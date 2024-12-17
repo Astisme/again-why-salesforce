@@ -15,7 +15,11 @@ if (browser === "firefox") {
 } else if (browser === "safari") {
 	delete manifest.browser_specific_settings;
 } else {
-	console.error(`Usage: ${process.argv[0]} ${process.argv[1]} (firefox || chrome || safari)`);
+	console.error(
+		`Usage: ${process.argv[0]} ${
+			process.argv[1]
+		} (firefox || chrome || safari)`,
+	);
 	throw new Error(`Unknown browser: ${browser}`);
 }
 
