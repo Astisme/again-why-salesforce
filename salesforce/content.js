@@ -273,7 +273,7 @@ function init(items) {
 	}
 
 	//call getDefaultTabs if we did not find data inside storage
-	const rowObj = (items == null || items[items.key] == null)
+	const rowObj = (items == null)
 		? getDefaultTabs()
 		: items[items.key];
 

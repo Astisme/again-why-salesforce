@@ -1,5 +1,4 @@
 import { Tab } from "./tab.js";
-import { WHY_KEY } from "./background/constants.js"
 const _tabContainerSecret = Symbol('tabContainerSecret');
 
 class TabContainer {
@@ -34,7 +33,7 @@ class TabContainer {
      */
     async _initializeTabs() {
         const savedTabs = await this._getSavedTabs();
-        this.tabs = savedTabs[WHY_KEY] ?? [];
+        this.tabs = savedTabs ?? [];
     }
 
     /**

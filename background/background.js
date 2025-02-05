@@ -16,17 +16,6 @@ import {
 } from "./utils.js";
 
 /**
- * Adds the key to the items object and invokes the provided callback.
- *
- * @param {Object} items - The items to which the key should be added.
- * @param {function} callback - The callback to execute after adding the key.
- */
-function bg_addKey(items, callback) {
-	items.key = WHY_KEY;
-	callback(items);
-}
-
-/**
  * Retrieves stored data from the browser's storage and invokes the provided callback.
  *
  * @param {function} callback - The callback to invoke with the retrieved data.
@@ -34,7 +23,10 @@ function bg_addKey(items, callback) {
 export function bg_getStorage(callback) {
 	browser.storage.sync.get(
 		[WHY_KEY],
-		(items) => bg_addKey(items, callback),
+		(items) => {
+            console.log(items[WHY_KEY]) // TODO remove this log
+            callback(items[WHY_KEY])
+        }
 	);
 }
 

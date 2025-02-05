@@ -4,7 +4,6 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	HTTPS,
 	SETUP_LIGHTNING,
-	WHY_KEY,
 } from "./constants.js";
 import { bg_getStorage } from "./background.js";
 
@@ -115,9 +114,9 @@ export function bg_expandURL(message) {
 /**
  * Handles the export functionality by downloading the current tabs as a JSON file.
  */
-function _exportHandler(bg_currentTabs) {
+function _exportHandler(tabs) {
 	// Convert JSON string to Blob
-	const blob = new Blob([JSON.stringify(bg_currentTabs[WHY_KEY], null, 4)], {
+	const blob = new Blob([JSON.stringify(tabs, null, 4)], {
 		type: "application/json",
 	});
 
@@ -137,13 +136,11 @@ function _exportHandler(bg_currentTabs) {
 /**
  * Exposes a function wrapper for the actual exportHandler due to the need for getting the currently saved tabs.
  *
- * @param [Array] bg_currentTabs - the currently saved tabs. if null, the tabs are retrieved automatically
+ * @param [Array] tabs - the currently saved tabs. if null, the tabs are retrieved automatically
  */
-export function exportHandler(bg_currentTabs = null) {
-	if (bg_currentTabs == null) {
+export function exportHandler(tabs = null) {
+	if (tabs == null) {
 		return bg_getStorage(_exportHandler);
 	}
-	const tabs = {};
-	tabs[WHY_KEY] = bg_currentTabs;
 	_exportHandler(tabs);
 }
