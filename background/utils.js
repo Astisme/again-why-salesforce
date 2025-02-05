@@ -1,10 +1,10 @@
 "use strict";
 import {
-	commonMainDomain,
-	commonSetupDomain,
-	https,
-	setupLightning,
-	whyKey,
+	LIGHTNING_FORCE_COM,
+	MY_SALESFORCE_SETUP_COM,
+	HTTPS,
+	SETUP_LIGHTNING,
+	WHY_KEY,
 } from "./constants.js";
 import { bg_getStorage } from "./background.js";
 
@@ -53,22 +53,22 @@ export function bg_minifyURL(url) {
 	}
 
 	// remove org-specific url
-	if (url.includes(commonMainDomain)) {
+	if (url.includes(LIGHTNING_FORCE_COM)) {
 		url = url.slice(
-			url.indexOf(commonMainDomain) +
-				commonMainDomain.length,
+			url.indexOf(LIGHTNING_FORCE_COM) +
+				LIGHTNING_FORCE_COM.length,
 		);
-	} else if (url.includes(commonSetupDomain)) {
+	} else if (url.includes(MY_SALESFORCE_SETUP_COM)) {
 		url = url.slice(
-			url.indexOf(commonSetupDomain) +
-				commonSetupDomain.length,
+			url.indexOf(MY_SALESFORCE_SETUP_COM) +
+				MY_SALESFORCE_SETUP_COM.length,
 		);
 	}
 
-	if (url.includes(setupLightning)) {
+	if (url.includes(SETUP_LIGHTNING)) {
 		url = url.slice(
-			url.indexOf(setupLightning) +
-				setupLightning.length,
+			url.indexOf(SETUP_LIGHTNING) +
+				SETUP_LIGHTNING.length,
 		);
 	}
 
@@ -105,11 +105,11 @@ export function bg_expandURL(message) {
 		return null;
 	}
 	const { url, baseUrl } = message;
-	if (url == null || url === "" || url.startsWith(https)) {
+	if (url == null || url === "" || url.startsWith(HTTPS)) {
 		return url;
 	}
 	const isSetupLink = !url.startsWith("/") && url.length > 0;
-	return `${baseUrl}${isSetupLink ? setupLightning : ""}${url}`;
+	return `${baseUrl}${isSetupLink ? SETUP_LIGHTNING : ""}${url}`;
 }
 
 /**
@@ -117,7 +117,7 @@ export function bg_expandURL(message) {
  */
 function _exportHandler(bg_currentTabs) {
 	// Convert JSON string to Blob
-	const blob = new Blob([JSON.stringify(bg_currentTabs[whyKey], null, 4)], {
+	const blob = new Blob([JSON.stringify(bg_currentTabs[WHY_KEY], null, 4)], {
 		type: "application/json",
 	});
 
@@ -144,6 +144,6 @@ export function exportHandler(bg_currentTabs = null) {
 		return bg_getStorage(_exportHandler);
 	}
 	const tabs = {};
-	tabs[whyKey] = bg_currentTabs;
+	tabs[WHY_KEY] = bg_currentTabs;
 	_exportHandler(tabs);
 }

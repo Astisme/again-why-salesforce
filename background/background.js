@@ -1,12 +1,12 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
 import {
-	https,
-	lightningForceCom,
-	mySalesforceCom,
-	mySalesforceSetupCom,
-	salesforceIdPattern,
-	whyKey,
+	HTTPS,
+	LIGHTNING_FORCE_COM,
+	MY_SALESFORCE_COM,
+	MY_SALESFORCE_SETUP_COM,
+	SALESFORCE_ID_PATTERN,
+	WHY_KEY,
 } from "./constants.js";
 import {
 	bg_expandURL,
@@ -22,7 +22,7 @@ import {
  * @param {function} callback - The callback to execute after adding the key.
  */
 function bg_addKey(items, callback) {
-	items.key = whyKey;
+	items.key = WHY_KEY;
 	callback(items);
 }
 
@@ -33,7 +33,7 @@ function bg_addKey(items, callback) {
  */
 export function bg_getStorage(callback) {
 	browser.storage.sync.get(
-		[whyKey],
+		[WHY_KEY],
 		(items) => bg_addKey(items, callback),
 	);
 }
@@ -46,7 +46,7 @@ export function bg_getStorage(callback) {
  */
 function bg_setStorage(tabs, callback) {
 	const set = {};
-	set[whyKey] = tabs;
+	set[WHY_KEY] = tabs;
 	browser.storage.sync.set(set, () => callback(null));
 }
 
@@ -61,19 +61,19 @@ function bg_extractOrgName(url) {
 		return null;
 	}
 	let host = new URL(
-		url.startsWith(https) ? url : `${https}${url}`,
+		url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
 	).host;
 
-	if (host.endsWith(lightningForceCom)) {
-		host = host.slice(0, host.indexOf(lightningForceCom));
+	if (host.endsWith(LIGHTNING_FORCE_COM)) {
+		host = host.slice(0, host.indexOf(LIGHTNING_FORCE_COM));
 	}
 
-	if (host.endsWith(mySalesforceSetupCom)) {
-		host = host.slice(0, host.indexOf(mySalesforceSetupCom));
+	if (host.endsWith(MY_SALESFORCE_SETUP_COM)) {
+		host = host.slice(0, host.indexOf(MY_SALESFORCE_SETUP_COM));
 	}
 
-	if (host.endsWith(mySalesforceCom)) {
-		host = host.slice(0, host.indexOf(mySalesforceCom));
+	if (host.endsWith(MY_SALESFORCE_COM)) {
+		host = host.slice(0, host.indexOf(MY_SALESFORCE_COM));
 	}
 
 	return host;
@@ -90,7 +90,7 @@ function bg_extractOrgName(url) {
  * @returns {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
  */
 function bg_containsSalesforceId(url) {
-	return salesforceIdPattern.test(decodeURIComponent(url));
+	return SALESFORCE_ID_PATTERN.test(decodeURIComponent(url));
 }
 
 /**

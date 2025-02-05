@@ -1,27 +1,25 @@
 "use strict";
-export const setupLightning = "/lightning/setup/";
-export const commonSetupDomain = "my.salesforce-setup.com";
-export const commonMainDomain = "lightning.force.com";
-export const whyKey = "againWhySalesforce";
-export const https = "https://";
-export const lightningForceCom = ".lightning.force.com";
-export const mySalesforceSetupCom = ".my.salesforce-setup.com";
-export const mySalesforceCom = ".my.salesforce.com";
-export const salesforceIdPattern =
+export const SETUP_LIGHTNING = "/lightning/setup/";
+export const WHY_KEY = "againWhySalesforce";
+export const HTTPS = "https://";
+export const LIGHTNING_FORCE_COM = ".lightning.force.com";
+export const MY_SALESFORCE_SETUP_COM = ".my.salesforce-setup.com";
+export const MY_SALESFORCE_COM = ".my.salesforce.com";
+export const SALESFORCE_ID_PATTERN =
 	/(?:^|\/|=)([a-zA-Z0-9]{15}|[a-zA-Z0-9]{18})(?:$|\/|\?|&)/;
 
-export const framePatterns = [
-	`${https}*${mySalesforceSetupCom}/*`,
-	`${https}*${lightningForceCom}/*`,
-	`${https}*${mySalesforceCom}/*`,
+export const FRAME_PATTERNS = [
+	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
+	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
+	`${HTTPS}*${MY_SALESFORCE_COM}/*`,
 ];
 
 // add `/setup/lightning/` to the framePatterns
-export const contextMenuPatterns = framePatterns.map((item) =>
-	`${item.substring(0, item.length - 2)}${setupLightning}*`
+export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
+	`${item.substring(0, item.length - 2)}${SETUP_LIGHTNING}*`
 );
 
-export const contextMenuPatternsRegex = contextMenuPatterns.map((item) =>
+export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 	item.replaceAll("\*", ".*")
 );
 

@@ -1,8 +1,8 @@
 "use strict";
 import {
-	contextMenuPatterns,
-	contextMenuPatternsRegex,
-	framePatterns,
+	CONTEXT_MENU_PATTERNS,
+	CONTEXT_MENU_PATTERNS_REGEX,
+	FRAME_PATTERNS,
 } from "./constants.js";
 import {
 	bg_expandURL,
@@ -108,13 +108,13 @@ const menuItems = [
 
 /**
  * - Updates `documentUrlPatterns` for each menu item:
- *   - Uses `framePatterns` if the item context includes "frame".
- *   - Uses `contextMenuPatterns` otherwise.
+ *   - Uses `FRAME_PATTERNS` if the item context includes "frame".
+ *   - Uses `CONTEXT_MENU_PATTERNS` otherwise.
  */
 menuItems.forEach((item) => {
 	item.documentUrlPatterns = item.contexts.includes("frame")
-		? framePatterns
-		: contextMenuPatterns;
+		? FRAME_PATTERNS
+		: CONTEXT_MENU_PATTERNS;
 });
 
 /**
@@ -157,7 +157,7 @@ async function removeMenuItems() {
  * Checks the current active tab's URL and conditionally adds or removes context menus.
  *
  * - Queries the currently active tab in the current browser window.
- * - If the tab exists and its URL matches any regex in `contextMenuPatternsRegex`, calls `createMenuItems`.
+ * - If the tab exists and its URL matches any regex in `CONTEXT_MENU_PATTERNS_REGEX`, calls `createMenuItems`.
  * - If no match is found, calls `removeMenuItems` to clean up context menus.
  */
 async function checkAddRemoveContextMenus() {
@@ -170,7 +170,7 @@ async function checkAddRemoveContextMenus() {
 		if (tabs && tabs[0] && tabs[0].url) {
 			const url = tabs[0].url;
 
-			if (contextMenuPatternsRegex.some((cmp) => url.match(cmp))) {
+			if (CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => url.match(cmp))) {
 				await removeMenuItems();
 				await createMenuItems();
 				bg_notify({ what: "focused" });
