@@ -1,6 +1,7 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
 import {
+    BROWSER,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	MY_SALESFORCE_COM,
@@ -13,6 +14,7 @@ import {
 	bg_minifyURL,
 	bg_notify,
 	exportHandler,
+    bg_getCurrentBrowserTab,
 } from "./utils.js";
 
 /**
@@ -21,10 +23,10 @@ import {
  * @param {function} callback - The callback to invoke with the retrieved data.
  */
 export function bg_getStorage(callback) {
-	browser.storage.sync.get(
+	BROWSER.storage.sync.get(
 		[WHY_KEY],
 		(items) => {
-            console.log(items[WHY_KEY]) // TODO remove this log
+            console.log('items',items[WHY_KEY]) // TODO remove this log
             callback(items[WHY_KEY])
         }
 	);
@@ -39,7 +41,7 @@ export function bg_getStorage(callback) {
 function bg_setStorage(tabs, callback) {
 	const set = {};
 	set[WHY_KEY] = tabs;
-	browser.storage.sync.set(set, () => callback(null));
+	BROWSER.storage.sync.set(set, () => callback(null));
 }
 
 /**
@@ -50,7 +52,8 @@ function bg_setStorage(tabs, callback) {
  */
 function bg_extractOrgName(url) {
 	if (url == null) {
-		return null;
+        console.log('bg_extractOrgName');
+		return bg_getCurrentBrowserTab(browserTab => bg_extractOrgName(browserTab.url))
 	}
 	let host = new URL(
 		url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
@@ -94,7 +97,7 @@ function bg_containsSalesforceId(url) {
  * @param {function} sendResponse - The function to send a response back.
  * @returns {boolean} Whether the message was handled asynchronously.
  */
-browser.runtime.onMessage.addListener((request, _, sendResponse) => {
+BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	const message = request.message;
 	if (message == null || message.what == null) {
 		console.error({ error: "Invalid message", message, request });
@@ -130,17 +133,14 @@ browser.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "contains-sf-id":
 			sendResponse(bg_containsSalesforceId(message.url));
 			return false; // we won't call sendResponse
-		case "reload":
-			sendResponse(null);
-			browser.tabs.query(
-				{ active: true, currentWindow: true },
-				(tabs) => browser.tabs.reload(tabs[0].id),
-			);
-			return false;
 		case "export":
 			exportHandler(message.tabs);
 			sendResponse(null);
 			return false;
+        case "browser-tab":
+            console.log('browser-tab');
+            bg_getCurrentBrowserTab(sendResponse, message.popup);
+            break;
 
 		default:
 			captured = ["import"].includes(message.what);

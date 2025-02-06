@@ -1,29 +1,56 @@
 "use strict";
 import {
+    BROWSER,
 	LIGHTNING_FORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
 	HTTPS,
 	SETUP_LIGHTNING,
 } from "./constants.js";
 import { bg_getStorage } from "./background.js";
+import { TabContainer } from "../tabContainer.js";
 
+
+export function bg_getCurrentBrowserTab(callback, fromPopup = false){
+    async function queryTabs(callback, count = 0){
+        const queryParams = { active: true, currentWindow: true };
+        (fromPopup == true || count > 0) && delete queryParams.currentWindow;
+        console.log(count,queryParams);
+        const browserTabs = await BROWSER.tabs.query(queryParams);
+        if (BROWSER.runtime.lastError || browserTabs == null || browserTabs[0] == null){
+            console.trace();
+            console.log(BROWSER.runtime.lastError,browserTabs,browserTabs[0]);
+            if(count > 5)
+                throw new Error("Could not find current tab.");
+            queryTabs(callback, count + 1);
+        } else callback(browserTabs[0]);
+    }
+
+	if (callback == null) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await queryTabs(resolve);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+    queryTabs(callback);
+}
 /**
  * Sends the same message back to other parts of the extension.
  *
  * @param {JSONObject} message - the message to be sent
  * @param {int} count = 0 - how many times the function has been called
  */
-export function bg_notify(message, count = 0) {
-	browser.tabs.query(
-		{ active: true, currentWindow: true },
-		(tabs) => {
-			if (tabs && tabs[0]) {
-				browser.tabs.sendMessage(tabs[0].id, message);
-			} else if (count < 5) {
-				setTimeout(() => bg_notify(count + 1), 500);
-			}
-		},
-	);
+export async function bg_notify(message, count = 0) {
+    try {
+        const browserTab = await bg_getCurrentBrowserTab();
+        BROWSER.tabs.sendMessage(browserTab.id, message);
+    } catch(error) {
+        console.trace();
+        if(error == null || error.message === "")
+            setTimeout(() => bg_notify(count + 1), 500);
+    }
 }
 
 /**
@@ -116,7 +143,7 @@ export function bg_expandURL(message) {
  */
 function _exportHandler(tabs) {
 	// Convert JSON string to Blob
-	const blob = new Blob([JSON.stringify(tabs, null, 4)], {
+	const blob = new Blob(TabContainer.toString(tabs), {
 		type: "application/json",
 	});
 

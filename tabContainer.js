@@ -244,8 +244,7 @@ class TabContainer {
      * @returns {string} - JSON string of Tabs
      */
     toString() {
-        return `[\n${this.tabs.map(tab => tab.toString()).join(",\n")}\n]`;
-        //return JSON.stringify(this.tabs, null, 4);
+        return TabContainer.toString(tabs);
     }
 
     /**
@@ -321,6 +320,12 @@ class TabContainer {
         return tabs != null
             && Array.isArray(tabs)
             && tabs.every(tab => Tab.isValid(tab));
+    }
+
+    static toString(tabs){
+        TabContainer.errorOnInvalidTabs(tabs);
+        return `[\n${tabs.map(tab => tab.toString()).join(",\n")}\n]`;
+        //return JSON.stringify(this.tabs, null, 4);
     }
 }
 

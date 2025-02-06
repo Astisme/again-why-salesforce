@@ -1,5 +1,6 @@
 "use strict";
 import {
+    BROWSER,
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
@@ -9,6 +10,7 @@ import {
 	bg_minifyURL,
 	bg_notify,
 	exportHandler,
+    bg_getCurrentBrowserTab,
 } from "./utils.js";
 
 let areMenuItemsVisible = false;
@@ -120,16 +122,16 @@ menuItems.forEach((item) => {
 /**
  * Creates context menu items dynamically based on the provided menu definitions.
  *
- * - Iterates through `menuItems` and creates each item using `browser.contextMenus.create`.
+ * - Iterates through `menuItems` and creates each item using `BROWSER.contextMenus.create`.
  */
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
 
 	try {
-		await browser.contextMenus.removeAll();
+		await BROWSER.contextMenus.removeAll();
 
 		for (const item of menuItems) {
-			await browser.contextMenus.create(item);
+			await BROWSER.contextMenus.create(item);
 		}
 
 		areMenuItemsVisible = true;
@@ -146,7 +148,7 @@ async function removeMenuItems() {
 	if (!areMenuItemsVisible) return;
 
 	try {
-		await browser.contextMenus.removeAll();
+		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
 		console.error("Error removing menu items:", error);
@@ -154,45 +156,41 @@ async function removeMenuItems() {
 }
 
 /**
- * Checks the current active tab's URL and conditionally adds or removes context menus.
+ * Checks the current active browserTab's URL and conditionally adds or removes context menus.
  *
- * - Queries the currently active tab in the current browser window.
- * - If the tab exists and its URL matches any regex in `CONTEXT_MENU_PATTERNS_REGEX`, calls `createMenuItems`.
+ * - Queries the currently active browserTab in the current browser window.
+ * - If the browserTab exists and its URL matches any regex in `CONTEXT_MENU_PATTERNS_REGEX`, calls `createMenuItems`.
  * - If no match is found, calls `removeMenuItems` to clean up context menus.
  */
 async function checkAddRemoveContextMenus() {
 	try {
-		const tabs = await browser.tabs.query({
-			active: true,
-			currentWindow: true,
-		});
+		const browserTab = await bg_getCurrentBrowserTab();
+        const url = browserTab.url;
 
-		if (tabs && tabs[0] && tabs[0].url) {
-			const url = tabs[0].url;
-
-			if (CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => url.match(cmp))) {
-				await removeMenuItems();
-				await createMenuItems();
-				bg_notify({ what: "focused" });
-			} else {
-				await removeMenuItems();
-			}
-		}
+        if (CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => url.match(cmp))) {
+            await removeMenuItems();
+            await createMenuItems();
+            bg_notify({ what: "focused" });
+        } else {
+            await removeMenuItems();
+        }
 	} catch (error) {
-		console.error("Error checking context menus:", error);
+        console.trace();
+        if(error != null && error.message !== "")
+            console.error("Error checking context menus:", error);
 	}
 }
 
 // when the browser starts
-browser.runtime.onStartup.addListener(checkAddRemoveContextMenus);
+BROWSER.runtime.onStartup.addListener(checkAddRemoveContextMenus);
 // when the extension is installed / updated
-browser.runtime.onInstalled.addListener(checkAddRemoveContextMenus);
-// when the extension is activated by the browser
+BROWSER.runtime.onInstalled.addListener(checkAddRemoveContextMenus);
+// when the extension is activated by the BROWSER
 self.addEventListener("activate", checkAddRemoveContextMenus);
 // when the tab changes
-browser.tabs.onHighlighted.addListener(checkAddRemoveContextMenus);
+BROWSER.tabs.onHighlighted.addListener(checkAddRemoveContextMenus);
 // when window changes
-browser.windows.onFocusChanged.addListener(checkAddRemoveContextMenus);
+BROWSER.windows.onFocusChanged.addListener(checkAddRemoveContextMenus);
 
 /* TODO add tutorial on install and link to current changes on update
 if (details.reason == "install") {
@@ -202,7 +200,7 @@ else if (details.reason == "update") {
 */
 /*
 // TODO update uninstall url
-browser.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
+BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
     removeMenuItems()
 });
 */
@@ -210,7 +208,7 @@ browser.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
 /**
  * Listener for context menu item clicks, processes actions based on the clicked menu item.
  *
- * - Listens to `browser.contextMenus.onClicked` events.
+ * - Listens to `BROWSER.contextMenus.onClicked` events.
  * - Creates a `message` object with details based on the menu item ID.
  *   - Common fields: `what` (menuItemId), `tabUrl`, `url`, and `tabTitle` (if applicable).
  *   - Special cases:
@@ -218,7 +216,7 @@ browser.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
  *     - "page-save-tab" and "page-remove-tab": Focuses on `pageUrl`.
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
-browser.contextMenus.onClicked.addListener((info, _) => {
+BROWSER.contextMenus.onClicked.addListener((info, _) => {
 	const message = { what: info.menuItemId };
 	switch (info.menuItemId) {
 		case "open-other-org":

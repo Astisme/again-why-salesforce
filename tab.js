@@ -97,7 +97,17 @@ class Tab {
      * @returns {boolean} true if the tab is a Tab; false otherwise
      */
     static isValid(tab) {
-        return tab instanceof Tab
+        let result = tab instanceof Tab
+        if(result)
+            return result;
+        // if the tab is not a Tab, try creating one
+        try {
+            Tab.create(tab);
+            return true;
+        } catch (error) {
+            // error on creation of tab
+            return false;
+        }
     }
 
     /**

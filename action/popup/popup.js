@@ -30,26 +30,14 @@ initThemeSvg();
  * Finds the current tab of the browser then calls the callback, if available. otherwise returns a Promise
  * @param {function|undefined} callback - the function to call when the result is found.
  */
-function getCurrentTab(callback) {
-	const queryParams = { active: true, currentWindow: true };
-	if (callback == null) {
-        return new Promise((resolve, reject) => {
-            chrome.tabs.query(queryParams, (res) => {
-                if (chrome.runtime.lastError) {
-                    reject(chrome.runtime.lastError);
-                } else {
-                    resolve(res[0]);
-                }
-            });
-        });
-    }
-    chrome.tabs.query(queryParams, callback);
+function pop_getCurrentBrowserTab(callback) {
+    return pop_sendMessage({what: "browser-tab", popup: true}, callback); 
 }
 
 // Get the current tab. If it's not salesforce setup, redirect the popup
-getCurrentTab(async (browserTabs) => {
+pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-    const broswerTabUrl = browserTabs[0].url;
+    const broswerTabUrl = browserTab.url;
 	if (broswerTabUrl == null || !broswerTabUrl.match(".*\/lightning\/setup\/.*")) {
 		window.location.href = chrome.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
@@ -57,7 +45,7 @@ getCurrentTab(async (browserTabs) => {
 			}`,
 		);
 	} else {
-        loadTabs(await allTabs.getTabs());
+        loadTabs(await allTabs.getTabs(), browserTab);
 	}
 });
 
@@ -85,25 +73,33 @@ function switchTheme() {
  * @param {function} callback - The callback to execute after sending the message.
  */
 function pop_sendMessage(message, callback) {
-	if (callback != null) {
-		return chrome.runtime.sendMessage(
-			{ message, url: location.href },
-			callback,
-		);
-	} else {
-		return new Promise((resolve, reject) => {
-			chrome.runtime.sendMessage(
-				{ message, url: location.href },
-				(response) => {
-					if (chrome.runtime.lastError) {
-						reject(chrome.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
+    /**
+     * Invoke the runtime to send the message
+     *
+     * @param {Object} message - The message to send
+     * @param {function} callback - The callback to execute after sending the message
+     */
+    function sendMessage(message, callback){
+        return chrome.runtime.sendMessage(
+            { message, url: location.href },
+            callback,
+        );
+    }
+
+	if (callback == null)
+        return new Promise((resolve, reject) => {
+            sendMessage(
+                message,
+                (response) => {
+                    if (chrome.runtime.lastError) {
+                        reject(chrome.runtime.lastError);
+                    } else {
+                        resolve(response);
+                    }
+                },
+            );
+        });
+    sendMessage(message, callback);
 }
 
 /**
@@ -142,9 +138,9 @@ function pop_minifyURL(url) {
  *
  * @param {string} url - The URL from which the Org name has to be extracted
  */
-async function pop_extractOrgName() {
-	const tab = await getCurrentTab();
-	return pop_sendMessage({ what: "extract-org", url: tab.url });
+async function pop_extractOrgName(browserTab = null) {
+	browserTab = browserTab ?? await pop_getCurrentBrowserTab();
+	return pop_sendMessage({ what: "extract-org", url: browserTab.url });
 }
 
 /**
@@ -330,12 +326,12 @@ function createElement() {
  *
  * @param {Object} items - The stored tab data.
  */
-function loadTabs(items) {
+function loadTabs(items, browserTab = null) {
 	if (items == null) {
 		return addTab();
 	}
 
-	pop_extractOrgName()
+	pop_extractOrgName(browserTab)
 		.then((orgName) => {
 			for (const tab of items) {
 				if (tab.org !== orgName) {

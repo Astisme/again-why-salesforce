@@ -23,6 +23,4 @@ export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 	item.replaceAll("\*", ".*")
 );
 
-if (typeof browser == "undefined") {
-	globalThis.browser = chrome;
-}
+export const BROWSER = typeof browser == "undefined" ? chrome : browser;
