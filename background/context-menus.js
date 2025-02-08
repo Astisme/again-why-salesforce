@@ -4,7 +4,7 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
-} from "./constants.js";
+} from "../constants.js";
 import {
 	bg_expandURL,
 	bg_minifyURL,
@@ -210,9 +210,9 @@ BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
  *
  * - Listens to `BROWSER.contextMenus.onClicked` events.
  * - Creates a `message` object with details based on the menu item ID.
- *   - Common fields: `what` (menuItemId), `tabUrl`, `url`, and `tabTitle` (if applicable).
+ *   - Common fields: `what` (menuItemId), `tabUrl`, `url`, and `label` (if applicable).
  *   - Special cases:
- *     - "open-other-org": Adds `pageTabUrl`, `pageUrl`, `linkTabUrl`, `linkUrl`, and `linkTabTitle`.
+ *     - "open-other-org": Adds `pageTabUrl`, `pageUrl`, `linkTabUrl`, `linkUrl`, and `linkTabLabel`.
  *     - "page-save-tab" and "page-remove-tab": Focuses on `pageUrl`.
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
@@ -224,7 +224,7 @@ BROWSER.contextMenus.onClicked.addListener((info, _) => {
 			message.pageUrl = bg_expandURL(info.pageUrl);
 			message.linkTabUrl = bg_minifyURL(info.linkUrl);
 			message.linkUrl = bg_expandURL(info.linkUrl);
-			message.linkTabTitle = info.linkText;
+			message.linkTabLabel = info.linkText;
 			break;
 		case "import-tabs":
 			message.what = "add";
@@ -240,7 +240,7 @@ BROWSER.contextMenus.onClicked.addListener((info, _) => {
 		default:
 			message.tabUrl = bg_minifyURL(info.linkUrl);
 			message.url = bg_expandURL(info.linkUrl);
-			message.tabTitle = info.linkText;
+			message.label = info.linkText;
 			break;
 	}
 	bg_notify(message);

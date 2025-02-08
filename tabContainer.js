@@ -28,12 +28,30 @@ class TabContainer {
         );
     }
 
+	/**
+	 * Initializes the default tabs and syncs them to storage.
+	 */
+	async setDefaultTabs() {
+        await this.replaceTabs([
+			{ label: "⚡", url: "/lightning" },
+			{ label: "Flows", url: "/lightning/app/standard__FlowsApp" },
+			{ label: "Users", url: "ManageUsers/home" },
+		], {
+            resetTabs: true,
+            removeOrgTabs: true,
+            sync: true
+        });
+	}
+
     /**
      * Inizializes the this.tabs variable based on the synced tabs from the background.
      */
     async _initializeTabs() {
         const savedTabs = await this._getSavedTabs();
-        this.tabs = savedTabs ?? [];
+        if(savedTabs != null)
+            this.tabs = savedTabs
+        else
+            await this.setDefaultTabs();
     }
 
     /**
@@ -53,16 +71,16 @@ class TabContainer {
      * @param {boolean} [sync=true] - whether a sync operation should be performed
      * @returns {boolean} - Whether the tab was successfully added
      */
-    addTab(tab, sync = true) {
+    async addTab(tab, sync = true) {
         if (!Tab.isValid(tab)) {
             throw new Error(`Invalid tab object: ${tab.toString()}`);
         }
         if(this.tabExistsByTab(tab))
             throw new Error(`This tab already exists: ${tab.toString()}`);
 
-        this.tabs.push(tab);
+        this.tabs.push(Tab.isTab(tab) ? tab : Tab.create(tab));
         if(sync)
-            this.syncTabs();
+            await this.syncTabs();
         return true;
     }
 
@@ -72,21 +90,21 @@ class TabContainer {
      * @param {boolean} [sync=true] - whether a sync operation should be performed
      * @returns {boolean} - Whether the tab was successfully added
      */
-    addTabs(tabs, sync = true) {
+    async addTabs(tabs, sync = true) {
         TabContainer.errorOnInvalidTabs(tabs);
         if(tabs.length === 0 && sync === false)
             return true;
 
-        const addedAll = tabs.every(tab => {
+        const addedAll = tabs.every(async tab => {
             try {
-                this.addTab(tab, false);
+                return await this.addTab(tab, false);
             } catch (error) {
                 if(error.message !== "This tab already exists")
                     throw error;
             }
         });
         if(sync)
-            this.syncTabs();
+            await this.syncTabs();
         return addedAll;
     }
 
@@ -98,7 +116,7 @@ class TabContainer {
      * @param {string} param0.org - the org of the Tab to remove
      * @returns {boolean} - Whether a tab was removed
      */
-    removeTabByData({label, url, org} = {}) {
+    removeTabsByData({label, url, org} = {}) {
         const initialLength = this.tabs.length;
         this.tabs = this.tabs.filter(tab => 
             !tab.equalsByData({label,url,org})
@@ -111,7 +129,7 @@ class TabContainer {
      * @param {Tab} tab - the Tab to remove
      * @returns {boolean} - Whether a Tab was removed
      */
-    removeTabByTab(tab) {
+    removeTabsByTab(tab) {
         const initialLength = this.tabs.length;
         this.tabs = this.tabs.filter(tb => !tb.equalsByTab(tab));
         return this.tabs.length < initialLength;
@@ -143,6 +161,50 @@ class TabContainer {
                 || (!matchOrg && tab.org !== org)
             )
         );
+    }
+
+    /**
+     *
+     */
+    getTabsByData({label, url, org}){
+        if(label == null && url == null && org == null)
+            return [];
+        return this.tabs.filter(tab => 
+            tab.equalsByData({label,url,org})
+        );
+    }
+
+    /**
+     *
+     */
+    _getTabIndex(tabOrData, isTab = true){ 
+        if(tabOrData == null)
+            throw new Error("Cannot search for null Tab.");
+        if((isTab && !Tab.isValid(tabOrData))
+            || (!isTab && tabOrData.label == null && tabOrData.url == null && tabOrData.org == null))
+            throw new Error("Cannot search for invalid Tab.");
+
+        const index = this.tabs.findIndex((tab) =>
+            (isTab && tab.equalsByTab(tabOrData))
+            || (!isTab && tab.equalsByData({label:tabOrData.label,url:tabOrData.url,org:tabOrData.org}))
+        );
+        if(index === -1)
+            throw new Error("Tab was not found.");
+        return index;
+    }
+
+    /**
+     *
+     */
+    getTabIndexByTab(tabToFind){
+        return this._getTabIndex(tabToFind, true);
+    }
+
+    /**
+     *
+     */
+    getTabIndexByData({label,url,org}){
+        return this._getTabIndex({label, url,org},false);
     }
 
     /**
@@ -217,26 +279,40 @@ class TabContainer {
      * // Remove org-specific tabs and add new ones
      * replaceTabs([{ label: "a", url: "a", org: "OrgA" }], false, true);
          */
-    replaceTabs(newTabs = [], {
+    async replaceTabs(newTabs = [], {
         resetTabs = true,
         removeOrgTabs = false,
         sync = true,
+        keepTabsNotThisOrg = null,
     } = {}) {
-        // If reset tabs, clear existing tabs
+        // If resetTabs, clear existing tabs
         if (resetTabs) {
+            // if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
+            // else, clear existing tabs which do not have an org set
             if (removeOrgTabs) {
-                this.tabs = [];
+                // if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
+                // else, clear existing tabs
+                if(keepTabsNotThisOrg != null){
+                    this.tabs = this.tabs.filter(tab => tab.org != null && tab.org !== keepTabsNotThisOrg);
+                } else {
+                    this.tabs = [];
+                }
             } else {
                 // Keep only org-specific tabs
                 this.tabs = this.tabs.filter(tab => tab.org != null);
             }
         } else if(removeOrgTabs){
-            // Keep only non-org-specific tabs
-            this.tabs = this.tabs.filter(tab => tab.org == null);
+            // if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
+            // else, keep only non-org-specific tabs
+            if(keepTabsNotThisOrg != null){
+                this.tabs = this.tabs.filter(tab => tab.org == null || tab.org !== keepTabsNotThisOrg);
+            } else {
+                this.tabs = this.tabs.filter(tab => tab.org == null);
+            }
         }
 
         // Add new tabs and sync them
-        this.addTabs(newTabs, sync);
+        await this.addTabs(newTabs, sync);
     }
 
     /**
@@ -244,7 +320,7 @@ class TabContainer {
      * @returns {string} - JSON string of Tabs
      */
     toString() {
-        return TabContainer.toString(tabs);
+        return TabContainer.toString(this.tabs);
     }
 
     /**
@@ -254,12 +330,12 @@ class TabContainer {
      * @param {boolean} [preserveOtherOrg=true] - Whether the org-specific tabs should be preserved 
      * @returns {number} - Number of tabs successfully imported
      */
-    importTabs(jsonString, resetTabs = false, preserveOtherOrg = true) {
+    async importTabs(jsonString, resetTabs = false, preserveOtherOrg = true) {
         const imported = JSON.parse(jsonString);
         
         TabContainer.errorOnInvalidTabs(imported);
 
-        this.replaceTabs(imported, resetTabs, !preserveOtherOrg);
+        await this.replaceTabs(imported, resetTabs, !preserveOtherOrg);
         return imported.length;
     }
 
@@ -307,7 +383,7 @@ class TabContainer {
 
         const invalidTabs = tabs.filter(tab => !Tab.isValid(tab));
         if(invalidTabs.length > 0){
-            throw new Error(`Invalid Tab${invalidTabs.length > 1 ? "s" : ""} detected: ${JSON.stringify(invalidTabs)}`);
+            throw new Error(`Invalid Tab${invalidTabs.length > 1 ? "s" : ""} detected: ${JSON.stringify(invalidTabs)}.\nEach item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.`);
         }
     }
 
@@ -319,13 +395,130 @@ class TabContainer {
     static isValid(tabs){
         return tabs != null
             && Array.isArray(tabs)
-            && tabs.every(tab => Tab.isValid(tab));
+            && tabs.every(tab => Tab.isTab(tab));
     }
 
+    /**
+     *
+     */
     static toString(tabs){
         TabContainer.errorOnInvalidTabs(tabs);
         return `[\n${tabs.map(tab => tab.toString()).join(",\n")}\n]`;
         //return JSON.stringify(this.tabs, null, 4);
+    }
+
+    /**
+     * Moves a tab to the specified spot and then reloads.
+     *
+     * @param {string} miniURL - the minified URL of the tab to keep
+     * @param {string} tabTitle - the title of the tab to keep
+     * @param {boolean} [moveBefore=true] - whether the tab should be moved one space before in the array
+     * @param {boolean} [fullMovement=false] - whether the tab should be moved at the begin or end of the array instead of moving it only one space
+     *
+     * @example
+     * for this example, we'll collapse miniURL and tabTitle into a single string and simply look at tabs as strings.
+     * tabs = ["a", "b", "c", "d", "e"]
+     *
+     * moveTab("c") || moveTab("c",true) || moveTab("c",true,false)
+     * ==> tabs = ["a", "c", "b", "d", "e"]
+     *
+     * moveTab("c",false) || moveTab("c",false,false)
+     * ==> tabs = ["a", "b", "d", "c", "e"]
+     *
+     * moveTab("c",true,true)
+     * ==> tabs = ["c", "a", "b", "d", "e"]
+     *
+     * moveTab("c",false,true)
+     * ==> tabs = ["a", "b", "d", "e", "c"]
+     */
+    async moveTab({label = null, url = null} = {}, {moveBefore = true, fullMovement = false} = {}) {
+        if(url == null)
+            throw new Error("Cannot identify Tab.");
+        if (label == null) {
+            label = this.tabs.getTabsByData({url})[0]?.label;
+        }
+        const index = this.tabs.getTabIndexByData({label, url});
+        // TODO changed signature of function
+
+        const [tab] = this.tabs.splice(index, 1);
+
+        if (fullMovement) {
+            moveBefore ? this.tabs.unshift(tab) : this.tabs.push(tab);
+        } else {
+            const newIndex = moveBefore
+                ? Math.max(0, index - 1)
+                : Math.min(this.tabs.length, index + 1);
+            // from newIndex, remove 0 tabs and insert `tab` in their place
+            this.tabs.splice(newIndex, 0, tab);
+        }
+
+        await this.syncTabs();
+    }
+
+    /**
+     * Removes the tab with the given url and title.
+     *
+     * @param {string} url - the minified URL of the tab to remove
+     * @param {string} title - the label of the tab to remove. if null, all tabs with the given URL will be removed
+     */
+    async removeTab({label = null, url = null} = {}) {
+        // TODO changed signature of function
+        if(url == null)
+            throw new Error("Cannot identify Tab without url.");
+        const filteredTabs = this.tabs.filter((tab) =>
+            !tab.equalsByData({label,url})
+        );
+        if (this.tabs.length === filteredTabs.length) {
+            throw new Error("This tab was not found.");
+        }
+        await this.syncTabs();
+    }
+
+    /**
+     * Removes the other saved tabs and then reloads.
+     *
+     * @param {string} miniURL - the minified URL of the tab to keep
+     * @param {string} tabTitle - the title of the tab to keep
+     * @param {boolean || null} [removeBefore=null] - special value to change the behaviour of the function. When not passed, the specified tab will be the only one kept. When true, only the tabs before it will be removed. When false, only the tabs after it will be removed.
+     *
+     * @example
+     * for this example, we'll collapse miniURL and tabTitle into a single string and simply look at tabs as strings.
+     * tabs = ["a", "b", "c"]
+     *
+     * removeOtherTabs("b") || removeOtherTabs("b",null) ==> tabs = ["b"]
+     * removeOtherTabs("b",true) ==> tabs = ["b", "c"]
+     * removeOtherTabs("b",false) ==> tabs = ["a", "b"]
+     */
+    async removeOtherTabs({label = null, url = null} = {}, {removeBefore = null} = {}) {
+        // TODO changed signature of function
+        if(url == null)
+            throw new Error("Cannot identify Tab.");
+        let tab;
+        if (label == null) {
+            tab = this.tabs.getTabsByData({url})[0];
+            label = tab?.label;
+        }
+
+        // check if the clicked tab is not one of the favourited ones
+        if (
+            !this.tabs.tabExistsByData({label,url})
+        ) {
+            throw new Error("This is not a saved tab!");
+        }
+        // remove all tabs but this one
+        if (removeBefore == null) {
+            // using filter, if the user picks an org-specific tab, the org info is kept intact
+            const tabToSave = [tab] ?? this.tabs.getTabsByData({label,url});
+            return await this.tabs.syncTabs(tabToSave);
+        }
+
+        const index = this.tabs.getTabsIndexByData({label,url});
+        //if (index === -1) return showToast("The tab could not be found.", false, true);
+
+        removeBefore
+            ? this.tabs.slice(index)
+            : this.tabs.slice(0, index + 1);
+        await this.syncTabs();
     }
 }
 

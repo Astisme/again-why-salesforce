@@ -1,4 +1,5 @@
 "use strict";
+export const EXTENSION_NAME = "again-why-salesforce";
 export const SETUP_LIGHTNING = "/lightning/setup/";
 export const WHY_KEY = "againWhySalesforce";
 export const HTTPS = "https://";

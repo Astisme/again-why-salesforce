@@ -34,6 +34,8 @@ class Tab {
      * @param {string|undefined} [org=undefined] - the org to which the tab is specific to
      */
     static async create(labelOrTab, url, org = undefined) {
+        if(Tab.isTab(labelOrTab))
+            return labelOrTab;
         // Check if first argument is an object (for object-style creation)
         if (labelOrTab && typeof labelOrTab === "object") {
             if(url || org)
@@ -92,18 +94,23 @@ class Tab {
     }
 
     /**
-     * Checks if the tab passed is a Tab.
+     *
+     */
+    static isTab(tab){
+        return tab instanceof Tab;
+    }
+
+    /**
+     * Checks if the tab passed is (or could be) a Tab.
      * @param {Object} tab - the tab to be checked
      * @returns {boolean} true if the tab is a Tab; false otherwise
      */
     static isValid(tab) {
-        let result = tab instanceof Tab
-        if(result)
-            return result;
+        if(Tab.isTab(tab))
+            return true;
         // if the tab is not a Tab, try creating one
         try {
-            Tab.create(tab);
-            return true;
+            return Tab.isTab(Tab.create(tab));
         } catch (error) {
             // error on creation of tab
             return false;
@@ -132,13 +139,16 @@ class Tab {
 
     /**
      * Checks if the tab is equal to the one passed as input.
-     * @param {Tab} tab - The Tab object to be checked against.
+     * @param {Object} [param0={}] - an object containing the following keys
+     * @param {*} param0.label - the label of the tab to check
+     * @param {*} param0.url - the url of the tab to check
+     * @param {*} param0.org - the org of the tab to check
      * @returns {boolean} whether the tabs are equal
      */
     equalsByData({label, url, org} = {}){
-        return label === this.label
-            && url === this.url
-            && org === this.org;
+        return (label != null && label === this.label)
+            && (url != null && url === this.url)
+            && (org != null && org === this.org)
     }
 
     /**
@@ -147,7 +157,13 @@ class Tab {
      * @returns {boolean} whether the tabs are equal
      */
     equalsByTab(tab){
-        return this.tab === tab;
+        if(tab === this.tab)
+            return true;
+        try {
+            return Tab.create(tab) === this.tab;
+        } catch (error) {
+            return false;
+        }
     }
 
     /**
