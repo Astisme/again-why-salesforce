@@ -17,14 +17,13 @@
 				"https://*.lightning.force.com/lightning/setup/*"
 			],
 			"js": [
-				"./tab.js",
-				"./tabContainer.js",
-				"./salesforce/generator.js",
-				"./salesforce/favourite-manager.js",
-				"./dragHandler.js",
-				"./salesforce/import.js",
-				"./salesforce/content.js"
+				"salesforce/generator.js",
+				"salesforce/favourite-manager.js",
+				"dragHandler.mjs",
+				"salesforce/import.js",
+				"salesforce/content.js"
 			],
+            "type": "module",
 			"run_at": "document_end"
 		}
 	],
@@ -47,28 +46,39 @@
 				"https://*.my.salesforce-setup.com/*",
 				"https://*.lightning.force.com/*"
 			]
+		},
+		{
+			"resources": [
+				"constants.mjs",
+				"tab.mjs",
+				"tabContainer.mjs"
+			],
+			"matches": [
+				"https://*.my.salesforce-setup.com/*",
+				"https://*.lightning.force.com/*"
+			]
 		}
 	],
 	"icons": {
-		"16": "./assets/icons/awsf-16.png",
-		"32": "./assets/icons/awsf-32.png",
-		"64": "./assets/icons/awsf-64.png",
-		"128": "./assets/icons/awsf-128.png",
-		"256": "./assets/icons/awsf-256.png",
-		"512": "./assets/icons/awsf-512.png",
-		"1024": "./assets/icons/awsf-1024.png"
+		"16": "assets/icons/awsf-16.png",
+		"32": "assets/icons/awsf-32.png",
+		"64": "assets/icons/awsf-64.png",
+		"128": "assets/icons/awsf-128.png",
+		"256": "assets/icons/awsf-256.png",
+		"512": "assets/icons/awsf-512.png",
+		"1024": "assets/icons/awsf-1024.png"
 	},
 	"action": {
 		"default_title": "Again, Why Salesforce",
-		"default_popup": "./action/popup/popup.html"
+		"default_popup": "action/popup/popup.html"
 	},
 	"background": {
-		"service_worker": "./background/background.js",
+		"service_worker": "background/background.js",
 		"scripts": [
-			"./background/constants.js",
-			"./background/utils.js",
-			"./background/context-menus.js",
-			"./background/background.js"
+			"constants.mjs",
+			"background/utils.js",
+			"background/context-menus.js",
+			"background/background.js"
 		],
 		"type": "module"
 	},

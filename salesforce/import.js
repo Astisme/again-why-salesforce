@@ -1,8 +1,8 @@
 "use strict";
 import {
 	EXTENSION_NAME,
-} from "../constants.js"
-import { allTabs } from "../tabContainer";
+} from "../constants.mjs"
+import { allTabs } from "../tabContainer.mjs";
 
 let overwritePick;
 let otherOrgPick;

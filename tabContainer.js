@@ -1,4 +1,5 @@
-import { Tab } from "./tab.js";
+import { Tab } from "./tab.mjs";
+
 const _tabContainerSecret = Symbol('tabContainerSecret');
 
 class TabContainer {
@@ -523,4 +524,6 @@ class TabContainer {
 }
 
 const allTabs = new TabContainer(null, _tabContainerSecret);
+//globalThis.allTabs = allTabs;
+//globalThis.TabContainer = TabContainer;
 export { allTabs, TabContainer };

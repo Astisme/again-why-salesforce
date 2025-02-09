@@ -190,4 +190,5 @@ class Tab {
     }
 }
 
+//globalThis.Tab = Tab;
 export { Tab };

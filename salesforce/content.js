@@ -1,11 +1,11 @@
 "use strict";
-import { Tab } from "../../tab.js"
-import { allTabs, TabContainer } from "../../tabContainer.js"
+import { Tab } from "../../tab.mjs"
+import { allTabs } from "../../tabContainer.mjs"
 import { 
     SETUP_LIGHTNING,
     HTTPS,
     LIGHTNING_FORCE_COM,
-} from "../constants.js";
+} from "../constants.mjs";
 
 let setupTabUl; // This is a UL on Salesforce Setup
 let objectManagerLi; // This is the standard last LI of setupTabUl

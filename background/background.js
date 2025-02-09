@@ -8,7 +8,7 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	SALESFORCE_ID_PATTERN,
 	WHY_KEY,
-} from "../constants.js";
+} from "../constants.mjs";
 import {
 	bg_expandURL,
 	bg_minifyURL,

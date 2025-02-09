@@ -4,7 +4,7 @@ import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	EXTENSION_NAME,
- } from "../constants";
+ } from "../constants.mjs";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 const MODAL_ID = `${EXTENSION_NAME}-modal`;

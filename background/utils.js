@@ -5,7 +5,7 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	HTTPS,
 	SETUP_LIGHTNING,
-} from "../constants.js";
+} from "../constants.mjs";
 import { bg_getStorage } from "./background.js";
 import { TabContainer } from "../tabContainer.js";
 
@@ -14,11 +14,8 @@ export function bg_getCurrentBrowserTab(callback, fromPopup = false){
     async function queryTabs(callback, count = 0){
         const queryParams = { active: true, currentWindow: true };
         (fromPopup == true || count > 0) && delete queryParams.currentWindow;
-        console.log(count,queryParams);
         const browserTabs = await BROWSER.tabs.query(queryParams);
         if (BROWSER.runtime.lastError || browserTabs == null || browserTabs[0] == null){
-            console.trace();
-            console.log(BROWSER.runtime.lastError,browserTabs,browserTabs[0]);
             if(count > 5)
                 throw new Error("Could not find current tab.");
             queryTabs(callback, count + 1);

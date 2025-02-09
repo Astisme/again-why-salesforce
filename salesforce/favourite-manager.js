@@ -1,8 +1,8 @@
 "use strict";
 import {
 	EXTENSION_NAME,
-} from "../constants.js"
-import { allTabs, TabContainer } from "../tabContainer";
+} from "../constants.mjs"
+import { allTabs } from "../tabContainer.mjs";
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;
 const STAR_ID = `${EXTENSION_NAME}-star`;
