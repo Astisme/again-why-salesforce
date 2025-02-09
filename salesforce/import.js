@@ -1,12 +1,16 @@
 "use strict";
+import {
+	EXTENSION_NAME,
+} from "../constants.js"
+import { allTabs } from "../tabContainer";
 
 let overwritePick;
 let otherOrgPick;
-const importId = `${prefix}-import`;
-const importFileId = `${importId}-file`;
-const overwriteId = `${importId}-overwrite`;
-const otherOrgId = `${importId}-other-org`;
-const closeModalId = `${prefix}-modal-close`;
+const IMPORT_ID = `${EXTENSION_NAME}-import`;
+const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
+const OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
+const OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
+const CLOSE_MODAL_ID = `${EXTENSION_NAME}-modal-close`;
 
 const reader = new FileReader();
 
@@ -17,7 +21,7 @@ const reader = new FileReader();
  * and then sets up a section with a full-width, flex container. It appends an SLDS file input component
  * (created by _generateSldsFileInput) and three checkboxes with labels for import options:
  * "Overwrite saved tabs." and "Preserve tabs for other orgs."
- * Additionally, it assigns an ID to the close button using closeModalId.
+ * Additionally, it assigns an ID to the close button using CLOSE_MODAL_ID.
  *
  * @returns {{
  *   modalParent: HTMLElement,
@@ -30,7 +34,7 @@ function generateSldsImport() {
 	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
 		"Import Tabs",
 	);
-	closeButton.id = closeModalId;
+	closeButton.id = CLOSE_MODAL_ID;
 
 	const { section, divParent } = generateSection();
 	divParent.style.width = "100%"; // makes the elements inside have full width
@@ -40,8 +44,8 @@ function generateSldsImport() {
 	article.appendChild(section);
 
 	const { fileInputWrapper, inputContainer } = _generateSldsFileInput(
-		importId,
-		importFileId,
+		IMPORT_ID,
+		IMPORT_FILE_ID,
 		".json,application/json",
 	);
 	fileInputWrapper.style.marginBottom = "1rem";
@@ -57,13 +61,13 @@ function generateSldsImport() {
 	divParent.append(duplicateWarning);
 
 	const overwriteCheckbox = _generateCheckboxWithLabel(
-		overwriteId,
+		OVERWRITE_ID,
 		"Overwrite saved tabs.",
 		false,
 	);
 	divParent.appendChild(overwriteCheckbox);
 	const otherOrgCheckbox = _generateCheckboxWithLabel(
-		otherOrgId,
+		OTHER_ORG_ID,
 		"Preserve tabs for other orgs.",
 		true,
 	);
@@ -77,59 +81,15 @@ function generateSldsImport() {
 	return { modalParent, saveButton, closeButton, inputContainer };
 }
 
-/**
- * Handles the imported tab data and updates the storage with the newly imported tabs.
- * If the page where the user is at this moment gets imported, the favourite img is switched to the unfavourite one.
- *
- * @param {Object} message - The message containing the imported tab data.
- * @param {Array<Object>} message.imported - The array of imported tab data.
- * @param {boolean} message.overwrite - Whether the imported array should overwrite the currently saved tabs
- * @param {boolean} message.preserveOtherOrg - Whether the org-specific tabs should be preserved
- */
-function importer(message) {
-	sf_overwriteCurrentTabs(
-		message.imported,
-		message.overwrite,
-		!message.preserveOtherOrg,
-	);
-
-	// remove file import
-	document.getElementById(closeModalId).click();
-}
-
-reader.onload = function (e) {
+reader.onload = async (e) => {
 	try {
-		const imported = JSON.parse(e.target.result);
-
-		// Validate JSON structure
-		if (
-			Array.isArray(imported) &&
-			imported.every((item) =>
-				typeof item.tabTitle === "string" &&
-				typeof item.url === "string" &&
-				(
-					item.org == null ||
-					typeof item.org === "string"
-				)
-			)
-		) {
-			importer({
-				what: "import",
-				imported,
-				overwrite: overwritePick,
-				preserveOtherOrg: otherOrgPick,
-			});
-		} else {
-			showToast(
-				"Invalid JSON structure. Your file must contain an array in which each item must have 'tabTitle' and 'url' as strings. Additionally, every item may have an 'org' as string.",
-				false,
-				false,
-			);
-		}
+        const importedNum = await allTabs.importTabs(e.target.result, overwritePick, otherOrgPick);
+        // remove file import
+        document.getElementById(CLOSE_MODAL_ID).click();
+        showToast(`Successfully imported ${importedNum} tabs.`,true);
 	} catch (error) {
 		showToast(
-			`Error parsing JSON: ${error.message}`,
-			false,
+			`Error during import:\n${error.message}`,
 			false,
 		);
 	}
@@ -138,7 +98,7 @@ reader.onload = function (e) {
 /**
  * Attaches event listeners to handle file uploads via both file selection and drag-and-drop.
  *
- * This function sets up listeners on the file input element (identified by the global `importId`)
+ * This function sets up listeners on the file input element (identified by the global `IMPORT_ID`)
  * within the modal. It handles the "change" event for file selection and "dragover", "dragleave",
  * and "drop" events for drag-and-drop actions. When a file is uploaded, it validates that the file
  * type is "application/json", retrieves import options (overwrite and other org picks)
@@ -155,12 +115,12 @@ function listenToFileUpload(modalParent) {
 			);
 		}
 
-		overwritePick = modalParent.querySelector(`#${overwriteId}`).checked;
-		otherOrgPick = modalParent.querySelector(`#${otherOrgId}`).checked;
+		overwritePick = modalParent.querySelector(`#${OVERWRITE_ID}`).checked;
+		otherOrgPick = modalParent.querySelector(`#${OTHER_ORG_ID}`).checked;
 		reader.readAsText(file);
 	}
 
-	const dropArea = document.getElementById(importId);
+	const dropArea = document.getElementById(IMPORT_ID);
 	dropArea.addEventListener("change", function (event) {
 		event.preventDefault();
 		readFile(event.target.files[0]);
@@ -188,7 +148,7 @@ function listenToFileUpload(modalParent) {
  */
 function showFileImport() {
 	if (
-		setupTabUl.querySelector(`#${importId}`) != null ||
+		setupTabUl.querySelector(`#${IMPORT_ID}`) != null ||
 		document.getElementById(modalId) != null
 	) {
 		return showToast("Close the other modal first!", false);

@@ -17,6 +17,8 @@
 				"https://*.lightning.force.com/lightning/setup/*"
 			],
 			"js": [
+				"./tab.js",
+				"./tabContainer.js",
 				"./salesforce/generator.js",
 				"./salesforce/favourite-manager.js",
 				"./dragHandler.js",

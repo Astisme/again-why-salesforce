@@ -1,8 +1,12 @@
 "use strict";
+import {
+	EXTENSION_NAME,
+} from "../constants.js"
+import { allTabs, TabContainer } from "../tabContainer";
 
-const buttonId = `${prefix}-button`;
-const starId = `${prefix}-star`;
-const slashedStarId = `${prefix}-slashed-star`;
+const BUTTON_ID = `${EXTENSION_NAME}-button`;
+const STAR_ID = `${EXTENSION_NAME}-star`;
+const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
 
 /**
  * Finds on the page
@@ -19,7 +23,7 @@ function getHeader(innerElement = "") {
  */
 function generateFavouriteButton() {
 	const button = document.createElement("button");
-	button.id = buttonId;
+	button.id = BUTTON_ID;
 	button.classList.add("slds-button", "slds-button--neutral", "uiButton");
 	button.setAttribute("type", "button");
 	button.setAttribute("aria-live", "off");
@@ -63,7 +67,7 @@ function generateFavouriteButton() {
 
 	const star = chrome.runtime.getURL("assets/svgs/star.svg");
 	const { img: starImg, span: starSpan } = createImageElement(
-		starId,
+		STAR_ID,
 		star,
 		"Save as Tab",
 	);
@@ -72,7 +76,7 @@ function generateFavouriteButton() {
 
 	const slashedStar = chrome.runtime.getURL("assets/svgs/slashed-star.svg");
 	const { img: slashedStarImg, span: slashedStarSpan } = createImageElement(
-		slashedStarId,
+		SLASHED_STAR_ID,
 		slashedStar,
 		"Remove Tab",
 	);
@@ -96,7 +100,7 @@ function getFavouriteImage(favouriteId, button = null) {
 	return button?.querySelector(`#${favouriteId}`) ??
 		button?.querySelector(`.${favouriteId}`) ??
 		document.getElementById(favouriteId) ??
-		document.querySelector(`#${buttonId} .${favouriteId}`);
+		document.querySelector(`#${BUTTON_ID} .${favouriteId}`);
 }
 /**
  * Toggles the visibility of the favourite button based on whether the tab is saved.
@@ -106,8 +110,8 @@ function getFavouriteImage(favouriteId, button = null) {
  */
 function toggleFavouriteButton(isSaved, button) {
 	// will use the class identifier if there was an error with the image (and was removed)
-	const star = getFavouriteImage(starId, button);
-	const slashedStar = getFavouriteImage(slashedStarId, button);
+	const star = getFavouriteImage(STAR_ID, button);
+	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 
 	if (isSaved == null) {
 		star.classList.toggle("hidden");
@@ -139,56 +143,44 @@ function sf_containsSalesforceId(url = location.href) {
  * @param {string} url - the minified URL of the tab to add
  * @param {HTMLElement} parent - the parent node of the favourite button
  */
-function addTab(url) {
-	const tabTitle = getHeader(".breadcrumbDetail").innerText;
-	const tab = { tabTitle, url };
-	const addThisTab = (tab) => {
-		sf_overwriteCurrentTabs([tab], false);
-	};
-	sf_containsSalesforceId()
-		.then((response) => {
-			if (response == false) {
-				return addThisTab(tab);
-			}
-			sf_extractOrgName()
-				.then((orgName) => {
-					addThisTab({ ...tab, org: orgName });
-				});
-		});
+async function addTab(url) {
+	const label = getHeader(".breadcrumbDetail").innerText;
+	let org;
+
+	const containsSfId = await sf_containsSalesforceId();
+    if (containsSfId) {
+		org = await sf_extractOrgName()
+    }
+
+	await performActionOnTabs("add",{ label, url, org })
 }
 /**
  * Adds or removes the current tab from the saved tabs list based on the button's state.
  *
  * @param {HTMLElement} parent - The parent element of the favourite button.
  */
-function actionFavourite() {
-	sf_minifyURL(href)
-		.then((url) => {
-			_minifiedURL = url;
+async function actionFavourite() {
+	const url = await sf_minifyURL(href);
+    _minifiedURL = url;
 
-			if (isCurrentlyOnSavedTab) {
-				removeTab(url);
-			} else {
-				addTab(url);
-			}
+    if (isCurrentlyOnSavedTab) {
+		await performActionOnTabs("remove-this",allTabs.getTabsByData({url}))
+    } else {
+        await addTab(url);
+    }
 
-			toggleFavouriteButton();
-		});
+    toggleFavouriteButton();
 }
 
 /**
  * Checks if the current URL is saved and updates the favourite button accordingly.
  */
-function checkUpdateFavouriteButton() {
+async function checkUpdateFavouriteButton() {
 	// check if the current page is being imported
-	sf_minifyURL(href)
-		.then((miniURL) => {
-			_minifiedURL = miniURL;
-			const isOnFavouriteTab = sf_currentTabs.some((current) =>
-				current.url === miniURL
-			);
-			toggleFavouriteButton(isOnFavouriteTab);
-		});
+	const url = await sf_minifyURL(href)
+    _minifiedURL = url;
+    const isOnFavouriteTab = allTabs.tabExistsByData({url});
+    toggleFavouriteButton(isOnFavouriteTab);
 }
 
 /**
@@ -196,11 +188,17 @@ function checkUpdateFavouriteButton() {
  *
  * @param {number} [count=0] - The number of retry attempts to find headers.
  */
-function showFavouriteButton(count = 0) {
+function _showFavouriteButton(count = 0) {
 	if (count > 5) {
 		console.error("Again, Why Salesforce - failed to find headers.");
-		return setTimeout(() => showFavouriteButton(), 5000);
+		return setTimeout(() => _showFavouriteButton(), 5000);
 	}
+    if(_minifiedURL == null){
+        return setTimeout(async () => {
+            _minifiedURL = await sf_minifyURL();
+            _showFavouriteButton(0);
+        });
+    }
 
 	// Do not add favourite button on Home and Object Manager
 	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
@@ -211,7 +209,7 @@ function showFavouriteButton(count = 0) {
 	// there's possibly 2 headers: one for Setup home and one for Object Manager by getting the active one, we're sure to get the correct one (and only one)
 	const header = getHeader("div.bRight");
 	if (header == null) {
-		return setTimeout(() => showFavouriteButton(count + 1), 500);
+		return setTimeout(() => _showFavouriteButton(count + 1), 500);
 	}
 
 	// ensure we have clean data
@@ -219,7 +217,7 @@ function showFavouriteButton(count = 0) {
 		isOnSavedTab();
 	}
 
-	const oldButton = header.querySelector(`#${buttonId}`);
+	const oldButton = header.querySelector(`#${BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
 		checkUpdateFavouriteButton();

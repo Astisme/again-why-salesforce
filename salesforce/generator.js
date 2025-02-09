@@ -1,24 +1,28 @@
 "use strict";
+import {
+	SETUP_LIGHTNING,
+	HTTPS,
+	LIGHTNING_FORCE_COM,
+	EXTENSION_NAME,
+ } from "../constants";
 
-const prefix = "again-why-salesforce";
-const toastId = `${prefix}-toast`;
-const modalId = `${prefix}-modal`;
-const modalConfirmId = `${prefix}-modal-confirm`;
+const TOAST_ID = `${EXTENSION_NAME}-toast`;
+const MODAL_ID = `${EXTENSION_NAME}-modal`;
+const MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
 
 /**
  * Generates a random number with the specified number of digits.
  *
  * @param {number} digits - The number of digits for the random number. Must be greater than 1.
- * @returns {number|null} A random number with the specified number of digits, or `null` if `digits <= 1`.
+ * @returns {number} A random number with the specified number of digits
  *
- * - If `digits <= 1`, returns `null`.
  * - Calculates the lower bound as 10^(digits - 1) (e.g., 10 for 2 digits, 100 for 3 digits).
  * - Multiplies a random value (0 to 1) by the range (9 * 10^(digits - 1)) and adds the lower bound.
  * - Ensures the result is a whole number with the correct number of digits.
  */
 function getRng_n_digits(digits = 1) {
 	if (digits <= 1) {
-		return null;
+		throw new Error("Cannot create rng with less than 1 digit.")
 	}
 	const tenToTheDigits = Math.pow(10, digits - 1);
 	return Math.floor(Math.random() * 9 * tenToTheDigits) +
@@ -62,7 +66,7 @@ function handleLightningLinkClick(e) {
 	 * @returns {String} "_blank" | "_top"
 	 */
 	function getLinkTarget(e, url) {
-		return e.ctrlKey || e.metaKey || !url.includes(setupLightning)
+		return e.ctrlKey || e.metaKey || !url.includes(SETUP_LIGHTNING)
 			? "_blank"
 			: "_top";
 	}
@@ -85,58 +89,55 @@ function handleLightningLinkClick(e) {
  * Generates the HTML for a tab row.
  *
  * @param {Object} row - The tab data object containing title and URL.
- * @param {string} row.tabTitle - The title of the tab.
+ * @param {string} row.label - The title of the tab.
  * @param {string} row.url - The URL of the tab.
  * @param {string} row.org - The org of the org-specific tab.
  * @returns {HTMLElement} - The generated list item element representing the tab.
  */
-function _generateRowTemplate(row) {
-	const { tabTitle, url } = row;
-	const miniURLpromise = sf_minifyURL(url);
-	const expURLpromise = sf_expandURL(url);
+async function _generateRowTemplate(row) {
+	const { label, url } = row;
+	const miniURL = await sf_minifyURL(url);
+	const expURL = await sf_expandURL(url);
 
-	return Promise.all([miniURLpromise, expURLpromise])
-		.then(([miniURL, expURL]) => {
-			_minifiedURL = miniURL;
-			_expandedURL = expURL;
+    _minifiedURL = miniURL;
+    _expandedURL = expURL;
 
-			const li = document.createElement("li");
-			li.setAttribute("role", "presentation");
-			li.classList.add(
-				"oneConsoleTabItem",
-				"tabItem",
-				"slds-context-bar__item",
-				"borderRight",
-				"navexConsoleTabItem",
-				prefix,
-			);
-			li.setAttribute("data-aura-class", "navexConsoleTabItem");
+    const li = document.createElement("li");
+    li.setAttribute("role", "presentation");
+    li.classList.add(
+        "oneConsoleTabItem",
+        "tabItem",
+        "slds-context-bar__item",
+        "borderRight",
+        "navexConsoleTabItem",
+        EXTENSION_NAME,
+    );
+    li.setAttribute("data-aura-class", "navexConsoleTabItem");
 
-			const a = document.createElement("a");
-			a.setAttribute("data-draggable", "true");
-			a.setAttribute("role", "tab");
-			a.setAttribute("tabindex", "-1");
-			a.setAttribute("title", miniURL);
-			a.setAttribute("aria-selected", "false");
-			a.setAttribute("href", expURL);
-			a.classList.add("tabHeader", "slds-context-bar__label-action");
-			a.style.zIndex = 0;
-			a.addEventListener("click", handleLightningLinkClick);
+    const a = document.createElement("a");
+    a.setAttribute("data-draggable", "true");
+    a.setAttribute("role", "tab");
+    a.setAttribute("tabindex", "-1");
+    a.setAttribute("title", miniURL);
+    a.setAttribute("aria-selected", "false");
+    a.setAttribute("href", expURL);
+    a.classList.add("tabHeader", "slds-context-bar__label-action");
+    a.style.zIndex = 0;
+    a.addEventListener("click", handleLightningLinkClick);
 
-			const span = document.createElement(row.org == null ? "span" : "b");
-			span.classList.add("title", "slds-truncate");
-			span.textContent = tabTitle;
+    const span = document.createElement(row.org == null ? "span" : "b");
+    span.classList.add("title", "slds-truncate");
+    span.textContent = label;
 
-			a.appendChild(span);
-			li.appendChild(a);
+    a.appendChild(span);
+    li.appendChild(a);
 
-			// Highlight the tab related to the current page
-			if (href === expURL) {
-				li.classList.add("slds-is-active");
-			}
+    // Highlight the tab related to the current page
+    if (href === expURL) {
+        li.classList.add("slds-is-active");
+    }
 
-			return li;
-		});
+    return li;
 }
 
 /**
@@ -160,7 +161,7 @@ function _generateSldsToastMessage(message, isSuccess, isWarning) {
 
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
-	toastContainer.id = `${toastId}-${randomNumber10digits}`;
+	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
 	toastContainer.classList.add(
 		"toastContainer",
 		"slds-notify_container",
@@ -511,7 +512,7 @@ function generateSection(sectionTitle = null) {
  */
 function generateSldsModal(modalTitle) {
 	const modalParent = document.createElement("div");
-	modalParent.id = modalId;
+	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
 		"DESKTOP",
 		"uiModal--medium",
@@ -673,7 +674,7 @@ function generateSldsModal(modalTitle) {
 	actionBodyDiv.appendChild(fieldContainerDiv);
 
 	const article = document.createElement("article");
-	article.setAttribute("aria-labelledby", modalId);
+	article.setAttribute("aria-labelledby", MODAL_ID);
 	fieldContainerDiv.appendChild(article);
 
 	const titleContainer = document.createElement("div");
@@ -849,7 +850,7 @@ function generateSldsModal(modalTitle) {
 	cancelButton.appendChild(cancelSpan);
 
 	const saveButton = document.createElement("button");
-	saveButton.id = modalConfirmId;
+	saveButton.id = MODAL_CONFIRM_ID;
 	saveButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
@@ -897,16 +898,16 @@ function generateSldsModal(modalTitle) {
  * Generates and opens a modal dialog for entering another Salesforce Org's information.
  *
  * @param {string} miniURL - A partial URL for the target org.
- * @param {string} tabTitle - The title of the modal tab.
+ * @param {string} label - The title of the modal tab.
  * @returns {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
  * - inputContainer: The container element for the org link input field.
  */
-function _generateOpenOtherOrgModal(miniURL, tabTitle) {
+function _generateOpenOtherOrgModal(miniURL, label) {
 	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
-		tabTitle,
+		label,
 	);
 
 	const { section, divParent } = generateSection("Other Org info");
@@ -924,15 +925,15 @@ function _generateOpenOtherOrgModal(miniURL, tabTitle) {
 	};
 
 	const { inputParent, inputContainer } = generateInput(orgLinkInputConf);
-	const https = document.createElement("span");
-	https.append("https://");
-	https.style.height = "1.5rem";
-	divParent.appendChild(https);
+	const httpsSpan = document.createElement("span");
+	httpsSpan.append(HTTPS);
+	httpsSpan.style.height = "1.5rem";
+	divParent.appendChild(httpsSpan);
 	divParent.appendChild(inputParent);
 	const linkEnd = document.createElement("span");
 	linkEnd.append(
-		`.lightning.force.com${
-			!miniURL.startsWith("/") ? setupLightning : ""
+		`${LIGHTNING_FORCE_COM}${
+			!miniURL.startsWith("/") ? SETUP_LIGHTNING : ""
 		}${miniURL}`,
 	);
 	linkEnd.style.width = "fit-content";
