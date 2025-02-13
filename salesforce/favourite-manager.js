@@ -1,8 +1,20 @@
 "use strict";
+import { allTabs } from "../tabContainer.js";
 import {
 	EXTENSION_NAME,
-} from "../constants.mjs"
-import { allTabs } from "../tabContainer.mjs";
+} from "../constants.js"
+import {
+    // functions
+    sf_sendMessage,
+    sf_minifyURL,
+    sf_extractOrgName,
+    getIsCurrentlyOnSavedTab,
+    setLastMinifiedUrl,
+    isOnSavedTab,
+    performActionOnTabs,
+    getLastMinifiedUrl,
+    getWasOnSavedTab,
+} from "./content.js"
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;
 const STAR_ID = `${EXTENSION_NAME}-star`;
@@ -160,10 +172,10 @@ async function addTab(url) {
  * @param {HTMLElement} parent - The parent element of the favourite button.
  */
 async function actionFavourite() {
-	const url = await sf_minifyURL(href);
-    _minifiedURL = url;
+	const url = await sf_minifyURL();
+    setLastMinifiedUrl(url);
 
-    if (isCurrentlyOnSavedTab) {
+    if (getIsCurrentlyOnSavedTab()) {
 		await performActionOnTabs("remove-this",allTabs.getTabsByData({url}))
     } else {
         await addTab(url);
@@ -177,8 +189,8 @@ async function actionFavourite() {
  */
 async function checkUpdateFavouriteButton() {
 	// check if the current page is being imported
-	const url = await sf_minifyURL(href)
-    _minifiedURL = url;
+	const url = await sf_minifyURL()
+    setLastMinifiedUrl(url);
     const isOnFavouriteTab = allTabs.tabExistsByData({url});
     toggleFavouriteButton(isOnFavouriteTab);
 }
@@ -188,32 +200,32 @@ async function checkUpdateFavouriteButton() {
  *
  * @param {number} [count=0] - The number of retry attempts to find headers.
  */
-function _showFavouriteButton(count = 0) {
+export function showFavouriteButton(count = 0) {
 	if (count > 5) {
 		console.error("Again, Why Salesforce - failed to find headers.");
-		return setTimeout(() => _showFavouriteButton(), 5000);
+		return setTimeout(() => showFavouriteButton(), 5000);
 	}
-    if(_minifiedURL == null){
+    if(getLastMinifiedUrl() == null){
         return setTimeout(async () => {
-            _minifiedURL = await sf_minifyURL();
-            _showFavouriteButton(0);
+            setLastMinifiedUrl(await sf_minifyURL());
+            showFavouriteButton(0);
         });
     }
 
 	// Do not add favourite button on Home and Object Manager
 	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
-	if (standardTabs.includes(_minifiedURL)) {
+	if (standardTabs.includes(getLastMinifiedUrl())) {
 		return;
 	}
 
 	// there's possibly 2 headers: one for Setup home and one for Object Manager by getting the active one, we're sure to get the correct one (and only one)
 	const header = getHeader("div.bRight");
 	if (header == null) {
-		return setTimeout(() => _showFavouriteButton(count + 1), 500);
+		return setTimeout(() => showFavouriteButton(count + 1), 500);
 	}
 
 	// ensure we have clean data
-	if (wasOnSavedTab == null && isCurrentlyOnSavedTab == null) {
+	if (getWasOnSavedTab() == null && getIsCurrentlyOnSavedTab() == null) {
 		isOnSavedTab();
 	}
 
@@ -225,5 +237,5 @@ function _showFavouriteButton(count = 0) {
 	}
 	const button = generateFavouriteButton();
 	header.appendChild(button);
-	toggleFavouriteButton(isCurrentlyOnSavedTab, button); // init correctly
+	toggleFavouriteButton(getIsCurrentlyOnSavedTab, button); // init correctly
 }

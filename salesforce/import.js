@@ -1,8 +1,18 @@
 "use strict";
 import {
 	EXTENSION_NAME,
-} from "../constants.mjs"
-import { allTabs } from "../tabContainer.mjs";
+} from "/constants.js"
+import { allTabs } from "/tabContainer.js";
+import {
+    generateSldsFileInput,
+    generateSldsModal,
+    generateCheckboxWithLabel,
+} from "./generator.js"
+import {
+    // functions
+    showToast,
+    getModalHanger,
+} from "./content.js"
 
 let overwritePick;
 let otherOrgPick;
@@ -19,7 +29,7 @@ const reader = new FileReader();
  *
  * This function creates a modal dialog by calling generateSldsModal with the title "Import Tabs",
  * and then sets up a section with a full-width, flex container. It appends an SLDS file input component
- * (created by _generateSldsFileInput) and three checkboxes with labels for import options:
+ * (created by generateSldsFileInput) and three checkboxes with labels for import options:
  * "Overwrite saved tabs." and "Preserve tabs for other orgs."
  * Additionally, it assigns an ID to the close button using CLOSE_MODAL_ID.
  *
@@ -43,7 +53,7 @@ function generateSldsImport() {
 	divParent.style.flexDirection = "column";
 	article.appendChild(section);
 
-	const { fileInputWrapper, inputContainer } = _generateSldsFileInput(
+	const { fileInputWrapper, inputContainer } = generateSldsFileInput(
 		IMPORT_ID,
 		IMPORT_FILE_ID,
 		".json,application/json",
@@ -60,13 +70,13 @@ function generateSldsImport() {
 	duplicateWarning.style.textAlign = "center";
 	divParent.append(duplicateWarning);
 
-	const overwriteCheckbox = _generateCheckboxWithLabel(
+	const overwriteCheckbox = generateCheckboxWithLabel(
 		OVERWRITE_ID,
 		"Overwrite saved tabs.",
 		false,
 	);
 	divParent.appendChild(overwriteCheckbox);
-	const otherOrgCheckbox = _generateCheckboxWithLabel(
+	const otherOrgCheckbox = generateCheckboxWithLabel(
 		OTHER_ORG_ID,
 		"Preserve tabs for other orgs.",
 		true,
@@ -156,8 +166,7 @@ function showFileImport() {
 
 	const { modalParent, saveButton } = generateSldsImport();
 
-	modalHanger = getModalHanger();
-	modalHanger.appendChild(modalParent);
+	getModalHanger().appendChild(modalParent);
 
 	saveButton.remove();
 	listenToFileUpload(modalParent);

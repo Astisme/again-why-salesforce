@@ -4,7 +4,7 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
-} from "../constants.mjs";
+} from "../constants.js";
 import {
 	bg_expandURL,
 	bg_minifyURL,

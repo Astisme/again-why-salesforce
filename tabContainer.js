@@ -1,4 +1,4 @@
-import { Tab } from "./tab.mjs";
+import { Tab } from "./tab.js";
 
 const _tabContainerSecret = Symbol('tabContainerSecret');
 
@@ -12,28 +12,45 @@ class TabContainer {
           throw new Error('You cannot instantiate different TabContainers.');
         }
 
-        if(tabs != null && Array.isArray(tabs))
-            this.addTabs(tabs);
-        else 
-            this.tabs = [];
-        this._initializeTabs();
+        this.tabs = [];
+        this._initializationPromise = this._initialize(tabs);
     }
 
     /**
+     * Inizializes the this.tabs variable based on the synced tabs from the background.
      * Gets all the available tabs while also looking for synced ones.
-     * @returns {Array<Tab>} - An array containing zero or more Tab objects.
      */
-    async _getSavedTabs(){
-        return await chrome.runtime.sendMessage(
+    async _initialize(tabs) {
+        async function checkAddTabs(context, tabs){
+            if (tabs != null && Array.isArray(tabs)) {
+                await context.addTabs(tabs);
+                return true;
+            }
+            return false;
+        }
+        
+        if(await checkAddTabs(this, tabs))
+            return;
+
+        const savedTabs = await chrome.runtime.sendMessage(
             { message: { what: "get" }},
-        );
+        ); 
+        if(!await checkAddTabs(this, savedTabs))
+            await this.setDefaultTabs();
+    }
+
+    /**
+     *
+     */
+    async ensureInitialized() {
+        await this._initializationPromise;
     }
 
 	/**
 	 * Initializes the default tabs and syncs them to storage.
 	 */
 	async setDefaultTabs() {
-        await this.replaceTabs([
+        const replaced = await this.replaceTabs([
 			{ label: "⚡", url: "/lightning" },
 			{ label: "Flows", url: "/lightning/app/standard__FlowsApp" },
 			{ label: "Users", url: "ManageUsers/home" },
@@ -42,27 +59,14 @@ class TabContainer {
             removeOrgTabs: true,
             sync: true
         });
+        return replaced;
 	}
 
     /**
-     * Inizializes the this.tabs variable based on the synced tabs from the background.
-     */
-    async _initializeTabs() {
-        const savedTabs = await this._getSavedTabs();
-        if(savedTabs != null)
-            this.tabs = savedTabs
-        else
-            await this.setDefaultTabs();
-    }
-
-    /**
-     * Gets all the available tabs while also looking for synced ones.
+     * Gets all the available tabs
      * @returns {Array<Tab>} - An array containing zero or more Tab objects.
      */
     async getTabs() {
-        if (this.tabs.length === 0) {
-            await this._initializeTabs();
-        }
         return this.tabs;
     }
 
@@ -73,13 +77,16 @@ class TabContainer {
      * @returns {boolean} - Whether the tab was successfully added
      */
     async addTab(tab, sync = true) {
-        if (!Tab.isValid(tab)) {
-            throw new Error(`Invalid tab object: ${tab.toString()}`);
+        if (!await Tab.isValid(tab)) { // await is needed
+            throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
         }
-        if(this.tabExistsByTab(tab))
+        if(await this.tabExistsByTab(tab)) // await is needed
             throw new Error(`This tab already exists: ${tab.toString()}`);
 
-        this.tabs.push(Tab.isTab(tab) ? tab : Tab.create(tab));
+
+        const validTab = await Tab.create(tab);
+        this.tabs.push(validTab);
+
         if(sync)
             await this.syncTabs();
         return true;
@@ -96,16 +103,20 @@ class TabContainer {
         if(tabs.length === 0 && sync === false)
             return true;
 
-        const addedAll = tabs.every(async tab => {
+        let addedAll = true;
+        for(const tab of tabs){
             try {
-                return await this.addTab(tab, false);
+                await this.addTab(tab, false);
             } catch (error) {
+                addedAll = false;
                 if(error.message !== "This tab already exists")
                     throw error;
             }
-        });
+        };
+
         if(sync)
             await this.syncTabs();
+
         return addedAll;
     }
 
@@ -117,7 +128,7 @@ class TabContainer {
      * @param {string} param0.org - the org of the Tab to remove
      * @returns {boolean} - Whether a tab was removed
      */
-    removeTabsByData({label, url, org} = {}) {
+    async removeTabsByData({label, url, org} = {}) {
         const initialLength = this.tabs.length;
         this.tabs = this.tabs.filter(tab => 
             !tab.equalsByData({label,url,org})
@@ -130,7 +141,7 @@ class TabContainer {
      * @param {Tab} tab - the Tab to remove
      * @returns {boolean} - Whether a Tab was removed
      */
-    removeTabsByTab(tab) {
+    async removeTabsByTab(tab) {
         const initialLength = this.tabs.length;
         this.tabs = this.tabs.filter(tb => !tb.equalsByTab(tab));
         return this.tabs.length < initialLength;
@@ -141,7 +152,7 @@ class TabContainer {
      * @param {boolean} [getWithOrg=true] - Wheter the org should be checked with or agains
      * @returns {Array} - Tabs belonging to the some organization
      */
-    getTabsWithOrg(getWithOrg = true) {
+    async getTabsWithOrg(getWithOrg = true) {
         return this.tabs.filter(tab => 
             (getWithOrg && tab.org != null)
             || (!getWithOrg && tab.org == null)
@@ -154,7 +165,7 @@ class TabContainer {
      * @param {boolean} [matchOrg=true] - Wheter the org specified should be checked with or agains
      * @returns {Array} - Tabs belonging to the specified organization
      */
-    getTabsByOrg(org, matchOrg = true) {
+    async getTabsByOrg(org, matchOrg = true) {
         return this.tabs.filter(tab => 
             tab.org != null 
             && (
@@ -167,7 +178,7 @@ class TabContainer {
     /**
      *
      */
-    getTabsByData({label, url, org}){
+    async getTabsByData({label, url, org}){
         if(label == null && url == null && org == null)
             return [];
         return this.tabs.filter(tab => 
@@ -178,10 +189,10 @@ class TabContainer {
     /**
      *
      */
-    _getTabIndex(tabOrData, isTab = true){ 
+    async _getTabIndex(tabOrData, isTab = true){ 
         if(tabOrData == null)
             throw new Error("Cannot search for null Tab.");
-        if((isTab && !Tab.isValid(tabOrData))
+        if((isTab && !await Tab.isValid(tabOrData)) // await is needed
             || (!isTab && tabOrData.label == null && tabOrData.url == null && tabOrData.org == null))
             throw new Error("Cannot search for invalid Tab.");
 
@@ -197,15 +208,17 @@ class TabContainer {
     /**
      *
      */
-    getTabIndexByTab(tabToFind){
-        return this._getTabIndex(tabToFind, true);
+    async getTabIndexByTab(tabToFind){
+        const res = await this._getTabIndex(tabToFind, true);
+        return res;
     }
 
     /**
      *
      */
-    getTabIndexByData({label,url,org}){
-        return this._getTabIndex({label, url,org},false);
+    async getTabIndexByData({label,url,org}){
+        const res = await this._getTabIndex({label, url,org},false);
+        return res;
     }
 
     /**
@@ -227,10 +240,34 @@ class TabContainer {
      * @param {Tab} tab - the Tab to find
      * @returns {boolean} - Whether the Tab exists
      */
-    tabExistsByTab(tab) {
-        return this.tabs.some(tb => 
-            tb.equalsByTab(tab)
+    async tabExistsByTab(tab) {
+        if (this.tabs == []) {
+            return false;
+        }
+        
+        try {
+            console.log('tab passed to tabExistsByTab', tab, this.tabs, this.tabs.length);
+            const results = await Promise.all(
+                this.tabs.map(async tb => {
+                    const res = await tb.equalsByTab(tab);
+                    console.log('Checked tab:', tb, res);
+                    return res;
+                })
+            );
+            console.log('Equality check results:', results);
+            return results.some(result => result);
+        } catch (error) {
+            console.error('Error in tabExistsByTab:', error);
+            return false;
+        }
+        /*
+        const results = await Promise.all(
+            this.tabs.map(async tb => 
+                await tb.equalsByTab(tab)
+            )
         );
+        return results.some(res => res);
+        */
     }
 
     /**
@@ -313,7 +350,15 @@ class TabContainer {
         }
 
         // Add new tabs and sync them
-        await this.addTabs(newTabs, sync);
+        const res = await this.addTabs(newTabs, sync);
+        return res;
+    }
+
+    /**
+     * 
+     */
+    toJSON(){
+        return TabContainer.toJSON(this.tabs);
     }
 
     /**
@@ -336,8 +381,9 @@ class TabContainer {
         
         TabContainer.errorOnInvalidTabs(imported);
 
-        await this.replaceTabs(imported, resetTabs, !preserveOtherOrg);
-        return imported.length;
+        if(await this.replaceTabs(imported, resetTabs, !preserveOtherOrg))
+            return imported.length;
+        return 0;
     }
 
     /**
@@ -347,8 +393,9 @@ class TabContainer {
     async syncTabs(tabs = null){
         const check = tabs == null;
         // replace tabs already checks the tabs
-        !check && this.replaceTabs(tabs, {sync: false});
-        return await TabContainer._syncTabs(this.tabs, check);
+        !check && await this.replaceTabs(tabs, {sync: false});
+        //console.log('synctabs',this.tabs);
+        return TabContainer._syncTabs(this.tabs, check);
     }
 
     /**
@@ -357,8 +404,8 @@ class TabContainer {
      * @param {Array<Tab>} tabs - The TabContainer to match against
      * @returns {boolean} True if the arrays are equal, false otherwise.
      */
-    equals(tabs){
-        return tabs.every(tab => Tab.isValid(tab) && this.tabs.some(ttb => ttb.equalsByTab(tab)))
+    async equals(tabs){
+        return tabs.every(async tab => await Tab.isValid(tab) && this.tabs.some(ttb => ttb.equalsByTab(tab))) // await is needed
             //&& JSON.stringify(this.tabs) === JSON.stringify(tabs);
     }
 
@@ -366,11 +413,12 @@ class TabContainer {
      * Sync tabs with the background
      * @param {Array<Tab>} tabs - The tabs to be synced
      */
-    static async _syncTabs(tabs, check){
+    static _syncTabs(tabs, check){
         check && TabContainer.errorOnInvalidTabs(tabs);
 
-        return await chrome.runtime.sendMessage(
-            { message: { what: "set", tabs }},
+        //console.warn('staticsync',tabs);
+        return chrome.runtime.sendMessage(
+            { message: { what: "set", tabs: TabContainer.toJSON(tabs) }},
         );
     }
 
@@ -381,9 +429,17 @@ class TabContainer {
     static errorOnInvalidTabs(tabs){
         if(tabs == null || !Array.isArray(tabs))
             throw new Error("No array was passed",tabs);
+        async function checkTabs(tabs){
+            const res = [];
+            for(const tab of tabs)
+                if(!await Tab.isValid(tab)) // await is needed
+                    res.push(tab);
+            return res;
+        }
 
-        const invalidTabs = tabs.filter(tab => !Tab.isValid(tab));
+        const invalidTabs = checkTabs(tabs);
         if(invalidTabs.length > 0){
+            console.warn(tabs, TabContainer.isValid(tabs));
             throw new Error(`Invalid Tab${invalidTabs.length > 1 ? "s" : ""} detected: ${JSON.stringify(invalidTabs)}.\nEach item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.`);
         }
     }
@@ -399,6 +455,27 @@ class TabContainer {
             && tabs.every(tab => Tab.isTab(tab));
     }
 
+    /**
+     *
+     */
+    static toJSON(tabs){
+        TabContainer.errorOnInvalidTabs(tabs);
+
+        const validArray = Array.isArray(tabs) ? [...tabs] : Array.from(tabs);
+        if (validArray.length !== tabs.length) {
+            console.warn('Array length mismatch:', {
+                original: tabs.length,
+                new: validArray.length
+            });
+        }
+
+        const resultJson = [];
+        for(const tab of validArray)
+            if(Tab.isTab(tab))
+                resultJson.push(tab.toJSON());
+        return resultJson;
+    }
+    
     /**
      *
      */
@@ -436,9 +513,10 @@ class TabContainer {
         if(url == null)
             throw new Error("Cannot identify Tab.");
         if (label == null) {
-            label = this.tabs.getTabsByData({url})[0]?.label;
+            label = (await this.tabs.getTabsByData({url}))
+                [0]?.label;
         }
-        const index = this.tabs.getTabIndexByData({label, url});
+        const index = await this.tabs.getTabIndexByData({label, url});
         // TODO changed signature of function
 
         const [tab] = this.tabs.splice(index, 1);
@@ -496,7 +574,7 @@ class TabContainer {
             throw new Error("Cannot identify Tab.");
         let tab;
         if (label == null) {
-            tab = this.tabs.getTabsByData({url})[0];
+            tab = (await this.tabs.getTabsByData({url}))[0];
             label = tab?.label;
         }
 
@@ -509,8 +587,13 @@ class TabContainer {
         // remove all tabs but this one
         if (removeBefore == null) {
             // using filter, if the user picks an org-specific tab, the org info is kept intact
-            const tabToSave = [tab] ?? this.tabs.getTabsByData({label,url});
-            return await this.tabs.syncTabs(tabToSave);
+            let tabToSave;
+            if(tab != null)
+                tabToSave = [tab];
+            else
+                tabToSave = await this.tabs.getTabsByData({label,url});
+            await this.syncTabs(tabToSave);
+            return;
         }
 
         const index = this.tabs.getTabsIndexByData({label,url});
@@ -524,6 +607,10 @@ class TabContainer {
 }
 
 const allTabs = new TabContainer(null, _tabContainerSecret);
+const wait = async () => {
+    await allTabs.ensureInitialized();
+};
+wait();
 //globalThis.allTabs = allTabs;
 //globalThis.TabContainer = TabContainer;
 export { allTabs, TabContainer };

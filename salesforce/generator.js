@@ -4,7 +4,14 @@ import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	EXTENSION_NAME,
- } from "../constants.mjs";
+ } from "../constants.js";
+import {
+    // functions
+    sf_sendMessage,
+    sf_minifyURL,
+    setLastMinifiedUrl,
+    setLastExpandedUrl,
+} from "./content.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -94,13 +101,13 @@ function handleLightningLinkClick(e) {
  * @param {string} row.org - The org of the org-specific tab.
  * @returns {HTMLElement} - The generated list item element representing the tab.
  */
-async function _generateRowTemplate(row) {
+export async function generateRowTemplate(row) {
 	const { label, url } = row;
 	const miniURL = await sf_minifyURL(url);
 	const expURL = await sf_expandURL(url);
 
-    _minifiedURL = miniURL;
-    _expandedURL = expURL;
+    setLastMinifiedUrl(miniURL);
+    setLastExpandedUrl(expURL);
 
     const li = document.createElement("li");
     li.setAttribute("role", "presentation");
@@ -147,7 +154,7 @@ async function _generateRowTemplate(row) {
  * @param {boolean} isSuccess - Indicates whether the message is a success or error.
  * @returns {HTMLElement} - The generated element for the toast message.
  */
-function _generateSldsToastMessage(message, isSuccess, isWarning) {
+export function generateSldsToastMessage(message, isSuccess, isWarning) {
 	if (
 		message == null || message === "" | isSuccess == null ||
 		isWarning == null
@@ -510,7 +517,7 @@ function generateSection(sectionTitle = null) {
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
  */
-function generateSldsModal(modalTitle) {
+export function generateSldsModal(modalTitle) {
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -866,8 +873,6 @@ function generateSldsModal(modalTitle) {
 	saveButton.setAttribute("data-aura-class", "uiButton forceActionButton");
 	buttonContainerInnerDiv.appendChild(saveButton);
 
-	saveButton.addEventListener;
-
 	const saveSpan = document.createElement("span");
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
@@ -905,7 +910,7 @@ function generateSldsModal(modalTitle) {
  * - closeButton: The close button element for closing the modal.
  * - inputContainer: The container element for the org link input field.
  */
-function _generateOpenOtherOrgModal(miniURL, label) {
+export function generateOpenOtherOrgModal(miniURL, label) {
 	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
 		label,
 	);
@@ -961,7 +966,7 @@ function _generateOpenOtherOrgModal(miniURL, label) {
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
-function _generateSldsFileInput(
+export function generateSldsFileInput(
 	wrapperId,
 	inputElementId,
 	acceptedType,
@@ -1264,7 +1269,7 @@ function _generateSldsFileInput(
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
  * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
-function _generateCheckboxWithLabel(id, label, checked = false) {
+export function generateCheckboxWithLabel(id, label, checked = false) {
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 

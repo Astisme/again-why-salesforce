@@ -42,7 +42,6 @@ class Tab {
                 throw new Error("When calling with an object, do not pass anything else.");
 
             const tab = labelOrTab;
-            console.log(tab)
 
             // Check for unexpected keys
             const unexpectedKeys = Object.keys(tab).filter(key => !Tab.allowedKeys.has(key));
@@ -51,12 +50,12 @@ class Tab {
             }
 
             // TODO tabTitle will be removed in a later version
-            return await Tab.create(tab.label ?? tab.tabTitle, tab.url, tab.org);
+            const createdTab = await Tab.create(tab.label ?? tab.tabTitle, tab.url, tab.org);
+            return createdTab;
         }
         
         // Original method signature (label, url, org)
         const label = labelOrTab;
-        console.log({label,url,org})
 
         // Check types of parameters
         if (typeof label !== "string" || label.trim() === "") {
@@ -88,16 +87,23 @@ class Tab {
      * @returns {Promise<string>} a Promise containing the smaller URL
      */
     static async minifyURL(url){
-        return await chrome.runtime.sendMessage(
+        const newUrl = await chrome.runtime.sendMessage(
             { message: { what: "minify", url }}
         );
+        return newUrl;
     }
 
     /**
      *
      */
     static isTab(tab){
-        return tab instanceof Tab;
+        const result = tab instanceof Tab;
+        console.log('isTab check:', {
+            input: tab,
+            constructor: tab?.constructor?.name,
+            isInstance: result
+        });
+        return result;
     }
 
     /**
@@ -105,13 +111,15 @@ class Tab {
      * @param {Object} tab - the tab to be checked
      * @returns {boolean} true if the tab is a Tab; false otherwise
      */
-    static isValid(tab) {
+    static async isValid(tab) {
+        console.warn('tabisvalid',Tab.isTab(tab),JSON.stringify(tab));
         if(Tab.isTab(tab))
             return true;
         // if the tab is not a Tab, try creating one
         try {
-            return Tab.isTab(Tab.create(tab));
+            return Tab.isTab(await Tab.create(tab));
         } catch (error) {
+            console.error("Invalid Tab: ",error.message);
             // error on creation of tab
             return false;
         }
@@ -122,6 +130,7 @@ class Tab {
      * @returns {Object} this Tab transformed into an Object
      */
     toJSON(){
+        console.log('tabtojson');
         return {
             label: this.label,
             url: this.url,
@@ -156,11 +165,13 @@ class Tab {
      * @param {Tab} tab - The Tab object to be checked against.
      * @returns {boolean} whether the tabs are equal
      */
-    equalsByTab(tab){
+    async equalsByTab(tab){
+        console.warn('tabequals',tab,this.tab,tab === this.tab, tab == this.tab,this.equalsByData(await Tab.create(tab)));
         if(tab === this.tab)
             return true;
         try {
-            return Tab.create(tab) === this.tab;
+            const tabToCompare = await Tab.create(tab);
+            return this.equalsByData(tabToCompare);
         } catch (error) {
             return false;
         }
@@ -177,7 +188,7 @@ class Tab {
      */
     static updateTab(tabToUpdate, {label,url,org} = {}){
         if(tabToUpdate == null)
-            throw new Error(`Unknown tab: ${tabToUpdate.toString()}`);
+            throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
 
         if(label == null && url == null && org == null)
             return tabToUpdate;

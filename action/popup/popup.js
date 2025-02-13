@@ -1,8 +1,8 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
-import { Tab } from "../../tab.js"
-import { allTabs, TabContainer } from "../../tabContainer.js"
+import { Tab } from "/tab.js"
+import { allTabs, TabContainer } from "/tabContainer.js"
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -390,9 +390,9 @@ async function findTabs(callback, doReload) {
 					url,
 				);
 				if (!onlyOrgChecked && !containsSalesforceId) {
-					return Tab.create(label, url);
+					return await Tab.create(label, url);
 				}
-				return Tab.create(label, url, orgName);
+				return await Tab.create(label, url, orgName);
 			}
 			return null; // Return null for invalid tabs
 		});
@@ -403,9 +403,11 @@ async function findTabs(callback, doReload) {
 		const resolvedTabs = await Promise.all(tabPromises);
 		availableTabs = resolvedTabs.filter((tab) => tab !== null);
 		// add all the hidden not-this-org tabs
+        /*
 		availableTabs.push(
 			...allTabs.getTabsByOrg(orgName, false)
         );
+        */
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 		availableTabs = [];
@@ -424,7 +426,10 @@ async function saveTabs(doReload = true, tabs) {
 	if (!TabContainer.isValid(tabs)) {
 		return findTabs(saveTabs, doReload);
 	}
-    await allTabs.syncTabs(tabs);
+    await allTabs.replaceTabs(tabs, {
+        removeOrgTabs: true,
+        keepTabsNotThisOrg: await pop_extractOrgName(),
+    });
 	doReload && reloadRows(tabs);
 }
 

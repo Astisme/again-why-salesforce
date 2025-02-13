@@ -5,7 +5,7 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	HTTPS,
 	SETUP_LIGHTNING,
-} from "../constants.mjs";
+} from "../constants.js";
 import { bg_getStorage } from "./background.js";
 import { TabContainer } from "../tabContainer.js";
 

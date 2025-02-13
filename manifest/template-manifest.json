@@ -17,11 +17,7 @@
 				"https://*.lightning.force.com/lightning/setup/*"
 			],
 			"js": [
-				"salesforce/generator.js",
-				"salesforce/favourite-manager.js",
-				"dragHandler.mjs",
-				"salesforce/import.js",
-				"salesforce/content.js"
+				"salesforce/bundledContent.js"
 			],
             "type": "module",
 			"run_at": "document_end"
@@ -46,17 +42,6 @@
 				"https://*.my.salesforce-setup.com/*",
 				"https://*.lightning.force.com/*"
 			]
-		},
-		{
-			"resources": [
-				"constants.mjs",
-				"tab.mjs",
-				"tabContainer.mjs"
-			],
-			"matches": [
-				"https://*.my.salesforce-setup.com/*",
-				"https://*.lightning.force.com/*"
-			]
 		}
 	],
 	"icons": {
@@ -73,12 +58,9 @@
 		"default_popup": "action/popup/popup.html"
 	},
 	"background": {
-		"service_worker": "background/background.js",
+		"service_worker": "background/bundledBackground.js",
 		"scripts": [
-			"constants.mjs",
-			"background/utils.js",
-			"background/context-menus.js",
-			"background/background.js"
+            "background/bundledBackground.js"
 		],
 		"type": "module"
 	},

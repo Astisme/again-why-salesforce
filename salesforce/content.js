@@ -1,16 +1,27 @@
 "use strict";
-import { Tab } from "../../tab.mjs"
-import { allTabs } from "../../tabContainer.mjs"
+import { Tab } from "/tab.js";
+import { allTabs } from "/tabContainer.js";
 import { 
     SETUP_LIGHTNING,
     HTTPS,
     LIGHTNING_FORCE_COM,
-} from "../constants.mjs";
+} from "/constants.js";
+import {
+    showFavouriteButton,
+} from "./favourite-manager.js";
+import {
+    setupDrag,
+} from "/dragHandler.js";
+import {
+    generateRowTemplate,
+    generateSldsToastMessage,
+    generateOpenOtherOrgModal,
+} from "./generator.js";
 
 let setupTabUl; // This is a UL on Salesforce Setup
 let objectManagerLi; // This is the standard last LI of setupTabUl
 let modalHanger; // This is where modals should be inserted in Salesforce Setup
-let href = globalThis.location.href;
+export let href = globalThis.location.href;
 
 let _minifiedURL;
 let _expandedURL;
@@ -26,13 +37,30 @@ let fromHrefUpdate;
 	(document.head || document.documentElement).appendChild(script);
 }
 
+export function getIsCurrentlyOnSavedTab(){
+    return isCurrentlyOnSavedTab;
+}
+
+export function getLastMinifiedUrl(){
+    return _minifiedURL;
+}
+export function setLastMinifiedUrl(url){
+    _minifiedURL = url;
+}
+export function setLastExpandedUrl(url){
+    _expandedURL = url;
+}
+export function getWasOnSavedTab(){
+    return wasOnSavedTab;
+}
+
 /**
  * Sends a message to the background script with the current URL.
  *
  * @param {Object} message - The message object to send.
  * @param {Function} callback - The callback function to execute after sending the message.
  */
-function sf_sendMessage(message, callback) {
+export function sf_sendMessage(message, callback) {
 	return chrome.runtime.sendMessage(
 		{ message, url: location.href },
 		callback,
@@ -67,7 +95,7 @@ function sf_afterSet(what = null) {
  * SetupOneHome/home/
  * SetupOneHome/home
  */
-function sf_minifyURL(url = window.location) {
+export function sf_minifyURL(url = globalThis.location.href) {
 	return sf_sendMessage({ what: "minify", url });
 }
 
@@ -76,7 +104,7 @@ function sf_minifyURL(url = window.location) {
  *
  * @param {string} url - The URL from which the Org name has to be extracted
  */
-function sf_extractOrgName(url = location.href) {
+export function sf_extractOrgName(url = location.href) {
 	return sf_sendMessage({ what: "extract-org", url });
 }
 
@@ -87,7 +115,7 @@ function sf_extractOrgName(url = location.href) {
  * @param {boolean} [isSuccess=true] - Whether the toast message is a success (default is true).
  * @param {boolean} [isWarning=false] - Whether the toast message is a warning (default is false).
  */
-function showToast(message, isSuccess = true, isWarning = false) {
+export function showToast(message, isSuccess = true, isWarning = false) {
 	/**
 	 * Calculates the estimated time (in milliseconds) it takes to read a given message.
 	 *
@@ -105,7 +133,7 @@ function showToast(message, isSuccess = true, isWarning = false) {
 	const hanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
-	const toastElement = _generateSldsToastMessage(
+	const toastElement = generateSldsToastMessage(
 		message,
 		isSuccess,
 		isWarning,
@@ -133,13 +161,13 @@ async function init() {
         allTabs.forEach(async (row) => {
             // hide org-specific but not-this-org tabs
             if (row.org == null || row.org === orgName) { // TODO add option to hide or show org-specific but not-this-org tabs
-                const element = await _generateRowTemplate(row);
+                const element = await generateRowTemplate(row);
                 setupTabUl.appendChild(element);
             }
         })
 	}
 	isOnSavedTab();
-	_showFavouriteButton();
+	showFavouriteButton();
 }
 
 /**
@@ -148,7 +176,7 @@ async function init() {
  * @param {boolean} [isFromHrefUpdate=false] - A flag to determine if the check is due to a URL update.
  * @returns {boolean} - True if the current tab is a saved tab, otherwise false.
  */
-async function isOnSavedTab(isFromHrefUpdate = false, callback) {
+export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
 		fromHrefUpdate = false;
 		return;
@@ -159,9 +187,7 @@ async function isOnSavedTab(isFromHrefUpdate = false, callback) {
     _minifiedURL = loc;
 
     wasOnSavedTab = isCurrentlyOnSavedTab;
-    isCurrentlyOnSavedTab = sf_currentTabs.some((tabdef) =>
-        tabdef.url.includes(loc)
-    );
+    isCurrentlyOnSavedTab = allTabs.tabExistsByData({url:loc});
 
     isFromHrefUpdate && callback(isCurrentlyOnSavedTab);
 }
@@ -176,7 +202,7 @@ function onHrefUpdate() {
      */
     function afterHrefUpdate(isCurrentlyOnSavedTab) {
         if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();
-        else _showFavouriteButton();
+        else showFavouriteButton();
     }
 
 	const newRef = globalThis.location.href;
@@ -316,9 +342,11 @@ function makeDuplicatesBold(miniURL) {
 /**
  * Find the div to where to add a modal
  */
-function getModalHanger() {
-	return modalHanger ??
-		document.querySelector("div.DESKTOP.uiContainerManager");
+export function getModalHanger() {
+    if(modalHanger != null)
+        return modalHanger;
+	modalHanger = document.querySelector("div.DESKTOP.uiContainerManager");
+    return modalHanger;
 }
 
 /**
@@ -342,7 +370,7 @@ async function showModalOpenOtherOrg({label = null, url = null} = {}) {
     }
 
     const { modalParent, saveButton, closeButton, inputContainer } =
-        _generateOpenOtherOrgModal(
+        generateOpenOtherOrgModal(
             url,
             label ??
                 allTabs.find((current) =>
@@ -421,7 +449,7 @@ function pageActionTab(save = true) {
 /**
  *
  */
-async function performActionOnTabs(action, tab, options){
+export async function performActionOnTabs(action, tab, options){
     try {
         switch (action) {
             case "move":

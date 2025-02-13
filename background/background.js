@@ -8,7 +8,7 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	SALESFORCE_ID_PATTERN,
 	WHY_KEY,
-} from "../constants.mjs";
+} from "../constants.js";
 import {
 	bg_expandURL,
 	bg_minifyURL,
@@ -25,9 +25,9 @@ import {
 export function bg_getStorage(callback) {
 	BROWSER.storage.sync.get(
 		[WHY_KEY],
-		(items) => {
+		async (items) => {
             console.log('items',items[WHY_KEY]) // TODO remove this log
-            callback(items[WHY_KEY])
+            callback(items[WHY_KEY]);
         }
 	);
 }
@@ -41,6 +41,7 @@ export function bg_getStorage(callback) {
 function bg_setStorage(tabs, callback) {
 	const set = {};
 	set[WHY_KEY] = tabs;
+    console.log('setstorage');
 	BROWSER.storage.sync.set(set, () => callback(null));
 }
 
