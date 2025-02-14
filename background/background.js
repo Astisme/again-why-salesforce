@@ -16,6 +16,7 @@ import {
 	exportHandler,
     bg_getCurrentBrowserTab,
 } from "./utils.js";
+import { TabContainer } from "../tabContainer.js";
 
 /**
  * Retrieves stored data from the browser's storage and invokes the provided callback.
@@ -26,7 +27,6 @@ export function bg_getStorage(callback) {
 	BROWSER.storage.sync.get(
 		[WHY_KEY],
 		async (items) => {
-            console.log('items',items[WHY_KEY]) // TODO remove this log
             callback(items[WHY_KEY]);
         }
 	);
@@ -38,11 +38,13 @@ export function bg_getStorage(callback) {
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
  */
-function bg_setStorage(tabs, callback) {
+async function bg_setStorage(tabs, callback) {
 	const set = {};
+    //tabs = await TabContainer.removeDuplicates(tabs);
+    tabs = TabContainer.removeDuplicates(tabs);
 	set[WHY_KEY] = tabs;
-    console.log('setstorage');
 	BROWSER.storage.sync.set(set, () => callback(null));
+    bg_getStorage((_ => {}));
 }
 
 /**
@@ -53,7 +55,6 @@ function bg_setStorage(tabs, callback) {
  */
 function bg_extractOrgName(url) {
 	if (url == null) {
-        console.log('bg_extractOrgName');
 		return bg_getCurrentBrowserTab(browserTab => bg_extractOrgName(browserTab.url))
 	}
 	let host = new URL(
@@ -105,7 +106,7 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		sendResponse(null);
 		return false;
 	}
-	let captured = true;
+	//let captured = true;
 
 	switch (message.what) {
 		case "get":
@@ -121,35 +122,42 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "warning":
 			sendResponse(null);
 			setTimeout(() => bg_notify(message), 250); // delay the notification to prevent accidental removal (for "add")
-			return false; // we won't call sendResponse
+			//return false; // we won't call sendResponse
+			break;
 		case "minify":
 			sendResponse(bg_minifyURL(message.url));
-			return false; // we won't call sendResponse
+			//return false; // we won't call sendResponse
+			break;
 		case "extract-org":
 			sendResponse(bg_extractOrgName(message.url));
-			return false; // we won't call sendResponse
+			//return false; // we won't call sendResponse
+			break;
 		case "expand":
 			sendResponse(bg_expandURL(message));
-			return false; // we won't call sendResponse
+			//return false; // we won't call sendResponse
+			break;
 		case "contains-sf-id":
 			sendResponse(bg_containsSalesforceId(message.url));
-			return false; // we won't call sendResponse
+			//return false; // we won't call sendResponse
+			break;
 		case "export":
 			exportHandler(message.tabs);
 			sendResponse(null);
-			return false;
+			//return false;
+			break;
         case "browser-tab":
-            console.log('browser-tab');
             bg_getCurrentBrowserTab(sendResponse, message.popup);
             break;
 
 		default:
-			captured = ["import"].includes(message.what);
-			if (!captured) {
+			//captured = ["import"].includes(message.what);
+			//if (!captured) {
+            if(!["import"].includes(message.what)){
 				console.error({ "error": "Unknown message", message, request });
 			}
 			break;
 	}
 
-	return captured; // will call sendResponse asynchronously if true
+	//return captured; // will call sendResponse asynchronously if true
+    return true;
 });

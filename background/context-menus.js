@@ -132,6 +132,8 @@ async function createMenuItems() {
 
 		for (const item of menuItems) {
 			await BROWSER.contextMenus.create(item);
+            if(BROWSER.runtime.lastError)
+                throw new Error(BROWSER.runtime.lastError.message);
 		}
 
 		areMenuItemsVisible = true;

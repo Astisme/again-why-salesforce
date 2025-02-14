@@ -21,7 +21,7 @@ import {
 let setupTabUl; // This is a UL on Salesforce Setup
 let objectManagerLi; // This is the standard last LI of setupTabUl
 let modalHanger; // This is where modals should be inserted in Salesforce Setup
-export let href = globalThis.location.href;
+let href = globalThis.location.href;
 
 let _minifiedURL;
 let _expandedURL;
@@ -52,6 +52,9 @@ export function setLastExpandedUrl(url){
 }
 export function getWasOnSavedTab(){
     return wasOnSavedTab;
+}
+export function getCurrentHref(){
+    return href;
 }
 
 /**
@@ -95,8 +98,10 @@ function sf_afterSet(what = null) {
  * SetupOneHome/home/
  * SetupOneHome/home
  */
-export function sf_minifyURL(url = globalThis.location.href) {
-	return sf_sendMessage({ what: "minify", url });
+export async function sf_minifyURL(url = globalThis.location.href) {
+	const miniURL = await sf_sendMessage({ what: "minify", url });
+    _minifiedURL = miniURL;
+    return miniURL;
 }
 
 /**
@@ -152,7 +157,8 @@ export function showToast(message, isSuccess = true, isWarning = false) {
  * @param {Array<Object>} items[key] - The array of tab data retrieved from storage or the default tabs.
  */
 async function init() {
-    if(allTabs == null)
+    console.log(allTabs,allTabs.length)
+    if(allTabs.length === 0) // Default: when nothing is inserted, set the default tabs
         await allTabs.setDefaultTabs();
 
 	if (allTabs.length > 0) {
@@ -187,7 +193,7 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
     _minifiedURL = loc;
 
     wasOnSavedTab = isCurrentlyOnSavedTab;
-    isCurrentlyOnSavedTab = allTabs.tabExistsByData({url:loc});
+    isCurrentlyOnSavedTab = allTabs.exists({url:loc});
 
     isFromHrefUpdate && callback(isCurrentlyOnSavedTab);
 }
@@ -283,7 +289,6 @@ async function reloadTabs() {
 	while (setupTabUl.childElementCount > 3) { // hidden li + Home + Object Manager
 		setupTabUl.removeChild(setupTabUl.lastChild);
 	}
-    await allTabs.getTabs();
     init();
 }
 
@@ -373,9 +378,7 @@ async function showModalOpenOtherOrg({label = null, url = null} = {}) {
         generateOpenOtherOrgModal(
             url,
             label ??
-                allTabs.find((current) =>
-                    current.url === url
-                )?.label ??
+                allTabs.getTabsByData({url})[0]?.label ??
                 "Where to?",
         );
     modalHanger = getModalHanger();
@@ -456,7 +459,7 @@ export async function performActionOnTabs(action, tab, options){
                 await allTabs.moveTab(tab, options);
                 break;
             case "remove-this":
-                await allTabs.removeTab(tab, options);
+                await allTabs.remove(tab, options);
                 break;
             case "remove-other":
                 await allTabs.removeOtherTabs(tab, options);

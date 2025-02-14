@@ -2,26 +2,24 @@ import { Tab } from "./tab.js";
 
 const _tabContainerSecret = Symbol('tabContainerSecret');
 
-class TabContainer {
+class TabContainer extends Array {
     /**
-     * Creates the TabContainer while setting the this.tabs variable
-     * @param {Array<Tab>|null} [tabs=null] - An array containing Tab objects (only valid Tabs are used). This will be used to set this.tabs if passed.
+     * Creates the TabContainer while setting the tabs
+     * @param {Array<Tab>|null} [tabs=null] - An array containing Tab objects (only valid Tabs are used)
      */
-    constructor(tabs = null, secret) {
-        if (secret !== _tabContainerSecret) {
-          throw new Error('You cannot instantiate different TabContainers.');
-        }
-
-        this.tabs = [];
-        this._initializationPromise = this._initialize(tabs);
+    constructor() {
+        super();
+        if(this._initializationPromise == null)
+            this._initializationPromise = this._initialize();
     }
 
     /**
-     * Inizializes the this.tabs variable based on the synced tabs from the background.
+     * Initializes the tabs based on the synced tabs from the background.
      * Gets all the available tabs while also looking for synced ones.
      */
     async _initialize(tabs) {
-        async function checkAddTabs(context, tabs){
+        async function checkAddTabs(context, tabs) {
+            console.log('cat',tabs);
             if (tabs != null && Array.isArray(tabs)) {
                 await context.addTabs(tabs);
                 return true;
@@ -29,46 +27,39 @@ class TabContainer {
             return false;
         }
         
-        if(await checkAddTabs(this, tabs))
+        if (await checkAddTabs(this, tabs))
             return;
 
         const savedTabs = await chrome.runtime.sendMessage(
             { message: { what: "get" }},
         ); 
-        if(!await checkAddTabs(this, savedTabs))
+        if (!await checkAddTabs(this, savedTabs))
             await this.setDefaultTabs();
     }
 
     /**
-     *
+     * Ensures initialization is complete
      */
     async ensureInitialized() {
         await this._initializationPromise;
     }
 
-	/**
-	 * Initializes the default tabs and syncs them to storage.
-	 */
-	async setDefaultTabs() {
-        const replaced = await this.replaceTabs([
-			{ label: "⚡", url: "/lightning" },
-			{ label: "Flows", url: "/lightning/app/standard__FlowsApp" },
-			{ label: "Users", url: "ManageUsers/home" },
-		], {
+    /**
+     * Initializes the default tabs and syncs them to storage.
+     */
+    async setDefaultTabs() {
+        await this.replaceTabs([
+            { label: "⚡", url: "/lightning" },
+            { label: "Flows", url: "/lightning/app/standard__FlowsApp" },
+            { label: "Users", url: "ManageUsers/home" },
+        ], {
             resetTabs: true,
             removeOrgTabs: true,
             sync: true
         });
-        return replaced;
-	}
-
-    /**
-     * Gets all the available tabs
-     * @returns {Array<Tab>} - An array containing zero or more Tab objects.
-     */
-    async getTabs() {
-        return this.tabs;
+        return this;
     }
+
 
     /**
      * Add a new tab to the collection and sync it with the background.
@@ -80,14 +71,13 @@ class TabContainer {
         if (!await Tab.isValid(tab)) { // await is needed
             throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
         }
-        if(await this.tabExistsByTab(tab)) // await is needed
+        if (this.exists(tab)) // await is needed
             throw new Error(`This tab already exists: ${tab.toString()}`);
 
-
         const validTab = await Tab.create(tab);
-        this.tabs.push(validTab);
+        this.push(validTab);
 
-        if(sync)
+        if (sync)
             await this.syncTabs();
         return true;
     }
@@ -121,39 +111,12 @@ class TabContainer {
     }
 
     /**
-     * Remove all tabs matching the label, url and org (based on the passed data)
-     * @param {Object} param0  - an Object containing the following parameters to match a Tab to remove
-     * @param {string} param0.label - the label of the Tab to remove
-     * @param {string} param0.url - the url of the Tab to remove
-     * @param {string} param0.org - the org of the Tab to remove
-     * @returns {boolean} - Whether a tab was removed
-     */
-    async removeTabsByData({label, url, org} = {}) {
-        const initialLength = this.tabs.length;
-        this.tabs = this.tabs.filter(tab => 
-            !tab.equalsByData({label,url,org})
-        );
-        return this.tabs.length < initialLength;
-    }
-
-    /**
-     * Remove the Tab passed as input
-     * @param {Tab} tab - the Tab to remove
-     * @returns {boolean} - Whether a Tab was removed
-     */
-    async removeTabsByTab(tab) {
-        const initialLength = this.tabs.length;
-        this.tabs = this.tabs.filter(tb => !tb.equalsByTab(tab));
-        return this.tabs.length < initialLength;
-    }
-
-    /**
      * Get tabs with or without an org
      * @param {boolean} [getWithOrg=true] - Wheter the org should be checked with or agains
      * @returns {Array} - Tabs belonging to the some organization
      */
     async getTabsWithOrg(getWithOrg = true) {
-        return this.tabs.filter(tab => 
+        return this.filter(tab => 
             (getWithOrg && tab.org != null)
             || (!getWithOrg && tab.org == null)
         );
@@ -165,8 +128,8 @@ class TabContainer {
      * @param {boolean} [matchOrg=true] - Wheter the org specified should be checked with or agains
      * @returns {Array} - Tabs belonging to the specified organization
      */
-    async getTabsByOrg(org, matchOrg = true) {
-        return this.tabs.filter(tab => 
+    getTabsByOrg(org, matchOrg = true) {
+        return this.filter(tab => 
             tab.org != null 
             && (
                 (matchOrg && tab.org === org) 
@@ -178,47 +141,33 @@ class TabContainer {
     /**
      *
      */
-    async getTabsByData({label, url, org}){
-        if(label == null && url == null && org == null)
+    getTabsByData(tab = {label: null, url: null, org: null}){
+        if(tab.label == null && tab.url == null && tab.org == null)
             return [];
-        return this.tabs.filter(tab => 
-            tab.equalsByData({label,url,org})
+
+        if(tab.label == null && tab.url == null && tab.org != null)
+            return this.getTabsByOrg(tab.org);
+
+        return this.filter(tab => 
+            tab.equals({label,url,org})
         );
     }
 
     /**
      *
      */
-    async _getTabIndex(tabOrData, isTab = true){ 
-        if(tabOrData == null)
-            throw new Error("Cannot search for null Tab.");
-        if((isTab && !await Tab.isValid(tabOrData)) // await is needed
-            || (!isTab && tabOrData.label == null && tabOrData.url == null && tabOrData.org == null))
-            throw new Error("Cannot search for invalid Tab.");
+    async getTabIndex(tab = {label: null, url: null, org: null}){ 
+        if(tab.label == null && tab.url == null && tab.org == null)
+            throw new Error("Cannot find index without data.");
 
-        const index = this.tabs.findIndex((tab) =>
-            (isTab && tab.equalsByTab(tabOrData))
-            || (!isTab && tab.equalsByData({label:tabOrData.label,url:tabOrData.url,org:tabOrData.org}))
+        const validTab = await Tab.create(tab);
+        const index = this.findIndex((tab) =>
+            tab.equals(validTab)
         );
-        if(index === -1)
+
+        if(index < 0)
             throw new Error("Tab was not found.");
         return index;
-    }
-
-    /**
-     *
-     */
-    async getTabIndexByTab(tabToFind){
-        const res = await this._getTabIndex(tabToFind, true);
-        return res;
-    }
-
-    /**
-     *
-     */
-    async getTabIndexByData({label,url,org}){
-        const res = await this._getTabIndex({label, url,org},false);
-        return res;
     }
 
     /**
@@ -229,45 +178,13 @@ class TabContainer {
      * @param {string} param0.org - the org of the Tab to find
      * @returns {boolean} - Whether the tab exists
      */
-    tabExistsByData({label,url,org} = {}) {
-        return this.tabs.some(tab => 
-            tab.equalsByData({label,url,org})
-        );
-    }
-    
-    /**
-     * Check if a Tab is already exists added to the list
-     * @param {Tab} tab - the Tab to find
-     * @returns {boolean} - Whether the Tab exists
-     */
-    async tabExistsByTab(tab) {
-        if (this.tabs == []) {
+    exists({label, url, org} = {}) {
+        if (this.length === 0) {
             return false;
         }
-        
-        try {
-            console.log('tab passed to tabExistsByTab', tab, this.tabs, this.tabs.length);
-            const results = await Promise.all(
-                this.tabs.map(async tb => {
-                    const res = await tb.equalsByTab(tab);
-                    console.log('Checked tab:', tb, res);
-                    return res;
-                })
-            );
-            console.log('Equality check results:', results);
-            return results.some(result => result);
-        } catch (error) {
-            console.error('Error in tabExistsByTab:', error);
-            return false;
-        }
-        /*
-        const results = await Promise.all(
-            this.tabs.map(async tb => 
-                await tb.equalsByTab(tab)
-            )
+        return this.some(tab => 
+            tab.equals({label, url, org})
         );
-        return results.some(res => res);
-        */
     }
 
     /**
@@ -323,6 +240,7 @@ class TabContainer {
         sync = true,
         keepTabsNotThisOrg = null,
     } = {}) {
+        console.log('replaceTabs',{newTabs,resetTabs,removeOrgTabs,sync,keepTabsNotThisOrg},this.tabs);
         // If resetTabs, clear existing tabs
         if (resetTabs) {
             // if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
@@ -330,35 +248,35 @@ class TabContainer {
             if (removeOrgTabs) {
                 // if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
                 // else, clear existing tabs
-                if(keepTabsNotThisOrg != null){
-                    this.tabs = this.tabs.filter(tab => tab.org != null && tab.org !== keepTabsNotThisOrg);
+                if (keepTabsNotThisOrg != null) {
+                    this.splice(0, this.length, ...this.filter(tab => tab.org != null && tab.org !== keepTabsNotThisOrg));
                 } else {
-                    this.tabs = [];
+                    this.splice(0, this.length);
                 }
             } else {
                 // Keep only org-specific tabs
-                this.tabs = this.tabs.filter(tab => tab.org != null);
+                this.splice(0, this.length, ...this.filter(tab => tab.org != null));
             }
-        } else if(removeOrgTabs){
+        } else if (removeOrgTabs) {
             // if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
             // else, keep only non-org-specific tabs
-            if(keepTabsNotThisOrg != null){
-                this.tabs = this.tabs.filter(tab => tab.org == null || tab.org !== keepTabsNotThisOrg);
+            if (keepTabsNotThisOrg != null) {
+                this.splice(0, this.length, ...this.filter(tab => tab.org == null || tab.org !== keepTabsNotThisOrg));
             } else {
-                this.tabs = this.tabs.filter(tab => tab.org == null);
+                this.splice(0, this.length, ...this.filter(tab => tab.org == null));
             }
         }
 
         // Add new tabs and sync them
+        console.log('replaceTabsafter',this.tabs,newTabs,sync);
         const res = await this.addTabs(newTabs, sync);
         return res;
     }
-
     /**
      * 
      */
     toJSON(){
-        return TabContainer.toJSON(this.tabs);
+        return TabContainer.toJSON(this);
     }
 
     /**
@@ -366,7 +284,7 @@ class TabContainer {
      * @returns {string} - JSON string of Tabs
      */
     toString() {
-        return TabContainer.toString(this.tabs);
+        return TabContainer.toString(this);
     }
 
     /**
@@ -394,19 +312,7 @@ class TabContainer {
         const check = tabs == null;
         // replace tabs already checks the tabs
         !check && await this.replaceTabs(tabs, {sync: false});
-        //console.log('synctabs',this.tabs);
-        return TabContainer._syncTabs(this.tabs, check);
-    }
-
-    /**
-     * Compares two TabContainers to check if they are equal.
-     *
-     * @param {Array<Tab>} tabs - The TabContainer to match against
-     * @returns {boolean} True if the arrays are equal, false otherwise.
-     */
-    async equals(tabs){
-        return tabs.every(async tab => await Tab.isValid(tab) && this.tabs.some(ttb => ttb.equalsByTab(tab))) // await is needed
-            //&& JSON.stringify(this.tabs) === JSON.stringify(tabs);
+        return TabContainer._syncTabs(this, check);
     }
 
     /**
@@ -416,7 +322,6 @@ class TabContainer {
     static _syncTabs(tabs, check){
         check && TabContainer.errorOnInvalidTabs(tabs);
 
-        //console.warn('staticsync',tabs);
         return chrome.runtime.sendMessage(
             { message: { what: "set", tabs: TabContainer.toJSON(tabs) }},
         );
@@ -427,7 +332,7 @@ class TabContainer {
      * @param {Array<Tab>} tabs - The tabs to be validated
      */
     static errorOnInvalidTabs(tabs){
-        if(tabs == null || !Array.isArray(tabs))
+        if(!TabContainer.isValid(tabs, false))
             throw new Error("No array was passed",tabs);
         async function checkTabs(tabs){
             const res = [];
@@ -449,10 +354,13 @@ class TabContainer {
      * @param {Array<Tab>} tabs - The tabs to be validated
      * @returns {boolean} Whether the array as input is valid.
      */
-    static isValid(tabs){
+    static isValid(tabs, strict = true){
         return tabs != null
             && Array.isArray(tabs)
-            && tabs.every(tab => Tab.isTab(tab));
+            && (
+                !strict ||
+                tabs.every(tab => Tab.isTab(tab))
+            );
     }
 
     /**
@@ -461,7 +369,7 @@ class TabContainer {
     static toJSON(tabs){
         TabContainer.errorOnInvalidTabs(tabs);
 
-        const validArray = Array.isArray(tabs) ? [...tabs] : Array.from(tabs);
+        const validArray = TabContainer.isValid(tabs) ? tabs : Array.from(tabs);
         if (validArray.length !== tabs.length) {
             console.warn('Array length mismatch:', {
                 original: tabs.length,
@@ -513,10 +421,9 @@ class TabContainer {
         if(url == null)
             throw new Error("Cannot identify Tab.");
         if (label == null) {
-            label = (await this.tabs.getTabsByData({url}))
-                [0]?.label;
+            label = this.getTabsByData({url})[0]?.label;
         }
-        const index = await this.tabs.getTabIndexByData({label, url});
+        const index = await this.getTabIndex({label, url});
         // TODO changed signature of function
 
         const [tab] = this.tabs.splice(index, 1);
@@ -526,7 +433,7 @@ class TabContainer {
         } else {
             const newIndex = moveBefore
                 ? Math.max(0, index - 1)
-                : Math.min(this.tabs.length, index + 1);
+                : Math.min(this.tabs.length, index + 1); // FIXME do not think this.tabs.length will return nothing other than 0
             // from newIndex, remove 0 tabs and insert `tab` in their place
             this.tabs.splice(newIndex, 0, tab);
         }
@@ -535,22 +442,24 @@ class TabContainer {
     }
 
     /**
-     * Removes the tab with the given url and title.
-     *
-     * @param {string} url - the minified URL of the tab to remove
-     * @param {string} title - the label of the tab to remove. if null, all tabs with the given URL will be removed
+     * Remove all tabs matching the label, url and org (based on the passed data)
+     * @param {Object} param0  - an Object containing the following parameters to match a Tab to remove
+     * @param {string} param0.label - the label of the Tab to remove
+     * @param {string} param0.url - the url of the Tab to remove
+     * @param {string} param0.org - the org of the Tab to remove
+     * @returns {boolean} - Whether a tab was removed
      */
-    async removeTab({label = null, url = null} = {}) {
-        // TODO changed signature of function
-        if(url == null)
-            throw new Error("Cannot identify Tab without url.");
-        const filteredTabs = this.tabs.filter((tab) =>
-            !tab.equalsByData({label,url})
+    async remove(tab = {label: null, url: null, org: null}) {
+        if(tab.label == null && tab.url == null && tab.org == null)
+            throw new Error("Cannot identify Tab without data.");
+        const filteredTabs = this.tabs.filter((tb) =>
+            !tb.equals(tab)
         );
-        if (this.tabs.length === filteredTabs.length) {
+        if (this.tabs.length === filteredTabs.length) { // FIXME do not think this.tabs.length will return nothing other than 0
             throw new Error("This tab was not found.");
         }
         await this.syncTabs();
+        return this.tabs.length < initialLength; // FIXME do not think this.tabs.length will return nothing other than 0
     }
 
     /**
@@ -574,13 +483,13 @@ class TabContainer {
             throw new Error("Cannot identify Tab.");
         let tab;
         if (label == null) {
-            tab = (await this.tabs.getTabsByData({url}))[0];
+            tab = (this.getTabsByData({url}))[0]?.label
             label = tab?.label;
         }
 
         // check if the clicked tab is not one of the favourited ones
         if (
-            !this.tabs.tabExistsByData({label,url})
+            !this.exists({label,url})
         ) {
             throw new Error("This is not a saved tab!");
         }
@@ -591,22 +500,56 @@ class TabContainer {
             if(tab != null)
                 tabToSave = [tab];
             else
-                tabToSave = await this.tabs.getTabsByData({label,url});
+                tabToSave = this.getTabsByData({label,url});
             await this.syncTabs(tabToSave);
             return;
         }
 
-        const index = this.tabs.getTabsIndexByData({label,url});
+        const index = this.getTabIndex({label,url});
         //if (index === -1) return showToast("The tab could not be found.", false, true);
 
         removeBefore
-            ? this.tabs.slice(index)
-            : this.tabs.slice(0, index + 1);
+            ? this.slice(index)
+            : this.slice(0, index + 1);
         await this.syncTabs();
+    }
+
+    /**
+     *
+     */
+    static removeDuplicates(tabs) {
+        if (!TabContainer.isValid(tabs, false)) {
+            throw new Error("Cannot remove duplicates from an invalid container.");
+        }
+
+        /*
+        // make sure we have Tabs
+        tabs = await Promise.all(
+            tabs.map(tab => 
+                Tab.create(tab)
+            )
+        );
+        */
+
+
+        // all elements of the array are Tabs
+        const uniqueTabs = new Map();
+        tabs.forEach(tab => {
+            //const key = tab.hashCode();
+            const key = JSON.stringify(tab);
+            if (!uniqueTabs.has(key)) {
+                uniqueTabs.set(key, tab);
+            }
+        });
+        
+        return new TabContainer(
+            Array.from(uniqueTabs.values()),
+            _tabContainerSecret,
+        );
     }
 }
 
-const allTabs = new TabContainer(null, _tabContainerSecret);
+const allTabs = new TabContainer();
 const wait = async () => {
     await allTabs.ensureInitialized();
 };

@@ -173,7 +173,6 @@ async function addTab(url) {
  */
 async function actionFavourite() {
 	const url = await sf_minifyURL();
-    setLastMinifiedUrl(url);
 
     if (getIsCurrentlyOnSavedTab()) {
 		await performActionOnTabs("remove-this",allTabs.getTabsByData({url}))
@@ -191,7 +190,7 @@ async function checkUpdateFavouriteButton() {
 	// check if the current page is being imported
 	const url = await sf_minifyURL()
     setLastMinifiedUrl(url);
-    const isOnFavouriteTab = allTabs.tabExistsByData({url});
+    const isOnFavouriteTab = allTabs.exists({url});
     toggleFavouriteButton(isOnFavouriteTab);
 }
 

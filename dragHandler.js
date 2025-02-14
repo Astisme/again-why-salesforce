@@ -76,7 +76,7 @@ function createListeners() {
 	container.addEventListener("drop", handleDrop, false); // when element is dropped
 }
 
-function setupDrag() {
+export function setupDrag() {
 	table = document.getElementById("sortable-table");
 	ul = document.getElementsByClassName("tabBarItems slds-grid")[0];
 	container = table ?? ul;

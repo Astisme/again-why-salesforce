@@ -37,7 +37,7 @@ function pop_getCurrentBrowserTab(callback) {
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-    const broswerTabUrl = browserTab.url;
+    const broswerTabUrl = browserTab?.url;
 	if (broswerTabUrl == null || !broswerTabUrl.match(".*\/lightning\/setup\/.*")) {
 		window.location.href = chrome.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
@@ -45,7 +45,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 			}`,
 		);
 	} else {
-        loadTabs(await allTabs.getTabs(), browserTab);
+        await loadTabs(browserTab);
 	}
 });
 
@@ -222,7 +222,7 @@ let focusedIndex = 0;
  *
  * @param {string} type - The type of input field ("label" or "url").
  */
-function inputLabelUrlListener(type) {
+async function inputLabelUrlListener(type) {
 	const currentObj = loggers[focusedIndex];
 	const element = currentObj[type];
 	const value = element.value;
@@ -232,41 +232,39 @@ function inputLabelUrlListener(type) {
 
 	// check if the user copied the url
 	if (delta > 2 && type === "url") {
-		pop_minifyURL(value)
-			.then((v) => {
-				element.value = v;
-				// check eventual duplicates
-				if (allTabs.tabExistsByData({url: v})) {
-					// show warning in salesforce
-					pop_sendMessage({
-						what: "warning",
-						message: "A tab with this URL has already been saved!",
-						action: "make-bold",
-						url: v,
-					});
+		const v = await pop_minifyURL(value)
+        element.value = v;
+        // check eventual duplicates
+        if (allTabs.tabExistsByData({url: v})) {
+            // show warning in salesforce
+            pop_sendMessage({
+                what: "warning",
+                message: "A tab with this URL has already been saved!",
+                action: "make-bold",
+                url: v,
+            });
 
-					// highlight all duplicated rows and scroll to the first one
-					const trs = Array.from(
-						tabAppendElement.querySelectorAll("tr input.url"),
-					)
-						.filter((input) => input.value === v)
-						.map((input) => input.closest("tr"));
+            // highlight all duplicated rows and scroll to the first one
+            const trs = Array.from(
+                tabAppendElement.querySelectorAll("tr input.url"),
+            )
+            .filter((input) => input.value === v)
+            .map((input) => input.closest("tr"));
 
-					trs.forEach((tr) => tr.classList.add("duplicate"));
-					trs[0].scrollIntoView({
-						behavior: "smooth",
-						block: "center",
-					});
+            trs.forEach((tr) => tr.classList.add("duplicate"));
+            trs[0].scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
 
-					setTimeout(
-						() =>
-							trs.forEach((tr) =>
-								tr.classList.remove("duplicate")
-							),
-						4000,
-					);
-				}
-			});
+            setTimeout(
+                () =>
+                    trs.forEach((tr) =>
+                        tr.classList.remove("duplicate")
+                    ),
+                4000,
+            );
+        }
 	}
 
 	inputObj[type] = value;
@@ -309,9 +307,9 @@ function createElement() {
 		element.dataset.element_index = loggers.length;
 	}
 	const label = element.querySelector(".label");
-	setInfoForDrag(label, () => inputLabelUrlListener("label"));
+	setInfoForDrag(label, async () => await inputLabelUrlListener("label"));
 	const url = element.querySelector(".url");
-	setInfoForDrag(url, () => inputLabelUrlListener("url"));
+	setInfoForDrag(url, async () => await inputLabelUrlListener("url"));
 
 	element.querySelector(".only-org").addEventListener("click", () => {
 		saveTabs(false);
@@ -326,34 +324,34 @@ function createElement() {
  *
  * @param {Object} items - The stored tab data.
  */
-function loadTabs(items, browserTab = null) {
-	if (items == null) {
+async function loadTabs(browserTab = null) {
+    console.log('lll',allTabs,allTabs == null,allTabs.length);
+	if (allTabs == null) {
 		return addTab();
 	}
 
-	pop_extractOrgName(browserTab)
-		.then((orgName) => {
-			for (const tab of items) {
-				if (tab.org !== orgName) {
-					continue; // default hide not-this-org org-specific tabs
-				}
-				const element = createElement();
-				element.querySelector(".label").value = tab.label;
-				element.querySelector(".url").value = tab.url;
-				element.querySelector(".only-org").checked = tab.org != null;
-				element.querySelector(".delete").removeAttribute("disabled");
-				const logger = loggers.pop();
-				logger.last_input.label = tab.label;
-				logger.last_input.url = tab.url;
+	const orgName = await pop_extractOrgName(browserTab);
+    console.log('lll',orgName,allTabs.length);
+    for (const tab of allTabs) {
+        console.log('lll',tab.org,tab.org != null && tab.org !== orgName)
+        if (tab.org != null && tab.org !== orgName) {
+            continue; // default hide not-this-org org-specific tabs
+        }
+        const element = createElement();
+        element.querySelector(".label").value = tab.label;
+        element.querySelector(".url").value = tab.url;
+        element.querySelector(".only-org").checked = tab.org != null;
+        element.querySelector(".delete").removeAttribute("disabled");
+        const logger = loggers.pop();
+        logger.last_input.label = tab.label;
+        logger.last_input.url = tab.url;
 
-				loggers.push(logger);
-				tabAppendElement.append(element);
-				updateTabAttributes();
-			}
-			tabAppendElement.append(createElement()); // leave a blank at the bottom
-            allTabs.replaceTabs(items);
-            pop_afterSet();
-		});
+        loggers.push(logger);
+        tabAppendElement.append(element);
+        updateTabAttributes();
+    }
+    tabAppendElement.append(createElement()); // leave a blank at the bottom
+    pop_afterSet();
 }
 
 /**
@@ -361,18 +359,18 @@ function loadTabs(items, browserTab = null) {
  *
  * @param {Object} items - The tab data to reload.
  */
-function reloadRows(items) {
+async function reloadRows() {
 	while (tabAppendElement.childElementCount > 0) {
 		tabAppendElement.removeChild(tabAppendElement.lastChild);
 	}
 	loggers = [];
-	loadTabs(items);
+	await loadTabs();
 }
 
 /**
  * Finds and returns all the tabs in the popup with valid label and url.
  */
-async function findTabs(callback, doReload) {
+async function findTabsFromRows() {
 	const tabElements = document.getElementsByClassName("tab");
 	// Get the list of tabs
 	const orgName = await pop_extractOrgName();
@@ -382,6 +380,7 @@ async function findTabs(callback, doReload) {
 			const url = tab.querySelector(".url").value;
 			const onlyOrgChecked = tab.querySelector(".only-org").checked;
 
+            console.log({label,url})
 			if (label != null && url != null
                 && label !== "" && url !== "") {
 				// the user has not checked the onlyOrgChecked checkbox &&
@@ -389,6 +388,7 @@ async function findTabs(callback, doReload) {
 				const containsSalesforceId = await pop_containsSalesforceId(
 					url,
 				);
+                console.log({label,url,onlyOrgChecked,containsSalesforceId});
 				if (!onlyOrgChecked && !containsSalesforceId) {
 					return await Tab.create(label, url);
 				}
@@ -413,7 +413,7 @@ async function findTabs(callback, doReload) {
 		availableTabs = [];
 	}
 
-	callback(doReload, availableTabs);
+    return availableTabs;
 }
 
 /**
@@ -422,15 +422,17 @@ async function findTabs(callback, doReload) {
  * @param {boolean} doReload - Whether to reload the tab rows after saving.
  * @param {Array} tabs - The tabs to save.
  */
-async function saveTabs(doReload = true, tabs) {
+async function saveTabs(doReload = true, tabs = null) {
 	if (!TabContainer.isValid(tabs)) {
-		return findTabs(saveTabs, doReload);
+		tabs = await findTabsFromRows(doReload);
 	}
+    console.warn('lllsavetabs',tabs,doReload);
     await allTabs.replaceTabs(tabs, {
         removeOrgTabs: true,
         keepTabsNotThisOrg: await pop_extractOrgName(),
     });
-	doReload && reloadRows(tabs);
+	if(doReload)
+        await reloadRows();
 }
 
 /**

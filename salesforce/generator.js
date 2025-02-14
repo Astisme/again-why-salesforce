@@ -9,8 +9,8 @@ import {
     // functions
     sf_sendMessage,
     sf_minifyURL,
-    setLastMinifiedUrl,
     setLastExpandedUrl,
+    getCurrentHref,
 } from "./content.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
@@ -53,8 +53,10 @@ function getRng_n_digits(digits = 1) {
  * SetupOneHome/home/
  * SetupOneHome/home
  */
-function sf_expandURL(url) {
-	return sf_sendMessage({ what: "expand", url, baseUrl: globalThis.origin });
+async function sf_expandURL(url) {
+	const expURL = await sf_sendMessage({ what: "expand", url, baseUrl: globalThis.origin });
+    setLastExpandedUrl(expURL);
+    return expURL;
 }
 
 /**
@@ -106,9 +108,6 @@ export async function generateRowTemplate(row) {
 	const miniURL = await sf_minifyURL(url);
 	const expURL = await sf_expandURL(url);
 
-    setLastMinifiedUrl(miniURL);
-    setLastExpandedUrl(expURL);
-
     const li = document.createElement("li");
     li.setAttribute("role", "presentation");
     li.classList.add(
@@ -140,7 +139,7 @@ export async function generateRowTemplate(row) {
     li.appendChild(a);
 
     // Highlight the tab related to the current page
-    if (href === expURL) {
+    if (getCurrentHref() === expURL) {
         li.classList.add("slds-is-active");
     }
 

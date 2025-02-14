@@ -66,17 +66,20 @@ class Tab {
             throw new Error("URL must be a non-empty string");
         }
         
-        if (org !== undefined && typeof org !== "string") {
+        if (typeof org !== "string" && org != null) {
             throw new Error("Org must be a string or undefined");
         }
         
         const miniURL = await Tab.minifyURL(url);
+        let orgName;
+        if(org != null)
+            orgName = await Tab.extractOrgName(org);
         
         // Create instance of Tab
         return new Tab(
             label, 
             miniURL, 
-            org,
+            orgName,
             _tabSecret
         );
     }
@@ -87,8 +90,29 @@ class Tab {
      * @returns {Promise<string>} a Promise containing the smaller URL
      */
     static async minifyURL(url){
+        const newUrl = await Promise.all([new Promise((resolve, reject) => 
+            chrome.runtime.sendMessage(
+                { message: { what: "minify", url }},
+                (response) => {
+                    if (chrome.runtime.lastError) {
+                        reject(chrome.runtime.lastError);
+                    } else {
+                        resolve(response);
+                    }
+                }
+            )
+        )]);
+        return newUrl[0] ?? url;
+    }
+
+    /**
+     * Removes all standard bits of the URL, reducing its lenght.
+     * @param {string} url - the url to reduce
+     * @returns {string} the smaller URL
+     */
+    static async extractOrgName(url){
         const newUrl = await chrome.runtime.sendMessage(
-            { message: { what: "minify", url }}
+            { message: { what: "extract-org", url }}
         );
         return newUrl;
     }
@@ -98,11 +122,6 @@ class Tab {
      */
     static isTab(tab){
         const result = tab instanceof Tab;
-        console.log('isTab check:', {
-            input: tab,
-            constructor: tab?.constructor?.name,
-            isInstance: result
-        });
         return result;
     }
 
@@ -112,7 +131,6 @@ class Tab {
      * @returns {boolean} true if the tab is a Tab; false otherwise
      */
     static async isValid(tab) {
-        console.warn('tabisvalid',Tab.isTab(tab),JSON.stringify(tab));
         if(Tab.isTab(tab))
             return true;
         // if the tab is not a Tab, try creating one
@@ -130,7 +148,6 @@ class Tab {
      * @returns {Object} this Tab transformed into an Object
      */
     toJSON(){
-        console.log('tabtojson');
         return {
             label: this.label,
             url: this.url,
@@ -154,27 +171,10 @@ class Tab {
      * @param {*} param0.org - the org of the tab to check
      * @returns {boolean} whether the tabs are equal
      */
-    equalsByData({label, url, org} = {}){
+    equals({label, url, org} = {}){
         return (label != null && label === this.label)
             && (url != null && url === this.url)
             && (org != null && org === this.org)
-    }
-
-    /**
-     * Checks if the tab is equal to the one passed as input.
-     * @param {Tab} tab - The Tab object to be checked against.
-     * @returns {boolean} whether the tabs are equal
-     */
-    async equalsByTab(tab){
-        console.warn('tabequals',tab,this.tab,tab === this.tab, tab == this.tab,this.equalsByData(await Tab.create(tab)));
-        if(tab === this.tab)
-            return true;
-        try {
-            const tabToCompare = await Tab.create(tab);
-            return this.equalsByData(tabToCompare);
-        } catch (error) {
-            return false;
-        }
     }
 
     /**
@@ -199,6 +199,10 @@ class Tab {
 
         return tabToUpdate;
     }
+
+  hashCode() {
+    return this.toString();
+  }
 }
 
 //globalThis.Tab = Tab;

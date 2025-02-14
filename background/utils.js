@@ -5,9 +5,9 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	HTTPS,
 	SETUP_LIGHTNING,
-} from "../constants.js";
+} from "/constants.js";
 import { bg_getStorage } from "./background.js";
-import { TabContainer } from "../tabContainer.js";
+import { TabContainer } from "/tabContainer.js";
 
 
 export function bg_getCurrentBrowserTab(callback, fromPopup = false){
