@@ -1,49 +1,5 @@
 import { Tab } from "/tab.js";
-Tab.minifyURL = async (url: string) => url.startsWith("mini-") ? url : `mini-${url}`;
-Tab.extractOrgName = (org: string) => org.startsWith("org-") ? org : `org-${org}`;
-
-// Mock browser APIs
-const mockStorage: {
-  tabs: Tab[]
-} = { tabs: [] };
-
-interface Message {
-  what: string;
-  tabs?: Tab[];
-}
-
-
-const mockBrowser = {
-  storage: {
-    local: {
-      get: async () => mockStorage,
-      set: async (data: any) => {
-        mockStorage.tabs = data.tabs;
-        return true;
-      }
-    }
-  },
-  runtime: {
-    sendMessage: ({ message }: { message: Message }) => {
-      if (message.what === "get") {
-        return mockStorage.tabs;
-      } else if (message.what === "set") {
-          if(message.tabs != null)
-            mockStorage.tabs = message.tabs;
-        return true;
-      }
-    }
-  }
-};
-
-declare global {
-  var chrome: typeof mockBrowser;
-  var browser: typeof mockBrowser;
-}
-
-// Setup global objects that extension code expects
-globalThis.chrome = mockBrowser as any;
-globalThis.browser = mockBrowser as any;
+import { mockStorage } from "./mocks.ts";
 
 import { assert, assertFalse, assertEquals, assertRejects, assertThrows } from "https://deno.land/std/testing/asserts.ts";
 import { TabContainer } from "/tabContainer.js";
