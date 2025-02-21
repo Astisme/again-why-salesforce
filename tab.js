@@ -32,8 +32,9 @@ class Tab {
      * @param {string|Object} labelOrTab - the text that will represent the tab OR the object from which to create the Tab
      * @param {string} url - the minifiedURL that represents the link to where the tab points
      * @param {string|undefined} [org=undefined] - the org to which the tab is specific to
+     * // TESTOK
      */
-    static async create(labelOrTab, url, org = undefined) {
+    static async create(labelOrTab, url = null, org = undefined) {
         if(Tab.isTab(labelOrTab))
             return labelOrTab;
         // Check if first argument is an object (for object-style creation)
@@ -88,6 +89,7 @@ class Tab {
      * Removes all standard bits of the URL, reducing its lenght.
      * @param {string} url - the url to reduce
      * @returns {Promise<string>} a Promise containing the smaller URL
+     * // TESTOK
      */
     static async minifyURL(url){
         const newUrl = await Promise.all([new Promise((resolve, reject) => 
@@ -109,6 +111,7 @@ class Tab {
      * Removes all standard bits of the URL, reducing its lenght.
      * @param {string} url - the url to reduce
      * @returns {string} the smaller URL
+     * // TESTOK
      */
     static async extractOrgName(url){
         const newUrl = await chrome.runtime.sendMessage(
@@ -119,23 +122,22 @@ class Tab {
 
     /**
      *
+     * // TESTOK
      */
     static isTab(tab){
-        const result = tab instanceof Tab;
-        return result;
+        return tab instanceof Tab;
     }
 
     /**
      * Checks if the tab passed is (or could be) a Tab.
      * @param {Object} tab - the tab to be checked
      * @returns {boolean} true if the tab is a Tab; false otherwise
+     * // TESTOK
      */
     static async isValid(tab) {
-        if(Tab.isTab(tab))
-            return true;
-        // if the tab is not a Tab, try creating one
         try {
-            return Tab.isTab(await Tab.create(tab));
+            await Tab.create(tab);
+            return true;
         } catch (error) {
             console.error("Invalid Tab: ",error.message);
             // error on creation of tab
@@ -146,18 +148,22 @@ class Tab {
     /**
      * Transforms a Tab into a JSON Object.
      * @returns {Object} this Tab transformed into an Object
+     * // TESTOK
      */
     toJSON(){
-        return {
+        const res = {
             label: this.label,
             url: this.url,
-            org: this.org
-        };
+        }
+        if(this.org != null)
+            res.org = this.org;
+        return res;
     }
 
     /**
-     * Transforms a Tab into a JSON Object.
-     * @returns {Object} this Tab transformed into an Object
+     * Transforms a Tab into a JSON String.
+     * @returns {String} this Tab transformed into a JSON String
+     * // TESTOK
      */
     toString(){
         return JSON.stringify(this.toJSON(), null, 4);
@@ -170,11 +176,13 @@ class Tab {
      * @param {*} param0.url - the url of the tab to check
      * @param {*} param0.org - the org of the tab to check
      * @returns {boolean} whether the tabs are equal
+     * // TESTOK
      */
     equals({label, url, org} = {}){
-        return (label != null && label === this.label)
-            && (url != null && url === this.url)
-            && (org != null && org === this.org)
+        return !(label == null && url == null && org == null)
+            && (label == null || label === this.label)
+            && (url == null || url === this.url)
+            && (org == null || (this.org != null && org === this.org))
     }
 
     /**
@@ -186,6 +194,7 @@ class Tab {
      * @param {*} param1.org - the new org for the Tab
      * @returns {Tab} The updated Tab
      */
+    /*
     static updateTab(tabToUpdate, {label,url,org} = {}){
         if(tabToUpdate == null)
             throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
@@ -199,6 +208,7 @@ class Tab {
 
         return tabToUpdate;
     }
+    */
 
   hashCode() {
     return this.toString();

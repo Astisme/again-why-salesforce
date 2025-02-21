@@ -31,6 +31,6 @@
 		"esbuild": "npm:esbuild@^0.25.0"
 	},
 	"test": {
-		"include": ["tests/*"]
+		"include": ["tests/*.test.ts"]
 	}
 }

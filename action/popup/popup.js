@@ -2,7 +2,8 @@
 "use strict";
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import { Tab } from "/tab.js"
-import { allTabs, TabContainer } from "/tabContainer.js"
+import { TabContainer } from "/tabContainer.js"
+const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -423,7 +424,7 @@ async function findTabsFromRows() {
  * @param {Array} tabs - The tabs to save.
  */
 async function saveTabs(doReload = true, tabs = null) {
-	if (!TabContainer.isValid(tabs)) {
+	if (!await TabContainer.isValid(tabs)) {
 		tabs = await findTabsFromRows(doReload);
 	}
     console.warn('lllsavetabs',tabs,doReload);

@@ -1,6 +1,7 @@
 "use strict";
 import { Tab } from "/tab.js";
-import { allTabs } from "/tabContainer.js";
+import { TabContainer } from "/tabContainer.js";
+export const allTabs = await TabContainer.create();
 import { 
     SETUP_LIGHTNING,
     HTTPS,

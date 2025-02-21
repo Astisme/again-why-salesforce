@@ -2,7 +2,6 @@
 import {
 	EXTENSION_NAME,
 } from "/constants.js"
-import { allTabs } from "/tabContainer.js";
 import {
     generateSldsFileInput,
     generateSldsModal,
@@ -12,6 +11,8 @@ import {
     // functions
     showToast,
     getModalHanger,
+    // constants
+    allTabs,
 } from "./content.js"
 
 let overwritePick;

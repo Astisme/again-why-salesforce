@@ -1,5 +1,4 @@
 "use strict";
-import { allTabs } from "../tabContainer.js";
 import {
 	EXTENSION_NAME,
 } from "../constants.js"
@@ -14,6 +13,8 @@ import {
     performActionOnTabs,
     getLastMinifiedUrl,
     getWasOnSavedTab,
+    // constants
+    allTabs,
 } from "./content.js"
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;

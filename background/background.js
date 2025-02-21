@@ -41,7 +41,7 @@ export function bg_getStorage(callback) {
 async function bg_setStorage(tabs, callback) {
 	const set = {};
     //tabs = await TabContainer.removeDuplicates(tabs);
-    tabs = TabContainer.removeDuplicates(tabs);
+    //tabs = TabContainer.removeDuplicates(tabs);
 	set[WHY_KEY] = tabs;
 	BROWSER.storage.sync.set(set, () => callback(null));
     bg_getStorage((_ => {}));
@@ -53,7 +53,7 @@ async function bg_setStorage(tabs, callback) {
  * @param {string} url - The URL from which the Org name has to be extracted.
  * @returns string | undefined - The Org name OR nothing if an error occurs
  */
-function bg_extractOrgName(url) {
+export function bg_extractOrgName(url) {
 	if (url == null) {
 		return bg_getCurrentBrowserTab(browserTab => bg_extractOrgName(browserTab.url))
 	}
