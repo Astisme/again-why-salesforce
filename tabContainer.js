@@ -252,7 +252,7 @@ export class TabContainer extends Array {
         if (!await Tab.isValid(tab)) { // await is needed
             throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
         }
-        if (await this.exists(tab)){
+        if (this.exists(tab)){
             throw new Error(`This tab already exists: ${JSON.stringify(tab)}`);
         }
 
@@ -301,7 +301,7 @@ export class TabContainer extends Array {
         if (!await Tab.isValid(tab)) { // await is needed
             throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
         }
-        if (await this.exists(tab)) // await is needed
+        if (this.exists(tab)) // await is needed
             throw new Error(`This tab already exists: ${tab.toString()}`);
 
         const validTab = await Tab.create(tab);
@@ -393,7 +393,7 @@ export class TabContainer extends Array {
      * @returns {boolean} - Whether the tab exists
       * //TESTOK
      */
-    async exists(tab = {label: undefined, url: undefined, org: undefined}) {
+    exists(tab = {label: undefined, url: undefined, org: undefined}) {
         if(tab.url != null)
             tab.url = Tab.minifyURL(tab.url);
         if(tab.org != null)
@@ -629,7 +629,7 @@ export class TabContainer extends Array {
             else {
                 try {
                     pushTab = await Tab.create(tab);
-                } catch (error) {
+                } catch (_) {
                     // do not add a failing tab to the JSON
                     continue;
                 }

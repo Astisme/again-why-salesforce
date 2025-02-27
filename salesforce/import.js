@@ -23,7 +23,8 @@ const interval = setInterval(() => {
     try {
         allTabs = getAllTabs();
         clearInterval(interval);
-    } catch (error) {
+    } catch (_) {
+        // wait next interval
     }
 }, 100)
 

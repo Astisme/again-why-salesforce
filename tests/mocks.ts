@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { Tab } from "/tab.js";
 export interface MockStorage {
     tabs: Tab[];
@@ -20,7 +21,9 @@ export interface Message {
 export const mockBrowser = {
   storage: {
     local: {
+      // deno-lint-ignore require-await
       get: async (): Promise<MockStorage> => mockStorage,
+      // deno-lint-ignore require-await
       set: async (data: { tabs: any[] }): Promise<boolean> => {
         mockStorage.tabs = data.tabs;
         return true;

@@ -17,7 +17,7 @@ export function getAllTabs(){
 export async function ensureAllTabsAvailability(){
     try {
         getAllTabs()
-    } catch (error) {
+    } catch (_) {
         await getAllTabs_async();
     }
 }
@@ -150,7 +150,7 @@ async function init(tabs = null) {
     }
 	if (allTabs.length > 0) {
 		const orgName = Tab.extractOrgName(location.href);
-        allTabs.forEach(async (row) => {
+        allTabs.forEach((row) => {
             // hide org-specific but not-this-org tabs
             if (row.org == null || row.org === orgName) { // TODO add option to hide or show org-specific but not-this-org tabs
                 setupTabUl.appendChild(generateRowTemplate(row));
@@ -176,7 +176,7 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 	const loc = Tab.minifyURL(href)
     wasOnSavedTab = isCurrentlyOnSavedTab;
     await ensureAllTabsAvailability();
-    isCurrentlyOnSavedTab = await allTabs.exists({url:loc});
+    isCurrentlyOnSavedTab = allTabs.exists({url:loc});
     isFromHrefUpdate && callback(isCurrentlyOnSavedTab);
 }
 
@@ -248,7 +248,7 @@ let firstRun = true;
 /**
  * Reloads the tabs by clearing the current list and fetching the updated data from storage.
  */
-async function reloadTabs(tabs = null) {
+function reloadTabs(tabs = null) {
 	// prevent creating duplicate tabs when refocusing on the setup window/tab
 	// only needed after the first run of this function
 	if (
@@ -366,12 +366,12 @@ async function showModalOpenOtherOrg({label = null, url = null} = {}) {
     modalHanger = getModalHanger();
     modalHanger.appendChild(modalParent);
     let lastInput = "";
-    inputContainer.addEventListener("input", async (e) => {
+    inputContainer.addEventListener("input", (e) => {
         const target = e.target;
         const value = target.value;
         const delta = value.length - lastInput.length;
         if (delta > 2) {
-            let newTarget = Tab.extractOrgName(value); 
+            const newTarget = Tab.extractOrgName(value); 
             if (newTarget != null && newTarget !== value) {
                 target.value = newTarget;
                 lastInput = newTarget;
@@ -380,7 +380,7 @@ async function showModalOpenOtherOrg({label = null, url = null} = {}) {
         }
         lastInput = value;
     });
-    saveButton.addEventListener("click", async (e) => {
+    saveButton.addEventListener("click", (e) => {
         e.preventDefault();
         const inputVal = inputContainer.value;
         if (inputVal == null || inputVal === "") {

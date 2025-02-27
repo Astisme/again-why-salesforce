@@ -184,7 +184,7 @@ let focusedIndex = 0;
  *
  * @param {string} type - The type of input field ("label" or "url").
  */
-async function inputLabelUrlListener(type) {
+function inputLabelUrlListener(type) {
 	const currentObj = loggers[focusedIndex];
 	const element = currentObj[type];
 	const value = element.value;
@@ -196,7 +196,7 @@ async function inputLabelUrlListener(type) {
 		const v = Tab.minifyURL(value);
         element.value = v;
         // check eventual duplicates
-        if (await allTabs.exists({url: v})) {
+        if (allTabs.exists({url: v})) {
             // show warning in salesforce
             pop_sendMessage({
                 what: "warning",
@@ -226,7 +226,6 @@ async function inputLabelUrlListener(type) {
 	}
 	inputObj[type] = value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
-    console.log(focusedIndex,loggers.length)
 	if (focusedIndex === (loggers.length - 1)) {
 		if (inputObj.label && inputObj.url) {
 			addTab();
@@ -260,8 +259,8 @@ function createElement() {
 		element.dataset.element_index = loggers.length;
         element.addEventListener("focusout", checkSaveTab);
 	}
-	setInfoForDrag(label, async () => await inputLabelUrlListener("label"));
-	setInfoForDrag(url, async () => await inputLabelUrlListener("url"));
+	setInfoForDrag(label, () => inputLabelUrlListener("label"));
+	setInfoForDrag(url, () => inputLabelUrlListener("url"));
 	element.querySelector(".only-org").addEventListener("click", checkSaveTab);
 	loggers.push({ label, url, last_input: {} }); // set last_input as an empty object
 	return element;

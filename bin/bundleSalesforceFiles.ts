@@ -1,4 +1,4 @@
-// importDependentFiles.ts
+// deno-lint-ignore-file no-explicit-any
 import { Tab } from '/tab.js';
 import { TabContainer } from '/tabContainer.js';
 import "/salesforce/generator.js ";

@@ -5,7 +5,10 @@
 		"semiColons": true,
 		"singleQuote": false,
 		"proseWrap": "never",
-		"exclude": ["*.git*"]
+		"exclude": [
+            "*.git*",
+            "*bundled*"
+        ]
 	},
 	"tasks": {
 		"test": "deno test --no-check",

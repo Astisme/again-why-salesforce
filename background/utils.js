@@ -21,9 +21,11 @@ export function bg_getCurrentBrowserTab(callback, fromPopup = false){
         } else callback(browserTabs[0]);
     }
 	if (callback == null) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             try {
-                await queryTabs(resolve);
+                queryTabs(resolve)
+                .then(q => resolve(q))
+                .catch(e => reject(e));
             } catch (error) {
                 reject(error);
             }
@@ -131,7 +133,7 @@ export function bg_expandURL(message) {
 /**
  * Handles the export functionality by downloading the current tabs as a JSON file.
  */
-async function _exportHandler(tabs) {
+function _exportHandler(tabs) {
     const dataUrl = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(tabs));
     BROWSER.downloads.download({
         url: dataUrl,

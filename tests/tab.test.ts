@@ -126,7 +126,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
   await t.step("throws error when org is not a string", async () => {
     await assertRejects(
       async () => {
-        await Tab.create("Test", "https://example.com", 123 as any);
+        await Tab.create("Test", "https://example.com", 123);
       },
       Error,
       "Org must be a string or undefined"
@@ -138,7 +138,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
       await Tab.isValid({
           label: "Test",
           url: "https://example.com",
-          org: 123 as any
+          org: 123
       })
     );
   });

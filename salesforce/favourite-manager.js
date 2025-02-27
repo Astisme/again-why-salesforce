@@ -20,7 +20,8 @@ const interval = setInterval(() => {
     try {
         allTabs = getAllTabs();
         clearInterval(interval);
-    } catch (error) {
+    } catch (_) {
+        // wait next interval
     }
 }, 100)
 
@@ -224,7 +225,7 @@ export async function showFavouriteButton(count = 0) {
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
         await ensureAllTabsAvailability();
-        toggleFavouriteButton(await allTabs.exists({url: miniURL}));
+        toggleFavouriteButton(allTabs.exists({url: miniURL}));
 		return;
 	}
 	const button = generateFavouriteButton();

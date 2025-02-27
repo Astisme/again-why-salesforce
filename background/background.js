@@ -26,7 +26,7 @@ import {
 export function bg_getStorage(callback) {
 	BROWSER.storage.sync.get(
 		[WHY_KEY],
-		async (items) => {
+		(items) => {
             callback(items[WHY_KEY]);
         }
 	);

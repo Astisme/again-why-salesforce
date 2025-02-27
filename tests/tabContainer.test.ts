@@ -148,7 +148,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
     assert(await container.addTab({ label: "New Tabb", url: "unique-url" }));
     assert(await container.addTab({ label: "New Tab", url: "unique-url2" }));
     await assertRejects(
-        async () => container.addTab({ label: "New Tab", url: "unique-url2" }),
+        async () => await container.addTab({ label: "New Tab", url: "unique-url2" }),
         Error,
         `This tab already exists`//: {"label":"New Tab","url":"unique-url2"}`
     );
@@ -633,15 +633,15 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
       { label: "Org Tab3", url: "urll", org: "test-org2" },
     ]));
     assertEquals(container.length, 8);
-    assert(await container.exists({org:"test-org"}));
-    assert(await container.exists({org:"test-org1"}));
+    assert(container.exists({org:"test-org"}));
+    assert(container.exists({org:"test-org1"}));
 
-    assert(await container.exists({label:"Org Tab"}));
-    assert(await container.exists({url:"urll"}));
-    assert(await container.exists({org:"test-org2",url:"urll"}));
-    assert(await container.exists({org:"test-org2"}));
-    assertFalse(await container.exists({org:"not-present"}));
-    assertFalse(await container.exists({url:"url-not-present"}));
+    assert(container.exists({label:"Org Tab"}));
+    assert(container.exists({url:"urll"}));
+    assert(container.exists({org:"test-org2",url:"urll"}));
+    assert(container.exists({org:"test-org2"}));
+    assertFalse(container.exists({org:"not-present"}));
+    assertFalse(container.exists({url:"url-not-present"}));
     assertEquals(container.length, 8);
   });
 
@@ -1004,7 +1004,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 });
 
 await Deno.test("TabContainer - Error on Invalid Tabs", async (t) => {
-  await t.step("errorOnInvalidTabs", async () => {
+  await t.step("errorOnInvalidTabs", () => {
     assertRejects(
         async () => await TabContainer.errorOnInvalidTabs(),
         Error,
