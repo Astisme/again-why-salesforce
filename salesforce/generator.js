@@ -7,7 +7,6 @@ import {
 } from "../constants.js";
 import {
 	// functions
-	//sf_sendMessage,
 	getCurrentHref,
 	showToast,
 } from "./content.js";

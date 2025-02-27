@@ -146,7 +146,7 @@ async function init(tabs = null) {
 		await allTabs.setDefaultTabs();
 	}
 	if (allTabs.length > 0) {
-		const orgName = Tab.extractOrgName(location.href);
+		const orgName = Tab.extractOrgName(href);
 		allTabs.forEach((row) => {
 			// hide org-specific but not-this-org tabs
 			if (row.org == null || row.org === orgName) { // TODO add option to hide or show org-specific but not-this-org tabs
@@ -297,7 +297,7 @@ async function reorderTabs() {
 				result.status === "fulfilled" && result.value != null
 			)
 			.map((result) => result.value);
-		const orgName = Tab.extractOrgName(location.href);
+		const orgName = Tab.extractOrgName(href);
 		await ensureAllTabsAvailability();
 		allTabs.replaceTabs(tabs, {
 			resetTabs: true,
@@ -350,7 +350,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("Close the other modal first!", false);
 	}
-	if (Tab.containsSalesforceId(location.href)) {
+	if (Tab.containsSalesforceId(href)) {
 		showToast(
 			"This page could not exist in another Org, because it contains an Id!",
 			false,

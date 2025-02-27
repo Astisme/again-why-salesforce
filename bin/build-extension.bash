@@ -22,11 +22,8 @@ BROWSER_VERSION_NAME="${AWSF}-$BROWSER-v$MANIFEST_VERSION"
 # Set variables
 ZIP_NAME="${BROWSER_VERSION_NAME}.zip"
 
-# Make Manifest (equivalent to deno task)
-deno task "dev-$BROWSER"
-
 # Verify manifest.json exists
 ls manifest.json >/dev/null 2>&1 || { echo "manifest.json not found!"; exit 1; }
 
 # Zip $BROWSER extension
-zip -r "bin/$ZIP_NAME" action assets background salesforce *.js LICENSE* README.md manifest.json -x "*/README.md" >/dev/null 2>&1
+zip -r "bin/$ZIP_NAME" action assets background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js *.js LICENSE* README.md manifest.json -x "*/README.md" >/dev/null 2>&1

@@ -298,7 +298,6 @@ async function loadTabs(browserTab = null) {
 		updateTabAttributes();
 	}
 	tabAppendElement.append(createElement()); // leave a blank at the bottom
-	//pop_afterSet(); // called every time saveTabs is called with doReload = true
 }
 
 /**
