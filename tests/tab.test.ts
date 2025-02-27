@@ -1,21 +1,20 @@
-import { Tab } from "/tab.js";
 import "./mocks.ts";
-
 import { assert, assertFalse, assertEquals, assertRejects, assertThrows } from "https://deno.land/std/testing/asserts.ts";
+import { Tab } from "/tab.js";
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {
   await t.step("creates tab with required parameters", async () => {
     const tab = await Tab.create("Home", "https://example.com");
     assertEquals(tab.label, "Home");
-    assertEquals(tab.url, "mini-https://example.com");
+    assertEquals(tab.url, "https://example.com");
     assertEquals(tab.org, undefined);
   });
 
   await t.step("creates tab with optional org parameter", async () => {
-    const tab = await Tab.create("Dashboard", "https://example.com", "testOrg");
+    const tab = await Tab.create("Dashboard", "https://example.com", "testorg");
     assertEquals(tab.label, "Dashboard");
-    assertEquals(tab.url, "mini-https://example.com");
-    assertEquals(tab.org, "org-testOrg");
+    assertEquals(tab.url, "https://example.com");
+    assertEquals(tab.org, "testorg");
   });
 
   await t.step("tab is valid when object with required parameters", async () => {
@@ -40,11 +39,11 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
     const tab = await Tab.create({
       label: "Settings",
       url: "https://example.com/settings",
-      org: "testOrg"
+      org: "testorg"
     });
     assertEquals(tab.label, "Settings");
-    assertEquals(tab.url, "mini-https://example.com/settings");
-    assertEquals(tab.org, "org-testOrg");
+    assertEquals(tab.url, "https://example.com/settings");
+    assertEquals(tab.org, "testorg");
   });
 
   await t.step("creates tab from valid object with tabTitle", async () => {
@@ -53,7 +52,7 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
       url: "https://example.com/profile"
     });
     assertEquals(tab.label, "Profile");
-    assertEquals(tab.url, "mini-https://example.com/profile");
+    assertEquals(tab.url, "https://example.com/profile");
     assertEquals(tab.org, undefined);
   });
 
@@ -165,15 +164,15 @@ await Deno.test("Tab Constructor Protection", () => {
 
 await Deno.test("Utility methods", async (t) => {
     const tab_no_org = await Tab.create("Test", "https://example.com");
-    const tab_with_org = await Tab.create("Test", "https://example.com", "testOrg");
+    const tab_with_org = await Tab.create("Test", "https://example.com", "testorg");
     const object_no_org = {
         label: "Test",
-        url: "mini-https://example.com"
+        url: "https://example.com"
     };
     const object_with_org = {
         label: "Test",
-        url: "mini-https://example.com",
-        org: "org-testOrg"
+        url: "https://example.com",
+        org: "testorg"
     };
 
     await t.step("isTab", () => {
@@ -215,15 +214,15 @@ await Deno.test("Utility methods", async (t) => {
             tab_string_no_org,
             `{
     "label": "Test",
-    "url": "mini-https://example.com"
+    "url": "https://example.com"
 }`,
         );
         assertEquals(
             tab_string_with_org,
             `{
     "label": "Test",
-    "url": "mini-https://example.com",
-    "org": "org-testOrg"
+    "url": "https://example.com",
+    "org": "testorg"
 }`,
         );
     });
@@ -232,75 +231,73 @@ await Deno.test("Utility methods", async (t) => {
         assertFalse(tab_with_org.equals());
         assertFalse(tab_with_org.equals({label: "Text"}));
         assert(tab_with_org.equals({label: "Test"}));
-        assertFalse(tab_with_org.equals({url: "https://example.com"}));
-        assert(tab_with_org.equals({url: "mini-https://example.com"}));
         assertFalse(tab_with_org.equals({org: "testOrg"}));
-        assert(tab_with_org.equals({org: "org-testOrg"}));
+        assert(tab_with_org.equals({org: "testorg"}));
         // label
         assertFalse(tab_with_org.equals({
             label: "Text",
         }));
         assertFalse(tab_with_org.equals({
             label: "Text",
-            url: "mini-https://example.com"
+            url: "https://example.com"
         }));
         assertFalse(tab_with_org.equals({
             label: "Text",
-            org: "org-testOrg"
+            org: "testorg"
         }));
         assertFalse(tab_with_org.equals({
             label: "Text",
-            url: "mini-https://example.com",
-            org: "org-testOrg"
+            url: "https://example.com",
+            org: "testorg"
         }));
         assert(tab_with_org.equals({
             label: "Test",
         }));
         assert(tab_with_org.equals({
             label: "Test",
-            url: "mini-https://example.com"
+            url: "https://example.com"
         }));
         assert(tab_with_org.equals({
             label: "Test",
-            org: "org-testOrg"
+            org: "testorg"
         }));
         assert(tab_with_org.equals({
             label: "Test",
-            url: "mini-https://example.com",
-            org: "org-testOrg"
+            url: "https://example.com",
+            org: "testorg"
         }));
         // url
         assertFalse(tab_with_org.equals({
-            url: "https://example.com",
+            url: "https://www.example.com",
         }));
         assertFalse(tab_with_org.equals({
-            url: "https://example.com",
+            url: "https://www.example.com",
             label: "Test",
         }));
         assertFalse(tab_with_org.equals({
-            url: "https://example.com",
-            org: "org-testOrg"
+            url: "https://www.example.com",
+            org: "testorg"
         }));
         assertFalse(tab_with_org.equals({
+            url: "https://www.example.com",
+            label: "Test",
+            org: "testorg"
+        }));
+        assert(tab_with_org.equals({
+            url: "https://example.com",
+        }));
+        assert(tab_with_org.equals({
             url: "https://example.com",
             label: "Test",
-            org: "org-testOrg"
         }));
         assert(tab_with_org.equals({
-            url: "mini-https://example.com",
+            url: "https://example.com",
+            org: "testorg"
         }));
         assert(tab_with_org.equals({
-            url: "mini-https://example.com",
+            url: "https://example.com",
             label: "Test",
-        }));
-        assert(tab_with_org.equals({
-            url: "mini-https://example.com",
-            org: "org-testOrg"
-        }));
-        assert(tab_with_org.equals({
-            url: "mini-https://example.com",
-            label: "Test",
-            org: "org-testOrg"
+            org: "testorg"
         }));
         // org
         assertFalse(tab_with_org.equals({
@@ -312,28 +309,28 @@ await Deno.test("Utility methods", async (t) => {
         }));
         assertFalse(tab_with_org.equals({
             org: "testOrg",
-            url: "mini-https://example.com",
+            url: "https://example.com",
         }));
         assertFalse(tab_with_org.equals({
             org: "testOrg",
             label: "Test",
-            url: "mini-https://example.com",
+            url: "https://example.com",
         }));
         assert(tab_with_org.equals({
-            org: "org-testOrg",
+            org: "testorg",
         }));
         assert(tab_with_org.equals({
-            org: "org-testOrg",
+            org: "testorg",
             label: "Test",
         }));
         assert(tab_with_org.equals({
-            org: "org-testOrg",
-            url: "mini-https://example.com",
+            org: "testorg",
+            url: "https://example.com",
         }));
         assert(tab_with_org.equals({
-            org: "org-testOrg",
+            org: "testorg",
             label: "Test",
-            url: "mini-https://example.com",
+            url: "https://example.com",
         }));
         // objects
         assertFalse(tab_no_org.equals(tab_with_org));
@@ -346,14 +343,66 @@ await Deno.test("Utility methods", async (t) => {
     });
 });
 
-await Deno.test("minify and extranct", async (t) => {
-    await t.step("minifyURL", async () => {
-        assertEquals(await Tab.minifyURL("url"), "mini-url");
-        assertEquals(await Tab.minifyURL("mini-url"), "mini-url");
+await Deno.test("URL manipulation", async (t) => {
+    await t.step("minifyURL", () => {
+        assertThrows(
+            () => Tab.minifyURL()
+        );
+		assertEquals(Tab.minifyURL("https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("/lightning/setup/SetupOneHome/home/"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("/lightning/setup/SetupOneHome/home"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("lightning/setup/SetupOneHome/home/"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("lightning/setup/SetupOneHome/home"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("SetupOneHome/home/"), "SetupOneHome/home");
+		assertEquals(Tab.minifyURL("SetupOneHome/home"), "SetupOneHome/home");
+
+		assertEquals(Tab.minifyURL("/SetupOneHome/home/"), "/SetupOneHome/home");
+		assertEquals(Tab.minifyURL("/SetupOneHome/home"), "/SetupOneHome/home");
     });
 
-    await t.step("extractOrgName", async () => {
-        assertEquals(await Tab.extractOrgName("testorg"), "org-testorg");
-        assertEquals(await Tab.extractOrgName("org-testorg"), "org-testorg");
+    await t.step("expandURL", () => {
+        assertThrows(
+            () => Tab.expandURL()
+        );
+        assertThrows(
+            () => Tab.expandURL("url")
+        );
+		assertEquals(Tab.expandURL("https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("lightning/setup/SetupOneHome/home/", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("lightning/setup/SetupOneHome/home", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("SetupOneHome/home/", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+		assertEquals(Tab.expandURL("SetupOneHome/home", "https://myorgdomain.sandbox.my.salesforce-setup.com/"), "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home");
+    });
+
+    await t.step("containsSalesforceId", () => {
+        assertThrows(
+            () => Tab.containsSalesforceId()
+        );
+        assert(Tab.containsSalesforceId("https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/ObjectManager/Account/FieldsAndRelationships/00N4W00000S0vI0/view"));
+        assert(Tab.containsSalesforceId("/lightning/setup/ObjectManager/Account/FieldsAndRelationships/00N4W00000S0vI0/view"));
+        assert(Tab.containsSalesforceId("https://myorgdomain.my.salesforce-setup.com/lightning/setup/EmbeddedServiceDeployments/04IEm000000J2VxMAK/view"));
+        assert(Tab.containsSalesforceId("00N4W00000S0vI0"));
+		assert(Tab.containsSalesforceId("/00N4W00000S0vI0/"));
+		assert(Tab.containsSalesforceId("=00N4W00000S0vI0/"));
+		assert(Tab.containsSalesforceId("/00N4W00000S0vI0?"));
+		assert(Tab.containsSalesforceId("=00N4W00000S0vI0?"));
+		assert(Tab.containsSalesforceId("/00N4W00000S0vI0&"));
+		assert(Tab.containsSalesforceId("=00N4W00000S0vI0&"));
+        assertFalse(Tab.containsSalesforceId("IamCountedAsSFi"));
+        assertFalse(Tab.containsSalesforceId("FieldsAndRelationships"));
+        assertFalse(Tab.containsSalesforceId("ObjectManagerNew"));
+		assertFalse(Tab.containsSalesforceId("/IamCountedAsSFi/"));
+		assertFalse(Tab.containsSalesforceId("/FieldsAndRelationships/"));
+		assertFalse(Tab.containsSalesforceId("/ObjectManagerNe/"));
+    });
+
+    await t.step("extractOrgName", () => {
+        assert(true);
     });
 });

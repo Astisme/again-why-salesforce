@@ -49,26 +49,6 @@ export const mockBrowser = {
             (chrome.runtime as any).lastError = { message: 'Tabs data is missing' };
           }
           break;
-        case 'minify':
-          const url = message.url
-          if (url) {
-            if(url.startsWith("mini-"))
-                response = url;
-            else response = `mini-${url}`
-          } else {
-            (chrome.runtime as any).lastError = { message: 'URL is missing' };
-          }
-          break;
-        case 'extract-org':
-          const org = message.url;
-          if (org) {
-            if(org.startsWith("org-"))
-                response = org;
-            else response = `org-${org}`
-          } else {
-            (chrome.runtime as any).lastError = { message: 'URL is missing' };
-          }
-          break;
         default:
           (chrome.runtime as any).lastError = { message: 'Unknown message type' };
       }
