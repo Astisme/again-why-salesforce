@@ -197,9 +197,7 @@ export class TabContainer extends Array {
             return false;
         }
         
-        const savedTabs = await chrome.runtime.sendMessage(
-            { message: { what: "get" }},
-        ); 
+        const savedTabs = await this.getSavedTabs(false);
         const addedSomething = await checkAddTabs(this, savedTabs) && savedTabs.length > 0;
         if(tabs == null && addedSomething)
             return addedSomething;
@@ -208,6 +206,21 @@ export class TabContainer extends Array {
             return true;
 
         return await this.setDefaultTabs();
+    }
+
+    async getSavedTabs(replace = true){
+        const res = await chrome.runtime.sendMessage(
+            { message: { what: "get" }},
+        );
+
+        if(replace)
+            await this.replaceTabs(res, {
+                resetTabs: true,
+                removeOrgTabs: true,
+                sync: false,
+            });
+
+        return replace ? this : res;
     }
 
     /**
@@ -244,7 +257,7 @@ export class TabContainer extends Array {
         }
 
         const validTab = await Tab.create(tab);
-        super.push(validTab);
+        this.push(validTab);
 
         if (sync)
             await this.syncTabs();
@@ -270,9 +283,10 @@ export class TabContainer extends Array {
             try {
                 await this.addTab(tab, false);
             } catch (error) {
-                addedAll = false;
-                if(!error.message.startsWith("This tab already exists"))
+                if(!error.message.startsWith("This tab already exists")){
+                    addedAll = false; // count duplicates as inserted
                     throw error;
+                }
             }
         };
 
@@ -307,8 +321,7 @@ export class TabContainer extends Array {
      */
     getTabsWithOrg(getWithOrg = true) {
         return this.filter(tab => 
-            (getWithOrg && tab.org != null)
-            || (!getWithOrg && tab.org == null)
+            getWithOrg === (tab.org != null)
         );
     }
 
@@ -325,8 +338,7 @@ export class TabContainer extends Array {
         return this.filter(tab => 
             tab.org != null 
             && (
-                (matchOrg && tab.org === org) 
-                || (!matchOrg && tab.org !== org)
+                matchOrg === (tab.org === org) 
             )
         );
     }
@@ -383,9 +395,9 @@ export class TabContainer extends Array {
      */
     async exists(tab = {label: undefined, url: undefined, org: undefined}) {
         if(tab.url != null)
-            tab.url = await Tab.minifyURL(tab.url);
+            tab.url = Tab.minifyURL(tab.url);
         if(tab.org != null)
-            tab.org = await Tab.extractOrgName(tab.org);
+            tab.org = Tab.extractOrgName(tab.org);
         return this.length !== 0 && 
                 this.some(tb => 
                     tb.equals(tab)
@@ -473,8 +485,7 @@ export class TabContainer extends Array {
         }
 
         // Add new tabs and sync them
-        const res = await this.addTabs(newTabs, sync);
-        return res;
+        return await this.addTabs(newTabs, sync);
     }
     /**
      * 
@@ -527,9 +538,9 @@ export class TabContainer extends Array {
      */
     async syncTabs(tabs = null){
         // replace tabs already checks the tabs
-        if(tabs != null)
-            await this.replaceTabs(tabs, {sync: false});
-        return TabContainer._syncTabs(this);
+        if(tabs != null && !await this.replaceTabs(tabs, {sync: false}))
+            return false;
+        return await TabContainer._syncTabs(this);
     }
 
     /**
@@ -538,10 +549,15 @@ export class TabContainer extends Array {
       * //TESTOK
      */
     static async _syncTabs(inputTabs = null){
+        if(inputTabs == null)
+            throw new Error("Cannot sync null tabs!");
         const tabs = await TabContainer.toJSON(inputTabs);
-        return chrome.runtime.sendMessage(
+        await chrome.runtime.sendMessage(
             { message: { what: "set", tabs }},
         );
+        if(chrome.runtime.lastError)
+            throw new Error(chrome.runtime.lastError);
+        return true;
     }
 
     /**
@@ -598,7 +614,6 @@ export class TabContainer extends Array {
      */
     static async toJSON(tabs){
         await TabContainer.errorOnInvalidTabs(tabs);
-
         const validArray = await TabContainer.isValid(tabs) ? tabs : Array.from(tabs);
         if (validArray.length !== tabs.length) {
             console.warn('Array length mismatch:', {
@@ -606,11 +621,21 @@ export class TabContainer extends Array {
                 new: validArray.length
             });
         }
-
         const resultJson = [];
-        for(const tab of validArray)
+        for(const tab of validArray){
+            let pushTab;
             if(Tab.isTab(tab))
-                resultJson.push(tab.toJSON());
+                pushTab = tab;
+            else {
+                try {
+                    pushTab = await Tab.create(tab);
+                } catch (error) {
+                    // do not add a failing tab to the JSON
+                    continue;
+                }
+            }
+            resultJson.push(pushTab.toJSON());
+        }
         return resultJson;
     }
     
@@ -696,10 +721,10 @@ export class TabContainer extends Array {
         let newIndex;
         if (fullMovement) {
             if(moveBefore){
-                super.unshift(tab);
+                this.unshift(tab);
                 newIndex = 0;
             } else {
-                super.push(tab);
+                this.push(tab);
                 newIndex = this.length - 1;
             }
         } else {

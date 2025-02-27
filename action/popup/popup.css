@@ -111,16 +111,6 @@ tbody#tabs {
 				stroke: var(--color);
 			}
 
-			& > div:not(:has(> .only-org)) {
-				clear: left;
-				transition: transform 0.3s var(--transition-timing-function);
-				transform: translateX(0); /* Initially no translation */
-
-				&:hover {
-					transform: translateX(10px);
-				}
-			}
-
 			& > div {
 				padding-top: 0.2rem;
 

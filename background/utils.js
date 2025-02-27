@@ -7,7 +7,6 @@ import {
 	SETUP_LIGHTNING,
 } from "/constants.js";
 import { bg_getStorage } from "./background.js";
-import { TabContainer } from "/tabContainer.js";
 
 
 export function bg_getCurrentBrowserTab(callback, fromPopup = false){
@@ -21,7 +20,6 @@ export function bg_getCurrentBrowserTab(callback, fromPopup = false){
             queryTabs(callback, count + 1);
         } else callback(browserTabs[0]);
     }
-
 	if (callback == null) {
         return new Promise(async (resolve, reject) => {
             try {
@@ -74,7 +72,6 @@ export function bg_minifyURL(url) {
 	if (url == null || url == "") {
 		return null;
 	}
-
 	// remove org-specific url
 	if (url.includes(LIGHTNING_FORCE_COM)) {
 		url = url.slice(
@@ -87,22 +84,18 @@ export function bg_minifyURL(url) {
 				MY_SALESFORCE_SETUP_COM.length,
 		);
 	}
-
 	if (url.includes(SETUP_LIGHTNING)) {
 		url = url.slice(
 			url.indexOf(SETUP_LIGHTNING) +
 				SETUP_LIGHTNING.length,
 		);
 	}
-
 	if (url.endsWith("/")) {
 		url = url.slice(0, url.length - 1);
 	}
-
 	if (url.length === 0) {
 		url = "/";
 	}
-
 	return url;
 }
 
@@ -138,23 +131,12 @@ export function bg_expandURL(message) {
 /**
  * Handles the export functionality by downloading the current tabs as a JSON file.
  */
-function _exportHandler(tabs) {
-	// Convert JSON string to Blob
-	const blob = new Blob(TabContainer.toString(tabs), {
-		type: "application/json",
-	});
-
-	// Create a download link
-	const link = document.createElement("a");
-	link.href = URL.createObjectURL(blob);
-	link.download = "again-why-salesforce.json";
-
-	// Append the link to the body and trigger the download
-	document.body.appendChild(link);
-	link.click();
-
-	// Cleanup
-	document.body.removeChild(link);
+async function _exportHandler(tabs) {
+    const dataUrl = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(tabs));
+    BROWSER.downloads.download({
+        url: dataUrl,
+        filename: "again-why-salesforce.json",
+    });
 }
 
 /**

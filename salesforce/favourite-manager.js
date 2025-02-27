@@ -4,18 +4,25 @@ import {
 } from "../constants.js"
 import {
     // functions
-    sf_sendMessage,
-    sf_minifyURL,
-    sf_extractOrgName,
+    //sf_sendMessage,
     getIsCurrentlyOnSavedTab,
-    setLastMinifiedUrl,
     isOnSavedTab,
     performActionOnTabs,
-    getLastMinifiedUrl,
     getWasOnSavedTab,
-    // constants
-    allTabs,
+    getAllTabs,
+    ensureAllTabsAvailability,
+    showToast,
+    getCurrentHref,
 } from "./content.js"
+
+let allTabs;
+const interval = setInterval(() => {
+    try {
+        allTabs = getAllTabs();
+        clearInterval(interval);
+    } catch (error) {
+    }
+}, 100)
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;
 const STAR_ID = `${EXTENSION_NAME}-star`;
@@ -110,6 +117,8 @@ function generateFavouriteButton() {
  * @param {HTMLElement} [button=null] - the HTMLElement of the button which is parent of the favouriteId.
  */
 function getFavouriteImage(favouriteId, button = null) {
+    if(favouriteId == null)
+        throw new Error("Cannot get favourite image without the Id");
 	return button?.querySelector(`#${favouriteId}`) ??
 		button?.querySelector(`.${favouriteId}`) ??
 		document.getElementById(favouriteId) ??
@@ -121,7 +130,7 @@ function getFavouriteImage(favouriteId, button = null) {
  * @param {HTMLElement} button - The favourite button element.
  * @param {boolean} isSaved - Optional flag indicating whether the tab is saved.
  */
-function toggleFavouriteButton(isSaved, button) {
+function toggleFavouriteButton(isSaved = null, button = null) {
 	// will use the class identifier if there was an error with the image (and was removed)
 	const star = getFavouriteImage(STAR_ID, button);
 	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
@@ -142,15 +151,6 @@ function toggleFavouriteButton(isSaved, button) {
 }
 
 /**
- * Checks if the url passed as input contains a Salesforce Id.
- *
- * @param {string} url - The URL to be checked.
- */
-function sf_containsSalesforceId(url = location.href) {
-	return sf_sendMessage({ what: "contains-sf-id", url });
-}
-
-/**
  * Adds the tab with the given URL and finds its title from the page
  *
  * @param {string} url - the minified URL of the tab to add
@@ -160,9 +160,9 @@ async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
 	let org;
 
-	const containsSfId = await sf_containsSalesforceId();
-    if (containsSfId) {
-		org = await sf_extractOrgName()
+    const href = location.href;
+    if (await Tab.containsSalesforceId(href)) {
+		org = Tab.extractOrgName(href);
     }
 
 	await performActionOnTabs("add",{ label, url, org })
@@ -173,10 +173,16 @@ async function addTab(url) {
  * @param {HTMLElement} parent - The parent element of the favourite button.
  */
 async function actionFavourite() {
-	const url = await sf_minifyURL();
+	const url = Tab.minifyURL(getCurrentHref());
 
     if (getIsCurrentlyOnSavedTab()) {
-		await performActionOnTabs("remove-this",allTabs.getTabsByData({url}))
+        await ensureAllTabsAvailability();
+        const tabToRemove = allTabs.getTabsByData({url})[0];
+        if(tabToRemove == null){
+            showToast("Cannot remove a non favourite Tab!", false, true);
+            return;
+        }
+		await performActionOnTabs("remove-this",tabToRemove);
     } else {
         await addTab(url);
     }
@@ -185,36 +191,20 @@ async function actionFavourite() {
 }
 
 /**
- * Checks if the current URL is saved and updates the favourite button accordingly.
- */
-async function checkUpdateFavouriteButton() {
-	// check if the current page is being imported
-	const url = await sf_minifyURL()
-    setLastMinifiedUrl(url);
-    const isOnFavouriteTab = allTabs.exists({url});
-    toggleFavouriteButton(isOnFavouriteTab);
-}
-
-/**
  * Displays the favourite button in the UI if applicable.
  *
  * @param {number} [count=0] - The number of retry attempts to find headers.
  */
-export function showFavouriteButton(count = 0) {
+export async function showFavouriteButton(count = 0) {
 	if (count > 5) {
 		console.error("Again, Why Salesforce - failed to find headers.");
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}
-    if(getLastMinifiedUrl() == null){
-        return setTimeout(async () => {
-            setLastMinifiedUrl(await sf_minifyURL());
-            showFavouriteButton(0);
-        });
-    }
+    const miniURL = Tab.minifyURL(getCurrentHref());
 
 	// Do not add favourite button on Home and Object Manager
 	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
-	if (standardTabs.includes(getLastMinifiedUrl())) {
+	if (standardTabs.includes(miniURL)) {
 		return;
 	}
 
@@ -225,17 +215,35 @@ export function showFavouriteButton(count = 0) {
 	}
 
 	// ensure we have clean data
-	if (getWasOnSavedTab() == null && getIsCurrentlyOnSavedTab() == null) {
-		isOnSavedTab();
+    const isCurrentlyOnSavedTab = getIsCurrentlyOnSavedTab();
+	if (getWasOnSavedTab() == null && isCurrentlyOnSavedTab == null) {
+		await isOnSavedTab();
 	}
 
 	const oldButton = header.querySelector(`#${BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
-		checkUpdateFavouriteButton();
+        await ensureAllTabsAvailability();
+        toggleFavouriteButton(await allTabs.exists({url: miniURL}));
 		return;
 	}
 	const button = generateFavouriteButton();
 	header.appendChild(button);
-	toggleFavouriteButton(getIsCurrentlyOnSavedTab, button); // init correctly
+	toggleFavouriteButton(isCurrentlyOnSavedTab, button); // init correctly
+}
+
+/**
+ * Performs the specified action for the current page, adding or removing from the tab list.
+ *
+ * @param {boolean} [save=true] - whether the current page should be added or removed as tab
+ */
+export function pageActionTab(save = true) {
+	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
+	if (!favourite.classList.contains("hidden")) favourite.click();
+	else {
+		const message = save
+			? "Cannot save:\nThis page has already been saved!"
+			: "Cannot remove:\nCannot remove a page that has not been saved before";
+		showToast(message, true, true);
+	}
 }

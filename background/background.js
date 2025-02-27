@@ -16,7 +16,7 @@ import {
 	exportHandler,
     bg_getCurrentBrowserTab,
 } from "./utils.js";
-import { TabContainer } from "../tabContainer.js";
+//import { TabContainer } from "../tabContainer.js";
 
 /**
  * Retrieves stored data from the browser's storage and invokes the provided callback.
@@ -38,13 +38,13 @@ export function bg_getStorage(callback) {
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
  */
-async function bg_setStorage(tabs, callback) {
+function bg_setStorage(tabs, callback) {
 	const set = {};
-    //tabs = await TabContainer.removeDuplicates(tabs);
-    //tabs = TabContainer.removeDuplicates(tabs);
 	set[WHY_KEY] = tabs;
-	BROWSER.storage.sync.set(set, () => callback(null));
-    bg_getStorage((_ => {}));
+	BROWSER.storage.sync.set(set, () => {
+        callback(null);
+        //bg_notify({what:"saved",tabs});
+    });
 }
 
 /**
@@ -60,19 +60,15 @@ export function bg_extractOrgName(url) {
 	let host = new URL(
 		url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
 	).host;
-
 	if (host.endsWith(LIGHTNING_FORCE_COM)) {
 		host = host.slice(0, host.indexOf(LIGHTNING_FORCE_COM));
 	}
-
 	if (host.endsWith(MY_SALESFORCE_SETUP_COM)) {
 		host = host.slice(0, host.indexOf(MY_SALESFORCE_SETUP_COM));
 	}
-
 	if (host.endsWith(MY_SALESFORCE_COM)) {
 		host = host.slice(0, host.indexOf(MY_SALESFORCE_COM));
 	}
-
 	return host;
 }
 
@@ -107,7 +103,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		return false;
 	}
 	//let captured = true;
-
 	switch (message.what) {
 		case "get":
 			bg_getStorage(sendResponse);
@@ -148,7 +143,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
         case "browser-tab":
             bg_getCurrentBrowserTab(sendResponse, message.popup);
             break;
-
 		default:
 			//captured = ["import"].includes(message.what);
 			//if (!captured) {
@@ -157,7 +151,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 			}
 			break;
 	}
-
 	//return captured; // will call sendResponse asynchronously if true
     return true;
 });

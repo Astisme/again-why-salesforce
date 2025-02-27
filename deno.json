@@ -8,7 +8,7 @@
 		"exclude": ["*.git*"]
 	},
 	"tasks": {
-		"test": "deno test -A",
+		"test": "deno test --no-check",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 

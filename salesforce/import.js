@@ -6,14 +6,26 @@ import {
     generateSldsFileInput,
     generateSldsModal,
     generateCheckboxWithLabel,
+    MODAL_ID,
+    generateSection,
 } from "./generator.js"
 import {
     // functions
     showToast,
     getModalHanger,
-    // constants
-    allTabs,
+    getAllTabs,
+    ensureAllTabsAvailability,
+    getSetupTabUl,
 } from "./content.js"
+
+let allTabs;
+const interval = setInterval(() => {
+    try {
+        allTabs = getAllTabs();
+        clearInterval(interval);
+    } catch (error) {
+    }
+}, 100)
 
 let overwritePick;
 let otherOrgPick;
@@ -46,14 +58,12 @@ function generateSldsImport() {
 		"Import Tabs",
 	);
 	closeButton.id = CLOSE_MODAL_ID;
-
 	const { section, divParent } = generateSection();
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	divParent.style.flexDirection = "column";
 	article.appendChild(section);
-
 	const { fileInputWrapper, inputContainer } = generateSldsFileInput(
 		IMPORT_ID,
 		IMPORT_FILE_ID,
@@ -61,7 +71,6 @@ function generateSldsImport() {
 	);
 	fileInputWrapper.style.marginBottom = "1rem";
 	divParent.appendChild(fileInputWrapper);
-
 	const style = document.createElement("style");
 	style.textContent = ".hidden { display: none; }";
 	divParent.appendChild(style);
@@ -70,7 +79,6 @@ function generateSldsImport() {
 		"Duplicate tabs will be ignored.<br />Two tabs are considered duplicates if they have the same URL.";
 	duplicateWarning.style.textAlign = "center";
 	divParent.append(duplicateWarning);
-
 	const overwriteCheckbox = generateCheckboxWithLabel(
 		OVERWRITE_ID,
 		"Overwrite saved tabs.",
@@ -88,16 +96,26 @@ function generateSldsImport() {
 		"change",
 		() => otherOrgCheckbox.classList.toggle("hidden"),
 	);
-
 	return { modalParent, saveButton, closeButton, inputContainer };
 }
 
 reader.onload = async (e) => {
 	try {
-        const importedNum = await allTabs.importTabs(e.target.result, overwritePick, otherOrgPick);
+        const jsonString = e.target.result;
+        await ensureAllTabsAvailability();
+        const importedNum = await allTabs.importTabs(jsonString, overwritePick, otherOrgPick);
         // remove file import
         document.getElementById(CLOSE_MODAL_ID).click();
         showToast(`Successfully imported ${importedNum} tabs.`,true);
+        if(jsonString.includes("tabTitle")){
+            // export and toast
+            chrome.runtime.sendMessage({message: { what: "export", tabs: JSON.parse(jsonString) }});
+            showToast(
+                "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
+                false,
+                true,
+            );
+        }
 	} catch (error) {
 		showToast(
 			`Error during import:\n${error.message}`,
@@ -159,8 +177,8 @@ function listenToFileUpload(modalParent) {
  */
 function showFileImport() {
 	if (
-		setupTabUl.querySelector(`#${IMPORT_ID}`) != null ||
-		document.getElementById(modalId) != null
+		getSetupTabUl().querySelector(`#${IMPORT_ID}`) != null ||
+		document.getElementById(MODAL_ID) != null
 	) {
 		return showToast("Close the other modal first!", false);
 	}

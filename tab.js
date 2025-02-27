@@ -1,3 +1,5 @@
+import { HTTPS, LIGHTNING_FORCE_COM, MY_SALESFORCE_COM, MY_SALESFORCE_SETUP_COM, SALESFORCE_ID_PATTERN, SETUP_LIGHTNING } from "./constants.js";
+
 const _tabSecret = Symbol("tabSecret");
 
 /**
@@ -71,10 +73,10 @@ class Tab {
             throw new Error("Org must be a string or undefined");
         }
         
-        const miniURL = await Tab.minifyURL(url);
+        const miniURL = Tab.minifyURL(url);
         let orgName;
         if(org != null)
-            orgName = await Tab.extractOrgName(org);
+            orgName = Tab.extractOrgName(org);
         
         // Create instance of Tab
         return new Tab(
@@ -86,42 +88,136 @@ class Tab {
     }
 
     /**
-     * Removes all standard bits of the URL, reducing its lenght.
-     * @param {string} url - the url to reduce
-     * @returns {Promise<string>} a Promise containing the smaller URL
-     * // TESTOK
-     */
-    static async minifyURL(url){
-        const newUrl = await Promise.all([new Promise((resolve, reject) => 
-            chrome.runtime.sendMessage(
-                { message: { what: "minify", url }},
-                (response) => {
-                    if (chrome.runtime.lastError) {
-                        reject(chrome.runtime.lastError);
-                    } else {
-                        resolve(response);
-                    }
-                }
-            )
-        )]);
-        return newUrl[0] ?? url;
-    }
-
-    /**
-     * Removes all standard bits of the URL, reducing its lenght.
-     * @param {string} url - the url to reduce
-     * @returns {string} the smaller URL
-     * // TESTOK
-     */
-    static async extractOrgName(url){
-        const newUrl = await chrome.runtime.sendMessage(
-            { message: { what: "extract-org", url }}
-        );
-        return newUrl;
-    }
-
-    /**
+     * Minifies a URL by the domain and removing Salesforce-specific parts.
      *
+     * @param {string} url - The URL to minify.
+     * @returns {string} The minified URL.
+     *
+     * These links would all collapse into "SetupOneHome/home".
+     * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
+     * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
+     * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
+     * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
+     * /lightning/setup/SetupOneHome/home/
+     * /lightning/setup/SetupOneHome/home
+     * lightning/setup/SetupOneHome/home/
+     * lightning/setup/SetupOneHome/home
+     * SetupOneHome/home/
+     * SetupOneHome/home
+     *
+     * Please note that these ones will not collapse as they're not though of as setup links
+     * /SetupOneHome/home/
+     * /SetupOneHome/home * this will be the result for both these urls
+     */
+    static minifyURL(url = null){
+        if (url == null || url == "") {
+            throw new Error("Cannot minify an empty URL!");
+        }
+        // remove org-specific url
+        if (url.includes(LIGHTNING_FORCE_COM)) {
+            url = url.slice(
+                url.indexOf(LIGHTNING_FORCE_COM) +
+                    LIGHTNING_FORCE_COM.length,
+            );
+        } else if (url.includes(MY_SALESFORCE_SETUP_COM)) {
+            url = url.slice(
+                url.indexOf(MY_SALESFORCE_SETUP_COM) +
+                    MY_SALESFORCE_SETUP_COM.length,
+            );
+        }
+        const setupLightningNoBeginSlash = SETUP_LIGHTNING.slice(1, SETUP_LIGHTNING.length);
+        if (url.includes(SETUP_LIGHTNING)) {
+            url = url.slice(
+                url.indexOf(SETUP_LIGHTNING) +
+                    SETUP_LIGHTNING.length,
+            );
+        } else if (url.includes(setupLightningNoBeginSlash)) {
+            url = url.slice(
+                url.indexOf(setupLightningNoBeginSlash) +
+                    setupLightningNoBeginSlash.length,
+            );
+        }
+        if (url.endsWith("/")) {
+            url = url.slice(0, url.length - 1);
+        }
+        if (url.length === 0) {
+            url = "/";
+        }
+        return url;
+    }
+
+    /**
+     * Expands a URL by adding the domain and the Salesforce setup parts.
+     * This function undoes what bg_minifyURL did to a URL.
+     *
+     * @param {string} url - The URL to expand.
+     * @returns {string} The expanded URL.
+     *
+     * These links would all collapse into "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/".
+     * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
+     * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
+     * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
+     * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
+     * lightning/setup/SetupOneHome/home/
+     * lightning/setup/SetupOneHome/home
+     * SetupOneHome/home/
+     * SetupOneHome/home
+     */
+    static expandURL(url = null, baseUrl = null){
+        if(baseUrl == null || !baseUrl.startsWith(HTTPS))
+            throw new Error("Cannot expand a URL without its base!");
+        if (url == null || url === "") {
+            throw new Error("Cannot expand an empty URL!");
+        }
+        baseUrl = new URL(baseUrl).origin;
+        url = Tab.minifyURL(url);
+        const isSetupLink = !url.startsWith("/") && url.length > 0;
+        return `${baseUrl}${isSetupLink ? SETUP_LIGHTNING : ""}${url}`;
+    }
+
+    /**
+     * Checks if a given URL contains a valid Salesforce ID.
+     *
+     * A Salesforce ID is either 15 or 18 alphanumeric characters, typically found
+     * in URL paths or query parameters. The function also handles encoded URLs
+     * (e.g., `%2F` becomes `/`) by decoding them before matching.
+     *
+     * @param {string} url - The URL to check for a Salesforce ID.
+     * @returns {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
+     */
+    static containsSalesforceId(url = null){
+        if(url == null)
+            throw new Error("No URL to check!");
+        return SALESFORCE_ID_PATTERN.test(decodeURIComponent(url));
+    }
+
+    /**
+     * Extracts the Org name from the url passed as input.
+     *
+     * @param {string} url - The URL from which the Org name has to be extracted.
+     * @returns {string} - The Org name OR nothing if an error occurs
+     */
+    static extractOrgName(url = null){
+        if (url == null) {
+            throw new Error("Cannot extract org name from empty URL!");
+        }
+        let host = new URL(
+            url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
+        ).host;
+        if (host.endsWith(LIGHTNING_FORCE_COM)) {
+            host = host.slice(0, host.indexOf(LIGHTNING_FORCE_COM));
+        }
+        if (host.endsWith(MY_SALESFORCE_SETUP_COM)) {
+            host = host.slice(0, host.indexOf(MY_SALESFORCE_SETUP_COM));
+        }
+        if (host.endsWith(MY_SALESFORCE_COM)) {
+            host = host.slice(0, host.indexOf(MY_SALESFORCE_COM));
+        }
+        return host;
+    }
+
+    /**
+     * Checks if the inputted object is an instanceof Tab
      * // TESTOK
      */
     static isTab(tab){
@@ -139,7 +235,7 @@ class Tab {
             await Tab.create(tab);
             return true;
         } catch (error) {
-            console.error("Invalid Tab: ",error.message);
+            console.log("Invalid Tab: ",error.message);
             // error on creation of tab
             return false;
         }

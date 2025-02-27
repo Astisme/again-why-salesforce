@@ -21,7 +21,6 @@ function initThemeSvg() {
 	initTheme();
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
-
 	elementToShow.classList.remove("invisible", "hidden");
 	elementToHide.classList.add("invisible", "hidden");
 }
@@ -56,14 +55,11 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 function switchTheme() {
 	const elementToShow = html.dataset.theme === "light" ? sun : moon;
 	const elementToHide = elementToShow === sun ? moon : sun;
-
 	elementToHide.classList.add("invisible", "hidden");
 	elementToShow.classList.remove("hidden");
-
 	setTimeout(() => {
 		elementToShow.classList.remove("invisible");
 	}, 200);
-
 	handleSwitchColorTheme();
 }
 
@@ -86,7 +82,6 @@ function pop_sendMessage(message, callback) {
             callback,
         );
     }
-
 	if (callback == null)
         return new Promise((resolve, reject) => {
             sendMessage(
@@ -111,46 +106,13 @@ function pop_afterSet() {
 }
 
 /**
- * Minifies a URL by the domain and removing Salesforce-specific parts.
- *
- * @param {string} url - The URL to minify.
- * @returns {Promise} A promise containing the minified URL.
- *
- * These links would all collapse into "SetupOneHome/home".
- * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
- * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
- * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
- * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
- * /lightning/setup/SetupOneHome/home/
- * /lightning/setup/SetupOneHome/home
- * lightning/setup/SetupOneHome/home/
- * lightning/setup/SetupOneHome/home
- * /SetupOneHome/home/
- * /SetupOneHome/home
- * SetupOneHome/home/
- * SetupOneHome/home
- */
-function pop_minifyURL(url) {
-	return pop_sendMessage({ what: "minify", url });
-}
-
-/**
  * Extracts the Org name out of the url passed as input.
  *
  * @param {string} url - The URL from which the Org name has to be extracted
  */
 async function pop_extractOrgName(browserTab = null) {
 	browserTab = browserTab ?? await pop_getCurrentBrowserTab();
-	return pop_sendMessage({ what: "extract-org", url: browserTab.url });
-}
-
-/**
- * Checks if the url passed as input contains a Salesforce Id.
- *
- * @param {string} url - The URL to be checked.
- */
-function pop_containsSalesforceId(url) {
-	return pop_sendMessage({ what: "contains-sf-id", url });
+    return Tab.extractOrgName(browserTab.url);
 }
 
 /**
@@ -164,7 +126,7 @@ function importHandler() {
  * Handles the export functionality by downloading the current tabs as a JSON file.
  */
 function pop_exportHandler() {
-	pop_sendMessage({ what: "export", tabs: allTabs }, close);
+	pop_sendMessage({ what: "export" }, close);
 }
 
 /**
@@ -184,7 +146,6 @@ function deleteTab() {
 function updateTabAttributes(enable = true) {
 	const tr = tabAppendElement.querySelector("tr:last-child");
 	const deleteButton = tr.querySelector("button.delete");
-
 	if (enable) {
 		deleteButton.removeAttribute("disabled");
 		tr.setAttribute("draggable", "true");
@@ -230,13 +191,12 @@ async function inputLabelUrlListener(type) {
 	const inputObj = currentObj.last_input;
 	const last_input = inputObj[type] || "";
 	const delta = value.length - last_input.length;
-
 	// check if the user copied the url
 	if (delta > 2 && type === "url") {
-		const v = await pop_minifyURL(value)
+		const v = Tab.minifyURL(value);
         element.value = v;
         // check eventual duplicates
-        if (allTabs.tabExistsByData({url: v})) {
+        if (await allTabs.exists({url: v})) {
             // show warning in salesforce
             pop_sendMessage({
                 what: "warning",
@@ -244,20 +204,17 @@ async function inputLabelUrlListener(type) {
                 action: "make-bold",
                 url: v,
             });
-
             // highlight all duplicated rows and scroll to the first one
             const trs = Array.from(
                 tabAppendElement.querySelectorAll("tr input.url"),
             )
             .filter((input) => input.value === v)
             .map((input) => input.closest("tr"));
-
             trs.forEach((tr) => tr.classList.add("duplicate"));
             trs[0].scrollIntoView({
                 behavior: "smooth",
                 block: "center",
             });
-
             setTimeout(
                 () =>
                     trs.forEach((tr) =>
@@ -267,9 +224,9 @@ async function inputLabelUrlListener(type) {
             );
         }
 	}
-
 	inputObj[type] = value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
+    console.log(focusedIndex,loggers.length)
 	if (focusedIndex === (loggers.length - 1)) {
 		if (inputObj.label && inputObj.url) {
 			addTab();
@@ -283,16 +240,6 @@ async function inputLabelUrlListener(type) {
 }
 
 /**
- * Focus listener to track the currently focused tab index.
- *
- * @param {Event} e - The focus event.
- */
-function focusListener(e) {
-	focusedIndex = parseInt(e.target.dataset.element_index);
-	saveTabs(false);
-}
-
-/**
  * Creates a new tab element for the popup and sets up event listeners for label and url input fields.
  *
  * @returns {HTMLElement} The created tab element.
@@ -300,22 +247,22 @@ function focusListener(e) {
 function createElement() {
 	const element = tabTemplate.content.firstElementChild.cloneNode(true);
 	const deleteButton = element.querySelector("button.delete");
-	deleteButton.addEventListener("click", deleteTab);
-
+    deleteButton.addEventListener("click", deleteTab);
+    const label = element.querySelector(".label");
+    const url = element.querySelector(".url");
+    function checkSaveTab() {
+        if(label.value !== "" && url.value !== "")
+            saveTabs(false);
+    }
 	function setInfoForDrag(element, listener) {
 		element.addEventListener("input", listener);
-		element.addEventListener("focus", focusListener);
+		element.addEventListener("focusin", (e) => focusedIndex = parseInt(e.target.dataset.element_index));
 		element.dataset.element_index = loggers.length;
+        element.addEventListener("focusout", checkSaveTab);
 	}
-	const label = element.querySelector(".label");
 	setInfoForDrag(label, async () => await inputLabelUrlListener("label"));
-	const url = element.querySelector(".url");
 	setInfoForDrag(url, async () => await inputLabelUrlListener("url"));
-
-	element.querySelector(".only-org").addEventListener("click", () => {
-		saveTabs(false);
-	});
-
+	element.querySelector(".only-org").addEventListener("click", checkSaveTab);
 	loggers.push({ label, url, last_input: {} }); // set last_input as an empty object
 	return element;
 }
@@ -326,15 +273,11 @@ function createElement() {
  * @param {Object} items - The stored tab data.
  */
 async function loadTabs(browserTab = null) {
-    console.log('lll',allTabs,allTabs == null,allTabs.length);
-	if (allTabs == null) {
+	if (allTabs == null || allTabs.length === 0) {
 		return addTab();
 	}
-
 	const orgName = await pop_extractOrgName(browserTab);
-    console.log('lll',orgName,allTabs.length);
     for (const tab of allTabs) {
-        console.log('lll',tab.org,tab.org != null && tab.org !== orgName)
         if (tab.org != null && tab.org !== orgName) {
             continue; // default hide not-this-org org-specific tabs
         }
@@ -346,13 +289,12 @@ async function loadTabs(browserTab = null) {
         const logger = loggers.pop();
         logger.last_input.label = tab.label;
         logger.last_input.url = tab.url;
-
         loggers.push(logger);
         tabAppendElement.append(element);
         updateTabAttributes();
     }
     tabAppendElement.append(createElement()); // leave a blank at the bottom
-    pop_afterSet();
+    //pop_afterSet(); // called every time saveTabs is called with doReload = true
 }
 
 /**
@@ -380,41 +322,31 @@ async function findTabsFromRows() {
 			const label = tab.querySelector(".label").value;
 			const url = tab.querySelector(".url").value;
 			const onlyOrgChecked = tab.querySelector(".only-org").checked;
-
-            console.log({label,url})
 			if (label != null && url != null
                 && label !== "" && url !== "") {
-				// the user has not checked the onlyOrgChecked checkbox &&
-				// the link does not contain a Salesforce Id
-				const containsSalesforceId = await pop_containsSalesforceId(
-					url,
-				);
-                console.log({label,url,onlyOrgChecked,containsSalesforceId});
-				if (!onlyOrgChecked && !containsSalesforceId) {
+                // the user has not checked the onlyOrgChecked checkbox &&
+                // the link does not contain a Salesforce Id
+				if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
 					return await Tab.create(label, url);
 				}
 				return await Tab.create(label, url, orgName);
 			}
 			return null; // Return null for invalid tabs
 		});
-
 	let availableTabs;
 	try {
 		// Wait for all promises to resolve and filter out null values
 		const resolvedTabs = await Promise.all(tabPromises);
-		availableTabs = resolvedTabs.filter((tab) => tab !== null);
+		availableTabs = resolvedTabs.filter((tab) => Tab.isTab(tab));
 		// add all the hidden not-this-org tabs
-        /*
 		availableTabs.push(
 			...allTabs.getTabsByOrg(orgName, false)
         );
-        */
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 		availableTabs = [];
 	}
-
-    return availableTabs;
+    return { availableTabs, org: orgName };
 }
 
 /**
@@ -424,16 +356,22 @@ async function findTabsFromRows() {
  * @param {Array} tabs - The tabs to save.
  */
 async function saveTabs(doReload = true, tabs = null) {
+    let orgName;
 	if (!await TabContainer.isValid(tabs)) {
-		tabs = await findTabsFromRows(doReload);
+        const { availableTabs, org } = await findTabsFromRows();
+        tabs = availableTabs;
+        orgName = org;
 	}
-    console.warn('lllsavetabs',tabs,doReload);
+    else
+        orgName = await pop_extractOrgName();
     await allTabs.replaceTabs(tabs, {
         removeOrgTabs: true,
-        keepTabsNotThisOrg: await pop_extractOrgName(),
+        keepTabsNotThisOrg: orgName,
     });
-	if(doReload)
+	if(doReload){
         await reloadRows();
+        pop_afterSet();
+    }
 }
 
 /**
