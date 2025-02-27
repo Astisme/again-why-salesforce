@@ -1,16 +1,16 @@
 "use strict";
 import {
-    BROWSER,
+	BROWSER,
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
 } from "../constants.js";
 import {
 	bg_expandURL,
+	bg_getCurrentBrowserTab,
 	bg_minifyURL,
 	bg_notify,
 	exportHandler,
-    bg_getCurrentBrowserTab,
 } from "./utils.js";
 
 let areMenuItemsVisible = false;
@@ -130,8 +130,9 @@ async function createMenuItems() {
 		await BROWSER.contextMenus.removeAll();
 		for (const item of menuItems) {
 			await BROWSER.contextMenus.create(item);
-            if(BROWSER.runtime.lastError)
-                throw new Error(BROWSER.runtime.lastError.message);
+			if (BROWSER.runtime.lastError) {
+				throw new Error(BROWSER.runtime.lastError.message);
+			}
 		}
 		areMenuItemsVisible = true;
 	} catch (error) {
@@ -162,56 +163,65 @@ async function removeMenuItems() {
  * - If no match is found, calls `removeMenuItems` to clean up context menus.
  */
 async function checkAddRemoveContextMenus(what) {
-    /*
+	/*
     if(operating != null)
         return console.log('operating',operating,what);
     operating = what;
     */
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
-        const url = browserTab.url;
-        if (CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => url.match(cmp))) {
-            await removeMenuItems();
-            await createMenuItems();
-            bg_notify({ what });
-        } else {
-            await removeMenuItems();
-        }
+		const url = browserTab.url;
+		if (CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => url.match(cmp))) {
+			await removeMenuItems();
+			await createMenuItems();
+			bg_notify({ what });
+		} else {
+			await removeMenuItems();
+		}
 	} catch (error) {
-        console.trace();
-        if(error != null && error.message !== "")
-            console.error("Error checking context menus:", error);
-    /*
+		console.trace();
+		if (error != null && error.message !== "") {
+			console.error("Error checking context menus:", error);
+		}
+		/*
 	} finally {
         operating = null;
     */
-    }
+	}
 }
 
 // Debounce function to prevent excessive calls
-function debounce (fn, delay = 150) {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => fn(...args), delay);
-    };
-};
+function debounce(fn, delay = 150) {
+	let timeout;
+	return (...args) => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => fn(...args), delay);
+	};
+}
 
 // Debounced version for high-frequency events
 const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
 
 // when the browser starts
-BROWSER.runtime.onStartup.addListener(() => checkAddRemoveContextMenus("startup"));
+BROWSER.runtime.onStartup.addListener(() =>
+	checkAddRemoveContextMenus("startup")
+);
 // when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener(() => checkAddRemoveContextMenus("installed"));
+BROWSER.runtime.onInstalled.addListener(() =>
+	checkAddRemoveContextMenus("installed")
+);
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
-BROWSER.tabs.onHighlighted.addListener(() => debouncedCheckMenus("highlighted"));
+BROWSER.tabs.onHighlighted.addListener(() =>
+	debouncedCheckMenus("highlighted")
+);
 //BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
 // when window changes
 //BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
-BROWSER.windows.onFocusChanged.addListener(() => checkAddRemoveContextMenus("focuschanged"));
+BROWSER.windows.onFocusChanged.addListener(() =>
+	checkAddRemoveContextMenus("focuschanged")
+);
 
 /* TODO add tutorial on install and link to current changes on update
 if (details.reason == "install") {

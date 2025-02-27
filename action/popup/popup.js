@@ -1,8 +1,8 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
-import { Tab } from "/tab.js"
-import { TabContainer } from "/tabContainer.js"
+import { Tab } from "/tab.js";
+import { TabContainer } from "/tabContainer.js";
 const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
@@ -31,21 +31,24 @@ initThemeSvg();
  * @param {function|undefined} callback - the function to call when the result is found.
  */
 function pop_getCurrentBrowserTab(callback) {
-    return pop_sendMessage({what: "browser-tab", popup: true}, callback); 
+	return pop_sendMessage({ what: "browser-tab", popup: true }, callback);
 }
 
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-    const broswerTabUrl = browserTab?.url;
-	if (broswerTabUrl == null || !broswerTabUrl.match(".*\/lightning\/setup\/.*")) {
+	const broswerTabUrl = browserTab?.url;
+	if (
+		broswerTabUrl == null ||
+		!broswerTabUrl.match(".*\/lightning\/setup\/.*")
+	) {
 		window.location.href = chrome.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
 				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
 			}`,
 		);
 	} else {
-        await loadTabs(browserTab);
+		await loadTabs(browserTab);
 	}
 });
 
@@ -70,32 +73,33 @@ function switchTheme() {
  * @param {function} callback - The callback to execute after sending the message.
  */
 function pop_sendMessage(message, callback) {
-    /**
-     * Invoke the runtime to send the message
-     *
-     * @param {Object} message - The message to send
-     * @param {function} callback - The callback to execute after sending the message
-     */
-    function sendMessage(message, callback){
-        return chrome.runtime.sendMessage(
-            { message, url: location.href },
-            callback,
-        );
-    }
-	if (callback == null)
-        return new Promise((resolve, reject) => {
-            sendMessage(
-                message,
-                (response) => {
-                    if (chrome.runtime.lastError) {
-                        reject(chrome.runtime.lastError);
-                    } else {
-                        resolve(response);
-                    }
-                },
-            );
-        });
-    sendMessage(message, callback);
+	/**
+	 * Invoke the runtime to send the message
+	 *
+	 * @param {Object} message - The message to send
+	 * @param {function} callback - The callback to execute after sending the message
+	 */
+	function sendMessage(message, callback) {
+		return chrome.runtime.sendMessage(
+			{ message, url: location.href },
+			callback,
+		);
+	}
+	if (callback == null) {
+		return new Promise((resolve, reject) => {
+			sendMessage(
+				message,
+				(response) => {
+					if (chrome.runtime.lastError) {
+						reject(chrome.runtime.lastError);
+					} else {
+						resolve(response);
+					}
+				},
+			);
+		});
+	}
+	sendMessage(message, callback);
 }
 
 /**
@@ -112,7 +116,7 @@ function pop_afterSet() {
  */
 async function pop_extractOrgName(browserTab = null) {
 	browserTab = browserTab ?? await pop_getCurrentBrowserTab();
-    return Tab.extractOrgName(browserTab.url);
+	return Tab.extractOrgName(browserTab.url);
 }
 
 /**
@@ -194,35 +198,32 @@ function inputLabelUrlListener(type) {
 	// check if the user copied the url
 	if (delta > 2 && type === "url") {
 		const v = Tab.minifyURL(value);
-        element.value = v;
-        // check eventual duplicates
-        if (allTabs.exists({url: v})) {
-            // show warning in salesforce
-            pop_sendMessage({
-                what: "warning",
-                message: "A tab with this URL has already been saved!",
-                action: "make-bold",
-                url: v,
-            });
-            // highlight all duplicated rows and scroll to the first one
-            const trs = Array.from(
-                tabAppendElement.querySelectorAll("tr input.url"),
-            )
-            .filter((input) => input.value === v)
-            .map((input) => input.closest("tr"));
-            trs.forEach((tr) => tr.classList.add("duplicate"));
-            trs[0].scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-            });
-            setTimeout(
-                () =>
-                    trs.forEach((tr) =>
-                        tr.classList.remove("duplicate")
-                    ),
-                4000,
-            );
-        }
+		element.value = v;
+		// check eventual duplicates
+		if (allTabs.exists({ url: v })) {
+			// show warning in salesforce
+			pop_sendMessage({
+				what: "warning",
+				message: "A tab with this URL has already been saved!",
+				action: "make-bold",
+				url: v,
+			});
+			// highlight all duplicated rows and scroll to the first one
+			const trs = Array.from(
+				tabAppendElement.querySelectorAll("tr input.url"),
+			)
+				.filter((input) => input.value === v)
+				.map((input) => input.closest("tr"));
+			trs.forEach((tr) => tr.classList.add("duplicate"));
+			trs[0].scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+			});
+			setTimeout(
+				() => trs.forEach((tr) => tr.classList.remove("duplicate")),
+				4000,
+			);
+		}
 	}
 	inputObj[type] = value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
@@ -246,18 +247,22 @@ function inputLabelUrlListener(type) {
 function createElement() {
 	const element = tabTemplate.content.firstElementChild.cloneNode(true);
 	const deleteButton = element.querySelector("button.delete");
-    deleteButton.addEventListener("click", deleteTab);
-    const label = element.querySelector(".label");
-    const url = element.querySelector(".url");
-    function checkSaveTab() {
-        if(label.value !== "" && url.value !== "")
-            saveTabs(false);
-    }
+	deleteButton.addEventListener("click", deleteTab);
+	const label = element.querySelector(".label");
+	const url = element.querySelector(".url");
+	function checkSaveTab() {
+		if (label.value !== "" && url.value !== "") {
+			saveTabs(false);
+		}
+	}
 	function setInfoForDrag(element, listener) {
 		element.addEventListener("input", listener);
-		element.addEventListener("focusin", (e) => focusedIndex = parseInt(e.target.dataset.element_index));
+		element.addEventListener(
+			"focusin",
+			(e) => focusedIndex = parseInt(e.target.dataset.element_index),
+		);
 		element.dataset.element_index = loggers.length;
-        element.addEventListener("focusout", checkSaveTab);
+		element.addEventListener("focusout", checkSaveTab);
 	}
 	setInfoForDrag(label, () => inputLabelUrlListener("label"));
 	setInfoForDrag(url, () => inputLabelUrlListener("url"));
@@ -276,24 +281,24 @@ async function loadTabs(browserTab = null) {
 		return addTab();
 	}
 	const orgName = await pop_extractOrgName(browserTab);
-    for (const tab of allTabs) {
-        if (tab.org != null && tab.org !== orgName) {
-            continue; // default hide not-this-org org-specific tabs
-        }
-        const element = createElement();
-        element.querySelector(".label").value = tab.label;
-        element.querySelector(".url").value = tab.url;
-        element.querySelector(".only-org").checked = tab.org != null;
-        element.querySelector(".delete").removeAttribute("disabled");
-        const logger = loggers.pop();
-        logger.last_input.label = tab.label;
-        logger.last_input.url = tab.url;
-        loggers.push(logger);
-        tabAppendElement.append(element);
-        updateTabAttributes();
-    }
-    tabAppendElement.append(createElement()); // leave a blank at the bottom
-    //pop_afterSet(); // called every time saveTabs is called with doReload = true
+	for (const tab of allTabs) {
+		if (tab.org != null && tab.org !== orgName) {
+			continue; // default hide not-this-org org-specific tabs
+		}
+		const element = createElement();
+		element.querySelector(".label").value = tab.label;
+		element.querySelector(".url").value = tab.url;
+		element.querySelector(".only-org").checked = tab.org != null;
+		element.querySelector(".delete").removeAttribute("disabled");
+		const logger = loggers.pop();
+		logger.last_input.label = tab.label;
+		logger.last_input.url = tab.url;
+		loggers.push(logger);
+		tabAppendElement.append(element);
+		updateTabAttributes();
+	}
+	tabAppendElement.append(createElement()); // leave a blank at the bottom
+	//pop_afterSet(); // called every time saveTabs is called with doReload = true
 }
 
 /**
@@ -321,10 +326,12 @@ async function findTabsFromRows() {
 			const label = tab.querySelector(".label").value;
 			const url = tab.querySelector(".url").value;
 			const onlyOrgChecked = tab.querySelector(".only-org").checked;
-			if (label != null && url != null
-                && label !== "" && url !== "") {
-                // the user has not checked the onlyOrgChecked checkbox &&
-                // the link does not contain a Salesforce Id
+			if (
+				label != null && url != null &&
+				label !== "" && url !== ""
+			) {
+				// the user has not checked the onlyOrgChecked checkbox &&
+				// the link does not contain a Salesforce Id
 				if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
 					return await Tab.create(label, url);
 				}
@@ -339,13 +346,13 @@ async function findTabsFromRows() {
 		availableTabs = resolvedTabs.filter((tab) => Tab.isTab(tab));
 		// add all the hidden not-this-org tabs
 		availableTabs.push(
-			...allTabs.getTabsByOrg(orgName, false)
-        );
+			...allTabs.getTabsByOrg(orgName, false),
+		);
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 		availableTabs = [];
 	}
-    return { availableTabs, org: orgName };
+	return { availableTabs, org: orgName };
 }
 
 /**
@@ -355,22 +362,22 @@ async function findTabsFromRows() {
  * @param {Array} tabs - The tabs to save.
  */
 async function saveTabs(doReload = true, tabs = null) {
-    let orgName;
+	let orgName;
 	if (!await TabContainer.isValid(tabs)) {
-        const { availableTabs, org } = await findTabsFromRows();
-        tabs = availableTabs;
-        orgName = org;
+		const { availableTabs, org } = await findTabsFromRows();
+		tabs = availableTabs;
+		orgName = org;
+	} else {
+		orgName = await pop_extractOrgName();
 	}
-    else
-        orgName = await pop_extractOrgName();
-    await allTabs.replaceTabs(tabs, {
-        removeOrgTabs: true,
-        keepTabsNotThisOrg: orgName,
-    });
-	if(doReload){
-        await reloadRows();
-        pop_afterSet();
-    }
+	await allTabs.replaceTabs(tabs, {
+		removeOrgTabs: true,
+		keepTabsNotThisOrg: orgName,
+	});
+	if (doReload) {
+		await reloadRows();
+		pop_afterSet();
+	}
 }
 
 /**

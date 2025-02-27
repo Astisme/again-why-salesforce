@@ -1,37 +1,40 @@
 "use strict";
 import {
-    BROWSER,
+	BROWSER,
+	HTTPS,
 	LIGHTNING_FORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
-	HTTPS,
 	SETUP_LIGHTNING,
 } from "/constants.js";
 import { bg_getStorage } from "./background.js";
 
-
-export function bg_getCurrentBrowserTab(callback, fromPopup = false){
-    async function queryTabs(callback, count = 0){
-        const queryParams = { active: true, currentWindow: true };
-        (fromPopup == true || count > 0) && delete queryParams.currentWindow;
-        const browserTabs = await BROWSER.tabs.query(queryParams);
-        if (BROWSER.runtime.lastError || browserTabs == null || browserTabs[0] == null){
-            if(count > 5)
-                throw new Error("Could not find current tab.");
-            queryTabs(callback, count + 1);
-        } else callback(browserTabs[0]);
-    }
+export function bg_getCurrentBrowserTab(callback, fromPopup = false) {
+	async function queryTabs(callback, count = 0) {
+		const queryParams = { active: true, currentWindow: true };
+		(fromPopup == true || count > 0) && delete queryParams.currentWindow;
+		const browserTabs = await BROWSER.tabs.query(queryParams);
+		if (
+			BROWSER.runtime.lastError || browserTabs == null ||
+			browserTabs[0] == null
+		) {
+			if (count > 5) {
+				throw new Error("Could not find current tab.");
+			}
+			queryTabs(callback, count + 1);
+		} else callback(browserTabs[0]);
+	}
 	if (callback == null) {
-        return new Promise((resolve, reject) => {
-            try {
-                queryTabs(resolve)
-                .then(q => resolve(q))
-                .catch(e => reject(e));
-            } catch (error) {
-                reject(error);
-            }
-        });
-    }
-    queryTabs(callback);
+		return new Promise((resolve, reject) => {
+			try {
+				queryTabs(resolve)
+					.then((q) => resolve(q))
+					.catch((e) => reject(e));
+			} catch (error) {
+				reject(error);
+			}
+		});
+	}
+	queryTabs(callback);
 }
 /**
  * Sends the same message back to other parts of the extension.
@@ -40,14 +43,15 @@ export function bg_getCurrentBrowserTab(callback, fromPopup = false){
  * @param {int} count = 0 - how many times the function has been called
  */
 export async function bg_notify(message, count = 0) {
-    try {
-        const browserTab = await bg_getCurrentBrowserTab();
-        BROWSER.tabs.sendMessage(browserTab.id, message);
-    } catch(error) {
-        console.trace();
-        if(error == null || error.message === "")
-            setTimeout(() => bg_notify(count + 1), 500);
-    }
+	try {
+		const browserTab = await bg_getCurrentBrowserTab();
+		BROWSER.tabs.sendMessage(browserTab.id, message);
+	} catch (error) {
+		console.trace();
+		if (error == null || error.message === "") {
+			setTimeout(() => bg_notify(count + 1), 500);
+		}
+	}
 }
 
 /**
@@ -134,11 +138,12 @@ export function bg_expandURL(message) {
  * Handles the export functionality by downloading the current tabs as a JSON file.
  */
 function _exportHandler(tabs) {
-    const dataUrl = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(tabs));
-    BROWSER.downloads.download({
-        url: dataUrl,
-        filename: "again-why-salesforce.json",
-    });
+	const dataUrl = "data:application/json;charset=utf-8," +
+		encodeURIComponent(JSON.stringify(tabs));
+	BROWSER.downloads.download({
+		url: dataUrl,
+		filename: "again-why-salesforce.json",
+	});
 }
 
 /**

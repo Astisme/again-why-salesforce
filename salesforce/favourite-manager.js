@@ -1,29 +1,27 @@
 "use strict";
+import { EXTENSION_NAME } from "../constants.js";
 import {
-	EXTENSION_NAME,
-} from "../constants.js"
-import {
-    // functions
-    //sf_sendMessage,
-    getIsCurrentlyOnSavedTab,
-    isOnSavedTab,
-    performActionOnTabs,
-    getWasOnSavedTab,
-    getAllTabs,
-    ensureAllTabsAvailability,
-    showToast,
-    getCurrentHref,
-} from "./content.js"
+	ensureAllTabsAvailability,
+	getAllTabs,
+	getCurrentHref,
+	// functions
+	//sf_sendMessage,
+	getIsCurrentlyOnSavedTab,
+	getWasOnSavedTab,
+	isOnSavedTab,
+	performActionOnTabs,
+	showToast,
+} from "./content.js";
 
 let allTabs;
 const interval = setInterval(() => {
-    try {
-        allTabs = getAllTabs();
-        clearInterval(interval);
-    } catch (_) {
-        // wait next interval
-    }
-}, 100)
+	try {
+		allTabs = getAllTabs();
+		clearInterval(interval);
+	} catch (_) {
+		// wait next interval
+	}
+}, 100);
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;
 const STAR_ID = `${EXTENSION_NAME}-star`;
@@ -118,8 +116,9 @@ function generateFavouriteButton() {
  * @param {HTMLElement} [button=null] - the HTMLElement of the button which is parent of the favouriteId.
  */
 function getFavouriteImage(favouriteId, button = null) {
-    if(favouriteId == null)
-        throw new Error("Cannot get favourite image without the Id");
+	if (favouriteId == null) {
+		throw new Error("Cannot get favourite image without the Id");
+	}
 	return button?.querySelector(`#${favouriteId}`) ??
 		button?.querySelector(`.${favouriteId}`) ??
 		document.getElementById(favouriteId) ??
@@ -161,12 +160,12 @@ async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
 	let org;
 
-    const href = location.href;
-    if (await Tab.containsSalesforceId(href)) {
+	const href = location.href;
+	if (await Tab.containsSalesforceId(href)) {
 		org = Tab.extractOrgName(href);
-    }
+	}
 
-	await performActionOnTabs("add",{ label, url, org })
+	await performActionOnTabs("add", { label, url, org });
 }
 /**
  * Adds or removes the current tab from the saved tabs list based on the button's state.
@@ -176,19 +175,19 @@ async function addTab(url) {
 async function actionFavourite() {
 	const url = Tab.minifyURL(getCurrentHref());
 
-    if (getIsCurrentlyOnSavedTab()) {
-        await ensureAllTabsAvailability();
-        const tabToRemove = allTabs.getTabsByData({url})[0];
-        if(tabToRemove == null){
-            showToast("Cannot remove a non favourite Tab!", false, true);
-            return;
-        }
-		await performActionOnTabs("remove-this",tabToRemove);
-    } else {
-        await addTab(url);
-    }
+	if (getIsCurrentlyOnSavedTab()) {
+		await ensureAllTabsAvailability();
+		const tabToRemove = allTabs.getTabsByData({ url })[0];
+		if (tabToRemove == null) {
+			showToast("Cannot remove a non favourite Tab!", false, true);
+			return;
+		}
+		await performActionOnTabs("remove-this", tabToRemove);
+	} else {
+		await addTab(url);
+	}
 
-    toggleFavouriteButton();
+	toggleFavouriteButton();
 }
 
 /**
@@ -201,7 +200,7 @@ export async function showFavouriteButton(count = 0) {
 		console.error("Again, Why Salesforce - failed to find headers.");
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}
-    const miniURL = Tab.minifyURL(getCurrentHref());
+	const miniURL = Tab.minifyURL(getCurrentHref());
 
 	// Do not add favourite button on Home and Object Manager
 	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
@@ -216,7 +215,7 @@ export async function showFavouriteButton(count = 0) {
 	}
 
 	// ensure we have clean data
-    const isCurrentlyOnSavedTab = getIsCurrentlyOnSavedTab();
+	const isCurrentlyOnSavedTab = getIsCurrentlyOnSavedTab();
 	if (getWasOnSavedTab() == null && isCurrentlyOnSavedTab == null) {
 		await isOnSavedTab();
 	}
@@ -224,8 +223,8 @@ export async function showFavouriteButton(count = 0) {
 	const oldButton = header.querySelector(`#${BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
-        await ensureAllTabsAvailability();
-        toggleFavouriteButton(allTabs.exists({url: miniURL}));
+		await ensureAllTabsAvailability();
+		toggleFavouriteButton(allTabs.exists({ url: miniURL }));
 		return;
 	}
 	const button = generateFavouriteButton();

@@ -73,12 +73,15 @@ let currentTab;
  * @param {string} url - the URL to be opened
  */
 function createTab(url, count = 0) {
-    if(count > 5){
-        throw new Error("Could not find browser tab.");
-    }
-    if(currentTab == null){
-        return nss_getCurrentBrowserTab((url) => createTab(url, count+1), url);
-    }
+	if (count > 5) {
+		throw new Error("Could not find browser tab.");
+	}
+	if (currentTab == null) {
+		return nss_getCurrentBrowserTab(
+			(url) => createTab(url, count + 1),
+			url,
+		);
+	}
 	chrome.tabs.create({
 		url: url,
 		index: Math.floor(currentTab.index) + 1,
@@ -93,13 +96,13 @@ function createTab(url, count = 0) {
  * @param {string} url - the url to pass to the callback function
  */
 function nss_getCurrentBrowserTab(callback, url) {
-    chrome.runtime.sendMessage(
-        { message: {what: "browser-tab"} },
-        (browserTab) => {
-            currentTab = browserTab;
-            callback != null && callback(url);
-        },
-    );
+	chrome.runtime.sendMessage(
+		{ message: { what: "browser-tab" } },
+		(browserTab) => {
+			currentTab = browserTab;
+			callback != null && callback(url);
+		},
+	);
 }
 
 // close the popup when the user clicks on the redirection link

@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
-import { Tab } from '/tab.js';
-import { TabContainer } from '/tabContainer.js';
+import { Tab } from "/tab.js";
+import { TabContainer } from "/tabContainer.js";
 import "/salesforce/generator.js ";
 import "/salesforce/favourite-manager.js";
 import "/dragHandler.js";

@@ -1,32 +1,30 @@
 "use strict";
+import { EXTENSION_NAME } from "/constants.js";
 import {
-	EXTENSION_NAME,
-} from "/constants.js"
+	generateCheckboxWithLabel,
+	generateSection,
+	generateSldsFileInput,
+	generateSldsModal,
+	MODAL_ID,
+} from "./generator.js";
 import {
-    generateSldsFileInput,
-    generateSldsModal,
-    generateCheckboxWithLabel,
-    MODAL_ID,
-    generateSection,
-} from "./generator.js"
-import {
-    // functions
-    showToast,
-    getModalHanger,
-    getAllTabs,
-    ensureAllTabsAvailability,
-    getSetupTabUl,
-} from "./content.js"
+	ensureAllTabsAvailability,
+	getAllTabs,
+	getModalHanger,
+	getSetupTabUl,
+	// functions
+	showToast,
+} from "./content.js";
 
 let allTabs;
 const interval = setInterval(() => {
-    try {
-        allTabs = getAllTabs();
-        clearInterval(interval);
-    } catch (_) {
-        // wait next interval
-    }
-}, 100)
+	try {
+		allTabs = getAllTabs();
+		clearInterval(interval);
+	} catch (_) {
+		// wait next interval
+	}
+}, 100);
 
 let overwritePick;
 let otherOrgPick;
@@ -102,21 +100,27 @@ function generateSldsImport() {
 
 reader.onload = async (e) => {
 	try {
-        const jsonString = e.target.result;
-        await ensureAllTabsAvailability();
-        const importedNum = await allTabs.importTabs(jsonString, overwritePick, otherOrgPick);
-        // remove file import
-        document.getElementById(CLOSE_MODAL_ID).click();
-        showToast(`Successfully imported ${importedNum} tabs.`,true);
-        if(jsonString.includes("tabTitle")){
-            // export and toast
-            chrome.runtime.sendMessage({message: { what: "export", tabs: JSON.parse(jsonString) }});
-            showToast(
-                "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
-                false,
-                true,
-            );
-        }
+		const jsonString = e.target.result;
+		await ensureAllTabsAvailability();
+		const importedNum = await allTabs.importTabs(
+			jsonString,
+			overwritePick,
+			otherOrgPick,
+		);
+		// remove file import
+		document.getElementById(CLOSE_MODAL_ID).click();
+		showToast(`Successfully imported ${importedNum} tabs.`, true);
+		if (jsonString.includes("tabTitle")) {
+			// export and toast
+			chrome.runtime.sendMessage({
+				message: { what: "export", tabs: JSON.parse(jsonString) },
+			});
+			showToast(
+				"You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
+				false,
+				true,
+			);
+		}
 	} catch (error) {
 		showToast(
 			`Error during import:\n${error.message}`,

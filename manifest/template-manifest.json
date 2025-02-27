@@ -7,7 +7,7 @@
 		"tabs",
 		"activeTab",
 		"contextMenus",
-        "downloads"
+		"downloads"
 	],
 	"description": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
@@ -20,7 +20,7 @@
 			"js": [
 				"salesforce/bundledContent.js"
 			],
-            "type": "module",
+			"type": "module",
 			"run_at": "document_end"
 		}
 	],
@@ -61,7 +61,7 @@
 	"background": {
 		"service_worker": "background/bundledBackground.js",
 		"scripts": [
-            "background/bundledBackground.js"
+			"background/bundledBackground.js"
 		],
 		"type": "module"
 	},

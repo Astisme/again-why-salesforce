@@ -1,7 +1,7 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
 import {
-    BROWSER,
+	BROWSER,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	MY_SALESFORCE_COM,
@@ -11,10 +11,10 @@ import {
 } from "../constants.js";
 import {
 	bg_expandURL,
+	bg_getCurrentBrowserTab,
 	bg_minifyURL,
 	bg_notify,
 	exportHandler,
-    bg_getCurrentBrowserTab,
 } from "./utils.js";
 //import { TabContainer } from "../tabContainer.js";
 
@@ -27,8 +27,8 @@ export function bg_getStorage(callback) {
 	BROWSER.storage.sync.get(
 		[WHY_KEY],
 		(items) => {
-            callback(items[WHY_KEY]);
-        }
+			callback(items[WHY_KEY]);
+		},
 	);
 }
 
@@ -42,9 +42,9 @@ function bg_setStorage(tabs, callback) {
 	const set = {};
 	set[WHY_KEY] = tabs;
 	BROWSER.storage.sync.set(set, () => {
-        callback(null);
-        //bg_notify({what:"saved",tabs});
-    });
+		callback(null);
+		//bg_notify({what:"saved",tabs});
+	});
 }
 
 /**
@@ -55,7 +55,9 @@ function bg_setStorage(tabs, callback) {
  */
 export function bg_extractOrgName(url) {
 	if (url == null) {
-		return bg_getCurrentBrowserTab(browserTab => bg_extractOrgName(browserTab.url))
+		return bg_getCurrentBrowserTab((browserTab) =>
+			bg_extractOrgName(browserTab.url)
+		);
 	}
 	let host = new URL(
 		url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
@@ -140,17 +142,17 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 			sendResponse(null);
 			//return false;
 			break;
-        case "browser-tab":
-            bg_getCurrentBrowserTab(sendResponse, message.popup);
-            break;
+		case "browser-tab":
+			bg_getCurrentBrowserTab(sendResponse, message.popup);
+			break;
 		default:
 			//captured = ["import"].includes(message.what);
 			//if (!captured) {
-            if(!["import"].includes(message.what)){
+			if (!["import"].includes(message.what)) {
 				console.error({ "error": "Unknown message", message, request });
 			}
 			break;
 	}
 	//return captured; // will call sendResponse asynchronously if true
-    return true;
+	return true;
 });

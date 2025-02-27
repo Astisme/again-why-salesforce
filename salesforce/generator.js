@@ -1,15 +1,15 @@
 "use strict";
 import {
-	SETUP_LIGHTNING,
+	EXTENSION_NAME,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
-	EXTENSION_NAME,
- } from "../constants.js";
+	SETUP_LIGHTNING,
+} from "../constants.js";
 import {
-    // functions
-    //sf_sendMessage,
-    getCurrentHref,
-    showToast,
+	// functions
+	//sf_sendMessage,
+	getCurrentHref,
+	showToast,
 } from "./content.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
@@ -28,7 +28,7 @@ const MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
  */
 function getRng_n_digits(digits = 1) {
 	if (digits <= 1) {
-		throw new Error("Cannot create rng with less than 1 digit.")
+		throw new Error("Cannot create rng with less than 1 digit.");
 	}
 	const tenToTheDigits = Math.pow(10, digits - 1);
 	return Math.floor(Math.random() * 9 * tenToTheDigits) +
@@ -55,11 +55,13 @@ function handleLightningLinkClick(e) {
 			: "_top";
 	}
 	const url = e.currentTarget.href;
-    if(url == null){
-        showToast("Cannot redirect. Please refresh the page.", false);
-        return;
-    }
-    const target = e.currentTarget.target !== "" ? e.currentTarget.target : getLinkTarget(e, url);
+	if (url == null) {
+		showToast("Cannot redirect. Please refresh the page.", false);
+		return;
+	}
+	const target = e.currentTarget.target !== ""
+		? e.currentTarget.target
+		: getLinkTarget(e, url);
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
 	if (target === "_blank" || url === getCurrentHref()) {
 		open(url, target);
@@ -86,37 +88,37 @@ export function generateRowTemplate(row) {
 	const { label, url } = row;
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url);
-    const li = document.createElement("li");
-    li.setAttribute("role", "presentation");
-    li.classList.add(
-        "oneConsoleTabItem",
-        "tabItem",
-        "slds-context-bar__item",
-        "borderRight",
-        "navexConsoleTabItem",
-        EXTENSION_NAME,
-    );
-    li.setAttribute("data-aura-class", "navexConsoleTabItem");
-    const a = document.createElement("a");
-    a.setAttribute("data-draggable", "true");
-    a.setAttribute("role", "tab");
-    a.setAttribute("tabindex", "-1");
-    a.setAttribute("title", miniURL);
-    a.setAttribute("aria-selected", "false");
-    a.setAttribute("href", expURL);
-    a.classList.add("tabHeader", "slds-context-bar__label-action");
-    a.style.zIndex = 0;
-    a.addEventListener("click", handleLightningLinkClick);
-    const span = document.createElement(row.org == null ? "span" : "b");
-    span.classList.add("title", "slds-truncate");
-    span.textContent = label;
-    a.appendChild(span);
-    li.appendChild(a);
-    // Highlight the tab related to the current page
-    if (getCurrentHref() === expURL) {
-        li.classList.add("slds-is-active");
-    }
-    return li;
+	const li = document.createElement("li");
+	li.setAttribute("role", "presentation");
+	li.classList.add(
+		"oneConsoleTabItem",
+		"tabItem",
+		"slds-context-bar__item",
+		"borderRight",
+		"navexConsoleTabItem",
+		EXTENSION_NAME,
+	);
+	li.setAttribute("data-aura-class", "navexConsoleTabItem");
+	const a = document.createElement("a");
+	a.setAttribute("data-draggable", "true");
+	a.setAttribute("role", "tab");
+	a.setAttribute("tabindex", "-1");
+	a.setAttribute("title", miniURL);
+	a.setAttribute("aria-selected", "false");
+	a.setAttribute("href", expURL);
+	a.classList.add("tabHeader", "slds-context-bar__label-action");
+	a.style.zIndex = 0;
+	a.addEventListener("click", handleLightningLinkClick);
+	const span = document.createElement(row.org == null ? "span" : "b");
+	span.classList.add("title", "slds-truncate");
+	span.textContent = label;
+	a.appendChild(span);
+	li.appendChild(a);
+	// Highlight the tab related to the current page
+	if (getCurrentHref() === expURL) {
+		li.classList.add("slds-is-active");
+	}
+	return li;
 }
 
 /**

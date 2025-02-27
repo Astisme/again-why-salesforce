@@ -6,16 +6,16 @@
 		"singleQuote": false,
 		"proseWrap": "never",
 		"exclude": [
-            "*.git*",
-            "*bundled*"
-        ]
+			"*.git*",
+			"*bundled*"
+		]
 	},
 	"tasks": {
 		"test": "deno test --no-check",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 
-        "bundle": "deno run -A bin/build.ts",
+		"bundle": "deno run -A bin/build.ts",
 
 		"dev-firefox": "deno --allow-write manifest/build-manifest.mjs firefox && deno task bundle",
 		"dev-chrome": "deno --allow-write manifest/build-manifest.mjs chrome && deno task bundle",
