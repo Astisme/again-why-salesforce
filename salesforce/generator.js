@@ -815,12 +815,12 @@ export function generateOpenOtherOrgModal(miniURL, label) {
 		type: "text",
 		required: true,
 		placeholder: "other-org",
-		style: "width: 50%",
+		style: "width: 100%",
 	};
 	const { inputParent, inputContainer } = generateInput(orgLinkInputConf);
 	const httpsSpan = document.createElement("span");
 	httpsSpan.append(HTTPS);
-	httpsSpan.style.height = "1.5rem";
+	httpsSpan.style.height = "1rem";
 	divParent.appendChild(httpsSpan);
 	divParent.appendChild(inputParent);
 	const linkEnd = document.createElement("span");
