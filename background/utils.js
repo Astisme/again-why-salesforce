@@ -139,13 +139,13 @@ export function bg_expandURL(message) {
  */
 function _exportHandler(tabs) {
 	//const dataUrl = "data:application/json;charset=utf-8," +
-		//encodeURIComponent(JSON.stringify(tabs));
-    const jsonData = JSON.stringify(tabs);
-    const blob = new Blob([jsonData], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
+	//encodeURIComponent(JSON.stringify(tabs));
+	const jsonData = JSON.stringify(tabs);
+	const blob = new Blob([jsonData], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
 	BROWSER.downloads.download({
 		//url: dataUrl,
-        url,
+		url,
 		filename: "again-why-salesforce.json",
 	});
 }
