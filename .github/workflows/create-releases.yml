@@ -5,6 +5,7 @@ on:
     tags:
       - "chrome-v*.*.*"
       - "firefox-v*.*.*"
+      - "edge-v*.*.*"
       - "safari-v*.*.*"
 
 permissions:
@@ -14,47 +15,38 @@ jobs:
     setup-and-build:
         runs-on: ubuntu-latest
         steps:
-            - name: Define prefix
-              run: echo "AWSF=awsf" >> $GITHUB_ENV
-
             - name: Setup repo
               uses: actions/checkout@v4
 
-            - name: Define file name with version
+            - name: Define variables
               run: |
+                AWSF=awsf
+                echo "AWSF=$AWSF" >> $GITHUB_ENV
+
                 TAG="${GITHUB_REF_NAME}"
-
-                BROWSER=${TAG%%-v*} # Extract substring before '-v'
-                TAG_VERSION=${TAG##*-v} # Extract substring after '-v'
-                PURE_VERSION=${TAG_VERSION%%-*} # Extract substring before any additional '-' (like '-alpha')
-                MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json) # Get version from manifest
-
-                PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")
-
-                BROWSER_VERSION_NAME="${{ env.AWSF }}-$BROWSER-v$MANIFEST_VERSION"
-
                 echo "TRIGGERING_TAG=$TAG" >> $GITHUB_ENV
+                # Extract substring before '-v'
+                BROWSER=${TAG%%-v*}
                 echo "BROWSER=$BROWSER" >> $GITHUB_ENV
-                echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
-                echo "MANIFEST_VERSION=$MANIFEST_VERSION" >> $GITHUB_ENV
-                echo "BROWSER_VERSION_NAME=$BROWSER_VERSION_NAME" >> $GITHUB_ENV
-                echo "ZIP_NAME=$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
+                # Get version from manifest
+                MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)
+                BROWSER_VERSION_NAME="$AWSF-$BROWSER-v$MANIFEST_VERSION"
+
+                echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+
+                # Extract substring after '-v'
+                TAG_VERSION=${TAG##*-v}
+                # Extract substring before any additional '-' (like '-alpha')
+                PURE_VERSION=${TAG_VERSION%%-*}
                 echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
-                echo "PRERELEASE=$PRERELEASE" >> $GITHUB_ENV
 
             - name: Setup Deno
               uses: denoland/setup-deno@v2
               with:
                   deno-version: v2.x
 
-            - name: Make Manifest
-              run: |
-                deno task dev-${{ env.BROWSER }}
-                ls manifest.json # if the file does not exist, fails the script
-
-            - name: Zip ${{ env.BROWSER }} extension
-              shell: bash
-              run: zip -r ${{ env.ZIP_NAME }} action assets background salesforce *.js LICENSE* README.md manifest.json -x "*/README.md"
+            - name: Build Extension
+              run: deno task build-${{ env.BROWSER }}
 
             - name: Create ${{ env.BROWSER }} Release
               uses: softprops/action-gh-release@v2

@@ -6,7 +6,8 @@
 		"storage",
 		"tabs",
 		"activeTab",
-		"contextMenus"
+		"contextMenus",
+		"downloads"
 	],
 	"description": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
@@ -17,11 +18,7 @@
 				"https://*.lightning.force.com/lightning/setup/*"
 			],
 			"js": [
-				"./salesforce/generator.js",
-				"./salesforce/favourite-manager.js",
-				"./dragHandler.js",
-				"./salesforce/import.js",
-				"./salesforce/content.js"
+				"salesforce/bundledContent.js"
 			],
 			"run_at": "document_end"
 		}
@@ -48,20 +45,23 @@
 		}
 	],
 	"icons": {
-		"16": "./assets/icons/awsf-16.png",
-		"32": "./assets/icons/awsf-32.png",
-		"64": "./assets/icons/awsf-64.png",
-		"128": "./assets/icons/awsf-128.png",
-		"256": "./assets/icons/awsf-256.png",
-		"512": "./assets/icons/awsf-512.png",
-		"1024": "./assets/icons/awsf-1024.png"
+		"16": "assets/icons/awsf-16.png",
+		"32": "assets/icons/awsf-32.png",
+		"64": "assets/icons/awsf-64.png",
+		"128": "assets/icons/awsf-128.png",
+		"256": "assets/icons/awsf-256.png",
+		"512": "assets/icons/awsf-512.png",
+		"1024": "assets/icons/awsf-1024.png"
 	},
 	"action": {
 		"default_title": "Again, Why Salesforce",
-		"default_popup": "./action/popup/popup.html"
+		"default_popup": "action/popup/popup.html"
 	},
 	"background": {
-		"service_worker": "./background/background.js",
+		"service_worker": "background/bundledBackground.js",
+		"scripts": [
+			"background/bundledBackground.js"
+		],
 		"type": "module"
 	},
 	"minimum_chrome_version": "120.0.0",
