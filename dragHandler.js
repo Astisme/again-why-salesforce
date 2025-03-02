@@ -46,26 +46,27 @@ function handleDrop(e) {
 	e.stopPropagation();
 	e.preventDefault();
 
-	const targetRow = e.target.parentNode; // Get the target row
+	const targetRow = e.target.closest(closestTag); // Get the target row
 
-	if (dragSrcEl != this && targetRow.tagName.toLowerCase() == closestTag) {
-		// Swap the positions of the dragged row and the target row
-		const parent = targetRow.parentNode; // Get the parent node (tbody)
-		const targetIndex = [...parent.children].indexOf(targetRow); // Get the index of the target row
-		const dragSrcIndex = [...parent.children].indexOf(dragSrcEl); // Get the index of the dragged row
+	if (dragSrcEl == this || targetRow.tagName.toLowerCase() != closestTag) {
+        return false;
+    }
 
-		if (targetIndex > dragSrcIndex) {
-			// If the target row is after the dragged row, insert the dragged row before the target row
-			parent.insertBefore(dragSrcEl, targetRow);
-		} else {
-			// If the target row is before the dragged row, insert the dragged row after the target row
-			parent.insertBefore(dragSrcEl, targetRow.nextSibling);
-		}
+    // Swap the positions of the dragged row and the target row
+    const parent = targetRow.parentNode; // Get the parent node (tbody)
+    const targetIndex = [...parent.children].indexOf(targetRow); // Get the index of the target row
+    const dragSrcIndex = [...parent.children].indexOf(dragSrcEl); // Get the index of the dragged row
 
-		e.target.style.cursor = "grab";
-		postMessage({ what: "order" }, "*");
-	}
-	return false;
+    if (targetIndex > dragSrcIndex) {
+        // If the target row is after the dragged row, insert the dragged row before the target row
+        parent.insertBefore(dragSrcEl, targetRow);
+    } else {
+        // If the target row is before the dragged row, insert the dragged row after the target row
+        parent.insertBefore(dragSrcEl, targetRow.nextSibling);
+    }
+
+    e.target.style.cursor = "grab";
+    postMessage({ what: "order" }, "*");
 }
 
 function createListeners() {

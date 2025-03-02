@@ -41,9 +41,8 @@ class Tab {
 	 * @param {string|Object} labelOrTab - the text that will represent the tab OR the object from which to create the Tab
 	 * @param {string} url - the minifiedURL that represents the link to where the tab points
 	 * @param {string|undefined} [org=undefined] - the org to which the tab is specific to
-	 * // TESTOK
 	 */
-	static async create(labelOrTab, url = null, org = undefined) {
+	static create(labelOrTab, url = null, org = undefined) {
 		if (Tab.isTab(labelOrTab)) {
 			return labelOrTab;
 		}
@@ -68,7 +67,7 @@ class Tab {
 			}
 
 			// TODO tabTitle will be removed in a later version
-			const createdTab = await Tab.create(
+			const createdTab = Tab.create(
 				tab.label ?? tab.tabTitle,
 				tab.url,
 				tab.org,
@@ -243,7 +242,6 @@ class Tab {
 
 	/**
 	 * Checks if the inputted object is an instanceof Tab
-	 * // TESTOK
 	 */
 	static isTab(tab) {
 		return tab instanceof Tab;
@@ -253,11 +251,10 @@ class Tab {
 	 * Checks if the tab passed is (or could be) a Tab.
 	 * @param {Object} tab - the tab to be checked
 	 * @returns {boolean} true if the tab is a Tab; false otherwise
-	 * // TESTOK
 	 */
-	static async isValid(tab) {
+	static isValid(tab) {
 		try {
-			await Tab.create(tab);
+			Tab.create(tab);
 			return true;
 		} catch (error) {
 			console.log("Invalid Tab: ", error.message);
@@ -269,7 +266,6 @@ class Tab {
 	/**
 	 * Transforms a Tab into a JSON Object.
 	 * @returns {Object} this Tab transformed into an Object
-	 * // TESTOK
 	 */
 	toJSON() {
 		const res = {
@@ -285,7 +281,6 @@ class Tab {
 	/**
 	 * Transforms a Tab into a JSON String.
 	 * @returns {String} this Tab transformed into a JSON String
-	 * // TESTOK
 	 */
 	toString() {
 		return JSON.stringify(this.toJSON(), null, 4);
@@ -298,7 +293,6 @@ class Tab {
 	 * @param {*} param0.url - the url of the tab to check
 	 * @param {*} param0.org - the org of the tab to check
 	 * @returns {boolean} whether the tabs are equal
-	 * // TESTOK
 	 */
 	equals({ label, url, org } = {}) {
 		return !(label == null && url == null && org == null) &&

@@ -206,11 +206,11 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 		assertEquals(org2Tabs[0].label, "Org2 Tab");
 		assertEquals(org2Tabs[1].label, "Org2 Tab2");
 
-		const noOrgTabs = await container.getTabsWithOrg(false);
+		const noOrgTabs = container.getTabsWithOrg(false);
 		assertEquals(noOrgTabs.length, 4);
 		assertEquals(noOrgTabs[noOrgTabs.length - 1].label, "No Org Tab");
 
-		const onlyOrgTabs = await container.getTabsWithOrg();
+		const onlyOrgTabs = container.getTabsWithOrg();
 		assertEquals(onlyOrgTabs.length, 3);
 		assertEquals(onlyOrgTabs[onlyOrgTabs.length - 1].label, "Org2 Tab2");
 	});
@@ -558,6 +558,42 @@ await Deno.test("TabContainer - Tab Replacement", async (t) => {
 });
 
 await Deno.test("TabContainer - Utility functions", async (t) => {
+	await t.step("slice", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+        {
+            const a = container.slice(0, 1)
+            assertEquals(a.length, 1);
+            assertEquals(a[0].label, "⚡");
+            assertEquals(container.length, 3);
+        }
+		assertEquals(container.slice(1, 1).length, 0);
+		assertEquals(container.slice(1, 0).length, 0);
+		assertEquals(container.length, 3);
+		assert(
+			await container.addTabs([
+				{ label: "Org Tab", url: "url", org: "test-org" },
+				{ label: "Normal Tab", url: "normal-url" },
+				{ label: "Org Tab2", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+			]),
+		);
+		assertEquals(container.length, 7);
+        {
+            const a = container.slice(2, container.length);
+            assertEquals(a.length, 5);
+            assertEquals(a[0].label, "Users");
+            assertEquals(a[1].label, "Org Tab");
+            assertEquals(a[2].label, "Normal Tab");
+            assertEquals(a[3].label, "Org Tab2");
+            assertEquals(a[4].label, "Org Tab3");
+            assertEquals(container.length, 7);
+        }
+        assertEquals(container.slice().length, 7);
+        assertEquals(container.length, 7);
+    });
+
 	await t.step("splice", async () => {
 		mockStorage.tabs = [];
 		const container = await TabContainer.create();
@@ -746,7 +782,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
-		assertEquals(await container.toJSON(), [
+		assertEquals(container.toJSON(), [
 			{
 				label: "⚡",
 				url: "/lightning",
@@ -760,7 +796,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				url: "ManageUsers/home",
 			},
 		]);
-		assertEquals(await TabContainer.toJSON(container), [
+		assertEquals(TabContainer.toJSON(container), [
 			{
 				label: "⚡",
 				url: "/lightning",
@@ -782,7 +818,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.length, 3);
 
 		assertEquals(
-			await container.toString(),
+			container.toString(),
 			`[
 {
     "label": "⚡",
@@ -799,7 +835,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 ]`,
 		);
 		assertEquals(
-			await TabContainer.toString(container),
+			TabContainer.toString(container),
 			`[
 {
     "label": "⚡",
@@ -821,11 +857,11 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		mockStorage.tabs = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
-		assert(await TabContainer.isValid(container, false));
-		assert(await TabContainer.isValid(container, true));
-		const customContainer = await container.toJSON();
-		assert(await TabContainer.isValid(customContainer, false));
-		assert(await TabContainer.isValid(customContainer, true));
+		assert(TabContainer.isValid(container, false));
+		assert(TabContainer.isValid(container, true));
+		const customContainer = container.toJSON();
+		assert(TabContainer.isValid(customContainer, false));
+		assert(TabContainer.isValid(customContainer, true));
 		const untabbedContainer = [
 			{
 				random: "string",
@@ -838,14 +874,14 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				},
 			},
 		];
-		assert(await TabContainer.isValid(untabbedContainer, false));
-		assertFalse(await TabContainer.isValid(untabbedContainer, true));
+		assert(TabContainer.isValid(untabbedContainer, false));
+		assertFalse(TabContainer.isValid(untabbedContainer, true));
 		const notAnArray = "Goodbye Celsa";
-		assertFalse(await TabContainer.isValid(notAnArray, false));
-		assertFalse(await TabContainer.isValid(notAnArray, true));
+		assertFalse(TabContainer.isValid(notAnArray, false));
+		assertFalse(TabContainer.isValid(notAnArray, true));
 
-		assertFalse(await TabContainer.isValid(null, false));
-		assertFalse(await TabContainer.isValid(null, true));
+		assertFalse(TabContainer.isValid(null, false));
+		assertFalse(TabContainer.isValid(null, true));
 	});
 
 	await t.step("map", async () => {
@@ -1035,17 +1071,44 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
 		matchStorageToContainer(container);
-
+		assert(
+			await container.addTabs([
+				{ label: "Org Tab", url: "url", org: "test-org" },
+				{ label: "Normal Tab", url: "normal-url" },
+				{ label: "Org Tab2", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+			]),
+		);
+		assertEquals(container.length, 7);
 		assertEquals(
 			await container.moveTab({ url: "ManageUsers/home" }, {
 				fullMovement: true,
 			}),
 			0,
 		);
-		assertEquals(container.length, 3);
+		assertEquals(container.length, 7);
 		assertEquals(container[0].url, "ManageUsers/home");
 		assertEquals(container[1].url, "/lightning");
 		assertEquals(container[2].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[3].url, "url");
+		assertEquals(container[4].url, "normal-url");
+		assertEquals(container[5].url, "urll");
+		assertEquals(container[6].url, "urll");
+		matchStorageToContainer(container);
+		assertEquals(
+			await container.moveTab({ url: "normal-url" }, {
+				moveBefore: false,
+			}),
+			5,
+		);
+		assertEquals(container.length, 7);
+		assertEquals(container[0].url, "ManageUsers/home");
+		assertEquals(container[1].url, "/lightning");
+		assertEquals(container[2].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[3].url, "url");
+		assertEquals(container[4].url, "urll");
+        assertEquals(container[5].url, "normal-url");
+		assertEquals(container[6].url, "urll");
 		matchStorageToContainer(container);
 	});
 
@@ -1189,22 +1252,22 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 
 await Deno.test("TabContainer - Error on Invalid Tabs", async (t) => {
 	await t.step("errorOnInvalidTabs", () => {
-		assertRejects(
-			async () => await TabContainer.errorOnInvalidTabs(),
+		assertThrows(
+			() => TabContainer.errorOnInvalidTabs(),
 			Error,
 		);
-		assertRejects(
-			async () => await TabContainer.errorOnInvalidTabs("reject"),
+		assertThrows(
+			() => TabContainer.errorOnInvalidTabs("reject"),
 			Error,
 		);
-		assertRejects(
-			async () =>
-				await TabContainer.errorOnInvalidTabs([{ unexpected: true }]),
+		assertThrows(
+			() =>
+				TabContainer.errorOnInvalidTabs([{ unexpected: true }]),
 			Error,
 		);
-		assertRejects(
-			async () =>
-				await TabContainer.errorOnInvalidTabs([{
+		assertThrows(
+			() =>
+				TabContainer.errorOnInvalidTabs([{
 					label: "hi",
 					url: "mum",
 					orgs: ["alpha", "beta"],

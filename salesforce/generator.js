@@ -86,7 +86,7 @@ function handleLightningLinkClick(e) {
 export function generateRowTemplate(row) {
 	const { label, url } = row;
 	const miniURL = Tab.minifyURL(url);
-	const expURL = Tab.expandURL(url);
+	const expURL = Tab.expandURL(url, getCurrentHref());
 	const li = document.createElement("li");
 	li.setAttribute("role", "presentation");
 	li.classList.add(

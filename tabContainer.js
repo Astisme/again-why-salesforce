@@ -18,7 +18,6 @@ export class TabContainer extends Array {
 	}
 
 	/**
-	 * //TESTOK
 	 */
 	static async create(tabs = null) {
 		const tabcont = new TabContainer(_tabContainerSecret);
@@ -64,7 +63,6 @@ export class TabContainer extends Array {
 	 * @param {number} deleteCount - Number of elements to delete
 	 * @param {...Tab} items - Items to insert
 	 * @returns {Tab[]} - Array of removed elements
-	 * //TESTOK
 	 */
 	splice(start, deleteCount, ...items) {
 		// Normalize start (assumes start can be negative)
@@ -75,42 +73,18 @@ export class TabContainer extends Array {
 		}
 		// Clamp deleteCount so we don’t remove more than available
 		deleteCount = Math.max(0, Math.min(deleteCount, this.length - start));
-
 		// Create an array directly without using any Array methods
 		const removedItems = [];
-
 		// Manually copy the items to be removed
 		for (let i = 0; i < deleteCount; i++) {
 			if (start + i < this.length) {
 				removedItems.push(this[start + i]);
 			}
 		}
-
-		// Calculate the new length
-		const newLength = this.length - deleteCount + items.length;
 		// Create a temporary array to hold the new result
-		const temp = new Array(newLength);
-		let j = 0;
-
-		// Copy elements before start
-		for (let i = 0; i < start; i++) {
-			temp[j++] = this[i];
-		}
-		// Copy the inserted items
-		for (let i = 0; i < items.length; i++) {
-			temp[j++] = items[i];
-		}
-		// Copy the rest of the original elements
-		for (let i = start + deleteCount; i < this.length; i++) {
-			temp[j++] = this[i];
-		}
-
-		// Copy back into "this" and update length
-		for (let i = 0; i < newLength; i++) {
-			this[i] = temp[i];
-		}
-		this.length = newLength;
-
+        const temp = this.slice(start + deleteCount);
+        this.length = start;
+        this.push(...items, ...temp);
 		return removedItems;
 	}
 
@@ -132,33 +106,25 @@ export class TabContainer extends Array {
 	 * const newContainer = container.slice(1, 2);
 	 * // newContainer contains [{id: 2}]
 	 */
-	/*
     slice(start = 0, end = this.length) {
         // Convert negative indices to positive
-        let normalizedStart = start < 0
+        start = start < 0
             ? Math.max(this.length + start, 0)
             : Math.min(start, this.length);
-
-        let normalizedEnd = end < 0
+        end = end < 0
             ? Math.max(this.length + end, 0)
             : Math.min(end, this.length);
-
         // Ensure start is not greater than end
-        if (normalizedStart > normalizedEnd) {
-            normalizedStart = normalizedEnd;
+        if (start >= end) {
+            return [];
         }
-
         const sliced = [];
         // Copy elements to the new array
-        for (let i = normalizedStart; i < normalizedEnd; i++) {
-            if (i in this) {
-                sliced.push(this[i]);
-            }
+        for (let i = start; i < end && i < this.length; i++) {
+            sliced.push(this[i]);
         }
-
         return sliced;
     }
-    */
 
 	/**
 	 * Creates a new array with all elements that pass the test implemented by the provided function.
@@ -170,7 +136,6 @@ export class TabContainer extends Array {
 	 *    - array: The array filter was called upon
 	 * @returns {Array} A new array with the elements that pass the test.
 	 *    If no elements pass the test, an empty array will be returned.
-	 * //TESTOK
 	 */
 	filter(callback) {
 		// Create a new instance of the same class
@@ -190,27 +155,23 @@ export class TabContainer extends Array {
 	/**
 	 * Initializes the tabs based on the synced tabs from the background.
 	 * Gets all the available tabs while also looking for synced ones.
-	 * //TESTOK
 	 */
 	async _initialize(tabs = null) {
 		async function checkAddTabs(context, tabs) {
-			if (await TabContainer.isValid(tabs, false)) {
+			if (TabContainer.isValid(tabs, false)) {
 				return await context.addTabs(tabs);
 			}
 			return false;
 		}
-
 		const savedTabs = await this.getSavedTabs(false);
 		const addedSomething = await checkAddTabs(this, savedTabs) &&
 			savedTabs.length > 0;
 		if (tabs == null && addedSomething) {
-			return addedSomething;
+			return true;
 		}
-
 		if (await checkAddTabs(this, tabs) || addedSomething) {
 			return true;
 		}
-
 		return await this.setDefaultTabs();
 	}
 
@@ -232,10 +193,9 @@ export class TabContainer extends Array {
 
 	/**
 	 * Initializes the default tabs and syncs them to storage.
-	 * //TESTOK
 	 */
 	async setDefaultTabs() {
-		const res = await this.replaceTabs([
+		return await this.replaceTabs([
 			{ label: "⚡", url: "/lightning" },
 			{ label: "Flows", url: "/lightning/app/standard__FlowsApp" },
 			{ label: "Users", url: "ManageUsers/home" },
@@ -244,7 +204,6 @@ export class TabContainer extends Array {
 			removeOrgTabs: true,
 			sync: true,
 		});
-		return res;
 	}
 
 	/**
@@ -252,21 +211,18 @@ export class TabContainer extends Array {
 	 * @param {Object} tab - Tab object with label, url, and optional org
 	 * @param {boolean} [sync=true] - whether a sync operation should be performed
 	 * @returns {boolean} - Whether the tab was successfully added
-	 * //TESTOK
 	 */
 	async addTab(tab, sync = true) {
-		if (!await Tab.isValid(tab)) { // await is needed
+		if (!Tab.isValid(tab)) {
 			throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
 		}
 		if (this.exists(tab)) {
 			throw new Error(`This tab already exists: ${JSON.stringify(tab)}`);
 		}
-
-		const validTab = await Tab.create(tab);
+		const validTab = Tab.create(tab);
 		this.push(validTab);
-
 		if (sync) {
-			await this.syncTabs();
+			return await this.syncTabs();
 		}
 		return true;
 	}
@@ -276,7 +232,6 @@ export class TabContainer extends Array {
 	 * @param {Array<Tab>} tabs - the tabs to be added
 	 * @param {boolean} [sync=true] - whether a sync operation should be performed
 	 * @returns {boolean} - Whether the tab was successfully added
-	 * //TESTOK
 	 */
 	async addTabs(tabs, sync = true) {
 		//this.push(...tabs);
@@ -284,7 +239,7 @@ export class TabContainer extends Array {
 			return true;
 		}
 
-		await TabContainer.errorOnInvalidTabs(tabs);
+		TabContainer.errorOnInvalidTabs(tabs);
 
 		let addedAll = true;
 		for (const tab of tabs) {
@@ -307,13 +262,13 @@ export class TabContainer extends Array {
 	/*
     async push({sync = true, ...tab} = {}) {
         console.log('push',sync, tab);
-        if (!await Tab.isValid(tab)) { // await is needed
+        if (!Tab.isValid(tab)) { // await is needed
             throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
         }
         if (this.exists(tab)) // await is needed
             throw new Error(`This tab already exists: ${tab.toString()}`);
 
-        const validTab = await Tab.create(tab);
+        const validTab = Tab.create(tab);
         this.push(validTab);
 
         if (sync)
@@ -326,7 +281,6 @@ export class TabContainer extends Array {
 	 * Get tabs with or without an org
 	 * @param {boolean} [getWithOrg=true] - Wheter the org should be checked with or agains
 	 * @returns {Array} - Tabs belonging to the some organization
-	 * //TESTOK
 	 */
 	getTabsWithOrg(getWithOrg = true) {
 		return this.filter((tab) => getWithOrg === (tab.org != null));
@@ -337,7 +291,6 @@ export class TabContainer extends Array {
 	 * @param {string} org - Organization name to filter by
 	 * @param {boolean} [matchOrg=true] - Wheter the org specified should be checked with or agains
 	 * @returns {Array} - Tabs belonging to the specified organization
-	 * //TESTOK
 	 */
 	getTabsByOrg(org = null, matchOrg = true) {
 		if (org == null) {
@@ -352,7 +305,6 @@ export class TabContainer extends Array {
 	}
 
 	/**
-	 * //TESTOK except match = false
 	 */
 	getTabsByData(tab = { label: null, url: null, org: null }, match = true) {
 		if (tab.label == null && tab.url == null) {
@@ -373,7 +325,6 @@ export class TabContainer extends Array {
 	}
 
 	/**
-	 * //TESTOK
 	 */
 	getTabIndex(tab = { label: null, url: null, org: null }) {
 		if (tab.label == null && tab.url == null && tab.org == null) {
@@ -401,7 +352,6 @@ export class TabContainer extends Array {
 	 * @param {string} param0.url - the url of the Tab to find
 	 * @param {string} param0.org - the org of the Tab to find
 	 * @returns {boolean} - Whether the tab exists
-	 * //TESTOK
 	 */
 	exists(tab = { label: undefined, url: undefined, org: undefined }) {
 		if (tab.url != null) {
@@ -460,7 +410,6 @@ export class TabContainer extends Array {
 	 * @example
 	 * // Remove org-specific tabs and add new ones
 	 * replaceTabs([{ label: "a", url: "a", org: "OrgA" }], false, true);
-	 * //TESTOK
 	 */
 	async replaceTabs(newTabs = [], {
 		resetTabs = true,
@@ -468,69 +417,47 @@ export class TabContainer extends Array {
 		sync = true,
 		keepTabsNotThisOrg = null,
 	} = {}) {
-		// If resetTabs, clear existing tabs
-		if (resetTabs) {
-			// if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
-			// else, clear existing tabs which do not have an org set
-			if (removeOrgTabs) {
-				// if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
-				// else, clear existing tabs
-				if (keepTabsNotThisOrg != null) {
-					this.splice(
-						0,
-						this.length,
-						...this.filter((tab) =>
-							tab.org != null && tab.org !== keepTabsNotThisOrg
-						),
-					);
-				} else {
-					this.splice(0, this.length);
-				}
-			} else {
-				// Keep only org-specific tabs
-				this.splice(
-					0,
-					this.length,
-					...this.filter((tab) => tab.org != null),
-				);
-			}
-		} else if (removeOrgTabs) {
-			// if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
-			// else, keep only non-org-specific tabs
-			if (keepTabsNotThisOrg != null) {
-				this.splice(
-					0,
-					this.length,
-					...this.filter((tab) =>
-						tab.org == null || tab.org !== keepTabsNotThisOrg
-					),
-				);
-			} else {
-				this.splice(
-					0,
-					this.length,
-					...this.filter((tab) => tab.org == null),
-				);
-			}
-		}
-
+        if(resetTabs || removeOrgTabs)
+            this.splice(
+              0,
+              this.length,
+              ...this.filter((tab) => {
+                  // If resetTabs, clear existing tabs
+                if (resetTabs) {
+                    // if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
+                    // else, clear existing tabs which do not have an org set
+                    if (!removeOrgTabs) {
+                      return tab.org != null;
+                    } else if (keepTabsNotThisOrg != null) {
+                      return tab.org != null && tab.org !== keepTabsNotThisOrg;
+                        // if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
+                    } else {
+                        // else, clear existing tabs
+                      return false;
+                    }
+                } else if (removeOrgTabs) {
+                    // if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
+                    // else, keep only non-org-specific tabs
+                    return tab.org == null || (keepTabsNotThisOrg != null && tab.org !== keepTabsNotThisOrg)
+                }
+              })
+            );
 		// Add new tabs and sync them
 		return await this.addTabs(newTabs, sync);
 	}
+
 	/**
-	 * //TESTOK
 	 */
-	async toJSON() {
-		return await TabContainer.toJSON(this);
+	toJSON() {
+		return TabContainer.toJSON(this);
 	}
 
 	/**
 	 * Export Tabs to JSON
 	 * @returns {string} - JSON string of Tabs
-	 * //TESTOK
 	 */
-	async toString() {
-		return await TabContainer.toString(this);
+	toString() {
+		return TabContainer.toString(this);
 	}
 
 	/**
@@ -542,11 +469,8 @@ export class TabContainer extends Array {
 	 */
 	async importTabs(jsonString, resetTabs = false, preserveOtherOrg = true) {
 		const imported = JSON.parse(jsonString);
-
-		await TabContainer.errorOnInvalidTabs(imported);
-
-		const currentTabs = [];
-		currentTabs.push(...this);
+		TabContainer.errorOnInvalidTabs(imported);
+		const backupTabs = [...this];
 		try {
 			if (
 				await this.replaceTabs(imported, {
@@ -557,7 +481,8 @@ export class TabContainer extends Array {
 				return imported.length;
 			}
 		} catch (error) {
-			this.push(...currentTabs);
+            this.length = 0;
+			this.push(...backupTabs);
 			throw error;
 		}
 		return 0;
@@ -566,7 +491,6 @@ export class TabContainer extends Array {
 	/**
 	 * Sync tabs with the background.
 	 * @param {Array<Tab>} tabs - The array which will be used from now on (if provided)
-	 * //TESTOK
 	 */
 	async syncTabs(tabs = null) {
 		// replace tabs already checks the tabs
@@ -579,13 +503,12 @@ export class TabContainer extends Array {
 	/**
 	 * Sync tabs with the background
 	 * @param {Array<Tab>} tabs - The tabs to be synced
-	 * //TESTOK
 	 */
 	static async _syncTabs(inputTabs = null) {
 		if (inputTabs == null) {
 			throw new Error("Cannot sync null tabs!");
 		}
-		const tabs = await TabContainer.toJSON(inputTabs);
+		const tabs = TabContainer.toJSON(inputTabs);
 		await chrome.runtime.sendMessage(
 			{ message: { what: "set", tabs } },
 		);
@@ -598,23 +521,18 @@ export class TabContainer extends Array {
 	/**
 	 * Throw an error for every invalid Tab passed
 	 * @param {Array<Tab>} tabs - The tabs to be validated
-	 * //TESTOK
 	 */
-	static async errorOnInvalidTabs(tabs = null) {
-		if (!await TabContainer.isValid(tabs, false)) {
+	static errorOnInvalidTabs(tabs = null) {
+		if (!TabContainer.isValid(tabs, false)) {
 			throw new Error("Invalid array or no array was passed", tabs);
 		}
-
-		async function checkTabs(tabs) {
-			for (const tab of tabs) {
-				if (!await Tab.isValid(tab)) { // await is needed
-					return tab;
-				}
-			}
-			return null;
-		}
-
-		const invalidTab = await checkTabs(tabs);
+        let invalidTab = null;
+        for (const tab of tabs) {
+            if (!Tab.isValid(tab)) {
+                invalidTab = tab;
+                break;
+            }
+        }
 		if (invalidTab != null) {
 			throw new Error(
 				`Invalid Tab(s) detected.\nFirst occurrence: ${
@@ -628,35 +546,21 @@ export class TabContainer extends Array {
 	 * Check if an array is a valid TabContainer
 	 * @param {Array<Tab>} tabs - The tabs to be validated
 	 * @returns {boolean} Whether the array as input is valid.
-	 * //TESTOK
 	 */
-	static async isValid(tabs, strict = true) {
+	static isValid(tabs, strict = true) {
 		const basicCheck = tabs != null && Array.isArray(tabs);
 		if (!strict || !basicCheck) {
 			return basicCheck;
 		}
-
-		const tabValidResults = await Promise.all(
-			tabs.map(async (tab) => await Tab.isValid(tab)),
-		);
+		const tabValidResults = tabs.map((tab) => Tab.isValid(tab));
 		return tabValidResults.every(Boolean);
-		/*
-            && (
-                !strict ||
-                (
-                    tabs.every(tab => Tab.isTab(tab))
-                    //&& tabs instanceof TabContainer
-                )
-            );
-        */
 	}
 
 	/**
-	 * //TESTOK
 	 */
-	static async toJSON(tabs) {
-		await TabContainer.errorOnInvalidTabs(tabs);
-		const validArray = await TabContainer.isValid(tabs)
+	static toJSON(tabs) {
+		TabContainer.errorOnInvalidTabs(tabs);
+		const validArray = TabContainer.isValid(tabs)
 			? tabs
 			: Array.from(tabs);
 		if (validArray.length !== tabs.length) {
@@ -672,7 +576,7 @@ export class TabContainer extends Array {
 				pushTab = tab;
 			} else {
 				try {
-					pushTab = await Tab.create(tab);
+					pushTab = Tab.create(tab);
 				} catch (_) {
 					// do not add a failing tab to the JSON
 					continue;
@@ -684,12 +588,10 @@ export class TabContainer extends Array {
 	}
 
 	/**
-	 * //TESTOK
 	 */
-	static async toString(tabs) {
-		await TabContainer.errorOnInvalidTabs(tabs);
+	static toString(tabs) {
+		TabContainer.errorOnInvalidTabs(tabs);
 		return `[\n${tabs.map((tab) => tab.toString()).join(",\n")}\n]`;
-		//return JSON.stringify(this.tabs, null, 4);
 	}
 
 	/**
@@ -702,17 +604,14 @@ export class TabContainer extends Array {
 	 *    - array: The TabContainer map was called upon
 	 * @returns {Array} A new Array with each element being the result of the callback function.
 	 *
-	 * //TESTOK
 	 */
 	map(callback) {
 		// Create a new instance of TabContainer
 		const mapped = [];
-
 		// Manually iterate and apply the callback
 		for (let i = 0; i < this.length; i++) {
 			mapped[i] = callback(this[i], i, this);
 		}
-
 		return mapped;
 	}
 
@@ -739,7 +638,6 @@ export class TabContainer extends Array {
 	 *
 	 * moveTab("c",false,true)
 	 * ==> tabs = ["a", "b", "d", "e", "c"]
-	 * //TESTOK
 	 */
 	async moveTab(
 		{ label = null, url = null } = {},
@@ -748,12 +646,10 @@ export class TabContainer extends Array {
 		if (url == null) {
 			throw new Error("Cannot identify Tab.");
 		}
-
 		const matchingTabs = this.getTabsByData({ label, url });
 		if (matchingTabs.length === 0) {
 			throw new Error("Did not find any matching Tabs.");
 		}
-
 		const matchTab = matchingTabs[0];
 		if (label == null) {
 			if (matchingTabs.length > 1) {
@@ -761,12 +657,8 @@ export class TabContainer extends Array {
 			}
 			label = matchTab.label;
 		}
-
-		const index = await this.getTabIndex({ label, url });
-		// TODO changed signature of function
-
+		const index = this.getTabIndex({ label, url });
 		const [tab] = this.splice(index, 1);
-
 		let newIndex;
 		if (fullMovement) {
 			if (moveBefore) {
@@ -783,7 +675,6 @@ export class TabContainer extends Array {
 			// from newIndex, remove 0 tabs and insert `tab` in their place
 			this.splice(newIndex, 0, tab);
 		}
-
 		await this.syncTabs();
 		return newIndex;
 	}
@@ -795,7 +686,6 @@ export class TabContainer extends Array {
 	 * @param {string} param0.url - the url of the Tab to remove
 	 * @param {string} param0.org - the org of the Tab to remove
 	 * @returns {boolean} - Whether a tab was removed
-	 * //TESTOK
 	 */
 	async remove(tab = { label: null, url: null, org: null }) {
 		if (tab.label == null && tab.url == null && tab.org == null) {
@@ -822,7 +712,6 @@ export class TabContainer extends Array {
 	 * removeOtherTabs("b") || removeOtherTabs("b",null) ==> tabs = ["b"]
 	 * removeOtherTabs("b",true) ==> tabs = ["b", "c"]
 	 * removeOtherTabs("b",false) ==> tabs = ["a", "b"]
-	 * //TESTOK
 	 */
 	async removeOtherTabs(
 		{ label = null, url = null } = {},
@@ -864,7 +753,7 @@ export class TabContainer extends Array {
 	 */
 	/*
     static async removeDuplicates(tabs) {
-        if (!await TabContainer.isValid(tabs, false)) {
+        if (!TabContainer.isValid(tabs, false)) {
             throw new Error("Cannot remove duplicates from an invalid container.");
         }
 

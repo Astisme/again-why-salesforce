@@ -3,21 +3,20 @@ import {
 	assert,
 	assertEquals,
 	assertFalse,
-	assertRejects,
 	assertThrows,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Tab } from "/tab.js";
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {
-	await t.step("creates tab with required parameters", async () => {
-		const tab = await Tab.create("Home", "https://example.com");
+	await t.step("creates tab with required parameters", () => {
+		const tab = Tab.create("Home", "https://example.com");
 		assertEquals(tab.label, "Home");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, undefined);
 	});
 
-	await t.step("creates tab with optional org parameter", async () => {
-		const tab = await Tab.create(
+	await t.step("creates tab with optional org parameter", () => {
+		const tab = Tab.create(
 			"Dashboard",
 			"https://example.com",
 			"testorg",
@@ -29,15 +28,15 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 
 	await t.step(
 		"tab is valid when object with required parameters",
-		async () => {
+		() => {
 			assert(
-				await Tab.isValid({
+				Tab.isValid({
 					label: "Home",
 					url: "https://example.com",
 				}),
 			);
 			assert(
-				await Tab.isValid({
+				Tab.isValid({
 					label: "Home",
 					url: "https://example.com",
 					org: "test-org",
@@ -48,8 +47,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 });
 
 await Deno.test("Tab Creation - Object Style", async (t) => {
-	await t.step("creates tab from valid object with label", async () => {
-		const tab = await Tab.create({
+	await t.step("creates tab from valid object with label", () => {
+		const tab = Tab.create({
 			label: "Settings",
 			url: "https://example.com/settings",
 			org: "testorg",
@@ -59,8 +58,8 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 		assertEquals(tab.org, "testorg");
 	});
 
-	await t.step("creates tab from valid object with tabTitle", async () => {
-		const tab = await Tab.create({
+	await t.step("creates tab from valid object with tabTitle", () => {
+		const tab = Tab.create({
 			tabTitle: "Profile",
 			url: "https://example.com/profile",
 		});
@@ -69,9 +68,9 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 		assertEquals(tab.org, undefined);
 	});
 
-	await t.step("tab is valid from valid object with tabTitle", async () => {
+	await t.step("tab is valid from valid object with tabTitle", () => {
 		assert(
-			await Tab.isValid({
+			Tab.isValid({
 				tabTitle: "Profile",
 				url: "https://example.com/profile",
 			}),
@@ -80,10 +79,10 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 
 	await t.step(
 		"throws error when object contains unexpected keys",
-		async () => {
-			await assertRejects(
-				async () => {
-					await Tab.create({
+		() => {
+			assertThrows(
+				() => {
+					Tab.create({
 						label: "Test",
 						url: "https://example.com",
 						invalidKey: "value",
@@ -97,10 +96,10 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 
 	await t.step(
 		"throws error when passing additional parameters with object",
-		async () => {
-			await assertRejects(
-				async () => {
-					await Tab.create({
+		() => {
+			assertThrows(
+				() => {
+					Tab.create({
 						label: "Test",
 						url: "https://example.com",
 					}, "extraParam");
@@ -113,51 +112,51 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 });
 
 await Deno.test("Tab Creation - Error Cases", async (t) => {
-	await t.step("throws error when label is empty", async () => {
-		await assertRejects(
-			async () => {
-				await Tab.create("", "https://example.com");
+	await t.step("throws error when label is empty", () => {
+		assertThrows(
+			() => {
+				Tab.create("", "https://example.com");
 			},
 			Error,
 			"Label must be a non-empty string",
 		);
 	});
 
-	await t.step("tab is not valid when label is empty", async () => {
+	await t.step("tab is not valid when label is empty", () => {
 		assertFalse(
-			await Tab.isValid({ url: "https://example.com" }),
+			Tab.isValid({ url: "https://example.com" }),
 		);
 	});
 
-	await t.step("throws error when url is empty", async () => {
-		await assertRejects(
-			async () => {
-				await Tab.create("Test", "");
+	await t.step("throws error when url is empty", () => {
+		assertThrows(
+			() => {
+				Tab.create("Test", "");
 			},
 			Error,
 			"URL must be a non-empty string",
 		);
 	});
 
-	await t.step("tab is not valid when url is empty", async () => {
+	await t.step("tab is not valid when url is empty", () => {
 		assertFalse(
-			await Tab.isValid({ label: "Test" }),
+			Tab.isValid({ label: "Test" }),
 		);
 	});
 
-	await t.step("throws error when org is not a string", async () => {
-		await assertRejects(
-			async () => {
-				await Tab.create("Test", "https://example.com", 123);
+	await t.step("throws error when org is not a string", () => {
+		assertThrows(
+			() => {
+				Tab.create("Test", "https://example.com", 123);
 			},
 			Error,
 			"Org must be a string or undefined",
 		);
 	});
 
-	await t.step("tab is not valid when org is not a string", async () => {
+	await t.step("tab is not valid when org is not a string", () => {
 		assertFalse(
-			await Tab.isValid({
+			Tab.isValid({
 				label: "Test",
 				url: "https://example.com",
 				org: 123,
@@ -169,9 +168,9 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 await Deno.test("Tab Creation - Instance Reuse", async (t) => {
 	await t.step(
 		"returns same instance when passing an existing Tab",
-		async () => {
-			const originalTab = await Tab.create("Test", "https://example.com");
-			const newTab = await Tab.create(originalTab);
+		() => {
+			const originalTab = Tab.create("Test", "https://example.com");
+			const newTab = Tab.create(originalTab);
 			assertEquals(newTab, originalTab);
 		},
 	);
@@ -188,8 +187,8 @@ await Deno.test("Tab Constructor Protection", () => {
 });
 
 await Deno.test("Utility methods", async (t) => {
-	const tab_no_org = await Tab.create("Test", "https://example.com");
-	const tab_with_org = await Tab.create(
+	const tab_no_org = Tab.create("Test", "https://example.com");
+	const tab_with_org = Tab.create(
 		"Test",
 		"https://example.com",
 		"testorg",
