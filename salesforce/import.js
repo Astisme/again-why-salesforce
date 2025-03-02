@@ -113,7 +113,7 @@ reader.onload = async (e) => {
 		if (jsonString.includes("tabTitle")) {
 			// export and toast
 			chrome.runtime.sendMessage({
-				message: { what: "export", tabs: JSON.parse(jsonString) },
+				message: { what: "export", tabs: allTabs },
 			});
 			showToast(
 				"You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
