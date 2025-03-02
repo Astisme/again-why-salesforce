@@ -160,7 +160,7 @@ async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
 	let org;
 
-    const href = getCurrentHref();
+	const href = getCurrentHref();
 	if (await Tab.containsSalesforceId(href)) {
 		org = Tab.extractOrgName(href);
 	}
