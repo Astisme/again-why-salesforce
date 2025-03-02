@@ -319,33 +319,35 @@ async function reloadRows() {
 async function findTabsFromRows(orgName = null) {
 	const tabElements = document.getElementsByClassName("tab");
 	// Get the list of tabs
-    if(orgName == null)
-        orgName = await pop_extractOrgName();
+	if (orgName == null) {
+		orgName = await pop_extractOrgName();
+	}
 	const availableTabs = [];
 	try {
-        availableTabs.push(
-            ...Array.from(tabElements)
-                .map((tab) => {
-                    const label = tab.querySelector(".label").value;
-                    const url = tab.querySelector(".url").value;
-                    const onlyOrgChecked = tab.querySelector(".only-org").checked;
-                    if (
-                        label == null || url == null ||
-                        label === "" || url === ""
-                    ) {
-                        return null; // Return null for invalid tabs
-                    }
-                    // the user has not checked the onlyOrgChecked checkbox &&
-                    // the link does not contain a Salesforce Id
-                    if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
-                        return Tab.create(label, url);
-                    }
-                    return Tab.create(label, url, orgName);
-                })
-                .filter(tab => tab != null),
-            // add all the hidden not-this-org tabs
-            ...allTabs.getTabsByOrg(orgName, false),
-        );
+		availableTabs.push(
+			...Array.from(tabElements)
+				.map((tab) => {
+					const label = tab.querySelector(".label").value;
+					const url = tab.querySelector(".url").value;
+					const onlyOrgChecked =
+						tab.querySelector(".only-org").checked;
+					if (
+						label == null || url == null ||
+						label === "" || url === ""
+					) {
+						return null; // Return null for invalid tabs
+					}
+					// the user has not checked the onlyOrgChecked checkbox &&
+					// the link does not contain a Salesforce Id
+					if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
+						return Tab.create(label, url);
+					}
+					return Tab.create(label, url, orgName);
+				})
+				.filter((tab) => tab != null),
+			// add all the hidden not-this-org tabs
+			...allTabs.getTabsByOrg(orgName, false),
+		);
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 	}

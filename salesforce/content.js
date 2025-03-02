@@ -132,26 +132,27 @@ export function showToast(message, isSuccess = true, isWarning = false) {
  * @param {Array<Object>} items[key] - The array of tab data retrieved from storage or the default tabs.
  */
 async function init(tabs = null) {
-    let orgName;
+	let orgName;
 	await ensureAllTabsAvailability();
 	if (tabs == null) {
 		await allTabs.getSavedTabs(true);
 	} else {
-        orgName = Tab.extractOrgName(href);
+		orgName = Tab.extractOrgName(href);
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
 			sync: false,
-            keepTabsNotThisOrg: orgName,
+			keepTabsNotThisOrg: orgName,
 		});
 	}
-    // Default: when nothing is inserted, set the default tabs
+	// Default: when nothing is inserted, set the default tabs
 	if (allTabs.length === 0) {
 		await allTabs.setDefaultTabs();
 	}
 	if (allTabs.length > 0) {
-        if(orgName == null)
-            orgName = Tab.extractOrgName(href);
+		if (orgName == null) {
+			orgName = Tab.extractOrgName(href);
+		}
 		allTabs.forEach((row) => {
 			// hide org-specific but not-this-org tabs
 			if (row.org == null || row.org === orgName) { // TODO add option to hide or show org-specific but not-this-org tabs
@@ -274,45 +275,46 @@ function reloadTabs(tabs = null) {
  */
 async function reorderTabs() {
 	try {
-        // Get the list of tabs
-        const tabs = Array.from(setupTabUl.children)
-            .slice(3) // remove Salesforce's tabs
-            .map((tab) => {
-                const a = tab.querySelector("a");
-                if (a == null) {
-                    return null;
-                }
-                // if standard tab, uses span; otherwise if org tab, uses b
-                const span = a.querySelector("span");
-                const b = a.querySelector("b");
-                if(span == null && b == null)
-                    return null;
-                const isOrgTab = span == null && b != null;
-                const labelFrom = !isOrgTab ? span : b;
-                const label = labelFrom.innerText ?? null;
-                const aHref = a.href ?? null;
-                if (label == null || aHref == null) {
-                    return null;
-                }
-                try {
-                    return Tab.create(
-                        label,
-                        aHref,
-                        isOrgTab ? getCurrentHref() : null,
-                    );
-                } catch (error) {
-                    console.error(error);
-                    return null;
-                }
-            })
-            .filter(tab => tab != null);
+		// Get the list of tabs
+		const tabs = Array.from(setupTabUl.children)
+			.slice(3) // remove Salesforce's tabs
+			.map((tab) => {
+				const a = tab.querySelector("a");
+				if (a == null) {
+					return null;
+				}
+				// if standard tab, uses span; otherwise if org tab, uses b
+				const span = a.querySelector("span");
+				const b = a.querySelector("b");
+				if (span == null && b == null) {
+					return null;
+				}
+				const isOrgTab = span == null && b != null;
+				const labelFrom = !isOrgTab ? span : b;
+				const label = labelFrom.innerText ?? null;
+				const aHref = a.href ?? null;
+				if (label == null || aHref == null) {
+					return null;
+				}
+				try {
+					return Tab.create(
+						label,
+						aHref,
+						isOrgTab ? getCurrentHref() : null,
+					);
+				} catch (error) {
+					console.error(error);
+					return null;
+				}
+			})
+			.filter((tab) => tab != null);
 		await ensureAllTabsAvailability();
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
-            removeOrgTabs: true,
+			removeOrgTabs: true,
 			keepTabsNotThisOrg: Tab.extractOrgName(href),
 		});
-        sf_afterSet();
+		sf_afterSet();
 	} catch (error) {
 		showToast(error.message, false);
 	}

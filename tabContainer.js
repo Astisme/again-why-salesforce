@@ -17,8 +17,7 @@ export class TabContainer extends Array {
 		super();
 	}
 
-	/**
-	 */
+	/** */
 	static async create(tabs = null) {
 		const tabcont = new TabContainer(_tabContainerSecret);
 		if (!await tabcont._initialize(tabs)) {
@@ -82,9 +81,9 @@ export class TabContainer extends Array {
 			}
 		}
 		// Create a temporary array to hold the new result
-        const temp = this.slice(start + deleteCount);
-        this.length = start;
-        this.push(...items, ...temp);
+		const temp = this.slice(start + deleteCount);
+		this.length = start;
+		this.push(...items, ...temp);
 		return removedItems;
 	}
 
@@ -106,25 +105,25 @@ export class TabContainer extends Array {
 	 * const newContainer = container.slice(1, 2);
 	 * // newContainer contains [{id: 2}]
 	 */
-    slice(start = 0, end = this.length) {
-        // Convert negative indices to positive
-        start = start < 0
-            ? Math.max(this.length + start, 0)
-            : Math.min(start, this.length);
-        end = end < 0
-            ? Math.max(this.length + end, 0)
-            : Math.min(end, this.length);
-        // Ensure start is not greater than end
-        if (start >= end) {
-            return [];
-        }
-        const sliced = [];
-        // Copy elements to the new array
-        for (let i = start; i < end && i < this.length; i++) {
-            sliced.push(this[i]);
-        }
-        return sliced;
-    }
+	slice(start = 0, end = this.length) {
+		// Convert negative indices to positive
+		start = start < 0
+			? Math.max(this.length + start, 0)
+			: Math.min(start, this.length);
+		end = end < 0
+			? Math.max(this.length + end, 0)
+			: Math.min(end, this.length);
+		// Ensure start is not greater than end
+		if (start >= end) {
+			return [];
+		}
+		const sliced = [];
+		// Copy elements to the new array
+		for (let i = start; i < end && i < this.length; i++) {
+			sliced.push(this[i]);
+		}
+		return sliced;
+	}
 
 	/**
 	 * Creates a new array with all elements that pass the test implemented by the provided function.
@@ -304,8 +303,7 @@ export class TabContainer extends Array {
 		);
 	}
 
-	/**
-	 */
+	/** */
 	getTabsByData(tab = { label: null, url: null, org: null }, match = true) {
 		if (tab.label == null && tab.url == null) {
 			if (tab.org == null) {
@@ -324,8 +322,7 @@ export class TabContainer extends Array {
 		);
 	}
 
-	/**
-	 */
+	/** */
 	getTabIndex(tab = { label: null, url: null, org: null }) {
 		if (tab.label == null && tab.url == null && tab.org == null) {
 			throw new Error("Cannot find index without data.");
@@ -417,37 +414,40 @@ export class TabContainer extends Array {
 		sync = true,
 		keepTabsNotThisOrg = null,
 	} = {}) {
-        if(resetTabs || removeOrgTabs)
-            this.splice(
-              0,
-              this.length,
-              ...this.filter((tab) => {
-                  // If resetTabs, clear existing tabs
-                if (resetTabs) {
-                    // if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
-                    // else, clear existing tabs which do not have an org set
-                    if (!removeOrgTabs) {
-                      return tab.org != null;
-                    } else if (keepTabsNotThisOrg != null) {
-                      return tab.org != null && tab.org !== keepTabsNotThisOrg;
-                        // if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
-                    } else {
-                        // else, clear existing tabs
-                      return false;
-                    }
-                } else if (removeOrgTabs) {
-                    // if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
-                    // else, keep only non-org-specific tabs
-                    return tab.org == null || (keepTabsNotThisOrg != null && tab.org !== keepTabsNotThisOrg)
-                }
-              })
-            );
+		if (resetTabs || removeOrgTabs) {
+			this.splice(
+				0,
+				this.length,
+				...this.filter((tab) => {
+					// If resetTabs, clear existing tabs
+					if (resetTabs) {
+						// if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
+						// else, clear existing tabs which do not have an org set
+						if (!removeOrgTabs) {
+							return tab.org != null;
+						} else if (keepTabsNotThisOrg != null) {
+							return tab.org != null &&
+								tab.org !== keepTabsNotThisOrg;
+							// if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
+						} else {
+							// else, clear existing tabs
+							return false;
+						}
+					} else if (removeOrgTabs) {
+						// if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
+						// else, keep only non-org-specific tabs
+						return tab.org == null ||
+							(keepTabsNotThisOrg != null &&
+								tab.org !== keepTabsNotThisOrg);
+					}
+				}),
+			);
+		}
 		// Add new tabs and sync them
 		return await this.addTabs(newTabs, sync);
 	}
 
-	/**
-	 */
+	/** */
 	toJSON() {
 		return TabContainer.toJSON(this);
 	}
@@ -481,7 +481,7 @@ export class TabContainer extends Array {
 				return imported.length;
 			}
 		} catch (error) {
-            this.length = 0;
+			this.length = 0;
 			this.push(...backupTabs);
 			throw error;
 		}
@@ -526,13 +526,13 @@ export class TabContainer extends Array {
 		if (!TabContainer.isValid(tabs, false)) {
 			throw new Error("Invalid array or no array was passed", tabs);
 		}
-        let invalidTab = null;
-        for (const tab of tabs) {
-            if (!Tab.isValid(tab)) {
-                invalidTab = tab;
-                break;
-            }
-        }
+		let invalidTab = null;
+		for (const tab of tabs) {
+			if (!Tab.isValid(tab)) {
+				invalidTab = tab;
+				break;
+			}
+		}
 		if (invalidTab != null) {
 			throw new Error(
 				`Invalid Tab(s) detected.\nFirst occurrence: ${
@@ -556,13 +556,10 @@ export class TabContainer extends Array {
 		return tabValidResults.every(Boolean);
 	}
 
-	/**
-	 */
+	/** */
 	static toJSON(tabs) {
 		TabContainer.errorOnInvalidTabs(tabs);
-		const validArray = TabContainer.isValid(tabs)
-			? tabs
-			: Array.from(tabs);
+		const validArray = TabContainer.isValid(tabs) ? tabs : Array.from(tabs);
 		if (validArray.length !== tabs.length) {
 			console.warn("Array length mismatch:", {
 				original: tabs.length,
@@ -587,8 +584,7 @@ export class TabContainer extends Array {
 		return resultJson;
 	}
 
-	/**
-	 */
+	/** */
 	static toString(tabs) {
 		TabContainer.errorOnInvalidTabs(tabs);
 		return `[\n${tabs.map((tab) => tab.toString()).join(",\n")}\n]`;
@@ -603,7 +599,6 @@ export class TabContainer extends Array {
 	 *    - index: The index of the current element being processed
 	 *    - array: The TabContainer map was called upon
 	 * @returns {Array} A new Array with each element being the result of the callback function.
-	 *
 	 */
 	map(callback) {
 		// Create a new instance of TabContainer
