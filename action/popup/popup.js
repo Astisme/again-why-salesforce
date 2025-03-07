@@ -168,7 +168,7 @@ function updateTabAttributes(enable = true) {
  * Adds a new empty tab at the bottom of the popup and enables the previously last child's delete button.
  */
 function addTab() {
-    // if list is empty, there's nothing to enable
+	// if list is empty, there's nothing to enable
 	if (tabAppendElement.childElementCount >= 1) {
 		updateTabAttributes();
 	}
@@ -180,7 +180,7 @@ function addTab() {
  * Removes the last empty tab at the bottom of the popup and disables the newly last child's delete button.
  */
 function removeTab() {
-    // if list is empty, there's nothing to disable
+	// if list is empty, there's nothing to disable
 	if (tabAppendElement.childElementCount >= 2) {
 		tabAppendElement.removeChild(tabAppendElement.lastChild);
 		loggers.pop();
@@ -237,8 +237,7 @@ function inputLabelUrlListener(type) {
 		if (inputObj.label && inputObj.url) {
 			addTab();
 		}
-	}
-    // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
+	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (focusedIndex === (loggers.length - 2)) {
 		if (!inputObj.label || !inputObj.url) {
 			removeTab();
@@ -253,28 +252,28 @@ function inputLabelUrlListener(type) {
  */
 function createElement() {
 	const element = tabTemplate.content.firstElementChild.cloneNode(true);
-    // deleteButton
+	// deleteButton
 	element.querySelector("button.delete").addEventListener("click", deleteTab);
 	const label = element.querySelector(".label");
 	const url = element.querySelector(".url");
-    /**
-     * Checks if both the label and URL fields are not empty, and if so, calls the `saveTabs` function with `false` as an argument.
-     */
+	/**
+	 * Checks if both the label and URL fields are not empty, and if so, calls the `saveTabs` function with `false` as an argument.
+	 */
 	function checkSaveTab() {
 		if (label.value !== "" && url.value !== "") {
 			saveTabs(false);
 		}
 	}
-    /**
-     * Sets up event listeners for the provided element to handle drag and focus events.
-     * - Listens for input events to trigger the specified listener.
-     * - Tracks focusin to set the `focusedIndex` based on the element's data attribute.
-     * - Sets a custom data attribute (`data-element_index`) to the current length of the `loggers` array.
-     * - Adds a focusout event listener to call `checkSaveTab` when the element loses focus.
-     *
-     * @param {HTMLElement} element - The DOM element to attach event listeners to.
-     * @param {Function} listener - The function to be called on "input" events for the element.
-     */
+	/**
+	 * Sets up event listeners for the provided element to handle drag and focus events.
+	 * - Listens for input events to trigger the specified listener.
+	 * - Tracks focusin to set the `focusedIndex` based on the element's data attribute.
+	 * - Sets a custom data attribute (`data-element_index`) to the current length of the `loggers` array.
+	 * - Adds a focusout event listener to call `checkSaveTab` when the element loses focus.
+	 *
+	 * @param {HTMLElement} element - The DOM element to attach event listeners to.
+	 * @param {Function} listener - The function to be called on "input" events for the element.
+	 */
 	function setInfoForDrag(element, listener) {
 		element.addEventListener("input", listener);
 		element.addEventListener(
@@ -310,7 +309,7 @@ async function loadTabs(browserTab = null) {
 	}
 	const orgName = await pop_extractOrgName(browserTab);
 	for (const tab of allTabs) {
-        // Default: hide not-this-org org-specific tabs
+		// Default: hide not-this-org org-specific tabs
 		if (tab.org != null && tab.org !== orgName) {
 			continue;
 		}
@@ -326,7 +325,7 @@ async function loadTabs(browserTab = null) {
 		tabAppendElement.append(element);
 		updateTabAttributes();
 	}
-    // leave a blank at the bottom
+	// leave a blank at the bottom
 	tabAppendElement.append(createElement());
 }
 
@@ -366,8 +365,8 @@ async function findTabsFromRows(orgName = null) {
 		orgName = await pop_extractOrgName();
 	}
 	try {
-        return [
-            // add all the Tabs from the popup
+		return [
+			// add all the Tabs from the popup
 			...Array.from(tabElements)
 				.map((tab) => {
 					const label = tab.querySelector(".label").value;
@@ -393,7 +392,7 @@ async function findTabsFromRows(orgName = null) {
 		];
 	} catch (err) {
 		console.error("Error processing tabs:", err);
-        return [];
+		return [];
 	}
 }
 

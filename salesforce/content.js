@@ -1,5 +1,10 @@
 "use strict";
-import { HTTPS, LIGHTNING_FORCE_COM, SETUP_LIGHTNING, EXTENSION_LABEL } from "/constants.js";
+import {
+	EXTENSION_LABEL,
+	HTTPS,
+	LIGHTNING_FORCE_COM,
+	SETUP_LIGHTNING,
+} from "/constants.js";
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import { setupDrag } from "/dragHandler.js";
 import {
@@ -39,14 +44,14 @@ export async function ensureAllTabsAvailability() {
  */
 let setupTabUl;
 export function getSetupTabUl() {
-  return setupTabUl;
+	return setupTabUl;
 }
 /**
- * The standard last LI of setupTabUl 
+ * The standard last LI of setupTabUl
  */
 let objectManagerLi;
 /**
- * Where modals should be inserted in Salesforce Setup 
+ * Where modals should be inserted in Salesforce Setup
  */
 let modalHanger;
 /**
@@ -54,17 +59,17 @@ let modalHanger;
  */
 let href = globalThis.location.href;
 export function getCurrentHref() {
-  return href;
+	return href;
 }
 
 let wasOnSavedTab;
 export function getWasOnSavedTab() {
-  return wasOnSavedTab;
+	return wasOnSavedTab;
 }
 
 let isCurrentlyOnSavedTab;
 export function getIsCurrentlyOnSavedTab() {
-  return isCurrentlyOnSavedTab;
+	return isCurrentlyOnSavedTab;
 }
 
 /**
@@ -206,10 +211,10 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 	const url = Tab.minifyURL(href);
 	wasOnSavedTab = isCurrentlyOnSavedTab;
 	await ensureAllTabsAvailability();
-    isCurrentlyOnSavedTab = allTabs.exists({ url });
-    if(isFromHrefUpdate){
-      callback(isCurrentlyOnSavedTab);
-    }
+	isCurrentlyOnSavedTab = allTabs.exists({ url });
+	if (isFromHrefUpdate) {
+		callback(isCurrentlyOnSavedTab);
+	}
 }
 
 /**
@@ -374,9 +379,9 @@ function makeDuplicatesBold(miniURL) {
 	if (duplicatetabs == null) {
 		return;
 	}
-    /**
-     * For each duplicatetabs, toggles the slds-theme--warning class
-     */
+	/**
+	 * For each duplicatetabs, toggles the slds-theme--warning class
+	 */
 	function toggleWarning() {
 		duplicatetabs.forEach((tab) =>
 			tab.classList.toggle("slds-theme--warning")
@@ -469,9 +474,12 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		) {
 			return showToast(`Please insert a valid Org!\n${newTarget}`, false);
 		}
-        if(newTarget === Tab.extractOrgName(getCurrentHref())){
-          return showToast("The inserted Org is the current one!\nPlease insert another Org.", false);
-        }
+		if (newTarget === Tab.extractOrgName(getCurrentHref())) {
+			return showToast(
+				"The inserted Org is the current one!\nPlease insert another Org.",
+				false,
+			);
+		}
 		const targetUrl = new URL(
 			`${HTTPS}${newTarget}${LIGHTNING_FORCE_COM}${
 				!url.startsWith("/") ? SETUP_LIGHTNING : ""

@@ -20,13 +20,14 @@ import {
 /**
  * Retrieves data from the browser's synced storage and invokes the provided callback with the data.
  *
- * @param {Function} callback - The function to be called once the data is retrieved. 
+ * @param {Function} callback - The function to be called once the data is retrieved.
  *                              The retrieved value is passed as an argument to the callback.
  * @throws {Error} If the callback is not provided.
  */
 export function bg_getStorage(callback) {
-    if(callback == null)
-        throw new Error("Please provide a callback");
+	if (callback == null) {
+		throw new Error("Please provide a callback");
+	}
 	BROWSER.storage.sync.get(
 		[WHY_KEY],
 		(items) => {

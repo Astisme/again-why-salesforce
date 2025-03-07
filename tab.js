@@ -20,17 +20,17 @@ class Tab {
 	static allowedKeys = new Set(["label", "url", "org", "tabTitle"]);
 	// TODO tabTitle will be removed in a later version
 
-    /**
-     * Creates a new instance of a `Tab` with the specified label, URL, and optional organization.
-     * 
-     * **Note:** This constructor should not be called directly. Use `Tab.create()` instead.
-     *
-     * @param {string} label - The label of the tab.
-     * @param {string} url - The URL of the tab.
-     * @param {string|undefined} [org=undefined] - The optional organization associated with the tab.
-     * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
-     * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
-     */
+	/**
+	 * Creates a new instance of a `Tab` with the specified label, URL, and optional organization.
+	 *
+	 * **Note:** This constructor should not be called directly. Use `Tab.create()` instead.
+	 *
+	 * @param {string} label - The label of the tab.
+	 * @param {string} url - The URL of the tab.
+	 * @param {string|undefined} [org=undefined] - The optional organization associated with the tab.
+	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
+	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
+	 */
 	constructor(label, url, org = undefined, secret) {
 		if (secret !== _tabSecret) {
 			throw new Error("Use Tab.create() instead of new Tab()");
@@ -40,15 +40,15 @@ class Tab {
 		this.org = org;
 	}
 
-    /**
-     * Creates a new `Tab` instance. Can be called with either individual parameters (label, url, org) or an object-style argument.
-     * 
-     * @param {string|Object} labelOrTab - The label of the tab, or an object representing a tab (with `label`, `url`, and optional `org` properties).
-     * @param {string|null} [url=null] - The URL of the tab. Ignored if `labelOrTab` is an object.
-     * @param {string|undefined} [org=undefined] - The optional organization associated with the tab. Ignored if `labelOrTab` is an object.
-     * @throws {Error} - Throws an error if the parameters are invalid, or if unexpected keys are found in the object.
-     * @returns {Tab} - A new instance of the `Tab` class.
-     */
+	/**
+	 * Creates a new `Tab` instance. Can be called with either individual parameters (label, url, org) or an object-style argument.
+	 *
+	 * @param {string|Object} labelOrTab - The label of the tab, or an object representing a tab (with `label`, `url`, and optional `org` properties).
+	 * @param {string|null} [url=null] - The URL of the tab. Ignored if `labelOrTab` is an object.
+	 * @param {string|undefined} [org=undefined] - The optional organization associated with the tab. Ignored if `labelOrTab` is an object.
+	 * @throws {Error} - Throws an error if the parameters are invalid, or if unexpected keys are found in the object.
+	 * @returns {Tab} - A new instance of the `Tab` class.
+	 */
 	static create(labelOrTab, url = null, org = undefined) {
 		if (Tab.isTab(labelOrTab)) {
 			return labelOrTab;
@@ -109,7 +109,7 @@ class Tab {
 	 *
 	 * @param {string|null} url - The URL to minify.
 	 * @throws {Error} - Throws an error if the provided URL is empty or invalid.
-     * @returns {string} The minified URL.
+	 * @returns {string} The minified URL.
 	 *
 	 * These links would all collapse into "SetupOneHome/home".
 	 * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
@@ -173,7 +173,7 @@ class Tab {
 	 *
 	 * @param {string|null} url - The URL to expand.
 	 * @param {string|null} baseUrl - The host to prepend to the URL.
-     * @throws {Error} - Throws an error if either the base URL is not valid, or if the provided URL is empty or invalid.
+	 * @throws {Error} - Throws an error if either the base URL is not valid, or if the provided URL is empty or invalid.
 	 * @returns {string|null} The expanded URL.
 	 *
 	 * These links would all collapse into "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/".
@@ -206,9 +206,9 @@ class Tab {
 	 * in URL paths or query parameters. The function also handles encoded URLs
 	 * (e.g., `%2F` becomes `/`) by decoding them before matching.
 	 *
-     * @param {string|null} [url=null] - The URL to check for a Salesforce ID.
-     * @throws {Error} - Throws an error if the provided URL is null or invalid.
-     * @returns {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
+	 * @param {string|null} [url=null] - The URL to check for a Salesforce ID.
+	 * @throws {Error} - Throws an error if the provided URL is null or invalid.
+	 * @returns {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
 	 */
 	static containsSalesforceId(url = null) {
 		if (url == null) {
@@ -217,13 +217,13 @@ class Tab {
 		return SALESFORCE_ID_PATTERN.test(decodeURIComponent(url));
 	}
 
-    /**
-     * Extracts the organization name from a given Salesforce URL by parsing the host part of the URL.
-     * 
-     * @param {string|null} [url=null] - The URL from which to extract the organization name.
-     * @throws {Error} - Throws an error if the provided URL is null or invalid.
-     * @returns {string} - The extracted organization name.
-     */
+	/**
+	 * Extracts the organization name from a given Salesforce URL by parsing the host part of the URL.
+	 *
+	 * @param {string|null} [url=null] - The URL from which to extract the organization name.
+	 * @throws {Error} - Throws an error if the provided URL is null or invalid.
+	 * @returns {string} - The extracted organization name.
+	 */
 	static extractOrgName(url = null) {
 		if (url == null) {
 			throw new Error("Cannot extract org name from empty URL!");
@@ -243,26 +243,27 @@ class Tab {
 		return host;
 	}
 
-    /**
-     * Checks if the provided object is an instance of the `Tab` class.
-     * 
-     * @param {any} tab - The object to check.
-     * @throws {Error} - Throws an error if the provided object is null or undefined.
-     * @returns {boolean} - Returns `true` if the object is an instance of `Tab`, otherwise `false`.
-     */
+	/**
+	 * Checks if the provided object is an instance of the `Tab` class.
+	 *
+	 * @param {any} tab - The object to check.
+	 * @throws {Error} - Throws an error if the provided object is null or undefined.
+	 * @returns {boolean} - Returns `true` if the object is an instance of `Tab`, otherwise `false`.
+	 */
 	static isTab(tab) {
-      if(tab == null)
-        throw new Error("No object to be checked!");
+		if (tab == null) {
+			throw new Error("No object to be checked!");
+		}
 		return tab instanceof Tab;
 	}
 
-    /**
-     * Validates if the provided object can be successfully created as a `Tab` instance.
-     * 
-     * @param {any} tab - The object to validate.
-     * @throws {Error} - Catches and logs errors related to invalid tab creation but does not throw an error.
-     * @returns {boolean} - Returns `true` if the object can be created as a valid `Tab`, otherwise `false`.
-     */
+	/**
+	 * Validates if the provided object can be successfully created as a `Tab` instance.
+	 *
+	 * @param {any} tab - The object to validate.
+	 * @throws {Error} - Catches and logs errors related to invalid tab creation but does not throw an error.
+	 * @returns {boolean} - Returns `true` if the object can be created as a valid `Tab`, otherwise `false`.
+	 */
 	static isValid(tab) {
 		try {
 			Tab.create(tab);
@@ -297,15 +298,15 @@ class Tab {
 		return JSON.stringify(this.toJSON(), null, 4);
 	}
 
-    /**
-     * Compares the current `Tab` instance to another object for equality based on `label`, `url`, and `org` properties.
-     * 
-     * @param {Object} [param] - The object to compare against.
-     * @param {string|null} [param.label=null] - The label to compare.
-     * @param {string|null} [param.url=null] - The URL to compare.
-     * @param {string|null} [param.org=null] - The organization to compare.
-     * @returns {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
-     */
+	/**
+	 * Compares the current `Tab` instance to another object for equality based on `label`, `url`, and `org` properties.
+	 *
+	 * @param {Object} [param] - The object to compare against.
+	 * @param {string|null} [param.label=null] - The label to compare.
+	 * @param {string|null} [param.url=null] - The URL to compare.
+	 * @param {string|null} [param.org=null] - The organization to compare.
+	 * @returns {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
+	 */
 	equals({ label = null, url = null, org = null } = {}) {
 		return !(label == null && url == null && org == null) &&
 			(label == null || label === this.label) &&
@@ -338,11 +339,11 @@ class Tab {
     }
     */
 
-    /**
-     * Returns a string representation of the `Tab` instance as its hash code.
-     * 
-     * @returns {string} - The string representation of the `Tab` instance.
-     */
+	/**
+	 * Returns a string representation of the `Tab` instance as its hash code.
+	 *
+	 * @returns {string} - The string representation of the `Tab` instance.
+	 */
 	hashCode() {
 		return this.toString();
 	}

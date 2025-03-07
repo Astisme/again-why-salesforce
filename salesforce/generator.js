@@ -41,13 +41,13 @@ function getRng_n_digits(digits = 1) {
  */
 function handleLightningLinkClick(e) {
 	e.preventDefault();
-    /**
-     * Determines the target for a link based on the click event and URL.
-     *
-     * @param {Event} e - The click event triggered by the link.
-     * @param {string} url - The URL of the link being clicked.
-     * @returns {string} The target for the link, either "_blank" or "_top".
-     */
+	/**
+	 * Determines the target for a link based on the click event and URL.
+	 *
+	 * @param {Event} e - The click event triggered by the link.
+	 * @param {string} url - The URL of the link being clicked.
+	 * @returns {string} The target for the link, either "_blank" or "_top".
+	 */
 	function getLinkTarget(e, url) {
 		return e.ctrlKey || e.metaKey || !url.includes(SETUP_LIGHTNING)
 			? "_blank"
@@ -83,7 +83,9 @@ function handleLightningLinkClick(e) {
  * @param {string} row.org - The org of the org-specific tab.
  * @returns {HTMLElement} - The generated list item element representing the tab.
  */
-export function generateRowTemplate({label = null, url = null, org = null} = {}) {
+export function generateRowTemplate(
+	{ label = null, url = null, org = null } = {},
+) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
 	const li = document.createElement("li");
@@ -315,19 +317,19 @@ function generateInput({
 	inputWrapper.setAttribute("part", "input-container");
 	inputWrapper.setAttribute("type", type);
 	formElementLabel.appendChild(inputWrapper);
-    /**
-     * Creates an input element with specified attributes.
-     *
-     * @param {Object} options - The configuration object for the input element.
-     * @param {string|null} options.id - The id of the input element (optional).
-     * @param {string|null} options.label - The label for the input element (optional).
-     * @param {string} options.type - The type of the input element (required).
-     * @param {string|null} options.placeholder - The placeholder text for the input element (optional).
-     * @param {boolean} options.required - A flag indicating whether the input is required (default is false).
-     * @param {boolean} options.enabled - A flag indicating whether the input is enabled (default is true).
-     * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
-     * @returns {HTMLInputElement} The created input element.
-     */
+	/**
+	 * Creates an input element with specified attributes.
+	 *
+	 * @param {Object} options - The configuration object for the input element.
+	 * @param {string|null} options.id - The id of the input element (optional).
+	 * @param {string|null} options.label - The label for the input element (optional).
+	 * @param {string} options.type - The type of the input element (required).
+	 * @param {string|null} options.placeholder - The placeholder text for the input element (optional).
+	 * @param {boolean} options.required - A flag indicating whether the input is required (default is false).
+	 * @param {boolean} options.enabled - A flag indicating whether the input is enabled (default is true).
+	 * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
+	 * @returns {HTMLInputElement} The created input element.
+	 */
 	function createInputElement(
 		{
 			id = null,
@@ -786,12 +788,12 @@ export function generateSldsModal(modalTitle) {
 	saveSpan.setAttribute("data-aura-rendered-by", "1383:0");
 	saveSpan.textContent = "Continue";
 	saveButton.appendChild(saveSpan);
-    /**
-     * Handles the keydown event and triggers specific actions based on the key pressed.
-     *
-     * @param {KeyboardEvent} event - The keydown event object.
-     * @returns {void}
-     */
+	/**
+	 * Handles the keydown event and triggers specific actions based on the key pressed.
+	 *
+	 * @param {KeyboardEvent} event - The keydown event object.
+	 * @returns {void}
+	 */
 	function keyDownListener(event) {
 		switch (event.key) {
 			case "Escape":

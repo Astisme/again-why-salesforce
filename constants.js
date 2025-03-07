@@ -29,5 +29,7 @@ export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 	item.replaceAll("\*", ".*")
 );
 export const BROWSER = typeof browser == "undefined" ? chrome : browser;
-export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`);
+export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
+	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`,
+);
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);

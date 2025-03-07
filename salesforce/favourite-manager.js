@@ -66,16 +66,16 @@ function generateFavouriteButton() {
 	span.setAttribute("dir", "ltr");
 	span.setAttribute("data-aura-rendered-by", "6:829;a");
 	button.appendChild(span);
-    /**
-     * Creates an image element with a specified `id`, `src` (source URL), and `alt` (alternative text) description.
-     * - The image element is styled with custom filter effects for visibility and design.
-     * - If the image fails to load (on error), a `span` with the `alt` text is displayed instead.
-     *
-     * @param {string} id - The ID to be assigned to the image element.
-     * @param {string} src - The source URL of the image.
-     * @param {string} alt - The alt text for the image, used for accessibility and as fallback content.
-     * @returns {Object} An object containing the `img` element and the corresponding `span` element (which is displayed in case of an error).
-     */
+	/**
+	 * Creates an image element with a specified `id`, `src` (source URL), and `alt` (alternative text) description.
+	 * - The image element is styled with custom filter effects for visibility and design.
+	 * - If the image fails to load (on error), a `span` with the `alt` text is displayed instead.
+	 *
+	 * @param {string} id - The ID to be assigned to the image element.
+	 * @param {string} src - The source URL of the image.
+	 * @param {string} alt - The alt text for the image, used for accessibility and as fallback content.
+	 * @returns {Object} An object containing the `img` element and the corresponding `span` element (which is displayed in case of an error).
+	 */
 	function createImageElement(id, src, alt) {
 		const img = document.createElement("img");
 		img.id = id;
@@ -121,7 +121,7 @@ function generateFavouriteButton() {
 
 /**
  * Retrieves the favourite image element by its ID or class name, searching through the button or the entire document.
- * - If the `favouriteId` is provided, it attempts to find the corresponding image element by ID or class within the provided button, 
+ * - If the `favouriteId` is provided, it attempts to find the corresponding image element by ID or class within the provided button,
  *   or in the entire document if the button is not specified.
  * - If no element is found with the given `favouriteId`, it returns `null`.
  *
@@ -145,8 +145,8 @@ function getFavouriteImage(favouriteId, button = null) {
  * - If `isSaved` is null, it simply toggles the visibility of both the star and slashed star icons.
  * - If `isSaved` is true, the star icon is hidden, and the slashed star icon is displayed.
  * - If `isSaved` is false, the slashed star icon is hidden, and the star icon is shown.
- * 
- * @param {boolean|null} [isSaved=null] - A flag indicating whether the tab is saved (true) or not saved (false). 
+ *
+ * @param {boolean|null} [isSaved=null] - A flag indicating whether the tab is saved (true) or not saved (false).
  *                                       If null, both icons are toggled.
  * @param {HTMLButtonElement|null} [button=null] - The button element that contains the star images. Defaults to null (searches the entire document).
  * @returns {void}

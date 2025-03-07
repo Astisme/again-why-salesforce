@@ -1,11 +1,11 @@
 "use strict";
 import {
 	BROWSER,
+	EXTENSION_NAME,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
 	SETUP_LIGHTNING,
-    EXTENSION_NAME,
 } from "/constants.js";
 import { bg_getStorage } from "./background.js";
 
@@ -21,15 +21,15 @@ import { bg_getStorage } from "./background.js";
  * @returns {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
  */
 export function bg_getCurrentBrowserTab(callback, fromPopup = false) {
-    /**
-     * Queries the browser for the current active tab in the current window.
-     * If the tab is not found or an error occurs, the function will retry up to 5 times before throwing an error.
-     * The `callback` function will be called with the first tab object found.
-     *
-     * @param {Function} callback - A function to handle the retrieved tab once it is found.
-     * @param {number} [count=0] - A counter used to track the number of retries. Defaults to 0.
-     * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
-     */
+	/**
+	 * Queries the browser for the current active tab in the current window.
+	 * If the tab is not found or an error occurs, the function will retry up to 5 times before throwing an error.
+	 * The `callback` function will be called with the first tab object found.
+	 *
+	 * @param {Function} callback - A function to handle the retrieved tab once it is found.
+	 * @param {number} [count=0] - A counter used to track the number of retries. Defaults to 0.
+	 * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
+	 */
 	async function queryTabs(callback, count = 0) {
 		const queryParams = { active: true, currentWindow: true };
 		(fromPopup == true || count > 0) && delete queryParams.currentWindow;

@@ -140,12 +140,12 @@ reader.onload = async (e) => {
  * @param {HTMLElement} modalParent - The parent element of the modal that contains the file input and option checkboxes.
  */
 function listenToFileUpload(modalParent) {
-    /**
-     * Reads the content of a JSON file and processes it. If the file is not of the correct type, shows an error toast.
-     *
-     * @param {File} file - The file to read and validate.
-     * @returns {void}
-     */
+	/**
+	 * Reads the content of a JSON file and processes it. If the file is not of the correct type, shows an error toast.
+	 *
+	 * @param {File} file - The file to read and validate.
+	 * @returns {void}
+	 */
 	function readFile(file) {
 		if (file.type !== "application/json") {
 			return showToast(
@@ -179,7 +179,7 @@ function listenToFileUpload(modalParent) {
 }
 
 /**
- * Displays the file import modal if there are no other open modals. 
+ * Displays the file import modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
  */
 function showFileImport() {

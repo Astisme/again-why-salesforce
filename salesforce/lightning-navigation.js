@@ -1,7 +1,7 @@
 // This script is injected in Salesforce context and does not share the context with the rest of the scripts in this direcory.
 
 /**
- * Handles Lightning navigation based on the provided details. 
+ * Handles Lightning navigation based on the provided details.
  * Navigates to a record page or a URL based on the navigation type.
  *
  * @param {Object} details - The details for navigation.

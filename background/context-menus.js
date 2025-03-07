@@ -107,14 +107,14 @@ const menuItems = [
 		contexts: ["page", "frame"],
 	},
 ].map((item) => {
-  /**
-   * - Updates `documentUrlPatterns` for each menu item:
-   *   - Uses `FRAME_PATTERNS` if the item context includes "frame".
-   *   - Uses `CONTEXT_MENU_PATTERNS` otherwise.
-   */
-  item.documentUrlPatterns = item.contexts.includes("frame")
-    ? FRAME_PATTERNS
-    : CONTEXT_MENU_PATTERNS;
+	/**
+	 * - Updates `documentUrlPatterns` for each menu item:
+	 *   - Uses `FRAME_PATTERNS` if the item context includes "frame".
+	 *   - Uses `CONTEXT_MENU_PATTERNS` otherwise.
+	 */
+	item.documentUrlPatterns = item.contexts.includes("frame")
+		? FRAME_PATTERNS
+		: CONTEXT_MENU_PATTERNS;
 });
 
 /**
@@ -182,7 +182,7 @@ async function checkAddRemoveContextMenus(what) {
 
 /**
  * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
- * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the 
+ * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the
  * specified delay has passed since the last invocation.
  *
  * @param {Function} fn - The function to debounce.

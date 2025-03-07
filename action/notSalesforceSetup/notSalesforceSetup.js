@@ -1,8 +1,5 @@
 // deno-lint-ignore-file no-window
-import {
-  SALESFORCE_LIGHTNING_PATTERN,
-  SETUP_LIGHTNING,
-} from "/constants.js"
+import { SALESFORCE_LIGHTNING_PATTERN, SETUP_LIGHTNING } from "/constants.js";
 import { initTheme } from "../themeHandler.js";
 initTheme();
 
@@ -41,7 +38,7 @@ if (page != null) { // we're in a salesforce page
 			strongEl.textContent = "Salesforce Lightning";
 			otherText.textContent = " Setup Page";
 		} else {
-            // we're in a Salesforce page (not setup)
+			// we're in a Salesforce page (not setup)
 			// switch which button is shown
 			document.getElementById("login").classList.add("hidden");
 			const goSetup = document.getElementById("go-setup");
@@ -58,8 +55,9 @@ if (page != null) { // we're in a salesforce page
 	strongEl.textContent = "Salesforce Lightning";
 	otherText.textContent = " Setup Page";
 }
-if(insertPrefix)
-  div.appendChild(prefix);
+if (insertPrefix) {
+	div.appendChild(prefix);
+}
 if (strongFirst) {
 	div.appendChild(strongEl);
 	div.appendChild(otherText);
@@ -80,8 +78,9 @@ function nss_getCurrentBrowserTab(callback, url) {
 		{ message: { what: "browser-tab" } },
 		(browserTab) => {
 			currentTab = browserTab;
-			if(callback != null)
-                callback(url);
+			if (callback != null) {
+				callback(url);
+			}
 		},
 	);
 }
