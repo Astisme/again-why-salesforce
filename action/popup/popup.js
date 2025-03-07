@@ -351,7 +351,7 @@ async function findTabsFromRows(orgName = null) {
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 	}
-	return { availableTabs, org: orgName };
+	return availableTabs;
 }
 
 /**

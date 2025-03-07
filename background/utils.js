@@ -138,13 +138,10 @@ export function bg_expandURL(message) {
  * Handles the export functionality by downloading the current tabs as a JSON file.
  */
 function _exportHandler(tabs) {
-	//const dataUrl = "data:application/json;charset=utf-8," +
-	//encodeURIComponent(JSON.stringify(tabs));
 	const jsonData = JSON.stringify(tabs);
 	const blob = new Blob([jsonData], { type: "application/json" });
 	const url = URL.createObjectURL(blob);
 	BROWSER.downloads.download({
-		//url: dataUrl,
 		url,
 		filename: "again-why-salesforce.json",
 	});

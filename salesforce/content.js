@@ -145,10 +145,6 @@ async function init(tabs = null) {
 			keepTabsNotThisOrg: orgName,
 		});
 	}
-	// Default: when nothing is inserted, set the default tabs
-	if (allTabs.length === 0) {
-		await allTabs.setDefaultTabs();
-	}
 	if (allTabs.length > 0) {
 		if (orgName == null) {
 			orgName = Tab.extractOrgName(href);
