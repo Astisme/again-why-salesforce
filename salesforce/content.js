@@ -375,7 +375,7 @@ async function reorderTabs() {
  * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
 function makeDuplicatesBold(miniURL) {
-	const duplicatetabs = setupTabUl.querySelectorAll(`a[label="${miniURL}"]`);
+	const duplicatetabs = setupTabUl.querySelectorAll(`a[title="${miniURL}"]`);
 	if (duplicatetabs == null) {
 		return;
 	}

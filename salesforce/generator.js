@@ -103,7 +103,7 @@ export function generateRowTemplate(
 	a.setAttribute("data-draggable", "true");
 	a.setAttribute("role", "tab");
 	a.setAttribute("tabindex", "-1");
-	a.setAttribute("label", miniURL);
+	a.setAttribute("title", miniURL); // popup showing where the Tab is pointing to
 	a.setAttribute("aria-selected", "false");
 	a.setAttribute("href", expURL);
 	a.classList.add("tabHeader", "slds-context-bar__label-action");
