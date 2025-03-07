@@ -261,7 +261,7 @@ function createElement() {
 	 */
 	function checkSaveTab() {
 		if (label.value !== "" && url.value !== "") {
-			saveTabs(false);
+			saveTabs();
 		}
 	}
 	/**

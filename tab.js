@@ -188,11 +188,13 @@ class Tab {
 	 */
 	static expandURL(url = null, baseUrl = null) {
 		if (baseUrl == null || !baseUrl.startsWith(HTTPS)) {
-			throw new Error("Cannot expand a URL without its base!");
+			throw new Error("Cannot expand a URL without its host!");
 		}
 		if (url == null || url === "") {
 			throw new Error("Cannot expand an empty URL!");
 		}
+        if(url.startsWith(HTTPS))
+          return url;
 		baseUrl = new URL(baseUrl).origin;
 		url = Tab.minifyURL(url);
 		const isSetupLink = !url.startsWith("/") && url.length > 0;
