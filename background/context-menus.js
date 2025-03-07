@@ -115,7 +115,7 @@ const menuItems = [
 	item.documentUrlPatterns = item.contexts.includes("frame")
 		? FRAME_PATTERNS
 		: CONTEXT_MENU_PATTERNS;
-    return item;
+	return item;
 });
 
 /**
