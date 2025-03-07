@@ -30,6 +30,6 @@ export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 );
 export const BROWSER = typeof browser == "undefined" ? chrome : browser;
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.","\\.")}.*$`,
+	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.", "\\.")}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
