@@ -35,19 +35,19 @@ function getRng_n_digits(digits = 1) {
 }
 
 /**
- * Handles the redirection to another Salesforce page without requiring a full reload.
+ * Handles the click event for a Lightning Link and determines the appropriate target for navigation.
  *
  * @param {Event} e - the click event
  */
 function handleLightningLinkClick(e) {
 	e.preventDefault();
-	/**
-	 * Picks a link target between _blank and _top based on whether the user is click CTRL or the meta key.
-	 * If the link goes outside of setup, always returns _blank.
-	 *
-	 * @param {Event} e - the click event
-	 * @returns {String} "_blank" | "_top"
-	 */
+    /**
+     * Determines the target for a link based on the click event and URL.
+     *
+     * @param {Event} e - The click event triggered by the link.
+     * @param {string} url - The URL of the link being clicked.
+     * @returns {string} The target for the link, either "_blank" or "_top".
+     */
 	function getLinkTarget(e, url) {
 		return e.ctrlKey || e.metaKey || !url.includes(SETUP_LIGHTNING)
 			? "_blank"
@@ -77,14 +77,13 @@ function handleLightningLinkClick(e) {
 /**
  * Generates the HTML for a tab row.
  *
- * @param {Object} row - The tab data object containing title and URL.
- * @param {string} row.label - The title of the tab.
+ * @param {Object} row - The tab data object containing label and URL.
+ * @param {string} row.label - The label of the tab.
  * @param {string} row.url - The URL of the tab.
  * @param {string} row.org - The org of the org-specific tab.
  * @returns {HTMLElement} - The generated list item element representing the tab.
  */
-export function generateRowTemplate(row) {
-	const { label, url } = row;
+export function generateRowTemplate({label = null, url = null, org = null} = {}) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
 	const li = document.createElement("li");
@@ -102,14 +101,14 @@ export function generateRowTemplate(row) {
 	a.setAttribute("data-draggable", "true");
 	a.setAttribute("role", "tab");
 	a.setAttribute("tabindex", "-1");
-	a.setAttribute("title", miniURL);
+	a.setAttribute("label", miniURL);
 	a.setAttribute("aria-selected", "false");
 	a.setAttribute("href", expURL);
 	a.classList.add("tabHeader", "slds-context-bar__label-action");
 	a.style.zIndex = 0;
 	a.addEventListener("click", handleLightningLinkClick);
-	const span = document.createElement(row.org == null ? "span" : "b");
-	span.classList.add("title", "slds-truncate");
+	const span = document.createElement(org == null ? "span" : "b");
+	span.classList.add("label", "slds-truncate");
 	span.textContent = label;
 	a.appendChild(span);
 	li.appendChild(a);
@@ -121,11 +120,13 @@ export function generateRowTemplate(row) {
 }
 
 /**
- * Generates the Element for a toast message.
+ * Generates an SLDS-styled toast message with a specified message, success, and warning types.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} isSuccess - Indicates whether the message is a success or error.
- * @returns {HTMLElement} - The generated element for the toast message.
+ * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
+ * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
+ * @throws {Error} Throws an error if required parameters are missing or invalid.
+ * @returns {HTMLElement} The generated toast container element.
  */
 export function generateSldsToastMessage(message, isSuccess, isWarning) {
 	if (
@@ -281,7 +282,7 @@ function generateInput({
 	prepend = null,
 	append = null,
 	style = null,
-}) {
+} = {}) {
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
 	const formElement = document.createElement("div");
@@ -314,6 +315,19 @@ function generateInput({
 	inputWrapper.setAttribute("part", "input-container");
 	inputWrapper.setAttribute("type", type);
 	formElementLabel.appendChild(inputWrapper);
+    /**
+     * Creates an input element with specified attributes.
+     *
+     * @param {Object} options - The configuration object for the input element.
+     * @param {string|null} options.id - The id of the input element (optional).
+     * @param {string|null} options.label - The label for the input element (optional).
+     * @param {string} options.type - The type of the input element (required).
+     * @param {string|null} options.placeholder - The placeholder text for the input element (optional).
+     * @param {boolean} options.required - A flag indicating whether the input is required (default is false).
+     * @param {boolean} options.enabled - A flag indicating whether the input is enabled (default is true).
+     * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
+     * @returns {HTMLInputElement} The created input element.
+     */
 	function createInputElement(
 		{
 			id = null,
@@ -772,7 +786,12 @@ export function generateSldsModal(modalTitle) {
 	saveSpan.setAttribute("data-aura-rendered-by", "1383:0");
 	saveSpan.textContent = "Continue";
 	saveButton.appendChild(saveSpan);
-	// listen for key presses
+    /**
+     * Handles the keydown event and triggers specific actions based on the key pressed.
+     *
+     * @param {KeyboardEvent} event - The keydown event object.
+     * @returns {void}
+     */
 	function keyDownListener(event) {
 		switch (event.key) {
 			case "Escape":
@@ -843,12 +862,15 @@ export function generateOpenOtherOrgModal(miniURL, label) {
  * Depending on the parameters, this function constructs a complex DOM structure styled with SLDS classes.
  * It supports enabling/disabling drag-and-drop, preventing file selection, and toggling single or multiple file uploads.
  *
- * @param {boolean} [singleFile=false] - If true, restricts the input to a single file; if false, multiple files can be selected.
- * @param {boolean} [allowDrop=true] - If true, enables file drop functionality.
- * @param {boolean} [preventFileSelection=false] - If true, disables file selection via the file dialog.
- *                                                Note: Cannot be true if allowDrop is false.
- * @param {boolean} [required=true] - If true, marks the file input as required and appends a required indicator.
- * @throws {Error} Throws an error if allowDrop is false while preventFileSelection is true.
+ * @param {string} wrapperId - The ID for the wrapper element that contains the file input.
+ * @param {string} inputElementId - The ID for the input element.
+ * @param {string} acceptedType - A string specifying the file types allowed (e.g., "image/*", ".pdf").
+ * @param {boolean} [singleFile=false] - Flag indicating if only one file is allowed for upload.
+ * @param {boolean} [allowDrop=true] - Flag indicating if file drop is allowed.
+ * @param {boolean} [preventFileSelection=false] - Flag indicating if file selection should be prevented.
+ * @param {boolean} [required=true] - Flag indicating if the file input is required.
+ * @throws {Error} Throws an error if both `allowDrop` is false and `preventFileSelection` is true.
+ * @throws {Error} Throws an error if required parameters are missing.
  * @returns {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.

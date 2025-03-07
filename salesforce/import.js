@@ -12,7 +12,6 @@ import {
 	getAllTabs,
 	getModalHanger,
 	getSetupTabUl,
-	// functions
 	showToast,
 } from "./content.js";
 
@@ -141,6 +140,12 @@ reader.onload = async (e) => {
  * @param {HTMLElement} modalParent - The parent element of the modal that contains the file input and option checkboxes.
  */
 function listenToFileUpload(modalParent) {
+    /**
+     * Reads the content of a JSON file and processes it. If the file is not of the correct type, shows an error toast.
+     *
+     * @param {File} file - The file to read and validate.
+     * @returns {void}
+     */
 	function readFile(file) {
 		if (file.type !== "application/json") {
 			return showToast(
@@ -148,18 +153,15 @@ function listenToFileUpload(modalParent) {
 				false,
 			);
 		}
-
 		overwritePick = modalParent.querySelector(`#${OVERWRITE_ID}`).checked;
 		otherOrgPick = modalParent.querySelector(`#${OTHER_ORG_ID}`).checked;
 		reader.readAsText(file);
 	}
-
 	const dropArea = document.getElementById(IMPORT_ID);
 	dropArea.addEventListener("change", function (event) {
 		event.preventDefault();
 		readFile(event.target.files[0]);
 	});
-
 	dropArea.addEventListener("dragover", function (event) {
 		event.preventDefault();
 		//console.log('dragover')
@@ -170,7 +172,6 @@ function listenToFileUpload(modalParent) {
 		//console.log('dragleave')
 		//dropArea.classList.remove("slds-has-drag-over");
 	});
-
 	dropArea.addEventListener("drop", function (event) {
 		event.preventDefault();
 		Array.from(event.dataTransfer.files).forEach((f) => readFile(f));
@@ -178,7 +179,8 @@ function listenToFileUpload(modalParent) {
 }
 
 /**
- * Displays the import modal for uploading tab data.
+ * Displays the file import modal if there are no other open modals. 
+ * If a modal is already open, shows a toast notification to close the other modal first.
  */
 function showFileImport() {
 	if (

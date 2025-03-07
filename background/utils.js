@@ -5,10 +5,31 @@ import {
 	LIGHTNING_FORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
 	SETUP_LIGHTNING,
+    EXTENSION_NAME,
 } from "/constants.js";
 import { bg_getStorage } from "./background.js";
 
+/**
+ * Retrieves the current active browser tab based on the given parameters.
+ * If the callback is provided, it will be invoked with the current tab object.
+ * If the callback is not provided, it will return a promise that resolves with the current tab object.
+ * The function attempts to find the tab multiple times (up to 5 retries) in case of failure.
+ *
+ * @param {Function} [callback] - A callback function to handle the retrieved tab. If not provided, a promise is returned.
+ * @param {boolean} [fromPopup=false] - A flag indicating whether the function was called from a popup. If true, queries all tabs in the current window.
+ * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
+ * @returns {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
+ */
 export function bg_getCurrentBrowserTab(callback, fromPopup = false) {
+    /**
+     * Queries the browser for the current active tab in the current window.
+     * If the tab is not found or an error occurs, the function will retry up to 5 times before throwing an error.
+     * The `callback` function will be called with the first tab object found.
+     *
+     * @param {Function} callback - A function to handle the retrieved tab once it is found.
+     * @param {number} [count=0] - A counter used to track the number of retries. Defaults to 0.
+     * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
+     */
 	async function queryTabs(callback, count = 0) {
 		const queryParams = { active: true, currentWindow: true };
 		(fromPopup == true || count > 0) && delete queryParams.currentWindow;
@@ -135,7 +156,10 @@ export function bg_expandURL(message) {
 }
 
 /**
- * Handles the export functionality by downloading the current tabs as a JSON file.
+ * Handles the export of tab data by converting it into a JSON file and triggering a download.
+ * The JSON file will be named "again-why-salesforce.json".
+ *
+ * @param {Array} tabs - An array of tab objects to be exported as a JSON file.
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
@@ -143,14 +167,14 @@ function _exportHandler(tabs) {
 	const url = URL.createObjectURL(blob);
 	BROWSER.downloads.download({
 		url,
-		filename: "again-why-salesforce.json",
+		filename: `${EXTENSION_NAME}.json`,
 	});
 }
 
 /**
- * Exposes a function wrapper for the actual exportHandler due to the need for getting the currently saved tabs.
+ * Exports tab data as a JSON file. If no tab data is provided, it retrieves the data from storage.
  *
- * @param [Array] tabs - the currently saved tabs. if null, the tabs are retrieved automatically
+ * @param {Array|null} tabs - An array of tab objects to be exported as a JSON file. If null, the function fetches the tab data from storage.
  */
 export function exportHandler(tabs = null) {
 	if (tabs == null) {

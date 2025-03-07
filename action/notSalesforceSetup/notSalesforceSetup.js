@@ -1,4 +1,8 @@
 // deno-lint-ignore-file no-window
+import {
+  SALESFORCE_LIGHTNING_PATTERN,
+  SETUP_LIGHTNING,
+} from "/constants.js"
 import { initTheme } from "../themeHandler.js";
 initTheme();
 
@@ -22,8 +26,7 @@ let strongFirst = true;
 
 const page = new URLSearchParams(window.location.search).get("url");
 if (page != null) { // we're in a salesforce page
-	let domain;
-
+	let domain = null;
 	try {
 		domain = new URL(page).origin;
 	} catch (_) {
@@ -31,22 +34,20 @@ if (page != null) { // we're in a salesforce page
 		otherText.textContent = " detected.";
 		insertPrefix = false;
 	}
-
 	// domain is null if an error occurred
 	if (domain != null) {
 		// Validate the domain (make sure it's a Salesforce domain)
-		const authorizedDomainRegex =
-			/^https:\/\/[a-zA-Z0-9.-]+\.lightning\.force\.com\/.*/;
-		if (!authorizedDomainRegex.test(page)) {
+		if (!SALESFORCE_LIGHTNING_PATTERN.test(page)) {
 			strongEl.textContent = "Salesforce Lightning";
 			otherText.textContent = " Setup Page";
 		} else {
+            // we're in a Salesforce page (not setup)
 			// switch which button is shown
 			document.getElementById("login").classList.add("hidden");
 			const goSetup = document.getElementById("go-setup");
 			goSetup.classList.remove("hidden");
 			// update the button href to use the domain
-			goSetup.href = `${domain}/lightning/setup/SetupOneHome/home`;
+			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
 			// update the bold on the text
 			otherText.textContent = "Salesforce Lightning";
 			strongEl.textContent = " Setup Page";
@@ -57,7 +58,8 @@ if (page != null) { // we're in a salesforce page
 	strongEl.textContent = "Salesforce Lightning";
 	otherText.textContent = " Setup Page";
 }
-insertPrefix && div.appendChild(prefix);
+if(insertPrefix)
+  div.appendChild(prefix);
 if (strongFirst) {
 	div.appendChild(strongEl);
 	div.appendChild(otherText);
@@ -67,6 +69,23 @@ if (strongFirst) {
 }
 
 let currentTab;
+/**
+ * Finds the carrently active tab and if the callback was provided, it is then called.
+ *
+ * @param {function} callback - the function to call when the current tab is found.
+ * @param {string} url - the url to pass to the callback function
+ */
+function nss_getCurrentBrowserTab(callback, url) {
+	chrome.runtime.sendMessage(
+		{ message: { what: "browser-tab" } },
+		(browserTab) => {
+			currentTab = browserTab;
+			if(callback != null)
+                callback(url);
+		},
+	);
+}
+
 /**
  * Creates a new tab with the given URL next to the current tab and it associates the new tab with the current tab (this ensures the same container is used).
  *
@@ -89,22 +108,6 @@ function createTab(url, count = 0) {
 	});
 }
 
-/**
- * Finds the carrently active tab and if the callback was provided, it is then called.
- *
- * @param {function} callback - the function to call when the current tab is found.
- * @param {string} url - the url to pass to the callback function
- */
-function nss_getCurrentBrowserTab(callback, url) {
-	chrome.runtime.sendMessage(
-		{ message: { what: "browser-tab" } },
-		(browserTab) => {
-			currentTab = browserTab;
-			callback != null && callback(url);
-		},
-	);
-}
-
 // close the popup when the user clicks on the redirection link
 document.querySelectorAll("a").forEach((a) => {
 	a.addEventListener("click", (e) => {
@@ -112,7 +115,6 @@ document.querySelectorAll("a").forEach((a) => {
 		currentTab == null
 			? nss_getCurrentBrowserTab(createTab, a.href)
 			: createTab(a.href);
-		//open(a.href, "_blank");
 		setTimeout(() => close(), 200);
 	});
 });

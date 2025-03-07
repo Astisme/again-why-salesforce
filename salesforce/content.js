@@ -1,6 +1,17 @@
 "use strict";
+import { HTTPS, LIGHTNING_FORCE_COM, SETUP_LIGHTNING, EXTENSION_LABEL } from "/constants.js";
+import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
+import { setupDrag } from "/dragHandler.js";
+import {
+	generateOpenOtherOrgModal,
+	generateRowTemplate,
+	generateSldsToastMessage,
+	MODAL_ID,
+} from "./generator.js";
+import { SALESFORCE_URL_PATTERN } from "../constants.js";
 import { Tab } from "/tab.js";
 import { TabContainer } from "/tabContainer.js";
+
 let allTabs;
 async function getAllTabs_async() {
 	if (allTabs == null) {
@@ -22,25 +33,44 @@ export async function ensureAllTabsAvailability() {
 		await getAllTabs_async();
 	}
 }
-import { HTTPS, LIGHTNING_FORCE_COM, SETUP_LIGHTNING } from "/constants.js";
-import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
-import { setupDrag } from "/dragHandler.js";
-import {
-	generateOpenOtherOrgModal,
-	generateRowTemplate,
-	generateSldsToastMessage,
-	MODAL_ID,
-} from "./generator.js";
-import { SALESFORCE_URL_PATTERN } from "../constants.js";
 
-let setupTabUl; // This is a UL on Salesforce Setup
-let objectManagerLi; // This is the standard last LI of setupTabUl
-let modalHanger; // This is where modals should be inserted in Salesforce Setup
+/**
+ * The main UL on Salesforce Setup
+ */
+let setupTabUl;
+export function getSetupTabUl() {
+  return setupTabUl;
+}
+/**
+ * The standard last LI of setupTabUl 
+ */
+let objectManagerLi;
+/**
+ * Where modals should be inserted in Salesforce Setup 
+ */
+let modalHanger;
+/**
+ * Contains the current href, always up-to-date
+ */
 let href = globalThis.location.href;
+export function getCurrentHref() {
+  return href;
+}
 
 let wasOnSavedTab;
+export function getWasOnSavedTab() {
+  return wasOnSavedTab;
+}
+
 let isCurrentlyOnSavedTab;
-let fromHrefUpdate;
+export function getIsCurrentlyOnSavedTab() {
+  return isCurrentlyOnSavedTab;
+}
+
+/**
+ * Wheter the href has been updated right now
+ */
+let fromHrefUpdate = false;
 
 // add lightning-navigation to the page in order to use it
 {
@@ -49,38 +79,32 @@ let fromHrefUpdate;
 	(document.head || document.documentElement).appendChild(script);
 }
 
-export function getIsCurrentlyOnSavedTab() {
-	return isCurrentlyOnSavedTab;
-}
-export function getWasOnSavedTab() {
-	return wasOnSavedTab;
-}
-export function getCurrentHref() {
-	return href;
-}
-export function getSetupTabUl() {
-	return setupTabUl;
-}
-
 /**
- * Reloads the saved tabs and shows a success toast message when storage is set.
+ * Handles post-save actions after setting Salesforce tabs.
+ * - Displays a toast message indicating that the Salesforce tabs have been saved.
+ * - Reloads the tabs by calling `reloadTabs` with the provided tabs.
+ *
+ * @param {string|null} [what=null] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
+ * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
  */
 function sf_afterSet(what = null, tabs = null) {
 	if (setupTabUl == null) {
 		return;
 	}
 	if (what == null || what === "saved") {
-		showToast(`"Again, Why Salesforce" tabs saved.`);
+		showToast(`"${EXTENSION_LABEL}" tabs saved.`);
 	}
 	reloadTabs(tabs);
 }
 
 /**
- * Displays a toast message in the UI.
+ * Displays a toast message on the UI with the provided message and styling options.
+ * - The toast message is appended to the DOM and automatically removed after an estimated reading time.
+ * - The message is logged to the console with an appropriate log level based on success, warning, or error.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} [isSuccess=true] - Whether the toast message is a success (default is true).
- * @param {boolean} [isWarning=false] - Whether the toast message is a warning (default is false).
+ * @param {boolean} [isSuccess=true] - Indicates if the message is a success. Defaults to `true`.
+ * @param {boolean} [isWarning=false] - Indicates if the message is a warning. Defaults to `false`.
  */
 export function showToast(message, isSuccess = true, isWarning = false) {
 	/**
@@ -125,11 +149,14 @@ export function showToast(message, isSuccess = true, isWarning = false) {
 }
 
 /**
- * Initializes and sets up the storage for the tabs with default data or from the stored data.
+ * Initializes the tab setup by ensuring all tabs are available and processing them accordingly.
+ * - If no `tabs` are provided, it fetches the saved tabs using `allTabs.getSavedTabs`.
+ * - If `tabs` are provided, it replaces the current tabs with the new set using `allTabs.replaceTabs` while applying various filters.
+ * - After processing, it iterates through `allTabs` and appends rows to the DOM for the tabs that match the current organization or are not organization-specific.
+ * - It also ensures the presence of a "favourite" button and checks if the current view is for saved tabs.
  *
- * @param {Array<Object>} items - The items retrieved from storage. If no data is found, the default tabs will be initialized.
- * @param {string} items.key - The key used to fetch the stored data.
- * @param {Array<Object>} items[key] - The array of tab data retrieved from storage or the default tabs.
+ * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the saved tabs will be fetched.
+ * @returns {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
  */
 async function init(tabs = null) {
 	let orgName;
@@ -161,10 +188,14 @@ async function init(tabs = null) {
 }
 
 /**
- * Determines if the current tab is a saved tab or not based on the URL.
+ * Checks if the current tab corresponds to a saved tab and executes a callback if specified.
+ * - If `isFromHrefUpdate` is `true`, it triggers the provided callback with the current saved tab status.
+ * - The function updates the `fromHrefUpdate` flag to track whether the check is triggered by a URL update.
+ * - It ensures all tabs are available by calling `ensureAllTabsAvailability`, and checks if the current URL exists in `allTabs`.
  *
- * @param {boolean} [isFromHrefUpdate=false] - A flag to determine if the check is due to a URL update.
- * @returns {boolean} - True if the current tab is a saved tab, otherwise false.
+ * @param {boolean} [isFromHrefUpdate=false] - A flag indicating if the check is triggered by a URL update.
+ * @param {Function} [callback] - A callback function to be invoked with the result of the saved tab check.
+ * @returns {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
  */
 export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
@@ -172,11 +203,13 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 		return;
 	}
 	fromHrefUpdate = isFromHrefUpdate;
-	const loc = Tab.minifyURL(href);
+	const url = Tab.minifyURL(href);
 	wasOnSavedTab = isCurrentlyOnSavedTab;
 	await ensureAllTabsAvailability();
-	isCurrentlyOnSavedTab = allTabs.exists({ url: loc });
-	isFromHrefUpdate && callback(isCurrentlyOnSavedTab);
+    isCurrentlyOnSavedTab = allTabs.exists({ url });
+    if(isFromHrefUpdate){
+      callback(isCurrentlyOnSavedTab);
+    }
 }
 
 /**
@@ -200,9 +233,12 @@ function onHrefUpdate() {
 }
 
 /**
- * Delays the loading of setup tabs until the relevant DOM elements are available.
+ * Attempts to find and set up the tab elements, retrying up to 5 times if the necessary elements are not found.
+ * - If the setup tab elements are not found within 5 attempts, it logs an error and retries after 5 seconds.
+ * - Once found, it initializes the DOM elements and applies various behaviors, such as observing URL changes, adding scroll behavior, and enabling mouse wheel scrolling.
+ * - It also sets up event listeners for drag behavior and reloads the tabs.
  *
- * @param {number} [count=0] - A counter to limit the number of retry attempts.
+ * @param {number} [count=0] - The number of retry attempts made so far. Defaults to 0.
  */
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
@@ -245,11 +281,15 @@ function delayLoadSetupTabs(count = 0) {
 
 let firstRun = true;
 /**
- * Reloads the tabs by clearing the current list and fetching the updated data from storage.
+ * Reloads the tabs by checking if the setup tab list is correctly populated and removing any existing tabs before reinitializing.
+ * - Ensures that duplicate tabs are not created when refocusing on the setup window/tab.
+ * - If the tabs are not properly loaded or if it's the first run, it retries after 500ms.
+ * - Removes all tabs in the setup tab list (except for hidden ones, "Home", and "Object Manager") and then calls the `init` function to load the new tabs.
+ *
+ * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the tabs will be fetched again.
+ * @returns {void} This function does not return anything, but it reinitializes the tab list as needed.
  */
 function reloadTabs(tabs = null) {
-	// prevent creating duplicate tabs when refocusing on the setup window/tab
-	// only needed after the first run of this function
 	if (
 		setupTabUl.childElementCount === 0 ||
 		(!firstRun && setupTabUl.childElementCount <= 3 &&
@@ -267,7 +307,12 @@ function reloadTabs(tabs = null) {
 }
 
 /**
- * Reorders the tabs based on their new order in the DOM and saves the updated list to storage.
+ * Reorders the tabs based on the current setup tab list, extracting information from each tab and updating the stored tabs.
+ * - Loops through the children of `setupTabUl` (ignoring Salesforce's default tabs) and extracts relevant tab information (e.g., label and URL).
+ * - Creates `Tab` objects for valid tabs and attempts to store them using `allTabs.replaceTabs`.
+ * - If any errors occur during the process, they are caught and displayed using `showToast`.
+ *
+ * @returns {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
  */
 async function reorderTabs() {
 	try {
@@ -317,13 +362,21 @@ async function reorderTabs() {
 }
 
 /**
- * Find tabs with the given URL and change their background-color
+ * Highlights duplicate tabs by toggling a warning style on tabs with the specified `miniURL`.
+ * - Searches for all anchor elements (`<a>`) in `setupTabUl` with a matching `label` attribute that equals the provided `miniURL`.
+ * - Toggles a warning class (`slds-theme--warning`) on all matching tabs to make them bold (styled as duplicates).
+ * - The warning is toggled twice: once immediately and again after 4 seconds to visually highlight the duplicates.
+ *
+ * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
 function makeDuplicatesBold(miniURL) {
-	const duplicatetabs = setupTabUl.querySelectorAll(`a[title="${miniURL}"]`);
+	const duplicatetabs = setupTabUl.querySelectorAll(`a[label="${miniURL}"]`);
 	if (duplicatetabs == null) {
 		return;
 	}
+    /**
+     * For each duplicatetabs, toggles the slds-theme--warning class
+     */
 	function toggleWarning() {
 		duplicatetabs.forEach((tab) =>
 			tab.classList.toggle("slds-theme--warning")
@@ -337,7 +390,11 @@ function makeDuplicatesBold(miniURL) {
 }
 
 /**
- * Find the div to where to add a modal
+ * Retrieves the modal hanger element, caching it for future use.
+ * - If the `modalHanger` is already set, it returns the cached value.
+ * - Otherwise, it finds it in the page.
+ *
+ * @returns {HTMLElement|null} The modal hanger element if found, otherwise null.
  */
 export function getModalHanger() {
 	if (modalHanger != null) {
@@ -348,16 +405,23 @@ export function getModalHanger() {
 }
 
 /**
- * Shows a modal to ask the user into which org they want to open the given URL.
+ * Displays a modal for opening a page in another Salesforce organization.
+ * - If a modal is already open, shows a toast to prompt the user to close the existing modal first.
+ * - If the current page contains a Salesforce ID, shows a warning toast indicating the page cannot exist in another Org.
+ * - Generates the modal with an input field for the user to specify the organization URL.
+ * - If the user enters a valid Salesforce Org URL, the modal provides a confirmation prompt before opening the page in a new tab.
+ * - The modal includes event listeners for user input and for saving the new organization link.
  *
- * @param {string} miniURL - the minified URL for which the user has engaged this action.
- * @param {string} tabTitle - the name of the URL for which the user has engaged this action. If not found, we try to find the name through the saved tabs; otherwise a default text is shown.
+ * @param {Object} options - An object containing optional parameters:
+ * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
+ * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
+ * @returns {Promise<void>} A promise that resolves once the modal has been displayed and the user interacts with it.
  */
 async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("Close the other modal first!", false);
 	}
-	if (Tab.containsSalesforceId(href)) {
+	if (Tab.containsSalesforceId(url)) {
 		showToast(
 			"This page could not exist in another Org, because it contains an Id!",
 			false,
@@ -367,13 +431,12 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	await ensureAllTabsAvailability();
 	const { modalParent, saveButton, closeButton, inputContainer } =
 		generateOpenOtherOrgModal(
-			url,
+			url, // if the url is "", we may still open the link in another Org without any issue
 			label ??
 				allTabs.getTabsByData({ url })[0]?.label ??
 				"Where to?",
 		);
-	modalHanger = getModalHanger();
-	modalHanger.appendChild(modalParent);
+	getModalHanger().appendChild(modalParent);
 	let lastInput = "";
 	inputContainer.addEventListener("input", (e) => {
 		const target = e.target;
@@ -406,6 +469,9 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		) {
 			return showToast(`Please insert a valid Org!\n${newTarget}`, false);
 		}
+        if(newTarget === Tab.extractOrgName(getCurrentHref())){
+          return showToast("The inserted Org is the current one!\nPlease insert another Org.", false);
+        }
 		const targetUrl = new URL(
 			`${HTTPS}${newTarget}${LIGHTNING_FORCE_COM}${
 				!url.startsWith("/") ? SETUP_LIGHTNING : ""
@@ -418,7 +484,17 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	});
 }
 
-/** */
+/**
+ * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
+ * - This function ensures all tabs are available before performing the action.
+ * - It handles various actions including moving, removing, adding, and clearing tabs, with the option to filter by organization.
+ * - After the action is performed, it triggers the `sf_afterSet` function to finalize the process.
+ * - If an error occurs during the action, it logs a warning and displays a toast with the error message.
+ *
+ * @param {string} action - The action to perform on the tab. Possible values: "move", "remove-this", "remove-other", "add", "remove-no-org-tabs", "remove-all".
+ * @param {Tab} tab - The tab on which the action should be performed.
+ * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
+ */
 export async function performActionOnTabs(action, tab, options) {
 	try {
 		await ensureAllTabsAvailability();
@@ -478,7 +554,6 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 		case "open-other-org": {
 			const label = message.linkTabLabel;
 			const url = message.linkTabUrl ?? message.pageTabUrl;
-			//const expURL = message.linkUrl ?? message.pageUrl
 			showModalOpenOtherOrg({ label, url });
 			break;
 		}

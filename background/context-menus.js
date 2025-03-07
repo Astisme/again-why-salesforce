@@ -4,7 +4,7 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
-} from "../constants.js";
+} from "/constants.js";
 import {
 	bg_expandURL,
 	bg_getCurrentBrowserTab,
@@ -106,17 +106,15 @@ const menuItems = [
 		title: "👋 Remove tab",
 		contexts: ["page", "frame"],
 	},
-];
-
-/**
- * - Updates `documentUrlPatterns` for each menu item:
- *   - Uses `FRAME_PATTERNS` if the item context includes "frame".
- *   - Uses `CONTEXT_MENU_PATTERNS` otherwise.
- */
-menuItems.forEach((item) => {
-	item.documentUrlPatterns = item.contexts.includes("frame")
-		? FRAME_PATTERNS
-		: CONTEXT_MENU_PATTERNS;
+].map((item) => {
+  /**
+   * - Updates `documentUrlPatterns` for each menu item:
+   *   - Uses `FRAME_PATTERNS` if the item context includes "frame".
+   *   - Uses `CONTEXT_MENU_PATTERNS` otherwise.
+   */
+  item.documentUrlPatterns = item.contexts.includes("frame")
+    ? FRAME_PATTERNS
+    : CONTEXT_MENU_PATTERNS;
 });
 
 /**
@@ -154,20 +152,16 @@ async function removeMenuItems() {
 	}
 }
 
-//let operating = null;
 /**
- * Checks the current active browserTab's URL and conditionally adds or removes context menus.
+ * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
+ * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
+ * The function also triggers a notification if the context menu is updated.
  *
- * - Queries the currently active browserTab in the current browser window.
- * - If the browserTab exists and its URL matches any regex in `CONTEXT_MENU_PATTERNS_REGEX`, calls `createMenuItems`.
- * - If no match is found, calls `removeMenuItems` to clean up context menus.
+ * @function checkAddRemoveContextMenus
+ * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
+ * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 async function checkAddRemoveContextMenus(what) {
-	/*
-    if(operating != null)
-        return console.log('operating',operating,what);
-    operating = what;
-    */
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
 		const url = browserTab.url;
@@ -183,14 +177,18 @@ async function checkAddRemoveContextMenus(what) {
 		if (error != null && error.message !== "") {
 			console.error("Error checking context menus:", error);
 		}
-		/*
-	} finally {
-        operating = null;
-    */
 	}
 }
 
-// Debounce function to prevent excessive calls
+/**
+ * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
+ * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the 
+ * specified delay has passed since the last invocation.
+ *
+ * @param {Function} fn - The function to debounce.
+ * @param {number} [delay=150] - The delay in milliseconds before the function is executed after the last invocation.
+ * @returns {Function} A debounced version of the provided function.
+ */
 function debounce(fn, delay = 150) {
 	let timeout;
 	return (...args) => {

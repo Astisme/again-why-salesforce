@@ -3,10 +3,17 @@ import { Tab } from "./tab.js";
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
 export class TabContainer extends Array {
-	/**
-	 * Creates the TabContainer while setting the tabs
-	 * @param {Array<Tab>|null} [tabs=null] - An array containing Tab objects (only valid Tabs are used)
-	 */
+    /**
+     * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
+     * Throws an error if the provided secret does not match the expected secret value.
+     * 
+     * @constructor
+     * @param {Symbol} secret - The secret value used to authorize instantiation.
+     * @throws {Error} Throws an error if the provided secret is invalid.
+     * @example
+     * const tabContainer = TabContainer.create(); // Correct way to create an instance.
+     * const tabContainer = new TabContainer("invalidSecret"); // Throws an error.
+     */
 	constructor(secret) {
 		if (secret !== _tabContainerSecret) {
 			console.trace();
@@ -17,7 +24,13 @@ export class TabContainer extends Array {
 		super();
 	}
 
-	/** */
+    /**
+     * Creates and initializes a new `TabContainer` instance.
+     *
+     * @param {Array|null} [tabs=null] - An optional array of tabs to initialize the container with. If not provided, defaults to null.
+     * @returns {Promise<TabContainer>} - A promise that resolves to the newly created and initialized `TabContainer` instance.
+     * @throws {Error} - Throws an error if the `TabContainer` cannot be initialized with the provided `tabs`.
+     */
 	static async create(tabs = null) {
 		const tabcont = new TabContainer(_tabContainerSecret);
 		if (!await tabcont._initialize(tabs)) {
@@ -54,15 +67,31 @@ export class TabContainer extends Array {
         }
         return this.length;
     }
+    async push({sync = true, ...tab} = {}) {
+        console.log('push',sync, tab);
+        if (!Tab.isValid(tab)) { // await is needed
+            throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
+        }
+        if (this.exists(tab)) // await is needed
+            throw new Error(`This tab already exists: ${tab.toString()}`);
+
+        const validTab = Tab.create(tab);
+        this.push(validTab);
+
+        if (sync)
+            await this.syncTabs();
+        return true;
+    }
     */
 
-	/**
-	 * Safely splice tabs while maintaining TabContainer instance
-	 * @param {number} start - The start index
-	 * @param {number} deleteCount - Number of elements to delete
-	 * @param {...Tab} items - Items to insert
-	 * @returns {Tab[]} - Array of removed elements
-	 */
+    /**
+     * Changes the contents of an array by removing, replacing, or adding elements.
+     *
+     * @param {number} start - The index at which to start changing the array. If negative, it is treated as an offset from the end of the array.
+     * @param {number} deleteCount - The number of elements to remove from the array starting from the `start` index. If `deleteCount` is larger than the number of elements from `start` to the end of the array, all elements after `start` will be removed.
+     * @param {...*} items - The elements to add to the array, starting at the `start` index. If no elements are provided, elements are only removed.
+     * @returns {Array} - An array containing the elements that were removed from the array.
+     */
 	splice(start, deleteCount, ...items) {
 		// Normalize start (assumes start can be negative)
 		if (start < 0) {
@@ -139,7 +168,6 @@ export class TabContainer extends Array {
 	filter(callback) {
 		// Create a new instance of the same class
 		const filtered = [];
-
 		// Manually iterate through the array and apply the callback
 		for (let i = 0; i < this.length; i++) {
 			const element = this[i];
@@ -147,14 +175,16 @@ export class TabContainer extends Array {
 				filtered.push(element);
 			}
 		}
-
 		return filtered;
 	}
 
-	/**
-	 * Initializes the tabs based on the synced tabs from the background.
-	 * Gets all the available tabs while also looking for synced ones.
-	 */
+    /**
+     * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
+     *
+     * @param {Array|null} [tabs=null] - An optional array of tabs to initialize the container with. If not provided, defaults to null.
+     * @returns {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
+     * @private
+     */
 	async _initialize(tabs = null) {
 		async function checkAddTabs(context, tabs) {
 			if (TabContainer.isValid(tabs, false)) {
@@ -174,25 +204,32 @@ export class TabContainer extends Array {
 		return await this.setDefaultTabs();
 	}
 
+    /**
+     * Retrieves the saved tabs from the browser's runtime and optionally replaces the current tabs.
+     *
+     * @param {boolean} [replace=true] - A flag indicating whether to replace the current tabs with the retrieved ones. Defaults to `true`.
+     * @returns {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
+     */
 	async getSavedTabs(replace = true) {
 		const res = await chrome.runtime.sendMessage(
 			{ message: { what: "get" } },
 		);
-
 		if (replace) {
 			await this.replaceTabs(res, {
 				resetTabs: true,
 				removeOrgTabs: true,
 				sync: false,
 			});
+          return this;
 		}
-
-		return replace ? this : res;
+      return res;
 	}
 
-	/**
-	 * Initializes the default tabs and syncs them to storage.
-	 */
+    /**
+     * Sets the default tabs for the `TabContainer` by replacing the current tabs with a predefined set of tabs.
+     *
+     * @returns {Promise<void>} - A promise that resolves once the default tabs are successfully set.
+     */
 	async setDefaultTabs() {
 		return await this.replaceTabs([
 			{ label: "⚡", url: "/lightning" },
@@ -205,12 +242,14 @@ export class TabContainer extends Array {
 		});
 	}
 
-	/**
-	 * Add a new tab to the collection and sync it with the background.
-	 * @param {Object} tab - Tab object with label, url, and optional org
-	 * @param {boolean} [sync=true] - whether a sync operation should be performed
-	 * @returns {boolean} - Whether the tab was successfully added
-	 */
+    /**
+     * Adds a new tab to the `TabContainer` if it is valid and does not already exist.
+     *
+     * @param {Object} tab - The tab object to be added.
+     * @param {boolean} [sync=true] - A flag indicating whether to synchronize the tabs after adding. Defaults to `true`.
+     * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
+     * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
+     */
 	async addTab(tab, sync = true) {
 		if (!Tab.isValid(tab)) {
 			throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
@@ -218,28 +257,27 @@ export class TabContainer extends Array {
 		if (this.exists(tab)) {
 			throw new Error(`This tab already exists: ${JSON.stringify(tab)}`);
 		}
-		const validTab = Tab.create(tab);
-		this.push(validTab);
+		this.push(Tab.create(tab));
 		if (sync) {
 			return await this.syncTabs();
 		}
 		return true;
 	}
 
-	/**
-	 * Add a collection of tabs to the collection and sync it with the background.
-	 * @param {Array<Tab>} tabs - the tabs to be added
-	 * @param {boolean} [sync=true] - whether a sync operation should be performed
-	 * @returns {boolean} - Whether the tab was successfully added
-	 */
+    /**
+     * Adds multiple tabs to the `TabContainer`. If a tab already exists, it is ignored.
+     *
+     * @param {Array<Object>} tabs - An array of tab objects to be added to the container.
+     * @param {boolean} [sync=true] - A flag indicating whether to synchronize the tabs after adding. Defaults to `true`.
+     * @throws {Error} - Throws an error if any tab (other than duplicates) fails to be added.
+     * @returns {Promise<boolean>} - A promise that resolves to `true` if all tabs were added successfully (excluding duplicates), otherwise `false` if any tab could not be added.
+     */
 	async addTabs(tabs, sync = true) {
 		//this.push(...tabs);
 		if (tabs.length === 0 && sync === false) {
 			return true;
 		}
-
 		TabContainer.errorOnInvalidTabs(tabs);
-
 		let addedAll = true;
 		for (const tab of tabs) {
 			try {
@@ -251,46 +289,30 @@ export class TabContainer extends Array {
 				}
 			}
 		}
-
 		if (sync) {
 			await this.syncTabs();
 		}
-
 		return addedAll;
 	}
-	/*
-    async push({sync = true, ...tab} = {}) {
-        console.log('push',sync, tab);
-        if (!Tab.isValid(tab)) { // await is needed
-            throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
-        }
-        if (this.exists(tab)) // await is needed
-            throw new Error(`This tab already exists: ${tab.toString()}`);
 
-        const validTab = Tab.create(tab);
-        this.push(validTab);
-
-        if (sync)
-            await this.syncTabs();
-        return true;
-    }
-    */
-
-	/**
-	 * Get tabs with or without an org
-	 * @param {boolean} [getWithOrg=true] - Wheter the org should be checked with or agains
-	 * @returns {Array} - Tabs belonging to the some organization
-	 */
+    /**
+     * Filters and returns tabs based on whether they are associated with an organization.
+     *
+     * @param {boolean} [getWithOrg=true] - A flag indicating whether to return tabs with an associated organization (`true`) or without (`false`). Defaults to `true`.
+     * @returns {Array<Tab>} - An array of tabs that match the specified organization condition.
+     */
 	getTabsWithOrg(getWithOrg = true) {
 		return this.filter((tab) => getWithOrg === (tab.org != null));
 	}
 
-	/**
-	 * Get tabs filtered by organization
-	 * @param {string} org - Organization name to filter by
-	 * @param {boolean} [matchOrg=true] - Wheter the org specified should be checked with or agains
-	 * @returns {Array} - Tabs belonging to the specified organization
-	 */
+    /**
+     * Filters and returns tabs based on the specified organization.
+     *
+     * @param {Object|null} org - The organization to filter tabs by. If `null`, an error is thrown.
+     * @param {boolean} [matchOrg=true] - A flag indicating whether to return tabs that exactly match the specified organization (`true`), or the ones that do not (`false`). Defaults to `true`.
+     * @throws {Error} - Throws an error if the `org` parameter is not specified (`null`).
+     * @returns {Array<Object>} - An array of tabs that match the specified organization condition.
+     */
 	getTabsByOrg(org = null, matchOrg = true) {
 		if (org == null) {
 			throw new Error("Cannot get Tabs if Org is not specified.");
@@ -303,62 +325,82 @@ export class TabContainer extends Array {
 		);
 	}
 
-	/** */
-	getTabsByData(tab = { label: null, url: null, org: null }, match = true) {
-		if (tab.label == null && tab.url == null) {
-			if (tab.org == null) {
+    /**
+     * Filters and returns tabs based on the specified tab data (label, url, and organization).
+     *
+     * @param {Object} [param={}] - An object containing the tab data to filter by. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
+     * @param {string|null} [param.label=null] - The label of the tab to filter by.
+     * @param {string|null} [param.url=null] - The URL of the tab to filter by.
+     * @param {Object|null} [param.org=null] - The organization associated with the tab to filter by.
+     * @param {boolean} [match=true] - A flag indicating whether to return tabs that exactly match the specified tab data (`true`), or those that do not match (`false`). Defaults to `true`.
+     * @returns {Array<Tab>} - An array of tabs that match the specified tab data condition.
+     */
+	getTabsByData({ label= null, url= null, org= null } = {}, match = true) {
+		if (label == null && url == null) {
+			if (org == null) {
 				return [];
 			} else {
-				return this.getTabsByOrg(tab.org);
+				return this.getTabsByOrg(org);
 			}
 		}
-
 		return this.filter((tb) =>
 			match === tb.equals({
-				label: tab.label,
-				url: tab.url,
-				org: tab.org,
+				label,
+				url,
+				org,
 			})
 		);
 	}
 
-	/** */
-	getTabIndex(tab = { label: null, url: null, org: null }) {
-		if (tab.label == null && tab.url == null && tab.org == null) {
+    /**
+     * Finds the index of a tab in the container based on the specified tab data (label, url, and organization).
+     *
+     * @param {Object} [tab={}] - An object containing the tab data to find. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
+     * @param {string|null} [tab.label=null] - The label of the tab to find.
+     * @param {string|null} [tab.url=null] - The URL of the tab to find.
+     * @param {Object|null} [tab.org=null] - The organization associated with the tab to find.
+     * @throws {Error} - Throws an error if no tab data is provided or if the tab is not found.
+     * @returns {number} - The index of the tab if found.
+     */
+	getTabIndex({ label= null, url= null, org= null } = {}) {
+		if (label == null && url == null && org == null) {
 			throw new Error("Cannot find index without data.");
 		}
-
 		const index = this.findIndex((tb) =>
 			tb.equals({
-				label: tab.label,
-				url: tab.url,
-				org: tab.org,
+				label,
+				url,
+				org,
 			})
 		);
-
 		if (index < 0) {
 			throw new Error("Tab was not found.");
 		}
 		return index;
 	}
 
-	/**
-	 * Check if a tab with a specific label, url and org (based on the passed data) already exists
-	 * @param {Object} param0  - an Object containing the following parameters to match a Tab to find
-	 * @param {string} param0.label - the label of the Tab to find
-	 * @param {string} param0.url - the url of the Tab to find
-	 * @param {string} param0.org - the org of the Tab to find
-	 * @returns {boolean} - Whether the tab exists
-	 */
-	exists(tab = { label: undefined, url: undefined, org: undefined }) {
-		if (tab.url != null) {
-			tab.url = Tab.minifyURL(tab.url);
+    /**
+     * Checks if a tab with the specified data (label, url, and organization) exists in the container.
+     *
+     * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
+     * @param {string|null} [tab.label=null] - The label of the tab to check for.
+     * @param {string|null} [tab.url=null] - The URL of the tab to check for.
+     * @param {Object|null} [tab.org=null] - The organization associated with the tab to check for.
+     * @returns {boolean} - `true` if a tab with the specified data exists, otherwise `false`.
+     */
+	exists({ label= null, url= null, org= null } = {}) {
+		if (url != null) {
+			url = Tab.minifyURL(url);
 		}
-		if (tab.org != null) {
-			tab.org = Tab.extractOrgName(tab.org);
+		if (org != null) {
+			org = Tab.extractOrgName(org);
 		}
 		return this.length !== 0 &&
-			this.some((tb) => tb.equals(tab));
+			this.some((tb) => tb.equals({
+				label,
+				url,
+				org,
+			}));
 	}
 
 	/**
@@ -447,15 +489,20 @@ export class TabContainer extends Array {
 		return await this.addTabs(newTabs, sync);
 	}
 
-	/** */
+    /**
+     * Converts the `TabContainer` instance to a JSON representation.
+     *
+     * @returns {Object} - A JSON object representing the `TabContainer` instance.
+     */
 	toJSON() {
 		return TabContainer.toJSON(this);
 	}
 
-	/**
-	 * Export Tabs to JSON
-	 * @returns {string} - JSON string of Tabs
-	 */
+    /**
+     * Returns a string representation of the `TabContainer` instance.
+     *
+     * @returns {string} - A string representing the `TabContainer` instance.
+     */
 	toString() {
 		return TabContainer.toString(this);
 	}
@@ -488,10 +535,12 @@ export class TabContainer extends Array {
 		return 0;
 	}
 
-	/**
-	 * Sync tabs with the background.
-	 * @param {Array<Tab>} tabs - The array which will be used from now on (if provided)
-	 */
+    /**
+     * Synchronizes the tabs in the `TabContainer`. Optionally replaces the current tabs before synchronization.
+     *
+     * @param {Array|null} [tabs=null] - An optional array of tabs to replace the current tabs before synchronization. If not provided, the current tabs are used.
+     * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
+     */
 	async syncTabs(tabs = null) {
 		// replace tabs already checks the tabs
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
@@ -500,10 +549,14 @@ export class TabContainer extends Array {
 		return await TabContainer._syncTabs(this);
 	}
 
-	/**
-	 * Sync tabs with the background
-	 * @param {Array<Tab>} tabs - The tabs to be synced
-	 */
+    /**
+     * Synchronizes the specified tabs by sending them to the browser's runtime.
+     *
+     * @param {Array|TabContainer|null} [inputTabs=null] - The tabs to synchronize. If `null`, synchronization is not possible.
+     * @throws {Error} - Throws an error if `inputTabs` is `null` or if there is an issue with the runtime message.
+     * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful.
+     * @private
+     */
 	static async _syncTabs(inputTabs = null) {
 		if (inputTabs == null) {
 			throw new Error("Cannot sync null tabs!");
@@ -518,10 +571,12 @@ export class TabContainer extends Array {
 		return true;
 	}
 
-	/**
-	 * Throw an error for every invalid Tab passed
-	 * @param {Array<Tab>} tabs - The tabs to be validated
-	 */
+    /**
+     * Validates an array of tabs, throwing an error if any tab is invalid or if the provided data is not a valid array.
+     *
+     * @param {Array|null} [tabs=null] - The array of tabs to validate.
+     * @throws {Error} - Throws an error if the array is invalid or if any tab in the array is not valid.
+     */
 	static errorOnInvalidTabs(tabs = null) {
 		if (!TabContainer.isValid(tabs, false)) {
 			throw new Error("Invalid array or no array was passed", tabs);
@@ -542,11 +597,13 @@ export class TabContainer extends Array {
 		}
 	}
 
-	/**
-	 * Check if an array is a valid TabContainer
-	 * @param {Array<Tab>} tabs - The tabs to be validated
-	 * @returns {boolean} Whether the array as input is valid.
-	 */
+    /**
+     * Validates if the provided data is a valid array of tabs. Optionally checks if each tab in the array is valid.
+     *
+     * @param {Array|null} tabs - The array of tabs to validate.
+     * @param {boolean} [strict=true] - A flag that, when `true`, also checks if each individual tab in the array is valid. Defaults to `true`.
+     * @returns {boolean} - `true` if the tabs are valid (and all tabs are valid if `strict` is `true`), otherwise `false`.
+     */
 	static isValid(tabs, strict = true) {
 		const basicCheck = tabs != null && Array.isArray(tabs);
 		if (!strict || !basicCheck) {
@@ -556,7 +613,13 @@ export class TabContainer extends Array {
 		return tabValidResults.every(Boolean);
 	}
 
-	/** */
+    /**
+     * Converts an array of tabs to a JSON representation. Validates the tabs before conversion.
+     *
+     * @param {Array} tabs - The array of tabs to convert to JSON.
+     * @throws {Error} - Throws an error if the provided tabs are invalid.
+     * @returns {Array<Object>} - A JSON array representing the valid tabs.
+     */
 	static toJSON(tabs) {
 		TabContainer.errorOnInvalidTabs(tabs);
 		const validArray = TabContainer.isValid(tabs) ? tabs : Array.from(tabs);
@@ -584,7 +647,13 @@ export class TabContainer extends Array {
 		return resultJson;
 	}
 
-	/** */
+    /**
+     * Converts an array of tabs to a string representation. Validates the tabs before conversion.
+     *
+     * @param {Array} tabs - The array of tabs to convert to a string.
+     * @throws {Error} - Throws an error if the provided tabs are invalid.
+     * @returns {string} - A string representation of the valid tabs.
+     */
 	static toString(tabs) {
 		TabContainer.errorOnInvalidTabs(tabs);
 		return `[\n${tabs.map((tab) => tab.toString()).join(",\n")}\n]`;
@@ -610,13 +679,17 @@ export class TabContainer extends Array {
 		return mapped;
 	}
 
-	/**
-	 * Moves a tab to the specified spot and then reloads.
-	 *
-	 * @param {string} miniURL - the minified URL of the tab to keep
-	 * @param {string} tabTitle - the title of the tab to keep
-	 * @param {boolean} [moveBefore=true] - whether the tab should be moved one space before in the array
-	 * @param {boolean} [fullMovement=false] - whether the tab should be moved at the begin or end of the array instead of moving it only one space
+    /**
+     * Moves a tab to a new position in the `TabContainer`. The tab can be moved to the beginning or end of the container, or just to an adjacent position.
+     *
+     * @param {Object} [tab={ label: null, url: null }] - The tab data used to identify the tab to move. The object can include `label` and `url` properties.
+     * @param {string|null} [tab.label=null] - The label of the tab to move.
+     * @param {string|null} [tab.url=null] - The URL of the tab to move.
+     * @param {Object} [options={ moveBefore: true, fullMovement: false }] - Options for the movement behavior.
+     * @param {boolean} [options.moveBefore=true] - A flag indicating whether to move the tab before the current one (`true`) or after (`false`).
+     * @param {boolean} [options.fullMovement=false] - A flag indicating whether to move the tab to the start or end of the container (`true`), or just to an adjacent position (`false`).
+     * @throws {Error} - Throws an error if no matching tab is found, if more than one matching tab is found, or if no valid `url` is provided.
+     * @returns {Promise<number>} - A promise that resolves to the new index of the moved tab.
 	 *
 	 * @example
 	 * for this example, we'll collapse miniURL and tabTitle into a single string and simply look at tabs as strings.
@@ -676,10 +749,11 @@ export class TabContainer extends Array {
 
 	/**
 	 * Remove all tabs matching the label, url and org (based on the passed data)
-	 * @param {Object} param0  - an Object containing the following parameters to match a Tab to remove
-	 * @param {string} param0.label - the label of the Tab to remove
-	 * @param {string} param0.url - the url of the Tab to remove
-	 * @param {string} param0.org - the org of the Tab to remove
+	 *
+	 * @param {Object} tab - an Object containing the following parameters to match a Tab to remove
+	 * @param {string} tab.label - the label of the Tab to remove
+	 * @param {string} tab.url - the url of the Tab to remove
+	 * @param {string} tab.org - the org of the Tab to remove
 	 * @returns {boolean} - Whether a tab was removed
 	 */
 	async remove(tab = { label: null, url: null, org: null }) {
@@ -693,12 +767,16 @@ export class TabContainer extends Array {
 		return this.length < initialLength;
 	}
 
-	/**
-	 * Removes the other saved tabs and then reloads.
-	 *
-	 * @param {string} miniURL - the minified URL of the tab to keep
-	 * @param {string} tabTitle - the title of the tab to keep
-	 * @param {boolean || null} [removeBefore=null] - special value to change the behaviour of the function. When not passed, the specified tab will be the only one kept. When true, only the tabs before it will be removed. When false, only the tabs after it will be removed.
+    /**
+     * Removes all tabs except the specified one, and optionally removes tabs before or after the specified tab.
+     *
+     * @param {Object} [tab={ label: null, url: null }] - The tab data used to identify the tab to keep. The object can include `label` and `url` properties.
+     * @param {string|null} [tab.label=null] - The label of the tab to keep.
+     * @param {string|null} [tab.url=null] - The URL of the tab to keep.
+     * @param {Object} [options={ removeBefore: null }] - Options for removing tabs.
+     * @param {boolean|null} [options.removeBefore=null] - A flag indicating whether to remove tabs before (`true`), after (`false`), or no tabs (`null`).
+     * @throws {Error} - Throws an error if no matching tab is found, if more than one matching tab is found, or if no valid `url` is provided.
+     * @returns {Promise<boolean>} - A promise that resolves to `true` if the tabs are successfully synchronized after removal.
 	 *
 	 * @example
 	 * for this example, we'll collapse miniURL and tabTitle into a single string and simply look at tabs as strings.
@@ -712,16 +790,13 @@ export class TabContainer extends Array {
 		{ label = null, url = null } = {},
 		{ removeBefore = null } = {},
 	) {
-		// TODO changed signature of function
 		if (url == null) {
 			throw new Error("Cannot identify Tab.");
 		}
-
 		const matchingTabs = this.getTabsByData({ label, url });
 		if (matchingTabs.length === 0) {
 			throw new Error("This is not a saved tab!");
 		}
-
 		const matchTab = matchingTabs[0];
 		if (label == null) {
 			if (matchingTabs.length > 1) {
@@ -729,14 +804,11 @@ export class TabContainer extends Array {
 			}
 			label = matchTab.label;
 		}
-
 		// remove all tabs but this one
 		if (removeBefore == null) {
 			return await this.syncTabs([matchTab]);
 		}
-
 		const index = this.getTabIndex({ label, url });
-
 		removeBefore
 			? this.splice(0, index)
 			: this.splice(index + 1, this.length);
@@ -776,4 +848,14 @@ export class TabContainer extends Array {
         );
     }
     */
+
+  /*
+    isEmpty(){
+      return this.length === 0;
+    }
+
+    isNotEmpty(){
+      return !this.isEmpty();
+    }
+  */
 }
