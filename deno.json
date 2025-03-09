@@ -11,7 +11,7 @@
 		]
 	},
 	"tasks": {
-		"test": "deno test --no-check",
+		"test": "deno test --no-check --parallel --quiet",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 
