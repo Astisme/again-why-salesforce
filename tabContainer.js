@@ -21,12 +21,12 @@ export class TabContainer extends Array {
 				"Use TabContainer.create() instead of new TabContainer()",
 			);
 		}
+        super();
         // test for pipeline
 			throw new Error(
 				"Use TabContainer.create() instead of new TabContainer()",
 			);
         // test for pipeline
-		//super();
 	}
 
 	/**
