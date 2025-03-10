@@ -4,22 +4,36 @@
 		"indentWidth": 4,
 		"semiColons": true,
 		"singleQuote": false,
-		"proseWrap": "preserve",
-		"exclude": ["*.git*"]
+		"proseWrap": "never",
+		"exclude": [
+			"*.git*",
+			"*bundled*"
+		]
 	},
 	"tasks": {
-		"test": "deno test -A",
+		"test": "deno test --no-check --parallel --quiet",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
-		"dev-firefox": "deno --allow-write manifest/build-manifest.mjs firefox",
-		"dev-chrome": "deno --allow-write manifest/build-manifest.mjs chrome",
-		"dev-safari": "deno --allow-write manifest/build-manifest.mjs safari"
+
+		"bundle": "deno run -A bin/build.ts",
+
+		"dev-firefox": "deno --allow-write manifest/build-manifest.mjs firefox && deno task bundle",
+		"dev-chrome": "deno --allow-write manifest/build-manifest.mjs chrome && deno task bundle",
+		"dev-edge": "deno --allow-write manifest/build-manifest.mjs edge && deno task bundle",
+		"dev-safari": "deno --allow-write manifest/build-manifest.mjs safari && deno task bundle",
+
+		"build-firefox": "deno task dev-firefox && bash bin/build-extension.bash firefox",
+		"build-chrome": "deno task dev-chrome && bash bin/build-extension.bash chrome",
+		"build-edge": "deno task dev-edge && bash bin/build-extension.bash edge",
+		"build-safari": "deno task dev-safari && bash bin/build-extension.bash safari"
 	},
 	"imports": {
 		"/": "./",
-		"./": "./"
+		"./": "./",
+		"@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.1",
+		"esbuild": "npm:esbuild@^0.25.0"
 	},
 	"test": {
-		"include": ["tests/*"]
+		"include": ["tests/*.test.ts"]
 	}
 }

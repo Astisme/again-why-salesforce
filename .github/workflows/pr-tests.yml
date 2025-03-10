@@ -43,19 +43,21 @@ jobs:
               with:
                 script: |
                   const fs = require('fs');
-                  
                   // Read the linter error output
                   const errorOutput = fs.readFileSync('lint-error.log', 'utf8');
+                  if(errorOutput == null || errorOutput === ""){
+                    console.error("Could not read lint logs");
+                    process.exit(1);
+                    return;
+                  }
+                  // Remove ANSI codes
+                  const ansiRegex = /\x1b\[[0-9;]*m/g;
+                  const cleanErrorOutput = errorOutput.replace(ansiRegex, '').replace(/^Download https:\/\/.*\n/gm, '');  
                   const problemsFoundRegex = /Found [0-9]+ problem(s)?\n/m 
-                  if (!errorOutput || !errorOutput.match(problemsFoundRegex)) {
+                  if (!cleanErrorOutput.match(problemsFoundRegex)) {
                     console.log("No lint errors.");
                     return;
                   }
-
-                  // Remove ANSI codes
-                  const ansiRegex = /\x1b\[[0-9;]*m/g;
-                  const cleanErrorOutput = errorOutput.replace(ansiRegex, '');  
-
                   // Create a comment on the PR with the error message
                   await github.rest.issues.createComment({
                     issue_number: context.issue.number,
@@ -63,12 +65,50 @@ jobs:
                     repo: context.repo.repo,
                     body: `## Linter Failed:\n\n\`\`\`${cleanErrorOutput}\`\`\``
                   });
-                  
                   // fail due to error found on previous step
                   process.exit(1);
 
             - name: Remove lint-error.log
               run: rm lint-error.log
+
+            - name: Run Tests
+              run: deno task test > test-error.log 2>&1 || true
+
+            - name: Comment on PR if any test fails
+              uses: actions/github-script@v7
+              with:
+                script: |
+                  const fs = require('fs');
+                  // Read the test error output
+                  const errorOutput = fs.readFileSync('test-error.log', 'utf8');
+                  if(errorOutput == null || errorOutput === ""){
+                    console.error("Could not read test logs");
+                    process.exit(1);
+                    return;
+                  }
+                  // Remove ANSI codes
+                  const ansiRegex = /\x1b\[[0-9;]*m/g;
+                  const cleanErrorOutput = errorOutput.replace(ansiRegex, '');  
+                  const problemsFoundRegex = /FAILED \| [1-9]+[0-9]* passed \([1-9]+[0-9]* step(s)?\) \| [1-9]+[0-9]* failed \([1-9]+[0-9]* step(s)?\)/m
+                  if (!cleanErrorOutput.match(problemsFoundRegex)) {
+                    console.log("No test errors.");
+                    return;
+                  }
+                  // Remove working tests from output
+                  const workingTestsRegex = /^\.\/tests\/.+ ok \([0-9]+ms\)\n/gm;
+                  const erroredTests = cleanErrorOutput.replace(workingTestsRegex, '');
+                  // Create a comment on the PR with the error message
+                  await github.rest.issues.createComment({
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: `## Tests Failed:\n\n\`\`\`${erroredTests}\`\`\``
+                  });
+                  // fail due to error found on previous step
+                  process.exit(1);
+
+            - name: Remove test-error.log
+              run: rm test-error.log
 
             - name: Verify formatting
               run: deno task fmt

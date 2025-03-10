@@ -4,25 +4,31 @@ import manifest from "./template-manifest.json" with { type: "json" };
 import { writeFileSync } from "node:fs";
 
 const browser = process.argv[2];
-if (browser === "firefox") {
-	const background_script = manifest.background.service_worker;
-	manifest.background.scripts = [background_script];
+switch (browser) {
+	case "firefox":
+		delete manifest.minimum_chrome_version;
+		delete manifest.background.service_worker;
+		delete manifest.browser_specific_settings.safari;
+		break;
 
-	delete manifest.minimum_chrome_version;
-	delete manifest.background.service_worker;
-	delete manifest.browser_specific_settings.safari;
-} else if (browser === "chrome") {
-	delete manifest.browser_specific_settings;
-} else if (browser === "safari") {
-	delete manifest.minimum_chrome_version;
-	delete manifest.browser_specific_settings.gecko;
-} else {
-	console.error(
-		`Usage: ${process.argv[0]} ${
-			process.argv[1]
-		} (firefox || chrome || safari)`,
-	);
-	throw new Error(`Unknown browser: ${browser}`);
+	case "chrome":
+	case "edge":
+		delete manifest.background.scripts;
+		delete manifest.browser_specific_settings;
+		break;
+
+	case "safari":
+		delete manifest.minimum_chrome_version;
+		delete manifest.browser_specific_settings.gecko;
+		break;
+
+	default:
+		console.error(
+			`Usage: ${process.argv[0]} ${
+				process.argv[1]
+			} (firefox || chrome || safari)`,
+		);
+		throw new Error(`Unknown browser: ${browser}`);
 }
 
 writeFileSync("manifest.json", JSON.stringify(manifest, null, 4));
