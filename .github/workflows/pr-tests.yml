@@ -102,7 +102,7 @@ jobs:
                     issue_number: context.issue.number,
                     owner: context.repo.owner,
                     repo: context.repo.repo,
-                    body: `## Tests Failed:\n\n\`\`\`${cleanErrorOutput}\`\`\``
+                    body: `## Tests Failed:\n\n\`\`\`${erroredTests}\`\`\``
                   });
                   // fail due to error found on previous step
                   process.exit(1);
