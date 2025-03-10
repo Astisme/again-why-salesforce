@@ -21,7 +21,7 @@ export class TabContainer extends Array {
 				"Use TabContainer.create() instead of new TabContainer()",
 			);
 		}
-        super();
+		super();
 	}
 
 	/**
