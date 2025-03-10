@@ -95,7 +95,7 @@ jobs:
                     return;
                   }
                   // Remove working tests from output
-                  const workingTestsRegex = /^\.\/tests\/.+ ok \([0-9]+ms\)\n$/g;
+                  const workingTestsRegex = /^\.\/tests\/.+ ok \([0-9]+ms\)$/g;
                   const erroredTests = cleanErrorOutput.replace(workingTestsRegex, '');
                   // Create a comment on the PR with the error message
                   await github.rest.issues.createComment({
