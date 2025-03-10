@@ -261,7 +261,7 @@ function createElement() {
 	 */
 	function checkSaveTab() {
 		if (label.value !== "" && url.value !== "") {
-			saveTabs();
+			saveTabs(false);
 		}
 	}
 	/**
@@ -310,14 +310,15 @@ async function loadTabs(browserTab = null) {
 	const orgName = await pop_extractOrgName(browserTab);
 	for (const tab of allTabs) {
 		// Default: hide not-this-org org-specific tabs
-		if (tab.org != null && tab.org !== orgName) {
-			continue;
-		}
 		const element = createElement();
 		element.querySelector(".label").value = tab.label;
 		element.querySelector(".url").value = tab.url;
 		element.querySelector(".only-org").checked = tab.org != null;
 		element.querySelector(".delete").removeAttribute("disabled");
+        if(tab.org != null && tab.org !== orgName){
+            element.querySelector(".org").value = tab.org;
+            element.style.display = "none";
+        }
 		const logger = loggers.pop();
 		logger.last_input.label = tab.label;
 		logger.last_input.url = tab.url;
@@ -359,15 +360,14 @@ async function reloadRows() {
  * @returns {Promise<Array<Tab>>} A promise that resolves to an array of `Tab` objects that match the given criteria.
  */
 async function findTabsFromRows(orgName = null) {
-	const tabElements = document.getElementsByClassName("tab");
 	// Get the list of tabs
 	if (orgName == null) {
 		orgName = await pop_extractOrgName();
 	}
 	try {
-		return [
-			// add all the Tabs from the popup
-			...Array.from(tabElements)
+		//return [
+        // add all the Tabs from the popup
+		return Array.from(document.getElementsByClassName("tab"))
 				.map((tab) => {
 					const label = tab.querySelector(".label").value;
 					const url = tab.querySelector(".url").value;
@@ -384,12 +384,15 @@ async function findTabsFromRows(orgName = null) {
 					if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
 						return Tab.create(label, url);
 					}
-					return Tab.create(label, url, orgName);
+                    const org = tab.querySelector(".org").value;
+                    if(org == null || org === "")
+                        return Tab.create(label, url, orgName);
+					return Tab.create(label, url, org);
 				})
-				.filter((tab) => tab != null),
+				.filter((tab) => tab != null);
 			// add all the hidden not-this-org tabs
-			...allTabs.getTabsByOrg(orgName, false),
-		];
+            // only needed when not rendering these tabs
+			//...allTabs.getTabsByOrg(orgName, false),
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 		return [];
@@ -407,18 +410,19 @@ async function findTabsFromRows(orgName = null) {
  * @returns {Promise<void>} A promise that resolves once the tabs have been saved and optionally rows reloaded.
  */
 async function saveTabs(doReload = true, tabs = null) {
-	const orgName = await pop_extractOrgName();
+	//const orgName = await pop_extractOrgName();
 	if (!TabContainer.isValid(tabs)) {
-		tabs = await findTabsFromRows(orgName);
+		//tabs = await findTabsFromRows(orgName);
+		tabs = await findTabsFromRows();
 	}
 	await allTabs.replaceTabs(tabs, {
 		removeOrgTabs: true,
-		keepTabsNotThisOrg: orgName,
+		//keepTabsNotThisOrg: orgName,
 	});
 	if (doReload) {
 		await reloadRows();
-		pop_afterSet();
 	}
+    pop_afterSet();
 }
 
 /**
