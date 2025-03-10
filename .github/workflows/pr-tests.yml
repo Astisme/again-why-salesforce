@@ -52,7 +52,7 @@ jobs:
                   }
                   // Remove ANSI codes
                   const ansiRegex = /\x1b\[[0-9;]*m/g;
-                  const cleanErrorOutput = errorOutput.replace(ansiRegex, '');  
+                  const cleanErrorOutput = errorOutput.replace(ansiRegex, '').replace(/^Download https:\/\/.*\n/gm, '');  
                   const problemsFoundRegex = /Found [0-9]+ problem(s)?\n/m 
                   if (!cleanErrorOutput.match(problemsFoundRegex)) {
                     console.log("No lint errors.");
