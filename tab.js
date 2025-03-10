@@ -193,13 +193,14 @@ class Tab {
 		if (url == null || url === "") {
 			throw new Error("Cannot expand an empty URL!");
 		}
-        if(
-          url.startsWith(HTTPS) &&
-          !url.match(MY_SALESFORCE_SETUP_COM) &&
-          !url.match(MY_SALESFORCE_COM) &&
-          !url.match(LIGHTNING_FORCE_COM)
-        )
-          return url;
+		if (
+			url.startsWith(HTTPS) &&
+			!url.match(MY_SALESFORCE_SETUP_COM) &&
+			!url.match(MY_SALESFORCE_COM) &&
+			!url.match(LIGHTNING_FORCE_COM)
+		) {
+			return url;
+		}
 		baseUrl = new URL(baseUrl).origin;
 		url = Tab.minifyURL(url);
 		const isSetupLink = !url.startsWith("/") && url.length > 0;
