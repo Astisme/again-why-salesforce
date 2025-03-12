@@ -4,17 +4,8 @@
 
 # Again, Why Salesforce
 
-![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)
+![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version) ![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white) ![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636) ![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce) ![Chrome users](https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi?label=Chrome%20Users&color=blue) ![Firefox users](https://img.shields.io/amo/users/again@why.salesforce?label=Firefox%20Users&color=red)
 
-![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white)
-
-![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636)
-
-![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce)
-
-![Chrome users](https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi)
-
-![Firefox users](https://img.shields.io/amo/users/again@why.salesforce)
 <!--
 ![Chrome stars](https://img.shields.io/chrome-web-store/stars/:storeId)
 ![Firefox stars](https://img.shields.io/amo/stars/:addonId)
