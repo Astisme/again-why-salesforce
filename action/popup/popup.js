@@ -68,13 +68,14 @@ function pop_sendMessage(message, callback) {
  * @param {function|undefined} callback - the function to call when the result is found.
  */
 function pop_getCurrentBrowserTab(callback) {
-	return pop_sendMessage({ what: "browser-tab", popup: true }, callback);
+	return pop_sendMessage({ what: "browser-tab" }, callback);
 }
 
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
 	const broswerTabUrl = browserTab?.url;
+    console.error(broswerTabUrl);
 	if (
 		broswerTabUrl == null ||
 		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)

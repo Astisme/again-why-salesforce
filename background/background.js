@@ -80,7 +80,7 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 			//return false;
 			break;
 		case "browser-tab":
-			bg_getCurrentBrowserTab(sendResponse, message.popup);
+			bg_getCurrentBrowserTab(sendResponse);
 			break;
 		default:
 			//captured = ["import"].includes(message.what);

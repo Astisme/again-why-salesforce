@@ -16,7 +16,7 @@ import { bg_getStorage } from "./background.js";
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
  * @returns {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
  */
-export function bg_getCurrentBrowserTab(callback, fromPopup = false) {
+export function bg_getCurrentBrowserTab(callback) {
 	/**
 	 * Queries the browser for the current active tab in the current window.
 	 * If the tab is not found or an error occurs, the function will retry up to 5 times before throwing an error.
@@ -28,7 +28,8 @@ export function bg_getCurrentBrowserTab(callback, fromPopup = false) {
 	 */
 	async function queryTabs(callback, count = 0) {
 		const queryParams = { active: true, currentWindow: true };
-		(fromPopup == true || count > 0) && delete queryParams.currentWindow;
+		if(count > 0)
+            delete queryParams.currentWindow;
 		const browserTabs = await BROWSER.tabs.query(queryParams);
 		if (
 			BROWSER.runtime.lastError || browserTabs == null ||
