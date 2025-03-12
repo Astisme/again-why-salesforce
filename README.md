@@ -15,6 +15,7 @@
 ![Chrome users](https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi)
 
 ![Firefox users](https://img.shields.io/amo/users/again@why.salesforce)
+
 <!--
 ![Chrome stars](https://img.shields.io/chrome-web-store/stars/:storeId)
 ![Firefox stars](https://img.shields.io/amo/stars/:addonId)
