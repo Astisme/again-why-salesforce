@@ -79,27 +79,29 @@ export async function bg_notify(message, count = 0) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-    if (!ISCHROME) {
-        // Firefox implementation
-        const blob = new Blob([jsonData], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        BROWSER.downloads.download({
-            url,
-            filename: `${EXTENSION_NAME}.json`,
-        }).then(() => {
-            BROWSER.downloads.onChanged.addListener(e => {
-                if(e.state.current === "complete")
-                    URL.revokeObjectURL(url);
-            });
-        });
-    } else {
-        // Chrome implementation
-        const dataStr = "data:application/json;charset=utf-8," + encodeURIComponent(jsonData);
-        chrome.downloads.download({
-            url: dataStr,
-            filename: `${EXTENSION_NAME}.json`,
-        });
-    }
+	if (!ISCHROME) {
+		// Firefox implementation
+		const blob = new Blob([jsonData], { type: "application/json" });
+		const url = URL.createObjectURL(blob);
+		BROWSER.downloads.download({
+			url,
+			filename: `${EXTENSION_NAME}.json`,
+		}).then(() => {
+			BROWSER.downloads.onChanged.addListener((e) => {
+				if (e.state.current === "complete") {
+					URL.revokeObjectURL(url);
+				}
+			});
+		});
+	} else {
+		// Chrome implementation
+		const dataStr = "data:application/json;charset=utf-8," +
+			encodeURIComponent(jsonData);
+		chrome.downloads.download({
+			url: dataStr,
+			filename: `${EXTENSION_NAME}.json`,
+		});
+	}
 }
 
 /**

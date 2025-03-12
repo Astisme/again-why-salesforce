@@ -170,9 +170,12 @@ async function removeMenuItems() {
 async function checkAddRemoveContextMenus(what) {
 	try {
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-        if(browserTabUrl == null)
-            return;
-		if (CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))) {
+		if (browserTabUrl == null) {
+			return;
+		}
+		if (
+			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
+		) {
 			await removeMenuItems();
 			await createMenuItems();
 			bg_notify({ what });

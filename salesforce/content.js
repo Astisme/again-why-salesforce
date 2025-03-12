@@ -568,7 +568,7 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 			break;
 		case "error":
 			showToast(message.message, false);
-            break;
+			break;
 			// context-menus
 		case "open-other-org": {
 			const label = message.linkTabLabel;
