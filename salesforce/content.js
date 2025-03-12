@@ -164,7 +164,7 @@ export function showToast(message, isSuccess = true, isWarning = false) {
  * @returns {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
  */
 async function init(tabs = null) {
-	let orgName;
+	let orgName = null;
 	await ensureAllTabsAvailability();
 	if (tabs == null) {
 		await allTabs.getSavedTabs(true);
@@ -182,10 +182,9 @@ async function init(tabs = null) {
 			orgName = Tab.extractOrgName(href);
 		}
 		allTabs.forEach((row) => {
-			// hide org-specific but not-this-org tabs
-			if (row.org == null || row.org === orgName) { // TODO add option to hide or show org-specific but not-this-org tabs
-				setupTabUl.appendChild(generateRowTemplate(row));
-			}
+			// TODO add option to hide or show not-this-org tabs
+            // hide not-this-org tabs
+            setupTabUl.appendChild(generateRowTemplate(row, !(row.org == null || row.org === orgName)));
 		});
 	}
 	isOnSavedTab();
@@ -343,10 +342,13 @@ async function reorderTabs() {
 					return null;
 				}
 				try {
+                    if(!isOrgTab)
+                        return Tab.create(label, aHref);
+                    const org = b.dataset.org;
 					return Tab.create(
 						label,
 						aHref,
-						isOrgTab ? getCurrentHref() : null,
+						org == null || org === "" ? getCurrentHref() : org,
 					);
 				} catch (error) {
 					console.error(error);
@@ -358,7 +360,7 @@ async function reorderTabs() {
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
-			keepTabsNotThisOrg: Tab.extractOrgName(href),
+			//keepTabsNotThisOrg: Tab.extractOrgName(href),
 		});
 		sf_afterSet();
 	} catch (error) {
@@ -625,6 +627,11 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 		case "page-remove-tab":
 			pageActionTab(false);
 			break;
+        /*
+		case "update-org":
+
+			break;
+        */
 		default:
 			break;
 	}

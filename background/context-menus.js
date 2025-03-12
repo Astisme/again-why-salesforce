@@ -6,12 +6,11 @@ import {
 	FRAME_PATTERNS,
 } from "/constants.js";
 import {
-	bg_expandURL,
 	bg_getCurrentBrowserTab,
-	bg_minifyURL,
 	bg_notify,
 	exportHandler,
 } from "./utils.js";
+import { Tab } from "/tab.js";
 
 let areMenuItemsVisible = false;
 
@@ -21,6 +20,16 @@ const menuItems = [
 		title: "🔗 Open in another Org",
 		contexts: ["link", "page", "frame"],
 	},
+
+    /* TODO next version
+	{ id: "update", title: "✏️ Update tab", contexts: ["link"] },
+	{
+		id: "update-org",
+		title: "📌 Toggle Org",
+		contexts: ["link"],
+		parentId: "update",
+	},
+    */
 
 	{ id: "move", title: "🧭 Move tab", contexts: ["link"] },
 	{
@@ -250,10 +259,10 @@ BROWSER.contextMenus.onClicked.addListener((info, _) => {
 	const message = { what: info.menuItemId };
 	switch (info.menuItemId) {
 		case "open-other-org":
-			message.pageTabUrl = bg_minifyURL(info.pageUrl);
-			message.pageUrl = bg_expandURL(info.pageUrl);
-			message.linkTabUrl = bg_minifyURL(info.linkUrl);
-			message.linkUrl = bg_expandURL(info.linkUrl);
+			message.pageTabUrl = Tab.minifyURL(info.pageUrl);
+			message.pageUrl = Tab.expandURL(info.pageUrl);
+			message.linkTabUrl = Tab.minifyURL(info.linkUrl);
+			message.linkUrl = Tab.expandURL(info.linkUrl);
 			message.linkTabLabel = info.linkText;
 			break;
 		case "import-tabs":
@@ -264,12 +273,12 @@ BROWSER.contextMenus.onClicked.addListener((info, _) => {
 			break;
 		case "page-save-tab":
 		case "page-remove-tab":
-			message.tabUrl = bg_minifyURL(info.pageUrl);
-			message.url = bg_expandURL(info.pageUrl);
+			message.tabUrl = Tab.minifyURL(info.pageUrl);
+			message.url = Tab.expandURL(info.pageUrl);
 			break;
 		default:
-			message.tabUrl = bg_minifyURL(info.linkUrl);
-			message.url = bg_expandURL(info.linkUrl);
+			message.tabUrl = Tab.minifyURL(info.linkUrl);
+			message.url = Tab.expandURL(info.linkUrl);
 			message.label = info.linkText;
 			break;
 	}
