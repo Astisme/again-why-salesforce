@@ -20,13 +20,14 @@ This is a fork of [Why Salesforce](https://www.github.com/walters954/why-salesfo
 [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 ## New Features
- Title | Image | Wiki 
--|-|-
- Import Modal | <img src="./images/import-modal.png" title="Import Modal" height="400px"/> | tbd
- Context Menus | <img src="./images/context-menu.png" title="Context Menus" height="400px"/> | tbd
- Open in another Org | <img src="./images/open-other-org.png" title="Open other Org" height="400px"/> | tbd
- Org specific Tabs | <img src="./images/popup-dark.png" title="Popup dark" height="400px"/> | tbd
- Fast save | <img src="./images/remove-tab.png" title="Remove Tab" height="400px"/> | tbd
+
+| Title               | Image                                                                          | Wiki |
+| ------------------- | ------------------------------------------------------------------------------ | ---- |
+| Import Modal        | <img src="./images/import-modal.png" title="Import Modal" height="400px"/>     | tbd  |
+| Context Menus       | <img src="./images/context-menu.png" title="Context Menus" height="400px"/>    | tbd  |
+| Open in another Org | <img src="./images/open-other-org.png" title="Open other Org" height="400px"/> | tbd  |
+| Org specific Tabs   | <img src="./images/popup-dark.png" title="Popup dark" height="400px"/>         | tbd  |
+| Fast save           | <img src="./images/remove-tab.png" title="Remove Tab" height="400px"/>         | tbd  |
 
 ## Install on browser
 
