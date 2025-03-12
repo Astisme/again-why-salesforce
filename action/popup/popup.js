@@ -1,10 +1,19 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
+import Tab from "/tab.js";
+import TabContainer from "/tabContainer.js";
+import { SETUP_LIGHTNING_PATTERN } from "/constants.js";
+const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
 const moon = document.getElementById("moon");
+
+const tabTemplate = document.getElementById("tr_template");
+const tabAppendElement = document.getElementById("tabs");
+
+let loggers = [];
 
 /**
  * Initializes the theme SVG elements based on the current theme and updates visibility.
@@ -13,23 +22,71 @@ function initThemeSvg() {
 	initTheme();
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
-
 	elementToShow.classList.remove("invisible", "hidden");
 	elementToHide.classList.add("invisible", "hidden");
 }
 initThemeSvg();
 
-// queries the currently active tab of the current active window
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+/**
+ * Sends a message to the background script with the specified message.
+ *
+ * @param {Object} message - The message to send.
+ * @param {function} callback - The callback to execute after sending the message.
+ */
+function pop_sendMessage(message, callback) {
+	/**
+	 * Invoke the runtime to send the message
+	 *
+	 * @param {Object} message - The message to send
+	 * @param {function} callback - The callback to execute after sending the message
+	 */
+	function sendMessage(message, callback) {
+		return chrome.runtime.sendMessage(
+			{ message },
+			callback,
+		);
+	}
+	if (callback == null) {
+		return new Promise((resolve, reject) => {
+			sendMessage(
+				message,
+				(response) => {
+					if (chrome.runtime.lastError) {
+						reject(chrome.runtime.lastError);
+					} else {
+						resolve(response);
+					}
+				},
+			);
+		});
+	}
+	sendMessage(message, callback);
+}
+
+/**
+ * Finds the current tab of the browser then calls the callback, if available. otherwise returns a Promise
+ * @param {function|undefined} callback - the function to call when the result is found.
+ */
+function pop_getCurrentBrowserTab(callback) {
+	return pop_sendMessage({ what: "browser-tab" }, callback);
+}
+
+// Get the current tab. If it's not salesforce setup, redirect the popup
+pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-	if (tabs[0].url == null || !tabs[0].url.match(".*\/lightning\/setup\/.*")) {
+	const broswerTabUrl = browserTab?.url;
+	console.error(broswerTabUrl);
+	if (
+		broswerTabUrl == null ||
+		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+	) {
 		window.location.href = chrome.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
-				tabs[0].url != null ? "?url=" + tabs[0].url : ""
+				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
 			}`,
 		);
 	} else {
-		getStorage(loadTabs);
+		await loadTabs(browserTab);
 	}
 });
 
@@ -39,95 +96,45 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 function switchTheme() {
 	const elementToShow = html.dataset.theme === "light" ? sun : moon;
 	const elementToHide = elementToShow === sun ? moon : sun;
-
 	elementToHide.classList.add("invisible", "hidden");
 	elementToShow.classList.remove("hidden");
-
 	setTimeout(() => {
 		elementToShow.classList.remove("invisible");
 	}, 200);
-
 	handleSwitchColorTheme();
-}
-
-const tabTemplate = document.getElementById("tr_template");
-const tabAppendElement = document.getElementById("tabs");
-
-let knownTabs = [];
-let loggers = [];
-
-/**
- * Sends a message to the background script with the specified message and the current URL.
- *
- * @param {Object} message - The message to send.
- * @param {function} callback - The callback to execute after sending the message.
- */
-function sendMessage(message, callback) {
-	chrome.runtime.sendMessage({ message, url: location.href }, callback);
-}
-
-/**
- * Retrieves stored data from the background script and invokes the provided callback.
- *
- * @param {function} callback - The callback to invoke with the retrieved data.
- */
-function getStorage(callback) {
-	sendMessage({ what: "get" }, callback);
 }
 
 /**
  * Sends a message indicating that data has been saved successfully.
  */
-function afterSet() {
-	sendMessage({ what: "saved" });
+function pop_afterSet() {
+	pop_sendMessage({ what: "saved" });
 }
 
 /**
- * Compares two arrays to check if they are equal.
+ * Extracts the organization name from the current browser tab's URL.
+ * If no browser tab is provided, the function will retrieve the current tab.
  *
- * @param {Array} arr1 - The first array.
- * @param {Array} arr2 - The second array.
- * @returns {boolean} True if the arrays are equal, false otherwise.
+ * @param {object|null} browserTab - The browser tab from which to extract the organization name. If not provided, the current tab will be used.
+ * @returns {Promise<string>} A promise that resolves to the extracted organization name from the tab's URL.
  */
-function arraysAreEqual(arr1, arr2) {
-	return JSON.stringify(arr1) === JSON.stringify(arr2);
+async function pop_extractOrgName(browserTab = null) {
+	browserTab = browserTab ?? await pop_getCurrentBrowserTab();
+	return Tab.extractOrgName(browserTab.url);
 }
 
 /**
- * Sets the stored tabs data in the background script, optionally checking for changes.
- *
- * @param {Array} tabs - The tabs to save.
- * @param {boolean} check - Whether to check for changes before saving.
+ * Sends a message that will create an import modal in the Salesforce page.
  */
-function setStorage(tabs, check = true) {
-	if ((check && !arraysAreEqual(tabs, knownTabs)) || !check) {
-		sendMessage({ what: "set", tabs }, afterSet);
-	}
-	knownTabs = tabs;
+function importHandler() {
+	pop_sendMessage({ what: "add" }, close);
 }
 
 /**
- * Minifies a URL by the domain and removing Salesforce-specific parts.
- *
- * @param {string} url - The URL to minify.
- * @returns {Promise} A promise containing the minified URL.
- *
- * These links would all collapse into "SetupOneHome/home".
- * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
- * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
- * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
- * https://myorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home
- * /lightning/setup/SetupOneHome/home/
- * /lightning/setup/SetupOneHome/home
- * lightning/setup/SetupOneHome/home/
- * lightning/setup/SetupOneHome/home
- * /SetupOneHome/home/
- * /SetupOneHome/home
- * SetupOneHome/home/
- * SetupOneHome/home
+ * Sends a message that will start the export procedure.
  */
-function minifyURL(url) {
-	return chrome.runtime.sendMessage({ message: { what: "minify", url } });
+function pop_exportHandler() {
+	pop_sendMessage({ what: "export" }, close);
 }
 
 /**
@@ -145,12 +152,8 @@ function deleteTab() {
  * @param {boolean} [enable=true] - if enabling or disabling the elements in the last td
  */
 function updateTabAttributes(enable = true) {
-	const deleteButton = tabAppendElement.querySelector(
-		"tr:last-child button.delete",
-	);
 	const tr = tabAppendElement.querySelector("tr:last-child");
-	const svg = tr.querySelector("svg");
-
+	const deleteButton = tr.querySelector("button.delete");
 	if (enable) {
 		deleteButton.removeAttribute("disabled");
 		tr.setAttribute("draggable", "true");
@@ -159,23 +162,27 @@ function updateTabAttributes(enable = true) {
 		tr.removeAttribute("draggable");
 	}
 	tr.dataset.draggable = enable;
-	svg.dataset.draggable = enable;
+	tr.querySelector("svg").dataset.draggable = enable;
 }
+
 /**
  * Adds a new empty tab at the bottom of the popup and enables the previously last child's delete button.
  */
 function addTab() {
-	if (tabAppendElement.childElementCount >= 1) { // if list is empty, there's nothing to disable
+	// if list is empty, there's nothing to enable
+	if (tabAppendElement.childElementCount >= 1) {
 		updateTabAttributes();
 	}
 	// add a new empty element
 	tabAppendElement.append(createElement());
 }
+
 /**
  * Removes the last empty tab at the bottom of the popup and disables the newly last child's delete button.
  */
 function removeTab() {
-	if (tabAppendElement.childElementCount >= 2) { // if list is empty, there's nothing to disable
+	// if list is empty, there's nothing to disable
+	if (tabAppendElement.childElementCount >= 2) {
 		tabAppendElement.removeChild(tabAppendElement.lastChild);
 		loggers.pop();
 		updateTabAttributes(false);
@@ -183,227 +190,240 @@ function removeTab() {
 }
 
 let focusedIndex = 0;
-
 /**
- * Listens for input changes on the title and URL fields and updates the corresponding values.
+ * Listens for input changes on the label and URL fields and updates the corresponding values.
  *
- * @param {string} type - The type of input field ("title" or "url").
+ * @param {string} type - The type of input field ("label" or "url").
  */
-function inputTitleUrlListener(type) {
+function inputLabelUrlListener(type) {
 	const currentObj = loggers[focusedIndex];
 	const element = currentObj[type];
 	const value = element.value;
 	const inputObj = currentObj.last_input;
 	const last_input = inputObj[type] || "";
 	const delta = value.length - last_input.length;
-
 	// check if the user copied the url
 	if (delta > 2 && type === "url") {
-		minifyURL(value)
-			.then((v) => {
-				element.value = v;
-				// check eventual duplicates
-				if (knownTabs.some((tab) => tab.url === v)) {
-					// show warning in salesforce
-					sendMessage({
-						what: "warning",
-						message: "A tab with this URL has already been saved!",
-						action: "make-bold",
-						url: v,
-					});
-
-					// highlight all duplicated rows and scroll to the first one
-					const trs = Array.from(
-						tabAppendElement.querySelectorAll("tr input.url"),
-					)
-						.filter((input) => input.value === v)
-						.map((input) => input.closest("tr"));
-
-					trs.forEach((tr) => tr.classList.add("duplicate"));
-					trs[0].scrollIntoView({
-						behavior: "smooth",
-						block: "center",
-					});
-
-					setTimeout(
-						() =>
-							trs.forEach((tr) =>
-								tr.classList.remove("duplicate")
-							),
-						4000,
-					);
-				}
+		const url = Tab.minifyURL(value);
+		element.value = url;
+		// check eventual duplicates
+		if (allTabs.exists({ url })) {
+			// show warning in salesforce
+			pop_sendMessage({
+				what: "warning",
+				message: "A tab with this URL has already been saved!",
+				action: "make-bold",
+				url,
 			});
+			// highlight all duplicated rows and scroll to the first one
+			const trs = Array.from(
+				tabAppendElement.querySelectorAll("tr input.url"),
+			)
+				.filter((input) => input.value === url)
+				.map((input) => input.closest("tr"));
+			trs.forEach((tr) => tr.classList.add("duplicate"));
+			trs[0].scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+			});
+			setTimeout(
+				() => trs.forEach((tr) => tr.classList.remove("duplicate")),
+				4000,
+			);
+		}
 	}
-
 	inputObj[type] = value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
 	if (focusedIndex === (loggers.length - 1)) {
-		if (inputObj.title && inputObj.url) {
+		if (inputObj.label && inputObj.url) {
 			addTab();
 		}
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (focusedIndex === (loggers.length - 2)) {
-		if (!inputObj.title || !inputObj.url) {
+		if (!inputObj.label || !inputObj.url) {
 			removeTab();
 		}
 	}
 }
 
 /**
- * Focus listener to track the currently focused tab index.
- *
- * @param {Event} e - The focus event.
- */
-function focusListener(e) {
-	focusedIndex = parseInt(e.target.dataset.element_index);
-	saveTabs(false);
-}
-
-/**
- * Creates a new tab element for the popup and sets up event listeners for title and URL input fields.
+ * Creates a new tab element for the popup and sets up event listeners for label and url input fields.
  *
  * @returns {HTMLElement} The created tab element.
  */
 function createElement() {
 	const element = tabTemplate.content.firstElementChild.cloneNode(true);
-	const deleteButton = element.querySelector("button.delete");
-	deleteButton.addEventListener("click", deleteTab);
-
+	// deleteButton
+	element.querySelector("button.delete").addEventListener("click", deleteTab);
+	const label = element.querySelector(".label");
+	const url = element.querySelector(".url");
+	/**
+	 * Checks if both the label and URL fields are not empty, and if so, calls the `saveTabs` function with `false` as an argument.
+	 */
+	function checkSaveTab() {
+		if (label.value !== "" && url.value !== "") {
+			saveTabs(false);
+		}
+	}
+	/**
+	 * Sets up event listeners for the provided element to handle drag and focus events.
+	 * - Listens for input events to trigger the specified listener.
+	 * - Tracks focusin to set the `focusedIndex` based on the element's data attribute.
+	 * - Sets a custom data attribute (`data-element_index`) to the current length of the `loggers` array.
+	 * - Adds a focusout event listener to call `checkSaveTab` when the element loses focus.
+	 *
+	 * @param {HTMLElement} element - The DOM element to attach event listeners to.
+	 * @param {Function} listener - The function to be called on "input" events for the element.
+	 */
 	function setInfoForDrag(element, listener) {
 		element.addEventListener("input", listener);
-		element.addEventListener("focus", focusListener);
+		element.addEventListener(
+			"focusin",
+			(e) => focusedIndex = parseInt(e.target.dataset.element_index),
+		);
 		element.dataset.element_index = loggers.length;
+		element.addEventListener("focusout", checkSaveTab);
 	}
-	const title = element.querySelector(".tabTitle");
-	setInfoForDrag(title, () => inputTitleUrlListener("title"));
-	const url = element.querySelector(".url");
-	setInfoForDrag(url, () => inputTitleUrlListener("url"));
-
-	loggers.push({ title, url, last_input: {} }); // set last_input as an empty object
+	setInfoForDrag(label, () => inputLabelUrlListener("label"));
+	setInfoForDrag(url, () => inputLabelUrlListener("url"));
+	element.querySelector(".only-org").addEventListener("click", checkSaveTab);
+	loggers.push({ label, url, last_input: {} }); // set last_input as an empty object
 	return element;
 }
 
 /**
- * Loads stored tab data and populates the tab elements in the popup.
+ * Loads and displays tabs based on the current state of `allTabs`.
+ * - If `allTabs` is empty or null, it calls `addTab()` to add a new tab.
+ * - Extracts the organization name using `pop_extractOrgName`.
+ * - Loops through all available tabs and only displays those that match the current organization (if applicable).
+ * - For each tab, creates an HTML element, sets values for its inputs (label, URL, and organization-specific state), and enables the delete button.
+ * - Updates the associated logger for each tab, pushing it back into the `loggers` array.
+ * - Appends the element representing the tab to `tabAppendElement`.
+ * - Finally, appends a blank element to leave space at the bottom.
  *
- * @param {Object} items - The stored tab data.
+ * @param {object|null} browserTab - The browser tab used to extract the organization name. If not provided, the current tab will be used.
+ * @returns {Promise<void>} A promise that resolves once all tabs have been processed and displayed.
  */
-function loadTabs(items) {
-	if (items == null || items[items.key] == null) {
+async function loadTabs(browserTab = null) {
+	if (allTabs == null || allTabs.length === 0) {
 		return addTab();
 	}
-
-	const rowObjs = items[items.key];
-	for (const tab of rowObjs) {
+	const orgName = await pop_extractOrgName(browserTab);
+	for (const tab of allTabs) {
+		// Default: hide not-this-org org-specific tabs
 		const element = createElement();
-		element.querySelector(".tabTitle").value = tab.tabTitle;
+		element.querySelector(".label").value = tab.label;
 		element.querySelector(".url").value = tab.url;
+		element.querySelector(".only-org").checked = tab.org != null;
 		element.querySelector(".delete").removeAttribute("disabled");
+		if (tab.org != null && tab.org !== orgName) {
+			element.querySelector(".org").value = tab.org;
+			element.style.display = "none";
+		}
 		const logger = loggers.pop();
-		logger.last_input.title = tab.tabTitle;
+		logger.last_input.label = tab.label;
 		logger.last_input.url = tab.url;
-
 		loggers.push(logger);
 		tabAppendElement.append(element);
 		updateTabAttributes();
 	}
-	tabAppendElement.append(createElement()); // always leave a blank at the bottom
-	knownTabs = rowObjs;
+	// leave a blank at the bottom
+	tabAppendElement.append(createElement());
 }
 
 /**
- * Reloads the tab elements in the popup based on the provided tab data.
+ * Clears all existing child elements from `tabAppendElement` and reloads the tabs.
+ * - Removes all child elements from `tabAppendElement`.
+ * - Resets the `loggers` array to an empty state.
+ * - Calls `loadTabs()` to reload and display the tabs.
  *
- * @param {Object} items - The tab data to reload.
+ * @returns {Promise<void>} A promise that resolves after the tabs have been reloaded.
  */
-function reloadRows(items) {
+async function reloadRows() {
 	while (tabAppendElement.childElementCount > 0) {
 		tabAppendElement.removeChild(tabAppendElement.lastChild);
 	}
 	loggers = [];
-	loadTabs(items);
+	await loadTabs();
 }
 
 /**
- * Finds and returns all the tabs in the popup with valid title and URL.
+ * Finds and returns a list of tabs from the DOM, filtered by the provided organization name.
+ * - If no organization name is provided, it will be extracted using `pop_extractOrgName`.
+ * - Collects all elements with the class name "tab" and processes them to create `Tab` objects.
+ * - For each tab element, the label, URL, and "only-org" checkbox state are retrieved.
+ * - If a tab is invalid (missing label or URL), it is ignored.
+ * - Tabs that are not organization-specific (when the "only-org" checkbox is not checked) are filtered by checking if the URL contains a Salesforce ID.
+ * - All tabs matching the criteria are returned, along with any existing tabs for the specified organization.
+ * - If an error occurs during the tab processing, it is logged to the console.
  *
- * @returns {Array} An array of tab objects containing title and URL.
+ * @param {string|null} orgName - The organization name to filter tabs by. If null, the organization name will be extracted from the current browser tab.
+ * @returns {Promise<Array<Tab>>} A promise that resolves to an array of `Tab` objects that match the given criteria.
  */
-async function findTabs(callback, doReload) {
-	const tabElements = document.getElementsByClassName("tab");
+async function findTabsFromRows(orgName = null) {
 	// Get the list of tabs
-	const tabPromises = Array.from(tabElements)
-		.map(async (tab) => {
-			const tabTitle = tab.querySelector(".tabTitle").value;
-			const href = tab.querySelector(".url").value;
-
-			// Await the minified URL
-			const url = await minifyURL(href);
-
-			if (tabTitle && url) {
-				return { tabTitle, url };
-			}
-			return null; // Return null for invalid tabs
-		});
-
-	let availableTabs;
+	if (orgName == null) {
+		orgName = await pop_extractOrgName();
+	}
 	try {
-		// Wait for all promises to resolve and filter out null values
-		const resolvedTabs = await Promise.all(tabPromises);
-		availableTabs = resolvedTabs.filter((tab) => tab !== null);
+		//return [
+		// add all the Tabs from the popup
+		return Array.from(document.getElementsByClassName("tab"))
+			.map((tab) => {
+				const label = tab.querySelector(".label").value;
+				const url = tab.querySelector(".url").value;
+				const onlyOrgChecked = tab.querySelector(".only-org").checked;
+				if (
+					label == null || url == null ||
+					label === "" || url === ""
+				) {
+					return null; // Return null for invalid tabs
+				}
+				// the user has not checked the onlyOrgChecked checkbox &&
+				// the link does not contain a Salesforce Id
+				if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
+					return Tab.create(label, url);
+				}
+				const org = tab.querySelector(".org").value;
+				if (org == null || org === "") {
+					return Tab.create(label, url, orgName);
+				}
+				return Tab.create(label, url, org);
+			})
+			.filter((tab) => tab != null);
+		// add all the hidden not-this-org tabs
+		// only needed when not rendering these tabs
+		//...allTabs.getTabsByOrg(orgName, false),
 	} catch (err) {
 		console.error("Error processing tabs:", err);
-		availableTabs = [];
+		return [];
 	}
-
-	callback(doReload, availableTabs);
 }
 
 /**
- * Saves the current tabs to storage and optionally reloads the tab rows.
+ * Saves the tabs by replacing the current tabs with the provided or found tabs, and optionally reloads the rows.
+ * - If no valid `tabs` are provided, it retrieves the tabs from the DOM using `findTabsFromRows`.
+ * - Replaces the current tabs in `allTabs` with the new set of tabs, applying filters to remove organization-specific tabs and keep non-matching organization tabs.
+ * - If `doReload` is true, reloads the tab rows by calling `reloadRows` and then performs post-save actions via `pop_afterSet`.
  *
- * @param {boolean} doReload - Whether to reload the tab rows after saving.
- * @param {Array} tabs - The tabs to save.
+ * @param {boolean} [doReload=true] - Whether to reload the rows after saving the tabs. Defaults to true.
+ * @param {Array<Tab>|null} [tabs=null] - The array of tabs to save. If null, the tabs will be fetched using `findTabsFromRows`.
+ * @returns {Promise<void>} A promise that resolves once the tabs have been saved and optionally rows reloaded.
  */
-function saveTabs(doReload = true, tabs) {
-	tabs = tabs ?? findTabs(saveTabs, doReload);
-	if (tabs == null || !Array.isArray(tabs)) {
-		return;
+async function saveTabs(doReload = true, tabs = null) {
+	//const orgName = await pop_extractOrgName();
+	if (!TabContainer.isValid(tabs)) {
+		//tabs = await findTabsFromRows(orgName);
+		tabs = await findTabsFromRows();
 	}
-	setStorage(tabs, true);
-	doReload && reloadRows({ tabs, key: "tabs" });
-}
-
-/**
- * Handles the import functionality by sending a message that will be used as signal to create an import modal in the Salesforce page.
- */
-function importHandler() {
-	const message = { what: "add" };
-	chrome.runtime.sendMessage({ message, url: location.href });
-	close();
-}
-
-/**
- * Handles the export functionality by downloading the current tabs as a JSON file.
- */
-function exportHandler() {
-	// Convert JSON string to Blob
-	const blob = new Blob([JSON.stringify(knownTabs, null, 4)], {
-		type: "application/json",
+	await allTabs.replaceTabs(tabs, {
+		removeOrgTabs: true,
+		//keepTabsNotThisOrg: orgName,
 	});
-
-	// Create a download link
-	const link = document.createElement("a");
-	link.href = URL.createObjectURL(blob);
-	link.download = "again-why-salesforce.json";
-
-	// Append the link to the body and trigger the download
-	document.body.appendChild(link);
-	link.click();
-
-	// Cleanup
-	document.body.removeChild(link);
+	if (doReload) {
+		await reloadRows();
+	}
+	pop_afterSet();
 }
 
 /**
@@ -423,5 +443,5 @@ document.getElementById("theme-selector").addEventListener(
 	switchTheme,
 );
 document.getElementById("import").addEventListener("click", importHandler);
-document.getElementById("export").addEventListener("click", exportHandler);
+document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);

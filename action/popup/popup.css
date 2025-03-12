@@ -112,14 +112,17 @@ tbody#tabs {
 			}
 
 			& > div {
-				clear: left;
-				transition: transform 0.3s var(--transition-timing-function);
-				transform: translateX(0); /* Initially no translation */
-			}
+				padding-top: 0.2rem;
 
-			&:hover > div {
-				transform: translateX(10px);
+				& > .only-org {
+					width: 1.5rem;
+					cursor: pointer;
+				}
 			}
+		}
+
+		& > td:last-child {
+			padding-left: 0;
 		}
 	}
 

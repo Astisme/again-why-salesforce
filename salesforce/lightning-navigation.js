@@ -1,6 +1,15 @@
 // This script is injected in Salesforce context and does not share the context with the rest of the scripts in this direcory.
 
-// Listener for custom events from the content script
+/**
+ * Handles Lightning navigation based on the provided details.
+ * Navigates to a record page or a URL based on the navigation type.
+ *
+ * @param {Object} details - The details for navigation.
+ * @param {string} details.navigationType - The type of navigation ("recordId" or "url").
+ * @param {string} [details.recordId] - The record ID for "recordId" navigation type.
+ * @param {string} [details.url] - The URL for "url" navigation type.
+ * @param {string} [details.fallbackURL] - The fallback URL to navigate to in case of error.
+ */
 function doLightningNavigation(details) {
 	try {
 		switch (details.navigationType) {

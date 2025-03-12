@@ -95,9 +95,14 @@
 						<th scope="col">
 							<span>Tab Url</span>
 						</th>
-						<th scope="col" style="width: 3.25rem">
+						<th scope="col">
 							<span class="slds-assistive-text">
-								Actions
+								Is Org Tab
+							</span>
+						</th>
+						<th scope="col">
+							<span class="slds-assistive-text">
+								Delete Tab
 							</span>
 						</th>
 					</tr>
@@ -152,8 +157,8 @@
 					<div>
 						<input
 							type="text"
-							name="tabTitle"
-							class="tabTitle"
+							name="label"
+							class="label"
 							placeholder="Flows"
 							title="Enter the label for this URL"
 						/>
@@ -167,6 +172,27 @@
 							class="url"
 							placeholder="Flows/home"
 							title="Enter the sub-URL where you want to be redirected."
+						/>
+					</div>
+				</td>
+				<td data-label="Only This Org">
+					<div>
+						<input
+							type="checkbox"
+							name="only-org"
+							class="only-org"
+							title="Click if you want this tab to be available for this Org only."
+						/>
+					</div>
+				</td>
+				<td data-label="Org Name" style="display: none">
+					<div>
+						<input
+							type="text"
+							name="org"
+							class="org"
+							title="The Org for which this Tab is available."
+							disabled="true"
 						/>
 					</div>
 				</td>
