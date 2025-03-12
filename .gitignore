@@ -1,6 +1,5 @@
 manifest.json
 .vscode
 deno.lock
-images/*github*.png
 bin/*.zip
 */bundled*
