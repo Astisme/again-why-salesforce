@@ -1,78 +1,78 @@
 {
-    "manifest_version": 3,
-    "name": "Again, Why Salesforce",
-    "version": "1.4.5",
-    "permissions": [
-        "storage",
-        "tabs",
-        "activeTab",
-        "contextMenus",
-        "downloads"
-    ],
-    "description": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
-    "homepage_url": "https://github.com/Astisme/again-why-salesforce",
-    "content_scripts": [
-        {
-            "matches": [
-                "https://*.my.salesforce-setup.com/lightning/setup/*",
-                "https://*.lightning.force.com/lightning/setup/*"
-            ],
-            "js": [
-                "salesforce/bundledContent.js"
-            ],
-            "run_at": "document_end"
-        }
-    ],
-    "web_accessible_resources": [
-        {
-            "resources": [
-                "salesforce/lightning-navigation.js"
-            ],
-            "matches": [
-                "https://*.my.salesforce-setup.com/*",
-                "https://*.lightning.force.com/*"
-            ]
-        },
-        {
-            "resources": [
-                "assets/svgs/*.svg",
-                "assets/icons/*.png"
-            ],
-            "matches": [
-                "https://*.my.salesforce-setup.com/*",
-                "https://*.lightning.force.com/*"
-            ]
-        }
-    ],
-    "icons": {
-        "16": "assets/icons/awsf-16.png",
-        "32": "assets/icons/awsf-32.png",
-        "64": "assets/icons/awsf-64.png",
-        "128": "assets/icons/awsf-128.png",
-        "256": "assets/icons/awsf-256.png",
-        "512": "assets/icons/awsf-512.png",
-        "1024": "assets/icons/awsf-1024.png"
-    },
-    "action": {
-        "default_title": "Again, Why Salesforce",
-        "default_popup": "action/popup/popup.html"
-    },
-    "background": {
-        "service_worker": "background/bundledBackground.js",
-        "scripts": [
-            "background/bundledBackground.js"
-        ],
-        "type": "module"
-    },
-    "minimum_chrome_version": "120.0.0",
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "again@why.salesforce",
-            "strict_min_version": "112.0"
-        },
-        "safari": {
-            "strict_min_version": "14"
-        }
-    },
-    "incognito": "spanning"
+	"manifest_version": 3,
+	"name": "Again, Why Salesforce",
+	"version": "1.4.5",
+	"permissions": [
+		"storage",
+		"tabs",
+		"activeTab",
+		"contextMenus",
+		"downloads"
+	],
+	"description": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
+	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
+	"content_scripts": [
+		{
+			"matches": [
+				"https://*.my.salesforce-setup.com/lightning/setup/*",
+				"https://*.lightning.force.com/lightning/setup/*"
+			],
+			"js": [
+				"salesforce/bundledContent.js"
+			],
+			"run_at": "document_end"
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"salesforce/lightning-navigation.js"
+			],
+			"matches": [
+				"https://*.my.salesforce-setup.com/*",
+				"https://*.lightning.force.com/*"
+			]
+		},
+		{
+			"resources": [
+				"assets/svgs/*.svg",
+				"assets/icons/*.png"
+			],
+			"matches": [
+				"https://*.my.salesforce-setup.com/*",
+				"https://*.lightning.force.com/*"
+			]
+		}
+	],
+	"icons": {
+		"16": "assets/icons/awsf-16.png",
+		"32": "assets/icons/awsf-32.png",
+		"64": "assets/icons/awsf-64.png",
+		"128": "assets/icons/awsf-128.png",
+		"256": "assets/icons/awsf-256.png",
+		"512": "assets/icons/awsf-512.png",
+		"1024": "assets/icons/awsf-1024.png"
+	},
+	"action": {
+		"default_title": "Again, Why Salesforce",
+		"default_popup": "action/popup/popup.html"
+	},
+	"background": {
+		"service_worker": "background/bundledBackground.js",
+		"scripts": [
+			"background/bundledBackground.js"
+		],
+		"type": "module"
+	},
+	"minimum_chrome_version": "120.0.0",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "again@why.salesforce",
+			"strict_min_version": "112.0"
+		},
+		"safari": {
+			"strict_min_version": "14"
+		}
+	},
+	"incognito": "spanning"
 }
