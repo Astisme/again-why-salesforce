@@ -202,7 +202,7 @@ async function addTab(url) {
 async function actionFavourite() {
 	const url = Tab.minifyURL(getCurrentHref());
 	if (getIsCurrentlyOnSavedTab()) {
-		await ensureAllTabsAvailability();
+		allTabs = await ensureAllTabsAvailability();
 		const tabToRemove = allTabs.getTabsByData({ url })[0];
 		if (tabToRemove == null) {
 			showToast("Cannot remove a non favourite Tab!", false, true);
@@ -248,7 +248,7 @@ export async function showFavouriteButton(count = 0) {
 	const oldButton = header.querySelector(`#${BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
-		await ensureAllTabsAvailability();
+		allTabs = await ensureAllTabsAvailability();
 		toggleFavouriteButton(allTabs.exists({ url }));
 		return;
 	}

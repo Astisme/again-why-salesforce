@@ -33,9 +33,9 @@ export function getAllTabs() {
 }
 export async function ensureAllTabsAvailability() {
 	try {
-		getAllTabs();
+		return getAllTabs();
 	} catch (_) {
-		await getAllTabs_async();
+		return await getAllTabs_async();
 	}
 }
 
@@ -165,7 +165,7 @@ export function showToast(message, isSuccess = true, isWarning = false) {
  */
 async function init(tabs = null) {
 	let orgName = null;
-	await ensureAllTabsAvailability();
+	allTabs = await ensureAllTabsAvailability();
 	if (tabs == null) {
 		await allTabs.getSavedTabs(true);
 	} else {
@@ -214,7 +214,7 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 	fromHrefUpdate = isFromHrefUpdate;
 	const url = Tab.minifyURL(href);
 	wasOnSavedTab = isCurrentlyOnSavedTab;
-	await ensureAllTabsAvailability();
+	allTabs = await ensureAllTabsAvailability();
 	isCurrentlyOnSavedTab = allTabs.exists({ url });
 	if (isFromHrefUpdate) {
 		callback(isCurrentlyOnSavedTab);
@@ -362,7 +362,7 @@ async function reorderTabs() {
 				}
 			})
 			.filter((tab) => tab != null);
-		await ensureAllTabsAvailability();
+		allTabs = await ensureAllTabsAvailability();
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
@@ -441,7 +441,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 			true,
 		);
 	}
-	await ensureAllTabsAvailability();
+	allTabs = await ensureAllTabsAvailability();
 	const { modalParent, saveButton, closeButton, inputContainer } =
 		generateOpenOtherOrgModal(
 			url, // if the url is "", we may still open the link in another Org without any issue
@@ -513,7 +513,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
  */
 export async function performActionOnTabs(action, tab, options) {
 	try {
-		await ensureAllTabsAvailability();
+		allTabs = await ensureAllTabsAvailability();
 		switch (action) {
 			case "move":
 				await allTabs.moveTab(tab, options);
@@ -549,7 +549,7 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 		return;
 	}
 	sendResponse(null);
-	await ensureAllTabsAvailability();
+	allTabs = await ensureAllTabsAvailability();
 	switch (message.what) {
 		case "saved":
 		case "focused":

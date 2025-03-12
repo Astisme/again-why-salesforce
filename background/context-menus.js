@@ -251,14 +251,19 @@ BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
  *     - "page-save-tab" and "page-remove-tab": Focuses on `pageUrl`.
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
-BROWSER.contextMenus.onClicked.addListener((info, _) => {
+BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const message = { what: info.menuItemId };
+	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
 		case "open-other-org":
-			message.pageTabUrl = Tab.minifyURL(info.pageUrl);
-			message.pageUrl = Tab.expandURL(info.pageUrl);
-			message.linkTabUrl = Tab.minifyURL(info.linkUrl);
-			message.linkUrl = Tab.expandURL(info.linkUrl);
+			if (info.pageUrl != null) {
+				message.pageTabUrl = Tab.minifyURL(info.pageUrl);
+				message.pageUrl = Tab.expandURL(info.pageUrl, browserTabUrl);
+			}
+			if (info.linkUrl) {
+				message.linkTabUrl = Tab.minifyURL(info.linkUrl);
+				message.linkUrl = Tab.expandURL(info.linkUrl, browserTabUrl);
+			}
 			message.linkTabLabel = info.linkText;
 			break;
 		case "import-tabs":
@@ -270,11 +275,11 @@ BROWSER.contextMenus.onClicked.addListener((info, _) => {
 		case "page-save-tab":
 		case "page-remove-tab":
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
-			message.url = Tab.expandURL(info.pageUrl);
+			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl);
-			message.url = Tab.expandURL(info.linkUrl);
+			message.url = Tab.expandURL(info.linkUrl, browserTabUrl);
 			message.label = info.linkText;
 			break;
 	}

@@ -100,7 +100,7 @@ function generateSldsImport() {
 reader.onload = async (e) => {
 	try {
 		const jsonString = e.target.result;
-		await ensureAllTabsAvailability();
+		allTabs = await ensureAllTabsAvailability();
 		const importedNum = await allTabs.importTabs(
 			jsonString,
 			overwritePick,
