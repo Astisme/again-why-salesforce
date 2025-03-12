@@ -4,7 +4,6 @@
     "version": "1.4.6",
     "permissions": [
         "storage",
-        "tabs",
         "activeTab",
         "contextMenus",
         "downloads"

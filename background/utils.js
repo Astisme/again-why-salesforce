@@ -1,6 +1,7 @@
 "use strict";
 import { BROWSER, EXTENSION_NAME } from "/constants.js";
 import { bg_getStorage } from "./background.js";
+import { ISCHROME } from "../constants.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -78,12 +79,27 @@ export async function bg_notify(message, count = 0) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-	const blob = new Blob([jsonData], { type: "application/json" });
-	const url = URL.createObjectURL(blob);
-	BROWSER.downloads.download({
-		url,
-		filename: `${EXTENSION_NAME}.json`,
-	});
+    if (!ISCHROME) {
+        // Firefox implementation
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        BROWSER.downloads.download({
+            url,
+            filename: `${EXTENSION_NAME}.json`,
+        }).then(() => {
+            BROWSER.downloads.onChanged.addListener(e => {
+                if(e.state.current === "complete")
+                    URL.revokeObjectURL(url);
+            });
+        });
+    } else {
+        // Chrome implementation
+        const dataStr = "data:application/json;charset=utf-8," + encodeURIComponent(jsonData);
+        chrome.downloads.download({
+            url: dataStr,
+            filename: `${EXTENSION_NAME}.json`,
+        });
+    }
 }
 
 /**

@@ -75,7 +75,6 @@ function pop_getCurrentBrowserTab(callback) {
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
 	const broswerTabUrl = browserTab?.url;
-	console.error(broswerTabUrl);
 	if (
 		broswerTabUrl == null ||
 		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
