@@ -1,14 +1,7 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
-import {
-	BROWSER,
-	WHY_KEY,
-} from "../constants.js";
-import {
-	bg_getCurrentBrowserTab,
-	bg_notify,
-	exportHandler,
-} from "./utils.js";
+import { BROWSER, WHY_KEY } from "../constants.js";
+import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
 /**
  * Retrieves data from the browser's synced storage and invokes the provided callback with the data.

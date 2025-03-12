@@ -1,8 +1,5 @@
 "use strict";
-import {
-	BROWSER,
-	EXTENSION_NAME,
-} from "/constants.js";
+import { BROWSER, EXTENSION_NAME } from "/constants.js";
 import { bg_getStorage } from "./background.js";
 
 /**
@@ -28,8 +25,9 @@ export function bg_getCurrentBrowserTab(callback) {
 	 */
 	async function queryTabs(callback, count = 0) {
 		const queryParams = { active: true, currentWindow: true };
-		if(count > 0)
-            delete queryParams.currentWindow;
+		if (count > 0) {
+			delete queryParams.currentWindow;
+		}
 		const browserTabs = await BROWSER.tabs.query(queryParams);
 		if (
 			BROWSER.runtime.lastError || browserTabs == null ||

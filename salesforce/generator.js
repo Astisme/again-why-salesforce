@@ -85,7 +85,7 @@ function handleLightningLinkClick(e) {
  */
 export function generateRowTemplate(
 	{ label = null, url = null, org = null } = {},
-    hide = false,
+	hide = false,
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -100,8 +100,9 @@ export function generateRowTemplate(
 		EXTENSION_NAME,
 	);
 	li.setAttribute("data-aura-class", "navexConsoleTabItem");
-    if(hide)
-        li.style.display = "none";
+	if (hide) {
+		li.style.display = "none";
+	}
 	const a = document.createElement("a");
 	a.setAttribute("data-draggable", "true");
 	a.setAttribute("role", "tab");
@@ -112,11 +113,11 @@ export function generateRowTemplate(
 	a.classList.add("tabHeader", "slds-context-bar__label-action");
 	a.style.zIndex = 0;
 	a.addEventListener("click", handleLightningLinkClick);
-    li.appendChild(a);
+	li.appendChild(a);
 	const span = document.createElement(org == null ? "span" : "b");
 	span.classList.add("label", "slds-truncate");
 	span.textContent = label;
-    span.dataset.org = org;
+	span.dataset.org = org;
 	a.appendChild(span);
 	// Highlight the tab related to the current page
 	if (getCurrentHref() === expURL) {

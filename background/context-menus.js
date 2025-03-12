@@ -5,11 +5,7 @@ import {
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
 } from "/constants.js";
-import {
-	bg_getCurrentBrowserTab,
-	bg_notify,
-	exportHandler,
-} from "./utils.js";
+import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import { Tab } from "/tab.js";
 
 let areMenuItemsVisible = false;
@@ -21,7 +17,7 @@ const menuItems = [
 		contexts: ["link", "page", "frame"],
 	},
 
-    /* TODO next version
+	/* TODO next version
 	{ id: "update", title: "✏️ Update tab", contexts: ["link"] },
 	{
 		id: "update-org",

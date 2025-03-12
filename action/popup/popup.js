@@ -75,7 +75,7 @@ function pop_getCurrentBrowserTab(callback) {
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
 	const broswerTabUrl = browserTab?.url;
-    console.error(broswerTabUrl);
+	console.error(broswerTabUrl);
 	if (
 		broswerTabUrl == null ||
 		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
@@ -316,10 +316,10 @@ async function loadTabs(browserTab = null) {
 		element.querySelector(".url").value = tab.url;
 		element.querySelector(".only-org").checked = tab.org != null;
 		element.querySelector(".delete").removeAttribute("disabled");
-        if(tab.org != null && tab.org !== orgName){
-            element.querySelector(".org").value = tab.org;
-            element.style.display = "none";
-        }
+		if (tab.org != null && tab.org !== orgName) {
+			element.querySelector(".org").value = tab.org;
+			element.style.display = "none";
+		}
 		const logger = loggers.pop();
 		logger.last_input.label = tab.label;
 		logger.last_input.url = tab.url;
@@ -367,33 +367,33 @@ async function findTabsFromRows(orgName = null) {
 	}
 	try {
 		//return [
-        // add all the Tabs from the popup
+		// add all the Tabs from the popup
 		return Array.from(document.getElementsByClassName("tab"))
-				.map((tab) => {
-					const label = tab.querySelector(".label").value;
-					const url = tab.querySelector(".url").value;
-					const onlyOrgChecked =
-						tab.querySelector(".only-org").checked;
-					if (
-						label == null || url == null ||
-						label === "" || url === ""
-					) {
-						return null; // Return null for invalid tabs
-					}
-					// the user has not checked the onlyOrgChecked checkbox &&
-					// the link does not contain a Salesforce Id
-					if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
-						return Tab.create(label, url);
-					}
-                    const org = tab.querySelector(".org").value;
-                    if(org == null || org === "")
-                        return Tab.create(label, url, orgName);
-					return Tab.create(label, url, org);
-				})
-				.filter((tab) => tab != null);
-			// add all the hidden not-this-org tabs
-            // only needed when not rendering these tabs
-			//...allTabs.getTabsByOrg(orgName, false),
+			.map((tab) => {
+				const label = tab.querySelector(".label").value;
+				const url = tab.querySelector(".url").value;
+				const onlyOrgChecked = tab.querySelector(".only-org").checked;
+				if (
+					label == null || url == null ||
+					label === "" || url === ""
+				) {
+					return null; // Return null for invalid tabs
+				}
+				// the user has not checked the onlyOrgChecked checkbox &&
+				// the link does not contain a Salesforce Id
+				if (!onlyOrgChecked && !Tab.containsSalesforceId(url)) {
+					return Tab.create(label, url);
+				}
+				const org = tab.querySelector(".org").value;
+				if (org == null || org === "") {
+					return Tab.create(label, url, orgName);
+				}
+				return Tab.create(label, url, org);
+			})
+			.filter((tab) => tab != null);
+		// add all the hidden not-this-org tabs
+		// only needed when not rendering these tabs
+		//...allTabs.getTabsByOrg(orgName, false),
 	} catch (err) {
 		console.error("Error processing tabs:", err);
 		return [];
@@ -423,7 +423,7 @@ async function saveTabs(doReload = true, tabs = null) {
 	if (doReload) {
 		await reloadRows();
 	}
-    pop_afterSet();
+	pop_afterSet();
 }
 
 /**

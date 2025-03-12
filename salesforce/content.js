@@ -183,8 +183,13 @@ async function init(tabs = null) {
 		}
 		allTabs.forEach((row) => {
 			// TODO add option to hide or show not-this-org tabs
-            // hide not-this-org tabs
-            setupTabUl.appendChild(generateRowTemplate(row, !(row.org == null || row.org === orgName)));
+			// hide not-this-org tabs
+			setupTabUl.appendChild(
+				generateRowTemplate(
+					row,
+					!(row.org == null || row.org === orgName),
+				),
+			);
 		});
 	}
 	isOnSavedTab();
@@ -342,9 +347,10 @@ async function reorderTabs() {
 					return null;
 				}
 				try {
-                    if(!isOrgTab)
-                        return Tab.create(label, aHref);
-                    const org = b.dataset.org;
+					if (!isOrgTab) {
+						return Tab.create(label, aHref);
+					}
+					const org = b.dataset.org;
 					return Tab.create(
 						label,
 						aHref,
@@ -627,7 +633,7 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 		case "page-remove-tab":
 			pageActionTab(false);
 			break;
-        /*
+			/*
 		case "update-org":
 
 			break;
