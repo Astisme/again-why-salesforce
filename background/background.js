@@ -2,17 +2,10 @@
 import "./context-menus.js"; // initiate context-menu loop
 import {
 	BROWSER,
-	HTTPS,
-	LIGHTNING_FORCE_COM,
-	MY_SALESFORCE_COM,
-	MY_SALESFORCE_SETUP_COM,
-	SALESFORCE_ID_PATTERN,
 	WHY_KEY,
 } from "../constants.js";
 import {
-	bg_expandURL,
 	bg_getCurrentBrowserTab,
-	bg_minifyURL,
 	bg_notify,
 	exportHandler,
 } from "./utils.js";
@@ -45,51 +38,7 @@ export function bg_getStorage(callback) {
 function bg_setStorage(tabs, callback) {
 	const set = {};
 	set[WHY_KEY] = tabs;
-	BROWSER.storage.sync.set(set, () => {
-		callback(null);
-		//bg_notify({what:"saved",tabs});
-	});
-}
-
-/**
- * Extracts the Org name from the url passed as input.
- *
- * @param {string} url - The URL from which the Org name has to be extracted.
- * @returns string | undefined - The Org name OR nothing if an error occurs
- */
-export function bg_extractOrgName(url) {
-	if (url == null) {
-		return bg_getCurrentBrowserTab((browserTab) =>
-			bg_extractOrgName(browserTab.url)
-		);
-	}
-	let host = new URL(
-		url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
-	).host;
-	if (host.endsWith(LIGHTNING_FORCE_COM)) {
-		host = host.slice(0, host.indexOf(LIGHTNING_FORCE_COM));
-	}
-	if (host.endsWith(MY_SALESFORCE_SETUP_COM)) {
-		host = host.slice(0, host.indexOf(MY_SALESFORCE_SETUP_COM));
-	}
-	if (host.endsWith(MY_SALESFORCE_COM)) {
-		host = host.slice(0, host.indexOf(MY_SALESFORCE_COM));
-	}
-	return host;
-}
-
-/**
- * Checks if a given URL contains a valid Salesforce ID.
- *
- * A Salesforce ID is either 15 or 18 alphanumeric characters, typically found
- * in URL paths or query parameters. The function also handles encoded URLs
- * (e.g., `%2F` becomes `/`) by decoding them before matching.
- *
- * @param {string} url - The URL to check for a Salesforce ID.
- * @returns {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
- */
-function bg_containsSalesforceId(url) {
-	return SALESFORCE_ID_PATTERN.test(decodeURIComponent(url));
+	BROWSER.storage.sync.set(set, callback(null));
 }
 
 /**
@@ -123,22 +72,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "warning":
 			sendResponse(null);
 			setTimeout(() => bg_notify(message), 250); // delay the notification to prevent accidental removal (for "add")
-			//return false; // we won't call sendResponse
-			break;
-		case "minify":
-			sendResponse(bg_minifyURL(message.url));
-			//return false; // we won't call sendResponse
-			break;
-		case "extract-org":
-			sendResponse(bg_extractOrgName(message.url));
-			//return false; // we won't call sendResponse
-			break;
-		case "expand":
-			sendResponse(bg_expandURL(message));
-			//return false; // we won't call sendResponse
-			break;
-		case "contains-sf-id":
-			sendResponse(bg_containsSalesforceId(message.url));
 			//return false; // we won't call sendResponse
 			break;
 		case "export":
