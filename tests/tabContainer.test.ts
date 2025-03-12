@@ -6,8 +6,8 @@ import {
 	assertRejects,
 	assertThrows,
 } from "https://deno.land/std/testing/asserts.ts";
-import { Tab } from "/tab.js";
-import { TabContainer } from "/tabContainer.js";
+import Tab from "/tab.js";
+import TabContainer from "/tabContainer.js";
 
 function matchStorageToContainer(container: TabContainer) {
 	assertEquals(mockStorage.tabs.length, container.length);

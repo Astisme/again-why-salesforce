@@ -1,8 +1,8 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
-import { Tab } from "/tab.js";
-import { TabContainer } from "/tabContainer.js";
+import Tab from "/tab.js";
+import TabContainer from "/tabContainer.js";
 import { SETUP_LIGHTNING_PATTERN } from "/constants.js";
 const allTabs = await TabContainer.create();
 

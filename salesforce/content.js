@@ -14,8 +14,8 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { SALESFORCE_URL_PATTERN } from "../constants.js";
-import { Tab } from "/tab.js";
-import { TabContainer } from "/tabContainer.js";
+import Tab from "/tab.js";
+import TabContainer from "/tabContainer.js";
 
 let allTabs;
 async function getAllTabs_async() {

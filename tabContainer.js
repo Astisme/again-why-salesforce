@@ -1,8 +1,8 @@
-import { Tab } from "./tab.js";
+import Tab from "./tab.js";
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
-export class TabContainer extends Array {
+export default class TabContainer extends Array {
 	/**
 	 * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
 	 * Throws an error if the provided secret does not match the expected secret value.

@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { Tab } from "/tab.js";
+import Tab from "/tab.js";
 export interface MockStorage {
 	tabs: Tab[];
 }

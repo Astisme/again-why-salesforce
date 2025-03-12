@@ -5,7 +5,7 @@ import {
 	assertFalse,
 	assertThrows,
 } from "https://deno.land/std/testing/asserts.ts";
-import { Tab } from "/tab.js";
+import Tab from "/tab.js";
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {
 	await t.step("creates tab with required parameters", () => {

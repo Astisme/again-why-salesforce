@@ -13,7 +13,7 @@ const _tabSecret = Symbol("tabSecret");
  * The class to create a single Tab (through Tab.create()).
  * It allows to check if an object is a Tab and to transform a Tab into JSON.
  */
-class Tab {
+export default class Tab {
 	/**
 	 * All the keys which are available inside a Tab.
 	 */
@@ -356,5 +356,3 @@ class Tab {
 		return this.toString();
 	}
 }
-
-export { Tab };
