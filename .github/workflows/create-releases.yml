@@ -35,7 +35,7 @@ jobs:
                 # Extract substring before any additional '-' (like '-alpha')
                 PURE_VERSION=${TAG_VERSION%%-*}
                 echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
-                echo "ZIP_NAME='bin/$BROWSER_VERSION_NAME.zip'" >> $GITHUB_ENV
+                echo "ZIP_NAME=bin/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
 
             - name: Setup Deno
               uses: denoland/setup-deno@v2
