@@ -39,24 +39,6 @@ You may find the release for this extension [here](https://github.com/Astisme/ag
 
 If you prefer, you can build this extension by downloading it and running `deno task dev-(browser)` then add it to your browser following its specific steps.
 
-## Roadmap
-
-- [x] Ability to customize tab
-  - [x] Salesforce SLDS
-  - [x] Feedback on save and delete #3
-  - [x] Update tabs onSave without refresh
-  - [x] Disable save button if tabs list empty
-  - [x] Reordering of tabs #5
-- [x] Remove SLDS files
-- [ ] Dark mode for flows
-- [ ] Org specific tab customization
-- [x] Highlight tab when user is on that url
-- [x] Open full urls in new tab
-- [ ] Better solutions for waiting until Salesforce setup is completely loaded
-- [ ] Utils class for templates or other shared code
-- [x] Favourite button on current Setup page #12
-- [x] Import & Export tabs
-
 ## Contributing
 
 All contributions are welcome. Please head to the [issues page](https://github.com/Astisme/again-why-salesforce/issues) and pick one unassigned issue to work on.
