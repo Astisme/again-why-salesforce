@@ -7,7 +7,6 @@ import {
 } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import Tab from "/tab.js";
-import { ISCHROME } from "../constants.js";
 
 let areMenuItemsVisible = false;
 
