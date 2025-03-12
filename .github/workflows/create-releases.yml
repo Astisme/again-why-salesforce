@@ -21,8 +21,6 @@ jobs:
             - name: Define variables
               run: |
                 AWSF=awsf
-                echo "AWSF=$AWSF" >> $GITHUB_ENV
-
                 TAG="${GITHUB_REF_NAME}"
                 echo "TRIGGERING_TAG=$TAG" >> $GITHUB_ENV
                 # Extract substring before '-v'
@@ -31,14 +29,13 @@ jobs:
                 # Get version from manifest
                 MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)
                 BROWSER_VERSION_NAME="$AWSF-$BROWSER-v$MANIFEST_VERSION"
-
-                echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
-
                 # Extract substring after '-v'
                 TAG_VERSION=${TAG##*-v}
+                echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
                 # Extract substring before any additional '-' (like '-alpha')
                 PURE_VERSION=${TAG_VERSION%%-*}
                 echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
+                echo "ZIP_NAME='bin/$BROWSER_VERSION_NAME.zip'" >> $GITHUB_ENV
 
             - name: Setup Deno
               uses: denoland/setup-deno@v2
