@@ -4,7 +4,21 @@ import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import { SETUP_LIGHTNING_PATTERN } from "/constants.js";
+
+// check permissions
+if(new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"){
+    chrome.permissions.contains({
+        origins: ["https://*.my.salesforce-setup.com/lightning/setup/*"]
+    }, async function(result) {
+        if (!result) {
+            const req_permissions = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");
+            globalThis.location = req_permissions;
+        }
+    });
+}
+
 const allTabs = await TabContainer.create();
+
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");

@@ -13,8 +13,7 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"https://*.my.salesforce-setup.com/lightning/setup/*",
-				"https://*.lightning.force.com/lightning/setup/*"
+				"https://*.my.salesforce-setup.com/lightning/setup/*"
 			],
 			"js": [
 				"salesforce/bundledContent.js"

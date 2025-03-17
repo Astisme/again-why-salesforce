@@ -1,0 +1,27 @@
+body {
+	width: 25rem;
+}
+
+#text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1rem;
+    padding: 1rem;
+
+    & > * {
+        text-align: center;
+        font-weight: normal;
+    }
+}
+
+#actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+
+    & > .button {
+        width: 30%;
+    }
+}
