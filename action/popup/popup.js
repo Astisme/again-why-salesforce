@@ -75,14 +75,6 @@ function pop_getCurrentBrowserTab(callback) {
 	return pop_sendMessage({ what: "browser-tab" }, callback);
 }
 
-/**
- * Redirects the popup to the req_permissions page
- */
-async function redirectToReqPermissions(){
-    globalThis.location = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");;
-}
-const allowPerms = document.getElementById("allow-permissions");
-
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
@@ -99,23 +91,18 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		);
 	} else {
         // we're in Salesforce Setup
-        // check if we may request optional permissions
-        if(
+        // check if we have all the optional permissions available
+        const permissionsAvailable = await chrome.permissions.contains({
+            origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN]
+        });
+        if (
+            !permissionsAvailable &&
             localStorage.getItem("noPerm") !== "true" &&
             new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"
-        ){
-            // check if we have all the optional permissions available
-            const result = await chrome.permissions.contains({
-                origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN]
-            });
-            if (!result) {
-                // if we do not have them, redirect to the req_permissions page
-                await redirectToReqPermissions();
-                // nothing else will happen from this file
-            } else {
-                // if we have them already, hide the allowPerms svg
-                allowPerms.classList.add("hidden");
-            }
+        ) {
+            // if we do not have them, redirect to the request permission page
+            globalThis.location = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");;
+            // nothing else will happen from this file
         }
 		await loadTabs(browserTab);
 	}
@@ -476,4 +463,3 @@ document.getElementById("theme-selector").addEventListener(
 document.getElementById("import").addEventListener("click", importHandler);
 document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
-allowPerms.addEventListener("click", redirectToReqPermissions);
