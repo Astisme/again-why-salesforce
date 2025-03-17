@@ -8,19 +8,31 @@ import {
     MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 } from "/constants.js";
 
-// check permissions
+/**
+ * Redirects the popup to the req_permissions page
+ */
+async function redirectToReqPermissions(){
+    globalThis.location = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");;
+}
+
+const allowPerms = document.getElementById("allow-permissions");
+// check if we may request optional permissions
 if(
     localStorage.getItem("noPerm") !== "true" &&
     new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"
 ){
-    chrome.permissions.contains({
+    // check if we have all the optional permissions available
+    const result = await chrome.permissions.contains({
         origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN]
-    }, async function(result) {
-        if (!result) {
-            const req_permissions = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");
-            globalThis.location = req_permissions;
-        }
     });
+    if (!result) {
+        // if we do not have them, redirect to the req_permissions page
+        await redirectToReqPermissions();
+        // nothing else will happen from this file
+    } else {
+        // if we have them already, hide the allowPerms svg
+        allowPerms.classList.add("hidden");
+    }
 }
 
 const allTabs = await TabContainer.create();
@@ -463,3 +475,4 @@ document.getElementById("theme-selector").addEventListener(
 document.getElementById("import").addEventListener("click", importHandler);
 document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
+allowPerms.addEventListener("click", redirectToReqPermissions);
