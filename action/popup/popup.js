@@ -3,9 +3,9 @@
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
-import { 
-    SETUP_LIGHTNING_PATTERN,
-    MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+import {
+	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
 
 const allTabs = await TabContainer.create();
@@ -83,27 +83,30 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		broswerTabUrl == null ||
 		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
 	) {
-        // we're not in Salesforce Setup
+		// we're not in Salesforce Setup
 		window.location.href = chrome.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
 				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
 			}`,
 		);
 	} else {
-        // we're in Salesforce Setup
-        // check if we have all the optional permissions available
-        const permissionsAvailable = await chrome.permissions.contains({
-            origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN]
-        });
-        if (
-            !permissionsAvailable &&
-            localStorage.getItem("noPerm") !== "true" &&
-            new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"
-        ) {
-            // if we do not have them, redirect to the request permission page
-            globalThis.location = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");;
-            // nothing else will happen from this file
-        }
+		// we're in Salesforce Setup
+		// check if we have all the optional permissions available
+		const permissionsAvailable = await chrome.permissions.contains({
+			origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN],
+		});
+		if (
+			!permissionsAvailable &&
+			localStorage.getItem("noPerm") !== "true" &&
+			new URL(globalThis.location.href).searchParams.get("noPerm") !==
+				"true"
+		) {
+			// if we do not have them, redirect to the request permission page
+			globalThis.location = await chrome.runtime.getURL(
+				"action/req_permissions/req_permissions.html",
+			);
+			// nothing else will happen from this file
+		}
 		await loadTabs(browserTab);
 	}
 });
