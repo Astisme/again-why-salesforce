@@ -25,3 +25,10 @@ body {
         width: 30%;
     }
 }
+
+#checkboxes {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    width: 55%;
+}

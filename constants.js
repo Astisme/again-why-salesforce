@@ -34,3 +34,4 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.", "\\.")}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
+export const MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN = `https://*${MY_SALESFORCE_SETUP_COM}/lightning/setup/*`

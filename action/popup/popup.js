@@ -3,12 +3,18 @@
 import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
-import { SETUP_LIGHTNING_PATTERN } from "/constants.js";
+import { 
+    SETUP_LIGHTNING_PATTERN,
+    MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+} from "/constants.js";
 
 // check permissions
-if(new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"){
+if(
+    localStorage.getItem("noPerm") !== "true" &&
+    new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"
+){
     chrome.permissions.contains({
-        origins: ["https://*.my.salesforce-setup.com/lightning/setup/*"]
+        origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN]
     }, async function(result) {
         if (!result) {
             const req_permissions = await chrome.runtime.getURL("action/req_permissions/req_permissions.html");
@@ -18,7 +24,6 @@ if(new URL(globalThis.location.href).searchParams.get("noPerm") !== "true"){
 }
 
 const allTabs = await TabContainer.create();
-
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
