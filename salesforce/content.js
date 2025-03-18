@@ -533,6 +533,9 @@ export async function performActionOnTabs(action, tab, options) {
 			case "remove-all":
 				await allTabs.replaceTabs([], { removeOrgTabs: true });
 				break;
+            case "toggle-org":
+                await toggleOrg(tab);
+                break;
 			default:
 				return console.error("Did not match any action", action);
 		}
@@ -541,6 +544,16 @@ export async function performActionOnTabs(action, tab, options) {
 		console.warn({ action, tab, options });
 		showToast(error.message, false);
 	}
+}
+
+async function toggleOrg({label, url} = {}){
+    const matchingTabs = await allTabs.getTabsByData({ label, url });
+    if(matchingTabs == null || matchingTabs.length > 1)
+        throw new Error("Could not discriminate Tab.");
+    const matchingTab = matchingTabs[0];
+    matchingTab.update({ org: matchingTab.org == null ? getCurrentHref() : "" });
+    if(!await allTabs.syncTabs())
+        throw new Error("Failed to sync");
 }
 
 // listen from saves from the action / background page
@@ -636,11 +649,15 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 		case "page-remove-tab":
 			pageActionTab(false);
 			break;
-			/*
 		case "update-org":
-
+            await performActionOnTabs("toggle-org", {
+                label: message.label,
+                url: message.tabUrl,
+            });
 			break;
-        */
+		case "update-tab":
+            // TODO show modal to update given Tab
+			break;
 		default:
 			break;
 	}

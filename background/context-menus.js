@@ -17,17 +17,21 @@ const menuItems = [
 		contexts: ["link", "page", "frame"],
 	},
 
-	/* TODO next version
-	{ id: "update", title: "✏️ Update tab", contexts: ["link"] },
+	{ id: "update", title: "✏️ Update Tab", contexts: ["link"] },
 	{
 		id: "update-org",
 		title: "📌 Toggle Org",
 		contexts: ["link"],
 		parentId: "update",
 	},
-    */
+	{
+		id: "update-tab",
+		title: "🧹 Other Updates",
+		contexts: ["link"],
+		parentId: "update",
+	},
 
-	{ id: "move", title: "🧭 Move tab", contexts: ["link"] },
+	{ id: "move", title: "🧭 Move Tab", contexts: ["link"] },
 	{
 		id: "move-first",
 		title: "↩️ Make first",
@@ -53,16 +57,16 @@ const menuItems = [
 		parentId: "move",
 	},
 
-	{ id: "remove", title: "💥 Remove tab(s)", contexts: ["link"] },
+	{ id: "remove", title: "💥 Remove Tab(s)", contexts: ["link"] },
 	{
 		id: "remove-tab",
-		title: "1️⃣ This tab",
+		title: "1️⃣ This s Tab",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: "remove-other-tabs",
-		title: "↔️ Other tabs",
+		title: "↔️ Other Tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
@@ -80,7 +84,7 @@ const menuItems = [
 	},
 	{
 		id: "empty-no-org-tabs",
-		title: "👀 All visible tabs",
+		title: "👀 All visible Tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
@@ -93,22 +97,22 @@ const menuItems = [
 
 	{
 		id: "import-tabs",
-		title: "🆙 Import tabs",
+		title: "🆙 Import Tabs",
 		contexts: ["page", "frame"],
 	},
 	{
 		id: "export-tabs",
-		title: "⬇️ Export tabs",
+		title: "⬇️ Export Tabs",
 		contexts: ["page", "frame"],
 	},
 	{
 		id: "page-save-tab",
-		title: "💾 Save as tab",
+		title: "💾 Save as Tab",
 		contexts: ["page", "frame"],
 	},
 	{
 		id: "page-remove-tab",
-		title: "👋 Remove tab",
+		title: "👋 Remove Tab",
 		contexts: ["page", "frame"],
 	},
 ].map((item) => {
