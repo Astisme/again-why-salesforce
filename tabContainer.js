@@ -1,4 +1,8 @@
-import Tab from "./tab.js";
+import { 
+    BROWSER,
+    WHY_KEY,
+} from "/constants.js"
+import Tab from "/tab.js";
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
@@ -211,18 +215,22 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
 	 */
 	async getSavedTabs(replace = true) {
-		const res = await chrome.runtime.sendMessage(
+        const res = await BROWSER.storage.sync.get([WHY_KEY]);
+        const tabs = res[WHY_KEY];
+        /*
+		const res = await BROWSER.runtime.sendMessage(
 			{ message: { what: "get" } },
 		);
+        */
 		if (replace) {
-			await this.replaceTabs(res, {
+			await this.replaceTabs(tabs, {
 				resetTabs: true,
 				removeOrgTabs: true,
 				sync: false,
 			});
 			return this;
 		}
-		return res;
+		return tabs;
 	}
 
 	/**
@@ -308,20 +316,18 @@ export default class TabContainer extends Array {
 	/**
 	 * Filters and returns tabs based on the specified organization.
 	 *
-	 * @param {Object|null} org - The organization to filter tabs by. If `null`, an error is thrown.
-	 * @param {boolean} [matchOrg=true] - A flag indicating whether to return tabs that exactly match the specified organization (`true`), or the ones that do not (`false`). Defaults to `true`.
+	 * @param {string|null} org - The organization to filter tabs by. If `null`, an error is thrown.
+	 * @param {boolean} [match=true] - A flag indicating whether to return tabs that exactly match the specified organization (`true`), or the ones that do not (`false`). Defaults to `true`.
 	 * @throws {Error} - Throws an error if the `org` parameter is not specified (`null`).
 	 * @returns {Array<Object>} - An array of tabs that match the specified organization condition.
 	 */
-	getTabsByOrg(org = null, matchOrg = true) {
+	getTabsByOrg(org = null, match = true) {
 		if (org == null) {
 			throw new Error("Cannot get Tabs if Org is not specified.");
 		}
 		return this.filter((tab) =>
 			tab.org != null &&
-			(
-				matchOrg === (tab.org === org)
-			)
+            match === (tab.org === org)
 		);
 	}
 
@@ -340,7 +346,7 @@ export default class TabContainer extends Array {
 			if (org == null) {
 				return [];
 			} else {
-				return this.getTabsByOrg(org);
+				return this.getTabsByOrg(org, match);
 			}
 		}
 		return this.filter((tb) =>
@@ -351,6 +357,25 @@ export default class TabContainer extends Array {
 			})
 		);
 	}
+
+	/**
+	 * Filters and returns a **single** Tab, based on the specified tab data (label, url, and organization).
+	 *
+	 * @param {Object} [tab={}] - An object containing the tab data to filter by. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
+	 * @param {string|null} [tab.label=null] - The label of the tab to filter by.
+	 * @param {string|null} [tab.url=null] - The URL of the tab to filter by.
+	 * @param {Object|null} [tab.org=null] - The organization associated with the tab to filter by.
+	 * @throws {Error} - Throws an error if it finds 0 Tabs or more than 1 Tab.
+	 * @returns {Tab} - A Tab that matches the specified tab data condition.
+	 */
+    getSingleTabByData(tab, match = true){
+        const matchingTabs = this.getTabsByData(tab, match);
+        if(matchingTabs.length === 0)
+            throw new Error("Could not find Tab.");
+        if(matchingTabs.length > 1)
+            throw new Error("Could not discriminate Tab.");
+        return matchingTabs[0];
+    }
 
 	/**
 	 * Finds the index of a tab in the container based on the specified tab data (label, url, and organization).
@@ -413,6 +438,7 @@ export default class TabContainer extends Array {
 	 * @param {boolean} [param1.removeOrgTabs=false] - This parameter changes its function based on the value of resetTabs. In any case, if `true`, removes all org-specific Tabs
 	 * When `resetTabs=true` and `removeOrgTabs=false`, removes only non-org-specific Tabs (Tabs with `org == null`), sparing org-specific Tabs.
 	 * When `resetTabs=false` and `removeOrgTabs=false`, does nothing.
+     * @returns {Promise<boolean>} - A Promise stating whether the operation was successful
 	 *
 	 * @example
 	 * // Remove all tabs
@@ -548,27 +574,26 @@ export default class TabContainer extends Array {
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
 			return false;
 		}
-		return await TabContainer._syncTabs(this);
+		return await TabContainer._syncTabs(tabs ?? this);
 	}
 
 	/**
 	 * Synchronizes the specified tabs by sending them to the browser's runtime.
 	 *
-	 * @param {Array|TabContainer|null} [inputTabs=null] - The tabs to synchronize. If `null`, synchronization is not possible.
-	 * @throws {Error} - Throws an error if `inputTabs` is `null` or if there is an issue with the runtime message.
+	 * @param {Array|TabContainer|null} [tabs=null] - The tabs to synchronize. If `null`, synchronization is not possible.
+	 * @throws {Error} - Throws an error if `tabs` is `null` or if there is an issue with the runtime message.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful.
 	 * @private
 	 */
-	static async _syncTabs(inputTabs = null) {
-		if (inputTabs == null) {
+	static async _syncTabs(tabs = null) {
+		if (tabs == null) {
 			throw new Error("Cannot sync null tabs!");
 		}
-		const tabs = TabContainer.toJSON(inputTabs);
-		await chrome.runtime.sendMessage(
-			{ message: { what: "set", tabs } },
-		);
-		if (chrome.runtime.lastError) {
-			throw new Error(chrome.runtime.lastError);
+        const set = {};
+        set[WHY_KEY] = TabContainer.toJSON(tabs);
+        await BROWSER.storage.sync.set(set);
+		if (BROWSER.runtime.lastError) {
+			throw new Error(BROWSER.runtime.lastError);
 		}
 		return true;
 	}
@@ -765,7 +790,8 @@ export default class TabContainer extends Array {
 		const index = this.getTabIndex(tab);
 		const initialLength = this.length;
 		this.splice(index, 1);
-		await this.syncTabs();
+		if(!await this.syncTabs())
+            return false;
 		return this.length < initialLength;
 	}
 

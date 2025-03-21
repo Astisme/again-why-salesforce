@@ -1,5 +1,6 @@
 "use strict";
 import {
+    BROWSER,
 	EXTENSION_LABEL,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
@@ -12,6 +13,7 @@ import {
 	generateRowTemplate,
 	generateSldsToastMessage,
 	MODAL_ID,
+    generateUpdateTabModal,
 } from "./generator.js";
 import { SALESFORCE_URL_PATTERN } from "../constants.js";
 import Tab from "/tab.js";
@@ -80,7 +82,7 @@ let fromHrefUpdate = false;
 // add lightning-navigation to the page in order to use it
 {
 	const script = document.createElement("script");
-	script.src = chrome.runtime.getURL("salesforce/lightning-navigation.js");
+	script.src = BROWSER.runtime.getURL("salesforce/lightning-navigation.js");
 	(document.head || document.documentElement).appendChild(script);
 }
 
@@ -507,7 +509,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
  * - After the action is performed, it triggers the `sf_afterSet` function to finalize the process.
  * - If an error occurs during the action, it logs a warning and displays a toast with the error message.
  *
- * @param {string} action - The action to perform on the tab. Possible values: "move", "remove-this", "remove-other", "add", "remove-no-org-tabs", "remove-all".
+ * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
  */
@@ -519,19 +521,24 @@ export async function performActionOnTabs(action, tab, options) {
 				await allTabs.moveTab(tab, options);
 				break;
 			case "remove-this":
-				await allTabs.remove(tab, options);
+				if(!await allTabs.remove(tab, options))
+                    throw new Error("Error when removing Tab",tab);
 				break;
 			case "remove-other":
-				await allTabs.removeOtherTabs(tab, options);
+				if(!await allTabs.removeOtherTabs(tab, options))
+                    throw new Error("Error when removing other Tabs",tab);
 				break;
 			case "add":
-				await allTabs.addTab(tab);
+				if(!await allTabs.addTab(tab))
+                    throw new Error("Error when adding Tab");
 				break;
 			case "remove-no-org-tabs":
-				await allTabs.replaceTabs();
+				if(!await allTabs.replaceTabs())
+                    throw new Error("Error when removing no org Tabs");
 				break;
 			case "remove-all":
-				await allTabs.replaceTabs([], { removeOrgTabs: true });
+				if(!await allTabs.replaceTabs([], { removeOrgTabs: true }))
+                    throw new Error("Error when removing all Tabs");
 				break;
             case "toggle-org":
                 await toggleOrg(tab);
@@ -546,18 +553,73 @@ export async function performActionOnTabs(action, tab, options) {
 	}
 }
 
+/**
+ * Retrieves a Tab from the saved ones and either removes the Org value (if it has one) OR sets it as the current Org.
+ * @param {Object} [param0={}] - An Object containing the data used to identify a Tab
+ * @param {string} param0.label - The label of the Tab to find
+ * @param {string} param0.url - The Url of the Tab to find
+ * @throws when it fails to sync the Tabs.
+ */
 async function toggleOrg({label, url} = {}){
-    const matchingTabs = await allTabs.getTabsByData({ label, url });
-    if(matchingTabs == null || matchingTabs.length > 1)
-        throw new Error("Could not discriminate Tab.");
-    const matchingTab = matchingTabs[0];
+	allTabs = await ensureAllTabsAvailability();
+    const matchingTab = allTabs.getSingleTabByData({ label, url });
     matchingTab.update({ org: matchingTab.org == null ? getCurrentHref() : "" });
     if(!await allTabs.syncTabs())
         throw new Error("Failed to sync");
 }
 
+/**
+ * Shows on-screen a new Modal used for fine updates to a single Tab
+ * @param {Object} [tab={}] - An Object containing the data used to identify a Tab
+ * @param {string} tab.label - The label of the Tab to update
+ * @param {string} tab.url - The Url of the Tab to update
+ * @param {string} tab.org - The Org of the Tab to update
+ */
+async function showModalUpdateTab(tab = {label: null, url: null, org: null}){
+	if (document.getElementById(MODAL_ID) != null) {
+		return showToast("Close the other modal first!", false);
+	}
+    if(tab.label == null && tab.url == null && tab.org == null)
+        throw new Error("Cannot update a Tab with no values");
+	allTabs = await ensureAllTabsAvailability();
+    const matchingTab = allTabs.getSingleTabByData(tab);
+    const { 
+        modalParent,
+        saveButton,
+        closeButton,
+        labelContainer,
+        urlContainer,
+        orgContainer
+    } = generateUpdateTabModal(matchingTab.label, matchingTab.url, matchingTab.org);
+    getModalHanger().appendChild(modalParent);
+    let lastUrlLength = 0;
+    urlContainer.addEventListener("input", () => {
+        if(urlContainer.value.length - lastUrlLength > 2)
+            urlContainer.value = Tab.minifyURL(urlContainer.value);
+        lastUrlLength = urlContainer.value.length;
+    });
+    let lastOrgLength = 0;
+    orgContainer.addEventListener("input", () => {
+        if(orgContainer.value.length - lastOrgLength > 2)
+            orgContainer.value = Tab.extractOrgName(orgContainer.value);
+        lastOrgLength = orgContainer.value.length;
+    });
+	saveButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        matchingTab.update({
+            label: labelContainer.value !== "" ? labelContainer.value : matchingTab.label,
+            url: urlContainer.value !== "" ? urlContainer.value : matchingTab.url,
+            org: orgContainer.value,
+        });
+        if(!await allTabs.syncTabs())
+            throw new Error("Failed to sync");
+        sf_afterSet();
+        closeButton.click();
+    });
+}
+
 // listen from saves from the action / background page
-chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
+BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 	if (message == null || message.what == null) {
 		return;
 	}
@@ -656,7 +718,10 @@ chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
             });
 			break;
 		case "update-tab":
-            // TODO show modal to update given Tab
+            showModalUpdateTab({
+                label: message.label,
+                url: message.tabUrl,
+            });
 			break;
 		default:
 			break;
