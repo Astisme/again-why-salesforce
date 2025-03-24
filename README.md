@@ -21,13 +21,13 @@ This is a fork of [Why Salesforce](https://www.github.com/walters954/why-salesfo
 
 ## New Features
 
-| Title               | Image                                                                          
-| ------------------- | -----------------
-| [Import Tabs](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)        | <img src="./images/import-modal.png" title="Import Modal" height="400px"/>     
-| Context Menus       | <img src="./images/context-menu.png" title="Context Menus" height="400px"/>    
-| [Open in another org](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org) | <img src="./images/open-other-org.png" title="Open other Org" height="400px"/> 
-| Org specific Tabs   | <img src="./images/popup-dark.png" title="Popup dark" height="400px"/>         
-| [Fast save](https://github.com/Astisme/again-why-salesforce/wiki/Save-a-Tab)           | <img src="./images/remove-tab.png" title="Remove Tab" height="400px"/>         
+| Title                                                                                      | Image                                                                          |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| [Import Tabs](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)         | <img src="./images/import-modal.png" title="Import Modal" height="400px"/>     |
+| Context Menus                                                                              | <img src="./images/context-menu.png" title="Context Menus" height="400px"/>    |
+| [Open in another org](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org) | <img src="./images/open-other-org.png" title="Open other Org" height="400px"/> |
+| Org specific Tabs                                                                          | <img src="./images/popup-dark.png" title="Popup dark" height="400px"/>         |
+| [Fast save](https://github.com/Astisme/again-why-salesforce/wiki/Save-a-Tab)               | <img src="./images/remove-tab.png" title="Remove Tab" height="400px"/>         |
 
 ## Install on browser
 
