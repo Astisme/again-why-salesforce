@@ -4,7 +4,7 @@
 		"indentWidth": 4,
 		"semiColons": true,
 		"singleQuote": false,
-		"proseWrap": "never",
+		"proseWrap": "preserve",
 		"exclude": [
 			"*.git*",
 			"*bundled*"
