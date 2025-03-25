@@ -1,7 +1,7 @@
 import { initTheme } from "../themeHandler.js";
-import { 
-    MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-    LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+import {
+	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 } from "/constants.js";
 initTheme();
 const noPerm = document.getElementById("no-permissions");
@@ -12,9 +12,9 @@ document.getElementById("allow-permissions").addEventListener("click", (e) => {
 	e.preventDefault();
 	chrome.permissions.request({
 		origins: [
-            MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-            LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-        ],
+			MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+			LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+		],
 	});
 	setTimeout(close, 100);
 });

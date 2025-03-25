@@ -4,8 +4,8 @@ import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
+	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-    LIGHTNING_FORCE_COM_OPERATING_PATTERN,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
 
@@ -95,9 +95,9 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		// check if we have all the optional permissions available
 		const permissionsAvailable = await chrome.permissions.contains({
 			origins: [
-                MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-                LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-            ],
+				MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+				LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+			],
 		});
 		if (
 			!permissionsAvailable &&
