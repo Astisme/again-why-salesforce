@@ -60,7 +60,7 @@ const menuItems = [
 	{ id: "remove", title: "💥 Remove Tab(s)", contexts: ["link"] },
 	{
 		id: "remove-tab",
-		title: "1️⃣ This s Tab",
+		title: "1️⃣ This taT",
 		contexts: ["link"],
 		parentId: "remove",
 	},
