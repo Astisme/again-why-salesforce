@@ -27,12 +27,12 @@ export function bg_getStorage(callback) {
  *
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
- */
 function bg_setStorage(tabs, callback) {
 	const set = {};
 	set[WHY_KEY] = tabs;
 	BROWSER.storage.sync.set(set, callback(null));
 }
+ */
 
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
@@ -52,12 +52,14 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	}
 	//let captured = true;
 	switch (message.what) {
+            /*
 		case "get":
 			bg_getStorage(sendResponse);
 			break;
 		case "set":
 			bg_setStorage(message.tabs, sendResponse);
 			break;
+            */
 		case "saved":
 		case "add":
 		case "theme":

@@ -1,5 +1,5 @@
 "use strict";
-import { EXTENSION_NAME } from "/constants.js";
+import { BROWSER, EXTENSION_NAME } from "/constants.js";
 import {
 	generateCheckboxWithLabel,
 	generateSection,
@@ -111,7 +111,7 @@ reader.onload = async (e) => {
 		showToast(`Successfully imported ${importedNum} tabs.`, true);
 		if (jsonString.includes("tabTitle")) {
 			// export and toast
-			chrome.runtime.sendMessage({
+			BROWSER.runtime.sendMessage({
 				message: { what: "export", tabs: allTabs },
 			});
 			showToast(
@@ -199,7 +199,7 @@ function showFileImport() {
 }
 
 // listen from saves from the action page
-chrome.runtime.onMessage.addListener(function (message, _, sendResponse) {
+BROWSER.runtime.onMessage.addListener(function (message, _, sendResponse) {
 	if (message == null || message.what == null) {
 		return;
 	}

@@ -1,5 +1,5 @@
 "use strict";
-import { EXTENSION_NAME } from "../constants.js";
+import { BROWSER, EXTENSION_NAME } from "../constants.js";
 import {
 	ensureAllTabsAvailability,
 	getAllTabs,
@@ -96,7 +96,7 @@ function generateFavouriteButton() {
 		});
 		return { img, span };
 	}
-	const star = chrome.runtime.getURL("assets/svgs/star.svg");
+	const star = BROWSER.runtime.getURL("assets/svgs/star.svg");
 	const { img: starImg, span: starSpan } = createImageElement(
 		STAR_ID,
 		star,
@@ -104,7 +104,7 @@ function generateFavouriteButton() {
 	);
 	span.appendChild(starImg);
 	span.appendChild(starSpan);
-	const slashedStar = chrome.runtime.getURL("assets/svgs/slashed-star.svg");
+	const slashedStar = BROWSER.runtime.getURL("assets/svgs/slashed-star.svg");
 	const { img: slashedStarImg, span: slashedStarSpan } = createImageElement(
 		SLASHED_STAR_ID,
 		slashedStar,

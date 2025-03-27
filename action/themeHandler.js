@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-window
+import { BROWSER } from "/constants.js";
 const html = document.documentElement;
 let systemColorListener = null;
 
@@ -8,7 +9,7 @@ let systemColorListener = null;
  * @param {string} theme - The theme to be applied.
  */
 function sendMessageTheme(theme) {
-	chrome.runtime.sendMessage({ message: { what: "theme", theme } });
+	BROWSER.runtime.sendMessage({ message: { what: "theme", theme } });
 }
 
 /**

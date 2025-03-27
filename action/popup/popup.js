@@ -4,6 +4,7 @@ import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
+    BROWSER,
 	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 	SETUP_LIGHTNING_PATTERN,
@@ -46,7 +47,7 @@ function pop_sendMessage(message, callback) {
 	 * @param {function} callback - The callback to execute after sending the message
 	 */
 	function sendMessage(message, callback) {
-		return chrome.runtime.sendMessage(
+		return BROWSER.runtime.sendMessage(
 			{ message },
 			callback,
 		);
@@ -56,8 +57,8 @@ function pop_sendMessage(message, callback) {
 			sendMessage(
 				message,
 				(response) => {
-					if (chrome.runtime.lastError) {
-						reject(chrome.runtime.lastError);
+					if (BROWSER.runtime.lastError) {
+						reject(BROWSER.runtime.lastError);
 					} else {
 						resolve(response);
 					}
@@ -85,7 +86,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
 	) {
 		// we're not in Salesforce Setup
-		window.location.href = chrome.runtime.getURL(
+		window.location.href = BROWSER.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
 				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
 			}`,
@@ -93,7 +94,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 	} else {
 		// we're in Salesforce Setup
 		// check if we have all the optional permissions available
-		const permissionsAvailable = await chrome.permissions.contains({
+		const permissionsAvailable = await BROWSER.permissions.contains({
 			origins: [
 				MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 				LIGHTNING_FORCE_COM_OPERATING_PATTERN,
@@ -106,7 +107,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 				"true"
 		) {
 			// if we do not have them, redirect to the request permission page
-			globalThis.location = await chrome.runtime.getURL(
+			globalThis.location = await BROWSER.runtime.getURL(
 				"action/req_permissions/req_permissions.html",
 			);
 			// nothing else will happen from this file

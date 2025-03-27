@@ -1,4 +1,5 @@
 "use strict";
+import { BROWSER } from "/constants.js";
 import { initTheme } from "../themeHandler.js";
 initTheme();
 
@@ -12,7 +13,7 @@ function updateTheme(theme) {
 }
 
 // Listens for messages from other parts of the extension and updates the theme if the message is valid.
-chrome.runtime.onMessage.addListener(function (mess, _, sendResponse) {
+BROWSER.runtime.onMessage.addListener(function (mess, _, sendResponse) {
 	const message = mess.message;
 	if (
 		message == null || message.what == null || message.what !== "theme" ||
