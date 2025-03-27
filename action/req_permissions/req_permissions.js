@@ -1,5 +1,9 @@
 import { initTheme } from "../themeHandler.js";
-import { BROWSER, MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN } from "/constants.js";
+import {
+  BROWSER,
+	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+} from "/constants.js";
 initTheme();
 const noPerm = document.getElementById("no-permissions");
 const popup = await BROWSER.runtime.getURL("action/popup/popup.html");
@@ -8,7 +12,10 @@ noPerm.href = `${popup}?noPerm=true`;
 document.getElementById("allow-permissions").addEventListener("click", (e) => {
 	e.preventDefault();
 	BROWSER.permissions.request({
-		origins: [MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN],
+		origins: [
+			MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+			LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+		],
 	});
 	setTimeout(close, 100);
 });

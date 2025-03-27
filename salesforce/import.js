@@ -149,7 +149,7 @@ function listenToFileUpload(modalParent) {
 	function readFile(file) {
 		if (file.type !== "application/json") {
 			return showToast(
-				`Invalid file type: ${file.type}.\nOnly JSON files are supported.`,
+				`Invalid file type.\nOnly JSON files are supported.`,
 				false,
 			);
 		}

@@ -4,7 +4,13 @@
 
 # Again, Why Salesforce
 
-![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version) ![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white) ![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636) ![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce) ![Chrome users](https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi?label=Chrome%20Users&color=blue) ![Firefox users](https://img.shields.io/amo/users/again@why.salesforce?label=Firefox%20Users&color=red)
+[![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)](https://www.github.com/Astisme/releases)
+[![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white)](https://github.com/Astisme/again-why-salesforce/commits/main/)
+[![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636)](https://github.com/Astisme/again-why-salesforce/blob/main/LICENSE)
+[![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce)](https://github.com/Astisme/again-why-salesforce/#)
+[![Chrome users](https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi?label=Chrome%20Users&color=blue)](https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi)
+[![Firefox users](https://img.shields.io/amo/users/again@why.salesforce?label=Firefox%20Users&color=red)](https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/)
+[![Edge users](https://img.shields.io/badge/dynamic/json?label=Edge%20Users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fdfdjpokbfeaamjcomllncennmfhpldmm)](https://microsoftedge.microsoft.com/addons/detail/dfdjpokbfeaamjcomllncennmfhpldmm)
 
 <!--
 ![Chrome stars](https://img.shields.io/chrome-web-store/stars/:storeId)
@@ -21,13 +27,13 @@ This is a fork of [Why Salesforce](https://www.github.com/walters954/why-salesfo
 
 ## New Features
 
-| Title               | Image                                                                          | Wiki |
-| ------------------- | ------------------------------------------------------------------------------ | ---- |
-| Import Modal        | <img src="./images/import-modal.png" title="Import Modal" height="400px"/>     | tbd  |
-| Context Menus       | <img src="./images/context-menu.png" title="Context Menus" height="400px"/>    | tbd  |
-| Open in another Org | <img src="./images/open-other-org.png" title="Open other Org" height="400px"/> | tbd  |
-| Org specific Tabs   | <img src="./images/popup-dark.png" title="Popup dark" height="400px"/>         | tbd  |
-| Fast save           | <img src="./images/remove-tab.png" title="Remove Tab" height="400px"/>         | tbd  |
+| Title                                                                                      | Image                                                                          |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| [Import Tabs](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)         | <img src="./images/import-modal.png" title="Import Modal" height="400px"/>     |
+| Context Menus                                                                              | <img src="./images/context-menu.png" title="Context Menus" height="400px"/>    |
+| [Open in another org](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org) | <img src="./images/open-other-org.png" title="Open other Org" height="400px"/> |
+| Org specific Tabs                                                                          | <img src="./images/popup-dark.png" title="Popup dark" height="400px"/>         |
+| [Fast save](https://github.com/Astisme/again-why-salesforce/wiki/Save-a-Tab)               | <img src="./images/remove-tab.png" title="Remove Tab" height="400px"/>         |
 
 ## Install on browser
 
