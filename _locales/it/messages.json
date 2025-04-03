@@ -1,0 +1,66 @@
+{
+    "theme_light": {
+        "message": "Cambia tema in chiaro",
+        "description": "[popup] titolo sul sole per cambiare tema"
+    },
+    "theme_dark": {
+        "message": "Cambia tema in scuro",
+        "description": "[popup] titolo sulla luna per cambiare tema"
+    },
+    "export_title": {
+        "message": "Esporta tutte le schede",
+        "description": "[popup] titolo sul pulsante di esportazione"
+    },
+    "export": {
+        "message": "Esporta",
+        "description": "[popup] pulsante di esportazione"
+    },
+    "import_title": {
+        "message": "Importa schede da un file JSON",
+        "description": "[popup] titolo sul pulsante di importazione"
+    },
+    "import": {
+        "message": "Importa",
+        "description": "[popup] pulsante di importazione"
+    },
+    "delete_all": {
+        "message": "Elimina tutte le schede",
+        "description": "[popup] titolo sul cestino per svuotare tutte le schede"
+    },
+    "table_label": {
+        "message": "Etichetta scheda",
+        "description": "[popup] intestazione della colonna per il nome della scheda"
+    },
+    "table_url": {
+        "message": "URL scheda",
+        "description": "[popup] intestazione della colonna per l'URL della scheda"
+    },
+    "table_org": {
+        "message": "È una scheda dell'organizzazione",
+        "description": "[popup] testo assistivo per la colonna con la checkbox dell'organizzazione"
+    },
+    "table_delete": {
+        "message": "Elimina scheda",
+        "description": "[popup] testo assistivo per la colonna con il pulsante di eliminazione"
+    },
+    "table_row_label": {
+        "message": "Inserisci l'etichetta per questo URL",
+        "description": "[popup] campo di input con il nome della scheda"
+    },
+    "table_row_url": {
+        "message": "Inserisci il sotto-URL a cui vuoi essere reindirizzato.",
+        "description": "[popup] campo di input con l'URL della scheda"
+    },
+    "table_row_org": {
+        "message": "Fai clic se vuoi che questa scheda sia disponibile solo per questa organizzazione.",
+        "description": "[popup] checkbox per rendere la scheda specifica per l'organizzazione"
+    },
+    "table_row_org_name": {
+        "message": "L'organizzazione per cui questa scheda è disponibile.",
+        "description": "[popup] campo di input con il nome dell'organizzazione"
+    },
+    "delete": {
+        "message": "Elimina",
+        "description": "[popup] elimina una riga"
+    }
+}

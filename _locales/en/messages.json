@@ -1,0 +1,74 @@
+{
+    "extension_label": {
+        "message": "Again, Why Salesforce",
+        "description": "The name of this extension"
+    },
+    "extension_description": {
+        "message": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
+        "description": "[manifest] The description of this extension"
+    },
+    "theme_light": {
+		"message":  "Change Theme to Light",
+		"description": "[popup] title on the sun to switch theme"
+	},
+    "theme_dark": {
+		"message":  "Change Theme to Dark",
+		"description": "[popup] title on the moon to switch theme"
+	},
+    "export_title": {
+		"message":  "Export all tabs",
+		"description": "[popup] title on export button"
+	},
+    "export": {
+		"message":  "Export",
+		"description": "[popup] export button"
+	},
+    "import_title": {
+		"message":  "Import tabs from json file",
+		"description": "[popup] title on import button"
+	},
+    "import": {
+		"message":  "Import",
+		"description": "[popup] import button"
+	},
+    "delete_all": {
+		"message":  "Delete all tabs",
+		"description": "[popup] title on the bin to empty all Tabs"
+	},
+    "table_label": {
+		"message":  "Tab Label",
+		"description": "[popup] column header for Tab name"
+	},
+    "table_url": {
+		"message":  "Tab Url",
+		"description": "[popop] column header for Tab url"
+	},
+    "table_org": {
+		"message":  "Is Org Tab",
+		"description": "[popup] assistive text for column with org checkbox"
+	},
+    "table_delete": {
+		"message":  "Delete Tab",
+		"description": "[popup] assistive text for column with delete button"
+	},
+    "table_row_label": {
+		"message":  "Enter the label for this URL",
+		"description": "[popup] input field with Tab name"
+	},
+    "table_row_url": {
+		"message":  "Enter the sub_URL where you want to be redirected.",
+		"description": "[popup] input field with Tab url"
+	},
+    "table_row_org": {
+		"message":  "Click if you want this tab to be available for this Org only.",
+		"description": "[popup] checkbox to toggle Tab to be org-specific"
+	},
+    "table_row_org_name": {
+		"message":  "The Org for which this Tab is available.",
+		"description": "[popup] input field with org name"
+	},
+    "delete": {
+		"message":  "Delete",
+		"description": "[popup] delete a row"
+	}
+}

@@ -1,0 +1,66 @@
+{
+    "theme_light": {
+        "message": "Cambiar el tema a claro",
+        "description": "[popup] título en el sol para cambiar el tema"
+    },
+    "theme_dark": {
+        "message": "Cambiar el tema a oscuro",
+        "description": "[popup] título en la luna para cambiar el tema"
+    },
+    "export_title": {
+        "message": "Exportar todas las pestañas",
+        "description": "[popup] título en el botón de exportación"
+    },
+    "export": {
+        "message": "Exportar",
+        "description": "[popup] botón de exportación"
+    },
+    "import_title": {
+        "message": "Importar pestañas desde un archivo JSON",
+        "description": "[popup] título en el botón de importación"
+    },
+    "import": {
+        "message": "Importar",
+        "description": "[popup] botón de importación"
+    },
+    "delete_all": {
+        "message": "Eliminar todas las pestañas",
+        "description": "[popup] título en el basurero para vaciar todas las pestañas"
+    },
+    "table_label": {
+        "message": "Etiqueta de la pestaña",
+        "description": "[popup] encabezado de columna para el nombre de la pestaña"
+    },
+    "table_url": {
+        "message": "URL de la pestaña",
+        "description": "[popup] encabezado de columna para la URL de la pestaña"
+    },
+    "table_org": {
+        "message": "Es una pestaña de la organización",
+        "description": "[popup] texto de asistencia para la columna con la casilla de verificación de la organización"
+    },
+    "table_delete": {
+        "message": "Eliminar pestaña",
+        "description": "[popup] texto de asistencia para la columna con el botón de eliminación"
+    },
+    "table_row_label": {
+        "message": "Ingrese la etiqueta para esta URL",
+        "description": "[popup] campo de entrada con el nombre de la pestaña"
+    },
+    "table_row_url": {
+        "message": "Ingrese la sub-URL a la que desea ser redirigido.",
+        "description": "[popup] campo de entrada con la URL de la pestaña"
+    },
+    "table_row_org": {
+        "message": "Haga clic si desea que esta pestaña esté disponible solo para esta organización.",
+        "description": "[popup] casilla de verificación para hacer que la pestaña sea específica de la organización"
+    },
+    "table_row_org_name": {
+        "message": "La organización para la cual esta pestaña está disponible.",
+        "description": "[popup] campo de entrada con el nombre de la organización"
+    },
+    "delete": {
+        "message": "Eliminar",
+        "description": "[popup] eliminar una fila"
+    }
+}

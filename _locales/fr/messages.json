@@ -1,0 +1,66 @@
+{
+    "theme_light": {
+        "message": "Changer le thème en clair",
+        "description": "[popup] titre sur le soleil pour changer de thème"
+    },
+    "theme_dark": {
+        "message": "Changer le thème en sombre",
+        "description": "[popup] titre sur la lune pour changer de thème"
+    },
+    "export_title": {
+        "message": "Exporter tous les onglets",
+        "description": "[popup] titre sur le bouton d'exportation"
+    },
+    "export": {
+        "message": "Exporter",
+        "description": "[popup] bouton d'exportation"
+    },
+    "import_title": {
+        "message": "Importer des onglets depuis un fichier JSON",
+        "description": "[popup] titre sur le bouton d'importation"
+    },
+    "import": {
+        "message": "Importer",
+        "description": "[popup] bouton d'importation"
+    },
+    "delete_all": {
+        "message": "Supprimer tous les onglets",
+        "description": "[popup] titre sur la corbeille pour supprimer tous les onglets"
+    },
+    "table_label": {
+        "message": "Libellé de l'onglet",
+        "description": "[popup] en-tête de colonne pour le nom de l'onglet"
+    },
+    "table_url": {
+        "message": "URL de l'onglet",
+        "description": "[popup] en-tête de colonne pour l'URL de l'onglet"
+    },
+    "table_org": {
+        "message": "Est un onglet d'organisation",
+        "description": "[popup] texte d'assistance pour la colonne avec la case à cocher de l'organisation"
+    },
+    "table_delete": {
+        "message": "Supprimer l'onglet",
+        "description": "[popup] texte d'assistance pour la colonne avec le bouton de suppression"
+    },
+    "table_row_label": {
+        "message": "Entrez le libellé pour cette URL",
+        "description": "[popup] champ de saisie avec le nom de l'onglet"
+    },
+    "table_row_url": {
+        "message": "Entrez le sous-URL où vous souhaitez être redirigé.",
+        "description": "[popup] champ de saisie avec l'URL de l'onglet"
+    },
+    "table_row_org": {
+        "message": "Cliquez si vous voulez que cet onglet soit disponible uniquement pour cette organisation.",
+        "description": "[popup] case à cocher pour rendre l'onglet spécifique à l'organisation"
+    },
+    "table_row_org_name": {
+        "message": "L'organisation pour laquelle cet onglet est disponible.",
+        "description": "[popup] champ de saisie avec le nom de l'organisation"
+    },
+    "delete": {
+        "message": "Supprimer",
+        "description": "[popup] supprimer une ligne"
+    }
+}

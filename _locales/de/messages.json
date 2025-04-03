@@ -1,0 +1,66 @@
+{
+    "theme_light": {
+        "message": "Thema auf Hell ändern",
+        "description": "[popup] Titel auf der Sonne, um das Thema zu wechseln"
+    },
+    "theme_dark": {
+        "message": "Thema auf Dunkel ändern",
+        "description": "[popup] Titel auf dem Mond, um das Thema zu wechseln"
+    },
+    "export_title": {
+        "message": "Alle Tabs exportieren",
+        "description": "[popup] Titel auf der Export-Schaltfläche"
+    },
+    "export": {
+        "message": "Exportieren",
+        "description": "[popup] Export-Schaltfläche"
+    },
+    "import_title": {
+        "message": "Tabs aus einer JSON-Datei importieren",
+        "description": "[popup] Titel auf der Import-Schaltfläche"
+    },
+    "import": {
+        "message": "Importieren",
+        "description": "[popup] Import-Schaltfläche"
+    },
+    "delete_all": {
+        "message": "Alle Tabs löschen",
+        "description": "[popup] Titel auf dem Papierkorb, um alle Tabs zu leeren"
+    },
+    "table_label": {
+        "message": "Tab-Bezeichnung",
+        "description": "[popup] Spaltenüberschrift für den Namen des Tabs"
+    },
+    "table_url": {
+        "message": "Tab-URL",
+        "description": "[popup] Spaltenüberschrift für die URL des Tabs"
+    },
+    "table_org": {
+        "message": "Ist ein Organisations-Tab",
+        "description": "[popup] Hilfstext für die Spalte mit dem Organisations-Checkbox"
+    },
+    "table_delete": {
+        "message": "Tab löschen",
+        "description": "[popup] Hilfstext für die Spalte mit der Löschen-Schaltfläche"
+    },
+    "table_row_label": {
+        "message": "Geben Sie die Bezeichnung für diese URL ein",
+        "description": "[popup] Eingabefeld für den Namen des Tabs"
+    },
+    "table_row_url": {
+        "message": "Geben Sie die Unter-URL ein, zu der Sie weitergeleitet werden möchten.",
+        "description": "[popup] Eingabefeld für die URL des Tabs"
+    },
+    "table_row_org": {
+        "message": "Klicken Sie hier, wenn dieser Tab nur für diese Organisation verfügbar sein soll.",
+        "description": "[popup] Kontrollkästchen, um den Tab organisationsspezifisch zu machen"
+    },
+    "table_row_org_name": {
+        "message": "Die Organisation, für die dieser Tab verfügbar ist.",
+        "description": "[popup] Eingabefeld für den Namen der Organisation"
+    },
+    "delete": {
+        "message": "Löschen",
+        "description": "[popup] eine Zeile löschen"
+    }
+}
