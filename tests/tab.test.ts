@@ -89,7 +89,7 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 					});
 				},
 				Error,
-				"Unexpected keys found: invalidKey",
+				"error_tab_unexpected_keys",
 			);
 		},
 	);
@@ -105,7 +105,7 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 					}, "extraParam");
 				},
 				Error,
-				"When calling with an object, do not pass anything else.",
+				"error_tab_object_creation",
 			);
 		},
 	);
@@ -118,7 +118,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 				Tab.create("", "https://example.com");
 			},
 			Error,
-			"Label must be a non-empty string",
+			"error_tab_label",
 		);
 	});
 
@@ -134,7 +134,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 				Tab.create("Test", "");
 			},
 			Error,
-			"URL must be a non-empty string",
+			"error_tab_url",
 		);
 	});
 
@@ -150,7 +150,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 				Tab.create("Test", "https://example.com", 123);
 			},
 			Error,
-			"Org must be a string or undefined",
+			"error_tab_org",
 		);
 	});
 

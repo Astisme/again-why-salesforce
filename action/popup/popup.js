@@ -8,7 +8,9 @@ import {
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
+import TranslationService from "/translator.js";
 
+const translator = await TranslationService.create();
 const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
@@ -354,6 +356,7 @@ async function loadTabs(browserTab = null) {
 	}
 	// leave a blank at the bottom
 	tabAppendElement.append(createElement());
+    translator.updatePageTranslations();
 }
 
 /**

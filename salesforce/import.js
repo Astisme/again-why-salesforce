@@ -1,6 +1,7 @@
 "use strict";
 import { EXTENSION_NAME } from "/constants.js";
 import {
+    ensureTranslatorAvailability,
 	generateCheckboxWithLabel,
 	generateSection,
 	generateSldsFileInput,
@@ -51,18 +52,19 @@ const reader = new FileReader();
  *   inputContainer: HTMLInputElement
  * }} An object containing the modal's parent element, the save button, the close button, and the file input element.
  */
-function generateSldsImport() {
-	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
+async function generateSldsImport() {
+    const translator = await ensureTranslatorAvailability();
+	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
 		"Import Tabs",
 	);
 	closeButton.id = CLOSE_MODAL_ID;
-	const { section, divParent } = generateSection();
+	const { section, divParent } = await generateSection();
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	divParent.style.flexDirection = "column";
 	article.appendChild(section);
-	const { fileInputWrapper, inputContainer } = generateSldsFileInput(
+	const { fileInputWrapper, inputContainer } = await generateSldsFileInput(
 		IMPORT_ID,
 		IMPORT_FILE_ID,
 		".json,application/json",
@@ -73,19 +75,18 @@ function generateSldsImport() {
 	style.textContent = ".hidden { display: none; }";
 	divParent.appendChild(style);
 	const duplicateWarning = document.createElement("span");
-	duplicateWarning.innerHTML =
-		"Duplicate tabs will be ignored.<br />Two tabs are considered duplicates if they have the same URL.";
+	duplicateWarning.innerHTML = await translator.translate("import_duplicate_description");
 	duplicateWarning.style.textAlign = "center";
 	divParent.append(duplicateWarning);
-	const overwriteCheckbox = generateCheckboxWithLabel(
+	const overwriteCheckbox = await generateCheckboxWithLabel(
 		OVERWRITE_ID,
-		"Overwrite saved tabs.",
+		"overwrite_tabs",
 		false,
 	);
 	divParent.appendChild(overwriteCheckbox);
-	const otherOrgCheckbox = generateCheckboxWithLabel(
+	const otherOrgCheckbox = await generateCheckboxWithLabel(
 		OTHER_ORG_ID,
-		"Preserve tabs for other orgs.",
+		"preserve_org_tabs",
 		true,
 	);
 	otherOrgCheckbox.classList.add("hidden");
@@ -108,21 +109,21 @@ reader.onload = async (e) => {
 		);
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
-		showToast(`Successfully imported ${importedNum} tabs.`, true);
+		showToast(["Successfully imported", importedNum, "tabs"], true);
 		if (jsonString.includes("tabTitle")) {
 			// export and toast
 			chrome.runtime.sendMessage({
 				message: { what: "export", tabs: allTabs },
 			});
 			showToast(
-				"You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
+				"warn_deprecated_tab_title",
 				false,
 				true,
 			);
 		}
 	} catch (error) {
 		showToast(
-			`Error during import:\n${error.message}`,
+			["error_import", error.message],
 			false,
 		);
 	}
@@ -149,7 +150,7 @@ function listenToFileUpload(modalParent) {
 	function readFile(file) {
 		if (file.type !== "application/json") {
 			return showToast(
-				`Invalid file type.\nOnly JSON files are supported.`,
+				"import_invalid_file",
 				false,
 			);
 		}
@@ -182,15 +183,15 @@ function listenToFileUpload(modalParent) {
  * Displays the file import modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
  */
-function showFileImport() {
+async function showFileImport() {
 	if (
 		getSetupTabUl().querySelector(`#${IMPORT_ID}`) != null ||
 		document.getElementById(MODAL_ID) != null
 	) {
-		return showToast("Close the other modal first!", false);
+		return showToast("error_close_other_modal", false);
 	}
 
-	const { modalParent, saveButton } = generateSldsImport();
+	const { modalParent, saveButton } = await generateSldsImport();
 
 	getModalHanger().appendChild(modalParent);
 

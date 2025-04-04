@@ -1,15 +1,36 @@
 "use strict";
 import {
+	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
-} from "../constants.js";
+} from "/constants.js";
 import {
-	// functions
 	getCurrentHref,
 	showToast,
 } from "./content.js";
+import TranslationService from "/translator.js";
+let translator = null;
+async function getTranslator_async(){
+    if(translator == null){
+        translator = await TranslationService.create();
+    } else await translator;
+    return translator;
+}
+getTranslator_async();
+function getTranslator(){
+    if(translator == null || translator instanceof Promise)
+        throw new Error("translator was not yet initialized");
+    return translator;
+}
+export async function ensureTranslatorAvailability(){
+    try {
+        return getTranslator();
+    } catch (_) {
+        return await getTranslator_async();
+    }
+}
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -135,12 +156,13 @@ export function generateRowTemplate(
  * @throws {Error} Throws an error if required parameters are missing or invalid.
  * @returns {HTMLElement} The generated toast container element.
  */
-export function generateSldsToastMessage(message, isSuccess, isWarning) {
+export async function generateSldsToastMessage(message, isSuccess, isWarning) {
+    translator = await ensureTranslatorAvailability();
 	if (
 		message == null || message === "" | isSuccess == null ||
 		isWarning == null
 	) {
-		throw new Error("Unable to generate Toast Message.");
+		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
 	const toastType = isSuccess
 		? (isWarning ? "info" : "success")
@@ -229,7 +251,7 @@ export function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
 	messageSpan.setAttribute("data-aura-class", "forceActionsText");
-	messageSpan.innerHTML = message.replaceAll("\n", "<br />");
+	messageSpan.innerHTML = (await translator.translate(message)).replaceAll("\n", "<br />");
 	// Assemble the message
 	descriptionDiv.appendChild(messageSpan);
 	contentInner.appendChild(descriptionDiv);
@@ -250,10 +272,11 @@ export function generateSldsToastMessage(message, isSuccess, isWarning) {
  *
  * @returns {HTMLElement} The <abbr> element representing the required indicator.
  */
-function generateRequired() {
+async function generateRequired() {
+    translator = await ensureTranslatorAvailability();
 	const requiredElement = document.createElement("abbr");
 	requiredElement.classList.add("slds-required");
-	requiredElement.setAttribute("title", "required");
+	requiredElement.setAttribute("title", await translator.translate("required"));
 	requiredElement.setAttribute("part", "required");
 	requiredElement.textContent = "*";
 	return requiredElement;
@@ -281,7 +304,7 @@ function generateRequired() {
  * - Applies optional attributes like `placeholder`, `required`, and `style`.
  * - Maintains Salesforce Lightning Design System (SLDS) styling conventions.
  */
-function generateInput({
+async function generateInput({
 	label,
 	type = "text",
 	required = false,
@@ -290,6 +313,7 @@ function generateInput({
 	append = null,
 	style = null,
 } = {}) {
+    translator = await ensureTranslatorAvailability();
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
 	const formElement = document.createElement("div");
@@ -314,9 +338,9 @@ function generateInput({
 	labelElement.setAttribute("for", inputId);
 	formElementLabel.appendChild(labelElement);
 	if (required) {
-		labelElement.appendChild(generateRequired());
+		labelElement.appendChild(await generateRequired());
 	}
-	labelElement.append(label);
+	labelElement.append(await translator.translate(label));
 	const inputWrapper = document.createElement("div");
 	inputWrapper.classList.add("slds-form-element__control", "slds-grow");
 	inputWrapper.setAttribute("part", "input-container");
@@ -335,7 +359,7 @@ function generateInput({
 	 * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
 	 * @returns {HTMLInputElement} The created input element.
 	 */
-	function createInputElement(
+	async function createInputElement(
 		{
 			id = null,
 			label = null,
@@ -351,18 +375,25 @@ function generateInput({
 		input.setAttribute("part", "input");
 		input.setAttribute("maxlength", "255");
 		id && (input.id = id);
-		label && input.setAttribute("name", label);
+        if(label){
+            const tranLabel = await translator.translate(label);
+		    input.setAttribute("name", tranLabel);
+    }
 		type && input.setAttribute("type", type);
-		placeholder && input.setAttribute("placeholder", placeholder);
+        if(placeholder){
+            const tranPlaceholder = await translator.translate(placeholder);
+            input.setAttribute("placeholder", tranPlaceholder);
+        }
 		required && input.setAttribute("required", true);
 		enabled == false && input.setAttribute("disabled", true);
 		style && (input.style = style);
 		return input;
 	}
 	if (prepend != null) {
-		inputWrapper.appendChild(createInputElement(prepend));
+        const prepChild = await createInputElement(prepend);
+		inputWrapper.appendChild(prepChild);
 	}
-	const inputContainer = createInputElement({
+	const inputContainer = await createInputElement({
 		id: inputId,
 		label,
 		type,
@@ -372,7 +403,8 @@ function generateInput({
 	});
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
-		inputWrapper.appendChild(createInputElement(append));
+        const appChild = await createInputElement(append);
+		inputWrapper.appendChild(appChild);
 	}
 	return { inputParent, inputContainer };
 }
@@ -391,7 +423,8 @@ function generateInput({
  * - Builds a nested grid layout inside the section for content organization.
  * - Adds empty slots (`divParent` and cloned `borderSpacer`) for future customization or dynamic content injection.
  */
-export function generateSection(sectionTitle = null) {
+export async function generateSection(sectionTitle = null) {
+    translator = await ensureTranslatorAvailability();
 	const section = document.createElement("records-record-layout-section");
 	section.setAttribute("lwc-692i7qiai51-host", "");
 	if (sectionTitle != null) {
@@ -421,8 +454,9 @@ export function generateSection(sectionTitle = null) {
 		const span = document.createElement("span");
 		span.setAttribute("lwc-mlenr16lk9", "");
 		span.classList.add("slds-truncate");
-		span.setAttribute("title", sectionTitle);
-		span.textContent = sectionTitle;
+        const tranSectionTitle = await translator.translate(sectionTitle);
+		span.setAttribute("title", tranSectionTitle);
+		span.textContent = tranSectionTitle;
 		h3.appendChild(span);
 	}
 	const progressiveContainer = document.createElement("div");
@@ -469,7 +503,8 @@ export function generateSection(sectionTitle = null) {
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
  */
-export function generateSldsModal(modalTitle) {
+export async function generateSldsModal(modalTitle) {
+    translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -506,7 +541,7 @@ export function generateSldsModal(modalTitle) {
 	dialog.style.opacity = "1";
 	dialog.setAttribute(
 		"aria-label",
-		`Again, Why Salesforce${
+		`${EXTENSION_LABEL}${
 			modalTitle != null && modalTitle !== "" ? ": " + modalTitle : ""
 		}`,
 	);
@@ -647,7 +682,7 @@ export function generateSldsModal(modalTitle) {
 	abbr.classList.add("slds-required");
 	abbr.textContent = "*";
 	legend.appendChild(abbr);
-	legend.append("= Required Information");
+	legend.append(await translator.translate("required_info"));
 	const footerContainer = document.createElement("div");
 	footerContainer.classList.add("inlineFooter");
 	footerContainer.setAttribute("data-aura-rendered-by", "1215:0");
@@ -827,27 +862,26 @@ export function generateSldsModal(modalTitle) {
  * - closeButton: The close button element for closing the modal.
  * - inputContainer: The container element for the org link input field.
  */
-export function generateOpenOtherOrgModal(miniURL, label) {
-	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
+export async function generateOpenOtherOrgModal(miniURL, label) {
+	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
 		label,
 	);
-	const { section, divParent } = generateSection("Other Org info");
+	const { section, divParent } = await generateSection("other_org_info");
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	article.appendChild(section);
-	const orgLinkInputConf = {
-		label: "Org Link",
-		type: "text",
-		required: true,
-		placeholder: "other-org",
-		style: "width: 100%",
-	};
-	const { inputParent, inputContainer } = generateInput(orgLinkInputConf);
 	const httpsSpan = document.createElement("span");
 	httpsSpan.append(HTTPS);
 	httpsSpan.style.height = "1rem";
 	divParent.appendChild(httpsSpan);
+    const { inputParent, inputContainer } = await generateInput({
+		label: "org_link",
+		type: "text",
+		required: true,
+		placeholder: "other_org_placeholder",
+		style: "width: 100%",
+	});
 	divParent.appendChild(inputParent);
 	const linkEnd = document.createElement("span");
 	linkEnd.append(
@@ -882,7 +916,7 @@ export function generateOpenOtherOrgModal(miniURL, label) {
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
-export function generateSldsFileInput(
+export async function generateSldsFileInput(
 	wrapperId,
 	inputElementId,
 	acceptedType,
@@ -1061,7 +1095,7 @@ export function generateSldsFileInput(
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
 	fileSelectorButtonSpan.append(`Upload File${singleFile ? "" : "s"}`);
-	required && fileSelectorButtonSpan.appendChild(generateRequired());
+	required && fileSelectorButtonSpan.appendChild(await generateRequired());
 	const buttonSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
 		"svg",
@@ -1141,13 +1175,14 @@ export function generateSldsFileInput(
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
  * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
-export function generateCheckboxWithLabel(id, label, checked = false) {
+export async function generateCheckboxWithLabel(id, label, checked = false) {
+    translator = await ensureTranslatorAvailability();
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 	const checkbox = document.createElement("input");
 	checkbox.type = "checkbox";
 	checkbox.id = id;
-	checkbox.name = label;
+	checkbox.name = await translator.translate(label);
 	checkbox.checked = checked;
 	checkboxLabel.appendChild(checkbox);
 	const checkboxSpan = document.createElement("span");

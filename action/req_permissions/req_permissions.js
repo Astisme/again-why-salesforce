@@ -3,6 +3,8 @@ import {
 	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 } from "/constants.js";
+import TranslationService from "/translator.js";
+await TranslationService.create();
 initTheme();
 const noPerm = document.getElementById("no-permissions");
 const popup = await chrome.runtime.getURL("action/popup/popup.html");

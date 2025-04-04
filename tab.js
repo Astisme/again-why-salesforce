@@ -57,7 +57,7 @@ export default class Tab {
 		if (labelOrTab && typeof labelOrTab === "object") {
 			if (url || org) {
 				throw new Error(
-					"When calling with an object, do not pass anything else.",
+					"error_tab_object_creation",
 				);
 			}
 			const tab = labelOrTab;
@@ -67,7 +67,7 @@ export default class Tab {
 			);
 			if (unexpectedKeys.length > 0) {
 				throw new Error(
-					`Unexpected keys found: ${unexpectedKeys.join(", ")}`,
+					["error_tab_unexpected_keys", unexpectedKeys.join(", ")],
 				);
 			}
 			// TODO tabTitle will be removed in a later version
@@ -82,13 +82,13 @@ export default class Tab {
 		const label = labelOrTab;
 		// Check types of parameters
 		if (typeof label !== "string" || label.trim() === "") {
-			throw new Error("Label must be a non-empty string");
+			throw new Error("error_tab_label");
 		}
 		if (typeof url !== "string" || url.trim() === "") {
-			throw new Error("URL must be a non-empty string");
+			throw new Error("error_tab_url");
 		}
 		if (typeof org !== "string" && org != null) {
-			throw new Error("Org must be a string or undefined");
+			throw new Error("error_tab_org");
 		}
 		const miniURL = Tab.minifyURL(url);
 		let orgName;
@@ -129,7 +129,7 @@ export default class Tab {
 	 */
 	static minifyURL(url = null) {
 		if (url == null || url == "") {
-			throw new Error("Cannot minify an empty URL!");
+			throw new Error("error_minify_url");
 		}
 		// remove org-specific url
 		if (url.includes(LIGHTNING_FORCE_COM)) {
@@ -188,10 +188,10 @@ export default class Tab {
 	 */
 	static expandURL(url = null, baseUrl = null) {
 		if (baseUrl == null || !baseUrl.startsWith(HTTPS)) {
-			throw new Error("Cannot expand a URL without its host!");
+			throw new Error("error_expand_url_no_base");
 		}
 		if (url == null || url === "") {
-			throw new Error("Cannot expand an empty URL!");
+			throw new Error("error_expand_url");
 		}
 		if (
 			url.startsWith(HTTPS) &&
@@ -220,7 +220,7 @@ export default class Tab {
 	 */
 	static containsSalesforceId(url = null) {
 		if (url == null) {
-			throw new Error("No URL to check!");
+			throw new Error("error_no_url");
 		}
 		return SALESFORCE_ID_PATTERN.test(decodeURIComponent(url));
 	}
@@ -234,7 +234,7 @@ export default class Tab {
 	 */
 	static extractOrgName(url = null) {
 		if (url == null) {
-			throw new Error("Cannot extract org name from empty URL!");
+			throw new Error("error_extract_empty_url");
 		}
 		let host = new URL(
 			url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
@@ -260,7 +260,7 @@ export default class Tab {
 	 */
 	static isTab(tab) {
 		if (tab == null) {
-			throw new Error("No object to be checked!");
+			throw new Error("error_no_object");
 		}
 		return tab instanceof Tab;
 	}
@@ -277,7 +277,6 @@ export default class Tab {
 			Tab.create(tab);
 			return true;
 		} catch (error) {
-			console.log("Invalid Tab: ", error.message);
 			// error on creation of tab
 			return false;
 		}
