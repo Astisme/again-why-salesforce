@@ -6,11 +6,12 @@ import {
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
 } from "/constants.js";
+import { ensureTranslatorAvailability } from "/translator.js";
+
 import {
 	getCurrentHref,
 	showToast,
 } from "./content.js";
-import { ensureTranslatorAvailability } from "/translator.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;

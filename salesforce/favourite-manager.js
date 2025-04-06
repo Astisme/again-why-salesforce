@@ -1,6 +1,7 @@
 "use strict";
 import { EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
 import { ensureTranslatorAvailability } from "/translator.js";
+
 import {
 	ensureAllTabsAvailability,
 	getAllTabs,

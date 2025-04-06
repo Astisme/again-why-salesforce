@@ -6,6 +6,9 @@ import {
     SALESFORCE_URL_PATTERN,
 } from "/constants.js";
 import { ensureTranslatorAvailability } from "/translator.js";
+import Tab from "/tab.js";
+import TabContainer from "/tabContainer.js";
+
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import { setupDrag } from "/dragHandler.js";
 import {
@@ -14,8 +17,6 @@ import {
 	generateSldsToastMessage,
 	MODAL_ID,
 } from "./generator.js";
-import Tab from "/tab.js";
-import TabContainer from "/tabContainer.js";
 
 let allTabs;
 async function getAllTabs_async() {

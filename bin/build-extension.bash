@@ -26,4 +26,4 @@ ZIP_NAME="${BROWSER_VERSION_NAME}.zip"
 ls manifest.json >/dev/null 2>&1 || { echo "manifest.json not found!"; exit 1; }
 
 # Zip $BROWSER extension
-zip -r "bin/$ZIP_NAME" action assets background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js *.js LICENSE* README.md manifest.json -x "*/README.md" >/dev/null 2>&1
+zip -r "bin/$ZIP_NAME" _locales action assets *.js background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js LICENSE README.md manifest.json -x "*/README.md" >/dev/null 2>&1
