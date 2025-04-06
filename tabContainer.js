@@ -1,6 +1,6 @@
 import Tab from "./tab.js";
-import TranslationService from "/translator.js";
-const translator = await TranslationService.create();
+import { ensureTranslatorAvailability } from "/translator.js";
+let translator = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
@@ -34,6 +34,7 @@ export default class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if the `TabContainer` cannot be initialized with the provided `tabs`.
 	 */
 	static async create(tabs = null) {
+        translator = await ensureTranslatorAvailability();
 		const tabcont = new TabContainer(_tabContainerSecret);
 		if (!await tabcont._initialize(tabs)) {
             const msg = await translator.translate(["error_tabcont_initialize",JSON.stringify(tabs)]);

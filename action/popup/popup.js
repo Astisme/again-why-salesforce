@@ -8,7 +8,7 @@ import {
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
-import TranslationService from "/translator.js";
+import { TranslationService } from "/translator.js";
 
 const translator = await TranslationService.create();
 const allTabs = await TabContainer.create();

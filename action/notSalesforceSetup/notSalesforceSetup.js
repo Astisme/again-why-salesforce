@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-window
 import { SALESFORCE_LIGHTNING_PATTERN, SETUP_LIGHTNING } from "/constants.js";
+import { TranslationService } from "/translator.js";
 import { initTheme } from "../themeHandler.js";
-import TranslationService from "/translator.js";
 await TranslationService.create();
 initTheme();
 

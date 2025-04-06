@@ -5,10 +5,10 @@ import {
 	SETUP_LIGHTNING,
     SALESFORCE_URL_PATTERN,
 } from "/constants.js";
+import { ensureTranslatorAvailability } from "/translator.js";
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import { setupDrag } from "/dragHandler.js";
 import {
-    ensureTranslatorAvailability,
 	generateOpenOtherOrgModal,
 	generateRowTemplate,
 	generateSldsToastMessage,

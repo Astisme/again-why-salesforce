@@ -10,27 +10,7 @@ import {
 	getCurrentHref,
 	showToast,
 } from "./content.js";
-import TranslationService from "/translator.js";
-let translator = null;
-async function getTranslator_async(){
-    if(translator == null){
-        translator = await TranslationService.create();
-    } else await translator;
-    return translator;
-}
-getTranslator_async();
-function getTranslator(){
-    if(translator == null || translator instanceof Promise)
-        throw new Error("translator was not yet initialized");
-    return translator;
-}
-export async function ensureTranslatorAvailability(){
-    try {
-        return getTranslator();
-    } catch (_) {
-        return await getTranslator_async();
-    }
-}
+import { ensureTranslatorAvailability } from "/translator.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -157,7 +137,7 @@ export function generateRowTemplate(
  * @returns {HTMLElement} The generated toast container element.
  */
 export async function generateSldsToastMessage(message, isSuccess, isWarning) {
-    translator = await ensureTranslatorAvailability();
+    const translator = await ensureTranslatorAvailability();
 	if (
 		message == null || message === "" | isSuccess == null ||
 		isWarning == null
@@ -273,7 +253,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
  * @returns {HTMLElement} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
-    translator = await ensureTranslatorAvailability();
+    const translator = await ensureTranslatorAvailability();
 	const requiredElement = document.createElement("abbr");
 	requiredElement.classList.add("slds-required");
 	requiredElement.setAttribute("title", await translator.translate("required"));
@@ -313,7 +293,7 @@ async function generateInput({
 	append = null,
 	style = null,
 } = {}) {
-    translator = await ensureTranslatorAvailability();
+    const translator = await ensureTranslatorAvailability();
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
 	const formElement = document.createElement("div");
@@ -424,7 +404,7 @@ async function generateInput({
  * - Adds empty slots (`divParent` and cloned `borderSpacer`) for future customization or dynamic content injection.
  */
 export async function generateSection(sectionTitle = null) {
-    translator = await ensureTranslatorAvailability();
+    const translator = await ensureTranslatorAvailability();
 	const section = document.createElement("records-record-layout-section");
 	section.setAttribute("lwc-692i7qiai51-host", "");
 	if (sectionTitle != null) {
@@ -504,7 +484,7 @@ export async function generateSection(sectionTitle = null) {
  * - closeButton: The close button element for closing the modal.
  */
 export async function generateSldsModal(modalTitle) {
-    translator = await ensureTranslatorAvailability();
+    const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -1176,7 +1156,7 @@ export async function generateSldsFileInput(
  * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
-    translator = await ensureTranslatorAvailability();
+    const translator = await ensureTranslatorAvailability();
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 	const checkbox = document.createElement("input");

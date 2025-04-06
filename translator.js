@@ -1,4 +1,4 @@
-import { BROWSER } from "/constants.js";
+import { BROWSER, LOCALE_KEY } from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
 let singleton = null;
 
@@ -10,7 +10,7 @@ async function sendMessage(message){
  * Service for handling text translations in a browser extension.
  * Uses language-specific caches to improve performance.
  */
-export default class TranslationService {
+export class TranslationService {
 	static DEFAULT_LANGUAGE = "en";
 	static TRANSLATE_ELEMENT_ATTRIBUTE = "data-i18n";
     static TRANSLATE_SEPARATOR = "+-+";
@@ -31,27 +31,38 @@ export default class TranslationService {
 		}
 	}
 
+    async loadNewLanguage(language = null){
+        if(language != null && language != this.currentLanguage)
+            await this.loadLanguageFile(language);
+    }
+
+    async loadSalesforceLanguage(){
+        const sfLanguage = await sendMessage({what: "get-sf-language"});
+        await this.loadNewLanguage(sfLanguage);
+    }
+
+    async loadSavedLanguage(){
+        const savedLanguage = await sendMessage({what: "get-language"});
+        await this.loadNewLanguage(savedLanguage);
+    }
+
 	/**
 	 * Load user's language preference from storage
 	 */
 	static async create() {
 		if (singleton != null) {
+            await singleton.loadSalesforceLanguage();
 			return singleton;
 		}
 		singleton = new TranslationService(_translationSecret);
         // load the default language for fallback cases
         await singleton.loadLanguageFile(TranslationService.DEFAULT_LANGUAGE);
         // load the user picked language
-        const savedLanguage = await sendMessage({what: "get-language"});
-        if(savedLanguage != null && savedLanguage != singleton.currentLanguage)
-            await singleton.loadLanguageFile(savedLanguage);
+        await singleton.loadSavedLanguage();
         // load the language in which salesforce is currently set
-        const sfLanguage = await sendMessage({what: "get-sf-language"});
-        if(sfLanguage != null && sfLanguage != singleton.currentLanguage)
-            await singleton.loadLanguageFile(sfLanguage);
+        await singleton.loadSalesforceLanguage();
         await singleton.updatePageTranslations();
         singleton.setListenerForLanguageChange();
-        console.log(savedLanguage,sfLanguage)
 		return singleton;
 	}
 
@@ -149,9 +160,34 @@ export default class TranslationService {
 
     setListenerForLanguageChange(){
         BROWSER.storage.onChanged.addListener((changes) => {
-          if (changes.language != null) {
-            this.updatePageTranslations(changes.language.newValue);
+            console.log('storage-changed',changes);
+          if (changes[LOCALE_KEY] != null) {
+            this.updatePageTranslations(changes[LOCALE_KEY].newValue);
           }
         });
+    }
+}
+
+async function getTranslator_async(){
+    if(singleton == null){
+        singleton = await TranslationService.create();
+    }
+    else if(singleton instanceof Promise)
+        await singleton;
+    return singleton;
+}
+getTranslator_async();
+
+function getTranslator(){
+    if(singleton == null || singleton instanceof Promise)
+        throw new Error("translator was not yet initialized");
+    return singleton;
+}
+
+export async function ensureTranslatorAvailability(){
+    try {
+        return getTranslator();
+    } catch (_) {
+        return await getTranslator_async();
     }
 }

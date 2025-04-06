@@ -106,7 +106,7 @@ globalThis.document = {
 // Make global variables available
 globalThis.BROWSER = mockBrowser;
 // Mock translations object
-const translations = {
+export const translations = {
 	"en": {
 		"hello": {
             "message": "Hello",

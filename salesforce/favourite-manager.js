@@ -1,5 +1,6 @@
 "use strict";
-import { EXTENSION_LABEL, EXTENSION_NAME } from "../constants.js";
+import { EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
+import { ensureTranslatorAvailability } from "/translator.js";
 import {
 	ensureAllTabsAvailability,
 	getAllTabs,
@@ -10,7 +11,6 @@ import {
 	performActionOnTabs,
 	showToast,
 } from "./content.js";
-import { ensureTranslatorAvailability } from "./generator.js";
 
 let allTabs;
 const interval = setInterval(() => {

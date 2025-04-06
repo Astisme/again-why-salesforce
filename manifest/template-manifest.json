@@ -1,14 +1,20 @@
 {
 	"manifest_version": 3,
-	"name": "Again, Why Salesforce",
+	"name": "__MSG_extension_label__",
 	"version": "1.4.8",
 	"permissions": [
 		"storage",
 		"activeTab",
 		"contextMenus",
-		"downloads"
+		"downloads",
+        "cookies"
 	],
-	"description": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
+    "default_locale": "en",
+	"description": "__MSG_extension_description__",
+    "host_permissions": [
+        "*://*.my.salesforce-setup.com/lightning/setup/*",
+        "*://*.lightning.force.com/lightning/setup/*"
+    ],
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
 	"content_scripts": [
 		{
@@ -25,17 +31,10 @@
 	"web_accessible_resources": [
 		{
 			"resources": [
-				"salesforce/lightning-navigation.js"
-			],
-			"matches": [
-				"https://*.my.salesforce-setup.com/*",
-				"https://*.lightning.force.com/*"
-			]
-		},
-		{
-			"resources": [
+				"salesforce/lightning-navigation.js",
 				"assets/svgs/*.svg",
-				"assets/icons/*.png"
+				"assets/icons/*.png",
+                "_locales/*/messages.json"
 			],
 			"matches": [
 				"https://*.my.salesforce-setup.com/*",
@@ -53,7 +52,7 @@
 		"1024": "assets/icons/awsf-1024.png"
 	},
 	"action": {
-		"default_title": "Again, Why Salesforce",
+		"default_title": "__MSG_extension_label__",
 		"default_popup": "action/popup/popup.html"
 	},
 	"background": {

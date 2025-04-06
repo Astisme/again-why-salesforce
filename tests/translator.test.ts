@@ -4,8 +4,14 @@ import {
 	assertThrows,
     assertRejects,
 } from "https://deno.land/std/testing/asserts.ts";
-import { mockBrowser } from "./mocks.ts";
-import TranslationService from "/translator.js";
+import { mockBrowser, translations } from "./mocks.ts";
+declare global {
+	var chrome: typeof mockBrowser;
+	var browser: typeof mockBrowser;
+}
+// Setup global objects that extension code expects
+globalThis.chrome = mockBrowser as any;
+import { TranslationService } from "/translator.js";
 
 Deno.test("TranslationService - singleton pattern", async () => {
 	const service1 = await TranslationService.create();
