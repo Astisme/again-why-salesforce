@@ -1,350 +1,350 @@
 {
   "extension_label": {
     "message": "Again, Why Salesforce",
-    "description": "El nombre de esta extensión"
+    "description": "[manifest] El nombre de esta extensión"
   },
   "extension_description": {
-    "message": "Crea y administra Tab personalizadas en el espacio disponible en la página de Setup de Salesforce Lightning.",
+    "message": "Crear y administrar Tabs personalizados en el espacio disponible en la página de Configuración de Salesforce Lightning.",
     "description": "[manifest] La descripción de esta extensión"
   },
   "theme_light": {
     "message": "Cambiar Tema a Claro",
-    "description": "[popup] título en el sol para cambiar el tema"
+    "description": "[popup] Título en el sol para cambiar el tema"
   },
   "theme_dark": {
     "message": "Cambiar Tema a Oscuro",
-    "description": "[popup] título en la luna para cambiar el tema"
+    "description": "[popup] Título en la luna para cambiar el tema"
   },
   "export_title": {
-    "message": "Exportar todas las Tab",
-    "description": "[popup] título en el botón de exportación"
+    "message": "Exportar todos los Tabs",
+    "description": "[popup] Título en el botón de exportación"
   },
   "export": {
     "message": "Exportar",
-    "description": "[popup] botón de exportación"
+    "description": "[popup] Botón de exportación"
   },
   "import_title": {
-    "message": "Importar Tab desde archivo json",
-    "description": "[popup] título en el botón de importación"
+    "message": "Importar Tabs desde archivo JSON",
+    "description": "[popup] Título en el botón de importación"
   },
   "import": {
     "message": "Importar",
-    "description": "[popup] botón de importación"
+    "description": "[popup] Botón de importación"
   },
   "delete_all": {
-    "message": "Eliminar todas las Tab",
-    "description": "[popup] título en el contenedor de basura para vaciar todas las Tab"
+    "message": "Eliminar todos los Tabs",
+    "description": "[popup] Título en la papelera para vaciar todos los Tabs"
   },
   "table_label": {
-    "message": "Etiqueta Tab",
-    "description": "[popup] encabezado de columna para el nombre de la Tab"
+    "message": "Etiqueta del Tab",
+    "description": "[popup] Encabezado de columna para el nombre del Tab"
   },
   "table_url": {
-    "message": "URL Tab",
-    "description": "[popop] encabezado de columna para el URL de la Tab"
+    "message": "URL del Tab",
+    "description": "[popup] Encabezado de columna para la URL del Tab"
   },
   "table_org": {
-    "message": "Es Tab Org",
-    "description": "[popup] texto de ayuda para la columna con la casilla de verificación Org"
+    "message": "Es Org Tab",
+    "description": "[popup] Texto de ayuda para la columna con la casilla de Org"
   },
   "table_delete": {
     "message": "Eliminar Tab",
-    "description": "[popup] texto de ayuda para la columna con el botón de eliminación"
+    "description": "[popup] Texto de ayuda para la columna con el botón de eliminación"
   },
   "table_row_label": {
-    "message": "Introduce la etiqueta para este URL",
-    "description": "[popup] campo de entrada con el nombre de la Tab"
+    "message": "Introduzca la etiqueta para esta URL",
+    "description": "[popup] Campo de entrada para el nombre del Tab"
   },
   "table_row_url": {
-    "message": "Introduce el sub_URL al que deseas ser redirigido.",
-    "description": "[popup] campo de entrada con el URL de la Tab"
+    "message": "Introduzca la sub_URL donde desea ser redirigido.",
+    "description": "[popup] Campo de entrada para la URL del Tab"
   },
   "table_row_org": {
-    "message": "Haz clic si deseas que esta Tab esté disponible solo para esta Org.",
-    "description": "[popup] casilla de verificación para hacer la Tab específica para la Org"
+    "message": "Haga clic si desea que este Tab esté disponible solo para esta Org.",
+    "description": "[popup] Casilla de verificación para designar el Tab como específico de la Org"
   },
   "table_row_org_name": {
-    "message": "La Org para la que esta Tab está disponible.",
-    "description": "[popup] campo de entrada con el nombre de la Org"
+    "message": "La Org para la cual este Tab está disponible.",
+    "description": "[popup] Campo de entrada para el nombre de la Org"
   },
   "delete": {
     "message": "Eliminar",
-    "description": "[popup] eliminar una fila"
+    "description": "[popup] Eliminar una fila"
   },
   "req_permissions_header": {
-    "message": "Permítenos acceder<br />automáticamente a las páginas de Setup de Salesforce.",
-    "description": "[req_permission] encabezado de la página para solicitar permisos"
+    "message": "Por favor, permítanos acceder<br />a las páginas de Configuración de Salesforce automáticamente.",
+    "description": "[req_permission] Encabezado de la página para solicitar permisos"
   },
   "req_permissions_paragraph": {
-    "message": "Si lo deseas, tus Tab favoritas pueden aparecer<br />en cuanto navegues a una página de Setup de Salesforce<br />sin tener que hacer clic en esta extensión cada vez.",
-    "description": "[req_permission] texto para explicar por qué se solicitan los permisos"
+    "message": "Si lo desea, sus Tabs favoritos aparecerán<br />tan pronto como navegue a una página de Configuración de Salesforce<br />sin tener que hacer clic en esta extensión cada vez.",
+    "description": "[req_permission] Texto explicativo sobre la solicitud de permisos"
   },
   "skip": {
     "message": "Omitir",
-    "description": "[req_permission] botón para NO conceder permisos"
+    "description": "[req_permission] Botón para NO permitir permisos"
   },
   "allow": {
     "message": "Permitir",
-    "description": "[req_permission] botón para conceder permisos"
+    "description": "[req_permission] Botón para permitir permisos"
   },
   "req_permissions_dont_ask": {
-    "message": "No volver a preguntar.",
-    "description": "[req_permission] etiqueta cuando el usuario no desea conceder permisos de forma permanente"
+    "message": "No preguntar de nuevo.",
+    "description": "[req_permission] Etiqueta cuando el usuario no desea que se le pregunte de forma permanente"
   },
   "nss_prefix": {
     "message": "Esto no es un ",
-    "description": "[notSalesforceSetup] este es el prefijo que se muestra cuando el usuario no está en una página de Salesforce. Asegúrate de incluir un espacio al final del mensaje"
+    "description": "[notSalesforceSetup] Prefijo mostrado cuando el usuario no está en una página de Salesforce; incluya un espacio al final"
   },
   "salesforce_lightning": {
     "message": "Salesforce Lightning",
-    "description": "[notSalesforceSetup] la plataforma Salesforce Lightning"
+    "description": "[notSalesforceSetup] La plataforma Salesforce Lightning"
   },
   "setup_page": {
-    "message": "Página de Setup",
-    "description": "[notSalesforceSetup] la página utilizada para modificar la configuración de Salesforce"
+    "message": "Página de Configuración",
+    "description": "[notSalesforceSetup] Página utilizada para modificar la configuración de Salesforce"
   },
   "invalid_url": {
-    "message": "URL no válido",
-    "description": "[notSalesforceSetup] un URL no válido"
+    "message": "URL no válida",
+    "description": "[notSalesforceSetup] Una URL que no es válida"
   },
   "nss_detected": {
     "message": " detectado.",
-    "description": "[notSalesforceSetup] algo que se ha encontrado. Asegúrate de incluir un espacio al principio del mensaje."
+    "description": "[notSalesforceSetup] Algo ha sido encontrado; incluya un espacio al inicio"
   },
   "login_to_salesforce": {
-    "message": "Inicia sesión en Salesforce",
-    "description": "[notSalesforceSetup] llamada a la acción en un botón para redirigir al usuario a la página de inicio de sesión de Salesforce"
+    "message": "Iniciar sesión en Salesforce",
+    "description": "[notSalesforceSetup] Llamado a la acción para redirigir al inicio de sesión de Salesforce"
   },
   "open_setup": {
-    "message": "Abrir Setup",
-    "description": "[notSalesforceSetup] llamada a la acción en un botón para redirigir al usuario a una página de Setup de Salesforce"
+    "message": "Abrir Configuración",
+    "description": "[notSalesforceSetup] Llamado a la acción para ir a la página de Configuración de Salesforce"
   },
   "error_missing_key": {
     "message": "Clave no encontrada en ninguna parte",
-    "description": "[error] no se encontró traducción en los archivos"
+    "description": "[error] Traducción no encontrada en los archivos"
   },
   "required": {
-    "message": "obligatorio",
-    "description": "[input] indica que un campo de entrada es obligatorio"
+    "message": "requerido",
+    "description": "[input] Marca un campo de entrada como obligatorio"
   },
   "required_info": {
-    "message": "= Información obligatoria",
-    "description": "[modal] informa al usuario que cierta información es obligatoria"
+    "message": "= Información requerida",
+    "description": "[modal] Indica al usuario que cierta información es obligatoria"
   },
   "other_org_info": {
     "message": "Otra información de Org",
     "description": "[modal-title]"
   },
   "org_link": {
-    "message": "Enlace Org",
+    "message": "Enlace de Org",
     "description": "[input-label]"
   },
   "other_org_placeholder": {
-    "message": "other-org",
+    "message": "otra-org",
     "description": "[input-placeholder]"
   },
   "overwrite_tabs": {
-    "message": "Sobrescribir las Tab guardadas.",
-    "description": "[label] elimina todas las Tab guardadas durante el proceso de importación"
+    "message": "Sobrescribir Tabs guardados.",
+    "description": "[label] Elimina todos los Tabs guardados durante el proceso de importación"
   },
   "preserve_org_tabs": {
-    "message": "Conservar las Tab para otras Org.",
-    "description": "[label] conservar todas las Tab específicas de Org durante el proceso de importación"
+    "message": "Conservar Tabs de otras orgs.",
+    "description": "[label] Mantiene los Tabs específicos de otras orgs durante el proceso de importación"
   },
   "tabs_saved": {
-    "message": "Tab guardadas.",
-    "description": "[toast] las Tab se han guardado correctamente."
+    "message": "Tabs guardados.",
+    "description": "[toast] Los Tabs se han guardado correctamente."
   },
   "error_no_setup_tab": {
-    "message": "No se encontró la Tab de Setup.",
-    "description": "[error] la extensión no pudo encontrar dónde colocar las Tab favoritas."
+    "message": "No se encontró la pestaña de Configuración.",
+    "description": "[error] La extensión no pudo encontrar dónde colocar los Tabs favoritos."
   },
   "error_close_other_modal": {
-    "message": "¡Cierra primero el otro modal!",
-    "description": "[toast] el usuario intentó abrir más de un modal"
+    "message": "¡Cierre primero el otro modal!",
+    "description": "[toast] Se intentó abrir más de un modal."
   },
   "error_link_with_id": {
-    "message": "¡Esta página no puede existir en otra Org, porque contiene un Id!",
-    "description": "[open-other-org-modal] advertencia para el usuario de que el enlace puede no existir en otra Org"
+    "message": "¡Esta página no podría existir en otra Org, porque contiene un Id!",
+    "description": "[open-other-org-modal] Advertencia de que el enlace podría no existir en otra Org."
   },
   "where_to": {
-    "message": "¿Dónde?",
-    "description": "[open-other-org-modal] título de reserva para el modal"
+    "message": "¿A dónde?",
+    "description": "[open-other-org-modal] Título alternativo para el modal."
   },
   "insert_another": {
-    "message": "Inserta otro",
-    "description": "[error-open-other-org-modal] mensaje cuando el usuario inserta la misma Org en el modal"
+    "message": "Insertar otro",
+    "description": "[error-open-other-org-modal] Mensaje cuando se inserta la misma Org en el modal."
   },
   "insert_valid_org": {
-    "message": "¡Por favor, inserta una Org válida!",
-    "description": "[error-open-other-org-modal] mensaje cuando el usuario inserta un URL incorrecto en el modal"
+    "message": "¡Por favor, inserte una Org válida!",
+    "description": "[error-open-other-org-modal] Mensaje cuando se ingresa una URL incorrecta en el modal."
   },
   "insert_another_org": {
-    "message": "¡La Org insertada es la actual!\nPor favor, inserta otra Org.",
-    "description": "[error-open-other-org-modal] mensaje cuando el usuario inserta la misma Org en el modal"
+    "message": "¡La Org insertada es la actual!\nPor favor, inserte otra Org.",
+    "description": "[error-open-other-org-modal] Mensaje cuando se ingresa la misma Org."
   },
   "confirm_another_org": {
-    "message": "Confirma la apertura de este enlace.",
-    "description": "[open-other-org-modal] solicitud de confirmación al usuario para abrir el enlace construido"
+    "message": "Confirme abrir este enlace.",
+    "description": "[open-other-org-modal] Solicita al usuario confirmar la apertura del enlace construido."
   },
   "no_match": {
-    "message": "No se ha encontrado ninguna acción coincidente",
-    "description": "[error] en Salesforce cuando no se encuentra una acción coincidente"
+    "message": "No se encontró ninguna acción coincidente",
+    "description": "[error] En Salesforce, la acción solicitada no coincide con ninguna acción disponible."
   },
   "successfully_imported": {
-    "message": "Importado con éxito",
-    "description": "[toast] el usuario añadió Tab desde un archivo externo"
+    "message": "Importación exitosa",
+    "description": "[toast] El usuario ha agregado Tabs desde un archivo externo."
   },
   "tabs": {
     "message": "Tabs",
-    "description": "los enlaces favoritos del usuario"
+    "description": "Los enlaces favoritos del usuario."
   },
   "warn_deprecated_tab_title": {
-    "message": "¡Has importado usando el deprecado 'tabTitle'!\nSe ha iniciado la descarga del archivo actualizado.\nA partir de ahora, utiliza el archivo recién descargado, por favor.\nEl uso de dicho archivo será discontinuado en una versión posterior.",
-    "description": "[warning] explica al usuario que el archivo importado utiliza una propiedad deprecada"
+    "message": "¡Ha importado usando el 'tabTitle' obsoleto!\nSe ha iniciado la descarga del archivo actualizado.\nDe ahora en adelante, utilice el archivo recién descargado, por favor.\nEl uso de dicho archivo se descontinuará en una versión futura.",
+    "description": "[warning] Explica al usuario que el archivo importado utiliza una propiedad obsoleta."
   },
   "error_import": {
     "message": "Error durante la importación:\n",
-    "description": "[error] se produjo un error durante el proceso de importación"
+    "description": "[error] Se produjo un error durante el proceso de importación."
   },
   "import_invalid_file": {
     "message": "Tipo de archivo no válido.\nSolo se admiten archivos JSON.",
-    "description": "[error] el archivo usado para la importación no es un JSON"
+    "description": "[error] La archivo utilizado para la importación no es un JSON."
   },
   "save_tab": {
     "message": "Guardar como Tab",
-    "description": "[alt] texto alternativo cuando las imágenes no funcionan"
+    "description": "[alt] Texto alternativo cuando las imágenes no funcionan."
   },
   "remove_tab": {
     "message": "Eliminar Tab",
-    "description": "[alt] texto alternativo cuando las imágenes no funcionan"
+    "description": "[alt] Texto alternativo cuando las imágenes no funcionan."
   },
   "error_missing_favourite_id": {
     "message": "No se puede obtener la imagen favorita sin el Id",
-    "description": "[error] no se pasó ningún id favorito"
+    "description": "[error] No se proporcionó un Id favorito."
   },
   "error_remove_not_favourite": {
-    "message": "¡No se puede eliminar una Tab que no es favorita!",
-    "description": "[error] el usuario intentó eliminar una Tab que aún no se había guardado"
+    "message": "¡No se puede eliminar un Tab que no está marcado como favorito!",
+    "description": "[error] Se intentó eliminar un Tab que aún no se ha guardado."
   },
   "error_no_headers": {
     "message": "No se encontraron encabezados.",
-    "description": "[error] la extensión no pudo encontrar dónde colocar el botón de favoritos"
+    "description": "[error] La extensión no pudo encontrar dónde colocar el botón de favoritos."
   },
   "error_useless_save": {
-    "message": "No se puede guardar:\n¡Esta página ya se ha guardado!",
-    "description": "[error] el usuario intentó guardar una página que ya estaba guardada"
+    "message": "No se puede guardar:\n¡Esta página ya ha sido guardada!",
+    "description": "[error] Se intentó guardar una página que ya estaba guardada."
   },
   "error_useless_remove": {
-    "message": "No se puede eliminar:\nNo se puede eliminar una página que no se haya guardado antes",
-    "description": "[error] el usuario intentó eliminar una página que aún no se había guardado"
+    "message": "No se puede eliminar:\nNo se puede eliminar una página que nunca se ha guardado.",
+    "description": "[error] Se intentó eliminar una página que no había sido guardada."
   },
   "error_tab_object_creation": {
-    "message": "Al llamar con un objeto, no pases nada más.",
-    "description": "[error] error de implementación por parte del desarrollador"
+    "message": "Al llamar con un objeto, no pase nada más.",
+    "description": "[error] Error de implementación por parte del desarrollador."
   },
   "error_tab_unexpected_keys": {
     "message": "Se encontraron claves inesperadas:",
-    "description": "[error] el usuario intentó crear una Tab con propiedades no soportadas"
+    "description": "[error] Se intentó crear un Tab con propiedades no soportadas."
   },
   "error_tab_label": {
     "message": "La etiqueta debe ser una cadena no vacía",
-    "description": "[error] el usuario intentó crear una Tab sin etiqueta"
+    "description": "[error] Se intentó crear un Tab sin etiqueta."
   },
   "error_tab_url": {
-    "message": "El URL debe ser una cadena no vacía",
-    "description": "[error] el usuario intentó crear una Tab sin URL"
+    "message": "La URL debe ser una cadena no vacía",
+    "description": "[error] Se intentó crear un Tab sin URL."
   },
   "error_tab_org": {
-    "message": "La Org debe ser una cadena o indefinida",
-    "description": "[error] el usuario intentó crear una Tab con un valor de Org no válido"
+    "message": "Org debe ser una cadena o indefinido",
+    "description": "[error] Se intentó crear un Tab con un valor de Org inválido."
   },
   "error_minify_url": {
-    "message": "¡No se puede minimizar un URL vacío!",
-    "description": "[error] no se pasó el URL a minimizar"
+    "message": "¡No se puede minimizar una URL vacía!",
+    "description": "[error] No se proporcionó la URL para reducir."
   },
   "error_expand_url_no_base": {
-    "message": "¡No se puede expandir un URL sin su host!",
-    "description": "[error] no se pasó el URL base para expandir"
+    "message": "¡No se puede expandir una URL sin su host!",
+    "description": "[error] No se proporcionó la URL base para expandir."
   },
   "error_expand_url": {
-    "message": "¡No se puede expandir un URL vacío!",
-    "description": "[error] no se pasó el URL a expandir"
+    "message": "¡No se puede expandir una URL vacía!",
+    "description": "[error] No se proporcionó la URL a expandir."
   },
   "error_no_url": {
-    "message": "¡No hay URL para comprobar!",
-    "description": "[error] no se pasó el URL a comprobar"
+    "message": "¡No hay URL para verificar!",
+    "description": "[error] No se proporcionó ninguna URL para comprobar."
   },
   "error_extract_empty_url": {
-    "message": "¡No se puede extraer el nombre de la Org de un URL vacío!",
-    "description": "[error] no se pasó el URL del cual extraer el nombre de la Org"
+    "message": "¡No se puede extraer el nombre de la Org de una URL vacía!",
+    "description": "[error] No se proporcionó la URL para extraer el nombre de la Org."
   },
   "error_no_object": {
-    "message": "¡No hay objeto para comprobar!",
-    "description": "[error] no se pasó el objeto"
+    "message": "¡No se proporcionó ningún objeto para verificar!",
+    "description": "[error] No se proporcionó ningún objeto."
   },
   "error_invalid_tab": {
-    "message": "Tab no válida",
-    "description": "[error] la Tab no es válida"
+    "message": "Tab no válido",
+    "description": "[error] El Tab no es válido."
   },
   "error_tabcont_initialize": {
-    "message": "Cuando se llama con un objeto, no pases nada más."
+    "message": "No se puede inicializar con"
   },
   "error_duplicate_tab": {
-    "message": "Esta Tab ya existe",
-    "description": "[error] la Tab está duplicada"
+    "message": "Este Tab ya existe",
+    "description": "[error] El Tab está duplicado."
   },
   "error_get_with_no_org": {
-    "message": "No se pueden obtener Tab si no se especifica la Org.",
-    "description": "[error] se intentó buscar Tab por Org sin proporcionar información de Org"
+    "message": "No se pueden obtener Tabs sin especificar la Org.",
+    "description": "[error] Se intentó buscar Tabs sin información de Org."
   },
   "error_no_data": {
-    "message": "No se puede identificar una Tab sin datos.",
-    "description": "[error] se intentó obtener una Tab sin proporcionar datos"
+    "message": "¡No se puede identificar un Tab sin datos!",
+    "description": "[error] No se proporcionaron datos para identificar el Tab."
   },
   "error_tab_not_found": {
-    "message": "No se encontró la Tab.",
-    "description": "[error] la Tab no fue incluida en el array"
+    "message": "No se encontró el Tab.",
+    "description": "[error] El Tab no se incluyó en la lista."
   },
   "error_sync_nothing": {
-    "message": "¡No se pueden sincronizar Tab nulas!",
-    "description": "[error] se intentó sincronizar nada"
+    "message": "¡No se pueden sincronizar Tabs nulos!",
+    "description": "[error] Se intentó sincronizar nada."
   },
   "error_no_array": {
-    "message": "Array no válido o no se pasó ningún array",
-    "description": "[error] no se recibió un array válido"
+    "message": "Array no válido o no se proporcionó un array",
+    "description": "[error] No se recibió un array válido."
   },
   "error_tabcont_invalid_tabs": {
-    "message": "Tab(s) no válidas detectadas.\nPrimera ocurrencia:",
-    "description": "[error] se pasaron Tab no válidas"
+    "message": "Se detectaron Tabs inválidos.\nPrimera aparición:",
+    "description": "[error] Se pasaron Tabs inválidos."
   },
   "tab_explain": {
-    "message": "Cada elemento debe tener 'label' y 'url' como cadenas. Además, cada elemento puede tener un 'org' como cadena.",
-    "description": "[error] explica cómo debe construirse una Tab"
+    "message": "Cada elemento debe tener 'label' y 'url' como cadenas. Además, cada elemento puede tener 'org' como cadena.",
+    "description": "[error] Explica cómo debe construirse un Tab."
   },
   "error_no_matching_tab": {
-    "message": "No se encontraron Tab que coincidan.",
-    "description": "[error] no se recuperaron Tab"
+    "message": "No se encontraron Tabs coincidentes.",
+    "description": "[error] No se recuperaron Tabs coincidentes."
   },
   "error_many_matching_tab": {
-    "message": "Se encontraron más de una Tab que coinciden.",
-    "description": "[error] se recuperaron demasiadas Tab"
+    "message": "Se encontraron más de 1 Tab coincidente.",
+    "description": "[error] Se recuperaron varios Tabs coincidentes."
   },
   "error_no_callback": {
-    "message": "Por favor, proporciona una función de callback",
-    "description": "[error] no se pasó una función de callback"
+    "message": "Por favor, proporcione un callback",
+    "description": "[error] No se proporcionó una función callback."
   },
   "error_no_cookies": {
     "message": "No se encontraron cookies coincidentes",
-    "description": "[error] no se devolvieron las cookies de Salesforce"
+    "description": "[error] No se devolvieron las cookies de Salesforce."
   },
   "error_no_browser_tab": {
-    "message": "No se pudo encontrar la Tab actual del navegador.",
-    "description": "[error] la página en segundo plano no pudo establecer una Tab activa del navegador"
+    "message": "No se pudo encontrar la pestaña actual del navegador.",
+    "description": "[error] No se encontró una pestaña activa del navegador."
   },
   "error_no_message": {
     "message": "No se especificó un mensaje para enviar.",
-    "description": "[error] no se encontró un mensaje para enviar a otras partes del código"
+    "description": "[error] No se encontró ningún mensaje para enviar a otras partes del código."
   },
   "cxm_open_other_org": {
     "message": "🔗 Abrir en otra Org",
@@ -355,7 +355,7 @@
     "description": "[context-menu]"
   },
   "cxm_move_first": {
-    "message": "↩️ Poner primero",
+    "message": "↩️ Colocar primero",
     "description": "[context-menu]"
   },
   "cxm_move_left": {
@@ -367,43 +367,43 @@
     "description": "[context-menu]"
   },
   "cxm_move_last": {
-    "message": "↪️ Poner al final",
+    "message": "↪️ Colocar al final",
     "description": "[context-menu]"
   },
   "cxm_remove": {
-    "message": "💥 Eliminar Tab",
+    "message": "💥 Eliminar Tab(s)",
     "description": "[context-menu]"
   },
   "cxm_remove_tab": {
-    "message": "1️⃣ Esta Tab",
+    "message": "1️⃣ Este Tab",
     "description": "[context-menu]"
   },
   "cxm_remove_other_tabs": {
-    "message": "↔️ Otras Tab",
+    "message": "↔️ Otros Tabs",
     "description": "[context-menu]"
   },
   "cxm_remove_left_tabs": {
-    "message": "🔥 Tab a la izquierda",
+    "message": "🔥 Tabs a la izquierda",
     "description": "[context-menu]"
   },
   "cxm_remove_right_tabs": {
-    "message": "🌊 Tab a la derecha",
+    "message": "🌊 Tabs a la derecha",
     "description": "[context-menu]"
   },
   "cxm_empty_no_org_tabs": {
-    "message": "👀 Todas las Tab visibles",
+    "message": "👀 Todos los Tabs visibles",
     "description": "[context-menu]"
   },
   "cxm_empty_tabs": {
-    "message": "😨 Reiniciar a los valores predeterminados",
+    "message": "😨 Restablecer a predeterminado",
     "description": "[context-menu]"
   },
   "cxm_import_tabs": {
-    "message": "🆙 Importar Tab",
+    "message": "🆙 Importar Tabs",
     "description": "[context-menu]"
   },
   "cxm_export_tabs": {
-    "message": "⬇️ Exportar Tab",
+    "message": "⬇️ Exportar Tabs",
     "description": "[context-menu]"
   },
   "cxm_page_save_tab": {
@@ -415,15 +415,55 @@
     "description": "[context-menu]"
   },
   "error_cxm_create": {
-    "message": "Error al crear los elementos del menú",
-    "description": "[error] no se pudieron inicializar los elementos del menú contextual"
+    "message": "Error al crear elementos del menú",
+    "description": "[error] No se pudieron inicializar los elementos del menú contextual."
   },
   "error_cxm_remove": {
-    "message": "Error al eliminar los elementos del menú",
-    "description": "[error] no se pudieron eliminar los elementos del menú contextual"
+    "message": "Error al eliminar elementos del menú",
+    "description": "[error] No se pudieron eliminar los elementos del menú contextual."
   },
   "error_cxm_check": {
-    "message": "Error al verificar los elementos del menú",
-    "description": "[error] no se pudieron encontrar los elementos del menú contextual"
+    "message": "Error al verificar elementos del menú",
+    "description": "[error] No se pudieron encontrar los elementos del menú contextual."
+  },
+  "cancel_close": {
+    "message": "Cancelar y cerrar",
+    "description": "Título o texto para el botón de cerrar modales"
+  },
+  "cancel": {
+    "message": "Cancelar",
+    "description": "Título o texto para botones que impiden que se ejecute la acción actual"
+  },
+  "continue": {
+    "message": "Continuar",
+    "description": "Texto para botones que permiten que se ejecute la acción actual"
+  },
+  "import_duplicate_description": {
+    "message": "Los Tabs duplicados serán ignorados.<br />Dos Tabs se consideran duplicados si tienen la misma URL.",
+    "description": "[import] Descripción del proceso de importación"
+  },
+  "upload": {
+    "message": "Subir",
+    "description": "[import] Permite al usuario buscar y seleccionar archivos"
+  },
+  "or_drop": {
+    "message": "O soltar",
+    "description": "[import] Permite al usuario arrastrar y soltar archivos"
+  },
+  "file": {
+    "message": "archivo",
+    "description": "Archivo individual"
+  },
+  "files": {
+    "message": "archivos",
+    "description": "Varios archivos"
+  },
+  "import_tabs": {
+    "message": "Importar Tabs",
+    "description": "[modal-title] Para el proceso de importación"
+  },
+  "import_successful": {
+    "message": "Importación exitosa",
+    "description": "[import] La importación se completó; se mostrará la cantidad de registros importados"
   }
 }

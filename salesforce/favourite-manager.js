@@ -1,4 +1,5 @@
 "use strict";
+import Tab from "/tab.js";
 import { EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
 import { ensureTranslatorAvailability } from "/translator.js";
 
@@ -230,7 +231,7 @@ async function actionFavourite() {
 export async function showFavouriteButton(count = 0) {
 	if (count > 5) {
         const translator = await ensureTranslatorAvailability();
-        const failHead = translator.translate("error_no_headers");
+        const failHead = await translator.translate("error_no_headers");
 		console.error(`${EXTENSION_LABEL} - ${failHead}`);
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}

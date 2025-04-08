@@ -130,7 +130,7 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
 	const toastElement = await generateSldsToastMessage(
-		message,
+		message instanceof Array ? message : [message],
 		isSuccess,
 		isWarning,
 	);
@@ -471,11 +471,11 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		lastInput = value;
 	});
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
-			return showToast(["insert_another", "org_link."], false, true);
+			return showToast(["insert_another", "org_link"], false, true);
 		}
 		let alreadyExtracted = false;
 		const newTarget = Tab.extractOrgName(inputVal);
@@ -499,7 +499,8 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 				!url.startsWith("/") ? SETUP_LIGHTNING : ""
 			}${url}`,
 		);
-		if (confirm(["confirm_another_org", targetUrl])) {
+        const confirm_msg = await translator.translate(["confirm_another_org", targetUrl]);
+		if (confirm(confirm_msg)) {
 			closeButton.click();
 			open(targetUrl, "_blank");
 		}

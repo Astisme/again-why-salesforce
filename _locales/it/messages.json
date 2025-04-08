@@ -140,7 +140,7 @@
     "description": "[input-label]"
   },
   "other_org_placeholder": {
-    "message": "other-org",
+    "message": "altra-org",
     "description": "[input-placeholder]"
   },
   "overwrite_tabs": {
@@ -395,7 +395,7 @@
     "description": "[context-menu]"
   },
   "cxm_empty_tabs": {
-    "message": "😨 Ripristina impostazioni predefinite",
+    "message": "😨 Ripristina Tab predefinite",
     "description": "[context-menu]"
   },
   "cxm_import_tabs": {
@@ -425,5 +425,45 @@
   "error_cxm_check": {
     "message": "Errore nel controllo degli elementi del menu",
     "description": "[error] non è stato possibile trovare gli elementi del menu contestuale"
-  }
+  },
+    "cancel_close": {
+		"message":  "Cancella e chiudi",
+		"description": "titolo o testo per il bottone di chiusura dei modali"
+    },
+    "cancel": {
+		"message":  "Cancella",
+        "description": "titolo o testo per i bottoni che evitano che l'azione corrente venga eseguita"
+    },
+    "continue": {
+		"message":  "Continua",
+        "description": "testo per i bottoni che permettono all'azione corrente di essere eseguita"
+    },
+    "import_duplicate_description": {
+		"message":  "I Tab duplicati verranno ignorati.<br />Due Tab sono considerati duplicati se hanno lo stesso URL.",
+        "description": "[import] descrizione di cosa faccia il processo d'importazione"
+    },
+    "upload": {
+		"message":  "Carica",
+        "description": "[import] permetti all'utente di cercare tra i propri file e scegliere quello giusto"
+    },
+    "or_drop": {
+		"message":  "O rilascia",
+        "description": "[import] permetti all'utente di muovere file con il mouse e di rilasciarli"
+    },
+    "file": {
+		"message":  "un file",
+        "description": "singolo file"
+    },
+    "files": {
+		"message":  "più file",
+        "description": "molteplici file"
+    },
+    "import_tabs": {
+		"message":  "Importa Tab",
+        "description": "[modal-title] per il processo d'importazione"
+    },
+    "import_successful": {
+		"message":  "Importati con successo",
+        "description": "[import] il processo d'importazione è stato completato. Dopo questo, un numero che riporta quanti record siano stati importati verrà mostrato"
+    }
 }

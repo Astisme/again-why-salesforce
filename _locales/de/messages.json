@@ -1,51 +1,51 @@
 {
   "extension_label": {
     "message": "Again, Why Salesforce",
-    "description": "Der Name dieser Erweiterung"
+    "description": "[manifest] Der Name dieser Erweiterung"
   },
   "extension_description": {
-    "message": "Erstellen und verwalten Sie benutzerdefinierte Tabs im verfügbaren Bereich der Salesforce Lightning Setup-Seite.",
-    "description": "[manifest] Die Beschreibung dieser Erweiterung"
+    "message": "Erstellen und verwalten von benutzerdefinierten Tabs im verfügbaren Bereich auf der Salesforce Lightning Setup-Seite.",
+    "description": "[manifest] Beschreibung dieser Erweiterung"
   },
   "theme_light": {
-    "message": "Thema auf Hell ändern",
-    "description": "[popup] Titel auf der Sonne, um das Thema zu wechseln"
+    "message": "Thema auf Hell wechseln",
+    "description": "[popup] Titel auf der Sonne zum Wechseln des Themas"
   },
   "theme_dark": {
-    "message": "Thema auf Dunkel ändern",
-    "description": "[popup] Titel auf dem Mond, um das Thema zu wechseln"
+    "message": "Thema auf Dunkel wechseln",
+    "description": "[popup] Titel auf dem Mond zum Wechseln des Themas"
   },
   "export_title": {
     "message": "Alle Tabs exportieren",
-    "description": "[popup] Titel auf dem Export-Button"
+    "description": "[popup] Titel auf dem Export-Knopf"
   },
   "export": {
     "message": "Exportieren",
-    "description": "[popup] Export-Button"
+    "description": "[popup] Export-Knopf"
   },
   "import_title": {
-    "message": "Tabs aus einer JSON-Datei importieren",
-    "description": "[popup] Titel auf dem Import-Button"
+    "message": "Tabs aus JSON-Datei importieren",
+    "description": "[popup] Titel auf dem Import-Knopf"
   },
   "import": {
     "message": "Importieren",
-    "description": "[popup] Import-Button"
+    "description": "[popup] Import-Knopf"
   },
   "delete_all": {
     "message": "Alle Tabs löschen",
-    "description": "[popup] Titel auf dem Papierkorb, um alle Tabs zu leeren"
+    "description": "[popup] Titel auf dem Papierkorb zum Leeren aller Tabs"
   },
   "table_label": {
     "message": "Tab-Bezeichnung",
-    "description": "[popup] Spaltenüberschrift für den Namen der Tab"
+    "description": "[popup] Spaltenüberschrift für den Namen des Tabs"
   },
   "table_url": {
     "message": "Tab-URL",
-    "description": "[popop] Spaltenüberschrift für die URL der Tab"
+    "description": "[popup] Spaltenüberschrift für die URL des Tabs"
   },
   "table_org": {
-    "message": "Ist Tab Org",
-    "description": "[popup] Hilfetext für die Spalte mit der Org-Checkbox"
+    "message": "Ist Org Tab",
+    "description": "[popup] Hilfetext für die Spalte mit dem Org-Kontrollkästchen"
   },
   "table_delete": {
     "message": "Tab löschen",
@@ -53,31 +53,31 @@
   },
   "table_row_label": {
     "message": "Geben Sie die Bezeichnung für diese URL ein",
-    "description": "[popup] Eingabefeld mit dem Namen der Tab"
+    "description": "[popup] Eingabefeld für den Namen des Tabs"
   },
   "table_row_url": {
-    "message": "Geben Sie den sub_URL ein, zu dem Sie weitergeleitet werden möchten.",
-    "description": "[popup] Eingabefeld mit der URL der Tab"
+    "message": "Geben Sie die sub_URL ein, zu der Sie weitergeleitet werden möchten.",
+    "description": "[popup] Eingabefeld für die URL des Tabs"
   },
   "table_row_org": {
-    "message": "Klicken Sie, wenn Sie möchten, dass diese Tab nur für diese Org verfügbar ist.",
-    "description": "[popup] Kontrollkästchen, um die Tab organisationsspezifisch zu machen"
+    "message": "Klicken Sie, wenn dieser Tab nur für diese Org verfügbar sein soll.",
+    "description": "[popup] Kontrollkästchen, um den Tab als Org-spezifisch zu kennzeichnen"
   },
   "table_row_org_name": {
-    "message": "Die Org, für die diese Tab verfügbar ist.",
-    "description": "[popup] Eingabefeld mit dem Namen der Org"
+    "message": "Die Org, für die dieser Tab verfügbar ist.",
+    "description": "[popup] Eingabefeld für den Namen der Org"
   },
   "delete": {
     "message": "Löschen",
-    "description": "[popup] lösche eine Zeile"
+    "description": "[popup] Eine Zeile löschen"
   },
   "req_permissions_header": {
-    "message": "Bitte erlauben Sie uns den automatischen Zugriff auf<br />Salesforce Setup-Seiten.",
+    "message": "Bitte erlauben Sie uns den automatischen Zugriff<br />auf Salesforce Setup-Seiten.",
     "description": "[req_permission] Kopfzeile der Seite zur Anforderung von Berechtigungen"
   },
   "req_permissions_paragraph": {
-    "message": "Wenn Sie möchten, erscheinen Ihre bevorzugten Tabs sofort,<br />sobald Sie zu einer Salesforce Setup-Seite navigieren,<br />ohne dass Sie diese Erweiterung jedes Mal anklicken müssen.",
-    "description": "[req_permission] Text, um zu erklären, warum Berechtigungen angefordert werden"
+    "message": "Wenn Sie möchten, können Ihre favorisierten Tabs sofort erscheinen,<br />sobald Sie eine Salesforce Setup-Seite aufrufen,<br />ohne dass Sie diese Erweiterung jedes Mal anklicken müssen.",
+    "description": "[req_permission] Erklärung, warum Berechtigungen angefordert werden"
   },
   "skip": {
     "message": "Überspringen",
@@ -89,50 +89,50 @@
   },
   "req_permissions_dont_ask": {
     "message": "Nicht erneut fragen.",
-    "description": "[req_permission] Bezeichnung, wenn der Benutzer dauerhaft keine Berechtigungen erteilen möchte"
+    "description": "[req_permission] Beschriftung, wenn der Benutzer dauerhaft nicht gefragt werden möchte"
   },
   "nss_prefix": {
     "message": "Dies ist kein ",
-    "description": "[notSalesforceSetup] Dies ist das Präfix, das angezeigt wird, wenn sich der Benutzer nicht auf einer Salesforce-Seite befindet. Bitte stellen Sie sicher, dass am Ende der Nachricht ein Leerzeichen steht"
+    "description": "[notSalesforceSetup] Präfix, wenn der Benutzer nicht auf einer Salesforce-Seite ist; bitte am Ende ein Leerzeichen einfügen"
   },
   "salesforce_lightning": {
     "message": "Salesforce Lightning",
-    "description": "[notSalesforceSetup] die Salesforce Lightning-Plattform"
+    "description": "[notSalesforceSetup] Die Salesforce Lightning Plattform"
   },
   "setup_page": {
     "message": "Setup-Seite",
-    "description": "[notSalesforceSetup] die Seite, die zur Änderung der Salesforce-Einstellungen verwendet wird"
+    "description": "[notSalesforceSetup] Seite zur Änderung der Salesforce-Einstellungen"
   },
   "invalid_url": {
     "message": "Ungültige URL",
-    "description": "[notSalesforceSetup] eine ungültige URL"
+    "description": "[notSalesforceSetup] Eine URL, die nicht gültig ist"
   },
   "nss_detected": {
     "message": " erkannt.",
-    "description": "[notSalesforceSetup] etwas, das gefunden wurde. Bitte stellen Sie sicher, dass am Anfang der Nachricht ein Leerzeichen steht."
+    "description": "[notSalesforceSetup] Etwas wurde erkannt; bitte am Anfang ein Leerzeichen einfügen"
   },
   "login_to_salesforce": {
     "message": "Bei Salesforce anmelden",
-    "description": "[notSalesforceSetup] Aufruf zur Aktion auf einem Button, um den Benutzer zur Salesforce-Login-Seite weiterzuleiten"
+    "description": "[notSalesforceSetup] Aufruf zur Anmeldung bei Salesforce"
   },
   "open_setup": {
     "message": "Setup öffnen",
-    "description": "[notSalesforceSetup] Aufruf zur Aktion auf einem Button, um den Benutzer zur Salesforce Setup-Seite weiterzuleiten"
+    "description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
   },
   "error_missing_key": {
-    "message": "Schlüssel nirgendwo gefunden",
-    "description": "[error] keine Übersetzung in den Dateien gefunden"
+    "message": "Schlüssel wurde nirgends gefunden",
+    "description": "[error] Übersetzung in den Dateien nicht gefunden"
   },
   "required": {
     "message": "erforderlich",
-    "description": "[input] kennzeichnet ein Eingabefeld als erforderlich"
+    "description": "[input] Markiert ein Eingabefeld als erforderlich"
   },
   "required_info": {
     "message": "= Erforderliche Informationen",
-    "description": "[modal] weist den Benutzer darauf hin, dass bestimmte Informationen erforderlich sind"
+    "description": "[modal] Zeigt an, dass bestimmte Informationen notwendig sind"
   },
   "other_org_info": {
-    "message": "Andere Org-Informationen",
+    "message": "Weitere Org-Informationen",
     "description": "[modal-title]"
   },
   "org_link": {
@@ -140,211 +140,211 @@
     "description": "[input-label]"
   },
   "other_org_placeholder": {
-    "message": "other-org",
+    "message": "andere-org",
     "description": "[input-placeholder]"
   },
   "overwrite_tabs": {
     "message": "Gespeicherte Tabs überschreiben.",
-    "description": "[label] löscht alle gespeicherten Tabs während des Importvorgangs"
+    "description": "[label] Löscht alle gespeicherten Tabs während des Importvorgangs"
   },
   "preserve_org_tabs": {
     "message": "Tabs für andere Orgs beibehalten.",
-    "description": "[label] behält alle org-spezifischen Tabs während des Importvorgangs bei"
+    "description": "[label] Behält org-spezifische Tabs während des Importvorgangs bei"
   },
   "tabs_saved": {
     "message": "Tabs gespeichert.",
-    "description": "[toast] die Tabs wurden erfolgreich gespeichert."
+    "description": "[toast] Tabs wurden erfolgreich gespeichert."
   },
   "error_no_setup_tab": {
     "message": "Setup-Tab konnte nicht gefunden werden.",
-    "description": "[error] Die Erweiterung konnte nicht finden, wo die favorisierten Tabs platziert werden sollen."
+    "description": "[error] Die Erweiterung konnte den Platz für die favorisierten Tabs nicht finden."
   },
   "error_close_other_modal": {
     "message": "Schließen Sie zuerst das andere Modal!",
-    "description": "[toast] der Benutzer versuchte, mehr als ein Modal zu öffnen"
+    "description": "[toast] Es wurde versucht, mehr als ein Modal zu öffnen."
   },
   "error_link_with_id": {
-    "message": "Diese Seite kann in einer anderen Org nicht existieren, da sie eine ID enthält!",
-    "description": "[open-other-org-modal] Warnung an den Benutzer, dass der Link in einer anderen Org möglicherweise nicht existiert"
+    "message": "Diese Seite kann in einer anderen Org nicht existieren, weil sie eine Id enthält!",
+    "description": "[open-other-org-modal] Warnung, dass der Link in einer anderen Org möglicherweise nicht existiert."
   },
   "where_to": {
-    "message": "Wo?",
-    "description": "[open-other-org-modal] Ersatztitel für das Modal"
+    "message": "Wohin?",
+    "description": "[open-other-org-modal] Alternativer Titel für das Modal."
   },
   "insert_another": {
-    "message": "Fügen Sie einen weiteren ein",
-    "description": "[error-open-other-org-modal] Nachricht, wenn der Benutzer dieselbe Org im Modal eingibt"
+    "message": "Weiteren einfügen",
+    "description": "[error-open-other-org-modal] Nachricht, wenn dieselbe Org im Modal eingegeben wird."
   },
   "insert_valid_org": {
     "message": "Bitte geben Sie eine gültige Org ein!",
-    "description": "[error-open-other-org-modal] Nachricht, wenn der Benutzer eine falsche URL im Modal eingibt"
+    "description": "[error-open-other-org-modal] Nachricht, wenn eine fehlerhafte URL eingegeben wird."
   },
   "insert_another_org": {
     "message": "Die eingegebene Org ist die aktuelle!\nBitte geben Sie eine andere Org ein.",
-    "description": "[error-open-other-org-modal] Nachricht, wenn der Benutzer dieselbe Org im Modal eingibt"
+    "description": "[error-open-other-org-modal] Nachricht, wenn dieselbe Org eingegeben wird."
   },
   "confirm_another_org": {
-    "message": "Bestätigen Sie die Öffnung dieses Links.",
-    "description": "[open-other-org-modal] fordert den Benutzer zur Bestätigung des geöffneten Links auf"
+    "message": "Bestätigen Sie das Öffnen dieses Links.",
+    "description": "[open-other-org-modal] Fordert den Benutzer auf, den Öffnungsvorgang des erstellten Links zu bestätigen."
   },
   "no_match": {
-    "message": "Keine passende Aktion gefunden",
-    "description": "[error] in Salesforce, wenn keine passende Aktion gefunden wird"
+    "message": "Keine Aktion gefunden, die übereinstimmt",
+    "description": "[error] In Salesforce stimmt die angeforderte Aktion mit keiner verfügbaren Aktion überein."
   },
   "successfully_imported": {
     "message": "Erfolgreich importiert",
-    "description": "[toast] der Benutzer hat Tabs aus einer externen Datei hinzugefügt"
+    "description": "[toast] Der Benutzer hat Tabs aus einer externen Datei hinzugefügt."
   },
   "tabs": {
     "message": "Tabs",
-    "description": "die favorisierten Links des Benutzers"
+    "description": "Die favorisierten Links des Benutzers."
   },
   "warn_deprecated_tab_title": {
-    "message": "Sie haben den veralteten 'tabTitle' verwendet!\nDer Download der aktualisierten Datei hat begonnen.\nBitte verwenden Sie ab sofort die neu heruntergeladene Datei.\nDie Nutzung dieser Datei wird in einer zukünftigen Version eingestellt.",
-    "description": "[warning] erklärt dem Benutzer, dass die importierte Datei eine veraltete Eigenschaft verwendet"
+    "message": "Sie haben den veralteten 'tabTitle' verwendet!\nDer Download der aktualisierten Datei hat begonnen.\nBitte verwenden Sie ab sofort die neu heruntergeladene Datei.\nDie Verwendung dieser Datei wird in einer späteren Version eingestellt.",
+    "description": "[warning] Erklärt dem Benutzer, dass die importierte Datei eine veraltete Eigenschaft verwendet."
   },
   "error_import": {
-    "message": "Fehler während des Imports:\n",
-    "description": "[error] es trat ein Fehler während des Importvorgangs auf"
+    "message": "Fehler beim Import:\n",
+    "description": "[error] Während des Importvorgangs ist ein Fehler aufgetreten."
   },
   "import_invalid_file": {
-    "message": "Ungültiger Dateityp.\nEs werden nur JSON-Dateien unterstützt.",
-    "description": "[error] die zum Import verwendete Datei ist kein JSON"
+    "message": "Ungültiger Dateityp.\nNur JSON-Dateien werden unterstützt.",
+    "description": "[error] Die für den Import verwendete Datei ist kein JSON."
   },
   "save_tab": {
     "message": "Als Tab speichern",
-    "description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden"
+    "description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
   },
   "remove_tab": {
     "message": "Tab entfernen",
-    "description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden"
+    "description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
   },
   "error_missing_favourite_id": {
-    "message": "Favoritenbild kann ohne ID nicht abgerufen werden",
-    "description": "[error] es wurde keine Favoriten-ID übergeben"
+    "message": "Favoritenbild kann ohne Id nicht abgerufen werden",
+    "description": "[error] Es wurde keine Favoriten-Id übergeben."
   },
   "error_remove_not_favourite": {
-    "message": "Es kann keine nicht favorisierte Tab entfernt werden!",
-    "description": "[error] der Benutzer versuchte, eine Tab zu entfernen, die noch nicht gespeichert war"
+    "message": "Nicht-favoritärer Tab kann nicht entfernt werden!",
+    "description": "[error] Es wurde versucht, einen Tab zu entfernen, der noch nicht gespeichert ist."
   },
   "error_no_headers": {
     "message": "Kopfzeilen konnten nicht gefunden werden.",
-    "description": "[error] die Erweiterung konnte nicht finden, wo der Favoriten-Button platziert werden soll"
+    "description": "[error] Die Erweiterung konnte nicht finden, wo der Favoriten-Button platziert werden soll."
   },
   "error_useless_save": {
-    "message": "Speichern nicht möglich:\nDiese Seite wurde bereits gespeichert!",
-    "description": "[error] der Benutzer versuchte, eine bereits gespeicherte Seite zu speichern"
+    "message": "Kann nicht gespeichert werden:\nDiese Seite wurde bereits gespeichert!",
+    "description": "[error] Es wurde versucht, eine Seite zu speichern, die bereits gespeichert wurde."
   },
   "error_useless_remove": {
-    "message": "Entfernen nicht möglich:\nEine Seite, die noch nie gespeichert wurde, kann nicht entfernt werden",
-    "description": "[error] der Benutzer versuchte, eine noch nicht gespeicherte Seite zu entfernen"
+    "message": "Kann nicht entfernt werden:\nEine Seite, die nie gespeichert wurde, kann nicht entfernt werden.",
+    "description": "[error] Es wurde versucht, eine Seite zu entfernen, die noch nicht gespeichert wurde."
   },
   "error_tab_object_creation": {
-    "message": "Beim Aufruf mit einem Objekt darf nichts Weiteres übergeben werden.",
-    "description": "[error] Implementierungsfehler des Entwicklers"
+    "message": "Beim Aufruf mit einem Objekt dürfen keine zusätzlichen Parameter übergeben werden.",
+    "description": "[error] Implementierungsfehler des Entwicklers."
   },
   "error_tab_unexpected_keys": {
     "message": "Unerwartete Schlüssel gefunden:",
-    "description": "[error] der Benutzer versuchte, eine Tab mit nicht unterstützten Eigenschaften zu erstellen"
+    "description": "[error] Es wurde versucht, einen Tab mit nicht unterstützten Eigenschaften zu erstellen."
   },
   "error_tab_label": {
-    "message": "Das Label muss eine nicht leere Zeichenkette sein",
-    "description": "[error] der Benutzer versuchte, eine Tab ohne Label zu erstellen"
+    "message": "Die Bezeichnung muss eine nicht leere Zeichenkette sein",
+    "description": "[error] Es wurde versucht, einen Tab ohne Bezeichnung zu erstellen."
   },
   "error_tab_url": {
     "message": "Die URL muss eine nicht leere Zeichenkette sein",
-    "description": "[error] der Benutzer versuchte, eine Tab ohne URL zu erstellen"
+    "description": "[error] Es wurde versucht, einen Tab ohne URL zu erstellen."
   },
   "error_tab_org": {
-    "message": "Die Org muss eine Zeichenkette oder undefiniert sein",
-    "description": "[error] der Benutzer versuchte, eine Tab mit einem ungültigen Org-Wert zu erstellen"
+    "message": "Org muss eine Zeichenkette oder undefiniert sein",
+    "description": "[error] Es wurde versucht, einen Tab mit einem ungültigen Org-Wert zu erstellen."
   },
   "error_minify_url": {
-    "message": "Ein leerer URL kann nicht minimiert werden!",
-    "description": "[error] es wurde kein URL zum Minimieren übergeben"
+    "message": "Eine leere URL kann nicht verkleinert werden!",
+    "description": "[error] Es wurde keine URL zum Verkleinern übergeben."
   },
   "error_expand_url_no_base": {
-    "message": "Ein URL ohne Host kann nicht erweitert werden!",
-    "description": "[error] es wurde kein Basis-URL zum Erweitern übergeben"
+    "message": "Eine URL ohne Host kann nicht erweitert werden!",
+    "description": "[error] Es wurde keine Basis-URL zum Erweitern übergeben."
   },
   "error_expand_url": {
-    "message": "Ein leerer URL kann nicht erweitert werden!",
-    "description": "[error] es wurde kein URL zum Erweitern übergeben"
+    "message": "Eine leere URL kann nicht erweitert werden!",
+    "description": "[error] Es wurde keine URL zum Erweitern übergeben."
   },
   "error_no_url": {
-    "message": "Kein URL zum Überprüfen!",
-    "description": "[error] es wurde kein URL zum Überprüfen übergeben"
+    "message": "Keine URL zum Überprüfen vorhanden!",
+    "description": "[error] Es wurde keine URL zum Überprüfen übergeben."
   },
   "error_extract_empty_url": {
-    "message": "Aus einem leeren URL kann kein Org-Name extrahiert werden!",
-    "description": "[error] es wurde kein URL übergeben, aus dem der Org-Name extrahiert werden kann"
+    "message": "Aus einer leeren URL kann kein Org-Name extrahiert werden!",
+    "description": "[error] Es wurde keine URL übergeben, um den Org-Namen zu extrahieren."
   },
   "error_no_object": {
-    "message": "Kein Objekt zum Überprüfen!",
-    "description": "[error] es wurde kein Objekt übergeben"
+    "message": "Kein Objekt zum Überprüfen vorhanden!",
+    "description": "[error] Es wurde kein Objekt übergeben."
   },
   "error_invalid_tab": {
-    "message": "Ungültige Tab",
-    "description": "[error] die Tab ist ungültig"
+    "message": "Ungültiger Tab",
+    "description": "[error] Der Tab ist ungültig."
   },
   "error_tabcont_initialize": {
-    "message": "Beim Aufruf mit einem Objekt darf nichts Weiteres übergeben werden."
+    "message": "Kann nicht initialisiert werden mit"
   },
   "error_duplicate_tab": {
-    "message": "Diese Tab existiert bereits",
-    "description": "[error] die Tab ist dupliziert"
+    "message": "Dieser Tab existiert bereits",
+    "description": "[error] Der Tab ist dupliziert."
   },
   "error_get_with_no_org": {
     "message": "Tabs können nicht abgerufen werden, wenn keine Org angegeben ist.",
-    "description": "[error] Versuch, Tabs nach Org zu suchen, ohne Org-Informationen zu übermitteln"
+    "description": "[error] Es wurde versucht, Tabs ohne Org-Information abzurufen."
   },
   "error_no_data": {
-    "message": "Es können keine Tabs ohne Daten identifiziert werden.",
-    "description": "[error] Versuch, eine Tab ohne übermittelte Daten abzurufen"
+    "message": "Tab kann ohne Daten nicht identifiziert werden.",
+    "description": "[error] Es wurden keine Daten zum Identifizieren des Tabs übergeben."
   },
   "error_tab_not_found": {
     "message": "Tab wurde nicht gefunden.",
-    "description": "[error] die Tab war nicht im Array enthalten"
+    "description": "[error] Der Tab ist in der Liste nicht enthalten."
   },
   "error_sync_nothing": {
-    "message": "Es können keine leeren Tabs synchronisiert werden!",
-    "description": "[error] Versuch, nichts zu synchronisieren"
+    "message": "Leere Tabs können nicht synchronisiert werden!",
+    "description": "[error] Es wurde versucht, nichts zu synchronisieren."
   },
   "error_no_array": {
-    "message": "Ungültiges Array oder kein Array übergeben",
-    "description": "[error] es wurde kein gültiges Array übermittelt"
+    "message": "Ungültiges Array oder kein Array wurde übergeben",
+    "description": "[error] Es wurde kein gültiges Array übergeben."
   },
   "error_tabcont_invalid_tabs": {
-    "message": "Ungültige Tab(s) erkannt.\nErste Vorkommnis:",
-    "description": "[error] es wurden ungültige Tabs übermittelt"
+    "message": "Ungültige Tabs erkannt.\nErstes Vorkommen:",
+    "description": "[error] Es wurden ungültige Tabs übergeben."
   },
   "tab_explain": {
-    "message": "Jedes Element muss 'label' und 'url' als Zeichenketten enthalten. Zusätzlich kann jedes Element ein 'org' als Zeichenkette enthalten.",
-    "description": "[error] erklärt, wie eine Tab aufgebaut sein muss"
+    "message": "Jedes Element muss 'label' und 'url' als Zeichenketten enthalten. Zusätzlich kann jedes Element ein 'org' als Zeichenkette haben.",
+    "description": "[error] Erklärt, wie ein Tab aufgebaut sein muss."
   },
   "error_no_matching_tab": {
-    "message": "Keine passende Tab gefunden.",
-    "description": "[error] es wurden keine Tabs abgerufen"
+    "message": "Es wurden keine übereinstimmenden Tabs gefunden.",
+    "description": "[error] Es wurden keine passenden Tabs abgerufen."
   },
   "error_many_matching_tab": {
-    "message": "Mehr als eine passende Tab gefunden.",
-    "description": "[error] es wurden zu viele Tabs abgerufen"
+    "message": "Es wurden mehr als ein übereinstimmender Tab gefunden.",
+    "description": "[error] Es wurden mehrere passende Tabs abgerufen."
   },
   "error_no_callback": {
-    "message": "Bitte geben Sie einen Callback an",
-    "description": "[error] es wurde keine Callback-Funktion übergeben"
+    "message": "Bitte stellen Sie einen Callback bereit",
+    "description": "[error] Es wurde keine Callback-Funktion übergeben."
   },
   "error_no_cookies": {
-    "message": "Keine passenden Cookies gefunden",
-    "description": "[error] es wurden keine Salesforce-Cookies zurückgegeben"
+    "message": "Es wurden keine passenden Cookies gefunden",
+    "description": "[error] Es wurden keine Salesforce-Cookies zurückgegeben."
   },
   "error_no_browser_tab": {
-    "message": "Aktuelle Browser-Tab konnte nicht gefunden werden.",
-    "description": "[error] die Hintergrundseite konnte keine aktive Browser-Tab ermitteln"
+    "message": "Aktueller Browser-Tab konnte nicht gefunden werden.",
+    "description": "[error] Es wurde kein aktiver Browser-Tab gefunden."
   },
   "error_no_message": {
-    "message": "Es wurde kein Nachricht zum Senden angegeben.",
-    "description": "[error] es wurde kein Nachricht gefunden, das an andere Code-Bereiche gesendet werden soll"
+    "message": "Es wurde keine Nachricht zum Senden angegeben.",
+    "description": "[error] Es wurde keine Nachricht definiert, die an andere Codeteile gesendet werden soll."
   },
   "cxm_open_other_org": {
     "message": "🔗 In einer anderen Org öffnen",
@@ -355,7 +355,7 @@
     "description": "[context-menu]"
   },
   "cxm_move_first": {
-    "message": "↩️ An erste Stelle setzen",
+    "message": "↩️ Als Ersten platzieren",
     "description": "[context-menu]"
   },
   "cxm_move_left": {
@@ -367,15 +367,15 @@
     "description": "[context-menu]"
   },
   "cxm_move_last": {
-    "message": "↪️ An letzte Stelle setzen",
+    "message": "↪️ Als Letzten platzieren",
     "description": "[context-menu]"
   },
   "cxm_remove": {
-    "message": "💥 Tab entfernen",
+    "message": "💥 Tab(s) entfernen",
     "description": "[context-menu]"
   },
   "cxm_remove_tab": {
-    "message": "1️⃣ Diese Tab",
+    "message": "1️⃣ Diesen Tab",
     "description": "[context-menu]"
   },
   "cxm_remove_other_tabs": {
@@ -383,11 +383,11 @@
     "description": "[context-menu]"
   },
   "cxm_remove_left_tabs": {
-    "message": "🔥 Tabs nach links",
+    "message": "🔥 Tabs links",
     "description": "[context-menu]"
   },
   "cxm_remove_right_tabs": {
-    "message": "🌊 Tabs nach rechts",
+    "message": "🌊 Tabs rechts",
     "description": "[context-menu]"
   },
   "cxm_empty_no_org_tabs": {
@@ -415,15 +415,55 @@
     "description": "[context-menu]"
   },
   "error_cxm_create": {
-    "message": "Fehler beim Erstellen der Menüelemente",
-    "description": "[error] die Kontextmenü-Elemente konnten nicht initialisiert werden"
+    "message": "Fehler beim Erstellen der Menüpunkte",
+    "description": "[error] Die Menüpunkte des Kontextmenüs konnten nicht initialisiert werden."
   },
   "error_cxm_remove": {
-    "message": "Fehler beim Entfernen der Menüelemente",
-    "description": "[error] die Kontextmenü-Elemente konnten nicht entfernt werden"
+    "message": "Fehler beim Entfernen der Menüpunkte",
+    "description": "[error] Die Menüpunkte des Kontextmenüs konnten nicht entfernt werden."
   },
   "error_cxm_check": {
-    "message": "Fehler beim Überprüfen der Menüelemente",
-    "description": "[error] die Kontextmenü-Elemente konnten nicht gefunden werden"
+    "message": "Fehler bei der Überprüfung der Menüpunkte",
+    "description": "[error] Die Menüpunkte des Kontextmenüs konnten nicht gefunden werden."
+  },
+  "cancel_close": {
+    "message": "Abbrechen und schließen",
+    "description": "Titel oder Text für den Schließknopf von Modals"
+  },
+  "cancel": {
+    "message": "Abbrechen",
+    "description": "Titel oder Text für Schaltflächen, die die aktuelle Aktion verhindern"
+  },
+  "continue": {
+    "message": "Fortfahren",
+    "description": "Text für Schaltflächen, die die aktuelle Aktion erlauben"
+  },
+  "import_duplicate_description": {
+    "message": "Doppelte Tabs werden ignoriert.<br />Zwei Tabs gelten als Duplikate, wenn sie dieselbe URL haben.",
+    "description": "[import] Beschreibung des Importprozesses"
+  },
+  "upload": {
+    "message": "Hochladen",
+    "description": "[import] Ermöglicht es dem Benutzer, durch seine Dateien zu stöbern und die richtige auszuwählen"
+  },
+  "or_drop": {
+    "message": "Oder ablegen",
+    "description": "[import] Ermöglicht es dem Benutzer, Dateien mit der Maus zu verschieben und loszulassen"
+  },
+  "file": {
+    "message": "Datei",
+    "description": "Einzelne Datei"
+  },
+  "files": {
+    "message": "Dateien",
+    "description": "Mehrere Dateien"
+  },
+  "import_tabs": {
+    "message": "Tabs importieren",
+    "description": "[modal-title] für den Importprozess"
+  },
+  "import_successful": {
+    "message": "Erfolgreich importiert",
+    "description": "[import] Der Import wurde abgeschlossen. Anschließend wird die Anzahl der importierten Datensätze angezeigt"
   }
 }

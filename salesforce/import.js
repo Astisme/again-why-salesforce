@@ -56,7 +56,7 @@ const reader = new FileReader();
 async function generateSldsImport() {
     const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
-		"Import Tabs",
+		await translator.translate("import_tabs"),
 	);
 	closeButton.id = CLOSE_MODAL_ID;
 	const { section, divParent } = await generateSection();
@@ -110,7 +110,7 @@ reader.onload = async (e) => {
 		);
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
-		showToast(["Successfully imported", importedNum, "tabs"], true);
+		showToast(["import_successful", importedNum, "tabs"], true);
 		if (jsonString.includes("tabTitle")) {
 			// export and toast
 			chrome.runtime.sendMessage({
@@ -207,6 +207,10 @@ chrome.runtime.onMessage.addListener(function (message, _, sendResponse) {
 	}
 	if (message.what == "add") {
 		sendResponse(null);
-		showFileImport();
+        try {
+            showFileImport();
+        } catch (error) {
+            showToast(error, false);
+        }
 	}
 });

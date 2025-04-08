@@ -425,5 +425,45 @@
     "error_cxm_check": {
 		"message":  "Error checking menu items",
 		"description": "[error] the context menu items could not be found"
+    },
+    "cancel_close": {
+		"message":  "Cancel and close",
+		"description": "title or textContent for the close button of modals"
+    },
+    "cancel": {
+		"message":  "Cancel",
+        "description": "title or textContent for buttons that prevent the current action from executing"
+    },
+    "continue": {
+		"message":  "Continue",
+        "description": "textContent for buttons that allow the current action to execute"
+    },
+    "import_duplicate_description": {
+		"message":  "Duplicate tabs will be ignored.<br />Two tabs are considered duplicates if they have the same URL.",
+        "description": "[import] description of what the import process does"
+    },
+    "upload": {
+		"message":  "Upload",
+        "description": "[import] let the user browse through their files and pick the right one"
+    },
+    "or_drop": {
+		"message":  "Or drop",
+        "description": "[import] let the user move files with their mouse and release them"
+    },
+    "file": {
+		"message":  "file",
+        "description": "single file"
+    },
+    "files": {
+		"message":  "files",
+        "description": "multiple files"
+    },
+    "import_tabs": {
+		"message":  "Import Tabs",
+        "description": "[modal-title] for import process"
+    },
+    "import_successful": {
+		"message":  "Successfully imported",
+        "description": "[import] import was completed. After this, a number of how many records have been imported will be shown"
     }
 }

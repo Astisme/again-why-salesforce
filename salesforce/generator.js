@@ -1,4 +1,5 @@
 "use strict";
+import Tab from "/tab.js";
 import {
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
@@ -541,7 +542,8 @@ export async function generateSldsModal(modalTitle) {
 	modalContainer.appendChild(modalHeader);
 	const closeButton = document.createElement("button");
 	closeButton.setAttribute("type", "button");
-	closeButton.setAttribute("title", "Cancel and close");
+    const msg_cancelClose = await translator.translate("cancel_close")
+	closeButton.setAttribute("title", msg_cancelClose);
 	closeButton.classList.add(
 		"slds-button",
 		"slds-button_icon",
@@ -580,7 +582,7 @@ export async function generateSldsModal(modalTitle) {
 	closeGroupElement.appendChild(closePath);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = "Cancel and close";
+	assistiveText.textContent = msg_cancelClose;
 	closeButton.appendChild(assistiveText);
 	const modalBody = document.createElement("div");
 	modalBody.id = "content_1099:0";
@@ -775,7 +777,8 @@ export async function generateSldsModal(modalTitle) {
 	);
 	cancelButton.setAttribute("aria-live", "off");
 	cancelButton.setAttribute("type", "button");
-	cancelButton.setAttribute("title", "Cancel");
+    const msg_cancel = await translator.translate("cancel");
+	cancelButton.setAttribute("title", msg_cancel);
 	cancelButton.setAttribute("aria-label", "");
 	cancelButton.setAttribute("data-aura-rendered-by", "1364:0");
 	cancelButton.setAttribute("data-aura-class", "uiButton forceActionButton");
@@ -785,7 +788,7 @@ export async function generateSldsModal(modalTitle) {
 	cancelSpan.classList.add("label", "bBody");
 	cancelSpan.setAttribute("dir", "ltr");
 	cancelSpan.setAttribute("data-aura-rendered-by", "1367:0");
-	cancelSpan.textContent = "Cancel";
+	cancelSpan.textContent = msg_cancel;
 	cancelButton.appendChild(cancelSpan);
 	const saveButton = document.createElement("button");
 	saveButton.id = MODAL_CONFIRM_ID;
@@ -807,7 +810,7 @@ export async function generateSldsModal(modalTitle) {
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
 	saveSpan.setAttribute("data-aura-rendered-by", "1383:0");
-	saveSpan.textContent = "Continue";
+	saveSpan.textContent = await translator.translate("continue");
 	saveButton.appendChild(saveSpan);
 	/**
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
@@ -918,6 +921,7 @@ export async function generateSldsFileInput(
 			"Cannot generate a file input when the required files are not passed.",
 		);
 	}
+    const translator = await ensureTranslatorAvailability();
 	const fileInputWrapper = document.createElement("div");
 	fileInputWrapper.id = wrapperId;
 	fileInputWrapper.classList.add(
@@ -1075,7 +1079,10 @@ export async function generateSldsFileInput(
 	const buttonIcon = document.createElement("lightning-primitive-icon");
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
-	fileSelectorButtonSpan.append(`Upload File${singleFile ? "" : "s"}`);
+    const msg_upload = await translator.translate("upload");
+    const msg_file = await translator.translate("file");
+    const msg_files = await translator.translate("files");
+	fileSelectorButtonSpan.append(`${msg_upload} ${singleFile ? msg_file : msg_files}`);
 	required && fileSelectorButtonSpan.appendChild(await generateRequired());
 	const buttonSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
@@ -1105,7 +1112,8 @@ export async function generateSldsFileInput(
 			"slds-file-selector__text",
 			"slds-medium-show",
 		);
-		orDropFilesSpan.textContent = `Or drop file${singleFile ? "" : "s"}`;
+        const msg_or_drop = await translator.translate("or_drop");
+		orDropFilesSpan.textContent = `${msg_or_drop} ${singleFile ? msg_file : msg_files}`;
 		fileSelectorLabel.appendChild(orDropFilesSpan);
 	}
 	/*
@@ -1158,17 +1166,18 @@ export async function generateSldsFileInput(
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
     const translator = await ensureTranslatorAvailability();
+    const msg_label = await translator.translate(label)
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 	const checkbox = document.createElement("input");
 	checkbox.type = "checkbox";
 	checkbox.id = id;
-	checkbox.name = await translator.translate(label);
+	checkbox.name = msg_label;
 	checkbox.checked = checked;
 	checkboxLabel.appendChild(checkbox);
 	const checkboxSpan = document.createElement("span");
 	checkboxSpan.style.marginLeft = "0.5rem";
-	checkboxSpan.textContent = label;
+	checkboxSpan.textContent = msg_label;
 	checkboxLabel.append(checkboxSpan);
 	return checkboxLabel;
 }
