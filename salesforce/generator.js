@@ -1,6 +1,7 @@
 "use strict";
 import Tab from "/tab.js";
 import {
+  BROWSER,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	HTTPS,
@@ -294,6 +295,7 @@ async function generateInput({
 	prepend = null,
 	append = null,
 	style = null,
+    value = null,
 } = {}) {
     const translator = await ensureTranslatorAvailability();
 	const inputParent = document.createElement("div");
@@ -350,6 +352,7 @@ async function generateInput({
 			required = false,
 			enabled = true,
 			style = null,
+            value = null,
 		},
 	) {
 		const input = document.createElement("input");
@@ -367,8 +370,9 @@ async function generateInput({
             input.setAttribute("placeholder", tranPlaceholder);
         }
 		required && input.setAttribute("required", true);
-		enabled == false && input.setAttribute("disabled", true);
+		enabled === false && input.setAttribute("disabled", true);
 		style && (input.style = style);
+        value && (input.value = value);
 		return input;
 	}
 	if (prepend != null) {
@@ -382,6 +386,7 @@ async function generateInput({
 		placeholder,
 		required,
 		style,
+        value,
 	});
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
@@ -651,7 +656,7 @@ export async function generateSldsModal(modalTitle) {
 	titleContainer.style.justifyContent = "center";
 	article.appendChild(titleContainer);
 	const awsIcon = document.createElement("img");
-	awsIcon.src = chrome.runtime.getURL("assets/icons/awsf-128.png");
+	awsIcon.src = BROWSER.runtime.getURL("assets/icons/awsf-128.png");
 	awsIcon.style.height = "2rem";
 	titleContainer.appendChild(awsIcon);
 	const heading = document.createElement("h2");
@@ -1180,4 +1185,57 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
 	checkboxSpan.textContent = msg_label;
 	checkboxLabel.append(checkboxSpan);
 	return checkboxLabel;
+}
+
+/**
+ * Generates a modal dialog for updating a Tab
+ *
+ * @param {string} label - The title of the modal tab.
+ * @param {string} url - A partial URL for the target org.
+ * @param {string} org - The Org to which the Tab points to.
+ * @returns {Object} An object containing key elements of the modal:
+ * - modalParent: The main modal container element.
+ * - saveButton: The save button element for user actions.
+ * - closeButton: The close button element for closing the modal.
+ * - labelContainer: The container element for the label input field.
+ * - urlContainer: The container element for the url input field.
+ * - orgContainer: The container element for the org input field.
+ */
+export function generateUpdateTabModal(label, url, org) {
+	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
+		label,
+	);
+	const { section, divParent } = generateSection("Tab information");
+	divParent.style.width = "100%";
+	divParent.style.display = "flex";
+	divParent.style.alignItems = "center";
+	article.appendChild(section);
+	const { inputParent: labelParent, inputContainer: labelContainer } = generateInput({
+		label: "Tab label",
+		type: "text",
+		required: true,
+		placeholder: label ?? "Users",
+		style: "width: 100%",
+        value: label,
+	});
+    divParent.appendChild(labelParent);
+	const { inputParent: urlParent, inputContainer: urlContainer } = generateInput({
+		label: "Tab url",
+		type: "text",
+		required: true,
+		placeholder: url ?? "ManageUsers/home",
+		style: "width: 100%",
+		value: url,
+	});
+    divParent.appendChild(urlParent);
+	const { inputParent: orgParent, inputContainer: orgContainer } = generateInput({
+		label: "Tab org",
+		type: "text",
+		required: false,
+		placeholder: org ?? "mycustomorg",
+		style: "width: 100%",
+		value: org,
+	});
+    divParent.appendChild(orgParent);
+	return { modalParent, saveButton, closeButton, labelContainer, urlContainer, orgContainer };
 }

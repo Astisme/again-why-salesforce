@@ -21,15 +21,19 @@ const menuItemsOriginal = [
 		contexts: ["link", "page", "frame"],
 	},
 
-	/* TODO next version
-	{ id: "update", title: "✏️ Update tab", contexts: ["link"] },
+	{ id: "update", title: "✏️ Update Tab", contexts: ["link"] },
 	{
 		id: "update-org",
 		title: "📌 Toggle Org",
 		contexts: ["link"],
 		parentId: "update",
 	},
-    */
+	{
+		id: "update-tab",
+		title: "🧹 Other Updates",
+		contexts: ["link"],
+		parentId: "update",
+	},
 
 	{ id: "move", title: "cxm_move", contexts: ["link"] },
 	{

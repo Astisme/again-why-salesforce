@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-window
-import { SALESFORCE_LIGHTNING_PATTERN, SETUP_LIGHTNING } from "/constants.js";
+import { BROWSER, SALESFORCE_LIGHTNING_PATTERN, SETUP_LIGHTNING } from "/constants.js";
 import { TranslationService } from "/translator.js";
 import { initTheme } from "../themeHandler.js";
 await TranslationService.create();
@@ -51,7 +51,7 @@ let currentTab;
  * @param {string} url - the url to pass to the callback function
  */
 function nss_getCurrentBrowserTab(callback, url) {
-	chrome.runtime.sendMessage(
+	BROWSER.runtime.sendMessage(
 		{ message: { what: "browser-tab" } },
 		(browserTab) => {
 			currentTab = browserTab;
@@ -77,7 +77,7 @@ function createTab(url, count = 0) {
 			url,
 		);
 	}
-	chrome.tabs.create({
+	BROWSER.tabs.create({
 		url: url,
 		index: Math.floor(currentTab.index) + 1,
 		openerTabId: currentTab.id,

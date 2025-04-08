@@ -1,6 +1,6 @@
 "use strict";
 import Tab from "/tab.js";
-import { EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
+import { BROWSER, EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
 import { ensureTranslatorAvailability } from "/translator.js";
 
 import {
@@ -99,8 +99,8 @@ async function generateFavouriteButton() {
 		});
 		return { img, span };
 	}
-	const star = chrome.runtime.getURL("assets/svgs/star.svg");
-    const translator = await ensureTranslatorAvailability();
+	const star = BROWSER.runtime.getURL("assets/svgs/star.svg");
+  const translator = await ensureTranslatorAvailability();
 	const { img: starImg, span: starSpan } = createImageElement(
 		STAR_ID,
 		star,
@@ -108,7 +108,7 @@ async function generateFavouriteButton() {
 	);
 	span.appendChild(starImg);
 	span.appendChild(starSpan);
-	const slashedStar = chrome.runtime.getURL("assets/svgs/slashed-star.svg");
+	const slashedStar = BROWSER.runtime.getURL("assets/svgs/slashed-star.svg");
 	const { img: slashedStarImg, span: slashedStarSpan } = createImageElement(
 		SLASHED_STAR_ID,
 		slashedStar,

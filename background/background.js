@@ -74,6 +74,7 @@ export async function bg_getSalesforceLanguage(callback){
     else
         bg_getStorage(callback, LOCALE_KEY);
 }
+ */
 
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
@@ -93,12 +94,14 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	}
 	//let captured = true;
 	switch (message.what) {
+            /*
 		case "get":
 			bg_getStorage(sendResponse);
 			break;
 		case "set":
 			bg_setStorage(message.tabs, sendResponse);
 			break;
+            */
 		case "saved":
 		case "add":
 		case "theme":
