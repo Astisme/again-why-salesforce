@@ -430,6 +430,10 @@
 		"message": "Tab लेबल",
 		"description": "[popup] Tab के नाम वाले कॉलम का हेडर"
 	},
+    "tab_org": {
+        "message": "Tab Org",
+        "description": "Tab की Org प्रॉपर्टी, यदि यह एक एकल Salesforce संगठन के लिए है"
+    },
 	"tab_url": {
 		"message": "Tab URL",
 		"description": "[popup] Tab की URL वाले कॉलम का हेडर"

@@ -410,6 +410,10 @@
 		"message": "Etiqueta del Tab",
 		"description": "[popup] Encabezado de columna para el nombre del Tab"
 	},
+    "tab_org": {
+        "message": "Tab Org",
+        "description": "la propiedad Org de la Tab, si es para una sola organización de Salesforce"
+    },
 	"tab_url": {
 		"message": "URL del Tab",
 		"description": "[popup] Encabezado de columna para la URL del Tab"

@@ -3,9 +3,21 @@
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
 	},
+	"cancel": {
+		"message": "Batal",
+		"description": "judul atau textContent untuk tombol yang mencegah tindakan saat ini dieksekusi"
+	},
+	"cancel_close": {
+		"message": "Batal dan tutup",
+		"description": "judul atau textContent untuk tombol tutup modal"
+	},
 	"confirm_another_org": {
 		"message": "Konfirmasi pembukaan link ini.",
 		"description": "[open-other-org-modal] Meminta konfirmasi dari pengguna untuk membuka link yang telah dibentuk."
+	},
+	"continue": {
+		"message": "Lanjutkan",
+		"description": "textContent untuk tombol yang memungkinkan tindakan saat ini dieksekusi"
 	},
 	"cxm_empty_no_org_tabs": {
 		"message": "👀 Semua Tab yang terlihat",
@@ -98,6 +110,18 @@
 	"error_close_other_modal": {
 		"message": "Tutup modal lain terlebih dahulu!",
 		"description": "[toast] Percobaan membuka lebih dari satu modal."
+	},
+	"error_cxm_check": {
+		"message": "Kesalahan saat memeriksa item menu",
+		"description": "[kesalahan] item menu konteks tidak dapat ditemukan"
+	},
+	"error_cxm_create": {
+		"message": "Kesalahan saat membuat item menu",
+		"description": "[kesalahan] item menu konteks tidak dapat diinisialisasi"
+	},
+	"error_cxm_remove": {
+		"message": "Kesalahan saat menghapus item menu",
+		"description": "[kesalahan] item menu konteks tidak dapat dihilangkan"
 	},
 	"error_duplicate_tab": {
 		"message": "Tab ini sudah ada",
@@ -254,13 +278,33 @@
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] Nama ekstensi ini"
 	},
+	"file": {
+		"message": "file",
+		"description": "satu file"
+	},
+	"files": {
+		"message": "file",
+		"description": "beberapa file"
+	},
 	"import": {
 		"message": "Impor",
 		"description": "[popup] Tombol impor"
 	},
+	"import_duplicate_description": {
+		"message": "Tab duplikat akan diabaikan.<br />Dua Tab dianggap duplikat jika memiliki URL yang sama.",
+		"description": "[impor] deskripsi tentang apa yang dilakukan proses impor"
+	},
 	"import_invalid_file": {
 		"message": "Tipe file tidak valid.\nHanya file JSON yang didukung.",
 		"description": "[error] File yang digunakan untuk impor bukan JSON."
+	},
+	"import_successful": {
+		"message": "Berhasil diimpor",
+		"description": "[impor] impor selesai. Setelah ini, jumlah berapa banyak catatan yang telah diimpor akan ditampilkan"
+	},
+	"import_tabs": {
+		"message": "Impor Tab",
+		"description": "[judul-modal] untuk proses impor"
 	},
 	"import_title": {
 		"message": "Impor Tabs dari file JSON",
@@ -305,6 +349,10 @@
 	"open_setup": {
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
+	},
+	"or_drop": {
+		"message": "Atau jatuhkan",
+		"description": "[impor] biarkan pengguna memindahkan file dengan mouse mereka dan melepaskannya"
 	},
 	"org_link": {
 		"message": "Link Org",
@@ -382,6 +430,10 @@
 		"message": "Label Tab",
 		"description": "[popup] Judul kolom untuk nama Tab"
 	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "properti Org dari Tab, jika itu untuk satu Organisasi Salesforce"
+	},
 	"tab_url": {
 		"message": "URL Tab",
 		"description": "[popup] Judul kolom untuk URL Tab"
@@ -425,6 +477,10 @@
 	"theme_light": {
 		"message": "Ubah Tema ke Terang",
 		"description": "[popup] Judul di matahari untuk mengganti tema"
+	},
+	"upload": {
+		"message": "Unggah",
+		"description": "[impor] biarkan pengguna menjelajahi file mereka dan memilih yang benar"
 	},
 	"users": {
 		"message": "Pengguna",

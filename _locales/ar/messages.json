@@ -430,6 +430,10 @@
 		"message": "علامة الـ Tab",
 		"description": "[popup] رأس العمود لاسم الـ Tab"
 	},
+    "tab_org": {
+        "message": "Tab Org",
+        "description": "خاصية Org لعلامة التبويب، إذا كانت لمنظمة Salesforce واحدة"
+    },
 	"tab_url": {
 		"message": "URL الـ Tab",
 		"description": "[popup] رأس العمود لعنوان URL للـ Tab"

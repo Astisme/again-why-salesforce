@@ -430,6 +430,10 @@
 		"message": "Etichetta Tab",
 		"description": "[popup] intestazione della colonna per il nome della Tab"
 	},
+    "tab_org": {
+        "message": "Tab Org",
+        "description": "la proprietà Org della Tab, se è per una singola organizzazione Salesforce"
+    },
 	"tab_url": {
 		"message": "URL Tab",
 		"description": "[popop] intestazione della colonna per l'URL della Tab"

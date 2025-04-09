@@ -430,6 +430,10 @@
 		"message": "Tab-Bezeichnung",
 		"description": "[popup] Spaltenüberschrift für den Namen des Tabs"
 	},
+    "tab_org": {
+        "message": "Tab Org",
+        "description": "die Org-Eigenschaft des Tab, wenn es sich um eine einzelne Salesforce-Organisation handelt"
+    },
 	"tab_url": {
 		"message": "Tab-URL",
 		"description": "[popup] Spaltenüberschrift für die URL des Tabs"

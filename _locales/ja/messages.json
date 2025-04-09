@@ -3,9 +3,21 @@
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
 	},
+	"cancel": {
+		"message": "キャンセル",
+		"description": "現在の操作の実行を防ぐボタンのタイトルまたはtextContent"
+	},
+	"cancel_close": {
+		"message": "キャンセルして閉じる",
+		"description": "モーダルの閉じるボタンのタイトルまたはtextContent"
+	},
 	"confirm_another_org": {
 		"message": "このリンクを開くことを確認してください。",
 		"description": "[open-other-org-modal] 作成されたリンクを開くためにユーザーに確認を求めます"
+	},
+	"continue": {
+		"message": "続行",
+		"description": "現在の操作の実行を許可するボタンのtextContent"
 	},
 	"cxm_empty_no_org_tabs": {
 		"message": "👀 表示されているすべての Tab",
@@ -98,6 +110,18 @@
 	"error_close_other_modal": {
 		"message": "まず他のモーダルを閉じてください！",
 		"description": "[toast] 複数のモーダルが開かれようとしました"
+	},
+	"error_cxm_check": {
+		"message": "メニュー項目の確認エラー",
+		"description": "[エラー] コンテキストメニュー項目が見つかりませんでした"
+	},
+	"error_cxm_create": {
+		"message": "メニュー項目の作成エラー",
+		"description": "[エラー] コンテキストメニュー項目を初期化できませんでした"
+	},
+	"error_cxm_remove": {
+		"message": "メニュー項目の削除エラー",
+		"description": "[エラー] コンテキストメニュー項目を削除できませんでした"
 	},
 	"error_duplicate_tab": {
 		"message": "この Tab は既に存在します",
@@ -254,13 +278,33 @@
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] この拡張機能の名前"
 	},
+	"file": {
+		"message": "ファイル",
+		"description": "単一のファイル"
+	},
+	"files": {
+		"message": "ファイル",
+		"description": "複数のファイル"
+	},
 	"import": {
 		"message": "インポートする",
 		"description": "[popup] インポートボタン"
 	},
+	"import_duplicate_description": {
+		"message": "重複するTabは無視されます。<br />同じURLを持つ2つのTabは重複していると見なされます。",
+		"description": "[インポート] インポート処理の内容の説明"
+	},
 	"import_invalid_file": {
 		"message": "無効なファイルタイプです。\nJSON ファイルのみがサポートされます。",
 		"description": "[error] インポートに使用されたファイルは JSON ではありません"
+	},
+	"import_successful": {
+		"message": "インポートに成功しました",
+		"description": "[インポート] インポートが完了しました。この後、インポートされたレコード数が表示されます"
+	},
+	"import_tabs": {
+		"message": "Tabをインポート",
+		"description": "[モーダルタイトル] インポート処理用"
 	},
 	"import_title": {
 		"message": "JSON ファイルから Tabs をインポートする",
@@ -305,6 +349,10 @@
 	"open_setup": {
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
+	},
+	"or_drop": {
+		"message": "またはドロップ",
+		"description": "[インポート] ユーザーがマウスでファイルを移動させて離せるようにします"
 	},
 	"org_link": {
 		"message": "Org リンク",
@@ -382,6 +430,10 @@
 		"message": "Tab ラベル",
 		"description": "[popup] Tab 名の列ヘッダー"
 	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "単一のSalesforce組織の場合の、TabのOrgプロパティ"
+	},
 	"tab_url": {
 		"message": "Tab URL",
 		"description": "[popup] Tab の URL の列ヘッダー"
@@ -425,6 +477,10 @@
 	"theme_light": {
 		"message": "ライトテーマに変更する",
 		"description": "[popup] テーマ変更用に太陽の上にあるタイトル"
+	},
+	"upload": {
+		"message": "アップロード",
+		"description": "[インポート] ユーザーが自分のファイルを参照して適切なものを選択できるようにします"
 	},
 	"users": {
 		"message": "ユーザー",

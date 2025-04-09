@@ -3,9 +3,21 @@
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"
 	},
+	"cancel": {
+		"message": "Hủy",
+		"description": "tiêu đề hoặc textContent cho các nút ngăn hành động hiện tại thực thi"
+	},
+	"cancel_close": {
+		"message": "Hủy và đóng",
+		"description": "tiêu đề hoặc textContent cho nút đóng của cửa sổ bật lên"
+	},
 	"confirm_another_org": {
 		"message": "Xác nhận mở liên kết này.",
 		"description": "[open-other-org-modal] Yêu cầu xác nhận từ người dùng để mở liên kết đã được tạo."
+	},
+	"continue": {
+		"message": "Tiếp tục",
+		"description": "textContent cho các nút cho phép hành động hiện tại thực thi"
 	},
 	"cxm_empty_no_org_tabs": {
 		"message": "👀 Tất cả các Tab hiển thị",
@@ -98,6 +110,18 @@
 	"error_close_other_modal": {
 		"message": "Vui lòng đóng modal khác trước!",
 		"description": "[toast] Đã cố mở nhiều modal cùng lúc."
+	},
+	"error_cxm_check": {
+		"message": "Lỗi khi kiểm tra các mục menu",
+		"description": "[lỗi] không thể tìm thấy các mục menu ngữ cảnh"
+	},
+	"error_cxm_create": {
+		"message": "Lỗi khi tạo các mục menu",
+		"description": "[lỗi] không thể khởi tạo các mục menu ngữ cảnh"
+	},
+	"error_cxm_remove": {
+		"message": "Lỗi khi xóa các mục menu",
+		"description": "[lỗi] không thể loại bỏ các mục menu ngữ cảnh"
 	},
 	"error_duplicate_tab": {
 		"message": "Tab này đã tồn tại",
@@ -254,13 +278,33 @@
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] Tên của tiện ích mở rộng này"
 	},
+	"file": {
+		"message": "tệp",
+		"description": "tệp đơn"
+	},
+	"files": {
+		"message": "tệp",
+		"description": "nhiều tệp"
+	},
 	"import": {
 		"message": "Nhập",
 		"description": "[popup] Nút nhập"
 	},
+	"import_duplicate_description": {
+		"message": "Các Tab trùng lặp sẽ bị bỏ qua.<br />Hai Tab được coi là trùng lặp nếu chúng có cùng URL.",
+		"description": "[nhập] mô tả về những gì quy trình nhập thực hiện"
+	},
 	"import_invalid_file": {
 		"message": "Loại file không hợp lệ.\nChỉ hỗ trợ các file JSON.",
 		"description": "[error] File sử dụng để nhập khẩu không phải là JSON."
+	},
+	"import_successful": {
+		"message": "Nhập thành công",
+		"description": "[nhập] quá trình nhập đã hoàn tất. Sau đó, một số lượng bản ghi đã được nhập sẽ được hiển thị"
+	},
+	"import_tabs": {
+		"message": "Nhập Tab",
+		"description": "[tiêu đề-modal] cho quá trình nhập"
 	},
 	"import_title": {
 		"message": "Nhập Tabs từ file JSON",
@@ -305,6 +349,10 @@
 	"open_setup": {
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
+	},
+	"or_drop": {
+		"message": "Hoặc thả",
+		"description": "[nhập] cho phép người dùng di chuyển tệp bằng chuột và thả chúng"
 	},
 	"org_link": {
 		"message": "Liên kết Org",
@@ -382,6 +430,10 @@
 		"message": "Nhãn Tab",
 		"description": "[popup] Tiêu đề cột cho tên Tab"
 	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "thuộc tính Org của Tab, nếu nó dành cho một Tổ chức Salesforce duy nhất"
+	},
 	"tab_url": {
 		"message": "URL Tab",
 		"description": "[popup] Tiêu đề cột cho URL của Tab"
@@ -425,6 +477,10 @@
 	"theme_light": {
 		"message": "Chuyển sang Giao diện Sáng",
 		"description": "[popup] Tiêu đề trên mặt trời để chuyển giao diện"
+	},
+	"upload": {
+		"message": "Tải lên",
+		"description": "[nhập] cho phép người dùng duyệt qua các tệp của họ và chọn đúng tệp"
 	},
 	"users": {
 		"message": "Người dùng",
