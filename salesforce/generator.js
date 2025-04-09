@@ -296,7 +296,15 @@ async function generateInput({
 	append = null,
 	style = null,
     value = null,
-} = {}) {
+    title = null,
+} = {},
+    {
+        translateLabel = true,
+        translatePlaceholder = true,
+        translateTitle = true,
+        //translateValue = true
+} = {}
+) {
     const translator = await ensureTranslatorAvailability();
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
@@ -324,7 +332,10 @@ async function generateInput({
 	if (required) {
 		labelElement.appendChild(await generateRequired());
 	}
-	labelElement.append(await translator.translate(label));
+    let msg_label = label;
+    if(translateLabel)
+        msg_label = await translator.translate(label);
+	labelElement.append(msg_label);
 	const inputWrapper = document.createElement("div");
 	inputWrapper.classList.add("slds-form-element__control", "slds-grow");
 	inputWrapper.setAttribute("part", "input-container");
@@ -353,6 +364,7 @@ async function generateInput({
 			enabled = true,
 			style = null,
             value = null,
+            title = null,
 		},
 	) {
 		const input = document.createElement("input");
@@ -361,18 +373,28 @@ async function generateInput({
 		input.setAttribute("maxlength", "255");
 		id && (input.id = id);
         if(label){
-            const tranLabel = await translator.translate(label);
-		    input.setAttribute("name", tranLabel);
-    }
+            let msg_tranLabel = label;
+            if(translateLabel)
+                msg_tranLabel = await translator.translate(label);
+		    input.setAttribute("name", msg_tranLabel);
+        }
 		type && input.setAttribute("type", type);
         if(placeholder){
-            const tranPlaceholder = await translator.translate(placeholder);
-            input.setAttribute("placeholder", tranPlaceholder);
+            let msg_tranPlaceholder = placeholder;
+            if(translatePlaceholder)
+                msg_tranPlaceholder = await translator.translate(placeholder);
+            input.setAttribute("placeholder", msg_tranPlaceholder);
         }
 		required && input.setAttribute("required", true);
 		enabled === false && input.setAttribute("disabled", true);
 		style && (input.style = style);
         value && (input.value = value);
+        if(title){
+            let msg_tranTitle = title;
+            if(translateTitle)
+                msg_tranTitle = await translator.translate(title);
+            input.setAttribute("title", msg_tranTitle);
+        }
 		return input;
 	}
 	if (prepend != null) {
@@ -387,6 +409,7 @@ async function generateInput({
 		required,
 		style,
         value,
+        title,
 	});
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
@@ -806,7 +829,8 @@ export async function generateSldsModal(modalTitle) {
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-	saveButton.setAttribute("title", "Save");
+    const msg_continue = await translator.translate("continue");
+	saveButton.setAttribute("title", msg_continue);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.setAttribute("data-aura-rendered-by", "1380:0");
 	saveButton.setAttribute("data-aura-class", "uiButton forceActionButton");
@@ -815,7 +839,7 @@ export async function generateSldsModal(modalTitle) {
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
 	saveSpan.setAttribute("data-aura-rendered-by", "1383:0");
-	saveSpan.textContent = await translator.translate("continue");
+	saveSpan.textContent = msg_continue;
 	saveButton.appendChild(saveSpan);
 	/**
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
@@ -1201,41 +1225,50 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * - urlContainer: The container element for the url input field.
  * - orgContainer: The container element for the org input field.
  */
-export function generateUpdateTabModal(label, url, org) {
-	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
+export async function generateUpdateTabModal(label, url, org) {
+	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
 		label,
 	);
-	const { section, divParent } = generateSection("Tab information");
+	const { section, divParent } = await generateSection("tab_information");
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	article.appendChild(section);
-	const { inputParent: labelParent, inputContainer: labelContainer } = generateInput({
-		label: "Tab label",
+	const { inputParent: labelParent, inputContainer: labelContainer } = await generateInput({
+		label: "tab_label",
 		type: "text",
 		required: true,
-		placeholder: label ?? "Users",
+		placeholder: label ?? "users",
 		style: "width: 100%",
         value: label,
-	});
+        title: "table_row_label",
+	}, {
+        translatePlaceholder: label == null,
+    });
     divParent.appendChild(labelParent);
-	const { inputParent: urlParent, inputContainer: urlContainer } = generateInput({
-		label: "Tab url",
+	const { inputParent: urlParent, inputContainer: urlContainer } = await generateInput({
+		label: "tab_url",
 		type: "text",
 		required: true,
 		placeholder: url ?? "ManageUsers/home",
 		style: "width: 100%",
 		value: url,
-	});
+        title: "table_row_url",
+	}, {
+        translatePlaceholder: false,
+    });
     divParent.appendChild(urlParent);
-	const { inputParent: orgParent, inputContainer: orgContainer } = generateInput({
-		label: "Tab org",
+	const { inputParent: orgParent, inputContainer: orgContainer } = await generateInput({
+		label: "tab_org",
 		type: "text",
 		required: false,
 		placeholder: org ?? "mycustomorg",
 		style: "width: 100%",
 		value: org,
-	});
+        title: "table_row_org_name",
+	}, {
+        translatePlaceholder: org == null,
+    });
     divParent.appendChild(orgParent);
 	return { modalParent, saveButton, closeButton, labelContainer, urlContainer, orgContainer };
 }

@@ -74,7 +74,6 @@ export async function bg_getSalesforceLanguage(callback){
     else
         bg_getStorage(callback, LOCALE_KEY);
 }
- */
 
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.

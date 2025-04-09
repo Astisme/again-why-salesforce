@@ -35,11 +35,11 @@
     "message": "Eliminar todos los Tabs",
     "description": "[popup] Título en la papelera para vaciar todos los Tabs"
   },
-  "table_label": {
+  "tab_label": {
     "message": "Etiqueta del Tab",
     "description": "[popup] Encabezado de columna para el nombre del Tab"
   },
-  "table_url": {
+  "tab_url": {
     "message": "URL del Tab",
     "description": "[popup] Encabezado de columna para la URL del Tab"
   },

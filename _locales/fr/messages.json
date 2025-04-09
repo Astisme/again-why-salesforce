@@ -35,11 +35,11 @@
     "message": "Supprimer tous les Tabs",
     "description": "[popup] Titre sur la corbeille pour vider tous les Tabs"
   },
-  "table_label": {
+  "tab_label": {
     "message": "Étiquette du Tab",
     "description": "[popup] En-tête de colonne pour le nom du Tab"
   },
-  "table_url": {
+  "tab_url": {
     "message": "URL du Tab",
     "description": "[popup] En-tête de colonne pour l'URL du Tab"
   },
@@ -465,5 +465,29 @@
     "import_successful": {
       "message": "Importation réussie",
       "description": "[import] l'importation a été effectuée. Ensuite, le nombre de lignes importées sera affiché"
-    }
+    },
+  "cxm_update": {
+    "message": "✏️ Mettre à jour Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 Basculer Org",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 Autres mises à jour",
+    "description": "[context-menu]"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "Espace réservé pour le modal de mise à jour du Tab"
+  },
+  "tab_information": {
+    "message": "Informations sur le Tab",
+    "description": "Titre pour le modal de mise à jour du Tab"
+  },
+  "users": {
+    "message": "Utilisateurs",
+    "description": "Le nom de la page liée à ManageUsers/home"
+  }
 }

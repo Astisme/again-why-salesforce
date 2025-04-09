@@ -35,11 +35,11 @@
       "message": "सभी Tabs हटाएं",
       "description": "[popup] सभी Tabs हटाने के लिए डस्टबिन पर शीर्षक"
     },
-    "table_label": {
+    "tab_label": {
       "message": "Tab लेबल",
       "description": "[popup] Tab के नाम वाले कॉलम का हेडर"
     },
-    "table_url": {
+    "tab_url": {
       "message": "Tab URL",
       "description": "[popup] Tab की URL वाले कॉलम का हेडर"
     },
@@ -465,6 +465,30 @@
     "import_successful": {
       "message": "सफलतापूर्वक आयात किया गया",
       "description": "[import] आयात पूरा हो गया है; उसके बाद आयात किए गए रिकॉर्ड की संख्या दिखाई जाएगी।"
+    },
+    "cxm_update": {
+      "message": "✏️ Tab अपडेट करें",
+      "description": "[context-menu]"
+    },
+    "cxm_update_org": {
+      "message": "📌 Org टॉगल करें",
+      "description": "[context-menu]"
+    },
+    "cxm_update_tab": {
+      "message": "🧹 अन्य अपडेट्स",
+      "description": "[context-menu]"
+    },
+    "mycustomorg": {
+      "message": "mycustomorg",
+      "description": "Update Tab modal के लिए प्लेसहोल्डर"
+    },
+    "tab_information": {
+      "message": "Tab जानकारी",
+      "description": "Update Tab modal का शीर्षक"
+    },
+    "users": {
+      "message": "उपयोगकर्ता",
+      "description": "ManageUsers/home से संबंधित पृष्ठ का नाम"
     }
-  }
+}
   

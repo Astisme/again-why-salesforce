@@ -35,11 +35,11 @@
     "message": "Alle Tabs löschen",
     "description": "[popup] Titel auf dem Papierkorb zum Leeren aller Tabs"
   },
-  "table_label": {
+  "tab_label": {
     "message": "Tab-Bezeichnung",
     "description": "[popup] Spaltenüberschrift für den Namen des Tabs"
   },
-  "table_url": {
+  "tab_url": {
     "message": "Tab-URL",
     "description": "[popup] Spaltenüberschrift für die URL des Tabs"
   },
@@ -465,5 +465,29 @@
   "import_successful": {
     "message": "Erfolgreich importiert",
     "description": "[import] Der Import wurde abgeschlossen. Anschließend wird die Anzahl der importierten Datensätze angezeigt"
+  },
+  "cxm_update": {
+    "message": "✏️ Tab aktualisieren",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 Org umschalten",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 Weitere Aktualisierungen",
+    "description": "[context-menu]"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "Platzhalter für das Update-Tab-Modal"
+  },
+  "tab_information": {
+    "message": "Tab-Informationen",
+    "description": "Titel für das Update-Tab-Modal"
+  },
+  "users": {
+    "message": "Benutzer",
+    "description": "Der Name der Seite, die sich auf ManageUsers/home bezieht"
   }
 }

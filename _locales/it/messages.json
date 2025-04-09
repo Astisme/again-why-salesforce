@@ -35,11 +35,11 @@
     "message": "Elimina tutte le Tab",
     "description": "[popup] titolo sul cestino per svuotare tutte le Tab"
   },
-  "table_label": {
+  "tab_label": {
     "message": "Etichetta Tab",
     "description": "[popup] intestazione della colonna per il nome della Tab"
   },
-  "table_url": {
+  "tab_url": {
     "message": "URL Tab",
     "description": "[popop] intestazione della colonna per l'URL della Tab"
   },
@@ -465,5 +465,29 @@
     "import_successful": {
 		"message":  "Importati con successo",
         "description": "[import] il processo d'importazione è stato completato. Dopo questo, un numero che riporta quanti record siano stati importati verrà mostrato"
+    },
+    "cxm_update": {
+		"message":  "✏️ Aggiorna Tab",
+		"description": "[context-menu]"
+    },
+    "cxm_update_org": {
+		"message":  "📌 Attiva/Disattiva Org",
+		"description": "[context-menu]"
+    },
+    "cxm_update_tab": {
+		"message":  "🧹 Altri Aggiornamenti",
+		"description": "[context-menu]"
+    },
+    "mycustomorg": {
+		"message":  "lamiaorgpersonale",
+		"description": "placeholder per il modal di aggiornamento Tab"
+    },
+    "tab_information": {
+		"message":  "Informazioni Tab",
+		"description": "titolo per il modal di aggiornamento Tab"
+    },
+    "users": {
+		"message":  "Utenti",
+		"description": "Il nome della pagina corrata a ManageUsers/home"
     }
 }

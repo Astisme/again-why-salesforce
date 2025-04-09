@@ -600,7 +600,7 @@ async function showModalUpdateTab(tab = {label: null, url: null, org: null}){
         labelContainer,
         urlContainer,
         orgContainer
-    } = generateUpdateTabModal(matchingTab.label, matchingTab.url, matchingTab.org);
+    } = await generateUpdateTabModal(matchingTab.label, matchingTab.url, matchingTab.org);
     getModalHanger().appendChild(modalParent);
     let lastUrlLength = 0;
     urlContainer.addEventListener("input", () => {

@@ -35,13 +35,17 @@
 		"message":  "Delete all Tabs",
 		"description": "[popup] title on the bin to empty all Tabs"
 	},
-    "table_label": {
+    "tab_label": {
 		"message":  "Tab Label",
-		"description": "[popup] column header for Tab name"
+		"description": "the Label property of the Tab, its name"
 	},
-    "table_url": {
+    "tab_url": {
 		"message":  "Tab URL",
-		"description": "[popop] column header for Tab url"
+		"description": "the URL property of the Tab, where it points to"
+	},
+    "tab_org": {
+		"message":  "Tab Org",
+		"description": "the Org property of the Tab, if it's for a single Salesforce Organization"
 	},
     "table_org": {
 		"message":  "Is Org Tab",
@@ -465,5 +469,29 @@
     "import_successful": {
 		"message":  "Successfully imported",
         "description": "[import] import was completed. After this, a number of how many records have been imported will be shown"
+    },
+    "cxm_update": {
+		"message":  "✏️ Update Tab",
+		"description": "[context-menu]"
+    },
+    "cxm_update_org": {
+		"message":  "📌 Toggle Org",
+		"description": "[context-menu]"
+    },
+    "cxm_update_tab": {
+		"message":  "🧹 Other Updates",
+		"description": "[context-menu]"
+    },
+    "mycustomorg": {
+		"message":  "mycustomorg",
+		"description": "placeholder for the Update Tab modal"
+    },
+    "tab_information": {
+		"message":  "Tab information",
+		"description": "title for update Tab modal"
+    },
+    "users": {
+		"message":  "Users",
+		"description": "The name of the page related to ManageUsers/home"
     }
 }

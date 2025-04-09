@@ -21,16 +21,16 @@ const menuItemsOriginal = [
 		contexts: ["link", "page", "frame"],
 	},
 
-	{ id: "update", title: "✏️ Update Tab", contexts: ["link"] },
+	{ id: "update", title: "cxm_update", contexts: ["link"] },
 	{
 		id: "update-org",
-		title: "📌 Toggle Org",
+		title: "cxm_update_org",
 		contexts: ["link"],
 		parentId: "update",
 	},
 	{
 		id: "update-tab",
-		title: "🧹 Other Updates",
+		title: "cxm_update_tab",
 		contexts: ["link"],
 		parentId: "update",
 	},
@@ -130,7 +130,6 @@ const menuItemsOriginal = [
 		: CONTEXT_MENU_PATTERNS;
 	return item;
 });
-let menuItems = structuredClone(menuItemsOriginal);
 
 /**
  * Creates context menu items dynamically based on the provided menu definitions.
@@ -144,6 +143,7 @@ async function createMenuItems() {
     areMenuItemsVisible = true;
 	try {
         await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+        const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
             item.title = await translator.translate(item.title);
 			await BROWSER.contextMenus.create(item);
@@ -151,7 +151,6 @@ async function createMenuItems() {
 				throw new Error(BROWSER.runtime.lastError.message);
 			}
 		}
-        menuItems = structuredClone(menuItemsOriginal);
 	} catch (error) {
         const msg = await translator.translate("error_cxm_create");
 		console.error(msg, error);
