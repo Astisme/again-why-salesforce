@@ -1,441 +1,441 @@
 {
-  "extension_label": {
-    "message": "Again, Why Salesforce",
-    "description": "[manifest] Nama ekstensi ini"
-  },
-  "extension_description": {
-    "message": "Buat dan kelola custom Tabs di ruang yang tersedia pada halaman Setup Salesforce Lightning.",
-    "description": "[manifest] Deskripsi ekstensi ini"
-  },
-  "theme_light": {
-    "message": "Ubah Tema ke Terang",
-    "description": "[popup] Judul di matahari untuk mengganti tema"
-  },
-  "theme_dark": {
-    "message": "Ubah Tema ke Gelap",
-    "description": "[popup] Judul di bulan untuk mengganti tema"
-  },
-  "export_title": {
-    "message": "Ekspor semua Tabs",
-    "description": "[popup] Judul pada tombol ekspor"
-  },
-  "export": {
-    "message": "Ekspor",
-    "description": "[popup] Tombol ekspor"
-  },
-  "import_title": {
-    "message": "Impor Tabs dari file JSON",
-    "description": "[popup] Judul pada tombol impor"
-  },
-  "import": {
-    "message": "Impor",
-    "description": "[popup] Tombol impor"
-  },
-  "delete_all": {
-    "message": "Hapus semua Tabs",
-    "description": "[popup] Judul pada ikon tempat sampah untuk mengosongkan semua Tabs"
-  },
-  "tab_label": {
-    "message": "Label Tab",
-    "description": "[popup] Judul kolom untuk nama Tab"
-  },
-  "tab_url": {
-    "message": "URL Tab",
-    "description": "[popup] Judul kolom untuk URL Tab"
-  },
-  "table_org": {
-    "message": "Apakah Org Tab",
-    "description": "[popup] Teks bantuan untuk kolom dengan kotak centang Org"
-  },
-  "table_delete": {
-    "message": "Hapus Tab",
-    "description": "[popup] Teks bantuan untuk kolom dengan tombol hapus"
-  },
-  "table_row_label": {
-    "message": "Masukkan label untuk URL ini",
-    "description": "[popup] Kolom input untuk nama Tab"
-  },
-  "table_row_url": {
-    "message": "Masukkan sub_URL ke mana Anda ingin dialihkan.",
-    "description": "[popup] Kolom input untuk URL Tab"
-  },
-  "table_row_org": {
-    "message": "Klik jika Anda ingin Tab ini hanya tersedia untuk Org ini.",
-    "description": "[popup] Kotak centang untuk mengaktifkan Tab khusus Org"
-  },
-  "table_row_org_name": {
-    "message": "Org untuk mana Tab ini tersedia",
-    "description": "[popup] Kolom input untuk nama Org"
-  },
-  "delete": {
-    "message": "Hapus",
-    "description": "[popup] Menghapus satu baris"
-  },
-  "req_permissions_header": {
-    "message": "Mohon izinkan kami mengakses<br />halaman Setup Salesforce secara otomatis.",
-    "description": "[req_permission] Judul halaman untuk meminta izin"
-  },
-  "req_permissions_paragraph": {
-    "message": "Jika Anda mau, Tabs favorit Anda dapat muncul<br />segera setelah Anda memasuki halaman Setup Salesforce<br />tanpa harus mengklik ekstensi ini setiap kali.",
-    "description": "[req_permission] Teks penjelasan mengenai alasan permintaan izin"
-  },
-  "skip": {
-    "message": "Lewati",
-    "description": "[req_permission] Tombol untuk tidak memberikan izin"
-  },
-  "allow": {
-    "message": "Izinkan",
-    "description": "[req_permission] Tombol untuk memberikan izin"
-  },
-  "req_permissions_dont_ask": {
-    "message": "Jangan tanya lagi.",
-    "description": "[req_permission] Label ketika pengguna tidak ingin ditanya terus-menerus"
-  },
-  "nss_prefix": {
-    "message": "Ini bukan ",
-    "description": "[notSalesforceSetup] Prefiks yang ditampilkan saat pengguna tidak berada di halaman Salesforce; sertakan spasi di akhir"
-  },
-  "salesforce_lightning": {
-    "message": "Salesforce Lightning",
-    "description": "[notSalesforceSetup] Platform Salesforce Lightning"
-  },
-  "setup_page": {
-    "message": "Halaman Setup",
-    "description": "[notSalesforceSetup] Halaman untuk mengubah pengaturan Salesforce"
-  },
-  "invalid_url": {
-    "message": "URL tidak valid",
-    "description": "[notSalesforceSetup] URL yang tidak valid"
-  },
-  "nss_detected": {
-    "message": " terdeteksi.",
-    "description": "[notSalesforceSetup] Sesuatu terdeteksi; pastikan untuk menyertakan spasi di awal pesan"
-  },
-  "login_to_salesforce": {
-    "message": "Login ke Salesforce",
-    "description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
-  },
-  "open_setup": {
-    "message": "Buka Setup",
-    "description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
-  },
-  "error_missing_key": {
-    "message": "Kunci tidak ditemukan di mana pun",
-    "description": "[error] Terjemahan tidak ditemukan di file"
-  },
-  "required": {
-    "message": "diperlukan",
-    "description": "[input] Menandai kolom input sebagai wajib"
-  },
-  "required_info": {
-    "message": "= Informasi yang diperlukan",
-    "description": "[modal] Memberitahukan pengguna bahwa beberapa informasi wajib diisi"
-  },
-  "other_org_info": {
-    "message": "Info Org Lainnya",
-    "description": "[modal-title]"
-  },
-  "org_link": {
-    "message": "Link Org",
-    "description": "[input-label]"
-  },
-  "other_org_placeholder": {
-    "message": "org-lain",
-    "description": "[input-placeholder]"
-  },
-  "overwrite_tabs": {
-    "message": "Timpa Tabs yang disimpan.",
-    "description": "[label] Hapus semua Tabs yang disimpan selama proses impor"
-  },
-  "preserve_org_tabs": {
-    "message": "Pertahankan Tabs untuk Org lain.",
-    "description": "[label] Pertahankan Tabs khusus Org selama proses impor"
-  },
-  "tabs_saved": {
-    "message": "Tabs tersimpan.",
-    "description": "[toast] Tabs berhasil disimpan."
-  },
-  "error_no_setup_tab": {
-    "message": "Setup Tab tidak ditemukan.",
-    "description": "[error] Ekstensi tidak dapat menemukan tempat untuk menyisipkan Tabs favorit."
-  },
-  "error_close_other_modal": {
-    "message": "Tutup modal lain terlebih dahulu!",
-    "description": "[toast] Percobaan membuka lebih dari satu modal."
-  },
-  "error_link_with_id": {
-    "message": "Halaman ini tidak dapat ada di Org lain, karena mengandung Id!",
-    "description": "[open-other-org-modal] Peringatan bahwa link mungkin tidak ada di Org lain."
-  },
-  "where_to": {
-    "message": "Ke mana?",
-    "description": "[open-other-org-modal] Judul alternatif untuk modal"
-  },
-  "insert_another": {
-    "message": "Masukkan yang lain",
-    "description": "[error-open-other-org-modal] Pesan ketika Org yang sama dimasukkan dalam modal"
-  },
-  "insert_valid_org": {
-    "message": "Masukkan Org yang valid, tolong!",
-    "description": "[error-open-other-org-modal] Pesan ketika URL yang salah dimasukkan dalam modal"
-  },
-  "insert_another_org": {
-    "message": "Org yang dimasukkan adalah yang sekarang!\nMasukkan Org yang berbeda.",
-    "description": "[error-open-other-org-modal] Pesan ketika Org yang sama dimasukkan dalam modal"
-  },
-  "confirm_another_org": {
-    "message": "Konfirmasi pembukaan link ini.",
-    "description": "[open-other-org-modal] Meminta konfirmasi dari pengguna untuk membuka link yang telah dibentuk."
-  },
-  "no_match": {
-    "message": "Tidak ada aksi yang cocok",
-    "description": "[error] Di Salesforce, aksi yang diminta tidak cocok dengan aksi yang tersedia."
-  },
-  "successfully_imported": {
-    "message": "Berhasil diimpor",
-    "description": "[toast] Pengguna telah menambahkan Tabs dari file eksternal."
-  },
-  "tabs": {
-    "message": "Tabs",
-    "description": "Link favorit pengguna."
-  },
-  "warn_deprecated_tab_title": {
-    "message": "Anda telah mengimpor menggunakan 'tabTitle' yang usang!\nDownload file yang diperbarui telah dimulai.\nMulai sekarang, gunakan file yang baru saja diunduh.\nPenggunaan file tersebut akan dihentikan pada rilis mendatang.",
-    "description": "[warning] Menjelaskan kepada pengguna bahwa file yang diimpor menggunakan properti yang usang."
-  },
-  "error_import": {
-    "message": "Kesalahan saat impor:\n",
-    "description": "[error] Terjadi kesalahan selama proses impor."
-  },
-  "import_invalid_file": {
-    "message": "Tipe file tidak valid.\nHanya file JSON yang didukung.",
-    "description": "[error] File yang digunakan untuk impor bukan JSON."
-  },
-  "save_tab": {
-    "message": "Simpan sebagai Tab",
-    "description": "[alt] Teks alternatif ketika gambar tidak muncul."
-  },
-  "remove_tab": {
-    "message": "Hapus Tab",
-    "description": "[alt] Teks alternatif ketika gambar tidak muncul."
-  },
-  "error_missing_favourite_id": {
-    "message": "Tidak dapat mengambil gambar favorit tanpa Id",
-    "description": "[error] Id favorit tidak dikirim."
-  },
-  "error_remove_not_favourite": {
-    "message": "Tidak dapat menghapus Tab yang bukan favorit!",
-    "description": "[error] Pengguna mencoba menghapus Tab yang belum disimpan sebagai favorit."
-  },
-  "error_no_headers": {
-    "message": "Header tidak ditemukan.",
-    "description": "[error] Ekstensi tidak dapat menemukan tempat untuk menyisipkan tombol favorit."
-  },
-  "error_useless_save": {
-    "message": "Tidak dapat menyimpan:\nHalaman ini sudah disimpan!",
-    "description": "[error] Pengguna mencoba menyimpan halaman yang sudah disimpan."
-  },
-  "error_useless_remove": {
-    "message": "Tidak dapat menghapus:\nHalaman yang belum pernah disimpan tidak bisa dihapus.",
-    "description": "[error] Pengguna mencoba menghapus halaman yang belum disimpan."
-  },
-  "error_tab_object_creation": {
-    "message": "Saat memanggil dengan objek, jangan kirim apa pun yang lain.",
-    "description": "[error] Kesalahan implementasi oleh pengembang."
-  },
-  "error_tab_unexpected_keys": {
-    "message": "Kunci yang tidak terduga ditemukan:",
-    "description": "[error] Pengguna mencoba membuat Tab dengan properti yang tidak didukung."
-  },
-  "error_tab_label": {
-    "message": "Label harus berupa string yang tidak kosong",
-    "description": "[error] Pengguna mencoba membuat Tab tanpa label."
-  },
-  "error_tab_url": {
-    "message": "URL harus berupa string yang tidak kosong",
-    "description": "[error] Pengguna mencoba membuat Tab tanpa URL."
-  },
-  "error_tab_org": {
-    "message": "Org harus berupa string atau tidak didefinisikan",
-    "description": "[error] Pengguna mencoba membuat Tab dengan nilai Org yang tidak valid."
-  },
-  "error_minify_url": {
-    "message": "Tidak dapat mengecilkan URL kosong!",
-    "description": "[error] URL untuk diperkecil tidak dikirim."
-  },
-  "error_expand_url_no_base": {
-    "message": "Tidak dapat memperluas URL tanpa host-nya!",
-    "description": "[error] URL dasar untuk memperluas tidak dikirim."
-  },
-  "error_expand_url": {
-    "message": "Tidak dapat memperluas URL kosong!",
-    "description": "[error] URL untuk memperluas tidak dikirim."
-  },
-  "error_no_url": {
-    "message": "Tidak ada URL untuk diperiksa!",
-    "description": "[error] URL untuk diperiksa tidak dikirim."
-  },
-  "error_extract_empty_url": {
-    "message": "Tidak dapat mengekstrak nama Org dari URL kosong!",
-    "description": "[error] URL untuk mengekstrak nama Org tidak dikirim."
-  },
-  "error_no_object": {
-    "message": "Tidak ada objek untuk diperiksa!",
-    "description": "[error] Objek tidak dikirim."
-  },
-  "error_invalid_tab": {
-    "message": "Tab tidak valid",
-    "description": "[error] Tab tidak valid."
-  },
-  "error_tabcont_initialize": {
-    "message": "Tidak dapat menginisialisasi dengan"
-  },
-  "error_duplicate_tab": {
-    "message": "Tab ini sudah ada",
-    "description": "[error] Tab duplikat."
-  },
-  "error_get_with_no_org": {
-    "message": "Tidak dapat mengambil Tabs jika Org tidak ditentukan.",
-    "description": "[error] Mencoba mencari Tabs tanpa informasi Org."
-  },
-  "error_no_data": {
-    "message": "Tidak dapat mengidentifikasi Tab tanpa data.",
-    "description": "[error] Data untuk mengidentifikasi Tab tidak dikirim."
-  },
-  "error_tab_not_found": {
-    "message": "Tab tidak ditemukan.",
-    "description": "[error] Tab tidak terdapat dalam daftar."
-  },
-  "error_sync_nothing": {
-    "message": "Tidak dapat menyinkronkan Tabs kosong!",
-    "description": "[error] Mencoba menyinkronkan sesuatu yang kosong."
-  },
-  "error_no_array": {
-    "message": "Array tidak valid atau tidak dikirimkan",
-    "description": "[error] Array yang valid tidak dikirim."
-  },
-  "error_tabcont_invalid_tabs": {
-    "message": "Tabs tidak valid terdeteksi.\nKejadian pertama:",
-    "description": "[error] Tabs yang tidak valid dikirim."
-  },
-  "tab_explain": {
-    "message": "Setiap item harus memiliki 'label' dan 'url' dalam bentuk string. Selain itu, setiap item dapat memiliki 'org' dalam bentuk string.",
-    "description": "[error] Menjelaskan bagaimana Tab harus dibuat."
-  },
-  "error_no_matching_tab": {
-    "message": "Tidak ditemukan Tab yang cocok.",
-    "description": "[error] Tabs yang cocok tidak diperoleh."
-  },
-  "error_many_matching_tab": {
-    "message": "Ditemukan lebih dari satu Tab yang cocok.",
-    "description": "[error] Beberapa Tabs yang cocok diperoleh."
-  },
-  "error_no_callback": {
-    "message": "Harap sediakan callback",
-    "description": "[error] Fungsi callback tidak dikirim."
-  },
-  "error_no_cookies": {
-    "message": "Cookies yang cocok tidak ditemukan",
-    "description": "[error] Salesforce cookies tidak dikembalikan."
-  },
-  "error_no_browser_tab": {
-    "message": "Tidak dapat menemukan tab browser saat ini.",
-    "description": "[error] Tab browser aktif tidak ditemukan."
-  },
-  "error_no_message": {
-    "message": "Tidak ada pesan yang ditentukan untuk dikirim.",
-    "description": "[error] Pesan untuk dikirim ke bagian kode lainnya tidak ditentukan."
-  },
-  "cxm_open_other_org": {
-    "message": "🔗 Buka di Org lain",
-    "description": "[context-menu]"
-  },
-  "cxm_move": {
-    "message": "🧭 Pindahkan Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_move_first": {
-    "message": "↩️ Letakkan pertama",
-    "description": "[context-menu]"
-  },
-  "cxm_move_left": {
-    "message": "👈 Pindahkan ke kiri",
-    "description": "[context-menu]"
-  },
-  "cxm_move_right": {
-    "message": "👉 Pindahkan ke kanan",
-    "description": "[context-menu]"
-  },
-  "cxm_move_last": {
-    "message": "↪️ Letakkan terakhir",
-    "description": "[context-menu]"
-  },
-  "cxm_remove": {
-    "message": "💥 Hapus Tab(s)",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_tab": {
-    "message": "1️⃣ Hapus Tab ini",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_other_tabs": {
-    "message": "↔️ Tab lainnya",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_left_tabs": {
-    "message": "🔥 Hapus Tab di kiri",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_right_tabs": {
-    "message": "🌊 Hapus Tab di kanan",
-    "description": "[context-menu]"
-  },
-  "cxm_empty_no_org_tabs": {
-    "message": "👀 Semua Tab yang terlihat",
-    "description": "[context-menu]"
-  },
-  "cxm_empty_tabs": {
-    "message": "😨 Setel ulang ke default",
-    "description": "[context-menu]"
-  },
-  "cxm_import_tabs": {
-    "message": "🆙 Impor Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_export_tabs": {
-    "message": "⬇️ Ekspor Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_page_save_tab": {
-    "message": "💾 Simpan sebagai Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_page_remove_tab": {
-    "message": "👋 Hapus Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update": {
-    "message": "✏️ Perbarui Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update_org": {
-    "message": "📌 Alihkan Org",
-    "description": "[context-menu]"
-  },
-  "cxm_update_tab": {
-    "message": "🧹 Pembaruan Lainnya",
-    "description": "[context-menu]"
-  },
-  "mycustomorg": {
-    "message": "mycustomorg",
-    "description": "placeholder untuk modal Pembaruan Tab"
-  },
-  "tab_information": {
-    "message": "Informasi Tab",
-    "description": "judul untuk modal Pembaruan Tab"
-  },
-  "users": {
-    "message": "Pengguna",
-    "description": "Nama halaman terkait ManageUsers/home"
-  }
+	"allow": {
+		"message": "Izinkan",
+		"description": "[req_permission] Tombol untuk memberikan izin"
+	},
+	"confirm_another_org": {
+		"message": "Konfirmasi pembukaan link ini.",
+		"description": "[open-other-org-modal] Meminta konfirmasi dari pengguna untuk membuka link yang telah dibentuk."
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 Semua Tab yang terlihat",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Setel ulang ke default",
+		"description": "[context-menu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Ekspor Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 Impor Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Pindahkan Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Letakkan pertama",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Letakkan terakhir",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Pindahkan ke kiri",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Pindahkan ke kanan",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Buka di Org lain",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 Hapus Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 Simpan sebagai Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Hapus Tab(s)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Hapus Tab di kiri",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Tab lainnya",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Hapus Tab di kanan",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Hapus Tab ini",
+		"description": "[context-menu]"
+	},
+	"cxm_update": {
+		"message": "✏️ Perbarui Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Alihkan Org",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Pembaruan Lainnya",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Hapus",
+		"description": "[popup] Menghapus satu baris"
+	},
+	"delete_all": {
+		"message": "Hapus semua Tabs",
+		"description": "[popup] Judul pada ikon tempat sampah untuk mengosongkan semua Tabs"
+	},
+	"error_close_other_modal": {
+		"message": "Tutup modal lain terlebih dahulu!",
+		"description": "[toast] Percobaan membuka lebih dari satu modal."
+	},
+	"error_duplicate_tab": {
+		"message": "Tab ini sudah ada",
+		"description": "[error] Tab duplikat."
+	},
+	"error_expand_url": {
+		"message": "Tidak dapat memperluas URL kosong!",
+		"description": "[error] URL untuk memperluas tidak dikirim."
+	},
+	"error_expand_url_no_base": {
+		"message": "Tidak dapat memperluas URL tanpa host-nya!",
+		"description": "[error] URL dasar untuk memperluas tidak dikirim."
+	},
+	"error_extract_empty_url": {
+		"message": "Tidak dapat mengekstrak nama Org dari URL kosong!",
+		"description": "[error] URL untuk mengekstrak nama Org tidak dikirim."
+	},
+	"error_get_with_no_org": {
+		"message": "Tidak dapat mengambil Tabs jika Org tidak ditentukan.",
+		"description": "[error] Mencoba mencari Tabs tanpa informasi Org."
+	},
+	"error_import": {
+		"message": "Kesalahan saat impor:\n",
+		"description": "[error] Terjadi kesalahan selama proses impor."
+	},
+	"error_invalid_tab": {
+		"message": "Tab tidak valid",
+		"description": "[error] Tab tidak valid."
+	},
+	"error_link_with_id": {
+		"message": "Halaman ini tidak dapat ada di Org lain, karena mengandung Id!",
+		"description": "[open-other-org-modal] Peringatan bahwa link mungkin tidak ada di Org lain."
+	},
+	"error_many_matching_tab": {
+		"message": "Ditemukan lebih dari satu Tab yang cocok.",
+		"description": "[error] Beberapa Tabs yang cocok diperoleh."
+	},
+	"error_minify_url": {
+		"message": "Tidak dapat mengecilkan URL kosong!",
+		"description": "[error] URL untuk diperkecil tidak dikirim."
+	},
+	"error_missing_favourite_id": {
+		"message": "Tidak dapat mengambil gambar favorit tanpa Id",
+		"description": "[error] Id favorit tidak dikirim."
+	},
+	"error_missing_key": {
+		"message": "Kunci tidak ditemukan di mana pun",
+		"description": "[error] Terjemahan tidak ditemukan di file"
+	},
+	"error_no_array": {
+		"message": "Array tidak valid atau tidak dikirimkan",
+		"description": "[error] Array yang valid tidak dikirim."
+	},
+	"error_no_browser_tab": {
+		"message": "Tidak dapat menemukan tab browser saat ini.",
+		"description": "[error] Tab browser aktif tidak ditemukan."
+	},
+	"error_no_callback": {
+		"message": "Harap sediakan callback",
+		"description": "[error] Fungsi callback tidak dikirim."
+	},
+	"error_no_cookies": {
+		"message": "Cookies yang cocok tidak ditemukan",
+		"description": "[error] Salesforce cookies tidak dikembalikan."
+	},
+	"error_no_data": {
+		"message": "Tidak dapat mengidentifikasi Tab tanpa data.",
+		"description": "[error] Data untuk mengidentifikasi Tab tidak dikirim."
+	},
+	"error_no_headers": {
+		"message": "Header tidak ditemukan.",
+		"description": "[error] Ekstensi tidak dapat menemukan tempat untuk menyisipkan tombol favorit."
+	},
+	"error_no_matching_tab": {
+		"message": "Tidak ditemukan Tab yang cocok.",
+		"description": "[error] Tabs yang cocok tidak diperoleh."
+	},
+	"error_no_message": {
+		"message": "Tidak ada pesan yang ditentukan untuk dikirim.",
+		"description": "[error] Pesan untuk dikirim ke bagian kode lainnya tidak ditentukan."
+	},
+	"error_no_object": {
+		"message": "Tidak ada objek untuk diperiksa!",
+		"description": "[error] Objek tidak dikirim."
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab tidak ditemukan.",
+		"description": "[error] Ekstensi tidak dapat menemukan tempat untuk menyisipkan Tabs favorit."
+	},
+	"error_no_url": {
+		"message": "Tidak ada URL untuk diperiksa!",
+		"description": "[error] URL untuk diperiksa tidak dikirim."
+	},
+	"error_remove_not_favourite": {
+		"message": "Tidak dapat menghapus Tab yang bukan favorit!",
+		"description": "[error] Pengguna mencoba menghapus Tab yang belum disimpan sebagai favorit."
+	},
+	"error_sync_nothing": {
+		"message": "Tidak dapat menyinkronkan Tabs kosong!",
+		"description": "[error] Mencoba menyinkronkan sesuatu yang kosong."
+	},
+	"error_tab_label": {
+		"message": "Label harus berupa string yang tidak kosong",
+		"description": "[error] Pengguna mencoba membuat Tab tanpa label."
+	},
+	"error_tab_not_found": {
+		"message": "Tab tidak ditemukan.",
+		"description": "[error] Tab tidak terdapat dalam daftar."
+	},
+	"error_tab_object_creation": {
+		"message": "Saat memanggil dengan objek, jangan kirim apa pun yang lain.",
+		"description": "[error] Kesalahan implementasi oleh pengembang."
+	},
+	"error_tab_org": {
+		"message": "Org harus berupa string atau tidak didefinisikan",
+		"description": "[error] Pengguna mencoba membuat Tab dengan nilai Org yang tidak valid."
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Kunci yang tidak terduga ditemukan:",
+		"description": "[error] Pengguna mencoba membuat Tab dengan properti yang tidak didukung."
+	},
+	"error_tab_url": {
+		"message": "URL harus berupa string yang tidak kosong",
+		"description": "[error] Pengguna mencoba membuat Tab tanpa URL."
+	},
+	"error_tabcont_initialize": {
+		"message": "Tidak dapat menginisialisasi dengan"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Tabs tidak valid terdeteksi.\nKejadian pertama:",
+		"description": "[error] Tabs yang tidak valid dikirim."
+	},
+	"error_useless_remove": {
+		"message": "Tidak dapat menghapus:\nHalaman yang belum pernah disimpan tidak bisa dihapus.",
+		"description": "[error] Pengguna mencoba menghapus halaman yang belum disimpan."
+	},
+	"error_useless_save": {
+		"message": "Tidak dapat menyimpan:\nHalaman ini sudah disimpan!",
+		"description": "[error] Pengguna mencoba menyimpan halaman yang sudah disimpan."
+	},
+	"export": {
+		"message": "Ekspor",
+		"description": "[popup] Tombol ekspor"
+	},
+	"export_title": {
+		"message": "Ekspor semua Tabs",
+		"description": "[popup] Judul pada tombol ekspor"
+	},
+	"extension_description": {
+		"message": "Buat dan kelola custom Tabs di ruang yang tersedia pada halaman Setup Salesforce Lightning.",
+		"description": "[manifest] Deskripsi ekstensi ini"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "[manifest] Nama ekstensi ini"
+	},
+	"import": {
+		"message": "Impor",
+		"description": "[popup] Tombol impor"
+	},
+	"import_invalid_file": {
+		"message": "Tipe file tidak valid.\nHanya file JSON yang didukung.",
+		"description": "[error] File yang digunakan untuk impor bukan JSON."
+	},
+	"import_title": {
+		"message": "Impor Tabs dari file JSON",
+		"description": "[popup] Judul pada tombol impor"
+	},
+	"insert_another": {
+		"message": "Masukkan yang lain",
+		"description": "[error-open-other-org-modal] Pesan ketika Org yang sama dimasukkan dalam modal"
+	},
+	"insert_another_org": {
+		"message": "Org yang dimasukkan adalah yang sekarang!\nMasukkan Org yang berbeda.",
+		"description": "[error-open-other-org-modal] Pesan ketika Org yang sama dimasukkan dalam modal"
+	},
+	"insert_valid_org": {
+		"message": "Masukkan Org yang valid, tolong!",
+		"description": "[error-open-other-org-modal] Pesan ketika URL yang salah dimasukkan dalam modal"
+	},
+	"invalid_url": {
+		"message": "URL tidak valid",
+		"description": "[notSalesforceSetup] URL yang tidak valid"
+	},
+	"login_to_salesforce": {
+		"message": "Login ke Salesforce",
+		"description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "placeholder untuk modal Pembaruan Tab"
+	},
+	"no_match": {
+		"message": "Tidak ada aksi yang cocok",
+		"description": "[error] Di Salesforce, aksi yang diminta tidak cocok dengan aksi yang tersedia."
+	},
+	"nss_detected": {
+		"message": " terdeteksi.",
+		"description": "[notSalesforceSetup] Sesuatu terdeteksi; pastikan untuk menyertakan spasi di awal pesan"
+	},
+	"nss_prefix": {
+		"message": "Ini bukan ",
+		"description": "[notSalesforceSetup] Prefiks yang ditampilkan saat pengguna tidak berada di halaman Salesforce; sertakan spasi di akhir"
+	},
+	"open_setup": {
+		"message": "Buka Setup",
+		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
+	},
+	"org_link": {
+		"message": "Link Org",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Info Org Lainnya",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "org-lain",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Timpa Tabs yang disimpan.",
+		"description": "[label] Hapus semua Tabs yang disimpan selama proses impor"
+	},
+	"preserve_org_tabs": {
+		"message": "Pertahankan Tabs untuk Org lain.",
+		"description": "[label] Pertahankan Tabs khusus Org selama proses impor"
+	},
+	"remove_tab": {
+		"message": "Hapus Tab",
+		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"req_permissions_dont_ask": {
+		"message": "Jangan tanya lagi.",
+		"description": "[req_permission] Label ketika pengguna tidak ingin ditanya terus-menerus"
+	},
+	"req_permissions_header": {
+		"message": "Mohon izinkan kami mengakses<br />halaman Setup Salesforce secara otomatis.",
+		"description": "[req_permission] Judul halaman untuk meminta izin"
+	},
+	"req_permissions_paragraph": {
+		"message": "Jika Anda mau, Tabs favorit Anda dapat muncul<br />segera setelah Anda memasuki halaman Setup Salesforce<br />tanpa harus mengklik ekstensi ini setiap kali.",
+		"description": "[req_permission] Teks penjelasan mengenai alasan permintaan izin"
+	},
+	"required": {
+		"message": "diperlukan",
+		"description": "[input] Menandai kolom input sebagai wajib"
+	},
+	"required_info": {
+		"message": "= Informasi yang diperlukan",
+		"description": "[modal] Memberitahukan pengguna bahwa beberapa informasi wajib diisi"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Platform Salesforce Lightning"
+	},
+	"save_tab": {
+		"message": "Simpan sebagai Tab",
+		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"setup_page": {
+		"message": "Halaman Setup",
+		"description": "[notSalesforceSetup] Halaman untuk mengubah pengaturan Salesforce"
+	},
+	"skip": {
+		"message": "Lewati",
+		"description": "[req_permission] Tombol untuk tidak memberikan izin"
+	},
+	"successfully_imported": {
+		"message": "Berhasil diimpor",
+		"description": "[toast] Pengguna telah menambahkan Tabs dari file eksternal."
+	},
+	"tab_explain": {
+		"message": "Setiap item harus memiliki 'label' dan 'url' dalam bentuk string. Selain itu, setiap item dapat memiliki 'org' dalam bentuk string.",
+		"description": "[error] Menjelaskan bagaimana Tab harus dibuat."
+	},
+	"tab_information": {
+		"message": "Informasi Tab",
+		"description": "judul untuk modal Pembaruan Tab"
+	},
+	"tab_label": {
+		"message": "Label Tab",
+		"description": "[popup] Judul kolom untuk nama Tab"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "[popup] Judul kolom untuk URL Tab"
+	},
+	"table_delete": {
+		"message": "Hapus Tab",
+		"description": "[popup] Teks bantuan untuk kolom dengan tombol hapus"
+	},
+	"table_org": {
+		"message": "Apakah Org Tab",
+		"description": "[popup] Teks bantuan untuk kolom dengan kotak centang Org"
+	},
+	"table_row_label": {
+		"message": "Masukkan label untuk URL ini",
+		"description": "[popup] Kolom input untuk nama Tab"
+	},
+	"table_row_org": {
+		"message": "Klik jika Anda ingin Tab ini hanya tersedia untuk Org ini.",
+		"description": "[popup] Kotak centang untuk mengaktifkan Tab khusus Org"
+	},
+	"table_row_org_name": {
+		"message": "Org untuk mana Tab ini tersedia",
+		"description": "[popup] Kolom input untuk nama Org"
+	},
+	"table_row_url": {
+		"message": "Masukkan sub_URL ke mana Anda ingin dialihkan.",
+		"description": "[popup] Kolom input untuk URL Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "Link favorit pengguna."
+	},
+	"tabs_saved": {
+		"message": "Tabs tersimpan.",
+		"description": "[toast] Tabs berhasil disimpan."
+	},
+	"theme_dark": {
+		"message": "Ubah Tema ke Gelap",
+		"description": "[popup] Judul di bulan untuk mengganti tema"
+	},
+	"theme_light": {
+		"message": "Ubah Tema ke Terang",
+		"description": "[popup] Judul di matahari untuk mengganti tema"
+	},
+	"users": {
+		"message": "Pengguna",
+		"description": "Nama halaman terkait ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "Anda telah mengimpor menggunakan 'tabTitle' yang usang!\nDownload file yang diperbarui telah dimulai.\nMulai sekarang, gunakan file yang baru saja diunduh.\nPenggunaan file tersebut akan dihentikan pada rilis mendatang.",
+		"description": "[warning] Menjelaskan kepada pengguna bahwa file yang diimpor menggunakan properti yang usang."
+	},
+	"where_to": {
+		"message": "Ke mana?",
+		"description": "[open-other-org-modal] Judul alternatif untuk modal"
+	}
 }
