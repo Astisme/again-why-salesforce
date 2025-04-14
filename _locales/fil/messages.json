@@ -1,0 +1,498 @@
+{
+  "allow": {
+    "message": "Pahintulutan",
+    "description": "[req_permission] button para pahintulutan ang mga pahintulot"
+  },
+  "cancel": {
+    "message": "Kanselahin",
+    "description": "pamagat o textContent para sa mga button na pumipigil sa kasalukuyang aksyon na maisakatuparan"
+  },
+  "cancel_close": {
+    "message": "Kanselahin at isara",
+    "description": "pamagat o textContent para sa close button ng mga modal"
+  },
+  "confirm_another_org": {
+    "message": "Kumpirmahin ang pagbubukas ng link na ito.",
+    "description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
+  },
+  "continue": {
+    "message": "Magpatuloy",
+    "description": "textContent para sa mga button na nagpapahintulot sa kasalukuyang aksyon na maisakatuparan"
+  },
+  "cxm_empty_no_org_tabs": {
+    "message": "👀 Lahat ng nakikitang Tabs",
+    "description": "[context-menu]"
+  },
+  "cxm_empty_tabs": {
+    "message": "😨 I-reset sa Default",
+    "description": "[context-menu]"
+  },
+  "cxm_export_tabs": {
+    "message": "⬇️ I-export ang Tabs",
+    "description": "[context-menu]"
+  },
+  "cxm_import_tabs": {
+    "message": "🆙 I-import ang Tabs",
+    "description": "[context-menu]"
+  },
+  "cxm_move": {
+    "message": "🧭 Ilipat ang Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move_first": {
+    "message": "↩️ Gawing una",
+    "description": "[context-menu]"
+  },
+  "cxm_move_last": {
+    "message": "↪️ Gawing huli",
+    "description": "[context-menu]"
+  },
+  "cxm_move_left": {
+    "message": "👈 Ilipat pakaliwa",
+    "description": "[context-menu]"
+  },
+  "cxm_move_right": {
+    "message": "👉 Ilipat pakanan",
+    "description": "[context-menu]"
+  },
+  "cxm_open_other_org": {
+    "message": "🔗 Buksan sa ibang Org",
+    "description": "[context-menu]"
+  },
+  "cxm_page_remove_tab": {
+    "message": "👋 Alisin ang Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_page_save_tab": {
+    "message": "💾 I-save bilang Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove": {
+    "message": "💥 Alisin ang Tab(s)",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_left_tabs": {
+    "message": "🔥 Mga Tab sa kaliwa",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_other_tabs": {
+    "message": "↔️ Ibang Tabs",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_right_tabs": {
+    "message": "🌊 Mga Tab sa kanan",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_tab": {
+    "message": "1️⃣ Itong Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update": {
+    "message": "✏️ I-update ang Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 I-toggle ang Org",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 Ibang mga Update",
+    "description": "[context-menu]"
+  },
+  "delete": {
+    "message": "Burahin",
+    "description": "[popup] burahin ang isang row"
+  },
+  "delete_all": {
+    "message": "Burahin lahat ng Tabs",
+    "description": "[popup] pamagat sa basurahan para alisan ng laman ang lahat ng Tabs"
+  },
+  "error_close_other_modal": {
+    "message": "Isara muna ang ibang modal!",
+    "description": "[toast] Sinubukan ng user na buksan ang higit sa 1 modal"
+  },
+  "error_cxm_check": {
+    "message": "Error sa pagsusuri ng mga item sa menu",
+    "description": "[error] hindi mahanap ang mga item ng context menu"
+  },
+  "error_cxm_create": {
+    "message": "Error sa paglikha ng mga item sa menu",
+    "description": "[error] hindi ma-initialize ang mga item ng context menu"
+  },
+  "error_cxm_remove": {
+    "message": "Error sa pag-alis ng mga item sa menu",
+    "description": "[error] hindi maalis ang mga item ng context menu"
+  },
+  "error_duplicate_tab": {
+    "message": "Umiiral na ang Tab na ito",
+    "description": "[error] nadoble ang Tab"
+  },
+  "error_expand_url": {
+    "message": "Hindi ma-expand ang isang walang laman na URL!",
+    "description": "[error] hindi naipasa ang url na ie-expand"
+  },
+  "error_expand_url_no_base": {
+    "message": "Hindi ma-expand ang isang URL nang walang host nito!",
+    "description": "[error] hindi naipasa ang base url na ginamit para mag-expand"
+  },
+  "error_extract_empty_url": {
+    "message": "Hindi ma-extract ang pangalan ng Org mula sa walang laman na URL!",
+    "description": "[error] hindi naipasa ang url kung saan kukunin ang pangalan ng Org"
+  },
+  "error_get_with_no_org": {
+    "message": "Hindi makakuha ng Tabs kung hindi tinukoy ang Org.",
+    "description": "[error] sinubukang maghanap ng mga Tab ayon sa Org nang hindi nagpapadala ng impormasyon ng Org"
+  },
+  "error_import": {
+    "message": "Error sa pag-import:\n",
+    "description": "[error] nagkaroon ng error sa proseso ng pag-import"
+  },
+  "error_invalid_tab": {
+    "message": "Hindi balidong Tab",
+    "description": "[error] hindi balido ang Tab"
+  },
+  "error_link_with_id": {
+    "message": "Hindi maaaring umiral ang page na ito sa ibang Org, dahil naglalaman ito ng Id!",
+    "description": "[open-other-org-modal] babala sa user na maaaring hindi umiiral ang link sa ibang Org"
+  },
+  "error_many_matching_tab": {
+    "message": "Nakahanap ng higit sa 1 tumutugmang Tab.",
+    "description": "[error] maraming Tabs ang nakuha"
+  },
+  "error_minify_url": {
+    "message": "Hindi ma-minify ang isang walang laman na URL!",
+    "description": "[error] hindi naipasa ang url na babawasan"
+  },
+  "error_missing_favourite_id": {
+    "message": "Hindi makakuha ng paboritong larawan nang walang Id",
+    "description": "[error] walang paboritong id ang naipasa"
+  },
+  "error_missing_key": {
+    "message": "Hindi mahanap ang key kahit saan",
+    "description": "[error] walang nakitang pagsasalin sa mga file"
+  },
+  "error_no_array": {
+    "message": "Hindi balido ang array o walang array na naipasa",
+    "description": "[error] hindi nakatanggap ng balidong array"
+  },
+  "error_no_browser_tab": {
+    "message": "Hindi mahanap ang kasalukuyang Tab ng browser.",
+    "description": "[error] hindi makapagtatag ng aktibong Tab ng browser ang background page"
+  },
+  "error_no_callback": {
+    "message": "Mangyaring magbigay ng callback",
+    "description": "[error] hindi naipasa ang function na tatawagan sa dulo ng method"
+  },
+  "error_no_cookies": {
+    "message": "Hindi nakahanap ng tumutugmang cookies",
+    "description": "[error] hindi naibalik ang Salesforce cookies"
+  },
+  "error_no_data": {
+    "message": "Hindi matukoy ang Tab nang walang data.",
+    "description": "[error] sinubukang kumuha ng Tab nang hindi nagpapadala ng data"
+  },
+  "error_no_headers": {
+    "message": "Nabigong mahanap ang mga header.",
+    "description": "[error] Hindi mahanap ng extension kung saan ilalagay ang paboritong button"
+  },
+  "error_no_matching_tab": {
+    "message": "Hindi nakahanap ng anumang tumutugmang Tabs.",
+    "description": "[error] walang Tabs na nakuha"
+  },
+  "error_no_message": {
+    "message": "Hindi tinukoy ang mensaheng ipapadala.",
+    "description": "[error] walang nakitang mensahe na ipapadala sa ibang bahagi ng code"
+  },
+  "error_no_object": {
+    "message": "Walang object na susuriin!",
+    "description": "[error] hindi naipasa ang object"
+  },
+  "error_no_setup_tab": {
+    "message": "Nabigong mahanap ang Setup tab.",
+    "description": "[error] Hindi mahanap ng extension kung saan ilalagay ang mga paboritong Tabs."
+  },
+  "error_no_url": {
+    "message": "Walang URL na susuriin!",
+    "description": "[error] hindi naipasa ang url na susuriin"
+  },
+  "error_remove_not_favourite": {
+    "message": "Hindi maalis ang isang hindi paboritong Tab!",
+    "description": "[error] sinubukan ng user na alisin ang isang Tab na hindi pa nai-save"
+  },
+  "error_sync_nothing": {
+    "message": "Hindi ma-sync ang mga null na Tab!",
+    "description": "[error] sinubukang i-synchronize ang wala"
+  },
+  "error_tab_label": {
+    "message": "Ang label ay dapat isang hindi walang laman na string",
+    "description": "[error] sinubukan ng user na lumikha ng Tab na walang label"
+  },
+  "error_tab_not_found": {
+    "message": "Hindi nahanap ang Tab.",
+    "description": "[error] hindi kasama ang Tab sa array"
+  },
+  "error_tab_object_creation": {
+    "message": "Kapag tumatawag gamit ang isang object, huwag magpasa ng anupaman.",
+    "description": "[error] error sa implementasyon ng developer"
+  },
+  "error_tab_org": {
+    "message": "Ang Org ay dapat isang string o undefined",
+    "description": "[error] sinubukan ng user na lumikha ng Tab na may hindi balidong halaga ng Org"
+  },
+  "error_tab_unexpected_keys": {
+    "message": "Nakahanap ng mga hindi inaasahang key:",
+    "description": "[error] sinubukan ng user na lumikha ng Tab na may ilang hindi suportadong mga property"
+  },
+  "error_tab_url": {
+    "message": "Ang URL ay dapat isang hindi walang laman na string",
+    "description": "[error] sinubukan ng user na lumikha ng Tab na walang url"
+  },
+  "error_tabcont_initialize": {
+    "message": "Hindi ma-initialize gamit ang",
+    "description": "[error] nabigo ang pag-initialize ng container ng Tab"
+  },
+  "error_tabcont_invalid_tabs": {
+    "message": "Nakakita ng hindi balido(ng) Tab(s).\nUnang paglitaw:",
+    "description": "[error] naipasa ang mga hindi balidong Tabs"
+  },
+  "error_useless_remove": {
+    "message": "Hindi maalis:\nHindi maalis ang isang page na hindi pa nai-save dati",
+    "description": "[error] sinubukan ng user na alisin ang isang page na hindi pa nai-save"
+  },
+  "error_useless_save": {
+    "message": "Hindi mai-save:\nNai-save na ang page na ito!",
+    "description": "[error] sinubukan ng user na i-save ang isang page na nai-save na"
+  },
+  "export": {
+    "message": "I-export",
+    "description": "[popup] button ng pag-export"
+  },
+  "export_title": {
+    "message": "I-export lahat ng Tabs",
+    "description": "[popup] pamagat sa button ng pag-export"
+  },
+  "extension_description": {
+    "message": "Lumikha at pamahalaan ang mga custom na Tab sa available na espasyo sa Salesforce Lightning Setup page.",
+    "description": "[manifest] Ang deskripsyon ng extension na ito"
+  },
+  "extension_label": {
+    "message": "Again, Why Salesforce",
+    "description": "Ang pangalan ng extension na ito"
+  },
+  "file": {
+    "message": "file",
+    "description": "isang file"
+  },
+  "files": {
+    "message": "mga file",
+    "description": "maramihang file"
+  },
+  "import": {
+    "message": "I-import",
+    "description": "[popup] button ng pag-import"
+  },
+  "import_duplicate_description": {
+    "message": "Babale-walain ang mga duplicate na Tab.<br />Itinuturing na duplicate ang dalawang Tab kung pareho ang kanilang URL.",
+    "description": "[import] deskripsyon ng ginagawa ng proseso ng pag-import"
+  },
+  "import_invalid_file": {
+    "message": "Hindi balidong uri ng file.\nTanging mga JSON file ang suportado.",
+    "description": "[error] ang file na ginamit para sa pag-import ay hindi isang JSON"
+  },
+  "import_successful": {
+    "message": "Matagumpay na na-import",
+    "description": "[import] natapos na ang pag-import. Pagkatapos nito, ipapakita ang bilang ng mga record na na-import"
+  },
+  "import_tabs": {
+    "message": "I-import ang Tabs",
+    "description": "[modal-title] para sa proseso ng pag-import"
+  },
+  "import_title": {
+    "message": "I-import ang Tabs mula sa json file",
+    "description": "[popup] pamagat sa button ng pag-import"
+  },
+  "insert_another": {
+    "message": "Magpasok ng iba",
+    "description": "[error-open-other-org-modal] mensahe kapag inilagay ng user ang parehong Org sa modal"
+  },
+  "insert_another_org": {
+    "message": "Ang inilagay na Org ay ang kasalukuyan!\nMangyaring magpasok ng ibang Org.",
+    "description": "[error-open-other-org-modal] mensahe kapag inilagay ng user ang parehong Org sa modal"
+  },
+  "insert_valid_org": {
+    "message": "Mangyaring magpasok ng balidong Org!",
+    "description": "[error-open-other-org-modal] mensahe kapag naglagay ang user ng maling url sa modal"
+  },
+  "invalid_url": {
+    "message": "Hindi balidong URL",
+    "description": "[notSalesforceSetup] isang URL na hindi balido"
+  },
+  "login_to_salesforce": {
+    "message": "Mag-login sa Salesforce",
+    "description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce login page"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "placeholder para sa Update Tab modal"
+  },
+  "no_match": {
+    "message": "Walang tumugmang aksyon",
+    "description": "[error] sa Salesforce kapag hindi maitugma ng switch ang hiniling na aksyon"
+  },
+  "nss_detected": {
+    "message": " nakita.",
+    "description": "[notSalesforceSetup] isang bagay na natagpuan. Siguraduhing may kasamang espasyo sa simula ng mensahe."
+  },
+  "nss_prefix": {
+    "message": "Ito ay hindi isang ",
+    "description": "[notSalesforceSetup] ito ang prefix na ipinapakita kapag wala ang user sa isang Salesforce page. Siguraduhing may kasamang espasyo sa dulo ng mensahe"
+  },
+  "open_setup": {
+    "message": "Buksan ang Setup",
+    "description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
+  },
+  "or_drop": {
+    "message": "O i-drop",
+    "description": "[import] hayaan ang user na ilipat ang mga file gamit ang kanilang mouse at bitawan ang mga ito"
+  },
+  "org_link": {
+    "message": "Link ng Org",
+    "description": "[input-label]"
+  },
+  "other_org_info": {
+    "message": "Impormasyon ng ibang Org",
+    "description": "[modal-title]"
+  },
+  "other_org_placeholder": {
+    "message": "ibang-org",
+    "description": "[input-placeholder]"
+  },
+  "overwrite_tabs": {
+    "message": "Patungan ang mga naka-save na Tabs.",
+    "description": "[label] burahin lahat ng naka-save na Tabs sa proseso ng pag-import"
+  },
+  "preserve_org_tabs": {
+    "message": "Panatilihin ang mga Tabs para sa ibang mga Org.",
+    "description": "[label] panatilihin lahat ng Org-specific na Tabs sa proseso ng pag-import"
+  },
+  "remove_tab": {
+    "message": "Alisin ang Tab",
+    "description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+  },
+  "req_permissions_dont_ask": {
+    "message": "Huwag nang tanungin muli.",
+    "description": "[req_permission] label kapag ayaw ng user na payagan ang mga pahintulot nang permanente"
+  },
+  "req_permissions_header": {
+    "message": "Mangyaring pahintulutan kaming i-access<br />ang mga Salesforce Setup page nang awtomatiko.",
+    "description": "[req_permission] header ng page para humiling ng mga pahintulot"
+  },
+  "req_permissions_paragraph": {
+    "message": "Kung gusto mo, maaari mong ipalabas ang iyong mga paboritong Tabs<br />sa sandaling mag-navigate ka sa isang Salesforce Setup page<br />nang hindi kinakailangang i-click ang extension na ito sa bawat oras.",
+    "description": "[req_permission] teksto upang ipaliwanag kung bakit hinihiling ang mga pahintulot"
+  },
+  "required": {
+    "message": "kailangan",
+    "description": "[input] nagmamarka sa isang input field bilang mandatoryo"
+  },
+  "required_info": {
+    "message": "= Kinakailangang Impormasyon",
+    "description": "[modal] nagsasabi sa user na ang ilang impormasyon ay mandatoryo"
+  },
+  "salesforce_lightning": {
+    "message": "Salesforce Lightning",
+    "description": "[notSalesforceSetup] ang Salesforce Lightning platform"
+  },
+  "save_tab": {
+    "message": "I-save bilang Tab",
+    "description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+  },
+  "setup_page": {
+    "message": "Pahina ng Setup",
+    "description": "[notSalesforceSetup] ang page na ginagamit para baguhin ang mga setting ng Salesforce"
+  },
+  "skip": {
+    "message": "Laktawan",
+    "description": "[req_permission] button para HINDI payagan ang mga pahintulot"
+  },
+  "successfully_imported": {
+    "message": "Matagumpay na na-import",
+    "description": "[toast] nagdagdag ang user ng mga Tab mula sa isang panlabas na file"
+  },
+  "tab_explain": {
+    "message": "Bawat item ay dapat may 'label' at 'url' bilang mga string. Bukod pa rito, bawat item ay maaaring magkaroon ng 'org' bilang string.",
+    "description": "[error] nagpapaliwanag kung paano dapat buuin ang isang Tab"
+  },
+  "tab_information": {
+    "message": "Impormasyon ng Tab",
+    "description": "pamagat para sa update Tab modal"
+  },
+  "tab_label": {
+    "message": "Label ng Tab",
+    "description": "Ang Label property ng Tab, ang pangalan nito"
+  },
+  "tab_org": {
+    "message": "Org ng Tab",
+    "description": "Ang Org property ng Tab, kung ito ay para sa isang Salesforce Organization"
+  },
+  "tab_url": {
+    "message": "URL ng Tab",
+    "description": "Ang URL property ng Tab, kung saan ito tumuturo"
+  },
+  "table_delete": {
+    "message": "Burahin ang Tab",
+    "description": "[popup] tulong na teksto para sa column na may button na burahin"
+  },
+  "table_org": {
+    "message": "Ay Org Tab",
+    "description": "[popup] tulong na teksto para sa column na may Org checkbox"
+  },
+  "table_row_label": {
+    "message": "Ilagay ang label para sa URL na ito",
+    "description": "[popup] input field na may pangalan ng Tab"
+  },
+  "table_row_org": {
+    "message": "I-click kung gusto mong maging available ang Tab na ito para lamang sa Org na ito.",
+    "description": "[popup] checkbox para i-toggle ang Tab na maging Org-specific"
+  },
+  "table_row_org_name": {
+    "message": "Ang Org kung saan available ang Tab na ito.",
+    "description": "[popup] input field na may pangalan ng Org"
+  },
+  "table_row_url": {
+    "message": "Ilagay ang sub_URL kung saan mo gustong ma-redirect.",
+    "description": "[popup] input field na may URL ng Tab"
+  },
+  "tabs": {
+    "message": "Tabs",
+    "description": "ang mga paboritong link ng user"
+  },
+  "tabs_saved": {
+    "message": "Nai-save ang mga Tabs.",
+    "description": "[toast] Matagumpay na naimbak ang mga Tabs."
+  },
+  "theme_dark": {
+    "message": "Palitan ang Tema sa Madilim",
+    "description": "[popup] pamagat sa buwan para palitan ang tema"
+  },
+  "theme_light": {
+    "message": "Palitan ang Tema sa Maliwanag",
+    "description": "[popup] pamagat sa araw para palitan ang tema"
+  },
+  "upload": {
+    "message": "Mag-upload",
+    "description": "[import] hayaan ang user na mag-browse sa kanilang mga file at piliin ang tama"
+  },
+  "users": {
+    "message": "Mga User",
+    "description": "Ang pangalan ng page na nauugnay sa ManageUsers/home"
+  },
+  "warn_deprecated_tab_title": {
+    "message": "Nag-import ka gamit ang deprecated na 'tabTitle'!\nNagsimula na ang pag-download ng na-update na file.\nMula ngayon, gamitin ang bagong na-download na file pakiusap.\nAng paggamit ng naturang file ay ititigil sa susunod na release.",
+    "description": "[warning] Ipaliwanag sa user na ang file na kanilang na-import ay gumagamit ng isang deprecated na property"
+  },
+  "where_to": {
+    "message": "Saan papunta?",
+    "description": "[open-other-org-modal] fallback na pamagat para sa modal"
+  }
+}
