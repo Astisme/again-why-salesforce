@@ -9,8 +9,9 @@
 		<link rel="stylesheet" href="./popup.css" />
 		<link rel="stylesheet" href="../basic.css" />
 		<script src="../themeHandler.js" type="module"></script>
+        <script src="/translator.js" type="module"></script>
+		<script src="/dragHandler.js" type="module"></script>
 		<script src="./popup.js" type="module"></script>
-		<script src="../../dragHandler.js" type="module"></script>
 	</head>
 
 	<body>
@@ -22,9 +23,11 @@
 						<svg
 							id="sun"
 							alt="Change Theme to Light"
+							title="Change Theme to Light"
 							class="visibility-transition"
 							viewBox="0 0 20 20"
 							xmlns="http://www.w3.org/2000/svg"
+                            data-i18n="theme_light+-+alt+-+title"
 						>
 							<g transform="translate(-2 -2)">
 								<path
@@ -46,9 +49,11 @@
 						<svg
 							id="moon"
 							alt="Change Theme to Dark"
+							title="Change Theme to Dark"
 							class="visibility-transition hidden invisible"
 							viewBox="-0.14 0 20.03 20.03"
 							xmlns="http://www.w3.org/2000/svg"
+                            data-i18n="theme_dark+-+alt+-+title"
 						>
 							<g transform="translate(-2.25 -2)">
 								<path
@@ -65,21 +70,23 @@
 							</g>
 						</svg>
 					</div>
-					<button id="export" class="success" title="Export all tabs">
-						<span>Export</span>
+					<button id="export" class="success" title="Export all Tabs" data-i18n="export_title+-+title">
+						<span data-i18n="export+-+textContent">Export</span>
 					</button>
 					<button
 						id="import"
 						class="highlight"
-						title="Import tabs from json file"
+						title="Import Tabs from json file"
+                        data-i18n="import_title+-+title"
 					>
-						<span>Import</span>
+						<span data-i18n="import+-+textContent">Import</span>
 					</button>
 					<img
 						id="delete-all"
 						src="../../assets/svgs/trash.svg"
-						alt="Delete all tabs"
-						title="Delete all tabs"
+						alt="Delete all Tabs"
+						title="Delete all Tabs"
+                        data-i18n="delete_all+-+title+-+alt"
 					/>
 				</div>
 			</header>
@@ -90,19 +97,19 @@
 							<span><!-- used for the svg --></span>
 						</th>
 						<th scope="col">
-							<span>Tab Label</span>
+							<span data-i18n="tab_label+-+textContent">Tab Label</span>
 						</th>
 						<th scope="col">
-							<span>Tab Url</span>
+							<span data-i18n="tab_url+-+textContent">Tab URL</span>
 						</th>
 						<th scope="col">
-							<span class="slds-assistive-text">
-								Is Org Tab
+							<span class="slds-assistive-text" data-i18n="table_org+-+textContent">
+                                Is Org Tab
 							</span>
 						</th>
 						<th scope="col">
-							<span class="slds-assistive-text">
-								Delete Tab
+							<span class="slds-assistive-text" data-i18n="table_delete+-+textContent">
+                                Delete Tab
 							</span>
 						</th>
 					</tr>
@@ -161,6 +168,7 @@
 							class="label"
 							placeholder="Flows"
 							title="Enter the label for this URL"
+                            data-i18n="table_row_label+-+title"
 						/>
 					</div>
 				</td>
@@ -171,7 +179,8 @@
 							name="url"
 							class="url"
 							placeholder="Flows/home"
-							title="Enter the sub-URL where you want to be redirected."
+							title="Enter the sub_URL where you want to be redirected."
+                            data-i18n="table_row_url+-+title"
 						/>
 					</div>
 				</td>
@@ -181,7 +190,8 @@
 							type="checkbox"
 							name="only-org"
 							class="only-org"
-							title="Click if you want this tab to be available for this Org only."
+							title="Click if you want this Tab to be available for this Org only."
+                            data-i18n="table_row_org+-+title"
 						/>
 					</div>
 				</td>
@@ -193,12 +203,13 @@
 							class="org"
 							title="The Org for which this Tab is available."
 							disabled="true"
+                            data-i18n="table_row_org_name+-+title"
 						/>
 					</div>
 				</td>
 				<td>
 					<button class="delete error" disabled>
-						<span>Delete</span>
+						<span data-i18n="delete+-+textContent">Delete</span>
 					</button>
 				</td>
 			</tr>

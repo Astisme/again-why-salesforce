@@ -5,114 +5,118 @@ import {
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
 } from "/constants.js";
-import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import Tab from "/tab.js";
+import { ensureTranslatorAvailability } from "/translator.js";
+import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
+import { bg_getSalesforceLanguage } from "./background.js";
+
+let translator = null;
 
 let areMenuItemsVisible = false;
 
-const menuItems = [
+const menuItemsOriginal = [
 	{
 		id: "open-other-org",
-		title: "🔗 Open in another Org",
+		title: "cxm_open_other_org",
 		contexts: ["link", "page", "frame"],
 	},
 
-	{ id: "update", title: "✏️ Update Tab", contexts: ["link"] },
+	{ id: "update", title: "cxm_update", contexts: ["link"] },
 	{
 		id: "update-org",
-		title: "📌 Toggle Org",
+		title: "cxm_update_org",
 		contexts: ["link"],
 		parentId: "update",
 	},
 	{
 		id: "update-tab",
-		title: "🧹 Other Updates",
+		title: "cxm_update_tab",
 		contexts: ["link"],
 		parentId: "update",
 	},
 
-	{ id: "move", title: "🧭 Move Tab", contexts: ["link"] },
+	{ id: "move", title: "cxm_move", contexts: ["link"] },
 	{
 		id: "move-first",
-		title: "↩️ Make first",
+		title: "cxm_move_first",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
 		id: "move-left",
-		title: "👈 Move left",
+		title: "cxm_move_left",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
 		id: "move-right",
-		title: "👉 Move right",
+		title: "cxm_move_right",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
 		id: "move-last",
-		title: "↪️ Make last",
+		title: "cxm_move_last",
 		contexts: ["link"],
 		parentId: "move",
 	},
 
-	{ id: "remove", title: "💥 Remove Tab(s)", contexts: ["link"] },
+	{ id: "remove", title: "cxm_remove", contexts: ["link"] },
 	{
 		id: "remove-tab",
-		title: "1️⃣ This taT",
+		title: "cxm_remove_tab",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: "remove-other-tabs",
-		title: "↔️ Other Tabs",
+		title: "cxm_remove_other_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: "remove-left-tabs",
-		title: "🔥 Tabs to the left",
+		title: "cxm_remove_left_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: "remove-right-tabs",
-		title: "🌊 Tabs to the right",
+		title: "cxm_remove_right_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: "empty-no-org-tabs",
-		title: "👀 All visible Tabs",
+		title: "cxm_empty_no_org_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: "empty-tabs",
-		title: "😨 Reset to Default",
+		title: "cxm_empty_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 
 	{
 		id: "import-tabs",
-		title: "🆙 Import Tabs",
+		title: "cxm_import_tabs",
 		contexts: ["page", "frame"],
 	},
 	{
 		id: "export-tabs",
-		title: "⬇️ Export Tabs",
+		title: "cxm_export_tabs",
 		contexts: ["page", "frame"],
 	},
 	{
 		id: "page-save-tab",
-		title: "💾 Save as Tab",
+		title: "cxm_page_save_tab",
 		contexts: ["page", "frame"],
 	},
 	{
 		id: "page-remove-tab",
-		title: "👋 Remove Tab",
+		title: "cxm_page_remove_tab",
 		contexts: ["page", "frame"],
 	},
 ].map((item) => {
@@ -134,18 +138,23 @@ const menuItems = [
  */
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
+    if(translator == null)
+        translator = await ensureTranslatorAvailability();
+    areMenuItemsVisible = true;
 	try {
-		await BROWSER.contextMenus.removeAll();
+        await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+        const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
+            item.title = await translator.translate(item.title);
 			await BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				throw new Error(BROWSER.runtime.lastError.message);
 			}
 		}
-		areMenuItemsVisible = true;
 	} catch (error) {
-		console.error("Error creating menu items:", error);
-		areMenuItemsVisible = false;
+        const msg = await translator.translate("error_cxm_create");
+		console.error(msg, error);
+        await removeMenuItems();
 	}
 }
 
@@ -158,7 +167,10 @@ async function removeMenuItems() {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
-		console.error("Error removing menu items:", error);
+        if(translator == null)
+            translator = await ensureTranslatorAvailability();
+        const msg = await translator.translate("error_cxm_remove");
+		console.error(msg, error);
 	}
 }
 
@@ -189,7 +201,10 @@ async function checkAddRemoveContextMenus(what) {
 	} catch (error) {
 		console.trace();
 		if (error != null && error.message !== "") {
-			console.error("Error checking context menus:", error);
+            if(translator == null)
+                translator = await ensureTranslatorAvailability();
+            const msg = await translator.translate("error_cxm_check");
+			console.error(msg, error);
 		}
 	}
 }

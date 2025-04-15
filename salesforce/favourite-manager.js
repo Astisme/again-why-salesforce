@@ -1,5 +1,8 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME } from "../constants.js";
+import Tab from "/tab.js";
+import { BROWSER, EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
+import { ensureTranslatorAvailability } from "/translator.js";
+
 import {
 	ensureAllTabsAvailability,
 	getAllTabs,
@@ -48,7 +51,7 @@ function getHeader(innerElement = "") {
  *
  * @returns {HTMLButtonElement} The generated button element with its child elements (star images and styles).
  */
-function generateFavouriteButton() {
+async function generateFavouriteButton() {
 	const button = document.createElement("button");
 	button.id = BUTTON_ID;
 	button.classList.add("slds-button", "slds-button--neutral", "uiButton");
@@ -97,10 +100,11 @@ function generateFavouriteButton() {
 		return { img, span };
 	}
 	const star = BROWSER.runtime.getURL("assets/svgs/star.svg");
+  const translator = await ensureTranslatorAvailability();
 	const { img: starImg, span: starSpan } = createImageElement(
 		STAR_ID,
 		star,
-		"Save as Tab",
+		await translator.translate("save_tab"),
 	);
 	span.appendChild(starImg);
 	span.appendChild(starSpan);
@@ -108,7 +112,7 @@ function generateFavouriteButton() {
 	const { img: slashedStarImg, span: slashedStarSpan } = createImageElement(
 		SLASHED_STAR_ID,
 		slashedStar,
-		"Remove Tab",
+        await translator.translate("remove_tab"),
 	);
 	slashedStarSpan.classList.add("hidden");
 	span.appendChild(slashedStarImg);
@@ -132,7 +136,7 @@ function generateFavouriteButton() {
  */
 function getFavouriteImage(favouriteId, button = null) {
 	if (favouriteId == null) {
-		throw new Error("Cannot get favourite image without the Id");
+		throw new Error("error_missing_favourite_id");
 	}
 	return button?.querySelector(`#${favouriteId}`) ??
 		button?.querySelector(`.${favouriteId}`) ??
@@ -205,7 +209,7 @@ async function actionFavourite() {
 		allTabs = await ensureAllTabsAvailability();
 		const tabToRemove = allTabs.getTabsByData({ url })[0];
 		if (tabToRemove == null) {
-			showToast("Cannot remove a non favourite Tab!", false, true);
+			showToast("error_remove_not_favourite", false, true);
 			return;
 		}
 		await performActionOnTabs("remove-this", tabToRemove);
@@ -226,7 +230,9 @@ async function actionFavourite() {
  */
 export async function showFavouriteButton(count = 0) {
 	if (count > 5) {
-		console.error("Again, Why Salesforce - failed to find headers.");
+        const translator = await ensureTranslatorAvailability();
+        const failHead = await translator.translate("error_no_headers");
+		console.error(`${EXTENSION_LABEL} - ${failHead}`);
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}
 	const url = Tab.minifyURL(getCurrentHref());
@@ -252,7 +258,7 @@ export async function showFavouriteButton(count = 0) {
 		toggleFavouriteButton(allTabs.exists({ url }));
 		return;
 	}
-	const button = generateFavouriteButton();
+	const button = await generateFavouriteButton();
 	header.appendChild(button);
 	toggleFavouriteButton(isCurrentlyOnSavedTab, button); // init correctly
 }
@@ -271,8 +277,8 @@ export function pageActionTab(save = true) {
 	if (!favourite.classList.contains("hidden")) favourite.click();
 	else {
 		const message = save
-			? "Cannot save:\nThis page has already been saved!"
-			: "Cannot remove:\nCannot remove a page that has not been saved before";
+			? "error_useless_save"
+			: "error_useless_remove";
 		showToast(message, true, true);
 	}
 }

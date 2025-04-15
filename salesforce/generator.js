@@ -1,13 +1,16 @@
 "use strict";
+import Tab from "/tab.js";
 import {
-    BROWSER,
+  BROWSER,
+	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
-} from "../constants.js";
+} from "/constants.js";
+import { ensureTranslatorAvailability } from "/translator.js";
+
 import {
-	// functions
 	getCurrentHref,
 	showToast,
 } from "./content.js";
@@ -136,12 +139,13 @@ export function generateRowTemplate(
  * @throws {Error} Throws an error if required parameters are missing or invalid.
  * @returns {HTMLElement} The generated toast container element.
  */
-export function generateSldsToastMessage(message, isSuccess, isWarning) {
+export async function generateSldsToastMessage(message, isSuccess, isWarning) {
+    const translator = await ensureTranslatorAvailability();
 	if (
 		message == null || message === "" | isSuccess == null ||
 		isWarning == null
 	) {
-		throw new Error("Unable to generate Toast Message.");
+		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
 	const toastType = isSuccess
 		? (isWarning ? "info" : "success")
@@ -230,7 +234,7 @@ export function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
 	messageSpan.setAttribute("data-aura-class", "forceActionsText");
-	messageSpan.innerHTML = message.replaceAll("\n", "<br />");
+	messageSpan.innerHTML = (await translator.translate(message)).replaceAll("\n", "<br />");
 	// Assemble the message
 	descriptionDiv.appendChild(messageSpan);
 	contentInner.appendChild(descriptionDiv);
@@ -251,10 +255,11 @@ export function generateSldsToastMessage(message, isSuccess, isWarning) {
  *
  * @returns {HTMLElement} The <abbr> element representing the required indicator.
  */
-function generateRequired() {
+async function generateRequired() {
+    const translator = await ensureTranslatorAvailability();
 	const requiredElement = document.createElement("abbr");
 	requiredElement.classList.add("slds-required");
-	requiredElement.setAttribute("title", "required");
+	requiredElement.setAttribute("title", await translator.translate("required"));
 	requiredElement.setAttribute("part", "required");
 	requiredElement.textContent = "*";
 	return requiredElement;
@@ -282,7 +287,7 @@ function generateRequired() {
  * - Applies optional attributes like `placeholder`, `required`, and `style`.
  * - Maintains Salesforce Lightning Design System (SLDS) styling conventions.
  */
-function generateInput({
+async function generateInput({
 	label,
 	type = "text",
 	required = false,
@@ -291,7 +296,16 @@ function generateInput({
 	append = null,
 	style = null,
     value = null,
-} = {}) {
+    title = null,
+} = {},
+    {
+        translateLabel = true,
+        translatePlaceholder = true,
+        translateTitle = true,
+        //translateValue = true
+} = {}
+) {
+    const translator = await ensureTranslatorAvailability();
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
 	const formElement = document.createElement("div");
@@ -316,9 +330,12 @@ function generateInput({
 	labelElement.setAttribute("for", inputId);
 	formElementLabel.appendChild(labelElement);
 	if (required) {
-		labelElement.appendChild(generateRequired());
+		labelElement.appendChild(await generateRequired());
 	}
-	labelElement.append(label);
+    let msg_label = label;
+    if(translateLabel)
+        msg_label = await translator.translate(label);
+	labelElement.append(msg_label);
 	const inputWrapper = document.createElement("div");
 	inputWrapper.classList.add("slds-form-element__control", "slds-grow");
 	inputWrapper.setAttribute("part", "input-container");
@@ -337,7 +354,7 @@ function generateInput({
 	 * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
 	 * @returns {HTMLInputElement} The created input element.
 	 */
-	function createInputElement(
+	async function createInputElement(
 		{
 			id = null,
 			label = null,
@@ -347,6 +364,7 @@ function generateInput({
 			enabled = true,
 			style = null,
             value = null,
+            title = null,
 		},
 	) {
 		const input = document.createElement("input");
@@ -354,19 +372,36 @@ function generateInput({
 		input.setAttribute("part", "input");
 		input.setAttribute("maxlength", "255");
 		id && (input.id = id);
-		label && input.setAttribute("name", label);
+        if(label){
+            let msg_tranLabel = label;
+            if(translateLabel)
+                msg_tranLabel = await translator.translate(label);
+		    input.setAttribute("name", msg_tranLabel);
+        }
 		type && input.setAttribute("type", type);
-		placeholder && input.setAttribute("placeholder", placeholder);
+        if(placeholder){
+            let msg_tranPlaceholder = placeholder;
+            if(translatePlaceholder)
+                msg_tranPlaceholder = await translator.translate(placeholder);
+            input.setAttribute("placeholder", msg_tranPlaceholder);
+        }
 		required && input.setAttribute("required", true);
 		enabled === false && input.setAttribute("disabled", true);
 		style && (input.style = style);
         value && (input.value = value);
+        if(title){
+            let msg_tranTitle = title;
+            if(translateTitle)
+                msg_tranTitle = await translator.translate(title);
+            input.setAttribute("title", msg_tranTitle);
+        }
 		return input;
 	}
 	if (prepend != null) {
-		inputWrapper.appendChild(createInputElement(prepend));
+        const prepChild = await createInputElement(prepend);
+		inputWrapper.appendChild(prepChild);
 	}
-	const inputContainer = createInputElement({
+	const inputContainer = await createInputElement({
 		id: inputId,
 		label,
 		type,
@@ -374,10 +409,12 @@ function generateInput({
 		required,
 		style,
         value,
+        title,
 	});
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
-		inputWrapper.appendChild(createInputElement(append));
+        const appChild = await createInputElement(append);
+		inputWrapper.appendChild(appChild);
 	}
 	return { inputParent, inputContainer };
 }
@@ -396,7 +433,8 @@ function generateInput({
  * - Builds a nested grid layout inside the section for content organization.
  * - Adds empty slots (`divParent` and cloned `borderSpacer`) for future customization or dynamic content injection.
  */
-export function generateSection(sectionTitle = null) {
+export async function generateSection(sectionTitle = null) {
+    const translator = await ensureTranslatorAvailability();
 	const section = document.createElement("records-record-layout-section");
 	section.setAttribute("lwc-692i7qiai51-host", "");
 	if (sectionTitle != null) {
@@ -426,8 +464,9 @@ export function generateSection(sectionTitle = null) {
 		const span = document.createElement("span");
 		span.setAttribute("lwc-mlenr16lk9", "");
 		span.classList.add("slds-truncate");
-		span.setAttribute("title", sectionTitle);
-		span.textContent = sectionTitle;
+        const tranSectionTitle = await translator.translate(sectionTitle);
+		span.setAttribute("title", tranSectionTitle);
+		span.textContent = tranSectionTitle;
 		h3.appendChild(span);
 	}
 	const progressiveContainer = document.createElement("div");
@@ -474,7 +513,8 @@ export function generateSection(sectionTitle = null) {
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
  */
-export function generateSldsModal(modalTitle) {
+export async function generateSldsModal(modalTitle) {
+    const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -511,7 +551,7 @@ export function generateSldsModal(modalTitle) {
 	dialog.style.opacity = "1";
 	dialog.setAttribute(
 		"aria-label",
-		`Again, Why Salesforce${
+		`${EXTENSION_LABEL}${
 			modalTitle != null && modalTitle !== "" ? ": " + modalTitle : ""
 		}`,
 	);
@@ -530,7 +570,8 @@ export function generateSldsModal(modalTitle) {
 	modalContainer.appendChild(modalHeader);
 	const closeButton = document.createElement("button");
 	closeButton.setAttribute("type", "button");
-	closeButton.setAttribute("title", "Cancel and close");
+    const msg_cancelClose = await translator.translate("cancel_close")
+	closeButton.setAttribute("title", msg_cancelClose);
 	closeButton.classList.add(
 		"slds-button",
 		"slds-button_icon",
@@ -569,7 +610,7 @@ export function generateSldsModal(modalTitle) {
 	closeGroupElement.appendChild(closePath);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = "Cancel and close";
+	assistiveText.textContent = msg_cancelClose;
 	closeButton.appendChild(assistiveText);
 	const modalBody = document.createElement("div");
 	modalBody.id = "content_1099:0";
@@ -652,7 +693,7 @@ export function generateSldsModal(modalTitle) {
 	abbr.classList.add("slds-required");
 	abbr.textContent = "*";
 	legend.appendChild(abbr);
-	legend.append("= Required Information");
+	legend.append(await translator.translate("required_info"));
 	const footerContainer = document.createElement("div");
 	footerContainer.classList.add("inlineFooter");
 	footerContainer.setAttribute("data-aura-rendered-by", "1215:0");
@@ -764,7 +805,8 @@ export function generateSldsModal(modalTitle) {
 	);
 	cancelButton.setAttribute("aria-live", "off");
 	cancelButton.setAttribute("type", "button");
-	cancelButton.setAttribute("title", "Cancel");
+    const msg_cancel = await translator.translate("cancel");
+	cancelButton.setAttribute("title", msg_cancel);
 	cancelButton.setAttribute("aria-label", "");
 	cancelButton.setAttribute("data-aura-rendered-by", "1364:0");
 	cancelButton.setAttribute("data-aura-class", "uiButton forceActionButton");
@@ -774,7 +816,7 @@ export function generateSldsModal(modalTitle) {
 	cancelSpan.classList.add("label", "bBody");
 	cancelSpan.setAttribute("dir", "ltr");
 	cancelSpan.setAttribute("data-aura-rendered-by", "1367:0");
-	cancelSpan.textContent = "Cancel";
+	cancelSpan.textContent = msg_cancel;
 	cancelButton.appendChild(cancelSpan);
 	const saveButton = document.createElement("button");
 	saveButton.id = MODAL_CONFIRM_ID;
@@ -787,7 +829,8 @@ export function generateSldsModal(modalTitle) {
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-	saveButton.setAttribute("title", "Save");
+    const msg_continue = await translator.translate("continue");
+	saveButton.setAttribute("title", msg_continue);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.setAttribute("data-aura-rendered-by", "1380:0");
 	saveButton.setAttribute("data-aura-class", "uiButton forceActionButton");
@@ -796,7 +839,7 @@ export function generateSldsModal(modalTitle) {
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
 	saveSpan.setAttribute("data-aura-rendered-by", "1383:0");
-	saveSpan.textContent = "Continue";
+	saveSpan.textContent = msg_continue;
 	saveButton.appendChild(saveSpan);
 	/**
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
@@ -832,27 +875,26 @@ export function generateSldsModal(modalTitle) {
  * - closeButton: The close button element for closing the modal.
  * - inputContainer: The container element for the org link input field.
  */
-export function generateOpenOtherOrgModal(miniURL, label) {
-	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
+export async function generateOpenOtherOrgModal(miniURL, label) {
+	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
 		label,
 	);
-	const { section, divParent } = generateSection("Other Org info");
+	const { section, divParent } = await generateSection("other_org_info");
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	article.appendChild(section);
-	const orgLinkInputConf = {
-		label: "Org Link",
-		type: "text",
-		required: true,
-		placeholder: "other-org",
-		style: "width: 100%",
-	};
-	const { inputParent, inputContainer } = generateInput(orgLinkInputConf);
 	const httpsSpan = document.createElement("span");
 	httpsSpan.append(HTTPS);
 	httpsSpan.style.height = "1rem";
 	divParent.appendChild(httpsSpan);
+    const { inputParent, inputContainer } = await generateInput({
+		label: "org_link",
+		type: "text",
+		required: true,
+		placeholder: "other_org_placeholder",
+		style: "width: 100%",
+	});
 	divParent.appendChild(inputParent);
 	const linkEnd = document.createElement("span");
 	linkEnd.append(
@@ -887,7 +929,7 @@ export function generateOpenOtherOrgModal(miniURL, label) {
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
-export function generateSldsFileInput(
+export async function generateSldsFileInput(
 	wrapperId,
 	inputElementId,
 	acceptedType,
@@ -908,6 +950,7 @@ export function generateSldsFileInput(
 			"Cannot generate a file input when the required files are not passed.",
 		);
 	}
+    const translator = await ensureTranslatorAvailability();
 	const fileInputWrapper = document.createElement("div");
 	fileInputWrapper.id = wrapperId;
 	fileInputWrapper.classList.add(
@@ -1065,8 +1108,11 @@ export function generateSldsFileInput(
 	const buttonIcon = document.createElement("lightning-primitive-icon");
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
-	fileSelectorButtonSpan.append(`Upload File${singleFile ? "" : "s"}`);
-	required && fileSelectorButtonSpan.appendChild(generateRequired());
+    const msg_upload = await translator.translate("upload");
+    const msg_file = await translator.translate("file");
+    const msg_files = await translator.translate("files");
+	fileSelectorButtonSpan.append(`${msg_upload} ${singleFile ? msg_file : msg_files}`);
+	required && fileSelectorButtonSpan.appendChild(await generateRequired());
 	const buttonSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
 		"svg",
@@ -1095,7 +1141,8 @@ export function generateSldsFileInput(
 			"slds-file-selector__text",
 			"slds-medium-show",
 		);
-		orDropFilesSpan.textContent = `Or drop file${singleFile ? "" : "s"}`;
+        const msg_or_drop = await translator.translate("or_drop");
+		orDropFilesSpan.textContent = `${msg_or_drop} ${singleFile ? msg_file : msg_files}`;
 		fileSelectorLabel.appendChild(orDropFilesSpan);
 	}
 	/*
@@ -1146,18 +1193,20 @@ export function generateSldsFileInput(
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
  * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
-export function generateCheckboxWithLabel(id, label, checked = false) {
+export async function generateCheckboxWithLabel(id, label, checked = false) {
+    const translator = await ensureTranslatorAvailability();
+    const msg_label = await translator.translate(label)
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 	const checkbox = document.createElement("input");
 	checkbox.type = "checkbox";
 	checkbox.id = id;
-	checkbox.name = label;
+	checkbox.name = msg_label;
 	checkbox.checked = checked;
 	checkboxLabel.appendChild(checkbox);
 	const checkboxSpan = document.createElement("span");
 	checkboxSpan.style.marginLeft = "0.5rem";
-	checkboxSpan.textContent = label;
+	checkboxSpan.textContent = msg_label;
 	checkboxLabel.append(checkboxSpan);
 	return checkboxLabel;
 }
@@ -1176,41 +1225,50 @@ export function generateCheckboxWithLabel(id, label, checked = false) {
  * - urlContainer: The container element for the url input field.
  * - orgContainer: The container element for the org input field.
  */
-export function generateUpdateTabModal(label, url, org) {
-	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
+export async function generateUpdateTabModal(label, url, org) {
+	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
 		label,
 	);
-	const { section, divParent } = generateSection("Tab information");
+	const { section, divParent } = await generateSection("tab_information");
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	article.appendChild(section);
-	const { inputParent: labelParent, inputContainer: labelContainer } = generateInput({
-		label: "Tab label",
+	const { inputParent: labelParent, inputContainer: labelContainer } = await generateInput({
+		label: "tab_label",
 		type: "text",
 		required: true,
-		placeholder: label ?? "Users",
+		placeholder: label ?? "users",
 		style: "width: 100%",
         value: label,
-	});
+        title: "table_row_label",
+	}, {
+        translatePlaceholder: label == null,
+    });
     divParent.appendChild(labelParent);
-	const { inputParent: urlParent, inputContainer: urlContainer } = generateInput({
-		label: "Tab url",
+	const { inputParent: urlParent, inputContainer: urlContainer } = await generateInput({
+		label: "tab_url",
 		type: "text",
 		required: true,
 		placeholder: url ?? "ManageUsers/home",
 		style: "width: 100%",
 		value: url,
-	});
+        title: "table_row_url",
+	}, {
+        translatePlaceholder: false,
+    });
     divParent.appendChild(urlParent);
-	const { inputParent: orgParent, inputContainer: orgContainer } = generateInput({
-		label: "Tab org",
+	const { inputParent: orgParent, inputContainer: orgContainer } = await generateInput({
+		label: "tab_org",
 		type: "text",
 		required: false,
 		placeholder: org ?? "mycustomorg",
 		style: "width: 100%",
 		value: org,
-	});
+        title: "table_row_org_name",
+	}, {
+        translatePlaceholder: org == null,
+    });
     divParent.appendChild(orgParent);
 	return { modalParent, saveButton, closeButton, labelContainer, urlContainer, orgContainer };
 }

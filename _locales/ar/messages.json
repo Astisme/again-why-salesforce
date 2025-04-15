@@ -1,0 +1,497 @@
+{
+	"allow": {
+		"message": "السماح",
+		"description": "[req_permission] زر للسماح بالأذونات"
+	},
+	"cancel": {
+		"message": "إلغاء",
+		"description": "العنوان أو النص لمحتوى الأزرار التي تمنع تنفيذ الإجراء الحالي"
+	},
+	"cancel_close": {
+		"message": "إلغاء وإغلاق",
+		"description": "العنوان أو النص لمحتوى زر الإغلاق في النوافذ المنبثقة"
+	},
+	"confirm_another_org": {
+		"message": "أكد فتح هذا الرابط.",
+		"description": "[open-other-org-modal] طلب تأكيد من المستخدم لفتح الرابط المُنشأ"
+	},
+	"continue": {
+		"message": "متابعة",
+		"description": "النص لمحتوى الأزرار التي تسمح بتنفيذ الإجراء الحالي"
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 كل الـ Tabs الظاهرة",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 إعادة التعيين للوضع الافتراضي",
+		"description": "[context-menu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ تصدير الـ Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 استيراد الـ Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_move": {
+		"message": "🧭 نقل الـ Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ ضع في البداية",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ ضع في النهاية",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 انقل لليسار",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 انقل لليمين",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 فتح في Org أخرى",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 إزالة الـ Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 احفظ كـ Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove": {
+		"message": "💥 إزالة الـ Tab(s)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 إزالة الـ Tabs اليسرى",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ الـ Tabs الأخرى",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 إزالة الـ Tabs اليمنى",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ هذا الـ Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update": {
+		"message": "✏️ تحديث الـ Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 تبديل Org",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 تحديثات أخرى",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "حذف",
+		"description": "[popup] حذف صف"
+	},
+	"delete_all": {
+		"message": "حذف كل الـ Tabs",
+		"description": "[popup] عنوان على سلة المهملات لتفريغ كل الـ Tabs"
+	},
+	"error_close_other_modal": {
+		"message": "أغلق النافذة المنبثقة الأخرى أولاً!",
+		"description": "[toast] تم محاولة فتح أكثر من نافذة منبثقة"
+	},
+	"error_cxm_check": {
+		"message": "خطأ في فحص عناصر القائمة",
+		"description": "[error] تعذر العثور على عناصر القائمة السياقية"
+	},
+	"error_cxm_create": {
+		"message": "خطأ في إنشاء عناصر القائمة",
+		"description": "[error] تعذر تهيئة عناصر القائمة السياقية"
+	},
+	"error_cxm_remove": {
+		"message": "خطأ في إزالة عناصر القائمة",
+		"description": "[error] تعذر إزالة عناصر القائمة السياقية"
+	},
+	"error_duplicate_tab": {
+		"message": "هذا الـ Tab موجود بالفعل",
+		"description": "[error] الـ Tab مكرر"
+	},
+	"error_expand_url": {
+		"message": "لا يمكن توسيع عنوان URL فارغ!",
+		"description": "[error] لم يتم تمرير عنوان URL للتوسيع"
+	},
+	"error_expand_url_no_base": {
+		"message": "لا يمكن توسيع عنوان URL بدون مضيفه!",
+		"description": "[error] لم يتم تمرير عنوان URL الأساسي للتوسيع"
+	},
+	"error_extract_empty_url": {
+		"message": "لا يمكن استخراج اسم Org من عنوان URL فارغ!",
+		"description": "[error] لم يتم تمرير عنوان URL لاستخراج اسم Org"
+	},
+	"error_get_with_no_org": {
+		"message": "لا يمكن الحصول على الـ Tabs دون تحديد Org.",
+		"description": "[error] تمت محاولة البحث عن الـ Tabs بدون تمرير معلومات Org"
+	},
+	"error_import": {
+		"message": "خطأ أثناء الاستيراد:\n",
+		"description": "[error] حدث خطأ أثناء عملية الاستيراد"
+	},
+	"error_invalid_tab": {
+		"message": "Tab غير صالح",
+		"description": "[error] الـ Tab غير صالح"
+	},
+	"error_link_with_id": {
+		"message": "لا يمكن أن توجد هذه الصفحة في Org أخرى لأنها تحتوي على معرف!",
+		"description": "[open-other-org-modal] تحذير بأن الرابط قد لا يوجد في Org أخرى"
+	},
+	"error_many_matching_tab": {
+		"message": "تم العثور على أكثر من الـ Tab المتطابقة.",
+		"description": "[error] تم جلب عدة Tabs متطابقة"
+	},
+	"error_minify_url": {
+		"message": "لا يمكن تصغير عنوان URL فارغ!",
+		"description": "[error] لم يتم تمرير عنوان URL للتصغير"
+	},
+	"error_missing_favourite_id": {
+		"message": "لا يمكن الحصول على صورة المفضلة بدون المعرف",
+		"description": "[error] لم يتم تمرير معرف المفضلة"
+	},
+	"error_missing_key": {
+		"message": "المفتاح غير موجود في أي مكان",
+		"description": "[error] لم يتم العثور على الترجمة في الملفات"
+	},
+	"error_no_array": {
+		"message": "مصفوفة غير صالحة أو لم يتم تمرير مصفوفة",
+		"description": "[error] لم يتم تمرير مصفوفة صالحة"
+	},
+	"error_no_browser_tab": {
+		"message": "لم يتم العثور على التبويب الحالي في المتصفح.",
+		"description": "[error] لم يتم تحديد تبويب متصفح نشط"
+	},
+	"error_no_callback": {
+		"message": "يرجى تقديم دالة callback",
+		"description": "[error] لم يتم تمرير دالة callback"
+	},
+	"error_no_cookies": {
+		"message": "لم يتم العثور على الكوكيز المتطابقة",
+		"description": "[error] لم يتم إعادة كوكيز Salesforce"
+	},
+	"error_no_data": {
+		"message": "لا يمكن تحديد الـ Tab بدون بيانات.",
+		"description": "[error] لم يتم تمرير بيانات لتحديد الـ Tab"
+	},
+	"error_no_headers": {
+		"message": "لم يتم العثور على رؤوس الأعمدة.",
+		"description": "[error] لم يتمكن الامتداد من إيجاد المكان المناسب لوضع زر المفضلة"
+	},
+	"error_no_matching_tab": {
+		"message": "لم يتم العثور على أي الـ Tabs المتطابقة.",
+		"description": "[error] لم يتم جلب أي Tabs متطابقة"
+	},
+	"error_no_message": {
+		"message": "لم يتم تحديد رسالة للإرسال.",
+		"description": "[error] لم يتم العثور على رسالة لإرسالها إلى أجزاء أخرى من الكود"
+	},
+	"error_no_object": {
+		"message": "لم يتم تمرير كائن للفحص!",
+		"description": "[error] لم يتم تمرير كائن"
+	},
+	"error_no_setup_tab": {
+		"message": "فشل في إيجاد Tab الإعداد",
+		"description": "[error] لم يتمكن الامتداد من إيجاد المكان المناسب لوضع الـ Tabs المفضلة"
+	},
+	"error_no_url": {
+		"message": "لا يوجد عنوان URL للفحص!",
+		"description": "[error] لم يتم تمرير عنوان URL للفحص"
+	},
+	"error_remove_not_favourite": {
+		"message": "لا يمكن إزالة Tab غير مفضلة!",
+		"description": "[error] تمت محاولة إزالة Tab لم تُحفظ بعد"
+	},
+	"error_sync_nothing": {
+		"message": "لا يمكن مزامنة الـ Tabs الفارغة!",
+		"description": "[error] تمت محاولة مزامنة لا شيء"
+	},
+	"error_tab_label": {
+		"message": "يجب أن تكون التسمية سلسلة غير فارغة",
+		"description": "[error] تمت محاولة إنشاء Tab بدون تسمية"
+	},
+	"error_tab_not_found": {
+		"message": "لم يتم العثور على الـ Tab.",
+		"description": "[error] الـ Tab غير موجود في القائمة"
+	},
+	"error_tab_object_creation": {
+		"message": "عند الاستدعاء مع كائن، لا تقم بتمرير أي شيء آخر.",
+		"description": "[error] خطأ تنفيذ من قبل المطور"
+	},
+	"error_tab_org": {
+		"message": "يجب أن يكون Org سلسلة أو غير معرف",
+		"description": "[error] تمت محاولة إنشاء Tab بقيمة Org غير صالحة"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "تم العثور على مفاتيح غير متوقعة:",
+		"description": "[error] تمت محاولة إنشاء Tab مع خصائص غير مدعومة"
+	},
+	"error_tab_url": {
+		"message": "يجب أن يكون عنوان URL سلسلة غير فارغة",
+		"description": "[error] تمت محاولة إنشاء Tab بدون عنوان URL"
+	},
+	"error_tabcont_initialize": {
+		"message": "لا يمكن التهيئة باستخدام"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "تم اكتشاف الـ Tabs غير الصالحة.\nأول ظهور:",
+		"description": "[error] تم تمرير Tabs غير صالحة"
+	},
+	"error_useless_remove": {
+		"message": "لا يمكن الإزالة:\nلا يمكن إزالة صفحة لم تُحفظ مسبقاً",
+		"description": "[error] تمت محاولة إزالة صفحة لم تُحفظ بعد"
+	},
+	"error_useless_save": {
+		"message": "لا يمكن الحفظ:\nتم حفظ هذه الصفحة بالفعل!",
+		"description": "[error] تمت محاولة حفظ صفحة محفوظة بالفعل"
+	},
+	"export": {
+		"message": "تصدير",
+		"description": "[popup] زر التصدير"
+	},
+	"export_title": {
+		"message": "تصدير كل الـ Tabs",
+		"description": "[popup] عنوان على زر التصدير"
+	},
+	"extension_description": {
+		"message": "إنشاء وإدارة Tabs مخصصة في المساحة المتاحة على صفحة إعدادات Salesforce Lightning.",
+		"description": "[manifest] وصف هذا الامتداد"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "[manifest] اسم هذا الامتداد"
+	},
+	"file": {
+		"message": "ملف",
+		"description": "ملف واحد"
+	},
+	"files": {
+		"message": "ملفات",
+		"description": "عدة ملفات"
+	},
+	"import": {
+		"message": "استيراد",
+		"description": "[popup] زر الاستيراد"
+	},
+	"import_duplicate_description": {
+		"message": "سيتم تجاهل علامات التبويب المكررة.<br />يتم اعتبار علامتي تبويب مكررتين إذا كان لهما نفس عنوان URL.",
+		"description": "[import] وصف لما تقوم به عملية الاستيراد"
+	},
+	"import_invalid_file": {
+		"message": "نوع الملف غير صالح.\nيدعم فقط ملفات JSON.",
+		"description": "[error] الملف المستخدم للاستيراد ليس JSON"
+	},
+	"import_successful": {
+		"message": "تم الاستيراد بنجاح",
+		"description": "[import] تم الانتهاء من الاستيراد. بعد ذلك، سيتم عرض عدد السجلات التي تم استيرادها"
+	},
+	"import_tabs": {
+		"message": "استيراد Tabs",
+		"description": "[modal-title] لعملية الاستيراد"
+	},
+	"import_title": {
+		"message": "استيراد الـ Tabs من ملف JSON",
+		"description": "[popup] عنوان على زر الاستيراد"
+	},
+	"insert_another": {
+		"message": "أدخل آخر",
+		"description": "[error-open-other-org-modal] رسالة عند إدخال نفس الـ Org في النافذة المنبثقة"
+	},
+	"insert_another_org": {
+		"message": "الـ Org المُدخل هو الحالي!\nيرجى إدخال Org آخر.",
+		"description": "[error-open-other-org-modal] رسالة عند إدخال نفس الـ Org في النافذة المنبثقة"
+	},
+	"insert_valid_org": {
+		"message": "يرجى إدخال Org صالح!",
+		"description": "[error-open-other-org-modal] رسالة عند إدخال عنوان URL خاطئ في النافذة المنبثقة"
+	},
+	"invalid_url": {
+		"message": "عنوان URL غير صالح",
+		"description": "[notSalesforceSetup] عنوان URL غير صالح"
+	},
+	"login_to_salesforce": {
+		"message": "تسجيل الدخول إلى Salesforce",
+		"description": "[notSalesforceSetup] دعوة لإعادة التوجيه إلى صفحة تسجيل الدخول في Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "نص العنصر النائب لنموذج تحديث الـ Tab"
+	},
+	"no_match": {
+		"message": "لم يتم مطابقة أي إجراء",
+		"description": "[error] في Salesforce، الإجراء المطلوب لم يتطابق مع أي إجراء متاح"
+	},
+	"nss_detected": {
+		"message": " تم الكشف عنه.",
+		"description": "[notSalesforceSetup] تم الكشف عن شيء؛ يرجى تضمين فراغ في البداية"
+	},
+	"nss_prefix": {
+		"message": "هذا ليس ",
+		"description": "[notSalesforceSetup] البادئة المعروضة عندما لا يكون المستخدم على صفحة Salesforce؛ يرجى تضمين فراغ في النهاية"
+	},
+	"open_setup": {
+		"message": "فتح الإعداد",
+		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
+	},
+	"or_drop": {
+		"message": "أو إسقاط",
+		"description": "[import] السماح للمستخدم بنقل الملفات باستخدام الماوس وإفلاتها"
+	},
+	"org_link": {
+		"message": "رابط Org",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "معلومات Org أخرى",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "org-آخر",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "استبدال الـ Tabs المحفوظة",
+		"description": "[label] حذف كل الـ Tabs المحفوظة أثناء عملية الاستيراد"
+	},
+	"preserve_org_tabs": {
+		"message": "الحفاظ على الـ Tabs الخاصة بـ Orgs الأخرى",
+		"description": "[label] الاحتفاظ بـ Tabs خاص بـ Org أخرى أثناء عملية الاستيراد"
+	},
+	"remove_tab": {
+		"message": "إزالة الـ Tab",
+		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"req_permissions_dont_ask": {
+		"message": "عدم السؤال مرة أخرى",
+		"description": "[req_permission] تسمية عندما لا يرغب المستخدم بالسماح بشكل دائم"
+	},
+	"req_permissions_header": {
+		"message": "يرجى السماح لنا بالوصول<br />إلى صفحات إعداد Salesforce تلقائياً.",
+		"description": "[req_permission] رأس الصفحة لطلب الأذونات"
+	},
+	"req_permissions_paragraph": {
+		"message": "إذا أردت، يمكن أن تظهر الـ Tabs المفضلة<br />بمجرد تنقلك إلى صفحة إعداد Salesforce<br />دون الحاجة للنقر على هذا الامتداد في كل مرة.",
+		"description": "[req_permission] نص يوضح سبب طلب الأذونات"
+	},
+	"required": {
+		"message": "مطلوب",
+		"description": "[input] يشير إلى أن حقل الإدخال إلزامي"
+	},
+	"required_info": {
+		"message": "= المعلومات المطلوبة",
+		"description": "[modal] يخبر المستخدم بأن بعض المعلومات ضرورية"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] منصة Salesforce Lightning"
+	},
+	"save_tab": {
+		"message": "احفظ كـ Tab",
+		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"setup_page": {
+		"message": "صفحة الإعداد",
+		"description": "[notSalesforceSetup] الصفحة المستخدمة لتعديل إعدادات Salesforce"
+	},
+	"skip": {
+		"message": "تخطي",
+		"description": "[req_permission] زر لعدم السماح بالأذونات"
+	},
+	"successfully_imported": {
+		"message": "تم الاستيراد بنجاح",
+		"description": "[toast] أضاف المستخدم الـ Tabs من ملف خارجي"
+	},
+	"tab_explain": {
+		"message": "يجب أن يحتوي كل عنصر على 'label' و 'url' كسلاسل. بالإضافة إلى ذلك، يمكن أن يحتوي كل عنصر على 'org' كسلسلة.",
+		"description": "[error] يوضح كيفية إنشاء الـ Tab بشكل صحيح"
+	},
+	"tab_information": {
+		"message": "معلومات الـ Tab",
+		"description": "عنوان لنموذج تحديث الـ Tab"
+	},
+	"tab_label": {
+		"message": "علامة الـ Tab",
+		"description": "[popup] رأس العمود لاسم الـ Tab"
+	},
+    "tab_org": {
+        "message": "Tab Org",
+        "description": "خاصية Org لعلامة التبويب، إذا كانت لمنظمة Salesforce واحدة"
+    },
+	"tab_url": {
+		"message": "URL الـ Tab",
+		"description": "[popup] رأس العمود لعنوان URL للـ Tab"
+	},
+	"table_delete": {
+		"message": "حذف الـ Tab",
+		"description": "[popup] نص المساعدة للعمود مع زر الحذف"
+	},
+	"table_org": {
+		"message": "هل الـ Tab للOrg",
+		"description": "[popup] نص المساعدة للعمود مع خانة اختيار Org"
+	},
+	"table_row_label": {
+		"message": "أدخل العلامة لهذا URL",
+		"description": "[popup] حقل الإدخال لاسم الـ Tab"
+	},
+	"table_row_org": {
+		"message": "انقر إذا كنت تريد أن يكون هذا الـ Tab متاحاً لهذه Org فقط.",
+		"description": "[popup] خانة اختيار لتعيين الـ Tab كخاص بالـ Org"
+	},
+	"table_row_org_name": {
+		"message": "الـ Org الذي يتوفر له هذا الـ Tab",
+		"description": "[popup] حقل الإدخال لاسم الـ Org"
+	},
+	"table_row_url": {
+		"message": "أدخل الـ sub_URL الذي تريد إعادة توجيهك إليه.",
+		"description": "[popup] حقل الإدخال لعنوان URL للـ Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "الروابط المفضلة للمستخدم"
+	},
+	"tabs_saved": {
+		"message": "تم حفظ الـ Tabs",
+		"description": "[toast] تم حفظ الـ Tabs بنجاح"
+	},
+	"theme_dark": {
+		"message": "تغيير الثيم إلى داكن",
+		"description": "[popup] عنوان على القمر لتغيير الثيم"
+	},
+	"theme_light": {
+		"message": "تغيير الثيم إلى فاتح",
+		"description": "[popup] عنوان على الشمس لتغيير الثيم"
+	},
+	"upload": {
+		"message": "تحميل",
+		"description": "[import] السماح للمستخدم بتصفح ملفاته واختيار الملف الصحيح"
+	},
+	"users": {
+		"message": "المستخدمون",
+		"description": "اسم الصفحة المتعلقة بـ ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "لقد استخدمت 'tabTitle' القديم!\nبدأ تنزيل الملف المحدث.\nيرجى استخدام الملف الذي تم تنزيله حديثاً من الآن فصاعداً.\nسيتم إيقاف استخدام هذا الملف في إصدار لاحق.",
+		"description": "[warning] يشرح للمستخدم أن الملف المستورد يستخدم خاصية قديمة"
+	},
+	"where_to": {
+		"message": "أين؟",
+		"description": "[open-other-org-modal] عنوان بديل للنافذة المنبثقة"
+	}
+}

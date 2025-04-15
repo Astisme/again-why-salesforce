@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="./notSalesforceSetup.css" />
 		<link rel="stylesheet" href="../basic.css" />
 		<script src="./notSalesforceSetup.js" type="module"></script>
+		<script src="/translator.js" type="module"></script>
 	</head>
 
 	<body>
@@ -16,14 +17,25 @@
 			<object data="../logo/logo.html" type="text/html"></object>
 		</header>
 		<div>
-			<h3>This is not a Salesforce Lightning Setup Page</h3>
-			<a id="login" class="button" href="https://login.salesforce.com">
+            <h3 id="plain">
+                <span data-i18n="nss_prefix+-+textContent">This is not a </span>
+                <span class="lightning" data-i18n="salesforce_lightning+-+textContent">Salesforce Lightning</span>
+                <strong class="lightning hidden" data-i18n="salesforce_lightning+-+textContent">Salesforce Lightning</strong>
+                <span class="setup" data-i18n="setup_page+-+textContent">Setup Page</span>
+                <strong class="setup hidden" data-i18n="setup_page+-+textContent">Setup Page</strong>
+            </h3>
+            <h3 id="invalid-url" class="hidden">
+                <strong data-i18n="invalid_url+-+textContent">Invalid URL</strong>
+                <span data-i18n="nss_detected+-+textContent"> detected.</span>
+            </h3>
+			<a id="login" class="button" href="https://login.salesforce.com" data-i18n="login_to_salesforce+-+textContent">
 				Login to Salesforce
 			</a>
 			<a
 				id="go-setup"
 				class="hidden highlight button"
 				href="/lightning/setup"
+                data-i18n="open_setup+-+textContent"
 			>
 				Open Setup
 			</a>

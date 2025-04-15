@@ -1,7 +1,6 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME } from "/constants.js";
+import { BROWSER, EXTENSION_NAME, ISCHROME } from "/constants.js";
 import { bg_getStorage } from "./background.js";
-import { ISCHROME } from "../constants.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -31,13 +30,12 @@ export function bg_getCurrentBrowserTab(callback) {
 		}
 		const browserTabs = await BROWSER.tabs.query(queryParams);
 		if (
-			BROWSER.runtime.lastError || browserTabs == null ||
-			browserTabs[0] == null
+			BROWSER.runtime.lastError || browserTabs == null || browserTabs == [] || browserTabs[0] == null
 		) {
 			if (count > 5) {
-				throw new Error("Could not find current tab.");
+				throw new Error("error_no_browser_tab");
 			}
-			queryTabs(callback, count + 1);
+			await queryTabs(callback, count + 1);
 		} else callback(browserTabs[0]);
 	}
 	if (callback == null) {
@@ -60,6 +58,8 @@ export function bg_getCurrentBrowserTab(callback) {
  * @param {int} count = 0 - how many times the function has been called
  */
 export async function bg_notify(message, count = 0) {
+    if(message == null)
+        throw new Error("error_no_message");
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
 		BROWSER.tabs.sendMessage(browserTab.id, message);

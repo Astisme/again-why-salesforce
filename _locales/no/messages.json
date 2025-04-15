@@ -1,0 +1,498 @@
+{
+  "allow": {
+    "message": "Tillat",
+    "description": "[req_permission] knapp for å gi tillatelser"
+  },
+  "cancel": {
+    "message": "Avbryt",
+    "description": "tittel eller tekst for knapper som hindrer at den nåværende handlingen blir utført"
+  },
+  "cancel_close": {
+    "message": "Avbryt og lukk",
+    "description": "tittel eller tekst for lukke-knappen for modaler"
+  },
+  "confirm_another_org": {
+    "message": "Bekreft åpning av denne lenken.",
+    "description": "[open-other-org-modal] ber om bekreftelse fra brukeren for å åpne den konstruerte lenken."
+  },
+  "continue": {
+    "message": "Fortsett",
+    "description": "tekst for knapper som lar den nåværende handlingen bli utført"
+  },
+  "cxm_empty_no_org_tabs": {
+    "message": "👀 Alle synlige Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_empty_tabs": {
+    "message": "😨 Tilbakestill til standard",
+    "description": "[context-menu]"
+  },
+  "cxm_export_tabs": {
+    "message": "⬇️ Eksporter Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_import_tabs": {
+    "message": "🆙 Importer Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move": {
+    "message": "🧭 Flytt Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move_first": {
+    "message": "↩️ Gjør til første",
+    "description": "[context-menu]"
+  },
+  "cxm_move_last": {
+    "message": "↪️ Gjør til siste",
+    "description": "[context-menu]"
+  },
+  "cxm_move_left": {
+    "message": "👈 Flytt til venstre",
+    "description": "[context-menu]"
+  },
+  "cxm_move_right": {
+    "message": "👉 Flytt til høyre",
+    "description": "[context-menu]"
+  },
+  "cxm_open_other_org": {
+    "message": "🔗 Åpne i en annen Organisasjon",
+    "description": "[context-menu]"
+  },
+  "cxm_page_remove_tab": {
+    "message": "👋 Fjern Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_page_save_tab": {
+    "message": "💾 Lagre som Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove": {
+    "message": "💥 Fjern Tab(ber)",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_left_tabs": {
+    "message": "🔥 Tabber til venstre",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_other_tabs": {
+    "message": "↔️ Andre Tabber",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_right_tabs": {
+    "message": "🌊 Tabber til høyre",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_tab": {
+    "message": "1️⃣ Denne Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update": {
+    "message": "✏️ Oppdater Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 Bytt Organisasjon",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 Andre oppdateringer",
+    "description": "[context-menu]"
+  },
+  "delete": {
+    "message": "Slett",
+    "description": "[popup] slett en rad"
+  },
+  "delete_all": {
+    "message": "Slett alle Tabber",
+    "description": "[popup] tittel for søppelbøtten for å tømme alle Tabber"
+  },
+  "error_close_other_modal": {
+    "message": "Lukk det andre modalvinduet først!",
+    "description": "[toast] Brukeren prøvde å åpne mer enn ett modalvindu"
+  },
+  "error_cxm_check": {
+    "message": "Feil ved sjekk av menyelementer",
+    "description": "[error] kontekstmenyelementene ble ikke funnet"
+  },
+  "error_cxm_create": {
+    "message": "Feil ved oppretting av menyelementer",
+    "description": "[error] kontekstmenyelementene kunne ikke initialiseres"
+  },
+  "error_cxm_remove": {
+    "message": "Feil ved fjerning av menyelementer",
+    "description": "[error] kontekstmenyelementene kunne ikke fjernes"
+  },
+  "error_duplicate_tab": {
+    "message": "Denne Tab'en finnes allerede",
+    "description": "[error] Tab-en er en duplikat"
+  },
+  "error_expand_url": {
+    "message": "Kan ikke utvide en tom URL!",
+    "description": "[error] ingen URL ble sendt inn for utvidelse"
+  },
+  "error_expand_url_no_base": {
+    "message": "Kan ikke utvide en URL uten dens host!",
+    "description": "[error] ingen basis-URL ble sendt inn for utvidelse"
+  },
+  "error_extract_empty_url": {
+    "message": "Kan ikke hente organisasjonsnavn fra en tom URL!",
+    "description": "[error] ingen URL ble sendt inn for å hente organisasjonsnavnet"
+  },
+  "error_get_with_no_org": {
+    "message": "Kan ikke hente Tabber hvis organisasjonen ikke er spesifisert.",
+    "description": "[error] forsøkte å søke etter Tabber uten å sende inn organisasjonsinformasjon"
+  },
+  "error_import": {
+    "message": "Feil ved import:\n",
+    "description": "[error] det oppsto en feil under importprosessen"
+  },
+  "error_invalid_tab": {
+    "message": "Ugyldig Tab",
+    "description": "[error] Tab-en er ikke gyldig"
+  },
+  "error_link_with_id": {
+    "message": "Denne siden kan ikke finnes i en annen organisasjon, fordi den inneholder et Id!",
+    "description": "[open-other-org-modal] advarsel til brukeren om at lenken kanskje ikke finnes i en annen organisasjon"
+  },
+  "error_many_matching_tab": {
+    "message": "Mer enn 1 matchende Tab ble funnet.",
+    "description": "[error] for mange Tabber ble returnert"
+  },
+  "error_minify_url": {
+    "message": "Kan ikke minimere en tom URL!",
+    "description": "[error] ingen URL ble sendt inn for minimering"
+  },
+  "error_missing_favourite_id": {
+    "message": "Kan ikke hente favorittbilde uten Id",
+    "description": "[error] ingen id for favorittbildet ble sendt inn"
+  },
+  "error_missing_key": {
+    "message": "Nøkkelen ble ikke funnet noe sted",
+    "description": "[error] ingen oversettelse ble funnet i filene"
+  },
+  "error_no_array": {
+    "message": "Ugyldig array eller ingen array ble sendt inn",
+    "description": "[error] ingen gyldig array ble mottatt"
+  },
+  "error_no_browser_tab": {
+    "message": "Kunne ikke finne en aktiv nettleserfane.",
+    "description": "[error] bakgrunnssiden kunne ikke identifisere en aktiv nettleserfane"
+  },
+  "error_no_callback": {
+    "message": "Vennligst oppgi en callback-funksjon",
+    "description": "[error] ingen funksjon ble sendt inn for å bli kalt på slutten av metoden"
+  },
+  "error_no_cookies": {
+    "message": "Ingen matchende informasjonskapsler ble funnet",
+    "description": "[error] Salesforce-informasjonskapsler ble ikke returnert"
+  },
+  "error_no_data": {
+    "message": "Kan ikke identifisere Tab uten data.",
+    "description": "[error] forsøkte å hente en Tab uten å sende med data"
+  },
+  "error_no_headers": {
+    "message": "Ingen overskrifter ble funnet.",
+    "description": "[error] utvidelsen kunne ikke finne hvor favorittknappen skulle plasseres"
+  },
+  "error_no_matching_tab": {
+    "message": "Ingen matchende Tab ble funnet.",
+    "description": "[error] ingen matchende Tab ble returnert"
+  },
+  "error_no_message": {
+    "message": "Ingen melding er spesifisert for sending.",
+    "description": "[error] ingen melding ble funnet for å sende til andre deler av koden"
+  },
+  "error_no_object": {
+    "message": "Ingen objekt ble oppgitt for kontroll!",
+    "description": "[error] intet objekt ble sendt inn for kontroll"
+  },
+  "error_no_setup_tab": {
+    "message": "Setup Tab ble ikke funnet.",
+    "description": "[error] utvidelsen kunne ikke finne hvor de lagrede Tab-ene skulle plasseres"
+  },
+  "error_no_url": {
+    "message": "Ingen URL ble oppgitt for kontroll!",
+    "description": "[error] ingen URL ble sendt inn for kontroll"
+  },
+  "error_remove_not_favourite": {
+    "message": "Kan ikke fjerne en Tab som ikke er favoritt!",
+    "description": "[error] brukeren forsøkte å fjerne en Tab som ennå ikke er lagret"
+  },
+  "error_sync_nothing": {
+    "message": "Kan ikke synkronisere tomme Tabber!",
+    "description": "[error] det ble forsøkt å synkronisere ingenting"
+  },
+  "error_tab_label": {
+    "message": "Merkingen må være en ikke-tom streng",
+    "description": "[error] brukeren forsøkte å opprette en Tab uten merking"
+  },
+  "error_tab_not_found": {
+    "message": "Tab ble ikke funnet.",
+    "description": "[error] Tab ble ikke inkludert i arrayet"
+  },
+  "error_tab_object_creation": {
+    "message": "Når du kaller med et objekt, ikke send med noe annet.",
+    "description": "[error] implementasjonsfeil fra utviklers side"
+  },
+  "error_tab_org": {
+    "message": "Organisasjonen må være en streng eller undefined",
+    "description": "[error] brukeren forsøkte å opprette en Tab med ugyldig organisasjonsverdi"
+  },
+  "error_tab_unexpected_keys": {
+    "message": "Uventede nøkler funnet:",
+    "description": "[error] brukeren forsøkte å opprette en Tab med ikke-støttede egenskaper"
+  },
+  "error_tab_url": {
+    "message": "URL må være en ikke-tom streng",
+    "description": "[error] brukeren forsøkte å opprette en Tab uten URL"
+  },
+  "error_tabcont_initialize": {
+    "message": "Kan ikke initialiseres med",
+    "description": ""
+  },
+  "error_tabcont_invalid_tabs": {
+    "message": "Ugyldige Tab(ber) funnet.\nFørste forekomst:",
+    "description": "[error] ugyldige Tab ble sendt inn"
+  },
+  "error_useless_remove": {
+    "message": "Kan ikke fjernes:\nEn side som ikke har vært lagret, kan ikke fjernes",
+    "description": "[error] brukeren forsøkte å fjerne en side som ennå ikke var lagret"
+  },
+  "error_useless_save": {
+    "message": "Kan ikke lagres:\nDenne siden er allerede lagret!",
+    "description": "[error] brukeren forsøkte å lagre en side som allerede var lagret"
+  },
+  "export": {
+    "message": "Eksporter",
+    "description": "[popup] eksportknapp"
+  },
+  "export_title": {
+    "message": "Eksporter alle Tabber",
+    "description": "[popup] tittel på eksportknappen"
+  },
+  "extension_description": {
+    "message": "Opprett og administrer tilpassede Tabber i tilgjengelig plass på Salesforce Lightning Setup-siden.",
+    "description": "[manifest] Beskrivelse av denne utvidelsen"
+  },
+  "extension_label": {
+    "message": "Again, Why Salesforce",
+    "description": "Navnet på denne utvidelsen"
+  },
+  "file": {
+    "message": "fil",
+    "description": "én fil"
+  },
+  "files": {
+    "message": "filer",
+    "description": "flere filer"
+  },
+  "import": {
+    "message": "Importer",
+    "description": "[popup] importknapp"
+  },
+  "import_duplicate_description": {
+    "message": "Dupliserte Tabber vil bli ignorert.<br />To Tabber anses som duplikater dersom de har samme URL.",
+    "description": "[import] beskrivelse av importprosessen"
+  },
+  "import_invalid_file": {
+    "message": "Ugyldig filtype.\nKun JSON-filer støttes.",
+    "description": "[error] filen som ble brukt til import er ikke JSON"
+  },
+  "import_successful": {
+    "message": "Importen var vellykket",
+    "description": "[import] importen er fullført. Antallet importerte poster vises deretter"
+  },
+  "import_tabs": {
+    "message": "Importer Tab",
+    "description": "[modal-title] for importprosessen"
+  },
+  "import_title": {
+    "message": "Importer Tab fra json-fil",
+    "description": "[popup] tittel på importknappen"
+  },
+  "insert_another": {
+    "message": "Sett inn en annen",
+    "description": "[error-open-other-org-modal] melding når brukeren oppgir samme organisasjon"
+  },
+  "insert_another_org": {
+    "message": "Den oppgitte Organisasjonen er den nåværende!\nVennligst oppgi en annen Organisasjon.",
+    "description": "[error-open-other-org-modal] melding når brukeren oppgir samme organisasjon"
+  },
+  "insert_valid_org": {
+    "message": "Vennligst oppgi en gyldig Organisasjon!",
+    "description": "[error-open-other-org-modal] melding når brukeren oppgir en feil URL"
+  },
+  "invalid_url": {
+    "message": "Ugyldig URL",
+    "description": "[notSalesforceSetup] en URL som ikke er gyldig"
+  },
+  "login_to_salesforce": {
+    "message": "Logg inn på Salesforce",
+    "description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforces innloggingsside"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "plassholder for oppdateringsmodal for Tab"
+  },
+  "no_match": {
+    "message": "Ingen matchende handling funnet",
+    "description": "[error] når switch-setningen ikke kan matche den forespurte handlingen"
+  },
+  "nss_detected": {
+    "message": " registrert.",
+    "description": "[notSalesforceSetup] noe ble registrert. Sørg for at meldingen begynner med et mellomrom."
+  },
+  "nss_prefix": {
+    "message": "Dette er ikke en ",
+    "description": "[notSalesforceSetup] prefiks vist når brukeren ikke er på en Salesforce-side."
+  },
+  "open_setup": {
+    "message": "Åpne Setup",
+    "description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforce Setup-siden"
+  },
+  "or_drop": {
+    "message": "Eller dra og slipp",
+    "description": "[import] lar brukeren dra filer med musen og slippe dem"
+  },
+  "org_link": {
+    "message": "Organisasjonslenke",
+    "description": "[input-label]"
+  },
+  "other_org_info": {
+    "message": "Informasjon om en annen Organisasjon",
+    "description": "[modal-title]"
+  },
+  "other_org_placeholder": {
+    "message": "annen-org",
+    "description": "[input-placeholder]"
+  },
+  "overwrite_tabs": {
+    "message": "Skriv over lagrede Tabber.",
+    "description": "[label] slett alle lagrede Tabber under import"
+  },
+  "preserve_org_tabs": {
+    "message": "Behold Tabber for andre organisasjoner.",
+    "description": "[label] behold alle organisasjonsspesifikke Tabber under import"
+  },
+  "remove_tab": {
+    "message": "Fjern Tab",
+    "description": "[alt] alternativ tekst når bilder ikke vises"
+  },
+  "req_permissions_dont_ask": {
+    "message": "Ikke spør igjen.",
+    "description": "[req_permission] etikett når brukeren ikke ønsker å gi tillatelser permanent"
+  },
+  "req_permissions_header": {
+    "message": "Vennligst la oss få tilgang<br />til Salesforce Setup-sidene automatisk.",
+    "description": "[req_permission] sideoverskrift for tillatelsesforespørsel"
+  },
+  "req_permissions_paragraph": {
+    "message": "Om du ønsker det, kan dine favorittabber vises<br />så snart du navigerer til en Salesforce Setup-side<br />uten at du må klikke på denne utvidelsen hver gang.",
+    "description": "[req_permission] tekst som forklarer hvorfor tillatelser kreves"
+  },
+  "required": {
+    "message": "påkrevd",
+    "description": "[input] markerer at et inndatafelt er påkrevd"
+  },
+  "required_info": {
+    "message": "= Påkrevd informasjon",
+    "description": "[modal] informerer brukeren om at visse opplysninger er påkrevd"
+  },
+  "salesforce_lightning": {
+    "message": "Salesforce Lightning",
+    "description": "[notSalesforceSetup] Salesforce Lightning-plattformen"
+  },
+  "save_tab": {
+    "message": "Lagre som Tab",
+    "description": "[alt] alternativ tekst når bilder ikke vises"
+  },
+  "setup_page": {
+    "message": "Setup-side",
+    "description": "[notSalesforceSetup] siden for å endre Salesforce-innstillinger"
+  },
+  "skip": {
+    "message": "Hopp over",
+    "description": "[req_permission] knapp for å avslå å gi tillatelser"
+  },
+  "successfully_imported": {
+    "message": "Importen var vellykket",
+    "description": "[toast] brukeren importerte Tabber fra en ekstern fil med suksess"
+  },
+  "tab_explain": {
+    "message": "Hvert element må ha 'label' og 'url' som strenger. I tillegg kan hvert element ha 'org' som streng.",
+    "description": "[error] forklarer hvordan en Tab skal konstrueres"
+  },
+  "tab_information": {
+    "message": "Tab-informasjon",
+    "description": "tittel for Tab-oppdateringsmodalen"
+  },
+  "tab_label": {
+    "message": "Tab-merke",
+    "description": "Tab'ens Label-egenskap, dets navn"
+  },
+  "tab_org": {
+    "message": "Tab-organisasjon",
+    "description": "Tab'ens Org-egenskap, hvis den er for en spesifikk Salesforce-organisasjon"
+  },
+  "tab_url": {
+    "message": "Tab-URL",
+    "description": "Tab'ens URL-egenskap, som det lenker til"
+  },
+  "table_delete": {
+    "message": "Slett Tab",
+    "description": "[popup] hjelpetekst for kolonnen med slett-knappen"
+  },
+  "table_org": {
+    "message": "Er Tab organisasjonsrelatert",
+    "description": "[popup] hjelpetekst for kolonnen med avkrysningsboksen for organisasjon"
+  },
+  "table_row_label": {
+    "message": "Skriv inn merket for denne URL-en",
+    "description": "[popup] inntastingsfelt for Tab-navn"
+  },
+  "table_row_org": {
+    "message": "Klikk hvis du vil at denne Tab-en kun skal være tilgjengelig for denne organisasjonen.",
+    "description": "[popup] avkrysningsboks for å bytte Tab til organisasjonsspesifikk modus"
+  },
+  "table_row_org_name": {
+    "message": "Organisasjonen denne Tab-en er tilgjengelig for.",
+    "description": "[popup] inntastingsfelt for organisasjonsnavn"
+  },
+  "table_row_url": {
+    "message": "Skriv inn sub_URL-en du vil bli omdirigert til.",
+    "description": "[popup] inntastingsfelt for Tab-URL"
+  },
+  "tabs": {
+    "message": "Tabber",
+    "description": "brukerens favorittlenker"
+  },
+  "tabs_saved": {
+    "message": "Tabber lagret.",
+    "description": "[toast] Tabber ble lagret med suksess."
+  },
+  "theme_dark": {
+    "message": "Bytt tema til mørkt",
+    "description": "[popup] tittel for måneikonet for temaendring"
+  },
+  "theme_light": {
+    "message": "Bytt tema til lyst",
+    "description": "[popup] tittel for solikonet for temaendring"
+  },
+  "upload": {
+    "message": "Last opp",
+    "description": "[import] lar brukeren bla gjennom filene sine og velge riktig"
+  },
+  "users": {
+    "message": "Brukere",
+    "description": "navnet på siden knyttet til ManageUsers/home"
+  },
+  "warn_deprecated_tab_title": {
+    "message": "Du har importert med den utdaterte 'tabTitle'!\nNedlastingen av den oppdaterte filen har startet.\nFra nå av, vennligst bruk den nye nedlastede filen.\nBruken av denne filen vil bli avviklet i fremtidige oppdateringer.",
+    "description": "[warning] informerer brukeren om at den importerte filen bruker en utdaterte egenskap"
+  },
+  "where_to": {
+    "message": "Til hvor?",
+    "description": "[open-other-org-modal] alternativ tittel for modal"
+  }
+}

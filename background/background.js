@@ -1,38 +1,79 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
-import { BROWSER, WHY_KEY } from "../constants.js";
+import { BROWSER, LOCALE_KEY, SUPPORTED_SALESFORCE_URLS, WHY_KEY } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
 /**
- * Retrieves data from the browser's synced storage and invokes the provided callback with the data.
+ * Retrieves data from the browser"s synced storage and invokes the provided callback with the data.
  *
  * @param {Function} callback - The function to be called once the data is retrieved.
  *                              The retrieved value is passed as an argument to the callback.
  * @throws {Error} If the callback is not provided.
  */
-export function bg_getStorage(callback) {
+export function bg_getStorage(callback, key = WHY_KEY) {
 	if (callback == null) {
-		throw new Error("Please provide a callback");
+		throw new Error("error_no_callback");
 	}
 	BROWSER.storage.sync.get(
-		[WHY_KEY],
+		[key],
 		(items) => {
-			callback(items[WHY_KEY]);
+			callback(items[key]);
 		},
 	);
 }
 
 /**
- * Stores the provided tabs data in the browser's storage and invokes the callback.
+ * Stores the provided tabs data in the browser"s storage and invokes the callback.
  *
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
-function bg_setStorage(tabs, callback) {
-	const set = {};
-	set[WHY_KEY] = tabs;
-	BROWSER.storage.sync.set(set, callback(null));
-}
  */
+function bg_setStorage(tobeset, callback, key = WHY_KEY) {
+	const set = {};
+	set[key] = tobeset;
+	BROWSER.storage.sync.set(set, callback(tobeset));
+}
+
+async function getCurrentUserInfo(currentUrl){
+    async function getAPIHostAndHeaders(currentUrl) {
+      const url = new URL(currentUrl);
+      const host = url.host;
+      if (SUPPORTED_SALESFORCE_URLS.filter(pattern => host.includes(pattern)).length === 0) {
+          return;
+      }
+    const cookies = await BROWSER.cookies.getAll({
+        "domain": host,
+        "name": "sid",
+    });
+        if(cookies.length === 0)
+            throw new Error("error_no_cookies");
+        return [
+            url.origin,
+            {
+              "Authorization": `Bearer ${cookies[0].value}`,
+              "Content-Type": "application/json",
+            }
+        ];
+    }
+    try {
+        const [apiHost, headers] = await getAPIHostAndHeaders(currentUrl);
+        const retrievedRows = await fetch(`${apiHost}/services/oauth2/userinfo`, {headers});
+        return await retrievedRows.json();
+    } catch (error) {
+        return;
+    }
+}
+
+export async function bg_getSalesforceLanguage(callback){
+    const currentUrl = (await bg_getCurrentBrowserTab())?.url;
+    const language = (await getCurrentUserInfo(currentUrl))?.language;
+    if(callback == null)
+        return language;
+    if(language != null)
+        bg_setStorage(language, callback, LOCALE_KEY);
+    else
+        bg_getStorage(callback, LOCALE_KEY);
+}
 
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
@@ -67,7 +108,7 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "warning":
 			sendResponse(null);
 			setTimeout(() => bg_notify(message), 250); // delay the notification to prevent accidental removal (for "add")
-			//return false; // we won't call sendResponse
+			//return false; // we won"t call sendResponse
 			break;
 		case "export":
 			exportHandler(message.tabs);
@@ -77,11 +118,17 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "browser-tab":
 			bg_getCurrentBrowserTab(sendResponse);
 			break;
+        case "get-sf-language":
+            bg_getSalesforceLanguage(sendResponse);
+            break;
+        case "get-language":
+            bg_getStorage(sendResponse, LOCALE_KEY);
+            break;
 		default:
 			//captured = ["import"].includes(message.what);
 			//if (!captured) {
 			if (!["import"].includes(message.what)) {
-				console.error({ "error": "Unknown message", message, request });
+				console.error({ error: "Unknown message", message, request });
 			}
 			break;
 	}

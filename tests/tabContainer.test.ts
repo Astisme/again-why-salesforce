@@ -178,7 +178,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 					url: "unique-url2",
 				}),
 			Error,
-			`This tab already exists`, //: {"label":"New Tab","url":"unique-url2"}`
+			"error_duplicate_tab",
 		);
 	});
 });
@@ -673,7 +673,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getTabsByOrg(),
 			Error,
-			"Cannot get Tabs if Org is not specified.",
+			"error_get_with_no_org",
 		);
 		assertEquals(container.getTabsByOrg("not-present").length, 0);
 		assertEquals(container.getTabsByOrg("test-org").length, 1);
@@ -810,12 +810,12 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getTabIndex(),
 			Error,
-			"Cannot find index without data.",
+			"error_no_data",
 		);
 		assertThrows(
 			() => container.getTabIndex({ org: "not-present" }),
 			Error,
-			"Tab was not found.",
+			"error_tab_not_found",
 		);
 		assertEquals(container.getTabIndex({ org: "test-org" }), 3);
 		assertEquals(container.getTabIndex({ org: "test-org1" }), 5);
@@ -1025,7 +1025,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 					url: "sync-url2",
 				}),
 			Error,
-			"Invalid array or no array was passed",
+			"error_no_array",
 		);
 		assertEquals(container.length, 0);
 		assertEquals(mockStorage.tabs.length, 1);
@@ -1045,7 +1045,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 					url: "sync-url2",
 				}),
 			Error,
-			"Invalid array or no array was passed",
+			"error_no_array",
 		);
 
 		const arr = [];

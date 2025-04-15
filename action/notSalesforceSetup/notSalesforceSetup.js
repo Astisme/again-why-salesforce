@@ -1,6 +1,8 @@
 // deno-lint-ignore-file no-window
 import { BROWSER, SALESFORCE_LIGHTNING_PATTERN, SETUP_LIGHTNING } from "/constants.js";
+import { TranslationService } from "/translator.js";
 import { initTheme } from "../themeHandler.js";
+await TranslationService.create();
 initTheme();
 
 /**
@@ -9,61 +11,36 @@ initTheme();
  * Updates the DOM with appropriate text and button visibility based on the validation.
  */
 
-const div = document.createElement("div");
-const prefix = document.createTextNode("This is not a ");
-const strongEl = document.createElement("strong");
-const otherText = document.createTextNode("");
-
-const sfsetupTextEl = document.querySelector("h3");
-sfsetupTextEl.innerText = "";
-sfsetupTextEl.appendChild(div);
-
-let insertPrefix = true;
-let strongFirst = true;
+const sfsetupTextEl = document.getElementById("plain");
+const invalidUrl = document.getElementById("invalid-url");
+const lightnings = document.querySelectorAll(".lightning");
+const setups = document.querySelectorAll(".setup");
 
 const page = new URLSearchParams(window.location.search).get("url");
 if (page != null) { // we're in a salesforce page
 	let domain = null;
 	try {
 		domain = new URL(page).origin;
+        // domain is null if an error occurred
+        // Validate the domain (make sure it's a Salesforce domain)
+        if (!SALESFORCE_LIGHTNING_PATTERN.test(page)) {
+            // not salesforce domain
+            lightnings.forEach(light => light.classList.toggle("hidden"));
+        } else {
+            // we're in a Salesforce page (not setup)
+            // switch which button is shown
+            document.getElementById("login").classList.add("hidden");
+            const goSetup = document.getElementById("go-setup");
+            goSetup.classList.remove("hidden");
+            // update the button href to use the domain
+            goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
+            // update the bold on the text
+            setups.forEach(set => set.classList.toggle("hidden"));
+        }
 	} catch (_) {
-		strongEl.textContent = "Invalid URL";
-		otherText.textContent = " detected.";
-		insertPrefix = false;
+        sfsetupTextEl.classList.add("hidden");
+        invalidUrl.classList.remove("hidden");
 	}
-	// domain is null if an error occurred
-	if (domain != null) {
-		// Validate the domain (make sure it's a Salesforce domain)
-		if (!SALESFORCE_LIGHTNING_PATTERN.test(page)) {
-			strongEl.textContent = "Salesforce Lightning";
-			otherText.textContent = " Setup Page";
-		} else {
-			// we're in a Salesforce page (not setup)
-			// switch which button is shown
-			document.getElementById("login").classList.add("hidden");
-			const goSetup = document.getElementById("go-setup");
-			goSetup.classList.remove("hidden");
-			// update the button href to use the domain
-			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
-			// update the bold on the text
-			otherText.textContent = "Salesforce Lightning";
-			strongEl.textContent = " Setup Page";
-			strongFirst = false;
-		}
-	}
-} else {
-	strongEl.textContent = "Salesforce Lightning";
-	otherText.textContent = " Setup Page";
-}
-if (insertPrefix) {
-	div.appendChild(prefix);
-}
-if (strongFirst) {
-	div.appendChild(strongEl);
-	div.appendChild(otherText);
-} else {
-	div.appendChild(otherText);
-	div.appendChild(strongEl);
 }
 
 let currentTab;
