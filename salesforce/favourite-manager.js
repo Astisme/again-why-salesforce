@@ -188,7 +188,8 @@ async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
 	let org = undefined;
 	const href = getCurrentHref();
-	if (Tab.containsSalesforceId(href)) {
+    const skip_link_detection = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: "skip_link_detection" }});
+	if (!skip_link_detection.enabled && Tab.containsSalesforceId(href)) {
 		org = Tab.extractOrgName(href);
 	}
 	await performActionOnTabs("add", { label, url, org });

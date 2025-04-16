@@ -446,7 +446,8 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", false);
 	}
-	if (Tab.containsSalesforceId(url)) {
+    const skip_link_detection = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: "skip_link_detection" }});
+	if (!skip_link_detection.enabled && Tab.containsSalesforceId(url)) {
 		showToast(
 			"error_link_with_id",
 			false,

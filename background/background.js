@@ -60,7 +60,7 @@ async function bg_getSettings(settingKeys = null){
     const requestedSettings = settings.filter(setting => settingKeys.includes(setting.id));
     if(requestedSettings.length !== settingKeys.length)
         throw new Error('tbd');
-    return requestedSettings;
+    return requestedSettings.length > 1 ? requestedSettings : requestedSettings[0];
 }
 
 /**
