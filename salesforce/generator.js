@@ -7,6 +7,7 @@ import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
+    SETTINGS_KEY,
 } from "/constants.js";
 import { ensureTranslatorAvailability } from "/translator.js";
 
@@ -43,7 +44,7 @@ function getRng_n_digits(digits = 1) {
  *
  * @param {Event} e - the click event
  */
-function handleLightningLinkClick(e) {
+async function handleLightningLinkClick(e) {
 	e.preventDefault();
 	/**
 	 * Determines the target for a link based on the click event and URL.
@@ -57,14 +58,21 @@ function handleLightningLinkClick(e) {
 			? "_blank"
 			: "_top";
 	}
+    const currentTarget = e.currentTarget.target;
+    const metaCtrl = {ctrlKey:e.ctrlKey, metaKey:e.metaKey}
 	const url = e.currentTarget.href;
 	if (url == null) {
 		showToast("Cannot redirect. Please refresh the page.", false);
 		return;
 	}
-	const target = e.currentTarget.target !== ""
-		? e.currentTarget.target
-		: getLinkTarget(e, url);
+    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get", key: SETTINGS_KEY } });
+    const link_new_browser = settings.filter(setting => setting.id === "link_new_browser");
+	const target = 
+        link_new_browser.length > 0 && link_new_browser[0].enabled
+        ? "_blank"
+        : currentTarget !== ""
+            ? currentTarget
+            : getLinkTarget(metaCtrl, url);
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
 	if (target === "_blank" || url === getCurrentHref()) {
 		open(url, target);

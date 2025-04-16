@@ -153,6 +153,9 @@ export class TranslationService {
                 language,
             );
             //const translation = await BROWSER.i18n.getMessage(key);
+            if(attributes == null) continue;
+            if(attributes.length === 0)
+                attributes.push("textContent");
             for(const attribute of attributes)
                 element[attribute] = translation;
         }

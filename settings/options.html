@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Again, Why Salesforce options</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/action/variables.css" />
+		<link rel="stylesheet" href="/action/basic.css" />
+		<link rel="stylesheet" href="./options.css" />
+		<script src="/action/themeHandler.js" type="module"></script>
+		<script src="/translator.js" type="module"></script>
+		<script defer src="./options.js" type="module"></script>
+	</head>
+
+	<body>
+		<ul>
+			<li>
+                <input id="link_new_browser" type="checkbox" />
+				<label for="link_new_browser" data-i18n="opt_link_new_browser">
+					Always open links in a new browser tab.
+                </label>
+			</li>
+			<li>
+                <input id="skip_link_detection" type="checkbox" />
+				<label for="skip_link_detection" data-i18n="opt_skip_link_detection">
+					Skip automatic check of Salesforce Id.
+				</label>
+			</li>
+			<li>
+				<input
+					id="use_lightning_navigation"
+					type="checkbox"
+				/>
+                <label for="use_lightning_navigation">
+                    <span data-i18n="opt_prevent_use">
+                        Prevent use
+                    </span>
+                    <strong data-i18n="lightning_navigation">
+                        Lightning Navigation
+                    </strong>
+                    <span data-i18n="opt_faster_loading">
+                        (faster loading when in use).
+                    </span>
+                </label>
+			</li>
+			<li>
+				<input
+					id="popup_open_login"
+					type="checkbox"
+				/>
+                <label for="popup_open_login">
+                    <span data-i18n="opt_always_open">
+                    	Always open
+                    </span>
+                    <strong data-i18n="salesforce_login">
+                        Salesforce Login
+                    </strong>
+                    <span data-i18n="opt_when_clicking_popup_not">
+                    	 page when clicking on the popup while not on a Salesforce page.
+                    </span>
+                </label>
+			</li>
+			<li>
+				<input
+					id="popup_open_setup"
+					type="checkbox"
+				/>
+                <label for="popup_open_setup">
+                    <span data-i18n="opt_always_open">
+                    	Always open
+                    </span>
+                    <strong data-i18n="salesforce_setup">
+                        Salesforce Setup
+                    </strong>
+                    <span data-i18n="opt_when_clicking_popup">
+                    	page when clicking on the popup while on a Salesforce page.
+                    </span>
+                </label>
+			</li>
+			<li>
+				<input
+					id="popup_login_new_tab"
+					type="checkbox"
+				/>
+                <label for="popup_login_new_tab">
+                    <span data-i18n="opt_always_open">
+                    	Always open
+                    </span>
+                    <strong data-i18n="salesforce_login">
+                        Salesforce Login
+                    </strong>
+                    <span data-i18n="opt_same_tab_popup">
+                    	page in the same tab when clicking on the popup.
+                    </span>
+                </label>
+			</li>
+			<li>
+				<input
+					id="popup_setup_new_tab"
+					type="checkbox"
+				/>
+                <label for="popup_setup_new_tab">
+                    <span data-i18n="opt_always_open">
+                    	Always open&nsbp;
+                    </span>
+                    <strong data-i18n="salesforce_setup">
+                        Salesforce Setup
+                    </strong>
+                    <span data-i18n="opt_same_tab_popup">
+                    	page in the same tab when clicking on the popup.
+                    </span>
+                </label>
+			</li>
+		</ul>
+	</body>
+</html>

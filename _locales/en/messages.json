@@ -326,6 +326,10 @@
 		"message": "Invalid URL",
 		"description": "[notSalesforceSetup] a URL which is not valid"
 	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce's custom navigation technology"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce login page"
@@ -349,6 +353,38 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce Setup page"
+	},
+	"opt_always_open": {
+		"message": "Always open ",
+		"description": "[setting] be sure to include a space at the end of the message"
+	},
+	"opt_faster_loading": {
+		"message": "(faster loading when in use).",
+		"description": "[setting] explanation of the Lightning Navigation feature"
+	},
+	"opt_link_new_browser": {
+		"message": "Always open links in a new browser tab.",
+		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
+	},
+	"opt_prevent_use": {
+		"message": "Prevent use ",
+		"description": "[setting] just like 'prefer not to use'. be sure to include a space at the end of the message"
+	},
+	"opt_same_tab_popup": {
+		"message": "page in the same tab when clicking on the popup.",
+		"description": "[setting] prevent opening a new browser tab"
+	},
+	"opt_skip_link_detection": {
+		"message": "Skip automatic check of Salesforce Id.",
+		"description": "[setting] when the favourites a Tab, prevent checking if there's an Id in the link that's being saved."
+	},
+	"opt_when_clicking_popup": {
+		"message": "page when clicking on the popup while on a Salesforce page.",
+		"description": "[setting] when the user opens the popup while on a Salesforce website"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "page when clicking on the popup while not on a Salesforce page.",
+		"description": "[setting] when the user opens the popup while on a random website"
 	},
 	"or_drop": {
 		"message": "Or drop",
@@ -401,6 +437,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] the Salesforce Lightning platform"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "the Salesforce Login page (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "any Salesforce Setup page (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Save as Tab",

@@ -1,6 +1,6 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
-import { BROWSER, LOCALE_KEY, SUPPORTED_SALESFORCE_URLS, WHY_KEY } from "/constants.js";
+import { BROWSER, LOCALE_KEY, SUPPORTED_SALESFORCE_URLS, WHY_KEY, SETTINGS_KEY } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
 /**
@@ -11,6 +11,34 @@ import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
  * @throws {Error} If the callback is not provided.
  */
 export function bg_getStorage(callback, key = WHY_KEY) {
+	/**
+	 * Invoke the runtime to send the message
+	 *
+	 * @param {function} callback - The callback to execute after sending the message
+	 */
+	function getFromStorage(callback) {
+        return BROWSER.storage.sync.get(
+            [key],
+            (items) => {
+                callback(items[key]);
+            },
+        );
+	}
+	if (callback == null) {
+		return new Promise((resolve, reject) => {
+			getFromStorage(
+				(response) => {
+					if (BROWSER.runtime.lastError) {
+						reject(BROWSER.runtime.lastError);
+					} else {
+						resolve(response);
+					}
+				},
+			);
+		});
+	}
+	getFromStorage(callback);
+    /*
 	if (callback == null) {
 		throw new Error("error_no_callback");
 	}
@@ -20,6 +48,7 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 			callback(items[key]);
 		},
 	);
+    */
 }
 
 /**
@@ -28,9 +57,23 @@ export function bg_getStorage(callback, key = WHY_KEY) {
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
  */
-function bg_setStorage(tobeset, callback, key = WHY_KEY) {
+async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
-	set[key] = tobeset;
+    if(key === SETTINGS_KEY){
+        // get the settings array
+        const settingsArray = await bg_getStorage(null, key); 
+        if(settingsArray != null){
+            // check if the tobeset.id is already present
+            const tobesetPresent = settingsArray.filter(setting => setting.id === tobeset.id);
+            if(tobesetPresent.length > 0)
+                tobesetPresent.forEach(tbsp => tbsp.enabled = tobeset.enabled);
+            else
+                settingsArray.push(tobeset);
+        }
+        set[key] = settingsArray ?? [tobeset];
+    } else {
+        set[key] = tobeset;
+    }
 	BROWSER.storage.sync.set(set, callback(tobeset));
 }
 
@@ -93,14 +136,12 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	}
 	//let captured = true;
 	switch (message.what) {
-            /*
 		case "get":
-			bg_getStorage(sendResponse);
+			bg_getStorage(sendResponse, message.key);
 			break;
 		case "set":
-			bg_setStorage(message.tabs, sendResponse);
+			bg_setStorage(message.set, sendResponse, message.key);
 			break;
-            */
 		case "saved":
 		case "add":
 		case "theme":

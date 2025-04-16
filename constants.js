@@ -6,7 +6,9 @@ export const EXTENSION_NAME = "again-why-salesforce";
 export const SETUP_LIGHTNING = "/lightning/setup/";
 export const WHY_KEY = "againWhySalesforce";
 export const LOCALE_KEY = "_locale";
-export const HTTPS = "https://";
+export const SETTINGS_KEY = "settings";
+const PROTOCOL_SEPARATOR = "://";
+export const HTTPS = `https${PROTOCOL_SEPARATOR}`;
 export const LIGHTNING_FORCE_COM = ".lightning.force.com";
 export const MY_SALESFORCE_SETUP_COM = ".my.salesforce-setup.com";
 export const MY_SALESFORCE_COM = ".my.salesforce.com";
@@ -42,6 +44,6 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 export const MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN =
-	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}${SETUP_LIGHTNING}*`;
+	`*${PROTOCOL_SEPARATOR}*${MY_SALESFORCE_SETUP_COM}${SETUP_LIGHTNING}*`;
 export const LIGHTNING_FORCE_COM_OPERATING_PATTERN =
-	`${HTTPS}*${LIGHTNING_FORCE_COM}${SETUP_LIGHTNING}*`;
+	`*${PROTOCOL_SEPARATOR}*${LIGHTNING_FORCE_COM}${SETUP_LIGHTNING}*`;
