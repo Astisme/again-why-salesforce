@@ -51,6 +51,18 @@ export function bg_getStorage(callback, key = WHY_KEY) {
     */
 }
 
+async function bg_getSettings(settingKeys = null){
+    const settings = await bg_getStorage(null, SETTINGS_KEY);
+    if(settingKeys == null)
+        return settings;
+    if(!(settingKeys instanceof Array))
+        settingKeys = [settingKeys];
+    const requestedSettings = settings.filter(setting => settingKeys.includes(setting.id));
+    if(requestedSettings.length !== settingKeys.length)
+        throw new Error('tbd');
+    return requestedSettings;
+}
+
 /**
  * Stores the provided tabs data in the browser"s storage and invokes the callback.
  *
@@ -61,7 +73,7 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
     if(key === SETTINGS_KEY){
         // get the settings array
-        const settingsArray = await bg_getStorage(null, key); 
+        const settingsArray = await bg_getSettings(); 
         if(settingsArray != null){
             // check if the tobeset.id is already present
             const tobesetPresent = settingsArray.filter(setting => setting.id === tobeset.id);
@@ -164,6 +176,9 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
             break;
         case "get-language":
             bg_getStorage(sendResponse, LOCALE_KEY);
+            break;
+        case "get-settings":
+            sendResponse(bg_getSettings(message.keys));
             break;
 		default:
 			//captured = ["import"].includes(message.what);

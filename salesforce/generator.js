@@ -65,24 +65,23 @@ async function handleLightningLinkClick(e) {
 		showToast("Cannot redirect. Please refresh the page.", false);
 		return;
 	}
-    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get", key: SETTINGS_KEY } });
-    const link_new_browser = settings.filter(setting => setting.id === "link_new_browser");
+    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: ["link_new_browser", "use_lightning_navigation"] } });
 	const target = 
-        link_new_browser.length > 0 && link_new_browser[0].enabled
+        settings.filter(setting => setting.id === "link_new_browser" && setting.enabled).length > 0
         ? "_blank"
         : currentTarget !== ""
             ? currentTarget
             : getLinkTarget(metaCtrl, url);
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
-	if (target === "_blank" || url === getCurrentHref()) {
+	if (target === "_blank" || url === getCurrentHref() || settings.filter(setting => setting.id === "use_lightning_navigation" && setting.enabled).length !== 0) {
 		open(url, target);
 	} else {
-		postMessage({
-			what: "lightningNavigation",
-			navigationType: "url",
-			url,
-			fallbackURL: url,
-		}, "*");
+        postMessage({
+            what: "lightningNavigation",
+            navigationType: "url",
+            url,
+            fallbackURL: url,
+        }, "*");
 	}
 }
 

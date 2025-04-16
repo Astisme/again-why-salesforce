@@ -1,11 +1,11 @@
 "use strict";
 import {
   BROWSER,
-	EXTENSION_LABEL,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
   SALESFORCE_URL_PATTERN,
+SETTINGS_KEY,
 } from "/constants.js";
 import { ensureTranslatorAvailability } from "/translator.js";
 import Tab from "/tab.js";
@@ -82,11 +82,16 @@ export function getIsCurrentlyOnSavedTab() {
 let fromHrefUpdate = false;
 
 // add lightning-navigation to the page in order to use it
-{
+async function checkAddLightningNavigation(){
+    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: ["link_new_browser", "use_lightning_navigation"] } });
+    const preventLightningNavigation = settings.filter(setting => setting.enabled).length !== 0;
+    if(preventLightningNavigation)
+        return;
 	const script = document.createElement("script");
 	script.src = BROWSER.runtime.getURL("salesforce/lightning-navigation.js");
 	(document.head || document.documentElement).appendChild(script);
 }
+checkAddLightningNavigation();
 
 /**
  * Handles post-save actions after setting Salesforce tabs.
