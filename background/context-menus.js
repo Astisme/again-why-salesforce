@@ -6,7 +6,7 @@ import {
 	FRAME_PATTERNS,
 } from "/constants.js";
 import Tab from "/tab.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import { bg_getSalesforceLanguage } from "./background.js";
 

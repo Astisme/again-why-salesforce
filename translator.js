@@ -10,7 +10,7 @@ async function sendMessage(message){
  * Service for handling text translations in a browser extension.
  * Uses language-specific caches to improve performance.
  */
-export class TranslationService {
+class TranslationService {
 	static DEFAULT_LANGUAGE = "en";
 	static TRANSLATE_ELEMENT_ATTRIBUTE = "data-i18n";
     static TRANSLATE_SEPARATOR = "+-+";
@@ -163,7 +163,6 @@ export class TranslationService {
 
     setListenerForLanguageChange(){
         BROWSER.storage.onChanged.addListener((changes) => {
-            console.log('storage-changed',changes);
           if (changes[LOCALE_KEY] != null) {
             this.updatePageTranslations(changes[LOCALE_KEY].newValue);
           }
@@ -179,7 +178,7 @@ async function getTranslator_async(){
         await singleton;
     return singleton;
 }
-getTranslator_async();
+//getTranslator_async();
 
 function getTranslator(){
     if(singleton == null || singleton instanceof Promise)
@@ -187,7 +186,7 @@ function getTranslator(){
     return singleton;
 }
 
-export async function ensureTranslatorAvailability(){
+export default async function ensureTranslatorAvailability(){
     try {
         return getTranslator();
     } catch (_) {

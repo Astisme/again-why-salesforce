@@ -1,6 +1,5 @@
 // deno-lint-ignore-file no-window
 "use strict";
-import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
@@ -9,9 +8,10 @@ import {
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
-import { TranslationService } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
+import { handleSwitchColorTheme } from "../themeHandler.js";
 
-const translator = await TranslationService.create();
+const translator = await ensureTranslatorAvailability();
 const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
@@ -27,7 +27,6 @@ let loggers = [];
  * Initializes the theme SVG elements based on the current theme and updates visibility.
  */
 function initThemeSvg() {
-	initTheme();
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
 	elementToShow.classList.remove("invisible", "hidden");

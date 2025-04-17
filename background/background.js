@@ -58,9 +58,7 @@ async function bg_getSettings(settingKeys = null){
     if(!(settingKeys instanceof Array))
         settingKeys = [settingKeys];
     const requestedSettings = settings.filter(setting => settingKeys.includes(setting.id));
-    if(requestedSettings.length !== settingKeys.length)
-        throw new Error('tbd');
-    return requestedSettings.length > 1 ? requestedSettings : requestedSettings[0];
+    return settingKeys.length > 1 ? requestedSettings : requestedSettings[0];
 }
 
 /**
@@ -140,7 +138,7 @@ export async function bg_getSalesforceLanguage(callback){
  * @returns {boolean} Whether the message was handled asynchronously.
  */
 BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
-	const message = request.message;
+	const message = request.message ?? request;
 	if (message == null || message.what == null) {
 		console.error({ error: "Invalid message", message, request });
 		sendResponse(null);

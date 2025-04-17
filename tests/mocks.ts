@@ -1,17 +1,24 @@
 // deno-lint-ignore-file no-explicit-any
 import Tab from "/tab.js";
+const WHY_KEY = "againWhySalesforce";
+const LOCALE_KEY = "_locale";
+const SETTINGS_KEY = "settings";
+
 export interface MockStorage {
 	tabs: Tab[];
+	settings: Object[];
 }
 // Mock browser APIs
 export const mockStorage: MockStorage = {
 	tabs: [],
+	settings: [],
 };
 
 export interface InternalMessage {
 	what: string;
 	url?: string;
-	tabs?: Tab[];
+	set?: any;
+    key?: string;
 }
 
 export interface Message {
@@ -22,17 +29,27 @@ let language = "fr";
 
 export const mockBrowser = {
 	storage: {
-		local: {
-			// deno-lint-ignore require-await
-			get: async (): Promise<MockStorage> => mockStorage,
+        sync: {
+            get: async (keys: string[]): Promise<Object> => {
+                const response = {};
+                keys.forEach(key => {
+                    if(key === WHY_KEY)
+                        response[WHY_KEY] = mockStorage.tabs;
+                    else
+                        response[key] = mockStorage[key];
+                });
+                return response;
+            },
 			// deno-lint-ignore require-await
 			set: async (data: { tabs: any[] }): Promise<boolean> => {
-				mockStorage.tabs = data.tabs;
+                if(data[WHY_KEY])
+                    mockStorage.tabs = data[WHY_KEY];
+                else if(data[LOCALE_KEY])
+                    mockStorage[LOCALE_KEY] = data[LOCALE_KEY];
+                else if(data[SETTINGS_KEY])
+                    mockStorage[SETTINGS_KEY] = data[SETTINGS_KEY];
 				return true;
 			},
-		},
-        sync: {
-            get: async () => ({ language })
         },
         onChanged: {
             addListener: () => {}
@@ -50,25 +67,26 @@ export const mockBrowser = {
 			const message = mess.message;
 			switch (message.what) {
 				case "get":
-					response = mockStorage.tabs;
+					if (message.key != null) {
+                        response = mockStorage[message.key];
+					} else {
+						(chrome.runtime as any).lastError = "Missing get key";
+					}
 					break;
 				case "set":
-					if (message.tabs != null) {
-						mockStorage.tabs = message.tabs;
+					if (message.key != null && message.set != null) {
+						mockStorage[message.key] = message.set;
 						response = true;
 					} else {
-						(chrome.runtime as any).lastError = {
-							message: "Tabs data is missing",
-						};
+						(chrome.runtime as any).lastError = "Set data is missing";
 					}
 					break;
 				case "get-language":
+				case "get-sf-language":
 					response = language;
 					break;
 				default:
-					(chrome.runtime as any).lastError = {
-						message: "Unknown message type",
-					};
+					(chrome.runtime as any).lastError = `Unknown message type ${message.what}`;
 			}
 
 			if (callback) {
@@ -94,6 +112,7 @@ declare global {
 // Setup global objects that extension code expects
 globalThis.chrome = mockBrowser as any;
 globalThis.browser = mockBrowser as any;
+
 const mockElements = [
 	{ getAttribute: () => "hello+-+textContent", textContent: "" },
 	{ getAttribute: () => "goodbye+-+textContent", textContent: "" },

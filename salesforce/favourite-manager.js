@@ -1,7 +1,7 @@
 "use strict";
 import Tab from "/tab.js";
 import { BROWSER, EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 import {
 	ensureAllTabsAvailability,

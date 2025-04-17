@@ -5,9 +5,10 @@ import {
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
   SALESFORCE_URL_PATTERN,
-SETTINGS_KEY,
+    LINK_NEW_BROWSER,
+    USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 
@@ -83,7 +84,7 @@ let fromHrefUpdate = false;
 
 // add lightning-navigation to the page in order to use it
 async function checkAddLightningNavigation(){
-    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: ["link_new_browser", "use_lightning_navigation"] } });
+    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: [LINK_NEW_BROWSER,USE_LIGHTNING_NAVIGATION] } });
     const preventLightningNavigation = settings.filter(setting => setting.enabled).length !== 0;
     if(preventLightningNavigation)
         return;

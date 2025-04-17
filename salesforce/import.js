@@ -1,6 +1,6 @@
 "use strict";
 import { BROWSER, EXTENSION_NAME } from "/constants.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 import {
 	generateCheckboxWithLabel,

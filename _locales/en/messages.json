@@ -355,8 +355,12 @@
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce Setup page"
 	},
 	"opt_always_open": {
-		"message": "Always open ",
-		"description": "[setting] be sure to include a space at the end of the message"
+		"message": "Always open",
+		"description": "[setting]"
+	},
+	"opt_automatic_open": {
+		"message": "Automatically open",
+		"description": "[setting]"
 	},
 	"opt_faster_loading": {
 		"message": "(faster loading when in use).",

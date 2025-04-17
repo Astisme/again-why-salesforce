@@ -3,7 +3,7 @@ import {
     WHY_KEY,
 } from "/constants.js"
 import Tab from "./tab.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
@@ -221,11 +221,6 @@ export default class TabContainer extends Array {
 	async getSavedTabs(replace = true) {
         const res = await BROWSER.storage.sync.get([WHY_KEY]);
         const tabs = res[WHY_KEY];
-        /*
-		const res = await BROWSER.runtime.sendMessage(
-			{ message: { what: "get" } },
-		);
-        */
 		if (replace) {
 			await this.replaceTabs(tabs, {
 				resetTabs: true,

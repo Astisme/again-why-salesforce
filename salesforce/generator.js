@@ -7,9 +7,10 @@ import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
-    SETTINGS_KEY,
+    LINK_NEW_BROWSER,
+    USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 import {
 	getCurrentHref,
@@ -65,15 +66,15 @@ async function handleLightningLinkClick(e) {
 		showToast("Cannot redirect. Please refresh the page.", false);
 		return;
 	}
-    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: ["link_new_browser", "use_lightning_navigation"] } });
+    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: [LINK_NEW_BROWSER, USE_LIGHTNING_NAVIGATION] } });
 	const target = 
-        settings.filter(setting => setting.id === "link_new_browser" && setting.enabled).length > 0
+        settings.filter(setting => setting.id === LINK_NEW_BROWSER && setting.enabled).length > 0
         ? "_blank"
         : currentTarget !== ""
             ? currentTarget
             : getLinkTarget(metaCtrl, url);
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
-	if (target === "_blank" || url === getCurrentHref() || settings.filter(setting => setting.id === "use_lightning_navigation" && setting.enabled).length !== 0) {
+	if (target === "_blank" || url === getCurrentHref() || settings.filter(setting => setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled).length !== 0) {
 		open(url, target);
 	} else {
         postMessage({

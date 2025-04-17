@@ -1,9 +1,15 @@
 // deno-lint-ignore-file no-window
-import { BROWSER, SALESFORCE_LIGHTNING_PATTERN, SETUP_LIGHTNING } from "/constants.js";
-import { TranslationService } from "/translator.js";
-import { initTheme } from "../themeHandler.js";
-await TranslationService.create();
-initTheme();
+import { 
+    BROWSER,
+    SALESFORCE_LIGHTNING_PATTERN,
+    SETUP_LIGHTNING,
+    POPUP_OPEN_LOGIN,
+    POPUP_OPEN_SETUP,
+    POPUP_LOGIN_NEW_TAB,
+    POPUP_SETUP_NEW_TAB,
+} from "/constants.js";
+import ensureTranslatorAvailability from "/translator.js";
+import "../themeHandler.js";
 
 /**
  * Dynamically creates and inserts content into the page based on the "url" query parameter.
@@ -15,6 +21,10 @@ const sfsetupTextEl = document.getElementById("plain");
 const invalidUrl = document.getElementById("invalid-url");
 const lightnings = document.querySelectorAll(".lightning");
 const setups = document.querySelectorAll(".setup");
+const loginId = "login";
+const setupId = "go-setup";
+let willOpenLogin = false;
+let willOpenSetup = false;
 
 const page = new URLSearchParams(window.location.search).get("url");
 if (page != null) { // we're in a salesforce page
@@ -26,24 +36,28 @@ if (page != null) { // we're in a salesforce page
         if (!SALESFORCE_LIGHTNING_PATTERN.test(page)) {
             // not salesforce domain
             lightnings.forEach(light => light.classList.toggle("hidden"));
+            willOpenLogin = true;
         } else {
             // we're in a Salesforce page (not setup)
             // switch which button is shown
-            document.getElementById("login").classList.add("hidden");
-            const goSetup = document.getElementById("go-setup");
+            document.getElementById(loginId).classList.add("hidden");
+            const goSetup = document.getElementById(setupId);
             goSetup.classList.remove("hidden");
             // update the button href to use the domain
             goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
             // update the bold on the text
             setups.forEach(set => set.classList.toggle("hidden"));
+            willOpenSetup = true;
         }
 	} catch (_) {
         sfsetupTextEl.classList.add("hidden");
         invalidUrl.classList.remove("hidden");
+        willOpenLogin = true;
 	}
 }
 
-let currentTab;
+let currentTab = null;
+let openPageInSameTab = false;
 /**
  * Finds the carrently active tab and if the callback was provided, it is then called.
  *
@@ -52,7 +66,7 @@ let currentTab;
  */
 function nss_getCurrentBrowserTab(callback, url) {
 	BROWSER.runtime.sendMessage(
-		{ message: { what: "browser-tab" } },
+		{ what: "browser-tab" },
 		(browserTab) => {
 			currentTab = browserTab;
 			if (callback != null) {
@@ -71,26 +85,41 @@ function createTab(url, count = 0) {
 	if (count > 5) {
 		throw new Error("Could not find browser tab.");
 	}
+    if(openPageInSameTab){
+        BROWSER.tabs.update({
+            url: url,
+        });
+        return;
+    }
 	if (currentTab == null) {
 		return nss_getCurrentBrowserTab(
 			(url) => createTab(url, count + 1),
 			url,
 		);
 	}
-	BROWSER.tabs.create({
-		url: url,
-		index: Math.floor(currentTab.index) + 1,
-		openerTabId: currentTab.id,
-	});
+    BROWSER.tabs.create({
+        url: url,
+        index: Math.floor(currentTab.index) + 1,
+        openerTabId: currentTab.id,
+    });
 }
 
 // close the popup when the user clicks on the redirection link
-document.querySelectorAll("a").forEach((a) => {
-	a.addEventListener("click", (e) => {
-		e.preventDefault();
-		currentTab == null
-			? nss_getCurrentBrowserTab(createTab, a.href)
-			: createTab(a.href);
-		setTimeout(() => close(), 200);
-	});
+const shownRedirectBtn = document.getElementById(willOpenLogin ? loginId : setupId);
+shownRedirectBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    currentTab == null && !openPageInSameTab
+        ? nss_getCurrentBrowserTab(createTab, shownRedirectBtn.href)
+        : createTab(shownRedirectBtn.href);
+    setTimeout(() => close(), 200);
 });
+
+if(willOpenLogin || willOpenSetup){
+    const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
+    const useSameTab = willOpenLogin ? POPUP_LOGIN_NEW_TAB : POPUP_SETUP_NEW_TAB;
+    const settings = await BROWSER.runtime.sendMessage({ what: "get-settings", keys: [automaticClick, useSameTab] });
+    openPageInSameTab = settings.filter(setting => setting.id === useSameTab && setting.enabled).length > 0;
+    if(settings.filter(setting => setting.id === automaticClick && setting.enabled).length > 0)
+        shownRedirectBtn.click();
+    else await ensureTranslatorAvailability();
+}

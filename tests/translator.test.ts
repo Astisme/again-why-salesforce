@@ -1,7 +1,6 @@
 // translation_service_test.ts
 import {
 	assertEquals,
-	assertThrows,
     assertRejects,
 } from "https://deno.land/std/testing/asserts.ts";
 import { mockBrowser, translations } from "./mocks.ts";
@@ -11,8 +10,10 @@ declare global {
 }
 // Setup global objects that extension code expects
 globalThis.chrome = mockBrowser as any;
-import { TranslationService } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
+const translate_element_attribute = "data-i18n";
 
+/*
 Deno.test("TranslationService - singleton pattern", async () => {
 	const service1 = await TranslationService.create();
 	const service2 = await TranslationService.create();
@@ -26,9 +27,10 @@ Deno.test("TranslationService - constructor protection", () => {
 		"Use TranslationService.create()",
 	);
 });
+*/
 
 Deno.test("TranslationService - load user preference", async () => {
-	const service = await TranslationService.create();
+	const service = await ensureTranslatorAvailability();
 	assertEquals(
 		service.currentLanguage,
 		"fr",
@@ -37,7 +39,7 @@ Deno.test("TranslationService - load user preference", async () => {
 });
 
 Deno.test("TranslationService - translate method", async () => {
-	const service = await TranslationService.create();
+	const service = await ensureTranslatorAvailability();
 	// Test available translation
 	assertEquals(
 		await service.translate("hello"),
@@ -59,12 +61,12 @@ Deno.test("TranslationService - translate method", async () => {
 });
 
 Deno.test("TranslationService - updatePageTranslations", async (t) => {
-	const service = await TranslationService.create();
+	const service = await ensureTranslatorAvailability();
 	await t.step("translates to french", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("fr");
 		const mockEle = document.querySelectorAll(
-			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]`,
+			`[${translate_element_attribute}]`,
 		);
 		assertEquals(
 			mockEle[0].textContent,
@@ -82,7 +84,7 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 		// Mock DOM elements
 		await service.updatePageTranslations("en");
 		const mockEle = document.querySelectorAll(
-			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]`,
+			`[${translate_element_attribute}]`,
 		);
 		assertEquals(
 			mockEle[0].textContent,
@@ -98,7 +100,7 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 });
 
 Deno.test("TranslationService - loadLanguageFile", async () => {
-	const service = await TranslationService.create();
+	const service = await ensureTranslatorAvailability();
 	// Test loading a new language
     // Add mock de to translations
     const mockJson = { "test": "Test de" };
