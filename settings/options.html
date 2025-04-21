@@ -5,113 +5,335 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/action/variables.css" />
-		<link rel="stylesheet" href="/action/basic.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.5.0/styles/salesforce-lightning-design-system.min.css" media="all">	
+		<link rel="stylesheet" href="../action/variables.css" />
+		<link rel="stylesheet" href="../action/basic.css" />
 		<link rel="stylesheet" href="./options.css" />
-		<script src="/action/themeHandler.js" type="module"></script>
 		<script src="/translator.js" type="module"></script>
 		<script defer src="./options.js" type="module"></script>
 	</head>
 
 	<body>
-		<ul>
-			<li>
-                <input id="link_new_browser" type="checkbox" />
-				<label for="link_new_browser" data-i18n="opt_link_new_browser">
-					Always open links in a new browser tab.
-                </label>
-			</li>
-			<li>
-                <input id="skip_link_detection" type="checkbox" />
-				<label for="skip_link_detection" data-i18n="opt_skip_link_detection">
-					Skip automatic check of Salesforce Id.
-				</label>
-			</li>
-			<li>
-				<input
-					id="use_lightning_navigation"
-					type="checkbox"
-				/>
-                <label for="use_lightning_navigation">
-                    <span data-i18n="opt_prevent_use">
-                        Prevent use
-                    </span>
-                    <strong data-i18n="lightning_navigation">
-                        Lightning Navigation
-                    </strong>
-                    <span data-i18n="opt_faster_loading">
-                        (faster loading when in use).
-                    </span>
-                </label>
-			</li>
-			<li>
-				<input
-					id="popup_open_login"
-					type="checkbox"
-				/>
-                <label for="popup_open_login">
-                    <span data-i18n="opt_automatic_open">
-                    	Automatically open
-                    </span>
-                    <strong data-i18n="salesforce_login">
-                        Salesforce Login
-                    </strong>
-                    <span data-i18n="opt_when_clicking_popup_not">
-                    	 page when clicking on the popup while not on a Salesforce page.
-                    </span>
-                </label>
-			</li>
-			<li>
-				<input
-					id="popup_open_setup"
-					type="checkbox"
-				/>
-                <label for="popup_open_setup">
-                    <span data-i18n="opt_automatic_open">
-                    	Automatically open
-                    </span>
-                    <strong data-i18n="salesforce_setup">
-                        Salesforce Setup
-                    </strong>
-                    <span data-i18n="opt_when_clicking_popup">
-                    	page when clicking on the popup while on a Salesforce page.
-                    </span>
-                </label>
-			</li>
-			<li>
-				<input
-					id="popup_login_new_tab"
-					type="checkbox"
-				/>
-                <label for="popup_login_new_tab">
-                    <span data-i18n="opt_always_open">
-                    	Always open
-                    </span>
-                    <strong data-i18n="salesforce_login">
-                        Salesforce Login
-                    </strong>
-                    <span data-i18n="opt_same_tab_popup">
-                    	page in the same tab when clicking on the popup.
-                    </span>
-                </label>
-			</li>
-			<li>
-				<input
-					id="popup_setup_new_tab"
-					type="checkbox"
-				/>
-                <label for="popup_setup_new_tab">
-                    <span data-i18n="opt_always_open">
-                    	Always open
-                    </span>
-                    <strong data-i18n="salesforce_setup">
-                        Salesforce Setup
-                    </strong>
-                    <span data-i18n="opt_same_tab_popup">
-                    	page in the same tab when clicking on the popup.
-                    </span>
-                </label>
-			</li>
-		</ul>
+        <div id="header" tabindex="-1" class="tabsetHeader slds-context-bar slds-context-bar--tabs slds-no-print noLeftSpacing">
+          <div class="slds-context-bar__primary navLeft navBar">
+            <div class="navexSetupNav">
+              <div class="slds-context-bar__item slds-no-hover">
+                <div role="navigation" class="appLauncher slds-context-bar__icon-action">
+                  <one-app-launcher-header>
+                    <button class="slds-button slds-context-bar__button slds-icon-waffle_container slds-show">
+                      <div class="slds-icon-waffle">
+                        <div class="slds-r1">
+                        </div>
+                        <div class="slds-r2">
+                        </div>
+                        <div class="slds-r3">
+                        </div>
+                        <div class="slds-r4">
+                        </div>
+                        <div class="slds-r5">
+                        </div>
+                        <div class="slds-r6">
+                        </div>
+                        <div class="slds-r7">
+                        </div>
+                        <div class="slds-r8">
+                        </div>
+                        <div class="slds-r9">
+                        </div>
+                      </div>
+                    </button>
+                  </one-app-launcher-header>
+                </div>
+                <div class="appName slds-context-bar__label-action slds-context-bar__app-name">
+                  <span title="Settings" class="slds-truncate" data-i18n="set_settings+-+textContent+-+title">Settings</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-context-bar__secondary navCenter tabBarContainer">
+            <div role="navigation" style="" class="tabContainer oneConsoleTabContainer slds-grid active navexConsoleTabContainer">
+              <div role="tablist" class="tabBar slds-grid resizing">
+                <ul id="hanger" role="presentation" class="tabBarItems slds-grid" style="overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; ">
+                  <li id="general-settings" role="presentation" style="" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight slds-is-active active hideAnimation navexConsoleTabItem">
+                    <a role="tab" tabindex="0" title="General Settings" class="tabHeader slds-context-bar__label-action " data-i18n="set_general_settings+-+title">
+                      <span class="title slds-truncate">General</span>
+                    </a>
+                  </li>
+                  <li id="tab_generic_style-settings" role="presentation" style="" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight hasActions navexConsoleTabItem">
+                    <a role="tab" tabindex="-1" title="Tab Manager" class="tabHeader slds-context-bar__label-action " data-i18n="set_tab_manager+-+title">
+                      <span class="title slds-truncate" data-i18n="set_tab_manager">Tab Manager</span>
+                    </a>
+                  </li>
+                  <!--
+                  <li role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a data-draggable="true" role="tab" tabindex="-1" title="/lightning" class="tabHeader slds-context-bar__label-action" style="z-index: 0;">
+                      <span class="label slds-truncate">⚡</span>
+                    </a>
+                  </li>
+                  <li role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a data-draggable="true" role="tab" tabindex="-1" title="/lightning/app/standard__FlowsApp" class="tabHeader slds-context-bar__label-action" style="z-index: 0;">
+                      <span class="label slds-truncate">Flows</span>
+                    </a>
+                  </li>
+                  <li role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a data-draggable="true" role="tab" tabindex="-1" title="ObjectManager/Account/FieldsAndRelationships/page?address=%2F00NWy000001CXFlMAO%3FretURL%3D%252Fsetup%252Fhome" class="tabHeader slds-context-bar__label-action" style="z-index: 0;">
+                      <b class="label slds-truncate">Account</b>
+                    </a>
+                  </li>
+                  <li role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a data-draggable="true" role="tab" tabindex="-1" title="Queues/home" class="tabHeader slds-context-bar__label-action" style="z-index: 0;">
+                      <b class="label slds-truncate">Queues</b>
+                    </a>
+                  </li>
+                  -->
+                  <li role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a data-draggable="true" role="tab" tabindex="-1" title="ExternalStrings/home" class="tabHeader slds-context-bar__label-action" style="z-index: 0;">
+                      <span class="label slds-truncate">Custom Labels</span>
+                    </a>
+                  </li>
+                  <li role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a data-draggable="true" role="tab" tabindex="-1" title="https://github.com/Astisme/again-why-salesforce" class="tabHeader slds-context-bar__label-action" style="z-index: 0;">
+                      <b class="label slds-truncate">GitHub</b>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="general-container" class="container">
+            <ul class="settings">
+                <li>
+                    <input id="link_new_browser" type="checkbox" />
+                    <label for="link_new_browser" data-i18n="opt_link_new_browser">
+                        Always open links in a new browser tab.
+                    </label>
+                </li>
+                <li>
+                    <input id="skip_link_detection" type="checkbox" />
+                    <label for="skip_link_detection" data-i18n="opt_skip_link_detection">
+                        Skip automatic check of Salesforce Id.
+                    </label>
+                </li>
+                <li>
+                    <input
+                        id="use_lightning_navigation"
+                        type="checkbox"
+                    />
+                    <label for="use_lightning_navigation">
+                        <span data-i18n="opt_prevent_use">
+                            Prevent use
+                        </span>
+                        <strong data-i18n="lightning_navigation">
+                            Lightning Navigation
+                        </strong>
+                        <span data-i18n="opt_faster_loading">
+                            (faster loading when in use).
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <input
+                        id="popup_open_login"
+                        type="checkbox"
+                    />
+                    <label for="popup_open_login">
+                        <span data-i18n="opt_automatic_open">
+                            Automatically open
+                        </span>
+                        <strong data-i18n="salesforce_login">
+                            Salesforce Login
+                        </strong>
+                        <span data-i18n="opt_when_clicking_popup_not">
+                             page when clicking on the popup while not on a Salesforce page.
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <input
+                        id="popup_open_setup"
+                        type="checkbox"
+                    />
+                    <label for="popup_open_setup">
+                        <span data-i18n="opt_automatic_open">
+                            Automatically open
+                        </span>
+                        <strong data-i18n="salesforce_setup">
+                            Salesforce Setup
+                        </strong>
+                        <span data-i18n="opt_when_clicking_popup">
+                            page when clicking on the popup while on a Salesforce page.
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <input
+                        id="popup_login_new_tab"
+                        type="checkbox"
+                    />
+                    <label for="popup_login_new_tab">
+                        <span data-i18n="opt_always_open">
+                            Always open
+                        </span>
+                        <strong data-i18n="salesforce_login">
+                            Salesforce Login
+                        </strong>
+                        <span data-i18n="opt_same_tab_popup">
+                            page in the same tab when clicking on the popup.
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <input
+                        id="popup_setup_new_tab"
+                        type="checkbox"
+                    />
+                    <label for="popup_setup_new_tab">
+                        <span data-i18n="opt_always_open">
+                            Always open
+                        </span>
+                        <strong data-i18n="salesforce_setup">
+                            Salesforce Setup
+                        </strong>
+                        <span data-i18n="opt_same_tab_popup">
+                            page in the same tab when clicking on the popup.
+                        </span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div id="tab_generic_style-container" class="container hidden">
+            <div name="input">
+                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
+                            <label class="slds-form-element__label slds-no-flex" for="background" data-i18n="set_tab_background_label">
+                                Insert the background color for your generic Tabs.
+                            </label>
+                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                <input id="background" class="slds-input" part="input" maxlength="255" name="set_tab_background" type="text" placeholder="white">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div name="input">
+                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
+                            <label class="slds-form-element__label slds-no-flex" for="color" data-i18n="set_tab_color_label">
+                                Insert the color of the text for your generic Tabs.
+                            </label>
+                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                <input id="color" class="slds-input" part="input" maxlength="255" name="set_tab_color" type="text" placeholder="black">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div name="input">
+                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
+                            <label class="slds-form-element__label slds-no-flex" for="border" data-i18n="set_tab_border_color_label">
+                                <!-- 1px solid input -->
+                                Insert the border color for your generic Tabs.
+                            </label>
+                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                <input id="border" class="slds-input" part="input" maxlength="255" name="set_tab_border_color" type="text" placeholder="blue">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div name="input">
+                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
+                            <label class="slds-form-element__label slds-no-flex" for="shadow" data-i18n="set_tab_shadow_label">
+                                <!-- 1px 1px 2px input -->
+                                Insert the shadow color for your generic Tabs.
+                            </label>
+                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                <input id="shadow" class="slds-input" part="input" maxlength="255" name="set_tab_shadow" type="text" placeholder="black">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div name="input">
+                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
+                            <label class="slds-form-element__label slds-no-flex" for="hover" data-i18n="set_tab_hover_background_label">
+                                Insert the hover background color for your generic Tabs.
+                            </label>
+                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                <input id="hover" class="slds-input" part="input" maxlength="255" name="set_tab_hover_background" type="text" placeholder="aqua">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-form-element_stacked slds-form-element" variant="label-stacked">
+                <div class="slds-form-element__label slds-form-element__legend" data-i18n="set_tab_decoration_label">Pick one or more decoration styles for your generic Tabs.</div>
+                <div class="slds-dueling-list">
+                    <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
+                        <span class="slds-form-element__label" data-i18n="available">Available</span>
+                        <div class="slds-dueling-list__options" style="height:10rem">
+                            <ul id="set_decoration_available" class="slds-listbox slds-listbox_vertical" role="listbox">
+                                <li id="bold" role="presentation" class="slds-listbox__item">
+                                    <!-- set aria-selected="true" from js -->
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="bold" style="font-weight: bold;" data-i18n="bold">Bold</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li id="italic" role="presentation" class="slds-listbox__item">
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="italic" style="font-style: italic;" data-i18n="italic">Italic</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li id="underline" role="presentation" class="slds-listbox__item">
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="underline" style="text-decoration: underline" data-i18n="underline">Underline</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li id="wavy" role="presentation" class="slds-listbox__item">
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slds-dueling-list__column">
+                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move to Chosen" type="button" data-i18n="set_move_chosen">
+                            <svg viewBox="0 0 520 520" class="slds-button__icon">
+                                <path d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"></path>
+                            </svg>
+                        </button>
+                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move to Available" type="button" data-i18n="set_move_available">
+                            <svg viewBox="0 0 520 520" class="slds-button__icon">
+                                <path d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
+                        <span class="slds-form-element__label" data-i18n="chosen">Chosen</span>
+                        <div class="slds-dueling-list__options" style="height:10rem">
+                            <ul id="set_decoration_chosen" class="slds-listbox slds-listbox_vertical" role="listbox"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</body>
 </html>

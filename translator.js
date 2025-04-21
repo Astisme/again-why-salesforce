@@ -1,10 +1,10 @@
-import { BROWSER, LOCALE_KEY } from "/constants.js";
+import { 
+    BROWSER,
+    LOCALE_KEY,
+    sendExtensionMessage,
+} from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
 let singleton = null;
-
-async function sendMessage(message){
-    return await BROWSER.runtime.sendMessage({message});
-}
 
 /**
  * Service for handling text translations in a browser extension.
@@ -37,12 +37,12 @@ class TranslationService {
     }
 
     async loadSalesforceLanguage(){
-        const sfLanguage = await sendMessage({what: "get-sf-language"});
+        const sfLanguage = await sendExtensionMessage({what: "get-sf-language"});
         await this.loadNewLanguage(sfLanguage);
     }
 
     async loadSavedLanguage(){
-        const savedLanguage = await sendMessage({what: "get-language"});
+        const savedLanguage = await sendExtensionMessage({what: "get-language"});
         await this.loadNewLanguage(savedLanguage);
     }
 
@@ -178,7 +178,6 @@ async function getTranslator_async(){
         await singleton;
     return singleton;
 }
-//getTranslator_async();
 
 function getTranslator(){
     if(singleton == null || singleton instanceof Promise)

@@ -1,6 +1,11 @@
 "use strict";
 import Tab from "/tab.js";
-import { BROWSER, EXTENSION_LABEL, EXTENSION_NAME } from "/constants.js";
+import { 
+    BROWSER,
+    EXTENSION_LABEL,
+    EXTENSION_NAME,
+    getSettings,
+} from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
@@ -188,7 +193,7 @@ async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
 	let org = undefined;
 	const href = getCurrentHref();
-    const skip_link_detection = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: "skip_link_detection" }});
+    const skip_link_detection = await getSettings("skip_link_detection");
 	if (!skip_link_detection.enabled && Tab.containsSalesforceId(href)) {
 		org = Tab.extractOrgName(href);
 	}

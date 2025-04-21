@@ -46,6 +46,43 @@ export const MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN =
 	`*${PROTOCOL_SEPARATOR}*${MY_SALESFORCE_SETUP_COM}${SETUP_LIGHTNING}*`;
 export const LIGHTNING_FORCE_COM_OPERATING_PATTERN =
 	`*${PROTOCOL_SEPARATOR}*${LIGHTNING_FORCE_COM}${SETUP_LIGHTNING}*`;
+/**
+ * Sends a message to the background script with the specified message.
+ *
+ * @param {Object} message - The message to send.
+ * @param {function} callback - The callback to execute after sending the message.
+ */
+export function sendExtensionMessage(message, callback) {
+	/**
+	 * Invoke the runtime to send the message
+	 *
+	 * @param {Object} message - The message to send
+	 * @param {function} callback - The callback to execute after sending the message
+	 */
+	function sendMessage(message, callback) {
+		return BROWSER.runtime.sendMessage(message, callback);
+	}
+	if (callback == null) {
+		return new Promise((resolve, reject) => {
+			sendMessage(
+				message,
+				(response) => {
+					if (BROWSER.runtime.lastError) {
+						reject(BROWSER.runtime.lastError);
+					} else {
+						resolve(response);
+					}
+				},
+			);
+		});
+	}
+	sendMessage(message, callback);
+}
+export async function getSettings(keys = null){
+    if(keys == null)
+        throw new Error('tbd');
+    return await sendExtensionMessage({ what: "get-settings", keys });
+}
 // SETTINGS
 export const SETTINGS_KEY = "settings";
 export const LINK_NEW_BROWSER = "link_new_browser";
@@ -55,3 +92,14 @@ export const POPUP_OPEN_LOGIN = "popup_open_login";
 export const POPUP_OPEN_SETUP = "popup_open_setup";
 export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
 export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
+export const TAB_GENERIC_STYLE = "tab_generic_style";
+export const TAB_ORG_STYLE = "tab_org_style";
+export const TAB_STYLE_BACKGROUND = "background";
+export const TAB_STYLE_COLOR = "color";
+export const TAB_STYLE_BORDER = "border";
+export const TAB_STYLE_SHADOW = "shadow";
+export const TAB_STYLE_HOVER = "hover";
+export const TAB_STYLE_BOLD = "bold";
+export const TAB_STYLE_ITALIC = "italic";
+export const TAB_STYLE_UNDERLINE = "underline";
+export const TAB_STYLE_WAVY = "wavy";

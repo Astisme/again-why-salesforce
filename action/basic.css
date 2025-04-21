@@ -149,3 +149,8 @@ html[data-theme="dark"] :is(.button, button) {
 	transition-duration: var(--transition-duration);
 	transition-timing-function: 1s;
 }
+
+input {
+    color: var(--color);
+    background-color: var(--background-color);
+}

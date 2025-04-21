@@ -1,3 +1,71 @@
-ul {
+html {
+    background-color: var(--background-color);
+}
+
+#header,
+input.slds-input,
+input.slds-input:focus,
+input.slds-input:active,
+::selection,
+.slds-form-element__label,
+option,
+label,
+.slds-dueling-list__options
+{
+    color: var(--color);
+    background-color: transparent;
+}
+
+ul.settings {
     list-style-type: none;
+    & > li {
+        margin-bottom: 0.2rem;
+    }
+}
+
+.container {
+    margin: 1rem;
+}
+
+.dual-listbox-container {
+    display: flex;
+    gap: 10px;
+}
+
+.list-column {
+    flex: 1;
+}
+
+.list-container select {
+    width: 100%;
+    height: 6rem;
+}
+
+.buttons-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.slds-dueling-list {
+    display: flex;
+    justify-content: center;
+}
+
+.slds-dueling-list__options {
+    overflow: hidden;
+}
+
+.slds-listbox__option:hover {
+    background-color: var(--shade) !important;
+}
+
+.button, button {
+    &:hover {
+        background-color: unset;
+    }
+    & > svg {
+        fill: var(--color);
+    }
 }

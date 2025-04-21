@@ -1,5 +1,9 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME } from "/constants.js";
+import { 
+    BROWSER,
+    EXTENSION_NAME,
+    sendExtensionMessage,
+} from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
@@ -113,9 +117,7 @@ reader.onload = async (e) => {
 		showToast(["import_successful", importedNum, "tabs"], true);
 		if (jsonString.includes("tabTitle")) {
 			// export and toast
-			BROWSER.runtime.sendMessage({
-				message: { what: "export", tabs: allTabs },
-			});
+			sendExtensionMessage({ what: "export", tabs: allTabs });
 			showToast(
 				"warn_deprecated_tab_title",
 				false,

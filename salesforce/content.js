@@ -7,6 +7,7 @@ import {
   SALESFORCE_URL_PATTERN,
     LINK_NEW_BROWSER,
     USE_LIGHTNING_NAVIGATION,
+    getSettings,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
@@ -84,7 +85,7 @@ let fromHrefUpdate = false;
 
 // add lightning-navigation to the page in order to use it
 async function checkAddLightningNavigation(){
-    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: [LINK_NEW_BROWSER,USE_LIGHTNING_NAVIGATION] } });
+    const settings = await getSettings([LINK_NEW_BROWSER,USE_LIGHTNING_NAVIGATION]);
     const preventLightningNavigation = settings.filter(setting => setting.enabled).length !== 0;
     if(preventLightningNavigation)
         return;
@@ -447,7 +448,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", false);
 	}
-    const skip_link_detection = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: "skip_link_detection" }});
+    const skip_link_detection = await getSettings("skip_link_detection");
 	if (!skip_link_detection.enabled && Tab.containsSalesforceId(url)) {
 		showToast(
 			"error_link_with_id",

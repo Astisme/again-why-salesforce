@@ -1,6 +1,15 @@
 "use strict";
 import "./context-menus.js"; // initiate context-menu loop
-import { BROWSER, LOCALE_KEY, SUPPORTED_SALESFORCE_URLS, WHY_KEY, SETTINGS_KEY } from "/constants.js";
+import { 
+    BROWSER,
+    LOCALE_KEY,
+    SUPPORTED_SALESFORCE_URLS,
+    WHY_KEY,
+    SETTINGS_KEY,
+    LIGHTNING_FORCE_COM,
+    MY_SALESFORCE_COM,
+    MY_SALESFORCE_SETUP_COM,
+} from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
 /**
@@ -73,14 +82,16 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
         // get the settings array
         const settingsArray = await bg_getSettings(); 
         if(settingsArray != null){
-            // check if the tobeset.id is already present
-            const tobesetPresent = settingsArray.filter(setting => setting.id === tobeset.id);
-            if(tobesetPresent.length > 0)
-                tobesetPresent.forEach(tbsp => tbsp.enabled = tobeset.enabled);
-            else
-                settingsArray.push(tobeset);
+            for(const item of tobeset) {
+                // check if the item.id is already present
+                const existingItems = settingsArray.filter(setting => setting.id === item.id);
+                if(existingItems.length > 0)
+                    existingItems.forEach(existing => existing.enabled = item.enabled);
+                else
+                    settingsArray.push(item);
+            }
         }
-        set[key] = settingsArray ?? [tobeset];
+        set[key] = settingsArray ?? tobeset;
     } else {
         set[key] = tobeset;
     }
@@ -90,20 +101,24 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 async function getCurrentUserInfo(currentUrl){
     async function getAPIHostAndHeaders(currentUrl) {
       const url = new URL(currentUrl);
-      const host = url.host;
-      if (SUPPORTED_SALESFORCE_URLS.filter(pattern => host.includes(pattern)).length === 0) {
+        let origin = url.origin;
+      if (SUPPORTED_SALESFORCE_URLS.filter(pattern => origin.includes(pattern)).length === 0) {
           return;
       }
+        if(url.origin.includes(LIGHTNING_FORCE_COM))
+            origin = url.origin.replace(LIGHTNING_FORCE_COM, MY_SALESFORCE_COM);
+        else if(url.origin.includes(MY_SALESFORCE_SETUP_COM))
+            origin = url.origin.replace(MY_SALESFORCE_SETUP_COM, MY_SALESFORCE_COM);
     const cookies = await BROWSER.cookies.getAll({
-        "domain": host,
-        "name": "sid",
+        domain: origin.replace("https:\/\/",""),
+        name: "sid",
     });
         if(cookies.length === 0)
             throw new Error("error_no_cookies");
         return [
-            url.origin,
+            origin,
             {
-              "Authorization": `Bearer ${cookies[0].value}`,
+              Authorization: `Bearer ${cookies[0].value}`,
               "Content-Type": "application/json",
             }
         ];
@@ -113,6 +128,7 @@ async function getCurrentUserInfo(currentUrl){
         const retrievedRows = await fetch(`${apiHost}/services/oauth2/userinfo`, {headers});
         return await retrievedRows.json();
     } catch (error) {
+        console.error(error);
         return;
     }
 }
@@ -138,19 +154,18 @@ export async function bg_getSalesforceLanguage(callback){
  * @returns {boolean} Whether the message was handled asynchronously.
  */
 BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
-	const message = request.message ?? request;
-	if (message == null || message.what == null) {
-		console.error({ error: "Invalid message", message, request });
+	if (request == null || request.what == null) {
+		console.error({ error: "Invalid request", request });
 		sendResponse(null);
 		return false;
 	}
 	//let captured = true;
-	switch (message.what) {
+	switch (request.what) {
 		case "get":
-			bg_getStorage(sendResponse, message.key);
+			bg_getStorage(sendResponse, request.key);
 			break;
 		case "set":
-			bg_setStorage(message.set, sendResponse, message.key);
+			bg_setStorage(request.set, sendResponse, request.key);
 			break;
 		case "saved":
 		case "add":
@@ -158,11 +173,11 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "error":
 		case "warning":
 			sendResponse(null);
-			setTimeout(() => bg_notify(message), 250); // delay the notification to prevent accidental removal (for "add")
+			setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
 			//return false; // we won"t call sendResponse
 			break;
 		case "export":
-			exportHandler(message.tabs);
+			exportHandler(request.tabs);
 			sendResponse(null);
 			//return false;
 			break;
@@ -176,13 +191,13 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
             bg_getStorage(sendResponse, LOCALE_KEY);
             break;
         case "get-settings":
-            sendResponse(bg_getSettings(message.keys));
+            sendResponse(bg_getSettings(request.keys));
             break;
 		default:
-			//captured = ["import"].includes(message.what);
+			//captured = ["import"].includes(request.what);
 			//if (!captured) {
-			if (!["import"].includes(message.what)) {
-				console.error({ error: "Unknown message", message, request });
+			if (!["import"].includes(request.what)) {
+				console.error({ error: "Unknown request", request });
 			}
 			break;
 	}

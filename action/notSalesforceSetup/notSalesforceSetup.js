@@ -7,6 +7,8 @@ import {
     POPUP_OPEN_SETUP,
     POPUP_LOGIN_NEW_TAB,
     POPUP_SETUP_NEW_TAB,
+    sendExtensionMessage,
+    getSettings,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import "../themeHandler.js";
@@ -65,7 +67,7 @@ let openPageInSameTab = false;
  * @param {string} url - the url to pass to the callback function
  */
 function nss_getCurrentBrowserTab(callback, url) {
-	BROWSER.runtime.sendMessage(
+	sendExtensionMessage(
 		{ what: "browser-tab" },
 		(browserTab) => {
 			currentTab = browserTab;
@@ -117,7 +119,7 @@ shownRedirectBtn.addEventListener("click", (e) => {
 if(willOpenLogin || willOpenSetup){
     const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
     const useSameTab = willOpenLogin ? POPUP_LOGIN_NEW_TAB : POPUP_SETUP_NEW_TAB;
-    const settings = await BROWSER.runtime.sendMessage({ what: "get-settings", keys: [automaticClick, useSameTab] });
+    const settings = await getSettings([automaticClick, useSameTab]);
     openPageInSameTab = settings.filter(setting => setting.id === useSameTab && setting.enabled).length > 0;
     if(settings.filter(setting => setting.id === automaticClick && setting.enabled).length > 0)
         shownRedirectBtn.click();

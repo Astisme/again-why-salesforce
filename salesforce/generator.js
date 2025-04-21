@@ -9,6 +9,7 @@ import {
 	SETUP_LIGHTNING,
     LINK_NEW_BROWSER,
     USE_LIGHTNING_NAVIGATION,
+    getSettings,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -66,7 +67,7 @@ async function handleLightningLinkClick(e) {
 		showToast("Cannot redirect. Please refresh the page.", false);
 		return;
 	}
-    const settings = await BROWSER.runtime.sendMessage({ message: { what: "get-settings", keys: [LINK_NEW_BROWSER, USE_LIGHTNING_NAVIGATION] } });
+    const settings = await getSettings([LINK_NEW_BROWSER, USE_LIGHTNING_NAVIGATION]);
 	const target = 
         settings.filter(setting => setting.id === LINK_NEW_BROWSER && setting.enabled).length > 0
         ? "_blank"

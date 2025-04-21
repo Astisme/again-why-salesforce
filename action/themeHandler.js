@@ -1,16 +1,9 @@
 // deno-lint-ignore-file no-window
-import { BROWSER } from "/constants.js";
+import { 
+    sendExtensionMessage,
+} from "/constants.js";
 const html = document.documentElement;
 let systemColorListener = null;
-
-/**
- * Sends a message to the runtime to update the theme.
- *
- * @param {string} theme - The theme to be applied.
- */
-function sendMessageTheme(theme) {
-	BROWSER.runtime.sendMessage({ message: { what: "theme", theme } });
-}
 
 /**
  * Updates the theme and applies the changes to the HTML document.
@@ -19,7 +12,7 @@ function sendMessageTheme(theme) {
  * @param {boolean} [updateUserTheme=false] - A flag to determine if the user theme should be updated in localStorage.
  */
 function messageAndUpdateTheme(theme, updateUserTheme = false) {
-	sendMessageTheme(theme);
+    sendExtensionMessage({ what: "theme", theme });
 	setTimeout(() => {
 		html.dataset.theme = theme;
 		localStorage.setItem("usingTheme", theme);
