@@ -250,12 +250,13 @@ function delayLoadSetupTabs(count = 0) {
 		console.error("Why Salesforce - failed to find setup tab.");
 		return setTimeout(delayLoadSetupTabs(), 5000);
 	}
-	setupTabUl = document.querySelector("ul.pinnedItems.slds-grid") ?? document.getElementsByClassName("pinnedItems slds-grid")?.[0];
+	setupTabUl = document.querySelector("ul.pinnedItems.slds-grid") ??
+		document.getElementsByClassName("pinnedItems slds-grid")?.[0];
 	if (setupTabUl == null) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
 	}
-    // move setupTabUl after ObjectManager
-    setupTabUl.parentElement.insertAdjacentElement('beforeend',setupTabUl);
+	// move setupTabUl after ObjectManager
+	setupTabUl.parentElement.insertAdjacentElement("beforeend", setupTabUl);
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
 	new MutationObserver(() => setTimeout(onHrefUpdate, 500))
