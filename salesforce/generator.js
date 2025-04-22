@@ -137,7 +137,7 @@ export function generateRowTemplate(
  */
 export function generateSldsToastMessage(message, isSuccess, isWarning) {
 	if (
-		message == null || message === "" | isSuccess == null ||
+		message == null || message === "" || isSuccess == null ||
 		isWarning == null
 	) {
 		throw new Error("Unable to generate Toast Message.");

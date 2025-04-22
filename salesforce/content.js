@@ -47,10 +47,6 @@ export function getSetupTabUl() {
 	return setupTabUl;
 }
 /**
- * The standard last LI of setupTabUl
- */
-let objectManagerLi;
-/**
  * Where modals should be inserted in Salesforce Setup
  */
 let modalHanger;
@@ -254,11 +250,12 @@ function delayLoadSetupTabs(count = 0) {
 		console.error("Why Salesforce - failed to find setup tab.");
 		return setTimeout(delayLoadSetupTabs(), 5000);
 	}
-	setupTabUl = document.getElementsByClassName("tabBarItems slds-grid")[0];
-	if (setupTabUl == null || setupTabUl.lastElementChild == null) {
+	setupTabUl = document.querySelector("ul.pinnedItems.slds-grid") ?? document.getElementsByClassName("pinnedItems slds-grid")?.[0];
+	if (setupTabUl == null) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
 	}
-	objectManagerLi = setupTabUl.childNodes[2];
+    // move setupTabUl after ObjectManager
+    setupTabUl.parentElement.insertAdjacentElement('beforeend',setupTabUl);
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
 	new MutationObserver(() => setTimeout(onHrefUpdate, 500))
@@ -288,7 +285,6 @@ function delayLoadSetupTabs(count = 0) {
 	reloadTabs();
 }
 
-let firstRun = true;
 /**
  * Reloads the tabs by checking if the setup tab list is correctly populated and removing any existing tabs before reinitializing.
  * - Ensures that duplicate tabs are not created when refocusing on the setup window/tab.
@@ -299,17 +295,8 @@ let firstRun = true;
  * @returns {void} This function does not return anything, but it reinitializes the tab list as needed.
  */
 function reloadTabs(tabs = null) {
-	if (
-		setupTabUl.childElementCount === 0 ||
-		(!firstRun && setupTabUl.childElementCount <= 3 &&
-			document.getElementsByClassName("tabBarItems slds-grid")[0]
-					?.lastElementChild === objectManagerLi)
-	) {
-		return setTimeout(reloadTabs, 500);
-	}
-	firstRun = false;
 	// remove the tabs that are already in the page
-	while (setupTabUl.childElementCount > 3) { // hidden li + Home + Object Manager
+	while (setupTabUl.childElementCount > 0) {
 		setupTabUl.removeChild(setupTabUl.lastChild);
 	}
 	init(tabs);
