@@ -62,7 +62,7 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 
 async function bg_getSettings(settingKeys = null){
     const settings = await bg_getStorage(null, SETTINGS_KEY);
-    if(settingKeys == null)
+    if(settingKeys == null || settings == null)
         return settings;
     if(!(settingKeys instanceof Array))
         settingKeys = [settingKeys];
@@ -98,6 +98,7 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	BROWSER.storage.sync.set(set, callback(tobeset));
 }
 
+// courtesy of derroman/salesforce-user-language-switcher
 async function getCurrentUserInfo(currentUrl){
     async function getAPIHostAndHeaders(currentUrl) {
       const url = new URL(currentUrl);

@@ -5,6 +5,7 @@ import {
     EXTENSION_LABEL,
     EXTENSION_NAME,
     getSettings,
+    SKIP_LINK_DETECTION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -67,7 +68,7 @@ async function generateFavouriteButton() {
 	button.setAttribute("data-aura-class", "uiButton");
 	button.addEventListener(
 		"click",
-		actionFavourite,
+        actionFavourite,
 	);
 	const span = document.createElement("span");
 	span.classList.add("label", "bBody");
@@ -164,13 +165,11 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 	// will use the class identifier if there was an error with the image (and was removed)
 	const star = getFavouriteImage(STAR_ID, button);
 	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
-
 	if (isSaved == null) {
 		star.classList.toggle("hidden");
 		slashedStar.classList.toggle("hidden");
 		return;
 	}
-
 	if (isSaved) {
 		star.classList.add("hidden");
 		slashedStar.classList.remove("hidden");
@@ -191,10 +190,16 @@ function toggleFavouriteButton(isSaved = null, button = null) {
  */
 async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
-	let org = undefined;
+    const skip_link_detection = await getSettings(SKIP_LINK_DETECTION);
 	const href = getCurrentHref();
-    const skip_link_detection = await getSettings("skip_link_detection");
-	if (!skip_link_detection.enabled && Tab.containsSalesforceId(href)) {
+    let org = undefined;
+	if (
+        (
+            skip_link_detection == null ||
+            skip_link_detection.enabled === false
+        ) &&
+        Tab.containsSalesforceId(href)
+    ) {
 		org = Tab.extractOrgName(href);
 	}
 	await performActionOnTabs("add", { label, url, org });

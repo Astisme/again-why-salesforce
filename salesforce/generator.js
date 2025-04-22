@@ -69,13 +69,13 @@ async function handleLightningLinkClick(e) {
 	}
     const settings = await getSettings([LINK_NEW_BROWSER, USE_LIGHTNING_NAVIGATION]);
 	const target = 
-        settings.filter(setting => setting.id === LINK_NEW_BROWSER && setting.enabled).length > 0
+        settings != null && settings.filter(setting => setting.id === LINK_NEW_BROWSER && setting.enabled).length > 0
         ? "_blank"
         : currentTarget !== ""
             ? currentTarget
             : getLinkTarget(metaCtrl, url);
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
-	if (target === "_blank" || url === getCurrentHref() || settings.filter(setting => setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled).length !== 0) {
+	if (target === "_blank" || url === getCurrentHref() || (settings != null && settings.filter(setting => setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled).length !== 0)) {
 		open(url, target);
 	} else {
         postMessage({
@@ -127,10 +127,13 @@ export function generateRowTemplate(
 	a.style.zIndex = 0;
 	a.addEventListener("click", handleLightningLinkClick);
 	li.appendChild(a);
-	const span = document.createElement(org == null ? "span" : "b");
+	const span = document.createElement("span");
 	span.classList.add("label", "slds-truncate");
 	span.textContent = label;
-	span.dataset.org = org;
+    if(org != null){
+        span.dataset.org = org;
+        span.style.fontWeight = "bold";
+    }
 	a.appendChild(span);
 	// Highlight the tab related to the current page
 	if (getCurrentHref() === expURL) {

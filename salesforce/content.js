@@ -86,8 +86,7 @@ let fromHrefUpdate = false;
 // add lightning-navigation to the page in order to use it
 async function checkAddLightningNavigation(){
     const settings = await getSettings([LINK_NEW_BROWSER,USE_LIGHTNING_NAVIGATION]);
-    const preventLightningNavigation = settings.filter(setting => setting.enabled).length !== 0;
-    if(preventLightningNavigation)
+    if(settings != null && settings.filter(setting => setting.enabled).length !== 0)
         return;
 	const script = document.createElement("script");
 	script.src = BROWSER.runtime.getURL("salesforce/lightning-navigation.js");
@@ -347,16 +346,13 @@ async function reorderTabs() {
 				if (a == null) {
 					return null;
 				}
-				// if standard tab, uses span; otherwise if org tab, uses b
 				const span = a.querySelector("span");
-				const b = a.querySelector("b");
-				if (span == null && b == null) {
+				if (span == null) {
 					return null;
 				}
-				const isOrgTab = span == null && b != null;
-				const labelFrom = !isOrgTab ? span : b;
-				const label = labelFrom.innerText ?? null;
-				const aHref = a.href ?? null;
+				const isOrgTab = span.dataset.org != null;
+				const label = span.innerText;
+				const aHref = a.href;
 				if (label == null || aHref == null) {
 					return null;
 				}
@@ -364,7 +360,7 @@ async function reorderTabs() {
 					if (!isOrgTab) {
 						return Tab.create(label, aHref);
 					}
-					const org = b.dataset.org;
+					const org = span.dataset.org;
 					return Tab.create(
 						label,
 						aHref,

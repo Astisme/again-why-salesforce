@@ -120,8 +120,8 @@ if(willOpenLogin || willOpenSetup){
     const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
     const useSameTab = willOpenLogin ? POPUP_LOGIN_NEW_TAB : POPUP_SETUP_NEW_TAB;
     const settings = await getSettings([automaticClick, useSameTab]);
-    openPageInSameTab = settings.filter(setting => setting.id === useSameTab && setting.enabled).length > 0;
-    if(settings.filter(setting => setting.id === automaticClick && setting.enabled).length > 0)
+    openPageInSameTab = settings != null && settings.filter(setting => setting.id === useSameTab && setting.enabled).length > 0;
+    if(settings != null && settings.filter(setting => setting.id === automaticClick && setting.enabled).length > 0)
         shownRedirectBtn.click();
     else await ensureTranslatorAvailability();
 }

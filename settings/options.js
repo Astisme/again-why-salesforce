@@ -19,6 +19,7 @@ import {
 	TAB_STYLE_UNDERLINE,
 	TAB_STYLE_WAVY,
     sendExtensionMessage,
+    getSettings,
 } from "/constants.js";
 
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
@@ -105,7 +106,7 @@ const allCheckboxes = [
 ];
 
 async function restoreGeneralSettings() {
-    const settings = await sendExtensionMessage({ what: "get-settings", keys: allCheckboxes.map(el => el.id) });
+    const settings = await getSettings(allCheckboxes.map(el => el.id));
     if(settings != null)
         settings instanceof Array ? settings.forEach(set => setCurrentChoice(set)) : setCurrentChoice(settings);
     allCheckboxes.forEach(el => {
@@ -165,7 +166,7 @@ function saveTabOptions(e, key = genericTabKey/*, ...dependentTabElements*/) {
 }
 
 async function restoreGenericTabSettings() {
-    const settings = await sendExtensionMessage({ what: "get-settings", keys: TAB_GENERIC_STYLE });
+    const settings = await getSettings(TAB_GENERIC_STYLE);
     console.log('retrieved',settings);
     if(settings != null)
         settings instanceof Array ? settings.forEach(set => setCurrentChoice(set)) : setCurrentChoice(settings);
