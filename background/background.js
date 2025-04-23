@@ -97,8 +97,9 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
             set[SETTINGS_KEY] = settingsArray ?? tobeset;
             break;
         }
-        case GENERIC_TAB_STYLE_KEY: {
-            const settingsArray = await bg_getSettings(null, GENERIC_TAB_STYLE_KEY); 
+        case GENERIC_TAB_STYLE_KEY:
+        case ORG_TAB_STYLE_KEY: {
+            const settingsArray = await bg_getSettings(null, key); 
             console.log('seta',settingsArray);
             console.log('tbs',tobeset);
             if(settingsArray != null){
@@ -121,7 +122,7 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
                         settingsArray.push(item);
                 }
             }
-            set[GENERIC_TAB_STYLE_KEY] = settingsArray ?? tobeset;
+            set[key] = settingsArray ?? tobeset;
             console.log('setting',set)
             break;
         }

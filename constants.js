@@ -106,7 +106,7 @@ export const TAB_STYLE_ITALIC = "italic";
 export const TAB_STYLE_UNDERLINE = "underline";
 //export const TAB_STYLE_WAVY = "wavy";
 export const TAB_STYLE_TOP = "top";
-export async function getStyleSettings(getGenericStyles = true){
-    return await sendExtensionMessage({ what: "get-style-settings", key: getGenericStyles ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY });
+export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY){
+    return await sendExtensionMessage({ what: "get-style-settings", key });
 }
 export const SLDS_ACTIVE = "slds-is-active";

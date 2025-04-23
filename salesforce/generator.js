@@ -131,6 +131,7 @@ export function generateRowTemplate(
 	span.classList.add("label", "slds-truncate");
 	span.textContent = label;
     if(org != null){
+        span.classList.add("is-org-tab");
         span.dataset.org = org;
         span.style.fontWeight = "bold";
     }
