@@ -93,7 +93,9 @@ export const POPUP_OPEN_SETUP = "popup_open_setup";
 export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
 export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
 export const TAB_GENERIC_STYLE = "tab_generic_style";
+export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
 export const TAB_ORG_STYLE = "tab_org_style";
+export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";
@@ -102,4 +104,9 @@ export const TAB_STYLE_HOVER = "hover";
 export const TAB_STYLE_BOLD = "bold";
 export const TAB_STYLE_ITALIC = "italic";
 export const TAB_STYLE_UNDERLINE = "underline";
-export const TAB_STYLE_WAVY = "wavy";
+//export const TAB_STYLE_WAVY = "wavy";
+export const TAB_STYLE_TOP = "top";
+export async function getStyleSettings(getGenericStyles = true){
+    return await sendExtensionMessage({ what: "get-style-settings", key: getGenericStyles ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY });
+}
+export const SLDS_ACTIVE = "slds-is-active";

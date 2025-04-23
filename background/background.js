@@ -9,6 +9,8 @@ import {
     LIGHTNING_FORCE_COM,
     MY_SALESFORCE_COM,
     MY_SALESFORCE_SETUP_COM,
+    GENERIC_TAB_STYLE_KEY,
+    ORG_TAB_STYLE_KEY,
 } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
@@ -60,8 +62,8 @@ export function bg_getStorage(callback, key = WHY_KEY) {
     */
 }
 
-async function bg_getSettings(settingKeys = null){
-    const settings = await bg_getStorage(null, SETTINGS_KEY);
+async function bg_getSettings(settingKeys = null, key = SETTINGS_KEY){
+    const settings = await bg_getStorage(null, key);
     if(settingKeys == null || settings == null)
         return settings;
     if(!(settingKeys instanceof Array))
@@ -78,24 +80,56 @@ async function bg_getSettings(settingKeys = null){
  */
 async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
-    if(key === SETTINGS_KEY){
-        // get the settings array
-        const settingsArray = await bg_getSettings(); 
-        if(settingsArray != null){
-            for(const item of tobeset) {
-                // check if the item.id is already present
-                const existingItems = settingsArray.filter(setting => setting.id === item.id);
-                if(existingItems.length > 0)
-                    existingItems.forEach(existing => existing.enabled = item.enabled);
-                else
-                    settingsArray.push(item);
+    switch (key) {
+        case SETTINGS_KEY: {
+            // get the settings array
+            const settingsArray = await bg_getSettings(); 
+            if(settingsArray != null){
+                for(const item of tobeset) {
+                    // check if the item.id is already present
+                    const existingItems = settingsArray.filter(setting => setting.id === item.id);
+                    if(existingItems.length > 0)
+                        existingItems.forEach(existing => existing.enabled = item.enabled);
+                    else
+                        settingsArray.push(item);
+                }
             }
+            set[SETTINGS_KEY] = settingsArray ?? tobeset;
+            break;
         }
-        set[key] = settingsArray ?? tobeset;
-    } else {
-        set[key] = tobeset;
+        case GENERIC_TAB_STYLE_KEY: {
+            const settingsArray = await bg_getSettings(null, GENERIC_TAB_STYLE_KEY); 
+            console.log('seta',settingsArray);
+            console.log('tbs',tobeset);
+            if(settingsArray != null){
+                for(const item of tobeset) {
+                    // check if the item.id is already present
+                    const existingItems = settingsArray.filter(setting => setting.id === item.id && (setting.forActive == null || setting.forActive === item.forActive));
+                    console.log('exit',existingItems);
+                    if(existingItems.length > 0){
+                        if(item.value == null || item.value === "")
+                            existingItems.forEach(el => {
+                                const index = settingsArray.indexOf(el);
+                                if (index >= 0) {
+                                    settingsArray.splice(index, 1);
+                                }
+                            });
+                        else
+                            existingItems.forEach(existing => existing.value = item.value);
+                    }
+                    else
+                        settingsArray.push(item);
+                }
+            }
+            set[GENERIC_TAB_STYLE_KEY] = settingsArray ?? tobeset;
+            console.log('setting',set)
+            break;
+        }
+        default:
+            set[key] = tobeset;
+            break;
     }
-	BROWSER.storage.sync.set(set, callback(tobeset));
+	BROWSER.storage.sync.set(set, callback(set[key]));
 }
 
 // courtesy of derroman/salesforce-user-language-switcher
@@ -193,6 +227,9 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
             break;
         case "get-settings":
             sendResponse(bg_getSettings(request.keys));
+            break;
+        case "get-style-settings":
+            sendResponse(bg_getSettings(null, request.key));
             break;
 		default:
 			//captured = ["import"].includes(request.what);

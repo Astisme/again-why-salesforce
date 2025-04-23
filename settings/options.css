@@ -1,3 +1,4 @@
+/*
 html {
     background-color: var(--background-color);
 }
@@ -15,12 +16,18 @@ label,
     color: var(--color);
     background-color: transparent;
 }
+*/
 
 ul.settings {
     list-style-type: none;
     & > li {
         margin-bottom: 0.2rem;
     }
+}
+
+.half-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 .container {
@@ -57,8 +64,12 @@ ul.settings {
     overflow: hidden;
 }
 
-.slds-listbox__option:hover {
-    background-color: var(--shade) !important;
+.slds-listbox_vertical .slds-listbox__option:hover{
+    background-color: transparent;
+}
+
+.slds-dueling-list__options {
+    height: 8rem;
 }
 
 .button, button {
@@ -67,5 +78,18 @@ ul.settings {
     }
     & > svg {
         fill: var(--color);
+    }
+}
+
+.slds-form-element__label.slds-no-flex {
+    display: unset;
+}
+
+.slds-dueling-list__column:has(> button.slds-button.slds-button_icon.slds-button_icon-container) {
+    display: flex;
+    flex-direction: row;
+    & > button.slds-button.slds-button_icon.slds-button_icon-container {
+        transform: rotate(90deg);
+        margin-top: 0;
     }
 }

@@ -51,29 +51,43 @@
             </div>
           </div>
           <div class="slds-context-bar__secondary navCenter tabBarContainer">
-            <div role="navigation" style="" class="tabContainer oneConsoleTabContainer slds-grid active navexConsoleTabContainer">
+            <div role="navigation" class="tabContainer oneConsoleTabContainer slds-grid active navexConsoleTabContainer">
               <div role="tablist" class="tabBar slds-grid resizing">
-                <ul id="hanger" role="presentation" class="tabBarItems slds-grid" style="overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; ">
-                  <li id="general-settings" role="presentation" style="" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight slds-is-active active hideAnimation navexConsoleTabItem">
-                    <a role="tab" tabindex="0" title="General Settings" class="tabHeader slds-context-bar__label-action " data-i18n="set_general_settings+-+title">
-                      <span class="title slds-truncate">General</span>
+                  <!--  style="overflow-x: auto; overflow-y: hidden; scrollbar-width: thin;" -->
+
+                <ul role="presentation" class="tabBarItems slds-grid">
+                  <li id="general-settings" role="presentation" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight slds-is-active active hideAnimation navexConsoleTabItem">
+                    <a role="tab" tabindex="0" title="General Settings" class="tabHeader slds-context-bar__label-action" data-i18n="set_general_settings+-+title">
+                      <span class="title slds-truncate" data-i18n="set_general">General</span>
                     </a>
                   </li>
                   <li id="tab_generic_style-settings" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
-                    <a role="tab" tabindex="-1" title="Generic Tab Manager" class="tabHeader slds-context-bar__label-action " data-i18n="set_gen_tab_manager+-+title">
-                      <span class="label slds-truncate" data-i18n="set_gen_tab_manager">Generic Tab Manager</span>
+                    <a role="tab" tabindex="-1" title="Tab Styler" class="tabHeader slds-context-bar__label-action " data-i18n="set_gen_styler+-+title">
+                      <span class="label slds-truncate" data-i18n="set_gen_styler">Tab Styler</span>
                     </a>
                   </li>
-                  <li id="tab_org_style-settings" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
-                    <a role="tab" tabindex="-1" title="Org Tab Manager" class="tabHeader slds-context-bar__label-action" data-i18n="set_org_tab_manager+-+title">
-                      <span class="label slds-truncate" data-i18n="set_org_tab_manager" style="font-weight: bold;">Org Tab Manager</span>
+                  <li id="tab_org_style-settings" class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce" style="font-weight: bold;">
+                    <a role="tab" tabindex="-1" title="Org Styler" class="tabHeader slds-context-bar__label-action" data-i18n="set_org_styler+-+title">
+                      <span class="label slds-truncate" data-i18n="set_org_styler">Org Styler</span>
+                    </a>
+                  </li>
+                  <li id="tab_generic_style-preview" class="hidden oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce">
+                    <a role="tab" tabindex="-1" title="Click to toggle active state" class="tabHeader slds-context-bar__label-action" data-i18n="set_toggle_preview+-+title">
+                      <span class="label slds-truncate" data-i18n="set_gen_preview">Tab Preview</span>
+                    </a>
+                  </li>
+                  <li id="tab_org_style-preview" class="hidden oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce" style="font-weight: bold;">
+                    <a role="tab" tabindex="-1" title="Click to toggle active state" class="tabHeader slds-context-bar__label-action" data-i18n="set_toggle_preview+-+title">
+                      <span class="label slds-truncate" data-i18n="set_org_preview">Org Preview</span>
                     </a>
                   </li>
                 </ul>
+
               </div>
             </div>
           </div>
         </div>
+
         <div id="general-container" class="container">
             <ul class="settings">
                 <li>
@@ -175,87 +189,16 @@
                 </li>
             </ul>
         </div>
-        <div id="tab_generic_style-container" class="container hidden">
-            <div name="input">
-                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
-                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
-                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
-                            <label class="slds-form-element__label slds-no-flex" for="background" data-i18n="set_tab_background_label">
-                                Insert the background color for your generic Tabs.
-                            </label>
-                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
-                                <input id="background" class="slds-input" part="input" maxlength="255" name="set_tab_background" type="text" placeholder="white">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div name="input">
-                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
-                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
-                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
-                            <label class="slds-form-element__label slds-no-flex" for="color" data-i18n="set_tab_color_label">
-                                Insert the color of the text for your generic Tabs.
-                            </label>
-                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
-                                <input id="color" class="slds-input" part="input" maxlength="255" name="set_tab_color" type="text" placeholder="black">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div name="input">
-                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
-                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
-                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
-                            <label class="slds-form-element__label slds-no-flex" for="border" data-i18n="set_tab_border_color_label">
-                                <!-- 1px solid input -->
-                                Insert the border color for your generic Tabs.
-                            </label>
-                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
-                                <input id="border" class="slds-input" part="input" maxlength="255" name="set_tab_border_color" type="text" placeholder="blue">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div name="input">
-                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
-                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
-                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
-                            <label class="slds-form-element__label slds-no-flex" for="shadow" data-i18n="set_tab_shadow_label">
-                                <!-- 1px 1px 2px input -->
-                                Insert the shadow color for your generic Tabs.
-                            </label>
-                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
-                                <input id="shadow" class="slds-input" part="input" maxlength="255" name="set_tab_shadow" type="text" placeholder="black">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div name="input">
-                <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
-                    <div exportparts="input-text, input-container, input, required" variant="label-stacked">
-                        <div class="slds-form-element__label slds-no-flex" part="input-text" style="display: unset;">
-                            <label class="slds-form-element__label slds-no-flex" for="hover" data-i18n="set_tab_hover_background_label">
-                                Insert the hover background color for your generic Tabs.
-                            </label>
-                            <div class="slds-form-element__control slds-grow" part="input-container" type="text">
-                                <input id="hover" class="slds-input" part="input" maxlength="255" name="set_tab_hover_background" type="text" placeholder="aqua">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slds-form-element_stacked slds-form-element" variant="label-stacked">
-                <div class="slds-form-element__label slds-form-element__legend" data-i18n="set_tab_decoration_label">Pick one or more decoration styles for your generic Tabs.</div>
-                <div class="slds-dueling-list">
+
+        <div id="tab_generic_style-container" class="half-container hidden">
+            <div id="tab_generic_style-inactive-container" class="container">
+                <div class="slds-form-element_stacked slds-form-element" variant="label-stacked">
+                    <div class="slds-form-element__label slds-form-element__legend" data-i18n="set_tab_decoration_label">Pick one or more decoration styles for your generic Tabs.</div>
                     <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
                         <span class="slds-form-element__label" data-i18n="available">Available</span>
-                        <div class="slds-dueling-list__options" style="height:10rem">
-                            <ul id="set_decoration_available" class="slds-listbox slds-listbox_vertical" role="listbox">
-                                <li id="bold" role="presentation" class="slds-listbox__item">
+                        <div class="slds-dueling-list__options">
+                            <ul id="set_decoration_available-inactive" class="slds-listbox slds-listbox_vertical" role="listbox">
+                                <li id="bold-inactive" role="presentation" class="slds-listbox__item" data-style-key="bold">
                                     <!-- set aria-selected="true" from js -->
                                     <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                                         <span class="slds-media__body">
@@ -263,37 +206,39 @@
                                         </span>
                                     </div>
                                 </li>
-                                <li id="italic" role="presentation" class="slds-listbox__item">
+                                <li id="italic-inactive" role="presentation" class="slds-listbox__item" data-style-key="italic">
                                     <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                                         <span class="slds-media__body">
                                             <span class="slds-truncate" title="italic" style="font-style: italic;" data-i18n="italic">Italic</span>
                                         </span>
                                     </div>
                                 </li>
-                                <li id="underline" role="presentation" class="slds-listbox__item">
+                                <li id="underline-inactive" role="presentation" class="slds-listbox__item" data-style-key="underline">
                                     <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                                         <span class="slds-media__body">
                                             <span class="slds-truncate" title="underline" style="text-decoration: underline" data-i18n="underline">Underline</span>
                                         </span>
                                     </div>
                                 </li>
-                                <li id="wavy" role="presentation" class="slds-listbox__item">
+                                <!--
+                                    <li id="wavy-inactive" role="presentation" class="slds-listbox__item" data-style-key="wavy">
                                     <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
-                                        <span class="slds-media__body">
-                                            <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
-                                        </span>
+                                    <span class="slds-media__body">
+                                    <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                                    </span>
                                     </div>
-                                </li>
+                                    </li>
+                                -->
                             </ul>
                         </div>
                     </div>
                     <div class="slds-dueling-list__column">
-                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move to Chosen" type="button" data-i18n="set_move_chosen">
+                        <button id="move-chosen-inactive" class="slds-button slds-button_icon slds-button_icon-container" title="Move to Chosen" type="button" data-i18n="set_move_chosen">
                             <svg viewBox="0 0 520 520" class="slds-button__icon">
                                 <path d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"></path>
                             </svg>
                         </button>
-                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move to Available" type="button" data-i18n="set_move_available">
+                        <button id="move-available-inactive" class="slds-button slds-button_icon slds-button_icon-container" title="Move to Available" type="button" data-i18n="set_move_available">
                             <svg viewBox="0 0 520 520" class="slds-button__icon">
                                 <path d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"></path>
                             </svg>
@@ -301,12 +246,235 @@
                     </div>
                     <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
                         <span class="slds-form-element__label" data-i18n="chosen">Chosen</span>
-                        <div class="slds-dueling-list__options" style="height:10rem">
-                            <ul id="set_decoration_chosen" class="slds-listbox slds-listbox_vertical" role="listbox"></ul>
+                        <div class="slds-dueling-list__options">
+                            <ul id="set_decoration_chosen-inactive" class="slds-listbox slds-listbox_vertical" role="listbox"></ul>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-background-inactive" data-i18n="set_tab_background_label">
+                                    Insert the background color for your generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-background-inactive" class="slds-input" part="input" maxlength="255" name="set_tab_background" type="text" placeholder="white" data-style-key="background-color">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-color-inactive" data-i18n="set_tab_color_label">
+                                    Insert the color of the text for your generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-color-inactive" class="slds-input" part="input" maxlength="255" name="set_tab_color" type="text" placeholder="black" data-style-key="color">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-border-inactive" data-i18n="set_tab_border_color_label">
+                                    <!-- 1px solid input -->
+                                    Insert the border color for your generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-border-inactive" class="slds-input" part="input" maxlength="255" name="set_tab_border_color" type="text" placeholder="blue" data-style-key="border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-shadow-inactive" data-i18n="set_tab_shadow_label">
+                                    <!-- 1px 1px 2px input -->
+                                    Insert the shadow color for your generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-shadow-inactive" class="slds-input" part="input" maxlength="255" name="set_tab_shadow" type="text" placeholder="black" data-style-key="shadow">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-hover-inactive" data-i18n="set_tab_hover_background_label">
+                                    Insert the hover background color for your generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-hover-inactive" class="slds-input" part="input" maxlength="255" name="set_tab_hover_background" type="text" placeholder="aqua" data-style-key="hover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab_generic_style-active-container" class="container">
+                <div class="slds-form-element_stacked slds-form-element" variant="label-stacked">
+                    <div class="slds-form-element__label slds-form-element__legend" data-i18n="set_tab_decoration_active_label">Pick one or more decoration styles for your active generic Tabs.</div>
+                    <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
+                        <span class="slds-form-element__label" data-i18n="available">Available</span>
+                        <div class="slds-dueling-list__options">
+                            <ul id="set_decoration_available-active" class="slds-listbox slds-listbox_vertical" role="listbox">
+                                <li id="bold-active" role="presentation" class="slds-listbox__item" data-style-key="bold">
+                                    <!-- set aria-selected="true" from js -->
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="bold" style="font-weight: bold;" data-i18n="bold">Bold</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li id="italic-active" role="presentation" class="slds-listbox__item" data-style-key="italic">
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="italic" style="font-style: italic;" data-i18n="italic">Italic</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li id="underline-active" role="presentation" class="slds-listbox__item" data-style-key="underline">
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="underline" style="text-decoration: underline" data-i18n="underline">Underline</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                <!--
+                                <li id="wavy-active" role="presentation" class="slds-listbox__item" data-style-key="wavy">
+                                    <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                                        </span>
+                                    </div>
+                                </li>
+                                -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slds-dueling-list__column">
+                        <button id="move-chosen-active" class="slds-button slds-button_icon slds-button_icon-container" title="Move to Chosen" type="button" data-i18n="set_move_chosen">
+                            <svg viewBox="0 0 520 520" class="slds-button__icon">
+                                <path d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"></path>
+                            </svg>
+                        </button>
+                        <button id="move-available-active" class="slds-button slds-button_icon slds-button_icon-container" title="Move to Available" type="button" data-i18n="set_move_available">
+                            <svg viewBox="0 0 520 520" class="slds-button__icon">
+                                <path d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
+                        <span class="slds-form-element__label" data-i18n="chosen">Chosen</span>
+                        <div class="slds-dueling-list__options">
+                            <ul id="set_decoration_chosen-active" class="slds-listbox slds-listbox_vertical" role="listbox"></ul>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-background-active" data-i18n="set_tab_background_active_label">
+                                    Insert the background color for your active generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-background-active" class="slds-input" part="input" maxlength="255" name="set_tab_background" type="text" placeholder="white" data-style-key="background-color">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-color-active" data-i18n="set_tab_color_active_label">
+                                    Insert the color of the text for your active generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-color-active" class="slds-input" part="input" maxlength="255" name="set_tab_color" type="text" placeholder="black" data-style-key="color">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-border-active" data-i18n="set_tab_border_color_active_label">
+                                    <!-- 1px solid input -->
+                                    Insert the border color for your active generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-border-active" class="slds-input" part="input" maxlength="255" name="set_tab_border_color" type="text" placeholder="blue" data-style-key="border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-shadow-active" data-i18n="set_tab_shadow_active_label">
+                                    <!-- 1px 1px 2px input -->
+                                    Insert the shadow color for your active generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-shadow-active" class="slds-input" part="input" maxlength="255" name="set_tab_shadow" type="text" placeholder="black" data-style-key="shadow">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-hover-active" data-i18n="set_tab_hover_background_active_label">
+                                    Insert the hover background color for your active generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-hover-active" class="slds-input" part="input" maxlength="255" name="set_tab_hover_background" type="text" placeholder="aqua" data-style-key="hover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div name="input">
+                    <div class="slds-form-element slds-form-element_stacked" variant="label-stacked">
+                        <div exportparts="input-text, input-container, input, required" variant="label-stacked">
+                            <div class="slds-form-element__label slds-no-flex" part="input-text">
+                                <label class="slds-form-element__label slds-no-flex" for="tab_generic_style-top-active" data-i18n="set_tab_top_active_label">
+                                    Insert the color for the bar at the top of your active generic Tabs.
+                                </label>
+                                <div class="slds-form-element__control slds-grow" part="input-container" type="text">
+                                    <input id="tab_generic_style-top-active" class="slds-input" part="input" maxlength="255" name="set_tab_top_active" type="text" placeholder="aqua" data-style-key="top">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 	</body>
 </html>
