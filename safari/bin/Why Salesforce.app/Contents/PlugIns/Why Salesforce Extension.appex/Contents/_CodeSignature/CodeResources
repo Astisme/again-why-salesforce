@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>files</key>
+	<dict>
+		<key>Resources/LICENSE</key>
+		<data>
+		Glo/0n+Ccvldjh2sazYruhO0a38=
+		</data>
+		<key>Resources/README.md</key>
+		<data>
+		lPGzFwhj1l3YlOptvW3647Er3ls=
+		</data>
+		<key>Resources/assets/salesforce-lightning-design-system.min.css</key>
+		<data>
+		uYVMserqUhYosTDYJSBW0O8f/9Y=
+		</data>
+		<key>Resources/content.js</key>
+		<data>
+		1Uf3WAK3JfMdbc5nvb5x0ns2Q5A=
+		</data>
+		<key>Resources/images/examplescreen.png</key>
+		<data>
+		e4f7qXxUO4svGT4iRIpTz+sPu9k=
+		</data>
+		<key>Resources/images/examplescreenpop.png</key>
+		<data>
+		9UvgkkpJ594ZnqE6r3y796XTyNc=
+		</data>
+		<key>Resources/images/whysf128.png</key>
+		<data>
+		L7z8j/Y9XdUz0etvNWMz2GbCvgY=
+		</data>
+		<key>Resources/images/whysf16.png</key>
+		<data>
+		z7v+I6wzrrMcXaIC2oLf8rs31po=
+		</data>
+		<key>Resources/images/whysf32.png</key>
+		<data>
+		LCFnoSW4PjDwbVzkdkOC2iw6UU8=
+		</data>
+		<key>Resources/images/whysf48.png</key>
+		<data>
+		dgOl81luIzmNlzmnLou155zm8Ek=
+		</data>
+		<key>Resources/manifest.json</key>
+		<data>
+		2km+FzhoDb9LtJ3/fJrTIMQHxdY=
+		</data>
+		<key>Resources/popup.css</key>
+		<data>
+		AElC2j+jycIcBtLTB+fUUOqc5uw=
+		</data>
+		<key>Resources/popup.html</key>
+		<data>
+		pzlY2pCI9CPfZMVANK6uZ+FYgGs=
+		</data>
+		<key>Resources/popup.js</key>
+		<data>
+		s1zaTT3M3lOhp+7QjymxUr+hQyE=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce Extension/Info.plist</key>
+		<data>
+		mIWs6Z1nbEKBp4TeDw2PtpkAWZw=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce Extension/SafariWebExtensionHandler.swift</key>
+		<data>
+		9A4L1SLEBkNDkO34aYFeHGmZe6k=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce Extension/Why_Salesforce_Extension.entitlements</key>
+		<data>
+		SGapO09ZoMRtzKRHqDoV1HqucP0=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.pbxproj</key>
+		<data>
+		HYN/wfI1/8Lj+/FajvnUJhw0KSQ=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.xcworkspace/contents.xcworkspacedata</key>
+		<data>
+		hCQ4SPVLDFmD4e0m3vtB0mLOE1Q=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist</key>
+		<data>
+		31/nObizq2nPGjKoiBxIoWYuA0A=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.xcworkspace/xcuserdata/astisme.xcuserdatad/UserInterfaceState.xcuserstate</key>
+		<data>
+		vfuAjgKwEsiA460JSXnCvp6GOAM=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/xcuserdata/astisme.xcuserdatad/xcschemes/xcschememanagement.plist</key>
+		<data>
+		FXw28KcySJSeg/quUa8w2CMHFYM=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/AppDelegate.swift</key>
+		<data>
+		lGLbgIaqLxE8pOFfPqMR79Yl9ho=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AccentColor.colorset/Contents.json</key>
+		<data>
+		3XbJw7ti0kGBxp26BbHqxkOSqaA=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/Contents.json</key>
+		<data>
+		0Pqsl+4rm4tzp1L3PVAF8Ax3uoI=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-128@1x.png</key>
+		<data>
+		FUkntG0OC3bZzBvUXRebfzCA7tU=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-128@2x.png</key>
+		<data>
+		6jonX//0s8R+tfcM0kHbEVI+tMY=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-16@1x.png</key>
+		<data>
+		CQI7+XfWhGzltQnHR9AmEBhAaYw=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-16@2x.png</key>
+		<data>
+		qB5mpMWfSmOQA+qZMK/hogtLmOE=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-256@1x.png</key>
+		<data>
+		6jonX//0s8R+tfcM0kHbEVI+tMY=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-256@2x.png</key>
+		<data>
+		C4wcsHxz4cdd2X+WoThnNQNsOb0=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-32@1x.png</key>
+		<data>
+		qB5mpMWfSmOQA+qZMK/hogtLmOE=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-32@2x.png</key>
+		<data>
+		TJoqRREiM9bK/V4A4/chOArwllQ=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-512@1x.png</key>
+		<data>
+		C4wcsHxz4cdd2X+WoThnNQNsOb0=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-512@2x.png</key>
+		<data>
+		xwk8OmJ9MdYlz+aGXxmkSoUp0HI=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/Contents.json</key>
+		<data>
+		OsxTSdeF0zGUdTl13dMC26vX4YM=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/LargeIcon.imageset/Contents.json</key>
+		<data>
+		bUpAY2i01f32d+bsBSi0i2uACsY=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Base.lproj/Main.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1+Lsl1Mdm6NhTnCmwyC5qoOLiwg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Base.lproj/Main.storyboard</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			14p25PKahLwlKt00RcIU8jWmGDY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Info.plist</key>
+		<data>
+		gvkGjuwwuOglZxw28Y6KN8SDjTk=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Resources/Icon.png</key>
+		<data>
+		L7z8j/Y9XdUz0etvNWMz2GbCvgY=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Resources/Script.js</key>
+		<data>
+		0iXpl2coQ7N5jTdmrmL1rlZ3K7M=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Resources/Style.css</key>
+		<data>
+		t+aBkmQ69W7040SLh12DsgyoDKc=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/ViewController.swift</key>
+		<data>
+		Desr2amKyDSvlbHYvt4cCQLGURA=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Why Salesforce.entitlements</key>
+		<data>
+		byrwFoSGILyY2OxR/30znzAnjKI=
+		</data>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Why_Salesforce.entitlements</key>
+		<data>
+		SGapO09ZoMRtzKRHqDoV1HqucP0=
+		</data>
+	</dict>
+	<key>files2</key>
+	<dict>
+		<key>Resources/LICENSE</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Zsd59C75ln/xiRO4dcRZfdpgiZExuEthCpqsMItjON8=
+			</data>
+		</dict>
+		<key>Resources/README.md</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7Tote+ZfzcUIJrx03lom7vsQup9x3SI4lZ+yy1QUASQ=
+			</data>
+		</dict>
+		<key>Resources/assets/salesforce-lightning-design-system.min.css</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			uOi/Qzl41XfSFmOEGoJV50bnTrUBBcCkcR/6+G84lT0=
+			</data>
+		</dict>
+		<key>Resources/content.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			E9w173R4rJRKxTOdqMu12Jqlpf0l6ZFQucwRnn3WCpA=
+			</data>
+		</dict>
+		<key>Resources/images/examplescreen.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Z1xnWJ32+ZjFyEJjq3uAGiR+eqUxnZa8po31jaS8MOM=
+			</data>
+		</dict>
+		<key>Resources/images/examplescreenpop.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			w9c3pzUihN52+5aUlJUt91y6EsHkOZp8CGhK01KrrsQ=
+			</data>
+		</dict>
+		<key>Resources/images/whysf128.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0dFJFkiwtCfSDdQ/ByUsxTueZDz752qVBAKWkbPNLcU=
+			</data>
+		</dict>
+		<key>Resources/images/whysf16.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			j5IFjHg4eZVZyjb0doaJfAMSovwIgMp88ePhnZl89aE=
+			</data>
+		</dict>
+		<key>Resources/images/whysf32.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ge7OOhuYxhCiKarVFWvNgJ3sX9X9nEk2EZmUJUBjexY=
+			</data>
+		</dict>
+		<key>Resources/images/whysf48.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KvX6wOz+wjOhfBKJS0Mh1g6EeixOJD82zLHyXev0YpY=
+			</data>
+		</dict>
+		<key>Resources/manifest.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VTET+89FYOjUFe8+ZjXIyi2IzZMDR7Qqz1gX3FB6MMw=
+			</data>
+		</dict>
+		<key>Resources/popup.css</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4YfasJ3Zna8poWXRTvZfjoPU6sG+sOC2AWwc2l9PpN8=
+			</data>
+		</dict>
+		<key>Resources/popup.html</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Yt2VX5mzCkDmKcIbmQgbeK+A+NGcscR0ieqLuBsmS4c=
+			</data>
+		</dict>
+		<key>Resources/popup.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Rxukh9sLGQsGHCoA421pWneTX37J7ITXriAynCASAwI=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce Extension/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tdn3fRPIqiHnYT3yL3o8xhTZowR3rM7WiKA+lZkX8UQ=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce Extension/SafariWebExtensionHandler.swift</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HO5AkCS4QVcCw76cCqwEKsgujzZL/GOYy8aA6NLZtLQ=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce Extension/Why_Salesforce_Extension.entitlements</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			T6wejWwWeNwMo2sHEbuO5QUnm3Lho4y9D2tfTzb7HNM=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.pbxproj</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+jt9EtNMtD3vvfKgHdLNlqGGewFD/Suzl8BYCBkuPv8=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.xcworkspace/contents.xcworkspacedata</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			fzsAtcP9tFJC17h+HlxOJdH6gSmhbJQpXsxOjqIjXF8=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			36D5u4W5XMupxoEa2t+MtAf7XVIIjonbg+vDCOxEhUI=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/project.xcworkspace/xcuserdata/astisme.xcuserdatad/UserInterfaceState.xcuserstate</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			55Go1i7HDTFC4Fg3G5a7H9Sq2zcBwAFtfZtzqvLJdQ4=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce.xcodeproj/xcuserdata/astisme.xcuserdatad/xcschemes/xcschememanagement.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PkFxHuaI+K+rnn4aJxpDnwFt5c2dbHg9pTI1GIe+1T0=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/AppDelegate.swift</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			X7Ugrodv4g/AmNuKAokgdUMasUy3S3Lexdq2nR9DRcw=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AccentColor.colorset/Contents.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mvZQhvowtJJS+uGhIlcxaR3nlPd3WvdNcb7+tQfRK3w=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/Contents.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			q61xctehsV2od+s7YyJGBTWLmXGdbf4g8/Sdz7cdMoc=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-128@1x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RzAXX2zBTuUzR0PtZsNFgdqlbnNvwnYLwvNGuZKKZOE=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-128@2x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			AHUhY6x5ENJj7hBWFA6mnQsBRVTm5AMOXR1BqZbF9XI=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-16@1x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GPMmfuiaz1+21IXS3aZpaqs2EDy1kK0znxbgJzvOczI=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-16@2x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			G4KrSw46gO4Gycz2Hl9mWcqbtF47zz6Ke1Bty87AhwQ=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-256@1x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			AHUhY6x5ENJj7hBWFA6mnQsBRVTm5AMOXR1BqZbF9XI=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-256@2x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Y7gb9kWFfzA83EULgLfr4E/G7iFSGUAA/mTva7jOW68=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-32@1x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			G4KrSw46gO4Gycz2Hl9mWcqbtF47zz6Ke1Bty87AhwQ=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-32@2x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			anozC8bydisWtZkPFmJYQSgGiexRgLaP0BpHDEFSjEk=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-512@1x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Y7gb9kWFfzA83EULgLfr4E/G7iFSGUAA/mTva7jOW68=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/AppIcon.appiconset/mac-icon-512@2x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4eVZtPE1hPgTSPwk1AnJqD7uQ1e8q3jngyt1TNdDyYM=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/Contents.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			D9Sbo8NYXHCWeOAEaoIcPGBoXscGNyDTDTo0SL46IIs=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Assets.xcassets/LargeIcon.imageset/Contents.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/gPTllBR9xOgxen3m1l/QAaNmpJxk0rEw1nEBoe9ooM=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Base.lproj/Main.html</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/s+1KQSr4eKXiHBZfhpZuNIDeuaX2i0BYqKRUKXTGK0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Base.lproj/Main.storyboard</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iApc9o9mFwJxMbBTu17WPYWa1pEegD71SnJStEzB7dU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			yhmv53zi4J+IMhAVVrsDmCMG4min4zNmojOyaFqT2PA=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Resources/Icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0dFJFkiwtCfSDdQ/ByUsxTueZDz752qVBAKWkbPNLcU=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Resources/Script.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			TDtNq0vsjoNraxBW9pbwaWvieXm/qEafMudAFp2hPdE=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Resources/Style.css</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			q+Wk9OtVBjA4Pn7yawKyU+jPnflb3EnjEXZQ/STfhS0=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/ViewController.swift</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			U/u4TzfcjRVRD50lbioYIfLs8qEk0AkFSKI7hgANuPM=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Why Salesforce.entitlements</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IvQf2qDvPS4q3KA9tg2u24llr8/iFGogVOGMiZSU+ds=
+			</data>
+		</dict>
+		<key>Resources/safari/Why Salesforce/Why Salesforce/Why_Salesforce.entitlements</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			T6wejWwWeNwMo2sHEbuO5QUnm3Lho4y9D2tfTzb7HNM=
+			</data>
+		</dict>
+	</dict>
+	<key>rules</key>
+	<dict>
+		<key>^Resources/</key>
+		<true/>
+		<key>^Resources/.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^version.plist$</key>
+		<true/>
+	</dict>
+	<key>rules2</key>
+	<dict>
+		<key>.*\.dSYM($|/)</key>
+		<dict>
+			<key>weight</key>
+			<real>11</real>
+		</dict>
+		<key>^(.*/)?\.DS_Store$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>2000</real>
+		</dict>
+		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
+		</dict>
+		<key>^.*</key>
+		<true/>
+		<key>^Info\.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^PkgInfo$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^[^/]+$</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
+		</dict>
+		<key>^embedded\.provisionprofile$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^version\.plist$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+	</dict>
+</dict>
+</plist>

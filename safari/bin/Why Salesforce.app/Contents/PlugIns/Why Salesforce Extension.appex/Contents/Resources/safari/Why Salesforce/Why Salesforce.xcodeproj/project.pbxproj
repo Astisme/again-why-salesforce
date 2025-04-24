@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3258B2E62DBA2F3600DCC6B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3258B2E52DBA2F3600DCC6B6 /* AppDelegate.swift */; };
+		3258B2EA2DBA2F3600DCC6B6 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 3258B2E82DBA2F3600DCC6B6 /* Main.html */; };
+		3258B2EC2DBA2F3600DCC6B6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3258B2EB2DBA2F3600DCC6B6 /* Icon.png */; };
+		3258B2EE2DBA2F3600DCC6B6 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 3258B2ED2DBA2F3600DCC6B6 /* Style.css */; };
+		3258B2F02DBA2F3600DCC6B6 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 3258B2EF2DBA2F3600DCC6B6 /* Script.js */; };
+		3258B2F22DBA2F3600DCC6B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3258B2F12DBA2F3600DCC6B6 /* ViewController.swift */; };
+		3258B2F52DBA2F3600DCC6B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3258B2F32DBA2F3600DCC6B6 /* Main.storyboard */; };
+		3258B2F72DBA2F3800DCC6B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3258B2F62DBA2F3800DCC6B6 /* Assets.xcassets */; };
+		3258B3002DBA2F3800DCC6B6 /* Why Salesforce Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3258B2FF2DBA2F3800DCC6B6 /* Why Salesforce Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3258B3052DBA2F3800DCC6B6 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3258B3042DBA2F3800DCC6B6 /* SafariWebExtensionHandler.swift */; };
+		3258B31C2DBA2F3900DCC6B6 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3122DBA2F3900DCC6B6 /* popup.js */; };
+		3258B31D2DBA2F3900DCC6B6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3132DBA2F3900DCC6B6 /* LICENSE */; };
+		3258B31E2DBA2F3900DCC6B6 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3142DBA2F3900DCC6B6 /* images */; };
+		3258B31F2DBA2F3900DCC6B6 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3152DBA2F3900DCC6B6 /* popup.html */; };
+		3258B3202DBA2F3900DCC6B6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3162DBA2F3900DCC6B6 /* README.md */; };
+		3258B3212DBA2F3900DCC6B6 /* safari in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3172DBA2F3900DCC6B6 /* safari */; };
+		3258B3222DBA2F3900DCC6B6 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3182DBA2F3900DCC6B6 /* manifest.json */; };
+		3258B3232DBA2F3900DCC6B6 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 3258B3192DBA2F3900DCC6B6 /* popup.css */; };
+		3258B3242DBA2F3900DCC6B6 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 3258B31A2DBA2F3900DCC6B6 /* content.js */; };
+		3258B3252DBA2F3900DCC6B6 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 3258B31B2DBA2F3900DCC6B6 /* assets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3258B3012DBA2F3800DCC6B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3258B2DA2DBA2F3600DCC6B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3258B2FE2DBA2F3800DCC6B6;
+			remoteInfo = "Why Salesforce Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3258B30D2DBA2F3800DCC6B6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3258B3002DBA2F3800DCC6B6 /* Why Salesforce Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3258B2E22DBA2F3600DCC6B6 /* Why Salesforce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Why Salesforce.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3258B2E52DBA2F3600DCC6B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3258B2E92DBA2F3600DCC6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		3258B2EB2DBA2F3600DCC6B6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		3258B2ED2DBA2F3600DCC6B6 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		3258B2EF2DBA2F3600DCC6B6 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		3258B2F12DBA2F3600DCC6B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3258B2F42DBA2F3600DCC6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3258B2F62DBA2F3800DCC6B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3258B2F82DBA2F3800DCC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3258B2F92DBA2F3800DCC6B6 /* Why_Salesforce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Why_Salesforce.entitlements; sourceTree = "<group>"; };
+		3258B2FA2DBA2F3800DCC6B6 /* Why Salesforce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Why Salesforce.entitlements"; sourceTree = "<group>"; };
+		3258B2FF2DBA2F3800DCC6B6 /* Why Salesforce Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Why Salesforce Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3258B3042DBA2F3800DCC6B6 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		3258B3062DBA2F3800DCC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3258B3072DBA2F3800DCC6B6 /* Why_Salesforce_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Why_Salesforce_Extension.entitlements; sourceTree = "<group>"; };
+		3258B3122DBA2F3900DCC6B6 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = popup.js; path = ../../../popup.js; sourceTree = "<group>"; };
+		3258B3132DBA2F3900DCC6B6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../../LICENSE; sourceTree = "<group>"; };
+		3258B3142DBA2F3900DCC6B6 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../images; sourceTree = "<group>"; };
+		3258B3152DBA2F3900DCC6B6 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../../../popup.html; sourceTree = "<group>"; };
+		3258B3162DBA2F3900DCC6B6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
+		3258B3172DBA2F3900DCC6B6 /* safari */ = {isa = PBXFileReference; lastKnownFileType = folder; name = safari; path = ../..; sourceTree = "<group>"; };
+		3258B3182DBA2F3900DCC6B6 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../manifest.json; sourceTree = "<group>"; };
+		3258B3192DBA2F3900DCC6B6 /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = popup.css; path = ../../../popup.css; sourceTree = "<group>"; };
+		3258B31A2DBA2F3900DCC6B6 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../../content.js; sourceTree = "<group>"; };
+		3258B31B2DBA2F3900DCC6B6 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3258B2DF2DBA2F3600DCC6B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3258B2FC2DBA2F3800DCC6B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3258B2D92DBA2F3600DCC6B6 = {
+			isa = PBXGroup;
+			children = (
+				3258B2E42DBA2F3600DCC6B6 /* Why Salesforce */,
+				3258B3032DBA2F3800DCC6B6 /* Why Salesforce Extension */,
+				3258B2E32DBA2F3600DCC6B6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3258B2E32DBA2F3600DCC6B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3258B2E22DBA2F3600DCC6B6 /* Why Salesforce.app */,
+				3258B2FF2DBA2F3800DCC6B6 /* Why Salesforce Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3258B2E42DBA2F3600DCC6B6 /* Why Salesforce */ = {
+			isa = PBXGroup;
+			children = (
+				3258B2E52DBA2F3600DCC6B6 /* AppDelegate.swift */,
+				3258B2F12DBA2F3600DCC6B6 /* ViewController.swift */,
+				3258B2F32DBA2F3600DCC6B6 /* Main.storyboard */,
+				3258B2F62DBA2F3800DCC6B6 /* Assets.xcassets */,
+				3258B2F82DBA2F3800DCC6B6 /* Info.plist */,
+				3258B2F92DBA2F3800DCC6B6 /* Why_Salesforce.entitlements */,
+				3258B2FA2DBA2F3800DCC6B6 /* Why Salesforce.entitlements */,
+				3258B2E72DBA2F3600DCC6B6 /* Resources */,
+			);
+			path = "Why Salesforce";
+			sourceTree = "<group>";
+		};
+		3258B2E72DBA2F3600DCC6B6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3258B2E82DBA2F3600DCC6B6 /* Main.html */,
+				3258B2EB2DBA2F3600DCC6B6 /* Icon.png */,
+				3258B2ED2DBA2F3600DCC6B6 /* Style.css */,
+				3258B2EF2DBA2F3600DCC6B6 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3258B3032DBA2F3800DCC6B6 /* Why Salesforce Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3258B3112DBA2F3900DCC6B6 /* Resources */,
+				3258B3042DBA2F3800DCC6B6 /* SafariWebExtensionHandler.swift */,
+				3258B3062DBA2F3800DCC6B6 /* Info.plist */,
+				3258B3072DBA2F3800DCC6B6 /* Why_Salesforce_Extension.entitlements */,
+			);
+			path = "Why Salesforce Extension";
+			sourceTree = "<group>";
+		};
+		3258B3112DBA2F3900DCC6B6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3258B3122DBA2F3900DCC6B6 /* popup.js */,
+				3258B3132DBA2F3900DCC6B6 /* LICENSE */,
+				3258B3142DBA2F3900DCC6B6 /* images */,
+				3258B3152DBA2F3900DCC6B6 /* popup.html */,
+				3258B3162DBA2F3900DCC6B6 /* README.md */,
+				3258B3172DBA2F3900DCC6B6 /* safari */,
+				3258B3182DBA2F3900DCC6B6 /* manifest.json */,
+				3258B3192DBA2F3900DCC6B6 /* popup.css */,
+				3258B31A2DBA2F3900DCC6B6 /* content.js */,
+				3258B31B2DBA2F3900DCC6B6 /* assets */,
+			);
+			name = Resources;
+			path = "Why Salesforce Extension";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3258B2E12DBA2F3600DCC6B6 /* Why Salesforce */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3258B30E2DBA2F3800DCC6B6 /* Build configuration list for PBXNativeTarget "Why Salesforce" */;
+			buildPhases = (
+				3258B2DE2DBA2F3600DCC6B6 /* Sources */,
+				3258B2DF2DBA2F3600DCC6B6 /* Frameworks */,
+				3258B2E02DBA2F3600DCC6B6 /* Resources */,
+				3258B30D2DBA2F3800DCC6B6 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3258B3022DBA2F3800DCC6B6 /* PBXTargetDependency */,
+			);
+			name = "Why Salesforce";
+			productName = "Why Salesforce";
+			productReference = 3258B2E22DBA2F3600DCC6B6 /* Why Salesforce.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3258B2FE2DBA2F3800DCC6B6 /* Why Salesforce Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3258B30A2DBA2F3800DCC6B6 /* Build configuration list for PBXNativeTarget "Why Salesforce Extension" */;
+			buildPhases = (
+				3258B2FB2DBA2F3800DCC6B6 /* Sources */,
+				3258B2FC2DBA2F3800DCC6B6 /* Frameworks */,
+				3258B2FD2DBA2F3800DCC6B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Why Salesforce Extension";
+			productName = "Why Salesforce Extension";
+			productReference = 3258B2FF2DBA2F3800DCC6B6 /* Why Salesforce Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3258B2DA2DBA2F3600DCC6B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					3258B2E12DBA2F3600DCC6B6 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					3258B2FE2DBA2F3800DCC6B6 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 3258B2DD2DBA2F3600DCC6B6 /* Build configuration list for PBXProject "Why Salesforce" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3258B2D92DBA2F3600DCC6B6;
+			productRefGroup = 3258B2E32DBA2F3600DCC6B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3258B2E12DBA2F3600DCC6B6 /* Why Salesforce */,
+				3258B2FE2DBA2F3800DCC6B6 /* Why Salesforce Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3258B2E02DBA2F3600DCC6B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3258B2EC2DBA2F3600DCC6B6 /* Icon.png in Resources */,
+				3258B2F52DBA2F3600DCC6B6 /* Main.storyboard in Resources */,
+				3258B2F02DBA2F3600DCC6B6 /* Script.js in Resources */,
+				3258B2EA2DBA2F3600DCC6B6 /* Main.html in Resources */,
+				3258B2F72DBA2F3800DCC6B6 /* Assets.xcassets in Resources */,
+				3258B2EE2DBA2F3600DCC6B6 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3258B2FD2DBA2F3800DCC6B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3258B31E2DBA2F3900DCC6B6 /* images in Resources */,
+				3258B3222DBA2F3900DCC6B6 /* manifest.json in Resources */,
+				3258B31F2DBA2F3900DCC6B6 /* popup.html in Resources */,
+				3258B3212DBA2F3900DCC6B6 /* safari in Resources */,
+				3258B3232DBA2F3900DCC6B6 /* popup.css in Resources */,
+				3258B3252DBA2F3900DCC6B6 /* assets in Resources */,
+				3258B3202DBA2F3900DCC6B6 /* README.md in Resources */,
+				3258B3242DBA2F3900DCC6B6 /* content.js in Resources */,
+				3258B31D2DBA2F3900DCC6B6 /* LICENSE in Resources */,
+				3258B31C2DBA2F3900DCC6B6 /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3258B2DE2DBA2F3600DCC6B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3258B2F22DBA2F3600DCC6B6 /* ViewController.swift in Sources */,
+				3258B2E62DBA2F3600DCC6B6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3258B2FB2DBA2F3800DCC6B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3258B3052DBA2F3800DCC6B6 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3258B3022DBA2F3800DCC6B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3258B2FE2DBA2F3800DCC6B6 /* Why Salesforce Extension */;
+			targetProxy = 3258B3012DBA2F3800DCC6B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3258B2E82DBA2F3600DCC6B6 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3258B2E92DBA2F3600DCC6B6 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		3258B2F32DBA2F3600DCC6B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3258B2F42DBA2F3600DCC6B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3258B3082DBA2F3800DCC6B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3258B3092DBA2F3800DCC6B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		3258B30B2DBA2F3800DCC6B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Why Salesforce Extension/Why_Salesforce_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Why Salesforce Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Why Salesforce Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforcementor.Why-Salesforce.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3258B30C2DBA2F3800DCC6B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Why Salesforce Extension/Why_Salesforce_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Why Salesforce Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Why Salesforce Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforcementor.Why-Salesforce.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3258B30F2DBA2F3800DCC6B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Why Salesforce/Why Salesforce.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Why Salesforce/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Why Salesforce";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforcementor.Why-Salesforce";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3258B3102DBA2F3800DCC6B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Why Salesforce/Why Salesforce.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Why Salesforce/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Why Salesforce";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforcementor.Why-Salesforce";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3258B2DD2DBA2F3600DCC6B6 /* Build configuration list for PBXProject "Why Salesforce" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3258B3082DBA2F3800DCC6B6 /* Debug */,
+				3258B3092DBA2F3800DCC6B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3258B30A2DBA2F3800DCC6B6 /* Build configuration list for PBXNativeTarget "Why Salesforce Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3258B30B2DBA2F3800DCC6B6 /* Debug */,
+				3258B30C2DBA2F3800DCC6B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3258B30E2DBA2F3800DCC6B6 /* Build configuration list for PBXNativeTarget "Why Salesforce" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3258B30F2DBA2F3800DCC6B6 /* Debug */,
+				3258B3102DBA2F3800DCC6B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3258B2DA2DBA2F3600DCC6B6 /* Project object */;
+}
