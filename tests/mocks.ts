@@ -21,10 +21,6 @@ export interface InternalMessage {
     key?: string;
 }
 
-export interface Message {
-	message: InternalMessage;
-}
-
 let language = "fr";
 
 export const mockBrowser = {
@@ -57,14 +53,13 @@ export const mockBrowser = {
 	},
 	runtime: {
 		sendMessage: async (
-			mess: Message,
+			message: InternalMessage,
 			callback?: (response?: any) => void,
 		): Promise<any> => {
 			// Clear any previous errors
 			delete (chrome.runtime as any).lastError;
 
 			let response: any;
-			const message = mess.message;
 			switch (message.what) {
 				case "get":
 					if (message.key != null) {
