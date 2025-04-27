@@ -106,9 +106,9 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
                 for(const item of tobeset) {
                     // check if the item.id is already present
                     const existingItems = settingsArray.filter(setting => setting.id === item.id && (setting.forActive == null || setting.forActive === item.forActive));
-                    console.log('exit',existingItems);
+                    console.log('exit',existingItems, item);
                     if(existingItems.length > 0){
-                        if(item.value == null || item.value === "")
+                        if(item.value == null || item.value === "") // the item has been removed
                             existingItems.forEach(el => {
                                 const index = settingsArray.indexOf(el);
                                 if (index >= 0) {
@@ -243,3 +243,17 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	//return captured; // will call sendResponse asynchronously if true
 	return true;
 });
+
+async function setDefalutOrgStyle(){
+    const orgStyles = await bg_getSettings(null, ORG_TAB_STYLE_KEY);
+    console.log({orgStyles})
+    if(orgStyles == null){
+        // no style settings have been found. create the default style for org-specific Tabs & send it to the background.
+        const request = {key: ORG_TAB_STYLE_KEY, set: [
+            {id: "bold", forActive: false, value: "bold"},
+            {id: "bold", forActive: true, value: "bold"},
+        ]};
+        bg_setStorage(request.set, () => {}, request.key);
+    }
+}
+setDefalutOrgStyle();

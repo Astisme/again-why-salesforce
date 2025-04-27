@@ -9,7 +9,14 @@ import {
 	SETUP_LIGHTNING,
     LINK_NEW_BROWSER,
     USE_LIGHTNING_NAVIGATION,
+    GENERIC_TAB_STYLE_KEY,
+    ORG_TAB_STYLE_KEY,
+    TAB_STYLE_HOVER,
+    TAB_STYLE_TOP,
     getSettings,
+    getAllStyleSettings,
+    getCssRule,
+    getCssSelector,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -87,6 +94,78 @@ async function handleLightningLinkClick(e) {
 	}
 }
 
+function areArraysEqual(arr1, arr2){
+    return (arr1 == null && arr2 == null) ||
+        (
+            arr1 != null && arr2 != null &&
+            arr1.length === arr2.length && 
+            JSON.stringify(arr1) === JSON.stringify(arr2)
+            //arr1.every((obj, idx) => JSON.stringify(obj) === JSON.stringify(arr2[idx]))
+        );
+}
+
+let oldSettings = null;
+function wereSettingsUpdated(settings){
+    return oldSettings == null || !(
+        areArraysEqual(oldSettings[GENERIC_TAB_STYLE_KEY], settings[GENERIC_TAB_STYLE_KEY]) &&
+        areArraysEqual(oldSettings[ORG_TAB_STYLE_KEY], settings[ORG_TAB_STYLE_KEY])
+    );
+}
+
+export async function generateStyleFromSettings(){
+    const settings = await getAllStyleSettings();
+    const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
+    const orgStyleList = settings[ORG_TAB_STYLE_KEY];
+    if(!wereSettingsUpdated(settings))
+        return;
+    oldSettings = settings;
+    for(let i = 0; i < 2; i++){
+        const styleList = i === 0 ? genericStyleList : orgStyleList;
+        if(styleList != null){
+            const isGeneric = styleList === genericStyleList;
+            const style = document.createElement("style");
+            style.id = isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY;
+            const oldStyle = document.getElementById(style.id);
+            if (oldStyle != null)
+                oldStyle.remove();
+            if(styleList.length === 0)
+                return;
+            let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
+            let activeCss = `${getCssSelector(false, isGeneric)} {`;
+            const rulesWhichNeedPseudoSelector = [];
+            styleList
+                .forEach(element => {
+                    if(element.id === TAB_STYLE_HOVER || element.id === TAB_STYLE_TOP){
+                        rulesWhichNeedPseudoSelector.push(element);
+                        return;
+                    }
+                    const rule = getCssRule(element.id, element.value);
+                    if(element.forActive)
+                        activeCss += rule;
+                    else
+                        inactiveCss += rule;
+                });
+            style.textContent = `${inactiveCss} } ${activeCss} }`;
+            for(const el of rulesWhichNeedPseudoSelector){
+                let elementPseudoSelector = "";
+                switch (el.id) {
+                    case TAB_STYLE_HOVER:
+                        elementPseudoSelector = ":hover";
+                        break;
+                    case TAB_STYLE_TOP:
+                        elementPseudoSelector = "::before";
+                        break;
+                    default:
+                        break;
+                }
+                style.textContent += `${getCssSelector(!el.forActive, isGeneric, elementPseudoSelector)}{ ${getCssRule(el.id, el.value)} }`;
+                console.log(el);
+            }
+            document.head.appendChild(style);
+        }
+    }
+}
+
 /**
  * Generates the HTML for a tab row.
  *
@@ -133,7 +212,7 @@ export function generateRowTemplate(
     if(org != null){
         span.classList.add("is-org-tab");
         span.dataset.org = org;
-        span.style.fontWeight = "bold";
+        //span.style.fontWeight = "bold";
     }
 	a.appendChild(span);
 	// Highlight the tab related to the current page

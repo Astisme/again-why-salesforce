@@ -26,6 +26,8 @@ import {
     sendExtensionMessage,
     getSettings,
     getStyleSettings,
+    getCssSelector,
+    getCssRule,
 } from "/constants.js";
 
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
@@ -53,12 +55,12 @@ const popup_setup_new_tab_el        = document.getElementById(POPUP_SETUP_NEW_TA
 
 const generalContainer              = document.getElementById("general-container");
 const generalHeader                 = document.getElementById("general-settings");
-const tabGenericManagerContainer            = document.getElementById(`${TAB_GENERIC_STYLE}-container`);
+const tabGenericManagerContainer    = document.getElementById(`${TAB_GENERIC_STYLE}-container`);
 const tabGenericManagerHeader       = document.getElementById(`${TAB_GENERIC_STYLE}-settings`);
 const tabGenericPreview             = document.getElementById(`${TAB_GENERIC_STYLE}-preview`);
-const tabOrgManagerContainer            = document.getElementById(`${TAB_ORG_STYLE}-container`);
-const tabOrgManagerHeader       = document.getElementById(`${TAB_ORG_STYLE}-settings`);
-const tabOrgPreview             = document.getElementById(`${TAB_ORG_STYLE}-preview`);
+const tabOrgManagerContainer        = document.getElementById(`${TAB_ORG_STYLE}-container`);
+const tabOrgManagerHeader           = document.getElementById(`${TAB_ORG_STYLE}-settings`);
+const tabOrgPreview                 = document.getElementById(`${TAB_ORG_STYLE}-preview`);
 
 function toggleActivePreview(event){
     event.target.closest("li").classList.toggle(SLDS_ACTIVE);
@@ -82,7 +84,7 @@ const tab_active_generic_setting_color_el                  = document.getElement
 const tab_active_generic_setting_border_color_el           = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-active`);
 const tab_active_generic_setting_shadow_el                 = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-active`);
 const tab_active_generic_setting_hover_background_el       = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-active`);
-const tab_active_generic_setting_top_background_el          = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-active`);
+const tab_active_generic_setting_top_background_el         = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-active`);
 const tab_active_generic_setting_decoration_bold_el        = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-active`);
 const tab_active_generic_setting_decoration_italic_el      = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-active`);
 const tab_active_generic_setting_decoration_underline_el   = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-active`);
@@ -146,7 +148,7 @@ const tab_active_org_setting_color_el                  = document.getElementById
 const tab_active_org_setting_border_color_el           = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-active`);
 const tab_active_org_setting_shadow_el                 = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-active`);
 const tab_active_org_setting_hover_background_el       = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-active`);
-const tab_active_org_setting_top_background_el          = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-active`);
+const tab_active_org_setting_top_background_el         = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-active`);
 const tab_active_org_setting_decoration_bold_el        = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-active`);
 const tab_active_org_setting_decoration_italic_el      = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-active`);
 const tab_active_org_setting_decoration_underline_el   = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-active`);
@@ -197,57 +199,57 @@ const allOrgTabSettings = [
 
 const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
-const ul_inactive_generic_decoration_available = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationAvailableId}-inactive`);
-const ul_inactive_generic_decoration_chosen = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationChosenId}-inactive`);
-const ul_active_generic_decoration_available = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationAvailableId}-active`);
-const ul_active_generic_decoration_chosen = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationChosenId}-active`);
+const ul_inactive_generic_decoration_available  = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationAvailableId}-inactive`);
+const ul_inactive_generic_decoration_chosen     = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationChosenId}-inactive`);
+const ul_active_generic_decoration_available    = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationAvailableId}-active`);
+const ul_active_generic_decoration_chosen       = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationChosenId}-active`);
 
-const ul_inactive_org_decoration_available = document.getElementById(`${TAB_ORG_STYLE}-${decorationAvailableId}-inactive`);
-const ul_inactive_org_decoration_chosen = document.getElementById(`${TAB_ORG_STYLE}-${decorationChosenId}-inactive`);
-const ul_active_org_decoration_available = document.getElementById(`${TAB_ORG_STYLE}-${decorationAvailableId}-active`);
-const ul_active_org_decoration_chosen = document.getElementById(`${TAB_ORG_STYLE}-${decorationChosenId}-active`);
+const ul_inactive_org_decoration_available  = document.getElementById(`${TAB_ORG_STYLE}-${decorationAvailableId}-inactive`);
+const ul_inactive_org_decoration_chosen     = document.getElementById(`${TAB_ORG_STYLE}-${decorationChosenId}-inactive`);
+const ul_active_org_decoration_available    = document.getElementById(`${TAB_ORG_STYLE}-${decorationAvailableId}-active`);
+const ul_active_org_decoration_chosen       = document.getElementById(`${TAB_ORG_STYLE}-${decorationChosenId}-active`);
 
-const backgroundStyleGenericInactiveId = `${EXTENSION_NAME}-background-style-generic-inactive`;
-const colorStyleGenericInactiveId = `${EXTENSION_NAME}-color-style-generic-inactive`;
-const borderStyleGenericInactiveId = `${EXTENSION_NAME}-border-style-generic-inactive`;
-const shadowStyleGenericInactiveId = `${EXTENSION_NAME}-shadow-style-generic-inactive`;
-const hoverStyleGenericInactiveId = `${EXTENSION_NAME}-hover-style-generic-inactive`;
-const boldStyleGenericInactiveId = `${EXTENSION_NAME}-bold-style-generic-inactive`;
-const italicStyleGenericInactiveId = `${EXTENSION_NAME}-italic-style-generic-inactive`;
-const underlineStyleGenericInactiveId = `${EXTENSION_NAME}-underline-style-generic-inactive`;
-//const wavyStyleGenericInactiveId = `${EXTENSION_NAME}-wavy-style-generic-inactive`;
+const backgroundStyleGenericInactiveId  = `${EXTENSION_NAME}-background-style-generic-inactive`;
+const colorStyleGenericInactiveId       = `${EXTENSION_NAME}-color-style-generic-inactive`;
+const borderStyleGenericInactiveId      = `${EXTENSION_NAME}-border-style-generic-inactive`;
+const shadowStyleGenericInactiveId      = `${EXTENSION_NAME}-shadow-style-generic-inactive`;
+const hoverStyleGenericInactiveId       = `${EXTENSION_NAME}-hover-style-generic-inactive`;
+const boldStyleGenericInactiveId        = `${EXTENSION_NAME}-bold-style-generic-inactive`;
+const italicStyleGenericInactiveId      = `${EXTENSION_NAME}-italic-style-generic-inactive`;
+const underlineStyleGenericInactiveId   = `${EXTENSION_NAME}-underline-style-generic-inactive`;
+//const wavyStyleGenericInactiveId      = `${EXTENSION_NAME}-wavy-style-generic-inactive`;
 
-const backgroundStyleGenericActiveId = `${EXTENSION_NAME}-background-style-generic-active`;
-const colorStyleGenericActiveId = `${EXTENSION_NAME}-color-style-generic-active`;
-const borderStyleGenericActiveId = `${EXTENSION_NAME}-border-style-generic-active`;
-const shadowStyleGenericActiveId = `${EXTENSION_NAME}-shadow-style-generic-active`;
-const hoverStyleGenericActiveId = `${EXTENSION_NAME}-hover-style-generic-active`;
-const topStyleGenericActiveId = `${EXTENSION_NAME}-top-style-generic-active`;
-const boldStyleGenericActiveId = `${EXTENSION_NAME}-bold-style-generic-active`;
-const italicStyleGenericActiveId = `${EXTENSION_NAME}-italic-style-generic-active`;
-const underlineStyleGenericActiveId = `${EXTENSION_NAME}-underline-style-generic-active`;
-//const wavyStyleGenericActiveId = `${EXTENSION_NAME}-wavy-style-generic-active`;
+const backgroundStyleGenericActiveId    = `${EXTENSION_NAME}-background-style-generic-active`;
+const colorStyleGenericActiveId         = `${EXTENSION_NAME}-color-style-generic-active`;
+const borderStyleGenericActiveId        = `${EXTENSION_NAME}-border-style-generic-active`;
+const shadowStyleGenericActiveId        = `${EXTENSION_NAME}-shadow-style-generic-active`;
+const hoverStyleGenericActiveId         = `${EXTENSION_NAME}-hover-style-generic-active`;
+const topStyleGenericActiveId           = `${EXTENSION_NAME}-top-style-generic-active`;
+const boldStyleGenericActiveId          = `${EXTENSION_NAME}-bold-style-generic-active`;
+const italicStyleGenericActiveId        = `${EXTENSION_NAME}-italic-style-generic-active`;
+const underlineStyleGenericActiveId     = `${EXTENSION_NAME}-underline-style-generic-active`;
+//const wavyStyleGenericActiveId        = `${EXTENSION_NAME}-wavy-style-generic-active`;
 
-const backgroundStyleOrgInactiveId = `${EXTENSION_NAME}-background-style-org-inactive`;
-const colorStyleOrgInactiveId = `${EXTENSION_NAME}-color-style-org-inactive`;
-const borderStyleOrgInactiveId = `${EXTENSION_NAME}-border-style-org-inactive`;
-const shadowStyleOrgInactiveId = `${EXTENSION_NAME}-shadow-style-org-inactive`;
-const hoverStyleOrgInactiveId = `${EXTENSION_NAME}-hover-style-org-inactive`;
-const boldStyleOrgInactiveId = `${EXTENSION_NAME}-bold-style-org-inactive`;
-const italicStyleOrgInactiveId = `${EXTENSION_NAME}-italic-style-org-inactive`;
-const underlineStyleOrgInactiveId = `${EXTENSION_NAME}-underline-style-org-inactive`;
-//const wavyStyleOrgInactiveId = `${EXTENSION_NAME}-wavy-style-org-inactive`;
+const backgroundStyleOrgInactiveId  = `${EXTENSION_NAME}-background-style-org-inactive`;
+const colorStyleOrgInactiveId       = `${EXTENSION_NAME}-color-style-org-inactive`;
+const borderStyleOrgInactiveId      = `${EXTENSION_NAME}-border-style-org-inactive`;
+const shadowStyleOrgInactiveId      = `${EXTENSION_NAME}-shadow-style-org-inactive`;
+const hoverStyleOrgInactiveId       = `${EXTENSION_NAME}-hover-style-org-inactive`;
+const boldStyleOrgInactiveId        = `${EXTENSION_NAME}-bold-style-org-inactive`;
+const italicStyleOrgInactiveId      = `${EXTENSION_NAME}-italic-style-org-inactive`;
+const underlineStyleOrgInactiveId   = `${EXTENSION_NAME}-underline-style-org-inactive`;
+//const wavyStyleOrgInactiveId      = `${EXTENSION_NAME}-wavy-style-org-inactive`;
 
-const backgroundStyleOrgActiveId = `${EXTENSION_NAME}-background-style-org-active`;
-const colorStyleOrgActiveId = `${EXTENSION_NAME}-color-style-org-active`;
-const borderStyleOrgActiveId = `${EXTENSION_NAME}-border-style-org-active`;
-const shadowStyleOrgActiveId = `${EXTENSION_NAME}-shadow-style-org-active`;
-const hoverStyleOrgActiveId = `${EXTENSION_NAME}-hover-style-org-active`;
-const topStyleOrgActiveId = `${EXTENSION_NAME}-top-style-org-active`;
-const boldStyleOrgActiveId = `${EXTENSION_NAME}-bold-style-org-active`;
-const italicStyleOrgActiveId = `${EXTENSION_NAME}-italic-style-org-active`;
-const underlineStyleOrgActiveId = `${EXTENSION_NAME}-underline-style-org-active`;
-//const wavyStyleOrgActiveId = `${EXTENSION_NAME}-wavy-style-org-active`;
+const backgroundStyleOrgActiveId    = `${EXTENSION_NAME}-background-style-org-active`;
+const colorStyleOrgActiveId         = `${EXTENSION_NAME}-color-style-org-active`;
+const borderStyleOrgActiveId        = `${EXTENSION_NAME}-border-style-org-active`;
+const shadowStyleOrgActiveId        = `${EXTENSION_NAME}-shadow-style-org-active`;
+const hoverStyleOrgActiveId         = `${EXTENSION_NAME}-hover-style-org-active`;
+const topStyleOrgActiveId           = `${EXTENSION_NAME}-top-style-org-active`;
+const boldStyleOrgActiveId          = `${EXTENSION_NAME}-bold-style-org-active`;
+const italicStyleOrgActiveId        = `${EXTENSION_NAME}-italic-style-org-active`;
+const underlineStyleOrgActiveId     = `${EXTENSION_NAME}-underline-style-org-active`;
+//const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-wavy-style-org-active`;
 
 function updateStyle(styleId, newStyle = null){
     // Remove any previous style for this element
@@ -268,18 +270,14 @@ function updateStyle(styleId, newStyle = null){
 function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
     const isForInactive = !setting.forActive;
     //const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
-    const slds_active_class = `.${SLDS_ACTIVE}`;
-    const has_org_tab = ":has(.is-org-tab)";
-    function getCssSelector(pseudoElement = ""){
-        return `.${EXTENSION_NAME}${isForInactive ? `:not(${slds_active_class})` : slds_active_class}${isGeneric ? `:not(${has_org_tab})` : has_org_tab}${pseudoElement}`;
-    }
     let relatedInput = null;
     let chosenUl = null;
     let moveToChosen = null;
     let styleId = null;
     const wasPicked = setting.value != null && setting.value !== "";
+    console.log('setttingpreview',setting)
     switch (setting.id) {
-        case "color":
+        case TAB_STYLE_COLOR:
             if(isForInactive){
 				if(isGeneric){
 					relatedInput = tab_inactive_generic_setting_color_el;
@@ -297,9 +295,9 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = colorStyleOrgActiveId;
                 }
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ color: ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_COLOR, setting.value)} }` : null);
             break;
-        case "background-color":
+        case TAB_STYLE_BACKGROUND:
             if(isForInactive){
 				if(isGeneric) {
 					relatedInput = tab_inactive_generic_setting_background_el;
@@ -317,9 +315,9 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = backgroundStyleOrgActiveId;
                 }
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ background-color: ${setting.value} !important; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_BACKGROUND, setting.value)} }` : null);
             break;
-        case "border":
+        case TAB_STYLE_BORDER:
             if(isForInactive){
 				if(isGeneric) {
 					relatedInput = tab_inactive_generic_setting_border_color_el;
@@ -337,9 +335,9 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = borderStyleOrgActiveId;
                 }
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ border: 2px solid ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_BORDER, setting.value)} }` : null);
             break;
-        case "shadow":
+        case TAB_STYLE_SHADOW:
             if(isForInactive){
 				if(isGeneric) {
 					relatedInput = tab_inactive_generic_setting_shadow_el;
@@ -357,9 +355,9 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = shadowStyleOrgActiveId;
                 }
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ text-shadow: 0px 0px 3px ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_SHADOW, setting.value)} }` : null);
             break;
-        case "hover":
+        case TAB_STYLE_HOVER:
             if(isForInactive){
 				if(isGeneric) {
 					relatedInput = tab_inactive_generic_setting_hover_background_el;
@@ -377,15 +375,15 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = hoverStyleOrgActiveId;
                 }
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector(":hover")}{ background-color: ${setting.value} !important; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric, ":hover")}{ ${getCssRule(TAB_STYLE_HOVER, setting.value)} }` : null);
             break;
-        case "top":
+        case TAB_STYLE_TOP:
             if(isForInactive)
                 break;
-            updateStyle(isGeneric ? topStyleGenericActiveId : topStyleOrgActiveId, wasPicked ? `${getCssSelector("::before")}{ background-color: ${setting.value} !important; }` : null);
+            updateStyle(isGeneric ? topStyleGenericActiveId : topStyleOrgActiveId, wasPicked ? `${getCssSelector(isForInactive, isGeneric, "::before")}{ ${getCssRule(TAB_STYLE_TOP, setting.value)} }` : null);
             relatedInput = isGeneric ? tab_active_generic_setting_top_background_el : tab_active_org_setting_top_background_el;
             break;
-        case "bold": {
+        case TAB_STYLE_BOLD:
             if(isForInactive){
                 if(isGeneric){
                     chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_generic_decoration_available;
@@ -407,10 +405,9 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = boldStyleOrgActiveId;
                 }
             }   
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ font-weight: ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_BOLD, setting.value)} }` : null);
             break;
-        }
-        case "italic": {
+        case TAB_STYLE_ITALIC:
             if(isForInactive){
                 if(isGeneric){
                     chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_available;
@@ -432,10 +429,9 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = italicStyleOrgActiveId;
                 }
             }   
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ font-style: ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_ITALIC, setting.value)} }` : null);
             break;
-        }
-        case "underline": {
+        case TAB_STYLE_UNDERLINE:
             if(isForInactive){
                 if(isGeneric){
                     chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_available;
@@ -457,11 +453,10 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = underlineStyleOrgActiveId;
                 }
             }   
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ text-decoration: ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_UNDERLINE, setting.value)} }` : null);
             break;
-        }
         /*
-        case "wavy": {
+        case TAB_STYLE_WAVY:
             if(isForInactive){
                 if(isGeneric){
                     chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_available;
@@ -483,9 +478,8 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
                     styleId = wavyStyleOrgActiveId;
                 }
             }
-            updateStyle(styleId, wasPicked ? `${getCssSelector()}{ text-decoration: underline ${setting.value}; }` : null);
+            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_WAVY, setting.value)} }` : null);
             break;
-        }
         */
         default:
             console.error(`Unmatched style setting id: ${setting.id}`);
@@ -643,6 +637,8 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
     const settings = await getStyleSettings(key);
     if(settings != null)
         settings instanceof Array ? setCurrentChoice({ id: key, value: settings }) : setCurrentChoice(settings);
+    //else if(key === ORG_TAB_STYLE_KEY)
+
     const isGeneric = key === GENERIC_TAB_STYLE_KEY;
     const allInputs = isGeneric ? allGenericInputs : allOrgInputs;
     const allDecorations = isGeneric ? allGenericDecorations : allOrgDecorations;
@@ -687,7 +683,7 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
         orgTabListenersSet = true;
 }
 
-generalHeader.addEventListener("click", () => {
+generalHeader.addEventListener("click", async () => {
     restoreGeneralSettings();
     generalHeader.classList.add(SLDS_ACTIVE);
     generalContainer.classList.remove("hidden");

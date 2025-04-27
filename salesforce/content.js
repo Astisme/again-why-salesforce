@@ -21,6 +21,7 @@ import {
 	generateSldsToastMessage,
 	MODAL_ID,
     generateUpdateTabModal,
+    generateStyleFromSettings,
 } from "./generator.js";
 
 let allTabs;
@@ -325,6 +326,7 @@ function reloadTabs(tabs = null) {
 	while (setupTabUl.childElementCount > 3) { // hidden li + Home + Object Manager
 		setupTabUl.removeChild(setupTabUl.lastChild);
 	}
+    generateStyleFromSettings();
 	init(tabs);
 }
 

@@ -109,4 +109,43 @@ export const TAB_STYLE_TOP = "top";
 export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY){
     return await sendExtensionMessage({ what: "get-style-settings", key });
 }
+export async function getAllStyleSettings(){
+    const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
+    const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
+    if(genericStyles == null && orgStyles == null)
+        return null;
+    const result = {};
+    result[GENERIC_TAB_STYLE_KEY] = genericStyles;
+    result[ORG_TAB_STYLE_KEY] = orgStyles;
+    return result;
+}
 export const SLDS_ACTIVE = "slds-is-active";
+const slds_active_class = `.${SLDS_ACTIVE}`;
+const has_org_tab = ":has(.is-org-tab)";
+export function getCssSelector(isInactive = true, isGeneric = true, pseudoElement = ""){
+    return `.${EXTENSION_NAME}${isInactive ? `:not(${slds_active_class})` : slds_active_class}${isGeneric ? `:not(${has_org_tab})` : has_org_tab}${pseudoElement}`;
+}
+export function getCssRule(styleId, value){
+    switch (styleId) {
+        case TAB_STYLE_BACKGROUND:
+        case TAB_STYLE_HOVER:
+        case TAB_STYLE_TOP:
+            return `background-color: ${value} !important;`;
+        case TAB_STYLE_COLOR:
+            return `color: ${value};`;
+        case TAB_STYLE_BORDER:
+            return `border: 2px solid ${value};`;
+        case TAB_STYLE_SHADOW:
+            return `text-shadow: 0px 0px 3px ${value};`;
+        case TAB_STYLE_BOLD:
+            return "font-weight: bold;";
+        case TAB_STYLE_ITALIC:
+            return "font-style: italic;";
+        case TAB_STYLE_UNDERLINE:
+            return "text-decoration: underline;";
+        //case TAB_STYLE_WAVY:
+            //return "text-decoration: underline wavy;";
+        default:
+            break;
+    }
+}
