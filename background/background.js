@@ -49,27 +49,22 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 		});
 	}
 	getFromStorage(callback);
-    /*
-	if (callback == null) {
-		throw new Error("error_no_callback");
-	}
-	BROWSER.storage.sync.get(
-		[key],
-		(items) => {
-			callback(items[key]);
-		},
-	);
-    */
 }
 
-async function bg_getSettings(settingKeys = null, key = SETTINGS_KEY){
+async function bg_getSettings(settingKeys = null, key = SETTINGS_KEY, callback = null){
     const settings = await bg_getStorage(null, key);
-    if(settingKeys == null || settings == null)
-        return settings;
+    if(settingKeys == null || settings == null){
+        if(callback == null)
+            return settings;
+        return callback(settings);
+    }
     if(!(settingKeys instanceof Array))
         settingKeys = [settingKeys];
     const requestedSettings = settings.filter(setting => settingKeys.includes(setting.id));
-    return settingKeys.length > 1 ? requestedSettings : requestedSettings[0];
+    const response = settingKeys.length > 1 ? requestedSettings : requestedSettings[0];
+    if(callback == null)
+        return response;
+    callback(response);
 }
 
 /**
@@ -195,7 +190,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		sendResponse(null);
 		return false;
 	}
-	//let captured = true;
 	switch (request.what) {
 		case "get":
 			bg_getStorage(sendResponse, request.key);
@@ -227,25 +221,22 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
             bg_getStorage(sendResponse, LOCALE_KEY);
             break;
         case "get-settings":
-            sendResponse(bg_getSettings(request.keys));
+            bg_getSettings(request.keys, undefined, sendResponse);
             break;
         case "get-style-settings":
-            sendResponse(bg_getSettings(null, request.key));
+            bg_getSettings(undefined, request.key, sendResponse);
             break;
 		default:
-			//captured = ["import"].includes(request.what);
-			//if (!captured) {
 			if (!["import"].includes(request.what)) {
 				console.error({ error: "Unknown request", request });
 			}
 			break;
 	}
-	//return captured; // will call sendResponse asynchronously if true
 	return true;
 });
 
 async function setDefalutOrgStyle(){
-    const orgStyles = await bg_getSettings(null, ORG_TAB_STYLE_KEY);
+    const orgStyles = await bg_getSettings(undefined, ORG_TAB_STYLE_KEY);
     console.log({orgStyles})
     if(orgStyles == null){
         // no style settings have been found. create the default style for org-specific Tabs & send it to the background.

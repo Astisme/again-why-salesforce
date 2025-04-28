@@ -680,7 +680,6 @@ function moveSelectedDecorationsTo(moveHereElement = null, allDecorations = null
 
 let genericTabListenersSet = false;
 let orgTabListenersSet = false;
-
 /**
  * Restores Tab style settings and initializes related UI listeners.
  * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Storage key for Tab settings (generic or org).

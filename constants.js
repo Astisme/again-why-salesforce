@@ -52,7 +52,7 @@ export const LIGHTNING_FORCE_COM_OPERATING_PATTERN =
  * @param {Object} message - The message to send.
  * @param {function} callback - The callback to execute after sending the message.
  */
-export function sendExtensionMessage(message, callback) {
+export function sendExtensionMessage(message, callback = null) {
 	/**
 	 * Invoke the runtime to send the message
 	 *
@@ -105,8 +105,9 @@ export const TAB_STYLE_UNDERLINE = "underline";
 //export const TAB_STYLE_WAVY = "wavy";
 export const TAB_STYLE_TOP = "top";
 export const SLDS_ACTIVE = "slds-is-active";
-const slds_active_class = `.${SLDS_ACTIVE}`;
-const has_org_tab = ":has(.is-org-tab)";
+const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
+export const ORG_TAB_CLASS = ".is-org-tab";
+const HAS_ORG_TAB = `:has(${ORG_TAB_CLASS})`;
 
 /**
  * Retrieves saved style settings for the specified key.
@@ -147,7 +148,7 @@ export async function getAllStyleSettings(){
  * @returns {string} The constructed CSS selector.
  */
 export function getCssSelector(isInactive = true, isGeneric = true, pseudoElement = ""){
-    return `.${EXTENSION_NAME}${isInactive ? `:not(${slds_active_class})` : slds_active_class}${isGeneric ? `:not(${has_org_tab})` : has_org_tab}${pseudoElement}`;
+    return `.${EXTENSION_NAME}${isInactive ? `:not(${SLDS_ACTIVE_CLASS})` : SLDS_ACTIVE_CLASS}${isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB}${pseudoElement}`;
 }
 
 /**

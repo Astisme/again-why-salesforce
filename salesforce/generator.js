@@ -13,6 +13,7 @@ import {
     ORG_TAB_STYLE_KEY,
     TAB_STYLE_HOVER,
     TAB_STYLE_TOP,
+    ORG_TAB_CLASS,
     getSettings,
     getAllStyleSettings,
     getCssRule,
@@ -236,9 +237,8 @@ export function generateRowTemplate(
 	span.classList.add("label", "slds-truncate");
 	span.textContent = label;
     if(org != null){
-        span.classList.add("is-org-tab");
+        span.classList.add(ORG_TAB_CLASS);
         span.dataset.org = org;
-        //span.style.fontWeight = "bold";
     }
 	a.appendChild(span);
 	// Highlight the tab related to the current page
