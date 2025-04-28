@@ -94,17 +94,27 @@ async function handleLightningLinkClick(e) {
 	}
 }
 
+/**
+ * Checks if two arrays are equal in content and order.
+ * @param {Array} arr1 - First array to compare.
+ * @param {Array} arr2 - Second array to compare.
+ * @returns {boolean} True if arrays are equal, otherwise false.
+ */
 function areArraysEqual(arr1, arr2){
     return (arr1 == null && arr2 == null) ||
         (
             arr1 != null && arr2 != null &&
             arr1.length === arr2.length && 
             JSON.stringify(arr1) === JSON.stringify(arr2)
-            //arr1.every((obj, idx) => JSON.stringify(obj) === JSON.stringify(arr2[idx]))
         );
 }
 
 let oldSettings = null;
+/**
+ * Determines if tab settings have been updated compared to previous settings.
+ * @param {Object} settings - Current settings to compare.
+ * @returns {boolean} True if settings were updated, otherwise false.
+ */
 function wereSettingsUpdated(settings){
     return oldSettings == null || !(
         areArraysEqual(oldSettings[GENERIC_TAB_STYLE_KEY], settings[GENERIC_TAB_STYLE_KEY]) &&
@@ -112,6 +122,16 @@ function wereSettingsUpdated(settings){
     );
 }
 
+/**
+ * Generates and injects CSS rules based on saved tab style settings.
+ *
+ * - Fetches both generic and org settings and exits if unchanged.
+ * - Removes any existing `<style>` elements for these keys.
+ * - Builds separate CSS rules for active vs. inactive tabs.
+ * - Handles pseudo-selectors (`:hover`, `::before`) for special rules.
+ * - Appends the assembled `<style>` element to the document head.
+ * @returns {Promise<void>} Resolves once styles are updated.
+ */
 export async function generateStyleFromSettings(){
     const settings = await getAllStyleSettings();
     const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
@@ -122,14 +142,20 @@ export async function generateStyleFromSettings(){
     for(let i = 0; i < 2; i++){
         const styleList = i === 0 ? genericStyleList : orgStyleList;
         if(styleList != null){
-            const isGeneric = styleList === genericStyleList;
-            const style = document.createElement("style");
-            style.id = isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY;
-            const oldStyle = document.getElementById(style.id);
-            if (oldStyle != null)
-                oldStyle.remove();
             if(styleList.length === 0)
                 return;
+            const isGeneric = styleList === genericStyleList;
+            let style = null;
+            {
+                const styleId = isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY;
+                const oldStyle = document.getElementById(styleId);
+                if (oldStyle != null){
+                    style = oldStyle;
+                    style.textContent = "";
+                } else {
+                    style = document.createElement("style");
+                }
+            }
             let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
             let activeCss = `${getCssSelector(false, isGeneric)} {`;
             const rulesWhichNeedPseudoSelector = [];

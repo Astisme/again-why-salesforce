@@ -30,6 +30,11 @@ import {
     getCssRule,
 } from "/constants.js";
 
+/**
+* Saves checkbox state and dependent checkbox states to settings
+* @param {Event} e - The event object from the checkbox interaction
+* @param {...HTMLElement} dependentCheckboxElements - Dependent checkbox elements whose states should also be saved
+*/
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
     const set = { what: "set", key: SETTINGS_KEY, set: [] };
     const setting = {};
@@ -62,6 +67,10 @@ const tabOrgManagerContainer        = document.getElementById(`${TAB_ORG_STYLE}-
 const tabOrgManagerHeader           = document.getElementById(`${TAB_ORG_STYLE}-settings`);
 const tabOrgPreview                 = document.getElementById(`${TAB_ORG_STYLE}-preview`);
 
+/**
+* Toggles the active class on a list item containing the target element
+* @param {Event} event - The event object from the interaction
+*/
 function toggleActivePreview(event){
     event.target.closest("li").classList.toggle(SLDS_ACTIVE);
 }
@@ -251,6 +260,11 @@ const italicStyleOrgActiveId        = `${EXTENSION_NAME}-italic-style-org-active
 const underlineStyleOrgActiveId     = `${EXTENSION_NAME}-underline-style-org-active`;
 //const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-wavy-style-org-active`;
 
+/**
+* Updates or removes a style element in the document head
+* @param {string} styleId - ID of the style element to update or remove
+* @param {string|null} newStyle - CSS content to add, or null to only remove existing style
+*/
 function updateStyle(styleId, newStyle = null){
     // Remove any previous style for this element
     const oldStyle = document.getElementById(styleId);
@@ -265,8 +279,16 @@ function updateStyle(styleId, newStyle = null){
     document.head.appendChild(style);
 }
 
-// update the style of the preview Tab
-// reset the value of the input fields
+/**
+* Updates CSS styles of the preview Tab based on provided tab style settings
+* Sets inputs fields with the value passed in the setting
+* @param {Object} setting - The style setting to apply
+* @param {string} setting.id - Identifier for the style type
+* @param {string|null} setting.value - Value for the style, null or empty string if not set
+* @param {boolean} setting.forActive - Whether the style applies to active tabs
+* @param {boolean} [isGeneric=true] - Whether to apply styles to generic tabs or org-specific tabs
+* @param {boolean} [updateViews=true] - Whether to update UI elements in addition to applying styles
+*/
 function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
     const isForInactive = !setting.forActive;
     //const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
@@ -493,6 +515,13 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
         relatedInput.value = setting.value;
 }
 
+/**
+* Updates checkbox elements based on a setting configuration
+* @param {Object} setting - The setting to apply
+* @param {string} setting.id - Identifier for the setting type
+* @param {boolean} [setting.enabled] - Enabled state for checkbox settings
+* @param {Array|Object} [setting.value] - Value for tab style settings
+*/
 function setCurrentChoice(setting) {
     switch (setting.id) {
         case LINK_NEW_BROWSER:
@@ -540,6 +569,10 @@ const allCheckboxes = [
 ];
 
 let generalSettingsListenersSet = false;
+/**
+* Restores general settings from storage and sets up event listeners
+* @returns {Promise<void>} Promise that resolves when settings are restored and listeners are set
+*/
 async function restoreGeneralSettings() {
     if(generalSettingsListenersSet)
         return;
@@ -577,6 +610,11 @@ const btn_inactive_org_available = document.getElementById(`${TAB_ORG_STYLE}-${a
 const btn_active_org_chosen = document.getElementById(`${TAB_ORG_STYLE}-${chosenBtnId}-active`);
 const btn_active_org_available = document.getElementById(`${TAB_ORG_STYLE}-${availableBtnId}-active`);
 
+/**
+* Saves Tab styling options to storage and updates the UI
+* @param {Event} e - The event object from the input interaction
+* @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
+*/
 function saveTabOptions(e, key = GENERIC_TAB_STYLE_KEY) {
     const set = { what: "set", key, set: [] };
     const setting = {};
@@ -590,6 +628,12 @@ function saveTabOptions(e, key = GENERIC_TAB_STYLE_KEY) {
     sendExtensionMessage(set);
 }
 
+/**
+* Saves Tab decoration styles to storage and updates the UI
+* @param {HTMLElement[]} [selectedLis=[]] - Selected list items containing decoration settings
+* @param {boolean} [isAdding=true] - Whether adding (true) or removing (false) decorations
+* @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
+*/
 function saveTabDecorations(selectedLis = [], isAdding = true, key = GENERIC_TAB_STYLE_KEY){
     const set = { what: "set", key, set: [] };
     selectedLis.forEach(li => {
@@ -604,15 +648,26 @@ function saveTabDecorations(selectedLis = [], isAdding = true, key = GENERIC_TAB
     sendExtensionMessage(set);
 }
 
+/**
+ * Toggles the `aria-selected` attribute of the clicked list item.
+ * @param {Event} event - The event triggered by user interaction.
+ */
 function flipSelected(event){
     const li = event.target.closest("li");
     li.ariaSelected = li.ariaSelected !== "true";
 }
+
+/**
+ * Moves selected decorations to a target element and updates their state.
+ * @param {HTMLElement} moveHereElement - The element to move selected decorations into.
+ * @param {HTMLElement[]} allDecorations - List of all decoration elements.
+ * @param {boolean} [isAdding=true] - Whether decorations are being added or removed.
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key used for saving decorations.
+ * @throws {Error} If required parameters are missing.
+ */
 function moveSelectedDecorationsTo(moveHereElement = null, allDecorations = null, isAdding = true, key = GENERIC_TAB_STYLE_KEY){
-    if(moveHereElement == null)
-        throw new Error('tbd');
-    if(allDecorations == null)
-        throw new Error('tbd');
+    if(moveHereElement == null || allDecorations == null)
+        throw new Error("error_required_params",moveHereElement,allDecorations);
     const selectedDecorations = allDecorations
         .filter(el => el.ariaSelected === "true");
     selectedDecorations
@@ -625,9 +680,16 @@ function moveSelectedDecorationsTo(moveHereElement = null, allDecorations = null
 
 let genericTabListenersSet = false;
 let orgTabListenersSet = false;
+
+/**
+ * Restores Tab style settings and initializes related UI listeners.
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Storage key for Tab settings (generic or org).
+ * @returns {Promise<void>}
+ * @throws {Error} If `key` is invalid.
+ */
 async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
     if(key !== GENERIC_TAB_STYLE_KEY && key !== ORG_TAB_STYLE_KEY)
-        throw new Error('tbd');
+        throw new Error("error_invalid_key");
     if(
         (key === GENERIC_TAB_STYLE_KEY && genericTabListenersSet) ||
         (key === ORG_TAB_STYLE_KEY && orgTabListenersSet)
@@ -637,8 +699,7 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
     const settings = await getStyleSettings(key);
     if(settings != null)
         settings instanceof Array ? setCurrentChoice({ id: key, value: settings }) : setCurrentChoice(settings);
-    //else if(key === ORG_TAB_STYLE_KEY)
-
+    // gather correct resources
     const isGeneric = key === GENERIC_TAB_STYLE_KEY;
     const allInputs = isGeneric ? allGenericInputs : allOrgInputs;
     const allDecorations = isGeneric ? allGenericDecorations : allOrgDecorations;
@@ -653,64 +714,53 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
     const ul_active_decoration_available = isGeneric ? ul_active_generic_decoration_available : ul_active_org_decoration_available;
     const ul_active_decoration_chosen = isGeneric ? ul_active_generic_decoration_chosen : ul_active_org_decoration_chosen;
     const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
-
+    // create event listeners
     tabPreview.classList.remove("hidden");
     allInputs.forEach(el => el.addEventListener("change", e => saveTabOptions(e, key)));
-    allDecorations.forEach(el => {
-        //el.addEventListener("active", flipSelected);
-        //el.addEventListener("focus", flipSelected);
-        el.addEventListener("click", flipSelected);
-    });
-    btn_inactive_available.addEventListener("click", () => {
-        // move to available
-        moveSelectedDecorationsTo(ul_inactive_decoration_available, allInactiveDecorations, false, key);
-    });
-    btn_inactive_chosen.addEventListener("click", () => {
-        // move to chosen
-        moveSelectedDecorationsTo(ul_inactive_decoration_chosen, allInactiveDecorations, true, key);
-    });
-    btn_active_available.addEventListener("click", () => {
-        // move to available
-        moveSelectedDecorationsTo(ul_active_decoration_available, allActiveDecorations, false, key);
-    });
-    btn_active_chosen.addEventListener("click", () => {
-        // move to chosen
-        moveSelectedDecorationsTo(ul_active_decoration_chosen, allActiveDecorations, true, key);
-    });
+    allDecorations.forEach(el => el.addEventListener("click", flipSelected));
+    // move to available
+    btn_inactive_available.addEventListener("click", () => moveSelectedDecorationsTo(ul_inactive_decoration_available, allInactiveDecorations, false, key));
+    btn_active_available.addEventListener("click", () => moveSelectedDecorationsTo(ul_active_decoration_available, allActiveDecorations, false, key));
+    // move to chosen
+    btn_inactive_chosen.addEventListener("click", () => moveSelectedDecorationsTo(ul_inactive_decoration_chosen, allInactiveDecorations, true, key));
+    btn_active_chosen.addEventListener("click", () => moveSelectedDecorationsTo(ul_active_decoration_chosen, allActiveDecorations, true, key));
     if(isGeneric)
         genericTabListenersSet = true;
     else
         orgTabListenersSet = true;
 }
 
+/**
+ * Activates one element and shows it, while deactivating and hiding others.
+ * @param {HTMLElement} elementToActivate - Element to set as active.
+ * @param {HTMLElement} elementToShow - Element to reveal (remove hidden).
+ * @param {HTMLElement[]} elementsToDeactivate - Elements to unset active state.
+ * @param {HTMLElement[]} elementsToHide - Elements to hide.
+ */
+function showRelevantSettings_HideOthers(elementToActivate, elementToShow, elementsToDeactivate, elementsToHide){
+    elementToActivate.classList.add(SLDS_ACTIVE);
+    elementToShow.classList.remove("hidden");
+    elementsToDeactivate.forEach(el => {
+        el.classList.remove(SLDS_ACTIVE);
+    });
+    elementsToHide.forEach(el => {
+        el.classList.add("hidden");
+    });
+}
+
 generalHeader.addEventListener("click", async () => {
     restoreGeneralSettings();
-    generalHeader.classList.add(SLDS_ACTIVE);
-    generalContainer.classList.remove("hidden");
-    tabGenericManagerHeader.classList.remove(SLDS_ACTIVE);
-    tabGenericManagerContainer.classList.add("hidden");
-    tabOrgManagerHeader.classList.remove(SLDS_ACTIVE);
-    tabOrgManagerContainer.classList.add("hidden");
+    showRelevantSettings_HideOthers(generalHeader, generalContainer, [tabGenericManagerContainer, tabOrgManagerHeader], [tabGenericManagerContainer, tabOrgManagerContainer]);
 });
 
 tabGenericManagerHeader.addEventListener("click", () => {
     restoreTabSettings(GENERIC_TAB_STYLE_KEY);
-    tabGenericManagerHeader.classList.add(SLDS_ACTIVE);
-    tabGenericManagerContainer.classList.remove("hidden");
-    generalHeader.classList.remove(SLDS_ACTIVE);
-    generalContainer.classList.add("hidden");
-    tabOrgManagerHeader.classList.remove(SLDS_ACTIVE);
-    tabOrgManagerContainer.classList.add("hidden");
+    showRelevantSettings_HideOthers(tabGenericManagerHeader, tabGenericManagerContainer, [generalHeader, tabOrgManagerHeader], [generalContainer, tabOrgManagerContainer]);
 });
 
 tabOrgManagerHeader.addEventListener("click", () => {
     restoreTabSettings(ORG_TAB_STYLE_KEY);
-    tabOrgManagerHeader.classList.add(SLDS_ACTIVE);
-    tabOrgManagerContainer.classList.remove("hidden");
-    generalHeader.classList.remove(SLDS_ACTIVE);
-    generalContainer.classList.add("hidden");
-    tabGenericManagerHeader.classList.remove(SLDS_ACTIVE);
-    tabGenericManagerContainer.classList.add("hidden");
+    showRelevantSettings_HideOthers(tabOrgManagerHeader, tabOrgManagerContainer, [generalHeader, tabGenericManagerHeader], [generalContainer, tabGenericManagerContainer]);
 });
 
 restoreGeneralSettings();

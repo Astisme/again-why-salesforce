@@ -79,8 +79,6 @@ export function sendExtensionMessage(message, callback) {
 	sendMessage(message, callback);
 }
 export async function getSettings(keys = null){
-    if(keys == null)
-        throw new Error('tbd');
     return await sendExtensionMessage({ what: "get-settings", keys });
 }
 // SETTINGS
@@ -106,9 +104,29 @@ export const TAB_STYLE_ITALIC = "italic";
 export const TAB_STYLE_UNDERLINE = "underline";
 //export const TAB_STYLE_WAVY = "wavy";
 export const TAB_STYLE_TOP = "top";
+export const SLDS_ACTIVE = "slds-is-active";
+const slds_active_class = `.${SLDS_ACTIVE}`;
+const has_org_tab = ":has(.is-org-tab)";
+
+/**
+ * Retrieves saved style settings for the specified key.
+ * @async
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which style settings to fetch.
+ * @returns {Promise<Object|null>} The retrieved style settings or null if none exist.
+ */
 export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY){
     return await sendExtensionMessage({ what: "get-style-settings", key });
 }
+
+/**
+ * Retrieves style settings for both generic and org tabs.
+ *
+ * - Fetches settings for GENERIC_TAB_STYLE_KEY and ORG_TAB_STYLE_KEY.
+ * - Returns null if neither setting exists.
+ * - Otherwise returns an object mapping each key to its settings.
+ * @async
+ * @returns {Promise<Object<string, any[] | null> | null>} Object with style arrays for each key, or null.
+ */
 export async function getAllStyleSettings(){
     const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
     const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
@@ -119,13 +137,27 @@ export async function getAllStyleSettings(){
     result[ORG_TAB_STYLE_KEY] = orgStyles;
     return result;
 }
-export const SLDS_ACTIVE = "slds-is-active";
-const slds_active_class = `.${SLDS_ACTIVE}`;
-const has_org_tab = ":has(.is-org-tab)";
+
+/**
+ * Constructs a CSS selector string based on tab state, type, and optional pseudo-element.
+ *
+ * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
+ * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
+ * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
+ * @returns {string} The constructed CSS selector.
+ */
 export function getCssSelector(isInactive = true, isGeneric = true, pseudoElement = ""){
     return `.${EXTENSION_NAME}${isInactive ? `:not(${slds_active_class})` : slds_active_class}${isGeneric ? `:not(${has_org_tab})` : has_org_tab}${pseudoElement}`;
 }
-export function getCssRule(styleId, value){
+
+/**
+ * Returns a CSS rule string based on the given style ID and optional value.
+ *
+ * @param {string} styleId - Identifier for the style to generate.
+ * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
+ * @returns {string} The corresponding CSS rule or an empty string if invalid.
+ */
+export function getCssRule(styleId, value = null){
     switch (styleId) {
         case TAB_STYLE_BACKGROUND:
         case TAB_STYLE_HOVER:
@@ -146,6 +178,7 @@ export function getCssRule(styleId, value){
         //case TAB_STYLE_WAVY:
             //return "text-decoration: underline wavy;";
         default:
-            break;
+            console.error(styleId);
+            return "";
     }
 }
