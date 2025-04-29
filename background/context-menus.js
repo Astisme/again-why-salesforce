@@ -4,11 +4,12 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
+    USER_LANGUAGE,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
-import { bg_getSalesforceLanguage } from "./background.js";
+import { bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
 
 let translator = null;
 
@@ -142,7 +143,11 @@ async function createMenuItems() {
         translator = await ensureTranslatorAvailability();
     areMenuItemsVisible = true;
 	try {
-        await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+        // load the user picked language
+        if(!await translator.loadNewLanguage((await bg_getSettings(USER_LANGUAGE))?.enabled)){
+            // load the language in which salesforce is currently set
+            await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+        }
         const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
             item.title = await translator.translate(item.title);

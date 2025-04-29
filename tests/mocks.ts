@@ -3,6 +3,7 @@ import Tab from "/tab.js";
 const WHY_KEY = "againWhySalesforce";
 const LOCALE_KEY = "_locale";
 const SETTINGS_KEY = "settings";
+const USER_LANGUAGE = "picked-language";
 
 export interface MockStorage {
 	tabs: Tab[];
@@ -19,6 +20,7 @@ export interface InternalMessage {
 	url?: string;
 	set?: any;
     key?: string;
+    keys?: string|string[];
 }
 
 let language = "fr";
@@ -58,6 +60,7 @@ export const mockBrowser = {
 		): Promise<any> => {
 			// Clear any previous errors
 			delete (chrome.runtime as any).lastError;
+            const setError = (message: string) => (chrome.runtime as any).lastError = message;
 
 			let response: any;
 			switch (message.what) {
@@ -65,7 +68,7 @@ export const mockBrowser = {
 					if (message.key != null) {
                         response = mockStorage[message.key];
 					} else {
-						(chrome.runtime as any).lastError = "Missing get key";
+						setError("Missing get key");
 					}
 					break;
 				case "set":
@@ -73,20 +76,32 @@ export const mockBrowser = {
 						mockStorage[message.key] = message.set;
 						response = true;
 					} else {
-						(chrome.runtime as any).lastError = "Set data is missing";
+                        setError("Set data is missing");
 					}
 					break;
-				case "get-language":
+				//case "get-language":
 				case "get-sf-language":
 					response = language;
 					break;
+                case "get-settings":
+                    switch (message.keys) {
+                        case USER_LANGUAGE:
+                            response = language;                            
+                            break;
+                        default:
+                            setError(`Unknown message keys for ${message.what}: ${message.keys}`);
+                            break;
+                    }
+                    break;
 				default:
-					(chrome.runtime as any).lastError = `Unknown message type ${message.what}`;
+                    setError(`Unknown message type ${message.what}`);
+                    break;
 			}
-
 			if (callback) {
 				callback(response);
-			} else return response;
+                return;
+			}
+            return response;
 		},
         getURL: (path: String): String => {
             return path;

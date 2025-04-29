@@ -183,3 +183,5 @@ export function getCssRule(styleId, value = null){
             return "";
     }
 }
+export const USER_LANGUAGE = "picked-language";
+export const FOLLOW_SF_LANG = "follow-sf-lang";

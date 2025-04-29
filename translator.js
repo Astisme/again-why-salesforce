@@ -1,7 +1,10 @@
 import { 
     BROWSER,
     LOCALE_KEY,
+    USER_LANGUAGE,
+    FOLLOW_SF_LANG,
     sendExtensionMessage,
+    getStyleSettings,
 } from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
 let singleton = null;
@@ -11,11 +14,11 @@ let singleton = null;
  * Uses language-specific caches to improve performance.
  */
 class TranslationService {
-	static DEFAULT_LANGUAGE = "en";
+	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_ELEMENT_ATTRIBUTE = "data-i18n";
     static TRANSLATE_SEPARATOR = "+-+";
 	/** @type {string} Current language code */
-	currentLanguage = TranslationService.DEFAULT_LANGUAGE;
+	currentLanguage = TranslationService.FALLBACK_LANGUAGE;
 	/** @type {Object.<string, Object.<string, string>>} Cache organized by language */
 	caches = {};
 
@@ -32,18 +35,25 @@ class TranslationService {
 	}
 
     async loadNewLanguage(language = null){
-        if(language != null && language != this.currentLanguage)
-            await this.loadLanguageFile(language);
+        if(language == null || language == this.currentLanguage || language === FOLLOW_SF_LANG)
+            return false;
+        await this.loadLanguageFile(language);
+        return true;
     }
 
-    async loadSalesforceLanguage(){
-        const sfLanguage = await sendExtensionMessage({what: "get-sf-language"});
-        await this.loadNewLanguage(sfLanguage);
+    async loadLanguageFromMessage(message){
+        const lang = await sendExtensionMessage(message);
+        if(lang?.enabled === FOLLOW_SF_LANG)
+            return false;
+        return await this.loadNewLanguage(lang?.enabled ?? lang);
     }
 
-    async loadSavedLanguage(){
-        const savedLanguage = await sendExtensionMessage({what: "get-language"});
-        await this.loadNewLanguage(savedLanguage);
+    async loadLanguageBackground(){
+        // load the user picked language
+        if(!await singleton.loadLanguageFromMessage({what: "get-settings", keys: USER_LANGUAGE})){
+            // load the language in which salesforce is currently set
+            await singleton.loadLanguageFromMessage({what: "get-sf-language"});
+        }
     }
 
 	/**
@@ -51,16 +61,14 @@ class TranslationService {
 	 */
 	static async create() {
 		if (singleton != null) {
-            await singleton.loadSalesforceLanguage();
+            await singleton.loadLanguageBackground();
 			return singleton;
 		}
 		singleton = new TranslationService(_translationSecret);
         // load the default language for fallback cases
-        await singleton.loadLanguageFile(TranslationService.DEFAULT_LANGUAGE);
-        // load the user picked language
-        await singleton.loadSavedLanguage();
-        // load the language in which salesforce is currently set
-        await singleton.loadSalesforceLanguage();
+        await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
+        // load translations for user picked language or salesforce language
+        await singleton.loadLanguageBackground();
         await singleton.updatePageTranslations();
         singleton.setListenerForLanguageChange();
 		return singleton;
@@ -91,8 +99,8 @@ class TranslationService {
             if(index > 0)
                 this.loadLanguageFile(language.substring(0, index));
             else {
-                this.currentLanguage = TranslationService.DEFAULT_LANGUAGE;
-                return this.caches[TranslationService.DEFAULT_LANGUAGE];
+                this.currentLanguage = TranslationService.FALLBACK_LANGUAGE;
+                return this.caches[TranslationService.FALLBACK_LANGUAGE];
             }
 		}
 	}
@@ -125,7 +133,7 @@ class TranslationService {
 		// Get translation or fallback to region agnostic or fallback to default language
 		const translation = loadedLanguage?.[key]?.message ??
             regionAgnosticLanguage?.[key]?.message ??
-			this.caches[TranslationService.DEFAULT_LANGUAGE]?.[key]?.message;
+			this.caches[TranslationService.FALLBACK_LANGUAGE]?.[key]?.message;
         if(translation == null){
             let errorMsg =  "Key not found anywhere";
             if(isError === false)
@@ -163,8 +171,8 @@ class TranslationService {
 
     setListenerForLanguageChange(){
         BROWSER.storage.onChanged.addListener((changes) => {
-          if (changes[LOCALE_KEY] != null) {
-            this.updatePageTranslations(changes[LOCALE_KEY].newValue);
+          if(changes[USER_LANGUAGE] != null) {
+            this.updatePageTranslations(changes[USER_LANGUAGE].newValue);
           }
         });
     }

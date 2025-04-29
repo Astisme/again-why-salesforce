@@ -23,6 +23,7 @@ import {
     TAB_STYLE_TOP,
     SLDS_ACTIVE,
     EXTENSION_NAME,
+    USER_LANGUAGE,
     sendExtensionMessage,
     getSettings,
     getStyleSettings,
@@ -57,6 +58,7 @@ const popup_open_login_el           = document.getElementById(POPUP_OPEN_LOGIN);
 const popup_open_setup_el           = document.getElementById(POPUP_OPEN_SETUP);
 const popup_login_new_tab_el        = document.getElementById(POPUP_LOGIN_NEW_TAB);
 const popup_setup_new_tab_el        = document.getElementById(POPUP_SETUP_NEW_TAB);
+const user_language_select = document.getElementById(USER_LANGUAGE);
 
 const generalContainer              = document.getElementById("general-container");
 const generalHeader                 = document.getElementById("general-settings");
@@ -552,6 +554,9 @@ function setCurrentChoice(setting) {
                 ? setting.value.forEach(set => setPreviewAndInputValue(set, isGeneric))
                 : setPreviewAndInputValue(setting.value, isGeneric);
             break;
+        case USER_LANGUAGE:
+            user_language_select.value = setting.enabled;
+            break;
         default:
             console.error(`Unmatched setting id: ${setting.id}`);
             break;
@@ -576,7 +581,7 @@ let generalSettingsListenersSet = false;
 async function restoreGeneralSettings() {
     if(generalSettingsListenersSet)
         return;
-    const settings = await getSettings(allCheckboxes.map(el => el.id));
+    const settings = await getSettings();
     if(settings != null)
         settings instanceof Array ? settings.forEach(set => setCurrentChoice(set)) : setCurrentChoice(settings);
     allCheckboxes.forEach(el => {
@@ -594,6 +599,16 @@ async function restoreGeneralSettings() {
         if(!e.target.checked)
             link_new_browser_el.checked = false;
         saveCheckboxOptions(e, link_new_browser_el);
+    });
+    user_language_select.addEventListener("change", e => {
+        sendExtensionMessage({
+            what: "set",
+            key: SETTINGS_KEY,
+            set: [{
+                id: USER_LANGUAGE,
+                enabled: e.target.value,
+            }]
+        });
     });
     generalSettingsListenersSet = true;
 }

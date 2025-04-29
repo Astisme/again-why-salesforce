@@ -11,6 +11,7 @@ import {
     MY_SALESFORCE_SETUP_COM,
     GENERIC_TAB_STYLE_KEY,
     ORG_TAB_STYLE_KEY,
+    USER_LANGUAGE,
 } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
@@ -51,7 +52,7 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 	getFromStorage(callback);
 }
 
-async function bg_getSettings(settingKeys = null, key = SETTINGS_KEY, callback = null){
+export async function bg_getSettings(settingKeys = null, key = SETTINGS_KEY, callback = null){
     const settings = await bg_getStorage(null, key);
     if(settingKeys == null || settings == null){
         if(callback == null)
@@ -164,11 +165,9 @@ async function getCurrentUserInfo(currentUrl){
     }
 }
 
-export async function bg_getSalesforceLanguage(callback){
+export async function bg_getSalesforceLanguage(callback = () => {}){
     const currentUrl = (await bg_getCurrentBrowserTab())?.url;
     const language = (await getCurrentUserInfo(currentUrl))?.language;
-    if(callback == null)
-        return language;
     if(language != null)
         bg_setStorage(language, callback, LOCALE_KEY);
     else
@@ -217,9 +216,11 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
         case "get-sf-language":
             bg_getSalesforceLanguage(sendResponse);
             break;
+            /*
         case "get-language":
-            bg_getStorage(sendResponse, LOCALE_KEY);
+            bg_getSettings(USER_LANGUAGE, undefined, sendResponse);
             break;
+            */
         case "get-settings":
             bg_getSettings(request.keys, undefined, sendResponse);
             break;
