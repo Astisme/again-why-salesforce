@@ -7,6 +7,7 @@ import {
   SALESFORCE_URL_PATTERN,
     LINK_NEW_BROWSER,
     USE_LIGHTNING_NAVIGATION,
+    TAB_ON_LEFT,
     getSettings,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -200,6 +201,7 @@ async function init(tabs = null) {
 		});
 	}
 	isOnSavedTab();
+    checkKeepTabsOnLeft();
 	await showFavouriteButton();
 }
 
@@ -248,6 +250,18 @@ function onHrefUpdate() {
 	isOnSavedTab(true, afterHrefUpdate);
 }
 
+async function checkKeepTabsOnLeft(){
+    const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
+    console.log('left?',keep_tabs_on_left)
+    if(keep_tabs_on_left == null || !keep_tabs_on_left.enabled){
+        // move setupTabUl after ObjectManager
+        setupTabUl.parentElement.insertAdjacentElement('beforeend',setupTabUl);
+    } else {
+        // move setupTabUl before Home
+        setupTabUl.parentElement.insertAdjacentElement('afterbegin',setupTabUl);
+    }
+}
+
 /**
  * Attempts to find and set up the tab elements, retrying up to 5 times if the necessary elements are not found.
  * - If the setup tab elements are not found within 5 attempts, it logs an error and retries after 5 seconds.
@@ -268,8 +282,7 @@ async function delayLoadSetupTabs(count = 0) {
 	if (setupTabUl == null) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
 	}
-    // move setupTabUl after ObjectManager
-    setupTabUl.parentElement.insertAdjacentElement('beforeend',setupTabUl);
+    checkKeepTabsOnLeft();
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
 	new MutationObserver(() => setTimeout(onHrefUpdate, 500))
