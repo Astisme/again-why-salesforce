@@ -260,7 +260,7 @@ export function generateRowTemplate(
 export async function generateSldsToastMessage(message, isSuccess, isWarning) {
     const translator = await ensureTranslatorAvailability();
 	if (
-		message == null || message === "" | isSuccess == null ||
+		message == null || message === "" || isSuccess == null ||
 		isWarning == null
 	) {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
