@@ -24,6 +24,7 @@ import {
     SLDS_ACTIVE,
     EXTENSION_NAME,
     USER_LANGUAGE,
+    TAB_ON_LEFT,
     sendExtensionMessage,
     getSettings,
     getStyleSettings,
@@ -58,7 +59,8 @@ const popup_open_login_el           = document.getElementById(POPUP_OPEN_LOGIN);
 const popup_open_setup_el           = document.getElementById(POPUP_OPEN_SETUP);
 const popup_login_new_tab_el        = document.getElementById(POPUP_LOGIN_NEW_TAB);
 const popup_setup_new_tab_el        = document.getElementById(POPUP_SETUP_NEW_TAB);
-const user_language_select = document.getElementById(USER_LANGUAGE);
+const tab_on_left_el                = document.getElementById(TAB_ON_LEFT);
+const user_language_select          = document.getElementById(USER_LANGUAGE);
 
 const generalContainer              = document.getElementById("general-container");
 const generalHeader                 = document.getElementById("general-settings");
@@ -547,15 +549,18 @@ function setCurrentChoice(setting) {
         case POPUP_SETUP_NEW_TAB:
             popup_setup_new_tab_el.checked = setting.enabled;
             break;
+        case TAB_ON_LEFT:
+            tab_on_left_el.checked = setting.enabled;
+            break;
+        case USER_LANGUAGE:
+            user_language_select.value = setting.enabled;
+            break;
         case GENERIC_TAB_STYLE_KEY:
         case ORG_TAB_STYLE_KEY:
             const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
             setting.value instanceof Array
                 ? setting.value.forEach(set => setPreviewAndInputValue(set, isGeneric))
                 : setPreviewAndInputValue(setting.value, isGeneric);
-            break;
-        case USER_LANGUAGE:
-            user_language_select.value = setting.enabled;
             break;
         default:
             console.error(`Unmatched setting id: ${setting.id}`);
@@ -571,6 +576,7 @@ const allCheckboxes = [
     popup_open_setup_el,
     popup_login_new_tab_el,
     popup_setup_new_tab_el,
+    tab_on_left_el,
 ];
 
 let generalSettingsListenersSet = false;

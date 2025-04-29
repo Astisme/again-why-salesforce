@@ -185,3 +185,4 @@ export function getCssRule(styleId, value = null){
 }
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";
+export const TAB_ON_LEFT = "tab_position_left";
