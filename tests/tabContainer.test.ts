@@ -178,7 +178,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 					url: "unique-url2",
 				}),
 			Error,
-			`This tab already exists`, //: {"label":"New Tab","url":"unique-url2"}`
+			"error_duplicate_tab",
 		);
 	});
 });
@@ -673,7 +673,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getTabsByOrg(),
 			Error,
-			"Cannot get Tabs if Org is not specified.",
+			"error_get_with_no_org",
 		);
 		assertEquals(container.getTabsByOrg("not-present").length, 0);
 		assertEquals(container.getTabsByOrg("test-org").length, 1);
@@ -702,12 +702,92 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.getTabsByData({ org: "not-present" }).length, 0);
 		assertEquals(container.getTabsByData({ org: "test-org" }).length, 1);
 		assertEquals(container.getTabsByData({ org: "test-org1" }).length, 2);
+		assertEquals(container.getTabsByData({ org: "not-present" }, false).length, 4);
+		assertEquals(container.getTabsByData({ org: "test-org" }, false).length, 3);
+		assertEquals(container.getTabsByData({ org: "test-org1" }, false).length, 2);
 
 		assertEquals(container.getTabsByData({ label: "Org Tab" }).length, 1);
 		assertEquals(container.getTabsByData({ url: "urll" }).length, 3);
 		assertEquals(
 			container.getTabsByData({ org: "test-org1", url: "urll" }).length,
 			2,
+		);
+		assertEquals(container.getTabsByData({ label: "Org Tab" }, false).length, 7);
+		assertEquals(container.getTabsByData({ url: "urll" }, false).length, 5);
+		assertEquals(
+			container.getTabsByData({ org: "test-org1", url: "urll" }, false).length,
+			6,
+		);
+		assertEquals(container.length, 8);
+	});
+
+	await t.step("getSingleTabByData", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+		assert(
+			await container.addTabs([
+				{ label: "Org Tab", url: "url", org: "test-org" },
+				{ label: "Normal Tab", url: "normal-url" },
+				{ label: "Org Tab2", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "urll", org: "test-org2" },
+			]),
+		);
+		assertEquals(container.length, 8);
+		// equal to getTabsByOrg
+		assertThrows(
+            () => container.getSingleTabByData({ org: "not-present" }),
+            Error,
+            "Could not find Tab.",
+        );
+		assertEquals(container.getSingleTabByData({ org: "test-org" }).org, "test-org");
+		assertThrows(
+            () => container.getSingleTabByData({ org: "test-org1" }),
+            Error,
+            "Could not discriminate Tab.",
+        );
+		assertThrows(
+            () => container.getSingleTabByData({ org: "not-present" }, false),
+            Error,
+            "Could not discriminate Tab.",
+        );
+		assertThrows(
+            () => container.getSingleTabByData({ org: "test-org" }, false),
+            Error,
+            "Could not discriminate Tab.",
+        );
+		assertThrows(
+            () => container.getSingleTabByData({ org: "test-org1" }, false),
+            Error,
+            "Could not discriminate Tab.",
+        );
+        // equal to getTabsByData
+		assertEquals(container.getSingleTabByData({ label: "Org Tab" }).label, "Org Tab");
+		assertThrows(
+            () => container.getSingleTabByData({ url: "urll" }),
+            Error,
+            "Could not discriminate Tab.",
+        );
+		assertThrows(
+			() => container.getSingleTabByData({ org: "test-org1", url: "urll" }),
+			Error,
+            "Could not discriminate Tab.",
+		);
+		assertThrows(
+            () => container.getSingleTabByData({ label: "Org Tab" }, false),
+            Error,
+            "Could not discriminate Tab.",
+        );
+		assertThrows(
+            () => container.getSingleTabByData({ url: "urll" }, false),
+            Error,
+            "Could not discriminate Tab.",
+        );
+		assertThrows(
+			() => container.getSingleTabByData({ org: "test-org1", url: "urll" }, false),
+			Error,
+            "Could not discriminate Tab.",
 		);
 		assertEquals(container.length, 8);
 	});
@@ -730,12 +810,12 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getTabIndex(),
 			Error,
-			"Cannot find index without data.",
+			"error_no_data",
 		);
 		assertThrows(
 			() => container.getTabIndex({ org: "not-present" }),
 			Error,
-			"Tab was not found.",
+			"error_tab_not_found",
 		);
 		assertEquals(container.getTabIndex({ org: "test-org" }), 3);
 		assertEquals(container.getTabIndex({ org: "test-org1" }), 5);
@@ -945,7 +1025,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 					url: "sync-url2",
 				}),
 			Error,
-			"Invalid array or no array was passed",
+			"error_no_array",
 		);
 		assertEquals(container.length, 0);
 		assertEquals(mockStorage.tabs.length, 1);
@@ -965,7 +1045,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 					url: "sync-url2",
 				}),
 			Error,
-			"Invalid array or no array was passed",
+			"error_no_array",
 		);
 
 		const arr = [];

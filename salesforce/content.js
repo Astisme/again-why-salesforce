@@ -1,10 +1,16 @@
 "use strict";
 import {
+  BROWSER,
 	EXTENSION_LABEL,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	SETUP_LIGHTNING,
+  SALESFORCE_URL_PATTERN,
 } from "/constants.js";
+import { ensureTranslatorAvailability } from "/translator.js";
+import Tab from "/tab.js";
+import TabContainer from "/tabContainer.js";
+
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import { setupDrag } from "/dragHandler.js";
 import {
@@ -12,10 +18,8 @@ import {
 	generateRowTemplate,
 	generateSldsToastMessage,
 	MODAL_ID,
+    generateUpdateTabModal,
 } from "./generator.js";
-import { SALESFORCE_URL_PATTERN } from "../constants.js";
-import Tab from "/tab.js";
-import TabContainer from "/tabContainer.js";
 
 let allTabs;
 async function getAllTabs_async() {
@@ -76,7 +80,7 @@ let fromHrefUpdate = false;
 // add lightning-navigation to the page in order to use it
 {
 	const script = document.createElement("script");
-	script.src = chrome.runtime.getURL("salesforce/lightning-navigation.js");
+	script.src = BROWSER.runtime.getURL("salesforce/lightning-navigation.js");
 	(document.head || document.documentElement).appendChild(script);
 }
 
@@ -93,7 +97,7 @@ function sf_afterSet(what = null, tabs = null) {
 		return;
 	}
 	if (what == null || what === "saved") {
-		showToast(`"${EXTENSION_LABEL}" tabs saved.`);
+		showToast(["extension_label", "tabs_saved"]);
 	}
 	reloadTabs(tabs);
 }
@@ -107,7 +111,7 @@ function sf_afterSet(what = null, tabs = null) {
  * @param {boolean} [isSuccess=true] - Indicates if the message is a success. Defaults to `true`.
  * @param {boolean} [isWarning=false] - Indicates if the message is a warning. Defaults to `false`.
  */
-export function showToast(message, isSuccess = true, isWarning = false) {
+export async function showToast(message, isSuccess = true, isWarning = false) {
 	/**
 	 * Calculates the estimated time (in milliseconds) it takes to read a given message.
 	 *
@@ -124,15 +128,15 @@ export function showToast(message, isSuccess = true, isWarning = false) {
 	const hanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
-	const toastElement = generateSldsToastMessage(
-		message,
+	const toastElement = await generateSldsToastMessage(
+		message instanceof Array ? message : [message],
 		isSuccess,
 		isWarning,
 	);
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
 		hanger.removeChild(document.getElementById(toastElement.id));
-	}, calculateReadingTime(message));
+	}, calculateReadingTime(toastElement.textContent));
 	if (isSuccess) {
 		if (isWarning) {
 			console.info(message);
@@ -245,9 +249,12 @@ function onHrefUpdate() {
  *
  * @param {number} [count=0] - The number of retry attempts made so far. Defaults to 0.
  */
-function delayLoadSetupTabs(count = 0) {
+async function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
-		console.error("Why Salesforce - failed to find setup tab.");
+        const translator = await ensureTranslatorAvailability();
+        const label = await translator.translate("extension_label");
+        const fail = await translator.translate("error_no_setup_tab");
+		console.error(`${label} - ${fail}`);
 		return setTimeout(delayLoadSetupTabs(), 5000);
 	}
 	setupTabUl = document.querySelector("ul.pinnedItems.slds-grid") ??
@@ -420,22 +427,24 @@ export function getModalHanger() {
  */
 async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("Close the other modal first!", false);
+		return showToast("error_close_other_modal", false);
 	}
 	if (Tab.containsSalesforceId(url)) {
 		showToast(
-			"This page could not exist in another Org, because it contains an Id!",
+			"error_link_with_id",
 			false,
 			true,
 		);
 	}
 	allTabs = await ensureAllTabsAvailability();
+    const translator = await ensureTranslatorAvailability();
+    const whereTo = await translator.translate("where_to");
 	const { modalParent, saveButton, closeButton, inputContainer } =
-		generateOpenOtherOrgModal(
+		await generateOpenOtherOrgModal(
 			url, // if the url is "", we may still open the link in another Org without any issue
 			label ??
 				allTabs.getTabsByData({ url })[0]?.label ??
-				"Where to?",
+				whereTo,
 		);
 	getModalHanger().appendChild(modalParent);
 	let lastInput = "";
@@ -453,11 +462,11 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		lastInput = value;
 	});
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
-			return showToast("Insert another org link.", false, true);
+			return showToast(["insert_another", "org_link"], false, true);
 		}
 		let alreadyExtracted = false;
 		const newTarget = Tab.extractOrgName(inputVal);
@@ -468,11 +477,11 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 				SALESFORCE_URL_PATTERN,
 			)
 		) {
-			return showToast(`Please insert a valid Org!\n${newTarget}`, false);
+			return showToast(["insert_valid_org",newTarget], false);
 		}
 		if (newTarget === Tab.extractOrgName(getCurrentHref())) {
 			return showToast(
-				"The inserted Org is the current one!\nPlease insert another Org.",
+				"insert_another_org",
 				false,
 			);
 		}
@@ -481,7 +490,8 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 				!url.startsWith("/") ? SETUP_LIGHTNING : ""
 			}${url}`,
 		);
-		if (confirm(`Are you sure you want to open\n${targetUrl}?`)) {
+        const confirm_msg = await translator.translate(["confirm_another_org", targetUrl]);
+		if (confirm(confirm_msg)) {
 			closeButton.click();
 			open(targetUrl, "_blank");
 		}
@@ -495,7 +505,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
  * - After the action is performed, it triggers the `sf_afterSet` function to finalize the process.
  * - If an error occurs during the action, it logs a warning and displays a toast with the error message.
  *
- * @param {string} action - The action to perform on the tab. Possible values: "move", "remove-this", "remove-other", "add", "remove-no-org-tabs", "remove-all".
+ * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
  */
@@ -507,22 +517,32 @@ export async function performActionOnTabs(action, tab, options) {
 				await allTabs.moveTab(tab, options);
 				break;
 			case "remove-this":
-				await allTabs.remove(tab, options);
+				if(!await allTabs.remove(tab, options))
+                    throw new Error("Error when removing Tab",tab);
 				break;
 			case "remove-other":
-				await allTabs.removeOtherTabs(tab, options);
+				if(!await allTabs.removeOtherTabs(tab, options))
+                    throw new Error("Error when removing other Tabs",tab);
 				break;
 			case "add":
-				await allTabs.addTab(tab);
+				if(!await allTabs.addTab(tab))
+                    throw new Error("Error when adding Tab");
 				break;
 			case "remove-no-org-tabs":
-				await allTabs.replaceTabs();
+				if(!await allTabs.replaceTabs())
+                    throw new Error("Error when removing no org Tabs");
 				break;
 			case "remove-all":
-				await allTabs.replaceTabs([], { removeOrgTabs: true });
+				if(!await allTabs.replaceTabs([], { removeOrgTabs: true }))
+                    throw new Error("Error when removing all Tabs");
 				break;
+            case "toggle-org":
+                await toggleOrg(tab);
+                break;
 			default:
-				return console.error("Did not match any action", action);
+                const translator = await ensureTranslatorAvailability();
+                const noMatch = await translator.translate("no_match");
+				return console.error(noMatch, action);
 		}
 		sf_afterSet();
 	} catch (error) {
@@ -531,107 +551,183 @@ export async function performActionOnTabs(action, tab, options) {
 	}
 }
 
+/**
+ * Retrieves a Tab from the saved ones and either removes the Org value (if it has one) OR sets it as the current Org.
+ * @param {Object} [param0={}] - An Object containing the data used to identify a Tab
+ * @param {string} param0.label - The label of the Tab to find
+ * @param {string} param0.url - The Url of the Tab to find
+ * @throws when it fails to sync the Tabs.
+ */
+async function toggleOrg({label, url} = {}){
+	allTabs = await ensureAllTabsAvailability();
+    const matchingTab = allTabs.getSingleTabByData({ label, url });
+    matchingTab.update({ org: matchingTab.org == null ? getCurrentHref() : "" });
+    if(!await allTabs.syncTabs())
+        throw new Error("Failed to sync");
+}
+
+/**
+ * Shows on-screen a new Modal used for fine updates to a single Tab
+ * @param {Object} [tab={}] - An Object containing the data used to identify a Tab
+ * @param {string} tab.label - The label of the Tab to update
+ * @param {string} tab.url - The Url of the Tab to update
+ * @param {string} tab.org - The Org of the Tab to update
+ */
+async function showModalUpdateTab(tab = {label: null, url: null, org: null}){
+	if (document.getElementById(MODAL_ID) != null) {
+		return showToast("Close the other modal first!", false);
+	}
+    if(tab.label == null && tab.url == null && tab.org == null)
+        throw new Error("Cannot update a Tab with no values");
+	allTabs = await ensureAllTabsAvailability();
+    const matchingTab = allTabs.getSingleTabByData(tab);
+    const { 
+        modalParent,
+        saveButton,
+        closeButton,
+        labelContainer,
+        urlContainer,
+        orgContainer
+    } = await generateUpdateTabModal(matchingTab.label, matchingTab.url, matchingTab.org);
+    getModalHanger().appendChild(modalParent);
+    let lastUrlLength = 0;
+    urlContainer.addEventListener("input", () => {
+        if(urlContainer.value.length - lastUrlLength > 2)
+            urlContainer.value = Tab.minifyURL(urlContainer.value);
+        lastUrlLength = urlContainer.value.length;
+    });
+    let lastOrgLength = 0;
+    orgContainer.addEventListener("input", () => {
+        if(orgContainer.value.length - lastOrgLength > 2)
+            orgContainer.value = Tab.extractOrgName(orgContainer.value);
+        lastOrgLength = orgContainer.value.length;
+    });
+	saveButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        matchingTab.update({
+            label: labelContainer.value !== "" ? labelContainer.value : matchingTab.label,
+            url: urlContainer.value !== "" ? urlContainer.value : matchingTab.url,
+            org: orgContainer.value,
+        });
+        if(!await allTabs.syncTabs())
+            throw new Error("Failed to sync");
+        sf_afterSet();
+        closeButton.click();
+    });
+}
+
 // listen from saves from the action / background page
-chrome.runtime.onMessage.addListener(async (message, _, sendResponse) => {
+BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 	if (message == null || message.what == null) {
 		return;
 	}
 	sendResponse(null);
 	allTabs = await ensureAllTabsAvailability();
-	switch (message.what) {
-		case "saved":
-		case "focused":
-		case "startup":
-		case "installed":
-		case "activate":
-		case "highlighted":
-		case "focuschanged":
-			sf_afterSet(message.what, message.tabs);
-			break;
-		case "warning":
-			showToast(message.message, false, true);
-			if (message.action === "make-bold") {
-				makeDuplicatesBold(message.url);
-			}
-			break;
-		case "error":
-			showToast(message.message, false);
-			break;
-			// context-menus
-		case "open-other-org": {
-			const label = message.linkTabLabel;
-			const url = message.linkTabUrl ?? message.pageTabUrl;
-			showModalOpenOtherOrg({ label, url });
-			break;
-		}
-		case "move-first":
-			await performActionOnTabs("move", {
-				label: message.label,
-				url: message.tabUrl,
-			}, { moveBefore: true, fullMovement: true });
-			break;
-		case "move-left":
-			await performActionOnTabs("move", {
-				label: message.label,
-				url: message.tabUrl,
-			}, { moveBefore: true, fullMovement: false });
-			break;
-		case "move-right":
-			await performActionOnTabs("move", {
-				label: message.label,
-				url: message.tabUrl,
-			}, { moveBefore: false, fullMovement: false });
-			break;
-		case "move-last":
-			await performActionOnTabs("move", {
-				label: message.label,
-				url: message.tabUrl,
-			}, { moveBefore: false, fullMovement: true });
-			break;
-		case "remove-tab":
-			await performActionOnTabs("remove-this", {
-				label: message.label,
-				url: message.tabUrl,
-			});
-			break;
-		case "remove-other-tabs":
-			await performActionOnTabs("remove-other", {
-				label: message.label,
-				url: message.tabUrl,
-			});
-			break;
-		case "remove-left-tabs":
-			await performActionOnTabs("remove-other", {
-				label: message.label,
-				url: message.tabUrl,
-			}, { removeBefore: true });
-			break;
-		case "remove-right-tabs":
-			await performActionOnTabs("remove-other", {
-				label: message.label,
-				url: message.tabUrl,
-			}, { removeBefore: false });
-			break;
-		case "empty-no-org-tabs":
-			await performActionOnTabs("remove-no-org-tabs");
-			break;
-		case "empty-tabs":
-			await performActionOnTabs("remove-all");
-			break;
-		case "page-save-tab":
-			pageActionTab(true);
-			break;
-		case "page-remove-tab":
-			pageActionTab(false);
-			break;
-			/*
-		case "update-org":
-
-			break;
-        */
-		default:
-			break;
-	}
+    try {
+        switch (message.what) {
+            case "saved":
+            case "focused":
+            case "startup":
+            case "installed":
+            case "activate":
+            case "highlighted":
+            case "focuschanged":
+                sf_afterSet(message.what, message.tabs);
+                break;
+            case "warning":
+                showToast(message.message, false, true);
+                if (message.action === "make-bold") {
+                    makeDuplicatesBold(message.url);
+                }
+                break;
+            case "error":
+                showToast(message.message, false);
+                break;
+                // context-menus
+            case "open-other-org": {
+                const label = message.linkTabLabel;
+                const url = message.linkTabUrl ?? message.pageTabUrl;
+                showModalOpenOtherOrg({ label, url });
+                break;
+            }
+            case "move-first":
+                await performActionOnTabs("move", {
+                    label: message.label,
+                    url: message.tabUrl,
+                }, { moveBefore: true, fullMovement: true });
+                break;
+            case "move-left":
+                await performActionOnTabs("move", {
+                    label: message.label,
+                    url: message.tabUrl,
+                }, { moveBefore: true, fullMovement: false });
+                break;
+            case "move-right":
+                await performActionOnTabs("move", {
+                    label: message.label,
+                    url: message.tabUrl,
+                }, { moveBefore: false, fullMovement: false });
+                break;
+            case "move-last":
+                await performActionOnTabs("move", {
+                    label: message.label,
+                    url: message.tabUrl,
+                }, { moveBefore: false, fullMovement: true });
+                break;
+            case "remove-tab":
+                await performActionOnTabs("remove-this", {
+                    label: message.label,
+                    url: message.tabUrl,
+                });
+                break;
+            case "remove-other-tabs":
+                await performActionOnTabs("remove-other", {
+                    label: message.label,
+                    url: message.tabUrl,
+                });
+                break;
+            case "remove-left-tabs":
+                await performActionOnTabs("remove-other", {
+                    label: message.label,
+                    url: message.tabUrl,
+                }, { removeBefore: true });
+                break;
+            case "remove-right-tabs":
+                await performActionOnTabs("remove-other", {
+                    label: message.label,
+                    url: message.tabUrl,
+                }, { removeBefore: false });
+                break;
+            case "empty-no-org-tabs":
+                await performActionOnTabs("remove-no-org-tabs");
+                break;
+            case "empty-tabs":
+                await performActionOnTabs("remove-all");
+                break;
+            case "page-save-tab":
+                pageActionTab(true);
+                break;
+            case "page-remove-tab":
+                pageActionTab(false);
+                break;
+		        case "update-org":
+                await performActionOnTabs("toggle-org", {
+                    label: message.label,
+                    url: message.tabUrl,
+                });
+                break;
+            case "update-tab":
+                    showModalUpdateTab({
+                        label: message.label,
+                        url: message.tabUrl,
+                    });
+                break;
+            default:
+                break;
+        }
+    } catch (error) {
+        showToast(error.message, false);
+    }
 });
 
 // listen to possible updates from other modules

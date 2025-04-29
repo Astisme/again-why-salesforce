@@ -1,0 +1,14 @@
+{
+  "error_missing_favourite_id": {
+    "message": "Cannot get favorite image without the Id",
+    "description": "[error] no favorite id was passed"
+  },
+  "error_remove_not_favourite": {
+    "message": "Cannot remove a non favorite Tab!",
+    "description": "[error] the user tried to remove a Tab which was not saved yet"
+  },
+  "req_permissions_paragraph": {
+    "message": "If you want, you may have your favorite Tabs appear<br />as soon as you navigate to a Salesforce Setup page<br />without having to click this extension every time.",
+    "description": "[req_permission] text to explain why the permissions are being requested"
+  }
+}

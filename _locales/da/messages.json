@@ -1,0 +1,498 @@
+{
+  "allow": {
+    "message": "Tillad",
+    "description": "[req_permission] knap for at tillade tilladelser"
+  },
+  "cancel": {
+    "message": "Annuller",
+    "description": "titel eller tekstindhold for knapper, der forhindrer den aktuelle handling i at blive udført"
+  },
+  "cancel_close": {
+    "message": "Annuller og luk",
+    "description": "titel eller tekstindhold for lukkeknappen på modaler"
+  },
+  "confirm_another_org": {
+    "message": "Bekræft åbning af dette link.",
+    "description": "[open-other-org-modal] anmodning om bekræftelse fra brugeren for at åbne det konstruerede link."
+  },
+  "continue": {
+    "message": "Fortsæt",
+    "description": "tekstindhold for knapper, der muliggør den aktuelle handling"
+  },
+  "cxm_empty_no_org_tabs": {
+    "message": "👀 Alle synlige Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_empty_tabs": {
+    "message": "😨 Nulstil til standard",
+    "description": "[context-menu]"
+  },
+  "cxm_export_tabs": {
+    "message": "⬇️ Eksporter Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_import_tabs": {
+    "message": "🆙 Importer Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move": {
+    "message": "🧭 Flyt Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move_first": {
+    "message": "↩️ Gør til første",
+    "description": "[context-menu]"
+  },
+  "cxm_move_last": {
+    "message": "↪️ Gør til sidste",
+    "description": "[context-menu]"
+  },
+  "cxm_move_left": {
+    "message": "👈 Flyt til venstre",
+    "description": "[context-menu]"
+  },
+  "cxm_move_right": {
+    "message": "👉 Flyt til højre",
+    "description": "[context-menu]"
+  },
+  "cxm_open_other_org": {
+    "message": "🔗 Åbn i en anden Organisation",
+    "description": "[context-menu]"
+  },
+  "cxm_page_remove_tab": {
+    "message": "👋 Fjern Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_page_save_tab": {
+    "message": "💾 Gem som Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove": {
+    "message": "💥 Fjern Tab(s)",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_left_tabs": {
+    "message": "🔥 Tab til venstre",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_other_tabs": {
+    "message": "↔️ Andre Tabs",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_right_tabs": {
+    "message": "🌊 Tab til højre",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_tab": {
+    "message": "1️⃣ Denne Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update": {
+    "message": "✏️ Opdater Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 Skift Organisation",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 Andre opdateringer",
+    "description": "[context-menu]"
+  },
+  "delete": {
+    "message": "Slet",
+    "description": "[popup] slet en række"
+  },
+  "delete_all": {
+    "message": "Slet alle Tabs",
+    "description": "[popup] titel på papirkurven for at tømme alle Tabs"
+  },
+  "error_close_other_modal": {
+    "message": "Luk det andet modal først!",
+    "description": "[toast] Brugeren forsøgte at åbne mere end et modal vindue"
+  },
+  "error_cxm_check": {
+    "message": "Fejl ved kontrol af menupunkter",
+    "description": "[error] kontekstmenuens elementer blev ikke fundet"
+  },
+  "error_cxm_create": {
+    "message": "Fejl ved oprettelse af menupunkter",
+    "description": "[error] kontekstmenuens elementer kunne ikke initialiseres"
+  },
+  "error_cxm_remove": {
+    "message": "Fejl ved fjernelse af menupunkter",
+    "description": "[error] kontekstmenuens elementer kunne ikke fjernes"
+  },
+  "error_duplicate_tab": {
+    "message": "Denne Tab findes allerede",
+    "description": "[error] Tabben er en dublet"
+  },
+  "error_expand_url": {
+    "message": "Kan ikke udvide en tom URL!",
+    "description": "[error] der blev ikke angivet en URL til udvidelse"
+  },
+  "error_expand_url_no_base": {
+    "message": "Kan ikke udvide en URL uden dens vært!",
+    "description": "[error] der blev ikke angivet en basis-URL til udvidelse"
+  },
+  "error_extract_empty_url": {
+    "message": "Kan ikke udtrække organisationsnavn fra en tom URL!",
+    "description": "[error] der blev ikke angivet en URL, hvorfra organisationsnavnet skal udtrækkes"
+  },
+  "error_get_with_no_org": {
+    "message": "Kan ikke hente Tabs, hvis organisation ikke er specificeret.",
+    "description": "[error] forsøg på at søge efter Tabs uden at sende organisationsinformation"
+  },
+  "error_import": {
+    "message": "Fejl ved import:\n",
+    "description": "[error] der opstod en fejl under importprocessen"
+  },
+  "error_invalid_tab": {
+    "message": "Ugyldig Tab",
+    "description": "[error] Tabben er ikke gyldig"
+  },
+  "error_link_with_id": {
+    "message": "Denne side kan ikke eksistere i en anden Organisation, fordi den indeholder et Id!",
+    "description": "[open-other-org-modal] advarsel til brugeren om, at linket muligvis ikke findes i en anden organisation"
+  },
+  "error_many_matching_tab": {
+    "message": "Der blev fundet mere end 1 matchende Tab.",
+    "description": "[error] der blev returneret for mange Tabs"
+  },
+  "error_minify_url": {
+    "message": "Kan ikke minimere en tom URL!",
+    "description": "[error] der blev ikke angivet en URL til minimering"
+  },
+  "error_missing_favourite_id": {
+    "message": "Kan ikke hente favoritbillede uden Id",
+    "description": "[error] der blev ikke angivet et id for favoritbilledet"
+  },
+  "error_missing_key": {
+    "message": "Nøgle ikke fundet overhovedet",
+    "description": "[error] ingen oversættelse blev fundet i filerne"
+  },
+  "error_no_array": {
+    "message": "Ugyldig array eller ingen array blev angivet",
+    "description": "[error] der blev ikke modtaget et gyldigt array"
+  },
+  "error_no_browser_tab": {
+    "message": "Kunne ikke finde en aktiv browserfane.",
+    "description": "[error] baggrundssiden kunne ikke identificere en aktiv browserfane"
+  },
+  "error_no_callback": {
+    "message": "Angiv venligst en callback-funktion",
+    "description": "[error] der blev ikke angivet en funktion at kalde i slutningen af metoden"
+  },
+  "error_no_cookies": {
+    "message": "Matchende cookies blev ikke fundet",
+    "description": "[error] Salesforce-cookies blev ikke returneret"
+  },
+  "error_no_data": {
+    "message": "Kan ikke identificere en Tab uden data.",
+    "description": "[error] forsøg på at hente en Tab uden at sende data"
+  },
+  "error_no_headers": {
+    "message": "Kunne ikke finde overskrifter.",
+    "description": "[error] udvidelsen kunne ikke finde, hvor den skulle placere favoritknappen"
+  },
+  "error_no_matching_tab": {
+    "message": "Ingen matchende Tabs blev fundet.",
+    "description": "[error] der blev ikke returneret nogen matchende Tabs"
+  },
+  "error_no_message": {
+    "message": "Ingen besked er specificeret til afsendelse.",
+    "description": "[error] der blev ikke fundet nogen besked til afsendelse til andre dele af koden"
+  },
+  "error_no_object": {
+    "message": "Intet objekt blev angivet til kontrol!",
+    "description": "[error] intet objekt blev angivet til kontrol"
+  },
+  "error_no_setup_tab": {
+    "message": "Setup Tab blev ikke fundet.",
+    "description": "[error] udvidelsen kunne ikke finde, hvor den skulle placere de gemte Tabs"
+  },
+  "error_no_url": {
+    "message": "Ingen URL blev angivet til kontrol!",
+    "description": "[error] der blev ikke angivet en URL til kontrol"
+  },
+  "error_remove_not_favourite": {
+    "message": "Kan ikke fjerne en Tab, der ikke er favorit!",
+    "description": "[error] brugeren forsøgte at fjerne en Tab, der endnu ikke var gemt"
+  },
+  "error_sync_nothing": {
+    "message": "Kan ikke synkronisere tomme Tabs!",
+    "description": "[error] der blev forsøgt at synkronisere ingenting"
+  },
+  "error_tab_label": {
+    "message": "Etiketten skal være en ikke-tom streng",
+    "description": "[error] brugeren forsøgte at oprette en Tab uden en etiket"
+  },
+  "error_tab_not_found": {
+    "message": "Tab blev ikke fundet.",
+    "description": "[error] Tab blev ikke inkluderet i array'et"
+  },
+  "error_tab_object_creation": {
+    "message": "Ved kald med et objekt, skal der ikke sendes andet med.",
+    "description": "[error] implementeringsfejl fra udviklers side"
+  },
+  "error_tab_org": {
+    "message": "Organisationen skal være en streng eller undefined",
+    "description": "[error] brugeren forsøgte at oprette en Tab med en ugyldig organisationsværdi"
+  },
+  "error_tab_unexpected_keys": {
+    "message": "Uventede nøgler fundet:",
+    "description": "[error] brugeren forsøgte at oprette en Tab med ikke-understøttede egenskaber"
+  },
+  "error_tab_url": {
+    "message": "URL skal være en ikke-tom streng",
+    "description": "[error] brugeren forsøgte at oprette en Tab uden URL"
+  },
+  "error_tabcont_initialize": {
+    "message": "Kan ikke initialiseres med",
+    "description": ""
+  },
+  "error_tabcont_invalid_tabs": {
+    "message": "Ugyldige Tab(s) fundet.\nFørste forekomst:",
+    "description": "[error] ugyldige Tabs blev modtaget"
+  },
+  "error_useless_remove": {
+    "message": "Kan ikke fjernes:\nDet er ikke muligt at fjerne en side, som ikke er blevet gemt tidligere",
+    "description": "[error] brugeren forsøgte at fjerne en side, der endnu ikke var gemt"
+  },
+  "error_useless_save": {
+    "message": "Kan ikke gemmes:\nDenne side er allerede gemt!",
+    "description": "[error] brugeren forsøgte at gemme en side, der allerede var gemt"
+  },
+  "export": {
+    "message": "Eksporter",
+    "description": "[popup] eksportknap"
+  },
+  "export_title": {
+    "message": "Eksporter alle Tabs",
+    "description": "[popup] titel på eksportknappen"
+  },
+  "extension_description": {
+    "message": "Opret og administrer tilpassede Tabs i det tilgængelige rum på Salesforce Lightning Setup-siden.",
+    "description": "[manifest] Beskrivelse af denne udvidelse"
+  },
+  "extension_label": {
+    "message": "Again, Why Salesforce",
+    "description": "Navnet på denne udvidelse"
+  },
+  "file": {
+    "message": "fil",
+    "description": "en enkelt fil"
+  },
+  "files": {
+    "message": "filer",
+    "description": "flere filer"
+  },
+  "import": {
+    "message": "Importer",
+    "description": "[popup] importknap"
+  },
+  "import_duplicate_description": {
+    "message": "Duplikerede Tabs vil blive ignoreret.<br />To Tabs betragtes som duplikater, hvis de har den samme URL.",
+    "description": "[import] beskrivelse af importprocessen"
+  },
+  "import_invalid_file": {
+    "message": "Ugyldig filtype.\nKun JSON-filer understøttes.",
+    "description": "[error] filen til import er ikke en JSON-fil"
+  },
+  "import_successful": {
+    "message": "Importen lykkedes",
+    "description": "[import] importen er fuldført. Herefter vises antallet af importerede poster"
+  },
+  "import_tabs": {
+    "message": "Importer Tab",
+    "description": "[modal-title] til importprocessen"
+  },
+  "import_title": {
+    "message": "Importer Tab fra json-fil",
+    "description": "[popup] titel på importknappen"
+  },
+  "insert_another": {
+    "message": "Indsæt en anden",
+    "description": "[error-open-other-org-modal] meddelelse når brugeren indtaster samme organisation"
+  },
+  "insert_another_org": {
+    "message": "Den indtastede Organisation er den aktuelle!\nIndtast venligst en anden Organisation.",
+    "description": "[error-open-other-org-modal] meddelelse når brugeren indtaster samme organisation"
+  },
+  "insert_valid_org": {
+    "message": "Indtast venligst en gyldig Organisation!",
+    "description": "[error-open-other-org-modal] meddelelse når brugeren indtaster en forkert URL"
+  },
+  "invalid_url": {
+    "message": "Ugyldig URL",
+    "description": "[notSalesforceSetup] en URL der ikke er gyldig"
+  },
+  "login_to_salesforce": {
+    "message": "Log ind på Salesforce",
+    "description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforces login-side"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "pladsholder til opdatering af Tab-modal"
+  },
+  "no_match": {
+    "message": "Ingen matchende handling fundet",
+    "description": "[error] når switch-sætningen ikke kan matche den anmodede handling"
+  },
+  "nss_detected": {
+    "message": " registreret.",
+    "description": "[notSalesforceSetup] noget er blevet registreret. Sørg for at meddelelsen starter med et mellemrum."
+  },
+  "nss_prefix": {
+    "message": "Dette er ikke en ",
+    "description": "[notSalesforceSetup] præfiks vist når brugeren ikke er på en Salesforce-side."
+  },
+  "open_setup": {
+    "message": "Åbn Setup",
+    "description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
+  },
+  "or_drop": {
+    "message": "Eller træk og slip",
+    "description": "[import] tillader brugeren at trække filer med musen og slippe dem"
+  },
+  "org_link": {
+    "message": "Organisationslink",
+    "description": "[input-label]"
+  },
+  "other_org_info": {
+    "message": "Oplysninger om en anden Organisation",
+    "description": "[modal-title]"
+  },
+  "other_org_placeholder": {
+    "message": "anden-org",
+    "description": "[input-placeholder]"
+  },
+  "overwrite_tabs": {
+    "message": "Overskriv gemte Tabs.",
+    "description": "[label] slet alle gemte Tabs under import"
+  },
+  "preserve_org_tabs": {
+    "message": "Bevar Tabs for andre organisationer.",
+    "description": "[label] behold alle organisationsspecifikke Tabs under import"
+  },
+  "remove_tab": {
+    "message": "Fjern Tab",
+    "description": "[alt] alternativ tekst når billeder ikke vises"
+  },
+  "req_permissions_dont_ask": {
+    "message": "Spørg ikke igen.",
+    "description": "[req_permission] mærkat når brugeren ikke ønsker at give tilladelser permanent"
+  },
+  "req_permissions_header": {
+    "message": "Tillad os venligst at få adgang<br />til Salesforce Setup-sider automatisk.",
+    "description": "[req_permission] overskrift på siden til tilladelsesforespørgsel"
+  },
+  "req_permissions_paragraph": {
+    "message": "Hvis du ønsker det, kan dine favorit Tabs vises<br />så snart du navigerer til en Salesforce Setup-side<br />uden at skulle klikke på denne udvidelse hver gang.",
+    "description": "[req_permission] tekst der forklarer, hvorfor tilladelser kræves"
+  },
+  "required": {
+    "message": "påkrævet",
+    "description": "[input] angiver at et inputfelt er påkrævet"
+  },
+  "required_info": {
+    "message": "= Påkrævet information",
+    "description": "[modal] informerer brugeren om, at visse oplysninger er påkrævede"
+  },
+  "salesforce_lightning": {
+    "message": "Salesforce Lightning",
+    "description": "[notSalesforceSetup] Salesforce Lightning-platformen"
+  },
+  "save_tab": {
+    "message": "Gem som Tab",
+    "description": "[alt] alternativ tekst når billeder ikke vises"
+  },
+  "setup_page": {
+    "message": "Setup-side",
+    "description": "[notSalesforceSetup] siden til ændring af Salesforce-indstillinger"
+  },
+  "skip": {
+    "message": "Spring over",
+    "description": "[req_permission] knap til at afvise at give tilladelser"
+  },
+  "successfully_imported": {
+    "message": "Importen var succesfuld",
+    "description": "[toast] brugeren importerede Tabs fra en ekstern fil med succes"
+  },
+  "tab_explain": {
+    "message": "Hvert element skal have 'label' og 'url' som strenge. Derudover kan hvert element have 'org' som streng.",
+    "description": "[error] forklarer, hvordan en Tab skal konstrueres"
+  },
+  "tab_information": {
+    "message": "Tab-information",
+    "description": "titel for Tab-opdateringsmodalen"
+  },
+  "tab_label": {
+    "message": "Tab-etiket",
+    "description": "Tab'ens Label-egenskab, dens navn"
+  },
+  "tab_org": {
+    "message": "Tab-organisation",
+    "description": "Tab'ens Org-egenskab, hvis den er for en specifik Salesforce-organisation"
+  },
+  "tab_url": {
+    "message": "Tab-URL",
+    "description": "Tab'ens URL-egenskab, hvor den linker hen"
+  },
+  "table_delete": {
+    "message": "Slet Tab",
+    "description": "[popup] hjælpe tekst for kolonnen med slet-knappen"
+  },
+  "table_org": {
+    "message": "Er Tab organisatorisk",
+    "description": "[popup] hjælpe tekst for kolonnen med checkbox for organisation"
+  },
+  "table_row_label": {
+    "message": "Indtast etiketten for denne URL",
+    "description": "[popup] inputfelt for Tab-navn"
+  },
+  "table_row_org": {
+    "message": "Klik, hvis du ønsker at denne Tab kun skal være tilgængelig for denne organisation.",
+    "description": "[popup] checkbox til at skifte Tab til at være organisationsspecifik"
+  },
+  "table_row_org_name": {
+    "message": "Organisationen, for hvilken denne Tab er tilgængelig.",
+    "description": "[popup] inputfelt for organisationsnavn"
+  },
+  "table_row_url": {
+    "message": "Indtast sub_URL, hvor du ønsker at blive omdirigeret.",
+    "description": "[popup] inputfelt for Tab-URL"
+  },
+  "tabs": {
+    "message": "Tabs",
+    "description": "brugerens favorittlinks"
+  },
+  "tabs_saved": {
+    "message": "Tabs gemt.",
+    "description": "[toast] Tabs blev gemt med succes."
+  },
+  "theme_dark": {
+    "message": "Skift tema til mørkt",
+    "description": "[popup] titel for måneikonet for at skifte tema"
+  },
+  "theme_light": {
+    "message": "Skift tema til lyst",
+    "description": "[popup] titel for solikonet for at skifte tema"
+  },
+  "upload": {
+    "message": "Upload",
+    "description": "[import] lader brugeren gennemse deres filer og vælge den rigtige"
+  },
+  "users": {
+    "message": "Brugere",
+    "description": "navnet på siden relateret til ManageUsers/home"
+  },
+  "warn_deprecated_tab_title": {
+    "message": "Du har importeret ved hjælp af den forældede 'tabTitle'!\nDownload af den opdaterede fil er startet.\nFremover bedes du bruge den nye downloadede fil.\nBrugen af denne fil vil blive udfaset i fremtidige opdateringer.",
+    "description": "[warning] informerer brugeren om, at den importerede fil bruger en forældet egenskab"
+  },
+  "where_to": {
+    "message": "Hvorhen?",
+    "description": "[open-other-org-modal] alternativ titel for modal"
+  }
+}

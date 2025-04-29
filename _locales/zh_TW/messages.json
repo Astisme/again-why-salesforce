@@ -1,0 +1,498 @@
+{
+  "allow": {
+    "message": "允許",
+    "description": "[req_permission] 按鈕，用於允許權限"
+  },
+  "cancel": {
+    "message": "取消",
+    "description": "用於防止當前操作執行的按鈕的標題或文字內容"
+  },
+  "cancel_close": {
+    "message": "取消並關閉",
+    "description": "用於模態視窗關閉按鈕的標題或文字內容"
+  },
+  "confirm_another_org": {
+    "message": "確認開啟此連結。",
+    "description": "[open-other-org-modal] 向使用者請求確認以開啟所構建的連結"
+  },
+  "continue": {
+    "message": "繼續",
+    "description": "用於允許當前操作執行的按鈕的文字內容"
+  },
+  "cxm_empty_no_org_tabs": {
+    "message": "👀 所有可見的 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_empty_tabs": {
+    "message": "😨 重設為預設",
+    "description": "[context-menu]"
+  },
+  "cxm_export_tabs": {
+    "message": "⬇️ 匯出 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_import_tabs": {
+    "message": "🆙 匯入 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move": {
+    "message": "🧭 移動 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move_first": {
+    "message": "↩️ 設為第一個",
+    "description": "[context-menu]"
+  },
+  "cxm_move_last": {
+    "message": "↪️ 設為最後一個",
+    "description": "[context-menu]"
+  },
+  "cxm_move_left": {
+    "message": "👈 向左移動",
+    "description": "[context-menu]"
+  },
+  "cxm_move_right": {
+    "message": "👉 向右移動",
+    "description": "[context-menu]"
+  },
+  "cxm_open_other_org": {
+    "message": "🔗 在另一個 Org 中開啟",
+    "description": "[context-menu]"
+  },
+  "cxm_page_remove_tab": {
+    "message": "👋 移除 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_page_save_tab": {
+    "message": "💾 儲存為 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove": {
+    "message": "💥 移除 Tab(s)",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_left_tabs": {
+    "message": "🔥 左側 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_other_tabs": {
+    "message": "↔️ 其它 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_right_tabs": {
+    "message": "🌊 右側 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_tab": {
+    "message": "1️⃣ This Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update": {
+    "message": "✏️ 更新 Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 切換 Org",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 其他更新",
+    "description": "[context-menu]"
+  },
+  "delete": {
+    "message": "刪除",
+    "description": "[popup] 刪除一行"
+  },
+  "delete_all": {
+    "message": "刪除所有 Tab",
+    "description": "[popup] 垃圾桶標題，用於清空所有 Tab"
+  },
+  "error_close_other_modal": {
+    "message": "請先關閉其他模態視窗！",
+    "description": "[toast] 使用者嘗試開啟超過一個模態視窗"
+  },
+  "error_cxm_check": {
+    "message": "檢查選單項目時出錯",
+    "description": "[error] 找不到上下文選單項目"
+  },
+  "error_cxm_create": {
+    "message": "建立選單項目時出錯",
+    "description": "[error] 無法初始化上下文選單項目"
+  },
+  "error_cxm_remove": {
+    "message": "移除選單項目時出錯",
+    "description": "[error] 無法刪除上下文選單項目"
+  },
+  "error_duplicate_tab": {
+    "message": "此 Tab 已存在",
+    "description": "[error] Tab 重複了"
+  },
+  "error_expand_url": {
+    "message": "無法展開空的 URL！",
+    "description": "[error] 未傳入要展開的 URL"
+  },
+  "error_expand_url_no_base": {
+    "message": "無法在沒有主機的情況下展開 URL！",
+    "description": "[error] 未傳入用於展開的基本 URL"
+  },
+  "error_extract_empty_url": {
+    "message": "無法從空的 URL 中提取 Org 名稱！",
+    "description": "[error] 未傳入提取 Org 名稱的 URL"
+  },
+  "error_get_with_no_org": {
+    "message": "若未指定 Org，無法取得 Tab。",
+    "description": "[error] 嘗試在未送出 org 資訊的情況下搜尋 Tab"
+  },
+  "error_import": {
+    "message": "匯入期間發生錯誤:\n",
+    "description": "[error] 匯入過程中出現錯誤"
+  },
+  "error_invalid_tab": {
+    "message": "無效的 Tab",
+    "description": "[error] Tab 不正確"
+  },
+  "error_link_with_id": {
+    "message": "此頁面無法在另一個 Org 中存在，因為其中包含 Id！",
+    "description": "[open-other-org-modal] 警告使用者該連結在另一個 org 中可能不存在"
+  },
+  "error_many_matching_tab": {
+    "message": "找到超過 1 個匹配的 Tab。",
+    "description": "[error] 找到太多 Tab"
+  },
+  "error_minify_url": {
+    "message": "無法壓縮空的 URL！",
+    "description": "[error] 未傳入要縮減的 URL"
+  },
+  "error_missing_favourite_id": {
+    "message": "無法在沒有 Id 的情況下取得最愛圖片",
+    "description": "[error] 未傳入最愛圖片的 id"
+  },
+  "error_missing_key": {
+    "message": "找不到任何地方的鍵",
+    "description": "[error] 檔案中未找到翻譯"
+  },
+  "error_no_array": {
+    "message": "無效的陣列或未傳入陣列",
+    "description": "[error] 未收到有效的陣列"
+  },
+  "error_no_browser_tab": {
+    "message": "找不到目前的瀏覽器分頁。",
+    "description": "[error] 後台頁面無法確定活動的瀏覽器分頁"
+  },
+  "error_no_callback": {
+    "message": "請提供 callback",
+    "description": "[error] 未傳入在方法結束時呼叫的函數"
+  },
+  "error_no_cookies": {
+    "message": "未找到匹配的 cookies",
+    "description": "[error] 未返回 Salesforce cookies"
+  },
+  "error_no_data": {
+    "message": "無法在沒有數據的情況下識別 Tab。",
+    "description": "[error] 嘗試在未傳送數據的情況下取得 Tab"
+  },
+  "error_no_headers": {
+    "message": "找不到標題。",
+    "description": "[error] 擴展無法確定放置最愛按鈕的位置"
+  },
+  "error_no_matching_tab": {
+    "message": "未找到任何匹配的 Tab。",
+    "description": "[error] 未檢索到 Tab"
+  },
+  "error_no_message": {
+    "message": "未指定要發送的消息。",
+    "description": "[error] 未找到要發送到程式碼其他部分的消息"
+  },
+  "error_no_object": {
+    "message": "未傳入可檢查的對象！",
+    "description": "[error] 未傳入對象"
+  },
+  "error_no_setup_tab": {
+    "message": "找不到 Setup Tab。",
+    "description": "[error] 擴展無法確定放置最愛 Tab 的位置"
+  },
+  "error_no_url": {
+    "message": "未傳入要檢查的 URL！",
+    "description": "[error] 未傳入要檢查的 URL"
+  },
+  "error_remove_not_favourite": {
+    "message": "無法刪除非最愛的 Tab！",
+    "description": "[error] 使用者嘗試刪除尚未儲存的 Tab"
+  },
+  "error_sync_nothing": {
+    "message": "無法同步空的 Tab！",
+    "description": "[error] 嘗試同步空的 Tab"
+  },
+  "error_tab_label": {
+    "message": "Label 必須為非空字串",
+    "description": "[error] 使用者嘗試創建沒有 Label 的 Tab"
+  },
+  "error_tab_not_found": {
+    "message": "未找到 Tab。",
+    "description": "[error] Tab 未包含於陣列中"
+  },
+  "error_tab_object_creation": {
+    "message": "呼叫對象時，請勿傳入其他任何內容。",
+    "description": "[error] 開發者實作錯誤"
+  },
+  "error_tab_org": {
+    "message": "Org 必須為字串或 undefined",
+    "description": "[error] 使用者嘗試以無效的 org 值創建 Tab"
+  },
+  "error_tab_unexpected_keys": {
+    "message": "發現意外的鍵：",
+    "description": "[error] 使用者嘗試創建帶有不支援屬性的 Tab"
+  },
+  "error_tab_url": {
+    "message": "URL 必須為非空字串",
+    "description": "[error] 使用者嘗試創建沒有 URL 的 Tab"
+  },
+  "error_tabcont_initialize": {
+    "message": "無法以以下內容初始化",
+    "description": ""
+  },
+  "error_tabcont_invalid_tabs": {
+    "message": "檢測到無效的 Tab(s).\n首次出現：",
+    "description": "[error] 傳入了無效的 Tab"
+  },
+  "error_useless_remove": {
+    "message": "無法移除：\n無法刪除尚未儲存的頁面",
+    "description": "[error] 使用者嘗試移除尚未儲存的頁面"
+  },
+  "error_useless_save": {
+    "message": "無法儲存：\n該頁面已被儲存！",
+    "description": "[error] 使用者嘗試儲存已被儲存的頁面"
+  },
+  "export": {
+    "message": "匯出",
+    "description": "[popup] 匯出按鈕"
+  },
+  "export_title": {
+    "message": "匯出所有 Tab",
+    "description": "[popup] 匯出按鈕的標題"
+  },
+  "extension_description": {
+    "message": "Create and manage custom Tab in the available space on Salesforce Lightning Setup page.",
+    "description": "[manifest] 此擴充功能的描述"
+  },
+  "extension_label": {
+    "message": "Again, Why Salesforce",
+    "description": "此擴充功能的名稱"
+  },
+  "file": {
+    "message": "file",
+    "description": "single file"
+  },
+  "files": {
+    "message": "files",
+    "description": "multiple files"
+  },
+  "import": {
+    "message": "Import",
+    "description": "[popup] 匯入按鈕"
+  },
+  "import_duplicate_description": {
+    "message": "Duplicate Tab will be ignored.<br />Two Tab are considered duplicates if they have the same URL.",
+    "description": "[import] 說明匯入過程會做什麼"
+  },
+  "import_invalid_file": {
+    "message": "Invalid file type.\nOnly JSON files are supported.",
+    "description": "[error] 用於匯入的檔案不是 JSON 格式"
+  },
+  "import_successful": {
+    "message": "Successfully imported",
+    "description": "[import] 匯入已完成，之後會顯示匯入記錄的數量"
+  },
+  "import_tabs": {
+    "message": "Import Tabs",
+    "description": "[modal-title] 匯入過程用的標題"
+  },
+  "import_title": {
+    "message": "Import Tabs from json file",
+    "description": "[popup] 匯入按鈕上的標題"
+  },
+  "insert_another": {
+    "message": "Insert another",
+    "description": "[error-open-other-org-modal] 當使用者在模態窗中輸入相同 Org 時顯示的訊息"
+  },
+  "insert_another_org": {
+    "message": "The inserted Org is the current one!\nPlease insert another Org.",
+    "description": "[error-open-other-org-modal] 當使用者在模態窗中輸入相同 Org 時顯示的訊息"
+  },
+  "insert_valid_org": {
+    "message": "Please insert a valid Org!",
+    "description": "[error-open-other-org-modal] 當使用者在模態窗中輸入錯誤 URL 時顯示的訊息"
+  },
+  "invalid_url": {
+    "message": "Invalid URL",
+    "description": "[notSalesforceSetup] 無效的 URL"
+  },
+  "login_to_salesforce": {
+    "message": "Login to Salesforce",
+    "description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce 登入頁"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "Update Tab 模態窗的佔位符"
+  },
+  "no_match": {
+    "message": "Did not match any action",
+    "description": "[error] 當 Salesforce 中的 switch 無法匹配請求的動作時"
+  },
+  "nss_detected": {
+    "message": " detected.",
+    "description": "[notSalesforceSetup] 有東西被找到。請確保訊息開頭有空格"
+  },
+  "nss_prefix": {
+    "message": "This is not a ",
+    "description": "[notSalesforceSetup] 當使用者不在 Salesforce 頁面時顯示的前綴，請確保末尾有空格"
+  },
+  "open_setup": {
+    "message": "Open Setup",
+    "description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce Setup 頁面"
+  },
+  "or_drop": {
+    "message": "Or drop",
+    "description": "[import] 讓使用者用滑鼠拖拽並釋放檔案"
+  },
+  "org_link": {
+    "message": "Org Link",
+    "description": "[input-label]"
+  },
+  "other_org_info": {
+    "message": "Other Org info",
+    "description": "[modal-title]"
+  },
+  "other_org_placeholder": {
+    "message": "other-org",
+    "description": "[input-placeholder]"
+  },
+  "overwrite_tabs": {
+    "message": "Overwrite saved Tabs.",
+    "description": "[label] 在匯入過程中刪除所有儲存的 Tab"
+  },
+  "preserve_org_tabs": {
+    "message": "Preserve Tabs for other orgs.",
+    "description": "[label] 在匯入過程中保留所有特定於 Org 的 Tab"
+  },
+  "remove_tab": {
+    "message": "Remove Tab",
+    "description": "[alt] 當圖片無法顯示時的替代文字"
+  },
+  "req_permissions_dont_ask": {
+    "message": "Do not ask again.",
+    "description": "[req_permission] 當使用者不希望永久授予權限時的標籤"
+  },
+  "req_permissions_header": {
+    "message": "Please allow us to access<br />Salesforce Setup pages automatically.",
+    "description": "[req_permission] 請求權限頁面的標題"
+  },
+  "req_permissions_paragraph": {
+    "message": "If you want, you may have your favourite Tabs appear<br />as soon as you navigate to a Salesforce Setup page<br />without having to click this extension every time.",
+    "description": "[req_permission] 解釋請求權限原因的文字"
+  },
+  "required": {
+    "message": "required",
+    "description": "[input] 將輸入欄位標記為必填"
+  },
+  "required_info": {
+    "message": "= Required Information",
+    "description": "[modal] 告知使用者某些資訊為必填"
+  },
+  "salesforce_lightning": {
+    "message": "Salesforce Lightning",
+    "description": "[notSalesforceSetup] Salesforce Lightning 平台"
+  },
+  "save_tab": {
+    "message": "Save as Tab",
+    "description": "[alt] 當圖片無法顯示時的替代文字"
+  },
+  "setup_page": {
+    "message": "Setup Page",
+    "description": "[notSalesforceSetup] 用於修改 Salesforce 設定的頁面"
+  },
+  "skip": {
+    "message": "Skip",
+    "description": "[req_permission] 按鈕，用於不授予權限"
+  },
+  "successfully_imported": {
+    "message": "Successfully imported",
+    "description": "[toast] 使用者已成功從外部檔案中新增 Tab"
+  },
+  "tab_explain": {
+    "message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
+    "description": "[error] 解釋如何構造 Tab"
+  },
+  "tab_information": {
+    "message": "Tab information",
+    "description": "Update Tab 模態窗的標題"
+  },
+  "tab_label": {
+    "message": "Tab Label",
+    "description": "Tab 的 Label 屬性，其名稱"
+  },
+  "tab_org": {
+    "message": "Tab Org",
+    "description": "Tab 的 Org 屬性，如果它僅屬於單一 Salesforce 組織"
+  },
+  "tab_url": {
+    "message": "Tab URL",
+    "description": "Tab 的 URL 屬性，指向的位置"
+  },
+  "table_delete": {
+    "message": "Delete Tab",
+    "description": "[popup] 用於含有刪除按鈕的欄位的輔助文字"
+  },
+  "table_org": {
+    "message": "Is Org Tab",
+    "description": "[popup] 用於含有組織勾選框的欄位的輔助文字"
+  },
+  "table_row_label": {
+    "message": "Enter the label for this URL",
+    "description": "[popup] 含有 Tab 名稱的輸入欄位"
+  },
+  "table_row_org": {
+    "message": "Click if you want this Tab to be available for this Org only.",
+    "description": "[popup] 用於切換 Tab 為僅限組織的勾選框"
+  },
+  "table_row_org_name": {
+    "message": "The Org for which this Tab is available.",
+    "description": "[popup] 含有組織名稱的輸入欄位"
+  },
+  "table_row_url": {
+    "message": "Enter the sub_URL where you want to be redirected.",
+    "description": "[popup] 含有 Tab URL 的輸入欄位"
+  },
+  "tabs": {
+    "message": "Tabs",
+    "description": "使用者的最愛連結"
+  },
+  "tabs_saved": {
+    "message": "Tabs saved.",
+    "description": "[toast] Tab 成功儲存。"
+  },
+  "theme_dark": {
+    "message": "Change Theme to Dark",
+    "description": "[popup] 切換主題時月亮圖示的標題"
+  },
+  "theme_light": {
+    "message": "Change Theme to Light",
+    "description": "[popup] 切換主題時太陽圖示的標題"
+  },
+  "upload": {
+    "message": "Upload",
+    "description": "[import] 讓使用者瀏覽其檔案並選擇正確檔案"
+  },
+  "users": {
+    "message": "Users",
+    "description": "與 ManageUsers/home 相關之頁面的名稱"
+  },
+  "warn_deprecated_tab_title": {
+    "message": "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
+    "description": "[warning] 說明使用者其匯入的檔案使用了已棄用的屬性"
+  },
+  "where_to": {
+    "message": "Where to?",
+    "description": "[open-other-org-modal] 模態視窗的備用標題"
+  }
+}

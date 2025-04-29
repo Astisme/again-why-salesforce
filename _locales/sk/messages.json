@@ -1,0 +1,498 @@
+{
+  "allow": {
+    "message": "Povoliť",
+    "description": "[req_permission] tlačidlo na povolenie oprávnení"
+  },
+  "cancel": {
+    "message": "Zrušiť",
+    "description": "názov alebo text pre tlačidlá, ktoré zabraňujú vykonaniu aktuálnej akcie"
+  },
+  "cancel_close": {
+    "message": "Zrušiť a zavrieť",
+    "description": "názov alebo text pre tlačidlo zavretia modálnych okien"
+  },
+  "confirm_another_org": {
+    "message": "Potvrďte otvorenie tohto odkazu.",
+    "description": "[open-other-org-modal] žiadosť o potvrdenie od používateľa na otvorenie vytvoreného odkazu."
+  },
+  "continue": {
+    "message": "Pokračovať",
+    "description": "text pre tlačidlá, ktoré umožňujú vykonanie aktuálnej akcie"
+  },
+  "cxm_empty_no_org_tabs": {
+    "message": "👀 Všetky viditeľné Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_empty_tabs": {
+    "message": "😨 Obnoviť na predvolené",
+    "description": "[context-menu]"
+  },
+  "cxm_export_tabs": {
+    "message": "⬇️ Exportovať Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_import_tabs": {
+    "message": "🆙 Importovať Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move": {
+    "message": "🧭 Presunúť Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_move_first": {
+    "message": "↩️ Nastaviť ako prvý",
+    "description": "[context-menu]"
+  },
+  "cxm_move_last": {
+    "message": "↪️ Nastaviť ako posledný",
+    "description": "[context-menu]"
+  },
+  "cxm_move_left": {
+    "message": "👈 Presunúť doľava",
+    "description": "[context-menu]"
+  },
+  "cxm_move_right": {
+    "message": "👉 Presunúť doprava",
+    "description": "[context-menu]"
+  },
+  "cxm_open_other_org": {
+    "message": "🔗 Otvoriť v inej Organizácii",
+    "description": "[context-menu]"
+  },
+  "cxm_page_remove_tab": {
+    "message": "👋 Odstrániť Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_page_save_tab": {
+    "message": "💾 Uložiť ako Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_remove": {
+    "message": "💥 Odstrániť Tab(y)",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_left_tabs": {
+    "message": "🔥 Tab-y naľavo",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_other_tabs": {
+    "message": "↔️ Ostatné Tab-y",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_right_tabs": {
+    "message": "🌊 Tab-y napravo",
+    "description": "[context-menu]"
+  },
+  "cxm_remove_tab": {
+    "message": "1️⃣ Tento Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update": {
+    "message": "✏️ Aktualizovať Tab",
+    "description": "[context-menu]"
+  },
+  "cxm_update_org": {
+    "message": "📌 Zmeniť Organizáciu",
+    "description": "[context-menu]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 Ďalšie aktualizácie",
+    "description": "[context-menu]"
+  },
+  "delete": {
+    "message": "Vymazať",
+    "description": "[popup] vymazať riadok"
+  },
+  "delete_all": {
+    "message": "Vymazať všetky Tab-y",
+    "description": "[popup] nadpis koša na vymazanie všetkých Tab-ov"
+  },
+  "error_close_other_modal": {
+    "message": "Najprv zatvorte iné modal okno!",
+    "description": "[toast] Používateľ sa pokúsil otvoriť viac ako jedno modal okno"
+  },
+  "error_cxm_check": {
+    "message": "Chyba pri kontrole položiek menu",
+    "description": "[error] Položky kontextového menu neboli nájdené"
+  },
+  "error_cxm_create": {
+    "message": "Chyba pri vytváraní položiek menu",
+    "description": "[error] Položky kontextového menu sa nedali inicializovať"
+  },
+  "error_cxm_remove": {
+    "message": "Chyba pri odstraňovaní položiek menu",
+    "description": "[error] Položky kontextového menu sa nedali odstrániť"
+  },
+  "error_duplicate_tab": {
+    "message": "Tento Tab už existuje",
+    "description": "[error] Tab je duplikát"
+  },
+  "error_expand_url": {
+    "message": "Nemožno rozšíriť prázdne URL!",
+    "description": "[error] Nebolo zadané URL na rozšírenie"
+  },
+  "error_expand_url_no_base": {
+    "message": "Nemožno rozšíriť URL bez hostiteľa!",
+    "description": "[error] Nebola zadaná základná URL na rozšírenie"
+  },
+  "error_extract_empty_url": {
+    "message": "Nemožno získať názov organizácie z prázdneho URL!",
+    "description": "[error] Nebolo zadané URL, z ktorého by sa mal získať názov organizácie"
+  },
+  "error_get_with_no_org": {
+    "message": "Tab-y nemožno získať, ak nie je zadaná organizácia.",
+    "description": "[error] Pokus o vyhľadanie Tab-ov bez odoslania informácií o organizácii"
+  },
+  "error_import": {
+    "message": "Chyba pri importe:\n",
+    "description": "[error] Nastala chyba počas importného procesu"
+  },
+  "error_invalid_tab": {
+    "message": "Neplatný Tab",
+    "description": "[error] Tab nie je platný"
+  },
+  "error_link_with_id": {
+    "message": "Táto stránka nemôže existovať v inej Organizácii, pretože obsahuje Id!",
+    "description": "[open-other-org-modal] upozornenie pre používateľa, že odkaz nemusí existovať v inej organizácii"
+  },
+  "error_many_matching_tab": {
+    "message": "Nájdených je viac ako jeden zodpovedajúci Tab.",
+    "description": "[error] Bolo vrátených príliš veľa Tab-ov"
+  },
+  "error_minify_url": {
+    "message": "Nemožno skrátiť prázdne URL!",
+    "description": "[error] Nebolo zadané URL na skrátenie"
+  },
+  "error_missing_favourite_id": {
+    "message": "Nemožno získať obľúbený obrázok bez Id",
+    "description": "[error] Nebolo zadané id obľúbeného obrázka"
+  },
+  "error_missing_key": {
+    "message": "Kľúč nikde nebol nájdený",
+    "description": "[error] Preklad nebol nájdený v súboroch"
+  },
+  "error_no_array": {
+    "message": "Neplatné pole alebo pole nebolo zadané",
+    "description": "[error] Nebolo prijaté platné pole"
+  },
+  "error_no_browser_tab": {
+    "message": "Aktívna záložka prehliadača nebola nájdená.",
+    "description": "[error] Pozadie stránky nedokázalo identifikovať aktívnu záložku prehliadača"
+  },
+  "error_no_callback": {
+    "message": "Prosím zadajte callback funkciu",
+    "description": "[error] Nebola zadaná funkcia, ktorá sa má zavolať na konci metódy"
+  },
+  "error_no_cookies": {
+    "message": "Nenájdené zhody pre cookies",
+    "description": "[error] Cookies Salesforce neboli vrátené"
+  },
+  "error_no_data": {
+    "message": "Tab nemožno identifikovať bez údajov.",
+    "description": "[error] Pokus o získanie Tab-u bez odoslania údajov"
+  },
+  "error_no_headers": {
+    "message": "Nenašli sa žiadne hlavičky.",
+    "description": "[error] Rozšírenie nenašlo, kam umiestniť tlačidlo pre obľúbené"
+  },
+  "error_no_matching_tab": {
+    "message": "Nenašiel sa žiadny zodpovedajúci Tab.",
+    "description": "[error] Neboli vrátené žiadne zodpovedajúce Tab-y"
+  },
+  "error_no_message": {
+    "message": "Nebola zadaná žiadna správa na odoslanie.",
+    "description": "[error] Nebola nájdená žiadna správa na odoslanie do iných častí kódu"
+  },
+  "error_no_object": {
+    "message": "Nebol zadaný objekt na kontrolu!",
+    "description": "[error] Objekt nebol zadaný na kontrolu"
+  },
+  "error_no_setup_tab": {
+    "message": "Setup Tab sa nenašiel.",
+    "description": "[error] Rozšírenie nenašlo, kam umiestniť uložené Tab-y"
+  },
+  "error_no_url": {
+    "message": "Nebola zadaná URL na kontrolu!",
+    "description": "[error] Nebola zadaná URL na kontrolu"
+  },
+  "error_remove_not_favourite": {
+    "message": "Tab, ktorý nie je obľúbený, nemožno odstrániť!",
+    "description": "[error] Používateľ sa pokúsil odstrániť Tab, ktorý ešte nebol uložený"
+  },
+  "error_sync_nothing": {
+    "message": "Nemožno zosynchronizovať prázdne Tab-y!",
+    "description": "[error] Pokus o synchronizáciu prázdnych Tab-ov"
+  },
+  "error_tab_label": {
+    "message": "Evidenčný štítok musí byť neprazdný reťazec",
+    "description": "[error] Používateľ sa pokúsil vytvoriť Tab bez evidenčného štítku"
+  },
+  "error_tab_not_found": {
+    "message": "Tab sa nenašiel.",
+    "description": "[error] Tab nebol zahrnutý v poli"
+  },
+  "error_tab_object_creation": {
+    "message": "Pri volaní s objektom, neodosielajte nič iné.",
+    "description": "[error] Implementačná chyba zo strany vývojára"
+  },
+  "error_tab_org": {
+    "message": "Organizácia musí byť reťazec alebo undefined",
+    "description": "[error] Používateľ sa pokúsil vytvoriť Tab s neplatnou hodnotou organizácie"
+  },
+  "error_tab_unexpected_keys": {
+    "message": "Neočakávané kľúče nájdené:",
+    "description": "[error] Používateľ sa pokúsil vytvoriť Tab s nepodporovanými vlastnosťami"
+  },
+  "error_tab_url": {
+    "message": "URL musí byť neprazdný reťazec",
+    "description": "[error] Používateľ sa pokúsil vytvoriť Tab bez URL"
+  },
+  "error_tabcont_initialize": {
+    "message": "Nemožno inicializovať s",
+    "description": ""
+  },
+  "error_tabcont_invalid_tabs": {
+    "message": "Nájdené sú neplatné Tab(y).\nPrvý výskyt:",
+    "description": "[error] Boli odovzdané neplatné Tab-y"
+  },
+  "error_useless_remove": {
+    "message": "Nemožno odstrániť:\nStránku, ktorá nebola predtým uložená, nemožno odstrániť",
+    "description": "[error] Používateľ sa pokúsil odstrániť stránku, ktorá ešte nebola uložená"
+  },
+  "error_useless_save": {
+    "message": "Nemožno uložiť:\nTáto stránka je už uložená!",
+    "description": "[error] Používateľ sa pokúsil uložiť stránku, ktorá už bola uložená"
+  },
+  "export": {
+    "message": "Exportovať",
+    "description": "[popup] exportné tlačidlo"
+  },
+  "export_title": {
+    "message": "Exportovať všetky Tab-y",
+    "description": "[popup] nadpis exportného tlačidla"
+  },
+  "extension_description": {
+    "message": "Vytvorte a spravujte vlastné Tab-y v dostupnom priestore na stránke Salesforce Lightning Setup.",
+    "description": "[manifest] Popis tohto rozšírenia"
+  },
+  "extension_label": {
+    "message": "Again, Why Salesforce",
+    "description": "Názov tohto rozšírenia"
+  },
+  "file": {
+    "message": "súbor",
+    "description": "jeden súbor"
+  },
+  "files": {
+    "message": "súbory",
+    "description": "viacero súborov"
+  },
+  "import": {
+    "message": "Importovať",
+    "description": "[popup] importné tlačidlo"
+  },
+  "import_duplicate_description": {
+    "message": "Duplicitné Tab-y budú ignorované.<br />Dva Tab-y sa považujú za duplicitné, ak majú rovnaké URL.",
+    "description": "[import] popis importného procesu"
+  },
+  "import_invalid_file": {
+    "message": "Neplatný typ súboru.\nPodporované sú iba JSON súbory.",
+    "description": "[error] Súbor použitý na import nie je typu JSON"
+  },
+  "import_successful": {
+    "message": "Import bol úspešný",
+    "description": "[import] Import bol dokončený. Následne sa zobrazí počet importovaných záznamov"
+  },
+  "import_tabs": {
+    "message": "Importovať Tab",
+    "description": "[modal-title] pre importný proces"
+  },
+  "import_title": {
+    "message": "Importovať Tab zo JSON súboru",
+    "description": "[popup] nadpis importného tlačidla"
+  },
+  "insert_another": {
+    "message": "Vložiť ďalší",
+    "description": "[error-open-other-org-modal] správa, keď používateľ zadá rovnakú organizáciu"
+  },
+  "insert_another_org": {
+    "message": "Zadaná Organizácia je aktuálna!\nProsím zadajte inú Organizáciu.",
+    "description": "[error-open-other-org-modal] správa, keď používateľ zadá rovnakú organizáciu"
+  },
+  "insert_valid_org": {
+    "message": "Prosím zadajte platnú Organizáciu!",
+    "description": "[error-open-other-org-modal] správa, keď používateľ zadá nesprávnu URL"
+  },
+  "invalid_url": {
+    "message": "Neplatné URL",
+    "description": "[notSalesforceSetup] URL, ktoré nie je platné"
+  },
+  "login_to_salesforce": {
+    "message": "Prihlásiť sa do Salesforce",
+    "description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na prihlásovaciu stránku Salesforce"
+  },
+  "mycustomorg": {
+    "message": "mycustomorg",
+    "description": "zástupný text pre modal na aktualizáciu Tab"
+  },
+  "no_match": {
+    "message": "Nenašiel sa žiadny zodpovedajúci príkaz",
+    "description": "[error] keď príkaz switch nedokáže zodpovedať požadovanú akciu"
+  },
+  "nss_detected": {
+    "message": " zaznamenané.",
+    "description": "[notSalesforceSetup] niečo bolo zaznamenané. Uistite sa, že správa začína medzerou."
+  },
+  "nss_prefix": {
+    "message": "Toto nie je ",
+    "description": "[notSalesforceSetup] predpona, ktorá sa zobrazuje, keď používateľ nie je na stránke Salesforce."
+  },
+  "open_setup": {
+    "message": "Otvoriť Setup",
+    "description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
+  },
+  "or_drop": {
+    "message": "Alebo ťahaj a pustite",
+    "description": "[import] umožňuje používateľovi ťahať súbory myšou a pustiť ich"
+  },
+  "org_link": {
+    "message": "Odkaz na Organizáciu",
+    "description": "[input-label]"
+  },
+  "other_org_info": {
+    "message": "Informácie o inej Organizácii",
+    "description": "[modal-title]"
+  },
+  "other_org_placeholder": {
+    "message": "ina-org",
+    "description": "[input-placeholder]"
+  },
+  "overwrite_tabs": {
+    "message": "Prepísať uložené Tab-y.",
+    "description": "[label] vymazať všetky uložené Tab-y počas importu"
+  },
+  "preserve_org_tabs": {
+    "message": "Zachovať Tab-y pre iné organizácie.",
+    "description": "[label] ponechať všetky organizačne špecifické Tab-y počas importu"
+  },
+  "remove_tab": {
+    "message": "Odstrániť Tab",
+    "description": "[alt] náhradný text, keď obrázky nie sú zobrazené"
+  },
+  "req_permissions_dont_ask": {
+    "message": "Neptaj sa znova.",
+    "description": "[req_permission] označenie, keď používateľ nechce trvalo udeliť oprávnenia"
+  },
+  "req_permissions_header": {
+    "message": "Prosím, povoľte nám prístup<br />na Salesforce Setup stránky automaticky.",
+    "description": "[req_permission] nadpis stránky pre žiadosť o oprávnenia"
+  },
+  "req_permissions_paragraph": {
+    "message": "Ak si želáte, vaše obľúbené Tab-y sa môžu zobraziť<br />hned keď prejdete na Salesforce Setup stránku<br />bez nutnosti klikať na toto rozšírenie zakaždým.",
+    "description": "[req_permission] text, ktorý vysvetľuje, prečo sa žiadajú oprávnenia"
+  },
+  "required": {
+    "message": "povinné",
+    "description": "[input] označuje, že vstupné pole je povinné"
+  },
+  "required_info": {
+    "message": "= Povinné informácie",
+    "description": "[modal] informuje používateľa, že niektoré údaje sú povinné"
+  },
+  "salesforce_lightning": {
+    "message": "Salesforce Lightning",
+    "description": "[notSalesforceSetup] Salesforce Lightning platforma"
+  },
+  "save_tab": {
+    "message": "Uložiť ako Tab",
+    "description": "[alt] náhradný text, keď obrázky nie sú zobrazené"
+  },
+  "setup_page": {
+    "message": "Setup stránka",
+    "description": "[notSalesforceSetup] stránka na úpravu nastavení Salesforce"
+  },
+  "skip": {
+    "message": "Preskočiť",
+    "description": "[req_permission] tlačidlo na odmietnutie udelenia oprávnení"
+  },
+  "successfully_imported": {
+    "message": "Import bol úspešný",
+    "description": "[toast] Používateľ úspešne importoval Tab-y z externého súboru"
+  },
+  "tab_explain": {
+    "message": "Každý prvok musí mať 'label' a 'url' ako reťazce. Okrem toho môže mať každý prvok 'org' ako reťazec.",
+    "description": "[error] vysvetľuje, ako má byť Tab konštruovaný"
+  },
+  "tab_information": {
+    "message": "Informácie o Tabe",
+    "description": "názov modalu pre aktualizáciu Tab-u"
+  },
+  "tab_label": {
+    "message": "Označenie Tab-u",
+    "description": "vlastnosť Label Tab-u, jeho názov"
+  },
+  "tab_org": {
+    "message": "Organizácia Tab-u",
+    "description": "vlastnosť Org Tab-u, ak je určený pre konkrétnu Salesforce organizáciu"
+  },
+  "tab_url": {
+    "message": "URL Tab-u",
+    "description": "vlastnosť URL Tab-u, na ktorú odkazuje"
+  },
+  "table_delete": {
+    "message": "Vymazať Tab",
+    "description": "[popup] pomocný text pre stĺpec s vymazávacím tlačidlom"
+  },
+  "table_org": {
+    "message": "Je Tab organizačný",
+    "description": "[popup] pomocný text pre stĺpec s zaškrtávacím políčkom pre organizáciu"
+  },
+  "table_row_label": {
+    "message": "Zadajte označenie pre túto URL",
+    "description": "[popup] vstupné pole pre názov Tab-u"
+  },
+  "table_row_org": {
+    "message": "Kliknite, ak chcete, aby bol tento Tab dostupný len pre túto organizáciu.",
+    "description": "[popup] zaškrtávacie políčko pre prepnutie Tab-u do organizačného režimu"
+  },
+  "table_row_org_name": {
+    "message": "Organizácia, pre ktorú je tento Tab dostupný.",
+    "description": "[popup] vstupné pole pre názov organizácie"
+  },
+  "table_row_url": {
+    "message": "Zadajte sub_URL, na ktorý chcete byť presmerovaní.",
+    "description": "[popup] vstupné pole pre URL Tab-u"
+  },
+  "tabs": {
+    "message": "Tab-y",
+    "description": "obľúbené odkazy používateľa"
+  },
+  "tabs_saved": {
+    "message": "Tab-y boli uložené.",
+    "description": "[toast] Tab-y boli úspešne uložené."
+  },
+  "theme_dark": {
+    "message": "Prepni tému na tmavú",
+    "description": "[popup] nadpis pre mesiacovú ikonu na zmenu témy"
+  },
+  "theme_light": {
+    "message": "Prepni tému na svetlú",
+    "description": "[popup] nadpis pre slnečnú ikonu na zmenu témy"
+  },
+  "upload": {
+    "message": "Nahraj",
+    "description": "[import] umožňuje používateľovi prehliadať svoje súbory a vybrať ten správny"
+  },
+  "users": {
+    "message": "Používatelia",
+    "description": "názov stránky spojený s ManageUsers/home"
+  },
+  "warn_deprecated_tab_title": {
+    "message": "Importovali ste pomocou zastaraného 'tabTitle'!\nSťahovanie aktualizovaného súboru bolo spustené.\nOdteraz, prosím, používajte nový stiahnutý súbor.\nPoužívanie tohto súboru bude v budúcich aktualizáciách ukončené.",
+    "description": "[warning] informuje používateľa, že importovaný súbor používa zastaranú vlastnosť"
+  },
+  "where_to": {
+    "message": "Kam?",
+    "description": "[open-other-org-modal] alternatívny nadpis pre modal"
+  }
+}

@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="../variables.css" />
 		<link rel="stylesheet" href="./req_permissions.css" />
 		<link rel="stylesheet" href="../basic.css" />
+        <script src="/translator.js" type="module"></script>
 		<script src="./req_permissions.js" type="module"></script>
 	</head>
 
@@ -16,11 +17,11 @@
 			<object data="../logo/logo.html" type="text/html"></object>
 		</header>
 		<div id="text">
-			<h3>
+			<h3 data-i18n="req_permissions_header+-+innerHTML">
 				Please allow us to access<br />Salesforce Setup pages
 				automatically.
 			</h3>
-			<p>
+			<p data-i18n="req_permissions_paragraph+-+innerHTML">
 				If you want, you may have your favourite Tabs appear<br />as
 				soon as you navigate to a Salesforce Setup page<br />without
 				having to click this extension every time.
@@ -31,6 +32,7 @@
 				id="no-permissions"
 				class="button"
 				href="https://login.salesforce.com"
+                data-i18n="skip+-+textContent"
 			>
 				Skip
 			</a>
@@ -38,13 +40,14 @@
 				id="allow-permissions"
 				class="highlight button"
 				href="/lightning/setup"
+                data-i18n="allow+-+textContent"
 			>
 				Allow
 			</a>
 		</div>
 		<div id="checkboxes">
 			<input id="remember-skip" type="checkbox" name="remember skip" />
-			<label for="#remember-skip">
+			<label for="#remember-skip" data-i18n="req_permissions_dont_ask+-+textContent">
 				Do not ask again.
 			</label>
 		</div>

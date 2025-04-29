@@ -1,0 +1,498 @@
+{
+  "allow": {
+    "message": "허용",
+    "description": "[권한_요청] 권한을 허용하는 버튼"
+  },
+  "cancel": {
+    "message": "취소",
+    "description": "현재 작업 실행을 방지하는 버튼의 제목 또는 textContent"
+  },
+  "cancel_close": {
+    "message": "취소하고 닫기",
+    "description": "모달 닫기 버튼의 제목 또는 textContent"
+  },
+  "confirm_another_org": {
+    "message": "이 링크 열기를 확인합니다.",
+    "description": "[다른_조직_열기_모달] 구성된 링크를 열도록 사용자에게 확인을 요청합니다."
+  },
+  "continue": {
+    "message": "계속",
+    "description": "현재 작업 실행을 허용하는 버튼의 textContent"
+  },
+  "cxm_empty_no_org_tabs": {
+    "message": "👀 보이는 모든 Tabs",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_empty_tabs": {
+    "message": "😨 기본값으로 재설정",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_export_tabs": {
+    "message": "⬇️ Tabs 내보내기",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_import_tabs": {
+    "message": "🆙 Tabs 가져오기",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_move": {
+    "message": "🧭 Tab 이동",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_move_first": {
+    "message": "↩️ 맨 앞으로 이동",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_move_last": {
+    "message": "↪️ 맨 뒤로 이동",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_move_left": {
+    "message": "👈 왼쪽으로 이동",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_move_right": {
+    "message": "👉 오른쪽으로 이동",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_open_other_org": {
+    "message": "🔗 다른 조직에서 열기",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_page_remove_tab": {
+    "message": "👋 Tab 제거",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_page_save_tab": {
+    "message": "💾 Tab으로 저장",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_remove": {
+    "message": "💥 Tab(들) 제거",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_remove_left_tabs": {
+    "message": "🔥 왼쪽의 Tabs",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_remove_other_tabs": {
+    "message": "↔️ 다른 Tabs",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_remove_right_tabs": {
+    "message": "🌊 오른쪽의 Tabs",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_remove_tab": {
+    "message": "1️⃣ 이 Tab",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_update": {
+    "message": "✏️ Tab 업데이트",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_update_org": {
+    "message": "📌 조직 토글",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "cxm_update_tab": {
+    "message": "🧹 기타 업데이트",
+    "description": "[컨텍스트_메뉴]"
+  },
+  "delete": {
+    "message": "삭제",
+    "description": "[팝업] 행 삭제"
+  },
+  "delete_all": {
+    "message": "모든 Tabs 삭제",
+    "description": "[팝업] 모든 Tabs를 비우기 위한 휴지통 제목"
+  },
+  "error_close_other_modal": {
+    "message": "먼저 다른 모달을 닫으십시오!",
+    "description": "[토스트] 사용자가 1개 이상의 모달을 열려고 했습니다."
+  },
+  "error_cxm_check": {
+    "message": "메뉴 항목 확인 오류",
+    "description": "[오류] 컨텍스트 메뉴 항목을 찾을 수 없습니다."
+  },
+  "error_cxm_create": {
+    "message": "메뉴 항목 생성 오류",
+    "description": "[오류] 컨텍스트 메뉴 항목을 초기화할 수 없습니다."
+  },
+  "error_cxm_remove": {
+    "message": "메뉴 항목 제거 오류",
+    "description": "[오류] 컨텍스트 메뉴 항목을 제거할 수 없습니다."
+  },
+  "error_duplicate_tab": {
+    "message": "이 Tab은 이미 존재합니다",
+    "description": "[오류] Tab이 중복되었습니다."
+  },
+  "error_expand_url": {
+    "message": "빈 URL을 확장할 수 없습니다!",
+    "description": "[오류] 확장할 URL이 전달되지 않았습니다."
+  },
+  "error_expand_url_no_base": {
+    "message": "호스트 없이 URL을 확장할 수 없습니다!",
+    "description": "[오류] 확장에 사용된 기본 URL이 전달되지 않았습니다."
+  },
+  "error_extract_empty_url": {
+    "message": "빈 URL에서 조직 이름을 추출할 수 없습니다!",
+    "description": "[오류] 조직 이름을 검색할 URL이 전달되지 않았습니다."
+  },
+  "error_get_with_no_org": {
+    "message": "조직이 지정되지 않은 경우 Tabs를 가져올 수 없습니다.",
+    "description": "[오류] 조직 정보를 보내지 않고 조직별로 Tabs를 검색하려고 했습니다."
+  },
+  "error_import": {
+    "message": "가져오기 중 오류:\n",
+    "description": "[오류] 가져오기 프로세스 중에 오류가 발생했습니다."
+  },
+  "error_invalid_tab": {
+    "message": "잘못된 Tab",
+    "description": "[오류] Tab이 유효하지 않습니다."
+  },
+  "error_link_with_id": {
+    "message": "이 페이지는 ID를 포함하고 있으므로 다른 조직에 존재할 수 없습니다!",
+    "description": "[다른_조직_열기_모달] 링크가 다른 조직에 존재하지 않을 수 있다는 사용자 경고"
+  },
+  "error_many_matching_tab": {
+    "message": "일치하는 Tab을 1개 이상 찾았습니다.",
+    "description": "[오류] 많은 Tabs가 검색되었습니다."
+  },
+  "error_minify_url": {
+    "message": "빈 URL을 축소할 수 없습니다!",
+    "description": "[오류] 축소할 URL이 전달되지 않았습니다."
+  },
+  "error_missing_favourite_id": {
+    "message": "ID 없이 즐겨찾기 이미지를 가져올 수 없습니다.",
+    "description": "[오류] 즐겨찾기 ID가 전달되지 않았습니다."
+  },
+  "error_missing_key": {
+    "message": "어디에서도 키를 찾을 수 없습니다.",
+    "description": "[오류] 파일에서 번역을 찾을 수 없습니다."
+  },
+  "error_no_array": {
+    "message": "잘못된 배열이거나 배열이 전달되지 않았습니다.",
+    "description": "[오류] 유효한 배열을 받지 못했습니다."
+  },
+  "error_no_browser_tab": {
+    "message": "현재 브라우저 탭을 찾을 수 없습니다.",
+    "description": "[오류] 백그라운드 페이지에서 활성 브라우저 탭을 설정할 수 없습니다."
+  },
+  "error_no_callback": {
+    "message": "콜백을 제공하십시오.",
+    "description": "[오류] 메서드 끝에서 호출할 함수가 전달되지 않았습니다."
+  },
+  "error_no_cookies": {
+    "message": "일치하는 쿠키를 찾지 못했습니다.",
+    "description": "[오류] Salesforce 쿠키가 반환되지 않았습니다."
+  },
+  "error_no_data": {
+    "message": "데이터 없이 Tab을 식별할 수 없습니다.",
+    "description": "[오류] 데이터를 보내지 않고 Tab을 가져오려고 했습니다."
+  },
+  "error_no_headers": {
+    "message": "헤더를 찾지 못했습니다.",
+    "description": "[오류] 확장 프로그램이 즐겨찾기 버튼을 넣을 위치를 찾지 못했습니다."
+  },
+  "error_no_matching_tab": {
+    "message": "일치하는 Tabs를 찾지 못했습니다.",
+    "description": "[오류] Tabs가 검색되지 않았습니다."
+  },
+  "error_no_message": {
+    "message": "보낼 메시지를 지정하지 않았습니다.",
+    "description": "[오류] 코드의 다른 부분으로 보낼 메시지를 찾을 수 없습니다."
+  },
+  "error_no_object": {
+    "message": "확인할 개체가 없습니다!",
+    "description": "[오류] 개체가 전달되지 않았습니다."
+  },
+  "error_no_setup_tab": {
+    "message": "설정 탭을 찾지 못했습니다.",
+    "description": "[오류] 확장 프로그램이 즐겨찾기 Tabs를 넣을 위치를 찾지 못했습니다."
+  },
+  "error_no_url": {
+    "message": "확인할 URL이 없습니다!",
+    "description": "[오류] 확인할 URL이 전달되지 않았습니다."
+  },
+  "error_remove_not_favourite": {
+    "message": "즐겨찾기가 아닌 Tab은 제거할 수 없습니다!",
+    "description": "[오류] 사용자가 아직 저장되지 않은 Tab을 제거하려고 했습니다."
+  },
+  "error_sync_nothing": {
+    "message": "null Tabs는 동기화할 수 없습니다!",
+    "description": "[오류] 아무것도 동기화하려고 시도했습니다."
+  },
+  "error_tab_label": {
+    "message": "레이블은 비어 있지 않은 문자열이어야 합니다.",
+    "description": "[오류] 사용자가 레이블 없이 Tab을 생성하려고 했습니다."
+  },
+  "error_tab_not_found": {
+    "message": "Tab을 찾을 수 없습니다.",
+    "description": "[오류] Tab이 배열에 포함되지 않았습니다."
+  },
+  "error_tab_object_creation": {
+    "message": "개체로 호출할 때는 다른 것을 전달하지 마십시오.",
+    "description": "[오류] 개발자의 구현 오류"
+  },
+  "error_tab_org": {
+    "message": "조직은 문자열이거나 정의되지 않아야 합니다.",
+    "description": "[오류] 사용자가 잘못된 조직 값으로 Tab을 생성하려고 했습니다."
+  },
+  "error_tab_unexpected_keys": {
+    "message": "예상치 못한 키가 발견되었습니다:",
+    "description": "[오류] 사용자가 지원되지 않는 속성으로 Tab을 생성하려고 했습니다."
+  },
+  "error_tab_url": {
+    "message": "URL은 비어 있지 않은 문자열이어야 합니다.",
+    "description": "[오류] 사용자가 URL 없이 Tab을 생성하려고 했습니다."
+  },
+  "error_tabcont_initialize": {
+    "message": "다음으로 초기화할 수 없습니다.",
+    "description": "[오류] Tab 컨테이너 초기화 실패"
+  },
+  "error_tabcont_invalid_tabs": {
+    "message": "잘못된 Tab(들)이 감지되었습니다.\n첫 번째 발생:",
+    "description": "[오류] 잘못된 Tabs가 전달되었습니다."
+  },
+  "error_useless_remove": {
+    "message": "제거할 수 없음:\n이전에 저장되지 않은 페이지는 제거할 수 없습니다.",
+    "description": "[오류] 사용자가 아직 저장되지 않은 페이지를 제거하려고 했습니다."
+  },
+  "error_useless_save": {
+    "message": "저장할 수 없음:\n이 페이지는 이미 저장되었습니다!",
+    "description": "[오류] 사용자가 이미 저장된 페이지를 저장하려고 했습니다."
+  },
+  "export": {
+    "message": "내보내기",
+    "description": "[팝업] 내보내기 버튼"
+  },
+  "export_title": {
+    "message": "모든 Tabs 내보내기",
+    "description": "[팝업] 내보내기 버튼 제목"
+  },
+  "extension_description": {
+    "message": "Salesforce Lightning 설정 페이지의 사용 가능한 공간에 사용자 지정 Tabs를 만들고 관리합니다.",
+    "description": "[매니페스트] 이 확장 프로그램의 설명"
+  },
+  "extension_label": {
+    "message": "Again, Why Salesforce",
+    "description": "이 확장 프로그램의 이름"
+  },
+  "file": {
+    "message": "파일",
+    "description": "단일 파일"
+  },
+  "files": {
+    "message": "파일들",
+    "description": "여러 파일"
+  },
+  "import": {
+    "message": "가져오기",
+    "description": "[팝업] 가져오기 버튼"
+  },
+  "import_duplicate_description": {
+    "message": "중복된 Tabs는 무시됩니다.<br />두 Tabs가 동일한 URL을 가지면 중복으로 간주됩니다.",
+    "description": "[가져오기] 가져오기 프로세스가 수행하는 작업에 대한 설명"
+  },
+  "import_invalid_file": {
+    "message": "잘못된 파일 형식입니다.\nJSON 파일만 지원됩니다.",
+    "description": "[오류] 가져오기에 사용된 파일이 JSON이 아닙니다."
+  },
+  "import_successful": {
+    "message": "성공적으로 가져왔습니다",
+    "description": "[가져오기] 가져오기가 완료되었습니다. 이 후 가져온 레코드 수가 표시됩니다."
+  },
+  "import_tabs": {
+    "message": "Tabs 가져오기",
+    "description": "[모달_제목] 가져오기 프로세스용"
+  },
+  "import_title": {
+    "message": "json 파일에서 Tabs 가져오기",
+    "description": "[팝업] 가져오기 버튼 제목"
+  },
+  "insert_another": {
+    "message": "다른 것 삽입",
+    "description": "[오류_다른_조직_열기_모달] 사용자가 모달에 동일한 조직을 삽입할 때의 메시지"
+  },
+  "insert_another_org": {
+    "message": "삽입된 조직은 현재 조직입니다!\n다른 조직을 삽입하십시오.",
+    "description": "[오류_다른_조직_열기_모달] 사용자가 모달에 동일한 조직을 삽입할 때의 메시지"
+  },
+  "insert_valid_org": {
+    "message": "유효한 조직을 삽입하십시오!",
+    "description": "[오류_다른_조직_열기_모달] 사용자가 모달에 잘못된 URL을 삽입할 때의 메시지"
+  },
+  "invalid_url": {
+    "message": "잘못된 URL",
+    "description": "[Salesforce설정아님] 유효하지 않은 URL"
+  },
+  "login_to_salesforce": {
+    "message": "Salesforce에 로그인",
+    "description": "[Salesforce설정아님] 사용자를 Salesforce 로그인 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+  },
+  "mycustomorg": {
+    "message": "내사용자지정조직",
+    "description": "Tab 업데이트 모달의 플레이스홀더"
+  },
+  "no_match": {
+    "message": "어떤 작업과도 일치하지 않았습니다.",
+    "description": "[오류] Salesforce에서 스위치가 요청된 작업과 일치할 수 없을 때"
+  },
+  "nss_detected": {
+    "message": " 감지됨.",
+    "description": "[Salesforce설정아님] 발견된 것. 메시지 시작 부분에 공백을 포함해야 합니다."
+  },
+  "nss_prefix": {
+    "message": "이것은 ",
+    "description": "[Salesforce설정아님] 사용자가 Salesforce 페이지에 없을 때 표시되는 접두사입니다. 메시지 끝에 공백을 포함해야 합니다."
+  },
+  "open_setup": {
+    "message": "설정 열기",
+    "description": "[Salesforce설정아님] 사용자를 Salesforce 설정 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+  },
+  "or_drop": {
+    "message": "또는 드롭",
+    "description": "[가져오기] 사용자가 마우스로 파일을 이동하고 놓을 수 있도록 허용"
+  },
+  "org_link": {
+    "message": "조직 링크",
+    "description": "[입력_레이블]"
+  },
+  "other_org_info": {
+    "message": "다른 조직 정보",
+    "description": "[모달_제목]"
+  },
+  "other_org_placeholder": {
+    "message": "다른 조직",
+    "description": "[입력_플레이스홀더]"
+  },
+  "overwrite_tabs": {
+    "message": "저장된 Tabs 덮어쓰기.",
+    "description": "[레이블] 가져오기 프로세스 중 모든 저장된 Tabs 삭제"
+  },
+  "preserve_org_tabs": {
+    "message": "다른 조직의 Tabs 보존.",
+    "description": "[레이블] 가져오기 프로세스 중 모든 조직별 Tabs 유지"
+  },
+  "remove_tab": {
+    "message": "Tab 제거",
+    "description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+  },
+  "req_permissions_dont_ask": {
+    "message": "다시 묻지 않음.",
+    "description": "[권한_요청] 사용자가 영구적으로 권한을 허용하고 싶지 않을 때의 레이블"
+  },
+  "req_permissions_header": {
+    "message": "자동으로<br />Salesforce 설정 페이지에 액세스할 수 있도록 허용해 주십시오.",
+    "description": "[권한_요청] 권한 요청 페이지의 헤더"
+  },
+  "req_permissions_paragraph": {
+    "message": "원하시면, 즐겨찾는 Tabs가<br />Salesforce 설정 페이지로 이동하자마자<br />매번 이 확장 프로그램을 클릭할 필요 없이 나타나도록 할 수 있습니다.",
+    "description": "[권한_요청] 권한을 요청하는 이유를 설명하는 텍스트"
+  },
+  "required": {
+    "message": "필수",
+    "description": "[입력] 입력 필드를 필수로 표시"
+  },
+  "required_info": {
+    "message": "= 필수 정보",
+    "description": "[모달] 일부 정보가 필수임을 사용자에게 알림"
+  },
+  "salesforce_lightning": {
+    "message": "Salesforce Lightning",
+    "description": "[Salesforce설정아님] Salesforce Lightning 플랫폼"
+  },
+  "save_tab": {
+    "message": "Tab으로 저장",
+    "description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+  },
+  "setup_page": {
+    "message": "설정 페이지",
+    "description": "[Salesforce설정아님] Salesforce 설정을 수정하는 데 사용되는 페이지"
+  },
+  "skip": {
+    "message": "건너뛰기",
+    "description": "[권한_요청] 권한을 허용하지 않는 버튼"
+  },
+  "successfully_imported": {
+    "message": "성공적으로 가져왔습니다",
+    "description": "[토스트] 사용자가 외부 파일에서 Tabs를 추가했습니다."
+  },
+  "tab_explain": {
+    "message": "각 항목에는 'label'과 'url'이 문자열로 있어야 합니다. 또한 모든 항목에는 'org'가 문자열로 있을 수 있습니다.",
+    "description": "[오류] Tab을 어떻게 구성해야 하는지 설명합니다."
+  },
+  "tab_information": {
+    "message": "Tab 정보",
+    "description": "Tab 업데이트 모달 제목"
+  },
+  "tab_label": {
+    "message": "Tab 레이블",
+    "description": "Tab의 Label 속성, 이름"
+  },
+  "tab_org": {
+    "message": "Tab 조직",
+    "description": "Tab의 Org 속성, 단일 Salesforce 조직용인 경우"
+  },
+  "tab_url": {
+    "message": "Tab URL",
+    "description": "Tab의 URL 속성, 가리키는 위치"
+  },
+  "table_delete": {
+    "message": "Tab 삭제",
+    "description": "[팝업] 삭제 버튼이 있는 열의 보조 텍스트"
+  },
+  "table_org": {
+    "message": "조직 Tab 여부",
+    "description": "[팝업] 조직 확인란이 있는 열의 보조 텍스트"
+  },
+  "table_row_label": {
+    "message": "이 URL의 레이블을 입력하십시오.",
+    "description": "[팝업] Tab 이름이 있는 입력 필드"
+  },
+  "table_row_org": {
+    "message": "이 Tab이 이 조직에만 사용 가능하게 하려면 클릭하십시오.",
+    "description": "[팝업] Tab을 조직별로 토글하는 확인란"
+  },
+  "table_row_org_name": {
+    "message": "이 Tab을 사용할 수 있는 조직.",
+    "description": "[팝업] 조직 이름이 있는 입력 필드"
+  },
+  "table_row_url": {
+    "message": "리디렉션할 하위 URL을 입력하십시오.",
+    "description": "[팝업] Tab URL이 있는 입력 필드"
+  },
+  "tabs": {
+    "message": "Tabs",
+    "description": "사용자의 즐겨찾는 링크"
+  },
+  "tabs_saved": {
+    "message": "Tabs가 저장되었습니다.",
+    "description": "[토스트] Tabs가 성공적으로 저장되었습니다."
+  },
+  "theme_dark": {
+    "message": "테마를 어둡게 변경",
+    "description": "[팝업] 테마 전환을 위한 달 아이콘 제목"
+  },
+  "theme_light": {
+    "message": "테마를 밝게 변경",
+    "description": "[팝업] 테마 전환을 위한 태양 아이콘 제목"
+  },
+  "upload": {
+    "message": "업로드",
+    "description": "[가져오기] 사용자가 파일을 탐색하고 올바른 파일을 선택하도록 허용"
+  },
+  "users": {
+    "message": "사용자",
+    "description": "ManageUsers/home 관련 페이지 이름"
+  },
+  "warn_deprecated_tab_title": {
+    "message": "더 이상 사용되지 않는 'tabTitle'을 사용하여 가져왔습니다!\n업데이트된 파일 다운로드가 시작되었습니다.\n이제부터는 새로 다운로드한 파일을 사용하십시오.\n해당 파일 사용은 추후 릴리스에서 중단됩니다.",
+    "description": "[경고] 가져온 파일이 더 이상 사용되지 않는 속성을 사용함을 사용자에게 설명합니다."
+  },
+  "where_to": {
+    "message": "어디로?",
+    "description": "[다른_조직_열기_모달] 모달의 대체 제목"
+  }
+}
