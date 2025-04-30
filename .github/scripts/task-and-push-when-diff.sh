@@ -9,7 +9,7 @@
 set -eox pipefail
 
 TASK="$1" # the Deno task to run (e.g. "fmt", "lint")
-LOG_FILE="$2"
+LOG_FILE="${2:-stdout.log}"
 COMMIT_MSG="${3:-"chore: auto-run deno $TASK"}"
 
 if [[ -z "$TASK" ]]; then
@@ -20,11 +20,7 @@ fi
 
 echo "▶  Running deno task: $TASK"
 # If LOG_FILE is empty, output to stdout, otherwise to the specified file
-if [[ -z "$LOG_FILE" ]]; then
-  deno task "$TASK"
-else
-  deno task "$TASK" > "$LOG_FILE"
-fi
+deno task "$TASK" > "$LOG_FILE"
 
 echo "▶  Checking for changes…"
 git diff --output="$LOG_FILE"
