@@ -4,7 +4,7 @@ These folders follow the [standard structure](https://developer.mozilla.org/en-U
 At the moment, all translations are powered by AI. Feel free to update a translation you do not like or wish to improve.
 When doing so, please create a README.md file in the locale folder you made your change to describe what you changed. This will help you getting known online :)
 
-To sort the keys of the messages.json files, you may use any tool you like. We've used https://jsonformatter.org/json-sorter **with "Key Name" as sorting option**.
+To sort the keys of the messages.json files, please run `deno task sort`.
 
 # Prompt used to get the translations
 
