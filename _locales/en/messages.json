@@ -3,6 +3,14 @@
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
 	},
+	"available": {
+		"message": "Available",
+		"description": "Section header for items that can be added"
+	},
+	"bold": {
+		"message": "Bold",
+		"description": "Font style option for bold text"
+	},
 	"cancel": {
 		"message": "Cancel",
 		"description": "title or textContent for buttons that prevent the current action from executing"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Cancel and close",
 		"description": "title or textContent for the close button of modals"
+	},
+	"chosen": {
+		"message": "Chosen",
+		"description": "Section header for items that have been selected"
 	},
 	"confirm_another_org": {
 		"message": "Confirm opening this link.",
@@ -286,6 +298,10 @@
 		"message": "files",
 		"description": "multiple files"
 	},
+	"general": {
+		"message": "General",
+		"description": "Label for the general settings category"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] import button"
@@ -326,6 +342,10 @@
 		"message": "Invalid URL",
 		"description": "[notSalesforceSetup] a URL which is not valid"
 	},
+	"italic": {
+		"message": "Italic",
+		"description": "Font style option for italic text"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce's custom navigation technology"
@@ -362,9 +382,17 @@
 		"message": "Automatically open",
 		"description": "[setting]"
 	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Language option to fall back to English if locale is unsupported or does not present the translation"
+	},
 	"opt_faster_loading": {
 		"message": "(faster loading when in use).",
 		"description": "[setting] explanation of the Lightning Navigation feature"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Keep favourite Tabs on the left of Home and Object Manager.",
+		"description": "Toggle to pin favorite Tabs to the left side of the navigation bar"
 	},
 	"opt_link_new_browser": {
 		"message": "Always open links in a new browser tab.",
@@ -377,6 +405,10 @@
 	"opt_same_tab_popup": {
 		"message": "page in the same tab when clicking on the popup.",
 		"description": "[setting] prevent opening a new browser tab"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Default)",
+		"description": "Option to use Salesforce’s language setting. This option is the default for the extension."
 	},
 	"opt_skip_link_detection": {
 		"message": "Skip automatic check of Salesforce Id.",
@@ -454,6 +486,94 @@
 		"message": "Save as Tab",
 		"description": "[alt] alternative text when pictures do not work"
 	},
+	"set_gen_preview": {
+		"message": "Tab Preview",
+		"description": "Label for previewing generic Tab appearance"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "Label for configuring the style of generic Tabs"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Section header for overall configuration options"
+	},
+	"set_move_available": {
+		"message": "Move to Available",
+		"description": "Button title to move selected items back to Available"
+	},
+	"set_move_chosen": {
+		"message": "Move to Chosen",
+		"description": "Button title to move selected items to Chosen"
+	},
+	"set_org_preview": {
+		"message": "Org Preview",
+		"description": "Label for previewing org-specific Tab appearance"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "Label for configuring the style of org-specific Tabs"
+	},
+	"set_tab_background_active_label": {
+		"message": "Insert the background color for your active generic Tabs.",
+		"description": "Label to set background color for active generic Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Insert the background color for your org Tabs.",
+		"description": "Label to set background color for org-specific Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Insert the border color for your active org Tabs.",
+		"description": "Label to set border color for active org-specific Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Insert the border color for your generic Tabs.",
+		"description": "Label to set border color for generic Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Insert the color of the text for your active generic Tabs.",
+		"description": "Label to set text color for active generic Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Insert the color of the text for your org Tabs.",
+		"description": "Label to set text color for org-specific Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Pick one or more decoration styles for your active org Tabs.",
+		"description": "Prompt to select decoration styles for active org-specific Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Pick one or more decoration styles for your generic Tabs.",
+		"description": "Prompt to select decoration styles for generic Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Insert the hover background color for your active generic Tabs.",
+		"description": "Label to set hover background color for active generic Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Insert the hover background color for your org Tabs.",
+		"description": "Label to set hover background color for org-specific Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Insert the shadow color for your active org Tabs.",
+		"description": "Label to set shadow color for active org-specific Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Insert the shadow color for your generic Tabs.",
+		"description": "Label to set shadow color for generic Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Insert the color for the bar at the top of your active generic Tabs.",
+		"description": "Label to set top-bar color for active generic Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Click to toggle active state.",
+		"description": "Tooltip text for the toggle active state control"
+	},
+	"settings": {
+		"message": "Settings",
+		"description": "Label for the settings menu"
+	},
 	"setup_page": {
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] the page used to modify the settings of Salesforce"
@@ -525,6 +645,14 @@
 	"theme_light": {
 		"message": "Change Theme to Light",
 		"description": "[popup] title on the sun to switch theme"
+	},
+	"underline": {
+		"message": "Underline",
+		"description": "Decoration style option to underline Tab text"
+	},
+	"underline_wavy": {
+		"message": "Underline Wavy",
+		"description": "Decoration style option to apply a wavy underline to Tab text"
 	},
 	"upload": {
 		"message": "Upload",

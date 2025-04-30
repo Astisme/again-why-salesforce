@@ -1,498 +1,626 @@
 {
-  "allow": {
-    "message": "Permetre",
-    "description": "[req_permission] botó per permetre permisos"
-  },
-  "cancel": {
-    "message": "Cancel·lar",
-    "description": "títol o text per als botons que impedeixen l'execució de l'acció actual"
-  },
-  "cancel_close": {
-    "message": "Cancel·lar i tancar",
-    "description": "títol o text per al botó que tanca els diàlegs"
-  },
-  "confirm_another_org": {
-    "message": "Confirmeu l'obertura d'aquest enllaç.",
-    "description": "[open-other-org-modal] sol·licitud de confirmació a l'usuari per obrir l'enllaç construït."
-  },
-  "continue": {
-    "message": "Continuar",
-    "description": "text per als botons que permeten executar l'acció actual"
-  },
-  "cxm_empty_no_org_tabs": {
-    "message": "👀 Tots els Tab visibles",
-    "description": "[context-menu]"
-  },
-  "cxm_empty_tabs": {
-    "message": "😨 Restablir per defecte",
-    "description": "[context-menu]"
-  },
-  "cxm_export_tabs": {
-    "message": "⬇️ Exportar Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_import_tabs": {
-    "message": "🆙 Importar Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_move": {
-    "message": "🧭 Moure Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_move_first": {
-    "message": "↩️ Fer primer",
-    "description": "[context-menu]"
-  },
-  "cxm_move_last": {
-    "message": "↪️ Fer darrer",
-    "description": "[context-menu]"
-  },
-  "cxm_move_left": {
-    "message": "👈 Moure cap a l'esquerra",
-    "description": "[context-menu]"
-  },
-  "cxm_move_right": {
-    "message": "👉 Moure cap a la dreta",
-    "description": "[context-menu]"
-  },
-  "cxm_open_other_org": {
-    "message": "🔗 Obrir en una altra Organització",
-    "description": "[context-menu]"
-  },
-  "cxm_page_remove_tab": {
-    "message": "👋 Eliminar Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_page_save_tab": {
-    "message": "💾 Desar com a Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_remove": {
-    "message": "💥 Eliminar Tab(s)",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_left_tabs": {
-    "message": "🔥 Tabs a l'esquerra",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_other_tabs": {
-    "message": "↔️ Altres Tabs",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_right_tabs": {
-    "message": "🌊 Tabs a la dreta",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_tab": {
-    "message": "1️⃣ Aquest Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update": {
-    "message": "✏️ Actualitzar Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update_org": {
-    "message": "📌 Canviar Organització",
-    "description": "[context-menu]"
-  },
-  "cxm_update_tab": {
-    "message": "🧹 Altres actualitzacions",
-    "description": "[context-menu]"
-  },
-  "delete": {
-    "message": "Esborrar",
-    "description": "[popup] esborrar una fila"
-  },
-  "delete_all": {
-    "message": "Esborrar tots els Tabs",
-    "description": "[popup] títol per al contenidor que buida tots els Tabs"
-  },
-  "error_close_other_modal": {
-    "message": "Tanca primer l'altre diàleg!",
-    "description": "[toast] l'usuari va intentar obrir més d'un diàleg"
-  },
-  "error_cxm_check": {
-    "message": "Error en comprovar els elements del menú",
-    "description": "[error] no s'han trobat els elements del menú contextual"
-  },
-  "error_cxm_create": {
-    "message": "Error en crear els elements del menú",
-    "description": "[error] no s'han pogut inicialitzar els elements del menú contextual"
-  },
-  "error_cxm_remove": {
-    "message": "Error en eliminar els elements del menú",
-    "description": "[error] no s'han pogut eliminar els elements del menú contextual"
-  },
-  "error_duplicate_tab": {
-    "message": "Aquest Tab ja existeix",
-    "description": "[error] el Tab és duplicat"
-  },
-  "error_expand_url": {
-    "message": "No es pot expandir una URL buida!",
-    "description": "[error] no s'ha passat la URL per expandir"
-  },
-  "error_expand_url_no_base": {
-    "message": "No es pot expandir una URL sense el seu host!",
-    "description": "[error] no s'ha passat la URL base per expandir-la"
-  },
-  "error_extract_empty_url": {
-    "message": "No es pot extreure el nom de l'organització d'una URL buida!",
-    "description": "[error] no s'ha passat la URL de la qual extreure el nom de l'organització"
-  },
-  "error_get_with_no_org": {
-    "message": "No es poden obtenir Tabs si l'organització no està especificada.",
-    "description": "[error] s'ha intentat cercar Tabs sense enviar informació de l'organització"
-  },
-  "error_import": {
-    "message": "Error durant la importació:\n",
-    "description": "[error] s'ha produït un error durant el procés d'importació"
-  },
-  "error_invalid_tab": {
-    "message": "Tab no vàlid",
-    "description": "[error] el Tab no és vàlid"
-  },
-  "error_link_with_id": {
-    "message": "Aquesta pàgina no pot existir en una altra Organització, perquè conté un Id!",
-    "description": "[open-other-org-modal] advertència a l'usuari que l'enllaç pot no existir en una altra organització"
-  },
-  "error_many_matching_tab": {
-    "message": "S'han trobat més d'un Tab coincidents.",
-    "description": "[error] s'han retornat molts Tabs"
-  },
-  "error_minify_url": {
-    "message": "No es pot minificar una URL buida!",
-    "description": "[error] no s'ha passat la URL per reduir-la"
-  },
-  "error_missing_favourite_id": {
-    "message": "No es pot obtenir la imatge favorita sense l'Id",
-    "description": "[error] no s'ha passat l'id de la imatge favorita"
-  },
-  "error_missing_key": {
-    "message": "Clau no trobada en cap lloc",
-    "description": "[error] no s'ha trobat cap traducció als fitxers"
-  },
-  "error_no_array": {
-    "message": "Array no vàlid o no s'ha passat cap array",
-    "description": "[error] no s'ha rebut un array vàlid"
-  },
-  "error_no_browser_tab": {
-    "message": "No s'ha trobat la pestanya activa del navegador.",
-    "description": "[error] la pàgina en segon pla no ha pogut identificar una pestanya activa del navegador"
-  },
-  "error_no_callback": {
-    "message": "Si us plau, proporcioneu una funció callback",
-    "description": "[error] no s'ha passat cap funció per trucar al final del mètode"
-  },
-  "error_no_cookies": {
-    "message": "No s'han trobat cookies corresponents",
-    "description": "[error] les cookies de Salesforce no s'han retornat"
-  },
-  "error_no_data": {
-    "message": "No es pot identificar un Tab sense dades.",
-    "description": "[error] s'ha intentat obtenir un Tab sense enviar dades"
-  },
-  "error_no_headers": {
-    "message": "No s'han trobat els encapçalaments.",
-    "description": "[error] l'extensió no ha pogut trobar on posar el botó de favorits"
-  },
-  "error_no_matching_tab": {
-    "message": "No s'ha trobat cap Tab coincident.",
-    "description": "[error] no s'han rebut Tabs coincidents"
-  },
-  "error_no_message": {
-    "message": "No s'ha especificat cap missatge per enviar.",
-    "description": "[error] no s'ha trobat cap missatge per enviar a altres parts del codi"
-  },
-  "error_no_object": {
-    "message": "No s'ha passat cap objecte per comprovar!",
-    "description": "[error] no s'ha passat l'objecte"
-  },
-  "error_no_setup_tab": {
-    "message": "No s'ha trobat el Setup Tab.",
-    "description": "[error] l'extensió no ha pogut trobar on posar els Tabs favorits"
-  },
-  "error_no_url": {
-    "message": "No s'ha passat cap URL per comprovar!",
-    "description": "[error] no s'ha passat la URL per comprovar"
-  },
-  "error_remove_not_favourite": {
-    "message": "No es pot eliminar un Tab que no és favorit!",
-    "description": "[error] l'usuari ha intentat eliminar un Tab que encara no s'ha desat"
-  },
-  "error_sync_nothing": {
-    "message": "No es poden sincronitzar Tabs buits!",
-    "description": "[error] s'ha intentat sincronitzar cap Tab"
-  },
-  "error_tab_label": {
-    "message": "L'etiqueta ha de ser una cadena no buida",
-    "description": "[error] l'usuari ha intentat crear un Tab sense etiqueta"
-  },
-  "error_tab_not_found": {
-    "message": "No s'ha trobat el Tab.",
-    "description": "[error] el Tab no està inclòs a l'array"
-  },
-  "error_tab_object_creation": {
-    "message": "Quan s'utilitza un objecte, no passeu res més.",
-    "description": "[error] error d'implementació per part del desenvolupador"
-  },
-  "error_tab_org": {
-    "message": "L'organització ha de ser una cadena o undefined",
-    "description": "[error] l'usuari ha intentat crear un Tab amb un valor d'organització invàlid"
-  },
-  "error_tab_unexpected_keys": {
-    "message": "Claus inesperades trobades:",
-    "description": "[error] l'usuari ha intentat crear un Tab amb propietats no suportades"
-  },
-  "error_tab_url": {
-    "message": "La URL ha de ser una cadena no buida",
-    "description": "[error] l'usuari ha intentat crear un Tab sense URL"
-  },
-  "error_tabcont_initialize": {
-    "message": "No es pot inicialitzar amb",
-    "description": ""
-  },
-  "error_tabcont_invalid_tabs": {
-    "message": "S'han detectat Tabs no vàlids.\nPrimera ocurrència:",
-    "description": "[error] s'han passat Tabs invàlids"
-  },
-  "error_useless_remove": {
-    "message": "No es pot eliminar:\nNo es pot eliminar una pàgina que no ha estat desada prèviament",
-    "description": "[error] l'usuari ha intentat eliminar una pàgina que encara no s'ha desat"
-  },
-  "error_useless_save": {
-    "message": "No es pot desar:\nAquesta pàgina ja està desada!",
-    "description": "[error] l'usuari ha intentat desar una pàgina que ja estava desada"
-  },
-  "export": {
-    "message": "Exportar",
-    "description": "[popup] botó d'exportació"
-  },
-  "export_title": {
-    "message": "Exportar tots els Tabs",
-    "description": "[popup] títol del botó d'exportació"
-  },
-  "extension_description": {
-    "message": "Crea i gestiona Tab personalitzats a l'espai disponible a la pàgina de Salesforce Lightning Setup.",
-    "description": "[manifest] La descripció d'aquesta extensió"
-  },
-  "extension_label": {
-    "message": "Again, Why Salesforce",
-    "description": "El nom d'aquesta extensió"
-  },
-  "file": {
-    "message": "fitxer",
-    "description": "un sol fitxer"
-  },
-  "files": {
-    "message": "fitxers",
-    "description": "diversos fitxers"
-  },
-  "import": {
-    "message": "Importar",
-    "description": "[popup] botó d'importació"
-  },
-  "import_duplicate_description": {
-    "message": "Els Tabs duplicats seran ignorats.<br />Dos Tabs es consideren duplicats si tenen la mateixa URL.",
-    "description": "[import] descripció del procés d'importació"
-  },
-  "import_invalid_file": {
-    "message": "Tipus de fitxer no vàlid.\nNomés es permeten fitxers JSON.",
-    "description": "[error] el fitxer utilitzat per a la importació no és JSON"
-  },
-  "import_successful": {
-    "message": "Importació realitzada amb èxit",
-    "description": "[import] la importació s'ha completat. Després s'indicarà el nombre de registres importats"
-  },
-  "import_tabs": {
-    "message": "Importar Tabs",
-    "description": "[modal-title] per al procés d'importació"
-  },
-  "import_title": {
-    "message": "Importar Tabs des d'un fitxer json",
-    "description": "[popup] títol del botó d'importació"
-  },
-  "insert_another": {
-    "message": "Inserir un altre",
-    "description": "[error-open-other-org-modal] missatge quan l'usuari introdueix la mateixa organització"
-  },
-  "insert_another_org": {
-    "message": "La organització introduïda és la actual!\nSisplau, introdueix una altra organització.",
-    "description": "[error-open-other-org-modal] missatge quan l'usuari introdueix la mateixa organització"
-  },
-  "insert_valid_org": {
-    "message": "Sisplau, introdueix una organització vàlida!",
-    "description": "[error-open-other-org-modal] missatge quan l'usuari introdueix una URL errònia"
-  },
-  "invalid_url": {
-    "message": "URL no vàlid",
-    "description": "[notSalesforceSetup] una URL que no és vàlida"
-  },
-  "login_to_salesforce": {
-    "message": "Inicia sessió a Salesforce",
-    "description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina d'inici de sessió de Salesforce"
-  },
-  "mycustomorg": {
-    "message": "mycustomorg",
-    "description": "marc per al diàleg d'Actualització de Tab"
-  },
-  "no_match": {
-    "message": "No coincideix cap acció",
-    "description": "[error] quan la sentència switch no pot coincidir amb l'acció sol·licitada"
-  },
-  "nss_detected": {
-    "message": " detectat.",
-    "description": "[notSalesforceSetup] alguna cosa s'ha trobat. Assegureu-vos que el missatge comença amb un espai."
-  },
-  "nss_prefix": {
-    "message": "Això no és un ",
-    "description": "[notSalesforceSetup] prefix que es mostra quan l'usuari no està a una pàgina de Salesforce."
-  },
-  "open_setup": {
-    "message": "Obrir Setup",
-    "description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
-  },
-  "or_drop": {
-    "message": "O arrossegar",
-    "description": "[import] permet que l'usuari arrossegui fitxers amb el ratolí i els deixi anar"
-  },
-  "org_link": {
-    "message": "Enllaç de l'Organització",
-    "description": "[input-label]"
-  },
-  "other_org_info": {
-    "message": "Informació d'una altra Organització",
-    "description": "[modal-title]"
-  },
-  "other_org_placeholder": {
-    "message": "altra-org",
-    "description": "[input-placeholder]"
-  },
-  "overwrite_tabs": {
-    "message": "Sobre-escriure els Tabs desats.",
-    "description": "[label] esborrar tots els Tabs desats durant la importació"
-  },
-  "preserve_org_tabs": {
-    "message": "Conservar els Tabs per a altres organitzacions.",
-    "description": "[label] conservar tots els Tabs específics d'organització durant la importació"
-  },
-  "remove_tab": {
-    "message": "Eliminar Tab",
-    "description": "[alt] text alternatiu quan les imatges no es mostren"
-  },
-  "req_permissions_dont_ask": {
-    "message": "No demanis-ho de nou.",
-    "description": "[req_permission] etiqueta quan l'usuari no vol permetre els permisos de manera permanent"
-  },
-  "req_permissions_header": {
-    "message": "Sisplau, permeteu-nos accedir<br />automàticament a les pàgines Salesforce Setup.",
-    "description": "[req_permission] capçalera de la pàgina per sol·licitar permisos"
-  },
-  "req_permissions_paragraph": {
-    "message": "Si voleu, els vostres Tabs favorits poden aparèixer<br />tan aviat com accediu a una pàgina Salesforce Setup<br />sense haver de clicar aquest extensió cada vegada.",
-    "description": "[req_permission] text que explica per què es demanen permisos"
-  },
-  "required": {
-    "message": "obligatori",
-    "description": "[input] marca un camp d'entrada com a obligatori"
-  },
-  "required_info": {
-    "message": "= Informació Obligatòria",
-    "description": "[modal] informa a l'usuari que certa informació és obligatòria"
-  },
-  "salesforce_lightning": {
-    "message": "Salesforce Lightning",
-    "description": "[notSalesforceSetup] la plataforma Salesforce Lightning"
-  },
-  "save_tab": {
-    "message": "Desar com a Tab",
-    "description": "[alt] text alternatiu quan les imatges no es mostren"
-  },
-  "setup_page": {
-    "message": "Pàgina Setup",
-    "description": "[notSalesforceSetup] la pàgina per modificar els paràmetres de Salesforce"
-  },
-  "skip": {
-    "message": "Saltar",
-    "description": "[req_permission] botó per NO permetre permisos"
-  },
-  "successfully_imported": {
-    "message": "Importat amb èxit",
-    "description": "[toast] l'usuari ha importat Tabs des d'un fitxer extern"
-  },
-  "tab_explain": {
-    "message": "Cada element ha de tenir 'label' i 'url' com a cadenes. A més, cada element pot tenir 'org' com a cadena.",
-    "description": "[error] explica com ha de construir-se un Tab"
-  },
-  "tab_information": {
-    "message": "Informació del Tab",
-    "description": "títol per al diàleg d'Actualització de Tab"
-  },
-  "tab_label": {
-    "message": "Etiqueta del Tab",
-    "description": "la propietat Label del Tab, el seu nom"
-  },
-  "tab_org": {
-    "message": "Organització del Tab",
-    "description": "la propietat Org del Tab, si és per a una única organització de Salesforce"
-  },
-  "tab_url": {
-    "message": "URL del Tab",
-    "description": "la propietat URL del Tab, cap on apunta"
-  },
-  "table_delete": {
-    "message": "Esborrar Tab",
-    "description": "[popup] text auxiliar per a la columna amb el botó d'esborrar"
-  },
-  "table_org": {
-    "message": "Tab d'Organització",
-    "description": "[popup] text auxiliar per a la columna amb el checkbox d'organització"
-  },
-  "table_row_label": {
-    "message": "Introduïu l'etiqueta per a aquesta URL",
-    "description": "[popup] camp d'entrada amb el nom del Tab"
-  },
-  "table_row_org": {
-    "message": "Feu clic si voleu que aquest Tab estigui disponible només per a aquesta organització.",
-    "description": "[popup] checkbox per alternar el Tab a específic d'organització"
-  },
-  "table_row_org_name": {
-    "message": "L'organització per a la qual aquest Tab està disponible.",
-    "description": "[popup] camp d'entrada amb el nom de l'organització"
-  },
-  "table_row_url": {
-    "message": "Introduïu el sub_URL on voleu ser redirigits.",
-    "description": "[popup] camp d'entrada amb el URL del Tab"
-  },
-  "tabs": {
-    "message": "Tabs",
-    "description": "els enllaços favorits de l'usuari"
-  },
-  "tabs_saved": {
-    "message": "Tabs desats.",
-    "description": "[toast] els Tabs s'han desat amb èxit."
-  },
-  "theme_dark": {
-    "message": "Canviar Tema a Fosc",
-    "description": "[popup] títol de la icona de la lluna per canviar el tema"
-  },
-  "theme_light": {
-    "message": "Canviar Tema a Clar",
-    "description": "[popup] títol de la icona del sol per canviar el tema"
-  },
-  "upload": {
-    "message": "Penjar",
-    "description": "[import] permet a l'usuari navegar pels seus fitxers i seleccionar-ne el correcte"
-  },
-  "users": {
-    "message": "Usuaris",
-    "description": "el nom de la pàgina relacionada amb ManageUsers/home"
-  },
-  "warn_deprecated_tab_title": {
-    "message": "Heu importat utilitzant el 'tabTitle' obsolet!\nS'ha iniciat la descàrrega del fitxer actualitzat.\nA partir d'ara, utilitzeu el nou fitxer descarregat, si us plau.\nL'ús d'aquest fitxer serà descontinuat en futures actualitzacions.",
-    "description": "[warning] informa a l'usuari que el fitxer importat utilitza una propietat obsoleta"
-  },
-  "where_to": {
-    "message": "On?",
-    "description": "[open-other-org-modal] títol alternatiu per al diàleg modal"
-  }
+	"allow": {
+		"message": "Permetre",
+		"description": "[req_permission] botó per permetre permisos"
+	},
+	"available": {
+		"message": "Disponible",
+		"description": "Capçalera de secció per als elements que es poden afegir"
+	},
+	"bold": {
+		"message": "Negreta",
+		"description": "Opció d'estil de lletra per a text en negreta"
+	},
+	"cancel": {
+		"message": "Cancel·lar",
+		"description": "títol o text per als botons que impedeixen l'execució de l'acció actual"
+	},
+	"cancel_close": {
+		"message": "Cancel·lar i tancar",
+		"description": "títol o text per al botó que tanca els diàlegs"
+	},
+	"chosen": {
+		"message": "Triat",
+		"description": "Capçalera de secció per als elements que s'han seleccionat"
+	},
+	"confirm_another_org": {
+		"message": "Confirmeu l'obertura d'aquest enllaç.",
+		"description": "[open-other-org-modal] sol·licitud de confirmació a l'usuari per obrir l'enllaç construït."
+	},
+	"continue": {
+		"message": "Continuar",
+		"description": "text per als botons que permeten executar l'acció actual"
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 Tots els Tab visibles",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Restablir per defecte",
+		"description": "[context-menu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Exportar Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 Importar Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Moure Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Fer primer",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Fer darrer",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Moure cap a l'esquerra",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Moure cap a la dreta",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Obrir en una altra Organització",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 Eliminar Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 Desar com a Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Eliminar Tab(s)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs a l'esquerra",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Altres Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs a la dreta",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Aquest Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update": {
+		"message": "✏️ Actualitzar Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Canviar Organització",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Altres actualitzacions",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Esborrar",
+		"description": "[popup] esborrar una fila"
+	},
+	"delete_all": {
+		"message": "Esborrar tots els Tabs",
+		"description": "[popup] títol per al contenidor que buida tots els Tabs"
+	},
+	"error_close_other_modal": {
+		"message": "Tanca primer l'altre diàleg!",
+		"description": "[toast] l'usuari va intentar obrir més d'un diàleg"
+	},
+	"error_cxm_check": {
+		"message": "Error en comprovar els elements del menú",
+		"description": "[error] no s'han trobat els elements del menú contextual"
+	},
+	"error_cxm_create": {
+		"message": "Error en crear els elements del menú",
+		"description": "[error] no s'han pogut inicialitzar els elements del menú contextual"
+	},
+	"error_cxm_remove": {
+		"message": "Error en eliminar els elements del menú",
+		"description": "[error] no s'han pogut eliminar els elements del menú contextual"
+	},
+	"error_duplicate_tab": {
+		"message": "Aquest Tab ja existeix",
+		"description": "[error] el Tab és duplicat"
+	},
+	"error_expand_url": {
+		"message": "No es pot expandir una URL buida!",
+		"description": "[error] no s'ha passat la URL per expandir"
+	},
+	"error_expand_url_no_base": {
+		"message": "No es pot expandir una URL sense el seu host!",
+		"description": "[error] no s'ha passat la URL base per expandir-la"
+	},
+	"error_extract_empty_url": {
+		"message": "No es pot extreure el nom de l'organització d'una URL buida!",
+		"description": "[error] no s'ha passat la URL de la qual extreure el nom de l'organització"
+	},
+	"error_get_with_no_org": {
+		"message": "No es poden obtenir Tabs si l'organització no està especificada.",
+		"description": "[error] s'ha intentat cercar Tabs sense enviar informació de l'organització"
+	},
+	"error_import": {
+		"message": "Error durant la importació:\n",
+		"description": "[error] s'ha produït un error durant el procés d'importació"
+	},
+	"error_invalid_tab": {
+		"message": "Tab no vàlid",
+		"description": "[error] el Tab no és vàlid"
+	},
+	"error_link_with_id": {
+		"message": "Aquesta pàgina no pot existir en una altra Organització, perquè conté un Id!",
+		"description": "[open-other-org-modal] advertència a l'usuari que l'enllaç pot no existir en una altra organització"
+	},
+	"error_many_matching_tab": {
+		"message": "S'han trobat més d'un Tab coincidents.",
+		"description": "[error] s'han retornat molts Tabs"
+	},
+	"error_minify_url": {
+		"message": "No es pot minificar una URL buida!",
+		"description": "[error] no s'ha passat la URL per reduir-la"
+	},
+	"error_missing_favourite_id": {
+		"message": "No es pot obtenir la imatge favorita sense l'Id",
+		"description": "[error] no s'ha passat l'id de la imatge favorita"
+	},
+	"error_missing_key": {
+		"message": "Clau no trobada en cap lloc",
+		"description": "[error] no s'ha trobat cap traducció als fitxers"
+	},
+	"error_no_array": {
+		"message": "Array no vàlid o no s'ha passat cap array",
+		"description": "[error] no s'ha rebut un array vàlid"
+	},
+	"error_no_browser_tab": {
+		"message": "No s'ha trobat la pestanya activa del navegador.",
+		"description": "[error] la pàgina en segon pla no ha pogut identificar una pestanya activa del navegador"
+	},
+	"error_no_callback": {
+		"message": "Si us plau, proporcioneu una funció callback",
+		"description": "[error] no s'ha passat cap funció per trucar al final del mètode"
+	},
+	"error_no_cookies": {
+		"message": "No s'han trobat cookies corresponents",
+		"description": "[error] les cookies de Salesforce no s'han retornat"
+	},
+	"error_no_data": {
+		"message": "No es pot identificar un Tab sense dades.",
+		"description": "[error] s'ha intentat obtenir un Tab sense enviar dades"
+	},
+	"error_no_headers": {
+		"message": "No s'han trobat els encapçalaments.",
+		"description": "[error] l'extensió no ha pogut trobar on posar el botó de favorits"
+	},
+	"error_no_matching_tab": {
+		"message": "No s'ha trobat cap Tab coincident.",
+		"description": "[error] no s'han rebut Tabs coincidents"
+	},
+	"error_no_message": {
+		"message": "No s'ha especificat cap missatge per enviar.",
+		"description": "[error] no s'ha trobat cap missatge per enviar a altres parts del codi"
+	},
+	"error_no_object": {
+		"message": "No s'ha passat cap objecte per comprovar!",
+		"description": "[error] no s'ha passat l'objecte"
+	},
+	"error_no_setup_tab": {
+		"message": "No s'ha trobat el Setup Tab.",
+		"description": "[error] l'extensió no ha pogut trobar on posar els Tabs favorits"
+	},
+	"error_no_url": {
+		"message": "No s'ha passat cap URL per comprovar!",
+		"description": "[error] no s'ha passat la URL per comprovar"
+	},
+	"error_remove_not_favourite": {
+		"message": "No es pot eliminar un Tab que no és favorit!",
+		"description": "[error] l'usuari ha intentat eliminar un Tab que encara no s'ha desat"
+	},
+	"error_sync_nothing": {
+		"message": "No es poden sincronitzar Tabs buits!",
+		"description": "[error] s'ha intentat sincronitzar cap Tab"
+	},
+	"error_tab_label": {
+		"message": "L'etiqueta ha de ser una cadena no buida",
+		"description": "[error] l'usuari ha intentat crear un Tab sense etiqueta"
+	},
+	"error_tab_not_found": {
+		"message": "No s'ha trobat el Tab.",
+		"description": "[error] el Tab no està inclòs a l'array"
+	},
+	"error_tab_object_creation": {
+		"message": "Quan s'utilitza un objecte, no passeu res més.",
+		"description": "[error] error d'implementació per part del desenvolupador"
+	},
+	"error_tab_org": {
+		"message": "L'organització ha de ser una cadena o undefined",
+		"description": "[error] l'usuari ha intentat crear un Tab amb un valor d'organització invàlid"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Claus inesperades trobades:",
+		"description": "[error] l'usuari ha intentat crear un Tab amb propietats no suportades"
+	},
+	"error_tab_url": {
+		"message": "La URL ha de ser una cadena no buida",
+		"description": "[error] l'usuari ha intentat crear un Tab sense URL"
+	},
+	"error_tabcont_initialize": {
+		"message": "No es pot inicialitzar amb",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "S'han detectat Tabs no vàlids.\nPrimera ocurrència:",
+		"description": "[error] s'han passat Tabs invàlids"
+	},
+	"error_useless_remove": {
+		"message": "No es pot eliminar:\nNo es pot eliminar una pàgina que no ha estat desada prèviament",
+		"description": "[error] l'usuari ha intentat eliminar una pàgina que encara no s'ha desat"
+	},
+	"error_useless_save": {
+		"message": "No es pot desar:\nAquesta pàgina ja està desada!",
+		"description": "[error] l'usuari ha intentat desar una pàgina que ja estava desada"
+	},
+	"export": {
+		"message": "Exportar",
+		"description": "[popup] botó d'exportació"
+	},
+	"export_title": {
+		"message": "Exportar tots els Tabs",
+		"description": "[popup] títol del botó d'exportació"
+	},
+	"extension_description": {
+		"message": "Crea i gestiona Tab personalitzats a l'espai disponible a la pàgina de Salesforce Lightning Setup.",
+		"description": "[manifest] La descripció d'aquesta extensió"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "El nom d'aquesta extensió"
+	},
+	"file": {
+		"message": "fitxer",
+		"description": "un sol fitxer"
+	},
+	"files": {
+		"message": "fitxers",
+		"description": "diversos fitxers"
+	},
+	"general": {
+		"message": "General",
+		"description": "Etiqueta per a la categoria de configuració general"
+	},
+	"import": {
+		"message": "Importar",
+		"description": "[popup] botó d'importació"
+	},
+	"import_duplicate_description": {
+		"message": "Els Tabs duplicats seran ignorats.<br />Dos Tabs es consideren duplicats si tenen la mateixa URL.",
+		"description": "[import] descripció del procés d'importació"
+	},
+	"import_invalid_file": {
+		"message": "Tipus de fitxer no vàlid.\nNomés es permeten fitxers JSON.",
+		"description": "[error] el fitxer utilitzat per a la importació no és JSON"
+	},
+	"import_successful": {
+		"message": "Importació realitzada amb èxit",
+		"description": "[import] la importació s'ha completat. Després s'indicarà el nombre de registres importats"
+	},
+	"import_tabs": {
+		"message": "Importar Tabs",
+		"description": "[modal-title] per al procés d'importació"
+	},
+	"import_title": {
+		"message": "Importar Tabs des d'un fitxer json",
+		"description": "[popup] títol del botó d'importació"
+	},
+	"insert_another": {
+		"message": "Inserir un altre",
+		"description": "[error-open-other-org-modal] missatge quan l'usuari introdueix la mateixa organització"
+	},
+	"insert_another_org": {
+		"message": "La organització introduïda és la actual!\nSisplau, introdueix una altra organització.",
+		"description": "[error-open-other-org-modal] missatge quan l'usuari introdueix la mateixa organització"
+	},
+	"insert_valid_org": {
+		"message": "Sisplau, introdueix una organització vàlida!",
+		"description": "[error-open-other-org-modal] missatge quan l'usuari introdueix una URL errònia"
+	},
+	"invalid_url": {
+		"message": "URL no vàlid",
+		"description": "[notSalesforceSetup] una URL que no és vàlida"
+	},
+	"italic": {
+		"message": "Cursiva",
+		"description": "Opció d'estil de lletra per a text en cursiva"
+	},
+	"login_to_salesforce": {
+		"message": "Inicia sessió a Salesforce",
+		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina d'inici de sessió de Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "marc per al diàleg d'Actualització de Tab"
+	},
+	"no_match": {
+		"message": "No coincideix cap acció",
+		"description": "[error] quan la sentència switch no pot coincidir amb l'acció sol·licitada"
+	},
+	"nss_detected": {
+		"message": " detectat.",
+		"description": "[notSalesforceSetup] alguna cosa s'ha trobat. Assegureu-vos que el missatge comença amb un espai."
+	},
+	"nss_prefix": {
+		"message": "Això no és un ",
+		"description": "[notSalesforceSetup] prefix que es mostra quan l'usuari no està a una pàgina de Salesforce."
+	},
+	"open_setup": {
+		"message": "Obrir Setup",
+		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
+	},
+	"opt_en_fallback": {
+		"message": "en (Alternativa)",
+		"description": "Opció d'idioma per tornar a l'anglès si la configuració regional no és compatible o no presenta la traducció"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Mantenir Tabs preferits a l'esquerra d'Inici i Gestor d'objectes.",
+		"description": "Commutador per fixar Tabs preferits al costat esquerre de la barra de navegació"
+	},
+	"opt_sf_lang_default": {
+		"message": "Idioma de Salesforce (Predeterminat)",
+		"description": "Opció per utilitzar la configuració d'idioma de Salesforce. Aquesta opció és la predeterminada per a l'extensió."
+	},
+	"or_drop": {
+		"message": "O arrossegar",
+		"description": "[import] permet que l'usuari arrossegui fitxers amb el ratolí i els deixi anar"
+	},
+	"org_link": {
+		"message": "Enllaç de l'Organització",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Informació d'una altra Organització",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "altra-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Sobre-escriure els Tabs desats.",
+		"description": "[label] esborrar tots els Tabs desats durant la importació"
+	},
+	"preserve_org_tabs": {
+		"message": "Conservar els Tabs per a altres organitzacions.",
+		"description": "[label] conservar tots els Tabs específics d'organització durant la importació"
+	},
+	"remove_tab": {
+		"message": "Eliminar Tab",
+		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"req_permissions_dont_ask": {
+		"message": "No demanis-ho de nou.",
+		"description": "[req_permission] etiqueta quan l'usuari no vol permetre els permisos de manera permanent"
+	},
+	"req_permissions_header": {
+		"message": "Sisplau, permeteu-nos accedir<br />automàticament a les pàgines Salesforce Setup.",
+		"description": "[req_permission] capçalera de la pàgina per sol·licitar permisos"
+	},
+	"req_permissions_paragraph": {
+		"message": "Si voleu, els vostres Tabs favorits poden aparèixer<br />tan aviat com accediu a una pàgina Salesforce Setup<br />sense haver de clicar aquest extensió cada vegada.",
+		"description": "[req_permission] text que explica per què es demanen permisos"
+	},
+	"required": {
+		"message": "obligatori",
+		"description": "[input] marca un camp d'entrada com a obligatori"
+	},
+	"required_info": {
+		"message": "= Informació Obligatòria",
+		"description": "[modal] informa a l'usuari que certa informació és obligatòria"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] la plataforma Salesforce Lightning"
+	},
+	"save_tab": {
+		"message": "Desar com a Tab",
+		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"set_gen_preview": {
+		"message": "Tab Previsualització",
+		"description": "Etiqueta per previsualitzar l'aparença genèrica de Tab"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "Etiqueta per configurar l'estil de Tabs genèrics"
+	},
+	"set_general_settings": {
+		"message": "Configuració General",
+		"description": "Capçalera de secció per a les opcions de configuració generals"
+	},
+	"set_move_available": {
+		"message": "Moure a Disponible",
+		"description": "Títol del botó per moure els elements seleccionats de nou a Disponible"
+	},
+	"set_move_chosen": {
+		"message": "Moure a Triat",
+		"description": "Títol del botó per moure els elements seleccionats a Triat"
+	},
+	"set_org_preview": {
+		"message": "Org Previsualització",
+		"description": "Etiqueta per previsualitzar l'aparença de Tab específica de l'organització"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "Etiqueta per configurar l'estil de Tabs específics de l'organització"
+	},
+	"set_tab_background_active_label": {
+		"message": "Inseriu el color de fons per als vostres Tabs genèrics actius.",
+		"description": "Etiqueta per establir el color de fons per als Tabs genèrics actius"
+	},
+	"set_tab_background_label": {
+		"message": "Inseriu el color de fons per als vostres Tabs d'organització.",
+		"description": "Etiqueta per establir el color de fons per als Tabs específics de l'organització"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Inseriu el color de la vora per als vostres Tabs d'organització actius.",
+		"description": "Etiqueta per establir el color de la vora per als Tabs específics de l'organització actius"
+	},
+	"set_tab_border_color_label": {
+		"message": "Inseriu el color de la vora per als vostres Tabs genèrics.",
+		"description": "Etiqueta per establir el color de la vora per als Tabs genèrics"
+	},
+	"set_tab_color_active_label": {
+		"message": "Inseriu el color del text per als vostres Tabs genèrics actius.",
+		"description": "Etiqueta per establir el color del text per als Tabs genèrics actius"
+	},
+	"set_tab_color_label": {
+		"message": "Inseriu el color del text per als vostres Tabs d'organització.",
+		"description": "Etiqueta per establir el color del text per als Tabs específics de l'organització"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Trieu un o més estils de decoració per als vostres Tabs d'organització actius.",
+		"description": "Indicació per seleccionar estils de decoració per als Tabs específics de l'organització actius"
+	},
+	"set_tab_decoration_label": {
+		"message": "Trieu un o més estils de decoració per als vostres Tabs genèrics.",
+		"description": "Indicació per seleccionar estils de decoració per als Tabs genèrics"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Inseriu el color de fons en passar el ratolí per sobre per als vostres Tabs genèrics actius.",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí per sobre per als Tabs genèrics actius"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Inseriu el color de fons en passar el ratolí per sobre per als vostres Tabs d'organització.",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí per sobre per als Tabs específics de l'organització"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Inseriu el color de l'ombra per als vostres Tabs d'organització actius.",
+		"description": "Etiqueta per establir el color de l'ombra per als Tabs específics de l'organització actius"
+	},
+	"set_tab_shadow_label": {
+		"message": "Inseriu el color de l'ombra per als vostres Tabs genèrics.",
+		"description": "Etiqueta per establir el color de l'ombra per als Tabs genèrics"
+	},
+	"set_tab_top_active_label": {
+		"message": "Inseriu el color per a la barra a la part superior dels vostres Tabs genèrics actius.",
+		"description": "Etiqueta per establir el color de la barra superior per als Tabs genèrics actius"
+	},
+	"set_toggle_preview": {
+		"message": "Feu clic per commutar l'estat actiu.",
+		"description": "Text d'informació emergent per al control de commutació de l'estat actiu"
+	},
+	"settings": {
+		"message": "Configuració",
+		"description": "Etiqueta per al menú de configuració"
+	},
+	"setup_page": {
+		"message": "Pàgina Setup",
+		"description": "[notSalesforceSetup] la pàgina per modificar els paràmetres de Salesforce"
+	},
+	"skip": {
+		"message": "Saltar",
+		"description": "[req_permission] botó per NO permetre permisos"
+	},
+	"successfully_imported": {
+		"message": "Importat amb èxit",
+		"description": "[toast] l'usuari ha importat Tabs des d'un fitxer extern"
+	},
+	"tab_explain": {
+		"message": "Cada element ha de tenir 'label' i 'url' com a cadenes. A més, cada element pot tenir 'org' com a cadena.",
+		"description": "[error] explica com ha de construir-se un Tab"
+	},
+	"tab_information": {
+		"message": "Informació del Tab",
+		"description": "títol per al diàleg d'Actualització de Tab"
+	},
+	"tab_label": {
+		"message": "Etiqueta del Tab",
+		"description": "la propietat Label del Tab, el seu nom"
+	},
+	"tab_org": {
+		"message": "Organització del Tab",
+		"description": "la propietat Org del Tab, si és per a una única organització de Salesforce"
+	},
+	"tab_url": {
+		"message": "URL del Tab",
+		"description": "la propietat URL del Tab, cap on apunta"
+	},
+	"table_delete": {
+		"message": "Esborrar Tab",
+		"description": "[popup] text auxiliar per a la columna amb el botó d'esborrar"
+	},
+	"table_org": {
+		"message": "Tab d'Organització",
+		"description": "[popup] text auxiliar per a la columna amb el checkbox d'organització"
+	},
+	"table_row_label": {
+		"message": "Introduïu l'etiqueta per a aquesta URL",
+		"description": "[popup] camp d'entrada amb el nom del Tab"
+	},
+	"table_row_org": {
+		"message": "Feu clic si voleu que aquest Tab estigui disponible només per a aquesta organització.",
+		"description": "[popup] checkbox per alternar el Tab a específic d'organització"
+	},
+	"table_row_org_name": {
+		"message": "L'organització per a la qual aquest Tab està disponible.",
+		"description": "[popup] camp d'entrada amb el nom de l'organització"
+	},
+	"table_row_url": {
+		"message": "Introduïu el sub_URL on voleu ser redirigits.",
+		"description": "[popup] camp d'entrada amb el URL del Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "els enllaços favorits de l'usuari"
+	},
+	"tabs_saved": {
+		"message": "Tabs desats.",
+		"description": "[toast] els Tabs s'han desat amb èxit."
+	},
+	"theme_dark": {
+		"message": "Canviar Tema a Fosc",
+		"description": "[popup] títol de la icona de la lluna per canviar el tema"
+	},
+	"theme_light": {
+		"message": "Canviar Tema a Clar",
+		"description": "[popup] títol de la icona del sol per canviar el tema"
+	},
+	"underline": {
+		"message": "Subratllat",
+		"description": "Opció d'estil de decoració per subratllar el text de Tab"
+	},
+	"underline_wavy": {
+		"message": "Subratllat Ondulat",
+		"description": "Opció d'estil de decoració per aplicar un subratllat ondulat al text de Tab"
+	},
+	"upload": {
+		"message": "Penjar",
+		"description": "[import] permet a l'usuari navegar pels seus fitxers i seleccionar-ne el correcte"
+	},
+	"users": {
+		"message": "Usuaris",
+		"description": "el nom de la pàgina relacionada amb ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "Heu importat utilitzant el 'tabTitle' obsolet!\nS'ha iniciat la descàrrega del fitxer actualitzat.\nA partir d'ara, utilitzeu el nou fitxer descarregat, si us plau.\nL'ús d'aquest fitxer serà descontinuat en futures actualitzacions.",
+		"description": "[warning] informa a l'usuari que el fitxer importat utilitza una propietat obsoleta"
+	},
+	"where_to": {
+		"message": "On?",
+		"description": "[open-other-org-modal] títol alternatiu per al diàleg modal"
+	}
 }

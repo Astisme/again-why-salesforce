@@ -3,6 +3,14 @@
 		"message": "Consenti",
 		"description": "[req_permission] pulsante per concedere le autorizzazioni"
 	},
+	"available": {
+		"message": "Disponibile",
+		"description": "Intestazione di sezione per gli elementi che possono essere aggiunti"
+	},
+	"bold": {
+		"message": "Grassetto",
+		"description": "Opzione di stile del carattere per il testo in grassetto"
+	},
 	"cancel": {
 		"message": "Cancella",
 		"description": "titolo o testo per i bottoni che evitano che l'azione corrente venga eseguita"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Cancella e chiudi",
 		"description": "titolo o testo per il bottone di chiusura dei modali"
+	},
+	"chosen": {
+		"message": "Scelto",
+		"description": "Intestazione di sezione per gli elementi selezionati"
 	},
 	"confirm_another_org": {
 		"message": "Conferma l'apertura di questo link.",
@@ -286,6 +298,10 @@
 		"message": "più file",
 		"description": "molteplici file"
 	},
+	"general": {
+		"message": "Generale",
+		"description": "Etichetta per la categoria delle impostazioni generali"
+	},
 	"import": {
 		"message": "Importa",
 		"description": "[popup] pulsante di importazione"
@@ -326,6 +342,14 @@
 		"message": "URL non valido",
 		"description": "[notSalesforceSetup] un URL non valido"
 	},
+	"italic": {
+		"message": "Corsivo",
+		"description": "Opzione di stile del carattere per il testo in corsivo"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Tecnologia di navigazione personalizzata di Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Accedi a Salesforce",
 		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente alla pagina di login di Salesforce"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Apri Setup",
 		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente a una pagina di Setup di Salesforce"
+	},
+	"opt_always_open": {
+		"message": "Apri sempre",
+		"description": "[impostazione]"
+	},
+	"opt_automatic_open": {
+		"message": "Apri automaticamente",
+		"description": "[impostazione]"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Opzione di lingua per tornare all'inglese se la località non è supportata o non presenta la traduzione"
+	},
+	"opt_faster_loading": {
+		"message": "(caricamento più rapido in uso).",
+		"description": "[impostazione] spiegazione della funzione Lightning Navigation"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Mantieni i Tab preferiti a sinistra di Home e Gestione Oggetti.",
+		"description": "Interruttore per fissare i Tab preferiti sul lato sinistro della barra di navigazione"
+	},
+	"opt_link_new_browser": {
+		"message": "Apri sempre i link in una nuova scheda del browser.",
+		"description": "[impostazione] quando l'utente fa clic su un Tab preferito, aprilo in una nuova scheda"
+	},
+	"opt_prevent_use": {
+		"message": "Impedisci utilizzo ",
+		"description": "[impostazione] simile a 'preferisco non usare'. assicurati di includere uno spazio alla fine"
+	},
+	"opt_same_tab_popup": {
+		"message": "apri la pagina nella stessa scheda quando fai clic sul popup.",
+		"description": "[impostazione] impedisci l'apertura di una nuova scheda"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Predefinito)",
+		"description": "Opzione per utilizzare le impostazioni della lingua di Salesforce. Questa opzione è predefinita per l'estensione."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salta il controllo automatico dell'ID Salesforce.",
+		"description": "[impostazione] quando aggiungi un Tab ai preferiti, impedisci il controllo dell'ID nel link"
+	},
+	"opt_when_clicking_popup": {
+		"message": "pagina quando fai clic sul popup mentre sei in una pagina Salesforce.",
+		"description": "[impostazione] quando l'utente apre il popup in un sito Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "pagina quando fai clic sul popup mentre non sei in una pagina Salesforce.",
+		"description": "[impostazione] quando l'utente apre il popup in un sito casuale"
 	},
 	"or_drop": {
 		"message": "O rilascia",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] la piattaforma Salesforce Lightning"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "la pagina di accesso di Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "qualsiasi pagina di configurazione Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Salva come Tab",
 		"description": "[alt] testo alternativo quando le immagini non funzionano"
+	},
+	"set_gen_preview": {
+		"message": "Anteprima Tab",
+		"description": "Etichetta per anteporre l'aspetto dei Tab generici"
+	},
+	"set_gen_styler": {
+		"message": "Stilista Tab",
+		"description": "Etichetta per configurare lo stile dei Tab generici"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Intestazione di sezione per le opzioni di configurazione generali"
+	},
+	"set_move_available": {
+		"message": "Sposta in Disponibile",
+		"description": "Titolo del pulsante per spostare gli elementi selezionati in Disponibile"
+	},
+	"set_move_chosen": {
+		"message": "Sposta in Scelto",
+		"description": "Titolo del pulsante per spostare gli elementi selezionati in Scelto"
+	},
+	"set_org_preview": {
+		"message": "Anteprima Org",
+		"description": "Etichetta per anteporre l'aspetto dei Tab specifici dell'organizzazione"
+	},
+	"set_org_styler": {
+		"message": "Stilista Org",
+		"description": "Etichetta per configurare lo stile dei Tab specifici dell'organizzazione"
+	},
+	"set_tab_background_active_label": {
+		"message": "Inserisci il colore di sfondo per i tuoi Tab generici attivi.",
+		"description": "Etichetta per impostare il colore di sfondo dei Tab generici attivi"
+	},
+	"set_tab_background_label": {
+		"message": "Inserisci il colore di sfondo per i tuoi Tab dell'organizzazione.",
+		"description": "Etichetta per impostare il colore di sfondo dei Tab specifici dell'organizzazione"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Inserisci il colore del bordo per i tuoi Tab attivi dell'organizzazione.",
+		"description": "Etichetta per impostare il colore del bordo dei Tab attivi specifici dell'organizzazione"
+	},
+	"set_tab_border_color_label": {
+		"message": "Inserisci il colore del bordo per i tuoi Tab generici.",
+		"description": "Etichetta per impostare il colore del bordo dei Tab generici"
+	},
+	"set_tab_color_active_label": {
+		"message": "Inserisci il colore del testo per i tuoi Tab generici attivi.",
+		"description": "Etichetta per impostare il colore del testo dei Tab generici attivi"
+	},
+	"set_tab_color_label": {
+		"message": "Inserisci il colore del testo per i tuoi Tab dell'organizzazione.",
+		"description": "Etichetta per impostare il colore del testo dei Tab specifici dell'organizzazione"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Scegli uno o più stili di decorazione per i tuoi Tab attivi dell'organizzazione.",
+		"description": "Invito a selezionare stili di decorazione per i Tab attivi specifici dell'organizzazione"
+	},
+	"set_tab_decoration_label": {
+		"message": "Scegli uno o più stili di decorazione per i tuoi Tab generici.",
+		"description": "Invito a selezionare stili di decorazione per i Tab generici"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Inserisci il colore di sfondo al passaggio del mouse per i tuoi Tab generici attivi.",
+		"description": "Etichetta per impostare il colore di sfondo al passaggio del mouse dei Tab generici attivi"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Inserisci il colore di sfondo al passaggio del mouse per i tuoi Tab dell'organizzazione.",
+		"description": "Etichetta per impostare il colore di sfondo al passaggio del mouse dei Tab specifici dell'organizzazione"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Inserisci il colore dell'ombra per i tuoi Tab attivi dell'organizzazione.",
+		"description": "Etichetta per impostare il colore dell'ombra dei Tab attivi specifici dell'organizzazione"
+	},
+	"set_tab_shadow_label": {
+		"message": "Inserisci il colore dell'ombra per i tuoi Tab generici.",
+		"description": "Etichetta per impostare il colore dell'ombra dei Tab generici"
+	},
+	"set_tab_top_active_label": {
+		"message": "Inserisci il colore per la barra superiore dei tuoi Tab generici attivi.",
+		"description": "Etichetta per impostare il colore della barra superiore dei Tab generici attivi"
+	},
+	"set_toggle_preview": {
+		"message": "Fai clic per alternare lo stato attivo.",
+		"description": "Testo del suggerimento strumenti per il controllo di alternanza dello stato attivo"
+	},
+	"settings": {
+		"message": "Impostazioni",
+		"description": "Etichetta per il menu delle impostazioni"
 	},
 	"setup_page": {
 		"message": "Pagina di Setup",
@@ -430,10 +598,10 @@
 		"message": "Etichetta Tab",
 		"description": "[popup] intestazione della colonna per il nome della Tab"
 	},
-    "tab_org": {
-        "message": "Tab Org",
-        "description": "la proprietà Org della Tab, se è per una singola organizzazione Salesforce"
-    },
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "la proprietà Org della Tab, se è per una singola organizzazione Salesforce"
+	},
 	"tab_url": {
 		"message": "URL Tab",
 		"description": "[popop] intestazione della colonna per l'URL della Tab"
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "Cambia Tema in Chiaro",
 		"description": "[popup] titolo sul sole per cambiare tema"
+	},
+	"underline": {
+		"message": "Sottolinea",
+		"description": "Opzione di stile decorativo per sottolineare il testo della Tab"
+	},
+	"underline_wavy": {
+		"message": "Sottolineatura ondulata",
+		"description": "Opzione di stile decorativo per applicare una sottolineatura ondulata al testo della Tab"
 	},
 	"upload": {
 		"message": "Carica",

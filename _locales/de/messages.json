@@ -3,6 +3,14 @@
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
 	},
+	"available": {
+		"message": "Verfügbar",
+		"description": "Abschnittsüberschrift für Elemente, die hinzugefügt werden können"
+	},
+	"bold": {
+		"message": "Fett",
+		"description": "Schriftstiloption für fettgedruckten Text"
+	},
 	"cancel": {
 		"message": "Abbrechen",
 		"description": "Titel oder Text für Schaltflächen, die die aktuelle Aktion verhindern"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Abbrechen und schließen",
 		"description": "Titel oder Text für den Schließknopf von Modals"
+	},
+	"chosen": {
+		"message": "Ausgewählt",
+		"description": "Abschnittsüberschrift für Elemente, die ausgewählt wurden"
 	},
 	"confirm_another_org": {
 		"message": "Bestätigen Sie das Öffnen dieses Links.",
@@ -286,6 +298,10 @@
 		"message": "Dateien",
 		"description": "Mehrere Dateien"
 	},
+	"general": {
+		"message": "Allgemein",
+		"description": "Bezeichnung für die Kategorie Allgemeine Einstellungen"
+	},
 	"import": {
 		"message": "Importieren",
 		"description": "[popup] Import-Knopf"
@@ -326,6 +342,14 @@
 		"message": "Ungültige URL",
 		"description": "[notSalesforceSetup] Eine URL, die nicht gültig ist"
 	},
+	"italic": {
+		"message": "Kursiv",
+		"description": "Schriftstiloption für kursiven Text"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce-eigene Navigationstechnologie"
+	},
 	"login_to_salesforce": {
 		"message": "Bei Salesforce anmelden",
 		"description": "[notSalesforceSetup] Aufruf zur Anmeldung bei Salesforce"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Setup öffnen",
 		"description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
+	},
+	"opt_always_open": {
+		"message": "Immer öffnen",
+		"description": "[Einstellung]"
+	},
+	"opt_automatic_open": {
+		"message": "Automatisch öffnen",
+		"description": "[Einstellung]"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Sprachauswahl, um auf Englisch zurückzufallen, wenn das Gebietsschema nicht unterstützt wird oder keine Übersetzung anbietet"
+	},
+	"opt_faster_loading": {
+		"message": "(schnelleres Laden bei Nutzung).",
+		"description": "[Einstellung] Erklärung der Lightning Navigation-Funktion"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Favorisierte Tabs links von Startseite und Objekt-Manager belassen.",
+		"description": "Umschalter, um Favoriten links in der Navigationsleiste zu fixieren"
+	},
+	"opt_link_new_browser": {
+		"message": "Links immer in einem neuen Browser-Tab öffnen.",
+		"description": "[Einstellung] wenn der Benutzer auf einen Favoriten klickt, in neuem Tab öffnen"
+	},
+	"opt_prevent_use": {
+		"message": "Verwendung verhindern ",
+		"description": "[Einstellung] wie 'möchte nicht verwenden'. Stelle sicher, dass am Ende ein Leerzeichen steht"
+	},
+	"opt_same_tab_popup": {
+		"message": "Seite im selben Tab öffnen, wenn auf das Popup geklickt wird.",
+		"description": "[Einstellung] Verhindert das Öffnen eines neuen Browser-Tabs"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Standard)",
+		"description": "Option zur Verwendung der Salesforce-Spracheneinstellung. Standard für die Erweiterung."
+	},
+	"opt_skip_link_detection": {
+		"message": "Automatische Überprüfung der Salesforce-ID überspringen.",
+		"description": "[Einstellung] beim Favorisieren eines Tabs nicht nach einer ID im Link suchen"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Seite beim Klicken im Popup auf einer Salesforce-Seite.",
+		"description": "[Einstellung] wenn der Benutzer das Popup auf einer Salesforce-Website öffnet"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Seite beim Klicken im Popup auf einer Nicht-Salesforce-Seite.",
+		"description": "[Einstellung] wenn der Benutzer das Popup auf einer beliebigen Website öffnet"
 	},
 	"or_drop": {
 		"message": "Oder ablegen",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Die Salesforce Lightning Plattform"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforce-Anmeldeseite (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "beliebige Salesforce-Setup-Seite (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"set_gen_preview": {
+		"message": "Tab Preview",
+		"description": "Bezeichnung zum Vorschauen des generischen Tab-Designs"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "Bezeichnung zum Konfigurieren des generischen Tab-Stils"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Abschnittsüberschrift für allgemeine Konfigurationsoptionen"
+	},
+	"set_move_available": {
+		"message": "Zu Verfügbar verschieben",
+		"description": "Button-Beschriftung, um ausgewählte Elemente zurück zu Verfügbar zu verschieben"
+	},
+	"set_move_chosen": {
+		"message": "Zu Ausgewählt verschieben",
+		"description": "Button-Beschriftung, um ausgewählte Elemente zu Ausgewählt zu verschieben"
+	},
+	"set_org_preview": {
+		"message": "Org Preview",
+		"description": "Bezeichnung zum Vorschauen des organisationsspezifischen Tab-Designs"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "Bezeichnung zum Konfigurieren des organisationsspezifischen Tab-Stils"
+	},
+	"set_tab_background_active_label": {
+		"message": "Hintergrundfarbe für aktive generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hintergrundfarbe aktiver generischer Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Hintergrundfarbe für Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hintergrundfarbe organisationsspezifischer Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Rahmenfarbe für aktive Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Rahmenfarbe aktiver organisationsspezifischer Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Rahmenfarbe für generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Rahmenfarbe generischer Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Textfarbe für aktive generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Textfarbe aktiver generischer Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Textfarbe für Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Textfarbe organisationsspezifischer Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Ein oder mehrere Dekorationsstile für aktive Organisations-Tabs wählen.",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für aktive organisationsspezifische Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Ein oder mehrere Dekorationsstile für generische Tabs wählen.",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für generische Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Hover-Hintergrundfarbe für aktive generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hover-Hintergrundfarbe aktiver generischer Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Hover-Hintergrundfarbe für Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hover-Hintergrundfarbe organisationsspezifischer Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Schattenfarbe für aktive Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Schattenfarbe aktiver organisationsspezifischer Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Schattenfarbe für generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Schattenfarbe generischer Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Farbe für die obere Leiste aktiver generischer Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Farbe der oberen Leiste aktiver generischer Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Klicken, um den aktiven Status umzuschalten.",
+		"description": "Tooltip-Text für die Steuerung des Umschaltens des aktiven Status"
+	},
+	"settings": {
+		"message": "Einstellungen",
+		"description": "Bezeichnung für das Einstellungsmenü"
 	},
 	"setup_page": {
 		"message": "Setup-Seite",
@@ -430,10 +598,10 @@
 		"message": "Tab-Bezeichnung",
 		"description": "[popup] Spaltenüberschrift für den Namen des Tabs"
 	},
-    "tab_org": {
-        "message": "Tab Org",
-        "description": "die Org-Eigenschaft des Tab, wenn es sich um eine einzelne Salesforce-Organisation handelt"
-    },
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "die Org-Eigenschaft des Tab, wenn es sich um eine einzelne Salesforce-Organisation handelt"
+	},
 	"tab_url": {
 		"message": "Tab-URL",
 		"description": "[popup] Spaltenüberschrift für die URL des Tabs"
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "Thema auf Hell wechseln",
 		"description": "[popup] Titel auf der Sonne zum Wechseln des Themas"
+	},
+	"underline": {
+		"message": "Unterstreichen",
+		"description": "Dekorationsstiloption zum Unterstreichen von Tab-Text"
+	},
+	"underline_wavy": {
+		"message": "Wellig unterstreichen",
+		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
 	},
 	"upload": {
 		"message": "Hochladen",

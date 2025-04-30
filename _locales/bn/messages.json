@@ -3,6 +3,14 @@
 		"message": "অনুমতি দিন",
 		"description": "[req_permission] অনুমতি দেওয়ার জন্য বোতাম"
 	},
+	"available": {
+		"message": "প্রাপ্য",
+		"description": "যেসব আইটেম যোগ করা যাবে সেগুলির জন্য সেকশন হেডার"
+	},
+	"bold": {
+		"message": "বোল্ড",
+		"description": "বল্ড টেক্সটের জন্য ফন্ট স্টাইল অপশন"
+	},
 	"cancel": {
 		"message": "বাতিল করুন",
 		"description": "বোতামের জন্য টাইটেল অথবা টেক্সট কনটেন্ট যা বর্তমান কার্যকলাপ বন্ধ করতে দেয়"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "বাতিল করুন এবং বন্ধ করুন",
 		"description": "মোডালগুলোর বন্ধ করার বোতামের জন্য টাইটেল অথবা টেক্সট কনটেন্ট"
+	},
+	"chosen": {
+		"message": "নির্বাচিত",
+		"description": "যেসব আইটেম নির্বাচিত হয়েছে তাদের জন্য সেকশন হেডার"
 	},
 	"confirm_another_org": {
 		"message": "এই লিঙ্কটি খুলতে সম্মতি দিন।",
@@ -286,6 +298,10 @@
 		"message": "ফাইলসমূহ",
 		"description": "একাধিক ফাইল"
 	},
+	"general": {
+		"message": "সাধারণ",
+		"description": "সাধারণ সেটিংস ক্যাটেগরির জন্য লেবেল"
+	},
 	"import": {
 		"message": "আমদানি করুন",
 		"description": "[popup] আমদানি বাটন"
@@ -326,6 +342,14 @@
 		"message": "অবৈধ URL",
 		"description": "[notSalesforceSetup] একটি অবৈধ URL"
 	},
+	"italic": {
+		"message": "ইটালিক",
+		"description": "ইটালিক টেক্সটের জন্য ফন্ট স্টাইল অপশন"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce-এর কাস্টম নেভিগেশন প্রযুক্তি"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce-এ লগইন করুন",
 		"description": "[notSalesforceSetup] Salesforce লগইন পৃষ্ঠায় পুনঃনির্দেশের জন্য কল-টু-অ্যাকশন"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Setup খুলুন",
 		"description": "[notSalesforceSetup] Salesforce Setup পৃষ্ঠায় যাওয়ার জন্য কল-টু-অ্যাকশন"
+	},
+	"opt_always_open": {
+		"message": "সবসময় খুলুন",
+		"description": "[সেটিং]"
+	},
+	"opt_automatic_open": {
+		"message": "স্বয়ংক্রিয়ভাবে খুলুন",
+		"description": "[সেটিং]"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "যদি লোকেল সমর্থিত না হয় অথবা অনুবাদ প্রদর্শন না করে তবে ইংরেজিতে ফিরে যাওয়ার ভাষা অপশন"
+	},
+	"opt_faster_loading": {
+		"message": "(ব্যবহারে দ্রুত লোডিং)।",
+		"description": "[সেটিং] Lightning Navigation ফিচারের ব্যাখ্যা"
+	},
+	"opt_keep_tabs_left": {
+		"message": "পছন্দসই Tabs-গুলো হোম এবং অবজেক্ট ম্যানেজারের বাম দিকে রাখুন।",
+		"description": "নেভিগেশন বারের বাম দিকে পছন্দের Tabs পিন করার টগল"
+	},
+	"opt_link_new_browser": {
+		"message": "লিঙ্কে ক্লিক করলে সর্বদা নতুন ব্রাউজার ট্যাবে খুলুন।",
+		"description": "[সেটিং] যখন ব্যবহারকারী কোনও পছন্দসই Tab-এ ক্লিক করে, তখন এটি নতুন ব্রাউজার ট্যাবে খুলুন"
+	},
+	"opt_prevent_use": {
+		"message": "ব্যবহার বন্ধ করুন ",
+		"description": "[সেটিং] 'ব্যবহার না করাই পছন্দ' এর মত। নিশ্চিত করুন যে মেসেজের শেষে একটি স্পেস আছে"
+	},
+	"opt_same_tab_popup": {
+		"message": "পপআপ ক্লিক করার সময় একই ট্যাবে পেজ খুলুন।",
+		"description": "[সেটিং] নতুন ব্রাউজার ট্যাব খোলার থেকে বিরত রাখুন"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (ডিফল্ট)",
+		"description": "Salesforce-এর ভাষা সেটিং ব্যবহারের অপশন। এই অপশনটি এক্সটেনশনের ডিফল্ট।"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce Id-এর স্বয়ংক্রিয় যাচাই এড়িয়ে যান।",
+		"description": "[সেটিং] Tab প্রিয় হিসেবে সংরক্ষণ করার সময় লিঙ্কে Id আছে কিনা তা যাচাই বন্ধ করুন।"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce পেজে পপআপ ক্লিক করার সময় পেজ।",
+		"description": "[সেটিং] যখন ব্যবহারকারী Salesforce ওয়েবসাইটে পপআপ খুলেন"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "অ-সেইলসফোর্স পেজে পপআপ ক্লিক করার সময় পেজ।",
+		"description": "[সেটিং] যখন ব্যবহারকারী যেকোনো অননুমোদিত সাইটে পপআপ খুলেন"
 	},
 	"or_drop": {
 		"message": "অথবা ড্রপ করুন",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning প্ল্যাটফর্ম"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforce লগইন পেজ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "যেকোনো Salesforce সেটআপ পেজ (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Tab হিসেবে সংরক্ষণ করুন",
 		"description": "[alt] ছবি কাজ না করলে বিকল্প পাঠ"
+	},
+	"set_gen_preview": {
+		"message": "Tab Preview",
+		"description": "জেনেরিক Tab-এর চেহারা পূর্বদর্শনের জন্য লেবেল"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "জেনেরিক Tabs-এর স্টাইল কনফিগার করার জন্য লেবেল"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "সামগ্রিক কনফিগারেশন অপশনগুলো জন্য সেকশন হেডার"
+	},
+	"set_move_available": {
+		"message": "Available-এ নিন",
+		"description": "নির্বাচিত আইটেমগুলোকে “Available” এ ফিরিয়ে নেওয়ার বাটন শিরোনাম"
+	},
+	"set_move_chosen": {
+		"message": "Chosen-এ নিন",
+		"description": "নির্বাচিত আইটেমগুলোকে “Chosen” এ নিয়ে যাওয়ার বাটন শিরোনাম"
+	},
+	"set_org_preview": {
+		"message": "Org Preview",
+		"description": "অর্গ-নির্দিষ্ট Tab-এর চেহারা পূর্বদর্শনের জন্য লেবেল"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "অর্গ-নির্দিষ্ট Tabs-এর স্টাইল কনফিগার করার জন্য লেবেল"
+	},
+	"set_tab_background_active_label": {
+		"message": "অ্যাকটিভ জেনেরিক Tabs-এর ব্যাকগ্রাউন্ড কালার যুক্ত করুন।",
+		"description": "অ্যাকটিভ জেনেরিক Tabs-এর ব্যাকগ্রাউন্ড কালার সেট করার লেবেল"
+	},
+	"set_tab_background_label": {
+		"message": "অর্গ Tabs-এর ব্যাকগ্রাউন্ড কালার যুক্ত করুন।",
+		"description": "অর্গ-নির্দিষ্ট Tabs-এর ব্যাকগ্রাউন্ড কালার সেট করার লেবেল"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "অ্যাকটিভ অর্গ Tabs-এর বর্ডার কালার যুক্ত করুন।",
+		"description": "অ্যাকটিভ অর্গ-নির্দিষ্ট Tabs-এর বর্ডার কালার সেট করার লেবেল"
+	},
+	"set_tab_border_color_label": {
+		"message": "জেনেরিক Tabs-এর বর্ডার কালার যুক্ত করুন।",
+		"description": "জেনেরিক Tabs-এর বর্ডার কালার সেট করার লেবেল"
+	},
+	"set_tab_color_active_label": {
+		"message": "অ্যাকটিভ জেনেরিক Tabs-এর টেক্সট কালার যুক্ত করুন।",
+		"description": "অ্যাকটিভ জেনেরিক Tabs-এর টেক্সট কালার সেট করার লেবেল"
+	},
+	"set_tab_color_label": {
+		"message": "অর্গ Tabs-এর টেক্সট কালার যুক্ত করুন।",
+		"description": "অর্গ-নির্দিষ্ট Tabs-এর টেক্সট কালার সেট করার লেবেল"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "অ্যাকটিভ অর্গ Tabs-এর জন্য একটি বা একাধিক ডেকোরেশন স্টাইল নির্বাচন করুন।",
+		"description": "অ্যাকটিভ অর্গ-নির্দিষ্ট Tabs-এর জন্য ডেকোরেশন স্টাইল নির্বাচন করার প্রম্পট"
+	},
+	"set_tab_decoration_label": {
+		"message": "জেনেরিক Tabs-এর জন্য একটি বা একাধিক ডেকোরেশন স্টাইল নির্বাচন করুন।",
+		"description": "জেনেরিক Tabs-এর জন্য ডেকোরেশন স্টাইল নির্বাচন করার প্রম্পট"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "অ্যাকটিভ জেনেরিক Tabs-এর হোভার ব্যাকগ্রাউন্ড কালার যুক্ত করুন।",
+		"description": "অ্যাকটিভ জেনেরিক Tabs-এর হোভার ব্যাকগ্রাউন্ড কালার সেট করার লেবেল"
+	},
+	"set_tab_hover_background_label": {
+		"message": "অর্গ Tabs-এর হোভার ব্যাকগ্রাউন্ড কালার যুক্ত করুন।",
+		"description": "অর্গ-নির্দিষ্ট Tabs-এর হোভার ব্যাকগ্রাউন্ড কালার সেট করার লেবেল"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "অ্যাকটিভ অর্গ Tabs-এর শ্যাডো কালার যুক্ত করুন।",
+		"description": "অ্যাকটিভ অর্গ-নির্দিষ্ট Tabs-এর শ্যাডো কালার সেট করার লেবেল"
+	},
+	"set_tab_shadow_label": {
+		"message": "জেনেরিক Tabs-এর শ্যাডো কালার যুক্ত করুন।",
+		"description": "জেনেরিক Tabs-এর শ্যাডো কালার সেট করার লেবেল"
+	},
+	"set_tab_top_active_label": {
+		"message": "অ্যাকটিভ জেনেরিক Tabs-এর উপরের বার জন্য কালার যুক্ত করুন।",
+		"description": "অ্যাকটিভ জেনেরিক Tabs-এর উপরের-বার কালার সেট করার লেবেল"
+	},
+	"set_toggle_preview": {
+		"message": "অ্যাকটিভ স্টেট টগল করতে ক্লিক করুন।",
+		"description": "টগল অ্যাকটিভ স্টেট নিয়ন্ত্রণের টুলটিপ টেক্সট"
+	},
+	"settings": {
+		"message": "সেটিংস",
+		"description": "সেটিংস মেনুর জন্য লেবেল"
 	},
 	"setup_page": {
 		"message": "Setup পৃষ্ঠা",
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "লাইট থিমে পরিবর্তন করুন",
 		"description": "[popup] থিম পরিবর্তনের জন্য সূর্যের উপর শিরোনাম"
+	},
+	"underline": {
+		"message": "আন্ডারলাইন",
+		"description": "Tab টেক্সট আন্ডারলাইন করার ডেকোরেশন স্টাইল অপশন"
+	},
+	"underline_wavy": {
+		"message": "ওয়েভি আন্ডারলাইন",
+		"description": "Tab টেক্সটের জন্য ওয়েভি আন্ডারলাইন প্রয়োগ করার ডেকোরেশন স্টাইল অপশন"
 	},
 	"upload": {
 		"message": "আপলোড করুন",

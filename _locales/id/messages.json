@@ -3,6 +3,14 @@
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
 	},
+	"available": {
+		"message": "Tersedia",
+		"description": "Judul bagian untuk item yang dapat ditambahkan"
+	},
+	"bold": {
+		"message": "Tebal",
+		"description": "Opsi gaya font untuk teks tebal"
+	},
 	"cancel": {
 		"message": "Batal",
 		"description": "judul atau textContent untuk tombol yang mencegah tindakan saat ini dieksekusi"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Batal dan tutup",
 		"description": "judul atau textContent untuk tombol tutup modal"
+	},
+	"chosen": {
+		"message": "Terpilih",
+		"description": "Judul bagian untuk item yang telah dipilih"
 	},
 	"confirm_another_org": {
 		"message": "Konfirmasi pembukaan link ini.",
@@ -286,6 +298,10 @@
 		"message": "file",
 		"description": "beberapa file"
 	},
+	"general": {
+		"message": "Umum",
+		"description": "Label untuk kategori pengaturan umum"
+	},
 	"import": {
 		"message": "Impor",
 		"description": "[popup] Tombol impor"
@@ -326,6 +342,14 @@
 		"message": "URL tidak valid",
 		"description": "[notSalesforceSetup] URL yang tidak valid"
 	},
+	"italic": {
+		"message": "Miring",
+		"description": "Opsi gaya font untuk teks miring"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Teknologi navigasi kustom Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Login ke Salesforce",
 		"description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
+	},
+	"opt_always_open": {
+		"message": "Selalu buka",
+		"description": "[pengaturan]"
+	},
+	"opt_automatic_open": {
+		"message": "Buka otomatis",
+		"description": "[pengaturan]"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Opsi bahasa untuk kembali ke bahasa Inggris jika lokal tidak didukung atau tidak menampilkan terjemahan"
+	},
+	"opt_faster_loading": {
+		"message": "(pemrosesan lebih cepat saat digunakan).",
+		"description": "[pengaturan] penjelasan fitur Lightning Navigation"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Pertahankan Tabs favorit di kiri Beranda dan Manajer Objek.",
+		"description": "Toggle untuk menyematkan Tabs favorit di sisi kiri bilah navigasi"
+	},
+	"opt_link_new_browser": {
+		"message": "Selalu buka tautan di tab baru browser.",
+		"description": "[pengaturan] ketika pengguna mengklik Tab favorit, buka di tab baru browser"
+	},
+	"opt_prevent_use": {
+		"message": "Cegah penggunaan ",
+		"description": "[pengaturan] seperti 'lebih suka tidak menggunakan'. pastikan ada spasi di akhir pesan"
+	},
+	"opt_same_tab_popup": {
+		"message": "halaman di tab yang sama saat mengklik popup.",
+		"description": "[pengaturan] mencegah pembukaan tab baru browser"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Default)",
+		"description": "Opsi untuk menggunakan pengaturan bahasa Salesforce. Opsi ini adalah default untuk ekstensi."
+	},
+	"opt_skip_link_detection": {
+		"message": "Lewati pemeriksaan otomatis ID Salesforce.",
+		"description": "[pengaturan] saat menandai Tab sebagai favorit, mencegah memeriksa apakah ada ID dalam tautan"
+	},
+	"opt_when_clicking_popup": {
+		"message": "halaman saat mengklik popup di halaman Salesforce.",
+		"description": "[pengaturan] saat pengguna membuka popup di situs Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "halaman saat mengklik popup di halaman bukan Salesforce.",
+		"description": "[pengaturan] saat pengguna membuka popup di situs acak"
 	},
 	"or_drop": {
 		"message": "Atau jatuhkan",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Platform Salesforce Lightning"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "halaman login Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "setiap halaman pengaturan Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"set_gen_preview": {
+		"message": "Tab Preview",
+		"description": "Label untuk pratinjau tampilan Tabs generik"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "Label untuk mengonfigurasi gaya Tabs generik"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Judul bagian untuk opsi konfigurasi umum"
+	},
+	"set_move_available": {
+		"message": "Pindah ke Tersedia",
+		"description": "Judul tombol untuk memindahkan item terpilih kembali ke Tersedia"
+	},
+	"set_move_chosen": {
+		"message": "Pindah ke Terpilih",
+		"description": "Judul tombol untuk memindahkan item terpilih ke Terpilih"
+	},
+	"set_org_preview": {
+		"message": "Org Preview",
+		"description": "Label untuk pratinjau tampilan Tabs khusus organisasi"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "Label untuk mengonfigurasi gaya Tabs khusus organisasi"
+	},
+	"set_tab_background_active_label": {
+		"message": "Masukkan warna latar untuk Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna latar Tabs generik aktif"
+	},
+	"set_tab_background_label": {
+		"message": "Masukkan warna latar untuk Tabs organisasi Anda.",
+		"description": "Label untuk mengatur warna latar Tabs khusus organisasi"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Masukkan warna batas untuk Tabs organisasi aktif Anda.",
+		"description": "Label untuk mengatur warna batas Tabs organisasi aktif"
+	},
+	"set_tab_border_color_label": {
+		"message": "Masukkan warna batas untuk Tabs generik Anda.",
+		"description": "Label untuk mengatur warna batas Tabs generik"
+	},
+	"set_tab_color_active_label": {
+		"message": "Masukkan warna teks untuk Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna teks Tabs generik aktif"
+	},
+	"set_tab_color_label": {
+		"message": "Masukkan warna teks untuk Tabs organisasi Anda.",
+		"description": "Label untuk mengatur warna teks Tabs khusus organisasi"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Pilih satu atau lebih gaya dekorasi untuk Tabs organisasi aktif Anda.",
+		"description": "Prompt untuk memilih gaya dekorasi untuk Tabs organisasi aktif"
+	},
+	"set_tab_decoration_label": {
+		"message": "Pilih satu atau lebih gaya dekorasi untuk Tabs generik Anda.",
+		"description": "Prompt untuk memilih gaya dekorasi untuk Tabs generik"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Masukkan warna latar saat hover untuk Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna latar saat hover Tabs generik aktif"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Masukkan warna latar saat hover untuk Tabs organisasi Anda.",
+		"description": "Label untuk mengatur warna latar saat hover Tabs khusus organisasi"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Masukkan warna bayangan untuk Tabs organisasi aktif Anda.",
+		"description": "Label untuk mengatur warna bayangan Tabs organisasi aktif"
+	},
+	"set_tab_shadow_label": {
+		"message": "Masukkan warna bayangan untuk Tabs generik Anda.",
+		"description": "Label untuk mengatur warna bayangan Tabs generik"
+	},
+	"set_tab_top_active_label": {
+		"message": "Masukkan warna untuk bilah atas Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna bilah atas Tabs generik aktif"
+	},
+	"set_toggle_preview": {
+		"message": "Klik untuk mengalihkan status aktif.",
+		"description": "Teks tooltip untuk kontrol pengalihan status aktif"
+	},
+	"settings": {
+		"message": "Pengaturan",
+		"description": "Label untuk menu pengaturan"
 	},
 	"setup_page": {
 		"message": "Halaman Setup",
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "Ubah Tema ke Terang",
 		"description": "[popup] Judul di matahari untuk mengganti tema"
+	},
+	"underline": {
+		"message": "Garis bawah",
+		"description": "Opsi gaya dekorasi untuk menggarisbawahi teks Tab"
+	},
+	"underline_wavy": {
+		"message": "Garis bawah bergelombang",
+		"description": "Opsi gaya dekorasi untuk menerapkan garis bawah bergelombang pada teks Tab"
 	},
 	"upload": {
 		"message": "Unggah",

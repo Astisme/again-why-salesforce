@@ -3,6 +3,14 @@
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
 	},
+	"available": {
+		"message": "利用可能",
+		"description": "追加できる項目のセクション見出し"
+	},
+	"bold": {
+		"message": "太字",
+		"description": "太字テキスト用のフォントスタイルオプション"
+	},
 	"cancel": {
 		"message": "キャンセル",
 		"description": "現在の操作の実行を防ぐボタンのタイトルまたはtextContent"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "キャンセルして閉じる",
 		"description": "モーダルの閉じるボタンのタイトルまたはtextContent"
+	},
+	"chosen": {
+		"message": "選択済み",
+		"description": "選択された項目のセクション見出し"
 	},
 	"confirm_another_org": {
 		"message": "このリンクを開くことを確認してください。",
@@ -286,6 +298,10 @@
 		"message": "ファイル",
 		"description": "複数のファイル"
 	},
+	"general": {
+		"message": "一般",
+		"description": "一般設定カテゴリのラベル"
+	},
 	"import": {
 		"message": "インポートする",
 		"description": "[popup] インポートボタン"
@@ -326,6 +342,14 @@
 		"message": "無効な URL",
 		"description": "[notSalesforceSetup] 無効な URL"
 	},
+	"italic": {
+		"message": "斜体",
+		"description": "斜体テキスト用のフォントスタイルオプション"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforceのカスタムナビゲーション技術"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce にログインする",
 		"description": "[notSalesforceSetup] Salesforce ログインページにリダイレクトするための呼びかけ"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
+	},
+	"opt_always_open": {
+		"message": "常に開く",
+		"description": "[設定]"
+	},
+	"opt_automatic_open": {
+		"message": "自動で開く",
+		"description": "[設定]"
+	},
+	"opt_en_fallback": {
+		"message": "en（フォールバック）",
+		"description": "ロケールがサポートされないか翻訳がない場合に英語に戻す言語オプション"
+	},
+	"opt_faster_loading": {
+		"message": "（使用時に高速ロード）。",
+		"description": "[設定] Lightning Navigation機能の説明"
+	},
+	"opt_keep_tabs_left": {
+		"message": "お気に入りのTabsをホームとオブジェクトマネージャーの左に保持します。",
+		"description": "ナビゲーションバーの左側にお気に入りのTabsを固定するトグル"
+	},
+	"opt_link_new_browser": {
+		"message": "リンクを常に新しいブラウザタブで開きます。",
+		"description": "[設定] お気に入りのTabをクリックしたときに新しいタブで開く"
+	},
+	"opt_prevent_use": {
+		"message": "使用を防ぐ ",
+		"description": "[設定] 「使用したくない」と同様。メッセージ末尾にスペースを含めてください"
+	},
+	"opt_same_tab_popup": {
+		"message": "ポップアップをクリックしたときに同じタブでページを開きます。",
+		"description": "[設定] 新しいブラウザタブの開放を防止"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language（デフォルト）",
+		"description": "Salesforceの言語設定を使用するオプション。拡張機能のデフォルトです。"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce IDの自動チェックをスキップします。",
+		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforceページでポップアップをクリックしたときのページ。",
+		"description": "[設定] Salesforceサイトでポップアップを開いたとき"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "非Salesforceページでポップアップをクリックしたときのページ。",
+		"description": "[設定] ランダムなサイトでポップアップを開いたとき"
 	},
 	"or_drop": {
 		"message": "またはドロップ",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning プラットフォーム"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforceログインページ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "任意のSalesforce設定ページ (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Tab として保存する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"set_gen_preview": {
+		"message": "Tab Preview",
+		"description": "一般的なTabの外観をプレビューするラベル"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "一般的なTabsのスタイルを設定するラベル"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "全体的な設定オプションのセクション見出し"
+	},
+	"set_move_available": {
+		"message": "利用可能に移動",
+		"description": "選択した項目を「利用可能」に戻すボタンのタイトル"
+	},
+	"set_move_chosen": {
+		"message": "選択済みに移動",
+		"description": "選択した項目を「選択済み」に移動するボタンのタイトル"
+	},
+	"set_org_preview": {
+		"message": "Org Preview",
+		"description": "組織専用Tabの外観をプレビューするラベル"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "組織専用Tabsのスタイルを設定するラベル"
+	},
+	"set_tab_background_active_label": {
+		"message": "アクティブな一般Tabsの背景色を入力します。",
+		"description": "アクティブな一般Tabsの背景色を設定するラベル"
+	},
+	"set_tab_background_label": {
+		"message": "組織Tabsの背景色を入力します。",
+		"description": "組織専用Tabsの背景色を設定するラベル"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "アクティブな組織Tabsのボーダーカラーを入力します。",
+		"description": "アクティブな組織専用Tabsのボーダーカラーを設定するラベル"
+	},
+	"set_tab_border_color_label": {
+		"message": "一般Tabsのボーダーカラーを入力します。",
+		"description": "一般Tabsのボーダーカラーを設定するラベル"
+	},
+	"set_tab_color_active_label": {
+		"message": "アクティブな一般Tabsのテキスト色を入力します。",
+		"description": "アクティブな一般Tabsのテキスト色を設定するラベル"
+	},
+	"set_tab_color_label": {
+		"message": "組織Tabsのテキスト色を入力します。",
+		"description": "組織専用Tabsのテキスト色を設定するラベル"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "アクティブな組織Tabsの装飾スタイルを1つ以上選択します。",
+		"description": "アクティブな組織専用Tabsの装飾スタイルを選択するプロンプト"
+	},
+	"set_tab_decoration_label": {
+		"message": "一般Tabsの装飾スタイルを1つ以上選択します。",
+		"description": "一般Tabsの装飾スタイルを選択するプロンプト"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "アクティブな一般Tabsのホバーバックグラウンド色を入力します。",
+		"description": "アクティブな一般Tabsのホバーバックグラウンド色を設定するラベル"
+	},
+	"set_tab_hover_background_label": {
+		"message": "組織Tabsのホバーバックグラウンド色を入力します。",
+		"description": "組織専用Tabsのホバーバックグラウンド色を設定するラベル"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "アクティブな組織Tabsのシャドウカラーを入力します。",
+		"description": "アクティブな組織専用Tabsのシャドウカラーを設定するラベル"
+	},
+	"set_tab_shadow_label": {
+		"message": "一般Tabsのシャドウカラーを入力します。",
+		"description": "一般Tabsのシャドウカラーを設定するラベル"
+	},
+	"set_tab_top_active_label": {
+		"message": "アクティブな一般Tabsの上部バーの色を入力します。",
+		"description": "アクティブな一般Tabsの上部バーの色を設定するラベル"
+	},
+	"set_toggle_preview": {
+		"message": "クリックしてアクティブ状態を切り替えます。",
+		"description": "アクティブ状態切り替えコントロールのツールチップテキスト"
+	},
+	"settings": {
+		"message": "設定",
+		"description": "設定メニューのラベル"
 	},
 	"setup_page": {
 		"message": "Setup ページ",
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "ライトテーマに変更する",
 		"description": "[popup] テーマ変更用に太陽の上にあるタイトル"
+	},
+	"underline": {
+		"message": "下線",
+		"description": "Tabテキストに下線を引く装飾スタイルオプション"
+	},
+	"underline_wavy": {
+		"message": "波線下線",
+		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
 	},
 	"upload": {
 		"message": "アップロード",

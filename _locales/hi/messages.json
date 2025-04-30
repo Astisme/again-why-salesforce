@@ -3,6 +3,14 @@
 		"message": "अनुमति दें",
 		"description": "[req_permission] अनुमतियाँ देने के लिए बटन"
 	},
+	"available": {
+		"message": "उपलब्ध",
+		"description": "ऐसे आइटम्स के लिए अनुभाग शीर्षक जिन्हें जोड़ा जा सकता है"
+	},
+	"bold": {
+		"message": "बोल्ड",
+		"description": "बोल्ड टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
+	},
 	"cancel": {
 		"message": "रद्द करें",
 		"description": "ऐसे बटनों का शीर्षक या टेक्स्ट जो वर्तमान क्रिया को रोकते हैं।"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "रद्द करें और बंद करें",
 		"description": "मोडल के क्लोज बटन का शीर्षक या टेक्स्ट"
+	},
+	"chosen": {
+		"message": "चयनित",
+		"description": "चयनित आइटम्स के लिए अनुभाग शीर्षक"
 	},
 	"confirm_another_org": {
 		"message": "इस लिंक को खोलने की पुष्टि करें।",
@@ -286,6 +298,10 @@
 		"message": "फाइलें",
 		"description": "कई फाइलें"
 	},
+	"general": {
+		"message": "सामान्य",
+		"description": "सामान्य सेटिंग्स श्रेणी के लिए लेबल"
+	},
 	"import": {
 		"message": "आयात करें",
 		"description": "[popup] आयात बटन"
@@ -326,6 +342,14 @@
 		"message": "अमान्य URL",
 		"description": "[notSalesforceSetup] एक अमान्य URL"
 	},
+	"italic": {
+		"message": "इटैलिक",
+		"description": "इटैलिक टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
+	},
+	"lightning_navigation": {
+		"message": "लाइटनिंग नेविगेशन",
+		"description": "Salesforce की कस्टम नेविगेशन तकनीक"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce में लॉगिन करें",
 		"description": "[notSalesforceSetup] Salesforce लॉगिन पृष्ठ पर जाने के लिए कॉल टू एक्शन"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Setup खोलें",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठ पर जाने के लिए कॉल टू एक्शन"
+	},
+	"opt_always_open": {
+		"message": "हमेशा खोलें",
+		"description": "[सेटिंग]"
+	},
+	"opt_automatic_open": {
+		"message": "स्वचालित रूप से खोलें",
+		"description": "[सेटिंग]"
+	},
+	"opt_en_fallback": {
+		"message": "en (बैकअप)",
+		"description": "यदि स्थानीय समर्थित नहीं है या अनुवाद नहीं मिलता है तो अंग्रेज़ी पर वापस जाने का भाषा विकल्प"
+	},
+	"opt_faster_loading": {
+		"message": "(उपयोग के दौरान तेज़ लोडिंग)।",
+		"description": "[सेटिंग] लाइटनिंग नेविगेशन फ़ीचर की व्याख्या"
+	},
+	"opt_keep_tabs_left": {
+		"message": "मनपसंद Tabs को होम और ऑब्जेक्ट मैनेजर के बाएँ रखें।",
+		"description": "नेविगेशन बार के बाएँ तरफ पसंदीदा Tabs को पिन करने के लिए टॉगल"
+	},
+	"opt_link_new_browser": {
+		"message": "लिंक पर क्लिक करने पर हमेशा नए ब्राउज़र टैब में खोलें।",
+		"description": "[सेटिंग] जब उपयोगकर्ता पसंदीदा Tab पर क्लिक करे तो नए टैब में खोलें"
+	},
+	"opt_prevent_use": {
+		"message": "उपयोग रोकें ",
+		"description": "[सेटिंग] 'उपयोग नहीं करना पसंद करें' जैसा। सुनिश्चित करें संदेश के अंत में स्थान हो"
+	},
+	"opt_same_tab_popup": {
+		"message": "पॉपअप क्लिक करते समय उसी टैब में पेज खोलें।",
+		"description": "[सेटिंग] नए ब्राउज़र टैब के खुलने से रोकें"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce भाषा (डिफ़ॉल्ट)",
+		"description": "Salesforce की भाषा सेटिंग का उपयोग करने का विकल्प। यह एक्सटेंशन के लिए डिफ़ॉल्ट है।"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce Id की स्वचालित जांच छोड़ें।",
+		"description": "[सेटिंग] Tab को पसंदीदा बनाते समय लिंक में Id की जांच न करें।"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce पेज पर पॉपअप क्लिक करते समय पेज।",
+		"description": "[सेटिंग] जब उपयोगकर्ता Salesforce वेबसाइट पर पॉपअप खोलें"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce पेज नहीं होने पर पॉपअप क्लिक करते समय पेज।",
+		"description": "[सेटिंग] जब उपयोगकर्ता किसी अन्य वेबसाइट पर पॉपअप खोलें"
 	},
 	"or_drop": {
 		"message": "या ड्रॉप करें",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning प्लेटफार्म"
 	},
+	"salesforce_login": {
+		"message": "Salesforce लॉगिन",
+		"description": "Salesforce लॉगिन पेज (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce सेटअप",
+		"description": "कोई भी Salesforce सेटअप पेज (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Tab के रूप में सहेजें",
 		"description": "[alt] जब चित्र काम नहीं करते, तो वैकल्पिक पाठ।"
+	},
+	"set_gen_preview": {
+		"message": "Tab पूर्वावलोकन",
+		"description": "सामान्य Tab के रूप को पूर्वावलोकन करने के लिए लेबल"
+	},
+	"set_gen_styler": {
+		"message": "Tab स्टाइलर",
+		"description": "सामान्य Tabs की शैली कॉन्फ़िगर करने के लिए लेबल"
+	},
+	"set_general_settings": {
+		"message": "सामान्य सेटिंग्स",
+		"description": "कुल कॉन्फ़िगरेशन विकल्पों के लिए अनुभाग शीर्षक"
+	},
+	"set_move_available": {
+		"message": "उपलब्ध में ले जाएँ",
+		"description": "चयनित आइटम्स को \"उपलब्ध\" में वापस ले जाने के लिए बटन शीर्षक"
+	},
+	"set_move_chosen": {
+		"message": "चयनित में ले जाएँ",
+		"description": "चयनित आइटम्स को \"चयनित\" में ले जाने के लिए बटन शीर्षक"
+	},
+	"set_org_preview": {
+		"message": "ऑर्ग पूर्वावलोकन",
+		"description": "ऑर्ग-विशेष Tab के रूप को पूर्वावलोकन करने के लिए लेबल"
+	},
+	"set_org_styler": {
+		"message": "ऑर्ग स्टाइलर",
+		"description": "ऑर्ग-विशेष Tabs की शैली कॉन्फ़िगर करने के लिए लेबल"
+	},
+	"set_tab_background_active_label": {
+		"message": "सक्रिय सामान्य Tabs के लिए पृष्ठभूमि रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के पृष्ठभूमि रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_background_label": {
+		"message": "ऑर्ग Tabs के लिए पृष्ठभूमि रंग डालें।",
+		"description": "ऑर्ग-विशेष Tabs के पृष्ठभूमि रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "सक्रिय ऑर्ग Tabs के लिए बॉर्डर रंग डालें।",
+		"description": "सक्रिय ऑर्ग-विशेष Tabs के बॉर्डर रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_border_color_label": {
+		"message": "सामान्य Tabs के लिए बॉर्डर रंग डालें।",
+		"description": "सामान्य Tabs के बॉर्डर रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_color_active_label": {
+		"message": "सक्रिय सामान्य Tabs के लिए टेक्स्ट रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के टेक्स्ट रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_color_label": {
+		"message": "ऑर्ग Tabs के लिए टेक्स्ट रंग डालें।",
+		"description": "ऑर्ग-विशेष Tabs के टेक्स्ट रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "सक्रिय ऑर्ग Tabs के लिए एक या अधिक सजावट शैलियाँ चुनें।",
+		"description": "सक्रिय ऑर्ग-विशेष Tabs के सजावट शैलियाँ चुनने के लिए संकेत"
+	},
+	"set_tab_decoration_label": {
+		"message": "सामान्य Tabs के लिए एक या अधिक सजावट शैलियाँ चुनें।",
+		"description": "सामान्य Tabs के सजावट शैलियाँ चुनने के लिए संकेत"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "सक्रिय सामान्य Tabs के लिए होवर पृष्ठभूमि रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के होवर पृष्ठभूमि رنگ सेट करने के लिए लेबल"
+	},
+	"set_tab_hover_background_label": {
+		"message": "ऑर्ग Tabs के लिए होवर पृष्ठभूमि रंग डालें।",
+		"description": "ऑर्ग-विशेष Tabs के होवर पृष्ठभूमि رنگ सेट करने के लिए लेबल"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "सक्रिय ऑर्ग Tabs के लिए शैडो रंग डालें।",
+		"description": "सक्रिय ऑर्ग-विशेष Tabs के शैडो रंग सेट کرنے के लिए लेबल"
+	},
+	"set_tab_shadow_label": {
+		"message": "सामान्य Tabs के लिए शैडो रंग डालें।",
+		"description": "सामान्य Tabs के शैडो रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_top_active_label": {
+		"message": "सक्रिय सामान्य Tabs के शीर्ष बार के लिए रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के शीर्ष-बार रंग सेट करने के लिए लेबल"
+	},
+	"set_toggle_preview": {
+		"message": "सक्रिय स्थिति टॉगल करने के लिए क्लिक करें।",
+		"description": "टॉगल सक्रिय स्थिति नियंत्रण के लिए टूलटिप टेक्स्ट"
+	},
+	"settings": {
+		"message": "सेटिंग्स",
+		"description": "सेटिंग मेनू के लिए लेबल"
 	},
 	"setup_page": {
 		"message": "Setup पृष्ठ",
@@ -430,10 +598,10 @@
 		"message": "Tab लेबल",
 		"description": "[popup] Tab के नाम वाले कॉलम का हेडर"
 	},
-    "tab_org": {
-        "message": "Tab Org",
-        "description": "Tab की Org प्रॉपर्टी, यदि यह एक एकल Salesforce संगठन के लिए है"
-    },
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "Tab की Org प्रॉपर्टी, यदि यह एक एकल Salesforce संगठन के लिए है"
+	},
 	"tab_url": {
 		"message": "Tab URL",
 		"description": "[popup] Tab की URL वाले कॉलम का हेडर"
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "लाइट थीम में बदलें",
 		"description": "[popup] थीम बदलने के लिए सूरज पर शीर्षक"
+	},
+	"underline": {
+		"message": "रेखांकित",
+		"description": "Tab टेक्स्ट के लिए रेखांकित सजावट शैली विकल्प"
+	},
+	"underline_wavy": {
+		"message": "तरंग रेखांकित",
+		"description": "Tab टेक्स्ट पर तरंगाकार रेखांकित लागू करने के लिए सजावट शैली विकल्प"
 	},
 	"upload": {
 		"message": "अपलोड करें",

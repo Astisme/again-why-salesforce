@@ -1,498 +1,626 @@
 {
-  "allow": {
-    "message": "Benarkan",
-    "description": "[minta_kebenaran] butang untuk membenarkan kebenaran"
-  },
-  "cancel": {
-    "message": "Batal",
-    "description": "tajuk atau textContent untuk butang yang menghalang tindakan semasa daripada dilaksanakan"
-  },
-  "cancel_close": {
-    "message": "Batal dan tutup",
-    "description": "tajuk atau textContent untuk butang tutup modal"
-  },
-  "confirm_another_org": {
-    "message": "Sahkan pembukaan pautan ini.",
-    "description": "[buka-modal-org-lain] minta pengesahan daripada pengguna untuk membuka pautan yang dibina."
-  },
-  "continue": {
-    "message": "Teruskan",
-    "description": "textContent untuk butang yang membenarkan tindakan semasa dilaksanakan"
-  },
-  "cxm_empty_no_org_tabs": {
-    "message": "👀 Semua Tabs yang kelihatan",
-    "description": "[menu-konteks]"
-  },
-  "cxm_empty_tabs": {
-    "message": "😨 Tetapkan Semula kepada Lalai",
-    "description": "[menu-konteks]"
-  },
-  "cxm_export_tabs": {
-    "message": "⬇️ Eksport Tabs",
-    "description": "[menu-konteks]"
-  },
-  "cxm_import_tabs": {
-    "message": "🆙 Import Tabs",
-    "description": "[menu-konteks]"
-  },
-  "cxm_move": {
-    "message": "🧭 Alihkan Tab",
-    "description": "[menu-konteks]"
-  },
-  "cxm_move_first": {
-    "message": "↩️ Jadikan pertama",
-    "description": "[menu-konteks]"
-  },
-  "cxm_move_last": {
-    "message": "↪️ Jadikan terakhir",
-    "description": "[menu-konteks]"
-  },
-  "cxm_move_left": {
-    "message": "👈 Alihkan ke kiri",
-    "description": "[menu-konteks]"
-  },
-  "cxm_move_right": {
-    "message": "👉 Alihkan ke kanan",
-    "description": "[menu-konteks]"
-  },
-  "cxm_open_other_org": {
-    "message": "🔗 Buka dalam Org lain",
-    "description": "[menu-konteks]"
-  },
-  "cxm_page_remove_tab": {
-    "message": "👋 Buang Tab",
-    "description": "[menu-konteks]"
-  },
-  "cxm_page_save_tab": {
-    "message": "💾 Simpan sebagai Tab",
-    "description": "[menu-konteks]"
-  },
-  "cxm_remove": {
-    "message": "💥 Buang Tab(s)",
-    "description": "[menu-konteks]"
-  },
-  "cxm_remove_left_tabs": {
-    "message": "🔥 Tabs di sebelah kiri",
-    "description": "[menu-konteks]"
-  },
-  "cxm_remove_other_tabs": {
-    "message": "↔️ Tabs Lain",
-    "description": "[menu-konteks]"
-  },
-  "cxm_remove_right_tabs": {
-    "message": "🌊 Tabs di sebelah kanan",
-    "description": "[menu-konteks]"
-  },
-  "cxm_remove_tab": {
-    "message": "1️⃣ Tab Ini",
-    "description": "[menu-konteks]"
-  },
-  "cxm_update": {
-    "message": "✏️ Kemas kini Tab",
-    "description": "[menu-konteks]"
-  },
-  "cxm_update_org": {
-    "message": "📌 Togol Org",
-    "description": "[menu-konteks]"
-  },
-  "cxm_update_tab": {
-    "message": "🧹 Kemas kini Lain",
-    "description": "[menu-konteks]"
-  },
-  "delete": {
-    "message": "Padam",
-    "description": "[popup] padam satu baris"
-  },
-  "delete_all": {
-    "message": "Padam semua Tabs",
-    "description": "[popup] tajuk pada tong sampah untuk mengosongkan semua Tabs"
-  },
-  "error_close_other_modal": {
-    "message": "Tutup modal lain dahulu!",
-    "description": "[toast] Pengguna cuba membuka lebih daripada 1 modal"
-  },
-  "error_cxm_check": {
-    "message": "Ralat menyemak item menu",
-    "description": "[ralat] item menu konteks tidak dapat ditemui"
-  },
-  "error_cxm_create": {
-    "message": "Ralat mencipta item menu",
-    "description": "[ralat] item menu konteks tidak dapat dimulakan"
-  },
-  "error_cxm_remove": {
-    "message": "Ralat membuang item menu",
-    "description": "[ralat] item menu konteks tidak dapat dihapuskan"
-  },
-  "error_duplicate_tab": {
-    "message": "Tab ini sudah wujud",
-    "description": "[ralat] Tab ini adalah pendua"
-  },
-  "error_expand_url": {
-    "message": "Tidak dapat mengembangkan URL kosong!",
-    "description": "[ralat] url untuk dikembangkan tidak dihantar"
-  },
-  "error_expand_url_no_base": {
-    "message": "Tidak dapat mengembangkan URL tanpa hosnya!",
-    "description": "[ralat] url asas yang digunakan untuk mengembangkan tidak dihantar"
-  },
-  "error_extract_empty_url": {
-    "message": "Tidak dapat mengekstrak nama Org daripada URL kosong!",
-    "description": "[ralat] url dari mana nama Org hendak diambil tidak dihantar"
-  },
-  "error_get_with_no_org": {
-    "message": "Tidak dapat mendapatkan Tabs jika Org tidak dinyatakan.",
-    "description": "[ralat] cuba mencari Tabs mengikut Org tanpa menghantar maklumat Org"
-  },
-  "error_import": {
-    "message": "Ralat semasa import:\n",
-    "description": "[ralat] terdapat ralat semasa proses import"
-  },
-  "error_invalid_tab": {
-    "message": "Tab tidak sah",
-    "description": "[ralat] Tab tidak sah"
-  },
-  "error_link_with_id": {
-    "message": "Halaman ini tidak boleh wujud dalam Org lain, kerana ia mengandungi Id!",
-    "description": "[buka-modal-org-lain] amaran kepada pengguna bahawa pautan itu mungkin tidak wujud dalam Org lain"
-  },
-  "error_many_matching_tab": {
-    "message": "Menemui lebih daripada 1 Tab yang sepadan.",
-    "description": "[ralat] banyak Tabs telah diambil semula"
-  },
-  "error_minify_url": {
-    "message": "Tidak dapat mengecilkan URL kosong!",
-    "description": "[ralat] url untuk dikurangkan tidak dihantar"
-  },
-  "error_missing_favourite_id": {
-    "message": "Tidak dapat mendapatkan imej kegemaran tanpa Id",
-    "description": "[ralat] tiada id kegemaran dihantar"
-  },
-  "error_missing_key": {
-    "message": "Kunci tidak ditemui di mana-mana",
-    "description": "[ralat] tiada terjemahan ditemui dalam fail"
-  },
-  "error_no_array": {
-    "message": "Array tidak sah atau tiada array dihantar",
-    "description": "[ralat] tidak menerima array yang sah"
-  },
-  "error_no_browser_tab": {
-    "message": "Tidak dapat mencari Tab pelayar semasa.",
-    "description": "[ralat] halaman latar belakang tidak dapat mewujudkan Tab pelayar aktif"
-  },
-  "error_no_callback": {
-    "message": "Sila berikan panggilan balik (callback)",
-    "description": "[ralat] fungsi untuk dipanggil pada akhir kaedah tidak dihantar"
-  },
-  "error_no_cookies": {
-    "message": "Tidak menemui kuki yang sepadan",
-    "description": "[ralat] kuki Salesforce tidak dikembalikan"
-  },
-  "error_no_data": {
-    "message": "Tidak dapat mengenal pasti Tab tanpa data.",
-    "description": "[ralat] cuba mendapatkan Tab tanpa menghantar data"
-  },
-  "error_no_headers": {
-    "message": "Gagal mencari pengepala.",
-    "description": "[ralat] Sambungan tidak dapat mencari tempat untuk meletakkan butang kegemaran"
-  },
-  "error_no_matching_tab": {
-    "message": "Tidak menemui sebarang Tab yang sepadan.",
-    "description": "[ralat] tiada Tabs diambil semula"
-  },
-  "error_no_message": {
-    "message": "Tidak menyatakan mesej untuk dihantar.",
-    "description": "[ralat] tiada mesej ditemui untuk dihantar ke bahagian lain kod"
-  },
-  "error_no_object": {
-    "message": "Tiada objek untuk disemak!",
-    "description": "[ralat] objek tidak dihantar"
-  },
-  "error_no_setup_tab": {
-    "message": "Gagal mencari Tab Persediaan (Setup).",
-    "description": "[ralat] Sambungan tidak dapat mencari tempat untuk meletakkan Tabs kegemaran."
-  },
-  "error_no_url": {
-    "message": "Tiada URL untuk disemak!",
-    "description": "[ralat] url untuk disemak tidak dihantar"
-  },
-  "error_remove_not_favourite": {
-    "message": "Tidak dapat membuang Tab yang bukan kegemaran!",
-    "description": "[ralat] pengguna cuba membuang Tab yang belum disimpan lagi"
-  },
-  "error_sync_nothing": {
-    "message": "Tidak dapat menyegerakkan Tab nol (null)!",
-    "description": "[ralat] cuba menyegerakkan tiada apa-apa"
-  },
-  "error_tab_label": {
-    "message": "Label mestilah rentetan bukan kosong",
-    "description": "[ralat] pengguna cuba mencipta Tab tanpa label"
-  },
-  "error_tab_not_found": {
-    "message": "Tab tidak ditemui.",
-    "description": "[ralat] Tab tidak disertakan dalam array"
-  },
-  "error_tab_object_creation": {
-    "message": "Apabila memanggil dengan objek, jangan hantar apa-apa lagi.",
-    "description": "[ralat] ralat pelaksanaan oleh pembangun"
-  },
-  "error_tab_org": {
-    "message": "Org mestilah rentetan atau tidak ditentukan (undefined)",
-    "description": "[ralat] pengguna cuba mencipta Tab dengan nilai Org yang tidak sah"
-  },
-  "error_tab_unexpected_keys": {
-    "message": "Kunci tidak dijangka ditemui:",
-    "description": "[ralat] pengguna cuba mencipta Tab dengan beberapa sifat yang tidak disokong"
-  },
-  "error_tab_url": {
-    "message": "URL mestilah rentetan bukan kosong",
-    "description": "[ralat] pengguna cuba mencipta Tab tanpa url"
-  },
-  "error_tabcont_initialize": {
-    "message": "Tidak dapat memulakan dengan",
-    "description": "[ralat] kegagalan memulakan bekas Tab"
-  },
-  "error_tabcont_invalid_tabs": {
-    "message": "Tab(s) tidak sah dikesan.\nKejadian pertama:",
-    "description": "[ralat] Tabs tidak sah dihantar"
-  },
-  "error_useless_remove": {
-    "message": "Tidak dapat membuang:\nTidak dapat membuang halaman yang belum disimpan sebelum ini",
-    "description": "[ralat] pengguna cuba membuang halaman yang belum disimpan lagi"
-  },
-  "error_useless_save": {
-    "message": "Tidak dapat menyimpan:\nHalaman ini telah disimpan!",
-    "description": "[ralat] pengguna cuba menyimpan halaman yang sudah disimpan"
-  },
-  "export": {
-    "message": "Eksport",
-    "description": "[popup] butang eksport"
-  },
-  "export_title": {
-    "message": "Eksport semua Tabs",
-    "description": "[popup] tajuk pada butang eksport"
-  },
-  "extension_description": {
-    "message": "Cipta dan urus Tabs tersuai dalam ruang yang tersedia di halaman Persediaan Salesforce Lightning.",
-    "description": "[manifest] Penerangan sambungan ini"
-  },
-  "extension_label": {
-    "message": "Again, Why Salesforce",
-    "description": "Nama sambungan ini"
-  },
-  "file": {
-    "message": "fail",
-    "description": "fail tunggal"
-  },
-  "files": {
-    "message": "fail",
-    "description": "berbilang fail"
-  },
-  "import": {
-    "message": "Import",
-    "description": "[popup] butang import"
-  },
-  "import_duplicate_description": {
-    "message": "Tabs pendua akan diabaikan.<br />Dua Tabs dianggap pendua jika mereka mempunyai URL yang sama.",
-    "description": "[import] penerangan tentang apa yang dilakukan oleh proses import"
-  },
-  "import_invalid_file": {
-    "message": "Jenis fail tidak sah.\nHanya fail JSON disokong.",
-    "description": "[ralat] fail yang digunakan untuk import bukan JSON"
-  },
-  "import_successful": {
-    "message": "Berjaya diimport",
-    "description": "[import] import telah selesai. Selepas ini, bilangan rekod yang telah diimport akan ditunjukkan"
-  },
-  "import_tabs": {
-    "message": "Import Tabs",
-    "description": "[tajuk-modal] untuk proses import"
-  },
-  "import_title": {
-    "message": "Import Tabs dari fail json",
-    "description": "[popup] tajuk pada butang import"
-  },
-  "insert_another": {
-    "message": "Masukkan yang lain",
-    "description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan Org yang sama dalam modal"
-  },
-  "insert_another_org": {
-    "message": "Org yang dimasukkan adalah yang semasa!\nSila masukkan Org lain.",
-    "description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan Org yang sama dalam modal"
-  },
-  "insert_valid_org": {
-    "message": "Sila masukkan Org yang sah!",
-    "description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan url yang salah dalam modal"
-  },
-  "invalid_url": {
-    "message": "URL tidak sah",
-    "description": "[bukanPersediaanSalesforce] URL yang tidak sah"
-  },
-  "login_to_salesforce": {
-    "message": "Log masuk ke Salesforce",
-    "description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman log masuk Salesforce"
-  },
-  "mycustomorg": {
-    "message": "orgsayatersuai",
-    "description": "placeholder untuk modal Kemas kini Tab"
-  },
-  "no_match": {
-    "message": "Tidak sepadan dengan sebarang tindakan",
-    "description": "[ralat] dalam Salesforce apabila suis tidak dapat memadankan tindakan yang diminta"
-  },
-  "nss_detected": {
-    "message": " dikesan.",
-    "description": "[bukanPersediaanSalesforce] sesuatu yang ditemui. Sila pastikan untuk menyertakan ruang pada permulaan mesej."
-  },
-  "nss_prefix": {
-    "message": "Ini bukan ",
-    "description": "[bukanPersediaanSalesforce] ini adalah awalan yang ditunjukkan apabila pengguna tidak berada di halaman Salesforce. Sila pastikan untuk menyertakan ruang pada akhir mesej"
-  },
-  "open_setup": {
-    "message": "Buka Persediaan",
-    "description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
-  },
-  "or_drop": {
-    "message": "Atau lepaskan",
-    "description": "[import] biarkan pengguna menggerakkan fail dengan tetikus mereka dan melepaskannya"
-  },
-  "org_link": {
-    "message": "Pautan Org",
-    "description": "[label-input]"
-  },
-  "other_org_info": {
-    "message": "Maklumat Org Lain",
-    "description": "[tajuk-modal]"
-  },
-  "other_org_placeholder": {
-    "message": "org-lain",
-    "description": "[placeholder-input]"
-  },
-  "overwrite_tabs": {
-    "message": "Tulis ganti Tabs yang disimpan.",
-    "description": "[label] padam semua Tabs yang disimpan semasa proses import"
-  },
-  "preserve_org_tabs": {
-    "message": "Kekalkan Tabs untuk Org lain.",
-    "description": "[label] simpan semua Tabs khusus Org semasa proses import"
-  },
-  "remove_tab": {
-    "message": "Buang Tab",
-    "description": "[alt] teks alternatif apabila gambar tidak berfungsi"
-  },
-  "req_permissions_dont_ask": {
-    "message": "Jangan tanya lagi.",
-    "description": "[minta_kebenaran] label apabila pengguna tidak mahu membenarkan kebenaran secara kekal"
-  },
-  "req_permissions_header": {
-    "message": "Sila benarkan kami mengakses<br />halaman Persediaan Salesforce secara automatik.",
-    "description": "[minta_kebenaran] pengepala halaman untuk meminta kebenaran"
-  },
-  "req_permissions_paragraph": {
-    "message": "Jika anda mahu, anda boleh meminta Tabs kegemaran anda muncul<br />sebaik sahaja anda menavigasi ke halaman Persediaan Salesforce<br />tanpa perlu mengklik sambungan ini setiap kali.",
-    "description": "[minta_kebenaran] teks untuk menerangkan mengapa kebenaran diminta"
-  },
-  "required": {
-    "message": "diperlukan",
-    "description": "[input] menandakan medan input sebagai wajib"
-  },
-  "required_info": {
-    "message": "= Maklumat Diperlukan",
-    "description": "[modal] memberitahu pengguna bahawa sesetengah maklumat adalah wajib"
-  },
-  "salesforce_lightning": {
-    "message": "Salesforce Lightning",
-    "description": "[bukanPersediaanSalesforce] platform Salesforce Lightning"
-  },
-  "save_tab": {
-    "message": "Simpan sebagai Tab",
-    "description": "[alt] teks alternatif apabila gambar tidak berfungsi"
-  },
-  "setup_page": {
-    "message": "Halaman Persediaan",
-    "description": "[bukanPersediaanSalesforce] halaman yang digunakan untuk mengubah suai tetapan Salesforce"
-  },
-  "skip": {
-    "message": "Langkau",
-    "description": "[minta_kebenaran] butang untuk TIDAK membenarkan kebenaran"
-  },
-  "successfully_imported": {
-    "message": "Berjaya diimport",
-    "description": "[toast] pengguna menambah Tabs dari fail luaran"
-  },
-  "tab_explain": {
-    "message": "Setiap item mesti mempunyai 'label' dan 'url' sebagai rentetan. Selain itu, setiap item mungkin mempunyai 'org' sebagai rentetan.",
-    "description": "[ralat] menerangkan bagaimana Tab sepatutnya dibina"
-  },
-  "tab_information": {
-    "message": "Maklumat Tab",
-    "description": "tajuk untuk modal kemas kini Tab"
-  },
-  "tab_label": {
-    "message": "Label Tab",
-    "description": "Sifat Label Tab, namanya"
-  },
-  "tab_org": {
-    "message": "Org Tab",
-    "description": "Sifat Org Tab, jika ia untuk satu Organisasi Salesforce"
-  },
-  "tab_url": {
-    "message": "URL Tab",
-    "description": "Sifat URL Tab, ke mana ia menunjuk"
-  },
-  "table_delete": {
-    "message": "Padam Tab",
-    "description": "[popup] teks bantuan untuk lajur dengan butang padam"
-  },
-  "table_org": {
-    "message": "Adakah Tab Org",
-    "description": "[popup] teks bantuan untuk lajur dengan kotak semak Org"
-  },
-  "table_row_label": {
-    "message": "Masukkan label untuk URL ini",
-    "description": "[popup] medan input dengan nama Tab"
-  },
-  "table_row_org": {
-    "message": "Klik jika anda mahu Tab ini tersedia untuk Org ini sahaja.",
-    "description": "[popup] kotak semak untuk menogol Tab menjadi khusus Org"
-  },
-  "table_row_org_name": {
-    "message": "Org tempat Tab ini tersedia.",
-    "description": "[popup] medan input dengan nama Org"
-  },
-  "table_row_url": {
-    "message": "Masukkan sub_URL ke mana anda mahu dialihkan.",
-    "description": "[popup] medan input dengan url Tab"
-  },
-  "tabs": {
-    "message": "Tabs",
-    "description": "pautan kegemaran pengguna"
-  },
-  "tabs_saved": {
-    "message": "Tabs disimpan.",
-    "description": "[toast] Tabs berjaya disimpan."
-  },
-  "theme_dark": {
-    "message": "Tukar Tema kepada Gelap",
-    "description": "[popup] tajuk pada bulan untuk menukar tema"
-  },
-  "theme_light": {
-    "message": "Tukar Tema kepada Cerah",
-    "description": "[popup] tajuk pada matahari untuk menukar tema"
-  },
-  "upload": {
-    "message": "Muat naik",
-    "description": "[import] biarkan pengguna melayari fail mereka dan memilih yang betul"
-  },
-  "users": {
-    "message": "Pengguna",
-    "description": "Nama halaman yang berkaitan dengan ManageUsers/home"
-  },
-  "warn_deprecated_tab_title": {
-    "message": "Anda telah mengimport menggunakan 'tabTitle' yang tidak digunakan lagi!\nMuat turun fail yang dikemas kini telah bermula.\nMulai sekarang, sila gunakan fail yang baru dimuat turun.\nPenggunaan fail sedemikian akan dihentikan dengan keluaran kemudian.",
-    "description": "[amaran] Terangkan kepada pengguna bahawa fail yang mereka import menggunakan sifat yang tidak digunakan lagi"
-  },
-  "where_to": {
-    "message": "Ke mana?",
-    "description": "[buka-modal-org-lain] tajuk sandaran untuk modal"
-  }
+	"allow": {
+		"message": "Benarkan",
+		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"
+	},
+	"available": {
+		"message": "Tersedia",
+		"description": "Tajuk bahagian untuk item yang boleh ditambah"
+	},
+	"bold": {
+		"message": "Tebal",
+		"description": "Pilihan gaya fon untuk teks tebal"
+	},
+	"cancel": {
+		"message": "Batal",
+		"description": "tajuk atau textContent untuk butang yang menghalang tindakan semasa daripada dilaksanakan"
+	},
+	"cancel_close": {
+		"message": "Batal dan tutup",
+		"description": "tajuk atau textContent untuk butang tutup modal"
+	},
+	"chosen": {
+		"message": "Dipilih",
+		"description": "Tajuk bahagian untuk item yang telah dipilih"
+	},
+	"confirm_another_org": {
+		"message": "Sahkan pembukaan pautan ini.",
+		"description": "[buka-modal-org-lain] minta pengesahan daripada pengguna untuk membuka pautan yang dibina."
+	},
+	"continue": {
+		"message": "Teruskan",
+		"description": "textContent untuk butang yang membenarkan tindakan semasa dilaksanakan"
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 Semua Tabs yang kelihatan",
+		"description": "[menu-konteks]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Tetapkan Semula kepada Lalai",
+		"description": "[menu-konteks]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Eksport Tabs",
+		"description": "[menu-konteks]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 Import Tabs",
+		"description": "[menu-konteks]"
+	},
+	"cxm_move": {
+		"message": "🧭 Alihkan Tab",
+		"description": "[menu-konteks]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Jadikan pertama",
+		"description": "[menu-konteks]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Jadikan terakhir",
+		"description": "[menu-konteks]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Alihkan ke kiri",
+		"description": "[menu-konteks]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Alihkan ke kanan",
+		"description": "[menu-konteks]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Buka dalam Org lain",
+		"description": "[menu-konteks]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 Buang Tab",
+		"description": "[menu-konteks]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 Simpan sebagai Tab",
+		"description": "[menu-konteks]"
+	},
+	"cxm_remove": {
+		"message": "💥 Buang Tab(s)",
+		"description": "[menu-konteks]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs di sebelah kiri",
+		"description": "[menu-konteks]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Tabs Lain",
+		"description": "[menu-konteks]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs di sebelah kanan",
+		"description": "[menu-konteks]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Tab Ini",
+		"description": "[menu-konteks]"
+	},
+	"cxm_update": {
+		"message": "✏️ Kemas kini Tab",
+		"description": "[menu-konteks]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Togol Org",
+		"description": "[menu-konteks]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Kemas kini Lain",
+		"description": "[menu-konteks]"
+	},
+	"delete": {
+		"message": "Padam",
+		"description": "[popup] padam satu baris"
+	},
+	"delete_all": {
+		"message": "Padam semua Tabs",
+		"description": "[popup] tajuk pada tong sampah untuk mengosongkan semua Tabs"
+	},
+	"error_close_other_modal": {
+		"message": "Tutup modal lain dahulu!",
+		"description": "[toast] Pengguna cuba membuka lebih daripada 1 modal"
+	},
+	"error_cxm_check": {
+		"message": "Ralat menyemak item menu",
+		"description": "[ralat] item menu konteks tidak dapat ditemui"
+	},
+	"error_cxm_create": {
+		"message": "Ralat mencipta item menu",
+		"description": "[ralat] item menu konteks tidak dapat dimulakan"
+	},
+	"error_cxm_remove": {
+		"message": "Ralat membuang item menu",
+		"description": "[ralat] item menu konteks tidak dapat dihapuskan"
+	},
+	"error_duplicate_tab": {
+		"message": "Tab ini sudah wujud",
+		"description": "[ralat] Tab ini adalah pendua"
+	},
+	"error_expand_url": {
+		"message": "Tidak dapat mengembangkan URL kosong!",
+		"description": "[ralat] url untuk dikembangkan tidak dihantar"
+	},
+	"error_expand_url_no_base": {
+		"message": "Tidak dapat mengembangkan URL tanpa hosnya!",
+		"description": "[ralat] url asas yang digunakan untuk mengembangkan tidak dihantar"
+	},
+	"error_extract_empty_url": {
+		"message": "Tidak dapat mengekstrak nama Org daripada URL kosong!",
+		"description": "[ralat] url dari mana nama Org hendak diambil tidak dihantar"
+	},
+	"error_get_with_no_org": {
+		"message": "Tidak dapat mendapatkan Tabs jika Org tidak dinyatakan.",
+		"description": "[ralat] cuba mencari Tabs mengikut Org tanpa menghantar maklumat Org"
+	},
+	"error_import": {
+		"message": "Ralat semasa import:\n",
+		"description": "[ralat] terdapat ralat semasa proses import"
+	},
+	"error_invalid_tab": {
+		"message": "Tab tidak sah",
+		"description": "[ralat] Tab tidak sah"
+	},
+	"error_link_with_id": {
+		"message": "Halaman ini tidak boleh wujud dalam Org lain, kerana ia mengandungi Id!",
+		"description": "[buka-modal-org-lain] amaran kepada pengguna bahawa pautan itu mungkin tidak wujud dalam Org lain"
+	},
+	"error_many_matching_tab": {
+		"message": "Menemui lebih daripada 1 Tab yang sepadan.",
+		"description": "[ralat] banyak Tabs telah diambil semula"
+	},
+	"error_minify_url": {
+		"message": "Tidak dapat mengecilkan URL kosong!",
+		"description": "[ralat] url untuk dikurangkan tidak dihantar"
+	},
+	"error_missing_favourite_id": {
+		"message": "Tidak dapat mendapatkan imej kegemaran tanpa Id",
+		"description": "[ralat] tiada id kegemaran dihantar"
+	},
+	"error_missing_key": {
+		"message": "Kunci tidak ditemui di mana-mana",
+		"description": "[ralat] tiada terjemahan ditemui dalam fail"
+	},
+	"error_no_array": {
+		"message": "Array tidak sah atau tiada array dihantar",
+		"description": "[ralat] tidak menerima array yang sah"
+	},
+	"error_no_browser_tab": {
+		"message": "Tidak dapat mencari Tab pelayar semasa.",
+		"description": "[ralat] halaman latar belakang tidak dapat mewujudkan Tab pelayar aktif"
+	},
+	"error_no_callback": {
+		"message": "Sila berikan panggilan balik (callback)",
+		"description": "[ralat] fungsi untuk dipanggil pada akhir kaedah tidak dihantar"
+	},
+	"error_no_cookies": {
+		"message": "Tidak menemui kuki yang sepadan",
+		"description": "[ralat] kuki Salesforce tidak dikembalikan"
+	},
+	"error_no_data": {
+		"message": "Tidak dapat mengenal pasti Tab tanpa data.",
+		"description": "[ralat] cuba mendapatkan Tab tanpa menghantar data"
+	},
+	"error_no_headers": {
+		"message": "Gagal mencari pengepala.",
+		"description": "[ralat] Sambungan tidak dapat mencari tempat untuk meletakkan butang kegemaran"
+	},
+	"error_no_matching_tab": {
+		"message": "Tidak menemui sebarang Tab yang sepadan.",
+		"description": "[ralat] tiada Tabs diambil semula"
+	},
+	"error_no_message": {
+		"message": "Tidak menyatakan mesej untuk dihantar.",
+		"description": "[ralat] tiada mesej ditemui untuk dihantar ke bahagian lain kod"
+	},
+	"error_no_object": {
+		"message": "Tiada objek untuk disemak!",
+		"description": "[ralat] objek tidak dihantar"
+	},
+	"error_no_setup_tab": {
+		"message": "Gagal mencari Tab Persediaan (Setup).",
+		"description": "[ralat] Sambungan tidak dapat mencari tempat untuk meletakkan Tabs kegemaran."
+	},
+	"error_no_url": {
+		"message": "Tiada URL untuk disemak!",
+		"description": "[ralat] url untuk disemak tidak dihantar"
+	},
+	"error_remove_not_favourite": {
+		"message": "Tidak dapat membuang Tab yang bukan kegemaran!",
+		"description": "[ralat] pengguna cuba membuang Tab yang belum disimpan lagi"
+	},
+	"error_sync_nothing": {
+		"message": "Tidak dapat menyegerakkan Tab nol (null)!",
+		"description": "[ralat] cuba menyegerakkan tiada apa-apa"
+	},
+	"error_tab_label": {
+		"message": "Label mestilah rentetan bukan kosong",
+		"description": "[ralat] pengguna cuba mencipta Tab tanpa label"
+	},
+	"error_tab_not_found": {
+		"message": "Tab tidak ditemui.",
+		"description": "[ralat] Tab tidak disertakan dalam array"
+	},
+	"error_tab_object_creation": {
+		"message": "Apabila memanggil dengan objek, jangan hantar apa-apa lagi.",
+		"description": "[ralat] ralat pelaksanaan oleh pembangun"
+	},
+	"error_tab_org": {
+		"message": "Org mestilah rentetan atau tidak ditentukan (undefined)",
+		"description": "[ralat] pengguna cuba mencipta Tab dengan nilai Org yang tidak sah"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Kunci tidak dijangka ditemui:",
+		"description": "[ralat] pengguna cuba mencipta Tab dengan beberapa sifat yang tidak disokong"
+	},
+	"error_tab_url": {
+		"message": "URL mestilah rentetan bukan kosong",
+		"description": "[ralat] pengguna cuba mencipta Tab tanpa url"
+	},
+	"error_tabcont_initialize": {
+		"message": "Tidak dapat memulakan dengan",
+		"description": "[ralat] kegagalan memulakan bekas Tab"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Tab(s) tidak sah dikesan.\nKejadian pertama:",
+		"description": "[ralat] Tabs tidak sah dihantar"
+	},
+	"error_useless_remove": {
+		"message": "Tidak dapat membuang:\nTidak dapat membuang halaman yang belum disimpan sebelum ini",
+		"description": "[ralat] pengguna cuba membuang halaman yang belum disimpan lagi"
+	},
+	"error_useless_save": {
+		"message": "Tidak dapat menyimpan:\nHalaman ini telah disimpan!",
+		"description": "[ralat] pengguna cuba menyimpan halaman yang sudah disimpan"
+	},
+	"export": {
+		"message": "Eksport",
+		"description": "[popup] butang eksport"
+	},
+	"export_title": {
+		"message": "Eksport semua Tabs",
+		"description": "[popup] tajuk pada butang eksport"
+	},
+	"extension_description": {
+		"message": "Cipta dan urus Tabs tersuai dalam ruang yang tersedia di halaman Persediaan Salesforce Lightning.",
+		"description": "[manifest] Penerangan sambungan ini"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Nama sambungan ini"
+	},
+	"file": {
+		"message": "fail",
+		"description": "fail tunggal"
+	},
+	"files": {
+		"message": "fail",
+		"description": "berbilang fail"
+	},
+	"general": {
+		"message": "Umum",
+		"description": "Label untuk kategori tetapan umum"
+	},
+	"import": {
+		"message": "Import",
+		"description": "[popup] butang import"
+	},
+	"import_duplicate_description": {
+		"message": "Tabs pendua akan diabaikan.<br />Dua Tabs dianggap pendua jika mereka mempunyai URL yang sama.",
+		"description": "[import] penerangan tentang apa yang dilakukan oleh proses import"
+	},
+	"import_invalid_file": {
+		"message": "Jenis fail tidak sah.\nHanya fail JSON disokong.",
+		"description": "[ralat] fail yang digunakan untuk import bukan JSON"
+	},
+	"import_successful": {
+		"message": "Berjaya diimport",
+		"description": "[import] import telah selesai. Selepas ini, bilangan rekod yang telah diimport akan ditunjukkan"
+	},
+	"import_tabs": {
+		"message": "Import Tabs",
+		"description": "[tajuk-modal] untuk proses import"
+	},
+	"import_title": {
+		"message": "Import Tabs dari fail json",
+		"description": "[popup] tajuk pada butang import"
+	},
+	"insert_another": {
+		"message": "Masukkan yang lain",
+		"description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan Org yang sama dalam modal"
+	},
+	"insert_another_org": {
+		"message": "Org yang dimasukkan adalah yang semasa!\nSila masukkan Org lain.",
+		"description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan Org yang sama dalam modal"
+	},
+	"insert_valid_org": {
+		"message": "Sila masukkan Org yang sah!",
+		"description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan url yang salah dalam modal"
+	},
+	"invalid_url": {
+		"message": "URL tidak sah",
+		"description": "[bukanPersediaanSalesforce] URL yang tidak sah"
+	},
+	"italic": {
+		"message": "Condong",
+		"description": "Pilihan gaya fon untuk teks condong"
+	},
+	"login_to_salesforce": {
+		"message": "Log masuk ke Salesforce",
+		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman log masuk Salesforce"
+	},
+	"mycustomorg": {
+		"message": "orgsayatersuai",
+		"description": "placeholder untuk modal Kemas kini Tab"
+	},
+	"no_match": {
+		"message": "Tidak sepadan dengan sebarang tindakan",
+		"description": "[ralat] dalam Salesforce apabila suis tidak dapat memadankan tindakan yang diminta"
+	},
+	"nss_detected": {
+		"message": " dikesan.",
+		"description": "[bukanPersediaanSalesforce] sesuatu yang ditemui. Sila pastikan untuk menyertakan ruang pada permulaan mesej."
+	},
+	"nss_prefix": {
+		"message": "Ini bukan ",
+		"description": "[bukanPersediaanSalesforce] ini adalah awalan yang ditunjukkan apabila pengguna tidak berada di halaman Salesforce. Sila pastikan untuk menyertakan ruang pada akhir mesej"
+	},
+	"open_setup": {
+		"message": "Buka Persediaan",
+		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
+	},
+	"opt_en_fallback": {
+		"message": "en (Sandaran)",
+		"description": "Pilihan bahasa untuk kembali ke Bahasa Inggeris jika locale tidak disokong atau tiada terjemahan"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Kekalkan Tab kegemaran di sebelah kiri Home dan Object Manager.",
+		"description": "Togol untuk menempatkan Tab kegemaran di sebelah kiri bar navigasi"
+	},
+	"opt_sf_lang_default": {
+		"message": "Bahasa Salesforce (Lalai)",
+		"description": "Pilihan untuk menggunakan tetapan bahasa Salesforce. Pilihan ini adalah lalai untuk sambungan ini."
+	},
+	"or_drop": {
+		"message": "Atau lepaskan",
+		"description": "[import] biarkan pengguna menggerakkan fail dengan tetikus mereka dan melepaskannya"
+	},
+	"org_link": {
+		"message": "Pautan Org",
+		"description": "[label-input]"
+	},
+	"other_org_info": {
+		"message": "Maklumat Org Lain",
+		"description": "[tajuk-modal]"
+	},
+	"other_org_placeholder": {
+		"message": "org-lain",
+		"description": "[placeholder-input]"
+	},
+	"overwrite_tabs": {
+		"message": "Tulis ganti Tabs yang disimpan.",
+		"description": "[label] padam semua Tabs yang disimpan semasa proses import"
+	},
+	"preserve_org_tabs": {
+		"message": "Kekalkan Tabs untuk Org lain.",
+		"description": "[label] simpan semua Tabs khusus Org semasa proses import"
+	},
+	"remove_tab": {
+		"message": "Buang Tab",
+		"description": "[alt] teks alternatif apabila gambar tidak berfungsi"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Jangan tanya lagi.",
+		"description": "[minta_kebenaran] label apabila pengguna tidak mahu membenarkan kebenaran secara kekal"
+	},
+	"req_permissions_header": {
+		"message": "Sila benarkan kami mengakses<br />halaman Persediaan Salesforce secara automatik.",
+		"description": "[minta_kebenaran] pengepala halaman untuk meminta kebenaran"
+	},
+	"req_permissions_paragraph": {
+		"message": "Jika anda mahu, anda boleh meminta Tabs kegemaran anda muncul<br />sebaik sahaja anda menavigasi ke halaman Persediaan Salesforce<br />tanpa perlu mengklik sambungan ini setiap kali.",
+		"description": "[minta_kebenaran] teks untuk menerangkan mengapa kebenaran diminta"
+	},
+	"required": {
+		"message": "diperlukan",
+		"description": "[input] menandakan medan input sebagai wajib"
+	},
+	"required_info": {
+		"message": "= Maklumat Diperlukan",
+		"description": "[modal] memberitahu pengguna bahawa sesetengah maklumat adalah wajib"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[bukanPersediaanSalesforce] platform Salesforce Lightning"
+	},
+	"save_tab": {
+		"message": "Simpan sebagai Tab",
+		"description": "[alt] teks alternatif apabila gambar tidak berfungsi"
+	},
+	"set_gen_preview": {
+		"message": "Pratonton Tab",
+		"description": "Label untuk pratonton rupa Tab umum"
+	},
+	"set_gen_styler": {
+		"message": "Penggaya Tab",
+		"description": "Label untuk mengkonfigurasi gaya Tab umum"
+	},
+	"set_general_settings": {
+		"message": "Tetapan Umum",
+		"description": "Tajuk bahagian untuk pilihan konfigurasi keseluruhan"
+	},
+	"set_move_available": {
+		"message": "Pindah ke Tersedia",
+		"description": "Tajuk butang untuk memindahkan item yang dipilih kembali ke Tersedia"
+	},
+	"set_move_chosen": {
+		"message": "Pindah ke Dipilih",
+		"description": "Tajuk butang untuk memindahkan item yang dipilih ke Dipilih"
+	},
+	"set_org_preview": {
+		"message": "Pratonton Organisasi",
+		"description": "Label untuk pratonton rupa Tab khusus organisasi"
+	},
+	"set_org_styler": {
+		"message": "Penggaya Organisasi",
+		"description": "Label untuk mengkonfigurasi gaya Tab khusus organisasi"
+	},
+	"set_tab_background_active_label": {
+		"message": "Masukkan warna latar belakang untuk Tab generik aktif anda.",
+		"description": "Label untuk menetapkan warna latar belakang untuk Tab generik aktif"
+	},
+	"set_tab_background_label": {
+		"message": "Masukkan warna latar belakang untuk Tab organisasi anda.",
+		"description": "Label untuk menetapkan warna latar belakang untuk Tab khusus organisasi"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Masukkan warna sempadan untuk Tab organisasi aktif anda.",
+		"description": "Label untuk menetapkan warna sempadan untuk Tab khusus organisasi aktif"
+	},
+	"set_tab_border_color_label": {
+		"message": "Masukkan warna sempadan untuk Tab generik anda.",
+		"description": "Label untuk menetapkan warna sempadan untuk Tab generik"
+	},
+	"set_tab_color_active_label": {
+		"message": "Masukkan warna teks untuk Tab generik aktif anda.",
+		"description": "Label untuk menetapkan warna teks untuk Tab generik aktif"
+	},
+	"set_tab_color_label": {
+		"message": "Masukkan warna teks untuk Tab organisasi anda.",
+		"description": "Label untuk menetapkan warna teks untuk Tab khusus organisasi"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Pilih satu atau lebih gaya hiasan untuk Tab organisasi aktif anda.",
+		"description": "Arahan untuk memilih gaya hiasan untuk Tab khusus organisasi aktif"
+	},
+	"set_tab_decoration_label": {
+		"message": "Pilih satu atau lebih gaya hiasan untuk Tab generik anda.",
+		"description": "Arahan untuk memilih gaya hiasan untuk Tab generik"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Masukkan warna latar belakang hover untuk Tab generik aktif anda.",
+		"description": "Label untuk menetapkan warna latar belakang hover untuk Tab generik aktif"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Masukkan warna latar belakang hover untuk Tab organisasi anda.",
+		"description": "Label untuk menetapkan warna latar belakang hover untuk Tab khusus organisasi"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Masukkan warna bayang untuk Tab organisasi aktif anda.",
+		"description": "Label untuk menetapkan warna bayang untuk Tab khusus organisasi aktif"
+	},
+	"set_tab_shadow_label": {
+		"message": "Masukkan warna bayang untuk Tab generik anda.",
+		"description": "Label untuk menetapkan warna bayang untuk Tab generik"
+	},
+	"set_tab_top_active_label": {
+		"message": "Masukkan warna untuk bar di bahagian atas Tab generik aktif anda.",
+		"description": "Label untuk menetapkan warna bar-atas untuk Tab generik aktif"
+	},
+	"set_toggle_preview": {
+		"message": "Klik untuk togol keadaan aktif.",
+		"description": "Teks petua alat untuk kawalan togol keadaan aktif"
+	},
+	"settings": {
+		"message": "Tetapan",
+		"description": "Label untuk menu tetapan"
+	},
+	"setup_page": {
+		"message": "Halaman Persediaan",
+		"description": "[bukanPersediaanSalesforce] halaman yang digunakan untuk mengubah suai tetapan Salesforce"
+	},
+	"skip": {
+		"message": "Langkau",
+		"description": "[minta_kebenaran] butang untuk TIDAK membenarkan kebenaran"
+	},
+	"successfully_imported": {
+		"message": "Berjaya diimport",
+		"description": "[toast] pengguna menambah Tabs dari fail luaran"
+	},
+	"tab_explain": {
+		"message": "Setiap item mesti mempunyai 'label' dan 'url' sebagai rentetan. Selain itu, setiap item mungkin mempunyai 'org' sebagai rentetan.",
+		"description": "[ralat] menerangkan bagaimana Tab sepatutnya dibina"
+	},
+	"tab_information": {
+		"message": "Maklumat Tab",
+		"description": "tajuk untuk modal kemas kini Tab"
+	},
+	"tab_label": {
+		"message": "Label Tab",
+		"description": "Sifat Label Tab, namanya"
+	},
+	"tab_org": {
+		"message": "Org Tab",
+		"description": "Sifat Org Tab, jika ia untuk satu Organisasi Salesforce"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "Sifat URL Tab, ke mana ia menunjuk"
+	},
+	"table_delete": {
+		"message": "Padam Tab",
+		"description": "[popup] teks bantuan untuk lajur dengan butang padam"
+	},
+	"table_org": {
+		"message": "Adakah Tab Org",
+		"description": "[popup] teks bantuan untuk lajur dengan kotak semak Org"
+	},
+	"table_row_label": {
+		"message": "Masukkan label untuk URL ini",
+		"description": "[popup] medan input dengan nama Tab"
+	},
+	"table_row_org": {
+		"message": "Klik jika anda mahu Tab ini tersedia untuk Org ini sahaja.",
+		"description": "[popup] kotak semak untuk menogol Tab menjadi khusus Org"
+	},
+	"table_row_org_name": {
+		"message": "Org tempat Tab ini tersedia.",
+		"description": "[popup] medan input dengan nama Org"
+	},
+	"table_row_url": {
+		"message": "Masukkan sub_URL ke mana anda mahu dialihkan.",
+		"description": "[popup] medan input dengan url Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "pautan kegemaran pengguna"
+	},
+	"tabs_saved": {
+		"message": "Tabs disimpan.",
+		"description": "[toast] Tabs berjaya disimpan."
+	},
+	"theme_dark": {
+		"message": "Tukar Tema kepada Gelap",
+		"description": "[popup] tajuk pada bulan untuk menukar tema"
+	},
+	"theme_light": {
+		"message": "Tukar Tema kepada Cerah",
+		"description": "[popup] tajuk pada matahari untuk menukar tema"
+	},
+	"underline": {
+		"message": "Garis bawah",
+		"description": "Pilihan gaya hiasan untuk menggarisbawahi teks Tab"
+	},
+	"underline_wavy": {
+		"message": "Garis bawah bergelombang",
+		"description": "Pilihan gaya hiasan untuk menerapkan garis bawah bergelombang pada teks Tab"
+	},
+	"upload": {
+		"message": "Muat naik",
+		"description": "[import] biarkan pengguna melayari fail mereka dan memilih yang betul"
+	},
+	"users": {
+		"message": "Pengguna",
+		"description": "Nama halaman yang berkaitan dengan ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "Anda telah mengimport menggunakan 'tabTitle' yang tidak digunakan lagi!\nMuat turun fail yang dikemas kini telah bermula.\nMulai sekarang, sila gunakan fail yang baru dimuat turun.\nPenggunaan fail sedemikian akan dihentikan dengan keluaran kemudian.",
+		"description": "[amaran] Terangkan kepada pengguna bahawa fail yang mereka import menggunakan sifat yang tidak digunakan lagi"
+	},
+	"where_to": {
+		"message": "Ke mana?",
+		"description": "[buka-modal-org-lain] tajuk sandaran untuk modal"
+	}
 }

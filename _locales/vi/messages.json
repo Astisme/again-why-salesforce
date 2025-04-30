@@ -3,6 +3,14 @@
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"
 	},
+	"available": {
+		"message": "Có sẵn",
+		"description": "Tiêu đề phần cho các mục có thể thêm"
+	},
+	"bold": {
+		"message": "Đậm",
+		"description": "Tùy chọn kiểu phông chữ cho văn bản đậm"
+	},
 	"cancel": {
 		"message": "Hủy",
 		"description": "tiêu đề hoặc textContent cho các nút ngăn hành động hiện tại thực thi"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Hủy và đóng",
 		"description": "tiêu đề hoặc textContent cho nút đóng của cửa sổ bật lên"
+	},
+	"chosen": {
+		"message": "Đã chọn",
+		"description": "Tiêu đề phần cho các mục đã được chọn"
 	},
 	"confirm_another_org": {
 		"message": "Xác nhận mở liên kết này.",
@@ -286,6 +298,10 @@
 		"message": "tệp",
 		"description": "nhiều tệp"
 	},
+	"general": {
+		"message": "Chung",
+		"description": "Nhãn cho danh mục cài đặt chung"
+	},
 	"import": {
 		"message": "Nhập",
 		"description": "[popup] Nút nhập"
@@ -326,6 +342,14 @@
 		"message": "URL không hợp lệ",
 		"description": "[notSalesforceSetup] Một URL không hợp lệ"
 	},
+	"italic": {
+		"message": "Nghiêng",
+		"description": "Tùy chọn kiểu phông chữ cho văn bản nghiêng"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Công nghệ điều hướng tùy chỉnh của Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Đăng nhập vào Salesforce",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang đăng nhập Salesforce"
@@ -349,6 +373,54 @@
 	"open_setup": {
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
+	},
+	"opt_always_open": {
+		"message": "Luôn mở",
+		"description": "[cài đặt]"
+	},
+	"opt_automatic_open": {
+		"message": "Mở tự động",
+		"description": "[cài đặt]"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Tùy chọn ngôn ngữ để quay lại tiếng Anh nếu ngôn ngữ khu vực không được hỗ trợ hoặc không có bản dịch"
+	},
+	"opt_faster_loading": {
+		"message": "(tải nhanh hơn khi sử dụng).",
+		"description": "[cài đặt] giải thích về tính năng Lightning Navigation"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Giữ Tabs yêu thích ở bên trái Home và Object Manager.",
+		"description": "Công tắc để ghim Tabs yêu thích vào bên trái thanh điều hướng"
+	},
+	"opt_link_new_browser": {
+		"message": "Luôn mở liên kết trong tab trình duyệt mới.",
+		"description": "[cài đặt] khi người dùng nhấp vào Tab yêu thích, mở nó trong tab mới"
+	},
+	"opt_prevent_use": {
+		"message": "Ngăn sử dụng ",
+		"description": "[cài đặt] tương tự 'không muốn sử dụng'. hãy chắc chắn có khoảng trắng ở cuối thông báo"
+	},
+	"opt_same_tab_popup": {
+		"message": "mở trang trong cùng tab khi nhấp popup.",
+		"description": "[cài đặt] ngăn mở tab trình duyệt mới"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Mặc định)",
+		"description": "Tùy chọn sử dụng cài đặt ngôn ngữ Salesforce. Đây là tùy chọn mặc định cho tiện ích mở rộng."
+	},
+	"opt_skip_link_detection": {
+		"message": "Bỏ qua kiểm tra tự động ID Salesforce.",
+		"description": "[cài đặt] khi yêu thích Tab, ngăn kiểm tra ID trong liên kết"
+	},
+	"opt_when_clicking_popup": {
+		"message": "trang khi nhấp popup trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở popup trên trang Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "trang khi nhấp popup trên trang không phải Salesforce.",
+		"description": "[cài đặt] khi người dùng mở popup trên trang ngẫu nhiên"
 	},
 	"or_drop": {
 		"message": "Hoặc thả",
@@ -402,9 +474,105 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Nền tảng Salesforce Lightning"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "trang đăng nhập Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "bất kỳ trang cài đặt Salesforce nào (https://*.my.salesforce-setup.com/*)"
+	},
 	"save_tab": {
 		"message": "Lưu dưới dạng Tab",
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
+	},
+	"set_gen_preview": {
+		"message": "Tab Preview",
+		"description": "Nhãn để xem trước giao diện Tab chung"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "Nhãn để cấu hình kiểu cho Tabs chung"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Tiêu đề phần cho các tùy chọn cấu hình chung"
+	},
+	"set_move_available": {
+		"message": "Di chuyển đến Có sẵn",
+		"description": "Tiêu đề nút để di chuyển các mục đã chọn trở lại Có sẵn"
+	},
+	"set_move_chosen": {
+		"message": "Di chuyển đến Đã chọn",
+		"description": "Tiêu đề nút để di chuyển các mục đã chọn đến Đã chọn"
+	},
+	"set_org_preview": {
+		"message": "Org Preview",
+		"description": "Nhãn để xem trước giao diện Tabs dành riêng cho tổ chức"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "Nhãn để cấu hình kiểu cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_background_active_label": {
+		"message": "Nhập màu nền cho Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu nền cho Tabs chung đang hoạt động"
+	},
+	"set_tab_background_label": {
+		"message": "Nhập màu nền cho Tabs tổ chức của bạn.",
+		"description": "Nhãn để đặt màu nền cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Nhập màu viền cho Tabs tổ chức đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu viền cho Tabs tổ chức đang hoạt động"
+	},
+	"set_tab_border_color_label": {
+		"message": "Nhập màu viền cho Tabs chung của bạn.",
+		"description": "Nhãn để đặt màu viền cho Tabs chung"
+	},
+	"set_tab_color_active_label": {
+		"message": "Nhập màu văn bản cho Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu văn bản cho Tabs chung đang hoạt động"
+	},
+	"set_tab_color_label": {
+		"message": "Nhập màu văn bản cho Tabs tổ chức của bạn.",
+		"description": "Nhãn để đặt màu văn bản cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Chọn một hoặc nhiều kiểu trang trí cho Tabs tổ chức đang hoạt động của bạn.",
+		"description": "Lời nhắc chọn kiểu trang trí cho Tabs tổ chức đang hoạt động"
+	},
+	"set_tab_decoration_label": {
+		"message": "Chọn một hoặc nhiều kiểu trang trí cho Tabs chung của bạn.",
+		"description": "Lời nhắc chọn kiểu trang trí cho Tabs chung"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Nhập màu nền khi hover cho Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu nền khi hover cho Tabs chung đang hoạt động"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Nhập màu nền khi hover cho Tabs tổ chức của bạn.",
+		"description": "Nhãn để đặt màu nền khi hover cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Nhập màu bóng cho Tabs tổ chức đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu bóng cho Tabs tổ chức đang hoạt động"
+	},
+	"set_tab_shadow_label": {
+		"message": "Nhập màu bóng cho Tabs chung của bạn.",
+		"description": "Nhãn để đặt màu bóng cho Tabs chung"
+	},
+	"set_tab_top_active_label": {
+		"message": "Nhập màu cho thanh trên cùng của Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu thanh trên cùng của Tabs chung đang hoạt động"
+	},
+	"set_toggle_preview": {
+		"message": "Nhấp để chuyển trạng thái hoạt động.",
+		"description": "Văn bản tooltip cho điều khiển chuyển đổi trạng thái hoạt động"
+	},
+	"settings": {
+		"message": "Cài đặt",
+		"description": "Nhãn cho menu cài đặt"
 	},
 	"setup_page": {
 		"message": "Trang Cài đặt",
@@ -477,6 +645,14 @@
 	"theme_light": {
 		"message": "Chuyển sang Giao diện Sáng",
 		"description": "[popup] Tiêu đề trên mặt trời để chuyển giao diện"
+	},
+	"underline": {
+		"message": "Gạch chân",
+		"description": "Tùy chọn kiểu trang trí để gạch chân văn bản Tab"
+	},
+	"underline_wavy": {
+		"message": "Gạch chân gợn sóng",
+		"description": "Tùy chọn kiểu trang trí để áp dụng gạch chân gợn sóng cho văn bản Tab"
 	},
 	"upload": {
 		"message": "Tải lên",

@@ -16,7 +16,7 @@ before sending your output, make sure all the keys are present. if you forget a 
 please try to be as thoughtful as possible to the translated language and do not worry about limits as there's lots of time available.
 This is the list of languages that you should translate to; already ordered so you should go from first to last.
 
-1. en (English) [this is the language in which I've sent you the JSON]
+1. en (English) [this is the language in which I've sent you the JSON. YOU MUST NOT send this back to me. Ignore it as this is only for your reference]
 2. zh_CN (Mandarin Chinese)
 3. hi (Hindi)
 4. es (Spanish)
@@ -63,10 +63,10 @@ This is the list of languages that you should translate to; already ordered so y
 45. te (Telugu)
 46. th (Thai)
 47. zh_TW (Traditional Chinese)
-48. en_AU (English - Australia)
-49. en_GB (English - UK)
-50. en_US (English - US)
-51. es_419 (Spanish - Latin America)
+48. en_AU (English - Australia) [for this language, only translate the keys which differ from the original JSON I sent you. ignore all messages which would not change at all]
+49. en_GB (English - UK) [for this language, only translate the keys which differ from the original JSON I sent you. ignore all messages which would not change at all]
+50. en_US (English - US) [for this language, only translate the keys which differ from the original JSON I sent you. ignore all messages which would not change at all]
+51. es_419 (Spanish - Latin America) [for this language, only translate the keys which differ from the translation for the "es" JSON. ignore all messages which would not change at all]
 52. gu (Gujarati)
 53. kn (Kannada)
 54. ml (Malayalam)

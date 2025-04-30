@@ -1,498 +1,626 @@
 {
-  "allow": {
-    "message": "Toestaan",
-    "description": "[req_toestemming] knop om toestemmingen toe te staan"
-  },
-  "cancel": {
-    "message": "Annuleren",
-    "description": "titel of textContent voor knoppen die voorkomen dat de huidige actie wordt uitgevoerd"
-  },
-  "cancel_close": {
-    "message": "Annuleren en sluiten",
-    "description": "titel of textContent voor de sluitknop van modals"
-  },
-  "confirm_another_org": {
-    "message": "Bevestig het openen van deze link.",
-    "description": "[open-andere-org-modal] vraag de gebruiker om bevestiging om de geconstrueerde link te openen."
-  },
-  "continue": {
-    "message": "Doorgaan",
-    "description": "textContent voor knoppen die toestaan dat de huidige actie wordt uitgevoerd"
-  },
-  "cxm_empty_no_org_tabs": {
-    "message": "👀 Alle zichtbare Tabs",
-    "description": "[context-menu]"
-  },
-  "cxm_empty_tabs": {
-    "message": "😨 Herstellen naar standaard",
-    "description": "[context-menu]"
-  },
-  "cxm_export_tabs": {
-    "message": "⬇️ Tabs exporteren",
-    "description": "[context-menu]"
-  },
-  "cxm_import_tabs": {
-    "message": "🆙 Tabs importeren",
-    "description": "[context-menu]"
-  },
-  "cxm_move": {
-    "message": "🧭 Tab verplaatsen",
-    "description": "[context-menu]"
-  },
-  "cxm_move_first": {
-    "message": "↩️ Eerste maken",
-    "description": "[context-menu]"
-  },
-  "cxm_move_last": {
-    "message": "↪️ Laatste maken",
-    "description": "[context-menu]"
-  },
-  "cxm_move_left": {
-    "message": "👈 Naar links verplaatsen",
-    "description": "[context-menu]"
-  },
-  "cxm_move_right": {
-    "message": "👉 Naar rechts verplaatsen",
-    "description": "[context-menu]"
-  },
-  "cxm_open_other_org": {
-    "message": "🔗 Openen in andere Org",
-    "description": "[context-menu]"
-  },
-  "cxm_page_remove_tab": {
-    "message": "👋 Tab verwijderen",
-    "description": "[context-menu]"
-  },
-  "cxm_page_save_tab": {
-    "message": "💾 Opslaan als Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_remove": {
-    "message": "💥 Tab(s) verwijderen",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_left_tabs": {
-    "message": "🔥 Tabs aan de linkerkant",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_other_tabs": {
-    "message": "↔️ Andere Tabs",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_right_tabs": {
-    "message": "🌊 Tabs aan de rechterkant",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_tab": {
-    "message": "1️⃣ Deze Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update": {
-    "message": "✏️ Tab bijwerken",
-    "description": "[context-menu]"
-  },
-  "cxm_update_org": {
-    "message": "📌 Org wisselen",
-    "description": "[context-menu]"
-  },
-  "cxm_update_tab": {
-    "message": "🧹 Andere updates",
-    "description": "[context-menu]"
-  },
-  "delete": {
-    "message": "Verwijderen",
-    "description": "[popup] een rij verwijderen"
-  },
-  "delete_all": {
-    "message": "Alle Tabs verwijderen",
-    "description": "[popup] titel op de prullenbak om alle Tabs te legen"
-  },
-  "error_close_other_modal": {
-    "message": "Sluit eerst de andere modal!",
-    "description": "[toast] De gebruiker probeerde meer dan 1 modal te openen"
-  },
-  "error_cxm_check": {
-    "message": "Fout bij het controleren van menu-items",
-    "description": "[fout] de contextmenu-items konden niet worden gevonden"
-  },
-  "error_cxm_create": {
-    "message": "Fout bij het maken van menu-items",
-    "description": "[fout] de contextmenu-items konden niet worden geïnitialiseerd"
-  },
-  "error_cxm_remove": {
-    "message": "Fout bij het verwijderen van menu-items",
-    "description": "[fout] de contextmenu-items konden niet worden verwijderd"
-  },
-  "error_duplicate_tab": {
-    "message": "Deze Tab bestaat al",
-    "description": "[fout] de Tab is gedupliceerd"
-  },
-  "error_expand_url": {
-    "message": "Kan een lege URL niet uitbreiden!",
-    "description": "[fout] de uit te breiden url is niet doorgegeven"
-  },
-  "error_expand_url_no_base": {
-    "message": "Kan een URL niet uitbreiden zonder de host!",
-    "description": "[fout] de basis-url die werd gebruikt om uit te breiden is niet doorgegeven"
-  },
-  "error_extract_empty_url": {
-    "message": "Kan Org-naam niet uit lege URL halen!",
-    "description": "[fout] de url waaruit de Org-naam moet worden gehaald, is niet doorgegeven"
-  },
-  "error_get_with_no_org": {
-    "message": "Kan Tabs niet ophalen als Org niet is opgegeven.",
-    "description": "[fout] geprobeerd Tabs per Org te zoeken zonder Org-informatie te verzenden"
-  },
-  "error_import": {
-    "message": "Fout tijdens importeren:\n",
-    "description": "[fout] er is een fout opgetreden tijdens het importproces"
-  },
-  "error_invalid_tab": {
-    "message": "Ongeldige Tab",
-    "description": "[fout] de Tab is niet geldig"
-  },
-  "error_link_with_id": {
-    "message": "Deze pagina kan niet bestaan in een andere Org, omdat deze een Id bevat!",
-    "description": "[open-andere-org-modal] waarschuwing voor de gebruiker dat de link mogelijk niet bestaat in een andere Org"
-  },
-  "error_many_matching_tab": {
-    "message": "Meer dan 1 overeenkomende Tab gevonden.",
-    "description": "[fout] er zijn veel Tabs opgehaald"
-  },
-  "error_minify_url": {
-    "message": "Kan een lege URL niet verkleinen!",
-    "description": "[fout] de te verkleinen url is niet doorgegeven"
-  },
-  "error_missing_favourite_id": {
-    "message": "Kan favoriete afbeelding niet ophalen zonder het Id",
-    "description": "[fout] er is geen favoriete id doorgegeven"
-  },
-  "error_missing_key": {
-    "message": "Sleutel nergens gevonden",
-    "description": "[fout] geen vertaling gevonden in de bestanden"
-  },
-  "error_no_array": {
-    "message": "Ongeldige array of geen array doorgegeven",
-    "description": "[fout] geen geldige array ontvangen"
-  },
-  "error_no_browser_tab": {
-    "message": "Kon huidige browsertabblad niet vinden.",
-    "description": "[fout] achtergrondpagina kon geen actief browsertabblad tot stand brengen"
-  },
-  "error_no_callback": {
-    "message": "Geef alstublieft een callback op",
-    "description": "[fout] functie om aan het einde van de methode aan te roepen is niet doorgegeven"
-  },
-  "error_no_cookies": {
-    "message": "Geen overeenkomende cookies gevonden",
-    "description": "[fout] Salesforce-cookies werden niet geretourneerd"
-  },
-  "error_no_data": {
-    "message": "Kan Tab niet identificeren zonder gegevens.",
-    "description": "[fout] geprobeerd een Tab op te halen zonder gegevens te verzenden"
-  },
-  "error_no_headers": {
-    "message": "Kon headers niet vinden.",
-    "description": "[fout] De extensie kon niet vinden waar de favorietenknop moest worden geplaatst"
-  },
-  "error_no_matching_tab": {
-    "message": "Geen overeenkomende Tabs gevonden.",
-    "description": "[fout] er zijn geen Tabs opgehaald"
-  },
-  "error_no_message": {
-    "message": "Geen bericht opgegeven om te verzenden.",
-    "description": "[fout] er is geen bericht gevonden om naar andere delen van de code te verzenden"
-  },
-  "error_no_object": {
-    "message": "Geen object om te controleren!",
-    "description": "[fout] het object is niet doorgegeven"
-  },
-  "error_no_setup_tab": {
-    "message": "Kon Setup-tabblad niet vinden.",
-    "description": "[fout] De extensie kon niet vinden waar de favoriete Tabs moesten worden geplaatst."
-  },
-  "error_no_url": {
-    "message": "Geen URL om te controleren!",
-    "description": "[fout] de te controleren url is niet doorgegeven"
-  },
-  "error_remove_not_favourite": {
-    "message": "Kan een niet-favoriete Tab niet verwijderen!",
-    "description": "[fout] de gebruiker probeerde een Tab te verwijderen die nog niet was opgeslagen"
-  },
-  "error_sync_nothing": {
-    "message": "Kan null Tabs niet synchroniseren!",
-    "description": "[fout] geprobeerd niets te synchroniseren"
-  },
-  "error_tab_label": {
-    "message": "Label moet een niet-lege string zijn",
-    "description": "[fout] gebruiker probeerde een Tab zonder label te maken"
-  },
-  "error_tab_not_found": {
-    "message": "Tab is niet gevonden.",
-    "description": "[fout] de Tab was niet opgenomen in de array"
-  },
-  "error_tab_object_creation": {
-    "message": "Geef bij het aanroepen met een object niets anders door.",
-    "description": "[fout] implementatiefout door de ontwikkelaar"
-  },
-  "error_tab_org": {
-    "message": "Org moet een string of undefined zijn",
-    "description": "[fout] gebruiker probeerde een Tab te maken met een ongeldige Org-waarde"
-  },
-  "error_tab_unexpected_keys": {
-    "message": "Onverwachte sleutels gevonden:",
-    "description": "[fout] gebruiker probeerde een Tab te maken met enkele niet-ondersteunde eigenschappen"
-  },
-  "error_tab_url": {
-    "message": "URL moet een niet-lege string zijn",
-    "description": "[fout] gebruiker probeerde een Tab zonder url te maken"
-  },
-  "error_tabcont_initialize": {
-    "message": "Kan niet initialiseren met",
-    "description": "[fout] initialisatie van Tab-container mislukt"
-  },
-  "error_tabcont_invalid_tabs": {
-    "message": "Ongeldige Tab(s) gedetecteerd.\nEerste voorkomen:",
-    "description": "[fout] ongeldige Tabs doorgegeven"
-  },
-  "error_useless_remove": {
-    "message": "Kan niet verwijderen:\nKan een pagina die nog niet eerder is opgeslagen niet verwijderen",
-    "description": "[fout] de gebruiker probeerde een pagina te verwijderen die nog niet was opgeslagen"
-  },
-  "error_useless_save": {
-    "message": "Kan niet opslaan:\nDeze pagina is al opgeslagen!",
-    "description": "[fout] de gebruiker probeerde een pagina op te slaan die al was opgeslagen"
-  },
-  "export": {
-    "message": "Exporteren",
-    "description": "[popup] exportknop"
-  },
-  "export_title": {
-    "message": "Alle Tabs exporteren",
-    "description": "[popup] titel op exportknop"
-  },
-  "extension_description": {
-    "message": "Maak en beheer aangepaste Tabs in de beschikbare ruimte op de Salesforce Lightning Setup-pagina.",
-    "description": "[manifest] De beschrijving van deze extensie"
-  },
-  "extension_label": {
-    "message": "Again, Why Salesforce",
-    "description": "De naam van deze extensie"
-  },
-  "file": {
-    "message": "bestand",
-    "description": "enkel bestand"
-  },
-  "files": {
-    "message": "bestanden",
-    "description": "meerdere bestanden"
-  },
-  "import": {
-    "message": "Importeren",
-    "description": "[popup] importknop"
-  },
-  "import_duplicate_description": {
-    "message": "Dubbele Tabs worden genegeerd.<br />Twee Tabs worden als dubbel beschouwd als ze dezelfde URL hebben.",
-    "description": "[importeren] beschrijving van wat het importproces doet"
-  },
-  "import_invalid_file": {
-    "message": "Ongeldig bestandstype.\nAlleen JSON-bestanden worden ondersteund.",
-    "description": "[fout] het bestand dat voor importeren is gebruikt, is geen JSON"
-  },
-  "import_successful": {
-    "message": "Succesvol geïmporteerd",
-    "description": "[importeren] importeren is voltooid. Hierna wordt getoond hoeveel records zijn geïmporteerd"
-  },
-  "import_tabs": {
-    "message": "Tabs importeren",
-    "description": "[modal-titel] voor importproces"
-  },
-  "import_title": {
-    "message": "Tabs importeren uit json-bestand",
-    "description": "[popup] titel op importknop"
-  },
-  "insert_another": {
-    "message": "Nog een invoegen",
-    "description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker dezelfde Org invoegt in de modal"
-  },
-  "insert_another_org": {
-    "message": "De ingevoegde Org is de huidige!\nVoeg alstublieft een andere Org in.",
-    "description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker dezelfde Org invoegt in de modal"
-  },
-  "insert_valid_org": {
-    "message": "Voeg alstublieft een geldige Org in!",
-    "description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker een verkeerde url invoegt in de modal"
-  },
-  "invalid_url": {
-    "message": "Ongeldige URL",
-    "description": "[geenSalesforceSetup] een URL die niet geldig is"
-  },
-  "login_to_salesforce": {
-    "message": "Inloggen bij Salesforce",
-    "description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
-  },
-  "mycustomorg": {
-    "message": "mijneigenorg",
-    "description": "placeholder voor de Tab bijwerken modal"
-  },
-  "no_match": {
-    "message": "Geen overeenkomst gevonden voor actie",
-    "description": "[fout] in Salesforce wanneer de switch de gevraagde actie niet kan matchen"
-  },
-  "nss_detected": {
-    "message": " gedetecteerd.",
-    "description": "[geenSalesforceSetup] iets dat is gevonden. Zorg ervoor dat er een spatie aan het begin van het bericht staat."
-  },
-  "nss_prefix": {
-    "message": "Dit is geen ",
-    "description": "[geenSalesforceSetup] dit is het voorvoegsel dat wordt getoond wanneer de gebruiker niet op een Salesforce-pagina is. Zorg ervoor dat er een spatie aan het einde van het bericht staat"
-  },
-  "open_setup": {
-    "message": "Setup openen",
-    "description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
-  },
-  "or_drop": {
-    "message": "Of neerzetten",
-    "description": "[importeren] laat de gebruiker bestanden met de muis verplaatsen en loslaten"
-  },
-  "org_link": {
-    "message": "Org Link",
-    "description": "[input-label]"
-  },
-  "other_org_info": {
-    "message": "Info andere Org",
-    "description": "[modal-titel]"
-  },
-  "other_org_placeholder": {
-    "message": "andere-org",
-    "description": "[input-placeholder]"
-  },
-  "overwrite_tabs": {
-    "message": "Opgeslagen Tabs overschrijven.",
-    "description": "[label] verwijder alle opgeslagen Tabs tijdens het importproces"
-  },
-  "preserve_org_tabs": {
-    "message": "Tabs voor andere Orgs behouden.",
-    "description": "[label] behoud alle Org-specifieke Tabs tijdens het importproces"
-  },
-  "remove_tab": {
-    "message": "Tab verwijderen",
-    "description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
-  },
-  "req_permissions_dont_ask": {
-    "message": "Niet opnieuw vragen.",
-    "description": "[req_toestemming] label wanneer de gebruiker geen permanente toestemming wil geven"
-  },
-  "req_permissions_header": {
-    "message": "Sta ons alstublieft toe om automatisch toegang te krijgen tot<br />Salesforce Setup-pagina's.",
-    "description": "[req_toestemming] koptekst van de pagina om toestemmingen te vragen"
-  },
-  "req_permissions_paragraph": {
-    "message": "Als u wilt, kunt u uw favoriete Tabs laten verschijnen<br />zodra u naar een Salesforce Setup-pagina navigeert<br />zonder telkens op deze extensie te hoeven klikken.",
-    "description": "[req_toestemming] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
-  },
-  "required": {
-    "message": "vereist",
-    "description": "[input] markeert een invoerveld als verplicht"
-  },
-  "required_info": {
-    "message": "= Vereiste informatie",
-    "description": "[modal] vertelt de gebruiker dat sommige info verplicht is"
-  },
-  "salesforce_lightning": {
-    "message": "Salesforce Lightning",
-    "description": "[geenSalesforceSetup] het Salesforce Lightning-platform"
-  },
-  "save_tab": {
-    "message": "Opslaan als Tab",
-    "description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
-  },
-  "setup_page": {
-    "message": "Setup Pagina",
-    "description": "[geenSalesforceSetup] de pagina die wordt gebruikt om de instellingen van Salesforce te wijzigen"
-  },
-  "skip": {
-    "message": "Overslaan",
-    "description": "[req_toestemming] knop om toestemmingen NIET toe te staan"
-  },
-  "successfully_imported": {
-    "message": "Succesvol geïmporteerd",
-    "description": "[toast] de gebruiker heeft Tabs toegevoegd vanuit een extern bestand"
-  },
-  "tab_explain": {
-    "message": "Elk item moet 'label' en 'url' als strings hebben. Daarnaast kan elk item een 'org' als string hebben.",
-    "description": "[fout] legt uit hoe een Tab moet worden opgebouwd"
-  },
-  "tab_information": {
-    "message": "Tab-informatie",
-    "description": "titel voor Tab bijwerken modal"
-  },
-  "tab_label": {
-    "message": "Tab Label",
-    "description": "De Label-eigenschap van de Tab, de naam ervan"
-  },
-  "tab_org": {
-    "message": "Tab Org",
-    "description": "De Org-eigenschap van de Tab, als deze voor een enkele Salesforce Organisatie is"
-  },
-  "tab_url": {
-    "message": "Tab URL",
-    "description": "De URL-eigenschap van de Tab, waar deze naar verwijst"
-  },
-  "table_delete": {
-    "message": "Tab verwijderen",
-    "description": "[popup] helpende tekst voor kolom met verwijderknop"
-  },
-  "table_org": {
-    "message": "Is Org Tab",
-    "description": "[popup] helpende tekst voor kolom met Org-selectievakje"
-  },
-  "table_row_label": {
-    "message": "Voer het label in voor deze URL",
-    "description": "[popup] invoerveld met Tab-naam"
-  },
-  "table_row_org": {
-    "message": "Klik als u wilt dat deze Tab alleen beschikbaar is voor deze Org.",
-    "description": "[popup] selectievakje om Tab Org-specifiek te maken"
-  },
-  "table_row_org_name": {
-    "message": "De Org waarvoor deze Tab beschikbaar is.",
-    "description": "[popup] invoerveld met Org-naam"
-  },
-  "table_row_url": {
-    "message": "Voer de sub_URL in waarnaar u wilt worden doorgestuurd.",
-    "description": "[popup] invoerveld met Tab-url"
-  },
-  "tabs": {
-    "message": "Tabs",
-    "description": "de favoriete links van de gebruiker"
-  },
-  "tabs_saved": {
-    "message": "Tabs opgeslagen.",
-    "description": "[toast] Tabs zijn succesvol opgeslagen."
-  },
-  "theme_dark": {
-    "message": "Thema wijzigen naar Donker",
-    "description": "[popup] titel op de maan om thema te wisselen"
-  },
-  "theme_light": {
-    "message": "Thema wijzigen naar Licht",
-    "description": "[popup] titel op de zon om thema te wisselen"
-  },
-  "upload": {
-    "message": "Uploaden",
-    "description": "[importeren] laat de gebruiker door zijn bestanden bladeren en de juiste kiezen"
-  },
-  "users": {
-    "message": "Gebruikers",
-    "description": "De naam van de pagina gerelateerd aan ManageUsers/home"
-  },
-  "warn_deprecated_tab_title": {
-    "message": "U heeft geïmporteerd met de verouderde 'tabTitle'!\nHet downloaden van het bijgewerkte bestand is begonnen.\nGebruik vanaf nu alstublieft het nieuw gedownloade bestand.\nHet gebruik van een dergelijk bestand wordt stopgezet met een latere release.",
-    "description": "[waarschuwing] Leg de gebruiker uit dat het bestand dat ze hebben geïmporteerd een verouderde eigenschap gebruikt"
-  },
-  "where_to": {
-    "message": "Waarheen?",
-    "description": "[open-andere-org-modal] fallback-titel voor de modal"
-  }
+	"allow": {
+		"message": "Toestaan",
+		"description": "[req_toestemming] knop om toestemmingen toe te staan"
+	},
+	"available": {
+		"message": "Beschikbaar",
+		"description": "Sectiekop voor items die kunnen worden toegevoegd"
+	},
+	"bold": {
+		"message": "Vet",
+		"description": "Lettertype-optie voor vetgedrukte tekst"
+	},
+	"cancel": {
+		"message": "Annuleren",
+		"description": "titel of textContent voor knoppen die voorkomen dat de huidige actie wordt uitgevoerd"
+	},
+	"cancel_close": {
+		"message": "Annuleren en sluiten",
+		"description": "titel of textContent voor de sluitknop van modals"
+	},
+	"chosen": {
+		"message": "Gekozen",
+		"description": "Sectiekop voor items die zijn geselecteerd"
+	},
+	"confirm_another_org": {
+		"message": "Bevestig het openen van deze link.",
+		"description": "[open-andere-org-modal] vraag de gebruiker om bevestiging om de geconstrueerde link te openen."
+	},
+	"continue": {
+		"message": "Doorgaan",
+		"description": "textContent voor knoppen die toestaan dat de huidige actie wordt uitgevoerd"
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 Alle zichtbare Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Herstellen naar standaard",
+		"description": "[context-menu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs exporteren",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 Tabs importeren",
+		"description": "[context-menu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab verplaatsen",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Eerste maken",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Laatste maken",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Naar links verplaatsen",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Naar rechts verplaatsen",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Openen in andere Org",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 Tab verwijderen",
+		"description": "[context-menu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 Opslaan als Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(s) verwijderen",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs aan de linkerkant",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Andere Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs aan de rechterkant",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Deze Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab bijwerken",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Org wisselen",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Andere updates",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Verwijderen",
+		"description": "[popup] een rij verwijderen"
+	},
+	"delete_all": {
+		"message": "Alle Tabs verwijderen",
+		"description": "[popup] titel op de prullenbak om alle Tabs te legen"
+	},
+	"error_close_other_modal": {
+		"message": "Sluit eerst de andere modal!",
+		"description": "[toast] De gebruiker probeerde meer dan 1 modal te openen"
+	},
+	"error_cxm_check": {
+		"message": "Fout bij het controleren van menu-items",
+		"description": "[fout] de contextmenu-items konden niet worden gevonden"
+	},
+	"error_cxm_create": {
+		"message": "Fout bij het maken van menu-items",
+		"description": "[fout] de contextmenu-items konden niet worden geïnitialiseerd"
+	},
+	"error_cxm_remove": {
+		"message": "Fout bij het verwijderen van menu-items",
+		"description": "[fout] de contextmenu-items konden niet worden verwijderd"
+	},
+	"error_duplicate_tab": {
+		"message": "Deze Tab bestaat al",
+		"description": "[fout] de Tab is gedupliceerd"
+	},
+	"error_expand_url": {
+		"message": "Kan een lege URL niet uitbreiden!",
+		"description": "[fout] de uit te breiden url is niet doorgegeven"
+	},
+	"error_expand_url_no_base": {
+		"message": "Kan een URL niet uitbreiden zonder de host!",
+		"description": "[fout] de basis-url die werd gebruikt om uit te breiden is niet doorgegeven"
+	},
+	"error_extract_empty_url": {
+		"message": "Kan Org-naam niet uit lege URL halen!",
+		"description": "[fout] de url waaruit de Org-naam moet worden gehaald, is niet doorgegeven"
+	},
+	"error_get_with_no_org": {
+		"message": "Kan Tabs niet ophalen als Org niet is opgegeven.",
+		"description": "[fout] geprobeerd Tabs per Org te zoeken zonder Org-informatie te verzenden"
+	},
+	"error_import": {
+		"message": "Fout tijdens importeren:\n",
+		"description": "[fout] er is een fout opgetreden tijdens het importproces"
+	},
+	"error_invalid_tab": {
+		"message": "Ongeldige Tab",
+		"description": "[fout] de Tab is niet geldig"
+	},
+	"error_link_with_id": {
+		"message": "Deze pagina kan niet bestaan in een andere Org, omdat deze een Id bevat!",
+		"description": "[open-andere-org-modal] waarschuwing voor de gebruiker dat de link mogelijk niet bestaat in een andere Org"
+	},
+	"error_many_matching_tab": {
+		"message": "Meer dan 1 overeenkomende Tab gevonden.",
+		"description": "[fout] er zijn veel Tabs opgehaald"
+	},
+	"error_minify_url": {
+		"message": "Kan een lege URL niet verkleinen!",
+		"description": "[fout] de te verkleinen url is niet doorgegeven"
+	},
+	"error_missing_favourite_id": {
+		"message": "Kan favoriete afbeelding niet ophalen zonder het Id",
+		"description": "[fout] er is geen favoriete id doorgegeven"
+	},
+	"error_missing_key": {
+		"message": "Sleutel nergens gevonden",
+		"description": "[fout] geen vertaling gevonden in de bestanden"
+	},
+	"error_no_array": {
+		"message": "Ongeldige array of geen array doorgegeven",
+		"description": "[fout] geen geldige array ontvangen"
+	},
+	"error_no_browser_tab": {
+		"message": "Kon huidige browsertabblad niet vinden.",
+		"description": "[fout] achtergrondpagina kon geen actief browsertabblad tot stand brengen"
+	},
+	"error_no_callback": {
+		"message": "Geef alstublieft een callback op",
+		"description": "[fout] functie om aan het einde van de methode aan te roepen is niet doorgegeven"
+	},
+	"error_no_cookies": {
+		"message": "Geen overeenkomende cookies gevonden",
+		"description": "[fout] Salesforce-cookies werden niet geretourneerd"
+	},
+	"error_no_data": {
+		"message": "Kan Tab niet identificeren zonder gegevens.",
+		"description": "[fout] geprobeerd een Tab op te halen zonder gegevens te verzenden"
+	},
+	"error_no_headers": {
+		"message": "Kon headers niet vinden.",
+		"description": "[fout] De extensie kon niet vinden waar de favorietenknop moest worden geplaatst"
+	},
+	"error_no_matching_tab": {
+		"message": "Geen overeenkomende Tabs gevonden.",
+		"description": "[fout] er zijn geen Tabs opgehaald"
+	},
+	"error_no_message": {
+		"message": "Geen bericht opgegeven om te verzenden.",
+		"description": "[fout] er is geen bericht gevonden om naar andere delen van de code te verzenden"
+	},
+	"error_no_object": {
+		"message": "Geen object om te controleren!",
+		"description": "[fout] het object is niet doorgegeven"
+	},
+	"error_no_setup_tab": {
+		"message": "Kon Setup-tabblad niet vinden.",
+		"description": "[fout] De extensie kon niet vinden waar de favoriete Tabs moesten worden geplaatst."
+	},
+	"error_no_url": {
+		"message": "Geen URL om te controleren!",
+		"description": "[fout] de te controleren url is niet doorgegeven"
+	},
+	"error_remove_not_favourite": {
+		"message": "Kan een niet-favoriete Tab niet verwijderen!",
+		"description": "[fout] de gebruiker probeerde een Tab te verwijderen die nog niet was opgeslagen"
+	},
+	"error_sync_nothing": {
+		"message": "Kan null Tabs niet synchroniseren!",
+		"description": "[fout] geprobeerd niets te synchroniseren"
+	},
+	"error_tab_label": {
+		"message": "Label moet een niet-lege string zijn",
+		"description": "[fout] gebruiker probeerde een Tab zonder label te maken"
+	},
+	"error_tab_not_found": {
+		"message": "Tab is niet gevonden.",
+		"description": "[fout] de Tab was niet opgenomen in de array"
+	},
+	"error_tab_object_creation": {
+		"message": "Geef bij het aanroepen met een object niets anders door.",
+		"description": "[fout] implementatiefout door de ontwikkelaar"
+	},
+	"error_tab_org": {
+		"message": "Org moet een string of undefined zijn",
+		"description": "[fout] gebruiker probeerde een Tab te maken met een ongeldige Org-waarde"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Onverwachte sleutels gevonden:",
+		"description": "[fout] gebruiker probeerde een Tab te maken met enkele niet-ondersteunde eigenschappen"
+	},
+	"error_tab_url": {
+		"message": "URL moet een niet-lege string zijn",
+		"description": "[fout] gebruiker probeerde een Tab zonder url te maken"
+	},
+	"error_tabcont_initialize": {
+		"message": "Kan niet initialiseren met",
+		"description": "[fout] initialisatie van Tab-container mislukt"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Ongeldige Tab(s) gedetecteerd.\nEerste voorkomen:",
+		"description": "[fout] ongeldige Tabs doorgegeven"
+	},
+	"error_useless_remove": {
+		"message": "Kan niet verwijderen:\nKan een pagina die nog niet eerder is opgeslagen niet verwijderen",
+		"description": "[fout] de gebruiker probeerde een pagina te verwijderen die nog niet was opgeslagen"
+	},
+	"error_useless_save": {
+		"message": "Kan niet opslaan:\nDeze pagina is al opgeslagen!",
+		"description": "[fout] de gebruiker probeerde een pagina op te slaan die al was opgeslagen"
+	},
+	"export": {
+		"message": "Exporteren",
+		"description": "[popup] exportknop"
+	},
+	"export_title": {
+		"message": "Alle Tabs exporteren",
+		"description": "[popup] titel op exportknop"
+	},
+	"extension_description": {
+		"message": "Maak en beheer aangepaste Tabs in de beschikbare ruimte op de Salesforce Lightning Setup-pagina.",
+		"description": "[manifest] De beschrijving van deze extensie"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "De naam van deze extensie"
+	},
+	"file": {
+		"message": "bestand",
+		"description": "enkel bestand"
+	},
+	"files": {
+		"message": "bestanden",
+		"description": "meerdere bestanden"
+	},
+	"general": {
+		"message": "Algemeen",
+		"description": "Label voor de algemene instellingencategorie"
+	},
+	"import": {
+		"message": "Importeren",
+		"description": "[popup] importknop"
+	},
+	"import_duplicate_description": {
+		"message": "Dubbele Tabs worden genegeerd.<br />Twee Tabs worden als dubbel beschouwd als ze dezelfde URL hebben.",
+		"description": "[importeren] beschrijving van wat het importproces doet"
+	},
+	"import_invalid_file": {
+		"message": "Ongeldig bestandstype.\nAlleen JSON-bestanden worden ondersteund.",
+		"description": "[fout] het bestand dat voor importeren is gebruikt, is geen JSON"
+	},
+	"import_successful": {
+		"message": "Succesvol geïmporteerd",
+		"description": "[importeren] importeren is voltooid. Hierna wordt getoond hoeveel records zijn geïmporteerd"
+	},
+	"import_tabs": {
+		"message": "Tabs importeren",
+		"description": "[modal-titel] voor importproces"
+	},
+	"import_title": {
+		"message": "Tabs importeren uit json-bestand",
+		"description": "[popup] titel op importknop"
+	},
+	"insert_another": {
+		"message": "Nog een invoegen",
+		"description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker dezelfde Org invoegt in de modal"
+	},
+	"insert_another_org": {
+		"message": "De ingevoegde Org is de huidige!\nVoeg alstublieft een andere Org in.",
+		"description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker dezelfde Org invoegt in de modal"
+	},
+	"insert_valid_org": {
+		"message": "Voeg alstublieft een geldige Org in!",
+		"description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker een verkeerde url invoegt in de modal"
+	},
+	"invalid_url": {
+		"message": "Ongeldige URL",
+		"description": "[geenSalesforceSetup] een URL die niet geldig is"
+	},
+	"italic": {
+		"message": "Cursief",
+		"description": "Lettertype-optie voor cursieve tekst"
+	},
+	"login_to_salesforce": {
+		"message": "Inloggen bij Salesforce",
+		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
+	},
+	"mycustomorg": {
+		"message": "mijneigenorg",
+		"description": "placeholder voor de Tab bijwerken modal"
+	},
+	"no_match": {
+		"message": "Geen overeenkomst gevonden voor actie",
+		"description": "[fout] in Salesforce wanneer de switch de gevraagde actie niet kan matchen"
+	},
+	"nss_detected": {
+		"message": " gedetecteerd.",
+		"description": "[geenSalesforceSetup] iets dat is gevonden. Zorg ervoor dat er een spatie aan het begin van het bericht staat."
+	},
+	"nss_prefix": {
+		"message": "Dit is geen ",
+		"description": "[geenSalesforceSetup] dit is het voorvoegsel dat wordt getoond wanneer de gebruiker niet op een Salesforce-pagina is. Zorg ervoor dat er een spatie aan het einde van het bericht staat"
+	},
+	"open_setup": {
+		"message": "Setup openen",
+		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Taaloptie om terug te vallen op Engels als de landinstelling niet wordt ondersteund of de vertaling niet weergeeft"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Houd favoriete Tabs links van Home en Object Manager.",
+		"description": "Schakelaar om favoriete Tabs aan de linkerkant van de navigatiebalk vast te pinnen"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Taal (Standaard)",
+		"description": "Optie om de taalinstelling van Salesforce te gebruiken. Deze optie is de standaard voor de extensie."
+	},
+	"or_drop": {
+		"message": "Of neerzetten",
+		"description": "[importeren] laat de gebruiker bestanden met de muis verplaatsen en loslaten"
+	},
+	"org_link": {
+		"message": "Org Link",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Info andere Org",
+		"description": "[modal-titel]"
+	},
+	"other_org_placeholder": {
+		"message": "andere-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Opgeslagen Tabs overschrijven.",
+		"description": "[label] verwijder alle opgeslagen Tabs tijdens het importproces"
+	},
+	"preserve_org_tabs": {
+		"message": "Tabs voor andere Orgs behouden.",
+		"description": "[label] behoud alle Org-specifieke Tabs tijdens het importproces"
+	},
+	"remove_tab": {
+		"message": "Tab verwijderen",
+		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Niet opnieuw vragen.",
+		"description": "[req_toestemming] label wanneer de gebruiker geen permanente toestemming wil geven"
+	},
+	"req_permissions_header": {
+		"message": "Sta ons alstublieft toe om automatisch toegang te krijgen tot<br />Salesforce Setup-pagina's.",
+		"description": "[req_toestemming] koptekst van de pagina om toestemmingen te vragen"
+	},
+	"req_permissions_paragraph": {
+		"message": "Als u wilt, kunt u uw favoriete Tabs laten verschijnen<br />zodra u naar een Salesforce Setup-pagina navigeert<br />zonder telkens op deze extensie te hoeven klikken.",
+		"description": "[req_toestemming] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
+	},
+	"required": {
+		"message": "vereist",
+		"description": "[input] markeert een invoerveld als verplicht"
+	},
+	"required_info": {
+		"message": "= Vereiste informatie",
+		"description": "[modal] vertelt de gebruiker dat sommige info verplicht is"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[geenSalesforceSetup] het Salesforce Lightning-platform"
+	},
+	"save_tab": {
+		"message": "Opslaan als Tab",
+		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"set_gen_preview": {
+		"message": "Tab Voorbeeld",
+		"description": "Label voor het bekijken van de algemene Tab-weergave"
+	},
+	"set_gen_styler": {
+		"message": "Tab Styler",
+		"description": "Label voor het configureren van de stijl van algemene Tabs"
+	},
+	"set_general_settings": {
+		"message": "Algemene Instellingen",
+		"description": "Sectiekop voor algemene configuratie-opties"
+	},
+	"set_move_available": {
+		"message": "Verplaats naar Beschikbaar",
+		"description": "Knoptekst om geselecteerde items terug te verplaatsen naar Beschikbaar"
+	},
+	"set_move_chosen": {
+		"message": "Verplaats naar Gekozen",
+		"description": "Knoptekst om geselecteerde items naar Gekozen te verplaatsen"
+	},
+	"set_org_preview": {
+		"message": "Org Voorbeeld",
+		"description": "Label voor het bekijken van de org-specifieke Tab-weergave"
+	},
+	"set_org_styler": {
+		"message": "Org Styler",
+		"description": "Label voor het configureren van de stijl van org-specifieke Tabs"
+	},
+	"set_tab_background_active_label": {
+		"message": "Voer de achtergrondkleur in voor uw actieve algemene Tabs.",
+		"description": "Label om achtergrondkleur in te stellen voor actieve algemene Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Voer de achtergrondkleur in voor uw org Tabs.",
+		"description": "Label om achtergrondkleur in te stellen voor org-specifieke Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Voer de randkleur in voor uw actieve org Tabs.",
+		"description": "Label om randkleur in te stellen voor actieve org-specifieke Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Voer de randkleur in voor uw algemene Tabs.",
+		"description": "Label om randkleur in te stellen voor algemene Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Voer de kleur van de tekst in voor uw actieve algemene Tabs.",
+		"description": "Label om tekstkleur in te stellen voor actieve algemene Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Voer de kleur van de tekst in voor uw org Tabs.",
+		"description": "Label om tekstkleur in te stellen voor org-specifieke Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Kies een of meer decoratiestijlen voor uw actieve org Tabs.",
+		"description": "Prompt om decoratiestijlen te selecteren voor actieve org-specifieke Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Kies een of meer decoratiestijlen voor uw algemene Tabs.",
+		"description": "Prompt om decoratiestijlen te selecteren voor algemene Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Voer de hover-achtergrondkleur in voor uw actieve algemene Tabs.",
+		"description": "Label om hover-achtergrondkleur in te stellen voor actieve algemene Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Voer de hover-achtergrondkleur in voor uw org Tabs.",
+		"description": "Label om hover-achtergrondkleur in te stellen voor org-specifieke Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Voer de schaduwkleur in voor uw actieve org Tabs.",
+		"description": "Label om schaduwkleur in te stellen voor actieve org-specifieke Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Voer de schaduwkleur in voor uw algemene Tabs.",
+		"description": "Label om schaduwkleur in te stellen voor algemene Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Voer de kleur in voor de balk bovenaan uw actieve algemene Tabs.",
+		"description": "Label om de kleur van de bovenste balk in te stellen voor actieve algemene Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Klik om actieve staat te wisselen.",
+		"description": "Tooltip-tekst voor de bediening om de actieve staat te wisselen"
+	},
+	"settings": {
+		"message": "Instellingen",
+		"description": "Label voor het instellingenmenu"
+	},
+	"setup_page": {
+		"message": "Setup Pagina",
+		"description": "[geenSalesforceSetup] de pagina die wordt gebruikt om de instellingen van Salesforce te wijzigen"
+	},
+	"skip": {
+		"message": "Overslaan",
+		"description": "[req_toestemming] knop om toestemmingen NIET toe te staan"
+	},
+	"successfully_imported": {
+		"message": "Succesvol geïmporteerd",
+		"description": "[toast] de gebruiker heeft Tabs toegevoegd vanuit een extern bestand"
+	},
+	"tab_explain": {
+		"message": "Elk item moet 'label' en 'url' als strings hebben. Daarnaast kan elk item een 'org' als string hebben.",
+		"description": "[fout] legt uit hoe een Tab moet worden opgebouwd"
+	},
+	"tab_information": {
+		"message": "Tab-informatie",
+		"description": "titel voor Tab bijwerken modal"
+	},
+	"tab_label": {
+		"message": "Tab Label",
+		"description": "De Label-eigenschap van de Tab, de naam ervan"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "De Org-eigenschap van de Tab, als deze voor een enkele Salesforce Organisatie is"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "De URL-eigenschap van de Tab, waar deze naar verwijst"
+	},
+	"table_delete": {
+		"message": "Tab verwijderen",
+		"description": "[popup] helpende tekst voor kolom met verwijderknop"
+	},
+	"table_org": {
+		"message": "Is Org Tab",
+		"description": "[popup] helpende tekst voor kolom met Org-selectievakje"
+	},
+	"table_row_label": {
+		"message": "Voer het label in voor deze URL",
+		"description": "[popup] invoerveld met Tab-naam"
+	},
+	"table_row_org": {
+		"message": "Klik als u wilt dat deze Tab alleen beschikbaar is voor deze Org.",
+		"description": "[popup] selectievakje om Tab Org-specifiek te maken"
+	},
+	"table_row_org_name": {
+		"message": "De Org waarvoor deze Tab beschikbaar is.",
+		"description": "[popup] invoerveld met Org-naam"
+	},
+	"table_row_url": {
+		"message": "Voer de sub_URL in waarnaar u wilt worden doorgestuurd.",
+		"description": "[popup] invoerveld met Tab-url"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "de favoriete links van de gebruiker"
+	},
+	"tabs_saved": {
+		"message": "Tabs opgeslagen.",
+		"description": "[toast] Tabs zijn succesvol opgeslagen."
+	},
+	"theme_dark": {
+		"message": "Thema wijzigen naar Donker",
+		"description": "[popup] titel op de maan om thema te wisselen"
+	},
+	"theme_light": {
+		"message": "Thema wijzigen naar Licht",
+		"description": "[popup] titel op de zon om thema te wisselen"
+	},
+	"underline": {
+		"message": "Onderstrepen",
+		"description": "Decoratiestijloptie om Tab-tekst te onderstrepen"
+	},
+	"underline_wavy": {
+		"message": "Onderstrepen Golvend",
+		"description": "Decoratiestijloptie om een golvende onderstreping toe te passen op Tab-tekst"
+	},
+	"upload": {
+		"message": "Uploaden",
+		"description": "[importeren] laat de gebruiker door zijn bestanden bladeren en de juiste kiezen"
+	},
+	"users": {
+		"message": "Gebruikers",
+		"description": "De naam van de pagina gerelateerd aan ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "U heeft geïmporteerd met de verouderde 'tabTitle'!\nHet downloaden van het bijgewerkte bestand is begonnen.\nGebruik vanaf nu alstublieft het nieuw gedownloade bestand.\nHet gebruik van een dergelijk bestand wordt stopgezet met een latere release.",
+		"description": "[waarschuwing] Leg de gebruiker uit dat het bestand dat ze hebben geïmporteerd een verouderde eigenschap gebruikt"
+	},
+	"where_to": {
+		"message": "Waarheen?",
+		"description": "[open-andere-org-modal] fallback-titel voor de modal"
+	}
 }
