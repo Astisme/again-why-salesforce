@@ -25,7 +25,6 @@ if [[ -z "$LOG_FILE" ]]; then
 else
   deno task "$TASK" > "$LOG_FILE"
 fi
-deno task "$TASK" > "$LOG_FILE"
 
 echo "▶  Checking for changes…"
 git diff --output="$LOG_FILE"
@@ -44,10 +43,20 @@ git config user.name "github-actions[bot]"
 git config user.email "github-actions@github.bot"
 git commit -am "$COMMIT_MSG"
 
-# Push back to the current PR branch:
-#   GITHUB_REF: refs/pull/<pr-number>/merge or refs/heads/<branch>
-#   We want the head branch name:
-BRANCH="${GITHUB_REF##*/}"
+# Extract the branch name from GITHUB_REF
+if [[ "$GITHUB_REF" == refs/pull/* ]]; then
+  # For pull requests, extract the PR number
+  PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/refs\/pull\/\([0-9]*\)\/merge/\1/')
+  BRANCH=$(git show-ref | grep "pull/${PR_NUMBER}/head" | cut -d/ -f4)
+  
+  # If that doesn't work, fallback to the head_ref env variable
+  if [ -z "$BRANCH" ] && [ -n "$GITHUB_HEAD_REF" ]; then
+    BRANCH=$GITHUB_HEAD_REF
+  fi
+else
+  # For direct branch pushes
+  BRANCH="${GITHUB_REF#refs/heads/}"
+fi
 
-echo "▶  Pushing to ${BRANCH}"
+echo "▶ Pushing to ${BRANCH}"
 git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" "$BRANCH"
