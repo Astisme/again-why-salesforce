@@ -31,7 +31,7 @@ jobs:
 
             - name: Sort locales
               continue-on-error: true
-              run: .github/scripts/task-and-push-when-diff.sh sort 2> locales-errors.log
+              run: bash .github/scripts/task-and-push-when-diff.sh sort 2> locales-errors.log
 
             - name: Comment on PR if sorter fails
               uses: actions/github-script@v7
@@ -93,4 +93,4 @@ jobs:
                   });
 
             - name: Run formatter
-              run: .github/scripts/task-and-push-when-diff.sh fmt
+              run: bash .github/scripts/task-and-push-when-diff.sh fmt
