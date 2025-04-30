@@ -1,10 +1,8 @@
 import { 
     BROWSER,
-    LOCALE_KEY,
     USER_LANGUAGE,
     FOLLOW_SF_LANG,
     sendExtensionMessage,
-    getStyleSettings,
 } from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
 let singleton = null;

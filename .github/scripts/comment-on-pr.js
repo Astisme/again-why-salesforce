@@ -1,3 +1,5 @@
+// deno-lint-ignore-file no-control-regex
+import process from "node:process";
 module.exports = async function commentOnPr({
 	github,
 	context,
@@ -19,7 +21,11 @@ module.exports = async function commentOnPr({
 
 	if (!raw.trim()) {
 		core.info(`${logFile} is empty; nothing to do.`);
-		try { fs.unlinkSync(logFile); } catch {}
+		try {
+            fs.unlinkSync(logFile);
+        } catch {
+            core.error("Failed unlinkSync");
+        }
 		return;
 	}
 
@@ -31,7 +37,11 @@ module.exports = async function commentOnPr({
 
 	if (!matchPattern.test(clean)) {
 		core.info(`✅ No ${title.toLowerCase()} to report.`);
-		try { fs.unlinkSync(logFile); } catch {}
+		try {
+            fs.unlinkSync(logFile);
+        } catch {
+            core.error("Failed unlinkSync");
+        }
 		return;
 	}
 

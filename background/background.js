@@ -11,7 +11,6 @@ import {
     MY_SALESFORCE_SETUP_COM,
     GENERIC_TAB_STYLE_KEY,
     ORG_TAB_STYLE_KEY,
-    USER_LANGUAGE,
 } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 

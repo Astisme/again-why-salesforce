@@ -556,12 +556,13 @@ function setCurrentChoice(setting) {
             user_language_select.value = setting.enabled;
             break;
         case GENERIC_TAB_STYLE_KEY:
-        case ORG_TAB_STYLE_KEY:
+        case ORG_TAB_STYLE_KEY: {
             const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
-            setting.value instanceof Array
+            Array.isArray(setting.value)
                 ? setting.value.forEach(set => setPreviewAndInputValue(set, isGeneric))
                 : setPreviewAndInputValue(setting.value, isGeneric);
             break;
+        }
         default:
             console.error(`Unmatched setting id: ${setting.id}`);
             break;
@@ -768,7 +769,7 @@ function showRelevantSettings_HideOthers(elementToActivate, elementToShow, eleme
     });
 }
 
-generalHeader.addEventListener("click", async () => {
+generalHeader.addEventListener("click", () => {
     restoreGeneralSettings();
     showRelevantSettings_HideOthers(generalHeader, generalContainer, [tabGenericManagerContainer, tabOrgManagerHeader], [tabGenericManagerContainer, tabOrgManagerContainer]);
 });

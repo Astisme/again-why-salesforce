@@ -7,7 +7,7 @@ const USER_LANGUAGE = "picked-language";
 
 export interface MockStorage {
 	tabs: Tab[];
-	settings: Object[];
+	settings: object[];
 }
 // Mock browser APIs
 export const mockStorage: MockStorage = {
@@ -23,12 +23,12 @@ export interface InternalMessage {
     keys?: string|string[];
 }
 
-let language = "fr";
+const language = "fr";
 
 export const mockBrowser = {
 	storage: {
         sync: {
-            get: async (keys: string[]): Promise<Object> => {
+            get: (keys: string[]): Promise<object> => {
                 const response = {};
                 keys.forEach(key => {
                     if(key === WHY_KEY)
@@ -36,7 +36,7 @@ export const mockBrowser = {
                     else
                         response[key] = mockStorage[key];
                 });
-                return response;
+                return new Promise((resolve, _) => resolve(response));
             },
 			// deno-lint-ignore require-await
 			set: async (data: { tabs: any[] }): Promise<boolean> => {
@@ -54,7 +54,7 @@ export const mockBrowser = {
         }
 	},
 	runtime: {
-		sendMessage: async (
+		sendMessage: (
 			message: InternalMessage,
 			callback?: (response?: any) => void,
 		): Promise<any> => {
@@ -103,12 +103,12 @@ export const mockBrowser = {
 			}
             return response;
 		},
-        getURL: (path: String): String => {
+        getURL: (path: string): string => {
             return path;
         }
 	},
     i18n: {
-        getMessage: (_: String): String => {
+        getMessage: (_: string): string => {
             return "Again, Why Salesforce"
         }
     }
@@ -154,8 +154,8 @@ export const translations = {
 		// goodbye is missing to test missing key default to english
 	},
 };
-globalThis.fetch = async (path) => ({
-    json: async () => {
+globalThis.fetch = (path) => ({
+    json: () => {
         // extract from `/_locales/${language}/messages.json`
         const language = path.substring("/_locales/".length, path.length - "/messages.json".length);
         return translations[language]

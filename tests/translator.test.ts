@@ -1,4 +1,4 @@
-// translation_service_test.ts
+// deno-lint-ignore-file no-explicit-any
 import {
 	assertEquals,
     assertRejects,
@@ -116,7 +116,7 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 		"Should return existing translations",
 	);
 	// Test error handling
-	globalThis.fetch = async () => {
+	globalThis.fetch = () => {
 		throw new Error("Network error");
 	};
 	const errorResult = await service.loadLanguageFile("es");

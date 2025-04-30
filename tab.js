@@ -276,7 +276,7 @@ export default class Tab {
 		try {
 			Tab.create(tab);
 			return true;
-		} catch (error) {
+		} catch (_) {
 			// error on creation of tab
 			return false;
 		}

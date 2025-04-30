@@ -557,10 +557,11 @@ export async function performActionOnTabs(action, tab, options) {
             case "toggle-org":
                 await toggleOrg(tab);
                 break;
-			default:
+			default: {
                 const translator = await ensureTranslatorAvailability();
                 const noMatch = await translator.translate("no_match");
 				return console.error(noMatch, action);
+            }
 		}
 		sf_afterSet();
 	} catch (error) {
