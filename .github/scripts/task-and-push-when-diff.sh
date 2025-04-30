@@ -44,17 +44,24 @@ git commit -am "$COMMIT_MSG"
 if [[ "$GITHUB_REF" == refs/pull/* ]]; then
   # For pull requests, extract the PR number
   PR_NUMBER=$(echo $GITHUB_REF | sed -e 's/refs\/pull\/\([0-9]*\)\/merge/\1/')
-  BRANCH=$(git show-ref | grep "pull/${PR_NUMBER}/head" | cut -d/ -f4)
   
-  # If that doesn't work, fallback to the head_ref env variable
-  if [ -z "$BRANCH" ] && [ -n "$GITHUB_HEAD_REF" ]; then
+  # Use GITHUB_HEAD_REF directly for pull requests - this is more reliable
+  if [ -n "$GITHUB_HEAD_REF" ]; then
     BRANCH=$GITHUB_HEAD_REF
+  else
+    # Try to extract branch from git, but don't fail if unsuccessful
+    BRANCH=$(git show-ref | grep "pull/${PR_NUMBER}/head" | cut -d/ -f4) || true
   fi
 else
   # For direct branch pushes
   BRANCH="${GITHUB_REF#refs/heads/}"
 fi
 
+# Final fallback - if BRANCH is still empty, use a default or fail gracefully
+if [ -z "$BRANCH" ]; then
+  echo "⚠️ Could not determine target branch, using PR number as reference"
+  BRANCH="pr-${PR_NUMBER}"
+fi
+
 echo "▶ Pushing to ${BRANCH}"
 git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" "$BRANCH"
-
