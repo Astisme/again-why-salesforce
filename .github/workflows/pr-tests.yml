@@ -41,7 +41,6 @@ jobs:
                   await handler({
                     github,
                     context,
-                    fs,
                     core,
                     logFile: 'locales-errors.log',
                     title:   'Locale Sorter Failed',
@@ -63,7 +62,6 @@ jobs:
                   await handler({
                     github,
                     context,
-                    fs,
                     core,
                     logFile: 'lint-error.log',
                     title:   'Linter Failed',
@@ -85,7 +83,6 @@ jobs:
                   await handler({
                     github,
                     context,
-                    fs,
                     core,
                     logFile: 'test-error.log',
                     title:   'Tests Failed',

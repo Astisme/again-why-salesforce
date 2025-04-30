@@ -1,7 +1,6 @@
 module.exports = async function commentOnPr({
 	github,
 	context,
-	fs,
 	core,
 	// — all of these get default values but can be overridden —
 	logFile			= 'error.log',
@@ -9,6 +8,7 @@ module.exports = async function commentOnPr({
 	matchPattern    = /./, // must match if there are errors
 	stripPatterns   = [], // array of regexes to strip noisy lines
 } = {}) {
+	const fs = require('fs');
 	let raw;
 	try {
 		raw = fs.readFileSync(logFile, 'utf8');
