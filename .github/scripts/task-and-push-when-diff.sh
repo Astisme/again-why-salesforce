@@ -20,14 +20,15 @@ fi
 
 echo "▶  Running deno task: $TASK"
 # If LOG_FILE is empty, output to stdout, otherwise to the specified file
-deno task "$TASK" > "$LOG_FILE"
+deno task "$TASK" > "$LOG_FILE" 2>&1
 
 echo "▶  Checking for changes…"
-git diff --output="$LOG_FILE"
+DIFF_FILE=$(mktemp)
+git diff --output="$DIFF_FILE"
+# Grab the size of the diff file
+SIZE=$(stat --format=%s "$DIFF_FILE" 2>/dev/null || stat -f%z "$DIFF_FILE")
 
-# Grab the size of the log file
-SIZE=$(stat --format=%s "$LOG_FILE" 2>/dev/null || stat -f%z "$LOG_FILE")
-
+rm -f "$DIFF_FILE"
 if [[ "$SIZE" -eq 0 ]]; then
   echo "✅  No changes from 'deno task $TASK'"
   rm -f "$LOG_FILE"
@@ -56,3 +57,4 @@ fi
 
 echo "▶ Pushing to ${BRANCH}"
 git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" "$BRANCH"
+
