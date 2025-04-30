@@ -6,7 +6,7 @@
 # Example:
 #   ./format-and-push.sh fmt mylog.log "chore: apply deno fmt"
 
-set -eo pipefail
+set -eox pipefail
 
 TASK="$1" # the Deno task to run (e.g. "fmt", "lint")
 LOG_FILE="$2"
