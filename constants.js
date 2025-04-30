@@ -12,9 +12,9 @@ export const LIGHTNING_FORCE_COM = ".lightning.force.com";
 export const MY_SALESFORCE_SETUP_COM = ".my.salesforce-setup.com";
 export const MY_SALESFORCE_COM = ".my.salesforce.com";
 export const SUPPORTED_SALESFORCE_URLS = [
-    LIGHTNING_FORCE_COM,
-    MY_SALESFORCE_SETUP_COM,
-    MY_SALESFORCE_COM,
+	LIGHTNING_FORCE_COM,
+	MY_SALESFORCE_SETUP_COM,
+	MY_SALESFORCE_COM,
 ];
 //export const API_VERSION = "v60.0";
 // source: https://www.fishofprey.com/2011/09/obscure-salesforce-object-key-prefixes.html
@@ -78,8 +78,8 @@ export function sendExtensionMessage(message, callback = null) {
 	}
 	sendMessage(message, callback);
 }
-export async function getSettings(keys = null){
-    return await sendExtensionMessage({ what: "get-settings", keys });
+export async function getSettings(keys = null) {
+	return await sendExtensionMessage({ what: "get-settings", keys });
 }
 // SETTINGS
 export const SETTINGS_KEY = "settings";
@@ -115,8 +115,8 @@ const HAS_ORG_TAB = `:has(${ORG_TAB_CLASS})`;
  * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which style settings to fetch.
  * @returns {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
-export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY){
-    return await sendExtensionMessage({ what: "get-style-settings", key });
+export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY) {
+	return await sendExtensionMessage({ what: "get-style-settings", key });
 }
 
 /**
@@ -128,15 +128,16 @@ export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY){
  * @async
  * @returns {Promise<Object<string, any[] | null> | null>} Object with style arrays for each key, or null.
  */
-export async function getAllStyleSettings(){
-    const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
-    const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
-    if(genericStyles == null && orgStyles == null)
-        return null;
-    const result = {};
-    result[GENERIC_TAB_STYLE_KEY] = genericStyles;
-    result[ORG_TAB_STYLE_KEY] = orgStyles;
-    return result;
+export async function getAllStyleSettings() {
+	const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
+	const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
+	if (genericStyles == null && orgStyles == null) {
+		return null;
+	}
+	const result = {};
+	result[GENERIC_TAB_STYLE_KEY] = genericStyles;
+	result[ORG_TAB_STYLE_KEY] = orgStyles;
+	return result;
 }
 
 /**
@@ -147,8 +148,14 @@ export async function getAllStyleSettings(){
  * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
  * @returns {string} The constructed CSS selector.
  */
-export function getCssSelector(isInactive = true, isGeneric = true, pseudoElement = ""){
-    return `.${EXTENSION_NAME}${isInactive ? `:not(${SLDS_ACTIVE_CLASS})` : SLDS_ACTIVE_CLASS}${isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB}${pseudoElement}`;
+export function getCssSelector(
+	isInactive = true,
+	isGeneric = true,
+	pseudoElement = "",
+) {
+	return `.${EXTENSION_NAME}${
+		isInactive ? `:not(${SLDS_ACTIVE_CLASS})` : SLDS_ACTIVE_CLASS
+	}${isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB}${pseudoElement}`;
 }
 
 /**
@@ -158,30 +165,30 @@ export function getCssSelector(isInactive = true, isGeneric = true, pseudoElemen
  * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
  * @returns {string} The corresponding CSS rule or an empty string if invalid.
  */
-export function getCssRule(styleId, value = null){
-    switch (styleId) {
-        case TAB_STYLE_BACKGROUND:
-        case TAB_STYLE_HOVER:
-        case TAB_STYLE_TOP:
-            return `background-color: ${value} !important;`;
-        case TAB_STYLE_COLOR:
-            return `color: ${value};`;
-        case TAB_STYLE_BORDER:
-            return `border: 2px solid ${value};`;
-        case TAB_STYLE_SHADOW:
-            return `text-shadow: 0px 0px 3px ${value};`;
-        case TAB_STYLE_BOLD:
-            return "font-weight: bold;";
-        case TAB_STYLE_ITALIC:
-            return "font-style: italic;";
-        case TAB_STYLE_UNDERLINE:
-            return "text-decoration: underline;";
-        //case TAB_STYLE_WAVY:
-            //return "text-decoration: underline wavy;";
-        default:
-            console.error(styleId);
-            return "";
-    }
+export function getCssRule(styleId, value = null) {
+	switch (styleId) {
+		case TAB_STYLE_BACKGROUND:
+		case TAB_STYLE_HOVER:
+		case TAB_STYLE_TOP:
+			return `background-color: ${value} !important;`;
+		case TAB_STYLE_COLOR:
+			return `color: ${value};`;
+		case TAB_STYLE_BORDER:
+			return `border: 2px solid ${value};`;
+		case TAB_STYLE_SHADOW:
+			return `text-shadow: 0px 0px 3px ${value};`;
+		case TAB_STYLE_BOLD:
+			return "font-weight: bold;";
+		case TAB_STYLE_ITALIC:
+			return "font-style: italic;";
+		case TAB_STYLE_UNDERLINE:
+			return "text-decoration: underline;";
+		//case TAB_STYLE_WAVY:
+		//return "text-decoration: underline wavy;";
+		default:
+			console.error(styleId);
+			return "";
+	}
 }
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";

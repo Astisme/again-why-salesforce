@@ -1,143 +1,185 @@
-import { 
-    SETTINGS_KEY,
+import {
+	EXTENSION_NAME,
+	GENERIC_TAB_STYLE_KEY,
+	getCssRule,
+	getCssSelector,
+	getSettings,
+	getStyleSettings,
 	LINK_NEW_BROWSER,
-	SKIP_LINK_DETECTION,
-	USE_LIGHTNING_NAVIGATION,
+	ORG_TAB_STYLE_KEY,
+	POPUP_LOGIN_NEW_TAB,
 	POPUP_OPEN_LOGIN,
 	POPUP_OPEN_SETUP,
-	POPUP_LOGIN_NEW_TAB,
 	POPUP_SETUP_NEW_TAB,
-    TAB_GENERIC_STYLE,
-    TAB_ORG_STYLE,
-    GENERIC_TAB_STYLE_KEY,
-    ORG_TAB_STYLE_KEY,
+	sendExtensionMessage,
+	SETTINGS_KEY,
+	SKIP_LINK_DETECTION,
+	SLDS_ACTIVE,
+	TAB_GENERIC_STYLE,
+	TAB_ON_LEFT,
+	TAB_ORG_STYLE,
 	TAB_STYLE_BACKGROUND,
-	TAB_STYLE_COLOR,
-	TAB_STYLE_BORDER,
-	TAB_STYLE_SHADOW,
-	TAB_STYLE_HOVER,
 	TAB_STYLE_BOLD,
+	TAB_STYLE_BORDER,
+	TAB_STYLE_COLOR,
+	TAB_STYLE_HOVER,
 	TAB_STYLE_ITALIC,
-	TAB_STYLE_UNDERLINE,
+	TAB_STYLE_SHADOW,
 	//TAB_STYLE_WAVY,
-    TAB_STYLE_TOP,
-    SLDS_ACTIVE,
-    EXTENSION_NAME,
-    USER_LANGUAGE,
-    TAB_ON_LEFT,
-    sendExtensionMessage,
-    getSettings,
-    getStyleSettings,
-    getCssSelector,
-    getCssRule,
+	TAB_STYLE_TOP,
+	TAB_STYLE_UNDERLINE,
+	USE_LIGHTNING_NAVIGATION,
+	USER_LANGUAGE,
 } from "/constants.js";
 
 /**
-* Saves checkbox state and dependent checkbox states to settings
-* @param {Event} e - The event object from the checkbox interaction
-* @param {...HTMLElement} dependentCheckboxElements - Dependent checkbox elements whose states should also be saved
-*/
+ * Saves checkbox state and dependent checkbox states to settings
+ * @param {Event} e - The event object from the checkbox interaction
+ * @param {...HTMLElement} dependentCheckboxElements - Dependent checkbox elements whose states should also be saved
+ */
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
-    const set = { what: "set", key: SETTINGS_KEY, set: [] };
-    const setting = {};
-    setting.id = e.target.id;
-    setting.enabled = this?.checked ?? e.target.checked;
-    set.set.push(setting)
-    dependentCheckboxElements.forEach(dc => {
-        const setting = {};
-        setting.id = dc.id;
-        setting.enabled = dc.checked;
-        set.set.push(setting)
-    });
-    sendExtensionMessage(set);
+	const set = { what: "set", key: SETTINGS_KEY, set: [] };
+	const setting = {};
+	setting.id = e.target.id;
+	setting.enabled = this?.checked ?? e.target.checked;
+	set.set.push(setting);
+	dependentCheckboxElements.forEach((dc) => {
+		const setting = {};
+		setting.id = dc.id;
+		setting.enabled = dc.checked;
+		set.set.push(setting);
+	});
+	sendExtensionMessage(set);
 }
 
-const link_new_browser_el           = document.getElementById(LINK_NEW_BROWSER);
-const skip_link_detection_el        = document.getElementById(SKIP_LINK_DETECTION);
-const use_lightning_navigation_el   = document.getElementById(USE_LIGHTNING_NAVIGATION);
-const popup_open_login_el           = document.getElementById(POPUP_OPEN_LOGIN);
-const popup_open_setup_el           = document.getElementById(POPUP_OPEN_SETUP);
-const popup_login_new_tab_el        = document.getElementById(POPUP_LOGIN_NEW_TAB);
-const popup_setup_new_tab_el        = document.getElementById(POPUP_SETUP_NEW_TAB);
-const tab_on_left_el                = document.getElementById(TAB_ON_LEFT);
-const user_language_select          = document.getElementById(USER_LANGUAGE);
+const link_new_browser_el = document.getElementById(LINK_NEW_BROWSER);
+const skip_link_detection_el = document.getElementById(SKIP_LINK_DETECTION);
+const use_lightning_navigation_el = document.getElementById(
+	USE_LIGHTNING_NAVIGATION,
+);
+const popup_open_login_el = document.getElementById(POPUP_OPEN_LOGIN);
+const popup_open_setup_el = document.getElementById(POPUP_OPEN_SETUP);
+const popup_login_new_tab_el = document.getElementById(POPUP_LOGIN_NEW_TAB);
+const popup_setup_new_tab_el = document.getElementById(POPUP_SETUP_NEW_TAB);
+const tab_on_left_el = document.getElementById(TAB_ON_LEFT);
+const user_language_select = document.getElementById(USER_LANGUAGE);
 
-const generalContainer              = document.getElementById("general-container");
-const generalHeader                 = document.getElementById("general-settings");
-const tabGenericManagerContainer    = document.getElementById(`${TAB_GENERIC_STYLE}-container`);
-const tabGenericManagerHeader       = document.getElementById(`${TAB_GENERIC_STYLE}-settings`);
-const tabGenericPreview             = document.getElementById(`${TAB_GENERIC_STYLE}-preview`);
-const tabOrgManagerContainer        = document.getElementById(`${TAB_ORG_STYLE}-container`);
-const tabOrgManagerHeader           = document.getElementById(`${TAB_ORG_STYLE}-settings`);
-const tabOrgPreview                 = document.getElementById(`${TAB_ORG_STYLE}-preview`);
+const generalContainer = document.getElementById("general-container");
+const generalHeader = document.getElementById("general-settings");
+const tabGenericManagerContainer = document.getElementById(
+	`${TAB_GENERIC_STYLE}-container`,
+);
+const tabGenericManagerHeader = document.getElementById(
+	`${TAB_GENERIC_STYLE}-settings`,
+);
+const tabGenericPreview = document.getElementById(
+	`${TAB_GENERIC_STYLE}-preview`,
+);
+const tabOrgManagerContainer = document.getElementById(
+	`${TAB_ORG_STYLE}-container`,
+);
+const tabOrgManagerHeader = document.getElementById(
+	`${TAB_ORG_STYLE}-settings`,
+);
+const tabOrgPreview = document.getElementById(`${TAB_ORG_STYLE}-preview`);
 
 /**
-* Toggles the active class on a list item containing the target element
-* @param {Event} event - The event object from the interaction
-*/
-function toggleActivePreview(event){
-    event.target.closest("li").classList.toggle(SLDS_ACTIVE);
+ * Toggles the active class on a list item containing the target element
+ * @param {Event} event - The event object from the interaction
+ */
+function toggleActivePreview(event) {
+	event.target.closest("li").classList.toggle(SLDS_ACTIVE);
 }
 
 tabGenericPreview.addEventListener("click", toggleActivePreview);
 tabOrgPreview.addEventListener("click", toggleActivePreview);
 
-const tab_inactive_generic_setting_background_el             = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-inactive`);
-const tab_inactive_generic_setting_color_el                  = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-inactive`);
-const tab_inactive_generic_setting_border_color_el           = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-inactive`);
-const tab_inactive_generic_setting_shadow_el                 = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-inactive`);
-const tab_inactive_generic_setting_hover_background_el       = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-inactive`);
-const tab_inactive_generic_setting_decoration_bold_el        = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-inactive`);
-const tab_inactive_generic_setting_decoration_italic_el      = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-inactive`);
-const tab_inactive_generic_setting_decoration_underline_el   = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-inactive`);
+const tab_inactive_generic_setting_background_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-inactive`,
+);
+const tab_inactive_generic_setting_color_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-inactive`,
+);
+const tab_inactive_generic_setting_border_color_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-inactive`,
+);
+const tab_inactive_generic_setting_shadow_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-inactive`,
+);
+const tab_inactive_generic_setting_hover_background_el = document
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-inactive`);
+const tab_inactive_generic_setting_decoration_bold_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-inactive`,
+);
+const tab_inactive_generic_setting_decoration_italic_el = document
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-inactive`);
+const tab_inactive_generic_setting_decoration_underline_el = document
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-inactive`);
 //const tab_inactive_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-inactive`);
 
-const tab_active_generic_setting_background_el             = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-active`);
-const tab_active_generic_setting_color_el                  = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-active`);
-const tab_active_generic_setting_border_color_el           = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-active`);
-const tab_active_generic_setting_shadow_el                 = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-active`);
-const tab_active_generic_setting_hover_background_el       = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-active`);
-const tab_active_generic_setting_top_background_el         = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-active`);
-const tab_active_generic_setting_decoration_bold_el        = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-active`);
-const tab_active_generic_setting_decoration_italic_el      = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-active`);
-const tab_active_generic_setting_decoration_underline_el   = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-active`);
+const tab_active_generic_setting_background_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-active`,
+);
+const tab_active_generic_setting_color_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-active`,
+);
+const tab_active_generic_setting_border_color_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-active`,
+);
+const tab_active_generic_setting_shadow_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-active`,
+);
+const tab_active_generic_setting_hover_background_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-active`,
+);
+const tab_active_generic_setting_top_background_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-active`,
+);
+const tab_active_generic_setting_decoration_bold_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-active`,
+);
+const tab_active_generic_setting_decoration_italic_el = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-active`,
+);
+const tab_active_generic_setting_decoration_underline_el = document
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-active`);
 //const tab_active_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-active`);
 
 const allInactiveGenericInputs = [
-    tab_inactive_generic_setting_background_el,
-    tab_inactive_generic_setting_color_el,
-    tab_inactive_generic_setting_border_color_el,
-    tab_inactive_generic_setting_shadow_el,
-    tab_inactive_generic_setting_hover_background_el,
+	tab_inactive_generic_setting_background_el,
+	tab_inactive_generic_setting_color_el,
+	tab_inactive_generic_setting_border_color_el,
+	tab_inactive_generic_setting_shadow_el,
+	tab_inactive_generic_setting_hover_background_el,
 ];
 const allActiveGenericInputs = [
-    tab_active_generic_setting_background_el,
-    tab_active_generic_setting_color_el,
-    tab_active_generic_setting_border_color_el,
-    tab_active_generic_setting_shadow_el,
-    tab_active_generic_setting_hover_background_el,
-    tab_active_generic_setting_top_background_el,
+	tab_active_generic_setting_background_el,
+	tab_active_generic_setting_color_el,
+	tab_active_generic_setting_border_color_el,
+	tab_active_generic_setting_shadow_el,
+	tab_active_generic_setting_hover_background_el,
+	tab_active_generic_setting_top_background_el,
 ];
 const allGenericInputs = [
-    ...allInactiveGenericInputs,
-    ...allActiveGenericInputs,
+	...allInactiveGenericInputs,
+	...allActiveGenericInputs,
 ];
 
 const allInactiveGenericDecorations = [
-    tab_inactive_generic_setting_decoration_bold_el,
-    tab_inactive_generic_setting_decoration_italic_el,
-    tab_inactive_generic_setting_decoration_underline_el,
-    //tab_inactive_generic_setting_decoration_underline_wavy_el,
+	tab_inactive_generic_setting_decoration_bold_el,
+	tab_inactive_generic_setting_decoration_italic_el,
+	tab_inactive_generic_setting_decoration_underline_el,
+	//tab_inactive_generic_setting_decoration_underline_wavy_el,
 ];
 const allActiveGenericDecorations = [
-    tab_active_generic_setting_decoration_bold_el,
-    tab_active_generic_setting_decoration_italic_el,
-    tab_active_generic_setting_decoration_underline_el,
-    //tab_active_generic_setting_decoration_underline_wavy_el,
+	tab_active_generic_setting_decoration_bold_el,
+	tab_active_generic_setting_decoration_italic_el,
+	tab_active_generic_setting_decoration_underline_el,
+	//tab_active_generic_setting_decoration_underline_wavy_el,
 ];
 const allGenericDecorations = [
-    ...allInactiveGenericDecorations,
-    ...allActiveGenericDecorations,
+	...allInactiveGenericDecorations,
+	...allActiveGenericDecorations,
 ];
 /*
 const allGenericTabSettings = [
@@ -146,62 +188,95 @@ const allGenericTabSettings = [
 ];
 */
 
-const tab_inactive_org_setting_background_el             = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-inactive`);
-const tab_inactive_org_setting_color_el                  = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-inactive`);
-const tab_inactive_org_setting_border_color_el           = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-inactive`);
-const tab_inactive_org_setting_shadow_el                 = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-inactive`);
-const tab_inactive_org_setting_hover_background_el       = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-inactive`);
-const tab_inactive_org_setting_decoration_bold_el        = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-inactive`);
-const tab_inactive_org_setting_decoration_italic_el      = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-inactive`);
-const tab_inactive_org_setting_decoration_underline_el   = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-inactive`);
+const tab_inactive_org_setting_background_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-inactive`,
+);
+const tab_inactive_org_setting_color_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-inactive`,
+);
+const tab_inactive_org_setting_border_color_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-inactive`,
+);
+const tab_inactive_org_setting_shadow_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-inactive`,
+);
+const tab_inactive_org_setting_hover_background_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-inactive`,
+);
+const tab_inactive_org_setting_decoration_bold_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-inactive`,
+);
+const tab_inactive_org_setting_decoration_italic_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-inactive`,
+);
+const tab_inactive_org_setting_decoration_underline_el = document
+	.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-inactive`);
 //const tab_inactive_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-inactive`);
 
-const tab_active_org_setting_background_el             = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-active`);
-const tab_active_org_setting_color_el                  = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-active`);
-const tab_active_org_setting_border_color_el           = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-active`);
-const tab_active_org_setting_shadow_el                 = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-active`);
-const tab_active_org_setting_hover_background_el       = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-active`);
-const tab_active_org_setting_top_background_el         = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-active`);
-const tab_active_org_setting_decoration_bold_el        = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-active`);
-const tab_active_org_setting_decoration_italic_el      = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-active`);
-const tab_active_org_setting_decoration_underline_el   = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-active`);
+const tab_active_org_setting_background_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-active`,
+);
+const tab_active_org_setting_color_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-active`,
+);
+const tab_active_org_setting_border_color_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-active`,
+);
+const tab_active_org_setting_shadow_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-active`,
+);
+const tab_active_org_setting_hover_background_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-active`,
+);
+const tab_active_org_setting_top_background_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-active`,
+);
+const tab_active_org_setting_decoration_bold_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-active`,
+);
+const tab_active_org_setting_decoration_italic_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-active`,
+);
+const tab_active_org_setting_decoration_underline_el = document.getElementById(
+	`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-active`,
+);
 //const tab_active_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-active`);
 
 const allInactiveOrgInputs = [
-    tab_inactive_org_setting_background_el,
-    tab_inactive_org_setting_color_el,
-    tab_inactive_org_setting_border_color_el,
-    tab_inactive_org_setting_shadow_el,
-    tab_inactive_org_setting_hover_background_el,
+	tab_inactive_org_setting_background_el,
+	tab_inactive_org_setting_color_el,
+	tab_inactive_org_setting_border_color_el,
+	tab_inactive_org_setting_shadow_el,
+	tab_inactive_org_setting_hover_background_el,
 ];
 const allActiveOrgInputs = [
-    tab_active_org_setting_background_el,
-    tab_active_org_setting_color_el,
-    tab_active_org_setting_border_color_el,
-    tab_active_org_setting_shadow_el,
-    tab_active_org_setting_hover_background_el,
-    tab_active_org_setting_top_background_el,
+	tab_active_org_setting_background_el,
+	tab_active_org_setting_color_el,
+	tab_active_org_setting_border_color_el,
+	tab_active_org_setting_shadow_el,
+	tab_active_org_setting_hover_background_el,
+	tab_active_org_setting_top_background_el,
 ];
 const allOrgInputs = [
-    ...allInactiveOrgInputs,
-    ...allActiveOrgInputs,
+	...allInactiveOrgInputs,
+	...allActiveOrgInputs,
 ];
 
 const allInactiveOrgDecorations = [
-    tab_inactive_org_setting_decoration_bold_el,
-    tab_inactive_org_setting_decoration_italic_el,
-    tab_inactive_org_setting_decoration_underline_el,
-    //tab_inactive_org_setting_decoration_underline_wavy_el,
+	tab_inactive_org_setting_decoration_bold_el,
+	tab_inactive_org_setting_decoration_italic_el,
+	tab_inactive_org_setting_decoration_underline_el,
+	//tab_inactive_org_setting_decoration_underline_wavy_el,
 ];
 const allActiveOrgDecorations = [
-    tab_active_org_setting_decoration_bold_el,
-    tab_active_org_setting_decoration_italic_el,
-    tab_active_org_setting_decoration_underline_el,
-    //tab_active_org_setting_decoration_underline_wavy_el,
+	tab_active_org_setting_decoration_bold_el,
+	tab_active_org_setting_decoration_italic_el,
+	tab_active_org_setting_decoration_underline_el,
+	//tab_active_org_setting_decoration_underline_wavy_el,
 ];
 const allOrgDecorations = [
-    ...allInactiveOrgDecorations,
-    ...allActiveOrgDecorations,
+	...allInactiveOrgDecorations,
+	...allActiveOrgDecorations,
 ];
 /*
 const allOrgTabSettings = [
@@ -212,276 +287,418 @@ const allOrgTabSettings = [
 
 const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
-const ul_inactive_generic_decoration_available  = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationAvailableId}-inactive`);
-const ul_inactive_generic_decoration_chosen     = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationChosenId}-inactive`);
-const ul_active_generic_decoration_available    = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationAvailableId}-active`);
-const ul_active_generic_decoration_chosen       = document.getElementById(`${TAB_GENERIC_STYLE}-${decorationChosenId}-active`);
+const ul_inactive_generic_decoration_available = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${decorationAvailableId}-inactive`,
+);
+const ul_inactive_generic_decoration_chosen = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${decorationChosenId}-inactive`,
+);
+const ul_active_generic_decoration_available = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${decorationAvailableId}-active`,
+);
+const ul_active_generic_decoration_chosen = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${decorationChosenId}-active`,
+);
 
-const ul_inactive_org_decoration_available  = document.getElementById(`${TAB_ORG_STYLE}-${decorationAvailableId}-inactive`);
-const ul_inactive_org_decoration_chosen     = document.getElementById(`${TAB_ORG_STYLE}-${decorationChosenId}-inactive`);
-const ul_active_org_decoration_available    = document.getElementById(`${TAB_ORG_STYLE}-${decorationAvailableId}-active`);
-const ul_active_org_decoration_chosen       = document.getElementById(`${TAB_ORG_STYLE}-${decorationChosenId}-active`);
+const ul_inactive_org_decoration_available = document.getElementById(
+	`${TAB_ORG_STYLE}-${decorationAvailableId}-inactive`,
+);
+const ul_inactive_org_decoration_chosen = document.getElementById(
+	`${TAB_ORG_STYLE}-${decorationChosenId}-inactive`,
+);
+const ul_active_org_decoration_available = document.getElementById(
+	`${TAB_ORG_STYLE}-${decorationAvailableId}-active`,
+);
+const ul_active_org_decoration_chosen = document.getElementById(
+	`${TAB_ORG_STYLE}-${decorationChosenId}-active`,
+);
 
-const backgroundStyleGenericInactiveId  = `${EXTENSION_NAME}-background-style-generic-inactive`;
-const colorStyleGenericInactiveId       = `${EXTENSION_NAME}-color-style-generic-inactive`;
-const borderStyleGenericInactiveId      = `${EXTENSION_NAME}-border-style-generic-inactive`;
-const shadowStyleGenericInactiveId      = `${EXTENSION_NAME}-shadow-style-generic-inactive`;
-const hoverStyleGenericInactiveId       = `${EXTENSION_NAME}-hover-style-generic-inactive`;
-const boldStyleGenericInactiveId        = `${EXTENSION_NAME}-bold-style-generic-inactive`;
-const italicStyleGenericInactiveId      = `${EXTENSION_NAME}-italic-style-generic-inactive`;
-const underlineStyleGenericInactiveId   = `${EXTENSION_NAME}-underline-style-generic-inactive`;
+const backgroundStyleGenericInactiveId =
+	`${EXTENSION_NAME}-background-style-generic-inactive`;
+const colorStyleGenericInactiveId =
+	`${EXTENSION_NAME}-color-style-generic-inactive`;
+const borderStyleGenericInactiveId =
+	`${EXTENSION_NAME}-border-style-generic-inactive`;
+const shadowStyleGenericInactiveId =
+	`${EXTENSION_NAME}-shadow-style-generic-inactive`;
+const hoverStyleGenericInactiveId =
+	`${EXTENSION_NAME}-hover-style-generic-inactive`;
+const boldStyleGenericInactiveId =
+	`${EXTENSION_NAME}-bold-style-generic-inactive`;
+const italicStyleGenericInactiveId =
+	`${EXTENSION_NAME}-italic-style-generic-inactive`;
+const underlineStyleGenericInactiveId =
+	`${EXTENSION_NAME}-underline-style-generic-inactive`;
 //const wavyStyleGenericInactiveId      = `${EXTENSION_NAME}-wavy-style-generic-inactive`;
 
-const backgroundStyleGenericActiveId    = `${EXTENSION_NAME}-background-style-generic-active`;
-const colorStyleGenericActiveId         = `${EXTENSION_NAME}-color-style-generic-active`;
-const borderStyleGenericActiveId        = `${EXTENSION_NAME}-border-style-generic-active`;
-const shadowStyleGenericActiveId        = `${EXTENSION_NAME}-shadow-style-generic-active`;
-const hoverStyleGenericActiveId         = `${EXTENSION_NAME}-hover-style-generic-active`;
-const topStyleGenericActiveId           = `${EXTENSION_NAME}-top-style-generic-active`;
-const boldStyleGenericActiveId          = `${EXTENSION_NAME}-bold-style-generic-active`;
-const italicStyleGenericActiveId        = `${EXTENSION_NAME}-italic-style-generic-active`;
-const underlineStyleGenericActiveId     = `${EXTENSION_NAME}-underline-style-generic-active`;
+const backgroundStyleGenericActiveId =
+	`${EXTENSION_NAME}-background-style-generic-active`;
+const colorStyleGenericActiveId =
+	`${EXTENSION_NAME}-color-style-generic-active`;
+const borderStyleGenericActiveId =
+	`${EXTENSION_NAME}-border-style-generic-active`;
+const shadowStyleGenericActiveId =
+	`${EXTENSION_NAME}-shadow-style-generic-active`;
+const hoverStyleGenericActiveId =
+	`${EXTENSION_NAME}-hover-style-generic-active`;
+const topStyleGenericActiveId = `${EXTENSION_NAME}-top-style-generic-active`;
+const boldStyleGenericActiveId = `${EXTENSION_NAME}-bold-style-generic-active`;
+const italicStyleGenericActiveId =
+	`${EXTENSION_NAME}-italic-style-generic-active`;
+const underlineStyleGenericActiveId =
+	`${EXTENSION_NAME}-underline-style-generic-active`;
 //const wavyStyleGenericActiveId        = `${EXTENSION_NAME}-wavy-style-generic-active`;
 
-const backgroundStyleOrgInactiveId  = `${EXTENSION_NAME}-background-style-org-inactive`;
-const colorStyleOrgInactiveId       = `${EXTENSION_NAME}-color-style-org-inactive`;
-const borderStyleOrgInactiveId      = `${EXTENSION_NAME}-border-style-org-inactive`;
-const shadowStyleOrgInactiveId      = `${EXTENSION_NAME}-shadow-style-org-inactive`;
-const hoverStyleOrgInactiveId       = `${EXTENSION_NAME}-hover-style-org-inactive`;
-const boldStyleOrgInactiveId        = `${EXTENSION_NAME}-bold-style-org-inactive`;
-const italicStyleOrgInactiveId      = `${EXTENSION_NAME}-italic-style-org-inactive`;
-const underlineStyleOrgInactiveId   = `${EXTENSION_NAME}-underline-style-org-inactive`;
+const backgroundStyleOrgInactiveId =
+	`${EXTENSION_NAME}-background-style-org-inactive`;
+const colorStyleOrgInactiveId = `${EXTENSION_NAME}-color-style-org-inactive`;
+const borderStyleOrgInactiveId = `${EXTENSION_NAME}-border-style-org-inactive`;
+const shadowStyleOrgInactiveId = `${EXTENSION_NAME}-shadow-style-org-inactive`;
+const hoverStyleOrgInactiveId = `${EXTENSION_NAME}-hover-style-org-inactive`;
+const boldStyleOrgInactiveId = `${EXTENSION_NAME}-bold-style-org-inactive`;
+const italicStyleOrgInactiveId = `${EXTENSION_NAME}-italic-style-org-inactive`;
+const underlineStyleOrgInactiveId =
+	`${EXTENSION_NAME}-underline-style-org-inactive`;
 //const wavyStyleOrgInactiveId      = `${EXTENSION_NAME}-wavy-style-org-inactive`;
 
-const backgroundStyleOrgActiveId    = `${EXTENSION_NAME}-background-style-org-active`;
-const colorStyleOrgActiveId         = `${EXTENSION_NAME}-color-style-org-active`;
-const borderStyleOrgActiveId        = `${EXTENSION_NAME}-border-style-org-active`;
-const shadowStyleOrgActiveId        = `${EXTENSION_NAME}-shadow-style-org-active`;
-const hoverStyleOrgActiveId         = `${EXTENSION_NAME}-hover-style-org-active`;
-const topStyleOrgActiveId           = `${EXTENSION_NAME}-top-style-org-active`;
-const boldStyleOrgActiveId          = `${EXTENSION_NAME}-bold-style-org-active`;
-const italicStyleOrgActiveId        = `${EXTENSION_NAME}-italic-style-org-active`;
-const underlineStyleOrgActiveId     = `${EXTENSION_NAME}-underline-style-org-active`;
+const backgroundStyleOrgActiveId =
+	`${EXTENSION_NAME}-background-style-org-active`;
+const colorStyleOrgActiveId = `${EXTENSION_NAME}-color-style-org-active`;
+const borderStyleOrgActiveId = `${EXTENSION_NAME}-border-style-org-active`;
+const shadowStyleOrgActiveId = `${EXTENSION_NAME}-shadow-style-org-active`;
+const hoverStyleOrgActiveId = `${EXTENSION_NAME}-hover-style-org-active`;
+const topStyleOrgActiveId = `${EXTENSION_NAME}-top-style-org-active`;
+const boldStyleOrgActiveId = `${EXTENSION_NAME}-bold-style-org-active`;
+const italicStyleOrgActiveId = `${EXTENSION_NAME}-italic-style-org-active`;
+const underlineStyleOrgActiveId =
+	`${EXTENSION_NAME}-underline-style-org-active`;
 //const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-wavy-style-org-active`;
 
 /**
-* Updates or removes a style element in the document head
-* @param {string} styleId - ID of the style element to update or remove
-* @param {string|null} newStyle - CSS content to add, or null to only remove existing style
-*/
-function updateStyle(styleId, newStyle = null){
-    // Remove any previous style for this element
-    const oldStyle = document.getElementById(styleId);
-    if (oldStyle != null)
-        oldStyle.remove();
-    if(newStyle == null)
-        return;
-    // Create new style element
-    const style = document.createElement('style');
-    style.id = styleId;
-    style.textContent = newStyle;
-    document.head.appendChild(style);
+ * Updates or removes a style element in the document head
+ * @param {string} styleId - ID of the style element to update or remove
+ * @param {string|null} newStyle - CSS content to add, or null to only remove existing style
+ */
+function updateStyle(styleId, newStyle = null) {
+	// Remove any previous style for this element
+	const oldStyle = document.getElementById(styleId);
+	if (oldStyle != null) {
+		oldStyle.remove();
+	}
+	if (newStyle == null) {
+		return;
+	}
+	// Create new style element
+	const style = document.createElement("style");
+	style.id = styleId;
+	style.textContent = newStyle;
+	document.head.appendChild(style);
 }
 
 /**
-* Updates CSS styles of the preview Tab based on provided tab style settings
-* Sets inputs fields with the value passed in the setting
-* @param {Object} setting - The style setting to apply
-* @param {string} setting.id - Identifier for the style type
-* @param {string|null} setting.value - Value for the style, null or empty string if not set
-* @param {boolean} setting.forActive - Whether the style applies to active tabs
-* @param {boolean} [isGeneric=true] - Whether to apply styles to generic tabs or org-specific tabs
-* @param {boolean} [updateViews=true] - Whether to update UI elements in addition to applying styles
-*/
-function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
-    const isForInactive = !setting.forActive;
-    //const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
-    let relatedInput = null;
-    let chosenUl = null;
-    let moveToChosen = null;
-    let styleId = null;
-    const wasPicked = setting.value != null && setting.value !== "";
-    console.log('setttingpreview',setting)
-    switch (setting.id) {
-        case TAB_STYLE_COLOR:
-            if(isForInactive){
-				if(isGeneric){
+ * Updates CSS styles of the preview Tab based on provided tab style settings
+ * Sets inputs fields with the value passed in the setting
+ * @param {Object} setting - The style setting to apply
+ * @param {string} setting.id - Identifier for the style type
+ * @param {string|null} setting.value - Value for the style, null or empty string if not set
+ * @param {boolean} setting.forActive - Whether the style applies to active tabs
+ * @param {boolean} [isGeneric=true] - Whether to apply styles to generic tabs or org-specific tabs
+ * @param {boolean} [updateViews=true] - Whether to update UI elements in addition to applying styles
+ */
+function setPreviewAndInputValue(
+	setting,
+	isGeneric = true,
+	updateViews = true,
+) {
+	const isForInactive = !setting.forActive;
+	//const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
+	let relatedInput = null;
+	let chosenUl = null;
+	let moveToChosen = null;
+	let styleId = null;
+	const wasPicked = setting.value != null && setting.value !== "";
+	console.log("setttingpreview", setting);
+	switch (setting.id) {
+		case TAB_STYLE_COLOR:
+			if (isForInactive) {
+				if (isGeneric) {
 					relatedInput = tab_inactive_generic_setting_color_el;
-                    styleId = colorStyleGenericInactiveId;
-                } else {
+					styleId = colorStyleGenericInactiveId;
+				} else {
 					relatedInput = tab_inactive_org_setting_color_el;
-                    styleId = colorStyleOrgInactiveId;
-                }
+					styleId = colorStyleOrgInactiveId;
+				}
 			} else {
-				if(isGeneric) {
+				if (isGeneric) {
 					relatedInput = tab_active_generic_setting_color_el;
-                    styleId = colorStyleGenericActiveId;
-                } else {
+					styleId = colorStyleGenericActiveId;
+				} else {
 					relatedInput = tab_active_org_setting_color_el;
-                    styleId = colorStyleOrgActiveId;
-                }
+					styleId = colorStyleOrgActiveId;
+				}
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_COLOR, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_BACKGROUND:
-            if(isForInactive){
-				if(isGeneric) {
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_COLOR, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_BACKGROUND:
+			if (isForInactive) {
+				if (isGeneric) {
 					relatedInput = tab_inactive_generic_setting_background_el;
-                    styleId = backgroundStyleGenericInactiveId;
-                } else {
+					styleId = backgroundStyleGenericInactiveId;
+				} else {
 					relatedInput = tab_inactive_org_setting_background_el;
-                    styleId = backgroundStyleOrgInactiveId;
-                }
+					styleId = backgroundStyleOrgInactiveId;
+				}
 			} else {
-				if(isGeneric) {
+				if (isGeneric) {
 					relatedInput = tab_active_generic_setting_background_el;
-                    styleId = backgroundStyleGenericActiveId;
-                } else {
+					styleId = backgroundStyleGenericActiveId;
+				} else {
 					relatedInput = tab_active_org_setting_background_el;
-                    styleId = backgroundStyleOrgActiveId;
-                }
+					styleId = backgroundStyleOrgActiveId;
+				}
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_BACKGROUND, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_BORDER:
-            if(isForInactive){
-				if(isGeneric) {
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_BACKGROUND, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_BORDER:
+			if (isForInactive) {
+				if (isGeneric) {
 					relatedInput = tab_inactive_generic_setting_border_color_el;
-                    styleId = borderStyleGenericInactiveId;
-                } else {
+					styleId = borderStyleGenericInactiveId;
+				} else {
 					relatedInput = tab_inactive_org_setting_border_color_el;
-                    styleId = borderStyleOrgInactiveId;
-                }
+					styleId = borderStyleOrgInactiveId;
+				}
 			} else {
-				if(isGeneric) {
+				if (isGeneric) {
 					relatedInput = tab_active_generic_setting_border_color_el;
-                    styleId = borderStyleGenericActiveId;
-                } else {
+					styleId = borderStyleGenericActiveId;
+				} else {
 					relatedInput = tab_active_org_setting_border_color_el;
-                    styleId = borderStyleOrgActiveId;
-                }
+					styleId = borderStyleOrgActiveId;
+				}
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_BORDER, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_SHADOW:
-            if(isForInactive){
-				if(isGeneric) {
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_BORDER, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_SHADOW:
+			if (isForInactive) {
+				if (isGeneric) {
 					relatedInput = tab_inactive_generic_setting_shadow_el;
-                    styleId = shadowStyleGenericInactiveId;
-                } else {
+					styleId = shadowStyleGenericInactiveId;
+				} else {
 					relatedInput = tab_inactive_org_setting_shadow_el;
-                    styleId = shadowStyleOrgInactiveId;
-                }
+					styleId = shadowStyleOrgInactiveId;
+				}
 			} else {
-				if(isGeneric) {
+				if (isGeneric) {
 					relatedInput = tab_active_generic_setting_shadow_el;
-                    styleId = shadowStyleGenericActiveId;
-                } else {
+					styleId = shadowStyleGenericActiveId;
+				} else {
 					relatedInput = tab_active_org_setting_shadow_el;
-                    styleId = shadowStyleOrgActiveId;
-                }
+					styleId = shadowStyleOrgActiveId;
+				}
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_SHADOW, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_HOVER:
-            if(isForInactive){
-				if(isGeneric) {
-					relatedInput = tab_inactive_generic_setting_hover_background_el;
-                    styleId = hoverStyleGenericInactiveId;
-                } else {
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_SHADOW, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_HOVER:
+			if (isForInactive) {
+				if (isGeneric) {
+					relatedInput =
+						tab_inactive_generic_setting_hover_background_el;
+					styleId = hoverStyleGenericInactiveId;
+				} else {
 					relatedInput = tab_inactive_org_setting_hover_background_el;
-                    styleId = hoverStyleOrgInactiveId;
-                }
+					styleId = hoverStyleOrgInactiveId;
+				}
 			} else {
-				if(isGeneric) {
-					relatedInput = tab_active_generic_setting_hover_background_el;
-                    styleId = hoverStyleGenericActiveId;
-                } else {
+				if (isGeneric) {
+					relatedInput =
+						tab_active_generic_setting_hover_background_el;
+					styleId = hoverStyleGenericActiveId;
+				} else {
 					relatedInput = tab_active_org_setting_hover_background_el;
-                    styleId = hoverStyleOrgActiveId;
-                }
+					styleId = hoverStyleOrgActiveId;
+				}
 			}
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric, ":hover")}{ ${getCssRule(TAB_STYLE_HOVER, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_TOP:
-            if(isForInactive)
-                break;
-            updateStyle(isGeneric ? topStyleGenericActiveId : topStyleOrgActiveId, wasPicked ? `${getCssSelector(isForInactive, isGeneric, "::before")}{ ${getCssRule(TAB_STYLE_TOP, setting.value)} }` : null);
-            relatedInput = isGeneric ? tab_active_generic_setting_top_background_el : tab_active_org_setting_top_background_el;
-            break;
-        case TAB_STYLE_BOLD:
-            if(isForInactive){
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_generic_decoration_available;
-                    moveToChosen = tab_inactive_generic_setting_decoration_bold_el;
-                    styleId = boldStyleGenericInactiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_inactive_org_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_org_setting_decoration_bold_el;
-                    styleId = boldStyleOrgInactiveId;
-                }
-            } else {
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_active_generic_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_generic_setting_decoration_bold_el;
-                    styleId = boldStyleGenericActiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_active_org_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_org_setting_decoration_bold_el;
-                    styleId = boldStyleOrgActiveId;
-                }
-            }   
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_BOLD, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_ITALIC:
-            if(isForInactive){
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_generic_setting_decoration_italic_el;
-                    styleId = italicStyleGenericInactiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_inactive_org_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_org_setting_decoration_italic_el;
-                    styleId = italicStyleOrgInactiveId;
-                }
-            } else {
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_active_generic_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_generic_setting_decoration_italic_el;
-                    styleId = italicStyleGenericActiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_active_org_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_org_setting_decoration_italic_el;
-                    styleId = italicStyleOrgActiveId;
-                }
-            }   
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_ITALIC, setting.value)} }` : null);
-            break;
-        case TAB_STYLE_UNDERLINE:
-            if(isForInactive){
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_generic_setting_decoration_underline_el;
-                    styleId = underlineStyleGenericInactiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_inactive_org_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_org_setting_decoration_underline_el;
-                    styleId = underlineStyleOrgInactiveId;
-                }
-            } else {
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_active_generic_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_generic_setting_decoration_underline_el;
-                    styleId = underlineStyleGenericActiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_active_org_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_org_setting_decoration_underline_el;
-                    styleId = underlineStyleOrgActiveId;
-                }
-            }   
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_UNDERLINE, setting.value)} }` : null);
-            break;
-        /*
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric, ":hover")}{ ${
+						getCssRule(TAB_STYLE_HOVER, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_TOP:
+			if (isForInactive) {
+				break;
+			}
+			updateStyle(
+				isGeneric ? topStyleGenericActiveId : topStyleOrgActiveId,
+				wasPicked
+					? `${
+						getCssSelector(isForInactive, isGeneric, "::before")
+					}{ ${getCssRule(TAB_STYLE_TOP, setting.value)} }`
+					: null,
+			);
+			relatedInput = isGeneric
+				? tab_active_generic_setting_top_background_el
+				: tab_active_org_setting_top_background_el;
+			break;
+		case TAB_STYLE_BOLD:
+			if (isForInactive) {
+				if (isGeneric) {
+					chosenUl = wasPicked
+						? ul_inactive_generic_decoration_chosen
+						: ul_inactive_generic_decoration_available;
+					moveToChosen =
+						tab_inactive_generic_setting_decoration_bold_el;
+					styleId = boldStyleGenericInactiveId;
+				} else {
+					chosenUl = wasPicked
+						? ul_inactive_org_decoration_chosen
+						: ul_inactive_org_decoration_available;
+					moveToChosen = tab_inactive_org_setting_decoration_bold_el;
+					styleId = boldStyleOrgInactiveId;
+				}
+			} else {
+				if (isGeneric) {
+					chosenUl = wasPicked
+						? ul_active_generic_decoration_chosen
+						: ul_active_org_decoration_available;
+					moveToChosen =
+						tab_active_generic_setting_decoration_bold_el;
+					styleId = boldStyleGenericActiveId;
+				} else {
+					chosenUl = wasPicked
+						? ul_active_org_decoration_chosen
+						: ul_active_org_decoration_available;
+					moveToChosen = tab_active_org_setting_decoration_bold_el;
+					styleId = boldStyleOrgActiveId;
+				}
+			}
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_BOLD, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_ITALIC:
+			if (isForInactive) {
+				if (isGeneric) {
+					chosenUl = wasPicked
+						? ul_inactive_generic_decoration_chosen
+						: ul_inactive_org_decoration_available;
+					moveToChosen =
+						tab_inactive_generic_setting_decoration_italic_el;
+					styleId = italicStyleGenericInactiveId;
+				} else {
+					chosenUl = wasPicked
+						? ul_inactive_org_decoration_chosen
+						: ul_inactive_org_decoration_available;
+					moveToChosen =
+						tab_inactive_org_setting_decoration_italic_el;
+					styleId = italicStyleOrgInactiveId;
+				}
+			} else {
+				if (isGeneric) {
+					chosenUl = wasPicked
+						? ul_active_generic_decoration_chosen
+						: ul_active_org_decoration_available;
+					moveToChosen =
+						tab_active_generic_setting_decoration_italic_el;
+					styleId = italicStyleGenericActiveId;
+				} else {
+					chosenUl = wasPicked
+						? ul_active_org_decoration_chosen
+						: ul_active_org_decoration_available;
+					moveToChosen = tab_active_org_setting_decoration_italic_el;
+					styleId = italicStyleOrgActiveId;
+				}
+			}
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_ITALIC, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		case TAB_STYLE_UNDERLINE:
+			if (isForInactive) {
+				if (isGeneric) {
+					chosenUl = wasPicked
+						? ul_inactive_generic_decoration_chosen
+						: ul_inactive_org_decoration_available;
+					moveToChosen =
+						tab_inactive_generic_setting_decoration_underline_el;
+					styleId = underlineStyleGenericInactiveId;
+				} else {
+					chosenUl = wasPicked
+						? ul_inactive_org_decoration_chosen
+						: ul_inactive_org_decoration_available;
+					moveToChosen =
+						tab_inactive_org_setting_decoration_underline_el;
+					styleId = underlineStyleOrgInactiveId;
+				}
+			} else {
+				if (isGeneric) {
+					chosenUl = wasPicked
+						? ul_active_generic_decoration_chosen
+						: ul_active_org_decoration_available;
+					moveToChosen =
+						tab_active_generic_setting_decoration_underline_el;
+					styleId = underlineStyleGenericActiveId;
+				} else {
+					chosenUl = wasPicked
+						? ul_active_org_decoration_chosen
+						: ul_active_org_decoration_available;
+					moveToChosen =
+						tab_active_org_setting_decoration_underline_el;
+					styleId = underlineStyleOrgActiveId;
+				}
+			}
+			updateStyle(
+				styleId,
+				wasPicked
+					? `${getCssSelector(isForInactive, isGeneric)}{ ${
+						getCssRule(TAB_STYLE_UNDERLINE, setting.value)
+					} }`
+					: null,
+			);
+			break;
+		/*
         case TAB_STYLE_WAVY:
             if(isForInactive){
                 if(isGeneric){
@@ -507,176 +724,208 @@ function setPreviewAndInputValue(setting, isGeneric = true, updateViews = true){
             updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_WAVY, setting.value)} }` : null);
             break;
         */
-        default:
-            console.error(`Unmatched style setting id: ${setting.id}`);
-            break;
-    }
-    if(!updateViews)
-        return;
-    if(chosenUl != null && moveToChosen != null)
-        chosenUl.insertAdjacentElement("beforeend", moveToChosen);
-    if(relatedInput != null)
-        relatedInput.value = setting.value;
+		default:
+			console.error(`Unmatched style setting id: ${setting.id}`);
+			break;
+	}
+	if (!updateViews) {
+		return;
+	}
+	if (chosenUl != null && moveToChosen != null) {
+		chosenUl.insertAdjacentElement("beforeend", moveToChosen);
+	}
+	if (relatedInput != null) {
+		relatedInput.value = setting.value;
+	}
 }
 
 /**
-* Updates checkbox elements based on a setting configuration
-* @param {Object} setting - The setting to apply
-* @param {string} setting.id - Identifier for the setting type
-* @param {boolean} [setting.enabled] - Enabled state for checkbox settings
-* @param {Array|Object} [setting.value] - Value for tab style settings
-*/
+ * Updates checkbox elements based on a setting configuration
+ * @param {Object} setting - The setting to apply
+ * @param {string} setting.id - Identifier for the setting type
+ * @param {boolean} [setting.enabled] - Enabled state for checkbox settings
+ * @param {Array|Object} [setting.value] - Value for tab style settings
+ */
 function setCurrentChoice(setting) {
-    switch (setting.id) {
-        case LINK_NEW_BROWSER:
-            link_new_browser_el.checked = setting.enabled;
-            break;
-        case SKIP_LINK_DETECTION:
-            skip_link_detection_el.checked = setting.enabled;
-            break;
-        case USE_LIGHTNING_NAVIGATION:
-            use_lightning_navigation_el.checked = setting.enabled;
-            break;
-        case POPUP_OPEN_LOGIN:
-            popup_open_login_el.checked = setting.enabled;
-            break;
-        case POPUP_OPEN_SETUP:
-            popup_open_setup_el.checked = setting.enabled;
-            break;
-        case POPUP_LOGIN_NEW_TAB:
-            popup_login_new_tab_el.checked = setting.enabled;
-            break;
-        case POPUP_SETUP_NEW_TAB:
-            popup_setup_new_tab_el.checked = setting.enabled;
-            break;
-        case TAB_ON_LEFT:
-            tab_on_left_el.checked = setting.enabled;
-            break;
-        case USER_LANGUAGE:
-            user_language_select.value = setting.enabled;
-            break;
-        case GENERIC_TAB_STYLE_KEY:
-        case ORG_TAB_STYLE_KEY: {
-            const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
-            Array.isArray(setting.value)
-                ? setting.value.forEach(set => setPreviewAndInputValue(set, isGeneric))
-                : setPreviewAndInputValue(setting.value, isGeneric);
-            break;
-        }
-        default:
-            console.error(`Unmatched setting id: ${setting.id}`);
-            break;
-    }
+	switch (setting.id) {
+		case LINK_NEW_BROWSER:
+			link_new_browser_el.checked = setting.enabled;
+			break;
+		case SKIP_LINK_DETECTION:
+			skip_link_detection_el.checked = setting.enabled;
+			break;
+		case USE_LIGHTNING_NAVIGATION:
+			use_lightning_navigation_el.checked = setting.enabled;
+			break;
+		case POPUP_OPEN_LOGIN:
+			popup_open_login_el.checked = setting.enabled;
+			break;
+		case POPUP_OPEN_SETUP:
+			popup_open_setup_el.checked = setting.enabled;
+			break;
+		case POPUP_LOGIN_NEW_TAB:
+			popup_login_new_tab_el.checked = setting.enabled;
+			break;
+		case POPUP_SETUP_NEW_TAB:
+			popup_setup_new_tab_el.checked = setting.enabled;
+			break;
+		case TAB_ON_LEFT:
+			tab_on_left_el.checked = setting.enabled;
+			break;
+		case USER_LANGUAGE:
+			user_language_select.value = setting.enabled;
+			break;
+		case GENERIC_TAB_STYLE_KEY:
+		case ORG_TAB_STYLE_KEY: {
+			const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
+			Array.isArray(setting.value)
+				? setting.value.forEach((set) =>
+					setPreviewAndInputValue(set, isGeneric)
+				)
+				: setPreviewAndInputValue(setting.value, isGeneric);
+			break;
+		}
+		default:
+			console.error(`Unmatched setting id: ${setting.id}`);
+			break;
+	}
 }
 
 const allCheckboxes = [
-    link_new_browser_el,
-    skip_link_detection_el,
-    use_lightning_navigation_el,
-    popup_open_login_el,
-    popup_open_setup_el,
-    popup_login_new_tab_el,
-    popup_setup_new_tab_el,
-    tab_on_left_el,
+	link_new_browser_el,
+	skip_link_detection_el,
+	use_lightning_navigation_el,
+	popup_open_login_el,
+	popup_open_setup_el,
+	popup_login_new_tab_el,
+	popup_setup_new_tab_el,
+	tab_on_left_el,
 ];
 
 let generalSettingsListenersSet = false;
 /**
-* Restores general settings from storage and sets up event listeners
-* @returns {Promise<void>} Promise that resolves when settings are restored and listeners are set
-*/
+ * Restores general settings from storage and sets up event listeners
+ * @returns {Promise<void>} Promise that resolves when settings are restored and listeners are set
+ */
 async function restoreGeneralSettings() {
-    if(generalSettingsListenersSet)
-        return;
-    const settings = await getSettings();
-    if(settings != null)
-        settings instanceof Array ? settings.forEach(set => setCurrentChoice(set)) : setCurrentChoice(settings);
-    allCheckboxes.forEach(el => {
-        if(el !== link_new_browser_el && el !== use_lightning_navigation_el)
-            el.addEventListener("change", saveCheckboxOptions)
-    });
-    link_new_browser_el.addEventListener("change", e => {
-        // click on dependent setting
-        if(e.target.checked)
-            use_lightning_navigation_el.checked = true;
-        saveCheckboxOptions(e, use_lightning_navigation_el);
-    });
-    use_lightning_navigation_el.addEventListener("change", e => {
-        // click on dependent setting
-        if(!e.target.checked)
-            link_new_browser_el.checked = false;
-        saveCheckboxOptions(e, link_new_browser_el);
-    });
-    user_language_select.addEventListener("change", e => {
-        sendExtensionMessage({
-            what: "set",
-            key: SETTINGS_KEY,
-            set: [{
-                id: USER_LANGUAGE,
-                enabled: e.target.value,
-            }]
-        });
-    });
-    generalSettingsListenersSet = true;
+	if (generalSettingsListenersSet) {
+		return;
+	}
+	const settings = await getSettings();
+	if (settings != null) {
+		settings instanceof Array
+			? settings.forEach((set) => setCurrentChoice(set))
+			: setCurrentChoice(settings);
+	}
+	allCheckboxes.forEach((el) => {
+		if (el !== link_new_browser_el && el !== use_lightning_navigation_el) {
+			el.addEventListener("change", saveCheckboxOptions);
+		}
+	});
+	link_new_browser_el.addEventListener("change", (e) => {
+		// click on dependent setting
+		if (e.target.checked) {
+			use_lightning_navigation_el.checked = true;
+		}
+		saveCheckboxOptions(e, use_lightning_navigation_el);
+	});
+	use_lightning_navigation_el.addEventListener("change", (e) => {
+		// click on dependent setting
+		if (!e.target.checked) {
+			link_new_browser_el.checked = false;
+		}
+		saveCheckboxOptions(e, link_new_browser_el);
+	});
+	user_language_select.addEventListener("change", (e) => {
+		sendExtensionMessage({
+			what: "set",
+			key: SETTINGS_KEY,
+			set: [{
+				id: USER_LANGUAGE,
+				enabled: e.target.value,
+			}],
+		});
+	});
+	generalSettingsListenersSet = true;
 }
 
 const chosenBtnId = "move-chosen";
 const availableBtnId = "move-available";
-const btn_inactive_generic_chosen = document.getElementById(`${TAB_GENERIC_STYLE}-${chosenBtnId}-inactive`);
-const btn_inactive_generic_available = document.getElementById(`${TAB_GENERIC_STYLE}-${availableBtnId}-inactive`);
-const btn_active_generic_chosen = document.getElementById(`${TAB_GENERIC_STYLE}-${chosenBtnId}-active`);
-const btn_active_generic_available = document.getElementById(`${TAB_GENERIC_STYLE}-${availableBtnId}-active`);
+const btn_inactive_generic_chosen = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${chosenBtnId}-inactive`,
+);
+const btn_inactive_generic_available = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${availableBtnId}-inactive`,
+);
+const btn_active_generic_chosen = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${chosenBtnId}-active`,
+);
+const btn_active_generic_available = document.getElementById(
+	`${TAB_GENERIC_STYLE}-${availableBtnId}-active`,
+);
 
-const btn_inactive_org_chosen = document.getElementById(`${TAB_ORG_STYLE}-${chosenBtnId}-inactive`);
-const btn_inactive_org_available = document.getElementById(`${TAB_ORG_STYLE}-${availableBtnId}-inactive`);
-const btn_active_org_chosen = document.getElementById(`${TAB_ORG_STYLE}-${chosenBtnId}-active`);
-const btn_active_org_available = document.getElementById(`${TAB_ORG_STYLE}-${availableBtnId}-active`);
+const btn_inactive_org_chosen = document.getElementById(
+	`${TAB_ORG_STYLE}-${chosenBtnId}-inactive`,
+);
+const btn_inactive_org_available = document.getElementById(
+	`${TAB_ORG_STYLE}-${availableBtnId}-inactive`,
+);
+const btn_active_org_chosen = document.getElementById(
+	`${TAB_ORG_STYLE}-${chosenBtnId}-active`,
+);
+const btn_active_org_available = document.getElementById(
+	`${TAB_ORG_STYLE}-${availableBtnId}-active`,
+);
 
 /**
-* Saves Tab styling options to storage and updates the UI
-* @param {Event} e - The event object from the input interaction
-* @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
-*/
+ * Saves Tab styling options to storage and updates the UI
+ * @param {Event} e - The event object from the input interaction
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
+ */
 function saveTabOptions(e, key = GENERIC_TAB_STYLE_KEY) {
-    const set = { what: "set", key, set: [] };
-    const setting = {};
-    const target = e.target;
-    const styleKey = target.dataset.styleKey;
-    setting.id = styleKey;
-    setting.forActive = !target.id.endsWith("inactive");
-    setting.value = e.target.value;
-    setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY);
-    set.set.push(setting)
-    sendExtensionMessage(set);
+	const set = { what: "set", key, set: [] };
+	const setting = {};
+	const target = e.target;
+	const styleKey = target.dataset.styleKey;
+	setting.id = styleKey;
+	setting.forActive = !target.id.endsWith("inactive");
+	setting.value = e.target.value;
+	setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY);
+	set.set.push(setting);
+	sendExtensionMessage(set);
 }
 
 /**
-* Saves Tab decoration styles to storage and updates the UI
-* @param {HTMLElement[]} [selectedLis=[]] - Selected list items containing decoration settings
-* @param {boolean} [isAdding=true] - Whether adding (true) or removing (false) decorations
-* @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
-*/
-function saveTabDecorations(selectedLis = [], isAdding = true, key = GENERIC_TAB_STYLE_KEY){
-    const set = { what: "set", key, set: [] };
-    selectedLis.forEach(li => {
-        const setting = {};
-        const styleKey = li.dataset.styleKey;
-        setting.id = styleKey;
-        setting.forActive = !li.id.endsWith("inactive");
-        setting.value = isAdding ? styleKey : "";
-        setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY, false);
-        set.set.push(setting)
-    });
-    sendExtensionMessage(set);
+ * Saves Tab decoration styles to storage and updates the UI
+ * @param {HTMLElement[]} [selectedLis=[]] - Selected list items containing decoration settings
+ * @param {boolean} [isAdding=true] - Whether adding (true) or removing (false) decorations
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
+ */
+function saveTabDecorations(
+	selectedLis = [],
+	isAdding = true,
+	key = GENERIC_TAB_STYLE_KEY,
+) {
+	const set = { what: "set", key, set: [] };
+	selectedLis.forEach((li) => {
+		const setting = {};
+		const styleKey = li.dataset.styleKey;
+		setting.id = styleKey;
+		setting.forActive = !li.id.endsWith("inactive");
+		setting.value = isAdding ? styleKey : "";
+		setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY, false);
+		set.set.push(setting);
+	});
+	sendExtensionMessage(set);
 }
 
 /**
  * Toggles the `aria-selected` attribute of the clicked list item.
  * @param {Event} event - The event triggered by user interaction.
  */
-function flipSelected(event){
-    const li = event.target.closest("li");
-    li.ariaSelected = li.ariaSelected !== "true";
+function flipSelected(event) {
+	const li = event.target.closest("li");
+	li.ariaSelected = li.ariaSelected !== "true";
 }
 
 /**
@@ -687,17 +936,27 @@ function flipSelected(event){
  * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key used for saving decorations.
  * @throws {Error} If required parameters are missing.
  */
-function moveSelectedDecorationsTo(moveHereElement = null, allDecorations = null, isAdding = true, key = GENERIC_TAB_STYLE_KEY){
-    if(moveHereElement == null || allDecorations == null)
-        throw new Error("error_required_params",moveHereElement,allDecorations);
-    const selectedDecorations = allDecorations
-        .filter(el => el.ariaSelected === "true");
-    selectedDecorations
-        .forEach(el => {
-            moveHereElement.insertAdjacentElement("beforeend", el);
-            el.ariaSelected = false;
-        });
-    saveTabDecorations(selectedDecorations, isAdding, key);
+function moveSelectedDecorationsTo(
+	moveHereElement = null,
+	allDecorations = null,
+	isAdding = true,
+	key = GENERIC_TAB_STYLE_KEY,
+) {
+	if (moveHereElement == null || allDecorations == null) {
+		throw new Error(
+			"error_required_params",
+			moveHereElement,
+			allDecorations,
+		);
+	}
+	const selectedDecorations = allDecorations
+		.filter((el) => el.ariaSelected === "true");
+	selectedDecorations
+		.forEach((el) => {
+			moveHereElement.insertAdjacentElement("beforeend", el);
+			el.ariaSelected = false;
+		});
+	saveTabDecorations(selectedDecorations, isAdding, key);
 }
 
 let genericTabListenersSet = false;
@@ -709,46 +968,111 @@ let orgTabListenersSet = false;
  * @throws {Error} If `key` is invalid.
  */
 async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
-    if(key !== GENERIC_TAB_STYLE_KEY && key !== ORG_TAB_STYLE_KEY)
-        throw new Error("error_invalid_key");
-    if(
-        (key === GENERIC_TAB_STYLE_KEY && genericTabListenersSet) ||
-        (key === ORG_TAB_STYLE_KEY && orgTabListenersSet)
-    ){
-        return;
-    }
-    const settings = await getStyleSettings(key);
-    if(settings != null)
-        settings instanceof Array ? setCurrentChoice({ id: key, value: settings }) : setCurrentChoice(settings);
-    // gather correct resources
-    const isGeneric = key === GENERIC_TAB_STYLE_KEY;
-    const allInputs = isGeneric ? allGenericInputs : allOrgInputs;
-    const allDecorations = isGeneric ? allGenericDecorations : allOrgDecorations;
-    const allInactiveDecorations = isGeneric ? allInactiveGenericDecorations : allInactiveOrgDecorations;
-    const allActiveDecorations = isGeneric ? allActiveGenericDecorations : allActiveOrgDecorations;
-    const btn_inactive_available = isGeneric ? btn_inactive_generic_available : btn_inactive_org_available;
-    const btn_inactive_chosen = isGeneric ? btn_inactive_generic_chosen : btn_inactive_org_chosen;
-    const btn_active_available = isGeneric ? btn_active_generic_available : btn_active_org_available;
-    const btn_active_chosen = isGeneric ? btn_active_generic_chosen : btn_active_org_chosen;
-    const ul_inactive_decoration_available = isGeneric ? ul_inactive_generic_decoration_available : ul_inactive_org_decoration_available;
-    const ul_inactive_decoration_chosen = isGeneric ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_chosen;
-    const ul_active_decoration_available = isGeneric ? ul_active_generic_decoration_available : ul_active_org_decoration_available;
-    const ul_active_decoration_chosen = isGeneric ? ul_active_generic_decoration_chosen : ul_active_org_decoration_chosen;
-    const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
-    // create event listeners
-    tabPreview.classList.remove("hidden");
-    allInputs.forEach(el => el.addEventListener("change", e => saveTabOptions(e, key)));
-    allDecorations.forEach(el => el.addEventListener("click", flipSelected));
-    // move to available
-    btn_inactive_available.addEventListener("click", () => moveSelectedDecorationsTo(ul_inactive_decoration_available, allInactiveDecorations, false, key));
-    btn_active_available.addEventListener("click", () => moveSelectedDecorationsTo(ul_active_decoration_available, allActiveDecorations, false, key));
-    // move to chosen
-    btn_inactive_chosen.addEventListener("click", () => moveSelectedDecorationsTo(ul_inactive_decoration_chosen, allInactiveDecorations, true, key));
-    btn_active_chosen.addEventListener("click", () => moveSelectedDecorationsTo(ul_active_decoration_chosen, allActiveDecorations, true, key));
-    if(isGeneric)
-        genericTabListenersSet = true;
-    else
-        orgTabListenersSet = true;
+	if (key !== GENERIC_TAB_STYLE_KEY && key !== ORG_TAB_STYLE_KEY) {
+		throw new Error("error_invalid_key");
+	}
+	if (
+		(key === GENERIC_TAB_STYLE_KEY && genericTabListenersSet) ||
+		(key === ORG_TAB_STYLE_KEY && orgTabListenersSet)
+	) {
+		return;
+	}
+	const settings = await getStyleSettings(key);
+	if (settings != null) {
+		settings instanceof Array
+			? setCurrentChoice({ id: key, value: settings })
+			: setCurrentChoice(settings);
+	}
+	// gather correct resources
+	const isGeneric = key === GENERIC_TAB_STYLE_KEY;
+	const allInputs = isGeneric ? allGenericInputs : allOrgInputs;
+	const allDecorations = isGeneric
+		? allGenericDecorations
+		: allOrgDecorations;
+	const allInactiveDecorations = isGeneric
+		? allInactiveGenericDecorations
+		: allInactiveOrgDecorations;
+	const allActiveDecorations = isGeneric
+		? allActiveGenericDecorations
+		: allActiveOrgDecorations;
+	const btn_inactive_available = isGeneric
+		? btn_inactive_generic_available
+		: btn_inactive_org_available;
+	const btn_inactive_chosen = isGeneric
+		? btn_inactive_generic_chosen
+		: btn_inactive_org_chosen;
+	const btn_active_available = isGeneric
+		? btn_active_generic_available
+		: btn_active_org_available;
+	const btn_active_chosen = isGeneric
+		? btn_active_generic_chosen
+		: btn_active_org_chosen;
+	const ul_inactive_decoration_available = isGeneric
+		? ul_inactive_generic_decoration_available
+		: ul_inactive_org_decoration_available;
+	const ul_inactive_decoration_chosen = isGeneric
+		? ul_inactive_generic_decoration_chosen
+		: ul_inactive_org_decoration_chosen;
+	const ul_active_decoration_available = isGeneric
+		? ul_active_generic_decoration_available
+		: ul_active_org_decoration_available;
+	const ul_active_decoration_chosen = isGeneric
+		? ul_active_generic_decoration_chosen
+		: ul_active_org_decoration_chosen;
+	const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
+	// create event listeners
+	tabPreview.classList.remove("hidden");
+	allInputs.forEach((el) =>
+		el.addEventListener("change", (e) => saveTabOptions(e, key))
+	);
+	allDecorations.forEach((el) => el.addEventListener("click", flipSelected));
+	// move to available
+	btn_inactive_available.addEventListener(
+		"click",
+		() =>
+			moveSelectedDecorationsTo(
+				ul_inactive_decoration_available,
+				allInactiveDecorations,
+				false,
+				key,
+			),
+	);
+	btn_active_available.addEventListener(
+		"click",
+		() =>
+			moveSelectedDecorationsTo(
+				ul_active_decoration_available,
+				allActiveDecorations,
+				false,
+				key,
+			),
+	);
+	// move to chosen
+	btn_inactive_chosen.addEventListener(
+		"click",
+		() =>
+			moveSelectedDecorationsTo(
+				ul_inactive_decoration_chosen,
+				allInactiveDecorations,
+				true,
+				key,
+			),
+	);
+	btn_active_chosen.addEventListener(
+		"click",
+		() =>
+			moveSelectedDecorationsTo(
+				ul_active_decoration_chosen,
+				allActiveDecorations,
+				true,
+				key,
+			),
+	);
+	if (isGeneric) {
+		genericTabListenersSet = true;
+	} else {
+		orgTabListenersSet = true;
+	}
 }
 
 /**
@@ -758,30 +1082,48 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
  * @param {HTMLElement[]} elementsToDeactivate - Elements to unset active state.
  * @param {HTMLElement[]} elementsToHide - Elements to hide.
  */
-function showRelevantSettings_HideOthers(elementToActivate, elementToShow, elementsToDeactivate, elementsToHide){
-    elementToActivate.classList.add(SLDS_ACTIVE);
-    elementToShow.classList.remove("hidden");
-    elementsToDeactivate.forEach(el => {
-        el.classList.remove(SLDS_ACTIVE);
-    });
-    elementsToHide.forEach(el => {
-        el.classList.add("hidden");
-    });
+function showRelevantSettings_HideOthers(
+	elementToActivate,
+	elementToShow,
+	elementsToDeactivate,
+	elementsToHide,
+) {
+	elementToActivate.classList.add(SLDS_ACTIVE);
+	elementToShow.classList.remove("hidden");
+	elementsToDeactivate.forEach((el) => {
+		el.classList.remove(SLDS_ACTIVE);
+	});
+	elementsToHide.forEach((el) => {
+		el.classList.add("hidden");
+	});
 }
 
 generalHeader.addEventListener("click", () => {
-    restoreGeneralSettings();
-    showRelevantSettings_HideOthers(generalHeader, generalContainer, [tabGenericManagerContainer, tabOrgManagerHeader], [tabGenericManagerContainer, tabOrgManagerContainer]);
+	restoreGeneralSettings();
+	showRelevantSettings_HideOthers(generalHeader, generalContainer, [
+		tabGenericManagerContainer,
+		tabOrgManagerHeader,
+	], [tabGenericManagerContainer, tabOrgManagerContainer]);
 });
 
 tabGenericManagerHeader.addEventListener("click", () => {
-    restoreTabSettings(GENERIC_TAB_STYLE_KEY);
-    showRelevantSettings_HideOthers(tabGenericManagerHeader, tabGenericManagerContainer, [generalHeader, tabOrgManagerHeader], [generalContainer, tabOrgManagerContainer]);
+	restoreTabSettings(GENERIC_TAB_STYLE_KEY);
+	showRelevantSettings_HideOthers(
+		tabGenericManagerHeader,
+		tabGenericManagerContainer,
+		[generalHeader, tabOrgManagerHeader],
+		[generalContainer, tabOrgManagerContainer],
+	);
 });
 
 tabOrgManagerHeader.addEventListener("click", () => {
-    restoreTabSettings(ORG_TAB_STYLE_KEY);
-    showRelevantSettings_HideOthers(tabOrgManagerHeader, tabOrgManagerContainer, [generalHeader, tabGenericManagerHeader], [generalContainer, tabGenericManagerContainer]);
+	restoreTabSettings(ORG_TAB_STYLE_KEY);
+	showRelevantSettings_HideOthers(
+		tabOrgManagerHeader,
+		tabOrgManagerContainer,
+		[generalHeader, tabGenericManagerHeader],
+		[generalContainer, tabGenericManagerContainer],
+	);
 });
 
 restoreGeneralSettings();

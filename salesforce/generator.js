@@ -1,30 +1,27 @@
 "use strict";
 import Tab from "/tab.js";
 import {
-  BROWSER,
+	BROWSER,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
+	GENERIC_TAB_STYLE_KEY,
+	getAllStyleSettings,
+	getCssRule,
+	getCssSelector,
+	getSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
+	LINK_NEW_BROWSER,
+	ORG_TAB_CLASS,
+	ORG_TAB_STYLE_KEY,
 	SETUP_LIGHTNING,
-    LINK_NEW_BROWSER,
-    USE_LIGHTNING_NAVIGATION,
-    GENERIC_TAB_STYLE_KEY,
-    ORG_TAB_STYLE_KEY,
-    TAB_STYLE_HOVER,
-    TAB_STYLE_TOP,
-    ORG_TAB_CLASS,
-    getSettings,
-    getAllStyleSettings,
-    getCssRule,
-    getCssSelector,
+	TAB_STYLE_HOVER,
+	TAB_STYLE_TOP,
+	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
-import {
-	getCurrentHref,
-	showToast,
-} from "./content.js";
+import { getCurrentHref, showToast } from "./content.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -68,30 +65,41 @@ async function handleLightningLinkClick(e) {
 			? "_blank"
 			: "_top";
 	}
-    const currentTarget = e.currentTarget.target;
-    const metaCtrl = {ctrlKey:e.ctrlKey, metaKey:e.metaKey}
+	const currentTarget = e.currentTarget.target;
+	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
 		showToast("Cannot redirect. Please refresh the page.", false);
 		return;
 	}
-    const settings = await getSettings([LINK_NEW_BROWSER, USE_LIGHTNING_NAVIGATION]);
-	const target = 
-        settings != null && settings.filter(setting => setting.id === LINK_NEW_BROWSER && setting.enabled).length > 0
-        ? "_blank"
-        : currentTarget !== ""
-            ? currentTarget
-            : getLinkTarget(metaCtrl, url);
+	const settings = await getSettings([
+		LINK_NEW_BROWSER,
+		USE_LIGHTNING_NAVIGATION,
+	]);
+	const target = settings != null &&
+			settings.filter((setting) =>
+					setting.id === LINK_NEW_BROWSER && setting.enabled
+				).length > 0
+		? "_blank"
+		: currentTarget !== ""
+		? currentTarget
+		: getLinkTarget(metaCtrl, url);
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
-	if (target === "_blank" || url === getCurrentHref() || (settings != null && settings.filter(setting => setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled).length !== 0)) {
+	if (
+		target === "_blank" || url === getCurrentHref() ||
+		(settings != null &&
+			settings.filter((setting) =>
+					setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled
+				).length !== 0)
+	) {
 		open(url, target);
 	} else {
-        postMessage({
-            what: "lightningNavigation",
-            navigationType: "url",
-            url,
-            fallbackURL: url,
-        }, "*");
+		postMessage({
+			what: "lightningNavigation",
+			navigationType: "url",
+			url,
+			fallbackURL: url,
+		}, "*");
 	}
 }
 
@@ -101,13 +109,13 @@ async function handleLightningLinkClick(e) {
  * @param {Array} arr2 - Second array to compare.
  * @returns {boolean} True if arrays are equal, otherwise false.
  */
-function areArraysEqual(arr1, arr2){
-    return (arr1 == null && arr2 == null) ||
-        (
-            arr1 != null && arr2 != null &&
-            arr1.length === arr2.length && 
-            JSON.stringify(arr1) === JSON.stringify(arr2)
-        );
+function areArraysEqual(arr1, arr2) {
+	return (arr1 == null && arr2 == null) ||
+		(
+			arr1 != null && arr2 != null &&
+			arr1.length === arr2.length &&
+			JSON.stringify(arr1) === JSON.stringify(arr2)
+		);
 }
 
 let oldSettings = null;
@@ -116,11 +124,17 @@ let oldSettings = null;
  * @param {Object} settings - Current settings to compare.
  * @returns {boolean} True if settings were updated, otherwise false.
  */
-function wereSettingsUpdated(settings){
-    return oldSettings == null || !(
-        areArraysEqual(oldSettings[GENERIC_TAB_STYLE_KEY], settings[GENERIC_TAB_STYLE_KEY]) &&
-        areArraysEqual(oldSettings[ORG_TAB_STYLE_KEY], settings[ORG_TAB_STYLE_KEY])
-    );
+function wereSettingsUpdated(settings) {
+	return oldSettings == null || !(
+		areArraysEqual(
+			oldSettings[GENERIC_TAB_STYLE_KEY],
+			settings[GENERIC_TAB_STYLE_KEY],
+		) &&
+		areArraysEqual(
+			oldSettings[ORG_TAB_STYLE_KEY],
+			settings[ORG_TAB_STYLE_KEY],
+		)
+	);
 }
 
 /**
@@ -133,64 +147,78 @@ function wereSettingsUpdated(settings){
  * - Appends the assembled `<style>` element to the document head.
  * @returns {Promise<void>} Resolves once styles are updated.
  */
-export async function generateStyleFromSettings(){
-    const settings = await getAllStyleSettings();
-    const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
-    const orgStyleList = settings[ORG_TAB_STYLE_KEY];
-    if(!wereSettingsUpdated(settings))
-        return;
-    oldSettings = settings;
-    for(let i = 0; i < 2; i++){
-        const styleList = i === 0 ? genericStyleList : orgStyleList;
-        if(styleList != null){
-            if(styleList.length === 0)
-                return;
-            const isGeneric = styleList === genericStyleList;
-            let style = null;
-            {
-                const styleId = isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY;
-                const oldStyle = document.getElementById(styleId);
-                if (oldStyle != null){
-                    style = oldStyle;
-                    style.textContent = "";
-                } else {
-                    style = document.createElement("style");
-                }
-            }
-            let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
-            let activeCss = `${getCssSelector(false, isGeneric)} {`;
-            const rulesWhichNeedPseudoSelector = [];
-            styleList
-                .forEach(element => {
-                    if(element.id === TAB_STYLE_HOVER || element.id === TAB_STYLE_TOP){
-                        rulesWhichNeedPseudoSelector.push(element);
-                        return;
-                    }
-                    const rule = getCssRule(element.id, element.value);
-                    if(element.forActive)
-                        activeCss += rule;
-                    else
-                        inactiveCss += rule;
-                });
-            style.textContent = `${inactiveCss} } ${activeCss} }`;
-            for(const el of rulesWhichNeedPseudoSelector){
-                let elementPseudoSelector = "";
-                switch (el.id) {
-                    case TAB_STYLE_HOVER:
-                        elementPseudoSelector = ":hover";
-                        break;
-                    case TAB_STYLE_TOP:
-                        elementPseudoSelector = "::before";
-                        break;
-                    default:
-                        break;
-                }
-                style.textContent += `${getCssSelector(!el.forActive, isGeneric, elementPseudoSelector)}{ ${getCssRule(el.id, el.value)} }`;
-                console.log(el);
-            }
-            document.head.appendChild(style);
-        }
-    }
+export async function generateStyleFromSettings() {
+	const settings = await getAllStyleSettings();
+	const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
+	const orgStyleList = settings[ORG_TAB_STYLE_KEY];
+	if (!wereSettingsUpdated(settings)) {
+		return;
+	}
+	oldSettings = settings;
+	for (let i = 0; i < 2; i++) {
+		const styleList = i === 0 ? genericStyleList : orgStyleList;
+		if (styleList != null) {
+			if (styleList.length === 0) {
+				return;
+			}
+			const isGeneric = styleList === genericStyleList;
+			let style = null;
+			{
+				const styleId = isGeneric
+					? GENERIC_TAB_STYLE_KEY
+					: ORG_TAB_STYLE_KEY;
+				const oldStyle = document.getElementById(styleId);
+				if (oldStyle != null) {
+					style = oldStyle;
+					style.textContent = "";
+				} else {
+					style = document.createElement("style");
+				}
+			}
+			let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
+			let activeCss = `${getCssSelector(false, isGeneric)} {`;
+			const rulesWhichNeedPseudoSelector = [];
+			styleList
+				.forEach((element) => {
+					if (
+						element.id === TAB_STYLE_HOVER ||
+						element.id === TAB_STYLE_TOP
+					) {
+						rulesWhichNeedPseudoSelector.push(element);
+						return;
+					}
+					const rule = getCssRule(element.id, element.value);
+					if (element.forActive) {
+						activeCss += rule;
+					} else {
+						inactiveCss += rule;
+					}
+				});
+			style.textContent = `${inactiveCss} } ${activeCss} }`;
+			for (const el of rulesWhichNeedPseudoSelector) {
+				let elementPseudoSelector = "";
+				switch (el.id) {
+					case TAB_STYLE_HOVER:
+						elementPseudoSelector = ":hover";
+						break;
+					case TAB_STYLE_TOP:
+						elementPseudoSelector = "::before";
+						break;
+					default:
+						break;
+				}
+				style.textContent += `${
+					getCssSelector(
+						!el.forActive,
+						isGeneric,
+						elementPseudoSelector,
+					)
+				}{ ${getCssRule(el.id, el.value)} }`;
+				console.log(el);
+			}
+			document.head.appendChild(style);
+		}
+	}
 }
 
 /**
@@ -236,10 +264,10 @@ export function generateRowTemplate(
 	const span = document.createElement("span");
 	span.classList.add("label", "slds-truncate");
 	span.textContent = label;
-    if(org != null){
-        span.classList.add(ORG_TAB_CLASS);
-        span.dataset.org = org;
-    }
+	if (org != null) {
+		span.classList.add(ORG_TAB_CLASS);
+		span.dataset.org = org;
+	}
 	a.appendChild(span);
 	// Highlight the tab related to the current page
 	if (getCurrentHref() === expURL) {
@@ -258,7 +286,7 @@ export function generateRowTemplate(
  * @returns {HTMLElement} The generated toast container element.
  */
 export async function generateSldsToastMessage(message, isSuccess, isWarning) {
-    const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
 	if (
 		message == null || message === "" || isSuccess == null ||
 		isWarning == null
@@ -352,7 +380,10 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
 	messageSpan.setAttribute("data-aura-class", "forceActionsText");
-	messageSpan.innerHTML = (await translator.translate(message)).replaceAll("\n", "<br />");
+	messageSpan.innerHTML = (await translator.translate(message)).replaceAll(
+		"\n",
+		"<br />",
+	);
 	// Assemble the message
 	descriptionDiv.appendChild(messageSpan);
 	contentInner.appendChild(descriptionDiv);
@@ -374,10 +405,13 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
  * @returns {HTMLElement} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
-    const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
 	const requiredElement = document.createElement("abbr");
 	requiredElement.classList.add("slds-required");
-	requiredElement.setAttribute("title", await translator.translate("required"));
+	requiredElement.setAttribute(
+		"title",
+		await translator.translate("required"),
+	);
 	requiredElement.setAttribute("part", "required");
 	requiredElement.textContent = "*";
 	return requiredElement;
@@ -413,17 +447,15 @@ async function generateInput({
 	prepend = null,
 	append = null,
 	style = null,
-    value = null,
-    title = null,
-} = {},
-    {
-        translateLabel = true,
-        translatePlaceholder = true,
-        translateTitle = true,
-        //translateValue = true
-} = {}
-) {
-    const translator = await ensureTranslatorAvailability();
+	value = null,
+	title = null,
+} = {}, {
+	translateLabel = true,
+	translatePlaceholder = true,
+	translateTitle = true,
+	//translateValue = true
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
 	const inputParent = document.createElement("div");
 	inputParent.setAttribute("name", "input");
 	const formElement = document.createElement("div");
@@ -450,9 +482,10 @@ async function generateInput({
 	if (required) {
 		labelElement.appendChild(await generateRequired());
 	}
-    let msg_label = label;
-    if(translateLabel)
-        msg_label = await translator.translate(label);
+	let msg_label = label;
+	if (translateLabel) {
+		msg_label = await translator.translate(label);
+	}
 	labelElement.append(msg_label);
 	const inputWrapper = document.createElement("div");
 	inputWrapper.classList.add("slds-form-element__control", "slds-grow");
@@ -481,8 +514,8 @@ async function generateInput({
 			required = false,
 			enabled = true,
 			style = null,
-            value = null,
-            title = null,
+			value = null,
+			title = null,
 		},
 	) {
 		const input = document.createElement("input");
@@ -490,33 +523,36 @@ async function generateInput({
 		input.setAttribute("part", "input");
 		input.setAttribute("maxlength", "255");
 		id && (input.id = id);
-        if(label){
-            let msg_tranLabel = label;
-            if(translateLabel)
-                msg_tranLabel = await translator.translate(label);
-		    input.setAttribute("name", msg_tranLabel);
-        }
+		if (label) {
+			let msg_tranLabel = label;
+			if (translateLabel) {
+				msg_tranLabel = await translator.translate(label);
+			}
+			input.setAttribute("name", msg_tranLabel);
+		}
 		type && input.setAttribute("type", type);
-        if(placeholder){
-            let msg_tranPlaceholder = placeholder;
-            if(translatePlaceholder)
-                msg_tranPlaceholder = await translator.translate(placeholder);
-            input.setAttribute("placeholder", msg_tranPlaceholder);
-        }
+		if (placeholder) {
+			let msg_tranPlaceholder = placeholder;
+			if (translatePlaceholder) {
+				msg_tranPlaceholder = await translator.translate(placeholder);
+			}
+			input.setAttribute("placeholder", msg_tranPlaceholder);
+		}
 		required && input.setAttribute("required", true);
 		enabled === false && input.setAttribute("disabled", true);
 		style && (input.style = style);
-        value && (input.value = value);
-        if(title){
-            let msg_tranTitle = title;
-            if(translateTitle)
-                msg_tranTitle = await translator.translate(title);
-            input.setAttribute("title", msg_tranTitle);
-        }
+		value && (input.value = value);
+		if (title) {
+			let msg_tranTitle = title;
+			if (translateTitle) {
+				msg_tranTitle = await translator.translate(title);
+			}
+			input.setAttribute("title", msg_tranTitle);
+		}
 		return input;
 	}
 	if (prepend != null) {
-        const prepChild = await createInputElement(prepend);
+		const prepChild = await createInputElement(prepend);
 		inputWrapper.appendChild(prepChild);
 	}
 	const inputContainer = await createInputElement({
@@ -526,12 +562,12 @@ async function generateInput({
 		placeholder,
 		required,
 		style,
-        value,
-        title,
+		value,
+		title,
 	});
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
-        const appChild = await createInputElement(append);
+		const appChild = await createInputElement(append);
 		inputWrapper.appendChild(appChild);
 	}
 	return { inputParent, inputContainer };
@@ -552,7 +588,7 @@ async function generateInput({
  * - Adds empty slots (`divParent` and cloned `borderSpacer`) for future customization or dynamic content injection.
  */
 export async function generateSection(sectionTitle = null) {
-    const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
 	const section = document.createElement("records-record-layout-section");
 	section.setAttribute("lwc-692i7qiai51-host", "");
 	if (sectionTitle != null) {
@@ -582,7 +618,7 @@ export async function generateSection(sectionTitle = null) {
 		const span = document.createElement("span");
 		span.setAttribute("lwc-mlenr16lk9", "");
 		span.classList.add("slds-truncate");
-        const tranSectionTitle = await translator.translate(sectionTitle);
+		const tranSectionTitle = await translator.translate(sectionTitle);
 		span.setAttribute("title", tranSectionTitle);
 		span.textContent = tranSectionTitle;
 		h3.appendChild(span);
@@ -632,7 +668,7 @@ export async function generateSection(sectionTitle = null) {
  * - closeButton: The close button element for closing the modal.
  */
 export async function generateSldsModal(modalTitle) {
-    const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -688,7 +724,7 @@ export async function generateSldsModal(modalTitle) {
 	modalContainer.appendChild(modalHeader);
 	const closeButton = document.createElement("button");
 	closeButton.setAttribute("type", "button");
-    const msg_cancelClose = await translator.translate("cancel_close")
+	const msg_cancelClose = await translator.translate("cancel_close");
 	closeButton.setAttribute("title", msg_cancelClose);
 	closeButton.classList.add(
 		"slds-button",
@@ -923,7 +959,7 @@ export async function generateSldsModal(modalTitle) {
 	);
 	cancelButton.setAttribute("aria-live", "off");
 	cancelButton.setAttribute("type", "button");
-    const msg_cancel = await translator.translate("cancel");
+	const msg_cancel = await translator.translate("cancel");
 	cancelButton.setAttribute("title", msg_cancel);
 	cancelButton.setAttribute("aria-label", "");
 	cancelButton.setAttribute("data-aura-rendered-by", "1364:0");
@@ -947,7 +983,7 @@ export async function generateSldsModal(modalTitle) {
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-    const msg_continue = await translator.translate("continue");
+	const msg_continue = await translator.translate("continue");
 	saveButton.setAttribute("title", msg_continue);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.setAttribute("data-aura-rendered-by", "1380:0");
@@ -994,9 +1030,10 @@ export async function generateSldsModal(modalTitle) {
  * - inputContainer: The container element for the org link input field.
  */
 export async function generateOpenOtherOrgModal(miniURL, label) {
-	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
-		label,
-	);
+	const { modalParent, article, saveButton, closeButton } =
+		await generateSldsModal(
+			label,
+		);
 	const { section, divParent } = await generateSection("other_org_info");
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
@@ -1006,7 +1043,7 @@ export async function generateOpenOtherOrgModal(miniURL, label) {
 	httpsSpan.append(HTTPS);
 	httpsSpan.style.height = "1rem";
 	divParent.appendChild(httpsSpan);
-    const { inputParent, inputContainer } = await generateInput({
+	const { inputParent, inputContainer } = await generateInput({
 		label: "org_link",
 		type: "text",
 		required: true,
@@ -1068,7 +1105,7 @@ export async function generateSldsFileInput(
 			"Cannot generate a file input when the required files are not passed.",
 		);
 	}
-    const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
 	const fileInputWrapper = document.createElement("div");
 	fileInputWrapper.id = wrapperId;
 	fileInputWrapper.classList.add(
@@ -1226,10 +1263,12 @@ export async function generateSldsFileInput(
 	const buttonIcon = document.createElement("lightning-primitive-icon");
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
-    const msg_upload = await translator.translate("upload");
-    const msg_file = await translator.translate("file");
-    const msg_files = await translator.translate("files");
-	fileSelectorButtonSpan.append(`${msg_upload} ${singleFile ? msg_file : msg_files}`);
+	const msg_upload = await translator.translate("upload");
+	const msg_file = await translator.translate("file");
+	const msg_files = await translator.translate("files");
+	fileSelectorButtonSpan.append(
+		`${msg_upload} ${singleFile ? msg_file : msg_files}`,
+	);
 	required && fileSelectorButtonSpan.appendChild(await generateRequired());
 	const buttonSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
@@ -1259,8 +1298,10 @@ export async function generateSldsFileInput(
 			"slds-file-selector__text",
 			"slds-medium-show",
 		);
-        const msg_or_drop = await translator.translate("or_drop");
-		orDropFilesSpan.textContent = `${msg_or_drop} ${singleFile ? msg_file : msg_files}`;
+		const msg_or_drop = await translator.translate("or_drop");
+		orDropFilesSpan.textContent = `${msg_or_drop} ${
+			singleFile ? msg_file : msg_files
+		}`;
 		fileSelectorLabel.appendChild(orDropFilesSpan);
 	}
 	/*
@@ -1312,8 +1353,8 @@ export async function generateSldsFileInput(
  * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
-    const translator = await ensureTranslatorAvailability();
-    const msg_label = await translator.translate(label)
+	const translator = await ensureTranslatorAvailability();
+	const msg_label = await translator.translate(label);
 	const checkboxLabel = document.createElement("label");
 	checkboxLabel.for = id;
 	const checkbox = document.createElement("input");
@@ -1344,49 +1385,60 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * - orgContainer: The container element for the org input field.
  */
 export async function generateUpdateTabModal(label, url, org) {
-	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
-		label,
-	);
+	const { modalParent, article, saveButton, closeButton } =
+		await generateSldsModal(
+			label,
+		);
 	const { section, divParent } = await generateSection("tab_information");
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	article.appendChild(section);
-	const { inputParent: labelParent, inputContainer: labelContainer } = await generateInput({
-		label: "tab_label",
-		type: "text",
-		required: true,
-		placeholder: label ?? "users",
-		style: "width: 100%",
-        value: label,
-        title: "table_row_label",
-	}, {
-        translatePlaceholder: label == null,
-    });
-    divParent.appendChild(labelParent);
-	const { inputParent: urlParent, inputContainer: urlContainer } = await generateInput({
-		label: "tab_url",
-		type: "text",
-		required: true,
-		placeholder: url ?? "ManageUsers/home",
-		style: "width: 100%",
-		value: url,
-        title: "table_row_url",
-	}, {
-        translatePlaceholder: false,
-    });
-    divParent.appendChild(urlParent);
-	const { inputParent: orgParent, inputContainer: orgContainer } = await generateInput({
-		label: "tab_org",
-		type: "text",
-		required: false,
-		placeholder: org ?? "mycustomorg",
-		style: "width: 100%",
-		value: org,
-        title: "table_row_org_name",
-	}, {
-        translatePlaceholder: org == null,
-    });
-    divParent.appendChild(orgParent);
-	return { modalParent, saveButton, closeButton, labelContainer, urlContainer, orgContainer };
+	const { inputParent: labelParent, inputContainer: labelContainer } =
+		await generateInput({
+			label: "tab_label",
+			type: "text",
+			required: true,
+			placeholder: label ?? "users",
+			style: "width: 100%",
+			value: label,
+			title: "table_row_label",
+		}, {
+			translatePlaceholder: label == null,
+		});
+	divParent.appendChild(labelParent);
+	const { inputParent: urlParent, inputContainer: urlContainer } =
+		await generateInput({
+			label: "tab_url",
+			type: "text",
+			required: true,
+			placeholder: url ?? "ManageUsers/home",
+			style: "width: 100%",
+			value: url,
+			title: "table_row_url",
+		}, {
+			translatePlaceholder: false,
+		});
+	divParent.appendChild(urlParent);
+	const { inputParent: orgParent, inputContainer: orgContainer } =
+		await generateInput({
+			label: "tab_org",
+			type: "text",
+			required: false,
+			placeholder: org ?? "mycustomorg",
+			style: "width: 100%",
+			value: org,
+			title: "table_row_org_name",
+		}, {
+			translatePlaceholder: org == null,
+		});
+	divParent.appendChild(orgParent);
+	return {
+		modalParent,
+		saveButton,
+		closeButton,
+		labelContainer,
+		urlContainer,
+		orgContainer,
+	};
 }

@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import {
 	assertEquals,
-    assertRejects,
+	assertRejects,
 } from "https://deno.land/std/testing/asserts.ts";
 import { mockBrowser, translations } from "./mocks.ts";
 declare global {
@@ -102,12 +102,16 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 Deno.test("TranslationService - loadLanguageFile", async () => {
 	const service = await ensureTranslatorAvailability();
 	// Test loading a new language
-    // Add mock de to translations
-    const mockJson = { "test": "Test de" };
-    translations.de = mockJson;
+	// Add mock de to translations
+	const mockJson = { "test": "Test de" };
+	translations.de = mockJson;
 	const result = await service.loadLanguageFile("de");
 	assertEquals(result, mockJson, "Should return loaded translations");
-	assertEquals(service.caches.de, result, "Should initialize cache for language");
+	assertEquals(
+		service.caches.de,
+		result,
+		"Should initialize cache for language",
+	);
 	// Test loading existing language
 	const existingResult = await service.loadLanguageFile("en");
 	assertEquals(

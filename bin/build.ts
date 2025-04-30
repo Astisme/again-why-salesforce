@@ -4,7 +4,7 @@ import { denoPlugins } from "jsr:@luca/esbuild-deno-loader";
 await esbuild.build({
 	plugins: [...denoPlugins()],
 	entryPoints: [
-        "./salesforce/import.js",
+		"./salesforce/import.js",
 	],
 	outfile: "./salesforce/bundledContent.js",
 	bundle: true,

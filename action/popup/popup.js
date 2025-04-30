@@ -3,11 +3,11 @@
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
-    BROWSER,
+	BROWSER,
 	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
 	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
-    sendExtensionMessage,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { handleSwitchColorTheme } from "../themeHandler.js";
@@ -321,7 +321,7 @@ async function loadTabs(browserTab = null) {
 	}
 	// leave a blank at the bottom
 	tabAppendElement.append(createElement());
-    translator.updatePageTranslations();
+	translator.updatePageTranslations();
 }
 
 /**

@@ -4,7 +4,7 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
-    USER_LANGUAGE,
+	USER_LANGUAGE,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -139,27 +139,32 @@ const menuItemsOriginal = [
  */
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
-    if(translator == null)
-        translator = await ensureTranslatorAvailability();
-    areMenuItemsVisible = true;
+	if (translator == null) {
+		translator = await ensureTranslatorAvailability();
+	}
+	areMenuItemsVisible = true;
 	try {
-        // load the user picked language
-        if(!await translator.loadNewLanguage((await bg_getSettings(USER_LANGUAGE))?.enabled)){
-            // load the language in which salesforce is currently set
-            await translator.loadNewLanguage(await bg_getSalesforceLanguage());
-        }
-        const menuItems = structuredClone(menuItemsOriginal);
+		// load the user picked language
+		if (
+			!await translator.loadNewLanguage(
+				(await bg_getSettings(USER_LANGUAGE))?.enabled,
+			)
+		) {
+			// load the language in which salesforce is currently set
+			await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+		}
+		const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
-            item.title = await translator.translate(item.title);
+			item.title = await translator.translate(item.title);
 			await BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				throw new Error(BROWSER.runtime.lastError.message);
 			}
 		}
 	} catch (error) {
-        const msg = await translator.translate("error_cxm_create");
+		const msg = await translator.translate("error_cxm_create");
 		console.error(msg, error);
-        await removeMenuItems();
+		await removeMenuItems();
 	}
 }
 
@@ -172,9 +177,10 @@ async function removeMenuItems() {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
-        if(translator == null)
-            translator = await ensureTranslatorAvailability();
-        const msg = await translator.translate("error_cxm_remove");
+		if (translator == null) {
+			translator = await ensureTranslatorAvailability();
+		}
+		const msg = await translator.translate("error_cxm_remove");
 		console.error(msg, error);
 	}
 }
@@ -206,9 +212,10 @@ async function checkAddRemoveContextMenus(what) {
 	} catch (error) {
 		console.trace();
 		if (error != null && error.message !== "") {
-            if(translator == null)
-                translator = await ensureTranslatorAvailability();
-            const msg = await translator.translate("error_cxm_check");
+			if (translator == null) {
+				translator = await ensureTranslatorAvailability();
+			}
+			const msg = await translator.translate("error_cxm_check");
 			console.error(msg, error);
 		}
 	}

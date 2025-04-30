@@ -1,11 +1,11 @@
 "use strict";
 import Tab from "/tab.js";
-import { 
-    BROWSER,
-    EXTENSION_LABEL,
-    EXTENSION_NAME,
-    getSettings,
-    SKIP_LINK_DETECTION,
+import {
+	BROWSER,
+	EXTENSION_LABEL,
+	EXTENSION_NAME,
+	getSettings,
+	SKIP_LINK_DETECTION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -68,7 +68,7 @@ async function generateFavouriteButton() {
 	button.setAttribute("data-aura-class", "uiButton");
 	button.addEventListener(
 		"click",
-        actionFavourite,
+		actionFavourite,
 	);
 	const span = document.createElement("span");
 	span.classList.add("label", "bBody");
@@ -106,7 +106,7 @@ async function generateFavouriteButton() {
 		return { img, span };
 	}
 	const star = BROWSER.runtime.getURL("assets/svgs/star.svg");
-  const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
 	const { img: starImg, span: starSpan } = createImageElement(
 		STAR_ID,
 		star,
@@ -118,7 +118,7 @@ async function generateFavouriteButton() {
 	const { img: slashedStarImg, span: slashedStarSpan } = createImageElement(
 		SLASHED_STAR_ID,
 		slashedStar,
-        await translator.translate("remove_tab"),
+		await translator.translate("remove_tab"),
 	);
 	slashedStarSpan.classList.add("hidden");
 	span.appendChild(slashedStarImg);
@@ -190,16 +190,16 @@ function toggleFavouriteButton(isSaved = null, button = null) {
  */
 async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
-    const skip_link_detection = await getSettings(SKIP_LINK_DETECTION);
+	const skip_link_detection = await getSettings(SKIP_LINK_DETECTION);
 	const href = getCurrentHref();
-    let org = undefined;
+	let org = undefined;
 	if (
-        (
-            skip_link_detection == null ||
-            skip_link_detection.enabled === false
-        ) &&
-        Tab.containsSalesforceId(href)
-    ) {
+		(
+			skip_link_detection == null ||
+			skip_link_detection.enabled === false
+		) &&
+		Tab.containsSalesforceId(href)
+	) {
 		org = Tab.extractOrgName(href);
 	}
 	await performActionOnTabs("add", { label, url, org });
@@ -241,8 +241,8 @@ async function actionFavourite() {
  */
 export async function showFavouriteButton(count = 0) {
 	if (count > 5) {
-        const translator = await ensureTranslatorAvailability();
-        const failHead = await translator.translate("error_no_headers");
+		const translator = await ensureTranslatorAvailability();
+		const failHead = await translator.translate("error_no_headers");
 		console.error(`${EXTENSION_LABEL} - ${failHead}`);
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}
@@ -287,9 +287,7 @@ export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
 	if (!favourite.classList.contains("hidden")) favourite.click();
 	else {
-		const message = save
-			? "error_useless_save"
-			: "error_useless_remove";
+		const message = save ? "error_useless_save" : "error_useless_remove";
 		showToast(message, true, true);
 	}
 }

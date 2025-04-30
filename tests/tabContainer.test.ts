@@ -702,9 +702,18 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.getTabsByData({ org: "not-present" }).length, 0);
 		assertEquals(container.getTabsByData({ org: "test-org" }).length, 1);
 		assertEquals(container.getTabsByData({ org: "test-org1" }).length, 2);
-		assertEquals(container.getTabsByData({ org: "not-present" }, false).length, 4);
-		assertEquals(container.getTabsByData({ org: "test-org" }, false).length, 3);
-		assertEquals(container.getTabsByData({ org: "test-org1" }, false).length, 2);
+		assertEquals(
+			container.getTabsByData({ org: "not-present" }, false).length,
+			4,
+		);
+		assertEquals(
+			container.getTabsByData({ org: "test-org" }, false).length,
+			3,
+		);
+		assertEquals(
+			container.getTabsByData({ org: "test-org1" }, false).length,
+			2,
+		);
 
 		assertEquals(container.getTabsByData({ label: "Org Tab" }).length, 1);
 		assertEquals(container.getTabsByData({ url: "urll" }).length, 3);
@@ -712,10 +721,14 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			container.getTabsByData({ org: "test-org1", url: "urll" }).length,
 			2,
 		);
-		assertEquals(container.getTabsByData({ label: "Org Tab" }, false).length, 7);
+		assertEquals(
+			container.getTabsByData({ label: "Org Tab" }, false).length,
+			7,
+		);
 		assertEquals(container.getTabsByData({ url: "urll" }, false).length, 5);
 		assertEquals(
-			container.getTabsByData({ org: "test-org1", url: "urll" }, false).length,
+			container.getTabsByData({ org: "test-org1", url: "urll" }, false)
+				.length,
 			6,
 		);
 		assertEquals(container.length, 8);
@@ -737,57 +750,68 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.length, 8);
 		// equal to getTabsByOrg
 		assertThrows(
-            () => container.getSingleTabByData({ org: "not-present" }),
-            Error,
-            "Could not find Tab.",
-        );
-		assertEquals(container.getSingleTabByData({ org: "test-org" }).org, "test-org");
-		assertThrows(
-            () => container.getSingleTabByData({ org: "test-org1" }),
-            Error,
-            "Could not discriminate Tab.",
-        );
-		assertThrows(
-            () => container.getSingleTabByData({ org: "not-present" }, false),
-            Error,
-            "Could not discriminate Tab.",
-        );
-		assertThrows(
-            () => container.getSingleTabByData({ org: "test-org" }, false),
-            Error,
-            "Could not discriminate Tab.",
-        );
-		assertThrows(
-            () => container.getSingleTabByData({ org: "test-org1" }, false),
-            Error,
-            "Could not discriminate Tab.",
-        );
-        // equal to getTabsByData
-		assertEquals(container.getSingleTabByData({ label: "Org Tab" }).label, "Org Tab");
-		assertThrows(
-            () => container.getSingleTabByData({ url: "urll" }),
-            Error,
-            "Could not discriminate Tab.",
-        );
-		assertThrows(
-			() => container.getSingleTabByData({ org: "test-org1", url: "urll" }),
+			() => container.getSingleTabByData({ org: "not-present" }),
 			Error,
-            "Could not discriminate Tab.",
+			"Could not find Tab.",
+		);
+		assertEquals(
+			container.getSingleTabByData({ org: "test-org" }).org,
+			"test-org",
 		);
 		assertThrows(
-            () => container.getSingleTabByData({ label: "Org Tab" }, false),
-            Error,
-            "Could not discriminate Tab.",
-        );
-		assertThrows(
-            () => container.getSingleTabByData({ url: "urll" }, false),
-            Error,
-            "Could not discriminate Tab.",
-        );
-		assertThrows(
-			() => container.getSingleTabByData({ org: "test-org1", url: "urll" }, false),
+			() => container.getSingleTabByData({ org: "test-org1" }),
 			Error,
-            "Could not discriminate Tab.",
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() => container.getSingleTabByData({ org: "not-present" }, false),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() => container.getSingleTabByData({ org: "test-org" }, false),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() => container.getSingleTabByData({ org: "test-org1" }, false),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		// equal to getTabsByData
+		assertEquals(
+			container.getSingleTabByData({ label: "Org Tab" }).label,
+			"Org Tab",
+		);
+		assertThrows(
+			() => container.getSingleTabByData({ url: "urll" }),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() =>
+				container.getSingleTabByData({ org: "test-org1", url: "urll" }),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() => container.getSingleTabByData({ label: "Org Tab" }, false),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() => container.getSingleTabByData({ url: "urll" }, false),
+			Error,
+			"Could not discriminate Tab.",
+		);
+		assertThrows(
+			() =>
+				container.getSingleTabByData(
+					{ org: "test-org1", url: "urll" },
+					false,
+				),
+			Error,
+			"Could not discriminate Tab.",
 		);
 		assertEquals(container.length, 8);
 	});

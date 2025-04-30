@@ -1,7 +1,5 @@
 // deno-lint-ignore-file no-window
-import { 
-    sendExtensionMessage,
-} from "/constants.js";
+import { sendExtensionMessage } from "/constants.js";
 const html = document.documentElement;
 let systemColorListener = null;
 
@@ -12,7 +10,7 @@ let systemColorListener = null;
  * @param {boolean} [updateUserTheme=false] - A flag to determine if the user theme should be updated in localStorage.
  */
 function messageAndUpdateTheme(theme, updateUserTheme = false) {
-    sendExtensionMessage({ what: "theme", theme });
+	sendExtensionMessage({ what: "theme", theme });
 	setTimeout(() => {
 		html.dataset.theme = theme;
 		localStorage.setItem("usingTheme", theme);

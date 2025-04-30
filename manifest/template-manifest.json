@@ -7,15 +7,15 @@
 		"activeTab",
 		"contextMenus",
 		"downloads",
-        "cookies",
-        "webRequest"
+		"cookies",
+		"webRequest"
 	],
-    "default_locale": "en",
+	"default_locale": "en",
 	"description": "__MSG_extension_description__",
-    "host_permissions": [
-        "*://*.my.salesforce-setup.com/lightning/setup/*",
-        "*://*.lightning.force.com/lightning/setup/*"
-    ],
+	"host_permissions": [
+		"*://*.my.salesforce-setup.com/lightning/setup/*",
+		"*://*.lightning.force.com/lightning/setup/*"
+	],
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
 	"content_scripts": [
 		{
@@ -35,7 +35,7 @@
 				"salesforce/lightning-navigation.js",
 				"assets/svgs/*.svg",
 				"assets/icons/*.png",
-                "_locales/*/messages.json"
+				"_locales/*/messages.json"
 			],
 			"matches": [
 				"*://*.my.salesforce-setup.com/*",
@@ -43,9 +43,9 @@
 			]
 		}
 	],
-    "options_ui": {
-        "page": "settings/options.html"
-    },
+	"options_ui": {
+		"page": "settings/options.html"
+	},
 	"icons": {
 		"16": "assets/icons/awsf-16.png",
 		"32": "assets/icons/awsf-32.png",
