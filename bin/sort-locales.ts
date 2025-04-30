@@ -1,4 +1,5 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
+// deno-lint-ignore-file no-explicit-any
 
 /**
  * Recursively sorts an object’s keys alphabetically.
