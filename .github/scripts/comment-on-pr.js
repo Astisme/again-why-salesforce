@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-control-regex
-import process from "node:process";
+const process = require('node:process');
+const fs = require('fs');
 module.exports = async function commentOnPr({
 	github,
 	context,
@@ -10,7 +11,6 @@ module.exports = async function commentOnPr({
 	matchPattern    = /./, // must match if there are errors
 	stripPatterns   = [], // array of regexes to strip noisy lines
 } = {}) {
-	const fs = require('fs');
 	let raw;
 	try {
 		raw = fs.readFileSync(logFile, 'utf8');
