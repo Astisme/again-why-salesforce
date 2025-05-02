@@ -347,6 +347,10 @@
 		"message": "Ležeče",
 		"description": "Možnost sloga pisave za ležeče besedilo"
 	},
+	"lightning_navigation": {
+		"message": "Lightning navigacija",
+		"description": "Prilagojena navigacijska tehnologija Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Prijava v Salesforce",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na prijavno stran Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Odpri Nastavitev",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
 	},
+	"opt_always_open": {
+		"message": "Vedno odpri",
+		"description": "[nastavitev]"
+	},
+	"opt_automatic_open": {
+		"message": "Samodejno odpri",
+		"description": "[nastavitev]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Nadomestno)",
 		"description": "Jezikovna možnost za uporabo angleščine, če jezik ni podprt ali ne prikazuje prevoda"
+	},
+	"opt_faster_loading": {
+		"message": "(hitreje se naloži med uporabo).",
+		"description": "Pojasnilo [nastavitve] funkcije Lightning navigacija"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Naj priljubljeni Tabi ostanejo na levi strani Doma in Upravitelja objektov.",
 		"description": "Stikalo za pripenjanje priljubljenih Tabov na levo stran navigacijske vrstice"
 	},
+	"opt_link_new_browser": {
+		"message": "Vedno odpri povezave v novem zavihku brskalnika.",
+		"description": "[nastavitev] ko uporabnik klikne na priljubljen zavihek, odpri v novem zavihku brskalnika"
+	},
+	"opt_prevent_use": {
+		"message": "Prepreči uporabo ",
+		"description": "[nastavitev] tako kot 'raje ne uporabljam'. poskrbite, da je na koncu sporočila presledek"
+	},
+	"opt_same_tab_popup": {
+		"message": "stran v istem zavihku ob kliku na pojavno okno.",
+		"description": "[nastavitev] prepreči odpiranje novega zavihka brskalnika"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce jezik (Privzeto)",
 		"description": "Možnost za uporabo Salesforce jezikovne nastavitve. Ta možnost je privzeta za razširitev."
+	},
+	"opt_skip_link_detection": {
+		"message": "Preskoči samodejno preverjanje ID-ja Salesforce.",
+		"description": "[nastavitev] ko uporabnik doda priljubljen zavihek, ne preverjaj, ali je v povezavi ID"
+	},
+	"opt_when_clicking_popup": {
+		"message": "stran, ko kliknete na pojavno okno, medtem ko ste na strani Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno, medtem ko je na spletnem mestu Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "stran, ko kliknete na pojavno okno, medtem ko niste na strani Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno, medtem ko je na naključni spletni strani"
 	},
 	"or_drop": {
 		"message": "Ali spusti",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[niSalesforceNastavitev] platforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Salesforce prijava",
+		"description": "Stran za prijavo v Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce nastavitve",
+		"description": "katerakoli stran z nastavitvami Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Shrani kot Tab",

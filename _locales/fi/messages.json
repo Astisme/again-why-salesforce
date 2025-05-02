@@ -347,6 +347,10 @@
 		"message": "Kursivoitu",
 		"description": "Fonttityylivalinta kursivoidulle tekstille"
 	},
+	"lightning_navigation": {
+		"message": "Lightning-navigointi",
+		"description": "Salesforcen mukautettu navigointiteknologia"
+	},
 	"login_to_salesforce": {
 		"message": "Kirjaudu Salesforceen",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforcen kirjautumissivulle"
@@ -371,17 +375,53 @@
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
 	},
+	"opt_always_open": {
+		"message": "Aina auki",
+		"description": "[asetus]"
+	},
+	"opt_automatic_open": {
+		"message": "Automaattinen avaus",
+		"description": "[asetus]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Varavaihtoehto)",
 		"description": "Kielivaihtoehto englanniksi palaamiseksi, jos kielialue ei ole tuettu tai käännöstä ei ole saatavilla"
+	},
+	"opt_faster_loading": {
+		"message": "(nopeampi lataus käytön aikana).",
+		"description": "[asetuksen selitys] selittää Lightning-navigoinnin toiminnon"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pidä suosikki-Tabit Kodin ja Objektien hallinnan vasemmalla puolella.",
 		"description": "Valinta suosikki-Tabien kiinnittämiseksi navigointipalkin vasemmalle puolelle"
 	},
+	"opt_link_new_browser": {
+		"message": "Avaa linkit aina uudessa selainvälilehdessä.",
+		"description": "[asetus] kun klikkaat suosikkitabiä, avaa se uudessa selainvälilehdessä"
+	},
+	"opt_prevent_use": {
+		"message": "Estä käyttö ",
+		"description": "[asetus] kuten ’en halua käyttää’. varmista, että lopussa on välilyönti"
+	},
+	"opt_same_tab_popup": {
+		"message": "sivu samalla välilehdellä ponnahdusikkunan klikkauksessa.",
+		"description": "[asetus] estää uuden selainvälilehden avaamisen"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce-kieli (Oletus)",
 		"description": "Vaihtoehto Salesforcen kieliasetuksen käyttämiseksi. Tämä on laajennuksen oletusasetus."
+	},
+	"opt_skip_link_detection": {
+		"message": "Ohita Salesforce -tunnuksen automaattinen tarkistus.",
+		"description": "[asetus] tallentaessa suosikkitabiä, älä tarkista linkin tunnusta"
+	},
+	"opt_when_clicking_popup": {
+		"message": "sivu ponnahdusikkunan klikkauksessa Salesforce-sivulla.",
+		"description": "[asetus] avattaessa ponnahdusikkuna Salesforce -sivustolla"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "sivu ponnahdusikkunan klikkauksessa muulla kuin Salesforce-sivulla.",
+		"description": "[asetus] avattaessa ponnahdusikkuna satunnaisella sivustolla"
 	},
 	"or_drop": {
 		"message": "Tai pudota",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning -alusta"
+	},
+	"salesforce_login": {
+		"message": "Salesforce -kirjautuminen",
+		"description": "Salesforcen kirjautumissivu (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce -asetukset",
+		"description": "mitkä tahansa Salesforce -asetussivut (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Tallenna Tabina",

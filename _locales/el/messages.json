@@ -347,6 +347,10 @@
 		"message": "Πλάγια",
 		"description": "Επιλογή στυλ γραμματοσειράς για πλάγιο κείμενο"
 	},
+	"lightning_navigation": {
+		"message": "Πλοήγηση Lightning",
+		"description": "Προσαρμοσμένη τεχνολογία πλοήγησης της Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Σύνδεση στο Salesforce",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη στη σελίδα σύνδεσης του Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Άνοιγμα Setup",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη σε σελίδα Salesforce Setup"
 	},
+	"opt_always_open": {
+		"message": "Πάντα άνοιγμα",
+		"description": "[ρύθμιση]"
+	},
+	"opt_automatic_open": {
+		"message": "Αυτόματο άνοιγμα",
+		"description": "[ρύθμιση]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Εφεδρικό)",
 		"description": "Επιλογή γλώσσας για επιστροφή στα Αγγλικά εάν οι τοπικές ρυθμίσεις δεν υποστηρίζονται ή δεν παρουσιάζουν τη μετάφραση"
+	},
+	"opt_faster_loading": {
+		"message": "(γρηγορότερη φόρτωση κατά τη χρήση).",
+		"description": "[εξήγηση ρύθμισης] εξήγηση λειτουργίας Πλοήγησης Lightning"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Διατήρηση αγαπημένων Tabs στα αριστερά της Αρχικής σελίδας και του Διαχειριστή Αντικειμένων.",
 		"description": "Διακόπτης για καρφίτσωμα αγαπημένων Tabs στην αριστερή πλευρά της γραμμής πλοήγησης"
 	},
+	"opt_link_new_browser": {
+		"message": "Πάντα άνοιγμα συνδέσμων σε νέα καρτέλα του προγράμματος περιήγησης.",
+		"description": "[ρύθμιση] όταν κάνετε κλικ σε αγαπημένο Tab, ανοίξτε το σε νέα καρτέλα του προγράμματος περιήγησης"
+	},
+	"opt_prevent_use": {
+		"message": "Αποτροπή χρήσης ",
+		"description": "[ρύθμιση] όπως 'προτιμώ να μην χρησιμοποιώ'. βεβαιωθείτε ότι υπάρχει κενό στο τέλος"
+	},
+	"opt_same_tab_popup": {
+		"message": "σελίδα στην ίδια καρτέλα κατά το κλικ στο αναδυόμενο παράθυρο.",
+		"description": "[ρύθμιση] αποτρέψτε το άνοιγμα νέας καρτέλας του προγράμματος περιήγησης"
+	},
 	"opt_sf_lang_default": {
 		"message": "Γλώσσα Salesforce (Προεπιλογή)",
 		"description": "Επιλογή για χρήση της ρύθμισης γλώσσας του Salesforce. Αυτή η επιλογή είναι η προεπιλογή για την επέκταση."
+	},
+	"opt_skip_link_detection": {
+		"message": "Παράλειψη αυτόματου ελέγχου ID Salesforce.",
+		"description": "[ρύθμιση] κατά την αποθήκευση αγαπημένου Tab, αποτρέψτε τον έλεγχο για ID στον σύνδεσμο"
+	},
+	"opt_when_clicking_popup": {
+		"message": "σελίδα κατά το κλικ στο αναδυόμενο παράθυρο ενώ βρίσκεστε σε σελίδα Salesforce.",
+		"description": "[ρύθμιση] κατά το άνοιγμα του αναδυόμενου παραθύρου σε ιστότοπο Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "σελίδα κατά το κλικ στο αναδυόμενο παράθυρο ενώ δεν βρίσκεστε σε σελίδα Salesforce.",
+		"description": "[ρύθμιση] κατά το άνοιγμα του αναδυόμενου παραθύρου σε τυχαίο ιστότοπο"
 	},
 	"or_drop": {
 		"message": "Ή σύρετε",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[όχιSalesforceSetup] η πλατφόρμα Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Σύνδεση Salesforce",
+		"description": "η σελίδα σύνδεσης Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Ρύθμιση Salesforce",
+		"description": "οποιαδήποτε σελίδα ρύθμισης Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Αποθήκευση ως Tab",

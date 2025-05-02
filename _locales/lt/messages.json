@@ -347,6 +347,10 @@
 		"message": "Kursyvas",
 		"description": "Šrifto stiliaus parinktis kursyviniam tekstui"
 	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "„Salesforce“ pasirinktinė navigacijos technologija"
+	},
 	"login_to_salesforce": {
 		"message": "Prisijungti prie Salesforce",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce prisijungimo puslapį"
@@ -371,17 +375,53 @@
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
 	},
+	"opt_always_open": {
+		"message": "Visada atidaryti",
+		"description": "[nustatymas]"
+	},
+	"opt_automatic_open": {
+		"message": "Atidaryti automatiškai",
+		"description": "[nustatymas]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Atsarginis)",
 		"description": "Kalbos parinktis grįžti į anglų kalbą, jei lokalė nepalaikoma arba neatvaizduoja vertimo"
+	},
+	"opt_faster_loading": {
+		"message": "(greitesnis įkėlimas naudojant).",
+		"description": "Lightning Navigation funkcijos [nustatymo] paaiškinimas"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Palikti mėgstamus Tabus kairėje nuo Namų ir Objektų tvarkyklės.",
 		"description": "Jungiklis prisegti mėgstamus Tabus kairėje navigacijos juostos pusėje"
 	},
+	"opt_link_new_browser": {
+		"message": "Visada atidaryti nuorodas naujame naršyklės skirtuke.",
+		"description": "[nustatymas] kai vartotojas spusteli mėgstamą Tab, atidaryti naujame naršyklės skirtuke"
+	},
+	"opt_prevent_use": {
+		"message": "Užkirsti kelią naudojimui ",
+		"description": "[nustatymas] kaip 'nenoriu naudoti'. būtinai palikite tarpą gale"
+	},
+	"opt_same_tab_popup": {
+		"message": "puslapis tame pačiame skirtuke spustelėjus iššokantį langą.",
+		"description": "[nustatymas] neleisti atidaryti naujo naršyklės skirtuko"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce kalba (Numatytoji)",
 		"description": "Parinktis naudoti Salesforce kalbos nustatymą. Ši parinktis yra numatytoji plėtiniui."
+	},
+	"opt_skip_link_detection": {
+		"message": "Praleisti automatinį Salesforce ID patikrinimą.",
+		"description": "[nustatymas] kai vartotojas prideda mėgstamą Tab, nepatikrinti, ar nuorodoje yra ID"
+	},
+	"opt_when_clicking_popup": {
+		"message": "puslapis spustelėjus iššokantį langą būnant Salesforce puslapyje.",
+		"description": "[nustatymas] kai vartotojas atidaro iššokantį langą būnant Salesforce svetainėje"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "puslapis spustelėjus iššokantį langą nebūnant Salesforce puslapyje.",
+		"description": "[nustatymas] kai vartotojas atidaro iššokantį langą nebūnant Salesforce svetainėje"
 	},
 	"or_drop": {
 		"message": "Arba numeskite",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[neSalesforceSąranka] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Salesforce prisijungimas",
+		"description": "Salesforce prisijungimo puslapis (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce nustatymai",
+		"description": "bet kuris Salesforce nustatymų puslapis (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Išsaugoti kaip Tab",

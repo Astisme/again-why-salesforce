@@ -347,6 +347,10 @@
 		"message": "Cursiva",
 		"description": "Opció d'estil de lletra per a text en cursiva"
 	},
+	"lightning_navigation": {
+		"message": "Navegació Lightning",
+		"description": "Tecnologia de navegació personalitzada de Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Inicia sessió a Salesforce",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina d'inici de sessió de Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Obrir Setup",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
 	},
+	"opt_always_open": {
+		"message": "Obre sempre",
+		"description": "[configuració]"
+	},
+	"opt_automatic_open": {
+		"message": "Obre automàticament",
+		"description": "[configuració]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Alternativa)",
 		"description": "Opció d'idioma per tornar a l'anglès si la configuració regional no és compatible o no presenta la traducció"
+	},
+	"opt_faster_loading": {
+		"message": "(carrega més ràpida quan s’utilitza).",
+		"description": "[explicació de configuració] explicació de la funció Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantenir Tabs preferits a l'esquerra d'Inici i Gestor d'objectes.",
 		"description": "Commutador per fixar Tabs preferits al costat esquerre de la barra de navegació"
 	},
+	"opt_link_new_browser": {
+		"message": "Obre sempre els enllaços en una nova pestanya del navegador.",
+		"description": "[configuració] en fer clic a una Tab preferida, obre-la en una nova pestanya del navegador"
+	},
+	"opt_prevent_use": {
+		"message": "Evita l’ús ",
+		"description": "[configuració] igual que 'prefereixo no utilitzar'. assegura’t que hi hagi un espai al final del missatge"
+	},
+	"opt_same_tab_popup": {
+		"message": "pàgina a la mateixa pestanya en fer clic a la finestra emergent.",
+		"description": "[configuració] evita obrir una nova pestanya del navegador"
+	},
 	"opt_sf_lang_default": {
 		"message": "Idioma de Salesforce (Predeterminat)",
 		"description": "Opció per utilitzar la configuració d'idioma de Salesforce. Aquesta opció és la predeterminada per a l'extensió."
+	},
+	"opt_skip_link_detection": {
+		"message": "Saltar la comprovació automàtica de l’ID de Salesforce.",
+		"description": "[configuració] en desar una Tab preferida, evita comprovar si hi ha un ID a l’enllaç"
+	},
+	"opt_when_clicking_popup": {
+		"message": "pàgina en fer clic a la finestra emergent mentre ets en una pàgina de Salesforce.",
+		"description": "[configuració] en obrir la finestra emergent mentre ets en un lloc de Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "pàgina en fer clic a la finestra emergent mentre no ets en una pàgina de Salesforce.",
+		"description": "[configuració] en obrir la finestra emergent mentre ets en un lloc qualsevol"
 	},
 	"or_drop": {
 		"message": "O arrossegar",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] la plataforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Inici de sessió de Salesforce",
+		"description": "la pàgina d’inici de sessió de Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Configuració de Salesforce",
+		"description": "qualsevol pàgina de configuració de Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Desar com a Tab",

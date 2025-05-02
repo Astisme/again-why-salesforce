@@ -347,6 +347,10 @@
 		"message": "נטוי",
 		"description": "אפשרות סגנון גופן לטקסט נטוי"
 	},
+	"lightning_navigation": {
+		"message": "ניווט Lightning",
+		"description": "טכנולוגיית הניווט המותאמת של Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "התחבר ל-Salesforce",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד ההתחברות של Salesforce"
@@ -371,17 +375,53 @@
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
 	},
+	"opt_always_open": {
+		"message": "תמיד פתח",
+		"description": "[הגדרה]"
+	},
+	"opt_automatic_open": {
+		"message": "פתיחה אוטומטית",
+		"description": "[הגדרה]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "אפשרות שפה לחזרה לאנגלית אם האזור אינו נתמך או אינו מציג את התרגום"
+	},
+	"opt_faster_loading": {
+		"message": "(הטענה מהירה יותר בזמן שימוש).",
+		"description": "[הגדרה] הסבר על פונקציית הניווט Lightning"
 	},
 	"opt_keep_tabs_left": {
 		"message": "שמור Tabs מועדפים משמאל לדף הבית ולמנהל האובייקטים.",
 		"description": "לחצן דו-מצבי להצמדת Tabs מועדפים לצד השמאלי של סרגל הניווט"
 	},
+	"opt_link_new_browser": {
+		"message": "פתח קישורים תמיד בכרטיסייה חדשה בדפדפן.",
+		"description": "[הגדרה] בעת לחיצה על Tab מועדף, פתח אותו בכרטיסייה חדשה בדפדפן"
+	},
+	"opt_prevent_use": {
+		"message": "מניעת שימוש ",
+		"description": "[הגדרה] בדומה ל'אני מעדיף לא להשתמש'. וודא שיש רווח בסוף"
+	},
+	"opt_same_tab_popup": {
+		"message": "דף באותה הכרטיסייה בעת לחיצה על החלון הקופץ.",
+		"description": "[הגדרה] מניעת פתיחת כרטיסיית דפדפן חדשה"
+	},
 	"opt_sf_lang_default": {
 		"message": "שפת Salesforce (ברירת מחדל)",
 		"description": "אפשרות להשתמש בהגדרת השפה של Salesforce. אפשרות זו היא ברירת המחדל של התוסף."
+	},
+	"opt_skip_link_detection": {
+		"message": "דלג על בדיקת ID של Salesforce אוטומטית.",
+		"description": "[הגדרה] בעת שמירת Tab מועדף, אל תבדוק ID בקישור"
+	},
+	"opt_when_clicking_popup": {
+		"message": "דף בעת לחיצה על החלון הקופץ בעמוד Salesforce.",
+		"description": "[הגדרה] בעת פתיחת החלון הקופץ באתר Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "דף בעת לחיצה על החלון הקופץ בעמוד שאינו Salesforce.",
+		"description": "[הגדרה] בעת פתיחת החלון הקופץ באתר אקראי"
 	},
 	"or_drop": {
 		"message": "או הנח",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] פלטפורמת Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "כניסה ל-Salesforce",
+		"description": "דף הכניסה של Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "הגדרות Salesforce",
+		"description": "כל דף הגדרות Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "שמור כ-Tab",

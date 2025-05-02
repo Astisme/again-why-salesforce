@@ -347,6 +347,10 @@
 		"message": "Dőlt",
 		"description": "Betűstílus opció dőlt szöveghez"
 	},
+	"lightning_navigation": {
+		"message": "Lightning navigáció",
+		"description": "A Salesforce egyedi navigációs technológiája"
+	},
 	"login_to_salesforce": {
 		"message": "Bejelentkezés a Salesforce-ba",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce bejelentkezési oldalára való átnyomásra"
@@ -371,17 +375,53 @@
 		"message": "Setup megnyitása",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
 	},
+	"opt_always_open": {
+		"message": "Mindig nyitva",
+		"description": "[beállítás]"
+	},
+	"opt_automatic_open": {
+		"message": "Automatikus megnyitás",
+		"description": "[beállítás]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Tartalék)",
 		"description": "Nyelvi lehetőség az angolra való visszalépéshez, ha a területi beállítás nem támogatott vagy nem jeleníti meg a fordítást"
+	},
+	"opt_faster_loading": {
+		"message": "(gyorsabb betöltés használat közben).",
+		"description": "[beállítás] magyarázat a Lightning navigációs funkcióra"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kedvenc Tabs megtartása a Kezdőlap és az Objektumkezelő bal oldalán.",
 		"description": "Kapcsoló a kedvenc Tabs rögzítéséhez a navigációs sáv bal oldalára"
 	},
+	"opt_link_new_browser": {
+		"message": "Linkek megnyitása mindig új böngészőfülön.",
+		"description": "[beállítás] kedvenc Tab-ra kattintva nyissa meg új fülön"
+	},
+	"opt_prevent_use": {
+		"message": "Használat megakadályozása ",
+		"description": "[beállítás] mint ’nem szeretném használni’. ügyelj a szóközre a végén"
+	},
+	"opt_same_tab_popup": {
+		"message": "oldal ugyanazon a fülön a felugró ablak kattintásakor.",
+		"description": "[beállítás] ne nyisson új böngészőfület"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Nyelv (Alapértelmezett)",
 		"description": "Opció a Salesforce nyelvi beállításának használatára. Ez az opció a bővítmény alapértelmezett beállítása."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ID automatikus ellenőrzésének kihagyása.",
+		"description": "[beállítás] kedvenc Tab mentésekor ne ellenőrizze az ID-t"
+	},
+	"opt_when_clicking_popup": {
+		"message": "oldal felugró ablak kattintásakor Salesforce oldalon.",
+		"description": "[beállítás] felugró ablak megnyitásakor Salesforce webhelyen"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "oldal felugró ablak kattintásakor nem Salesforce oldalon.",
+		"description": "[beállítás] felugró ablak megnyitásakor bármely más webhelyen"
 	},
 	"or_drop": {
 		"message": "Vagy dobja ide",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] a Salesforce Lightning platformja"
+	},
+	"salesforce_login": {
+		"message": "Salesforce bejelentkezés",
+		"description": "A Salesforce bejelentkezőoldala (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce beállítás",
+		"description": "Bármely Salesforce beállítási oldal (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Mentés Tabként",

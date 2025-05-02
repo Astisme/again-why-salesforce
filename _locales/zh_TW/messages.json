@@ -347,6 +347,10 @@
 		"message": "斜體",
 		"description": "斜體文字的字體樣式選項"
 	},
+	"lightning_navigation": {
+		"message": "Lightning 導航",
+		"description": "Salesforce 的自訂導航技術"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce 登入頁"
@@ -371,17 +375,53 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce Setup 頁面"
 	},
+	"opt_always_open": {
+		"message": "始終打開",
+		"description": "[設定]"
+	},
+	"opt_automatic_open": {
+		"message": "自動打開",
+		"description": "[設定]"
+	},
 	"opt_en_fallback": {
 		"message": "en (備用)",
 		"description": "當地區設定不支援或沒有提供翻譯時，回退到英文的語言選項"
+	},
+	"opt_faster_loading": {
+		"message": "(使用時載入更快)。",
+		"description": "Lightning 導航功能的 [設定] 說明"
 	},
 	"opt_keep_tabs_left": {
 		"message": "將收藏的 Tab 保持在首頁和物件管理器的左側。",
 		"description": "將收藏的 Tab 固定在導航欄左側的切換開關"
 	},
+	"opt_link_new_browser": {
+		"message": "始終在新瀏覽器標籤中打開鏈接。",
+		"description": "[設定] 當用戶點擊收藏的 Tab 時，在新標籤中打開"
+	},
+	"opt_prevent_use": {
+		"message": "阻止使用 ",
+		"description": "[設定] 類似於“更願不使用”。請確保消息末尾有一個空格"
+	},
+	"opt_same_tab_popup": {
+		"message": "單擊彈出窗口時在同一標籤中打開頁面。",
+		"description": "[設定] 阻止打開新瀏覽器標籤"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce 語言（預設）",
 		"description": "使用 Salesforce 的語言設定的選項。此選項是擴充功能的預設值。"
+	},
+	"opt_skip_link_detection": {
+		"message": "跳過自動檢測 Salesforce ID。",
+		"description": "[設定] 當用戶收藏 Tab 時，跳過檢查鏈接中是否有 ID"
+	},
+	"opt_when_clicking_popup": {
+		"message": "在 Salesforce 頁面中單擊彈出窗口時打開頁面。",
+		"description": "[設定] 當用戶在 Salesforce 網站上打開彈出窗口時"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "在非 Salesforce 頁面中單擊彈出窗口時打開頁面。",
+		"description": "[設定] 當用戶在任意網站上打開彈出窗口時"
 	},
 	"or_drop": {
 		"message": "Or drop",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning 平台"
+	},
+	"salesforce_login": {
+		"message": "Salesforce 登錄",
+		"description": "Salesforce 登錄頁面 (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce 設定",
+		"description": "任何 Salesforce 設定頁面 (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Save as Tab",

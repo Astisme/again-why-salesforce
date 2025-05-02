@@ -347,6 +347,10 @@
 		"message": "Condong",
 		"description": "Pilihan gaya fon untuk teks condong"
 	},
+	"lightning_navigation": {
+		"message": "Navigasi Lightning",
+		"description": "Teknologi navigasi tersuai Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Log masuk ke Salesforce",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman log masuk Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Buka Persediaan",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
 	},
+	"opt_always_open": {
+		"message": "Sentiasa buka",
+		"description": "[tetapan]"
+	},
+	"opt_automatic_open": {
+		"message": "Buka secara automatik",
+		"description": "[tetapan]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Sandaran)",
 		"description": "Pilihan bahasa untuk kembali ke Bahasa Inggeris jika locale tidak disokong atau tiada terjemahan"
+	},
+	"opt_faster_loading": {
+		"message": "(pemuatan lebih pantas semasa digunakan).",
+		"description": "Penerangan [tetapan] fungsi Navigasi Lightning"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kekalkan Tab kegemaran di sebelah kiri Home dan Object Manager.",
 		"description": "Togol untuk menempatkan Tab kegemaran di sebelah kiri bar navigasi"
 	},
+	"opt_link_new_browser": {
+		"message": "Sentiasa buka pautan dalam tab pelayar baharu.",
+		"description": "[tetapan] apabila pengguna mengklik Tab kegemaran, buka dalam tab pelayar baharu"
+	},
+	"opt_prevent_use": {
+		"message": "Hentikan penggunaan ",
+		"description": "[tetapan] sama seperti 'lebih suka tidak menggunakan'. pastikan ada ruang pada akhir mesej"
+	},
+	"opt_same_tab_popup": {
+		"message": "halaman dalam tab yang sama apabila mengklik popup.",
+		"description": "[tetapan] elakkan membuka tab pelayar baharu"
+	},
 	"opt_sf_lang_default": {
 		"message": "Bahasa Salesforce (Lalai)",
 		"description": "Pilihan untuk menggunakan tetapan bahasa Salesforce. Pilihan ini adalah lalai untuk sambungan ini."
+	},
+	"opt_skip_link_detection": {
+		"message": "Langkau semakan ID Salesforce automatik.",
+		"description": "[tetapan] apabila pengguna menambah Tab kegemaran, elakkan menyemak jika ada ID dalam pautan yang disimpan"
+	},
+	"opt_when_clicking_popup": {
+		"message": "halaman apabila mengklik popup semasa berada di halaman Salesforce.",
+		"description": "[tetapan] apabila pengguna membuka popup semasa berada di laman Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "halaman apabila mengklik popup semasa tidak berada di halaman Salesforce.",
+		"description": "[tetapan] apabila pengguna membuka popup semasa berada di laman rawak"
 	},
 	"or_drop": {
 		"message": "Atau lepaskan",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[bukanPersediaanSalesforce] platform Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Log Masuk Salesforce",
+		"description": "halaman log masuk Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Tetapan Salesforce",
+		"description": "mana-mana halaman tetapan Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Simpan sebagai Tab",

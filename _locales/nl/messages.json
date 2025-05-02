@@ -347,6 +347,10 @@
 		"message": "Cursief",
 		"description": "Lettertype-optie voor cursieve tekst"
 	},
+	"lightning_navigation": {
+		"message": "Lightning-navigatie",
+		"description": "Salesforce’s aangepaste navigatietechnologie"
+	},
 	"login_to_salesforce": {
 		"message": "Inloggen bij Salesforce",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
@@ -371,17 +375,53 @@
 		"message": "Setup openen",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
 	},
+	"opt_always_open": {
+		"message": "Altijd openen",
+		"description": "[instelling]"
+	},
+	"opt_automatic_open": {
+		"message": "Automatisch openen",
+		"description": "[instelling]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Taaloptie om terug te vallen op Engels als de landinstelling niet wordt ondersteund of de vertaling niet weergeeft"
+	},
+	"opt_faster_loading": {
+		"message": "(sneller laden bij gebruik).",
+		"description": "Uitleg van Lightning-navigatiefunctie [instelling]"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Houd favoriete Tabs links van Home en Object Manager.",
 		"description": "Schakelaar om favoriete Tabs aan de linkerkant van de navigatiebalk vast te pinnen"
 	},
+	"opt_link_new_browser": {
+		"message": "Altijd links openen in een nieuw browsertabblad.",
+		"description": "[instelling] als de gebruiker op een favoriet Tab klikt, openen in een nieuw browsertabblad"
+	},
+	"opt_prevent_use": {
+		"message": "Gebruik voorkomen ",
+		"description": "[instelling] net als ‘wil niet gebruiken’. zorg ervoor dat er een spatie aan het einde van de boodschap staat"
+	},
+	"opt_same_tab_popup": {
+		"message": "pagina in hetzelfde tabblad bij het klikken op de popup.",
+		"description": "[instelling] voorkom het openen van een nieuw browsertabblad"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Taal (Standaard)",
 		"description": "Optie om de taalinstelling van Salesforce te gebruiken. Deze optie is de standaard voor de extensie."
+	},
+	"opt_skip_link_detection": {
+		"message": "Automatische controle van Salesforce-id overslaan.",
+		"description": "[instelling] wanneer de gebruiker een favoriet Tab toevoegt, niet controleren of er een id in de link staat"
+	},
+	"opt_when_clicking_popup": {
+		"message": "pagina bij het klikken op de popup terwijl u op een Salesforce-pagina bent.",
+		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij op een Salesforce-website is"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "pagina bij het klikken op de popup terwijl u niet op een Salesforce-pagina bent.",
+		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij op een willekeurige website is"
 	},
 	"or_drop": {
 		"message": "Of neerzetten",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[geenSalesforceSetup] het Salesforce Lightning-platform"
+	},
+	"salesforce_login": {
+		"message": "Salesforce-login",
+		"description": "de Salesforce-loginpagina (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce-instellingen",
+		"description": "elke Salesforce-instellingspagina (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Opslaan als Tab",

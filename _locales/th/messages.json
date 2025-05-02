@@ -347,6 +347,10 @@
 		"message": "ตัวเอียง",
 		"description": "ตัวเลือกรูปแบบตัวอักษรสำหรับข้อความตัวเอียง"
 	},
+	"lightning_navigation": {
+		"message": "การนำทาง Lightning",
+		"description": "เทคโนโลยีการนำทางที่ปรับแต่งโดย Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้าล็อกอินของ Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
 	},
+	"opt_always_open": {
+		"message": "เปิดเสมอ",
+		"description": "[การตั้งค่า]"
+	},
+	"opt_automatic_open": {
+		"message": "เปิดโดยอัตโนมัติ",
+		"description": "[การตั้งค่า]"
+	},
 	"opt_en_fallback": {
 		"message": "en (สำรอง)",
 		"description": "ตัวเลือกภาษาเพื่อกลับไปใช้ภาษาอังกฤษหากภาษาท้องถิ่นไม่รองรับหรือไม่มีการแปล"
+	},
+	"opt_faster_loading": {
+		"message": "(โหลดเร็วขึ้นเมื่อใช้งาน)",
+		"description": "คำอธิบาย [การตั้งค่า] ของคุณสมบัติ Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "เก็บ Tab โปรดไว้ทางซ้ายของ Home และ Object Manager",
 		"description": "ตัวเลือกเพื่อปักหมุด Tab โปรดไว้ที่ด้านซ้ายของแถบนำทาง"
 	},
+	"opt_link_new_browser": {
+		"message": "เปิดลิงก์เสมอในแท็บเบราว์เซอร์ใหม่",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้คลิก Tab ที่ชื่นชอบ ให้เปิดในแท็บเบราว์เซอร์ใหม่"
+	},
+	"opt_prevent_use": {
+		"message": "ป้องกันการใช้งาน ",
+		"description": "[การตั้งค่า] เช่น 'ไม่ต้องการใช้งาน' โปรดตรวจสอบให้มีช่องว่างท้ายข้อความ"
+	},
+	"opt_same_tab_popup": {
+		"message": "หน้าในแท็บเดียวกันเมื่อคลิกป็อปอัป",
+		"description": "[การตั้งค่า] ป้องกันการเปิดแท็บเบราว์เซอร์ใหม่"
+	},
 	"opt_sf_lang_default": {
 		"message": "ภาษา Salesforce (ค่าเริ่มต้น)",
 		"description": "ตัวเลือกการใช้การตั้งค่าภาษาของ Salesforce ตัวเลือกนี้เป็นค่าเริ่มต้นสำหรับส่วนขยาย"
+	},
+	"opt_skip_link_detection": {
+		"message": "ข้ามการตรวจสอบ ID Salesforce อัตโนมัติ",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เพิ่ม Tab ที่ชื่นชอบ ให้ข้ามการตรวจสอบว่ามี ID ในลิงก์ที่บันทึก"
+	},
+	"opt_when_clicking_popup": {
+		"message": "หน้าเมื่อคลิกป็อปอัปขณะอยู่ในหน้า Salesforce",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป็อปอัปขณะอยู่ในเว็บไซต์ Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "หน้าเมื่อคลิกป็อปอัปขณะไม่อยู่ในหน้า Salesforce",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป็อปอัปขณะอยู่ในเว็บไซต์อื่นๆ"
 	},
 	"or_drop": {
 		"message": "Or drop",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] แพลตฟอร์ม Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "เข้าสู่ระบบ Salesforce",
+		"description": "หน้าล็อกอิน Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "การตั้งค่า Salesforce",
+		"description": "หน้าใดๆ ของการตั้งค่า Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Save as Tab",

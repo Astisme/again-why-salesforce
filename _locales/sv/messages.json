@@ -347,6 +347,10 @@
 		"message": "Kursiv",
 		"description": "Teckensnittsalternativ för kursiv text"
 	},
+	"lightning_navigation": {
+		"message": "Lightning-navigering",
+		"description": "Salesforces anpassade navigeringsteknik"
+	},
 	"login_to_salesforce": {
 		"message": "Logga in på Salesforce",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce inloggningssida"
@@ -371,17 +375,53 @@
 		"message": "Öppna Setup",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
 	},
+	"opt_always_open": {
+		"message": "Öppna alltid",
+		"description": "[inställning]"
+	},
+	"opt_automatic_open": {
+		"message": "Öppna automatiskt",
+		"description": "[inställning]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Språkalternativ för att återgå till engelska om locale inte stöds eller inte presenterar översättningen"
+	},
+	"opt_faster_loading": {
+		"message": "(snabbare inläsning vid användning).",
+		"description": "Förklaring av Lightning-navigeringsfunktionens [inställning]"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behåll favorit-Tabs till vänster om Hem och Objekthanteraren.",
 		"description": "Växlingsknapp för att fästa favorit-Tabs på vänster sida av navigeringsfältet"
 	},
+	"opt_link_new_browser": {
+		"message": "Öppna alltid länkar i en ny webbläsarflik.",
+		"description": "[inställning] när användaren klickar på en favorit-Tab, öppna i en ny webbläsarflik"
+	},
+	"opt_prevent_use": {
+		"message": "Förhindra användning ",
+		"description": "[inställning] precis som 'föredrar att inte använda'. se till att det finns ett mellanslag i slutet av meddelandet"
+	},
+	"opt_same_tab_popup": {
+		"message": "sida i samma flik när du klickar på popup.",
+		"description": "[inställning] förhindra öppning av en ny webbläsarflik"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Språk (Standard)",
 		"description": "Alternativ för att använda Salesforces språkinställning. Detta alternativ är standard för tillägget."
+	},
+	"opt_skip_link_detection": {
+		"message": "Hoppa över automatisk kontroll av Salesforce-id.",
+		"description": "[inställning] när användaren lägger till en favorit-Tab, kontrollera inte om det finns ett id i länken"
+	},
+	"opt_when_clicking_popup": {
+		"message": "sida när du klickar på popup medan du är på en Salesforce-sida.",
+		"description": "[inställning] när användaren öppnar popup medan han är på en Salesforce-webbplats"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "sida när du klickar på popup medan du inte är på en Salesforce-sida.",
+		"description": "[inställning] när användaren öppnar popup medan han är på en slumpmässig webbplats"
 	},
 	"or_drop": {
 		"message": "Eller dra",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning-plattformen"
+	},
+	"salesforce_login": {
+		"message": "Salesforce-inloggning",
+		"description": "Salesforces inloggningssida (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce-inställningar",
+		"description": "vilken Salesforce-inställningssida som helst (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Spara som Tab",

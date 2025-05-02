@@ -347,6 +347,10 @@
 		"message": "Курзив",
 		"description": "Опција стила фонта за курзивни текст"
 	},
+	"lightning_navigation": {
+		"message": "Lightning навигација",
+		"description": "Прилагођена технологија навигације Salesforce-a"
+	},
 	"login_to_salesforce": {
 		"message": "Prijavite se na Salesforce",
 		"description": "[notSalesforceSetup] poziv na akciju na dugmetu za preusmeravanje korisnika na stranicu za prijavu u Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na dugmetu za preusmeravanje korisnika na Salesforce Setup stranicu"
 	},
+	"opt_always_open": {
+		"message": "Увек отвори",
+		"description": "[поставка]"
+	},
+	"opt_automatic_open": {
+		"message": "Аутоматски отвори",
+		"description": "[поставка]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Резервни)",
 		"description": "Језичка опција за враћање на енглески ако локално подешавање није подржано или не приказује превод"
+	},
+	"opt_faster_loading": {
+		"message": "(брже учитавање приликом коришћења).",
+		"description": "Објашњење [поставке] функције Lightning навигација"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Задржи омиљене Tabs лево од Почетне странице и Менаџера објеката.",
 		"description": "Прекидач за качење омиљених Tabs на леву страну навигационе траке"
 	},
+	"opt_link_new_browser": {
+		"message": "Увек отвараи везе у новом картици прегледача.",
+		"description": "[поставка] када корисник кликне на фаворит Tabs, отвори у новом картици прегледача"
+	},
+	"opt_prevent_use": {
+		"message": "Забрани употребу ",
+		"description": "[поставка] као 'радре не користим'. уверите се да порука завршава размаком"
+	},
+	"opt_same_tab_popup": {
+		"message": "страница у истом картици приликом клика на искачући прозор.",
+		"description": "[поставка] спречи отварање новог картице прегледача"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Језик (Подразумевано)",
 		"description": "Опција за коришћење Salesforce подешавања језика. Ова опција је подразумевана за екстензију."
+	},
+	"opt_skip_link_detection": {
+		"message": "Прескочи аутоматску проверу Salesforce ID.",
+		"description": "[поставка] када корисник додаје фаворит Tabs, не проверавај да ли постоји ID у вези"
+	},
+	"opt_when_clicking_popup": {
+		"message": "страница приликом клика на искачући прозор док сте на страници Salesforce.",
+		"description": "[поставка] када корисник отвори искачући прозор док је на веб-сајту Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "страница приликом клика на искачући прозор док нисте на страници Salesforce.",
+		"description": "[поставка] када корисник отвори искачући прозор док је на произвољном веб-сајту"
 	},
 	"or_drop": {
 		"message": "Ili spusti",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Salesforce пријава",
+		"description": "страница за пријаву у Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce подешавања",
+		"description": "било која страница подешавања Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Sačuvaj kao Tab",

@@ -346,6 +346,10 @@
 		"message": "ഇറ്റാലിക്",
 		"description": "ഇറ്റാലിക് ടെക്സ്റ്റ്‌ക്കായുള്ള ഫോണ്ട് ശൈലി ഓപ്‌ഷൻ"
 	},
+	"lightning_navigation": {
+		"message": "ലൈറ്റ്‌നിംഗ് നാവിഗേഷൻ",
+		"description": "സെയിൽസ്ഫോഴ്സിന്റെ കസ്റ്റം നാവിഗേഷൻ സാങ്കേതികവിദ്യ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce-ലേക്ക് ലോഗിന്‍ ചെയ്യുക",
 		"description": "[notSalesforceSetup] Salesforce ലോഗിന്‍ പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
@@ -370,17 +374,53 @@
 		"message": "സെറ്റപ്പ് തുറക്കുക",
 		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
 	},
+	"opt_always_open": {
+		"message": "എപ്പോഴും തുറക്കുക",
+		"description": "[ക്രമീകരണം]"
+	},
+	"opt_automatic_open": {
+		"message": "സ്വയംതേട്ന് തുറക്കുക",
+		"description": "[ക്രമീകരണം]"
+	},
 	"opt_en_fallback": {
 		"message": "en (ഫോൾബാക്ക്)",
 		"description": "ലോകൽ പിന്തുണയില്ലയെങ്കിൽ fallback ആയി English ഉപയോഗിക്കാൻ ഭാഷായോൺ"
+	},
+	"opt_faster_loading": {
+		"message": "(ഉപയോഗത്തിൽ വേഗത്തിൽ ലോഡ് ചെയ്യപ്പെടുന്നു).",
+		"description": "ലൈറ്റ്‌നിംഗ് നാവിഗേഷൻ സവിശേഷതയുടെ [ക്രമീകരണം] വിശദാംശം"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ഫേവറിറ്റ് Tabs നെ Home‌യും Object Managerഉം ഡിപ്പാർട്ട്മെന്റിന്റെ ഇടതുവശത്ത് സൂക്ഷിക്കുക.",
 		"description": "നാവിഗേഷൻ ബാറിന്റെ ഇടതു വശത്ത് പ്രിയപ്പെട്ട Tabs പിനുചെയ്യുന്നതിനുള്ള ടോഗിൾ"
 	},
+	"opt_link_new_browser": {
+		"message": "ലിങ്കുകൾ എല്ലായ്പ്പോഴും പുതിയ ബ്രൗസർ ടാബിൽ തുറക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് പ്രിയപ്പെട്ട ടാബിൽ ക്ലിക് ചെയ്യുമ്പോൾ പുതിയ ബ്രൗസർ ടാബിൽ തുറക്കാൻ"
+	},
+	"opt_prevent_use": {
+		"message": "ഉപയോഗം തടയുക ",
+		"description": "[ക്രമീകരണം] 'അനുവദിക്കാൻ ആഗ്രഹിക്കുന്നില്ല' എന്നപോലെ. സന്ദേശത്തിന്റെ അവസാനം തുറന്നിര_space ഉറപ്പാക്കുക"
+	},
+	"opt_same_tab_popup": {
+		"message": "പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ ഒരേ ടാബില്‍ പേജ്.",
+		"description": "[ക്രമീകരണം] പുതിയ ബ്രൗസർ ടാബ് തുറക്കാതെ നിർത്താൻ"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Language (Default)",
 		"description": "Salesforce ഭാഷാ ക്രമീകരണം ഉപയോഗിക്കാൻ ഓപ്‌ഷൻ. ഈ എക്സ്റ്റൻഷനിന്റെ ഡീഫോൾട്ട് ആണ്."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ഐഡി സ്വയenchുന്ന പരിശോധന ഒഴിവാക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഫേവറിറ്റ് ടാബ് ചേർക്കുമ്പോൾ ലിങ്കിൽ ഐഡി ഉണ്ടോയെന്ന് പരിശോധിക്കാതെ വിടാം"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce പേജിൽ ആയപ്പോൾ പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ പേജ്.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് Salesforce സൈറ്റിൽ ഉള്ളപ്പോൾ പോപ്-അപ്പ് തുറക്കുമ്പോൾ"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce പേജിൽ ഇല്ലായിക്കുമ്പോൾ പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ പേജ്.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് Salesforce സൈറ്റിൽ ഇല്ലായിക്കുമ്പോൾ പോപ്-അപ്പ് തുറക്കുമ്പോൾ"
 	},
 	"or_drop": {
 		"message": "അല്ലെങ്കില്‍ ഇളക്കി വിടുക",
@@ -433,6 +473,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning പ്ലാറ്റ്‌ഫോം"
+	},
+	"salesforce_login": {
+		"message": "Salesforce ലോഗിൻ",
+		"description": "Salesforce ലോഗിൻ പേജ് (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce ക്രമീകരണങ്ങൾ",
+		"description": "ഏതെങ്കിലും Salesforce ക്രമീകരണ പേജ് (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Tab എന്ന നിലയില്‍ സംരക്ഷിക്കുക",

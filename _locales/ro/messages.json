@@ -347,6 +347,10 @@
 		"message": "Italic",
 		"description": "Opțiune de stil pentru text italic"
 	},
+	"lightning_navigation": {
+		"message": "Navigație Lightning",
+		"description": "tehnologia personalizată de navigare a Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Conectați-vă la Salesforce",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de conectare Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Deschideți Configurare",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
 	},
+	"opt_always_open": {
+		"message": "Deschide întotdeauna",
+		"description": "[setare]"
+	},
+	"opt_automatic_open": {
+		"message": "Deschidere automată",
+		"description": "[setare]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Alternativ)",
 		"description": "Opțiune de limbă pentru a reveni la engleză dacă localizarea nu este acceptată sau nu prezintă traducerea"
+	},
+	"opt_faster_loading": {
+		"message": "(încărcare mai rapidă în timpul utilizării).",
+		"description": "[explicație setare] pentru funcția Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Păstrează Tab-urile favorite în partea stângă a Home și Object Manager.",
 		"description": "Comutator pentru a fixa Tab-urile favorite în partea stângă a barei de navigare"
 	},
+	"opt_link_new_browser": {
+		"message": "Deschide întotdeauna linkurile într-o filă nouă a browserului.",
+		"description": "[setare] când utilizatorul face clic pe un Tab favorit, să se deschidă într-o filă nouă"
+	},
+	"opt_prevent_use": {
+		"message": "Preveniți utilizarea ",
+		"description": "[setare] similar cu „prefer să nu folosesc”"
+	},
+	"opt_same_tab_popup": {
+		"message": "pagina în aceeași filă la clic pe popup.",
+		"description": "[setare] pentru a preveni deschiderea unei file noi"
+	},
 	"opt_sf_lang_default": {
 		"message": "Limba Salesforce (Implicit)",
 		"description": "Opțiune pentru a utiliza setarea de limbă Salesforce. Această opțiune este implicită pentru extensie."
+	},
+	"opt_skip_link_detection": {
+		"message": "Omitere verificare automată a ID-ului Salesforce.",
+		"description": "[setare] când adăugați un Tab favorit, să nu se verifice dacă linkul conține un ID Salesforce"
+	},
+	"opt_when_clicking_popup": {
+		"message": "pagina la clic pe popup în timp ce sunteți pe o pagină Salesforce.",
+		"description": "[setare] la deschiderea popup-ului de pe un site Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "pagina la clic pe popup în timp ce nu sunteți pe o pagină Salesforce.",
+		"description": "[setare] la deschiderea popup-ului de pe un site oarecare"
 	},
 	"or_drop": {
 		"message": "Sau plasați",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[nuEsteConfigurareSalesforce] platforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Autentificare Salesforce",
+		"description": "pagina de autentificare Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Configurare Salesforce",
+		"description": "orice pagină Setup Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Salvați ca Tab",

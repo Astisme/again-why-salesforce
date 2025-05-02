@@ -527,6 +527,54 @@
 		"message": "ለአገልግሎት በድርጅት  Tabs ያሉትን አገግም ቀለም ያክሉ።",
 		"description": "የሚበልጥ በድርጅት  Tabs የቅጥር ቀለም ለመተካት ምድብ"
 	},
+	"set_tab_border_color_label": {
+		"message": "የአጠቃላይ Tab የድንጋጤ ቀለም አስገባ",
+		"description": "ለአጠቃላይ Tab የድንጋጤ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_color_active_label": {
+		"message": "ለተነሳ አጠቃላይ Tab የጽሑፍ ቀለም አስገባ",
+		"description": "ለተነሳ አጠቃላይ Tab የጽሑፍ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_color_label": {
+		"message": "ለድርጅት-የተለመዱ Tab የጽሑፍ ቀለም አስገባ",
+		"description": "ለድርጅት-የተለመዱ Tab የጽሑፍ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "ለተነሳ ድርጅት-የተለመዱ Tab አንድ ወይም ከዚያ በላይ የአምጣጥ ቅርጾች ይምረጡ",
+		"description": "ለተነሳ ድርጅት-የተለመዱ Tab የአምጣጥ ቅርጾች ለመምረጥ መለያ"
+	},
+	"set_tab_decoration_label": {
+		"message": "ለአጠቃላይ Tab አንድ ወይም ከዚያ በላይ የአምጣጥ ቅርጾች ይምረጡ",
+		"description": "ለአጠቃላይ Tab የአምጣጥ ቅርጾች ለመምረጥ መለያ"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "ለተነሳ አጠቃላይ Tab የሚሸውበት የጀርባ ቀለም አስገባ",
+		"description": "ለተነሳ አጠቃላይ Tab የሚሸውበት የጀርባ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_hover_background_label": {
+		"message": "ለድርጅት-የተለመዱ Tab የሚሸውበት የጀርባ ቀለም አስገባ",
+		"description": "ለድርጅት-የተለመዱ Tab የሚሸውበት የጀርባ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "ለተነሳ ድርጅት-የተለመዱ Tab የጥላ ቀለም አስገባ",
+		"description": "ለተነሳ ድርጅት-የተለመዱ Tab የጥላ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_shadow_label": {
+		"message": "ለአጠቃላይ Tab የጥላ ቀለም አስገባ",
+		"description": "ለአጠቃላይ Tab የጥላ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_top_active_label": {
+		"message": "ለተነሳ አጠቃላይ Tab በላይ ያለው የመስመር ቀለም አስገባ",
+		"description": "ለተነሳ አጠቃላይ Tab የላይ መስመር ቀለም ለመያዝ መለያ"
+	},
+	"set_toggle_preview": {
+		"message": "Click to toggle active state.",
+		"description": "የሁኔታ በተዘዋዋሪ ሁኔታ መቀየር ለመቆጣጠር ማሳያ ጥቆማ"
+	},
+	"settings": {
+		"message": "ቅንብሮች",
+		"description": "ለቅንብሮች ማውጫ መለያ"
+	},
 	"setup_page": {
 		"message": "የማዋቀሪያ ገጽ",
 		"description": "[SalesforceSetupአይደለም] የ Salesforce ቅንብሮችን ለመቀየር የሚያገለግል ገጽ"
@@ -598,6 +646,14 @@
 	"theme_light": {
 		"message": "ገጽታን ወደ ብርሃን ቀይር",
 		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በፀሐይ ላይ ያለ ርዕስ"
+	},
+	"underline": {
+		"message": "በመስመር ታቦት",
+		"description": "ለTab ጽሑፍ መስመር ታቦት የቅርጽ አማራጭ"
+	},
+	"underline_wavy": {
+		"message": "በመስመር ሞጎጮ",
+		"description": "በTab ጽሑፍ ላይ በመስመር ሞጎጮ መስመር የማቆሚያ የቅርጽ አማራጭ"
 	},
 	"upload": {
 		"message": "ስቀል",

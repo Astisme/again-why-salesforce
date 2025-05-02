@@ -346,6 +346,10 @@
 		"message": "ಇಟಾಲಿಕ್",
 		"description": "ಇಟಾಲಿಕ್ ಪಂಕ್ತಿಗಾಗಿ ಫಾಂಟ್ ಶೈಲಿ ಆಯ್ಕೆ"
 	},
+	"lightning_navigation": {
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್",
+		"description": "Salesforce ನ ಕಸ್ಟಮ್ ನ್ಯಾವಿಗೇಶನ್ ತಂತ್ರಜ್ಞಾನ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce ಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಲಾಗಿನ್ ಪುಟಕ್ಕೆ ದಾರಿ ತೋರುವ ಕರೆ"
@@ -370,17 +374,53 @@
 		"message": "ಸೆಟಪ್ ತೆರೆಯಿರಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆ"
 	},
+	"opt_always_open": {
+		"message": "ಎಲ್ಲಾವೇಳೆಯೂ ತೆರೆಯಿರಿ",
+		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	},
+	"opt_automatic_open": {
+		"message": "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ",
+		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	},
 	"opt_en_fallback": {
 		"message": "en (ಫಾಲ್ಬ್ಯಾಕ್)",
 		"description": "ಸ್ಥಳೀಯೀಕರಣ ಬೆಂಬಲರಹಿತ ಅಥವಾ ಅನುವಾದ ಇಲ್ಲದಿದ್ದರೆ fallback ಆಗಿ English ಬಳಸಲು ಭಾಷಾ ಆಯ್ಕೆ"
+	},
+	"opt_faster_loading": {
+		"message": "(ಬಳಕೆಯಲ್ಲಿ ವೇಗವಾಗಿ ಲೋಡ್ ಆಗುತ್ತದೆ).",
+		"description": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್ ವೈಶಿಷ್ಟ್ಯದ [ಸೆಟ್ಟಿಂಗ್] ವಿವರಣೆ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ಪ್ರಿಯ Tabsಗಳನ್ನು Home ಮತ್ತು Object Managerನ ಎಡಭಾಗದಲ್ಲಿರಿಸಿ.",
 		"description": "ನೆವಿಗೇಶನ್ ಬಾರ್‌ನ ಎಡಭಾಗಕ್ಕೆ ಪ್ರಿಯ Tabsವನ್ನು ಪಿನ್ ಮಾಡಲು ಟಾಗಲ್"
 	},
+	"opt_link_new_browser": {
+		"message": "ಲಿಂಕ್‌ಗಳನ್ನು ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಯಾವಾಗಲೂ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು ನೆಚ್ಚಿನ Tab ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ತೆರೆಯಲು"
+	},
+	"opt_prevent_use": {
+		"message": "ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ ",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] 'ಬಳಕೆ ಮಾಡಲು ಇಚ್ಛಿಸುವುದಿಲ್ಲ' ಎಂಬಂತೆ. ದಯವಿಟ್ಟು ಸಂದೇಶದ ಕೊನೇಯಲ್ಲಿ ಖಾಲಿ ಜಾಗ ಸೇರಿಸಿ"
+	},
+	"opt_same_tab_popup": {
+		"message": "ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಅದೇ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಪುಟ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್ ತೆರೆಯುವುದನ್ನು ತಡೆಯಲು"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Language (Default)",
 		"description": "Salesforce ಭಾಷಾ ಸೆಟ್ಟಿಂಗ್ ಬಳಕೆ ಮಾಡಲು ಆಯ್ಕೆ. ವಿಸ್ತರಣೆಯ ಡೀಫಾಲ್ಟ್."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ಐಡಿ ಸ್ವಯಂಚಾಲಿತ ಪರಿಶೀಲನೆಯನ್ನು ಬಿಟ್ಟಿಟ್ಟು ಹೋಗಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Tab ನೆಚ್ಚುಮುನ್ಸು ಸೇರಿಸುವಾಗ, ಉಳಿಸಬೇಕಾದ ಲಿಂಕ್‌ನಲ್ಲಿ ID ಇದ್ದರೆ ಪರಿಶೀಲಿಸುವುದನ್ನು ತಡೆಯಲು"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce ಪುಟದಲ್ಲಿದ್ದಾಗ ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಪುಟ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಇದ್ದಾಗ ಪಾಪ್ ಅಪ್ ತೆರೆಯುವಾಗ"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce ಪುಟದಲ್ಲಿಲ್ಲದಾಗ ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಪುಟ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ಪುಟದಲ್ಲಿಲ್ಲದಾಗ ಪಾಪ್ ಅಪ್ ತೆರೆಯುವಾಗ"
 	},
 	"or_drop": {
 		"message": "ಅಥವಾ ಎಸೆದು ಬಿಡಿ",
@@ -433,6 +473,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce Lightning ವೇದಿಕೆ"
+	},
+	"salesforce_login": {
+		"message": "Salesforce ಲಾಗಿನ್",
+		"description": "Salesforce ಲಾಗಿನ್ ಪುಟ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce ಸೆಟ್ಟಿಂಗ್",
+		"description": "ಯಾವುದೇ Salesforce ಸೆಟ್ಟಿಂಗ್ ಪುಟ (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Tab ಆಗಿ ಉಳಿಸಿ",

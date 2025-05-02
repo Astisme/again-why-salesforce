@@ -99,6 +99,18 @@
 		"message": "1️⃣ Este Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_update": {
+		"message": "✏️ Actualizar Tab",
+		"description": "[menú contextual]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Alternar Org",
+		"description": "[menú contextual]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Otras Actualizaciones",
+		"description": "[menú contextual]"
+	},
 	"delete": {
 		"message": "Eliminar",
 		"description": "[popup] Eliminar una fila"
@@ -342,6 +354,10 @@
 		"message": "Iniciar sesión en Salesforce",
 		"description": "[notSalesforceSetup] Llamado a la acción para redirigir al inicio de sesión de Salesforce"
 	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "marcador de posición para el modal Actualizar Tab"
+	},
 	"no_match": {
 		"message": "No se encontró ninguna acción coincidente",
 		"description": "[error] En Salesforce, la acción solicitada no coincide con ninguna acción disponible."
@@ -574,6 +590,10 @@
 		"message": "Cada elemento debe tener 'label' y 'url' como cadenas. Además, cada elemento puede tener 'org' como cadena.",
 		"description": "[error] Explica cómo debe construirse un Tab."
 	},
+	"tab_information": {
+		"message": "Información de Tab",
+		"description": "título para el modal de actualización de Tab"
+	},
 	"tab_label": {
 		"message": "Etiqueta del Tab",
 		"description": "[popup] Encabezado de columna para el nombre del Tab"
@@ -637,6 +657,10 @@
 	"upload": {
 		"message": "Subir",
 		"description": "[import] Permite al usuario buscar y seleccionar archivos"
+	},
+	"users": {
+		"message": "Usuarios",
+		"description": "El nombre de la página relacionada con ManageUsers/home"
 	},
 	"warn_deprecated_tab_title": {
 		"message": "¡Ha importado usando el 'tabTitle' obsoleto!\nSe ha iniciado la descarga del archivo actualizado.\nDe ahora en adelante, utilice el archivo recién descargado, por favor.\nEl uso de dicho archivo se descontinuará en una versión futura.",

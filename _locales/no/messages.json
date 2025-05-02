@@ -347,6 +347,10 @@
 		"message": "Kursiv",
 		"description": "Skriftalternativ for kursiv tekst"
 	},
+	"lightning_navigation": {
+		"message": "Lightning-navigasjon",
+		"description": "Salesforces tilpassede navigasjonsteknologi"
+	},
 	"login_to_salesforce": {
 		"message": "Logg inn på Salesforce",
 		"description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforces innloggingsside"
@@ -371,17 +375,53 @@
 		"message": "Åpne Setup",
 		"description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforce Setup-siden"
 	},
+	"opt_always_open": {
+		"message": "Alltid åpne",
+		"description": "[innstilling]"
+	},
+	"opt_automatic_open": {
+		"message": "Åpne automatisk",
+		"description": "[innstilling]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Reserve)",
 		"description": "Språkalternativ for å falle tilbake til engelsk hvis lokalet ikke støttes eller ikke viser oversettelsen"
+	},
+	"opt_faster_loading": {
+		"message": "(raskere lasting ved bruk).",
+		"description": "Forklaring av Lightning-navigasjonsfunksjonens [innstilling]"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hold favoritt-Tabs til venstre for Hjem og Objektbehandler.",
 		"description": "Bryter for å feste favoritt-Tabs til venstre side av navigasjonslinjen"
 	},
+	"opt_link_new_browser": {
+		"message": "Åpne alltid lenker i en ny nettleserfane.",
+		"description": "[innstilling] når brukeren klikker på en favoritt-Tab, åpne i en ny nettleserfane"
+	},
+	"opt_prevent_use": {
+		"message": "Forhindre bruk ",
+		"description": "[innstilling] akkurat som 'foretrekker å ikke bruke'. vær sikker på å inkludere et mellomrom på slutten av meldingen"
+	},
+	"opt_same_tab_popup": {
+		"message": "side i samme fane når du klikker på popup.",
+		"description": "[innstilling] forhindre åpning av en ny nettleserfane"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce-språk (Standard)",
 		"description": "Alternativ for å bruke Salesforce sin språkinnstilling. Dette alternativet er standard for utvidelsen."
+	},
+	"opt_skip_link_detection": {
+		"message": "Hopp over automatisk kontroll av Salesforce-ID.",
+		"description": "[innstilling] når brukeren lagrer en favoritt-Tab, forhindre kontroll om det er en ID i lenken som lagres"
+	},
+	"opt_when_clicking_popup": {
+		"message": "side når du klikker på popup mens du er på en Salesforce-side.",
+		"description": "[innstilling] når brukeren åpner popup mens han er på et Salesforce-nettsted"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "side når du klikker på popup mens du ikke er på en Salesforce-side.",
+		"description": "[innstilling] når brukeren åpner popup mens han er på et tilfeldig nettsted"
 	},
 	"or_drop": {
 		"message": "Eller dra og slipp",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning-plattformen"
+	},
+	"salesforce_login": {
+		"message": "Salesforce-innlogging",
+		"description": "Salesforce-innloggingssiden (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce-innstillinger",
+		"description": "enhver Salesforce-innstillingsside (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Lagre som Tab",

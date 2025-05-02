@@ -347,6 +347,10 @@
 		"message": "Kursiv",
 		"description": "Skrifttypemulighed for kursiv tekst"
 	},
+	"lightning_navigation": {
+		"message": "Lightning-navigation",
+		"description": "Salesforce’s tilpassede navigations-teknologi"
+	},
 	"login_to_salesforce": {
 		"message": "Log ind på Salesforce",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforces login-side"
@@ -371,17 +375,53 @@
 		"message": "Åbn Setup",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
 	},
+	"opt_always_open": {
+		"message": "Åbn altid",
+		"description": "[indstilling]"
+	},
+	"opt_automatic_open": {
+		"message": "Åbn automatisk",
+		"description": "[indstilling]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Sprogmulighed for at falde tilbage til engelsk, hvis lokalet ikke understøttes eller ikke viser oversættelsen"
+	},
+	"opt_faster_loading": {
+		"message": "(hurtigere indlæsning ved brug).",
+		"description": "[indstillingsforklaring] forklaring af Lightning-navigation-funktionen"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behold favorit-Tabs til venstre for Hjem og Objektstyring.",
 		"description": "Mulighed for at fastgøre favorit-Tabs til venstre side af navigationslinjen"
 	},
+	"opt_link_new_browser": {
+		"message": "Åbn altid links i en ny browser-fane.",
+		"description": "[indstilling] når du klikker på en favorit-Tab, åbnes den i en ny browser-fane"
+	},
+	"opt_prevent_use": {
+		"message": "Forhindr brug ",
+		"description": "[indstilling] ligesom 'foretrækker ikke at bruge'. sørg for et mellemrum sidst"
+	},
+	"opt_same_tab_popup": {
+		"message": "side i den samme fane ved klik på pop-up.",
+		"description": "[indstilling] forhindr åbning af en ny browser-fane"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce-sprog (Standard)",
 		"description": "Mulighed for at bruge Salesforces sprogindstilling. Dette er standardindstillingen for udvidelsen."
+	},
+	"opt_skip_link_detection": {
+		"message": "Spring automatisk kontrol af Salesforce ID over.",
+		"description": "[indstilling] når der gemmes en favorit-Tab, forhindr kontrol af ID i linket"
+	},
+	"opt_when_clicking_popup": {
+		"message": "side ved klik på pop-up, mens du er på en Salesforce-side.",
+		"description": "[indstilling] når pop-up åbnes på et Salesforce-websted"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "side ved klik på pop-up, mens du ikke er på en Salesforce-side.",
+		"description": "[indstilling] når pop-up åbnes på et tilfældigt websted"
 	},
 	"or_drop": {
 		"message": "Eller træk og slip",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning-platformen"
+	},
+	"salesforce_login": {
+		"message": "Salesforce-login",
+		"description": "Salesforce-login-siden (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce-opsætning",
+		"description": "enhver Salesforce-opsætningsside (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Gem som Tab",

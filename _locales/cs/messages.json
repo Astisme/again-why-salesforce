@@ -347,6 +347,10 @@
 		"message": "Kurzíva",
 		"description": "Možnost stylu písma pro text kurzívou"
 	},
+	"lightning_navigation": {
+		"message": "Lightning Navigace",
+		"description": "Vlastní navigační technologie Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Přihlásit se do Salesforce",
 		"description": "[notSalesforceSetup] výzva tlačítka pro přesměrování uživatele na přihlašovací stránku Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Otevřít Setup",
 		"description": "[notSalesforceSetup] výzva tlačítka pro přesměrování uživatele na stránku Salesforce Setup"
 	},
+	"opt_always_open": {
+		"message": "Vždy otevřít",
+		"description": "[nastavení]"
+	},
+	"opt_automatic_open": {
+		"message": "Automaticky otevřít",
+		"description": "[nastavení]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Náhradní)",
 		"description": "Možnost jazyka pro návrat k angličtině, pokud místní nastavení není podporováno nebo nezobrazuje překlad"
+	},
+	"opt_faster_loading": {
+		"message": "(rychlejší načítání při použití).",
+		"description": "[vysvětlení nastavení] vysvětlení funkce Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Ponechat oblíbené Tabs nalevo od Domovské stránky a Správce objektů.",
 		"description": "Přepínač pro připnutí oblíbených Tabs na levou stranu navigační lišty"
 	},
+	"opt_link_new_browser": {
+		"message": "Vždy otevírat odkazy v novém panelu prohlížeče.",
+		"description": "[nastavení] při kliknutí na oblíbenou Tab ji otevřít v novém panelu prohlížeče"
+	},
+	"opt_prevent_use": {
+		"message": "Zabránit použití ",
+		"description": "[nastavení] stejně jako 'preferuji nepoužívat'. ujistěte se, že je na konci mezera"
+	},
+	"opt_same_tab_popup": {
+		"message": "stránku ve stejném panelu při kliknutí na vyskakovací okno.",
+		"description": "[nastavení] zabránit otevření nového panelu prohlížeče"
+	},
 	"opt_sf_lang_default": {
 		"message": "Jazyk Salesforce (Výchozí)",
 		"description": "Možnost použít nastavení jazyka Salesforce. Tato možnost je výchozí pro rozšíření."
+	},
+	"opt_skip_link_detection": {
+		"message": "Přeskočit automatickou kontrolu ID Salesforce.",
+		"description": "[nastavení] při ukládání oblíbené Tab zabránit kontrole, zda je v odkazu ID"
+	},
+	"opt_when_clicking_popup": {
+		"message": "stránku při kliknutí na vyskakovací okno, když jste na stránce Salesforce.",
+		"description": "[nastavení] při otevření vyskakovacího okna na webu Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "stránku při kliknutí na vyskakovací okno, když nejste na stránce Salesforce.",
+		"description": "[nastavení] při otevření vyskakovacího okna na libovolném webu"
 	},
 	"or_drop": {
 		"message": "Nebo přetáhněte",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] platforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Přihlášení Salesforce",
+		"description": "stránka přihlášení Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Nastavení Salesforce",
+		"description": "jakákoli stránka nastavení Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Uložit jako Tab",

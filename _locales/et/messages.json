@@ -347,6 +347,10 @@
 		"message": "Kaldkiri",
 		"description": "Fondi stiili valik kaldkirja jaoks"
 	},
+	"lightning_navigation": {
+		"message": "Lightningi navigeerimine",
+		"description": "Salesforce’i kohandatud navigeerimistehnoloogia"
+	},
 	"login_to_salesforce": {
 		"message": "Logi sisse Salesforce'i",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i sisselogimislehele"
@@ -371,17 +375,53 @@
 		"message": "Ava Seadistus",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
 	},
+	"opt_always_open": {
+		"message": "Alati ava",
+		"description": "[seade]"
+	},
+	"opt_automatic_open": {
+		"message": "Automaatne avamine",
+		"description": "[seade]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Varuvariant)",
 		"description": "Keele valik inglise keelele tagasi minekuks, kui lokaat ei ole toetatud või puudub tõlge"
+	},
+	"opt_faster_loading": {
+		"message": "(kiirem laadimine kasutamise ajal).",
+		"description": "[seade] selgitus Lightningi navigeerimise funktsioonile"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hoia lemmikud Tabs Home ja Object Manager'i vasakul küljel.",
 		"description": "Lüliti lemmik Tabs'ide kinnitamiseks navigeerimisriba vasakule küljele"
 	},
+	"opt_link_new_browser": {
+		"message": "Ava lingid alati uues brauseri vahekaardis.",
+		"description": "[seade] kui klõpsate lemmikul Tabil, avage see uues brauseri vahekaardis"
+	},
+	"opt_prevent_use": {
+		"message": "Kasutamise vältimine ",
+		"description": "[seade] nagu 'eelistan mitte kasutada'. veenduge, et lõpus oleks tühik"
+	},
+	"opt_same_tab_popup": {
+		"message": "leht samas vahekaardis hüpikaknale klõpsates.",
+		"description": "[seade] ära ava uut brauseri vahekaarti"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce'i keel (Vaikimisi)",
 		"description": "Valik Salesforce'i keeleseade kasutamiseks. See valik on laienduse vaikimisi seade."
+	},
+	"opt_skip_link_detection": {
+		"message": "Jäta Salesforce’i ID automaatkontroll vahele.",
+		"description": "[seade] salvestades lemmiku Tab, ära kontrolli lingi ID-d"
+	},
+	"opt_when_clicking_popup": {
+		"message": "leht hüpikaknale klõpsates Salesforce’i lehel.",
+		"description": "[seade] avades hüpikakna Salesforce’i saidil"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "leht hüpikaknale klõpsates mitte Salesforce’i lehel.",
+		"description": "[seade] avades hüpikakna juhuslikul saidil"
 	},
 	"or_drop": {
 		"message": "Või lohista siia",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[poleSalesforceSeadistus] Salesforce Lightning platvorm"
+	},
+	"salesforce_login": {
+		"message": "Salesforce’i sisselogimine",
+		"description": "Salesforce’i sisselogimisleht (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce’i seadistamine",
+		"description": "kõik Salesforce’i seadistuslehed (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Salvesta kui Tab",

@@ -347,6 +347,10 @@
 		"message": "ઈટાલિક",
 		"description": "આડું લખાણ માટે ફોન્ટ શૈલી વિકલ્પ"
 	},
+	"lightning_navigation": {
+		"message": "Lightning નાવિગેશન",
+		"description": "Salesforce ની કસ્ટમ નાવિગેશન તકનીક"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce લૉગિન પૃષ્ઠ પર રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
@@ -371,17 +375,53 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce Setup પૃષ્ઠ તરફ રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
 	},
+	"opt_always_open": {
+		"message": "હંમેશા ખોલો",
+		"description": "[સેટિંગ]"
+	},
+	"opt_automatic_open": {
+		"message": "સ્વચાલિત ખોલવું",
+		"description": "[સેટિંગ]"
+	},
 	"opt_en_fallback": {
 		"message": "en (ફોલબેક)",
 		"description": "જો લોકેલ સમર્થિત ન હોય અથવા અનુવાદ હાજર ન હોય તો fallback તરીકે અંગ્રેજીમાં સ્વિચ કરવાનો ભાષા વિકલ્પ"
+	},
+	"opt_faster_loading": {
+		"message": "(ઉપયોગ દરમિયાન ઝડપથી લોડ થાય છે).",
+		"description": "[સેટિંગ] Lightning નાવિગેશન ફંક્શનનો વર્ણન"
 	},
 	"opt_keep_tabs_left": {
 		"message": "પસંદીદા Tabsને Home અને Object Managerની ડાબી બાજુ રાખો.",
 		"description": "નાવિગેશન બારમાં પસંદગીના Tabsને ડાબી તરફ પિન કરવાની ટૉગલ"
 	},
+	"opt_link_new_browser": {
+		"message": "લિંકોને હંમેશા નવા બ્રાઉઝર ટૅબમાં ખોલો.",
+		"description": "[સેટિંગ] જો તમે કોઈ ફેવરિટ Tab પર ક્લિક કરો તો તેને નવા બ્રાઉઝર ટૅબમાં ખોલો"
+	},
+	"opt_prevent_use": {
+		"message": "ઉપયોગ કોઈ સાચો ",
+		"description": "[સેટિંગ] 'ઉપયોગ કરવાનું પસંદ નથી'. ખાતરી કરો કે અંતે ખાલી જગ્યા છે"
+	},
+	"opt_same_tab_popup": {
+		"message": "પોપઅપ પર ક્લિક કરતા પાના એકસંગ Tab માં.",
+		"description": "[સેટિંગ] નવા બ્રાઉઝર Tab ખોલવાનું અટકાવો"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Language (Default)",
 		"description": "Salesforce ની ભાષા સેટિંગ ઉપયોગ કરવા માટે વિકલ્પ. આ એક્સટેંશન માટે ડિફોલ્ટ છે."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ID સ્વચાલિત તપાસ બાકી મૂકો.",
+		"description": "[સેટિંગ] ફેવરિટ Tab સાચવતા ID ચકાસવું રોકો"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce પૃષ્ઠ પર પોપઅપ ક્લિક કરતી વખતે પાનું.",
+		"description": "[સેટિંગ] Salesforce સાઇટ પર પોપઅપ ખોલતી વખતે"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce વિના પૃષ્ઠ પર પોપઅપ ક્લિક કરતી વખતે પાનું.",
+		"description": "[સેટિંગ] કોઈ પણ સાઇટ પર પોપઅપ ખોલતી વખતે"
 	},
 	"or_drop": {
 		"message": "Or drop",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning પ્લેટફોર્મ"
+	},
+	"salesforce_login": {
+		"message": "Salesforce લોગિન",
+		"description": "Salesforce લોગિન પૃષ્ઠ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce સેટઅપ",
+		"description": "કોઈ પણ Salesforce સેટઅપ પૃષ્ઠો (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Save as Tab",

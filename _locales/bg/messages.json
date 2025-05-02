@@ -347,6 +347,10 @@
 		"message": "Курсив",
 		"description": "Опция за стил на шрифта за курсивен текст"
 	},
+	"lightning_navigation": {
+		"message": "Lightning навигация",
+		"description": "Персонализирана навигационна технология на Salesforce"
+	},
 	"login_to_salesforce": {
 		"message": "Влез в Salesforce",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към страницата за вход на Salesforce"
@@ -371,17 +375,53 @@
 		"message": "Отвори Setup",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към Salesforce Setup страницата"
 	},
+	"opt_always_open": {
+		"message": "Винаги отваряй",
+		"description": "[настройка]"
+	},
+	"opt_automatic_open": {
+		"message": "Автоматично отваряне",
+		"description": "[настройка]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Резервен)",
 		"description": "Езикова опция за връщане към английски, ако локалът не се поддържа или не представя превода"
+	},
+	"opt_faster_loading": {
+		"message": "(по-бързо зареждане при използване).",
+		"description": "[обяснение на настройка] обяснение на функцията Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Запазване на любими Tabs вляво от Начало и Мениджър на обекти.",
 		"description": "Превключвател за закачане на любими Tabs от лявата страна на навигационната лента"
 	},
+	"opt_link_new_browser": {
+		"message": "Винаги отваряй връзки в нов раздел на браузъра.",
+		"description": "[настройка] при щракване върху любима Tab, отваряй я в нов раздел на браузъра"
+	},
+	"opt_prevent_use": {
+		"message": "Предотврати използване ",
+		"description": "[настройка] същото като 'предпочитам да не използвам'. уверете се, че има интервал в края"
+	},
+	"opt_same_tab_popup": {
+		"message": "страница в същия раздел при щракване върху изскачащия прозорец.",
+		"description": "[настройка] предотврати отварянето на нов раздел"
+	},
 	"opt_sf_lang_default": {
 		"message": "Език на Salesforce (По подразбиране)",
 		"description": "Опция за използване на езиковата настройка на Salesforce. Тази опция е по подразбиране за разширението."
+	},
+	"opt_skip_link_detection": {
+		"message": "Пропусни автоматична проверка на Salesforce ID.",
+		"description": "[настройка] при запазване на любима Tab, предотврати проверка за наличието на ID в връзката"
+	},
+	"opt_when_clicking_popup": {
+		"message": "страница при щракване върху изскачащия прозорец докато сте на страница на Salesforce.",
+		"description": "[настройка] при отваряне на изскачащия прозорец докато сте на сайт на Salesforce"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "страница при щракване върху изскачащия прозорец докато не сте на страница на Salesforce.",
+		"description": "[настройка] при отваряне на изскачащия прозорец докато сте на произволен сайт"
 	},
 	"or_drop": {
 		"message": "Или пусни",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] платформата Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Вход в Salesforce",
+		"description": "страница за вход в Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Настройка на Salesforce",
+		"description": "всяка страница за настройка на Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Запази като Tab",

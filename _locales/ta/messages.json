@@ -347,6 +347,10 @@
 		"message": "சாய்வு",
 		"description": "சாய்வு உரைக்கான எழுத்துரு பாணி விருப்பம்"
 	},
+	"lightning_navigation": {
+		"message": "லைட்னிங் நெவிகேஷன்",
+		"description": "Salesforce-இன் தனிப்பயன் வழிசெலுத்தல் தொழில்நுட்பம்"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce இல் உள்நுழைக",
 		"description": "[notSalesforceSetup] பயனரை Salesforce உள்நுழைவு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
@@ -371,17 +375,53 @@
 		"message": "அமைப்பைத் திற",
 		"description": "[notSalesforceSetup] பயனரை Salesforce அமைப்பு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
 	},
+	"opt_always_open": {
+		"message": "எப்பொழுதும் திறக்கவும்",
+		"description": "[அமைப்பு]"
+	},
+	"opt_automatic_open": {
+		"message": "தானாக திறக்கவும்",
+		"description": "[அமைப்பு]"
+	},
 	"opt_en_fallback": {
 		"message": "en (இருப்பு)",
 		"description": "உள்ளூர் ஆதரிக்கப்படவில்லை அல்லது மொழிபெயர்ப்பு இல்லை எனில் ஆங்கிலத்திற்கு திரும்புவதற்கான மொழி விருப்பம்"
+	},
+	"opt_faster_loading": {
+		"message": "(பயன்பாட்டின்போது அதிவேகமாக ஏற்றப்படுகிறது).",
+		"description": "லைட்னிங் நெவிகேஷன் அம்சத்தின் [அமைப்பு] விளக்கம்"
 	},
 	"opt_keep_tabs_left": {
 		"message": "பிடித்த Tab-களை Home மற்றும் Object Manager-இன் இடது பக்கத்தில் வைக்கவும்.",
 		"description": "பிடித்த Tab-களை வழிசெலுத்தல் பட்டியின் இடது பக்கத்தில் பொருத்துவதற்கான மாற்றி"
 	},
+	"opt_link_new_browser": {
+		"message": "இணைகளை எப்பொழுதும் புதிய உலாவிக் குத்தகையில் திறக்கவும்.",
+		"description": "[அமைப்பு] பயனர் பொலிவு Indigo Tab-ஐ சொடுக்கும்போது புதிய உலாவிக் குத்தகையில் திறக்க"
+	},
+	"opt_prevent_use": {
+		"message": "பயன்பாட்டை தடுக ",
+		"description": "[அமைப்பு] 'பயன்படுதுவதற்கு விருப்பமில்லை' போன்றதாக. செய்தியின் இறுதியில் இடைவெளி சேர்க்க நினைவில் வையுங்கள்"
+	},
+	"opt_same_tab_popup": {
+		"message": "Popup-ஐ சொடுக்கும்போது அதே குத்தகையில் பக்கம்.",
+		"description": "[அமைப்பு] புதிய உலாவிக் குத்தகையைத் திறக்காமல் தடுக்கும்"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce மொழி (இயல்புநிலை)",
 		"description": "Salesforce மொழி அமைப்பைப் பயன்படுத்துவதற்கான விருப்பம். இந்த விருப்பம் நீட்டிப்பிற்கான இயல்புநிலை ஆகும்."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ஐடி தானாகச் சோதிப்பதை தவிர்க்கவும்.",
+		"description": "[அமைப்பு] பயனர் Tabs-ஐ சேமிக்கும்போது, இணைப்பில் ஐடி உள்ளதா என்பதைத் தானாகச் சோதிக்காது"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce பக்கத்தில் இருந்தபோது Popup-ஐ சொடுக்கும்போது பக்கம்.",
+		"description": "[அமைப்பு] பயனர் Salesforce இணையதளத்தில் இருந்தபோது Popup-ஐ திறக்கும் போது"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce பக்கத்தில் இல்லாதபோது Popup-ஐ சொடுக்கும்போது பக்கம்.",
+		"description": "[அமைப்பு] பயனர் Salesforce இணையதளத்தில் இல்லாதபோது Popup-ஐ திறக்கும் போது"
 	},
 	"or_drop": {
 		"message": "அல்லது விடு",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning தளம்"
+	},
+	"salesforce_login": {
+		"message": "Salesforce உள்நுழைவு",
+		"description": "Salesforce உள்நுழைவு பக்கம் (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce அமைப்புகள்",
+		"description": "எந்த Salesforce அமைப்புகள் பக்கம் (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Tab ஆக சேமி",

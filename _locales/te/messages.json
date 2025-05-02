@@ -346,6 +346,10 @@
 		"message": "ఇటాలిక్",
 		"description": "ఇటాలిక్ టెక్స్ట్ కోసం ఫాంట్ స్టైల్ ఎంపిక"
 	},
+	"lightning_navigation": {
+		"message": "లైట్నింగ్ నావిగేషన్",
+		"description": "Salesforce యొక్క అనుకూల నావిగేషన్ సాంకేతికత"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforceలో లాగిన్ అవ్వండి",
 		"description": "[notSalesforceSetup] Salesforceలో లాగిన్ పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
@@ -370,17 +374,53 @@
 		"message": "Setupని తెరవండి",
 		"description": "[notSalesforceSetup] Salesforce Setup పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
 	},
+	"opt_always_open": {
+		"message": "ఎల్లప్పుడూ తెరవండి",
+		"description": "[సెట్టింగ్]"
+	},
+	"opt_automatic_open": {
+		"message": "ఆటోమేటిక్ తెరవండి",
+		"description": "[సెట్టింగ్]"
+	},
 	"opt_en_fallback": {
 		"message": "en (ఫాల్‌బ్యాక్)",
 		"description": "స్థానిక భాష మద్దతు లేనప్పుడు లేదా అనువాదం లేనప్పుడు ఆంగ్లానికి తిరిగి వెళ్లడానికి భాష ఎంపిక"
+	},
+	"opt_faster_loading": {
+		"message": "(వాడకంలో వేగంగా లోడ్ అవుతుంది).",
+		"description": "లైట్నింగ్ నావిగేషన్ ఫీచర్ [సెట్టింగ్] వివరణ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Home మరియు Object Manager యొక్క ఎడమవైపున ఇష్టమైన Tab లను ఉంచండి.",
 		"description": "నావిగేషన్ బార్ యొక్క ఎడమవైపున ఇష్టమైన Tab లను పిన్ చేయడానికి టాగుల్"
 	},
+	"opt_link_new_browser": {
+		"message": "లింకులను ఎల్లప్పుడూ కొత్త బ్రౌజర్ ట్యాబ్‌లో తెరవండి.",
+		"description": "[సెట్టింగ్] యూజర్ ఫేవరెట్ Tabపై క్లిక్ చేసినప్పుడు కొత్త బ్రౌజర్ ట్యాబ్‌లో తెరవడానికి"
+	},
+	"opt_prevent_use": {
+		"message": "వాడకాన్ని నిరోధించండి ",
+		"description": "[సెట్టింగ్] 'వాడకాన్ని ఇష్టపడను' వంటి. సందేశం చివర స్పేస్ ఉంచడం నిర్ధారించండి"
+	},
+	"opt_same_tab_popup": {
+		"message": "పాప్-అప్‌పై క్లిక్ చేసినప్పుడు అదే ట్యాబ్‌లో పేజీ.",
+		"description": "[సెట్టింగ్] కొత్త బ్రౌజర్ ట్యాబ్ తెరవకుండా నిరోధించడానికి"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce భాష (డిఫాల్ట్)",
 		"description": "Salesforce యొక్క భాష సెట్టింగ్‌ని ఉపయోగించడానికి ఎంపిక. ఈ ఎంపిక పొడిగింపు కోసం డిఫాల్ట్."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ID స్వయంచాలక తనిఖీని దాటవేయండి.",
+		"description": "[సెట్టింగ్] యూజర్ ఫేవరిట్ Tabs ను జోడించినప్పుడు, రిజిస్టర్ చేస్తున్న లింక్‌లో ID ఉందా అని తనిఖీ చేయకుండా"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce పేజీలో ఉన్నప్పుడు పాప్-అప్‌పై క్లిక్ చేసినప్పుడు పేజీ.",
+		"description": "[సెట్టింగ్] యూజర్ Salesforce సైట్‌లో ఉన్నప్పుడు పాప్-అప్ తెరిచేటప్పుడు"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce పేజీలో లేనప్పుడు పాప్-అప్‌పై క్లిక్ చేసినప్పుడు పేజీ.",
+		"description": "[సెట్టింగ్] యూజర్ Salesforce సైట్‌లో లేనప్పుడు పాప్-అప్ తెరిచేటప్పుడు"
 	},
 	"or_drop": {
 		"message": "లేదా డ్రాప్ చేయి",
@@ -433,6 +473,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning ప్లాట్‌ఫారం"
+	},
+	"salesforce_login": {
+		"message": "Salesforce లాగిన్",
+		"description": "Salesforce లాగిన్ పేజీ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce సెటప్",
+		"description": "ఏదైనా Salesforce సెటప్ పేజీ (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Tab గా సేవ్ చేయండి",

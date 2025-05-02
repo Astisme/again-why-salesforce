@@ -347,6 +347,10 @@
 		"message": "Slīpraksts",
 		"description": "Fonta stila opcija slīpraksta tekstam"
 	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce pielāgotās navigācijas tehnoloģija"
+	},
 	"login_to_salesforce": {
 		"message": "Pieteikties Salesforce",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce pieteikšanās lapu"
@@ -371,17 +375,53 @@
 		"message": "Atvērt iestatīšanu",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
 	},
+	"opt_always_open": {
+		"message": "Vienmēr atvērt",
+		"description": "[iestatījums]"
+	},
+	"opt_automatic_open": {
+		"message": "Automātiski atvērt",
+		"description": "[iestatījums]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Rezerves)",
 		"description": "Valodas opcija, lai izmantotu angļu valodu, ja lokalizācija netiek atbalstīta vai nav pieejams tulkojums"
+	},
+	"opt_faster_loading": {
+		"message": "(ātrāka ielāde lietošanas laikā).",
+		"description": "Lightning Navigation funkcijas [iestatījuma] skaidrojums"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Saglabāt iecienītākās Tabs kreisajā pusē no Home un Object Manager.",
 		"description": "Slēdzis, lai piespraustu iecienītākās Tabs navigācijas joslas kreisajā pusē"
 	},
+	"opt_link_new_browser": {
+		"message": "Vienmēr atvērt saites jaunā pārlūka cilnē.",
+		"description": "[iestatījums] kad lietotājs noklikšķina uz iecienītākā Tab, atvērt jaunā pārlūka cilnē"
+	},
+	"opt_prevent_use": {
+		"message": "Novērst izmantošanu ",
+		"description": "[iestatījums] līdzīgi 'nevēlos izmantot'. pārliecinieties, ka ziņojuma beigās ir atstarpe"
+	},
+	"opt_same_tab_popup": {
+		"message": "lapa tajā pašā cilnē, noklikšķinot uz uznirstošā loga.",
+		"description": "[iestatījums] nepieļaut jaunas pārlūka cilnes atvēršanu"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce valoda (Noklusējuma)",
 		"description": "Opcija izmantot Salesforce valodas iestatījumu. Šī opcija ir paplašinājuma noklusējuma iestatījums."
+	},
+	"opt_skip_link_detection": {
+		"message": "Izlaist automātisko Salesforce ID pārbaudi.",
+		"description": "[iestatījums] kad lietotājs pievieno iecienītāko Tab, nepārbaudīt, vai saitē ir ID"
+	},
+	"opt_when_clicking_popup": {
+		"message": "lapa, noklikšķinot uz uznirstošā loga, atrodoties Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties Salesforce vietnē"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "lapa, noklikšķinot uz uznirstošā loga, neatrodoties Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, neatrodoties Salesforce vietnē"
 	},
 	"or_drop": {
 		"message": "Vai nomest",
@@ -434,6 +474,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[navSalesforceIestatīšana] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Salesforce pieteikšanās",
+		"description": "Salesforce pieteikšanās lapa (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce iestatījumi",
+		"description": "jebkura Salesforce iestatījumu lapa (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Saglabāt kā Tab",

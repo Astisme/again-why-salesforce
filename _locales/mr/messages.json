@@ -346,6 +346,10 @@
 		"message": "तिरडे",
 		"description": "तिरड्या मजकुरासाठी फॉन्ट शैली पर्याय"
 	},
+	"lightning_navigation": {
+		"message": "Lightning नेव्हिगेशन",
+		"description": "Salesforce ची सानुकूल नेव्हिगेशन तंत्रज्ञान"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce मध्ये लॉगिन करा",
 		"description": "[notSalesforceSetup] Salesforce लॉगिन पृष्ठावर पुनर्निर्देशित करण्यासाठी कॉल टू अॅक्शन"
@@ -370,17 +374,53 @@
 		"message": "Setup उघडा",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठाकडे जाण्यासाठी कॉल टू अॅक्शन"
 	},
+	"opt_always_open": {
+		"message": "हमीने उघडा",
+		"description": "[सेटिंग]"
+	},
+	"opt_automatic_open": {
+		"message": "स्वयंचलितपणे उघडा",
+		"description": "[सेटिंग]"
+	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "लोकॅल समर्थित नसेल किंवा अनुवाद उपलब्ध नसेल तर fallback म्हणून इंग्रजी वापरण्याचा भाषा पर्याय"
+	},
+	"opt_faster_loading": {
+		"message": "(वापरात वेगवान लोडिंग).",
+		"description": "Lightning नेव्हिगेशन वैशिष्ट्याच्या [सेटिंग] चे स्पष्टीकरण"
 	},
 	"opt_keep_tabs_left": {
 		"message": "पसंदीदा Tabs Home आणि Object Managerच्या डाव्या बाजूला ठेवा.",
 		"description": "नेव्हिगेशन बारच्या डाव्या बाजूस पसंंिददा Tabs पिन करण्यासाठी toggle"
 	},
+	"opt_link_new_browser": {
+		"message": "प्रत्येकदा दुवे नवीन ब्राउझर टॅबमध्ये उघडा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता आवडता Tab क्लिक करतो, तेव्हा नवीन ब्राउझर टॅबमध्ये उघडा"
+	},
+	"opt_prevent_use": {
+		"message": "वापर प्रतिबंधित करा ",
+		"description": "[सेटिंग] 'वापरू इच्छित नाही' प्रमाणे. संदेशाच्या शेवटी जागा असावी याची खात्री करा"
+	},
+	"opt_same_tab_popup": {
+		"message": "पॉपअपवर क्लिक केल्यास त्याच टॅबमध्ये पृष्ठ.",
+		"description": "[सेटिंग] नवीन ब्राउझर टॅब उघडण्यापासून प्रतिबंधित करा"
+	},
 	"opt_sf_lang_default": {
 		"message": "Salesforce Language (Default)",
 		"description": "Salesforce ची भाषा सेटिंग वापरण्याचा पर्याय. हे Extension चे default आहे."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce आयडी स्वयंचलित तपासणी वगळा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता आवडता Tab जतन करतो, तेव्हा URL मध्ये आयडी असल्यास तपासणी कमी"
+	},
+	"opt_when_clicking_popup": {
+		"message": "Salesforce पृष्ठावर असताना पॉपअपवर क्लिक केल्यास पृष्ठ.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर आहे, तेव्हा पॉपअप उघडतो"
+	},
+	"opt_when_clicking_popup_not": {
+		"message": "Salesforce पृष्ठावर नसताना पॉपअपवर क्लिक केल्यास पृष्ठ.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर नाही, तेव्हा पॉपअप उघडतो"
 	},
 	"or_drop": {
 		"message": "किंवा ड्रॉप करा",
@@ -433,6 +473,14 @@
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning प्लॅटफॉर्म"
+	},
+	"salesforce_login": {
+		"message": "Salesforce लॉगिन",
+		"description": "Salesforce लॉगिन पृष्ठ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce सेटअप",
+		"description": "कोणताही Salesforce सेटअप पृष्ठ (https://*.my.salesforce-setup.com/*)"
 	},
 	"save_tab": {
 		"message": "Tab म्हणून जतन करा",
