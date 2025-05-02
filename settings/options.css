@@ -1,3 +1,7 @@
+.tabContainer {
+    overflow-x: auto;
+}
+
 ul.settings {
 	list-style-type: none;
     padding-bottom: 1rem;
