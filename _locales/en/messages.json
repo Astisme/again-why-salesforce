@@ -338,8 +338,8 @@
 		"message": "Please insert a valid Org!",
 		"description": "[error-open-other-org-modal] message for when the user inserts a wrong url in the modal"
 	},
-	"invalid_url": {
-		"message": "Invalid URL",
+	"nss_invalid_url": {
+		"message": "Invalid URL detected.",
 		"description": "[notSalesforceSetup] a URL which is not valid"
 	},
 	"italic": {
@@ -362,33 +362,33 @@
 		"message": "Did not match any action",
 		"description": "[error] in salesforce when the switch cannot match the requested action"
 	},
-	"nss_detected": {
-		"message": " detected.",
-		"description": "[notSalesforceSetup] something that is found. Please be sure to include a space at the beginning of the message."
-	},
-	"nss_prefix": {
-		"message": "This is not a ",
-		"description": "[notSalesforceSetup] this is the prefix shown when the user is not on a Salesforce page. Please be sure to include a space at the end of the message"
+	"nss_not_setup_page": {
+		"message": "This is not a Salesforce Lightning Setup page.",
+		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
 	},
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce Setup page"
 	},
-	"opt_always_open": {
-		"message": "Always open",
+	"opt_open_login_same_tab": {
+		"message": "Always open Salesforce Login page in the same tab when clicking on the popup.",
 		"description": "[setting]"
 	},
-	"opt_automatic_open": {
-		"message": "Automatically open",
+	"opt_open_setup_same_tab": {
+		"message": "Always open Salesforce Setup page in the same tab when clicking on the popup.",
 		"description": "[setting]"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automatically open Salesforce Login page when clicking on the popup while not on a Salesforce page.",
+		"description": "[setting] when the user opens the popup while on a random website"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automatically open Salesforce Setup page when clicking on the popup while on a Salesforce page.",
+		"description": "[setting] when the user opens the popup while on a Salesforce website"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Language option to fall back to English if locale is unsupported or does not present the translation"
-	},
-	"opt_faster_loading": {
-		"message": "(faster loading when in use).",
-		"description": "[setting] explanation of the Lightning Navigation feature"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Keep favourite Tabs on the left of Home and Object Manager.",
@@ -398,9 +398,9 @@
 		"message": "Always open links in a new browser tab.",
 		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
 	},
-	"opt_prevent_use": {
-		"message": "Prevent use ",
-		"description": "[setting] just like 'prefer not to use'. be sure to include a space at the end of the message"
+	"opt_prevent_lightning_navigation": {
+		"message": "Prevent use of Lightning Navigation (faster loading when in use).",
+		"description": "[setting] do not allow Lightning Navigation with explanation of feature"
 	},
 	"opt_same_tab_popup": {
 		"message": "page in the same tab when clicking on the popup.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Skip automatic check of Salesforce Id.",
 		"description": "[setting] when the favourites a Tab, prevent checking if there's an Id in the link that's being saved."
-	},
-	"opt_when_clicking_popup": {
-		"message": "page when clicking on the popup while on a Salesforce page.",
-		"description": "[setting] when the user opens the popup while on a Salesforce website"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "page when clicking on the popup while not on a Salesforce page.",
-		"description": "[setting] when the user opens the popup while on a random website"
 	},
 	"or_drop": {
 		"message": "Or drop",

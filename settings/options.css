@@ -55,7 +55,7 @@ ul.settings {
 }
 
 .button, button {
-	&:hover {
+	&:not(.highlight):hover {
 		background-color: unset;
 	}
 	& > svg {

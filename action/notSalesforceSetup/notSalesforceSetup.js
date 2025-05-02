@@ -21,12 +21,9 @@ import "../themeHandler.js";
 
 const sfsetupTextEl = document.getElementById("plain");
 const invalidUrl = document.getElementById("invalid-url");
-const lightnings = document.querySelectorAll(".lightning");
-const setups = document.querySelectorAll(".setup");
 const loginId = "login";
 const setupId = "go-setup";
-let willOpenLogin = false;
-let willOpenSetup = false;
+let willOpenLogin = true;
 
 const page = new URLSearchParams(window.location.search).get("url");
 if (page != null) { // we're in a salesforce page
@@ -35,11 +32,7 @@ if (page != null) { // we're in a salesforce page
 		domain = new URL(page).origin;
 		// domain is null if an error occurred
 		// Validate the domain (make sure it's a Salesforce domain)
-		if (!SALESFORCE_LIGHTNING_PATTERN.test(page)) {
-			// not salesforce domain
-			lightnings.forEach((light) => light.classList.toggle("hidden"));
-			willOpenLogin = true;
-		} else {
+		if (SALESFORCE_LIGHTNING_PATTERN.test(page)) {
 			// we're in a Salesforce page (not setup)
 			// switch which button is shown
 			document.getElementById(loginId).classList.add("hidden");
@@ -48,13 +41,11 @@ if (page != null) { // we're in a salesforce page
 			// update the button href to use the domain
 			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
 			// update the bold on the text
-			setups.forEach((set) => set.classList.toggle("hidden"));
-			willOpenSetup = true;
+            willOpenLogin = false
 		}
 	} catch (_) {
 		sfsetupTextEl.classList.add("hidden");
 		invalidUrl.classList.remove("hidden");
-		willOpenLogin = true;
 	}
 }
 
@@ -118,22 +109,20 @@ shownRedirectBtn.addEventListener("click", (e) => {
 	setTimeout(() => close(), 200);
 });
 
-if (willOpenLogin || willOpenSetup) {
-	const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
-	const useSameTab = willOpenLogin
-		? POPUP_LOGIN_NEW_TAB
-		: POPUP_SETUP_NEW_TAB;
-	const settings = await getSettings([automaticClick, useSameTab]);
-	openPageInSameTab = settings != null &&
-		settings.filter((setting) =>
-				setting.id === useSameTab && setting.enabled
-			).length > 0;
-	if (
-		settings != null &&
-		settings.filter((setting) =>
-				setting.id === automaticClick && setting.enabled
-			).length > 0
-	) {
-		shownRedirectBtn.click();
-	} else await ensureTranslatorAvailability();
-}
+const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
+const useSameTab = willOpenLogin
+    ? POPUP_LOGIN_NEW_TAB
+    : POPUP_SETUP_NEW_TAB;
+const settings = await getSettings([automaticClick, useSameTab]);
+openPageInSameTab = settings != null &&
+    settings.filter((setting) =>
+            setting.id === useSameTab && setting.enabled
+        ).length > 0;
+if (
+    settings != null &&
+    settings.filter((setting) =>
+            setting.id === automaticClick && setting.enabled
+        ).length > 0
+) {
+    shownRedirectBtn.click();
+} else await ensureTranslatorAvailability();

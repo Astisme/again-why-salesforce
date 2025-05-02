@@ -3,6 +3,7 @@ import {
 	FOLLOW_SF_LANG,
 	sendExtensionMessage,
 	USER_LANGUAGE,
+    SETTINGS_KEY,
 } from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
 let singleton = null;
@@ -195,8 +196,9 @@ class TranslationService {
 
 	setListenerForLanguageChange() {
 		BROWSER.storage.onChanged.addListener((changes) => {
-			if (changes[USER_LANGUAGE] != null) {
-				this.updatePageTranslations(changes[USER_LANGUAGE].newValue);
+            const pickedLanguageObj = changes[SETTINGS_KEY].newValue.filter(el => el.id === USER_LANGUAGE);
+			if (pickedLanguageObj.length > 0) {
+				this.updatePageTranslations(pickedLanguageObj[0].enabled);
 			}
 		});
 	}
