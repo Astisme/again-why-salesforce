@@ -339,10 +339,6 @@
 		"message": "Molimo unesite važeću Organizaciju!",
 		"description": "[error-open-other-org-modal] poruka kada korisnik unese pogrešan URL"
 	},
-	"invalid_url": {
-		"message": "Nevažeći URL",
-		"description": "[notSalesforceSetup] URL koji nije važeći"
-	},
 	"italic": {
 		"message": "Kurziv",
 		"description": "Opcija stila fonta za kurzivni tekst"
@@ -363,33 +359,29 @@
 		"message": "Nije pronađena odgovarajuća akcija",
 		"description": "[error] kada switch ne može podudariti zatraženu akciju"
 	},
-	"nss_detected": {
-		"message": " detektovano.",
-		"description": "[notSalesforceSetup] nešto je detektovano. Provjerite je li poruka započela razmakom"
+	"nss_invalid_url": {
+		"message": "Otkriven je nevažeći URL.",
+		"description": "[nijeSalesforcePostavljanje] nevažeći URL"
 	},
-	"nss_prefix": {
-		"message": "Ovo nije ",
-		"description": "[notSalesforceSetup] prefiks koji se prikazuje kada korisnik nije na Salesforce stranici."
+	"nss_not_setup_page": {
+		"message": "Ovo nije stranica za postavljanje programa Salesforce Lightning.",
+		"description": "[nijeSalesforcePostavljanje] korisnik nije na stranici programa Salesforce."
 	},
 	"open_setup": {
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na Salesforce Setup stranicu"
 	},
-	"opt_always_open": {
-		"message": "Uvijek otvori",
-		"description": "[postavka]"
+	"opt_automatic_open_login": {
+		"message": "Automatski otvori stranicu za prijavu u program Salesforce kada kliknete skočni prozor dok niste na stranici programa Salesforce.",
+		"description": "[postavka] kada korisnik otvori skočni prozor dok je na nasumičnoj web-stranici"
 	},
-	"opt_automatic_open": {
-		"message": "Automatsko otvaranje",
-		"description": "[postavka]"
+	"opt_automatic_open_setup": {
+		"message": "Automatski otvori stranicu za postavljanje programa Salesforce kada kliknete skočni prozor dok ste na stranici programa Salesforce.",
+		"description": "[postavka] kada korisnik otvori skočni prozor dok je na web-stranici programa Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Rezervno)",
 		"description": "Jezična opcija za povratak na engleski ako lokalizacija nije podržana ili ne prikazuje prijevod"
-	},
-	"opt_faster_loading": {
-		"message": "(brže učitavanje tijekom korištenja).",
-		"description": "[objašnjenje postavke] objašnjava funkciju Lightning navigacije"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Zadrži omiljene Tabove na lijevoj strani Početne stranice i Upravitelja objekata.",
@@ -399,9 +391,17 @@
 		"message": "Uvijek otvori poveznice u novom pregledničkom tabu.",
 		"description": "[postavka] pri kliku na omiljeni Tab, otvori ga u novom pregledničkom tabu"
 	},
-	"opt_prevent_use": {
-		"message": "Spriječi korištenje ",
-		"description": "[postavka] poput 'više ne želim koristiti'. pobrini se da na kraju postoji razmak"
+	"opt_open_login_same_tab": {
+		"message": "Uvijek otvori stranicu za prijavu u program Salesforce u istom Tab kada kliknete skočni prozor.",
+		"description": "[postavka]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Uvijek otvori stranicu za postavljanje programa Salesforce u istom Tab kada kliknete skočni prozor.",
+		"description": "[postavka]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Spriječi upotrebu navigacije Lightning (brže učitavanje tijekom upotrebe).",
+		"description": "[postavka] ne dopusti navigaciju Lightning s objašnjenjem značajke"
 	},
 	"opt_same_tab_popup": {
 		"message": "stranica na istom tabu pri kliku na skočni prozor.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Preskoči automatsku provjeru Salesforce ID-ja.",
 		"description": "[postavka] pri spremanju omiljenog Taba, ne provjeravaj ID u poveznici"
-	},
-	"opt_when_clicking_popup": {
-		"message": "stranica pri kliku na skočni prozor na Salesforce stranici.",
-		"description": "[postavka] pri otvaranju skočnog prozora na Salesforce web-mjestu"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "stranica pri kliku na skočni prozor na stranici koja nije Salesforce.",
-		"description": "[postavka] pri otvaranju skočnog prozora na nekom drugom mjestu"
 	},
 	"or_drop": {
 		"message": "Ili ispusti",

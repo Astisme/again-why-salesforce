@@ -339,10 +339,6 @@
 		"message": "Prosimo, vstavite veljavno Org!",
 		"description": "[napaka_odpri_drugo_org_modalno_okno] sporočilo, ko uporabnik vstavi napačen url v modalno okno"
 	},
-	"invalid_url": {
-		"message": "Neveljaven URL",
-		"description": "[niSalesforceNastavitev] URL, ki ni veljaven"
-	},
 	"italic": {
 		"message": "Ležeče",
 		"description": "Možnost sloga pisave za ležeče besedilo"
@@ -363,33 +359,29 @@
 		"message": "Ni se ujemalo z nobenim dejanjem",
 		"description": "[napaka] v Salesforce, ko stikalo ne more najti zahtevanega dejanja"
 	},
-	"nss_detected": {
-		"message": " zaznano.",
-		"description": "[niSalesforceNastavitev] nekaj, kar je bilo najdeno. Prepričajte se, da na začetku sporočila vključite presledek."
+	"nss_invalid_url": {
+		"message": "Zaznan je neveljaven URL naslov.",
+		"description": "[niNastavitevSalesforce] neveljaven URL naslov"
 	},
-	"nss_prefix": {
-		"message": "To ni ",
-		"description": "[niSalesforceNastavitev] to je predpona, prikazana, ko uporabnik ni na strani Salesforce. Prepričajte se, da na koncu sporočila vključite presledek"
+	"nss_not_setup_page": {
+		"message": "To ni stran za nastavitev programa Salesforce Lightning.",
+		"description": "[niNastavitevSalesforce] uporabnik ni na strani programa Salesforce."
 	},
 	"open_setup": {
 		"message": "Odpri Nastavitev",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Vedno odpri",
-		"description": "[nastavitev]"
+	"opt_automatic_open_login": {
+		"message": "Samodejno odpri stran za prijavo v program Salesforce, ko kliknete pojavno okno, če niste na strani programa Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno, ko je na naključni spletni strani"
 	},
-	"opt_automatic_open": {
-		"message": "Samodejno odpri",
-		"description": "[nastavitev]"
+	"opt_automatic_open_setup": {
+		"message": "Samodejno odpri stran za nastavitev programa Salesforce, ko kliknete pojavno okno, če ste na strani programa Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno, ko je na spletni strani programa Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Nadomestno)",
 		"description": "Jezikovna možnost za uporabo angleščine, če jezik ni podprt ali ne prikazuje prevoda"
-	},
-	"opt_faster_loading": {
-		"message": "(hitreje se naloži med uporabo).",
-		"description": "Pojasnilo [nastavitve] funkcije Lightning navigacija"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Naj priljubljeni Tabi ostanejo na levi strani Doma in Upravitelja objektov.",
@@ -399,9 +391,17 @@
 		"message": "Vedno odpri povezave v novem zavihku brskalnika.",
 		"description": "[nastavitev] ko uporabnik klikne na priljubljen zavihek, odpri v novem zavihku brskalnika"
 	},
-	"opt_prevent_use": {
-		"message": "Prepreči uporabo ",
-		"description": "[nastavitev] tako kot 'raje ne uporabljam'. poskrbite, da je na koncu sporočila presledek"
+	"opt_open_login_same_tab": {
+		"message": "Vedno odpri stran za prijavo v program Salesforce v istem zavihku Tab, ko kliknete pojavno okno.",
+		"description": "[nastavitev]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Vedno odpri stran za nastavitev programa Salesforce v istem zavihku Tab, ko kliknete pojavno okno.",
+		"description": "[nastavitev]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Prepreči uporabo navigacije Lightning (hitrejše nalaganje med uporabo).",
+		"description": "[nastavitev] ne dovoli navigacije Lightning z razlago funkcije"
 	},
 	"opt_same_tab_popup": {
 		"message": "stran v istem zavihku ob kliku na pojavno okno.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Preskoči samodejno preverjanje ID-ja Salesforce.",
 		"description": "[nastavitev] ko uporabnik doda priljubljen zavihek, ne preverjaj, ali je v povezavi ID"
-	},
-	"opt_when_clicking_popup": {
-		"message": "stran, ko kliknete na pojavno okno, medtem ko ste na strani Salesforce.",
-		"description": "[nastavitev] ko uporabnik odpre pojavno okno, medtem ko je na spletnem mestu Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "stran, ko kliknete na pojavno okno, medtem ko niste na strani Salesforce.",
-		"description": "[nastavitev] ko uporabnik odpre pojavno okno, medtem ko je na naključni spletni strani"
 	},
 	"or_drop": {
 		"message": "Ali spusti",

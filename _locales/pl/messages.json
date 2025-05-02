@@ -339,10 +339,6 @@
 		"message": "Proszę wstawić prawidłową Org!",
 		"description": "[błąd-modal-otwórz-inną-org] wiadomość, gdy użytkownik wstawia błędny adres URL w oknie modalnym"
 	},
-	"invalid_url": {
-		"message": "Nieprawidłowy URL",
-		"description": "[nieKonfiguracjaSalesforce] adres URL, który jest nieprawidłowy"
-	},
 	"italic": {
 		"message": "Kursywa",
 		"description": "Opcja stylu czcionki dla tekstu kursywą"
@@ -363,33 +359,29 @@
 		"message": "Nie dopasowano żadnej akcji",
 		"description": "[błąd] w Salesforce, gdy przełącznik nie może dopasować żądanej akcji"
 	},
-	"nss_detected": {
-		"message": " wykryto.",
-		"description": "[nieKonfiguracjaSalesforce] coś, co zostało znalezione. Upewnij się, że na początku wiadomości znajduje się spacja."
+	"nss_invalid_url": {
+		"message": "Wykryto nieprawidłowy adres URL.",
+		"description": "[nieDotyczyKonfiguracjiSalesforce] nieprawidłowy adres URL"
 	},
-	"nss_prefix": {
-		"message": "To nie jest ",
-		"description": "[nieKonfiguracjaSalesforce] jest to prefiks pokazywany, gdy użytkownik nie jest na stronie Salesforce. Upewnij się, że na końcu wiadomości znajduje się spacja"
+	"nss_not_setup_page": {
+		"message": "To nie jest strona konfiguracji Salesforce Lightning.",
+		"description": "[nieDotyczyKonfiguracjiSalesforce] użytkownik nie znajduje się na stronie Salesforce."
 	},
 	"open_setup": {
 		"message": "Otwórz Konfigurację",
 		"description": "[nieKonfiguracjaSalesforce] wezwanie do działania na przycisku, aby przekierować użytkownika na stronę Konfiguracji Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Zawsze otwieraj",
-		"description": "[ustawienie]"
+	"opt_automatic_open_login": {
+		"message": "Automatycznie otwieraj stronę logowania Salesforce po kliknięciu wyskakującego okienka, gdy nie znajdujesz się na stronie Salesforce.",
+		"description": "[ustawienie] gdy użytkownik otworzy wyskakujące okienko, znajdując się na losowej stronie internetowej"
 	},
-	"opt_automatic_open": {
-		"message": "Otwieraj automatycznie",
-		"description": "[ustawienie]"
+	"opt_automatic_open_setup": {
+		"message": "Automatycznie otwieraj stronę konfiguracji Salesforce po kliknięciu wyskakującego okienka, gdy znajdujesz się na stronie Salesforce.",
+		"description": "[ustawienie] gdy użytkownik otworzy wyskakujące okienko, znajdując się na stronie internetowej Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Opcja języka powrotu do angielskiego, jeśli lokalizacja nie jest obsługiwana lub nie ma tłumaczenia"
-	},
-	"opt_faster_loading": {
-		"message": "(szybsze ładowanie podczas użycia).",
-		"description": "[ustawienie] wyjaśnienie funkcji Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Zachowaj ulubione karty po lewej stronie Strony głównej i Menedżera obiektów.",
@@ -399,9 +391,17 @@
 		"message": "Zawsze otwieraj linki w nowej karcie przeglądarki.",
 		"description": "[ustawienie] gdy użytkownik kliknie ulubioną kartę, otwórz ją w nowej karcie"
 	},
-	"opt_prevent_use": {
-		"message": "Zabroń użycia ",
-		"description": "[ustawienie] podobne do 'wolę nie używać'. upewnij się, że na końcu jest spacja"
+	"opt_open_login_same_tab": {
+		"message": "Zawsze otwieraj stronę logowania Salesforce w tej samej Tab po kliknięciu wyskakującego okienka.",
+		"description": "[ustawienie]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Zawsze otwieraj stronę konfiguracji Salesforce w tej samej Tab po kliknięciu wyskakującego okienka.",
+		"description": "[ustawienie]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Zapobiegaj używaniu nawigacji Lightning (szybsze ładowanie podczas używania).",
+		"description": "[ustawienie] nie zezwalaj na nawigację Lightning z wyjaśnieniem funkcji"
 	},
 	"opt_same_tab_popup": {
 		"message": "otwórz stronę w tej samej karcie po kliknięciu wyskakującego okienka.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Pomiń automatyczne sprawdzanie identyfikatora Salesforce.",
 		"description": "[ustawienie] przy dodawaniu karty do ulubionych, zapobiegaj sprawdzaniu identyfikatora w linku"
-	},
-	"opt_when_clicking_popup": {
-		"message": "strona po kliknięciu wyskakującego okienka na stronie Salesforce.",
-		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na stronie Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "strona po kliknięciu wyskakującego okienka na stronie niebędącej Salesforce.",
-		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na losowej stronie"
 	},
 	"or_drop": {
 		"message": "Lub upuść",

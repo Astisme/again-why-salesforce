@@ -339,10 +339,6 @@
 		"message": "אנא הכנס ארגון תקין!",
 		"description": "[error-open-other-org-modal] הודעה כאשר המשתמש מכניס URL שגוי"
 	},
-	"invalid_url": {
-		"message": "URL לא תקין",
-		"description": "[notSalesforceSetup] URL שאינו תקין"
-	},
 	"italic": {
 		"message": "נטוי",
 		"description": "אפשרות סגנון גופן לטקסט נטוי"
@@ -363,33 +359,29 @@
 		"message": "לא נמצאה פעולה תואמת",
 		"description": "[error] כאשר אין התאמה לפעולה המבוקשת"
 	},
-	"nss_detected": {
-		"message": " זוהה.",
-		"description": "[notSalesforceSetup] משהו זוהה. יש לוודא שההודעה מתחילה ברווח"
+	"nss_invalid_url": {
+		"message": "אותרה כתובת URL לא חוקית.",
+		"description": "[לאהגדרתSalesforce] כתובת URL שאינה חוקית"
 	},
-	"nss_prefix": {
-		"message": "זה אינו ",
-		"description": "[notSalesforceSetup] קידומת שמופיעה כאשר המשתמש אינו בדף Salesforce."
+	"nss_not_setup_page": {
+		"message": "זהו אינו דף הגדרות של Salesforce Lightning.",
+		"description": "[לאהגדרתSalesforce] המשתמש אינו נמצא בדף של Salesforce."
 	},
 	"open_setup": {
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
 	},
-	"opt_always_open": {
-		"message": "תמיד פתח",
-		"description": "[הגדרה]"
+	"opt_automatic_open_login": {
+		"message": "פתח אוטומטית את דף ההתחברות של Salesforce בעת לחיצה על החלון הקופץ כשאינך נמצא בדף של Salesforce.",
+		"description": "[הגדרה] כאשר המשתמש פותח את החלון הקופץ בזמן שהוא נמצא באתר אקראי"
 	},
-	"opt_automatic_open": {
-		"message": "פתיחה אוטומטית",
-		"description": "[הגדרה]"
+	"opt_automatic_open_setup": {
+		"message": "פתח אוטומטית את דף ההגדרות של Salesforce בעת לחיצה על החלון הקופץ כשאתה נמצא בדף של Salesforce.",
+		"description": "[הגדרה] כאשר המשתמש פותח את החלון הקופץ בזמן שהוא נמצא באתר של Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "אפשרות שפה לחזרה לאנגלית אם האזור אינו נתמך או אינו מציג את התרגום"
-	},
-	"opt_faster_loading": {
-		"message": "(הטענה מהירה יותר בזמן שימוש).",
-		"description": "[הגדרה] הסבר על פונקציית הניווט Lightning"
 	},
 	"opt_keep_tabs_left": {
 		"message": "שמור Tabs מועדפים משמאל לדף הבית ולמנהל האובייקטים.",
@@ -399,9 +391,17 @@
 		"message": "פתח קישורים תמיד בכרטיסייה חדשה בדפדפן.",
 		"description": "[הגדרה] בעת לחיצה על Tab מועדף, פתח אותו בכרטיסייה חדשה בדפדפן"
 	},
-	"opt_prevent_use": {
-		"message": "מניעת שימוש ",
-		"description": "[הגדרה] בדומה ל'אני מעדיף לא להשתמש'. וודא שיש רווח בסוף"
+	"opt_open_login_same_tab": {
+		"message": "פתח תמיד את דף ההתחברות של Salesforce באותו Tab בעת לחיצה על החלון הקופץ.",
+		"description": "[הגדרה]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "פתח תמיד את דף ההגדרות של Salesforce באותו Tab בעת לחיצה על החלון הקופץ.",
+		"description": "[הגדרה]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "מנע שימוש בניווט Lightning (טעינה מהירה יותר בעת שימוש).",
+		"description": "[הגדרה] אל תאפשר ניווט Lightning עם הסבר על התכונה"
 	},
 	"opt_same_tab_popup": {
 		"message": "דף באותה הכרטיסייה בעת לחיצה על החלון הקופץ.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "דלג על בדיקת ID של Salesforce אוטומטית.",
 		"description": "[הגדרה] בעת שמירת Tab מועדף, אל תבדוק ID בקישור"
-	},
-	"opt_when_clicking_popup": {
-		"message": "דף בעת לחיצה על החלון הקופץ בעמוד Salesforce.",
-		"description": "[הגדרה] בעת פתיחת החלון הקופץ באתר Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "דף בעת לחיצה על החלון הקופץ בעמוד שאינו Salesforce.",
-		"description": "[הגדרה] בעת פתיחת החלון הקופץ באתר אקראי"
 	},
 	"or_drop": {
 		"message": "או הנח",

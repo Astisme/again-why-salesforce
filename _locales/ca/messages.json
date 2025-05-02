@@ -339,10 +339,6 @@
 		"message": "Sisplau, introdueix una organització vàlida!",
 		"description": "[error-open-other-org-modal] missatge quan l'usuari introdueix una URL errònia"
 	},
-	"invalid_url": {
-		"message": "URL no vàlid",
-		"description": "[notSalesforceSetup] una URL que no és vàlida"
-	},
 	"italic": {
 		"message": "Cursiva",
 		"description": "Opció d'estil de lletra per a text en cursiva"
@@ -363,33 +359,29 @@
 		"message": "No coincideix cap acció",
 		"description": "[error] quan la sentència switch no pot coincidir amb l'acció sol·licitada"
 	},
-	"nss_detected": {
-		"message": " detectat.",
-		"description": "[notSalesforceSetup] alguna cosa s'ha trobat. Assegureu-vos que el missatge comença amb un espai."
+	"nss_invalid_url": {
+		"message": "S'ha detectat una URL no vàlida.",
+		"description": "[noÉsConfiguracióDeSalesforce] una URL que no és vàlida"
 	},
-	"nss_prefix": {
-		"message": "Això no és un ",
-		"description": "[notSalesforceSetup] prefix que es mostra quan l'usuari no està a una pàgina de Salesforce."
+	"nss_not_setup_page": {
+		"message": "Aquesta no és una pàgina de configuració de Salesforce Lightning.",
+		"description": "[noÉsConfiguracióDeSalesforce] l'usuari no es troba en una pàgina de Salesforce."
 	},
 	"open_setup": {
 		"message": "Obrir Setup",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
 	},
-	"opt_always_open": {
-		"message": "Obre sempre",
-		"description": "[configuració]"
+	"opt_automatic_open_login": {
+		"message": "Obre automàticament la pàgina d'inici de sessió de Salesforce quan es faci clic a la finestra emergent mentre no es trobi en una pàgina de Salesforce.",
+		"description": "[configuració] quan l'usuari obre la finestra emergent mentre es troba en un lloc web aleatori"
 	},
-	"opt_automatic_open": {
-		"message": "Obre automàticament",
-		"description": "[configuració]"
+	"opt_automatic_open_setup": {
+		"message": "Obre automàticament la pàgina de configuració de Salesforce quan es faci clic a la finestra emergent mentre es trobi en una pàgina de Salesforce.",
+		"description": "[configuració] quan l'usuari obre la finestra emergent mentre es troba en un lloc web de Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Alternativa)",
 		"description": "Opció d'idioma per tornar a l'anglès si la configuració regional no és compatible o no presenta la traducció"
-	},
-	"opt_faster_loading": {
-		"message": "(carrega més ràpida quan s’utilitza).",
-		"description": "[explicació de configuració] explicació de la funció Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantenir Tabs preferits a l'esquerra d'Inici i Gestor d'objectes.",
@@ -399,9 +391,17 @@
 		"message": "Obre sempre els enllaços en una nova pestanya del navegador.",
 		"description": "[configuració] en fer clic a una Tab preferida, obre-la en una nova pestanya del navegador"
 	},
-	"opt_prevent_use": {
-		"message": "Evita l’ús ",
-		"description": "[configuració] igual que 'prefereixo no utilitzar'. assegura’t que hi hagi un espai al final del missatge"
+	"opt_open_login_same_tab": {
+		"message": "Obre sempre la pàgina d'inici de sessió de Salesforce a la mateixa Tab quan es faci clic a la finestra emergent.",
+		"description": "[configuració]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Obre sempre la pàgina de configuració de Salesforce a la mateixa Tab quan es faci clic a la finestra emergent.",
+		"description": "[configuració]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Impedeix l'ús de la navegació Lightning (càrrega més ràpida quan s'utilitza).",
+		"description": "[configuració] no permetis la navegació Lightning amb l'explicació de la funció"
 	},
 	"opt_same_tab_popup": {
 		"message": "pàgina a la mateixa pestanya en fer clic a la finestra emergent.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Saltar la comprovació automàtica de l’ID de Salesforce.",
 		"description": "[configuració] en desar una Tab preferida, evita comprovar si hi ha un ID a l’enllaç"
-	},
-	"opt_when_clicking_popup": {
-		"message": "pàgina en fer clic a la finestra emergent mentre ets en una pàgina de Salesforce.",
-		"description": "[configuració] en obrir la finestra emergent mentre ets en un lloc de Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "pàgina en fer clic a la finestra emergent mentre no ets en una pàgina de Salesforce.",
-		"description": "[configuració] en obrir la finestra emergent mentre ets en un lloc qualsevol"
 	},
 	"or_drop": {
 		"message": "O arrossegar",

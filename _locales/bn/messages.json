@@ -338,10 +338,6 @@
 		"message": "দয়া করে সঠিক Org লিখুন!",
 		"description": "[error-open-other-org-modal] ভুল URL ইনপুট করলে বার্তা"
 	},
-	"invalid_url": {
-		"message": "অবৈধ URL",
-		"description": "[notSalesforceSetup] একটি অবৈধ URL"
-	},
 	"italic": {
 		"message": "ইটালিক",
 		"description": "ইটালিক টেক্সটের জন্য ফন্ট স্টাইল অপশন"
@@ -362,33 +358,29 @@
 		"message": "কোনও কার্যক্রম মিলেনি",
 		"description": "[error] Salesforce-এ অনুরোধিত কার্যক্রম উপলব্ধ কার্যক্রমগুলোর সাথে মিলেনি"
 	},
-	"nss_detected": {
-		"message": " সনাক্ত হয়েছে।",
-		"description": "[notSalesforceSetup] কিছু সনাক্ত হয়েছে; অনুগ্রহ করে বার্তার শুরুতে একটি স্পেস অন্তর্ভুক্ত করুন।"
+	"nss_invalid_url": {
+		"message": "অবৈধ URL সনাক্ত করা হয়েছে।",
+		"description": "[Salesforce সেটআপ নয়] একটি অবৈধ URL"
 	},
-	"nss_prefix": {
-		"message": "এটি নয় ",
-		"description": "[notSalesforceSetup] যখন ব্যবহারকারী Salesforce পৃষ্ঠায় না থাকে তখন প্রদর্শিত প্রিফিক্স; শেষে একটি স্পেস অন্তর্ভুক্ত করুন"
+	"nss_not_setup_page": {
+		"message": "এটি Salesforce লাইটনিং সেটআপ পেজ নয়।",
+		"description": "[Salesforce সেটআপ নয়] ব্যবহারকারী Salesforce পেজে নেই।"
 	},
 	"open_setup": {
 		"message": "Setup খুলুন",
 		"description": "[notSalesforceSetup] Salesforce Setup পৃষ্ঠায় যাওয়ার জন্য কল-টু-অ্যাকশন"
 	},
-	"opt_always_open": {
-		"message": "সবসময় খুলুন",
-		"description": "[সেটিং]"
+	"opt_automatic_open_login": {
+		"message": "Salesforce পেজে না থাকলে পপআপে ক্লিক করার সময় Salesforce লগইন পেজ স্বয়ংক্রিয়ভাবে খুলুন।",
+		"description": "[সেটিং] যখন ব্যবহারকারী কোনো এলোমেলো ওয়েবসাইটে পপআপ খোলে"
 	},
-	"opt_automatic_open": {
-		"message": "স্বয়ংক্রিয়ভাবে খুলুন",
-		"description": "[সেটিং]"
+	"opt_automatic_open_setup": {
+		"message": "Salesforce পেজে থাকলে পপআপে ক্লিক করার সময় Salesforce সেটআপ পেজ স্বয়ংক্রিয়ভাবে খুলুন।",
+		"description": "[সেটিং] যখন ব্যবহারকারী কোনো Salesforce ওয়েবসাইটে পপআপ খোলে"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "যদি লোকেল সমর্থিত না হয় অথবা অনুবাদ প্রদর্শন না করে তবে ইংরেজিতে ফিরে যাওয়ার ভাষা অপশন"
-	},
-	"opt_faster_loading": {
-		"message": "(ব্যবহারে দ্রুত লোডিং)।",
-		"description": "[সেটিং] Lightning Navigation ফিচারের ব্যাখ্যা"
 	},
 	"opt_keep_tabs_left": {
 		"message": "পছন্দসই Tabs-গুলো হোম এবং অবজেক্ট ম্যানেজারের বাম দিকে রাখুন।",
@@ -398,9 +390,17 @@
 		"message": "লিঙ্কে ক্লিক করলে সর্বদা নতুন ব্রাউজার ট্যাবে খুলুন।",
 		"description": "[সেটিং] যখন ব্যবহারকারী কোনও পছন্দসই Tab-এ ক্লিক করে, তখন এটি নতুন ব্রাউজার ট্যাবে খুলুন"
 	},
-	"opt_prevent_use": {
-		"message": "ব্যবহার বন্ধ করুন ",
-		"description": "[সেটিং] 'ব্যবহার না করাই পছন্দ' এর মত। নিশ্চিত করুন যে মেসেজের শেষে একটি স্পেস আছে"
+	"opt_open_login_same_tab": {
+		"message": "পপআপে ক্লিক করার সময় সর্বদা একই Tab-এ Salesforce লগইন পেজ খুলুন।",
+		"description": "[সেটিং]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "পপআপে ক্লিক করার সময় সর্বদা একই Tab-এ Salesforce সেটআপ পেজ খুলুন।",
+		"description": "[সেটিং]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "লাইটনিং নেভিগেশন ব্যবহার করা বন্ধ করুন (ব্যবহারের সময় দ্রুত লোড হয়)।",
+		"description": "[সেটিং] ফিচারের ব্যাখ্যা সহ লাইটনিং নেভিগেশন অনুমোদন করবেন না"
 	},
 	"opt_same_tab_popup": {
 		"message": "পপআপ ক্লিক করার সময় একই ট্যাবে পেজ খুলুন।",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce Id-এর স্বয়ংক্রিয় যাচাই এড়িয়ে যান।",
 		"description": "[সেটিং] Tab প্রিয় হিসেবে সংরক্ষণ করার সময় লিঙ্কে Id আছে কিনা তা যাচাই বন্ধ করুন।"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce পেজে পপআপ ক্লিক করার সময় পেজ।",
-		"description": "[সেটিং] যখন ব্যবহারকারী Salesforce ওয়েবসাইটে পপআপ খুলেন"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "অ-সেইলসফোর্স পেজে পপআপ ক্লিক করার সময় পেজ।",
-		"description": "[সেটিং] যখন ব্যবহারকারী যেকোনো অননুমোদিত সাইটে পপআপ খুলেন"
 	},
 	"or_drop": {
 		"message": "অথবা ড্রপ করুন",

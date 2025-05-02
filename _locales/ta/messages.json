@@ -339,10 +339,6 @@
 		"message": "தயவுசெய்து செல்லுபடியாகும் Org ஐச் செருகவும்!",
 		"description": "[error-open-other-org-modal] பயனர் மோடலில் தவறான url ஐச் செருகும்போது செய்தி"
 	},
-	"invalid_url": {
-		"message": "செல்லாத URL",
-		"description": "[notSalesforceSetup] செல்லுபடியாகாத URL"
-	},
 	"italic": {
 		"message": "சாய்வு",
 		"description": "சாய்வு உரைக்கான எழுத்துரு பாணி விருப்பம்"
@@ -363,33 +359,29 @@
 		"message": "எந்தச் செயலுடனும் பொருந்தவில்லை",
 		"description": "[பிழை] Salesforce இல் சுவிட்ச் கோரப்பட்ட செயலைப் பொருத்த முடியாதபோது"
 	},
-	"nss_detected": {
-		"message": " கண்டறியப்பட்டது.",
-		"description": "[notSalesforceSetup] கண்டுபிடிக்கப்பட்ட ஒன்று. செய்தியின் தொடக்கத்தில் ஒரு இடைவெளியைச் சேர்ப்பதை உறுதிப்படுத்தவும்."
+	"nss_invalid_url": {
+		"message": "செல்லாத URL கண்டறியப்பட்டது.",
+		"description": "[Salesforce அமைவு இல்லை] செல்லாத URL"
 	},
-	"nss_prefix": {
-		"message": "இது ஒரு ",
-		"description": "[notSalesforceSetup] பயனர் Salesforce பக்கத்தில் இல்லாதபோது காண்பிக்கப்படும் முன்னொட்டு. செய்தியின் முடிவில் ஒரு இடைவெளியைச் சேர்ப்பதை உறுதிப்படுத்தவும்"
+	"nss_not_setup_page": {
+		"message": "இது Salesforce லைட்னிங் அமைவு பக்கம் அல்ல.",
+		"description": "[Salesforce அமைவு இல்லை] பயனர் Salesforce பக்கத்தில் இல்லை."
 	},
 	"open_setup": {
 		"message": "அமைப்பைத் திற",
 		"description": "[notSalesforceSetup] பயனரை Salesforce அமைப்பு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
 	},
-	"opt_always_open": {
-		"message": "எப்பொழுதும் திறக்கவும்",
-		"description": "[அமைப்பு]"
+	"opt_automatic_open_login": {
+		"message": "Salesforce பக்கத்தில் இல்லாவிட்டால் பாப்அப்பை கிளிக் செய்யும் போது Salesforce உள்நுழைவு பக்கம் தானாகவே திறக்கப்படும்.",
+		"description": "[அமைப்பு] பயனர் ஒரு தற்செயலான இணையதளத்தில் பாப்அப்பை திறக்கும்போது"
 	},
-	"opt_automatic_open": {
-		"message": "தானாக திறக்கவும்",
-		"description": "[அமைப்பு]"
+	"opt_automatic_open_setup": {
+		"message": "Salesforce பக்கத்தில் இருந்தால் பாப்அப்பை கிளிக் செய்யும் போது Salesforce அமைவு பக்கம் தானாகவே திறக்கப்படும்.",
+		"description": "[அமைப்பு] பயனர் ஒரு Salesforce இணையதளத்தில் பாப்அப்பை திறக்கும்போது"
 	},
 	"opt_en_fallback": {
 		"message": "en (இருப்பு)",
 		"description": "உள்ளூர் ஆதரிக்கப்படவில்லை அல்லது மொழிபெயர்ப்பு இல்லை எனில் ஆங்கிலத்திற்கு திரும்புவதற்கான மொழி விருப்பம்"
-	},
-	"opt_faster_loading": {
-		"message": "(பயன்பாட்டின்போது அதிவேகமாக ஏற்றப்படுகிறது).",
-		"description": "லைட்னிங் நெவிகேஷன் அம்சத்தின் [அமைப்பு] விளக்கம்"
 	},
 	"opt_keep_tabs_left": {
 		"message": "பிடித்த Tab-களை Home மற்றும் Object Manager-இன் இடது பக்கத்தில் வைக்கவும்.",
@@ -399,9 +391,17 @@
 		"message": "இணைகளை எப்பொழுதும் புதிய உலாவிக் குத்தகையில் திறக்கவும்.",
 		"description": "[அமைப்பு] பயனர் பொலிவு Indigo Tab-ஐ சொடுக்கும்போது புதிய உலாவிக் குத்தகையில் திறக்க"
 	},
-	"opt_prevent_use": {
-		"message": "பயன்பாட்டை தடுக ",
-		"description": "[அமைப்பு] 'பயன்படுதுவதற்கு விருப்பமில்லை' போன்றதாக. செய்தியின் இறுதியில் இடைவெளி சேர்க்க நினைவில் வையுங்கள்"
+	"opt_open_login_same_tab": {
+		"message": "பாப்அப்பை கிளிக் செய்யும் போது எப்போதும் Salesforce உள்நுழைவு பக்கத்தை அதே Tab-இல் திறக்கவும்.",
+		"description": "[அமைப்பு]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "பாப்அப்பை கிளிக் செய்யும் போது எப்போதும் Salesforce அமைவு பக்கத்தை அதே Tab-இல் திறக்கவும்.",
+		"description": "[அமைப்பு]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "லைட்னிங் வழிசெலுத்தலை பயன்படுத்துவதை தடுக்கவும் (பயன்பாட்டில் இருக்கும்போது வேகமாக ஏற்றும்).",
+		"description": "[அமைப்பு] அம்சத்தின் விளக்கத்துடன் லைட்னிங் வழிசெலுத்தலை அனுமதிக்க வேண்டாம்"
 	},
 	"opt_same_tab_popup": {
 		"message": "Popup-ஐ சொடுக்கும்போது அதே குத்தகையில் பக்கம்.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce ஐடி தானாகச் சோதிப்பதை தவிர்க்கவும்.",
 		"description": "[அமைப்பு] பயனர் Tabs-ஐ சேமிக்கும்போது, இணைப்பில் ஐடி உள்ளதா என்பதைத் தானாகச் சோதிக்காது"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce பக்கத்தில் இருந்தபோது Popup-ஐ சொடுக்கும்போது பக்கம்.",
-		"description": "[அமைப்பு] பயனர் Salesforce இணையதளத்தில் இருந்தபோது Popup-ஐ திறக்கும் போது"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce பக்கத்தில் இல்லாதபோது Popup-ஐ சொடுக்கும்போது பக்கம்.",
-		"description": "[அமைப்பு] பயனர் Salesforce இணையதளத்தில் இல்லாதபோது Popup-ஐ திறக்கும் போது"
 	},
 	"or_drop": {
 		"message": "அல்லது விடு",

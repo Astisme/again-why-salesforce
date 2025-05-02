@@ -338,10 +338,6 @@
 		"message": "يرجى إدخال Org صالح!",
 		"description": "[error-open-other-org-modal] رسالة عند إدخال عنوان URL خاطئ في النافذة المنبثقة"
 	},
-	"invalid_url": {
-		"message": "عنوان URL غير صالح",
-		"description": "[notSalesforceSetup] عنوان URL غير صالح"
-	},
 	"italic": {
 		"message": "مائل",
 		"description": "خيار نمط الخط للنص المائل"
@@ -362,33 +358,29 @@
 		"message": "لم يتم مطابقة أي إجراء",
 		"description": "[error] في Salesforce، الإجراء المطلوب لم يتطابق مع أي إجراء متاح"
 	},
-	"nss_detected": {
-		"message": " تم الكشف عنه.",
-		"description": "[notSalesforceSetup] تم الكشف عن شيء؛ يرجى تضمين فراغ في البداية"
+	"nss_invalid_url": {
+		"message": "تم الكشف عن عنوان URL غير صالح.",
+		"description": "[ليس إعداد Salesforce] عنوان URL غير صالح"
 	},
-	"nss_prefix": {
-		"message": "هذا ليس ",
-		"description": "[notSalesforceSetup] البادئة المعروضة عندما لا يكون المستخدم على صفحة Salesforce؛ يرجى تضمين فراغ في النهاية"
+	"nss_not_setup_page": {
+		"message": "هذه ليست صفحة إعداد Salesforce Lightning.",
+		"description": "[ليس إعداد Salesforce] المستخدم ليس على صفحة Salesforce."
 	},
 	"open_setup": {
 		"message": "فتح الإعداد",
 		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
 	},
-	"opt_always_open": {
-		"message": "افتح دائمًا",
-		"description": "[إعداد]"
+	"opt_automatic_open_login": {
+		"message": "افتح تلقائيًا صفحة تسجيل الدخول إلى Salesforce عند النقر فوق النافذة المنبثقة عندما لا تكون على صفحة Salesforce.",
+		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على أي موقع ويب"
 	},
-	"opt_automatic_open": {
-		"message": "افتح تلقائيًا",
-		"description": "[إعداد]"
+	"opt_automatic_open_setup": {
+		"message": "افتح تلقائيًا صفحة إعداد Salesforce عند النقر فوق النافذة المنبثقة عندما تكون على صفحة Salesforce.",
+		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على موقع ويب Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "خيار اللغة للرجوع إلى الإنجليزية إذا لم يتم دعم الإعداد الإقليمي أو لم يقدم الترجمة"
-	},
-	"opt_faster_loading": {
-		"message": "(تحميل أسرع عند الاستخدام).",
-		"description": "[إعداد] شرح ميزة Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "احتفظ بعلامات التبويب المفضلة على يسار الصفحة الرئيسية ومدير الكائنات.",
@@ -398,9 +390,17 @@
 		"message": "افتح الروابط دائمًا في علامة تبويب جديدة.",
 		"description": "[إعداد] عند نقر المستخدم على علامة تبويب مفضلة، افتحها في علامة تبويب جديدة"
 	},
-	"opt_prevent_use": {
-		"message": "منع الاستخدام ",
-		"description": "[إعداد] مثل 'يفضل عدم الاستخدام'. تأكد من تضمين مسافة في نهاية الرسالة"
+	"opt_open_login_same_tab": {
+		"message": "افتح دائمًا صفحة تسجيل الدخول إلى Salesforce في نفس Tab عند النقر فوق النافذة المنبثقة.",
+		"description": "[إعداد]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "افتح دائمًا صفحة إعداد Salesforce في نفس Tab عند النقر فوق النافذة المنبثقة.",
+		"description": "[إعداد]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "منع استخدام تنقل Lightning (تحميل أسرع عند الاستخدام).",
+		"description": "[إعداد] عدم السماح بتنقل Lightning مع شرح الميزة"
 	},
 	"opt_same_tab_popup": {
 		"message": "الصفحة في نفس العلامة عند النقر على المنبثق.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "تخطي التحقق التلقائي من معرف Salesforce.",
 		"description": "[إعداد] عند إضافة علامة تبويب إلى المفضلة، منع التحقق من وجود معرف في الرابط"
-	},
-	"opt_when_clicking_popup": {
-		"message": "الصفحة عند النقر على المنبثق أثناء التواجد في صفحة Salesforce.",
-		"description": "[إعداد] عندما يفتح المستخدم المنبثق على موقع Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "الصفحة عند النقر على المنبثق أثناء عدم التواجد في صفحة Salesforce.",
-		"description": "[إعداد] عندما يفتح المستخدم المنبثق على موقع عشوائي"
 	},
 	"or_drop": {
 		"message": "أو إسقاط",

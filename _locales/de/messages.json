@@ -338,10 +338,6 @@
 		"message": "Bitte geben Sie eine gültige Org ein!",
 		"description": "[error-open-other-org-modal] Nachricht, wenn eine fehlerhafte URL eingegeben wird."
 	},
-	"invalid_url": {
-		"message": "Ungültige URL",
-		"description": "[notSalesforceSetup] Eine URL, die nicht gültig ist"
-	},
 	"italic": {
 		"message": "Kursiv",
 		"description": "Schriftstiloption für kursiven Text"
@@ -362,33 +358,29 @@
 		"message": "Keine Aktion gefunden, die übereinstimmt",
 		"description": "[error] In Salesforce stimmt die angeforderte Aktion mit keiner verfügbaren Aktion überein."
 	},
-	"nss_detected": {
-		"message": " erkannt.",
-		"description": "[notSalesforceSetup] Etwas wurde erkannt; bitte am Anfang ein Leerzeichen einfügen"
+	"nss_invalid_url": {
+		"message": "Ungültige URL erkannt.",
+		"description": "[notSalesforceSetup] eine URL, die nicht gültig ist"
 	},
-	"nss_prefix": {
-		"message": "Dies ist kein ",
-		"description": "[notSalesforceSetup] Präfix, wenn der Benutzer nicht auf einer Salesforce-Seite ist; bitte am Ende ein Leerzeichen einfügen"
+	"nss_not_setup_page": {
+		"message": "Dies ist keine Salesforce Lightning Setup-Seite.",
+		"description": "[notSalesforceSetup] der Benutzer befindet sich nicht auf einer Salesforce-Seite."
 	},
 	"open_setup": {
 		"message": "Setup öffnen",
 		"description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
 	},
-	"opt_always_open": {
-		"message": "Immer öffnen",
-		"description": "[Einstellung]"
+	"opt_automatic_open_login": {
+		"message": "Salesforce-Anmeldeseite automatisch öffnen, wenn Sie das Popup auf einer beliebigen Seite öffnen.",
+		"description": "[setting] wenn der Benutzer das Popup auf einer zufälligen Website öffnet"
 	},
-	"opt_automatic_open": {
-		"message": "Automatisch öffnen",
-		"description": "[Einstellung]"
+	"opt_automatic_open_setup": {
+		"message": "Salesforce Setup-Seite automatisch öffnen, wenn Sie das Popup auf einer Salesforce-Seite öffnen.",
+		"description": "[setting] wenn der Benutzer das Popup auf einer Salesforce-Website öffnet"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Sprachauswahl, um auf Englisch zurückzufallen, wenn das Gebietsschema nicht unterstützt wird oder keine Übersetzung anbietet"
-	},
-	"opt_faster_loading": {
-		"message": "(schnelleres Laden bei Nutzung).",
-		"description": "[Einstellung] Erklärung der Lightning Navigation-Funktion"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Favorisierte Tabs links von Startseite und Objekt-Manager belassen.",
@@ -398,9 +390,17 @@
 		"message": "Links immer in einem neuen Browser-Tab öffnen.",
 		"description": "[Einstellung] wenn der Benutzer auf einen Favoriten klickt, in neuem Tab öffnen"
 	},
-	"opt_prevent_use": {
-		"message": "Verwendung verhindern ",
-		"description": "[Einstellung] wie 'möchte nicht verwenden'. Stelle sicher, dass am Ende ein Leerzeichen steht"
+	"opt_open_login_same_tab": {
+		"message": "Salesforce-Anmeldeseite beim Klick auf das Popup immer im selben Tab öffnen.",
+		"description": "[setting] Salesforce-Anmeldeseite immer im selben Tab öffnen"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Salesforce Setup-Seite beim Klick auf das Popup immer im selben Tab öffnen.",
+		"description": "[setting] Salesforce Setup-Seite immer im selben Tab öffnen"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Verwendung von Lightning Navigation verhindern (schnellere Ladezeit bei Nutzung).",
+		"description": "[setting] Lightning Navigation nicht zulassen mit Erklärung der Funktion"
 	},
 	"opt_same_tab_popup": {
 		"message": "Seite im selben Tab öffnen, wenn auf das Popup geklickt wird.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Automatische Überprüfung der Salesforce-ID überspringen.",
 		"description": "[Einstellung] beim Favorisieren eines Tabs nicht nach einer ID im Link suchen"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Seite beim Klicken im Popup auf einer Salesforce-Seite.",
-		"description": "[Einstellung] wenn der Benutzer das Popup auf einer Salesforce-Website öffnet"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Seite beim Klicken im Popup auf einer Nicht-Salesforce-Seite.",
-		"description": "[Einstellung] wenn der Benutzer das Popup auf einer beliebigen Website öffnet"
 	},
 	"or_drop": {
 		"message": "Oder ablegen",

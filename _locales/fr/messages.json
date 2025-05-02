@@ -338,10 +338,6 @@
 		"message": "Veuillez insérer une Org valide !",
 		"description": "[error-open-other-org-modal] Message lorsque l'URL saisie est incorrecte dans le modal."
 	},
-	"invalid_url": {
-		"message": "URL non valide",
-		"description": "[notSalesforceSetup] Une URL qui n'est pas valide"
-	},
 	"italic": {
 		"message": "Italique",
 		"description": "Option de style de police pour le texte en italique"
@@ -362,33 +358,29 @@
 		"message": "Aucune action correspondante trouvée",
 		"description": "[error] Dans Salesforce, l'action demandée ne correspond à aucune action disponible."
 	},
-	"nss_detected": {
-		"message": " détecté.",
-		"description": "[notSalesforceSetup] Quelque chose a été détecté; veuillez inclure un espace au début"
+	"nss_invalid_url": {
+		"message": "URL invalide détectée.",
+		"description": "[n'estPasUneConfigurationSalesforce] une URL qui n'est pas valide"
 	},
-	"nss_prefix": {
-		"message": "Ce n'est pas un ",
-		"description": "[notSalesforceSetup] Préfixe affiché lorsque l'utilisateur n'est pas sur une page Salesforce; veuillez inclure un espace à la fin"
+	"nss_not_setup_page": {
+		"message": "Ceci n'est pas une page de configuration Salesforce Lightning.",
+		"description": "[n'estPasUneConfigurationSalesforce] l'utilisateur n'est pas sur une page Salesforce."
 	},
 	"open_setup": {
 		"message": "Ouvrir la configuration",
 		"description": "[notSalesforceSetup] Appel à l'action pour accéder à la page de configuration de Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Toujours ouvrir",
-		"description": "[paramètre]"
+	"opt_automatic_open_login": {
+		"message": "Ouvrir automatiquement la page de connexion Salesforce lorsque vous cliquez sur la fenêtre contextuelle alors que vous n'êtes pas sur une page Salesforce.",
+		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site web quelconque"
 	},
-	"opt_automatic_open": {
-		"message": "Ouvrir automatiquement",
-		"description": "[paramètre]"
+	"opt_automatic_open_setup": {
+		"message": "Ouvrir automatiquement la page de configuration Salesforce lorsque vous cliquez sur la fenêtre contextuelle alors que vous êtes sur une page Salesforce.",
+		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Option de langue pour revenir à l'anglais si la locale n'est pas prise en charge ou n'affiche pas la traduction"
-	},
-	"opt_faster_loading": {
-		"message": "(chargement plus rapide en cours d'utilisation).",
-		"description": "[paramètre] explication de la fonctionnalité Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Garder les Tabs favoris à gauche de Accueil et Gestionnaire d'objets.",
@@ -398,9 +390,17 @@
 		"message": "Toujours ouvrir les liens dans un nouvel onglet du navigateur.",
 		"description": "[paramètre] lorsque l'utilisateur clique sur un Tab favori, l'ouvrir dans un nouvel onglet du navigateur"
 	},
-	"opt_prevent_use": {
-		"message": "Empêcher l'utilisation ",
-		"description": "[paramètre] comme 'préférer ne pas utiliser'. assurez-vous d'inclure un espace à la fin du message"
+	"opt_open_login_same_tab": {
+		"message": "Toujours ouvrir la page de connexion Salesforce dans le même Tab lorsque vous cliquez sur la fenêtre contextuelle.",
+		"description": "[paramètre]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Toujours ouvrir la page de configuration Salesforce dans le même Tab lorsque vous cliquez sur la fenêtre contextuelle.",
+		"description": "[paramètre]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Empêcher l'utilisation de la navigation Lightning (chargement plus rapide lors de l'utilisation).",
+		"description": "[paramètre] ne pas autoriser la navigation Lightning avec explication de la fonctionnalité"
 	},
 	"opt_same_tab_popup": {
 		"message": "page dans le même onglet lors du clic sur la fenêtre contextuelle.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Ignorer la vérification automatique de l'ID Salesforce.",
 		"description": "[paramètre] lors de la mise en favori d'un Tab, empêcher la vérification de la présence d'un ID dans le lien"
-	},
-	"opt_when_clicking_popup": {
-		"message": "page lors du clic sur la fenêtre contextuelle sur une page Salesforce.",
-		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle sur un site Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "page lors du clic sur la fenêtre contextuelle sur une page non Salesforce.",
-		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle sur un site aléatoire"
 	},
 	"or_drop": {
 		"message": "Ou déposer",

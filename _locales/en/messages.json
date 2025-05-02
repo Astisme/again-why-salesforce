@@ -338,10 +338,6 @@
 		"message": "Please insert a valid Org!",
 		"description": "[error-open-other-org-modal] message for when the user inserts a wrong url in the modal"
 	},
-	"nss_invalid_url": {
-		"message": "Invalid URL detected.",
-		"description": "[notSalesforceSetup] a URL which is not valid"
-	},
 	"italic": {
 		"message": "Italic",
 		"description": "Font style option for italic text"
@@ -362,6 +358,10 @@
 		"message": "Did not match any action",
 		"description": "[error] in salesforce when the switch cannot match the requested action"
 	},
+	"nss_invalid_url": {
+		"message": "Invalid URL detected.",
+		"description": "[notSalesforceSetup] a URL which is not valid"
+	},
 	"nss_not_setup_page": {
 		"message": "This is not a Salesforce Lightning Setup page.",
 		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
@@ -369,14 +369,6 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce Setup page"
-	},
-	"opt_open_login_same_tab": {
-		"message": "Always open Salesforce Login page in the same tab when clicking on the popup.",
-		"description": "[setting]"
-	},
-	"opt_open_setup_same_tab": {
-		"message": "Always open Salesforce Setup page in the same tab when clicking on the popup.",
-		"description": "[setting]"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automatically open Salesforce Login page when clicking on the popup while not on a Salesforce page.",
@@ -397,6 +389,14 @@
 	"opt_link_new_browser": {
 		"message": "Always open links in a new browser tab.",
 		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Always open Salesforce Login page in the same tab when clicking on the popup.",
+		"description": "[setting]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Always open Salesforce Setup page in the same tab when clicking on the popup.",
+		"description": "[setting]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Prevent use of Lightning Navigation (faster loading when in use).",

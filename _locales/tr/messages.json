@@ -339,10 +339,6 @@
 		"message": "Lütfen geçerli bir Kuruluş girin!",
 		"description": "[hata-başka-kuruluş-aç-modal] kullanıcı modalda yanlış bir URL girdiğinde gösterilen mesaj"
 	},
-	"invalid_url": {
-		"message": "Geçersiz URL",
-		"description": "[SalesforceKurulumuDeğil] geçerli olmayan bir URL"
-	},
 	"italic": {
 		"message": "İtalik",
 		"description": "İtalik metin için yazı tipi stili seçeneği"
@@ -363,33 +359,29 @@
 		"message": "Herhangi bir eylemle eşleşmedi",
 		"description": "[hata] Salesforce'ta anahtar istenen eylemle eşleşemediğinde"
 	},
-	"nss_detected": {
-		"message": " algılandı.",
-		"description": "[SalesforceKurulumuDeğil] bulunan bir şey. Lütfen mesajın başına bir boşluk eklediğinizden emin olun."
+	"nss_invalid_url": {
+		"message": "Geçersiz URL tespit edildi.",
+		"description": "[SalesforceKurulumuDeğil] geçersiz bir URL"
 	},
-	"nss_prefix": {
-		"message": "Bu bir ",
-		"description": "[SalesforceKurulumuDeğil] kullanıcı bir Salesforce sayfasında olmadığında gösterilen ön ek. Lütfen mesajın sonuna bir boşluk eklediğinizden emin olun"
+	"nss_not_setup_page": {
+		"message": "Bu bir Salesforce Lightning Kurulum sayfası değil.",
+		"description": "[SalesforceKurulumuDeğil] kullanıcı bir Salesforce sayfasında değil."
 	},
 	"open_setup": {
 		"message": "Kurulumu Aç",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
 	},
-	"opt_always_open": {
-		"message": "Her zaman aç",
-		"description": "[ayar]"
+	"opt_automatic_open_login": {
+		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklarken Salesforce Giriş sayfasını otomatik olarak açın.",
+		"description": "[ayarlama] kullanıcı rastgele bir web sitesindeyken açılır pencereyi açtığında"
 	},
-	"opt_automatic_open": {
-		"message": "Otomatik aç",
-		"description": "[ayar]"
+	"opt_automatic_open_setup": {
+		"message": "Bir Salesforce sayfasındayken açılır pencereye tıklarken Salesforce Kurulum sayfasını otomatik olarak açın.",
+		"description": "[ayarlama] kullanıcı bir Salesforce web sitesindeyken açılır pencereyi açtığında"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Yerel ayar desteklenmiyorsa veya çeviri yoksa İngilizce'ye dönme dil seçeneği"
-	},
-	"opt_faster_loading": {
-		"message": "(kullanıldığında daha hızlı yükleme).",
-		"description": "[ayar] Lightning Navigation özelliği açıklaması"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Favori Sekmeleri Ana Sayfa ve Nesne Yöneticisi solunda tut.",
@@ -399,9 +391,17 @@
 		"message": "Bağlantıları her zaman yeni bir tarayıcı sekmesinde aç.",
 		"description": "[ayar] kullanıcı favori Sekmeye tıkladığında yeni sekmede aç"
 	},
-	"opt_prevent_use": {
-		"message": "Kullanımı önle ",
-		"description": "[ayar] 'kullanmayı tercih etme' gibi. Mesaj sonunda boşluk bırakın"
+	"opt_open_login_same_tab": {
+		"message": "Açılır pencereye tıklarken Salesforce Giriş sayfasını her zaman aynı Tab'de açın.",
+		"description": "[ayarlama]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Açılır pencereye tıklarken Salesforce Kurulum sayfasını her zaman aynı Tab'de açın.",
+		"description": "[ayarlama]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightning Navigasyon kullanımını engelleyin (kullanımdayken daha hızlı yükleme).",
+		"description": "[ayarlama] özellik açıklamasıyla Lightning Navigasyon'a izin verme"
 	},
 	"opt_same_tab_popup": {
 		"message": "Popup'a tıklandığında sayfayı aynı sekmede aç.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce Kimliği otomatik denetlemesini atla.",
 		"description": "[ayar] Sekmeyi favoriye eklerken bağlantıda kimlik denetimini önle"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce sayfasındayken popup'a tıklandığında sayfa.",
-		"description": "[ayar] kullanıcı Salesforce sitesinde popup açtığında"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce olmayan bir sayfadayken popup'a tıklandığında sayfa.",
-		"description": "[ayar] kullanıcı rastgele bir sitede popup açtığında"
 	},
 	"or_drop": {
 		"message": "Veya bırakın",

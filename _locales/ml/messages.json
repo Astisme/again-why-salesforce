@@ -338,10 +338,6 @@
 		"message": "ദയവായി ശരിയായ ഓര്‍ഗൻ ചേര്‍ക്കുക!",
 		"description": "[error-open-other-org-modal] തെറ്റായ URL ചേര്‍ത്തപ്പഴുള്ള സന്ദേശം"
 	},
-	"invalid_url": {
-		"message": "അസാധുവായ URL",
-		"description": "[notSalesforceSetup] ശരിയായതല്ലാത്ത URL"
-	},
 	"italic": {
 		"message": "ഇറ്റാലിക്",
 		"description": "ഇറ്റാലിക് ടെക്സ്റ്റ്‌ക്കായുള്ള ഫോണ്ട് ശൈലി ഓപ്‌ഷൻ"
@@ -362,33 +358,29 @@
 		"message": "ഏതെങ്കിലും പ്രവര്‍ത്തനവുമായി പൊരുത്തപ്പെടുന്നില്ല",
 		"description": "[error] Salesforce-ല്‍ ആവശ്യപ്പെട്ട പ്രവര്‍ത്തനവുമായി പൊരുത്തപ്പെടുന്നില്ല"
 	},
-	"nss_detected": {
-		"message": " കണ്ടുപിടിച്ചു.",
-		"description": "[notSalesforceSetup] കണ്ടെത്തിയതു. സന്ദേശത്തിന്റെ ആരംഭത്തില്‍ സ്ഥലം വേണം."
+	"nss_invalid_url": {
+		"message": "അസാധുവായ URL കണ്ടെത്തി.",
+		"description": "[Salesforce സജ്ജീകരണമല്ല] ഒരു അസാധുവായ URL"
 	},
-	"nss_prefix": {
-		"message": "ഇത് ഒരു ",
-		"description": "[notSalesforceSetup] Salesforce-ലല്ലാത്തതിന്റെ മുൻകൂർ പദം; സന്ദേശത്തിന്റെ അവസാനം സ്ഥലം വേണം"
+	"nss_not_setup_page": {
+		"message": "ഇതൊരു Salesforce ലൈറ്റ്നിംഗ് സജ്ജീകരണ താളല്ല.",
+		"description": "[Salesforce സജ്ജീകരണമല്ല] ഉപയോക്താവ് ഒരു Salesforce താളിലല്ല."
 	},
 	"open_setup": {
 		"message": "സെറ്റപ്പ് തുറക്കുക",
 		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
 	},
-	"opt_always_open": {
-		"message": "എപ്പോഴും തുറക്കുക",
-		"description": "[ക്രമീകരണം]"
+	"opt_automatic_open_login": {
+		"message": "ഒരു Salesforce താളിലല്ലെങ്കിൽ പോപ്പ്അപ്പിൽ ക്ലിക്കുചെയ്യുമ്പോൾ Salesforce ലോഗിൻ താൾ യാന്ത്രികമായി തുറക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഏതെങ്കിലും വെബ്സൈറ്റിൽ പോപ്പ്അപ്പ് തുറക്കുമ്പോൾ"
 	},
-	"opt_automatic_open": {
-		"message": "സ്വയംതേട്ന് തുറക്കുക",
-		"description": "[ക്രമീകരണം]"
+	"opt_automatic_open_setup": {
+		"message": "ഒരു Salesforce താളിലാണെങ്കിൽ പോപ്പ്അപ്പിൽ ക്ലിക്കുചെയ്യുമ്പോൾ Salesforce സജ്ജീകരണ താൾ യാന്ത്രികമായി തുറക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഒരു Salesforce വെബ്സൈറ്റിൽ പോപ്പ്അപ്പ് തുറക്കുമ്പോൾ"
 	},
 	"opt_en_fallback": {
 		"message": "en (ഫോൾബാക്ക്)",
 		"description": "ലോകൽ പിന്തുണയില്ലയെങ്കിൽ fallback ആയി English ഉപയോഗിക്കാൻ ഭാഷായോൺ"
-	},
-	"opt_faster_loading": {
-		"message": "(ഉപയോഗത്തിൽ വേഗത്തിൽ ലോഡ് ചെയ്യപ്പെടുന്നു).",
-		"description": "ലൈറ്റ്‌നിംഗ് നാവിഗേഷൻ സവിശേഷതയുടെ [ക്രമീകരണം] വിശദാംശം"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ഫേവറിറ്റ് Tabs നെ Home‌യും Object Managerഉം ഡിപ്പാർട്ട്മെന്റിന്റെ ഇടതുവശത്ത് സൂക്ഷിക്കുക.",
@@ -398,9 +390,17 @@
 		"message": "ലിങ്കുകൾ എല്ലായ്പ്പോഴും പുതിയ ബ്രൗസർ ടാബിൽ തുറക്കുക.",
 		"description": "[ക്രമീകരണം] ഉപയോക്താവ് പ്രിയപ്പെട്ട ടാബിൽ ക്ലിക് ചെയ്യുമ്പോൾ പുതിയ ബ്രൗസർ ടാബിൽ തുറക്കാൻ"
 	},
-	"opt_prevent_use": {
-		"message": "ഉപയോഗം തടയുക ",
-		"description": "[ക്രമീകരണം] 'അനുവദിക്കാൻ ആഗ്രഹിക്കുന്നില്ല' എന്നപോലെ. സന്ദേശത്തിന്റെ അവസാനം തുറന്നിര_space ഉറപ്പാക്കുക"
+	"opt_open_login_same_tab": {
+		"message": "പോപ്പ്അപ്പിൽ ക്ലിക്കുചെയ്യുമ്പോൾ എല്ലായ്പ്പോഴും Salesforce ലോഗിൻ താൾ അതേ Tab-ൽ തുറക്കുക.",
+		"description": "[ക്രമീകരണം]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "പോപ്പ്അപ്പിൽ ക്ലിക്കുചെയ്യുമ്പോൾ എല്ലായ്പ്പോഴും Salesforce സജ്ജീകരണ താൾ അതേ Tab-ൽ തുറക്കുക.",
+		"description": "[ക്രമീകരണം]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "ലൈറ്റ്നിംഗ് നാവിഗേഷൻ ഉപയോഗിക്കുന്നത് തടയുക (ഉപയോഗിക്കുമ്പോൾ വേഗത്തിൽ ലോഡുചെയ്യുന്നു).",
+		"description": "[ക്രമീകരണം] ഈ സൗകര്യത്തെക്കുറിച്ചുള്ള വിശദീകരണത്തോടൊപ്പം ലൈറ്റ്നിംഗ് നാവിഗേഷൻ അനുവദിക്കരുത്"
 	},
 	"opt_same_tab_popup": {
 		"message": "പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ ഒരേ ടാബില്‍ പേജ്.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce ഐഡി സ്വയenchുന്ന പരിശോധന ഒഴിവാക്കുക.",
 		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഫേവറിറ്റ് ടാബ് ചേർക്കുമ്പോൾ ലിങ്കിൽ ഐഡി ഉണ്ടോയെന്ന് പരിശോധിക്കാതെ വിടാം"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce പേജിൽ ആയപ്പോൾ പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ പേജ്.",
-		"description": "[ക്രമീകരണം] ഉപയോക്താവ് Salesforce സൈറ്റിൽ ഉള്ളപ്പോൾ പോപ്-അപ്പ് തുറക്കുമ്പോൾ"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce പേജിൽ ഇല്ലായിക്കുമ്പോൾ പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ പേജ്.",
-		"description": "[ക്രമീകരണം] ഉപയോക്താവ് Salesforce സൈറ്റിൽ ഇല്ലായിക്കുമ്പോൾ പോപ്-അപ്പ് തുറക്കുമ്പോൾ"
 	},
 	"or_drop": {
 		"message": "അല്ലെങ്കില്‍ ഇളക്കി വിടുക",

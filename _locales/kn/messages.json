@@ -338,10 +338,6 @@
 		"message": "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಸಂಸ್ಥೆಯನ್ನು ಸೇರ್ಪಡೆ ಮಾಡಿ!",
 		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್ ದೋಷ] ತಪ್ಪು URL ಸೇರಿಸಿದಾಗಿನ ಸಂದೇಶ"
 	},
-	"invalid_url": {
-		"message": "ಅಮಾನ್ಯ URL",
-		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] ಮಾನ್ಯವಲ್ಲದ URL"
-	},
 	"italic": {
 		"message": "ಇಟಾಲಿಕ್",
 		"description": "ಇಟಾಲಿಕ್ ಪಂಕ್ತಿಗಾಗಿ ಫಾಂಟ್ ಶೈಲಿ ಆಯ್ಕೆ"
@@ -362,33 +358,29 @@
 		"message": "ಯಾವುದೇ ಕ್ರಿಯೆ ಹೊಂದಿಕೆಯಾಗಲಿಲ್ಲ",
 		"description": "[ದೋಷ] Salesforce ನಲ್ಲಿ ಅನುಸರಿಸಲ್ಲದ ಕ್ರಿಯೆ ಸಂದರ್ಭ"
 	},
-	"nss_detected": {
-		"message": " ಕಂಡುಬಂದಿದೆ.",
-		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] ಕಂಡುಬರುವ ಯಾವುದೋ. ಸಂದೇಶದ ಆರಂಭದಲ್ಲಿ ಖಾಲಿ ಸ್ಥಳ ಇರಲಿ."
+	"nss_invalid_url": {
+		"message": "ಅಮಾನ್ಯ URL ಪತ್ತೆಯಾಗಿದೆ.",
+		"description": "[Salesforce ಸೆಟಪ್ ಅಲ್ಲ] ಅಮಾನ್ಯ URL"
 	},
-	"nss_prefix": {
-		"message": "ಇದು ಒಂದು ",
-		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಪುಟದಲ್ಲಿಲ್ಲದ ಬಳಕೆದಾರರಿಗೆ ಗೋಚರಿಸುವ ಪೂರ್ವಸೂಚನಾ ಪದ್ಯ; ಸಂದೇಶದ ಅಂತ್ಯದಲ್ಲಿ ಖಾಲಿ ಸ್ಥಳ ಇರಲಿ"
+	"nss_not_setup_page": {
+		"message": "ಇದು Salesforce ಲೈಟ್ನಿಂಗ್ ಸೆಟಪ್ ಪುಟವಲ್ಲ.",
+		"description": "[Salesforce ಸೆಟಪ್ ಅಲ್ಲ] ಬಳಕೆದಾರರು Salesforce ಪುಟದಲ್ಲಿಲ್ಲ."
 	},
 	"open_setup": {
 		"message": "ಸೆಟಪ್ ತೆರೆಯಿರಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆ"
 	},
-	"opt_always_open": {
-		"message": "ಎಲ್ಲಾವೇಳೆಯೂ ತೆರೆಯಿರಿ",
-		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	"opt_automatic_open_login": {
+		"message": "Salesforce ಪುಟದಲ್ಲಿಲ್ಲದಿದ್ದಾಗ ಪಾಪ್ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ Salesforce ಲಾಗಿನ್ ಪುಟವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು ಯಾವುದೇ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಪಾಪ್ಅಪ್ ತೆರೆದಾಗ"
 	},
-	"opt_automatic_open": {
-		"message": "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ",
-		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	"opt_automatic_open_setup": {
+		"message": "Salesforce ಪುಟದಲ್ಲಿರುವಾಗ ಪಾಪ್ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ Salesforce ಸೆಟಪ್ ಪುಟವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಪಾಪ್ಅಪ್ ತೆರೆದಾಗ"
 	},
 	"opt_en_fallback": {
 		"message": "en (ಫಾಲ್ಬ್ಯಾಕ್)",
 		"description": "ಸ್ಥಳೀಯೀಕರಣ ಬೆಂಬಲರಹಿತ ಅಥವಾ ಅನುವಾದ ಇಲ್ಲದಿದ್ದರೆ fallback ಆಗಿ English ಬಳಸಲು ಭಾಷಾ ಆಯ್ಕೆ"
-	},
-	"opt_faster_loading": {
-		"message": "(ಬಳಕೆಯಲ್ಲಿ ವೇಗವಾಗಿ ಲೋಡ್ ಆಗುತ್ತದೆ).",
-		"description": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್ ವೈಶಿಷ್ಟ್ಯದ [ಸೆಟ್ಟಿಂಗ್] ವಿವರಣೆ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ಪ್ರಿಯ Tabsಗಳನ್ನು Home ಮತ್ತು Object Managerನ ಎಡಭಾಗದಲ್ಲಿರಿಸಿ.",
@@ -398,9 +390,17 @@
 		"message": "ಲಿಂಕ್‌ಗಳನ್ನು ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಯಾವಾಗಲೂ ತೆರೆಯಿರಿ.",
 		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು ನೆಚ್ಚಿನ Tab ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ತೆರೆಯಲು"
 	},
-	"opt_prevent_use": {
-		"message": "ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ ",
-		"description": "[ಸೆಟ್ಟಿಂಗ್] 'ಬಳಕೆ ಮಾಡಲು ಇಚ್ಛಿಸುವುದಿಲ್ಲ' ಎಂಬಂತೆ. ದಯವಿಟ್ಟು ಸಂದೇಶದ ಕೊನೇಯಲ್ಲಿ ಖಾಲಿ ಜಾಗ ಸೇರಿಸಿ"
+	"opt_open_login_same_tab": {
+		"message": "ಪಾಪ್ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಯಾವಾಗಲೂ Salesforce ಲಾಗಿನ್ ಪುಟವನ್ನು ಅದೇ Tab ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ಪಾಪ್ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಯಾವಾಗಲೂ Salesforce ಸೆಟಪ್ ಪುಟವನ್ನು ಅದೇ Tab ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ (ಬಳಕೆಯಲ್ಲಿರುವಾಗ ವೇಗವಾಗಿ ಲೋಡ್ ಆಗುತ್ತದೆ).",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ವೈಶಿಷ್ಟ್ಯದ ವಿವರಣೆಯೊಂದಿಗೆ ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ ಅನ್ನು ಅನುಮತಿಸಬೇಡಿ"
 	},
 	"opt_same_tab_popup": {
 		"message": "ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಅದೇ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಪುಟ.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce ಐಡಿ ಸ್ವಯಂಚಾಲಿತ ಪರಿಶೀಲನೆಯನ್ನು ಬಿಟ್ಟಿಟ್ಟು ಹೋಗಿ.",
 		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Tab ನೆಚ್ಚುಮುನ್ಸು ಸೇರಿಸುವಾಗ, ಉಳಿಸಬೇಕಾದ ಲಿಂಕ್‌ನಲ್ಲಿ ID ಇದ್ದರೆ ಪರಿಶೀಲಿಸುವುದನ್ನು ತಡೆಯಲು"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce ಪುಟದಲ್ಲಿದ್ದಾಗ ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಪುಟ.",
-		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಇದ್ದಾಗ ಪಾಪ್ ಅಪ್ ತೆರೆಯುವಾಗ"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce ಪುಟದಲ್ಲಿಲ್ಲದಾಗ ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಪುಟ.",
-		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ಪುಟದಲ್ಲಿಲ್ಲದಾಗ ಪಾಪ್ ಅಪ್ ತೆರೆಯುವಾಗ"
 	},
 	"or_drop": {
 		"message": "ಅಥವಾ ಎಸೆದು ಬಿಡಿ",

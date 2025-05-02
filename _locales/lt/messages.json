@@ -339,10 +339,6 @@
 		"message": "Prašome įterpti galiojančią Org!",
 		"description": "[klaida_atidaryti_kitą_org_modal] pranešimas, kai vartotojas įterpia neteisingą URL modaliniame lange"
 	},
-	"invalid_url": {
-		"message": "Neteisingas URL",
-		"description": "[neSalesforceSąranka] URL, kuris nėra galiojantis"
-	},
 	"italic": {
 		"message": "Kursyvas",
 		"description": "Šrifto stiliaus parinktis kursyviniam tekstui"
@@ -363,33 +359,29 @@
 		"message": "Neatitiko jokio veiksmo",
 		"description": "[klaida] Salesforce, kai perjungiklis negali suderinti prašomo veiksmo"
 	},
-	"nss_detected": {
-		"message": " aptikta.",
-		"description": "[neSalesforceSąranka] kažkas, kas rasta. Įsitikinkite, kad pranešimo pradžioje yra tarpas."
+	"nss_invalid_url": {
+		"message": "Aptiktas netinkamas URL.",
+		"description": "[neSalesforceNustatymas] netinkamas URL"
 	},
-	"nss_prefix": {
-		"message": "Tai nėra ",
-		"description": "[neSalesforceSąranka] tai priešdėlis, rodomas, kai vartotojas nėra Salesforce puslapyje. Įsitikinkite, kad pranešimo pabaigoje yra tarpas"
+	"nss_not_setup_page": {
+		"message": "Tai nėra „Salesforce Lightning“ sąrankos puslapis.",
+		"description": "[neSalesforceNustatymas] naudotojas nėra „Salesforce“ puslapyje."
 	},
 	"open_setup": {
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
 	},
-	"opt_always_open": {
-		"message": "Visada atidaryti",
-		"description": "[nustatymas]"
+	"opt_automatic_open_login": {
+		"message": "Automatiškai atidaryti „Salesforce“ prisijungimo puslapį spustelėjus iššokantįjį langą, kai nesate „Salesforce“ puslapyje.",
+		"description": "[nustatymas] kai naudotojas atidaro iššokantįjį langą būdamas bet kuriame tinklalapyje"
 	},
-	"opt_automatic_open": {
-		"message": "Atidaryti automatiškai",
-		"description": "[nustatymas]"
+	"opt_automatic_open_setup": {
+		"message": "Automatiškai atidaryti „Salesforce“ sąrankos puslapį spustelėjus iššokantįjį langą, kai esate „Salesforce“ puslapyje.",
+		"description": "[nustatymas] kai naudotojas atidaro iššokantįjį langą būdamas „Salesforce“ tinklalapyje"
 	},
 	"opt_en_fallback": {
 		"message": "en (Atsarginis)",
 		"description": "Kalbos parinktis grįžti į anglų kalbą, jei lokalė nepalaikoma arba neatvaizduoja vertimo"
-	},
-	"opt_faster_loading": {
-		"message": "(greitesnis įkėlimas naudojant).",
-		"description": "Lightning Navigation funkcijos [nustatymo] paaiškinimas"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Palikti mėgstamus Tabus kairėje nuo Namų ir Objektų tvarkyklės.",
@@ -399,9 +391,17 @@
 		"message": "Visada atidaryti nuorodas naujame naršyklės skirtuke.",
 		"description": "[nustatymas] kai vartotojas spusteli mėgstamą Tab, atidaryti naujame naršyklės skirtuke"
 	},
-	"opt_prevent_use": {
-		"message": "Užkirsti kelią naudojimui ",
-		"description": "[nustatymas] kaip 'nenoriu naudoti'. būtinai palikite tarpą gale"
+	"opt_open_login_same_tab": {
+		"message": "Visada atidaryti „Salesforce“ prisijungimo puslapį tame pačiame Tab spustelėjus iššokantįjį langą.",
+		"description": "[nustatymas]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Visada atidaryti „Salesforce“ sąrankos puslapį tame pačiame Tab spustelėjus iššokantįjį langą.",
+		"description": "[nustatymas]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Neleisti naudoti „Lightning“ naršymo (naudojant greitesnis įkėlimas).",
+		"description": "[nustatymas] neleisti „Lightning“ naršymo su funkcijos paaiškinimu"
 	},
 	"opt_same_tab_popup": {
 		"message": "puslapis tame pačiame skirtuke spustelėjus iššokantį langą.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Praleisti automatinį Salesforce ID patikrinimą.",
 		"description": "[nustatymas] kai vartotojas prideda mėgstamą Tab, nepatikrinti, ar nuorodoje yra ID"
-	},
-	"opt_when_clicking_popup": {
-		"message": "puslapis spustelėjus iššokantį langą būnant Salesforce puslapyje.",
-		"description": "[nustatymas] kai vartotojas atidaro iššokantį langą būnant Salesforce svetainėje"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "puslapis spustelėjus iššokantį langą nebūnant Salesforce puslapyje.",
-		"description": "[nustatymas] kai vartotojas atidaro iššokantį langą nebūnant Salesforce svetainėje"
 	},
 	"or_drop": {
 		"message": "Arba numeskite",

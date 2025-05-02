@@ -339,10 +339,6 @@
 		"message": "Please insert a valid Org!",
 		"description": "[error-open-other-org-modal] જ્યારે વપરાશકર્તા ખોટો URL દાખલ કરે ત્યારે સંદેશો"
 	},
-	"invalid_url": {
-		"message": "Invalid URL",
-		"description": "[notSalesforceSetup] અમાન્ય URL"
-	},
 	"italic": {
 		"message": "ઈટાલિક",
 		"description": "આડું લખાણ માટે ફોન્ટ શૈલી વિકલ્પ"
@@ -363,33 +359,29 @@
 		"message": "Did not match any action",
 		"description": "[error] જ્યારે Salesforce માં switch રિકવેસ્ટેડ ક્રિયા સાથે મેળ ખાતું નથી"
 	},
-	"nss_detected": {
-		"message": " detected.",
-		"description": "[notSalesforceSetup] કંઈક મળ્યું છે. કૃપા કરીને ખાતરી કરો કે સંદેશની શરૂઆતમાં જગ્યા છે"
+	"nss_invalid_url": {
+		"message": "અમાન્ય URL શોધાયો.",
+		"description": "[સેલ્સફોર્સ સેટઅપ નથી] એક અમાન્ય URL"
 	},
-	"nss_prefix": {
-		"message": "This is not a ",
-		"description": "[notSalesforceSetup] જ્યારે વપરાશકર્તા Salesforce પૃષ્ઠ પર નથી ત્યારે દર્શાવાતો પ્રિફિક્સ. અંતમાં જગ્યા હોવી જરૂરી છે"
+	"nss_not_setup_page": {
+		"message": "આ સેલ્સફોર્સ લાઇટનિંગ સેટઅપ પૃષ્ઠ નથી.",
+		"description": "[સેલ્સફોર્સ સેટઅપ નથી] વપરાશકર્તા સેલ્સફોર્સ પૃષ્ઠ પર નથી."
 	},
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce Setup પૃષ્ઠ તરફ રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
 	},
-	"opt_always_open": {
-		"message": "હંમેશા ખોલો",
-		"description": "[સેટિંગ]"
+	"opt_automatic_open_login": {
+		"message": "જ્યારે સેલ્સફોર્સ પૃષ્ઠ પર ન હોવ ત્યારે પૉપઅપ પર ક્લિક કરવા પર સેલ્સફોર્સ લૉગિન પૃષ્ઠ આપમેળે ખોલો.",
+		"description": "[સેટિંગ] જ્યારે વપરાશકર્તા કોઈપણ વેબસાઇટ પર પૉપઅપ ખોલે છે"
 	},
-	"opt_automatic_open": {
-		"message": "સ્વચાલિત ખોલવું",
-		"description": "[સેટિંગ]"
+	"opt_automatic_open_setup": {
+		"message": "જ્યારે સેલ્સફોર્સ પૃષ્ઠ પર હોવ ત્યારે પૉપઅપ પર ક્લિક કરવા પર સેલ્સફોર્સ સેટઅપ પૃષ્ઠ આપમેળે ખોલો.",
+		"description": "[સેટિંગ] જ્યારે વપરાશકર્તા સેલ્સફોર્સ વેબસાઇટ પર પૉપઅપ ખોલે છે"
 	},
 	"opt_en_fallback": {
 		"message": "en (ફોલબેક)",
 		"description": "જો લોકેલ સમર્થિત ન હોય અથવા અનુવાદ હાજર ન હોય તો fallback તરીકે અંગ્રેજીમાં સ્વિચ કરવાનો ભાષા વિકલ્પ"
-	},
-	"opt_faster_loading": {
-		"message": "(ઉપયોગ દરમિયાન ઝડપથી લોડ થાય છે).",
-		"description": "[સેટિંગ] Lightning નાવિગેશન ફંક્શનનો વર્ણન"
 	},
 	"opt_keep_tabs_left": {
 		"message": "પસંદીદા Tabsને Home અને Object Managerની ડાબી બાજુ રાખો.",
@@ -399,9 +391,17 @@
 		"message": "લિંકોને હંમેશા નવા બ્રાઉઝર ટૅબમાં ખોલો.",
 		"description": "[સેટિંગ] જો તમે કોઈ ફેવરિટ Tab પર ક્લિક કરો તો તેને નવા બ્રાઉઝર ટૅબમાં ખોલો"
 	},
-	"opt_prevent_use": {
-		"message": "ઉપયોગ કોઈ સાચો ",
-		"description": "[સેટિંગ] 'ઉપયોગ કરવાનું પસંદ નથી'. ખાતરી કરો કે અંતે ખાલી જગ્યા છે"
+	"opt_open_login_same_tab": {
+		"message": "જ્યારે પૉપઅપ પર ક્લિક કરો ત્યારે હંમેશાં સેલ્સફોર્સ લૉગિન પૃષ્ઠને તે જ Tab માં ખોલો.",
+		"description": "[સેટિંગ]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "જ્યારે પૉપઅપ પર ક્લિક કરો ત્યારે હંમેશાં સેલ્સફોર્સ સેટઅપ પૃષ્ઠને તે જ Tab માં ખોલો.",
+		"description": "[સેટિંગ]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "લાઇટનિંગ નેવિગેશનનો ઉપયોગ કરવાનું ટાળો (ઉપયોગમાં હોય ત્યારે ઝડપી લોડ થાય છે).",
+		"description": "[સેટિંગ] સુવિધાના સ્પષ્ટીકરણ સાથે લાઇટનિંગ નેવિગેશનની મંજૂરી આપશો નહીં"
 	},
 	"opt_same_tab_popup": {
 		"message": "પોપઅપ પર ક્લિક કરતા પાના એકસંગ Tab માં.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce ID સ્વચાલિત તપાસ બાકી મૂકો.",
 		"description": "[સેટિંગ] ફેવરિટ Tab સાચવતા ID ચકાસવું રોકો"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce પૃષ્ઠ પર પોપઅપ ક્લિક કરતી વખતે પાનું.",
-		"description": "[સેટિંગ] Salesforce સાઇટ પર પોપઅપ ખોલતી વખતે"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce વિના પૃષ્ઠ પર પોપઅપ ક્લિક કરતી વખતે પાનું.",
-		"description": "[સેટિંગ] કોઈ પણ સાઇટ પર પોપઅપ ખોલતી વખતે"
 	},
 	"or_drop": {
 		"message": "Or drop",

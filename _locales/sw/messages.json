@@ -339,10 +339,6 @@
 		"message": "Tafadhali weka Org sahihi!",
 		"description": "[hitilafu-fungua-modal-org-nyingine] ujumbe wakati mtumiaji anapoweka url isiyo sahihi katika modal"
 	},
-	"invalid_url": {
-		"message": "URL si sahihi",
-		"description": "[siUsanidiWaSalesforce] URL ambayo si sahihi"
-	},
 	"italic": {
 		"message": "Italiki",
 		"description": "Chaguo la mtindo wa fonti kwa maandishi ya italiki"
@@ -363,33 +359,29 @@
 		"message": "Haikulingana na kitendo chochote",
 		"description": "[hitilafu] katika Salesforce wakati swichi haiwezi kulinganisha kitendo kilichoombwa"
 	},
-	"nss_detected": {
-		"message": " imegunduliwa.",
-		"description": "[siUsanidiWaSalesforce] kitu ambacho kimepatikana. Tafadhali hakikisha unajumuisha nafasi mwanzoni mwa ujumbe."
+	"nss_invalid_url": {
+		"message": "URL batili imegunduliwa.",
+		"description": "[siUsanidiWaSalesforce] URL ambayo si sahihi"
 	},
-	"nss_prefix": {
-		"message": "Hii si ",
-		"description": "[siUsanidiWaSalesforce] hii ni kiambishi awali kinachoonyeshwa wakati mtumiaji hayuko kwenye ukurasa wa Salesforce. Tafadhali hakikisha unajumuisha nafasi mwishoni mwa ujumbe"
+	"nss_not_setup_page": {
+		"message": "Hii siyo ukurasa wa Usanidi wa Salesforce Lightning.",
+		"description": "[siUsanidiWaSalesforce] mtumiaji hayupo kwenye ukurasa wa Salesforce."
 	},
 	"open_setup": {
 		"message": "Fungua Usanidi",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa Usanidi wa Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Fungua kila wakati",
-		"description": "[mpangilio]"
+	"opt_automatic_open_login": {
+		"message": "Fungua ukurasa wa Kuingia wa Salesforce kiotomatiki unapobofya kidirisha ibukizi ukiwa si kwenye ukurasa wa Salesforce.",
+		"description": "[mpangilio] mtumiaji anapofungua kidirisha ibukizi akiwa kwenye tovuti nasibu"
 	},
-	"opt_automatic_open": {
-		"message": "Fungua kiotomatiki",
-		"description": "[mpangilio]"
+	"opt_automatic_open_setup": {
+		"message": "Fungua ukurasa wa Usanidi wa Salesforce kiotomatiki unapobofya kidirisha ibukizi ukiwa kwenye ukurasa wa Salesforce.",
+		"description": "[mpangilio] mtumiaji anapofungua kidirisha ibukizi akiwa kwenye tovuti ya Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Mbadala)",
 		"description": "Chaguo la lugha kurudi kwenye Kiingereza ikiwa eneo haliauniwi au halina tafsiri"
-	},
-	"opt_faster_loading": {
-		"message": "(ina pakua haraka zaidi wakati inapotumika).",
-		"description": "Maelezo ya [mpangilio] ya kipengele cha Uabiri wa Umeme (Lightning)"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Weka Tab unazopenda kushoto kwa Home na Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Kila mara fungua viungo katika kichupo kipya cha kivinjari.",
 		"description": "[mpangilio] wakati mtumiaji anabonyeza Tab ya kupenda, fungua katika kichupo kipya cha kivinjari"
 	},
-	"opt_prevent_use": {
-		"message": "Zuia matumizi ",
-		"description": "[mpangilio] kama 'napendelea kutokutumia'. hakikisha kuna nafasi mwishoni mwa ujumbe"
+	"opt_open_login_same_tab": {
+		"message": "Fungua ukurasa wa Kuingia wa Salesforce kila wakati kwenye Tabu hiyo hiyo unapobofya kidirisha ibukizi.",
+		"description": "[mpangilio]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Fungua ukurasa wa Usanidi wa Salesforce kila wakati kwenye Tabu hiyo hiyo unapobofya kidirisha ibukizi.",
+		"description": "[mpangilio]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Zuia matumizi ya Usogezaji wa Lightning (upakiaji wa haraka zaidi unapotumiwa).",
+		"description": "[mpangilio] usiruhusu Usogezaji wa Lightning na maelezo ya kipengele"
 	},
 	"opt_same_tab_popup": {
 		"message": "ukurasa katika kichupo hicho hicho wakati unabonyeza popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Ruka ukaguzi wa moja kwa moja wa Kitambulisho cha Salesforce (ID).",
 		"description": "[mpangilio] wakati mtumiaji anoongeza Tab katika upendeleo, usikague ikiwa kuna Kitambulisho (ID) katika kiungo kinachosajiliwa"
-	},
-	"opt_when_clicking_popup": {
-		"message": "ukurasa unabonyeza popup ukiwa kwenye ukurasa wa Salesforce.",
-		"description": "[mpangilio] wakati mtumiaji anafungua popup akiwa kwenye tovuti ya Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "ukurasa unabonyeza popup ukiwa sio kwenye ukurasa wa Salesforce.",
-		"description": "[mpangilio] wakati mtumiaji anafungua popup akiwa sio kwenye tovuti ya Salesforce"
 	},
 	"or_drop": {
 		"message": "Au dondosha",

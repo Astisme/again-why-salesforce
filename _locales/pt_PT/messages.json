@@ -339,10 +339,6 @@
 		"message": "Por favor, insira uma Org válida!",
 		"description": "[erro-modal-abrir-outra-org] mensagem para quando o utilizador insere um URL errado no modal"
 	},
-	"invalid_url": {
-		"message": "URL inválido",
-		"description": "[naoConfigSalesforce] um URL que não é válido"
-	},
 	"italic": {
 		"message": "Itálico",
 		"description": "Opção de estilo de fonte para texto em itálico"
@@ -363,33 +359,29 @@
 		"message": "Não correspondeu a nenhuma ação",
 		"description": "[erro] no Salesforce quando o switch não consegue corresponder à ação pedida"
 	},
-	"nss_detected": {
-		"message": " detetado.",
-		"description": "[naoConfigSalesforce] algo que foi encontrado. Certifique-se de incluir um espaço no início da mensagem."
+	"nss_invalid_url": {
+		"message": "URL inválido detetado.",
+		"description": "[nãoÉConfiguraçãoSalesforce] um URL que não é válido"
 	},
-	"nss_prefix": {
-		"message": "Isto não é uma ",
-		"description": "[naoConfigSalesforce] este é o prefixo mostrado quando o utilizador não está numa página do Salesforce. Certifique-se de incluir um espaço no final da mensagem"
+	"nss_not_setup_page": {
+		"message": "Esta não é uma página de configuração do Salesforce Lightning.",
+		"description": "[nãoÉConfiguraçãoSalesforce] o utilizador não está numa página do Salesforce."
 	},
 	"open_setup": {
 		"message": "Abrir Configuração",
 		"description": "[naoConfigSalesforce] chamada para ação num botão para redirecionar o utilizador para uma página de Configuração do Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Abrir sempre",
-		"description": "[definição]"
+	"opt_automatic_open_login": {
+		"message": "Abrir automaticamente a página de início de sessão do Salesforce ao clicar na janela pop-up enquanto não estiver numa página do Salesforce.",
+		"description": "[definição] quando o utilizador abre a janela pop-up enquanto está num website aleatório"
 	},
-	"opt_automatic_open": {
-		"message": "Abrir automaticamente",
-		"description": "[definição]"
+	"opt_automatic_open_setup": {
+		"message": "Abrir automaticamente a página de configuração do Salesforce ao clicar na janela pop-up enquanto estiver numa página do Salesforce.",
+		"description": "[definição] quando o utilizador abre a janela pop-up enquanto está num website do Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Alternativa)",
 		"description": "Opção de idioma para recorrer ao inglês se o local não for suportado ou não apresentar a tradução"
-	},
-	"opt_faster_loading": {
-		"message": "(carregamento mais rápido quando utilizado).",
-		"description": "Explicação [definição] da funcionalidade de Navegação Lightning"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Manter Tabs favoritos à esquerda do Home e Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Abrir sempre links numa nova aba do navegador.",
 		"description": "[definição] quando o utilizador clica num Tab favorito, abrir numa nova aba do navegador"
 	},
-	"opt_prevent_use": {
-		"message": "Impedir utilização ",
-		"description": "[definição] tal como 'preferir não utilizar'. certifique-se de incluir um espaço no final da mensagem"
+	"opt_open_login_same_tab": {
+		"message": "Abrir sempre a página de início de sessão do Salesforce no mesmo Tab ao clicar na janela pop-up.",
+		"description": "[definição]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Abrir sempre a página de configuração do Salesforce no mesmo Tab ao clicar na janela pop-up.",
+		"description": "[definição]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Impedir a utilização da Navegação Lightning (carregamento mais rápido quando em uso).",
+		"description": "[definição] não permitir a Navegação Lightning com explicação da funcionalidade"
 	},
 	"opt_same_tab_popup": {
 		"message": "página na mesma aba ao clicar no popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Ignorar verificação automática de Id da Salesforce.",
 		"description": "[definição] quando o utilizador adiciona um Tab favorito, impedir a verificação se existe um Id no link que está a ser guardado."
-	},
-	"opt_when_clicking_popup": {
-		"message": "página ao clicar no popup enquanto estiver numa página da Salesforce.",
-		"description": "[definição] quando o utilizador abre o popup enquanto está num site da Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "página ao clicar no popup enquanto não estiver numa página da Salesforce.",
-		"description": "[definição] quando o utilizador abre o popup enquanto está num site aleatório"
 	},
 	"or_drop": {
 		"message": "Ou largue",

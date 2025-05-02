@@ -339,10 +339,6 @@
 		"message": "لطفاً یک سازمان معتبر وارد کنید!",
 		"description": "[خطا_مودال_بازکردن_سازمان_دیگر] پیام برای زمانی که کاربر URL اشتباهی را در مودال وارد می‌کند"
 	},
-	"invalid_url": {
-		"message": "URL نامعتبر",
-		"description": "[نه_صفحه_تنظیمات_Salesforce] یک URL که معتبر نیست"
-	},
 	"italic": {
 		"message": "ایتالیک",
 		"description": "گزینه سبک قلم برای متن ایتالیک"
@@ -363,33 +359,29 @@
 		"message": "با هیچ عملی مطابقت نداشت",
 		"description": "[خطا] در Salesforce زمانی که سوئیچ نمی‌تواند عمل درخواستی را مطابقت دهد"
 	},
-	"nss_detected": {
-		"message": " شناسایی شد.",
-		"description": "[نه_صفحه_تنظیمات_Salesforce] چیزی که پیدا شده است. لطفاً حتماً یک فاصله در ابتدای پیام قرار دهید."
+	"nss_invalid_url": {
+		"message": "URL نامعتبر شناسایی شد.",
+		"description": "[غیر راه‌اندازی Salesforce] یک URL که معتبر نیست"
 	},
-	"nss_prefix": {
-		"message": "این یک ",
-		"description": "[نه_صفحه_تنظیمات_Salesforce] این پیشوندی است که وقتی کاربر در صفحه Salesforce نیست نشان داده می‌شود. لطفاً حتماً یک فاصله در انتهای پیام قرار دهید"
+	"nss_not_setup_page": {
+		"message": "این یک صفحه راه‌اندازی Salesforce Lightning نیست.",
+		"description": "[غیر راه‌اندازی Salesforce] کاربر در یک صفحه Salesforce نیست."
 	},
 	"open_setup": {
 		"message": "باز کردن تنظیمات",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
 	},
-	"opt_always_open": {
-		"message": "همیشه باز کن",
-		"description": "[تنظیم]"
+	"opt_automatic_open_login": {
+		"message": "هنگام کلیک کردن روی پنجره بازشو در حالی که در یک صفحه Salesforce نیستید، صفحه ورود به Salesforce را به طور خودکار باز کنید.",
+		"description": "[تنظیم] وقتی کاربر پنجره بازشو را در یک وب سایت تصادفی باز می کند"
 	},
-	"opt_automatic_open": {
-		"message": "خودکار باز کن",
-		"description": "[تنظیم]"
+	"opt_automatic_open_setup": {
+		"message": "هنگام کلیک کردن روی پنجره بازشو در حالی که در یک صفحه Salesforce هستید، صفحه تنظیمات Salesforce را به طور خودکار باز کنید.",
+		"description": "[تنظیم] وقتی کاربر پنجره بازشو را در یک وب سایت Salesforce باز می کند"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "گزینه زبان برای بازگشت به انگلیسی اگر زبان منطقه‌ای پشتیبانی نشود یا ترجمه نداشته باشد"
-	},
-	"opt_faster_loading": {
-		"message": "(بارگذاری سریع‌تر هنگام استفاده).",
-		"description": "[تنظیم] توضیح ویژگی Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "نگه‌داشتن Tabهای علاقه‌مند در سمت چپ Home و Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "همیشه پیوندها را در یک برگه جدید مرورگر باز کن.",
 		"description": "[تنظیم] هنگام کلیک روی یک Tab علاقه‌مند، آن را در یک برگه جدید باز کن"
 	},
-	"opt_prevent_use": {
-		"message": "جلوگیری از استفاده ",
-		"description": "[تنظیم] شبیه 'ترجیح می‌دهم استفاده نکنم'. حتماً یک فاصله در انتهای پیام باشد"
+	"opt_open_login_same_tab": {
+		"message": "هنگام کلیک کردن روی پنجره بازشو، همیشه صفحه ورود به Salesforce را در همان Tab باز کنید.",
+		"description": "[تنظیم]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "هنگام کلیک کردن روی پنجره بازشو، همیشه صفحه تنظیمات Salesforce را در همان Tab باز کنید.",
+		"description": "[تنظیم]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "از استفاده از ناوبری Lightning جلوگیری کنید (هنگام استفاده بارگیری سریعتر است).",
+		"description": "[تنظیم] اجازه ندهید ناوبری Lightning با توضیح ویژگی استفاده شود"
 	},
 	"opt_same_tab_popup": {
 		"message": "باز کردن صفحه در همان برگه هنگام کلیک روی پاپ‌آپ.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "رد کردن بررسی خودکار شناسه Salesforce.",
 		"description": "[تنظیم] هنگام انتخاب یک Tab به علاقه‌مندها، بررسی شناسه لینک را انجام نده"
-	},
-	"opt_when_clicking_popup": {
-		"message": "صفحه هنگام کلیک روی پاپ‌آپ در یک صفحه Salesforce.",
-		"description": "[تنظیم] وقتی کاربر پاپ‌آپ را در سایت Salesforce باز می‌کند"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "صفحه هنگام کلیک روی پاپ‌آپ در صفحه‌ای غیر از Salesforce.",
-		"description": "[تنظیم] وقتی کاربر پاپ‌آپ را در سایت دلخواه باز می‌کند"
 	},
 	"or_drop": {
 		"message": "یا رها کنید",

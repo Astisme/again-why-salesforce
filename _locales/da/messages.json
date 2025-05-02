@@ -339,10 +339,6 @@
 		"message": "Indtast venligst en gyldig Organisation!",
 		"description": "[error-open-other-org-modal] meddelelse når brugeren indtaster en forkert URL"
 	},
-	"invalid_url": {
-		"message": "Ugyldig URL",
-		"description": "[notSalesforceSetup] en URL der ikke er gyldig"
-	},
 	"italic": {
 		"message": "Kursiv",
 		"description": "Skrifttypemulighed for kursiv tekst"
@@ -363,33 +359,29 @@
 		"message": "Ingen matchende handling fundet",
 		"description": "[error] når switch-sætningen ikke kan matche den anmodede handling"
 	},
-	"nss_detected": {
-		"message": " registreret.",
-		"description": "[notSalesforceSetup] noget er blevet registreret. Sørg for at meddelelsen starter med et mellemrum."
+	"nss_invalid_url": {
+		"message": "Ugyldig URL registreret.",
+		"description": "[ikkeSalesforceSetup] en ugyldig URL"
 	},
-	"nss_prefix": {
-		"message": "Dette er ikke en ",
-		"description": "[notSalesforceSetup] præfiks vist når brugeren ikke er på en Salesforce-side."
+	"nss_not_setup_page": {
+		"message": "Dette er ikke en Salesforce Lightning-opsætningsside.",
+		"description": "[ikkeSalesforceSetup] brugeren er ikke på en Salesforce-side."
 	},
 	"open_setup": {
 		"message": "Åbn Setup",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
 	},
-	"opt_always_open": {
-		"message": "Åbn altid",
-		"description": "[indstilling]"
+	"opt_automatic_open_login": {
+		"message": "Åbn automatisk Salesforce-loginsiden, når du klikker på pop op-vinduet, mens du ikke er på en Salesforce-side.",
+		"description": "[indstilling] når brugeren åbner pop op-vinduet, mens vedkommende er på en tilfældig hjemmeside"
 	},
-	"opt_automatic_open": {
-		"message": "Åbn automatisk",
-		"description": "[indstilling]"
+	"opt_automatic_open_setup": {
+		"message": "Åbn automatisk Salesforce-opsætningssiden, når du klikker på pop op-vinduet, mens du er på en Salesforce-side.",
+		"description": "[indstilling] når brugeren åbner pop op-vinduet, mens vedkommende er på en Salesforce-hjemmeside"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Sprogmulighed for at falde tilbage til engelsk, hvis lokalet ikke understøttes eller ikke viser oversættelsen"
-	},
-	"opt_faster_loading": {
-		"message": "(hurtigere indlæsning ved brug).",
-		"description": "[indstillingsforklaring] forklaring af Lightning-navigation-funktionen"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behold favorit-Tabs til venstre for Hjem og Objektstyring.",
@@ -399,9 +391,17 @@
 		"message": "Åbn altid links i en ny browser-fane.",
 		"description": "[indstilling] når du klikker på en favorit-Tab, åbnes den i en ny browser-fane"
 	},
-	"opt_prevent_use": {
-		"message": "Forhindr brug ",
-		"description": "[indstilling] ligesom 'foretrækker ikke at bruge'. sørg for et mellemrum sidst"
+	"opt_open_login_same_tab": {
+		"message": "Åbn altid Salesforce-loginsiden i samme Tab, når du klikker på pop op-vinduet.",
+		"description": "[indstilling]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Åbn altid Salesforce-opsætningssiden i samme Tab, når du klikker på pop op-vinduet.",
+		"description": "[indstilling]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Forhindr brug af Lightning-navigation (hurtigere indlæsning ved brug).",
+		"description": "[indstilling] tillad ikke Lightning-navigation med forklaring af funktionen"
 	},
 	"opt_same_tab_popup": {
 		"message": "side i den samme fane ved klik på pop-up.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Spring automatisk kontrol af Salesforce ID over.",
 		"description": "[indstilling] når der gemmes en favorit-Tab, forhindr kontrol af ID i linket"
-	},
-	"opt_when_clicking_popup": {
-		"message": "side ved klik på pop-up, mens du er på en Salesforce-side.",
-		"description": "[indstilling] når pop-up åbnes på et Salesforce-websted"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "side ved klik på pop-up, mens du ikke er på en Salesforce-side.",
-		"description": "[indstilling] når pop-up åbnes på et tilfældigt websted"
 	},
 	"or_drop": {
 		"message": "Eller træk og slip",

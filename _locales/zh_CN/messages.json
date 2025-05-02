@@ -339,10 +339,6 @@
 		"message": "请输入有效的组织！",
 		"description": "[错误-打开其他组织模态框] 当用户在模态框中插入错误的 URL 时的消息"
 	},
-	"invalid_url": {
-		"message": "无效的 URL",
-		"description": "[非 Salesforce 设置页] 一个无效的 URL"
-	},
 	"italic": {
 		"message": "斜体",
 		"description": "斜体文本的字体样式选项"
@@ -363,33 +359,29 @@
 		"message": "未匹配任何操作",
 		"description": "[错误] 在 Salesforce 中，当切换无法匹配请求的操作时"
 	},
-	"nss_detected": {
-		"message": " 已检测到。",
-		"description": "[非 Salesforce 设置页] 发现某物。请确保在消息开头包含一个空格。"
+	"nss_invalid_url": {
+		"message": "检测到无效的URL。",
+		"description": "[非Salesforce设置] 无效的URL"
 	},
-	"nss_prefix": {
-		"message": "这不是 ",
-		"description": "[非 Salesforce 设置页] 当用户不在 Salesforce 页面上时显示的前缀。请确保在消息末尾包含一个空格"
+	"nss_not_setup_page": {
+		"message": "这不是Salesforce Lightning设置页面。",
+		"description": "[非Salesforce设置] 用户不在Salesforce页面上。"
 	},
 	"open_setup": {
 		"message": "打开设置",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 设置页面"
 	},
-	"opt_always_open": {
-		"message": "始终打开",
-		"description": "[设置]"
+	"opt_automatic_open_login": {
+		"message": "当不在Salesforce页面上时，单击弹出窗口时自动打开Salesforce登录页面。",
+		"description": "[设置] 当用户在任意网站上打开弹出窗口时"
 	},
-	"opt_automatic_open": {
-		"message": "自动打开",
-		"description": "[设置]"
+	"opt_automatic_open_setup": {
+		"message": "当在Salesforce页面上时，单击弹出窗口时自动打开Salesforce设置页面。",
+		"description": "[设置] 当用户在Salesforce网站上打开弹出窗口时"
 	},
 	"opt_en_fallback": {
 		"message": "en (备用)",
 		"description": "当本地不受支持或未提供翻译时回退到英文的语言选项"
-	},
-	"opt_faster_loading": {
-		"message": "（使用时加载更快）。",
-		"description": "[设置] 对 Lightning Navigation 功能的解释"
 	},
 	"opt_keep_tabs_left": {
 		"message": "将收藏的 Tabs 保持在首页和对象管理器的左侧。",
@@ -399,9 +391,17 @@
 		"message": "点击收藏的 Tab 时始终在新的浏览器标签中打开链接。",
 		"description": "[设置] 当用户点击收藏的 Tab 时，在新的浏览器标签中打开它"
 	},
-	"opt_prevent_use": {
-		"message": "阻止使用 ",
-		"description": "[设置] 类似于“宁愿不使用”。请确保消息末尾包含空格"
+	"opt_open_login_same_tab": {
+		"message": "单击弹出窗口时，始终在同一Tab中打开Salesforce登录页面。",
+		"description": "[设置]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "单击弹出窗口时，始终在同一Tab中打开Salesforce设置页面。",
+		"description": "[设置]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "阻止使用Lightning导航（使用时加载更快）。",
+		"description": "[设置] 不允许使用Lightning导航，并解释该功能"
 	},
 	"opt_same_tab_popup": {
 		"message": "点击弹出窗口时在同一标签页中打开页面。",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "跳过 Salesforce Id 的自动检查。",
 		"description": "[设置] 收藏 Tab 时，防止检查要保存的链接中是否包含 Id。"
-	},
-	"opt_when_clicking_popup": {
-		"message": "在 Salesforce 页面上点击弹出窗口时的页面。",
-		"description": "[设置] 当用户在 Salesforce 网站上打开弹出窗口时"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "在非 Salesforce 页面上点击弹出窗口时的页面。",
-		"description": "[设置] 当用户在随机网站上打开弹出窗口时"
 	},
 	"or_drop": {
 		"message": "或拖放",

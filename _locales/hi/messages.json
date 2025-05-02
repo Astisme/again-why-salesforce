@@ -338,10 +338,6 @@
 		"message": "कृपया एक मान्य Org दर्ज करें!",
 		"description": "[error-open-other-org-modal] जब गलत URL दर्ज किया जाता है, तब संदेश"
 	},
-	"invalid_url": {
-		"message": "अमान्य URL",
-		"description": "[notSalesforceSetup] एक अमान्य URL"
-	},
 	"italic": {
 		"message": "इटैलिक",
 		"description": "इटैलिक टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
@@ -362,33 +358,29 @@
 		"message": "कोई मेल खाने वाली क्रिया नहीं मिली",
 		"description": "[error] Salesforce में अनुरोधित क्रिया से मेल नहीं खाई।"
 	},
-	"nss_detected": {
-		"message": " पाया गया।",
-		"description": "[notSalesforceSetup] कुछ पाया गया; कृपया संदेश की शुरुआत में रिक्त स्थान शामिल करें।"
+	"nss_invalid_url": {
+		"message": "अमान्य URL मिला।",
+		"description": "[Salesforce सेटअप नहीं] एक अमान्य URL"
 	},
-	"nss_prefix": {
-		"message": "यह एक नहीं है ",
-		"description": "[notSalesforceSetup] जब उपयोगकर्ता Salesforce पृष्ठ पर नहीं होता, तब दिखाया जाने वाला प्रीफिक्स; अंत में एक रिक्त स्थान शामिल करें"
+	"nss_not_setup_page": {
+		"message": "यह Salesforce लाइटनिंग सेटअप पेज नहीं है।",
+		"description": "[Salesforce सेटअप नहीं] उपयोगकर्ता Salesforce पेज पर नहीं है।"
 	},
 	"open_setup": {
 		"message": "Setup खोलें",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठ पर जाने के लिए कॉल टू एक्शन"
 	},
-	"opt_always_open": {
-		"message": "हमेशा खोलें",
-		"description": "[सेटिंग]"
+	"opt_automatic_open_login": {
+		"message": "जब Salesforce पेज पर नहीं हों तो पॉपअप पर क्लिक करने पर Salesforce लॉगिन पेज अपने आप खुल जाएगा।",
+		"description": "[सेटिंग] जब उपयोगकर्ता किसी भी वेबसाइट पर पॉपअप खोलता है"
 	},
-	"opt_automatic_open": {
-		"message": "स्वचालित रूप से खोलें",
-		"description": "[सेटिंग]"
+	"opt_automatic_open_setup": {
+		"message": "जब Salesforce पेज पर हों तो पॉपअप पर क्लिक करने पर Salesforce सेटअप पेज अपने आप खुल जाएगा।",
+		"description": "[सेटिंग] जब उपयोगकर्ता Salesforce वेबसाइट पर पॉपअप खोलता है"
 	},
 	"opt_en_fallback": {
 		"message": "en (बैकअप)",
 		"description": "यदि स्थानीय समर्थित नहीं है या अनुवाद नहीं मिलता है तो अंग्रेज़ी पर वापस जाने का भाषा विकल्प"
-	},
-	"opt_faster_loading": {
-		"message": "(उपयोग के दौरान तेज़ लोडिंग)।",
-		"description": "[सेटिंग] लाइटनिंग नेविगेशन फ़ीचर की व्याख्या"
 	},
 	"opt_keep_tabs_left": {
 		"message": "मनपसंद Tabs को होम और ऑब्जेक्ट मैनेजर के बाएँ रखें।",
@@ -398,9 +390,17 @@
 		"message": "लिंक पर क्लिक करने पर हमेशा नए ब्राउज़र टैब में खोलें।",
 		"description": "[सेटिंग] जब उपयोगकर्ता पसंदीदा Tab पर क्लिक करे तो नए टैब में खोलें"
 	},
-	"opt_prevent_use": {
-		"message": "उपयोग रोकें ",
-		"description": "[सेटिंग] 'उपयोग नहीं करना पसंद करें' जैसा। सुनिश्चित करें संदेश के अंत में स्थान हो"
+	"opt_open_login_same_tab": {
+		"message": "पॉपअप पर क्लिक करने पर हमेशा Salesforce लॉगिन पेज को उसी Tab में खोलें।",
+		"description": "[सेटिंग]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "पॉपअप पर क्लिक करने पर हमेशा Salesforce सेटअप पेज को उसी Tab में खोलें।",
+		"description": "[सेटिंग]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "लाइटनिंग नेविगेशन के उपयोग को रोकें (उपयोग में होने पर तेज़ी से लोड होता है)।",
+		"description": "[सेटिंग] सुविधा की व्याख्या के साथ लाइटनिंग नेविगेशन की अनुमति न दें"
 	},
 	"opt_same_tab_popup": {
 		"message": "पॉपअप क्लिक करते समय उसी टैब में पेज खोलें।",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce Id की स्वचालित जांच छोड़ें।",
 		"description": "[सेटिंग] Tab को पसंदीदा बनाते समय लिंक में Id की जांच न करें।"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce पेज पर पॉपअप क्लिक करते समय पेज।",
-		"description": "[सेटिंग] जब उपयोगकर्ता Salesforce वेबसाइट पर पॉपअप खोलें"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce पेज नहीं होने पर पॉपअप क्लिक करते समय पेज।",
-		"description": "[सेटिंग] जब उपयोगकर्ता किसी अन्य वेबसाइट पर पॉपअप खोलें"
 	},
 	"or_drop": {
 		"message": "या ड्रॉप करें",

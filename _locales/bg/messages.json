@@ -339,10 +339,6 @@
 		"message": "Моля, въведете валидна Организация!",
 		"description": "[error-open-other-org-modal] съобщение когато потребителят въведе грешен URL"
 	},
-	"invalid_url": {
-		"message": "Невалиден URL",
-		"description": "[notSalesforceSetup] URL, който не е валиден"
-	},
 	"italic": {
 		"message": "Курсив",
 		"description": "Опция за стил на шрифта за курсивен текст"
@@ -363,33 +359,29 @@
 		"message": "Няма намерено съвпадение за действие",
 		"description": "[error] когато switch не може да съпостави поисканото действие"
 	},
-	"nss_detected": {
-		"message": " засечено.",
-		"description": "[notSalesforceSetup] нещо е засечено. Уверете се, че съобщението започва с интервал."
+	"nss_invalid_url": {
+		"message": "Открит е невалиден URL адрес.",
+		"description": "[не е настройка на Salesforce] невалиден URL адрес"
 	},
-	"nss_prefix": {
-		"message": "Това не е ",
-		"description": "[notSalesforceSetup] префикс, който се показва, когато потребителят не е на страница на Salesforce."
+	"nss_not_setup_page": {
+		"message": "Това не е страница за настройка на Salesforce Lightning.",
+		"description": "[не е настройка на Salesforce] потребителят не е на страница на Salesforce."
 	},
 	"open_setup": {
 		"message": "Отвори Setup",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към Salesforce Setup страницата"
 	},
-	"opt_always_open": {
-		"message": "Винаги отваряй",
-		"description": "[настройка]"
+	"opt_automatic_open_login": {
+		"message": "Автоматично отваряне на страницата за влизане в Salesforce, когато кликнете върху изскачащия прозорец, докато не сте на страница на Salesforce.",
+		"description": "[настройка] когато потребителят отвори изскачащия прозорец, докато е на произволен уебсайт"
 	},
-	"opt_automatic_open": {
-		"message": "Автоматично отваряне",
-		"description": "[настройка]"
+	"opt_automatic_open_setup": {
+		"message": "Автоматично отваряне на страницата за настройка на Salesforce, когато кликнете върху изскачащия прозорец, докато сте на страница на Salesforce.",
+		"description": "[настройка] когато потребителят отвори изскачащия прозорец, докато е на уебсайт на Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Резервен)",
 		"description": "Езикова опция за връщане към английски, ако локалът не се поддържа или не представя превода"
-	},
-	"opt_faster_loading": {
-		"message": "(по-бързо зареждане при използване).",
-		"description": "[обяснение на настройка] обяснение на функцията Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Запазване на любими Tabs вляво от Начало и Мениджър на обекти.",
@@ -399,9 +391,17 @@
 		"message": "Винаги отваряй връзки в нов раздел на браузъра.",
 		"description": "[настройка] при щракване върху любима Tab, отваряй я в нов раздел на браузъра"
 	},
-	"opt_prevent_use": {
-		"message": "Предотврати използване ",
-		"description": "[настройка] същото като 'предпочитам да не използвам'. уверете се, че има интервал в края"
+	"opt_open_login_same_tab": {
+		"message": "Винаги отваряйте страницата за влизане в Salesforce в същия Tab, когато кликнете върху изскачащия прозорец.",
+		"description": "[настройка]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Винаги отваряйте страницата за настройка на Salesforce в същия Tab, когато кликнете върху изскачащия прозорец.",
+		"description": "[настройка]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Предотвратяване на използването на Lightning навигация (по-бързо зареждане, когато се използва).",
+		"description": "[настройка] не позволявайте Lightning навигация с обяснение на функцията"
 	},
 	"opt_same_tab_popup": {
 		"message": "страница в същия раздел при щракване върху изскачащия прозорец.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Пропусни автоматична проверка на Salesforce ID.",
 		"description": "[настройка] при запазване на любима Tab, предотврати проверка за наличието на ID в връзката"
-	},
-	"opt_when_clicking_popup": {
-		"message": "страница при щракване върху изскачащия прозорец докато сте на страница на Salesforce.",
-		"description": "[настройка] при отваряне на изскачащия прозорец докато сте на сайт на Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "страница при щракване върху изскачащия прозорец докато не сте на страница на Salesforce.",
-		"description": "[настройка] при отваряне на изскачащия прозорец докато сте на произволен сайт"
 	},
 	"or_drop": {
 		"message": "Или пусни",

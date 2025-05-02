@@ -338,10 +338,6 @@
 		"message": "Vui lòng nhập Org hợp lệ!",
 		"description": "[error-open-other-org-modal] Thông báo khi URL sai được nhập vào modal"
 	},
-	"invalid_url": {
-		"message": "URL không hợp lệ",
-		"description": "[notSalesforceSetup] Một URL không hợp lệ"
-	},
 	"italic": {
 		"message": "Nghiêng",
 		"description": "Tùy chọn kiểu phông chữ cho văn bản nghiêng"
@@ -362,33 +358,29 @@
 		"message": "Không tìm thấy hành động phù hợp",
 		"description": "[error] Hành động được yêu cầu trong Salesforce không khớp với bất kỳ hành động nào có sẵn."
 	},
-	"nss_detected": {
-		"message": " đã được phát hiện.",
-		"description": "[notSalesforceSetup] Đã phát hiện một thứ gì đó; vui lòng đảm bảo bao gồm một khoảng trắng ở đầu thông điệp"
+	"nss_invalid_url": {
+		"message": "Đã phát hiện URL không hợp lệ.",
+		"description": "[khôngPhảiThiếtLậpSalesforce] một URL không hợp lệ"
 	},
-	"nss_prefix": {
-		"message": "Đây không phải là ",
-		"description": "[notSalesforceSetup] Tiền tố được hiển thị khi người dùng không ở trên trang Salesforce; vui lòng bao gồm một khoảng trắng ở cuối"
+	"nss_not_setup_page": {
+		"message": "Đây không phải là trang Thiết lập Salesforce Lightning.",
+		"description": "[khôngPhảiThiếtLậpSalesforce] người dùng không ở trên trang Salesforce."
 	},
 	"open_setup": {
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Luôn mở",
-		"description": "[cài đặt]"
+	"opt_automatic_open_login": {
+		"message": "Tự động mở trang Đăng nhập Salesforce khi nhấp vào cửa sổ bật lên trong khi không ở trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên trong khi ở trên một trang web ngẫu nhiên"
 	},
-	"opt_automatic_open": {
-		"message": "Mở tự động",
-		"description": "[cài đặt]"
+	"opt_automatic_open_setup": {
+		"message": "Tự động mở trang Thiết lập Salesforce khi nhấp vào cửa sổ bật lên trong khi ở trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên trong khi ở trên một trang web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Tùy chọn ngôn ngữ để quay lại tiếng Anh nếu ngôn ngữ khu vực không được hỗ trợ hoặc không có bản dịch"
-	},
-	"opt_faster_loading": {
-		"message": "(tải nhanh hơn khi sử dụng).",
-		"description": "[cài đặt] giải thích về tính năng Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Giữ Tabs yêu thích ở bên trái Home và Object Manager.",
@@ -398,9 +390,17 @@
 		"message": "Luôn mở liên kết trong tab trình duyệt mới.",
 		"description": "[cài đặt] khi người dùng nhấp vào Tab yêu thích, mở nó trong tab mới"
 	},
-	"opt_prevent_use": {
-		"message": "Ngăn sử dụng ",
-		"description": "[cài đặt] tương tự 'không muốn sử dụng'. hãy chắc chắn có khoảng trắng ở cuối thông báo"
+	"opt_open_login_same_tab": {
+		"message": "Luôn mở trang Đăng nhập Salesforce trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
+		"description": "[cài đặt]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Luôn mở trang Thiết lập Salesforce trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
+		"description": "[cài đặt]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Ngăn chặn việc sử dụng Điều hướng Lightning (tải nhanh hơn khi sử dụng).",
+		"description": "[cài đặt] không cho phép Điều hướng Lightning với giải thích về tính năng"
 	},
 	"opt_same_tab_popup": {
 		"message": "mở trang trong cùng tab khi nhấp popup.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Bỏ qua kiểm tra tự động ID Salesforce.",
 		"description": "[cài đặt] khi yêu thích Tab, ngăn kiểm tra ID trong liên kết"
-	},
-	"opt_when_clicking_popup": {
-		"message": "trang khi nhấp popup trên trang Salesforce.",
-		"description": "[cài đặt] khi người dùng mở popup trên trang Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "trang khi nhấp popup trên trang không phải Salesforce.",
-		"description": "[cài đặt] khi người dùng mở popup trên trang ngẫu nhiên"
 	},
 	"or_drop": {
 		"message": "Hoặc thả",

@@ -338,10 +338,6 @@
 		"message": "Пожалуйста, введите действительную Org!",
 		"description": "[error-open-other-org-modal] Сообщение, если введён неверный URL в модальном окне"
 	},
-	"invalid_url": {
-		"message": "Неверный URL",
-		"description": "[notSalesforceSetup] Неверный URL"
-	},
 	"italic": {
 		"message": "Курсив",
 		"description": "Параметр стиля шрифта для курсивного текста"
@@ -362,33 +358,29 @@
 		"message": "Не найдено соответствующего действия",
 		"description": "[error] В Salesforce запрошенное действие не совпадает ни с одним доступным действием"
 	},
-	"nss_detected": {
-		"message": " обнаружен.",
-		"description": "[notSalesforceSetup] Обнаружено что-то; включите пробел в начале сообщения"
+	"nss_invalid_url": {
+		"message": "Обнаружен недействительный URL.",
+		"description": "[неНастройкаSalesforce] недействительный URL"
 	},
-	"nss_prefix": {
-		"message": "Это не ",
-		"description": "[notSalesforceSetup] Префикс, показываемый, когда пользователь не на странице Salesforce; не забудьте включить пробел в конце"
+	"nss_not_setup_page": {
+		"message": "Это не страница настройки Salesforce Lightning.",
+		"description": "[неНастройкаSalesforce] пользователь не находится на странице Salesforce."
 	},
 	"open_setup": {
 		"message": "Открыть настройку",
 		"description": "[notSalesforceSetup] Призыв к переходу на страницу настройки Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Всегда открывать",
-		"description": "[настройка]"
+	"opt_automatic_open_login": {
+		"message": "Автоматически открывать страницу входа в Salesforce при нажатии на всплывающее окно, если вы не находитесь на странице Salesforce.",
+		"description": "[настройка] когда пользователь открывает всплывающее окно, находясь на случайном веб-сайте"
 	},
-	"opt_automatic_open": {
-		"message": "Открывать автоматически",
-		"description": "[настройка]"
+	"opt_automatic_open_setup": {
+		"message": "Автоматически открывать страницу настройки Salesforce при нажатии на всплывающее окно, если вы находитесь на странице Salesforce.",
+		"description": "[настройка] когда пользователь открывает всплывающее окно, находясь на веб-сайте Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Параметр языка для возврата к английскому, если локаль не поддерживается или не предоставляет перевод"
-	},
-	"opt_faster_loading": {
-		"message": "(загрузка быстрее при использовании).",
-		"description": "[настройка] объяснение функции Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Держать избранные Tabs слева от Главной и Менеджера объектов.",
@@ -398,9 +390,17 @@
 		"message": "Всегда открывать ссылки в новой вкладке браузера.",
 		"description": "[настройка] при щелчке пользователя по избранному Tab открывать его в новой вкладке"
 	},
-	"opt_prevent_use": {
-		"message": "Запретить использование ",
-		"description": "[настройка] похожа на 'предпочитаю не использовать'. убедитесь, что в конце сообщения есть пробел"
+	"opt_open_login_same_tab": {
+		"message": "Всегда открывать страницу входа в Salesforce в той же Tab при нажатии на всплывающее окно.",
+		"description": "[настройка]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Всегда открывать страницу настройки Salesforce в той же Tab при нажатии на всплывающее окно.",
+		"description": "[настройка]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Запретить использование навигации Lightning (более быстрая загрузка при использовании).",
+		"description": "[настройка] не разрешать навигацию Lightning с объяснением функции"
 	},
 	"opt_same_tab_popup": {
 		"message": "страница в той же вкладке при щелчке по всплывающему окну.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Пропустить автоматическую проверку идентификатора Salesforce.",
 		"description": "[настройка] при добавлении Tab в избранное не проверять, есть ли идентификатор в ссылке"
-	},
-	"opt_when_clicking_popup": {
-		"message": "страница при щелчке по всплывающему окну на странице Salesforce.",
-		"description": "[настройка] когда пользователь открывает всплывающее окно на сайте Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "страница при щелчке по всплывающему окну на странице, не являющейся Salesforce.",
-		"description": "[настройка] когда пользователь открывает всплывающее окно на случайном сайте"
 	},
 	"or_drop": {
 		"message": "Или перетащите",

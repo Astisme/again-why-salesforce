@@ -339,10 +339,6 @@
 		"message": "Sila masukkan Org yang sah!",
 		"description": "[ralat-buka-modal-org-lain] mesej apabila pengguna memasukkan url yang salah dalam modal"
 	},
-	"invalid_url": {
-		"message": "URL tidak sah",
-		"description": "[bukanPersediaanSalesforce] URL yang tidak sah"
-	},
 	"italic": {
 		"message": "Condong",
 		"description": "Pilihan gaya fon untuk teks condong"
@@ -363,33 +359,29 @@
 		"message": "Tidak sepadan dengan sebarang tindakan",
 		"description": "[ralat] dalam Salesforce apabila suis tidak dapat memadankan tindakan yang diminta"
 	},
-	"nss_detected": {
-		"message": " dikesan.",
-		"description": "[bukanPersediaanSalesforce] sesuatu yang ditemui. Sila pastikan untuk menyertakan ruang pada permulaan mesej."
+	"nss_invalid_url": {
+		"message": "URL tidak sah dikesan.",
+		"description": "[bukanPersediaanSalesforce] URL yang tidak sah"
 	},
-	"nss_prefix": {
-		"message": "Ini bukan ",
-		"description": "[bukanPersediaanSalesforce] ini adalah awalan yang ditunjukkan apabila pengguna tidak berada di halaman Salesforce. Sila pastikan untuk menyertakan ruang pada akhir mesej"
+	"nss_not_setup_page": {
+		"message": "Ini bukan halaman Persediaan Salesforce Lightning.",
+		"description": "[bukanPersediaanSalesforce] pengguna tidak berada di halaman Salesforce."
 	},
 	"open_setup": {
 		"message": "Buka Persediaan",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Sentiasa buka",
-		"description": "[tetapan]"
+	"opt_automatic_open_login": {
+		"message": "Buka halaman Log Masuk Salesforce secara automatik apabila mengklik pada tetingkap timbul semasa tidak berada di halaman Salesforce.",
+		"description": "[tetapan] apabila pengguna membuka tetingkap timbul semasa berada di tapak web rawak"
 	},
-	"opt_automatic_open": {
-		"message": "Buka secara automatik",
-		"description": "[tetapan]"
+	"opt_automatic_open_setup": {
+		"message": "Buka halaman Persediaan Salesforce secara automatik apabila mengklik pada tetingkap timbul semasa berada di halaman Salesforce.",
+		"description": "[tetapan] apabila pengguna membuka tetingkap timbul semasa berada di tapak web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Sandaran)",
 		"description": "Pilihan bahasa untuk kembali ke Bahasa Inggeris jika locale tidak disokong atau tiada terjemahan"
-	},
-	"opt_faster_loading": {
-		"message": "(pemuatan lebih pantas semasa digunakan).",
-		"description": "Penerangan [tetapan] fungsi Navigasi Lightning"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kekalkan Tab kegemaran di sebelah kiri Home dan Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Sentiasa buka pautan dalam tab pelayar baharu.",
 		"description": "[tetapan] apabila pengguna mengklik Tab kegemaran, buka dalam tab pelayar baharu"
 	},
-	"opt_prevent_use": {
-		"message": "Hentikan penggunaan ",
-		"description": "[tetapan] sama seperti 'lebih suka tidak menggunakan'. pastikan ada ruang pada akhir mesej"
+	"opt_open_login_same_tab": {
+		"message": "Sentiasa buka halaman Log Masuk Salesforce dalam Tab yang sama apabila mengklik pada tetingkap timbul.",
+		"description": "[tetapan]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Sentiasa buka halaman Persediaan Salesforce dalam Tab yang sama apabila mengklik pada tetingkap timbul.",
+		"description": "[tetapan]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat apabila digunakan).",
+		"description": "[tetapan] jangan benarkan Navigasi Lightning dengan penjelasan ciri"
 	},
 	"opt_same_tab_popup": {
 		"message": "halaman dalam tab yang sama apabila mengklik popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Langkau semakan ID Salesforce automatik.",
 		"description": "[tetapan] apabila pengguna menambah Tab kegemaran, elakkan menyemak jika ada ID dalam pautan yang disimpan"
-	},
-	"opt_when_clicking_popup": {
-		"message": "halaman apabila mengklik popup semasa berada di halaman Salesforce.",
-		"description": "[tetapan] apabila pengguna membuka popup semasa berada di laman Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "halaman apabila mengklik popup semasa tidak berada di halaman Salesforce.",
-		"description": "[tetapan] apabila pengguna membuka popup semasa berada di laman rawak"
 	},
 	"or_drop": {
 		"message": "Atau lepaskan",

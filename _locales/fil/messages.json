@@ -339,10 +339,6 @@
 		"message": "Mangyaring magpasok ng balidong Org!",
 		"description": "[error-open-other-org-modal] mensahe kapag naglagay ang user ng maling url sa modal"
 	},
-	"invalid_url": {
-		"message": "Hindi balidong URL",
-		"description": "[notSalesforceSetup] isang URL na hindi balido"
-	},
 	"italic": {
 		"message": "Italic",
 		"description": "Pagpipilian ng estilo ng font para sa italic na teksto"
@@ -363,33 +359,29 @@
 		"message": "Walang tumugmang aksyon",
 		"description": "[error] sa Salesforce kapag hindi maitugma ng switch ang hiniling na aksyon"
 	},
-	"nss_detected": {
-		"message": " nakita.",
-		"description": "[notSalesforceSetup] isang bagay na natagpuan. Siguraduhing may kasamang espasyo sa simula ng mensahe."
+	"nss_invalid_url": {
+		"message": "Hindi balidong URL ang natukoy.",
+		"description": "[hindiSetupNgSalesforce] isang URL na hindi balido"
 	},
-	"nss_prefix": {
-		"message": "Ito ay hindi isang ",
-		"description": "[notSalesforceSetup] ito ang prefix na ipinapakita kapag wala ang user sa isang Salesforce page. Siguraduhing may kasamang espasyo sa dulo ng mensahe"
+	"nss_not_setup_page": {
+		"message": "Hindi ito isang pahina ng Setup ng Salesforce Lightning.",
+		"description": "[hindiSetupNgSalesforce] wala ang user sa isang pahina ng Salesforce."
 	},
 	"open_setup": {
 		"message": "Buksan ang Setup",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
 	},
-	"opt_always_open": {
-		"message": "Laging buksan",
-		"description": "[setting]"
+	"opt_automatic_open_login": {
+		"message": "Awtomatikong buksan ang pahina ng Pag-login sa Salesforce kapag nag-click sa popup habang wala sa isang pahina ng Salesforce.",
+		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang random na website"
 	},
-	"opt_automatic_open": {
-		"message": "Awtomatikong buksan",
-		"description": "[setting]"
+	"opt_automatic_open_setup": {
+		"message": "Awtomatikong buksan ang pahina ng Setup ng Salesforce kapag nag-click sa popup habang nasa isang pahina ng Salesforce.",
+		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang website ng Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Pagpipilian ng wika upang bumalik sa Ingles kung hindi suportado ang locale o walang pagsasalin"
-	},
-	"opt_faster_loading": {
-		"message": "(mas mabilis na pag-load kapag ginagamit).",
-		"description": "[setting] paliwanag ng tampok na Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Panatilihin ang paboritong Tabs sa kaliwa ng Home at Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Laging buksan ang mga link sa bagong tab ng browser.",
 		"description": "[setting] kapag nag-click ang user sa paboritong Tab, buksan sa bagong tab"
 	},
-	"opt_prevent_use": {
-		"message": "Pigilan ang paggamit ",
-		"description": "[setting] katulad ng 'mas gusto hindi gamitin'. siguraduhing may space sa dulo"
+	"opt_open_login_same_tab": {
+		"message": "Palaging buksan ang pahina ng Pag-login sa Salesforce sa parehong Tab kapag nag-click sa popup.",
+		"description": "[setting]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Palaging buksan ang pahina ng Setup ng Salesforce sa parehong Tab kapag nag-click sa popup.",
+		"description": "[setting]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag ginagamit).",
+		"description": "[setting] huwag payagan ang Lightning Navigation na may paliwanag ng feature"
 	},
 	"opt_same_tab_popup": {
 		"message": "buksan ang pahina sa parehong tab kapag na-click ang popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Laktawan ang awtomatikong tsek ng Salesforce Id.",
 		"description": "[setting] sa pag-favorite ng Tab, pigilan ang tsek kung may Id sa link"
-	},
-	"opt_when_clicking_popup": {
-		"message": "pahina kapag nag-click ng popup sa pahina ng Salesforce.",
-		"description": "[setting] kapag binuksan ng user ang popup sa site ng Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "pahina kapag nag-click ng popup sa hindi Salesforce na pahina.",
-		"description": "[setting] kapag binuksan ng user ang popup sa random na site"
 	},
 	"or_drop": {
 		"message": "O i-drop",

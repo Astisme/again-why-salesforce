@@ -338,10 +338,6 @@
 		"message": "有効な Org を入力してください！",
 		"description": "[error-open-other-org-modal] 間違った URL がモーダルに入力された場合のメッセージ"
 	},
-	"invalid_url": {
-		"message": "無効な URL",
-		"description": "[notSalesforceSetup] 無効な URL"
-	},
 	"italic": {
 		"message": "斜体",
 		"description": "斜体テキスト用のフォントスタイルオプション"
@@ -362,33 +358,29 @@
 		"message": "一致するアクションが見つかりませんでした",
 		"description": "[error] リクエストされたアクションが利用可能なものと一致しません"
 	},
-	"nss_detected": {
-		"message": " 検出されました。",
-		"description": "[notSalesforceSetup] 何かが検出されました。文頭にスペースを含めてください"
+	"nss_invalid_url": {
+		"message": "無効なURLが検出されました。",
+		"description": "[Salesforceセットアップ以外] 無効なURL"
 	},
-	"nss_prefix": {
-		"message": "これは ",
-		"description": "[notSalesforceSetup] ユーザーが Salesforce ページにいない場合に表示される接頭辞（最後にスペースを含める）"
+	"nss_not_setup_page": {
+		"message": "これはSalesforce Lightning Setupページではありません。",
+		"description": "[Salesforceセットアップ以外] ユーザーはSalesforceページにいません。"
 	},
 	"open_setup": {
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
 	},
-	"opt_always_open": {
-		"message": "常に開く",
-		"description": "[設定]"
+	"opt_automatic_open_login": {
+		"message": "Salesforceページ以外のページでポップアップをクリックしたときに、Salesforceログインページを自動的に開きます。",
+		"description": "[設定] ユーザーがランダムなWebサイトでポップアップを開いた場合"
 	},
-	"opt_automatic_open": {
-		"message": "自動で開く",
-		"description": "[設定]"
+	"opt_automatic_open_setup": {
+		"message": "Salesforceページでポップアップをクリックしたときに、Salesforce設定ページを自動的に開きます。",
+		"description": "[設定] ユーザーがSalesforce Webサイトでポップアップを開いた場合"
 	},
 	"opt_en_fallback": {
 		"message": "en（フォールバック）",
 		"description": "ロケールがサポートされないか翻訳がない場合に英語に戻す言語オプション"
-	},
-	"opt_faster_loading": {
-		"message": "（使用時に高速ロード）。",
-		"description": "[設定] Lightning Navigation機能の説明"
 	},
 	"opt_keep_tabs_left": {
 		"message": "お気に入りのTabsをホームとオブジェクトマネージャーの左に保持します。",
@@ -398,9 +390,17 @@
 		"message": "リンクを常に新しいブラウザタブで開きます。",
 		"description": "[設定] お気に入りのTabをクリックしたときに新しいタブで開く"
 	},
-	"opt_prevent_use": {
-		"message": "使用を防ぐ ",
-		"description": "[設定] 「使用したくない」と同様。メッセージ末尾にスペースを含めてください"
+	"opt_open_login_same_tab": {
+		"message": "ポップアップをクリックしたときに、Salesforceログインページを常に同じTabで開きます。",
+		"description": "[設定]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ポップアップをクリックしたときに、Salesforce設定ページを常に同じTabで開きます。",
+		"description": "[設定]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightningナビゲーションの使用を禁止します（使用中は読み込みが高速になります）。",
+		"description": "[設定] 機能の説明付きでLightningナビゲーションを許可しない"
 	},
 	"opt_same_tab_popup": {
 		"message": "ポップアップをクリックしたときに同じタブでページを開きます。",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce IDの自動チェックをスキップします。",
 		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforceページでポップアップをクリックしたときのページ。",
-		"description": "[設定] Salesforceサイトでポップアップを開いたとき"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "非Salesforceページでポップアップをクリックしたときのページ。",
-		"description": "[設定] ランダムなサイトでポップアップを開いたとき"
 	},
 	"or_drop": {
 		"message": "またはドロップ",

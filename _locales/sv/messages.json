@@ -339,10 +339,6 @@
 		"message": "Ange en giltig Organisation, tack!",
 		"description": "[error-open-other-org-modal] meddelande när användaren anger en felaktig URL"
 	},
-	"invalid_url": {
-		"message": "Ogiltig URL",
-		"description": "[notSalesforceSetup] en URL som inte är giltig"
-	},
 	"italic": {
 		"message": "Kursiv",
 		"description": "Teckensnittsalternativ för kursiv text"
@@ -363,33 +359,29 @@
 		"message": "Ingen åtgärd matchade",
 		"description": "[error] när switch-satsen inte kan matcha den begärda åtgärden"
 	},
-	"nss_detected": {
-		"message": " upptäckt.",
-		"description": "[notSalesforceSetup] något har hittats. Se till att meddelandet börjar med ett mellanslag."
+	"nss_invalid_url": {
+		"message": "Ogiltig URL upptäckt.",
+		"description": "[inteSalesforceSetup] en ogiltig URL"
 	},
-	"nss_prefix": {
-		"message": "Det här är inte en ",
-		"description": "[notSalesforceSetup] prefix som visas när användaren inte befinner sig på en Salesforce-sida."
+	"nss_not_setup_page": {
+		"message": "Detta är inte en Salesforce Lightning-inställningssida.",
+		"description": "[inteSalesforceSetup] användaren är inte på en Salesforce-sida."
 	},
 	"open_setup": {
 		"message": "Öppna Setup",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
 	},
-	"opt_always_open": {
-		"message": "Öppna alltid",
-		"description": "[inställning]"
+	"opt_automatic_open_login": {
+		"message": "Öppna automatiskt Salesforce inloggningssida när du klickar på popup-fönstret medan du inte är på en Salesforce-sida.",
+		"description": "[inställning] när användaren öppnar popup-fönstret medan hen är på en slumpmässig webbplats"
 	},
-	"opt_automatic_open": {
-		"message": "Öppna automatiskt",
-		"description": "[inställning]"
+	"opt_automatic_open_setup": {
+		"message": "Öppna automatiskt Salesforce inställningssida när du klickar på popup-fönstret medan du är på en Salesforce-sida.",
+		"description": "[inställning] när användaren öppnar popup-fönstret medan hen är på en Salesforce-webbplats"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Språkalternativ för att återgå till engelska om locale inte stöds eller inte presenterar översättningen"
-	},
-	"opt_faster_loading": {
-		"message": "(snabbare inläsning vid användning).",
-		"description": "Förklaring av Lightning-navigeringsfunktionens [inställning]"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behåll favorit-Tabs till vänster om Hem och Objekthanteraren.",
@@ -399,9 +391,17 @@
 		"message": "Öppna alltid länkar i en ny webbläsarflik.",
 		"description": "[inställning] när användaren klickar på en favorit-Tab, öppna i en ny webbläsarflik"
 	},
-	"opt_prevent_use": {
-		"message": "Förhindra användning ",
-		"description": "[inställning] precis som 'föredrar att inte använda'. se till att det finns ett mellanslag i slutet av meddelandet"
+	"opt_open_login_same_tab": {
+		"message": "Öppna alltid Salesforce inloggningssida i samma Tab när du klickar på popup-fönstret.",
+		"description": "[inställning]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Öppna alltid Salesforce inställningssida i samma Tab när du klickar på popup-fönstret.",
+		"description": "[inställning]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Förhindra användning av Lightning-navigering (snabbare laddning vid användning).",
+		"description": "[inställning] tillåt inte Lightning-navigering med förklaring av funktionen"
 	},
 	"opt_same_tab_popup": {
 		"message": "sida i samma flik när du klickar på popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Hoppa över automatisk kontroll av Salesforce-id.",
 		"description": "[inställning] när användaren lägger till en favorit-Tab, kontrollera inte om det finns ett id i länken"
-	},
-	"opt_when_clicking_popup": {
-		"message": "sida när du klickar på popup medan du är på en Salesforce-sida.",
-		"description": "[inställning] när användaren öppnar popup medan han är på en Salesforce-webbplats"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "sida när du klickar på popup medan du inte är på en Salesforce-sida.",
-		"description": "[inställning] när användaren öppnar popup medan han är på en slumpmässig webbplats"
 	},
 	"or_drop": {
 		"message": "Eller dra",

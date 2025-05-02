@@ -339,10 +339,6 @@
 		"message": "Please insert a valid Org!",
 		"description": "[error-open-other-org-modal] ข้อความสำหรับเมื่อผู้ใช้ใส่ URL ผิดในโมดอล"
 	},
-	"invalid_url": {
-		"message": "Invalid URL",
-		"description": "[notSalesforceSetup] URL ที่ไม่ถูกต้อง"
-	},
 	"italic": {
 		"message": "ตัวเอียง",
 		"description": "ตัวเลือกรูปแบบตัวอักษรสำหรับข้อความตัวเอียง"
@@ -363,33 +359,29 @@
 		"message": "Did not match any action",
 		"description": "[error] ใน Salesforce เมื่อ switch ไม่สามารถจับคู่การกระทำที่ร้องขอได้"
 	},
-	"nss_detected": {
-		"message": " detected.",
-		"description": "[notSalesforceSetup] มีบางอย่างถูกพบ กรุณาใส่ช่องว่างไว้ที่จุดเริ่มต้นของข้อความ"
+	"nss_invalid_url": {
+		"message": "Hindi balidong URL ang natukoy.",
+		"description": "[hindiSetupNgSalesforce] isang URL na hindi balido"
 	},
-	"nss_prefix": {
-		"message": "This is not a ",
-		"description": "[notSalesforceSetup] นี่คือคำนำหน้าที่จะแสดงเมื่อผู้ใช้ไม่ได้อยู่บนหน้า Salesforce กรุณาใส่ช่องว่างไว้ที่ท้ายข้อความ"
+	"nss_not_setup_page": {
+		"message": "Hindi ito isang pahina ng Setup ng Salesforce Lightning.",
+		"description": "[hindiSetupNgSalesforce] wala ang user sa isang pahina ng Salesforce."
 	},
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
 	},
-	"opt_always_open": {
-		"message": "เปิดเสมอ",
-		"description": "[การตั้งค่า]"
+	"opt_automatic_open_login": {
+		"message": "Awtomatikong buksan ang pahina ng Pag-login sa Salesforce kapag nag-click sa popup habang wala sa isang pahina ng Salesforce.",
+		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang random na website"
 	},
-	"opt_automatic_open": {
-		"message": "เปิดโดยอัตโนมัติ",
-		"description": "[การตั้งค่า]"
+	"opt_automatic_open_setup": {
+		"message": "Awtomatikong buksan ang pahina ng Setup ng Salesforce kapag nag-click sa popup habang nasa isang pahina ng Salesforce.",
+		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang website ng Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (สำรอง)",
 		"description": "ตัวเลือกภาษาเพื่อกลับไปใช้ภาษาอังกฤษหากภาษาท้องถิ่นไม่รองรับหรือไม่มีการแปล"
-	},
-	"opt_faster_loading": {
-		"message": "(โหลดเร็วขึ้นเมื่อใช้งาน)",
-		"description": "คำอธิบาย [การตั้งค่า] ของคุณสมบัติ Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "เก็บ Tab โปรดไว้ทางซ้ายของ Home และ Object Manager",
@@ -399,9 +391,17 @@
 		"message": "เปิดลิงก์เสมอในแท็บเบราว์เซอร์ใหม่",
 		"description": "[การตั้งค่า] เมื่อผู้ใช้คลิก Tab ที่ชื่นชอบ ให้เปิดในแท็บเบราว์เซอร์ใหม่"
 	},
-	"opt_prevent_use": {
-		"message": "ป้องกันการใช้งาน ",
-		"description": "[การตั้งค่า] เช่น 'ไม่ต้องการใช้งาน' โปรดตรวจสอบให้มีช่องว่างท้ายข้อความ"
+	"opt_open_login_same_tab": {
+		"message": "Palaging buksan ang pahina ng Pag-login sa Salesforce sa parehong Tab kapag nag-click sa popup.",
+		"description": "[setting]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Palaging buksan ang pahina ng Setup ng Salesforce sa parehong Tab kapag nag-click sa popup.",
+		"description": "[setting]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag ginagamit).",
+		"description": "[setting] huwag payagan ang Lightning Navigation na may paliwanag ng feature"
 	},
 	"opt_same_tab_popup": {
 		"message": "หน้าในแท็บเดียวกันเมื่อคลิกป็อปอัป",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "ข้ามการตรวจสอบ ID Salesforce อัตโนมัติ",
 		"description": "[การตั้งค่า] เมื่อผู้ใช้เพิ่ม Tab ที่ชื่นชอบ ให้ข้ามการตรวจสอบว่ามี ID ในลิงก์ที่บันทึก"
-	},
-	"opt_when_clicking_popup": {
-		"message": "หน้าเมื่อคลิกป็อปอัปขณะอยู่ในหน้า Salesforce",
-		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป็อปอัปขณะอยู่ในเว็บไซต์ Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "หน้าเมื่อคลิกป็อปอัปขณะไม่อยู่ในหน้า Salesforce",
-		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป็อปอัปขณะอยู่ในเว็บไซต์อื่นๆ"
 	},
 	"or_drop": {
 		"message": "Or drop",

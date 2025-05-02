@@ -338,10 +338,6 @@
 		"message": "Masukkan Org yang valid, tolong!",
 		"description": "[error-open-other-org-modal] Pesan ketika URL yang salah dimasukkan dalam modal"
 	},
-	"invalid_url": {
-		"message": "URL tidak valid",
-		"description": "[notSalesforceSetup] URL yang tidak valid"
-	},
 	"italic": {
 		"message": "Miring",
 		"description": "Opsi gaya font untuk teks miring"
@@ -362,33 +358,29 @@
 		"message": "Tidak ada aksi yang cocok",
 		"description": "[error] Di Salesforce, aksi yang diminta tidak cocok dengan aksi yang tersedia."
 	},
-	"nss_detected": {
-		"message": " terdeteksi.",
-		"description": "[notSalesforceSetup] Sesuatu terdeteksi; pastikan untuk menyertakan spasi di awal pesan"
+	"nss_invalid_url": {
+		"message": "URL tidak valid terdeteksi.",
+		"description": "[bukanSetupSalesforce] URL yang tidak valid"
 	},
-	"nss_prefix": {
-		"message": "Ini bukan ",
-		"description": "[notSalesforceSetup] Prefiks yang ditampilkan saat pengguna tidak berada di halaman Salesforce; sertakan spasi di akhir"
+	"nss_not_setup_page": {
+		"message": "Ini bukan halaman Pengaturan Salesforce Lightning.",
+		"description": "[bukanSetupSalesforce] pengguna tidak berada di halaman Salesforce."
 	},
 	"open_setup": {
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Selalu buka",
-		"description": "[pengaturan]"
+	"opt_automatic_open_login": {
+		"message": "Buka otomatis halaman Login Salesforce saat mengklik popup saat tidak berada di halaman Salesforce.",
+		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web acak"
 	},
-	"opt_automatic_open": {
-		"message": "Buka otomatis",
-		"description": "[pengaturan]"
+	"opt_automatic_open_setup": {
+		"message": "Buka otomatis halaman Pengaturan Salesforce saat mengklik popup saat berada di halaman Salesforce.",
+		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Opsi bahasa untuk kembali ke bahasa Inggris jika lokal tidak didukung atau tidak menampilkan terjemahan"
-	},
-	"opt_faster_loading": {
-		"message": "(pemrosesan lebih cepat saat digunakan).",
-		"description": "[pengaturan] penjelasan fitur Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pertahankan Tabs favorit di kiri Beranda dan Manajer Objek.",
@@ -398,9 +390,17 @@
 		"message": "Selalu buka tautan di tab baru browser.",
 		"description": "[pengaturan] ketika pengguna mengklik Tab favorit, buka di tab baru browser"
 	},
-	"opt_prevent_use": {
-		"message": "Cegah penggunaan ",
-		"description": "[pengaturan] seperti 'lebih suka tidak menggunakan'. pastikan ada spasi di akhir pesan"
+	"opt_open_login_same_tab": {
+		"message": "Selalu buka halaman Login Salesforce di Tab yang sama saat mengklik popup.",
+		"description": "[pengaturan]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Selalu buka halaman Pengaturan Salesforce di Tab yang sama saat mengklik popup.",
+		"description": "[pengaturan]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat saat digunakan).",
+		"description": "[pengaturan] jangan izinkan Navigasi Lightning dengan penjelasan fitur"
 	},
 	"opt_same_tab_popup": {
 		"message": "halaman di tab yang sama saat mengklik popup.",
@@ -413,14 +413,6 @@
 	"opt_skip_link_detection": {
 		"message": "Lewati pemeriksaan otomatis ID Salesforce.",
 		"description": "[pengaturan] saat menandai Tab sebagai favorit, mencegah memeriksa apakah ada ID dalam tautan"
-	},
-	"opt_when_clicking_popup": {
-		"message": "halaman saat mengklik popup di halaman Salesforce.",
-		"description": "[pengaturan] saat pengguna membuka popup di situs Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "halaman saat mengklik popup di halaman bukan Salesforce.",
-		"description": "[pengaturan] saat pengguna membuka popup di situs acak"
 	},
 	"or_drop": {
 		"message": "Atau jatuhkan",

@@ -339,10 +339,6 @@
 		"message": "Lūdzu, ievietojiet derīgu Org!",
 		"description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto nepareizu URL"
 	},
-	"invalid_url": {
-		"message": "Nederīgs URL",
-		"description": "[navSalesforceIestatīšana] URL, kas nav derīgs"
-	},
 	"italic": {
 		"message": "Slīpraksts",
 		"description": "Fonta stila opcija slīpraksta tekstam"
@@ -363,33 +359,29 @@
 		"message": "Neatbilda nevienai darbībai",
 		"description": "[kļūda] Salesforce, kad pārslēgs nevar saskaņot pieprasīto darbību"
 	},
-	"nss_detected": {
-		"message": " konstatēts.",
-		"description": "[navSalesforceIestatīšana] kaut kas, kas ir atrasts. Lūdzu, pārliecinieties, ka ziņojuma sākumā ir iekļauta atstarpe."
+	"nss_invalid_url": {
+		"message": "Atrasts nederīgs URL.",
+		"description": "[navSalesforceIestatīšana] nederīgs URL"
 	},
-	"nss_prefix": {
-		"message": "Šī nav ",
-		"description": "[navSalesforceIestatīšana] šis ir prefikss, kas tiek rādīts, kad lietotājs nav Salesforce lapā. Lūdzu, pārliecinieties, ka ziņojuma beigās ir iekļauta atstarpe"
+	"nss_not_setup_page": {
+		"message": "Šī nav Salesforce Lightning iestatīšanas lapa.",
+		"description": "[navSalesforceIestatīšana] lietotājs neatrodas Salesforce lapā."
 	},
 	"open_setup": {
 		"message": "Atvērt iestatīšanu",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
 	},
-	"opt_always_open": {
-		"message": "Vienmēr atvērt",
-		"description": "[iestatījums]"
+	"opt_automatic_open_login": {
+		"message": "Automātiski atvērt Salesforce pierakstīšanās lapu, noklikšķinot uz uznirstošā loga, ja neatrodaties Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties nejaušā tīmekļa vietnē"
 	},
-	"opt_automatic_open": {
-		"message": "Automātiski atvērt",
-		"description": "[iestatījums]"
+	"opt_automatic_open_setup": {
+		"message": "Automātiski atvērt Salesforce iestatīšanas lapu, noklikšķinot uz uznirstošā loga, ja atrodaties Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties Salesforce tīmekļa vietnē"
 	},
 	"opt_en_fallback": {
 		"message": "en (Rezerves)",
 		"description": "Valodas opcija, lai izmantotu angļu valodu, ja lokalizācija netiek atbalstīta vai nav pieejams tulkojums"
-	},
-	"opt_faster_loading": {
-		"message": "(ātrāka ielāde lietošanas laikā).",
-		"description": "Lightning Navigation funkcijas [iestatījuma] skaidrojums"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Saglabāt iecienītākās Tabs kreisajā pusē no Home un Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Vienmēr atvērt saites jaunā pārlūka cilnē.",
 		"description": "[iestatījums] kad lietotājs noklikšķina uz iecienītākā Tab, atvērt jaunā pārlūka cilnē"
 	},
-	"opt_prevent_use": {
-		"message": "Novērst izmantošanu ",
-		"description": "[iestatījums] līdzīgi 'nevēlos izmantot'. pārliecinieties, ka ziņojuma beigās ir atstarpe"
+	"opt_open_login_same_tab": {
+		"message": "Vienmēr atvērt Salesforce pierakstīšanās lapu vienā un tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
+		"description": "[iestatījums]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Vienmēr atvērt Salesforce iestatīšanas lapu vienā un tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
+		"description": "[iestatījums]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Neļaut izmantot Lightning navigāciju (ātrāka ielāde, kad tiek izmantota).",
+		"description": "[iestatījums] neatļaut Lightning navigāciju ar funkcijas skaidrojumu"
 	},
 	"opt_same_tab_popup": {
 		"message": "lapa tajā pašā cilnē, noklikšķinot uz uznirstošā loga.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Izlaist automātisko Salesforce ID pārbaudi.",
 		"description": "[iestatījums] kad lietotājs pievieno iecienītāko Tab, nepārbaudīt, vai saitē ir ID"
-	},
-	"opt_when_clicking_popup": {
-		"message": "lapa, noklikšķinot uz uznirstošā loga, atrodoties Salesforce lapā.",
-		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties Salesforce vietnē"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "lapa, noklikšķinot uz uznirstošā loga, neatrodoties Salesforce lapā.",
-		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, neatrodoties Salesforce vietnē"
 	},
 	"or_drop": {
 		"message": "Vai nomest",

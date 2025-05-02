@@ -339,10 +339,6 @@
 		"message": "Vă rugăm introduceți o Org validă!",
 		"description": "[eroare-modal-deschide-altă-org] mesaj pentru când utilizatorul introduce un URL greșit în modal"
 	},
-	"invalid_url": {
-		"message": "URL invalid",
-		"description": "[nuEsteConfigurareSalesforce] un URL care nu este valid"
-	},
 	"italic": {
 		"message": "Italic",
 		"description": "Opțiune de stil pentru text italic"
@@ -363,33 +359,29 @@
 		"message": "Nu s-a potrivit cu nicio acțiune",
 		"description": "[eroare] în Salesforce când comutatorul nu poate potrivi acțiunea solicitată"
 	},
-	"nss_detected": {
-		"message": " detectat.",
-		"description": "[nuEsteConfigurareSalesforce] ceva ce a fost găsit. Vă rugăm să vă asigurați că includeți un spațiu la începutul mesajului."
+	"nss_invalid_url": {
+		"message": "Adresă URL nevalidă detectată.",
+		"description": "[nuEsteConfigurareSalesforce] o adresă URL nevalidă"
 	},
-	"nss_prefix": {
-		"message": "Aceasta nu este o ",
-		"description": "[nuEsteConfigurareSalesforce] acesta este prefixul afișat când utilizatorul nu se află pe o pagină Salesforce. Vă rugăm să vă asigurați că includeți un spațiu la sfârșitul mesajului"
+	"nss_not_setup_page": {
+		"message": "Aceasta nu este o pagină de configurare Salesforce Lightning.",
+		"description": "[nuEsteConfigurareSalesforce] utilizatorul nu se află pe o pagină Salesforce."
 	},
 	"open_setup": {
 		"message": "Deschideți Configurare",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
 	},
-	"opt_always_open": {
-		"message": "Deschide întotdeauna",
-		"description": "[setare]"
+	"opt_automatic_open_login": {
+		"message": "Deschide automat pagina de autentificare Salesforce când se face clic pe fereastra pop-up în timp ce nu se află pe o pagină Salesforce.",
+		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web aleatoriu"
 	},
-	"opt_automatic_open": {
-		"message": "Deschidere automată",
-		"description": "[setare]"
+	"opt_automatic_open_setup": {
+		"message": "Deschide automat pagina de configurare Salesforce când se face clic pe fereastra pop-up în timp ce se află pe o pagină Salesforce.",
+		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Alternativ)",
 		"description": "Opțiune de limbă pentru a reveni la engleză dacă localizarea nu este acceptată sau nu prezintă traducerea"
-	},
-	"opt_faster_loading": {
-		"message": "(încărcare mai rapidă în timpul utilizării).",
-		"description": "[explicație setare] pentru funcția Lightning Navigation"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Păstrează Tab-urile favorite în partea stângă a Home și Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Deschide întotdeauna linkurile într-o filă nouă a browserului.",
 		"description": "[setare] când utilizatorul face clic pe un Tab favorit, să se deschidă într-o filă nouă"
 	},
-	"opt_prevent_use": {
-		"message": "Preveniți utilizarea ",
-		"description": "[setare] similar cu „prefer să nu folosesc”"
+	"opt_open_login_same_tab": {
+		"message": "Deschide întotdeauna pagina de autentificare Salesforce în același Tab când se face clic pe fereastra pop-up.",
+		"description": "[setare]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Deschide întotdeauna pagina de configurare Salesforce în același Tab când se face clic pe fereastra pop-up.",
+		"description": "[setare]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Împiedică utilizarea navigării Lightning (încărcare mai rapidă în timpul utilizării).",
+		"description": "[setare] nu permite navigarea Lightning cu explicația funcției"
 	},
 	"opt_same_tab_popup": {
 		"message": "pagina în aceeași filă la clic pe popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Omitere verificare automată a ID-ului Salesforce.",
 		"description": "[setare] când adăugați un Tab favorit, să nu se verifice dacă linkul conține un ID Salesforce"
-	},
-	"opt_when_clicking_popup": {
-		"message": "pagina la clic pe popup în timp ce sunteți pe o pagină Salesforce.",
-		"description": "[setare] la deschiderea popup-ului de pe un site Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "pagina la clic pe popup în timp ce nu sunteți pe o pagină Salesforce.",
-		"description": "[setare] la deschiderea popup-ului de pe un site oarecare"
 	},
 	"or_drop": {
 		"message": "Sau plasați",

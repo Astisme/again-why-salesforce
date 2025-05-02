@@ -339,10 +339,6 @@
 		"message": "Voeg alstublieft een geldige Org in!",
 		"description": "[fout-open-andere-org-modal] bericht wanneer de gebruiker een verkeerde url invoegt in de modal"
 	},
-	"invalid_url": {
-		"message": "Ongeldige URL",
-		"description": "[geenSalesforceSetup] een URL die niet geldig is"
-	},
 	"italic": {
 		"message": "Cursief",
 		"description": "Lettertype-optie voor cursieve tekst"
@@ -363,33 +359,29 @@
 		"message": "Geen overeenkomst gevonden voor actie",
 		"description": "[fout] in Salesforce wanneer de switch de gevraagde actie niet kan matchen"
 	},
-	"nss_detected": {
-		"message": " gedetecteerd.",
-		"description": "[geenSalesforceSetup] iets dat is gevonden. Zorg ervoor dat er een spatie aan het begin van het bericht staat."
+	"nss_invalid_url": {
+		"message": "Ongeldige URL gedetecteerd.",
+		"description": "[geenSalesforceSetup] een ongeldige URL"
 	},
-	"nss_prefix": {
-		"message": "Dit is geen ",
-		"description": "[geenSalesforceSetup] dit is het voorvoegsel dat wordt getoond wanneer de gebruiker niet op een Salesforce-pagina is. Zorg ervoor dat er een spatie aan het einde van het bericht staat"
+	"nss_not_setup_page": {
+		"message": "Dit is geen Salesforce Lightning Setup-pagina.",
+		"description": "[geenSalesforceSetup] de gebruiker bevindt zich niet op een Salesforce-pagina."
 	},
 	"open_setup": {
 		"message": "Setup openen",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
 	},
-	"opt_always_open": {
-		"message": "Altijd openen",
-		"description": "[instelling]"
+	"opt_automatic_open_login": {
+		"message": "Open de Salesforce-loginpagina automatisch wanneer op de popup wordt geklikt terwijl u zich niet op een Salesforce-pagina bevindt.",
+		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij zich op een willekeurige website bevindt"
 	},
-	"opt_automatic_open": {
-		"message": "Automatisch openen",
-		"description": "[instelling]"
+	"opt_automatic_open_setup": {
+		"message": "Open de Salesforce-setuppagina automatisch wanneer op de popup wordt geklikt terwijl u zich op een Salesforce-pagina bevindt.",
+		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij zich op een Salesforce-website bevindt"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "Taaloptie om terug te vallen op Engels als de landinstelling niet wordt ondersteund of de vertaling niet weergeeft"
-	},
-	"opt_faster_loading": {
-		"message": "(sneller laden bij gebruik).",
-		"description": "Uitleg van Lightning-navigatiefunctie [instelling]"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Houd favoriete Tabs links van Home en Object Manager.",
@@ -399,9 +391,17 @@
 		"message": "Altijd links openen in een nieuw browsertabblad.",
 		"description": "[instelling] als de gebruiker op een favoriet Tab klikt, openen in een nieuw browsertabblad"
 	},
-	"opt_prevent_use": {
-		"message": "Gebruik voorkomen ",
-		"description": "[instelling] net als ‘wil niet gebruiken’. zorg ervoor dat er een spatie aan het einde van de boodschap staat"
+	"opt_open_login_same_tab": {
+		"message": "Open de Salesforce-loginpagina altijd in hetzelfde Tab wanneer op de popup wordt geklikt.",
+		"description": "[instelling]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Open de Salesforce-setuppagina altijd in hetzelfde Tab wanneer op de popup wordt geklikt.",
+		"description": "[instelling]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Gebruik van Lightning-navigatie voorkomen (snellere laadtijd bij gebruik).",
+		"description": "[instelling] Lightning-navigatie met uitleg van de functie niet toestaan"
 	},
 	"opt_same_tab_popup": {
 		"message": "pagina in hetzelfde tabblad bij het klikken op de popup.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Automatische controle van Salesforce-id overslaan.",
 		"description": "[instelling] wanneer de gebruiker een favoriet Tab toevoegt, niet controleren of er een id in de link staat"
-	},
-	"opt_when_clicking_popup": {
-		"message": "pagina bij het klikken op de popup terwijl u op een Salesforce-pagina bent.",
-		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij op een Salesforce-website is"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "pagina bij het klikken op de popup terwijl u niet op een Salesforce-pagina bent.",
-		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij op een willekeurige website is"
 	},
 	"or_drop": {
 		"message": "Of neerzetten",

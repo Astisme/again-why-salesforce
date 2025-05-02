@@ -339,10 +339,6 @@
 		"message": "Syötä kelvollinen Organisaatio, kiitos!",
 		"description": "[error-open-other-org-modal] viesti, kun käyttäjä syöttää virheellisen URL:n"
 	},
-	"invalid_url": {
-		"message": "Virheellinen URL",
-		"description": "[notSalesforceSetup] URL, joka ei ole kelvollinen"
-	},
 	"italic": {
 		"message": "Kursivoitu",
 		"description": "Fonttityylivalinta kursivoidulle tekstille"
@@ -363,33 +359,29 @@
 		"message": "Yhtään vastaavaa toimintoa ei löytynyt",
 		"description": "[error] kun switch-lause ei löydä pyydettyä toimintoa"
 	},
-	"nss_detected": {
-		"message": " havaittu.",
-		"description": "[notSalesforceSetup] jotain havaittiin. Varmista, että viestin alussa on välilyönti."
+	"nss_invalid_url": {
+		"message": "Virheellinen URL havaittu.",
+		"description": "[eiSalesforce-asetus] virheellinen URL"
 	},
-	"nss_prefix": {
-		"message": "Tämä ei ole ",
-		"description": "[notSalesforceSetup] etuliite, joka näytetään, kun käyttäjä ei ole Salesforce-sivulla."
+	"nss_not_setup_page": {
+		"message": "Tämä ei ole Salesforce Lightning -asetussivu.",
+		"description": "[eiSalesforce-asetus] käyttäjä ei ole Salesforce-sivulla."
 	},
 	"open_setup": {
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
 	},
-	"opt_always_open": {
-		"message": "Aina auki",
-		"description": "[asetus]"
+	"opt_automatic_open_login": {
+		"message": "Avaa Salesforce-kirjautumissivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
+		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan ollessaan satunnaisella verkkosivustolla"
 	},
-	"opt_automatic_open": {
-		"message": "Automaattinen avaus",
-		"description": "[asetus]"
+	"opt_automatic_open_setup": {
+		"message": "Avaa Salesforce-asetussivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
+		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan ollessaan Salesforce-verkkosivustolla"
 	},
 	"opt_en_fallback": {
 		"message": "en (Varavaihtoehto)",
 		"description": "Kielivaihtoehto englanniksi palaamiseksi, jos kielialue ei ole tuettu tai käännöstä ei ole saatavilla"
-	},
-	"opt_faster_loading": {
-		"message": "(nopeampi lataus käytön aikana).",
-		"description": "[asetuksen selitys] selittää Lightning-navigoinnin toiminnon"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pidä suosikki-Tabit Kodin ja Objektien hallinnan vasemmalla puolella.",
@@ -399,9 +391,17 @@
 		"message": "Avaa linkit aina uudessa selainvälilehdessä.",
 		"description": "[asetus] kun klikkaat suosikkitabiä, avaa se uudessa selainvälilehdessä"
 	},
-	"opt_prevent_use": {
-		"message": "Estä käyttö ",
-		"description": "[asetus] kuten ’en halua käyttää’. varmista, että lopussa on välilyönti"
+	"opt_open_login_same_tab": {
+		"message": "Avaa Salesforce-kirjautumissivu aina samassa Tab-välilehdessä, kun napsautat ponnahdusikkunaa.",
+		"description": "[asetus]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Avaa Salesforce-asetussivu aina samassa Tab-välilehdessä, kun napsautat ponnahdusikkunaa.",
+		"description": "[asetus]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Estä Lightning-navigoinnin käyttö (nopeampi lataus käytössä).",
+		"description": "[asetus] älä salli Lightning-navigointia ominaisuuden selityksen kanssa"
 	},
 	"opt_same_tab_popup": {
 		"message": "sivu samalla välilehdellä ponnahdusikkunan klikkauksessa.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Ohita Salesforce -tunnuksen automaattinen tarkistus.",
 		"description": "[asetus] tallentaessa suosikkitabiä, älä tarkista linkin tunnusta"
-	},
-	"opt_when_clicking_popup": {
-		"message": "sivu ponnahdusikkunan klikkauksessa Salesforce-sivulla.",
-		"description": "[asetus] avattaessa ponnahdusikkuna Salesforce -sivustolla"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "sivu ponnahdusikkunan klikkauksessa muulla kuin Salesforce-sivulla.",
-		"description": "[asetus] avattaessa ponnahdusikkuna satunnaisella sivustolla"
 	},
 	"or_drop": {
 		"message": "Tai pudota",

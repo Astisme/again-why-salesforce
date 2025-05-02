@@ -339,10 +339,6 @@
 		"message": "유효한 조직을 삽입하십시오!",
 		"description": "[오류_다른_조직_열기_모달] 사용자가 모달에 잘못된 URL을 삽입할 때의 메시지"
 	},
-	"invalid_url": {
-		"message": "잘못된 URL",
-		"description": "[Salesforce설정아님] 유효하지 않은 URL"
-	},
 	"italic": {
 		"message": "기울임꼴",
 		"description": "기울임 텍스트용 글꼴 스타일 옵션"
@@ -363,33 +359,29 @@
 		"message": "어떤 작업과도 일치하지 않았습니다.",
 		"description": "[오류] Salesforce에서 스위치가 요청된 작업과 일치할 수 없을 때"
 	},
-	"nss_detected": {
-		"message": " 감지됨.",
-		"description": "[Salesforce설정아님] 발견된 것. 메시지 시작 부분에 공백을 포함해야 합니다."
+	"nss_invalid_url": {
+		"message": "유효하지 않은 URL이 감지되었습니다.",
+		"description": "[Salesforce 설정 아님] 유효하지 않은 URL"
 	},
-	"nss_prefix": {
-		"message": "이것은 ",
-		"description": "[Salesforce설정아님] 사용자가 Salesforce 페이지에 없을 때 표시되는 접두사입니다. 메시지 끝에 공백을 포함해야 합니다."
+	"nss_not_setup_page": {
+		"message": "이것은 Salesforce Lightning 설정 페이지가 아닙니다.",
+		"description": "[Salesforce 설정 아님] 사용자가 Salesforce 페이지에 있지 않습니다."
 	},
 	"open_setup": {
 		"message": "설정 열기",
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 설정 페이지로 리디렉션하는 버튼의 클릭 유도문안"
 	},
-	"opt_always_open": {
-		"message": "항상 열기",
-		"description": "[설정]"
+	"opt_automatic_open_login": {
+		"message": "Salesforce 페이지가 아닐 때 팝업을 클릭하면 Salesforce 로그인 페이지를 자동으로 엽니다.",
+		"description": "[설정] 사용자가 임의의 웹사이트에서 팝업을 열 때"
 	},
-	"opt_automatic_open": {
-		"message": "자동으로 열기",
-		"description": "[설정]"
+	"opt_automatic_open_setup": {
+		"message": "Salesforce 페이지일 때 팝업을 클릭하면 Salesforce 설정 페이지를 자동으로 엽니다.",
+		"description": "[설정] 사용자가 Salesforce 웹사이트에서 팝업을 열 때"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "로케일이 지원되지 않거나 번역이 없는 경우 영어로 돌아가는 언어 옵션"
-	},
-	"opt_faster_loading": {
-		"message": "(사용 중 더 빠른 로딩).",
-		"description": "[설정] Lightning Navigation 기능 설명"
 	},
 	"opt_keep_tabs_left": {
 		"message": "홈 및 개체 관리자 왼쪽에 즐겨찾기 Tabs 유지.",
@@ -399,9 +391,17 @@
 		"message": "링크를 항상 새 브라우저 탭에서 열기.",
 		"description": "[설정] 즐겨찾기 Tab을 클릭할 때 새 탭에서 열기"
 	},
-	"opt_prevent_use": {
-		"message": "사용 방지 ",
-		"description": "[설정] '사용하지 않기'와 유사합니다. 메시지 끝에 공백을 포함하세요"
+	"opt_open_login_same_tab": {
+		"message": "팝업을 클릭할 때 항상 같은 Tab에서 Salesforce 로그인 페이지를 엽니다.",
+		"description": "[설정]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "팝업을 클릭할 때 항상 같은 Tab에서 Salesforce 설정 페이지를 엽니다.",
+		"description": "[설정]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightning 탐색 사용을 방지합니다(사용 중일 때 로딩 속도 향상).",
+		"description": "[설정] 기능 설명과 함께 Lightning 탐색을 허용하지 않음"
 	},
 	"opt_same_tab_popup": {
 		"message": "팝업 클릭 시 동일한 탭에서 페이지 열기.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce ID 자동 확인 건너뛰기.",
 		"description": "[설정] Tab을 즐겨찾기에 추가할 때 링크의 ID 확인 방지"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce 페이지에서 팝업 클릭 시 페이지.",
-		"description": "[설정] 사용자가 Salesforce 사이트에서 팝업을 열 때"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "비-Salesforce 페이지에서 팝업 클릭 시 페이지.",
-		"description": "[설정] 사용자가 임의의 사이트에서 팝업을 열 때"
 	},
 	"or_drop": {
 		"message": "또는 드롭",

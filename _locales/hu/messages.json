@@ -339,10 +339,6 @@
 		"message": "Kérem, érvényes Szervezetet adjon meg!",
 		"description": "[error-open-other-org-modal] üzenet, amikor a felhasználó hibás URL-t adott meg"
 	},
-	"invalid_url": {
-		"message": "Érvénytelen URL",
-		"description": "[notSalesforceSetup] egy URL, amely nem érvényes"
-	},
 	"italic": {
 		"message": "Dőlt",
 		"description": "Betűstílus opció dőlt szöveghez"
@@ -363,33 +359,29 @@
 		"message": "Nem egyezik semmilyen művelet",
 		"description": "[error] amikor a kapcsoló nem tudja egyeztetni a kért műveletet"
 	},
-	"nss_detected": {
-		"message": " észlelve.",
-		"description": "[notSalesforceSetup] valami, ami megtalálható. Ügyeljen arra, hogy az üzenet elején legyen szóköz."
+	"nss_invalid_url": {
+		"message": "Érvénytelen URL-t észleltünk.",
+		"description": "[nemSalesforceBeállítás] érvénytelen URL"
 	},
-	"nss_prefix": {
-		"message": "Ez nem egy ",
-		"description": "[notSalesforceSetup] előtag, ami akkor jelenik meg, ha a felhasználó nem a Salesforce oldalán tartózkodik"
+	"nss_not_setup_page": {
+		"message": "Ez nem egy Salesforce Lightning beállítási oldal.",
+		"description": "[nemSalesforceBeállítás] a felhasználó nem egy Salesforce oldalon van."
 	},
 	"open_setup": {
 		"message": "Setup megnyitása",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
 	},
-	"opt_always_open": {
-		"message": "Mindig nyitva",
-		"description": "[beállítás]"
+	"opt_automatic_open_login": {
+		"message": "Ha nem egy Salesforce oldalon van, a felugró ablakra kattintva automatikusan nyissa meg a Salesforce bejelentkezési oldalt.",
+		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy véletlenszerű webhelyen"
 	},
-	"opt_automatic_open": {
-		"message": "Automatikus megnyitás",
-		"description": "[beállítás]"
+	"opt_automatic_open_setup": {
+		"message": "Ha egy Salesforce oldalon van, a felugró ablakra kattintva automatikusan nyissa meg a Salesforce beállítási oldalt.",
+		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy Salesforce webhelyen"
 	},
 	"opt_en_fallback": {
 		"message": "en (Tartalék)",
 		"description": "Nyelvi lehetőség az angolra való visszalépéshez, ha a területi beállítás nem támogatott vagy nem jeleníti meg a fordítást"
-	},
-	"opt_faster_loading": {
-		"message": "(gyorsabb betöltés használat közben).",
-		"description": "[beállítás] magyarázat a Lightning navigációs funkcióra"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kedvenc Tabs megtartása a Kezdőlap és az Objektumkezelő bal oldalán.",
@@ -399,9 +391,17 @@
 		"message": "Linkek megnyitása mindig új böngészőfülön.",
 		"description": "[beállítás] kedvenc Tab-ra kattintva nyissa meg új fülön"
 	},
-	"opt_prevent_use": {
-		"message": "Használat megakadályozása ",
-		"description": "[beállítás] mint ’nem szeretném használni’. ügyelj a szóközre a végén"
+	"opt_open_login_same_tab": {
+		"message": "A felugró ablakra kattintva mindig ugyanabban a Tab-ban nyissa meg a Salesforce bejelentkezési oldalt.",
+		"description": "[beállítás]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "A felugró ablakra kattintva mindig ugyanabban a Tab-ban nyissa meg a Salesforce beállítási oldalt.",
+		"description": "[beállítás]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "A Lightning navigáció használatának megakadályozása (használat közben gyorsabb betöltés).",
+		"description": "[beállítás] ne engedélyezze a Lightning navigációt a funkció magyarázatával"
 	},
 	"opt_same_tab_popup": {
 		"message": "oldal ugyanazon a fülön a felugró ablak kattintásakor.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce ID automatikus ellenőrzésének kihagyása.",
 		"description": "[beállítás] kedvenc Tab mentésekor ne ellenőrizze az ID-t"
-	},
-	"opt_when_clicking_popup": {
-		"message": "oldal felugró ablak kattintásakor Salesforce oldalon.",
-		"description": "[beállítás] felugró ablak megnyitásakor Salesforce webhelyen"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "oldal felugró ablak kattintásakor nem Salesforce oldalon.",
-		"description": "[beállítás] felugró ablak megnyitásakor bármely más webhelyen"
 	},
 	"or_drop": {
 		"message": "Vagy dobja ide",

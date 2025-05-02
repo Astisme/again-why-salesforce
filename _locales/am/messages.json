@@ -339,10 +339,6 @@
 		"message": "እባክዎ ልክ የሆነ ድርጅት ያስገቡ!",
 		"description": "[ስህተት_ሌላ_ድርጅት_ክፈት_ሞዳል] ተጠቃሚው በሞዳሉ ውስጥ የተሳሳተ URL ሲያስገባ የሚታይ መልእክት"
 	},
-	"invalid_url": {
-		"message": "ልክ ያልሆነ URL",
-		"description": "[SalesforceSetupአይደለም] ልክ ያልሆነ URL"
-	},
 	"italic": {
 		"message": "አንደኛ",
 		"description": "አንደኛ ጽሑፍ የፊደል አወታት አማራጭ"
@@ -363,33 +359,29 @@
 		"message": "ከማንኛውም ድርጊት ጋር አልተዛመደም",
 		"description": "[ስህተት] በ Salesforce ውስጥ መቀየሪያው የተጠየቀውን ድርጊት ማዛመድ በማይችልበት ጊዜ"
 	},
-	"nss_detected": {
-		"message": " ተገኝቷል።",
-		"description": "[SalesforceSetupአይደለም] የተገኘ ነገር። እባክዎ በመልእክቱ መጀመሪያ ላይ ክፍተት ማካተትዎን ያረጋግጡ።"
+	"nss_invalid_url": {
+		"message": "ልክ ያልሆነ ዩአርኤል ተገኝቷል።",
+		"description": "[SalesforceSetup አይደለም] ልክ ያልሆነ ዩአርኤል።"
 	},
-	"nss_prefix": {
-		"message": "ይህ ",
-		"description": "[SalesforceSetupአይደለም] ተጠቃሚው በ Salesforce ገጽ ላይ በማይሆንበት ጊዜ የሚታየው ቅድመ ቅጥያ። እባክዎ በመልእክቱ መጨረሻ ላይ ክፍተት ማካተትዎን ያረጋግጡ"
+	"nss_not_setup_page": {
+		"message": "ይህ የSalesforce Lightning Setup ገጽ አይደለም።",
+		"description": "[SalesforceSetup አይደለም] ተጠቃሚው በSalesforce ገጽ ላይ አይደለም።"
 	},
 	"open_setup": {
 		"message": "ማዋቀሪያ (Setup) ክፈት",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce የማዋቀሪያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
 	},
-	"opt_always_open": {
-		"message": "ሁልጊዜ ክፈት",
-		"description": "[ቅንብር]"
+	"opt_automatic_open_login": {
+		"message": "በSalesforce ገጽ ላይ ባልሆኑበት ጊዜ ብቅ ባዩን ጠቅ ሲያደርጉ የSalesforce መግቢያ ገጹን በራስ-ሰር ይክፈቱ።",
+		"description": "[ቅንብር] ተጠቃሚው በዘፈቀደ ድህረ ገጽ ላይ እያለ ብቅ ባዩን ሲከፍት"
 	},
-	"opt_automatic_open": {
-		"message": "በተነሳ ክፈት",
-		"description": "[ቅንብር]"
+	"opt_automatic_open_setup": {
+		"message": "በSalesforce ገጽ ላይ እያሉ ብቅ ባዩን ጠቅ ሲያደርጉ የSalesforce Setup ገጹን በራስ-ሰር ይክፈቱ።",
+		"description": "[ቅንብር] ተጠቃሚው በSalesforce ድህረ ገጽ ላይ እያለ ብቅ ባዩን ሲከፍት"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
 		"description": "ቋንቋ አማራጭ ለመመለስ ወደ እንግሊዝኛ ቋንቋ ከእንደ ተደጋጋሚ ቦታው ወይም ከትርጉሙ የጎደለ"
-	},
-	"opt_faster_loading": {
-		"message": "(በመጠቀም ጊዜ የበለጠ ፈጣን ጫና).",
-		"description": "[ቅንብር] Lightning Navigation ባህሪው ማብራሪያ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ተወዳጆቹን Tabs ወደ home እና Object Manager ግራ ይዝሉ።",
@@ -399,9 +391,17 @@
 		"message": "መገናኛዎቹን ሁልጊዜ በአዲስ ትርጉም በብራውዘር ትርጉም ክፈት።",
 		"description": "[ቅንብር] ተወዳጅ Tab ላይ ሲጫን በአዲስ ትርጉም ክፈት"
 	},
-	"opt_prevent_use": {
-		"message": "አጥፋ ተጠቃሚነት ",
-		"description": "[ቅንብር] ማድረግ እንደ ' መጠቀም እንፈልጋለን። ' እንደ ተወሰነ ቁልፍ በመጨረሻ ባዶ ቦታ አለ"
+	"opt_open_login_same_tab": {
+		"message": "ብቅ ባዩን ጠቅ ሲያደርጉ ሁልጊዜ የSalesforce መግቢያ ገጹን በተመሳሳይ Tab ይክፈቱ።",
+		"description": "[ቅንብር]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ብቅ ባዩን ጠቅ ሲያደርጉ ሁልጊዜ የSalesforce Setup ገጹን በተመሳሳይ Tab ይክፈቱ።",
+		"description": "[ቅንብር]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "የLightning Navigation አጠቃቀምን ይከላከሉ (ጥቅም ላይ ሲውል በፍጥነት ይጫናል)።",
+		"description": "[ቅንብር] የባህሪ ማብራሪያ ያለው Lightning Navigation አትፍቀድ"
 	},
 	"opt_same_tab_popup": {
 		"message": "ፖፕአፕ ጠቅ ሲደርስ በተመሳሳይ ትርጉም ውስጥ ገፅ ክፈት።",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Salesforce መለያ   ቁጥጥር  ማድረግን   ተልኮት።",
 		"description": "[ቅንብር] በTab ማስቀመጫ ሲለዋዋጭ መለያ ቦታ አትፈት"
-	},
-	"opt_when_clicking_popup": {
-		"message": "Salesforce ገፅ ላይ ፖፕአፕ ጠቅ ሲደርስ ገፅ",
-		"description": "[ቅንብር] ተጠቃሚው እርስዎ ላይ ፖፕአፕ ሲከፈት"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "Salesforce ሳይሆን ገፅ ላይ ፖፕአፕ ጠቅ ሲደርስ ገፅ",
-		"description": "[ቅንብር] ተጠቃሚው እርስዎ ላይ ፖፕአፕ በድንጋጤ ሳይታዩ ሲከፈት"
 	},
 	"or_drop": {
 		"message": "ወይም ጣል",

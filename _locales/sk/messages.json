@@ -339,10 +339,6 @@
 		"message": "Prosím zadajte platnú Organizáciu!",
 		"description": "[error-open-other-org-modal] správa, keď používateľ zadá nesprávnu URL"
 	},
-	"invalid_url": {
-		"message": "Neplatné URL",
-		"description": "[notSalesforceSetup] URL, ktoré nie je platné"
-	},
 	"italic": {
 		"message": "Kurzíva",
 		"description": "Možnosť štýlu písma pre kurzívu"
@@ -363,33 +359,29 @@
 		"message": "Nenašiel sa žiadny zodpovedajúci príkaz",
 		"description": "[error] keď príkaz switch nedokáže zodpovedať požadovanú akciu"
 	},
-	"nss_detected": {
-		"message": " zaznamenané.",
-		"description": "[notSalesforceSetup] niečo bolo zaznamenané. Uistite sa, že správa začína medzerou."
+	"nss_invalid_url": {
+		"message": "Zistená neplatná URL adresa.",
+		"description": "[nieJeNastavenieSalesforce] neplatná URL adresa"
 	},
-	"nss_prefix": {
-		"message": "Toto nie je ",
-		"description": "[notSalesforceSetup] predpona, ktorá sa zobrazuje, keď používateľ nie je na stránke Salesforce."
+	"nss_not_setup_page": {
+		"message": "Toto nie je stránka nastavenia Salesforce Lightning.",
+		"description": "[nieJeNastavenieSalesforce] používateľ nie je na stránke Salesforce."
 	},
 	"open_setup": {
 		"message": "Otvoriť Setup",
 		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
 	},
-	"opt_always_open": {
-		"message": "Vždy otvoriť",
-		"description": "[nastavenie]"
+	"opt_automatic_open_login": {
+		"message": "Automaticky otvoriť prihlasovaciu stránku Salesforce po kliknutí na kontextové okno, ak nie ste na stránke Salesforce.",
+		"description": "[nastavenie] keď používateľ otvorí kontextové okno, keď je na náhodnej webovej lokalite"
 	},
-	"opt_automatic_open": {
-		"message": "Otvoriť automaticky",
-		"description": "[nastavenie]"
+	"opt_automatic_open_setup": {
+		"message": "Automaticky otvoriť stránku nastavenia Salesforce po kliknutí na kontextové okno, ak ste na stránke Salesforce.",
+		"description": "[nastavenie] keď používateľ otvorí kontextové okno, keď je na webovej lokalite Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Záložný)",
 		"description": "Jazyková možnosť pre návrat k angličtine, ak lokalizácia nie je podporovaná alebo nezobrazuje preklad"
-	},
-	"opt_faster_loading": {
-		"message": "(rýchlejšie načítanie pri používaní).",
-		"description": "Vysvetlenie [nastavenia] funkcie Lightning navigácie"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Ponechať obľúbené Taby naľavo od Domova a Správcu objektov.",
@@ -399,9 +391,17 @@
 		"message": "Vždy otvárať odkazy v novej karte prehliadača.",
 		"description": "[nastavenie] pri kliknutí používateľa na obľúbený Tab otvoriť v novej karte prehliadača"
 	},
-	"opt_prevent_use": {
-		"message": "Zabrániť použitiu ",
-		"description": "[nastavenie] rovnako ako 'nechcem používať'. uistite sa, že na konci správy je medzera"
+	"opt_open_login_same_tab": {
+		"message": "Vždy otvoriť prihlasovaciu stránku Salesforce v rovnakej karte Tab po kliknutí na kontextové okno.",
+		"description": "[nastavenie]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Vždy otvoriť stránku nastavenia Salesforce v rovnakej karte Tab po kliknutí na kontextové okno.",
+		"description": "[nastavenie]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Zabrániť používaniu navigácie Lightning (rýchlejšie načítanie počas používania).",
+		"description": "[nastavenie] nepovoliť navigáciu Lightning s vysvetlením funkcie"
 	},
 	"opt_same_tab_popup": {
 		"message": "stránka v tej istej karte po kliknutí na vyskakovacie okno.",
@@ -414,14 +414,6 @@
 	"opt_skip_link_detection": {
 		"message": "Preskočiť automatickú kontrolu ID Salesforce.",
 		"description": "[nastavenie] keď používateľ pridáva obľúbený Tab, nekontrolovať, či je v odkaze ID"
-	},
-	"opt_when_clicking_popup": {
-		"message": "stránka po kliknutí na vyskakovacie okno na stránke Salesforce.",
-		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno na webe Salesforce"
-	},
-	"opt_when_clicking_popup_not": {
-		"message": "stránka po kliknutí na vyskakovacie okno mimo stránky Salesforce.",
-		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno mimo stránky Salesforce"
 	},
 	"or_drop": {
 		"message": "Alebo ťahaj a pustite",
