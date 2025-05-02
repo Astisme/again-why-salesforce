@@ -45,9 +45,6 @@ class TranslationService {
 
 	async loadLanguageFromMessage(message) {
 		const lang = await sendExtensionMessage(message);
-		if (lang?.enabled === FOLLOW_SF_LANG) {
-			return false;
-		}
 		return await this.loadNewLanguage(lang?.enabled ?? lang);
 	}
 

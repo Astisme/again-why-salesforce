@@ -4,8 +4,7 @@ import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
 	BROWSER,
-	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+    OPERATING_PATTERNS,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
@@ -61,11 +60,9 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		// we're in Salesforce Setup
 		// check if we have all the optional permissions available
 		const permissionsAvailable = await BROWSER.permissions.contains({
-			origins: [
-				MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-				LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-			],
+			origins: OPERATING_PATTERNS,
 		});
+        console.log({permissionsAvailable})
 		if (
 			!permissionsAvailable &&
 			localStorage.getItem("noPerm") !== "true" &&

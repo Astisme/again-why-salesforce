@@ -15,6 +15,7 @@
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts",
+        "locales": "deno --allow-read --allow-write bin/missing-locales.ts && deno task sort",
 
 		"bundle": "deno run -A bin/build.ts",
 

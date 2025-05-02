@@ -7,14 +7,14 @@
 		"activeTab",
 		"contextMenus",
 		"downloads",
-		"cookies",
-		"webRequest"
+		"cookies"
 	],
 	"default_locale": "en",
 	"description": "__MSG_extension_description__",
 	"host_permissions": [
 		"*://*.my.salesforce-setup.com/lightning/setup/*",
-		"*://*.lightning.force.com/lightning/setup/*"
+		"*://*.lightning.force.com/lightning/setup/*",
+		"*://*.my.salesforce.com/"
 	],
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
 	"content_scripts": [
