@@ -34,6 +34,7 @@ class TranslationService {
 	}
 
 	async loadNewLanguage(language = null) {
+        console.log('lnl',language)
 		if (
 			language == null || language == this.currentLanguage ||
 			language === FOLLOW_SF_LANG
@@ -44,24 +45,24 @@ class TranslationService {
 		return true;
 	}
 
-	async loadLanguageFromMessage(message) {
-		const lang = await sendExtensionMessage(message);
-		return await this.loadNewLanguage(lang?.enabled ?? lang);
-	}
-
 	async loadLanguageBackground() {
+		const userLanguage = await sendExtensionMessage({
+            what: "get-settings",
+            keys: USER_LANGUAGE,
+        });
 		// load the user picked language
 		if (
-			!await singleton.loadLanguageFromMessage({
-				what: "get-settings",
-				keys: USER_LANGUAGE,
-			})
+			await this.loadNewLanguage(userLanguage?.enabled)
 		) {
-			// load the language in which salesforce is currently set
-			await singleton.loadLanguageFromMessage({
-				what: "get-sf-language",
-			});
-		}
+            return userLanguage;
+        }
+        // load the language in which salesforce is currently set
+		const sfLanguage = await sendExtensionMessage({
+            what: "get-sf-language",
+        });
+        if(await this.loadNewLanguage(sfLanguage))
+            return sfLanguage;
+        return null;
 	}
 
 	/**
@@ -76,7 +77,6 @@ class TranslationService {
 		// load the default language for fallback cases
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
-		await singleton.loadLanguageBackground();
 		await singleton.updatePageTranslations();
 		singleton.setListenerForLanguageChange();
 		return singleton;
@@ -89,6 +89,7 @@ class TranslationService {
 	 */
 	async loadLanguageFile(language = null) {
 		if (language == null) {
+            console.trace();
 			throw new Error("Be sure to insert a language to load.");
 		}
 		if (this.caches[language] != null) {
@@ -167,8 +168,14 @@ class TranslationService {
 	/**
 	 * Update all translatable elements on the page
 	 */
-	async updatePageTranslations(language = this.currentLanguage) {
-		this.currentLanguage = language;
+	async updatePageTranslations(language = null) {
+        if(language == null){
+            const loadedLanguage = await this.loadLanguageBackground();
+            language = loadedLanguage?.enabled ?? loadedLanguage;
+            console.log('newl',language)
+            console.trace()
+        }
+		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
 		const elements = document.querySelectorAll(
 			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]`,
 		);
@@ -181,7 +188,7 @@ class TranslationService {
 			);
 			const translation = await this.translate(
 				key,
-				language,
+                this.currentLanguage
 			);
 			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;

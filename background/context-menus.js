@@ -139,11 +139,9 @@ const menuItemsOriginal = [
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
 	const translator = await ensureTranslatorAvailability();
-    console.log('create',translator.currentLanguage);
 	areMenuItemsVisible = true;
 	try {
 		// load the user picked language
-        console.log(await bg_getSettings(USER_LANGUAGE), await bg_getSalesforceLanguage())
 		if (
 			!await translator.loadNewLanguage(
 				(await bg_getSettings(USER_LANGUAGE))?.enabled,
@@ -152,7 +150,6 @@ async function createMenuItems() {
 			// load the language in which salesforce is currently set
 			await translator.loadNewLanguage(await bg_getSalesforceLanguage());
 		}
-        console.log('fjdklsa',translator.currentLanguage);
 		const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
 			item.title = await translator.translate(item.title);

@@ -144,7 +144,7 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 			set[key] = tobeset;
 			break;
 	}
-	return BROWSER.storage.sync.set(set, callback?.call(set[key]));
+	return BROWSER.storage.sync.set(set, callback?.(set[key]));
 }
 
 // courtesy of derroman/salesforce-user-language-switcher
@@ -198,6 +198,7 @@ async function getCurrentUserInfo(currentUrl) {
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
+    console.log('sfl',language)
 	if (language != null) {
 		bg_setStorage(language, callback, LOCALE_KEY);
         return language;

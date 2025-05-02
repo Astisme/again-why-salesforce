@@ -317,7 +317,7 @@ async function loadTabs(browserTab = null) {
 	}
 	// leave a blank at the bottom
 	tabAppendElement.append(createElement());
-	translator.updatePageTranslations();
+	//translator.updatePageTranslations();
 }
 
 /**
