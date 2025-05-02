@@ -1,7 +1,4 @@
-import {
-	BROWSER,
-    OPERATING_PATTERNS,
-} from "/constants.js";
+import { BROWSER, OPERATING_PATTERNS } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import "../themeHandler.js";
 await ensureTranslatorAvailability();

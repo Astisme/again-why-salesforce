@@ -4,7 +4,7 @@ import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
 	BROWSER,
-    OPERATING_PATTERNS,
+	OPERATING_PATTERNS,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
@@ -62,7 +62,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		const permissionsAvailable = await BROWSER.permissions.contains({
 			origins: OPERATING_PATTERNS,
 		});
-        console.log({permissionsAvailable})
+		console.log({ permissionsAvailable });
 		if (
 			!permissionsAvailable &&
 			localStorage.getItem("noPerm") !== "true" &&
