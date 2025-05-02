@@ -483,12 +483,12 @@
 		"description": "[alt] Альтернативный текст, если изображения не отображаются"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Метка для предварительного просмотра внешнего вида универсальных Tabs"
+		"message": "Предпросмотр Tab",
+		"description": "Метка для предпросмотра внешнего вида общего Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Метка для настройки стиля универсальных Tabs"
+		"message": "Стайлер Tab",
+		"description": "Метка для настройки стиля общего Tab"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "Название кнопки для перемещения выбранных элементов в Выбрано"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Метка для предварительного просмотра внешнего вида Tabs, специфичных для организации"
+		"message": "Предпросмотр Org",
+		"description": "Метка для предпросмотра внешнего вида Org-специфичного Tab"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Метка для настройки стиля Tabs, специфичных для организации"
+		"message": "Стайлер Org",
+		"description": "Метка для настройки стиля Org-специфичных вкладок"
 	},
 	"set_tab_background_active_label": {
 		"message": "Введите цвет фона для активных универсальных Tabs.",

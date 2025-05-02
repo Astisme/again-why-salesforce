@@ -483,12 +483,12 @@
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Bezeichnung zum Vorschauen des generischen Tab-Designs"
+		"message": "Tab-Vorschau",
+		"description": "Bezeichnung zum Vorschau des generischen Tab-Aussehens"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Bezeichnung zum Konfigurieren des generischen Tab-Stils"
+		"message": "Tab-Styler",
+		"description": "Bezeichnung zum Konfigurieren des Stils generischer Tabs"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "Button-Beschriftung, um ausgewählte Elemente zu Ausgewählt zu verschieben"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Bezeichnung zum Vorschauen des organisationsspezifischen Tab-Designs"
+		"message": "Org-Vorschau",
+		"description": "Bezeichnung zum Vorschau der orgspezifischen Tab-Aussehens"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Bezeichnung zum Konfigurieren des organisationsspezifischen Tab-Stils"
+		"message": "Org-Styler",
+		"description": "Bezeichnung zum Konfigurieren des Stils orgspezifischer Tabs"
 	},
 	"set_tab_background_active_label": {
 		"message": "Hintergrundfarbe für aktive generische Tabs eingeben.",

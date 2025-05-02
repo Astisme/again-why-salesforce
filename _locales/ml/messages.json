@@ -483,12 +483,12 @@
 		"description": "[alt] ചിത്രങ്ങള്‍ പ്രവര്‍ത്തിക്കാത്തപ്പോള്‍ ബദല്‍ ടെക്സ്റ്റ്"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "ജനറൽ Tabs ന്റെ രൂപം മുൻകാഴ്ചയ്ക്കുള്ള ലേബൽ"
+		"message": "Tab മുൻനിര ദൃശ്യം",
+		"description": " പൊതുവായ Tab രൂപം മുന്‍നിരയിൽ കാണാനുള്ള ലേബൽ"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "ജനറൽ Tabs ന്റെ ശൈലി ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+		"message": "Tab സ്റ്റൈലർ",
+		"description": " പൊതുവായ Tab ശൈലി ക്രമീകരിക്കാൻ ലേബൽ"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "തിരഞ്ഞെടുക്കപ്പെട്ട आइറ്റങ്ങൾ Chosenലേക്ക് അയക്കാനുള്ള ബട്ടൺ ശീർഷകം"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "ഓർഗ്-നിർദിഷ്ട Tabs ന്റെ മുൻകാഴ്ചയ്ക്കുള്ള ലേബൽ"
+		"message": "Org മുൻനിര ദൃശ്യം",
+		"description": "വര്‍ഗ്ഗംനിര്‍ദ്ദിഷ്ട Tab രൂപം മുന്‍നിരയില്‍ കാണാനുള്ള ലേബൽ"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "ഓർഗ്-നിർദിഷ്ട Tabs ന്റെ ശൈലി ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+		"message": "Org സ്റ്റൈലർ",
+		"description": "വർഗ്ഗംനിര്‍ദ്ദിഷ്ട Tab ശൈലി ക്രമീകരിക്കാൻ ലേബൽ"
 	},
 	"set_tab_background_active_label": {
 		"message": "നിങ്ങളുടെ സജീവ ജനറൽ Tabs-നുള്ള പശ്ചാത്തല നിറം നൽകുക.",

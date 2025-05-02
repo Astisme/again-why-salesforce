@@ -483,12 +483,12 @@
 		"description": "[alt] प्रतिमांदृष्ट अयशस्वी झाल्यास पर्यायी मजकूर"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "सामान्य Tabs चा पूर्वावलोकन करण्यासाठी लेबल"
+		"message": "Tab पूर्वावलोकन",
+		"description": "सामान्य Tab चे स्वरूप पूर्वावलोकन करण्यासाठी लेबल"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "सामान्य Tabs ची शैली कॉन्फिगर करण्यासाठी लेबल"
+		"message": "Tab स्टायलर",
+		"description": "सामान्य Tab ची शैली कॉन्फिगर करण्यासाठी लेबल"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "निवडलेल्या आयटém्स Chosen मध्ये हलवण्यासाठी बटण शीर्षक"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "ऑर्ग-विशिष्ट Tabs चा पूर्वावलोकन करण्यासाठी लेबल"
+		"message": "Org पूर्वावलोकन",
+		"description": "संस्थानिर्दिष्ट Tab चे स्वरूप पूर्वावलोकन करण्यासाठी लेबल"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "ऑर्ग-विशिष्ट Tabs ची शैली कॉन्फिगर करण्यासाठी लेबल"
+		"message": "Org स्टायलर",
+		"description": "संस्थानिर्दिष्ट Tab ची शैली कॉन्फिगर करण्यासाठी लेबल"
 	},
 	"set_tab_background_active_label": {
 		"message": "तुमच्या सक्रिय सामान्य Tabs साठी पार्श्वभूमीचा रंग प्रविष्ट करा.",

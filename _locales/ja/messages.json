@@ -483,12 +483,12 @@
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "一般的なTabの外観をプレビューするラベル"
+		"message": "Tab プレビュー",
+		"description": "汎用 Tab の外観をプレビューするラベル"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "一般的なTabsのスタイルを設定するラベル"
+		"message": "Tab スタイラー",
+		"description": "汎用 Tab のスタイルを設定するラベル"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "選択した項目を「選択済み」に移動するボタンのタイトル"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "組織専用Tabの外観をプレビューするラベル"
+		"message": "Org プレビュー",
+		"description": "組織固有の Tab の外観をプレビューするラベル"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "組織専用Tabsのスタイルを設定するラベル"
+		"message": "Org スタイラー",
+		"description": "組織固有の Tab のスタイルを設定するラベル"
 	},
 	"set_tab_background_active_label": {
 		"message": "アクティブな一般Tabsの背景色を入力します。",

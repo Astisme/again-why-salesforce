@@ -488,8 +488,8 @@
 		"description": "Štítek pro náhled vzhledu obecných Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Štítek pro konfiguraci stylu obecných Tabs"
+		"message": "Stylovač Tab",
+		"description": "Štítek pro konfiguraci stylu generického Tab"
 	},
 	"set_general_settings": {
 		"message": "Obecná Nastavení",
@@ -508,8 +508,8 @@
 		"description": "Štítek pro náhled vzhledu Tab specifických pro organizaci"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Štítek pro konfiguraci stylu Tab specifických pro organizaci"
+		"message": "Stylovač Org",
+		"description": "Štítek pro konfiguraci stylu Tab specifického pro Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Vložte barvu pozadí pro vaše aktivní obecné Tabs.",

@@ -488,8 +488,8 @@
 		"description": "Ετικέτα για προεπισκόπηση της εμφάνισης γενικών Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Ετικέτα για διαμόρφωση του στυλ των γενικών Tabs"
+		"message": "Στυλιζαριστής Tab",
+		"description": "Ετικέτα για διαμόρφωση του στυλ του γενικού Tab"
 	},
 	"set_general_settings": {
 		"message": "Γενικές Ρυθμίσεις",
@@ -508,8 +508,8 @@
 		"description": "Ετικέτα για προεπισκόπηση της εμφάνισης Tab συγκεκριμένων για τον οργανισμό"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Ετικέτα για διαμόρφωση του στυλ των Tab που αφορούν συγκεκριμένο οργανισμό"
+		"message": "Στυλιζαριστής Org",
+		"description": "Ετικέτα για διαμόρφωση του στυλ των Tabs ειδικά για το Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Εισαγάγετε το χρώμα φόντου για τα ενεργά γενικά Tabs σας.",

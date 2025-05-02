@@ -484,12 +484,12 @@
 		"description": "[alt] ચિત્રો કામ ન કરતી વખતે વિકલ્પિક લખાણ"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "જનરલ Tabsનો દેખાવ પૂર્વદર્શન માટે લેબલ"
+		"message": "Tab પૂર્વદર્શન",
+		"description": "આટ સામાન્ય Tab દેખાવ પૂર્વદર્શન માટે લેબલ"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "જનરલ Tabsની શૈલી રૂપરેખા માટે લેબલ"
+		"message": "Tab સ્ટાઇલર",
+		"description": "આટ સામાન્ય Tab શૈલી રૂપરેખાંકિત કરવા માટે લેબલ"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -504,12 +504,12 @@
 		"description": "પસંદ કરેલ વસ્તુઓ Chosenમાં મોકલવા માટે બટન શીર્ષક"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "ઓર્ગ-વિશિષ્ટ Tabsનો દેખાવ પૂર્વદર્શન માટે લેબલ"
+		"message": "Org પૂર્વદર્શન",
+		"description": "આટ સંગઠન-નિર્ધારિત Tab દેખાવ પૂર્વદર્શન માટે લેબલ"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "ઓર્ગ-વિશિષ્ટ Tabsની શૈલી રૂપરેખા માટે લેબલ"
+		"message": "Org સ્ટાઇલર",
+		"description": "આટ સંગઠન-નિર્ધારિત Tab શૈલી રૂપરેખાંકિત કરવા માટે લેબલ"
 	},
 	"set_tab_background_active_label": {
 		"message": "તમારા સક્રિય જનરલ Tabs માટે પૃષ્ઠભૂમિ રંગ દાખલ કરો.",

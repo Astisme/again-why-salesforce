@@ -488,8 +488,8 @@
 		"description": "Label voor het bekijken van de algemene Tab-weergave"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Label voor het configureren van de stijl van algemene Tabs"
+		"message": "Tab-styler",
+		"description": "Label voor het configureren van de stijl van generieke Tabs"
 	},
 	"set_general_settings": {
 		"message": "Algemene Instellingen",
@@ -508,8 +508,8 @@
 		"description": "Label voor het bekijken van de org-specifieke Tab-weergave"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Label voor het configureren van de stijl van org-specifieke Tabs"
+		"message": "Org-styler",
+		"description": "Label voor het configureren van de stijl van Org-specifieke Tabs"
 	},
 	"set_tab_background_active_label": {
 		"message": "Voer de achtergrondkleur in voor uw actieve algemene Tabs.",

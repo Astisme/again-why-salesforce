@@ -483,12 +483,12 @@
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "علامة لمعاينة مظهر علامة التبويب العام"
+		"message": "معاينة Tab",
+		"description": "التسمية لمعاينة المظهر العام للـ Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "علامة لتكوين نمط علامات التبويب العامة"
+		"message": "منسق Tab",
+		"description": "التسمية لتكوين النمط العام للـ Tab"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "عنوان الزر لنقل العناصر المحددة إلى مختار"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "علامة لمعاينة مظهر علامة التبويب الخاصة بالمنظمة"
+		"message": "معاينة Org",
+		"description": "التسمية لمعاينة مظهر الـ Tab الخاص بالمنظّمة"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "علامة لتكوين نمط علامات التبويب الخاصة بالمنظمة"
+		"message": "منسق Org",
+		"description": "التسمية لتكوين نمط الـ Tab الخاص بالمنظّمة"
 	},
 	"set_tab_background_active_label": {
 		"message": "أدخل لون الخلفية لعناصر Tab العامة النشطة.",

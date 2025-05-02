@@ -488,8 +488,8 @@
 		"description": "Etiqueta per previsualitzar l'aparença genèrica de Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Etiqueta per configurar l'estil de Tabs genèrics"
+		"message": "Estilitzador de Tab",
+		"description": "Etiqueta per configurar l’estil del Tab genèric"
 	},
 	"set_general_settings": {
 		"message": "Configuració General",
@@ -508,8 +508,8 @@
 		"description": "Etiqueta per previsualitzar l'aparença de Tab específica de l'organització"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Etiqueta per configurar l'estil de Tabs específics de l'organització"
+		"message": "Estilitzador d’Org",
+		"description": "Etiqueta per configurar l’estil de Tab específica de l’Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Inseriu el color de fons per als vostres Tabs genèrics actius.",

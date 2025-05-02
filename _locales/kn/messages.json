@@ -483,12 +483,12 @@
 		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "ಸಾಮಾನ್ಯ Tabsನ ನೋಟ ಪೂರ್ವದರ್ಶನಕ್ಕೆ ಲೇಬಲ್"
+		"message": "Tab ಪೂರ್ವದೃಶ್ಯ",
+		"description": " ಸಾಮಾನ್ಯ Tab ರೂಪರೇಖೆ ಪೂರ್ವದೃಶ್ಯ ಮಾಡಲು ಲೇಬಲ್"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "ಸಾಮಾನ್ಯ Tabsನ ಶೈಲಿ ಸಂರಚಿಸಲು ಲೇಬಲ್"
+		"message": "Tab ಶೈಲಿಸ್ಟರ್",
+		"description": " ಸಾಮಾನ್ಯ Tab ಶೈಲಿಯನ್ನು ಸಂರಚಿಸುವ ಲೇಬಲ್"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "ಆಯ್ಕೆಮಾಡಿದ ಐಟಂಗಳನ್ನು Chosenಗೆ ಕಳುಹಿಸಲು ಬಟನ್ ಶೀರ್ಷಿಕೆ"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "ಒರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsನ ನೋಟ ಪೂರ್ವದರ್ಶನಕ್ಕಾಗಿ ಲೇಬಲ್"
+		"message": "Org ಪೂರ್ವದೃಶ್ಯ",
+		"description": "ಸಂಸ್ಥಾಪನ ವಿಶೇಷ Tab ರೂಪರೇಖೆ ಪೂರ್ವದೃಶ್ಯ ಮಾಡಲು ಲೇಬಲ್"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "ಒರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsನ ಶೈಲಿ ಸಂರಚಿಸಲು ಲೇಬಲ್"
+		"message": "Org ಶೈಲಿಸ್ಟರ್",
+		"description": "ಸಂಸ್ಥಾಪನ ವಿಶೇಷ Tab ಶೈಲಿಯನ್ನು ಸಂರಚಿಸುವ ಲೇಬಲ್"
 	},
 	"set_tab_background_active_label": {
 		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ನಮೂದಿಸಿ.",

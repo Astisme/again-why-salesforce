@@ -484,12 +484,12 @@
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Label para i-preview ang hitsura ng pangkalahatang Tabs"
+		"message": "Paunang‑tanaw ng Tab",
+		"description": "Label para tingnan ang hitsura ng pangkalahatang Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Label para i-configure ang estilo ng pangkalahatang Tabs"
+		"message": "Estayler ng Tab",
+		"description": "Label para i‑configure ang istilo ng pangkalahatang Tab"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -504,12 +504,12 @@
 		"description": "Pamagat ng button para ilipat ang napiling item sa Napili"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Label para i-preview ang hitsura ng org-specific Tabs"
+		"message": "Paunang‑tanaw ng Org",
+		"description": "Label para tingnan ang hitsura ng Tab na tukoy sa Org"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Label para i-configure ang estilo ng org-specific Tabs"
+		"message": "Estayler ng Org",
+		"description": "Label para i‑configure ang istilo ng Tab na tukoy sa Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Ipasok ang kulay ng background para sa iyong aktibong pangkalahatang Tabs.",

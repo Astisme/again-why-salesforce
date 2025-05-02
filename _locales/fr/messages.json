@@ -483,12 +483,12 @@
 		"description": "[alt] Texte alternatif quand les images ne fonctionnent pas."
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Étiquette pour prévisualiser l'apparence des Tabs génériques"
+		"message": "Aperçu Tab",
+		"description": "Étiquette pour prévisualiser l’apparence du Tab générique"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Étiquette pour configurer le style des Tabs génériques"
+		"message": "Styliseur Tab",
+		"description": "Étiquette pour configurer le style du Tab générique"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "Titre du bouton pour déplacer les éléments sélectionnés vers Choisi"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Étiquette pour prévisualiser l'apparence des Tabs spécifiques à l'organisation"
+		"message": "Aperçu Org",
+		"description": "Étiquette pour prévisualiser l’apparence de l’onglet spécifique à l’Org"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Étiquette pour configurer le style des Tabs spécifiques à l'organisation"
+		"message": "Styliseur Org",
+		"description": "Étiquette pour configurer le style des onglets spécifiques à l’Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Insérez la couleur de fond pour vos Tabs génériques actifs.",

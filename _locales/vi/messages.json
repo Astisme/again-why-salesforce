@@ -483,12 +483,12 @@
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
+		"message": "Xem trước Tab",
 		"description": "Nhãn để xem trước giao diện Tab chung"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Nhãn để cấu hình kiểu cho Tabs chung"
+		"message": "Bộ tạo kiểu Tab",
+		"description": "Nhãn để cấu hình kiểu cho Tab chung"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "Tiêu đề nút để di chuyển các mục đã chọn đến Đã chọn"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Nhãn để xem trước giao diện Tabs dành riêng cho tổ chức"
+		"message": "Xem trước Org",
+		"description": "Nhãn để xem trước giao diện Tab dành riêng cho Org"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Nhãn để cấu hình kiểu cho Tabs dành riêng cho tổ chức"
+		"message": "Bộ tạo kiểu Org",
+		"description": "Nhãn để cấu hình kiểu cho Tab dành riêng cho Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Nhập màu nền cho Tabs chung đang hoạt động của bạn.",

@@ -483,12 +483,12 @@
 		"description": "[alt] ছবি কাজ না করলে বিকল্প পাঠ"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "জেনেরিক Tab-এর চেহারা পূর্বদর্শনের জন্য লেবেল"
+		"message": "Tab প্রাকদর্শন",
+		"description": "সাধারণ Tab-এর চেহারা প্রাকদর্শন করার লেবেল"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "জেনেরিক Tabs-এর স্টাইল কনফিগার করার জন্য লেবেল"
+		"message": "Tab স্টাইলার",
+		"description": "সাধারণ Tab-এর স্টাইল কনফিগার করার লেবেল"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "নির্বাচিত আইটেমগুলোকে “Chosen” এ নিয়ে যাওয়ার বাটন শিরোনাম"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "অর্গ-নির্দিষ্ট Tab-এর চেহারা পূর্বদর্শনের জন্য লেবেল"
+		"message": "Org প্রাকদর্শন",
+		"description": "সংগঠনের নির্দিষ্ট Tab-এর চেহারা প্রাকদর্শন করার লেবেল"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "অর্গ-নির্দিষ্ট Tabs-এর স্টাইল কনফিগার করার জন্য লেবেল"
+		"message": "Org স্টাইলার",
+		"description": "সংগঠনের নির্দিষ্ট Tab-এর স্টাইল কনফিগার করার লেবেল"
 	},
 	"set_tab_background_active_label": {
 		"message": "অ্যাকটিভ জেনেরিক Tabs-এর ব্যাকগ্রাউন্ড কালার যুক্ত করুন।",

@@ -484,12 +484,12 @@
 		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "برچسب برای پیش‌نمایش ظاهر Tab عمومی"
+		"message": "پیش‌نمایش Tab",
+		"description": "برچسب برای پیش‌نمایش ظاهر تب عمومی"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "برچسب برای پیکربندی سبک Tab عمومی"
+		"message": "استایل‌دهنده Tab",
+		"description": "برچسب برای پیکربندی سبک تب عمومی"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -504,12 +504,12 @@
 		"description": "عنوان دکمه برای انتقال آیتم‌های انتخاب‌شده به انتخاب‌شده"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "برچسب برای پیش‌نمایش ظاهر Tab مخصوص سازمان"
+		"message": "پیش‌نمایش Org",
+		"description": "برچسب برای پیش‌نمایش ظاهر تب مخصوص Org"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "برچسب برای پیکربندی سبک Tab مخصوص سازمان"
+		"message": "استایل‌دهنده Org",
+		"description": "برچسب برای پیکربندی سبک تب مخصوص Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "رنگ پس‌زمینه را برای Tabهای عمومی فعال خود وارد کنید.",

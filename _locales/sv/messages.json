@@ -488,8 +488,8 @@
 		"description": "Etikett för förhandsgranskning av generiskt Tab-utseende"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Etikett för att konfigurera stilen på generiska Tabs"
+		"message": "Tab-stylare",
+		"description": "Etikett för att konfigurera stilen för generisk Tab"
 	},
 	"set_general_settings": {
 		"message": "Allmänna Inställningar",
@@ -508,8 +508,8 @@
 		"description": "Etikett för förhandsgranskning av organisationsspecifikt Tab-utseende"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Etikett för att konfigurera stilen på organisationsspecifika Tabs"
+		"message": "Org-stylare",
+		"description": "Etikett för att konfigurera stilen för Org-specifika Tab"
 	},
 	"set_tab_background_active_label": {
 		"message": "Ange bakgrundsfärgen för dina aktiva generiska Tabs.",

@@ -483,12 +483,12 @@
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Etiqueta para previsualizar la apariencia de Tabs genéricos"
+		"message": "Vista previa de Tab",
+		"description": "Etiqueta para previsualizar la apariencia de Tab genérica"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Etiqueta para configurar el estilo de Tabs genéricos"
+		"message": "Configurador de estilo de Tab",
+		"description": "Etiqueta para configurar el estilo de Tab genérica"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "Título del botón para mover elementos seleccionados a Seleccionado"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Etiqueta para previsualizar la apariencia de Tabs específicos de la organización"
+		"message": "Vista previa de Org",
+		"description": "Etiqueta para previsualizar la apariencia de Tab específica de la Org"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Etiqueta para configurar el estilo de Tabs específicos de la organización"
+		"message": "Estilizador de Org",
+		"description": "Etiqueta para configurar el estilo de Tab específico de la Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Inserte el color de fondo para sus Tabs genéricos activos.",

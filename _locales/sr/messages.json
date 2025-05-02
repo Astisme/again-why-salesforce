@@ -488,8 +488,8 @@
 		"description": "Ознака за преглед изгледа генеричког Tab-а"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Ознака за конфигурисање стила генеричких Tabs-ова"
+		"message": "Стилајзер Tab",
+		"description": "Ознака за конфигурисање стила опште Tab"
 	},
 	"set_general_settings": {
 		"message": "Општа Подешавања",
@@ -508,8 +508,8 @@
 		"description": "Ознака за преглед изгледа Tab-а специфичног за организацију"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Ознака за конфигурисање стила Tabs-ова специфичних за организацију"
+		"message": "Стилајзер Org",
+		"description": "Ознака за конфигурисање стила Org-специфичних Tab"
 	},
 	"set_tab_background_active_label": {
 		"message": "Унесите боју позадине за ваше активне генеричке Tabs-ове.",

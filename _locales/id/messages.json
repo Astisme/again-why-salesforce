@@ -483,12 +483,12 @@
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Label untuk pratinjau tampilan Tabs generik"
+		"message": "Pratinjau Tab",
+		"description": "Label untuk melihat pratinjau tampilan Tab umum"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Label untuk mengonfigurasi gaya Tabs generik"
+		"message": "Pengatur Gaya Tab",
+		"description": "Label untuk mengonfigurasi gaya Tab umum"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -503,12 +503,12 @@
 		"description": "Judul tombol untuk memindahkan item terpilih ke Terpilih"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Label untuk pratinjau tampilan Tabs khusus organisasi"
+		"message": "Pratinjau Org",
+		"description": "Label untuk melihat pratinjau tampilan Tab khusus Org"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Label untuk mengonfigurasi gaya Tabs khusus organisasi"
+		"message": "Pengatur Gaya Org",
+		"description": "Label untuk mengonfigurasi gaya Tab khusus Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Masukkan warna latar untuk Tabs generik aktif Anda.",

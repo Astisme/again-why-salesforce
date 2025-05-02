@@ -488,8 +488,8 @@
 		"description": "Címke az általános Tab megjelenésének előnézetéhez"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Címke az általános Tabs stílusának konfigurálásához"
+		"message": "Tab-stílusbeállító",
+		"description": "Címke az általános Tab stílusának konfigurálásához"
 	},
 	"set_general_settings": {
 		"message": "Általános Beállítások",
@@ -508,8 +508,8 @@
 		"description": "Címke a szervezet-specifikus Tab megjelenésének előnézetéhez"
 	},
 	"set_org_styler": {
-		"message": "Szervezet Styler",
-		"description": "Címke a szervezet-specifikus Tabs stílusának konfigurálásához"
+		"message": "Org-stílusbeállító",
+		"description": "Címke az Org-specifikus Tab stílusának konfigurálásához"
 	},
 	"set_tab_background_active_label": {
 		"message": "Adja meg az aktív általános Tabs háttérszínét.",

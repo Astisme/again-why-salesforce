@@ -488,8 +488,8 @@
 		"description": "Етикет за предварителен преглед на общия изглед на Tab"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Етикет за конфигуриране на стила на общи Tabs"
+		"message": "Стил на Tab",
+		"description": "Етикет за конфигуриране на стила на общия Tab"
 	},
 	"set_general_settings": {
 		"message": "Общи Настройки",
@@ -508,8 +508,8 @@
 		"description": "Етикет за предварителен преглед на специфичния за организацията изглед на Tab"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Етикет за конфигуриране на стила на специфични за организацията Tabs"
+		"message": "Стил на Org",
+		"description": "Етикет за конфигуриране на стила на Tab за конкретната Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "Въведете фоновия цвят за вашите активни общи Tabs.",

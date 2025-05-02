@@ -488,8 +488,8 @@
 		"description": "תווית לתצוגה מקדימה של מראה Tab גנרי"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "תווית להגדרת הסגנון של Tabs גנריים"
+		"message": "מעצב Tab",
+		"description": "תווית להגדרת הסגנון של ה‑Tab הכללי"
 	},
 	"set_general_settings": {
 		"message": "הגדרות כלליות",
@@ -508,8 +508,8 @@
 		"description": "תווית לתצוגה מקדימה של מראה Tab ספציפי לארגון"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "תווית להגדרת הסגנון של Tabs ספציפיים לארגון"
+		"message": "מעצב Org",
+		"description": "תווית להגדרת הסגנון של Tabs הספציפיים ל‑Org"
 	},
 	"set_tab_background_active_label": {
 		"message": "הכנס את צבע הרקע עבור ה-Tabs הגנריים הפעילים שלך.",
