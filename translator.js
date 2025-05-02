@@ -196,8 +196,8 @@ class TranslationService {
 
 	setListenerForLanguageChange() {
 		BROWSER.storage.onChanged.addListener((changes) => {
-            const pickedLanguageObj = changes[SETTINGS_KEY].newValue.filter(el => el.id === USER_LANGUAGE);
-			if (pickedLanguageObj.length > 0) {
+            const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter(el => el.id === USER_LANGUAGE);
+			if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
 				this.updatePageTranslations(pickedLanguageObj[0].enabled);
 			}
 		});

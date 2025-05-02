@@ -1,3 +1,4 @@
+import ensureTranslatorAvailability from "/translator.js";
 import {
 	EXTENSION_NAME,
 	GENERIC_TAB_STYLE_KEY,
@@ -32,6 +33,7 @@ import {
 	USER_LANGUAGE,
 } from "/constants.js";
 
+ensureTranslatorAvailability();
 const preventDefaultOverride = "user-set";
 
 /**
