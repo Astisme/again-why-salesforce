@@ -32,6 +32,8 @@ import {
 	USER_LANGUAGE,
 } from "/constants.js";
 
+const preventDefaultOverride = "user-set";
+
 /**
  * Saves checkbox state and dependent checkbox states to settings
  * @param {Event} e - The event object from the checkbox interaction
@@ -411,13 +413,11 @@ function setPreviewAndInputValue(
 	updateViews = true,
 ) {
 	const isForInactive = !setting.forActive;
-	//const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
 	let relatedInput = null;
 	let chosenUl = null;
 	let moveToChosen = null;
 	let styleId = null;
 	const wasPicked = setting.value != null && setting.value !== "";
-	console.log("setttingpreview", setting);
 	switch (setting.id) {
 		case TAB_STYLE_COLOR:
 			if (isForInactive) {
@@ -725,7 +725,8 @@ function setPreviewAndInputValue(
             break;
         */
 		default:
-			console.error(`Unmatched style setting id: ${setting.id}`);
+            if(setting.id !== preventDefaultOverride)
+                console.error(`Unmatched style setting id: ${setting.id}`);
 			break;
 	}
 	if (!updateViews) {
@@ -906,7 +907,9 @@ function saveTabDecorations(
 	isAdding = true,
 	key = GENERIC_TAB_STYLE_KEY,
 ) {
-	const set = { what: "set", key, set: [] };
+	const set = { what: "set", key, set: [{
+        id: preventDefaultOverride, value: "no-default"
+    }] };
 	selectedLis.forEach((li) => {
 		const setting = {};
 		const styleKey = li.dataset.styleKey;

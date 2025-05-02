@@ -259,7 +259,6 @@ function onHrefUpdate() {
 
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
-	console.log("left?", keep_tabs_on_left);
 	if (keep_tabs_on_left == null || !keep_tabs_on_left.enabled) {
 		// move setupTabUl after ObjectManager
 		setupTabUl.parentElement.insertAdjacentElement("beforeend", setupTabUl);

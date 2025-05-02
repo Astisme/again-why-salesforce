@@ -111,8 +111,6 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
 			const settingsArray = await bg_getSettings(null, key);
-			console.log("seta", settingsArray);
-			console.log("tbs", tobeset);
 			if (settingsArray != null) {
 				for (const item of tobeset) {
 					// check if the item.id is already present
@@ -121,7 +119,6 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 						(setting.forActive == null ||
 							setting.forActive === item.forActive)
 					);
-					console.log("exit", existingItems, item);
 					if (existingItems.length > 0) {
 						if (item.value == null || item.value === "") { // the item has been removed
 							existingItems.forEach((el) => {
@@ -141,7 +138,6 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 				}
 			}
 			set[key] = settingsArray ?? tobeset;
-			console.log("setting", set);
 			break;
 		}
 		default:
@@ -273,7 +269,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 
 async function setDefalutOrgStyle() {
 	const orgStyles = await bg_getSettings(undefined, ORG_TAB_STYLE_KEY);
-	console.log({ orgStyles });
 	if (orgStyles == null) {
 		// no style settings have been found. create the default style for org-specific Tabs & send it to the background.
 		const request = {

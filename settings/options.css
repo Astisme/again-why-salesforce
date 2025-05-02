@@ -1,5 +1,7 @@
 ul.settings {
 	list-style-type: none;
+    padding-bottom: 1rem;
+
 	& > li {
 		margin-bottom: 0.2rem;
 	}
@@ -118,4 +120,8 @@ ul.settings {
 			pointer-events: none;
 		}
 	}
+}
+
+hr {
+    margin: 1rem 0;
 }

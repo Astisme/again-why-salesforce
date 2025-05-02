@@ -214,7 +214,6 @@ export async function generateStyleFromSettings() {
 						elementPseudoSelector,
 					)
 				}{ ${getCssRule(el.id, el.value)} }`;
-				console.log(el);
 			}
 			document.head.appendChild(style);
 		}

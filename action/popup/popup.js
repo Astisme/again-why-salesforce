@@ -62,7 +62,6 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		const permissionsAvailable = await BROWSER.permissions.contains({
 			origins: OPERATING_PATTERNS,
 		});
-		console.log({ permissionsAvailable });
 		if (
 			!permissionsAvailable &&
 			localStorage.getItem("noPerm") !== "true" &&
