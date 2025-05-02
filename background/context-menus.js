@@ -5,13 +5,12 @@ import {
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
 	USER_LANGUAGE,
+    SETTINGS_KEY,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import { bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
-
-let translator = null;
 
 let areMenuItemsVisible = false;
 
@@ -139,12 +138,12 @@ const menuItemsOriginal = [
  */
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
-	if (translator == null) {
-		translator = await ensureTranslatorAvailability();
-	}
+	const translator = await ensureTranslatorAvailability();
+    console.log('create',translator.currentLanguage);
 	areMenuItemsVisible = true;
 	try {
 		// load the user picked language
+        console.log(await bg_getSettings(USER_LANGUAGE), await bg_getSalesforceLanguage())
 		if (
 			!await translator.loadNewLanguage(
 				(await bg_getSettings(USER_LANGUAGE))?.enabled,
@@ -153,6 +152,7 @@ async function createMenuItems() {
 			// load the language in which salesforce is currently set
 			await translator.loadNewLanguage(await bg_getSalesforceLanguage());
 		}
+        console.log('fjdklsa',translator.currentLanguage);
 		const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
 			item.title = await translator.translate(item.title);
@@ -177,9 +177,7 @@ async function removeMenuItems() {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
-		if (translator == null) {
-			translator = await ensureTranslatorAvailability();
-		}
+		const translator = await ensureTranslatorAvailability();
 		const msg = await translator.translate("error_cxm_remove");
 		console.error(msg, error);
 	}
@@ -212,9 +210,7 @@ async function checkAddRemoveContextMenus(what) {
 	} catch (error) {
 		console.trace();
 		if (error != null && error.message !== "") {
-			if (translator == null) {
-				translator = await ensureTranslatorAvailability();
-			}
+			const translator = await ensureTranslatorAvailability();
 			const msg = await translator.translate("error_cxm_check");
 			console.error(msg, error);
 		}
@@ -330,3 +326,11 @@ setInterval(async () => {
 
 // create persistent menuItems
 checkAddRemoveContextMenus();
+
+
+BROWSER.storage.onChanged.addListener((changes) => {
+    const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter(el => el.id === USER_LANGUAGE);
+    if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
+        checkAddRemoveContextMenus();
+    }
+});
