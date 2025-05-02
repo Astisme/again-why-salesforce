@@ -31,7 +31,7 @@ SIZE=$(stat --format=%s "$DIFF_FILE" 2>/dev/null || stat -f%z "$DIFF_FILE")
 rm -f "$DIFF_FILE"
 if [[ "$SIZE" -eq 0 ]]; then
   echo "✅  No changes from 'deno task $TASK'"
-  rm -f "$LOG_FILE"
+  #rm -f "$LOG_FILE"
   exit 0
 fi
 
