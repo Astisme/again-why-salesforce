@@ -483,6 +483,10 @@
 		"message": "Salesforce iestatījumi",
 		"description": "jebkura Salesforce iestatījumu lapa (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Saglabāt",
+		"description": "Lietot izmaiņas un saglabāt tās atmiņā"
+	},
 	"save_tab": {
 		"message": "Saglabāt kā Tab",
 		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"

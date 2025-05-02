@@ -482,6 +482,10 @@
 		"message": "Salesforce సెటప్",
 		"description": "ఏదైనా Salesforce సెటప్ పేజీ (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "సేవ్ చేయి",
+		"description": "మార్పులను వర్తింపజేసి, వాటిని మెమరీలో నిల్వ చేయండి"
+	},
 	"save_tab": {
 		"message": "Tab గా సేవ్ చేయండి",
 		"description": "[alt] చిత్రాలు చూపించకపోతే ప్రత్యామ్నాయ టెక్స్ట్"

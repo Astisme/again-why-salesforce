@@ -483,6 +483,10 @@
 		"message": "Configuració de Salesforce",
 		"description": "qualsevol pàgina de configuració de Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Desa",
+		"description": "Aplica els canvis i desa'ls a la memòria"
+	},
 	"save_tab": {
 		"message": "Desar com a Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"

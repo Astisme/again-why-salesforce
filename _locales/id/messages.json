@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "setiap halaman pengaturan Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Simpan",
+		"description": "Terapkan perubahan dan simpan di memori"
+	},
 	"save_tab": {
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."

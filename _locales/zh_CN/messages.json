@@ -483,6 +483,10 @@
 		"message": "Salesforce 设置",
 		"description": "任何 Salesforce 设置页面 (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "保存",
+		"description": "应用更改并将其存储在内存中"
+	},
 	"save_tab": {
 		"message": "另存为 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"

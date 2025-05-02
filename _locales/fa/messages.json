@@ -483,6 +483,10 @@
 		"message": "Salesforce Setup",
 		"description": "هر صفحه تنظیماتی در Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "ذخیره",
+		"description": "اعمال تغییرات و ذخیره آن‌ها در حافظه"
+	},
 	"save_tab": {
 		"message": "ذخیره به عنوان Tab",
 		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"

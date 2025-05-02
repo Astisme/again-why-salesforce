@@ -1078,6 +1078,7 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 	}
 }
 
+const saveContainer = document.getElementById("save-container");
 /**
  * Activates one element and shows it, while deactivating and hiding others.
  * @param {HTMLElement} elementToActivate - Element to set as active.
@@ -1086,13 +1087,17 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
  * @param {HTMLElement[]} elementsToHide - Elements to hide.
  */
 function showRelevantSettings_HideOthers(
-	elementToActivate,
-	elementToShow,
+	elementsToActivate,
+	elementsToShow,
 	elementsToDeactivate,
 	elementsToHide,
 ) {
-	elementToActivate.classList.add(SLDS_ACTIVE);
-	elementToShow.classList.remove("hidden");
+	elementsToActivate.forEach((el) => {
+		el.classList.add(SLDS_ACTIVE);
+	});
+	elementsToShow.forEach((el) => {
+		el.classList.remove("hidden");
+	});
 	elementsToDeactivate.forEach((el) => {
 		el.classList.remove(SLDS_ACTIVE);
 	});
@@ -1103,17 +1108,17 @@ function showRelevantSettings_HideOthers(
 
 generalHeader.addEventListener("click", () => {
 	restoreGeneralSettings();
-	showRelevantSettings_HideOthers(generalHeader, generalContainer, [
+	showRelevantSettings_HideOthers([generalHeader], [generalContainer], [
 		tabGenericManagerContainer,
 		tabOrgManagerHeader,
-	], [tabGenericManagerContainer, tabOrgManagerContainer]);
+	], [tabGenericManagerContainer, tabOrgManagerContainer, saveContainer]);
 });
 
 tabGenericManagerHeader.addEventListener("click", () => {
 	restoreTabSettings(GENERIC_TAB_STYLE_KEY);
 	showRelevantSettings_HideOthers(
-		tabGenericManagerHeader,
-		tabGenericManagerContainer,
+		[tabGenericManagerHeader],
+		[tabGenericManagerContainer, saveContainer],
 		[generalHeader, tabOrgManagerHeader],
 		[generalContainer, tabOrgManagerContainer],
 	);
@@ -1122,8 +1127,8 @@ tabGenericManagerHeader.addEventListener("click", () => {
 tabOrgManagerHeader.addEventListener("click", () => {
 	restoreTabSettings(ORG_TAB_STYLE_KEY);
 	showRelevantSettings_HideOthers(
-		tabOrgManagerHeader,
-		tabOrgManagerContainer,
+		[tabOrgManagerHeader],
+		[tabOrgManagerContainer, saveContainer],
 		[generalHeader, tabGenericManagerHeader],
 		[generalContainer, tabGenericManagerContainer],
 	);

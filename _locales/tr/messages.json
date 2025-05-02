@@ -483,6 +483,10 @@
 		"message": "Salesforce Setup",
 		"description": "Herhangi bir Salesforce Kurulum sayfası (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Kaydet",
+		"description": "Değişiklikleri uygula ve bellekte sakla"
+	},
 	"save_tab": {
 		"message": "Tab Olarak Kaydet",
 		"description": "[alt] resimler çalışmadığında alternatif metin"

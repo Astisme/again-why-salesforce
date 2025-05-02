@@ -483,6 +483,10 @@
 		"message": "Nastavení Salesforce",
 		"description": "jakákoli stránka nastavení Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Uložit",
+		"description": "Použít změny a uložit je do paměti"
+	},
 	"save_tab": {
 		"message": "Uložit jako Tab",
 		"description": "[alt] alternativní text, pokud se obrázky nezobrazí"

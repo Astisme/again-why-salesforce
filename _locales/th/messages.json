@@ -483,6 +483,10 @@
 		"message": "การตั้งค่า Salesforce",
 		"description": "หน้าใดๆ ของการตั้งค่า Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "บันทึก",
+		"description": "ใช้การเปลี่ยนแปลงและจัดเก็บไว้ในหน่วยความจำ"
+	},
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"

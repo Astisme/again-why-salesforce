@@ -483,6 +483,10 @@
 		"message": "Salesforce સેટઅપ",
 		"description": "કોઈ પણ Salesforce સેટઅપ પૃષ્ઠો (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "સાચવો",
+		"description": "ફેરફારો લાગુ કરો અને તેને મેમરીમાં સ્ટોર કરો"
+	},
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] ચિત્રો કામ ન કરતી વખતે વિકલ્પિક લખાણ"

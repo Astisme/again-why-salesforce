@@ -483,6 +483,10 @@
 		"message": "Ρύθμιση Salesforce",
 		"description": "οποιαδήποτε σελίδα ρύθμισης Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Αποθήκευση",
+		"description": "Εφαρμογή αλλαγών και αποθήκευσή τους στη μνήμη"
+	},
 	"save_tab": {
 		"message": "Αποθήκευση ως Tab",
 		"description": "[εναλλακτικό-κείμενο] εναλλακτικό κείμενο όταν οι εικόνες δεν λειτουργούν"

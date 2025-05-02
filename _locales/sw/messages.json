@@ -483,6 +483,10 @@
 		"message": "Mipangilio ya Salesforce",
 		"description": "ukurasa wowote wa mipangilio ya Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Hifadhi",
+		"description": "Tekeleza mabadiliko na uyahifadhi kwenye kumbukumbu"
+	},
 	"save_tab": {
 		"message": "Hifadhi kama Tab",
 		"description": "[alt] maandishi mbadala wakati picha hazifanyi kazi"

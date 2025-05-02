@@ -483,6 +483,10 @@
 		"message": "Salesforce-innstillinger",
 		"description": "enhver Salesforce-innstillingsside (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Lagre",
+		"description": "Bruk endringer og lagre dem i minnet"
+	},
 	"save_tab": {
 		"message": "Lagre som Tab",
 		"description": "[alt] alternativ tekst når bilder ikke vises"

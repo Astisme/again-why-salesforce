@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "任意のSalesforce設定ページ (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "保存",
+		"description": "変更を適用してメモリに保存します"
+	},
 	"save_tab": {
 		"message": "Tab として保存する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"

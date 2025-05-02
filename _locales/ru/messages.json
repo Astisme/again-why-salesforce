@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "любая страница настройки Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Сохранить",
+		"description": "Применить изменения и сохранить их в памяти"
+	},
 	"save_tab": {
 		"message": "Сохранить как Tab",
 		"description": "[alt] Альтернативный текст, если изображения не отображаются"

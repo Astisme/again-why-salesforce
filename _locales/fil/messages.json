@@ -483,6 +483,10 @@
 		"message": "Salesforce Setup",
 		"description": "anumang pahina ng setup ng Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "I-save",
+		"description": "Ilapat ang mga pagbabago at i-store ang mga ito sa memory"
+	},
 	"save_tab": {
 		"message": "I-save bilang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"

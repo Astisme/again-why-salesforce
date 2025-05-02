@@ -483,6 +483,10 @@
 		"message": "Salesforce’i seadistamine",
 		"description": "kõik Salesforce’i seadistuslehed (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Salvesta",
+		"description": "Rakenda muudatused ja salvesta need mällu"
+	},
 	"save_tab": {
 		"message": "Salvesta kui Tab",
 		"description": "[alt] alternatiivtekst, kui pildid ei tööta"

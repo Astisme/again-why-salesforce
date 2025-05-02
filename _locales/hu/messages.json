@@ -483,6 +483,10 @@
 		"message": "Salesforce beállítás",
 		"description": "Bármely Salesforce beállítási oldal (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Mentés",
+		"description": "Módosítások alkalmazása és tárolása a memóriában"
+	},
 	"save_tab": {
 		"message": "Mentés Tabként",
 		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"

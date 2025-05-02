@@ -483,6 +483,10 @@
 		"message": "Настройка на Salesforce",
 		"description": "всяка страница за настройка на Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Запази",
+		"description": "Приложи промените и ги запази в паметта"
+	},
 	"save_tab": {
 		"message": "Запази като Tab",
 		"description": "[alt] алтернативен текст когато изображенията не се показват"

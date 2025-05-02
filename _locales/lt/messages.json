@@ -483,6 +483,10 @@
 		"message": "Salesforce nustatymai",
 		"description": "bet kuris Salesforce nustatymų puslapis (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Išsaugoti",
+		"description": "Taikyti pakeitimus ir išsaugoti juos atmintyje"
+	},
 	"save_tab": {
 		"message": "Išsaugoti kaip Tab",
 		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"

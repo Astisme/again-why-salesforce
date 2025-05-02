@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "any Salesforce Setup page (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Save",
+		"description": "Apply changes and store them in memory"
+	},
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] alternative text when pictures do not work"

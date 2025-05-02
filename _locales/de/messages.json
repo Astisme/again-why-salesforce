@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "beliebige Salesforce-Setup-Seite (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Speichern",
+		"description": "Änderungen übernehmen und im Speicher sichern"
+	},
 	"save_tab": {
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."

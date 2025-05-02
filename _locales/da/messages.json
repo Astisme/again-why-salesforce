@@ -483,6 +483,10 @@
 		"message": "Salesforce-opsætning",
 		"description": "enhver Salesforce-opsætningsside (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Gem",
+		"description": "Anvend ændringer og gem dem i hukommelsen"
+	},
 	"save_tab": {
 		"message": "Gem som Tab",
 		"description": "[alt] alternativ tekst når billeder ikke vises"

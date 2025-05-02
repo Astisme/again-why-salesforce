@@ -483,6 +483,10 @@
 		"message": "Salesforce அமைப்புகள்",
 		"description": "எந்த Salesforce அமைப்புகள் பக்கம் (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "சேமி",
+		"description": "மாற்றங்களைப் பிரயோகித்து அவற்றை நினைவகத்தில் சேமிக்கவும்"
+	},
 	"save_tab": {
 		"message": "Tab ஆக சேமி",
 		"description": "[alt] படங்கள் வேலை செய்யாதபோது மாற்று உரை"

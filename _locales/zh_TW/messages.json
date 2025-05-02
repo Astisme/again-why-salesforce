@@ -483,6 +483,10 @@
 		"message": "Salesforce 設定",
 		"description": "任何 Salesforce 設定頁面 (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "儲存",
+		"description": "套用變更並將其儲存在記憶體中"
+	},
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] 當圖片無法顯示時的替代文字"

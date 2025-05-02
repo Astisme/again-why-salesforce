@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "bất kỳ trang cài đặt Salesforce nào (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Lưu",
+		"description": "Áp dụng các thay đổi và lưu trữ chúng trong bộ nhớ"
+	},
 	"save_tab": {
 		"message": "Lưu dưới dạng Tab",
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."

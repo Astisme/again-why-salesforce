@@ -483,6 +483,10 @@
 		"message": "הגדרות Salesforce",
 		"description": "כל דף הגדרות Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "שמור",
+		"description": "החל שינויים ואחסן אותם בזיכרון"
+	},
 	"save_tab": {
 		"message": "שמור כ-Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"

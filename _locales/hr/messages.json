@@ -483,6 +483,10 @@
 		"message": "Salesforce postavke",
 		"description": "bilo koja stranica za postavke Salesforcea (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Spremi",
+		"description": "Primijeni promjene i spremi ih u memoriju"
+	},
 	"save_tab": {
 		"message": "Spremi kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"

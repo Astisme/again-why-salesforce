@@ -483,6 +483,10 @@
 		"message": "Configurare Salesforce",
 		"description": "orice pagină Setup Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Salvare",
+		"description": "Aplicați modificările și stocați-le în memorie"
+	},
 	"save_tab": {
 		"message": "Salvați ca Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"

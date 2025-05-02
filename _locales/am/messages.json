@@ -483,6 +483,10 @@
 		"message": "Salesforce Setup",
 		"description": "ማንኛውም Salesforce ቅንብር ገፅ (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "አስቀምጥ",
+		"description": "ለውጦችን ተግብር እና በማስታወሻ ውስጥ አስቀምጣቸው"
+	},
 	"save_tab": {
 		"message": "እንደ Tab አስቀምጥ",
 		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"

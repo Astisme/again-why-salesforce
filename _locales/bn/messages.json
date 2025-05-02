@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "যেকোনো Salesforce সেটআপ পেজ (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "সংরক্ষণ করুন",
+		"description": "পরিবর্তনগুলি প্রয়োগ করুন এবং মেমরিতে সংরক্ষণ করুন"
+	},
 	"save_tab": {
 		"message": "Tab হিসেবে সংরক্ষণ করুন",
 		"description": "[alt] ছবি কাজ না করলে বিকল্প পাঠ"

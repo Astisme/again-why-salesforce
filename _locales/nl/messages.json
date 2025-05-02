@@ -483,6 +483,10 @@
 		"message": "Salesforce-instellingen",
 		"description": "elke Salesforce-instellingspagina (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Opslaan",
+		"description": "Wijzigingen toepassen en opslaan in het geheugen"
+	},
 	"save_tab": {
 		"message": "Opslaan als Tab",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"

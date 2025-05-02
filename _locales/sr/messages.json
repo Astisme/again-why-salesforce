@@ -483,6 +483,10 @@
 		"message": "Salesforce подешавања",
 		"description": "било која страница подешавања Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Сачувај",
+		"description": "Примени промене и сачувај их у меморији"
+	},
 	"save_tab": {
 		"message": "Sačuvaj kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"

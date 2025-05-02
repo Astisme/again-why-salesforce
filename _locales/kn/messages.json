@@ -482,6 +482,10 @@
 		"message": "Salesforce ಸೆಟ್ಟಿಂಗ್",
 		"description": "ಯಾವುದೇ Salesforce ಸೆಟ್ಟಿಂಗ್ ಪುಟ (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "ಉಳಿಸಿ",
+		"description": "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಿ ಮತ್ತು ಅವುಗಳನ್ನು ಮೆಮೊರಿಯಲ್ಲಿ ಸಂಗ್ರಹಿಸಿ"
+	},
 	"save_tab": {
 		"message": "Tab ಆಗಿ ಉಳಿಸಿ",
 		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"

@@ -483,6 +483,10 @@
 		"message": "Salesforce nastavitve",
 		"description": "katerakoli stran z nastavitvami Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Shrani",
+		"description": "Uporabi spremembe in jih shrani v pomnilnik"
+	},
 	"save_tab": {
 		"message": "Shrani kot Tab",
 		"description": "[alt] alternativno besedilo, ko slike ne delujejo"

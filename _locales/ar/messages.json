@@ -482,6 +482,10 @@
 		"message": "Salesforce Setup",
 		"description": "أي صفحة إعدادات Salesforce (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "حفظ",
+		"description": "تطبيق التغييرات وتخزينها في الذاكرة"
+	},
 	"save_tab": {
 		"message": "احفظ كـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"

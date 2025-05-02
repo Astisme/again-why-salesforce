@@ -483,6 +483,10 @@
 		"message": "Salesforce-inställningar",
 		"description": "vilken Salesforce-inställningssida som helst (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Spara",
+		"description": "Verkställ ändringar och spara dem i minnet"
+	},
 	"save_tab": {
 		"message": "Spara som Tab",
 		"description": "[alt] alternativ text när bilder inte visas"

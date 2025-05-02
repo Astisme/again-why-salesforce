@@ -483,6 +483,10 @@
 		"message": "Salesforce -asetukset",
 		"description": "mitkä tahansa Salesforce -asetussivut (https://*.my.salesforce-setup.com/*)"
 	},
+	"save": {
+		"message": "Tallenna",
+		"description": "Ota muutokset käyttöön ja tallenna ne muistiin"
+	},
 	"save_tab": {
 		"message": "Tallenna Tabina",
 		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
