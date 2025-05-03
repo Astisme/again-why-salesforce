@@ -34,9 +34,8 @@ class TranslationService {
 	}
 
 	async loadNewLanguage(language = null) {
-        console.log('lnl',language)
 		if (
-			language == null || language == this.currentLanguage ||
+			language == null ||
 			language === FOLLOW_SF_LANG
 		) {
 			return false;
@@ -46,13 +45,13 @@ class TranslationService {
 	}
 
 	async loadLanguageBackground() {
-		const userLanguage = await sendExtensionMessage({
+		const userLanguage = (await sendExtensionMessage({
             what: "get-settings",
             keys: USER_LANGUAGE,
-        });
+        }))?.enabled;
 		// load the user picked language
 		if (
-			await this.loadNewLanguage(userLanguage?.enabled)
+			await this.loadNewLanguage(userLanguage)
 		) {
             return userLanguage;
         }
@@ -77,6 +76,7 @@ class TranslationService {
 		// load the default language for fallback cases
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
+        singleton.currentLanguage = await singleton.loadLanguageBackground();
 		await singleton.updatePageTranslations();
 		singleton.setListenerForLanguageChange();
 		return singleton;
@@ -168,13 +168,7 @@ class TranslationService {
 	/**
 	 * Update all translatable elements on the page
 	 */
-	async updatePageTranslations(language = null) {
-        if(language == null){
-            const loadedLanguage = await this.loadLanguageBackground();
-            language = loadedLanguage?.enabled ?? loadedLanguage;
-            console.log('newl',language)
-            console.trace()
-        }
+	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
 		const elements = document.querySelectorAll(
 			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]`,
@@ -188,7 +182,7 @@ class TranslationService {
 			);
 			const translation = await this.translate(
 				key,
-                this.currentLanguage
+                language
 			);
 			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;
