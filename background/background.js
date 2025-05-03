@@ -198,10 +198,10 @@ async function getCurrentUserInfo(currentUrl) {
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
-    console.log('sfl',language)
+	console.log("sfl", language);
 	if (language != null) {
 		bg_setStorage(language, callback, LOCALE_KEY);
-        return language;
+		return language;
 	} else {
 		return bg_getStorage(callback, LOCALE_KEY);
 	}

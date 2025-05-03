@@ -128,7 +128,9 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 					missingKeys: ["FILE_NOT_FOUND"],
 				} as LocaleMissingKeys;
 			}
-			(groupedReport[groupId] as LocaleMissingKeys).locales.push(localeDir);
+			(groupedReport[groupId] as LocaleMissingKeys).locales.push(
+				localeDir,
+			);
 			continue;
 		}
 		try {
@@ -152,7 +154,7 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 					locale: localeDir,
 					missingKeys,
 				});
-				
+
 				// Add to the set of all missing keys
 				missingKeys.forEach((key) => allMissingKeys.add(key));
 			}
@@ -169,7 +171,9 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 					missingKeys: ["FILE_ERROR"],
 				} as LocaleMissingKeys;
 			}
-			(groupedReport[groupId] as LocaleMissingKeys).locales.push(localeDir);
+			(groupedReport[groupId] as LocaleMissingKeys).locales.push(
+				localeDir,
+			);
 		}
 	}
 	// Group locales by their missing keys using signatures
@@ -218,15 +222,15 @@ function main() {
 	try {
 		const groupedReport = checkLocaleFiles(localesDir);
 		// Calculate total missing keys and locales with missing translations
-        let someMissingKeys = false;
-        for(const [key, group] of Object.entries(groupedReport)){
+		let someMissingKeys = false;
+		for (const [key, group] of Object.entries(groupedReport)) {
 			if (key === "en/messages.json") continue;
 			const localeGroup = group as LocaleMissingKeys;
-            if(localeGroup.locales.length > 0){
-                someMissingKeys = true;
-                break;
-            }
-		};
+			if (localeGroup.locales.length > 0) {
+				someMissingKeys = true;
+				break;
+			}
+		}
 		// If no missing keys were found, close with success
 		if (!someMissingKeys) {
 			process.exit(0);
