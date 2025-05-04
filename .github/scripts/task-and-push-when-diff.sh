@@ -24,7 +24,7 @@ deno task "$TASK" > "$LOG_FILE" 2>&1
 
 echo "▶  Checking for changes…"
 DIFF_FILE=$(mktemp)
-git diff --output="$DIFF_FILE"
+(git diff;  git diff --staged) > "$DIFF_FILE"
 # Grab the size of the diff file
 SIZE=$(stat --format=%s "$DIFF_FILE" 2>/dev/null || stat -f%z "$DIFF_FILE")
 

@@ -7,10 +7,6 @@
 		"message": "Available",
 		"description": "Section header for items that can be added"
 	},
-	"bold": {
-		"message": "Bold",
-		"description": "Font style option for bold text"
-	},
 	"cancel": {
 		"message": "Cancel",
 		"description": "title or textContent for buttons that prevent the current action from executing"
@@ -22,6 +18,10 @@
 	"chosen": {
 		"message": "Chosen",
 		"description": "Section header for items that have been selected"
+	},
+	"bold": {
+		"message": "Bold",
+		"description": "Font style option for bold text"
 	},
 	"confirm_another_org": {
 		"message": "Confirm opening this link.",
