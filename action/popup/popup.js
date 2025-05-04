@@ -4,10 +4,10 @@ import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
 	BROWSER,
+	openSettingsPage,
 	OPERATING_PATTERNS,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
-    openSettingsPage,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { handleSwitchColorTheme } from "../themeHandler.js";
@@ -435,4 +435,7 @@ document.getElementById("theme-selector").addEventListener(
 document.getElementById("import").addEventListener("click", importHandler);
 document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
-document.getElementById("open-settings").addEventListener("click", openSettingsPage);
+document.getElementById("open-settings").addEventListener(
+	"click",
+	openSettingsPage,
+);

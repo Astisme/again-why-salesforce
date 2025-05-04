@@ -4,9 +4,9 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
+	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
-    openSettingsPage,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -312,9 +312,9 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			break;
-        case "open-settings":
-            openSettingsPage();
-            break;
+		case "open-settings":
+			openSettingsPage();
+			break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl);
 			message.url = Tab.expandURL(info.linkUrl, browserTabUrl);

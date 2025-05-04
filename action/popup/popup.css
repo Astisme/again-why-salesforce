@@ -159,10 +159,10 @@ input {
 }
 
 svg#open-settings {
-    height: 2rem;
-    margin-left: 0.5rem;
-    
-    & > g > g {
-        fill: var(--color);
-    }
+	height: 2rem;
+	margin-left: 0.5rem;
+
+	& > g > g {
+		fill: var(--color);
+	}
 }
