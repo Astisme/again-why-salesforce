@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Fungua Mipangilio ya Kiendelezi",
-            "description": "[dirisha ibukizi] kitufe cha kuelekeza kwenye ukurasa wa mipangilio"
-        }
-    ,
 	"allow": {
 		"message": "Ruhusu",
 		"description": "[omba_ruhusa] kitufe cha kuruhusu ruhusa"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab Hii",
 		"description": "[menu-ya-mukhtadha]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Mipangilio",
+		"description": "Lebo ya menyu ya mipangilio"
 	},
 	"cxm_update": {
 		"message": "✏️ Sasisha Tab",
@@ -380,6 +379,10 @@
 		"message": "Hii siyo ukurasa wa Usanidi wa Salesforce Lightning.",
 		"description": "[siUsanidiWaSalesforce] mtumiaji hayupo kwenye ukurasa wa Salesforce."
 	},
+	"open_settings": {
+		"message": "Fungua Mipangilio ya Kiendelezi",
+		"description": "[dirisha ibukizi] kitufe cha kuelekeza kwenye ukurasa wa mipangilio"
+	},
 	"open_setup": {
 		"message": "Fungua Usanidi",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa Usanidi wa Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Bofya ili kubadilisha hali ya kutumika.",
 		"description": "Maandishi ya kidokezo cha zana kwa kudhibiti kubadilisha hali ya kutumika"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Mipangilio",
-		"description": "Lebo ya menyu ya mipangilio"
 	},
 	"settings": {
 		"message": "Mipangilio",

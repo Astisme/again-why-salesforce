@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Otvori Postavke proširenja",
-            "description": "[skočni prozor] gumb za preusmjeravanje na stranicu s postavkama"
-        }
-    ,
 	"allow": {
 		"message": "Dopusti",
 		"description": "[req_permission] gumb za dopuštanje ovlasti"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ovaj Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Postavke",
+		"description": "Oznaka za izbornik postavki"
 	},
 	"cxm_update": {
 		"message": "✏️ Ažuriraj Tab",
@@ -380,6 +379,10 @@
 		"message": "Ovo nije stranica za postavljanje programa Salesforce Lightning.",
 		"description": "[nijeSalesforcePostavljanje] korisnik nije na stranici programa Salesforce."
 	},
+	"open_settings": {
+		"message": "Otvori Postavke proširenja",
+		"description": "[skočni prozor] gumb za preusmjeravanje na stranicu s postavkama"
+	},
 	"open_setup": {
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na Salesforce Setup stranicu"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Kliknite za prebacivanje aktivnog stanja.",
 		"description": "Tekst opisa alata za kontrolu prebacivanja aktivnog stanja"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Postavke",
-		"description": "Oznaka za izbornik postavki"
 	},
 	"settings": {
 		"message": "Postavke",

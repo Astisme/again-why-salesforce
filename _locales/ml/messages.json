@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "വിപുലീകരണ ക്രമീകരണങ്ങൾ തുറക്കുക",
-            "description": "[പോപ്പ്അപ്പ്] ക്രമീകരണ പേജിലേക്ക് റീഡയറക്‌ട് ചെയ്യാനുള്ള ബട്ടൺ"
-        }
-    ,
 	"allow": {
 		"message": "അനുമതി",
 		"description": "[req_permission] ബട്ടൺ അനുമതികള്‍ അനുവദിക്കാന്‍"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This tTb",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ സെറ്റിംഗ്സ്",
+		"description": "സെറ്റിംഗ്സ് മെനുവിന് ലേബൽ"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab അപ്‌ഡേറ്റ് ചെയ്യുക",
@@ -379,6 +378,10 @@
 		"message": "ഇതൊരു Salesforce ലൈറ്റ്നിംഗ് സജ്ജീകരണ താളല്ല.",
 		"description": "[Salesforce സജ്ജീകരണമല്ല] ഉപയോക്താവ് ഒരു Salesforce താളിലല്ല."
 	},
+	"open_settings": {
+		"message": "വിപുലീകരണ ക്രമീകരണങ്ങൾ തുറക്കുക",
+		"description": "[പോപ്പ്അപ്പ്] ക്രമീകരണ പേജിലേക്ക് റീഡയറക്‌ട് ചെയ്യാനുള്ള ബട്ടൺ"
+	},
 	"open_setup": {
 		"message": "സെറ്റപ്പ് തുറക്കുക",
 		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "സജീവ അവസ്ഥ ടോക്കിൽ ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക.",
 		"description": "സജീവ അവസ്ഥ ടോഗിൾ നിയന്ത്രണത്തിന് ടൂൾടിപ്പ്"
-	},
-	"cxm_settings": {
-		"message": "⚙️ സെറ്റിംഗ്സ്",
-		"description": "സെറ്റിംഗ്സ് മെനുവിന് ലേബൽ"
 	},
 	"settings": {
 		"message": "സെറ്റിംഗ്സ്",

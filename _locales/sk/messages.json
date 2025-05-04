@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Otvoriť nastavenia rozšírenia",
-            "description": "[vyskakovacie okno] tlačidlo pre presmerovanie na stránku nastavení"
-        }
-    ,
 	"allow": {
 		"message": "Povoliť",
 		"description": "[req_permission] tlačidlo na povolenie oprávnení"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tento Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Nastavenia",
+		"description": "Označenie pre menu nastavení"
 	},
 	"cxm_update": {
 		"message": "✏️ Aktualizovať Tab",
@@ -380,6 +379,10 @@
 		"message": "Toto nie je stránka nastavenia Salesforce Lightning.",
 		"description": "[nieJeNastavenieSalesforce] používateľ nie je na stránke Salesforce."
 	},
+	"open_settings": {
+		"message": "Otvoriť nastavenia rozšírenia",
+		"description": "[vyskakovacie okno] tlačidlo pre presmerovanie na stránku nastavení"
+	},
 	"open_setup": {
 		"message": "Otvoriť Setup",
 		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Kliknite pre prepnutie aktívneho stavu.",
 		"description": "Text popisku nástroja pre ovládanie prepnutia aktívneho stavu"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Nastavenia",
-		"description": "Označenie pre menu nastavení"
 	},
 	"settings": {
 		"message": "Nastavenia",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "打开扩展程序设置",
-            "description": "[弹窗] 重定向到设置页面的按钮"
-        }
-    ,
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ 这个 Tab",
 		"description": "[上下文菜单]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ 设置",
+		"description": "设置菜单的标签"
 	},
 	"cxm_update": {
 		"message": "✏️ 更新 Tab",
@@ -380,6 +379,10 @@
 		"message": "这不是Salesforce Lightning设置页面。",
 		"description": "[非Salesforce设置] 用户不在Salesforce页面上。"
 	},
+	"open_settings": {
+		"message": "打开扩展程序设置",
+		"description": "[弹窗] 重定向到设置页面的按钮"
+	},
 	"open_setup": {
 		"message": "打开设置",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 设置页面"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "点击切换活动状态。",
 		"description": "切换活动状态控件的工具提示文本"
-	},
-	"cxm_settings": {
-		"message": "⚙️ 设置",
-		"description": "设置菜单的标签"
 	},
 	"settings": {
 		"message": "设置",

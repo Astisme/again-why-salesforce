@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Atidaryti plėtinio nustatymus",
-            "description": "[iššokantis langas] mygtukas, skirtas nukreipti į nustatymų puslapį"
-        }
-    ,
 	"allow": {
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Šis Tab",
 		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Nustatymai",
+		"description": "Etiketė nustatymų meniu"
 	},
 	"cxm_update": {
 		"message": "✏️ Atnaujinti Tab",
@@ -380,6 +379,10 @@
 		"message": "Tai nėra „Salesforce Lightning“ sąrankos puslapis.",
 		"description": "[neSalesforceNustatymas] naudotojas nėra „Salesforce“ puslapyje."
 	},
+	"open_settings": {
+		"message": "Atidaryti plėtinio nustatymus",
+		"description": "[iššokantis langas] mygtukas, skirtas nukreipti į nustatymų puslapį"
+	},
 	"open_setup": {
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Spustelėkite, kad perjungtumėte aktyvią būseną.",
 		"description": "Įrankio patarimo tekstas aktyvios būsenos perjungimo valdikliui"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Nustatymai",
-		"description": "Etiketė nustatymų meniu"
 	},
 	"settings": {
 		"message": "Nustatymai",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Erweiterungseinstellungen öffnen",
-            "description": "[Popup] Schaltfläche zur Weiterleitung zur Einstellungsseite"
-        }
-    ,
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Diesen Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Einstellungen",
+		"description": "Bezeichnung für das Einstellungsmenü"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab aktualisieren",
@@ -379,6 +378,10 @@
 		"message": "Dies ist keine Salesforce Lightning Setup-Seite.",
 		"description": "[notSalesforceSetup] der Benutzer befindet sich nicht auf einer Salesforce-Seite."
 	},
+	"open_settings": {
+		"message": "Erweiterungseinstellungen öffnen",
+		"description": "[Popup] Schaltfläche zur Weiterleitung zur Einstellungsseite"
+	},
 	"open_setup": {
 		"message": "Setup öffnen",
 		"description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Klicken, um den aktiven Status umzuschalten.",
 		"description": "Tooltip-Text für die Steuerung des Umschaltens des aktiven Status"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Einstellungen",
-		"description": "Bezeichnung für das Einstellungsmenü"
 	},
 	"settings": {
 		"message": "Einstellungen",

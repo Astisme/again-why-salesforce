@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Отвори Подешавања проширења",
-            "description": "[искачући прозор] дугме за преусмеравање на страницу подешавања"
-        }
-    ,
 	"allow": {
 		"message": "Dozvoli",
 		"description": "[req_permission] dugme za dozvolu privilegija"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ovaj Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Подешавања",
+		"description": "Ознака за мени подешавања"
 	},
 	"cxm_update": {
 		"message": "✏️ Ažuriraj Tab",
@@ -380,6 +379,10 @@
 		"message": "Ovo nije stranica za podešavanje programa Salesforce Lightning.",
 		"description": "[nijeSalesforcePodešavanje] korisnik nije na stranici programa Salesforce."
 	},
+	"open_settings": {
+		"message": "Отвори Подешавања проширења",
+		"description": "[искачући прозор] дугме за преусмеравање на страницу подешавања"
+	},
 	"open_setup": {
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na dugmetu za preusmeravanje korisnika na Salesforce Setup stranicu"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Кликните да бисте променили активно стање.",
 		"description": "Текст објашњења за контролу промене активног стања"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Подешавања",
-		"description": "Ознака за мени подешавања"
 	},
 	"settings": {
 		"message": "Подешавања",

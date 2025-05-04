@@ -1,8 +1,4 @@
 {
-        "open_settings": {
-            "message": "فتح إعدادات الإضافة",
-            "description": "[نافذة منبثقة] زر لإعادة التوجيه إلى صفحة الإعدادات"
-    },
 	"allow": {
 		"message": "السماح",
 		"description": "[req_permission] زر للسماح بالأذونات"
@@ -102,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ هذا الـ Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ الإعدادات",
+		"description": "علامة لقائمة الإعدادات"
 	},
 	"cxm_update": {
 		"message": "✏️ تحديث الـ Tab",
@@ -378,6 +378,10 @@
 		"message": "هذه ليست صفحة إعداد Salesforce Lightning.",
 		"description": "[ليس إعداد Salesforce] المستخدم ليس على صفحة Salesforce."
 	},
+	"open_settings": {
+		"message": "فتح إعدادات الإضافة",
+		"description": "[نافذة منبثقة] زر لإعادة التوجيه إلى صفحة الإعدادات"
+	},
 	"open_setup": {
 		"message": "فتح الإعداد",
 		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
@@ -577,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "انقر لتبديل الحالة النشطة.",
 		"description": "نص التلميح للأداة للتحكم في تبديل الحالة النشطة"
-	},
-	"cxm_settings": {
-		"message": "⚙️ الإعدادات",
-		"description": "علامة لقائمة الإعدادات"
 	},
 	"settings": {
 		"message": "الإعدادات",

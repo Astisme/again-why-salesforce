@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Buka Pengaturan Ekstensi",
-            "description": "[popup] tombol untuk mengarahkan ke halaman pengaturan"
-        }
-    ,
 	"allow": {
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Hapus Tab ini",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Pengaturan",
+		"description": "Label untuk menu pengaturan"
 	},
 	"cxm_update": {
 		"message": "✏️ Perbarui Tab",
@@ -379,6 +378,10 @@
 		"message": "Ini bukan halaman Pengaturan Salesforce Lightning.",
 		"description": "[bukanSetupSalesforce] pengguna tidak berada di halaman Salesforce."
 	},
+	"open_settings": {
+		"message": "Buka Pengaturan Ekstensi",
+		"description": "[popup] tombol untuk mengarahkan ke halaman pengaturan"
+	},
 	"open_setup": {
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Klik untuk mengalihkan status aktif.",
 		"description": "Teks tooltip untuk kontrol pengalihan status aktif"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Pengaturan",
-		"description": "Label untuk menu pengaturan"
 	},
 	"settings": {
 		"message": "Pengaturan",

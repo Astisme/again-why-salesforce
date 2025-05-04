@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Åbn udvidelsesindstillinger",
-            "description": "[pop op] knap til at omdirigere til indstillingssiden"
-        }
-    ,
 	"allow": {
 		"message": "Tillad",
 		"description": "[req_permission] knap for at tillade tilladelser"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Denne Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Indstillinger",
+		"description": "Etiket for indstillingsmenuen"
 	},
 	"cxm_update": {
 		"message": "✏️ Opdater Tab",
@@ -380,6 +379,10 @@
 		"message": "Dette er ikke en Salesforce Lightning-opsætningsside.",
 		"description": "[ikkeSalesforceSetup] brugeren er ikke på en Salesforce-side."
 	},
+	"open_settings": {
+		"message": "Åbn udvidelsesindstillinger",
+		"description": "[pop op] knap til at omdirigere til indstillingssiden"
+	},
 	"open_setup": {
 		"message": "Åbn Setup",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Klik for at skifte aktiv tilstand.",
 		"description": "Værktøjstip for kontrollen til at skifte aktiv tilstand"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Indstillinger",
-		"description": "Etiket for indstillingsmenuen"
 	},
 	"settings": {
 		"message": "Indstillinger",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Atvērt paplašinājuma iestatījumus",
-            "description": "[iznirstošais logs] poga novirzīšanai uz iestatījumu lapu"
-        }
-    ,
 	"allow": {
 		"message": "Atļaut",
 		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Šis Tab",
 		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Iestatījumi",
+		"description": "Etiķete iestatījumu izvēlnei"
 	},
 	"cxm_update": {
 		"message": "✏️ Atjaunināt Tab",
@@ -380,6 +379,10 @@
 		"message": "Šī nav Salesforce Lightning iestatīšanas lapa.",
 		"description": "[navSalesforceIestatīšana] lietotājs neatrodas Salesforce lapā."
 	},
+	"open_settings": {
+		"message": "Atvērt paplašinājuma iestatījumus",
+		"description": "[iznirstošais logs] poga novirzīšanai uz iestatījumu lapu"
+	},
 	"open_setup": {
 		"message": "Atvērt iestatīšanu",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Noklikšķiniet, lai pārslēgtu aktīvo stāvokli.",
 		"description": "Rīka padoms teksts aktīvā stāvokļa pārslēgšanas vadīklai"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Iestatījumi",
-		"description": "Etiķete iestatījumu izvēlnei"
 	},
 	"settings": {
 		"message": "Iestatījumi",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Odpri nastavitve razširitve",
-            "description": "[pojokno] gumb za preusmeritev na stran z nastavitvami"
-        }
-    ,
 	"allow": {
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ta Tab",
 		"description": "[kontekstni_meni]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Nastavitve",
+		"description": "Oznaka za meni nastavitev"
 	},
 	"cxm_update": {
 		"message": "✏️ Posodobi Tab",
@@ -380,6 +379,10 @@
 		"message": "To ni stran za nastavitev programa Salesforce Lightning.",
 		"description": "[niNastavitevSalesforce] uporabnik ni na strani programa Salesforce."
 	},
+	"open_settings": {
+		"message": "Odpri nastavitve razširitve",
+		"description": "[pojokno] gumb za preusmeritev na stran z nastavitvami"
+	},
 	"open_setup": {
 		"message": "Odpri Nastavitev",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Kliknite za preklop aktivnega stanja.",
 		"description": "Besedilo namiga orodja za kontrolnik za preklop aktivnega stanja"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Nastavitve",
-		"description": "Oznaka za meni nastavitev"
 	},
 	"settings": {
 		"message": "Nastavitve",

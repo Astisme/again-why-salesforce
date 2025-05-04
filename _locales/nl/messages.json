@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Extensie-instellingen openen",
-            "description": "[popup] knop om door te verwijzen naar de instellingenpagina"
-        }
-    ,
 	"allow": {
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Deze Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Instellingen",
+		"description": "Label voor het instellingenmenu"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab bijwerken",
@@ -380,6 +379,10 @@
 		"message": "Dit is geen Salesforce Lightning Setup-pagina.",
 		"description": "[geenSalesforceSetup] de gebruiker bevindt zich niet op een Salesforce-pagina."
 	},
+	"open_settings": {
+		"message": "Extensie-instellingen openen",
+		"description": "[popup] knop om door te verwijzen naar de instellingenpagina"
+	},
 	"open_setup": {
 		"message": "Setup openen",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Klik om actieve staat te wisselen.",
 		"description": "Tooltip-tekst voor de bediening om de actieve staat te wisselen"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Instellingen",
-		"description": "Label voor het instellingenmenu"
 	},
 	"settings": {
 		"message": "Instellingen",

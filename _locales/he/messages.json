@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "פתח הגדרות תוסף",
-            "description": "[חלון קופץ] כפתור להפניה מחדש לדף ההגדרות"
-        }
-    ,
 	"allow": {
 		"message": "אפשר",
 		"description": "[req_permission] כפתור לאישור הרשאות"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab זה",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ הגדרות",
+		"description": "תווית לתפריט ההגדרות"
 	},
 	"cxm_update": {
 		"message": "✏️ עדכן Tab",
@@ -380,6 +379,10 @@
 		"message": "זהו אינו דף הגדרות של Salesforce Lightning.",
 		"description": "[לאהגדרתSalesforce] המשתמש אינו נמצא בדף של Salesforce."
 	},
+	"open_settings": {
+		"message": "פתח הגדרות תוסף",
+		"description": "[חלון קופץ] כפתור להפניה מחדש לדף ההגדרות"
+	},
 	"open_setup": {
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "לחץ כדי להחליף מצב פעיל.",
 		"description": "טקסט הסבר קצר עבור פקד החלפת מצב פעיל"
-	},
-	"cxm_settings": {
-		"message": "⚙️ הגדרות",
-		"description": "תווית לתפריט ההגדרות"
 	},
 	"settings": {
 		"message": "הגדרות",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Öppna tilläggsinställningar",
-            "description": "[popup] knapp för att omdirigera till inställningssidan"
-        }
-    ,
 	"allow": {
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Den här Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Inställningar",
+		"description": "Etikett för inställningsmenyn"
 	},
 	"cxm_update": {
 		"message": "✏️ Uppdatera Tab",
@@ -380,6 +379,10 @@
 		"message": "Detta är inte en Salesforce Lightning-inställningssida.",
 		"description": "[inteSalesforceSetup] användaren är inte på en Salesforce-sida."
 	},
+	"open_settings": {
+		"message": "Öppna tilläggsinställningar",
+		"description": "[popup] knapp för att omdirigera till inställningssidan"
+	},
 	"open_setup": {
 		"message": "Öppna Setup",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Klicka för att växla aktivt läge.",
 		"description": "Tooltip-text för kontrollen för att växla aktivt läge"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Inställningar",
-		"description": "Etikett för inställningsmenyn"
 	},
 	"settings": {
 		"message": "Inställningar",

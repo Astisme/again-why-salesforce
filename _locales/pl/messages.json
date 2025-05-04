@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Otwórz ustawienia rozszerzenia",
-            "description": "[popup] przycisk do przekierowania do strony ustawień"
-        }
-    ,
 	"allow": {
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ten Tab",
 		"description": "[menu-kontekstowe]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Ustawienia",
+		"description": "Etykieta dla menu ustawień"
 	},
 	"cxm_update": {
 		"message": "✏️ Aktualizuj Tab",
@@ -380,6 +379,10 @@
 		"message": "To nie jest strona konfiguracji Salesforce Lightning.",
 		"description": "[nieDotyczyKonfiguracjiSalesforce] użytkownik nie znajduje się na stronie Salesforce."
 	},
+	"open_settings": {
+		"message": "Otwórz ustawienia rozszerzenia",
+		"description": "[popup] przycisk do przekierowania do strony ustawień"
+	},
 	"open_setup": {
 		"message": "Otwórz Konfigurację",
 		"description": "[nieKonfiguracjaSalesforce] wezwanie do działania na przycisku, aby przekierować użytkownika na stronę Konfiguracji Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Kliknij, aby przełączyć stan aktywny.",
 		"description": "Tekst podpowiedzi narzędzia dla przełącznika stanu aktywnego"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Ustawienia",
-		"description": "Etykieta dla menu ustawień"
 	},
 	"settings": {
 		"message": "Ustawienia",

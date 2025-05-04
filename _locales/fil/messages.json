@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Buksan ang Mga Setting ng Extension",
-            "description": "[popup] button para i-redirect sa pahina ng settings"
-        }
-    ,
 	"allow": {
 		"message": "Pahintulutan",
 		"description": "[req_permission] button para pahintulutan ang mga pahintulot"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Itong Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Mga Setting",
+		"description": "Label para sa menu ng setting"
 	},
 	"cxm_update": {
 		"message": "✏️ I-update ang Tab",
@@ -380,6 +379,10 @@
 		"message": "Hindi ito isang pahina ng Setup ng Salesforce Lightning.",
 		"description": "[hindiSetupNgSalesforce] wala ang user sa isang pahina ng Salesforce."
 	},
+	"open_settings": {
+		"message": "Buksan ang Mga Setting ng Extension",
+		"description": "[popup] button para i-redirect sa pahina ng settings"
+	},
 	"open_setup": {
 		"message": "Buksan ang Setup",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "I-click upang i-toggle ang aktibong estado.",
 		"description": "Tooltip text para sa kontrol ng toggle ng aktibong estado"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Mga Setting",
-		"description": "Label para sa menu ng setting"
 	},
 	"settings": {
 		"message": "Mga Setting",

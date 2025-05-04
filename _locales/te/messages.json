@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "పొడిగింపు సెట్టింగ్‌లను తెరవండి",
-            "description": "[పాప్‌అప్] సెట్టింగ్‌ల పేజీకి దారి మళ్లించడానికి బటన్"
-        }
-    ,
 	"allow": {
 		"message": "అనుమతించండి",
 		"description": "[req_permission] అనుమతులు ఇవ్వడానికి బటన్"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ ఈ Tab తీసివేయి",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ సెట్టింగులు",
+		"description": "సెట్టింగుల మెనూ కోసం లేబుల్"
 	},
 	"cxm_update": {
 		"message": "✏️ Tabను నవీకరించు",
@@ -379,6 +378,10 @@
 		"message": "ఇది సేల్స్‌ఫోర్స్ లైట్నింగ్ సెటప్ పేజీ కాదు.",
 		"description": "[సేల్స్‌ఫోర్స్ సెటప్ కాదు] వినియోగదారు సేల్స్‌ఫోర్స్ పేజీలో లేరు."
 	},
+	"open_settings": {
+		"message": "పొడిగింపు సెట్టింగ్‌లను తెరవండి",
+		"description": "[పాప్‌అప్] సెట్టింగ్‌ల పేజీకి దారి మళ్లించడానికి బటన్"
+	},
 	"open_setup": {
 		"message": "Setupని తెరవండి",
 		"description": "[notSalesforceSetup] Salesforce Setup పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "యాక్టివ్ స్థితిని టాగుల్ చేయడానికి క్లిక్ చేయండి.",
 		"description": "టాగుల్ యాక్టివ్ స్థితి నియంత్రణ కోసం టూల్‌టిప్ టెక్స్ట్"
-	},
-	"cxm_settings": {
-		"message": "⚙️ సెట్టింగులు",
-		"description": "సెట్టింగుల మెనూ కోసం లేబుల్"
 	},
 	"settings": {
 		"message": "సెట్టింగులు",

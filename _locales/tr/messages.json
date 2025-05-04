@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Uzantı Ayarlarını Aç",
-            "description": "[açılır pencere] ayarlar sayfasına yönlendirme düğmesi"
-        }
-    ,
 	"allow": {
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Bu Tab",
 		"description": "[bağlam-menüsü]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Ayarlar",
+		"description": "Ayarlar menüsü etiketi"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab Güncelle",
@@ -380,6 +379,10 @@
 		"message": "Bu bir Salesforce Lightning Kurulum sayfası değil.",
 		"description": "[SalesforceKurulumuDeğil] kullanıcı bir Salesforce sayfasında değil."
 	},
+	"open_settings": {
+		"message": "Uzantı Ayarlarını Aç",
+		"description": "[açılır pencere] ayarlar sayfasına yönlendirme düğmesi"
+	},
 	"open_setup": {
 		"message": "Kurulumu Aç",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Etkin durumu değiştirmek için tıklayın.",
 		"description": "Etkin durum değiştirici kontrolün araç ipucu metni"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Ayarlar",
-		"description": "Ayarlar menüsü etiketi"
 	},
 	"settings": {
 		"message": "Ayarlar",

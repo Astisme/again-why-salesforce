@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "拡張機能設定を開く",
-            "description": "[ポップアップ] 設定ページにリダイレクトするボタン"
-        }
-    ,
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ この Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ 設定",
+		"description": "設定メニューのラベル"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab を更新する",
@@ -379,6 +378,10 @@
 		"message": "これはSalesforce Lightning Setupページではありません。",
 		"description": "[Salesforceセットアップ以外] ユーザーはSalesforceページにいません。"
 	},
+	"open_settings": {
+		"message": "拡張機能設定を開く",
+		"description": "[ポップアップ] 設定ページにリダイレクトするボタン"
+	},
 	"open_setup": {
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "クリックしてアクティブ状態を切り替えます。",
 		"description": "アクティブ状態切り替えコントロールのツールチップテキスト"
-	},
-	"cxm_settings": {
-		"message": "⚙️ 設定",
-		"description": "設定メニューのラベル"
 	},
 	"settings": {
 		"message": "設定",

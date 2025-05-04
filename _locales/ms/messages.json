@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Buka Tetapan Sambungan",
-            "description": "[popup] butang untuk mengubah hala ke halaman tetapan"
-        }
-    ,
 	"allow": {
 		"message": "Benarkan",
 		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab Ini",
 		"description": "[menu-konteks]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Tetapan",
+		"description": "Label untuk menu tetapan"
 	},
 	"cxm_update": {
 		"message": "✏️ Kemas kini Tab",
@@ -380,6 +379,10 @@
 		"message": "Ini bukan halaman Persediaan Salesforce Lightning.",
 		"description": "[bukanPersediaanSalesforce] pengguna tidak berada di halaman Salesforce."
 	},
+	"open_settings": {
+		"message": "Buka Tetapan Sambungan",
+		"description": "[popup] butang untuk mengubah hala ke halaman tetapan"
+	},
 	"open_setup": {
 		"message": "Buka Persediaan",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Klik untuk togol keadaan aktif.",
 		"description": "Teks petua alat untuk kawalan togol keadaan aktif"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Tetapan",
-		"description": "Label untuk menu tetapan"
 	},
 	"settings": {
 		"message": "Tetapan",

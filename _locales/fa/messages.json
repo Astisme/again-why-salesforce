@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "باز کردن تنظیمات افزونه",
-            "description": "[پاپ‌آپ] دکمه برای هدایت مجدد به صفحه تنظیمات"
-        }
-    ,
 	"allow": {
 		"message": "اجازه دادن",
 		"description": "[درخواست_مجوز] دکمه برای اجازه دادن مجوزها"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ این Tab",
 		"description": "[منوی_زمینه]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ تنظیمات",
+		"description": "برچسب برای منوی تنظیمات"
 	},
 	"cxm_update": {
 		"message": "✏️ به‌روزرسانی Tab",
@@ -380,6 +379,10 @@
 		"message": "این یک صفحه راه‌اندازی Salesforce Lightning نیست.",
 		"description": "[غیر راه‌اندازی Salesforce] کاربر در یک صفحه Salesforce نیست."
 	},
+	"open_settings": {
+		"message": "باز کردن تنظیمات افزونه",
+		"description": "[پاپ‌آپ] دکمه برای هدایت مجدد به صفحه تنظیمات"
+	},
 	"open_setup": {
 		"message": "باز کردن تنظیمات",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "برای تغییر وضعیت فعال کلیک کنید.",
 		"description": "متن راهنمای ابزار برای کنترل تغییر وضعیت فعال"
-	},
-	"cxm_settings": {
-		"message": "⚙️ تنظیمات",
-		"description": "برچسب برای منوی تنظیمات"
 	},
 	"settings": {
 		"message": "تنظیمات",

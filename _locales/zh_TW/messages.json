@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "開啟擴充功能設定",
-            "description": "[彈出視窗] 重新導向至設定頁面的按鈕"
-        }
-    ,
 	"allow": {
 		"message": "允許",
 		"description": "[req_permission] 按鈕，用於允許權限"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ 設定",
+		"description": "設定選單的標籤"
 	},
 	"cxm_update": {
 		"message": "✏️ 更新 Tab",
@@ -380,6 +379,10 @@
 		"message": "這不是 Salesforce Lightning 設定頁面。",
 		"description": "[非Salesforce設定] 使用者不在 Salesforce 頁面上。"
 	},
+	"open_settings": {
+		"message": "開啟擴充功能設定",
+		"description": "[彈出視窗] 重新導向至設定頁面的按鈕"
+	},
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce Setup 頁面"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "點擊切換活動狀態。",
 		"description": "切換活動狀態控制的工具提示文字"
-	},
-	"cxm_settings": {
-		"message": "⚙️ 設定",
-		"description": "設定選單的標籤"
 	},
 	"settings": {
 		"message": "設定",

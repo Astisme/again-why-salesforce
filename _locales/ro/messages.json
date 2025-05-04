@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Deschide Setările Extensiei",
-            "description": "[pop-up] buton pentru redirecționare către pagina de setări"
-        }
-    ,
 	"allow": {
 		"message": "Permiteți",
 		"description": "[cerere_permisiune] buton pentru a permite permisiuni"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Acest Tab",
 		"description": "[meniu-contextual]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Setări",
+		"description": "Etichetă pentru meniul de setări"
 	},
 	"cxm_update": {
 		"message": "✏️ Actualizați Tab",
@@ -380,6 +379,10 @@
 		"message": "Aceasta nu este o pagină de configurare Salesforce Lightning.",
 		"description": "[nuEsteConfigurareSalesforce] utilizatorul nu se află pe o pagină Salesforce."
 	},
+	"open_settings": {
+		"message": "Deschide Setările Extensiei",
+		"description": "[pop-up] buton pentru redirecționare către pagina de setări"
+	},
 	"open_setup": {
 		"message": "Deschideți Configurare",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Clic pentru a comuta starea activă.",
 		"description": "Text pentru descrierea instrumentului de control pentru comutarea stării active"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Setări",
-		"description": "Etichetă pentru meniul de setări"
 	},
 	"settings": {
 		"message": "Setări",

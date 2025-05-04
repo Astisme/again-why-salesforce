@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Mở Cài đặt Tiện ích",
-            "description": "[popup] nút để chuyển hướng đến trang cài đặt"
-        }
-    ,
 	"allow": {
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Xóa Tab này",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Cài đặt",
+		"description": "Nhãn cho menu cài đặt"
 	},
 	"cxm_update": {
 		"message": "✏️ Cập nhật Tab",
@@ -379,6 +378,10 @@
 		"message": "Đây không phải là trang Thiết lập Salesforce Lightning.",
 		"description": "[khôngPhảiThiếtLậpSalesforce] người dùng không ở trên trang Salesforce."
 	},
+	"open_settings": {
+		"message": "Mở Cài đặt Tiện ích",
+		"description": "[popup] nút để chuyển hướng đến trang cài đặt"
+	},
 	"open_setup": {
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Nhấp để chuyển trạng thái hoạt động.",
 		"description": "Văn bản tooltip cho điều khiển chuyển đổi trạng thái hoạt động"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Cài đặt",
-		"description": "Nhãn cho menu cài đặt"
 	},
 	"settings": {
 		"message": "Cài đặt",

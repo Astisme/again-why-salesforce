@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "এক্সটেনশন সেটিংস খুলুন",
-            "description": "[পপআপ] সেটিংস পৃষ্ঠায় পুনঃনির্দেশ করার বোতাম"
-        }
-    ,
 	"allow": {
 		"message": "অনুমতি দিন",
 		"description": "[req_permission] অনুমতি দেওয়ার জন্য বোতাম"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ এই Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ সেটিংস",
+		"description": "সেটিংস মেনুর জন্য লেবেল"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab আপডেট করুন",
@@ -379,6 +378,10 @@
 		"message": "এটি Salesforce লাইটনিং সেটআপ পেজ নয়।",
 		"description": "[Salesforce সেটআপ নয়] ব্যবহারকারী Salesforce পেজে নেই।"
 	},
+	"open_settings": {
+		"message": "এক্সটেনশন সেটিংস খুলুন",
+		"description": "[পপআপ] সেটিংস পৃষ্ঠায় পুনঃনির্দেশ করার বোতাম"
+	},
 	"open_setup": {
 		"message": "Setup খুলুন",
 		"description": "[notSalesforceSetup] Salesforce Setup পৃষ্ঠায় যাওয়ার জন্য কল-টু-অ্যাকশন"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "অ্যাকটিভ স্টেট টগল করতে ক্লিক করুন।",
 		"description": "টগল অ্যাকটিভ স্টেট নিয়ন্ত্রণের টুলটিপ টেক্সট"
-	},
-	"cxm_settings": {
-		"message": "⚙️ সেটিংস",
-		"description": "সেটিংস মেনুর জন্য লেবেল"
 	},
 	"settings": {
 		"message": "সেটিংস",

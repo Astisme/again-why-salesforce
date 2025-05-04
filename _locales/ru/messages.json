@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Открыть настройки расширения",
-            "description": "[всплывающее окно] кнопка для перенаправления на страницу настроек"
-        }
-    ,
 	"allow": {
 		"message": "Разрешить",
 		"description": "[req_permission] Кнопка для предоставления разрешений"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Этот Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Настройки",
+		"description": "Метка для меню настроек"
 	},
 	"cxm_update": {
 		"message": "✏️ Обновить Tab",
@@ -379,6 +378,10 @@
 		"message": "Это не страница настройки Salesforce Lightning.",
 		"description": "[неНастройкаSalesforce] пользователь не находится на странице Salesforce."
 	},
+	"open_settings": {
+		"message": "Открыть настройки расширения",
+		"description": "[всплывающее окно] кнопка для перенаправления на страницу настроек"
+	},
 	"open_setup": {
 		"message": "Открыть настройку",
 		"description": "[notSalesforceSetup] Призыв к переходу на страницу настройки Salesforce"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Нажмите, чтобы переключить активное состояние.",
 		"description": "Подсказка для инструмента переключения активного состояния"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Настройки",
-		"description": "Метка для меню настроек"
 	},
 	"settings": {
 		"message": "Настройки",

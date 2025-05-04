@@ -1,8 +1,4 @@
 {
-	"open_settings": {
-		"message": "Open Extension Settings",
-		"description": "[popup] button to redirect to the settings page"
-	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -102,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This tTb",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Settings",
+		"description": "Label for the settings menu"
 	},
 	"cxm_update": {
 		"message": "✏️ Update Tab",
@@ -378,6 +378,10 @@
 		"message": "This is not a Salesforce Lightning Setup page.",
 		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
 	},
+	"open_settings": {
+		"message": "Open Extension Settings",
+		"description": "[popup] button to redirect to the settings page"
+	},
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce Setup page"
@@ -577,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Click to toggle active state.",
 		"description": "Tooltip text for the toggle active state control"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Settings",
-		"description": "Label for the settings menu"
 	},
 	"settings": {
 		"message": "Settings",

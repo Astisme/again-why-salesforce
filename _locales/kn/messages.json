@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "ವಿಸ್ತರಣಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ",
-            "description": "[ಪಾಪ್‌ಅಪ್] ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟಕ್ಕೆ ಮರುನಿರ್ದೇಶಿಸಲು ಬಟನ್"
-        }
-    ,
 	"allow": {
 		"message": "ಅನುಮತಿಸಿ",
 		"description": "[ಅನುಮತಿ_ಕೋರಿಕೆ] ಬಟನ್ ಅನುಮತಿಗಳನ್ನು ನೀಡಲು"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This tTb",
 		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ ಸೆಟ್ಟಿಂಗ್ಸ್",
+		"description": "ಸೆಟ್ಟಿಂಗ್ಸ್ ಮೆನುಗೆ ಲೇಬಲ್"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab ನವೀಕರಿಸಿ",
@@ -379,6 +378,10 @@
 		"message": "ಇದು Salesforce ಲೈಟ್ನಿಂಗ್ ಸೆಟಪ್ ಪುಟವಲ್ಲ.",
 		"description": "[Salesforce ಸೆಟಪ್ ಅಲ್ಲ] ಬಳಕೆದಾರರು Salesforce ಪುಟದಲ್ಲಿಲ್ಲ."
 	},
+	"open_settings": {
+		"message": "ವಿಸ್ತರಣಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ",
+		"description": "[ಪಾಪ್‌ಅಪ್] ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟಕ್ಕೆ ಮರುನಿರ್ದೇಶಿಸಲು ಬಟನ್"
+	},
 	"open_setup": {
 		"message": "ಸೆಟಪ್ ತೆರೆಯಿರಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆ"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "ಸಕ್ರಿಯ ಸ್ಥಿತಿಯನ್ನು ಟಾಗಲ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ.",
 		"description": "ಸಕ್ರಿಯ ಸ್ಥಿತಿ ಟಾಗಲ್ ನಿಯಂತ್ರಣದ ಟೂಲ್‌ಟಿಪ್"
-	},
-	"cxm_settings": {
-		"message": "⚙️ ಸೆಟ್ಟಿಂಗ್ಸ್",
-		"description": "ಸೆಟ್ಟಿಂಗ್ಸ್ ಮೆನುಗೆ ಲೇಬಲ್"
 	},
 	"settings": {
 		"message": "ಸೆಟ್ಟಿಂಗ್ಸ್",

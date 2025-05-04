@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Ouvrir les paramètres de l'extension",
-            "description": "[popup] bouton pour rediriger vers la page des paramètres"
-        }
-    ,
 	"allow": {
 		"message": "Autoriser",
 		"description": "[req_permission] Bouton pour autoriser les permissions"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ce Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Paramètres",
+		"description": "Étiquette pour le menu des paramètres"
 	},
 	"cxm_update": {
 		"message": "✏️ Mettre à jour Tab",
@@ -379,6 +378,10 @@
 		"message": "Ceci n'est pas une page de configuration Salesforce Lightning.",
 		"description": "[n'estPasUneConfigurationSalesforce] l'utilisateur n'est pas sur une page Salesforce."
 	},
+	"open_settings": {
+		"message": "Ouvrir les paramètres de l'extension",
+		"description": "[popup] bouton pour rediriger vers la page des paramètres"
+	},
 	"open_setup": {
 		"message": "Ouvrir la configuration",
 		"description": "[notSalesforceSetup] Appel à l'action pour accéder à la page de configuration de Salesforce"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Cliquez pour basculer l'état actif.",
 		"description": "Texte info-bulle pour le contrôle de bascule de l'état actif"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Paramètres",
-		"description": "Étiquette pour le menu des paramètres"
 	},
 	"settings": {
 		"message": "Paramètres",

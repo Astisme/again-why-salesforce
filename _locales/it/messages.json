@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Apri Impostazioni Estensione",
-            "description": "[popup] pulsante per reindirizzare alla pagina delle impostazioni"
-        }
-    ,
 	"allow": {
 		"message": "Consenti",
 		"description": "[req_permission] pulsante per concedere le autorizzazioni"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Questa Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Impostazioni",
+		"description": "Etichetta per il menu delle impostazioni"
 	},
 	"cxm_update": {
 		"message": "✏️ Aggiorna Tab",
@@ -379,6 +378,10 @@
 		"message": "Questa non è una pagina di Configurazione di Salesforce Lightning.",
 		"description": "[notSalesforceSetup] l’utente non si trova in una pagina di Salesforce."
 	},
+	"open_settings": {
+		"message": "Apri Impostazioni Estensione",
+		"description": "[popup] pulsante per reindirizzare alla pagina delle impostazioni"
+	},
 	"open_setup": {
 		"message": "Apri Setup",
 		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente a una pagina di Setup di Salesforce"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "Fai clic per alternare lo stato attivo.",
 		"description": "Testo del suggerimento strumenti per il controllo di alternanza dello stato attivo"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Impostazioni",
-		"description": "Etichetta per il menu delle impostazioni"
 	},
 	"settings": {
 		"message": "Impostazioni",

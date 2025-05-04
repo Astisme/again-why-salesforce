@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Ava laienduse seaded",
-            "description": "[hüpikaken] nupp seadete lehele suunamiseks"
-        }
-    ,
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ See Tab",
 		"description": "[kontekstimenüü]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Seaded",
+		"description": "Silt seadete menüü jaoks"
 	},
 	"cxm_update": {
 		"message": "✏️ Uuenda Tab",
@@ -380,6 +379,10 @@
 		"message": "See ei ole Salesforce Lightningu seadistusleht.",
 		"description": "[mitteSalesforce'iSeadistus] kasutaja ei ole Salesforce'i lehel."
 	},
+	"open_settings": {
+		"message": "Ava laienduse seaded",
+		"description": "[hüpikaken] nupp seadete lehele suunamiseks"
+	},
 	"open_setup": {
 		"message": "Ava Seadistus",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Klõpsa aktiivse oleku lülitamiseks.",
 		"description": "Tööriista vihje tekst aktiivse oleku lülitamise juhtelemendile"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Seaded",
-		"description": "Silt seadete menüü jaoks"
 	},
 	"settings": {
 		"message": "Seaded",

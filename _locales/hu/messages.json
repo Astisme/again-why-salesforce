@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Bővítmény beállításainak megnyitása",
-            "description": "[előugró ablak] gomb a beállítások oldalra történő átirányításhoz"
-        }
-    ,
 	"allow": {
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ez a Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Beállítások",
+		"description": "Címke a beállítások menühöz"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab frissítése",
@@ -380,6 +379,10 @@
 		"message": "Ez nem egy Salesforce Lightning beállítási oldal.",
 		"description": "[nemSalesforceBeállítás] a felhasználó nem egy Salesforce oldalon van."
 	},
+	"open_settings": {
+		"message": "Bővítmény beállításainak megnyitása",
+		"description": "[előugró ablak] gomb a beállítások oldalra történő átirányításhoz"
+	},
 	"open_setup": {
 		"message": "Setup megnyitása",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Kattintson az aktív állapot váltásához.",
 		"description": "Eszköztipp szöveg az aktív állapot váltó vezérlőhöz"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Beállítások",
-		"description": "Címke a beállítások menühöz"
 	},
 	"settings": {
 		"message": "Beállítások",

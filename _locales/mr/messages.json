@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "विस्तार सेटिंग्ज उघडा",
-            "description": "[पॉपअप] सेटिंग्ज पृष्ठावर पुनर्निर्देशित करण्यासाठी बटण"
-        }
-    ,
 	"allow": {
 		"message": "परवानगी द्या",
 		"description": "[req_permission] परवानगी देण्यासाठीचे बटण"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ हा Tab काढा",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ सेटिंग्ज",
+		"description": "सेटिंग्ज मेन्यूसाठी लेबल"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab अपडेट करा",
@@ -379,6 +378,10 @@
 		"message": "हे Salesforce लाइटनिंग सेटअप पृष्ठ नाही.",
 		"description": "[सेल्सफोर्स सेटअप नाही] वापरकर्ता Salesforce पृष्ठावर नाही."
 	},
+	"open_settings": {
+		"message": "विस्तार सेटिंग्ज उघडा",
+		"description": "[पॉपअप] सेटिंग्ज पृष्ठावर पुनर्निर्देशित करण्यासाठी बटण"
+	},
 	"open_setup": {
 		"message": "Setup उघडा",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठाकडे जाण्यासाठी कॉल टू अॅक्शन"
@@ -578,10 +581,6 @@
 	"set_toggle_preview": {
 		"message": "सक्रिय स्थिती टॉगल करण्यासाठी क्लिक करा.",
 		"description": "सक्रिय स्थिती टॉगल नियंत्रणासाठी टूलटिप"
-	},
-	"cxm_settings": {
-		"message": "⚙️ सेटिंग्ज",
-		"description": "सेटिंग्ज मेन्यूसाठी लेबल"
 	},
 	"settings": {
 		"message": "सेटिंग्ज",

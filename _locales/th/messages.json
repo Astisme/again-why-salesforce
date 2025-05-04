@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "เปิดการตั้งค่าส่วนขยาย",
-            "description": "[ป๊อปอัป] ปุ่มเพื่อเปลี่ยนเส้นทางไปยังหน้าการตั้งค่า"
-        }
-    ,
 	"allow": {
 		"message": "อนุญาต",
 		"description": "[req_permission] ปุ่มสำหรับอนุญาตการเข้าถึง"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ การตั้งค่า",
+		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
 	},
 	"cxm_update": {
 		"message": "✏️ อัปเดต Tab",
@@ -380,6 +379,10 @@
 		"message": "Hindi ito isang pahina ng Setup ng Salesforce Lightning.",
 		"description": "[hindiSetupNgSalesforce] wala ang user sa isang pahina ng Salesforce."
 	},
+	"open_settings": {
+		"message": "เปิดการตั้งค่าส่วนขยาย",
+		"description": "[ป๊อปอัป] ปุ่มเพื่อเปลี่ยนเส้นทางไปยังหน้าการตั้งค่า"
+	},
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "คลิกเพื่อสลับสถานะการใช้งาน",
 		"description": "ข้อความคำแนะนำสำหรับการควบคุมการสลับสถานะการใช้งาน"
-	},
-	"cxm_settings": {
-		"message": "⚙️ การตั้งค่า",
-		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
 	},
 	"settings": {
 		"message": "การตั้งค่า",

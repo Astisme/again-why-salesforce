@@ -91,6 +91,10 @@
 		"message": "1️⃣ Este Tab",
 		"description": "[menú-contextual]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Configuración",
+		"description": "Etiqueta para el menú de configuración"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualizar Tab",
 		"description": "[menú-contextual]"
@@ -414,10 +418,6 @@
 	"save_tab": {
 		"message": "Guardar como Tab",
 		"description": "[alt] texto alternativo cuando las imágenes no funcionan"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Configuración",
-		"description": "Etiqueta para el menú de configuración"
 	},
 	"settings": {
 		"message": "Configuración",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Obrir Configuració de l'Extensió",
-            "description": "[finestra emergent] botó per redirigir a la pàgina de configuració"
-        }
-    ,
 	"allow": {
 		"message": "Permetre",
 		"description": "[req_permission] botó per permetre permisos"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Aquest Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Configuració",
+		"description": "Etiqueta per al menú de configuració"
 	},
 	"cxm_update": {
 		"message": "✏️ Actualitzar Tab",
@@ -380,6 +379,10 @@
 		"message": "Aquesta no és una pàgina de configuració de Salesforce Lightning.",
 		"description": "[noÉsConfiguracióDeSalesforce] l'usuari no es troba en una pàgina de Salesforce."
 	},
+	"open_settings": {
+		"message": "Obrir Configuració de l'Extensió",
+		"description": "[finestra emergent] botó per redirigir a la pàgina de configuració"
+	},
 	"open_setup": {
 		"message": "Obrir Setup",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Feu clic per commutar l'estat actiu.",
 		"description": "Text d'informació emergent per al control de commutació de l'estat actiu"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Configuració",
-		"description": "Etiqueta per al menú de configuració"
 	},
 	"settings": {
 		"message": "Configuració",

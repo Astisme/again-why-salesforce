@@ -1,8 +1,4 @@
 {
-        "open_settings": {
-            "message": "የቅጥያ ቅንብሮችን ክፈት",
-            "description": "[ብቅ-ባይ] ወደ ቅንብሮች ገጽ የሚያዞር አዝራር"
-    },
 	"allow": {
 		"message": "ፍቀድ",
 		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ለመፍቀድ የሚሆን አዝራር"
@@ -102,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ ይህ Tab",
 		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ ቅንብሮች",
+		"description": "ለቅንብሮች ማውጫ መለያ"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab አዘምን",
@@ -379,6 +379,10 @@
 		"message": "ይህ የSalesforce Lightning Setup ገጽ አይደለም።",
 		"description": "[SalesforceSetup አይደለም] ተጠቃሚው በSalesforce ገጽ ላይ አይደለም።"
 	},
+	"open_settings": {
+		"message": "የቅጥያ ቅንብሮችን ክፈት",
+		"description": "[ብቅ-ባይ] ወደ ቅንብሮች ገጽ የሚያዞር አዝራር"
+	},
 	"open_setup": {
 		"message": "ማዋቀሪያ (Setup) ክፈት",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce የማዋቀሪያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
@@ -578,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Click to toggle active state.",
 		"description": "የሁኔታ በተዘዋዋሪ ሁኔታ መቀየር ለመቆጣጠር ማሳያ ጥቆማ"
-	},
-	"cxm_settings": {
-		"message": "⚙️ ቅንብሮች",
-		"description": "ለቅንብሮች ማውጫ መለያ"
 	},
 	"settings": {
 		"message": "ቅንብሮች",

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Abrir Configurações da Extensão",
-            "description": "[popup] botão para redirecionar para a página de configurações"
-        }
-    ,
 	"allow": {
 		"message": "Permitir",
 		"description": "[req_permissão] botão para permitir permissões"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Esta Tab",
 		"description": "[menu-de-contexto]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Configurações",
+		"description": "Rótulo para o menu de configurações"
 	},
 	"cxm_update": {
 		"message": "✏️ Atualizar Tab",
@@ -380,6 +379,10 @@
 		"message": "Esta não é uma página de configuração do Salesforce Lightning.",
 		"description": "[nãoÉConfiguraçãoDoSalesforce] o usuário não está em uma página do Salesforce."
 	},
+	"open_settings": {
+		"message": "Abrir Configurações da Extensão",
+		"description": "[popup] botão para redirecionar para a página de configurações"
+	},
 	"open_setup": {
 		"message": "Abrir Configuração",
 		"description": "[naoEhConfigSalesforce] chamada para ação em um botão para redirecionar o usuário para uma página de Configuração do Salesforce"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Clique para alternar o estado ativo.",
 		"description": "Texto da dica de ferramenta para o controle de alternar estado ativo"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Configurações",
-		"description": "Rótulo para o menu de configurações"
 	},
 	"settings": {
 		"message": "Configurações",

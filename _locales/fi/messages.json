@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Avaa laajennuksen asetukset",
-            "description": "[ponnahdusikkuna] painike ohjatakseen asetussivulle"
-        }
-    ,
 	"allow": {
 		"message": "Salli",
 		"description": "[req_permission] painike, jolla myönnetään oikeudet"
@@ -103,6 +98,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tämä Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Asetukset",
+		"description": "Nimike asetusvalikkoa varten"
 	},
 	"cxm_update": {
 		"message": "✏️ Päivitä Tab",
@@ -380,6 +379,10 @@
 		"message": "Tämä ei ole Salesforce Lightning -asetussivu.",
 		"description": "[eiSalesforce-asetus] käyttäjä ei ole Salesforce-sivulla."
 	},
+	"open_settings": {
+		"message": "Avaa laajennuksen asetukset",
+		"description": "[ponnahdusikkuna] painike ohjatakseen asetussivulle"
+	},
 	"open_setup": {
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
@@ -579,10 +582,6 @@
 	"set_toggle_preview": {
 		"message": "Napsauta vaihtaaksesi aktiivista tilaa.",
 		"description": "Työkaluvihjeen teksti aktiivisen tilan vaihtamiseksi"
-	},
-	"cxm_settings": {
-		"message": "⚙️ Asetukset",
-		"description": "Nimike asetusvalikkoa varten"
 	},
 	"settings": {
 		"message": "Asetukset",
