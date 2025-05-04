@@ -580,6 +580,10 @@
 		"message": "點擊切換活動狀態。",
 		"description": "切換活動狀態控制的工具提示文字"
 	},
+	"cxm_settings": {
+		"message": "⚙️ 設定",
+		"description": "設定選單的標籤"
+	},
 	"settings": {
 		"message": "設定",
 		"description": "設定選單的標籤"

@@ -6,6 +6,7 @@ import {
 	FRAME_PATTERNS,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
+    openSettingsPage,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -118,6 +119,12 @@ const menuItemsOriginal = [
 		id: "page-remove-tab",
 		title: "cxm_page_remove_tab",
 		contexts: ["page", "frame"],
+	},
+
+	{
+		id: "open-settings",
+		title: "cxm_settings",
+		contexts: ["link", "page", "frame"],
 	},
 ].map((item) => {
 	/**
@@ -305,6 +312,9 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			break;
+        case "open-settings":
+            openSettingsPage();
+            break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl);
 			message.url = Tab.expandURL(info.linkUrl, browserTabUrl);

@@ -1,9 +1,4 @@
 {
-        "open_settings": {
-            "message": "Abrir Configuración de la Extensión",
-            "description": "[ventana emergente] botón para redirigir a la página de configuración"
-        }
-    ,
 	"open_settings": {
 		"message": "Open Extension Settings",
 		"description": "[popup] button to redirect to the settings page"
@@ -582,6 +577,10 @@
 	"set_toggle_preview": {
 		"message": "Click to toggle active state.",
 		"description": "Tooltip text for the toggle active state control"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Settings",
+		"description": "Label for the settings menu"
 	},
 	"settings": {
 		"message": "Settings",

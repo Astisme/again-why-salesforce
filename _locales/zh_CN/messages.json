@@ -580,6 +580,10 @@
 		"message": "点击切换活动状态。",
 		"description": "切换活动状态控件的工具提示文本"
 	},
+	"cxm_settings": {
+		"message": "⚙️ 设置",
+		"description": "设置菜单的标签"
+	},
 	"settings": {
 		"message": "设置",
 		"description": "设置菜单的标签"

@@ -136,3 +136,13 @@ hr {
 	justify-content: center;
 	padding-bottom: 1rem;
 }
+
+.slds-dueling-list__column {
+    display: block;
+}
+
+.center-columns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

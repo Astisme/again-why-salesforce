@@ -580,6 +580,10 @@
 		"message": "Bofya ili kubadilisha hali ya kutumika.",
 		"description": "Maandishi ya kidokezo cha zana kwa kudhibiti kubadilisha hali ya kutumika"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Mipangilio",
+		"description": "Lebo ya menyu ya mipangilio"
+	},
 	"settings": {
 		"message": "Mipangilio",
 		"description": "Lebo ya menyu ya mipangilio"

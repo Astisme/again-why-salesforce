@@ -580,6 +580,10 @@
 		"message": "Clic pentru a comuta starea activă.",
 		"description": "Text pentru descrierea instrumentului de control pentru comutarea stării active"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Setări",
+		"description": "Etichetă pentru meniul de setări"
+	},
 	"settings": {
 		"message": "Setări",
 		"description": "Etichetă pentru meniul de setări"

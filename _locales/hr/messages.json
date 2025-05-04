@@ -580,6 +580,10 @@
 		"message": "Kliknite za prebacivanje aktivnog stanja.",
 		"description": "Tekst opisa alata za kontrolu prebacivanja aktivnog stanja"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Postavke",
+		"description": "Oznaka za izbornik postavki"
+	},
 	"settings": {
 		"message": "Postavke",
 		"description": "Oznaka za izbornik postavki"

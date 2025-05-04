@@ -415,6 +415,10 @@
 		"message": "Guardar como Tab",
 		"description": "[alt] texto alternativo cuando las imágenes no funcionan"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Configuración",
+		"description": "Etiqueta para el menú de configuración"
+	},
 	"settings": {
 		"message": "Configuración",
 		"description": "Etiqueta para el menú de configuración"

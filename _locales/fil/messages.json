@@ -580,6 +580,10 @@
 		"message": "I-click upang i-toggle ang aktibong estado.",
 		"description": "Tooltip text para sa kontrol ng toggle ng aktibong estado"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Mga Setting",
+		"description": "Label para sa menu ng setting"
+	},
 	"settings": {
 		"message": "Mga Setting",
 		"description": "Label para sa menu ng setting"

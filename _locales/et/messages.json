@@ -580,6 +580,10 @@
 		"message": "Klõpsa aktiivse oleku lülitamiseks.",
 		"description": "Tööriista vihje tekst aktiivse oleku lülitamise juhtelemendile"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Seaded",
+		"description": "Silt seadete menüü jaoks"
+	},
 	"settings": {
 		"message": "Seaded",
 		"description": "Silt seadete menüü jaoks"

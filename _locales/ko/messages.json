@@ -580,6 +580,10 @@
 		"message": "활성 상태 전환하려면 클릭하세요.",
 		"description": "활성 상태 전환 컨트롤 툴팁 텍스트"
 	},
+	"cxm_settings": {
+		"message": "⚙️ 설정",
+		"description": "설정 메뉴 레이블"
+	},
 	"settings": {
 		"message": "설정",
 		"description": "설정 메뉴 레이블"

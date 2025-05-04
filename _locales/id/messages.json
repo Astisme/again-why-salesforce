@@ -579,6 +579,10 @@
 		"message": "Klik untuk mengalihkan status aktif.",
 		"description": "Teks tooltip untuk kontrol pengalihan status aktif"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Pengaturan",
+		"description": "Label untuk menu pengaturan"
+	},
 	"settings": {
 		"message": "Pengaturan",
 		"description": "Label untuk menu pengaturan"

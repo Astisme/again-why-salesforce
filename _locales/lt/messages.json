@@ -580,6 +580,10 @@
 		"message": "Spustelėkite, kad perjungtumėte aktyvią būseną.",
 		"description": "Įrankio patarimo tekstas aktyvios būsenos perjungimo valdikliui"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Nustatymai",
+		"description": "Etiketė nustatymų meniu"
+	},
 	"settings": {
 		"message": "Nustatymai",
 		"description": "Etiketė nustatymų meniu"

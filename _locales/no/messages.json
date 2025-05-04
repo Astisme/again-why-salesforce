@@ -580,6 +580,10 @@
 		"message": "Klikk for å veksle aktiv tilstand.",
 		"description": "Verktøytips-tekst for kontrollen for å veksle aktiv tilstand"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Innstillinger",
+		"description": "Etikett for innstillingsmenyen"
+	},
 	"settings": {
 		"message": "Innstillinger",
 		"description": "Etikett for innstillingsmenyen"

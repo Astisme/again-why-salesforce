@@ -580,6 +580,10 @@
 		"message": "Etkin durumu değiştirmek için tıklayın.",
 		"description": "Etkin durum değiştirici kontrolün araç ipucu metni"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Ayarlar",
+		"description": "Ayarlar menüsü etiketi"
+	},
 	"settings": {
 		"message": "Ayarlar",
 		"description": "Ayarlar menüsü etiketi"

@@ -579,6 +579,10 @@
 		"message": "Cliquez pour basculer l'état actif.",
 		"description": "Texte info-bulle pour le contrôle de bascule de l'état actif"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Paramètres",
+		"description": "Étiquette pour le menu des paramètres"
+	},
 	"settings": {
 		"message": "Paramètres",
 		"description": "Étiquette pour le menu des paramètres"

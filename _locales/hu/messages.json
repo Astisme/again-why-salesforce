@@ -580,6 +580,10 @@
 		"message": "Kattintson az aktív állapot váltásához.",
 		"description": "Eszköztipp szöveg az aktív állapot váltó vezérlőhöz"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Beállítások",
+		"description": "Címke a beállítások menühöz"
+	},
 	"settings": {
 		"message": "Beállítások",
 		"description": "Címke a beállítások menühöz"

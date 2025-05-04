@@ -580,6 +580,10 @@
 		"message": "Kliknite za preklop aktivnega stanja.",
 		"description": "Besedilo namiga orodja za kontrolnik za preklop aktivnega stanja"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Nastavitve",
+		"description": "Oznaka za meni nastavitev"
+	},
 	"settings": {
 		"message": "Nastavitve",
 		"description": "Oznaka za meni nastavitev"

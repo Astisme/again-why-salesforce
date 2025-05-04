@@ -579,6 +579,10 @@
 		"message": "Haga clic para alternar el estado activo.",
 		"description": "Texto de la información sobre herramientas para el control de alternar estado activo"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Configuración",
+		"description": "Etiqueta para el menú de configuración"
+	},
 	"settings": {
 		"message": "Configuración",
 		"description": "Etiqueta para el menú de configuración"

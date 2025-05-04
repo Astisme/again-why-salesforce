@@ -580,6 +580,10 @@
 		"message": "Klicka för att växla aktivt läge.",
 		"description": "Tooltip-text för kontrollen för att växla aktivt läge"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Inställningar",
+		"description": "Etikett för inställningsmenyn"
+	},
 	"settings": {
 		"message": "Inställningar",
 		"description": "Etikett för inställningsmenyn"

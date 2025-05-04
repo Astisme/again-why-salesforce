@@ -580,6 +580,10 @@
 		"message": "לחץ כדי להחליף מצב פעיל.",
 		"description": "טקסט הסבר קצר עבור פקד החלפת מצב פעיל"
 	},
+	"cxm_settings": {
+		"message": "⚙️ הגדרות",
+		"description": "תווית לתפריט ההגדרות"
+	},
 	"settings": {
 		"message": "הגדרות",
 		"description": "תווית לתפריט ההגדרות"

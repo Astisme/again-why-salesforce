@@ -580,6 +580,10 @@
 		"message": "Feu clic per commutar l'estat actiu.",
 		"description": "Text d'informació emergent per al control de commutació de l'estat actiu"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Configuració",
+		"description": "Etiqueta per al menú de configuració"
+	},
 	"settings": {
 		"message": "Configuració",
 		"description": "Etiqueta per al menú de configuració"

@@ -580,6 +580,10 @@
 		"message": "Klik untuk togol keadaan aktif.",
 		"description": "Teks petua alat untuk kawalan togol keadaan aktif"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Tetapan",
+		"description": "Label untuk menu tetapan"
+	},
 	"settings": {
 		"message": "Tetapan",
 		"description": "Label untuk menu tetapan"

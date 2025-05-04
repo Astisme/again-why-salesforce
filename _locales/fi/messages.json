@@ -580,6 +580,10 @@
 		"message": "Napsauta vaihtaaksesi aktiivista tilaa.",
 		"description": "Työkaluvihjeen teksti aktiivisen tilan vaihtamiseksi"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Asetukset",
+		"description": "Nimike asetusvalikkoa varten"
+	},
 	"settings": {
 		"message": "Asetukset",
 		"description": "Nimike asetusvalikkoa varten"

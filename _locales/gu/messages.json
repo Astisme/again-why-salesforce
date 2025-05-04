@@ -580,6 +580,10 @@
 		"message": "સક્રિય સ્થિતિ ટૉગલ કરવા 위해 ક્લિક કરો.",
 		"description": "સક્રિય સ્થિતિ ટૉગલ નિયંત્રણ માટે ટૂલટિપ"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Settings",
+		"description": "સેટિંગ્સ મેનુ માટે લેબલ"
+	},
 	"settings": {
 		"message": "Settings",
 		"description": "સેટિંગ્સ મેનુ માટે લેબલ"

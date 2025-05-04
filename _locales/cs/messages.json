@@ -580,6 +580,10 @@
 		"message": "Kliknutím přepnete aktivní stav.",
 		"description": "Text nápovědy pro ovládací prvek přepnutí aktivního stavu"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Nastavení",
+		"description": "Štítek pro nabídku nastavení"
+	},
 	"settings": {
 		"message": "Nastavení",
 		"description": "Štítek pro nabídku nastavení"

@@ -580,6 +580,10 @@
 		"message": "Kliknij, aby przełączyć stan aktywny.",
 		"description": "Tekst podpowiedzi narzędzia dla przełącznika stanu aktywnego"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Ustawienia",
+		"description": "Etykieta dla menu ustawień"
+	},
 	"settings": {
 		"message": "Ustawienia",
 		"description": "Etykieta dla menu ustawień"

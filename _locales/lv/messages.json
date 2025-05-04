@@ -580,6 +580,10 @@
 		"message": "Noklikšķiniet, lai pārslēgtu aktīvo stāvokli.",
 		"description": "Rīka padoms teksts aktīvā stāvokļa pārslēgšanas vadīklai"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Iestatījumi",
+		"description": "Etiķete iestatījumu izvēlnei"
+	},
 	"settings": {
 		"message": "Iestatījumi",
 		"description": "Etiķete iestatījumu izvēlnei"

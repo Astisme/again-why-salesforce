@@ -580,6 +580,10 @@
 		"message": "Klik om actieve staat te wisselen.",
 		"description": "Tooltip-tekst voor de bediening om de actieve staat te wisselen"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Instellingen",
+		"description": "Label voor het instellingenmenu"
+	},
 	"settings": {
 		"message": "Instellingen",
 		"description": "Label voor het instellingenmenu"
