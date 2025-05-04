@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Buka Pengaturan Ekstensi",
+            "description": "[popup] tombol untuk mengarahkan ke halaman pengaturan"
+        }
+    ,
 	"allow": {
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"

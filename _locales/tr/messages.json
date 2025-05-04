@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Uzantı Ayarlarını Aç",
+            "description": "[açılır pencere] ayarlar sayfasına yönlendirme düğmesi"
+        }
+    ,
 	"allow": {
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"

@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Buksan ang Mga Setting ng Extension",
+            "description": "[popup] button para i-redirect sa pahina ng settings"
+        }
+    ,
 	"allow": {
 		"message": "Pahintulutan",
 		"description": "[req_permission] button para pahintulutan ang mga pahintulot"

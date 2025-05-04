@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Mở Cài đặt Tiện ích",
+            "description": "[popup] nút để chuyển hướng đến trang cài đặt"
+        }
+    ,
 	"allow": {
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"

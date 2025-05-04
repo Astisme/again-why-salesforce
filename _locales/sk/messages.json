@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Otvoriť nastavenia rozšírenia",
+            "description": "[vyskakovacie okno] tlačidlo pre presmerovanie na stránku nastavení"
+        }
+    ,
 	"allow": {
 		"message": "Povoliť",
 		"description": "[req_permission] tlačidlo na povolenie oprávnení"

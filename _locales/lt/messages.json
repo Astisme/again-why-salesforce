@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Atidaryti plėtinio nustatymus",
+            "description": "[iššokantis langas] mygtukas, skirtas nukreipti į nustatymų puslapį"
+        }
+    ,
 	"allow": {
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"

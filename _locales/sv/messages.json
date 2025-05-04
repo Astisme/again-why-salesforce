@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Öppna tilläggsinställningar",
+            "description": "[popup] knapp för att omdirigera till inställningssidan"
+        }
+    ,
 	"allow": {
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"

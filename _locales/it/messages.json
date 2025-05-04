@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Apri Impostazioni Estensione",
+            "description": "[popup] pulsante per reindirizzare alla pagina delle impostazioni"
+        }
+    ,
 	"allow": {
 		"message": "Consenti",
 		"description": "[req_permission] pulsante per concedere le autorizzazioni"

@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Atvērt paplašinājuma iestatījumus",
+            "description": "[iznirstošais logs] poga novirzīšanai uz iestatījumu lapu"
+        }
+    ,
 	"allow": {
 		"message": "Atļaut",
 		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"

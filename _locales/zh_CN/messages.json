@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "打开扩展程序设置",
+            "description": "[弹窗] 重定向到设置页面的按钮"
+        }
+    ,
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"

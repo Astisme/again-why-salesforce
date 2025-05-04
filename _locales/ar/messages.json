@@ -1,4 +1,8 @@
 {
+        "open_settings": {
+            "message": "فتح إعدادات الإضافة",
+            "description": "[نافذة منبثقة] زر لإعادة التوجيه إلى صفحة الإعدادات"
+    },
 	"allow": {
 		"message": "السماح",
 		"description": "[req_permission] زر للسماح بالأذونات"

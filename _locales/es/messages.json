@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Abrir Configuración de la Extensión",
+            "description": "[ventana emergente] botón para redirigir a la página de configuración"
+        }
+    ,
 	"allow": {
 		"message": "Permitir",
 		"description": "[req_permission] Botón para permitir permisos"

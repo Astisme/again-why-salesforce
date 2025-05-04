@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "פתח הגדרות תוסף",
+            "description": "[חלון קופץ] כפתור להפניה מחדש לדף ההגדרות"
+        }
+    ,
 	"allow": {
 		"message": "אפשר",
 		"description": "[req_permission] כפתור לאישור הרשאות"

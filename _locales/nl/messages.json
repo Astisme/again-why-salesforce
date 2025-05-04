@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Extensie-instellingen openen",
+            "description": "[popup] knop om door te verwijzen naar de instellingenpagina"
+        }
+    ,
 	"allow": {
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"

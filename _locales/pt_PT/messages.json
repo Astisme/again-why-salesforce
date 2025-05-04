@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Abrir Definições da Extensão",
+            "description": "[popup] botão para redirecionar para a página de definições"
+        }
+    ,
 	"allow": {
 		"message": "Permitir",
 		"description": "[pedir_permissao] botão para permitir permissões"

@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Отвори Подешавања проширења",
+            "description": "[искачући прозор] дугме за преусмеравање на страницу подешавања"
+        }
+    ,
 	"allow": {
 		"message": "Dozvoli",
 		"description": "[req_permission] dugme za dozvolu privilegija"

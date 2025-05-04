@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Deschide Setările Extensiei",
+            "description": "[pop-up] buton pentru redirecționare către pagina de setări"
+        }
+    ,
 	"allow": {
 		"message": "Permiteți",
 		"description": "[cerere_permisiune] buton pentru a permite permisiuni"

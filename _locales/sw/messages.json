@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Fungua Mipangilio ya Kiendelezi",
+            "description": "[dirisha ibukizi] kitufe cha kuelekeza kwenye ukurasa wa mipangilio"
+        }
+    ,
 	"allow": {
 		"message": "Ruhusu",
 		"description": "[omba_ruhusa] kitufe cha kuruhusu ruhusa"

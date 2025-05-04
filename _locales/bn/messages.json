@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "এক্সটেনশন সেটিংস খুলুন",
+            "description": "[পপআপ] সেটিংস পৃষ্ঠায় পুনঃনির্দেশ করার বোতাম"
+        }
+    ,
 	"allow": {
 		"message": "অনুমতি দিন",
 		"description": "[req_permission] অনুমতি দেওয়ার জন্য বোতাম"

@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Odpri nastavitve razširitve",
+            "description": "[pojokno] gumb za preusmeritev na stran z nastavitvami"
+        }
+    ,
 	"allow": {
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"

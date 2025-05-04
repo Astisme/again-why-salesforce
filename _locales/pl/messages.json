@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Otwórz ustawienia rozszerzenia",
+            "description": "[popup] przycisk do przekierowania do strony ustawień"
+        }
+    ,
 	"allow": {
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"

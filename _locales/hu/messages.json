@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Bővítmény beállításainak megnyitása",
+            "description": "[előugró ablak] gomb a beállítások oldalra történő átirányításhoz"
+        }
+    ,
 	"allow": {
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"

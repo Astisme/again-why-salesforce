@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "एक्सटेंशन सेटिंग खोलें",
+            "description": "[पॉपअप] सेटिंग पेज पर रीडायरेक्ट करने के लिए बटन"
+        }
+    ,
 	"allow": {
 		"message": "अनुमति दें",
 		"description": "[req_permission] अनुमतियाँ देने के लिए बटन"

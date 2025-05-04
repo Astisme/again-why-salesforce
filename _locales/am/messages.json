@@ -1,4 +1,8 @@
 {
+        "open_settings": {
+            "message": "የቅጥያ ቅንብሮችን ክፈት",
+            "description": "[ብቅ-ባይ] ወደ ቅንብሮች ገጽ የሚያዞር አዝራር"
+    },
 	"allow": {
 		"message": "ፍቀድ",
 		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ለመፍቀድ የሚሆን አዝራር"

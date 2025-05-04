@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "開啟擴充功能設定",
+            "description": "[彈出視窗] 重新導向至設定頁面的按鈕"
+        }
+    ,
 	"allow": {
 		"message": "允許",
 		"description": "[req_permission] 按鈕，用於允許權限"

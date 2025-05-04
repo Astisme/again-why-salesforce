@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Buka Tetapan Sambungan",
+            "description": "[popup] butang untuk mengubah hala ke halaman tetapan"
+        }
+    ,
 	"allow": {
 		"message": "Benarkan",
 		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"

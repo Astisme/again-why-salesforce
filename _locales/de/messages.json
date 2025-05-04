@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Erweiterungseinstellungen öffnen",
+            "description": "[Popup] Schaltfläche zur Weiterleitung zur Einstellungsseite"
+        }
+    ,
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"

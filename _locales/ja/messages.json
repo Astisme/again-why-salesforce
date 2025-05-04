@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "拡張機能設定を開く",
+            "description": "[ポップアップ] 設定ページにリダイレクトするボタン"
+        }
+    ,
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"

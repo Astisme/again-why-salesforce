@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Ouvrir les paramètres de l'extension",
+            "description": "[popup] bouton pour rediriger vers la page des paramètres"
+        }
+    ,
 	"allow": {
 		"message": "Autoriser",
 		"description": "[req_permission] Bouton pour autoriser les permissions"

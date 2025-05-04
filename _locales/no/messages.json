@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Åpne utvidelsesinnstillinger",
+            "description": "[popup] knapp for å omdirigere til innstillingssiden"
+        }
+    ,
 	"allow": {
 		"message": "Tillat",
 		"description": "[req_permission] knapp for å gi tillatelser"

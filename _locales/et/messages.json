@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Ava laienduse seaded",
+            "description": "[hüpikaken] nupp seadete lehele suunamiseks"
+        }
+    ,
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"

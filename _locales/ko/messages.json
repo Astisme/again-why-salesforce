@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "확장 프로그램 설정 열기",
+            "description": "[팝업] 설정 페이지로 리디렉션하는 버튼"
+        }
+    ,
 	"allow": {
 		"message": "허용",
 		"description": "[권한_요청] 권한을 허용하는 버튼"

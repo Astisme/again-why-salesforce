@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Otvori Postavke proširenja",
+            "description": "[skočni prozor] gumb za preusmjeravanje na stranicu s postavkama"
+        }
+    ,
 	"allow": {
 		"message": "Dopusti",
 		"description": "[req_permission] gumb za dopuštanje ovlasti"

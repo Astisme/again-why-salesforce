@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "Otevřít nastavení rozšíření",
+            "description": "[vyskakovací okno] tlačítko pro přesměrování na stránku nastavení"
+        }
+    ,
 	"allow": {
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"

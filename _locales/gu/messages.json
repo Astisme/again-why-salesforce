@@ -1,4 +1,9 @@
 {
+        "open_settings": {
+            "message": "એક્સ્ટેંશન સેટિંગ્સ ખોલો",
+            "description": "[પોપઅપ] સેટિંગ્સ પૃષ્ઠ પર રીડાયરેક્ટ કરવા માટે બટન"
+        }
+    ,
 	"allow": {
 		"message": "અનુમતિ આપો",
 		"description": "[req_permission] પરવાનગી આપવાનું બટન"
