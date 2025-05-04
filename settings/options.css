@@ -1,6 +1,6 @@
 .tabContainer {
 	overflow-x: auto;
-    scrollbar-width: thin;
+	scrollbar-width: thin;
 }
 
 ul.settings {
