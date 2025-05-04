@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Parameter yang diperlukan untuk fungsi tidak dihantar",
+            "description": "[ralat] pembangun cuba memanggil fungsi tanpa parameter yang diperlukan"
+        },
+        "error_invalid_key": {
+            "message": "Parameter kunci yang dihantar ke fungsi tidak sah",
+            "description": "[ralat] pembangun cuba memanggil fungsi dengan parameter yang tidak sah"
+        },
 	"allow": {
 		"message": "Benarkan",
 		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"

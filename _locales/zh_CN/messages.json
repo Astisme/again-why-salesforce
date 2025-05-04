@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "函数所需的参数未传递",
+            "description": "[错误] 开发者尝试调用函数但未提供必要的参数"
+        },
+        "error_invalid_key": {
+            "message": "传递给函数的键参数无效",
+            "description": "[错误] 开发者尝试使用无效参数调用函数"
+        },
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"

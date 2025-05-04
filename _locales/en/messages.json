@@ -266,6 +266,14 @@
 		"message": "Invalid Tab(s) detected.\nFirst occurrence:",
 		"description": "[error] invalid Tabs were passed"
 	},
+    "error_required_params": {
+		"message": "The required parameters for the function were not passed",
+		"description": "[error] the developer tried to call a function without the necessary parameters"
+    },
+    "error_invalid_key": {
+		"message": "The key parameter passed to the function is not valid",
+		"description": "[error] the developer tried to call a function with an invalid parameter"
+    },
 	"error_useless_remove": {
 		"message": "Cannot remove:\nCannot remove a page that has not been saved before",
 		"description": "[error] the user tried to remove a page that was not saved yet"

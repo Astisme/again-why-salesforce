@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "関数に必要なパラメータが渡されませんでした",
+            "description": "[エラー] 開発者が必要なパラメータなしで関数を呼び出そうとしました"
+        },
+        "error_invalid_key": {
+            "message": "関数に渡されたキーパラメータが無効です",
+            "description": "[エラー] 開発者が無効なパラメータで関数を呼び出そうとしました"
+        },
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"

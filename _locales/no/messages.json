@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "De nødvendige parameterne for funksjonen ble ikke sendt med",
+            "description": "[feil] utvikleren prøvde å kalle en funksjon uten de nødvendige parameterne"
+        },
+        "error_invalid_key": {
+            "message": "Nøkkelparameteren som ble sendt til funksjonen er ikke gyldig",
+            "description": "[feil] utvikleren prøvde å kalle en funksjon med en ugyldig parameter"
+        },
 	"allow": {
 		"message": "Tillat",
 		"description": "[req_permission] knapp for å gi tillatelser"

@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Hindi naipasa ang mga kinakailangang parameter para sa function",
+      "description": "[error] sinubukan ng developer na tawagin ang function nang walang kinakailangang mga parameter"
+    },
+    "error_invalid_key": {
+      "message": "Hindi wasto ang key parameter na ipinasa sa function",
+      "description": "[error] sinubukan ng developer na tawagin ang function na may hindi wastong parameter"
+    },
 	"allow": {
 		"message": "Pahintulutan",
 		"description": "[req_permission] button para pahintulutan ang mga pahintulot"

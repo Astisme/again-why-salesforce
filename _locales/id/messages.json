@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Parameter yang diperlukan untuk fungsi tidak dilewatkan",
+            "description": "[kesalahan] pengembang mencoba memanggil fungsi tanpa parameter yang diperlukan"
+        },
+        "error_invalid_key": {
+            "message": "Parameter kunci yang dilewatkan ke fungsi tidak valid",
+            "description": "[kesalahan] pengembang mencoba memanggil fungsi dengan parameter yang tidak valid"
+        },
 	"allow": {
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"

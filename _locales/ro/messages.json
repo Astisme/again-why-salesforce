@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Parametrii necesari pentru funcție nu au fost transmiși",
+            "description": "[eroare] dezvoltatorul a încercat să apeleze o funcție fără parametrii necesari"
+        },
+        "error_invalid_key": {
+            "message": "Parametrul cheie transmis funcției nu este valid",
+            "description": "[eroare] dezvoltatorul a încercat să apeleze o funcție cu un parametru invalid"
+        },
 	"allow": {
 		"message": "Permiteți",
 		"description": "[cerere_permisiune] buton pentru a permite permisiuni"

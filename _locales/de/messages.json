@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
+      "description": "[Fehler] Der Entwickler hat versucht, die Funktion ohne die notwendigen Parameter aufzurufen"
+    },
+    "error_invalid_key": {
+      "message": "Der an die Funktion übergebene key-Parameter ist ungültig",
+      "description": "[Fehler] Der Entwickler hat versucht, die Funktion mit einem ungültigen Parameter aufzurufen"
+    },
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"

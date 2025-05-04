@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Fonksiyon için gerekli parametreler geçilmedi",
+            "description": "[hata] geliştirici gerekli parametreler olmadan bir fonksiyon çağırmaya çalıştı"
+        },
+        "error_invalid_key": {
+            "message": "Fonskiyon'a geçirilen anahtar parametresi geçerli değil",
+            "description": "[hata] geliştirici geçersiz bir parametre ile bir fonksiyon çağırmaya çalıştı"
+        },
 	"allow": {
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"

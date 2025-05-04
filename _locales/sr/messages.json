@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Потребни параметри за функцију нису прослеђени",
+            "description": "[грешка] програмер је покушао да позове функцију без неопходних параметара"
+        },
+        "error_invalid_key": {
+            "message": "Параметар кључа прослеђен функцији није валидан",
+            "description": "[грешка] програмер је покушао да позове функцију са невалидним параметром"
+        },
 	"allow": {
 		"message": "Dozvoli",
 		"description": "[req_permission] dugme za dozvolu privilegija"

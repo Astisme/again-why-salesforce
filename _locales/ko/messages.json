@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "함수에 필요한 파라미터가 전달되지 않았습니다",
+            "description": "[오류] 개발자가 필요한 파라미터 없이 함수를 호출하려고 했습니다"
+        },
+        "error_invalid_key": {
+            "message": "함수에 전달된 키 파라미터가 유효하지 않습니다",
+            "description": "[오류] 개발자가 유효하지 않은 파라미터로 함수를 호출하려고 했습니다"
+        },
 	"allow": {
 		"message": "허용",
 		"description": "[권한_요청] 권한을 허용하는 버튼"

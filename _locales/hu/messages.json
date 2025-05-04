@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "A függvényhez szükséges paraméterek nem lettek átadva",
+      "description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt a szükséges paraméterek nélkül"
+    },
+    "error_invalid_key": {
+      "message": "A függvénynek átadott kulcsparaméter érvénytelen",
+      "description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt érvénytelen paraméterrel"
+    },
 	"allow": {
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"

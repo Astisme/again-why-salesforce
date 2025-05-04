@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Các tham số bắt buộc cho hàm không được truyền",
+            "description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm mà không có các tham số cần thiết"
+        },
+        "error_invalid_key": {
+            "message": "Tham số khóa được truyền cho hàm không hợp lệ",
+            "description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm với một tham số không hợp lệ"
+        },
 	"allow": {
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"

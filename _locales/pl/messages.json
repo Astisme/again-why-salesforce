@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Wymagane parametry funkcji nie zostały przekazane",
+            "description": "[błąd] deweloper próbował wywołać funkcję bez niezbędnych parametrów"
+        },
+        "error_invalid_key": {
+            "message": "Parametr klucza przekazany do funkcji jest nieprawidłowy",
+            "description": "[błąd] deweloper próbował wywołać funkcję z nieprawidłowym parametrem"
+        },
 	"allow": {
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"

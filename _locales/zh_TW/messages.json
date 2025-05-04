@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "未傳遞函數所需的參數",
+            "description": "[錯誤] 開發人員嘗試呼叫函數但未提供必要的參數"
+        },
+        "error_invalid_key": {
+            "message": "傳遞給函數的鍵參數無效",
+            "description": "[錯誤] 開發人員嘗試使用無效參數呼叫函數"
+        },
 	"allow": {
 		"message": "允許",
 		"description": "[req_permission] 按鈕，用於允許權限"

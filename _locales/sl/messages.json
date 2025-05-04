@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Zahtevani parametri za funkcijo niso bili posredovani",
+            "description": "[napaka] razvijalec je poskusil poklicati funkcijo brez potrebnih parametrov"
+        },
+        "error_invalid_key": {
+            "message": "Parameter ključa, posredovan funkciji, ni veljaven",
+            "description": "[napaka] razvijalec je poskusil poklicati funkcijo z neveljavnim parametrom"
+        },
 	"allow": {
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"

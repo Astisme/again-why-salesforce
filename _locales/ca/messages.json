@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "No s'han passat els paràmetres requerits per a la funció",
+      "description": "[error] el desenvolupador ha intentat cridar la funció sense els paràmetres necessaris"
+    },
+    "error_invalid_key": {
+      "message": "El paràmetre key enviat a la funció no és vàlid",
+      "description": "[error] el desenvolupador ha intentat cridar la funció amb un paràmetre invàlid"
+    },
 	"allow": {
 		"message": "Permetre",
 		"description": "[req_permission] botó per permetre permisos"

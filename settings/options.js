@@ -95,59 +95,61 @@ function toggleActivePreview(event) {
 	event.target.closest("li").classList.toggle(SLDS_ACTIVE);
 }
 
+const inactive = "inactive";
+const active = "active";
 tabGenericPreview.addEventListener("click", toggleActivePreview);
 tabOrgPreview.addEventListener("click", toggleActivePreview);
 
 const tab_inactive_generic_setting_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-inactive`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-${inactive}`,
 );
 const tab_inactive_generic_setting_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-inactive`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-${inactive}`,
 );
 const tab_inactive_generic_setting_border_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-inactive`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-${inactive}`,
 );
 const tab_inactive_generic_setting_shadow_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-inactive`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-${inactive}`,
 );
 const tab_inactive_generic_setting_hover_background_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-inactive`);
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-${inactive}`);
 const tab_inactive_generic_setting_decoration_bold_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-inactive`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-${inactive}`,
 );
 const tab_inactive_generic_setting_decoration_italic_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-inactive`);
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-${inactive}`);
 const tab_inactive_generic_setting_decoration_underline_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-inactive`);
-//const tab_inactive_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-inactive`);
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-${inactive}`);
+//const tab_inactive_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-${inactive}`);
 
 const tab_active_generic_setting_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-${active}`,
 );
 const tab_active_generic_setting_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-${active}`,
 );
 const tab_active_generic_setting_border_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-${active}`,
 );
 const tab_active_generic_setting_shadow_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-${active}`,
 );
 const tab_active_generic_setting_hover_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-${active}`,
 );
 const tab_active_generic_setting_top_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-${active}`,
 );
 const tab_active_generic_setting_decoration_bold_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-${active}`,
 );
 const tab_active_generic_setting_decoration_italic_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-active`,
+	`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-${active}`,
 );
 const tab_active_generic_setting_decoration_underline_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-active`);
-//const tab_active_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-active`);
+	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-${active}`);
+//const tab_active_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-${active}`);
 
 const allInactiveGenericInputs = [
 	tab_inactive_generic_setting_background_el,
@@ -193,58 +195,58 @@ const allGenericTabSettings = [
 */
 
 const tab_inactive_org_setting_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-${inactive}`,
 );
 const tab_inactive_org_setting_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-${inactive}`,
 );
 const tab_inactive_org_setting_border_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-${inactive}`,
 );
 const tab_inactive_org_setting_shadow_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-${inactive}`,
 );
 const tab_inactive_org_setting_hover_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-${inactive}`,
 );
 const tab_inactive_org_setting_decoration_bold_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-${inactive}`,
 );
 const tab_inactive_org_setting_decoration_italic_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-inactive`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-${inactive}`,
 );
 const tab_inactive_org_setting_decoration_underline_el = document
-	.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-inactive`);
-//const tab_inactive_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-inactive`);
+	.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-${inactive}`);
+//const tab_inactive_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-${inactive}`);
 
 const tab_active_org_setting_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-${active}`,
 );
 const tab_active_org_setting_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-${active}`,
 );
 const tab_active_org_setting_border_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-${active}`,
 );
 const tab_active_org_setting_shadow_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-${active}`,
 );
 const tab_active_org_setting_hover_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-${active}`,
 );
 const tab_active_org_setting_top_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-${active}`,
 );
 const tab_active_org_setting_decoration_bold_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-${active}`,
 );
 const tab_active_org_setting_decoration_italic_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-${active}`,
 );
 const tab_active_org_setting_decoration_underline_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-active`,
+	`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-${active}`,
 );
-//const tab_active_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-active`);
+//const tab_active_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-${active}`);
 
 const allInactiveOrgInputs = [
 	tab_inactive_org_setting_background_el,
@@ -291,92 +293,104 @@ const allOrgTabSettings = [
 
 const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
+const decorationAvailableInactiveId = `${decorationAvailableId}-${inactive}`;
+const decorationChosenInactiveId = `${decorationChosenId}-${inactive}`;
+const decorationAvailableActiveId = `${decorationAvailableId}-${active}`;
+const decorationChosenActiveId = `${decorationChosenId}-${active}`;
+
 const ul_inactive_generic_decoration_available = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationAvailableId}-inactive`,
+	`${TAB_GENERIC_STYLE}-${decorationAvailableInactiveId}`,
 );
 const ul_inactive_generic_decoration_chosen = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationChosenId}-inactive`,
+	`${TAB_GENERIC_STYLE}-${decorationChosenInactiveId}`,
 );
 const ul_active_generic_decoration_available = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationAvailableId}-active`,
+	`${TAB_GENERIC_STYLE}-${decorationAvailableActiveId}`,
 );
 const ul_active_generic_decoration_chosen = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationChosenId}-active`,
+	`${TAB_GENERIC_STYLE}-${decorationChosenActiveId}`,
 );
 
 const ul_inactive_org_decoration_available = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationAvailableId}-inactive`,
+	`${TAB_ORG_STYLE}-${decorationAvailableInactiveId}`,
 );
 const ul_inactive_org_decoration_chosen = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationChosenId}-inactive`,
+	`${TAB_ORG_STYLE}-${decorationChosenInactiveId}`,
 );
 const ul_active_org_decoration_available = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationAvailableId}-active`,
+	`${TAB_ORG_STYLE}-${decorationAvailableActiveId}`,
 );
 const ul_active_org_decoration_chosen = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationChosenId}-active`,
+	`${TAB_ORG_STYLE}-${decorationChosenActiveId}`,
 );
 
+const styleGeneric = "style-generic";
+const styleGenericInactive = `${styleGeneric}-${inactive}`;
+const styleGenericActive = `${styleGeneric}-${active}`;
+const styleOrg = "style-org";
+const styleOrgInactive = `${styleOrg}-${inactive}`;
+const styleOrgActive = `${styleOrg}-${active}`;
+
 const backgroundStyleGenericInactiveId =
-	`${EXTENSION_NAME}-background-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleGenericInactive}`;
 const colorStyleGenericInactiveId =
-	`${EXTENSION_NAME}-color-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleGenericInactive}`;
 const borderStyleGenericInactiveId =
-	`${EXTENSION_NAME}-border-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleGenericInactive}`;
 const shadowStyleGenericInactiveId =
-	`${EXTENSION_NAME}-shadow-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleGenericInactive}`;
 const hoverStyleGenericInactiveId =
-	`${EXTENSION_NAME}-hover-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleGenericInactive}`;
 const boldStyleGenericInactiveId =
-	`${EXTENSION_NAME}-bold-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleGenericInactive}`;
 const italicStyleGenericInactiveId =
-	`${EXTENSION_NAME}-italic-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleGenericInactive}`;
 const underlineStyleGenericInactiveId =
-	`${EXTENSION_NAME}-underline-style-generic-inactive`;
-//const wavyStyleGenericInactiveId      = `${EXTENSION_NAME}-wavy-style-generic-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleGenericInactive}`;
+//const wavyStyleGenericInactiveId      = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleGenericInactive}`;
 
 const backgroundStyleGenericActiveId =
-	`${EXTENSION_NAME}-background-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleGenericActive}`;
 const colorStyleGenericActiveId =
-	`${EXTENSION_NAME}-color-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleGenericActive}`;
 const borderStyleGenericActiveId =
-	`${EXTENSION_NAME}-border-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleGenericActive}`;
 const shadowStyleGenericActiveId =
-	`${EXTENSION_NAME}-shadow-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleGenericActive}`;
 const hoverStyleGenericActiveId =
-	`${EXTENSION_NAME}-hover-style-generic-active`;
-const topStyleGenericActiveId = `${EXTENSION_NAME}-top-style-generic-active`;
-const boldStyleGenericActiveId = `${EXTENSION_NAME}-bold-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleGenericActive}`;
+const topStyleGenericActiveId = `${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleGenericActive}`;
+const boldStyleGenericActiveId = `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleGenericActive}`;
 const italicStyleGenericActiveId =
-	`${EXTENSION_NAME}-italic-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleGenericActive}`;
 const underlineStyleGenericActiveId =
-	`${EXTENSION_NAME}-underline-style-generic-active`;
-//const wavyStyleGenericActiveId        = `${EXTENSION_NAME}-wavy-style-generic-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleGenericActive}`;
+//const wavyStyleGenericActiveId        = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleGenericActive}`;
 
 const backgroundStyleOrgInactiveId =
-	`${EXTENSION_NAME}-background-style-org-inactive`;
-const colorStyleOrgInactiveId = `${EXTENSION_NAME}-color-style-org-inactive`;
-const borderStyleOrgInactiveId = `${EXTENSION_NAME}-border-style-org-inactive`;
-const shadowStyleOrgInactiveId = `${EXTENSION_NAME}-shadow-style-org-inactive`;
-const hoverStyleOrgInactiveId = `${EXTENSION_NAME}-hover-style-org-inactive`;
-const boldStyleOrgInactiveId = `${EXTENSION_NAME}-bold-style-org-inactive`;
-const italicStyleOrgInactiveId = `${EXTENSION_NAME}-italic-style-org-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleOrgInactive}`;
+const colorStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgInactive}`;
+const borderStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgInactive}`;
+const shadowStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgInactive}`;
+const hoverStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgInactive}`;
+const boldStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgInactive}`;
+const italicStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgInactive}`;
 const underlineStyleOrgInactiveId =
-	`${EXTENSION_NAME}-underline-style-org-inactive`;
-//const wavyStyleOrgInactiveId      = `${EXTENSION_NAME}-wavy-style-org-inactive`;
+	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleOrgInactive}`;
+//const wavyStyleOrgInactiveId      = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleOrgInactive}`;
 
 const backgroundStyleOrgActiveId =
-	`${EXTENSION_NAME}-background-style-org-active`;
-const colorStyleOrgActiveId = `${EXTENSION_NAME}-color-style-org-active`;
-const borderStyleOrgActiveId = `${EXTENSION_NAME}-border-style-org-active`;
-const shadowStyleOrgActiveId = `${EXTENSION_NAME}-shadow-style-org-active`;
-const hoverStyleOrgActiveId = `${EXTENSION_NAME}-hover-style-org-active`;
-const topStyleOrgActiveId = `${EXTENSION_NAME}-top-style-org-active`;
-const boldStyleOrgActiveId = `${EXTENSION_NAME}-bold-style-org-active`;
-const italicStyleOrgActiveId = `${EXTENSION_NAME}-italic-style-org-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleOrgActive}`;
+const colorStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgActive}`;
+const borderStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgActive}`;
+const shadowStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgActive}`;
+const hoverStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgActive}`;
+const topStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleOrgActive}`;
+const boldStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgActive}`;
+const italicStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgActive}`;
 const underlineStyleOrgActiveId =
-	`${EXTENSION_NAME}-underline-style-org-active`;
-//const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-wavy-style-org-active`;
+	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleOrgActive}`;
+//const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleOrgActive}`;
 
 /**
  * Updates or removes a style element in the document head
@@ -853,31 +867,36 @@ async function restoreGeneralSettings() {
 }
 
 const chosenBtnId = "move-chosen";
+const chosenBtnInactiveId = `${chosenBtnId}-${inactive}`;
+const chosenBtnActiveId = `${chosenBtnId}-${active}`;
 const availableBtnId = "move-available";
+const availableBtnInactiveId = `${availableBtnId}-${inactive}`;
+const availableBtnActiveId = `${availableBtnId}-${active}`;
+
 const btn_inactive_generic_chosen = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${chosenBtnId}-inactive`,
+	`${TAB_GENERIC_STYLE}-${chosenBtnInactiveId}`,
 );
 const btn_inactive_generic_available = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${availableBtnId}-inactive`,
+	`${TAB_GENERIC_STYLE}-${availableBtnInactiveId}`,
 );
 const btn_active_generic_chosen = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${chosenBtnId}-active`,
+	`${TAB_GENERIC_STYLE}-${chosenBtnActiveId}`,
 );
 const btn_active_generic_available = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${availableBtnId}-active`,
+	`${TAB_GENERIC_STYLE}-${availableBtnActiveId}`,
 );
 
 const btn_inactive_org_chosen = document.getElementById(
-	`${TAB_ORG_STYLE}-${chosenBtnId}-inactive`,
+	`${TAB_ORG_STYLE}-${chosenBtnInactiveId}`,
 );
 const btn_inactive_org_available = document.getElementById(
-	`${TAB_ORG_STYLE}-${availableBtnId}-inactive`,
+	`${TAB_ORG_STYLE}-${availableBtnInactiveId}`,
 );
 const btn_active_org_chosen = document.getElementById(
-	`${TAB_ORG_STYLE}-${chosenBtnId}-active`,
+	`${TAB_ORG_STYLE}-${chosenBtnActiveId}`,
 );
 const btn_active_org_available = document.getElementById(
-	`${TAB_ORG_STYLE}-${availableBtnId}-active`,
+	`${TAB_ORG_STYLE}-${availableBtnActiveId}`,
 );
 
 /**
@@ -891,7 +910,7 @@ function saveTabOptions(e, key = GENERIC_TAB_STYLE_KEY) {
 	const target = e.target;
 	const styleKey = target.dataset.styleKey;
 	setting.id = styleKey;
-	setting.forActive = !target.id.endsWith("inactive");
+	setting.forActive = !target.id.endsWith(inactive);
 	setting.value = e.target.value;
 	setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY);
 	set.set.push(setting);
@@ -916,7 +935,7 @@ function saveTabDecorations(
 		const setting = {};
 		const styleKey = li.dataset.styleKey;
 		setting.id = styleKey;
-		setting.forActive = !li.id.endsWith("inactive");
+		setting.forActive = !li.id.endsWith(inactive);
 		setting.value = isAdding ? styleKey : "";
 		setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY, false);
 		set.set.push(setting);

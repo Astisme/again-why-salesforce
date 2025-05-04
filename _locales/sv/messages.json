@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "De nödvändiga parametrarna för funktionen skickades inte med",
+            "description": "[fel] utvecklaren försökte anropa en funktion utan de nödvändiga parametrarna"
+        },
+        "error_invalid_key": {
+            "message": "Nyckelparametern som skickades till funktionen är inte giltig",
+            "description": "[fel] utvecklaren försökte anropa en funktion med en ogiltig parameter"
+        },
 	"allow": {
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"

@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
+            "description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
+        },
+        "error_invalid_key": {
+            "message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
+            "description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
+        },
 	"allow": {
 		"message": "அனுமதி",
 		"description": "[req_permission] அனுமதிகளை அனுமதிக்க பொத்தான்"

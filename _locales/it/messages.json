@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "I parametri richiesti per la funzione non sono stati passati",
+            "description": "[errore] lo sviluppatore ha provato a chiamare una funzione senza i parametri necessari"
+        },
+        "error_invalid_key": {
+            "message": "Il parametro chiave passato alla funzione non è valido",
+            "description": "[errore] lo sviluppatore ha provato a chiamare una funzione con un parametro non valido"
+        },
 	"allow": {
 		"message": "Consenti",
 		"description": "[req_permission] pulsante per concedere le autorizzazioni"

@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Potrebni parametri za funkciju nisu proslijeđeni",
+      "description": "[pogreška] programer je pokušao pozvati funkciju bez potrebnih parametara"
+    },
+    "error_invalid_key": {
+      "message": "Parametar ključa proslijeđen funkciji nije valjan",
+      "description": "[pogreška] programer je pokušao pozvati funkciju s nevaljanim parametrom"
+    },
 	"allow": {
 		"message": "Dopusti",
 		"description": "[req_permission] gumb za dopuštanje ovlasti"

@@ -198,7 +198,6 @@ async function getCurrentUserInfo(currentUrl) {
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
-    console.log('sfl',language)
 	if (language != null) {
 		bg_setStorage(language, callback, LOCALE_KEY);
         return language;
@@ -249,11 +248,6 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "get-sf-language":
 			bg_getSalesforceLanguage(sendResponse);
 			break;
-			/*
-        case "get-language":
-            bg_getSettings(USER_LANGUAGE, undefined, sendResponse);
-            break;
-            */
 		case "get-settings":
 			bg_getSettings(request.keys, undefined, sendResponse);
 			break;

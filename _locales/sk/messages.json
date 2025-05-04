@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Požadované parametre pre funkciu neboli odovzdané",
+            "description": "[chyba] vývojár sa pokúsil volať funkciu bez potrebných parametrov"
+        },
+        "error_invalid_key": {
+            "message": "Parameter kľúča odovzdaný funkcii nie je platný",
+            "description": "[chyba] vývojár sa pokúsil volať funkciu s neplatným parametrom"
+        },
 	"allow": {
 		"message": "Povoliť",
 		"description": "[req_permission] tlačidlo na povolenie oprávnení"

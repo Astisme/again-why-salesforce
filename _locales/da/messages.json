@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "De krævede parametre til funktionen blev ikke overført",
+      "description": "[fejl] udvikleren forsøgte at kalde funktionen uden de nødvendige parametre"
+    },
+    "error_invalid_key": {
+      "message": "Den nøgleparameter, der blev sendt til funktionen, er ugyldig",
+      "description": "[fejl] udvikleren forsøgte at kalde funktionen med en ugyldig parameter"
+    },
 	"allow": {
 		"message": "Tillad",
 		"description": "[req_permission] knap for at tillade tilladelser"

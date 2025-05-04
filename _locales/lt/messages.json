@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Būtini funkcijos parametrai nebuvo perduoti",
+            "description": "[klaida] kūrėjas bandė iškviesti funkciją be reikiamų parametrų"
+        },
+        "error_invalid_key": {
+            "message": "Funkcijai perduotas rakto parametras yra neteisingas",
+            "description": "[klaida] kūrėjas bandė iškviesti funkciją su neteisingu parametru"
+        },
 	"allow": {
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"

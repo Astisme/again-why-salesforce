@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Nepředány požadované parametry pro funkci",
+      "description": "[chyba] vývojář se pokusil volat funkci bez potřebných parametrů"
+    },
+    "error_invalid_key": {
+      "message": "Parametr key předaný funkci je neplatný",
+      "description": "[chyba] vývojář se pokusil volat funkci s neplatným parametrem"
+    },
 	"allow": {
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"

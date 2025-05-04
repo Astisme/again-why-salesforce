@@ -1,4 +1,12 @@
 {
+        "error_required_params": {
+            "message": "Funkcijai nepieciešamie parametri netika nodoti",
+            "description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju bez nepieciešamajiem parametriem"
+        },
+        "error_invalid_key": {
+            "message": "Funkcijai nodotais atslēgas parametrs nav derīgs",
+            "description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju ar nederīgu parametru"
+        },
 	"allow": {
 		"message": "Atļaut",
 		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"

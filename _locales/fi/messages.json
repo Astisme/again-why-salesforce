@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
+      "description": "[virhe] kehittäjä yritti kutsua toimintoa ilman tarvittavia parametreja"
+    },
+    "error_invalid_key": {
+      "message": "Toiminnolle lähetetty key-parametri on virheellinen",
+      "description": "[virhe] kehittäjä yritti kutsua toimintoa virheellisellä parametrilla"
+    },
 	"allow": {
 		"message": "Salli",
 		"description": "[req_permission] painike, jolla myönnetään oikeudet"

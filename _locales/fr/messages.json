@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Les paramètres requis pour la fonction n'ont pas été fournis",
+      "description": "[erreur] le développeur a tenté d'appeler la fonction sans les paramètres nécessaires"
+    },
+    "error_invalid_key": {
+      "message": "Le paramètre key passé à la fonction n'est pas valide",
+      "description": "[erreur] le développeur a tenté d'appeler la fonction avec un paramètre invalide"
+    },
 	"allow": {
 		"message": "Autoriser",
 		"description": "[req_permission] Bouton pour autoriser les permissions"

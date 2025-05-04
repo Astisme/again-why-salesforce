@@ -1,4 +1,12 @@
 {
+    "error_required_params": {
+      "message": "Funktsioonile vajalikke parameetreid ei edastatud",
+      "description": "[viga] arendaja proovis funktsiooni kutsuda ilma vajalike parameetriteta"
+    },
+    "error_invalid_key": {
+      "message": "Funktsioonile edastatud key-parameeter on kehtetu",
+      "description": "[viga] arendaja proovis funktsiooni kutsuda kehtetu parameetriga"
+    },
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"
