@@ -41,7 +41,7 @@ if (page != null) { // we're in a salesforce page
 			// update the button href to use the domain
 			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
 			// update the bold on the text
-            willOpenLogin = false
+			willOpenLogin = false;
 		}
 	} catch (_) {
 		sfsetupTextEl.classList.add("hidden");
@@ -110,19 +110,16 @@ shownRedirectBtn.addEventListener("click", (e) => {
 });
 
 const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
-const useSameTab = willOpenLogin
-    ? POPUP_LOGIN_NEW_TAB
-    : POPUP_SETUP_NEW_TAB;
+const useSameTab = willOpenLogin ? POPUP_LOGIN_NEW_TAB : POPUP_SETUP_NEW_TAB;
 const settings = await getSettings([automaticClick, useSameTab]);
 openPageInSameTab = settings != null &&
-    settings.filter((setting) =>
-            setting.id === useSameTab && setting.enabled
-        ).length > 0;
+	settings.filter((setting) => setting.id === useSameTab && setting.enabled)
+			.length > 0;
 if (
-    settings != null &&
-    settings.filter((setting) =>
-            setting.id === automaticClick && setting.enabled
-        ).length > 0
+	settings != null &&
+	settings.filter((setting) =>
+			setting.id === automaticClick && setting.enabled
+		).length > 0
 ) {
-    shownRedirectBtn.click();
+	shownRedirectBtn.click();
 } else await ensureTranslatorAvailability();

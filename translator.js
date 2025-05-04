@@ -2,8 +2,8 @@ import {
 	BROWSER,
 	FOLLOW_SF_LANG,
 	sendExtensionMessage,
+	SETTINGS_KEY,
 	USER_LANGUAGE,
-    SETTINGS_KEY,
 } from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
 let singleton = null;
@@ -46,22 +46,23 @@ class TranslationService {
 
 	async loadLanguageBackground() {
 		const userLanguage = (await sendExtensionMessage({
-            what: "get-settings",
-            keys: USER_LANGUAGE,
-        }))?.enabled;
+			what: "get-settings",
+			keys: USER_LANGUAGE,
+		}))?.enabled;
 		// load the user picked language
 		if (
 			await this.loadNewLanguage(userLanguage)
 		) {
-            return userLanguage;
-        }
-        // load the language in which salesforce is currently set
+			return userLanguage;
+		}
+		// load the language in which salesforce is currently set
 		const sfLanguage = await sendExtensionMessage({
-            what: "get-sf-language",
-        });
-        if(await this.loadNewLanguage(sfLanguage))
-            return sfLanguage;
-        return null;
+			what: "get-sf-language",
+		});
+		if (await this.loadNewLanguage(sfLanguage)) {
+			return sfLanguage;
+		}
+		return null;
 	}
 
 	/**
@@ -76,7 +77,7 @@ class TranslationService {
 		// load the default language for fallback cases
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
-        singleton.currentLanguage = await singleton.loadLanguageBackground();
+		singleton.currentLanguage = await singleton.loadLanguageBackground();
 		await singleton.updatePageTranslations();
 		singleton.setListenerForLanguageChange();
 		return singleton;
@@ -89,7 +90,7 @@ class TranslationService {
 	 */
 	async loadLanguageFile(language = null) {
 		if (language == null) {
-            console.trace();
+			console.trace();
 			throw new Error("Be sure to insert a language to load.");
 		}
 		if (this.caches[language] != null) {
@@ -182,7 +183,7 @@ class TranslationService {
 			);
 			const translation = await this.translate(
 				key,
-                language
+				language,
 			);
 			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;
@@ -197,7 +198,9 @@ class TranslationService {
 
 	setListenerForLanguageChange() {
 		BROWSER.storage.onChanged.addListener((changes) => {
-            const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter(el => el.id === USER_LANGUAGE);
+			const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter(
+				(el) => el.id === USER_LANGUAGE,
+			);
 			if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
 				this.updatePageTranslations(pickedLanguageObj[0].enabled);
 			}

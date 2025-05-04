@@ -4,8 +4,8 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
+	SETTINGS_KEY,
 	USER_LANGUAGE,
-    SETTINGS_KEY,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -324,10 +324,11 @@ setInterval(async () => {
 // create persistent menuItems
 checkAddRemoveContextMenus();
 
-
 BROWSER.storage.onChanged.addListener((changes) => {
-    const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter(el => el.id === USER_LANGUAGE);
-    if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
-        checkAddRemoveContextMenus();
-    }
+	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter((el) =>
+		el.id === USER_LANGUAGE
+	);
+	if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
+		checkAddRemoveContextMenus();
+	}
 });

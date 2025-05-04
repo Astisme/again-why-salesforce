@@ -741,8 +741,9 @@ function setPreviewAndInputValue(
             break;
         */
 		default:
-            if(setting.id !== preventDefaultOverride)
-                console.error(`Unmatched style setting id: ${setting.id}`);
+			if (setting.id !== preventDefaultOverride) {
+				console.error(`Unmatched style setting id: ${setting.id}`);
+			}
 			break;
 	}
 	if (!updateViews) {
@@ -928,9 +929,14 @@ function saveTabDecorations(
 	isAdding = true,
 	key = GENERIC_TAB_STYLE_KEY,
 ) {
-	const set = { what: "set", key, set: [{
-        id: preventDefaultOverride, value: "no-default"
-    }] };
+	const set = {
+		what: "set",
+		key,
+		set: [{
+			id: preventDefaultOverride,
+			value: "no-default",
+		}],
+	};
 	selectedLis.forEach((li) => {
 		const setting = {};
 		const styleKey = li.dataset.styleKey;

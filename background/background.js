@@ -200,7 +200,7 @@ export async function bg_getSalesforceLanguage(callback = null) {
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
 	if (language != null) {
 		bg_setStorage(language, callback, LOCALE_KEY);
-        return language;
+		return language;
 	} else {
 		return bg_getStorage(callback, LOCALE_KEY);
 	}
