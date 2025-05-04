@@ -6,14 +6,15 @@ export const EXTENSION_NAME = "again-why-salesforce";
 export const SETUP_LIGHTNING = "/lightning/setup/";
 export const WHY_KEY = "againWhySalesforce";
 export const LOCALE_KEY = "_locale";
-export const HTTPS = "https://";
+const PROTOCOL_SEPARATOR = "://";
+export const HTTPS = `https${PROTOCOL_SEPARATOR}`;
 export const LIGHTNING_FORCE_COM = ".lightning.force.com";
 export const MY_SALESFORCE_SETUP_COM = ".my.salesforce-setup.com";
 export const MY_SALESFORCE_COM = ".my.salesforce.com";
 export const SUPPORTED_SALESFORCE_URLS = [
-    LIGHTNING_FORCE_COM,
-    MY_SALESFORCE_SETUP_COM,
-    MY_SALESFORCE_COM,
+	LIGHTNING_FORCE_COM,
+	MY_SALESFORCE_SETUP_COM,
+	MY_SALESFORCE_COM,
 ];
 //export const API_VERSION = "v60.0";
 // source: https://www.fishofprey.com/2011/09/obscure-salesforce-object-key-prefixes.html
@@ -41,7 +42,170 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.", "\\.")}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
-export const MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN =
-	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}${SETUP_LIGHTNING}*`;
-export const LIGHTNING_FORCE_COM_OPERATING_PATTERN =
-	`${HTTPS}*${LIGHTNING_FORCE_COM}${SETUP_LIGHTNING}*`;
+const MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN =
+	`*${PROTOCOL_SEPARATOR}*${MY_SALESFORCE_SETUP_COM}${SETUP_LIGHTNING}*`;
+const LIGHTNING_FORCE_COM_OPERATING_PATTERN =
+	`*${PROTOCOL_SEPARATOR}*${LIGHTNING_FORCE_COM}${SETUP_LIGHTNING}*`;
+const MY_SALESFORCE_COM_OPERATING_PATTERN =
+	`*${PROTOCOL_SEPARATOR}*${MY_SALESFORCE_COM}/*`;
+export const OPERATING_PATTERNS = [
+	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
+	MY_SALESFORCE_COM_OPERATING_PATTERN,
+];
+/**
+ * Sends a message to the background script with the specified message.
+ *
+ * @param {Object} message - The message to send.
+ * @param {function} callback - The callback to execute after sending the message.
+ */
+export function sendExtensionMessage(message, callback = null) {
+	/**
+	 * Invoke the runtime to send the message
+	 *
+	 * @param {Object} message - The message to send
+	 * @param {function} callback - The callback to execute after sending the message
+	 */
+	function sendMessage(message, callback) {
+		return BROWSER.runtime.sendMessage(message, callback);
+	}
+	if (callback == null) {
+		return new Promise((resolve, reject) => {
+			sendMessage(
+				message,
+				(response) => {
+					if (BROWSER.runtime.lastError) {
+						reject(BROWSER.runtime.lastError);
+					} else {
+						resolve(response);
+					}
+				},
+			);
+		});
+	}
+	sendMessage(message, callback);
+}
+export async function getSettings(keys = null) {
+	return await sendExtensionMessage({ what: "get-settings", keys });
+}
+// SETTINGS
+export const SETTINGS_KEY = "settings";
+export const LINK_NEW_BROWSER = "link_new_browser";
+export const SKIP_LINK_DETECTION = "skip_link_detection";
+export const USE_LIGHTNING_NAVIGATION = "use_lightning_navigation";
+export const POPUP_OPEN_LOGIN = "popup_open_login";
+export const POPUP_OPEN_SETUP = "popup_open_setup";
+export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
+export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
+export const TAB_GENERIC_STYLE = "tab_generic_style";
+export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
+export const TAB_ORG_STYLE = "tab_org_style";
+export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
+export const TAB_STYLE_BACKGROUND = "background";
+export const TAB_STYLE_COLOR = "color";
+export const TAB_STYLE_BORDER = "border";
+export const TAB_STYLE_SHADOW = "shadow";
+export const TAB_STYLE_HOVER = "hover";
+export const TAB_STYLE_BOLD = "bold";
+export const TAB_STYLE_ITALIC = "italic";
+export const TAB_STYLE_UNDERLINE = "underline";
+//export const TAB_STYLE_WAVY = "wavy";
+export const TAB_STYLE_TOP = "top";
+export const SLDS_ACTIVE = "slds-is-active";
+const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
+export const ORG_TAB_CLASS = "is-org-tab";
+const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
+
+/**
+ * Retrieves saved style settings for the specified key.
+ * @async
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which style settings to fetch.
+ * @returns {Promise<Object|null>} The retrieved style settings or null if none exist.
+ */
+export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY) {
+	return await sendExtensionMessage({ what: "get-style-settings", key });
+}
+
+/**
+ * Retrieves style settings for both generic and org tabs.
+ *
+ * - Fetches settings for GENERIC_TAB_STYLE_KEY and ORG_TAB_STYLE_KEY.
+ * - Returns null if neither setting exists.
+ * - Otherwise returns an object mapping each key to its settings.
+ * @async
+ * @returns {Promise<Object<string, any[] | null> | null>} Object with style arrays for each key, or null.
+ */
+export async function getAllStyleSettings() {
+	const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
+	const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
+	if (genericStyles == null && orgStyles == null) {
+		return null;
+	}
+	const result = {};
+	result[GENERIC_TAB_STYLE_KEY] = genericStyles;
+	result[ORG_TAB_STYLE_KEY] = orgStyles;
+	return result;
+}
+
+/**
+ * Constructs a CSS selector string based on tab state, type, and optional pseudo-element.
+ *
+ * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
+ * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
+ * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
+ * @returns {string} The constructed CSS selector.
+ */
+export function getCssSelector(
+	isInactive = true,
+	isGeneric = true,
+	pseudoElement = "",
+) {
+	return `.${EXTENSION_NAME}${
+		isInactive ? `:not(${SLDS_ACTIVE_CLASS})` : SLDS_ACTIVE_CLASS
+	}${isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB}${pseudoElement}`;
+}
+
+/**
+ * Returns a CSS rule string based on the given style ID and optional value.
+ *
+ * @param {string} styleId - Identifier for the style to generate.
+ * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
+ * @returns {string} The corresponding CSS rule or an empty string if invalid.
+ */
+export function getCssRule(styleId, value = null) {
+	switch (styleId) {
+		case TAB_STYLE_BACKGROUND:
+		case TAB_STYLE_HOVER:
+		case TAB_STYLE_TOP:
+			return `background-color: ${value} !important;`;
+		case TAB_STYLE_COLOR:
+			return `color: ${value};`;
+		case TAB_STYLE_BORDER:
+			return `border: 2px solid ${value};`;
+		case TAB_STYLE_SHADOW:
+			return `text-shadow: 0px 0px 3px ${value};`;
+		case TAB_STYLE_BOLD:
+			return "font-weight: bold;";
+		case TAB_STYLE_ITALIC:
+			return "font-style: italic;";
+		case TAB_STYLE_UNDERLINE:
+			return "text-decoration: underline;";
+		//case TAB_STYLE_WAVY:
+		//return "text-decoration: underline wavy;";
+		case "user-set":
+			break;
+		default:
+			console.error(styleId);
+			return "";
+	}
+}
+export const USER_LANGUAGE = "picked-language";
+export const FOLLOW_SF_LANG = "follow-sf-lang";
+export const TAB_ON_LEFT = "tab_position_left";
+export function openSettingsPage() {
+	if (BROWSER.runtime.openOptionsPage) {
+		BROWSER.runtime.openOptionsPage();
+	} else {
+		open(BROWSER.runtime.getURL("settings/options.html"));
+	}
+}

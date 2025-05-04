@@ -531,69 +531,69 @@ await Deno.test("URL manipulation", async (t) => {
 });
 
 await Deno.test("Update", async (t) => {
-    const newlabel = "new label";
-    const oldlabel = "old label";
-    const newurl = "new-url";
-    const oldurl = "old-url";
-    const neworg = "neworg";
-    const oldorg = "oldorg";
+	const newlabel = "new label";
+	const oldlabel = "old label";
+	const newurl = "new-url";
+	const oldurl = "old-url";
+	const neworg = "neworg";
+	const oldorg = "oldorg";
 	await t.step("Update Tab", () => {
-        const tab = Tab.create(oldlabel, oldurl);
-        assertEquals(tab.update({label: newlabel}).label, newlabel);
-        assertEquals(tab.label, newlabel);
-        assertEquals(tab.url, oldurl);
-        assertEquals(tab.update({url: newurl}).url, newurl);
-        assertEquals(tab.label, newlabel);
-        assertEquals(tab.url, newurl);
-        assertEquals(tab.update({org: neworg}).org, neworg);
-        assertEquals(tab.label, newlabel);
-        assertEquals(tab.url, newurl);
-        assertEquals(tab.org, neworg);
-        assertEquals(tab.update({org: ""}).org, undefined);
-        assertEquals(tab.label, newlabel);
-        assertEquals(tab.url, newurl);
-        assertEquals(tab.org, undefined);
-    });
+		const tab = Tab.create(oldlabel, oldurl);
+		assertEquals(tab.update({ label: newlabel }).label, newlabel);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.update({ url: newurl }).url, newurl);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, newurl);
+		assertEquals(tab.update({ org: neworg }).org, neworg);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, newurl);
+		assertEquals(tab.org, neworg);
+		assertEquals(tab.update({ org: "" }).org, undefined);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, newurl);
+		assertEquals(tab.org, undefined);
+	});
 
 	await t.step("Update Tab Static", () => {
-        const tab = Tab.create(oldlabel, oldurl, oldorg);
-        const updatedlabel = Tab.update(tab, {label: newlabel});
-        assertEquals(updatedlabel.label, newlabel);
-        assertEquals(updatedlabel.url, tab.url);
-        assertEquals(updatedlabel.org, tab.org);
-        assertEquals(tab.label, oldlabel);
-        assertEquals(tab.url, oldurl);
-        assertEquals(tab.org, oldorg);
-        const updatedurl = Tab.update(tab, {url: newurl});
-        assertEquals(updatedurl.label, tab.label);
-        assertEquals(updatedurl.url, newurl);
-        assertEquals(updatedurl.org, tab.org);
-        assertEquals(tab.label, oldlabel);
-        assertEquals(tab.url, oldurl);
-        assertEquals(tab.org, oldorg);
-        const updatedorg = Tab.update(tab, {org: neworg});
-        assertEquals(updatedorg.label, tab.label);
-        assertEquals(updatedorg.url, tab.url);
-        assertEquals(updatedorg.org, neworg);
-        assertEquals(tab.label, oldlabel);
-        assertEquals(tab.url, oldurl);
-        assertEquals(tab.org, oldorg);
-        const undefinedorg = Tab.update(tab, {org: ""});
-        assertEquals(undefinedorg.label, tab.label);
-        assertEquals(undefinedorg.url, tab.url);
-        assertEquals(undefinedorg.org, undefined);
-        assertEquals(tab.label, oldlabel);
-        assertEquals(tab.url, oldurl);
-        assertEquals(tab.org, oldorg);
-        assertThrows(
-            () => Tab.update(null),
-            Error,
-            "Unknown tab",
-        );
-        assertThrows(
-            () => Tab.update({ url: "https://example.com" }),
-            Error,
-            "Unknown tab",
-        );
-    });
+		const tab = Tab.create(oldlabel, oldurl, oldorg);
+		const updatedlabel = Tab.update(tab, { label: newlabel });
+		assertEquals(updatedlabel.label, newlabel);
+		assertEquals(updatedlabel.url, tab.url);
+		assertEquals(updatedlabel.org, tab.org);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		const updatedurl = Tab.update(tab, { url: newurl });
+		assertEquals(updatedurl.label, tab.label);
+		assertEquals(updatedurl.url, newurl);
+		assertEquals(updatedurl.org, tab.org);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		const updatedorg = Tab.update(tab, { org: neworg });
+		assertEquals(updatedorg.label, tab.label);
+		assertEquals(updatedorg.url, tab.url);
+		assertEquals(updatedorg.org, neworg);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		const undefinedorg = Tab.update(tab, { org: "" });
+		assertEquals(undefinedorg.label, tab.label);
+		assertEquals(undefinedorg.url, tab.url);
+		assertEquals(undefinedorg.org, undefined);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		assertThrows(
+			() => Tab.update(null),
+			Error,
+			"Unknown tab",
+		);
+		assertThrows(
+			() => Tab.update({ url: "https://example.com" }),
+			Error,
+			"Unknown tab",
+		);
+	});
 });

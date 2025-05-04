@@ -4,13 +4,14 @@ import {
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
 	FRAME_PATTERNS,
+	openSettingsPage,
+	SETTINGS_KEY,
+	USER_LANGUAGE,
 } from "/constants.js";
 import Tab from "/tab.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
-import { bg_getSalesforceLanguage } from "./background.js";
-
-let translator = null;
+import { bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
 
 let areMenuItemsVisible = false;
 
@@ -119,6 +120,12 @@ const menuItemsOriginal = [
 		title: "cxm_page_remove_tab",
 		contexts: ["page", "frame"],
 	},
+
+	{
+		id: "open-settings",
+		title: "cxm_settings",
+		contexts: ["link", "page", "frame"],
+	},
 ].map((item) => {
 	/**
 	 * - Updates `documentUrlPatterns` for each menu item:
@@ -138,23 +145,30 @@ const menuItemsOriginal = [
  */
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
-    if(translator == null)
-        translator = await ensureTranslatorAvailability();
-    areMenuItemsVisible = true;
+	const translator = await ensureTranslatorAvailability();
+	areMenuItemsVisible = true;
 	try {
-        await translator.loadNewLanguage(await bg_getSalesforceLanguage());
-        const menuItems = structuredClone(menuItemsOriginal);
+		// load the user picked language
+		if (
+			!await translator.loadNewLanguage(
+				(await bg_getSettings(USER_LANGUAGE))?.enabled,
+			)
+		) {
+			// load the language in which salesforce is currently set
+			await translator.loadNewLanguage(await bg_getSalesforceLanguage());
+		}
+		const menuItems = structuredClone(menuItemsOriginal);
 		for (const item of menuItems) {
-            item.title = await translator.translate(item.title);
+			item.title = await translator.translate(item.title);
 			await BROWSER.contextMenus.create(item);
 			if (BROWSER.runtime.lastError) {
 				throw new Error(BROWSER.runtime.lastError.message);
 			}
 		}
 	} catch (error) {
-        const msg = await translator.translate("error_cxm_create");
+		const msg = await translator.translate("error_cxm_create");
 		console.error(msg, error);
-        await removeMenuItems();
+		await removeMenuItems();
 	}
 }
 
@@ -167,9 +181,8 @@ async function removeMenuItems() {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
 	} catch (error) {
-        if(translator == null)
-            translator = await ensureTranslatorAvailability();
-        const msg = await translator.translate("error_cxm_remove");
+		const translator = await ensureTranslatorAvailability();
+		const msg = await translator.translate("error_cxm_remove");
 		console.error(msg, error);
 	}
 }
@@ -201,9 +214,8 @@ async function checkAddRemoveContextMenus(what) {
 	} catch (error) {
 		console.trace();
 		if (error != null && error.message !== "") {
-            if(translator == null)
-                translator = await ensureTranslatorAvailability();
-            const msg = await translator.translate("error_cxm_check");
+			const translator = await ensureTranslatorAvailability();
+			const msg = await translator.translate("error_cxm_check");
 			console.error(msg, error);
 		}
 	}
@@ -300,6 +312,9 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			break;
+		case "open-settings":
+			openSettingsPage();
+			break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl);
 			message.url = Tab.expandURL(info.linkUrl, browserTabUrl);
@@ -318,3 +333,12 @@ setInterval(async () => {
 
 // create persistent menuItems
 checkAddRemoveContextMenus();
+
+BROWSER.storage.onChanged.addListener((changes) => {
+	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>
+		el.id === USER_LANGUAGE
+	);
+	if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
+		checkAddRemoveContextMenus();
+	}
+});

@@ -1,498 +1,686 @@
 {
-  "allow": {
-    "message": "Dopusti",
-    "description": "[req_permission] gumb za dopuštanje ovlasti"
-  },
-  "cancel": {
-    "message": "Odustani",
-    "description": "naslov ili tekst za gumbe koji sprječavaju izvršenje trenutne radnje"
-  },
-  "cancel_close": {
-    "message": "Odustani i zatvori",
-    "description": "naslov ili tekst za gumb za zatvaranje modalnih prozora"
-  },
-  "confirm_another_org": {
-    "message": "Potvrdite otvaranje ove veze.",
-    "description": "[open-other-org-modal] zahtjev za potvrdu od korisnika za otvaranje konstruirane veze."
-  },
-  "continue": {
-    "message": "Nastavi",
-    "description": "tekst za gumbe koji omogućuju izvršenje trenutne radnje"
-  },
-  "cxm_empty_no_org_tabs": {
-    "message": "👀 Svi vidljivi Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_empty_tabs": {
-    "message": "😨 Poništi na zadano",
-    "description": "[context-menu]"
-  },
-  "cxm_export_tabs": {
-    "message": "⬇️ Izvezi Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_import_tabs": {
-    "message": "🆙 Uvezi Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_move": {
-    "message": "🧭 Premjesti Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_move_first": {
-    "message": "↩️ Postavi kao prvi",
-    "description": "[context-menu]"
-  },
-  "cxm_move_last": {
-    "message": "↪️ Postavi kao zadnji",
-    "description": "[context-menu]"
-  },
-  "cxm_move_left": {
-    "message": "👈 Premjesti ulijevo",
-    "description": "[context-menu]"
-  },
-  "cxm_move_right": {
-    "message": "👉 Premjesti udesno",
-    "description": "[context-menu]"
-  },
-  "cxm_open_other_org": {
-    "message": "🔗 Otvori u drugoj Organizaciji",
-    "description": "[context-menu]"
-  },
-  "cxm_page_remove_tab": {
-    "message": "👋 Ukloni Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_page_save_tab": {
-    "message": "💾 Spremi kao Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_remove": {
-    "message": "💥 Ukloni Tab(ove)",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_left_tabs": {
-    "message": "🔥 Tabovi ulijevo",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_other_tabs": {
-    "message": "↔️ Ostali Tabovi",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_right_tabs": {
-    "message": "🌊 Tabovi udesno",
-    "description": "[context-menu]"
-  },
-  "cxm_remove_tab": {
-    "message": "1️⃣ Ovaj Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update": {
-    "message": "✏️ Ažuriraj Tab",
-    "description": "[context-menu]"
-  },
-  "cxm_update_org": {
-    "message": "📌 Promijeni Organizaciju",
-    "description": "[context-menu]"
-  },
-  "cxm_update_tab": {
-    "message": "🧹 Ostala ažuriranja",
-    "description": "[context-menu]"
-  },
-  "delete": {
-    "message": "Izbriši",
-    "description": "[popup] izbriši red"
-  },
-  "delete_all": {
-    "message": "Izbriši sve Tabove",
-    "description": "[popup] naslov koša za brisanje svih Tabova"
-  },
-  "error_close_other_modal": {
-    "message": "Prvo zatvori drugi modal!",
-    "description": "[toast] Korisnik je pokušao otvoriti više od jednog modala"
-  },
-  "error_cxm_check": {
-    "message": "Greška pri provjeri stavki izbornika",
-    "description": "[error] stavke kontekstnog izbornika nisu pronađene"
-  },
-  "error_cxm_create": {
-    "message": "Greška pri kreiranju stavki izbornika",
-    "description": "[error] stavke kontekstnog izbornika nije moguće inicijalizirati"
-  },
-  "error_cxm_remove": {
-    "message": "Greška pri uklanjanju stavki izbornika",
-    "description": "[error] stavke kontekstnog izbornika nije moguće ukloniti"
-  },
-  "error_duplicate_tab": {
-    "message": "Ovaj Tab već postoji",
-    "description": "[error] Tab je dupliciran"
-  },
-  "error_expand_url": {
-    "message": "Ne može se proširiti prazan URL!",
-    "description": "[error] nije dostavljen URL za proširenje"
-  },
-  "error_expand_url_no_base": {
-    "message": "Ne može se proširiti URL bez hosta!",
-    "description": "[error] nije dostavljen osnovni URL za proširenje"
-  },
-  "error_extract_empty_url": {
-    "message": "Ne može se izdvojiti ime organizacije iz praznog URL-a!",
-    "description": "[error] nije dostavljen URL iz kojeg se izdvoji ime organizacije"
-  },
-  "error_get_with_no_org": {
-    "message": "Ne mogu se dohvatiti Tabovi ako organizacija nije specificirana.",
-    "description": "[error] pokušano je traženje Tabova bez slanja informacija o organizaciji"
-  },
-  "error_import": {
-    "message": "Greška pri uvozu:\n",
-    "description": "[error] došlo je do greške tijekom procesa uvoza"
-  },
-  "error_invalid_tab": {
-    "message": "Nevažeći Tab",
-    "description": "[error] Tab nije valjan"
-  },
-  "error_link_with_id": {
-    "message": "Ova stranica ne može postojati u drugoj Organizaciji, jer sadrži Id!",
-    "description": "[open-other-org-modal] upozorenje korisniku da veza možda ne postoji u drugoj organizaciji"
-  },
-  "error_many_matching_tab": {
-    "message": "Pronađeno je više od jednog podudarajućeg Tab-a.",
-    "description": "[error] vraćeno je previše Tabova"
-  },
-  "error_minify_url": {
-    "message": "Ne može se skratiti prazan URL!",
-    "description": "[error] nije dostavljen URL za skraćivanje"
-  },
-  "error_missing_favourite_id": {
-    "message": "Ne može se dohvatiti omiljena slika bez Id",
-    "description": "[error] nije dostavljen id omiljene slike"
-  },
-  "error_missing_key": {
-    "message": "Ključ nije pronađen nigdje",
-    "description": "[error] prijevod nije pronađen u datotekama"
-  },
-  "error_no_array": {
-    "message": "Nevažeći niz ili nije dostavljen niz",
-    "description": "[error] nije primljen valjani niz"
-  },
-  "error_no_browser_tab": {
-    "message": "Nije pronađena aktivna kartica preglednika.",
-    "description": "[error] pozadinska stranica nije uspjela identificirati aktivnu karticu preglednika"
-  },
-  "error_no_callback": {
-    "message": "Molimo navedite callback funkciju",
-    "description": "[error] nije dostavljena funkcija koja se poziva na kraju metode"
-  },
-  "error_no_cookies": {
-    "message": "Nisu pronađeni odgovarajući kolačići",
-    "description": "[error] Salesforce kolačići nisu vraćeni"
-  },
-  "error_no_data": {
-    "message": "Ne može se identificirati Tab bez podataka.",
-    "description": "[error] pokušano je dobivanje Tab-a bez slanja podataka"
-  },
-  "error_no_headers": {
-    "message": "Nisu pronađena zaglavlja.",
-    "description": "[error] ekstenzija nije uspjela pronaći gdje postaviti gumb za omiljeno"
-  },
-  "error_no_matching_tab": {
-    "message": "Nije pronađen nijedan podudarajući Tab.",
-    "description": "[error] nije vraćen nijedan podudarajući Tab"
-  },
-  "error_no_message": {
-    "message": "Nije specificirana poruka za slanje.",
-    "description": "[error] nije pronađena poruka za slanje drugim dijelovima koda"
-  },
-  "error_no_object": {
-    "message": "Nije dostavljen objekt za provjeru!",
-    "description": "[error] objekt nije dostavljen za provjeru"
-  },
-  "error_no_setup_tab": {
-    "message": "Setup Tab nije pronađen.",
-    "description": "[error] ekstenzija nije uspjela pronaći gdje postaviti omiljene Tabove"
-  },
-  "error_no_url": {
-    "message": "Nije dostavljen URL za provjeru!",
-    "description": "[error] URL nije dostavljen za provjeru"
-  },
-  "error_remove_not_favourite": {
-    "message": "Ne može se ukloniti Tab koji nije omiljen!",
-    "description": "[error] korisnik je pokušao ukloniti Tab koji još nije spremljen"
-  },
-  "error_sync_nothing": {
-    "message": "Ne mogu se sinkronizirati prazni Tabovi!",
-    "description": "[error] pokušano je sinkroniziranje praznog sadržaja"
-  },
-  "error_tab_label": {
-    "message": "Oznaka mora biti neprazan niz",
-    "description": "[error] korisnik je pokušao stvoriti Tab bez oznake"
-  },
-  "error_tab_not_found": {
-    "message": "Tab nije pronađen.",
-    "description": "[error] Tab nije uključen u niz"
-  },
-  "error_tab_object_creation": {
-    "message": "Pri pozivu s objektom, ne šaljite ništa drugo.",
-    "description": "[error] pogreška u implementaciji od strane developera"
-  },
-  "error_tab_org": {
-    "message": "Organizacija mora biti niz ili undefined",
-    "description": "[error] korisnik je pokušao stvoriti Tab s nevažećom vrijednošću organizacije"
-  },
-  "error_tab_unexpected_keys": {
-    "message": "Neočekivani ključevi pronađeni:",
-    "description": "[error] korisnik je pokušao stvoriti Tab s neprihvaćenim svojstvima"
-  },
-  "error_tab_url": {
-    "message": "URL mora biti neprazan niz",
-    "description": "[error] korisnik je pokušao stvoriti Tab bez URL-a"
-  },
-  "error_tabcont_initialize": {
-    "message": "Ne može se inicijalizirati sa",
-    "description": ""
-  },
-  "error_tabcont_invalid_tabs": {
-    "message": "Pronađeni su nevažeći Tab(ovi).\nPrvi slučaj:",
-    "description": "[error] dostavljeni su nevažeći Tabovi"
-  },
-  "error_useless_remove": {
-    "message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja nije prethodno spremljena",
-    "description": "[error] korisnik je pokušao ukloniti stranicu koja još nije bila spremljena"
-  },
-  "error_useless_save": {
-    "message": "Ne može se spremiti:\nOva stranica je već spremljena!",
-    "description": "[error] korisnik je pokušao spremiti stranicu koja je već spremljena"
-  },
-  "export": {
-    "message": "Izvezi",
-    "description": "[popup] gumb za izvoz"
-  },
-  "export_title": {
-    "message": "Izvezi sve Tabove",
-    "description": "[popup] naslov na gumbu za izvoz"
-  },
-  "extension_description": {
-    "message": "Kreirajte i upravljajte prilagođenim Tabovima u raspoloživom prostoru na Salesforce Lightning Setup stranici.",
-    "description": "[manifest] Opis ovog proširenja"
-  },
-  "extension_label": {
-    "message": "Again, Why Salesforce",
-    "description": "Naziv ovog proširenja"
-  },
-  "file": {
-    "message": "datoteka",
-    "description": "jedna datoteka"
-  },
-  "files": {
-    "message": "datoteke",
-    "description": "više datoteka"
-  },
-  "import": {
-    "message": "Uvezi",
-    "description": "[popup] gumb za uvoz"
-  },
-  "import_duplicate_description": {
-    "message": "Duplicirani Tabovi će biti zanemareni.<br />Dva Tabova se smatraju dupliciranima ako imaju isti URL.",
-    "description": "[import] opis procesa uvoza"
-  },
-  "import_invalid_file": {
-    "message": "Nevažeći tip datoteke.\nPodržani su samo JSON datoteke.",
-    "description": "[error] datoteka korištena za uvoz nije JSON"
-  },
-  "import_successful": {
-    "message": "Uvoz je uspješan",
-    "description": "[import] uvoz je završen. Nakon toga će biti prikazan broj unesenih zapisa"
-  },
-  "import_tabs": {
-    "message": "Uvezi Tab",
-    "description": "[modal-title] za proces uvoza"
-  },
-  "import_title": {
-    "message": "Uvezi Tab iz json datoteke",
-    "description": "[popup] naslov gumba za uvoz"
-  },
-  "insert_another": {
-    "message": "Ubaci još jedan",
-    "description": "[error-open-other-org-modal] poruka kada korisnik unese istu organizaciju"
-  },
-  "insert_another_org": {
-    "message": "Unesena Organizacija je trenutna!\nMolimo unesite drugu Organizaciju.",
-    "description": "[error-open-other-org-modal] poruka kada korisnik unese istu organizaciju"
-  },
-  "insert_valid_org": {
-    "message": "Molimo unesite važeću Organizaciju!",
-    "description": "[error-open-other-org-modal] poruka kada korisnik unese pogrešan URL"
-  },
-  "invalid_url": {
-    "message": "Nevažeći URL",
-    "description": "[notSalesforceSetup] URL koji nije važeći"
-  },
-  "login_to_salesforce": {
-    "message": "Prijavite se na Salesforce",
-    "description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na stranicu za prijavu u Salesforce"
-  },
-  "mycustomorg": {
-    "message": "mycustomorg",
-    "description": "zamjenik za modal za ažuriranje Tabova"
-  },
-  "no_match": {
-    "message": "Nije pronađena odgovarajuća akcija",
-    "description": "[error] kada switch ne može podudariti zatraženu akciju"
-  },
-  "nss_detected": {
-    "message": " detektovano.",
-    "description": "[notSalesforceSetup] nešto je detektovano. Provjerite je li poruka započela razmakom"
-  },
-  "nss_prefix": {
-    "message": "Ovo nije ",
-    "description": "[notSalesforceSetup] prefiks koji se prikazuje kada korisnik nije na Salesforce stranici."
-  },
-  "open_setup": {
-    "message": "Otvori Setup",
-    "description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na Salesforce Setup stranicu"
-  },
-  "or_drop": {
-    "message": "Ili ispusti",
-    "description": "[import] omogućuje korisniku da povuče datoteke mišem i ispusti ih"
-  },
-  "org_link": {
-    "message": "Poveznica do Organizacije",
-    "description": "[input-label]"
-  },
-  "other_org_info": {
-    "message": "Informacije o drugoj Organizaciji",
-    "description": "[modal-title]"
-  },
-  "other_org_placeholder": {
-    "message": "druga-org",
-    "description": "[input-placeholder]"
-  },
-  "overwrite_tabs": {
-    "message": "Prepiši spremljene Tabove.",
-    "description": "[label] izbriši sve spremljene Tabove tijekom uvoza"
-  },
-  "preserve_org_tabs": {
-    "message": "Sačuvaj Tabove za druge organizacije.",
-    "description": "[label] zadrži sve organizacijski specifične Tabove tijekom uvoza"
-  },
-  "remove_tab": {
-    "message": "Ukloni Tab",
-    "description": "[alt] alternativni tekst kada slike nisu prikazane"
-  },
-  "req_permissions_dont_ask": {
-    "message": "Nemoj pitati ponovo.",
-    "description": "[req_permission] oznaka kada korisnik ne želi trajno davati ovlasti"
-  },
-  "req_permissions_header": {
-    "message": "Molimo, omogućite nam pristup<br />Salesforce Setup stranicama automatski.",
-    "description": "[req_permission] zaglavlje stranice za zahtjev ovlasti"
-  },
-  "req_permissions_paragraph": {
-    "message": "Ako želite, vaši omiljeni Tabovi mogu se pojaviti<br />odmah kada prijeđete na Salesforce Setup stranicu<br />bez potrebe da svaki put kliknete na ovo proširenje.",
-    "description": "[req_permission] tekst koji objašnjava zašto se traže ovlasti"
-  },
-  "required": {
-    "message": "obavezno",
-    "description": "[input] označava polje za unos kao obavezno"
-  },
-  "required_info": {
-    "message": "= Obavezne informacije",
-    "description": "[modal] obavještava korisnika da su određene informacije obavezne"
-  },
-  "salesforce_lightning": {
-    "message": "Salesforce Lightning",
-    "description": "[notSalesforceSetup] Salesforce Lightning platforma"
-  },
-  "save_tab": {
-    "message": "Spremi kao Tab",
-    "description": "[alt] alternativni tekst kada slike nisu prikazane"
-  },
-  "setup_page": {
-    "message": "Setup stranica",
-    "description": "[notSalesforceSetup] stranica za uređivanje Salesforce postavki"
-  },
-  "skip": {
-    "message": "Preskoči",
-    "description": "[req_permission] gumb za odbijanje davanja ovlasti"
-  },
-  "successfully_imported": {
-    "message": "Uvoz je uspješan",
-    "description": "[toast] Tabovi su uspješno spremljeni"
-  },
-  "tab_explain": {
-    "message": "Svaki predmet mora imati 'label' i 'url' kao nizove. Osim toga, svaki predmet može imati 'org' kao niz.",
-    "description": "[error] objašnjava kako treba biti strukturiran Tab"
-  },
-  "tab_information": {
-    "message": "Informacije o Tab-u",
-    "description": "naslov modala za ažuriranje Tabova"
-  },
-  "tab_label": {
-    "message": "Oznaka Tab-a",
-    "description": "svojstvo Label Tab-a, njegovo ime"
-  },
-  "tab_org": {
-    "message": "Organizacija Tab-a",
-    "description": "svojstvo Org Tab-a, ako je namijenjen jednoj specifičnoj Salesforce organizaciji"
-  },
-  "tab_url": {
-    "message": "URL Tab-a",
-    "description": "svojstvo URL Tab-a, na koji linkira"
-  },
-  "table_delete": {
-    "message": "Izbriši Tab",
-    "description": "[popup] pomoćni tekst za stupac s gumbom za brisanje"
-  },
-  "table_org": {
-    "message": "Je li Tab organizacijski",
-    "description": "[popup] pomoćni tekst za stupac s checkboxom za organizaciju"
-  },
-  "table_row_label": {
-    "message": "Unesite oznaku za ovaj URL",
-    "description": "[popup] polje za unos imena Tab-a"
-  },
-  "table_row_org": {
-    "message": "Kliknite ako želite da ovaj Tab bude dostupan samo za ovu organizaciju.",
-    "description": "[popup] checkbox za prebacivanje Tab-a u organizacijski način"
-  },
-  "table_row_org_name": {
-    "message": "Organizacija za koju je ovaj Tab dostupan.",
-    "description": "[popup] polje za unos imena organizacije"
-  },
-  "table_row_url": {
-    "message": "Unesite sub_URL na koji želite biti preusmjereni",
-    "description": "[popup] polje za unos URL-a Tab-a"
-  },
-  "tabs": {
-    "message": "Tabovi",
-    "description": "omiljene veze korisnika"
-  },
-  "tabs_saved": {
-    "message": "Tabovi spremljeni.",
-    "description": "[toast] Tabovi su uspješno spremljeni."
-  },
-  "theme_dark": {
-    "message": "Promijeni temu u tamnu",
-    "description": "[popup] naslov ikone mjeseca za promjenu teme"
-  },
-  "theme_light": {
-    "message": "Promijeni temu u svijetlu",
-    "description": "[popup] naslov ikone sunca za promjenu teme"
-  },
-  "upload": {
-    "message": "Otpremi",
-    "description": "[import] omogućuje korisniku pregled datoteka i odabir ispravne"
-  },
-  "users": {
-    "message": "Korisnici",
-    "description": "ime stranice povezane s ManageUsers/home"
-  },
-  "warn_deprecated_tab_title": {
-    "message": "Uvezli ste koristeći zastarjeli 'tabTitle'!\nPreuzimanje ažuriranog fajla je započelo.\nOd sada, molimo koristite novi preuzeti fajl.\nKorištenje ovog fajla će biti ukinuto u budućim ažuriranjima.",
-    "description": "[warning] obavještava korisnika da uvezeni fajl koristi zastarjelo svojstvo"
-  },
-  "where_to": {
-    "message": "Kamo?",
-    "description": "[open-other-org-modal] alternativni naslov za modal"
-  }
+	"allow": {
+		"message": "Dopusti",
+		"description": "[req_permission] gumb za dopuštanje ovlasti"
+	},
+	"available": {
+		"message": "Dostupno",
+		"description": "Naslov odjeljka za stavke koje se mogu dodati"
+	},
+	"bold": {
+		"message": "Podebljano",
+		"description": "Opcija stila fonta za podebljani tekst"
+	},
+	"cancel": {
+		"message": "Odustani",
+		"description": "naslov ili tekst za gumbe koji sprječavaju izvršenje trenutne radnje"
+	},
+	"cancel_close": {
+		"message": "Odustani i zatvori",
+		"description": "naslov ili tekst za gumb za zatvaranje modalnih prozora"
+	},
+	"chosen": {
+		"message": "Odabrano",
+		"description": "Naslov odjeljka za stavke koje su odabrane"
+	},
+	"confirm_another_org": {
+		"message": "Potvrdite otvaranje ove veze.",
+		"description": "[open-other-org-modal] zahtjev za potvrdu od korisnika za otvaranje konstruirane veze."
+	},
+	"continue": {
+		"message": "Nastavi",
+		"description": "tekst za gumbe koji omogućuju izvršenje trenutne radnje"
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 Svi vidljivi Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Poništi na zadano",
+		"description": "[context-menu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Izvezi Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 Uvezi Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Premjesti Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Postavi kao prvi",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Postavi kao zadnji",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Premjesti ulijevo",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Premjesti udesno",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Otvori u drugoj Organizaciji",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 Ukloni Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 Spremi kao Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Ukloni Tab(ove)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabovi ulijevo",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Ostali Tabovi",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabovi udesno",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Ovaj Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Postavke",
+		"description": "Oznaka za izbornik postavki"
+	},
+	"cxm_update": {
+		"message": "✏️ Ažuriraj Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Promijeni Organizaciju",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Ostala ažuriranja",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Izbriši",
+		"description": "[popup] izbriši red"
+	},
+	"delete_all": {
+		"message": "Izbriši sve Tabove",
+		"description": "[popup] naslov koša za brisanje svih Tabova"
+	},
+	"error_close_other_modal": {
+		"message": "Prvo zatvori drugi modal!",
+		"description": "[toast] Korisnik je pokušao otvoriti više od jednog modala"
+	},
+	"error_cxm_check": {
+		"message": "Greška pri provjeri stavki izbornika",
+		"description": "[error] stavke kontekstnog izbornika nisu pronađene"
+	},
+	"error_cxm_create": {
+		"message": "Greška pri kreiranju stavki izbornika",
+		"description": "[error] stavke kontekstnog izbornika nije moguće inicijalizirati"
+	},
+	"error_cxm_remove": {
+		"message": "Greška pri uklanjanju stavki izbornika",
+		"description": "[error] stavke kontekstnog izbornika nije moguće ukloniti"
+	},
+	"error_duplicate_tab": {
+		"message": "Ovaj Tab već postoji",
+		"description": "[error] Tab je dupliciran"
+	},
+	"error_expand_url": {
+		"message": "Ne može se proširiti prazan URL!",
+		"description": "[error] nije dostavljen URL za proširenje"
+	},
+	"error_expand_url_no_base": {
+		"message": "Ne može se proširiti URL bez hosta!",
+		"description": "[error] nije dostavljen osnovni URL za proširenje"
+	},
+	"error_extract_empty_url": {
+		"message": "Ne može se izdvojiti ime organizacije iz praznog URL-a!",
+		"description": "[error] nije dostavljen URL iz kojeg se izdvoji ime organizacije"
+	},
+	"error_get_with_no_org": {
+		"message": "Ne mogu se dohvatiti Tabovi ako organizacija nije specificirana.",
+		"description": "[error] pokušano je traženje Tabova bez slanja informacija o organizaciji"
+	},
+	"error_import": {
+		"message": "Greška pri uvozu:\n",
+		"description": "[error] došlo je do greške tijekom procesa uvoza"
+	},
+	"error_invalid_key": {
+		"message": "Parametar ključa proslijeđen funkciji nije valjan",
+		"description": "[pogreška] programer je pokušao pozvati funkciju s nevaljanim parametrom"
+	},
+	"error_invalid_tab": {
+		"message": "Nevažeći Tab",
+		"description": "[error] Tab nije valjan"
+	},
+	"error_link_with_id": {
+		"message": "Ova stranica ne može postojati u drugoj Organizaciji, jer sadrži Id!",
+		"description": "[open-other-org-modal] upozorenje korisniku da veza možda ne postoji u drugoj organizaciji"
+	},
+	"error_many_matching_tab": {
+		"message": "Pronađeno je više od jednog podudarajućeg Tab-a.",
+		"description": "[error] vraćeno je previše Tabova"
+	},
+	"error_minify_url": {
+		"message": "Ne može se skratiti prazan URL!",
+		"description": "[error] nije dostavljen URL za skraćivanje"
+	},
+	"error_missing_favourite_id": {
+		"message": "Ne može se dohvatiti omiljena slika bez Id",
+		"description": "[error] nije dostavljen id omiljene slike"
+	},
+	"error_missing_key": {
+		"message": "Ključ nije pronađen nigdje",
+		"description": "[error] prijevod nije pronađen u datotekama"
+	},
+	"error_no_array": {
+		"message": "Nevažeći niz ili nije dostavljen niz",
+		"description": "[error] nije primljen valjani niz"
+	},
+	"error_no_browser_tab": {
+		"message": "Nije pronađena aktivna kartica preglednika.",
+		"description": "[error] pozadinska stranica nije uspjela identificirati aktivnu karticu preglednika"
+	},
+	"error_no_callback": {
+		"message": "Molimo navedite callback funkciju",
+		"description": "[error] nije dostavljena funkcija koja se poziva na kraju metode"
+	},
+	"error_no_cookies": {
+		"message": "Nisu pronađeni odgovarajući kolačići",
+		"description": "[error] Salesforce kolačići nisu vraćeni"
+	},
+	"error_no_data": {
+		"message": "Ne može se identificirati Tab bez podataka.",
+		"description": "[error] pokušano je dobivanje Tab-a bez slanja podataka"
+	},
+	"error_no_headers": {
+		"message": "Nisu pronađena zaglavlja.",
+		"description": "[error] ekstenzija nije uspjela pronaći gdje postaviti gumb za omiljeno"
+	},
+	"error_no_matching_tab": {
+		"message": "Nije pronađen nijedan podudarajući Tab.",
+		"description": "[error] nije vraćen nijedan podudarajući Tab"
+	},
+	"error_no_message": {
+		"message": "Nije specificirana poruka za slanje.",
+		"description": "[error] nije pronađena poruka za slanje drugim dijelovima koda"
+	},
+	"error_no_object": {
+		"message": "Nije dostavljen objekt za provjeru!",
+		"description": "[error] objekt nije dostavljen za provjeru"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab nije pronađen.",
+		"description": "[error] ekstenzija nije uspjela pronaći gdje postaviti omiljene Tabove"
+	},
+	"error_no_url": {
+		"message": "Nije dostavljen URL za provjeru!",
+		"description": "[error] URL nije dostavljen za provjeru"
+	},
+	"error_remove_not_favourite": {
+		"message": "Ne može se ukloniti Tab koji nije omiljen!",
+		"description": "[error] korisnik je pokušao ukloniti Tab koji još nije spremljen"
+	},
+	"error_required_params": {
+		"message": "Potrebni parametri za funkciju nisu proslijeđeni",
+		"description": "[pogreška] programer je pokušao pozvati funkciju bez potrebnih parametara"
+	},
+	"error_sync_nothing": {
+		"message": "Ne mogu se sinkronizirati prazni Tabovi!",
+		"description": "[error] pokušano je sinkroniziranje praznog sadržaja"
+	},
+	"error_tab_label": {
+		"message": "Oznaka mora biti neprazan niz",
+		"description": "[error] korisnik je pokušao stvoriti Tab bez oznake"
+	},
+	"error_tab_not_found": {
+		"message": "Tab nije pronađen.",
+		"description": "[error] Tab nije uključen u niz"
+	},
+	"error_tab_object_creation": {
+		"message": "Pri pozivu s objektom, ne šaljite ništa drugo.",
+		"description": "[error] pogreška u implementaciji od strane developera"
+	},
+	"error_tab_org": {
+		"message": "Organizacija mora biti niz ili undefined",
+		"description": "[error] korisnik je pokušao stvoriti Tab s nevažećom vrijednošću organizacije"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Neočekivani ključevi pronađeni:",
+		"description": "[error] korisnik je pokušao stvoriti Tab s neprihvaćenim svojstvima"
+	},
+	"error_tab_url": {
+		"message": "URL mora biti neprazan niz",
+		"description": "[error] korisnik je pokušao stvoriti Tab bez URL-a"
+	},
+	"error_tabcont_initialize": {
+		"message": "Ne može se inicijalizirati sa",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Pronađeni su nevažeći Tab(ovi).\nPrvi slučaj:",
+		"description": "[error] dostavljeni su nevažeći Tabovi"
+	},
+	"error_useless_remove": {
+		"message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja nije prethodno spremljena",
+		"description": "[error] korisnik je pokušao ukloniti stranicu koja još nije bila spremljena"
+	},
+	"error_useless_save": {
+		"message": "Ne može se spremiti:\nOva stranica je već spremljena!",
+		"description": "[error] korisnik je pokušao spremiti stranicu koja je već spremljena"
+	},
+	"export": {
+		"message": "Izvezi",
+		"description": "[popup] gumb za izvoz"
+	},
+	"export_title": {
+		"message": "Izvezi sve Tabove",
+		"description": "[popup] naslov na gumbu za izvoz"
+	},
+	"extension_description": {
+		"message": "Kreirajte i upravljajte prilagođenim Tabovima u raspoloživom prostoru na Salesforce Lightning Setup stranici.",
+		"description": "[manifest] Opis ovog proširenja"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Naziv ovog proširenja"
+	},
+	"file": {
+		"message": "datoteka",
+		"description": "jedna datoteka"
+	},
+	"files": {
+		"message": "datoteke",
+		"description": "više datoteka"
+	},
+	"general": {
+		"message": "Općenito",
+		"description": "Oznaka za kategoriju općih postavki"
+	},
+	"import": {
+		"message": "Uvezi",
+		"description": "[popup] gumb za uvoz"
+	},
+	"import_duplicate_description": {
+		"message": "Duplicirani Tabovi će biti zanemareni.<br />Dva Tabova se smatraju dupliciranima ako imaju isti URL.",
+		"description": "[import] opis procesa uvoza"
+	},
+	"import_invalid_file": {
+		"message": "Nevažeći tip datoteke.\nPodržani su samo JSON datoteke.",
+		"description": "[error] datoteka korištena za uvoz nije JSON"
+	},
+	"import_successful": {
+		"message": "Uvoz je uspješan",
+		"description": "[import] uvoz je završen. Nakon toga će biti prikazan broj unesenih zapisa"
+	},
+	"import_tabs": {
+		"message": "Uvezi Tab",
+		"description": "[modal-title] za proces uvoza"
+	},
+	"import_title": {
+		"message": "Uvezi Tab iz json datoteke",
+		"description": "[popup] naslov gumba za uvoz"
+	},
+	"insert_another": {
+		"message": "Ubaci još jedan",
+		"description": "[error-open-other-org-modal] poruka kada korisnik unese istu organizaciju"
+	},
+	"insert_another_org": {
+		"message": "Unesena Organizacija je trenutna!\nMolimo unesite drugu Organizaciju.",
+		"description": "[error-open-other-org-modal] poruka kada korisnik unese istu organizaciju"
+	},
+	"insert_valid_org": {
+		"message": "Molimo unesite važeću Organizaciju!",
+		"description": "[error-open-other-org-modal] poruka kada korisnik unese pogrešan URL"
+	},
+	"italic": {
+		"message": "Kurziv",
+		"description": "Opcija stila fonta za kurzivni tekst"
+	},
+	"lightning_navigation": {
+		"message": "Lightning navigacija",
+		"description": "Prilagođena navigacijska tehnologija Salesforcea"
+	},
+	"login_to_salesforce": {
+		"message": "Prijavite se na Salesforce",
+		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na stranicu za prijavu u Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "zamjenik za modal za ažuriranje Tabova"
+	},
+	"no_match": {
+		"message": "Nije pronađena odgovarajuća akcija",
+		"description": "[error] kada switch ne može podudariti zatraženu akciju"
+	},
+	"nss_invalid_url": {
+		"message": "Otkriven je nevažeći URL.",
+		"description": "[nijeSalesforcePostavljanje] nevažeći URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Ovo nije stranica za postavljanje programa Salesforce Lightning.",
+		"description": "[nijeSalesforcePostavljanje] korisnik nije na stranici programa Salesforce."
+	},
+	"open_settings": {
+		"message": "Otvori Postavke proširenja",
+		"description": "[skočni prozor] gumb za preusmjeravanje na stranicu s postavkama"
+	},
+	"open_setup": {
+		"message": "Otvori Setup",
+		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na Salesforce Setup stranicu"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automatski otvori stranicu za prijavu u program Salesforce kada kliknete skočni prozor dok niste na stranici programa Salesforce.",
+		"description": "[postavka] kada korisnik otvori skočni prozor dok je na nasumičnoj web-stranici"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automatski otvori stranicu za postavljanje programa Salesforce kada kliknete skočni prozor dok ste na stranici programa Salesforce.",
+		"description": "[postavka] kada korisnik otvori skočni prozor dok je na web-stranici programa Salesforce"
+	},
+	"opt_en_fallback": {
+		"message": "en (Rezervno)",
+		"description": "Jezična opcija za povratak na engleski ako lokalizacija nije podržana ili ne prikazuje prijevod"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Zadrži omiljene Tabove na lijevoj strani Početne stranice i Upravitelja objekata.",
+		"description": "Prekidač za pričvršćivanje omiljenih Tabova na lijevu stranu navigacijske trake"
+	},
+	"opt_link_new_browser": {
+		"message": "Uvijek otvori poveznice u novom pregledničkom tabu.",
+		"description": "[postavka] pri kliku na omiljeni Tab, otvori ga u novom pregledničkom tabu"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Uvijek otvori stranicu za prijavu u program Salesforce u istom Tab kada kliknete skočni prozor.",
+		"description": "[postavka]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Uvijek otvori stranicu za postavljanje programa Salesforce u istom Tab kada kliknete skočni prozor.",
+		"description": "[postavka]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Spriječi upotrebu navigacije Lightning (brže učitavanje tijekom upotrebe).",
+		"description": "[postavka] ne dopusti navigaciju Lightning s objašnjenjem značajke"
+	},
+	"opt_same_tab_popup": {
+		"message": "stranica na istom tabu pri kliku na skočni prozor.",
+		"description": "[postavka] spriječi otvaranje novog pregledničkog taba"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce jezik (Zadano)",
+		"description": "Opcija za korištenje Salesforce postavke jezika. Ova opcija je zadana za proširenje."
+	},
+	"opt_skip_link_detection": {
+		"message": "Preskoči automatsku provjeru Salesforce ID-ja.",
+		"description": "[postavka] pri spremanju omiljenog Taba, ne provjeravaj ID u poveznici"
+	},
+	"or_drop": {
+		"message": "Ili ispusti",
+		"description": "[import] omogućuje korisniku da povuče datoteke mišem i ispusti ih"
+	},
+	"org_link": {
+		"message": "Poveznica do Organizacije",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Informacije o drugoj Organizaciji",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "druga-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Prepiši spremljene Tabove.",
+		"description": "[label] izbriši sve spremljene Tabove tijekom uvoza"
+	},
+	"preserve_org_tabs": {
+		"message": "Sačuvaj Tabove za druge organizacije.",
+		"description": "[label] zadrži sve organizacijski specifične Tabove tijekom uvoza"
+	},
+	"remove_tab": {
+		"message": "Ukloni Tab",
+		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Nemoj pitati ponovo.",
+		"description": "[req_permission] oznaka kada korisnik ne želi trajno davati ovlasti"
+	},
+	"req_permissions_header": {
+		"message": "Molimo, omogućite nam pristup<br />Salesforce Setup stranicama automatski.",
+		"description": "[req_permission] zaglavlje stranice za zahtjev ovlasti"
+	},
+	"req_permissions_paragraph": {
+		"message": "Ako želite, vaši omiljeni Tabovi mogu se pojaviti<br />odmah kada prijeđete na Salesforce Setup stranicu<br />bez potrebe da svaki put kliknete na ovo proširenje.",
+		"description": "[req_permission] tekst koji objašnjava zašto se traže ovlasti"
+	},
+	"required": {
+		"message": "obavezno",
+		"description": "[input] označava polje za unos kao obavezno"
+	},
+	"required_info": {
+		"message": "= Obavezne informacije",
+		"description": "[modal] obavještava korisnika da su određene informacije obavezne"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Salesforce prijava",
+		"description": "stranica za prijavu u Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce postavke",
+		"description": "bilo koja stranica za postavke Salesforcea (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Spremi",
+		"description": "Primijeni promjene i spremi ih u memoriju"
+	},
+	"save_tab": {
+		"message": "Spremi kao Tab",
+		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"set_gen_preview": {
+		"message": "Tab pregled",
+		"description": "Oznaka za pregled izgleda općenitih Tabova"
+	},
+	"set_gen_styler": {
+		"message": "Tab uređivač stila",
+		"description": "Oznaka za konfiguriranje stila općenitih Tabova"
+	},
+	"set_general_settings": {
+		"message": "Opće postavke",
+		"description": "Naslov odjeljka za opće opcije konfiguracije"
+	},
+	"set_move_available": {
+		"message": "Premjesti u Dostupno",
+		"description": "Naslov gumba za premještanje odabranih stavki natrag u Dostupno"
+	},
+	"set_move_chosen": {
+		"message": "Premjesti u Odabrano",
+		"description": "Naslov gumba za premještanje odabranih stavki u Odabrano"
+	},
+	"set_org_preview": {
+		"message": "Pregled organizacije",
+		"description": "Oznaka za pregled izgleda Tabova specifičnih za organizaciju"
+	},
+	"set_org_styler": {
+		"message": "Uređivač stila organizacije",
+		"description": "Oznaka za konfiguriranje stila Tabova specifičnih za organizaciju"
+	},
+	"set_tab_background_active_label": {
+		"message": "Unesite boju pozadine za vaše aktivne općenite Tabove.",
+		"description": "Oznaka za postavljanje boje pozadine za aktivne općenite Tabove"
+	},
+	"set_tab_background_label": {
+		"message": "Unesite boju pozadine za vaše organizacijske Tabove.",
+		"description": "Oznaka za postavljanje boje pozadine za Tabove specifične za organizaciju"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Unesite boju obruba za vaše aktivne organizacijske Tabove.",
+		"description": "Oznaka za postavljanje boje obruba za aktivne Tabove specifične za organizaciju"
+	},
+	"set_tab_border_color_label": {
+		"message": "Unesite boju obruba za vaše općenite Tabove.",
+		"description": "Oznaka za postavljanje boje obruba za općenite Tabove"
+	},
+	"set_tab_color_active_label": {
+		"message": "Unesite boju teksta za vaše aktivne općenite Tabove.",
+		"description": "Oznaka za postavljanje boje teksta za aktivne općenite Tabove"
+	},
+	"set_tab_color_label": {
+		"message": "Unesite boju teksta za vaše organizacijske Tabove.",
+		"description": "Oznaka za postavljanje boje teksta za Tabove specifične za organizaciju"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Odaberite jedan ili više stilova ukrašavanja za vaše aktivne organizacijske Tabove.",
+		"description": "Upit za odabir stilova ukrašavanja za aktivne Tabove specifične za organizaciju"
+	},
+	"set_tab_decoration_label": {
+		"message": "Odaberite jedan ili više stilova ukrašavanja za vaše općenite Tabove.",
+		"description": "Upit za odabir stilova ukrašavanja za općenite Tabove"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Unesite boju pozadine prilikom prelaska mišem za vaše aktivne općenite Tabove.",
+		"description": "Oznaka za postavljanje boje pozadine prilikom prelaska mišem za aktivne općenite Tabove"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Unesite boju pozadine prilikom prelaska mišem za vaše organizacijske Tabove.",
+		"description": "Oznaka za postavljanje boje pozadine prilikom prelaska mišem za Tabove specifične za organizaciju"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Unesite boju sjene za vaše aktivne organizacijske Tabove.",
+		"description": "Oznaka za postavljanje boje sjene za aktivne Tabove specifične za organizaciju"
+	},
+	"set_tab_shadow_label": {
+		"message": "Unesite boju sjene za vaše općenite Tabove.",
+		"description": "Oznaka za postavljanje boje sjene za općenite Tabove"
+	},
+	"set_tab_top_active_label": {
+		"message": "Unesite boju za traku na vrhu vaših aktivnih općenitih Tabova.",
+		"description": "Oznaka za postavljanje boje gornje trake za aktivne općenite Tabove"
+	},
+	"set_toggle_preview": {
+		"message": "Kliknite za prebacivanje aktivnog stanja.",
+		"description": "Tekst opisa alata za kontrolu prebacivanja aktivnog stanja"
+	},
+	"settings": {
+		"message": "Postavke",
+		"description": "Oznaka za izbornik postavki"
+	},
+	"setup_page": {
+		"message": "Setup stranica",
+		"description": "[notSalesforceSetup] stranica za uređivanje Salesforce postavki"
+	},
+	"skip": {
+		"message": "Preskoči",
+		"description": "[req_permission] gumb za odbijanje davanja ovlasti"
+	},
+	"successfully_imported": {
+		"message": "Uvoz je uspješan",
+		"description": "[toast] Tabovi su uspješno spremljeni"
+	},
+	"tab_explain": {
+		"message": "Svaki predmet mora imati 'label' i 'url' kao nizove. Osim toga, svaki predmet može imati 'org' kao niz.",
+		"description": "[error] objašnjava kako treba biti strukturiran Tab"
+	},
+	"tab_information": {
+		"message": "Informacije o Tab-u",
+		"description": "naslov modala za ažuriranje Tabova"
+	},
+	"tab_label": {
+		"message": "Oznaka Tab-a",
+		"description": "svojstvo Label Tab-a, njegovo ime"
+	},
+	"tab_org": {
+		"message": "Organizacija Tab-a",
+		"description": "svojstvo Org Tab-a, ako je namijenjen jednoj specifičnoj Salesforce organizaciji"
+	},
+	"tab_url": {
+		"message": "URL Tab-a",
+		"description": "svojstvo URL Tab-a, na koji linkira"
+	},
+	"table_delete": {
+		"message": "Izbriši Tab",
+		"description": "[popup] pomoćni tekst za stupac s gumbom za brisanje"
+	},
+	"table_org": {
+		"message": "Je li Tab organizacijski",
+		"description": "[popup] pomoćni tekst za stupac s checkboxom za organizaciju"
+	},
+	"table_row_label": {
+		"message": "Unesite oznaku za ovaj URL",
+		"description": "[popup] polje za unos imena Tab-a"
+	},
+	"table_row_org": {
+		"message": "Kliknite ako želite da ovaj Tab bude dostupan samo za ovu organizaciju.",
+		"description": "[popup] checkbox za prebacivanje Tab-a u organizacijski način"
+	},
+	"table_row_org_name": {
+		"message": "Organizacija za koju je ovaj Tab dostupan.",
+		"description": "[popup] polje za unos imena organizacije"
+	},
+	"table_row_url": {
+		"message": "Unesite sub_URL na koji želite biti preusmjereni",
+		"description": "[popup] polje za unos URL-a Tab-a"
+	},
+	"tabs": {
+		"message": "Tabovi",
+		"description": "omiljene veze korisnika"
+	},
+	"tabs_saved": {
+		"message": "Tabovi spremljeni.",
+		"description": "[toast] Tabovi su uspješno spremljeni."
+	},
+	"theme_dark": {
+		"message": "Promijeni temu u tamnu",
+		"description": "[popup] naslov ikone mjeseca za promjenu teme"
+	},
+	"theme_light": {
+		"message": "Promijeni temu u svijetlu",
+		"description": "[popup] naslov ikone sunca za promjenu teme"
+	},
+	"underline": {
+		"message": "Podcrtano",
+		"description": "Opcija stila ukrašavanja za podcrtavanje teksta Taba"
+	},
+	"underline_wavy": {
+		"message": "Valovito podcrtano",
+		"description": "Opcija stila ukrašavanja za primjenu valovitog podcrtavanja na tekst Taba"
+	},
+	"upload": {
+		"message": "Otpremi",
+		"description": "[import] omogućuje korisniku pregled datoteka i odabir ispravne"
+	},
+	"users": {
+		"message": "Korisnici",
+		"description": "ime stranice povezane s ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "Uvezli ste koristeći zastarjeli 'tabTitle'!\nPreuzimanje ažuriranog fajla je započelo.\nOd sada, molimo koristite novi preuzeti fajl.\nKorištenje ovog fajla će biti ukinuto u budućim ažuriranjima.",
+		"description": "[warning] obavještava korisnika da uvezeni fajl koristi zastarjelo svojstvo"
+	},
+	"where_to": {
+		"message": "Kamo?",
+		"description": "[open-other-org-modal] alternativni naslov za modal"
+	}
 }

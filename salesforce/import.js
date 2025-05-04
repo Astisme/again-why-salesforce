@@ -1,6 +1,6 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME } from "/constants.js";
-import { ensureTranslatorAvailability } from "/translator.js";
+import { BROWSER, EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 import {
 	generateCheckboxWithLabel,
@@ -54,10 +54,11 @@ const reader = new FileReader();
  * }} An object containing the modal's parent element, the save button, the close button, and the file input element.
  */
 async function generateSldsImport() {
-    const translator = await ensureTranslatorAvailability();
-	const { modalParent, article, saveButton, closeButton } = await generateSldsModal(
-		await translator.translate("import_tabs"),
-	);
+	const translator = await ensureTranslatorAvailability();
+	const { modalParent, article, saveButton, closeButton } =
+		await generateSldsModal(
+			await translator.translate("import_tabs"),
+		);
 	closeButton.id = CLOSE_MODAL_ID;
 	const { section, divParent } = await generateSection();
 	divParent.style.width = "100%"; // makes the elements inside have full width
@@ -76,7 +77,9 @@ async function generateSldsImport() {
 	style.textContent = ".hidden { display: none; }";
 	divParent.appendChild(style);
 	const duplicateWarning = document.createElement("span");
-	duplicateWarning.innerHTML = await translator.translate("import_duplicate_description");
+	duplicateWarning.innerHTML = await translator.translate(
+		"import_duplicate_description",
+	);
 	duplicateWarning.style.textAlign = "center";
 	divParent.append(duplicateWarning);
 	const overwriteCheckbox = await generateCheckboxWithLabel(
@@ -113,9 +116,7 @@ reader.onload = async (e) => {
 		showToast(["import_successful", importedNum, "tabs"], true);
 		if (jsonString.includes("tabTitle")) {
 			// export and toast
-			BROWSER.runtime.sendMessage({
-				message: { what: "export", tabs: allTabs },
-			});
+			sendExtensionMessage({ what: "export", tabs: allTabs });
 			showToast(
 				"warn_deprecated_tab_title",
 				false,
@@ -207,10 +208,10 @@ BROWSER.runtime.onMessage.addListener(function (message, _, sendResponse) {
 	}
 	if (message.what == "add") {
 		sendResponse(null);
-        try {
-            showFileImport();
-        } catch (error) {
-            showToast(error, false);
-        }
+		try {
+			showFileImport();
+		} catch (error) {
+			showToast(error, false);
+		}
 	}
 });

@@ -3,6 +3,14 @@
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
 	},
+	"available": {
+		"message": "Verfügbar",
+		"description": "Abschnittsüberschrift für Elemente, die hinzugefügt werden können"
+	},
+	"bold": {
+		"message": "Fett",
+		"description": "Schriftstiloption für fettgedruckten Text"
+	},
 	"cancel": {
 		"message": "Abbrechen",
 		"description": "Titel oder Text für Schaltflächen, die die aktuelle Aktion verhindern"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Abbrechen und schließen",
 		"description": "Titel oder Text für den Schließknopf von Modals"
+	},
+	"chosen": {
+		"message": "Ausgewählt",
+		"description": "Abschnittsüberschrift für Elemente, die ausgewählt wurden"
 	},
 	"confirm_another_org": {
 		"message": "Bestätigen Sie das Öffnen dieses Links.",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ Diesen Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Einstellungen",
+		"description": "Bezeichnung für das Einstellungsmenü"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab aktualisieren",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "Fehler beim Import:\n",
 		"description": "[error] Während des Importvorgangs ist ein Fehler aufgetreten."
+	},
+	"error_invalid_key": {
+		"message": "Der an die Funktion übergebene key-Parameter ist ungültig",
+		"description": "[Fehler] Der Entwickler hat versucht, die Funktion mit einem ungültigen Parameter aufzurufen"
 	},
 	"error_invalid_tab": {
 		"message": "Ungültiger Tab",
@@ -219,6 +239,10 @@
 		"message": "Nicht-favoritärer Tab kann nicht entfernt werden!",
 		"description": "[error] Es wurde versucht, einen Tab zu entfernen, der noch nicht gespeichert ist."
 	},
+	"error_required_params": {
+		"message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
+		"description": "[Fehler] Der Entwickler hat versucht, die Funktion ohne die notwendigen Parameter aufzurufen"
+	},
 	"error_sync_nothing": {
 		"message": "Leere Tabs können nicht synchronisiert werden!",
 		"description": "[error] Es wurde versucht, nichts zu synchronisieren."
@@ -286,6 +310,10 @@
 		"message": "Dateien",
 		"description": "Mehrere Dateien"
 	},
+	"general": {
+		"message": "Allgemein",
+		"description": "Bezeichnung für die Kategorie Allgemeine Einstellungen"
+	},
 	"import": {
 		"message": "Importieren",
 		"description": "[popup] Import-Knopf"
@@ -322,9 +350,13 @@
 		"message": "Bitte geben Sie eine gültige Org ein!",
 		"description": "[error-open-other-org-modal] Nachricht, wenn eine fehlerhafte URL eingegeben wird."
 	},
-	"invalid_url": {
-		"message": "Ungültige URL",
-		"description": "[notSalesforceSetup] Eine URL, die nicht gültig ist"
+	"italic": {
+		"message": "Kursiv",
+		"description": "Schriftstiloption für kursiven Text"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce-eigene Navigationstechnologie"
 	},
 	"login_to_salesforce": {
 		"message": "Bei Salesforce anmelden",
@@ -338,17 +370,65 @@
 		"message": "Keine Aktion gefunden, die übereinstimmt",
 		"description": "[error] In Salesforce stimmt die angeforderte Aktion mit keiner verfügbaren Aktion überein."
 	},
-	"nss_detected": {
-		"message": " erkannt.",
-		"description": "[notSalesforceSetup] Etwas wurde erkannt; bitte am Anfang ein Leerzeichen einfügen"
+	"nss_invalid_url": {
+		"message": "Ungültige URL erkannt.",
+		"description": "[notSalesforceSetup] eine URL, die nicht gültig ist"
 	},
-	"nss_prefix": {
-		"message": "Dies ist kein ",
-		"description": "[notSalesforceSetup] Präfix, wenn der Benutzer nicht auf einer Salesforce-Seite ist; bitte am Ende ein Leerzeichen einfügen"
+	"nss_not_setup_page": {
+		"message": "Dies ist keine Salesforce Lightning Setup-Seite.",
+		"description": "[notSalesforceSetup] der Benutzer befindet sich nicht auf einer Salesforce-Seite."
+	},
+	"open_settings": {
+		"message": "Erweiterungseinstellungen öffnen",
+		"description": "[Popup] Schaltfläche zur Weiterleitung zur Einstellungsseite"
 	},
 	"open_setup": {
 		"message": "Setup öffnen",
 		"description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforce-Anmeldeseite automatisch öffnen, wenn Sie das Popup auf einer beliebigen Seite öffnen.",
+		"description": "[setting] wenn der Benutzer das Popup auf einer zufälligen Website öffnet"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforce Setup-Seite automatisch öffnen, wenn Sie das Popup auf einer Salesforce-Seite öffnen.",
+		"description": "[setting] wenn der Benutzer das Popup auf einer Salesforce-Website öffnet"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Sprachauswahl, um auf Englisch zurückzufallen, wenn das Gebietsschema nicht unterstützt wird oder keine Übersetzung anbietet"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Favorisierte Tabs links von Startseite und Objekt-Manager belassen.",
+		"description": "Umschalter, um Favoriten links in der Navigationsleiste zu fixieren"
+	},
+	"opt_link_new_browser": {
+		"message": "Links immer in einem neuen Browser-Tab öffnen.",
+		"description": "[Einstellung] wenn der Benutzer auf einen Favoriten klickt, in neuem Tab öffnen"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Salesforce-Anmeldeseite beim Klick auf das Popup immer im selben Tab öffnen.",
+		"description": "[setting] Salesforce-Anmeldeseite immer im selben Tab öffnen"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Salesforce Setup-Seite beim Klick auf das Popup immer im selben Tab öffnen.",
+		"description": "[setting] Salesforce Setup-Seite immer im selben Tab öffnen"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Verwendung von Lightning Navigation verhindern (schnellere Ladezeit bei Nutzung).",
+		"description": "[setting] Lightning Navigation nicht zulassen mit Erklärung der Funktion"
+	},
+	"opt_same_tab_popup": {
+		"message": "Seite im selben Tab öffnen, wenn auf das Popup geklickt wird.",
+		"description": "[Einstellung] Verhindert das Öffnen eines neuen Browser-Tabs"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Standard)",
+		"description": "Option zur Verwendung der Salesforce-Spracheneinstellung. Standard für die Erweiterung."
+	},
+	"opt_skip_link_detection": {
+		"message": "Automatische Überprüfung der Salesforce-ID überspringen.",
+		"description": "[Einstellung] beim Favorisieren eines Tabs nicht nach einer ID im Link suchen"
 	},
 	"or_drop": {
 		"message": "Oder ablegen",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Die Salesforce Lightning Plattform"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforce-Anmeldeseite (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "beliebige Salesforce-Setup-Seite (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Speichern",
+		"description": "Änderungen übernehmen und im Speicher sichern"
+	},
 	"save_tab": {
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"set_gen_preview": {
+		"message": "Tab-Vorschau",
+		"description": "Bezeichnung zum Vorschau des generischen Tab-Aussehens"
+	},
+	"set_gen_styler": {
+		"message": "Tab-Styler",
+		"description": "Bezeichnung zum Konfigurieren des Stils generischer Tabs"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Abschnittsüberschrift für allgemeine Konfigurationsoptionen"
+	},
+	"set_move_available": {
+		"message": "Zu Verfügbar verschieben",
+		"description": "Button-Beschriftung, um ausgewählte Elemente zurück zu Verfügbar zu verschieben"
+	},
+	"set_move_chosen": {
+		"message": "Zu Ausgewählt verschieben",
+		"description": "Button-Beschriftung, um ausgewählte Elemente zu Ausgewählt zu verschieben"
+	},
+	"set_org_preview": {
+		"message": "Org-Vorschau",
+		"description": "Bezeichnung zum Vorschau der orgspezifischen Tab-Aussehens"
+	},
+	"set_org_styler": {
+		"message": "Org-Styler",
+		"description": "Bezeichnung zum Konfigurieren des Stils orgspezifischer Tabs"
+	},
+	"set_tab_background_active_label": {
+		"message": "Hintergrundfarbe für aktive generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hintergrundfarbe aktiver generischer Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Hintergrundfarbe für Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hintergrundfarbe organisationsspezifischer Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Rahmenfarbe für aktive Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Rahmenfarbe aktiver organisationsspezifischer Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Rahmenfarbe für generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Rahmenfarbe generischer Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Textfarbe für aktive generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Textfarbe aktiver generischer Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Textfarbe für Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Textfarbe organisationsspezifischer Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Ein oder mehrere Dekorationsstile für aktive Organisations-Tabs wählen.",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für aktive organisationsspezifische Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Ein oder mehrere Dekorationsstile für generische Tabs wählen.",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für generische Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Hover-Hintergrundfarbe für aktive generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hover-Hintergrundfarbe aktiver generischer Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Hover-Hintergrundfarbe für Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Hover-Hintergrundfarbe organisationsspezifischer Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Schattenfarbe für aktive Organisations-Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Schattenfarbe aktiver organisationsspezifischer Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Schattenfarbe für generische Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Schattenfarbe generischer Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Farbe für die obere Leiste aktiver generischer Tabs eingeben.",
+		"description": "Bezeichnung zum Festlegen der Farbe der oberen Leiste aktiver generischer Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Klicken, um den aktiven Status umzuschalten.",
+		"description": "Tooltip-Text für die Steuerung des Umschaltens des aktiven Status"
+	},
+	"settings": {
+		"message": "Einstellungen",
+		"description": "Bezeichnung für das Einstellungsmenü"
 	},
 	"setup_page": {
 		"message": "Setup-Seite",
@@ -430,10 +610,10 @@
 		"message": "Tab-Bezeichnung",
 		"description": "[popup] Spaltenüberschrift für den Namen des Tabs"
 	},
-    "tab_org": {
-        "message": "Tab Org",
-        "description": "die Org-Eigenschaft des Tab, wenn es sich um eine einzelne Salesforce-Organisation handelt"
-    },
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "die Org-Eigenschaft des Tab, wenn es sich um eine einzelne Salesforce-Organisation handelt"
+	},
 	"tab_url": {
 		"message": "Tab-URL",
 		"description": "[popup] Spaltenüberschrift für die URL des Tabs"
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "Thema auf Hell wechseln",
 		"description": "[popup] Titel auf der Sonne zum Wechseln des Themas"
+	},
+	"underline": {
+		"message": "Unterstreichen",
+		"description": "Dekorationsstiloption zum Unterstreichen von Tab-Text"
+	},
+	"underline_wavy": {
+		"message": "Wellig unterstreichen",
+		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
 	},
 	"upload": {
 		"message": "Hochladen",

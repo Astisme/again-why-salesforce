@@ -3,6 +3,14 @@
 		"message": "Разрешить",
 		"description": "[req_permission] Кнопка для предоставления разрешений"
 	},
+	"available": {
+		"message": "Доступно",
+		"description": "Заголовок раздела для элементов, которые можно добавить"
+	},
+	"bold": {
+		"message": "Жирный",
+		"description": "Параметр стиля шрифта для жирного текста"
+	},
 	"cancel": {
 		"message": "Отмена",
 		"description": "заголовок или textContent для кнопок, предотвращающих выполнение текущего действия"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Отменить и закрыть",
 		"description": "заголовок или textContent для кнопки закрытия модальных окон"
+	},
+	"chosen": {
+		"message": "Выбрано",
+		"description": "Заголовок раздела для элементов, которые были выбраны"
 	},
 	"confirm_another_org": {
 		"message": "Подтвердите открытие этой ссылки.",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ Этот Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Настройки",
+		"description": "Метка для меню настроек"
+	},
 	"cxm_update": {
 		"message": "✏️ Обновить Tab",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "Ошибка импорта:\n",
 		"description": "[error] Во время импорта произошла ошибка"
+	},
+	"error_invalid_key": {
+		"message": "Параметр ключа, переданный в функцию, недействителен",
+		"description": "[ошибка] разработчик попытался вызвать функцию с недействительным параметром"
 	},
 	"error_invalid_tab": {
 		"message": "Неверный Tab",
@@ -219,6 +239,10 @@
 		"message": "Невозможно удалить не избранный Tab!",
 		"description": "[error] Попытка удалить Tab, который ещё не сохранён"
 	},
+	"error_required_params": {
+		"message": "Необходимые параметры для функции не были переданы",
+		"description": "[ошибка] разработчик попытался вызвать функцию без необходимых параметров"
+	},
 	"error_sync_nothing": {
 		"message": "Невозможно синхронизировать пустые Tabs!",
 		"description": "[error] Попытка синхронизировать ничего"
@@ -286,6 +310,10 @@
 		"message": "файлы",
 		"description": "несколько файлов"
 	},
+	"general": {
+		"message": "Общие",
+		"description": "Метка для категории общих настроек"
+	},
 	"import": {
 		"message": "Импортировать",
 		"description": "[popup] Кнопка импорта"
@@ -322,9 +350,13 @@
 		"message": "Пожалуйста, введите действительную Org!",
 		"description": "[error-open-other-org-modal] Сообщение, если введён неверный URL в модальном окне"
 	},
-	"invalid_url": {
-		"message": "Неверный URL",
-		"description": "[notSalesforceSetup] Неверный URL"
+	"italic": {
+		"message": "Курсив",
+		"description": "Параметр стиля шрифта для курсивного текста"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Технология пользовательской навигации Salesforce"
 	},
 	"login_to_salesforce": {
 		"message": "Войти в Salesforce",
@@ -338,17 +370,65 @@
 		"message": "Не найдено соответствующего действия",
 		"description": "[error] В Salesforce запрошенное действие не совпадает ни с одним доступным действием"
 	},
-	"nss_detected": {
-		"message": " обнаружен.",
-		"description": "[notSalesforceSetup] Обнаружено что-то; включите пробел в начале сообщения"
+	"nss_invalid_url": {
+		"message": "Обнаружен недействительный URL.",
+		"description": "[неНастройкаSalesforce] недействительный URL"
 	},
-	"nss_prefix": {
-		"message": "Это не ",
-		"description": "[notSalesforceSetup] Префикс, показываемый, когда пользователь не на странице Salesforce; не забудьте включить пробел в конце"
+	"nss_not_setup_page": {
+		"message": "Это не страница настройки Salesforce Lightning.",
+		"description": "[неНастройкаSalesforce] пользователь не находится на странице Salesforce."
+	},
+	"open_settings": {
+		"message": "Открыть настройки расширения",
+		"description": "[всплывающее окно] кнопка для перенаправления на страницу настроек"
 	},
 	"open_setup": {
 		"message": "Открыть настройку",
 		"description": "[notSalesforceSetup] Призыв к переходу на страницу настройки Salesforce"
+	},
+	"opt_automatic_open_login": {
+		"message": "Автоматически открывать страницу входа в Salesforce при нажатии на всплывающее окно, если вы не находитесь на странице Salesforce.",
+		"description": "[настройка] когда пользователь открывает всплывающее окно, находясь на случайном веб-сайте"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Автоматически открывать страницу настройки Salesforce при нажатии на всплывающее окно, если вы находитесь на странице Salesforce.",
+		"description": "[настройка] когда пользователь открывает всплывающее окно, находясь на веб-сайте Salesforce"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Параметр языка для возврата к английскому, если локаль не поддерживается или не предоставляет перевод"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Держать избранные Tabs слева от Главной и Менеджера объектов.",
+		"description": "Переключатель для закрепления избранных Tabs слева на панели навигации"
+	},
+	"opt_link_new_browser": {
+		"message": "Всегда открывать ссылки в новой вкладке браузера.",
+		"description": "[настройка] при щелчке пользователя по избранному Tab открывать его в новой вкладке"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Всегда открывать страницу входа в Salesforce в той же Tab при нажатии на всплывающее окно.",
+		"description": "[настройка]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Всегда открывать страницу настройки Salesforce в той же Tab при нажатии на всплывающее окно.",
+		"description": "[настройка]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Запретить использование навигации Lightning (более быстрая загрузка при использовании).",
+		"description": "[настройка] не разрешать навигацию Lightning с объяснением функции"
+	},
+	"opt_same_tab_popup": {
+		"message": "страница в той же вкладке при щелчке по всплывающему окну.",
+		"description": "[настройка] предотвращение открытия новой вкладки браузера"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (По умолчанию)",
+		"description": "Параметр использования языковых настроек Salesforce. Это значение по умолчанию для расширения."
+	},
+	"opt_skip_link_detection": {
+		"message": "Пропустить автоматическую проверку идентификатора Salesforce.",
+		"description": "[настройка] при добавлении Tab в избранное не проверять, есть ли идентификатор в ссылке"
 	},
 	"or_drop": {
 		"message": "Или перетащите",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Платформа Salesforce Lightning"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "страница входа Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "любая страница настройки Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Сохранить",
+		"description": "Применить изменения и сохранить их в памяти"
+	},
 	"save_tab": {
 		"message": "Сохранить как Tab",
 		"description": "[alt] Альтернативный текст, если изображения не отображаются"
+	},
+	"set_gen_preview": {
+		"message": "Предпросмотр Tab",
+		"description": "Метка для предпросмотра внешнего вида общего Tab"
+	},
+	"set_gen_styler": {
+		"message": "Стайлер Tab",
+		"description": "Метка для настройки стиля общего Tab"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Заголовок раздела для общих параметров конфигурации"
+	},
+	"set_move_available": {
+		"message": "Переместить в Доступно",
+		"description": "Название кнопки для перемещения выбранных элементов обратно в Доступно"
+	},
+	"set_move_chosen": {
+		"message": "Переместить в Выбрано",
+		"description": "Название кнопки для перемещения выбранных элементов в Выбрано"
+	},
+	"set_org_preview": {
+		"message": "Предпросмотр Org",
+		"description": "Метка для предпросмотра внешнего вида Org-специфичного Tab"
+	},
+	"set_org_styler": {
+		"message": "Стайлер Org",
+		"description": "Метка для настройки стиля Org-специфичных вкладок"
+	},
+	"set_tab_background_active_label": {
+		"message": "Введите цвет фона для активных универсальных Tabs.",
+		"description": "Метка для установки цвета фона активных универсальных Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Введите цвет фона для Tabs организации.",
+		"description": "Метка для установки цвета фона Tabs, специфичных для организации"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Введите цвет рамки для активных Tabs организации.",
+		"description": "Метка для установки цвета рамки активных Tabs, специфичных для организации"
+	},
+	"set_tab_border_color_label": {
+		"message": "Введите цвет рамки для универсальных Tabs.",
+		"description": "Метка для установки цвета рамки универсальных Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Введите цвет текста для активных универсальных Tabs.",
+		"description": "Метка для установки цвета текста активных универсальных Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Введите цвет текста для Tabs организации.",
+		"description": "Метка для установки цвета текста Tabs, специфичных для организации"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Выберите один или несколько стилей оформления для активных Tabs организации.",
+		"description": "Запрос на выбор стилей оформления для активных Tabs, специфичных для организации"
+	},
+	"set_tab_decoration_label": {
+		"message": "Выберите один или несколько стилей оформления для универсальных Tabs.",
+		"description": "Запрос на выбор стилей оформления для универсальных Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Введите цвет фона при наведении для активных универсальных Tabs.",
+		"description": "Метка для установки цвета фона при наведении для активных универсальных Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Введите цвет фона при наведении для Tabs организации.",
+		"description": "Метка для установки цвета фона при наведении для Tabs, специфичных для организации"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Введите цвет тени для активных Tabs организации.",
+		"description": "Метка для установки цвета тени активных Tabs, специфичных для организации"
+	},
+	"set_tab_shadow_label": {
+		"message": "Введите цвет тени для универсальных Tabs.",
+		"description": "Метка для установки цвета тени универсальных Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Введите цвет для верхней панели ваших активных универсальных Tabs.",
+		"description": "Метка для установки цвета верхней панели активных универсальных Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Нажмите, чтобы переключить активное состояние.",
+		"description": "Подсказка для инструмента переключения активного состояния"
+	},
+	"settings": {
+		"message": "Настройки",
+		"description": "Метка для меню настроек"
 	},
 	"setup_page": {
 		"message": "Страница настройки",
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "Переключить тему на Светлую",
 		"description": "[popup] Заголовок на солнце для смены темы"
+	},
+	"underline": {
+		"message": "Подчеркнуть",
+		"description": "Параметр стиля оформления для подчеркивания текста Tab"
+	},
+	"underline_wavy": {
+		"message": "Волнистое подчеркивание",
+		"description": "Параметр стиля оформления для применения волнистого подчеркивания к тексту Tab"
 	},
 	"upload": {
 		"message": "Загрузить",

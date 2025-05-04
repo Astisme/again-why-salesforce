@@ -3,6 +3,14 @@
 		"message": "అనుమతించండి",
 		"description": "[req_permission] అనుమతులు ఇవ్వడానికి బటన్"
 	},
+	"available": {
+		"message": "అందుబాటులో ఉన్నవి",
+		"description": "జోడించగల అంశాల కోసం విభాగ శీర్షిక"
+	},
+	"bold": {
+		"message": "బోల్డ్",
+		"description": "బోల్డ్ టెక్స్ట్ కోసం ఫాంట్ స్టైల్ ఎంపిక"
+	},
 	"cancel": {
 		"message": "రద్దు చేయి",
 		"description": "ప్రస్తుత చర్యను అమలు చేయకుండా నిరోధించే బటన్ల కోసం శీర్షిక లేదా టెక్స్ట్ కంటెంట్"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "రద్దు చేసి మూసివేయి",
 		"description": "మోడల్స్ యొక్క మూసివేయి బటన్ కోసం శీర్షిక లేదా టెక్స్ట్ కంటెంట్"
+	},
+	"chosen": {
+		"message": "ఎంచుకున్నవి",
+		"description": "ఎంచుకున్న అంశాల కోసం విభాగ శీర్షిక"
 	},
 	"confirm_another_org": {
 		"message": "ఈ లింక్ ని తెరవడాన్ని నిర్ధారించండి.",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ ఈ Tab తీసివేయి",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ సెట్టింగులు",
+		"description": "సెట్టింగుల మెనూ కోసం లేబుల్"
+	},
 	"cxm_update": {
 		"message": "✏️ Tabను నవీకరించు",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "దిగుమతి సమయంలో లోపం:\n",
 		"description": "[error] దిగుమతి ప్రక్రియలో లోపం జరిగింది"
+	},
+	"error_invalid_key": {
+		"message": "ఫంక్షన్‌కు పంపబడిన కీ పారామీటర్ చెల్లదు",
+		"description": "[లోపం] చెల్లని పారామీటర్‌తో డెవలపర్ ఫంక్షన్‌ను కాల్ చేయడానికి ప్రయత్నించారు"
 	},
 	"error_invalid_tab": {
 		"message": "చెల్లని Tab",
@@ -219,6 +239,10 @@
 		"message": "ప్రియమైన కాదు అనే Tab ను తొలగించలేము!",
 		"description": "[error] ఇంకా సేవ్ కాలేదు అని చూపే Tab ను తొలగించాలని ప్రయత్నించారు"
 	},
+	"error_required_params": {
+		"message": "ఫంక్షన్ కోసం అవసరమైన పారామీటర్లు పంపబడలేదు",
+		"description": "[లోపం] అవసరమైన పారామీటర్లు లేకుండా డెవలపర్ ఫంక్షన్‌ను కాల్ చేయడానికి ప్రయత్నించారు"
+	},
 	"error_sync_nothing": {
 		"message": "ఖాళీ Tabs సింక్ చేయలేము!",
 		"description": "[error] సింక్ చేయడానికి ఎలాంటి వస్తువూ లేవు"
@@ -286,6 +310,10 @@
 		"message": "ఫైల్స్",
 		"description": "బహుళ ఫైల్స్"
 	},
+	"general": {
+		"message": "సాధారణం",
+		"description": "సాధారణ సెట్టింగ్‌ల వర్గం కోసం లేబుల్"
+	},
 	"import": {
 		"message": "దిగుమతి చేయండి",
 		"description": "[popup] దిగుమతి బటన్"
@@ -322,9 +350,13 @@
 		"message": "దయచేసి సరైన Orgని ఇవ్వండి!",
 		"description": "[error-open-other-org-modal] modalలో తప్పు URL ఇవ్వబడితే సందేశం"
 	},
-	"invalid_url": {
-		"message": "చెల్లని URL",
-		"description": "[notSalesforceSetup] చెల్లని URL"
+	"italic": {
+		"message": "ఇటాలిక్",
+		"description": "ఇటాలిక్ టెక్స్ట్ కోసం ఫాంట్ స్టైల్ ఎంపిక"
+	},
+	"lightning_navigation": {
+		"message": "లైట్నింగ్ నావిగేషన్",
+		"description": "Salesforce యొక్క అనుకూల నావిగేషన్ సాంకేతికత"
 	},
 	"login_to_salesforce": {
 		"message": "Salesforceలో లాగిన్ అవ్వండి",
@@ -338,17 +370,65 @@
 		"message": "ఏ చర్యతో సరిపోలడం లేదు",
 		"description": "[error] Salesforceలో కోరుకున్న చర్య అందుబాటులో ఉన్నదీ కాదు"
 	},
-	"nss_detected": {
-		"message": " కనుగొనబడింది.",
-		"description": "[notSalesforceSetup] ఏదో కనుగొనబడింది; సందేశ మొదట ఖాళీని చేర్చండి"
+	"nss_invalid_url": {
+		"message": "తప్పు URL కనుగొనబడింది.",
+		"description": "[సేల్స్‌ఫోర్స్ సెటప్ కాదు] ఒక తప్పు URL"
 	},
-	"nss_prefix": {
-		"message": "ఇది కాదు ",
-		"description": "[notSalesforceSetup] Salesforce పేజీపై లేనప్పుడు చూపబడే ప్రిఫిక్స్ (అఖరి లో ఒక ఖాళీని చేర్చండి)"
+	"nss_not_setup_page": {
+		"message": "ఇది సేల్స్‌ఫోర్స్ లైట్నింగ్ సెటప్ పేజీ కాదు.",
+		"description": "[సేల్స్‌ఫోర్స్ సెటప్ కాదు] వినియోగదారు సేల్స్‌ఫోర్స్ పేజీలో లేరు."
+	},
+	"open_settings": {
+		"message": "పొడిగింపు సెట్టింగ్‌లను తెరవండి",
+		"description": "[పాప్‌అప్] సెట్టింగ్‌ల పేజీకి దారి మళ్లించడానికి బటన్"
 	},
 	"open_setup": {
 		"message": "Setupని తెరవండి",
 		"description": "[notSalesforceSetup] Salesforce Setup పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
+	},
+	"opt_automatic_open_login": {
+		"message": "సేల్స్‌ఫోర్స్ పేజీలో లేనప్పుడు పాప్‌అప్‌పై క్లిక్ చేస్తే సేల్స్‌ఫోర్స్ లాగిన్ పేజీని స్వయంచాలకంగా తెరవండి.",
+		"description": "[సెట్టింగ్] వినియోగదారు యాదృచ్ఛిక వెబ్‌సైట్‌లో పాప్‌అప్‌ను తెరిచినప్పుడు"
+	},
+	"opt_automatic_open_setup": {
+		"message": "సేల్స్‌ఫోర్స్ పేజీలో ఉన్నప్పుడు పాప్‌అప్‌పై క్లిక్ చేస్తే సేల్స్‌ఫోర్స్ సెటప్ పేజీని స్వయంచాలకంగా తెరవండి.",
+		"description": "[సెట్టింగ్] వినియోగదారు సేల్స్‌ఫోర్స్ వెబ్‌సైట్‌లో పాప్‌అప్‌ను తెరిచినప్పుడు"
+	},
+	"opt_en_fallback": {
+		"message": "en (ఫాల్‌బ్యాక్)",
+		"description": "స్థానిక భాష మద్దతు లేనప్పుడు లేదా అనువాదం లేనప్పుడు ఆంగ్లానికి తిరిగి వెళ్లడానికి భాష ఎంపిక"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Home మరియు Object Manager యొక్క ఎడమవైపున ఇష్టమైన Tab లను ఉంచండి.",
+		"description": "నావిగేషన్ బార్ యొక్క ఎడమవైపున ఇష్టమైన Tab లను పిన్ చేయడానికి టాగుల్"
+	},
+	"opt_link_new_browser": {
+		"message": "లింకులను ఎల్లప్పుడూ కొత్త బ్రౌజర్ ట్యాబ్‌లో తెరవండి.",
+		"description": "[సెట్టింగ్] యూజర్ ఫేవరెట్ Tabపై క్లిక్ చేసినప్పుడు కొత్త బ్రౌజర్ ట్యాబ్‌లో తెరవడానికి"
+	},
+	"opt_open_login_same_tab": {
+		"message": "పాప్‌అప్‌పై క్లిక్ చేసినప్పుడు ఎల్లప్పుడూ సేల్స్‌ఫోర్స్ లాగిన్ పేజీని అదే Tabలో తెరవండి.",
+		"description": "[సెట్టింగ్]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "పాప్‌అప్‌పై క్లిక్ చేసినప్పుడు ఎల్లప్పుడూ సేల్స్‌ఫోర్స్ సెటప్ పేజీని అదే Tabలో తెరవండి.",
+		"description": "[సెట్టింగ్]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "లైట్నింగ్ నావిగేషన్ వాడకాన్ని నిరోధించండి (వాడుతున్నప్పుడు వేగంగా లోడ్ అవుతుంది).",
+		"description": "[సెట్టింగ్] ఫీచర్ వివరణతో లైట్నింగ్ నావిగేషన్‌ను అనుమతించవద్దు"
+	},
+	"opt_same_tab_popup": {
+		"message": "పాప్-అప్‌పై క్లిక్ చేసినప్పుడు అదే ట్యాబ్‌లో పేజీ.",
+		"description": "[సెట్టింగ్] కొత్త బ్రౌజర్ ట్యాబ్ తెరవకుండా నిరోధించడానికి"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce భాష (డిఫాల్ట్)",
+		"description": "Salesforce యొక్క భాష సెట్టింగ్‌ని ఉపయోగించడానికి ఎంపిక. ఈ ఎంపిక పొడిగింపు కోసం డిఫాల్ట్."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ID స్వయంచాలక తనిఖీని దాటవేయండి.",
+		"description": "[సెట్టింగ్] యూజర్ ఫేవరిట్ Tabs ను జోడించినప్పుడు, రిజిస్టర్ చేస్తున్న లింక్‌లో ID ఉందా అని తనిఖీ చేయకుండా"
 	},
 	"or_drop": {
 		"message": "లేదా డ్రాప్ చేయి",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning ప్లాట్‌ఫారం"
 	},
+	"salesforce_login": {
+		"message": "Salesforce లాగిన్",
+		"description": "Salesforce లాగిన్ పేజీ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce సెటప్",
+		"description": "ఏదైనా Salesforce సెటప్ పేజీ (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "సేవ్ చేయి",
+		"description": "మార్పులను వర్తింపజేసి, వాటిని మెమరీలో నిల్వ చేయండి"
+	},
 	"save_tab": {
 		"message": "Tab గా సేవ్ చేయండి",
 		"description": "[alt] చిత్రాలు చూపించకపోతే ప్రత్యామ్నాయ టెక్స్ట్"
+	},
+	"set_gen_preview": {
+		"message": "Tab ప్రివ్యూ",
+		"description": "సాధారణ Tab రూపాన్ని ముందుగా చూడటానికి లేబుల్"
+	},
+	"set_gen_styler": {
+		"message": "Tab స్టైలర్",
+		"description": "సాధారణ Tab ల శైలిని కాన్ఫిగర్ చేయడానికి లేబుల్"
+	},
+	"set_general_settings": {
+		"message": "సాధారణ సెట్టింగులు",
+		"description": "మొత్తం కాన్ఫిగరేషన్ ఎంపికల కోసం విభాగ శీర్షిక"
+	},
+	"set_move_available": {
+		"message": "అందుబాటులో ఉన్నవి వద్దకు తరలించు",
+		"description": "ఎంచుకున్న అంశాలను తిరిగి అందుబాటులో ఉన్నవి వద్దకు తరలించడానికి బటన్ శీర్షిక"
+	},
+	"set_move_chosen": {
+		"message": "ఎంచుకున్నవి వద్దకు తరలించు",
+		"description": "ఎంచుకున్న అంశాలను ఎంచుకున్నవి వద్దకు తరలించడానికి బటన్ శీర్షిక"
+	},
+	"set_org_preview": {
+		"message": "సంస్థ ప్రివ్యూ",
+		"description": "సంస్థ-నిర్దిష్ట Tab రూపాన్ని ముందుగా చూడటానికి లేబుల్"
+	},
+	"set_org_styler": {
+		"message": "సంస్థ స్టైలర్",
+		"description": "సంస్థ-నిర్దిష్ట Tab ల శైలిని కాన్ఫిగర్ చేయడానికి లేబుల్"
+	},
+	"set_tab_background_active_label": {
+		"message": "మీ యాక్టివ్ జెనెరిక్ Tab ల బ్యాక్‌గ్రౌండ్ రంగును చొప్పించండి.",
+		"description": "యాక్టివ్ జెనెరిక్ Tab ల బ్యాక్‌గ్రౌండ్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_background_label": {
+		"message": "మీ సంస్థ Tab ల బ్యాక్‌గ్రౌండ్ రంగును చొప్పించండి.",
+		"description": "సంస్థ-నిర్దిష్ట Tab ల బ్యాక్‌గ్రౌండ్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "మీ యాక్టివ్ సంస్థ Tab ల బార్డర్ రంగును చొప్పించండి.",
+		"description": "యాక్టివ్ సంస్థ-నిర్దిష్ట Tab ల బార్డర్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_border_color_label": {
+		"message": "మీ జెనెరిక్ Tab ల బార్డర్ రంగును చొప్పించండి.",
+		"description": "జెనెరిక్ Tab ల బార్డర్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_color_active_label": {
+		"message": "మీ యాక్టివ్ జెనెరిక్ Tab ల టెక్స్ట్ యొక్క రంగును చొప్పించండి.",
+		"description": "యాక్టివ్ జెనెరిక్ Tab ల టెక్స్ట్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_color_label": {
+		"message": "మీ సంస్థ Tab ల టెక్స్ట్ యొక్క రంగును చొప్పించండి.",
+		"description": "సంస్థ-నిర్దిష్ట Tab ల టెక్స్ట్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "మీ యాక్టివ్ సంస్థ Tab ల కోసం ఒకటి లేదా ఎక్కువ అలంకరణ శైలులను ఎంచుకోండి.",
+		"description": "యాక్టివ్ సంస్థ-నిర్దిష్ట Tab ల కోసం అలంకరణ శైలులను ఎంచుకోవడానికి ప్రాంప్ట్"
+	},
+	"set_tab_decoration_label": {
+		"message": "మీ జెనెరిక్ Tab ల కోసం ఒకటి లేదా ఎక్కువ అలంకరణ శైలులను ఎంచుకోండి.",
+		"description": "జెనెరిక్ Tab ల కోసం అలంకరణ శైలులను ఎంచుకోవడానికి ప్రాంప్ట్"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "మీ యాక్టివ్ జెనెరిక్ Tab ల హోవర్ బ్యాక్‌గ్రౌండ్ రంగును చొప్పించండి.",
+		"description": "యాక్టివ్ జెనెరిక్ Tab ల హోవర్ బ్యాక్‌గ్రౌండ్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_hover_background_label": {
+		"message": "మీ సంస్థ Tab ల హోవర్ బ్యాక్‌గ్రౌండ్ రంగును చొప్పించండి.",
+		"description": "సంస్థ-నిర్దిష్ట Tab ల హోవర్ బ్యాక్‌గ్రౌండ్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "మీ యాక్టివ్ సంస్థ Tab ల షాడో రంగును చొప్పించండి.",
+		"description": "యాక్టివ్ సంస్థ-నిర్దిష్ట Tab ల షాడో రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_shadow_label": {
+		"message": "మీ జెనెరిక్ Tab ల షాడో రంగును చొప్పించండి.",
+		"description": "జెనెరిక్ Tab ల షాడో రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_tab_top_active_label": {
+		"message": "మీ యాక్టివ్ జెనెరిక్ Tab ల పైభాగాన ఉన్న బార్ యొక్క రంగును చొప్పించండి.",
+		"description": "యాక్టివ్ జెనెరిక్ Tab ల టాప్-బార్ రంగును సెట్ చేయడానికి లేబుల్"
+	},
+	"set_toggle_preview": {
+		"message": "యాక్టివ్ స్థితిని టాగుల్ చేయడానికి క్లిక్ చేయండి.",
+		"description": "టాగుల్ యాక్టివ్ స్థితి నియంత్రణ కోసం టూల్‌టిప్ టెక్స్ట్"
+	},
+	"settings": {
+		"message": "సెట్టింగులు",
+		"description": "సెట్టింగుల మెనూ కోసం లేబుల్"
 	},
 	"setup_page": {
 		"message": "Setup పేజీ",
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "లైట్ థీమ్‌కు మార్చండి",
 		"description": "[popup] థీమ్ మార్చటానికి సూర్యుడిపై టైటిల్"
+	},
+	"underline": {
+		"message": "అండర్‌లైన్",
+		"description": "Tab టెక్స్ట్‌ను అండర్‌లైన్ చేయడానికి అలంకరణ శైలి ఎంపిక"
+	},
+	"underline_wavy": {
+		"message": "వేవీ అండర్‌లైన్",
+		"description": "Tab టెక్స్ట్‌కు వేవీ అండర్‌లైన్‌ను వర్తింపజేయడానికి అలంకరణ శైలి ఎంపిక"
 	},
 	"upload": {
 		"message": "అప్‌లోడ్ చేయి",

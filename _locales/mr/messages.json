@@ -3,6 +3,14 @@
 		"message": "परवानगी द्या",
 		"description": "[req_permission] परवानगी देण्यासाठीचे बटण"
 	},
+	"available": {
+		"message": "उपलब्ध",
+		"description": "उपलब्ध विभागातील आयटém्ससाठी विभाग शीर्षक"
+	},
+	"bold": {
+		"message": "ठळक",
+		"description": "ठळक मजकुरासाठी फॉन्ट शैली पर्याय"
+	},
 	"cancel": {
 		"message": "रद्द करा",
 		"description": "बटणांसाठी शीर्षक किंवा टेक्स्ट कंटेंट जे वर्तमान क्रिया कार्यान्वित होण्यापासून प्रतिबंधित करते"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "रद्द करा आणि बंद करा",
 		"description": "मोडल्सच्या क्लोज बटणासाठी शीर्षक किंवा टेक्स्ट कंटेंट"
+	},
+	"chosen": {
+		"message": "निवडलेले",
+		"description": "निवडलेल्या आयटém्ससाठी विभाग शीर्षक"
 	},
 	"confirm_another_org": {
 		"message": "हा लिंक उघडणे पुष्टी करा.",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ हा Tab काढा",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ सेटिंग्ज",
+		"description": "सेटिंग्ज मेन्यूसाठी लेबल"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab अपडेट करा",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "आयात करताना त्रुटी आली:\n",
 		"description": "[error] आयात प्रक्रियेदरम्यान त्रुटी आली."
+	},
+	"error_invalid_key": {
+		"message": "फंक्शनला पास केलेला की पॅरामीटर वैध नाही",
+		"description": "[त्रुटी] विकसकाने अवैध पॅरामीटरसह फंक्शन कॉल करण्याचा प्रयत्न केला"
 	},
 	"error_invalid_tab": {
 		"message": "अवैध Tab",
@@ -219,6 +239,10 @@
 		"message": "आवडते नसलेला Tab काढता येणार नाही!",
 		"description": "[error] अद्याप जतन न केलेला Tab काढण्याचा प्रयत्न केला गेला."
 	},
+	"error_required_params": {
+		"message": "कार्यासाठी आवश्यक असलेले पॅरामीटर्स पास केले गेले नाहीत",
+		"description": "[त्रुटी] विकसकाने आवश्यक पॅरामीटर्सशिवाय फंक्शन कॉल करण्याचा प्रयत्न केला"
+	},
 	"error_sync_nothing": {
 		"message": "रिक्त Tabs समक्रमण करता येणार नाहीत!",
 		"description": "[error] काही समक्रमित करण्याचा प्रयत्न केला गेला."
@@ -286,6 +310,10 @@
 		"message": "फाईल्स",
 		"description": "एकाधिक फाईल्स"
 	},
+	"general": {
+		"message": "सामान्य",
+		"description": "सामान्य सेटिंग्ज श्रेणीसाठी लेबल"
+	},
 	"import": {
 		"message": "आयात करा",
 		"description": "[popup] आयात बटण"
@@ -322,9 +350,13 @@
 		"message": "कृपया वैध Org प्रविष्ट करा!",
 		"description": "[error-open-other-org-modal] modal मध्ये चुकीचा URL प्रविष्ट केल्यास संदेश"
 	},
-	"invalid_url": {
-		"message": "अवैध URL",
-		"description": "[notSalesforceSetup] एक अवैध URL"
+	"italic": {
+		"message": "तिरडे",
+		"description": "तिरड्या मजकुरासाठी फॉन्ट शैली पर्याय"
+	},
+	"lightning_navigation": {
+		"message": "Lightning नेव्हिगेशन",
+		"description": "Salesforce ची सानुकूल नेव्हिगेशन तंत्रज्ञान"
 	},
 	"login_to_salesforce": {
 		"message": "Salesforce मध्ये लॉगिन करा",
@@ -338,17 +370,65 @@
 		"message": "कोणतीही अनुरूप क्रिया सापडली नाही",
 		"description": "[error] Salesforce मध्ये मागितलेली क्रिया उपलब्ध क्रियांशी जुळत नाही."
 	},
-	"nss_detected": {
-		"message": " आढळले.",
-		"description": "[notSalesforceSetup] काही आढळले; कृपया संदेशाच्या सुरुवातीला स्पेस समाविष्ट करा"
+	"nss_invalid_url": {
+		"message": "अवैध URL आढळला.",
+		"description": "[सेल्सफोर्स सेटअप नाही] एक अवैध URL"
 	},
-	"nss_prefix": {
-		"message": "हे नाही ",
-		"description": "[notSalesforceSetup] जेव्हा वापरकर्ता Salesforce पृष्ठावर नसतो तेव्हा प्रदर्शित होणारा प्रीफिक्स; शेवटी स्पेस समाविष्ट करा"
+	"nss_not_setup_page": {
+		"message": "हे Salesforce लाइटनिंग सेटअप पृष्ठ नाही.",
+		"description": "[सेल्सफोर्स सेटअप नाही] वापरकर्ता Salesforce पृष्ठावर नाही."
+	},
+	"open_settings": {
+		"message": "विस्तार सेटिंग्ज उघडा",
+		"description": "[पॉपअप] सेटिंग्ज पृष्ठावर पुनर्निर्देशित करण्यासाठी बटण"
 	},
 	"open_setup": {
 		"message": "Setup उघडा",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठाकडे जाण्यासाठी कॉल टू अॅक्शन"
+	},
+	"opt_automatic_open_login": {
+		"message": "जेव्हा Salesforce पृष्ठावर नसाल तेव्हा पॉपअपवर क्लिक केल्यावर Salesforce लॉगिन पृष्ठ आपोआप उघडा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता यादृच्छिक वेबसाइटवर पॉपअप उघडतो"
+	},
+	"opt_automatic_open_setup": {
+		"message": "जेव्हा Salesforce पृष्ठावर असाल तेव्हा पॉपअपवर क्लिक केल्यावर Salesforce सेटअप पृष्ठ आपोआप उघडा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर पॉपअप उघडतो"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "लोकॅल समर्थित नसेल किंवा अनुवाद उपलब्ध नसेल तर fallback म्हणून इंग्रजी वापरण्याचा भाषा पर्याय"
+	},
+	"opt_keep_tabs_left": {
+		"message": "पसंदीदा Tabs Home आणि Object Managerच्या डाव्या बाजूला ठेवा.",
+		"description": "नेव्हिगेशन बारच्या डाव्या बाजूस पसंंिददा Tabs पिन करण्यासाठी toggle"
+	},
+	"opt_link_new_browser": {
+		"message": "प्रत्येकदा दुवे नवीन ब्राउझर टॅबमध्ये उघडा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता आवडता Tab क्लिक करतो, तेव्हा नवीन ब्राउझर टॅबमध्ये उघडा"
+	},
+	"opt_open_login_same_tab": {
+		"message": "पॉपअपवर क्लिक केल्यावर Salesforce लॉगिन पृष्ठ नेहमी त्याच Tab मध्ये उघडा.",
+		"description": "[सेटिंग]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "पॉपअपवर क्लिक केल्यावर Salesforce सेटअप पृष्ठ नेहमी त्याच Tab मध्ये उघडा.",
+		"description": "[सेटिंग]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "लाइटनिंग नेव्हिगेशनचा वापर टाळा (वापरत असताना जलद लोड होते).",
+		"description": "[सेटिंग] वैशिष्ट्याच्या स्पष्टीकरणासह लाइटनिंग नेव्हिगेशनला परवानगी देऊ नका"
+	},
+	"opt_same_tab_popup": {
+		"message": "पॉपअपवर क्लिक केल्यास त्याच टॅबमध्ये पृष्ठ.",
+		"description": "[सेटिंग] नवीन ब्राउझर टॅब उघडण्यापासून प्रतिबंधित करा"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Default)",
+		"description": "Salesforce ची भाषा सेटिंग वापरण्याचा पर्याय. हे Extension चे default आहे."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce आयडी स्वयंचलित तपासणी वगळा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता आवडता Tab जतन करतो, तेव्हा URL मध्ये आयडी असल्यास तपासणी कमी"
 	},
 	"or_drop": {
 		"message": "किंवा ड्रॉप करा",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning प्लॅटफॉर्म"
 	},
+	"salesforce_login": {
+		"message": "Salesforce लॉगिन",
+		"description": "Salesforce लॉगिन पृष्ठ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce सेटअप",
+		"description": "कोणताही Salesforce सेटअप पृष्ठ (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "जतन करा",
+		"description": "बदल लागू करा आणि मेमरीमध्ये संग्रहित करा"
+	},
 	"save_tab": {
 		"message": "Tab म्हणून जतन करा",
 		"description": "[alt] प्रतिमांदृष्ट अयशस्वी झाल्यास पर्यायी मजकूर"
+	},
+	"set_gen_preview": {
+		"message": "Tab पूर्वावलोकन",
+		"description": "सामान्य Tab चे स्वरूप पूर्वावलोकन करण्यासाठी लेबल"
+	},
+	"set_gen_styler": {
+		"message": "Tab स्टायलर",
+		"description": "सामान्य Tab ची शैली कॉन्फिगर करण्यासाठी लेबल"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "संपूर्ण सेटिंग्ज पर्यायांसाठी विभाग शीर्षक"
+	},
+	"set_move_available": {
+		"message": "उपलब्धात हलवा",
+		"description": "निवडलेल्या आयटém्स परत Available मध्ये हलवण्यासाठी बटण शीर्षक"
+	},
+	"set_move_chosen": {
+		"message": "निवडलेल्या मध्ये हलवा",
+		"description": "निवडलेल्या आयटém्स Chosen मध्ये हलवण्यासाठी बटण शीर्षक"
+	},
+	"set_org_preview": {
+		"message": "Org पूर्वावलोकन",
+		"description": "संस्थानिर्दिष्ट Tab चे स्वरूप पूर्वावलोकन करण्यासाठी लेबल"
+	},
+	"set_org_styler": {
+		"message": "Org स्टायलर",
+		"description": "संस्थानिर्दिष्ट Tab ची शैली कॉन्फिगर करण्यासाठी लेबल"
+	},
+	"set_tab_background_active_label": {
+		"message": "तुमच्या सक्रिय सामान्य Tabs साठी पार्श्वभूमीचा रंग प्रविष्ट करा.",
+		"description": "सक्रिय सामान्य Tabs साठी पार्श्वभूमी रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_background_label": {
+		"message": "तुमच्या ऑर्ग Tabs साठी पार्श्वभूमीचा रंग प्रविष्ट करा.",
+		"description": "ऑर्ग-विशिष्ट Tabs साठी पार्श्वभूमी रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "तुमच्या सक्रिय ऑर्ग Tabs साठी बॉर्डर रंग प्रविष्ट करा.",
+		"description": "सक्रिय ऑर्ग-विशिष्ट Tabs साठी बॉर्डर रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_border_color_label": {
+		"message": "तुमच्या सामान्य Tabs साठी बॉर्डर रंग प्रविष्ट करा.",
+		"description": "सामान्य Tabs साठी बॉर्डर रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_color_active_label": {
+		"message": "तुमच्या सक्रिय सामान्य Tabs साठी मजकूराचा रंग प्रविष्ट करा.",
+		"description": "सक्रिय सामान्य Tabs साठी मजकूर रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_color_label": {
+		"message": "तुमच्या ऑर्ग Tabs साठी मजकूराचा रंग प्रविष्ट करा.",
+		"description": "ऑर्ग-विशिष्ट Tabs साठी मजकूर रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "तुमच्या सक्रिय ऑर्ग Tabs साठी एक किंवा अधिक अलंकरण शैली निवडा.",
+		"description": "सक्रिय ऑर्ग-विशिष्ट Tabs साठी अलंकरण शैली निवडण्याचे सुचनात्मक टेक्स्ट"
+	},
+	"set_tab_decoration_label": {
+		"message": "तुमच्या सामान्य Tabs साठी एक किंवा अधिक अलंकरण शैली निवडा.",
+		"description": "सामान्य Tabs साठी अलंकरण शैली निवडण्याचे सुचनात्मक टेक्स्ट"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "तुमच्या सक्रिय सामान्य Tabs साठी hover पार्श्वभूमीचा रंग प्रविष्ट करा.",
+		"description": "सक्रिय सामान्य Tabs साठी hover पार्श्वभूमी रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_hover_background_label": {
+		"message": "तुमच्या ऑर्ग Tabs साठी hover पार्श्वभूमीचा रंग प्रविष्ट करा.",
+		"description": "ऑर्ग-विशिष्ट Tabs साठी hover पार्श्वभूमी रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "तुमच्या सक्रिय ऑर्ग Tabs साठी छाया रंग प्रविष्ट करा.",
+		"description": "सक्रिय ऑर्ग-विशिष्ट Tabs साठी छाया रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_shadow_label": {
+		"message": "तुमच्या सामान्य Tabs साठी छाया रंग प्रविष्ट करा.",
+		"description": "सामान्य Tabs साठी छाया रंग सेट करण्यासाठी लेबल"
+	},
+	"set_tab_top_active_label": {
+		"message": "तुमच्या सक्रिय सामान्य Tabs साठी टॉप बारचा रंग प्रविष्ट करा.",
+		"description": "सक्रिय सामान्य Tabs साठी टॉप बार रंग सेट करण्यासाठी लेबल"
+	},
+	"set_toggle_preview": {
+		"message": "सक्रिय स्थिती टॉगल करण्यासाठी क्लिक करा.",
+		"description": "सक्रिय स्थिती टॉगल नियंत्रणासाठी टूलटिप"
+	},
+	"settings": {
+		"message": "सेटिंग्ज",
+		"description": "सेटिंग्ज मेन्यूसाठी लेबल"
 	},
 	"setup_page": {
 		"message": "Setup पृष्ठ",
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "Light थीममध्ये बदला",
 		"description": "[popup] थीम बदलण्यासाठी सूर्यावरचे शीर्षक"
+	},
+	"underline": {
+		"message": "खाली रेषा",
+		"description": "Tab मजकुराखाली रेषा आकर्षक शैली पर्याय"
+	},
+	"underline_wavy": {
+		"message": "लहरी खाली रेषा",
+		"description": "Tab मजकुराखाली लहरी रेषा लागू करण्यासाठी आकर्षक शैली पर्याय"
 	},
 	"upload": {
 		"message": "अपलोड करा",

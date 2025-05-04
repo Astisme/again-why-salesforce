@@ -3,6 +3,14 @@
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
 	},
+	"available": {
+		"message": "利用可能",
+		"description": "追加できる項目のセクション見出し"
+	},
+	"bold": {
+		"message": "太字",
+		"description": "太字テキスト用のフォントスタイルオプション"
+	},
 	"cancel": {
 		"message": "キャンセル",
 		"description": "現在の操作の実行を防ぐボタンのタイトルまたはtextContent"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "キャンセルして閉じる",
 		"description": "モーダルの閉じるボタンのタイトルまたはtextContent"
+	},
+	"chosen": {
+		"message": "選択済み",
+		"description": "選択された項目のセクション見出し"
 	},
 	"confirm_another_org": {
 		"message": "このリンクを開くことを確認してください。",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ この Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ 設定",
+		"description": "設定メニューのラベル"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab を更新する",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "インポート中にエラーが発生しました：\n",
 		"description": "[error] インポートプロセス中にエラーが発生しました"
+	},
+	"error_invalid_key": {
+		"message": "関数に渡されたキーパラメータが無効です",
+		"description": "[エラー] 開発者が無効なパラメータで関数を呼び出そうとしました"
 	},
 	"error_invalid_tab": {
 		"message": "無効な Tab",
@@ -219,6 +239,10 @@
 		"message": "お気に入りでない Tab は削除できません！",
 		"description": "[error] まだ保存されていない Tab を削除しようとしました"
 	},
+	"error_required_params": {
+		"message": "関数に必要なパラメータが渡されませんでした",
+		"description": "[エラー] 開発者が必要なパラメータなしで関数を呼び出そうとしました"
+	},
 	"error_sync_nothing": {
 		"message": "空の Tabs は同期できません！",
 		"description": "[error] 同期すべきものがありません。"
@@ -286,6 +310,10 @@
 		"message": "ファイル",
 		"description": "複数のファイル"
 	},
+	"general": {
+		"message": "一般",
+		"description": "一般設定カテゴリのラベル"
+	},
 	"import": {
 		"message": "インポートする",
 		"description": "[popup] インポートボタン"
@@ -322,9 +350,13 @@
 		"message": "有効な Org を入力してください！",
 		"description": "[error-open-other-org-modal] 間違った URL がモーダルに入力された場合のメッセージ"
 	},
-	"invalid_url": {
-		"message": "無効な URL",
-		"description": "[notSalesforceSetup] 無効な URL"
+	"italic": {
+		"message": "斜体",
+		"description": "斜体テキスト用のフォントスタイルオプション"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforceのカスタムナビゲーション技術"
 	},
 	"login_to_salesforce": {
 		"message": "Salesforce にログインする",
@@ -338,17 +370,65 @@
 		"message": "一致するアクションが見つかりませんでした",
 		"description": "[error] リクエストされたアクションが利用可能なものと一致しません"
 	},
-	"nss_detected": {
-		"message": " 検出されました。",
-		"description": "[notSalesforceSetup] 何かが検出されました。文頭にスペースを含めてください"
+	"nss_invalid_url": {
+		"message": "無効なURLが検出されました。",
+		"description": "[Salesforceセットアップ以外] 無効なURL"
 	},
-	"nss_prefix": {
-		"message": "これは ",
-		"description": "[notSalesforceSetup] ユーザーが Salesforce ページにいない場合に表示される接頭辞（最後にスペースを含める）"
+	"nss_not_setup_page": {
+		"message": "これはSalesforce Lightning Setupページではありません。",
+		"description": "[Salesforceセットアップ以外] ユーザーはSalesforceページにいません。"
+	},
+	"open_settings": {
+		"message": "拡張機能設定を開く",
+		"description": "[ポップアップ] 設定ページにリダイレクトするボタン"
 	},
 	"open_setup": {
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforceページ以外のページでポップアップをクリックしたときに、Salesforceログインページを自動的に開きます。",
+		"description": "[設定] ユーザーがランダムなWebサイトでポップアップを開いた場合"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforceページでポップアップをクリックしたときに、Salesforce設定ページを自動的に開きます。",
+		"description": "[設定] ユーザーがSalesforce Webサイトでポップアップを開いた場合"
+	},
+	"opt_en_fallback": {
+		"message": "en（フォールバック）",
+		"description": "ロケールがサポートされないか翻訳がない場合に英語に戻す言語オプション"
+	},
+	"opt_keep_tabs_left": {
+		"message": "お気に入りのTabsをホームとオブジェクトマネージャーの左に保持します。",
+		"description": "ナビゲーションバーの左側にお気に入りのTabsを固定するトグル"
+	},
+	"opt_link_new_browser": {
+		"message": "リンクを常に新しいブラウザタブで開きます。",
+		"description": "[設定] お気に入りのTabをクリックしたときに新しいタブで開く"
+	},
+	"opt_open_login_same_tab": {
+		"message": "ポップアップをクリックしたときに、Salesforceログインページを常に同じTabで開きます。",
+		"description": "[設定]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ポップアップをクリックしたときに、Salesforce設定ページを常に同じTabで開きます。",
+		"description": "[設定]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightningナビゲーションの使用を禁止します（使用中は読み込みが高速になります）。",
+		"description": "[設定] 機能の説明付きでLightningナビゲーションを許可しない"
+	},
+	"opt_same_tab_popup": {
+		"message": "ポップアップをクリックしたときに同じタブでページを開きます。",
+		"description": "[設定] 新しいブラウザタブの開放を防止"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language（デフォルト）",
+		"description": "Salesforceの言語設定を使用するオプション。拡張機能のデフォルトです。"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce IDの自動チェックをスキップします。",
+		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
 	},
 	"or_drop": {
 		"message": "またはドロップ",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning プラットフォーム"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforceログインページ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "任意のSalesforce設定ページ (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "保存",
+		"description": "変更を適用してメモリに保存します"
+	},
 	"save_tab": {
 		"message": "Tab として保存する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"set_gen_preview": {
+		"message": "Tab プレビュー",
+		"description": "汎用 Tab の外観をプレビューするラベル"
+	},
+	"set_gen_styler": {
+		"message": "Tab スタイラー",
+		"description": "汎用 Tab のスタイルを設定するラベル"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "全体的な設定オプションのセクション見出し"
+	},
+	"set_move_available": {
+		"message": "利用可能に移動",
+		"description": "選択した項目を「利用可能」に戻すボタンのタイトル"
+	},
+	"set_move_chosen": {
+		"message": "選択済みに移動",
+		"description": "選択した項目を「選択済み」に移動するボタンのタイトル"
+	},
+	"set_org_preview": {
+		"message": "Org プレビュー",
+		"description": "組織固有の Tab の外観をプレビューするラベル"
+	},
+	"set_org_styler": {
+		"message": "Org スタイラー",
+		"description": "組織固有の Tab のスタイルを設定するラベル"
+	},
+	"set_tab_background_active_label": {
+		"message": "アクティブな一般Tabsの背景色を入力します。",
+		"description": "アクティブな一般Tabsの背景色を設定するラベル"
+	},
+	"set_tab_background_label": {
+		"message": "組織Tabsの背景色を入力します。",
+		"description": "組織専用Tabsの背景色を設定するラベル"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "アクティブな組織Tabsのボーダーカラーを入力します。",
+		"description": "アクティブな組織専用Tabsのボーダーカラーを設定するラベル"
+	},
+	"set_tab_border_color_label": {
+		"message": "一般Tabsのボーダーカラーを入力します。",
+		"description": "一般Tabsのボーダーカラーを設定するラベル"
+	},
+	"set_tab_color_active_label": {
+		"message": "アクティブな一般Tabsのテキスト色を入力します。",
+		"description": "アクティブな一般Tabsのテキスト色を設定するラベル"
+	},
+	"set_tab_color_label": {
+		"message": "組織Tabsのテキスト色を入力します。",
+		"description": "組織専用Tabsのテキスト色を設定するラベル"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "アクティブな組織Tabsの装飾スタイルを1つ以上選択します。",
+		"description": "アクティブな組織専用Tabsの装飾スタイルを選択するプロンプト"
+	},
+	"set_tab_decoration_label": {
+		"message": "一般Tabsの装飾スタイルを1つ以上選択します。",
+		"description": "一般Tabsの装飾スタイルを選択するプロンプト"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "アクティブな一般Tabsのホバーバックグラウンド色を入力します。",
+		"description": "アクティブな一般Tabsのホバーバックグラウンド色を設定するラベル"
+	},
+	"set_tab_hover_background_label": {
+		"message": "組織Tabsのホバーバックグラウンド色を入力します。",
+		"description": "組織専用Tabsのホバーバックグラウンド色を設定するラベル"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "アクティブな組織Tabsのシャドウカラーを入力します。",
+		"description": "アクティブな組織専用Tabsのシャドウカラーを設定するラベル"
+	},
+	"set_tab_shadow_label": {
+		"message": "一般Tabsのシャドウカラーを入力します。",
+		"description": "一般Tabsのシャドウカラーを設定するラベル"
+	},
+	"set_tab_top_active_label": {
+		"message": "アクティブな一般Tabsの上部バーの色を入力します。",
+		"description": "アクティブな一般Tabsの上部バーの色を設定するラベル"
+	},
+	"set_toggle_preview": {
+		"message": "クリックしてアクティブ状態を切り替えます。",
+		"description": "アクティブ状態切り替えコントロールのツールチップテキスト"
+	},
+	"settings": {
+		"message": "設定",
+		"description": "設定メニューのラベル"
 	},
 	"setup_page": {
 		"message": "Setup ページ",
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "ライトテーマに変更する",
 		"description": "[popup] テーマ変更用に太陽の上にあるタイトル"
+	},
+	"underline": {
+		"message": "下線",
+		"description": "Tabテキストに下線を引く装飾スタイルオプション"
+	},
+	"underline_wavy": {
+		"message": "波線下線",
+		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
 	},
 	"upload": {
 		"message": "アップロード",

@@ -276,7 +276,7 @@ export default class Tab {
 		try {
 			Tab.create(tab);
 			return true;
-		} catch (error) {
+		} catch (_) {
 			// error on creation of tab
 			return false;
 		}
@@ -329,17 +329,21 @@ export default class Tab {
 	 * @param {*} tab.org - the new org for the Tab
 	 * @returns {Tab} The updated Tab
 	 */
-    update({label, url, org} = {}){
-        if(label == null && url == null && org == null)
-            return this;
-		if(label != null)
+	update({ label, url, org } = {}) {
+		if (label == null && url == null && org == null) {
+			return this;
+		}
+		if (label != null) {
 			this.label = label;
-		if(url != null)
+		}
+		if (url != null) {
 			this.url = Tab.minifyURL(url);
-		if(org != null)
+		}
+		if (org != null) {
 			this.org = org !== "" ? Tab.extractOrgName(org) : undefined;
-        return this;
-    }
+		}
+		return this;
+	}
 
 	/**
 	 * Update a Tab based on the options passed.
@@ -350,17 +354,19 @@ export default class Tab {
 	 * @param {*} param1.org - the new org for the Tab
 	 * @returns {Tab} A new Tab with the updated values
 	 */
-    static update(tabToUpdate, {label, url, org} = {}){
-        if(tabToUpdate == null || !Tab.isValid(tabToUpdate))
-            throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
-        if(label == null && url == null && org == null)
-            return tabToUpdate;
-        return Tab.create(
-            label ?? tabToUpdate.label,
-            url ?? tabToUpdate.url,
-            org != null ? (org !== "" ? org : undefined) : tabToUpdate.org
-        );
-    }
+	static update(tabToUpdate, { label, url, org } = {}) {
+		if (tabToUpdate == null || !Tab.isValid(tabToUpdate)) {
+			throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
+		}
+		if (label == null && url == null && org == null) {
+			return tabToUpdate;
+		}
+		return Tab.create(
+			label ?? tabToUpdate.label,
+			url ?? tabToUpdate.url,
+			org != null ? (org !== "" ? org : undefined) : tabToUpdate.org,
+		);
+	}
 
 	/**
 	 * Returns a string representation of the `Tab` instance as its hash code.

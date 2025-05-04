@@ -3,6 +3,14 @@
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
 	},
+	"available": {
+		"message": "Tersedia",
+		"description": "Judul bagian untuk item yang dapat ditambahkan"
+	},
+	"bold": {
+		"message": "Tebal",
+		"description": "Opsi gaya font untuk teks tebal"
+	},
 	"cancel": {
 		"message": "Batal",
 		"description": "judul atau textContent untuk tombol yang mencegah tindakan saat ini dieksekusi"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "Batal dan tutup",
 		"description": "judul atau textContent untuk tombol tutup modal"
+	},
+	"chosen": {
+		"message": "Terpilih",
+		"description": "Judul bagian untuk item yang telah dipilih"
 	},
 	"confirm_another_org": {
 		"message": "Konfirmasi pembukaan link ini.",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ Hapus Tab ini",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ Pengaturan",
+		"description": "Label untuk menu pengaturan"
+	},
 	"cxm_update": {
 		"message": "✏️ Perbarui Tab",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "Kesalahan saat impor:\n",
 		"description": "[error] Terjadi kesalahan selama proses impor."
+	},
+	"error_invalid_key": {
+		"message": "Parameter kunci yang dilewatkan ke fungsi tidak valid",
+		"description": "[kesalahan] pengembang mencoba memanggil fungsi dengan parameter yang tidak valid"
 	},
 	"error_invalid_tab": {
 		"message": "Tab tidak valid",
@@ -219,6 +239,10 @@
 		"message": "Tidak dapat menghapus Tab yang bukan favorit!",
 		"description": "[error] Pengguna mencoba menghapus Tab yang belum disimpan sebagai favorit."
 	},
+	"error_required_params": {
+		"message": "Parameter yang diperlukan untuk fungsi tidak dilewatkan",
+		"description": "[kesalahan] pengembang mencoba memanggil fungsi tanpa parameter yang diperlukan"
+	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyinkronkan Tabs kosong!",
 		"description": "[error] Mencoba menyinkronkan sesuatu yang kosong."
@@ -286,6 +310,10 @@
 		"message": "file",
 		"description": "beberapa file"
 	},
+	"general": {
+		"message": "Umum",
+		"description": "Label untuk kategori pengaturan umum"
+	},
 	"import": {
 		"message": "Impor",
 		"description": "[popup] Tombol impor"
@@ -322,9 +350,13 @@
 		"message": "Masukkan Org yang valid, tolong!",
 		"description": "[error-open-other-org-modal] Pesan ketika URL yang salah dimasukkan dalam modal"
 	},
-	"invalid_url": {
-		"message": "URL tidak valid",
-		"description": "[notSalesforceSetup] URL yang tidak valid"
+	"italic": {
+		"message": "Miring",
+		"description": "Opsi gaya font untuk teks miring"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Teknologi navigasi kustom Salesforce"
 	},
 	"login_to_salesforce": {
 		"message": "Login ke Salesforce",
@@ -338,17 +370,65 @@
 		"message": "Tidak ada aksi yang cocok",
 		"description": "[error] Di Salesforce, aksi yang diminta tidak cocok dengan aksi yang tersedia."
 	},
-	"nss_detected": {
-		"message": " terdeteksi.",
-		"description": "[notSalesforceSetup] Sesuatu terdeteksi; pastikan untuk menyertakan spasi di awal pesan"
+	"nss_invalid_url": {
+		"message": "URL tidak valid terdeteksi.",
+		"description": "[bukanSetupSalesforce] URL yang tidak valid"
 	},
-	"nss_prefix": {
-		"message": "Ini bukan ",
-		"description": "[notSalesforceSetup] Prefiks yang ditampilkan saat pengguna tidak berada di halaman Salesforce; sertakan spasi di akhir"
+	"nss_not_setup_page": {
+		"message": "Ini bukan halaman Pengaturan Salesforce Lightning.",
+		"description": "[bukanSetupSalesforce] pengguna tidak berada di halaman Salesforce."
+	},
+	"open_settings": {
+		"message": "Buka Pengaturan Ekstensi",
+		"description": "[popup] tombol untuk mengarahkan ke halaman pengaturan"
 	},
 	"open_setup": {
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
+	},
+	"opt_automatic_open_login": {
+		"message": "Buka otomatis halaman Login Salesforce saat mengklik popup saat tidak berada di halaman Salesforce.",
+		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web acak"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Buka otomatis halaman Pengaturan Salesforce saat mengklik popup saat berada di halaman Salesforce.",
+		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web Salesforce"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "Opsi bahasa untuk kembali ke bahasa Inggris jika lokal tidak didukung atau tidak menampilkan terjemahan"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Pertahankan Tabs favorit di kiri Beranda dan Manajer Objek.",
+		"description": "Toggle untuk menyematkan Tabs favorit di sisi kiri bilah navigasi"
+	},
+	"opt_link_new_browser": {
+		"message": "Selalu buka tautan di tab baru browser.",
+		"description": "[pengaturan] ketika pengguna mengklik Tab favorit, buka di tab baru browser"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Selalu buka halaman Login Salesforce di Tab yang sama saat mengklik popup.",
+		"description": "[pengaturan]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Selalu buka halaman Pengaturan Salesforce di Tab yang sama saat mengklik popup.",
+		"description": "[pengaturan]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat saat digunakan).",
+		"description": "[pengaturan] jangan izinkan Navigasi Lightning dengan penjelasan fitur"
+	},
+	"opt_same_tab_popup": {
+		"message": "halaman di tab yang sama saat mengklik popup.",
+		"description": "[pengaturan] mencegah pembukaan tab baru browser"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (Default)",
+		"description": "Opsi untuk menggunakan pengaturan bahasa Salesforce. Opsi ini adalah default untuk ekstensi."
+	},
+	"opt_skip_link_detection": {
+		"message": "Lewati pemeriksaan otomatis ID Salesforce.",
+		"description": "[pengaturan] saat menandai Tab sebagai favorit, mencegah memeriksa apakah ada ID dalam tautan"
 	},
 	"or_drop": {
 		"message": "Atau jatuhkan",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Platform Salesforce Lightning"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "halaman login Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "setiap halaman pengaturan Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Simpan",
+		"description": "Terapkan perubahan dan simpan di memori"
+	},
 	"save_tab": {
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"set_gen_preview": {
+		"message": "Pratinjau Tab",
+		"description": "Label untuk melihat pratinjau tampilan Tab umum"
+	},
+	"set_gen_styler": {
+		"message": "Pengatur Gaya Tab",
+		"description": "Label untuk mengonfigurasi gaya Tab umum"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Judul bagian untuk opsi konfigurasi umum"
+	},
+	"set_move_available": {
+		"message": "Pindah ke Tersedia",
+		"description": "Judul tombol untuk memindahkan item terpilih kembali ke Tersedia"
+	},
+	"set_move_chosen": {
+		"message": "Pindah ke Terpilih",
+		"description": "Judul tombol untuk memindahkan item terpilih ke Terpilih"
+	},
+	"set_org_preview": {
+		"message": "Pratinjau Org",
+		"description": "Label untuk melihat pratinjau tampilan Tab khusus Org"
+	},
+	"set_org_styler": {
+		"message": "Pengatur Gaya Org",
+		"description": "Label untuk mengonfigurasi gaya Tab khusus Org"
+	},
+	"set_tab_background_active_label": {
+		"message": "Masukkan warna latar untuk Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna latar Tabs generik aktif"
+	},
+	"set_tab_background_label": {
+		"message": "Masukkan warna latar untuk Tabs organisasi Anda.",
+		"description": "Label untuk mengatur warna latar Tabs khusus organisasi"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Masukkan warna batas untuk Tabs organisasi aktif Anda.",
+		"description": "Label untuk mengatur warna batas Tabs organisasi aktif"
+	},
+	"set_tab_border_color_label": {
+		"message": "Masukkan warna batas untuk Tabs generik Anda.",
+		"description": "Label untuk mengatur warna batas Tabs generik"
+	},
+	"set_tab_color_active_label": {
+		"message": "Masukkan warna teks untuk Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna teks Tabs generik aktif"
+	},
+	"set_tab_color_label": {
+		"message": "Masukkan warna teks untuk Tabs organisasi Anda.",
+		"description": "Label untuk mengatur warna teks Tabs khusus organisasi"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Pilih satu atau lebih gaya dekorasi untuk Tabs organisasi aktif Anda.",
+		"description": "Prompt untuk memilih gaya dekorasi untuk Tabs organisasi aktif"
+	},
+	"set_tab_decoration_label": {
+		"message": "Pilih satu atau lebih gaya dekorasi untuk Tabs generik Anda.",
+		"description": "Prompt untuk memilih gaya dekorasi untuk Tabs generik"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Masukkan warna latar saat hover untuk Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna latar saat hover Tabs generik aktif"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Masukkan warna latar saat hover untuk Tabs organisasi Anda.",
+		"description": "Label untuk mengatur warna latar saat hover Tabs khusus organisasi"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Masukkan warna bayangan untuk Tabs organisasi aktif Anda.",
+		"description": "Label untuk mengatur warna bayangan Tabs organisasi aktif"
+	},
+	"set_tab_shadow_label": {
+		"message": "Masukkan warna bayangan untuk Tabs generik Anda.",
+		"description": "Label untuk mengatur warna bayangan Tabs generik"
+	},
+	"set_tab_top_active_label": {
+		"message": "Masukkan warna untuk bilah atas Tabs generik aktif Anda.",
+		"description": "Label untuk mengatur warna bilah atas Tabs generik aktif"
+	},
+	"set_toggle_preview": {
+		"message": "Klik untuk mengalihkan status aktif.",
+		"description": "Teks tooltip untuk kontrol pengalihan status aktif"
+	},
+	"settings": {
+		"message": "Pengaturan",
+		"description": "Label untuk menu pengaturan"
 	},
 	"setup_page": {
 		"message": "Halaman Setup",
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "Ubah Tema ke Terang",
 		"description": "[popup] Judul di matahari untuk mengganti tema"
+	},
+	"underline": {
+		"message": "Garis bawah",
+		"description": "Opsi gaya dekorasi untuk menggarisbawahi teks Tab"
+	},
+	"underline_wavy": {
+		"message": "Garis bawah bergelombang",
+		"description": "Opsi gaya dekorasi untuk menerapkan garis bawah bergelombang pada teks Tab"
 	},
 	"upload": {
 		"message": "Unggah",

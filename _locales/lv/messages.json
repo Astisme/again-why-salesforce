@@ -1,498 +1,686 @@
 {
-  "allow": {
-    "message": "Atļaut",
-    "description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"
-  },
-  "cancel": {
-    "message": "Atcelt",
-    "description": "virsraksts vai textContent pogām, kas novērš pašreizējās darbības izpildi"
-  },
-  "cancel_close": {
-    "message": "Atcelt un aizvērt",
-    "description": "virsraksts vai textContent modālo logu aizvēršanas pogai"
-  },
-  "confirm_another_org": {
-    "message": "Apstipriniet šīs saites atvēršanu.",
-    "description": "[atvērt_citu_org_modal] lūgt lietotāja apstiprinājumu, lai atvērtu izveidoto saiti."
-  },
-  "continue": {
-    "message": "Turpināt",
-    "description": "textContent pogām, kas atļauj izpildīt pašreizējo darbību"
-  },
-  "cxm_empty_no_org_tabs": {
-    "message": "👀 Visas redzamās Tabs",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_empty_tabs": {
-    "message": "😨 Atiestatīt uz noklusējumu",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_export_tabs": {
-    "message": "⬇️ Eksportēt Tabs",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_import_tabs": {
-    "message": "🆙 Importēt Tabs",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_move": {
-    "message": "🧭 Pārvietot Tab",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_move_first": {
-    "message": "↩️ Padarīt par pirmo",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_move_last": {
-    "message": "↪️ Padarīt par pēdējo",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_move_left": {
-    "message": "👈 Pārvietot pa kreisi",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_move_right": {
-    "message": "👉 Pārvietot pa labi",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_open_other_org": {
-    "message": "🔗 Atvērt citā Org",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_page_remove_tab": {
-    "message": "👋 Noņemt Tab",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_page_save_tab": {
-    "message": "💾 Saglabāt kā Tab",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_remove": {
-    "message": "💥 Noņemt Tab(s)",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_remove_left_tabs": {
-    "message": "🔥 Tabs pa kreisi",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_remove_other_tabs": {
-    "message": "↔️ Citas Tabs",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_remove_right_tabs": {
-    "message": "🌊 Tabs pa labi",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_remove_tab": {
-    "message": "1️⃣ Šis Tab",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_update": {
-    "message": "✏️ Atjaunināt Tab",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_update_org": {
-    "message": "📌 Pārslēgt Org",
-    "description": "[konteksta_izvēlne]"
-  },
-  "cxm_update_tab": {
-    "message": "🧹 Citi atjauninājumi",
-    "description": "[konteksta_izvēlne]"
-  },
-  "delete": {
-    "message": "Dzēst",
-    "description": "[uznirstošais_logs] dzēst rindu"
-  },
-  "delete_all": {
-    "message": "Dzēst visas Tabs",
-    "description": "[uznirstošais_logs] virsraksts uz miskastes, lai iztukšotu visas Tabs"
-  },
-  "error_close_other_modal": {
-    "message": "Lūdzu, vispirms aizveriet otru modālo logu!",
-    "description": "[paziņojums] Lietotājs mēģināja atvērt vairāk nekā 1 modālo logu"
-  },
-  "error_cxm_check": {
-    "message": "Kļūda, pārbaudot izvēlnes vienumus",
-    "description": "[kļūda] nevarēja atrast konteksta izvēlnes vienumus"
-  },
-  "error_cxm_create": {
-    "message": "Kļūda, veidojot izvēlnes vienumus",
-    "description": "[kļūda] nevarēja inicializēt konteksta izvēlnes vienumus"
-  },
-  "error_cxm_remove": {
-    "message": "Kļūda, noņemot izvēlnes vienumus",
-    "description": "[kļūda] nevarēja noņemt konteksta izvēlnes vienumus"
-  },
-  "error_duplicate_tab": {
-    "message": "Šis Tab jau pastāv",
-    "description": "[kļūda] Tab dublējas"
-  },
-  "error_expand_url": {
-    "message": "Nevar izvērst tukšu URL!",
-    "description": "[kļūda] URL, kas jāizvērš, netika nodots"
-  },
-  "error_expand_url_no_base": {
-    "message": "Nevar izvērst URL bez tā resursdatora!",
-    "description": "[kļūda] bāzes URL, kas tika izmantots izvēršanai, netika nodots"
-  },
-  "error_extract_empty_url": {
-    "message": "Nevar iegūt Org nosaukumu no tukša URL!",
-    "description": "[kļūda] URL, no kura jāiegūst Org nosaukums, netika nodots"
-  },
-  "error_get_with_no_org": {
-    "message": "Nevar iegūt Tabs, ja nav norādīta Org.",
-    "description": "[kļūda] mēģināja meklēt Tabs pēc Org, nesūtot Org informāciju"
-  },
-  "error_import": {
-    "message": "Kļūda importēšanas laikā:\n",
-    "description": "[kļūda] importēšanas procesa laikā radās kļūda"
-  },
-  "error_invalid_tab": {
-    "message": "Nederīgs Tab",
-    "description": "[kļūda] Tab nav derīgs"
-  },
-  "error_link_with_id": {
-    "message": "Šī lapa nevar pastāvēt citā Org, jo tā satur ID!",
-    "description": "[atvērt_citu_org_modal] brīdinājums lietotājam, ka saite var nepastāvēt citā Org"
-  },
-  "error_many_matching_tab": {
-    "message": "Atrasts vairāk nekā 1 atbilstošs Tab.",
-    "description": "[kļūda] tika iegūti daudzi Tabs"
-  },
-  "error_minify_url": {
-    "message": "Nevar samazināt tukšu URL!",
-    "description": "[kļūda] URL, kas jāsamazina, netika nodots"
-  },
-  "error_missing_favourite_id": {
-    "message": "Nevar iegūt iecienītāko attēlu bez ID",
-    "description": "[kļūda] iecienītākā ID netika nodots"
-  },
-  "error_missing_key": {
-    "message": "Atslēga nekur nav atrasta",
-    "description": "[kļūda] failos nav atrasts tulkojums"
-  },
-  "error_no_array": {
-    "message": "Nederīgs masīvs vai masīvs netika nodots",
-    "description": "[kļūda] netika saņemts derīgs masīvs"
-  },
-  "error_no_browser_tab": {
-    "message": "Nevarēja atrast pašreizējo pārlūkprogrammas cilni.",
-    "description": "[kļūda] fona lapa nevarēja izveidot aktīvu pārlūkprogrammas cilni"
-  },
-  "error_no_callback": {
-    "message": "Lūdzu, norādiet atzvanīšanas funkciju (callback)",
-    "description": "[kļūda] funkcija, kas jāizsauc metodes beigās, netika nodota"
-  },
-  "error_no_cookies": {
-    "message": "Neatrada atbilstošus sīkfailus",
-    "description": "[kļūda] Salesforce sīkfaili netika atgriezti"
-  },
-  "error_no_data": {
-    "message": "Nevar identificēt Tab bez datiem.",
-    "description": "[kļūda] mēģināja iegūt Tab, nesūtot datus"
-  },
-  "error_no_headers": {
-    "message": "Neizdevās atrast galvenes.",
-    "description": "[kļūda] Paplašinājums nevarēja atrast, kur ievietot iecienītāko pogu"
-  },
-  "error_no_matching_tab": {
-    "message": "Neatrada nevienu atbilstošu Tab.",
-    "description": "[kļūda] netika iegūti nekādi Tabs"
-  },
-  "error_no_message": {
-    "message": "Nav norādīts ziņojums sūtīšanai.",
-    "description": "[kļūda] nav atrasts ziņojums sūtīšanai uz citām koda daļām"
-  },
-  "error_no_object": {
-    "message": "Nav objekta pārbaudei!",
-    "description": "[kļūda] objekts netika nodots"
-  },
-  "error_no_setup_tab": {
-    "message": "Neizdevās atrast Iestatīšanas (Setup) cilni.",
-    "description": "[kļūda] Paplašinājums nevarēja atrast, kur ievietot iecienītākos Tabs."
-  },
-  "error_no_url": {
-    "message": "Nav URL pārbaudei!",
-    "description": "[kļūda] URL pārbaudei netika nodots"
-  },
-  "error_remove_not_favourite": {
-    "message": "Nevar noņemt Tab, kas nav iecienītākais!",
-    "description": "[kļūda] lietotājs mēģināja noņemt Tab, kas vēl nebija saglabāts"
-  },
-  "error_sync_nothing": {
-    "message": "Nevar sinhronizēt null Tabs!",
-    "description": "[kļūda] mēģināja sinhronizēt neko"
-  },
-  "error_tab_label": {
-    "message": "Etiķetei jābūt netukšai virknei",
-    "description": "[kļūda] lietotājs mēģināja izveidot Tab bez etiķetes"
-  },
-  "error_tab_not_found": {
-    "message": "Tab netika atrasts.",
-    "description": "[kļūda] Tab nebija iekļauts masīvā"
-  },
-  "error_tab_object_creation": {
-    "message": "Zvanot ar objektu, nenododiet neko citu.",
-    "description": "[kļūda] izstrādātāja implementācijas kļūda"
-  },
-  "error_tab_org": {
-    "message": "Org jābūt virknei vai nedefinētai (undefined)",
-    "description": "[kļūda] lietotājs mēģināja izveidot Tab ar nederīgu Org vērtību"
-  },
-  "error_tab_unexpected_keys": {
-    "message": "Atrastas negaidītas atslēgas:",
-    "description": "[kļūda] lietotājs mēģināja izveidot Tab ar dažām neatbalstītām īpašībām"
-  },
-  "error_tab_url": {
-    "message": "URL jābūt netukšai virknei",
-    "description": "[kļūda] lietotājs mēģināja izveidot Tab bez URL"
-  },
-  "error_tabcont_initialize": {
-    "message": "Nevar inicializēt ar",
-    "description": "[kļūda] Tab konteinera inicializācija neizdevās"
-  },
-  "error_tabcont_invalid_tabs": {
-    "message": "Konstatēts(-i) nederīgs(-i) Tab(s).\nPirmā sastopamība:",
-    "description": "[kļūda] tika nodoti nederīgi Tabs"
-  },
-  "error_useless_remove": {
-    "message": "Nevar noņemt:\nNevar noņemt lapu, kas iepriekš nav saglabāta",
-    "description": "[kļūda] lietotājs mēģināja noņemt lapu, kas vēl nebija saglabāta"
-  },
-  "error_useless_save": {
-    "message": "Nevar saglabāt:\nŠī lapa jau ir saglabāta!",
-    "description": "[kļūda] lietotājs mēģināja saglabāt lapu, kas jau bija saglabāta"
-  },
-  "export": {
-    "message": "Eksportēt",
-    "description": "[uznirstošais_logs] eksportēšanas poga"
-  },
-  "export_title": {
-    "message": "Eksportēt visas Tabs",
-    "description": "[uznirstošais_logs] virsraksts uz eksportēšanas pogas"
-  },
-  "extension_description": {
-    "message": "Izveidojiet un pārvaldiet pielāgotas Tabs pieejamajā vietā Salesforce Lightning iestatīšanas lapā.",
-    "description": "[manifests] Šī paplašinājuma apraksts"
-  },
-  "extension_label": {
-    "message": "Again, Why Salesforce",
-    "description": "Šī paplašinājuma nosaukums"
-  },
-  "file": {
-    "message": "fails",
-    "description": "viens fails"
-  },
-  "files": {
-    "message": "faili",
-    "description": "vairāki faili"
-  },
-  "import": {
-    "message": "Importēt",
-    "description": "[uznirstošais_logs] importēšanas poga"
-  },
-  "import_duplicate_description": {
-    "message": "Dublējošie Tabs tiks ignorēti.<br />Divi Tabs tiek uzskatīti par dublējošiem, ja tiem ir vienāds URL.",
-    "description": "[importēt] apraksts par to, ko dara importēšanas process"
-  },
-  "import_invalid_file": {
-    "message": "Nederīgs faila tips.\nTiek atbalstīti tikai JSON faili.",
-    "description": "[kļūda] importēšanai izmantotais fails nav JSON"
-  },
-  "import_successful": {
-    "message": "Veiksmīgi importēts",
-    "description": "[importēt] importēšana pabeigta. Pēc tam tiks parādīts, cik ierakstu ir importēti"
-  },
-  "import_tabs": {
-    "message": "Importēt Tabs",
-    "description": "[modal_virsraksts] importēšanas procesam"
-  },
-  "import_title": {
-    "message": "Importēt Tabs no json faila",
-    "description": "[uznirstošais_logs] virsraksts uz importēšanas pogas"
-  },
-  "insert_another": {
-    "message": "Ievietot citu",
-    "description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto to pašu Org"
-  },
-  "insert_another_org": {
-    "message": "Ievietotā Org ir pašreizējā!\nLūdzu, ievietojiet citu Org.",
-    "description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto to pašu Org"
-  },
-  "insert_valid_org": {
-    "message": "Lūdzu, ievietojiet derīgu Org!",
-    "description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto nepareizu URL"
-  },
-  "invalid_url": {
-    "message": "Nederīgs URL",
-    "description": "[navSalesforceIestatīšana] URL, kas nav derīgs"
-  },
-  "login_to_salesforce": {
-    "message": "Pieteikties Salesforce",
-    "description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce pieteikšanās lapu"
-  },
-  "mycustomorg": {
-    "message": "manapielagotaorg",
-    "description": "aizvietotājs Atjaunināt Tab modālajam logam"
-  },
-  "no_match": {
-    "message": "Neatbilda nevienai darbībai",
-    "description": "[kļūda] Salesforce, kad pārslēgs nevar saskaņot pieprasīto darbību"
-  },
-  "nss_detected": {
-    "message": " konstatēts.",
-    "description": "[navSalesforceIestatīšana] kaut kas, kas ir atrasts. Lūdzu, pārliecinieties, ka ziņojuma sākumā ir iekļauta atstarpe."
-  },
-  "nss_prefix": {
-    "message": "Šī nav ",
-    "description": "[navSalesforceIestatīšana] šis ir prefikss, kas tiek rādīts, kad lietotājs nav Salesforce lapā. Lūdzu, pārliecinieties, ka ziņojuma beigās ir iekļauta atstarpe"
-  },
-  "open_setup": {
-    "message": "Atvērt iestatīšanu",
-    "description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
-  },
-  "or_drop": {
-    "message": "Vai nomest",
-    "description": "[importēt] ļaujiet lietotājam pārvietot failus ar peli un atlaist tos"
-  },
-  "org_link": {
-    "message": "Org saite",
-    "description": "[ievades_etiķete]"
-  },
-  "other_org_info": {
-    "message": "Citas Org informācija",
-    "description": "[modal_virsraksts]"
-  },
-  "other_org_placeholder": {
-    "message": "cita-org",
-    "description": "[ievades_aizvietotājs]"
-  },
-  "overwrite_tabs": {
-    "message": "Pārrakstīt saglabātos Tabs.",
-    "description": "[etiķete] dzēst visus saglabātos Tabs importēšanas procesa laikā"
-  },
-  "preserve_org_tabs": {
-    "message": "Saglabāt Tabs citām Org.",
-    "description": "[etiķete] saglabāt visus Org specifiskos Tabs importēšanas procesa laikā"
-  },
-  "remove_tab": {
-    "message": "Noņemt Tab",
-    "description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
-  },
-  "req_permissions_dont_ask": {
-    "message": "Vairs nejautāt.",
-    "description": "[pieprasīt_atļauju] etiķete, kad lietotājs nevēlas neatgriezeniski atļaut atļaujas"
-  },
-  "req_permissions_header": {
-    "message": "Lūdzu, atļaujiet mums automātiski piekļūt<br />Salesforce iestatīšanas lapām.",
-    "description": "[pieprasīt_atļauju] lapas galvene atļauju pieprasīšanai"
-  },
-  "req_permissions_paragraph": {
-    "message": "Ja vēlaties, varat likt saviem iecienītākajiem Tabs parādīties,<br />tiklīdz pārejat uz Salesforce iestatīšanas lapu,<br />bez nepieciešamības katru reizi noklikšķināt uz šī paplašinājuma.",
-    "description": "[pieprasīt_atļauju] teksts, kas izskaidro, kāpēc tiek pieprasītas atļaujas"
-  },
-  "required": {
-    "message": "obligāts",
-    "description": "[ievade] atzīmē ievades lauku kā obligātu"
-  },
-  "required_info": {
-    "message": "= Obligātā informācija",
-    "description": "[modal] informē lietotāju, ka daļa informācijas ir obligāta"
-  },
-  "salesforce_lightning": {
-    "message": "Salesforce Lightning",
-    "description": "[navSalesforceIestatīšana] Salesforce Lightning platforma"
-  },
-  "save_tab": {
-    "message": "Saglabāt kā Tab",
-    "description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
-  },
-  "setup_page": {
-    "message": "Iestatīšanas lapa",
-    "description": "[navSalesforceIestatīšana] lapa, ko izmanto Salesforce iestatījumu modificēšanai"
-  },
-  "skip": {
-    "message": "Izlaist",
-    "description": "[pieprasīt_atļauju] poga NEatļaut atļaujas"
-  },
-  "successfully_imported": {
-    "message": "Veiksmīgi importēts",
-    "description": "[paziņojums] lietotājs pievienoja Tabs no ārēja faila"
-  },
-  "tab_explain": {
-    "message": "Katram elementam jābūt 'label' un 'url' kā virknēm. Papildus katram elementam var būt 'org' kā virkne.",
-    "description": "[kļūda] izskaidro, kā jābūt konstruētam Tab"
-  },
-  "tab_information": {
-    "message": "Tab informācija",
-    "description": "virsraksts atjaunināšanas Tab modālajam logam"
-  },
-  "tab_label": {
-    "message": "Tab etiķete",
-    "description": "Tab etiķetes (Label) īpašība, tās nosaukums"
-  },
-  "tab_org": {
-    "message": "Tab Org",
-    "description": "Tab Org īpašība, ja tā ir paredzēta vienai Salesforce organizācijai"
-  },
-  "tab_url": {
-    "message": "Tab URL",
-    "description": "Tab URL īpašība, uz kurieni tā norāda"
-  },
-  "table_delete": {
-    "message": "Dzēst Tab",
-    "description": "[uznirstošais_logs] palīdzības teksts kolonnai ar dzēšanas pogu"
-  },
-  "table_org": {
-    "message": "Ir Org Tab",
-    "description": "[uznirstošais_logs] palīdzības teksts kolonnai ar Org izvēles rūtiņu"
-  },
-  "table_row_label": {
-    "message": "Ievadiet etiķeti šim URL",
-    "description": "[uznirstošais_logs] ievades lauks ar Tab nosaukumu"
-  },
-  "table_row_org": {
-    "message": "Noklikšķiniet, ja vēlaties, lai šis Tab būtu pieejams tikai šai Org.",
-    "description": "[uznirstošais_logs] izvēles rūtiņa, lai pārslēgtu Tab uz Org specifisku"
-  },
-  "table_row_org_name": {
-    "message": "Org, kurai šis Tab ir pieejams.",
-    "description": "[uznirstošais_logs] ievades lauks ar Org nosaukumu"
-  },
-  "table_row_url": {
-    "message": "Ievadiet apakš_URL, uz kuru vēlaties tikt pāradresēts.",
-    "description": "[uznirstošais_logs] ievades lauks ar Tab URL"
-  },
-  "tabs": {
-    "message": "Tabs",
-    "description": "lietotāja iecienītākās saites"
-  },
-  "tabs_saved": {
-    "message": "Tabs saglabāti.",
-    "description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
-  },
-  "theme_dark": {
-    "message": "Mainīt motīvu uz tumšu",
-    "description": "[uznirstošais_logs] virsraksts uz mēness, lai pārslēgtu motīvu"
-  },
-  "theme_light": {
-    "message": "Mainīt motīvu uz gaišu",
-    "description": "[uznirstošais_logs] virsraksts uz saules, lai pārslēgtu motīvu"
-  },
-  "upload": {
-    "message": "Augšupielādēt",
-    "description": "[importēt] ļaujiet lietotājam pārlūkot savus failus un izvēlēties pareizo"
-  },
-  "users": {
-    "message": "Lietotāji",
-    "description": "Lapas nosaukums, kas saistīts ar ManageUsers/home"
-  },
-  "warn_deprecated_tab_title": {
-    "message": "Jūs importējāt, izmantojot novecojušo 'tabTitle'!\nAtjauninātā faila lejupielāde ir sākusies.\nTurpmāk, lūdzu, izmantojiet jauniegūto failu.\nŠāda faila lietošana tiks pārtraukta vēlākā laidienā.",
-    "description": "[brīdinājums] Paskaidrojiet lietotājam, ka viņu importētais fails izmanto novecojušu īpašību"
-  },
-  "where_to": {
-    "message": "Uz kurieni?",
-    "description": "[atvērt_citu_org_modal] rezerves virsraksts modālajam logam"
-  }
+	"allow": {
+		"message": "Atļaut",
+		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"
+	},
+	"available": {
+		"message": "Pieejams",
+		"description": "Sadaļas virsraksts vienumiem, kurus var pievienot"
+	},
+	"bold": {
+		"message": "Treknraksts",
+		"description": "Fonta stila opcija treknraksta tekstam"
+	},
+	"cancel": {
+		"message": "Atcelt",
+		"description": "virsraksts vai textContent pogām, kas novērš pašreizējās darbības izpildi"
+	},
+	"cancel_close": {
+		"message": "Atcelt un aizvērt",
+		"description": "virsraksts vai textContent modālo logu aizvēršanas pogai"
+	},
+	"chosen": {
+		"message": "Izvēlēts",
+		"description": "Sadaļas virsraksts vienumiem, kas ir atlasīti"
+	},
+	"confirm_another_org": {
+		"message": "Apstipriniet šīs saites atvēršanu.",
+		"description": "[atvērt_citu_org_modal] lūgt lietotāja apstiprinājumu, lai atvērtu izveidoto saiti."
+	},
+	"continue": {
+		"message": "Turpināt",
+		"description": "textContent pogām, kas atļauj izpildīt pašreizējo darbību"
+	},
+	"cxm_empty_no_org_tabs": {
+		"message": "👀 Visas redzamās Tabs",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Atiestatīt uz noklusējumu",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Eksportēt Tabs",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 Importēt Tabs",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_move": {
+		"message": "🧭 Pārvietot Tab",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Padarīt par pirmo",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Padarīt par pēdējo",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Pārvietot pa kreisi",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Pārvietot pa labi",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Atvērt citā Org",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 Noņemt Tab",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 Saglabāt kā Tab",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_remove": {
+		"message": "💥 Noņemt Tab(s)",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs pa kreisi",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Citas Tabs",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs pa labi",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Šis Tab",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ Iestatījumi",
+		"description": "Etiķete iestatījumu izvēlnei"
+	},
+	"cxm_update": {
+		"message": "✏️ Atjaunināt Tab",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Pārslēgt Org",
+		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Citi atjauninājumi",
+		"description": "[konteksta_izvēlne]"
+	},
+	"delete": {
+		"message": "Dzēst",
+		"description": "[uznirstošais_logs] dzēst rindu"
+	},
+	"delete_all": {
+		"message": "Dzēst visas Tabs",
+		"description": "[uznirstošais_logs] virsraksts uz miskastes, lai iztukšotu visas Tabs"
+	},
+	"error_close_other_modal": {
+		"message": "Lūdzu, vispirms aizveriet otru modālo logu!",
+		"description": "[paziņojums] Lietotājs mēģināja atvērt vairāk nekā 1 modālo logu"
+	},
+	"error_cxm_check": {
+		"message": "Kļūda, pārbaudot izvēlnes vienumus",
+		"description": "[kļūda] nevarēja atrast konteksta izvēlnes vienumus"
+	},
+	"error_cxm_create": {
+		"message": "Kļūda, veidojot izvēlnes vienumus",
+		"description": "[kļūda] nevarēja inicializēt konteksta izvēlnes vienumus"
+	},
+	"error_cxm_remove": {
+		"message": "Kļūda, noņemot izvēlnes vienumus",
+		"description": "[kļūda] nevarēja noņemt konteksta izvēlnes vienumus"
+	},
+	"error_duplicate_tab": {
+		"message": "Šis Tab jau pastāv",
+		"description": "[kļūda] Tab dublējas"
+	},
+	"error_expand_url": {
+		"message": "Nevar izvērst tukšu URL!",
+		"description": "[kļūda] URL, kas jāizvērš, netika nodots"
+	},
+	"error_expand_url_no_base": {
+		"message": "Nevar izvērst URL bez tā resursdatora!",
+		"description": "[kļūda] bāzes URL, kas tika izmantots izvēršanai, netika nodots"
+	},
+	"error_extract_empty_url": {
+		"message": "Nevar iegūt Org nosaukumu no tukša URL!",
+		"description": "[kļūda] URL, no kura jāiegūst Org nosaukums, netika nodots"
+	},
+	"error_get_with_no_org": {
+		"message": "Nevar iegūt Tabs, ja nav norādīta Org.",
+		"description": "[kļūda] mēģināja meklēt Tabs pēc Org, nesūtot Org informāciju"
+	},
+	"error_import": {
+		"message": "Kļūda importēšanas laikā:\n",
+		"description": "[kļūda] importēšanas procesa laikā radās kļūda"
+	},
+	"error_invalid_key": {
+		"message": "Funkcijai nodotais atslēgas parametrs nav derīgs",
+		"description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju ar nederīgu parametru"
+	},
+	"error_invalid_tab": {
+		"message": "Nederīgs Tab",
+		"description": "[kļūda] Tab nav derīgs"
+	},
+	"error_link_with_id": {
+		"message": "Šī lapa nevar pastāvēt citā Org, jo tā satur ID!",
+		"description": "[atvērt_citu_org_modal] brīdinājums lietotājam, ka saite var nepastāvēt citā Org"
+	},
+	"error_many_matching_tab": {
+		"message": "Atrasts vairāk nekā 1 atbilstošs Tab.",
+		"description": "[kļūda] tika iegūti daudzi Tabs"
+	},
+	"error_minify_url": {
+		"message": "Nevar samazināt tukšu URL!",
+		"description": "[kļūda] URL, kas jāsamazina, netika nodots"
+	},
+	"error_missing_favourite_id": {
+		"message": "Nevar iegūt iecienītāko attēlu bez ID",
+		"description": "[kļūda] iecienītākā ID netika nodots"
+	},
+	"error_missing_key": {
+		"message": "Atslēga nekur nav atrasta",
+		"description": "[kļūda] failos nav atrasts tulkojums"
+	},
+	"error_no_array": {
+		"message": "Nederīgs masīvs vai masīvs netika nodots",
+		"description": "[kļūda] netika saņemts derīgs masīvs"
+	},
+	"error_no_browser_tab": {
+		"message": "Nevarēja atrast pašreizējo pārlūkprogrammas cilni.",
+		"description": "[kļūda] fona lapa nevarēja izveidot aktīvu pārlūkprogrammas cilni"
+	},
+	"error_no_callback": {
+		"message": "Lūdzu, norādiet atzvanīšanas funkciju (callback)",
+		"description": "[kļūda] funkcija, kas jāizsauc metodes beigās, netika nodota"
+	},
+	"error_no_cookies": {
+		"message": "Neatrada atbilstošus sīkfailus",
+		"description": "[kļūda] Salesforce sīkfaili netika atgriezti"
+	},
+	"error_no_data": {
+		"message": "Nevar identificēt Tab bez datiem.",
+		"description": "[kļūda] mēģināja iegūt Tab, nesūtot datus"
+	},
+	"error_no_headers": {
+		"message": "Neizdevās atrast galvenes.",
+		"description": "[kļūda] Paplašinājums nevarēja atrast, kur ievietot iecienītāko pogu"
+	},
+	"error_no_matching_tab": {
+		"message": "Neatrada nevienu atbilstošu Tab.",
+		"description": "[kļūda] netika iegūti nekādi Tabs"
+	},
+	"error_no_message": {
+		"message": "Nav norādīts ziņojums sūtīšanai.",
+		"description": "[kļūda] nav atrasts ziņojums sūtīšanai uz citām koda daļām"
+	},
+	"error_no_object": {
+		"message": "Nav objekta pārbaudei!",
+		"description": "[kļūda] objekts netika nodots"
+	},
+	"error_no_setup_tab": {
+		"message": "Neizdevās atrast Iestatīšanas (Setup) cilni.",
+		"description": "[kļūda] Paplašinājums nevarēja atrast, kur ievietot iecienītākos Tabs."
+	},
+	"error_no_url": {
+		"message": "Nav URL pārbaudei!",
+		"description": "[kļūda] URL pārbaudei netika nodots"
+	},
+	"error_remove_not_favourite": {
+		"message": "Nevar noņemt Tab, kas nav iecienītākais!",
+		"description": "[kļūda] lietotājs mēģināja noņemt Tab, kas vēl nebija saglabāts"
+	},
+	"error_required_params": {
+		"message": "Funkcijai nepieciešamie parametri netika nodoti",
+		"description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju bez nepieciešamajiem parametriem"
+	},
+	"error_sync_nothing": {
+		"message": "Nevar sinhronizēt null Tabs!",
+		"description": "[kļūda] mēģināja sinhronizēt neko"
+	},
+	"error_tab_label": {
+		"message": "Etiķetei jābūt netukšai virknei",
+		"description": "[kļūda] lietotājs mēģināja izveidot Tab bez etiķetes"
+	},
+	"error_tab_not_found": {
+		"message": "Tab netika atrasts.",
+		"description": "[kļūda] Tab nebija iekļauts masīvā"
+	},
+	"error_tab_object_creation": {
+		"message": "Zvanot ar objektu, nenododiet neko citu.",
+		"description": "[kļūda] izstrādātāja implementācijas kļūda"
+	},
+	"error_tab_org": {
+		"message": "Org jābūt virknei vai nedefinētai (undefined)",
+		"description": "[kļūda] lietotājs mēģināja izveidot Tab ar nederīgu Org vērtību"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Atrastas negaidītas atslēgas:",
+		"description": "[kļūda] lietotājs mēģināja izveidot Tab ar dažām neatbalstītām īpašībām"
+	},
+	"error_tab_url": {
+		"message": "URL jābūt netukšai virknei",
+		"description": "[kļūda] lietotājs mēģināja izveidot Tab bez URL"
+	},
+	"error_tabcont_initialize": {
+		"message": "Nevar inicializēt ar",
+		"description": "[kļūda] Tab konteinera inicializācija neizdevās"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Konstatēts(-i) nederīgs(-i) Tab(s).\nPirmā sastopamība:",
+		"description": "[kļūda] tika nodoti nederīgi Tabs"
+	},
+	"error_useless_remove": {
+		"message": "Nevar noņemt:\nNevar noņemt lapu, kas iepriekš nav saglabāta",
+		"description": "[kļūda] lietotājs mēģināja noņemt lapu, kas vēl nebija saglabāta"
+	},
+	"error_useless_save": {
+		"message": "Nevar saglabāt:\nŠī lapa jau ir saglabāta!",
+		"description": "[kļūda] lietotājs mēģināja saglabāt lapu, kas jau bija saglabāta"
+	},
+	"export": {
+		"message": "Eksportēt",
+		"description": "[uznirstošais_logs] eksportēšanas poga"
+	},
+	"export_title": {
+		"message": "Eksportēt visas Tabs",
+		"description": "[uznirstošais_logs] virsraksts uz eksportēšanas pogas"
+	},
+	"extension_description": {
+		"message": "Izveidojiet un pārvaldiet pielāgotas Tabs pieejamajā vietā Salesforce Lightning iestatīšanas lapā.",
+		"description": "[manifests] Šī paplašinājuma apraksts"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Šī paplašinājuma nosaukums"
+	},
+	"file": {
+		"message": "fails",
+		"description": "viens fails"
+	},
+	"files": {
+		"message": "faili",
+		"description": "vairāki faili"
+	},
+	"general": {
+		"message": "Vispārīgi",
+		"description": "Etiķete vispārīgo iestatījumu kategorijai"
+	},
+	"import": {
+		"message": "Importēt",
+		"description": "[uznirstošais_logs] importēšanas poga"
+	},
+	"import_duplicate_description": {
+		"message": "Dublējošie Tabs tiks ignorēti.<br />Divi Tabs tiek uzskatīti par dublējošiem, ja tiem ir vienāds URL.",
+		"description": "[importēt] apraksts par to, ko dara importēšanas process"
+	},
+	"import_invalid_file": {
+		"message": "Nederīgs faila tips.\nTiek atbalstīti tikai JSON faili.",
+		"description": "[kļūda] importēšanai izmantotais fails nav JSON"
+	},
+	"import_successful": {
+		"message": "Veiksmīgi importēts",
+		"description": "[importēt] importēšana pabeigta. Pēc tam tiks parādīts, cik ierakstu ir importēti"
+	},
+	"import_tabs": {
+		"message": "Importēt Tabs",
+		"description": "[modal_virsraksts] importēšanas procesam"
+	},
+	"import_title": {
+		"message": "Importēt Tabs no json faila",
+		"description": "[uznirstošais_logs] virsraksts uz importēšanas pogas"
+	},
+	"insert_another": {
+		"message": "Ievietot citu",
+		"description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto to pašu Org"
+	},
+	"insert_another_org": {
+		"message": "Ievietotā Org ir pašreizējā!\nLūdzu, ievietojiet citu Org.",
+		"description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto to pašu Org"
+	},
+	"insert_valid_org": {
+		"message": "Lūdzu, ievietojiet derīgu Org!",
+		"description": "[kļūda_atvērt_citu_org_modal] ziņojums, kad lietotājs modālajā logā ievieto nepareizu URL"
+	},
+	"italic": {
+		"message": "Slīpraksts",
+		"description": "Fonta stila opcija slīpraksta tekstam"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce pielāgotās navigācijas tehnoloģija"
+	},
+	"login_to_salesforce": {
+		"message": "Pieteikties Salesforce",
+		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce pieteikšanās lapu"
+	},
+	"mycustomorg": {
+		"message": "manapielagotaorg",
+		"description": "aizvietotājs Atjaunināt Tab modālajam logam"
+	},
+	"no_match": {
+		"message": "Neatbilda nevienai darbībai",
+		"description": "[kļūda] Salesforce, kad pārslēgs nevar saskaņot pieprasīto darbību"
+	},
+	"nss_invalid_url": {
+		"message": "Atrasts nederīgs URL.",
+		"description": "[navSalesforceIestatīšana] nederīgs URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Šī nav Salesforce Lightning iestatīšanas lapa.",
+		"description": "[navSalesforceIestatīšana] lietotājs neatrodas Salesforce lapā."
+	},
+	"open_settings": {
+		"message": "Atvērt paplašinājuma iestatījumus",
+		"description": "[iznirstošais logs] poga novirzīšanai uz iestatījumu lapu"
+	},
+	"open_setup": {
+		"message": "Atvērt iestatīšanu",
+		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automātiski atvērt Salesforce pierakstīšanās lapu, noklikšķinot uz uznirstošā loga, ja neatrodaties Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties nejaušā tīmekļa vietnē"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automātiski atvērt Salesforce iestatīšanas lapu, noklikšķinot uz uznirstošā loga, ja atrodaties Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties Salesforce tīmekļa vietnē"
+	},
+	"opt_en_fallback": {
+		"message": "en (Rezerves)",
+		"description": "Valodas opcija, lai izmantotu angļu valodu, ja lokalizācija netiek atbalstīta vai nav pieejams tulkojums"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Saglabāt iecienītākās Tabs kreisajā pusē no Home un Object Manager.",
+		"description": "Slēdzis, lai piespraustu iecienītākās Tabs navigācijas joslas kreisajā pusē"
+	},
+	"opt_link_new_browser": {
+		"message": "Vienmēr atvērt saites jaunā pārlūka cilnē.",
+		"description": "[iestatījums] kad lietotājs noklikšķina uz iecienītākā Tab, atvērt jaunā pārlūka cilnē"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Vienmēr atvērt Salesforce pierakstīšanās lapu vienā un tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
+		"description": "[iestatījums]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Vienmēr atvērt Salesforce iestatīšanas lapu vienā un tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
+		"description": "[iestatījums]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Neļaut izmantot Lightning navigāciju (ātrāka ielāde, kad tiek izmantota).",
+		"description": "[iestatījums] neatļaut Lightning navigāciju ar funkcijas skaidrojumu"
+	},
+	"opt_same_tab_popup": {
+		"message": "lapa tajā pašā cilnē, noklikšķinot uz uznirstošā loga.",
+		"description": "[iestatījums] nepieļaut jaunas pārlūka cilnes atvēršanu"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce valoda (Noklusējuma)",
+		"description": "Opcija izmantot Salesforce valodas iestatījumu. Šī opcija ir paplašinājuma noklusējuma iestatījums."
+	},
+	"opt_skip_link_detection": {
+		"message": "Izlaist automātisko Salesforce ID pārbaudi.",
+		"description": "[iestatījums] kad lietotājs pievieno iecienītāko Tab, nepārbaudīt, vai saitē ir ID"
+	},
+	"or_drop": {
+		"message": "Vai nomest",
+		"description": "[importēt] ļaujiet lietotājam pārvietot failus ar peli un atlaist tos"
+	},
+	"org_link": {
+		"message": "Org saite",
+		"description": "[ievades_etiķete]"
+	},
+	"other_org_info": {
+		"message": "Citas Org informācija",
+		"description": "[modal_virsraksts]"
+	},
+	"other_org_placeholder": {
+		"message": "cita-org",
+		"description": "[ievades_aizvietotājs]"
+	},
+	"overwrite_tabs": {
+		"message": "Pārrakstīt saglabātos Tabs.",
+		"description": "[etiķete] dzēst visus saglabātos Tabs importēšanas procesa laikā"
+	},
+	"preserve_org_tabs": {
+		"message": "Saglabāt Tabs citām Org.",
+		"description": "[etiķete] saglabāt visus Org specifiskos Tabs importēšanas procesa laikā"
+	},
+	"remove_tab": {
+		"message": "Noņemt Tab",
+		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Vairs nejautāt.",
+		"description": "[pieprasīt_atļauju] etiķete, kad lietotājs nevēlas neatgriezeniski atļaut atļaujas"
+	},
+	"req_permissions_header": {
+		"message": "Lūdzu, atļaujiet mums automātiski piekļūt<br />Salesforce iestatīšanas lapām.",
+		"description": "[pieprasīt_atļauju] lapas galvene atļauju pieprasīšanai"
+	},
+	"req_permissions_paragraph": {
+		"message": "Ja vēlaties, varat likt saviem iecienītākajiem Tabs parādīties,<br />tiklīdz pārejat uz Salesforce iestatīšanas lapu,<br />bez nepieciešamības katru reizi noklikšķināt uz šī paplašinājuma.",
+		"description": "[pieprasīt_atļauju] teksts, kas izskaidro, kāpēc tiek pieprasītas atļaujas"
+	},
+	"required": {
+		"message": "obligāts",
+		"description": "[ievade] atzīmē ievades lauku kā obligātu"
+	},
+	"required_info": {
+		"message": "= Obligātā informācija",
+		"description": "[modal] informē lietotāju, ka daļa informācijas ir obligāta"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[navSalesforceIestatīšana] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Salesforce pieteikšanās",
+		"description": "Salesforce pieteikšanās lapa (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce iestatījumi",
+		"description": "jebkura Salesforce iestatījumu lapa (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Saglabāt",
+		"description": "Lietot izmaiņas un saglabāt tās atmiņā"
+	},
+	"save_tab": {
+		"message": "Saglabāt kā Tab",
+		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
+	},
+	"set_gen_preview": {
+		"message": "Tab priekšskatījums",
+		"description": "Etiķete vispārīgo Tab izskatu priekšskatīšanai"
+	},
+	"set_gen_styler": {
+		"message": "Tab stila maiņa",
+		"description": "Etiķete vispārīgo Tab stila konfigurēšanai"
+	},
+	"set_general_settings": {
+		"message": "Vispārīgie iestatījumi",
+		"description": "Sadaļas virsraksts vispārīgajām konfigurācijas opcijām"
+	},
+	"set_move_available": {
+		"message": "Pārvietot uz Pieejams",
+		"description": "Pogas nosaukums, lai pārvietotu izvēlētos vienumus atpakaļ uz Pieejams"
+	},
+	"set_move_chosen": {
+		"message": "Pārvietot uz Izvēlēts",
+		"description": "Pogas nosaukums, lai pārvietotu izvēlētos vienumus uz Izvēlēts"
+	},
+	"set_org_preview": {
+		"message": "Organizācijas priekšskatījums",
+		"description": "Etiķete organizācijai specifisko Tab izskatu priekšskatīšanai"
+	},
+	"set_org_styler": {
+		"message": "Organizācijas stila maiņa",
+		"description": "Etiķete organizācijai specifisko Tab stila konfigurēšanai"
+	},
+	"set_tab_background_active_label": {
+		"message": "Ievadiet fona krāsu jūsu aktīvajām vispārīgajām Tabs.",
+		"description": "Etiķete, lai iestatītu fona krāsu aktīvajām vispārīgajām Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Ievadiet fona krāsu jūsu organizācijas Tabs.",
+		"description": "Etiķete, lai iestatītu fona krāsu organizācijai specifiskajām Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Ievadiet apmales krāsu jūsu aktīvajām organizācijas Tabs.",
+		"description": "Etiķete, lai iestatītu apmales krāsu aktīvajām organizācijai specifiskajām Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Ievadiet apmales krāsu jūsu vispārīgajām Tabs.",
+		"description": "Etiķete, lai iestatītu apmales krāsu vispārīgajām Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Ievadiet teksta krāsu jūsu aktīvajām vispārīgajām Tabs.",
+		"description": "Etiķete, lai iestatītu teksta krāsu aktīvajām vispārīgajām Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Ievadiet teksta krāsu jūsu organizācijas Tabs.",
+		"description": "Etiķete, lai iestatītu teksta krāsu organizācijai specifiskajām Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Izvēlieties vienu vai vairākus dekorācijas stilus jūsu aktīvajām organizācijas Tabs.",
+		"description": "Uzaicinājums izvēlēties dekorācijas stilus aktīvajām organizācijai specifiskajām Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Izvēlieties vienu vai vairākus dekorācijas stilus jūsu vispārīgajām Tabs.",
+		"description": "Uzaicinājums izvēlēties dekorācijas stilus vispārīgajām Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Ievadiet uznirstošo fona krāsu jūsu aktīvajām vispārīgajām Tabs.",
+		"description": "Etiķete, lai iestatītu uznirstošo fona krāsu aktīvajām vispārīgajām Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Ievadiet uznirstošo fona krāsu jūsu organizācijas Tabs.",
+		"description": "Etiķete, lai iestatītu uznirstošo fona krāsu organizācijai specifiskajām Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Ievadiet ēnas krāsu jūsu aktīvajām organizācijas Tabs.",
+		"description": "Etiķete, lai iestatītu ēnas krāsu aktīvajām organizācijai specifiskajām Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Ievadiet ēnas krāsu jūsu vispārīgajām Tabs.",
+		"description": "Etiķete, lai iestatītu ēnas krāsu vispārīgajām Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Ievadiet krāsu joslai jūsu aktīvo vispārīgo Tabs augšpusē.",
+		"description": "Etiķete, lai iestatītu augšējās joslas krāsu aktīvajām vispārīgajām Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Noklikšķiniet, lai pārslēgtu aktīvo stāvokli.",
+		"description": "Rīka padoms teksts aktīvā stāvokļa pārslēgšanas vadīklai"
+	},
+	"settings": {
+		"message": "Iestatījumi",
+		"description": "Etiķete iestatījumu izvēlnei"
+	},
+	"setup_page": {
+		"message": "Iestatīšanas lapa",
+		"description": "[navSalesforceIestatīšana] lapa, ko izmanto Salesforce iestatījumu modificēšanai"
+	},
+	"skip": {
+		"message": "Izlaist",
+		"description": "[pieprasīt_atļauju] poga NEatļaut atļaujas"
+	},
+	"successfully_imported": {
+		"message": "Veiksmīgi importēts",
+		"description": "[paziņojums] lietotājs pievienoja Tabs no ārēja faila"
+	},
+	"tab_explain": {
+		"message": "Katram elementam jābūt 'label' un 'url' kā virknēm. Papildus katram elementam var būt 'org' kā virkne.",
+		"description": "[kļūda] izskaidro, kā jābūt konstruētam Tab"
+	},
+	"tab_information": {
+		"message": "Tab informācija",
+		"description": "virsraksts atjaunināšanas Tab modālajam logam"
+	},
+	"tab_label": {
+		"message": "Tab etiķete",
+		"description": "Tab etiķetes (Label) īpašība, tās nosaukums"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "Tab Org īpašība, ja tā ir paredzēta vienai Salesforce organizācijai"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab URL īpašība, uz kurieni tā norāda"
+	},
+	"table_delete": {
+		"message": "Dzēst Tab",
+		"description": "[uznirstošais_logs] palīdzības teksts kolonnai ar dzēšanas pogu"
+	},
+	"table_org": {
+		"message": "Ir Org Tab",
+		"description": "[uznirstošais_logs] palīdzības teksts kolonnai ar Org izvēles rūtiņu"
+	},
+	"table_row_label": {
+		"message": "Ievadiet etiķeti šim URL",
+		"description": "[uznirstošais_logs] ievades lauks ar Tab nosaukumu"
+	},
+	"table_row_org": {
+		"message": "Noklikšķiniet, ja vēlaties, lai šis Tab būtu pieejams tikai šai Org.",
+		"description": "[uznirstošais_logs] izvēles rūtiņa, lai pārslēgtu Tab uz Org specifisku"
+	},
+	"table_row_org_name": {
+		"message": "Org, kurai šis Tab ir pieejams.",
+		"description": "[uznirstošais_logs] ievades lauks ar Org nosaukumu"
+	},
+	"table_row_url": {
+		"message": "Ievadiet apakš_URL, uz kuru vēlaties tikt pāradresēts.",
+		"description": "[uznirstošais_logs] ievades lauks ar Tab URL"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "lietotāja iecienītākās saites"
+	},
+	"tabs_saved": {
+		"message": "Tabs saglabāti.",
+		"description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
+	},
+	"theme_dark": {
+		"message": "Mainīt motīvu uz tumšu",
+		"description": "[uznirstošais_logs] virsraksts uz mēness, lai pārslēgtu motīvu"
+	},
+	"theme_light": {
+		"message": "Mainīt motīvu uz gaišu",
+		"description": "[uznirstošais_logs] virsraksts uz saules, lai pārslēgtu motīvu"
+	},
+	"underline": {
+		"message": "Pasvītrojums",
+		"description": "Dekorācijas stila opcija Tab teksta pasvītrošanai"
+	},
+	"underline_wavy": {
+		"message": "Viļņots pasvītrojums",
+		"description": "Dekorācijas stila opcija viļņota pasvītrojuma pievienošanai Tab tekstam"
+	},
+	"upload": {
+		"message": "Augšupielādēt",
+		"description": "[importēt] ļaujiet lietotājam pārlūkot savus failus un izvēlēties pareizo"
+	},
+	"users": {
+		"message": "Lietotāji",
+		"description": "Lapas nosaukums, kas saistīts ar ManageUsers/home"
+	},
+	"warn_deprecated_tab_title": {
+		"message": "Jūs importējāt, izmantojot novecojušo 'tabTitle'!\nAtjauninātā faila lejupielāde ir sākusies.\nTurpmāk, lūdzu, izmantojiet jauniegūto failu.\nŠāda faila lietošana tiks pārtraukta vēlākā laidienā.",
+		"description": "[brīdinājums] Paskaidrojiet lietotājam, ka viņu importētais fails izmanto novecojušu īpašību"
+	},
+	"where_to": {
+		"message": "Uz kurieni?",
+		"description": "[atvērt_citu_org_modal] rezerves virsraksts modālajam logam"
+	}
 }

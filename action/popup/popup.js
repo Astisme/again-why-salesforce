@@ -1,17 +1,18 @@
 // deno-lint-ignore-file no-window
 "use strict";
-import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
-    BROWSER,
-	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+	BROWSER,
+	openSettingsPage,
+	OPERATING_PATTERNS,
+	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
-import { TranslationService } from "/translator.js";
+import ensureTranslatorAvailability from "/translator.js";
+import { handleSwitchColorTheme } from "../themeHandler.js";
 
-const translator = await TranslationService.create();
+const translator = await ensureTranslatorAvailability();
 const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
@@ -27,7 +28,6 @@ let loggers = [];
  * Initializes the theme SVG elements based on the current theme and updates visibility.
  */
 function initThemeSvg() {
-	initTheme();
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
 	elementToShow.classList.remove("invisible", "hidden");
@@ -36,47 +36,11 @@ function initThemeSvg() {
 initThemeSvg();
 
 /**
- * Sends a message to the background script with the specified message.
- *
- * @param {Object} message - The message to send.
- * @param {function} callback - The callback to execute after sending the message.
- */
-function pop_sendMessage(message, callback) {
-	/**
-	 * Invoke the runtime to send the message
-	 *
-	 * @param {Object} message - The message to send
-	 * @param {function} callback - The callback to execute after sending the message
-	 */
-	function sendMessage(message, callback) {
-		return BROWSER.runtime.sendMessage(
-			{ message },
-			callback,
-		);
-	}
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			sendMessage(
-				message,
-				(response) => {
-					if (BROWSER.runtime.lastError) {
-						reject(BROWSER.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
-	sendMessage(message, callback);
-}
-
-/**
  * Finds the current tab of the browser then calls the callback, if available. otherwise returns a Promise
  * @param {function|undefined} callback - the function to call when the result is found.
  */
 function pop_getCurrentBrowserTab(callback) {
-	return pop_sendMessage({ what: "browser-tab" }, callback);
+	return sendExtensionMessage({ what: "browser-tab" }, callback);
 }
 
 // Get the current tab. If it's not salesforce setup, redirect the popup
@@ -97,10 +61,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		// we're in Salesforce Setup
 		// check if we have all the optional permissions available
 		const permissionsAvailable = await BROWSER.permissions.contains({
-			origins: [
-				MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-				LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-			],
+			origins: OPERATING_PATTERNS,
 		});
 		if (
 			!permissionsAvailable &&
@@ -136,7 +97,7 @@ function switchTheme() {
  * Sends a message indicating that data has been saved successfully.
  */
 function pop_afterSet() {
-	pop_sendMessage({ what: "saved" });
+	sendExtensionMessage({ what: "saved" });
 }
 
 /**
@@ -155,14 +116,14 @@ async function pop_extractOrgName(browserTab = null) {
  * Sends a message that will create an import modal in the Salesforce page.
  */
 function importHandler() {
-	pop_sendMessage({ what: "add" }, close);
+	sendExtensionMessage({ what: "add" }, close);
 }
 
 /**
  * Sends a message that will start the export procedure.
  */
 function pop_exportHandler() {
-	pop_sendMessage({ what: "export" }, close);
+	sendExtensionMessage({ what: "export" }, close);
 }
 
 /**
@@ -237,7 +198,7 @@ function inputLabelUrlListener(type) {
 		// check eventual duplicates
 		if (allTabs.exists({ url })) {
 			// show warning in salesforce
-			pop_sendMessage({
+			sendExtensionMessage({
 				what: "warning",
 				message: "A tab with this URL has already been saved!",
 				action: "make-bold",
@@ -357,7 +318,7 @@ async function loadTabs(browserTab = null) {
 	}
 	// leave a blank at the bottom
 	tabAppendElement.append(createElement());
-    translator.updatePageTranslations();
+	translator.updatePageTranslations();
 }
 
 /**
@@ -474,3 +435,7 @@ document.getElementById("theme-selector").addEventListener(
 document.getElementById("import").addEventListener("click", importHandler);
 document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
+document.getElementById("open-settings").addEventListener(
+	"click",
+	openSettingsPage,
+);

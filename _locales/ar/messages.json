@@ -3,6 +3,14 @@
 		"message": "السماح",
 		"description": "[req_permission] زر للسماح بالأذونات"
 	},
+	"available": {
+		"message": "متاح",
+		"description": "رأس قسم للعناصر التي يمكن إضافتها"
+	},
+	"bold": {
+		"message": "عريض",
+		"description": "خيار نمط الخط للنص العريض"
+	},
 	"cancel": {
 		"message": "إلغاء",
 		"description": "العنوان أو النص لمحتوى الأزرار التي تمنع تنفيذ الإجراء الحالي"
@@ -10,6 +18,10 @@
 	"cancel_close": {
 		"message": "إلغاء وإغلاق",
 		"description": "العنوان أو النص لمحتوى زر الإغلاق في النوافذ المنبثقة"
+	},
+	"chosen": {
+		"message": "مختار",
+		"description": "رأس قسم للعناصر التي تم اختيارها"
 	},
 	"confirm_another_org": {
 		"message": "أكد فتح هذا الرابط.",
@@ -87,6 +99,10 @@
 		"message": "1️⃣ هذا الـ Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_settings": {
+		"message": "⚙️ الإعدادات",
+		"description": "علامة لقائمة الإعدادات"
+	},
 	"cxm_update": {
 		"message": "✏️ تحديث الـ Tab",
 		"description": "[context-menu]"
@@ -146,6 +162,10 @@
 	"error_import": {
 		"message": "خطأ أثناء الاستيراد:\n",
 		"description": "[error] حدث خطأ أثناء عملية الاستيراد"
+	},
+	"error_invalid_key": {
+		"message": "معامل المفتاح المرسل للدالة غير صالح",
+		"description": "[خطأ] حاول المطور استدعاء الدالة بمعامل غير صالح"
 	},
 	"error_invalid_tab": {
 		"message": "Tab غير صالح",
@@ -219,6 +239,10 @@
 		"message": "لا يمكن إزالة Tab غير مفضلة!",
 		"description": "[error] تمت محاولة إزالة Tab لم تُحفظ بعد"
 	},
+	"error_required_params": {
+		"message": "لم يتم تمرير المعلمات المطلوبة للدالة",
+		"description": "[خطأ] حاول المطور استدعاء الدالة بدون المعلمات اللازمة"
+	},
 	"error_sync_nothing": {
 		"message": "لا يمكن مزامنة الـ Tabs الفارغة!",
 		"description": "[error] تمت محاولة مزامنة لا شيء"
@@ -286,6 +310,10 @@
 		"message": "ملفات",
 		"description": "عدة ملفات"
 	},
+	"general": {
+		"message": "عام",
+		"description": "علامة لفئة الإعدادات العامة"
+	},
 	"import": {
 		"message": "استيراد",
 		"description": "[popup] زر الاستيراد"
@@ -322,9 +350,13 @@
 		"message": "يرجى إدخال Org صالح!",
 		"description": "[error-open-other-org-modal] رسالة عند إدخال عنوان URL خاطئ في النافذة المنبثقة"
 	},
-	"invalid_url": {
-		"message": "عنوان URL غير صالح",
-		"description": "[notSalesforceSetup] عنوان URL غير صالح"
+	"italic": {
+		"message": "مائل",
+		"description": "خيار نمط الخط للنص المائل"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "تقنية التنقل المخصصة من Salesforce"
 	},
 	"login_to_salesforce": {
 		"message": "تسجيل الدخول إلى Salesforce",
@@ -338,17 +370,65 @@
 		"message": "لم يتم مطابقة أي إجراء",
 		"description": "[error] في Salesforce، الإجراء المطلوب لم يتطابق مع أي إجراء متاح"
 	},
-	"nss_detected": {
-		"message": " تم الكشف عنه.",
-		"description": "[notSalesforceSetup] تم الكشف عن شيء؛ يرجى تضمين فراغ في البداية"
+	"nss_invalid_url": {
+		"message": "تم الكشف عن عنوان URL غير صالح.",
+		"description": "[ليس إعداد Salesforce] عنوان URL غير صالح"
 	},
-	"nss_prefix": {
-		"message": "هذا ليس ",
-		"description": "[notSalesforceSetup] البادئة المعروضة عندما لا يكون المستخدم على صفحة Salesforce؛ يرجى تضمين فراغ في النهاية"
+	"nss_not_setup_page": {
+		"message": "هذه ليست صفحة إعداد Salesforce Lightning.",
+		"description": "[ليس إعداد Salesforce] المستخدم ليس على صفحة Salesforce."
+	},
+	"open_settings": {
+		"message": "فتح إعدادات الإضافة",
+		"description": "[نافذة منبثقة] زر لإعادة التوجيه إلى صفحة الإعدادات"
 	},
 	"open_setup": {
 		"message": "فتح الإعداد",
 		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
+	},
+	"opt_automatic_open_login": {
+		"message": "افتح تلقائيًا صفحة تسجيل الدخول إلى Salesforce عند النقر فوق النافذة المنبثقة عندما لا تكون على صفحة Salesforce.",
+		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على أي موقع ويب"
+	},
+	"opt_automatic_open_setup": {
+		"message": "افتح تلقائيًا صفحة إعداد Salesforce عند النقر فوق النافذة المنبثقة عندما تكون على صفحة Salesforce.",
+		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على موقع ويب Salesforce"
+	},
+	"opt_en_fallback": {
+		"message": "en (Fallback)",
+		"description": "خيار اللغة للرجوع إلى الإنجليزية إذا لم يتم دعم الإعداد الإقليمي أو لم يقدم الترجمة"
+	},
+	"opt_keep_tabs_left": {
+		"message": "احتفظ بعلامات التبويب المفضلة على يسار الصفحة الرئيسية ومدير الكائنات.",
+		"description": "التبديل لتثبيت علامات التبويب المفضلة على الجانب الأيسر من شريط التنقل"
+	},
+	"opt_link_new_browser": {
+		"message": "افتح الروابط دائمًا في علامة تبويب جديدة.",
+		"description": "[إعداد] عند نقر المستخدم على علامة تبويب مفضلة، افتحها في علامة تبويب جديدة"
+	},
+	"opt_open_login_same_tab": {
+		"message": "افتح دائمًا صفحة تسجيل الدخول إلى Salesforce في نفس Tab عند النقر فوق النافذة المنبثقة.",
+		"description": "[إعداد]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "افتح دائمًا صفحة إعداد Salesforce في نفس Tab عند النقر فوق النافذة المنبثقة.",
+		"description": "[إعداد]"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "منع استخدام تنقل Lightning (تحميل أسرع عند الاستخدام).",
+		"description": "[إعداد] عدم السماح بتنقل Lightning مع شرح الميزة"
+	},
+	"opt_same_tab_popup": {
+		"message": "الصفحة في نفس العلامة عند النقر على المنبثق.",
+		"description": "[إعداد] منع فتح علامة تبويب جديدة"
+	},
+	"opt_sf_lang_default": {
+		"message": "Salesforce Language (الافتراضي)",
+		"description": "خيار لاستخدام إعداد اللغة في Salesforce. هذا الخيار هو الافتراضي للإضافة."
+	},
+	"opt_skip_link_detection": {
+		"message": "تخطي التحقق التلقائي من معرف Salesforce.",
+		"description": "[إعداد] عند إضافة علامة تبويب إلى المفضلة، منع التحقق من وجود معرف في الرابط"
 	},
 	"or_drop": {
 		"message": "أو إسقاط",
@@ -402,9 +482,109 @@
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] منصة Salesforce Lightning"
 	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "صفحة تسجيل الدخول إلى Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "أي صفحة إعدادات Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "حفظ",
+		"description": "تطبيق التغييرات وتخزينها في الذاكرة"
+	},
 	"save_tab": {
 		"message": "احفظ كـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"set_gen_preview": {
+		"message": "معاينة Tab",
+		"description": "التسمية لمعاينة المظهر العام للـ Tab"
+	},
+	"set_gen_styler": {
+		"message": "منسق Tab",
+		"description": "التسمية لتكوين النمط العام للـ Tab"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "رأس قسم لخيارات التكوين العامة"
+	},
+	"set_move_available": {
+		"message": "نقل إلى متاح",
+		"description": "عنوان الزر لنقل العناصر المحددة إلى متاح"
+	},
+	"set_move_chosen": {
+		"message": "نقل إلى مختار",
+		"description": "عنوان الزر لنقل العناصر المحددة إلى مختار"
+	},
+	"set_org_preview": {
+		"message": "معاينة Org",
+		"description": "التسمية لمعاينة مظهر الـ Tab الخاص بالمنظّمة"
+	},
+	"set_org_styler": {
+		"message": "منسق Org",
+		"description": "التسمية لتكوين نمط الـ Tab الخاص بالمنظّمة"
+	},
+	"set_tab_background_active_label": {
+		"message": "أدخل لون الخلفية لعناصر Tab العامة النشطة.",
+		"description": "علامة لتعيين لون الخلفية لعلامات التبويب العامة النشطة"
+	},
+	"set_tab_background_label": {
+		"message": "أدخل لون الخلفية لعناصر Tab الخاصة بالمنظمة.",
+		"description": "علامة لتعيين لون الخلفية لعلامات التبويب الخاصة بالمنظمة"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "أدخل لون الحدود لعناصر Tab النشطة الخاصة بالمنظمة.",
+		"description": "علامة لتعيين لون الحدود لعلامات التبويب النشطة الخاصة بالمنظمة"
+	},
+	"set_tab_border_color_label": {
+		"message": "أدخل لون الحدود لعناصر Tab العامة.",
+		"description": "علامة لتعيين لون الحدود لعلامات التبويب العامة"
+	},
+	"set_tab_color_active_label": {
+		"message": "أدخل لون النص لعناصر Tab العامة النشطة.",
+		"description": "علامة لتعيين لون النص لعلامات التبويب العامة النشطة"
+	},
+	"set_tab_color_label": {
+		"message": "أدخل لون النص لعناصر Tab الخاصة بالمنظمة.",
+		"description": "علامة لتعيين لون النص لعلامات التبويب الخاصة بالمنظمة"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "اختر نمطًا أو أكثر لتزيين علامات التبويب النشطة الخاصة بالمنظمة.",
+		"description": "موجه لاختيار أنماط الزخرفة لعلامات التبويب النشطة الخاصة بالمنظمة"
+	},
+	"set_tab_decoration_label": {
+		"message": "اختر نمطًا أو أكثر لتزيين علامات التبويب العامة.",
+		"description": "موجه لاختيار أنماط الزخرفة لعلامات التبويب العامة"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "أدخل لون خلفية التمرير لعناصر Tab العامة النشطة.",
+		"description": "علامة لتعيين لون خلفية التمرير لعلامات التبويب العامة النشطة"
+	},
+	"set_tab_hover_background_label": {
+		"message": "أدخل لون خلفية التمرير لعناصر Tab الخاصة بالمنظمة.",
+		"description": "علامة لتعيين لون خلفية التمرير لعلامات التبويب الخاصة بالمنظمة"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "أدخل لون الظل لعناصر Tab النشطة الخاصة بالمنظمة.",
+		"description": "علامة لتعيين لون الظل لعلامات التبويب النشطة الخاصة بالمنظمة"
+	},
+	"set_tab_shadow_label": {
+		"message": "أدخل لون الظل لعناصر Tab العامة.",
+		"description": "علامة لتعيين لون الظل لعلامات التبويب العامة"
+	},
+	"set_tab_top_active_label": {
+		"message": "أدخل اللون لشريط أعلى علامات Tab العامة النشطة.",
+		"description": "علامة لتعيين لون الشريط العلوي لعلامات التبويب العامة النشطة"
+	},
+	"set_toggle_preview": {
+		"message": "انقر لتبديل الحالة النشطة.",
+		"description": "نص التلميح للأداة للتحكم في تبديل الحالة النشطة"
+	},
+	"settings": {
+		"message": "الإعدادات",
+		"description": "علامة لقائمة الإعدادات"
 	},
 	"setup_page": {
 		"message": "صفحة الإعداد",
@@ -430,10 +610,10 @@
 		"message": "علامة الـ Tab",
 		"description": "[popup] رأس العمود لاسم الـ Tab"
 	},
-    "tab_org": {
-        "message": "Tab Org",
-        "description": "خاصية Org لعلامة التبويب، إذا كانت لمنظمة Salesforce واحدة"
-    },
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "خاصية Org لعلامة التبويب، إذا كانت لمنظمة Salesforce واحدة"
+	},
 	"tab_url": {
 		"message": "URL الـ Tab",
 		"description": "[popup] رأس العمود لعنوان URL للـ Tab"
@@ -477,6 +657,14 @@
 	"theme_light": {
 		"message": "تغيير الثيم إلى فاتح",
 		"description": "[popup] عنوان على الشمس لتغيير الثيم"
+	},
+	"underline": {
+		"message": "تسطير",
+		"description": "خيار نمط الزخرفة لتسطير نص Thab"
+	},
+	"underline_wavy": {
+		"message": "تسطير متموج",
+		"description": "خيار نمط الزخرفة لتطبيق تسطير متموج على نص Tab"
 	},
 	"upload": {
 		"message": "تحميل",

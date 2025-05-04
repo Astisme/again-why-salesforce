@@ -30,7 +30,8 @@ export function bg_getCurrentBrowserTab(callback) {
 		}
 		const browserTabs = await BROWSER.tabs.query(queryParams);
 		if (
-			BROWSER.runtime.lastError || browserTabs == null || browserTabs == [] || browserTabs[0] == null
+			BROWSER.runtime.lastError || browserTabs == null ||
+			browserTabs == [] || browserTabs[0] == null
 		) {
 			if (count > 5) {
 				throw new Error("error_no_browser_tab");
@@ -58,8 +59,9 @@ export function bg_getCurrentBrowserTab(callback) {
  * @param {int} count = 0 - how many times the function has been called
  */
 export async function bg_notify(message, count = 0) {
-    if(message == null)
-        throw new Error("error_no_message");
+	if (message == null) {
+		throw new Error("error_no_message");
+	}
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
 		BROWSER.tabs.sendMessage(browserTab.id, message);

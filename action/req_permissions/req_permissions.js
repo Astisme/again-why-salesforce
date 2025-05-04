@@ -1,12 +1,8 @@
-import {
-  BROWSER,
-	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-} from "/constants.js";
-import { TranslationService } from "/translator.js";
-import { initTheme } from "../themeHandler.js";
-await TranslationService.create();
-initTheme();
+import { BROWSER, OPERATING_PATTERNS } from "/constants.js";
+import ensureTranslatorAvailability from "/translator.js";
+import "../themeHandler.js";
+await ensureTranslatorAvailability();
+
 const noPerm = document.getElementById("no-permissions");
 const popup = await BROWSER.runtime.getURL("action/popup/popup.html");
 noPerm.href = `${popup}?noPerm=true`;
@@ -14,10 +10,7 @@ noPerm.href = `${popup}?noPerm=true`;
 document.getElementById("allow-permissions").addEventListener("click", (e) => {
 	e.preventDefault();
 	BROWSER.permissions.request({
-		origins: [
-			MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-			LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-		],
+		origins: OPERATING_PATTERNS,
 	});
 	setTimeout(close, 100);
 });
