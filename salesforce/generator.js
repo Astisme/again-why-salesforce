@@ -157,66 +157,68 @@ export async function generateStyleFromSettings() {
 	oldSettings = settings;
 	for (let i = 0; i < 2; i++) {
 		const styleList = i === 0 ? genericStyleList : orgStyleList;
-		if (styleList != null) {
-			if (styleList.length === 0) {
-				return;
-			}
-			const isGeneric = styleList === genericStyleList;
-			let style = null;
-			{
-				const styleId = isGeneric
-					? GENERIC_TAB_STYLE_KEY
-					: ORG_TAB_STYLE_KEY;
-				const oldStyle = document.getElementById(styleId);
-				if (oldStyle != null) {
-					style = oldStyle;
-					style.textContent = "";
-				} else {
-					style = document.createElement("style");
-				}
-			}
-			let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
-			let activeCss = `${getCssSelector(false, isGeneric)} {`;
-			const rulesWhichNeedPseudoSelector = [];
-			styleList
-				.forEach((element) => {
-					if (
-						element.id === TAB_STYLE_HOVER ||
-						element.id === TAB_STYLE_TOP
-					) {
-						rulesWhichNeedPseudoSelector.push(element);
-						return;
-					}
-					const rule = getCssRule(element.id, element.value);
-					if (element.forActive) {
-						activeCss += rule;
-					} else {
-						inactiveCss += rule;
-					}
-				});
-			style.textContent = `${inactiveCss} } ${activeCss} }`;
-			for (const el of rulesWhichNeedPseudoSelector) {
-				let elementPseudoSelector = "";
-				switch (el.id) {
-					case TAB_STYLE_HOVER:
-						elementPseudoSelector = ":hover";
-						break;
-					case TAB_STYLE_TOP:
-						elementPseudoSelector = "::before";
-						break;
-					default:
-						break;
-				}
-				style.textContent += `${
-					getCssSelector(
-						!el.forActive,
-						isGeneric,
-						elementPseudoSelector,
-					)
-				}{ ${getCssRule(el.id, el.value)} }`;
-			}
-			document.head.appendChild(style);
-		}
+		if (styleList == null) {
+            continue;
+        }
+        if (styleList.length === 0) {
+            return;
+        }
+        const isGeneric = styleList === genericStyleList;
+        let style = null;
+        {
+            const styleId = `${EXTENSION_NAME}-${isGeneric
+                ? GENERIC_TAB_STYLE_KEY
+                : ORG_TAB_STYLE_KEY}`;
+            const oldStyle = document.getElementById(styleId);
+            if (oldStyle != null) {
+                style = oldStyle;
+                style.textContent = "";
+            } else {
+                style = document.createElement("style");
+                style.id = styleId;
+            }
+        }
+        let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
+        let activeCss = `${getCssSelector(false, isGeneric)} {`;
+        const rulesWhichNeedPseudoSelector = [];
+        styleList
+            .forEach((element) => {
+                if (
+                    element.id === TAB_STYLE_HOVER ||
+                    element.id === TAB_STYLE_TOP
+                ) {
+                    rulesWhichNeedPseudoSelector.push(element);
+                    return;
+                }
+                const rule = getCssRule(element.id, element.value);
+                if (element.forActive) {
+                    activeCss += rule;
+                } else {
+                    inactiveCss += rule;
+                }
+            });
+        style.textContent = `${inactiveCss} } ${activeCss} }`;
+        for (const el of rulesWhichNeedPseudoSelector) {
+            let elementPseudoSelector = "";
+            switch (el.id) {
+                case TAB_STYLE_HOVER:
+                    elementPseudoSelector = ":hover";
+                    break;
+                case TAB_STYLE_TOP:
+                    elementPseudoSelector = "::before";
+                    break;
+                default:
+                    break;
+            }
+            style.textContent += `${
+                getCssSelector(
+                    !el.forActive,
+                    isGeneric,
+                    elementPseudoSelector,
+                )
+            }{ ${getCssRule(el.id, el.value)} }`;
+        }
+        document.head.appendChild(style);
 	}
 }
 

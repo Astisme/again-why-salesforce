@@ -325,7 +325,7 @@ setInterval(async () => {
 checkAddRemoveContextMenus();
 
 BROWSER.storage.onChanged.addListener((changes) => {
-	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue.filter((el) =>
+	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>
 		el.id === USER_LANGUAGE
 	);
 	if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {

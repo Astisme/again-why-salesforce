@@ -113,8 +113,8 @@ export const TAB_STYLE_UNDERLINE = "underline";
 export const TAB_STYLE_TOP = "top";
 export const SLDS_ACTIVE = "slds-is-active";
 const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
-export const ORG_TAB_CLASS = ".is-org-tab";
-const HAS_ORG_TAB = `:has(${ORG_TAB_CLASS})`;
+export const ORG_TAB_CLASS = "is-org-tab";
+const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
 
 /**
  * Retrieves saved style settings for the specified key.
@@ -192,6 +192,8 @@ export function getCssRule(styleId, value = null) {
 			return "text-decoration: underline;";
 		//case TAB_STYLE_WAVY:
 		//return "text-decoration: underline wavy;";
+        case "user-set":
+            break;
 		default:
 			console.error(styleId);
 			return "";
