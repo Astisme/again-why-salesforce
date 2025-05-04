@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Būtini funkcijos parametrai nebuvo perduoti",
-            "description": "[klaida] kūrėjas bandė iškviesti funkciją be reikiamų parametrų"
-        },
-        "error_invalid_key": {
-            "message": "Funkcijai perduotas rakto parametras yra neteisingas",
-            "description": "[klaida] kūrėjas bandė iškviesti funkciją su neteisingu parametru"
-        },
 	"allow": {
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"
@@ -167,6 +159,10 @@
 		"message": "Klaida importuojant:\n",
 		"description": "[klaida] importavimo proceso metu įvyko klaida"
 	},
+	"error_invalid_key": {
+		"message": "Funkcijai perduotas rakto parametras yra neteisingas",
+		"description": "[klaida] kūrėjas bandė iškviesti funkciją su neteisingu parametru"
+	},
 	"error_invalid_tab": {
 		"message": "Neteisingas Tab",
 		"description": "[klaida] Tab negalioja"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Negalima pašalinti ne mėgstamo Tab!",
 		"description": "[klaida] vartotojas bandė pašalinti Tab, kuris dar nebuvo išsaugotas"
+	},
+	"error_required_params": {
+		"message": "Būtini funkcijos parametrai nebuvo perduoti",
+		"description": "[klaida] kūrėjas bandė iškviesti funkciją be reikiamų parametrų"
 	},
 	"error_sync_nothing": {
 		"message": "Negalima sinchronizuoti null Tabs!",

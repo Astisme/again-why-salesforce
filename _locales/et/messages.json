@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "Funktsioonile vajalikke parameetreid ei edastatud",
-      "description": "[viga] arendaja proovis funktsiooni kutsuda ilma vajalike parameetriteta"
-    },
-    "error_invalid_key": {
-      "message": "Funktsioonile edastatud key-parameeter on kehtetu",
-      "description": "[viga] arendaja proovis funktsiooni kutsuda kehtetu parameetriga"
-    },
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"
@@ -167,6 +159,10 @@
 		"message": "Viga importimisel:\n",
 		"description": "[viga] importimisprotsessi käigus ilmnes viga"
 	},
+	"error_invalid_key": {
+		"message": "Funktsioonile edastatud key-parameeter on kehtetu",
+		"description": "[viga] arendaja proovis funktsiooni kutsuda kehtetu parameetriga"
+	},
 	"error_invalid_tab": {
 		"message": "Kehtetu Tab",
 		"description": "[viga] Tab ei kehti"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Mitte-lemmikut Tab ei saa eemaldada!",
 		"description": "[viga] kasutaja üritas eemaldada Tab, mida polnud veel salvestatud"
+	},
+	"error_required_params": {
+		"message": "Funktsioonile vajalikke parameetreid ei edastatud",
+		"description": "[viga] arendaja proovis funktsiooni kutsuda ilma vajalike parameetriteta"
 	},
 	"error_sync_nothing": {
 		"message": "Null (null) Tabs ei saa sünkroonida!",

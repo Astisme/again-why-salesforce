@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Parameter yang diperlukan untuk fungsi tidak dihantar",
-            "description": "[ralat] pembangun cuba memanggil fungsi tanpa parameter yang diperlukan"
-        },
-        "error_invalid_key": {
-            "message": "Parameter kunci yang dihantar ke fungsi tidak sah",
-            "description": "[ralat] pembangun cuba memanggil fungsi dengan parameter yang tidak sah"
-        },
 	"allow": {
 		"message": "Benarkan",
 		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"
@@ -167,6 +159,10 @@
 		"message": "Ralat semasa import:\n",
 		"description": "[ralat] terdapat ralat semasa proses import"
 	},
+	"error_invalid_key": {
+		"message": "Parameter kunci yang dihantar ke fungsi tidak sah",
+		"description": "[ralat] pembangun cuba memanggil fungsi dengan parameter yang tidak sah"
+	},
 	"error_invalid_tab": {
 		"message": "Tab tidak sah",
 		"description": "[ralat] Tab tidak sah"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Tidak dapat membuang Tab yang bukan kegemaran!",
 		"description": "[ralat] pengguna cuba membuang Tab yang belum disimpan lagi"
+	},
+	"error_required_params": {
+		"message": "Parameter yang diperlukan untuk fungsi tidak dihantar",
+		"description": "[ralat] pembangun cuba memanggil fungsi tanpa parameter yang diperlukan"
 	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyegerakkan Tab nol (null)!",

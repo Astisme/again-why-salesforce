@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "함수에 필요한 파라미터가 전달되지 않았습니다",
-            "description": "[오류] 개발자가 필요한 파라미터 없이 함수를 호출하려고 했습니다"
-        },
-        "error_invalid_key": {
-            "message": "함수에 전달된 키 파라미터가 유효하지 않습니다",
-            "description": "[오류] 개발자가 유효하지 않은 파라미터로 함수를 호출하려고 했습니다"
-        },
 	"allow": {
 		"message": "허용",
 		"description": "[권한_요청] 권한을 허용하는 버튼"
@@ -167,6 +159,10 @@
 		"message": "가져오기 중 오류:\n",
 		"description": "[오류] 가져오기 프로세스 중에 오류가 발생했습니다."
 	},
+	"error_invalid_key": {
+		"message": "함수에 전달된 키 파라미터가 유효하지 않습니다",
+		"description": "[오류] 개발자가 유효하지 않은 파라미터로 함수를 호출하려고 했습니다"
+	},
 	"error_invalid_tab": {
 		"message": "잘못된 Tab",
 		"description": "[오류] Tab이 유효하지 않습니다."
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "즐겨찾기가 아닌 Tab은 제거할 수 없습니다!",
 		"description": "[오류] 사용자가 아직 저장되지 않은 Tab을 제거하려고 했습니다."
+	},
+	"error_required_params": {
+		"message": "함수에 필요한 파라미터가 전달되지 않았습니다",
+		"description": "[오류] 개발자가 필요한 파라미터 없이 함수를 호출하려고 했습니다"
 	},
 	"error_sync_nothing": {
 		"message": "null Tabs는 동기화할 수 없습니다!",

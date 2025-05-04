@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "No s'han passat els paràmetres requerits per a la funció",
-      "description": "[error] el desenvolupador ha intentat cridar la funció sense els paràmetres necessaris"
-    },
-    "error_invalid_key": {
-      "message": "El paràmetre key enviat a la funció no és vàlid",
-      "description": "[error] el desenvolupador ha intentat cridar la funció amb un paràmetre invàlid"
-    },
 	"allow": {
 		"message": "Permetre",
 		"description": "[req_permission] botó per permetre permisos"
@@ -167,6 +159,10 @@
 		"message": "Error durant la importació:\n",
 		"description": "[error] s'ha produït un error durant el procés d'importació"
 	},
+	"error_invalid_key": {
+		"message": "El paràmetre key enviat a la funció no és vàlid",
+		"description": "[error] el desenvolupador ha intentat cridar la funció amb un paràmetre invàlid"
+	},
 	"error_invalid_tab": {
 		"message": "Tab no vàlid",
 		"description": "[error] el Tab no és vàlid"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "No es pot eliminar un Tab que no és favorit!",
 		"description": "[error] l'usuari ha intentat eliminar un Tab que encara no s'ha desat"
+	},
+	"error_required_params": {
+		"message": "No s'han passat els paràmetres requerits per a la funció",
+		"description": "[error] el desenvolupador ha intentat cridar la funció sense els paràmetres necessaris"
 	},
 	"error_sync_nothing": {
 		"message": "No es poden sincronitzar Tabs buits!",

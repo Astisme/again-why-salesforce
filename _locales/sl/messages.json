@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Zahtevani parametri za funkcijo niso bili posredovani",
-            "description": "[napaka] razvijalec je poskusil poklicati funkcijo brez potrebnih parametrov"
-        },
-        "error_invalid_key": {
-            "message": "Parameter ključa, posredovan funkciji, ni veljaven",
-            "description": "[napaka] razvijalec je poskusil poklicati funkcijo z neveljavnim parametrom"
-        },
 	"allow": {
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"
@@ -167,6 +159,10 @@
 		"message": "Napaka med uvozom:\n",
 		"description": "[napaka] med postopkom uvoza je prišlo do napake"
 	},
+	"error_invalid_key": {
+		"message": "Parameter ključa, posredovan funkciji, ni veljaven",
+		"description": "[napaka] razvijalec je poskusil poklicati funkcijo z neveljavnim parametrom"
+	},
 	"error_invalid_tab": {
 		"message": "Neveljaven Tab",
 		"description": "[napaka] Tab ni veljaven"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Ni mogoče odstraniti Tab, ki ni priljubljen!",
 		"description": "[napaka] uporabnik je poskusil odstraniti Tab, ki še ni bil shranjen"
+	},
+	"error_required_params": {
+		"message": "Zahtevani parametri za funkcijo niso bili posredovani",
+		"description": "[napaka] razvijalec je poskusil poklicati funkcijo brez potrebnih parametrov"
 	},
 	"error_sync_nothing": {
 		"message": "Ni mogoče sinhronizirati ničelnih (null) Tabs!",

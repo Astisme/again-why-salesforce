@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
-            "description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
-        },
-        "error_invalid_key": {
-            "message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
-            "description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
-        },
 	"allow": {
 		"message": "Ruhusu",
 		"description": "[omba_ruhusa] kitufe cha kuruhusu ruhusa"
@@ -167,6 +159,10 @@
 		"message": "Hitilafu wakati wa kuingiza:\n",
 		"description": "[hitilafu] kulitokea hitilafu wakati wa mchakato wa kuingiza"
 	},
+	"error_invalid_key": {
+		"message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
+		"description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
+	},
 	"error_invalid_tab": {
 		"message": "Tab si sahihi",
 		"description": "[hitilafu] Tab si sahihi"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Haiwezi kuondoa Tab isiyo pendwa!",
 		"description": "[hitilafu] mtumiaji alijaribu kuondoa Tab ambayo haikuwa imehifadhiwa bado"
+	},
+	"error_required_params": {
+		"message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
+		"description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
 	},
 	"error_sync_nothing": {
 		"message": "Haiwezi kusawazisha Tabs batili (null)!",

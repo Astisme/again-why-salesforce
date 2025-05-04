@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "函数所需的参数未传递",
-            "description": "[错误] 开发者尝试调用函数但未提供必要的参数"
-        },
-        "error_invalid_key": {
-            "message": "传递给函数的键参数无效",
-            "description": "[错误] 开发者尝试使用无效参数调用函数"
-        },
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"
@@ -167,6 +159,10 @@
 		"message": "导入过程中出错：\n",
 		"description": "[错误] 导入过程中发生错误"
 	},
+	"error_invalid_key": {
+		"message": "传递给函数的键参数无效",
+		"description": "[错误] 开发者尝试使用无效参数调用函数"
+	},
 	"error_invalid_tab": {
 		"message": "无效的 Tab",
 		"description": "[错误] Tab 无效"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "无法移除非收藏的 Tab！",
 		"description": "[错误] 用户尝试移除尚未保存的 Tab"
+	},
+	"error_required_params": {
+		"message": "函数所需的参数未传递",
+		"description": "[错误] 开发者尝试调用函数但未提供必要的参数"
 	},
 	"error_sync_nothing": {
 		"message": "无法同步空的 Tabs！",

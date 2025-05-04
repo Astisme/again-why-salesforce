@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Fonksiyon için gerekli parametreler geçilmedi",
-            "description": "[hata] geliştirici gerekli parametreler olmadan bir fonksiyon çağırmaya çalıştı"
-        },
-        "error_invalid_key": {
-            "message": "Fonskiyon'a geçirilen anahtar parametresi geçerli değil",
-            "description": "[hata] geliştirici geçersiz bir parametre ile bir fonksiyon çağırmaya çalıştı"
-        },
 	"allow": {
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"
@@ -167,6 +159,10 @@
 		"message": "İçe aktarma sırasında hata:\n",
 		"description": "[hata] içe aktarma işlemi sırasında bir hata oluştu"
 	},
+	"error_invalid_key": {
+		"message": "Fonskiyon'a geçirilen anahtar parametresi geçerli değil",
+		"description": "[hata] geliştirici geçersiz bir parametre ile bir fonksiyon çağırmaya çalıştı"
+	},
 	"error_invalid_tab": {
 		"message": "Geçersiz Tab",
 		"description": "[hata] Tab geçerli değil"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Favori olmayan bir Tab kaldırılamaz!",
 		"description": "[hata] kullanıcı henüz kaydedilmemiş bir Tab kaldırmaya çalıştı"
+	},
+	"error_required_params": {
+		"message": "Fonksiyon için gerekli parametreler geçilmedi",
+		"description": "[hata] geliştirici gerekli parametreler olmadan bir fonksiyon çağırmaya çalıştı"
 	},
 	"error_sync_nothing": {
 		"message": "Boş Tabs senkronize edilemez!",

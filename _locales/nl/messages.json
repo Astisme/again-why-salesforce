@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "De vereiste parameters voor de functie zijn niet doorgegeven",
-            "description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen zonder de benodigde parameters"
-        },
-        "error_invalid_key": {
-            "message": "De key-parameter die aan de functie is doorgegeven, is niet geldig",
-            "description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen met een ongeldige parameter"
-        },
 	"allow": {
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"
@@ -167,6 +159,10 @@
 		"message": "Fout tijdens importeren:\n",
 		"description": "[fout] er is een fout opgetreden tijdens het importproces"
 	},
+	"error_invalid_key": {
+		"message": "De key-parameter die aan de functie is doorgegeven, is niet geldig",
+		"description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen met een ongeldige parameter"
+	},
 	"error_invalid_tab": {
 		"message": "Ongeldige Tab",
 		"description": "[fout] de Tab is niet geldig"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Kan een niet-favoriete Tab niet verwijderen!",
 		"description": "[fout] de gebruiker probeerde een Tab te verwijderen die nog niet was opgeslagen"
+	},
+	"error_required_params": {
+		"message": "De vereiste parameters voor de functie zijn niet doorgegeven",
+		"description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen zonder de benodigde parameters"
 	},
 	"error_sync_nothing": {
 		"message": "Kan null Tabs niet synchroniseren!",

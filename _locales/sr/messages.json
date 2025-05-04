@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Потребни параметри за функцију нису прослеђени",
-            "description": "[грешка] програмер је покушао да позове функцију без неопходних параметара"
-        },
-        "error_invalid_key": {
-            "message": "Параметар кључа прослеђен функцији није валидан",
-            "description": "[грешка] програмер је покушао да позове функцију са невалидним параметром"
-        },
 	"allow": {
 		"message": "Dozvoli",
 		"description": "[req_permission] dugme za dozvolu privilegija"
@@ -167,6 +159,10 @@
 		"message": "Greška prilikom uvoza:\n",
 		"description": "[error] došlo je do greške tokom procesa uvoza"
 	},
+	"error_invalid_key": {
+		"message": "Параметар кључа прослеђен функцији није валидан",
+		"description": "[грешка] програмер је покушао да позове функцију са невалидним параметром"
+	},
 	"error_invalid_tab": {
 		"message": "Nevažeći Tab",
 		"description": "[error] Tab nije validan"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Ne može se ukloniti Tab koji nije omiljen!",
 		"description": "[error] korisnik je pokušao da ukloni Tab koji još nije sačuvan"
+	},
+	"error_required_params": {
+		"message": "Потребни параметри за функцију нису прослеђени",
+		"description": "[грешка] програмер је покушао да позове функцију без неопходних параметара"
 	},
 	"error_sync_nothing": {
 		"message": "Ne mogu se sinhronizovati prazni Tabovi!",

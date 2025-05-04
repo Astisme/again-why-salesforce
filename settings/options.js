@@ -359,8 +359,10 @@ const shadowStyleGenericActiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleGenericActive}`;
 const hoverStyleGenericActiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleGenericActive}`;
-const topStyleGenericActiveId = `${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleGenericActive}`;
-const boldStyleGenericActiveId = `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleGenericActive}`;
+const topStyleGenericActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleGenericActive}`;
+const boldStyleGenericActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleGenericActive}`;
 const italicStyleGenericActiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleGenericActive}`;
 const underlineStyleGenericActiveId =
@@ -369,25 +371,38 @@ const underlineStyleGenericActiveId =
 
 const backgroundStyleOrgInactiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleOrgInactive}`;
-const colorStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgInactive}`;
-const borderStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgInactive}`;
-const shadowStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgInactive}`;
-const hoverStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgInactive}`;
-const boldStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgInactive}`;
-const italicStyleOrgInactiveId = `${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgInactive}`;
+const colorStyleOrgInactiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgInactive}`;
+const borderStyleOrgInactiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgInactive}`;
+const shadowStyleOrgInactiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgInactive}`;
+const hoverStyleOrgInactiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgInactive}`;
+const boldStyleOrgInactiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgInactive}`;
+const italicStyleOrgInactiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgInactive}`;
 const underlineStyleOrgInactiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleOrgInactive}`;
 //const wavyStyleOrgInactiveId      = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleOrgInactive}`;
 
 const backgroundStyleOrgActiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleOrgActive}`;
-const colorStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgActive}`;
-const borderStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgActive}`;
-const shadowStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgActive}`;
-const hoverStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgActive}`;
-const topStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleOrgActive}`;
-const boldStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgActive}`;
-const italicStyleOrgActiveId = `${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgActive}`;
+const colorStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgActive}`;
+const borderStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgActive}`;
+const shadowStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgActive}`;
+const hoverStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgActive}`;
+const topStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleOrgActive}`;
+const boldStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgActive}`;
+const italicStyleOrgActiveId =
+	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgActive}`;
 const underlineStyleOrgActiveId =
 	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleOrgActive}`;
 //const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleOrgActive}`;

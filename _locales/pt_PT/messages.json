@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Os parâmetros necessários para a função não foram passados",
-            "description": "[erro] o programador tentou chamar uma função sem os parâmetros necessários"
-        },
-        "error_invalid_key": {
-            "message": "O parâmetro chave passado para a função não é válido",
-            "description": "[erro] o programador tentou chamar uma função com um parâmetro inválido"
-        },
 	"allow": {
 		"message": "Permitir",
 		"description": "[pedir_permissao] botão para permitir permissões"
@@ -167,6 +159,10 @@
 		"message": "Erro durante a importação:\n",
 		"description": "[erro] ocorreu um erro durante o processo de importação"
 	},
+	"error_invalid_key": {
+		"message": "O parâmetro chave passado para a função não é válido",
+		"description": "[erro] o programador tentou chamar uma função com um parâmetro inválido"
+	},
 	"error_invalid_tab": {
 		"message": "Tab inválido",
 		"description": "[erro] o Tab não é válido"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Não é possível remover um Tab não favorito!",
 		"description": "[erro] o utilizador tentou remover um Tab que ainda não tinha sido guardado"
+	},
+	"error_required_params": {
+		"message": "Os parâmetros necessários para a função não foram passados",
+		"description": "[erro] o programador tentou chamar uma função sem os parâmetros necessários"
 	},
 	"error_sync_nothing": {
 		"message": "Não é possível sincronizar Tabs nulos!",

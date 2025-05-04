@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "De nödvändiga parametrarna för funktionen skickades inte med",
-            "description": "[fel] utvecklaren försökte anropa en funktion utan de nödvändiga parametrarna"
-        },
-        "error_invalid_key": {
-            "message": "Nyckelparametern som skickades till funktionen är inte giltig",
-            "description": "[fel] utvecklaren försökte anropa en funktion med en ogiltig parameter"
-        },
 	"allow": {
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"
@@ -167,6 +159,10 @@
 		"message": "Fel vid import:\n",
 		"description": "[error] ett fel uppstod under importprocessen"
 	},
+	"error_invalid_key": {
+		"message": "Nyckelparametern som skickades till funktionen är inte giltig",
+		"description": "[fel] utvecklaren försökte anropa en funktion med en ogiltig parameter"
+	},
 	"error_invalid_tab": {
 		"message": "Ogiltig Tab",
 		"description": "[error] Tabben är inte giltig"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Kan inte ta bort en Tab som inte är favorit!",
 		"description": "[error] användaren försökte ta bort en Tab som inte har sparats än"
+	},
+	"error_required_params": {
+		"message": "De nödvändiga parametrarna för funktionen skickades inte med",
+		"description": "[fel] utvecklaren försökte anropa en funktion utan de nödvändiga parametrarna"
 	},
 	"error_sync_nothing": {
 		"message": "Kan inte synkronisera tomma Tabbar!",

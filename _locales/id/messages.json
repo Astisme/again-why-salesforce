@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Parameter yang diperlukan untuk fungsi tidak dilewatkan",
-            "description": "[kesalahan] pengembang mencoba memanggil fungsi tanpa parameter yang diperlukan"
-        },
-        "error_invalid_key": {
-            "message": "Parameter kunci yang dilewatkan ke fungsi tidak valid",
-            "description": "[kesalahan] pengembang mencoba memanggil fungsi dengan parameter yang tidak valid"
-        },
 	"allow": {
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
@@ -167,6 +159,10 @@
 		"message": "Kesalahan saat impor:\n",
 		"description": "[error] Terjadi kesalahan selama proses impor."
 	},
+	"error_invalid_key": {
+		"message": "Parameter kunci yang dilewatkan ke fungsi tidak valid",
+		"description": "[kesalahan] pengembang mencoba memanggil fungsi dengan parameter yang tidak valid"
+	},
 	"error_invalid_tab": {
 		"message": "Tab tidak valid",
 		"description": "[error] Tab tidak valid."
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Tidak dapat menghapus Tab yang bukan favorit!",
 		"description": "[error] Pengguna mencoba menghapus Tab yang belum disimpan sebagai favorit."
+	},
+	"error_required_params": {
+		"message": "Parameter yang diperlukan untuk fungsi tidak dilewatkan",
+		"description": "[kesalahan] pengembang mencoba memanggil fungsi tanpa parameter yang diperlukan"
 	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyinkronkan Tabs kosong!",

@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
-            "description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
-        },
-        "error_invalid_key": {
-            "message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
-            "description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
-        },
 	"allow": {
 		"message": "அனுமதி",
 		"description": "[req_permission] அனுமதிகளை அனுமதிக்க பொத்தான்"
@@ -167,6 +159,10 @@
 		"message": "இறக்குமதி செய்யும் போது பிழை:\n",
 		"description": "[பிழை] இறக்குமதி செயல்முறையின் போது ஒரு பிழை ஏற்பட்டது"
 	},
+	"error_invalid_key": {
+		"message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
+		"description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
+	},
 	"error_invalid_tab": {
 		"message": "செல்லாத Tab",
 		"description": "[பிழை] Tab செல்லுபடியாகாது"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "பிடித்தமில்லாத Tab ஐ அகற்ற முடியாது!",
 		"description": "[பிழை] பயனர் இன்னும் சேமிக்கப்படாத Tab ஐ அகற்ற முயன்றார்"
+	},
+	"error_required_params": {
+		"message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
+		"description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
 	},
 	"error_sync_nothing": {
 		"message": "null Tabs ஐ ஒத்திசைக்க முடியாது!",

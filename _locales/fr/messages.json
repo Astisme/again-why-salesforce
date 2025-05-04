@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "Les paramètres requis pour la fonction n'ont pas été fournis",
-      "description": "[erreur] le développeur a tenté d'appeler la fonction sans les paramètres nécessaires"
-    },
-    "error_invalid_key": {
-      "message": "Le paramètre key passé à la fonction n'est pas valide",
-      "description": "[erreur] le développeur a tenté d'appeler la fonction avec un paramètre invalide"
-    },
 	"allow": {
 		"message": "Autoriser",
 		"description": "[req_permission] Bouton pour autoriser les permissions"
@@ -167,6 +159,10 @@
 		"message": "Erreur lors de l'importation :\n",
 		"description": "[error] Une erreur s'est produite pendant le processus d'importation."
 	},
+	"error_invalid_key": {
+		"message": "Le paramètre key passé à la fonction n'est pas valide",
+		"description": "[erreur] le développeur a tenté d'appeler la fonction avec un paramètre invalide"
+	},
 	"error_invalid_tab": {
 		"message": "Tab non valide",
 		"description": "[error] Le Tab n'est pas valide."
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Impossible de supprimer un Tab non favori !",
 		"description": "[error] L'utilisateur a tenté de supprimer un Tab qui n'a pas encore été enregistré."
+	},
+	"error_required_params": {
+		"message": "Les paramètres requis pour la fonction n'ont pas été fournis",
+		"description": "[erreur] le développeur a tenté d'appeler la fonction sans les paramètres nécessaires"
 	},
 	"error_sync_nothing": {
 		"message": "Impossible de synchroniser des Tabs nuls !",

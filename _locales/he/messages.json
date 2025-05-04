@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "הפרמטרים הנדרשים לפונקציה לא הועברו",
-      "description": "[שגיאה] המפתח ניסה לקרוא לפונקציה ללא הפרמטרים הדרושים"
-    },
-    "error_invalid_key": {
-      "message": "פרמטר המפתח שהועבר לפונקציה אינו חוקי",
-      "description": "[שגיאה] המפתח ניסה לקרוא לפונקציה עם פרמטר לא חוקי"
-    },
 	"allow": {
 		"message": "אפשר",
 		"description": "[req_permission] כפתור לאישור הרשאות"
@@ -167,6 +159,10 @@
 		"message": "שגיאה בייבוא:\n",
 		"description": "[error] אירעה שגיאה במהלך תהליך הייבוא"
 	},
+	"error_invalid_key": {
+		"message": "פרמטר המפתח שהועבר לפונקציה אינו חוקי",
+		"description": "[שגיאה] המפתח ניסה לקרוא לפונקציה עם פרמטר לא חוקי"
+	},
 	"error_invalid_tab": {
 		"message": "Tab לא תקין",
 		"description": "[error] ה-Tab אינו תקין"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "לא ניתן להסיר Tab שאינו מועדף!",
 		"description": "[error] המשתמש ניסה להסיר Tab שעדיין לא נשמר"
+	},
+	"error_required_params": {
+		"message": "הפרמטרים הנדרשים לפונקציה לא הועברו",
+		"description": "[שגיאה] המפתח ניסה לקרוא לפונקציה ללא הפרמטרים הדרושים"
 	},
 	"error_sync_nothing": {
 		"message": "לא ניתן לסנכרן Tab ריקים!",

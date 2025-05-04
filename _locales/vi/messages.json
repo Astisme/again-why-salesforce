@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Các tham số bắt buộc cho hàm không được truyền",
-            "description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm mà không có các tham số cần thiết"
-        },
-        "error_invalid_key": {
-            "message": "Tham số khóa được truyền cho hàm không hợp lệ",
-            "description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm với một tham số không hợp lệ"
-        },
 	"allow": {
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"
@@ -167,6 +159,10 @@
 		"message": "Lỗi khi nhập khẩu:\n",
 		"description": "[error] Có lỗi xảy ra trong quá trình nhập khẩu."
 	},
+	"error_invalid_key": {
+		"message": "Tham số khóa được truyền cho hàm không hợp lệ",
+		"description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm với một tham số không hợp lệ"
+	},
 	"error_invalid_tab": {
 		"message": "Tab không hợp lệ",
 		"description": "[error] Tab không hợp lệ."
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Không thể xóa Tab không phải yêu thích!",
 		"description": "[error] Người dùng đã cố xóa Tab chưa được lưu dưới dạng yêu thích."
+	},
+	"error_required_params": {
+		"message": "Các tham số bắt buộc cho hàm không được truyền",
+		"description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm mà không có các tham số cần thiết"
 	},
 	"error_sync_nothing": {
 		"message": "Không thể đồng bộ các Tabs rỗng!",

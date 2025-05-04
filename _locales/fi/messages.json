@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
-      "description": "[virhe] kehittäjä yritti kutsua toimintoa ilman tarvittavia parametreja"
-    },
-    "error_invalid_key": {
-      "message": "Toiminnolle lähetetty key-parametri on virheellinen",
-      "description": "[virhe] kehittäjä yritti kutsua toimintoa virheellisellä parametrilla"
-    },
 	"allow": {
 		"message": "Salli",
 		"description": "[req_permission] painike, jolla myönnetään oikeudet"
@@ -167,6 +159,10 @@
 		"message": "Virhe tuonnissa:\n",
 		"description": "[error] tuontiprosessissa ilmeni virhe"
 	},
+	"error_invalid_key": {
+		"message": "Toiminnolle lähetetty key-parametri on virheellinen",
+		"description": "[virhe] kehittäjä yritti kutsua toimintoa virheellisellä parametrilla"
+	},
 	"error_invalid_tab": {
 		"message": "Virheellinen Tab",
 		"description": "[error] Tab ei ole kelvollinen"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Tabia, joka ei ole suosikki, ei voi poistaa!",
 		"description": "[error] käyttäjä yritti poistaa Tabiä, jota ei ole vielä tallennettu"
+	},
+	"error_required_params": {
+		"message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
+		"description": "[virhe] kehittäjä yritti kutsua toimintoa ilman tarvittavia parametreja"
 	},
 	"error_sync_nothing": {
 		"message": "Tyhjiä Tabeja ei voida synkronoida!",

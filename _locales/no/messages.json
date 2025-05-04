@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "De nødvendige parameterne for funksjonen ble ikke sendt med",
-            "description": "[feil] utvikleren prøvde å kalle en funksjon uten de nødvendige parameterne"
-        },
-        "error_invalid_key": {
-            "message": "Nøkkelparameteren som ble sendt til funksjonen er ikke gyldig",
-            "description": "[feil] utvikleren prøvde å kalle en funksjon med en ugyldig parameter"
-        },
 	"allow": {
 		"message": "Tillat",
 		"description": "[req_permission] knapp for å gi tillatelser"
@@ -167,6 +159,10 @@
 		"message": "Feil ved import:\n",
 		"description": "[error] det oppsto en feil under importprosessen"
 	},
+	"error_invalid_key": {
+		"message": "Nøkkelparameteren som ble sendt til funksjonen er ikke gyldig",
+		"description": "[feil] utvikleren prøvde å kalle en funksjon med en ugyldig parameter"
+	},
 	"error_invalid_tab": {
 		"message": "Ugyldig Tab",
 		"description": "[error] Tab-en er ikke gyldig"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Kan ikke fjerne en Tab som ikke er favoritt!",
 		"description": "[error] brukeren forsøkte å fjerne en Tab som ennå ikke er lagret"
+	},
+	"error_required_params": {
+		"message": "De nødvendige parameterne for funksjonen ble ikke sendt med",
+		"description": "[feil] utvikleren prøvde å kalle en funksjon uten de nødvendige parameterne"
 	},
 	"error_sync_nothing": {
 		"message": "Kan ikke synkronisere tomme Tabber!",

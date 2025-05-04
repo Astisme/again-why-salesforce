@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "ለተግባሩ የሚፈለጉት ፓራሜተሮች አልተላኩም",
-      "description": "[ችግር] አባል የሚያስፈልጉት ፓራሜተሮች ባይኖሩ ተግባሩን ለመጥለቅ ሞክሮ"
-    },
-    "error_invalid_key": {
-      "message": "ወደ ተግባሩ የተላከው የቁልፍ ፓራሜተር የተሳሳተ ነው",
-      "description": "[ችግር] አባል በልኩል ፓራሜተር ተግባሩን ለመጥለቅ ሞክሮ"
-    },
 	"allow": {
 		"message": "ፍቀድ",
 		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ለመፍቀድ የሚሆን አዝራር"
@@ -167,6 +159,10 @@
 		"message": "በማስመጣት ወቅት ስህተት፦\n",
 		"description": "[ስህተት] በማስመጣት ሂደት ወቅት ስህተት ተከስቷል"
 	},
+	"error_invalid_key": {
+		"message": "ወደ ተግባሩ የተላከው የቁልፍ ፓራሜተር የተሳሳተ ነው",
+		"description": "[ችግር] አባል በልኩል ፓራሜተር ተግባሩን ለመጥለቅ ሞክሮ"
+	},
 	"error_invalid_tab": {
 		"message": "ልክ ያልሆነ Tab",
 		"description": "[ስህተት] Tab ልክ ያልሆነ ነው"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "ተመራጭ ያልሆነ Tabን ማስወገድ አይቻልም!",
 		"description": "[ስህተት] ተጠቃሚው ገና ያልተቀመጠ Tabን ለማስወገድ ሞክሯል"
+	},
+	"error_required_params": {
+		"message": "ለተግባሩ የሚፈለጉት ፓራሜተሮች አልተላኩም",
+		"description": "[ችግር] አባል የሚያስፈልጉት ፓራሜተሮች ባይኖሩ ተግባሩን ለመጥለቅ ሞክሮ"
 	},
 	"error_sync_nothing": {
 		"message": "ባዶ (null) Tabs ማመሳሰል አይቻልም!",

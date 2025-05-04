@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Wymagane parametry funkcji nie zostały przekazane",
-            "description": "[błąd] deweloper próbował wywołać funkcję bez niezbędnych parametrów"
-        },
-        "error_invalid_key": {
-            "message": "Parametr klucza przekazany do funkcji jest nieprawidłowy",
-            "description": "[błąd] deweloper próbował wywołać funkcję z nieprawidłowym parametrem"
-        },
 	"allow": {
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"
@@ -167,6 +159,10 @@
 		"message": "Błąd podczas importu:\n",
 		"description": "[błąd] wystąpił błąd podczas procesu importu"
 	},
+	"error_invalid_key": {
+		"message": "Parametr klucza przekazany do funkcji jest nieprawidłowy",
+		"description": "[błąd] deweloper próbował wywołać funkcję z nieprawidłowym parametrem"
+	},
 	"error_invalid_tab": {
 		"message": "Nieprawidłowy Tab",
 		"description": "[błąd] Tab jest nieprawidłowy"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Nie można usunąć Tab, który nie jest ulubiony!",
 		"description": "[błąd] użytkownik próbował usunąć Tab, który nie został jeszcze zapisany"
+	},
+	"error_required_params": {
+		"message": "Wymagane parametry funkcji nie zostały przekazane",
+		"description": "[błąd] deweloper próbował wywołać funkcję bez niezbędnych parametrów"
 	},
 	"error_sync_nothing": {
 		"message": "Nie można zsynchronizować pustych Tabs!",

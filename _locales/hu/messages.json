@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "A függvényhez szükséges paraméterek nem lettek átadva",
-      "description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt a szükséges paraméterek nélkül"
-    },
-    "error_invalid_key": {
-      "message": "A függvénynek átadott kulcsparaméter érvénytelen",
-      "description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt érvénytelen paraméterrel"
-    },
 	"allow": {
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"
@@ -167,6 +159,10 @@
 		"message": "Hiba az importálás során:\n",
 		"description": "[error] hiba történt az import folyamat során"
 	},
+	"error_invalid_key": {
+		"message": "A függvénynek átadott kulcsparaméter érvénytelen",
+		"description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt érvénytelen paraméterrel"
+	},
 	"error_invalid_tab": {
 		"message": "Érvénytelen Tab",
 		"description": "[error] a Tab nem érvényes"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Nem távolítható el egy nem kedvenc Tab!",
 		"description": "[error] a felhasználó nem mentett Tabot próbált meg eltávolítani"
+	},
+	"error_required_params": {
+		"message": "A függvényhez szükséges paraméterek nem lettek átadva",
+		"description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt a szükséges paraméterek nélkül"
 	},
 	"error_sync_nothing": {
 		"message": "Üres Tabokat nem lehet szinkronizálni!",

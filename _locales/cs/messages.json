@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "Nepředány požadované parametry pro funkci",
-      "description": "[chyba] vývojář se pokusil volat funkci bez potřebných parametrů"
-    },
-    "error_invalid_key": {
-      "message": "Parametr key předaný funkci je neplatný",
-      "description": "[chyba] vývojář se pokusil volat funkci s neplatným parametrem"
-    },
 	"allow": {
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"
@@ -167,6 +159,10 @@
 		"message": "Chyba při importu:\n",
 		"description": "[error] během importu došlo k chybě"
 	},
+	"error_invalid_key": {
+		"message": "Parametr key předaný funkci je neplatný",
+		"description": "[chyba] vývojář se pokusil volat funkci s neplatným parametrem"
+	},
 	"error_invalid_tab": {
 		"message": "Neplatný Tab",
 		"description": "[error] Tab není platný"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Nelze odstranit Tab, který není oblíbený!",
 		"description": "[error] uživatel se pokusil odstranit Tab, který ještě nebyl uložen"
+	},
+	"error_required_params": {
+		"message": "Nepředány požadované parametry pro funkci",
+		"description": "[chyba] vývojář se pokusil volat funkci bez potřebných parametrů"
 	},
 	"error_sync_nothing": {
 		"message": "Nelze synchronizovat prázdné Taby!",

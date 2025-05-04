@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
-      "description": "[Fehler] Der Entwickler hat versucht, die Funktion ohne die notwendigen Parameter aufzurufen"
-    },
-    "error_invalid_key": {
-      "message": "Der an die Funktion übergebene key-Parameter ist ungültig",
-      "description": "[Fehler] Der Entwickler hat versucht, die Funktion mit einem ungültigen Parameter aufzurufen"
-    },
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
@@ -167,6 +159,10 @@
 		"message": "Fehler beim Import:\n",
 		"description": "[error] Während des Importvorgangs ist ein Fehler aufgetreten."
 	},
+	"error_invalid_key": {
+		"message": "Der an die Funktion übergebene key-Parameter ist ungültig",
+		"description": "[Fehler] Der Entwickler hat versucht, die Funktion mit einem ungültigen Parameter aufzurufen"
+	},
 	"error_invalid_tab": {
 		"message": "Ungültiger Tab",
 		"description": "[error] Der Tab ist ungültig."
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Nicht-favoritärer Tab kann nicht entfernt werden!",
 		"description": "[error] Es wurde versucht, einen Tab zu entfernen, der noch nicht gespeichert ist."
+	},
+	"error_required_params": {
+		"message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
+		"description": "[Fehler] Der Entwickler hat versucht, die Funktion ohne die notwendigen Parameter aufzurufen"
 	},
 	"error_sync_nothing": {
 		"message": "Leere Tabs können nicht synchronisiert werden!",

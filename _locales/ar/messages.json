@@ -1,12 +1,4 @@
 {
-    "error_required_params": {
-      "message": "لم يتم تمرير المعلمات المطلوبة للدالة",
-      "description": "[خطأ] حاول المطور استدعاء الدالة بدون المعلمات اللازمة"
-    },
-    "error_invalid_key": {
-      "message": "معامل المفتاح المرسل للدالة غير صالح",
-      "description": "[خطأ] حاول المطور استدعاء الدالة بمعامل غير صالح"
-    },
 	"allow": {
 		"message": "السماح",
 		"description": "[req_permission] زر للسماح بالأذونات"
@@ -167,6 +159,10 @@
 		"message": "خطأ أثناء الاستيراد:\n",
 		"description": "[error] حدث خطأ أثناء عملية الاستيراد"
 	},
+	"error_invalid_key": {
+		"message": "معامل المفتاح المرسل للدالة غير صالح",
+		"description": "[خطأ] حاول المطور استدعاء الدالة بمعامل غير صالح"
+	},
 	"error_invalid_tab": {
 		"message": "Tab غير صالح",
 		"description": "[error] الـ Tab غير صالح"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "لا يمكن إزالة Tab غير مفضلة!",
 		"description": "[error] تمت محاولة إزالة Tab لم تُحفظ بعد"
+	},
+	"error_required_params": {
+		"message": "لم يتم تمرير المعلمات المطلوبة للدالة",
+		"description": "[خطأ] حاول المطور استدعاء الدالة بدون المعلمات اللازمة"
 	},
 	"error_sync_nothing": {
 		"message": "لا يمكن مزامنة الـ Tabs الفارغة!",

@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "未傳遞函數所需的參數",
-            "description": "[錯誤] 開發人員嘗試呼叫函數但未提供必要的參數"
-        },
-        "error_invalid_key": {
-            "message": "傳遞給函數的鍵參數無效",
-            "description": "[錯誤] 開發人員嘗試使用無效參數呼叫函數"
-        },
 	"allow": {
 		"message": "允許",
 		"description": "[req_permission] 按鈕，用於允許權限"
@@ -167,6 +159,10 @@
 		"message": "匯入期間發生錯誤:\n",
 		"description": "[error] 匯入過程中出現錯誤"
 	},
+	"error_invalid_key": {
+		"message": "傳遞給函數的鍵參數無效",
+		"description": "[錯誤] 開發人員嘗試使用無效參數呼叫函數"
+	},
 	"error_invalid_tab": {
 		"message": "無效的 Tab",
 		"description": "[error] Tab 不正確"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "無法刪除非最愛的 Tab！",
 		"description": "[error] 使用者嘗試刪除尚未儲存的 Tab"
+	},
+	"error_required_params": {
+		"message": "未傳遞函數所需的參數",
+		"description": "[錯誤] 開發人員嘗試呼叫函數但未提供必要的參數"
 	},
 	"error_sync_nothing": {
 		"message": "無法同步空的 Tab！",

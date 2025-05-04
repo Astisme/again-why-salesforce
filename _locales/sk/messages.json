@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Požadované parametre pre funkciu neboli odovzdané",
-            "description": "[chyba] vývojár sa pokúsil volať funkciu bez potrebných parametrov"
-        },
-        "error_invalid_key": {
-            "message": "Parameter kľúča odovzdaný funkcii nie je platný",
-            "description": "[chyba] vývojár sa pokúsil volať funkciu s neplatným parametrom"
-        },
 	"allow": {
 		"message": "Povoliť",
 		"description": "[req_permission] tlačidlo na povolenie oprávnení"
@@ -167,6 +159,10 @@
 		"message": "Chyba pri importe:\n",
 		"description": "[error] Nastala chyba počas importného procesu"
 	},
+	"error_invalid_key": {
+		"message": "Parameter kľúča odovzdaný funkcii nie je platný",
+		"description": "[chyba] vývojár sa pokúsil volať funkciu s neplatným parametrom"
+	},
 	"error_invalid_tab": {
 		"message": "Neplatný Tab",
 		"description": "[error] Tab nie je platný"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Tab, ktorý nie je obľúbený, nemožno odstrániť!",
 		"description": "[error] Používateľ sa pokúsil odstrániť Tab, ktorý ešte nebol uložený"
+	},
+	"error_required_params": {
+		"message": "Požadované parametre pre funkciu neboli odovzdané",
+		"description": "[chyba] vývojár sa pokúsil volať funkciu bez potrebných parametrov"
 	},
 	"error_sync_nothing": {
 		"message": "Nemožno zosynchronizovať prázdne Tab-y!",

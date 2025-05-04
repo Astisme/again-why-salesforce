@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "Funkcijai nepieciešamie parametri netika nodoti",
-            "description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju bez nepieciešamajiem parametriem"
-        },
-        "error_invalid_key": {
-            "message": "Funkcijai nodotais atslēgas parametrs nav derīgs",
-            "description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju ar nederīgu parametru"
-        },
 	"allow": {
 		"message": "Atļaut",
 		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"
@@ -167,6 +159,10 @@
 		"message": "Kļūda importēšanas laikā:\n",
 		"description": "[kļūda] importēšanas procesa laikā radās kļūda"
 	},
+	"error_invalid_key": {
+		"message": "Funkcijai nodotais atslēgas parametrs nav derīgs",
+		"description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju ar nederīgu parametru"
+	},
 	"error_invalid_tab": {
 		"message": "Nederīgs Tab",
 		"description": "[kļūda] Tab nav derīgs"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "Nevar noņemt Tab, kas nav iecienītākais!",
 		"description": "[kļūda] lietotājs mēģināja noņemt Tab, kas vēl nebija saglabāts"
+	},
+	"error_required_params": {
+		"message": "Funkcijai nepieciešamie parametri netika nodoti",
+		"description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju bez nepieciešamajiem parametriem"
 	},
 	"error_sync_nothing": {
 		"message": "Nevar sinhronizēt null Tabs!",

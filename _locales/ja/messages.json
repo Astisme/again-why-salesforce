@@ -1,12 +1,4 @@
 {
-        "error_required_params": {
-            "message": "関数に必要なパラメータが渡されませんでした",
-            "description": "[エラー] 開発者が必要なパラメータなしで関数を呼び出そうとしました"
-        },
-        "error_invalid_key": {
-            "message": "関数に渡されたキーパラメータが無効です",
-            "description": "[エラー] 開発者が無効なパラメータで関数を呼び出そうとしました"
-        },
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
@@ -167,6 +159,10 @@
 		"message": "インポート中にエラーが発生しました：\n",
 		"description": "[error] インポートプロセス中にエラーが発生しました"
 	},
+	"error_invalid_key": {
+		"message": "関数に渡されたキーパラメータが無効です",
+		"description": "[エラー] 開発者が無効なパラメータで関数を呼び出そうとしました"
+	},
 	"error_invalid_tab": {
 		"message": "無効な Tab",
 		"description": "[error] Tab が無効です。"
@@ -238,6 +234,10 @@
 	"error_remove_not_favourite": {
 		"message": "お気に入りでない Tab は削除できません！",
 		"description": "[error] まだ保存されていない Tab を削除しようとしました"
+	},
+	"error_required_params": {
+		"message": "関数に必要なパラメータが渡されませんでした",
+		"description": "[エラー] 開発者が必要なパラメータなしで関数を呼び出そうとしました"
 	},
 	"error_sync_nothing": {
 		"message": "空の Tabs は同期できません！",

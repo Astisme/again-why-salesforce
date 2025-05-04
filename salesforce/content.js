@@ -89,9 +89,7 @@ async function checkAddLightningNavigation() {
 	]);
 	if (
 		settings != null &&
-        settings.some(setting => 
-            setting.enabled
-        )
+		settings.some((setting) => setting.enabled)
 	) {
 		return;
 	}
