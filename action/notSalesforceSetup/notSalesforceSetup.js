@@ -76,7 +76,7 @@ function nss_getCurrentBrowserTab(callback, url) {
  */
 function createTab(url, count = 0) {
 	if (count > 5) {
-		throw new Error("Could not find browser tab.");
+		throw new Error("error_no_browser_tab");
 	}
 	if (openPageInSameTab) {
 		BROWSER.tabs.update({

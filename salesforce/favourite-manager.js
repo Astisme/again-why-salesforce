@@ -10,6 +10,8 @@ import {
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
+    ACTION_ADD,
+    ACTION_REMOVE_THIS,
 	ensureAllTabsAvailability,
 	getAllTabs,
 	getCurrentHref,
@@ -202,7 +204,7 @@ async function addTab(url) {
 	) {
 		org = Tab.extractOrgName(href);
 	}
-	await performActionOnTabs("add", { label, url, org });
+	await performActionOnTabs(ACTION_ADD, { label, url, org });
 }
 
 /**
@@ -223,7 +225,7 @@ async function actionFavourite() {
 			showToast("error_remove_not_favourite", false, true);
 			return;
 		}
-		await performActionOnTabs("remove-this", tabToRemove);
+		await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
 	} else {
 		await addTab(url);
 	}

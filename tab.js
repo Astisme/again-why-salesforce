@@ -33,7 +33,7 @@ export default class Tab {
 	 */
 	constructor(label, url, org = undefined, secret) {
 		if (secret !== _tabSecret) {
-			throw new Error("Use Tab.create() instead of new Tab()");
+			throw new Error("error_tab_constructor");
 		}
 		this.label = label;
 		this.url = url;

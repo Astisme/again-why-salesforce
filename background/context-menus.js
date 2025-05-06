@@ -7,6 +7,23 @@ import {
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
+	CXM_OPEN_OTHER_ORG,
+	CXM_UPDATE_ORG,
+	CXM_UPDATE_TAB,
+	CXM_MOVE_FIRST,
+	CXM_MOVE_LEFT,
+	CXM_MOVE_RIGHT,
+	CXM_MOVE_LAST,
+	CXM_REMOVE_TAB,
+	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_RIGHT_TABS,
+	CXM_EMPTY_NO_ORG_TABS,
+	CXM_EMPTY_TABS,
+	CXM_IMPORT_TABS,
+	CXM_EXPORT_TABS,
+	CXM_PAGE_SAVE_TAB,
+	CXM_PAGE_REMOVE_TAB,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -14,23 +31,24 @@ import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import { bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
 
 let areMenuItemsVisible = false;
+const cxm_open_settings = "open-settings";
 
 const menuItemsOriginal = [
 	{
-		id: "open-other-org",
+		id: CXM_OPEN_OTHER_ORG,
 		title: "cxm_open_other_org",
 		contexts: ["link", "page", "frame"],
 	},
 
 	{ id: "update", title: "cxm_update", contexts: ["link"] },
 	{
-		id: "update-org",
+		id: CXM_UPDATE_ORG,
 		title: "cxm_update_org",
 		contexts: ["link"],
 		parentId: "update",
 	},
 	{
-		id: "update-tab",
+		id: CXM_UPDATE_TAB,
 		title: "cxm_update_tab",
 		contexts: ["link"],
 		parentId: "update",
@@ -38,25 +56,25 @@ const menuItemsOriginal = [
 
 	{ id: "move", title: "cxm_move", contexts: ["link"] },
 	{
-		id: "move-first",
+		id: CXM_MOVE_FIRST,
 		title: "cxm_move_first",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
-		id: "move-left",
+		id: CXM_MOVE_LEFT,
 		title: "cxm_move_left",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
-		id: "move-right",
+		id: CXM_MOVE_RIGHT,
 		title: "cxm_move_right",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
-		id: "move-last",
+		id: CXM_MOVE_LAST,
 		title: "cxm_move_last",
 		contexts: ["link"],
 		parentId: "move",
@@ -64,65 +82,65 @@ const menuItemsOriginal = [
 
 	{ id: "remove", title: "cxm_remove", contexts: ["link"] },
 	{
-		id: "remove-tab",
+		id: CXM_REMOVE_TAB,
 		title: "cxm_remove_tab",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "remove-other-tabs",
+		id: CXM_REMOVE_OTHER_TABS,
 		title: "cxm_remove_other_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "remove-left-tabs",
+		id: CXM_REMOVE_LEFT_TABS,
 		title: "cxm_remove_left_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "remove-right-tabs",
+		id: CXM_REMOVE_RIGHT_TABS,
 		title: "cxm_remove_right_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "empty-no-org-tabs",
+		id: CXM_EMPTY_NO_ORG_TABS,
 		title: "cxm_empty_no_org_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "empty-tabs",
+		id: CXM_EMPTY_TABS,
 		title: "cxm_empty_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 
 	{
-		id: "import-tabs",
+		id: CXM_IMPORT_TABS,
 		title: "cxm_import_tabs",
 		contexts: ["page", "frame"],
 	},
 	{
-		id: "export-tabs",
+		id: CXM_EXPORT_TABS,
 		title: "cxm_export_tabs",
 		contexts: ["page", "frame"],
 	},
 	{
-		id: "page-save-tab",
+		id: CXM_PAGE_SAVE_TAB,
 		title: "cxm_page_save_tab",
 		contexts: ["page", "frame"],
 	},
 	{
-		id: "page-remove-tab",
+		id: CXM_PAGE_REMOVE_TAB,
 		title: "cxm_page_remove_tab",
 		contexts: ["page", "frame"],
 	},
 
 	{
-		id: "open-settings",
+		id: cxm_open_settings,
 		title: "cxm_settings",
 		contexts: ["link", "page", "frame"],
 	},
@@ -290,7 +308,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
-		case "open-other-org":
+		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);
 				message.pageUrl = Tab.expandURL(info.pageUrl, browserTabUrl);
@@ -301,18 +319,18 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			}
 			message.linkTabLabel = info.linkText;
 			break;
-		case "import-tabs":
+		case CXM_IMPORT_TABS:
 			message.what = "add";
 			break;
-		case "export-tabs":
+		case CXM_EXPORT_TABS:
 			exportHandler();
 			break;
-		case "page-save-tab":
-		case "page-remove-tab":
+		case CXM_PAGE_SAVE_TAB:
+		case CXM_REMOVE_TAB:
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			break;
-		case "open-settings":
+		case cxm_open_settings:
 			openSettingsPage();
 			break;
 		default:

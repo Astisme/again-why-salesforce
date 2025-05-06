@@ -201,17 +201,10 @@ async function showFileImport() {
 	listenToFileUpload(modalParent);
 }
 
-// listen from saves from the action page
-BROWSER.runtime.onMessage.addListener(function (message, _, sendResponse) {
-	if (message == null || message.what == null) {
-		return;
-	}
-	if (message.what == "add") {
-		sendResponse(null);
-		try {
-			showFileImport();
-		} catch (error) {
-			showToast(error, false);
-		}
-	}
-});
+export async function createImportModal(){
+    try {
+        showFileImport();
+    } catch (error) {
+        showToast(error, false);
+    }
+}

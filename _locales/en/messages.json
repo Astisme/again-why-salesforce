@@ -1,4 +1,100 @@
 {
+	"error_translationservice_constructor": {
+		"message": "Use TranslationService.create() instead of new TranslationService()",
+		"description": "[error] tell the developer how to use the TranslationService class"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator was not yet initialized.",
+		"description": "[error] the TranslationService was not ready"
+	},
+	"error_many_tabs_found": {
+		"message": "Found more than one Tab.",
+		"description": "[error] many Tabs where retrieved"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Use TabContainer.create() instead of new TabContainer()",
+		"description": "[error] tell the developer how to use the TabContainer class"
+	},
+	"error_tab_constructor": {
+		"message": "Use Tab.create() instead of new Tab()",
+		"description": "[error] tell the developer how to use the Tab class"
+	},
+	"error_redirect": {
+		"message": "Cannot redirect. Please refresh the page.",
+		"description": "[error] Generic error on page redirection."
+	},
+	"error_failed_sync": {
+		"message": "Failed to sync.",
+		"description": "[error] Generic error when the Tabs could not get synced from the user"
+	},
+	"error_removing_all_tabs": {
+		"message": "Error when removing all Tabs.",
+		"description": "[error] Generic error used while removing all Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Error when removing generic Tabs.",
+		"description": "[error] Generic error used while removing generic Tabs"
+	},
+	"error_adding_tab": {
+		"message": "Error when adding Tab.",
+		"description": "[error] Generic error used while adding a Tab"
+	},
+	"error_removing_other_tabs": {
+		"message": "Error when removing other Tabs.",
+		"description": "[error] Generic error used while removing other Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Error when removing Tab.",
+		"description": "[error] Generic error used while removing a Tab"
+	},
+	"error_not_initialized": {
+		"message": "was not yet initialized.",
+		"description": "[error] Generic error for when a variable is not ready"
+	},
+	"error_unknown_request": {
+		"message": "Unknown request.",
+		"description": "[error] Generic error after getting a message which was not recognized"
+	},
+	"error_invalid_request": {
+		"message": "Invalid request.",
+		"description": "[error] Generic error after getting a badly formatted message"
+	},
+	"error_processing_tabs": {
+		"message": "Error processing Tabs.",
+		"description": "[error] Generic error when processing the Tabs"
+	},
+	"error_tab_url_saved": {
+		"message": "A Tab with this URL has already been saved!",
+		"description": "[error] The user tried to save an already favourited Tab"
+	},
+	"cmd_export_all": {
+		"message": "Show the modal to export all saved Tabs",
+		"description": "[command description] the user wants to export all Tabs"
+	},
+	"cmd_import": {
+		"message": "Show the modal to import new Tabs",
+		"description": "[command description] the user wants to import new Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Show the modal to open the current page in another Org",
+		"description": "[command description] the user wants to open the current page in another Org"
+	},
+	"cmd_update_tab": {
+		"message": "Show modal to update current page (if saved)",
+		"description": "[command description] the user wants to update the current page"
+	},
+	"cmd_toggle_org": {
+		"message": "Toggle the current page's Org value (if saved)",
+		"description": "[command description] the user wants to toggle the Org for the current page"
+	},
+	"cmd_remove_tab": {
+		"message": "Remove the current page from the Tab list (if saved)",
+		"description": "[command description] the user wants to remove the current page"
+	},
+	"cmd_save_as_tab": {
+		"message": "Save the current page in the Tab list (if not saved)",
+		"description": "[command description] the user wants to save the current page"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -665,6 +761,10 @@
 	"underline_wavy": {
 		"message": "Underline Wavy",
 		"description": "Decoration style option to apply a wavy underline to Tab text"
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] let the user drop their files onto the specified area"
 	},
 	"upload": {
 		"message": "Upload",

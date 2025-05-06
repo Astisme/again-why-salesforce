@@ -11,6 +11,16 @@ import {
 	SETTINGS_KEY,
 	SUPPORTED_SALESFORCE_URLS,
 	WHY_KEY,
+    SETUP_LIGHTNING_PATTERN,
+	CMD_SAVE_AS_TAB,
+	CMD_REMOVE_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
+	CMD_OPEN_SETTINGS,
+	CMD_OPEN_OTHER_ORG,
+	CMD_IMPORT,
+	CMD_EXPORT_ALL,
+	openSettingsPage,
 } from "/constants.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 
@@ -217,7 +227,7 @@ export async function bg_getSalesforceLanguage(callback = null) {
  */
 BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	if (request == null || request.what == null) {
-		console.error({ error: "Invalid request", request });
+		console.error({ error: "error_invalid_request", request });
 		sendResponse(null);
 		return false;
 	}
@@ -256,11 +266,44 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 			break;
 		default:
 			if (!["import"].includes(request.what)) {
-				console.error({ error: "Unknown request", request });
+				console.error({ error: "error_unknown_request", request });
 			}
 			break;
 	}
 	return true;
+});
+
+BROWSER.commands.onCommand.addListener(async (command) => {
+    // check the current page is Salesforce Setup
+	const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
+	if (
+		broswerTabUrl == null ||
+		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+	) {
+		// we're not in Salesforce Setup
+        return;
+    }
+    const message = { what: command };
+    switch (command) {
+        case CMD_IMPORT:
+            message.what = "add";
+		case CMD_SAVE_AS_TAB:
+        case CMD_REMOVE_TAB:
+        case CMD_TOGGLE_ORG:
+        case CMD_UPDATE_TAB:
+        case CMD_OPEN_OTHER_ORG:
+            bg_notify(message);
+			break;
+		case CMD_OPEN_SETTINGS:
+            openSettingsPage();
+			break;
+		case CMD_EXPORT_ALL:
+            exportHandler();
+			break;
+        default:
+            bg_notify({ what: "warning", message: `Received unknown command: ${command}` });
+            break;
+    }
 });
 
 async function setDefalutOrgStyle() {

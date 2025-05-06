@@ -21,7 +21,7 @@ export default class TabContainer extends Array {
 		if (secret !== _tabContainerSecret) {
 			console.trace();
 			throw new Error(
-				"Use TabContainer.create() instead of new TabContainer()",
+				"error_tabcontainer_constructor",
 			);
 		}
 		super();
@@ -379,10 +379,10 @@ export default class TabContainer extends Array {
 	getSingleTabByData(tab, match = true) {
 		const matchingTabs = this.getTabsByData(tab, match);
 		if (matchingTabs.length === 0) {
-			throw new Error("Could not find Tab.");
+			throw new Error("error_tab_not_found");
 		}
 		if (matchingTabs.length > 1) {
-			throw new Error("Could not discriminate Tab.");
+			throw new Error("error_many_tabs_found");
 		}
 		return matchingTabs[0];
 	}
@@ -856,22 +856,6 @@ export default class TabContainer extends Array {
 		{ label = null, url = null } = {},
 		{ removeBefore = null } = {},
 	) {
-		/*
-		if (url == null) {
-			throw new Error("Cannot identify Tab.");
-		}
-		const matchingTabs = this.getTabsByData({ label, url });
-		if (matchingTabs.length === 0) {
-			throw new Error("This is not a saved tab!");
-		}
-		const matchTab = matchingTabs[0];
-		if (label == null) {
-			if (matchingTabs.length > 1) {
-				throw new Error("Found more than 1 matching Tab.");
-			}
-			label = matchTab.label;
-		}
-        */
 		const matchTab = await this.getMatchingTab(label, url);
 		if (label == null) {
 			label = matchTab.label;

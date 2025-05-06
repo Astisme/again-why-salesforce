@@ -200,7 +200,7 @@ function inputLabelUrlListener(type) {
 			// show warning in salesforce
 			sendExtensionMessage({
 				what: "warning",
-				message: "A tab with this URL has already been saved!",
+				message: "error_tab_url_saved",
 				action: "make-bold",
 				url,
 			});
@@ -385,7 +385,7 @@ async function findTabsFromRows(orgName = null) {
 		// only needed when not rendering these tabs
 		//...allTabs.getTabsByOrg(orgName, false),
 	} catch (err) {
-		console.error("Error processing tabs:", err);
+		console.error("error_processing_tabs", err);
 		return [];
 	}
 }

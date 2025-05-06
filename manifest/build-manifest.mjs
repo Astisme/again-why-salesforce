@@ -12,10 +12,21 @@ switch (browser) {
 		break;
 
 	case "chrome":
-	case "edge":
+	case "edge":{
 		delete manifest.background.scripts;
 		delete manifest.browser_specific_settings;
+        const commandsToKeep = [
+            "save-as-tab",
+            "remove-tab",
+            "update-tab",
+            "open-other-org",
+        ];
+        Object.keys(manifest.commands).forEach(com => {
+            if(!commandsToKeep.includes(com))
+                delete manifest.commands[com];
+        });
 		break;
+    }
 
 	case "safari":
 		delete manifest.minimum_chrome_version;

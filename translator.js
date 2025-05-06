@@ -28,7 +28,7 @@ class TranslationService {
 	constructor(secret) {
 		if (secret !== _translationSecret) {
 			throw new Error(
-				"Use TranslationService.create() instead of new TranslationService()",
+				"error_translationservice_constructor",
 			);
 		}
 	}
@@ -91,7 +91,7 @@ class TranslationService {
 	async loadLanguageFile(language = null) {
 		if (language == null) {
 			console.trace();
-			throw new Error("Be sure to insert a language to load.");
+			throw new Error("error_required_params");
 		}
 		if (this.caches[language] != null) {
 			this.currentLanguage = language;
@@ -153,10 +153,10 @@ class TranslationService {
 			regionAgnosticLanguage?.[key]?.message ??
 			this.caches[TranslationService.FALLBACK_LANGUAGE]?.[key]?.message;
 		if (translation == null) {
-			let errorMsg = "Key not found anywhere";
+			let errorMsg = "error_missing_key"; // fallback
 			if (isError === false) {
 				errorMsg = await this.translate(
-					"error_missing_key",
+                    errorMsg,
 					language,
 					true,
 				);
@@ -219,7 +219,7 @@ async function getTranslator_async() {
 
 function getTranslator() {
 	if (singleton == null || singleton instanceof Promise) {
-		throw new Error("translator was not yet initialized");
+		throw new Error("error_translator_not_initialized");
 	}
 	return singleton;
 }
