@@ -1,5 +1,5 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
+import { EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
@@ -203,7 +203,7 @@ async function showFileImport() {
 
 export async function createImportModal(){
     try {
-        showFileImport();
+        await showFileImport();
     } catch (error) {
         showToast(error, false);
     }

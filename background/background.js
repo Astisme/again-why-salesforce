@@ -305,6 +305,7 @@ BROWSER.commands.onCommand.addListener(async (command) => {
     switch (command) {
         case CMD_IMPORT:
             message.what = "add";
+            /* falls through */
 		case CMD_SAVE_AS_TAB:
         case CMD_REMOVE_TAB:
         case CMD_TOGGLE_ORG:
