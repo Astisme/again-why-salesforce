@@ -12,21 +12,22 @@ switch (browser) {
 		break;
 
 	case "chrome":
-	case "edge":{
+	case "edge": {
 		delete manifest.background.scripts;
 		delete manifest.browser_specific_settings;
-        const commandsToKeep = [
-            "cmd-save-as-tab",
-            "cmd-remove-tab",
-            "cmd-update-tab",
-            "cmd-open-other-org",
-        ];
-        Object.keys(manifest.commands).forEach(com => {
-            if(!commandsToKeep.includes(com))
-                delete manifest.commands[com]["suggested_key"];
-        });
+		const commandsToKeep = [
+			"cmd-save-as-tab",
+			"cmd-remove-tab",
+			"cmd-update-tab",
+			"cmd-open-other-org",
+		];
+		Object.keys(manifest.commands).forEach((com) => {
+			if (!commandsToKeep.includes(com)) {
+				delete manifest.commands[com]["suggested_key"];
+			}
+		});
 		break;
-    }
+	}
 
 	case "safari":
 		delete manifest.minimum_chrome_version;

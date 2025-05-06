@@ -1,108 +1,4 @@
 {
-  "error_translationservice_constructor": {
-    "message": "Použijte TranslationService.create() místo new TranslationService()",
-    "description": "[error] Informujte vývojáře, jak používat třídu TranslationService"
-  },
-  "error_translator_not_initialized": {
-    "message": "translator dosud nebyl inicializován.",
-    "description": "[error] TranslationService nebyl připraven"
-  },
-  "error_many_tabs_found": {
-    "message": "Bylo nalezeno více než jedno Tab.",
-    "description": "[error] Bylo načteno více Tabs"
-  },
-  "error_tabcontainer_constructor": {
-    "message": "Použijte TabContainer.create() místo new TabContainer()",
-    "description": "[error] Informujte vývojáře, jak používat třídu TabContainer"
-  },
-  "error_tab_constructor": {
-    "message": "Použijte Tab.create() místo new Tab()",
-    "description": "[error] Informujte vývojáře, jak používat třídu Tab"
-  },
-  "error_redirect": {
-    "message": "Přesměrování nelze provést. Prosím obnovte stránku.",
-    "description": "[error] Obecná chyba při přesměrování stránky"
-  },
-  "error_failed_sync": {
-    "message": "Synchronizace se nezdařila.",
-    "description": "[error] Obecná chyba při synchronizaci Tabs s uživatelem"
-  },
-  "error_removing_all_tabs": {
-    "message": "Chyba při odstraňování všech Tabs.",
-    "description": "[error] Obecná chyba při odstraňování všech Tabs"
-  },
-  "error_removing_generic_tabs": {
-    "message": "Chyba při odstraňování obecných Tabs.",
-    "description": "[error] Obecná chyba při odstraňování obecných Tabs"
-  },
-  "error_adding_tab": {
-    "message": "Chyba při přidávání Tab.",
-    "description": "[error] Obecná chyba při přidávání Tab"
-  },
-  "error_removing_other_tabs": {
-    "message": "Chyba při odstraňování ostatních Tabs.",
-    "description": "[error] Obecná chyba při odstraňování ostatních Tabs"
-  },
-  "error_removing_tab": {
-    "message": "Chyba při odstraňování Tab.",
-    "description": "[error] Obecná chyba při odstraňování Tab"
-  },
-  "error_not_initialized": {
-    "message": "Ještě nebylo inicializováno.",
-    "description": "[error] Obecná chyba, když proměnná není připravena"
-  },
-  "error_unknown_request": {
-    "message": "Neznámý požadavek.",
-    "description": "[error] Obecná chyba po přijmutí neznámé zprávy"
-  },
-  "error_invalid_request": {
-    "message": "Neplatný požadavek.",
-    "description": "[error] Obecná chyba po přijmutí zprávy ve špatném formátu"
-  },
-  "error_processing_tabs": {
-    "message": "Chyba při zpracování Tabs.",
-    "description": "[error] Obecná chyba při zpracování Tabs"
-  },
-  "error_tab_url_saved": {
-    "message": "Tab s touto URL je již uložen!",
-    "description": "[error] Uživatel se pokusil uložit již uložený Tab"
-  },
-  "cmd_export_all": {
-    "message": "Zobrazit modální okno pro export všech uložených Tabs",
-    "description": "[command description] uživatel chce exportovat všechny Tabs"
-  },
-  "cmd_import": {
-    "message": "Zobrazit modální okno pro import nových Tabs",
-    "description": "[command description] uživatel chce importovat nové Tabs"
-  },
-  "cmd_open_other_org": {
-    "message": "Zobrazit modální okno pro otevření aktuální stránky v jiné Org",
-    "description": "[command description] uživatel chce otevřít aktuální stránku v jiné Org"
-  },
-  "cmd_update_tab": {
-    "message": "Zobrazit modální okno pro aktualizaci aktuální stránky (pokud je uložena)",
-    "description": "[command description] uživatel chce aktualizovat aktuální stránku"
-  },
-  "cmd_toggle_org": {
-    "message": "Zobrazit modální okno pro přepnutí hodnoty Org aktuální stránky (pokud je uložena)",
-    "description": "[command description] uživatel chce přepnout Org aktuální stránky"
-  },
-  "cmd_remove_tab": {
-    "message": "Odstranit aktuální stránku ze seznamu Tabs (pokud je uložena)",
-    "description": "[command description] uživatel chce odstranit aktuální stránku"
-  },
-  "cmd_save_as_tab": {
-    "message": "Uložit aktuální stránku do seznamu Tabs (pokud není uložena)",
-    "description": "[command description] uživatel chce uložit aktuální stránku"
-  },
-  "drop": {
-    "message": "Drop",
-    "description": "[import] umožňuje uživateli přetáhnout své soubory do určené oblasti"
-  },
-  "open_settings": {
-    "message": "Open Extension Settings",
-    "description": "[popup] tlačítko pro přesměrování na stránku nastavení"
-  },
 	"allow": {
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Vybrané",
 		"description": "Záhlaví sekce pro položky, které byly vybrány"
+	},
+	"cmd_export_all": {
+		"message": "Zobrazit modální okno pro export všech uložených Tabs",
+		"description": "[command description] uživatel chce exportovat všechny Tabs"
+	},
+	"cmd_import": {
+		"message": "Zobrazit modální okno pro import nových Tabs",
+		"description": "[command description] uživatel chce importovat nové Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Zobrazit modální okno pro otevření aktuální stránky v jiné Org",
+		"description": "[command description] uživatel chce otevřít aktuální stránku v jiné Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Odstranit aktuální stránku ze seznamu Tabs (pokud je uložena)",
+		"description": "[command description] uživatel chce odstranit aktuální stránku"
+	},
+	"cmd_save_as_tab": {
+		"message": "Uložit aktuální stránku do seznamu Tabs (pokud není uložena)",
+		"description": "[command description] uživatel chce uložit aktuální stránku"
+	},
+	"cmd_toggle_org": {
+		"message": "Zobrazit modální okno pro přepnutí hodnoty Org aktuální stránky (pokud je uložena)",
+		"description": "[command description] uživatel chce přepnout Org aktuální stránky"
+	},
+	"cmd_update_tab": {
+		"message": "Zobrazit modální okno pro aktualizaci aktuální stránky (pokud je uložena)",
+		"description": "[command description] uživatel chce aktualizovat aktuální stránku"
 	},
 	"confirm_another_org": {
 		"message": "Potvrďte otevření tohoto odkazu.",
@@ -227,6 +151,14 @@
 		"message": "Smazat všechny Taby",
 		"description": "[popup] titulek v koši pro smazání všech Tabů"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] umožňuje uživateli přetáhnout své soubory do určené oblasti"
+	},
+	"error_adding_tab": {
+		"message": "Chyba při přidávání Tab.",
+		"description": "[error] Obecná chyba při přidávání Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Nejprve zavřete ostatní okno!",
 		"description": "[toast] Uživatel se pokusil otevřít více než jedno modální okno"
@@ -259,6 +191,10 @@
 		"message": "Nelze extrahovat název organizace z prázdného URL!",
 		"description": "[error] nebylo předáno URL, z něhož by se extrahoval název organizace"
 	},
+	"error_failed_sync": {
+		"message": "Synchronizace se nezdařila.",
+		"description": "[error] Obecná chyba při synchronizaci Tabs s uživatelem"
+	},
 	"error_get_with_no_org": {
 		"message": "Nelze získat Taby, pokud organizace není specifikována.",
 		"description": "[error] pokus o hledání Tabů bez zaslání informací o organizaci"
@@ -271,6 +207,10 @@
 		"message": "Parametr key předaný funkci je neplatný",
 		"description": "[chyba] vývojář se pokusil volat funkci s neplatným parametrem"
 	},
+	"error_invalid_request": {
+		"message": "Neplatný požadavek.",
+		"description": "[error] Obecná chyba po přijmutí zprávy ve špatném formátu"
+	},
 	"error_invalid_tab": {
 		"message": "Neplatný Tab",
 		"description": "[error] Tab není platný"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Bylo nalezeno více než jeden odpovídající Tab.",
 		"description": "[error] bylo vráceno více Tabů"
+	},
+	"error_many_tabs_found": {
+		"message": "Bylo nalezeno více než jedno Tab.",
+		"description": "[error] Bylo načteno více Tabs"
 	},
 	"error_minify_url": {
 		"message": "Nelze zkrátit prázdné URL!",
@@ -339,9 +283,37 @@
 		"message": "Nebyla předána URL k ověření!",
 		"description": "[error] nebyla předána URL k ověření"
 	},
+	"error_not_initialized": {
+		"message": "Ještě nebylo inicializováno.",
+		"description": "[error] Obecná chyba, když proměnná není připravena"
+	},
+	"error_processing_tabs": {
+		"message": "Chyba při zpracování Tabs.",
+		"description": "[error] Obecná chyba při zpracování Tabs"
+	},
+	"error_redirect": {
+		"message": "Přesměrování nelze provést. Prosím obnovte stránku.",
+		"description": "[error] Obecná chyba při přesměrování stránky"
+	},
 	"error_remove_not_favourite": {
 		"message": "Nelze odstranit Tab, který není oblíbený!",
 		"description": "[error] uživatel se pokusil odstranit Tab, který ještě nebyl uložen"
+	},
+	"error_removing_all_tabs": {
+		"message": "Chyba při odstraňování všech Tabs.",
+		"description": "[error] Obecná chyba při odstraňování všech Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Chyba při odstraňování obecných Tabs.",
+		"description": "[error] Obecná chyba při odstraňování obecných Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Chyba při odstraňování ostatních Tabs.",
+		"description": "[error] Obecná chyba při odstraňování ostatních Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Chyba při odstraňování Tab.",
+		"description": "[error] Obecná chyba při odstraňování Tab"
 	},
 	"error_required_params": {
 		"message": "Nepředány požadované parametry pro funkci",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Nelze synchronizovat prázdné Taby!",
 		"description": "[error] pokus o synchronizaci prázdných Tabů"
+	},
+	"error_tab_constructor": {
+		"message": "Použijte Tab.create() místo new Tab()",
+		"description": "[error] Informujte vývojáře, jak používat třídu Tab"
 	},
 	"error_tab_label": {
 		"message": "Štítek musí být neprázdný řetězec",
@@ -375,6 +351,10 @@
 		"message": "URL musí být neprázdný řetězec",
 		"description": "[error] uživatel se pokusil vytvořit Tab bez URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab s touto URL je již uložen!",
+		"description": "[error] Uživatel se pokusil uložit již uložený Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Nelze inicializovat s",
 		"description": ""
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Byly nalezeny neplatné Tab(y).\nPrvní výskyt:",
 		"description": "[error] byly předány neplatné Taby"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Použijte TabContainer.create() místo new TabContainer()",
+		"description": "[error] Informujte vývojáře, jak používat třídu TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Použijte TranslationService.create() místo new TranslationService()",
+		"description": "[error] Informujte vývojáře, jak používat třídu TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator dosud nebyl inicializován.",
+		"description": "[error] TranslationService nebyl připraven"
+	},
+	"error_unknown_request": {
+		"message": "Neznámý požadavek.",
+		"description": "[error] Obecná chyba po přijmutí neznámé zprávy"
 	},
 	"error_useless_remove": {
 		"message": "Nelze odstranit:\nNelze odstranit stránku, která nebyla předem uložena",

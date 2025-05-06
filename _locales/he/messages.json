@@ -1,108 +1,4 @@
 {
-  "error_translationservice_constructor": {
-    "message": "השתמש ב-TranslationService.create() במקום new TranslationService()",
-    "description": "[error] הודע למפתח כיצד להשתמש במחלקת TranslationService"
-  },
-  "error_translator_not_initialized": {
-    "message": "ה-translator טרם מאותחל.",
-    "description": "[error] שירות התרגום לא היה מוכן"
-  },
-  "error_many_tabs_found": {
-    "message": "נמצאו יותר מ-Tab אחד.",
-    "description": "[error] התקבלו מספר Tabs"
-  },
-  "error_tabcontainer_constructor": {
-    "message": "השתמש ב-TabContainer.create() במקום new TabContainer()",
-    "description": "[error] הודע למפתח כיצד להשתמש במחלקת TabContainer"
-  },
-  "error_tab_constructor": {
-    "message": "השתמש ב-Tab.create() במקום new Tab()",
-    "description": "[error] הודע למפתח כיצד להשתמש במחלקת Tab"
-  },
-  "error_redirect": {
-    "message": "לא ניתן לבצע הפניה. נא רענן את הדף.",
-    "description": "[error] שגיאה כללית בעת הפניה"
-  },
-  "error_failed_sync": {
-    "message": "הסנכרון נכשל.",
-    "description": "[error] שגיאה כללית בסנכרון Tabs עם המשתמש"
-  },
-  "error_removing_all_tabs": {
-    "message": "שגיאה בהסרת כל ה-Tabs.",
-    "description": "[error] שגיאה כללית בהסרת כל ה-Tabs"
-  },
-  "error_removing_generic_tabs": {
-    "message": "שגיאה בהסרת Tabs גנריים.",
-    "description": "[error] שגיאה כללית בהסרת Tabs גנריים"
-  },
-  "error_adding_tab": {
-    "message": "שגיאה בהוספת Tab.",
-    "description": "[error] שגיאה כללית בהוספת Tab"
-  },
-  "error_removing_other_tabs": {
-    "message": "שגיאה בהסרת Tabs אחרות.",
-    "description": "[error] שגיאה כללית בהסרת Tabs אחרות"
-  },
-  "error_removing_tab": {
-    "message": "שגיאה בהסרת Tab.",
-    "description": "[error] שגיאה כללית בהסרת Tab"
-  },
-  "error_not_initialized": {
-    "message": "טרם מאותחל.",
-    "description": "[error] שגיאה כללית כאשר משתנה אינו מוכן"
-  },
-  "error_unknown_request": {
-    "message": "בקשה לא ידועה.",
-    "description": "[error] שגיאה כללית לאחר קבלת הודעה לא מזוהה"
-  },
-  "error_invalid_request": {
-    "message": "בקשה לא תקפה.",
-    "description": "[error] שגיאה כללית לאחר קבלת הודעה במבנה שגוי"
-  },
-  "error_processing_tabs": {
-    "message": "שגיאה בעיבוד Tabs.",
-    "description": "[error] שגיאה כללית בעיבוד Tabs"
-  },
-  "error_tab_url_saved": {
-    "message": "Tab עם כתובת URL זו כבר שמור!",
-    "description": "[error] המשתמש ניסה לשמור Tab שכבר נשמר"
-  },
-  "cmd_export_all": {
-    "message": "הצג חלון לייצוא כל ה-Tabs השמורים",
-    "description": "[command description] המשתמש רוצה לייצא את כל ה-Tabs"
-  },
-  "cmd_import": {
-    "message": "הצג חלון ליבוא Tabs חדשים",
-    "description": "[command description] המשתמש רוצה לייבא Tabs חדשים"
-  },
-  "cmd_open_other_org": {
-    "message": "הצג חלון לפתיחת הדף הנוכחי ב-Org אחרת",
-    "description": "[command description] המשתמש רוצה לפתוח את הדף הנוכחי ב-Org אחרת"
-  },
-  "cmd_update_tab": {
-    "message": "הצג חלון לעדכון הדף הנוכחי (אם שמור)",
-    "description": "[command description] המשתמש רוצה לעדכן את הדף הנוכחי"
-  },
-  "cmd_toggle_org": {
-    "message": "הצג חלון להחלפת ערך ה-Org של הדף הנוכחי (אם שמור)",
-    "description": "[command description] המשתמש רוצה להחליף את ה-Org של הדף הנוכחי"
-  },
-  "cmd_remove_tab": {
-    "message": "הסר את הדף הנוכחי מרשימת ה-Tabs (אם שמור)",
-    "description": "[command description] המשתמש רוצה להסיר את הדף הנוכחי"
-  },
-  "cmd_save_as_tab": {
-    "message": "שמור את הדף הנוכחי ברשימת ה-Tabs (אם לא שמור)",
-    "description": "[command description] המשתמש רוצה לשמור את הדף הנוכחי"
-  },
-  "drop": {
-    "message": "Drop",
-    "description": "[import] מאפשר למשתמש לשחרר את הקבצים שלו באזור המיועד"
-  },
-  "open_settings": {
-    "message": "Open Extension Settings",
-    "description": "[popup] כפתור להפניה לדף ההגדרות"
-  },
 	"allow": {
 		"message": "אפשר",
 		"description": "[req_permission] כפתור לאישור הרשאות"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "נבחר",
 		"description": "כותרת מקטע לפריטים שנבחרו"
+	},
+	"cmd_export_all": {
+		"message": "הצג חלון לייצוא כל ה-Tabs השמורים",
+		"description": "[command description] המשתמש רוצה לייצא את כל ה-Tabs"
+	},
+	"cmd_import": {
+		"message": "הצג חלון ליבוא Tabs חדשים",
+		"description": "[command description] המשתמש רוצה לייבא Tabs חדשים"
+	},
+	"cmd_open_other_org": {
+		"message": "הצג חלון לפתיחת הדף הנוכחי ב-Org אחרת",
+		"description": "[command description] המשתמש רוצה לפתוח את הדף הנוכחי ב-Org אחרת"
+	},
+	"cmd_remove_tab": {
+		"message": "הסר את הדף הנוכחי מרשימת ה-Tabs (אם שמור)",
+		"description": "[command description] המשתמש רוצה להסיר את הדף הנוכחי"
+	},
+	"cmd_save_as_tab": {
+		"message": "שמור את הדף הנוכחי ברשימת ה-Tabs (אם לא שמור)",
+		"description": "[command description] המשתמש רוצה לשמור את הדף הנוכחי"
+	},
+	"cmd_toggle_org": {
+		"message": "הצג חלון להחלפת ערך ה-Org של הדף הנוכחי (אם שמור)",
+		"description": "[command description] המשתמש רוצה להחליף את ה-Org של הדף הנוכחי"
+	},
+	"cmd_update_tab": {
+		"message": "הצג חלון לעדכון הדף הנוכחי (אם שמור)",
+		"description": "[command description] המשתמש רוצה לעדכן את הדף הנוכחי"
 	},
 	"confirm_another_org": {
 		"message": "אשר פתיחת הקישור הזה.",
@@ -227,6 +151,14 @@
 		"message": "מחק את כל ה-Tab",
 		"description": "[popup] כותרת בדלי למחיקת כל ה-Tab"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] מאפשר למשתמש לשחרר את הקבצים שלו באזור המיועד"
+	},
+	"error_adding_tab": {
+		"message": "שגיאה בהוספת Tab.",
+		"description": "[error] שגיאה כללית בהוספת Tab"
+	},
 	"error_close_other_modal": {
 		"message": "סגור את החלון הנוסף קודם!",
 		"description": "[toast] המשתמש ניסה לפתוח יותר מחלון אחד"
@@ -259,6 +191,10 @@
 		"message": "לא ניתן לשאוב את שם הארגון מ-URL ריק!",
 		"description": "[error] לא סופקה URL שממנה יש לשאוב את שם הארגון"
 	},
+	"error_failed_sync": {
+		"message": "הסנכרון נכשל.",
+		"description": "[error] שגיאה כללית בסנכרון Tabs עם המשתמש"
+	},
 	"error_get_with_no_org": {
 		"message": "לא ניתן לקבל Tab אם הארגון לא צויין.",
 		"description": "[error] ניסו לחפש Tab ללא שליחת מידע על הארגון"
@@ -271,6 +207,10 @@
 		"message": "פרמטר המפתח שהועבר לפונקציה אינו חוקי",
 		"description": "[שגיאה] המפתח ניסה לקרוא לפונקציה עם פרמטר לא חוקי"
 	},
+	"error_invalid_request": {
+		"message": "בקשה לא תקפה.",
+		"description": "[error] שגיאה כללית לאחר קבלת הודעה במבנה שגוי"
+	},
 	"error_invalid_tab": {
 		"message": "Tab לא תקין",
 		"description": "[error] ה-Tab אינו תקין"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "נמצאו יותר מ-1 Tab תואם.",
 		"description": "[error] נמצאו מספר Tab"
+	},
+	"error_many_tabs_found": {
+		"message": "נמצאו יותר מ-Tab אחד.",
+		"description": "[error] התקבלו מספר Tabs"
 	},
 	"error_minify_url": {
 		"message": "לא ניתן לצמצם URL ריק!",
@@ -339,9 +283,37 @@
 		"message": "לא סופקה URL לבדיקה!",
 		"description": "[error] לא סופקה URL לבדיקה"
 	},
+	"error_not_initialized": {
+		"message": "טרם מאותחל.",
+		"description": "[error] שגיאה כללית כאשר משתנה אינו מוכן"
+	},
+	"error_processing_tabs": {
+		"message": "שגיאה בעיבוד Tabs.",
+		"description": "[error] שגיאה כללית בעיבוד Tabs"
+	},
+	"error_redirect": {
+		"message": "לא ניתן לבצע הפניה. נא רענן את הדף.",
+		"description": "[error] שגיאה כללית בעת הפניה"
+	},
 	"error_remove_not_favourite": {
 		"message": "לא ניתן להסיר Tab שאינו מועדף!",
 		"description": "[error] המשתמש ניסה להסיר Tab שעדיין לא נשמר"
+	},
+	"error_removing_all_tabs": {
+		"message": "שגיאה בהסרת כל ה-Tabs.",
+		"description": "[error] שגיאה כללית בהסרת כל ה-Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "שגיאה בהסרת Tabs גנריים.",
+		"description": "[error] שגיאה כללית בהסרת Tabs גנריים"
+	},
+	"error_removing_other_tabs": {
+		"message": "שגיאה בהסרת Tabs אחרות.",
+		"description": "[error] שגיאה כללית בהסרת Tabs אחרות"
+	},
+	"error_removing_tab": {
+		"message": "שגיאה בהסרת Tab.",
+		"description": "[error] שגיאה כללית בהסרת Tab"
 	},
 	"error_required_params": {
 		"message": "הפרמטרים הנדרשים לפונקציה לא הועברו",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "לא ניתן לסנכרן Tab ריקים!",
 		"description": "[error] ניסה לסנכרן Tab ללא תוכן"
+	},
+	"error_tab_constructor": {
+		"message": "השתמש ב-Tab.create() במקום new Tab()",
+		"description": "[error] הודע למפתח כיצד להשתמש במחלקת Tab"
 	},
 	"error_tab_label": {
 		"message": "התווית חייבת להיות מחרוזת שאינה ריקה",
@@ -375,6 +351,10 @@
 		"message": "ה-URL חייב להיות מחרוזת שאינה ריקה",
 		"description": "[error] המשתמש ניסה ליצור Tab ללא URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab עם כתובת URL זו כבר שמור!",
+		"description": "[error] המשתמש ניסה לשמור Tab שכבר נשמר"
+	},
 	"error_tabcont_initialize": {
 		"message": "לא ניתן לאתחל עם",
 		"description": ""
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "נמצאו Tab(s) לא תקינים.\nהמופע הראשון:",
 		"description": "[error] Tab לא תקינים סופקו"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "השתמש ב-TabContainer.create() במקום new TabContainer()",
+		"description": "[error] הודע למפתח כיצד להשתמש במחלקת TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "השתמש ב-TranslationService.create() במקום new TranslationService()",
+		"description": "[error] הודע למפתח כיצד להשתמש במחלקת TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "ה-translator טרם מאותחל.",
+		"description": "[error] שירות התרגום לא היה מוכן"
+	},
+	"error_unknown_request": {
+		"message": "בקשה לא ידועה.",
+		"description": "[error] שגיאה כללית לאחר קבלת הודעה לא מזוהה"
 	},
 	"error_useless_remove": {
 		"message": "לא ניתן להסיר:\nלא ניתן להסיר דף שלא נשמר קודם",

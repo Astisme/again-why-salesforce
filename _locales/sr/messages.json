@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "Користите TranslationService.create() уместо new TranslationService() да бисте користили класу TranslationService",
-            "description": "[грешка] реците програмеру како да користи класу TranslationService"
-        },
-        "error_translator_not_initialized": {
-            "message": "преводилац још није био иницијализован.",
-            "description": "[грешка] TranslationService није био спреман"
-        },
-        "error_many_tabs_found": {
-            "message": "Пронађено више од једног Tab.",
-            "description": "[грешка] преузето је много Tabs"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "Користите TabContainer.create() уместо new TabContainer() да бисте користили класу TabContainer",
-            "description": "[грешка] реците програмеру како да користи класу TabContainer"
-        },
-        "error_tab_constructor": {
-            "message": "Користите Tab.create() уместо new Tab() да бисте користили класу Tab",
-            "description": "[грешка] реците програмеру како да користи класу Tab"
-        },
-        "error_redirect": {
-            "message": "Не могу да преусмерим. Освежите страницу.",
-            "description": "[грешка] Општа грешка при преусмеравању странице."
-        },
-        "error_failed_sync": {
-            "message": "Синхронизација није успела.",
-            "description": "[грешка] Општа грешка када Tabs нису могли да се синхронизују од корисника"
-        },
-        "error_removing_all_tabs": {
-            "message": "Грешка приликом уклањања свих Tabs.",
-            "description": "[грешка] Општа грешка која се користи приликом уклањања свих Tabs"
-        },
-        "error_removing_generic_tabs": {
-            "message": "Грешка приликом уклањања генеричких Tabs.",
-            "description": "[грешка] Општа грешка која се користи приликом уклањања генеричких Tabs"
-        },
-        "error_adding_tab": {
-            "message": "Грешка приликом додавања Tab.",
-            "description": "[грешка] Општа грешка која се користи приликом додавања Tab"
-        },
-        "error_removing_other_tabs": {
-            "message": "Грешка приликом уклањања осталих Tabs.",
-            "description": "[грешка] Општа грешка која се користи приликом уклањања осталих Tabs"
-        },
-        "error_removing_tab": {
-            "message": "Грешка приликом уклањања Tab.",
-            "description": "[грешка] Општа грешка која се користи приликом уклањања Tab"
-        },
-        "error_not_initialized": {
-            "message": "још није био иницијализован.",
-            "description": "[грешка] Општа грешка када променљива није спремна"
-        },
-        "error_unknown_request": {
-            "message": "Непознат захтев.",
-            "description": "[грешка] Општа грешка након пријема поруке која није препозната"
-        },
-        "error_invalid_request": {
-            "message": "Неважећи захтев.",
-            "description": "[грешка] Општа грешка након пријема лоше форматиране поруке"
-        },
-        "error_processing_tabs": {
-            "message": "Грешка приликом обраде Tabs.",
-            "description": "[грешка] Општа грешка приликом обраде Tabs"
-        },
-        "error_tab_url_saved": {
-            "message": "Tab са овим URL-ом је већ сачуван!",
-            "description": "[грешка] Корисник је покушао да сачува Tab који је већ био омиљен"
-        },
-        "cmd_export_all": {
-            "message": "Прикажи модал за извоз свих сачуваних Tabs",
-            "description": "[опис команде] корисник жели да извезе све Tabs"
-        },
-        "cmd_import": {
-            "message": "Прикажи модал за увоз нових Tabs",
-            "description": "[опис команде] корисник жели да увезе нове Tabs"
-        },
-        "cmd_open_other_org": {
-            "message": "Прикажи модал за отварање тренутне странице у другој Org",
-            "description": "[опис команде] корисник жели да отвори тренутну страницу у другој Org"
-        },
-        "cmd_update_tab": {
-            "message": "Прикажи модал за ажурирање тренутне странице (ако је сачувана)",
-            "description": "[опис команде] корисник жели да ажурира тренутну страницу"
-        },
-        "cmd_toggle_org": {
-            "message": "Пребаци вредност Org тренутне странице (ако је сачувана)",
-            "description": "[опис команде] корисник жели да пребаци Org за тренутну страницу"
-        },
-        "cmd_remove_tab": {
-            "message": "Уклони тренутну страницу са листе Tabs (ако је сачувана)",
-            "description": "[опис команде] корисник жели да уклони тренутну страницу"
-        },
-        "cmd_save_as_tab": {
-            "message": "Сачувај тренутну страницу на листи Tabs (ако није сачувана)",
-            "description": "[опис команде] корисник жели да сачува тренутну страницу"
-        },
-        "drop": {
-            "message": "Испусти",
-            "description": "[увоз] дозволите кориснику да испусти своје датотеке на одређено подручје"
-        },
-        "open_settings": {
-            "message": "Отвори Подешавања Проширења",
-            "description": "[искачући прозор] дугме за преусмеравање на страницу подешавања"
-        },
 	"allow": {
 		"message": "Dozvoli",
 		"description": "[req_permission] dugme za dozvolu privilegija"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Изабрано",
 		"description": "Заглавље одељка за ставке које су изабране"
+	},
+	"cmd_export_all": {
+		"message": "Прикажи модал за извоз свих сачуваних Tabs",
+		"description": "[опис команде] корисник жели да извезе све Tabs"
+	},
+	"cmd_import": {
+		"message": "Прикажи модал за увоз нових Tabs",
+		"description": "[опис команде] корисник жели да увезе нове Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Прикажи модал за отварање тренутне странице у другој Org",
+		"description": "[опис команде] корисник жели да отвори тренутну страницу у другој Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Уклони тренутну страницу са листе Tabs (ако је сачувана)",
+		"description": "[опис команде] корисник жели да уклони тренутну страницу"
+	},
+	"cmd_save_as_tab": {
+		"message": "Сачувај тренутну страницу на листи Tabs (ако није сачувана)",
+		"description": "[опис команде] корисник жели да сачува тренутну страницу"
+	},
+	"cmd_toggle_org": {
+		"message": "Пребаци вредност Org тренутне странице (ако је сачувана)",
+		"description": "[опис команде] корисник жели да пребаци Org за тренутну страницу"
+	},
+	"cmd_update_tab": {
+		"message": "Прикажи модал за ажурирање тренутне странице (ако је сачувана)",
+		"description": "[опис команде] корисник жели да ажурира тренутну страницу"
 	},
 	"confirm_another_org": {
 		"message": "Potvrdite otvaranje ovog linka.",
@@ -227,6 +151,14 @@
 		"message": "Obriši sve Tabove",
 		"description": "[popup] naslov korpe za brisanje svih Tabova"
 	},
+	"drop": {
+		"message": "Испусти",
+		"description": "[увоз] дозволите кориснику да испусти своје датотеке на одређено подручје"
+	},
+	"error_adding_tab": {
+		"message": "Грешка приликом додавања Tab.",
+		"description": "[грешка] Општа грешка која се користи приликом додавања Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Prvo zatvori drugi modal!",
 		"description": "[toast] Korisnik je pokušao da otvori više od jednog modala"
@@ -259,6 +191,10 @@
 		"message": "Ne može se izdvojiti ime organizacije iz praznog URL-a!",
 		"description": "[error] nije prosleđen URL iz kog treba izdvojiti ime organizacije"
 	},
+	"error_failed_sync": {
+		"message": "Синхронизација није успела.",
+		"description": "[грешка] Општа грешка када Tabs нису могли да се синхронизују од корисника"
+	},
 	"error_get_with_no_org": {
 		"message": "Ne mogu se dohvatiti Tabovi ako organizacija nije specificirana.",
 		"description": "[error] pokušano je pretraživanje Tabova bez slanja informacija o organizaciji"
@@ -271,6 +207,10 @@
 		"message": "Параметар кључа прослеђен функцији није валидан",
 		"description": "[грешка] програмер је покушао да позове функцију са невалидним параметром"
 	},
+	"error_invalid_request": {
+		"message": "Неважећи захтев.",
+		"description": "[грешка] Општа грешка након пријема лоше форматиране поруке"
+	},
 	"error_invalid_tab": {
 		"message": "Nevažeći Tab",
 		"description": "[error] Tab nije validan"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Pronađeno je više od jednog odgovarajućeg Tab-a.",
 		"description": "[error] vraćeno je previše Tabova"
+	},
+	"error_many_tabs_found": {
+		"message": "Пронађено више од једног Tab.",
+		"description": "[грешка] преузето је много Tabs"
 	},
 	"error_minify_url": {
 		"message": "Ne može se skratiti prazan URL!",
@@ -339,9 +283,37 @@
 		"message": "Nije prosleđen URL za proveru!",
 		"description": "[error] URL nije prosleđen za proveru"
 	},
+	"error_not_initialized": {
+		"message": "још није био иницијализован.",
+		"description": "[грешка] Општа грешка када променљива није спремна"
+	},
+	"error_processing_tabs": {
+		"message": "Грешка приликом обраде Tabs.",
+		"description": "[грешка] Општа грешка приликом обраде Tabs"
+	},
+	"error_redirect": {
+		"message": "Не могу да преусмерим. Освежите страницу.",
+		"description": "[грешка] Општа грешка при преусмеравању странице."
+	},
 	"error_remove_not_favourite": {
 		"message": "Ne može se ukloniti Tab koji nije omiljen!",
 		"description": "[error] korisnik je pokušao da ukloni Tab koji još nije sačuvan"
+	},
+	"error_removing_all_tabs": {
+		"message": "Грешка приликом уклањања свих Tabs.",
+		"description": "[грешка] Општа грешка која се користи приликом уклањања свих Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Грешка приликом уклањања генеричких Tabs.",
+		"description": "[грешка] Општа грешка која се користи приликом уклањања генеричких Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Грешка приликом уклањања осталих Tabs.",
+		"description": "[грешка] Општа грешка која се користи приликом уклањања осталих Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Грешка приликом уклањања Tab.",
+		"description": "[грешка] Општа грешка која се користи приликом уклањања Tab"
 	},
 	"error_required_params": {
 		"message": "Потребни параметри за функцију нису прослеђени",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Ne mogu se sinhronizovati prazni Tabovi!",
 		"description": "[error] pokušano je sinhronizovanje praznog sadržaja"
+	},
+	"error_tab_constructor": {
+		"message": "Користите Tab.create() уместо new Tab() да бисте користили класу Tab",
+		"description": "[грешка] реците програмеру како да користи класу Tab"
 	},
 	"error_tab_label": {
 		"message": "Etiketa mora biti neprazan string",
@@ -375,6 +351,10 @@
 		"message": "URL mora biti neprazan string",
 		"description": "[error] korisnik je pokušao da kreira Tab bez URL-a"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab са овим URL-ом је већ сачуван!",
+		"description": "[грешка] Корисник је покушао да сачува Tab који је већ био омиљен"
+	},
 	"error_tabcont_initialize": {
 		"message": "Ne može se inicijalizovati sa",
 		"description": ""
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Pronađeni su nevažeći Tab(ovi).\nPrvi slučaj:",
 		"description": "[error] prosleđeni su nevažeći Tabovi"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Користите TabContainer.create() уместо new TabContainer() да бисте користили класу TabContainer",
+		"description": "[грешка] реците програмеру како да користи класу TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Користите TranslationService.create() уместо new TranslationService() да бисте користили класу TranslationService",
+		"description": "[грешка] реците програмеру како да користи класу TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "преводилац још није био иницијализован.",
+		"description": "[грешка] TranslationService није био спреман"
+	},
+	"error_unknown_request": {
+		"message": "Непознат захтев.",
+		"description": "[грешка] Општа грешка након пријема поруке која није препозната"
 	},
 	"error_useless_remove": {
 		"message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja ranije nije sačuvana",

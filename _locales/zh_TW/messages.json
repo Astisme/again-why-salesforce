@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "請使用 TranslationService.create() 而不是 new TranslationService() 來使用 TranslationService 類別",
-            "description": "[錯誤] 告訴開發人員如何使用 TranslationService 類別"
-        },
-        "error_translator_not_initialized": {
-            "message": "翻譯工具尚未初始化。",
-            "description": "[錯誤] TranslationService 尚未準備好"
-        },
-        "error_many_tabs_found": {
-            "message": "找到多於一個 Tab。",
-            "description": "[錯誤] 擷取到許多 Tabs"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "請使用 TabContainer.create() 而不是 new TabContainer() 來使用 TabContainer 類別",
-            "description": "[錯誤] 告訴開發人員如何使用 TabContainer 類別"
-        },
-        "error_tab_constructor": {
-            "message": "請使用 Tab.create() 而不是 new Tab() 來使用 Tab 類別",
-            "description": "[錯誤] 告訴開發人員如何使用 Tab 類別"
-        },
-        "error_redirect": {
-            "message": "無法 redirect。請重新整理頁面。",
-            "description": "[錯誤] 頁面重新導向時的一般錯誤。"
-        },
-        "error_failed_sync": {
-            "message": "同步失敗。",
-            "description": "[錯誤] 從使用者同步 Tab 時發生一般錯誤"
-        },
-        "error_removing_all_tabs": {
-            "message": "移除所有 Tabs 時發生錯誤。",
-            "description": "[錯誤] 移除所有 Tabs 時使用的一般錯誤"
-        },
-        "error_removing_generic_tabs": {
-            "message": "移除一般 Tabs 時發生錯誤。",
-            "description": "[錯誤] 移除一般 Tabs 時使用的一般錯誤"
-        },
-        "error_adding_tab": {
-            "message": "新增 Tab 時發生錯誤。",
-            "description": "[錯誤] 新增 Tab 時使用的一般錯誤"
-        },
-        "error_removing_other_tabs": {
-            "message": "移除其他 Tabs 時發生錯誤。",
-            "description": "[錯誤] 移除其他 Tabs 時使用的一般錯誤"
-        },
-        "error_removing_tab": {
-            "message": "移除 Tab 時發生錯誤。",
-            "description": "[錯誤] 移除 Tab 時使用的一般錯誤"
-        },
-        "error_not_initialized": {
-            "message": "尚未初始化。",
-            "description": "[錯誤] 變數未準備就緒時的一般錯誤"
-        },
-        "error_unknown_request": {
-            "message": "未知請求。",
-            "description": "[錯誤] 收到無法辨識的訊息後的一般錯誤"
-        },
-        "error_invalid_request": {
-            "message": "無效請求。",
-            "description": "[錯誤] 收到格式不正確的訊息後的一般錯誤"
-        },
-        "error_processing_tabs": {
-            "message": "處理 Tabs 時發生錯誤。",
-            "description": "[錯誤] 處理 Tabs 時的一般錯誤"
-        },
-        "error_tab_url_saved": {
-            "message": "此 URL 的 Tab 已儲存！",
-            "description": "[錯誤] 使用者嘗試儲存已收藏的 Tab"
-        },
-        "cmd_export_all": {
-            "message": "顯示 modal 以匯出所有已儲存的 Tabs",
-            "description": "[指令說明] 使用者想要匯出所有 Tabs"
-        },
-        "cmd_import": {
-            "message": "顯示 modal 以匯入新的 Tabs",
-            "description": "[指令說明] 使用者想要匯入新的 Tabs"
-        },
-        "cmd_open_other_org": {
-            "message": "顯示 modal 以在其他 Org 中開啟目前頁面",
-            "description": "[指令說明] 使用者想要在其他 Org 中開啟目前頁面"
-        },
-        "cmd_update_tab": {
-            "message": "顯示 modal 以更新目前頁面（如果已儲存）",
-            "description": "[指令說明] 使用者想要更新目前頁面"
-        },
-        "cmd_toggle_org": {
-            "message": "切換目前頁面的 Org 值（如果已儲存）",
-            "description": "[指令說明] 使用者想要切換目前頁面的 Org"
-        },
-        "cmd_remove_tab": {
-            "message": "從 Tab 列表中移除目前頁面（如果已儲存）",
-            "description": "[指令說明] 使用者想要移除目前頁面"
-        },
-        "cmd_save_as_tab": {
-            "message": "在 Tab 列表中儲存目前頁面（如果未儲存）",
-            "description": "[指令說明] 使用者想要儲存目前頁面"
-        },
-        "drop": {
-            "message": "拖曳",
-            "description": "[匯入] 允許使用者將其檔案拖曳到指定區域"
-        },
-        "open_settings": {
-            "message": "開啟擴充功能設定",
-            "description": "[彈出視窗] 重新導向至設定頁面的按鈕"
-        },
 	"allow": {
 		"message": "允許",
 		"description": "[req_permission] 按鈕，用於允許權限"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "已選擇",
 		"description": "已選擇項目的區段標題"
+	},
+	"cmd_export_all": {
+		"message": "顯示 modal 以匯出所有已儲存的 Tabs",
+		"description": "[指令說明] 使用者想要匯出所有 Tabs"
+	},
+	"cmd_import": {
+		"message": "顯示 modal 以匯入新的 Tabs",
+		"description": "[指令說明] 使用者想要匯入新的 Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "顯示 modal 以在其他 Org 中開啟目前頁面",
+		"description": "[指令說明] 使用者想要在其他 Org 中開啟目前頁面"
+	},
+	"cmd_remove_tab": {
+		"message": "從 Tab 列表中移除目前頁面（如果已儲存）",
+		"description": "[指令說明] 使用者想要移除目前頁面"
+	},
+	"cmd_save_as_tab": {
+		"message": "在 Tab 列表中儲存目前頁面（如果未儲存）",
+		"description": "[指令說明] 使用者想要儲存目前頁面"
+	},
+	"cmd_toggle_org": {
+		"message": "切換目前頁面的 Org 值（如果已儲存）",
+		"description": "[指令說明] 使用者想要切換目前頁面的 Org"
+	},
+	"cmd_update_tab": {
+		"message": "顯示 modal 以更新目前頁面（如果已儲存）",
+		"description": "[指令說明] 使用者想要更新目前頁面"
 	},
 	"confirm_another_org": {
 		"message": "確認開啟此連結。",
@@ -227,6 +151,14 @@
 		"message": "刪除所有 Tab",
 		"description": "[popup] 垃圾桶標題，用於清空所有 Tab"
 	},
+	"drop": {
+		"message": "拖曳",
+		"description": "[匯入] 允許使用者將其檔案拖曳到指定區域"
+	},
+	"error_adding_tab": {
+		"message": "新增 Tab 時發生錯誤。",
+		"description": "[錯誤] 新增 Tab 時使用的一般錯誤"
+	},
 	"error_close_other_modal": {
 		"message": "請先關閉其他模態視窗！",
 		"description": "[toast] 使用者嘗試開啟超過一個模態視窗"
@@ -259,6 +191,10 @@
 		"message": "無法從空的 URL 中提取 Org 名稱！",
 		"description": "[error] 未傳入提取 Org 名稱的 URL"
 	},
+	"error_failed_sync": {
+		"message": "同步失敗。",
+		"description": "[錯誤] 從使用者同步 Tab 時發生一般錯誤"
+	},
 	"error_get_with_no_org": {
 		"message": "若未指定 Org，無法取得 Tab。",
 		"description": "[error] 嘗試在未送出 org 資訊的情況下搜尋 Tab"
@@ -271,6 +207,10 @@
 		"message": "傳遞給函數的鍵參數無效",
 		"description": "[錯誤] 開發人員嘗試使用無效參數呼叫函數"
 	},
+	"error_invalid_request": {
+		"message": "無效請求。",
+		"description": "[錯誤] 收到格式不正確的訊息後的一般錯誤"
+	},
 	"error_invalid_tab": {
 		"message": "無效的 Tab",
 		"description": "[error] Tab 不正確"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "找到超過 1 個匹配的 Tab。",
 		"description": "[error] 找到太多 Tab"
+	},
+	"error_many_tabs_found": {
+		"message": "找到多於一個 Tab。",
+		"description": "[錯誤] 擷取到許多 Tabs"
 	},
 	"error_minify_url": {
 		"message": "無法壓縮空的 URL！",
@@ -339,9 +283,37 @@
 		"message": "未傳入要檢查的 URL！",
 		"description": "[error] 未傳入要檢查的 URL"
 	},
+	"error_not_initialized": {
+		"message": "尚未初始化。",
+		"description": "[錯誤] 變數未準備就緒時的一般錯誤"
+	},
+	"error_processing_tabs": {
+		"message": "處理 Tabs 時發生錯誤。",
+		"description": "[錯誤] 處理 Tabs 時的一般錯誤"
+	},
+	"error_redirect": {
+		"message": "無法 redirect。請重新整理頁面。",
+		"description": "[錯誤] 頁面重新導向時的一般錯誤。"
+	},
 	"error_remove_not_favourite": {
 		"message": "無法刪除非最愛的 Tab！",
 		"description": "[error] 使用者嘗試刪除尚未儲存的 Tab"
+	},
+	"error_removing_all_tabs": {
+		"message": "移除所有 Tabs 時發生錯誤。",
+		"description": "[錯誤] 移除所有 Tabs 時使用的一般錯誤"
+	},
+	"error_removing_generic_tabs": {
+		"message": "移除一般 Tabs 時發生錯誤。",
+		"description": "[錯誤] 移除一般 Tabs 時使用的一般錯誤"
+	},
+	"error_removing_other_tabs": {
+		"message": "移除其他 Tabs 時發生錯誤。",
+		"description": "[錯誤] 移除其他 Tabs 時使用的一般錯誤"
+	},
+	"error_removing_tab": {
+		"message": "移除 Tab 時發生錯誤。",
+		"description": "[錯誤] 移除 Tab 時使用的一般錯誤"
 	},
 	"error_required_params": {
 		"message": "未傳遞函數所需的參數",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "無法同步空的 Tab！",
 		"description": "[error] 嘗試同步空的 Tab"
+	},
+	"error_tab_constructor": {
+		"message": "請使用 Tab.create() 而不是 new Tab() 來使用 Tab 類別",
+		"description": "[錯誤] 告訴開發人員如何使用 Tab 類別"
 	},
 	"error_tab_label": {
 		"message": "Label 必須為非空字串",
@@ -375,6 +351,10 @@
 		"message": "URL 必須為非空字串",
 		"description": "[error] 使用者嘗試創建沒有 URL 的 Tab"
 	},
+	"error_tab_url_saved": {
+		"message": "此 URL 的 Tab 已儲存！",
+		"description": "[錯誤] 使用者嘗試儲存已收藏的 Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "無法以以下內容初始化",
 		"description": ""
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "檢測到無效的 Tab(s).\n首次出現：",
 		"description": "[error] 傳入了無效的 Tab"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "請使用 TabContainer.create() 而不是 new TabContainer() 來使用 TabContainer 類別",
+		"description": "[錯誤] 告訴開發人員如何使用 TabContainer 類別"
+	},
+	"error_translationservice_constructor": {
+		"message": "請使用 TranslationService.create() 而不是 new TranslationService() 來使用 TranslationService 類別",
+		"description": "[錯誤] 告訴開發人員如何使用 TranslationService 類別"
+	},
+	"error_translator_not_initialized": {
+		"message": "翻譯工具尚未初始化。",
+		"description": "[錯誤] TranslationService 尚未準備好"
+	},
+	"error_unknown_request": {
+		"message": "未知請求。",
+		"description": "[錯誤] 收到無法辨識的訊息後的一般錯誤"
 	},
 	"error_useless_remove": {
 		"message": "無法移除：\n無法刪除尚未儲存的頁面",

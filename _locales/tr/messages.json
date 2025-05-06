@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "TranslationService sınıfını kullanmak için new TranslationService() yerine TranslationService.create() kullanın",
-            "description": "[hata] geliştiriciye TranslationService sınıfını nasıl kullanacağını söyleyin"
-        },
-        "error_translator_not_initialized": {
-            "message": "çevirmen henüz başlatılmadı.",
-            "description": "[hata] TranslationService hazır değildi"
-        },
-        "error_many_tabs_found": {
-            "message": "Birden fazla Tab bulundu.",
-            "description": "[hata] çok sayıda Tabs alındı"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "TabContainer sınıfını kullanmak için new TabContainer() yerine TabContainer.create() kullanın",
-            "description": "[hata] geliştiriciye TabContainer sınıfını nasıl kullanacağını söyleyin"
-        },
-        "error_tab_constructor": {
-            "message": "Tab sınıfını kullanmak için new Tab() yerine Tab.create() kullanın",
-            "description": "[hata] geliştiriciye Tab sınıfını nasıl kullanacağını söyleyin"
-        },
-        "error_redirect": {
-            "message": "Yeniden yönlendirilemiyor. Lütfen sayfayı yenileyin.",
-            "description": "[hata] Sayfa yeniden yönlendirmesinde genel hata."
-        },
-        "error_failed_sync": {
-            "message": "Senkronize edilemedi.",
-            "description": "[hata] Tabs kullanıcından senkronize edilemediğinde genel hata"
-        },
-        "error_removing_all_tabs": {
-            "message": "Tüm Tabs kaldırılırken hata.",
-            "description": "[hata] Tüm Tabs kaldırılırken kullanılan genel hata"
-        },
-        "error_removing_generic_tabs": {
-            "message": "Genel Tabs kaldırılırken hata.",
-            "description": "[hata] Genel Tabs kaldırılırken kullanılan genel hata"
-        },
-        "error_adding_tab": {
-            "message": "Tab eklenirken hata.",
-            "description": "[hata] Tab eklenirken kullanılan genel hata"
-        },
-        "error_removing_other_tabs": {
-            "message": "Diğer Tabs kaldırılırken hata.",
-            "description": "[hata] Diğer Tabs kaldırılırken kullanılan genel hata"
-        },
-        "error_removing_tab": {
-            "message": "Tab kaldırılırken hata.",
-            "description": "[hata] Tab kaldırılırken kullanılan genel hata"
-        },
-        "error_not_initialized": {
-            "message": "henüz başlatılmadı.",
-            "description": "[hata] Bir değişken hazır olmadığında genel hata"
-        },
-        "error_unknown_request": {
-            "message": "Bilinmeyen istek.",
-            "description": "[hata] Tanınmayan bir mesaj alındıktan sonra genel hata"
-        },
-        "error_invalid_request": {
-            "message": "Geçersiz istek.",
-            "description": "[hata] Hatalı biçimlendirilmiş bir mesaj alındıktan sonra genel hata"
-        },
-        "error_processing_tabs": {
-            "message": "Tabs işlenirken hata.",
-            "description": "[hata] Tabs işlenirken genel hata"
-        },
-        "error_tab_url_saved": {
-            "message": "Bu URL ile bir Tab zaten kaydedildi!",
-            "description": "[hata] Kullanıcı zaten favorilere eklenmiş bir Tab kaydetmeye çalıştı"
-        },
-        "cmd_export_all": {
-            "message": "Kaydedilmiş tüm Tabs'ı dışa aktarmak için modalı göster",
-            "description": "[komut açıklaması] kullanıcı tüm Tabs'ı dışa aktarmak istiyor"
-        },
-        "cmd_import": {
-            "message": "Yeni Tabs'ı içe aktarmak için modalı göster",
-            "description": "[komut açıklaması] kullanıcı yeni Tabs'ı içe aktarmak istiyor"
-        },
-        "cmd_open_other_org": {
-            "message": "Mevcut sayfayı başka bir Org'da açmak için modalı göster",
-            "description": "[komut açıklaması] kullanıcı mevcut sayfayı başka bir Org'da açmak istiyor"
-        },
-        "cmd_update_tab": {
-            "message": "Mevcut sayfayı güncellemek için modalı göster (kaydedilmişse)",
-            "description": "[komut açıklaması] kullanıcı mevcut sayfayı güncellemek istiyor"
-        },
-        "cmd_toggle_org": {
-            "message": "Mevcut sayfanın Org değerini değiştir (kaydedilmişse)",
-            "description": "[komut açıklaması] kullanıcı mevcut sayfa için Org'ı değiştirmek istiyor"
-        },
-        "cmd_remove_tab": {
-            "message": "Mevcut sayfayı Tab listesinden kaldır (kaydedilmişse)",
-            "description": "[komut açıklaması] kullanıcı mevcut sayfayı kaldırmak istiyor"
-        },
-        "cmd_save_as_tab": {
-            "message": "Mevcut sayfayı Tab listesine kaydet (kaydedilmemişse)",
-            "description": "[komut açıklaması] kullanıcı mevcut sayfayı kaydetmek istiyor"
-        },
-        "drop": {
-            "message": "Bırakın",
-            "description": "[içe aktarma] kullanıcının dosyalarını belirtilen alana sürükleyip bırakmasına izin verin"
-        },
-        "open_settings": {
-            "message": "Uzantı Ayarlarını Aç",
-            "description": "[açılır pencere] ayarlar sayfasına yönlendirme düğmesi"
-        },
 	"allow": {
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Seçildi",
 		"description": "Seçilen öğeler için bölüm başlığı"
+	},
+	"cmd_export_all": {
+		"message": "Kaydedilmiş tüm Tabs'ı dışa aktarmak için modalı göster",
+		"description": "[komut açıklaması] kullanıcı tüm Tabs'ı dışa aktarmak istiyor"
+	},
+	"cmd_import": {
+		"message": "Yeni Tabs'ı içe aktarmak için modalı göster",
+		"description": "[komut açıklaması] kullanıcı yeni Tabs'ı içe aktarmak istiyor"
+	},
+	"cmd_open_other_org": {
+		"message": "Mevcut sayfayı başka bir Org'da açmak için modalı göster",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı başka bir Org'da açmak istiyor"
+	},
+	"cmd_remove_tab": {
+		"message": "Mevcut sayfayı Tab listesinden kaldır (kaydedilmişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı kaldırmak istiyor"
+	},
+	"cmd_save_as_tab": {
+		"message": "Mevcut sayfayı Tab listesine kaydet (kaydedilmemişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı kaydetmek istiyor"
+	},
+	"cmd_toggle_org": {
+		"message": "Mevcut sayfanın Org değerini değiştir (kaydedilmişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfa için Org'ı değiştirmek istiyor"
+	},
+	"cmd_update_tab": {
+		"message": "Mevcut sayfayı güncellemek için modalı göster (kaydedilmişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı güncellemek istiyor"
 	},
 	"confirm_another_org": {
 		"message": "Bu bağlantının açılmasını onaylayın.",
@@ -227,6 +151,14 @@
 		"message": "Tüm Tabs Sil",
 		"description": "[açılır-pencere] tüm Tabs boşaltmak için çöp kutusu üzerindeki başlık"
 	},
+	"drop": {
+		"message": "Bırakın",
+		"description": "[içe aktarma] kullanıcının dosyalarını belirtilen alana sürükleyip bırakmasına izin verin"
+	},
+	"error_adding_tab": {
+		"message": "Tab eklenirken hata.",
+		"description": "[hata] Tab eklenirken kullanılan genel hata"
+	},
 	"error_close_other_modal": {
 		"message": "Lütfen önce diğer modalı kapatın!",
 		"description": "[bildirim] Kullanıcı 1'den fazla modal açmaya çalıştı"
@@ -259,6 +191,10 @@
 		"message": "Boş URL'den kuruluş adı çıkarılamaz!",
 		"description": "[hata] kuruluş adının alınacağı URL iletilmedi"
 	},
+	"error_failed_sync": {
+		"message": "Senkronize edilemedi.",
+		"description": "[hata] Tabs kullanıcından senkronize edilemediğinde genel hata"
+	},
 	"error_get_with_no_org": {
 		"message": "Kuruluş belirtilmezse Tabs alınamaz.",
 		"description": "[hata] kuruluş bilgisi göndermeden kuruluşa göre Tabs aramaya çalışıldı"
@@ -271,6 +207,10 @@
 		"message": "Fonskiyon'a geçirilen anahtar parametresi geçerli değil",
 		"description": "[hata] geliştirici geçersiz bir parametre ile bir fonksiyon çağırmaya çalıştı"
 	},
+	"error_invalid_request": {
+		"message": "Geçersiz istek.",
+		"description": "[hata] Hatalı biçimlendirilmiş bir mesaj alındıktan sonra genel hata"
+	},
 	"error_invalid_tab": {
 		"message": "Geçersiz Tab",
 		"description": "[hata] Tab geçerli değil"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "1'den fazla eşleşen Tab bulundu.",
 		"description": "[hata] birçok Tab alındı"
+	},
+	"error_many_tabs_found": {
+		"message": "Birden fazla Tab bulundu.",
+		"description": "[hata] çok sayıda Tabs alındı"
 	},
 	"error_minify_url": {
 		"message": "Boş bir URL küçültülemez!",
@@ -339,9 +283,37 @@
 		"message": "Kontrol edilecek URL yok!",
 		"description": "[hata] kontrol edilecek URL iletilmedi"
 	},
+	"error_not_initialized": {
+		"message": "henüz başlatılmadı.",
+		"description": "[hata] Bir değişken hazır olmadığında genel hata"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs işlenirken hata.",
+		"description": "[hata] Tabs işlenirken genel hata"
+	},
+	"error_redirect": {
+		"message": "Yeniden yönlendirilemiyor. Lütfen sayfayı yenileyin.",
+		"description": "[hata] Sayfa yeniden yönlendirmesinde genel hata."
+	},
 	"error_remove_not_favourite": {
 		"message": "Favori olmayan bir Tab kaldırılamaz!",
 		"description": "[hata] kullanıcı henüz kaydedilmemiş bir Tab kaldırmaya çalıştı"
+	},
+	"error_removing_all_tabs": {
+		"message": "Tüm Tabs kaldırılırken hata.",
+		"description": "[hata] Tüm Tabs kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Genel Tabs kaldırılırken hata.",
+		"description": "[hata] Genel Tabs kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_other_tabs": {
+		"message": "Diğer Tabs kaldırılırken hata.",
+		"description": "[hata] Diğer Tabs kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_tab": {
+		"message": "Tab kaldırılırken hata.",
+		"description": "[hata] Tab kaldırılırken kullanılan genel hata"
 	},
 	"error_required_params": {
 		"message": "Fonksiyon için gerekli parametreler geçilmedi",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Boş Tabs senkronize edilemez!",
 		"description": "[hata] hiçbir şeyi senkronize etmeye çalışıldı"
+	},
+	"error_tab_constructor": {
+		"message": "Tab sınıfını kullanmak için new Tab() yerine Tab.create() kullanın",
+		"description": "[hata] geliştiriciye Tab sınıfını nasıl kullanacağını söyleyin"
 	},
 	"error_tab_label": {
 		"message": "Etiket boş olmayan bir dize olmalıdır",
@@ -375,6 +351,10 @@
 		"message": "URL boş olmayan bir dize olmalıdır",
 		"description": "[hata] kullanıcı URL'siz bir Tab oluşturmaya çalıştı"
 	},
+	"error_tab_url_saved": {
+		"message": "Bu URL ile bir Tab zaten kaydedildi!",
+		"description": "[hata] Kullanıcı zaten favorilere eklenmiş bir Tab kaydetmeye çalıştı"
+	},
 	"error_tabcont_initialize": {
 		"message": "Şununla başlatılamıyor:",
 		"description": "[hata] Tab konteyneri başlatılamadı"
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Geçersiz Tab(lar) algılandı.\nİlk oluşum:",
 		"description": "[hata] geçersiz Tabs iletildi"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer sınıfını kullanmak için new TabContainer() yerine TabContainer.create() kullanın",
+		"description": "[hata] geliştiriciye TabContainer sınıfını nasıl kullanacağını söyleyin"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService sınıfını kullanmak için new TranslationService() yerine TranslationService.create() kullanın",
+		"description": "[hata] geliştiriciye TranslationService sınıfını nasıl kullanacağını söyleyin"
+	},
+	"error_translator_not_initialized": {
+		"message": "çevirmen henüz başlatılmadı.",
+		"description": "[hata] TranslationService hazır değildi"
+	},
+	"error_unknown_request": {
+		"message": "Bilinmeyen istek.",
+		"description": "[hata] Tanınmayan bir mesaj alındıktan sonra genel hata"
 	},
 	"error_useless_remove": {
 		"message": "Kaldırılamıyor:\nDaha önce kaydedilmemiş bir sayfa kaldırılamaz",

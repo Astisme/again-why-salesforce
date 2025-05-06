@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "TranslationService क्लास वापरण्यासाठी new TranslationService() ऐवजी TranslationService.create() वापरा",
-            "description": "[त्रुटी] TranslationService क्लास कसा वापरायचा हे विकसकाला सांगा"
-        },
-        "error_translator_not_initialized": {
-            "message": "भाषांतरकार अद्याप सुरु केलेला नाही.",
-            "description": "[त्रुटी] TranslationService तयार नव्हते"
-        },
-        "error_many_tabs_found": {
-            "message": "एकापेक्षा जास्त Tab सापडले.",
-            "description": "[त्रुटी] अनेक Tab मिळवले गेले"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "TabContainer क्लास वापरण्यासाठी new TabContainer() ऐवजी TabContainer.create() वापरा",
-            "description": "[त्रुटी] TabContainer क्लास कसा वापरायचा हे विकसकाला सांगा"
-        },
-        "error_tab_constructor": {
-            "message": "Tab क्लास वापरण्यासाठी new Tab() ऐवजी Tab.create() वापरा",
-            "description": "[त्रुटी] Tab क्लास कसा वापरायचा हे विकसकाला सांगा"
-        },
-        "error_redirect": {
-            "message": "редирект करणे शक्य नाही. कृपया पृष्ठ रीफ्रेश करा.",
-            "description": "[त्रुटी] पृष्ठ पुनर्निर्देशनावरील सामान्य त्रुटी."
-        },
-        "error_failed_sync": {
-            "message": "синх्रनाइझेशन अयशस्वी झाले.",
-            "description": "[त्रुटी] जेव्हा Tab वापरकर्त्याकडून sincronizar होऊ शकले नाहीत तेव्हाची सामान्य त्रुटी"
-        },
-        "error_removing_all_tabs": {
-            "message": "सर्व Tab काढताना त्रुटी.",
-            "description": "[त्रुटी] सर्व Tab काढताना वापरली जाणारी सामान्य त्रुटी"
-        },
-        "error_removing_generic_tabs": {
-            "message": "सामान्य Tab काढताना त्रुटी.",
-            "description": "[त्रुटी] सामान्य Tab काढताना वापरली जाणारी सामान्य त्रुटी"
-        },
-        "error_adding_tab": {
-            "message": "Tab जोडताना त्रुटी.",
-            "description": "[त्रुटी] Tab जोडताना वापरली जाणारी सामान्य त्रुटी"
-        },
-        "error_removing_other_tabs": {
-            "message": "इतर Tab काढताना त्रुटी.",
-            "description": "[त्रुटी] इतर Tab काढताना वापरली जाणारी सामान्य त्रुटी"
-        },
-        "error_removing_tab": {
-            "message": "Tab काढताना त्रुटी.",
-            "description": "[त्रुटी] Tab काढताना वापरली जाणारी सामान्य त्रुटी"
-        },
-        "error_not_initialized": {
-            "message": "अद्याप सुरु केलेला नाही.",
-            "description": "[त्रुटी] जेव्हा एखादा चल (variable) तयार नसतो तेव्हाची सामान्य त्रुटी"
-        },
-        "error_unknown_request": {
-            "message": "अज्ञात विनंती.",
-            "description": "[त्रुटी] ओळखल्या न गेलेल्या संदेशानंतरची सामान्य त्रुटी"
-        },
-        "error_invalid_request": {
-            "message": "अवैध विनंती.",
-            "description": "[त्रुटी] खराब स्वरूपातील संदेश मिळाल्यानंतरची सामान्य त्रुटी"
-        },
-        "error_processing_tabs": {
-            "message": "Tab प्रक्रिया करताना त्रुटी.",
-            "description": "[त्रुटी] Tab प्रक्रिया करताना सामान्य त्रुटी"
-        },
-        "error_tab_url_saved": {
-            "message": "या URL सह एक Tab आधीच जतन केला आहे!",
-            "description": "[त्रुटी] वापरकर्त्याने आधीच पसंदीदा केलेला Tab जतन करण्याचा प्रयत्न केला"
-        },
-        "cmd_export_all": {
-            "message": "जतन केलेले सर्व Tab निर्यात करण्यासाठी modal दाखवा",
-            "description": "[कमांड वर्णन] वापरकर्त्याला सर्व Tab निर्यात करायचे आहेत"
-        },
-        "cmd_import": {
-            "message": "नवीन Tab आयात करण्यासाठी modal दाखवा",
-            "description": "[कमांड वर्णन] वापरकर्त्याला नवीन Tab आयात करायचे आहेत"
-        },
-        "cmd_open_other_org": {
-            "message": "सध्याचे पृष्ठ दुसऱ्या Org मध्ये उघडण्यासाठी modal दाखवा",
-            "description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ दुसऱ्या Org मध्ये उघडायचे आहे"
-        },
-        "cmd_update_tab": {
-            "message": "सध्याचे पृष्ठ अद्यतनित करण्यासाठी modal दाखवा (जतन केलेले असल्यास)",
-            "description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ अद्यतनित करायचे आहे"
-        },
-        "cmd_toggle_org": {
-            "message": "सध्याच्या पृष्ठाचे Org मूल्य टॉगल करा (जतन केलेले असल्यास)",
-            "description": "[कमांड वर्णन] वापरकर्त्याला सध्याच्या पृष्ठासाठी Org टॉगल करायचे आहे"
-        },
-        "cmd_remove_tab": {
-            "message": "Tab सूचीतून सध्याचे पृष्ठ काढा (जतन केलेले असल्यास)",
-            "description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ काढायचे आहे"
-        },
-        "cmd_save_as_tab": {
-            "message": "सध्याचे पृष्ठ Tab सूचीमध्ये जतन करा (जतन केलेले नसल्यास)",
-            "description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ जतन करायचे आहे"
-        },
-        "drop": {
-            "message": "टाका",
-            "description": "[आयात] वापरकर्त्याला त्यांच्या फाइल्स निर्दिष्ट क्षेत्रावर टाकू द्या"
-        },
-        "open_settings": {
-            "message": "विस्तार सेटिंग्ज उघडा",
-            "description": "[पॉपअप] सेटिंग्ज पृष्ठावर पुनर्निर्देशित करण्यासाठी बटण"
-        },
 	"allow": {
 		"message": "परवानगी द्या",
 		"description": "[req_permission] परवानगी देण्यासाठीचे बटण"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "निवडलेले",
 		"description": "निवडलेल्या आयटém्ससाठी विभाग शीर्षक"
+	},
+	"cmd_export_all": {
+		"message": "जतन केलेले सर्व Tab निर्यात करण्यासाठी modal दाखवा",
+		"description": "[कमांड वर्णन] वापरकर्त्याला सर्व Tab निर्यात करायचे आहेत"
+	},
+	"cmd_import": {
+		"message": "नवीन Tab आयात करण्यासाठी modal दाखवा",
+		"description": "[कमांड वर्णन] वापरकर्त्याला नवीन Tab आयात करायचे आहेत"
+	},
+	"cmd_open_other_org": {
+		"message": "सध्याचे पृष्ठ दुसऱ्या Org मध्ये उघडण्यासाठी modal दाखवा",
+		"description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ दुसऱ्या Org मध्ये उघडायचे आहे"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab सूचीतून सध्याचे पृष्ठ काढा (जतन केलेले असल्यास)",
+		"description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ काढायचे आहे"
+	},
+	"cmd_save_as_tab": {
+		"message": "सध्याचे पृष्ठ Tab सूचीमध्ये जतन करा (जतन केलेले नसल्यास)",
+		"description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ जतन करायचे आहे"
+	},
+	"cmd_toggle_org": {
+		"message": "सध्याच्या पृष्ठाचे Org मूल्य टॉगल करा (जतन केलेले असल्यास)",
+		"description": "[कमांड वर्णन] वापरकर्त्याला सध्याच्या पृष्ठासाठी Org टॉगल करायचे आहे"
+	},
+	"cmd_update_tab": {
+		"message": "सध्याचे पृष्ठ अद्यतनित करण्यासाठी modal दाखवा (जतन केलेले असल्यास)",
+		"description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ अद्यतनित करायचे आहे"
 	},
 	"confirm_another_org": {
 		"message": "हा लिंक उघडणे पुष्टी करा.",
@@ -227,6 +151,14 @@
 		"message": "सर्व Tabs काढून टाका",
 		"description": "[popup] सर्व Tabs काढून टाकण्यासाठी कचरा पेटीवरचे शीर्षक"
 	},
+	"drop": {
+		"message": "टाका",
+		"description": "[आयात] वापरकर्त्याला त्यांच्या फाइल्स निर्दिष्ट क्षेत्रावर टाकू द्या"
+	},
+	"error_adding_tab": {
+		"message": "Tab जोडताना त्रुटी.",
+		"description": "[त्रुटी] Tab जोडताना वापरली जाणारी सामान्य त्रुटी"
+	},
 	"error_close_other_modal": {
 		"message": "कृपया आधी इतर modal बंद करा!",
 		"description": "[toast] एकापेक्षा जास्त modal उघडण्याचा प्रयत्न केला गेला आहे."
@@ -259,6 +191,10 @@
 		"message": "रिक्त URL मधून Org चे नाव काढता येणार नाही!",
 		"description": "[error] Org चे नाव काढण्यासाठी URL पुरवले गेले नाही."
 	},
+	"error_failed_sync": {
+		"message": "синх्रनाइझेशन अयशस्वी झाले.",
+		"description": "[त्रुटी] जेव्हा Tab वापरकर्त्याकडून sincronizar होऊ शकले नाहीत तेव्हाची सामान्य त्रुटी"
+	},
 	"error_get_with_no_org": {
 		"message": "Org न दिल्यास Tabs मिळवता येत नाहीत.",
 		"description": "[error] Org माहिती शिवाय Tabs मिळवण्याचा प्रयत्न केला गेला."
@@ -271,6 +207,10 @@
 		"message": "फंक्शनला पास केलेला की पॅरामीटर वैध नाही",
 		"description": "[त्रुटी] विकसकाने अवैध पॅरामीटरसह फंक्शन कॉल करण्याचा प्रयत्न केला"
 	},
+	"error_invalid_request": {
+		"message": "अवैध विनंती.",
+		"description": "[त्रुटी] खराब स्वरूपातील संदेश मिळाल्यानंतरची सामान्य त्रुटी"
+	},
 	"error_invalid_tab": {
 		"message": "अवैध Tab",
 		"description": "[error] Tab अवैध आहे."
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "एकापेक्षा जास्त जुळणारे Tab सापडले.",
 		"description": "[error] अनेक जुळणारे Tabs मिळाले आहेत."
+	},
+	"error_many_tabs_found": {
+		"message": "एकापेक्षा जास्त Tab सापडले.",
+		"description": "[त्रुटी] अनेक Tab मिळवले गेले"
 	},
 	"error_minify_url": {
 		"message": "रिक्त URL लहान करता येणार नाही!",
@@ -339,9 +283,37 @@
 		"message": "तपासण्यासाठी URL उपलब्ध नाही!",
 		"description": "[error] तपासण्यासाठी URL पुरवले गेले नाही."
 	},
+	"error_not_initialized": {
+		"message": "अद्याप सुरु केलेला नाही.",
+		"description": "[त्रुटी] जेव्हा एखादा चल (variable) तयार नसतो तेव्हाची सामान्य त्रुटी"
+	},
+	"error_processing_tabs": {
+		"message": "Tab प्रक्रिया करताना त्रुटी.",
+		"description": "[त्रुटी] Tab प्रक्रिया करताना सामान्य त्रुटी"
+	},
+	"error_redirect": {
+		"message": "редирект करणे शक्य नाही. कृपया पृष्ठ रीफ्रेश करा.",
+		"description": "[त्रुटी] पृष्ठ पुनर्निर्देशनावरील सामान्य त्रुटी."
+	},
 	"error_remove_not_favourite": {
 		"message": "आवडते नसलेला Tab काढता येणार नाही!",
 		"description": "[error] अद्याप जतन न केलेला Tab काढण्याचा प्रयत्न केला गेला."
+	},
+	"error_removing_all_tabs": {
+		"message": "सर्व Tab काढताना त्रुटी.",
+		"description": "[त्रुटी] सर्व Tab काढताना वापरली जाणारी सामान्य त्रुटी"
+	},
+	"error_removing_generic_tabs": {
+		"message": "सामान्य Tab काढताना त्रुटी.",
+		"description": "[त्रुटी] सामान्य Tab काढताना वापरली जाणारी सामान्य त्रुटी"
+	},
+	"error_removing_other_tabs": {
+		"message": "इतर Tab काढताना त्रुटी.",
+		"description": "[त्रुटी] इतर Tab काढताना वापरली जाणारी सामान्य त्रुटी"
+	},
+	"error_removing_tab": {
+		"message": "Tab काढताना त्रुटी.",
+		"description": "[त्रुटी] Tab काढताना वापरली जाणारी सामान्य त्रुटी"
 	},
 	"error_required_params": {
 		"message": "कार्यासाठी आवश्यक असलेले पॅरामीटर्स पास केले गेले नाहीत",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "रिक्त Tabs समक्रमण करता येणार नाहीत!",
 		"description": "[error] काही समक्रमित करण्याचा प्रयत्न केला गेला."
+	},
+	"error_tab_constructor": {
+		"message": "Tab क्लास वापरण्यासाठी new Tab() ऐवजी Tab.create() वापरा",
+		"description": "[त्रुटी] Tab क्लास कसा वापरायचा हे विकसकाला सांगा"
 	},
 	"error_tab_label": {
 		"message": "लेबल रिक्त स्ट्रिंग असू शकत नाही",
@@ -375,12 +351,32 @@
 		"message": "URL रिक्त स्ट्रिंग असू शकत नाही",
 		"description": "[error] URL न देता Tab तयार करण्याचा प्रयत्न केला गेला."
 	},
+	"error_tab_url_saved": {
+		"message": "या URL सह एक Tab आधीच जतन केला आहे!",
+		"description": "[त्रुटी] वापरकर्त्याने आधीच पसंदीदा केलेला Tab जतन करण्याचा प्रयत्न केला"
+	},
 	"error_tabcont_initialize": {
 		"message": "या सह प्रारंभ करता येणार नाही"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "अवैध Tabs आढळले.\nपहिले प्रकट:",
 		"description": "[error] अवैध Tabs पुरवले गेले."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer क्लास वापरण्यासाठी new TabContainer() ऐवजी TabContainer.create() वापरा",
+		"description": "[त्रुटी] TabContainer क्लास कसा वापरायचा हे विकसकाला सांगा"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService क्लास वापरण्यासाठी new TranslationService() ऐवजी TranslationService.create() वापरा",
+		"description": "[त्रुटी] TranslationService क्लास कसा वापरायचा हे विकसकाला सांगा"
+	},
+	"error_translator_not_initialized": {
+		"message": "भाषांतरकार अद्याप सुरु केलेला नाही.",
+		"description": "[त्रुटी] TranslationService तयार नव्हते"
+	},
+	"error_unknown_request": {
+		"message": "अज्ञात विनंती.",
+		"description": "[त्रुटी] ओळखल्या न गेलेल्या संदेशानंतरची सामान्य त्रुटी"
 	},
 	"error_useless_remove": {
 		"message": "काढता येणार नाही:\nकधीच जतन न झालेली पृष्ठ काढता येणार नाही.",
