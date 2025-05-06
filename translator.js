@@ -16,6 +16,7 @@ class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_ELEMENT_ATTRIBUTE = "data-i18n";
 	static TRANSLATE_SEPARATOR = "+-+";
+	static ATTRIBUTE_EXCLUDE = "data-exclude-automatic-i18n";
 	/** @type {string} Current language code */
 	currentLanguage = TranslationService.FALLBACK_LANGUAGE;
 	/** @type {Object.<string, Object.<string, string>>} Cache organized by language */
@@ -172,7 +173,7 @@ class TranslationService {
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
 		const elements = document.querySelectorAll(
-			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]`,
+			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
 		);
 		for (const element of elements) {
 			const toTranslateKey = element.getAttribute(

@@ -8,8 +8,12 @@ import {
 	OPERATING_PATTERNS,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
+    CMD_OPEN_SETTINGS,
+	CMD_IMPORT,
+	CMD_EXPORT_ALL,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
+
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
 const translator = await ensureTranslatorAvailability();
@@ -432,10 +436,47 @@ document.getElementById("theme-selector").addEventListener(
 	"click",
 	switchTheme,
 );
-document.getElementById("import").addEventListener("click", importHandler);
-document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
-document.getElementById("open-settings").addEventListener(
+
+const importBtn = document.getElementById("import");
+importBtn.addEventListener("click", importHandler);
+const exportBtn = document.getElementById("export");
+exportBtn.addEventListener("click", pop_exportHandler);
+const settingsBtn = document.getElementById("open-settings");
+settingsBtn.addEventListener(
 	"click",
 	openSettingsPage,
 );
+
+const availableCommands = await sendExtensionMessage({ what: "get-commands", commands: [
+    CMD_EXPORT_ALL,
+    CMD_IMPORT,
+    CMD_OPEN_SETTINGS,
+] });
+function sliceBeforeSeparator(i18n){
+    return i18n.slice(0, i18n.indexOf("+-+"));
+}
+availableCommands.forEach(async ac => {
+    switch (ac.name) {
+        case CMD_EXPORT_ALL:
+            exportBtn.title = await translator.translate([
+                sliceBeforeSeparator(exportBtn.dataset.i18n),
+                `(${ac.shortcut})`
+            ]);
+            break;
+        case CMD_IMPORT:
+            importBtn.title = await translator.translate([
+                sliceBeforeSeparator(importBtn.dataset.i18n),
+                `(${ac.shortcut})`
+            ]);
+            break;
+        case CMD_OPEN_SETTINGS:
+            settingsBtn.title = await translator.translate([
+                sliceBeforeSeparator(settingsBtn.dataset.i18n),
+                `(${ac.shortcut})`
+            ]);
+            break;
+        default:
+            break;
+    }
+});
