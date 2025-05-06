@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "新しい TranslationService() の代わりに TranslationService.create() を使用してください",
-            "description": "[エラー] 開発者に TranslationService クラスの使用方法を伝えます"
-        },
-        "error_translator_not_initialized": {
-            "message": "翻訳ツールはまだ初期化されていません。",
-            "description": "[エラー] TranslationService が準備できていませんでした"
-        },
-        "error_many_tabs_found": {
-            "message": "複数の Tab が見つかりました。",
-            "description": "[エラー] 多くの Tabs が取得されました"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "新しい TabContainer() の代わりに TabContainer.create() を使用してください",
-            "description": "[エラー] 開発者に TabContainer クラスの使用方法を伝えます"
-        },
-        "error_tab_constructor": {
-            "message": "新しい Tab() の代わりに Tab.create() を使用してください",
-            "description": "[エラー] 開発者に Tab クラスの使用方法を伝えます"
-        },
-        "error_redirect": {
-            "message": "リダイレクトできません。ページを更新してください。",
-            "description": "[エラー] ページ リダイレクトに関する一般的なエラー。"
-        },
-        "error_failed_sync": {
-            "message": "同期に失敗しました。",
-            "description": "[エラー] ユーザーから Tabs を同期できなかった場合の一般的なエラー"
-        },
-        "error_removing_all_tabs": {
-            "message": "すべての Tabs を削除中にエラーが発生しました。",
-            "description": "[エラー] すべての Tabs を削除中に使用される一般的なエラー"
-        },
-        "error_removing_generic_tabs": {
-            "message": "汎用 Tabs を削除中にエラーが発生しました。",
-            "description": "[エラー] 汎用 Tabs を削除中に使用される一般的なエラー"
-        },
-        "error_adding_tab": {
-            "message": "Tab の追加中にエラーが発生しました。",
-            "description": "[エラー] Tab の追加中に使用される一般的なエラー"
-        },
-        "error_removing_other_tabs": {
-            "message": "他の Tabs を削除中にエラーが発生しました。",
-            "description": "[エラー] 他の Tabs を削除中に使用される一般的なエラー"
-        },
-        "error_removing_tab": {
-            "message": "Tab の削除中にエラーが発生しました。",
-            "description": "[エラー] Tab の削除中に使用される一般的なエラー"
-        },
-        "error_not_initialized": {
-            "message": "はまだ初期化されていませんでした。",
-            "description": "[エラー] 変数が準備できていない場合の一般的なエラー"
-        },
-        "error_unknown_request": {
-            "message": "不明なリクエスト。",
-            "description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
-        },
-        "error_invalid_request": {
-            "message": "無効なリクエスト。",
-            "description": "[エラー] フォーマットが不正なメッセージを受信した後の一般的なエラー"
-        },
-        "error_processing_tabs": {
-            "message": "Tabs の処理中にエラーが発生しました。",
-            "description": "[エラー] Tabs の処理中の一般的なエラー"
-        },
-        "error_tab_url_saved": {
-            "message": "この URL を持つ Tab は既に保存されています！",
-            "description": "[エラー] ユーザーが既にブックマークされている Tab を保存しようとしました"
-        },
-        "cmd_export_all": {
-            "message": "保存されているすべての Tabs をエクスポートするモーダルを表示する",
-            "description": "[コマンド説明] ユーザーはすべての Tabs をエクスポートしたいと考えています"
-        },
-        "cmd_import": {
-            "message": "新しい Tabs をインポートするモーダルを表示する",
-            "description": "[コマンド説明] ユーザーは新しい Tabs をインポートしたいと考えています"
-        },
-        "cmd_open_other_org": {
-            "message": "現在のページを別の Org で開くモーダルを表示する",
-            "description": "[コマンド説明] ユーザーは現在のページを別の Org で開きたいと考えています"
-        },
-        "cmd_update_tab": {
-            "message": "現在のページを更新するモーダルを表示する（保存されている場合）",
-            "description": "[コマンド説明] ユーザーは現在のページを更新したいと考えています"
-        },
-        "cmd_toggle_org": {
-            "message": "現在のページの Org 値を切り替える（保存されている場合）",
-            "description": "[コマンド説明] ユーザーは現在のページの Org を切り替えたいと考えています"
-        },
-        "cmd_remove_tab": {
-            "message": "Tab リストから現在のページを削除する（保存されている場合）",
-            "description": "[コマンド説明] ユーザーは現在のページを削除したいと考えています"
-        },
-        "cmd_save_as_tab": {
-            "message": "現在のページを Tab リストに保存する（保存されていない場合）",
-            "description": "[コマンド説明] ユーザーは現在のページを保存したいと考えています"
-        },
-        "drop": {
-            "message": "ドロップ",
-            "description": "[インポート] ユーザーが指定されたエリアにファイルをドロップできるようにします"
-        },
-        "open_settings": {
-            "message": "拡張機能設定を開く",
-            "description": "[ポップアップ] 設定ページにリダイレクトするボタン"
-        },
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "選択済み",
 		"description": "選択された項目のセクション見出し"
+	},
+	"cmd_export_all": {
+		"message": "保存されているすべての Tabs をエクスポートするモーダルを表示する",
+		"description": "[コマンド説明] ユーザーはすべての Tabs をエクスポートしたいと考えています"
+	},
+	"cmd_import": {
+		"message": "新しい Tabs をインポートするモーダルを表示する",
+		"description": "[コマンド説明] ユーザーは新しい Tabs をインポートしたいと考えています"
+	},
+	"cmd_open_other_org": {
+		"message": "現在のページを別の Org で開くモーダルを表示する",
+		"description": "[コマンド説明] ユーザーは現在のページを別の Org で開きたいと考えています"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab リストから現在のページを削除する（保存されている場合）",
+		"description": "[コマンド説明] ユーザーは現在のページを削除したいと考えています"
+	},
+	"cmd_save_as_tab": {
+		"message": "現在のページを Tab リストに保存する（保存されていない場合）",
+		"description": "[コマンド説明] ユーザーは現在のページを保存したいと考えています"
+	},
+	"cmd_toggle_org": {
+		"message": "現在のページの Org 値を切り替える（保存されている場合）",
+		"description": "[コマンド説明] ユーザーは現在のページの Org を切り替えたいと考えています"
+	},
+	"cmd_update_tab": {
+		"message": "現在のページを更新するモーダルを表示する（保存されている場合）",
+		"description": "[コマンド説明] ユーザーは現在のページを更新したいと考えています"
 	},
 	"confirm_another_org": {
 		"message": "このリンクを開くことを確認してください。",
@@ -227,6 +151,14 @@
 		"message": "すべての Tabs を削除する",
 		"description": "[popup] すべての Tabs を空にするためのゴミ箱のタイトル"
 	},
+	"drop": {
+		"message": "ドロップ",
+		"description": "[インポート] ユーザーが指定されたエリアにファイルをドロップできるようにします"
+	},
+	"error_adding_tab": {
+		"message": "Tab の追加中にエラーが発生しました。",
+		"description": "[エラー] Tab の追加中に使用される一般的なエラー"
+	},
 	"error_close_other_modal": {
 		"message": "まず他のモーダルを閉じてください！",
 		"description": "[toast] 複数のモーダルが開かれようとしました"
@@ -259,6 +191,10 @@
 		"message": "空の URL から Org 名を抽出できません！",
 		"description": "[error] Org 名を抽出するための URL が渡されませんでした"
 	},
+	"error_failed_sync": {
+		"message": "同期に失敗しました。",
+		"description": "[エラー] ユーザーから Tabs を同期できなかった場合の一般的なエラー"
+	},
 	"error_get_with_no_org": {
 		"message": "Org が指定されないと Tabs を取得できません。",
 		"description": "[error] Org 情報なしで Tabs を取得しようとしました。"
@@ -271,6 +207,10 @@
 		"message": "関数に渡されたキーパラメータが無効です",
 		"description": "[エラー] 開発者が無効なパラメータで関数を呼び出そうとしました"
 	},
+	"error_invalid_request": {
+		"message": "無効なリクエスト。",
+		"description": "[エラー] フォーマットが不正なメッセージを受信した後の一般的なエラー"
+	},
 	"error_invalid_tab": {
 		"message": "無効な Tab",
 		"description": "[error] Tab が無効です。"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "一致する Tab が複数見つかりました。",
 		"description": "[error] 複数の一致する Tab が取得されました。"
+	},
+	"error_many_tabs_found": {
+		"message": "複数の Tab が見つかりました。",
+		"description": "[エラー] 多くの Tabs が取得されました"
 	},
 	"error_minify_url": {
 		"message": "空の URL は短縮できません！",
@@ -339,9 +283,37 @@
 		"message": "確認するための URL がありません！",
 		"description": "[error] 確認する URL が渡されませんでした"
 	},
+	"error_not_initialized": {
+		"message": "はまだ初期化されていませんでした。",
+		"description": "[エラー] 変数が準備できていない場合の一般的なエラー"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs の処理中にエラーが発生しました。",
+		"description": "[エラー] Tabs の処理中の一般的なエラー"
+	},
+	"error_redirect": {
+		"message": "リダイレクトできません。ページを更新してください。",
+		"description": "[エラー] ページ リダイレクトに関する一般的なエラー。"
+	},
 	"error_remove_not_favourite": {
 		"message": "お気に入りでない Tab は削除できません！",
 		"description": "[error] まだ保存されていない Tab を削除しようとしました"
+	},
+	"error_removing_all_tabs": {
+		"message": "すべての Tabs を削除中にエラーが発生しました。",
+		"description": "[エラー] すべての Tabs を削除中に使用される一般的なエラー"
+	},
+	"error_removing_generic_tabs": {
+		"message": "汎用 Tabs を削除中にエラーが発生しました。",
+		"description": "[エラー] 汎用 Tabs を削除中に使用される一般的なエラー"
+	},
+	"error_removing_other_tabs": {
+		"message": "他の Tabs を削除中にエラーが発生しました。",
+		"description": "[エラー] 他の Tabs を削除中に使用される一般的なエラー"
+	},
+	"error_removing_tab": {
+		"message": "Tab の削除中にエラーが発生しました。",
+		"description": "[エラー] Tab の削除中に使用される一般的なエラー"
 	},
 	"error_required_params": {
 		"message": "関数に必要なパラメータが渡されませんでした",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "空の Tabs は同期できません！",
 		"description": "[error] 同期すべきものがありません。"
+	},
+	"error_tab_constructor": {
+		"message": "新しい Tab() の代わりに Tab.create() を使用してください",
+		"description": "[エラー] 開発者に Tab クラスの使用方法を伝えます"
 	},
 	"error_tab_label": {
 		"message": "ラベルは空でない文字列でなければなりません",
@@ -375,12 +351,32 @@
 		"message": "URL は空でない文字列でなければなりません",
 		"description": "[error] URL なしで Tab を作成しようとしました"
 	},
+	"error_tab_url_saved": {
+		"message": "この URL を持つ Tab は既に保存されています！",
+		"description": "[エラー] ユーザーが既にブックマークされている Tab を保存しようとしました"
+	},
 	"error_tabcont_initialize": {
 		"message": "これでは初期化できません："
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "無効な Tabs が検出されました。\n最初の出現：",
 		"description": "[error] 無効な Tabs が渡されました。"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "新しい TabContainer() の代わりに TabContainer.create() を使用してください",
+		"description": "[エラー] 開発者に TabContainer クラスの使用方法を伝えます"
+	},
+	"error_translationservice_constructor": {
+		"message": "新しい TranslationService() の代わりに TranslationService.create() を使用してください",
+		"description": "[エラー] 開発者に TranslationService クラスの使用方法を伝えます"
+	},
+	"error_translator_not_initialized": {
+		"message": "翻訳ツールはまだ初期化されていません。",
+		"description": "[エラー] TranslationService が準備できていませんでした"
+	},
+	"error_unknown_request": {
+		"message": "不明なリクエスト。",
+		"description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
 	},
 	"error_useless_remove": {
 		"message": "削除できません：\n一度も保存されていないページは削除できません",

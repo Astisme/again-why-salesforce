@@ -1,108 +1,4 @@
 {
-  "error_translationservice_constructor": {
-    "message": "Kasuta TranslationService.create() asemel new TranslationService()",
-    "description": "[error] Teavita arendajat, kuidas kasutada TranslationService klassi"
-  },
-  "error_translator_not_initialized": {
-    "message": "translator pole veel initsialiseeritud.",
-    "description": "[error] TranslationService ei olnud veel valmis"
-  },
-  "error_many_tabs_found": {
-    "message": "Leiti rohkem kui üks Tab.",
-    "description": "[error] Tagastati mitu Tabsi"
-  },
-  "error_tabcontainer_constructor": {
-    "message": "Kasuta TabContainer.create() asemel new TabContainer()",
-    "description": "[error] Teavita arendajat, kuidas kasutada TabContainer klassi"
-  },
-  "error_tab_constructor": {
-    "message": "Kasuta Tab.create() asemel new Tab()",
-    "description": "[error] Teavita arendajat, kuidas kasutada Tab klassi"
-  },
-  "error_redirect": {
-    "message": "Ümbersuunamine ebaõnnestus. Palun värskenda lehte.",
-    "description": "[error] Üldine viga lehe ümbersuunamisel"
-  },
-  "error_failed_sync": {
-    "message": "Sünkroonimine ebaõnnestus.",
-    "description": "[error] Üldine viga Tabside kasutajaga sünkroonimisel"
-  },
-  "error_removing_all_tabs": {
-    "message": "Viga kõigi Tabside eemaldamisel.",
-    "description": "[error] Üldine viga kõigi Tabside eemaldamisel"
-  },
-  "error_removing_generic_tabs": {
-    "message": "Viga üldiste Tabside eemaldamisel.",
-    "description": "[error] Üldine viga üldiste Tabside eemaldamisel"
-  },
-  "error_adding_tab": {
-    "message": "Viga Tabsi lisamisel.",
-    "description": "[error] Üldine viga Tabsi lisamisel"
-  },
-  "error_removing_other_tabs": {
-    "message": "Viga teiste Tabside eemaldamisel.",
-    "description": "[error] Üldine viga teiste Tabside eemaldamisel"
-  },
-  "error_removing_tab": {
-    "message": "Viga Tabsi eemaldamisel.",
-    "description": "[error] Üldine viga Tabsi eemaldamisel"
-  },
-  "error_not_initialized": {
-    "message": "Pole veel initsialiseeritud.",
-    "description": "[error] Üldine viga muutuja ettevalmistatumisel"
-  },
-  "error_unknown_request": {
-    "message": "Tundmatu päring.",
-    "description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
-  },
-  "error_invalid_request": {
-    "message": "Kehtetu päring.",
-    "description": "[error] Üldine viga pärast valesti vormindatud sõnumi vastuvõttu"
-  },
-  "error_processing_tabs": {
-    "message": "Viga Tabside töötlemisel.",
-    "description": "[error] Üldine viga Tabside töötlemisel"
-  },
-  "error_tab_url_saved": {
-    "message": "Selle URL-iga Tab on juba salvestatud!",
-    "description": "[error] Kasutaja üritas salvestada juba salvestatud Tabsi"
-  },
-  "cmd_export_all": {
-    "message": "Kuva dialoog kõigi salvestatud Tabside eksportimiseks",
-    "description": "[command description] kasutaja soovib eksportida kõiki Tabse"
-  },
-  "cmd_import": {
-    "message": "Kuva dialoog uute Tabside importimiseks",
-    "description": "[command description] kasutaja soovib importida uusi Tabse"
-  },
-  "cmd_open_other_org": {
-    "message": "Kuva dialoog praeguse lehe avamiseks teises Org-is",
-    "description": "[command description] kasutaja soovib avada praeguse lehe teises Org-is"
-  },
-  "cmd_update_tab": {
-    "message": "Kuva dialoog praeguse lehe värskendamiseks (kui salvestatud)",
-    "description": "[command description] kasutaja soovib värskendada praegust lehte"
-  },
-  "cmd_toggle_org": {
-    "message": "Kuva dialoog Org väärtuse vahetamiseks praegusel lehel (kui salvestatud)",
-    "description": "[command description] kasutaja soovib vahetada Org väärtust praegusel lehel"
-  },
-  "cmd_remove_tab": {
-    "message": "Eemalda praegune leht Tabside loendist (kui salvestatud)",
-    "description": "[command description] kasutaja soovib eemaldada praeguse lehe"
-  },
-  "cmd_save_as_tab": {
-    "message": "Salvesta praegune leht Tabside loendisse (kui pole salvestatud)",
-    "description": "[command description] kasutaja soovib salvestada praeguse lehe"
-  },
-  "drop": {
-    "message": "Drop",
-    "description": "[import] lubab kasutajal lohistada oma faile määratud alale"
-  },
-  "open_settings": {
-    "message": "Open Extension Settings",
-    "description": "[popup] nupp, mis suunab seadete lehele"
-  },
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Valitud",
 		"description": "Jaotise pealkiri elementidele, mis on valitud"
+	},
+	"cmd_export_all": {
+		"message": "Kuva dialoog kõigi salvestatud Tabside eksportimiseks",
+		"description": "[command description] kasutaja soovib eksportida kõiki Tabse"
+	},
+	"cmd_import": {
+		"message": "Kuva dialoog uute Tabside importimiseks",
+		"description": "[command description] kasutaja soovib importida uusi Tabse"
+	},
+	"cmd_open_other_org": {
+		"message": "Kuva dialoog praeguse lehe avamiseks teises Org-is",
+		"description": "[command description] kasutaja soovib avada praeguse lehe teises Org-is"
+	},
+	"cmd_remove_tab": {
+		"message": "Eemalda praegune leht Tabside loendist (kui salvestatud)",
+		"description": "[command description] kasutaja soovib eemaldada praeguse lehe"
+	},
+	"cmd_save_as_tab": {
+		"message": "Salvesta praegune leht Tabside loendisse (kui pole salvestatud)",
+		"description": "[command description] kasutaja soovib salvestada praeguse lehe"
+	},
+	"cmd_toggle_org": {
+		"message": "Kuva dialoog Org väärtuse vahetamiseks praegusel lehel (kui salvestatud)",
+		"description": "[command description] kasutaja soovib vahetada Org väärtust praegusel lehel"
+	},
+	"cmd_update_tab": {
+		"message": "Kuva dialoog praeguse lehe värskendamiseks (kui salvestatud)",
+		"description": "[command description] kasutaja soovib värskendada praegust lehte"
 	},
 	"confirm_another_org": {
 		"message": "Kinnita selle lingi avamine.",
@@ -227,6 +151,14 @@
 		"message": "Kustuta kõik Tabs",
 		"description": "[hüpikaken] pealkiri prügikastil kõigi Tabs'ide tühjendamiseks"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] lubab kasutajal lohistada oma faile määratud alale"
+	},
+	"error_adding_tab": {
+		"message": "Viga Tabsi lisamisel.",
+		"description": "[error] Üldine viga Tabsi lisamisel"
+	},
 	"error_close_other_modal": {
 		"message": "Palun sulgege esmalt teine modaalaken!",
 		"description": "[teavitus] Kasutaja üritas avada rohkem kui 1 modaalakent"
@@ -259,6 +191,10 @@
 		"message": "Org nime ei saa tühjast URL-ist eraldada!",
 		"description": "[viga] URL-i, millest Org nimi eraldada, ei edastatud"
 	},
+	"error_failed_sync": {
+		"message": "Sünkroonimine ebaõnnestus.",
+		"description": "[error] Üldine viga Tabside kasutajaga sünkroonimisel"
+	},
 	"error_get_with_no_org": {
 		"message": "Tabs ei saa hankida, kui Org pole määratud.",
 		"description": "[viga] üritati otsida Tabs Org järgi ilma Org teavet saatmata"
@@ -271,6 +207,10 @@
 		"message": "Funktsioonile edastatud key-parameeter on kehtetu",
 		"description": "[viga] arendaja proovis funktsiooni kutsuda kehtetu parameetriga"
 	},
+	"error_invalid_request": {
+		"message": "Kehtetu päring.",
+		"description": "[error] Üldine viga pärast valesti vormindatud sõnumi vastuvõttu"
+	},
 	"error_invalid_tab": {
 		"message": "Kehtetu Tab",
 		"description": "[viga] Tab ei kehti"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Leiti rohkem kui 1 sobiv Tab.",
 		"description": "[viga] hangiti palju Tabs'e"
+	},
+	"error_many_tabs_found": {
+		"message": "Leiti rohkem kui üks Tab.",
+		"description": "[error] Tagastati mitu Tabsi"
 	},
 	"error_minify_url": {
 		"message": "Tühja URL-i ei saa minimeerida!",
@@ -339,9 +283,37 @@
 		"message": "Kontrollitavat URL-i pole!",
 		"description": "[viga] kontrollitavat URL-i ei edastatud"
 	},
+	"error_not_initialized": {
+		"message": "Pole veel initsialiseeritud.",
+		"description": "[error] Üldine viga muutuja ettevalmistatumisel"
+	},
+	"error_processing_tabs": {
+		"message": "Viga Tabside töötlemisel.",
+		"description": "[error] Üldine viga Tabside töötlemisel"
+	},
+	"error_redirect": {
+		"message": "Ümbersuunamine ebaõnnestus. Palun värskenda lehte.",
+		"description": "[error] Üldine viga lehe ümbersuunamisel"
+	},
 	"error_remove_not_favourite": {
 		"message": "Mitte-lemmikut Tab ei saa eemaldada!",
 		"description": "[viga] kasutaja üritas eemaldada Tab, mida polnud veel salvestatud"
+	},
+	"error_removing_all_tabs": {
+		"message": "Viga kõigi Tabside eemaldamisel.",
+		"description": "[error] Üldine viga kõigi Tabside eemaldamisel"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Viga üldiste Tabside eemaldamisel.",
+		"description": "[error] Üldine viga üldiste Tabside eemaldamisel"
+	},
+	"error_removing_other_tabs": {
+		"message": "Viga teiste Tabside eemaldamisel.",
+		"description": "[error] Üldine viga teiste Tabside eemaldamisel"
+	},
+	"error_removing_tab": {
+		"message": "Viga Tabsi eemaldamisel.",
+		"description": "[error] Üldine viga Tabsi eemaldamisel"
 	},
 	"error_required_params": {
 		"message": "Funktsioonile vajalikke parameetreid ei edastatud",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Null (null) Tabs ei saa sünkroonida!",
 		"description": "[viga] üritati sünkroonida mitte midagi"
+	},
+	"error_tab_constructor": {
+		"message": "Kasuta Tab.create() asemel new Tab()",
+		"description": "[error] Teavita arendajat, kuidas kasutada Tab klassi"
 	},
 	"error_tab_label": {
 		"message": "Silt peab olema mittetühi string",
@@ -375,6 +351,10 @@
 		"message": "URL peab olema mittetühi string",
 		"description": "[viga] kasutaja üritas luua Tab ilma URL-ita"
 	},
+	"error_tab_url_saved": {
+		"message": "Selle URL-iga Tab on juba salvestatud!",
+		"description": "[error] Kasutaja üritas salvestada juba salvestatud Tabsi"
+	},
 	"error_tabcont_initialize": {
 		"message": "Ei saa lähtestada:",
 		"description": "[viga] Tab konteineri lähtestamine ebaõnnestus"
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Tuvastati kehtetu(id) Tab(id).\nEsimene esinemine:",
 		"description": "[viga] edastati kehtetud Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Kasuta TabContainer.create() asemel new TabContainer()",
+		"description": "[error] Teavita arendajat, kuidas kasutada TabContainer klassi"
+	},
+	"error_translationservice_constructor": {
+		"message": "Kasuta TranslationService.create() asemel new TranslationService()",
+		"description": "[error] Teavita arendajat, kuidas kasutada TranslationService klassi"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator pole veel initsialiseeritud.",
+		"description": "[error] TranslationService ei olnud veel valmis"
+	},
+	"error_unknown_request": {
+		"message": "Tundmatu päring.",
+		"description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
 	},
 	"error_useless_remove": {
 		"message": "Ei saa eemaldada:\nEi saa eemaldada lehte, mida pole varem salvestatud",

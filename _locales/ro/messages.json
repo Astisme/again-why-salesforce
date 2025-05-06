@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "Folosiți TranslationService.create() în loc de new TranslationService() pentru a utiliza clasa TranslationService",
-            "description": "[eroare] spune dezvoltatorului cum să folosească clasa TranslationService"
-        },
-        "error_translator_not_initialized": {
-            "message": "traducătorul nu a fost încă inițializat.",
-            "description": "[eroare] TranslationService nu era gata"
-        },
-        "error_many_tabs_found": {
-            "message": "S-au găsit mai mult de un Tab.",
-            "description": "[eroare] multe Tabs au fost preluate"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "Folosiți TabContainer.create() în loc de new TabContainer() pentru a utiliza clasa TabContainer",
-            "description": "[eroare] spune dezvoltatorului cum să folosească clasa TabContainer"
-        },
-        "error_tab_constructor": {
-            "message": "Folosiți Tab.create() în loc de new Tab() pentru a utiliza clasa Tab",
-            "description": "[eroare] spune dezvoltatorului cum să folosească clasa Tab"
-        },
-        "error_redirect": {
-            "message": "Nu se poate redirecta. Vă rugăm să reîncărcați pagina.",
-            "description": "[eroare] Eroare generică la redirecționarea paginii."
-        },
-        "error_failed_sync": {
-            "message": "Sincronizare eșuată.",
-            "description": "[eroare] Eroare generică atunci când Tab-urile nu au putut fi sincronizate de la utilizator"
-        },
-        "error_removing_all_tabs": {
-            "message": "Eroare la eliminarea tuturor Tabs.",
-            "description": "[eroare] Eroare generică utilizată la eliminarea tuturor Tabs"
-        },
-        "error_removing_generic_tabs": {
-            "message": "Eroare la eliminarea Tabs generice.",
-            "description": "[eroare] Eroare generică utilizată la eliminarea Tabs generice"
-        },
-        "error_adding_tab": {
-            "message": "Eroare la adăugarea Tab.",
-            "description": "[eroare] Eroare generică utilizată la adăugarea unui Tab"
-        },
-        "error_removing_other_tabs": {
-            "message": "Eroare la eliminarea altor Tabs.",
-            "description": "[eroare] Eroare generică utilizată la eliminarea altor Tabs"
-        },
-        "error_removing_tab": {
-            "message": "Eroare la eliminarea Tab.",
-            "description": "[eroare] Eroare generică utilizată la eliminarea unui Tab"
-        },
-        "error_not_initialized": {
-            "message": "nu a fost încă inițializat.",
-            "description": "[eroare] Eroare generică pentru când o variabilă nu este gata"
-        },
-        "error_unknown_request": {
-            "message": "Solicitare necunoscută.",
-            "description": "[eroare] Eroare generică după primirea unui mesaj care nu a fost recunoscut"
-        },
-        "error_invalid_request": {
-            "message": "Solicitare invalidă.",
-            "description": "[eroare] Eroare generică după primirea unui mesaj formatat incorect"
-        },
-        "error_processing_tabs": {
-            "message": "Eroare la procesarea Tabs.",
-            "description": "[eroare] Eroare generică la procesarea Tabs"
-        },
-        "error_tab_url_saved": {
-            "message": "Un Tab cu acest URL a fost deja salvat!",
-            "description": "[eroare] Utilizatorul a încercat să salveze un Tab deja preferat"
-        },
-        "cmd_export_all": {
-            "message": "Afișează modalul pentru a exporta toate Tabs salvate",
-            "description": "[descrierea comenzii] utilizatorul dorește să exporte toate Tabs"
-        },
-        "cmd_import": {
-            "message": "Afișează modalul pentru a importa Tabs noi",
-            "description": "[descrierea comenzii] utilizatorul dorește să importe Tabs noi"
-        },
-        "cmd_open_other_org": {
-            "message": "Afișează modalul pentru a deschide pagina curentă într-o altă Org",
-            "description": "[descrierea comenzii] utilizatorul dorește să deschidă pagina curentă într-o altă Org"
-        },
-        "cmd_update_tab": {
-            "message": "Afișează modalul pentru a actualiza pagina curentă (dacă este salvată)",
-            "description": "[descrierea comenzii] utilizatorul dorește să actualizeze pagina curentă"
-        },
-        "cmd_toggle_org": {
-            "message": "Comută valoarea Org a paginii curente (dacă este salvată)",
-            "description": "[descrierea comenzii] utilizatorul dorește să comute Org pentru pagina curentă"
-        },
-        "cmd_remove_tab": {
-            "message": "Elimină pagina curentă din lista de Tabs (dacă este salvată)",
-            "description": "[descrierea comenzii] utilizatorul dorește să elimine pagina curentă"
-        },
-        "cmd_save_as_tab": {
-            "message": "Salvează pagina curentă în lista de Tabs (dacă nu este salvată)",
-            "description": "[descrierea comenzii] utilizatorul dorește să salveze pagina curentă"
-        },
-        "drop": {
-            "message": "Trageți",
-            "description": "[import] permite utilizatorului să tragă fișierele lor în zona specificată"
-        },
-        "open_settings": {
-            "message": "Deschide Setările Extensiei",
-            "description": "[pop-up] buton pentru a redirecționa către pagina de setări"
-        },
 	"allow": {
 		"message": "Permiteți",
 		"description": "[cerere_permisiune] buton pentru a permite permisiuni"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Ales",
 		"description": "Antet de secțiune pentru elementele care au fost selectate"
+	},
+	"cmd_export_all": {
+		"message": "Afișează modalul pentru a exporta toate Tabs salvate",
+		"description": "[descrierea comenzii] utilizatorul dorește să exporte toate Tabs"
+	},
+	"cmd_import": {
+		"message": "Afișează modalul pentru a importa Tabs noi",
+		"description": "[descrierea comenzii] utilizatorul dorește să importe Tabs noi"
+	},
+	"cmd_open_other_org": {
+		"message": "Afișează modalul pentru a deschide pagina curentă într-o altă Org",
+		"description": "[descrierea comenzii] utilizatorul dorește să deschidă pagina curentă într-o altă Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Elimină pagina curentă din lista de Tabs (dacă este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să elimine pagina curentă"
+	},
+	"cmd_save_as_tab": {
+		"message": "Salvează pagina curentă în lista de Tabs (dacă nu este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să salveze pagina curentă"
+	},
+	"cmd_toggle_org": {
+		"message": "Comută valoarea Org a paginii curente (dacă este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să comute Org pentru pagina curentă"
+	},
+	"cmd_update_tab": {
+		"message": "Afișează modalul pentru a actualiza pagina curentă (dacă este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să actualizeze pagina curentă"
 	},
 	"confirm_another_org": {
 		"message": "Confirmați deschiderea acestui link.",
@@ -227,6 +151,14 @@
 		"message": "Ștergeți toate Tabs",
 		"description": "[popup] titlu pe coșul de gunoi pentru a goli toate Tabs"
 	},
+	"drop": {
+		"message": "Trageți",
+		"description": "[import] permite utilizatorului să tragă fișierele lor în zona specificată"
+	},
+	"error_adding_tab": {
+		"message": "Eroare la adăugarea Tab.",
+		"description": "[eroare] Eroare generică utilizată la adăugarea unui Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Închideți mai întâi celălalt modal!",
 		"description": "[toast] Utilizatorul a încercat să deschidă mai mult de 1 modal"
@@ -259,6 +191,10 @@
 		"message": "Nu se poate extrage numele Org dintr-un URL gol!",
 		"description": "[eroare] url-ul din care să se recupereze numele Org nu a fost transmis"
 	},
+	"error_failed_sync": {
+		"message": "Sincronizare eșuată.",
+		"description": "[eroare] Eroare generică atunci când Tab-urile nu au putut fi sincronizate de la utilizator"
+	},
 	"error_get_with_no_org": {
 		"message": "Nu se pot obține Tabs dacă Org nu este specificată.",
 		"description": "[eroare] s-a încercat căutarea Tabs după Org fără a trimite informații despre Org"
@@ -271,6 +207,10 @@
 		"message": "Parametrul cheie transmis funcției nu este valid",
 		"description": "[eroare] dezvoltatorul a încercat să apeleze o funcție cu un parametru invalid"
 	},
+	"error_invalid_request": {
+		"message": "Solicitare invalidă.",
+		"description": "[eroare] Eroare generică după primirea unui mesaj formatat incorect"
+	},
 	"error_invalid_tab": {
 		"message": "Tab invalid",
 		"description": "[eroare] Tab-ul nu este valid"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "S-au găsit mai mult de 1 Tab corespunzător.",
 		"description": "[eroare] s-au recuperat multe Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "S-au găsit mai mult de un Tab.",
+		"description": "[eroare] multe Tabs au fost preluate"
 	},
 	"error_minify_url": {
 		"message": "Nu se poate minimiza un URL gol!",
@@ -339,9 +283,37 @@
 		"message": "Niciun URL de verificat!",
 		"description": "[eroare] url-ul de verificat nu a fost transmis"
 	},
+	"error_not_initialized": {
+		"message": "nu a fost încă inițializat.",
+		"description": "[eroare] Eroare generică pentru când o variabilă nu este gata"
+	},
+	"error_processing_tabs": {
+		"message": "Eroare la procesarea Tabs.",
+		"description": "[eroare] Eroare generică la procesarea Tabs"
+	},
+	"error_redirect": {
+		"message": "Nu se poate redirecta. Vă rugăm să reîncărcați pagina.",
+		"description": "[eroare] Eroare generică la redirecționarea paginii."
+	},
 	"error_remove_not_favourite": {
 		"message": "Nu se poate elimina un Tab care nu este favorit!",
 		"description": "[eroare] utilizatorul a încercat să elimine un Tab care nu fusese încă salvat"
+	},
+	"error_removing_all_tabs": {
+		"message": "Eroare la eliminarea tuturor Tabs.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea tuturor Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Eroare la eliminarea Tabs generice.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea Tabs generice"
+	},
+	"error_removing_other_tabs": {
+		"message": "Eroare la eliminarea altor Tabs.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea altor Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Eroare la eliminarea Tab.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea unui Tab"
 	},
 	"error_required_params": {
 		"message": "Parametrii necesari pentru funcție nu au fost transmiși",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Nu se pot sincroniza Tabs nule!",
 		"description": "[eroare] s-a încercat sincronizarea a nimic"
+	},
+	"error_tab_constructor": {
+		"message": "Folosiți Tab.create() în loc de new Tab() pentru a utiliza clasa Tab",
+		"description": "[eroare] spune dezvoltatorului cum să folosească clasa Tab"
 	},
 	"error_tab_label": {
 		"message": "Eticheta trebuie să fie un șir nevid",
@@ -375,6 +351,10 @@
 		"message": "URL-ul trebuie să fie un șir nevid",
 		"description": "[eroare] utilizatorul a încercat să creeze un Tab fără URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Un Tab cu acest URL a fost deja salvat!",
+		"description": "[eroare] Utilizatorul a încercat să salveze un Tab deja preferat"
+	},
 	"error_tabcont_initialize": {
 		"message": "Nu se poate inițializa cu",
 		"description": "[eroare] inițializarea containerului Tab a eșuat"
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Tab(uri) invalid(e) detectat(e).\nPrima apariție:",
 		"description": "[eroare] s-au transmis Tabs invalide"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Folosiți TabContainer.create() în loc de new TabContainer() pentru a utiliza clasa TabContainer",
+		"description": "[eroare] spune dezvoltatorului cum să folosească clasa TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Folosiți TranslationService.create() în loc de new TranslationService() pentru a utiliza clasa TranslationService",
+		"description": "[eroare] spune dezvoltatorului cum să folosească clasa TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "traducătorul nu a fost încă inițializat.",
+		"description": "[eroare] TranslationService nu era gata"
+	},
+	"error_unknown_request": {
+		"message": "Solicitare necunoscută.",
+		"description": "[eroare] Eroare generică după primirea unui mesaj care nu a fost recunoscut"
 	},
 	"error_useless_remove": {
 		"message": "Nu se poate elimina:\nNu se poate elimina o pagină care nu a fost salvată anterior",

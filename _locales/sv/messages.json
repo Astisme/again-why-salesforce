@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "Använd TranslationService.create() istället för new TranslationService() för att använda klassen TranslationService",
-            "description": "[fel] berätta för utvecklaren hur man använder klassen TranslationService"
-        },
-        "error_translator_not_initialized": {
-            "message": "översättaren var inte initialiserad än.",
-            "description": "[fel] TranslationService var inte redo"
-        },
-        "error_many_tabs_found": {
-            "message": "Hittade mer än en Tab.",
-            "description": "[fel] många Tabs hämtades"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "Använd TabContainer.create() istället för new TabContainer() för att använda klassen TabContainer",
-            "description": "[fel] berätta för utvecklaren hur man använder klassen TabContainer"
-        },
-        "error_tab_constructor": {
-            "message": "Använd Tab.create() istället för new Tab() för att använda klassen Tab",
-            "description": "[fel] berätta för utvecklaren hur man använder klassen Tab"
-        },
-        "error_redirect": {
-            "message": "Kan inte redirecta. Uppdatera sidan.",
-            "description": "[fel] Allmänt fel vid sidomdirigering."
-        },
-        "error_failed_sync": {
-            "message": "Misslyckades med att synkronisera.",
-            "description": "[fel] Allmänt fel när Tabs inte kunde synkroniseras från användaren"
-        },
-        "error_removing_all_tabs": {
-            "message": "Fel vid borttagning av alla Tabs.",
-            "description": "[fel] Allmänt fel som används vid borttagning av alla Tabs"
-        },
-        "error_removing_generic_tabs": {
-            "message": "Fel vid borttagning av generiska Tabs.",
-            "description": "[fel] Allmänt fel som används vid borttagning av generiska Tabs"
-        },
-        "error_adding_tab": {
-            "message": "Fel vid tillägg av Tab.",
-            "description": "[fel] Allmänt fel som används vid tillägg av en Tab"
-        },
-        "error_removing_other_tabs": {
-            "message": "Fel vid borttagning av andra Tabs.",
-            "description": "[fel] Allmänt fel som används vid borttagning av andra Tabs"
-        },
-        "error_removing_tab": {
-            "message": "Fel vid borttagning av Tab.",
-            "description": "[fel] Allmänt fel som används vid borttagning av en Tab"
-        },
-        "error_not_initialized": {
-            "message": "var inte initialiserad än.",
-            "description": "[fel] Allmänt fel när en variabel inte är redo"
-        },
-        "error_unknown_request": {
-            "message": "Okänt begäran.",
-            "description": "[fel] Allmänt fel efter att ha mottagit ett meddelande som inte kändes igen"
-        },
-        "error_invalid_request": {
-            "message": "Ogiltig begäran.",
-            "description": "[fel] Allmänt fel efter att ha mottagit ett felaktigt formaterat meddelande"
-        },
-        "error_processing_tabs": {
-            "message": "Fel vid bearbetning av Tabs.",
-            "description": "[fel] Allmänt fel vid bearbetning av Tabs"
-        },
-        "error_tab_url_saved": {
-            "message": "En Tab med denna URL har redan sparats!",
-            "description": "[fel] Användaren försökte spara en redan favoriterad Tab"
-        },
-        "cmd_export_all": {
-            "message": "Visa modalen för att exportera alla sparade Tabs",
-            "description": "[kommandobeskrivning] användaren vill exportera alla Tabs"
-        },
-        "cmd_import": {
-            "message": "Visa modalen för att importera nya Tabs",
-            "description": "[kommandobeskrivning] användaren vill importera nya Tabs"
-        },
-        "cmd_open_other_org": {
-            "message": "Visa modalen för att öppna den aktuella sidan i en annan Org",
-            "description": "[kommandobeskrivning] användaren vill öppna den aktuella sidan i en annan Org"
-        },
-        "cmd_update_tab": {
-            "message": "Visa modal för att uppdatera aktuell sida (om sparad)",
-            "description": "[kommandobeskrivning] användaren vill uppdatera aktuell sida"
-        },
-        "cmd_toggle_org": {
-            "message": "Växla Org-värdet för den aktuella sidan (om sparad)",
-            "description": "[kommandobeskrivning] användaren vill växla Org för den aktuella sidan"
-        },
-        "cmd_remove_tab": {
-            "message": "Ta bort aktuell sida från Tab listan (om sparad)",
-            "description": "[kommandobeskrivning] användaren vill ta bort aktuell sida"
-        },
-        "cmd_save_as_tab": {
-            "message": "Spara aktuell sida i Tab listan (om inte sparad)",
-            "description": "[kommandobeskrivning] användaren vill spara aktuell sida"
-        },
-        "drop": {
-            "message": "Släpp",
-            "description": "[import] låt användaren släppa sina filer på det angivna området"
-        },
-        "open_settings": {
-            "message": "Öppna Tilläggsinställningar",
-            "description": "[popup] knapp för att omdirigera till inställningssidan"
-        },
 	"allow": {
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Vald",
 		"description": "Avsnittsrubrik för objekt som har valts"
+	},
+	"cmd_export_all": {
+		"message": "Visa modalen för att exportera alla sparade Tabs",
+		"description": "[kommandobeskrivning] användaren vill exportera alla Tabs"
+	},
+	"cmd_import": {
+		"message": "Visa modalen för att importera nya Tabs",
+		"description": "[kommandobeskrivning] användaren vill importera nya Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Visa modalen för att öppna den aktuella sidan i en annan Org",
+		"description": "[kommandobeskrivning] användaren vill öppna den aktuella sidan i en annan Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Ta bort aktuell sida från Tab listan (om sparad)",
+		"description": "[kommandobeskrivning] användaren vill ta bort aktuell sida"
+	},
+	"cmd_save_as_tab": {
+		"message": "Spara aktuell sida i Tab listan (om inte sparad)",
+		"description": "[kommandobeskrivning] användaren vill spara aktuell sida"
+	},
+	"cmd_toggle_org": {
+		"message": "Växla Org-värdet för den aktuella sidan (om sparad)",
+		"description": "[kommandobeskrivning] användaren vill växla Org för den aktuella sidan"
+	},
+	"cmd_update_tab": {
+		"message": "Visa modal för att uppdatera aktuell sida (om sparad)",
+		"description": "[kommandobeskrivning] användaren vill uppdatera aktuell sida"
 	},
 	"confirm_another_org": {
 		"message": "Bekräfta att du vill öppna denna länk.",
@@ -227,6 +151,14 @@
 		"message": "Radera alla Tabbar",
 		"description": "[popup] rubrik för papperskorgen för att tömma alla Tabbar"
 	},
+	"drop": {
+		"message": "Släpp",
+		"description": "[import] låt användaren släppa sina filer på det angivna området"
+	},
+	"error_adding_tab": {
+		"message": "Fel vid tillägg av Tab.",
+		"description": "[fel] Allmänt fel som används vid tillägg av en Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Stäng det andra modalfönstret först!",
 		"description": "[toast] Användaren försökte öppna mer än ett modalfönster"
@@ -259,6 +191,10 @@
 		"message": "Kan inte extrahera organisationsnamn från en tom URL!",
 		"description": "[error] ingen URL skickades in från vilken organisationsnamnet ska extraheras"
 	},
+	"error_failed_sync": {
+		"message": "Misslyckades med att synkronisera.",
+		"description": "[fel] Allmänt fel när Tabs inte kunde synkroniseras från användaren"
+	},
 	"error_get_with_no_org": {
 		"message": "Kan inte hämta Tabbar om organisation inte anges.",
 		"description": "[error] försök att söka efter Tabbar utan att skicka in organisationsinformation"
@@ -271,6 +207,10 @@
 		"message": "Nyckelparametern som skickades till funktionen är inte giltig",
 		"description": "[fel] utvecklaren försökte anropa en funktion med en ogiltig parameter"
 	},
+	"error_invalid_request": {
+		"message": "Ogiltig begäran.",
+		"description": "[fel] Allmänt fel efter att ha mottagit ett felaktigt formaterat meddelande"
+	},
 	"error_invalid_tab": {
 		"message": "Ogiltig Tab",
 		"description": "[error] Tabben är inte giltig"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Fler än 1 matchande Tab hittades.",
 		"description": "[error] för många Tabbar returnerades"
+	},
+	"error_many_tabs_found": {
+		"message": "Hittade mer än en Tab.",
+		"description": "[fel] många Tabs hämtades"
 	},
 	"error_minify_url": {
 		"message": "Kan inte komprimera en tom URL!",
@@ -339,9 +283,37 @@
 		"message": "Ingen URL skickades in att kontrollera!",
 		"description": "[error] ingen URL skickades in att kontrollera"
 	},
+	"error_not_initialized": {
+		"message": "var inte initialiserad än.",
+		"description": "[fel] Allmänt fel när en variabel inte är redo"
+	},
+	"error_processing_tabs": {
+		"message": "Fel vid bearbetning av Tabs.",
+		"description": "[fel] Allmänt fel vid bearbetning av Tabs"
+	},
+	"error_redirect": {
+		"message": "Kan inte redirecta. Uppdatera sidan.",
+		"description": "[fel] Allmänt fel vid sidomdirigering."
+	},
 	"error_remove_not_favourite": {
 		"message": "Kan inte ta bort en Tab som inte är favorit!",
 		"description": "[error] användaren försökte ta bort en Tab som inte har sparats än"
+	},
+	"error_removing_all_tabs": {
+		"message": "Fel vid borttagning av alla Tabs.",
+		"description": "[fel] Allmänt fel som används vid borttagning av alla Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Fel vid borttagning av generiska Tabs.",
+		"description": "[fel] Allmänt fel som används vid borttagning av generiska Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Fel vid borttagning av andra Tabs.",
+		"description": "[fel] Allmänt fel som används vid borttagning av andra Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Fel vid borttagning av Tab.",
+		"description": "[fel] Allmänt fel som används vid borttagning av en Tab"
 	},
 	"error_required_params": {
 		"message": "De nödvändiga parametrarna för funktionen skickades inte med",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Kan inte synkronisera tomma Tabbar!",
 		"description": "[error] försök att synkronisera ingenting"
+	},
+	"error_tab_constructor": {
+		"message": "Använd Tab.create() istället för new Tab() för att använda klassen Tab",
+		"description": "[fel] berätta för utvecklaren hur man använder klassen Tab"
 	},
 	"error_tab_label": {
 		"message": "Etiketten måste vara en icke-tom sträng",
@@ -375,6 +351,10 @@
 		"message": "URL:en måste vara en icke-tom sträng",
 		"description": "[error] användaren försökte skapa en Tab utan URL"
 	},
+	"error_tab_url_saved": {
+		"message": "En Tab med denna URL har redan sparats!",
+		"description": "[fel] Användaren försökte spara en redan favoriterad Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Kan inte initialiseras med",
 		"description": ""
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Ogiltiga Tabbar upptäcktes.\nFörsta förekomsten:",
 		"description": "[error] ogiltiga Tabbar skickades in"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Använd TabContainer.create() istället för new TabContainer() för att använda klassen TabContainer",
+		"description": "[fel] berätta för utvecklaren hur man använder klassen TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Använd TranslationService.create() istället för new TranslationService() för att använda klassen TranslationService",
+		"description": "[fel] berätta för utvecklaren hur man använder klassen TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "översättaren var inte initialiserad än.",
+		"description": "[fel] TranslationService var inte redo"
+	},
+	"error_unknown_request": {
+		"message": "Okänt begäran.",
+		"description": "[fel] Allmänt fel efter att ha mottagit ett meddelande som inte kändes igen"
 	},
 	"error_useless_remove": {
 		"message": "Kan inte ta bort:\nKan inte ta bort en sida som inte har sparats tidigare",

@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "새로운 TranslationService() 대신 TranslationService.create()를 사용하세요",
-            "description": "[오류] 개발자에게 TranslationService 클래스 사용 방법을 알려줍니다"
-        },
-        "error_translator_not_initialized": {
-            "message": "번역기가 아직 초기화되지 않았습니다.",
-            "description": "[오류] TranslationService가 준비되지 않았습니다"
-        },
-        "error_many_tabs_found": {
-            "message": "한 개 이상의 Tab이 발견되었습니다.",
-            "description": "[오류] 많은 Tab이 검색되었습니다"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "새로운 TabContainer() 대신 TabContainer.create()를 사용하세요",
-            "description": "[오류] 개발자에게 TabContainer 클래스 사용 방법을 알려줍니다"
-        },
-        "error_tab_constructor": {
-            "message": "새로운 Tab() 대신 Tab.create()를 사용하세요",
-            "description": "[오류] 개발자에게 Tab 클래스 사용 방법을 알려줍니다"
-        },
-        "error_redirect": {
-            "message": "리디렉션할 수 없습니다. 페이지를 새로고침하세요.",
-            "description": "[오류] 페이지 리디렉션에 대한 일반 오류입니다."
-        },
-        "error_failed_sync": {
-            "message": "동기화에 실패했습니다.",
-            "description": "[오류] 사용자의 Tab을 동기화할 수 없었을 때 발생하는 일반 오류"
-        },
-        "error_removing_all_tabs": {
-            "message": "모든 Tab 제거 중 오류가 발생했습니다.",
-            "description": "[오류] 모든 Tab 제거 시 사용되는 일반 오류"
-        },
-        "error_removing_generic_tabs": {
-            "message": "일반 Tab 제거 중 오류가 발생했습니다.",
-            "description": "[오류] 일반 Tab 제거 시 사용되는 일반 오류"
-        },
-        "error_adding_tab": {
-            "message": "Tab 추가 중 오류가 발생했습니다.",
-            "description": "[오류] Tab 추가 시 사용되는 일반 오류"
-        },
-        "error_removing_other_tabs": {
-            "message": "다른 Tab 제거 중 오류가 발생했습니다.",
-            "description": "[오류] 다른 Tab 제거 시 사용되는 일반 오류"
-        },
-        "error_removing_tab": {
-            "message": "Tab 제거 중 오류가 발생했습니다.",
-            "description": "[오류] Tab 제거 시 사용되는 일반 오류"
-        },
-        "error_not_initialized": {
-            "message": "아직 초기화되지 않았습니다.",
-            "description": "[오류] 변수가 준비되지 않았을 때 발생하는 일반 오류"
-        },
-        "error_unknown_request": {
-            "message": "알 수 없는 요청입니다.",
-            "description": "[오류] 인식되지 않은 메시지를 받은 후 발생하는 일반 오류"
-        },
-        "error_invalid_request": {
-            "message": "잘못된 요청입니다.",
-            "description": "[오류] 잘못된 형식의 메시지를 받은 후 발생하는 일반 오류"
-        },
-        "error_processing_tabs": {
-            "message": "Tab 처리 중 오류가 발생했습니다.",
-            "description": "[오류] Tab 처리 시 발생하는 일반 오류"
-        },
-        "error_tab_url_saved": {
-            "message": "이 URL을 가진 Tab은 이미 저장되었습니다!",
-            "description": "[오류] 사용자가 이미 즐겨찾기에 추가된 Tab을 저장하려고 했습니다"
-        },
-        "cmd_export_all": {
-            "message": "저장된 모든 Tab을 내보내기 위한 모달 표시",
-            "description": "[명령 설명] 사용자가 모든 Tab을 내보내고 싶어합니다"
-        },
-        "cmd_import": {
-            "message": "새로운 Tab을 가져오기 위한 모달 표시",
-            "description": "[명령 설명] 사용자가 새로운 Tab을 가져오고 싶어합니다"
-        },
-        "cmd_open_other_org": {
-            "message": "현재 페이지를 다른 Org에서 열기 위한 모달 표시",
-            "description": "[명령 설명] 사용자가 현재 페이지를 다른 Org에서 열고 싶어합니다"
-        },
-        "cmd_update_tab": {
-            "message": "현재 페이지를 업데이트하기 위한 모달 표시 (저장된 경우)",
-            "description": "[명령 설명] 사용자가 현재 페이지를 업데이트하고 싶어합니다"
-        },
-        "cmd_toggle_org": {
-            "message": "현재 페이지의 Org 값을 토글합니다 (저장된 경우)",
-            "description": "[명령 설명] 사용자가 현재 페이지의 Org를 토글하고 싶어합니다"
-        },
-        "cmd_remove_tab": {
-            "message": "Tab 목록에서 현재 페이지를 제거합니다 (저장된 경우)",
-            "description": "[명령 설명] 사용자가 현재 페이지를 제거하고 싶어합니다"
-        },
-        "cmd_save_as_tab": {
-            "message": "현재 페이지를 Tab 목록에 저장합니다 (저장되지 않은 경우)",
-            "description": "[명령 설명] 사용자가 현재 페이지를 저장하고 싶어합니다"
-        },
-        "drop": {
-            "message": "드롭",
-            "description": "[가져오기] 사용자가 지정된 영역에 파일을 드롭할 수 있도록 합니다"
-        },
-        "open_settings": {
-            "message": "확장 프로그램 설정 열기",
-            "description": "[팝업] 설정 페이지로 리디렉션하는 버튼"
-        },
 	"allow": {
 		"message": "허용",
 		"description": "[권한_요청] 권한을 허용하는 버튼"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "선택됨",
 		"description": "선택된 항목의 섹션 헤더"
+	},
+	"cmd_export_all": {
+		"message": "저장된 모든 Tab을 내보내기 위한 모달 표시",
+		"description": "[명령 설명] 사용자가 모든 Tab을 내보내고 싶어합니다"
+	},
+	"cmd_import": {
+		"message": "새로운 Tab을 가져오기 위한 모달 표시",
+		"description": "[명령 설명] 사용자가 새로운 Tab을 가져오고 싶어합니다"
+	},
+	"cmd_open_other_org": {
+		"message": "현재 페이지를 다른 Org에서 열기 위한 모달 표시",
+		"description": "[명령 설명] 사용자가 현재 페이지를 다른 Org에서 열고 싶어합니다"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab 목록에서 현재 페이지를 제거합니다 (저장된 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지를 제거하고 싶어합니다"
+	},
+	"cmd_save_as_tab": {
+		"message": "현재 페이지를 Tab 목록에 저장합니다 (저장되지 않은 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지를 저장하고 싶어합니다"
+	},
+	"cmd_toggle_org": {
+		"message": "현재 페이지의 Org 값을 토글합니다 (저장된 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지의 Org를 토글하고 싶어합니다"
+	},
+	"cmd_update_tab": {
+		"message": "현재 페이지를 업데이트하기 위한 모달 표시 (저장된 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지를 업데이트하고 싶어합니다"
 	},
 	"confirm_another_org": {
 		"message": "이 링크 열기를 확인합니다.",
@@ -227,6 +151,14 @@
 		"message": "모든 Tabs 삭제",
 		"description": "[팝업] 모든 Tabs를 비우기 위한 휴지통 제목"
 	},
+	"drop": {
+		"message": "드롭",
+		"description": "[가져오기] 사용자가 지정된 영역에 파일을 드롭할 수 있도록 합니다"
+	},
+	"error_adding_tab": {
+		"message": "Tab 추가 중 오류가 발생했습니다.",
+		"description": "[오류] Tab 추가 시 사용되는 일반 오류"
+	},
 	"error_close_other_modal": {
 		"message": "먼저 다른 모달을 닫으십시오!",
 		"description": "[토스트] 사용자가 1개 이상의 모달을 열려고 했습니다."
@@ -259,6 +191,10 @@
 		"message": "빈 URL에서 조직 이름을 추출할 수 없습니다!",
 		"description": "[오류] 조직 이름을 검색할 URL이 전달되지 않았습니다."
 	},
+	"error_failed_sync": {
+		"message": "동기화에 실패했습니다.",
+		"description": "[오류] 사용자의 Tab을 동기화할 수 없었을 때 발생하는 일반 오류"
+	},
 	"error_get_with_no_org": {
 		"message": "조직이 지정되지 않은 경우 Tabs를 가져올 수 없습니다.",
 		"description": "[오류] 조직 정보를 보내지 않고 조직별로 Tabs를 검색하려고 했습니다."
@@ -271,6 +207,10 @@
 		"message": "함수에 전달된 키 파라미터가 유효하지 않습니다",
 		"description": "[오류] 개발자가 유효하지 않은 파라미터로 함수를 호출하려고 했습니다"
 	},
+	"error_invalid_request": {
+		"message": "잘못된 요청입니다.",
+		"description": "[오류] 잘못된 형식의 메시지를 받은 후 발생하는 일반 오류"
+	},
 	"error_invalid_tab": {
 		"message": "잘못된 Tab",
 		"description": "[오류] Tab이 유효하지 않습니다."
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "일치하는 Tab을 1개 이상 찾았습니다.",
 		"description": "[오류] 많은 Tabs가 검색되었습니다."
+	},
+	"error_many_tabs_found": {
+		"message": "한 개 이상의 Tab이 발견되었습니다.",
+		"description": "[오류] 많은 Tab이 검색되었습니다"
 	},
 	"error_minify_url": {
 		"message": "빈 URL을 축소할 수 없습니다!",
@@ -339,9 +283,37 @@
 		"message": "확인할 URL이 없습니다!",
 		"description": "[오류] 확인할 URL이 전달되지 않았습니다."
 	},
+	"error_not_initialized": {
+		"message": "아직 초기화되지 않았습니다.",
+		"description": "[오류] 변수가 준비되지 않았을 때 발생하는 일반 오류"
+	},
+	"error_processing_tabs": {
+		"message": "Tab 처리 중 오류가 발생했습니다.",
+		"description": "[오류] Tab 처리 시 발생하는 일반 오류"
+	},
+	"error_redirect": {
+		"message": "리디렉션할 수 없습니다. 페이지를 새로고침하세요.",
+		"description": "[오류] 페이지 리디렉션에 대한 일반 오류입니다."
+	},
 	"error_remove_not_favourite": {
 		"message": "즐겨찾기가 아닌 Tab은 제거할 수 없습니다!",
 		"description": "[오류] 사용자가 아직 저장되지 않은 Tab을 제거하려고 했습니다."
+	},
+	"error_removing_all_tabs": {
+		"message": "모든 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 모든 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_generic_tabs": {
+		"message": "일반 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 일반 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_other_tabs": {
+		"message": "다른 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 다른 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_tab": {
+		"message": "Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] Tab 제거 시 사용되는 일반 오류"
 	},
 	"error_required_params": {
 		"message": "함수에 필요한 파라미터가 전달되지 않았습니다",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "null Tabs는 동기화할 수 없습니다!",
 		"description": "[오류] 아무것도 동기화하려고 시도했습니다."
+	},
+	"error_tab_constructor": {
+		"message": "새로운 Tab() 대신 Tab.create()를 사용하세요",
+		"description": "[오류] 개발자에게 Tab 클래스 사용 방법을 알려줍니다"
 	},
 	"error_tab_label": {
 		"message": "레이블은 비어 있지 않은 문자열이어야 합니다.",
@@ -375,6 +351,10 @@
 		"message": "URL은 비어 있지 않은 문자열이어야 합니다.",
 		"description": "[오류] 사용자가 URL 없이 Tab을 생성하려고 했습니다."
 	},
+	"error_tab_url_saved": {
+		"message": "이 URL을 가진 Tab은 이미 저장되었습니다!",
+		"description": "[오류] 사용자가 이미 즐겨찾기에 추가된 Tab을 저장하려고 했습니다"
+	},
 	"error_tabcont_initialize": {
 		"message": "다음으로 초기화할 수 없습니다.",
 		"description": "[오류] Tab 컨테이너 초기화 실패"
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "잘못된 Tab(들)이 감지되었습니다.\n첫 번째 발생:",
 		"description": "[오류] 잘못된 Tabs가 전달되었습니다."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "새로운 TabContainer() 대신 TabContainer.create()를 사용하세요",
+		"description": "[오류] 개발자에게 TabContainer 클래스 사용 방법을 알려줍니다"
+	},
+	"error_translationservice_constructor": {
+		"message": "새로운 TranslationService() 대신 TranslationService.create()를 사용하세요",
+		"description": "[오류] 개발자에게 TranslationService 클래스 사용 방법을 알려줍니다"
+	},
+	"error_translator_not_initialized": {
+		"message": "번역기가 아직 초기화되지 않았습니다.",
+		"description": "[오류] TranslationService가 준비되지 않았습니다"
+	},
+	"error_unknown_request": {
+		"message": "알 수 없는 요청입니다.",
+		"description": "[오류] 인식되지 않은 메시지를 받은 후 발생하는 일반 오류"
 	},
 	"error_useless_remove": {
 		"message": "제거할 수 없음:\n이전에 저장되지 않은 페이지는 제거할 수 없습니다.",

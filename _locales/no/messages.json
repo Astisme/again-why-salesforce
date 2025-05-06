@@ -1,108 +1,4 @@
 {
-        "error_translationservice_constructor": {
-            "message": "Bruk TranslationService.create() i stedet for new TranslationService() for å bruke TranslationService-klassen",
-            "description": "[feil] fortell utvikleren hvordan man bruker TranslationService-klassen"
-        },
-        "error_translator_not_initialized": {
-            "message": "oversetteren ble ikke initialisert ennå.",
-            "description": "[feil] TranslationService var ikke klar"
-        },
-        "error_many_tabs_found": {
-            "message": "Fant mer enn én Tab.",
-            "description": "[feil] mange Tabs ble hentet"
-        },
-        "error_tabcontainer_constructor": {
-            "message": "Bruk TabContainer.create() i stedet for new TabContainer() for å bruke TabContainer-klassen",
-            "description": "[feil] fortell utvikleren hvordan man bruker TabContainer-klassen"
-        },
-        "error_tab_constructor": {
-            "message": "Bruk Tab.create() i stedet for new Tab() for å bruke Tab-klassen",
-            "description": "[feil] fortell utvikleren hvordan man bruker Tab-klassen"
-        },
-        "error_redirect": {
-            "message": "Kan ikke redirecte. Vennligst oppdater siden.",
-            "description": "[feil] Generisk feil ved sideomdirigering."
-        },
-        "error_failed_sync": {
-            "message": "Kunne ikke synkronisere.",
-            "description": "[feil] Generisk feil når Tabs ikke kunne synkroniseres fra brukeren"
-        },
-        "error_removing_all_tabs": {
-            "message": "Feil ved fjerning av alle Tabs.",
-            "description": "[feil] Generisk feil brukt ved fjerning av alle Tabs"
-        },
-        "error_removing_generic_tabs": {
-            "message": "Feil ved fjerning av generiske Tabs.",
-            "description": "[feil] Generisk feil brukt ved fjerning av generiske Tabs"
-        },
-        "error_adding_tab": {
-            "message": "Feil ved tillegging av Tab.",
-            "description": "[feil] Generisk feil brukt ved tillegging av en Tab"
-        },
-        "error_removing_other_tabs": {
-            "message": "Feil ved fjerning av andre Tabs.",
-            "description": "[feil] Generisk feil brukt ved fjerning av andre Tabs"
-        },
-        "error_removing_tab": {
-            "message": "Feil ved fjerning av Tab.",
-            "description": "[feil] Generisk feil brukt ved fjerning av en Tab"
-        },
-        "error_not_initialized": {
-            "message": "ble ikke initialisert ennå.",
-            "description": "[feil] Generisk feil for når en variabel ikke er klar"
-        },
-        "error_unknown_request": {
-            "message": "Ukjent forespørsel.",
-            "description": "[feil] Generisk feil etter å ha mottatt en melding som ikke ble gjenkjent"
-        },
-        "error_invalid_request": {
-            "message": "Ugyldig forespørsel.",
-            "description": "[feil] Generisk feil etter å ha mottatt en dårlig formatert melding"
-        },
-        "error_processing_tabs": {
-            "message": "Feil ved behandling av Tabs.",
-            "description": "[feil] Generisk feil ved behandling av Tabs"
-        },
-        "error_tab_url_saved": {
-            "message": "En Tab med denne URL-en er allerede lagret!",
-            "description": "[feil] Brukeren prøvde å lagre en allerede favoritt Tab"
-        },
-        "cmd_export_all": {
-            "message": "Vis modal for å eksportere alle lagrede Tabs",
-            "description": "[kommando beskrivelse] brukeren vil eksportere alle Tabs"
-        },
-        "cmd_import": {
-            "message": "Vis modal for å importere nye Tabs",
-            "description": "[kommando beskrivelse] brukeren vil importere nye Tabs"
-        },
-        "cmd_open_other_org": {
-            "message": "Vis modal for å åpne gjeldende side i en annen Org",
-            "description": "[kommando beskrivelse] brukeren vil åpne gjeldende side i en annen Org"
-        },
-        "cmd_update_tab": {
-            "message": "Vis modal for å oppdatere gjeldende side (hvis lagret)",
-            "description": "[kommando beskrivelse] brukeren vil oppdatere gjeldende side"
-        },
-        "cmd_toggle_org": {
-            "message": "Veksle Org-verdien til gjeldende side (hvis lagret)",
-            "description": "[kommando beskrivelse] brukeren vil veksle Org for gjeldende side"
-        },
-        "cmd_remove_tab": {
-            "message": "Fjern gjeldende side fra Tab listen (hvis lagret)",
-            "description": "[kommando beskrivelse] brukeren vil fjerne gjeldende side"
-        },
-        "cmd_save_as_tab": {
-            "message": "Lagre gjeldende side i Tab listen (hvis ikke lagret)",
-            "description": "[kommando beskrivelse] brukeren vil lagre gjeldende side"
-        },
-        "drop": {
-            "message": "Slipp",
-            "description": "[импорт] la brukeren slippe filene sine på det angitte området"
-        },
-        "open_settings": {
-            "message": "Åpne Utvidelsesinnstillinger",
-            "description": "[popup] knapp for å omdirigere til innstillingssiden"
-        },
 	"allow": {
 		"message": "Tillat",
 		"description": "[req_permission] knapp for å gi tillatelser"
@@ -126,6 +22,34 @@
 	"chosen": {
 		"message": "Valgt",
 		"description": "Seksjonshode for elementer som har blitt valgt"
+	},
+	"cmd_export_all": {
+		"message": "Vis modal for å eksportere alle lagrede Tabs",
+		"description": "[kommando beskrivelse] brukeren vil eksportere alle Tabs"
+	},
+	"cmd_import": {
+		"message": "Vis modal for å importere nye Tabs",
+		"description": "[kommando beskrivelse] brukeren vil importere nye Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Vis modal for å åpne gjeldende side i en annen Org",
+		"description": "[kommando beskrivelse] brukeren vil åpne gjeldende side i en annen Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Fjern gjeldende side fra Tab listen (hvis lagret)",
+		"description": "[kommando beskrivelse] brukeren vil fjerne gjeldende side"
+	},
+	"cmd_save_as_tab": {
+		"message": "Lagre gjeldende side i Tab listen (hvis ikke lagret)",
+		"description": "[kommando beskrivelse] brukeren vil lagre gjeldende side"
+	},
+	"cmd_toggle_org": {
+		"message": "Veksle Org-verdien til gjeldende side (hvis lagret)",
+		"description": "[kommando beskrivelse] brukeren vil veksle Org for gjeldende side"
+	},
+	"cmd_update_tab": {
+		"message": "Vis modal for å oppdatere gjeldende side (hvis lagret)",
+		"description": "[kommando beskrivelse] brukeren vil oppdatere gjeldende side"
 	},
 	"confirm_another_org": {
 		"message": "Bekreft åpning av denne lenken.",
@@ -227,6 +151,14 @@
 		"message": "Slett alle Tabber",
 		"description": "[popup] tittel for søppelbøtten for å tømme alle Tabber"
 	},
+	"drop": {
+		"message": "Slipp",
+		"description": "[импорт] la brukeren slippe filene sine på det angitte området"
+	},
+	"error_adding_tab": {
+		"message": "Feil ved tillegging av Tab.",
+		"description": "[feil] Generisk feil brukt ved tillegging av en Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Lukk det andre modalvinduet først!",
 		"description": "[toast] Brukeren prøvde å åpne mer enn ett modalvindu"
@@ -259,6 +191,10 @@
 		"message": "Kan ikke hente organisasjonsnavn fra en tom URL!",
 		"description": "[error] ingen URL ble sendt inn for å hente organisasjonsnavnet"
 	},
+	"error_failed_sync": {
+		"message": "Kunne ikke synkronisere.",
+		"description": "[feil] Generisk feil når Tabs ikke kunne synkroniseres fra brukeren"
+	},
 	"error_get_with_no_org": {
 		"message": "Kan ikke hente Tabber hvis organisasjonen ikke er spesifisert.",
 		"description": "[error] forsøkte å søke etter Tabber uten å sende inn organisasjonsinformasjon"
@@ -271,6 +207,10 @@
 		"message": "Nøkkelparameteren som ble sendt til funksjonen er ikke gyldig",
 		"description": "[feil] utvikleren prøvde å kalle en funksjon med en ugyldig parameter"
 	},
+	"error_invalid_request": {
+		"message": "Ugyldig forespørsel.",
+		"description": "[feil] Generisk feil etter å ha mottatt en dårlig formatert melding"
+	},
 	"error_invalid_tab": {
 		"message": "Ugyldig Tab",
 		"description": "[error] Tab-en er ikke gyldig"
@@ -282,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Mer enn 1 matchende Tab ble funnet.",
 		"description": "[error] for mange Tabber ble returnert"
+	},
+	"error_many_tabs_found": {
+		"message": "Fant mer enn én Tab.",
+		"description": "[feil] mange Tabs ble hentet"
 	},
 	"error_minify_url": {
 		"message": "Kan ikke minimere en tom URL!",
@@ -339,9 +283,37 @@
 		"message": "Ingen URL ble oppgitt for kontroll!",
 		"description": "[error] ingen URL ble sendt inn for kontroll"
 	},
+	"error_not_initialized": {
+		"message": "ble ikke initialisert ennå.",
+		"description": "[feil] Generisk feil for når en variabel ikke er klar"
+	},
+	"error_processing_tabs": {
+		"message": "Feil ved behandling av Tabs.",
+		"description": "[feil] Generisk feil ved behandling av Tabs"
+	},
+	"error_redirect": {
+		"message": "Kan ikke redirecte. Vennligst oppdater siden.",
+		"description": "[feil] Generisk feil ved sideomdirigering."
+	},
 	"error_remove_not_favourite": {
 		"message": "Kan ikke fjerne en Tab som ikke er favoritt!",
 		"description": "[error] brukeren forsøkte å fjerne en Tab som ennå ikke er lagret"
+	},
+	"error_removing_all_tabs": {
+		"message": "Feil ved fjerning av alle Tabs.",
+		"description": "[feil] Generisk feil brukt ved fjerning av alle Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Feil ved fjerning av generiske Tabs.",
+		"description": "[feil] Generisk feil brukt ved fjerning av generiske Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Feil ved fjerning av andre Tabs.",
+		"description": "[feil] Generisk feil brukt ved fjerning av andre Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Feil ved fjerning av Tab.",
+		"description": "[feil] Generisk feil brukt ved fjerning av en Tab"
 	},
 	"error_required_params": {
 		"message": "De nødvendige parameterne for funksjonen ble ikke sendt med",
@@ -350,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Kan ikke synkronisere tomme Tabber!",
 		"description": "[error] det ble forsøkt å synkronisere ingenting"
+	},
+	"error_tab_constructor": {
+		"message": "Bruk Tab.create() i stedet for new Tab() for å bruke Tab-klassen",
+		"description": "[feil] fortell utvikleren hvordan man bruker Tab-klassen"
 	},
 	"error_tab_label": {
 		"message": "Merkingen må være en ikke-tom streng",
@@ -375,6 +351,10 @@
 		"message": "URL må være en ikke-tom streng",
 		"description": "[error] brukeren forsøkte å opprette en Tab uten URL"
 	},
+	"error_tab_url_saved": {
+		"message": "En Tab med denne URL-en er allerede lagret!",
+		"description": "[feil] Brukeren prøvde å lagre en allerede favoritt Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Kan ikke initialiseres med",
 		"description": ""
@@ -382,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Ugyldige Tab(ber) funnet.\nFørste forekomst:",
 		"description": "[error] ugyldige Tab ble sendt inn"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Bruk TabContainer.create() i stedet for new TabContainer() for å bruke TabContainer-klassen",
+		"description": "[feil] fortell utvikleren hvordan man bruker TabContainer-klassen"
+	},
+	"error_translationservice_constructor": {
+		"message": "Bruk TranslationService.create() i stedet for new TranslationService() for å bruke TranslationService-klassen",
+		"description": "[feil] fortell utvikleren hvordan man bruker TranslationService-klassen"
+	},
+	"error_translator_not_initialized": {
+		"message": "oversetteren ble ikke initialisert ennå.",
+		"description": "[feil] TranslationService var ikke klar"
+	},
+	"error_unknown_request": {
+		"message": "Ukjent forespørsel.",
+		"description": "[feil] Generisk feil etter å ha mottatt en melding som ikke ble gjenkjent"
 	},
 	"error_useless_remove": {
 		"message": "Kan ikke fjernes:\nEn side som ikke har vært lagret, kan ikke fjernes",
