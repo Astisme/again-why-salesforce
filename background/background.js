@@ -216,6 +216,20 @@ export async function bg_getSalesforceLanguage(callback = null) {
 	}
 }
 
+export async function bg_getCommandLinks(commands = null, callback = null){
+    const availableCommands = await BROWSER.commands.getAll();
+    if(commands == null){
+        if(callback == null)
+            return availableCommands;
+        callback(availableCommands);
+        return;
+    }
+    const requestedCommands = availableCommands.filter(ac => ac.shortcut !== "" && commands.includes(ac.name));
+    if(callback == null)
+        return requestedCommands;
+    callback(requestedCommands);
+}
+
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
  * Also handles theme updates and tab-related messages.
@@ -263,6 +277,9 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 			break;
 		case "get-style-settings":
 			bg_getSettings(undefined, request.key, sendResponse);
+			break;
+		case "get-commands":
+			bg_getCommandLinks(request.commands, sendResponse);
 			break;
 		default:
 			if (!["import"].includes(request.what)) {

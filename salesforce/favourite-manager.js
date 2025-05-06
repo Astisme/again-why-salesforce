@@ -6,6 +6,9 @@ import {
 	EXTENSION_NAME,
 	getSettings,
 	SKIP_LINK_DETECTION,
+    sendExtensionMessage,
+	CMD_SAVE_AS_TAB,
+	CMD_REMOVE_TAB,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -90,16 +93,20 @@ async function generateFavouriteButton() {
 	function createImageElement(id, src, alt) {
 		const img = document.createElement("img");
 		img.id = id;
-		img.setAttribute("src", src);
-		img.setAttribute("alt", alt);
+        img.src = src;
 		img.setAttribute(
 			"style",
 			"height: 2rem; filter: invert(60%) sepia(100%) saturate(500%) hue-rotate(170deg) brightness(90%);",
 		);
 		const span = document.createElement("span");
 		span.textContent = alt;
+        if(alt != null){
+            img.alt = alt;
+            img.title = alt;
+            span.title = alt;
+        }
 		span.classList.add("hidden", id);
-		img.addEventListener("error", function () {
+		img.addEventListener("error", () => {
 			if (!img.classList.contains("hidden")) {
 				span.classList.remove("hidden");
 			}
@@ -109,10 +116,26 @@ async function generateFavouriteButton() {
 	}
 	const star = BROWSER.runtime.getURL("assets/svgs/star.svg");
 	const translator = await ensureTranslatorAvailability();
+    const commands = [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB]
+    const connectedCommands = await sendExtensionMessage({ what: "get-commands", commands });
+    let starCmd = null;
+    let slashedStarCmd = null;
+    connectedCommands.forEach(cc => {
+        switch (cc.name) {
+            case CMD_SAVE_AS_TAB:
+                starCmd = cc.shortcut;
+                break;
+            case CMD_REMOVE_TAB:
+                slashedStarCmd = cc.shortcut;
+                break;
+            default:
+                break;
+        }
+    });
 	const { img: starImg, span: starSpan } = createImageElement(
 		STAR_ID,
 		star,
-		await translator.translate("save_tab"),
+		`${await translator.translate("save_tab")}${starCmd != null ?  ` (${starCmd})` : ""}`,
 	);
 	span.appendChild(starImg);
 	span.appendChild(starSpan);
@@ -120,7 +143,7 @@ async function generateFavouriteButton() {
 	const { img: slashedStarImg, span: slashedStarSpan } = createImageElement(
 		SLASHED_STAR_ID,
 		slashedStar,
-		await translator.translate("remove_tab"),
+		`${await translator.translate("remove_tab")}${slashedStarCmd != null ?  ` (${slashedStarCmd})` : ""}`,
 	);
 	slashedStarSpan.classList.add("hidden");
 	span.appendChild(slashedStarImg);
