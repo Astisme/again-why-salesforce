@@ -119,7 +119,7 @@ class TranslationService {
 
 	/**
 	 * Translate a key to the current language
-	 * @param {string} key - The translation key
+	 * @param {string|Array[string]} key - The translation key
 	 * @returns {string} Translated text
 	 */
 	async translate(key, language = this.currentLanguage, isError = false) {

@@ -217,14 +217,15 @@ export async function bg_getSalesforceLanguage(callback = null) {
 }
 
 export async function bg_getCommandLinks(commands = null, callback = null){
-    const availableCommands = await BROWSER.commands.getAll();
+    const allCommands = await BROWSER.commands.getAll();
+    const availableCommands = allCommands.filter(singleCommand => singleCommand.shortcut !== "");
     if(commands == null){
         if(callback == null)
             return availableCommands;
         callback(availableCommands);
         return;
     }
-    const requestedCommands = availableCommands.filter(ac => ac.shortcut !== "" && commands.includes(ac.name));
+    const requestedCommands = availableCommands.filter(ac => commands.includes(ac.name));
     if(callback == null)
         return requestedCommands;
     callback(requestedCommands);
