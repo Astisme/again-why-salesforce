@@ -752,7 +752,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getSingleTabByData({ org: "not-present" }),
 			Error,
-			"Could not find Tab.",
+			"error_tab_not_found",
 		);
 		assertEquals(
 			container.getSingleTabByData({ org: "test-org" }).org,
