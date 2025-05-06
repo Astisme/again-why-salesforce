@@ -117,21 +117,3 @@ export function exportHandler(tabs = null) {
 	}
 	_exportHandler(tabs);
 }
-
-// Only use this function during the initial install phase. After
-// installation the user may have intentionally unassigned commands.
-export function checkCommandShortcuts() {
-  BROWSER.commands.getAll((commands) => {
-    const missingShortcuts = [];
-    for (let {name, shortcut} of commands) {
-      if (shortcut === '') {
-        missingShortcuts.push(name);
-      }
-    }
-    if (missingShortcuts.length > 0) {
-        // Update the extension UI to inform the user that one or more
-        // commands are currently unassigned.
-        bg_notify({ what: "commands", commands: missingShortcuts });
-    }
-  });
-}
