@@ -74,7 +74,7 @@ jobs:
 
             - name: Comment Missing Locales
               continue-on-error: true
-              run: .github/scripts/task-and-push-when-diff.sh locale-check locales-errors.log
+              run: .github/scripts/task-and-push-when-diff.sh locale-check missing-locales.log
 
             - name: Sort locales
               continue-on-error: true
