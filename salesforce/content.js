@@ -1,6 +1,26 @@
 "use strict";
 import {
 	BROWSER,
+	CMD_OPEN_OTHER_ORG,
+	CMD_REMOVE_TAB,
+	CMD_SAVE_AS_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
+	CXM_EMPTY_NO_ORG_TABS,
+	CXM_EMPTY_TABS,
+	CXM_MOVE_FIRST,
+	CXM_MOVE_LAST,
+	CXM_MOVE_LEFT,
+	CXM_MOVE_RIGHT,
+	CXM_OPEN_OTHER_ORG,
+	CXM_PAGE_REMOVE_TAB,
+	CXM_PAGE_SAVE_TAB,
+	CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_RIGHT_TABS,
+	CXM_REMOVE_TAB,
+	CXM_UPDATE_ORG,
+	CXM_UPDATE_TAB,
 	getSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
@@ -9,26 +29,6 @@ import {
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
-	CXM_OPEN_OTHER_ORG,
-	CXM_UPDATE_ORG,
-	CXM_UPDATE_TAB,
-	CXM_MOVE_FIRST,
-	CXM_MOVE_LEFT,
-	CXM_MOVE_RIGHT,
-	CXM_MOVE_LAST,
-	CXM_REMOVE_TAB,
-	CXM_REMOVE_OTHER_TABS,
-	CXM_REMOVE_LEFT_TABS,
-	CXM_REMOVE_RIGHT_TABS,
-	CXM_EMPTY_NO_ORG_TABS,
-	CXM_EMPTY_TABS,
-	CXM_PAGE_SAVE_TAB,
-	CXM_PAGE_REMOVE_TAB,
-	CMD_SAVE_AS_TAB,
-	CMD_REMOVE_TAB,
-	CMD_TOGGLE_ORG,
-	CMD_UPDATE_TAB,
-	CMD_OPEN_OTHER_ORG,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
@@ -478,16 +478,16 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		return showToast("error_close_other_modal", false);
 	}
 	allTabs = await ensureAllTabsAvailability();
-    if(label == null && url == null){
-        const minyURL = Tab.minifyURL(getCurrentHref());
-        try {
-            const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
-            label = matchingTab.label;
-            url = matchingTab.url;
-        } catch (_) {
-            url = minyURL;
-        }
-    }
+	if (label == null && url == null) {
+		const minyURL = Tab.minifyURL(getCurrentHref());
+		try {
+			const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
+			label = matchingTab.label;
+			url = matchingTab.url;
+		} catch (_) {
+			url = minyURL;
+		}
+	}
 	const skip_link_detection = await getSettings("skip_link_detection");
 	if (
 		skip_link_detection != null && !skip_link_detection.enabled &&
@@ -583,7 +583,7 @@ const ACTION_TOGGLE_ORG = "toggle-org";
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
  */
 export async function performActionOnTabs(action, tab = null, options = null) {
-    console.log('performActionOnTabs',action,tab,options)
+	console.log("performActionOnTabs", action, tab, options);
 	try {
 		allTabs = await ensureAllTabsAvailability();
 		switch (action) {
@@ -639,9 +639,9 @@ export async function performActionOnTabs(action, tab = null, options = null) {
  * @throws when it fails to sync the Tabs.
  */
 async function toggleOrg({ label, url } = {}) {
-    if(label == null && url == null){
-        url = Tab.minifyURL(getCurrentHref());
-    }
+	if (label == null && url == null) {
+		url = Tab.minifyURL(getCurrentHref());
+	}
 	allTabs = await ensureAllTabsAvailability();
 	const matchingTab = allTabs.getSingleTabByData({ label, url });
 	matchingTab.update({
@@ -664,7 +664,9 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 		return showToast("error_close_other_modal", false);
 	}
 	if (tab.label == null && tab.url == null && tab.org == null) {
-        tab = allTabs.getSingleTabByData({ url: Tab.minifyURL(getCurrentHref()) });
+		tab = allTabs.getSingleTabByData({
+			url: Tab.minifyURL(getCurrentHref()),
+		});
 	}
 	allTabs = await ensureAllTabsAvailability();
 	const matchingTab = allTabs.getSingleTabByData(tab);
@@ -741,11 +743,11 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 			case "error":
 				showToast(message.message, false);
 				break;
-            case "add":
-                createImportModal();
-                break;
-            case CXM_OPEN_OTHER_ORG:
-            case CMD_OPEN_OTHER_ORG: {
+			case "add":
+				createImportModal();
+				break;
+			case CXM_OPEN_OTHER_ORG:
+			case CMD_OPEN_OTHER_ORG: {
 				const label = message.linkTabLabel;
 				const url = message.linkTabUrl ?? message.pageTabUrl;
 				showModalOpenOtherOrg({ label, url });
@@ -806,33 +808,45 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 				await performActionOnTabs(ACTION_REMOVE_ALL);
 				break;
 			case CXM_PAGE_SAVE_TAB:
-            case CMD_SAVE_AS_TAB:
+			case CMD_SAVE_AS_TAB:
 				pageActionTab(true);
 				break;
 			case CXM_PAGE_REMOVE_TAB:
-            case CMD_REMOVE_TAB:
+			case CMD_REMOVE_TAB:
 				pageActionTab(false);
 				break;
 			case CXM_UPDATE_ORG:
-            case CMD_TOGGLE_ORG:
+			case CMD_TOGGLE_ORG:
 				await performActionOnTabs(ACTION_TOGGLE_ORG, {
 					label: message.label,
 					url: message.tabUrl,
 				});
 				break;
 			case CXM_UPDATE_TAB:
-            case CMD_UPDATE_TAB:
+			case CMD_UPDATE_TAB:
 				showModalUpdateTab({
 					label: message.label,
 					url: message.tabUrl,
 				});
 				break;
-            case "commands":
-                showToast([`[${message.commands.length}]:`,"error_unassigned_commands"], false, true);
-                break;
+			case "commands":
+				showToast(
+					[
+						`[${message.commands.length}]:`,
+						"error_unassigned_commands",
+					],
+					false,
+					true,
+				);
+				break;
 			default:
-                if(message.what != "theme")
-                    showToast(`Unknown message received ${message.what}`, false, true);
+				if (message.what != "theme") {
+					showToast(
+						`Unknown message received ${message.what}`,
+						false,
+						true,
+					);
+				}
 				break;
 		}
 	} catch (error) {

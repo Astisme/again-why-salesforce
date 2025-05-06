@@ -157,7 +157,7 @@ class TranslationService {
 			let errorMsg = "error_missing_key"; // fallback
 			if (isError === false) {
 				errorMsg = await this.translate(
-                    errorMsg,
+					errorMsg,
 					language,
 					true,
 				);

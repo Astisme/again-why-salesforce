@@ -1,42 +1,46 @@
 "use strict";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_OTHER_ORG,
+	CMD_OPEN_SETTINGS,
+	CMD_REMOVE_TAB,
+	CMD_SAVE_AS_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
+	CXM_EMPTY_NO_ORG_TABS,
+	CXM_EMPTY_TABS,
+	CXM_EXPORT_TABS,
+	CXM_IMPORT_TABS,
+	CXM_MOVE_FIRST,
+	CXM_MOVE_LAST,
+	CXM_MOVE_LEFT,
+	CXM_MOVE_RIGHT,
+	CXM_OPEN_OTHER_ORG,
+	CXM_PAGE_REMOVE_TAB,
+	CXM_PAGE_SAVE_TAB,
+	CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_RIGHT_TABS,
+	CXM_REMOVE_TAB,
+	CXM_UPDATE_ORG,
+	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
-	CXM_OPEN_OTHER_ORG,
-	CXM_UPDATE_ORG,
-	CXM_UPDATE_TAB,
-	CXM_MOVE_FIRST,
-	CXM_MOVE_LEFT,
-	CXM_MOVE_RIGHT,
-	CXM_MOVE_LAST,
-	CXM_REMOVE_TAB,
-	CXM_REMOVE_OTHER_TABS,
-	CXM_REMOVE_LEFT_TABS,
-	CXM_REMOVE_RIGHT_TABS,
-	CXM_EMPTY_NO_ORG_TABS,
-	CXM_EMPTY_TABS,
-	CXM_IMPORT_TABS,
-	CXM_EXPORT_TABS,
-	CXM_PAGE_SAVE_TAB,
-	CXM_PAGE_REMOVE_TAB,
-	CMD_SAVE_AS_TAB,
-	CMD_REMOVE_TAB,
-	CMD_TOGGLE_ORG,
-	CMD_UPDATE_TAB,
-	CMD_OPEN_SETTINGS,
-	CMD_OPEN_OTHER_ORG,
-	CMD_IMPORT,
-	CMD_EXPORT_ALL,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
-import { bg_getCommandLinks, bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
+import {
+	bg_getCommandLinks,
+	bg_getSalesforceLanguage,
+	bg_getSettings,
+} from "./background.js";
 
 let areMenuItemsVisible = false;
 const cxm_open_settings = "open-settings";
@@ -49,48 +53,48 @@ let link_cmd_open_settings = null;
 let link_cmd_open_other_org = null;
 let link_cmd_import = null;
 let link_cmd_export_all = null;
-async function updateCommandLinks(){
-    const commandLinks = await bg_getCommandLinks();
-    commandLinks.forEach(cmdLink => {
-        switch (cmdLink.name) {
-            case CMD_SAVE_AS_TAB:
-                link_cmd_save_as_tab = cmdLink.shortcut;
+async function updateCommandLinks() {
+	const commandLinks = await bg_getCommandLinks();
+	commandLinks.forEach((cmdLink) => {
+		switch (cmdLink.name) {
+			case CMD_SAVE_AS_TAB:
+				link_cmd_save_as_tab = cmdLink.shortcut;
 				break;
-            case CMD_REMOVE_TAB:
-                link_cmd_remove_tab = cmdLink.shortcut;
+			case CMD_REMOVE_TAB:
+				link_cmd_remove_tab = cmdLink.shortcut;
 				break;
-            case CMD_TOGGLE_ORG:
-                link_cmd_toggle_org = cmdLink.shortcut;
+			case CMD_TOGGLE_ORG:
+				link_cmd_toggle_org = cmdLink.shortcut;
 				break;
-            case CMD_UPDATE_TAB:
-                link_cmd_update_tab = cmdLink.shortcut;
+			case CMD_UPDATE_TAB:
+				link_cmd_update_tab = cmdLink.shortcut;
 				break;
-            case CMD_OPEN_SETTINGS:
-                link_cmd_open_settings = cmdLink.shortcut;
+			case CMD_OPEN_SETTINGS:
+				link_cmd_open_settings = cmdLink.shortcut;
 				break;
-            case CMD_OPEN_OTHER_ORG:
-                link_cmd_open_other_org = cmdLink.shortcut;
+			case CMD_OPEN_OTHER_ORG:
+				link_cmd_open_other_org = cmdLink.shortcut;
 				break;
-            case CMD_IMPORT:
-                link_cmd_import = cmdLink.shortcut;
+			case CMD_IMPORT:
+				link_cmd_import = cmdLink.shortcut;
 				break;
-            case CMD_EXPORT_ALL:
-                link_cmd_export_all = cmdLink.shortcut;
-                break;
-            default:
-                break;
-        }
-    });
+			case CMD_EXPORT_ALL:
+				link_cmd_export_all = cmdLink.shortcut;
+				break;
+			default:
+				break;
+		}
+	});
 }
-function resetLinks(){
-    link_cmd_save_as_tab = null;
-    link_cmd_remove_tab = null;
-    link_cmd_toggle_org = null;
-    link_cmd_update_tab = null;
-    link_cmd_open_settings = null;
-    link_cmd_open_other_org = null;
-    link_cmd_import = null;
-    link_cmd_export_all = null;
+function resetLinks() {
+	link_cmd_save_as_tab = null;
+	link_cmd_remove_tab = null;
+	link_cmd_toggle_org = null;
+	link_cmd_update_tab = null;
+	link_cmd_open_settings = null;
+	link_cmd_open_other_org = null;
+	link_cmd_import = null;
+	link_cmd_export_all = null;
 }
 
 const menuItemsOriginal = [
@@ -217,71 +221,79 @@ const menuItemsOriginal = [
 	return item;
 });
 
-function getMenuItemsClone(){
-    const clone = structuredClone(menuItemsOriginal);
-    clone.forEach(el => {
-        switch (el.id) {
-            case CXM_PAGE_SAVE_TAB:
-                if(link_cmd_save_as_tab != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_save_as_tab})`
-                    ];
-                break;
-            case CXM_PAGE_REMOVE_TAB:
-                if(link_cmd_remove_tab != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_remove_tab})`
-                    ];
-                break;
-            case CXM_UPDATE_ORG:
-                if(link_cmd_toggle_org != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_toggle_org})`
-                    ];
-                break;
-            case CXM_UPDATE_TAB:
-                if(link_cmd_update_tab != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_update_tab})`
-                    ];
-                break;
-            case cxm_open_settings:
-                if(link_cmd_open_settings != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_open_settings})`
-                    ];
-                break;
-            case CXM_OPEN_OTHER_ORG:
-                if(link_cmd_open_other_org != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_open_other_org})`
-                    ];
-                break;
-            case CXM_IMPORT_TABS:
-                if(link_cmd_import != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_import})`
-                    ];
-                break;
-            case CXM_EXPORT_TABS:
-                if(link_cmd_export_all != null)
-                    el.title = [
-                        el.title,
-                        `(${link_cmd_export_all})`
-                    ];
-                break;
-            default:
-                break;
-        }
-    });
-    return clone;
+function getMenuItemsClone() {
+	const clone = structuredClone(menuItemsOriginal);
+	clone.forEach((el) => {
+		switch (el.id) {
+			case CXM_PAGE_SAVE_TAB:
+				if (link_cmd_save_as_tab != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_save_as_tab})`,
+					];
+				}
+				break;
+			case CXM_PAGE_REMOVE_TAB:
+				if (link_cmd_remove_tab != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_remove_tab})`,
+					];
+				}
+				break;
+			case CXM_UPDATE_ORG:
+				if (link_cmd_toggle_org != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_toggle_org})`,
+					];
+				}
+				break;
+			case CXM_UPDATE_TAB:
+				if (link_cmd_update_tab != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_update_tab})`,
+					];
+				}
+				break;
+			case cxm_open_settings:
+				if (link_cmd_open_settings != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_open_settings})`,
+					];
+				}
+				break;
+			case CXM_OPEN_OTHER_ORG:
+				if (link_cmd_open_other_org != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_open_other_org})`,
+					];
+				}
+				break;
+			case CXM_IMPORT_TABS:
+				if (link_cmd_import != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_import})`,
+					];
+				}
+				break;
+			case CXM_EXPORT_TABS:
+				if (link_cmd_export_all != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_export_all})`,
+					];
+				}
+				break;
+			default:
+				break;
+		}
+	});
+	return clone;
 }
 
 /**
@@ -292,7 +304,7 @@ function getMenuItemsClone(){
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
 	const translator = await ensureTranslatorAvailability();
-    await updateCommandLinks();
+	await updateCommandLinks();
 	areMenuItemsVisible = true;
 	try {
 		// load the user picked language
@@ -317,7 +329,7 @@ async function createMenuItems() {
 		console.error(msg, error);
 		await removeMenuItems();
 	}
-    resetLinks();
+	resetLinks();
 }
 
 /**

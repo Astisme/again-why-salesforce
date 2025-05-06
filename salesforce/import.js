@@ -201,10 +201,10 @@ async function showFileImport() {
 	listenToFileUpload(modalParent);
 }
 
-export async function createImportModal(){
-    try {
-        await showFileImport();
-    } catch (error) {
-        showToast(error, false);
-    }
+export async function createImportModal() {
+	try {
+		await showFileImport();
+	} catch (error) {
+		showToast(error, false);
+	}
 }

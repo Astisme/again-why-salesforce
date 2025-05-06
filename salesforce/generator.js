@@ -1095,12 +1095,12 @@ export async function generateSldsFileInput(
 	required = true,
 ) {
 	if (
-        (!allowDrop && preventFileSelection) || 
-        (
-            wrapperId == null || wrapperId === "" || inputElementId == null ||
-            inputElementId === "" || acceptedType == null || acceptedType === ""
-        )
-    ){
+		(!allowDrop && preventFileSelection) ||
+		(
+			wrapperId == null || wrapperId === "" || inputElementId == null ||
+			inputElementId === "" || acceptedType == null || acceptedType === ""
+		)
+	) {
 		throw new Error(
 			"error_required_params",
 		);
@@ -1199,9 +1199,10 @@ export async function generateSldsFileInput(
 			"slds-text-heading--medium",
 			"slds-text-align--center",
 		);
-        const msg_drop = await translator.translate("drop");
-		dropFilesSpan.textContent = `${msg_drop} ${singleFile ? msg_file : msg_files}`,
-		dropzoneBodySpan.appendChild(dropFilesSpan);
+		const msg_drop = await translator.translate("drop");
+		dropFilesSpan.textContent = `${msg_drop} ${
+			singleFile ? msg_file : msg_files
+		}`, dropzoneBodySpan.appendChild(dropFilesSpan);
 	}
 	const dragOverDiv = document.createElement("div");
 	dragOverDiv.classList.add("drag-over-body");

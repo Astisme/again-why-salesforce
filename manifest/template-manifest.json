@@ -78,59 +78,59 @@
 		}
 	},
 	"incognito": "spanning",
-    "commands": {
-        "cmd-save-as-tab": {
-            "suggested_key": {
-                "default": "Alt+Shift+P"
-            },
-            "description": "__MSG_cmd_save_as_tab__"
-        },
-        "cmd-remove-tab": {
-            "suggested_key": {
-                "default": "Alt+Shift+R"
-            },
-            "description": "__MSG_cmd_remove_tab__"
-        },
-        "cmd-toggle-org": {
-            "suggested_key": {
-                "default": "Alt+Shift+G"
-            },
-            "description": "__MSG_cmd_toggle_org__"
-        },
-        "cmd-update-tab": {
-            "suggested_key": {
-                "default": "Alt+Shift+U"
-            },
-            "description": "__MSG_cmd_update_tab__"
-        },
-        "cmd-open-settings": {
-            "suggested_key": {
-                "default": "Alt+Comma"
-            },
-            "description": "__MSG_open_settings__"
-        },
-        "cmd-open-other-org": {
-            "suggested_key": {
-                "default": "Alt+Shift+O"
-            },
-            "description": "__MSG_cmd_open_other_org__"
-        },
-        "cmd-import": {
-            "suggested_key": {
-                "default": "Alt+Shift+M"
-            },
-            "description": "__MSG_cmd_import__"
-        },
-        "cmd-export-all": {
-            "suggested_key": {
-                "default": "Alt+Shift+X"
-            },
-            "description": "__MSG_export_title__"
-        },
-        "_execute_action": {
-            "suggested_key": {
-                "default": "Alt+Shift+B"
-            }
-        }
-    }
+	"commands": {
+		"cmd-save-as-tab": {
+			"suggested_key": {
+				"default": "Alt+Shift+P"
+			},
+			"description": "__MSG_cmd_save_as_tab__"
+		},
+		"cmd-remove-tab": {
+			"suggested_key": {
+				"default": "Alt+Shift+R"
+			},
+			"description": "__MSG_cmd_remove_tab__"
+		},
+		"cmd-toggle-org": {
+			"suggested_key": {
+				"default": "Alt+Shift+G"
+			},
+			"description": "__MSG_cmd_toggle_org__"
+		},
+		"cmd-update-tab": {
+			"suggested_key": {
+				"default": "Alt+Shift+U"
+			},
+			"description": "__MSG_cmd_update_tab__"
+		},
+		"cmd-open-settings": {
+			"suggested_key": {
+				"default": "Alt+Comma"
+			},
+			"description": "__MSG_open_settings__"
+		},
+		"cmd-open-other-org": {
+			"suggested_key": {
+				"default": "Alt+Shift+O"
+			},
+			"description": "__MSG_cmd_open_other_org__"
+		},
+		"cmd-import": {
+			"suggested_key": {
+				"default": "Alt+Shift+M"
+			},
+			"description": "__MSG_cmd_import__"
+		},
+		"cmd-export-all": {
+			"suggested_key": {
+				"default": "Alt+Shift+X"
+			},
+			"description": "__MSG_export_title__"
+		},
+		"_execute_action": {
+			"suggested_key": {
+				"default": "Alt+Shift+B"
+			}
+		}
+	}
 }
