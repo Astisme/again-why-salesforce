@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "new TranslationService() के बजाय TranslationService.create() का उपयोग करें",
+    "description": "[error] डेवलपर को बताएं कि TranslationService क्लास का उपयोग कैसे करें"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator अभी तक प्रारंभ नहीं हुआ है।",
+    "description": "[error] TranslationService तैयार नहीं था"
+  },
+  "error_many_tabs_found": {
+    "message": "एक से अधिक Tab मिला।",
+    "description": "[error] कई Tabs पुनर्प्राप्त किए गए"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "new TabContainer() के बजाय TabContainer.create() का उपयोग करें",
+    "description": "[error] डेवलपर को बताएं कि TabContainer क्लास का उपयोग कैसे करें"
+  },
+  "error_tab_constructor": {
+    "message": "new Tab() के बजाय Tab.create() का उपयोग करें",
+    "description": "[error] डेवलपर को बताएं कि Tab क्लास का उपयोग कैसे करें"
+  },
+  "error_redirect": {
+    "message": "पुनर्निदेशन असंभव। कृपया पृष्ठ को पुनः लोड करें।",
+    "description": "[error] पृष्ठ पुनर्निदेशन में सामान्य त्रुटि"
+  },
+  "error_failed_sync": {
+    "message": "सिंक विफल हुआ।",
+    "description": "[error] उपयोगकर्ता के साथ Tabs सिंक करने में सामान्य त्रुटि"
+  },
+  "error_removing_all_tabs": {
+    "message": "सभी Tabs हटाने में त्रुटि।",
+    "description": "[error] सभी Tabs हटाते समय सामान्य त्रुटि"
+  },
+  "error_removing_generic_tabs": {
+    "message": "सामान्य Tabs हटाने में त्रुटि।",
+    "description": "[error] सामान्य Tabs हटाते समय सामान्य त्रुटि"
+  },
+  "error_adding_tab": {
+    "message": "Tab जोड़ने में त्रुटि।",
+    "description": "[error] Tab जोड़ते समय सामान्य त्रुटि"
+  },
+  "error_removing_other_tabs": {
+    "message": "अन्य Tabs हटाने में त्रुटि।",
+    "description": "[error] अन्य Tabs हटाते समय सामान्य त्रुटि"
+  },
+  "error_removing_tab": {
+    "message": "Tab हटाने में त्रुटि।",
+    "description": "[error] Tab हटाते समय सामान्य त्रुटि"
+  },
+  "error_not_initialized": {
+    "message": "अभी तक प्रारंभ नहीं हुआ है।",
+    "description": "[error] जब कोई वेरिएबल तैयार नहीं होता तो सामान्य त्रुटि"
+  },
+  "error_unknown_request": {
+    "message": "अज्ञात अनुरोध।",
+    "description": "[error] अज्ञात संदेश प्राप्त होने के बाद सामान्य त्रुटि"
+  },
+  "error_invalid_request": {
+    "message": "अमान्य अनुरोध।",
+    "description": "[error] गलत प्रारूप के संदेश प्राप्त होने के बाद सामान्य त्रुटि"
+  },
+  "error_processing_tabs": {
+    "message": "Tabs प्रसंस्करण में त्रुटि।",
+    "description": "[error] Tabs प्रसंस्करण में सामान्य त्रुटि"
+  },
+  "error_tab_url_saved": {
+    "message": "इस URL के साथ एक Tab पहले से ही सहेजा गया है!",
+    "description": "[error] उपयोगकर्ता ने पहले से सहेजे Tab को सहेजने का प्रयास किया"
+  },
+  "cmd_export_all": {
+    "message": "सहेजे गए सभी Tabs को निर्यात करने के लिए मोडल दिखाएँ",
+    "description": "[command description] उपयोगकर्ता सभी Tabs को निर्यात करना चाहता है"
+  },
+  "cmd_import": {
+    "message": "नए Tabs आयात करने के लिए मोडल दिखाएँ",
+    "description": "[command description] उपयोगकर्ता नए Tabs आयात करना चाहता है"
+  },
+  "cmd_open_other_org": {
+    "message": "वर्तमान पृष्ठ को अन्य Org में खोलने के लिए मोडल दिखाएँ",
+    "description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अन्य Org में खोलना चाहता है"
+  },
+  "cmd_update_tab": {
+    "message": "वर्तमान पृष्ठ (यदि सहेजा गया हो) को अपडेट करने के लिए मोडल दिखाएँ",
+    "description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अपडेट करना चाहता है"
+  },
+  "cmd_toggle_org": {
+    "message": "वर्तमान पृष्ठ के Org मान को टॉगल करने के लिए मोडल दिखाएँ (यदि सहेजा गया हो)",
+    "description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ के Org मान को टॉगल करना चाहता है"
+  },
+  "cmd_remove_tab": {
+    "message": "वर्तमान पृष्ठ को Tab सूची से हटाएँ (यदि सहेजा गया हो)",
+    "description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को हटाना चाहता है"
+  },
+  "cmd_save_as_tab": {
+    "message": "वर्तमान पृष्ठ को Tab सूची में सहेजें (यदि नहीं सहेजा गया हो)",
+    "description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को सहेजना चाहता है"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] उपयोगकर्ता को निर्दिष्ट क्षेत्र में अपनी फ़ाइलें ड्रॉप करने की अनुमति देता है"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] सेटिंग्स पृष्ठ पर पुनर्निदेशन के लिए बटन"
+  },
 	"allow": {
 		"message": "अनुमति दें",
 		"description": "[req_permission] अनुमतियाँ देने के लिए बटन"

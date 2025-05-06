@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Upotrijebite TranslationService.create() umjesto new TranslationService()",
+    "description": "[error] Obavijestite programera kako koristiti klasu TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator još nije inicijaliziran.",
+    "description": "[error] TranslationService nije bio spreman"
+  },
+  "error_many_tabs_found": {
+    "message": "Pronađeno je više od jedne Tab.",
+    "description": "[error] Vraćeno je više Tabs"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Upotrijebite TabContainer.create() umjesto new TabContainer()",
+    "description": "[error] Obavijestite programera kako koristiti klasu TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Upotrijebite Tab.create() umjesto new Tab()",
+    "description": "[error] Obavijestite programera kako koristiti klasu Tab"
+  },
+  "error_redirect": {
+    "message": "Preusmjeravanje nije moguće. Molimo osvježite stranicu.",
+    "description": "[error] Opća pogreška kod preusmjeravanja stranice"
+  },
+  "error_failed_sync": {
+    "message": "Sinkronizacija nije uspjela.",
+    "description": "[error] Opća pogreška pri sinkronizaciji Tabsa s korisnikom"
+  },
+  "error_removing_all_tabs": {
+    "message": "Pogreška pri uklanjanju svih Tabs-a.",
+    "description": "[error] Opća pogreška pri uklanjanju svih Tabs-a"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Pogreška pri uklanjanju generičkih Tabs-a.",
+    "description": "[error] Opća pogreška pri uklanjanju generičkih Tabs-a"
+  },
+  "error_adding_tab": {
+    "message": "Pogreška pri dodavanju Tab-a.",
+    "description": "[error] Opća pogreška pri dodavanju Tab-a"
+  },
+  "error_removing_other_tabs": {
+    "message": "Pogreška pri uklanjanju ostalih Tabs-a.",
+    "description": "[error] Opća pogreška pri uklanjanju ostalih Tabs-a"
+  },
+  "error_removing_tab": {
+    "message": "Pogreška pri uklanjanju Tab-a.",
+    "description": "[error] Opća pogreška pri uklanjanju Tab-a"
+  },
+  "error_not_initialized": {
+    "message": "Još nije inicijalizirano.",
+    "description": "[error] Opća pogreška kad varijabla nije spremna"
+  },
+  "error_unknown_request": {
+    "message": "Nepoznat zahtjev.",
+    "description": "[error] Opća pogreška nakon primitka nepoznate poruke"
+  },
+  "error_invalid_request": {
+    "message": "Neispravan zahtjev.",
+    "description": "[error] Opća pogreška nakon primitka poruke pogrešnog formata"
+  },
+  "error_processing_tabs": {
+    "message": "Pogreška pri obradi Tabs-a.",
+    "description": "[error] Opća pogreška pri obradi Tabs-a"
+  },
+  "error_tab_url_saved": {
+    "message": "Tab s ovim URL-om već je spremljen!",
+    "description": "[error] Korisnik je pokušao spremiti već spremljeni Tab"
+  },
+  "cmd_export_all": {
+    "message": "Prikaži modal za izvoz svih spremljenih Tabs-a",
+    "description": "[command description] korisnik želi izvesti sve Tabs-e"
+  },
+  "cmd_import": {
+    "message": "Prikaži modal za uvoz novih Tabs-a",
+    "description": "[command description] korisnik želi uvesti nove Tabs-e"
+  },
+  "cmd_open_other_org": {
+    "message": "Prikaži modal za otvaranje trenutne stranice u drugoj Org",
+    "description": "[command description] korisnik želi otvoriti trenutnu stranicu u drugoj Org"
+  },
+  "cmd_update_tab": {
+    "message": "Prikaži modal za ažuriranje trenutne stranice (ako je spremljena)",
+    "description": "[command description] korisnik želi ažurirati trenutnu stranicu"
+  },
+  "cmd_toggle_org": {
+    "message": "Prikaži modal za prebacivanje Org vrijednosti trenutne stranice (ako je spremljena)",
+    "description": "[command description] korisnik želi prebaciti Org trenutne stranice"
+  },
+  "cmd_remove_tab": {
+    "message": "Ukloni trenutnu stranicu s popisa Tabs-a (ako je spremljena)",
+    "description": "[command description] korisnik želi ukloniti trenutnu stranicu"
+  },
+  "cmd_save_as_tab": {
+    "message": "Spremi trenutnu stranicu na popis Tabs-a (ako nije spremljena)",
+    "description": "[command description] korisnik želi spremiti trenutnu stranicu"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] omogućuje korisniku da ispusti svoje datoteke na zadano područje"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] gumb za preusmjeravanje na stranicu postavki"
+  },
 	"allow": {
 		"message": "Dopusti",
 		"description": "[req_permission] gumb za dopuštanje ovlasti"

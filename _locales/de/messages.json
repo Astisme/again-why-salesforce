@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Verwende TranslationService.create() anstelle von new TranslationService()",
+    "description": "[error] Entwickler darüber informieren, wie die Klasse TranslationService verwendet wird"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator wurde noch nicht initialisiert.",
+    "description": "[error] TranslationService war noch nicht bereit"
+  },
+  "error_many_tabs_found": {
+    "message": "Mehr als ein Tab gefunden.",
+    "description": "[error] Mehrere Tabs wurden abgerufen"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Verwende TabContainer.create() anstelle von new TabContainer()",
+    "description": "[error] Entwickler darüber informieren, wie die Klasse TabContainer verwendet wird"
+  },
+  "error_tab_constructor": {
+    "message": "Verwende Tab.create() anstelle von new Tab()",
+    "description": "[error] Entwickler darüber informieren, wie die Klasse Tab verwendet wird"
+  },
+  "error_redirect": {
+    "message": "Weiterleitung nicht möglich. Bitte Seite neu laden.",
+    "description": "[error] Allgemeiner Fehler bei Seitenweiterleitung"
+  },
+  "error_failed_sync": {
+    "message": "Synchronisierung fehlgeschlagen.",
+    "description": "[error] Allgemeiner Fehler bei der Synchronisierung der Tabs mit dem Benutzer"
+  },
+  "error_removing_all_tabs": {
+    "message": "Fehler beim Entfernen aller Tabs.",
+    "description": "[error] Allgemeiner Fehler beim Entfernen aller Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Fehler beim Entfernen generischer Tabs.",
+    "description": "[error] Allgemeiner Fehler beim Entfernen generischer Tabs"
+  },
+  "error_adding_tab": {
+    "message": "Fehler beim Hinzufügen eines Tabs.",
+    "description": "[error] Allgemeiner Fehler beim Hinzufügen eines Tabs"
+  },
+  "error_removing_other_tabs": {
+    "message": "Fehler beim Entfernen anderer Tabs.",
+    "description": "[error] Allgemeiner Fehler beim Entfernen anderer Tabs"
+  },
+  "error_removing_tab": {
+    "message": "Fehler beim Entfernen des Tabs.",
+    "description": "[error] Allgemeiner Fehler beim Entfernen eines Tabs"
+  },
+  "error_not_initialized": {
+    "message": "Noch nicht initialisiert.",
+    "description": "[error] Allgemeiner Fehler, wenn eine Variable nicht bereit ist"
+  },
+  "error_unknown_request": {
+    "message": "Unbekannte Anfrage.",
+    "description": "[error] Allgemeiner Fehler nach Empfang einer unbekannten Nachricht"
+  },
+  "error_invalid_request": {
+    "message": "Ungültige Anfrage.",
+    "description": "[error] Allgemeiner Fehler nach Empfang einer falsch formatierten Nachricht"
+  },
+  "error_processing_tabs": {
+    "message": "Fehler beim Verarbeiten der Tabs.",
+    "description": "[error] Allgemeiner Fehler beim Verarbeiten der Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Ein Tab mit dieser URL wurde bereits gespeichert!",
+    "description": "[error] Benutzer hat versucht, einen bereits gespeicherten Tab zu speichern"
+  },
+  "cmd_export_all": {
+    "message": "Modal zum Export aller gespeicherten Tabs anzeigen",
+    "description": "[command description] Benutzer möchte alle Tabs exportieren"
+  },
+  "cmd_import": {
+    "message": "Modal zum Import neuer Tabs anzeigen",
+    "description": "[command description] Benutzer möchte neue Tabs importieren"
+  },
+  "cmd_open_other_org": {
+    "message": "Modal zum Öffnen der aktuellen Seite in einer anderen Org anzeigen",
+    "description": "[command description] Benutzer möchte die aktuelle Seite in einer anderen Org öffnen"
+  },
+  "cmd_update_tab": {
+    "message": "Modal zum Aktualisieren der aktuellen Seite anzeigen (falls gespeichert)",
+    "description": "[command description] Benutzer möchte die aktuelle Seite aktualisieren"
+  },
+  "cmd_toggle_org": {
+    "message": "Modal zum Umschalten des Org-Werts der aktuellen Seite anzeigen (falls gespeichert)",
+    "description": "[command description] Benutzer möchte die Org der aktuellen Seite umschalten"
+  },
+  "cmd_remove_tab": {
+    "message": "Aktuelle Seite aus der Tab-Liste entfernen (falls gespeichert)",
+    "description": "[command description] Benutzer möchte die aktuelle Seite entfernen"
+  },
+  "cmd_save_as_tab": {
+    "message": "Aktuelle Seite in der Tab-Liste speichern (falls noch nicht gespeichert)",
+    "description": "[command description] Benutzer möchte die aktuelle Seite speichern"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] Ermöglicht es dem Benutzer, seine Dateien in den angegebenen Bereich zu ziehen"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] Schaltfläche zum Weiterleiten zur Einstellungsseite"
+  },
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"

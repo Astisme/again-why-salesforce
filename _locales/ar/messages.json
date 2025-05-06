@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "استخدم TranslationService.create() بدلاً من new TranslationService()",
+    "description": "[error] أخبر المطور بكيفية استخدام فئة TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "لم يتم تهيئة translator بعد.",
+    "description": "[error] لم يكن TranslationService جاهزاً بعد"
+  },
+  "error_many_tabs_found": {
+    "message": "تم العثور على أكثر من Tab واحد.",
+    "description": "[error] تم استرجاع عدة Tabs"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "استخدم TabContainer.create() بدلاً من new TabContainer()",
+    "description": "[error] أخبر المطور بكيفية استخدام فئة TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "استخدم Tab.create() بدلاً من new Tab()",
+    "description": "[error] أخبر المطور بكيفية استخدام فئة Tab"
+  },
+  "error_redirect": {
+    "message": "لا يمكن إعادة التوجيه. الرجاء تحديث الصفحة.",
+    "description": "[error] خطأ عام أثناء إعادة توجيه الصفحة"
+  },
+  "error_failed_sync": {
+    "message": "فشل التزامن.",
+    "description": "[error] خطأ عام عند محاولة مزامنة Tabs مع المستخدم"
+  },
+  "error_removing_all_tabs": {
+    "message": "خطأ أثناء إزالة جميع Tabs.",
+    "description": "[error] خطأ عام أثناء إزالة جميع Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "خطأ أثناء إزالة Tabs عامة.",
+    "description": "[error] خطأ عام أثناء إزالة Tabs عامة"
+  },
+  "error_adding_tab": {
+    "message": "خطأ أثناء إضافة Tab.",
+    "description": "[error] خطأ عام عند إضافة Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "خطأ أثناء إزالة Tabs أخرى.",
+    "description": "[error] خطأ عام أثناء إزالة Tabs أخرى"
+  },
+  "error_removing_tab": {
+    "message": "خطأ أثناء إزالة Tab.",
+    "description": "[error] خطأ عام عند إزالة Tab"
+  },
+  "error_not_initialized": {
+    "message": "لم يتم التهيئة بعد.",
+    "description": "[error] خطأ عام عند عدم جاهزية متغير"
+  },
+  "error_unknown_request": {
+    "message": "طلب غير معروف.",
+    "description": "[error] خطأ عام بعد استقبال رسالة غير معروفة"
+  },
+  "error_invalid_request": {
+    "message": "طلب غير صالح.",
+    "description": "[error] خطأ عام بعد استقبال رسالة بصيغة غير صحيحة"
+  },
+  "error_processing_tabs": {
+    "message": "خطأ أثناء معالجة Tabs.",
+    "description": "[error] خطأ عام أثناء معالجة Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Tab بهذا URL تم حفظه مسبقاً!",
+    "description": "[error] حاول المستخدم حفظ Tab محبذ مسبقاً"
+  },
+  "cmd_export_all": {
+    "message": "عرض النافذة لتصدير جميع Tabs المحفوظة",
+    "description": "[command description] يريد المستخدم تصدير جميع Tabs"
+  },
+  "cmd_import": {
+    "message": "عرض النافذة لاستيراد Tabs جديدة",
+    "description": "[command description] يريد المستخدم استيراد Tabs جديدة"
+  },
+  "cmd_open_other_org": {
+    "message": "عرض النافذة لفتح الصفحة الحالية في Org أخرى",
+    "description": "[command description] يريد المستخدم فتح الصفحة الحالية في Org أخرى"
+  },
+  "cmd_update_tab": {
+    "message": "عرض النافذة لتحديث الصفحة الحالية (إذا كانت محفوظة)",
+    "description": "[command description] يريد المستخدم تحديث الصفحة الحالية"
+  },
+  "cmd_toggle_org": {
+    "message": "عرض النافذة لتبديل قيمة Org للصفحة الحالية (إذا كانت محفوظة)",
+    "description": "[command description] يريد المستخدم تبديل Org للصفحة الحالية"
+  },
+  "cmd_remove_tab": {
+    "message": "إزالة الصفحة الحالية من قائمة Tabs (إذا كانت محفوظة)",
+    "description": "[command description] يريد المستخدم إزالة الصفحة الحالية"
+  },
+  "cmd_save_as_tab": {
+    "message": "حفظ الصفحة الحالية في قائمة Tabs (إذا لم تكن محفوظة)",
+    "description": "[command description] يريد المستخدم حفظ الصفحة الحالية"
+  },
+  "drop": {
+    "message": "إسقاط",
+    "description": "[import] يسمح للمستخدم بإسقاط ملفاته في المنطقة المحددة"
+  },
+  "open_settings": {
+    "message": "فتح إعدادات الإضافة",
+    "description": "[popup] زر لإعادة التوجيه إلى صفحة الإعدادات"
+  },
 	"allow": {
 		"message": "السماح",
 		"description": "[req_permission] زر للسماح بالأذونات"

@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Käytä TranslationService.create() sen sijaan, että käyttäisit new TranslationService()",
+    "description": "[error] Kerro kehittäjälle, miten TranslationService-luokkaa käytetään"
+  },
+  "error_translator_not_initialized": {
+    "message": "translatoria ei ole vielä alustettu.",
+    "description": "[error] TranslationService ei ollut valmis"
+  },
+  "error_many_tabs_found": {
+    "message": "Löydettiin enemmän kuin yksi Tab.",
+    "description": "[error] Useita Tabs-eja haettiin"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Käytä TabContainer.create() sen sijaan, että käyttäisit new TabContainer()",
+    "description": "[error] Kerro kehittäjälle, miten TabContainer-luokkaa käytetään"
+  },
+  "error_tab_constructor": {
+    "message": "Käytä Tab.create() sen sijaan, että käyttäisit new Tab()",
+    "description": "[error] Kerro kehittäjälle, miten Tab-luokkaa käytetään"
+  },
+  "error_redirect": {
+    "message": "Uudelleenohjaus ei onnistu. Päivitä sivu, ole hyvä.",
+    "description": "[error] Yleinen virhe sivun uudelleenohjauksessa"
+  },
+  "error_failed_sync": {
+    "message": "Synkronointi epäonnistui.",
+    "description": "[error] Yleinen virhe Tabsien synkronoinnissa käyttäjän kanssa"
+  },
+  "error_removing_all_tabs": {
+    "message": "Virhe kaikkien Tabsien poistamisessa.",
+    "description": "[error] Yleinen virhe kaikkien Tabsien poistamisessa"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Virhe geneeristen Tabsien poistamisessa.",
+    "description": "[error] Yleinen virhe geneeristen Tabsien poistamisessa"
+  },
+  "error_adding_tab": {
+    "message": "Virhe Tabin lisäämisessä.",
+    "description": "[error] Yleinen virhe Tabin lisäämisessä"
+  },
+  "error_removing_other_tabs": {
+    "message": "Virhe muiden Tabsien poistamisessa.",
+    "description": "[error] Yleinen virhe muiden Tabsien poistamisessa"
+  },
+  "error_removing_tab": {
+    "message": "Virhe Tabin poistamisessa.",
+    "description": "[error] Yleinen virhe Tabin poistamisessa"
+  },
+  "error_not_initialized": {
+    "message": "Ei ole vielä alustettu.",
+    "description": "[error] Yleinen virhe, kun muuttuja ei ole valmis"
+  },
+  "error_unknown_request": {
+    "message": "Tuntematon pyyntö.",
+    "description": "[error] Yleinen virhe tuntemattoman viestin vastaanoton jälkeen"
+  },
+  "error_invalid_request": {
+    "message": "Virheellinen pyyntö.",
+    "description": "[error] Yleinen virhe virheellisen muotoilun viestin vastaanoton jälkeen"
+  },
+  "error_processing_tabs": {
+    "message": "Virhe Tabsien käsittelyssä.",
+    "description": "[error] Yleinen virhe Tabsien käsittelyssä"
+  },
+  "error_tab_url_saved": {
+    "message": "Tällä URLilla oleva Tab on jo tallennettu!",
+    "description": "[error] Käyttäjä yritti tallentaa jo tallennetun Tabin"
+  },
+  "cmd_export_all": {
+    "message": "Näytä modaalinen ikkuna kaikkien tallennettujen Tabsien vientiin",
+    "description": "[command description] käyttäjä haluaa viedä kaikki Tabsit"
+  },
+  "cmd_import": {
+    "message": "Näytä modaalinen ikkuna uusien Tabsien tuomiseen",
+    "description": "[command description] käyttäjä haluaa tuoda uusia Tabsia"
+  },
+  "cmd_open_other_org": {
+    "message": "Näytä modaalinen ikkuna nykyisen sivun avaamiseksi toisessa Orgissa",
+    "description": "[command description] käyttäjä haluaa avata nykyisen sivun toisessa Orgissa"
+  },
+  "cmd_update_tab": {
+    "message": "Näytä modaalinen ikkuna nykyisen sivun päivittämiseksi (jos tallennettu)",
+    "description": "[command description] käyttäjä haluaa päivittää nykyisen sivun"
+  },
+  "cmd_toggle_org": {
+    "message": "Näytä modaalinen ikkuna Org-arvon vaihtamiseksi nykyisellä sivulla (jos tallennettu)",
+    "description": "[command description] käyttäjä haluaa vaihtaa Org-arvon nykyisellä sivulla"
+  },
+  "cmd_remove_tab": {
+    "message": "Poista nykyinen sivu Tab-listalta (jos tallennettu)",
+    "description": "[command description] käyttäjä haluaa poistaa nykyisen sivun"
+  },
+  "cmd_save_as_tab": {
+    "message": "Tallenna nykyinen sivu Tab-listalle (jos ei vielä tallennettu)",
+    "description": "[command description] käyttäjä haluaa tallentaa nykyisen sivun"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] antaa käyttäjän pudottaa tiedostonsa määritettyyn alueeseen"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] painike, joka vie asetussivulle"
+  },
 	"allow": {
 		"message": "Salli",
 		"description": "[req_permission] painike, jolla myönnetään oikeudet"

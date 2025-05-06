@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "TranslationService క్లాస్‌ను ఉపయోగించడానికి new TranslationService() కు బదులుగా TranslationService.create() ఉపయోగించండి",
+            "description": "[లోపం] TranslationService క్లాస్‌ను ఎలా ఉపయోగించాలో డెవలపర్‌కు చెప్పండి"
+        },
+        "error_translator_not_initialized": {
+            "message": "అనువాదకుడు ఇంకా ప్రారంభించబడలేదు.",
+            "description": "[లోపం] TranslationService సిద్ధంగా లేదు"
+        },
+        "error_many_tabs_found": {
+            "message": "ఒకటి కంటే ఎక్కువ Tab దొరికింది.",
+            "description": "[లోపం] చాలా Tabs తిరిగి పొందబడ్డాయి"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "TabContainer క్లాస్‌ను ఉపయోగించడానికి new TabContainer() కు బదులుగా TabContainer.create() ఉపయోగించండి",
+            "description": "[లోపం] TabContainer క్లాస్‌ను ఎలా ఉపయోగించాలో డెవలపర్‌కు చెప్పండి"
+        },
+        "error_tab_constructor": {
+            "message": "Tab క్లాస్‌ను ఉపయోగించడానికి new Tab() కు బదులుగా Tab.create() ఉపయోగించండి",
+            "description": "[లోపం] Tab క్లాస్‌ను ఎలా ఉపయోగించాలో డెవలపర్‌కు చెప్పండి"
+        },
+        "error_redirect": {
+            "message": "Редирект చేయడం సాధ్యం కాదు. దయచేసి పేజీని రిఫ్రెష్ చేయండి.",
+            "description": "[లోపం] పేజీ దారి మళ్లింపులో సాధారణ లోపం."
+        },
+        "error_failed_sync": {
+            "message": "సమకాలీకరణ విఫలమైంది.",
+            "description": "[లోపం] వినియోగదారు నుండి Tabs సమకాలీకరించబడనప్పుడు సాధారణ లోపం"
+        },
+        "error_removing_all_tabs": {
+            "message": "అన్ని Tabs తీసివేసేటప్పుడు లోపం.",
+            "description": "[లోపం] అన్ని Tabs తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+        },
+        "error_removing_generic_tabs": {
+            "message": "సాధారణ Tabs తీసివేసేటప్పుడు లోపం.",
+            "description": "[లోపం] సాధారణ Tabs తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+        },
+        "error_adding_tab": {
+            "message": "Tab జోడించేటప్పుడు లోపం.",
+            "description": "[లోపం] Tab జోడించేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+        },
+        "error_removing_other_tabs": {
+            "message": "ఇతర Tabs తీసివేసేటప్పుడు లోపం.",
+            "description": "[లోపం] ఇతర Tabs తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+        },
+        "error_removing_tab": {
+            "message": "Tab తీసివేసేటప్పుడు లోపం.",
+            "description": "[లోపం] Tab తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+        },
+        "error_not_initialized": {
+            "message": "ఇంకా ప్రారంభించబడలేదు.",
+            "description": "[లోపం] వేరియబుల్ సిద్ధంగా లేనప్పుడు సాధారణ లోపం"
+        },
+        "error_unknown_request": {
+            "message": "తెలియని అభ్యర్థన.",
+            "description": "[లోపం] గుర్తించబడని సందేశాన్ని పొందిన తర్వాత సాధారణ లోపం"
+        },
+        "error_invalid_request": {
+            "message": "చెల్లని అభ్యర్థన.",
+            "description": "[లోపం] తప్పుగా ఫార్మాట్ చేయబడిన సందేశాన్ని పొందిన తర్వాత సాధారణ లోపం"
+        },
+        "error_processing_tabs": {
+            "message": "Tabs ప్రాసెసింగ్ లోపం.",
+            "description": "[లోపం] Tabs ప్రాసెస్ చేసేటప్పుడు సాధారణ లోపం"
+        },
+        "error_tab_url_saved": {
+            "message": "ఈ URL తో కూడిన Tab ఇప్పటికే సేవ్ చేయబడింది!",
+            "description": "[లోపం] వినియోగదారు ఇప్పటికే ఇష్టపడిన Tab ను సేవ్ చేయడానికి ప్రయత్నించారు"
+        },
+        "cmd_export_all": {
+            "message": "సేవ్ చేసిన అన్ని Tabs ను экспорт చేయడానికి మోడల్ చూపించు",
+            "description": "[కమాండ్ వివరణ] వినియోగదారు అన్ని Tabs ను export చేయాలనుకుంటున్నారు"
+        },
+        "cmd_import": {
+            "message": "కొత్త Tabs ను импорт చేయడానికి మోడల్ చూపించు",
+            "description": "[కమాండ్ వివరణ] వినియోగదారు కొత్త Tabs ను import చేయాలనుకుంటున్నారు"
+        },
+        "cmd_open_other_org": {
+            "message": "ప్రస్తుత పేజీని మరొక Org లో తెరవడానికి మోడల్ చూపించు",
+            "description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని మరొక Org లో తెరవాలనుకుంటున్నారు"
+        },
+        "cmd_update_tab": {
+            "message": "ప్రస్తుత పేజీని అప్‌డేట్ చేయడానికి మోడల్ చూపించు (సేవ్ చేయబడితే)",
+            "description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని అప్‌డేట్ చేయాలనుకుంటున్నారు"
+        },
+        "cmd_toggle_org": {
+            "message": "ప్రస్తుత పేజీ యొక్క Org విలువను టోగుల్ చేయండి (సేవ్ చేయబడితే)",
+            "description": "[కమాండ్ వివరణ] ప్రస్తుత పేజీ కోసం Org ని టోగుల్ చేయాలనుకుంటున్నారు"
+        },
+        "cmd_remove_tab": {
+            "message": "Tab జాబితా నుండి ప్రస్తుత పేజీని తీసివేయండి (సేవ్ చేయబడితే)",
+            "description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని తీసివేయాలనుకుంటున్నారు"
+        },
+        "cmd_save_as_tab": {
+            "message": "Tab జాబితాలో ప్రస్తుత పేజీని సేవ్ చేయండి (సేవ్ చేయబడకపోతే)",
+            "description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని సేవ్ చేయాలనుకుంటున్నారు"
+        },
+        "drop": {
+            "message": "వదలండి",
+            "description": "[ఇంపోర్ట్] వినియోగదారు తమ ఫైళ్ళను నిర్దిష్ట ప్రాంతంలో వదలడానికి అనుమతించండి"
+        },
+        "open_settings": {
+            "message": "పొడిగింపు సెట్టింగ్‌లను తెరవండి",
+            "description": "[పాపప్] సెట్టింగ్‌ల పేజీకి దారి మళ్లించడానికి బటన్"
+        },
 	"allow": {
 		"message": "అనుమతించండి",
 		"description": "[req_permission] అనుమతులు ఇవ్వడానికి బటన్"

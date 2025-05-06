@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "new TranslationService() ની જગ્યાએ TranslationService.create() નો ઉપયોગ કરો",
+    "description": "[error] ડેવલપરને TranslationService વર્ગ કેવી રીતે ઉપયોગ કરવો તે જણાવો"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator હજી ઈનિશિયલાઈઝ થયું નથી.",
+    "description": "[error] TranslationService રેડી નથી"
+  },
+  "error_many_tabs_found": {
+    "message": "એક કરતા વધુ Tab મળ્યાં.",
+    "description": "[error] એકથી વધુ Tabs રીટ્રીવ થયા"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "new TabContainer() ની જગ્યાએ TabContainer.create() નો ઉપયોગ કરો",
+    "description": "[error] ડેવલપરને TabContainer વર્ગ કેવી રીતે ઉપયોગ કરવું તે જણાવો"
+  },
+  "error_tab_constructor": {
+    "message": "new Tab() ની જગ્યાએ Tab.create() નો ઉપયોગ કરો",
+    "description": "[error] ડેવલપરને Tab વર્ગ કેવી રીતે ઉપયોગ કરવું તે જણાવો"
+  },
+  "error_redirect": {
+    "message": "ફરીથી દિશા નિર્દેશ કરી શકાતો નથી. કૃપા કરીને પાનું રીફ્રેશ કરો.",
+    "description": "[error] પાનું રિડાયરેક્ટ કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_failed_sync": {
+    "message": "સિંક નિષ્ફળ થયું.",
+    "description": "[error] Tabs યૂઝર સાથે સિંક કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_removing_all_tabs": {
+    "message": "તમામ Tabs દૂર કરતી વખતે ભૂલ.",
+    "description": "[error] તમામ Tabs દૂર કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_removing_generic_tabs": {
+    "message": "જનરિક Tabs દૂર કરતી વખતે ભૂલ.",
+    "description": "[error] જનરિક Tabs દૂર કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_adding_tab": {
+    "message": "Tab ઉમેરતી વખતે ભૂલ.",
+    "description": "[error] Tab ઉમેરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_removing_other_tabs": {
+    "message": "બીજી Tabs દૂર કરતી વખતે ભૂલ.",
+    "description": "[error] બીજી Tabs દૂર કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_removing_tab": {
+    "message": "Tab દૂર કરતી વખતે ભૂલ.",
+    "description": "[error] Tab દૂર કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_not_initialized": {
+    "message": "હજી ઈનિશિયલાઈઝ થયું નથી.",
+    "description": "[error] વેરિએબલ તૈયાર નથી ત્યારે સામાન્ય ભૂલ"
+  },
+  "error_unknown_request": {
+    "message": "અજ્ઞાત વિનંતી.",
+    "description": "[error] અજ્ઞાત સંદેશ મળ્યા પછી સામાન્ય ભૂલ"
+  },
+  "error_invalid_request": {
+    "message": "અમાન્ય વિનંતી.",
+    "description": "[error] ખોટા ફોર્મેટમાં સંદેશા મળ્યા પછી સામાન્ય ભૂલ"
+  },
+  "error_processing_tabs": {
+    "message": "Tabs પ્રક્રિયા કરતી વખતે ભૂલ.",
+    "description": "[error] Tabs પ્રક્રિયા કરતી વખતે સામાન્ય ભૂલ"
+  },
+  "error_tab_url_saved": {
+    "message": "આ URL સાથેનું Tab પહેલેથી જ સંગ્રહિત છે!",
+    "description": "[error] વપરાશકર્તાએ પહેલેથી જ સંગ્રહિત Tab સંગ્રહિત કરવાનો પ્રયાસ કર્યો"
+  },
+  "cmd_export_all": {
+    "message": "બધા સંગ્રહિત Tabs નિકાસ કરવા માટે મોડલ દેખાવો",
+    "description": "[command description] વપરાશકર્તા બધા Tabs નિકાસ કરવા માંગે છે"
+  },
+  "cmd_import": {
+    "message": "નવા Tabs આયાત કરવા માટે મોડલ દેખાવો",
+    "description": "[command description] વપરાશકર્તા નવા Tabs આયાત કરવા માંગે છે"
+  },
+  "cmd_open_other_org": {
+    "message": "વર્તમાન પાનું અન્ય Org માં ખોલવા માટે મોડલ દેખાવો",
+    "description": "[command description] વપરાશકર્તા વર્તમાન પાનું અન્ય Org માં ખોલવા માંગે છે"
+  },
+  "cmd_update_tab": {
+    "message": "વર્તમાન પાનું (જો સાચવેલું હોય) અપડેટ કરવા માટે મોડલ દેખાવો",
+    "description": "[command description] વપરાશકર્તા વર્તમાન પાનું અપડેટ કરવા માંગે છે"
+  },
+  "cmd_toggle_org": {
+    "message": "વર્તમાન પાનુંનું Org મૂલ્ય ફેરવવા માટે મોડલ દેખાવો",
+    "description": "[command description] વપરાશકર્તા વર્તમાન પાનુંનું Org મૂલ્ય ફેરવવા માંગે છે"
+  },
+  "cmd_remove_tab": {
+    "message": "વર્તમાન પાનું Tabs યાદીમાંથી દૂર કરો (જો સાચવેલું હોય)",
+    "description": "[command description] વપરાશકર્તા વર્તમાન પાનું દૂર કરવા માંગે છે"
+  },
+  "cmd_save_as_tab": {
+    "message": "વર્તમાન પાનું Tabs યાદીમાં સાચવો (જો સાચવેલું નહોતું)",
+    "description": "[command description] વપરાશકર્તા વર્તમાન પાનું સાચવવા માંગે છે"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] વપરાશકર્તાને નિર્ધારિત વિસ્તારમાં તેની ફાઇલો ડ્રોપ કરવાની મંજૂરી આપે છે"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] સેટિંગ્સ પૃષ્ઠ પર પુનઃનિર્દેશ કરવા માટે બટન"
+  },
 	"allow": {
 		"message": "અનુમતિ આપો",
 		"description": "[req_permission] પરવાનગી આપવાનું બટન"

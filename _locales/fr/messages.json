@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Utilisez TranslationService.create() au lieu de new TranslationService()",
+            "description": "[erreur] indiquer au développeur comment utiliser la classe TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "le traducteur n'était pas encore initialisé.",
+            "description": "[erreur] le TranslationService n'était pas prêt"
+        },
+        "error_many_tabs_found": {
+            "message": "Trouvé plus d'un Tab.",
+            "description": "[erreur] plusieurs Tabs ont été récupérés"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Utilisez TabContainer.create() au lieu de new TabContainer()",
+            "description": "[erreur] indiquer au développeur comment utiliser la classe TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Utilisez Tab.create() au lieu de new Tab()",
+            "description": "[erreur] indiquer au développeur comment utiliser la classe Tab"
+        },
+        "error_redirect": {
+            "message": "Impossible de rediriger. Veuillez rafraîchir la page.",
+            "description": "[erreur] Erreur générique lors de la redirection de page."
+        },
+        "error_failed_sync": {
+            "message": "Échec de la synchronisation.",
+            "description": "[erreur] Erreur générique lorsque les Tabs n'ont pas pu être synchronisés par l'utilisateur"
+        },
+        "error_removing_all_tabs": {
+            "message": "Erreur lors de la suppression de tous les Tabs.",
+            "description": "[erreur] Erreur générique utilisée lors de la suppression de tous les Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Erreur lors de la suppression de Tabs génériques.",
+            "description": "[erreur] Erreur générique utilisée lors de la suppression de Tabs génériques"
+        },
+        "error_adding_tab": {
+            "message": "Erreur lors de l'ajout de Tab.",
+            "description": "[erreur] Erreur générique utilisée lors de l'ajout d'un Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Erreur lors de la suppression d'autres Tabs.",
+            "description": "[erreur] Erreur générique utilisée lors de la suppression d'autres Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Erreur lors de la suppression de Tab.",
+            "description": "[erreur] Erreur générique utilisée lors de la suppression d'un Tab"
+        },
+        "error_not_initialized": {
+            "message": "n'était pas encore initialisé.",
+            "description": "[erreur] Erreur générique lorsqu'une variable n'est pas prête"
+        },
+        "error_unknown_request": {
+            "message": "Requête inconnue.",
+            "description": "[erreur] Erreur générique après avoir reçu un message non reconnu"
+        },
+        "error_invalid_request": {
+            "message": "Requête invalide.",
+            "description": "[erreur] Erreur générique après avoir reçu un message mal formaté"
+        },
+        "error_processing_tabs": {
+            "message": "Erreur lors du traitement des Tabs.",
+            "description": "[erreur] Erreur générique lors du traitement des Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Un Tab avec cette URL a déjà été enregistré !",
+            "description": "[erreur] L'utilisateur a essayé d'enregistrer un Tab déjà favori"
+        },
+        "cmd_export_all": {
+            "message": "Afficher le modal pour exporter tous les Tabs enregistrés",
+            "description": "[description de commande] l'utilisateur veut exporter tous les Tabs"
+        },
+        "cmd_import": {
+            "message": "Afficher le modal pour importer de nouveaux Tabs",
+            "description": "[description de commande] l'utilisateur veut importer de nouveaux Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Afficher le modal pour ouvrir la page actuelle dans une autre Org",
+            "description": "[description de commande] l'utilisateur veut ouvrir la page actuelle dans une autre Org"
+        },
+        "cmd_update_tab": {
+            "message": "Afficher le modal pour mettre à jour la page actuelle (si enregistrée)",
+            "description": "[description de commande] l'utilisateur veut mettre à jour la page actuelle"
+        },
+        "cmd_toggle_org": {
+            "message": "Basculer la valeur de l'Org de la page actuelle (si enregistrée)",
+            "description": "[description de commande] l'utilisateur veut basculer l'Org pour la page actuelle"
+        },
+        "cmd_remove_tab": {
+            "message": "Retirer la page actuelle de la liste des Tabs (si enregistrée)",
+            "description": "[description de commande] l'utilisateur veut retirer la page actuelle"
+        },
+        "cmd_save_as_tab": {
+            "message": "Enregistrer la page actuelle dans la liste des Tabs (si non enregistrée)",
+            "description": "[description de commande] l'utilisateur veut enregistrer la page actuelle"
+        },
+        "drop": {
+            "message": "Déposer",
+            "description": "[import] laisser l'utilisateur déposer ses fichiers sur la zone spécifiée"
+        },
+        "open_settings": {
+            "message": "Ouvrir les paramètres de l'extension",
+            "description": "[popup] bouton pour rediriger vers la page des paramètres"
+        },
 	"allow": {
 		"message": "Autoriser",
 		"description": "[req_permission] Bouton pour autoriser les permissions"

@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Използвайте TranslationService.create() вместо new TranslationService()",
+    "description": "[error] Информирайте разработчика как да използва класа TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator все още не е инициализиран.",
+    "description": "[error] TranslationService не е бил готов"
+  },
+  "error_many_tabs_found": {
+    "message": "Намерени са повече от един Tab.",
+    "description": "[error] Върнати са множество Tabs"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Използвайте TabContainer.create() вместо new TabContainer()",
+    "description": "[error] Информирайте разработчика как да използва класа TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Използвайте Tab.create() вместо new Tab()",
+    "description": "[error] Информирайте разработчика как да използва класа Tab"
+  },
+  "error_redirect": {
+    "message": "Не може да се пренасочи. Моля, презаредете страницата.",
+    "description": "[error] Общa грешка при пренасочване на страница"
+  },
+  "error_failed_sync": {
+    "message": "Синхронизацията се провали.",
+    "description": "[error] Общa грешка при синхронизиране на Tabs с потребителя"
+  },
+  "error_removing_all_tabs": {
+    "message": "Грешка при премахване на всички Tabs.",
+    "description": "[error] Общa грешка при премахване на всички Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Грешка при премахване на обобщени Tabs.",
+    "description": "[error] Общa грешка при премахване на обобщени Tabs"
+  },
+  "error_adding_tab": {
+    "message": "Грешка при добавяне на Tab.",
+    "description": "[error] Общa грешка при добавяне на Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "Грешка при премахване на други Tabs.",
+    "description": "[error] Общa грешка при премахване на други Tabs"
+  },
+  "error_removing_tab": {
+    "message": "Грешка при премахване на Tab.",
+    "description": "[error] Общa грешка при премахване на Tab"
+  },
+  "error_not_initialized": {
+    "message": "Все още не е инициализиран.",
+    "description": "[error] Общa грешка когато променлива не е готова"
+  },
+  "error_unknown_request": {
+    "message": "Непознато запитване.",
+    "description": "[error] Общa грешка след получаване на непознато съобщение"
+  },
+  "error_invalid_request": {
+    "message": "Невалидно запитване.",
+    "description": "[error] Общa грешка след получаване на съобщение с неправилен формат"
+  },
+  "error_processing_tabs": {
+    "message": "Грешка при обработка на Tabs.",
+    "description": "[error] Общa грешка при обработка на Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Tab с този URL вече е запазен!",
+    "description": "[error] Потребителят се опита да запази вече запазен Tab"
+  },
+  "cmd_export_all": {
+    "message": "Покажи модал за експортиране на всички запазени Tabs",
+    "description": "[command description] потребителят иска да експортира всички Tabs"
+  },
+  "cmd_import": {
+    "message": "Покажи модал за импортиране на нови Tabs",
+    "description": "[command description] потребителят иска да импортира нови Tabs"
+  },
+  "cmd_open_other_org": {
+    "message": "Покажи модал за отваряне на текущата страница в друга Org",
+    "description": "[command description] потребителят иска да отвори текущата страница в друга Org"
+  },
+  "cmd_update_tab": {
+    "message": "Покажи модал за обновяване на текущата страница (ако е запазена)",
+    "description": "[command description] потребителят иска да обнови текущата страница"
+  },
+  "cmd_toggle_org": {
+    "message": "Покажи модал за превключване на стойността на Org на текущата страница (ако е запазена)",
+    "description": "[command description] потребителят иска да превключи Org на текущата страница"
+  },
+  "cmd_remove_tab": {
+    "message": "Премахни текущата страница от списъка с Tabs (ако е запазена)",
+    "description": "[command description] потребителят иска да премахне текущата страница"
+  },
+  "cmd_save_as_tab": {
+    "message": "Запази текущата страница в списъка с Tabs (ако не е запазена)",
+    "description": "[command description] потребителят иска да запази текущата страница"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] позволява на потребителя да плъзне файловете си в определената зона"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] бутон, който пренасочва към страницата с настройки"
+  },
 	"allow": {
 		"message": "Позволи",
 		"description": "[req_permission] бутон за разрешаване на права"

@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Use TranslationService.create() em vez de new TranslationService() para usar a classe TranslationService",
+            "description": "[erro] diga ao desenvolvedor como usar a classe TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "o tradutor ainda não foi inicializado.",
+            "description": "[erro] o TranslationService não estava pronto"
+        },
+        "error_many_tabs_found": {
+            "message": "Encontrado mais de um Tab.",
+            "description": "[erro] muitos Tabs foram recuperados"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Use TabContainer.create() em vez de new TabContainer() para usar a classe TabContainer",
+            "description": "[erro] diga ao desenvolvedor como usar a classe TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Use Tab.create() em vez de new Tab() para usar a classe Tab",
+            "description": "[erro] diga ao desenvolvedor como usar a classe Tab"
+        },
+        "error_redirect": {
+            "message": "Não é possível redirecionar. Por favor, atualize a página.",
+            "description": "[erro] Erro genérico no redirecionamento de página."
+        },
+        "error_failed_sync": {
+            "message": "Falha ao sincronizar.",
+            "description": "[erro] Erro genérico quando os Tabs não puderam ser sincronizados do usuário"
+        },
+        "error_removing_all_tabs": {
+            "message": "Erro ao remover todos os Tabs.",
+            "description": "[erro] Erro genérico usado ao remover todos os Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Erro ao remover Tabs genéricos.",
+            "description": "[erro] Erro genérico usado ao remover Tabs genéricos"
+        },
+        "error_adding_tab": {
+            "message": "Erro ao adicionar Tab.",
+            "description": "[erro] Erro genérico usado ao adicionar um Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Erro ao remover outros Tabs.",
+            "description": "[erro] Erro genérico usado ao remover outros Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Erro ao remover Tab.",
+            "description": "[erro] Erro genérico usado ao remover um Tab"
+        },
+        "error_not_initialized": {
+            "message": "não foi inicializado ainda.",
+            "description": "[erro] Erro genérico para quando uma variável não está pronta"
+        },
+        "error_unknown_request": {
+            "message": "Solicitação desconhecida.",
+            "description": "[erro] Erro genérico após receber uma mensagem que não foi reconhecida"
+        },
+        "error_invalid_request": {
+            "message": "Solicitação inválida.",
+            "description": "[erro] Erro genérico após receber uma mensagem mal formatada"
+        },
+        "error_processing_tabs": {
+            "message": "Erro ao processar Tabs.",
+            "description": "[erro] Erro genérico ao processar os Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Uma Tab com esta URL já foi salva!",
+            "description": "[erro] O usuário tentou salvar um Tab já favoritado"
+        },
+        "cmd_export_all": {
+            "message": "Mostrar o modal para exportar todos os Tabs salvos",
+            "description": "[descrição do comando] o usuário quer exportar todos os Tabs"
+        },
+        "cmd_import": {
+            "message": "Mostrar o modal para importar novos Tabs",
+            "description": "[descrição do comando] o usuário quer importar novos Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Mostrar o modal para abrir a página atual em outra Org",
+            "description": "[descrição do comando] o usuário quer abrir a página atual em outra Org"
+        },
+        "cmd_update_tab": {
+            "message": "Mostrar modal para atualizar a página atual (se salva)",
+            "description": "[descrição do comando] o usuário quer atualizar a página atual"
+        },
+        "cmd_toggle_org": {
+            "message": "Alternar o valor da Org da página atual (se salvo)",
+            "description": "[descrição do comando] o usuário quer alternar a Org para a página atual"
+        },
+        "cmd_remove_tab": {
+            "message": "Remover a página atual da lista de Tabs (se salva)",
+            "description": "[descrição do comando] o usuário quer remover a página atual"
+        },
+        "cmd_save_as_tab": {
+            "message": "Salvar a página atual na lista de Tabs (se não salva)",
+            "description": "[descrição do comando] o usuário quer salvar a página atual"
+        },
+        "drop": {
+            "message": "Soltar",
+            "description": "[import] permitir que o usuário solte seus arquivos na área especificada"
+        },
+        "open_settings": {
+            "message": "Abrir Configurações da Extensão",
+            "description": "[popup] botão para redirecionar para a página de configurações"
+        },
 	"allow": {
 		"message": "Permitir",
 		"description": "[req_permissão] botão para permitir permissões"

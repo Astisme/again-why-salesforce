@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "TranslationService வகுப்பைப் பயன்படுத்த new TranslationService() பதிலாக TranslationService.create() ஐப் பயன்படுத்தவும்",
+            "description": "[பிழை] TranslationService வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+        },
+        "error_translator_not_initialized": {
+            "message": "மொழிபெயர்ப்பாளர் இன்னும் தொடங்கப்படவில்லை.",
+            "description": "[பிழை] TranslationService தயாராக இல்லை"
+        },
+        "error_many_tabs_found": {
+            "message": "ஒன்றுக்கு மேற்பட்ட Tab கண்டறியப்பட்டது.",
+            "description": "[பிழை] பல Tabs பெறப்பட்டது"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "TabContainer வகுப்பைப் பயன்படுத்த new TabContainer() பதிலாக TabContainer.create() ஐப் பயன்படுத்தவும்",
+            "description": "[பிழை] TabContainer வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+        },
+        "error_tab_constructor": {
+            "message": "Tab வகுப்பைப் பயன்படுத்த new Tab() பதிலாக Tab.create() ஐப் பயன்படுத்தவும்",
+            "description": "[பிழை] Tab வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+        },
+        "error_redirect": {
+            "message": "திசைதிருப்ப முடியாது. தயவுசெய்து பக்கத்தை புதுப்பிக்கவும்.",
+            "description": "[பிழை] பக்க வழிமாற்றத்தில் உள்ள பொதுவான பிழை."
+        },
+        "error_failed_sync": {
+            "message": "ஒத்திசைக்கத் தவறிவிட்டது.",
+            "description": "[பிழை] பயனரிடமிருந்து Tabs ஒத்திசைக்க முடியாதபோது பொதுவான பிழை"
+        },
+        "error_removing_all_tabs": {
+            "message": "அனைத்து Tabs நீக்கும்போது பிழை.",
+            "description": "[பிழை] அனைத்து Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+        },
+        "error_removing_generic_tabs": {
+            "message": "பொதுவான Tabs நீக்கும்போது பிழை.",
+            "description": "[பிழை] பொதுவான Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+        },
+        "error_adding_tab": {
+            "message": "Tab சேர்க்கும்போது பிழை.",
+            "description": "[பிழை] Tab சேர்க்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+        },
+        "error_removing_other_tabs": {
+            "message": "பிற Tabs நீக்கும்போது பிழை.",
+            "description": "[பிழை] பிற Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+        },
+        "error_removing_tab": {
+            "message": "Tab நீக்கும்போது பிழை.",
+            "description": "[பிழை] Tab நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+        },
+        "error_not_initialized": {
+            "message": "இன்னும் தொடங்கப்படவில்லை.",
+            "description": "[பிழை] மாறி தயாராக இல்லாதபோது பொதுவான பிழை"
+        },
+        "error_unknown_request": {
+            "message": "அறியப்படாத கோரிக்கை.",
+            "description": "[பிழை] அறியப்படாத செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
+        },
+        "error_invalid_request": {
+            "message": "தவறான கோரிக்கை.",
+            "description": "[பிழை] தவறாக வடிவமைக்கப்பட்ட செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
+        },
+        "error_processing_tabs": {
+            "message": "Tabs செயலாக்கப் பிழை.",
+            "description": "[பிழை] Tabs செயல்படுத்தும்போது பொதுவான பிழை"
+        },
+        "error_tab_url_saved": {
+            "message": "இந்த URL உடன் ஒரு Tab ஏற்கனவே சேமிக்கப்பட்டுள்ளது!",
+            "description": "[பிழை] பயனர் ஏற்கனவே விரும்பிய Tab ஐ சேமிக்க முயன்றார்"
+        },
+        "cmd_export_all": {
+            "message": "சேமிக்கப்பட்ட அனைத்து Tabs ஐயும் экспоர்ட் செய்ய modal ஐக் காட்டு",
+            "description": "[கட்டளை விளக்கம்] பயனர் அனைத்து Tabs ஐயும் ஏற்றுமதி செய்ய விரும்புகிறார்"
+        },
+        "cmd_import": {
+            "message": "புதிய Tabs ஐ импорт செய்ய modal ஐக் காட்டு",
+            "description": "[கட்டளை விளக்கம்] பயனர் புதிய Tabs ஐ இறக்குமதி செய்ய விரும்புகிறார்"
+        },
+        "cmd_open_other_org": {
+            "message": "தற்போதைய பக்கத்தை மற்றொரு Org இல் திறக்க modal ஐக் காட்டு",
+            "description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை மற்றொரு Org இல் திறக்க விரும்புகிறார்"
+        },
+        "cmd_update_tab": {
+            "message": "தற்போதைய பக்கத்தை புதுப்பிக்க modal ஐக் காட்டு (சேமிக்கப்பட்டிருந்தால்)",
+            "description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை புதுப்பிக்க விரும்புகிறார்"
+        },
+        "cmd_toggle_org": {
+            "message": "தற்போதைய பக்கத்தின் Org மதிப்பை மாற்று (சேமிக்கப்பட்டிருந்தால்)",
+            "description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்திற்கான Org ஐ மாற்ற விரும்புகிறார்"
+        },
+        "cmd_remove_tab": {
+            "message": "Tab பட்டியலிலிருந்து தற்போதைய பக்கத்தை அகற்று (சேமிக்கப்பட்டிருந்தால்)",
+            "description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை அகற்ற விரும்புகிறார்"
+        },
+        "cmd_save_as_tab": {
+            "message": "Tab பட்டியலில் தற்போதைய பக்கத்தை சேமி (சேமிக்கப்படாவிட்டால்)",
+            "description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை சேமிக்க விரும்புகிறார்"
+        },
+        "drop": {
+            "message": "இழுத்து விடு",
+            "description": "[இறக்குமதி] பயனர் தங்கள் கோப்புகளை குறிப்பிட்ட பகுதிக்கு இழுத்து விட அனுமதிக்கவும்"
+        },
+        "open_settings": {
+            "message": "நீட்டிப்பு அமைப்புகளைத் திறக்கவும்",
+            "description": "[பாப்அப்] அமைப்புகள் பக்கத்திற்குத் திசைதிருப்ப பொத்தான்"
+        },
 	"allow": {
 		"message": "அனுமதி",
 		"description": "[req_permission] அனுமதிகளை அனுமதிக்க பொத்தான்"

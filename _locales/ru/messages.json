@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Используйте TranslationService.create() вместо new TranslationService() для использования класса TranslationService",
+            "description": "[ошибка] сообщить разработчику, как использовать класс TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "переводчик еще не был инициализирован.",
+            "description": "[ошибка] TranslationService не был готов"
+        },
+        "error_many_tabs_found": {
+            "message": "Найдено более одного Tab.",
+            "description": "[ошибка] было получено много Tabs"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Используйте TabContainer.create() вместо new TabContainer() для использования класса TabContainer",
+            "description": "[ошибка] сообщить разработчику, как использовать класс TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Используйте Tab.create() вместо new Tab() для использования класса Tab",
+            "description": "[ошибка] сообщить разработчику, как использовать класс Tab"
+        },
+        "error_redirect": {
+            "message": "Не удается перенаправить. Пожалуйста, обновите страницу.",
+            "description": "[ошибка] Общая ошибка при перенаправлении страницы."
+        },
+        "error_failed_sync": {
+            "message": "Не удалось sincronizar.",
+            "description": "[ошибка] Общая ошибка, когда Tabs не удалось синхронизировать с пользователем"
+        },
+        "error_removing_all_tabs": {
+            "message": "Ошибка при удалении всех Tabs.",
+            "description": "[ошибка] Общая ошибка, используемая при удалении всех Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Ошибка при удалении общих Tabs.",
+            "description": "[ошибка] Общая ошибка, используемая при удалении общих Tabs"
+        },
+        "error_adding_tab": {
+            "message": "Ошибка при добавлении Tab.",
+            "description": "[ошибка] Общая ошибка, используемая при добавлении Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Ошибка при удалении других Tabs.",
+            "description": "[ошибка] Общая ошибка, используемая при удалении других Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Ошибка при удалении Tab.",
+            "description": "[ошибка] Общая ошибка, используемая при удалении Tab"
+        },
+        "error_not_initialized": {
+            "message": "еще не был инициализирован.",
+            "description": "[ошибка] Общая ошибка, когда переменная не готова"
+        },
+        "error_unknown_request": {
+            "message": "Неизвестный запрос.",
+            "description": "[ошибка] Общая ошибка после получения неопознанного сообщения"
+        },
+        "error_invalid_request": {
+            "message": "Недопустимый запрос.",
+            "description": "[ошибка] Общая ошибка после получения сообщения с неверным форматом"
+        },
+        "error_processing_tabs": {
+            "message": "Ошибка обработки Tabs.",
+            "description": "[ошибка] Общая ошибка при обработке Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab с этим URL уже сохранен!",
+            "description": "[ошибка] Пользователь попытался сохранить уже добавленный в избранное Tab"
+        },
+        "cmd_export_all": {
+            "message": "Показать модальное окно для экспорта всех сохраненных Tabs",
+            "description": "[описание команды] пользователь хочет экспортировать все Tabs"
+        },
+        "cmd_import": {
+            "message": "Показать модальное окно для импорта новых Tabs",
+            "description": "[описание команды] пользователь хочет импортировать новые Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Показать модальное окно для открытия текущей страницы в другом Org",
+            "description": "[описание команды] пользователь хочет открыть текущую страницу в другом Org"
+        },
+        "cmd_update_tab": {
+            "message": "Показать модальное окно для обновления текущей страницы (если сохранена)",
+            "description": "[описание команды] пользователь хочет обновить текущую страницу"
+        },
+        "cmd_toggle_org": {
+            "message": "Переключить значение Org текущей страницы (если сохранено)",
+            "description": "[описание команды] пользователь хочет переключить Org для текущей страницы"
+        },
+        "cmd_remove_tab": {
+            "message": "Удалить текущую страницу из списка Tabs (если сохранена)",
+            "description": "[описание команды] пользователь хочет удалить текущую страницу"
+        },
+        "cmd_save_as_tab": {
+            "message": "Сохранить текущую страницу в списке Tabs (если не сохранена)",
+            "description": "[описание команды] пользователь хочет сохранить текущую страницу"
+        },
+        "drop": {
+            "message": "Перетащить",
+            "description": "[импорт] позволить пользователю перетаскивать свои файлы в указанную область"
+        },
+        "open_settings": {
+            "message": "Открыть Настройки Расширения",
+            "description": "[всплывающее окно] кнопка для перенаправления на страницу настроек"
+        },
 	"allow": {
 		"message": "Разрешить",
 		"description": "[req_permission] Кнопка для предоставления разрешений"

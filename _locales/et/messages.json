@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Kasuta TranslationService.create() asemel new TranslationService()",
+    "description": "[error] Teavita arendajat, kuidas kasutada TranslationService klassi"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator pole veel initsialiseeritud.",
+    "description": "[error] TranslationService ei olnud veel valmis"
+  },
+  "error_many_tabs_found": {
+    "message": "Leiti rohkem kui üks Tab.",
+    "description": "[error] Tagastati mitu Tabsi"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Kasuta TabContainer.create() asemel new TabContainer()",
+    "description": "[error] Teavita arendajat, kuidas kasutada TabContainer klassi"
+  },
+  "error_tab_constructor": {
+    "message": "Kasuta Tab.create() asemel new Tab()",
+    "description": "[error] Teavita arendajat, kuidas kasutada Tab klassi"
+  },
+  "error_redirect": {
+    "message": "Ümbersuunamine ebaõnnestus. Palun värskenda lehte.",
+    "description": "[error] Üldine viga lehe ümbersuunamisel"
+  },
+  "error_failed_sync": {
+    "message": "Sünkroonimine ebaõnnestus.",
+    "description": "[error] Üldine viga Tabside kasutajaga sünkroonimisel"
+  },
+  "error_removing_all_tabs": {
+    "message": "Viga kõigi Tabside eemaldamisel.",
+    "description": "[error] Üldine viga kõigi Tabside eemaldamisel"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Viga üldiste Tabside eemaldamisel.",
+    "description": "[error] Üldine viga üldiste Tabside eemaldamisel"
+  },
+  "error_adding_tab": {
+    "message": "Viga Tabsi lisamisel.",
+    "description": "[error] Üldine viga Tabsi lisamisel"
+  },
+  "error_removing_other_tabs": {
+    "message": "Viga teiste Tabside eemaldamisel.",
+    "description": "[error] Üldine viga teiste Tabside eemaldamisel"
+  },
+  "error_removing_tab": {
+    "message": "Viga Tabsi eemaldamisel.",
+    "description": "[error] Üldine viga Tabsi eemaldamisel"
+  },
+  "error_not_initialized": {
+    "message": "Pole veel initsialiseeritud.",
+    "description": "[error] Üldine viga muutuja ettevalmistatumisel"
+  },
+  "error_unknown_request": {
+    "message": "Tundmatu päring.",
+    "description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
+  },
+  "error_invalid_request": {
+    "message": "Kehtetu päring.",
+    "description": "[error] Üldine viga pärast valesti vormindatud sõnumi vastuvõttu"
+  },
+  "error_processing_tabs": {
+    "message": "Viga Tabside töötlemisel.",
+    "description": "[error] Üldine viga Tabside töötlemisel"
+  },
+  "error_tab_url_saved": {
+    "message": "Selle URL-iga Tab on juba salvestatud!",
+    "description": "[error] Kasutaja üritas salvestada juba salvestatud Tabsi"
+  },
+  "cmd_export_all": {
+    "message": "Kuva dialoog kõigi salvestatud Tabside eksportimiseks",
+    "description": "[command description] kasutaja soovib eksportida kõiki Tabse"
+  },
+  "cmd_import": {
+    "message": "Kuva dialoog uute Tabside importimiseks",
+    "description": "[command description] kasutaja soovib importida uusi Tabse"
+  },
+  "cmd_open_other_org": {
+    "message": "Kuva dialoog praeguse lehe avamiseks teises Org-is",
+    "description": "[command description] kasutaja soovib avada praeguse lehe teises Org-is"
+  },
+  "cmd_update_tab": {
+    "message": "Kuva dialoog praeguse lehe värskendamiseks (kui salvestatud)",
+    "description": "[command description] kasutaja soovib värskendada praegust lehte"
+  },
+  "cmd_toggle_org": {
+    "message": "Kuva dialoog Org väärtuse vahetamiseks praegusel lehel (kui salvestatud)",
+    "description": "[command description] kasutaja soovib vahetada Org väärtust praegusel lehel"
+  },
+  "cmd_remove_tab": {
+    "message": "Eemalda praegune leht Tabside loendist (kui salvestatud)",
+    "description": "[command description] kasutaja soovib eemaldada praeguse lehe"
+  },
+  "cmd_save_as_tab": {
+    "message": "Salvesta praegune leht Tabside loendisse (kui pole salvestatud)",
+    "description": "[command description] kasutaja soovib salvestada praeguse lehe"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] lubab kasutajal lohistada oma faile määratud alale"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] nupp, mis suunab seadete lehele"
+  },
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"

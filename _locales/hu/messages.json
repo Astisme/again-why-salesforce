@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Használd a TranslationService.create() metódust a new TranslationService() helyett",
+    "description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a TranslationService osztályt"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator még nincs inicializálva.",
+    "description": "[error] A TranslationService még nem volt készen"
+  },
+  "error_many_tabs_found": {
+    "message": "Több mint egy Tab található.",
+    "description": "[error] Több Tab került lekérésre"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Használd a TabContainer.create() metódust a new TabContainer() helyett",
+    "description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a TabContainer osztályt"
+  },
+  "error_tab_constructor": {
+    "message": "Használd a Tab.create() metódust a new Tab() helyett",
+    "description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a Tab osztályt"
+  },
+  "error_redirect": {
+    "message": "Átirányítás nem lehetséges. Kérlek, frissítsd az oldalt.",
+    "description": "[error] Általános hiba az oldal átirányításakor"
+  },
+  "error_failed_sync": {
+    "message": "Szinkronizálás sikertelen.",
+    "description": "[error] Általános hiba a Tab-ek felhasználóval való szinkronizálásakor"
+  },
+  "error_removing_all_tabs": {
+    "message": "Hiba az összes Tab eltávolításakor.",
+    "description": "[error] Általános hiba az összes Tab eltávolításakor"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Hiba az általános Tab-ek eltávolításakor.",
+    "description": "[error] Általános hiba az általános Tab-ek eltávolításakor"
+  },
+  "error_adding_tab": {
+    "message": "Hiba Tab hozzáadásakor.",
+    "description": "[error] Általános hiba Tab hozzáadásakor"
+  },
+  "error_removing_other_tabs": {
+    "message": "Hiba más Tab-ek eltávolításakor.",
+    "description": "[error] Általános hiba más Tab-ek eltávolításakor"
+  },
+  "error_removing_tab": {
+    "message": "Hiba Tab eltávolításakor.",
+    "description": "[error] Általános hiba Tab eltávolításakor"
+  },
+  "error_not_initialized": {
+    "message": "Még nincs inicializálva.",
+    "description": "[error] Általános hiba, ha egy változó nem készült el"
+  },
+  "error_unknown_request": {
+    "message": "Ismeretlen kérés.",
+    "description": "[error] Általános hiba ismeretlen üzenet fogadása után"
+  },
+  "error_invalid_request": {
+    "message": "Érvénytelen kérés.",
+    "description": "[error] Általános hiba helytelen formátumú üzenet fogadása után"
+  },
+  "error_processing_tabs": {
+    "message": "Hiba a Tab-ek feldolgozásakor.",
+    "description": "[error] Általános hiba a Tab-ek feldolgozásakor"
+  },
+  "error_tab_url_saved": {
+    "message": "Ezzel az URL-lel rendelkező Tab már el van mentve!",
+    "description": "[error] A felhasználó már elmentett Tab mentésével próbálkozott"
+  },
+  "cmd_export_all": {
+    "message": "Mutasd a párbeszédet az összes mentett Tab exportálásához",
+    "description": "[command description] a felhasználó az összes Tab exportálását kéri"
+  },
+  "cmd_import": {
+    "message": "Mutasd a párbeszédet új Tab-ek importálásához",
+    "description": "[command description] a felhasználó új Tab-ek importálását kéri"
+  },
+  "cmd_open_other_org": {
+    "message": "Mutasd a párbeszédet az aktuális oldal másik Org-ban való megnyitásához",
+    "description": "[command description] a felhasználó az aktuális oldal másik Org-ban való megnyitását kéri"
+  },
+  "cmd_update_tab": {
+    "message": "Mutasd a párbeszédet az aktuális oldal frissítéséhez (ha el van mentve)",
+    "description": "[command description] a felhasználó az aktuális oldal frissítését kéri"
+  },
+  "cmd_toggle_org": {
+    "message": "Mutasd a párbeszédet az aktuális oldal Org értékének váltásához (ha el van mentve)",
+    "description": "[command description] a felhasználó az aktuális oldal Org értékének váltását kéri"
+  },
+  "cmd_remove_tab": {
+    "message": "Távolítsd el az aktuális oldalt a Tab-listából (ha el van mentve)",
+    "description": "[command description] a felhasználó az aktuális oldal eltávolítását kéri"
+  },
+  "cmd_save_as_tab": {
+    "message": "Mentsd el az aktuális oldalt a Tab-listára (ha még nincs elmentve)",
+    "description": "[command description] a felhasználó az aktuális oldal elmentését kéri"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] lehetővé teszi a felhasználónak, hogy fájljait a megadott területre húzza"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] gomb az átirányításhoz a beállítások oldalra"
+  },
 	"allow": {
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"

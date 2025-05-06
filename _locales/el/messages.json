@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Χρησιμοποιήστε TranslationService.create() αντί για new TranslationService()",
+    "description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "ο μεταφραστής δεν έχει αρχικοποιηθεί ακόμη.",
+    "description": "[error] Η υπηρεσία μετάφρασης δεν ήταν έτοιμη"
+  },
+  "error_many_tabs_found": {
+    "message": "Βρέθηκαν περισσότερα από ένα Tab.",
+    "description": "[error] Επιστράφηκαν πολλά Tabs"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Χρησιμοποιήστε TabContainer.create() αντί για new TabContainer()",
+    "description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Χρησιμοποιήστε Tab.create() αντί για new Tab()",
+    "description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση Tab"
+  },
+  "error_redirect": {
+    "message": "Αδύνατη η ανακατεύθυνση. Παρακαλώ ανανεώστε τη σελίδα.",
+    "description": "[error] Γενικό σφάλμα κατά την ανακατεύθυνση σελίδας"
+  },
+  "error_failed_sync": {
+    "message": "Ο συγχρονισμός απέτυχε.",
+    "description": "[error] Γενικό σφάλμα κατά το συγχρονισμό των Tabs με τον χρήστη"
+  },
+  "error_removing_all_tabs": {
+    "message": "Σφάλμα κατά την αφαίρεση όλων των Tabs.",
+    "description": "[error] Γενικό σφάλμα κατά την αφαίρεση όλων των Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Σφάλμα κατά την αφαίρεση γενικών Tabs.",
+    "description": "[error] Γενικό σφάλμα κατά την αφαίρεση γενικών Tabs"
+  },
+  "error_adding_tab": {
+    "message": "Σφάλμα κατά την προσθήκη Tab.",
+    "description": "[error] Γενικό σφάλμα κατά την προσθήκη Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "Σφάλμα κατά την αφαίρεση άλλων Tabs.",
+    "description": "[error] Γενικό σφάλμα κατά την αφαίρεση άλλων Tabs"
+  },
+  "error_removing_tab": {
+    "message": "Σφάλμα κατά την αφαίρεση Tab.",
+    "description": "[error] Γενικό σφάλμα κατά την αφαίρεση Tab"
+  },
+  "error_not_initialized": {
+    "message": "Δεν έχει αρχικοποιηθεί ακόμη.",
+    "description": "[error] Γενικό σφάλμα όταν μία μεταβλητή δεν είναι έτοιμη"
+  },
+  "error_unknown_request": {
+    "message": "Άγνωστο αίτημα.",
+    "description": "[error] Γενικό σφάλμα μετά τη λήψη άγνωστου μηνύματος"
+  },
+  "error_invalid_request": {
+    "message": "Μη έγκυρο αίτημα.",
+    "description": "[error] Γενικό σφάλμα μετά τη λήψη μηνύματος σε λανθασμένη μορφή"
+  },
+  "error_processing_tabs": {
+    "message": "Σφάλμα κατά την επεξεργασία των Tabs.",
+    "description": "[error] Γενικό σφάλμα κατά την επεξεργασία των Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Ένα Tab με αυτό το URL έχει ήδη αποθηκευτεί!",
+    "description": "[error] Ο χρήστης προσπάθησε να αποθηκεύσει ένα ήδη αποθηκευμένο Tab"
+  },
+  "cmd_export_all": {
+    "message": "Εμφάνιση παραθύρου για εξαγωγή όλων των αποθηκευμένων Tabs",
+    "description": "[command description] ο χρήστης θέλει να εξαγάγει όλα τα Tabs"
+  },
+  "cmd_import": {
+    "message": "Εμφάνιση παραθύρου για εισαγωγή νέων Tabs",
+    "description": "[command description] ο χρήστης θέλει να εισαγάγει νέα Tabs"
+  },
+  "cmd_open_other_org": {
+    "message": "Εμφάνιση παραθύρου για άνοιγμα της τρέχουσας σελίδας σε άλλη Org",
+    "description": "[command description] ο χρήστης θέλει να ανοίξει την τρέχουσα σελίδα σε άλλη Org"
+  },
+  "cmd_update_tab": {
+    "message": "Εμφάνιση παραθύρου για ενημέρωση της τρέχουσας σελίδας (εάν έχει αποθηκευτεί)",
+    "description": "[command description] ο χρήστης θέλει να ενημερώσει την τρέχουσα σελίδα"
+  },
+  "cmd_toggle_org": {
+    "message": "Εμφάνιση παραθύρου για εναλλαγή της τιμής Org της τρέχουσας σελίδας (εάν έχει αποθηκευτεί)",
+    "description": "[command description] ο χρήστης θέλει να εναλλάξει την Org της τρέχουσας σελίδας"
+  },
+  "cmd_remove_tab": {
+    "message": "Αφαίρεση της τρέχουσας σελίδας από τη λίστα Tabs (εάν έχει αποθηκευτεί)",
+    "description": "[command description] ο χρήστης θέλει να αφαιρέσει την τρέχουσα σελίδα"
+  },
+  "cmd_save_as_tab": {
+    "message": "Αποθήκευση της τρέχουσας σελίδας στη λίστα Tabs (εάν δεν έχει αποθηκευτεί)",
+    "description": "[command description] ο χρήστης θέλει να αποθηκεύσει την τρέχουσα σελίδα"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] επιτρέπει στον χρήστη να αποθέσει τα αρχεία του στην καθορισμένη περιοχή"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] κουμπί για ανακατεύθυνση στη σελίδα ρυθμίσεων"
+  },
 	"allow": {
 		"message": "Επιτρέπω",
 		"description": "[αίτηση-άδειας] κουμπί για να επιτρέψετε τις άδειες"

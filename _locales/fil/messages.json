@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Gamitin ang TranslationService.create() sa halip na new TranslationService()",
+    "description": "[error] Ipaalam sa developer kung paano gamitin ang klase na TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "hindi pa na-initialize ang translator.",
+    "description": "[error] Hindi pa handa ang TranslationService"
+  },
+  "error_many_tabs_found": {
+    "message": "Nakita ang higit sa isang Tab.",
+    "description": "[error] Maraming Tabs ang na-retrieve"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Gamitin ang TabContainer.create() sa halip na new TabContainer()",
+    "description": "[error] Ipaalam sa developer kung paano gamitin ang klase na TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Gamitin ang Tab.create() sa halip na new Tab()",
+    "description": "[error] Ipaalam sa developer kung paano gamitin ang klase na Tab"
+  },
+  "error_redirect": {
+    "message": "Hindi ma-redirect. Paki-refresh ang pahina.",
+    "description": "[error] Pangkalahatang error sa pag-redirect ng pahina"
+  },
+  "error_failed_sync": {
+    "message": "Nabigo ang synchronization.",
+    "description": "[error] Pangkalahatang error sa pag-sync ng Tabs sa user"
+  },
+  "error_removing_all_tabs": {
+    "message": "Error sa pagtanggal ng lahat ng Tabs.",
+    "description": "[error] Pangkalahatang error sa pagtanggal ng lahat ng Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Error sa pagtanggal ng generic na Tabs.",
+    "description": "[error] Pangkalahatang error sa pagtanggal ng generic na Tabs"
+  },
+  "error_adding_tab": {
+    "message": "Error sa pagdagdag ng Tab.",
+    "description": "[error] Pangkalahatang error sa pagdagdag ng Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "Error sa pagtanggal ng ibang Tabs.",
+    "description": "[error] Pangkalahatang error sa pagtanggal ng ibang Tabs"
+  },
+  "error_removing_tab": {
+    "message": "Error sa pagtanggal ng Tab.",
+    "description": "[error] Pangkalahatang error sa pagtanggal ng Tab"
+  },
+  "error_not_initialized": {
+    "message": "Hindi pa na-initialize.",
+    "description": "[error] Pangkalahatang error kapag hindi pa handa ang variable"
+  },
+  "error_unknown_request": {
+    "message": "Hindi kilalang kahilingan.",
+    "description": "[error] Pangkalahatang error pagkatapos makatanggap ng hindi kilalang mensahe"
+  },
+  "error_invalid_request": {
+    "message": "Hindi wastong kahilingan.",
+    "description": "[error] Pangkalahatang error pagkatapos makatanggap ng maling format na mensahe"
+  },
+  "error_processing_tabs": {
+    "message": "Error sa pagproseso ng Tabs.",
+    "description": "[error] Pangkalahatang error sa pagproseso ng Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Isang Tab na may URL na ito ay naka-save na!",
+    "description": "[error] Sinubukang i-save ng user ang isang Tab na naka-save na"
+  },
+  "cmd_export_all": {
+    "message": "Ipakita ang modal para i-export ang lahat ng naka-save na Tabs",
+    "description": "[command description] gustong i-export ng user ang lahat ng Tabs"
+  },
+  "cmd_import": {
+    "message": "Ipakita ang modal para mag-import ng bagong Tabs",
+    "description": "[command description] gustong mag-import ng bagong Tabs ang user"
+  },
+  "cmd_open_other_org": {
+    "message": "Ipakita ang modal para buksan ang kasalukuyang pahina sa ibang Org",
+    "description": "[command description] gustong buksan ng user ang kasalukuyang pahina sa ibang Org"
+  },
+  "cmd_update_tab": {
+    "message": "Ipakita ang modal para i-update ang kasalukuyang pahina (kung naka-save)",
+    "description": "[command description] gustong i-update ng user ang kasalukuyang pahina"
+  },
+  "cmd_toggle_org": {
+    "message": "Ipakita ang modal para i-toggle ang Org value ng kasalukuyang pahina (kung naka-save)",
+    "description": "[command description] gustong i-toggle ng user ang Org ng kasalukuyang pahina"
+  },
+  "cmd_remove_tab": {
+    "message": "Tanggalin ang kasalukuyang pahina mula sa listahan ng Tabs (kung naka-save)",
+    "description": "[command description] gustong tanggalin ng user ang kasalukuyang pahina"
+  },
+  "cmd_save_as_tab": {
+    "message": "I-save ang kasalukuyang pahina sa listahan ng Tabs (kung hindi pa naka-save)",
+    "description": "[command description] gustong i-save ng user ang kasalukuyang pahina"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] pinapayagan ang user na i-drop ang kanilang mga file sa tinukoy na lugar"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] button para i-redirect sa settings page"
+  },
 	"allow": {
 		"message": "Pahintulutan",
 		"description": "[req_permission] button para pahintulutan ang mga pahintulot"

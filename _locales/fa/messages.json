@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "به‌جای new TranslationService() از TranslationService.create() استفاده کنید",
+    "description": "[error] به توسعه‌دهنده توضیح دهید چگونه از کلاس TranslationService استفاده کند"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator هنوز مقداردهی اولیه نشده است.",
+    "description": "[error] سرویس ترجمه (TranslationService) آماده نبود"
+  },
+  "error_many_tabs_found": {
+    "message": "بیش از یک Tab یافت شد.",
+    "description": "[error] چندین Tab بازیابی شدند"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "به‌جای new TabContainer() از TabContainer.create() استفاده کنید",
+    "description": "[error] به توسعه‌دهنده توضیح دهید چگونه از کلاس TabContainer استفاده کند"
+  },
+  "error_tab_constructor": {
+    "message": "به‌جای new Tab() از Tab.create() استفاده کنید",
+    "description": "[error] به توسعه‌دهنده توضیح دهید چگونه از کلاس Tab استفاده کند"
+  },
+  "error_redirect": {
+    "message": "امکان هدایت مجدد وجود ندارد. لطفاً صفحه را مجدداً بارگذاری کنید.",
+    "description": "[error] خطای عمومی در هدایت صفحه"
+  },
+  "error_failed_sync": {
+    "message": "همگام‌سازی ناموفق بود.",
+    "description": "[error] خطای عمومی در همگام‌سازی Tabs با کاربر"
+  },
+  "error_removing_all_tabs": {
+    "message": "خطا در حذف همه‌ی Tabs.",
+    "description": "[error] خطای عمومی در حذف همه‌ی Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "خطا در حذف Tabs عمومی.",
+    "description": "[error] خطای عمومی در حذف Tabs عمومی"
+  },
+  "error_adding_tab": {
+    "message": "خطا در افزودن Tab.",
+    "description": "[error] خطای عمومی در افزودن Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "خطا در حذف سایر Tabs.",
+    "description": "[error] خطای عمومی در حذف سایر Tabs"
+  },
+  "error_removing_tab": {
+    "message": "خطا در حذف Tab.",
+    "description": "[error] خطای عمومی در حذف Tab"
+  },
+  "error_not_initialized": {
+    "message": "هنوز مقداردهی اولیه نشده است.",
+    "description": "[error] خطای عمومی زمانی که متغیر آماده نیست"
+  },
+  "error_unknown_request": {
+    "message": "درخواست ناشناخته.",
+    "description": "[error] خطای عمومی پس از دریافت پیام ناشناخته"
+  },
+  "error_invalid_request": {
+    "message": "درخواست نامعتبر.",
+    "description": "[error] خطای عمومی پس از دریافت پیام با فرمت نادرست"
+  },
+  "error_processing_tabs": {
+    "message": "خطا در پردازش Tabs.",
+    "description": "[error] خطای عمومی در پردازش Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Tab ای با این URL قبلاً ذخیره شده است!",
+    "description": "[error] کاربر تلاش کرد Tab ای که قبلاً ذخیره شده بود را ذخیره کند"
+  },
+  "cmd_export_all": {
+    "message": "نمایش مودال برای صدور همه‌ی Tabs ذخیره‌شده",
+    "description": "[command description] کاربر می‌خواهد همه‌ی Tabs را صادر کند"
+  },
+  "cmd_import": {
+    "message": "نمایش مودال برای وارد کردن Tabs جدید",
+    "description": "[command description] کاربر می‌خواهد Tabs جدید وارد کند"
+  },
+  "cmd_open_other_org": {
+    "message": "نمایش مودال برای باز کردن صفحه‌ی جاری در یک Org دیگر",
+    "description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را در یک Org دیگر باز کند"
+  },
+  "cmd_update_tab": {
+    "message": "نمایش مودال برای به‌روزرسانی صفحه‌ی جاری (در صورت ذخیره‌شده بودن)",
+    "description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را به‌روزرسانی کند"
+  },
+  "cmd_toggle_org": {
+    "message": "نمایش مودال برای تغییر مقدار Org صفحه‌ی جاری (در صورت ذخیره‌شده بودن)",
+    "description": "[command description] کاربر می‌خواهد Org صفحه‌ی جاری را تغییر دهد"
+  },
+  "cmd_remove_tab": {
+    "message": "حذف صفحه‌ی جاری از فهرست Tabs (در صورت ذخیره‌شده بودن)",
+    "description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را حذف کند"
+  },
+  "cmd_save_as_tab": {
+    "message": "ذخیره‌ی صفحه‌ی جاری در فهرست Tabs (در صورت ذخیره‌نشده بودن)",
+    "description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را ذخیره کند"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] به کاربر اجازه می‌دهد فایل‌های خود را در منطقه‌ی مشخص شده رها کند"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] دکمه‌ای برای هدایت به صفحه تنظیمات"
+  },
 	"allow": {
 		"message": "اجازه دادن",
 		"description": "[درخواست_مجوز] دکمه برای اجازه دادن مجوزها"

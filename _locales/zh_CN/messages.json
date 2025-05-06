@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "请使用 TranslationService.create() 而不是 new TranslationService() 来使用 TranslationService 类",
+            "description": "[错误] 告诉开发者如何使用 TranslationService 类"
+        },
+        "error_translator_not_initialized": {
+            "message": "翻译器尚未初始化。",
+            "description": "[错误] TranslationService 尚未准备好"
+        },
+        "error_many_tabs_found": {
+            "message": "找到多个 Tab。",
+            "description": "[错误] 检索到多个 Tabs"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "请使用 TabContainer.create() 而不是 new TabContainer() 来使用 TabContainer 类",
+            "description": "[错误] 告诉开发者如何使用 TabContainer 类"
+        },
+        "error_tab_constructor": {
+            "message": "请使用 Tab.create() 而不是 new Tab() 来使用 Tab 类",
+            "description": "[错误] 告诉开发者如何使用 Tab 类"
+        },
+        "error_redirect": {
+            "message": "无法 redirect。请刷新页面。",
+            "description": "[错误] 页面重定向时出现一般错误。"
+        },
+        "error_failed_sync": {
+            "message": "同步失败。",
+            "description": "[错误] 从用户同步 Tabs 时出现一般错误"
+        },
+        "error_removing_all_tabs": {
+            "message": "移除所有 Tabs 时出错。",
+            "description": "[错误] 移除所有 Tabs 时使用的一般错误"
+        },
+        "error_removing_generic_tabs": {
+            "message": "移除通用 Tabs 时出错。",
+            "description": "[错误] 移除通用 Tabs 时使用的一般错误"
+        },
+        "error_adding_tab": {
+            "message": "添加 Tab 时出错。",
+            "description": "[错误] 添加 Tab 时使用的一般错误"
+        },
+        "error_removing_other_tabs": {
+            "message": "移除其他 Tabs 时出错。",
+            "description": "[错误] 移除其他 Tabs 时使用的一般错误"
+        },
+        "error_removing_tab": {
+            "message": "移除 Tab 时出错。",
+            "description": "[错误] 移除 Tab 时使用的一般错误"
+        },
+        "error_not_initialized": {
+            "message": "尚未初始化。",
+            "description": "[错误] 变量未准备就绪时出现的一般错误"
+        },
+        "error_unknown_request": {
+            "message": "未知请求。",
+            "description": "[错误] 收到无法识别的消息后出现的一般错误"
+        },
+        "error_invalid_request": {
+            "message": "无效请求。",
+            "description": "[错误] 收到格式错误的消息后出现的一般错误"
+        },
+        "error_processing_tabs": {
+            "message": "处理 Tabs 时出错。",
+            "description": "[错误] 处理 Tabs 时出现的一般错误"
+        },
+        "error_tab_url_saved": {
+            "message": "已保存此 URL 的 Tab！",
+            "description": "[错误] 用户尝试保存已收藏的 Tab"
+        },
+        "cmd_export_all": {
+            "message": "显示 modal 以导出所有已保存的 Tabs",
+            "description": "[命令说明] 用户想要导出所有 Tabs"
+        },
+        "cmd_import": {
+            "message": "显示 modal 以 импорт 新的 Tabs",
+            "description": "[命令说明] 用户想要导入新的 Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "显示 modal 以在另一个 Org 中打开当前页面",
+            "description": "[命令说明] 用户想要在另一个 Org 中打开当前页面"
+        },
+        "cmd_update_tab": {
+            "message": "显示 modal 以更新当前页面（如果已保存）",
+            "description": "[命令说明] 用户想要更新当前页面"
+        },
+        "cmd_toggle_org": {
+            "message": "切换当前页面的 Org 值（如果已保存）",
+            "description": "[命令说明] 用户想要切换当前页面的 Org"
+        },
+        "cmd_remove_tab": {
+            "message": "从 Tab 列表中移除当前页面（如果已保存）",
+            "description": "[命令说明] 用户想要移除当前页面"
+        },
+        "cmd_save_as_tab": {
+            "message": "在 Tab 列表中保存当前页面（如果未保存）",
+            "description": "[命令说明] 用户想要保存当前页面"
+        },
+        "drop": {
+            "message": "拖放",
+            "description": "[导入] 允许用户将文件拖放到指定区域"
+        },
+        "open_settings": {
+            "message": "打开扩展程序设置",
+            "description": "[弹出窗口] 重定向到设置页面的按钮"
+        },
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"

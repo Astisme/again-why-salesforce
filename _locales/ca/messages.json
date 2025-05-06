@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Utilitza TranslationService.create() en lloc de new TranslationService()",
+    "description": "[error] Informa al desenvolupador com utilitzar la classe TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator encara no està inicialitzat.",
+    "description": "[error] El TranslationService no estava preparat"
+  },
+  "error_many_tabs_found": {
+    "message": "S'ha trobat més d'una Tab.",
+    "description": "[error] S'han recuperat diverses Tabs"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Utilitza TabContainer.create() en lloc de new TabContainer()",
+    "description": "[error] Informa al desenvolupador com utilitzar la classe TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Utilitza Tab.create() en lloc de new Tab()",
+    "description": "[error] Informa al desenvolupador com utilitzar la classe Tab"
+  },
+  "error_redirect": {
+    "message": "No es pot redirigir. Si us plau, actualitza la pàgina.",
+    "description": "[error] Error genèric en la redirecció de la pàgina"
+  },
+  "error_failed_sync": {
+    "message": "La sincronització ha fallat.",
+    "description": "[error] Error genèric en sincronitzar les Tabs amb l’usuari"
+  },
+  "error_removing_all_tabs": {
+    "message": "Error en eliminar totes les Tabs.",
+    "description": "[error] Error genèric en eliminar totes les Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Error en eliminar les Tabs genèriques.",
+    "description": "[error] Error genèric en eliminar les Tabs genèriques"
+  },
+  "error_adding_tab": {
+    "message": "Error en afegir Tab.",
+    "description": "[error] Error genèric en afegir una Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "Error en eliminar altres Tabs.",
+    "description": "[error] Error genèric en eliminar altres Tabs"
+  },
+  "error_removing_tab": {
+    "message": "Error en eliminar Tab.",
+    "description": "[error] Error genèric en eliminar una Tab"
+  },
+  "error_not_initialized": {
+    "message": "Encara no està inicialitzat.",
+    "description": "[error] Error genèric quan una variable no està preparada"
+  },
+  "error_unknown_request": {
+    "message": "Sol·licitud desconeguda.",
+    "description": "[error] Error genèric després de rebre un missatge no reconegut"
+  },
+  "error_invalid_request": {
+    "message": "Sol·licitud invàlida.",
+    "description": "[error] Error genèric després de rebre un missatge amb format incorrecte"
+  },
+  "error_processing_tabs": {
+    "message": "Error en processar les Tabs.",
+    "description": "[error] Error genèric en processar les Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Ja s'ha desat una Tab amb aquesta URL!",
+    "description": "[error] L’usuari ha intentat desar una Tab ja desada"
+  },
+  "cmd_export_all": {
+    "message": "Mostra el modal per exportar totes les Tabs desades",
+    "description": "[command description] l’usuari vol exportar totes les Tabs"
+  },
+  "cmd_import": {
+    "message": "Mostra el modal per importar noves Tabs",
+    "description": "[command description] l’usuari vol importar noves Tabs"
+  },
+  "cmd_open_other_org": {
+    "message": "Mostra el modal per obrir la pàgina actual en una altra Org",
+    "description": "[command description] l’usuari vol obrir la pàgina actual en una altra Org"
+  },
+  "cmd_update_tab": {
+    "message": "Mostra el modal per actualitzar la pàgina actual (si està desada)",
+    "description": "[command description] l’usuari vol actualitzar la pàgina actual"
+  },
+  "cmd_toggle_org": {
+    "message": "Mostra el modal per alternar el valor Org de la pàgina actual (si està desada)",
+    "description": "[command description] l’usuari vol alternar l’Org de la pàgina actual"
+  },
+  "cmd_remove_tab": {
+    "message": "Elimina la pàgina actual de la llista de Tabs (si està desada)",
+    "description": "[command description] l’usuari vol eliminar la pàgina actual"
+  },
+  "cmd_save_as_tab": {
+    "message": "Desa la pàgina actual a la llista de Tabs (si no està desada)",
+    "description": "[command description] l’usuari vol desar la pàgina actual"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] permet a l’usuari deixar anar els seus fitxers a l’àrea especificada"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] botó per redirigir a la pàgina de configuració"
+  },
 	"allow": {
 		"message": "Permetre",
 		"description": "[req_permission] botó per permetre permisos"

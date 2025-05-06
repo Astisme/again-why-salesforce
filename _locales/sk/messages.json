@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Použite TranslationService.create() namiesto new TranslationService() na použitie triedy TranslationService",
+            "description": "[chyba] povedzte vývojárovi, ako použiť triedu TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "prekladač ešte nebol inicializovaný.",
+            "description": "[chyba] TranslationService nebol pripravený"
+        },
+        "error_many_tabs_found": {
+            "message": "Nájdene viac ako jeden Tab.",
+            "description": "[chyba] bolo načítaných veľa Tabs"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Použite TabContainer.create() namiesto new TabContainer() na použitie triedy TabContainer",
+            "description": "[chyba] povedzte vývojárovi, ako použiť triedu TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Použite Tab.create() namiesto new Tab() na použitie triedy Tab",
+            "description": "[chyba] povedzte vývojárovi, ako použiť triedu Tab"
+        },
+        "error_redirect": {
+            "message": "Nedá sa redirect. Prosím, obnovte stránku.",
+            "description": "[chyba] Všeobecná chyba pri presmerovaní stránky."
+        },
+        "error_failed_sync": {
+            "message": "Nepodarilo sa synchronizovať.",
+            "description": "[chyba] Všeobecná chyba, keď sa Tabs nepodarilo synchronizovať od používateľa"
+        },
+        "error_removing_all_tabs": {
+            "message": "Chyba pri odstraňovaní všetkých Tabs.",
+            "description": "[chyba] Všeobecná chyba použitá pri odstraňovaní všetkých Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Chyba pri odstraňovaní generických Tabs.",
+            "description": "[chyba] Všeobecná chyba použitá pri odstraňovaní generických Tabs"
+        },
+        "error_adding_tab": {
+            "message": "Chyba pri pridávaní Tab.",
+            "description": "[chyba] Všeobecná chyba použitá pri pridávaní Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Chyba pri odstraňovaní ostatných Tabs.",
+            "description": "[chyba] Všeobecná chyba použitá pri odstraňovaní ostatných Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Chyba pri odstraňovaní Tab.",
+            "description": "[chyba] Všeobecná chyba použitá pri odstraňovaní Tab"
+        },
+        "error_not_initialized": {
+            "message": "nebol ešte inicializovaný.",
+            "description": "[chyba] Všeobecná chyba, keď premenná nie je pripravená"
+        },
+        "error_unknown_request": {
+            "message": "Neznáma požiadavka.",
+            "description": "[chyba] Všeobecná chyba po prijatí správy, ktorá nebola rozpoznaná"
+        },
+        "error_invalid_request": {
+            "message": "Neplatná požiadavka.",
+            "description": "[chyba] Všeobecná chyba po prijatí nesprávne formátovanej správy"
+        },
+        "error_processing_tabs": {
+            "message": "Chyba spracovania Tabs.",
+            "description": "[chyba] Všeobecná chyba pri spracovaní Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab s touto URL bol už uložený!",
+            "description": "[chyba] Používateľ sa pokúsil uložiť Tab, ktorý už bol obľúbený"
+        },
+        "cmd_export_all": {
+            "message": "Zobraziť modal na export všetkých uložených Tabs",
+            "description": "[popis príkazu] používateľ chce exportovať všetky Tabs"
+        },
+        "cmd_import": {
+            "message": "Zobraziť modal na import nových Tabs",
+            "description": "[popis príkazu] používateľ chce importovať nové Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Zobraziť modal na otvorenie aktuálnej stránky v inej Org",
+            "description": "[popis príkazu] používateľ chce otvoriť aktuálnu stránku v inej Org"
+        },
+        "cmd_update_tab": {
+            "message": "Zobraziť modal na aktualizáciu aktuálnej stránky (ak je uložená)",
+            "description": "[popis príkazu] používateľ chce aktualizovať aktuálnu stránku"
+        },
+        "cmd_toggle_org": {
+            "message": "Prepnúť hodnotu Org aktuálnej stránky (ak je uložená)",
+            "description": "[popis príkazu] používateľ chce prepnúť Org pre aktuálnu stránku"
+        },
+        "cmd_remove_tab": {
+            "message": "Odstrániť aktuálnu stránku zo zoznamu Tabs (ak je uložená)",
+            "description": "[popis príkazu] používateľ chce odstrániť aktuálnu stránku"
+        },
+        "cmd_save_as_tab": {
+            "message": "Uložiť aktuálnu stránku do zoznamu Tabs (ak nie je uložená)",
+            "description": "[popis príkazu] používateľ chce uložiť aktuálnu stránku"
+        },
+        "drop": {
+            "message": "Pusťte",
+            "description": "[import] umožniť používateľovi pustiť súbory na určenú oblasť"
+        },
+        "open_settings": {
+            "message": "Otvoriť Nastavenia Rozšírenia",
+            "description": "[pop-up] tlačidlo na presmerovanie na stránku nastavení"
+        },
 	"allow": {
 		"message": "Povoliť",
 		"description": "[req_permission] tlačidlo na povolenie oprávnení"

@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Tumia TranslationService.create() badala ya new TranslationService() kutumia darasa la TranslationService",
+            "description": "[hitilafu] mwambie msanidi jinsi ya kutumia darasa la TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "mtafsiri bado hajaanzishwa.",
+            "description": "[hitilafu] TranslationService haikuwa tayari"
+        },
+        "error_many_tabs_found": {
+            "message": "Imepata zaidi ya Tab moja.",
+            "description": "[hitilafu] Tabs nyingi zilirejeshwa"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Tumia TabContainer.create() badala ya new TabContainer() kutumia darasa la TabContainer",
+            "description": "[hitilafu] mwambie msanidi jinsi ya kutumia darasa la TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Tumia Tab.create() badala ya new Tab() kutumia darasa la Tab",
+            "description": "[hitilafu] mwambie msanidi jinsi ya kutumia darasa la Tab"
+        },
+        "error_redirect": {
+            "message": "Haiwezi redirect. Tafadhali onyesha upya ukurasa.",
+            "description": "[hitilafu] Hitilafu ya jumla kwenye mwelekeo wa ukurasa."
+        },
+        "error_failed_sync": {
+            "message": "Imeshindwa sync.",
+            "description": "[hitilafu] Hitilafu ya jumla wakati Tab hazikuweza sincronizar kutoka kwa mtumiaji"
+        },
+        "error_removing_all_tabs": {
+            "message": "Hitilafu wakati wa kuondoa Tabs zote.",
+            "description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tabs zote"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Hitilafu wakati wa kuondoa Tabs za jumla.",
+            "description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tabs za jumla"
+        },
+        "error_adding_tab": {
+            "message": "Hitilafu wakati wa kuongeza Tab.",
+            "description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuongeza Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Hitilafu wakati wa kuondoa Tabs zingine.",
+            "description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tabs zingine"
+        },
+        "error_removing_tab": {
+            "message": "Hitilafu wakati wa kuondoa Tab.",
+            "description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tab"
+        },
+        "error_not_initialized": {
+            "message": "bado hajaanzishwa.",
+            "description": "[hitilafu] Hitilafu ya jumla kwa wakati kigeugeu hakiko tayari"
+        },
+        "error_unknown_request": {
+            "message": "Ombi lisilojulikana.",
+            "description": "[hitilafu] Hitilafu ya jumla baada ya kupata ujumbe ambao haukutambuliwa"
+        },
+        "error_invalid_request": {
+            "message": "Ombi batili.",
+            "description": "[hitilafu] Hitilafu ya jumla baada ya kupata ujumbe ulioandikwa vibaya"
+        },
+        "error_processing_tabs": {
+            "message": "Hitilafu ya kuchakata Tabs.",
+            "description": "[hitilafu] Hitilafu ya jumla wakati wa kuchakata Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab yenye URL hii tayari imehifadhiwa!",
+            "description": "[hitilafu] Mtumiaji alijaribu kuhifadhi Tab ambayo tayari imependwa"
+        },
+        "cmd_export_all": {
+            "message": "Onyesha modal kuэкспорт Tabs zote zilizohifadhiwa",
+            "description": "[maelezo ya amri] mtumiaji anataka kutoa nje Tabs zote"
+        },
+        "cmd_import": {
+            "message": "Onyesha modal kuimport Tabs mpya",
+            "description": "[maelezo ya amri] mtumiaji anataka kuingiza Tabs mpya"
+        },
+        "cmd_open_other_org": {
+            "message": "Onyesha modal kufungua ukurasa wa sasa katika Org nyingine",
+            "description": "[maelezo ya amri] mtumiaji anataka kufungua ukurasa wa sasa katika Org nyingine"
+        },
+        "cmd_update_tab": {
+            "message": "Onyesha modal kusasisha ukurasa wa sasa (ikiwa imehifadhiwa)",
+            "description": "[maelezo ya amri] mtumiaji anataka kusasisha ukurasa wa sasa"
+        },
+        "cmd_toggle_org": {
+            "message": "Washa thamani ya Org ya ukurasa wa sasa (ikiwa imehifadhiwa)",
+            "description": "[maelezo ya amri] mtumiaji anataka kubadili Org kwa ukurasa wa sasa"
+        },
+        "cmd_remove_tab": {
+            "message": "Ondoa ukurasa wa sasa kutoka kwenye orodha ya Tab (ikiwa imehifadhiwa)",
+            "description": "[maelezo ya amri] mtumiaji anataka kuondoa ukurasa wa sasa"
+        },
+        "cmd_save_as_tab": {
+            "message": "Hifadhi ukurasa wa sasa kwenye orodha ya Tab (ikiwa haijahifadhiwa)",
+            "description": "[maelezo ya amri] mtumiaji anataka kuhifadhi ukurasa wa sasa"
+        },
+        "drop": {
+            "message": "Shusha",
+            "description": "[импорт] ruhusu mtumiaji kushusha faili zao kwenye eneo maalum"
+        },
+        "open_settings": {
+            "message": "Fungua Mipangilio ya Kiendelezo",
+            "description": "[ibukizi] kitufe cha kuelekeza upya kwenye ukurasa wa mipangilio"
+        },
 	"allow": {
 		"message": "Ruhusu",
 		"description": "[omba_ruhusa] kitufe cha kuruhusu ruhusa"

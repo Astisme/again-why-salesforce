@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "ใช้ TranslationService.create() แทน new TranslationService() เพื่อใช้คลาส TranslationService",
+            "description": "[ข้อผิดพลาด] บอกนักพัฒนาวิธีใช้คลาส TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "ตัวแปลยังไม่ได้รับการเริ่มต้น.",
+            "description": "[ข้อผิดพลาด] TranslationService ยังไม่พร้อม"
+        },
+        "error_many_tabs_found": {
+            "message": "พบมากกว่าหนึ่ง Tab.",
+            "description": "[ข้อผิดพลาด] ดึง Tabs มาหลายรายการ"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "ใช้ TabContainer.create() แทน new TabContainer() เพื่อใช้คลาส TabContainer",
+            "description": "[ข้อผิดพลาด] บอกนักพัฒนาวิธีใช้คลาส TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "ใช้ Tab.create() แทน new Tab() เพื่อใช้คลาส Tab",
+            "description": "[ข้อผิดพลาด] บอกนักพัฒนาวิธีใช้คลาส Tab"
+        },
+        "error_redirect": {
+            "message": "ไม่สามารถ redirect ได้ กรุณารีเฟรชหน้าใหม่",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปในการเปลี่ยนเส้นทางหน้าเว็บ"
+        },
+        "error_failed_sync": {
+            "message": "согласовать ไม่สำเร็จ",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปเมื่อ Tab ไม่สามารถ sincronizar จากผู้ใช้ได้"
+        },
+        "error_removing_all_tabs": {
+            "message": "ข้อผิดพลาดในการลบ Tabs ทั้งหมด",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tabs ทั้งหมด"
+        },
+        "error_removing_generic_tabs": {
+            "message": "ข้อผิดพลาดในการลบ Tabs ทั่วไป",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tabs ทั่วไป"
+        },
+        "error_adding_tab": {
+            "message": "ข้อผิดพลาดในการเพิ่ม Tab",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะเพิ่ม Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "ข้อผิดพลาดในการลบ Tabs อื่นๆ",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tabs อื่นๆ"
+        },
+        "error_removing_tab": {
+            "message": "ข้อผิดพลาดในการลบ Tab",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tab"
+        },
+        "error_not_initialized": {
+            "message": "ยังไม่ได้รับการเริ่มต้น.",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปเมื่อตัวแปรยังไม่พร้อม"
+        },
+        "error_unknown_request": {
+            "message": "คำขอไม่ทราบ.",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปหลังจากได้รับข้อความที่ไม่รู้จัก"
+        },
+        "error_invalid_request": {
+            "message": "คำขอไม่ถูกต้อง.",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปหลังจากได้รับข้อความที่มีรูปแบบไม่ถูกต้อง"
+        },
+        "error_processing_tabs": {
+            "message": "ข้อผิดพลาดในการประมวลผล Tabs.",
+            "description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปขณะประมวลผล Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab ที่มี URL นี้ได้ถูกบันทึกแล้ว!",
+            "description": "[ข้อผิดพลาด] ผู้ใช้พยายามบันทึก Tab ที่ชื่นชอบแล้ว"
+        },
+        "cmd_export_all": {
+            "message": "แสดงโมดอลเพื่อส่งออก Tabs ที่บันทึกไว้ทั้งหมด",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการส่งออก Tabs ทั้งหมด"
+        },
+        "cmd_import": {
+            "message": "แสดงโมดอลเพื่อนำเข้า Tabs ใหม่",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการนำเข้า Tabs ใหม่"
+        },
+        "cmd_open_other_org": {
+            "message": "แสดงโมดอลเพื่อเปิดหน้าปัจจุบันใน Org อื่น",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการเปิดหน้าปัจจุบันใน Org อื่น"
+        },
+        "cmd_update_tab": {
+            "message": "แสดงโมดอลเพื่ออัปเดตหน้าปัจจุบัน (หากบันทึกไว้)",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการอัปเดตหน้าปัจจุบัน"
+        },
+        "cmd_toggle_org": {
+            "message": "สลับค่า Org ของหน้าปัจจุบัน (หากบันทึกไว้)",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการสลับ Org สำหรับหน้าปัจจุบัน"
+        },
+        "cmd_remove_tab": {
+            "message": "ลบหน้าปัจจุบันออกจากรายการ Tab (หากบันทึกไว้)",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการลบหน้าปัจจุบัน"
+        },
+        "cmd_save_as_tab": {
+            "message": "บันทึกหน้าปัจจุบันในรายการ Tab (หากยังไม่ได้บันทึก)",
+            "description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการบันทึกหน้าปัจจุบัน"
+        },
+        "drop": {
+            "message": "วาง",
+            "description": "[นำเข้า] ให้ผู้ใช้ลากไฟล์ของตนลงในพื้นที่ที่กำหนด"
+        },
+        "open_settings": {
+            "message": "เปิดการตั้งค่าส่วนขยาย",
+            "description": "[ป๊อปอัป] ปุ่มเพื่อเปลี่ยนเส้นทางไปยังหน้าการตั้งค่า"
+        },
 	"allow": {
 		"message": "อนุญาต",
 		"description": "[req_permission] ปุ่มสำหรับอนุญาตการเข้าถึง"

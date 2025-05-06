@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "new TranslationService() በመጠቀም በተቃራኒ TranslationService.create() አጠቀም",
+    "description": "[error] የTranslationService ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator አልተጀመረም።",
+    "description": "[error] የTranslationService መነሻ አልተዘጋጀም"
+  },
+  "error_many_tabs_found": {
+    "message": "ከአንድ በላይ Tab ተገኘ።",
+    "description": "[error] ብዙ Tabs ተመርመሩ"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "new TabContainer() በመጠቀም በተቃራኒ TabContainer.create() አጠቀም",
+    "description": "[error] የTabContainer ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+  },
+  "error_tab_constructor": {
+    "message": "new Tab() በመጠቀም በተቃራኒ Tab.create() አጠቀም",
+    "description": "[error] የTab ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+  },
+  "error_redirect": {
+    "message": "ማመላለሻ አይቻልም። ወደ ገጹ እባክዎን ዳግም ይጫኑ።",
+    "description": "[error] በገጽ መመላለሻ ላይ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_failed_sync": {
+    "message": "ስምርት መዛመድ አልተሳካም።",
+    "description": "[error] ሰብስ በተጠቃሚው ላይ Tabs ሊዛመዱ አልቻሉም"
+  },
+  "error_removing_all_tabs": {
+    "message": "ሁሉንም Tabs ሲወገድ ስህተት።",
+    "description": "[error] ሁሉንም Tabs ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Generic Tabs ሲወገድ ስህተት።",
+    "description": "[error] Generic Tabs ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_adding_tab": {
+    "message": "Tab ሲያክል ስህተት።",
+    "description": "[error] Tab ሲያክሉ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_removing_other_tabs": {
+    "message": "ሌሎች Tabs ሲወገድ ስህተት።",
+    "description": "[error] ሌሎች Tabs ሲወግዱ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_removing_tab": {
+    "message": "Tab ሲወገድ ስህተት።",
+    "description": "[error] Tab ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_not_initialized": {
+    "message": "አልተጀመረም።",
+    "description": "[error] ተለዋዋጭ እስካላዘጋጀ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_unknown_request": {
+    "message": "ያልታወቀ ትእዛዝ።",
+    "description": "[error] እርዳታ ሲጠየቅ ያልታወቀ መልዕክት የተቀበለ ስህተት"
+  },
+  "error_invalid_request": {
+    "message": "የተሳሳተ ትእዛዝ።",
+    "description": "[error] በትክክል ካልተቀበረ መልዕክት የተፈጠረ ስህተት"
+  },
+  "error_processing_tabs": {
+    "message": "Tabs ሲያቀርብ ስህተት።",
+    "description": "[error] Tabs ሲያቀርቡ የተፈጠረ አጠቃላይ ስህተት"
+  },
+  "error_tab_url_saved": {
+    "message": "በዚህ URL ያለው Tab አስቀድሞ ተቀመጠ።",
+    "description": "[error] ተጠቃሚው አስቀድሞ የተመዘገበውን Tab ለመቆም ሞከረ"
+  },
+  "cmd_export_all": {
+    "message": "የተቀመጡትን ሁሉንም Tabs ለማስወገድ ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው ሁሉንም Tabs ለማስወገድ ይፈልጋል"
+  },
+  "cmd_import": {
+    "message": "አዲስ Tabs ለመጫን ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው አዲስ Tabs ለመጫን ይፈልጋል"
+  },
+  "cmd_open_other_org": {
+    "message": "ያሁኑን ገጽ በሌላ Org ለማክፈት ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው ያሁኑን ገጽ በሌላ Org ለመክፈት ይፈልጋል"
+  },
+  "cmd_update_tab": {
+    "message": "ተቀመጠ ገጽ ሲሆን ለማዘመን ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማዘመን ይፈልጋል"
+  },
+  "cmd_toggle_org": {
+    "message": "ያሁኑን ገጽ የOrg እሴት ሲቀየር ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው ያሁኑን ገጽ የOrg እሴት ለመቀየር ይፈልጋል"
+  },
+  "cmd_remove_tab": {
+    "message": "ያሁኑን ገጽ ከTab ዝርዝር ሲሆን ለማስወገድ ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማስወገድ ይፈልጋል"
+  },
+  "cmd_save_as_tab": {
+    "message": "ያሁኑን ገጽ ከTab ዝርዝር ሲሆን ለማስመዝገብ ቁልፍ አሳይ",
+    "description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማስመዝገብ ይፈልጋል"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] ተጠቃሚው ፋይሎቹን ወደ ውስጥ ለማድረግ ያስችላል"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] ወደ ቅንብሮች ገጽ የሚመራ አዝራር"
+  },
 	"allow": {
 		"message": "ፍቀድ",
 		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ለመፍቀድ የሚሆን አዝራር"

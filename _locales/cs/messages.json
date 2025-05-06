@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Použijte TranslationService.create() místo new TranslationService()",
+    "description": "[error] Informujte vývojáře, jak používat třídu TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator dosud nebyl inicializován.",
+    "description": "[error] TranslationService nebyl připraven"
+  },
+  "error_many_tabs_found": {
+    "message": "Bylo nalezeno více než jedno Tab.",
+    "description": "[error] Bylo načteno více Tabs"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Použijte TabContainer.create() místo new TabContainer()",
+    "description": "[error] Informujte vývojáře, jak používat třídu TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Použijte Tab.create() místo new Tab()",
+    "description": "[error] Informujte vývojáře, jak používat třídu Tab"
+  },
+  "error_redirect": {
+    "message": "Přesměrování nelze provést. Prosím obnovte stránku.",
+    "description": "[error] Obecná chyba při přesměrování stránky"
+  },
+  "error_failed_sync": {
+    "message": "Synchronizace se nezdařila.",
+    "description": "[error] Obecná chyba při synchronizaci Tabs s uživatelem"
+  },
+  "error_removing_all_tabs": {
+    "message": "Chyba při odstraňování všech Tabs.",
+    "description": "[error] Obecná chyba při odstraňování všech Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Chyba při odstraňování obecných Tabs.",
+    "description": "[error] Obecná chyba při odstraňování obecných Tabs"
+  },
+  "error_adding_tab": {
+    "message": "Chyba při přidávání Tab.",
+    "description": "[error] Obecná chyba při přidávání Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "Chyba při odstraňování ostatních Tabs.",
+    "description": "[error] Obecná chyba při odstraňování ostatních Tabs"
+  },
+  "error_removing_tab": {
+    "message": "Chyba při odstraňování Tab.",
+    "description": "[error] Obecná chyba při odstraňování Tab"
+  },
+  "error_not_initialized": {
+    "message": "Ještě nebylo inicializováno.",
+    "description": "[error] Obecná chyba, když proměnná není připravena"
+  },
+  "error_unknown_request": {
+    "message": "Neznámý požadavek.",
+    "description": "[error] Obecná chyba po přijmutí neznámé zprávy"
+  },
+  "error_invalid_request": {
+    "message": "Neplatný požadavek.",
+    "description": "[error] Obecná chyba po přijmutí zprávy ve špatném formátu"
+  },
+  "error_processing_tabs": {
+    "message": "Chyba při zpracování Tabs.",
+    "description": "[error] Obecná chyba při zpracování Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Tab s touto URL je již uložen!",
+    "description": "[error] Uživatel se pokusil uložit již uložený Tab"
+  },
+  "cmd_export_all": {
+    "message": "Zobrazit modální okno pro export všech uložených Tabs",
+    "description": "[command description] uživatel chce exportovat všechny Tabs"
+  },
+  "cmd_import": {
+    "message": "Zobrazit modální okno pro import nových Tabs",
+    "description": "[command description] uživatel chce importovat nové Tabs"
+  },
+  "cmd_open_other_org": {
+    "message": "Zobrazit modální okno pro otevření aktuální stránky v jiné Org",
+    "description": "[command description] uživatel chce otevřít aktuální stránku v jiné Org"
+  },
+  "cmd_update_tab": {
+    "message": "Zobrazit modální okno pro aktualizaci aktuální stránky (pokud je uložena)",
+    "description": "[command description] uživatel chce aktualizovat aktuální stránku"
+  },
+  "cmd_toggle_org": {
+    "message": "Zobrazit modální okno pro přepnutí hodnoty Org aktuální stránky (pokud je uložena)",
+    "description": "[command description] uživatel chce přepnout Org aktuální stránky"
+  },
+  "cmd_remove_tab": {
+    "message": "Odstranit aktuální stránku ze seznamu Tabs (pokud je uložena)",
+    "description": "[command description] uživatel chce odstranit aktuální stránku"
+  },
+  "cmd_save_as_tab": {
+    "message": "Uložit aktuální stránku do seznamu Tabs (pokud není uložena)",
+    "description": "[command description] uživatel chce uložit aktuální stránku"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] umožňuje uživateli přetáhnout své soubory do určené oblasti"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] tlačítko pro přesměrování na stránku nastavení"
+  },
 	"allow": {
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"

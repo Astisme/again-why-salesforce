@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Sử dụng TranslationService.create() thay vì new TranslationService() để sử dụng lớp TranslationService",
+            "description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "trình dịch chưa được khởi tạo.",
+            "description": "[lỗi] TranslationService chưa sẵn sàng"
+        },
+        "error_many_tabs_found": {
+            "message": "Tìm thấy nhiều hơn một Tab.",
+            "description": "[lỗi] nhiều Tabs đã được truy xuất"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Sử dụng TabContainer.create() thay vì new TabContainer() để sử dụng lớp TabContainer",
+            "description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Sử dụng Tab.create() thay vì new Tab() để sử dụng lớp Tab",
+            "description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp Tab"
+        },
+        "error_redirect": {
+            "message": "Không thể redirect. Vui lòng làm mới trang.",
+            "description": "[lỗi] Lỗi chung khi chuyển hướng trang."
+        },
+        "error_failed_sync": {
+            "message": "Sync không thành công.",
+            "description": "[lỗi] Lỗi chung khi Tabs không thể đồng bộ hóa từ người dùng"
+        },
+        "error_removing_all_tabs": {
+            "message": "Lỗi khi xóa tất cả Tabs.",
+            "description": "[lỗi] Lỗi chung được sử dụng khi xóa tất cả Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Lỗi khi xóa các Tabs chung.",
+            "description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs chung"
+        },
+        "error_adding_tab": {
+            "message": "Lỗi khi thêm Tab.",
+            "description": "[lỗi] Lỗi chung được sử dụng khi thêm Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Lỗi khi xóa các Tabs khác.",
+            "description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs khác"
+        },
+        "error_removing_tab": {
+            "message": "Lỗi khi xóa Tab.",
+            "description": "[lỗi] Lỗi chung được sử dụng khi xóa Tab"
+        },
+        "error_not_initialized": {
+            "message": "chưa được khởi tạo.",
+            "description": "[lỗi] Lỗi chung khi một biến chưa sẵn sàng"
+        },
+        "error_unknown_request": {
+            "message": "Yêu cầu không xác định.",
+            "description": "[lỗi] Lỗi chung sau khi nhận được thông báo không được nhận dạng"
+        },
+        "error_invalid_request": {
+            "message": "Yêu cầu không hợp lệ.",
+            "description": "[lỗi] Lỗi chung sau khi nhận được thông báo được định dạng sai"
+        },
+        "error_processing_tabs": {
+            "message": "Lỗi xử lý Tabs.",
+            "description": "[lỗi] Lỗi chung khi xử lý Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Một Tab với URL này đã được lưu!",
+            "description": "[lỗi] Người dùng đã cố gắng lưu một Tab đã được yêu thích"
+        },
+        "cmd_export_all": {
+            "message": "Hiển thị modal để xuất tất cả Tabs đã lưu",
+            "description": "[mô tả lệnh] người dùng muốn xuất tất cả Tabs"
+        },
+        "cmd_import": {
+            "message": "Hiển thị modal để import Tabs mới",
+            "description": "[mô tả lệnh] người dùng muốn nhập Tabs mới"
+        },
+        "cmd_open_other_org": {
+            "message": "Hiển thị modal để mở trang hiện tại trong một Org khác",
+            "description": "[mô tả lệnh] người dùng muốn mở trang hiện tại trong một Org khác"
+        },
+        "cmd_update_tab": {
+            "message": "Hiển thị modal để cập nhật trang hiện tại (nếu đã lưu)",
+            "description": "[mô tả lệnh] người dùng muốn cập nhật trang hiện tại"
+        },
+        "cmd_toggle_org": {
+            "message": "Chuyển đổi giá trị Org của trang hiện tại (nếu đã lưu)",
+            "description": "[mô tả lệnh] người dùng muốn chuyển đổi Org cho trang hiện tại"
+        },
+        "cmd_remove_tab": {
+            "message": "Xóa trang hiện tại khỏi danh sách Tab (nếu đã lưu)",
+            "description": "[mô tả lệnh] người dùng muốn xóa trang hiện tại"
+        },
+        "cmd_save_as_tab": {
+            "message": "Lưu trang hiện tại vào danh sách Tab (nếu chưa lưu)",
+            "description": "[mô tả lệnh] người dùng muốn lưu trang hiện tại"
+        },
+        "drop": {
+            "message": "Thả",
+            "description": "[import] cho phép người dùng kéo thả tệp của họ vào khu vực được chỉ định"
+        },
+        "open_settings": {
+            "message": "Mở Cài đặt Tiện ích",
+            "description": "[popup] nút để chuyển hướng đến trang cài đặt"
+        },
 	"allow": {
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"

@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "new TranslationService() এর পরিবর্তে TranslationService.create() ব্যবহার করুন",
+    "description": "[error] ডেভেলপারকে TranslationService ক্লাস কীভাবে ব্যবহার করতে হয় তা জানান"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator এখনও আরম্ভ হয়নি।",
+    "description": "[error] TranslationService প্রস্তুত ছিল না"
+  },
+  "error_many_tabs_found": {
+    "message": "একটি Tab এর বেশি পাওয়া গেছে।",
+    "description": "[error] একাধিক Tabs উদ্ধার করা হয়েছে"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "new TabContainer() এর পরিবর্তে TabContainer.create() ব্যবহার করুন",
+    "description": "[error] ডেভেলপারকে TabContainer ক্লাস কীভাবে ব্যবহার করতে হয় তা জানান"
+  },
+  "error_tab_constructor": {
+    "message": "new Tab() এর পরিবর্তে Tab.create() ব্যবহার করুন",
+    "description": "[error] ডেভেলপারকে Tab ক্লাস কীভাবে ব্যবহার করতে হয় তা জানান"
+  },
+  "error_redirect": {
+    "message": "পুনঃনির্দেশ সম্ভব নয়। দয়া করে পৃষ্ঠা পুনরায় লোড করুন।",
+    "description": "[error] পৃষ্ঠা পুনঃনির্দেশে সাধারণ ত্রুটি"
+  },
+  "error_failed_sync": {
+    "message": "সমন্বয় ব্যর্থ হয়েছে।",
+    "description": "[error] ব্যবহারকারীর সাথে Tabs সমন্বয় করতে ব্যর্থ"
+  },
+  "error_removing_all_tabs": {
+    "message": "সমস্ত Tabs মুছতে চেষ্টায় ত্রুটি।",
+    "description": "[error] সমস্ত Tabs মুছতে গিয়ে ত্রুটি"
+  },
+  "error_removing_generic_tabs": {
+    "message": "সাধারণ Tabs মুছতে চেষ্টায় ত্রুটি।",
+    "description": "[error] সাধারণ Tabs মুছতে গিয়ে ত্রুটি"
+  },
+  "error_adding_tab": {
+    "message": "Tab যোগ করতে চেষ্টায় ত্রুটি।",
+    "description": "[error] Tab যোগ করার সময় সাধারণ ত্রুটি"
+  },
+  "error_removing_other_tabs": {
+    "message": "অন্যান্য Tabs মুছতে চেষ্টায় ত্রুটি।",
+    "description": "[error] অন্যান্য Tabs মুছতে গিয়ে ত্রুটি"
+  },
+  "error_removing_tab": {
+    "message": "Tab মুছতে চেষ্টায় ত্রুটি।",
+    "description": "[error] Tab মুছার সময় সাধারণ ত্রুটি"
+  },
+  "error_not_initialized": {
+    "message": "এখনও আরম্ভ হয়নি।",
+    "description": "[error] ভেরিয়েবল প্রস্তুত না হওয়ার সময় সাধারণ ত্রুটি"
+  },
+  "error_unknown_request": {
+    "message": "অজানা অনুরোধ।",
+    "description": "[error] অজানা বার্তা প্রাপ্তির পর সাধারণ ত্রুটি"
+  },
+  "error_invalid_request": {
+    "message": "অবৈধ অনুরোধ।",
+    "description": "[error] ভুল ফর্ম্যাটের বার্তা প্রাপ্তির পর সাধারণ ত্রুটি"
+  },
+  "error_processing_tabs": {
+    "message": "Tabs প্রক্রিয়াকরণে ত্রুটি।",
+    "description": "[error] Tabs প্রক্রিয়াকরণে সাধারণ ত্রুটি"
+  },
+  "error_tab_url_saved": {
+    "message": "এই URL সহ Tab ইতিমধ্যে সংরক্ষণ করা হয়েছে!",
+    "description": "[error] ব্যবহারকারী পূর্বে সংরক্ষিত Tab সংরক্ষণের চেষ্টা করেছে"
+  },
+  "cmd_export_all": {
+    "message": "সংরক্ষণ করা সমস্ত Tabs রপ্তানি করার জন্য মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী সমস্ত Tabs রপ্তানি করতে চান"
+  },
+  "cmd_import": {
+    "message": "নতুন Tabs আমদানি করার জন্য মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী নতুন Tabs আমদানি করতে চান"
+  },
+  "cmd_open_other_org": {
+    "message": "বর্তমান পৃষ্ঠা অন্য Org-এ খুলতে মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী বর্তমান পৃষ্ঠা অন্য Org-এ খুলতে চান"
+  },
+  "cmd_update_tab": {
+    "message": "বর্তমান পৃষ্ঠা (যদি সংরক্ষিত থাকে) আপডেট করার জন্য মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী বর্তমান পৃষ্ঠা আপডেট করতে চান"
+  },
+  "cmd_toggle_org": {
+    "message": "বর্তমান পৃষ্ঠার Org মান পরিবর্তনের জন্য মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী বর্তমান পৃষ্ঠার Org পরিবর্তন করতে চান"
+  },
+  "cmd_remove_tab": {
+    "message": "বর্তমান পৃষ্ঠা তালিকা থেকে সরাতে মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী বর্তমান পৃষ্ঠা সরাতে চান"
+  },
+  "cmd_save_as_tab": {
+    "message": "বর্তমান পৃষ্ঠা তালিকায় সংরক্ষণ করতে মডাল প্রদর্শন করুন",
+    "description": "[command description] ব্যবহারকারী বর্তমান পৃষ্ঠা সংরক্ষণ করতে চান"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] ব্যবহারকারীকে নির্দিষ্ট এলাকায় ফাইল ড্রপ করতে দেয়"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] সেটিংস পাতায় পুনঃনির্দেশ করার জন্য বোতাম"
+  },
 	"allow": {
 		"message": "অনুমতি দিন",
 		"description": "[req_permission] অনুমতি দেওয়ার জন্য বোতাম"

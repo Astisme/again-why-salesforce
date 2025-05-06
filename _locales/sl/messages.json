@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Uporabite TranslationService.create() namesto new TranslationService() za uporabo razreda TranslationService",
+            "description": "[napaka] povejte razvijalcu, kako uporabljati razred TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "prevajalnik še ni bil inicializiran.",
+            "description": "[napaka] TranslationService ni bil pripravljen"
+        },
+        "error_many_tabs_found": {
+            "message": "Najdenih več kot en Tab.",
+            "description": "[napaka] pridobljenih je bilo veliko Tabs"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Uporabite TabContainer.create() namesto new TabContainer() za uporabo razreda TabContainer",
+            "description": "[napaka] povejte razvijalcu, kako uporabljati razred TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Uporabite Tab.create() namesto new Tab() za uporabo razreda Tab",
+            "description": "[napaka] povejte razvijalcu, kako uporabljati razred Tab"
+        },
+        "error_redirect": {
+            "message": "Ne morem preusmeriti. Prosimo, osvežite stran.",
+            "description": "[napaka] Splošna napaka pri preusmeritvi strani."
+        },
+        "error_failed_sync": {
+            "message": "Sinhronizacija ni uspela.",
+            "description": "[napaka] Splošna napaka, ko Tab-ov ni bilo mogoče sinhronizirati od uporabnika"
+        },
+        "error_removing_all_tabs": {
+            "message": "Napaka pri odstranjevanju vseh Tabs.",
+            "description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju vseh Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Napaka pri odstranjevanju splošnih Tabs.",
+            "description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju splošnih Tabs"
+        },
+        "error_adding_tab": {
+            "message": "Napaka pri dodajanju Tab.",
+            "description": "[napaka] Splošna napaka, uporabljena pri dodajanju Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Napaka pri odstranjevanju drugih Tabs.",
+            "description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju drugih Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Napaka pri odstranjevanju Tab.",
+            "description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju Tab"
+        },
+        "error_not_initialized": {
+            "message": "še ni bil inicializiran.",
+            "description": "[napaka] Splošna napaka, ko spremenljivka ni pripravljena"
+        },
+        "error_unknown_request": {
+            "message": "Neznana zahteva.",
+            "description": "[napaka] Splošna napaka po prejemu sporočila, ki ni bilo prepoznano"
+        },
+        "error_invalid_request": {
+            "message": "Neveljavna zahteva.",
+            "description": "[napaka] Splošna napaka po prejemu sporočila s slabim formatom"
+        },
+        "error_processing_tabs": {
+            "message": "Napaka pri obdelavi Tabs.",
+            "description": "[napaka] Splošna napaka pri obdelavi Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab s tem URL-jem je že shranjen!",
+            "description": "[napaka] Uporabnik je poskusil shraniti že priljubljen Tab"
+        },
+        "cmd_export_all": {
+            "message": "Prikaži modal za izvoz vseh shranjenih Tabs",
+            "description": "[opis ukaza] uporabnik želi izvoziti vse Tabs"
+        },
+        "cmd_import": {
+            "message": "Prikaži modal za uvoz novih Tabs",
+            "description": "[opis ukaza] uporabnik želi uvoziti nove Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Prikaži modal za odprtje trenutne strani v drugi Org",
+            "description": "[opis ukaza] uporabnik želi odpreti trenutno stran v drugi Org"
+        },
+        "cmd_update_tab": {
+            "message": "Prikaži modal za posodobitev trenutne strani (če je shranjena)",
+            "description": "[opis ukaza] uporabnik želi posodobiti trenutno stran"
+        },
+        "cmd_toggle_org": {
+            "message": "Preklopi vrednost Org trenutne strani (če je shranjena)",
+            "description": "[opis ukaza] uporabnik želi preklopiti Org za trenutno stran"
+        },
+        "cmd_remove_tab": {
+            "message": "Odstrani trenutno stran s seznama Tabs (če je shranjena)",
+            "description": "[opis ukaza] uporabnik želi odstraniti trenutno stran"
+        },
+        "cmd_save_as_tab": {
+            "message": "Shrani trenutno stran na seznam Tabs (če ni shranjena)",
+            "description": "[opis ukaza] uporabnik želi shraniti trenutno stran"
+        },
+        "drop": {
+            "message": "Spusti",
+            "description": "[uvoz] omogoči uporabniku, da spusti svoje datoteke na določeno območje"
+        },
+        "open_settings": {
+            "message": "Odpri Nastavitve Razširitve",
+            "description": "[pojavi se] gumb za preusmeritev na stran z nastavitvami"
+        },
 	"allow": {
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"

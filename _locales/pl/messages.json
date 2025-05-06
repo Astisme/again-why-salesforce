@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Użyj TranslationService.create() zamiast new TranslationService() aby użyć klasy TranslationService",
+            "description": "[błąd] poinformuj dewelopera jak używać klasy TranslationService"
+        },
+        "error_translator_not_initialized": {
+            "message": "translator nie został jeszcze zainicjalizowany.",
+            "description": "[błąd] TranslationService nie był gotowy"
+        },
+        "error_many_tabs_found": {
+            "message": "Znaleziono więcej niż jeden Tab.",
+            "description": "[błąd] pobrano wiele Tabs"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Użyj TabContainer.create() zamiast new TabContainer() aby użyć klasy TabContainer",
+            "description": "[błąd] poinformuj dewelopera jak używać klasy TabContainer"
+        },
+        "error_tab_constructor": {
+            "message": "Użyj Tab.create() zamiast new Tab() aby użyć klasy Tab",
+            "description": "[błąd] poinformuj dewelopera jak używać klasy Tab"
+        },
+        "error_redirect": {
+            "message": "Nie można przekierować. Proszę odświeżyć stronę.",
+            "description": "[błąd] Ogólny błąd podczas przekierowania strony."
+        },
+        "error_failed_sync": {
+            "message": "Nie udało się synchronizować.",
+            "description": "[błąd] Ogólny błąd, gdy Tabs nie mogły zostać zsynchronizowane od użytkownika"
+        },
+        "error_removing_all_tabs": {
+            "message": "Błąd podczas usuwania wszystkich Tabs.",
+            "description": "[błąd] Ogólny błąd używany podczas usuwania wszystkich Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Błąd podczas usuwania generycznych Tabs.",
+            "description": "[błąd] Ogólny błąd używany podczas usuwania generycznych Tabs"
+        },
+        "error_adding_tab": {
+            "message": "Błąd podczas dodawania Tab.",
+            "description": "[błąd] Ogólny błąd używany podczas dodawania Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Błąd podczas usuwania innych Tabs.",
+            "description": "[błąd] Ogólny błąd używany podczas usuwania innych Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Błąd podczas usuwania Tab.",
+            "description": "[błąd] Ogólny błąd używany podczas usuwania Tab"
+        },
+        "error_not_initialized": {
+            "message": "nie został jeszcze zainicjalizowany.",
+            "description": "[błąd] Ogólny błąd, gdy zmienna nie jest gotowa"
+        },
+        "error_unknown_request": {
+            "message": "Nieznane żądanie.",
+            "description": "[błąd] Ogólny błąd po otrzymaniu wiadomości, która nie została rozpoznana"
+        },
+        "error_invalid_request": {
+            "message": "Nieprawidłowe żądanie.",
+            "description": "[błąd] Ogólny błąd po otrzymaniu źle sformatowanej wiadomości"
+        },
+        "error_processing_tabs": {
+            "message": "Błąd przetwarzania Tabs.",
+            "description": "[błąd] Ogólny błąd podczas przetwarzania Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab z tym URL-em został już zapisany!",
+            "description": "[błąd] Użytkownik próbował zapisać Tab, który już był ulubiony"
+        },
+        "cmd_export_all": {
+            "message": "Pokaż modal eksportu wszystkich zapisanych Tabs",
+            "description": "[opis komendy] użytkownik chce wyeksportować wszystkie Tabs"
+        },
+        "cmd_import": {
+            "message": "Pokaż modal importu nowych Tabs",
+            "description": "[opis komendy] użytkownik chce zaimportować nowe Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Pokaż modal otwarcia bieżącej strony w innej Org",
+            "description": "[opis komendy] użytkownik chce otworzyć bieżącą stronę w innej Org"
+        },
+        "cmd_update_tab": {
+            "message": "Pokaż modal aktualizacji bieżącej strony (jeśli zapisana)",
+            "description": "[opis komendy] użytkownik chce zaktualizować bieżącą stronę"
+        },
+        "cmd_toggle_org": {
+            "message": "Przełącz wartość Org bieżącej strony (jeśli zapisana)",
+            "description": "[opis komendy] użytkownik chce przełączyć Org dla bieżącej strony"
+        },
+        "cmd_remove_tab": {
+            "message": "Usuń bieżącą stronę z listy Tabs (jeśli zapisana)",
+            "description": "[opis komendy] użytkownik chce usunąć bieżącą stronę"
+        },
+        "cmd_save_as_tab": {
+            "message": "Zapisz bieżącą stronę w liście Tabs (jeśli nie zapisana)",
+            "description": "[opis komendy] użytkownik chce zapisać bieżącą stronę"
+        },
+        "drop": {
+            "message": "Upuść",
+            "description": "[import] pozwól użytkownikowi upuścić pliki na wyznaczony obszar"
+        },
+        "open_settings": {
+            "message": "Otwórz Ustawienia Rozszerzenia",
+            "description": "[popup] przycisk do przekierowania do strony ustawień"
+        },
 	"allow": {
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"

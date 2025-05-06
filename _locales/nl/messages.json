@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Gebruik TranslationService.create() in plaats van new TranslationService() om de TranslationService klasse te gebruiken",
+            "description": "[fout] vertel de ontwikkelaar hoe de TranslationService klasse te gebruiken"
+        },
+        "error_translator_not_initialized": {
+            "message": "vertaler was nog niet geïnitialiseerd.",
+            "description": "[fout] de TranslationService was niet klaar"
+        },
+        "error_many_tabs_found": {
+            "message": "Meer dan één Tab gevonden.",
+            "description": "[fout] veel Tabs werden opgehaald"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Gebruik TabContainer.create() in plaats van new TabContainer() om de TabContainer klasse te gebruiken",
+            "description": "[fout] vertel de ontwikkelaar hoe de TabContainer klasse te gebruiken"
+        },
+        "error_tab_constructor": {
+            "message": "Gebruik Tab.create() in plaats van new Tab() om de Tab klasse te gebruiken",
+            "description": "[fout] vertel de ontwikkelaar hoe de Tab klasse te gebruiken"
+        },
+        "error_redirect": {
+            "message": "Kan niet redirecten. Ververs de pagina alstublieft.",
+            "description": "[fout] Algemene fout bij het doorverwijzen van pagina's."
+        },
+        "error_failed_sync": {
+            "message": "Synchronisatie mislukt.",
+            "description": "[fout] Algemene fout wanneer de Tabs niet konden worden gesynchroniseerd van de gebruiker"
+        },
+        "error_removing_all_tabs": {
+            "message": "Fout bij het verwijderen van alle Tabs.",
+            "description": "[fout] Algemene fout gebruikt bij het verwijderen van alle Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Fout bij het verwijderen van generieke Tabs.",
+            "description": "[fout] Algemene fout gebruikt bij het verwijderen van generieke Tabs"
+        },
+        "error_adding_tab": {
+            "message": "Fout bij het toevoegen van Tab.",
+            "description": "[fout] Algemene fout gebruikt bij het toevoegen van een Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Fout bij het verwijderen van andere Tabs.",
+            "description": "[fout] Algemene fout gebruikt bij het verwijderen van andere Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Fout bij het verwijderen van Tab.",
+            "description": "[fout] Algemene fout gebruikt bij het verwijderen van een Tab"
+        },
+        "error_not_initialized": {
+            "message": "was nog niet geïnitialiseerd.",
+            "description": "[fout] Algemene fout voor wanneer een variabele niet klaar is"
+        },
+        "error_unknown_request": {
+            "message": "Onbekend verzoek.",
+            "description": "[fout] Algemene fout na ontvangst van een niet-herkend bericht"
+        },
+        "error_invalid_request": {
+            "message": "Ongeldig verzoek.",
+            "description": "[fout] Algemene fout na ontvangst van een slecht opgemaakt bericht"
+        },
+        "error_processing_tabs": {
+            "message": "Fout bij het verwerken van Tabs.",
+            "description": "[fout] Algemene fout bij het verwerken van de Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Een Tab met deze URL is al opgeslagen!",
+            "description": "[fout] De gebruiker probeerde een reeds favoriete Tab op te slaan"
+        },
+        "cmd_export_all": {
+            "message": "Toon de modal om alle opgeslagen Tabs te exporteren",
+            "description": "[opdrachtbeschrijving] de gebruiker wil alle Tabs exporteren"
+        },
+        "cmd_import": {
+            "message": "Toon de modal om nieuwe Tabs te importeren",
+            "description": "[opdrachtbeschrijving] de gebruiker wil nieuwe Tabs importeren"
+        },
+        "cmd_open_other_org": {
+            "message": "Toon de modal om de huidige pagina in een andere Org te openen",
+            "description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina in een andere Org openen"
+        },
+        "cmd_update_tab": {
+            "message": "Toon modal om huidige pagina bij te werken (indien opgeslagen)",
+            "description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina bijwerken"
+        },
+        "cmd_toggle_org": {
+            "message": "Schakel de Org-waarde van de huidige pagina om (indien opgeslagen)",
+            "description": "[opdrachtbeschrijving] de gebruiker wil de Org voor de huidige pagina omwisselen"
+        },
+        "cmd_remove_tab": {
+            "message": "Verwijder de huidige pagina uit de Tab lijst (indien opgeslagen)",
+            "description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina verwijderen"
+        },
+        "cmd_save_as_tab": {
+            "message": "Sla de huidige pagina op in de Tab lijst (indien niet opgeslagen)",
+            "description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina opslaan"
+        },
+        "drop": {
+            "message": "Drop",
+            "description": "[import] laat de gebruiker hun bestanden op het opgegeven gebied neerzetten"
+        },
+        "open_settings": {
+            "message": "Extensie-instellingen openen",
+            "description": "[popup] knop om door te verwijzen naar de instellingenpagina"
+        },
 	"allow": {
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"

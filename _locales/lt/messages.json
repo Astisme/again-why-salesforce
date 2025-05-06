@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "Naudokite TranslationService.create() vietoj new TranslationService()",
+            "description": "[klaida] nurodykite kūrėjui, kaip naudoti TranslationService klasę"
+        },
+        "error_translator_not_initialized": {
+            "message": "vertėjas dar nebuvo inicializuotas.",
+            "description": "[klaida] TranslationService nebuvo paruoštas"
+        },
+        "error_many_tabs_found": {
+            "message": "Rasta daugiau nei vienas Tab.",
+            "description": "[klaida] rasta daug Tabs"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "Naudokite TabContainer.create() vietoj new TabContainer()",
+            "description": "[klaida] nurodykite kūrėjui, kaip naudoti TabContainer klasę"
+        },
+        "error_tab_constructor": {
+            "message": "Naudokite Tab.create() vietoj new Tab()",
+            "description": "[klaida] nurodykite kūrėjui, kaip naudoti Tab klasę"
+        },
+        "error_redirect": {
+            "message": "Negalima peradresuoti. Prašome atnaujinti puslapį.",
+            "description": "[klaida] Bendra klaida perskirstant puslapį."
+        },
+        "error_failed_sync": {
+            "message": "Sinchronizuoti nepavyko.",
+            "description": "[klaida] Bendra klaida, kai Tabs nepavyko sinchronizuoti iš vartotojo"
+        },
+        "error_removing_all_tabs": {
+            "message": "Klaida šalinant visus Tabs.",
+            "description": "[klaida] Bendra klaida naudojama šalinant visus Tabs"
+        },
+        "error_removing_generic_tabs": {
+            "message": "Klaida šalinant bendrus Tabs.",
+            "description": "[klaida] Bendra klaida naudojama šalinant bendrus Tabs"
+        },
+        "error_adding_tab": {
+            "message": "Klaida pridedant Tab.",
+            "description": "[klaida] Bendra klaida naudojama pridedant Tab"
+        },
+        "error_removing_other_tabs": {
+            "message": "Klaida šalinant kitus Tabs.",
+            "description": "[klaida] Bendra klaida naudojama šalinant kitus Tabs"
+        },
+        "error_removing_tab": {
+            "message": "Klaida šalinant Tab.",
+            "description": "[klaida] Bendra klaida naudojama šalinant Tab"
+        },
+        "error_not_initialized": {
+            "message": "dar nebuvo inicializuotas.",
+            "description": "[klaida] Bendra klaida, kai kintamasis nėra paruoštas"
+        },
+        "error_unknown_request": {
+            "message": "Nežinoma užklausa.",
+            "description": "[klaida] Bendra klaida gavus neatpažintą žinutę"
+        },
+        "error_invalid_request": {
+            "message": "Neleistina užklausa.",
+            "description": "[klaida] Bendra klaida gavus blogai suformatuotą žinutę"
+        },
+        "error_processing_tabs": {
+            "message": "Klaida apdorojant Tabs.",
+            "description": "[klaida] Bendra klaida apdorojant Tabs"
+        },
+        "error_tab_url_saved": {
+            "message": "Tab su šiuo URL jau buvo išsaugotas!",
+            "description": "[klaida] Vartotojas bandė išsaugoti jau mėgstamą Tab"
+        },
+        "cmd_export_all": {
+            "message": "Rodyti modalą visų išsaugotų Tabs eksportavimui",
+            "description": "[komandos aprašymas] vartotojas nori eksportuoti visus Tabs"
+        },
+        "cmd_import": {
+            "message": "Rodyti modalą naujų Tabs importavimui",
+            "description": "[komandos aprašymas] vartotojas nori importuoti naujus Tabs"
+        },
+        "cmd_open_other_org": {
+            "message": "Rodyti modalą atidaryti dabartinį puslapį kitoje Org",
+            "description": "[komandos aprašymas] vartotojas nori atidaryti dabartinį puslapį kitoje Org"
+        },
+        "cmd_update_tab": {
+            "message": "Rodyti modalą dabartinio puslapio atnaujinimui (jei išsaugotas)",
+            "description": "[komandos aprašymas] vartotojas nori atnaujinti dabartinį puslapį"
+        },
+        "cmd_toggle_org": {
+            "message": "Perjungti dabartinio puslapio Org reikšmę (jei išsaugotas)",
+            "description": "[komandos aprašymas] vartotojas nori perjungti Org dabartiniam puslapiui"
+        },
+        "cmd_remove_tab": {
+            "message": "Pašalinti dabartinį puslapį iš Tabs sąrašo (jei išsaugotas)",
+            "description": "[komandos aprašymas] vartotojas nori pašalinti dabartinį puslapį"
+        },
+        "cmd_save_as_tab": {
+            "message": "Išsaugoti dabartinį puslapį Tabs sąraše (jei neišsaugotas)",
+            "description": "[komandos aprašymas] vartotojas nori išsaugoti dabartinį puslapį"
+        },
+        "drop": {
+            "message": "Numesti",
+            "description": "[importas] leisti vartotojui numesti savo failus į nurodytą sritį"
+        },
+        "open_settings": {
+            "message": "Atidaryti plėtinio nustatymus",
+            "description": "[iššokantis langas] mygtukas nukreipti į nustatymų puslapį"
+        },
 	"allow": {
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"

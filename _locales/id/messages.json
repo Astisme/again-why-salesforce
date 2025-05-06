@@ -1,4 +1,108 @@
 {
+  "error_translationservice_constructor": {
+    "message": "Gunakan TranslationService.create() alih-alih new TranslationService()",
+    "description": "[error] Beri tahu pengembang cara menggunakan kelas TranslationService"
+  },
+  "error_translator_not_initialized": {
+    "message": "translator belum diinisialisasi.",
+    "description": "[error] TranslationService belum siap"
+  },
+  "error_many_tabs_found": {
+    "message": "Ditemukan lebih dari satu Tab.",
+    "description": "[error] Banyak Tabs dikembalikan"
+  },
+  "error_tabcontainer_constructor": {
+    "message": "Gunakan TabContainer.create() alih-alih new TabContainer()",
+    "description": "[error] Beri tahu pengembang cara menggunakan kelas TabContainer"
+  },
+  "error_tab_constructor": {
+    "message": "Gunakan Tab.create() alih-alih new Tab()",
+    "description": "[error] Beri tahu pengembang cara menggunakan kelas Tab"
+  },
+  "error_redirect": {
+    "message": "Tidak dapat mengarahkan ulang. Harap muat ulang halaman.",
+    "description": "[error] Kesalahan umum saat pengalihan halaman"
+  },
+  "error_failed_sync": {
+    "message": "Sinkronisasi gagal.",
+    "description": "[error] Kesalahan umum saat menyinkronkan Tabs dengan pengguna"
+  },
+  "error_removing_all_tabs": {
+    "message": "Kesalahan saat menghapus semua Tabs.",
+    "description": "[error] Kesalahan umum saat menghapus semua Tabs"
+  },
+  "error_removing_generic_tabs": {
+    "message": "Kesalahan saat menghapus Tabs generik.",
+    "description": "[error] Kesalahan umum saat menghapus Tabs generik"
+  },
+  "error_adding_tab": {
+    "message": "Kesalahan saat menambah Tab.",
+    "description": "[error] Kesalahan umum saat menambah Tab"
+  },
+  "error_removing_other_tabs": {
+    "message": "Kesalahan saat menghapus Tabs lain.",
+    "description": "[error] Kesalahan umum saat menghapus Tabs lain"
+  },
+  "error_removing_tab": {
+    "message": "Kesalahan saat menghapus Tab.",
+    "description": "[error] Kesalahan umum saat menghapus Tab"
+  },
+  "error_not_initialized": {
+    "message": "Belum diinisialisasi.",
+    "description": "[error] Kesalahan umum ketika variabel belum siap"
+  },
+  "error_unknown_request": {
+    "message": "Permintaan tidak dikenal.",
+    "description": "[error] Kesalahan umum setelah menerima pesan yang tidak dikenali"
+  },
+  "error_invalid_request": {
+    "message": "Permintaan tidak valid.",
+    "description": "[error] Kesalahan umum setelah menerima pesan dengan format salah"
+  },
+  "error_processing_tabs": {
+    "message": "Kesalahan saat memproses Tabs.",
+    "description": "[error] Kesalahan umum saat memproses Tabs"
+  },
+  "error_tab_url_saved": {
+    "message": "Tab dengan URL ini sudah disimpan!",
+    "description": "[error] Pengguna mencoba menyimpan Tab yang sudah disimpan"
+  },
+  "cmd_export_all": {
+    "message": "Tampilkan modal untuk mengekspor semua Tabs yang disimpan",
+    "description": "[command description] pengguna ingin mengekspor semua Tabs"
+  },
+  "cmd_import": {
+    "message": "Tampilkan modal untuk mengimpor Tabs baru",
+    "description": "[command description] pengguna ingin mengimpor Tabs baru"
+  },
+  "cmd_open_other_org": {
+    "message": "Tampilkan modal untuk membuka halaman saat ini di Org lain",
+    "description": "[command description] pengguna ingin membuka halaman saat ini di Org lain"
+  },
+  "cmd_update_tab": {
+    "message": "Tampilkan modal untuk memperbarui halaman saat ini (jika disimpan)",
+    "description": "[command description] pengguna ingin memperbarui halaman saat ini"
+  },
+  "cmd_toggle_org": {
+    "message": "Tampilkan modal untuk mengganti nilai Org halaman saat ini (jika disimpan)",
+    "description": "[command description] pengguna ingin mengganti Org halaman saat ini"
+  },
+  "cmd_remove_tab": {
+    "message": "Hapus halaman saat ini dari daftar Tabs (jika disimpan)",
+    "description": "[command description] pengguna ingin menghapus halaman saat ini"
+  },
+  "cmd_save_as_tab": {
+    "message": "Simpan halaman saat ini ke daftar Tabs (jika belum disimpan)",
+    "description": "[command description] pengguna ingin menyimpan halaman saat ini"
+  },
+  "drop": {
+    "message": "Drop",
+    "description": "[import] memungkinkan pengguna menjatuhkan file mereka ke area yang ditentukan"
+  },
+  "open_settings": {
+    "message": "Open Extension Settings",
+    "description": "[popup] tombol untuk mengarahkan ke halaman pengaturan"
+  },
 	"allow": {
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"

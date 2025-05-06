@@ -1,4 +1,108 @@
 {
+        "error_translationservice_constructor": {
+            "message": "新しい TranslationService() の代わりに TranslationService.create() を使用してください",
+            "description": "[エラー] 開発者に TranslationService クラスの使用方法を伝えます"
+        },
+        "error_translator_not_initialized": {
+            "message": "翻訳ツールはまだ初期化されていません。",
+            "description": "[エラー] TranslationService が準備できていませんでした"
+        },
+        "error_many_tabs_found": {
+            "message": "複数の Tab が見つかりました。",
+            "description": "[エラー] 多くの Tabs が取得されました"
+        },
+        "error_tabcontainer_constructor": {
+            "message": "新しい TabContainer() の代わりに TabContainer.create() を使用してください",
+            "description": "[エラー] 開発者に TabContainer クラスの使用方法を伝えます"
+        },
+        "error_tab_constructor": {
+            "message": "新しい Tab() の代わりに Tab.create() を使用してください",
+            "description": "[エラー] 開発者に Tab クラスの使用方法を伝えます"
+        },
+        "error_redirect": {
+            "message": "リダイレクトできません。ページを更新してください。",
+            "description": "[エラー] ページ リダイレクトに関する一般的なエラー。"
+        },
+        "error_failed_sync": {
+            "message": "同期に失敗しました。",
+            "description": "[エラー] ユーザーから Tabs を同期できなかった場合の一般的なエラー"
+        },
+        "error_removing_all_tabs": {
+            "message": "すべての Tabs を削除中にエラーが発生しました。",
+            "description": "[エラー] すべての Tabs を削除中に使用される一般的なエラー"
+        },
+        "error_removing_generic_tabs": {
+            "message": "汎用 Tabs を削除中にエラーが発生しました。",
+            "description": "[エラー] 汎用 Tabs を削除中に使用される一般的なエラー"
+        },
+        "error_adding_tab": {
+            "message": "Tab の追加中にエラーが発生しました。",
+            "description": "[エラー] Tab の追加中に使用される一般的なエラー"
+        },
+        "error_removing_other_tabs": {
+            "message": "他の Tabs を削除中にエラーが発生しました。",
+            "description": "[エラー] 他の Tabs を削除中に使用される一般的なエラー"
+        },
+        "error_removing_tab": {
+            "message": "Tab の削除中にエラーが発生しました。",
+            "description": "[エラー] Tab の削除中に使用される一般的なエラー"
+        },
+        "error_not_initialized": {
+            "message": "はまだ初期化されていませんでした。",
+            "description": "[エラー] 変数が準備できていない場合の一般的なエラー"
+        },
+        "error_unknown_request": {
+            "message": "不明なリクエスト。",
+            "description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
+        },
+        "error_invalid_request": {
+            "message": "無効なリクエスト。",
+            "description": "[エラー] フォーマットが不正なメッセージを受信した後の一般的なエラー"
+        },
+        "error_processing_tabs": {
+            "message": "Tabs の処理中にエラーが発生しました。",
+            "description": "[エラー] Tabs の処理中の一般的なエラー"
+        },
+        "error_tab_url_saved": {
+            "message": "この URL を持つ Tab は既に保存されています！",
+            "description": "[エラー] ユーザーが既にブックマークされている Tab を保存しようとしました"
+        },
+        "cmd_export_all": {
+            "message": "保存されているすべての Tabs をエクスポートするモーダルを表示する",
+            "description": "[コマンド説明] ユーザーはすべての Tabs をエクスポートしたいと考えています"
+        },
+        "cmd_import": {
+            "message": "新しい Tabs をインポートするモーダルを表示する",
+            "description": "[コマンド説明] ユーザーは新しい Tabs をインポートしたいと考えています"
+        },
+        "cmd_open_other_org": {
+            "message": "現在のページを別の Org で開くモーダルを表示する",
+            "description": "[コマンド説明] ユーザーは現在のページを別の Org で開きたいと考えています"
+        },
+        "cmd_update_tab": {
+            "message": "現在のページを更新するモーダルを表示する（保存されている場合）",
+            "description": "[コマンド説明] ユーザーは現在のページを更新したいと考えています"
+        },
+        "cmd_toggle_org": {
+            "message": "現在のページの Org 値を切り替える（保存されている場合）",
+            "description": "[コマンド説明] ユーザーは現在のページの Org を切り替えたいと考えています"
+        },
+        "cmd_remove_tab": {
+            "message": "Tab リストから現在のページを削除する（保存されている場合）",
+            "description": "[コマンド説明] ユーザーは現在のページを削除したいと考えています"
+        },
+        "cmd_save_as_tab": {
+            "message": "現在のページを Tab リストに保存する（保存されていない場合）",
+            "description": "[コマンド説明] ユーザーは現在のページを保存したいと考えています"
+        },
+        "drop": {
+            "message": "ドロップ",
+            "description": "[インポート] ユーザーが指定されたエリアにファイルをドロップできるようにします"
+        },
+        "open_settings": {
+            "message": "拡張機能設定を開く",
+            "description": "[ポップアップ] 設定ページにリダイレクトするボタン"
+        },
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
