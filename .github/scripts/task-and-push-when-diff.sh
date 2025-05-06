@@ -25,6 +25,9 @@ deno task "$TASK" > "$LOG_FILE" 2>&1
 echo "▶  Checking for changes…"
 DIFF_FILE=$(mktemp)
 (git diff;  git diff --staged) > "$DIFF_FILE"
+if [ "$TASK" = "locale-check" ]; then
+    cat missing-keys-report.json >> "$DIFF_FILE"
+fi
 # Grab the size of the diff file
 SIZE=$(stat --format=%s "$DIFF_FILE" 2>/dev/null || stat -f%z "$DIFF_FILE")
 
