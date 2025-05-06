@@ -479,13 +479,13 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	}
 	allTabs = await ensureAllTabsAvailability();
     if(label == null && url == null){
-        const miniyURL = Tab.minifyURL(getCurrentHref());
+        const minyURL = Tab.minifyURL(getCurrentHref());
         try {
-            const matchingTab = allTabs.getSingleTabByData({ url: miniyURL });
+            const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
             label = matchingTab.label;
             url = matchingTab.url;
         } catch (_) {
-            url = miniyURL;
+            url = minyURL;
         }
     }
 	const skip_link_detection = await getSettings("skip_link_detection");

@@ -23,7 +23,7 @@ switch (browser) {
         ];
         Object.keys(manifest.commands).forEach(com => {
             if(!commandsToKeep.includes(com))
-                delete manifest.commands[com];
+                delete manifest.commands[com]["suggested_key"];
         });
 		break;
     }
