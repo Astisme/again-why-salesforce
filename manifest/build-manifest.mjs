@@ -16,10 +16,10 @@ switch (browser) {
 		delete manifest.background.scripts;
 		delete manifest.browser_specific_settings;
         const commandsToKeep = [
-            "save-as-tab",
-            "remove-tab",
-            "update-tab",
-            "open-other-org",
+            "cmd-save-as-tab",
+            "cmd-remove-tab",
+            "cmd-update-tab",
+            "cmd-open-other-org",
         ];
         Object.keys(manifest.commands).forEach(com => {
             if(!commandsToKeep.includes(com))

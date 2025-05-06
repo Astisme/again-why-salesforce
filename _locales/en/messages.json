@@ -1,4 +1,8 @@
 {
+	"error_unassigned_commands": {
+		"message": "keyboard shortcuts which are not set.",
+		"description": "[error] inform the user that some commands / keyboard shortcuts did not register correctly"
+	},
 	"error_translationservice_constructor": {
 		"message": "Use TranslationService.create() instead of new TranslationService()",
 		"description": "[error] tell the developer how to use the TranslationService class"

@@ -165,7 +165,7 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
 	const toastElement = await generateSldsToastMessage(
-		message instanceof Array ? message : [message],
+		Array.isArray(message) ? message : [message],
 		isSuccess,
 		isWarning,
 	);
@@ -479,9 +479,14 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	}
 	allTabs = await ensureAllTabsAvailability();
     if(label == null && url == null){
-        const matchingTab = allTabs.getSingleTabByData({ url: Tab.minifyURL(getCurrentHref()) });
-        label = matchingTab.label;
-        url = matchingTab.url;
+        const miniyURL = Tab.minifyURL(getCurrentHref());
+        try {
+            const matchingTab = allTabs.getSingleTabByData({ url: miniyURL });
+            label = matchingTab.label;
+            url = matchingTab.url;
+        } catch (_) {
+            url = miniyURL;
+        }
     }
 	const skip_link_detection = await getSettings("skip_link_detection");
 	if (
@@ -822,6 +827,9 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 					url: message.tabUrl,
 				});
 				break;
+            case "commands":
+                showToast([`[${message.commands.length}]:`,"error_unassigned_commands"], false, true);
+                break;
 			default:
                 if(message.what != "theme")
                     showToast(`Unknown message received ${message.what}`, false, true);

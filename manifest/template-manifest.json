@@ -81,7 +81,7 @@
     "commands": {
         "cmd-save-as-tab": {
             "suggested_key": {
-                "default": "Alt+Shift+A"
+                "default": "Alt+Shift+P"
             },
             "description": "__MSG_cmd_save_as_tab__"
         },
@@ -129,7 +129,7 @@
         },
         "_execute_action": {
             "suggested_key": {
-                "default": "Alt+Shift+P"
+                "default": "Alt+Shift+B"
             }
         }
     }

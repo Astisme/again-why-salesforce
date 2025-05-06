@@ -123,7 +123,7 @@ class TranslationService {
 	 * @returns {string} Translated text
 	 */
 	async translate(key, language = this.currentLanguage, isError = false) {
-		if (key instanceof Array) {
+		if (Array.isArray(key)) {
 			const compoundTranslation = [];
 			for (const k of key) {
 				try {

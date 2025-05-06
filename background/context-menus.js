@@ -27,7 +27,7 @@ import {
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
+import { bg_getCurrentBrowserTab, bg_notify, checkCommandShortcuts, exportHandler } from "./utils.js";
 import { bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
 
 let areMenuItemsVisible = false;
@@ -264,9 +264,12 @@ BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
 );
 // when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener(() =>
-	checkAddRemoveContextMenus("installed")
-);
+BROWSER.runtime.onInstalled.addListener((details) => {
+	checkAddRemoveContextMenus("installed");
+    if (details.reason === BROWSER.runtime.OnInstalledReason.INSTALL) {
+        checkCommandShortcuts()
+    }
+});
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
