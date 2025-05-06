@@ -15,7 +15,8 @@
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add _locales/*/messages.json",
-		"locales": "deno --allow-read --allow-write bin/missing-locales.ts && deno task sort",
+        "locale-check": "deno --allow-read --allow-write bin/missing-locales.ts",
+		"locales": "deno task locale-check && deno task sort",
 		"bundle": "deno run -A bin/build.ts",
 
 		"dev-firefox": "deno --allow-write manifest/build-manifest.mjs firefox && deno task bundle",
