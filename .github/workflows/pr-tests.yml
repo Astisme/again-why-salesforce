@@ -38,13 +38,13 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require('./.github/scripts/comment-on-pr.js');
+                  const handler = require("./.github/scripts/comment-on-pr.js");
                   await handler({
                     github,
                     context,
                     core,
-                    logFile: 'lint-error.log',
-                    title:   'Linter Failed',
+                    logFile: "lint-error.log",
+                    title:   "Linter Failed",
                     matchPattern: /Found [0-9]+ problem/,
                     stripPatterns: [
                       /^Download https:\/\/.*\n/gm
@@ -59,16 +59,37 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require('./.github/scripts/comment-on-pr.js');
+                  const handler = require("./.github/scripts/comment-on-pr.js");
                   await handler({
                     github,
                     context,
                     core,
-                    logFile: 'test-error.log',
-                    title:   'Tests Failed',
+                    logFile: "test-error.log",
+                    title:   "Tests Failed",
                     matchPattern: /FAILED \| [0-9]+ passed .* \| [0-9]+ failed/,
                     stripPatterns: [
                       /^\.\/tests\/.+ ok \([0-9]+ms\)\n/gm
+                    ]
+                  });
+
+            - name: Comment Missing Locales
+              continue-on-error: true
+              run: .github/scripts/task-and-push-when-diff.sh locale-check missing-locales.log
+
+            - name: Comment on PR if there are missing locales
+              continue-on-error: true
+              uses: actions/github-script@v7
+              with:
+                script: |
+                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  await handler({
+                    github,
+                    context,
+                    core,
+                    logFile: "missing-locales.log",
+                    title:   "These Locale Translation are missing (not blocking)",
+                    stripPatterns: [
+                      /^Task locale-check deno --allow-read --allow-write bin/missing-locales.ts\n/gm
                     ]
                   });
 
@@ -80,13 +101,13 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require('./.github/scripts/comment-on-pr.js');
+                  const handler = require("./.github/scripts/comment-on-pr.js");
                   await handler({
                     github,
                     context,
                     core,
-                    logFile: 'locales-errors.log',
-                    title:   'Locale Sorter Failed',
+                    logFile: "locales-errors.log",
+                    title:   "Locale Sorter Failed",
                     matchPattern: /^(?:✖  Failed .+?: .+|Error traversing .+?: .+|Unexpected error: .+)/m,
                     stripPatterns: [
                       /^✔  Sorted .+\n/gm

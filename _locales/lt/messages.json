@@ -23,6 +23,34 @@
 		"message": "Pasirinkti",
 		"description": "Skyriaus antraštė elementams, kurie buvo pasirinkti"
 	},
+	"cmd_export_all": {
+		"message": "Rodyti modalą visų išsaugotų Tabs eksportavimui",
+		"description": "[komandos aprašymas] vartotojas nori eksportuoti visus Tabs"
+	},
+	"cmd_import": {
+		"message": "Rodyti modalą naujų Tabs importavimui",
+		"description": "[komandos aprašymas] vartotojas nori importuoti naujus Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Rodyti modalą atidaryti dabartinį puslapį kitoje Org",
+		"description": "[komandos aprašymas] vartotojas nori atidaryti dabartinį puslapį kitoje Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Pašalinti dabartinį puslapį iš Tabs sąrašo (jei išsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori pašalinti dabartinį puslapį"
+	},
+	"cmd_save_as_tab": {
+		"message": "Išsaugoti dabartinį puslapį Tabs sąraše (jei neišsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori išsaugoti dabartinį puslapį"
+	},
+	"cmd_toggle_org": {
+		"message": "Perjungti dabartinio puslapio Org reikšmę (jei išsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori perjungti Org dabartiniam puslapiui"
+	},
+	"cmd_update_tab": {
+		"message": "Rodyti modalą dabartinio puslapio atnaujinimui (jei išsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori atnaujinti dabartinį puslapį"
+	},
 	"confirm_another_org": {
 		"message": "Patvirtinkite šios nuorodos atidarymą.",
 		"description": "[atidaryti_kitą_org_modal] prašyti vartotojo patvirtinimo atidaryti sukurtą nuorodą."
@@ -123,6 +151,14 @@
 		"message": "Ištrinti visus Tabs",
 		"description": "[iškylantysis_langas] pavadinimas ant šiukšliadėžės, kad ištuštintumėte visus Tabs"
 	},
+	"drop": {
+		"message": "Numesti",
+		"description": "[importas] leisti vartotojui numesti savo failus į nurodytą sritį"
+	},
+	"error_adding_tab": {
+		"message": "Klaida pridedant Tab.",
+		"description": "[klaida] Bendra klaida naudojama pridedant Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Pirmiausia uždarykite kitą modalinį langą!",
 		"description": "[pranešimas] Vartotojas bandė atidaryti daugiau nei 1 modalinį langą"
@@ -155,6 +191,10 @@
 		"message": "Negalima išgauti Org pavadinimo iš tuščio URL!",
 		"description": "[klaida] URL, iš kurio reikia gauti Org pavadinimą, neperduotas"
 	},
+	"error_failed_sync": {
+		"message": "Sinchronizuoti nepavyko.",
+		"description": "[klaida] Bendra klaida, kai Tabs nepavyko sinchronizuoti iš vartotojo"
+	},
 	"error_get_with_no_org": {
 		"message": "Negalima gauti Tabs, jei Org nenurodyta.",
 		"description": "[klaida] bandyta ieškoti Tabs pagal Org nesiunčiant Org informacijos"
@@ -167,6 +207,10 @@
 		"message": "Funkcijai perduotas rakto parametras yra neteisingas",
 		"description": "[klaida] kūrėjas bandė iškviesti funkciją su neteisingu parametru"
 	},
+	"error_invalid_request": {
+		"message": "Neleistina užklausa.",
+		"description": "[klaida] Bendra klaida gavus blogai suformatuotą žinutę"
+	},
 	"error_invalid_tab": {
 		"message": "Neteisingas Tab",
 		"description": "[klaida] Tab negalioja"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Rasta daugiau nei 1 atitinkantis Tab.",
 		"description": "[klaida] gauta daug Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Rasta daugiau nei vienas Tab.",
+		"description": "[klaida] rasta daug Tabs"
 	},
 	"error_minify_url": {
 		"message": "Negalima sumažinti tuščio URL!",
@@ -235,9 +283,37 @@
 		"message": "Nėra URL tikrinimui!",
 		"description": "[klaida] URL tikrinimui neperduotas"
 	},
+	"error_not_initialized": {
+		"message": "dar nebuvo inicializuotas.",
+		"description": "[klaida] Bendra klaida, kai kintamasis nėra paruoštas"
+	},
+	"error_processing_tabs": {
+		"message": "Klaida apdorojant Tabs.",
+		"description": "[klaida] Bendra klaida apdorojant Tabs"
+	},
+	"error_redirect": {
+		"message": "Negalima peradresuoti. Prašome atnaujinti puslapį.",
+		"description": "[klaida] Bendra klaida perskirstant puslapį."
+	},
 	"error_remove_not_favourite": {
 		"message": "Negalima pašalinti ne mėgstamo Tab!",
 		"description": "[klaida] vartotojas bandė pašalinti Tab, kuris dar nebuvo išsaugotas"
+	},
+	"error_removing_all_tabs": {
+		"message": "Klaida šalinant visus Tabs.",
+		"description": "[klaida] Bendra klaida naudojama šalinant visus Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Klaida šalinant bendrus Tabs.",
+		"description": "[klaida] Bendra klaida naudojama šalinant bendrus Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Klaida šalinant kitus Tabs.",
+		"description": "[klaida] Bendra klaida naudojama šalinant kitus Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Klaida šalinant Tab.",
+		"description": "[klaida] Bendra klaida naudojama šalinant Tab"
 	},
 	"error_required_params": {
 		"message": "Būtini funkcijos parametrai nebuvo perduoti",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Negalima sinchronizuoti null Tabs!",
 		"description": "[klaida] bandyta sinchronizuoti nieko"
+	},
+	"error_tab_constructor": {
+		"message": "Naudokite Tab.create() vietoj new Tab()",
+		"description": "[klaida] nurodykite kūrėjui, kaip naudoti Tab klasę"
 	},
 	"error_tab_label": {
 		"message": "Etiketė turi būti ne tuščia eilutė",
@@ -271,6 +351,10 @@
 		"message": "URL turi būti ne tuščia eilutė",
 		"description": "[klaida] vartotojas bandė sukurti Tab be URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab su šiuo URL jau buvo išsaugotas!",
+		"description": "[klaida] Vartotojas bandė išsaugoti jau mėgstamą Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Negalima inicijuoti su",
 		"description": "[klaida] nepavyko inicijuoti Tab konteinerio"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Aptikta neteisingų Tab(s).\nPirmas pasitaikymas:",
 		"description": "[klaida] perduoti neteisingi Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Naudokite TabContainer.create() vietoj new TabContainer()",
+		"description": "[klaida] nurodykite kūrėjui, kaip naudoti TabContainer klasę"
+	},
+	"error_translationservice_constructor": {
+		"message": "Naudokite TranslationService.create() vietoj new TranslationService()",
+		"description": "[klaida] nurodykite kūrėjui, kaip naudoti TranslationService klasę"
+	},
+	"error_translator_not_initialized": {
+		"message": "vertėjas dar nebuvo inicializuotas.",
+		"description": "[klaida] TranslationService nebuvo paruoštas"
+	},
+	"error_unknown_request": {
+		"message": "Nežinoma užklausa.",
+		"description": "[klaida] Bendra klaida gavus neatpažintą žinutę"
 	},
 	"error_useless_remove": {
 		"message": "Negalima pašalinti:\nNegalima pašalinti puslapio, kuris anksčiau nebuvo išsaugotas",

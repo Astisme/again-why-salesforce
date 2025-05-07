@@ -23,6 +23,34 @@
 		"message": "Избрано",
 		"description": "Заглавие на секция за елементи, които са избрани"
 	},
+	"cmd_export_all": {
+		"message": "Покажи модал за експортиране на всички запазени Tabs",
+		"description": "[command description] потребителят иска да експортира всички Tabs"
+	},
+	"cmd_import": {
+		"message": "Покажи модал за импортиране на нови Tabs",
+		"description": "[command description] потребителят иска да импортира нови Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Покажи модал за отваряне на текущата страница в друга Org",
+		"description": "[command description] потребителят иска да отвори текущата страница в друга Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Премахни текущата страница от списъка с Tabs (ако е запазена)",
+		"description": "[command description] потребителят иска да премахне текущата страница"
+	},
+	"cmd_save_as_tab": {
+		"message": "Запази текущата страница в списъка с Tabs (ако не е запазена)",
+		"description": "[command description] потребителят иска да запази текущата страница"
+	},
+	"cmd_toggle_org": {
+		"message": "Покажи модал за превключване на стойността на Org на текущата страница (ако е запазена)",
+		"description": "[command description] потребителят иска да превключи Org на текущата страница"
+	},
+	"cmd_update_tab": {
+		"message": "Покажи модал за обновяване на текущата страница (ако е запазена)",
+		"description": "[command description] потребителят иска да обнови текущата страница"
+	},
 	"confirm_another_org": {
 		"message": "Потвърдете отварянето на този линк.",
 		"description": "[open-other-org-modal] заявка за потвърждение от потребителя за отваряне на конструирания линк."
@@ -123,6 +151,14 @@
 		"message": "Изтрий всички Tab",
 		"description": "[popup] заглавие на кошчето за изтриване на всички Tab"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] позволява на потребителя да плъзне файловете си в определената зона"
+	},
+	"error_adding_tab": {
+		"message": "Грешка при добавяне на Tab.",
+		"description": "[error] Общa грешка при добавяне на Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Затвори първо другия прозорец!",
 		"description": "[toast] Потребителят се опита да отвори повече от един модален прозорец"
@@ -155,6 +191,10 @@
 		"message": "Не може да се извлече името на организацията от празен URL!",
 		"description": "[error] не е подаден URL, от който да се извлече името на организацията"
 	},
+	"error_failed_sync": {
+		"message": "Синхронизацията се провали.",
+		"description": "[error] Общa грешка при синхронизиране на Tabs с потребителя"
+	},
 	"error_get_with_no_org": {
 		"message": "Не може да се получат Tab, ако организацията не е посочена.",
 		"description": "[error] се опитва да се търсят Tab без подадена информация за организация"
@@ -167,6 +207,10 @@
 		"message": "Параметърът key, подаден на функцията, е невалиден",
 		"description": "[грешка] разработчикът се опита да извика функция с невалиден параметър"
 	},
+	"error_invalid_request": {
+		"message": "Невалидно запитване.",
+		"description": "[error] Общa грешка след получаване на съобщение с неправилен формат"
+	},
 	"error_invalid_tab": {
 		"message": "Невалиден Tab",
 		"description": "[error] Tab-ът не е валиден"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Намерени са повече от един съответстващ Tab.",
 		"description": "[error] върнати са твърде много Tab"
+	},
+	"error_many_tabs_found": {
+		"message": "Намерени са повече от един Tab.",
+		"description": "[error] Върнати са множество Tabs"
 	},
 	"error_minify_url": {
 		"message": "Не може да се намали празен URL!",
@@ -235,9 +283,37 @@
 		"message": "Не беше подаден URL за проверка!",
 		"description": "[error] не беше подаден URL за проверка"
 	},
+	"error_not_initialized": {
+		"message": "Все още не е инициализиран.",
+		"description": "[error] Общa грешка когато променлива не е готова"
+	},
+	"error_processing_tabs": {
+		"message": "Грешка при обработка на Tabs.",
+		"description": "[error] Общa грешка при обработка на Tabs"
+	},
+	"error_redirect": {
+		"message": "Не може да се пренасочи. Моля, презаредете страницата.",
+		"description": "[error] Общa грешка при пренасочване на страница"
+	},
 	"error_remove_not_favourite": {
 		"message": "Не може да се премахне Tab, който не е любимо!",
 		"description": "[error] потребителят се опита да премахне Tab, който още не е запазен"
+	},
+	"error_removing_all_tabs": {
+		"message": "Грешка при премахване на всички Tabs.",
+		"description": "[error] Общa грешка при премахване на всички Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Грешка при премахване на обобщени Tabs.",
+		"description": "[error] Общa грешка при премахване на обобщени Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Грешка при премахване на други Tabs.",
+		"description": "[error] Общa грешка при премахване на други Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Грешка при премахване на Tab.",
+		"description": "[error] Общa грешка при премахване на Tab"
 	},
 	"error_required_params": {
 		"message": "Не са подадени необходимите параметри за функцията",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Не може да се синхронизират празни Tab!",
 		"description": "[error] се опита да се синхронизира нищо"
+	},
+	"error_tab_constructor": {
+		"message": "Използвайте Tab.create() вместо new Tab()",
+		"description": "[error] Информирайте разработчика как да използва класа Tab"
 	},
 	"error_tab_label": {
 		"message": "Етикетът трябва да бъде непразен низ",
@@ -271,6 +351,10 @@
 		"message": "URL трябва да бъде непразен низ",
 		"description": "[error] потребителят се опита да създаде Tab без URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab с този URL вече е запазен!",
+		"description": "[error] Потребителят се опита да запази вече запазен Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Не може да се инициализира с",
 		"description": ""
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Открити са невалидни Tab(ове).\nПърво срещане:",
 		"description": "[error] подадени са невалидни Tab"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Използвайте TabContainer.create() вместо new TabContainer()",
+		"description": "[error] Информирайте разработчика как да използва класа TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Използвайте TranslationService.create() вместо new TranslationService()",
+		"description": "[error] Информирайте разработчика как да използва класа TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator все още не е инициализиран.",
+		"description": "[error] TranslationService не е бил готов"
+	},
+	"error_unknown_request": {
+		"message": "Непознато запитване.",
+		"description": "[error] Общa грешка след получаване на непознато съобщение"
 	},
 	"error_useless_remove": {
 		"message": "Не може да се премахне:\nНе може да се премахне страница, която не е била запазена предварително",

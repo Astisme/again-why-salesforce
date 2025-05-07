@@ -23,6 +23,34 @@
 		"message": "Terpilih",
 		"description": "Judul bagian untuk item yang telah dipilih"
 	},
+	"cmd_export_all": {
+		"message": "Tampilkan modal untuk mengekspor semua Tabs yang disimpan",
+		"description": "[command description] pengguna ingin mengekspor semua Tabs"
+	},
+	"cmd_import": {
+		"message": "Tampilkan modal untuk mengimpor Tabs baru",
+		"description": "[command description] pengguna ingin mengimpor Tabs baru"
+	},
+	"cmd_open_other_org": {
+		"message": "Tampilkan modal untuk membuka halaman saat ini di Org lain",
+		"description": "[command description] pengguna ingin membuka halaman saat ini di Org lain"
+	},
+	"cmd_remove_tab": {
+		"message": "Hapus halaman saat ini dari daftar Tabs (jika disimpan)",
+		"description": "[command description] pengguna ingin menghapus halaman saat ini"
+	},
+	"cmd_save_as_tab": {
+		"message": "Simpan halaman saat ini ke daftar Tabs (jika belum disimpan)",
+		"description": "[command description] pengguna ingin menyimpan halaman saat ini"
+	},
+	"cmd_toggle_org": {
+		"message": "Tampilkan modal untuk mengganti nilai Org halaman saat ini (jika disimpan)",
+		"description": "[command description] pengguna ingin mengganti Org halaman saat ini"
+	},
+	"cmd_update_tab": {
+		"message": "Tampilkan modal untuk memperbarui halaman saat ini (jika disimpan)",
+		"description": "[command description] pengguna ingin memperbarui halaman saat ini"
+	},
 	"confirm_another_org": {
 		"message": "Konfirmasi pembukaan link ini.",
 		"description": "[open-other-org-modal] Meminta konfirmasi dari pengguna untuk membuka link yang telah dibentuk."
@@ -123,6 +151,14 @@
 		"message": "Hapus semua Tabs",
 		"description": "[popup] Judul pada ikon tempat sampah untuk mengosongkan semua Tabs"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] memungkinkan pengguna menjatuhkan file mereka ke area yang ditentukan"
+	},
+	"error_adding_tab": {
+		"message": "Kesalahan saat menambah Tab.",
+		"description": "[error] Kesalahan umum saat menambah Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Tutup modal lain terlebih dahulu!",
 		"description": "[toast] Percobaan membuka lebih dari satu modal."
@@ -155,6 +191,10 @@
 		"message": "Tidak dapat mengekstrak nama Org dari URL kosong!",
 		"description": "[error] URL untuk mengekstrak nama Org tidak dikirim."
 	},
+	"error_failed_sync": {
+		"message": "Sinkronisasi gagal.",
+		"description": "[error] Kesalahan umum saat menyinkronkan Tabs dengan pengguna"
+	},
 	"error_get_with_no_org": {
 		"message": "Tidak dapat mengambil Tabs jika Org tidak ditentukan.",
 		"description": "[error] Mencoba mencari Tabs tanpa informasi Org."
@@ -167,6 +207,10 @@
 		"message": "Parameter kunci yang dilewatkan ke fungsi tidak valid",
 		"description": "[kesalahan] pengembang mencoba memanggil fungsi dengan parameter yang tidak valid"
 	},
+	"error_invalid_request": {
+		"message": "Permintaan tidak valid.",
+		"description": "[error] Kesalahan umum setelah menerima pesan dengan format salah"
+	},
 	"error_invalid_tab": {
 		"message": "Tab tidak valid",
 		"description": "[error] Tab tidak valid."
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Ditemukan lebih dari satu Tab yang cocok.",
 		"description": "[error] Beberapa Tabs yang cocok diperoleh."
+	},
+	"error_many_tabs_found": {
+		"message": "Ditemukan lebih dari satu Tab.",
+		"description": "[error] Banyak Tabs dikembalikan"
 	},
 	"error_minify_url": {
 		"message": "Tidak dapat mengecilkan URL kosong!",
@@ -235,9 +283,37 @@
 		"message": "Tidak ada URL untuk diperiksa!",
 		"description": "[error] URL untuk diperiksa tidak dikirim."
 	},
+	"error_not_initialized": {
+		"message": "Belum diinisialisasi.",
+		"description": "[error] Kesalahan umum ketika variabel belum siap"
+	},
+	"error_processing_tabs": {
+		"message": "Kesalahan saat memproses Tabs.",
+		"description": "[error] Kesalahan umum saat memproses Tabs"
+	},
+	"error_redirect": {
+		"message": "Tidak dapat mengarahkan ulang. Harap muat ulang halaman.",
+		"description": "[error] Kesalahan umum saat pengalihan halaman"
+	},
 	"error_remove_not_favourite": {
 		"message": "Tidak dapat menghapus Tab yang bukan favorit!",
 		"description": "[error] Pengguna mencoba menghapus Tab yang belum disimpan sebagai favorit."
+	},
+	"error_removing_all_tabs": {
+		"message": "Kesalahan saat menghapus semua Tabs.",
+		"description": "[error] Kesalahan umum saat menghapus semua Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Kesalahan saat menghapus Tabs generik.",
+		"description": "[error] Kesalahan umum saat menghapus Tabs generik"
+	},
+	"error_removing_other_tabs": {
+		"message": "Kesalahan saat menghapus Tabs lain.",
+		"description": "[error] Kesalahan umum saat menghapus Tabs lain"
+	},
+	"error_removing_tab": {
+		"message": "Kesalahan saat menghapus Tab.",
+		"description": "[error] Kesalahan umum saat menghapus Tab"
 	},
 	"error_required_params": {
 		"message": "Parameter yang diperlukan untuk fungsi tidak dilewatkan",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyinkronkan Tabs kosong!",
 		"description": "[error] Mencoba menyinkronkan sesuatu yang kosong."
+	},
+	"error_tab_constructor": {
+		"message": "Gunakan Tab.create() alih-alih new Tab()",
+		"description": "[error] Beri tahu pengembang cara menggunakan kelas Tab"
 	},
 	"error_tab_label": {
 		"message": "Label harus berupa string yang tidak kosong",
@@ -271,12 +351,32 @@
 		"message": "URL harus berupa string yang tidak kosong",
 		"description": "[error] Pengguna mencoba membuat Tab tanpa URL."
 	},
+	"error_tab_url_saved": {
+		"message": "Tab dengan URL ini sudah disimpan!",
+		"description": "[error] Pengguna mencoba menyimpan Tab yang sudah disimpan"
+	},
 	"error_tabcont_initialize": {
 		"message": "Tidak dapat menginisialisasi dengan"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Tabs tidak valid terdeteksi.\nKejadian pertama:",
 		"description": "[error] Tabs yang tidak valid dikirim."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Gunakan TabContainer.create() alih-alih new TabContainer()",
+		"description": "[error] Beri tahu pengembang cara menggunakan kelas TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Gunakan TranslationService.create() alih-alih new TranslationService()",
+		"description": "[error] Beri tahu pengembang cara menggunakan kelas TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator belum diinisialisasi.",
+		"description": "[error] TranslationService belum siap"
+	},
+	"error_unknown_request": {
+		"message": "Permintaan tidak dikenal.",
+		"description": "[error] Kesalahan umum setelah menerima pesan yang tidak dikenali"
 	},
 	"error_useless_remove": {
 		"message": "Tidak dapat menghapus:\nHalaman yang belum pernah disimpan tidak bisa dihapus.",

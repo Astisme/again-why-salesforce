@@ -23,6 +23,34 @@
 		"message": "Gekozen",
 		"description": "Sectiekop voor items die zijn geselecteerd"
 	},
+	"cmd_export_all": {
+		"message": "Toon de modal om alle opgeslagen Tabs te exporteren",
+		"description": "[opdrachtbeschrijving] de gebruiker wil alle Tabs exporteren"
+	},
+	"cmd_import": {
+		"message": "Toon de modal om nieuwe Tabs te importeren",
+		"description": "[opdrachtbeschrijving] de gebruiker wil nieuwe Tabs importeren"
+	},
+	"cmd_open_other_org": {
+		"message": "Toon de modal om de huidige pagina in een andere Org te openen",
+		"description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina in een andere Org openen"
+	},
+	"cmd_remove_tab": {
+		"message": "Verwijder de huidige pagina uit de Tab lijst (indien opgeslagen)",
+		"description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina verwijderen"
+	},
+	"cmd_save_as_tab": {
+		"message": "Sla de huidige pagina op in de Tab lijst (indien niet opgeslagen)",
+		"description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina opslaan"
+	},
+	"cmd_toggle_org": {
+		"message": "Schakel de Org-waarde van de huidige pagina om (indien opgeslagen)",
+		"description": "[opdrachtbeschrijving] de gebruiker wil de Org voor de huidige pagina omwisselen"
+	},
+	"cmd_update_tab": {
+		"message": "Toon modal om huidige pagina bij te werken (indien opgeslagen)",
+		"description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina bijwerken"
+	},
 	"confirm_another_org": {
 		"message": "Bevestig het openen van deze link.",
 		"description": "[open-andere-org-modal] vraag de gebruiker om bevestiging om de geconstrueerde link te openen."
@@ -123,6 +151,14 @@
 		"message": "Alle Tabs verwijderen",
 		"description": "[popup] titel op de prullenbak om alle Tabs te legen"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] laat de gebruiker hun bestanden op het opgegeven gebied neerzetten"
+	},
+	"error_adding_tab": {
+		"message": "Fout bij het toevoegen van Tab.",
+		"description": "[fout] Algemene fout gebruikt bij het toevoegen van een Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Sluit eerst de andere modal!",
 		"description": "[toast] De gebruiker probeerde meer dan 1 modal te openen"
@@ -155,6 +191,10 @@
 		"message": "Kan Org-naam niet uit lege URL halen!",
 		"description": "[fout] de url waaruit de Org-naam moet worden gehaald, is niet doorgegeven"
 	},
+	"error_failed_sync": {
+		"message": "Synchronisatie mislukt.",
+		"description": "[fout] Algemene fout wanneer de Tabs niet konden worden gesynchroniseerd van de gebruiker"
+	},
 	"error_get_with_no_org": {
 		"message": "Kan Tabs niet ophalen als Org niet is opgegeven.",
 		"description": "[fout] geprobeerd Tabs per Org te zoeken zonder Org-informatie te verzenden"
@@ -167,6 +207,10 @@
 		"message": "De key-parameter die aan de functie is doorgegeven, is niet geldig",
 		"description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen met een ongeldige parameter"
 	},
+	"error_invalid_request": {
+		"message": "Ongeldig verzoek.",
+		"description": "[fout] Algemene fout na ontvangst van een slecht opgemaakt bericht"
+	},
 	"error_invalid_tab": {
 		"message": "Ongeldige Tab",
 		"description": "[fout] de Tab is niet geldig"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Meer dan 1 overeenkomende Tab gevonden.",
 		"description": "[fout] er zijn veel Tabs opgehaald"
+	},
+	"error_many_tabs_found": {
+		"message": "Meer dan één Tab gevonden.",
+		"description": "[fout] veel Tabs werden opgehaald"
 	},
 	"error_minify_url": {
 		"message": "Kan een lege URL niet verkleinen!",
@@ -235,9 +283,37 @@
 		"message": "Geen URL om te controleren!",
 		"description": "[fout] de te controleren url is niet doorgegeven"
 	},
+	"error_not_initialized": {
+		"message": "was nog niet geïnitialiseerd.",
+		"description": "[fout] Algemene fout voor wanneer een variabele niet klaar is"
+	},
+	"error_processing_tabs": {
+		"message": "Fout bij het verwerken van Tabs.",
+		"description": "[fout] Algemene fout bij het verwerken van de Tabs"
+	},
+	"error_redirect": {
+		"message": "Kan niet redirecten. Ververs de pagina alstublieft.",
+		"description": "[fout] Algemene fout bij het doorverwijzen van pagina's."
+	},
 	"error_remove_not_favourite": {
 		"message": "Kan een niet-favoriete Tab niet verwijderen!",
 		"description": "[fout] de gebruiker probeerde een Tab te verwijderen die nog niet was opgeslagen"
+	},
+	"error_removing_all_tabs": {
+		"message": "Fout bij het verwijderen van alle Tabs.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van alle Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Fout bij het verwijderen van generieke Tabs.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van generieke Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Fout bij het verwijderen van andere Tabs.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van andere Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Fout bij het verwijderen van Tab.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van een Tab"
 	},
 	"error_required_params": {
 		"message": "De vereiste parameters voor de functie zijn niet doorgegeven",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Kan null Tabs niet synchroniseren!",
 		"description": "[fout] geprobeerd niets te synchroniseren"
+	},
+	"error_tab_constructor": {
+		"message": "Gebruik Tab.create() in plaats van new Tab() om de Tab klasse te gebruiken",
+		"description": "[fout] vertel de ontwikkelaar hoe de Tab klasse te gebruiken"
 	},
 	"error_tab_label": {
 		"message": "Label moet een niet-lege string zijn",
@@ -271,6 +351,10 @@
 		"message": "URL moet een niet-lege string zijn",
 		"description": "[fout] gebruiker probeerde een Tab zonder url te maken"
 	},
+	"error_tab_url_saved": {
+		"message": "Een Tab met deze URL is al opgeslagen!",
+		"description": "[fout] De gebruiker probeerde een reeds favoriete Tab op te slaan"
+	},
 	"error_tabcont_initialize": {
 		"message": "Kan niet initialiseren met",
 		"description": "[fout] initialisatie van Tab-container mislukt"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Ongeldige Tab(s) gedetecteerd.\nEerste voorkomen:",
 		"description": "[fout] ongeldige Tabs doorgegeven"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Gebruik TabContainer.create() in plaats van new TabContainer() om de TabContainer klasse te gebruiken",
+		"description": "[fout] vertel de ontwikkelaar hoe de TabContainer klasse te gebruiken"
+	},
+	"error_translationservice_constructor": {
+		"message": "Gebruik TranslationService.create() in plaats van new TranslationService() om de TranslationService klasse te gebruiken",
+		"description": "[fout] vertel de ontwikkelaar hoe de TranslationService klasse te gebruiken"
+	},
+	"error_translator_not_initialized": {
+		"message": "vertaler was nog niet geïnitialiseerd.",
+		"description": "[fout] de TranslationService was niet klaar"
+	},
+	"error_unknown_request": {
+		"message": "Onbekend verzoek.",
+		"description": "[fout] Algemene fout na ontvangst van een niet-herkend bericht"
 	},
 	"error_useless_remove": {
 		"message": "Kan niet verwijderen:\nKan een pagina die nog niet eerder is opgeslagen niet verwijderen",

@@ -1,8 +1,33 @@
 "use strict";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_OTHER_ORG,
+	CMD_OPEN_SETTINGS,
+	CMD_REMOVE_TAB,
+	CMD_SAVE_AS_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
+	CXM_EMPTY_NO_ORG_TABS,
+	CXM_EMPTY_TABS,
+	CXM_EXPORT_TABS,
+	CXM_IMPORT_TABS,
+	CXM_MOVE_FIRST,
+	CXM_MOVE_LAST,
+	CXM_MOVE_LEFT,
+	CXM_MOVE_RIGHT,
+	CXM_OPEN_OTHER_ORG,
+	CXM_PAGE_REMOVE_TAB,
+	CXM_PAGE_SAVE_TAB,
+	CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_RIGHT_TABS,
+	CXM_REMOVE_TAB,
+	CXM_UPDATE_ORG,
+	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
 	openSettingsPage,
 	SETTINGS_KEY,
@@ -11,26 +36,84 @@ import {
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
-import { bg_getSalesforceLanguage, bg_getSettings } from "./background.js";
+import {
+	bg_getCommandLinks,
+	bg_getSalesforceLanguage,
+	bg_getSettings,
+} from "./background.js";
 
 let areMenuItemsVisible = false;
+const cxm_open_settings = "open-settings";
+
+let link_cmd_save_as_tab = null;
+let link_cmd_remove_tab = null;
+let link_cmd_toggle_org = null;
+let link_cmd_update_tab = null;
+let link_cmd_open_settings = null;
+let link_cmd_open_other_org = null;
+let link_cmd_import = null;
+let link_cmd_export_all = null;
+async function updateCommandLinks() {
+	const commandLinks = await bg_getCommandLinks();
+	commandLinks.forEach((cmdLink) => {
+		switch (cmdLink.name) {
+			case CMD_SAVE_AS_TAB:
+				link_cmd_save_as_tab = cmdLink.shortcut;
+				break;
+			case CMD_REMOVE_TAB:
+				link_cmd_remove_tab = cmdLink.shortcut;
+				break;
+			case CMD_TOGGLE_ORG:
+				link_cmd_toggle_org = cmdLink.shortcut;
+				break;
+			case CMD_UPDATE_TAB:
+				link_cmd_update_tab = cmdLink.shortcut;
+				break;
+			case CMD_OPEN_SETTINGS:
+				link_cmd_open_settings = cmdLink.shortcut;
+				break;
+			case CMD_OPEN_OTHER_ORG:
+				link_cmd_open_other_org = cmdLink.shortcut;
+				break;
+			case CMD_IMPORT:
+				link_cmd_import = cmdLink.shortcut;
+				break;
+			case CMD_EXPORT_ALL:
+				link_cmd_export_all = cmdLink.shortcut;
+				break;
+			default:
+				break;
+		}
+	});
+}
+function resetLinks() {
+	link_cmd_save_as_tab = null;
+	link_cmd_remove_tab = null;
+	link_cmd_toggle_org = null;
+	link_cmd_update_tab = null;
+	link_cmd_open_settings = null;
+	link_cmd_open_other_org = null;
+	link_cmd_import = null;
+	link_cmd_export_all = null;
+}
 
 const menuItemsOriginal = [
 	{
-		id: "open-other-org",
+		id: CXM_OPEN_OTHER_ORG,
 		title: "cxm_open_other_org",
+		//title: ["cxm_open_other_org",link_cmd_open_other_org != null ? `(${link_cmd_open_other_org})` : null],
 		contexts: ["link", "page", "frame"],
 	},
 
 	{ id: "update", title: "cxm_update", contexts: ["link"] },
 	{
-		id: "update-org",
+		id: CXM_UPDATE_ORG,
 		title: "cxm_update_org",
 		contexts: ["link"],
 		parentId: "update",
 	},
 	{
-		id: "update-tab",
+		id: CXM_UPDATE_TAB,
 		title: "cxm_update_tab",
 		contexts: ["link"],
 		parentId: "update",
@@ -38,25 +121,25 @@ const menuItemsOriginal = [
 
 	{ id: "move", title: "cxm_move", contexts: ["link"] },
 	{
-		id: "move-first",
+		id: CXM_MOVE_FIRST,
 		title: "cxm_move_first",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
-		id: "move-left",
+		id: CXM_MOVE_LEFT,
 		title: "cxm_move_left",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
-		id: "move-right",
+		id: CXM_MOVE_RIGHT,
 		title: "cxm_move_right",
 		contexts: ["link"],
 		parentId: "move",
 	},
 	{
-		id: "move-last",
+		id: CXM_MOVE_LAST,
 		title: "cxm_move_last",
 		contexts: ["link"],
 		parentId: "move",
@@ -64,65 +147,65 @@ const menuItemsOriginal = [
 
 	{ id: "remove", title: "cxm_remove", contexts: ["link"] },
 	{
-		id: "remove-tab",
+		id: CXM_REMOVE_TAB,
 		title: "cxm_remove_tab",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "remove-other-tabs",
+		id: CXM_REMOVE_OTHER_TABS,
 		title: "cxm_remove_other_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "remove-left-tabs",
+		id: CXM_REMOVE_LEFT_TABS,
 		title: "cxm_remove_left_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "remove-right-tabs",
+		id: CXM_REMOVE_RIGHT_TABS,
 		title: "cxm_remove_right_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "empty-no-org-tabs",
+		id: CXM_EMPTY_NO_ORG_TABS,
 		title: "cxm_empty_no_org_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
-		id: "empty-tabs",
+		id: CXM_EMPTY_TABS,
 		title: "cxm_empty_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 
 	{
-		id: "import-tabs",
+		id: CXM_IMPORT_TABS,
 		title: "cxm_import_tabs",
 		contexts: ["page", "frame"],
 	},
 	{
-		id: "export-tabs",
+		id: CXM_EXPORT_TABS,
 		title: "cxm_export_tabs",
 		contexts: ["page", "frame"],
 	},
 	{
-		id: "page-save-tab",
+		id: CXM_PAGE_SAVE_TAB,
 		title: "cxm_page_save_tab",
 		contexts: ["page", "frame"],
 	},
 	{
-		id: "page-remove-tab",
+		id: CXM_PAGE_REMOVE_TAB,
 		title: "cxm_page_remove_tab",
 		contexts: ["page", "frame"],
 	},
 
 	{
-		id: "open-settings",
+		id: cxm_open_settings,
 		title: "cxm_settings",
 		contexts: ["link", "page", "frame"],
 	},
@@ -138,6 +221,81 @@ const menuItemsOriginal = [
 	return item;
 });
 
+function getMenuItemsClone() {
+	const clone = structuredClone(menuItemsOriginal);
+	clone.forEach((el) => {
+		switch (el.id) {
+			case CXM_PAGE_SAVE_TAB:
+				if (link_cmd_save_as_tab != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_save_as_tab})`,
+					];
+				}
+				break;
+			case CXM_PAGE_REMOVE_TAB:
+				if (link_cmd_remove_tab != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_remove_tab})`,
+					];
+				}
+				break;
+			case CXM_UPDATE_ORG:
+				if (link_cmd_toggle_org != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_toggle_org})`,
+					];
+				}
+				break;
+			case CXM_UPDATE_TAB:
+				if (link_cmd_update_tab != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_update_tab})`,
+					];
+				}
+				break;
+			case cxm_open_settings:
+				if (link_cmd_open_settings != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_open_settings})`,
+					];
+				}
+				break;
+			case CXM_OPEN_OTHER_ORG:
+				if (link_cmd_open_other_org != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_open_other_org})`,
+					];
+				}
+				break;
+			case CXM_IMPORT_TABS:
+				if (link_cmd_import != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_import})`,
+					];
+				}
+				break;
+			case CXM_EXPORT_TABS:
+				if (link_cmd_export_all != null) {
+					el.title = [
+						el.title,
+						`(${link_cmd_export_all})`,
+					];
+				}
+				break;
+			default:
+				break;
+		}
+	});
+	return clone;
+}
+
 /**
  * Creates context menu items dynamically based on the provided menu definitions.
  *
@@ -146,6 +304,7 @@ const menuItemsOriginal = [
 async function createMenuItems() {
 	if (areMenuItemsVisible) return;
 	const translator = await ensureTranslatorAvailability();
+	await updateCommandLinks();
 	areMenuItemsVisible = true;
 	try {
 		// load the user picked language
@@ -157,7 +316,7 @@ async function createMenuItems() {
 			// load the language in which salesforce is currently set
 			await translator.loadNewLanguage(await bg_getSalesforceLanguage());
 		}
-		const menuItems = structuredClone(menuItemsOriginal);
+		const menuItems = getMenuItemsClone();
 		for (const item of menuItems) {
 			item.title = await translator.translate(item.title);
 			await BROWSER.contextMenus.create(item);
@@ -170,6 +329,7 @@ async function createMenuItems() {
 		console.error(msg, error);
 		await removeMenuItems();
 	}
+	resetLinks();
 }
 
 /**
@@ -246,9 +406,9 @@ BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
 );
 // when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener(() =>
-	checkAddRemoveContextMenus("installed")
-);
+BROWSER.runtime.onInstalled.addListener((_) => {
+	checkAddRemoveContextMenus("installed");
+});
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
@@ -290,7 +450,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
-		case "open-other-org":
+		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);
 				message.pageUrl = Tab.expandURL(info.pageUrl, browserTabUrl);
@@ -301,18 +461,18 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			}
 			message.linkTabLabel = info.linkText;
 			break;
-		case "import-tabs":
+		case CXM_IMPORT_TABS:
 			message.what = "add";
 			break;
-		case "export-tabs":
+		case CXM_EXPORT_TABS:
 			exportHandler();
 			break;
-		case "page-save-tab":
-		case "page-remove-tab":
+		case CXM_PAGE_SAVE_TAB:
+		case CXM_REMOVE_TAB:
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			break;
-		case "open-settings":
+		case cxm_open_settings:
 			openSettingsPage();
 			break;
 		default:

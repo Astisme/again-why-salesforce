@@ -23,6 +23,34 @@
 		"message": "Επιλεγμένο",
 		"description": "Επικεφαλίδα ενότητας για στοιχεία που έχουν επιλεγεί"
 	},
+	"cmd_export_all": {
+		"message": "Εμφάνιση παραθύρου για εξαγωγή όλων των αποθηκευμένων Tabs",
+		"description": "[command description] ο χρήστης θέλει να εξαγάγει όλα τα Tabs"
+	},
+	"cmd_import": {
+		"message": "Εμφάνιση παραθύρου για εισαγωγή νέων Tabs",
+		"description": "[command description] ο χρήστης θέλει να εισαγάγει νέα Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Εμφάνιση παραθύρου για άνοιγμα της τρέχουσας σελίδας σε άλλη Org",
+		"description": "[command description] ο χρήστης θέλει να ανοίξει την τρέχουσα σελίδα σε άλλη Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Αφαίρεση της τρέχουσας σελίδας από τη λίστα Tabs (εάν έχει αποθηκευτεί)",
+		"description": "[command description] ο χρήστης θέλει να αφαιρέσει την τρέχουσα σελίδα"
+	},
+	"cmd_save_as_tab": {
+		"message": "Αποθήκευση της τρέχουσας σελίδας στη λίστα Tabs (εάν δεν έχει αποθηκευτεί)",
+		"description": "[command description] ο χρήστης θέλει να αποθηκεύσει την τρέχουσα σελίδα"
+	},
+	"cmd_toggle_org": {
+		"message": "Εμφάνιση παραθύρου για εναλλαγή της τιμής Org της τρέχουσας σελίδας (εάν έχει αποθηκευτεί)",
+		"description": "[command description] ο χρήστης θέλει να εναλλάξει την Org της τρέχουσας σελίδας"
+	},
+	"cmd_update_tab": {
+		"message": "Εμφάνιση παραθύρου για ενημέρωση της τρέχουσας σελίδας (εάν έχει αποθηκευτεί)",
+		"description": "[command description] ο χρήστης θέλει να ενημερώσει την τρέχουσα σελίδα"
+	},
 	"confirm_another_org": {
 		"message": "Επιβεβαιώστε το άνοιγμα αυτού του συνδέσμου.",
 		"description": "[διάλογος-άνοιγμα-άλλης-οργάνωσης] αίτημα επιβεβαίωσης προς τον χρήστη για το άνοιγμα του συνδέσμου που δημιουργήθηκε."
@@ -123,6 +151,14 @@
 		"message": "Διαγραφή όλων των Tab",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος για τη διαγραφή όλων των Tab"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] επιτρέπει στον χρήστη να αποθέσει τα αρχεία του στην καθορισμένη περιοχή"
+	},
+	"error_adding_tab": {
+		"message": "Σφάλμα κατά την προσθήκη Tab.",
+		"description": "[error] Γενικό σφάλμα κατά την προσθήκη Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Κλείστε πρώτα το άλλο παράθυρο!",
 		"description": "[σημείωμα] Ο χρήστης προσπάθησε να ανοίξει περισσότερα από 1 παράθυρο"
@@ -155,6 +191,10 @@
 		"message": "Δεν μπορεί να εξαχθεί το όνομα της οργάνωσης από κενό URL!",
 		"description": "[σφάλμα] δεν δόθηκε το url από το οποίο πρέπει να εξαχθεί το όνομα της οργάνωσης"
 	},
+	"error_failed_sync": {
+		"message": "Ο συγχρονισμός απέτυχε.",
+		"description": "[error] Γενικό σφάλμα κατά το συγχρονισμό των Tabs με τον χρήστη"
+	},
 	"error_get_with_no_org": {
 		"message": "Δεν μπορεί να ληφθούν Tab εάν δεν έχει καθοριστεί οργάνωση.",
 		"description": "[σφάλμα] προσπαθήθηκε η αναζήτηση Tab χωρίς αποστολή πληροφοριών οργάνωσης"
@@ -167,6 +207,10 @@
 		"message": "Η παράμετρος key που στάλθηκε στη συνάρτηση δεν είναι έγκυρη",
 		"description": "[σφάλμα] ο προγραμματιστής προσπάθησε να καλέσει τη συνάρτηση με άκυρη παράμετρο"
 	},
+	"error_invalid_request": {
+		"message": "Μη έγκυρο αίτημα.",
+		"description": "[error] Γενικό σφάλμα μετά τη λήψη μηνύματος σε λανθασμένη μορφή"
+	},
 	"error_invalid_tab": {
 		"message": "Μη έγκυρο Tab",
 		"description": "[σφάλμα] το Tab δεν είναι έγκυρο"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Βρέθηκαν περισσότερα από 1 αντίστοιχα Tab.",
 		"description": "[σφάλμα] βρέθηκαν πολλά Tab"
+	},
+	"error_many_tabs_found": {
+		"message": "Βρέθηκαν περισσότερα από ένα Tab.",
+		"description": "[error] Επιστράφηκαν πολλά Tabs"
 	},
 	"error_minify_url": {
 		"message": "Δεν μπορεί να μικροποιηθεί ένα κενό URL!",
@@ -235,9 +283,37 @@
 		"message": "Δεν δόθηκε URL για έλεγχο!",
 		"description": "[σφάλμα] δεν δόθηκε το url προς έλεγχο"
 	},
+	"error_not_initialized": {
+		"message": "Δεν έχει αρχικοποιηθεί ακόμη.",
+		"description": "[error] Γενικό σφάλμα όταν μία μεταβλητή δεν είναι έτοιμη"
+	},
+	"error_processing_tabs": {
+		"message": "Σφάλμα κατά την επεξεργασία των Tabs.",
+		"description": "[error] Γενικό σφάλμα κατά την επεξεργασία των Tabs"
+	},
+	"error_redirect": {
+		"message": "Αδύνατη η ανακατεύθυνση. Παρακαλώ ανανεώστε τη σελίδα.",
+		"description": "[error] Γενικό σφάλμα κατά την ανακατεύθυνση σελίδας"
+	},
 	"error_remove_not_favourite": {
 		"message": "Δεν μπορεί να αφαιρεθεί ένα μη αγαπημένο Tab!",
 		"description": "[σφάλμα] ο χρήστης προσπάθησε να αφαιρέσει ένα Tab που δεν έχει αποθηκευτεί ακόμα"
+	},
+	"error_removing_all_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση όλων των Tabs.",
+		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση όλων των Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση γενικών Tabs.",
+		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση γενικών Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση άλλων Tabs.",
+		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση άλλων Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Σφάλμα κατά την αφαίρεση Tab.",
+		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση Tab"
 	},
 	"error_required_params": {
 		"message": "Δεν περάστηκαν οι απαιτούμενες παράμετροι στη συνάρτηση",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Δεν μπορεί να συγχρονιστούν κενά Tab!",
 		"description": "[σφάλμα] προσπαθήθηκε ο συγχρονισμός κενών Tab"
+	},
+	"error_tab_constructor": {
+		"message": "Χρησιμοποιήστε Tab.create() αντί για new Tab()",
+		"description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση Tab"
 	},
 	"error_tab_label": {
 		"message": "Η ετικέτα πρέπει να είναι μη κενή συμβολοσειρά",
@@ -271,6 +351,10 @@
 		"message": "Το URL πρέπει να είναι μη κενή συμβολοσειρά",
 		"description": "[σφάλμα] ο χρήστης προσπάθησε να δημιουργήσει ένα Tab χωρίς url"
 	},
+	"error_tab_url_saved": {
+		"message": "Ένα Tab με αυτό το URL έχει ήδη αποθηκευτεί!",
+		"description": "[error] Ο χρήστης προσπάθησε να αποθηκεύσει ένα ήδη αποθηκευμένο Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Δεν μπορεί να αρχικοποιηθεί με",
 		"description": ""
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Εντοπίστηκαν μη έγκυρα Tab(s).\nΠρώτη εμφάνιση:",
 		"description": "[σφάλμα] εντοπίστηκαν μη έγκυρα Tab που ελήφθησαν"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Χρησιμοποιήστε TabContainer.create() αντί για new TabContainer()",
+		"description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Χρησιμοποιήστε TranslationService.create() αντί για new TranslationService()",
+		"description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "ο μεταφραστής δεν έχει αρχικοποιηθεί ακόμη.",
+		"description": "[error] Η υπηρεσία μετάφρασης δεν ήταν έτοιμη"
+	},
+	"error_unknown_request": {
+		"message": "Άγνωστο αίτημα.",
+		"description": "[error] Γενικό σφάλμα μετά τη λήψη άγνωστου μηνύματος"
 	},
 	"error_useless_remove": {
 		"message": "Δεν μπορεί να αφαιρεθεί:\nΔεν μπορεί να αφαιρεθεί μια σελίδα που δεν έχει αποθηκευτεί προηγουμένως",

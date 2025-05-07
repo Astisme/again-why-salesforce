@@ -23,6 +23,34 @@
 		"message": "चयनित",
 		"description": "चयनित आइटम्स के लिए अनुभाग शीर्षक"
 	},
+	"cmd_export_all": {
+		"message": "सहेजे गए सभी Tabs को निर्यात करने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता सभी Tabs को निर्यात करना चाहता है"
+	},
+	"cmd_import": {
+		"message": "नए Tabs आयात करने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता नए Tabs आयात करना चाहता है"
+	},
+	"cmd_open_other_org": {
+		"message": "वर्तमान पृष्ठ को अन्य Org में खोलने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अन्य Org में खोलना चाहता है"
+	},
+	"cmd_remove_tab": {
+		"message": "वर्तमान पृष्ठ को Tab सूची से हटाएँ (यदि सहेजा गया हो)",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को हटाना चाहता है"
+	},
+	"cmd_save_as_tab": {
+		"message": "वर्तमान पृष्ठ को Tab सूची में सहेजें (यदि नहीं सहेजा गया हो)",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को सहेजना चाहता है"
+	},
+	"cmd_toggle_org": {
+		"message": "वर्तमान पृष्ठ के Org मान को टॉगल करने के लिए मोडल दिखाएँ (यदि सहेजा गया हो)",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ के Org मान को टॉगल करना चाहता है"
+	},
+	"cmd_update_tab": {
+		"message": "वर्तमान पृष्ठ (यदि सहेजा गया हो) को अपडेट करने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अपडेट करना चाहता है"
+	},
 	"confirm_another_org": {
 		"message": "इस लिंक को खोलने की पुष्टि करें।",
 		"description": "[open-other-org-modal] निर्मित लिंक खोलने के लिए उपयोगकर्ता से पुष्टि माँगे"
@@ -123,6 +151,14 @@
 		"message": "सभी Tabs हटाएं",
 		"description": "[popup] सभी Tabs हटाने के लिए डस्टबिन पर शीर्षक"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] उपयोगकर्ता को निर्दिष्ट क्षेत्र में अपनी फ़ाइलें ड्रॉप करने की अनुमति देता है"
+	},
+	"error_adding_tab": {
+		"message": "Tab जोड़ने में त्रुटि।",
+		"description": "[error] Tab जोड़ते समय सामान्य त्रुटि"
+	},
 	"error_close_other_modal": {
 		"message": "पहले अन्य modal बंद करें!",
 		"description": "[toast] एक से अधिक modal खोलने का प्रयास किया गया।"
@@ -155,6 +191,10 @@
 		"message": "खाली URL से Org नाम निकाला नहीं जा सकता!",
 		"description": "[error] Org नाम निकालने के लिए कोई URL प्रदान नहीं किया गया।"
 	},
+	"error_failed_sync": {
+		"message": "सिंक विफल हुआ।",
+		"description": "[error] उपयोगकर्ता के साथ Tabs सिंक करने में सामान्य त्रुटि"
+	},
 	"error_get_with_no_org": {
 		"message": "बिना Org के Tabs प्राप्त नहीं किए जा सकते।",
 		"description": "[error] Org जानकारी के बिना Tabs प्राप्त करने की कोशिश की गई।"
@@ -167,6 +207,10 @@
 		"message": "फ़ंक्शन को पास किया गया कुंजी पैरामीटर मान्य नहीं है",
 		"description": "[त्रुटि] डेवलपर ने एक अमान्य पैरामीटर के साथ किसी फ़ंक्शन को कॉल करने का प्रयास किया"
 	},
+	"error_invalid_request": {
+		"message": "अमान्य अनुरोध।",
+		"description": "[error] गलत प्रारूप के संदेश प्राप्त होने के बाद सामान्य त्रुटि"
+	},
 	"error_invalid_tab": {
 		"message": "अमान्य Tab",
 		"description": "[error] Tab अमान्य है।"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "एक से अधिक मेल खाने वाले Tab पाए गए।",
 		"description": "[error] कई मेल खाते Tab प्राप्त हुए।"
+	},
+	"error_many_tabs_found": {
+		"message": "एक से अधिक Tab मिला।",
+		"description": "[error] कई Tabs पुनर्प्राप्त किए गए"
 	},
 	"error_minify_url": {
 		"message": "खाली URL को छोटा नहीं किया जा सकता!",
@@ -235,9 +283,37 @@
 		"message": "जांच के लिए कोई URL नहीं है!",
 		"description": "[error] जांच के लिए कोई URL प्रदान नहीं किया गया।"
 	},
+	"error_not_initialized": {
+		"message": "अभी तक प्रारंभ नहीं हुआ है।",
+		"description": "[error] जब कोई वेरिएबल तैयार नहीं होता तो सामान्य त्रुटि"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs प्रसंस्करण में त्रुटि।",
+		"description": "[error] Tabs प्रसंस्करण में सामान्य त्रुटि"
+	},
+	"error_redirect": {
+		"message": "पुनर्निदेशन असंभव। कृपया पृष्ठ को पुनः लोड करें।",
+		"description": "[error] पृष्ठ पुनर्निदेशन में सामान्य त्रुटि"
+	},
 	"error_remove_not_favourite": {
 		"message": "अनपसंदीदा Tab हटाया नहीं जा सकता!",
 		"description": "[error] ऐसा Tab हटाने की कोशिश की गई जो अभी तक सहेजा नहीं गया।"
+	},
+	"error_removing_all_tabs": {
+		"message": "सभी Tabs हटाने में त्रुटि।",
+		"description": "[error] सभी Tabs हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_generic_tabs": {
+		"message": "सामान्य Tabs हटाने में त्रुटि।",
+		"description": "[error] सामान्य Tabs हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_other_tabs": {
+		"message": "अन्य Tabs हटाने में त्रुटि।",
+		"description": "[error] अन्य Tabs हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_tab": {
+		"message": "Tab हटाने में त्रुटि।",
+		"description": "[error] Tab हटाते समय सामान्य त्रुटि"
 	},
 	"error_required_params": {
 		"message": "फ़ंक्शन के लिए आवश्यक पैरामीटर पास नहीं किए गए थे",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "खाली Tabs को सिंक नहीं किया जा सकता!",
 		"description": "[error] कुछ सिंक करने की कोशिश की गई।"
+	},
+	"error_tab_constructor": {
+		"message": "new Tab() के बजाय Tab.create() का उपयोग करें",
+		"description": "[error] डेवलपर को बताएं कि Tab क्लास का उपयोग कैसे करें"
 	},
 	"error_tab_label": {
 		"message": "लेबल खाली नहीं होनी चाहिए",
@@ -271,12 +351,32 @@
 		"message": "URL खाली नहीं होनी चाहिए",
 		"description": "[error] बिना URL के Tab बनाने की कोशिश की गई।"
 	},
+	"error_tab_url_saved": {
+		"message": "इस URL के साथ एक Tab पहले से ही सहेजा गया है!",
+		"description": "[error] उपयोगकर्ता ने पहले से सहेजे Tab को सहेजने का प्रयास किया"
+	},
 	"error_tabcont_initialize": {
 		"message": "इसके साथ इनिशियलाइज़ नहीं किया जा सकता"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "अमान्य Tabs पाए गए।\nपहली घटना:",
 		"description": "[error] अमान्य Tabs प्रदान किए गए।"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "new TabContainer() के बजाय TabContainer.create() का उपयोग करें",
+		"description": "[error] डेवलपर को बताएं कि TabContainer क्लास का उपयोग कैसे करें"
+	},
+	"error_translationservice_constructor": {
+		"message": "new TranslationService() के बजाय TranslationService.create() का उपयोग करें",
+		"description": "[error] डेवलपर को बताएं कि TranslationService क्लास का उपयोग कैसे करें"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator अभी तक प्रारंभ नहीं हुआ है।",
+		"description": "[error] TranslationService तैयार नहीं था"
+	},
+	"error_unknown_request": {
+		"message": "अज्ञात अनुरोध।",
+		"description": "[error] अज्ञात संदेश प्राप्त होने के बाद सामान्य त्रुटि"
 	},
 	"error_useless_remove": {
 		"message": "हटाया नहीं जा सकता:\nजिस पृष्ठ को कभी सहेजा ही नहीं गया, उसे हटाया नहीं जा सकता।",

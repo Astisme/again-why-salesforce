@@ -23,6 +23,34 @@
 		"message": "ఎంచుకున్నవి",
 		"description": "ఎంచుకున్న అంశాల కోసం విభాగ శీర్షిక"
 	},
+	"cmd_export_all": {
+		"message": "సేవ్ చేసిన అన్ని Tabs ను экспорт చేయడానికి మోడల్ చూపించు",
+		"description": "[కమాండ్ వివరణ] వినియోగదారు అన్ని Tabs ను export చేయాలనుకుంటున్నారు"
+	},
+	"cmd_import": {
+		"message": "కొత్త Tabs ను импорт చేయడానికి మోడల్ చూపించు",
+		"description": "[కమాండ్ వివరణ] వినియోగదారు కొత్త Tabs ను import చేయాలనుకుంటున్నారు"
+	},
+	"cmd_open_other_org": {
+		"message": "ప్రస్తుత పేజీని మరొక Org లో తెరవడానికి మోడల్ చూపించు",
+		"description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని మరొక Org లో తెరవాలనుకుంటున్నారు"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab జాబితా నుండి ప్రస్తుత పేజీని తీసివేయండి (సేవ్ చేయబడితే)",
+		"description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని తీసివేయాలనుకుంటున్నారు"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tab జాబితాలో ప్రస్తుత పేజీని సేవ్ చేయండి (సేవ్ చేయబడకపోతే)",
+		"description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని సేవ్ చేయాలనుకుంటున్నారు"
+	},
+	"cmd_toggle_org": {
+		"message": "ప్రస్తుత పేజీ యొక్క Org విలువను టోగుల్ చేయండి (సేవ్ చేయబడితే)",
+		"description": "[కమాండ్ వివరణ] ప్రస్తుత పేజీ కోసం Org ని టోగుల్ చేయాలనుకుంటున్నారు"
+	},
+	"cmd_update_tab": {
+		"message": "ప్రస్తుత పేజీని అప్‌డేట్ చేయడానికి మోడల్ చూపించు (సేవ్ చేయబడితే)",
+		"description": "[కమాండ్ వివరణ] వినియోగదారు ప్రస్తుత పేజీని అప్‌డేట్ చేయాలనుకుంటున్నారు"
+	},
 	"confirm_another_org": {
 		"message": "ఈ లింక్ ని తెరవడాన్ని నిర్ధారించండి.",
 		"description": "[open-other-org-modal] రూపొందించిన లింక్ తెరవడానికి వినియోగదారుని నిర్ధారణ కోరుతుంది"
@@ -123,6 +151,14 @@
 		"message": "అన్ని Tabs తొలగించండి",
 		"description": "[popup] అన్ని Tabs ని ఖాళీ చేయడానికి డస్ట్బిన్‌పై టైటిల్"
 	},
+	"drop": {
+		"message": "వదలండి",
+		"description": "[ఇంపోర్ట్] వినియోగదారు తమ ఫైళ్ళను నిర్దిష్ట ప్రాంతంలో వదలడానికి అనుమతించండి"
+	},
+	"error_adding_tab": {
+		"message": "Tab జోడించేటప్పుడు లోపం.",
+		"description": "[లోపం] Tab జోడించేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+	},
 	"error_close_other_modal": {
 		"message": "ముందుగా ఇతర modalని మూసేయండి!",
 		"description": "[toast] ఒకే సమయంలో ఒకటి కంటే ఎక్కువ modalలు తెరవడమైనది"
@@ -155,6 +191,10 @@
 		"message": "ఖాళీ URL నుండి Org పేరు తీసుకోలేము!",
 		"description": "[error] Org పేరు తీసుకోవడానికి URL పంపలేదు"
 	},
+	"error_failed_sync": {
+		"message": "సమకాలీకరణ విఫలమైంది.",
+		"description": "[లోపం] వినియోగదారు నుండి Tabs సమకాలీకరించబడనప్పుడు సాధారణ లోపం"
+	},
 	"error_get_with_no_org": {
 		"message": "Org నిర్దేశించకపోతే Tabs పొందలేము.",
 		"description": "[error] Org సమాచారం లేకుండా Tabs కోసం ప్రయత్నించారు"
@@ -167,6 +207,10 @@
 		"message": "ఫంక్షన్‌కు పంపబడిన కీ పారామీటర్ చెల్లదు",
 		"description": "[లోపం] చెల్లని పారామీటర్‌తో డెవలపర్ ఫంక్షన్‌ను కాల్ చేయడానికి ప్రయత్నించారు"
 	},
+	"error_invalid_request": {
+		"message": "చెల్లని అభ్యర్థన.",
+		"description": "[లోపం] తప్పుగా ఫార్మాట్ చేయబడిన సందేశాన్ని పొందిన తర్వాత సాధారణ లోపం"
+	},
 	"error_invalid_tab": {
 		"message": "చెల్లని Tab",
 		"description": "[error] Tab చెల్లని"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "ఒకటి కన్నా ఎక్కువ సరిపోలే Tabలు కనుగొనబడ్డాయి.",
 		"description": "[error] ఒకటి కన్నా ఎక్కువ సరిపోలే Tabs లభించాయి"
+	},
+	"error_many_tabs_found": {
+		"message": "ఒకటి కంటే ఎక్కువ Tab దొరికింది.",
+		"description": "[లోపం] చాలా Tabs తిరిగి పొందబడ్డాయి"
 	},
 	"error_minify_url": {
 		"message": "ఖాళీ URL ను చిన్నదిగా చేయలేము!",
@@ -235,9 +283,37 @@
 		"message": "పరిశీలించడానికి URL లేదు!",
 		"description": "[error] పరిశీలన కోసం URL పంపలేదు"
 	},
+	"error_not_initialized": {
+		"message": "ఇంకా ప్రారంభించబడలేదు.",
+		"description": "[లోపం] వేరియబుల్ సిద్ధంగా లేనప్పుడు సాధారణ లోపం"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs ప్రాసెసింగ్ లోపం.",
+		"description": "[లోపం] Tabs ప్రాసెస్ చేసేటప్పుడు సాధారణ లోపం"
+	},
+	"error_redirect": {
+		"message": "Редирект చేయడం సాధ్యం కాదు. దయచేసి పేజీని రిఫ్రెష్ చేయండి.",
+		"description": "[లోపం] పేజీ దారి మళ్లింపులో సాధారణ లోపం."
+	},
 	"error_remove_not_favourite": {
 		"message": "ప్రియమైన కాదు అనే Tab ను తొలగించలేము!",
 		"description": "[error] ఇంకా సేవ్ కాలేదు అని చూపే Tab ను తొలగించాలని ప్రయత్నించారు"
+	},
+	"error_removing_all_tabs": {
+		"message": "అన్ని Tabs తీసివేసేటప్పుడు లోపం.",
+		"description": "[లోపం] అన్ని Tabs తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+	},
+	"error_removing_generic_tabs": {
+		"message": "సాధారణ Tabs తీసివేసేటప్పుడు లోపం.",
+		"description": "[లోపం] సాధారణ Tabs తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+	},
+	"error_removing_other_tabs": {
+		"message": "ఇతర Tabs తీసివేసేటప్పుడు లోపం.",
+		"description": "[లోపం] ఇతర Tabs తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
+	},
+	"error_removing_tab": {
+		"message": "Tab తీసివేసేటప్పుడు లోపం.",
+		"description": "[లోపం] Tab తీసివేసేటప్పుడు ఉపయోగించే సాధారణ లోపం"
 	},
 	"error_required_params": {
 		"message": "ఫంక్షన్ కోసం అవసరమైన పారామీటర్లు పంపబడలేదు",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "ఖాళీ Tabs సింక్ చేయలేము!",
 		"description": "[error] సింక్ చేయడానికి ఎలాంటి వస్తువూ లేవు"
+	},
+	"error_tab_constructor": {
+		"message": "Tab క్లాస్‌ను ఉపయోగించడానికి new Tab() కు బదులుగా Tab.create() ఉపయోగించండి",
+		"description": "[లోపం] Tab క్లాస్‌ను ఎలా ఉపయోగించాలో డెవలపర్‌కు చెప్పండి"
 	},
 	"error_tab_label": {
 		"message": "లేబుల్ ఖాళీ స్ట్రింగ్‌గా ఉండకూడదు",
@@ -271,12 +351,32 @@
 		"message": "URL ఖాళీ స్ట్రింగ్‌గా ఉండకూడదు",
 		"description": "[error] URL ఇవ్వకుండా Tab సృష్టించడానికి ప్రయత్నించారు"
 	},
+	"error_tab_url_saved": {
+		"message": "ఈ URL తో కూడిన Tab ఇప్పటికే సేవ్ చేయబడింది!",
+		"description": "[లోపం] వినియోగదారు ఇప్పటికే ఇష్టపడిన Tab ను సేవ్ చేయడానికి ప్రయత్నించారు"
+	},
 	"error_tabcont_initialize": {
 		"message": "దీనితో ఆరంభించలేము"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "చెల్లని Tabs కనిపించాయి.\nమొదటి సారి:",
 		"description": "[error] చెల్లని Tabs పంపబడ్డాయి"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer క్లాస్‌ను ఉపయోగించడానికి new TabContainer() కు బదులుగా TabContainer.create() ఉపయోగించండి",
+		"description": "[లోపం] TabContainer క్లాస్‌ను ఎలా ఉపయోగించాలో డెవలపర్‌కు చెప్పండి"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService క్లాస్‌ను ఉపయోగించడానికి new TranslationService() కు బదులుగా TranslationService.create() ఉపయోగించండి",
+		"description": "[లోపం] TranslationService క్లాస్‌ను ఎలా ఉపయోగించాలో డెవలపర్‌కు చెప్పండి"
+	},
+	"error_translator_not_initialized": {
+		"message": "అనువాదకుడు ఇంకా ప్రారంభించబడలేదు.",
+		"description": "[లోపం] TranslationService సిద్ధంగా లేదు"
+	},
+	"error_unknown_request": {
+		"message": "తెలియని అభ్యర్థన.",
+		"description": "[లోపం] గుర్తించబడని సందేశాన్ని పొందిన తర్వాత సాధారణ లోపం"
 	},
 	"error_useless_remove": {
 		"message": "తొలగించలేము:\nఎప్పుడూ సేవ్ కాని పేజీని తొలగించలేము",

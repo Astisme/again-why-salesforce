@@ -23,6 +23,34 @@
 		"message": "Dipilih",
 		"description": "Tajuk bahagian untuk item yang telah dipilih"
 	},
+	"cmd_export_all": {
+		"message": "Tunjukkan modal untuk експорт semua Tab yang disimpan",
+		"description": "[penerangan arahan] pengguna mahu mengeksport semua Tab"
+	},
+	"cmd_import": {
+		"message": "Tunjukkan modal untuk импорт Tab baharu",
+		"description": "[penerangan arahan] pengguna mahu mengimport Tab baharu"
+	},
+	"cmd_open_other_org": {
+		"message": "Tunjukkan modal untuk membuka halaman semasa dalam Org lain",
+		"description": "[penerangan arahan] pengguna mahu membuka halaman semasa dalam Org lain"
+	},
+	"cmd_remove_tab": {
+		"message": "Alih keluar halaman semasa dari senarai Tab (jika disimpan)",
+		"description": "[penerangan arahan] pengguna mahu mengalih keluar halaman semasa"
+	},
+	"cmd_save_as_tab": {
+		"message": "Simpan halaman semasa dalam senarai Tab (jika belum disimpan)",
+		"description": "[penerangan arahan] pengguna mahu menyimpan halaman semasa"
+	},
+	"cmd_toggle_org": {
+		"message": "Togol nilai Org halaman semasa (jika disimpan)",
+		"description": "[penerangan arahan] pengguna mahu menogol Org untuk halaman semasa"
+	},
+	"cmd_update_tab": {
+		"message": "Tunjukkan modal untuk mengemas kini halaman semasa (jika disimpan)",
+		"description": "[penerangan arahan] pengguna mahu mengemas kini halaman semasa"
+	},
 	"confirm_another_org": {
 		"message": "Sahkan pembukaan pautan ini.",
 		"description": "[buka-modal-org-lain] minta pengesahan daripada pengguna untuk membuka pautan yang dibina."
@@ -123,6 +151,14 @@
 		"message": "Padam semua Tabs",
 		"description": "[popup] tajuk pada tong sampah untuk mengosongkan semua Tabs"
 	},
+	"drop": {
+		"message": "Lepaskan",
+		"description": "[import] biarkan pengguna meletakkan fail mereka ke kawasan yang ditentukan"
+	},
+	"error_adding_tab": {
+		"message": "Ralat semasa menambah Tab.",
+		"description": "[ralat] Ralat generik yang digunakan semasa menambah Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Tutup modal lain dahulu!",
 		"description": "[toast] Pengguna cuba membuka lebih daripada 1 modal"
@@ -155,6 +191,10 @@
 		"message": "Tidak dapat mengekstrak nama Org daripada URL kosong!",
 		"description": "[ralat] url dari mana nama Org hendak diambil tidak dihantar"
 	},
+	"error_failed_sync": {
+		"message": "Gagal sync.",
+		"description": "[ralat] Ralat generik apabila Tab tidak dapat disegerakkan daripada pengguna"
+	},
 	"error_get_with_no_org": {
 		"message": "Tidak dapat mendapatkan Tabs jika Org tidak dinyatakan.",
 		"description": "[ralat] cuba mencari Tabs mengikut Org tanpa menghantar maklumat Org"
@@ -167,6 +207,10 @@
 		"message": "Parameter kunci yang dihantar ke fungsi tidak sah",
 		"description": "[ralat] pembangun cuba memanggil fungsi dengan parameter yang tidak sah"
 	},
+	"error_invalid_request": {
+		"message": "Permintaan tidak sah.",
+		"description": "[ralat] Ralat generik selepas menerima mesej yang diformat dengan buruk"
+	},
 	"error_invalid_tab": {
 		"message": "Tab tidak sah",
 		"description": "[ralat] Tab tidak sah"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Menemui lebih daripada 1 Tab yang sepadan.",
 		"description": "[ralat] banyak Tabs telah diambil semula"
+	},
+	"error_many_tabs_found": {
+		"message": "Menemui lebih daripada satu Tab.",
+		"description": "[ralat] banyak Tab telah diambil"
 	},
 	"error_minify_url": {
 		"message": "Tidak dapat mengecilkan URL kosong!",
@@ -235,9 +283,37 @@
 		"message": "Tiada URL untuk disemak!",
 		"description": "[ralat] url untuk disemak tidak dihantar"
 	},
+	"error_not_initialized": {
+		"message": "belum dimulakan lagi.",
+		"description": "[ralat] Ralat generik apabila pembolehubah belum siap"
+	},
+	"error_processing_tabs": {
+		"message": "Ralat memproses Tab.",
+		"description": "[ralat] Ralat generik semasa memproses Tab"
+	},
+	"error_redirect": {
+		"message": "Tidak dapat redirect. Sila muat semula halaman.",
+		"description": "[ralat] Ralat generik pada pengalihan halaman."
+	},
 	"error_remove_not_favourite": {
 		"message": "Tidak dapat membuang Tab yang bukan kegemaran!",
 		"description": "[ralat] pengguna cuba membuang Tab yang belum disimpan lagi"
+	},
+	"error_removing_all_tabs": {
+		"message": "Ralat semasa mengalih keluar semua Tab.",
+		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar semua Tab"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Ralat semasa mengalih keluar Tab generik.",
+		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab generik"
+	},
+	"error_removing_other_tabs": {
+		"message": "Ralat semasa mengalih keluar Tab lain.",
+		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab lain"
+	},
+	"error_removing_tab": {
+		"message": "Ralat semasa mengalih keluar Tab.",
+		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab"
 	},
 	"error_required_params": {
 		"message": "Parameter yang diperlukan untuk fungsi tidak dihantar",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyegerakkan Tab nol (null)!",
 		"description": "[ralat] cuba menyegerakkan tiada apa-apa"
+	},
+	"error_tab_constructor": {
+		"message": "Gunakan Tab.create() bukannya new Tab() untuk menggunakan kelas Tab",
+		"description": "[ralat] beritahu pembangun cara menggunakan kelas Tab"
 	},
 	"error_tab_label": {
 		"message": "Label mestilah rentetan bukan kosong",
@@ -271,6 +351,10 @@
 		"message": "URL mestilah rentetan bukan kosong",
 		"description": "[ralat] pengguna cuba mencipta Tab tanpa url"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab dengan URL ini telah disimpan!",
+		"description": "[ralat] Pengguna cuba menyimpan Tab yang sudah menjadi kegemaran"
+	},
 	"error_tabcont_initialize": {
 		"message": "Tidak dapat memulakan dengan",
 		"description": "[ralat] kegagalan memulakan bekas Tab"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Tab(s) tidak sah dikesan.\nKejadian pertama:",
 		"description": "[ralat] Tabs tidak sah dihantar"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Gunakan TabContainer.create() bukannya new TabContainer() untuk menggunakan kelas TabContainer",
+		"description": "[ralat] beritahu pembangun cara menggunakan kelas TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Gunakan TranslationService.create() bukannya new TranslationService() untuk menggunakan kelas TranslationService",
+		"description": "[ralat] beritahu pembangun cara menggunakan kelas TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "penterjemah belum dimulakan lagi.",
+		"description": "[ralat] TranslationService belum siap"
+	},
+	"error_unknown_request": {
+		"message": "Permintaan tidak diketahui.",
+		"description": "[ralat] Ralat generik selepas menerima mesej yang tidak dikenali"
 	},
 	"error_useless_remove": {
 		"message": "Tidak dapat membuang:\nTidak dapat membuang halaman yang belum disimpan sebelum ini",

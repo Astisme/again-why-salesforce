@@ -39,7 +39,7 @@ const MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
  */
 function getRng_n_digits(digits = 1) {
 	if (digits <= 1) {
-		throw new Error("Cannot create rng with less than 1 digit.");
+		throw new Error("error_required_params");
 	}
 	const tenToTheDigits = Math.pow(10, digits - 1);
 	return Math.floor(Math.random() * 9 * tenToTheDigits) +
@@ -69,7 +69,7 @@ async function handleLightningLinkClick(e) {
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
-		showToast("Cannot redirect. Please refresh the page.", false);
+		showToast("error_redirect", false);
 		return;
 	}
 	const settings = await getSettings([
@@ -1094,16 +1094,15 @@ export async function generateSldsFileInput(
 	preventFileSelection = false,
 	required = true,
 ) {
-	if (!allowDrop && preventFileSelection) {
-		throw new Error(
-			"Cannot generate a file input when allowDrop == false && preventFileSelection == true",
-		);
-	} else if (
-		wrapperId == null || wrapperId === "" || inputElementId == null ||
-		inputElementId === "" || acceptedType == null || acceptedType === ""
+	if (
+		(!allowDrop && preventFileSelection) ||
+		(
+			wrapperId == null || wrapperId === "" || inputElementId == null ||
+			inputElementId === "" || acceptedType == null || acceptedType === ""
+		)
 	) {
 		throw new Error(
-			"Cannot generate a file input when the required files are not passed.",
+			"error_required_params",
 		);
 	}
 	const translator = await ensureTranslatorAvailability();
@@ -1129,6 +1128,8 @@ export async function generateSldsFileInput(
 		"forceContentFileDroppableZone forceContentRelatedListPreviewFileList",
 	);
 	innerDiv.appendChild(cardBodyDiv);
+	const msg_file = await translator.translate("file");
+	const msg_files = await translator.translate("files");
 	if (preventFileSelection && allowDrop) {
 		const fileSelectorDiv = document.createElement("div");
 		fileSelectorDiv.classList.add(
@@ -1198,8 +1199,10 @@ export async function generateSldsFileInput(
 			"slds-text-heading--medium",
 			"slds-text-align--center",
 		);
-		dropFilesSpan.textContent = `Drop File${singleFile ? "" : "s"}`;
-		dropzoneBodySpan.appendChild(dropFilesSpan);
+		const msg_drop = await translator.translate("drop");
+		dropFilesSpan.textContent = `${msg_drop} ${
+			singleFile ? msg_file : msg_files
+		}`, dropzoneBodySpan.appendChild(dropFilesSpan);
 	}
 	const dragOverDiv = document.createElement("div");
 	dragOverDiv.classList.add("drag-over-body");
@@ -1265,8 +1268,6 @@ export async function generateSldsFileInput(
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
 	const msg_upload = await translator.translate("upload");
-	const msg_file = await translator.translate("file");
-	const msg_files = await translator.translate("files");
 	fileSelectorButtonSpan.append(
 		`${msg_upload} ${singleFile ? msg_file : msg_files}`,
 	);

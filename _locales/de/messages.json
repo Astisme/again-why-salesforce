@@ -23,6 +23,34 @@
 		"message": "Ausgewählt",
 		"description": "Abschnittsüberschrift für Elemente, die ausgewählt wurden"
 	},
+	"cmd_export_all": {
+		"message": "Modal zum Export aller gespeicherten Tabs anzeigen",
+		"description": "[command description] Benutzer möchte alle Tabs exportieren"
+	},
+	"cmd_import": {
+		"message": "Modal zum Import neuer Tabs anzeigen",
+		"description": "[command description] Benutzer möchte neue Tabs importieren"
+	},
+	"cmd_open_other_org": {
+		"message": "Modal zum Öffnen der aktuellen Seite in einer anderen Org anzeigen",
+		"description": "[command description] Benutzer möchte die aktuelle Seite in einer anderen Org öffnen"
+	},
+	"cmd_remove_tab": {
+		"message": "Aktuelle Seite aus der Tab-Liste entfernen (falls gespeichert)",
+		"description": "[command description] Benutzer möchte die aktuelle Seite entfernen"
+	},
+	"cmd_save_as_tab": {
+		"message": "Aktuelle Seite in der Tab-Liste speichern (falls noch nicht gespeichert)",
+		"description": "[command description] Benutzer möchte die aktuelle Seite speichern"
+	},
+	"cmd_toggle_org": {
+		"message": "Modal zum Umschalten des Org-Werts der aktuellen Seite anzeigen (falls gespeichert)",
+		"description": "[command description] Benutzer möchte die Org der aktuellen Seite umschalten"
+	},
+	"cmd_update_tab": {
+		"message": "Modal zum Aktualisieren der aktuellen Seite anzeigen (falls gespeichert)",
+		"description": "[command description] Benutzer möchte die aktuelle Seite aktualisieren"
+	},
 	"confirm_another_org": {
 		"message": "Bestätigen Sie das Öffnen dieses Links.",
 		"description": "[open-other-org-modal] Fordert den Benutzer auf, den Öffnungsvorgang des erstellten Links zu bestätigen."
@@ -123,6 +151,14 @@
 		"message": "Alle Tabs löschen",
 		"description": "[popup] Titel auf dem Papierkorb zum Leeren aller Tabs"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] Ermöglicht es dem Benutzer, seine Dateien in den angegebenen Bereich zu ziehen"
+	},
+	"error_adding_tab": {
+		"message": "Fehler beim Hinzufügen eines Tabs.",
+		"description": "[error] Allgemeiner Fehler beim Hinzufügen eines Tabs"
+	},
 	"error_close_other_modal": {
 		"message": "Schließen Sie zuerst das andere Modal!",
 		"description": "[toast] Es wurde versucht, mehr als ein Modal zu öffnen."
@@ -155,6 +191,10 @@
 		"message": "Aus einer leeren URL kann kein Org-Name extrahiert werden!",
 		"description": "[error] Es wurde keine URL übergeben, um den Org-Namen zu extrahieren."
 	},
+	"error_failed_sync": {
+		"message": "Synchronisierung fehlgeschlagen.",
+		"description": "[error] Allgemeiner Fehler bei der Synchronisierung der Tabs mit dem Benutzer"
+	},
 	"error_get_with_no_org": {
 		"message": "Tabs können nicht abgerufen werden, wenn keine Org angegeben ist.",
 		"description": "[error] Es wurde versucht, Tabs ohne Org-Information abzurufen."
@@ -167,6 +207,10 @@
 		"message": "Der an die Funktion übergebene key-Parameter ist ungültig",
 		"description": "[Fehler] Der Entwickler hat versucht, die Funktion mit einem ungültigen Parameter aufzurufen"
 	},
+	"error_invalid_request": {
+		"message": "Ungültige Anfrage.",
+		"description": "[error] Allgemeiner Fehler nach Empfang einer falsch formatierten Nachricht"
+	},
 	"error_invalid_tab": {
 		"message": "Ungültiger Tab",
 		"description": "[error] Der Tab ist ungültig."
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Es wurden mehr als ein übereinstimmender Tab gefunden.",
 		"description": "[error] Es wurden mehrere passende Tabs abgerufen."
+	},
+	"error_many_tabs_found": {
+		"message": "Mehr als ein Tab gefunden.",
+		"description": "[error] Mehrere Tabs wurden abgerufen"
 	},
 	"error_minify_url": {
 		"message": "Eine leere URL kann nicht verkleinert werden!",
@@ -235,9 +283,37 @@
 		"message": "Keine URL zum Überprüfen vorhanden!",
 		"description": "[error] Es wurde keine URL zum Überprüfen übergeben."
 	},
+	"error_not_initialized": {
+		"message": "Noch nicht initialisiert.",
+		"description": "[error] Allgemeiner Fehler, wenn eine Variable nicht bereit ist"
+	},
+	"error_processing_tabs": {
+		"message": "Fehler beim Verarbeiten der Tabs.",
+		"description": "[error] Allgemeiner Fehler beim Verarbeiten der Tabs"
+	},
+	"error_redirect": {
+		"message": "Weiterleitung nicht möglich. Bitte Seite neu laden.",
+		"description": "[error] Allgemeiner Fehler bei Seitenweiterleitung"
+	},
 	"error_remove_not_favourite": {
 		"message": "Nicht-favoritärer Tab kann nicht entfernt werden!",
 		"description": "[error] Es wurde versucht, einen Tab zu entfernen, der noch nicht gespeichert ist."
+	},
+	"error_removing_all_tabs": {
+		"message": "Fehler beim Entfernen aller Tabs.",
+		"description": "[error] Allgemeiner Fehler beim Entfernen aller Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Fehler beim Entfernen generischer Tabs.",
+		"description": "[error] Allgemeiner Fehler beim Entfernen generischer Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Fehler beim Entfernen anderer Tabs.",
+		"description": "[error] Allgemeiner Fehler beim Entfernen anderer Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Fehler beim Entfernen des Tabs.",
+		"description": "[error] Allgemeiner Fehler beim Entfernen eines Tabs"
 	},
 	"error_required_params": {
 		"message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Leere Tabs können nicht synchronisiert werden!",
 		"description": "[error] Es wurde versucht, nichts zu synchronisieren."
+	},
+	"error_tab_constructor": {
+		"message": "Verwende Tab.create() anstelle von new Tab()",
+		"description": "[error] Entwickler darüber informieren, wie die Klasse Tab verwendet wird"
 	},
 	"error_tab_label": {
 		"message": "Die Bezeichnung muss eine nicht leere Zeichenkette sein",
@@ -271,12 +351,32 @@
 		"message": "Die URL muss eine nicht leere Zeichenkette sein",
 		"description": "[error] Es wurde versucht, einen Tab ohne URL zu erstellen."
 	},
+	"error_tab_url_saved": {
+		"message": "Ein Tab mit dieser URL wurde bereits gespeichert!",
+		"description": "[error] Benutzer hat versucht, einen bereits gespeicherten Tab zu speichern"
+	},
 	"error_tabcont_initialize": {
 		"message": "Kann nicht initialisiert werden mit"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Ungültige Tabs erkannt.\nErstes Vorkommen:",
 		"description": "[error] Es wurden ungültige Tabs übergeben."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Verwende TabContainer.create() anstelle von new TabContainer()",
+		"description": "[error] Entwickler darüber informieren, wie die Klasse TabContainer verwendet wird"
+	},
+	"error_translationservice_constructor": {
+		"message": "Verwende TranslationService.create() anstelle von new TranslationService()",
+		"description": "[error] Entwickler darüber informieren, wie die Klasse TranslationService verwendet wird"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator wurde noch nicht initialisiert.",
+		"description": "[error] TranslationService war noch nicht bereit"
+	},
+	"error_unknown_request": {
+		"message": "Unbekannte Anfrage.",
+		"description": "[error] Allgemeiner Fehler nach Empfang einer unbekannten Nachricht"
 	},
 	"error_useless_remove": {
 		"message": "Kann nicht entfernt werden:\nEine Seite, die nie gespeichert wurde, kann nicht entfernt werden.",

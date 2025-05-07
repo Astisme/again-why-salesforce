@@ -23,6 +23,34 @@
 		"message": "已选择",
 		"description": "已选项目的部分标题"
 	},
+	"cmd_export_all": {
+		"message": "显示 modal 以导出所有已保存的 Tabs",
+		"description": "[命令说明] 用户想要导出所有 Tabs"
+	},
+	"cmd_import": {
+		"message": "显示 modal 以 импорт 新的 Tabs",
+		"description": "[命令说明] 用户想要导入新的 Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "显示 modal 以在另一个 Org 中打开当前页面",
+		"description": "[命令说明] 用户想要在另一个 Org 中打开当前页面"
+	},
+	"cmd_remove_tab": {
+		"message": "从 Tab 列表中移除当前页面（如果已保存）",
+		"description": "[命令说明] 用户想要移除当前页面"
+	},
+	"cmd_save_as_tab": {
+		"message": "在 Tab 列表中保存当前页面（如果未保存）",
+		"description": "[命令说明] 用户想要保存当前页面"
+	},
+	"cmd_toggle_org": {
+		"message": "切换当前页面的 Org 值（如果已保存）",
+		"description": "[命令说明] 用户想要切换当前页面的 Org"
+	},
+	"cmd_update_tab": {
+		"message": "显示 modal 以更新当前页面（如果已保存）",
+		"description": "[命令说明] 用户想要更新当前页面"
+	},
 	"confirm_another_org": {
 		"message": "确认打开此链接。",
 		"description": "[打开其他组织模态框] 请求用户确认以打开构造的链接。"
@@ -123,6 +151,14 @@
 		"message": "删除所有 Tabs",
 		"description": "[弹出窗口] 用于清空所有 Tabs 的回收站标题"
 	},
+	"drop": {
+		"message": "拖放",
+		"description": "[导入] 允许用户将文件拖放到指定区域"
+	},
+	"error_adding_tab": {
+		"message": "添加 Tab 时出错。",
+		"description": "[错误] 添加 Tab 时使用的一般错误"
+	},
 	"error_close_other_modal": {
 		"message": "请先关闭其他模态框！",
 		"description": "[提示信息] 用户尝试打开超过1个模态框"
@@ -155,6 +191,10 @@
 		"message": "无法从空 URL 中提取组织名称！",
 		"description": "[错误] 未传递要从中检索组织名称的 URL"
 	},
+	"error_failed_sync": {
+		"message": "同步失败。",
+		"description": "[错误] 从用户同步 Tabs 时出现一般错误"
+	},
 	"error_get_with_no_org": {
 		"message": "如果未指定组织，则无法获取 Tabs。",
 		"description": "[错误] 尝试按组织搜索 Tabs 但未发送组织信息"
@@ -167,6 +207,10 @@
 		"message": "传递给函数的键参数无效",
 		"description": "[错误] 开发者尝试使用无效参数调用函数"
 	},
+	"error_invalid_request": {
+		"message": "无效请求。",
+		"description": "[错误] 收到格式错误的消息后出现的一般错误"
+	},
 	"error_invalid_tab": {
 		"message": "无效的 Tab",
 		"description": "[错误] Tab 无效"
@@ -177,6 +221,10 @@
 	},
 	"error_many_matching_tab": {
 		"message": "找到超过1个匹配的 Tab。",
+		"description": "[错误] 检索到多个 Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "找到多个 Tab。",
 		"description": "[错误] 检索到多个 Tabs"
 	},
 	"error_minify_url": {
@@ -235,9 +283,37 @@
 		"message": "没有要检查的 URL！",
 		"description": "[错误] 未传递要检查的 URL"
 	},
+	"error_not_initialized": {
+		"message": "尚未初始化。",
+		"description": "[错误] 变量未准备就绪时出现的一般错误"
+	},
+	"error_processing_tabs": {
+		"message": "处理 Tabs 时出错。",
+		"description": "[错误] 处理 Tabs 时出现的一般错误"
+	},
+	"error_redirect": {
+		"message": "无法 redirect。请刷新页面。",
+		"description": "[错误] 页面重定向时出现一般错误。"
+	},
 	"error_remove_not_favourite": {
 		"message": "无法移除非收藏的 Tab！",
 		"description": "[错误] 用户尝试移除尚未保存的 Tab"
+	},
+	"error_removing_all_tabs": {
+		"message": "移除所有 Tabs 时出错。",
+		"description": "[错误] 移除所有 Tabs 时使用的一般错误"
+	},
+	"error_removing_generic_tabs": {
+		"message": "移除通用 Tabs 时出错。",
+		"description": "[错误] 移除通用 Tabs 时使用的一般错误"
+	},
+	"error_removing_other_tabs": {
+		"message": "移除其他 Tabs 时出错。",
+		"description": "[错误] 移除其他 Tabs 时使用的一般错误"
+	},
+	"error_removing_tab": {
+		"message": "移除 Tab 时出错。",
+		"description": "[错误] 移除 Tab 时使用的一般错误"
 	},
 	"error_required_params": {
 		"message": "函数所需的参数未传递",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "无法同步空的 Tabs！",
 		"description": "[错误] 尝试同步无内容"
+	},
+	"error_tab_constructor": {
+		"message": "请使用 Tab.create() 而不是 new Tab() 来使用 Tab 类",
+		"description": "[错误] 告诉开发者如何使用 Tab 类"
 	},
 	"error_tab_label": {
 		"message": "标签必须是非空字符串",
@@ -271,6 +351,10 @@
 		"message": "URL 必须是非空字符串",
 		"description": "[错误] 用户尝试创建一个没有 URL 的 Tab"
 	},
+	"error_tab_url_saved": {
+		"message": "已保存此 URL 的 Tab！",
+		"description": "[错误] 用户尝试保存已收藏的 Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "无法初始化：",
 		"description": "[错误] Tab 容器初始化失败"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "检测到无效的 Tab(s)。\n首次出现：",
 		"description": "[错误] 传递了无效的 Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "请使用 TabContainer.create() 而不是 new TabContainer() 来使用 TabContainer 类",
+		"description": "[错误] 告诉开发者如何使用 TabContainer 类"
+	},
+	"error_translationservice_constructor": {
+		"message": "请使用 TranslationService.create() 而不是 new TranslationService() 来使用 TranslationService 类",
+		"description": "[错误] 告诉开发者如何使用 TranslationService 类"
+	},
+	"error_translator_not_initialized": {
+		"message": "翻译器尚未初始化。",
+		"description": "[错误] TranslationService 尚未准备好"
+	},
+	"error_unknown_request": {
+		"message": "未知请求。",
+		"description": "[错误] 收到无法识别的消息后出现的一般错误"
 	},
 	"error_useless_remove": {
 		"message": "无法移除：\n无法移除之前未保存的页面",

@@ -23,6 +23,34 @@
 		"message": "Choisi",
 		"description": "En-tête de section pour les éléments qui ont été sélectionnés"
 	},
+	"cmd_export_all": {
+		"message": "Afficher le modal pour exporter tous les Tabs enregistrés",
+		"description": "[description de commande] l'utilisateur veut exporter tous les Tabs"
+	},
+	"cmd_import": {
+		"message": "Afficher le modal pour importer de nouveaux Tabs",
+		"description": "[description de commande] l'utilisateur veut importer de nouveaux Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Afficher le modal pour ouvrir la page actuelle dans une autre Org",
+		"description": "[description de commande] l'utilisateur veut ouvrir la page actuelle dans une autre Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Retirer la page actuelle de la liste des Tabs (si enregistrée)",
+		"description": "[description de commande] l'utilisateur veut retirer la page actuelle"
+	},
+	"cmd_save_as_tab": {
+		"message": "Enregistrer la page actuelle dans la liste des Tabs (si non enregistrée)",
+		"description": "[description de commande] l'utilisateur veut enregistrer la page actuelle"
+	},
+	"cmd_toggle_org": {
+		"message": "Basculer la valeur de l'Org de la page actuelle (si enregistrée)",
+		"description": "[description de commande] l'utilisateur veut basculer l'Org pour la page actuelle"
+	},
+	"cmd_update_tab": {
+		"message": "Afficher le modal pour mettre à jour la page actuelle (si enregistrée)",
+		"description": "[description de commande] l'utilisateur veut mettre à jour la page actuelle"
+	},
 	"confirm_another_org": {
 		"message": "Confirmez l'ouverture de ce lien.",
 		"description": "[open-other-org-modal] Demande de confirmation à l'utilisateur pour ouvrir le lien construit."
@@ -123,6 +151,14 @@
 		"message": "Supprimer tous les Tabs",
 		"description": "[popup] Titre sur la corbeille pour vider tous les Tabs"
 	},
+	"drop": {
+		"message": "Déposer",
+		"description": "[import] laisser l'utilisateur déposer ses fichiers sur la zone spécifiée"
+	},
+	"error_adding_tab": {
+		"message": "Erreur lors de l'ajout de Tab.",
+		"description": "[erreur] Erreur générique utilisée lors de l'ajout d'un Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Fermez d'abord l'autre modal !",
 		"description": "[toast] L'utilisateur a tenté d'ouvrir plusieurs modals."
@@ -155,6 +191,10 @@
 		"message": "Impossible d'extraire le nom de l'Org d'une URL vide !",
 		"description": "[error] Aucune URL n'a été fournie pour extraire le nom de l'Org."
 	},
+	"error_failed_sync": {
+		"message": "Échec de la synchronisation.",
+		"description": "[erreur] Erreur générique lorsque les Tabs n'ont pas pu être synchronisés par l'utilisateur"
+	},
 	"error_get_with_no_org": {
 		"message": "Impossible d'obtenir des Tabs sans spécifier l'Org.",
 		"description": "[error] Tentative de récupération de Tabs sans information d'Org."
@@ -167,6 +207,10 @@
 		"message": "Le paramètre key passé à la fonction n'est pas valide",
 		"description": "[erreur] le développeur a tenté d'appeler la fonction avec un paramètre invalide"
 	},
+	"error_invalid_request": {
+		"message": "Requête invalide.",
+		"description": "[erreur] Erreur générique après avoir reçu un message mal formaté"
+	},
 	"error_invalid_tab": {
 		"message": "Tab non valide",
 		"description": "[error] Le Tab n'est pas valide."
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Plus d'un Tab correspondant a été trouvé.",
 		"description": "[error] Plusieurs Tabs correspondants ont été récupérés."
+	},
+	"error_many_tabs_found": {
+		"message": "Trouvé plus d'un Tab.",
+		"description": "[erreur] plusieurs Tabs ont été récupérés"
 	},
 	"error_minify_url": {
 		"message": "Impossible de réduire une URL vide !",
@@ -235,9 +283,37 @@
 		"message": "Aucune URL à vérifier !",
 		"description": "[error] Aucune URL n'a été fournie pour la vérification."
 	},
+	"error_not_initialized": {
+		"message": "n'était pas encore initialisé.",
+		"description": "[erreur] Erreur générique lorsqu'une variable n'est pas prête"
+	},
+	"error_processing_tabs": {
+		"message": "Erreur lors du traitement des Tabs.",
+		"description": "[erreur] Erreur générique lors du traitement des Tabs"
+	},
+	"error_redirect": {
+		"message": "Impossible de rediriger. Veuillez rafraîchir la page.",
+		"description": "[erreur] Erreur générique lors de la redirection de page."
+	},
 	"error_remove_not_favourite": {
 		"message": "Impossible de supprimer un Tab non favori !",
 		"description": "[error] L'utilisateur a tenté de supprimer un Tab qui n'a pas encore été enregistré."
+	},
+	"error_removing_all_tabs": {
+		"message": "Erreur lors de la suppression de tous les Tabs.",
+		"description": "[erreur] Erreur générique utilisée lors de la suppression de tous les Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Erreur lors de la suppression de Tabs génériques.",
+		"description": "[erreur] Erreur générique utilisée lors de la suppression de Tabs génériques"
+	},
+	"error_removing_other_tabs": {
+		"message": "Erreur lors de la suppression d'autres Tabs.",
+		"description": "[erreur] Erreur générique utilisée lors de la suppression d'autres Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Erreur lors de la suppression de Tab.",
+		"description": "[erreur] Erreur générique utilisée lors de la suppression d'un Tab"
 	},
 	"error_required_params": {
 		"message": "Les paramètres requis pour la fonction n'ont pas été fournis",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Impossible de synchroniser des Tabs nuls !",
 		"description": "[error] Aucune synchronisation n'a été effectuée."
+	},
+	"error_tab_constructor": {
+		"message": "Utilisez Tab.create() au lieu de new Tab()",
+		"description": "[erreur] indiquer au développeur comment utiliser la classe Tab"
 	},
 	"error_tab_label": {
 		"message": "L'étiquette doit être une chaîne non vide",
@@ -271,12 +351,32 @@
 		"message": "L'URL doit être une chaîne non vide",
 		"description": "[error] Tentative de création d'un Tab sans URL."
 	},
+	"error_tab_url_saved": {
+		"message": "Un Tab avec cette URL a déjà été enregistré !",
+		"description": "[erreur] L'utilisateur a essayé d'enregistrer un Tab déjà favori"
+	},
 	"error_tabcont_initialize": {
 		"message": "Impossible d'initialiser avec"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Tabs non valides détectés.\nPremière occurrence :",
 		"description": "[error] Des Tabs non valides ont été fournis."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Utilisez TabContainer.create() au lieu de new TabContainer()",
+		"description": "[erreur] indiquer au développeur comment utiliser la classe TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Utilisez TranslationService.create() au lieu de new TranslationService()",
+		"description": "[erreur] indiquer au développeur comment utiliser la classe TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "le traducteur n'était pas encore initialisé.",
+		"description": "[erreur] le TranslationService n'était pas prêt"
+	},
+	"error_unknown_request": {
+		"message": "Requête inconnue.",
+		"description": "[erreur] Erreur générique après avoir reçu un message non reconnu"
 	},
 	"error_useless_remove": {
 		"message": "Impossible de supprimer :\nImpossible de supprimer une page qui n'a jamais été enregistrée.",

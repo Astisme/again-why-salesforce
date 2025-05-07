@@ -209,3 +209,30 @@ export function openSettingsPage() {
 		open(BROWSER.runtime.getURL("settings/options.html"));
 	}
 }
+// context menus
+export const CXM_OPEN_OTHER_ORG = "open-other-org";
+export const CXM_UPDATE_ORG = "update-org";
+export const CXM_UPDATE_TAB = "update-tab";
+export const CXM_MOVE_FIRST = "move-first";
+export const CXM_MOVE_LEFT = "move-left";
+export const CXM_MOVE_RIGHT = "move-right";
+export const CXM_MOVE_LAST = "move-last";
+export const CXM_REMOVE_TAB = "remove-tab";
+export const CXM_REMOVE_OTHER_TABS = "remove-other-tabs";
+export const CXM_REMOVE_LEFT_TABS = "remove-left-tabs";
+export const CXM_REMOVE_RIGHT_TABS = "remove-right-tabs";
+export const CXM_EMPTY_NO_ORG_TABS = "empty-no-org-tabs";
+export const CXM_EMPTY_TABS = "empty-tabs";
+export const CXM_IMPORT_TABS = "import-tabs";
+export const CXM_EXPORT_TABS = "export-tabs";
+export const CXM_PAGE_SAVE_TAB = "page-save-tab";
+export const CXM_PAGE_REMOVE_TAB = "page-remove-tab";
+// commands (keyboard shortcuts)
+export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
+export const CMD_REMOVE_TAB = "cmd-remove-tab";
+export const CMD_TOGGLE_ORG = "cmd-toggle-org";
+export const CMD_UPDATE_TAB = "cmd-update-tab";
+export const CMD_OPEN_SETTINGS = "cmd-open-settings";
+export const CMD_OPEN_OTHER_ORG = "cmd-open-other-org";
+export const CMD_IMPORT = "cmd-import";
+export const CMD_EXPORT_ALL = "cmd-export-all";

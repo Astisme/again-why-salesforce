@@ -16,6 +16,7 @@ class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_ELEMENT_ATTRIBUTE = "data-i18n";
 	static TRANSLATE_SEPARATOR = "+-+";
+	static ATTRIBUTE_EXCLUDE = "data-exclude-automatic-i18n";
 	/** @type {string} Current language code */
 	currentLanguage = TranslationService.FALLBACK_LANGUAGE;
 	/** @type {Object.<string, Object.<string, string>>} Cache organized by language */
@@ -28,7 +29,7 @@ class TranslationService {
 	constructor(secret) {
 		if (secret !== _translationSecret) {
 			throw new Error(
-				"Use TranslationService.create() instead of new TranslationService()",
+				"error_translationservice_constructor",
 			);
 		}
 	}
@@ -91,7 +92,7 @@ class TranslationService {
 	async loadLanguageFile(language = null) {
 		if (language == null) {
 			console.trace();
-			throw new Error("Be sure to insert a language to load.");
+			throw new Error("error_required_params");
 		}
 		if (this.caches[language] != null) {
 			this.currentLanguage = language;
@@ -119,11 +120,11 @@ class TranslationService {
 
 	/**
 	 * Translate a key to the current language
-	 * @param {string} key - The translation key
+	 * @param {string|Array[string]} key - The translation key
 	 * @returns {string} Translated text
 	 */
 	async translate(key, language = this.currentLanguage, isError = false) {
-		if (key instanceof Array) {
+		if (Array.isArray(key)) {
 			const compoundTranslation = [];
 			for (const k of key) {
 				try {
@@ -153,10 +154,10 @@ class TranslationService {
 			regionAgnosticLanguage?.[key]?.message ??
 			this.caches[TranslationService.FALLBACK_LANGUAGE]?.[key]?.message;
 		if (translation == null) {
-			let errorMsg = "Key not found anywhere";
+			let errorMsg = "error_missing_key"; // fallback
 			if (isError === false) {
 				errorMsg = await this.translate(
-					"error_missing_key",
+					errorMsg,
 					language,
 					true,
 				);
@@ -172,7 +173,7 @@ class TranslationService {
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
 		const elements = document.querySelectorAll(
-			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]`,
+			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
 		);
 		for (const element of elements) {
 			const toTranslateKey = element.getAttribute(
@@ -219,7 +220,7 @@ async function getTranslator_async() {
 
 function getTranslator() {
 	if (singleton == null || singleton instanceof Promise) {
-		throw new Error("translator was not yet initialized");
+		throw new Error("error_translator_not_initialized");
 	}
 	return singleton;
 }

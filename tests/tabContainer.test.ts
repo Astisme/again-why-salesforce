@@ -752,7 +752,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getSingleTabByData({ org: "not-present" }),
 			Error,
-			"Could not find Tab.",
+			"error_tab_not_found",
 		);
 		assertEquals(
 			container.getSingleTabByData({ org: "test-org" }).org,
@@ -761,22 +761,22 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getSingleTabByData({ org: "test-org1" }),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ org: "not-present" }, false),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ org: "test-org" }, false),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ org: "test-org1" }, false),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		// equal to getTabsByData
 		assertEquals(
@@ -786,23 +786,23 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getSingleTabByData({ url: "urll" }),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() =>
 				container.getSingleTabByData({ org: "test-org1", url: "urll" }),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ label: "Org Tab" }, false),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ url: "urll" }, false),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertThrows(
 			() =>
@@ -811,7 +811,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 					false,
 				),
 			Error,
-			"Could not discriminate Tab.",
+			"error_many_tabs_found",
 		);
 		assertEquals(container.length, 8);
 	});

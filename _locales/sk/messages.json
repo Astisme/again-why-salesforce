@@ -23,6 +23,34 @@
 		"message": "Vybrané",
 		"description": "Hlavička sekcie pre položky, ktoré boli vybrané"
 	},
+	"cmd_export_all": {
+		"message": "Zobraziť modal na export všetkých uložených Tabs",
+		"description": "[popis príkazu] používateľ chce exportovať všetky Tabs"
+	},
+	"cmd_import": {
+		"message": "Zobraziť modal na import nových Tabs",
+		"description": "[popis príkazu] používateľ chce importovať nové Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Zobraziť modal na otvorenie aktuálnej stránky v inej Org",
+		"description": "[popis príkazu] používateľ chce otvoriť aktuálnu stránku v inej Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Odstrániť aktuálnu stránku zo zoznamu Tabs (ak je uložená)",
+		"description": "[popis príkazu] používateľ chce odstrániť aktuálnu stránku"
+	},
+	"cmd_save_as_tab": {
+		"message": "Uložiť aktuálnu stránku do zoznamu Tabs (ak nie je uložená)",
+		"description": "[popis príkazu] používateľ chce uložiť aktuálnu stránku"
+	},
+	"cmd_toggle_org": {
+		"message": "Prepnúť hodnotu Org aktuálnej stránky (ak je uložená)",
+		"description": "[popis príkazu] používateľ chce prepnúť Org pre aktuálnu stránku"
+	},
+	"cmd_update_tab": {
+		"message": "Zobraziť modal na aktualizáciu aktuálnej stránky (ak je uložená)",
+		"description": "[popis príkazu] používateľ chce aktualizovať aktuálnu stránku"
+	},
 	"confirm_another_org": {
 		"message": "Potvrďte otvorenie tohto odkazu.",
 		"description": "[open-other-org-modal] žiadosť o potvrdenie od používateľa na otvorenie vytvoreného odkazu."
@@ -123,6 +151,14 @@
 		"message": "Vymazať všetky Tab-y",
 		"description": "[popup] nadpis koša na vymazanie všetkých Tab-ov"
 	},
+	"drop": {
+		"message": "Pusťte",
+		"description": "[import] umožniť používateľovi pustiť súbory na určenú oblasť"
+	},
+	"error_adding_tab": {
+		"message": "Chyba pri pridávaní Tab.",
+		"description": "[chyba] Všeobecná chyba použitá pri pridávaní Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Najprv zatvorte iné modal okno!",
 		"description": "[toast] Používateľ sa pokúsil otvoriť viac ako jedno modal okno"
@@ -155,6 +191,10 @@
 		"message": "Nemožno získať názov organizácie z prázdneho URL!",
 		"description": "[error] Nebolo zadané URL, z ktorého by sa mal získať názov organizácie"
 	},
+	"error_failed_sync": {
+		"message": "Nepodarilo sa synchronizovať.",
+		"description": "[chyba] Všeobecná chyba, keď sa Tabs nepodarilo synchronizovať od používateľa"
+	},
 	"error_get_with_no_org": {
 		"message": "Tab-y nemožno získať, ak nie je zadaná organizácia.",
 		"description": "[error] Pokus o vyhľadanie Tab-ov bez odoslania informácií o organizácii"
@@ -167,6 +207,10 @@
 		"message": "Parameter kľúča odovzdaný funkcii nie je platný",
 		"description": "[chyba] vývojár sa pokúsil volať funkciu s neplatným parametrom"
 	},
+	"error_invalid_request": {
+		"message": "Neplatná požiadavka.",
+		"description": "[chyba] Všeobecná chyba po prijatí nesprávne formátovanej správy"
+	},
 	"error_invalid_tab": {
 		"message": "Neplatný Tab",
 		"description": "[error] Tab nie je platný"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Nájdených je viac ako jeden zodpovedajúci Tab.",
 		"description": "[error] Bolo vrátených príliš veľa Tab-ov"
+	},
+	"error_many_tabs_found": {
+		"message": "Nájdene viac ako jeden Tab.",
+		"description": "[chyba] bolo načítaných veľa Tabs"
 	},
 	"error_minify_url": {
 		"message": "Nemožno skrátiť prázdne URL!",
@@ -235,9 +283,37 @@
 		"message": "Nebola zadaná URL na kontrolu!",
 		"description": "[error] Nebola zadaná URL na kontrolu"
 	},
+	"error_not_initialized": {
+		"message": "nebol ešte inicializovaný.",
+		"description": "[chyba] Všeobecná chyba, keď premenná nie je pripravená"
+	},
+	"error_processing_tabs": {
+		"message": "Chyba spracovania Tabs.",
+		"description": "[chyba] Všeobecná chyba pri spracovaní Tabs"
+	},
+	"error_redirect": {
+		"message": "Nedá sa redirect. Prosím, obnovte stránku.",
+		"description": "[chyba] Všeobecná chyba pri presmerovaní stránky."
+	},
 	"error_remove_not_favourite": {
 		"message": "Tab, ktorý nie je obľúbený, nemožno odstrániť!",
 		"description": "[error] Používateľ sa pokúsil odstrániť Tab, ktorý ešte nebol uložený"
+	},
+	"error_removing_all_tabs": {
+		"message": "Chyba pri odstraňovaní všetkých Tabs.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní všetkých Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Chyba pri odstraňovaní generických Tabs.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní generických Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Chyba pri odstraňovaní ostatných Tabs.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní ostatných Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Chyba pri odstraňovaní Tab.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní Tab"
 	},
 	"error_required_params": {
 		"message": "Požadované parametre pre funkciu neboli odovzdané",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Nemožno zosynchronizovať prázdne Tab-y!",
 		"description": "[error] Pokus o synchronizáciu prázdnych Tab-ov"
+	},
+	"error_tab_constructor": {
+		"message": "Použite Tab.create() namiesto new Tab() na použitie triedy Tab",
+		"description": "[chyba] povedzte vývojárovi, ako použiť triedu Tab"
 	},
 	"error_tab_label": {
 		"message": "Evidenčný štítok musí byť neprazdný reťazec",
@@ -271,6 +351,10 @@
 		"message": "URL musí byť neprazdný reťazec",
 		"description": "[error] Používateľ sa pokúsil vytvoriť Tab bez URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab s touto URL bol už uložený!",
+		"description": "[chyba] Používateľ sa pokúsil uložiť Tab, ktorý už bol obľúbený"
+	},
 	"error_tabcont_initialize": {
 		"message": "Nemožno inicializovať s",
 		"description": ""
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Nájdené sú neplatné Tab(y).\nPrvý výskyt:",
 		"description": "[error] Boli odovzdané neplatné Tab-y"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Použite TabContainer.create() namiesto new TabContainer() na použitie triedy TabContainer",
+		"description": "[chyba] povedzte vývojárovi, ako použiť triedu TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Použite TranslationService.create() namiesto new TranslationService() na použitie triedy TranslationService",
+		"description": "[chyba] povedzte vývojárovi, ako použiť triedu TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "prekladač ešte nebol inicializovaný.",
+		"description": "[chyba] TranslationService nebol pripravený"
+	},
+	"error_unknown_request": {
+		"message": "Neznáma požiadavka.",
+		"description": "[chyba] Všeobecná chyba po prijatí správy, ktorá nebola rozpoznaná"
 	},
 	"error_useless_remove": {
 		"message": "Nemožno odstrániť:\nStránku, ktorá nebola predtým uložená, nemožno odstrániť",

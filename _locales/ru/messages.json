@@ -23,6 +23,34 @@
 		"message": "Выбрано",
 		"description": "Заголовок раздела для элементов, которые были выбраны"
 	},
+	"cmd_export_all": {
+		"message": "Показать модальное окно для экспорта всех сохраненных Tabs",
+		"description": "[описание команды] пользователь хочет экспортировать все Tabs"
+	},
+	"cmd_import": {
+		"message": "Показать модальное окно для импорта новых Tabs",
+		"description": "[описание команды] пользователь хочет импортировать новые Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Показать модальное окно для открытия текущей страницы в другом Org",
+		"description": "[описание команды] пользователь хочет открыть текущую страницу в другом Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Удалить текущую страницу из списка Tabs (если сохранена)",
+		"description": "[описание команды] пользователь хочет удалить текущую страницу"
+	},
+	"cmd_save_as_tab": {
+		"message": "Сохранить текущую страницу в списке Tabs (если не сохранена)",
+		"description": "[описание команды] пользователь хочет сохранить текущую страницу"
+	},
+	"cmd_toggle_org": {
+		"message": "Переключить значение Org текущей страницы (если сохранено)",
+		"description": "[описание команды] пользователь хочет переключить Org для текущей страницы"
+	},
+	"cmd_update_tab": {
+		"message": "Показать модальное окно для обновления текущей страницы (если сохранена)",
+		"description": "[описание команды] пользователь хочет обновить текущую страницу"
+	},
 	"confirm_another_org": {
 		"message": "Подтвердите открытие этой ссылки.",
 		"description": "[open-other-org-modal] Запрашивает подтверждение от пользователя для открытия сформированной ссылки"
@@ -123,6 +151,14 @@
 		"message": "Удалить все Tabs",
 		"description": "[popup] Заголовок на корзине для очистки всех Tabs"
 	},
+	"drop": {
+		"message": "Перетащить",
+		"description": "[импорт] позволить пользователю перетаскивать свои файлы в указанную область"
+	},
+	"error_adding_tab": {
+		"message": "Ошибка при добавлении Tab.",
+		"description": "[ошибка] Общая ошибка, используемая при добавлении Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Сначала закройте другое модальное окно!",
 		"description": "[toast] Попытка открыть более одного модального окна"
@@ -155,6 +191,10 @@
 		"message": "Невозможно извлечь имя Org из пустого URL!",
 		"description": "[error] URL для извлечения имени Org не был передан"
 	},
+	"error_failed_sync": {
+		"message": "Не удалось sincronizar.",
+		"description": "[ошибка] Общая ошибка, когда Tabs не удалось синхронизировать с пользователем"
+	},
 	"error_get_with_no_org": {
 		"message": "Невозможно получить Tabs без указания Org.",
 		"description": "[error] Попытка получить Tabs без информации об Org"
@@ -167,6 +207,10 @@
 		"message": "Параметр ключа, переданный в функцию, недействителен",
 		"description": "[ошибка] разработчик попытался вызвать функцию с недействительным параметром"
 	},
+	"error_invalid_request": {
+		"message": "Недопустимый запрос.",
+		"description": "[ошибка] Общая ошибка после получения сообщения с неверным форматом"
+	},
 	"error_invalid_tab": {
 		"message": "Неверный Tab",
 		"description": "[error] Tab недействителен"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Найдено более одного совпадающего Tab.",
 		"description": "[error] Получено несколько совпадающих Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Найдено более одного Tab.",
+		"description": "[ошибка] было получено много Tabs"
 	},
 	"error_minify_url": {
 		"message": "Невозможно сократить пустой URL!",
@@ -235,9 +283,37 @@
 		"message": "Нет URL для проверки!",
 		"description": "[error] URL для проверки не был передан"
 	},
+	"error_not_initialized": {
+		"message": "еще не был инициализирован.",
+		"description": "[ошибка] Общая ошибка, когда переменная не готова"
+	},
+	"error_processing_tabs": {
+		"message": "Ошибка обработки Tabs.",
+		"description": "[ошибка] Общая ошибка при обработке Tabs"
+	},
+	"error_redirect": {
+		"message": "Не удается перенаправить. Пожалуйста, обновите страницу.",
+		"description": "[ошибка] Общая ошибка при перенаправлении страницы."
+	},
 	"error_remove_not_favourite": {
 		"message": "Невозможно удалить не избранный Tab!",
 		"description": "[error] Попытка удалить Tab, который ещё не сохранён"
+	},
+	"error_removing_all_tabs": {
+		"message": "Ошибка при удалении всех Tabs.",
+		"description": "[ошибка] Общая ошибка, используемая при удалении всех Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Ошибка при удалении общих Tabs.",
+		"description": "[ошибка] Общая ошибка, используемая при удалении общих Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Ошибка при удалении других Tabs.",
+		"description": "[ошибка] Общая ошибка, используемая при удалении других Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Ошибка при удалении Tab.",
+		"description": "[ошибка] Общая ошибка, используемая при удалении Tab"
 	},
 	"error_required_params": {
 		"message": "Необходимые параметры для функции не были переданы",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Невозможно синхронизировать пустые Tabs!",
 		"description": "[error] Попытка синхронизировать ничего"
+	},
+	"error_tab_constructor": {
+		"message": "Используйте Tab.create() вместо new Tab() для использования класса Tab",
+		"description": "[ошибка] сообщить разработчику, как использовать класс Tab"
 	},
 	"error_tab_label": {
 		"message": "Метка должна быть непустой строкой",
@@ -271,12 +351,32 @@
 		"message": "URL должен быть непустой строкой",
 		"description": "[error] Попытка создать Tab без URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab с этим URL уже сохранен!",
+		"description": "[ошибка] Пользователь попытался сохранить уже добавленный в избранное Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Невозможно инициализировать с"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Обнаружены некорректные Tabs.\nПервое вхождение:",
 		"description": "[error] Были переданы некорректные Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Используйте TabContainer.create() вместо new TabContainer() для использования класса TabContainer",
+		"description": "[ошибка] сообщить разработчику, как использовать класс TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Используйте TranslationService.create() вместо new TranslationService() для использования класса TranslationService",
+		"description": "[ошибка] сообщить разработчику, как использовать класс TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "переводчик еще не был инициализирован.",
+		"description": "[ошибка] TranslationService не был готов"
+	},
+	"error_unknown_request": {
+		"message": "Неизвестный запрос.",
+		"description": "[ошибка] Общая ошибка после получения неопознанного сообщения"
 	},
 	"error_useless_remove": {
 		"message": "Невозможно удалить:\nНельзя удалить страницу, которая никогда не была сохранена",

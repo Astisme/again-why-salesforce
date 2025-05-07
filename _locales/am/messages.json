@@ -23,6 +23,34 @@
 		"message": "ተመርጧል",
 		"description": "ተመርጡ የሆኑ ንጥሎች የክፍል ርዕሰ መልዕክት"
 	},
+	"cmd_export_all": {
+		"message": "የተቀመጡትን ሁሉንም Tabs ለማስወገድ ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ሁሉንም Tabs ለማስወገድ ይፈልጋል"
+	},
+	"cmd_import": {
+		"message": "አዲስ Tabs ለመጫን ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው አዲስ Tabs ለመጫን ይፈልጋል"
+	},
+	"cmd_open_other_org": {
+		"message": "ያሁኑን ገጽ በሌላ Org ለማክፈት ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ በሌላ Org ለመክፈት ይፈልጋል"
+	},
+	"cmd_remove_tab": {
+		"message": "ያሁኑን ገጽ ከTab ዝርዝር ሲሆን ለማስወገድ ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማስወገድ ይፈልጋል"
+	},
+	"cmd_save_as_tab": {
+		"message": "ያሁኑን ገጽ ከTab ዝርዝር ሲሆን ለማስመዝገብ ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማስመዝገብ ይፈልጋል"
+	},
+	"cmd_toggle_org": {
+		"message": "ያሁኑን ገጽ የOrg እሴት ሲቀየር ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ የOrg እሴት ለመቀየር ይፈልጋል"
+	},
+	"cmd_update_tab": {
+		"message": "ተቀመጠ ገጽ ሲሆን ለማዘመን ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማዘመን ይፈልጋል"
+	},
 	"confirm_another_org": {
 		"message": "ይህን ሊንክ መክፈት ያረጋግጡ።",
 		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] የተገነባውን ሊንክ ለመክፈት ከተጠቃሚው ማረጋገጫ ይጠይቁ።"
@@ -123,6 +151,14 @@
 		"message": "ሁሉንም Tabs ሰርዝ",
 		"description": "[ብቅ_ባይ] ሁሉንም Tabs ባዶ ለማድረግ የቆሻሻ መጣያ ርዕስ"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] ተጠቃሚው ፋይሎቹን ወደ ውስጥ ለማድረግ ያስችላል"
+	},
+	"error_adding_tab": {
+		"message": "Tab ሲያክል ስህተት።",
+		"description": "[error] Tab ሲያክሉ የተፈጠረ አጠቃላይ ስህተት"
+	},
 	"error_close_other_modal": {
 		"message": "እባክዎ መጀመሪያ ሌላውን ሞዳል ዝጋ!",
 		"description": "[ቶስት] ተጠቃሚው ከ1 በላይ ሞዳል ለመክፈት ሞክሯል"
@@ -155,6 +191,10 @@
 		"message": "ከባዶ URL የድርጅት ስም ማውጣት አይቻልም!",
 		"description": "[ስህተት] የድርጅት ስም የሚወጣበት URL አልተላለፈም"
 	},
+	"error_failed_sync": {
+		"message": "ስምርት መዛመድ አልተሳካም።",
+		"description": "[error] ሰብስ በተጠቃሚው ላይ Tabs ሊዛመዱ አልቻሉም"
+	},
 	"error_get_with_no_org": {
 		"message": "ድርጅት ካልተገለጸ Tabs ማግኘት አይቻልም።",
 		"description": "[ስህተት] የድርጅት መረጃ ሳይልክ በድርጅት Tabs ለመፈለግ ሞክሯል"
@@ -167,6 +207,10 @@
 		"message": "ወደ ተግባሩ የተላከው የቁልፍ ፓራሜተር የተሳሳተ ነው",
 		"description": "[ችግር] አባል በልኩል ፓራሜተር ተግባሩን ለመጥለቅ ሞክሮ"
 	},
+	"error_invalid_request": {
+		"message": "የተሳሳተ ትእዛዝ።",
+		"description": "[error] በትክክል ካልተቀበረ መልዕክት የተፈጠረ ስህተት"
+	},
 	"error_invalid_tab": {
 		"message": "ልክ ያልሆነ Tab",
 		"description": "[ስህተት] Tab ልክ ያልሆነ ነው"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "ከ1 በላይ የሚዛመድ Tab ተገኝቷል።",
 		"description": "[ስህተት] ብዙ Tabs ተመልሰዋል"
+	},
+	"error_many_tabs_found": {
+		"message": "ከአንድ በላይ Tab ተገኘ።",
+		"description": "[error] ብዙ Tabs ተመርመሩ"
 	},
 	"error_minify_url": {
 		"message": "ባዶ URL ማሳጠር አይቻልም!",
@@ -235,9 +283,37 @@
 		"message": "ምንም የሚመረመር URL የለም!",
 		"description": "[ስህተት] የሚመረመረው URL አልተላለፈም"
 	},
+	"error_not_initialized": {
+		"message": "አልተጀመረም።",
+		"description": "[error] ተለዋዋጭ እስካላዘጋጀ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs ሲያቀርብ ስህተት።",
+		"description": "[error] Tabs ሲያቀርቡ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_redirect": {
+		"message": "ማመላለሻ አይቻልም። ወደ ገጹ እባክዎን ዳግም ይጫኑ።",
+		"description": "[error] በገጽ መመላለሻ ላይ የተፈጠረ አጠቃላይ ስህተት"
+	},
 	"error_remove_not_favourite": {
 		"message": "ተመራጭ ያልሆነ Tabን ማስወገድ አይቻልም!",
 		"description": "[ስህተት] ተጠቃሚው ገና ያልተቀመጠ Tabን ለማስወገድ ሞክሯል"
+	},
+	"error_removing_all_tabs": {
+		"message": "ሁሉንም Tabs ሲወገድ ስህተት።",
+		"description": "[error] ሁሉንም Tabs ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Generic Tabs ሲወገድ ስህተት።",
+		"description": "[error] Generic Tabs ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_other_tabs": {
+		"message": "ሌሎች Tabs ሲወገድ ስህተት።",
+		"description": "[error] ሌሎች Tabs ሲወግዱ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_tab": {
+		"message": "Tab ሲወገድ ስህተት።",
+		"description": "[error] Tab ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
 	},
 	"error_required_params": {
 		"message": "ለተግባሩ የሚፈለጉት ፓራሜተሮች አልተላኩም",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "ባዶ (null) Tabs ማመሳሰል አይቻልም!",
 		"description": "[ስህተት] ምንም ነገር ለማመሳሰል ሞክሯል"
+	},
+	"error_tab_constructor": {
+		"message": "new Tab() በመጠቀም በተቃራኒ Tab.create() አጠቀም",
+		"description": "[error] የTab ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
 	},
 	"error_tab_label": {
 		"message": "መለያ ባዶ ያልሆነ ሕብረቁምፊ መሆን አለበት",
@@ -271,6 +351,10 @@
 		"message": "URL ባዶ ያልሆነ ሕብረቁምፊ መሆን አለበት",
 		"description": "[ስህተት] ተጠቃሚው ያለ URL Tab ለመፍጠር ሞክሯል"
 	},
+	"error_tab_url_saved": {
+		"message": "በዚህ URL ያለው Tab አስቀድሞ ተቀመጠ።",
+		"description": "[error] ተጠቃሚው አስቀድሞ የተመዘገበውን Tab ለመቆም ሞከረ"
+	},
 	"error_tabcont_initialize": {
 		"message": "በዚህ ማስጀመር አይቻልም፦",
 		"description": "[ስህተት] የTab መያዣ ማስጀመር አልተሳካም"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "ልክ ያልሆነ Tab(ዎች) ተገኝቷል።\nየመጀመሪያ መከሰት፦",
 		"description": "[ስህተት] ልክ ያልሆኑ Tabs ተላልፈዋል"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "new TabContainer() በመጠቀም በተቃራኒ TabContainer.create() አጠቀም",
+		"description": "[error] የTabContainer ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+	},
+	"error_translationservice_constructor": {
+		"message": "new TranslationService() በመጠቀም በተቃራኒ TranslationService.create() አጠቀም",
+		"description": "[error] የTranslationService ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator አልተጀመረም።",
+		"description": "[error] የTranslationService መነሻ አልተዘጋጀም"
+	},
+	"error_unknown_request": {
+		"message": "ያልታወቀ ትእዛዝ።",
+		"description": "[error] እርዳታ ሲጠየቅ ያልታወቀ መልዕክት የተቀበለ ስህተት"
 	},
 	"error_useless_remove": {
 		"message": "ማስወገድ አይቻልም፦\nከዚህ በፊት ያልተቀመጠ ገጽ ማስወገድ አይቻልም",

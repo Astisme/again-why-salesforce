@@ -23,6 +23,34 @@
 		"message": "Đã chọn",
 		"description": "Tiêu đề phần cho các mục đã được chọn"
 	},
+	"cmd_export_all": {
+		"message": "Hiển thị modal để xuất tất cả Tabs đã lưu",
+		"description": "[mô tả lệnh] người dùng muốn xuất tất cả Tabs"
+	},
+	"cmd_import": {
+		"message": "Hiển thị modal để import Tabs mới",
+		"description": "[mô tả lệnh] người dùng muốn nhập Tabs mới"
+	},
+	"cmd_open_other_org": {
+		"message": "Hiển thị modal để mở trang hiện tại trong một Org khác",
+		"description": "[mô tả lệnh] người dùng muốn mở trang hiện tại trong một Org khác"
+	},
+	"cmd_remove_tab": {
+		"message": "Xóa trang hiện tại khỏi danh sách Tab (nếu đã lưu)",
+		"description": "[mô tả lệnh] người dùng muốn xóa trang hiện tại"
+	},
+	"cmd_save_as_tab": {
+		"message": "Lưu trang hiện tại vào danh sách Tab (nếu chưa lưu)",
+		"description": "[mô tả lệnh] người dùng muốn lưu trang hiện tại"
+	},
+	"cmd_toggle_org": {
+		"message": "Chuyển đổi giá trị Org của trang hiện tại (nếu đã lưu)",
+		"description": "[mô tả lệnh] người dùng muốn chuyển đổi Org cho trang hiện tại"
+	},
+	"cmd_update_tab": {
+		"message": "Hiển thị modal để cập nhật trang hiện tại (nếu đã lưu)",
+		"description": "[mô tả lệnh] người dùng muốn cập nhật trang hiện tại"
+	},
 	"confirm_another_org": {
 		"message": "Xác nhận mở liên kết này.",
 		"description": "[open-other-org-modal] Yêu cầu xác nhận từ người dùng để mở liên kết đã được tạo."
@@ -123,6 +151,14 @@
 		"message": "Xóa tất cả các Tabs",
 		"description": "[popup] Tiêu đề trên biểu tượng thùng rác để xóa tất cả các Tabs"
 	},
+	"drop": {
+		"message": "Thả",
+		"description": "[import] cho phép người dùng kéo thả tệp của họ vào khu vực được chỉ định"
+	},
+	"error_adding_tab": {
+		"message": "Lỗi khi thêm Tab.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi thêm Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Vui lòng đóng modal khác trước!",
 		"description": "[toast] Đã cố mở nhiều modal cùng lúc."
@@ -155,6 +191,10 @@
 		"message": "Không thể trích xuất tên Org từ URL rỗng!",
 		"description": "[error] URL để trích xuất tên Org không được cung cấp."
 	},
+	"error_failed_sync": {
+		"message": "Sync không thành công.",
+		"description": "[lỗi] Lỗi chung khi Tabs không thể đồng bộ hóa từ người dùng"
+	},
 	"error_get_with_no_org": {
 		"message": "Không thể lấy Tabs nếu không xác định Org.",
 		"description": "[error] Đã cố lấy Tabs mà không có thông tin Org."
@@ -167,6 +207,10 @@
 		"message": "Tham số khóa được truyền cho hàm không hợp lệ",
 		"description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm với một tham số không hợp lệ"
 	},
+	"error_invalid_request": {
+		"message": "Yêu cầu không hợp lệ.",
+		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo được định dạng sai"
+	},
 	"error_invalid_tab": {
 		"message": "Tab không hợp lệ",
 		"description": "[error] Tab không hợp lệ."
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Đã tìm thấy nhiều hơn một Tab phù hợp.",
 		"description": "[error] Nhiều Tabs phù hợp được lấy."
+	},
+	"error_many_tabs_found": {
+		"message": "Tìm thấy nhiều hơn một Tab.",
+		"description": "[lỗi] nhiều Tabs đã được truy xuất"
 	},
 	"error_minify_url": {
 		"message": "Không thể thu gọn URL rỗng!",
@@ -235,9 +283,37 @@
 		"message": "Không có URL để kiểm tra!",
 		"description": "[error] URL để kiểm tra không được cung cấp."
 	},
+	"error_not_initialized": {
+		"message": "chưa được khởi tạo.",
+		"description": "[lỗi] Lỗi chung khi một biến chưa sẵn sàng"
+	},
+	"error_processing_tabs": {
+		"message": "Lỗi xử lý Tabs.",
+		"description": "[lỗi] Lỗi chung khi xử lý Tabs"
+	},
+	"error_redirect": {
+		"message": "Không thể redirect. Vui lòng làm mới trang.",
+		"description": "[lỗi] Lỗi chung khi chuyển hướng trang."
+	},
 	"error_remove_not_favourite": {
 		"message": "Không thể xóa Tab không phải yêu thích!",
 		"description": "[error] Người dùng đã cố xóa Tab chưa được lưu dưới dạng yêu thích."
+	},
+	"error_removing_all_tabs": {
+		"message": "Lỗi khi xóa tất cả Tabs.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa tất cả Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Lỗi khi xóa các Tabs chung.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs chung"
+	},
+	"error_removing_other_tabs": {
+		"message": "Lỗi khi xóa các Tabs khác.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs khác"
+	},
+	"error_removing_tab": {
+		"message": "Lỗi khi xóa Tab.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa Tab"
 	},
 	"error_required_params": {
 		"message": "Các tham số bắt buộc cho hàm không được truyền",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Không thể đồng bộ các Tabs rỗng!",
 		"description": "[error] Đã cố đồng bộ những gì không có."
+	},
+	"error_tab_constructor": {
+		"message": "Sử dụng Tab.create() thay vì new Tab() để sử dụng lớp Tab",
+		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp Tab"
 	},
 	"error_tab_label": {
 		"message": "Nhãn không được để trống",
@@ -271,12 +351,32 @@
 		"message": "URL không được để trống",
 		"description": "[error] Đã cố tạo Tab mà không có URL."
 	},
+	"error_tab_url_saved": {
+		"message": "Một Tab với URL này đã được lưu!",
+		"description": "[lỗi] Người dùng đã cố gắng lưu một Tab đã được yêu thích"
+	},
 	"error_tabcont_initialize": {
 		"message": "Không thể khởi tạo với"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Phát hiện các Tabs không hợp lệ.\nLần xuất hiện đầu tiên:",
 		"description": "[error] Các Tabs không hợp lệ đã được cung cấp."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Sử dụng TabContainer.create() thay vì new TabContainer() để sử dụng lớp TabContainer",
+		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Sử dụng TranslationService.create() thay vì new TranslationService() để sử dụng lớp TranslationService",
+		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "trình dịch chưa được khởi tạo.",
+		"description": "[lỗi] TranslationService chưa sẵn sàng"
+	},
+	"error_unknown_request": {
+		"message": "Yêu cầu không xác định.",
+		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo không được nhận dạng"
 	},
 	"error_useless_remove": {
 		"message": "Không thể xóa:\nKhông thể xóa một trang chưa từng được lưu.",

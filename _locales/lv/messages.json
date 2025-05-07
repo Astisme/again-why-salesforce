@@ -23,6 +23,34 @@
 		"message": "Izvēlēts",
 		"description": "Sadaļas virsraksts vienumiem, kas ir atlasīti"
 	},
+	"cmd_export_all": {
+		"message": "Rādīt modālo logu visu saglabāto Tabs eksportēšanai",
+		"description": "[komandas apraksts] lietotājs vēlas eksportēt visus Tabs"
+	},
+	"cmd_import": {
+		"message": "Rādīt modālo logu jaunu Tabs importēšanai",
+		"description": "[komandas apraksts] lietotājs vēlas importēt jaunus Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Rādīt modālo logu pašreizējās lapas atvēršanai citā Org",
+		"description": "[komandas apraksts] lietotājs vēlas atvērt pašreizējo lapu citā Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Izdzēst pašreizējo lapu no Tabs saraksta (ja saglabāta)",
+		"description": "[komandas apraksts] lietotājs vēlas izdzēst pašreizējo lapu"
+	},
+	"cmd_save_as_tab": {
+		"message": "Saglabāt pašreizējo lapu Tabs sarakstā (ja nav saglabāta)",
+		"description": "[komandas apraksts] lietotājs vēlas saglabāt pašreizējo lapu"
+	},
+	"cmd_toggle_org": {
+		"message": "Pārslēgt pašreizējās lapas Org vērtību (ja saglabāta)",
+		"description": "[komandas apraksts] lietotājs vēlas pārslēgt Org pašreizējai lapai"
+	},
+	"cmd_update_tab": {
+		"message": "Rādīt modālo logu pašreizējās lapas atjaunināšanai (ja saglabāta)",
+		"description": "[komandas apraksts] lietotājs vēlas atjaunināt pašreizējo lapu"
+	},
 	"confirm_another_org": {
 		"message": "Apstipriniet šīs saites atvēršanu.",
 		"description": "[atvērt_citu_org_modal] lūgt lietotāja apstiprinājumu, lai atvērtu izveidoto saiti."
@@ -123,6 +151,14 @@
 		"message": "Dzēst visas Tabs",
 		"description": "[uznirstošais_logs] virsraksts uz miskastes, lai iztukšotu visas Tabs"
 	},
+	"drop": {
+		"message": "Nomest",
+		"description": "[importēšana] ļauj lietotājam nomest savus failus uz norādītās zonas"
+	},
+	"error_adding_tab": {
+		"message": "Kļūda pievienojot Tab.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, pievienojot Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Lūdzu, vispirms aizveriet otru modālo logu!",
 		"description": "[paziņojums] Lietotājs mēģināja atvērt vairāk nekā 1 modālo logu"
@@ -155,6 +191,10 @@
 		"message": "Nevar iegūt Org nosaukumu no tukša URL!",
 		"description": "[kļūda] URL, no kura jāiegūst Org nosaukums, netika nodots"
 	},
+	"error_failed_sync": {
+		"message": "Neizdevās sinhronizēt.",
+		"description": "[kļūda] Vispārīga kļūda, kad Tabs nevarēja sinhronizēt no lietotāja"
+	},
 	"error_get_with_no_org": {
 		"message": "Nevar iegūt Tabs, ja nav norādīta Org.",
 		"description": "[kļūda] mēģināja meklēt Tabs pēc Org, nesūtot Org informāciju"
@@ -167,6 +207,10 @@
 		"message": "Funkcijai nodotais atslēgas parametrs nav derīgs",
 		"description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju ar nederīgu parametru"
 	},
+	"error_invalid_request": {
+		"message": "Nederīgs pieprasījums.",
+		"description": "[kļūda] Vispārīga kļūda pēc saņemšanas slikti formatētas ziņas"
+	},
 	"error_invalid_tab": {
 		"message": "Nederīgs Tab",
 		"description": "[kļūda] Tab nav derīgs"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Atrasts vairāk nekā 1 atbilstošs Tab.",
 		"description": "[kļūda] tika iegūti daudzi Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Atrasts vairāk nekā viens Tab.",
+		"description": "[kļūda] tika izgūti daudzi Tabs"
 	},
 	"error_minify_url": {
 		"message": "Nevar samazināt tukšu URL!",
@@ -235,9 +283,37 @@
 		"message": "Nav URL pārbaudei!",
 		"description": "[kļūda] URL pārbaudei netika nodots"
 	},
+	"error_not_initialized": {
+		"message": "vēl nebija inicializēts.",
+		"description": "[kļūda] Vispārīga kļūda, kad mainīgais nav gatavs"
+	},
+	"error_processing_tabs": {
+		"message": "Kļūda apstrādājot Tabs.",
+		"description": "[kļūda] Vispārīga kļūda, apstrādājot Tabs"
+	},
+	"error_redirect": {
+		"message": "Nevar novirzīt. Lūdzu, atsvaidziniet lapu.",
+		"description": "[kļūda] Vispārīga kļūda lapas novirzīšanā."
+	},
 	"error_remove_not_favourite": {
 		"message": "Nevar noņemt Tab, kas nav iecienītākais!",
 		"description": "[kļūda] lietotājs mēģināja noņemt Tab, kas vēl nebija saglabāts"
+	},
+	"error_removing_all_tabs": {
+		"message": "Kļūda dzēšot visus Tabs.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot visus Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Kļūda dzēšot vispārīgus Tabs.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot vispārīgus Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Kļūda dzēšot citus Tabs.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot citus Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Kļūda dzēšot Tab.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot Tab"
 	},
 	"error_required_params": {
 		"message": "Funkcijai nepieciešamie parametri netika nodoti",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Nevar sinhronizēt null Tabs!",
 		"description": "[kļūda] mēģināja sinhronizēt neko"
+	},
+	"error_tab_constructor": {
+		"message": "Izmantojiet Tab.create() jaunā Tab() vietā",
+		"description": "[kļūda] pastāstiet izstrādātājam, kā lietot Tab klasi"
 	},
 	"error_tab_label": {
 		"message": "Etiķetei jābūt netukšai virknei",
@@ -271,6 +351,10 @@
 		"message": "URL jābūt netukšai virknei",
 		"description": "[kļūda] lietotājs mēģināja izveidot Tab bez URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Tab ar šo URL jau ir saglabāts!",
+		"description": "[kļūda] Lietotājs mēģināja saglabāt jau izlasei pievienotu Tab"
+	},
 	"error_tabcont_initialize": {
 		"message": "Nevar inicializēt ar",
 		"description": "[kļūda] Tab konteinera inicializācija neizdevās"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Konstatēts(-i) nederīgs(-i) Tab(s).\nPirmā sastopamība:",
 		"description": "[kļūda] tika nodoti nederīgi Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Izmantojiet TabContainer.create() jaunā TabContainer() vietā",
+		"description": "[kļūda] pastāstiet izstrādātājam, kā lietot TabContainer klasi"
+	},
+	"error_translationservice_constructor": {
+		"message": "Izmantojiet TranslationService.create() jaunā TranslationService() vietā",
+		"description": "[kļūda] pastāstiet izstrādātājam, kā lietot TranslationService klasi"
+	},
+	"error_translator_not_initialized": {
+		"message": "tulkotājs vēl nebija inicializēts.",
+		"description": "[kļūda] TranslationService nebija gatavs"
+	},
+	"error_unknown_request": {
+		"message": "Nezināms pieprasījums.",
+		"description": "[kļūda] Vispārīga kļūda pēc neatpazītas ziņas saņemšanas"
 	},
 	"error_useless_remove": {
 		"message": "Nevar noņemt:\nNevar noņemt lapu, kas iepriekš nav saglabāta",

@@ -23,6 +23,34 @@
 		"message": "Triat",
 		"description": "Capçalera de secció per als elements que s'han seleccionat"
 	},
+	"cmd_export_all": {
+		"message": "Mostra el modal per exportar totes les Tabs desades",
+		"description": "[command description] l’usuari vol exportar totes les Tabs"
+	},
+	"cmd_import": {
+		"message": "Mostra el modal per importar noves Tabs",
+		"description": "[command description] l’usuari vol importar noves Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Mostra el modal per obrir la pàgina actual en una altra Org",
+		"description": "[command description] l’usuari vol obrir la pàgina actual en una altra Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Elimina la pàgina actual de la llista de Tabs (si està desada)",
+		"description": "[command description] l’usuari vol eliminar la pàgina actual"
+	},
+	"cmd_save_as_tab": {
+		"message": "Desa la pàgina actual a la llista de Tabs (si no està desada)",
+		"description": "[command description] l’usuari vol desar la pàgina actual"
+	},
+	"cmd_toggle_org": {
+		"message": "Mostra el modal per alternar el valor Org de la pàgina actual (si està desada)",
+		"description": "[command description] l’usuari vol alternar l’Org de la pàgina actual"
+	},
+	"cmd_update_tab": {
+		"message": "Mostra el modal per actualitzar la pàgina actual (si està desada)",
+		"description": "[command description] l’usuari vol actualitzar la pàgina actual"
+	},
 	"confirm_another_org": {
 		"message": "Confirmeu l'obertura d'aquest enllaç.",
 		"description": "[open-other-org-modal] sol·licitud de confirmació a l'usuari per obrir l'enllaç construït."
@@ -123,6 +151,14 @@
 		"message": "Esborrar tots els Tabs",
 		"description": "[popup] títol per al contenidor que buida tots els Tabs"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] permet a l’usuari deixar anar els seus fitxers a l’àrea especificada"
+	},
+	"error_adding_tab": {
+		"message": "Error en afegir Tab.",
+		"description": "[error] Error genèric en afegir una Tab"
+	},
 	"error_close_other_modal": {
 		"message": "Tanca primer l'altre diàleg!",
 		"description": "[toast] l'usuari va intentar obrir més d'un diàleg"
@@ -155,6 +191,10 @@
 		"message": "No es pot extreure el nom de l'organització d'una URL buida!",
 		"description": "[error] no s'ha passat la URL de la qual extreure el nom de l'organització"
 	},
+	"error_failed_sync": {
+		"message": "La sincronització ha fallat.",
+		"description": "[error] Error genèric en sincronitzar les Tabs amb l’usuari"
+	},
 	"error_get_with_no_org": {
 		"message": "No es poden obtenir Tabs si l'organització no està especificada.",
 		"description": "[error] s'ha intentat cercar Tabs sense enviar informació de l'organització"
@@ -167,6 +207,10 @@
 		"message": "El paràmetre key enviat a la funció no és vàlid",
 		"description": "[error] el desenvolupador ha intentat cridar la funció amb un paràmetre invàlid"
 	},
+	"error_invalid_request": {
+		"message": "Sol·licitud invàlida.",
+		"description": "[error] Error genèric després de rebre un missatge amb format incorrecte"
+	},
 	"error_invalid_tab": {
 		"message": "Tab no vàlid",
 		"description": "[error] el Tab no és vàlid"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "S'han trobat més d'un Tab coincidents.",
 		"description": "[error] s'han retornat molts Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "S'ha trobat més d'una Tab.",
+		"description": "[error] S'han recuperat diverses Tabs"
 	},
 	"error_minify_url": {
 		"message": "No es pot minificar una URL buida!",
@@ -235,9 +283,37 @@
 		"message": "No s'ha passat cap URL per comprovar!",
 		"description": "[error] no s'ha passat la URL per comprovar"
 	},
+	"error_not_initialized": {
+		"message": "Encara no està inicialitzat.",
+		"description": "[error] Error genèric quan una variable no està preparada"
+	},
+	"error_processing_tabs": {
+		"message": "Error en processar les Tabs.",
+		"description": "[error] Error genèric en processar les Tabs"
+	},
+	"error_redirect": {
+		"message": "No es pot redirigir. Si us plau, actualitza la pàgina.",
+		"description": "[error] Error genèric en la redirecció de la pàgina"
+	},
 	"error_remove_not_favourite": {
 		"message": "No es pot eliminar un Tab que no és favorit!",
 		"description": "[error] l'usuari ha intentat eliminar un Tab que encara no s'ha desat"
+	},
+	"error_removing_all_tabs": {
+		"message": "Error en eliminar totes les Tabs.",
+		"description": "[error] Error genèric en eliminar totes les Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Error en eliminar les Tabs genèriques.",
+		"description": "[error] Error genèric en eliminar les Tabs genèriques"
+	},
+	"error_removing_other_tabs": {
+		"message": "Error en eliminar altres Tabs.",
+		"description": "[error] Error genèric en eliminar altres Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Error en eliminar Tab.",
+		"description": "[error] Error genèric en eliminar una Tab"
 	},
 	"error_required_params": {
 		"message": "No s'han passat els paràmetres requerits per a la funció",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "No es poden sincronitzar Tabs buits!",
 		"description": "[error] s'ha intentat sincronitzar cap Tab"
+	},
+	"error_tab_constructor": {
+		"message": "Utilitza Tab.create() en lloc de new Tab()",
+		"description": "[error] Informa al desenvolupador com utilitzar la classe Tab"
 	},
 	"error_tab_label": {
 		"message": "L'etiqueta ha de ser una cadena no buida",
@@ -271,6 +351,10 @@
 		"message": "La URL ha de ser una cadena no buida",
 		"description": "[error] l'usuari ha intentat crear un Tab sense URL"
 	},
+	"error_tab_url_saved": {
+		"message": "Ja s'ha desat una Tab amb aquesta URL!",
+		"description": "[error] L’usuari ha intentat desar una Tab ja desada"
+	},
 	"error_tabcont_initialize": {
 		"message": "No es pot inicialitzar amb",
 		"description": ""
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "S'han detectat Tabs no vàlids.\nPrimera ocurrència:",
 		"description": "[error] s'han passat Tabs invàlids"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Utilitza TabContainer.create() en lloc de new TabContainer()",
+		"description": "[error] Informa al desenvolupador com utilitzar la classe TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Utilitza TranslationService.create() en lloc de new TranslationService()",
+		"description": "[error] Informa al desenvolupador com utilitzar la classe TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator encara no està inicialitzat.",
+		"description": "[error] El TranslationService no estava preparat"
+	},
+	"error_unknown_request": {
+		"message": "Sol·licitud desconeguda.",
+		"description": "[error] Error genèric després de rebre un missatge no reconegut"
 	},
 	"error_useless_remove": {
 		"message": "No es pot eliminar:\nNo es pot eliminar una pàgina que no ha estat desada prèviament",

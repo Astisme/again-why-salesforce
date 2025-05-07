@@ -23,6 +23,34 @@
 		"message": "Valittu",
 		"description": "Osionotsikko kohteille, jotka on valittu"
 	},
+	"cmd_export_all": {
+		"message": "Näytä modaalinen ikkuna kaikkien tallennettujen Tabsien vientiin",
+		"description": "[command description] käyttäjä haluaa viedä kaikki Tabsit"
+	},
+	"cmd_import": {
+		"message": "Näytä modaalinen ikkuna uusien Tabsien tuomiseen",
+		"description": "[command description] käyttäjä haluaa tuoda uusia Tabsia"
+	},
+	"cmd_open_other_org": {
+		"message": "Näytä modaalinen ikkuna nykyisen sivun avaamiseksi toisessa Orgissa",
+		"description": "[command description] käyttäjä haluaa avata nykyisen sivun toisessa Orgissa"
+	},
+	"cmd_remove_tab": {
+		"message": "Poista nykyinen sivu Tab-listalta (jos tallennettu)",
+		"description": "[command description] käyttäjä haluaa poistaa nykyisen sivun"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tallenna nykyinen sivu Tab-listalle (jos ei vielä tallennettu)",
+		"description": "[command description] käyttäjä haluaa tallentaa nykyisen sivun"
+	},
+	"cmd_toggle_org": {
+		"message": "Näytä modaalinen ikkuna Org-arvon vaihtamiseksi nykyisellä sivulla (jos tallennettu)",
+		"description": "[command description] käyttäjä haluaa vaihtaa Org-arvon nykyisellä sivulla"
+	},
+	"cmd_update_tab": {
+		"message": "Näytä modaalinen ikkuna nykyisen sivun päivittämiseksi (jos tallennettu)",
+		"description": "[command description] käyttäjä haluaa päivittää nykyisen sivun"
+	},
 	"confirm_another_org": {
 		"message": "Vahvista tämän linkin avaaminen.",
 		"description": "[open-other-org-modal] pyytää käyttäjältä vahvistusta rakennetun linkin avaamiseen."
@@ -123,6 +151,14 @@
 		"message": "Poista kaikki Tabit",
 		"description": "[popup] otsikko roskakoriin, joka tyhjentää kaikki Tabit"
 	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] antaa käyttäjän pudottaa tiedostonsa määritettyyn alueeseen"
+	},
+	"error_adding_tab": {
+		"message": "Virhe Tabin lisäämisessä.",
+		"description": "[error] Yleinen virhe Tabin lisäämisessä"
+	},
 	"error_close_other_modal": {
 		"message": "Sulje ensin toinen modal!",
 		"description": "[toast] Käyttäjä yritti avata useampaa kuin yhtä modalia"
@@ -155,6 +191,10 @@
 		"message": "Tyhjästä URL-osoitteesta ei voi poimia organisaation nimeä!",
 		"description": "[error] URL-osoitetta, josta organisaation nimi pitäisi poimia, ei annettu"
 	},
+	"error_failed_sync": {
+		"message": "Synkronointi epäonnistui.",
+		"description": "[error] Yleinen virhe Tabsien synkronoinnissa käyttäjän kanssa"
+	},
 	"error_get_with_no_org": {
 		"message": "Tabeja ei voida hakea ilman, että organisaatio on määritelty.",
 		"description": "[error] yritettiin hakea Tabeja ilman organisaatiotietoja"
@@ -167,6 +207,10 @@
 		"message": "Toiminnolle lähetetty key-parametri on virheellinen",
 		"description": "[virhe] kehittäjä yritti kutsua toimintoa virheellisellä parametrilla"
 	},
+	"error_invalid_request": {
+		"message": "Virheellinen pyyntö.",
+		"description": "[error] Yleinen virhe virheellisen muotoilun viestin vastaanoton jälkeen"
+	},
 	"error_invalid_tab": {
 		"message": "Virheellinen Tab",
 		"description": "[error] Tab ei ole kelvollinen"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "Löytyi useampi kuin yksi vastaava Tab.",
 		"description": "[error] Tabeja palautettiin liikaa"
+	},
+	"error_many_tabs_found": {
+		"message": "Löydettiin enemmän kuin yksi Tab.",
+		"description": "[error] Useita Tabs-eja haettiin"
 	},
 	"error_minify_url": {
 		"message": "Tyhjää URL-osoitetta ei voi pienentää!",
@@ -235,9 +283,37 @@
 		"message": "URL-osoitetta ei annettu tarkistettavaksi!",
 		"description": "[error] URL-osoitetta ei annettu tarkistettavaksi"
 	},
+	"error_not_initialized": {
+		"message": "Ei ole vielä alustettu.",
+		"description": "[error] Yleinen virhe, kun muuttuja ei ole valmis"
+	},
+	"error_processing_tabs": {
+		"message": "Virhe Tabsien käsittelyssä.",
+		"description": "[error] Yleinen virhe Tabsien käsittelyssä"
+	},
+	"error_redirect": {
+		"message": "Uudelleenohjaus ei onnistu. Päivitä sivu, ole hyvä.",
+		"description": "[error] Yleinen virhe sivun uudelleenohjauksessa"
+	},
 	"error_remove_not_favourite": {
 		"message": "Tabia, joka ei ole suosikki, ei voi poistaa!",
 		"description": "[error] käyttäjä yritti poistaa Tabiä, jota ei ole vielä tallennettu"
+	},
+	"error_removing_all_tabs": {
+		"message": "Virhe kaikkien Tabsien poistamisessa.",
+		"description": "[error] Yleinen virhe kaikkien Tabsien poistamisessa"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Virhe geneeristen Tabsien poistamisessa.",
+		"description": "[error] Yleinen virhe geneeristen Tabsien poistamisessa"
+	},
+	"error_removing_other_tabs": {
+		"message": "Virhe muiden Tabsien poistamisessa.",
+		"description": "[error] Yleinen virhe muiden Tabsien poistamisessa"
+	},
+	"error_removing_tab": {
+		"message": "Virhe Tabin poistamisessa.",
+		"description": "[error] Yleinen virhe Tabin poistamisessa"
 	},
 	"error_required_params": {
 		"message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "Tyhjiä Tabeja ei voida synkronoida!",
 		"description": "[error] yritettiin synkronoida tyhjää sisältöä"
+	},
+	"error_tab_constructor": {
+		"message": "Käytä Tab.create() sen sijaan, että käyttäisit new Tab()",
+		"description": "[error] Kerro kehittäjälle, miten Tab-luokkaa käytetään"
 	},
 	"error_tab_label": {
 		"message": "Tunnisteen tulee olla ei-tyhjä merkkijono",
@@ -271,6 +351,10 @@
 		"message": "URL-osoitteen tulee olla ei-tyhjä merkkijono",
 		"description": "[error] käyttäjä yritti luoda Tabiä ilman URL-osoitetta"
 	},
+	"error_tab_url_saved": {
+		"message": "Tällä URLilla oleva Tab on jo tallennettu!",
+		"description": "[error] Käyttäjä yritti tallentaa jo tallennetun Tabin"
+	},
 	"error_tabcont_initialize": {
 		"message": "Ei voi alustaa seuraavilla",
 		"description": ""
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "Virheellisiä Tabeja havaittu.\nEnsimmäinen tapaus:",
 		"description": "[error] virheelliset Tabit on toimitettu"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Käytä TabContainer.create() sen sijaan, että käyttäisit new TabContainer()",
+		"description": "[error] Kerro kehittäjälle, miten TabContainer-luokkaa käytetään"
+	},
+	"error_translationservice_constructor": {
+		"message": "Käytä TranslationService.create() sen sijaan, että käyttäisit new TranslationService()",
+		"description": "[error] Kerro kehittäjälle, miten TranslationService-luokkaa käytetään"
+	},
+	"error_translator_not_initialized": {
+		"message": "translatoria ei ole vielä alustettu.",
+		"description": "[error] TranslationService ei ollut valmis"
+	},
+	"error_unknown_request": {
+		"message": "Tuntematon pyyntö.",
+		"description": "[error] Yleinen virhe tuntemattoman viestin vastaanoton jälkeen"
 	},
 	"error_useless_remove": {
 		"message": "Ei voi poistaa:\nSivua, jota ei ole aiemmin tallennettu, ei voi poistaa",

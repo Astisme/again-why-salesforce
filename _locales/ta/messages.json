@@ -23,6 +23,34 @@
 		"message": "தேர்ந்தெடுக்கப்பட்டவை",
 		"description": "தேர்ந்தெடுக்கப்பட்ட உருப்படிகளுக்கான பிரிவு தலைப்பு"
 	},
+	"cmd_export_all": {
+		"message": "சேமிக்கப்பட்ட அனைத்து Tabs ஐயும் экспоர்ட் செய்ய modal ஐக் காட்டு",
+		"description": "[கட்டளை விளக்கம்] பயனர் அனைத்து Tabs ஐயும் ஏற்றுமதி செய்ய விரும்புகிறார்"
+	},
+	"cmd_import": {
+		"message": "புதிய Tabs ஐ импорт செய்ய modal ஐக் காட்டு",
+		"description": "[கட்டளை விளக்கம்] பயனர் புதிய Tabs ஐ இறக்குமதி செய்ய விரும்புகிறார்"
+	},
+	"cmd_open_other_org": {
+		"message": "தற்போதைய பக்கத்தை மற்றொரு Org இல் திறக்க modal ஐக் காட்டு",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை மற்றொரு Org இல் திறக்க விரும்புகிறார்"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab பட்டியலிலிருந்து தற்போதைய பக்கத்தை அகற்று (சேமிக்கப்பட்டிருந்தால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை அகற்ற விரும்புகிறார்"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tab பட்டியலில் தற்போதைய பக்கத்தை சேமி (சேமிக்கப்படாவிட்டால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை சேமிக்க விரும்புகிறார்"
+	},
+	"cmd_toggle_org": {
+		"message": "தற்போதைய பக்கத்தின் Org மதிப்பை மாற்று (சேமிக்கப்பட்டிருந்தால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்திற்கான Org ஐ மாற்ற விரும்புகிறார்"
+	},
+	"cmd_update_tab": {
+		"message": "தற்போதைய பக்கத்தை புதுப்பிக்க modal ஐக் காட்டு (சேமிக்கப்பட்டிருந்தால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை புதுப்பிக்க விரும்புகிறார்"
+	},
 	"confirm_another_org": {
 		"message": "இந்த இணைப்பைத் திறப்பதை உறுதிப்படுத்தவும்.",
 		"description": "[open-other-org-modal] கட்டமைக்கப்பட்ட இணைப்பைத் திறக்க பயனரிடமிருந்து உறுதிப்படுத்தல் கோரவும்."
@@ -123,6 +151,14 @@
 		"message": "அனைத்து Tabs நீக்கு",
 		"description": "[popup] அனைத்து Tabs ஐயும் காலி செய்ய குப்பைத்தொட்டியின் மீதான தலைப்பு"
 	},
+	"drop": {
+		"message": "இழுத்து விடு",
+		"description": "[இறக்குமதி] பயனர் தங்கள் கோப்புகளை குறிப்பிட்ட பகுதிக்கு இழுத்து விட அனுமதிக்கவும்"
+	},
+	"error_adding_tab": {
+		"message": "Tab சேர்க்கும்போது பிழை.",
+		"description": "[பிழை] Tab சேர்க்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
 	"error_close_other_modal": {
 		"message": "முதலில் மற்ற மோடலை மூடவும்!",
 		"description": "[toast] பயனர் 1 க்கும் மேற்பட்ட மோடலைத் திறக்க முயன்றார்"
@@ -155,6 +191,10 @@
 		"message": "வெற்று URL இலிருந்து Org பெயரைப் பிரித்தெடுக்க முடியாது!",
 		"description": "[பிழை] Org பெயரைப் பெற வேண்டிய url அனுப்பப்படவில்லை"
 	},
+	"error_failed_sync": {
+		"message": "ஒத்திசைக்கத் தவறிவிட்டது.",
+		"description": "[பிழை] பயனரிடமிருந்து Tabs ஒத்திசைக்க முடியாதபோது பொதுவான பிழை"
+	},
 	"error_get_with_no_org": {
 		"message": "Org குறிப்பிடப்படவில்லை என்றால் Tabs பெற முடியாது.",
 		"description": "[பிழை] Org தகவல் அனுப்பாமல் Org வாரியாக Tabs தேட முயன்றது"
@@ -167,6 +207,10 @@
 		"message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
 		"description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
 	},
+	"error_invalid_request": {
+		"message": "தவறான கோரிக்கை.",
+		"description": "[பிழை] தவறாக வடிவமைக்கப்பட்ட செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
+	},
 	"error_invalid_tab": {
 		"message": "செல்லாத Tab",
 		"description": "[பிழை] Tab செல்லுபடியாகாது"
@@ -178,6 +222,10 @@
 	"error_many_matching_tab": {
 		"message": "1 க்கும் மேற்பட்ட பொருந்தும் Tab கண்டுபிடிக்கப்பட்டது.",
 		"description": "[பிழை] பல Tabs பெறப்பட்டன"
+	},
+	"error_many_tabs_found": {
+		"message": "ஒன்றுக்கு மேற்பட்ட Tab கண்டறியப்பட்டது.",
+		"description": "[பிழை] பல Tabs பெறப்பட்டது"
 	},
 	"error_minify_url": {
 		"message": "வெற்று URL ஐ சிறிதாக்க முடியாது!",
@@ -235,9 +283,37 @@
 		"message": "சரிபார்க்க எந்த URL உம் இல்லை!",
 		"description": "[பிழை] சரிபார்க்க வேண்டிய url அனுப்பப்படவில்லை"
 	},
+	"error_not_initialized": {
+		"message": "இன்னும் தொடங்கப்படவில்லை.",
+		"description": "[பிழை] மாறி தயாராக இல்லாதபோது பொதுவான பிழை"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs செயலாக்கப் பிழை.",
+		"description": "[பிழை] Tabs செயல்படுத்தும்போது பொதுவான பிழை"
+	},
+	"error_redirect": {
+		"message": "திசைதிருப்ப முடியாது. தயவுசெய்து பக்கத்தை புதுப்பிக்கவும்.",
+		"description": "[பிழை] பக்க வழிமாற்றத்தில் உள்ள பொதுவான பிழை."
+	},
 	"error_remove_not_favourite": {
 		"message": "பிடித்தமில்லாத Tab ஐ அகற்ற முடியாது!",
 		"description": "[பிழை] பயனர் இன்னும் சேமிக்கப்படாத Tab ஐ அகற்ற முயன்றார்"
+	},
+	"error_removing_all_tabs": {
+		"message": "அனைத்து Tabs நீக்கும்போது பிழை.",
+		"description": "[பிழை] அனைத்து Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_generic_tabs": {
+		"message": "பொதுவான Tabs நீக்கும்போது பிழை.",
+		"description": "[பிழை] பொதுவான Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_other_tabs": {
+		"message": "பிற Tabs நீக்கும்போது பிழை.",
+		"description": "[பிழை] பிற Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_tab": {
+		"message": "Tab நீக்கும்போது பிழை.",
+		"description": "[பிழை] Tab நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
 	},
 	"error_required_params": {
 		"message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
@@ -246,6 +322,10 @@
 	"error_sync_nothing": {
 		"message": "null Tabs ஐ ஒத்திசைக்க முடியாது!",
 		"description": "[பிழை] எதையும் ஒத்திசைக்க முயன்றது"
+	},
+	"error_tab_constructor": {
+		"message": "Tab வகுப்பைப் பயன்படுத்த new Tab() பதிலாக Tab.create() ஐப் பயன்படுத்தவும்",
+		"description": "[பிழை] Tab வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
 	},
 	"error_tab_label": {
 		"message": "லேபிள் காலியாக இல்லாத ஒரு சரமாக இருக்க வேண்டும்",
@@ -271,6 +351,10 @@
 		"message": "URL காலியாக இல்லாத ஒரு சரமாக இருக்க வேண்டும்",
 		"description": "[பிழை] பயனர் url இல்லாத ஒரு Tab ஐ உருவாக்க முயன்றார்"
 	},
+	"error_tab_url_saved": {
+		"message": "இந்த URL உடன் ஒரு Tab ஏற்கனவே சேமிக்கப்பட்டுள்ளது!",
+		"description": "[பிழை] பயனர் ஏற்கனவே விரும்பிய Tab ஐ சேமிக்க முயன்றார்"
+	},
 	"error_tabcont_initialize": {
 		"message": "இதனுடன் தொடங்க முடியாது:",
 		"description": "[பிழை] Tab கொள்கலன் தொடக்கம் தோல்வியடைந்தது"
@@ -278,6 +362,22 @@
 	"error_tabcont_invalid_tabs": {
 		"message": "செல்லாத Tab(கள்) கண்டறியப்பட்டது.\nமுதல் நிகழ்வு:",
 		"description": "[பிழை] செல்லாத Tabs அனுப்பப்பட்டன"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer வகுப்பைப் பயன்படுத்த new TabContainer() பதிலாக TabContainer.create() ஐப் பயன்படுத்தவும்",
+		"description": "[பிழை] TabContainer வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService வகுப்பைப் பயன்படுத்த new TranslationService() பதிலாக TranslationService.create() ஐப் பயன்படுத்தவும்",
+		"description": "[பிழை] TranslationService வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+	},
+	"error_translator_not_initialized": {
+		"message": "மொழிபெயர்ப்பாளர் இன்னும் தொடங்கப்படவில்லை.",
+		"description": "[பிழை] TranslationService தயாராக இல்லை"
+	},
+	"error_unknown_request": {
+		"message": "அறியப்படாத கோரிக்கை.",
+		"description": "[பிழை] அறியப்படாத செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
 	},
 	"error_useless_remove": {
 		"message": "அகற்ற முடியாது:\nமுன்பு சேமிக்கப்படாத பக்கத்தை அகற்ற முடியாது",
@@ -378,6 +478,10 @@
 	"nss_not_setup_page": {
 		"message": "இது Salesforce லைட்னிங் அமைவு பக்கம் அல்ல.",
 		"description": "[Salesforce அமைவு இல்லை] பயனர் Salesforce பக்கத்தில் இல்லை."
+	},
+	"open_settings": {
+		"message": "நீட்டிப்பு அமைப்புகளைத் திறக்கவும்",
+		"description": "[பாப்அப்] அமைப்புகள் பக்கத்திற்குத் திசைதிருப்ப பொத்தான்"
 	},
 	"open_setup": {
 		"message": "அமைப்பைத் திற",

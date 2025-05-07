@@ -2,13 +2,23 @@
 import "./context-menus.js"; // initiate context-menu loop
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_OTHER_ORG,
+	CMD_OPEN_SETTINGS,
+	CMD_REMOVE_TAB,
+	CMD_SAVE_AS_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
 	GENERIC_TAB_STYLE_KEY,
 	LIGHTNING_FORCE_COM,
 	LOCALE_KEY,
 	MY_SALESFORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
+	openSettingsPage,
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
+	SETUP_LIGHTNING_PATTERN,
 	SUPPORTED_SALESFORCE_URLS,
 	WHY_KEY,
 } from "/constants.js";
@@ -206,6 +216,27 @@ export async function bg_getSalesforceLanguage(callback = null) {
 	}
 }
 
+export async function bg_getCommandLinks(commands = null, callback = null) {
+	const allCommands = await BROWSER.commands.getAll();
+	const availableCommands = allCommands.filter((singleCommand) =>
+		singleCommand.shortcut !== ""
+	);
+	if (commands == null) {
+		if (callback == null) {
+			return availableCommands;
+		}
+		callback(availableCommands);
+		return;
+	}
+	const requestedCommands = availableCommands.filter((ac) =>
+		commands.includes(ac.name)
+	);
+	if (callback == null) {
+		return requestedCommands;
+	}
+	callback(requestedCommands);
+}
+
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
  * Also handles theme updates and tab-related messages.
@@ -217,7 +248,7 @@ export async function bg_getSalesforceLanguage(callback = null) {
  */
 BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 	if (request == null || request.what == null) {
-		console.error({ error: "Invalid request", request });
+		console.error({ error: "error_invalid_request", request });
 		sendResponse(null);
 		return false;
 	}
@@ -254,13 +285,53 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 		case "get-style-settings":
 			bg_getSettings(undefined, request.key, sendResponse);
 			break;
+		case "get-commands":
+			bg_getCommandLinks(request.commands, sendResponse);
+			break;
 		default:
 			if (!["import"].includes(request.what)) {
-				console.error({ error: "Unknown request", request });
+				console.error({ error: "error_unknown_request", request });
 			}
 			break;
 	}
 	return true;
+});
+
+BROWSER.commands.onCommand.addListener(async (command) => {
+	// check the current page is Salesforce Setup
+	const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
+	if (
+		broswerTabUrl == null ||
+		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+	) {
+		// we're not in Salesforce Setup
+		return;
+	}
+	const message = { what: command };
+	switch (command) {
+		case CMD_IMPORT:
+			message.what = "add";
+			/* falls through */
+		case CMD_SAVE_AS_TAB:
+		case CMD_REMOVE_TAB:
+		case CMD_TOGGLE_ORG:
+		case CMD_UPDATE_TAB:
+		case CMD_OPEN_OTHER_ORG:
+			bg_notify(message);
+			break;
+		case CMD_OPEN_SETTINGS:
+			openSettingsPage();
+			break;
+		case CMD_EXPORT_ALL:
+			exportHandler();
+			break;
+		default:
+			bg_notify({
+				what: "warning",
+				message: `Received unknown command: ${command}`,
+			});
+			break;
+	}
 });
 
 async function setDefalutOrgStyle() {

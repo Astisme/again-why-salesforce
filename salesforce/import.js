@@ -1,5 +1,5 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
+import { EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
@@ -201,17 +201,10 @@ async function showFileImport() {
 	listenToFileUpload(modalParent);
 }
 
-// listen from saves from the action page
-BROWSER.runtime.onMessage.addListener(function (message, _, sendResponse) {
-	if (message == null || message.what == null) {
-		return;
+export async function createImportModal() {
+	try {
+		await showFileImport();
+	} catch (error) {
+		showToast(error, false);
 	}
-	if (message.what == "add") {
-		sendResponse(null);
-		try {
-			showFileImport();
-		} catch (error) {
-			showToast(error, false);
-		}
-	}
-});
+}

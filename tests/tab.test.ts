@@ -182,7 +182,7 @@ await Deno.test("Tab Constructor Protection", () => {
 			new Tab("Test", "https://example.com", undefined, Symbol("fake"));
 		},
 		Error,
-		"Use Tab.create() instead of new Tab()",
+		"error_tab_constructor",
 	);
 });
 
