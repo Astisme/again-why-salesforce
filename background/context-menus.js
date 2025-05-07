@@ -35,7 +35,7 @@ import {
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
+import { bg_getCurrentBrowserTab, bg_notify, checkForUpdates, exportHandler } from "./utils.js";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
@@ -356,18 +356,20 @@ async function removeMenuItems() {
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
-async function checkAddRemoveContextMenus(what) {
+async function checkAddRemoveContextMenus(what, callback = null) {
 	try {
-		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (browserTabUrl == null) {
-			return;
-		}
+        const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+        if (browserTabUrl == null) {
+            return;
+        }
 		if (
 			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
 		) {
 			await removeMenuItems();
 			await createMenuItems();
 			bg_notify({ what });
+            if(callback != null)
+                callback();
 		} else {
 			await removeMenuItems();
 		}
@@ -401,6 +403,15 @@ function debounce(fn, delay = 150) {
 // Debounced version for high-frequency events
 const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
 
+async function isUserOnAvailableTab(){
+    try {
+        const tab = await bg_getCurrentBrowserTab();
+        return tab?.url != null && tab?.url !== "";
+    } catch (_) {
+        return false;
+    }
+}
+
 // when the browser starts
 BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
@@ -424,26 +435,22 @@ BROWSER.runtime.onInstalled.addListener((details) => {
             url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
         });
     }
+    /* TODO add tutorial on install and link to current changes on update
+    if (details.reason == "install") {
+    }
+    else if (details.reason == "update") {
+    }
+    */
 });
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
-BROWSER.tabs.onHighlighted.addListener(() =>
-	debouncedCheckMenus("highlighted")
-);
+BROWSER.tabs.onActivated.addListener(async () => debouncedCheckMenus("highlighted", checkForUpdates));
 //BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
 // when window changes
 //BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
-BROWSER.windows.onFocusChanged.addListener(() =>
-	checkAddRemoveContextMenus("focuschanged")
-);
+BROWSER.windows.onFocusChanged.addListener(async () => checkAddRemoveContextMenus("focuschanged"));
 
-/* TODO add tutorial on install and link to current changes on update
-if (details.reason == "install") {
-}
-else if (details.reason == "update") {
-}
-*/
 /*
 // TODO update uninstall url
 BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {

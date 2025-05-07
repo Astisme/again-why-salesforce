@@ -1,5 +1,5 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME, ISCHROME } from "/constants.js";
+import { WHAT_UPDATE_EXTENSION, BROWSER, BROWSER_NAME, EXTENSION_NAME, ISCHROME } from "/constants.js";
 import { bg_getStorage } from "./background.js";
 
 /**
@@ -116,4 +116,64 @@ export function exportHandler(tabs = null) {
 		return bg_getStorage(_exportHandler);
 	}
 	_exportHandler(tabs);
+}
+
+let checked = false;
+export async function checkForUpdates() {
+    if(checked)
+        return;
+    checked = true;
+    function isNewerVersion(latest, current) {
+        const latestParts = latest.split('.').map(Number);
+        const currentParts = current.split('.').map(Number);
+        for (let i = 0; i < Math.max(latestParts.length, currentParts.length); i++) {
+            const latestPart = latestParts[i] || 0;
+            const currentPart = currentParts[i] || 0;
+            if (latestPart > currentPart) {
+                return true;
+            } else if (latestPart < currentPart) {
+                return false;
+            }
+        }
+        return false; // Versions are equal
+    }
+  try {
+    const manifest = BROWSER.runtime.getManifest();
+    const currentVersion = manifest.version;
+    const homepageUrl = manifest.homepage_url;
+    // Validate homepage URL (must be GitHub)
+    if (!homepageUrl || !homepageUrl.includes('github.com')) {
+      console.error('Invalid or missing GitHub homepage_url in manifest');
+      return;
+    }
+    // Parse GitHub username and repo from homepage URL
+    const urlParts = homepageUrl.split('github.com/');
+    if (urlParts.length < 2) {
+      console.error('Could not parse GitHub repository from homepage_url');
+      return;
+    }
+    const repoPath = urlParts[1].replace(/\.git$/, '');
+    // Fetch latest release data from GitHub API
+    const response = await fetch(`https://api.github.com/repos/${repoPath}/releases`);
+    if (!response.ok) {
+      console.error('Failed to fetch releases from GitHub API:', response.status);
+      return;
+    }
+    const releases = await response.json();
+    // Find the latest non-prerelease version
+    const latestVersion = releases.find(release => !release.prerelease && release.tag_name.startsWith(BROWSER_NAME)
+    ).tag_name.replace(/^.*-v/, '');
+    // Compare versions and open homepage if update is available
+    if (isNewerVersion(latestVersion, currentVersion)) {
+      console.log(`Update available: ${currentVersion} → ${latestVersion}`);
+        bg_notify({
+            what: WHAT_UPDATE_EXTENSION,
+            oldversion: currentVersion,
+            version: latestVersion,
+            link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
+        });
+    }
+  } catch (error) {
+    console.error('Error checking for updates:', error);
+  }
 }
