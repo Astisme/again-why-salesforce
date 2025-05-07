@@ -27,7 +27,7 @@ DIFF_FILE=$(mktemp)
 if [ "$TASK" = "locale-check" ] && [ -f "missing-keys-report.json" ]; then
     cp missing-keys-report.json "$LOG_FILE"
 fi
-git status --porcelain > "$DIFF_FILE"
+(git diff;  git diff --staged) > "$DIFF_FILE"
 # Grab the size of the diff file
 SIZE=$(stat --format=%s "$DIFF_FILE" 2>/dev/null || stat -f%z "$DIFF_FILE")
 
