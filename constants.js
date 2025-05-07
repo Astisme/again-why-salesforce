@@ -216,7 +216,7 @@ export function getCssRule(styleId, value = null) {
 		//case TAB_STYLE_WAVY:
 		//return "text-decoration: underline wavy;";
 		case "user-set":
-			break;
+			return "";
 		default:
 			console.error(styleId);
 			return "";
