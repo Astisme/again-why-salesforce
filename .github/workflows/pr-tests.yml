@@ -88,6 +88,9 @@ jobs:
                     core,
                     logFile: "missing-locales.log",
                     title:   "These Locale Translation are missing (not blocking)",
+                    stripPatterns: [
+                      /^Task locale-check deno --allow-read --allow-write bin/missing-locales.ts\n/gm
+                    ]
                   });
 
             - name: Sort locales
