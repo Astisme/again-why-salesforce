@@ -374,10 +374,6 @@
 		"message": "translator was not yet initialized.",
 		"description": "[error] the TranslationService was not ready"
 	},
-	"error_unassigned_commands": {
-		"message": "keyboard shortcuts which are not set.",
-		"description": "[error] inform the user that some commands / keyboard shortcuts did not register correctly"
-	},
 	"error_unknown_request": {
 		"message": "Unknown request.",
 		"description": "[error] Generic error after getting a message which was not recognized"
