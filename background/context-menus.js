@@ -406,8 +406,24 @@ BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
 );
 // when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener((_) => {
+BROWSER.runtime.onInstalled.addListener((details) => {
 	checkAddRemoveContextMenus("installed");
+    if(details.reason === "update"){
+        // the extension has been updated
+        // get the extension version
+        const manifest = BROWSER.runtime.getManifest();
+        const version = manifest.version;
+        // open github to show the release notes
+        const homepage = manifest.homepage_url;
+        // Validate homepage URL (must be GitHub)
+        if (!homepage || !homepage.includes('github.com')) {
+            console.error('Invalid or missing GitHub homepage_url in manifest');
+            return;
+        }
+        BROWSER.tabs.create({
+            url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
+        });
+    }
 });
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
