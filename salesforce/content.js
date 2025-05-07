@@ -583,7 +583,6 @@ const ACTION_TOGGLE_ORG = "toggle-org";
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
  */
 export async function performActionOnTabs(action, tab = null, options = null) {
-	console.log("performActionOnTabs", action, tab, options);
 	try {
 		allTabs = await ensureAllTabsAvailability();
 		switch (action) {
@@ -828,16 +827,6 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 					label: message.label,
 					url: message.tabUrl,
 				});
-				break;
-			case "commands":
-				showToast(
-					[
-						`[${message.commands.length}]:`,
-						"error_unassigned_commands",
-					],
-					false,
-					true,
-				);
 				break;
 			default:
 				if (message.what != "theme") {
