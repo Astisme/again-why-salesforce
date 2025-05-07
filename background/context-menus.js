@@ -403,15 +403,6 @@ function debounce(fn, delay = 150) {
 // Debounced version for high-frequency events
 const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
 
-async function isUserOnAvailableTab(){
-    try {
-        const tab = await bg_getCurrentBrowserTab();
-        return tab?.url != null && tab?.url !== "";
-    } catch (_) {
-        return false;
-    }
-}
-
 // when the browser starts
 BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
@@ -419,7 +410,7 @@ BROWSER.runtime.onStartup.addListener(() =>
 // when the extension is installed / updated
 BROWSER.runtime.onInstalled.addListener((details) => {
 	checkAddRemoveContextMenus("installed");
-    if(details.reason === "update"){
+    if(details.reason === "update" && !details.temporary){
         // the extension has been updated
         // get the extension version
         const manifest = BROWSER.runtime.getManifest();
@@ -435,21 +426,19 @@ BROWSER.runtime.onInstalled.addListener((details) => {
             url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
         });
     }
-    /* TODO add tutorial on install and link to current changes on update
+    /* TODO add tutorial on install
     if (details.reason == "install") {
-    }
-    else if (details.reason == "update") {
     }
     */
 });
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
-BROWSER.tabs.onActivated.addListener(async () => debouncedCheckMenus("highlighted", checkForUpdates));
+BROWSER.tabs.onActivated.addListener(() => debouncedCheckMenus("highlighted", checkForUpdates));
 //BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
 // when window changes
 //BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
-BROWSER.windows.onFocusChanged.addListener(async () => checkAddRemoveContextMenus("focuschanged"));
+BROWSER.windows.onFocusChanged.addListener(() => checkAddRemoveContextMenus("focuschanged"));
 
 /*
 // TODO update uninstall url
