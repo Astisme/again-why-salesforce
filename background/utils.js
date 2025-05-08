@@ -1,6 +1,6 @@
 "use strict";
-import { WHAT_UPDATE_EXTENSION, BROWSER, BROWSER_NAME, EXTENSION_NAME, ISCHROME } from "/constants.js";
-import { bg_getStorage } from "./background.js";
+import { WHAT_UPDATE_EXTENSION, BROWSER, BROWSER_NAME, EXTENSION_NAME, ISCHROME, NO_UPDATE_NOTIFICATION, } from "/constants.js";
+import { bg_getStorage, bg_getSettings } from "./background.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -123,6 +123,10 @@ export async function checkForUpdates() {
     if(checked)
         return;
     checked = true;
+    // check user settings
+    const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
+    if(no_update_notification != null && no_update_notification.enabled === true)
+        return;
     function isNewerVersion(latest, current) {
         const latestParts = latest.split('.').map(Number);
         const currentParts = current.split('.').map(Number);

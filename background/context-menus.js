@@ -32,6 +32,7 @@ import {
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
+    NO_RELEASE_NOTES,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -408,10 +409,14 @@ BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
 );
 // when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener((details) => {
+BROWSER.runtime.onInstalled.addListener(async (details) => {
 	checkAddRemoveContextMenus("installed");
-    if(details.reason === "update" && !details.temporary){
+    if(details.reason === "update"){
         // the extension has been updated
+        // check user settings
+        const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
+        if(no_release_notes != null && no_release_notes.enabled === true)
+            return;
         // get the extension version
         const manifest = BROWSER.runtime.getManifest();
         const version = manifest.version;

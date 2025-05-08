@@ -73,7 +73,7 @@ export async function bg_getSettings(
 		}
 		return callback(settings);
 	}
-	if (!(settingKeys instanceof Array)) {
+	if (!Array.isArray(settingKeys)) {
 		settingKeys = [settingKeys];
 	}
 	const requestedSettings = settings.filter((setting) =>

@@ -120,6 +120,9 @@ export const POPUP_OPEN_LOGIN = "popup_open_login";
 export const POPUP_OPEN_SETUP = "popup_open_setup";
 export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
 export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
+export const NO_RELEASE_NOTES = "no_release_notes";
+export const NO_UPDATE_NOTIFICATION = "no_update_notification";
+// decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
 export const TAB_ORG_STYLE = "tab_org_style";

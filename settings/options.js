@@ -16,6 +16,8 @@ import {
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
+	NO_RELEASE_NOTES,
+	NO_UPDATE_NOTIFICATION,
 	TAB_GENERIC_STYLE,
 	TAB_ON_LEFT,
 	TAB_ORG_STYLE,
@@ -66,6 +68,8 @@ const popup_open_setup_el = document.getElementById(POPUP_OPEN_SETUP);
 const popup_login_new_tab_el = document.getElementById(POPUP_LOGIN_NEW_TAB);
 const popup_setup_new_tab_el = document.getElementById(POPUP_SETUP_NEW_TAB);
 const tab_on_left_el = document.getElementById(TAB_ON_LEFT);
+const no_release_notes_el = document.getElementById(NO_RELEASE_NOTES);
+const no_update_notification_el = document.getElementById(NO_UPDATE_NOTIFICATION);
 const user_language_select = document.getElementById(USER_LANGUAGE);
 
 const generalContainer = document.getElementById("general-container");
@@ -805,6 +809,12 @@ function setCurrentChoice(setting) {
 		case TAB_ON_LEFT:
 			tab_on_left_el.checked = setting.enabled;
 			break;
+		case NO_RELEASE_NOTES:
+			no_release_notes_el.checked = setting.enabled;
+			break;
+		case NO_UPDATE_NOTIFICATION:
+			no_update_notification_el.checked = setting.enabled;
+			break;
 		case USER_LANGUAGE:
 			user_language_select.value = setting.enabled;
 			break;
@@ -833,6 +843,8 @@ const allCheckboxes = [
 	popup_login_new_tab_el,
 	popup_setup_new_tab_el,
 	tab_on_left_el,
+    no_release_notes_el,
+    no_update_notification_el,
 ];
 
 let generalSettingsListenersSet = false;
