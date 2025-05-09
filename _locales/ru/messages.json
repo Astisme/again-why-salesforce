@@ -55,6 +55,10 @@
 		"message": "Подтвердите открытие этой ссылки.",
 		"description": "[open-other-org-modal] Запрашивает подтверждение от пользователя для открытия сформированной ссылки"
 	},
+	"confirm_update_extension": {
+		"message": "Доступна новая версия $extension_label!",
+		"description": "получено неизвестное сообщение от слушателя"
+	},
 	"continue": {
 		"message": "Продолжить",
 		"description": "textContent для кнопок, разрешающих выполнение текущего действия"
@@ -159,6 +163,10 @@
 		"message": "Ошибка при добавлении Tab.",
 		"description": "[ошибка] Общая ошибка, используемая при добавлении Tab"
 	},
+	"error_check_update": {
+		"message": "Ошибка при проверке обновлений",
+		"description": "[ошибка] общая ошибка при проверке обновлений расширения"
+	},
 	"error_close_other_modal": {
 		"message": "Сначала закройте другое модальное окно!",
 		"description": "[toast] Попытка открыть более одного модального окна"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Не удалось sincronizar.",
 		"description": "[ошибка] Общая ошибка, когда Tabs не удалось синхронизировать с пользователем"
+	},
+	"error_failed_to_fetch": {
+		"message": "Не удалось получить внешние ресурсы",
+		"description": "[ошибка] Вызов внешнего веб-сайта не был успешным"
 	},
 	"error_get_with_no_org": {
 		"message": "Невозможно получить Tabs без указания Org.",
@@ -374,6 +386,10 @@
 		"message": "переводчик еще не был инициализирован.",
 		"description": "[ошибка] TranslationService не был готов"
 	},
+	"error_unknown_message": {
+		"message": "Получено неизвестное сообщение",
+		"description": "получено неизвестное сообщение от слушателя"
+	},
 	"error_unknown_request": {
 		"message": "Неизвестный запрос.",
 		"description": "[ошибка] Общая ошибка после получения неопознанного сообщения"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Плейсхолдер для модального окна обновления Tab"
+	},
+	"no_manifest_github": {
+		"message": "Неверный или отсутствующий GitHub homepage_url в манифесте",
+		"description": "Ключ homepage_url манифеста не использует ссылку GitHub"
 	},
 	"no_match": {
 		"message": "Не найдено соответствующего действия",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Волнистое подчеркивание",
 		"description": "Параметр стиля оформления для применения волнистого подчеркивания к тексту Tab"
+	},
+	"update_available": {
+		"message": "Доступно обновление",
+		"description": "доступно новое обновление для расширения"
 	},
 	"upload": {
 		"message": "Загрузить",

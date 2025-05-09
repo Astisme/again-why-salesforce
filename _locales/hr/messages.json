@@ -55,6 +55,10 @@
 		"message": "Potvrdite otvaranje ove veze.",
 		"description": "[open-other-org-modal] zahtjev za potvrdu od korisnika za otvaranje konstruirane veze."
 	},
+	"confirm_update_extension": {
+		"message": "Nova verzija $extension_label je sada dostupna!",
+		"description": "primljena je nepoznata poruka od slušatelja"
+	},
 	"continue": {
 		"message": "Nastavi",
 		"description": "tekst za gumbe koji omogućuju izvršenje trenutne radnje"
@@ -159,6 +163,10 @@
 		"message": "Pogreška pri dodavanju Tab-a.",
 		"description": "[error] Opća pogreška pri dodavanju Tab-a"
 	},
+	"error_check_update": {
+		"message": "Greška prilikom provjere ažuriranja",
+		"description": "[greška] opća greška tijekom provjere ažuriranja proširenja"
+	},
 	"error_close_other_modal": {
 		"message": "Prvo zatvori drugi modal!",
 		"description": "[toast] Korisnik je pokušao otvoriti više od jednog modala"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sinkronizacija nije uspjela.",
 		"description": "[error] Opća pogreška pri sinkronizaciji Tabsa s korisnikom"
+	},
+	"error_failed_to_fetch": {
+		"message": "Dohvaćanje vanjskih resursa nije uspjelo",
+		"description": "[greška] Poziv vanjskom web mjestu nije uspio"
 	},
 	"error_get_with_no_org": {
 		"message": "Ne mogu se dohvatiti Tabovi ako organizacija nije specificirana.",
@@ -375,6 +387,10 @@
 		"message": "translator još nije inicijaliziran.",
 		"description": "[error] TranslationService nije bio spreman"
 	},
+	"error_unknown_message": {
+		"message": "Primljena nepoznata poruka",
+		"description": "primljena je nepoznata poruka od slušatelja"
+	},
 	"error_unknown_request": {
 		"message": "Nepoznat zahtjev.",
 		"description": "[error] Opća pogreška nakon primitka nepoznate poruke"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "zamjenik za modal za ažuriranje Tabova"
+	},
+	"no_manifest_github": {
+		"message": "Nevažeći ili nedostajući GitHub homepage_url u manifestu",
+		"description": "Ključ homepage_url manifesta ne koristi GitHub vezu"
 	},
 	"no_match": {
 		"message": "Nije pronađena odgovarajuća akcija",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Valovito podcrtano",
 		"description": "Opcija stila ukrašavanja za primjenu valovitog podcrtavanja na tekst Taba"
+	},
+	"update_available": {
+		"message": "Ažuriranje dostupno",
+		"description": "novo ažuriranje za proširenje je dostupno"
 	},
 	"upload": {
 		"message": "Otpremi",

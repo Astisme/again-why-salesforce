@@ -722,7 +722,7 @@ async function promptUpdateExtension({ version, link, oldversion } = {}){
         `${oldversion} → ${version}`,
         "confirm_update_extension",
         link,
-    ]);
+    ], "\n");
     if (confirm(confirm_msg)) {
         open(link, "_blank");
     }
@@ -847,8 +847,10 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 				break;
 			default:
 				if (message.what != "theme") {
-					showToast(
-						`Unknown message received ${message.what}`,
+					showToast([
+                            "error_unknown_message",
+                            message.what
+                        ],
 						false,
 						true,
 					);

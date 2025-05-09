@@ -55,6 +55,10 @@
 		"message": "Bestätigen Sie das Öffnen dieses Links.",
 		"description": "[open-other-org-modal] Fordert den Benutzer auf, den Öffnungsvorgang des erstellten Links zu bestätigen."
 	},
+	"confirm_update_extension": {
+		"message": "Eine neue Version von $extension_label ist jetzt verfügbar!",
+		"description": "eine unbekannte Nachricht wurde von einem Listener empfangen"
+	},
 	"continue": {
 		"message": "Fortfahren",
 		"description": "Text für Schaltflächen, die die aktuelle Aktion erlauben"
@@ -159,6 +163,10 @@
 		"message": "Fehler beim Hinzufügen eines Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Hinzufügen eines Tabs"
 	},
+	"error_check_update": {
+		"message": "Fehler beim Überprüfen auf Updates",
+		"description": "[Fehler] allgemeiner Fehler beim Überprüfen auf Erweiterungsupdates"
+	},
 	"error_close_other_modal": {
 		"message": "Schließen Sie zuerst das andere Modal!",
 		"description": "[toast] Es wurde versucht, mehr als ein Modal zu öffnen."
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Synchronisierung fehlgeschlagen.",
 		"description": "[error] Allgemeiner Fehler bei der Synchronisierung der Tabs mit dem Benutzer"
+	},
+	"error_failed_to_fetch": {
+		"message": "Externe Ressourcen konnten nicht abgerufen werden",
+		"description": "[Fehler] Der Aufruf einer externen Website war nicht erfolgreich"
 	},
 	"error_get_with_no_org": {
 		"message": "Tabs können nicht abgerufen werden, wenn keine Org angegeben ist.",
@@ -374,6 +386,10 @@
 		"message": "translator wurde noch nicht initialisiert.",
 		"description": "[error] TranslationService war noch nicht bereit"
 	},
+	"error_unknown_message": {
+		"message": "Unbekannte Nachricht erhalten",
+		"description": "eine unbekannte Nachricht wurde von einem Listener empfangen"
+	},
 	"error_unknown_request": {
 		"message": "Unbekannte Anfrage.",
 		"description": "[error] Allgemeiner Fehler nach Empfang einer unbekannten Nachricht"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Platzhalter für das Update-Tab-Modal"
+	},
+	"no_manifest_github": {
+		"message": "Ungültige oder fehlende GitHub homepage_url im Manifest",
+		"description": "Der homepage_url-Schlüssel des Manifests verwendet keinen GitHub-Link"
 	},
 	"no_match": {
 		"message": "Keine Aktion gefunden, die übereinstimmt",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Wellig unterstreichen",
 		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
+	},
+	"update_available": {
+		"message": "Update verfügbar",
+		"description": "ein neues Update für die Erweiterung ist verfügbar"
 	},
 	"upload": {
 		"message": "Hochladen",

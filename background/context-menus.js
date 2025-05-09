@@ -424,7 +424,7 @@ BROWSER.runtime.onInstalled.addListener(async (details) => {
         const homepage = manifest.homepage_url;
         // Validate homepage URL (must be GitHub)
         if (!homepage || !homepage.includes('github.com')) {
-            console.error('Invalid or missing GitHub homepage_url in manifest');
+            console.error('no_manifest_github');
             return;
         }
         BROWSER.tabs.create({

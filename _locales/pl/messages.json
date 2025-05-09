@@ -55,6 +55,10 @@
 		"message": "Potwierdź otwarcie tego linku.",
 		"description": "[modal-otwórz-inną-org] prośba o potwierdzenie od użytkownika otwarcia skonstruowanego linku."
 	},
+	"confirm_update_extension": {
+		"message": "Nowa wersja $extension_label jest już dostępna!",
+		"description": "otrzymano nieznaną wiadomość od słuchacza"
+	},
 	"continue": {
 		"message": "Kontynuuj",
 		"description": "textContent dla przycisków umożliwiających wykonanie bieżącej akcji"
@@ -159,6 +163,10 @@
 		"message": "Błąd podczas dodawania Tab.",
 		"description": "[błąd] Ogólny błąd używany podczas dodawania Tab"
 	},
+	"error_check_update": {
+		"message": "Błąd podczas sprawdzania aktualizacji",
+		"description": "[błąd] ogólny błąd podczas sprawdzania aktualizacji rozszerzenia"
+	},
 	"error_close_other_modal": {
 		"message": "Najpierw zamknij inne okno modalne!",
 		"description": "[toast] Użytkownik próbował otworzyć więcej niż 1 okno modalne"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Nie udało się synchronizować.",
 		"description": "[błąd] Ogólny błąd, gdy Tabs nie mogły zostać zsynchronizowane od użytkownika"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nie udało się pobrać zasobów zewnętrznych",
+		"description": "[błąd] Wywołanie do zewnętrznej strony internetowej nie powiodło się"
 	},
 	"error_get_with_no_org": {
 		"message": "Nie można pobrać Tabs, jeśli Org nie jest określona.",
@@ -375,6 +387,10 @@
 		"message": "translator nie został jeszcze zainicjalizowany.",
 		"description": "[błąd] TranslationService nie był gotowy"
 	},
+	"error_unknown_message": {
+		"message": "Otrzymano nieznaną wiadomość",
+		"description": "otrzymano nieznaną wiadomość od słuchacza"
+	},
 	"error_unknown_request": {
 		"message": "Nieznane żądanie.",
 		"description": "[błąd] Ogólny błąd po otrzymaniu wiadomości, która nie została rozpoznana"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mojawlasnaorg",
 		"description": "symbol zastępczy dla okna modalnego Aktualizuj Tab"
+	},
+	"no_manifest_github": {
+		"message": "Nieprawidłowy lub brakujący GitHub homepage_url w manifeście",
+		"description": "Klucz homepage_url manifestu nie używa linku GitHub"
 	},
 	"no_match": {
 		"message": "Nie dopasowano żadnej akcji",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Fala podkreślenia",
 		"description": "Opcja stylu dekoracji do zastosowania falistego podkreślenia tekstu karty"
+	},
+	"update_available": {
+		"message": "Aktualizacja dostępna",
+		"description": "dostępna jest nowa aktualizacja rozszerzenia"
 	},
 	"upload": {
 		"message": "Prześlij",

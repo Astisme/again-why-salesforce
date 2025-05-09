@@ -55,6 +55,10 @@
 		"message": "ఈ లింక్ ని తెరవడాన్ని నిర్ధారించండి.",
 		"description": "[open-other-org-modal] రూపొందించిన లింక్ తెరవడానికి వినియోగదారుని నిర్ధారణ కోరుతుంది"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label యొక్క కొత్త వెర్షన్ ఇప్పుడు అందుబాటులో ఉంది!",
+		"description": "ఒక శ్రోత నుండి తెలియని సందేశం స్వీకరించబడింది"
+	},
 	"continue": {
 		"message": "కొనసాగించు",
 		"description": "ప్రస్తుత చర్యను అమలు చేయడానికి అనుమతించే బటన్ల కోసం టెక్స్ట్ కంటెంట్"
@@ -159,6 +163,10 @@
 		"message": "Tab జోడించేటప్పుడు లోపం.",
 		"description": "[లోపం] Tab జోడించేటప్పుడు ఉపయోగించే సాధారణ లోపం"
 	},
+	"error_check_update": {
+		"message": "నవీకరణల కోసం తనిఖీ చేస్తున్నప్పుడు లోపం",
+		"description": "[లోపం] పొడిగింపు నవీకరణల కోసం తనిఖీ చేస్తున్నప్పుడు సాధారణ లోపం"
+	},
 	"error_close_other_modal": {
 		"message": "ముందుగా ఇతర modalని మూసేయండి!",
 		"description": "[toast] ఒకే సమయంలో ఒకటి కంటే ఎక్కువ modalలు తెరవడమైనది"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "సమకాలీకరణ విఫలమైంది.",
 		"description": "[లోపం] వినియోగదారు నుండి Tabs సమకాలీకరించబడనప్పుడు సాధారణ లోపం"
+	},
+	"error_failed_to_fetch": {
+		"message": "బాహ్య వనరులను పొందడంలో విఫలమైంది",
+		"description": "[లోపం] బాహ్య వెబ్‌సైట్‌కు చేసిన కాల్ విజయవంతం కాలేదు"
 	},
 	"error_get_with_no_org": {
 		"message": "Org నిర్దేశించకపోతే Tabs పొందలేము.",
@@ -374,6 +386,10 @@
 		"message": "అనువాదకుడు ఇంకా ప్రారంభించబడలేదు.",
 		"description": "[లోపం] TranslationService సిద్ధంగా లేదు"
 	},
+	"error_unknown_message": {
+		"message": "తెలియని సందేశం స్వీకరించబడింది",
+		"description": "ఒక శ్రోత నుండి తెలియని సందేశం స్వీకరించబడింది"
+	},
 	"error_unknown_request": {
 		"message": "తెలియని అభ్యర్థన.",
 		"description": "[లోపం] గుర్తించబడని సందేశాన్ని పొందిన తర్వాత సాధారణ లోపం"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Update Tab మోడల్‌కు placeholder"
+	},
+	"no_manifest_github": {
+		"message": "మానిఫెస్ట్‌లో చెల్లని లేదా తప్పిపోయిన GitHub homepage_url",
+		"description": "మానిఫెస్ట్ యొక్క homepage_url కీ GitHub లింక్‌ను ఉపయోగించడం లేదు"
 	},
 	"no_match": {
 		"message": "ఏ చర్యతో సరిపోలడం లేదు",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "వేవీ అండర్‌లైన్",
 		"description": "Tab టెక్స్ట్‌కు వేవీ అండర్‌లైన్‌ను వర్తింపజేయడానికి అలంకరణ శైలి ఎంపిక"
+	},
+	"update_available": {
+		"message": "నవీకరణ అందుబాటులో ఉంది",
+		"description": "పొడిగింపు కోసం కొత్త నవీకరణ అందుబాటులో ఉంది"
 	},
 	"upload": {
 		"message": "అప్‌లోడ్ చేయి",

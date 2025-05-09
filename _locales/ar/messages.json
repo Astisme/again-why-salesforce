@@ -55,6 +55,10 @@
 		"message": "أكد فتح هذا الرابط.",
 		"description": "[open-other-org-modal] طلب تأكيد من المستخدم لفتح الرابط المُنشأ"
 	},
+	"confirm_update_extension": {
+		"message": "يتوفر الآن إصدار جديد من $extension_label!",
+		"description": "تم استلام رسالة غير معروفة من مستمع"
+	},
 	"continue": {
 		"message": "متابعة",
 		"description": "النص لمحتوى الأزرار التي تسمح بتنفيذ الإجراء الحالي"
@@ -159,6 +163,10 @@
 		"message": "خطأ أثناء إضافة Tab.",
 		"description": "[error] خطأ عام عند إضافة Tab"
 	},
+	"error_check_update": {
+		"message": "خطأ في التحقق من وجود تحديثات",
+		"description": "[خطأ] خطأ عام أثناء التحقق من تحديثات الامتداد"
+	},
 	"error_close_other_modal": {
 		"message": "أغلق النافذة المنبثقة الأخرى أولاً!",
 		"description": "[toast] تم محاولة فتح أكثر من نافذة منبثقة"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "فشل التزامن.",
 		"description": "[error] خطأ عام عند محاولة مزامنة Tabs مع المستخدم"
+	},
+	"error_failed_to_fetch": {
+		"message": "فشل جلب الموارد الخارجية",
+		"description": "[خطأ] لم تنجح المكالمة إلى موقع ويب خارجي"
 	},
 	"error_get_with_no_org": {
 		"message": "لا يمكن الحصول على الـ Tabs دون تحديد Org.",
@@ -374,6 +386,10 @@
 		"message": "لم يتم تهيئة translator بعد.",
 		"description": "[error] لم يكن TranslationService جاهزاً بعد"
 	},
+	"error_unknown_message": {
+		"message": "تم استلام رسالة غير معروفة",
+		"description": "تم استلام رسالة غير معروفة من مستمع"
+	},
 	"error_unknown_request": {
 		"message": "طلب غير معروف.",
 		"description": "[error] خطأ عام بعد استقبال رسالة غير معروفة"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "نص العنصر النائب لنموذج تحديث الـ Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url غير صالح أو مفقود لـ GitHub في البيان",
+		"description": "مفتاح homepage_url في البيان لا يستخدم رابط GitHub"
 	},
 	"no_match": {
 		"message": "لم يتم مطابقة أي إجراء",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "تسطير متموج",
 		"description": "خيار نمط الزخرفة لتطبيق تسطير متموج على نص Tab"
+	},
+	"update_available": {
+		"message": "تحديث متاح",
+		"description": "يتوفر تحديث جديد للامتداد"
 	},
 	"upload": {
 		"message": "تحميل",

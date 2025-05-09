@@ -55,6 +55,10 @@
 		"message": "确认打开此链接。",
 		"description": "[打开其他组织模态框] 请求用户确认以打开构造的链接。"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label 的新版本现已可用！",
+		"description": "从侦听器收到一个未知消息"
+	},
 	"continue": {
 		"message": "继续",
 		"description": "允许当前操作执行的按钮的文本内容"
@@ -159,6 +163,10 @@
 		"message": "添加 Tab 时出错。",
 		"description": "[错误] 添加 Tab 时使用的一般错误"
 	},
+	"error_check_update": {
+		"message": "检查更新时出错",
+		"description": "[错误] 检查扩展更新时出现通用错误"
+	},
 	"error_close_other_modal": {
 		"message": "请先关闭其他模态框！",
 		"description": "[提示信息] 用户尝试打开超过1个模态框"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "同步失败。",
 		"description": "[错误] 从用户同步 Tabs 时出现一般错误"
+	},
+	"error_failed_to_fetch": {
+		"message": "获取外部资源失败",
+		"description": "[错误] 调用外部网站失败"
 	},
 	"error_get_with_no_org": {
 		"message": "如果未指定组织，则无法获取 Tabs。",
@@ -375,6 +387,10 @@
 		"message": "翻译器尚未初始化。",
 		"description": "[错误] TranslationService 尚未准备好"
 	},
+	"error_unknown_message": {
+		"message": "收到未知消息",
+		"description": "从侦听器收到一个未知消息"
+	},
 	"error_unknown_request": {
 		"message": "未知请求。",
 		"description": "[错误] 收到无法识别的消息后出现的一般错误"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "我的自定义组织",
 		"description": "更新 Tab 模态框的占位符"
+	},
+	"no_manifest_github": {
+		"message": "清单中无效或缺失的 GitHub homepage_url",
+		"description": "清单的 homepage_url 键未使用 GitHub 链接"
 	},
 	"no_match": {
 		"message": "未匹配任何操作",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "波浪下划线",
 		"description": "为 Tab 文本应用波浪下划线的装饰样式选项"
+	},
+	"update_available": {
+		"message": "有可用更新",
+		"description": "扩展程序有新的更新可用"
 	},
 	"upload": {
 		"message": "上传",

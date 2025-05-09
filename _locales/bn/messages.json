@@ -55,6 +55,10 @@
 		"message": "এই লিঙ্কটি খুলতে সম্মতি দিন।",
 		"description": "[open-other-org-modal] তৈরি করা লিঙ্ক খুলতে ব্যবহারকারীর থেকে নিশ্চিততা চায়"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label এর একটি নতুন সংস্করণ এখন উপলব্ধ!",
+		"description": "একজন শ্রোতার কাছ থেকে একটি অজানা বার্তা প্রাপ্ত হয়েছে"
+	},
 	"continue": {
 		"message": "চালিয়ে যান",
 		"description": "বোতামের জন্য টেক্সট কনটেন্ট যা বর্তমান কার্যকলাপ চালু করতে দেয়"
@@ -159,6 +163,10 @@
 		"message": "Tab যোগ করতে চেষ্টায় ত্রুটি।",
 		"description": "[error] Tab যোগ করার সময় সাধারণ ত্রুটি"
 	},
+	"error_check_update": {
+		"message": "আপডেট চেক করার সময় ত্রুটি",
+		"description": "[ত্রুটি] এক্সটেনশন আপডেটের জন্য চেক করার সময় সাধারণ ত্রুটি"
+	},
 	"error_close_other_modal": {
 		"message": "প্রথমে অন্য modal বন্ধ করুন!",
 		"description": "[toast] একাধিক modal খোলার চেষ্টা করা হয়েছে"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "সমন্বয় ব্যর্থ হয়েছে।",
 		"description": "[error] ব্যবহারকারীর সাথে Tabs সমন্বয় করতে ব্যর্থ"
+	},
+	"error_failed_to_fetch": {
+		"message": "বাহ্যিক সংস্থান আনতে ব্যর্থ হয়েছে",
+		"description": "[ত্রুটি] একটি বাহ্যিক ওয়েবসাইটে কল সফল হয়নি"
 	},
 	"error_get_with_no_org": {
 		"message": "Org ছাড়া Tabs পাওয়া যাবে না।",
@@ -374,6 +386,10 @@
 		"message": "translator এখনও আরম্ভ হয়নি।",
 		"description": "[error] TranslationService প্রস্তুত ছিল না"
 	},
+	"error_unknown_message": {
+		"message": "অজানা বার্তা প্রাপ্ত হয়েছে",
+		"description": "একজন শ্রোতার কাছ থেকে একটি অজানা বার্তা প্রাপ্ত হয়েছে"
+	},
 	"error_unknown_request": {
 		"message": "অজানা অনুরোধ।",
 		"description": "[error] অজানা বার্তা প্রাপ্তির পর সাধারণ ত্রুটি"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Tab আপডেট মডালের জন্য প্লেসহোল্ডার"
+	},
+	"no_manifest_github": {
+		"message": "ম্যানিফেস্টে অবৈধ বা অনুপস্থিত GitHub homepage_url",
+		"description": "ম্যানিফেস্টের homepage_url কী একটি GitHub লিঙ্ক ব্যবহার করে না"
 	},
 	"no_match": {
 		"message": "কোনও কার্যক্রম মিলেনি",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "ওয়েভি আন্ডারলাইন",
 		"description": "Tab টেক্সটের জন্য ওয়েভি আন্ডারলাইন প্রয়োগ করার ডেকোরেশন স্টাইল অপশন"
+	},
+	"update_available": {
+		"message": "আপডেট উপলব্ধ",
+		"description": "এক্সটেনশনের জন্য একটি নতুন আপডেট উপলব্ধ"
 	},
 	"upload": {
 		"message": "আপলোড করুন",

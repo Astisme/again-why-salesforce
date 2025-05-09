@@ -145,22 +145,18 @@ export async function checkForUpdates() {
     const manifest = BROWSER.runtime.getManifest();
     const currentVersion = manifest.version;
     const homepageUrl = manifest.homepage_url;
-    // Validate homepage URL (must be GitHub)
-    if (!homepageUrl || !homepageUrl.includes('github.com')) {
-      console.error('Invalid or missing GitHub homepage_url in manifest');
-      return;
-    }
-    // Parse GitHub username and repo from homepage URL
-    const urlParts = homepageUrl.split('github.com/');
-    if (urlParts.length < 2) {
-      console.error('Could not parse GitHub repository from homepage_url');
+      // Parse GitHub username and repo from homepage URL
+      const urlParts = homepageUrl?.split('github.com/');
+      // Validate homepage URL (must be GitHub)
+    if (!homepageUrl || !homepageUrl.includes('github.com') || urlParts.length < 2) {
+      console.error('no_manifest_github');
       return;
     }
     const repoPath = urlParts[1].replace(/\.git$/, '');
     // Fetch latest release data from GitHub API
     const response = await fetch(`https://api.github.com/repos/${repoPath}/releases`);
     if (!response.ok) {
-      console.error('Failed to fetch releases from GitHub API:', response.status);
+      console.error('error_failed_to_fetch', response.status);
       return;
     }
     const releases = await response.json();
@@ -169,15 +165,16 @@ export async function checkForUpdates() {
     ).tag_name.replace(/^.*-v/, '');
     // Compare versions and open homepage if update is available
     if (isNewerVersion(latestVersion, currentVersion)) {
-      console.log(`Update available: ${currentVersion} → ${latestVersion}`);
+      console.log(["update_available", currentVersion, "→", latestVersion]);
         bg_notify({
             what: WHAT_UPDATE_EXTENSION,
             oldversion: currentVersion,
             version: latestVersion,
-            link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
+            link: homepageUrl,
+            //link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
         });
     }
   } catch (error) {
-    console.error('Error checking for updates:', error);
+    console.error('error_check_update', error);
   }
 }

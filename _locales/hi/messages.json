@@ -55,6 +55,10 @@
 		"message": "इस लिंक को खोलने की पुष्टि करें।",
 		"description": "[open-other-org-modal] निर्मित लिंक खोलने के लिए उपयोगकर्ता से पुष्टि माँगे"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label का नया संस्करण अब उपलब्ध है!",
+		"description": "एक श्रोता से एक अज्ञात संदेश प्राप्त हुआ है"
+	},
 	"continue": {
 		"message": "जारी रखें",
 		"description": "ऐसे बटनों का टेक्स्ट जो वर्तमान क्रिया की अनुमति देते हैं।"
@@ -159,6 +163,10 @@
 		"message": "Tab जोड़ने में त्रुटि।",
 		"description": "[error] Tab जोड़ते समय सामान्य त्रुटि"
 	},
+	"error_check_update": {
+		"message": "अपडेट जांचते समय त्रुटि",
+		"description": "[त्रुटि] एक्सटेंशन अपडेट जांचते समय सामान्य त्रुटि"
+	},
 	"error_close_other_modal": {
 		"message": "पहले अन्य modal बंद करें!",
 		"description": "[toast] एक से अधिक modal खोलने का प्रयास किया गया।"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "सिंक विफल हुआ।",
 		"description": "[error] उपयोगकर्ता के साथ Tabs सिंक करने में सामान्य त्रुटि"
+	},
+	"error_failed_to_fetch": {
+		"message": "बाहरी संसाधन लाने में विफल",
+		"description": "[त्रुटि] बाहरी वेबसाइट पर कॉल सफल नहीं हुआ"
 	},
 	"error_get_with_no_org": {
 		"message": "बिना Org के Tabs प्राप्त नहीं किए जा सकते।",
@@ -374,6 +386,10 @@
 		"message": "translator अभी तक प्रारंभ नहीं हुआ है।",
 		"description": "[error] TranslationService तैयार नहीं था"
 	},
+	"error_unknown_message": {
+		"message": "अज्ञात संदेश प्राप्त हुआ",
+		"description": "एक श्रोता से एक अज्ञात संदेश प्राप्त हुआ है"
+	},
 	"error_unknown_request": {
 		"message": "अज्ञात अनुरोध।",
 		"description": "[error] अज्ञात संदेश प्राप्त होने के बाद सामान्य त्रुटि"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Update Tab modal के लिए प्लेसहोल्डर"
+	},
+	"no_manifest_github": {
+		"message": "मेनिफेस्ट में अमान्य या गुम GitHub homepage_url",
+		"description": "मेनिफेस्ट की homepage_url कुंजी GitHub लिंक का उपयोग नहीं करती है"
 	},
 	"no_match": {
 		"message": "कोई मेल खाने वाली क्रिया नहीं मिली",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "तरंग रेखांकित",
 		"description": "Tab टेक्स्ट पर तरंगाकार रेखांकित लागू करने के लिए सजावट शैली विकल्प"
+	},
+	"update_available": {
+		"message": "अपडेट उपलब्ध",
+		"description": "एक्सटेंशन के लिए एक नया अपडेट उपलब्ध है"
 	},
 	"upload": {
 		"message": "अपलोड करें",

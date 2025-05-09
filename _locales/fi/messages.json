@@ -55,6 +55,10 @@
 		"message": "Vahvista tämän linkin avaaminen.",
 		"description": "[open-other-org-modal] pyytää käyttäjältä vahvistusta rakennetun linkin avaamiseen."
 	},
+	"confirm_update_extension": {
+		"message": "Uusi versio $extension_label on nyt saatavilla!",
+		"description": "tuntematon viesti on vastaanotettu kuuntelijalta"
+	},
 	"continue": {
 		"message": "Jatka",
 		"description": "tekstisisältö painikkeille, jotka sallivat nykyisen toiminnon suorittamisen"
@@ -159,6 +163,10 @@
 		"message": "Virhe Tabin lisäämisessä.",
 		"description": "[error] Yleinen virhe Tabin lisäämisessä"
 	},
+	"error_check_update": {
+		"message": "Virhe tarkistettaessa päivityksiä",
+		"description": "[virhe] yleinen virhe tarkistettaessa laajennuspäivityksiä"
+	},
 	"error_close_other_modal": {
 		"message": "Sulje ensin toinen modal!",
 		"description": "[toast] Käyttäjä yritti avata useampaa kuin yhtä modalia"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Synkronointi epäonnistui.",
 		"description": "[error] Yleinen virhe Tabsien synkronoinnissa käyttäjän kanssa"
+	},
+	"error_failed_to_fetch": {
+		"message": "Ulkopuolisten resurssien noutaminen epäonnistui",
+		"description": "[virhe] Kutsu ulkoiselle verkkosivustolle ei onnistunut"
 	},
 	"error_get_with_no_org": {
 		"message": "Tabeja ei voida hakea ilman, että organisaatio on määritelty.",
@@ -375,6 +387,10 @@
 		"message": "translatoria ei ole vielä alustettu.",
 		"description": "[error] TranslationService ei ollut valmis"
 	},
+	"error_unknown_message": {
+		"message": "Tuntematon viesti vastaanotettu",
+		"description": "tuntematon viesti on vastaanotettu kuuntelijalta"
+	},
 	"error_unknown_request": {
 		"message": "Tuntematon pyyntö.",
 		"description": "[error] Yleinen virhe tuntemattoman viestin vastaanoton jälkeen"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "paikkamerkki Tab-modalin päivitykselle"
+	},
+	"no_manifest_github": {
+		"message": "Manifestin GitHub homepage_url on virheellinen tai puuttuu",
+		"description": "Manifestin homepage_url-avain ei käytä GitHub-linkkiä"
 	},
 	"no_match": {
 		"message": "Yhtään vastaavaa toimintoa ei löytynyt",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Aaltomainen alleviivaus",
 		"description": "Koristelutyyli aaltomaisen alleviivauksen lisäämiseksi Tab-tekstiin"
+	},
+	"update_available": {
+		"message": "Päivitys saatavilla",
+		"description": "uusi päivitys laajennukseen on saatavilla"
 	},
 	"upload": {
 		"message": "Lähetä",

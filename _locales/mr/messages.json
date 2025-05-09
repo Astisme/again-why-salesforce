@@ -55,6 +55,10 @@
 		"message": "हा लिंक उघडणे पुष्टी करा.",
 		"description": "[open-other-org-modal] तयार केलेल्या लिंक उघडण्यासाठी वापरकर्त्याकडून पुष्टी मागते."
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label ची नवीन आवृत्ती आता उपलब्ध आहे!",
+		"description": "श्रोत्याकडून एक अज्ञात संदेश प्राप्त झाला आहे"
+	},
 	"continue": {
 		"message": "सुरू ठेवा",
 		"description": "बटणांसाठी टेक्स्ट कंटेंट जे वर्तमान क्रिया कार्यान्वित करण्यास अनुमती देते"
@@ -159,6 +163,10 @@
 		"message": "Tab जोडताना त्रुटी.",
 		"description": "[त्रुटी] Tab जोडताना वापरली जाणारी सामान्य त्रुटी"
 	},
+	"error_check_update": {
+		"message": "अद्यतने तपासताना त्रुटी",
+		"description": "[त्रुटी] एक्स्टेंशन अद्यतने तपासताना सामान्य त्रुटी"
+	},
 	"error_close_other_modal": {
 		"message": "कृपया आधी इतर modal बंद करा!",
 		"description": "[toast] एकापेक्षा जास्त modal उघडण्याचा प्रयत्न केला गेला आहे."
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "синх्रनाइझेशन अयशस्वी झाले.",
 		"description": "[त्रुटी] जेव्हा Tab वापरकर्त्याकडून sincronizar होऊ शकले नाहीत तेव्हाची सामान्य त्रुटी"
+	},
+	"error_failed_to_fetch": {
+		"message": "बाह्य संसाधन मिळविण्यात अयशस्वी",
+		"description": "[त्रुटी] बाह्य वेबसाइटवर कॉल यशस्वी झाला नाही"
 	},
 	"error_get_with_no_org": {
 		"message": "Org न दिल्यास Tabs मिळवता येत नाहीत.",
@@ -374,6 +386,10 @@
 		"message": "भाषांतरकार अद्याप सुरु केलेला नाही.",
 		"description": "[त्रुटी] TranslationService तयार नव्हते"
 	},
+	"error_unknown_message": {
+		"message": "अज्ञात संदेश प्राप्त झाला",
+		"description": "श्रोत्याकडून एक अज्ञात संदेश प्राप्त झाला आहे"
+	},
 	"error_unknown_request": {
 		"message": "अज्ञात विनंती.",
 		"description": "[त्रुटी] ओळखल्या न गेलेल्या संदेशानंतरची सामान्य त्रुटी"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Update Tab मोडेलसाठी placeholder"
+	},
+	"no_manifest_github": {
+		"message": "मॅनिफेस्टमध्ये अवैध किंवा गहाळ GitHub homepage_url",
+		"description": "मॅनिफेस्टची homepage_url की GitHub लिंक वापरत नाही"
 	},
 	"no_match": {
 		"message": "कोणतीही अनुरूप क्रिया सापडली नाही",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "लहरी खाली रेषा",
 		"description": "Tab मजकुराखाली लहरी रेषा लागू करण्यासाठी आकर्षक शैली पर्याय"
+	},
+	"update_available": {
+		"message": "अद्यतन उपलब्ध",
+		"description": "एक्स्टेंशनसाठी नवीन अद्यतन उपलब्ध आहे"
 	},
 	"upload": {
 		"message": "अपलोड करा",

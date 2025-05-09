@@ -55,6 +55,10 @@
 		"message": "Confirmeu l'obertura d'aquest enllaç.",
 		"description": "[open-other-org-modal] sol·licitud de confirmació a l'usuari per obrir l'enllaç construït."
 	},
+	"confirm_update_extension": {
+		"message": "Hi ha una nova versió de $extension_label disponible!",
+		"description": "s'ha rebut un missatge desconegut d'un listener"
+	},
 	"continue": {
 		"message": "Continuar",
 		"description": "text per als botons que permeten executar l'acció actual"
@@ -159,6 +163,10 @@
 		"message": "Error en afegir Tab.",
 		"description": "[error] Error genèric en afegir una Tab"
 	},
+	"error_check_update": {
+		"message": "Error al comprovar actualitzacions",
+		"description": "[error] error genèric en comprovar actualitzacions de l'extensió"
+	},
 	"error_close_other_modal": {
 		"message": "Tanca primer l'altre diàleg!",
 		"description": "[toast] l'usuari va intentar obrir més d'un diàleg"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "La sincronització ha fallat.",
 		"description": "[error] Error genèric en sincronitzar les Tabs amb l’usuari"
+	},
+	"error_failed_to_fetch": {
+		"message": "No s'han pogut obtenir recursos externs",
+		"description": "[error] La crida a un lloc web extern no ha tingut èxit"
 	},
 	"error_get_with_no_org": {
 		"message": "No es poden obtenir Tabs si l'organització no està especificada.",
@@ -375,6 +387,10 @@
 		"message": "translator encara no està inicialitzat.",
 		"description": "[error] El TranslationService no estava preparat"
 	},
+	"error_unknown_message": {
+		"message": "S'ha rebut un missatge desconegut",
+		"description": "s'ha rebut un missatge desconegut d'un listener"
+	},
 	"error_unknown_request": {
 		"message": "Sol·licitud desconeguda.",
 		"description": "[error] Error genèric després de rebre un missatge no reconegut"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "marc per al diàleg d'Actualització de Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url de GitHub no vàlida o absent al manifest",
+		"description": "La clau homepage_url del manifest no utilitza un enllaç de GitHub"
 	},
 	"no_match": {
 		"message": "No coincideix cap acció",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Subratllat Ondulat",
 		"description": "Opció d'estil de decoració per aplicar un subratllat ondulat al text de Tab"
+	},
+	"update_available": {
+		"message": "Actualització disponible",
+		"description": "hi ha una nova actualització disponible per a l'extensió"
 	},
 	"upload": {
 		"message": "Penjar",

@@ -55,6 +55,10 @@
 		"message": "Confirmar a abertura deste link.",
 		"description": "[modal-abrir-outra-org] solicitar confirmação ao usuário para abrir o link construído."
 	},
+	"confirm_update_extension": {
+		"message": "Uma nova versão de $extension_label está agora disponível!",
+		"description": "uma mensagem desconhecida foi recebida de um listener"
+	},
 	"continue": {
 		"message": "Continuar",
 		"description": "textContent para botões que permitem a execução da ação atual"
@@ -159,6 +163,10 @@
 		"message": "Erro ao adicionar Tab.",
 		"description": "[erro] Erro genérico usado ao adicionar um Tab"
 	},
+	"error_check_update": {
+		"message": "Erro ao verificar atualizações",
+		"description": "[erro] erro genérico ao verificar atualizações de extensão"
+	},
 	"error_close_other_modal": {
 		"message": "Feche o outro modal primeiro!",
 		"description": "[toast] O usuário tentou abrir mais de 1 modal"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Falha ao sincronizar.",
 		"description": "[erro] Erro genérico quando os Tabs não puderam ser sincronizados do usuário"
+	},
+	"error_failed_to_fetch": {
+		"message": "Falha ao buscar recursos externos",
+		"description": "[erro] A chamada para um site externo não foi bem-sucedida"
 	},
 	"error_get_with_no_org": {
 		"message": "Não é possível obter Tabs se a Org não for especificada.",
@@ -375,6 +387,10 @@
 		"message": "o tradutor ainda não foi inicializado.",
 		"description": "[erro] o TranslationService não estava pronto"
 	},
+	"error_unknown_message": {
+		"message": "Mensagem desconhecida recebida",
+		"description": "uma mensagem desconhecida foi recebida de um listener"
+	},
 	"error_unknown_request": {
 		"message": "Solicitação desconhecida.",
 		"description": "[erro] Erro genérico após receber uma mensagem que não foi reconhecida"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "minhaorgpersonalizada",
 		"description": "placeholder para o modal Atualizar Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url do GitHub inválida ou ausente no manifesto",
+		"description": "A chave homepage_url do manifesto não usa um link do GitHub"
 	},
 	"no_match": {
 		"message": "Não correspondeu a nenhuma ação",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Sublinhar ondulado",
 		"description": "Opção de estilo de decoração para aplicar um sublinhado ondulado ao texto de Tab"
+	},
+	"update_available": {
+		"message": "Atualização disponível",
+		"description": "uma nova atualização para a extensão está disponível"
 	},
 	"upload": {
 		"message": "Carregar",

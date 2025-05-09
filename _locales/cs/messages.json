@@ -55,6 +55,10 @@
 		"message": "Potvrďte otevření tohoto odkazu.",
 		"description": "[open-other-org-modal] žádost o potvrzení od uživatele pro otevření vytvořeného odkazu."
 	},
+	"confirm_update_extension": {
+		"message": "Nová verze $extension_label je nyní k dispozici!",
+		"description": "byla přijata neznámá zpráva od posluchače"
+	},
 	"continue": {
 		"message": "Pokračovat",
 		"description": "text u tlačítek, které umožňují provést aktuální akci"
@@ -159,6 +163,10 @@
 		"message": "Chyba při přidávání Tab.",
 		"description": "[error] Obecná chyba při přidávání Tab"
 	},
+	"error_check_update": {
+		"message": "Chyba při kontrole aktualizací",
+		"description": "[chyba] obecná chyba při kontrole aktualizací rozšíření"
+	},
 	"error_close_other_modal": {
 		"message": "Nejprve zavřete ostatní okno!",
 		"description": "[toast] Uživatel se pokusil otevřít více než jedno modální okno"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Synchronizace se nezdařila.",
 		"description": "[error] Obecná chyba při synchronizaci Tabs s uživatelem"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nepodařilo se načíst externí zdroje",
+		"description": "[chyba] Volání na externí webovou stránku nebylo úspěšné"
 	},
 	"error_get_with_no_org": {
 		"message": "Nelze získat Taby, pokud organizace není specifikována.",
@@ -375,6 +387,10 @@
 		"message": "translator dosud nebyl inicializován.",
 		"description": "[error] TranslationService nebyl připraven"
 	},
+	"error_unknown_message": {
+		"message": "Přijata neznámá zpráva",
+		"description": "byla přijata neznámá zpráva od posluchače"
+	},
 	"error_unknown_request": {
 		"message": "Neznámý požadavek.",
 		"description": "[error] Obecná chyba po přijmutí neznámé zprávy"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "zástupný text pro dialog Aktualizace Tab"
+	},
+	"no_manifest_github": {
+		"message": "Neplatná nebo chybějící homepage_url GitHubu v manifestu",
+		"description": "Klíč homepage_url manifestu nepoužívá odkaz na GitHub"
 	},
 	"no_match": {
 		"message": "Nesouhlasí žádná akce",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Podtržení Vlnité",
 		"description": "Možnost stylu dekorace pro použití vlnitého podtržení na text Tab"
+	},
+	"update_available": {
+		"message": "Aktualizace k dispozici",
+		"description": "k dispozici je nová aktualizace pro rozšíření"
 	},
 	"upload": {
 		"message": "Nahrát",

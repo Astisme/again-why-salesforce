@@ -55,6 +55,10 @@
 		"message": "Konfirmasi pembukaan link ini.",
 		"description": "[open-other-org-modal] Meminta konfirmasi dari pengguna untuk membuka link yang telah dibentuk."
 	},
+	"confirm_update_extension": {
+		"message": "Versi baru $extension_label sekarang tersedia!",
+		"description": "pesan tidak dikenal telah diterima dari pendengar"
+	},
 	"continue": {
 		"message": "Lanjutkan",
 		"description": "textContent untuk tombol yang memungkinkan tindakan saat ini dieksekusi"
@@ -159,6 +163,10 @@
 		"message": "Kesalahan saat menambah Tab.",
 		"description": "[error] Kesalahan umum saat menambah Tab"
 	},
+	"error_check_update": {
+		"message": "Kesalahan saat memeriksa pembaruan",
+		"description": "[kesalahan] kesalahan umum saat memeriksa pembaruan ekstensi"
+	},
 	"error_close_other_modal": {
 		"message": "Tutup modal lain terlebih dahulu!",
 		"description": "[toast] Percobaan membuka lebih dari satu modal."
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sinkronisasi gagal.",
 		"description": "[error] Kesalahan umum saat menyinkronkan Tabs dengan pengguna"
+	},
+	"error_failed_to_fetch": {
+		"message": "Gagal mengambil sumber daya eksternal",
+		"description": "[kesalahan] Panggilan ke situs web eksternal tidak berhasil"
 	},
 	"error_get_with_no_org": {
 		"message": "Tidak dapat mengambil Tabs jika Org tidak ditentukan.",
@@ -374,6 +386,10 @@
 		"message": "translator belum diinisialisasi.",
 		"description": "[error] TranslationService belum siap"
 	},
+	"error_unknown_message": {
+		"message": "Pesan tidak dikenal diterima",
+		"description": "pesan tidak dikenal telah diterima dari pendengar"
+	},
 	"error_unknown_request": {
 		"message": "Permintaan tidak dikenal.",
 		"description": "[error] Kesalahan umum setelah menerima pesan yang tidak dikenali"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "placeholder untuk modal Pembaruan Tab"
+	},
+	"no_manifest_github": {
+		"message": "GitHub homepage_url tidak valid atau hilang di manifes",
+		"description": "Kunci homepage_url manifes tidak menggunakan tautan GitHub"
 	},
 	"no_match": {
 		"message": "Tidak ada aksi yang cocok",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Garis bawah bergelombang",
 		"description": "Opsi gaya dekorasi untuk menerapkan garis bawah bergelombang pada teks Tab"
+	},
+	"update_available": {
+		"message": "Pembaruan tersedia",
+		"description": "pembaruan baru untuk ekstensi tersedia"
 	},
 	"upload": {
 		"message": "Unggah",
