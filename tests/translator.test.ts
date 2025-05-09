@@ -1,8 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import {
-	assertEquals,
-	assertRejects,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { mockBrowser, translations } from "./mocks.ts";
 declare global {
 	var chrome: typeof mockBrowser;
@@ -53,10 +50,16 @@ Deno.test("TranslationService - translate method", async () => {
 		"Should fallback to English",
 	);
 	// Test missing key
-	assertRejects(
-		async () => await service.translate("missing"),
-		Error,
-		"Key not found anywhere",
+	assertEquals(
+		await service.translate("missing"),
+		"missing",
+		"Key not found anywhere should report same string",
+	);
+	// Test placeholder translated
+	assertEquals(
+		await service.translate("world"),
+		"Bonjour Monde",
+		"Placeholder should get translated",
 	);
 });
 
@@ -75,8 +78,23 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 		);
 		assertEquals(
 			mockEle[1].textContent,
+			"thisiskept",
+			"Second element textContent should not be translated",
+		);
+		assertEquals(
+			mockEle[1].title,
 			"Goodbye",
-			"Second element should not be translated to french",
+			"Second element title should not be translated to french",
+		);
+		assertEquals(
+			mockEle[2].textContent,
+			"Météo",
+			"Third element textContent should be translated to french",
+		);
+		assertEquals(
+			mockEle[2].title,
+			"Météo",
+			"Third element title should be translated to french",
 		);
 	});
 
@@ -93,8 +111,23 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 		);
 		assertEquals(
 			mockEle[1].textContent,
+			"thisiskept",
+			"Second element textContent should not be translated to english",
+		);
+		assertEquals(
+			mockEle[1].title,
 			"Goodbye",
-			"Second element should not be translated to english",
+			"Second element title should be translated to english",
+		);
+		assertEquals(
+			mockEle[2].textContent,
+			"Weather",
+			"Third element textContent should be translated to english",
+		);
+		assertEquals(
+			mockEle[2].title,
+			"Weather",
+			"Third element title should be translated to english",
 		);
 	});
 });
@@ -124,5 +157,9 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 		throw new Error("Network error");
 	};
 	const errorResult = await service.loadLanguageFile("es");
-	assertEquals(errorResult, translations.en, "Should return null on error");
+	assertEquals(
+		errorResult,
+		translations.en,
+		"Should return fallback language on error",
+	);
 });

@@ -55,6 +55,10 @@
 		"message": "Bekräfta att du vill öppna denna länk.",
 		"description": "[open-other-org-modal] begär bekräftelse från användaren att öppna den konstruerade länken."
 	},
+	"confirm_update_extension": {
+		"message": "En ny version av $extension_label är nu tillgänglig!",
+		"description": "ett okänt meddelande har mottagits från en lyssnare"
+	},
 	"continue": {
 		"message": "Fortsätt",
 		"description": "textinnehåll för knappar som möjliggör att den aktuella åtgärden genomförs"
@@ -159,6 +163,10 @@
 		"message": "Fel vid tillägg av Tab.",
 		"description": "[fel] Allmänt fel som används vid tillägg av en Tab"
 	},
+	"error_check_update": {
+		"message": "Fel vid kontroll av uppdateringar",
+		"description": "[fel] generellt fel vid kontroll av tilläggsuppdateringar"
+	},
 	"error_close_other_modal": {
 		"message": "Stäng det andra modalfönstret först!",
 		"description": "[toast] Användaren försökte öppna mer än ett modalfönster"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Misslyckades med att synkronisera.",
 		"description": "[fel] Allmänt fel när Tabs inte kunde synkroniseras från användaren"
+	},
+	"error_failed_to_fetch": {
+		"message": "Misslyckades med att hämta externa resurser",
+		"description": "[fel] Anropet till en extern webbplats lyckades inte"
 	},
 	"error_get_with_no_org": {
 		"message": "Kan inte hämta Tabbar om organisation inte anges.",
@@ -375,6 +387,10 @@
 		"message": "översättaren var inte initialiserad än.",
 		"description": "[fel] TranslationService var inte redo"
 	},
+	"error_unknown_message": {
+		"message": "Okänt meddelande mottaget",
+		"description": "ett okänt meddelande har mottagits från en lyssnare"
+	},
 	"error_unknown_request": {
 		"message": "Okänt begäran.",
 		"description": "[fel] Allmänt fel efter att ha mottagit ett meddelande som inte kändes igen"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "platshållare för Uppdatera Tab-modal"
+	},
+	"no_manifest_github": {
+		"message": "Ogiltig eller saknad GitHub homepage_url i manifestet",
+		"description": "Nyckeln homepage_url i manifestet använder inte en GitHub-länk"
 	},
 	"no_match": {
 		"message": "Ingen åtgärd matchade",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Understruken Vågig",
 		"description": "Dekorationsstilalternativ för att applicera en vågig understrykning på Tab-text"
+	},
+	"update_available": {
+		"message": "Uppdatering tillgänglig",
+		"description": "en ny uppdatering för tillägget är tillgänglig"
 	},
 	"upload": {
 		"message": "Ladda upp",

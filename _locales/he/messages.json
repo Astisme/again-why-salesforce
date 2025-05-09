@@ -55,6 +55,10 @@
 		"message": "אשר פתיחת הקישור הזה.",
 		"description": "[open-other-org-modal] בקשת אישור מהמשתמש לפתיחת הקישור שנבנה."
 	},
+	"confirm_update_extension": {
+		"message": "גרסה חדשה של $extension_label זמינה כעת!",
+		"description": "התקבלה הודעה לא ידועה ממאזין"
+	},
 	"continue": {
 		"message": "המשך",
 		"description": "תוכן טקסט עבור כפתורים שמאפשרים את ביצוע הפעולה הנוכחית"
@@ -159,6 +163,10 @@
 		"message": "שגיאה בהוספת Tab.",
 		"description": "[error] שגיאה כללית בהוספת Tab"
 	},
+	"error_check_update": {
+		"message": "שגיאה בבדיקת עדכונים",
+		"description": "[שגיאה] שגיאה כללית במהלך בדיקת עדכוני הרחבה"
+	},
 	"error_close_other_modal": {
 		"message": "סגור את החלון הנוסף קודם!",
 		"description": "[toast] המשתמש ניסה לפתוח יותר מחלון אחד"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "הסנכרון נכשל.",
 		"description": "[error] שגיאה כללית בסנכרון Tabs עם המשתמש"
+	},
+	"error_failed_to_fetch": {
+		"message": "קליטת משאבים חיצוניים נכשלה",
+		"description": "[שגיאה] הקריאה לאתר חיצוני לא הצליחה"
 	},
 	"error_get_with_no_org": {
 		"message": "לא ניתן לקבל Tab אם הארגון לא צויין.",
@@ -375,6 +387,10 @@
 		"message": "ה-translator טרם מאותחל.",
 		"description": "[error] שירות התרגום לא היה מוכן"
 	},
+	"error_unknown_message": {
+		"message": "התקבלה הודעה לא ידועה",
+		"description": "התקבלה הודעה לא ידועה ממאזין"
+	},
 	"error_unknown_request": {
 		"message": "בקשה לא ידועה.",
 		"description": "[error] שגיאה כללית לאחר קבלת הודעה לא מזוהה"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "מחליף לטקסט בחלון העדכון של Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url של GitHub לא חוקי או חסר בקובץ המניפסט",
+		"description": "מפתח ה-homepage_url בקובץ המניפסט אינו משתמש בקישור GitHub"
 	},
 	"no_match": {
 		"message": "לא נמצאה פעולה תואמת",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "קו תחתון גלי",
 		"description": "אפשרות סגנון עיטור להחלת קו תחתון גלי על טקסט Tab"
+	},
+	"update_available": {
+		"message": "עדכון זמין",
+		"description": "עדכון חדש עבור ההרחבה זמין"
 	},
 	"upload": {
 		"message": "העלה",

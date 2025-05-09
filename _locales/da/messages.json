@@ -55,6 +55,10 @@
 		"message": "Bekræft åbning af dette link.",
 		"description": "[open-other-org-modal] anmodning om bekræftelse fra brugeren for at åbne det konstruerede link."
 	},
+	"confirm_update_extension": {
+		"message": "En ny version af $extension_label er nu tilgængelig!",
+		"description": "en ukendt meddelelse er modtaget fra en lytter"
+	},
 	"continue": {
 		"message": "Fortsæt",
 		"description": "tekstindhold for knapper, der muliggør den aktuelle handling"
@@ -159,6 +163,10 @@
 		"message": "Fejl ved tilføjelse af Tab.",
 		"description": "[fejl] Generisk fejl ved tilføjelse af en Tab"
 	},
+	"error_check_update": {
+		"message": "Fejl under kontrol efter opdateringer",
+		"description": "[fejl] generel fejl under kontrol efter udvidelsesopdateringer"
+	},
 	"error_close_other_modal": {
 		"message": "Luk det andet modal først!",
 		"description": "[toast] Brugeren forsøgte at åbne mere end et modal vindue"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Synkronisering mislykkedes.",
 		"description": "[fejl] Generisk fejl ved synkronisering af Tabs med brugeren"
+	},
+	"error_failed_to_fetch": {
+		"message": "Kunne ikke hente eksterne ressourcer",
+		"description": "[fejl] Kaldet til et eksternt websted lykkedes ikke"
 	},
 	"error_get_with_no_org": {
 		"message": "Kan ikke hente Tabs, hvis organisation ikke er specificeret.",
@@ -375,6 +387,10 @@
 		"message": "translator er endnu ikke initialiseret.",
 		"description": "[fejl] TranslationService var ikke klar"
 	},
+	"error_unknown_message": {
+		"message": "Ukendt meddelelse modtaget",
+		"description": "en ukendt meddelelse er modtaget fra en lytter"
+	},
 	"error_unknown_request": {
 		"message": "Ukendt anmodning.",
 		"description": "[fejl] Generisk fejl efter modtagelse af en ukendt besked"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "pladsholder til opdatering af Tab-modal"
+	},
+	"no_manifest_github": {
+		"message": "Ugyldig eller manglende GitHub homepage_url i manifestet",
+		"description": "Nøglen homepage_url i manifestet bruger ikke et GitHub-link"
 	},
 	"no_match": {
 		"message": "Ingen matchende handling fundet",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Bølget understreget",
 		"description": "Dekorationsstilmulighed for at anvende en bølget understregning på Tab-tekst"
+	},
+	"update_available": {
+		"message": "Opdatering tilgængelig",
+		"description": "en ny opdatering til udvidelsen er tilgængelig"
 	},
 	"upload": {
 		"message": "Upload",

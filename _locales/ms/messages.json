@@ -55,6 +55,10 @@
 		"message": "Sahkan pembukaan pautan ini.",
 		"description": "[buka-modal-org-lain] minta pengesahan daripada pengguna untuk membuka pautan yang dibina."
 	},
+	"confirm_update_extension": {
+		"message": "Versi baharu $extension_label kini tersedia!",
+		"description": "mesej tidak diketahui telah diterima daripada pendengar"
+	},
 	"continue": {
 		"message": "Teruskan",
 		"description": "textContent untuk butang yang membenarkan tindakan semasa dilaksanakan"
@@ -159,6 +163,10 @@
 		"message": "Ralat semasa menambah Tab.",
 		"description": "[ralat] Ralat generik yang digunakan semasa menambah Tab"
 	},
+	"error_check_update": {
+		"message": "Ralat semasa menyemak kemas kini",
+		"description": "[ralat] ralat umum semasa menyemak kemas kini sambungan"
+	},
 	"error_close_other_modal": {
 		"message": "Tutup modal lain dahulu!",
 		"description": "[toast] Pengguna cuba membuka lebih daripada 1 modal"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Gagal sync.",
 		"description": "[ralat] Ralat generik apabila Tab tidak dapat disegerakkan daripada pengguna"
+	},
+	"error_failed_to_fetch": {
+		"message": "Gagal mengambil sumber luaran",
+		"description": "[ralat] Panggilan ke laman web luaran tidak berjaya"
 	},
 	"error_get_with_no_org": {
 		"message": "Tidak dapat mendapatkan Tabs jika Org tidak dinyatakan.",
@@ -375,6 +387,10 @@
 		"message": "penterjemah belum dimulakan lagi.",
 		"description": "[ralat] TranslationService belum siap"
 	},
+	"error_unknown_message": {
+		"message": "Mesej tidak diketahui diterima",
+		"description": "mesej tidak diketahui telah diterima daripada pendengar"
+	},
 	"error_unknown_request": {
 		"message": "Permintaan tidak diketahui.",
 		"description": "[ralat] Ralat generik selepas menerima mesej yang tidak dikenali"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "orgsayatersuai",
 		"description": "placeholder untuk modal Kemas kini Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url GitHub tidak sah atau tiada dalam manifes",
+		"description": "Kunci homepage_url manifes tidak menggunakan pautan GitHub"
 	},
 	"no_match": {
 		"message": "Tidak sepadan dengan sebarang tindakan",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Garis bawah bergelombang",
 		"description": "Pilihan gaya hiasan untuk menerapkan garis bawah bergelombang pada teks Tab"
+	},
+	"update_available": {
+		"message": "Kemas kini tersedia",
+		"description": "kemas kini baharu untuk sambungan tersedia"
 	},
 	"upload": {
 		"message": "Muat naik",

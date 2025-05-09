@@ -55,6 +55,10 @@
 		"message": "Confirmați deschiderea acestui link.",
 		"description": "[modal-deschide-altă-org] solicitați confirmarea utilizatorului pentru a deschide linkul construit."
 	},
+	"confirm_update_extension": {
+		"message": "O nouă versiune a $extension_label este acum disponibilă!",
+		"description": "un mesaj necunoscut a fost primit de la un ascultător"
+	},
 	"continue": {
 		"message": "Continuați",
 		"description": "textContent pentru butoanele care permit executarea acțiunii curente"
@@ -159,6 +163,10 @@
 		"message": "Eroare la adăugarea Tab.",
 		"description": "[eroare] Eroare generică utilizată la adăugarea unui Tab"
 	},
+	"error_check_update": {
+		"message": "Eroare la verificarea actualizărilor",
+		"description": "[eroare] eroare generică la verificarea actualizărilor extensiei"
+	},
 	"error_close_other_modal": {
 		"message": "Închideți mai întâi celălalt modal!",
 		"description": "[toast] Utilizatorul a încercat să deschidă mai mult de 1 modal"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sincronizare eșuată.",
 		"description": "[eroare] Eroare generică atunci când Tab-urile nu au putut fi sincronizate de la utilizator"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nu s-au putut prelua resursele externe",
+		"description": "[eroare] Apelul către un site web extern nu a avut succes"
 	},
 	"error_get_with_no_org": {
 		"message": "Nu se pot obține Tabs dacă Org nu este specificată.",
@@ -375,6 +387,10 @@
 		"message": "traducătorul nu a fost încă inițializat.",
 		"description": "[eroare] TranslationService nu era gata"
 	},
+	"error_unknown_message": {
+		"message": "Mesaj necunoscut primit",
+		"description": "un mesaj necunoscut a fost primit de la un ascultător"
+	},
 	"error_unknown_request": {
 		"message": "Solicitare necunoscută.",
 		"description": "[eroare] Eroare generică după primirea unui mesaj care nu a fost recunoscut"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "organizațiameapersonalizată",
 		"description": "placeholder pentru modalul Actualizare Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url GitHub invalid sau lipsă în manifest",
+		"description": "Cheia homepage_url a manifestului nu utilizează o legătură GitHub"
 	},
 	"no_match": {
 		"message": "Nu s-a potrivit cu nicio acțiune",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Subliniat Ondulat",
 		"description": "Opțiune de stil de decorare pentru aplicarea unei sublinieri ondulate la textul Tab"
+	},
+	"update_available": {
+		"message": "Actualizare disponibilă",
+		"description": "o nouă actualizare pentru extensie este disponibilă"
 	},
 	"upload": {
 		"message": "Încărcați",

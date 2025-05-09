@@ -55,6 +55,10 @@
 		"message": "Bevestig het openen van deze link.",
 		"description": "[open-andere-org-modal] vraag de gebruiker om bevestiging om de geconstrueerde link te openen."
 	},
+	"confirm_update_extension": {
+		"message": "Een nieuwe versie van $extension_label is nu beschikbaar!",
+		"description": "een onbekend bericht is ontvangen van een luisteraar"
+	},
 	"continue": {
 		"message": "Doorgaan",
 		"description": "textContent voor knoppen die toestaan dat de huidige actie wordt uitgevoerd"
@@ -159,6 +163,10 @@
 		"message": "Fout bij het toevoegen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het toevoegen van een Tab"
 	},
+	"error_check_update": {
+		"message": "Fout bij het controleren op updates",
+		"description": "[fout] algemene fout bij het controleren op extensie-updates"
+	},
 	"error_close_other_modal": {
 		"message": "Sluit eerst de andere modal!",
 		"description": "[toast] De gebruiker probeerde meer dan 1 modal te openen"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Synchronisatie mislukt.",
 		"description": "[fout] Algemene fout wanneer de Tabs niet konden worden gesynchroniseerd van de gebruiker"
+	},
+	"error_failed_to_fetch": {
+		"message": "Kan externe bronnen niet ophalen",
+		"description": "[fout] De oproep naar een externe website is niet gelukt"
 	},
 	"error_get_with_no_org": {
 		"message": "Kan Tabs niet ophalen als Org niet is opgegeven.",
@@ -375,6 +387,10 @@
 		"message": "vertaler was nog niet geïnitialiseerd.",
 		"description": "[fout] de TranslationService was niet klaar"
 	},
+	"error_unknown_message": {
+		"message": "Onbekend bericht ontvangen",
+		"description": "een onbekend bericht is ontvangen van een luisteraar"
+	},
 	"error_unknown_request": {
 		"message": "Onbekend verzoek.",
 		"description": "[fout] Algemene fout na ontvangst van een niet-herkend bericht"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mijneigenorg",
 		"description": "placeholder voor de Tab bijwerken modal"
+	},
+	"no_manifest_github": {
+		"message": "Ongeldige of ontbrekende GitHub homepage_url in het manifest",
+		"description": "De homepage_url sleutel van het manifest gebruikt geen GitHub link"
 	},
 	"no_match": {
 		"message": "Geen overeenkomst gevonden voor actie",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Onderstrepen Golvend",
 		"description": "Decoratiestijloptie om een golvende onderstreping toe te passen op Tab-tekst"
+	},
+	"update_available": {
+		"message": "Update beschikbaar",
+		"description": "een nieuwe update voor de extensie is beschikbaar"
 	},
 	"upload": {
 		"message": "Uploaden",

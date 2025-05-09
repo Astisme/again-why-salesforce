@@ -55,6 +55,10 @@
 		"message": "Kinnita selle lingi avamine.",
 		"description": "[ava_teine_org_modaal] küsi kasutajalt kinnitust konstrueeritud lingi avamiseks."
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label uus versioon on nüüd saadaval!",
+		"description": "listenerilt on vastu võetud tundmatu sõnum"
+	},
 	"continue": {
 		"message": "Jätka",
 		"description": "nuppude textContent, mis lubavad praeguse toimingu täita"
@@ -159,6 +163,10 @@
 		"message": "Viga Tabsi lisamisel.",
 		"description": "[error] Üldine viga Tabsi lisamisel"
 	},
+	"error_check_update": {
+		"message": "Viga värskenduste kontrollimisel",
+		"description": "[viga] üldine viga laienduse värskenduste kontrollimisel"
+	},
 	"error_close_other_modal": {
 		"message": "Palun sulgege esmalt teine modaalaken!",
 		"description": "[teavitus] Kasutaja üritas avada rohkem kui 1 modaalakent"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sünkroonimine ebaõnnestus.",
 		"description": "[error] Üldine viga Tabside kasutajaga sünkroonimisel"
+	},
+	"error_failed_to_fetch": {
+		"message": "Väliste ressursside hankimine nurjus",
+		"description": "[viga] Kõne välisele veebisaidile ei õnnestunud"
 	},
 	"error_get_with_no_org": {
 		"message": "Tabs ei saa hankida, kui Org pole määratud.",
@@ -375,6 +387,10 @@
 		"message": "translator pole veel initsialiseeritud.",
 		"description": "[error] TranslationService ei olnud veel valmis"
 	},
+	"error_unknown_message": {
+		"message": "Vastu võetud tundmatu sõnum",
+		"description": "listenerilt on vastu võetud tundmatu sõnum"
+	},
 	"error_unknown_request": {
 		"message": "Tundmatu päring.",
 		"description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "minukohandatudorg",
 		"description": "kohatäide Uuenda Tab modaali jaoks"
+	},
+	"no_manifest_github": {
+		"message": "Kehtetu või puuduv GitHub homepage_url manifestis",
+		"description": "Manifesti homepage_url võti ei kasuta GitHubi linki"
 	},
 	"no_match": {
 		"message": "Ei vastanud ühelegi toimingule",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Laineline alljoonitus",
 		"description": "Kujundusstiili valik lainelise joone lisamiseks Tab'i teksti alla"
+	},
+	"update_available": {
+		"message": "Värskendus saadaval",
+		"description": "laienduse jaoks on saadaval uus värskendus"
 	},
 	"upload": {
 		"message": "Laadi üles",

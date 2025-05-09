@@ -29,13 +29,19 @@ import {
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
+	NO_RELEASE_NOTES,
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
+import {
+	bg_getCurrentBrowserTab,
+	bg_notify,
+	checkForUpdates,
+	exportHandler,
+} from "./utils.js";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
@@ -356,7 +362,7 @@ async function removeMenuItems() {
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
-async function checkAddRemoveContextMenus(what) {
+async function checkAddRemoveContextMenus(what, callback = null) {
 	try {
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 		if (browserTabUrl == null) {
@@ -368,6 +374,9 @@ async function checkAddRemoveContextMenus(what) {
 			await removeMenuItems();
 			await createMenuItems();
 			bg_notify({ what });
+			if (callback != null) {
+				callback();
+			}
 		} else {
 			await removeMenuItems();
 		}
@@ -406,14 +415,39 @@ BROWSER.runtime.onStartup.addListener(() =>
 	checkAddRemoveContextMenus("startup")
 );
 // when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener((_) => {
+BROWSER.runtime.onInstalled.addListener(async (details) => {
 	checkAddRemoveContextMenus("installed");
+	if (details.reason === "update") {
+		// the extension has been updated
+		// check user settings
+		const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
+		if (no_release_notes != null && no_release_notes.enabled === true) {
+			return;
+		}
+		// get the extension version
+		const manifest = BROWSER.runtime.getManifest();
+		const version = manifest.version;
+		// open github to show the release notes
+		const homepage = manifest.homepage_url;
+		// Validate homepage URL (must be GitHub)
+		if (!homepage || !homepage.includes("github.com")) {
+			console.error("no_manifest_github");
+			return;
+		}
+		BROWSER.tabs.create({
+			url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
+		});
+	}
+	/* TODO add tutorial on install
+    if (details.reason == "install") {
+    }
+    */
 });
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
-BROWSER.tabs.onHighlighted.addListener(() =>
-	debouncedCheckMenus("highlighted")
+BROWSER.tabs.onActivated.addListener(() =>
+	debouncedCheckMenus("highlighted", checkForUpdates)
 );
 //BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
 // when window changes
@@ -422,12 +456,6 @@ BROWSER.windows.onFocusChanged.addListener(() =>
 	checkAddRemoveContextMenus("focuschanged")
 );
 
-/* TODO add tutorial on install and link to current changes on update
-if (details.reason == "install") {
-}
-else if (details.reason == "update") {
-}
-*/
 /*
 // TODO update uninstall url
 BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {

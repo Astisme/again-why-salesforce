@@ -55,6 +55,10 @@
 		"message": "Potvrďte otvorenie tohto odkazu.",
 		"description": "[open-other-org-modal] žiadosť o potvrdenie od používateľa na otvorenie vytvoreného odkazu."
 	},
+	"confirm_update_extension": {
+		"message": "Nová verzia $extension_label je teraz k dispozícii!",
+		"description": "bola prijatá neznáma správa od poslucháča"
+	},
 	"continue": {
 		"message": "Pokračovať",
 		"description": "text pre tlačidlá, ktoré umožňujú vykonanie aktuálnej akcie"
@@ -159,6 +163,10 @@
 		"message": "Chyba pri pridávaní Tab.",
 		"description": "[chyba] Všeobecná chyba použitá pri pridávaní Tab"
 	},
+	"error_check_update": {
+		"message": "Chyba pri kontrole aktualizácií",
+		"description": "[chyba] všeobecná chyba pri kontrole aktualizácií rozšírenia"
+	},
 	"error_close_other_modal": {
 		"message": "Najprv zatvorte iné modal okno!",
 		"description": "[toast] Používateľ sa pokúsil otvoriť viac ako jedno modal okno"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Nepodarilo sa synchronizovať.",
 		"description": "[chyba] Všeobecná chyba, keď sa Tabs nepodarilo synchronizovať od používateľa"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nepodarilo sa načítať externé zdroje",
+		"description": "[chyba] Volanie na externú webovú stránku nebolo úspešné"
 	},
 	"error_get_with_no_org": {
 		"message": "Tab-y nemožno získať, ak nie je zadaná organizácia.",
@@ -375,6 +387,10 @@
 		"message": "prekladač ešte nebol inicializovaný.",
 		"description": "[chyba] TranslationService nebol pripravený"
 	},
+	"error_unknown_message": {
+		"message": "Prijatá neznáma správa",
+		"description": "bola prijatá neznáma správa od poslucháča"
+	},
 	"error_unknown_request": {
 		"message": "Neznáma požiadavka.",
 		"description": "[chyba] Všeobecná chyba po prijatí správy, ktorá nebola rozpoznaná"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "zástupný text pre modal na aktualizáciu Tab"
+	},
+	"no_manifest_github": {
+		"message": "Neplatná alebo chýbajúca homepage_url GitHubu v manifeste",
+		"description": "Kľúč homepage_url manifestu nepoužíva odkaz na GitHub"
 	},
 	"no_match": {
 		"message": "Nenašiel sa žiadny zodpovedajúci príkaz",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Vlnité podčiarknutie",
 		"description": "Možnosť dekoračného štýlu na aplikáciu vlnitého podčiarknutia na text Tabu"
+	},
+	"update_available": {
+		"message": "Aktualizácia k dispozícii",
+		"description": "k dispozícii je nová aktualizácia pre rozšírenie"
 	},
 	"upload": {
 		"message": "Nahraj",

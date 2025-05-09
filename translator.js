@@ -120,33 +120,22 @@ class TranslationService {
 
 	/**
 	 * Translate a key to the current language
-	 * @param {string|Array[string]} key - The translation key
+	 * @param {string} key - The translation key
 	 * @returns {string} Translated text
 	 */
-	async translate(key, language = this.currentLanguage, isError = false) {
-		if (Array.isArray(key)) {
-			const compoundTranslation = [];
-			for (const k of key) {
-				try {
-					compoundTranslation.push(
-						await this.translate(k, language, isError),
-					);
-				} catch (_) {
-					compoundTranslation.push(k);
-				}
-			}
-			return compoundTranslation.join(" ");
-		}
+	async _translate(key, connector = " ", isError = false) {
 		// Check language-specific cache first
-		if (this.caches[language]?.[key]?.message != null) {
-			return this.caches[language][key].message;
+		if (this.caches[this.currentLanguage]?.[key]?.message != null) {
+			return this.caches[this.currentLanguage][key].message;
 		}
-		const loadedLanguage = await this.loadLanguageFile(language);
+		const loadedLanguage = await this.loadLanguageFile(
+			this.currentLanguage,
+		);
 		let regionAgnosticLanguage = null;
-		const index = language.indexOf("_");
+		const index = this.currentLanguage.indexOf("_");
 		if (index > 0) {
 			regionAgnosticLanguage = await this.loadLanguageFile(
-				language.substring(0, index),
+				this.currentLanguage.substring(0, index),
 			);
 		}
 		// Get translation or fallback to region agnostic or fallback to default language
@@ -156,15 +145,47 @@ class TranslationService {
 		if (translation == null) {
 			let errorMsg = "error_missing_key"; // fallback
 			if (isError === false) {
-				errorMsg = await this.translate(
+				errorMsg = await this._translate(
 					errorMsg,
-					language,
+					connector,
 					true,
 				);
 			}
 			throw new Error(`${errorMsg}: ${key}`);
 		}
 		return translation;
+	}
+
+	async translate(key, connector = " ") {
+		// get all inner translations
+		if (Array.isArray(key)) {
+			const compoundTranslation = [];
+			for (const k of key) {
+				const kTranslate = await this.translate(k);
+				compoundTranslation.push(kTranslate);
+			}
+			return compoundTranslation.join(connector);
+		}
+		// key is not an Array
+		try {
+			const keyTranslate = await this._translate(key);
+			if (keyTranslate.indexOf("$") < 0) {
+				return keyTranslate;
+			}
+			let messageTranslated = "";
+			const words = keyTranslate.split(/\s+/);
+			for (const word of words) {
+				if (!word.startsWith("\$")) {
+					messageTranslated += ` ${word}`;
+					continue;
+				}
+				const innerTranslation = await this._translate(word.slice(1));
+				messageTranslated += ` ${innerTranslation}`;
+			}
+			return messageTranslated.slice(1);
+		} catch (_) {
+			return key;
+		}
 	}
 
 	/**
@@ -182,9 +203,8 @@ class TranslationService {
 			const [key, ...attributes] = toTranslateKey.split(
 				TranslationService.TRANSLATE_SEPARATOR,
 			);
-			const translation = await this.translate(
+			const translation = await this._translate(
 				key,
-				language,
 			);
 			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;

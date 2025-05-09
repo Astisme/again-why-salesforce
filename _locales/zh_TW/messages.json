@@ -55,6 +55,10 @@
 		"message": "確認開啟此連結。",
 		"description": "[open-other-org-modal] 向使用者請求確認以開啟所構建的連結"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label 的新版本現已可用！",
+		"description": "從偵聽器收到一個未知訊息"
+	},
 	"continue": {
 		"message": "繼續",
 		"description": "用於允許當前操作執行的按鈕的文字內容"
@@ -159,6 +163,10 @@
 		"message": "新增 Tab 時發生錯誤。",
 		"description": "[錯誤] 新增 Tab 時使用的一般錯誤"
 	},
+	"error_check_update": {
+		"message": "檢查更新時發生錯誤",
+		"description": "[錯誤] 檢查擴充功能更新時發生一般錯誤"
+	},
 	"error_close_other_modal": {
 		"message": "請先關閉其他模態視窗！",
 		"description": "[toast] 使用者嘗試開啟超過一個模態視窗"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "同步失敗。",
 		"description": "[錯誤] 從使用者同步 Tab 時發生一般錯誤"
+	},
+	"error_failed_to_fetch": {
+		"message": "無法獲取外部資源",
+		"description": "[錯誤] 呼叫外部網站失敗"
 	},
 	"error_get_with_no_org": {
 		"message": "若未指定 Org，無法取得 Tab。",
@@ -375,6 +387,10 @@
 		"message": "翻譯工具尚未初始化。",
 		"description": "[錯誤] TranslationService 尚未準備好"
 	},
+	"error_unknown_message": {
+		"message": "收到未知訊息",
+		"description": "從偵聽器收到一個未知訊息"
+	},
 	"error_unknown_request": {
 		"message": "未知請求。",
 		"description": "[錯誤] 收到無法辨識的訊息後的一般錯誤"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Update Tab 模態窗的佔位符"
+	},
+	"no_manifest_github": {
+		"message": "manifest 中無效或遺失的 GitHub homepage_url",
+		"description": "manifest 的 homepage_url 鍵未使用 GitHub 連結"
 	},
 	"no_match": {
 		"message": "Did not match any action",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "波浪底線",
 		"description": "為 Tab 文字添加波浪下劃線的裝飾樣式選項"
+	},
+	"update_available": {
+		"message": "有可用更新",
+		"description": "擴充功能有新的更新可用"
 	},
 	"upload": {
 		"message": "Upload",

@@ -55,6 +55,10 @@
 		"message": "Apstipriniet šīs saites atvēršanu.",
 		"description": "[atvērt_citu_org_modal] lūgt lietotāja apstiprinājumu, lai atvērtu izveidoto saiti."
 	},
+	"confirm_update_extension": {
+		"message": "Jauna $extension_label versija tagad ir pieejama!",
+		"description": "no klausītāja saņemta nezināma ziņa"
+	},
 	"continue": {
 		"message": "Turpināt",
 		"description": "textContent pogām, kas atļauj izpildīt pašreizējo darbību"
@@ -159,6 +163,10 @@
 		"message": "Kļūda pievienojot Tab.",
 		"description": "[kļūda] Vispārīga kļūda, ko izmanto, pievienojot Tab"
 	},
+	"error_check_update": {
+		"message": "Kļūda, pārbaudot atjauninājumus",
+		"description": "[kļūda] vispārēja kļūda, pārbaudot paplašinājuma atjauninājumus"
+	},
 	"error_close_other_modal": {
 		"message": "Lūdzu, vispirms aizveriet otru modālo logu!",
 		"description": "[paziņojums] Lietotājs mēģināja atvērt vairāk nekā 1 modālo logu"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Neizdevās sinhronizēt.",
 		"description": "[kļūda] Vispārīga kļūda, kad Tabs nevarēja sinhronizēt no lietotāja"
+	},
+	"error_failed_to_fetch": {
+		"message": "Neizdevās ielādēt ārējos resursus",
+		"description": "[kļūda] Zvans uz ārēju tīmekļa vietni nebija veiksmīgs"
 	},
 	"error_get_with_no_org": {
 		"message": "Nevar iegūt Tabs, ja nav norādīta Org.",
@@ -375,6 +387,10 @@
 		"message": "tulkotājs vēl nebija inicializēts.",
 		"description": "[kļūda] TranslationService nebija gatavs"
 	},
+	"error_unknown_message": {
+		"message": "Saņemta nezināma ziņa",
+		"description": "no klausītāja saņemta nezināma ziņa"
+	},
 	"error_unknown_request": {
 		"message": "Nezināms pieprasījums.",
 		"description": "[kļūda] Vispārīga kļūda pēc neatpazītas ziņas saņemšanas"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "manapielagotaorg",
 		"description": "aizvietotājs Atjaunināt Tab modālajam logam"
+	},
+	"no_manifest_github": {
+		"message": "Nederīgs vai trūkstošs GitHub homepage_url manifestā",
+		"description": "Manifesta homepage_url atslēga neizmanto GitHub saiti"
 	},
 	"no_match": {
 		"message": "Neatbilda nevienai darbībai",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Viļņots pasvītrojums",
 		"description": "Dekorācijas stila opcija viļņota pasvītrojuma pievienošanai Tab tekstam"
+	},
+	"update_available": {
+		"message": "Atjauninājums pieejams",
+		"description": "ir pieejams jauns atjauninājums paplašinājumam"
 	},
 	"upload": {
 		"message": "Augšupielādēt",

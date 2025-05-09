@@ -1,3 +1,7 @@
+body {
+	background-color: unset;
+}
+
 .tabContainer {
 	overflow-x: auto;
 	scrollbar-width: thin;

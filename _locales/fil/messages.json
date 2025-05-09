@@ -55,6 +55,10 @@
 		"message": "Kumpirmahin ang pagbubukas ng link na ito.",
 		"description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
 	},
+	"confirm_update_extension": {
+		"message": "Isang bagong bersyon ng $extension_label ay magagamit na!",
+		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
+	},
 	"continue": {
 		"message": "Magpatuloy",
 		"description": "textContent para sa mga button na nagpapahintulot sa kasalukuyang aksyon na maisakatuparan"
@@ -159,6 +163,10 @@
 		"message": "Error sa pagdagdag ng Tab.",
 		"description": "[error] Pangkalahatang error sa pagdagdag ng Tab"
 	},
+	"error_check_update": {
+		"message": "Error sa pagsusuri ng mga update",
+		"description": "[error] pangkalahatang error habang sinusuri ang mga update sa extension"
+	},
 	"error_close_other_modal": {
 		"message": "Isara muna ang ibang modal!",
 		"description": "[toast] Sinubukan ng user na buksan ang higit sa 1 modal"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Nabigo ang synchronization.",
 		"description": "[error] Pangkalahatang error sa pag-sync ng Tabs sa user"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nabigong kunin ang mga panlabas na mapagkukunan",
+		"description": "[error] Hindi nagtagumpay ang tawag sa isang panlabas na website"
 	},
 	"error_get_with_no_org": {
 		"message": "Hindi makakuha ng Tabs kung hindi tinukoy ang Org.",
@@ -375,6 +387,10 @@
 		"message": "hindi pa na-initialize ang translator.",
 		"description": "[error] Hindi pa handa ang TranslationService"
 	},
+	"error_unknown_message": {
+		"message": "Nakakatanggap ng hindi kilalang mensahe",
+		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
+	},
 	"error_unknown_request": {
 		"message": "Hindi kilalang kahilingan.",
 		"description": "[error] Pangkalahatang error pagkatapos makatanggap ng hindi kilalang mensahe"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "placeholder para sa Update Tab modal"
+	},
+	"no_manifest_github": {
+		"message": "Hindi balido o nawawalang GitHub homepage_url sa manifest",
+		"description": "Ang homepage_url key ng manifest ay hindi gumagamit ng GitHub link"
 	},
 	"no_match": {
 		"message": "Walang tumugmang aksyon",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Wavy Underline",
 		"description": "Pagpipilian ng estilo ng dekorasyon upang mag-apply ng wavy underline sa teksto ng Tab"
+	},
+	"update_available": {
+		"message": "May available na update",
+		"description": "may available na bagong update para sa extension"
 	},
 	"upload": {
 		"message": "Mag-upload",

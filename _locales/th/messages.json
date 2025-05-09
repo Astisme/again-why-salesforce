@@ -55,6 +55,10 @@
 		"message": "ยืนยันการเปิดลิงก์นี้",
 		"description": "[open-other-org-modal] ขอการยืนยันจากผู้ใช้เพื่อเปิดลิงก์ที่สร้างขึ้น"
 	},
+	"confirm_update_extension": {
+		"message": "เวอร์ชันใหม่ของ $extension_label พร้อมใช้งานแล้ว!",
+		"description": "ได้รับข้อความที่ไม่รู้จักจากผู้ฟัง"
+	},
 	"continue": {
 		"message": "ดำเนินการต่อ",
 		"description": "เนื้อความสำหรับปุ่มที่อนุญาตให้ดำเนินการปัจจุบันทำงาน"
@@ -159,6 +163,10 @@
 		"message": "ข้อผิดพลาดในการเพิ่ม Tab",
 		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะเพิ่ม Tab"
 	},
+	"error_check_update": {
+		"message": "ข้อผิดพลาดในการตรวจสอบการอัปเดต",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปขณะตรวจสอบการอัปเดตส่วนขยาย"
+	},
 	"error_close_other_modal": {
 		"message": "กรุณาปิดโมดอลอื่นก่อน!",
 		"description": "[toast] ผู้ใช้พยายามเปิดโมดอลมากกว่าหนึ่ง"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "согласовать ไม่สำเร็จ",
 		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปเมื่อ Tab ไม่สามารถ sincronizar จากผู้ใช้ได้"
+	},
+	"error_failed_to_fetch": {
+		"message": "ดึงข้อมูลทรัพยากรภายนอกไม่สำเร็จ",
+		"description": "[ข้อผิดพลาด] การเรียกใช้เว็บไซต์ภายนอกไม่สำเร็จ"
 	},
 	"error_get_with_no_org": {
 		"message": "ไม่สามารถรับ Tab ได้หาก Org ไม่ได้ระบุ",
@@ -375,6 +387,10 @@
 		"message": "ตัวแปลยังไม่ได้รับการเริ่มต้น.",
 		"description": "[ข้อผิดพลาด] TranslationService ยังไม่พร้อม"
 	},
+	"error_unknown_message": {
+		"message": "ได้รับข้อความที่ไม่รู้จัก",
+		"description": "ได้รับข้อความที่ไม่รู้จักจากผู้ฟัง"
+	},
 	"error_unknown_request": {
 		"message": "คำขอไม่ทราบ.",
 		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปหลังจากได้รับข้อความที่ไม่รู้จัก"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "placeholder สำหรับโมดอล Update Tab"
+	},
+	"no_manifest_github": {
+		"message": "GitHub homepage_url ใน manifest ไม่ถูกต้องหรือไม่พบ",
+		"description": "คีย์ homepage_url ของ manifest ไม่ได้ใช้ลิงก์ GitHub"
 	},
 	"no_match": {
 		"message": "Did not match any action",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "ขีดเส้นใต้แบบคลื่น",
 		"description": "ตัวเลือกรูปแบบการตกแต่งเพื่อใช้เส้นใต้แบบคลื่นกับข้อความ Tab"
+	},
+	"update_available": {
+		"message": "มีการอัปเดต",
+		"description": "มีการอัปเดตใหม่สำหรับส่วนขยาย"
 	},
 	"upload": {
 		"message": "Upload",

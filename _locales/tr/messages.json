@@ -55,6 +55,10 @@
 		"message": "Bu bağlantının açılmasını onaylayın.",
 		"description": "[başka-kuruluş-aç-modal] oluşturulan bağlantıyı açmak için kullanıcıdan onay isteyin."
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label yeni bir sürümü artık mevcut!",
+		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
+	},
 	"continue": {
 		"message": "Devam",
 		"description": "mevcut eylemin yürütülmesine izin veren düğmeler için textContent"
@@ -159,6 +163,10 @@
 		"message": "Tab eklenirken hata.",
 		"description": "[hata] Tab eklenirken kullanılan genel hata"
 	},
+	"error_check_update": {
+		"message": "Güncellemeler denetlenirken hata oluştu",
+		"description": "[hata] uzantı güncellemeleri denetlenirken genel hata"
+	},
 	"error_close_other_modal": {
 		"message": "Lütfen önce diğer modalı kapatın!",
 		"description": "[bildirim] Kullanıcı 1'den fazla modal açmaya çalıştı"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Senkronize edilemedi.",
 		"description": "[hata] Tabs kullanıcından senkronize edilemediğinde genel hata"
+	},
+	"error_failed_to_fetch": {
+		"message": "Harici kaynaklar alınamadı",
+		"description": "[hata] Harici bir web sitesine yapılan çağrı başarılı olmadı"
 	},
 	"error_get_with_no_org": {
 		"message": "Kuruluş belirtilmezse Tabs alınamaz.",
@@ -375,6 +387,10 @@
 		"message": "çevirmen henüz başlatılmadı.",
 		"description": "[hata] TranslationService hazır değildi"
 	},
+	"error_unknown_message": {
+		"message": "Bilinmeyen mesaj alındı",
+		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
+	},
 	"error_unknown_request": {
 		"message": "Bilinmeyen istek.",
 		"description": "[hata] Tanınmayan bir mesaj alındıktan sonra genel hata"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "benimözelkuruluşum",
 		"description": "Tab Güncelle modalı için yer tutucu"
+	},
+	"no_manifest_github": {
+		"message": "Manifestte geçersiz veya eksik GitHub homepage_url",
+		"description": "Manifestin homepage_url anahtarı bir GitHub bağlantısı kullanmıyor"
 	},
 	"no_match": {
 		"message": "Herhangi bir eylemle eşleşmedi",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Dalgalı Altı Çizili",
 		"description": "Sekme metnine dalgalı altı çizili uygulamak için dekorasyon stili seçeneği"
+	},
+	"update_available": {
+		"message": "Güncelleme mevcut",
+		"description": "uzantı için yeni bir güncelleme mevcut"
 	},
 	"upload": {
 		"message": "Yükle",

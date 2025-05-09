@@ -55,6 +55,10 @@
 		"message": "Потвърдете отварянето на този линк.",
 		"description": "[open-other-org-modal] заявка за потвърждение от потребителя за отваряне на конструирания линк."
 	},
+	"confirm_update_extension": {
+		"message": "Налична е нова версия на $extension_label!",
+		"description": "получено е неизвестно съобщение от слушател"
+	},
 	"continue": {
 		"message": "Продължи",
 		"description": "текст за бутоните, които позволяват изпълнението на текущото действие"
@@ -159,6 +163,10 @@
 		"message": "Грешка при добавяне на Tab.",
 		"description": "[error] Общa грешка при добавяне на Tab"
 	},
+	"error_check_update": {
+		"message": "Грешка при проверка за актуализации",
+		"description": "[грешка] обща грешка при проверка за актуализации на разширението"
+	},
 	"error_close_other_modal": {
 		"message": "Затвори първо другия прозорец!",
 		"description": "[toast] Потребителят се опита да отвори повече от един модален прозорец"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Синхронизацията се провали.",
 		"description": "[error] Общa грешка при синхронизиране на Tabs с потребителя"
+	},
+	"error_failed_to_fetch": {
+		"message": "Неуспешно извличане на външни ресурси",
+		"description": "[грешка] Извикването към външен уебсайт не беше успешно"
 	},
 	"error_get_with_no_org": {
 		"message": "Не може да се получат Tab, ако организацията не е посочена.",
@@ -375,6 +387,10 @@
 		"message": "translator все още не е инициализиран.",
 		"description": "[error] TranslationService не е бил готов"
 	},
+	"error_unknown_message": {
+		"message": "Получено неизвестно съобщение",
+		"description": "получено е неизвестно съобщение от слушател"
+	},
 	"error_unknown_request": {
 		"message": "Непознато запитване.",
 		"description": "[error] Общa грешка след получаване на непознато съобщение"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "заместител за модала за актуализиране на Tab"
+	},
+	"no_manifest_github": {
+		"message": "Невалиден или липсващ GitHub homepage_url в манифеста",
+		"description": "Ключът homepage_url в манифеста не използва GitHub връзка"
 	},
 	"no_match": {
 		"message": "Няма намерено съвпадение за действие",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Вълнообразно Подчертаване",
 		"description": "Опция за стил на декорация за прилагане на вълнообразно подчертаване върху текст на Tab"
+	},
+	"update_available": {
+		"message": "Налична актуализация",
+		"description": "налична е нова актуализация за разширението"
 	},
 	"upload": {
 		"message": "Качи",

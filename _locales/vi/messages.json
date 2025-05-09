@@ -55,6 +55,10 @@
 		"message": "Xác nhận mở liên kết này.",
 		"description": "[open-other-org-modal] Yêu cầu xác nhận từ người dùng để mở liên kết đã được tạo."
 	},
+	"confirm_update_extension": {
+		"message": "Phiên bản mới của $extension_label hiện đã có!",
+		"description": "một tin nhắn không xác định đã được nhận từ người nghe"
+	},
 	"continue": {
 		"message": "Tiếp tục",
 		"description": "textContent cho các nút cho phép hành động hiện tại thực thi"
@@ -159,6 +163,10 @@
 		"message": "Lỗi khi thêm Tab.",
 		"description": "[lỗi] Lỗi chung được sử dụng khi thêm Tab"
 	},
+	"error_check_update": {
+		"message": "Lỗi khi kiểm tra cập nhật",
+		"description": "[lỗi] lỗi chung khi kiểm tra cập nhật tiện ích mở rộng"
+	},
 	"error_close_other_modal": {
 		"message": "Vui lòng đóng modal khác trước!",
 		"description": "[toast] Đã cố mở nhiều modal cùng lúc."
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sync không thành công.",
 		"description": "[lỗi] Lỗi chung khi Tabs không thể đồng bộ hóa từ người dùng"
+	},
+	"error_failed_to_fetch": {
+		"message": "Không thể tải tài nguyên bên ngoài",
+		"description": "[lỗi] Cuộc gọi đến một trang web bên ngoài không thành công"
 	},
 	"error_get_with_no_org": {
 		"message": "Không thể lấy Tabs nếu không xác định Org.",
@@ -374,6 +386,10 @@
 		"message": "trình dịch chưa được khởi tạo.",
 		"description": "[lỗi] TranslationService chưa sẵn sàng"
 	},
+	"error_unknown_message": {
+		"message": "Đã nhận tin nhắn không xác định",
+		"description": "một tin nhắn không xác định đã được nhận từ người nghe"
+	},
 	"error_unknown_request": {
 		"message": "Yêu cầu không xác định.",
 		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo không được nhận dạng"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "placeholder cho modal Cập nhật Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url GitHub không hợp lệ hoặc bị thiếu trong manifest",
+		"description": "Khóa homepage_url của manifest không sử dụng liên kết GitHub"
 	},
 	"no_match": {
 		"message": "Không tìm thấy hành động phù hợp",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Gạch chân gợn sóng",
 		"description": "Tùy chọn kiểu trang trí để áp dụng gạch chân gợn sóng cho văn bản Tab"
+	},
+	"update_available": {
+		"message": "Cập nhật khả dụng",
+		"description": "một bản cập nhật mới cho tiện ích mở rộng có sẵn"
 	},
 	"upload": {
 		"message": "Tải lên",

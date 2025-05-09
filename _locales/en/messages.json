@@ -55,6 +55,10 @@
 		"message": "Confirm opening this link.",
 		"description": "[open-other-org-modal] request confirmation to the user to open the constructed link."
 	},
+	"confirm_update_extension": {
+		"message": "A new version of $extension_label is now available!",
+		"description": "an unknown message has been received from a listener"
+	},
 	"continue": {
 		"message": "Continue",
 		"description": "textContent for buttons that allow the current action to execute"
@@ -159,6 +163,10 @@
 		"message": "Error when adding Tab.",
 		"description": "[error] Generic error used while adding a Tab"
 	},
+	"error_check_update": {
+		"message": "Error checking for updates",
+		"description": "[error] generic error while checking for extension updates"
+	},
 	"error_close_other_modal": {
 		"message": "Close the other modal first!",
 		"description": "[toast] The user tried to open more than 1 modal"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Failed to sync.",
 		"description": "[error] Generic error when the Tabs could not get synced from the user"
+	},
+	"error_failed_to_fetch": {
+		"message": "Failed to fetch external resources",
+		"description": "[error] The call to an external website did not succeed"
 	},
 	"error_get_with_no_org": {
 		"message": "Cannot get Tabs if Org is not specified.",
@@ -374,6 +386,10 @@
 		"message": "translator was not yet initialized.",
 		"description": "[error] the TranslationService was not ready"
 	},
+	"error_unknown_message": {
+		"message": "Unknown message received",
+		"description": "an unknown message has been received from a listener"
+	},
 	"error_unknown_request": {
 		"message": "Unknown request.",
 		"description": "[error] Generic error after getting a message which was not recognized"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "placeholder for the Update Tab modal"
+	},
+	"no_manifest_github": {
+		"message": "Invalid or missing GitHub homepage_url in manifest",
+		"description": "The homepage_url key of the manifest does not use a GitHub link"
 	},
 	"no_match": {
 		"message": "Did not match any action",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Underline Wavy",
 		"description": "Decoration style option to apply a wavy underline to Tab text"
+	},
+	"update_available": {
+		"message": "Update available",
+		"description": "a new update for the extension is available"
 	},
 	"upload": {
 		"message": "Upload",

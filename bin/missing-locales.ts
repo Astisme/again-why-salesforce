@@ -88,8 +88,6 @@ function createKeySignature(keys: string[]): string {
 	return keys.sort().join(",");
 }
 
-const missingKeysKey = "missing-keys";
-
 /**
  * Main function to check all locale files against the English reference
  */
@@ -208,7 +206,7 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 		}
 	});
 	// Add English missing keys to the grouped report
-	groupedReport[missingKeysKey] = englishMissingKeys;
+	Object.assign(groupedReport, englishMissingKeys);
 	return groupedReport;
 }
 
@@ -226,7 +224,7 @@ function main() {
 		// Calculate total missing keys and locales with missing translations
 		let someMissingKeys = false;
 		for (const [key, group] of Object.entries(groupedReport)) {
-			if (key === missingKeysKey) continue;
+			if (!Number.isInteger(Number(key))) continue;
 			const localeGroup = group as LocaleMissingKeys;
 			if (localeGroup.locales.length > 0) {
 				someMissingKeys = true;

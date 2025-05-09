@@ -55,6 +55,10 @@
 		"message": "باز کردن این لینک را تأیید کنید.",
 		"description": "[مودال_بازکردن_سازمان_دیگر] درخواست تأیید از کاربر برای باز کردن لینک ساخته شده."
 	},
+	"confirm_update_extension": {
+		"message": "نسخه جدید $extension_label اکنون در دسترس است!",
+		"description": "یک پیام ناشناخته از شنونده دریافت شده است"
+	},
 	"continue": {
 		"message": "ادامه",
 		"description": "محتوای متنی برای دکمه‌هایی که اجازه اجرای عمل فعلی را می‌دهند"
@@ -159,6 +163,10 @@
 		"message": "خطا در افزودن Tab.",
 		"description": "[error] خطای عمومی در افزودن Tab"
 	},
+	"error_check_update": {
+		"message": "خطا در بررسی به‌روزرسانی‌ها",
+		"description": "[خطا] خطای عمومی هنگام بررسی به‌روزرسانی‌های افزونه"
+	},
 	"error_close_other_modal": {
 		"message": "لطفاً ابتدا مودال دیگر را ببندید!",
 		"description": "[اعلان_کوتاه] کاربر سعی کرد بیش از 1 مودال باز کند"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "همگام‌سازی ناموفق بود.",
 		"description": "[error] خطای عمومی در همگام‌سازی Tabs با کاربر"
+	},
+	"error_failed_to_fetch": {
+		"message": "دریافت منابع خارجی ناموفق بود",
+		"description": "[خطا] تماس با وب‌سایت خارجی موفقیت‌آمیز نبود"
 	},
 	"error_get_with_no_org": {
 		"message": "در صورت مشخص نشدن سازمان، نمی‌توان Tabs را دریافت کرد.",
@@ -375,6 +387,10 @@
 		"message": "translator هنوز مقداردهی اولیه نشده است.",
 		"description": "[error] سرویس ترجمه (TranslationService) آماده نبود"
 	},
+	"error_unknown_message": {
+		"message": "پیام ناشناخته دریافت شد",
+		"description": "یک پیام ناشناخته از شنونده دریافت شده است"
+	},
 	"error_unknown_request": {
 		"message": "درخواست ناشناخته.",
 		"description": "[error] خطای عمومی پس از دریافت پیام ناشناخته"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "سازمان_سفارشی_من",
 		"description": "متن جایگزین برای مودال به‌روزرسانی Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url نامعتبر یا گم شده گیت‌هاب در مانیفست",
+		"description": "کلید homepage_url مانیفست از لینک گیت‌هاب استفاده نمی‌کند"
 	},
 	"no_match": {
 		"message": "با هیچ عملی مطابقت نداشت",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "زیرخط موجی",
 		"description": "گزینه سبک تزئینی برای اعمال زیرخط موجی به متن Tab"
+	},
+	"update_available": {
+		"message": "به‌روزرسانی در دسترس است",
+		"description": "یک به‌روزرسانی جدید برای افزونه در دسترس است"
 	},
 	"upload": {
 		"message": "بارگذاری",

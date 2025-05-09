@@ -29,6 +29,7 @@ import {
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
+	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
@@ -715,6 +716,18 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	});
 }
 
+async function promptUpdateExtension({ version, link, oldversion } = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const confirm_msg = await translator.translate([
+		`${oldversion} → ${version}`,
+		"confirm_update_extension",
+		link,
+	], "\n");
+	if (confirm(confirm_msg)) {
+		open(link, "_blank");
+	}
+}
+
 // listen from saves from the action / background page
 BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 	if (message == null || message.what == null) {
@@ -724,6 +737,7 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 	allTabs = await ensureAllTabsAvailability();
 	try {
 		switch (message.what) {
+			// hot reload (from context-menus.js)
 			case "saved":
 			case "focused":
 			case "startup":
@@ -828,10 +842,16 @@ BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 					url: message.tabUrl,
 				});
 				break;
+			case WHAT_UPDATE_EXTENSION:
+				promptUpdateExtension(message);
+				break;
 			default:
 				if (message.what != "theme") {
 					showToast(
-						`Unknown message received ${message.what}`,
+						[
+							"error_unknown_message",
+							message.what,
+						],
 						false,
 						true,
 					);

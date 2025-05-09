@@ -55,6 +55,10 @@
 		"message": "Thibitisha kufungua kiungo hiki.",
 		"description": "[fungua-modal-org-nyingine] omba uthibitisho kutoka kwa mtumiaji ili kufungua kiungo kilichojengwa."
 	},
+	"confirm_update_extension": {
+		"message": "Toleo jipya la $extension_label sasa linapatikana!",
+		"description": "ujumbe usiojulikana umepokewa kutoka kwa msikilizaji"
+	},
 	"continue": {
 		"message": "Endelea",
 		"description": "textContent kwa vitufe vinavyoruhusu kitendo cha sasa kitekelezwe"
@@ -159,6 +163,10 @@
 		"message": "Hitilafu wakati wa kuongeza Tab.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuongeza Tab"
 	},
+	"error_check_update": {
+		"message": "Hitilafu wakati wa kuangalia masasisho",
+		"description": "[hitilafu] hitilafu ya jumla wakati wa kuangalia masasisho ya kiendelezi"
+	},
 	"error_close_other_modal": {
 		"message": "Funga modal nyingine kwanza!",
 		"description": "[toast] Mtumiaji alijaribu kufungua zaidi ya modal 1"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Imeshindwa sync.",
 		"description": "[hitilafu] Hitilafu ya jumla wakati Tab hazikuweza sincronizar kutoka kwa mtumiaji"
+	},
+	"error_failed_to_fetch": {
+		"message": "Imeshindwa kuchukua rasilimali za nje",
+		"description": "[hitilafu] Simu ya kwenda kwenye tovuti ya nje haikufanikiwa"
 	},
 	"error_get_with_no_org": {
 		"message": "Haiwezi kupata Tabs ikiwa Org haijaainishwa.",
@@ -375,6 +387,10 @@
 		"message": "mtafsiri bado hajaanzishwa.",
 		"description": "[hitilafu] TranslationService haikuwa tayari"
 	},
+	"error_unknown_message": {
+		"message": "Ujumbe usiojulikana umepokewa",
+		"description": "ujumbe usiojulikana umepokewa kutoka kwa msikilizaji"
+	},
 	"error_unknown_request": {
 		"message": "Ombi lisilojulikana.",
 		"description": "[hitilafu] Hitilafu ya jumla baada ya kupata ujumbe ambao haukutambuliwa"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "orgYanguMaalum",
 		"description": "placeholder kwa modal ya Sasisha Tab"
+	},
+	"no_manifest_github": {
+		"message": "GitHub homepage_url batili au haipo katika manifest",
+		"description": "Ufunguo wa homepage_url wa manifest hautumii kiungo cha GitHub"
 	},
 	"no_match": {
 		"message": "Haikulingana na kitendo chochote",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Pigia mstari wa mawimbi",
 		"description": "Chaguo la mtindo wa mapambo kwa kutumia mstari wa mawimbi kwenye maandishi ya Tab"
+	},
+	"update_available": {
+		"message": "Masasisho yanapatikana",
+		"description": "sasisho jipya la kiendelezi linapatikana"
 	},
 	"upload": {
 		"message": "Pakia",

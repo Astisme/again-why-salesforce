@@ -55,6 +55,10 @@
 		"message": "Conferma l'apertura di questo link.",
 		"description": "[open-other-org-modal] richiesta di conferma all'utente per aprire il link costruito."
 	},
+	"confirm_update_extension": {
+		"message": "Una nuova versione di $extension_label è ora disponibile!",
+		"description": "un messaggio sconosciuto è stato ricevuto da un listener"
+	},
 	"continue": {
 		"message": "Continua",
 		"description": "testo per i bottoni che permettono all'azione corrente di essere eseguita"
@@ -159,6 +163,10 @@
 		"message": "Errore durante l'aggiunta di Tab.",
 		"description": "[errore] Errore generico usato durante l'aggiunta di un Tab"
 	},
+	"error_check_update": {
+		"message": "Errore durante la verifica degli aggiornamenti",
+		"description": "[errore] errore generico durante la verifica degli aggiornamenti dell'estensione"
+	},
 	"error_close_other_modal": {
 		"message": "Chiudi prima l'altro modal!",
 		"description": "[toast] l'utente ha tentato di aprire più di un modal"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sincronizzazione fallita.",
 		"description": "[errore] Errore generico quando i Tabs non sono potuti essere sincronizzati dall'utente"
+	},
+	"error_failed_to_fetch": {
+		"message": "Impossibile recuperare risorse esterne",
+		"description": "[errore] La chiamata a un sito web esterno non è riuscita"
 	},
 	"error_get_with_no_org": {
 		"message": "Impossibile ottenere le Tab se l'Org non è specificato.",
@@ -374,6 +386,10 @@
 		"message": "il traduttore non era ancora inizializzato.",
 		"description": "[errore] il TranslationService non era pronto"
 	},
+	"error_unknown_message": {
+		"message": "Messaggio sconosciuto ricevuto",
+		"description": "un messaggio sconosciuto è stato ricevuto da un listener"
+	},
 	"error_unknown_request": {
 		"message": "Richiesta sconosciuta.",
 		"description": "[errore] Errore generico dopo aver ricevuto un messaggio non riconosciuto"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "lamiaorgpersonale",
 		"description": "placeholder per il modal di aggiornamento Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url di GitHub non valido o mancante nel manifest",
+		"description": "La chiave homepage_url del manifest non utilizza un link GitHub"
 	},
 	"no_match": {
 		"message": "Nessuna azione corrispondente trovata",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Sottolineatura ondulata",
 		"description": "Opzione di stile decorativo per applicare una sottolineatura ondulata al testo della Tab"
+	},
+	"update_available": {
+		"message": "Aggiornamento disponibile",
+		"description": "è disponibile un nuovo aggiornamento per l'estensione"
 	},
 	"upload": {
 		"message": "Carica",

@@ -55,6 +55,10 @@
 		"message": "このリンクを開くことを確認してください。",
 		"description": "[open-other-org-modal] 作成されたリンクを開くためにユーザーに確認を求めます"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label の新しいバージョンが利用可能です！",
+		"description": "リスナーから不明なメッセージが受信されました"
+	},
 	"continue": {
 		"message": "続行",
 		"description": "現在の操作の実行を許可するボタンのtextContent"
@@ -159,6 +163,10 @@
 		"message": "Tab の追加中にエラーが発生しました。",
 		"description": "[エラー] Tab の追加中に使用される一般的なエラー"
 	},
+	"error_check_update": {
+		"message": "アップデート確認中にエラーが発生しました",
+		"description": "[エラー] 拡張機能のアップデート確認中の一般的なエラー"
+	},
 	"error_close_other_modal": {
 		"message": "まず他のモーダルを閉じてください！",
 		"description": "[toast] 複数のモーダルが開かれようとしました"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "同期に失敗しました。",
 		"description": "[エラー] ユーザーから Tabs を同期できなかった場合の一般的なエラー"
+	},
+	"error_failed_to_fetch": {
+		"message": "外部リソースの取得に失敗しました",
+		"description": "[エラー] 外部ウェブサイトへの呼び出しが成功しませんでした"
 	},
 	"error_get_with_no_org": {
 		"message": "Org が指定されないと Tabs を取得できません。",
@@ -374,6 +386,10 @@
 		"message": "翻訳ツールはまだ初期化されていません。",
 		"description": "[エラー] TranslationService が準備できていませんでした"
 	},
+	"error_unknown_message": {
+		"message": "不明なメッセージを受信しました",
+		"description": "リスナーから不明なメッセージが受信されました"
+	},
 	"error_unknown_request": {
 		"message": "不明なリクエスト。",
 		"description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Update Tab モーダルのプレースホルダー"
+	},
+	"no_manifest_github": {
+		"message": "マニフェスト内のGitHub homepage_urlが無効または欠落しています",
+		"description": "マニフェストのhomepage_urlキーはGitHubリンクを使用していません"
 	},
 	"no_match": {
 		"message": "一致するアクションが見つかりませんでした",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "波線下線",
 		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
+	},
+	"update_available": {
+		"message": "アップデート利用可能",
+		"description": "拡張機能の新しいアップデートが利用可能です"
 	},
 	"upload": {
 		"message": "アップロード",

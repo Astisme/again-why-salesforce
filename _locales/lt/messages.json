@@ -55,6 +55,10 @@
 		"message": "Patvirtinkite šios nuorodos atidarymą.",
 		"description": "[atidaryti_kitą_org_modal] prašyti vartotojo patvirtinimo atidaryti sukurtą nuorodą."
 	},
+	"confirm_update_extension": {
+		"message": "Nauja $extension_label versija dabar pasiekiama!",
+		"description": "iš klausytojo gauta nežinoma žinutė"
+	},
 	"continue": {
 		"message": "Tęsti",
 		"description": "mygtukų, leidžiančių vykdyti dabartinį veiksmą, textContent"
@@ -159,6 +163,10 @@
 		"message": "Klaida pridedant Tab.",
 		"description": "[klaida] Bendra klaida naudojama pridedant Tab"
 	},
+	"error_check_update": {
+		"message": "Klaida tikrinant atnaujinimus",
+		"description": "[klaida] bendra klaida tikrinant plėtinio atnaujinimus"
+	},
 	"error_close_other_modal": {
 		"message": "Pirmiausia uždarykite kitą modalinį langą!",
 		"description": "[pranešimas] Vartotojas bandė atidaryti daugiau nei 1 modalinį langą"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sinchronizuoti nepavyko.",
 		"description": "[klaida] Bendra klaida, kai Tabs nepavyko sinchronizuoti iš vartotojo"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nepavyko gauti išorinių resursų",
+		"description": "[klaida] Skambutis į išorinę svetainę nebuvo sėkmingas"
 	},
 	"error_get_with_no_org": {
 		"message": "Negalima gauti Tabs, jei Org nenurodyta.",
@@ -375,6 +387,10 @@
 		"message": "vertėjas dar nebuvo inicializuotas.",
 		"description": "[klaida] TranslationService nebuvo paruoštas"
 	},
+	"error_unknown_message": {
+		"message": "Gauta nežinoma žinutė",
+		"description": "iš klausytojo gauta nežinoma žinutė"
+	},
 	"error_unknown_request": {
 		"message": "Nežinoma užklausa.",
 		"description": "[klaida] Bendra klaida gavus neatpažintą žinutę"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "manopasirinktineorg",
 		"description": "užpildas Atnaujinti Tab modaliniam langui"
+	},
+	"no_manifest_github": {
+		"message": "Neteisingas arba trūkstamas GitHub homepage_url manifeste",
+		"description": "Manifesto homepage_url raktas nenaudoja GitHub nuorodos"
 	},
 	"no_match": {
 		"message": "Neatitiko jokio veiksmo",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Banguotas pabraukimas",
 		"description": "Dekoravimo stiliaus parinktis banguoto pabraukimo taikymui Tab tekstui"
+	},
+	"update_available": {
+		"message": "Atnaujinimas pasiekiamas",
+		"description": "pasiekiamas naujas plėtinio atnaujinimas"
 	},
 	"upload": {
 		"message": "Įkelti",

@@ -55,6 +55,10 @@
 		"message": "આ લિંક ખોલવાનું സ്ഥിരീകരો.",
 		"description": "[open-other-org-modal] બનાવેલા લિંકને ખોલવા માટે વપરાશકર્તાની પુષ્ટિ માંગતી વિનંતી"
 	},
+	"confirm_update_extension": {
+		"message": "$extension_label નું નવું સંસ્કરણ હવે ઉપલબ્ધ છે!",
+		"description": "એક શ્રોતા પાસેથી અજાણ્યો સંદેશ પ્રાપ્ત થયો છે"
+	},
 	"continue": {
 		"message": "ચાલુ રાખો",
 		"description": "તે બટનો માટેનું લખાણ જે વર્તમાન કામગીરીને મંજૂરી આપે છે"
@@ -159,6 +163,10 @@
 		"message": "Tab ઉમેરતી વખતે ભૂલ.",
 		"description": "[error] Tab ઉમેરતી વખતે સામાન્ય ભૂલ"
 	},
+	"error_check_update": {
+		"message": "અપડેટ્સ તપાસવામાં ભૂલ",
+		"description": "[ભૂલ] એક્સટેન્શન અપડેટ્સ તપાસતી વખતે સામાન્ય ભૂલ"
+	},
 	"error_close_other_modal": {
 		"message": "પહેલાં બીજું મોડલ બંધ કરો!",
 		"description": "[toast] વપરાશકર્તાએ એકથી વધુ મોડલ ખોલવાનો પ્રયાસ કર્યો"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "સિંક નિષ્ફળ થયું.",
 		"description": "[error] Tabs યૂઝર સાથે સિંક કરતી વખતે સામાન્ય ભૂલ"
+	},
+	"error_failed_to_fetch": {
+		"message": "બાહ્ય સંસાધનો મેળવવામાં નિષ્ફળ",
+		"description": "[ભૂલ] બાહ્ય વેબસાઇટ પર કૉલ સફળ થયો નથી"
 	},
 	"error_get_with_no_org": {
 		"message": "જો Org નિર્દિષ્ટ ન થાય તો Tab મેળવી શકાતું નથી.",
@@ -375,6 +387,10 @@
 		"message": "translator હજી ઈનિશિયલાઈઝ થયું નથી.",
 		"description": "[error] TranslationService રેડી નથી"
 	},
+	"error_unknown_message": {
+		"message": "અજાણ્યો સંદેશ પ્રાપ્ત થયો",
+		"description": "એક શ્રોતા પાસેથી અજાણ્યો સંદેશ પ્રાપ્ત થયો છે"
+	},
 	"error_unknown_request": {
 		"message": "અજ્ઞાત વિનંતી.",
 		"description": "[error] અજ્ઞાત સંદેશ મળ્યા પછી સામાન્ય ભૂલ"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "Update Tab modal માટેનું પ્લેસહોલ્ડર"
+	},
+	"no_manifest_github": {
+		"message": "મેનિફેસ્ટમાં અમાન્ય અથવા ખૂટતી GitHub homepage_url",
+		"description": "મેનિફેસ્ટની homepage_url કી GitHub લિંકનો ઉપયોગ કરતી નથી"
 	},
 	"no_match": {
 		"message": "Did not match any action",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "લહેરદાર અંડરલાઇન",
 		"description": "Tab લખાણ નીચે તરંગી અંડરલાઇન લાગુ કરવા માટે ડેકોરેશન શૈલી વિકલ્પ"
+	},
+	"update_available": {
+		"message": "અપડેટ ઉપલબ્ધ",
+		"description": "એક્સટેન્શન માટે નવું અપડેટ ઉપલબ્ધ છે"
 	},
 	"upload": {
 		"message": "Upload",

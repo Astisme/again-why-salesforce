@@ -55,6 +55,10 @@
 		"message": "Confirme abrir este enlace.",
 		"description": "[open-other-org-modal] Solicita al usuario confirmar la apertura del enlace construido."
 	},
+	"confirm_update_extension": {
+		"message": "¡Una nueva versión de $extension_label ya está disponible!",
+		"description": "se ha recibido un mensaje desconocido de un listener"
+	},
 	"continue": {
 		"message": "Continuar",
 		"description": "Texto para botones que permiten que se ejecute la acción actual"
@@ -159,6 +163,10 @@
 		"message": "Error al agregar Tab.",
 		"description": "[error] error genérico al agregar una Tab"
 	},
+	"error_check_update": {
+		"message": "Error al comprobar actualizaciones",
+		"description": "[error] error genérico al comprobar actualizaciones de la extensión"
+	},
 	"error_close_other_modal": {
 		"message": "¡Cierre primero el otro modal!",
 		"description": "[toast] Se intentó abrir más de un modal."
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "La sincronización falló.",
 		"description": "[error] error genérico al sincronizar las Tabs con el usuario"
+	},
+	"error_failed_to_fetch": {
+		"message": "No se pudieron obtener recursos externos",
+		"description": "[error] La llamada a un sitio web externo no tuvo éxito"
 	},
 	"error_get_with_no_org": {
 		"message": "No se pueden obtener Tabs sin especificar la Org.",
@@ -374,6 +386,10 @@
 		"message": "translator aún no se ha inicializado.",
 		"description": "[error] TranslationService no estaba listo"
 	},
+	"error_unknown_message": {
+		"message": "Mensaje desconocido recibido",
+		"description": "se ha recibido un mensaje desconocido de un listener"
+	},
 	"error_unknown_request": {
 		"message": "Solicitud desconocida.",
 		"description": "[error] error genérico después de recibir un mensaje no reconocido"
@@ -465,6 +481,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "marcador de posición para el modal Actualizar Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url de GitHub no válida o faltante en el manifiesto",
+		"description": "La clave homepage_url del manifiesto no utiliza un enlace de GitHub"
 	},
 	"no_match": {
 		"message": "No se encontró ninguna acción coincidente",
@@ -765,6 +785,10 @@
 	"underline_wavy": {
 		"message": "Subrayado ondulado",
 		"description": "Opción de estilo de decoración para aplicar un subrayado ondulado al texto de Tab"
+	},
+	"update_available": {
+		"message": "Actualización disponible",
+		"description": "hay una nueva actualización disponible para la extensión"
 	},
 	"upload": {
 		"message": "Subir",

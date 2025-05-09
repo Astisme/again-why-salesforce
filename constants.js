@@ -1,5 +1,28 @@
 "use strict";
-export const ISCHROME = typeof browser == "undefined";
+/**
+ * Detects the browser name from the navigator object
+ * @returns {string|undefined} - 'chrome', 'firefox', 'safari', or undefined
+ */
+function detectBrowser() {
+	const userAgent = navigator.userAgent.toLowerCase();
+	// Firefox detection (including Firefox-based browsers)
+	if (userAgent.indexOf("firefox") !== -1) {
+		return "firefox";
+	}
+	// Chrome detection (including Edge and other Chromium-based browsers)
+	if (userAgent.indexOf("chrome") !== -1 || userAgent.indexOf("edg") !== -1) {
+		return "chrome";
+	}
+	// Safari detection (after checking for Chrome since Chrome includes "safari" in its user agent)
+	if (userAgent.indexOf("safari") !== -1) {
+		return "safari";
+	}
+	return undefined;
+}
+export const BROWSER_NAME = detectBrowser();
+export const ISCHROME = BROWSER_NAME === "chrome";
+export const ISFIREFOX = BROWSER_NAME === "firefox";
+export const ISSAFARI = BROWSER_NAME === "safari";
 export const BROWSER = ISCHROME ? chrome : browser;
 export const EXTENSION_LABEL = BROWSER.i18n.getMessage("extension_label");
 export const EXTENSION_NAME = "again-why-salesforce";
@@ -97,6 +120,9 @@ export const POPUP_OPEN_LOGIN = "popup_open_login";
 export const POPUP_OPEN_SETUP = "popup_open_setup";
 export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
 export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
+export const NO_RELEASE_NOTES = "no_release_notes";
+export const NO_UPDATE_NOTIFICATION = "no_update_notification";
+// decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
 export const TAB_ORG_STYLE = "tab_org_style";
@@ -193,7 +219,7 @@ export function getCssRule(styleId, value = null) {
 		//case TAB_STYLE_WAVY:
 		//return "text-decoration: underline wavy;";
 		case "user-set":
-			break;
+			return "";
 		default:
 			console.error(styleId);
 			return "";
@@ -236,3 +262,4 @@ export const CMD_OPEN_SETTINGS = "cmd-open-settings";
 export const CMD_OPEN_OTHER_ORG = "cmd-open-other-org";
 export const CMD_IMPORT = "cmd-import";
 export const CMD_EXPORT_ALL = "cmd-export-all";
+export const WHAT_UPDATE_EXTENSION = "update-extension";

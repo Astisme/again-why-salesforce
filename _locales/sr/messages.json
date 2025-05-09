@@ -55,6 +55,10 @@
 		"message": "Potvrdite otvaranje ovog linka.",
 		"description": "[open-other-org-modal] zahtev za potvrdu od korisnika za otvaranje konstruisanog linka."
 	},
+	"confirm_update_extension": {
+		"message": "Нова верзија $extension_label је сада доступна!",
+		"description": "примљена је непозната порука од слушаоца"
+	},
 	"continue": {
 		"message": "Nastavi",
 		"description": "sadržaj teksta za dugmad koja dozvoljavaju izvršenje trenutne akcije"
@@ -159,6 +163,10 @@
 		"message": "Грешка приликом додавања Tab.",
 		"description": "[грешка] Општа грешка која се користи приликом додавања Tab"
 	},
+	"error_check_update": {
+		"message": "Грешка приликом провере ажурирања",
+		"description": "[грешка] општа грешка приликом провере ажурирања проширења"
+	},
 	"error_close_other_modal": {
 		"message": "Prvo zatvori drugi modal!",
 		"description": "[toast] Korisnik je pokušao da otvori više od jednog modala"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Синхронизација није успела.",
 		"description": "[грешка] Општа грешка када Tabs нису могли да се синхронизују од корисника"
+	},
+	"error_failed_to_fetch": {
+		"message": "Неуспешно преузимање спољних ресурса",
+		"description": "[грешка] Позив спољном веб-сајту није био успешан"
 	},
 	"error_get_with_no_org": {
 		"message": "Ne mogu se dohvatiti Tabovi ako organizacija nije specificirana.",
@@ -375,6 +387,10 @@
 		"message": "преводилац још није био иницијализован.",
 		"description": "[грешка] TranslationService није био спреман"
 	},
+	"error_unknown_message": {
+		"message": "Примљена непозната порука",
+		"description": "примљена је непозната порука од слушаоца"
+	},
 	"error_unknown_request": {
 		"message": "Непознат захтев.",
 		"description": "[грешка] Општа грешка након пријема поруке која није препозната"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "zamenik za modal za ažuriranje Tab-a"
+	},
+	"no_manifest_github": {
+		"message": "Неважећи или недостајући GitHub homepage_url у манифесту",
+		"description": "Кључ homepage_url манифеста не користи GitHub везу"
 	},
 	"no_match": {
 		"message": "Nije pronađena odgovarajuća akcija",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Подвучено Таласасто",
 		"description": "Опција стила декорације за примену таласастог подвлачења на текст Tab-а"
+	},
+	"update_available": {
+		"message": "Доступно ажурирање",
+		"description": "доступно је ново ажурирање за проширење"
 	},
 	"upload": {
 		"message": "Otpremi",

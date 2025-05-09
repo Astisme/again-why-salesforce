@@ -55,6 +55,10 @@
 		"message": "Potrdite odpiranje te povezave.",
 		"description": "[odpri_drugo_org_modalno_okno] zahtevaj potrditev od uporabnika za odpiranje ustvarjene povezave."
 	},
+	"confirm_update_extension": {
+		"message": "Nova različica $extension_label je zdaj na voljo!",
+		"description": "od poslušalca je bilo prejeto neznano sporočilo"
+	},
 	"continue": {
 		"message": "Nadaljuj",
 		"description": "textContent za gumbe, ki omogočajo izvedbo trenutnega dejanja"
@@ -159,6 +163,10 @@
 		"message": "Napaka pri dodajanju Tab.",
 		"description": "[napaka] Splošna napaka, uporabljena pri dodajanju Tab"
 	},
+	"error_check_update": {
+		"message": "Napaka pri preverjanju posodobitev",
+		"description": "[napaka] splošna napaka pri preverjanju posodobitev razširitve"
+	},
 	"error_close_other_modal": {
 		"message": "Najprej zaprite drugo modalno okno!",
 		"description": "[toast] Uporabnik je poskusil odpreti več kot 1 modalno okno"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Sinhronizacija ni uspela.",
 		"description": "[napaka] Splošna napaka, ko Tab-ov ni bilo mogoče sinhronizirati od uporabnika"
+	},
+	"error_failed_to_fetch": {
+		"message": "Pridobivanje zunanjih virov ni uspelo",
+		"description": "[napaka] Klic na zunanje spletno mesto ni bil uspešen"
 	},
 	"error_get_with_no_org": {
 		"message": "Ni mogoče pridobiti Tabs, če Org ni določena.",
@@ -375,6 +387,10 @@
 		"message": "prevajalnik še ni bil inicializiran.",
 		"description": "[napaka] TranslationService ni bil pripravljen"
 	},
+	"error_unknown_message": {
+		"message": "Prejeto neznano sporočilo",
+		"description": "od poslušalca je bilo prejeto neznano sporočilo"
+	},
 	"error_unknown_request": {
 		"message": "Neznana zahteva.",
 		"description": "[napaka] Splošna napaka po prejemu sporočila, ki ni bilo prepoznano"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mojalastnaorg",
 		"description": "ograda za modalno okno Posodobi Tab"
+	},
+	"no_manifest_github": {
+		"message": "Neveljavna ali manjkajoča GitHub homepage_url v manifestu",
+		"description": "Ključ homepage_url manifesta ne uporablja povezave GitHub"
 	},
 	"no_match": {
 		"message": "Ni se ujemalo z nobenim dejanjem",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Valovito podčrtano",
 		"description": "Možnost sloga okrasitve za uporabo valovitega podčrtovanja na besedilu Taba"
+	},
+	"update_available": {
+		"message": "Posodobitev na voljo",
+		"description": "na voljo je nova posodobitev razširitve"
 	},
 	"upload": {
 		"message": "Naloži",

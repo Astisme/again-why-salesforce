@@ -55,6 +55,10 @@
 		"message": "Erősítse meg ennek a linknek a megnyitását.",
 		"description": "[open-other-org-modal] felhasználói megerősítés kérése a generált link megnyitásához."
 	},
+	"confirm_update_extension": {
+		"message": "A $extension_label új verziója már elérhető!",
+		"description": "ismeretlen üzenet érkezett egy hallgatótól"
+	},
 	"continue": {
 		"message": "Folytatás",
 		"description": "szöveg azokhoz a gombokhoz, melyek lehetővé teszik a jelenlegi művelet végrehajtását"
@@ -159,6 +163,10 @@
 		"message": "Hiba Tab hozzáadásakor.",
 		"description": "[error] Általános hiba Tab hozzáadásakor"
 	},
+	"error_check_update": {
+		"message": "Hiba a frissítések ellenőrzésekor",
+		"description": "[hiba] általános hiba a bővítményfrissítések ellenőrzésekor"
+	},
 	"error_close_other_modal": {
 		"message": "Előbb zárja be a másik ablakot!",
 		"description": "[toast] A felhasználó több modális ablakot próbált megnyitni"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "Szinkronizálás sikertelen.",
 		"description": "[error] Általános hiba a Tab-ek felhasználóval való szinkronizálásakor"
+	},
+	"error_failed_to_fetch": {
+		"message": "Külső erőforrások lekérése sikertelen",
+		"description": "[hiba] A külső webhelyre irányuló hívás nem sikerült"
 	},
 	"error_get_with_no_org": {
 		"message": "Tabokat nem lehet lekérni, ha a szervezet nincs megadva.",
@@ -375,6 +387,10 @@
 		"message": "translator még nincs inicializálva.",
 		"description": "[error] A TranslationService még nem volt készen"
 	},
+	"error_unknown_message": {
+		"message": "Ismeretlen üzenet érkezett",
+		"description": "ismeretlen üzenet érkezett egy hallgatótól"
+	},
 	"error_unknown_request": {
 		"message": "Ismeretlen kérés.",
 		"description": "[error] Általános hiba ismeretlen üzenet fogadása után"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "mycustomorg",
 		"description": "helyettesítő az Update Tab modális ablakhoz"
+	},
+	"no_manifest_github": {
+		"message": "Érvénytelen vagy hiányzó GitHub homepage_url a manifesztben",
+		"description": "A manifeszt homepage_url kulcsa nem használ GitHub linket"
 	},
 	"no_match": {
 		"message": "Nem egyezik semmilyen művelet",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "Hullámos Aláhúzás",
 		"description": "Dekorációs stílus opció hullámos aláhúzás alkalmazásához a Tab szövegen"
+	},
+	"update_available": {
+		"message": "Frissítés elérhető",
+		"description": "új frissítés érhető el a bővítményhez"
 	},
 	"upload": {
 		"message": "Feltöltés",

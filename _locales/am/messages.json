@@ -55,6 +55,10 @@
 		"message": "ይህን ሊንክ መክፈት ያረጋግጡ።",
 		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] የተገነባውን ሊንክ ለመክፈት ከተጠቃሚው ማረጋገጫ ይጠይቁ።"
 	},
+	"confirm_update_extension": {
+		"message": "የ$extension_label አዲስ ስሪት አሁን ይገኛል!",
+		"description": "ያልታወቀ መልዕክት ከአድማጭ ተቀብሏል"
+	},
 	"continue": {
 		"message": "ቀጥል",
 		"description": "የአሁኑን ድርጊት እንዲፈጸም የሚፈቅዱ የአዝራሮች የጽሑፍ ይዘት"
@@ -159,6 +163,10 @@
 		"message": "Tab ሲያክል ስህተት።",
 		"description": "[error] Tab ሲያክሉ የተፈጠረ አጠቃላይ ስህተት"
 	},
+	"error_check_update": {
+		"message": "ማሻሻያዎችን ሲፈተሽ ስህተት ተከስቷል",
+		"description": "[ስህተት] የኤክስቴንሽን ማሻሻያዎችን ሲፈተሽ የተለመደ ስህተት"
+	},
 	"error_close_other_modal": {
 		"message": "እባክዎ መጀመሪያ ሌላውን ሞዳል ዝጋ!",
 		"description": "[ቶስት] ተጠቃሚው ከ1 በላይ ሞዳል ለመክፈት ሞክሯል"
@@ -194,6 +202,10 @@
 	"error_failed_sync": {
 		"message": "ስምርት መዛመድ አልተሳካም።",
 		"description": "[error] ሰብስ በተጠቃሚው ላይ Tabs ሊዛመዱ አልቻሉም"
+	},
+	"error_failed_to_fetch": {
+		"message": "ውጫዊ ምንጮችን ለማምጣት አልተሳካም",
+		"description": "[ስህተት] ወደ ውጫዊ ድህረ ገጽ የተደረገው ጥሪ አልተሳካም"
 	},
 	"error_get_with_no_org": {
 		"message": "ድርጅት ካልተገለጸ Tabs ማግኘት አይቻልም።",
@@ -375,6 +387,10 @@
 		"message": "translator አልተጀመረም።",
 		"description": "[error] የTranslationService መነሻ አልተዘጋጀም"
 	},
+	"error_unknown_message": {
+		"message": "ያልታወቀ መልዕክት ተቀብሏል",
+		"description": "ያልታወቀ መልዕክት ከአድማጭ ተቀብሏል"
+	},
 	"error_unknown_request": {
 		"message": "ያልታወቀ ትእዛዝ።",
 		"description": "[error] እርዳታ ሲጠየቅ ያልታወቀ መልዕክት የተቀበለ ስህተት"
@@ -466,6 +482,10 @@
 	"mycustomorg": {
 		"message": "የኔብጁድርጅት",
 		"description": "ለ Tab አዘምን ሞዳል ቦታ ያዥ"
+	},
+	"no_manifest_github": {
+		"message": "በማኒፌስት ውስጥ ልክ ያልሆነ ወይም የሌለ የጊትሀብ homepage_url",
+		"description": "የማኒፌስቱ homepage_url ቁልፍ የጊትሀብ ማገናኛን አይጠቀምም"
 	},
 	"no_match": {
 		"message": "ከማንኛውም ድርጊት ጋር አልተዛመደም",
@@ -766,6 +786,10 @@
 	"underline_wavy": {
 		"message": "በመስመር ሞጎጮ",
 		"description": "በTab ጽሑፍ ላይ በመስመር ሞጎጮ መስመር የማቆሚያ የቅርጽ አማራጭ"
+	},
+	"update_available": {
+		"message": "ማሻሻያ ይገኛል",
+		"description": "ለኤክስቴንሽኑ አዲስ ማሻሻያ ይገኛል"
 	},
 	"upload": {
 		"message": "ስቀል",
