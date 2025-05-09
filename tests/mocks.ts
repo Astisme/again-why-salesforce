@@ -129,8 +129,9 @@ globalThis.chrome = mockBrowser as any;
 globalThis.browser = mockBrowser as any;
 
 const mockElements = [
-	{ getAttribute: () => "hello+-+textContent", textContent: "" },
-	{ getAttribute: () => "goodbye+-+textContent", textContent: "" },
+	{ getAttribute: () => "hello", textContent: "thiswillbeoverwritten" },
+	{ getAttribute: () => "goodbye+-+title", textContent: "thisiskept", title: "thiswillbeoverwritten" },
+	{ getAttribute: () => "weather+-+title+-+textContent", textContent: "thiswillbeoverwritten", title: "thiswillbeoverwritten" },
 ];
 globalThis.document = {
 	querySelectorAll: () => mockElements,
@@ -147,6 +148,12 @@ export const translations = {
 		"goodbye": {
 			"message": "Goodbye",
 		},
+		"weather": {
+			"message": "Weather",
+		},
+		"world": {
+			"message": "$hello World",
+		},
 		"error_missing_key": {
 			"message": "Key not found anywhere",
 		},
@@ -156,6 +163,12 @@ export const translations = {
 			"message": "Bonjour",
 		},
 		// goodbye is missing to test missing key default to english
+		"weather": {
+			"message": "Météo",
+		},
+		"world": {
+			"message": "$hello Monde",
+		},
 	},
 };
 globalThis.fetch = (path) => ({
