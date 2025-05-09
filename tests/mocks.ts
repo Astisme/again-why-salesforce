@@ -130,8 +130,16 @@ globalThis.browser = mockBrowser as any;
 
 const mockElements = [
 	{ getAttribute: () => "hello", textContent: "thiswillbeoverwritten" },
-	{ getAttribute: () => "goodbye+-+title", textContent: "thisiskept", title: "thiswillbeoverwritten" },
-	{ getAttribute: () => "weather+-+title+-+textContent", textContent: "thiswillbeoverwritten", title: "thiswillbeoverwritten" },
+	{
+		getAttribute: () => "goodbye+-+title",
+		textContent: "thisiskept",
+		title: "thiswillbeoverwritten",
+	},
+	{
+		getAttribute: () => "weather+-+title+-+textContent",
+		textContent: "thiswillbeoverwritten",
+		title: "thiswillbeoverwritten",
+	},
 ];
 globalThis.document = {
 	querySelectorAll: () => mockElements,

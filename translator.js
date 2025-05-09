@@ -123,12 +123,14 @@ class TranslationService {
 	 * @param {string} key - The translation key
 	 * @returns {string} Translated text
 	 */
-	async _translate(key, connector = " ",  isError = false) {
+	async _translate(key, connector = " ", isError = false) {
 		// Check language-specific cache first
 		if (this.caches[this.currentLanguage]?.[key]?.message != null) {
 			return this.caches[this.currentLanguage][key].message;
 		}
-		const loadedLanguage = await this.loadLanguageFile(this.currentLanguage);
+		const loadedLanguage = await this.loadLanguageFile(
+			this.currentLanguage,
+		);
 		let regionAgnosticLanguage = null;
 		const index = this.currentLanguage.indexOf("_");
 		if (index > 0) {
@@ -145,8 +147,8 @@ class TranslationService {
 			if (isError === false) {
 				errorMsg = await this._translate(
 					errorMsg,
-                    connector,
-                    true,
+					connector,
+					true,
 				);
 			}
 			throw new Error(`${errorMsg}: ${key}`);
@@ -154,36 +156,37 @@ class TranslationService {
 		return translation;
 	}
 
-    async translate(key, connector = " "){
-        // get all inner translations
+	async translate(key, connector = " ") {
+		// get all inner translations
 		if (Array.isArray(key)) {
 			const compoundTranslation = [];
 			for (const k of key) {
-                const kTranslate = await this.translate(k);
-                compoundTranslation.push(kTranslate);
+				const kTranslate = await this.translate(k);
+				compoundTranslation.push(kTranslate);
 			}
 			return compoundTranslation.join(connector);
 		}
-        // key is not an Array
-        try {
-            const keyTranslate = await this._translate(key);
-            if(keyTranslate.indexOf("$") < 0)
-                return keyTranslate;
-            let messageTranslated = "";
-            const words = keyTranslate.split(/\s+/);
-            for(const word of words){
-                if(!word.startsWith("\$")){
-                    messageTranslated += ` ${word}`;
-                    continue;
-                }
-                const innerTranslation = await this._translate(word.slice(1));
-                messageTranslated += ` ${innerTranslation}`;
-            }
-            return messageTranslated.slice(1);
-        } catch (_) {
-            return key;
-        }
-    }
+		// key is not an Array
+		try {
+			const keyTranslate = await this._translate(key);
+			if (keyTranslate.indexOf("$") < 0) {
+				return keyTranslate;
+			}
+			let messageTranslated = "";
+			const words = keyTranslate.split(/\s+/);
+			for (const word of words) {
+				if (!word.startsWith("\$")) {
+					messageTranslated += ` ${word}`;
+					continue;
+				}
+				const innerTranslation = await this._translate(word.slice(1));
+				messageTranslated += ` ${innerTranslation}`;
+			}
+			return messageTranslated.slice(1);
+		} catch (_) {
+			return key;
+		}
+	}
 
 	/**
 	 * Update all translatable elements on the page

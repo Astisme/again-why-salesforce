@@ -1,7 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import {
-	assertEquals,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { mockBrowser, translations } from "./mocks.ts";
 declare global {
 	var chrome: typeof mockBrowser;
@@ -159,5 +157,9 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 		throw new Error("Network error");
 	};
 	const errorResult = await service.loadLanguageFile("es");
-	assertEquals(errorResult, translations.en, "Should return fallback language on error");
+	assertEquals(
+		errorResult,
+		translations.en,
+		"Should return fallback language on error",
+	);
 });

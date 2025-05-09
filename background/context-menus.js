@@ -29,14 +29,19 @@ import {
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
+	NO_RELEASE_NOTES,
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
-    NO_RELEASE_NOTES,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { bg_getCurrentBrowserTab, bg_notify, checkForUpdates, exportHandler } from "./utils.js";
+import {
+	bg_getCurrentBrowserTab,
+	bg_notify,
+	checkForUpdates,
+	exportHandler,
+} from "./utils.js";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
@@ -359,18 +364,19 @@ async function removeMenuItems() {
  */
 async function checkAddRemoveContextMenus(what, callback = null) {
 	try {
-        const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-        if (browserTabUrl == null) {
-            return;
-        }
+		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+		if (browserTabUrl == null) {
+			return;
+		}
 		if (
 			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
 		) {
 			await removeMenuItems();
 			await createMenuItems();
 			bg_notify({ what });
-            if(callback != null)
-                callback();
+			if (callback != null) {
+				callback();
+			}
 		} else {
 			await removeMenuItems();
 		}
@@ -411,27 +417,28 @@ BROWSER.runtime.onStartup.addListener(() =>
 // when the extension is installed / updated
 BROWSER.runtime.onInstalled.addListener(async (details) => {
 	checkAddRemoveContextMenus("installed");
-    if(details.reason === "update"){
-        // the extension has been updated
-        // check user settings
-        const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
-        if(no_release_notes != null && no_release_notes.enabled === true)
-            return;
-        // get the extension version
-        const manifest = BROWSER.runtime.getManifest();
-        const version = manifest.version;
-        // open github to show the release notes
-        const homepage = manifest.homepage_url;
-        // Validate homepage URL (must be GitHub)
-        if (!homepage || !homepage.includes('github.com')) {
-            console.error('no_manifest_github');
-            return;
-        }
-        BROWSER.tabs.create({
-            url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
-        });
-    }
-    /* TODO add tutorial on install
+	if (details.reason === "update") {
+		// the extension has been updated
+		// check user settings
+		const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
+		if (no_release_notes != null && no_release_notes.enabled === true) {
+			return;
+		}
+		// get the extension version
+		const manifest = BROWSER.runtime.getManifest();
+		const version = manifest.version;
+		// open github to show the release notes
+		const homepage = manifest.homepage_url;
+		// Validate homepage URL (must be GitHub)
+		if (!homepage || !homepage.includes("github.com")) {
+			console.error("no_manifest_github");
+			return;
+		}
+		BROWSER.tabs.create({
+			url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
+		});
+	}
+	/* TODO add tutorial on install
     if (details.reason == "install") {
     }
     */
@@ -439,11 +446,15 @@ BROWSER.runtime.onInstalled.addListener(async (details) => {
 // when the extension is activated by the BROWSER
 self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
 // when the tab changes
-BROWSER.tabs.onActivated.addListener(() => debouncedCheckMenus("highlighted", checkForUpdates));
+BROWSER.tabs.onActivated.addListener(() =>
+	debouncedCheckMenus("highlighted", checkForUpdates)
+);
 //BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
 // when window changes
 //BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
-BROWSER.windows.onFocusChanged.addListener(() => checkAddRemoveContextMenus("focuschanged"));
+BROWSER.windows.onFocusChanged.addListener(() =>
+	checkAddRemoveContextMenus("focuschanged")
+);
 
 /*
 // TODO update uninstall url

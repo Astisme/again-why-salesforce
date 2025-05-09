@@ -7,6 +7,8 @@ import {
 	getSettings,
 	getStyleSettings,
 	LINK_NEW_BROWSER,
+	NO_RELEASE_NOTES,
+	NO_UPDATE_NOTIFICATION,
 	ORG_TAB_STYLE_KEY,
 	POPUP_LOGIN_NEW_TAB,
 	POPUP_OPEN_LOGIN,
@@ -16,8 +18,6 @@ import {
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
-	NO_RELEASE_NOTES,
-	NO_UPDATE_NOTIFICATION,
 	TAB_GENERIC_STYLE,
 	TAB_ON_LEFT,
 	TAB_ORG_STYLE,
@@ -69,7 +69,9 @@ const popup_login_new_tab_el = document.getElementById(POPUP_LOGIN_NEW_TAB);
 const popup_setup_new_tab_el = document.getElementById(POPUP_SETUP_NEW_TAB);
 const tab_on_left_el = document.getElementById(TAB_ON_LEFT);
 const no_release_notes_el = document.getElementById(NO_RELEASE_NOTES);
-const no_update_notification_el = document.getElementById(NO_UPDATE_NOTIFICATION);
+const no_update_notification_el = document.getElementById(
+	NO_UPDATE_NOTIFICATION,
+);
 const user_language_select = document.getElementById(USER_LANGUAGE);
 
 const generalContainer = document.getElementById("general-container");
@@ -843,8 +845,8 @@ const allCheckboxes = [
 	popup_login_new_tab_el,
 	popup_setup_new_tab_el,
 	tab_on_left_el,
-    no_release_notes_el,
-    no_update_notification_el,
+	no_release_notes_el,
+	no_update_notification_el,
 ];
 
 let generalSettingsListenersSet = false;

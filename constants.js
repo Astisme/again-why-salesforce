@@ -4,20 +4,20 @@
  * @returns {string|undefined} - 'chrome', 'firefox', 'safari', or undefined
  */
 function detectBrowser() {
-  const userAgent = navigator.userAgent.toLowerCase();
-  // Firefox detection (including Firefox-based browsers)
-  if (userAgent.indexOf('firefox') !== -1) {
-    return 'firefox';
-  }
-  // Chrome detection (including Edge and other Chromium-based browsers)
-  if (userAgent.indexOf('chrome') !== -1 || userAgent.indexOf('edg') !== -1) {
-    return 'chrome';
-  }
-  // Safari detection (after checking for Chrome since Chrome includes "safari" in its user agent)
-  if (userAgent.indexOf('safari') !== -1) {
-    return 'safari';
-  }
-    return undefined;
+	const userAgent = navigator.userAgent.toLowerCase();
+	// Firefox detection (including Firefox-based browsers)
+	if (userAgent.indexOf("firefox") !== -1) {
+		return "firefox";
+	}
+	// Chrome detection (including Edge and other Chromium-based browsers)
+	if (userAgent.indexOf("chrome") !== -1 || userAgent.indexOf("edg") !== -1) {
+		return "chrome";
+	}
+	// Safari detection (after checking for Chrome since Chrome includes "safari" in its user agent)
+	if (userAgent.indexOf("safari") !== -1) {
+		return "safari";
+	}
+	return undefined;
 }
 export const BROWSER_NAME = detectBrowser();
 export const ISCHROME = BROWSER_NAME === "chrome";

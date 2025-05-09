@@ -1,6 +1,13 @@
 "use strict";
-import { WHAT_UPDATE_EXTENSION, BROWSER, BROWSER_NAME, EXTENSION_NAME, ISCHROME, NO_UPDATE_NOTIFICATION, } from "/constants.js";
-import { bg_getStorage, bg_getSettings } from "./background.js";
+import {
+	BROWSER,
+	BROWSER_NAME,
+	EXTENSION_NAME,
+	ISCHROME,
+	NO_UPDATE_NOTIFICATION,
+	WHAT_UPDATE_EXTENSION,
+} from "/constants.js";
+import { bg_getSettings, bg_getStorage } from "./background.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -120,61 +127,81 @@ export function exportHandler(tabs = null) {
 
 let checked = false;
 export async function checkForUpdates() {
-    if(checked)
-        return;
-    checked = true;
-    // check user settings
-    const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
-    if(no_update_notification != null && no_update_notification.enabled === true)
-        return;
-    function isNewerVersion(latest, current) {
-        const latestParts = latest.split('.').map(Number);
-        const currentParts = current.split('.').map(Number);
-        for (let i = 0; i < Math.max(latestParts.length, currentParts.length); i++) {
-            const latestPart = latestParts[i] || 0;
-            const currentPart = currentParts[i] || 0;
-            if (latestPart > currentPart) {
-                return true;
-            } else if (latestPart < currentPart) {
-                return false;
-            }
-        }
-        return false; // Versions are equal
-    }
-  try {
-    const manifest = BROWSER.runtime.getManifest();
-    const currentVersion = manifest.version;
-    const homepageUrl = manifest.homepage_url;
-      // Parse GitHub username and repo from homepage URL
-      const urlParts = homepageUrl?.split('github.com/');
-      // Validate homepage URL (must be GitHub)
-    if (!homepageUrl || !homepageUrl.includes('github.com') || urlParts.length < 2) {
-      console.error('no_manifest_github');
-      return;
-    }
-    const repoPath = urlParts[1].replace(/\.git$/, '');
-    // Fetch latest release data from GitHub API
-    const response = await fetch(`https://api.github.com/repos/${repoPath}/releases`);
-    if (!response.ok) {
-      console.error('error_failed_to_fetch', response.status);
-      return;
-    }
-    const releases = await response.json();
-    // Find the latest non-prerelease version
-    const latestVersion = releases.find(release => !release.prerelease && release.tag_name.startsWith(BROWSER_NAME)
-    ).tag_name.replace(/^.*-v/, '');
-    // Compare versions and open homepage if update is available
-    if (isNewerVersion(latestVersion, currentVersion)) {
-      console.log(["update_available", currentVersion, "→", latestVersion]);
-        bg_notify({
-            what: WHAT_UPDATE_EXTENSION,
-            oldversion: currentVersion,
-            version: latestVersion,
-            link: homepageUrl,
-            //link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
-        });
-    }
-  } catch (error) {
-    console.error('error_check_update', error);
-  }
+	if (checked) {
+		return;
+	}
+	checked = true;
+	// check user settings
+	const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
+	if (
+		no_update_notification != null &&
+		no_update_notification.enabled === true
+	) {
+		return;
+	}
+	function isNewerVersion(latest, current) {
+		const latestParts = latest.split(".").map(Number);
+		const currentParts = current.split(".").map(Number);
+		for (
+			let i = 0;
+			i < Math.max(latestParts.length, currentParts.length);
+			i++
+		) {
+			const latestPart = latestParts[i] || 0;
+			const currentPart = currentParts[i] || 0;
+			if (latestPart > currentPart) {
+				return true;
+			} else if (latestPart < currentPart) {
+				return false;
+			}
+		}
+		return false; // Versions are equal
+	}
+	try {
+		const manifest = BROWSER.runtime.getManifest();
+		const currentVersion = manifest.version;
+		const homepageUrl = manifest.homepage_url;
+		// Parse GitHub username and repo from homepage URL
+		const urlParts = homepageUrl?.split("github.com/");
+		// Validate homepage URL (must be GitHub)
+		if (
+			!homepageUrl || !homepageUrl.includes("github.com") ||
+			urlParts.length < 2
+		) {
+			console.error("no_manifest_github");
+			return;
+		}
+		const repoPath = urlParts[1].replace(/\.git$/, "");
+		// Fetch latest release data from GitHub API
+		const response = await fetch(
+			`https://api.github.com/repos/${repoPath}/releases`,
+		);
+		if (!response.ok) {
+			console.error("error_failed_to_fetch", response.status);
+			return;
+		}
+		const releases = await response.json();
+		// Find the latest non-prerelease version
+		const latestVersion = releases.find((release) =>
+			!release.prerelease && release.tag_name.startsWith(BROWSER_NAME)
+		).tag_name.replace(/^.*-v/, "");
+		// Compare versions and open homepage if update is available
+		if (isNewerVersion(latestVersion, currentVersion)) {
+			console.log([
+				"update_available",
+				currentVersion,
+				"→",
+				latestVersion,
+			]);
+			bg_notify({
+				what: WHAT_UPDATE_EXTENSION,
+				oldversion: currentVersion,
+				version: latestVersion,
+				link: homepageUrl,
+				//link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
+			});
+		}
+	} catch (error) {
+		console.error("error_check_update", error);
+	}
 }
