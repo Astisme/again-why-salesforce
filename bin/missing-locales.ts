@@ -88,8 +88,6 @@ function createKeySignature(keys: string[]): string {
 	return keys.sort().join(",");
 }
 
-const missingKeysKey = "missing-keys";
-
 /**
  * Main function to check all locale files against the English reference
  */
