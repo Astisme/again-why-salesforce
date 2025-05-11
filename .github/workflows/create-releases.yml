@@ -60,10 +60,15 @@ jobs:
 
             - name: Create Safari Release
               if: ${{ env.BROWSER == 'safari' }}
-              uses: ./.github/workflows/package-safari.yml@${{ github.ref }} 
+              uses: actions/workflow-dispatch@v1
               with:
-                version: ${{ env.VERSION }}
-                triggering_tag: ${{ env.TRIGGERING_TAG }}
-                release_notes: ${{ env.RELEASE_NOTES }}
-                browser_version_name: ${{ env.BROWSER_VERSION_NAME }}
-                prerelease: ${{ env.PRERELEASE }}
+                workflow: package-safari.yml
+                ref: ${{ github.ref }}
+                inputs: |
+                  {
+                    "version": "${{ env.VERSION }}",
+                    "triggering_tag": "${{ env.TRIGGERING_TAG }}",
+                    "release_notes": "${{ env.RELEASE_NOTES }}",
+                    "browser_version_name": "${{ env.BROWSER_VERSION_NAME }}",
+                    "prerelease": "${{ env.PRERELEASE }}"
+                  }
