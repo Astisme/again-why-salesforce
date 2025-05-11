@@ -1,0 +1,111 @@
+name: Build & Package Safari Web Extension
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Version number'
+        required: true
+        type: string
+      triggering_tag:
+        description: "Tag that launched the workflow"
+        required: true
+        type: string
+      release_notes:
+        description: "Path to Release Notes file"
+        required: true
+        type: string
+      browser_version_name:
+        description: "Name of Browser with version to build"
+        required: true
+        type: string
+      prerelease:
+        description: "Whether to make this a prerelease"
+        required: true
+        type: boolean
+
+jobs:
+  build-and-package:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      EXTENSION_SRC: ./my-web-extension      # Path to your unconverted web extension
+      XCODE_PROJ: SafariExtension.xcodeproj  # Xcode project name created by converter
+      SCHEME: SafariExtensionApp             # Scheme that builds the macOS app + .appex
+      APP_NAME: SafariExtensionApp.app       # The resulting .app bundle name
+      VOLUME_NAME: "SafariExtensionInstaller"
+      DMG_NAME: "SafariExtension.dmg"
+      IDENTIFIER: "com.whysalesforce.again"
+      VERSION: ${{ github.event.inputs.version }}
+      TRIGGERING_TAG: ${{ github.event.inputs.triggering_tag }}
+      RELEASE_NOTES: ${{ github.event.inputs.release_notes }}
+      BROWSER_VERSION_NAME: ${{ github.event.inputs.broswer_version_name }}
+      PRERELEASE: ${{ github.event.inputs.prerelease }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Convert Web Extension → Safari App Extension
+        run: |
+          xcrun safari-web-extension-converter "$EXTENSION_SRC" \
+            --project-location . \
+            --macos-version-minimum 11.0 \
+            --no-open \
+            --bundle-identifier "$IDENTIFIER"
+
+      - name: Build macOS App Archive (unsigned)
+        run: |
+          xcodebuild clean archive \
+            -project "$XCODE_PROJ" \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -archivePath "$PWD/build/AppArchive" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Extract .app and .appex
+        run: |
+          mkdir -p output
+          # copy the .app bundle
+          cp -R build/AppArchive.xcarchive/Products/Applications/"$APP_NAME" output/
+          # find and copy the .appex inside
+          find output/"$APP_NAME"/Contents/PlugIns -name "*.appex" -exec cp -R {} output/ \;
+
+      - name: Create drag-and-drop .dmg
+        run: |
+          mkdir -p dmg_staging/"$VOLUME_NAME"
+          cp -R output/"$APP_NAME" dmg_staging/"$VOLUME_NAME"/
+          ln -s /Applications dmg_staging/"$VOLUME_NAME"/Applications
+          # optional: copy a background image into dmg_staging if you have one
+          hdiutil create \
+            -volname "$VOLUME_NAME" \
+            -srcfolder dmg_staging/"$VOLUME_NAME" \
+            -ov -format UDZO \
+            "$DMG_NAME"
+
+      - name: Create Safari Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ env.BROWSER_VERSION_NAME }}
+          body: See release notes at ${{ env.RELEASE_NOTES }}.
+          body_path: ${{ env.RELEASE_NOTES }}
+          generate_release_notes: true
+          make_latest: true
+          tag_name: ${{ env.TRIGGERING_TAG }}
+          prerelease: ${{ env.PRERELEASE }}
+          files: ${{ DMG_NAME }}
+
+            #- name: Upload artifacts
+            #uses: actions/upload-artifact@v3
+            #with:
+            #name: safari-extension-packages
+            #path: |
+            ##output/"$APP_NAME"
+            #output/*.appex
+            #"$DMG_NAME"

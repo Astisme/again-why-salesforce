@@ -43,9 +43,11 @@ jobs:
                   deno-version: v2.x
 
             - name: Build Extension
+              if: ${{ env.BROWSER }} != "safari"
               run: deno task build-${{ env.BROWSER }}
 
             - name: Create ${{ env.BROWSER }} Release
+              if: ${{ env.BROWSER }} != "safari"
               uses: softprops/action-gh-release@v2
               with:
                 name: ${{ env.BROWSER_VERSION_NAME }}
@@ -56,3 +58,13 @@ jobs:
                 tag_name: ${{ env.TRIGGERING_TAG }}
                 prerelease: ${{ env.PRERELEASE }}
                 files: ${{ env.ZIP_NAME }}
+
+            - name: Create Safari Release
+              if: ${{ env.BROWSER }} == "safari"
+              uses: ./.github/workflows/package-extension
+              with:
+                version: ${{ env.VERSION }}
+                triggering_tag: ${{ env.TRIGGERING_TAG }}
+                release_notes: ${{ env.RELEASE_NOTES }}
+                browser_version_name: ${{ env.BROWSER_VERSION_NAME }}
+                prerelease: ${{ env.PRERELEASE }}
