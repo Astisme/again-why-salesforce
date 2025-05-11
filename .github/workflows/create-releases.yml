@@ -60,7 +60,7 @@ jobs:
 
             - name: Create Safari Release
               if: ${{ env.BROWSER == 'safari' }}
-              uses: ./.github/workflows/package-extension
+              uses: ./.github/workflows/package-safari.yml@${{ github.ref }}
               with:
                 version: ${{ env.VERSION }}
                 triggering_tag: ${{ env.TRIGGERING_TAG }}
