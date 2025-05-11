@@ -1,29 +1,12 @@
-name: Build & Package Safari Web Extension
+name: Create Safari Release
 
 on:
-  workflow_dispatch:
-  workflow_call:
-    inputs:
-      version:
-        description: 'Version number'
-        required: true
-        type: string
-      triggering_tag:
-        description: "Tag that launched the workflow"
-        required: true
-        type: string
-      release_notes:
-        description: "Path to Release Notes file"
-        required: true
-        type: string
-      browser_version_name:
-        description: "Name of Browser with version to build"
-        required: true
-        type: string
-      prerelease:
-        description: "Whether to make this a prerelease"
-        required: true
-        type: boolean
+  push:
+    tags:
+      - "safari-v*.*.*"
+
+permissions:
+    contents: write
 
 jobs:
   build-and-package:
@@ -45,15 +28,43 @@ jobs:
       RELEASE_NOTES: ${{ github.event.inputs.release_notes }}
       BROWSER_VERSION_NAME: ${{ github.event.inputs.broswer_version_name }}
       PRERELEASE: ${{ github.event.inputs.prerelease }}
+      CONVERTER_PATH="/Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter"
 
     steps:
-      - name: Checkout repository
+      - name: Setup repo
         uses: actions/checkout@v4
+
+      - name: Define variables
+        run: |
+          AWSF=awsf
+          TAG="${GITHUB_REF_NAME}"
+          echo "TRIGGERING_TAG=$TAG" >> $GITHUB_ENV
+          # Extract substring before '-v'
+          BROWSER=${TAG%%-v*}
+          echo "BROWSER=$BROWSER" >> $GITHUB_ENV
+          # Get version from manifest
+          MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)
+          BROWSER_VERSION_NAME="$AWSF-$BROWSER-v$MANIFEST_VERSION"
+          # Extract substring after '-v'
+          TAG_VERSION=${TAG##*-v}
+          echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+          # Extract substring before any additional '-' (like '-alpha')
+          PURE_VERSION=${TAG_VERSION%%-*}
+          echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
+          echo "ZIP_NAME=bin/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+            deno-version: v2.x
+
+      - name: Build Extension
+        run: deno task build-${{ env.BROWSER }}
 
       - name: Convert Web Extension → Safari App Extension
         run: |
-          xcrun safari-web-extension-converter "$EXTENSION_SRC" \
-            --project-location . \
+          "$CONVERTER_PATH" "$EXTENSION_SRC" \
+            --project-location safari \
             --macos-version-minimum 11.0 \
             --no-open \
             --bundle-identifier "$IDENTIFIER"
