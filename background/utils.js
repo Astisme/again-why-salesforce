@@ -5,8 +5,8 @@ import {
 	EXTENSION_NAME,
 	ISCHROME,
 	NO_UPDATE_NOTIFICATION,
+	SETTINGS_KEY,
 	WHAT_UPDATE_EXTENSION,
-    SETTINGS_KEY,
 } from "/constants.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
@@ -130,12 +130,14 @@ export async function checkForUpdates() {
 	// check user settings
 	const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
 	if (
-        no_update_notification != null &&
-        (
-            no_update_notification.enabled === true || // the user does not want to be notified
-            Math.floor((new Date() - new Date(no_update_notification.date)) / (1000 * 60 * 60 * 24)) <= 7 // the date difference is less than a week
-            
-        )
+		no_update_notification != null &&
+		(
+			no_update_notification.enabled === true || // the user does not want to be notified
+			Math.floor(
+					(new Date() - new Date(no_update_notification.date)) /
+						(1000 * 60 * 60 * 24),
+				) <= 7 // the date difference is less than a week
+		)
 	) {
 		return;
 	}
@@ -157,8 +159,12 @@ export async function checkForUpdates() {
 		}
 		return false; // Versions are equal
 	}
-    // set last date saved as today
-    bg_setStorage([{id: NO_UPDATE_NOTIFICATION, date: new Date().toJSON()}], null, SETTINGS_KEY);
+	// set last date saved as today
+	bg_setStorage(
+		[{ id: NO_UPDATE_NOTIFICATION, date: new Date().toJSON() }],
+		null,
+		SETTINGS_KEY,
+	);
 	try {
 		const manifest = BROWSER.runtime.getManifest();
 		const currentVersion = manifest.version;

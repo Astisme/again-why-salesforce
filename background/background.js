@@ -108,8 +108,8 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 					);
 					if (existingItems.length > 0) {
 						existingItems.forEach((existing) =>
-                            Object.assign(existing, item)
-                        );
+							Object.assign(existing, item)
+						);
 					} else {
 						settingsArray.push(item);
 					}
