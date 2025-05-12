@@ -28,7 +28,7 @@ jobs:
       RELEASE_NOTES: ${{ github.event.inputs.release_notes }}
       BROWSER_VERSION_NAME: ${{ github.event.inputs.broswer_version_name }}
       PRERELEASE: ${{ github.event.inputs.prerelease }}
-      CONVERTER_PATH="/Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter"
+      CONVERTER_PATH: "/Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter"
 
     steps:
       - name: Setup repo
