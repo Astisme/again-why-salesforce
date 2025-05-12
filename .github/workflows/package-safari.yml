@@ -16,12 +16,12 @@ jobs:
         shell: bash
 
     env:
-      EXTENSION_SRC: ./my-web-extension      # Path to your unconverted web extension
-      XCODE_PROJ: SafariExtension.xcodeproj  # Xcode project name created by converter
-      SCHEME: SafariExtensionApp             # Scheme that builds the macOS app + .appex
-      APP_NAME: SafariExtensionApp.app       # The resulting .app bundle name
-      VOLUME_NAME: "SafariExtensionInstaller"
-      DMG_NAME: "SafariExtension.dmg"
+      EXTENSION_SRC: .      # Path to your unconverted web extension
+      XCODE_PROJ: AgainWhySalesforce.xcodeproj  # Xcode project name created by converter
+      SCHEME: AgainWhySalesforce             # Scheme that builds the macOS app + .appex
+      APP_NAME: AgainWhySalesforce.app       # The resulting .app bundle name
+      VOLUME_NAME: "AgainWhySalesforceInstaller"
+      DMG_NAME: "AgainWhySalesforce.dmg"
       IDENTIFIER: "com.whysalesforce.again"
       VERSION: ${{ github.event.inputs.version }}
       TRIGGERING_TAG: ${{ github.event.inputs.triggering_tag }}
@@ -64,7 +64,7 @@ jobs:
       - name: Convert Web Extension → Safari App Extension
         run: |
           "$CONVERTER_PATH" "$EXTENSION_SRC" \
-            --project-location safari \
+            --project-location bin \
             --macos-version-minimum 11.0 \
             --no-open \
             --bundle-identifier "$IDENTIFIER"
