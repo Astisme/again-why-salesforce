@@ -43,7 +43,7 @@ jobs:
           BROWSER=${TAG%%-v*}
           echo "BROWSER=$BROWSER" >> $GITHUB_ENV
           # Get version from manifest
-          MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)
+          MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' manifest/template-manifest.json)
           BROWSER_VERSION_NAME="$AWSF-$BROWSER-v$MANIFEST_VERSION"
           # Extract substring after '-v'
           TAG_VERSION=${TAG##*-v}
