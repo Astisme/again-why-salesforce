@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "safari-v*.*.*"
+      - "safari-v*.*.*-*"
 
 permissions:
     contents: write
