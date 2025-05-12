@@ -6,9 +6,6 @@ on:
       - "chrome-v*.*.*"
       - "firefox-v*.*.*"
       - "edge-v*.*.*"
-      - "chrome-v*.*.*-*"
-      - "firefox-v*.*.*-*"
-      - "edge-v*.*.*-*"
 
 permissions:
     contents: write

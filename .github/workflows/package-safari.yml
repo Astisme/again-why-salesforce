@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - "safari-v*.*.*"
-      - "safari-v*.*.*-*"
 
 permissions:
     contents: write
@@ -111,7 +110,7 @@ jobs:
           make_latest: true
           tag_name: ${{ env.TRIGGERING_TAG }}
           prerelease: ${{ env.PRERELEASE }}
-          files: ${{ DMG_NAME }}
+          files: ${{ env.DMG_NAME }}
 
             #- name: Upload artifacts
             #uses: actions/upload-artifact@v3
