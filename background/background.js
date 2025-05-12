@@ -94,7 +94,7 @@ export async function bg_getSettings(
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
  */
-async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
+export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
 	switch (key) {
 		case SETTINGS_KEY: {
@@ -108,8 +108,8 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 					);
 					if (existingItems.length > 0) {
 						existingItems.forEach((existing) =>
-							existing.enabled = item.enabled
-						);
+                            Object.assign(existing, item)
+                        );
 					} else {
 						settingsArray.push(item);
 					}

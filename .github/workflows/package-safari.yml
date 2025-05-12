@@ -67,6 +67,7 @@ jobs:
             --project-location bin \
             --macos-version-minimum 11.0 \
             --no-open \
+            --macos-only \
             --bundle-identifier "$IDENTIFIER"
 
       - name: Build macOS App Archive (unsigned)
