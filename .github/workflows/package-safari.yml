@@ -1,0 +1,123 @@
+name: Create Safari Release
+
+on:
+  push:
+    tags:
+      - "safari-v*.*.*"
+
+permissions:
+    contents: write
+
+jobs:
+  build-and-package:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      EXTENSION_SRC: .      # Path to your unconverted web extension
+      XCODE_PROJ: AgainWhySalesforce.xcodeproj  # Xcode project name created by converter
+      SCHEME: AgainWhySalesforce             # Scheme that builds the macOS app + .appex
+      APP_NAME: AgainWhySalesforce.app       # The resulting .app bundle name
+      VOLUME_NAME: "AgainWhySalesforceInstaller"
+      DMG_NAME: "AgainWhySalesforce.dmg"
+      IDENTIFIER: "com.whysalesforce.again"
+      VERSION: ${{ github.event.inputs.version }}
+      TRIGGERING_TAG: ${{ github.event.inputs.triggering_tag }}
+      RELEASE_NOTES: ${{ github.event.inputs.release_notes }}
+      BROWSER_VERSION_NAME: ${{ github.event.inputs.broswer_version_name }}
+      PRERELEASE: ${{ github.event.inputs.prerelease }}
+      CONVERTER_PATH: "/Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter"
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - name: Define variables
+        run: |
+          AWSF=awsf
+          TAG="${GITHUB_REF_NAME}"
+          echo "TRIGGERING_TAG=$TAG" >> $GITHUB_ENV
+          # Extract substring before '-v'
+          BROWSER=${TAG%%-v*}
+          echo "BROWSER=$BROWSER" >> $GITHUB_ENV
+          # Get version from manifest
+          MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' manifest/template-manifest.json)
+          BROWSER_VERSION_NAME="$AWSF-$BROWSER-v$MANIFEST_VERSION"
+          # Extract substring after '-v'
+          TAG_VERSION=${TAG##*-v}
+          echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+          # Extract substring before any additional '-' (like '-alpha')
+          PURE_VERSION=${TAG_VERSION%%-*}
+          echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
+          echo "ZIP_NAME=bin/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+            deno-version: v2.x
+
+      - name: Build Extension
+        run: deno task build-${{ env.BROWSER }}
+
+      - name: Convert Web Extension → Safari App Extension
+        run: |
+          "$CONVERTER_PATH" "$EXTENSION_SRC" \
+            --project-location bin \
+            --macos-version-minimum 11.0 \
+            --no-open \
+            --macos-only \
+            --bundle-identifier "$IDENTIFIER"
+
+      - name: Build macOS App Archive (unsigned)
+        run: |
+          xcodebuild clean archive \
+            -project "$XCODE_PROJ" \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -archivePath "$PWD/build/AppArchive" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Extract .app and .appex
+        run: |
+          mkdir -p output
+          # copy the .app bundle
+          cp -R build/AppArchive.xcarchive/Products/Applications/"$APP_NAME" output/
+          # find and copy the .appex inside
+          find output/"$APP_NAME"/Contents/PlugIns -name "*.appex" -exec cp -R {} output/ \;
+
+      - name: Create drag-and-drop .dmg
+        run: |
+          mkdir -p dmg_staging/"$VOLUME_NAME"
+          cp -R output/"$APP_NAME" dmg_staging/"$VOLUME_NAME"/
+          ln -s /Applications dmg_staging/"$VOLUME_NAME"/Applications
+          # optional: copy a background image into dmg_staging if you have one
+          hdiutil create \
+            -volname "$VOLUME_NAME" \
+            -srcfolder dmg_staging/"$VOLUME_NAME" \
+            -ov -format UDZO \
+            "$DMG_NAME"
+
+      - name: Create Safari Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ env.BROWSER_VERSION_NAME }}
+          body: See release notes at ${{ env.RELEASE_NOTES }}.
+          body_path: ${{ env.RELEASE_NOTES }}
+          generate_release_notes: true
+          make_latest: true
+          tag_name: ${{ env.TRIGGERING_TAG }}
+          prerelease: ${{ env.PRERELEASE }}
+          files: ${{ env.DMG_NAME }}
+
+            #- name: Upload artifacts
+            #uses: actions/upload-artifact@v3
+            #with:
+            #name: safari-extension-packages
+            #path: |
+            ##output/"$APP_NAME"
+            #output/*.appex
+            #"$DMG_NAME"
