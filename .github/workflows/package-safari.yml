@@ -17,11 +17,6 @@ jobs:
 
     env:
       EXTENSION_SRC: .      # Path to your unconverted web extension
-      XCODE_PROJ: AgainWhySalesforce.xcodeproj  # Xcode project name created by converter
-      SCHEME: AgainWhySalesforce             # Scheme that builds the macOS app + .appex
-      APP_NAME: AgainWhySalesforce.app       # The resulting .app bundle name
-      VOLUME_NAME: "AgainWhySalesforceInstaller"
-      DMG_NAME: "AgainWhySalesforce.dmg"
       IDENTIFIER: "com.whysalesforce.again"
       VERSION: ${{ github.event.inputs.version }}
       TRIGGERING_TAG: ${{ github.event.inputs.triggering_tag }}
@@ -51,7 +46,16 @@ jobs:
           # Extract substring before any additional '-' (like '-alpha')
           PURE_VERSION=${TAG_VERSION%%-*}
           echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
-          echo "ZIP_NAME=bin/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
+          OUTPUT_DIR=bin
+          echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
+          echo "ZIP_NAME=$OUTPUT_DIR/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
+          EXTENSION_NAME="Again, Why Salesforce"
+          echo "SCHEME=$EXTENSION_NAME" >> $GITHUB_ENV
+          echo "XCODE_PROJ=$OUTPUT_DIR/$EXTENSION_NAME/$EXTENSION_NAME.xcodeproj" >> $GITHUB_ENV
+          echo "ARCHIVE_PATH=$OUTPUT_DIR/AppArchive" >> $GITHUB_ENV
+          echo "APP_NAME=$EXTENSION_NAME.app" >> $GITHUB_ENV
+          echo "VOLUME_NAME=$EXTENSION_NAME Installer" >> $GITHUB_ENV
+          echo "DMG_NAME=$EXTENSION_NAME.dmg" >> $GITHUB_ENV
 
       - name: Setup Deno
         uses: denoland/setup-deno@v2
@@ -59,47 +63,48 @@ jobs:
             deno-version: v2.x
 
       - name: Build Extension
-        run: deno task build-${{ env.BROWSER }}
+        run: deno task dev-${{ env.BROWSER }}
 
       - name: Convert Web Extension → Safari App Extension
         run: |
-          "$CONVERTER_PATH" "$EXTENSION_SRC" \
-            --project-location bin \
-            --macos-version-minimum 11.0 \
+          "$CONVERTER_PATH" \
             --no-open \
+            --no-prompt \
             --macos-only \
             --bundle-identifier "$IDENTIFIER"
+            --project-location "${{ env.OUTPUT_DIR }}" \
+            "$EXTENSION_SRC"
 
       - name: Build macOS App Archive (unsigned)
         run: |
           xcodebuild clean archive \
-            -project "$XCODE_PROJ" \
-            -scheme "$SCHEME" \
+            -project "${{ env.XCODE_PROJ }}" \
+            -scheme "${{ env.SCHEME }}" \
             -configuration Release \
-            -archivePath "$PWD/build/AppArchive" \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+            -archivePath "${{ env.ARCHIVE_PATH }}"
+            #CODE_SIGN_IDENTITY="" \
+            #CODE_SIGNING_REQUIRED=NO \
+            #CODE_SIGNING_ALLOWED=NO
 
       - name: Extract .app and .appex
         run: |
           mkdir -p output
           # copy the .app bundle
-          cp -R build/AppArchive.xcarchive/Products/Applications/"$APP_NAME" output/
+          cp -R "${{ env.ARCHIVE_PATH }}.xcarchive/Products/Applications/${{ env.APP_NAME }}" output/
           # find and copy the .appex inside
-          find output/"$APP_NAME"/Contents/PlugIns -name "*.appex" -exec cp -R {} output/ \;
+          cp -R "output/${{ env.APP_NAME }}/Contents/PlugIns/*.appex" output/
 
       - name: Create drag-and-drop .dmg
         run: |
-          mkdir -p dmg_staging/"$VOLUME_NAME"
-          cp -R output/"$APP_NAME" dmg_staging/"$VOLUME_NAME"/
-          ln -s /Applications dmg_staging/"$VOLUME_NAME"/Applications
+          mkdir -p dmg_staging/"${{ env.VOLUME_NAME }}"
+          cp -R output/"${{ env.APP_NAME }}" dmg_staging/"${{ env.VOLUME_NAME }}"/
+          ln -s /Applications dmg_staging/"${{ env.VOLUME_NAME }}"/Applications
           # optional: copy a background image into dmg_staging if you have one
           hdiutil create \
-            -volname "$VOLUME_NAME" \
-            -srcfolder dmg_staging/"$VOLUME_NAME" \
+            -volname "${{ env.VOLUME_NAME }}" \
+            -srcfolder dmg_staging/"${{ env.VOLUME_NAME }}" \
             -ov -format UDZO \
-            "$DMG_NAME"
+            "${{ env.DMG_NAME }}"
 
       - name: Create Safari Release
         uses: softprops/action-gh-release@v2
