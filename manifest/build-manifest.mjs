@@ -29,15 +29,17 @@ switch (browser) {
 		break;
 	}
 
-	case "safari":{
+	case "safari": {
 		delete manifest.minimum_chrome_version;
 		delete manifest.browser_specific_settings.gecko;
 		delete manifest.background.type;
 		delete manifest.incognito;
 		const notAllowedPermissions = [
-			"downloads"
+			"downloads",
 		];
-		manifest.permissions = manifest.permissions.filter(perm => !notAllowedPermissions.includes(perm));
+		manifest.permissions = manifest.permissions.filter((perm) =>
+			!notAllowedPermissions.includes(perm)
+		);
 		break;
 	}
 	default:
