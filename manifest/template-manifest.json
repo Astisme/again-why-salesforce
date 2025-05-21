@@ -74,7 +74,7 @@
 			"strict_min_version": "112.0"
 		},
 		"safari": {
-			"strict_min_version": "14"
+			"strict_min_version": "14.0"
 		}
 	},
 	"incognito": "spanning",

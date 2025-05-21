@@ -15,7 +15,7 @@ fi
 AWSF="awsf"
 
 # Extract manifest version
-MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)  # Get version from manifest
+MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' manifest/template-manifest.json)  # Get version from manifest
 
 BROWSER_VERSION_NAME="${AWSF}-$BROWSER-v$MANIFEST_VERSION"
 
