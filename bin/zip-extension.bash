@@ -11,15 +11,13 @@ if [[ ! "$BROWSER" =~ ^(firefox|chrome|edge|safari)$ ]]; then
   exit 1
 fi
 
-# Define prefix
-AWSF="awsf"
+TAG_VERSION=$(git describe --tags --exact-match HEAD 2>/dev/null | sed 's/^v//')
+if [ -z "$TAG_VERSION" ]; then
+    echo "No tag found on current commit"
+    exit 1
+fi
 
-# Extract manifest version
-MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' manifest/template-manifest.json)  # Get version from manifest
-
-BROWSER_VERSION_NAME="${AWSF}-$BROWSER-v$MANIFEST_VERSION"
-
-# Set variables
+BROWSER_VERSION_NAME="awsf-$BROWSER-v$TAG_VERSION"
 ZIP_NAME="${BROWSER_VERSION_NAME}.zip"
 
 # Verify manifest.json exists
