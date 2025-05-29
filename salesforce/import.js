@@ -1,5 +1,5 @@
 "use strict";
-import { EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
+import { EXTENSION_NAME } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
