@@ -21,7 +21,7 @@ import {
 	CXM_REMOVE_TAB,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
-    EXTENSION_NAME,
+	EXTENSION_NAME,
 	getSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
@@ -310,19 +310,20 @@ async function delayLoadSetupTabs(count = 0) {
 		console.error(`${label} - ${fail}`);
 		return setTimeout(delayLoadSetupTabs, 5000);
 	}
-	const parentOfSetupTabUl = (document.querySelector("ul.pinnedItems.slds-grid") ??
-		document.getElementsByClassName("pinnedItems slds-grid")?.[0])
-    ?.parentElement;
+	const parentOfSetupTabUl =
+		(document.querySelector("ul.pinnedItems.slds-grid") ??
+			document.getElementsByClassName("pinnedItems slds-grid")?.[0])
+			?.parentElement;
 	if (parentOfSetupTabUl == null) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
 	}
-    setupTabUl = parentOfSetupTabUl.querySelector(`#${EXTENSION_NAME}`);
-    if(setupTabUl == null){
-        setupTabUl = document.createElement("ul");
-        setupTabUl.id = EXTENSION_NAME;
-        setupTabUl.classList.add("tabBarItems", "slds-grid");
-        parentOfSetupTabUl.appendChild(setupTabUl);
-    }
+	setupTabUl = parentOfSetupTabUl.querySelector(`#${EXTENSION_NAME}`);
+	if (setupTabUl == null) {
+		setupTabUl = document.createElement("ul");
+		setupTabUl.id = EXTENSION_NAME;
+		setupTabUl.classList.add("tabBarItems", "slds-grid");
+		parentOfSetupTabUl.appendChild(setupTabUl);
+	}
 	checkKeepTabsOnLeft();
 	// Start observing changes to the DOM to then check for URL change
 	// when URL changes, show the favourite button
