@@ -77,7 +77,7 @@ async function generateSldsImport() {
 	style.textContent = ".hidden { display: none; }";
 	divParent.appendChild(style);
 	const duplicateWarning = document.createElement("span");
-	duplicateWarning.innerHTML = await translator.translate(
+	duplicateWarning.textContent = await translator.translate(
 		"import_duplicate_description",
 	);
 	duplicateWarning.style.textAlign = "center";

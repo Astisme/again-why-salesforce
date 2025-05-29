@@ -203,7 +203,7 @@ class TranslationService {
 			const [key, ...attributes] = toTranslateKey.split(
 				TranslationService.TRANSLATE_SEPARATOR,
 			);
-			const translation = await this._translate(
+			const translation = await this.translate(
 				key,
 			);
 			//const translation = await BROWSER.i18n.getMessage(key);

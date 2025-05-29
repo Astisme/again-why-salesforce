@@ -381,7 +381,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
 	messageSpan.setAttribute("data-aura-class", "forceActionsText");
-	messageSpan.innerHTML = (await translator.translate(message)).replaceAll(
+	messageSpan.textContent = (await translator.translate(message)).replaceAll(
 		"\n",
 		"<br />",
 	);
