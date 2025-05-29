@@ -1,12 +1,4 @@
 {
-    "open_new_tab": {
-		"message": "Open in a new tab.",
-		"description": "[open-other-org-modal] radio button to let the user open in a new browser tab."
-    },
-    "open_here": {
-		"message": "Open in this tab.",
-		"description": "[open-other-org-modal] radio button to let the user open in the same browser tab"
-    },
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -505,6 +497,14 @@
 	"nss_not_setup_page": {
 		"message": "This is not a $salesforce_lightning Setup page.",
 		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
+	},
+	"open_here": {
+		"message": "Open in this tab.",
+		"description": "[open-other-org-modal] radio button to let the user open in the same browser tab"
+	},
+	"open_new_tab": {
+		"message": "Open in a new tab.",
+		"description": "[open-other-org-modal] radio button to let the user open in a new browser tab."
 	},
 	"open_settings": {
 		"message": "Open Extension Settings",
