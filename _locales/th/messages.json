@@ -807,10 +807,6 @@
 		"message": "Users",
 		"description": "ชื่อของหน้าที่เกี่ยวข้องกับ ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
-		"description": "[warning] อธิบายให้ผู้ใช้ทราบว่าไฟล์ที่นำเข้าใช้คุณสมบัติที่เลิกใช้แล้ว"
-	},
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] ชื่อสำรองสำหรับโมดอล"

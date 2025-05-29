@@ -807,10 +807,6 @@
 		"message": "Kasutajad",
 		"description": "Lehe nimi, mis on seotud ManageUsers/home'ga"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Importisite aegunud 'tabTitle' abil!\nUuendatud faili allalaadimine on alanud.\nPalun kasutage edaspidi äsja alla laaditud faili.\nSellise faili kasutamine lõpetatakse hilisemas versioonis.",
-		"description": "[hoiatus] Selgitage kasutajale, et fail, mille nad importisid, kasutab aegunud omadust"
-	},
 	"where_to": {
 		"message": "Kuhu?",
 		"description": "[ava_teine_org_modaal] varupealkiri modaali jaoks"

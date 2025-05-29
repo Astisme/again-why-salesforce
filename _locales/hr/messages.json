@@ -807,10 +807,6 @@
 		"message": "Korisnici",
 		"description": "ime stranice povezane s ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Uvezli ste koristeći zastarjeli 'tabTitle'!\nPreuzimanje ažuriranog fajla je započelo.\nOd sada, molimo koristite novi preuzeti fajl.\nKorištenje ovog fajla će biti ukinuto u budućim ažuriranjima.",
-		"description": "[warning] obavještava korisnika da uvezeni fajl koristi zastarjelo svojstvo"
-	},
 	"where_to": {
 		"message": "Kamo?",
 		"description": "[open-other-org-modal] alternativni naslov za modal"

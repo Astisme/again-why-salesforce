@@ -806,10 +806,6 @@
 		"message": "المستخدمون",
 		"description": "اسم الصفحة المتعلقة بـ ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "لقد استخدمت 'tabTitle' القديم!\nبدأ تنزيل الملف المحدث.\nيرجى استخدام الملف الذي تم تنزيله حديثاً من الآن فصاعداً.\nسيتم إيقاف استخدام هذا الملف في إصدار لاحق.",
-		"description": "[warning] يشرح للمستخدم أن الملف المستورد يستخدم خاصية قديمة"
-	},
 	"where_to": {
 		"message": "أين؟",
 		"description": "[open-other-org-modal] عنوان بديل للنافذة المنبثقة"

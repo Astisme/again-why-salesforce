@@ -806,10 +806,6 @@
 		"message": "Pengguna",
 		"description": "Nama halaman terkait ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Anda telah mengimpor menggunakan 'tabTitle' yang usang!\nDownload file yang diperbarui telah dimulai.\nMulai sekarang, gunakan file yang baru saja diunduh.\nPenggunaan file tersebut akan dihentikan pada rilis mendatang.",
-		"description": "[warning] Menjelaskan kepada pengguna bahwa file yang diimpor menggunakan properti yang usang."
-	},
 	"where_to": {
 		"message": "Ke mana?",
 		"description": "[open-other-org-modal] Judul alternatif untuk modal"

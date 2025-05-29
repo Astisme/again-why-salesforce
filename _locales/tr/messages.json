@@ -807,10 +807,6 @@
 		"message": "Kullanıcılar",
 		"description": "ManageUsers/home ile ilgili sayfanın adı"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Kullanımdan kaldırılmış 'tabTitle' kullanarak içe aktardınız!\nGüncellenmiş dosyanın indirilmesi başladı.\nBundan sonra lütfen yeni indirilen dosyayı kullanın.\nBu tür dosyaların kullanımı daha sonraki bir sürümle durdurulacaktır.",
-		"description": "[uyarı] Kullanıcıya içe aktardıkları dosyanın kullanımdan kaldırılmış bir özellik kullandığını açıklayın"
-	},
 	"where_to": {
 		"message": "Nereye?",
 		"description": "[başka-kuruluş-aç-modal] modal için geri dönüş başlığı"

@@ -807,10 +807,6 @@
 		"message": "Používatelia",
 		"description": "názov stránky spojený s ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Importovali ste pomocou zastaraného 'tabTitle'!\nSťahovanie aktualizovaného súboru bolo spustené.\nOdteraz, prosím, používajte nový stiahnutý súbor.\nPoužívanie tohto súboru bude v budúcich aktualizáciách ukončené.",
-		"description": "[warning] informuje používateľa, že importovaný súbor používa zastaranú vlastnosť"
-	},
 	"where_to": {
 		"message": "Kam?",
 		"description": "[open-other-org-modal] alternatívny nadpis pre modal"

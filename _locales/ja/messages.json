@@ -806,10 +806,6 @@
 		"message": "ユーザー",
 		"description": "ManageUsers/home に関連するページの名前"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "古い 'tabTitle' を使用してインポートしました！\n更新されたファイルのダウンロードが開始されました。\n今後は新たにダウンロードされたファイルを使用してください。\nこのファイルの使用は将来的に廃止されます。",
-		"description": "[warning] インポートされたファイルが古いプロパティを使用していることを説明します"
-	},
 	"where_to": {
 		"message": "どこへ？",
 		"description": "[open-other-org-modal] モーダルの代替タイトル"

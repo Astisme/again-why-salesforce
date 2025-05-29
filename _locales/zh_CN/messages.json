@@ -807,10 +807,6 @@
 		"message": "用户",
 		"description": "与 ManageUsers/home 相关的页面名称"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "您使用了已弃用的 'tabTitle' 导入！\n更新文件的下载已开始。\n请从现在开始使用新下载的文件。\n此类文件的使用将在后续版本中停止。",
-		"description": "[警告] 向用户解释他们导入的文件使用了已弃用的属性"
-	},
 	"where_to": {
 		"message": "去哪里？",
 		"description": "[打开其他组织模态框] 模态框的备用标题"

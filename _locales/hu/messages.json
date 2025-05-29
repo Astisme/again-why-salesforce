@@ -807,10 +807,6 @@
 		"message": "Felhasználók",
 		"description": "az oldal neve, amely a ManageUsers/home-hoz tartozik"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "A régi 'tabTitle' használatával importált!\nElindult a frissített fájl letöltése.\nMostantól kérjük, használja az újonnan letöltött fájlt.\nEnnek a fájlnak a használata egy későbbi frissítéssel megszűnik.",
-		"description": "[warning] tájékoztatja a felhasználót, hogy az importált fájl elavult tulajdonságot tartalmaz"
-	},
 	"where_to": {
 		"message": "Hová?",
 		"description": "[open-other-org-modal] alternatív cím a modális ablakhoz"

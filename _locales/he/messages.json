@@ -807,10 +807,6 @@
 		"message": "משתמשים",
 		"description": "שם העמוד הקשור ל-ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "ייבאתם באמצעות 'tabTitle' מיושן!\nהורדת הקובץ המעודכן החלה.\nלהמשך, אנא השתמשו בקובץ החדש שהורד.\nהשימוש בקובץ זה יופסק בעדכונים עתידיים.",
-		"description": "[warning] מסביר למשתמש שהקובץ שייבא משתמש בתכונה מיושנת"
-	},
 	"where_to": {
 		"message": "לאן?",
 		"description": "[open-other-org-modal] כותרת חלופית לחלון המודאלי"

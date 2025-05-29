@@ -807,10 +807,6 @@
 		"message": "Użytkownicy",
 		"description": "Nazwa strony związanej z ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Zaimportowałeś przy użyciu przestarzałego 'tabTitle'!\nPobieranie zaktualizowanego pliku rozpoczęło się.\nOd teraz używaj nowo pobranego pliku.\nUżycie takiego pliku zostanie przerwane w późniejszej wersji.",
-		"description": "[ostrzeżenie] Wyjaśnij użytkownikowi, że plik, który zaimportowali, używa przestarzałej właściwości"
-	},
 	"where_to": {
 		"message": "Dokąd?",
 		"description": "[modal-otwórz-inną-org] zapasowy tytuł dla okna modalnego"

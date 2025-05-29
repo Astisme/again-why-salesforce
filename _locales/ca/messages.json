@@ -807,10 +807,6 @@
 		"message": "Usuaris",
 		"description": "el nom de la pàgina relacionada amb ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Heu importat utilitzant el 'tabTitle' obsolet!\nS'ha iniciat la descàrrega del fitxer actualitzat.\nA partir d'ara, utilitzeu el nou fitxer descarregat, si us plau.\nL'ús d'aquest fitxer serà descontinuat en futures actualitzacions.",
-		"description": "[warning] informa a l'usuari que el fitxer importat utilitza una propietat obsoleta"
-	},
 	"where_to": {
 		"message": "On?",
 		"description": "[open-other-org-modal] títol alternatiu per al diàleg modal"

@@ -807,10 +807,6 @@
 		"message": "Käyttäjät",
 		"description": "ManageUsers/home -sivun nimi"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Olet tuonut käyttämällä vanhentunutta 'tabTitle'-kenttää!\nPäivitetyn tiedoston lataus on alkanut.\nJatkossa käytä uutta ladattua tiedostoa.\nTätä tiedostoa ei tueta tulevissa päivityksissä.",
-		"description": "[warning] ilmoittaa käyttäjälle, että tuotettu tiedosto käyttää vanhentunutta ominaisuutta"
-	},
 	"where_to": {
 		"message": "Mihin?",
 		"description": "[open-other-org-modal] vaihtoehtoinen otsikko modalille"

@@ -807,10 +807,6 @@
 		"message": "Mga User",
 		"description": "Ang pangalan ng page na nauugnay sa ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Nag-import ka gamit ang deprecated na 'tabTitle'!\nNagsimula na ang pag-download ng na-update na file.\nMula ngayon, gamitin ang bagong na-download na file pakiusap.\nAng paggamit ng naturang file ay ititigil sa susunod na release.",
-		"description": "[warning] Ipaliwanag sa user na ang file na kanilang na-import ay gumagamit ng isang deprecated na property"
-	},
 	"where_to": {
 		"message": "Saan papunta?",
 		"description": "[open-other-org-modal] fallback na pamagat para sa modal"

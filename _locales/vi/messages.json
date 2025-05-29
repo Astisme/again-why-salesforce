@@ -806,10 +806,6 @@
 		"message": "Người dùng",
 		"description": "Tên trang liên quan đến ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Bạn đã nhập khẩu sử dụng 'tabTitle' lỗi thời!\nBắt đầu tải xuống file cập nhật.\nTừ bây giờ, vui lòng sử dụng file mới tải xuống.\nViệc sử dụng file này sẽ bị ngừng trong các phiên bản sau.",
-		"description": "[warning] Giải thích cho người dùng rằng file nhập khẩu sử dụng thuộc tính lỗi thời."
-	},
 	"where_to": {
 		"message": "Đi đâu?",
 		"description": "[open-other-org-modal] Tiêu đề dự phòng cho modal"

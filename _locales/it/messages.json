@@ -806,10 +806,6 @@
 		"message": "Utenti",
 		"description": "Il nome della pagina corrata a ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Hai importato usando il deprecato 'tabTitle'!\nIl download del file aggiornato è iniziato.\nDa ora in poi, utilizza il file appena scaricato, per favore.\nL'uso di tale file sarà dismesso in una versione futura.",
-		"description": "[warning] spiega all'utente che il file importato utilizza una proprietà deprecata"
-	},
 	"where_to": {
 		"message": "Dove?",
 		"description": "[open-other-org-modal] titolo di riserva per il modal"

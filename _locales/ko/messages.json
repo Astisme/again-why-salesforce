@@ -807,10 +807,6 @@
 		"message": "사용자",
 		"description": "ManageUsers/home 관련 페이지 이름"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "더 이상 사용되지 않는 'tabTitle'을 사용하여 가져왔습니다!\n업데이트된 파일 다운로드가 시작되었습니다.\n이제부터는 새로 다운로드한 파일을 사용하십시오.\n해당 파일 사용은 추후 릴리스에서 중단됩니다.",
-		"description": "[경고] 가져온 파일이 더 이상 사용되지 않는 속성을 사용함을 사용자에게 설명합니다."
-	},
 	"where_to": {
 		"message": "어디로?",
 		"description": "[다른_조직_열기_모달] 모달의 대체 제목"

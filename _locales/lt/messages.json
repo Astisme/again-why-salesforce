@@ -807,10 +807,6 @@
 		"message": "Vartotojai",
 		"description": "Puslapio, susijusio su ManageUsers/home, pavadinimas"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Importavote naudodami pasenusį 'tabTitle'!\nAtnaujinto failo atsisiuntimas prasidėjo.\nNuo šiol naudokite naujai atsisiųstą failą.\nTokio failo naudojimas bus nutrauktas vėlesnėje versijoje.",
-		"description": "[įspėjimas] Paaiškinkite vartotojui, kad failas, kurį jie importavo, naudoja pasenusią savybę"
-	},
 	"where_to": {
 		"message": "Kur?",
 		"description": "[atidaryti_kitą_org_modal] atsarginis pavadinimas modaliniam langui"

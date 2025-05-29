@@ -806,10 +806,6 @@
 		"message": "Benutzer",
 		"description": "Der Name der Seite, die sich auf ManageUsers/home bezieht"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Sie haben den veralteten 'tabTitle' verwendet!\nDer Download der aktualisierten Datei hat begonnen.\nBitte verwenden Sie ab sofort die neu heruntergeladene Datei.\nDie Verwendung dieser Datei wird in einer späteren Version eingestellt.",
-		"description": "[warning] Erklärt dem Benutzer, dass die importierte Datei eine veraltete Eigenschaft verwendet."
-	},
 	"where_to": {
 		"message": "Wohin?",
 		"description": "[open-other-org-modal] Alternativer Titel für das Modal."

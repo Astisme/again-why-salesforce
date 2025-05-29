@@ -806,10 +806,6 @@
 		"message": "वापरकर्ते",
 		"description": "ManageUsers/home शी संबंधित पृष्ठाचे नाव"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "आपण जुना 'tabTitle' वापरून आयात केला आहे!\nअपडेटेड फाइल डाउनलोड सुरू झाली आहे.\nआता पासून, कृपया नवीन डाउनलोड केलेली फाइल वापरा.\nभविष्यात ही फाइल वापरणे थांबवले जाईल.",
-		"description": "[warning] आयात केलेल्या फाइलने जुनी प्रॉपर्टी वापरली आहे हे समजावून सांगते."
-	},
 	"where_to": {
 		"message": "कोठे?",
 		"description": "[open-other-org-modal] modal साठी पर्यायी शीर्षक"

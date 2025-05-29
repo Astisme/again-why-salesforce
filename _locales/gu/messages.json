@@ -807,10 +807,6 @@
 		"message": "Users",
 		"description": "ManageUsers/home સાથે સંબંધિત પૃષ્ઠનું નામ"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
-		"description": "[warning] તે વપરાશકર્તાને સમજાવે છે કે આયાત કરેલી ફાઇલમાં જૂની પ્રોપર્ટી વપરાય છે"
-	},
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] મોડલ માટેનું ફ્લેબેક ટાઇટલ"

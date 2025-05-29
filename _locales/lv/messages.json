@@ -807,10 +807,6 @@
 		"message": "Lietotāji",
 		"description": "Lapas nosaukums, kas saistīts ar ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Jūs importējāt, izmantojot novecojušo 'tabTitle'!\nAtjauninātā faila lejupielāde ir sākusies.\nTurpmāk, lūdzu, izmantojiet jauniegūto failu.\nŠāda faila lietošana tiks pārtraukta vēlākā laidienā.",
-		"description": "[brīdinājums] Paskaidrojiet lietotājam, ka viņu importētais fails izmanto novecojušu īpašību"
-	},
 	"where_to": {
 		"message": "Uz kurieni?",
 		"description": "[atvērt_citu_org_modal] rezerves virsraksts modālajam logam"

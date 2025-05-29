@@ -807,10 +807,6 @@
 		"message": "Brukere",
 		"description": "navnet på siden knyttet til ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Du har importert med den utdaterte 'tabTitle'!\nNedlastingen av den oppdaterte filen har startet.\nFra nå av, vennligst bruk den nye nedlastede filen.\nBruken av denne filen vil bli avviklet i fremtidige oppdateringer.",
-		"description": "[warning] informerer brukeren om at den importerte filen bruker en utdaterte egenskap"
-	},
 	"where_to": {
 		"message": "Til hvor?",
 		"description": "[open-other-org-modal] alternativ tittel for modal"

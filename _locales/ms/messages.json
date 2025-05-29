@@ -807,10 +807,6 @@
 		"message": "Pengguna",
 		"description": "Nama halaman yang berkaitan dengan ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Anda telah mengimport menggunakan 'tabTitle' yang tidak digunakan lagi!\nMuat turun fail yang dikemas kini telah bermula.\nMulai sekarang, sila gunakan fail yang baru dimuat turun.\nPenggunaan fail sedemikian akan dihentikan dengan keluaran kemudian.",
-		"description": "[amaran] Terangkan kepada pengguna bahawa fail yang mereka import menggunakan sifat yang tidak digunakan lagi"
-	},
 	"where_to": {
 		"message": "Ke mana?",
 		"description": "[buka-modal-org-lain] tajuk sandaran untuk modal"

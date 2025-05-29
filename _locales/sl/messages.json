@@ -807,10 +807,6 @@
 		"message": "Uporabniki",
 		"description": "Ime strani, povezano z ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Uvozili ste z zastarelim 'tabTitle'!\nPrenos posodobljene datoteke se je začel.\nOd zdaj naprej uporabljajte novo preneseno datoteko.\nUporaba take datoteke bo prekinjena v poznejši izdaji.",
-		"description": "[opozorilo] Pojasnite uporabniku, da datoteka, ki so jo uvozili, uporablja zastarelo lastnost"
-	},
 	"where_to": {
 		"message": "Kam?",
 		"description": "[odpri_drugo_org_modalno_okno] rezervni naslov za modalno okno"

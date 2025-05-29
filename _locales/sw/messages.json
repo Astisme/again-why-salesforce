@@ -807,10 +807,6 @@
 		"message": "Watumiaji",
 		"description": "Jina la ukurasa unaohusiana na ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Umeingiza kwa kutumia 'tabTitle' iliyopitwa na wakati!\nUpakuaji wa faili iliyosasishwa umeanza.\nKuanzia sasa, tafadhali tumia faili mpya iliyopakuliwa.\nMatumizi ya faili kama hiyo yatakoma katika toleo la baadaye.",
-		"description": "[onyo] Eleza mtumiaji kuwa faili waliyoingiza inatumia sifa iliyopitwa na wakati"
-	},
 	"where_to": {
 		"message": "Wapi?",
 		"description": "[fungua-modal-org-nyingine] kichwa mbadala kwa modal"

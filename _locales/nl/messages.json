@@ -807,10 +807,6 @@
 		"message": "Gebruikers",
 		"description": "De naam van de pagina gerelateerd aan ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "U heeft geïmporteerd met de verouderde 'tabTitle'!\nHet downloaden van het bijgewerkte bestand is begonnen.\nGebruik vanaf nu alstublieft het nieuw gedownloade bestand.\nHet gebruik van een dergelijk bestand wordt stopgezet met een latere release.",
-		"description": "[waarschuwing] Leg de gebruiker uit dat het bestand dat ze hebben geïmporteerd een verouderde eigenschap gebruikt"
-	},
 	"where_to": {
 		"message": "Waarheen?",
 		"description": "[open-andere-org-modal] fallback-titel voor de modal"

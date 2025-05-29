@@ -807,10 +807,6 @@
 		"message": "Utilizatori",
 		"description": "Numele paginii legate de ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "Ați importat folosind învechitul 'tabTitle'!\nDescărcarea fișierului actualizat a început.\nDe acum înainte, vă rugăm să utilizați fișierul nou descărcat.\nUtilizarea unui astfel de fișier va fi întreruptă într-o versiune ulterioară.",
-		"description": "[avertisment] Explicați utilizatorului că fișierul pe care l-au importat folosește o proprietate învechită"
-	},
 	"where_to": {
 		"message": "Unde?",
 		"description": "[modal-deschide-altă-org] titlu de rezervă pentru modal"
