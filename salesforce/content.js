@@ -307,7 +307,7 @@ async function delayLoadSetupTabs(count = 0) {
 		const label = await translator.translate("extension_label");
 		const fail = await translator.translate("error_no_setup_tab");
 		console.error(`${label} - ${fail}`);
-		return setTimeout(delayLoadSetupTabs(), 5000);
+		return setTimeout(delayLoadSetupTabs, 5000);
 	}
 	setupTabUl = document.querySelector("ul.pinnedItems.slds-grid") ??
 		document.getElementsByClassName("pinnedItems slds-grid")?.[0];
