@@ -1,5 +1,6 @@
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
+import { process } from "node:process";
 
 // Builds browser extensions for all supported browsers and creates a GitHub release
 const browsers: string[] = [
