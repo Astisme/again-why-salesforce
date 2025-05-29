@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importer Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstmeny]"
 	},
 	"cxm_move": {
 		"message": "🧭 Flytt Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Fjern Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[kontekstmeny]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Lagre som Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[kontekstmeny]"
 	},
 	"cxm_remove": {
 		"message": "💥 Fjern Tab(ber)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Innstillinger",
+		"message": "⚙️ $settings",
 		"description": "Etikett for innstillingsmenyen"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] slett en rad"
 	},
 	"delete_all": {
-		"message": "Slett alle Tabber",
-		"description": "[popup] tittel for søppelbøtten for å tømme alle Tabber"
+		"message": "$delete alle Tabs",
+		"description": "[popup] tittel på papirkurven for å tømme alle Tabs"
 	},
 	"drop": {
 		"message": "Slipp",
@@ -452,7 +452,7 @@
 		"description": "[modal-title] for importprosessen"
 	},
 	"import_title": {
-		"message": "Importer Tab fra json-fil",
+		"message": "$import_tabs fra JSON-fil",
 		"description": "[popup] tittel på importknappen"
 	},
 	"insert_another": {
@@ -496,8 +496,16 @@
 		"description": "[ikkeSalesforceOppsett] en ugyldig URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Dette er ikke en Salesforce Lightning-oppsettside.",
-		"description": "[ikkeSalesforceOppsett] brukeren er ikke på en Salesforce-side."
+		"message": "Dette er ikke en $salesforce_lightning-oppsettside.",
+		"description": "[notSalesforceSetup] brukeren er ikke på en Salesforce-side."
+	},
+	"open_here": {
+		"message": "Åpne i denne Tab.",
+		"description": "[open-other-org-modal] alternativknapp for å la brukeren åpne i samme nettleser-Tab"
+	},
+	"open_new_tab": {
+		"message": "Åpne i en ny Tab.",
+		"description": "[open-other-org-modal] alternativknapp for å la brukeren åpne i en ny nettleser-Tab."
 	},
 	"open_settings": {
 		"message": "Åpne utvidelsesinnstillinger",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforce Setup-siden"
 	},
 	"opt_automatic_open_login": {
-		"message": "Åpne automatisk Salesforce-påloggingssiden når du klikker på popup-vinduet mens du ikke er på en Salesforce-side.",
-		"description": "[innstilling] når brukeren åpner popup-vinduet mens hen er på en tilfeldig nettside"
+		"message": "Åpne $salesforce_login-siden automatisk når du klikker på popup-vinduet mens du ikke er på en Salesforce-side.",
+		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et tilfeldig nettsted"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Åpne automatisk Salesforce-oppsettsiden når du klikker på popup-vinduet mens du er på en Salesforce-side.",
-		"description": "[innstilling] når brukeren åpner popup-vinduet mens hen er på en Salesforce-nettside"
+		"message": "Åpne $salesforce_setup-siden automatisk når du klikker på popup-vinduet mens du er på en Salesforce-side.",
+		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et Salesforce-nettsted"
 	},
 	"opt_en_fallback": {
 		"message": "en (Reserve)",
@@ -528,11 +536,11 @@
 		"description": "[innstilling] når brukeren klikker på en favoritt-Tab, åpne i en ny nettleserfane"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Åpne alltid Salesforce-påloggingssiden i samme Tab når du klikker på popup-vinduet.",
+		"message": "Åpne alltid $salesforce_login-siden i samme Tab når du klikker på popup-vinduet.",
 		"description": "[innstilling]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Åpne alltid Salesforce-oppsettsiden i samme Tab når du klikker på popup-vinduet.",
+		"message": "Åpne alltid $salesforce_setup-siden i samme Tab når du klikker på popup-vinduet.",
 		"description": "[innstilling]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[innstilling] når brukeren lagrer en favoritt-Tab, forhindre kontroll om det er en ID i lenken som lagres"
 	},
 	"or_drop": {
-		"message": "Eller dra og slipp",
-		"description": "[import] lar brukeren dra filer med musen og slippe dem"
+		"message": "Eller $drop",
+		"description": "[importer] la brukeren flytte filer med musen og slippe dem"
 	},
 	"org_link": {
 		"message": "Organisasjonslenke",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] etikett når brukeren ikke ønsker å gi tillatelser permanent"
 	},
 	"req_permissions_header": {
-		"message": "Vennligst la oss få tilgang<br />til Salesforce Setup-sidene automatisk.",
-		"description": "[req_permission] sideoverskrift for tillatelsesforespørsel"
+		"message": "Tillat oss å få tilgang til\n$salesforce_setup-sider automatisk.",
+		"description": "[req_permission] overskrift på siden for å be om tillatelser"
 	},
 	"req_permissions_paragraph": {
-		"message": "Om du ønsker det, kan dine favorittabber vises<br />så snart du navigerer til en Salesforce Setup-side<br />uten at du må klikke på denne utvidelsen hver gang.",
-		"description": "[req_permission] tekst som forklarer hvorfor tillatelser kreves"
+		"message": "Hvis du vil, kan du få favoritt-Tabs til å vises\nså snart du navigerer til en $salesforce_setup-side\nuten å måtte klikke på denne utvidelsen hver gang.",
+		"description": "[req_permission] tekst som forklarer hvorfor tillatelsene blir bedt om"
 	},
 	"required": {
 		"message": "påkrevd",

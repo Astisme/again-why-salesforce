@@ -205,7 +205,7 @@ class TranslationService {
 			);
 			const translation = await this.translate(
 				key,
-			);
+			).replaceAll("\n", "<br />");
 			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;
 			if (attributes.length === 0) {

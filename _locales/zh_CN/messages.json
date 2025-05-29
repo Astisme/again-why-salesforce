@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "$extension_label 的新版本现已可用！",
-		"description": "从侦听器收到一个未知消息"
+		"description": "从侦听器收到一条未知消息"
 	},
 	"continue": {
 		"message": "继续",
@@ -76,7 +76,7 @@
 		"description": "[上下文菜单]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 导入 Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[上下文菜单]"
 	},
 	"cxm_move": {
@@ -104,11 +104,11 @@
 		"description": "[上下文菜单]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 移除 Tab",
+		"message": "👋 $remove_tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 另存为 Tab",
+		"message": "💾 $save_tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_remove": {
@@ -132,7 +132,7 @@
 		"description": "[上下文菜单]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ 设置",
+		"message": "⚙️ $settings",
 		"description": "设置菜单的标签"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[弹出窗口] 删除一行"
 	},
 	"delete_all": {
-		"message": "删除所有 Tabs",
-		"description": "[弹出窗口] 用于清空所有 Tabs 的回收站标题"
+		"message": "$delete 所有 Tab",
+		"description": "[弹出窗口] 回收站上用于清空所有 Tab 的标题"
 	},
 	"drop": {
 		"message": "拖放",
@@ -452,7 +452,7 @@
 		"description": "[模态框标题] 用于导入过程"
 	},
 	"import_title": {
-		"message": "从 JSON 文件导入 Tabs",
+		"message": "从 JSON 文件 $import_tabs",
 		"description": "[弹出窗口] 导入按钮上的标题"
 	},
 	"insert_another": {
@@ -496,8 +496,16 @@
 		"description": "[非Salesforce设置] 无效的URL"
 	},
 	"nss_not_setup_page": {
-		"message": "这不是Salesforce Lightning设置页面。",
-		"description": "[非Salesforce设置] 用户不在Salesforce页面上。"
+		"message": "这不是 $salesforce_lightning 设置页面。",
+		"description": "[notSalesforceSetup] 用户不在 Salesforce 页面上。"
+	},
+	"open_here": {
+		"message": "在此 Tab 中打开。",
+		"description": "[open-other-org-modal] 单选按钮，允许用户在同一浏览器 Tab 中打开"
+	},
+	"open_new_tab": {
+		"message": "在新的 Tab 中打开。",
+		"description": "[open-other-org-modal] 单选按钮，允许用户在新的浏览器 Tab 中打开。"
 	},
 	"open_settings": {
 		"message": "打开扩展程序设置",
@@ -508,12 +516,12 @@
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 设置页面"
 	},
 	"opt_automatic_open_login": {
-		"message": "当不在Salesforce页面上时，单击弹出窗口时自动打开Salesforce登录页面。",
-		"description": "[设置] 当用户在任意网站上打开弹出窗口时"
+		"message": "当不在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_login 页面。",
+		"description": "[设置] 当用户在随机网站上打开弹出窗口时"
 	},
 	"opt_automatic_open_setup": {
-		"message": "当在Salesforce页面上时，单击弹出窗口时自动打开Salesforce设置页面。",
-		"description": "[设置] 当用户在Salesforce网站上打开弹出窗口时"
+		"message": "当在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_setup 页面。",
+		"description": "[设置] 当用户在 Salesforce 网站上打开弹出窗口时"
 	},
 	"opt_en_fallback": {
 		"message": "en (备用)",
@@ -528,11 +536,11 @@
 		"description": "[设置] 当用户点击收藏的 Tab 时，在新的浏览器标签中打开它"
 	},
 	"opt_open_login_same_tab": {
-		"message": "单击弹出窗口时，始终在同一Tab中打开Salesforce登录页面。",
+		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_login 页面。",
 		"description": "[设置]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "单击弹出窗口时，始终在同一Tab中打开Salesforce设置页面。",
+		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_setup 页面。",
 		"description": "[设置]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[设置] 收藏 Tab 时，防止检查要保存的链接中是否包含 Id。"
 	},
 	"or_drop": {
-		"message": "或拖放",
-		"description": "[导入] 让用户用鼠标移动文件并释放它们"
+		"message": "或 $drop",
+		"description": "[导入] 允许用户用鼠标移动文件并释放它们"
 	},
 	"org_link": {
 		"message": "组织链接",
@@ -584,12 +592,12 @@
 		"description": "[请求权限] 当用户不想永久允许权限时的标签"
 	},
 	"req_permissions_header": {
-		"message": "请允许我们自动访问<br />Salesforce 设置页面。",
-		"description": "[请求权限] 请求权限页面的标题"
+		"message": "请允许我们自动访问\n$salesforce_setup 页面。",
+		"description": "[req_permission] 请求权限页面的标题"
 	},
 	"req_permissions_paragraph": {
-		"message": "如果您愿意，您可以让您收藏的 Tabs<br />在您导航到 Salesforce 设置页面时立即出现<br />而无需每次都点击此扩展程序。",
-		"description": "[请求权限] 解释请求权限原因的文本"
+		"message": "如果您愿意，您可以在导航到 $salesforce_setup 页面后\n立即显示您最喜欢的 Tabs，\n而无需每次都单击此扩展程序。",
+		"description": "[req_permission] 解释请求权限原因的文本"
 	},
 	"required": {
 		"message": "必填",

@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Nová verzia $extension_label je teraz k dispozícii!",
-		"description": "bola prijatá neznáma správa od poslucháča"
+		"description": "od poslucháča bola prijatá neznáma správa"
 	},
 	"continue": {
 		"message": "Pokračovať",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importovať Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[kontextové-menu]"
 	},
 	"cxm_move": {
 		"message": "🧭 Presunúť Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Odstrániť Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[kontextové-menu]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Uložiť ako Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[kontextové-menu]"
 	},
 	"cxm_remove": {
 		"message": "💥 Odstrániť Tab(y)",
@@ -132,8 +132,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Nastavenia",
-		"description": "Označenie pre menu nastavení"
+		"message": "⚙️ $settings",
+		"description": "Označenie pre ponuku nastavení"
 	},
 	"cxm_update": {
 		"message": "✏️ Aktualizovať Tab",
@@ -152,8 +152,8 @@
 		"description": "[popup] vymazať riadok"
 	},
 	"delete_all": {
-		"message": "Vymazať všetky Tab-y",
-		"description": "[popup] nadpis koša na vymazanie všetkých Tab-ov"
+		"message": "$delete všetky Tabs",
+		"description": "[vyskakovacie-okno] názov na koši na vyprázdnenie všetkých Tabs"
 	},
 	"drop": {
 		"message": "Pusťte",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] pre importný proces"
 	},
 	"import_title": {
-		"message": "Importovať Tab zo JSON súboru",
-		"description": "[popup] nadpis importného tlačidla"
+		"message": "$import_tabs zo súboru JSON",
+		"description": "[vyskakovacie-okno] názov na tlačidle importu"
 	},
 	"insert_another": {
 		"message": "Vložiť ďalší",
@@ -496,8 +496,16 @@
 		"description": "[nieJeNastavenieSalesforce] neplatná URL adresa"
 	},
 	"nss_not_setup_page": {
-		"message": "Toto nie je stránka nastavenia Salesforce Lightning.",
-		"description": "[nieJeNastavenieSalesforce] používateľ nie je na stránke Salesforce."
+		"message": "Toto nie je stránka nastavenia $salesforce_lightning.",
+		"description": "[notSalesforceSetup] používateľ sa nenachádza na stránke Salesforce."
+	},
+	"open_here": {
+		"message": "Otvoriť v tejto Tab.",
+		"description": "[open-other-org-modal] prepínač, ktorý používateľovi umožní otvoriť v tej istej Tab prehliadača"
+	},
+	"open_new_tab": {
+		"message": "Otvoriť v novej Tab.",
+		"description": "[open-other-org-modal] prepínač, ktorý používateľovi umožní otvoriť v novej Tab prehliadača."
 	},
 	"open_settings": {
 		"message": "Otvoriť nastavenia rozšírenia",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automaticky otvoriť prihlasovaciu stránku Salesforce po kliknutí na kontextové okno, ak nie ste na stránke Salesforce.",
-		"description": "[nastavenie] keď používateľ otvorí kontextové okno, keď je na náhodnej webovej lokalite"
+		"message": "Automaticky otvoriť stránku $salesforce_login po kliknutí na vyskakovacie okno, ak sa nenachádzate na stránke Salesforce.",
+		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno na náhodnej webovej stránke"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automaticky otvoriť stránku nastavenia Salesforce po kliknutí na kontextové okno, ak ste na stránke Salesforce.",
-		"description": "[nastavenie] keď používateľ otvorí kontextové okno, keď je na webovej lokalite Salesforce"
+		"message": "Automaticky otvoriť stránku $salesforce_setup po kliknutí na vyskakovacie okno, ak sa nachádzate na stránke Salesforce.",
+		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno na webovej stránke Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Záložný)",
@@ -528,11 +536,11 @@
 		"description": "[nastavenie] pri kliknutí používateľa na obľúbený Tab otvoriť v novej karte prehliadača"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Vždy otvoriť prihlasovaciu stránku Salesforce v rovnakej karte Tab po kliknutí na kontextové okno.",
+		"message": "Po kliknutí na vyskakovacie okno vždy otvoriť stránku $salesforce_login v tej istej Tab.",
 		"description": "[nastavenie]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Vždy otvoriť stránku nastavenia Salesforce v rovnakej karte Tab po kliknutí na kontextové okno.",
+		"message": "Po kliknutí na vyskakovacie okno vždy otvoriť stránku $salesforce_setup v tej istej Tab.",
 		"description": "[nastavenie]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[nastavenie] keď používateľ pridáva obľúbený Tab, nekontrolovať, či je v odkaze ID"
 	},
 	"or_drop": {
-		"message": "Alebo ťahaj a pustite",
-		"description": "[import] umožňuje používateľovi ťahať súbory myšou a pustiť ich"
+		"message": "Alebo $drop",
+		"description": "[importovať] umožnite používateľovi presúvať súbory myšou a púšťať ich"
 	},
 	"org_link": {
 		"message": "Odkaz na Organizáciu",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] označenie, keď používateľ nechce trvalo udeliť oprávnenia"
 	},
 	"req_permissions_header": {
-		"message": "Prosím, povoľte nám prístup<br />na Salesforce Setup stránky automaticky.",
-		"description": "[req_permission] nadpis stránky pre žiadosť o oprávnenia"
+		"message": "Povoľte nám, prosím, automatický prístup\nk stránkam $salesforce_setup.",
+		"description": "[req_permission] hlavička stránky na vyžiadanie povolení"
 	},
 	"req_permissions_paragraph": {
-		"message": "Ak si želáte, vaše obľúbené Tab-y sa môžu zobraziť<br />hned keď prejdete na Salesforce Setup stránku<br />bez nutnosti klikať na toto rozšírenie zakaždým.",
-		"description": "[req_permission] text, ktorý vysvetľuje, prečo sa žiadajú oprávnenia"
+		"message": "Ak chcete, môžete si nechať zobraziť svoje obľúbené Tabs\nhneď po prechode na stránku $salesforce_setup\nbez toho, aby ste museli zakaždým klikať na toto rozšírenie.",
+		"description": "[req_permission] text vysvetľujúci, prečo sa požadujú povolenia"
 	},
 	"required": {
 		"message": "povinné",

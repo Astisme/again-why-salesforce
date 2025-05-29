@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Nova različica $extension_label je zdaj na voljo!",
-		"description": "od poslušalca je bilo prejeto neznano sporočilo"
+		"description": "neznano sporočilo je bilo prejeto od poslušalca"
 	},
 	"continue": {
 		"message": "Nadaljuj",
@@ -76,8 +76,8 @@
 		"description": "[kontekstni_meni]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Uvozi Tabs",
-		"description": "[kontekstni_meni]"
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstni-meni]"
 	},
 	"cxm_move": {
 		"message": "🧭 Premakni Tab",
@@ -104,12 +104,12 @@
 		"description": "[kontekstni_meni]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Odstrani Tab",
-		"description": "[kontekstni_meni]"
+		"message": "👋 $remove_tab",
+		"description": "[kontekstni-meni]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Shrani kot Tab",
-		"description": "[kontekstni_meni]"
+		"message": "💾 $save_tab",
+		"description": "[kontekstni-meni]"
 	},
 	"cxm_remove": {
 		"message": "💥 Odstrani Tab(e)",
@@ -132,8 +132,8 @@
 		"description": "[kontekstni_meni]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Nastavitve",
-		"description": "Oznaka za meni nastavitev"
+		"message": "⚙️ $settings",
+		"description": "Oznaka za meni z nastavitvami"
 	},
 	"cxm_update": {
 		"message": "✏️ Posodobi Tab",
@@ -152,8 +152,8 @@
 		"description": "[pojavno_okno] izbriši vrstico"
 	},
 	"delete_all": {
-		"message": "Izbriši vse Tabs",
-		"description": "[pojavno_okno] naslov na košu za izpraznitev vseh Tabs"
+		"message": "$delete vse Tabs",
+		"description": "[pojavno-okno] naslov na košu za izpraznitev vseh Tabs"
 	},
 	"drop": {
 		"message": "Spusti",
@@ -452,8 +452,8 @@
 		"description": "[naslov_modalnega_okna] za postopek uvoza"
 	},
 	"import_title": {
-		"message": "Uvozi Tabs iz datoteke json",
-		"description": "[pojavno_okno] naslov na gumbu za uvoz"
+		"message": "$import_tabs iz datoteke JSON",
+		"description": "[pojavno-okno] naslov na gumbu za uvoz"
 	},
 	"insert_another": {
 		"message": "Vstavi drugega",
@@ -496,8 +496,16 @@
 		"description": "[niNastavitevSalesforce] neveljaven URL naslov"
 	},
 	"nss_not_setup_page": {
-		"message": "To ni stran za nastavitev programa Salesforce Lightning.",
-		"description": "[niNastavitevSalesforce] uporabnik ni na strani programa Salesforce."
+		"message": "To ni stran za nastavitev $salesforce_lightning.",
+		"description": "[notSalesforceSetup] uporabnik ni na strani Salesforce."
+	},
+	"open_here": {
+		"message": "Odpri v tem Tab.",
+		"description": "[open-other-org-modal] izbirni gumb, ki uporabniku omogoča odpiranje v istem Tab brskalnika"
+	},
+	"open_new_tab": {
+		"message": "Odpri v novem Tab.",
+		"description": "[open-other-org-modal] izbirni gumb, ki uporabniku omogoča odpiranje v novem Tab brskalnika."
 	},
 	"open_settings": {
 		"message": "Odpri nastavitve razširitve",
@@ -508,12 +516,12 @@
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Samodejno odpri stran za prijavo v program Salesforce, ko kliknete pojavno okno, če niste na strani programa Salesforce.",
-		"description": "[nastavitev] ko uporabnik odpre pojavno okno, ko je na naključni spletni strani"
+		"message": "Samodejno odpri stran $salesforce_login, ko kliknete pojavno okno, medtem ko niste na strani Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno na naključnem spletnem mestu"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Samodejno odpri stran za nastavitev programa Salesforce, ko kliknete pojavno okno, če ste na strani programa Salesforce.",
-		"description": "[nastavitev] ko uporabnik odpre pojavno okno, ko je na spletni strani programa Salesforce"
+		"message": "Samodejno odpri stran $salesforce_setup, ko kliknete pojavno okno, medtem ko ste na strani Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno na spletnem mestu Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Nadomestno)",
@@ -528,11 +536,11 @@
 		"description": "[nastavitev] ko uporabnik klikne na priljubljen zavihek, odpri v novem zavihku brskalnika"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Vedno odpri stran za prijavo v program Salesforce v istem zavihku Tab, ko kliknete pojavno okno.",
+		"message": "Vedno odprite stran $salesforce_login v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Vedno odpri stran za nastavitev programa Salesforce v istem zavihku Tab, ko kliknete pojavno okno.",
+		"message": "Vedno odprite stran $salesforce_setup v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[nastavitev] ko uporabnik doda priljubljen zavihek, ne preverjaj, ali je v povezavi ID"
 	},
 	"or_drop": {
-		"message": "Ali spusti",
-		"description": "[uvoz] dovoli uporabniku, da premakne datoteke z miško in jih spusti"
+		"message": "Ali $drop",
+		"description": "[uvozi] dovolite uporabniku, da premika datoteke z miško in jih spusti"
 	},
 	"org_link": {
 		"message": "Povezava Org",
@@ -584,12 +592,12 @@
 		"description": "[zahtevaj_dovoljenje] oznaka, ko uporabnik ne želi trajno dovoliti dovoljenj"
 	},
 	"req_permissions_header": {
-		"message": "Prosimo, dovolite nam samodejni dostop do<br />strani za nastavitev Salesforce.",
-		"description": "[zahtevaj_dovoljenje] glava strani za zahtevo dovoljenj"
+		"message": "Dovolite nam samodejni dostop\ndo strani $salesforce_setup.",
+		"description": "[req_permission] glava strani za zahtevanje dovoljenj"
 	},
 	"req_permissions_paragraph": {
-		"message": "Če želite, lahko prikažete svoje priljubljene Tabs,<br />takoj ko se premaknete na stran za nastavitev Salesforce,<br />brez potrebe po vsakokratnem kliku te razširitve.",
-		"description": "[zahtevaj_dovoljenje] besedilo za razlago, zakaj se zahtevajo dovoljenja"
+		"message": "Če želite, lahko svoje priljubljene Tabs prikažete\ntakoj, ko se pomaknete na stran $salesforce_setup,\nne da bi morali vsakič klikniti to razširitev.",
+		"description": "[req_permission] besedilo, ki pojasnjuje, zakaj se zahtevajo dovoljenja"
 	},
 	"required": {
 		"message": "zahtevano",

@@ -300,7 +300,7 @@
 		"description": "[popup] botón de importar"
 	},
 	"import_duplicate_description": {
-		"message": "Se ignorarán las Tabs duplicadas.<br />Dos Tabs se consideran duplicadas si tienen la misma URL.",
+		"message": "Se ignorarán las Tabs duplicadas.\nDos Tabs se consideran duplicadas si tienen la misma URL.",
 		"description": "[importar] descripción de lo que hace el proceso de importación"
 	},
 	"import_invalid_file": {
@@ -396,11 +396,11 @@
 		"description": "[solicitar_permiso] etiqueta cuando el usuario no quiere permitir permisos permanentemente"
 	},
 	"req_permissions_header": {
-		"message": "Por favor, permítanos acceder<br />a las páginas de Configuración de Salesforce automáticamente.",
+		"message": "Por favor, permítanos acceder\na las páginas de Configuración de Salesforce automáticamente.",
 		"description": "[solicitar_permiso] encabezado de la página para solicitar permisos"
 	},
 	"req_permissions_paragraph": {
-		"message": "Si lo desea, puede hacer que sus Tabs favoritas aparezcan<br />tan pronto como navegue a una página de Configuración de Salesforce<br />sin tener que hacer clic en esta extensión cada vez.",
+		"message": "Si lo desea, puede hacer que sus Tabs favoritas aparezcan\ntan pronto como navegue a una página de Configuración de Salesforce\nsin tener que hacer clic en esta extensión cada vez.",
 		"description": "[solicitar_permiso] texto para explicar por qué se solicitan los permisos"
 	},
 	"required": {

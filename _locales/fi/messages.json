@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Tuo Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[pikavalikko]"
 	},
 	"cxm_move": {
 		"message": "🧭 Siirrä Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Poista Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[pikavalikko]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Tallenna Tabina",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[pikavalikko]"
 	},
 	"cxm_remove": {
 		"message": "💥 Poista Tab(t)",
@@ -132,8 +132,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Asetukset",
-		"description": "Nimike asetusvalikkoa varten"
+		"message": "⚙️ $settings",
+		"description": "Asetusvalikon nimiö"
 	},
 	"cxm_update": {
 		"message": "✏️ Päivitä Tab",
@@ -152,8 +152,8 @@
 		"description": "[popup] poista rivi"
 	},
 	"delete_all": {
-		"message": "Poista kaikki Tabit",
-		"description": "[popup] otsikko roskakoriin, joka tyhjentää kaikki Tabit"
+		"message": "$delete kaikki Tabs",
+		"description": "[ponnahdusikkuna] otsikko roskakorissa kaikkien Tabs tyhjentämiseksi"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] tuontiprosessia varten"
 	},
 	"import_title": {
-		"message": "Tuo Tab json-tiedostosta",
-		"description": "[popup] tuontipainikkeen otsikko"
+		"message": "$import_tabs JSON-tiedostosta",
+		"description": "[ponnahdusikkuna] otsikko tuontipainikkeessa"
 	},
 	"insert_another": {
 		"message": "Lisää toinen",
@@ -496,8 +496,16 @@
 		"description": "[eiSalesforce-asetus] virheellinen URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Tämä ei ole Salesforce Lightning -asetussivu.",
-		"description": "[eiSalesforce-asetus] käyttäjä ei ole Salesforce-sivulla."
+		"message": "Tämä ei ole $salesforce_lightning asennussivu.",
+		"description": "[notSalesforceSetup] käyttäjä ei ole Salesforce-sivulla."
+	},
+	"open_here": {
+		"message": "Avaa tässä Tab.",
+		"description": "[open-other-org-modal] valintanappi, jonka avulla käyttäjä voi avata samassa selaimen Tab"
+	},
+	"open_new_tab": {
+		"message": "Avaa uudessa Tab.",
+		"description": "[open-other-org-modal] valintanappi, jonka avulla käyttäjä voi avata uudessa selaimen Tab."
 	},
 	"open_settings": {
 		"message": "Avaa laajennuksen asetukset",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
 	},
 	"opt_automatic_open_login": {
-		"message": "Avaa Salesforce-kirjautumissivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
-		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan ollessaan satunnaisella verkkosivustolla"
+		"message": "Avaa $salesforce_login-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
+		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan satunnaisella verkkosivustolla"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Avaa Salesforce-asetussivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
-		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan ollessaan Salesforce-verkkosivustolla"
+		"message": "Avaa $salesforce_setup-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
+		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan Salesforce-verkkosivustolla"
 	},
 	"opt_en_fallback": {
 		"message": "en (Varavaihtoehto)",
@@ -528,11 +536,11 @@
 		"description": "[asetus] kun klikkaat suosikkitabiä, avaa se uudessa selainvälilehdessä"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Avaa Salesforce-kirjautumissivu aina samassa Tab-välilehdessä, kun napsautat ponnahdusikkunaa.",
+		"message": "Avaa $salesforce_login-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Avaa Salesforce-asetussivu aina samassa Tab-välilehdessä, kun napsautat ponnahdusikkunaa.",
+		"message": "Avaa $salesforce_setup-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[asetus] tallentaessa suosikkitabiä, älä tarkista linkin tunnusta"
 	},
 	"or_drop": {
-		"message": "Tai pudota",
-		"description": "[import] sallii käyttäjän vetää tiedostoja hiirellä ja pudottaa ne"
+		"message": "Tai $drop",
+		"description": "[tuo] anna käyttäjän siirtää tiedostoja hiirellä ja vapauttaa ne"
 	},
 	"org_link": {
 		"message": "Organisaatiolinkki",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] merkintä, kun käyttäjä ei halua antaa oikeuksia pysyvästi"
 	},
 	"req_permissions_header": {
-		"message": "Salli meidän päästä<br />Salesforce Setup -sivuille automaattisesti.",
-		"description": "[req_permission] sivun otsikko oikeuksien pyytämiseksi"
+		"message": "Salli meidän käyttää\n$salesforce_setup-sivuja automaattisesti.",
+		"description": "[req_permission] käyttöoikeuksien pyyntösivun otsikko"
 	},
 	"req_permissions_paragraph": {
-		"message": "Halutessasi suosikkitabejasi voidaan näyttää<br />heti, kun siirryt Salesforce Setup -sivulle<br />ilman, että klikkaat tätä laajennusta joka kerta.",
-		"description": "[req_permission] teksti, joka selittää miksi oikeuksia pyydetään"
+		"message": "Jos haluat, voit saada suosikki Tabs näkyviin\nheti, kun siirryt $salesforce_setup-sivulle\nilman, että sinun tarvitsee napsauttaa tätä laajennusta joka kerta.",
+		"description": "[req_permission] teksti, joka selittää, miksi käyttöoikeuksia pyydetään"
 	},
 	"required": {
 		"message": "pakollinen",

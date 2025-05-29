@@ -56,8 +56,8 @@
 		"description": "[다른_조직_열기_모달] 구성된 링크를 열도록 사용자에게 확인을 요청합니다."
 	},
 	"confirm_update_extension": {
-		"message": "$extension_label 새 버전이 지금 사용 가능합니다!",
-		"description": "리스너로부터 알 수 없는 메시지가 수신되었습니다"
+		"message": "$extension_label 의 새 버전을 지금 사용할 수 있습니다!",
+		"description": "수신기에서 알 수 없는 메시지를 받았습니다."
 	},
 	"continue": {
 		"message": "계속",
@@ -76,8 +76,8 @@
 		"description": "[컨텍스트_메뉴]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Tabs 가져오기",
-		"description": "[컨텍스트_메뉴]"
+		"message": "🆙 $import_tabs",
+		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab 이동",
@@ -104,12 +104,12 @@
 		"description": "[컨텍스트_메뉴]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Tab 제거",
-		"description": "[컨텍스트_메뉴]"
+		"message": "👋 $remove_tab",
+		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Tab으로 저장",
-		"description": "[컨텍스트_메뉴]"
+		"message": "💾 $save_tab",
+		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_remove": {
 		"message": "💥 Tab(들) 제거",
@@ -132,8 +132,8 @@
 		"description": "[컨텍스트_메뉴]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ 설정",
-		"description": "설정 메뉴 레이블"
+		"message": "⚙️ $settings",
+		"description": "설정 메뉴의 레이블"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab 업데이트",
@@ -152,8 +152,8 @@
 		"description": "[팝업] 행 삭제"
 	},
 	"delete_all": {
-		"message": "모든 Tabs 삭제",
-		"description": "[팝업] 모든 Tabs를 비우기 위한 휴지통 제목"
+		"message": "모든 Tabs $delete",
+		"description": "[팝업] 모든 Tabs를 비우기 위한 휴지통의 제목"
 	},
 	"drop": {
 		"message": "드롭",
@@ -452,8 +452,8 @@
 		"description": "[모달_제목] 가져오기 프로세스용"
 	},
 	"import_title": {
-		"message": "json 파일에서 Tabs 가져오기",
-		"description": "[팝업] 가져오기 버튼 제목"
+		"message": "JSON 파일에서 $import_tabs",
+		"description": "[팝업] 가져오기 버튼의 제목"
 	},
 	"insert_another": {
 		"message": "다른 것 삽입",
@@ -496,8 +496,16 @@
 		"description": "[Salesforce 설정 아님] 유효하지 않은 URL"
 	},
 	"nss_not_setup_page": {
-		"message": "이것은 Salesforce Lightning 설정 페이지가 아닙니다.",
-		"description": "[Salesforce 설정 아님] 사용자가 Salesforce 페이지에 있지 않습니다."
+		"message": "이 페이지는 $salesforce_lightning 설정 페이지가 아닙니다.",
+		"description": "[notSalesforceSetup] 사용자가 Salesforce 페이지에 없습니다."
+	},
+	"open_here": {
+		"message": "이 Tab에서 열기.",
+		"description": "[open-other-org-modal] 사용자가 동일한 브라우저 Tab에서 열 수 있도록 하는 라디오 버튼"
+	},
+	"open_new_tab": {
+		"message": "새 Tab에서 열기.",
+		"description": "[open-other-org-modal] 사용자가 새 브라우저 Tab에서 열 수 있도록 하는 라디오 버튼."
 	},
 	"open_settings": {
 		"message": "확장 프로그램 설정 열기",
@@ -508,11 +516,11 @@
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 설정 페이지로 리디렉션하는 버튼의 클릭 유도문안"
 	},
 	"opt_automatic_open_login": {
-		"message": "Salesforce 페이지가 아닐 때 팝업을 클릭하면 Salesforce 로그인 페이지를 자동으로 엽니다.",
+		"message": "Salesforce 페이지에 있지 않을 때 팝업을 클릭하면 $salesforce_login 페이지를 자동으로 엽니다.",
 		"description": "[설정] 사용자가 임의의 웹사이트에서 팝업을 열 때"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Salesforce 페이지일 때 팝업을 클릭하면 Salesforce 설정 페이지를 자동으로 엽니다.",
+		"message": "Salesforce 페이지에 있을 때 팝업을 클릭하면 $salesforce_setup 페이지를 자동으로 엽니다.",
 		"description": "[설정] 사용자가 Salesforce 웹사이트에서 팝업을 열 때"
 	},
 	"opt_en_fallback": {
@@ -528,11 +536,11 @@
 		"description": "[설정] 즐겨찾기 Tab을 클릭할 때 새 탭에서 열기"
 	},
 	"opt_open_login_same_tab": {
-		"message": "팝업을 클릭할 때 항상 같은 Tab에서 Salesforce 로그인 페이지를 엽니다.",
+		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_login 페이지를 엽니다.",
 		"description": "[설정]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "팝업을 클릭할 때 항상 같은 Tab에서 Salesforce 설정 페이지를 엽니다.",
+		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_setup 페이지를 엽니다.",
 		"description": "[설정]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[설정] Tab을 즐겨찾기에 추가할 때 링크의 ID 확인 방지"
 	},
 	"or_drop": {
-		"message": "또는 드롭",
+		"message": "또는 $drop",
 		"description": "[가져오기] 사용자가 마우스로 파일을 이동하고 놓을 수 있도록 허용"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[권한_요청] 사용자가 영구적으로 권한을 허용하고 싶지 않을 때의 레이블"
 	},
 	"req_permissions_header": {
-		"message": "자동으로<br />Salesforce 설정 페이지에 액세스할 수 있도록 허용해 주십시오.",
-		"description": "[권한_요청] 권한 요청 페이지의 헤더"
+		"message": "$salesforce_setup 페이지에 자동으로 액세스할 수 있도록 허용해 주십시오.",
+		"description": "[req_permission] 권한 요청 페이지의 헤더"
 	},
 	"req_permissions_paragraph": {
-		"message": "원하시면, 즐겨찾는 Tabs가<br />Salesforce 설정 페이지로 이동하자마자<br />매번 이 확장 프로그램을 클릭할 필요 없이 나타나도록 할 수 있습니다.",
-		"description": "[권한_요청] 권한을 요청하는 이유를 설명하는 텍스트"
+		"message": "원하는 경우 $salesforce_setup 페이지로 이동하자마자\n즐겨찾는 Tabs가 나타나도록 할 수 있습니다.\n매번 이 확장 프로그램을 클릭할 필요 없이 말입니다.",
+		"description": "[req_permission] 권한을 요청하는 이유를 설명하는 텍스트"
 	},
 	"required": {
 		"message": "필수",

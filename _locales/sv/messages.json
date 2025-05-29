@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "En ny version av $extension_label är nu tillgänglig!",
-		"description": "ett okänt meddelande har mottagits från en lyssnare"
+		"description": "ett okänt meddelande har tagits emot från en lyssnare"
 	},
 	"continue": {
 		"message": "Fortsätt",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importera Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[kontextmeny]"
 	},
 	"cxm_move": {
 		"message": "🧭 Flytta Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Ta bort Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[kontextmeny]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Spara som Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[kontextmeny]"
 	},
 	"cxm_remove": {
 		"message": "💥 Ta bort Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Inställningar",
+		"message": "⚙️ $settings",
 		"description": "Etikett för inställningsmenyn"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] radera en rad"
 	},
 	"delete_all": {
-		"message": "Radera alla Tabbar",
-		"description": "[popup] rubrik för papperskorgen för att tömma alla Tabbar"
+		"message": "$delete alla Tabs",
+		"description": "[popup] titel på papperskorgen för att tömma alla Tabs"
 	},
 	"drop": {
 		"message": "Släpp",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] för importprocessen"
 	},
 	"import_title": {
-		"message": "Importera Tabbar från en json-fil",
-		"description": "[popup] rubrik på importknappen"
+		"message": "$import_tabs från JSON-fil",
+		"description": "[popup] titel på importknappen"
 	},
 	"insert_another": {
 		"message": "Infoga ytterligare en",
@@ -496,8 +496,16 @@
 		"description": "[inteSalesforceSetup] en ogiltig URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Detta är inte en Salesforce Lightning-inställningssida.",
-		"description": "[inteSalesforceSetup] användaren är inte på en Salesforce-sida."
+		"message": "Detta är inte en $salesforce_lightning-installationssida.",
+		"description": "[notSalesforceSetup] användaren är inte på en Salesforce-sida."
+	},
+	"open_here": {
+		"message": "Öppna i denna Tab.",
+		"description": "[open-other-org-modal] alternativknapp för att låta användaren öppna i samma webbläsar-Tab"
+	},
+	"open_new_tab": {
+		"message": "Öppna i en ny Tab.",
+		"description": "[open-other-org-modal] alternativknapp för att låta användaren öppna i en ny webbläsar-Tab."
 	},
 	"open_settings": {
 		"message": "Öppna tilläggsinställningar",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
 	},
 	"opt_automatic_open_login": {
-		"message": "Öppna automatiskt Salesforce inloggningssida när du klickar på popup-fönstret medan du inte är på en Salesforce-sida.",
-		"description": "[inställning] när användaren öppnar popup-fönstret medan hen är på en slumpmässig webbplats"
+		"message": "Öppna $salesforce_login-sidan automatiskt när du klickar på popup-fönstret när du inte är på en Salesforce-sida.",
+		"description": "[inställning] när användaren öppnar popup-fönstret på en slumpmässig webbplats"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Öppna automatiskt Salesforce inställningssida när du klickar på popup-fönstret medan du är på en Salesforce-sida.",
-		"description": "[inställning] när användaren öppnar popup-fönstret medan hen är på en Salesforce-webbplats"
+		"message": "Öppna $salesforce_setup-sidan automatiskt när du klickar på popup-fönstret när du är på en Salesforce-sida.",
+		"description": "[inställning] när användaren öppnar popup-fönstret på en Salesforce-webbplats"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,11 +536,11 @@
 		"description": "[inställning] när användaren klickar på en favorit-Tab, öppna i en ny webbläsarflik"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Öppna alltid Salesforce inloggningssida i samma Tab när du klickar på popup-fönstret.",
+		"message": "Öppna alltid $salesforce_login-sidan i samma Tab när du klickar på popup-fönstret.",
 		"description": "[inställning]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Öppna alltid Salesforce inställningssida i samma Tab när du klickar på popup-fönstret.",
+		"message": "Öppna alltid $salesforce_setup-sidan i samma Tab när du klickar på popup-fönstret.",
 		"description": "[inställning]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[inställning] när användaren lägger till en favorit-Tab, kontrollera inte om det finns ett id i länken"
 	},
 	"or_drop": {
-		"message": "Eller dra",
-		"description": "[import] låter användaren dra filer med musen och släppa dem"
+		"message": "Eller $drop",
+		"description": "[importera] låt användaren flytta filer med musen och släppa dem"
 	},
 	"org_link": {
 		"message": "Organisationslänk",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] etikett när användaren inte vill ge behörigheter permanent"
 	},
 	"req_permissions_header": {
-		"message": "Var god låt oss få tillgång<br />till Salesforce Setup-sidor automatiskt.",
-		"description": "[req_permission] rubrik på sidan för behörighetsbegäran"
+		"message": "Tillåt oss att automatiskt komma åt\n$salesforce_setup-sidor.",
+		"description": "[req_permission] sidhuvud på sidan för att begära behörigheter"
 	},
 	"req_permissions_paragraph": {
-		"message": "Om du vill kan dina favorit Tabbar visas<br />så snart du navigerar till en Salesforce Setup-sida<br />utan att behöva klicka på detta tillägg varje gång.",
-		"description": "[req_permission] text som förklarar varför behörigheter begärs"
+		"message": "Om du vill kan du visa dina favorit-Tabs\nså snart du navigerar till en $salesforce_setup-sida\nutan att behöva klicka på det här tillägget varje gång.",
+		"description": "[req_permission] text som förklarar varför behörigheterna begärs"
 	},
 	"required": {
 		"message": "obligatoriskt",

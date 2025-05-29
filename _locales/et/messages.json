@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "$extension_label uus versioon on nüüd saadaval!",
-		"description": "listenerilt on vastu võetud tundmatu sõnum"
+		"description": "kuulajalt on saadud tundmatu teade"
 	},
 	"continue": {
 		"message": "Jätka",
@@ -76,7 +76,7 @@
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Impordi Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_move": {
@@ -104,11 +104,11 @@
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Eemalda Tab",
+		"message": "👋 $remove_tab",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Salvesta kui Tab",
+		"message": "💾 $save_tab",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_remove": {
@@ -132,8 +132,8 @@
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Seaded",
-		"description": "Silt seadete menüü jaoks"
+		"message": "⚙️ $settings",
+		"description": "Seadete menüü silt"
 	},
 	"cxm_update": {
 		"message": "✏️ Uuenda Tab",
@@ -152,8 +152,8 @@
 		"description": "[hüpikaken] kustuta rida"
 	},
 	"delete_all": {
-		"message": "Kustuta kõik Tabs",
-		"description": "[hüpikaken] pealkiri prügikastil kõigi Tabs'ide tühjendamiseks"
+		"message": "$delete kõik Tabs",
+		"description": "[hüpikaken] prügikasti pealkiri kõigi Tabs tühjendamiseks"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[modaal_pealkiri] importimisprotsessi jaoks"
 	},
 	"import_title": {
-		"message": "Impordi Tabs json-failist",
-		"description": "[hüpikaken] pealkiri importimisnupul"
+		"message": "$import_tabs JSON-failist",
+		"description": "[hüpikaken] impordinupu pealkiri"
 	},
 	"insert_another": {
 		"message": "Sisesta teine",
@@ -496,8 +496,16 @@
 		"description": "[mitteSalesforce'iSeadistus] kehtetu URL"
 	},
 	"nss_not_setup_page": {
-		"message": "See ei ole Salesforce Lightningu seadistusleht.",
-		"description": "[mitteSalesforce'iSeadistus] kasutaja ei ole Salesforce'i lehel."
+		"message": "See ei ole $salesforce_lightning seadistusleht.",
+		"description": "[notSalesforceSetup] kasutaja ei ole Salesforce'i lehel."
+	},
+	"open_here": {
+		"message": "Ava siin Tab.",
+		"description": "[open-other-org-modal] raadionupp, mis laseb kasutajal avada samas brauseri Tab"
+	},
+	"open_new_tab": {
+		"message": "Ava uues Tab.",
+		"description": "[open-other-org-modal] raadionupp, mis laseb kasutajal avada uues brauseri Tab."
 	},
 	"open_settings": {
 		"message": "Ava laienduse seaded",
@@ -508,11 +516,11 @@
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
 	},
 	"opt_automatic_open_login": {
-		"message": "Ava automaatselt Salesforce'i sisselogimisleht, kui klõpsad hüpikaknal, kui sa ei ole Salesforce'i lehel.",
-		"description": "[seadistus] kui kasutaja avab hüpikakna suvalisel veebisaidil"
+		"message": "Automaatselt ava $salesforce_login leht, kui klõpsate hüpikaknal, kui te ei ole Salesforce'i lehel.",
+		"description": "[seadistus] kui kasutaja avab hüpikakna juhuslikul veebisaidil"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Ava automaatselt Salesforce'i seadistusleht, kui klõpsad hüpikaknal, kui sa oled Salesforce'i lehel.",
+		"message": "Automaatselt ava $salesforce_setup leht, kui klõpsate hüpikaknal, kui olete Salesforce'i lehel.",
 		"description": "[seadistus] kui kasutaja avab hüpikakna Salesforce'i veebisaidil"
 	},
 	"opt_en_fallback": {
@@ -528,11 +536,11 @@
 		"description": "[seade] kui klõpsate lemmikul Tabil, avage see uues brauseri vahekaardis"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Ava alati Salesforce'i sisselogimisleht samal Tab-il, kui klõpsad hüpikaknal.",
+		"message": "Ava alati $salesforce_login leht samas Tab, kui klõpsate hüpikaknal.",
 		"description": "[seadistus]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Ava alati Salesforce'i seadistusleht samal Tab-il, kui klõpsad hüpikaknal.",
+		"message": "Ava alati $salesforce_setup leht samas Tab, kui klõpsate hüpikaknal.",
 		"description": "[seadistus]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[seade] salvestades lemmiku Tab, ära kontrolli lingi ID-d"
 	},
 	"or_drop": {
-		"message": "Või lohista siia",
-		"description": "[import] lase kasutajal faile hiirega liigutada ja lahti lasta"
+		"message": "Või $drop",
+		"description": "[import] lase kasutajal faile hiirega liigutada ja vabastada"
 	},
 	"org_link": {
 		"message": "Org link",
@@ -584,12 +592,12 @@
 		"description": "[loa_taotlus] silt, kui kasutaja ei soovi lube püsivalt anda"
 	},
 	"req_permissions_header": {
-		"message": "Palun lubage meil automaatselt pääseda<br />Salesforce'i seadistuslehtedele.",
-		"description": "[loa_taotlus] lehe päis lubade taotlemiseks"
+		"message": "Palun lubage meil automaatselt juurde pääseda\n$salesforce_setup lehtedele.",
+		"description": "[req_permission] lubade taotlemise lehe päis"
 	},
 	"req_permissions_paragraph": {
-		"message": "Soovi korral saate oma lemmik Tabs ilmuma panna<br />kohe, kui navigeerite Salesforce'i seadistuslehele<br />ilma et peaksite iga kord seda laiendust klõpsama.",
-		"description": "[loa_taotlus] tekst, mis selgitab, miks lube taotletakse"
+		"message": "Soovi korral võite lasta oma lemmik Tabs ilmuda\nkohe, kui navigeerite $salesforce_setup lehele,\nilma et peaksite iga kord seda laiendust klõpsama.",
+		"description": "[req_permission] tekst, mis selgitab, miks lube taotletakse"
 	},
 	"required": {
 		"message": "nõutud",

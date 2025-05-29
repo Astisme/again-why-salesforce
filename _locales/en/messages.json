@@ -435,7 +435,7 @@
 		"description": "[popup] import button"
 	},
 	"import_duplicate_description": {
-		"message": "Duplicate tabs will be ignored.<br />Two tabs are considered duplicates if they have the same URL.",
+		"message": "Duplicate tabs will be ignored.\nTwo tabs are considered duplicates if they have the same URL.",
 		"description": "[import] description of what the import process does"
 	},
 	"import_invalid_file": {
@@ -591,11 +591,11 @@
 		"description": "[req_permission] label when the user does not want to allow permissions permanently"
 	},
 	"req_permissions_header": {
-		"message": "Please allow us to access<br />$salesforce_setup pages automatically.",
+		"message": "Please allow us to access\n$salesforce_setup pages automatically.",
 		"description": "[req_permission] header of the page to request permissions"
 	},
 	"req_permissions_paragraph": {
-		"message": "If you want, you may have your favourite Tabs appear<br />as soon as you navigate to a $salesforce_setup page<br />without having to click this extension every time.",
+		"message": "If you want, you may have your favourite Tabs appear\nas soon as you navigate to a $salesforce_setup page\nwithout having to click this extension every time.",
 		"description": "[req_permission] text to explain why the permissions are being requested"
 	},
 	"required": {

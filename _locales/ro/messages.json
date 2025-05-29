@@ -76,7 +76,7 @@
 		"description": "[meniu-contextual]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importați Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[meniu-contextual]"
 	},
 	"cxm_move": {
@@ -104,11 +104,11 @@
 		"description": "[meniu-contextual]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Eliminați Tab",
+		"message": "👋 $remove_tab",
 		"description": "[meniu-contextual]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Salvați ca Tab",
+		"message": "💾 $save_tab",
 		"description": "[meniu-contextual]"
 	},
 	"cxm_remove": {
@@ -132,7 +132,7 @@
 		"description": "[meniu-contextual]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Setări",
+		"message": "⚙️ $settings",
 		"description": "Etichetă pentru meniul de setări"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] ștergeți un rând"
 	},
 	"delete_all": {
-		"message": "Ștergeți toate Tabs",
-		"description": "[popup] titlu pe coșul de gunoi pentru a goli toate Tabs"
+		"message": "$delete toate Tabs",
+		"description": "[fereastră-pop-up] titlu pe coșul de gunoi pentru a goli toate Tabs"
 	},
 	"drop": {
 		"message": "Trageți",
@@ -452,8 +452,8 @@
 		"description": "[titlu-modal] pentru procesul de import"
 	},
 	"import_title": {
-		"message": "Importați Tabs din fișierul json",
-		"description": "[popup] titlu pe butonul de import"
+		"message": "$import_tabs din fișierul JSON",
+		"description": "[fereastră-pop-up] titlu pe butonul de import"
 	},
 	"insert_another": {
 		"message": "Introduceți altul",
@@ -496,8 +496,16 @@
 		"description": "[nuEsteConfigurareSalesforce] o adresă URL nevalidă"
 	},
 	"nss_not_setup_page": {
-		"message": "Aceasta nu este o pagină de configurare Salesforce Lightning.",
-		"description": "[nuEsteConfigurareSalesforce] utilizatorul nu se află pe o pagină Salesforce."
+		"message": "Aceasta nu este o pagină de Configurare $salesforce_lightning.",
+		"description": "[notSalesforceSetup] utilizatorul nu se află pe o pagină Salesforce."
+	},
+	"open_here": {
+		"message": "Deschide în acest Tab.",
+		"description": "[open-other-org-modal] buton radio pentru a permite utilizatorului să deschidă în același Tab de browser"
+	},
+	"open_new_tab": {
+		"message": "Deschide într-un Tab nou.",
+		"description": "[open-other-org-modal] buton radio pentru a permite utilizatorului să deschidă într-un Tab nou de browser."
 	},
 	"open_settings": {
 		"message": "Deschide Setările Extensiei",
@@ -508,11 +516,11 @@
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Deschide automat pagina de autentificare Salesforce când se face clic pe fereastra pop-up în timp ce nu se află pe o pagină Salesforce.",
+		"message": "Deschideți automat pagina $salesforce_login atunci când faceți clic pe fereastra pop-up în timp ce nu vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web aleatoriu"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Deschide automat pagina de configurare Salesforce când se face clic pe fereastra pop-up în timp ce se află pe o pagină Salesforce.",
+		"message": "Deschideți automat pagina $salesforce_setup atunci când faceți clic pe fereastra pop-up în timp ce vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web Salesforce"
 	},
 	"opt_en_fallback": {
@@ -528,11 +536,11 @@
 		"description": "[setare] când utilizatorul face clic pe un Tab favorit, să se deschidă într-o filă nouă"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Deschide întotdeauna pagina de autentificare Salesforce în același Tab când se face clic pe fereastra pop-up.",
+		"message": "Deschideți întotdeauna pagina $salesforce_login în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Deschide întotdeauna pagina de configurare Salesforce în același Tab când se face clic pe fereastra pop-up.",
+		"message": "Deschideți întotdeauna pagina $salesforce_setup în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[setare] când adăugați un Tab favorit, să nu se verifice dacă linkul conține un ID Salesforce"
 	},
 	"or_drop": {
-		"message": "Sau plasați",
+		"message": "Sau $drop",
 		"description": "[import] permiteți utilizatorului să mute fișiere cu mouse-ul și să le elibereze"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[cerere_permisiune] etichetă când utilizatorul nu dorește să permită permisiuni permanent"
 	},
 	"req_permissions_header": {
-		"message": "Vă rugăm să ne permiteți să accesăm automat<br />paginile de Configurare Salesforce.",
-		"description": "[cerere_permisiune] antetul paginii pentru a solicita permisiuni"
+		"message": "Vă rugăm să ne permiteți să accesăm\nautomat paginile $salesforce_setup.",
+		"description": "[req_permission] antetul paginii pentru solicitarea permisiunilor"
 	},
 	"req_permissions_paragraph": {
-		"message": "Dacă doriți, puteți face ca Tabs favorite să apară<br />imediat ce navigați la o pagină de Configurare Salesforce<br />fără a trebui să faceți clic pe această extensie de fiecare dată.",
-		"description": "[cerere_permisiune] text pentru a explica de ce se solicită permisiunile"
+		"message": "Dacă doriți, puteți face ca Tabs preferate să apară\nde îndată ce navigați la o pagină $salesforce_setup\nfără a fi nevoie să faceți clic pe această extensie de fiecare dată.",
+		"description": "[req_permission] text pentru a explica de ce sunt solicitate permisiunile"
 	},
 	"required": {
 		"message": "obligatoriu",

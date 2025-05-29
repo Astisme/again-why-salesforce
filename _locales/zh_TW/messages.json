@@ -56,8 +56,8 @@
 		"description": "[open-other-org-modal] 向使用者請求確認以開啟所構建的連結"
 	},
 	"confirm_update_extension": {
-		"message": "$extension_label 的新版本現已可用！",
-		"description": "從偵聽器收到一個未知訊息"
+		"message": "$extension_label 的新版本現已推出！",
+		"description": "從接聽程式收到未知訊息"
 	},
 	"continue": {
 		"message": "繼續",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 匯入 Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[內容功能表]"
 	},
 	"cxm_move": {
 		"message": "🧭 移動 Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 移除 Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[內容功能表]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 儲存為 Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[內容功能表]"
 	},
 	"cxm_remove": {
 		"message": "💥 移除 Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ 設定",
+		"message": "⚙️ $settings",
 		"description": "設定選單的標籤"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] 刪除一行"
 	},
 	"delete_all": {
-		"message": "刪除所有 Tab",
-		"description": "[popup] 垃圾桶標題，用於清空所有 Tab"
+		"message": "$delete 所有 Tab",
+		"description": "[快顯視窗] 清除所有 Tab 的資源回收筒標題"
 	},
 	"drop": {
 		"message": "拖曳",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] 匯入過程用的標題"
 	},
 	"import_title": {
-		"message": "Import Tabs from json file",
-		"description": "[popup] 匯入按鈕上的標題"
+		"message": "從 JSON 檔案 $import_tabs",
+		"description": "[快顯視窗] 匯入按鈕上的標題"
 	},
 	"insert_another": {
 		"message": "Insert another",
@@ -496,8 +496,16 @@
 		"description": "[非Salesforce設定] 無效的 URL"
 	},
 	"nss_not_setup_page": {
-		"message": "這不是 Salesforce Lightning 設定頁面。",
-		"description": "[非Salesforce設定] 使用者不在 Salesforce 頁面上。"
+		"message": "這不是 $salesforce_lightning 設定頁面。",
+		"description": "[notSalesforceSetup] 使用者不在 Salesforce 頁面上。"
+	},
+	"open_here": {
+		"message": "在此 Tab 中開啟。",
+		"description": "[open-other-org-modal] 圓形按鈕，讓使用者在相同的瀏覽器 Tab 中開啟"
+	},
+	"open_new_tab": {
+		"message": "在新 Tab 中開啟。",
+		"description": "[open-other-org-modal] 圓形按鈕，讓使用者在新的瀏覽器 Tab 中開啟。"
 	},
 	"open_settings": {
 		"message": "開啟擴充功能設定",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce Setup 頁面"
 	},
 	"opt_automatic_open_login": {
-		"message": "當不在 Salesforce 頁面上時，按一下彈出式視窗時自動開啟 Salesforce 登入頁面。",
-		"description": "[設定] 當使用者在任意網站上開啟彈出式視窗時"
+		"message": "當不在 Salesforce 頁面上時，按一下快顯視窗時自動開啟 $salesforce_login 頁面。",
+		"description": "[設定] 當使用者在隨機網站上開啟快顯視窗時"
 	},
 	"opt_automatic_open_setup": {
-		"message": "當在 Salesforce 頁面上時，按一下彈出式視窗時自動開啟 Salesforce 設定頁面。",
-		"description": "[設定] 當使用者在 Salesforce 網站上開啟彈出式視窗時"
+		"message": "當在 Salesforce 頁面上時，按一下快顯視窗時自動開啟 $salesforce_setup 頁面。",
+		"description": "[設定] 當使用者在 Salesforce 網站上開啟快顯視窗時"
 	},
 	"opt_en_fallback": {
 		"message": "en (備用)",
@@ -528,11 +536,11 @@
 		"description": "[設定] 當用戶點擊收藏的 Tab 時，在新標籤中打開"
 	},
 	"opt_open_login_same_tab": {
-		"message": "按一下彈出式視窗時，一律在同一個 Tab 中開啟 Salesforce 登入頁面。",
+		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_login 頁面。",
 		"description": "[設定]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "按一下彈出式視窗時，一律在同一個 Tab 中開啟 Salesforce 設定頁面。",
+		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_setup 頁面。",
 		"description": "[設定]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[設定] 當用戶收藏 Tab 時，跳過檢查鏈接中是否有 ID"
 	},
 	"or_drop": {
-		"message": "Or drop",
-		"description": "[import] 讓使用者用滑鼠拖拽並釋放檔案"
+		"message": "或 $drop",
+		"description": "[匯入] 讓使用者使用滑鼠移動檔案並放開它們"
 	},
 	"org_link": {
 		"message": "Org Link",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] 當使用者不希望永久授予權限時的標籤"
 	},
 	"req_permissions_header": {
-		"message": "Please allow us to access<br />Salesforce Setup pages automatically.",
-		"description": "[req_permission] 請求權限頁面的標題"
+		"message": "請允許我們自動存取\n$salesforce_setup 頁面。",
+		"description": "[req_permission] 要求權限頁面的標頭"
 	},
 	"req_permissions_paragraph": {
-		"message": "If you want, you may have your favourite Tabs appear<br />as soon as you navigate to a Salesforce Setup page<br />without having to click this extension every time.",
-		"description": "[req_permission] 解釋請求權限原因的文字"
+		"message": "如果您願意，您可以在導覽至 $salesforce_setup 頁面後\n立即顯示您最愛的 Tabs，\n而不需要每次都按一下此擴充功能。",
+		"description": "[req_permission] 說明為何要求權限的文字"
 	},
 	"required": {
 		"message": "required",

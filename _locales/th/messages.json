@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 นำเข้า Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[เมนูบริบท]"
 	},
 	"cxm_move": {
 		"message": "🧭 ย้าย Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 ลบ Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[เมนูบริบท]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 บันทึกเป็น Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[เมนูบริบท]"
 	},
 	"cxm_remove": {
 		"message": "💥 ลบ Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ การตั้งค่า",
+		"message": "⚙️ $settings",
 		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] ลบแถว"
 	},
 	"delete_all": {
-		"message": "ลบ Tab ทั้งหมด",
-		"description": "[popup] หัวเรื่องบนถังขยะสำหรับลบ Tab ทั้งหมด"
+		"message": "$delete Tabs ทั้งหมด",
+		"description": "[ป๊อปอัป] ชื่อบนถังขยะเพื่อล้าง Tabs ทั้งหมด"
 	},
 	"drop": {
 		"message": "วาง",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] สำหรับกระบวนการนำเข้า"
 	},
 	"import_title": {
-		"message": "Import Tabs from json file",
-		"description": "[popup] หัวเรื่องบนปุ่มนำเข้า"
+		"message": "$import_tabs จากไฟล์ JSON",
+		"description": "[ป๊อปอัป] ชื่อบนปุ่มนำเข้า"
 	},
 	"insert_another": {
 		"message": "Insert another",
@@ -496,8 +496,16 @@
 		"description": "[hindiSetupNgSalesforce] isang URL na hindi balido"
 	},
 	"nss_not_setup_page": {
-		"message": "Hindi ito isang pahina ng Setup ng Salesforce Lightning.",
-		"description": "[hindiSetupNgSalesforce] wala ang user sa isang pahina ng Salesforce."
+		"message": "นี่ไม่ใช่หน้าการตั้งค่า $salesforce_lightning",
+		"description": "[notSalesforceSetup] ผู้ใช้ไม่ได้อยู่ในหน้า Salesforce"
+	},
+	"open_here": {
+		"message": "เปิดใน Tab นี้",
+		"description": "[open-other-org-modal] ปุ่มตัวเลือกเพื่อให้ผู้ใช้เปิดใน Tab เบราว์เซอร์เดียวกัน"
+	},
+	"open_new_tab": {
+		"message": "เปิดใน Tab ใหม่",
+		"description": "[open-other-org-modal] ปุ่มตัวเลือกเพื่อให้ผู้ใช้เปิดใน Tab เบราว์เซอร์ใหม่"
 	},
 	"open_settings": {
 		"message": "เปิดการตั้งค่าส่วนขยาย",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
 	},
 	"opt_automatic_open_login": {
-		"message": "Awtomatikong buksan ang pahina ng Pag-login sa Salesforce kapag nag-click sa popup habang wala sa isang pahina ng Salesforce.",
-		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang random na website"
+		"message": "เปิดหน้า $salesforce_login โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปในขณะที่ไม่ได้อยู่บนหน้า Salesforce",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์แบบสุ่ม"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Awtomatikong buksan ang pahina ng Setup ng Salesforce kapag nag-click sa popup habang nasa isang pahina ng Salesforce.",
-		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang website ng Salesforce"
+		"message": "เปิดหน้า $salesforce_setup โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปขณะอยู่บนหน้า Salesforce",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์ Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (สำรอง)",
@@ -528,12 +536,12 @@
 		"description": "[การตั้งค่า] เมื่อผู้ใช้คลิก Tab ที่ชื่นชอบ ให้เปิดในแท็บเบราว์เซอร์ใหม่"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Palaging buksan ang pahina ng Pag-login sa Salesforce sa parehong Tab kapag nag-click sa popup.",
-		"description": "[setting]"
+		"message": "เปิดหน้า $salesforce_login ใน Tab เดียวกันเสมอเมื่อคลิกที่ป๊อปอัป",
+		"description": "[การตั้งค่า]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Palaging buksan ang pahina ng Setup ng Salesforce sa parehong Tab kapag nag-click sa popup.",
-		"description": "[setting]"
+		"message": "เปิดหน้า $salesforce_setup ใน Tab เดียวกันเสมอเมื่อคลิกที่ป๊อปอัป",
+		"description": "[การตั้งค่า]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag ginagamit).",
@@ -552,8 +560,8 @@
 		"description": "[การตั้งค่า] เมื่อผู้ใช้เพิ่ม Tab ที่ชื่นชอบ ให้ข้ามการตรวจสอบว่ามี ID ในลิงก์ที่บันทึก"
 	},
 	"or_drop": {
-		"message": "Or drop",
-		"description": "[import] อนุญาตให้ผู้ใช้ลากไฟล์ด้วยเมาส์แล้ววาง"
+		"message": "หรือ $drop",
+		"description": "[นำเข้า] ให้ผู้ใช้ย้ายไฟล์ด้วยเมาส์และปล่อยไฟล์เหล่านั้น"
 	},
 	"org_link": {
 		"message": "Org Link",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] ป้ายเมื่อผู้ใช้ไม่ต้องการให้ขออนุญาตอีกต่อไป"
 	},
 	"req_permissions_header": {
-		"message": "Please allow us to access<br />Salesforce Setup pages automatically.",
-		"description": "[req_permission] หัวเรื่องของหน้าที่ขออนุญาต"
+		"message": "โปรดอนุญาตให้เราเข้าถึง\nหน้า $salesforce_setup โดยอัตโนมัติ",
+		"description": "[req_permission] ส่วนหัวของหน้าเพื่อขอสิทธิ์"
 	},
 	"req_permissions_paragraph": {
-		"message": "If you want, you may have your favourite Tabs appear<br />as soon as you navigate to a Salesforce Setup page<br />without having to click this extension every time.",
-		"description": "[req_permission] ข้อความอธิบายเหตุผลที่ขออนุญาต"
+		"message": "หากคุณต้องการ คุณสามารถให้ Tabs ที่คุณชื่นชอบปรากฏขึ้น\nทันทีที่คุณไปที่หน้า $salesforce_setup\nโดยไม่ต้องคลิกส่วนขยายนี้ทุกครั้ง",
+		"description": "[req_permission] ข้อความเพื่ออธิบายว่าทำไมจึงมีการร้องขอการอนุญาต"
 	},
 	"required": {
 		"message": "required",

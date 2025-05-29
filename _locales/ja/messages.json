@@ -56,8 +56,8 @@
 		"description": "[open-other-org-modal] 作成されたリンクを開くためにユーザーに確認を求めます"
 	},
 	"confirm_update_extension": {
-		"message": "$extension_label の新しいバージョンが利用可能です！",
-		"description": "リスナーから不明なメッセージが受信されました"
+		"message": "$extension_label の新しいバージョンが利用可能になりました！",
+		"description": "リスナーから不明なメッセージを受信しました"
 	},
 	"continue": {
 		"message": "続行",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Tab をインポートする",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab を移動する",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Tab を削除する",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Tab として保存する",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_remove": {
 		"message": "💥 Tab(たち) を削除する",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ 設定",
+		"message": "⚙️ $settings",
 		"description": "設定メニューのラベル"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] 行を削除する"
 	},
 	"delete_all": {
-		"message": "すべての Tabs を削除する",
-		"description": "[popup] すべての Tabs を空にするためのゴミ箱のタイトル"
+		"message": "すべてのTabsを$delete",
+		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"
 	},
 	"drop": {
 		"message": "ドロップ",
@@ -451,8 +451,8 @@
 		"description": "[モーダルタイトル] インポート処理用"
 	},
 	"import_title": {
-		"message": "JSON ファイルから Tabs をインポートする",
-		"description": "[popup] インポートボタンのタイトル"
+		"message": "JSONファイルから$import_tabs",
+		"description": "[ポップアップ] インポートボタンのタイトル"
 	},
 	"insert_another": {
 		"message": "別のものを挿入する",
@@ -495,8 +495,16 @@
 		"description": "[Salesforceセットアップ以外] 無効なURL"
 	},
 	"nss_not_setup_page": {
-		"message": "これはSalesforce Lightning Setupページではありません。",
-		"description": "[Salesforceセットアップ以外] ユーザーはSalesforceページにいません。"
+		"message": "これは $salesforce_lightning の設定ページではありません。",
+		"description": "[notSalesforceSetup] ユーザーはSalesforceページにいません。"
+	},
+	"open_here": {
+		"message": "このTabで開く。",
+		"description": "[open-other-org-modal] ユーザーが同じブラウザTabで開くことを許可するラジオボタン"
+	},
+	"open_new_tab": {
+		"message": "新しいTabで開く。",
+		"description": "[open-other-org-modal] ユーザーが新しいブラウザTabで開くことを許可するラジオボタン。"
 	},
 	"open_settings": {
 		"message": "拡張機能設定を開く",
@@ -507,12 +515,12 @@
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
 	},
 	"opt_automatic_open_login": {
-		"message": "Salesforceページ以外のページでポップアップをクリックしたときに、Salesforceログインページを自動的に開きます。",
-		"description": "[設定] ユーザーがランダムなWebサイトでポップアップを開いた場合"
+		"message": "Salesforceページにいないときにポップアップをクリックすると、$salesforce_loginページを自動的に開きます。",
+		"description": "[設定] ユーザーがランダムなウェブサイトでポップアップを開いたとき"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Salesforceページでポップアップをクリックしたときに、Salesforce設定ページを自動的に開きます。",
-		"description": "[設定] ユーザーがSalesforce Webサイトでポップアップを開いた場合"
+		"message": "Salesforceページにいるときにポップアップをクリックすると、$salesforce_setupページを自動的に開きます。",
+		"description": "[設定] ユーザーがSalesforceウェブサイトでポップアップを開いたとき"
 	},
 	"opt_en_fallback": {
 		"message": "en（フォールバック）",
@@ -527,11 +535,11 @@
 		"description": "[設定] お気に入りのTabをクリックしたときに新しいタブで開く"
 	},
 	"opt_open_login_same_tab": {
-		"message": "ポップアップをクリックしたときに、Salesforceログインページを常に同じTabで開きます。",
+		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_loginページを開きます。",
 		"description": "[設定]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "ポップアップをクリックしたときに、Salesforce設定ページを常に同じTabで開きます。",
+		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_setupページを開きます。",
 		"description": "[設定]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -551,8 +559,8 @@
 		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
 	},
 	"or_drop": {
-		"message": "またはドロップ",
-		"description": "[インポート] ユーザーがマウスでファイルを移動させて離せるようにします"
+		"message": "または$drop",
+		"description": "[インポート] ユーザーがマウスでファイルを移動してドロップできるようにする"
 	},
 	"org_link": {
 		"message": "Org リンク",
@@ -583,12 +591,12 @@
 		"description": "[req_permission] 常に許可しない場合のラベル"
 	},
 	"req_permissions_header": {
-		"message": "どうか自動的に<br />Salesforce Setup ページにアクセスさせてください。",
-		"description": "[req_permission] 許可を求めるページのヘッダー"
+		"message": "$salesforce_setupページへの\n自動アクセスを許可してください。",
+		"description": "[req_permission] 権限を要求するページのヘッダー"
 	},
 	"req_permissions_paragraph": {
-		"message": "もしご希望なら、Salesforce Setup ページに移動した際に<br />お気に入りの Tabs がすぐに表示されます。<br />この拡張機能を毎回クリックする必要はありません。",
-		"description": "[req_permission] 許可を求める理由の説明"
+		"message": "必要に応じて、$salesforce_setupページに移動するとすぐに\nお気に入りのTabsを表示できます。\n毎回この拡張機能をクリックする必要はありません。",
+		"description": "[req_permission] 権限が要求される理由を説明するテキスト"
 	},
 	"required": {
 		"message": "必須",

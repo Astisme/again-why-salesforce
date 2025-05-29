@@ -56,7 +56,7 @@
 		"description": "[başka-kuruluş-aç-modal] oluşturulan bağlantıyı açmak için kullanıcıdan onay isteyin."
 	},
 	"confirm_update_extension": {
-		"message": "$extension_label yeni bir sürümü artık mevcut!",
+		"message": "$extension_label uygulamasının yeni bir sürümü şimdi mevcut!",
 		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
 	},
 	"continue": {
@@ -76,8 +76,8 @@
 		"description": "[bağlam-menüsü]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Tabs İçe Aktar",
-		"description": "[bağlam-menüsü]"
+		"message": "🆙 $import_tabs",
+		"description": "[içerik-menüsü]"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab Taşı",
@@ -104,12 +104,12 @@
 		"description": "[bağlam-menüsü]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Tab Kaldır",
-		"description": "[bağlam-menüsü]"
+		"message": "👋 $remove_tab",
+		"description": "[içerik-menüsü]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Tab Olarak Kaydet",
-		"description": "[bağlam-menüsü]"
+		"message": "💾 $save_tab",
+		"description": "[içerik-menüsü]"
 	},
 	"cxm_remove": {
 		"message": "💥 Tab(ları) Kaldır",
@@ -132,8 +132,8 @@
 		"description": "[bağlam-menüsü]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Ayarlar",
-		"description": "Ayarlar menüsü etiketi"
+		"message": "⚙️ $settings",
+		"description": "Ayarlar menüsü için etiket"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab Güncelle",
@@ -152,8 +152,8 @@
 		"description": "[açılır-pencere] bir satırı sil"
 	},
 	"delete_all": {
-		"message": "Tüm Tabs Sil",
-		"description": "[açılır-pencere] tüm Tabs boşaltmak için çöp kutusu üzerindeki başlık"
+		"message": "Tüm Tabs $delete",
+		"description": "[popup] tüm Tabs boşaltmak için çöp kutusundaki başlık"
 	},
 	"drop": {
 		"message": "Bırakın",
@@ -452,8 +452,8 @@
 		"description": "[modal-başlığı] içe aktarma işlemi için"
 	},
 	"import_title": {
-		"message": "Json dosyasından Tabs İçe Aktar",
-		"description": "[açılır-pencere] içe aktarma düğmesi üzerindeki başlık"
+		"message": "JSON dosyasından $import_tabs",
+		"description": "[popup] içe aktarma düğmesindeki başlık"
 	},
 	"insert_another": {
 		"message": "Başka bir tane ekle",
@@ -496,8 +496,16 @@
 		"description": "[SalesforceKurulumuDeğil] geçersiz bir URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Bu bir Salesforce Lightning Kurulum sayfası değil.",
-		"description": "[SalesforceKurulumuDeğil] kullanıcı bir Salesforce sayfasında değil."
+		"message": "Bu bir $salesforce_lightning Kurulum sayfası değil.",
+		"description": "[notSalesforceSetup] kullanıcı bir Salesforce sayfasında değil."
+	},
+	"open_here": {
+		"message": "Bu Tab sekmesinde aç.",
+		"description": "[open-other-org-modal] kullanıcının aynı tarayıcı sekmesinde açmasına izin veren radyo düğmesi"
+	},
+	"open_new_tab": {
+		"message": "Yeni bir Tab sekmesinde aç.",
+		"description": "[open-other-org-modal] kullanıcının yeni bir tarayıcı sekmesinde açmasına izin veren radyo düğmesi."
 	},
 	"open_settings": {
 		"message": "Uzantı Ayarlarını Aç",
@@ -508,12 +516,12 @@
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
 	},
 	"opt_automatic_open_login": {
-		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklarken Salesforce Giriş sayfasını otomatik olarak açın.",
-		"description": "[ayarlama] kullanıcı rastgele bir web sitesindeyken açılır pencereyi açtığında"
+		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklandığında $salesforce_login sayfasını otomatik olarak aç.",
+		"description": "[ayar] kullanıcı rastgele bir web sitesindeyken açılır pencereyi açtığında"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Bir Salesforce sayfasındayken açılır pencereye tıklarken Salesforce Kurulum sayfasını otomatik olarak açın.",
-		"description": "[ayarlama] kullanıcı bir Salesforce web sitesindeyken açılır pencereyi açtığında"
+		"message": "Bir Salesforce sayfasındayken açılır pencereye tıklandığında $salesforce_setup sayfasını otomatik olarak aç.",
+		"description": "[ayar] kullanıcı bir Salesforce web sitesindeyken açılır pencereyi açtığında"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,12 +536,12 @@
 		"description": "[ayar] kullanıcı favori Sekmeye tıkladığında yeni sekmede aç"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Açılır pencereye tıklarken Salesforce Giriş sayfasını her zaman aynı Tab'de açın.",
-		"description": "[ayarlama]"
+		"message": "Açılır pencereye tıklandığında $salesforce_login sayfasını her zaman aynı Tab sekmesinde aç.",
+		"description": "[ayar]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Açılır pencereye tıklarken Salesforce Kurulum sayfasını her zaman aynı Tab'de açın.",
-		"description": "[ayarlama]"
+		"message": "Açılır pencereye tıklandığında $salesforce_setup sayfasını her zaman aynı Tab sekmesinde aç.",
+		"description": "[ayar]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Lightning Navigasyon kullanımını engelleyin (kullanımdayken daha hızlı yükleme).",
@@ -552,8 +560,8 @@
 		"description": "[ayar] Sekmeyi favoriye eklerken bağlantıda kimlik denetimini önle"
 	},
 	"or_drop": {
-		"message": "Veya bırakın",
-		"description": "[içe-aktar] kullanıcının fareleriyle dosyaları taşımasına ve bırakmasına izin verin"
+		"message": "Veya $drop",
+		"description": "[içe aktarma] kullanıcının dosyaları faresiyle taşımasına ve bırakmasına izin verin"
 	},
 	"org_link": {
 		"message": "Kuruluş Bağlantısı",
@@ -584,12 +592,12 @@
 		"description": "[izin_iste] kullanıcı izinleri kalıcı olarak vermek istemediğinde etiket"
 	},
 	"req_permissions_header": {
-		"message": "Lütfen otomatik olarak<br />Salesforce Kurulum sayfalarına erişmemize izin verin.",
-		"description": "[izin_iste] izin isteme sayfasının başlığı"
+		"message": "Lütfen $salesforce_setup sayfalarına\notomatik olarak erişmemize izin verin.",
+		"description": "[req_permission] izin isteme sayfasının başlığı"
 	},
 	"req_permissions_paragraph": {
-		"message": "İsterseniz, favori Tabs'inizin<br />bir Salesforce Kurulum sayfasına gittiğinizde<br />her seferinde bu uzantıyı tıklamak zorunda kalmadan görünmesini sağlayabilirsiniz.",
-		"description": "[izin_iste] izinlerin neden istendiğini açıklayan metin"
+		"message": "İsterseniz, bir $salesforce_setup sayfasına gider gitmez\nbu uzantıyı her seferinde tıklamak zorunda kalmadan\nfavori Tabs sekmelerinizin görünmesini sağlayabilirsiniz.",
+		"description": "[req_permission] izinlerin neden istendiğini açıklayan metin"
 	},
 	"required": {
 		"message": "gerekli",

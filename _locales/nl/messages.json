@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Een nieuwe versie van $extension_label is nu beschikbaar!",
-		"description": "een onbekend bericht is ontvangen van een luisteraar"
+		"description": "een onbekend bericht is ontvangen van een listener"
 	},
 	"continue": {
 		"message": "Doorgaan",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Tabs importeren",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[contextmenu]"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab verplaatsen",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Tab verwijderen",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[contextmenu]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Opslaan als Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[contextmenu]"
 	},
 	"cxm_remove": {
 		"message": "💥 Tab(s) verwijderen",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Instellingen",
+		"message": "⚙️ $settings",
 		"description": "Label voor het instellingenmenu"
 	},
 	"cxm_update": {
@@ -152,7 +152,7 @@
 		"description": "[popup] een rij verwijderen"
 	},
 	"delete_all": {
-		"message": "Alle Tabs verwijderen",
+		"message": "$delete alle Tabs",
 		"description": "[popup] titel op de prullenbak om alle Tabs te legen"
 	},
 	"drop": {
@@ -452,8 +452,8 @@
 		"description": "[modal-titel] voor importproces"
 	},
 	"import_title": {
-		"message": "Tabs importeren uit json-bestand",
-		"description": "[popup] titel op importknop"
+		"message": "$import_tabs van JSON-bestand",
+		"description": "[popup] titel op de importknop"
 	},
 	"insert_another": {
 		"message": "Nog een invoegen",
@@ -496,8 +496,16 @@
 		"description": "[geenSalesforceSetup] een ongeldige URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Dit is geen Salesforce Lightning Setup-pagina.",
-		"description": "[geenSalesforceSetup] de gebruiker bevindt zich niet op een Salesforce-pagina."
+		"message": "Dit is geen $salesforce_lightning Setuppagina.",
+		"description": "[notSalesforceSetup] de gebruiker bevindt zich niet op een Salesforce-pagina."
+	},
+	"open_here": {
+		"message": "Open in deze Tab.",
+		"description": "[open-other-org-modal] keuzerondje om de gebruiker in dezelfde browser-Tab te laten openen"
+	},
+	"open_new_tab": {
+		"message": "Open in een nieuwe Tab.",
+		"description": "[open-other-org-modal] keuzerondje om de gebruiker in een nieuwe browser-Tab te laten openen."
 	},
 	"open_settings": {
 		"message": "Extensie-instellingen openen",
@@ -508,12 +516,12 @@
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
 	},
 	"opt_automatic_open_login": {
-		"message": "Open de Salesforce-loginpagina automatisch wanneer op de popup wordt geklikt terwijl u zich niet op een Salesforce-pagina bevindt.",
-		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij zich op een willekeurige website bevindt"
+		"message": "Open automatisch de $salesforce_login-pagina wanneer u op de pop-up klikt terwijl u niet op een Salesforce-pagina bent.",
+		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een willekeurige website is"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Open de Salesforce-setuppagina automatisch wanneer op de popup wordt geklikt terwijl u zich op een Salesforce-pagina bevindt.",
-		"description": "[instelling] wanneer de gebruiker de popup opent terwijl hij zich op een Salesforce-website bevindt"
+		"message": "Open automatisch de $salesforce_setup-pagina wanneer u op de pop-up klikt terwijl u op een Salesforce-pagina bent.",
+		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een Salesforce-website is"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,11 +536,11 @@
 		"description": "[instelling] als de gebruiker op een favoriet Tab klikt, openen in een nieuw browsertabblad"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Open de Salesforce-loginpagina altijd in hetzelfde Tab wanneer op de popup wordt geklikt.",
+		"message": "Open de $salesforce_login-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Open de Salesforce-setuppagina altijd in hetzelfde Tab wanneer op de popup wordt geklikt.",
+		"message": "Open de $salesforce_setup-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[instelling] wanneer de gebruiker een favoriet Tab toevoegt, niet controleren of er een id in de link staat"
 	},
 	"or_drop": {
-		"message": "Of neerzetten",
+		"message": "Of $drop",
 		"description": "[importeren] laat de gebruiker bestanden met de muis verplaatsen en loslaten"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[req_toestemming] label wanneer de gebruiker geen permanente toestemming wil geven"
 	},
 	"req_permissions_header": {
-		"message": "Sta ons alstublieft toe om automatisch toegang te krijgen tot<br />Salesforce Setup-pagina's.",
-		"description": "[req_toestemming] koptekst van de pagina om toestemmingen te vragen"
+		"message": "Sta ons alstublieft toe om automatisch\ntoe te treden tot $salesforce_setup-pagina's.",
+		"description": "[req_permission] kop van de pagina om toestemmingen aan te vragen"
 	},
 	"req_permissions_paragraph": {
-		"message": "Als u wilt, kunt u uw favoriete Tabs laten verschijnen<br />zodra u naar een Salesforce Setup-pagina navigeert<br />zonder telkens op deze extensie te hoeven klikken.",
-		"description": "[req_toestemming] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
+		"message": "Als u wilt, kunt u uw favoriete Tabs laten verschijnen\nzodra u naar een $salesforce_setup-pagina navigeert\nzonder elke keer op deze extensie te hoeven klikken.",
+		"description": "[req_permission] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
 	},
 	"required": {
 		"message": "vereist",

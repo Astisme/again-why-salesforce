@@ -76,7 +76,7 @@
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importuj Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_move": {
@@ -104,11 +104,11 @@
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Usuń Tab",
+		"message": "👋 $remove_tab",
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Zapisz jako Tab",
+		"message": "💾 $save_tab",
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_remove": {
@@ -132,8 +132,8 @@
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Ustawienia",
-		"description": "Etykieta dla menu ustawień"
+		"message": "⚙️ $settings",
+		"description": "Etykieta menu ustawień"
 	},
 	"cxm_update": {
 		"message": "✏️ Aktualizuj Tab",
@@ -152,8 +152,8 @@
 		"description": "[popup] usuń wiersz"
 	},
 	"delete_all": {
-		"message": "Usuń wszystkie Tabs",
-		"description": "[popup] tytuł na koszu, aby opróżnić wszystkie Tabs"
+		"message": "$delete wszystkie Tabs",
+		"description": "[wyskakujące-okienko] tytuł na koszu, aby opróżnić wszystkie Tabs"
 	},
 	"drop": {
 		"message": "Upuść",
@@ -452,8 +452,8 @@
 		"description": "[tytuł-modal] dla procesu importu"
 	},
 	"import_title": {
-		"message": "Importuj Tabs z pliku json",
-		"description": "[popup] tytuł na przycisku importu"
+		"message": "$import_tabs z pliku JSON",
+		"description": "[wyskakujące-okienko] tytuł na przycisku importu"
 	},
 	"insert_another": {
 		"message": "Wstaw inny",
@@ -496,8 +496,16 @@
 		"description": "[nieDotyczyKonfiguracjiSalesforce] nieprawidłowy adres URL"
 	},
 	"nss_not_setup_page": {
-		"message": "To nie jest strona konfiguracji Salesforce Lightning.",
-		"description": "[nieDotyczyKonfiguracjiSalesforce] użytkownik nie znajduje się na stronie Salesforce."
+		"message": "To nie jest strona konfiguracji $salesforce_lightning.",
+		"description": "[notSalesforceSetup] użytkownik nie znajduje się na stronie Salesforce."
+	},
+	"open_here": {
+		"message": "Otwórz w tej Tab.",
+		"description": "[open-other-org-modal] przycisk radiowy pozwalający użytkownikowi otworzyć w tej samej Tab przeglądarki"
+	},
+	"open_new_tab": {
+		"message": "Otwórz w nowej Tab.",
+		"description": "[open-other-org-modal] przycisk radiowy pozwalający użytkownikowi otworzyć w nowej Tab przeglądarki."
 	},
 	"open_settings": {
 		"message": "Otwórz ustawienia rozszerzenia",
@@ -508,12 +516,12 @@
 		"description": "[nieKonfiguracjaSalesforce] wezwanie do działania na przycisku, aby przekierować użytkownika na stronę Konfiguracji Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automatycznie otwieraj stronę logowania Salesforce po kliknięciu wyskakującego okienka, gdy nie znajdujesz się na stronie Salesforce.",
-		"description": "[ustawienie] gdy użytkownik otworzy wyskakujące okienko, znajdując się na losowej stronie internetowej"
+		"message": "Automatycznie otwieraj stronę $salesforce_login po kliknięciu wyskakującego okienka, gdy nie jesteś na stronie Salesforce.",
+		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na losowej stronie internetowej"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automatycznie otwieraj stronę konfiguracji Salesforce po kliknięciu wyskakującego okienka, gdy znajdujesz się na stronie Salesforce.",
-		"description": "[ustawienie] gdy użytkownik otworzy wyskakujące okienko, znajdując się na stronie internetowej Salesforce"
+		"message": "Automatycznie otwieraj stronę $salesforce_setup po kliknięciu wyskakującego okienka, gdy jesteś na stronie Salesforce.",
+		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na stronie Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,11 +536,11 @@
 		"description": "[ustawienie] gdy użytkownik kliknie ulubioną kartę, otwórz ją w nowej karcie"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Zawsze otwieraj stronę logowania Salesforce w tej samej Tab po kliknięciu wyskakującego okienka.",
+		"message": "Zawsze otwieraj stronę $salesforce_login w tej samej Tab po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Zawsze otwieraj stronę konfiguracji Salesforce w tej samej Tab po kliknięciu wyskakującego okienka.",
+		"message": "Zawsze otwieraj stronę $salesforce_setup w tej samej Tab po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[ustawienie] przy dodawaniu karty do ulubionych, zapobiegaj sprawdzaniu identyfikatora w linku"
 	},
 	"or_drop": {
-		"message": "Lub upuść",
-		"description": "[import] pozwól użytkownikowi przenieść pliki myszką i upuścić je"
+		"message": "Lub $drop",
+		"description": "[importuj] pozwól użytkownikowi przenosić pliki myszą i upuszczać je"
 	},
 	"org_link": {
 		"message": "Link Org",
@@ -584,12 +592,12 @@
 		"description": "[prośba_o_uprawnienia] etykieta, gdy użytkownik nie chce trwale zezwolić na uprawnienia"
 	},
 	"req_permissions_header": {
-		"message": "Proszę zezwolić nam na automatyczny dostęp do<br />stron Konfiguracji Salesforce.",
-		"description": "[prośba_o_uprawnienia] nagłówek strony z prośbą o uprawnienia"
+		"message": "Zezwól nam na automatyczny dostęp\ndo stron $salesforce_setup.",
+		"description": "[req_permission] nagłówek strony z prośbą o uprawnienia"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jeśli chcesz, możesz sprawić, że Twoje ulubione Tabs pojawią się,<br />gdy tylko przejdziesz na stronę Konfiguracji Salesforce<br />bez konieczności klikania tego rozszerzenia za każdym razem.",
-		"description": "[prośba_o_uprawnienia] tekst wyjaśniający, dlaczego prosimy o uprawnienia"
+		"message": "Jeśli chcesz, możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup,\nbez konieczności klikania tego rozszerzenia za każdym razem.",
+		"description": "[req_permission] tekst wyjaśniający, dlaczego wymagane są uprawnienia"
 	},
 	"required": {
 		"message": "wymagane",

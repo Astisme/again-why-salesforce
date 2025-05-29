@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Нова верзија $extension_label је сада доступна!",
-		"description": "примљена је непозната порука од слушаоца"
+		"description": "непозната порука је примљена од слушаоца"
 	},
 	"continue": {
 		"message": "Nastavi",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Uvezi Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[контекстни-мени]"
 	},
 	"cxm_move": {
 		"message": "🧭 Pomeri Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Ukloni Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[контекстни-мени]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Sačuvaj kao Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[контекстни-мени]"
 	},
 	"cxm_remove": {
 		"message": "💥 Ukloni Tab(ove)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Подешавања",
+		"message": "⚙️ $settings",
 		"description": "Ознака за мени подешавања"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] obriši red"
 	},
 	"delete_all": {
-		"message": "Obriši sve Tabove",
-		"description": "[popup] naslov korpe za brisanje svih Tabova"
+		"message": "$delete све Tabs",
+		"description": "[искачући-прозор] наслов на канти за пражњење свих Tabs"
 	},
 	"drop": {
 		"message": "Испусти",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] za proces uvoza"
 	},
 	"import_title": {
-		"message": "Uvezi Tab iz json fajla",
-		"description": "[popup] naslov dugmeta za uvoz"
+		"message": "$import_tabs из ЈСОН датотеке",
+		"description": "[искачући-прозор] наслов на дугмету за увоз"
 	},
 	"insert_another": {
 		"message": "Ubaci još jedan",
@@ -496,8 +496,16 @@
 		"description": "[nijeSalesforcePodešavanje] nevažeći URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Ovo nije stranica za podešavanje programa Salesforce Lightning.",
-		"description": "[nijeSalesforcePodešavanje] korisnik nije na stranici programa Salesforce."
+		"message": "Ово није $salesforce_lightning страница за подешавање.",
+		"description": "[notSalesforceSetup] корисник није на Salesforce страници."
+	},
+	"open_here": {
+		"message": "Отвори у овом Tab.",
+		"description": "[open-other-org-modal] радио дугме које омогућава кориснику да отвори у истом Tab прегледача"
+	},
+	"open_new_tab": {
+		"message": "Отвори у новом Tab.",
+		"description": "[open-other-org-modal] радио дугме које омогућава кориснику да отвори у новом Tab прегледача."
 	},
 	"open_settings": {
 		"message": "Отвори Подешавања проширења",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] poziv na akciju na dugmetu za preusmeravanje korisnika na Salesforce Setup stranicu"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automatski otvori stranicu za prijavljivanje u program Salesforce kada kliknete iskačući prozor dok niste na stranici programa Salesforce.",
-		"description": "[podešavanje] kada korisnik otvori iskačući prozor dok je na nasumičnoj veb-stranici"
+		"message": "Аутоматски отвори $salesforce_login страницу када кликнете на искачући прозор док нисте на Salesforce страници.",
+		"description": "[подешавање] када корисник отвори искачући прозор док је на насумичној веб локацији"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automatski otvori stranicu za podešavanje programa Salesforce kada kliknete iskačući prozor dok ste na stranici programa Salesforce.",
-		"description": "[podešavanje] kada korisnik otvori iskačući prozor dok je na veb-stranici programa Salesforce"
+		"message": "Аутоматски отвори $salesforce_setup страницу када кликнете на искачући прозор док сте на Salesforce страници.",
+		"description": "[подешавање] када корисник отвори искачући прозор док је на Salesforce веб локацији"
 	},
 	"opt_en_fallback": {
 		"message": "en (Резервни)",
@@ -528,12 +536,12 @@
 		"description": "[поставка] када корисник кликне на фаворит Tabs, отвори у новом картици прегледача"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Uvek otvori stranicu za prijavljivanje u program Salesforce u istom Tab kada kliknete iskačući prozor.",
-		"description": "[podešavanje]"
+		"message": "Увек отвори $salesforce_login страницу у истом Tab када кликнете на искачући прозор.",
+		"description": "[подешавање]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Uvek otvori stranicu za podešavanje programa Salesforce u istom Tab kada kliknete iskačući prozor.",
-		"description": "[podešavanje]"
+		"message": "Увек отвори $salesforce_setup страницу у истом Tab када кликнете на искачући прозор.",
+		"description": "[подешавање]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Spreči korišćenje Lightning navigacije (brže učitavanje tokom korišćenja).",
@@ -552,8 +560,8 @@
 		"description": "[поставка] када корисник додаје фаворит Tabs, не проверавај да ли постоји ID у вези"
 	},
 	"or_drop": {
-		"message": "Ili spusti",
-		"description": "[import] omogućava korisniku da prevuče fajlove mišem i pusti ih"
+		"message": "Или $drop",
+		"description": "[увези] дозволите кориснику да помера датотеке мишем и испушта их"
 	},
 	"org_link": {
 		"message": "Link do Organizacije",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] oznaka kada korisnik ne želi trajno da dozvoli privilegije"
 	},
 	"req_permissions_header": {
-		"message": "Molimo dozvolite nam pristup<br />Salesforce Setup stranicama automatski.",
-		"description": "[req_permission] zaglavlje stranice za zahtev za privilegije"
+		"message": "Молимо вас да нам дозволите аутоматски приступ\n$salesforce_setup страницама.",
+		"description": "[req_permission] заглавље странице за захтевање дозвола"
 	},
 	"req_permissions_paragraph": {
-		"message": "Ako želite, vaši omiljeni Tabovi mogu da se pojave<br />odmah čim odete na Salesforce Setup stranicu<br />bez potrebe da svaki put kliknete na ovo proširenje.",
-		"description": "[req_permission] tekst koji objašnjava zašto se zahtevaju privilegije"
+		"message": "Ако желите, можете да прикажете своје омиљене Tabs\nчим одете на $salesforce_setup страницу\nбез потребе да сваки пут кликнете на ову екстензију.",
+		"description": "[req_permission] текст који објашњава зашто се траже дозволе"
 	},
 	"required": {
 		"message": "obavezno",
