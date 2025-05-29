@@ -502,13 +502,18 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	}
 	const translator = await ensureTranslatorAvailability();
 	const whereTo = await translator.translate("where_to");
-	const { modalParent, saveButton, closeButton, inputContainer, getSelectedRadioButtonValue } =
-		await generateOpenOtherOrgModal(
-			url, // if the url is "", we may still open the link in another Org without any issue
-			label ??
-				allTabs.getTabsByData({ url })[0]?.label ??
-				whereTo,
-		);
+	const {
+		modalParent,
+		saveButton,
+		closeButton,
+		inputContainer,
+		getSelectedRadioButtonValue,
+	} = await generateOpenOtherOrgModal(
+		url, // if the url is "", we may still open the link in another Org without any issue
+		label ??
+			allTabs.getTabsByData({ url })[0]?.label ??
+			whereTo,
+	);
 	getModalHanger().appendChild(modalParent);
 	let lastInput = "";
 	inputContainer.addEventListener("input", (e) => {
@@ -527,7 +532,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-        const linkTarget = getSelectedRadioButtonValue();
+		const linkTarget = getSelectedRadioButtonValue();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
 			return showToast(["insert_another", "org_link"], false, true);
