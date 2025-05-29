@@ -806,10 +806,6 @@
 		"message": "Users",
 		"description": "The name of the page related to ManageUsers/home"
 	},
-	"warn_deprecated_tab_title": {
-		"message": "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
-		"description": "[warning] Explain the user that the file they imported uses a deprecated property"
-	},
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] fallback title for the modal"

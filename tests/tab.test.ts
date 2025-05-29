@@ -58,25 +58,6 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 		assertEquals(tab.org, "testorg");
 	});
 
-	await t.step("creates tab from valid object with tabTitle", () => {
-		const tab = Tab.create({
-			tabTitle: "Profile",
-			url: "https://example.com/profile",
-		});
-		assertEquals(tab.label, "Profile");
-		assertEquals(tab.url, "https://example.com/profile");
-		assertEquals(tab.org, undefined);
-	});
-
-	await t.step("tab is valid from valid object with tabTitle", () => {
-		assert(
-			Tab.isValid({
-				tabTitle: "Profile",
-				url: "https://example.com/profile",
-			}),
-		);
-	});
-
 	await t.step(
 		"throws error when object contains unexpected keys",
 		() => {
@@ -86,6 +67,17 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 						label: "Test",
 						url: "https://example.com",
 						invalidKey: "value",
+					});
+				},
+				Error,
+				"error_tab_unexpected_keys",
+			);
+			assertThrows(
+				() => {
+					Tab.create({
+						tabTitle: "Test",
+						url: "https://example.com",
+						org: "value",
 					});
 				},
 				Error,
