@@ -450,6 +450,7 @@ async function generateInput({
 	style = null,
 	value = null,
 	title = null,
+    isTextArea = false,
 } = {}, {
 	translateLabel = true,
 	translatePlaceholder = true,
@@ -517,9 +518,10 @@ async function generateInput({
 			style = null,
 			value = null,
 			title = null,
+            isTextArea = false,
 		},
 	) {
-		const input = document.createElement("input");
+		const input = document.createElement(isTextArea ? "textarea" : "input");
 		input.classList.add("slds-input");
 		input.setAttribute("part", "input");
 		input.setAttribute("maxlength", "255");
@@ -565,6 +567,7 @@ async function generateInput({
 		style,
 		value,
 		title,
+        isTextArea,
 	});
 	inputWrapper.appendChild(inputContainer);
 	if (append != null) {
@@ -1019,6 +1022,43 @@ export async function generateSldsModal(modalTitle) {
 	return { modalParent, article, saveButton, closeButton };
 }
 
+export function generateRadioButtons(name, radio0def = {
+    id: null,
+    value: null,
+    label: null,
+    checked: false,
+}, radio1def = {
+    id: null,
+    value: null,
+    label: null,
+    checked: false,
+}, ...otherRadioDefs){
+    const allRadioInputs = [];
+    const radioGroup = document.createElement("div");
+    otherRadioDefs.push(radio0def, radio1def);
+    otherRadioDefs.forEach(raddef => {
+        const innerSpan = document.createElement("span");
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = name;
+        radio.id = raddef.id;
+        radio.value = raddef.value;
+        radio.checked = raddef.checked;
+        allRadioInputs.push(radio);
+        innerSpan.appendChild(radio);
+        const labelEl = document.createElement("label");
+        labelEl.for = radio.id;
+        labelEl.textContent = raddef.label;
+        labelEl.style.marginLeft = "0.5em";
+        innerSpan.appendChild(labelEl);
+        radioGroup.appendChild(innerSpan);
+    });
+    function getSelectedRadioButtonValue(){
+        return allRadioInputs.filter(inp => inp.checked)?.[0]?.value;
+    }
+    return { radioGroup, getSelectedRadioButtonValue };
+}
+
 /**
  * Generates and opens a modal dialog for entering another Salesforce Org's information.
  *
@@ -1042,14 +1082,15 @@ export async function generateOpenOtherOrgModal(miniURL, label) {
 	article.appendChild(section);
 	const httpsSpan = document.createElement("span");
 	httpsSpan.append(HTTPS);
-	httpsSpan.style.height = "1rem";
+	httpsSpan.style.height = "1.5em";
 	divParent.appendChild(httpsSpan);
 	const { inputParent, inputContainer } = await generateInput({
 		label: "org_link",
 		type: "text",
 		required: true,
 		placeholder: "other_org_placeholder",
-		style: "width: 100%",
+		style: "width: 100%; height: 3em; resize: horizontal; line-height: 32px;",
+        isTextArea: true,
 	});
 	divParent.appendChild(inputParent);
 	const linkEnd = document.createElement("span");
@@ -1059,11 +1100,27 @@ export async function generateOpenOtherOrgModal(miniURL, label) {
 		}${miniURL}`,
 	);
 	linkEnd.style.width = "fit-content";
-	linkEnd.style.height = "1.5rem";
+	linkEnd.style.height = "1.5em";
 	linkEnd.style.wordBreak = "break-all";
 	linkEnd.style.overflow = "hidden";
 	divParent.appendChild(linkEnd);
-	return { modalParent, saveButton, closeButton, inputContainer };
+    // create radio button to let the user pick where to open the link
+	const translator = await ensureTranslatorAvailability();
+    const { radioGroup, getSelectedRadioButtonValue } = generateRadioButtons(`${EXTENSION_NAME}-where-open-link`, {
+        id: `${EXTENSION_NAME}-radio-top`,
+        value: "_top",
+        label: await translator.translate("open_here"),
+    }, {
+        id: `${EXTENSION_NAME}-radio-blank`,
+        value: "_blank",
+        label: await translator.translate("open_new_tab"),
+        checked: true,
+    });
+    radioGroup.style.display = "flex";
+    radioGroup.style.flexDirection = "column";
+    radioGroup.style.alignItems = "center";
+    article.appendChild(radioGroup);
+	return { modalParent, saveButton, closeButton, inputContainer, getSelectedRadioButtonValue };
 }
 
 /**

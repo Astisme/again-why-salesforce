@@ -502,7 +502,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	}
 	const translator = await ensureTranslatorAvailability();
 	const whereTo = await translator.translate("where_to");
-	const { modalParent, saveButton, closeButton, inputContainer } =
+	const { modalParent, saveButton, closeButton, inputContainer, getSelectedRadioButtonValue } =
 		await generateOpenOtherOrgModal(
 			url, // if the url is "", we may still open the link in another Org without any issue
 			label ??
@@ -527,6 +527,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
+        const linkTarget = getSelectedRadioButtonValue();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
 			return showToast(["insert_another", "org_link"], false, true);
@@ -556,10 +557,10 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		const confirm_msg = await translator.translate([
 			"confirm_another_org",
 			targetUrl,
-		]);
+		], "\n");
 		if (confirm(confirm_msg)) {
 			closeButton.click();
-			open(targetUrl, "_blank");
+			open(targetUrl, linkTarget ?? "_blank");
 		}
 	});
 }
