@@ -114,15 +114,6 @@ reader.onload = async (e) => {
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
 		showToast(["import_successful", importedNum, "tabs"], true);
-		if (jsonString.includes("tabTitle")) {
-			// export and toast
-			sendExtensionMessage({ what: "export", tabs: allTabs });
-			showToast(
-				"warn_deprecated_tab_title",
-				false,
-				true,
-			);
-		}
 	} catch (error) {
 		showToast(
 			["error_import", error.message],
