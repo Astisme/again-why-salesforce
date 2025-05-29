@@ -56,8 +56,8 @@
 		"description": "[open-other-org-modal] Yêu cầu xác nhận từ người dùng để mở liên kết đã được tạo."
 	},
 	"confirm_update_extension": {
-		"message": "Phiên bản mới của $extension_label hiện đã có!",
-		"description": "một tin nhắn không xác định đã được nhận từ người nghe"
+		"message": "Một phiên bản mới của $extension_label hiện đã có sẵn!",
+		"description": "một tin nhắn không xác định đã được nhận từ một người nghe"
 	},
 	"continue": {
 		"message": "Tiếp tục",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Nhập Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[menu-ngữ-cảnh]"
 	},
 	"cxm_move": {
 		"message": "🧭 Di chuyển Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Xóa Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[menu-ngữ-cảnh]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Lưu dưới dạng Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[menu-ngữ-cảnh]"
 	},
 	"cxm_remove": {
 		"message": "💥 Xóa Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Cài đặt",
+		"message": "⚙️ $settings",
 		"description": "Nhãn cho menu cài đặt"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] Xóa một dòng"
 	},
 	"delete_all": {
-		"message": "Xóa tất cả các Tabs",
-		"description": "[popup] Tiêu đề trên biểu tượng thùng rác để xóa tất cả các Tabs"
+		"message": "$delete tất cả các Tab",
+		"description": "[popup] tiêu đề trên thùng rác để làm trống tất cả các Tab"
 	},
 	"drop": {
 		"message": "Thả",
@@ -451,8 +451,8 @@
 		"description": "[tiêu đề-modal] cho quá trình nhập"
 	},
 	"import_title": {
-		"message": "Nhập Tabs từ file JSON",
-		"description": "[popup] Tiêu đề trên nút nhập"
+		"message": "$import_tabs từ tệp JSON",
+		"description": "[popup] tiêu đề trên nút nhập"
 	},
 	"insert_another": {
 		"message": "Chèn thêm một cái nữa",
@@ -495,8 +495,16 @@
 		"description": "[khôngPhảiThiếtLậpSalesforce] một URL không hợp lệ"
 	},
 	"nss_not_setup_page": {
-		"message": "Đây không phải là trang Thiết lập Salesforce Lightning.",
-		"description": "[khôngPhảiThiếtLậpSalesforce] người dùng không ở trên trang Salesforce."
+		"message": "Đây không phải là trang Thiết lập $salesforce_lightning.",
+		"description": "[notSalesforceSetup] người dùng không ở trên trang Salesforce."
+	},
+	"open_here": {
+		"message": "Mở trong Tab này.",
+		"description": "[open-other-org-modal] nút radio để cho phép người dùng mở trong cùng một Tab trình duyệt"
+	},
+	"open_new_tab": {
+		"message": "Mở trong một Tab mới.",
+		"description": "[open-other-org-modal] nút radio để cho phép người dùng mở trong một Tab trình duyệt mới."
 	},
 	"open_settings": {
 		"message": "Mở Cài đặt Tiện ích",
@@ -507,12 +515,12 @@
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Tự động mở trang Đăng nhập Salesforce khi nhấp vào cửa sổ bật lên trong khi không ở trên trang Salesforce.",
-		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên trong khi ở trên một trang web ngẫu nhiên"
+		"message": "Tự động mở trang $salesforce_login khi nhấp vào cửa sổ bật lên trong khi không ở trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên một trang web ngẫu nhiên"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Tự động mở trang Thiết lập Salesforce khi nhấp vào cửa sổ bật lên trong khi ở trên trang Salesforce.",
-		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên trong khi ở trên một trang web Salesforce"
+		"message": "Tự động mở trang $salesforce_setup khi nhấp vào cửa sổ bật lên khi đang ở trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên trang web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -527,11 +535,11 @@
 		"description": "[cài đặt] khi người dùng nhấp vào Tab yêu thích, mở nó trong tab mới"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Luôn mở trang Đăng nhập Salesforce trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
+		"message": "Luôn mở trang $salesforce_login trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
 		"description": "[cài đặt]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Luôn mở trang Thiết lập Salesforce trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
+		"message": "Luôn mở trang $salesforce_setup trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
 		"description": "[cài đặt]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -551,8 +559,8 @@
 		"description": "[cài đặt] khi yêu thích Tab, ngăn kiểm tra ID trong liên kết"
 	},
 	"or_drop": {
-		"message": "Hoặc thả",
-		"description": "[nhập] cho phép người dùng di chuyển tệp bằng chuột và thả chúng"
+		"message": "Hoặc $drop",
+		"description": "[nhập] cho phép người dùng di chuyển các tệp bằng chuột của họ và thả chúng"
 	},
 	"org_link": {
 		"message": "Liên kết Org",
@@ -583,12 +591,12 @@
 		"description": "[req_permission] Nhãn khi người dùng không muốn được hỏi lại mãi mãi"
 	},
 	"req_permissions_header": {
-		"message": "Vui lòng cho phép chúng tôi truy cập<br />trang Cài đặt Salesforce một cách tự động.",
-		"description": "[req_permission] Tiêu đề của trang yêu cầu cấp quyền"
+		"message": "Vui lòng cho phép chúng tôi truy cập\ncác trang $salesforce_setup một cách tự động.",
+		"description": "[req_permission] tiêu đề của trang để yêu cầu quyền"
 	},
 	"req_permissions_paragraph": {
-		"message": "Nếu bạn muốn, các Tabs yêu thích của bạn sẽ xuất hiện<br />ngay khi bạn chuyển đến trang Cài đặt Salesforce<br />mà không cần phải nhấp vào tiện ích này mỗi lần.",
-		"description": "[req_permission] Văn bản giải thích lý do yêu cầu cấp quyền"
+		"message": "Nếu bạn muốn, bạn có thể hiển thị các Tab yêu thích của mình\nngay khi bạn điều hướng đến trang $salesforce_setup\nmà không cần phải nhấp vào tiện ích mở rộng này mỗi lần.",
+		"description": "[req_permission] văn bản giải thích lý do tại sao các quyền được yêu cầu"
 	},
 	"required": {
 		"message": "bắt buộc",
@@ -797,10 +805,6 @@
 	"users": {
 		"message": "Người dùng",
 		"description": "Tên trang liên quan đến ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Bạn đã nhập khẩu sử dụng 'tabTitle' lỗi thời!\nBắt đầu tải xuống file cập nhật.\nTừ bây giờ, vui lòng sử dụng file mới tải xuống.\nViệc sử dụng file này sẽ bị ngừng trong các phiên bản sau.",
-		"description": "[warning] Giải thích cho người dùng rằng file nhập khẩu sử dụng thuộc tính lỗi thời."
 	},
 	"where_to": {
 		"message": "Đi đâu?",

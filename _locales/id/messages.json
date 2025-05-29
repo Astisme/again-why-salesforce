@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Versi baru $extension_label sekarang tersedia!",
-		"description": "pesan tidak dikenal telah diterima dari pendengar"
+		"description": "pesan yang tidak dikenal telah diterima dari pendengar"
 	},
 	"continue": {
 		"message": "Lanjutkan",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Impor Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[menu-konteks]"
 	},
 	"cxm_move": {
 		"message": "🧭 Pindahkan Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Hapus Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[menu-konteks]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Simpan sebagai Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[menu-konteks]"
 	},
 	"cxm_remove": {
 		"message": "💥 Hapus Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Pengaturan",
+		"message": "⚙️ $settings",
 		"description": "Label untuk menu pengaturan"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] Menghapus satu baris"
 	},
 	"delete_all": {
-		"message": "Hapus semua Tabs",
-		"description": "[popup] Judul pada ikon tempat sampah untuk mengosongkan semua Tabs"
+		"message": "$delete semua Tabs",
+		"description": "[popup] judul di tempat sampah untuk mengosongkan semua Tabs"
 	},
 	"drop": {
 		"message": "Drop",
@@ -451,8 +451,8 @@
 		"description": "[judul-modal] untuk proses impor"
 	},
 	"import_title": {
-		"message": "Impor Tabs dari file JSON",
-		"description": "[popup] Judul pada tombol impor"
+		"message": "$import_tabs dari file JSON",
+		"description": "[popup] judul pada tombol impor"
 	},
 	"insert_another": {
 		"message": "Masukkan yang lain",
@@ -495,8 +495,16 @@
 		"description": "[bukanSetupSalesforce] URL yang tidak valid"
 	},
 	"nss_not_setup_page": {
-		"message": "Ini bukan halaman Pengaturan Salesforce Lightning.",
-		"description": "[bukanSetupSalesforce] pengguna tidak berada di halaman Salesforce."
+		"message": "Ini bukan halaman Pengaturan $salesforce_lightning.",
+		"description": "[notSalesforceSetup] pengguna tidak berada di halaman Salesforce."
+	},
+	"open_here": {
+		"message": "Buka di Tab ini.",
+		"description": "[open-other-org-modal] tombol radio untuk mengizinkan pengguna membuka di Tab browser yang sama"
+	},
+	"open_new_tab": {
+		"message": "Buka di Tab baru.",
+		"description": "[open-other-org-modal] tombol radio untuk mengizinkan pengguna membuka di Tab browser baru."
 	},
 	"open_settings": {
 		"message": "Buka Pengaturan Ekstensi",
@@ -507,11 +515,11 @@
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Buka otomatis halaman Login Salesforce saat mengklik popup saat tidak berada di halaman Salesforce.",
+		"message": "Buka halaman $salesforce_login secara otomatis saat mengeklik popup saat tidak di halaman Salesforce.",
 		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web acak"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Buka otomatis halaman Pengaturan Salesforce saat mengklik popup saat berada di halaman Salesforce.",
+		"message": "Buka halaman $salesforce_setup secara otomatis saat mengeklik popup saat berada di halaman Salesforce.",
 		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web Salesforce"
 	},
 	"opt_en_fallback": {
@@ -527,11 +535,11 @@
 		"description": "[pengaturan] ketika pengguna mengklik Tab favorit, buka di tab baru browser"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Selalu buka halaman Login Salesforce di Tab yang sama saat mengklik popup.",
+		"message": "Selalu buka halaman $salesforce_login di Tab yang sama saat mengeklik popup.",
 		"description": "[pengaturan]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Selalu buka halaman Pengaturan Salesforce di Tab yang sama saat mengklik popup.",
+		"message": "Selalu buka halaman $salesforce_setup di Tab yang sama saat mengeklik popup.",
 		"description": "[pengaturan]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -551,7 +559,7 @@
 		"description": "[pengaturan] saat menandai Tab sebagai favorit, mencegah memeriksa apakah ada ID dalam tautan"
 	},
 	"or_drop": {
-		"message": "Atau jatuhkan",
+		"message": "Atau $drop",
 		"description": "[impor] biarkan pengguna memindahkan file dengan mouse mereka dan melepaskannya"
 	},
 	"org_link": {
@@ -583,12 +591,12 @@
 		"description": "[req_permission] Label ketika pengguna tidak ingin ditanya terus-menerus"
 	},
 	"req_permissions_header": {
-		"message": "Mohon izinkan kami mengakses<br />halaman Setup Salesforce secara otomatis.",
-		"description": "[req_permission] Judul halaman untuk meminta izin"
+		"message": "Izinkan kami mengakses\nhalaman $salesforce_setup secara otomatis.",
+		"description": "[req_permission] header halaman untuk meminta izin"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jika Anda mau, Tabs favorit Anda dapat muncul<br />segera setelah Anda memasuki halaman Setup Salesforce<br />tanpa harus mengklik ekstensi ini setiap kali.",
-		"description": "[req_permission] Teks penjelasan mengenai alasan permintaan izin"
+		"message": "Jika mau, Anda dapat menampilkan Tabs favorit Anda\nsegera setelah Anda menavigasi ke halaman $salesforce_setup\ntanpa harus mengeklik ekstensi ini setiap saat.",
+		"description": "[req_permission] teks untuk menjelaskan mengapa izin diminta"
 	},
 	"required": {
 		"message": "diperlukan",
@@ -797,10 +805,6 @@
 	"users": {
 		"message": "Pengguna",
 		"description": "Nama halaman terkait ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Anda telah mengimpor menggunakan 'tabTitle' yang usang!\nDownload file yang diperbarui telah dimulai.\nMulai sekarang, gunakan file yang baru saja diunduh.\nPenggunaan file tersebut akan dihentikan pada rilis mendatang.",
-		"description": "[warning] Menjelaskan kepada pengguna bahwa file yang diimpor menggunakan properti yang usang."
 	},
 	"where_to": {
 		"message": "Ke mana?",

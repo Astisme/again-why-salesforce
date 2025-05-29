@@ -56,7 +56,7 @@
 		"description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
 	},
 	"confirm_update_extension": {
-		"message": "Isang bagong bersyon ng $extension_label ay magagamit na!",
+		"message": "Available na ngayon ang bagong bersyon ng $extension_label!",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
 	},
 	"continue": {
@@ -76,7 +76,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 I-import ang Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_move": {
@@ -104,11 +104,11 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Alisin ang Tab",
+		"message": "👋 $remove_tab",
 		"description": "[context-menu]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 I-save bilang Tab",
+		"message": "💾 $save_tab",
 		"description": "[context-menu]"
 	},
 	"cxm_remove": {
@@ -132,8 +132,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Mga Setting",
-		"description": "Label para sa menu ng setting"
+		"message": "⚙️ $settings",
+		"description": "Label para sa menu ng mga setting"
 	},
 	"cxm_update": {
 		"message": "✏️ I-update ang Tab",
@@ -152,7 +152,7 @@
 		"description": "[popup] burahin ang isang row"
 	},
 	"delete_all": {
-		"message": "Burahin lahat ng Tabs",
+		"message": "$delete lahat ng Tabs",
 		"description": "[popup] pamagat sa basurahan para alisan ng laman ang lahat ng Tabs"
 	},
 	"drop": {
@@ -452,8 +452,8 @@
 		"description": "[modal-title] para sa proseso ng pag-import"
 	},
 	"import_title": {
-		"message": "I-import ang Tabs mula sa json file",
-		"description": "[popup] pamagat sa button ng pag-import"
+		"message": "$import_tabs mula sa JSON file",
+		"description": "[popup] pamagat sa import button"
 	},
 	"insert_another": {
 		"message": "Magpasok ng iba",
@@ -496,8 +496,16 @@
 		"description": "[hindiSetupNgSalesforce] isang URL na hindi balido"
 	},
 	"nss_not_setup_page": {
-		"message": "Hindi ito isang pahina ng Setup ng Salesforce Lightning.",
-		"description": "[hindiSetupNgSalesforce] wala ang user sa isang pahina ng Salesforce."
+		"message": "Hindi ito isang $salesforce_lightning Setup page.",
+		"description": "[notSalesforceSetup] wala ang user sa isang Salesforce page."
+	},
+	"open_here": {
+		"message": "Buksan sa Tab na ito.",
+		"description": "[open-other-org-modal] radio button para hayaan ang user na magbukas sa parehong browser Tab"
+	},
+	"open_new_tab": {
+		"message": "Buksan sa bagong Tab.",
+		"description": "[open-other-org-modal] radio button para hayaan ang user na magbukas sa bagong browser Tab."
 	},
 	"open_settings": {
 		"message": "Buksan ang Mga Setting ng Extension",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
 	},
 	"opt_automatic_open_login": {
-		"message": "Awtomatikong buksan ang pahina ng Pag-login sa Salesforce kapag nag-click sa popup habang wala sa isang pahina ng Salesforce.",
+		"message": "Awtomatikong buksan ang $salesforce_login page kapag nag-click sa popup habang wala sa Salesforce page.",
 		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang random na website"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Awtomatikong buksan ang pahina ng Setup ng Salesforce kapag nag-click sa popup habang nasa isang pahina ng Salesforce.",
-		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang website ng Salesforce"
+		"message": "Awtomatikong buksan ang $salesforce_setup page kapag nag-click sa popup habang nasa Salesforce page.",
+		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang Salesforce website"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,11 +536,11 @@
 		"description": "[setting] kapag nag-click ang user sa paboritong Tab, buksan sa bagong tab"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Palaging buksan ang pahina ng Pag-login sa Salesforce sa parehong Tab kapag nag-click sa popup.",
+		"message": "Palaging buksan ang $salesforce_login page sa parehong Tab kapag nag-click sa popup.",
 		"description": "[setting]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Palaging buksan ang pahina ng Setup ng Salesforce sa parehong Tab kapag nag-click sa popup.",
+		"message": "Palaging buksan ang $salesforce_setup page sa parehong Tab kapag nag-click sa popup.",
 		"description": "[setting]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[setting] sa pag-favorite ng Tab, pigilan ang tsek kung may Id sa link"
 	},
 	"or_drop": {
-		"message": "O i-drop",
+		"message": "O $drop",
 		"description": "[import] hayaan ang user na ilipat ang mga file gamit ang kanilang mouse at bitawan ang mga ito"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[req_permission] label kapag ayaw ng user na payagan ang mga pahintulot nang permanente"
 	},
 	"req_permissions_header": {
-		"message": "Mangyaring pahintulutan kaming i-access<br />ang mga Salesforce Setup page nang awtomatiko.",
+		"message": "Pakiusap payagan kaming i-access\nang mga $salesforce_setup page nang awtomatiko.",
 		"description": "[req_permission] header ng page para humiling ng mga pahintulot"
 	},
 	"req_permissions_paragraph": {
-		"message": "Kung gusto mo, maaari mong ipalabas ang iyong mga paboritong Tabs<br />sa sandaling mag-navigate ka sa isang Salesforce Setup page<br />nang hindi kinakailangang i-click ang extension na ito sa bawat oras.",
-		"description": "[req_permission] teksto upang ipaliwanag kung bakit hinihiling ang mga pahintulot"
+		"message": "Kung gusto mo, maaari mong ipakita ang iyong mga paboritong Tabs\nsa sandaling mag-navigate ka sa isang $salesforce_setup page\nnang hindi kinakailangang i-click ang extension na ito sa bawat oras.",
+		"description": "[req_permission] text para ipaliwanag kung bakit hinihiling ang mga pahintulot"
 	},
 	"required": {
 		"message": "kailangan",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Mga User",
 		"description": "Ang pangalan ng page na nauugnay sa ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Nag-import ka gamit ang deprecated na 'tabTitle'!\nNagsimula na ang pag-download ng na-update na file.\nMula ngayon, gamitin ang bagong na-download na file pakiusap.\nAng paggamit ng naturang file ay ititigil sa susunod na release.",
-		"description": "[warning] Ipaliwanag sa user na ang file na kanilang na-import ay gumagamit ng isang deprecated na property"
 	},
 	"where_to": {
 		"message": "Saan papunta?",

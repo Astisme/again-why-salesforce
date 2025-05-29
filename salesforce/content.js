@@ -21,6 +21,7 @@ import {
 	CXM_REMOVE_TAB,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
+	EXTENSION_NAME,
 	getSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
@@ -307,12 +308,21 @@ async function delayLoadSetupTabs(count = 0) {
 		const label = await translator.translate("extension_label");
 		const fail = await translator.translate("error_no_setup_tab");
 		console.error(`${label} - ${fail}`);
-		return setTimeout(delayLoadSetupTabs(), 5000);
+		return setTimeout(delayLoadSetupTabs, 5000);
 	}
-	setupTabUl = document.querySelector("ul.pinnedItems.slds-grid") ??
-		document.getElementsByClassName("pinnedItems slds-grid")?.[0];
-	if (setupTabUl == null) {
+	const parentOfSetupTabUl =
+		(document.querySelector("ul.pinnedItems.slds-grid") ??
+			document.getElementsByClassName("pinnedItems slds-grid")?.[0])
+			?.parentElement;
+	if (parentOfSetupTabUl == null) {
 		return setTimeout(() => delayLoadSetupTabs(count + 1), 500);
+	}
+	setupTabUl = parentOfSetupTabUl.querySelector(`#${EXTENSION_NAME}`);
+	if (setupTabUl == null) {
+		setupTabUl = document.createElement("ul");
+		setupTabUl.id = EXTENSION_NAME;
+		setupTabUl.classList.add("tabBarItems", "slds-grid");
+		parentOfSetupTabUl.appendChild(setupTabUl);
 	}
 	checkKeepTabsOnLeft();
 	// Start observing changes to the DOM to then check for URL change
@@ -502,13 +512,18 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	}
 	const translator = await ensureTranslatorAvailability();
 	const whereTo = await translator.translate("where_to");
-	const { modalParent, saveButton, closeButton, inputContainer } =
-		await generateOpenOtherOrgModal(
-			url, // if the url is "", we may still open the link in another Org without any issue
-			label ??
-				allTabs.getTabsByData({ url })[0]?.label ??
-				whereTo,
-		);
+	const {
+		modalParent,
+		saveButton,
+		closeButton,
+		inputContainer,
+		getSelectedRadioButtonValue,
+	} = await generateOpenOtherOrgModal(
+		url, // if the url is "", we may still open the link in another Org without any issue
+		label ??
+			allTabs.getTabsByData({ url })[0]?.label ??
+			whereTo,
+	);
 	getModalHanger().appendChild(modalParent);
 	let lastInput = "";
 	inputContainer.addEventListener("input", (e) => {
@@ -527,6 +542,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
+		const linkTarget = getSelectedRadioButtonValue();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
 			return showToast(["insert_another", "org_link"], false, true);
@@ -556,10 +572,10 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		const confirm_msg = await translator.translate([
 			"confirm_another_org",
 			targetUrl,
-		]);
+		], "\n");
 		if (confirm(confirm_msg)) {
 			closeButton.click();
-			open(targetUrl, "_blank");
+			open(targetUrl, linkTarget ?? "_blank");
 		}
 	});
 }

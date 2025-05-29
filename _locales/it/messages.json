@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importa Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[menu-contestuale]"
 	},
 	"cxm_move": {
 		"message": "🧭 Sposta Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Rimuovi Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[menu-contestuale]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Salva come Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[menu-contestuale]"
 	},
 	"cxm_remove": {
 		"message": "💥 Rimuovi Tab",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Impostazioni",
+		"message": "⚙️ $settings",
 		"description": "Etichetta per il menu delle impostazioni"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] elimina una riga"
 	},
 	"delete_all": {
-		"message": "Elimina tutte le Tab",
-		"description": "[popup] titolo sul cestino per svuotare tutte le Tab"
+		"message": "$delete tutte le Tabs",
+		"description": "[popup] titolo sul cestino per svuotare tutte le Tabs"
 	},
 	"drop": {
 		"message": "Trascina",
@@ -451,7 +451,7 @@
 		"description": "[modal-title] per il processo d'importazione"
 	},
 	"import_title": {
-		"message": "Importa Tab da file json",
+		"message": "$import_tabs da file JSON",
 		"description": "[popup] titolo sul pulsante di importazione"
 	},
 	"insert_another": {
@@ -495,8 +495,16 @@
 		"description": "[notSalesforceSetup] un URL che non è valido"
 	},
 	"nss_not_setup_page": {
-		"message": "Questa non è una pagina di Configurazione di Salesforce Lightning.",
-		"description": "[notSalesforceSetup] l’utente non si trova in una pagina di Salesforce."
+		"message": "Questa non è una pagina di configurazione di $salesforce_lightning.",
+		"description": "[notSalesforceSetup] l'utente non si trova su una pagina Salesforce."
+	},
+	"open_here": {
+		"message": "Apri in questa Tab.",
+		"description": "[open-other-org-modal] pulsante di opzione per consentire all'utente di aprire nella stessa Tab del browser"
+	},
+	"open_new_tab": {
+		"message": "Apri in una nuova Tab.",
+		"description": "[open-other-org-modal] pulsante di opzione per consentire all'utente di aprire in una nuova Tab del browser."
 	},
 	"open_settings": {
 		"message": "Apri Impostazioni Estensione",
@@ -507,12 +515,12 @@
 		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente a una pagina di Setup di Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Apri automaticamente la pagina di accesso di Salesforce cliccando sul popup quando non sei in una pagina di Salesforce.",
-		"description": "[setting] quando l’utente apre il popup su un sito a caso"
+		"message": "Apri automaticamente la pagina $salesforce_login quando si fa clic sul popup mentre non si è su una pagina Salesforce.",
+		"description": "[impostazione] quando l'utente apre il popup mentre si trova su un sito Web casuale"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Apri automaticamente la pagina di Configurazione di Salesforce cliccando sul popup quando sei in una pagina di Salesforce.",
-		"description": "[setting] quando l’utente apre il popup su un sito Salesforce"
+		"message": "Apri automaticamente la pagina $salesforce_setup quando si fa clic sul popup mentre si è su una pagina Salesforce.",
+		"description": "[impostazione] quando l'utente apre il popup mentre si trova su un sito Web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -527,12 +535,12 @@
 		"description": "[impostazione] quando l'utente fa clic su un Tab preferito, aprilo in una nuova scheda"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Apri sempre la pagina di accesso di Salesforce nella stessa scheda cliccando sul popup.",
-		"description": "[setting] apri sempre la pagina di accesso di Salesforce nella stessa scheda"
+		"message": "Apri sempre la pagina $salesforce_login nella stessa Tab quando si fa clic sul popup.",
+		"description": "[impostazione]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Apri sempre la pagina di Configurazione di Salesforce nella stessa scheda cliccando sul popup.",
-		"description": "[setting] apri sempre la pagina di Configurazione di Salesforce nella stessa scheda"
+		"message": "Apri sempre la pagina $salesforce_setup nella stessa Tab quando si fa clic sul popup.",
+		"description": "[impostazione]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Impedisci l’uso di Lightning Navigation (caricamento più veloce quando è attivo).",
@@ -551,8 +559,8 @@
 		"description": "[impostazione] quando aggiungi un Tab ai preferiti, impedisci il controllo dell'ID nel link"
 	},
 	"or_drop": {
-		"message": "O rilascia",
-		"description": "[import] permetti all'utente di muovere file con il mouse e di rilasciarli"
+		"message": "O $drop",
+		"description": "[importa] consenti all'utente di spostare i file con il mouse e rilasciarli"
 	},
 	"org_link": {
 		"message": "Link Org",
@@ -583,11 +591,11 @@
 		"description": "[req_permission] etichetta quando l'utente non vuole concedere le autorizzazioni in modo permanente"
 	},
 	"req_permissions_header": {
-		"message": "Permettici di accedere<br />automaticamente alle pagine di Setup di Salesforce.",
+		"message": "Consentici di accedere\nautomaticamente alle pagine $salesforce_setup.",
 		"description": "[req_permission] intestazione della pagina per richiedere le autorizzazioni"
 	},
 	"req_permissions_paragraph": {
-		"message": "Se vuoi, le tue Tab preferite possono apparire<br />non appena navighi in una pagina di Setup di Salesforce<br />senza dover cliccare questa estensione ogni volta.",
+		"message": "Se lo desideri, puoi visualizzare le tue Tabs preferite\nnon appena accedi a una pagina $salesforce_setup\nsenza dover fare clic su questa estensione ogni volta.",
 		"description": "[req_permission] testo per spiegare perché vengono richieste le autorizzazioni"
 	},
 	"required": {
@@ -797,10 +805,6 @@
 	"users": {
 		"message": "Utenti",
 		"description": "Il nome della pagina corrata a ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Hai importato usando il deprecato 'tabTitle'!\nIl download del file aggiornato è iniziato.\nDa ora in poi, utilizza il file appena scaricato, per favore.\nL'uso di tale file sarà dismesso in una versione futura.",
-		"description": "[warning] spiega all'utente che il file importato utilizza una proprietà deprecata"
 	},
 	"where_to": {
 		"message": "Dove?",

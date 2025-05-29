@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Nová verze $extension_label je nyní k dispozici!",
-		"description": "byla přijata neznámá zpráva od posluchače"
+		"description": "od posluchače byla přijata neznámá zpráva"
 	},
 	"continue": {
 		"message": "Pokračovat",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importovat Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[kontextová-nabídka]"
 	},
 	"cxm_move": {
 		"message": "🧭 Posunout Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Odebrat Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[kontextová-nabídka]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Uložit jako Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[kontextová-nabídka]"
 	},
 	"cxm_remove": {
 		"message": "💥 Odebrat Tab(y)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Nastavení",
+		"message": "⚙️ $settings",
 		"description": "Štítek pro nabídku nastavení"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] smazat řádek"
 	},
 	"delete_all": {
-		"message": "Smazat všechny Taby",
-		"description": "[popup] titulek v koši pro smazání všech Tabů"
+		"message": "$delete všechny Tabs",
+		"description": "[vyskakovací-okno] název na koši pro vyprázdnění všech Tabs"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] pro importovací proces"
 	},
 	"import_title": {
-		"message": "Importovat Taby ze souboru json",
-		"description": "[popup] titulek importního tlačítka"
+		"message": "$import_tabs z JSON souboru",
+		"description": "[vyskakovací-okno] název na tlačítku importu"
 	},
 	"insert_another": {
 		"message": "Vložit další",
@@ -496,8 +496,16 @@
 		"description": "[neníNastaveníSalesforce] neplatná URL adresa"
 	},
 	"nss_not_setup_page": {
-		"message": "Toto není stránka nastavení Salesforce Lightning.",
-		"description": "[neníNastaveníSalesforce] uživatel není na stránce Salesforce."
+		"message": "Toto není stránka nastavení $salesforce_lightning.",
+		"description": "[notSalesforceSetup] uživatel není na stránce Salesforce."
+	},
+	"open_here": {
+		"message": "Otevřít v této Tab.",
+		"description": "[open-other-org-modal] přepínač, který uživateli umožní otevřít ve stejné Tab prohlížeče"
+	},
+	"open_new_tab": {
+		"message": "Otevřít v nové Tab.",
+		"description": "[open-other-org-modal] přepínač, který uživateli umožní otevřít v nové Tab prohlížeče."
 	},
 	"open_settings": {
 		"message": "Otevřít nastavení rozšíření",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] výzva tlačítka pro přesměrování uživatele na stránku Salesforce Setup"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automaticky otevírat přihlašovací stránku Salesforce po kliknutí na vyskakovací okno, pokud nejste na stránce Salesforce.",
-		"description": "[nastavení] když uživatel otevře vyskakovací okno, když je na náhodné webové stránce"
+		"message": "Automaticky otevřít stránku $salesforce_login po kliknutí na vyskakovací okno, pokud nejste na stránce Salesforce.",
+		"description": "[nastavení] když uživatel otevře vyskakovací okno na náhodné webové stránce"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automaticky otevírat stránku nastavení Salesforce po kliknutí na vyskakovací okno, pokud jste na stránce Salesforce.",
-		"description": "[nastavení] když uživatel otevře vyskakovací okno, když je na webové stránce Salesforce"
+		"message": "Automaticky otevřít stránku $salesforce_setup po kliknutí na vyskakovací okno, pokud jste na stránce Salesforce.",
+		"description": "[nastavení] když uživatel otevře vyskakovací okno na webové stránce Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Náhradní)",
@@ -528,11 +536,11 @@
 		"description": "[nastavení] při kliknutí na oblíbenou Tab ji otevřít v novém panelu prohlížeče"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Vždy otevírat přihlašovací stránku Salesforce ve stejném Tab po kliknutí na vyskakovací okno.",
+		"message": "Po kliknutí na vyskakovací okno vždy otevřít stránku $salesforce_login ve stejné Tab.",
 		"description": "[nastavení]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Vždy otevírat stránku nastavení Salesforce ve stejném Tab po kliknutí na vyskakovací okno.",
+		"message": "Po kliknutí na vyskakovací okno vždy otevřít stránku $salesforce_setup ve stejné Tab.",
 		"description": "[nastavení]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[nastavení] při ukládání oblíbené Tab zabránit kontrole, zda je v odkazu ID"
 	},
 	"or_drop": {
-		"message": "Nebo přetáhněte",
-		"description": "[import] umožňuje uživateli přetáhnout soubory myší a pustit je"
+		"message": "Nebo $drop",
+		"description": "[importovat] umožnit uživateli přesouvat soubory myší a pouštět je"
 	},
 	"org_link": {
 		"message": "Odkaz organizace",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] popisek, když uživatel nechce trvale povolit oprávnění"
 	},
 	"req_permissions_header": {
-		"message": "Prosím, umožněte nám přístup<br />k automatickému prohlížení stránek Salesforce Setup.",
-		"description": "[req_permission] záhlaví stránky s žádostí o oprávnění"
+		"message": "Povolte nám prosím automatický přístup\nke stránkám $salesforce_setup.",
+		"description": "[req_permission] záhlaví stránky pro vyžádání oprávnění"
 	},
 	"req_permissions_paragraph": {
-		"message": "Pokud chcete, vaše oblíbené Taby se mohou objevit<br />hned po přechodu na stránku Salesforce Setup<br />bez nutnosti pokaždé klikat na toto rozšíření.",
-		"description": "[req_permission] text, který vysvětluje, proč jsou žádána oprávnění"
+		"message": "Pokud chcete, můžete si nechat zobrazit své oblíbené Tabs\njakmile přejdete na stránku $salesforce_setup,\naniž byste museli pokaždé klikat na toto rozšíření.",
+		"description": "[req_permission] text vysvětlující, proč jsou oprávnění požadována"
 	},
 	"required": {
 		"message": "povinné",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Uživatelé",
 		"description": "název stránky související s ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Importovali jste pomocí zastaralého 'tabTitle'!\nStahování aktualizovaného souboru bylo spuštěno.\nOd této chvíle prosím používejte nově stažený soubor.\nPoužívání tohoto souboru bude v budoucnu ukončeno.",
-		"description": "[warning] informuje uživatele, že importovaný soubor používá zastaralou vlastnost"
 	},
 	"where_to": {
 		"message": "Kam?",

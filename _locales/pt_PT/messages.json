@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Uma nova versão de $extension_label está agora disponível!",
-		"description": "uma mensagem desconhecida foi recebida de um listener"
+		"description": "foi recebida uma mensagem desconhecida de um ouvinte"
 	},
 	"continue": {
 		"message": "Continuar",
@@ -76,7 +76,7 @@
 		"description": "[menu-de-contexto]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importar Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[menu-de-contexto]"
 	},
 	"cxm_move": {
@@ -104,11 +104,11 @@
 		"description": "[menu-de-contexto]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Remover Tab",
+		"message": "👋 $remove_tab",
 		"description": "[menu-de-contexto]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Guardar como Tab",
+		"message": "💾 $save_tab",
 		"description": "[menu-de-contexto]"
 	},
 	"cxm_remove": {
@@ -132,7 +132,7 @@
 		"description": "[menu-de-contexto]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Definições",
+		"message": "⚙️ $settings",
 		"description": "Etiqueta para o menu de definições"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] eliminar uma linha"
 	},
 	"delete_all": {
-		"message": "Eliminar todos os Tabs",
-		"description": "[popup] título no caixote do lixo para esvaziar todos os Tabs"
+		"message": "$delete todos os Tabs",
+		"description": "[pop-up] título no caixote do lixo para esvaziar todos os Tabs"
 	},
 	"drop": {
 		"message": "Soltar",
@@ -452,8 +452,8 @@
 		"description": "[titulo-modal] para o processo de importação"
 	},
 	"import_title": {
-		"message": "Importar Tabs do ficheiro json",
-		"description": "[popup] título no botão de importação"
+		"message": "$import_tabs do ficheiro JSON",
+		"description": "[pop-up] título no botão de importação"
 	},
 	"insert_another": {
 		"message": "Inserir outra",
@@ -496,8 +496,16 @@
 		"description": "[nãoÉConfiguraçãoSalesforce] um URL que não é válido"
 	},
 	"nss_not_setup_page": {
-		"message": "Esta não é uma página de configuração do Salesforce Lightning.",
-		"description": "[nãoÉConfiguraçãoSalesforce] o utilizador não está numa página do Salesforce."
+		"message": "Esta não é uma página de Configuração do $salesforce_lightning.",
+		"description": "[notSalesforceSetup] o utilizador não está numa página do Salesforce."
+	},
+	"open_here": {
+		"message": "Abrir neste Tab.",
+		"description": "[open-other-org-modal] botão de opção para permitir que o utilizador abra no mesmo Tab do navegador"
+	},
+	"open_new_tab": {
+		"message": "Abrir num novo Tab.",
+		"description": "[open-other-org-modal] botão de opção para permitir que o utilizador abra num novo Tab do navegador."
 	},
 	"open_settings": {
 		"message": "Abrir Definições da Extensão",
@@ -508,12 +516,12 @@
 		"description": "[naoConfigSalesforce] chamada para ação num botão para redirecionar o utilizador para uma página de Configuração do Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Abrir automaticamente a página de início de sessão do Salesforce ao clicar na janela pop-up enquanto não estiver numa página do Salesforce.",
-		"description": "[definição] quando o utilizador abre a janela pop-up enquanto está num website aleatório"
+		"message": "Abrir automaticamente a página $salesforce_login ao clicar no pop-up enquanto não estiver numa página do Salesforce.",
+		"description": "[definição] quando o utilizador abre o pop-up enquanto está num Web site aleatório"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Abrir automaticamente a página de configuração do Salesforce ao clicar na janela pop-up enquanto estiver numa página do Salesforce.",
-		"description": "[definição] quando o utilizador abre a janela pop-up enquanto está num website do Salesforce"
+		"message": "Abrir automaticamente a página $salesforce_setup ao clicar no pop-up enquanto estiver numa página do Salesforce.",
+		"description": "[definição] quando o utilizador abre o pop-up enquanto está num Web site do Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Alternativa)",
@@ -528,11 +536,11 @@
 		"description": "[definição] quando o utilizador clica num Tab favorito, abrir numa nova aba do navegador"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Abrir sempre a página de início de sessão do Salesforce no mesmo Tab ao clicar na janela pop-up.",
+		"message": "Abrir sempre a página $salesforce_login no mesmo Tab ao clicar no pop-up.",
 		"description": "[definição]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Abrir sempre a página de configuração do Salesforce no mesmo Tab ao clicar na janela pop-up.",
+		"message": "Abrir sempre a página $salesforce_setup no mesmo Tab ao clicar no pop-up.",
 		"description": "[definição]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[definição] quando o utilizador adiciona um Tab favorito, impedir a verificação se existe um Id no link que está a ser guardado."
 	},
 	"or_drop": {
-		"message": "Ou largue",
+		"message": "Ou $drop",
 		"description": "[importar] permitir que o utilizador mova ficheiros com o rato e os solte"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[pedir_permissao] rótulo quando o utilizador não quer permitir permissões permanentemente"
 	},
 	"req_permissions_header": {
-		"message": "Por favor, permita-nos aceder<br />às páginas de Configuração do Salesforce automaticamente.",
-		"description": "[pedir_permissao] cabeçalho da página para pedir permissões"
+		"message": "Permita-nos aceder\nàs páginas $salesforce_setup automaticamente.",
+		"description": "[req_permission] cabeçalho da página para solicitar permissões"
 	},
 	"req_permissions_paragraph": {
-		"message": "Se quiser, pode fazer com que os seus Tabs favoritos apareçam<br />assim que navegar para uma página de Configuração do Salesforce<br />sem precisar de clicar nesta extensão a toda a hora.",
-		"description": "[pedir_permissao] texto para explicar porque é que as permissões estão a ser pedidas"
+		"message": "Se desejar, pode fazer com que os seus Tabs favoritos apareçam\nassim que navegar para uma página $salesforce_setup\nsem ter de clicar nesta extensão sempre.",
+		"description": "[req_permission] texto para explicar por que motivo as permissões estão a ser solicitadas"
 	},
 	"required": {
 		"message": "obrigatório",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Utilizadores",
 		"description": "O nome da página relacionada com ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Importou usando o 'tabTitle' obsoleto!\nO download do ficheiro atualizado começou.\nDe agora em diante, use o ficheiro recém-descarregado, por favor.\nA utilização desse ficheiro será descontinuada numa versão posterior.",
-		"description": "[aviso] Explicar ao utilizador que o ficheiro que importaram usa uma propriedade obsoleta"
 	},
 	"where_to": {
 		"message": "Para onde?",

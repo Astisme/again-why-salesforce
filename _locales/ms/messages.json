@@ -56,8 +56,8 @@
 		"description": "[buka-modal-org-lain] minta pengesahan daripada pengguna untuk membuka pautan yang dibina."
 	},
 	"confirm_update_extension": {
-		"message": "Versi baharu $extension_label kini tersedia!",
-		"description": "mesej tidak diketahui telah diterima daripada pendengar"
+		"message": "$extension_label ची नवीन आवृत्ती आता उपलब्ध आहे!",
+		"description": "श्रोत्याकडून अज्ञात संदेश प्राप्त झाला आहे"
 	},
 	"continue": {
 		"message": "Teruskan",
@@ -76,8 +76,8 @@
 		"description": "[menu-konteks]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Import Tabs",
-		"description": "[menu-konteks]"
+		"message": "🆙 $import_tabs",
+		"description": "[संदर्भ-मेनू]"
 	},
 	"cxm_move": {
 		"message": "🧭 Alihkan Tab",
@@ -104,12 +104,12 @@
 		"description": "[menu-konteks]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Buang Tab",
-		"description": "[menu-konteks]"
+		"message": "👋 $remove_tab",
+		"description": "[संदर्भ-मेनू]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Simpan sebagai Tab",
-		"description": "[menu-konteks]"
+		"message": "💾 $save_tab",
+		"description": "[संदर्भ-मेनू]"
 	},
 	"cxm_remove": {
 		"message": "💥 Buang Tab(s)",
@@ -132,8 +132,8 @@
 		"description": "[menu-konteks]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Tetapan",
-		"description": "Label untuk menu tetapan"
+		"message": "⚙️ $settings",
+		"description": "सेटिंग्ज मेनूसाठी लेबल"
 	},
 	"cxm_update": {
 		"message": "✏️ Kemas kini Tab",
@@ -152,8 +152,8 @@
 		"description": "[popup] padam satu baris"
 	},
 	"delete_all": {
-		"message": "Padam semua Tabs",
-		"description": "[popup] tajuk pada tong sampah untuk mengosongkan semua Tabs"
+		"message": "$delete सर्व Tabs",
+		"description": "[पॉपअप] सर्व Tabs रिकामे करण्यासाठी बिनवरील शीर्षक"
 	},
 	"drop": {
 		"message": "Lepaskan",
@@ -452,8 +452,8 @@
 		"description": "[tajuk-modal] untuk proses import"
 	},
 	"import_title": {
-		"message": "Import Tabs dari fail json",
-		"description": "[popup] tajuk pada butang import"
+		"message": "JSON फाइलमधून $import_tabs",
+		"description": "[पॉपअप] आयात बटणावरील शीर्षक"
 	},
 	"insert_another": {
 		"message": "Masukkan yang lain",
@@ -496,8 +496,16 @@
 		"description": "[bukanPersediaanSalesforce] URL yang tidak sah"
 	},
 	"nss_not_setup_page": {
-		"message": "Ini bukan halaman Persediaan Salesforce Lightning.",
-		"description": "[bukanPersediaanSalesforce] pengguna tidak berada di halaman Salesforce."
+		"message": "हे $salesforce_lightning सेटअप पृष्ठ नाही.",
+		"description": "[notSalesforceSetup] वापरकर्ता Salesforce पृष्ठावर नाही."
+	},
+	"open_here": {
+		"message": "या Tab मध्ये उघडा.",
+		"description": "[open-other-org-modal] वापरकर्त्याला त्याच ब्राउझर Tab मध्ये उघडण्याची परवानगी देण्यासाठी रेडिओ बटण"
+	},
+	"open_new_tab": {
+		"message": "नवीन Tab मध्ये उघडा.",
+		"description": "[open-other-org-modal] वापरकर्त्याला नवीन ब्राउझर Tab मध्ये उघडण्याची परवानगी देण्यासाठी रेडिओ बटण."
 	},
 	"open_settings": {
 		"message": "Buka Tetapan Sambungan",
@@ -508,12 +516,12 @@
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Buka halaman Log Masuk Salesforce secara automatik apabila mengklik pada tetingkap timbul semasa tidak berada di halaman Salesforce.",
-		"description": "[tetapan] apabila pengguna membuka tetingkap timbul semasa berada di tapak web rawak"
+		"message": "Salesforce पृष्ठावर नसताना पॉपअपवर क्लिक केल्यावर $salesforce_login पृष्ठ स्वयंचलितपणे उघडा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता यादृच्छिक वेबसाइटवर असताना पॉपअप उघडतो"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Buka halaman Persediaan Salesforce secara automatik apabila mengklik pada tetingkap timbul semasa berada di halaman Salesforce.",
-		"description": "[tetapan] apabila pengguna membuka tetingkap timbul semasa berada di tapak web Salesforce"
+		"message": "Salesforce पृष्ठावर असताना पॉपअपवर क्लिक केल्यावर $salesforce_setup पृष्ठ स्वयंचलितपणे उघडा.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर असताना पॉपअप उघडतो"
 	},
 	"opt_en_fallback": {
 		"message": "en (Sandaran)",
@@ -528,12 +536,12 @@
 		"description": "[tetapan] apabila pengguna mengklik Tab kegemaran, buka dalam tab pelayar baharu"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Sentiasa buka halaman Log Masuk Salesforce dalam Tab yang sama apabila mengklik pada tetingkap timbul.",
-		"description": "[tetapan]"
+		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_login पृष्ठ त्याच Tab मध्ये उघडा.",
+		"description": "[सेटिंग]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Sentiasa buka halaman Persediaan Salesforce dalam Tab yang sama apabila mengklik pada tetingkap timbul.",
-		"description": "[tetapan]"
+		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_setup पृष्ठ त्याच Tab मध्ये उघडा.",
+		"description": "[सेटिंग]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat apabila digunakan).",
@@ -552,8 +560,8 @@
 		"description": "[tetapan] apabila pengguna menambah Tab kegemaran, elakkan menyemak jika ada ID dalam pautan yang disimpan"
 	},
 	"or_drop": {
-		"message": "Atau lepaskan",
-		"description": "[import] biarkan pengguna menggerakkan fail dengan tetikus mereka dan melepaskannya"
+		"message": "किंवा $drop",
+		"description": "[आयात] वापरकर्त्याला त्यांच्या माउसने फाइल्स हलवण्याची आणि त्या रिलीज करण्याची परवानगी द्या"
 	},
 	"org_link": {
 		"message": "Pautan Org",
@@ -584,12 +592,12 @@
 		"description": "[minta_kebenaran] label apabila pengguna tidak mahu membenarkan kebenaran secara kekal"
 	},
 	"req_permissions_header": {
-		"message": "Sila benarkan kami mengakses<br />halaman Persediaan Salesforce secara automatik.",
-		"description": "[minta_kebenaran] pengepala halaman untuk meminta kebenaran"
+		"message": "कृपया आम्हाला $salesforce_setup पृष्ठांवर स्वयंचलितपणे प्रवेश करण्याची परवानगी द्या.",
+		"description": "[req_permission] परवानग्यांची विनंती करण्यासाठी पृष्ठाचे शीर्षलेख"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jika anda mahu, anda boleh meminta Tabs kegemaran anda muncul<br />sebaik sahaja anda menavigasi ke halaman Persediaan Salesforce<br />tanpa perlu mengklik sambungan ini setiap kali.",
-		"description": "[minta_kebenaran] teks untuk menerangkan mengapa kebenaran diminta"
+		"message": "तुम्हाला हवे असल्यास, तुम्ही $salesforce_setup पृष्ठावर नेव्हिगेट करताच\nतुमचे आवडते Tabs दिसू शकतात\nप्रत्येक वेळी या विस्तारावर क्लिक न करता.",
+		"description": "[req_permission] परवानग्या का मागितल्या जात आहेत हे स्पष्ट करणारा मजकूर"
 	},
 	"required": {
 		"message": "diperlukan",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Pengguna",
 		"description": "Nama halaman yang berkaitan dengan ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Anda telah mengimport menggunakan 'tabTitle' yang tidak digunakan lagi!\nMuat turun fail yang dikemas kini telah bermula.\nMulai sekarang, sila gunakan fail yang baru dimuat turun.\nPenggunaan fail sedemikian akan dihentikan dengan keluaran kemudian.",
-		"description": "[amaran] Terangkan kepada pengguna bahawa fail yang mereka import menggunakan sifat yang tidak digunakan lagi"
 	},
 	"where_to": {
 		"message": "Ke mana?",

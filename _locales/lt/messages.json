@@ -56,8 +56,8 @@
 		"description": "[atidaryti_kitą_org_modal] prašyti vartotojo patvirtinimo atidaryti sukurtą nuorodą."
 	},
 	"confirm_update_extension": {
-		"message": "Nauja $extension_label versija dabar pasiekiama!",
-		"description": "iš klausytojo gauta nežinoma žinutė"
+		"message": "Nauja $extension_label versija jau pasiekiama!",
+		"description": "iš klausytojo gautas nežinomas pranešimas"
 	},
 	"continue": {
 		"message": "Tęsti",
@@ -76,8 +76,8 @@
 		"description": "[kontekstinis_meniu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importuoti Tabs",
-		"description": "[kontekstinis_meniu]"
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstinis-meniu]"
 	},
 	"cxm_move": {
 		"message": "🧭 Perkelti Tab",
@@ -104,12 +104,12 @@
 		"description": "[kontekstinis_meniu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Pašalinti Tab",
-		"description": "[kontekstinis_meniu]"
+		"message": "👋 $remove_tab",
+		"description": "[kontekstinis-meniu]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Išsaugoti kaip Tab",
-		"description": "[kontekstinis_meniu]"
+		"message": "💾 $save_tab",
+		"description": "[kontekstinis-meniu]"
 	},
 	"cxm_remove": {
 		"message": "💥 Pašalinti Tab(s)",
@@ -132,8 +132,8 @@
 		"description": "[kontekstinis_meniu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Nustatymai",
-		"description": "Etiketė nustatymų meniu"
+		"message": "⚙️ $settings",
+		"description": "Nustatymų meniu etiketė"
 	},
 	"cxm_update": {
 		"message": "✏️ Atnaujinti Tab",
@@ -152,8 +152,8 @@
 		"description": "[iškylantysis_langas] ištrinti eilutę"
 	},
 	"delete_all": {
-		"message": "Ištrinti visus Tabs",
-		"description": "[iškylantysis_langas] pavadinimas ant šiukšliadėžės, kad ištuštintumėte visus Tabs"
+		"message": "$delete visus Tabs",
+		"description": "[iškylantis-langas] pavadinimas šiukšliadėžėje, norint ištuštinti visus Tabs"
 	},
 	"drop": {
 		"message": "Numesti",
@@ -452,8 +452,8 @@
 		"description": "[modal_pavadinimas] importavimo procesui"
 	},
 	"import_title": {
-		"message": "Importuoti Tabs iš json failo",
-		"description": "[iškylantysis_langas] pavadinimas ant importavimo mygtuko"
+		"message": "$import_tabs iš JSON failo",
+		"description": "[iškylantis-langas] pavadinimas importavimo mygtuke"
 	},
 	"insert_another": {
 		"message": "Įterpti kitą",
@@ -496,8 +496,16 @@
 		"description": "[neSalesforceNustatymas] netinkamas URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Tai nėra „Salesforce Lightning“ sąrankos puslapis.",
-		"description": "[neSalesforceNustatymas] naudotojas nėra „Salesforce“ puslapyje."
+		"message": "Tai nėra $salesforce_lightning sąrankos puslapis.",
+		"description": "[notSalesforceSetup] vartotojas nėra „Salesforce“ puslapyje."
+	},
+	"open_here": {
+		"message": "Atidaryti šiame Tab.",
+		"description": "[open-other-org-modal] radijo mygtukas, leidžiantis vartotojui atidaryti tame pačiame naršyklės Tab"
+	},
+	"open_new_tab": {
+		"message": "Atidaryti naujame Tab.",
+		"description": "[open-other-org-modal] radijo mygtukas, leidžiantis vartotojui atidaryti naujame naršyklės Tab."
 	},
 	"open_settings": {
 		"message": "Atidaryti plėtinio nustatymus",
@@ -508,12 +516,12 @@
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automatiškai atidaryti „Salesforce“ prisijungimo puslapį spustelėjus iššokantįjį langą, kai nesate „Salesforce“ puslapyje.",
-		"description": "[nustatymas] kai naudotojas atidaro iššokantįjį langą būdamas bet kuriame tinklalapyje"
+		"message": "Automatiškai atidaryti $salesforce_login puslapį spustelėjus iškylantįjį langą, kai nesate „Salesforce“ puslapyje.",
+		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą atsitiktinėje svetainėje"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automatiškai atidaryti „Salesforce“ sąrankos puslapį spustelėjus iššokantįjį langą, kai esate „Salesforce“ puslapyje.",
-		"description": "[nustatymas] kai naudotojas atidaro iššokantįjį langą būdamas „Salesforce“ tinklalapyje"
+		"message": "Automatiškai atidaryti $salesforce_setup puslapį spustelėjus iškylantįjį langą, kai esate „Salesforce“ puslapyje.",
+		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą „Salesforce“ svetainėje"
 	},
 	"opt_en_fallback": {
 		"message": "en (Atsarginis)",
@@ -528,11 +536,11 @@
 		"description": "[nustatymas] kai vartotojas spusteli mėgstamą Tab, atidaryti naujame naršyklės skirtuke"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Visada atidaryti „Salesforce“ prisijungimo puslapį tame pačiame Tab spustelėjus iššokantįjį langą.",
+		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_login puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Visada atidaryti „Salesforce“ sąrankos puslapį tame pačiame Tab spustelėjus iššokantįjį langą.",
+		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_setup puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[nustatymas] kai vartotojas prideda mėgstamą Tab, nepatikrinti, ar nuorodoje yra ID"
 	},
 	"or_drop": {
-		"message": "Arba numeskite",
+		"message": "Arba $drop",
 		"description": "[importuoti] leiskite vartotojui perkelti failus pele ir juos paleisti"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[prašyti_leidimo] etiketė, kai vartotojas nenori visam laikui leisti leidimų"
 	},
 	"req_permissions_header": {
-		"message": "Prašome leisti mums automatiškai pasiekti<br />Salesforce sąrankos puslapius.",
-		"description": "[prašyti_leidimo] puslapio antraštė leidimams prašyti"
+		"message": "Leiskite mums automatiškai pasiekti\n$salesforce_setup puslapius.",
+		"description": "[req_permission] leidimų prašymo puslapio antraštė"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jei norite, galite padaryti, kad jūsų mėgstamiausi Tabs atsirastų,<br />kai tik pereinate į Salesforce sąrankos puslapį,<br />nereikia kaskart spustelėti šio plėtinio.",
-		"description": "[prašyti_leidimo] tekstas, paaiškinantis, kodėl prašoma leidimų"
+		"message": "Jei norite, galite rodyti mėgstamiausius Tabs\nkai tik pereisite į $salesforce_setup puslapį,\nkas kartą nespaudžiant šio plėtinio.",
+		"description": "[req_permission] tekstas, paaiškinantis, kodėl prašoma leidimų"
 	},
 	"required": {
 		"message": "privaloma",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Vartotojai",
 		"description": "Puslapio, susijusio su ManageUsers/home, pavadinimas"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Importavote naudodami pasenusį 'tabTitle'!\nAtnaujinto failo atsisiuntimas prasidėjo.\nNuo šiol naudokite naujai atsisiųstą failą.\nTokio failo naudojimas bus nutrauktas vėlesnėje versijoje.",
-		"description": "[įspėjimas] Paaiškinkite vartotojui, kad failas, kurį jie importavo, naudoja pasenusią savybę"
 	},
 	"where_to": {
 		"message": "Kur?",

@@ -1,5 +1,5 @@
 "use strict";
-import { EXTENSION_NAME, sendExtensionMessage } from "/constants.js";
+import { EXTENSION_NAME } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
@@ -77,7 +77,7 @@ async function generateSldsImport() {
 	style.textContent = ".hidden { display: none; }";
 	divParent.appendChild(style);
 	const duplicateWarning = document.createElement("span");
-	duplicateWarning.innerHTML = await translator.translate(
+	duplicateWarning.textContent = await translator.translate(
 		"import_duplicate_description",
 	);
 	duplicateWarning.style.textAlign = "center";
@@ -114,15 +114,6 @@ reader.onload = async (e) => {
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
 		showToast(["import_successful", importedNum, "tabs"], true);
-		if (jsonString.includes("tabTitle")) {
-			// export and toast
-			sendExtensionMessage({ what: "export", tabs: allTabs });
-			showToast(
-				"warn_deprecated_tab_title",
-				false,
-				true,
-			);
-		}
 	} catch (error) {
 		showToast(
 			["error_import", error.message],

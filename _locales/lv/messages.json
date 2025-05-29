@@ -56,8 +56,8 @@
 		"description": "[atvērt_citu_org_modal] lūgt lietotāja apstiprinājumu, lai atvērtu izveidoto saiti."
 	},
 	"confirm_update_extension": {
-		"message": "Jauna $extension_label versija tagad ir pieejama!",
-		"description": "no klausītāja saņemta nezināma ziņa"
+		"message": "Tagad ir pieejama jauna $extension_label versija!",
+		"description": "no klausītāja ir saņemts nezināms ziņojums"
 	},
 	"continue": {
 		"message": "Turpināt",
@@ -76,8 +76,8 @@
 		"description": "[konteksta_izvēlne]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importēt Tabs",
-		"description": "[konteksta_izvēlne]"
+		"message": "🆙 $import_tabs",
+		"description": "[konteksta-izvēlne]"
 	},
 	"cxm_move": {
 		"message": "🧭 Pārvietot Tab",
@@ -104,12 +104,12 @@
 		"description": "[konteksta_izvēlne]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Noņemt Tab",
-		"description": "[konteksta_izvēlne]"
+		"message": "👋 $remove_tab",
+		"description": "[konteksta-izvēlne]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Saglabāt kā Tab",
-		"description": "[konteksta_izvēlne]"
+		"message": "💾 $save_tab",
+		"description": "[konteksta-izvēlne]"
 	},
 	"cxm_remove": {
 		"message": "💥 Noņemt Tab(s)",
@@ -132,8 +132,8 @@
 		"description": "[konteksta_izvēlne]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Iestatījumi",
-		"description": "Etiķete iestatījumu izvēlnei"
+		"message": "⚙️ $settings",
+		"description": "Iestatījumu izvēlnes etiķete"
 	},
 	"cxm_update": {
 		"message": "✏️ Atjaunināt Tab",
@@ -152,8 +152,8 @@
 		"description": "[uznirstošais_logs] dzēst rindu"
 	},
 	"delete_all": {
-		"message": "Dzēst visas Tabs",
-		"description": "[uznirstošais_logs] virsraksts uz miskastes, lai iztukšotu visas Tabs"
+		"message": "$delete visas Tabs",
+		"description": "[uznirstošais-logs] nosaukums miskastē, lai iztukšotu visas Tabs"
 	},
 	"drop": {
 		"message": "Nomest",
@@ -452,8 +452,8 @@
 		"description": "[modal_virsraksts] importēšanas procesam"
 	},
 	"import_title": {
-		"message": "Importēt Tabs no json faila",
-		"description": "[uznirstošais_logs] virsraksts uz importēšanas pogas"
+		"message": "$import_tabs no JSON faila",
+		"description": "[uznirstošais-logs] nosaukums importēšanas pogai"
 	},
 	"insert_another": {
 		"message": "Ievietot citu",
@@ -496,8 +496,16 @@
 		"description": "[navSalesforceIestatīšana] nederīgs URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Šī nav Salesforce Lightning iestatīšanas lapa.",
-		"description": "[navSalesforceIestatīšana] lietotājs neatrodas Salesforce lapā."
+		"message": "Šī nav $salesforce_lightning iestatīšanas lapa.",
+		"description": "[notSalesforceSetup] lietotājs neatrodas Salesforce lapā."
+	},
+	"open_here": {
+		"message": "Atvērt šajā Tab.",
+		"description": "[open-other-org-modal] radiopoga, kas ļauj lietotājam atvērt tajā pašā pārlūkprogrammas Tab"
+	},
+	"open_new_tab": {
+		"message": "Atvērt jaunā Tab.",
+		"description": "[open-other-org-modal] radiopoga, kas ļauj lietotājam atvērt jaunā pārlūkprogrammas Tab."
 	},
 	"open_settings": {
 		"message": "Atvērt paplašinājuma iestatījumus",
@@ -508,12 +516,12 @@
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automātiski atvērt Salesforce pierakstīšanās lapu, noklikšķinot uz uznirstošā loga, ja neatrodaties Salesforce lapā.",
-		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties nejaušā tīmekļa vietnē"
+		"message": "Automātiski atvērt $salesforce_login lapu, noklikšķinot uz uznirstošā loga, ja neesat Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu nejaušā vietnē"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automātiski atvērt Salesforce iestatīšanas lapu, noklikšķinot uz uznirstošā loga, ja atrodaties Salesforce lapā.",
-		"description": "[iestatījums] kad lietotājs atver uznirstošo logu, atrodoties Salesforce tīmekļa vietnē"
+		"message": "Automātiski atvērt $salesforce_setup lapu, noklikšķinot uz uznirstošā loga, ja esat Salesforce lapā.",
+		"description": "[iestatījums] kad lietotājs atver uznirstošo logu Salesforce vietnē"
 	},
 	"opt_en_fallback": {
 		"message": "en (Rezerves)",
@@ -528,11 +536,11 @@
 		"description": "[iestatījums] kad lietotājs noklikšķina uz iecienītākā Tab, atvērt jaunā pārlūka cilnē"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Vienmēr atvērt Salesforce pierakstīšanās lapu vienā un tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
+		"message": "Vienmēr atvērt $salesforce_login lapu tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Vienmēr atvērt Salesforce iestatīšanas lapu vienā un tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
+		"message": "Vienmēr atvērt $salesforce_setup lapu tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,7 +560,7 @@
 		"description": "[iestatījums] kad lietotājs pievieno iecienītāko Tab, nepārbaudīt, vai saitē ir ID"
 	},
 	"or_drop": {
-		"message": "Vai nomest",
+		"message": "Vai $drop",
 		"description": "[importēt] ļaujiet lietotājam pārvietot failus ar peli un atlaist tos"
 	},
 	"org_link": {
@@ -584,12 +592,12 @@
 		"description": "[pieprasīt_atļauju] etiķete, kad lietotājs nevēlas neatgriezeniski atļaut atļaujas"
 	},
 	"req_permissions_header": {
-		"message": "Lūdzu, atļaujiet mums automātiski piekļūt<br />Salesforce iestatīšanas lapām.",
-		"description": "[pieprasīt_atļauju] lapas galvene atļauju pieprasīšanai"
+		"message": "Lūdzu, atļaujiet mums automātiski piekļūt\n$salesforce_setup lapām.",
+		"description": "[req_permission] atļauju pieprasīšanas lapas galvene"
 	},
 	"req_permissions_paragraph": {
-		"message": "Ja vēlaties, varat likt saviem iecienītākajiem Tabs parādīties,<br />tiklīdz pārejat uz Salesforce iestatīšanas lapu,<br />bez nepieciešamības katru reizi noklikšķināt uz šī paplašinājuma.",
-		"description": "[pieprasīt_atļauju] teksts, kas izskaidro, kāpēc tiek pieprasītas atļaujas"
+		"message": "Ja vēlaties, varat parādīt savas iecienītākās Tabs,\ntiklīdz pārejat uz $salesforce_setup lapu,\nkatru reizi neklikšķinot uz šī paplašinājuma.",
+		"description": "[req_permission] teksts, kas paskaidro, kāpēc tiek pieprasītas atļaujas"
 	},
 	"required": {
 		"message": "obligāts",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Lietotāji",
 		"description": "Lapas nosaukums, kas saistīts ar ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Jūs importējāt, izmantojot novecojušo 'tabTitle'!\nAtjauninātā faila lejupielāde ir sākusies.\nTurpmāk, lūdzu, izmantojiet jauniegūto failu.\nŠāda faila lietošana tiks pārtraukta vēlākā laidienā.",
-		"description": "[brīdinājums] Paskaidrojiet lietotājam, ka viņu importētais fails izmanto novecojušu īpašību"
 	},
 	"where_to": {
 		"message": "Uz kurieni?",

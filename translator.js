@@ -203,9 +203,9 @@ class TranslationService {
 			const [key, ...attributes] = toTranslateKey.split(
 				TranslationService.TRANSLATE_SEPARATOR,
 			);
-			const translation = await this._translate(
+			const translation = (await this.translate(
 				key,
-			);
+			)).replaceAll("\n", "<br />");
 			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;
 			if (attributes.length === 0) {
