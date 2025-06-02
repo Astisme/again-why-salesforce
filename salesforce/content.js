@@ -1,12 +1,16 @@
 "use strict";
 import {
 	BROWSER,
+  WHAT_EXPORT,
+  EXTENSION_NAME,
 	CMD_OPEN_OTHER_ORG,
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
 	CMD_TOGGLE_ORG,
+  CXM_RESET_DEFAULT_TABS,
+  CXM_EMPTY_VISIBLE_TABS,
 	CMD_UPDATE_TAB,
-	CXM_EMPTY_NO_ORG_TABS,
+	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
@@ -54,7 +58,7 @@ async function getAllTabs_async() {
 	} else await allTabs;
 	return allTabs;
 }
-getAllTabs_async();
+
 export function getAllTabs() {
 	if (allTabs == null || allTabs instanceof Promise) {
 		throw new Error(["allTabs", "error_not_initilized"]);
@@ -119,7 +123,6 @@ async function checkAddLightningNavigation() {
 	script.src = BROWSER.runtime.getURL("salesforce/lightning-navigation.js");
 	(document.head || document.documentElement).appendChild(script);
 }
-checkAddLightningNavigation();
 
 /**
  * Handles post-save actions after setting Salesforce tabs.
@@ -568,7 +571,9 @@ const ACTION_MOVE = "move";
 export const ACTION_REMOVE_THIS = "remove-this";
 const ACTION_REMOVE_OTHER = "remove-other";
 export const ACTION_ADD = "add";
-const ACTION_REMOVE_NO_ORG_TABS = "remove-no-org-tabs";
+const ACTION_REMOVE_VISIBLE_TABS = "remove-shown-tabs";
+const ACTION_REMOVE_GENERIC_TABS = "remove-generic-tabs";
+const ACTION_RESET_DEFAULT = "reset-default";
 const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
 
@@ -605,7 +610,7 @@ export async function performActionOnTabs(action, tab = null, options = null) {
 					throw new Error("error_adding_tab");
 				}
 				break;
-			case ACTION_REMOVE_NO_ORG_TABS:
+			case ACTION_REMOVE_GENERIC_TABS:
 				if (!await allTabs.replaceTabs()) {
 					throw new Error("error_removing_generic_tabs");
 				}
@@ -617,6 +622,22 @@ export async function performActionOnTabs(action, tab = null, options = null) {
 				break;
 			case ACTION_TOGGLE_ORG:
 				await toggleOrg(tab);
+				break;
+			case ACTION_REMOVE_VISIBLE_TABS: {
+        // The visible Tabs are all the generic ones + the org-specific Tabs for the current Org
+        const thisOrg = Tab.extractOrgName(href);
+				if (!await allTabs.replaceTabs([], {
+          removeOrgTabs: true,
+          removeThisOrgTabs: thisOrg,
+        })) {
+					throw new Error("error_removing_visible_tabs");
+				}
+				break;
+      }
+			case ACTION_RESET_DEFAULT:
+				if (!await allTabs.setDefaultTabs()) {
+					throw new Error("error_resetting_default_tabs");
+				}
 				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
@@ -728,154 +749,194 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 	}
 }
 
+function launchDownload(message){
+  const jsonText = message.payload;
+  const filename = message.filename || "download.json";
+  // Create a Blob & object URL
+  const blob = new Blob([jsonText], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  // Build <a> and “click” it
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  // Cleanup
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 // listen from saves from the action / background page
-BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
-	if (message == null || message.what == null) {
-		return;
-	}
-	sendResponse(null);
-	allTabs = await ensureAllTabsAvailability();
-	try {
-		switch (message.what) {
-			// hot reload (from context-menus.js)
-			case "saved":
-			case "focused":
-			case "startup":
-			case "installed":
-			case "activate":
-			case "highlighted":
-			case "focuschanged":
-				sf_afterSet(message.what, message.tabs);
-				break;
-			case "warning":
-				showToast(message.message, false, true);
-				if (message.action === "make-bold") {
-					makeDuplicatesBold(message.url);
-				}
-				break;
-			case "error":
-				showToast(message.message, false);
-				break;
-			case "add":
-				createImportModal();
-				break;
-			case CXM_OPEN_OTHER_ORG:
-			case CMD_OPEN_OTHER_ORG: {
-				const label = message.linkTabLabel;
-				const url = message.linkTabUrl ?? message.pageTabUrl;
-				showModalOpenOtherOrg({ label, url });
-				break;
-			}
-			case CXM_MOVE_FIRST:
-				await performActionOnTabs(ACTION_MOVE, {
-					label: message.label,
-					url: message.tabUrl,
-				}, { moveBefore: true, fullMovement: true });
-				break;
-			case CXM_MOVE_LEFT:
-				await performActionOnTabs(ACTION_MOVE, {
-					label: message.label,
-					url: message.tabUrl,
-				}, { moveBefore: true, fullMovement: false });
-				break;
-			case CXM_MOVE_RIGHT:
-				await performActionOnTabs(ACTION_MOVE, {
-					label: message.label,
-					url: message.tabUrl,
-				}, { moveBefore: false, fullMovement: false });
-				break;
-			case CXM_MOVE_LAST:
-				await performActionOnTabs(ACTION_MOVE, {
-					label: message.label,
-					url: message.tabUrl,
-				}, { moveBefore: false, fullMovement: true });
-				break;
-			case CXM_REMOVE_TAB:
-				await performActionOnTabs(ACTION_REMOVE_THIS, {
-					label: message.label,
-					url: message.tabUrl,
-				});
-				break;
-			case CXM_REMOVE_OTHER_TABS:
-				await performActionOnTabs(ACTION_REMOVE_OTHER, {
-					label: message.label,
-					url: message.tabUrl,
-				});
-				break;
-			case CXM_REMOVE_LEFT_TABS:
-				await performActionOnTabs(ACTION_REMOVE_OTHER, {
-					label: message.label,
-					url: message.tabUrl,
-				}, { removeBefore: true });
-				break;
-			case CXM_REMOVE_RIGHT_TABS:
-				await performActionOnTabs(ACTION_REMOVE_OTHER, {
-					label: message.label,
-					url: message.tabUrl,
-				}, { removeBefore: false });
-				break;
-			case CXM_EMPTY_NO_ORG_TABS:
-				await performActionOnTabs(ACTION_REMOVE_NO_ORG_TABS);
-				break;
-			case CXM_EMPTY_TABS:
-				await performActionOnTabs(ACTION_REMOVE_ALL);
-				break;
-			case CXM_PAGE_SAVE_TAB:
-			case CMD_SAVE_AS_TAB:
-				pageActionTab(true);
-				break;
-			case CXM_PAGE_REMOVE_TAB:
-			case CMD_REMOVE_TAB:
-				pageActionTab(false);
-				break;
-			case CXM_UPDATE_ORG:
-			case CMD_TOGGLE_ORG:
-				await performActionOnTabs(ACTION_TOGGLE_ORG, {
-					label: message.label,
-					url: message.tabUrl,
-				});
-				break;
-			case CXM_UPDATE_TAB:
-			case CMD_UPDATE_TAB:
-				showModalUpdateTab({
-					label: message.label,
-					url: message.tabUrl,
-				});
-				break;
-			case WHAT_UPDATE_EXTENSION:
-				promptUpdateExtension(message);
-				break;
-			default:
-				if (message.what != "theme") {
-					showToast(
-						[
-							"error_unknown_message",
-							message.what,
-						],
-						false,
-						true,
-					);
-				}
-				break;
-		}
-	} catch (error) {
-		showToast(error.message, false);
-	}
-});
+function listenToBackgroundPage(){
+  BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
+    if (message == null || message.what == null) {
+      return;
+    }
+    sendResponse(null);
+    allTabs = await ensureAllTabsAvailability();
+    try {
+      switch (message.what) {
+        // hot reload (from context-menus.js)
+        case "saved":
+        case "focused":
+        case "startup":
+        case "installed":
+        case "activate":
+        case "highlighted":
+        case "focuschanged":
+          sf_afterSet(message.what, message.tabs);
+          break;
+        case "warning":
+          showToast(message.message, false, true);
+          if (message.action === "make-bold") {
+            makeDuplicatesBold(message.url);
+          }
+          break;
+        case "error":
+          showToast(message.message, false);
+          break;
+        case "add":
+          createImportModal();
+          break;
+        case CXM_OPEN_OTHER_ORG:
+        case CMD_OPEN_OTHER_ORG: {
+          const label = message.linkTabLabel;
+          const url = message.linkTabUrl ?? message.pageTabUrl;
+          showModalOpenOtherOrg({ label, url });
+          break;
+        }
+        case CXM_MOVE_FIRST:
+          await performActionOnTabs(ACTION_MOVE, {
+            label: message.label,
+            url: message.tabUrl,
+          }, { moveBefore: true, fullMovement: true });
+          break;
+        case CXM_MOVE_LEFT:
+          await performActionOnTabs(ACTION_MOVE, {
+            label: message.label,
+            url: message.tabUrl,
+          }, { moveBefore: true, fullMovement: false });
+          break;
+        case CXM_MOVE_RIGHT:
+          await performActionOnTabs(ACTION_MOVE, {
+            label: message.label,
+            url: message.tabUrl,
+          }, { moveBefore: false, fullMovement: false });
+          break;
+        case CXM_MOVE_LAST:
+          await performActionOnTabs(ACTION_MOVE, {
+            label: message.label,
+            url: message.tabUrl,
+          }, { moveBefore: false, fullMovement: true });
+          break;
+        case CXM_REMOVE_TAB:
+          await performActionOnTabs(ACTION_REMOVE_THIS, {
+            label: message.label,
+            url: message.tabUrl,
+          });
+          break;
+        case CXM_REMOVE_OTHER_TABS:
+          await performActionOnTabs(ACTION_REMOVE_OTHER, {
+            label: message.label,
+            url: message.tabUrl,
+          });
+          break;
+        case CXM_REMOVE_LEFT_TABS:
+          await performActionOnTabs(ACTION_REMOVE_OTHER, {
+            label: message.label,
+            url: message.tabUrl,
+          }, { removeBefore: true });
+          break;
+        case CXM_REMOVE_RIGHT_TABS:
+          await performActionOnTabs(ACTION_REMOVE_OTHER, {
+            label: message.label,
+            url: message.tabUrl,
+          }, { removeBefore: false });
+          break;
+        case CXM_EMPTY_GENERIC_TABS:
+          await performActionOnTabs(ACTION_REMOVE_GENERIC_TABS);
+          break;
+        case CXM_EMPTY_TABS:
+          await performActionOnTabs(ACTION_REMOVE_ALL);
+          break;
+        case CXM_PAGE_SAVE_TAB:
+        case CMD_SAVE_AS_TAB:
+          pageActionTab(true);
+          break;
+        case CXM_PAGE_REMOVE_TAB:
+        case CMD_REMOVE_TAB:
+          pageActionTab(false);
+          break;
+        case CXM_UPDATE_ORG:
+        case CMD_TOGGLE_ORG:
+          await performActionOnTabs(ACTION_TOGGLE_ORG, {
+            label: message.label,
+            url: message.tabUrl,
+          });
+          break;
+        case CXM_UPDATE_TAB:
+        case CMD_UPDATE_TAB:
+          showModalUpdateTab({
+            label: message.label,
+            url: message.tabUrl,
+          });
+          break;
+        case CXM_EMPTY_VISIBLE_TABS:
+          await performActionOnTabs(ACTION_REMOVE_VISIBLE_TABS);
+          break;
+        case CXM_RESET_DEFAULT_TABS:
+          await performActionOnTabs(ACTION_RESET_DEFAULT);
+          break;
+        case WHAT_UPDATE_EXTENSION:
+          promptUpdateExtension(message);
+          break;
+        case WHAT_EXPORT:
+          launchDownload(message);
+          break;
+        default:
+          if (message.what != "theme") {
+            showToast(
+              [
+                "error_unknown_message",
+                message.what,
+              ],
+              false,
+              true,
+            );
+          }
+          break;
+      }
+    } catch (error) {
+      showToast(error.message, false);
+    }
+  });
+}
 
 // listen to possible updates from other modules
-addEventListener("message", (e) => {
-	if (e.source != window) {
-		return;
-	}
-	const what = e.data.what;
-	if (what === "order") {
-		reorderTabs();
-	}
-});
+function listenToReorderedTabs(){
+  addEventListener("message", (e) => {
+    if (e.source != window) {
+      return;
+    }
+    const what = e.data.what;
+    if (what === "order") {
+      reorderTabs();
+    }
+  });
+}
+
+// launch all starting functions
+function main(){
+  getAllTabs_async();
+  checkAddLightningNavigation();
+  listenToBackgroundPage();
+  listenToReorderedTabs();
+	delayLoadSetupTabs();
+}
 
 // queries the currently active tab of the current active window
 // this prevents showing the tabs when not in a setup page (like Sales or Service Console)
-if (href.includes(SETUP_LIGHTNING)) {
-	delayLoadSetupTabs();
+if (href.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]) {
+  globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
+  main();
 }

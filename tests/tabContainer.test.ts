@@ -25,8 +25,8 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
-			assertEquals(container[1].label, "Flows");
-			assertEquals(container[2].label, "Users");
+			assertEquals(container[1].label, "flows");
+			assertEquals(container[2].label, "users");
 
 			mockStorage.tabs = [];
 			container.length = 0;
@@ -34,8 +34,8 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
-			assertEquals(container[1].label, "Flows");
-			assertEquals(container[2].label, "Users");
+			assertEquals(container[1].label, "flows");
+			assertEquals(container[2].label, "users");
 		},
 	);
 
@@ -97,8 +97,8 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
-			assertEquals(container[1].label, "Flows");
-			assertEquals(container[2].label, "Users");
+			assertEquals(container[1].label, "flows");
+			assertEquals(container[2].label, "users");
 
 			mockStorage.tabs = [];
 			container.length = 0;
@@ -109,8 +109,8 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			);
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
-			assertEquals(container[1].label, "Flows");
-			assertEquals(container[2].label, "Users");
+			assertEquals(container[1].label, "flows");
+			assertEquals(container[2].label, "users");
 
 			mockStorage.tabs = [];
 			container.length = 0;
@@ -121,8 +121,8 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			);
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
-			assertEquals(container[1].label, "Flows");
-			assertEquals(container[2].label, "Users");
+			assertEquals(container[1].label, "flows");
+			assertEquals(container[2].label, "users");
 		},
 	);
 });
@@ -216,344 +216,111 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 	});
 });
 
-await Deno.test("TabContainer - Tab Replacement", async (t) => {
-	// resetTabs = true, removeOrgTabs = true, keepTabsNotThisOrg = something
-	await t.step("replaces all tabs with a different org", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-		assertEquals(container.length, 3);
+async function setupContainer() {
+	const container = await TabContainer.create();
+  container.length = 0;
+	await container.addTabs([
+			{ label: "Tab A", url: "url1", org: "test-org" },
+			{ label: "Tab B", url: "url2", org: "other-org" },
+			{ label: "Tab C", url: "url3", org: "new-org" },
+			{ label: "Tab D", url: "url4" },
+		]);
+	return container;
+}
 
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Org Tab", url: "url2", org: "test-org2" },
-				{ label: "Normal Tab", url: "normal-url" },
-			], {
-				removeOrgTabs: true,
-			}),
-		);
-		assertEquals(container.length, 3);
+await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
+	// resetTabs = true, removeOrgTabs = true, keepTabsNotThisOrg = 'test-org', removeThisOrgTabs = null
+	await t.step("clear all tabs without org and org tabs with org != keepTabsNotThisOrg", async () => {
+		const container = await setupContainer();
 
-		assert(
-			await container.replaceTabs([], {
-				removeOrgTabs: true,
-				keepTabsNotThisOrg: "test-org",
-			}),
-		);
+		await container.replaceTabs([], {
+			resetTabs: true,
+			removeOrgTabs: true,
+			keepTabsNotThisOrg: "test-org",
+		});
+
+		assertEquals(container.length, 2);
+    assertFalse(container.some(t => t.org === "test-org"));
+	});
+
+	// resetTabs = true, removeOrgTabs = true, keepTabsNotThisOrg = null, removeThisOrgTabs = 'other-org'
+	await t.step("clears all tabs without org and org tabs with org == removeThisOrgTabs", async () => {
+		const container = await setupContainer();
+
+		await container.replaceTabs([], {
+			resetTabs: true,
+			removeOrgTabs: true,
+			removeThisOrgTabs: "other-org",
+		});
+
+		assertEquals(container.length, 2);
+		assertFalse(container.some(t => t.org === "other-org"));
+	});
+
+	// resetTabs = true, removeOrgTabs = true
+	await t.step("clears all tabs", async () => {
+		const container = await setupContainer();
+
+		await container.replaceTabs([], {
+			resetTabs: true,
+			removeOrgTabs: true,
+		});
+
+		assertEquals(container.length, 0);
+	});
+
+	// resetTabs = true, removeOrgTabs = false
+	await t.step("removes only non-org (generic) tabs", async () => {
+		const container = await setupContainer();
+
+		await container.replaceTabs([], {
+			resetTabs: true,
+			removeOrgTabs: false,
+		});
+
+		assertEquals(container.length, 3);
+		assert(container.every(t => t.org != null));
+	});
+
+	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = 'test-org'
+	await t.step("keeps tabs without org and removes org tabs not matching keepTabsNotThisOrg", async () => {
+		const container = await setupContainer();
+
+		await container.replaceTabs([], {
+			resetTabs: false,
+			removeOrgTabs: true,
+			keepTabsNotThisOrg: "test-org",
+		});
+
+		assertEquals(container.length, 2);
+		assert(container.every(t => !t.org || t.org === "test-org"));
+	});
+
+	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = null
+	await t.step("keeps tabs without org and removes all org tabs", async () => {
+		const container = await setupContainer();
+
+		await container.replaceTabs([], {
+			resetTabs: false,
+			removeOrgTabs: true,
+		});
+
 		assertEquals(container.length, 1);
-		assertEquals(mockStorage.tabs.length, 1);
-		assertEquals(container.getTabsWithOrg().length, 1);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Org Tab3", url: "url2", org: "test-org2" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-			], {
-				removeOrgTabs: true,
-			}),
-		);
-		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 4);
-
-		assert(
-			await container.replaceTabs([], {
-				removeOrgTabs: true,
-				sync: false,
-				keepTabsNotThisOrg: "test-org",
-			}),
-		);
-		assertEquals(container.length, 1);
-		assertEquals(mockStorage.tabs.length, 4);
-		assertEquals(container[0].label, "Org Tab3");
-		assertEquals(mockStorage.tabs[0].label, "Org Tab2");
+		assert(!container[0].org);
 	});
 
-	// resetTabs = true, removeOrgTabs = true, keepTabsNotThisOrg = nothing
-	await t.step("replaces all tabs", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-		assertEquals(container.length, 3);
+	// resetTabs = false, removeOrgTabs = false, keepTabsNotThisOrg = anything
+	await t.step("adds tabs without removing any", async () => {
+		const container = await setupContainer();
 
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Normal Tab", url: "normal-url" },
-			], {
-				removeOrgTabs: true,
-			}),
-		);
-		assertEquals(container.length, 2);
-		assertEquals(mockStorage.tabs.length, 2);
+		await container.replaceTabs([
+			{ label: "Tab B", url: "url2", org: "test-org" },
+		], {
+			resetTabs: false,
+			removeOrgTabs: false,
+		});
 
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-			], {
-				removeOrgTabs: true,
-				sync: false,
-			}),
-		);
-		assertEquals(container.length, 3);
-		assertEquals(mockStorage.tabs.length, 2);
-		assertEquals(container[0].label, "Org Tab2");
-		assertEquals(mockStorage.tabs[0].label, "Org Tab");
-	});
-
-	// resetTabs = true, removeOrgTabs = false, keepTabsNotThisOrg = something
-	await t.step("replaces all tabs without org", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-		assertEquals(container.length, 3);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Normal Tab", url: "normal-url" },
-			], {
-				removeOrgTabs: true,
-			}),
-		);
-		assertEquals(container.length, 2);
-		assertEquals(mockStorage.tabs.length, 2);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-			], {
-				removeOrgTabs: false,
-				sync: false,
-				keepTabsNotThisOrg: "test-org",
-			}),
-		);
-		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 2);
-		assertEquals(container[0].label, "Org Tab");
-		assertEquals(container[1].label, "Org Tab2");
-		assertEquals(mockStorage.tabs[0].label, "Org Tab");
-		assertEquals(mockStorage.tabs[1].label, "Normal Tab");
-	});
-
-	// resetTabs = true, removeOrgTabs = false, keepTabsNotThisOrg = nothing
-	await t.step("replaces all tabs while preserving org tabs", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-		assertEquals(container.length, 3);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Normal Tab", url: "normal-url" },
-			], {
-				removeOrgTabs: true,
-			}),
-		);
-		assertEquals(container.length, 2);
-
-		assert(
-			await container.replaceTabs(
-				[{ label: "New Tab", url: "new-url" }],
-				{ resetTabs: true, removeOrgTabs: false },
-			),
-		);
-
-		assertEquals(container.length, 2);
-		assertEquals(mockStorage.tabs.length, 2);
-		const orgTabs = container.getTabsByOrg("test-org");
-		assertEquals(orgTabs.length, 1);
-		assertEquals(orgTabs[0].label, "Org Tab");
-		assertEquals(container[0].label, "Org Tab");
-		assertEquals(container[1].label, "New Tab");
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-			], {
-				removeOrgTabs: false,
-				sync: false,
-			}),
-		);
-		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 2);
-		assertEquals(container[0].label, "Org Tab");
-		assertEquals(container[1].label, "Org Tab2");
-		assertEquals(container[2].label, "Normal Tab2");
-		assertEquals(mockStorage.tabs[0].label, "Org Tab");
-		assertEquals(mockStorage.tabs[1].label, "New Tab");
-	});
-
-	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = something
-	await t.step("remove all org tabs with a specific org", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-		assertEquals(container.length, 3);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Normal Tab", url: "normal-url" },
-				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
-			], {
-				removeOrgTabs: true,
-			}),
-		);
-		assertEquals(container.length, 4);
-
-		assert(
-			await container.replaceTabs(
-				[],
-				{
-					resetTabs: false,
-					removeOrgTabs: true,
-					keepTabsNotThisOrg: "test-org",
-				},
-			),
-		);
-
-		assertEquals(container.length, 3);
-		assertEquals(mockStorage.tabs.length, 3);
-		assertEquals(container.getTabsByOrg("test-org").length, 0);
-		const org1Tabs = container.getTabsByOrg("test-org1");
-		assertEquals(org1Tabs.length, 2);
-		assertEquals(org1Tabs[0].label, "Org Tab2");
-		assertEquals(org1Tabs[1].label, "Org Tab3");
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-			], {
-				resetTabs: false,
-				removeOrgTabs: true,
-				sync: false,
-				keepTabsNotThisOrg: "test-org",
-			}),
-		);
-		assertEquals(container.length, 6);
-		assertEquals(mockStorage.tabs.length, 3);
-		assertEquals(container[0].label, "Normal Tab");
-		assertEquals(container[1].label, "Org Tab2");
-		assertEquals(container[2].label, "Org Tab3");
-		assertEquals(mockStorage.tabs[0].label, "Normal Tab");
-		assertEquals(mockStorage.tabs[1].label, "Org Tab2");
-	});
-
-	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = nothing
-	await t.step("remove all org tabs while maintaing the rest", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-
-		assert(
-			await container.addTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Normal Tab", url: "normal-url" },
-				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
-			]),
-		);
-		assertEquals(container.length, 7);
-
-		assert(
-			await container.replaceTabs(
-				[],
-				{
-					resetTabs: false,
-					removeOrgTabs: true,
-				},
-			),
-		);
-
-		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 4);
-		assertEquals(container.getTabsWithOrg().length, 0);
-		assertEquals(container.getTabsWithOrg(false).length, 4);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-				{ label: "Org Tab3", url: "url", org: "test-org1" },
-			], {
-				resetTabs: false,
-				removeOrgTabs: true,
-				sync: false,
-			}),
-		);
-		assertEquals(container.length, 8);
-		assertEquals(mockStorage.tabs.length, 4);
-		assertEquals(container[0].label, "⚡");
-		assertEquals(container[1].label, "Flows");
-		assertEquals(container[2].label, "Users");
-		assertEquals(container[3].label, "Normal Tab");
-		assertEquals(mockStorage.tabs[0].label, "⚡");
-		assertEquals(mockStorage.tabs[1].label, "Flows");
-		assertEquals(mockStorage.tabs[2].label, "Users");
-		assertEquals(mockStorage.tabs[3].label, "Normal Tab");
-	});
-
-	// resetTabs = false, removeOrgTabs = false, keepTabsNotThisOrg = something|nothing
-	await t.step("only adds tabs", async () => {
-		mockStorage.tabs = [];
-		const container = await TabContainer.create();
-		assertEquals(container.length, 3);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab", url: "url", org: "test-org" },
-				{ label: "Org Tab", url: "url2", org: "test-org2" },
-				{ label: "Normal Tab", url: "normal-url" },
-			], {
-				resetTabs: false,
-				removeOrgTabs: false,
-			}),
-		);
-		assertEquals(container.length, 6);
-		assertEquals(mockStorage.tabs.length, 6);
-
-		assert(
-			await container.replaceTabs([], {
-				resetTabs: false,
-				removeOrgTabs: false,
-				keepTabsNotThisOrg: "test-org",
-			}),
-		);
-		assertEquals(container.length, 6);
-
-		assert(
-			await container.replaceTabs([
-				{ label: "Org Tab2", url: "url", org: "test-org" },
-				{ label: "Org Tab3", url: "url2", org: "test-org2" },
-				{ label: "Normal Tab2", url: "normal-url" },
-				{ label: "New Tab", url: "new-url" },
-			], {
-				resetTabs: false,
-				removeOrgTabs: false,
-				sync: false,
-			}),
-		);
-		assertEquals(container.length, 10);
-		assertEquals(mockStorage.tabs.length, 6);
-
-		assert(
-			await container.replaceTabs([], {
-				resetTabs: false,
-				removeOrgTabs: false,
-				sync: false,
-				keepTabsNotThisOrg: "test-org",
-			}),
-		);
-		assertEquals(container.length, 10);
-		assertEquals(mockStorage.tabs.length, 6);
+		assertEquals(container.length, 5);
 	});
 });
 
@@ -583,7 +350,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		{
 			const a = container.slice(2, container.length);
 			assertEquals(a.length, 5);
-			assertEquals(a[0].label, "Users");
+			assertEquals(a[0].label, "users");
 			assertEquals(a[1].label, "Org Tab");
 			assertEquals(a[2].label, "Normal Tab");
 			assertEquals(a[3].label, "Org Tab2");
@@ -623,12 +390,12 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(
-			container.filter((tab) => tab.label === "Flows").length,
+			container.filter((tab) => tab.label === "flows").length,
 			1,
 		);
 		assertEquals(container.length, 3);
 		assertEquals(
-			container.filter((tab) => tab.label !== "Flows").length,
+			container.filter((tab) => tab.label !== "flows").length,
 			2,
 		);
 		assertEquals(container.length, 3);
@@ -892,11 +659,11 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				url: "/lightning",
 			},
 			{
-				label: "Flows",
+				label: "flows",
 				url: "/lightning/app/standard__FlowsApp",
 			},
 			{
-				label: "Users",
+				label: "users",
 				url: "ManageUsers/home",
 			},
 		]);
@@ -906,11 +673,11 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				url: "/lightning",
 			},
 			{
-				label: "Flows",
+				label: "flows",
 				url: "/lightning/app/standard__FlowsApp",
 			},
 			{
-				label: "Users",
+				label: "users",
 				url: "ManageUsers/home",
 			},
 		]);
@@ -929,11 +696,11 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
     "url": "/lightning"
 },
 {
-    "label": "Flows",
+    "label": "flows",
     "url": "/lightning/app/standard__FlowsApp"
 },
 {
-    "label": "Users",
+    "label": "users",
     "url": "ManageUsers/home"
 }
 ]`,
@@ -946,11 +713,11 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
     "url": "/lightning"
 },
 {
-    "label": "Flows",
+    "label": "flows",
     "url": "/lightning/app/standard__FlowsApp"
 },
 {
-    "label": "Users",
+    "label": "users",
     "url": "ManageUsers/home"
 }
 ]`,
@@ -1005,15 +772,14 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assert(await container.setDefaultTabs());
 		assertEquals(container.length, 3);
 		assertEquals(container[0].label, "⚡");
-		assertEquals(container[1].label, "Flows");
-		assertEquals(container[2].label, "Users");
+		assertEquals(container[1].label, "flows");
+		assertEquals(container[2].label, "users");
 		assertEquals(container[0].url, "/lightning");
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
 	});
 });
 
-// TODO
 await Deno.test("TabContainer - Synchronization", async (t) => {
 	await t.step("syncs tabs with storage", async () => {
 		mockStorage.tabs = [];

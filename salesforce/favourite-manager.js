@@ -54,7 +54,7 @@ function getHeader(innerElement = "") {
 }
 
 /**
- * Generates a "Favourite" button with an icon that toggles between a star and a slashed star, depending on whether a tab is saved or not.
+ * Generates a "Favourite" button with an icon that toggles between a star and a slashed star, depending on whether a Tab is saved or not.
  * - The button is created with necessary ARIA attributes for accessibility and styled with Salesforce Lightning Design System (SLDS) classes.
  * - A click event listener is added to trigger the `actionFavourite` function when the button is clicked.
  * - The button contains a span for the label and image elements for the star icons.
@@ -123,7 +123,7 @@ async function generateFavouriteButton() {
 	});
 	let starCmd = null;
 	let slashedStarCmd = null;
-	connectedCommands.forEach((cc) => {
+	connectedCommands?.forEach((cc) => {
 		switch (cc.name) {
 			case CMD_SAVE_AS_TAB:
 				starCmd = cc.shortcut;
@@ -188,7 +188,7 @@ function getFavouriteImage(favouriteId, button = null) {
  * - If `isSaved` is true, the star icon is hidden, and the slashed star icon is displayed.
  * - If `isSaved` is false, the slashed star icon is hidden, and the star icon is shown.
  *
- * @param {boolean|null} [isSaved=null] - A flag indicating whether the tab is saved (true) or not saved (false).
+ * @param {boolean|null} [isSaved=null] - A flag indicating whether the Tab is saved (true) or not saved (false).
  *                                       If null, both icons are toggled.
  * @param {HTMLButtonElement|null} [button=null] - The button element that contains the star images. Defaults to null (searches the entire document).
  * @returns {void}
@@ -212,12 +212,12 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 }
 
 /**
- * Adds a new tab to the collection with the specified URL and label.
+ * Adds a new Tab to the collection with the specified URL and label.
  * - Retrieves the label of the current page from the breadcrumb header.
  * - Attempts to extract the organization name from the current URL if it contains a Salesforce ID.
- * - Calls the `performActionOnTabs` function to add the new tab with the extracted label, URL, and optional organization.
+ * - Calls the `performActionOnTabs` function to add the new Tab with the extracted label, URL, and optional organization.
  *
- * @param {string} url - The URL of the tab to be added.
+ * @param {string} url - The URL of the Tab to be added.
  * @returns {Promise<void>}
  */
 async function addTab(url) {
@@ -238,10 +238,10 @@ async function addTab(url) {
 }
 
 /**
- * Handles the action of toggling a tab as a favourite.
- * - If the current tab is already saved as a favourite, it removes it from the collection.
- * - If the current tab is not saved, it adds the tab as a favourite.
- * - The function performs actions based on whether the tab is currently marked as a favourite.
+ * Handles the action of toggling a Tab as a favourite.
+ * - If the current Tab is already saved as a favourite, it removes it from the collection.
+ * - If the current Tab is not saved, it adds the Tab as a favourite.
+ * - The function performs actions based on whether the Tab is currently marked as a favourite.
  * - After performing the action, it updates the "Favourite" button's state.
  *
  * @returns {Promise<void>}
@@ -263,10 +263,10 @@ async function actionFavourite() {
 }
 
 /**
- * Handles the action of toggling a tab as a favourite.
- * - If the current tab is already saved as a favourite, it removes it from the collection.
- * - If the current tab is not saved, it adds the tab as a favourite.
- * - The function performs actions based on whether the tab is currently marked as a favourite.
+ * Handles the action of toggling a Tab as a favourite.
+ * - If the current Tab is already saved as a favourite, it removes it from the collection.
+ * - If the current Tab is not saved, it adds the Tab as a favourite.
+ * - The function performs actions based on whether the Tab is currently marked as a favourite.
  * - After performing the action, it updates the "Favourite" button's state.
  *
  * @returns {Promise<void>}
@@ -307,10 +307,10 @@ export async function showFavouriteButton(count = 0) {
 }
 
 /**
- * Performs an action on the "Favourite" tab (either save or remove) based on the provided `save` flag.
+ * Performs an action on the "Favourite" Tab (either save or remove) based on the provided `save` flag.
  * - If `save` is true, it attempts to click the star image to save the current page as a favourite.
  * - If `save` is false, it attempts to click the slashed star image to remove the page from the favourites.
- * - If the tab is already in the desired state (saved or not), it shows a toast message indicating the action cannot be performed.
+ * - If the Tab is already in the desired state (saved or not), it shows a toast message indicating the action cannot be performed.
  *
  * @param {boolean} [save=true] - A flag indicating whether to save (true) or remove (false) the current page from the favourites.
  * @returns {void}

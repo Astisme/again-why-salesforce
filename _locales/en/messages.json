@@ -1,4 +1,12 @@
 {
+	"flows": {
+		"message": "Flows",
+		"description": "[default-tab] Label for the default Flows Tab"
+	},
+	"users": {
+		"message": "Users",
+		"description": "[default-tab] Label for the default Users Tab"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -63,12 +71,20 @@
 		"message": "Continue",
 		"description": "textContent for buttons that allow the current action to execute"
 	},
-	"cxm_empty_no_org_tabs": {
+	"cxm_empty_visible_tabs": {
 		"message": "👀 All visible Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 All generic Tabs",
+		"description": "[context-menu]"
+	},
 	"cxm_empty_tabs": {
-		"message": "😨 Reset to Default",
+		"message": "😨 Remove all Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Reset Default Tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_export_tabs": {
@@ -311,6 +327,14 @@
 		"message": "Cannot remove a non favourite Tab!",
 		"description": "[error] the user tried to remove a Tab which was not saved yet"
 	},
+	"error_resetting_default_tabs": {
+		"message": "Error when resetting to default Tabs.",
+		"description": "[error] Generic error used while resetting the Tabs to their default"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Error when removing all visible Tabs.",
+		"description": "[error] Generic error used while removing all visible Tabs"
+	},
 	"error_removing_all_tabs": {
 		"message": "Error when removing all Tabs.",
 		"description": "[error] Generic error used while removing all Tabs"
@@ -332,7 +356,7 @@
 		"description": "[error] the developer tried to call a function without the necessary parameters"
 	},
 	"error_sync_nothing": {
-		"message": "Cannot sync null tabs!",
+		"message": "Cannot sync null Tabs!",
 		"description": "[error] tried to synchronize nothing"
 	},
 	"error_tab_constructor": {
@@ -411,7 +435,7 @@
 		"description": "[popup] title on export button"
 	},
 	"extension_description": {
-		"message": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
+		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
 		"description": "[manifest] The description of this extension"
 	},
 	"extension_label": {
@@ -435,7 +459,7 @@
 		"description": "[popup] import button"
 	},
 	"import_duplicate_description": {
-		"message": "Duplicate tabs will be ignored.<br />Two tabs are considered duplicates if they have the same URL.",
+		"message": "Duplicate Tabs will be ignored.<br />Two Tabs are considered duplicates if they have the same URL.",
 		"description": "[import] description of what the import process does"
 	},
 	"import_invalid_file": {

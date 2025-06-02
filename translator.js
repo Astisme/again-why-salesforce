@@ -79,8 +79,8 @@ class TranslationService {
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
 		singleton.currentLanguage = await singleton.loadLanguageBackground();
-		await singleton.updatePageTranslations();
-		singleton.setListenerForLanguageChange();
+		if(await singleton.updatePageTranslations())
+      singleton.setListenerForLanguageChange();
 		return singleton;
 	}
 
@@ -190,31 +190,38 @@ class TranslationService {
 
 	/**
 	 * Update all translatable elements on the page
+   * @returns {boolean} whether the page translations have been setup or not
 	 */
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
-		const elements = document.querySelectorAll(
-			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
-		);
-		for (const element of elements) {
-			const toTranslateKey = element.getAttribute(
-				TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE,
-			);
-			const [key, ...attributes] = toTranslateKey.split(
-				TranslationService.TRANSLATE_SEPARATOR,
-			);
-			const translation = await this._translate(
-				key,
-			);
-			//const translation = await BROWSER.i18n.getMessage(key);
-			if (attributes == null) continue;
-			if (attributes.length === 0) {
-				attributes.push("textContent");
-			}
-			for (const attribute of attributes) {
-				element[attribute] = translation;
-			}
-		}
+    try{
+      const elements = document.querySelectorAll(
+        `[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
+      );
+      for (const element of elements) {
+        const toTranslateKey = element.getAttribute(
+          TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE,
+        );
+        const [key, ...attributes] = toTranslateKey.split(
+          TranslationService.TRANSLATE_SEPARATOR,
+        );
+        const translation = await this._translate(
+          key,
+        );
+        //const translation = await BROWSER.i18n.getMessage(key);
+        if (attributes == null) continue;
+        if (attributes.length === 0) {
+          attributes.push("textContent");
+        }
+        for (const attribute of attributes) {
+          element[attribute] = translation;
+        }
+      }
+      return true;
+    } catch(e) {
+      console.error('catched',e);
+      return false;
+    }
 	}
 
 	setListenerForLanguageChange() {
