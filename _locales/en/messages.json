@@ -1,20 +1,4 @@
 {
-	"opt_no_release_notes": {
-		"message": "Do not show update release notes.",
-		"description": "[setting] let the user prevent the extension from showing release notes after it is updated"
-	},
-	"opt_prevent_analytics": {
-		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
-		"description": "[setting] let the user prevent them from sending anonymous analytics"
-	},
-	"flows": {
-		"message": "Flows",
-		"description": "[default-tab] Label for the default Flows Tab"
-	},
-	"users": {
-		"message": "Users",
-		"description": "[default-tab] Label for the default Users Tab"
-	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -79,10 +63,6 @@
 		"message": "Continue",
 		"description": "textContent for buttons that allow the current action to execute"
 	},
-	"cxm_empty_visible_tabs": {
-		"message": "👀 All visible Tabs",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_generic_tabs": {
 		"message": "😊 All generic Tabs",
 		"description": "[context-menu]"
@@ -91,8 +71,8 @@
 		"message": "😨 Remove all Tabs",
 		"description": "[context-menu]"
 	},
-	"cxm_reset_default": {
-		"message": "🧐 Reset Default Tabs",
+	"cxm_empty_visible_tabs": {
+		"message": "👀 All visible Tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_export_tabs": {
@@ -153,6 +133,10 @@
 	},
 	"cxm_remove_tab": {
 		"message": "1️⃣ This tTb",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Reset Default Tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
@@ -335,14 +319,6 @@
 		"message": "Cannot remove a non favourite Tab!",
 		"description": "[error] the user tried to remove a Tab which was not saved yet"
 	},
-	"error_resetting_default_tabs": {
-		"message": "Error when resetting to default Tabs.",
-		"description": "[error] Generic error used while resetting the Tabs to their default"
-	},
-	"error_removing_visible_tabs": {
-		"message": "Error when removing all visible Tabs.",
-		"description": "[error] Generic error used while removing all visible Tabs"
-	},
 	"error_removing_all_tabs": {
 		"message": "Error when removing all Tabs.",
 		"description": "[error] Generic error used while removing all Tabs"
@@ -359,9 +335,17 @@
 		"message": "Error when removing Tab.",
 		"description": "[error] Generic error used while removing a Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Error when removing all visible Tabs.",
+		"description": "[error] Generic error used while removing all visible Tabs"
+	},
 	"error_required_params": {
 		"message": "The required parameters for the function were not passed",
 		"description": "[error] the developer tried to call a function without the necessary parameters"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Error when resetting to default Tabs.",
+		"description": "[error] Generic error used while resetting the Tabs to their default"
 	},
 	"error_sync_nothing": {
 		"message": "Cannot sync null Tabs!",
@@ -457,6 +441,10 @@
 	"files": {
 		"message": "files",
 		"description": "multiple files"
+	},
+	"flows": {
+		"message": "Flows",
+		"description": "[default-tab] Label for the default Flows Tab"
 	},
 	"general": {
 		"message": "General",
@@ -566,6 +554,10 @@
 		"message": "Always open links in a new browser tab.",
 		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
 	},
+	"opt_no_release_notes": {
+		"message": "Do not show update release notes.",
+		"description": "[setting] let the user prevent the extension from showing release notes after it is updated"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Always open $salesforce_login page in the same tab when clicking on the popup.",
 		"description": "[setting]"
@@ -573,6 +565,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Always open $salesforce_setup page in the same tab when clicking on the popup.",
 		"description": "[setting]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
+		"description": "[setting] let the user prevent them from sending anonymous analytics"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Prevent use of Lightning Navigation (faster loading when in use).",
