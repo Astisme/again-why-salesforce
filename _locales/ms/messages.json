@@ -63,10 +63,6 @@
 		"message": "Teruskan",
 		"description": "textContent untuk butang yang membenarkan tindakan semasa dilaksanakan"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Semua Tabs yang kelihatan",
-		"description": "[menu-konteks]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Tetapkan Semula kepada Lalai",
 		"description": "[menu-konteks]"

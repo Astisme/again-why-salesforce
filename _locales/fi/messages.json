@@ -63,10 +63,6 @@
 		"message": "Jatka",
 		"description": "tekstisisältö painikkeille, jotka sallivat nykyisen toiminnon suorittamisen"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Kaikki näkyvät Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Nollaa oletus",
 		"description": "[context-menu]"

@@ -63,10 +63,6 @@
 		"message": "Jätka",
 		"description": "nuppude textContent, mis lubavad praeguse toimingu täita"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Kõik nähtavad Tabs",
-		"description": "[kontekstimenüü]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Lähtesta vaikeväärtustele",
 		"description": "[kontekstimenüü]"

@@ -63,10 +63,6 @@
 		"message": "Doorgaan",
 		"description": "textContent voor knoppen die toestaan dat de huidige actie wordt uitgevoerd"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Alle zichtbare Tabs",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Herstellen naar standaard",
 		"description": "[context-menu]"

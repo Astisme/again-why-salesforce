@@ -93,5 +93,3 @@ export function setupDrag() {
 	if (container != null) createListeners();
 	else setTimeout(() => setupDrag(), 500);
 }
-
-setupDrag();

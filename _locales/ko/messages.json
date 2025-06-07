@@ -63,10 +63,6 @@
 		"message": "계속",
 		"description": "현재 작업 실행을 허용하는 버튼의 textContent"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 보이는 모든 Tabs",
-		"description": "[컨텍스트_메뉴]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 기본값으로 재설정",
 		"description": "[컨텍스트_메뉴]"

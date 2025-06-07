@@ -63,10 +63,6 @@
 		"message": "Folytatás",
 		"description": "szöveg azokhoz a gombokhoz, melyek lehetővé teszik a jelenlegi művelet végrehajtását"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Minden látható Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Alaphelyzetbe állítás",
 		"description": "[context-menu]"

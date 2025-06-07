@@ -63,10 +63,6 @@
 		"message": "Endelea",
 		"description": "textContent kwa vitufe vinavyoruhusu kitendo cha sasa kitekelezwe"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tabs zote zinazoonekana",
-		"description": "[menu-ya-mukhtadha]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Weka Upya kuwa Chaguomsingi",
 		"description": "[menu-ya-mukhtadha]"

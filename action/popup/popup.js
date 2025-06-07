@@ -459,7 +459,7 @@ const availableCommands = await sendExtensionMessage({
 function sliceBeforeSeparator(i18n) {
 	return i18n.slice(0, i18n.indexOf("+-+"));
 }
-availableCommands.forEach(async (ac) => {
+availableCommands?.forEach(async (ac) => {
 	switch (ac.name) {
 		case CMD_EXPORT_ALL:
 			exportBtn.title = await translator.translate([

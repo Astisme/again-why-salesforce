@@ -63,10 +63,6 @@
 		"message": "Fortsett",
 		"description": "tekst for knapper som lar den nåværende handlingen bli utført"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Alle synlige Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Tilbakestill til standard",
 		"description": "[context-menu]"

@@ -63,10 +63,6 @@
 		"message": "ادامه",
 		"description": "محتوای متنی برای دکمه‌هایی که اجازه اجرای عمل فعلی را می‌دهند"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 همه Tabs قابل مشاهده",
-		"description": "[منوی_زمینه]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 بازنشانی به پیش‌فرض",
 		"description": "[منوی_زمینه]"

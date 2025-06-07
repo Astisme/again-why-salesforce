@@ -63,10 +63,6 @@
 		"message": "Lanjutkan",
 		"description": "textContent untuk tombol yang memungkinkan tindakan saat ini dieksekusi"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Semua Tab yang terlihat",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Setel ulang ke default",
 		"description": "[context-menu]"

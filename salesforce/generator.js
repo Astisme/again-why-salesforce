@@ -149,6 +149,9 @@ function wereSettingsUpdated(settings) {
  */
 export async function generateStyleFromSettings() {
 	const settings = await getAllStyleSettings();
+	if (settings == null) {
+		return;
+	}
 	const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
 	const orgStyleList = settings[ORG_TAB_STYLE_KEY];
 	if (!wereSettingsUpdated(settings)) {
@@ -305,6 +308,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 		"slds-notify_container",
 		"slds-is-relative",
 	);
+	toastContainer.style.pointerEvents = "none";
 	toastContainer.setAttribute("data-aura-rendered-by", "7381:0");
 	const toast = document.createElement("div");
 	toast.setAttribute("role", "alertdialog");

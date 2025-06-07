@@ -63,10 +63,6 @@
 		"message": "Nastavi",
 		"description": "tekst za gumbe koji omogućuju izvršenje trenutne radnje"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Svi vidljivi Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Poništi na zadano",
 		"description": "[context-menu]"

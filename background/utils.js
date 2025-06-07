@@ -4,10 +4,14 @@ import {
 	BROWSER_NAME,
 	EXTENSION_NAME,
 	ISCHROME,
+	ISFIREFOX,
+	ISSAFARI,
 	NO_UPDATE_NOTIFICATION,
+	SETTINGS_KEY,
+	WHAT_EXPORT,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
-import { bg_getSettings, bg_getStorage } from "./background.js";
+import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -63,20 +67,16 @@ export function bg_getCurrentBrowserTab(callback = null) {
  * Sends the same message back to other parts of the extension.
  *
  * @param {JSONObject} message - the message to be sent
- * @param {int} count = 0 - how many times the function has been called
  */
-export async function bg_notify(message, count = 0) {
+export async function bg_notify(message) {
 	if (message == null) {
 		throw new Error("error_no_message");
 	}
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
 		BROWSER.tabs.sendMessage(browserTab.id, message);
-	} catch (error) {
+	} catch (_) {
 		console.trace();
-		if (error == null || error.message === "") {
-			setTimeout(() => bg_notify(count + 1), 500);
-		}
 	}
 }
 
@@ -88,13 +88,14 @@ export async function bg_notify(message, count = 0) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-	if (!ISCHROME) {
+	const filename = `${EXTENSION_NAME}.json`;
+	if (ISFIREFOX) {
 		// Firefox implementation
 		const blob = new Blob([jsonData], { type: "application/json" });
 		const url = URL.createObjectURL(blob);
 		BROWSER.downloads.download({
 			url,
-			filename: `${EXTENSION_NAME}.json`,
+			filename,
 		}).then(() => {
 			BROWSER.downloads.onChanged.addListener((e) => {
 				if (e.state.current === "complete") {
@@ -102,15 +103,26 @@ function _exportHandler(tabs) {
 				}
 			});
 		});
-	} else {
+		return;
+	} else if (ISCHROME) {
 		// Chrome implementation
 		const dataStr = "data:application/json;charset=utf-8," +
 			encodeURIComponent(jsonData);
 		chrome.downloads.download({
 			url: dataStr,
-			filename: `${EXTENSION_NAME}.json`,
+			filename,
 		});
+		return;
+	} else if (ISSAFARI) {
+		// Safari: send a message to the content script
+		bg_notify({
+			what: WHAT_EXPORT,
+			filename,
+			payload: jsonData,
+		});
+		return;
 	}
+	console.warn(["error_export", ISCHROME, ISFIREFOX, ISSAFARI]);
 }
 
 /**
@@ -125,17 +137,18 @@ export function exportHandler(tabs = null) {
 	_exportHandler(tabs);
 }
 
-let checked = false;
 export async function checkForUpdates() {
-	if (checked) {
-		return;
-	}
-	checked = true;
 	// check user settings
 	const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
 	if (
 		no_update_notification != null &&
-		no_update_notification.enabled === true
+		(
+			no_update_notification.enabled === true || // the user does not want to be notified
+			Math.floor(
+					(new Date() - new Date(no_update_notification.date)) /
+						(1000 * 60 * 60 * 24),
+				) <= 7 // the date difference is less than a week
+		)
 	) {
 		return;
 	}
@@ -157,6 +170,12 @@ export async function checkForUpdates() {
 		}
 		return false; // Versions are equal
 	}
+	// set last date saved as today
+	bg_setStorage(
+		[{ id: NO_UPDATE_NOTIFICATION, date: new Date().toJSON() }],
+		null,
+		SETTINGS_KEY,
+	);
 	try {
 		const manifest = BROWSER.runtime.getManifest();
 		const currentVersion = manifest.version;
@@ -187,12 +206,6 @@ export async function checkForUpdates() {
 		).tag_name.replace(/^.*-v/, "");
 		// Compare versions and open homepage if update is available
 		if (isNewerVersion(latestVersion, currentVersion)) {
-			console.log([
-				"update_available",
-				currentVersion,
-				"→",
-				latestVersion,
-			]);
 			bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: currentVersion,

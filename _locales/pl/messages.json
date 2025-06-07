@@ -63,10 +63,6 @@
 		"message": "Kontynuuj",
 		"description": "textContent dla przycisków umożliwiających wykonanie bieżącej akcji"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Wszystkie widoczne Tabs",
-		"description": "[menu-kontekstowe]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Resetuj do domyślnych",
 		"description": "[menu-kontekstowe]"

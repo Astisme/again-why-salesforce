@@ -11,8 +11,9 @@ import {
 	CMD_UPDATE_TAB,
 	CONTEXT_MENU_PATTERNS,
 	CONTEXT_MENU_PATTERNS_REGEX,
-	CXM_EMPTY_NO_ORG_TABS,
+	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
+	CXM_EMPTY_VISIBLE_TABS,
 	CXM_EXPORT_TABS,
 	CXM_IMPORT_TABS,
 	CXM_MOVE_FIRST,
@@ -26,22 +27,17 @@ import {
 	CXM_REMOVE_OTHER_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_RESET_DEFAULT_TABS,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
-	NO_RELEASE_NOTES,
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import {
-	bg_getCurrentBrowserTab,
-	bg_notify,
-	checkForUpdates,
-	exportHandler,
-} from "./utils.js";
+import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
@@ -177,14 +173,26 @@ const menuItemsOriginal = [
 		parentId: "remove",
 	},
 	{
-		id: CXM_EMPTY_NO_ORG_TABS,
-		title: "cxm_empty_no_org_tabs",
+		id: CXM_EMPTY_VISIBLE_TABS,
+		title: "cxm_empty_visible_tabs",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_EMPTY_GENERIC_TABS,
+		title: "cxm_empty_generic_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
 	{
 		id: CXM_EMPTY_TABS,
 		title: "cxm_empty_tabs",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_RESET_DEFAULT_TABS,
+		title: "cxm_reset_default",
 		contexts: ["link"],
 		parentId: "remove",
 	},
@@ -353,6 +361,7 @@ async function removeMenuItems() {
 	}
 }
 
+let intervalCxm = null;
 /**
  * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
  * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
@@ -362,23 +371,29 @@ async function removeMenuItems() {
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
-async function checkAddRemoveContextMenus(what, callback = null) {
+export async function checkAddRemoveContextMenus(what, callback = null) {
+	if (intervalCxm == null) {
+		// Start periodic check
+		intervalCxm = setInterval(async () => {
+			if (!areMenuItemsVisible) {
+				await checkAddRemoveContextMenus();
+			}
+		}, 60000);
+	}
 	try {
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 		if (browserTabUrl == null) {
 			return;
 		}
+		await removeMenuItems();
 		if (
 			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
 		) {
-			await removeMenuItems();
 			await createMenuItems();
 			bg_notify({ what });
 			if (callback != null) {
 				callback();
 			}
-		} else {
-			await removeMenuItems();
 		}
 	} catch (error) {
 		console.trace();
@@ -389,79 +404,6 @@ async function checkAddRemoveContextMenus(what, callback = null) {
 		}
 	}
 }
-
-/**
- * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
- * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the
- * specified delay has passed since the last invocation.
- *
- * @param {Function} fn - The function to debounce.
- * @param {number} [delay=150] - The delay in milliseconds before the function is executed after the last invocation.
- * @returns {Function} A debounced version of the provided function.
- */
-function debounce(fn, delay = 150) {
-	let timeout;
-	return (...args) => {
-		clearTimeout(timeout);
-		timeout = setTimeout(() => fn(...args), delay);
-	};
-}
-
-// Debounced version for high-frequency events
-const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
-
-// when the browser starts
-BROWSER.runtime.onStartup.addListener(() =>
-	checkAddRemoveContextMenus("startup")
-);
-// when the extension is installed / updated
-BROWSER.runtime.onInstalled.addListener(async (details) => {
-	checkAddRemoveContextMenus("installed");
-	if (details.reason === "update") {
-		// the extension has been updated
-		// check user settings
-		const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
-		if (no_release_notes != null && no_release_notes.enabled === true) {
-			return;
-		}
-		// get the extension version
-		const manifest = BROWSER.runtime.getManifest();
-		const version = manifest.version;
-		// open github to show the release notes
-		const homepage = manifest.homepage_url;
-		// Validate homepage URL (must be GitHub)
-		if (!homepage || !homepage.includes("github.com")) {
-			console.error("no_manifest_github");
-			return;
-		}
-		BROWSER.tabs.create({
-			url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
-		});
-	}
-	/* TODO add tutorial on install
-    if (details.reason == "install") {
-    }
-    */
-});
-// when the extension is activated by the BROWSER
-self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
-// when the tab changes
-BROWSER.tabs.onActivated.addListener(() =>
-	debouncedCheckMenus("highlighted", checkForUpdates)
-);
-//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
-// when window changes
-//BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
-BROWSER.windows.onFocusChanged.addListener(() =>
-	checkAddRemoveContextMenus("focuschanged")
-);
-
-/*
-// TODO update uninstall url
-BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
-    removeMenuItems()
-});
-*/
 
 /**
  * Listener for context menu item clicks, processes actions based on the clicked menu item.
@@ -478,12 +420,18 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
+		case CXM_EXPORT_TABS:
+			exportHandler();
+			return;
+		case cxm_open_settings:
+			openSettingsPage();
+			return;
 		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);
 				message.pageUrl = Tab.expandURL(info.pageUrl, browserTabUrl);
 			}
-			if (info.linkUrl) {
+			if (info.linkUrl != null) {
 				message.linkTabUrl = Tab.minifyURL(info.linkUrl);
 				message.linkUrl = Tab.expandURL(info.linkUrl, browserTabUrl);
 			}
@@ -492,35 +440,20 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_IMPORT_TABS:
 			message.what = "add";
 			break;
-		case CXM_EXPORT_TABS:
-			exportHandler();
-			break;
-		case CXM_PAGE_SAVE_TAB:
-		case CXM_REMOVE_TAB:
-			message.tabUrl = Tab.minifyURL(info.pageUrl);
-			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
-			break;
-		case cxm_open_settings:
-			openSettingsPage();
-			break;
 		default:
-			message.tabUrl = Tab.minifyURL(info.linkUrl);
-			message.url = Tab.expandURL(info.linkUrl, browserTabUrl);
+			message.tabUrl = Tab.minifyURL(info.linkUrl ?? info.pageUrl);
+			message.url = Tab.expandURL(
+				info.linkUrl ?? info.pageUrl,
+				browserTabUrl,
+			);
 			message.label = info.linkText;
 			break;
 	}
 	bg_notify(message);
 });
 
-// Start periodic check
-setInterval(async () => {
-	if (!areMenuItemsVisible) {
-		await checkAddRemoveContextMenus();
-	}
-}, 60000);
-
 // create persistent menuItems
-checkAddRemoveContextMenus();
+//checkAddRemoveContextMenus();
 
 BROWSER.storage.onChanged.addListener((changes) => {
 	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>

@@ -63,10 +63,6 @@
 		"message": "繼續",
 		"description": "用於允許當前操作執行的按鈕的文字內容"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 所有可見的 Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 重設為預設",
 		"description": "[context-menu]"

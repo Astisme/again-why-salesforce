@@ -63,10 +63,6 @@
 		"message": "המשך",
 		"description": "תוכן טקסט עבור כפתורים שמאפשרים את ביצוע הפעולה הנוכחית"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 כל ה-Tab הנראים",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 אפס לברירת מחדל",
 		"description": "[context-menu]"
