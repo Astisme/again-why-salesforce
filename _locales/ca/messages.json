@@ -63,10 +63,6 @@
 		"message": "Continuar",
 		"description": "text per als botons que permeten executar l'acció actual"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tots els Tab visibles",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Restablir per defecte",
 		"description": "[context-menu]"

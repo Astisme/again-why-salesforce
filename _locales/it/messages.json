@@ -63,10 +63,6 @@
 		"message": "Continua",
 		"description": "testo per i bottoni che permettono all'azione corrente di essere eseguita"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tutte le Tab visibili",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Ripristina Tab predefinite",
 		"description": "[context-menu]"

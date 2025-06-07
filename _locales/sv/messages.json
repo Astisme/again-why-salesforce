@@ -63,10 +63,6 @@
 		"message": "Fortsätt",
 		"description": "textinnehåll för knappar som möjliggör att den aktuella åtgärden genomförs"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Alla synliga Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Återställ till standard",
 		"description": "[context-menu]"

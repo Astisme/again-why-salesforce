@@ -63,10 +63,6 @@
 		"message": "继续",
 		"description": "允许当前操作执行的按钮的文本内容"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 所有可见的 Tabs",
-		"description": "[上下文菜单]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 重置为默认值",
 		"description": "[上下文菜单]"

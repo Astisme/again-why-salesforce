@@ -63,10 +63,6 @@
 		"message": "Nadaljuj",
 		"description": "textContent za gumbe, ki omogočajo izvedbo trenutnega dejanja"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Vsi vidni Tabs",
-		"description": "[kontekstni_meni]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Ponastavi na privzeto",
 		"description": "[kontekstni_meni]"

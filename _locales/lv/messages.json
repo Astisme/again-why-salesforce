@@ -63,10 +63,6 @@
 		"message": "Turpināt",
 		"description": "textContent pogām, kas atļauj izpildīt pašreizējo darbību"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Visas redzamās Tabs",
-		"description": "[konteksta_izvēlne]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Atiestatīt uz noklusējumu",
 		"description": "[konteksta_izvēlne]"

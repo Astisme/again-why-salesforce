@@ -63,10 +63,6 @@
 		"message": "Continuați",
 		"description": "textContent pentru butoanele care permit executarea acțiunii curente"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Toate Tabs vizibile",
-		"description": "[meniu-contextual]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Resetați la valorile implicite",
 		"description": "[meniu-contextual]"

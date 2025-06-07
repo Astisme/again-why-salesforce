@@ -63,10 +63,6 @@
 		"message": "Tiếp tục",
 		"description": "textContent cho các nút cho phép hành động hiện tại thực thi"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tất cả các Tab hiển thị",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Đặt lại về mặc định",
 		"description": "[context-menu]"

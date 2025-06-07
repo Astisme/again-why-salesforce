@@ -63,10 +63,6 @@
 		"message": "Продолжить",
 		"description": "textContent для кнопок, разрешающих выполнение текущего действия"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Все видимые Tabs",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Сбросить к значению по умолчанию",
 		"description": "[context-menu]"

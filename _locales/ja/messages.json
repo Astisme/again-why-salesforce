@@ -63,10 +63,6 @@
 		"message": "続行",
 		"description": "現在の操作の実行を許可するボタンのtextContent"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 表示されているすべての Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 デフォルトにリセットする",
 		"description": "[context-menu]"

@@ -63,10 +63,6 @@
 		"message": "Magpatuloy",
 		"description": "textContent para sa mga button na nagpapahintulot sa kasalukuyang aksyon na maisakatuparan"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Lahat ng nakikitang Tabs",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 I-reset sa Default",
 		"description": "[context-menu]"

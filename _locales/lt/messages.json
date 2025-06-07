@@ -63,10 +63,6 @@
 		"message": "Tęsti",
 		"description": "mygtukų, leidžiančių vykdyti dabartinį veiksmą, textContent"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Visi matomi Tabs",
-		"description": "[kontekstinis_meniu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Atstatyti į numatytuosius",
 		"description": "[kontekstinis_meniu]"

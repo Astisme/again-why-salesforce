@@ -63,10 +63,6 @@
 		"message": "Pokračovat",
 		"description": "text u tlačítek, které umožňují provést aktuální akci"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Všechny viditelné Tab",
-		"description": "[context-menu]"
-	},
 	"cxm_empty_tabs": {
 		"message": "😨 Obnovit výchozí",
 		"description": "[context-menu]"
