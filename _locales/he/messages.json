@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "גרסה חדשה של $extension_label זמינה כעת!",
-		"description": "התקבלה הודעה לא ידועה ממאזין"
+		"description": "הודעה לא מוכרת התקבלה ממאזין"
 	},
 	"continue": {
 		"message": "המשך",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 ייבוא Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[תפריט-הקשר]"
 	},
 	"cxm_move": {
 		"message": "🧭 הזז Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 הסר Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[תפריט-הקשר]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 שמור כ-Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[תפריט-הקשר]"
 	},
 	"cxm_remove": {
 		"message": "💥 הסר Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ הגדרות",
+		"message": "⚙️ $settings",
 		"description": "תווית לתפריט ההגדרות"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] מחק שורה"
 	},
 	"delete_all": {
-		"message": "מחק את כל ה-Tab",
-		"description": "[popup] כותרת בדלי למחיקת כל ה-Tab"
+		"message": "$delete את כל ה-Tabs",
+		"description": "[חלון-קופץ] כותרת על סל המיחזור לריקון כל ה-Tabs"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] לתהליך הייבוא"
 	},
 	"import_title": {
-		"message": "ייבא Tab מקובץ json",
-		"description": "[popup] כותרת כפתור הייבוא"
+		"message": "$import_tabs מקובץ JSON",
+		"description": "[חלון-קופץ] כותרת על לחצן הייבוא"
 	},
 	"insert_another": {
 		"message": "הוסף עוד אחד",
@@ -496,8 +496,16 @@
 		"description": "[לאהגדרתSalesforce] כתובת URL שאינה חוקית"
 	},
 	"nss_not_setup_page": {
-		"message": "זהו אינו דף הגדרות של Salesforce Lightning.",
-		"description": "[לאהגדרתSalesforce] המשתמש אינו נמצא בדף של Salesforce."
+		"message": "זה אינו דף הגדרות של $salesforce_lightning.",
+		"description": "[notSalesforceSetup] המשתמש אינו נמצא בדף Salesforce."
+	},
+	"open_here": {
+		"message": "פתח ב-Tab זה.",
+		"description": "[open-other-org-modal] לחצן רדיו המאפשר למשתמש לפתוח באותו Tab דפדפן"
+	},
+	"open_new_tab": {
+		"message": "פתח ב-Tab חדש.",
+		"description": "[open-other-org-modal] לחצן רדיו המאפשר למשתמש לפתוח ב-Tab דפדפן חדש."
 	},
 	"open_settings": {
 		"message": "פתח הגדרות תוסף",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
 	},
 	"opt_automatic_open_login": {
-		"message": "פתח אוטומטית את דף ההתחברות של Salesforce בעת לחיצה על החלון הקופץ כשאינך נמצא בדף של Salesforce.",
-		"description": "[הגדרה] כאשר המשתמש פותח את החלון הקופץ בזמן שהוא נמצא באתר אקראי"
+		"message": "פתח אוטומטית את דף $salesforce_login בעת לחיצה על החלון הקופץ כשאינך נמצא בדף Salesforce.",
+		"description": "[הגדרה] כשהמשתמש פותח את החלון הקופץ באתר אקראי"
 	},
 	"opt_automatic_open_setup": {
-		"message": "פתח אוטומטית את דף ההגדרות של Salesforce בעת לחיצה על החלון הקופץ כשאתה נמצא בדף של Salesforce.",
-		"description": "[הגדרה] כאשר המשתמש פותח את החלון הקופץ בזמן שהוא נמצא באתר של Salesforce"
+		"message": "פתח אוטומטית את דף $salesforce_setup בעת לחיצה על החלון הקופץ כשאתה נמצא בדף Salesforce.",
+		"description": "[הגדרה] כשהמשתמש פותח את החלון הקופץ באתר Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,11 +536,11 @@
 		"description": "[הגדרה] בעת לחיצה על Tab מועדף, פתח אותו בכרטיסייה חדשה בדפדפן"
 	},
 	"opt_open_login_same_tab": {
-		"message": "פתח תמיד את דף ההתחברות של Salesforce באותו Tab בעת לחיצה על החלון הקופץ.",
+		"message": "פתח תמיד את דף $salesforce_login באותו Tab בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "פתח תמיד את דף ההגדרות של Salesforce באותו Tab בעת לחיצה על החלון הקופץ.",
+		"message": "פתח תמיד את דף $salesforce_setup באותו Tab בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[הגדרה] בעת שמירת Tab מועדף, אל תבדוק ID בקישור"
 	},
 	"or_drop": {
-		"message": "או הנח",
-		"description": "[import] מאפשר למשתמש לגרור קבצים עם העכבר ולשחררם"
+		"message": "או $drop",
+		"description": "[ייבוא] אפשר למשתמש להזיז קבצים עם העכבר ולשחרר אותם"
 	},
 	"org_link": {
 		"message": "קישור ארגון",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] תווית כאשר המשתמש אינו רוצה לאשר הרשאות לצמיתות"
 	},
 	"req_permissions_header": {
-		"message": "אנא אפשר לנו גישה<br />לעמודי Salesforce Setup באופן אוטומטי.",
-		"description": "[req_permission] כותרת העמוד לבקשת הרשאות"
+		"message": "אנא אפשר לנו לגשת\nלדפי $salesforce_setup באופן אוטומטי.",
+		"description": "[req_permission] כותרת הדף לבקשת הרשאות"
 	},
 	"req_permissions_paragraph": {
-		"message": "אם תרצה, ה-Tabs המועדפים שלך יכולים להופיע<br />מיד עם מעבר לעמוד Salesforce Setup<br />מבלי שתצטרך ללחוץ על התוסף הזה בכל פעם.",
-		"description": "[req_permission] טקסט המסביר מדוע נדרשות הרשאות"
+		"message": "אם תרצה, תוכל להציג את ה-Tabs המועדפים עליך\nברגע שתנווט לדף $salesforce_setup\nמבלי שתצטרך ללחוץ על תוסף זה בכל פעם.",
+		"description": "[req_permission] טקסט המסביר מדוע מתבקשות ההרשאות"
 	},
 	"required": {
 		"message": "נדרש",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "משתמשים",
 		"description": "שם העמוד הקשור ל-ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "ייבאתם באמצעות 'tabTitle' מיושן!\nהורדת הקובץ המעודכן החלה.\nלהמשך, אנא השתמשו בקובץ החדש שהורד.\nהשימוש בקובץ זה יופסק בעדכונים עתידיים.",
-		"description": "[warning] מסביר למשתמש שהקובץ שייבא משתמש בתכונה מיושנת"
 	},
 	"where_to": {
 		"message": "לאן?",

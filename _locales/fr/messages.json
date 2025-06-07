@@ -56,7 +56,7 @@
 		"description": "[open-other-org-modal] Demande de confirmation à l'utilisateur pour ouvrir le lien construit."
 	},
 	"confirm_update_extension": {
-		"message": "Une nouvelle version de $extension_label est maintenant disponible !",
+		"message": "Une nouvelle version de $extension_label est maintenant disponible !",
 		"description": "un message inconnu a été reçu d'un écouteur"
 	},
 	"continue": {
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importer Tabs",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[menu-contextuel]"
 	},
 	"cxm_move": {
 		"message": "🧭 Déplacer Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Supprimer Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[menu-contextuel]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Enregistrer comme Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[menu-contextuel]"
 	},
 	"cxm_remove": {
 		"message": "💥 Supprimer Tab(s)",
@@ -132,8 +132,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Paramètres",
-		"description": "Étiquette pour le menu des paramètres"
+		"message": "⚙️ $settings",
+		"description": "Libellé du menu des paramètres"
 	},
 	"cxm_update": {
 		"message": "✏️ Mettre à jour Tab",
@@ -152,8 +152,8 @@
 		"description": "[popup] Supprimer une ligne"
 	},
 	"delete_all": {
-		"message": "Supprimer tous les Tabs",
-		"description": "[popup] Titre sur la corbeille pour vider tous les Tabs"
+		"message": "$delete tous les Tabs",
+		"description": "[popup] titre sur la corbeille pour vider tous les Tabs"
 	},
 	"drop": {
 		"message": "Déposer",
@@ -451,8 +451,8 @@
 		"description": "[modal-title] pour le processus d'importation"
 	},
 	"import_title": {
-		"message": "Importer des Tabs depuis un fichier JSON",
-		"description": "[popup] Titre sur le bouton d'importation"
+		"message": "$import_tabs à partir d'un fichier JSON",
+		"description": "[popup] titre sur le bouton d'importation"
 	},
 	"insert_another": {
 		"message": "Insérer un autre",
@@ -495,8 +495,16 @@
 		"description": "[n'estPasUneConfigurationSalesforce] une URL qui n'est pas valide"
 	},
 	"nss_not_setup_page": {
-		"message": "Ceci n'est pas une page de configuration Salesforce Lightning.",
-		"description": "[n'estPasUneConfigurationSalesforce] l'utilisateur n'est pas sur une page Salesforce."
+		"message": "Ceci n'est pas une page de configuration $salesforce_lightning.",
+		"description": "[notSalesforceSetup] l'utilisateur n'est pas sur une page Salesforce."
+	},
+	"open_here": {
+		"message": "Ouvrir dans cet Tab.",
+		"description": "[open-other-org-modal] bouton radio pour permettre à l'utilisateur d'ouvrir dans le même Tab du navigateur"
+	},
+	"open_new_tab": {
+		"message": "Ouvrir dans un nouveau Tab.",
+		"description": "[open-other-org-modal] bouton radio pour permettre à l'utilisateur d'ouvrir dans un nouveau Tab du navigateur."
 	},
 	"open_settings": {
 		"message": "Ouvrir les paramètres de l'extension",
@@ -507,12 +515,12 @@
 		"description": "[notSalesforceSetup] Appel à l'action pour accéder à la page de configuration de Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Ouvrir automatiquement la page de connexion Salesforce lorsque vous cliquez sur la fenêtre contextuelle alors que vous n'êtes pas sur une page Salesforce.",
-		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site web quelconque"
+		"message": "Ouvrir automatiquement la page $salesforce_login en cliquant sur la fenêtre contextuelle lorsque vous n'êtes pas sur une page Salesforce.",
+		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site Web aléatoire"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Ouvrir automatiquement la page de configuration Salesforce lorsque vous cliquez sur la fenêtre contextuelle alors que vous êtes sur une page Salesforce.",
-		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site web Salesforce"
+		"message": "Ouvrir automatiquement la page $salesforce_setup en cliquant sur la fenêtre contextuelle lorsque vous êtes sur une page Salesforce.",
+		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site Web Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -527,11 +535,11 @@
 		"description": "[paramètre] lorsque l'utilisateur clique sur un Tab favori, l'ouvrir dans un nouvel onglet du navigateur"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Toujours ouvrir la page de connexion Salesforce dans le même Tab lorsque vous cliquez sur la fenêtre contextuelle.",
+		"message": "Toujours ouvrir la page $salesforce_login dans le même Tab en cliquant sur la fenêtre contextuelle.",
 		"description": "[paramètre]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Toujours ouvrir la page de configuration Salesforce dans le même Tab lorsque vous cliquez sur la fenêtre contextuelle.",
+		"message": "Toujours ouvrir la page $salesforce_setup dans le même Tab en cliquant sur la fenêtre contextuelle.",
 		"description": "[paramètre]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -551,8 +559,8 @@
 		"description": "[paramètre] lors de la mise en favori d'un Tab, empêcher la vérification de la présence d'un ID dans le lien"
 	},
 	"or_drop": {
-		"message": "Ou déposer",
-		"description": "[import] permet à l'utilisateur de déplacer des fichiers avec sa souris et de les relâcher"
+		"message": "Ou $drop",
+		"description": "[importer] permettre à l'utilisateur de déplacer des fichiers avec sa souris et de les déposer"
 	},
 	"org_link": {
 		"message": "Lien Org",
@@ -583,12 +591,12 @@
 		"description": "[req_permission] Étiquette lorsque l'utilisateur ne souhaite plus être sollicité"
 	},
 	"req_permissions_header": {
-		"message": "Veuillez nous autoriser à accéder<br />aux pages de configuration de Salesforce automatiquement.",
-		"description": "[req_permission] En-tête de la page pour demander des permissions"
+		"message": "Veuillez nous autoriser à accéder\nautomatiquement aux pages $salesforce_setup.",
+		"description": "[req_permission] en-tête de la page pour demander des autorisations"
 	},
 	"req_permissions_paragraph": {
-		"message": "Si vous le souhaitez, vos Tabs favoris apparaîtront<br />dès que vous naviguerez vers une page de configuration de Salesforce<br />sans avoir à cliquer sur cette extension à chaque fois.",
-		"description": "[req_permission] Texte explicatif sur la demande de permissions"
+		"message": "Si vous le souhaitez, vous pouvez afficher vos Tabs favoris\ndès que vous accédez à une page $salesforce_setup\nsans avoir à cliquer sur cette extension à chaque fois.",
+		"description": "[req_permission] texte expliquant pourquoi les autorisations sont demandées"
 	},
 	"required": {
 		"message": "obligatoire",
@@ -797,10 +805,6 @@
 	"users": {
 		"message": "Utilisateurs",
 		"description": "Le nom de la page liée à ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Vous avez importé en utilisant le 'tabTitle' obsolète !\nLe téléchargement du fichier mis à jour a commencé.\nDésormais, veuillez utiliser le fichier nouvellement téléchargé.\nL'utilisation de ce fichier sera interrompue dans une version ultérieure.",
-		"description": "[warning] Explique à l'utilisateur que le fichier importé utilise une propriété obsolète."
 	},
 	"where_to": {
 		"message": "Où aller ?",

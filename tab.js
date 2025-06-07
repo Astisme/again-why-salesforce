@@ -17,8 +17,7 @@ export default class Tab {
 	/**
 	 * All the keys which are available inside a Tab.
 	 */
-	static allowedKeys = new Set(["label", "url", "org", "tabTitle"]);
-	// TODO tabTitle will be removed in a later version
+	static allowedKeys = new Set(["label", "url", "org"]);
 
 	/**
 	 * Creates a new instance of a `Tab` with the specified label, URL, and optional organization.
@@ -70,9 +69,8 @@ export default class Tab {
 					["error_tab_unexpected_keys", unexpectedKeys.join(", ")],
 				);
 			}
-			// TODO tabTitle will be removed in a later version
 			const createdTab = Tab.create(
-				tab.label ?? tab.tabTitle,
+				tab.label,
 				tab.url,
 				tab.org,
 			);

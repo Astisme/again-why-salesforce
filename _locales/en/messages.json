@@ -100,7 +100,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Import Tabs",
+		"message": "🆙 $import_tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_move": {
@@ -128,11 +128,11 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Remove Tab",
+		"message": "👋 $remove_tab",
 		"description": "[context-menu]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Save as Tab",
+		"message": "💾 $save_tab",
 		"description": "[context-menu]"
 	},
 	"cxm_remove": {
@@ -156,7 +156,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Settings",
+		"message": "⚙️ $settings",
 		"description": "Label for the settings menu"
 	},
 	"cxm_update": {
@@ -176,7 +176,7 @@
 		"description": "[popup] delete a row"
 	},
 	"delete_all": {
-		"message": "Delete all Tabs",
+		"message": "$delete all Tabs",
 		"description": "[popup] title on the bin to empty all Tabs"
 	},
 	"drop": {
@@ -467,7 +467,7 @@
 		"description": "[popup] import button"
 	},
 	"import_duplicate_description": {
-		"message": "Duplicate Tabs will be ignored.<br />Two Tabs are considered duplicates if they have the same URL.",
+		"message": "Duplicate tabs will be ignored.\nTwo tabs are considered duplicates if they have the same URL.",
 		"description": "[import] description of what the import process does"
 	},
 	"import_invalid_file": {
@@ -483,7 +483,7 @@
 		"description": "[modal-title] for import process"
 	},
 	"import_title": {
-		"message": "Import Tabs from json file",
+		"message": "$import_tabs from JSON file",
 		"description": "[popup] title on import button"
 	},
 	"insert_another": {
@@ -508,7 +508,7 @@
 	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
-		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce login page"
+		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_login page"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -527,8 +527,16 @@
 		"description": "[notSalesforceSetup] a URL which is not valid"
 	},
 	"nss_not_setup_page": {
-		"message": "This is not a Salesforce Lightning Setup page.",
+		"message": "This is not a $salesforce_lightning Setup page.",
 		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
+	},
+	"open_here": {
+		"message": "Open in this tab.",
+		"description": "[open-other-org-modal] radio button to let the user open in the same browser tab"
+	},
+	"open_new_tab": {
+		"message": "Open in a new tab.",
+		"description": "[open-other-org-modal] radio button to let the user open in a new browser tab."
 	},
 	"open_settings": {
 		"message": "Open Extension Settings",
@@ -536,14 +544,14 @@
 	},
 	"open_setup": {
 		"message": "Open Setup",
-		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a Salesforce Setup page"
+		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_setup page"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automatically open Salesforce Login page when clicking on the popup while not on a Salesforce page.",
+		"message": "Automatically open $salesforce_login page when clicking on the popup while not on a Salesforce page.",
 		"description": "[setting] when the user opens the popup while on a random website"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automatically open Salesforce Setup page when clicking on the popup while on a Salesforce page.",
+		"message": "Automatically open $salesforce_setup page when clicking on the popup while on a Salesforce page.",
 		"description": "[setting] when the user opens the popup while on a Salesforce website"
 	},
 	"opt_en_fallback": {
@@ -559,11 +567,11 @@
 		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Always open Salesforce Login page in the same tab when clicking on the popup.",
+		"message": "Always open $salesforce_login page in the same tab when clicking on the popup.",
 		"description": "[setting]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Always open Salesforce Setup page in the same tab when clicking on the popup.",
+		"message": "Always open $salesforce_setup page in the same tab when clicking on the popup.",
 		"description": "[setting]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -583,7 +591,7 @@
 		"description": "[setting] when the favourites a Tab, prevent checking if there's an Id in the link that's being saved."
 	},
 	"or_drop": {
-		"message": "Or drop",
+		"message": "Or $drop",
 		"description": "[import] let the user move files with their mouse and release them"
 	},
 	"org_link": {
@@ -615,11 +623,11 @@
 		"description": "[req_permission] label when the user does not want to allow permissions permanently"
 	},
 	"req_permissions_header": {
-		"message": "Please allow us to access<br />Salesforce Setup pages automatically.",
+		"message": "Please allow us to access\n$salesforce_setup pages automatically.",
 		"description": "[req_permission] header of the page to request permissions"
 	},
 	"req_permissions_paragraph": {
-		"message": "If you want, you may have your favourite Tabs appear<br />as soon as you navigate to a Salesforce Setup page<br />without having to click this extension every time.",
+		"message": "If you want, you may have your favourite Tabs appear\nas soon as you navigate to a $salesforce_setup page\nwithout having to click this extension every time.",
 		"description": "[req_permission] text to explain why the permissions are being requested"
 	},
 	"required": {
@@ -829,10 +837,6 @@
 	"users": {
 		"message": "Users",
 		"description": "The name of the page related to ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
-		"description": "[warning] Explain the user that the file they imported uses a deprecated property"
 	},
 	"where_to": {
 		"message": "Where to?",

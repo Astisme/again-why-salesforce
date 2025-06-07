@@ -56,8 +56,8 @@
 		"description": "[مودال_بازکردن_سازمان_دیگر] درخواست تأیید از کاربر برای باز کردن لینک ساخته شده."
 	},
 	"confirm_update_extension": {
-		"message": "نسخه جدید $extension_label اکنون در دسترس است!",
-		"description": "یک پیام ناشناخته از شنونده دریافت شده است"
+		"message": "نسخه جدیدی از $extension_label اکنون در دسترس است!",
+		"description": "یک پیام ناشناس از یک شنونده دریافت شده است"
 	},
 	"continue": {
 		"message": "ادامه",
@@ -76,8 +76,8 @@
 		"description": "[منوی_زمینه]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 ورود Tabs",
-		"description": "[منوی_زمینه]"
+		"message": "🆙 $import_tabs",
+		"description": "[منوی-زمینه]"
 	},
 	"cxm_move": {
 		"message": "🧭 انتقال Tab",
@@ -104,12 +104,12 @@
 		"description": "[منوی_زمینه]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 حذف Tab",
-		"description": "[منوی_زمینه]"
+		"message": "👋 $remove_tab",
+		"description": "[منوی-زمینه]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 ذخیره به عنوان Tab",
-		"description": "[منوی_زمینه]"
+		"message": "💾 $save_tab",
+		"description": "[منوی-زمینه]"
 	},
 	"cxm_remove": {
 		"message": "💥 حذف Tab(ها)",
@@ -132,7 +132,7 @@
 		"description": "[منوی_زمینه]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ تنظیمات",
+		"message": "⚙️ $settings",
 		"description": "برچسب برای منوی تنظیمات"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[پنجره_بازشو] حذف یک ردیف"
 	},
 	"delete_all": {
-		"message": "حذف همه Tabs",
-		"description": "[پنجره_بازشو] عنوان روی سطل زباله برای خالی کردن همه Tabs"
+		"message": "$delete همه Tabs",
+		"description": "[پنجره-بازشو] عنوان روی سطل زباله برای خالی کردن همه Tabs"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[عنوان_مودال] برای فرآیند ورود"
 	},
 	"import_title": {
-		"message": "ورود Tabs از فایل json",
-		"description": "[پنجره_بازشو] عنوان روی دکمه ورود"
+		"message": "$import_tabs از فایل JSON",
+		"description": "[پنجره-بازشو] عنوان روی دکمه وارد کردن"
 	},
 	"insert_another": {
 		"message": "درج دیگری",
@@ -496,8 +496,16 @@
 		"description": "[غیر راه‌اندازی Salesforce] یک URL که معتبر نیست"
 	},
 	"nss_not_setup_page": {
-		"message": "این یک صفحه راه‌اندازی Salesforce Lightning نیست.",
-		"description": "[غیر راه‌اندازی Salesforce] کاربر در یک صفحه Salesforce نیست."
+		"message": "این یک صفحه تنظیمات $salesforce_lightning نیست.",
+		"description": "[notSalesforceSetup] کاربر در صفحه Salesforce نیست."
+	},
+	"open_here": {
+		"message": "در این Tab باز شود.",
+		"description": "[open-other-org-modal] دکمه رادیویی برای اینکه کاربر بتواند در همان Tab مرورگر باز کند"
+	},
+	"open_new_tab": {
+		"message": "در یک Tab جدید باز شود.",
+		"description": "[open-other-org-modal] دکمه رادیویی برای اینکه کاربر بتواند در یک Tab مرورگر جدید باز کند."
 	},
 	"open_settings": {
 		"message": "باز کردن تنظیمات افزونه",
@@ -508,12 +516,12 @@
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "هنگام کلیک کردن روی پنجره بازشو در حالی که در یک صفحه Salesforce نیستید، صفحه ورود به Salesforce را به طور خودکار باز کنید.",
-		"description": "[تنظیم] وقتی کاربر پنجره بازشو را در یک وب سایت تصادفی باز می کند"
+		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce نیستید، صفحه $salesforce_login را به طور خودکار باز کنید.",
+		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت تصادفی است باز می کند"
 	},
 	"opt_automatic_open_setup": {
-		"message": "هنگام کلیک کردن روی پنجره بازشو در حالی که در یک صفحه Salesforce هستید، صفحه تنظیمات Salesforce را به طور خودکار باز کنید.",
-		"description": "[تنظیم] وقتی کاربر پنجره بازشو را در یک وب سایت Salesforce باز می کند"
+		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce هستید، صفحه $salesforce_setup را به طور خودکار باز کنید.",
+		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت Salesforce است باز می کند"
 	},
 	"opt_en_fallback": {
 		"message": "en (Fallback)",
@@ -528,12 +536,12 @@
 		"description": "[تنظیم] هنگام کلیک روی یک Tab علاقه‌مند، آن را در یک برگه جدید باز کن"
 	},
 	"opt_open_login_same_tab": {
-		"message": "هنگام کلیک کردن روی پنجره بازشو، همیشه صفحه ورود به Salesforce را در همان Tab باز کنید.",
-		"description": "[تنظیم]"
+		"message": "همیشه صفحه $salesforce_login را در همان Tab هنگام کلیک بر روی پنجGLE_TTS_CURSORپنجره بازشو باز کنید.",
+		"description": "[تنظیمات]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "هنگام کلیک کردن روی پنجره بازشو، همیشه صفحه تنظیمات Salesforce را در همان Tab باز کنید.",
-		"description": "[تنظیم]"
+		"message": "همیشه صفحه $salesforce_setup را در همان Tab هنگام کلیک بر روی پنجره بازشو باز کنید.",
+		"description": "[تنظیمات]"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "از استفاده از ناوبری Lightning جلوگیری کنید (هنگام استفاده بارگیری سریعتر است).",
@@ -552,8 +560,8 @@
 		"description": "[تنظیم] هنگام انتخاب یک Tab به علاقه‌مندها، بررسی شناسه لینک را انجام نده"
 	},
 	"or_drop": {
-		"message": "یا رها کنید",
-		"description": "[ورود] به کاربر اجازه دهید فایل‌ها را با ماوس خود جابجا کرده و رها کند"
+		"message": "یا $drop",
+		"description": "[وارد کردن] به کاربر اجازه دهید فایل ها را با ماوس خود جابجا کرده و رها کند"
 	},
 	"org_link": {
 		"message": "لینک سازمان",
@@ -584,12 +592,12 @@
 		"description": "[درخواست_مجوز] برچسب زمانی که کاربر نمی‌خواهد به طور دائم مجوزها را اجازه دهد"
 	},
 	"req_permissions_header": {
-		"message": "لطفاً به ما اجازه دسترسی خودکار به<br />صفحات تنظیمات Salesforce را بدهید.",
-		"description": "[درخواست_مجوز] سربرگ صفحه برای درخواست مجوزها"
+		"message": "لطفاً به ما اجازه دهید به طور خودکار به صفحات $salesforce_setup\n دسترسی پیدا کنیم.",
+		"description": "[req_permission] سرصفحه صفحه برای درخواست مجوزها"
 	},
 	"req_permissions_paragraph": {
-		"message": "اگر می‌خواهید، می‌توانید Tabs مورد علاقه خود را<br />به محض رفتن به صفحه تنظیمات Salesforce<br />بدون نیاز به کلیک کردن هر بار روی این افزونه، ظاهر کنید.",
-		"description": "[درخواست_مجوز] متن برای توضیح اینکه چرا مجوزها درخواست می‌شوند"
+		"message": "اگر می خواهید، می توانید Tabs مورد علاقه خود را به محض رفتن به صفحه $salesforce_setup\n بدون نیاز به کلیک بر روی این برنامه افزودنی در هر بار، ظاهر کنید.",
+		"description": "[req_permission] متنی برای توضیح اینکه چرا مجوزها درخواست می شوند"
 	},
 	"required": {
 		"message": "الزامی",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "کاربران",
 		"description": "نام صفحه مربوط به ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "شما با استفاده از 'tabTitle' منسوخ شده وارد کرده‌اید!\nدانلود فایل به‌روز شده آغاز شده است.\nاز این پس، لطفاً از فایل تازه دانلود شده استفاده کنید.\nاستفاده از چنین فایلی در نسخه‌های بعدی متوقف خواهد شد.",
-		"description": "[هشدار] به کاربر توضیح دهید که فایلی که وارد کرده‌اند از یک ویژگی منسوخ شده استفاده می‌کند"
 	},
 	"where_to": {
 		"message": "کجا؟",

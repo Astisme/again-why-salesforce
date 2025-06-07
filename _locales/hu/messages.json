@@ -56,8 +56,8 @@
 		"description": "[open-other-org-modal] felhasználói megerősítés kérése a generált link megnyitásához."
 	},
 	"confirm_update_extension": {
-		"message": "A $extension_label új verziója már elérhető!",
-		"description": "ismeretlen üzenet érkezett egy hallgatótól"
+		"message": "A(z) $extension_label új verziója már elérhető!",
+		"description": "ismeretlen üzenet érkezett egy figyelőtől"
 	},
 	"continue": {
 		"message": "Folytatás",
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Tabok importálása",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[helyi-menü]"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab mozgatása",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Tab eltávolítása",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[helyi-menü]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Mentés Tabként",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[helyi-menü]"
 	},
 	"cxm_remove": {
 		"message": "💥 Tab(ok) eltávolítása",
@@ -132,8 +132,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Beállítások",
-		"description": "Címke a beállítások menühöz"
+		"message": "⚙️ $settings",
+		"description": "A beállítások menü címkéje"
 	},
 	"cxm_update": {
 		"message": "✏️ Tab frissítése",
@@ -152,8 +152,8 @@
 		"description": "[popup] sor törlése"
 	},
 	"delete_all": {
-		"message": "Összes Tab törlése",
-		"description": "[popup] a kukában megjelenő cím az összes Tab törléséhez"
+		"message": "$delete az összes Tabs",
+		"description": "[felugró-ablak] cím a kukán az összes Tabs kiürítéséhez"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] az importálási folyamathoz"
 	},
 	"import_title": {
-		"message": "Tabok importálása json fájlból",
-		"description": "[popup] import gomb címe"
+		"message": "$import_tabs JSON fájlból",
+		"description": "[felugró-ablak] cím az importálás gombon"
 	},
 	"insert_another": {
 		"message": "Másik beszúrása",
@@ -496,8 +496,16 @@
 		"description": "[nemSalesforceBeállítás] érvénytelen URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Ez nem egy Salesforce Lightning beállítási oldal.",
-		"description": "[nemSalesforceBeállítás] a felhasználó nem egy Salesforce oldalon van."
+		"message": "Ez nem egy $salesforce_lightning beállítási oldal.",
+		"description": "[notSalesforceSetup] a felhasználó nem Salesforce oldalon van."
+	},
+	"open_here": {
+		"message": "Megnyitás ezen a Tab.",
+		"description": "[open-other-org-modal] választógomb, amellyel a felhasználó ugyanabban a böngésző Tab nyithatja meg"
+	},
+	"open_new_tab": {
+		"message": "Megnyitás új Tab.",
+		"description": "[open-other-org-modal] választógomb, amellyel a felhasználó új böngésző Tab nyithatja meg."
 	},
 	"open_settings": {
 		"message": "Bővítmény beállításainak megnyitása",
@@ -508,11 +516,11 @@
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
 	},
 	"opt_automatic_open_login": {
-		"message": "Ha nem egy Salesforce oldalon van, a felugró ablakra kattintva automatikusan nyissa meg a Salesforce bejelentkezési oldalt.",
+		"message": "Automatikusan nyissa meg a $salesforce_login oldalt, amikor a felugró ablakra kattint, miközben nem Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy véletlenszerű webhelyen"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Ha egy Salesforce oldalon van, a felugró ablakra kattintva automatikusan nyissa meg a Salesforce beállítási oldalt.",
+		"message": "Automatikusan nyissa meg a $salesforce_setup oldalt, amikor a felugró ablakra kattint, miközben Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy Salesforce webhelyen"
 	},
 	"opt_en_fallback": {
@@ -528,11 +536,11 @@
 		"description": "[beállítás] kedvenc Tab-ra kattintva nyissa meg új fülön"
 	},
 	"opt_open_login_same_tab": {
-		"message": "A felugró ablakra kattintva mindig ugyanabban a Tab-ban nyissa meg a Salesforce bejelentkezési oldalt.",
+		"message": "Mindig nyissa meg a $salesforce_login oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
 		"description": "[beállítás]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "A felugró ablakra kattintva mindig ugyanabban a Tab-ban nyissa meg a Salesforce beállítási oldalt.",
+		"message": "Mindig nyissa meg a $salesforce_setup oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
 		"description": "[beállítás]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[beállítás] kedvenc Tab mentésekor ne ellenőrizze az ID-t"
 	},
 	"or_drop": {
-		"message": "Vagy dobja ide",
-		"description": "[import] lehetőség, hogy a felhasználó az egérrel áthúzza és elengedje a fájlokat"
+		"message": "Vagy $drop",
+		"description": "[importálás] engedélyezze a felhasználónak, hogy az egérrel mozgassa a fájlokat, és elengedje őket"
 	},
 	"org_link": {
 		"message": "Szervezet Link",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] címke, amikor a felhasználó nem kívánja véglegesen az engedélyt megadni"
 	},
 	"req_permissions_header": {
-		"message": "Kérem, engedélyezze nekünk, hogy<br />automatikusan hozzáférjünk a Salesforce Setup oldalakhoz.",
-		"description": "[req_permission] oldal fejléc az engedélykéréshez"
+		"message": "Kérjük, engedélyezze számunkra a $salesforce_setup oldalak\nautomatikus elérését.",
+		"description": "[req_permission] az engedélykérő oldal fejléce"
 	},
 	"req_permissions_paragraph": {
-		"message": "Ha szeretné, kedvenc Tabjai megjelenhetnek<br />amint navigál a Salesforce Setup oldalra<br />anélkül, hogy minden alkalommal rákattintana erre a kiterjesztésre.",
-		"description": "[req_permission] magyarázó szöveg, hogy miért kérjük az engedélyt"
+		"message": "Ha szeretné, megjelenítheti kedvenc Tabs\namint egy $salesforce_setup oldalra navigál,\nanélkül, hogy minden alkalommal erre a bővítményre kellene kattintania.",
+		"description": "[req_permission] szöveg, amely elmagyarázza, miért kérik az engedélyeket"
 	},
 	"required": {
 		"message": "kötelező",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Felhasználók",
 		"description": "az oldal neve, amely a ManageUsers/home-hoz tartozik"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "A régi 'tabTitle' használatával importált!\nElindult a frissített fájl letöltése.\nMostantól kérjük, használja az újonnan letöltött fájlt.\nEnnek a fájlnak a használata egy későbbi frissítéssel megszűnik.",
-		"description": "[warning] tájékoztatja a felhasználót, hogy az importált fájl elavult tulajdonságot tartalmaz"
 	},
 	"where_to": {
 		"message": "Hová?",

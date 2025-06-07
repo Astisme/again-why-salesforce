@@ -57,7 +57,7 @@
 	},
 	"confirm_update_extension": {
 		"message": "Toleo jipya la $extension_label sasa linapatikana!",
-		"description": "ujumbe usiojulikana umepokewa kutoka kwa msikilizaji"
+		"description": "ujumbe usiojulikana umepokelewa kutoka kwa msikilizaji"
 	},
 	"continue": {
 		"message": "Endelea",
@@ -76,8 +76,8 @@
 		"description": "[menu-ya-mukhtadha]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Ingiza Tabs",
-		"description": "[menu-ya-mukhtadha]"
+		"message": "🆙 $import_tabs",
+		"description": "[menyu-ya-mukhtadha]"
 	},
 	"cxm_move": {
 		"message": "🧭 Sogeza Tab",
@@ -104,12 +104,12 @@
 		"description": "[menu-ya-mukhtadha]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Ondoa Tab",
-		"description": "[menu-ya-mukhtadha]"
+		"message": "👋 $remove_tab",
+		"description": "[menyu-ya-mukhtadha]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Hifadhi kama Tab",
-		"description": "[menu-ya-mukhtadha]"
+		"message": "💾 $save_tab",
+		"description": "[menyu-ya-mukhtadha]"
 	},
 	"cxm_remove": {
 		"message": "💥 Ondoa Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[menu-ya-mukhtadha]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Mipangilio",
+		"message": "⚙️ $settings",
 		"description": "Lebo ya menyu ya mipangilio"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[ibukizi] futa safu"
 	},
 	"delete_all": {
-		"message": "Futa Tabs zote",
-		"description": "[ibukizi] kichwa kwenye pipa la taka ili kuondoa Tabs zote"
+		"message": "$delete Tabs zote",
+		"description": "[ibukizi] kichwa kwenye pipa la taka ili kumwaga Tabs zote"
 	},
 	"drop": {
 		"message": "Shusha",
@@ -452,8 +452,8 @@
 		"description": "[kichwa-cha-modal] kwa mchakato wa kuingiza"
 	},
 	"import_title": {
-		"message": "Ingiza Tabs kutoka kwa faili ya json",
-		"description": "[ibukizi] kichwa kwenye kitufe cha kuingiza"
+		"message": "$import_tabs kutoka faili ya JSON",
+		"description": "[ibukizi] kichwa kwenye kitufe cha kuagiza"
 	},
 	"insert_another": {
 		"message": "Weka nyingine",
@@ -496,8 +496,16 @@
 		"description": "[siUsanidiWaSalesforce] URL ambayo si sahihi"
 	},
 	"nss_not_setup_page": {
-		"message": "Hii siyo ukurasa wa Usanidi wa Salesforce Lightning.",
-		"description": "[siUsanidiWaSalesforce] mtumiaji hayupo kwenye ukurasa wa Salesforce."
+		"message": "Hii si ukurasa wa Mipangilio ya $salesforce_lightning.",
+		"description": "[notSalesforceSetup] mtumiaji hayuko kwenye ukurasa wa Salesforce."
+	},
+	"open_here": {
+		"message": "Fungua kwenye Tab hii.",
+		"description": "[open-other-org-modal] kitufe cha redio kumruhusu mtumiaji kufungua kwenye Tab moja ya kivinjari"
+	},
+	"open_new_tab": {
+		"message": "Fungua kwenye Tab mpya.",
+		"description": "[open-other-org-modal] kitufe cha redio kumruhusu mtumiaji kufungua kwenye Tab mpya ya kivinjari."
 	},
 	"open_settings": {
 		"message": "Fungua Mipangilio ya Kiendelezi",
@@ -508,12 +516,12 @@
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa Usanidi wa Salesforce"
 	},
 	"opt_automatic_open_login": {
-		"message": "Fungua ukurasa wa Kuingia wa Salesforce kiotomatiki unapobofya kidirisha ibukizi ukiwa si kwenye ukurasa wa Salesforce.",
-		"description": "[mpangilio] mtumiaji anapofungua kidirisha ibukizi akiwa kwenye tovuti nasibu"
+		"message": "Fungua ukurasa wa $salesforce_login kiotomatiki unapobofya kwenye ibukizi ukiwa hauko kwenye ukurasa wa Salesforce.",
+		"description": "[mpangilio] mtumiaji anapofungua ibukizi akiwa kwenye tovuti isiyo ya mpangilio"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Fungua ukurasa wa Usanidi wa Salesforce kiotomatiki unapobofya kidirisha ibukizi ukiwa kwenye ukurasa wa Salesforce.",
-		"description": "[mpangilio] mtumiaji anapofungua kidirisha ibukizi akiwa kwenye tovuti ya Salesforce"
+		"message": "Fungua ukurasa wa $salesforce_setup kiotomatiki unapobofya kwenye ibukizi ukiwa kwenye ukurasa wa Salesforce.",
+		"description": "[mpangilio] mtumiaji anapofungua ibukizi akiwa kwenye tovuti ya Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Mbadala)",
@@ -528,11 +536,11 @@
 		"description": "[mpangilio] wakati mtumiaji anabonyeza Tab ya kupenda, fungua katika kichupo kipya cha kivinjari"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Fungua ukurasa wa Kuingia wa Salesforce kila wakati kwenye Tabu hiyo hiyo unapobofya kidirisha ibukizi.",
+		"message": "Fungua ukurasa wa $salesforce_login kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Fungua ukurasa wa Usanidi wa Salesforce kila wakati kwenye Tabu hiyo hiyo unapobofya kidirisha ibukizi.",
+		"message": "Fungua ukurasa wa $salesforce_setup kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[mpangilio] wakati mtumiaji anoongeza Tab katika upendeleo, usikague ikiwa kuna Kitambulisho (ID) katika kiungo kinachosajiliwa"
 	},
 	"or_drop": {
-		"message": "Au dondosha",
-		"description": "[ingiza] ruhusu mtumiaji kusogeza faili na kipanya chake na kuzidondosha"
+		"message": "Au $drop",
+		"description": "[agiza] ruhusu mtumiaji kusogeza faili kwa kipanya chake na kuziachilia"
 	},
 	"org_link": {
 		"message": "Kiungo cha Org",
@@ -584,12 +592,12 @@
 		"description": "[omba_ruhusa] lebo wakati mtumiaji hataki kuruhusu ruhusa kabisa"
 	},
 	"req_permissions_header": {
-		"message": "Tafadhali turuhusu kufikia<br />kurasa za Usanidi wa Salesforce kiotomatiki.",
-		"description": "[omba_ruhusa] kichwa cha ukurasa wa kuomba ruhusa"
+		"message": "Tafadhali turuhusu kufikia\nkurasa za $salesforce_setup kiotomatiki.",
+		"description": "[req_permission] kichwa cha ukurasa wa kuomba ruhusa"
 	},
 	"req_permissions_paragraph": {
-		"message": "Ukipenda, unaweza kufanya Tabs zako pendwa zionekane<br />mara tu unapoelekea kwenye ukurasa wa Usanidi wa Salesforce<br />bila kulazimika kubofya kiendelezi hiki kila wakati.",
-		"description": "[omba_ruhusa] maandishi ya kueleza kwa nini ruhusa zinaombwa"
+		"message": "Ukipenda, unaweza kuwa na Tabs zako uzipendazo zionekane\nmara tu unapovinjari hadi kwenye ukurasa wa $salesforce_setup\nbila kulazimika kubofya kiendelezi hiki kila wakati.",
+		"description": "[req_permission] maandishi ya kueleza kwa nini ruhusa zinaombwa"
 	},
 	"required": {
 		"message": "inahitajika",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Watumiaji",
 		"description": "Jina la ukurasa unaohusiana na ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Umeingiza kwa kutumia 'tabTitle' iliyopitwa na wakati!\nUpakuaji wa faili iliyosasishwa umeanza.\nKuanzia sasa, tafadhali tumia faili mpya iliyopakuliwa.\nMatumizi ya faili kama hiyo yatakoma katika toleo la baadaye.",
-		"description": "[onyo] Eleza mtumiaji kuwa faili waliyoingiza inatumia sifa iliyopitwa na wakati"
 	},
 	"where_to": {
 		"message": "Wapi?",

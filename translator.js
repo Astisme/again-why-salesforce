@@ -196,34 +196,28 @@ class TranslationService {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
     if(document == null)
       return false;
-    try{
-      const elements = document.querySelectorAll(
-        `[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
-      );
-      for (const element of elements) {
-        const toTranslateKey = element.getAttribute(
-          TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE,
-        );
-        const [key, ...attributes] = toTranslateKey.split(
-          TranslationService.TRANSLATE_SEPARATOR,
-        );
-        const translation = await this._translate(
-          key,
-        );
-        //const translation = await BROWSER.i18n.getMessage(key);
-        if (attributes == null) continue;
-        if (attributes.length === 0) {
-          attributes.push("textContent");
-        }
-        for (const attribute of attributes) {
-          element[attribute] = translation;
-        }
-      }
-      return true;
-    } catch(e) {
-      console.error('catched',e);
-      return false;
-    }
+		const elements = document.querySelectorAll(
+			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
+		);
+		for (const element of elements) {
+			const toTranslateKey = element.getAttribute(
+				TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE,
+			);
+			const [key, ...attributes] = toTranslateKey.split(
+				TranslationService.TRANSLATE_SEPARATOR,
+			);
+			const translation = (await this.translate(
+				key,
+			)).replaceAll("\n", "<br />");
+			//const translation = await BROWSER.i18n.getMessage(key);
+			if (attributes == null) continue;
+			if (attributes.length === 0) {
+				attributes.push("textContent");
+			}
+			for (const attribute of attributes) {
+				element[attribute] = translation;
+			}
+		}
 	}
 
 	setListenerForLanguageChange() {

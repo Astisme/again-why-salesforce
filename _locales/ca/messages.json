@@ -56,7 +56,7 @@
 		"description": "[open-other-org-modal] sol·licitud de confirmació a l'usuari per obrir l'enllaç construït."
 	},
 	"confirm_update_extension": {
-		"message": "Hi ha una nova versió de $extension_label disponible!",
+		"message": "Una nova versió de $extension_label ja està disponible!",
 		"description": "s'ha rebut un missatge desconegut d'un listener"
 	},
 	"continue": {
@@ -76,8 +76,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
-		"message": "🆙 Importar Tab",
-		"description": "[context-menu]"
+		"message": "🆙 $import_tabs",
+		"description": "[menú-contextual]"
 	},
 	"cxm_move": {
 		"message": "🧭 Moure Tab",
@@ -104,12 +104,12 @@
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
-		"message": "👋 Eliminar Tab",
-		"description": "[context-menu]"
+		"message": "👋 $remove_tab",
+		"description": "[menú-contextual]"
 	},
 	"cxm_page_save_tab": {
-		"message": "💾 Desar com a Tab",
-		"description": "[context-menu]"
+		"message": "💾 $save_tab",
+		"description": "[menú-contextual]"
 	},
 	"cxm_remove": {
 		"message": "💥 Eliminar Tab(s)",
@@ -132,7 +132,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
-		"message": "⚙️ Configuració",
+		"message": "⚙️ $settings",
 		"description": "Etiqueta per al menú de configuració"
 	},
 	"cxm_update": {
@@ -152,8 +152,8 @@
 		"description": "[popup] esborrar una fila"
 	},
 	"delete_all": {
-		"message": "Esborrar tots els Tabs",
-		"description": "[popup] títol per al contenidor que buida tots els Tabs"
+		"message": "$delete totes les Tabs",
+		"description": "[finestra-emergent] títol a la paperera per buidar totes les Tabs"
 	},
 	"drop": {
 		"message": "Drop",
@@ -452,8 +452,8 @@
 		"description": "[modal-title] per al procés d'importació"
 	},
 	"import_title": {
-		"message": "Importar Tabs des d'un fitxer json",
-		"description": "[popup] títol del botó d'importació"
+		"message": "$import_tabs des d'un fitxer JSON",
+		"description": "[finestra-emergent] títol al botó d'importació"
 	},
 	"insert_another": {
 		"message": "Inserir un altre",
@@ -496,8 +496,16 @@
 		"description": "[noÉsConfiguracióDeSalesforce] una URL que no és vàlida"
 	},
 	"nss_not_setup_page": {
-		"message": "Aquesta no és una pàgina de configuració de Salesforce Lightning.",
-		"description": "[noÉsConfiguracióDeSalesforce] l'usuari no es troba en una pàgina de Salesforce."
+		"message": "Aquesta no és una pàgina de configuració de $salesforce_lightning.",
+		"description": "[notSalesforceSetup] l'usuari no es troba en una pàgina de Salesforce."
+	},
+	"open_here": {
+		"message": "Obre en aquesta Tab.",
+		"description": "[open-other-org-modal] botó d'opció per permetre a l'usuari obrir a la mateixa Tab del navegador"
+	},
+	"open_new_tab": {
+		"message": "Obre en una Tab nova.",
+		"description": "[open-other-org-modal] botó d'opció per permetre a l'usuari obrir en una nova Tab del navegador."
 	},
 	"open_settings": {
 		"message": "Obrir Configuració de l'Extensió",
@@ -508,12 +516,12 @@
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
 	},
 	"opt_automatic_open_login": {
-		"message": "Obre automàticament la pàgina d'inici de sessió de Salesforce quan es faci clic a la finestra emergent mentre no es trobi en una pàgina de Salesforce.",
-		"description": "[configuració] quan l'usuari obre la finestra emergent mentre es troba en un lloc web aleatori"
+		"message": "Obre automàticament la pàgina $salesforce_login en fer clic a la finestra emergent si no ets en una pàgina de Salesforce.",
+		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web aleatori"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Obre automàticament la pàgina de configuració de Salesforce quan es faci clic a la finestra emergent mentre es trobi en una pàgina de Salesforce.",
-		"description": "[configuració] quan l'usuari obre la finestra emergent mentre es troba en un lloc web de Salesforce"
+		"message": "Obre automàticament la pàgina $salesforce_setup en fer clic a la finestra emergent si ets en una pàgina de Salesforce.",
+		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web de Salesforce"
 	},
 	"opt_en_fallback": {
 		"message": "en (Alternativa)",
@@ -528,11 +536,11 @@
 		"description": "[configuració] en fer clic a una Tab preferida, obre-la en una nova pestanya del navegador"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Obre sempre la pàgina d'inici de sessió de Salesforce a la mateixa Tab quan es faci clic a la finestra emergent.",
+		"message": "Obre sempre la pàgina $salesforce_login a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Obre sempre la pàgina de configuració de Salesforce a la mateixa Tab quan es faci clic a la finestra emergent.",
+		"message": "Obre sempre la pàgina $salesforce_setup a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
 	},
 	"opt_prevent_lightning_navigation": {
@@ -552,8 +560,8 @@
 		"description": "[configuració] en desar una Tab preferida, evita comprovar si hi ha un ID a l’enllaç"
 	},
 	"or_drop": {
-		"message": "O arrossegar",
-		"description": "[import] permet que l'usuari arrossegui fitxers amb el ratolí i els deixi anar"
+		"message": "O $drop",
+		"description": "[importar] permet que l'usuari mogui fitxers amb el ratolí i els deixi anar"
 	},
 	"org_link": {
 		"message": "Enllaç de l'Organització",
@@ -584,12 +592,12 @@
 		"description": "[req_permission] etiqueta quan l'usuari no vol permetre els permisos de manera permanent"
 	},
 	"req_permissions_header": {
-		"message": "Sisplau, permeteu-nos accedir<br />automàticament a les pàgines Salesforce Setup.",
+		"message": "Permeteu-nos accedir\na les pàgines de $salesforce_setup automàticament.",
 		"description": "[req_permission] capçalera de la pàgina per sol·licitar permisos"
 	},
 	"req_permissions_paragraph": {
-		"message": "Si voleu, els vostres Tabs favorits poden aparèixer<br />tan aviat com accediu a una pàgina Salesforce Setup<br />sense haver de clicar aquest extensió cada vegada.",
-		"description": "[req_permission] text que explica per què es demanen permisos"
+		"message": "Si ho desitgeu, podeu fer que les vostres Tabs preferides apareguin\ntan bon punt navegueu a una pàgina de $salesforce_setup\nsense haver de fer clic a aquesta extensió cada vegada.",
+		"description": "[req_permission] text per explicar per què se sol·liciten els permisos"
 	},
 	"required": {
 		"message": "obligatori",
@@ -798,10 +806,6 @@
 	"users": {
 		"message": "Usuaris",
 		"description": "el nom de la pàgina relacionada amb ManageUsers/home"
-	},
-	"warn_deprecated_tab_title": {
-		"message": "Heu importat utilitzant el 'tabTitle' obsolet!\nS'ha iniciat la descàrrega del fitxer actualitzat.\nA partir d'ara, utilitzeu el nou fitxer descarregat, si us plau.\nL'ús d'aquest fitxer serà descontinuat en futures actualitzacions.",
-		"description": "[warning] informa a l'usuari que el fitxer importat utilitza una propietat obsoleta"
 	},
 	"where_to": {
 		"message": "On?",

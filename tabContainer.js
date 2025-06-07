@@ -755,7 +755,7 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<number>} - A promise that resolves to the new index of the moved tab.
 	 *
 	 * @example
-	 * for this example, we'll collapse miniURL and tabTitle into a single string and simply look at tabs as strings.
+	 * for this example, we'll collapse miniURL and label into a single string and simply look at tabs as strings.
 	 * tabs = ["a", "b", "c", "d", "e"]
 	 *
 	 * moveTab("c") || moveTab("c",true) || moveTab("c",true,false)
@@ -854,7 +854,7 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tabs are successfully synchronized after removal.
 	 *
 	 * @example
-	 * for this example, we'll collapse miniURL and tabTitle into a single string and simply look at tabs as strings.
+	 * for this example, we'll collapse miniURL and label into a single string and simply look at tabs as strings.
 	 * tabs = ["a", "b", "c"]
 	 *
 	 * removeOtherTabs("b") || removeOtherTabs("b",null) ==> tabs = ["b"]
