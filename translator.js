@@ -194,6 +194,8 @@ class TranslationService {
 	 */
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
+    if(document == null)
+      return false;
     try{
       const elements = document.querySelectorAll(
         `[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,

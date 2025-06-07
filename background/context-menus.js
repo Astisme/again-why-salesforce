@@ -365,6 +365,7 @@ async function removeMenuItems() {
 	}
 }
 
+let intervalCxm = null;
 /**
  * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
  * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
@@ -375,22 +376,28 @@ async function removeMenuItems() {
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 export async function checkAddRemoveContextMenus(what, callback = null) {
+  if(intervalCxm == null){
+    // Start periodic check
+    intervalCxm = setInterval(async () => {
+      if (!areMenuItemsVisible) {
+        await checkAddRemoveContextMenus();
+      }
+    }, 60000);
+  }
 	try {
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 		if (browserTabUrl == null) {
 			return;
 		}
+    await removeMenuItems();
 		if (
 			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
 		) {
-			await removeMenuItems();
 			await createMenuItems();
 			bg_notify({ what });
 			if (callback != null) {
 				callback();
 			}
-		} else {
-			await removeMenuItems();
 		}
 	} catch (error) {
 		console.trace();
@@ -446,15 +453,8 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	bg_notify(message);
 });
 
-// Start periodic check
-setInterval(async () => {
-	if (!areMenuItemsVisible) {
-		await checkAddRemoveContextMenus();
-	}
-}, 60000);
-
 // create persistent menuItems
-checkAddRemoveContextMenus();
+//checkAddRemoveContextMenus();
 
 BROWSER.storage.onChanged.addListener((changes) => {
 	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>

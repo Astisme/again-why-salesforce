@@ -1,6 +1,7 @@
 "use strict";
 import {
 	BROWSER,
+  PREVENT_ANALYTICS,
   WHAT_EXPORT,
   EXTENSION_NAME,
 	CMD_OPEN_OTHER_ORG,
@@ -925,6 +926,29 @@ function listenToReorderedTabs(){
   });
 }
 
+// Simple Analytics - 100% privacy-first analytics - https://github.com/simpleanalytics
+async function checkInsertAnalytics(){
+  const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
+  if(prevent_analytics != null && prevent_analytics.enabled === true)
+    return;
+  const whereToAppend = (document.head || document.documentElement);
+  const cspMeta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+  if (cspMeta) {
+    const currentCSP = cspMeta.getAttribute('content');
+    cspMeta.setAttribute('content', currentCSP + ' https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com');
+  } else {
+    const meta = document.createElement('meta');
+    meta.setAttribute('http-equiv', 'Content-Security-Policy');
+    meta.setAttribute('content', "default-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com;");
+    whereToAppend.appendChild(meta);
+  }
+  const img = document.createElement("img");
+  img.src = "https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F";
+  img.alt = "";
+  img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+  whereToAppend.appendChild(img);
+}
+
 // launch all starting functions
 function main(){
   getAllTabs_async();
@@ -932,6 +956,7 @@ function main(){
   listenToBackgroundPage();
   listenToReorderedTabs();
 	delayLoadSetupTabs();
+  checkInsertAnalytics();
 }
 
 // queries the currently active tab of the current active window

@@ -1,4 +1,12 @@
 {
+	"opt_no_release_notes": {
+		"message": "Do not show update release notes.",
+		"description": "[setting] let the user prevent the extension from showing release notes after it is updated"
+	},
+	"opt_prevent_analytics": {
+		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
+		"description": "[setting] let the user prevent them from sending anonymous analytics"
+	},
 	"flows": {
 		"message": "Flows",
 		"description": "[default-tab] Label for the default Flows Tab"

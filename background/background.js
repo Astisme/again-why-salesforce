@@ -435,28 +435,4 @@ function main(){
   checkAddRemoveContextMenus();
 }
 
-function tryInitBackground() {
-  const port = chrome.runtime.connect({ name: "init-check" });
-
-  port.onDisconnect.addListener(() => {
-    // Nobody responded — we're the first, so initialize
-    main();
-  });
-
-  // If someone responds, we are the second instance
-  port.onMessage.addListener((msg) => {
-    if (msg === "already-initialized") {
-      return;
-    }
-  });
-}
-
-// This will only be active in one background instance
-chrome.runtime.onConnect.addListener((port) => {
-  if (port.name === "init-check") {
-    port.postMessage("already-initialized");
-    port.disconnect();
-  }
-});
-
-tryInitBackground();
+main();
