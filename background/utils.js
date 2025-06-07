@@ -2,13 +2,13 @@
 import {
 	BROWSER,
 	BROWSER_NAME,
-  WHAT_EXPORT,
 	EXTENSION_NAME,
 	ISCHROME,
 	ISFIREFOX,
 	ISSAFARI,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
+	WHAT_EXPORT,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
@@ -88,7 +88,7 @@ export async function bg_notify(message) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-  const filename = `${EXTENSION_NAME}.json`;
+	const filename = `${EXTENSION_NAME}.json`;
 	if (ISFIREFOX) {
 		// Firefox implementation
 		const blob = new Blob([jsonData], { type: "application/json" });
@@ -103,8 +103,8 @@ function _exportHandler(tabs) {
 				}
 			});
 		});
-    return;
-	} else if(ISCHROME) {
+		return;
+	} else if (ISCHROME) {
 		// Chrome implementation
 		const dataStr = "data:application/json;charset=utf-8," +
 			encodeURIComponent(jsonData);
@@ -112,17 +112,17 @@ function _exportHandler(tabs) {
 			url: dataStr,
 			filename,
 		});
-    return;
-	} else if(ISSAFARI){
-      // Safari: send a message to the content script
-      bg_notify({
-        what: WHAT_EXPORT,
-        filename,
-        payload: jsonData
-      });
-      return;
-  }
-  console.warn(["error_export",ISCHROME,ISFIREFOX,ISSAFARI]);
+		return;
+	} else if (ISSAFARI) {
+		// Safari: send a message to the content script
+		bg_notify({
+			what: WHAT_EXPORT,
+			filename,
+			payload: jsonData,
+		});
+		return;
+	}
+	console.warn(["error_export", ISCHROME, ISFIREFOX, ISSAFARI]);
 }
 
 /**

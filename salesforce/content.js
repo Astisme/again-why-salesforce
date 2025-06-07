@@ -1,18 +1,14 @@
 "use strict";
 import {
 	BROWSER,
-  PREVENT_ANALYTICS,
-  WHAT_EXPORT,
-  EXTENSION_NAME,
 	CMD_OPEN_OTHER_ORG,
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
 	CMD_TOGGLE_ORG,
-  CXM_RESET_DEFAULT_TABS,
-  CXM_EMPTY_VISIBLE_TABS,
 	CMD_UPDATE_TAB,
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
+	CXM_EMPTY_VISIBLE_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -24,17 +20,21 @@ import {
 	CXM_REMOVE_OTHER_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_RESET_DEFAULT_TABS,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
+	EXTENSION_NAME,
 	EXTENSION_NAME,
 	getSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
+	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
+	WHAT_EXPORT,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -641,16 +641,18 @@ export async function performActionOnTabs(action, tab = null, options = null) {
 				await toggleOrg(tab);
 				break;
 			case ACTION_REMOVE_VISIBLE_TABS: {
-        // The visible Tabs are all the generic ones + the org-specific Tabs for the current Org
-        const thisOrg = Tab.extractOrgName(href);
-				if (!await allTabs.replaceTabs([], {
-          removeOrgTabs: true,
-          removeThisOrgTabs: thisOrg,
-        })) {
+				// The visible Tabs are all the generic ones + the org-specific Tabs for the current Org
+				const thisOrg = Tab.extractOrgName(href);
+				if (
+					!await allTabs.replaceTabs([], {
+						removeOrgTabs: true,
+						removeThisOrgTabs: thisOrg,
+					})
+				) {
 					throw new Error("error_removing_visible_tabs");
 				}
 				break;
-      }
+			}
 			case ACTION_RESET_DEFAULT:
 				if (!await allTabs.setDefaultTabs()) {
 					throw new Error("error_resetting_default_tabs");
@@ -766,218 +768,231 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 	}
 }
 
-function launchDownload(message){
-  const jsonText = message.payload;
-  const filename = message.filename || "download.json";
-  // Create a Blob & object URL
-  const blob = new Blob([jsonText], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  // Build <a> and “click” it
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  // Cleanup
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+function launchDownload(message) {
+	const jsonText = message.payload;
+	const filename = message.filename || "download.json";
+	// Create a Blob & object URL
+	const blob = new Blob([jsonText], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
+	// Build <a> and “click” it
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = filename;
+	document.body.appendChild(a);
+	a.click();
+	// Cleanup
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
 }
 
 // listen from saves from the action / background page
-function listenToBackgroundPage(){
-  BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
-    if (message == null || message.what == null) {
-      return;
-    }
-    sendResponse(null);
-    allTabs = await ensureAllTabsAvailability();
-    try {
-      switch (message.what) {
-        // hot reload (from context-menus.js)
-        case "saved":
-        case "focused":
-        case "startup":
-        case "installed":
-        case "activate":
-        case "highlighted":
-        case "focuschanged":
-          sf_afterSet(message.what, message.tabs);
-          break;
-        case "warning":
-          showToast(message.message, false, true);
-          if (message.action === "make-bold") {
-            makeDuplicatesBold(message.url);
-          }
-          break;
-        case "error":
-          showToast(message.message, false);
-          break;
-        case "add":
-          createImportModal();
-          break;
-        case CXM_OPEN_OTHER_ORG:
-        case CMD_OPEN_OTHER_ORG: {
-          const label = message.linkTabLabel;
-          const url = message.linkTabUrl ?? message.pageTabUrl;
-          showModalOpenOtherOrg({ label, url });
-          break;
-        }
-        case CXM_MOVE_FIRST:
-          await performActionOnTabs(ACTION_MOVE, {
-            label: message.label,
-            url: message.tabUrl,
-          }, { moveBefore: true, fullMovement: true });
-          break;
-        case CXM_MOVE_LEFT:
-          await performActionOnTabs(ACTION_MOVE, {
-            label: message.label,
-            url: message.tabUrl,
-          }, { moveBefore: true, fullMovement: false });
-          break;
-        case CXM_MOVE_RIGHT:
-          await performActionOnTabs(ACTION_MOVE, {
-            label: message.label,
-            url: message.tabUrl,
-          }, { moveBefore: false, fullMovement: false });
-          break;
-        case CXM_MOVE_LAST:
-          await performActionOnTabs(ACTION_MOVE, {
-            label: message.label,
-            url: message.tabUrl,
-          }, { moveBefore: false, fullMovement: true });
-          break;
-        case CXM_REMOVE_TAB:
-          await performActionOnTabs(ACTION_REMOVE_THIS, {
-            label: message.label,
-            url: message.tabUrl,
-          });
-          break;
-        case CXM_REMOVE_OTHER_TABS:
-          await performActionOnTabs(ACTION_REMOVE_OTHER, {
-            label: message.label,
-            url: message.tabUrl,
-          });
-          break;
-        case CXM_REMOVE_LEFT_TABS:
-          await performActionOnTabs(ACTION_REMOVE_OTHER, {
-            label: message.label,
-            url: message.tabUrl,
-          }, { removeBefore: true });
-          break;
-        case CXM_REMOVE_RIGHT_TABS:
-          await performActionOnTabs(ACTION_REMOVE_OTHER, {
-            label: message.label,
-            url: message.tabUrl,
-          }, { removeBefore: false });
-          break;
-        case CXM_EMPTY_GENERIC_TABS:
-          await performActionOnTabs(ACTION_REMOVE_GENERIC_TABS);
-          break;
-        case CXM_EMPTY_TABS:
-          await performActionOnTabs(ACTION_REMOVE_ALL);
-          break;
-        case CXM_PAGE_SAVE_TAB:
-        case CMD_SAVE_AS_TAB:
-          pageActionTab(true);
-          break;
-        case CXM_PAGE_REMOVE_TAB:
-        case CMD_REMOVE_TAB:
-          pageActionTab(false);
-          break;
-        case CXM_UPDATE_ORG:
-        case CMD_TOGGLE_ORG:
-          await performActionOnTabs(ACTION_TOGGLE_ORG, {
-            label: message.label,
-            url: message.tabUrl,
-          });
-          break;
-        case CXM_UPDATE_TAB:
-        case CMD_UPDATE_TAB:
-          showModalUpdateTab({
-            label: message.label,
-            url: message.tabUrl,
-          });
-          break;
-        case CXM_EMPTY_VISIBLE_TABS:
-          await performActionOnTabs(ACTION_REMOVE_VISIBLE_TABS);
-          break;
-        case CXM_RESET_DEFAULT_TABS:
-          await performActionOnTabs(ACTION_RESET_DEFAULT);
-          break;
-        case WHAT_UPDATE_EXTENSION:
-          promptUpdateExtension(message);
-          break;
-        case WHAT_EXPORT:
-          launchDownload(message);
-          break;
-        default:
-          if (message.what != "theme") {
-            showToast(
-              [
-                "error_unknown_message",
-                message.what,
-              ],
-              false,
-              true,
-            );
-          }
-          break;
-      }
-    } catch (error) {
-      showToast(error.message, false);
-    }
-  });
+function listenToBackgroundPage() {
+	BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
+		if (message == null || message.what == null) {
+			return;
+		}
+		sendResponse(null);
+		allTabs = await ensureAllTabsAvailability();
+		try {
+			switch (message.what) {
+				// hot reload (from context-menus.js)
+				case "saved":
+				case "focused":
+				case "startup":
+				case "installed":
+				case "activate":
+				case "highlighted":
+				case "focuschanged":
+					sf_afterSet(message.what, message.tabs);
+					break;
+				case "warning":
+					showToast(message.message, false, true);
+					if (message.action === "make-bold") {
+						makeDuplicatesBold(message.url);
+					}
+					break;
+				case "error":
+					showToast(message.message, false);
+					break;
+				case "add":
+					createImportModal();
+					break;
+				case CXM_OPEN_OTHER_ORG:
+				case CMD_OPEN_OTHER_ORG: {
+					const label = message.linkTabLabel;
+					const url = message.linkTabUrl ?? message.pageTabUrl;
+					showModalOpenOtherOrg({ label, url });
+					break;
+				}
+				case CXM_MOVE_FIRST:
+					await performActionOnTabs(ACTION_MOVE, {
+						label: message.label,
+						url: message.tabUrl,
+					}, { moveBefore: true, fullMovement: true });
+					break;
+				case CXM_MOVE_LEFT:
+					await performActionOnTabs(ACTION_MOVE, {
+						label: message.label,
+						url: message.tabUrl,
+					}, { moveBefore: true, fullMovement: false });
+					break;
+				case CXM_MOVE_RIGHT:
+					await performActionOnTabs(ACTION_MOVE, {
+						label: message.label,
+						url: message.tabUrl,
+					}, { moveBefore: false, fullMovement: false });
+					break;
+				case CXM_MOVE_LAST:
+					await performActionOnTabs(ACTION_MOVE, {
+						label: message.label,
+						url: message.tabUrl,
+					}, { moveBefore: false, fullMovement: true });
+					break;
+				case CXM_REMOVE_TAB:
+					await performActionOnTabs(ACTION_REMOVE_THIS, {
+						label: message.label,
+						url: message.tabUrl,
+					});
+					break;
+				case CXM_REMOVE_OTHER_TABS:
+					await performActionOnTabs(ACTION_REMOVE_OTHER, {
+						label: message.label,
+						url: message.tabUrl,
+					});
+					break;
+				case CXM_REMOVE_LEFT_TABS:
+					await performActionOnTabs(ACTION_REMOVE_OTHER, {
+						label: message.label,
+						url: message.tabUrl,
+					}, { removeBefore: true });
+					break;
+				case CXM_REMOVE_RIGHT_TABS:
+					await performActionOnTabs(ACTION_REMOVE_OTHER, {
+						label: message.label,
+						url: message.tabUrl,
+					}, { removeBefore: false });
+					break;
+				case CXM_EMPTY_GENERIC_TABS:
+					await performActionOnTabs(ACTION_REMOVE_GENERIC_TABS);
+					break;
+				case CXM_EMPTY_TABS:
+					await performActionOnTabs(ACTION_REMOVE_ALL);
+					break;
+				case CXM_PAGE_SAVE_TAB:
+				case CMD_SAVE_AS_TAB:
+					pageActionTab(true);
+					break;
+				case CXM_PAGE_REMOVE_TAB:
+				case CMD_REMOVE_TAB:
+					pageActionTab(false);
+					break;
+				case CXM_UPDATE_ORG:
+				case CMD_TOGGLE_ORG:
+					await performActionOnTabs(ACTION_TOGGLE_ORG, {
+						label: message.label,
+						url: message.tabUrl,
+					});
+					break;
+				case CXM_UPDATE_TAB:
+				case CMD_UPDATE_TAB:
+					showModalUpdateTab({
+						label: message.label,
+						url: message.tabUrl,
+					});
+					break;
+				case CXM_EMPTY_VISIBLE_TABS:
+					await performActionOnTabs(ACTION_REMOVE_VISIBLE_TABS);
+					break;
+				case CXM_RESET_DEFAULT_TABS:
+					await performActionOnTabs(ACTION_RESET_DEFAULT);
+					break;
+				case WHAT_UPDATE_EXTENSION:
+					promptUpdateExtension(message);
+					break;
+				case WHAT_EXPORT:
+					launchDownload(message);
+					break;
+				default:
+					if (message.what != "theme") {
+						showToast(
+							[
+								"error_unknown_message",
+								message.what,
+							],
+							false,
+							true,
+						);
+					}
+					break;
+			}
+		} catch (error) {
+			showToast(error.message, false);
+		}
+	});
 }
 
 // listen to possible updates from other modules
-function listenToReorderedTabs(){
-  addEventListener("message", (e) => {
-    if (e.source != window) {
-      return;
-    }
-    const what = e.data.what;
-    if (what === "order") {
-      reorderTabs();
-    }
-  });
+function listenToReorderedTabs() {
+	addEventListener("message", (e) => {
+		if (e.source != window) {
+			return;
+		}
+		const what = e.data.what;
+		if (what === "order") {
+			reorderTabs();
+		}
+	});
 }
 
 // Simple Analytics - 100% privacy-first analytics - https://github.com/simpleanalytics
-async function checkInsertAnalytics(){
-  const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
-  if(prevent_analytics != null && prevent_analytics.enabled === true)
-    return;
-  const whereToAppend = (document.head || document.documentElement);
-  const cspMeta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
-  if (cspMeta) {
-    const currentCSP = cspMeta.getAttribute('content');
-    cspMeta.setAttribute('content', currentCSP + ' https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com');
-  } else {
-    const meta = document.createElement('meta');
-    meta.setAttribute('http-equiv', 'Content-Security-Policy');
-    meta.setAttribute('content', "default-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com;");
-    whereToAppend.appendChild(meta);
-  }
-  const img = document.createElement("img");
-  img.src = "https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F";
-  img.alt = "";
-  img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-  whereToAppend.appendChild(img);
+async function checkInsertAnalytics() {
+	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
+	if (prevent_analytics != null && prevent_analytics.enabled === true) {
+		return;
+	}
+	const whereToAppend = document.head || document.documentElement;
+	const cspMeta = document.querySelector(
+		'meta[http-equiv="Content-Security-Policy"]',
+	);
+	if (cspMeta) {
+		const currentCSP = cspMeta.getAttribute("content");
+		cspMeta.setAttribute(
+			"content",
+			currentCSP +
+				" https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com",
+		);
+	} else {
+		const meta = document.createElement("meta");
+		meta.setAttribute("http-equiv", "Content-Security-Policy");
+		meta.setAttribute(
+			"content",
+			"default-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com;",
+		);
+		whereToAppend.appendChild(meta);
+	}
+	const img = document.createElement("img");
+	img.src =
+		"https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F";
+	img.alt = "";
+	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+	whereToAppend.appendChild(img);
 }
 
 // launch all starting functions
-function main(){
-  getAllTabs_async();
-  checkAddLightningNavigation();
-  listenToBackgroundPage();
-  listenToReorderedTabs();
+function main() {
+	getAllTabs_async();
+	checkAddLightningNavigation();
+	listenToBackgroundPage();
+	listenToReorderedTabs();
 	delayLoadSetupTabs();
-  checkInsertAnalytics();
+	checkInsertAnalytics();
 }
 
 // queries the currently active tab of the current active window
 // this prevents showing the tabs when not in a setup page (like Sales or Service Console)
-if (href.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]) {
-  globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
-  main();
+if (
+	href.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
+) {
+	globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
+	main();
 }

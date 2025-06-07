@@ -1,28 +1,33 @@
 "use strict";
 import {
-  BROWSER,
-  NO_RELEASE_NOTES,
-  CMD_EXPORT_ALL,
-  CMD_IMPORT,
-  CMD_OPEN_OTHER_ORG,
-  CMD_OPEN_SETTINGS,
-  CMD_REMOVE_TAB,
-  CMD_SAVE_AS_TAB,
-  CMD_TOGGLE_ORG,
-  CMD_UPDATE_TAB,
-  GENERIC_TAB_STYLE_KEY,
-  LIGHTNING_FORCE_COM,
-  LOCALE_KEY,
-  MY_SALESFORCE_COM,
-  MY_SALESFORCE_SETUP_COM,
-  openSettingsPage,
-  ORG_TAB_STYLE_KEY,
-  SETTINGS_KEY,
-  SETUP_LIGHTNING_PATTERN,
-  SUPPORTED_SALESFORCE_URLS,
-  WHY_KEY,
+	BROWSER,
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_OTHER_ORG,
+	CMD_OPEN_SETTINGS,
+	CMD_REMOVE_TAB,
+	CMD_SAVE_AS_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
+	GENERIC_TAB_STYLE_KEY,
+	LIGHTNING_FORCE_COM,
+	LOCALE_KEY,
+	MY_SALESFORCE_COM,
+	MY_SALESFORCE_SETUP_COM,
+	NO_RELEASE_NOTES,
+	openSettingsPage,
+	ORG_TAB_STYLE_KEY,
+	SETTINGS_KEY,
+	SETUP_LIGHTNING_PATTERN,
+	SUPPORTED_SALESFORCE_URLS,
+	WHY_KEY,
 } from "/constants.js";
-import { bg_getCurrentBrowserTab, checkForUpdates, bg_notify, exportHandler } from "./utils.js";
+import {
+	bg_getCurrentBrowserTab,
+	bg_notify,
+	checkForUpdates,
+	exportHandler,
+} from "./utils.js";
 import { checkAddRemoveContextMenus } from "./context-menus.js";
 
 /**
@@ -247,96 +252,96 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  * @param {function} sendResponse - The function to send a response back.
  * @returns {boolean} Whether the message was handled asynchronously.
  */
-function listenToExtensionMessages(){
-  BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
-    if (request == null || request.what == null) {
-      console.error({ error: "error_invalid_request", request });
-      sendResponse(null);
-      return false;
-    }
-    switch (request.what) {
-      case "get":
-        bg_getStorage(sendResponse, request.key);
-        break;
-      case "set":
-        bg_setStorage(request.set, sendResponse, request.key);
-        break;
-      case "saved":
-      case "add":
-      case "theme":
-      case "error":
-      case "warning":
-        sendResponse(null);
-        setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
-        //return false; // we won"t call sendResponse
-        break;
-      case "export":
-        exportHandler(request.tabs);
-        sendResponse(null);
-        //return false;
-        break;
-      case "browser-tab":
-        bg_getCurrentBrowserTab(sendResponse);
-        break;
-      case "get-sf-language":
-        bg_getSalesforceLanguage(sendResponse);
-        break;
-      case "get-settings":
-        bg_getSettings(request.keys, undefined, sendResponse);
-        break;
-      case "get-style-settings":
-        bg_getSettings(undefined, request.key, sendResponse);
-        break;
-      case "get-commands":
-        bg_getCommandLinks(request.commands, sendResponse);
-        break;
-      default:
-        if (!["import"].includes(request.what)) {
-          console.error({ error: "error_unknown_request", request });
-        }
-        break;
-    }
-    return true;
-  });
+function listenToExtensionMessages() {
+	BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
+		if (request == null || request.what == null) {
+			console.error({ error: "error_invalid_request", request });
+			sendResponse(null);
+			return false;
+		}
+		switch (request.what) {
+			case "get":
+				bg_getStorage(sendResponse, request.key);
+				break;
+			case "set":
+				bg_setStorage(request.set, sendResponse, request.key);
+				break;
+			case "saved":
+			case "add":
+			case "theme":
+			case "error":
+			case "warning":
+				sendResponse(null);
+				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
+				//return false; // we won"t call sendResponse
+				break;
+			case "export":
+				exportHandler(request.tabs);
+				sendResponse(null);
+				//return false;
+				break;
+			case "browser-tab":
+				bg_getCurrentBrowserTab(sendResponse);
+				break;
+			case "get-sf-language":
+				bg_getSalesforceLanguage(sendResponse);
+				break;
+			case "get-settings":
+				bg_getSettings(request.keys, undefined, sendResponse);
+				break;
+			case "get-style-settings":
+				bg_getSettings(undefined, request.key, sendResponse);
+				break;
+			case "get-commands":
+				bg_getCommandLinks(request.commands, sendResponse);
+				break;
+			default:
+				if (!["import"].includes(request.what)) {
+					console.error({ error: "error_unknown_request", request });
+				}
+				break;
+		}
+		return true;
+	});
 }
 
-function listenToExtensionCommands(){
-  BROWSER.commands.onCommand.addListener(async (command) => {
-    // check the current page is Salesforce Setup
-    const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
-    if (
-      broswerTabUrl == null ||
-      !broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
-    ) {
-      // we're not in Salesforce Setup
-      return;
-    }
-    const message = { what: command };
-    switch (command) {
-      case CMD_IMPORT:
-        message.what = "add";
-        /* falls through */
-      case CMD_SAVE_AS_TAB:
-      case CMD_REMOVE_TAB:
-      case CMD_TOGGLE_ORG:
-      case CMD_UPDATE_TAB:
-      case CMD_OPEN_OTHER_ORG:
-        bg_notify(message);
-        break;
-      case CMD_OPEN_SETTINGS:
-        openSettingsPage();
-        break;
-      case CMD_EXPORT_ALL:
-        exportHandler();
-        break;
-      default:
-        bg_notify({
-          what: "warning",
-          message: `Received unknown command: ${command}`,
-        });
-        break;
-    }
-  });
+function listenToExtensionCommands() {
+	BROWSER.commands.onCommand.addListener(async (command) => {
+		// check the current page is Salesforce Setup
+		const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
+		if (
+			broswerTabUrl == null ||
+			!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+		) {
+			// we're not in Salesforce Setup
+			return;
+		}
+		const message = { what: command };
+		switch (command) {
+			case CMD_IMPORT:
+				message.what = "add";
+				/* falls through */
+			case CMD_SAVE_AS_TAB:
+			case CMD_REMOVE_TAB:
+			case CMD_TOGGLE_ORG:
+			case CMD_UPDATE_TAB:
+			case CMD_OPEN_OTHER_ORG:
+				bg_notify(message);
+				break;
+			case CMD_OPEN_SETTINGS:
+				openSettingsPage();
+				break;
+			case CMD_EXPORT_ALL:
+				exportHandler();
+				break;
+			default:
+				bg_notify({
+					what: "warning",
+					message: `Received unknown command: ${command}`,
+				});
+				break;
+		}
+	});
 }
 
 async function setDefalutOrgStyle() {
@@ -354,72 +359,75 @@ async function setDefalutOrgStyle() {
 	}
 }
 
-function setExtensionBrowserListeners(){
-  /**
-   * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
-   * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the
-   * specified delay has passed since the last invocation.
-   *
-   * @param {Function} fn - The function to debounce.
-   * @param {number} [delay=150] - The delay in milliseconds before the function is executed after the last invocation.
-   * @returns {Function} A debounced version of the provided function.
-   */
-  function debounce(fn, delay = 150) {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => fn(...args), delay);
-    };
-  }
-  // Debounced version for high-frequency events
-  const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
-  // when the browser starts
-  BROWSER.runtime.onStartup.addListener(() =>
-    checkAddRemoveContextMenus("startup")
-  );
-  // when the extension is installed / updated
-  BROWSER.runtime.onInstalled.addListener(async (details) => {
-    checkAddRemoveContextMenus("installed");
-    if (details.reason === "update") {
-      // the extension has been updated
-      // check user settings
-      const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
-      if (no_release_notes != null && no_release_notes.enabled === true) {
-        return;
-      }
-      // get the extension version
-      const manifest = BROWSER.runtime.getManifest();
-      const version = manifest.version;
-      // open github to show the release notes
-      const homepage = manifest.homepage_url;
-      // Validate homepage URL (must be GitHub)
-      if (!homepage || !homepage.includes("github.com")) {
-        console.error("no_manifest_github");
-        return;
-      }
-      BROWSER.tabs.create({
-        url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
-      });
-    }
-    /* TODO add tutorial on install
+function setExtensionBrowserListeners() {
+	/**
+	 * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
+	 * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the
+	 * specified delay has passed since the last invocation.
+	 *
+	 * @param {Function} fn - The function to debounce.
+	 * @param {number} [delay=150] - The delay in milliseconds before the function is executed after the last invocation.
+	 * @returns {Function} A debounced version of the provided function.
+	 */
+	function debounce(fn, delay = 150) {
+		let timeout;
+		return (...args) => {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => fn(...args), delay);
+		};
+	}
+	// Debounced version for high-frequency events
+	const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
+	// when the browser starts
+	BROWSER.runtime.onStartup.addListener(() =>
+		checkAddRemoveContextMenus("startup")
+	);
+	// when the extension is installed / updated
+	BROWSER.runtime.onInstalled.addListener(async (details) => {
+		checkAddRemoveContextMenus("installed");
+		if (details.reason === "update") {
+			// the extension has been updated
+			// check user settings
+			const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
+			if (no_release_notes != null && no_release_notes.enabled === true) {
+				return;
+			}
+			// get the extension version
+			const manifest = BROWSER.runtime.getManifest();
+			const version = manifest.version;
+			// open github to show the release notes
+			const homepage = manifest.homepage_url;
+			// Validate homepage URL (must be GitHub)
+			if (!homepage || !homepage.includes("github.com")) {
+				console.error("no_manifest_github");
+				return;
+			}
+			BROWSER.tabs.create({
+				url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
+			});
+		}
+		/* TODO add tutorial on install
       if (details.reason == "install") {
       }
       */
-  });
-  // when the extension is activated by the BROWSER
-  self.addEventListener("activate", () => checkAddRemoveContextMenus("activate"));
-  // when the tab changes
-  BROWSER.tabs.onActivated.addListener(() =>
-    debouncedCheckMenus("highlighted", checkForUpdates)
-  );
-  //BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
-  // when window changes
-  //BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
-  BROWSER.windows.onFocusChanged.addListener(() =>
-    checkAddRemoveContextMenus("focuschanged")
-  );
+	});
+	// when the extension is activated by the BROWSER
+	self.addEventListener(
+		"activate",
+		() => checkAddRemoveContextMenus("activate"),
+	);
+	// when the tab changes
+	BROWSER.tabs.onActivated.addListener(() =>
+		debouncedCheckMenus("highlighted", checkForUpdates)
+	);
+	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
+	// when window changes
+	//BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
+	BROWSER.windows.onFocusChanged.addListener(() =>
+		checkAddRemoveContextMenus("focuschanged")
+	);
 
-  /*
+	/*
   // TODO update uninstall url
   BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
       removeMenuItems()
@@ -427,12 +435,12 @@ function setExtensionBrowserListeners(){
   */
 }
 
-function main(){
-  setExtensionBrowserListeners();
-  setDefalutOrgStyle();
-  listenToExtensionMessages();
-  listenToExtensionCommands();
-  checkAddRemoveContextMenus();
+function main() {
+	setExtensionBrowserListeners();
+	setDefalutOrgStyle();
+	listenToExtensionMessages();
+	listenToExtensionCommands();
+	checkAddRemoveContextMenus();
 }
 
 main();

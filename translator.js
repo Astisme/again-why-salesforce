@@ -79,8 +79,9 @@ class TranslationService {
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
 		singleton.currentLanguage = await singleton.loadLanguageBackground();
-		if(await singleton.updatePageTranslations())
-      singleton.setListenerForLanguageChange();
+		if (await singleton.updatePageTranslations()) {
+			singleton.setListenerForLanguageChange();
+		}
 		return singleton;
 	}
 
@@ -190,12 +191,13 @@ class TranslationService {
 
 	/**
 	 * Update all translatable elements on the page
-   * @returns {boolean} whether the page translations have been setup or not
+	 * @returns {boolean} whether the page translations have been setup or not
 	 */
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
-    if(document == null)
-      return false;
+		if (document == null) {
+			return false;
+		}
 		const elements = document.querySelectorAll(
 			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
 		);

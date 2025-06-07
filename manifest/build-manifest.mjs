@@ -33,7 +33,7 @@ switch (browser) {
 		delete manifest.minimum_chrome_version;
 		delete manifest.browser_specific_settings.gecko;
 		delete manifest.background.type;
-    delete manifest.background.scripts;
+		delete manifest.background.scripts;
 		delete manifest.incognito;
 		const notAllowedPermissions = [
 			"downloads",

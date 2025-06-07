@@ -13,10 +13,9 @@ import {
 	CONTEXT_MENU_PATTERNS_REGEX,
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
+	CXM_EMPTY_VISIBLE_TABS,
 	CXM_EXPORT_TABS,
 	CXM_IMPORT_TABS,
-  CXM_EMPTY_VISIBLE_TABS,
-  CXM_RESET_DEFAULT_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -28,6 +27,7 @@ import {
 	CXM_REMOVE_OTHER_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_RESET_DEFAULT_TABS,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
@@ -37,11 +37,7 @@ import {
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import {
-	bg_getCurrentBrowserTab,
-	bg_notify,
-	exportHandler,
-} from "./utils.js";
+import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
@@ -376,20 +372,20 @@ let intervalCxm = null;
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 export async function checkAddRemoveContextMenus(what, callback = null) {
-  if(intervalCxm == null){
-    // Start periodic check
-    intervalCxm = setInterval(async () => {
-      if (!areMenuItemsVisible) {
-        await checkAddRemoveContextMenus();
-      }
-    }, 60000);
-  }
+	if (intervalCxm == null) {
+		// Start periodic check
+		intervalCxm = setInterval(async () => {
+			if (!areMenuItemsVisible) {
+				await checkAddRemoveContextMenus();
+			}
+		}, 60000);
+	}
 	try {
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 		if (browserTabUrl == null) {
 			return;
 		}
-    await removeMenuItems();
+		await removeMenuItems();
 		if (
 			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
 		) {
@@ -426,10 +422,10 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	switch (info.menuItemId) {
 		case CXM_EXPORT_TABS:
 			exportHandler();
-      return;
+			return;
 		case cxm_open_settings:
 			openSettingsPage();
-      return;
+			return;
 		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);
@@ -446,7 +442,10 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl ?? info.pageUrl);
-			message.url = Tab.expandURL(info.linkUrl ?? info.pageUrl, browserTabUrl);
+			message.url = Tab.expandURL(
+				info.linkUrl ?? info.pageUrl,
+				browserTabUrl,
+			);
 			message.label = info.linkText;
 			break;
 	}

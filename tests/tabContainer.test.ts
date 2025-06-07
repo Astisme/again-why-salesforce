@@ -218,44 +218,50 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 
 async function setupContainer() {
 	const container = await TabContainer.create();
-  container.length = 0;
+	container.length = 0;
 	await container.addTabs([
-			{ label: "Tab A", url: "url1", org: "test-org" },
-			{ label: "Tab B", url: "url2", org: "other-org" },
-			{ label: "Tab C", url: "url3", org: "new-org" },
-			{ label: "Tab D", url: "url4" },
-		]);
+		{ label: "Tab A", url: "url1", org: "test-org" },
+		{ label: "Tab B", url: "url2", org: "other-org" },
+		{ label: "Tab C", url: "url3", org: "new-org" },
+		{ label: "Tab D", url: "url4" },
+	]);
 	return container;
 }
 
 await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 	// resetTabs = true, removeOrgTabs = true, keepTabsNotThisOrg = 'test-org', removeThisOrgTabs = null
-	await t.step("clear all tabs without org and org tabs with org != keepTabsNotThisOrg", async () => {
-		const container = await setupContainer();
+	await t.step(
+		"clear all tabs without org and org tabs with org != keepTabsNotThisOrg",
+		async () => {
+			const container = await setupContainer();
 
-		await container.replaceTabs([], {
-			resetTabs: true,
-			removeOrgTabs: true,
-			keepTabsNotThisOrg: "test-org",
-		});
+			await container.replaceTabs([], {
+				resetTabs: true,
+				removeOrgTabs: true,
+				keepTabsNotThisOrg: "test-org",
+			});
 
-		assertEquals(container.length, 2);
-    assertFalse(container.some(t => t.org === "test-org"));
-	});
+			assertEquals(container.length, 2);
+			assertFalse(container.some((t) => t.org === "test-org"));
+		},
+	);
 
 	// resetTabs = true, removeOrgTabs = true, keepTabsNotThisOrg = null, removeThisOrgTabs = 'other-org'
-	await t.step("clears all tabs without org and org tabs with org == removeThisOrgTabs", async () => {
-		const container = await setupContainer();
+	await t.step(
+		"clears all tabs without org and org tabs with org == removeThisOrgTabs",
+		async () => {
+			const container = await setupContainer();
 
-		await container.replaceTabs([], {
-			resetTabs: true,
-			removeOrgTabs: true,
-			removeThisOrgTabs: "other-org",
-		});
+			await container.replaceTabs([], {
+				resetTabs: true,
+				removeOrgTabs: true,
+				removeThisOrgTabs: "other-org",
+			});
 
-		assertEquals(container.length, 2);
-		assertFalse(container.some(t => t.org === "other-org"));
-	});
+			assertEquals(container.length, 2);
+			assertFalse(container.some((t) => t.org === "other-org"));
+		},
+	);
 
 	// resetTabs = true, removeOrgTabs = true
 	await t.step("clears all tabs", async () => {
@@ -279,35 +285,41 @@ await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 		});
 
 		assertEquals(container.length, 3);
-		assert(container.every(t => t.org != null));
+		assert(container.every((t) => t.org != null));
 	});
 
 	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = 'test-org'
-	await t.step("keeps tabs without org and removes org tabs not matching keepTabsNotThisOrg", async () => {
-		const container = await setupContainer();
+	await t.step(
+		"keeps tabs without org and removes org tabs not matching keepTabsNotThisOrg",
+		async () => {
+			const container = await setupContainer();
 
-		await container.replaceTabs([], {
-			resetTabs: false,
-			removeOrgTabs: true,
-			keepTabsNotThisOrg: "test-org",
-		});
+			await container.replaceTabs([], {
+				resetTabs: false,
+				removeOrgTabs: true,
+				keepTabsNotThisOrg: "test-org",
+			});
 
-		assertEquals(container.length, 2);
-		assert(container.every(t => !t.org || t.org === "test-org"));
-	});
+			assertEquals(container.length, 2);
+			assert(container.every((t) => !t.org || t.org === "test-org"));
+		},
+	);
 
 	// resetTabs = false, removeOrgTabs = true, keepTabsNotThisOrg = null
-	await t.step("keeps tabs without org and removes all org tabs", async () => {
-		const container = await setupContainer();
+	await t.step(
+		"keeps tabs without org and removes all org tabs",
+		async () => {
+			const container = await setupContainer();
 
-		await container.replaceTabs([], {
-			resetTabs: false,
-			removeOrgTabs: true,
-		});
+			await container.replaceTabs([], {
+				resetTabs: false,
+				removeOrgTabs: true,
+			});
 
-		assertEquals(container.length, 1);
-		assert(!container[0].org);
-	});
+			assertEquals(container.length, 1);
+			assert(!container[0].org);
+		},
+	);
 
 	// resetTabs = false, removeOrgTabs = false, keepTabsNotThisOrg = anything
 	await t.step("adds tabs without removing any", async () => {

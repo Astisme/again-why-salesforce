@@ -9,12 +9,12 @@ import {
 	LINK_NEW_BROWSER,
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
-  PREVENT_ANALYTICS,
 	ORG_TAB_STYLE_KEY,
 	POPUP_LOGIN_NEW_TAB,
 	POPUP_OPEN_LOGIN,
 	POPUP_OPEN_SETUP,
 	POPUP_SETUP_NEW_TAB,
+	PREVENT_ANALYTICS,
 	sendExtensionMessage,
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
@@ -819,9 +819,9 @@ function setCurrentChoice(setting) {
 		case NO_UPDATE_NOTIFICATION:
 			no_update_notification_el.checked = setting.enabled;
 			break;
-    case PREVENT_ANALYTICS:
-      prevent_analytics_el.checked = setting.enabled;
-      break;
+		case PREVENT_ANALYTICS:
+			prevent_analytics_el.checked = setting.enabled;
+			break;
 		case USER_LANGUAGE:
 			user_language_select.value = setting.enabled;
 			break;
@@ -852,7 +852,7 @@ const allCheckboxes = [
 	tab_on_left_el,
 	no_release_notes_el,
 	no_update_notification_el,
-  prevent_analytics_el,
+	prevent_analytics_el,
 ];
 
 let generalSettingsListenersSet = false;
