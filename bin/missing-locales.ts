@@ -195,10 +195,10 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 		const group = groupedReport[groupId] as LocaleMissingKeys;
 		group.locales.push(result.locale);
 	}
-  // sort locales alphabetically
-  for(let i = 0; i < groupCounter; i++){
-    groupedReport[i].locales = groupedReport[i].locales.sort();
-  }
+	// sort locales alphabetically
+	for (let i = 0; i < groupCounter; i++) {
+		groupedReport[i].locales = groupedReport[i].locales.sort();
+	}
 	// Create the English missing keys report
 	const englishMissingKeys: EnglishMissingKeys = {};
 	allMissingKeys.forEach((key) => {
