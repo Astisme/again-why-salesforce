@@ -63,9 +63,17 @@
 		"message": "Continuați",
 		"description": "textContent pentru butoanele care permit executarea acțiunii curente"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Toate Tab-urile generice",
+		"description": "[meniul contextual]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Resetați la valorile implicite",
 		"description": "[meniu-contextual]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Toate Tab-urile vizibile",
+		"description": "[meniul contextual]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportați Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Acest Tab",
 		"description": "[meniu-contextual]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Resetează Tab-urile implicite",
+		"description": "[meniul contextual]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Eroare la eliminarea Tab.",
 		"description": "[eroare] Eroare generică utilizată la eliminarea unui Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Eroare la eliminarea tuturor Tab-urilor vizibile.",
+		"description": "[eroare] Eroare generală la eliminarea tuturor Tab-urilor vizibile"
+	},
 	"error_required_params": {
 		"message": "Parametrii necesari pentru funcție nu au fost transmiși",
 		"description": "[eroare] dezvoltatorul a încercat să apeleze o funcție fără parametrii necesari"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Eroare la resetarea Tab-urilor implicite.",
+		"description": "[eroare] Eroare generală la resetarea Tab-urilor la valorile implicite"
 	},
 	"error_sync_nothing": {
 		"message": "Nu se pot sincroniza Tabs nule!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "fișiere",
 		"description": "mai multe fișiere"
+	},
+	"flows": {
+		"message": "Fluxuri",
+		"description": "[tab implicit] Etichetă pentru Tab-ul implicit de fluxuri"
 	},
 	"general": {
 		"message": "General",
@@ -531,6 +555,10 @@
 		"message": "Deschide întotdeauna linkurile într-o filă nouă a browserului.",
 		"description": "[setare] când utilizatorul face clic pe un Tab favorit, să se deschidă într-o filă nouă"
 	},
+	"opt_no_release_notes": {
+		"message": "Nu afișa notele de lansare ale actualizării.",
+		"description": "[setare] permite utilizatorului să împiedice afișarea notelor de lansare după actualizarea extensiei"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Deschideți întotdeauna pagina $salesforce_login în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Deschideți întotdeauna pagina $salesforce_setup în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Împiedică utilizarea Simple Analytics (nu va fi contorizat la numărul de utilizatori).",
+		"description": "[setare] permite utilizatorului să oprească trimiterea de analize anonime"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Împiedică utilizarea navigării Lightning (încărcare mai rapidă în timpul utilizării).",

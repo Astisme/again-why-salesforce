@@ -63,9 +63,17 @@
 		"message": "Kontynuuj",
 		"description": "textContent dla przycisków umożliwiających wykonanie bieżącej akcji"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Wszystkie ogólne Tab",
+		"description": "[menu kontekstowe]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Resetuj do domyślnych",
 		"description": "[menu-kontekstowe]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Wszystkie widoczne Tab",
+		"description": "[menu kontekstowe]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksportuj Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ten Tab",
 		"description": "[menu-kontekstowe]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Przywróć domyślne Tab",
+		"description": "[menu kontekstowe]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Błąd podczas usuwania Tab.",
 		"description": "[błąd] Ogólny błąd używany podczas usuwania Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Błąd podczas usuwania wszystkich widocznych Tab.",
+		"description": "[błąd] Ogólny błąd podczas usuwania wszystkich widocznych Tab"
+	},
 	"error_required_params": {
 		"message": "Wymagane parametry funkcji nie zostały przekazane",
 		"description": "[błąd] deweloper próbował wywołać funkcję bez niezbędnych parametrów"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Błąd podczas przywracania domyślnych Tab.",
+		"description": "[błąd] Ogólny błąd podczas przywracania Tab do domyślnych ustawień"
 	},
 	"error_sync_nothing": {
 		"message": "Nie można zsynchronizować pustych Tabs!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "pliki",
 		"description": "wiele plików"
+	},
+	"flows": {
+		"message": "Przepływy",
+		"description": "[domyślna-tab] Etykieta dla domyślnej karty Przepływy"
 	},
 	"general": {
 		"message": "Ogólne",
@@ -531,6 +555,10 @@
 		"message": "Zawsze otwieraj linki w nowej karcie przeglądarki.",
 		"description": "[ustawienie] gdy użytkownik kliknie ulubioną kartę, otwórz ją w nowej karcie"
 	},
+	"opt_no_release_notes": {
+		"message": "Nie pokazuj informacji o wydaniu aktualizacji.",
+		"description": "[ustawienie] pozwala użytkownikowi uniemożliwić rozszerzeniu wyświetlanie informacji o wersji po aktualizacji"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Zawsze otwieraj stronę $salesforce_login w tej samej Tab po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Zawsze otwieraj stronę $salesforce_setup w tej samej Tab po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Zablokuj korzystanie z Simple Analytics (nie pojawi się w liczbie użytkowników).",
+		"description": "[ustawienie] pozwala użytkownikowi zablokować wysyłanie anonimowych danych analitycznych"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Zapobiegaj używaniu nawigacji Lightning (szybsze ładowanie podczas używania).",

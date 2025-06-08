@@ -63,9 +63,17 @@
 		"message": "Endelea",
 		"description": "textContent kwa vitufe vinavyoruhusu kitendo cha sasa kitekelezwe"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tab zote za kawaida",
+		"description": "[menyu ya muktadha]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Weka Upya kuwa Chaguomsingi",
 		"description": "[menu-ya-mukhtadha]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tab zote zinazoonekana",
+		"description": "[menyu ya muktadha]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Hamisha Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab Hii",
 		"description": "[menu-ya-mukhtadha]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Weka Tab chaguomsingi upya",
+		"description": "[menyu ya muktadha]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Hitilafu wakati wa kuondoa Tab.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Hitilafu ilipotokea kuondoa Tab zote zinazoonekana.",
+		"description": "[hitilafu] Hitilafu ya jumla wakati wa kuondoa Tab zote zinazoonekana"
+	},
 	"error_required_params": {
 		"message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
 		"description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Hitilafu ilipotokea kurejesha Tab kuwa za chaguomsingi.",
+		"description": "[hitilafu] Hitilafu ya jumla ilipotokea wakati wa kurejesha Tab kuwa za chaguomsingi"
 	},
 	"error_sync_nothing": {
 		"message": "Haiwezi kusawazisha Tabs batili (null)!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "faili",
 		"description": "faili nyingi"
+	},
+	"flows": {
+		"message": "Mitiririko",
+		"description": "[tab chaguomsingi] Lebo kwa Tab ya chaguomsingi ya Mitiririko"
 	},
 	"general": {
 		"message": "Jumla",
@@ -531,6 +555,10 @@
 		"message": "Kila mara fungua viungo katika kichupo kipya cha kivinjari.",
 		"description": "[mpangilio] wakati mtumiaji anabonyeza Tab ya kupenda, fungua katika kichupo kipya cha kivinjari"
 	},
+	"opt_no_release_notes": {
+		"message": "Usionyeshe maelezo ya masasisho.",
+		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kiendelezi kuonyesha maelezo ya masasisho baada ya kusasishwa"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Fungua ukurasa wa $salesforce_login kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Fungua ukurasa wa $salesforce_setup kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Zuia matumizi ya Simple Analytics (usiwe sehemu ya hesabu ya watumiaji).",
+		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kutuma takwimu za uchanganuzi zisizo na majina"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Zuia matumizi ya Usogezaji wa Lightning (upakiaji wa haraka zaidi unapotumiwa).",

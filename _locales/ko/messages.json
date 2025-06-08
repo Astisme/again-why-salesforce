@@ -63,9 +63,17 @@
 		"message": "계속",
 		"description": "현재 작업 실행을 허용하는 버튼의 textContent"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 모든 일반 Tab",
+		"description": "[컨텍스트 메뉴]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 기본값으로 재설정",
 		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 모든 보이는 Tab",
+		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabs 내보내기",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ 이 Tab",
 		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 기본 Tab 재설정",
+		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Tab 제거 중 오류가 발생했습니다.",
 		"description": "[오류] Tab 제거 시 사용되는 일반 오류"
 	},
+	"error_removing_visible_tabs": {
+		"message": "모든 보이는 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 모든 보이는 Tab 제거 시 사용되는 일반 오류"
+	},
 	"error_required_params": {
 		"message": "함수에 필요한 파라미터가 전달되지 않았습니다",
 		"description": "[오류] 개발자가 필요한 파라미터 없이 함수를 호출하려고 했습니다"
+	},
+	"error_resetting_default_tabs": {
+		"message": "기본 Tab 재설정 중 오류가 발생했습니다.",
+		"description": "[오류] Tab를 기본값으로 재설정할 때 사용되는 일반 오류"
 	},
 	"error_sync_nothing": {
 		"message": "null Tabs는 동기화할 수 없습니다!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "파일들",
 		"description": "여러 파일"
+	},
+	"flows": {
+		"message": "흐름",
+		"description": "[기본-탭] 기본 흐름 Tab의 라벨"
 	},
 	"general": {
 		"message": "일반",
@@ -531,6 +555,10 @@
 		"message": "링크를 항상 새 브라우저 탭에서 열기.",
 		"description": "[설정] 즐겨찾기 Tab을 클릭할 때 새 탭에서 열기"
 	},
+	"opt_no_release_notes": {
+		"message": "업데이트 릴리즈 노트 표시 안 함.",
+		"description": "[설정] 사용자가 업데이트 후 확장 프로그램이 릴리즈 노트를 표시하지 못하도록 함"
+	},
 	"opt_open_login_same_tab": {
 		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_login 페이지를 엽니다.",
 		"description": "[설정]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_setup 페이지를 엽니다.",
 		"description": "[설정]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics 사용 방지 (사용자 수 집계에 포함되지 않음).",
+		"description": "[설정] 사용자가 익명 분석 전송을 방지할 수 있음"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Lightning 탐색 사용을 방지합니다(사용 중일 때 로딩 속도 향상).",

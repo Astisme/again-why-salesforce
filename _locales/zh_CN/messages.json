@@ -63,8 +63,16 @@
 		"message": "继续",
 		"description": "允许当前操作执行的按钮的文本内容"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 所有通用Tab",
+		"description": "[上下文菜单]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 重置为默认值",
+		"description": "[上下文菜单]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 所有可见Tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_export_tabs": {
@@ -125,6 +133,10 @@
 	},
 	"cxm_remove_tab": {
 		"message": "1️⃣ 这个 Tab",
+		"description": "[上下文菜单]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 重置默认Tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_settings": {
@@ -323,9 +335,17 @@
 		"message": "移除 Tab 时出错。",
 		"description": "[错误] 移除 Tab 时使用的一般错误"
 	},
+	"error_removing_visible_tabs": {
+		"message": "删除所有可见Tab时出错。",
+		"description": "[错误] 删除所有可见Tab时的通用错误"
+	},
 	"error_required_params": {
 		"message": "函数所需的参数未传递",
 		"description": "[错误] 开发者尝试调用函数但未提供必要的参数"
+	},
+	"error_resetting_default_tabs": {
+		"message": "重置为默认Tab时出错。",
+		"description": "[错误] 将Tab重置为默认时的通用错误"
 	},
 	"error_sync_nothing": {
 		"message": "无法同步空的 Tabs！",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "文件",
 		"description": "多个文件"
+	},
+	"flows": {
+		"message": "流程",
+		"description": "[默认-tab] 默认流程Tab的标签"
 	},
 	"general": {
 		"message": "常规",
@@ -531,6 +555,10 @@
 		"message": "点击收藏的 Tab 时始终在新的浏览器标签中打开链接。",
 		"description": "[设置] 当用户点击收藏的 Tab 时，在新的浏览器标签中打开它"
 	},
+	"opt_no_release_notes": {
+		"message": "不显示更新发布说明。",
+		"description": "[设置] 允许用户阻止扩展更新后显示发布说明"
+	},
 	"opt_open_login_same_tab": {
 		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_login 页面。",
 		"description": "[设置]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_setup 页面。",
 		"description": "[设置]"
+	},
+	"opt_prevent_analytics": {
+		"message": "防止使用Simple Analytics（不会出现在用户统计中）。",
+		"description": "[设置] 允许用户阻止发送匿名分析数据"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "阻止使用Lightning导航（使用时加载更快）。",

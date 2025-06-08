@@ -63,9 +63,17 @@
 		"message": "Fortsæt",
 		"description": "tekstindhold for knapper, der muliggør den aktuelle handling"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle generiske Tab",
+		"description": "[kontekstmenu]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Nulstil til standard",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle synlige Tab",
+		"description": "[kontekstmenu]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksporter Tab",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Denne Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Nulstil standard-Tab",
+		"description": "[kontekstmenu]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Fejl ved fjernelse af Tab.",
 		"description": "[fejl] Generisk fejl ved fjernelse af en Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Fejl ved fjernelse af alle synlige Tab.",
+		"description": "[fejl] Generisk fejl ved fjernelse af alle synlige Tab"
+	},
 	"error_required_params": {
 		"message": "De krævede parametre til funktionen blev ikke overført",
 		"description": "[fejl] udvikleren forsøgte at kalde funktionen uden de nødvendige parametre"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Fejl ved nulstilling til standard-Tab.",
+		"description": "[fejl] Generisk fejl ved nulstilling af Tab til standard"
 	},
 	"error_sync_nothing": {
 		"message": "Kan ikke synkronisere tomme Tabs!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "filer",
 		"description": "flere filer"
+	},
+	"flows": {
+		"message": "Flows",
+		"description": "[standard-tab] Etiket til standard Flows-Tab"
 	},
 	"general": {
 		"message": "Generelt",
@@ -531,6 +555,10 @@
 		"message": "Åbn altid links i en ny browser-fane.",
 		"description": "[indstilling] når du klikker på en favorit-Tab, åbnes den i en ny browser-fane"
 	},
+	"opt_no_release_notes": {
+		"message": "Vis ikke opdateringsnoter.",
+		"description": "[indstilling] lader brugeren forhindre udvidelsen i at vise versionsnoter efter opdatering"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Åbn altid $salesforce_login-siden i samme Tab, når du klikker på pop op-vinduet.",
 		"description": "[indstilling]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Åbn altid $salesforce_setup-siden i samme Tab, når du klikker på pop op-vinduet.",
 		"description": "[indstilling]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Forhindr brug af Simple Analytics (bliver ikke talt med i brugerantal).",
+		"description": "[indstilling] lader brugeren forhindre afsendelse af anonym analyse"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Forhindr brug af Lightning-navigation (hurtigere indlæsning ved brug).",

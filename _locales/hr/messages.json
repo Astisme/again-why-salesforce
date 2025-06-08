@@ -63,9 +63,17 @@
 		"message": "Nastavi",
 		"description": "tekst za gumbe koji omogućuju izvršenje trenutne radnje"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Sve generičke Tabove",
+		"description": "[kontekstni izbornik]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Poništi na zadano",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Sve vidljive Tabove",
+		"description": "[kontekstni izbornik]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Izvezi Tab",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ovaj Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Resetiraj zadane Tabove",
+		"description": "[kontekstni izbornik]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Pogreška pri uklanjanju Tab-a.",
 		"description": "[error] Opća pogreška pri uklanjanju Tab-a"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Pogreška pri uklanjanju svih vidljivih Tabova.",
+		"description": "[pogreška] Opća pogreška pri uklanjanju svih vidljivih Tabova"
+	},
 	"error_required_params": {
 		"message": "Potrebni parametri za funkciju nisu proslijeđeni",
 		"description": "[pogreška] programer je pokušao pozvati funkciju bez potrebnih parametara"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Pogreška pri resetiranju zadanih Tabova.",
+		"description": "[pogreška] Opća pogreška pri resetiranju Tabova na zadane"
 	},
 	"error_sync_nothing": {
 		"message": "Ne mogu se sinkronizirati prazni Tabovi!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "datoteke",
 		"description": "više datoteka"
+	},
+	"flows": {
+		"message": "Tokovi",
+		"description": "[zadani-tab] Oznaka za zadani tab Tokovi"
 	},
 	"general": {
 		"message": "Općenito",
@@ -531,6 +555,10 @@
 		"message": "Uvijek otvori poveznice u novom pregledničkom tabu.",
 		"description": "[postavka] pri kliku na omiljeni Tab, otvori ga u novom pregledničkom tabu"
 	},
+	"opt_no_release_notes": {
+		"message": "Nemoj prikazivati bilješke o izdanju ažuriranja.",
+		"description": "[postavka] omogućuje korisniku da spriječi prikaz bilješki o izdanju nakon ažuriranja proširenja"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Uvijek otvori stranicu $salesforce_login u istom Tab kada kliknete na skočni prozor.",
 		"description": "[postavka]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Uvijek otvori stranicu $salesforce_setup u istom Tab kada kliknete na skočni prozor.",
 		"description": "[postavka]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Spriječi korištenje Simple Analytics (neće se prikazivati u broju korisnika).",
+		"description": "[postavka] omogućuje korisniku da spriječi slanje anonimnih analiza"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Spriječi upotrebu navigacije Lightning (brže učitavanje tijekom upotrebe).",

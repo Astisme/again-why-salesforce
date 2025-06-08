@@ -63,9 +63,17 @@
 		"message": "Doorgaan",
 		"description": "textContent voor knoppen die toestaan dat de huidige actie wordt uitgevoerd"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle algemene Tab",
+		"description": "[contextmenu]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Herstellen naar standaard",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle zichtbare Tab",
+		"description": "[contextmenu]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabs exporteren",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Deze Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Standaard Tabs resetten",
+		"description": "[contextmenu]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Fout bij het verwijderen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het verwijderen van een Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Fout bij het verwijderen van alle zichtbare Tab.",
+		"description": "[fout] Algemene fout bij het verwijderen van alle zichtbare Tab"
+	},
 	"error_required_params": {
 		"message": "De vereiste parameters voor de functie zijn niet doorgegeven",
 		"description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen zonder de benodigde parameters"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Fout bij het terugzetten van de standaard Tabs.",
+		"description": "[fout] Algemene fout bij het terugzetten van de Tabs naar standaard"
 	},
 	"error_sync_nothing": {
 		"message": "Kan null Tabs niet synchroniseren!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "bestanden",
 		"description": "meerdere bestanden"
+	},
+	"flows": {
+		"message": "Stromen",
+		"description": "[standaard-tab] Label voor de standaard Stromen Tab"
 	},
 	"general": {
 		"message": "Algemeen",
@@ -531,6 +555,10 @@
 		"message": "Altijd links openen in een nieuw browsertabblad.",
 		"description": "[instelling] als de gebruiker op een favoriet Tab klikt, openen in een nieuw browsertabblad"
 	},
+	"opt_no_release_notes": {
+		"message": "Release-opmerkingen bij updates niet tonen.",
+		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat de extensie release-opmerkingen toont na een update"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Open de $salesforce_login-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Open de $salesforce_setup-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Gebruik van Simple Analytics voorkomen (niet zichtbaar in gebruikersstatistieken).",
+		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat anonieme analyses worden verzonden"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Gebruik van Lightning-navigatie voorkomen (snellere laadtijd bij gebruik).",

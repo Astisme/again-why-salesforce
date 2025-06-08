@@ -63,9 +63,17 @@
 		"message": "Continuar",
 		"description": "Texto para botones que permiten que se ejecute la acción actual"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Todas las Tabs genéricas",
+		"description": "[menú contextual]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Restablecer a predeterminado",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Todas las Tabs visibles",
+		"description": "[menú contextual]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportar Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Este Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Restablecer Tabs predeterminadas",
+		"description": "[menú contextual]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Error al eliminar Tab.",
 		"description": "[error] error genérico al eliminar una Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Error al eliminar todas las Tabs visibles.",
+		"description": "[error] Error genérico utilizado al eliminar todas las Tabs visibles"
+	},
 	"error_required_params": {
 		"message": "No se pasaron los parámetros necesarios para la función",
 		"description": "[error] el desarrollador intentó invocar la función sin los parámetros necesarios"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Error al restablecer las Tabs a las predeterminadas.",
+		"description": "[error] Error genérico utilizado al restablecer las Tabs a sus valores predeterminados"
 	},
 	"error_sync_nothing": {
 		"message": "¡No se pueden sincronizar Tabs nulos!",
@@ -421,6 +441,10 @@
 	"files": {
 		"message": "archivos",
 		"description": "Varios archivos"
+	},
+	"flows": {
+		"message": "Flujos",
+		"description": "[pestaña predeterminada] Etiqueta para la pestaña Flujos predeterminada"
 	},
 	"general": {
 		"message": "General",
@@ -530,6 +554,10 @@
 		"message": "Abrir siempre enlaces en una nueva pestaña del navegador.",
 		"description": "[configuración] cuando el usuario hace clic en un Tab favorito, abrirlo en una nueva pestaña del navegador"
 	},
+	"opt_no_release_notes": {
+		"message": "No mostrar notas de la versión de la actualización.",
+		"description": "[configuración] permite al usuario evitar que la extensión muestre notas de la versión después de actualizarse"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Abrir siempre la página de $salesforce_login en la misma Tab al hacer clic en la ventana emergente.",
 		"description": "[configuración]"
@@ -537,6 +565,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Abrir siempre la página de $salesforce_setup en la misma Tab al hacer clic en la ventana emergente.",
 		"description": "[configuración]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Evitar el uso de Simple Analytics (no aparecerá en el conteo de usuarios).",
+		"description": "[configuración] permite al usuario evitar enviar análisis anónimos"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Evitar el uso de Lightning Navigation (carga más rápida cuando está en uso).",

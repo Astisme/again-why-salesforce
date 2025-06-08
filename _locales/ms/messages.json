@@ -63,9 +63,17 @@
 		"message": "Teruskan",
 		"description": "textContent untuk butang yang membenarkan tindakan semasa dilaksanakan"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Semua Tab umum",
+		"description": "[menu konteks]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Tetapkan Semula kepada Lalai",
 		"description": "[menu-konteks]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Semua Tab kelihatan",
+		"description": "[menu konteks]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksport Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab Ini",
 		"description": "[menu-konteks]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Tetapkan semula Tab lalai",
+		"description": "[menu konteks]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Ralat semasa mengalih keluar Tab.",
 		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Ralat semasa mengalih keluar semua Tab kelihatan.",
+		"description": "[ralat] Ralat umum semasa mengalih keluar semua Tab kelihatan"
+	},
 	"error_required_params": {
 		"message": "Parameter yang diperlukan untuk fungsi tidak dihantar",
 		"description": "[ralat] pembangun cuba memanggil fungsi tanpa parameter yang diperlukan"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Ralat semasa menetapkan semula Tab lalai.",
+		"description": "[ralat] Ralat umum semasa menetapkan semula Tab kepada lalai"
 	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyegerakkan Tab nol (null)!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "fail",
 		"description": "berbilang fail"
+	},
+	"flows": {
+		"message": "Aliran",
+		"description": "[tab lalai] Label untuk Tab Aliran lalai"
 	},
 	"general": {
 		"message": "Umum",
@@ -531,6 +555,10 @@
 		"message": "Sentiasa buka pautan dalam tab pelayar baharu.",
 		"description": "[tetapan] apabila pengguna mengklik Tab kegemaran, buka dalam tab pelayar baharu"
 	},
+	"opt_no_release_notes": {
+		"message": "Jangan tunjukkan nota keluaran kemas kini.",
+		"description": "[tetapan] benarkan pengguna menghalang sambungan daripada memaparkan nota keluaran selepas dikemas kini"
+	},
 	"opt_open_login_same_tab": {
 		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_login पृष्ठ त्याच Tab मध्ये उघडा.",
 		"description": "[सेटिंग]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_setup पृष्ठ त्याच Tab मध्ये उघडा.",
 		"description": "[सेटिंग]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Halang penggunaan Simple Analytics (tidak termasuk dalam kiraan pengguna).",
+		"description": "[tetapan] benarkan pengguna menghalang penghantaran analitik tanpa nama"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat apabila digunakan).",

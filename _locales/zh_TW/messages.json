@@ -63,9 +63,17 @@
 		"message": "繼續",
 		"description": "用於允許當前操作執行的按鈕的文字內容"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 所有通用Tab",
+		"description": "[右鍵選單]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 重設為預設",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 所有可見Tab",
+		"description": "[右鍵選單]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ 匯出 Tab",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 重設預設Tab",
+		"description": "[右鍵選單]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "移除 Tab 時發生錯誤。",
 		"description": "[錯誤] 移除 Tab 時使用的一般錯誤"
 	},
+	"error_removing_visible_tabs": {
+		"message": "移除所有可見Tab時發生錯誤。",
+		"description": "[錯誤] 移除所有可見Tab時的通用錯誤"
+	},
 	"error_required_params": {
 		"message": "未傳遞函數所需的參數",
 		"description": "[錯誤] 開發人員嘗試呼叫函數但未提供必要的參數"
+	},
+	"error_resetting_default_tabs": {
+		"message": "重設為預設Tab時發生錯誤。",
+		"description": "[錯誤] 將Tab重設為預設時的通用錯誤"
 	},
 	"error_sync_nothing": {
 		"message": "無法同步空的 Tab！",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "files",
 		"description": "multiple files"
+	},
+	"flows": {
+		"message": "流程",
+		"description": "[預設-tab] 預設流程Tab的標籤"
 	},
 	"general": {
 		"message": "一般",
@@ -531,6 +555,10 @@
 		"message": "始終在新瀏覽器標籤中打開鏈接。",
 		"description": "[設定] 當用戶點擊收藏的 Tab 時，在新標籤中打開"
 	},
+	"opt_no_release_notes": {
+		"message": "不顯示更新的發行說明。",
+		"description": "[設定] 允許使用者阻止擴充功能在更新後顯示發行說明"
+	},
 	"opt_open_login_same_tab": {
 		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_login 頁面。",
 		"description": "[設定]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_setup 頁面。",
 		"description": "[設定]"
+	},
+	"opt_prevent_analytics": {
+		"message": "防止使用Simple Analytics（不會計入使用者統計）。",
+		"description": "[設定] 允許使用者阻止傳送匿名分析資料"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "防止使用 Lightning 導覽 (使用時載入速度更快)。",

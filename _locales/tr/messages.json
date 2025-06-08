@@ -63,9 +63,17 @@
 		"message": "Devam",
 		"description": "mevcut eylemin yürütülmesine izin veren düğmeler için textContent"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tüm genel Tab'lar",
+		"description": "[bağlam menüsü]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Varsayılana Sıfırla",
 		"description": "[bağlam-menüsü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tüm görünür Tab'lar",
+		"description": "[bağlam menüsü]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabs Dışa Aktar",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Bu Tab",
 		"description": "[bağlam-menüsü]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Varsayılan Tab'ları Sıfırla",
+		"description": "[bağlam menüsü]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Tab kaldırılırken hata.",
 		"description": "[hata] Tab kaldırılırken kullanılan genel hata"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Tüm görünür Tab'lar kaldırılırken hata oluştu.",
+		"description": "[hata] Tüm görünür Tab'lar kaldırılırken kullanılan genel hata"
+	},
 	"error_required_params": {
 		"message": "Fonksiyon için gerekli parametreler geçilmedi",
 		"description": "[hata] geliştirici gerekli parametreler olmadan bir fonksiyon çağırmaya çalıştı"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Tab'lar varsayılanlara sıfırlanırken hata oluştu.",
+		"description": "[hata] Tab'ları varsayılanlarına sıfırlarken kullanılan genel hata"
 	},
 	"error_sync_nothing": {
 		"message": "Boş Tabs senkronize edilemez!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "dosyalar",
 		"description": "birden çok dosya"
+	},
+	"flows": {
+		"message": "Akışlar",
+		"description": "[varsayılan-tab] Varsayılan Akışlar Tab'ı için etiket"
 	},
 	"general": {
 		"message": "Genel",
@@ -531,6 +555,10 @@
 		"message": "Bağlantıları her zaman yeni bir tarayıcı sekmesinde aç.",
 		"description": "[ayar] kullanıcı favori Sekmeye tıkladığında yeni sekmede aç"
 	},
+	"opt_no_release_notes": {
+		"message": "Güncelleme sürüm notlarını gösterme.",
+		"description": "[ayar] kullanıcının eklentinin güncelleme sonrası sürüm notlarını göstermesini engellemesini sağlar"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Açılır pencereye tıklandığında $salesforce_login sayfasını her zaman aynı Tab sekmesinde aç.",
 		"description": "[ayar]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Açılır pencereye tıklandığında $salesforce_setup sayfasını her zaman aynı Tab sekmesinde aç.",
 		"description": "[ayar]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics kullanımını engelle (kullanıcı sayımlarında görünmez).",
+		"description": "[ayar] kullanıcının anonim analiz göndermesini engellemesini sağlar"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Lightning Navigasyon kullanımını engelleyin (kullanımdayken daha hızlı yükleme).",

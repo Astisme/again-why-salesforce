@@ -63,9 +63,17 @@
 		"message": "Jatka",
 		"description": "tekstisisältö painikkeille, jotka sallivat nykyisen toiminnon suorittamisen"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Kaikki yleiset Tab",
+		"description": "[kontekstivalikko]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Nollaa oletus",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Kaikki näkyvät Tab",
+		"description": "[kontekstivalikko]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Vie Tab",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tämä Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Palauta oletus Tabit",
+		"description": "[kontekstivalikko]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Virhe Tabin poistamisessa.",
 		"description": "[error] Yleinen virhe Tabin poistamisessa"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Virhe kaikkia näkyviä Tab-poistoja suoritettaessa.",
+		"description": "[virhe] Yleinen virhe kaikkia näkyviä Tab-poistoja suoritettaessa"
+	},
 	"error_required_params": {
 		"message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
 		"description": "[virhe] kehittäjä yritti kutsua toimintoa ilman tarvittavia parametreja"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Virhe oletus Tabien palautuksessa.",
+		"description": "[virhe] Yleinen virhe Tabien palautuksessa oletusarvoon"
 	},
 	"error_sync_nothing": {
 		"message": "Tyhjiä Tabeja ei voida synkronoida!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "tiedostot",
 		"description": "useita tiedostoja"
+	},
+	"flows": {
+		"message": "Virtaukset",
+		"description": "[oletus-tab] Oletusvirtaus Tabin tunniste"
 	},
 	"general": {
 		"message": "Yleiset",
@@ -531,6 +555,10 @@
 		"message": "Avaa linkit aina uudessa selainvälilehdessä.",
 		"description": "[asetus] kun klikkaat suosikkitabiä, avaa se uudessa selainvälilehdessä"
 	},
+	"opt_no_release_notes": {
+		"message": "Älä näytä päivitysten julkaisutietoja.",
+		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää laajennusta näyttämästä julkaisutietoja päivityksen jälkeen"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Avaa $salesforce_login-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Avaa $salesforce_setup-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Estä Simple Analyticsin käyttö (ei näy käyttäjämäärissä).",
+		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää anonyymien analytiikkojen lähettämisen"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Estä Lightning-navigoinnin käyttö (nopeampi lataus käytössä).",

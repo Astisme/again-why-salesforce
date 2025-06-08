@@ -63,9 +63,17 @@
 		"message": "Nadaljuj",
 		"description": "textContent za gumbe, ki omogočajo izvedbo trenutnega dejanja"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Vse splošne Tab",
+		"description": "[meni z desnim klikom]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Ponastavi na privzeto",
 		"description": "[kontekstni_meni]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Vse vidne Tab",
+		"description": "[meni z desnim klikom]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Izvozi Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ta Tab",
 		"description": "[kontekstni_meni]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Ponastavi privzete Tab",
+		"description": "[meni z desnim klikom]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Napaka pri odstranjevanju Tab.",
 		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Napaka pri odstranjevanju vseh vidnih Tab.",
+		"description": "[napaka] Splošna napaka pri odstranjevanju vseh vidnih Tab"
+	},
 	"error_required_params": {
 		"message": "Zahtevani parametri za funkcijo niso bili posredovani",
 		"description": "[napaka] razvijalec je poskusil poklicati funkcijo brez potrebnih parametrov"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Napaka pri ponastavljanju na privzete Tab.",
+		"description": "[napaka] Splošna napaka pri ponastavitvi Tab na privzete"
 	},
 	"error_sync_nothing": {
 		"message": "Ni mogoče sinhronizirati ničelnih (null) Tabs!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "datoteke",
 		"description": "več datotek"
+	},
+	"flows": {
+		"message": "Tokovi",
+		"description": "[privzeti-tab] Oznaka za privzeti Tab z Tokovi"
 	},
 	"general": {
 		"message": "Splošno",
@@ -531,6 +555,10 @@
 		"message": "Vedno odpri povezave v novem zavihku brskalnika.",
 		"description": "[nastavitev] ko uporabnik klikne na priljubljen zavihek, odpri v novem zavihku brskalnika"
 	},
+	"opt_no_release_notes": {
+		"message": "Ne prikaži opomb ob izdaji posodobitev.",
+		"description": "[nastavitev] uporabniku omogoči, da prepreči prikaz opomb ob posodobitvah razširitve"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Vedno odprite stran $salesforce_login v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Vedno odprite stran $salesforce_setup v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Prepreči uporabo Simple Analytics (ne boš vključen v štetje uporabnikov).",
+		"description": "[nastavitev] uporabniku omogoči preprečitev pošiljanja anonimne analitike"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Prepreči uporabo navigacije Lightning (hitrejše nalaganje med uporabo).",

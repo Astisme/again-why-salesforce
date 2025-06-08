@@ -63,9 +63,17 @@
 		"message": "Continuar",
 		"description": "text per als botons que permeten executar l'acció actual"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Totes les Tab genèriques",
+		"description": "[menú contextual]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Restablir per defecte",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Totes les Tab visibles",
+		"description": "[menú contextual]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportar Tab",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Aquest Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Restableix les Tab per defecte",
+		"description": "[menú contextual]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Error en eliminar Tab.",
 		"description": "[error] Error genèric en eliminar una Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "S'ha produït un error en eliminar totes les Tab visibles.",
+		"description": "[error] Error genèric en eliminar totes les Tab visibles"
+	},
 	"error_required_params": {
 		"message": "No s'han passat els paràmetres requerits per a la funció",
 		"description": "[error] el desenvolupador ha intentat cridar la funció sense els paràmetres necessaris"
+	},
+	"error_resetting_default_tabs": {
+		"message": "S'ha produït un error en restablir les Tab per defecte.",
+		"description": "[error] Error genèric en restablir les Tab als valors per defecte"
 	},
 	"error_sync_nothing": {
 		"message": "No es poden sincronitzar Tabs buits!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "fitxers",
 		"description": "diversos fitxers"
+	},
+	"flows": {
+		"message": "Fluxos",
+		"description": "[tab per defecte] Etiqueta per a la Tab de Fluxos per defecte"
 	},
 	"general": {
 		"message": "General",
@@ -531,6 +555,10 @@
 		"message": "Obre sempre els enllaços en una nova pestanya del navegador.",
 		"description": "[configuració] en fer clic a una Tab preferida, obre-la en una nova pestanya del navegador"
 	},
+	"opt_no_release_notes": {
+		"message": "No mostrar les notes de llançament de l'actualització.",
+		"description": "[configuració] permet a l’usuari evitar que l’extensió mostri les notes de llançament després d’actualitzar-se"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Obre sempre la pàgina $salesforce_login a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Obre sempre la pàgina $salesforce_setup a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Evitar l’ús de Simple Analytics (no es comptarà en el recompte d’usuaris).",
+		"description": "[configuració] permet a l’usuari evitar l'enviament d'analítiques anònimes"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Impedeix l'ús de la navegació Lightning (càrrega més ràpida quan s'utilitza).",

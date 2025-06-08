@@ -63,8 +63,16 @@
 		"message": "Jätka",
 		"description": "nuppude textContent, mis lubavad praeguse toimingu täita"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Kõik üldised Tabid",
+		"description": "[kontekstimenüü]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Lähtesta vaikeväärtustele",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Kõik nähtavad Tabid",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_export_tabs": {
@@ -125,6 +133,10 @@
 	},
 	"cxm_remove_tab": {
 		"message": "1️⃣ See Tab",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Lähtesta vaikimisi Tabid",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_settings": {
@@ -323,9 +335,17 @@
 		"message": "Viga Tabsi eemaldamisel.",
 		"description": "[error] Üldine viga Tabsi eemaldamisel"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Viga kõigi nähtavate Tabide eemaldamisel.",
+		"description": "[viga] Üldine viga, mida kasutatakse kõigi nähtavate Tabide eemaldamisel"
+	},
 	"error_required_params": {
 		"message": "Funktsioonile vajalikke parameetreid ei edastatud",
 		"description": "[viga] arendaja proovis funktsiooni kutsuda ilma vajalike parameetriteta"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Viga Tabide lähtestamisel vaikeseadetele.",
+		"description": "[viga] Üldine viga, mida kasutatakse Tabide lähtestamisel vaikeseadetele"
 	},
 	"error_sync_nothing": {
 		"message": "Null (null) Tabs ei saa sünkroonida!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "failid",
 		"description": "mitu faili"
+	},
+	"flows": {
+		"message": "Voogud",
+		"description": "[vaikimisi-tab] Silt vaikimisi Voogude Tabile"
 	},
 	"general": {
 		"message": "Üldine",
@@ -531,6 +555,10 @@
 		"message": "Ava lingid alati uues brauseri vahekaardis.",
 		"description": "[seade] kui klõpsate lemmikul Tabil, avage see uues brauseri vahekaardis"
 	},
+	"opt_no_release_notes": {
+		"message": "Ära näita uuenduste väljalaseteateid.",
+		"description": "[seade] võimaldab kasutajal takistada laiendusel uuenduste väljalaseteateid kuvamast"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Ava alati $salesforce_login leht samas Tab, kui klõpsate hüpikaknal.",
 		"description": "[seadistus]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Ava alati $salesforce_setup leht samas Tab, kui klõpsate hüpikaknal.",
 		"description": "[seadistus]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Takista Simple Analytics kasutamist (ei kuvata kasutajate arvus).",
+		"description": "[seade] võimaldab kasutajal takistada anonüümsete analüütikate saatmist"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Takista Lightningu navigeerimise kasutamist (kasutamisel kiirem laadimine).",

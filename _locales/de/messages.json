@@ -63,9 +63,17 @@
 		"message": "Fortfahren",
 		"description": "Text für Schaltflächen, die die aktuelle Aktion erlauben"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle generischen Tabs",
+		"description": "[Kontextmenü]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Auf Standard zurücksetzen",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle sichtbaren Tabs",
+		"description": "[Kontextmenü]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabs exportieren",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Diesen Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Standard-Tabs zurücksetzen",
+		"description": "[Kontextmenü]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Fehler beim Entfernen des Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Entfernen eines Tabs"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Fehler beim Entfernen aller sichtbaren Tabs.",
+		"description": "[Fehler] Allgemeiner Fehler beim Entfernen aller sichtbaren Tabs"
+	},
 	"error_required_params": {
 		"message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
 		"description": "[Fehler] Der Entwickler hat versucht, die Funktion ohne die notwendigen Parameter aufzurufen"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Fehler beim Zurücksetzen der Standard-Tabs.",
+		"description": "[Fehler] Allgemeiner Fehler beim Zurücksetzen der Tabs auf den Standard"
 	},
 	"error_sync_nothing": {
 		"message": "Leere Tabs können nicht synchronisiert werden!",
@@ -421,6 +441,10 @@
 	"files": {
 		"message": "Dateien",
 		"description": "Mehrere Dateien"
+	},
+	"flows": {
+		"message": "Flows",
+		"description": "[Standard-Tab] Bezeichnung für den Standard-Flows-Tab"
 	},
 	"general": {
 		"message": "Allgemein",
@@ -530,6 +554,10 @@
 		"message": "Links immer in einem neuen Browser-Tab öffnen.",
 		"description": "[Einstellung] wenn der Benutzer auf einen Favoriten klickt, in neuem Tab öffnen"
 	},
+	"opt_no_release_notes": {
+		"message": "Update-Release-Notes nicht anzeigen.",
+		"description": "[Einstellung] Ermöglicht dem Benutzer, zu verhindern, dass die Erweiterung Release-Notes nach einem Update anzeigt"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Öffnen Sie die $salesforce_login-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
 		"description": "[Einstellung]"
@@ -537,6 +565,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Öffnen Sie die $salesforce_setup-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
 		"description": "[Einstellung]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Verwendung von Simple Analytics verhindern (erscheint nicht in der Nutzeranzahl).",
+		"description": "[Einstellung] Ermöglicht dem Benutzer, das Senden anonymer Analysen zu verhindern"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Verwendung von Lightning Navigation verhindern (schnellere Ladezeit bei Nutzung).",

@@ -63,9 +63,17 @@
 		"message": "Tęsti",
 		"description": "mygtukų, leidžiančių vykdyti dabartinį veiksmą, textContent"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Visos bendros Tab",
+		"description": "[konteksto meniu]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Atstatyti į numatytuosius",
 		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Visos matomos Tab",
+		"description": "[konteksto meniu]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksportuoti Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Šis Tab",
 		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Atstatyti numatytąsias Tabs",
+		"description": "[konteksto meniu]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Klaida šalinant Tab.",
 		"description": "[klaida] Bendra klaida naudojama šalinant Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Klaida pašalinant visas matomas Tabs.",
+		"description": "[klaida] Bendro pobūdžio klaida pašalinant visas matomas Tabs"
+	},
 	"error_required_params": {
 		"message": "Būtini funkcijos parametrai nebuvo perduoti",
 		"description": "[klaida] kūrėjas bandė iškviesti funkciją be reikiamų parametrų"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Klaida atstatant Tabs į numatytąsias reikšmes.",
+		"description": "[klaida] Bendro pobūdžio klaida atstatant Tabs į numatytąsias reikšmes"
 	},
 	"error_sync_nothing": {
 		"message": "Negalima sinchronizuoti null Tabs!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "failai",
 		"description": "keli failai"
+	},
+	"flows": {
+		"message": "Srautai",
+		"description": "[numatytoji Tab] Etiketė numatytajai Srautų Tab"
 	},
 	"general": {
 		"message": "Bendri",
@@ -531,6 +555,10 @@
 		"message": "Visada atidaryti nuorodas naujame naršyklės skirtuke.",
 		"description": "[nustatymas] kai vartotojas spusteli mėgstamą Tab, atidaryti naujame naršyklės skirtuke"
 	},
+	"opt_no_release_notes": {
+		"message": "Nerodyti naujinimo išleidimo pastabų.",
+		"description": "[nustatymas] leidžia vartotojui neleisti plėtiniui rodyti išleidimo pastabų po atnaujinimo"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_login puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_setup puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Užkirsti kelią Simple Analytics naudojimui (nerodoma naudotojų skaičiuje).",
+		"description": "[nustatymas] leidžia vartotojui užkirsti kelią anoniminiams analizės duomenų siuntimui"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Neleisti naudoti „Lightning“ naršymo (naudojant greitesnis įkėlimas).",

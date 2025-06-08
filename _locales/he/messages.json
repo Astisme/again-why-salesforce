@@ -63,9 +63,17 @@
 		"message": "המשך",
 		"description": "תוכן טקסט עבור כפתורים שמאפשרים את ביצוע הפעולה הנוכחית"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 כל ה-Tab הכלליים",
+		"description": "[תפריט הקשר]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 אפס לברירת מחדל",
 		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 כל ה-Tab הגלויים",
+		"description": "[תפריט הקשר]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ ייצוא Tab",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab זה",
 		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 אפס את ברירת המחדל של ה-Tab",
+		"description": "[תפריט הקשר]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "שגיאה בהסרת Tab.",
 		"description": "[error] שגיאה כללית בהסרת Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "שגיאה בעת הסרת כל ה-Tab הגלויים.",
+		"description": "[שגיאה] שגיאה כללית בעת הסרת כל ה-Tab הגלויים"
+	},
 	"error_required_params": {
 		"message": "הפרמטרים הנדרשים לפונקציה לא הועברו",
 		"description": "[שגיאה] המפתח ניסה לקרוא לפונקציה ללא הפרמטרים הדרושים"
+	},
+	"error_resetting_default_tabs": {
+		"message": "שגיאה בעת איפוס ל-Tab ברירת מחדל.",
+		"description": "[שגיאה] שגיאה כללית בעת איפוס ה-Tab לברירת המחדל שלהם"
 	},
 	"error_sync_nothing": {
 		"message": "לא ניתן לסנכרן Tab ריקים!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "קבצים",
 		"description": "קבצים מרובים"
+	},
+	"flows": {
+		"message": "זרימות",
+		"description": "[Tab ברירת מחדל] תווית עבור Tab זרימות ברירת מחדל"
 	},
 	"general": {
 		"message": "כללי",
@@ -531,6 +555,10 @@
 		"message": "פתח קישורים תמיד בכרטיסייה חדשה בדפדפן.",
 		"description": "[הגדרה] בעת לחיצה על Tab מועדף, פתח אותו בכרטיסייה חדשה בדפדפן"
 	},
+	"opt_no_release_notes": {
+		"message": "אל תציג הערות גרסה לאחר עדכון.",
+		"description": "[הגדרה] מאפשר למשתמש למנוע מהתוסף להציג הערות גרסה לאחר עדכון"
+	},
 	"opt_open_login_same_tab": {
 		"message": "פתח תמיד את דף $salesforce_login באותו Tab בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "פתח תמיד את דף $salesforce_setup באותו Tab בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה]"
+	},
+	"opt_prevent_analytics": {
+		"message": "מנע שימוש ב-Simple Analytics (לא ייכלל בספירת המשתמשים).",
+		"description": "[הגדרה] מאפשר למשתמש למנוע שליחת נתוני אנליטיקה אנונימיים"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "מנע שימוש בניווט Lightning (טעינה מהירה יותר בעת שימוש).",

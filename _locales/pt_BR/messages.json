@@ -63,9 +63,17 @@
 		"message": "Continuar",
 		"description": "textContent para botões que permitem a execução da ação atual"
 	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Todas as Tabs genéricas",
+		"description": "[menu de contexto]"
+	},
 	"cxm_empty_tabs": {
 		"message": "😨 Redefinir para Padrão",
 		"description": "[menu-de-contexto]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Todas as Tabs visíveis",
+		"description": "[menu de contexto]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportar Tabs",
@@ -126,6 +134,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Esta Tab",
 		"description": "[menu-de-contexto]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Redefinir Tabs padrão",
+		"description": "[menu de contexto]"
 	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
@@ -323,9 +335,17 @@
 		"message": "Erro ao remover Tab.",
 		"description": "[erro] Erro genérico usado ao remover um Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Erro ao remover todas as Tabs visíveis.",
+		"description": "[erro] Erro genérico ao remover todas as Tabs visíveis"
+	},
 	"error_required_params": {
 		"message": "Os parâmetros necessários para a função não foram passados",
 		"description": "[erro] o desenvolvedor tentou chamar uma função sem os parâmetros necessários"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Erro ao redefinir para Tabs padrão.",
+		"description": "[erro] Erro genérico ao redefinir as Tabs para o padrão"
 	},
 	"error_sync_nothing": {
 		"message": "Não é possível sincronizar Tabs nulas!",
@@ -422,6 +442,10 @@
 	"files": {
 		"message": "arquivos",
 		"description": "múltiplos arquivos"
+	},
+	"flows": {
+		"message": "Fluxos",
+		"description": "[tab padrão] Rótulo da Tab padrão de Fluxos"
 	},
 	"general": {
 		"message": "Geral",
@@ -531,6 +555,10 @@
 		"message": "Abrir sempre links em uma nova guia do navegador.",
 		"description": "[configuração] quando o usuário clica em um Tab favorito, abri-lo em uma nova guia do navegador"
 	},
+	"opt_no_release_notes": {
+		"message": "Não mostrar notas de atualização.",
+		"description": "[configuração] permite ao usuário impedir que a extensão mostre notas de atualização após ser atualizada"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Sempre abrir a página $salesforce_login na mesma Tab ao clicar no pop-up.",
 		"description": "[configuração]"
@@ -538,6 +566,10 @@
 	"opt_open_setup_same_tab": {
 		"message": "Sempre abrir a página $salesforce_setup na mesma Tab ao clicar no pop-up.",
 		"description": "[configuração]"
+	},
+	"opt_prevent_analytics": {
+		"message": "Impedir o uso do Simple Analytics (não contar nas estatísticas de usuários).",
+		"description": "[configuração] permite ao usuário impedir o envio de análises anônimas"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Impedir o uso da Navegação Lightning (carregamento mais rápido quando em uso).",
