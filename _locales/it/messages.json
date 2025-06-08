@@ -68,8 +68,8 @@
 		"description": "[menu contestuale]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Ripristina Tab predefinite",
-		"description": "[context-menu]"
+		"message": "😨 Rimuovi tutte le Tab",
+		"description": "[menu contestuale]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Tutte le Tab visibili",

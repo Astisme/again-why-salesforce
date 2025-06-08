@@ -68,8 +68,8 @@
 		"description": "[kontekstni izbornik]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Poništi na zadano",
-		"description": "[context-menu]"
+		"message": "😨 Ukloni sve Tab",
+		"description": "[kontekstni izbornik]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Sve vidljive Tabove",

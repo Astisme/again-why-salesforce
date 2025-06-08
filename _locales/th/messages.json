@@ -68,8 +68,8 @@
 		"description": "[เมนูบริบท]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 รีเซ็ตเป็นค่าเริ่มต้น",
-		"description": "[context-menu]"
+		"message": "😨 ลบ Tab ทั้งหมด",
+		"description": "[เมนูบริบท]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 แท็บที่มองเห็นทั้งหมด",

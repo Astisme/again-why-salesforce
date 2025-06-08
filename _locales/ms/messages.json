@@ -68,8 +68,8 @@
 		"description": "[menu konteks]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Tetapkan Semula kepada Lalai",
-		"description": "[menu-konteks]"
+		"message": "😨 Alih semua Tab",
+		"description": "[menu konteks]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Semua Tab kelihatan",

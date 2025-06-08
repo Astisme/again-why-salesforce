@@ -68,8 +68,8 @@
 		"description": "[menu-konteks]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Setel ulang ke default",
-		"description": "[context-menu]"
+		"message": "😨 Hapus semua Tab",
+		"description": "[menu konteks]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Semua Tab terlihat",

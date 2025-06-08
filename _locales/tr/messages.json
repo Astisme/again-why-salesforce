@@ -68,8 +68,8 @@
 		"description": "[bağlam menüsü]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Varsayılana Sıfırla",
-		"description": "[bağlam-menüsü]"
+		"message": "😨 Tüm Tab öğelerini kaldır",
+		"description": "[bağlam menüsü]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Tüm görünür Tab'lar",

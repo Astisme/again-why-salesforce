@@ -68,8 +68,8 @@
 		"description": "[قائمة السياق]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 إعادة التعيين للوضع الافتراضي",
-		"description": "[context-menu]"
+		"message": "😨 إزالة جميع Tab",
+		"description": "[قائمة السياق]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 جميع الـ Tab الظاهرة",

@@ -68,8 +68,8 @@
 		"description": "[trình đơn ngữ cảnh]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Đặt lại về mặc định",
-		"description": "[context-menu]"
+		"message": "😨 Xóa tất cả Tab",
+		"description": "[menu ngữ cảnh]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Tất cả Tab hiển thị",

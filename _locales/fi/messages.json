@@ -68,8 +68,8 @@
 		"description": "[kontekstivalikko]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Nollaa oletus",
-		"description": "[context-menu]"
+		"message": "😨 Poista kaikki Tab",
+		"description": "[pikavalikko]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Kaikki näkyvät Tab",

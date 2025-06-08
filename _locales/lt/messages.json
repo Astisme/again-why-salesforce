@@ -68,8 +68,8 @@
 		"description": "[konteksto meniu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Atstatyti į numatytuosius",
-		"description": "[kontekstinis_meniu]"
+		"message": "😨 Pašalinti visas Tab",
+		"description": "[kontekstinis meniu]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Visos matomos Tab",

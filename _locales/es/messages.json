@@ -68,8 +68,8 @@
 		"description": "[menú contextual]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Restablecer a predeterminado",
-		"description": "[context-menu]"
+		"message": "😨 Eliminar todas las Tab",
+		"description": "[menú contextual]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Todas las Tabs visibles",

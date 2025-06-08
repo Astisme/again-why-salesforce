@@ -68,8 +68,8 @@
 		"description": "[kontekstmenu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Nulstil til standard",
-		"description": "[context-menu]"
+		"message": "😨 Fjern alle Tab",
+		"description": "[kontekstmenu]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Alle synlige Tab",

@@ -68,8 +68,8 @@
 		"description": "[menu de contexto]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Redefinir para Padrão",
-		"description": "[menu-de-contexto]"
+		"message": "😨 Remover todas as Tab",
+		"description": "[menu de contexto]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Todas as Tabs visíveis",

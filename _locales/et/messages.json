@@ -68,7 +68,7 @@
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Lähtesta vaikeväärtustele",
+		"message": "😨 Eemalda kõik Tabid",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_empty_visible_tabs": {

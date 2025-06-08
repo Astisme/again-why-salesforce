@@ -68,8 +68,8 @@
 		"description": "[右鍵選單]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 重設為預設",
-		"description": "[context-menu]"
+		"message": "😨 移除所有 Tab",
+		"description": "[右鍵選單]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 所有可見Tab",

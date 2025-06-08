@@ -68,8 +68,8 @@
 		"description": "[menu kontekstowe]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Resetuj do domyślnych",
-		"description": "[menu-kontekstowe]"
+		"message": "😨 Usuń wszystkie Tab",
+		"description": "[menu kontekstowe]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Wszystkie widoczne Tab",

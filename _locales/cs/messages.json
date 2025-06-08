@@ -68,8 +68,8 @@
 		"description": "[kontextová nabídka]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Obnovit výchozí",
-		"description": "[context-menu]"
+		"message": "😨 Odebrat všechny Tab",
+		"description": "[kontextová nabídka]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Všechny viditelné Tab",

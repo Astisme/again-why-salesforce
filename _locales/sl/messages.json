@@ -68,8 +68,8 @@
 		"description": "[meni z desnim klikom]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Ponastavi na privzeto",
-		"description": "[kontekstni_meni]"
+		"message": "😨 Odstrani vse Tab",
+		"description": "[kontekstni meni]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Vse vidne Tab",

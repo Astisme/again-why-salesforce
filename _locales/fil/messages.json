@@ -68,8 +68,8 @@
 		"description": "[context-menu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 I-reset sa Default",
-		"description": "[context-menu]"
+		"message": "😨 Alisin ang lahat ng Tab",
+		"description": "[konteksto na menu]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Lahat ng nakikitang Tab",

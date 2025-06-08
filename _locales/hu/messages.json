@@ -68,8 +68,8 @@
 		"description": "[helyi menü]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Alaphelyzetbe állítás",
-		"description": "[context-menu]"
+		"message": "😨 Minden Tab eltávolítása",
+		"description": "[helyi menü]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Minden látható Tab",

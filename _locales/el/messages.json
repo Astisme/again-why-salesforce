@@ -68,8 +68,8 @@
 		"description": "[μενού περιβάλλοντος]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Επαναφορά στο Προεπιλεγμένο",
-		"description": "[μενού-πλαισίου]"
+		"message": "😨 Αφαίρεση όλων των Tab",
+		"description": "[μενού περιβάλλοντος]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Όλες οι ορατές Tab",

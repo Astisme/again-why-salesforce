@@ -68,8 +68,8 @@
 		"description": "[meniul contextual]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Resetați la valorile implicite",
-		"description": "[meniu-contextual]"
+		"message": "😨 Elimină toate Tab",
+		"description": "[meniu contextual]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Toate Tab-urile vizibile",

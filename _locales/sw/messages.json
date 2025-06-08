@@ -68,8 +68,8 @@
 		"description": "[menyu ya muktadha]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Weka Upya kuwa Chaguomsingi",
-		"description": "[menu-ya-mukhtadha]"
+		"message": "😨 Ondoa Tab zote",
+		"description": "[menyu ya muktadha]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Tab zote zinazoonekana",

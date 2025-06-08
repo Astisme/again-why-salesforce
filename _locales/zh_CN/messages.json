@@ -68,7 +68,7 @@
 		"description": "[上下文菜单]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 重置为默认值",
+		"message": "😨 删除所有 Tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_empty_visible_tabs": {

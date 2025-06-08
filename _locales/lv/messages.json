@@ -68,8 +68,8 @@
 		"description": "[konteksta izvēlne]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Atiestatīt uz noklusējumu",
-		"description": "[konteksta_izvēlne]"
+		"message": "😨 Noņemt visas Tab",
+		"description": "[konteksta izvēlne]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Visas redzamās Tab",

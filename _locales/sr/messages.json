@@ -68,8 +68,8 @@
 		"description": "[контекст мени]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Resetuj na podrazumevano",
-		"description": "[context-menu]"
+		"message": "😨 Уклони све Tab",
+		"description": "[контекстни мени]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Сви видљиви Tab",

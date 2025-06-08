@@ -68,8 +68,8 @@
 		"description": "[Kontextmenü]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Auf Standard zurücksetzen",
-		"description": "[context-menu]"
+		"message": "😨 Alle Tab entfernen",
+		"description": "[Kontextmenü]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Alle sichtbaren Tabs",

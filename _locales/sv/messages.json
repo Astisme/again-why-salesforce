@@ -68,8 +68,8 @@
 		"description": "[snabbmeny]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Återställ till standard",
-		"description": "[context-menu]"
+		"message": "😨 Ta bort alla Tab",
+		"description": "[snabbmeny]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Alla synliga Tab",

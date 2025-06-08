@@ -68,8 +68,8 @@
 		"description": "[תפריט הקשר]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 אפס לברירת מחדל",
-		"description": "[context-menu]"
+		"message": "😨 הסר את כל Tab",
+		"description": "[תפריט הקשר]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 כל ה-Tab הגלויים",

@@ -68,8 +68,8 @@
 		"description": "[contextmenu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Herstellen naar standaard",
-		"description": "[context-menu]"
+		"message": "😨 Alle Tab verwijderen",
+		"description": "[contextmenu]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 Alle zichtbare Tab",

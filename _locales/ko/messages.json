@@ -68,8 +68,8 @@
 		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 기본값으로 재설정",
-		"description": "[컨텍스트_메뉴]"
+		"message": "😨 모든 Tab 제거",
+		"description": "[컨텍스트 메뉴]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 모든 보이는 Tab",

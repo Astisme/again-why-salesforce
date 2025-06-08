@@ -68,8 +68,8 @@
 		"description": "[コンテキストメニュー]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 デフォルトにリセットする",
-		"description": "[context-menu]"
+		"message": "😨 すべてのTabを削除",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_empty_visible_tabs": {
 		"message": "👀 すべての表示中のTab",
