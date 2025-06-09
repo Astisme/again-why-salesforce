@@ -55,6 +55,14 @@ let link_cmd_open_settings = null;
 let link_cmd_open_other_org = null;
 let link_cmd_import = null;
 let link_cmd_export_all = null;
+
+/**
+ * Asynchronously retrieves command shortcut links and updates corresponding variables.
+ * Fetches the latest command links using `bg_getCommandLinks` and assigns the associated shortcuts
+ * to their respective global variables based on the command name.
+ *
+ * @returns {Promise<void>} A promise that resolves once the command links have been updated.
+ */
 async function updateCommandLinks() {
 	const commandLinks = await bg_getCommandLinks();
 	commandLinks.forEach((cmdLink) => {
@@ -88,6 +96,11 @@ async function updateCommandLinks() {
 		}
 	});
 }
+
+/**
+ * Resets all stored command shortcut links to `null`.
+ * Clears the global variables holding shortcut references for all known commands.
+ */
 function resetLinks() {
 	link_cmd_save_as_tab = null;
 	link_cmd_remove_tab = null;
@@ -235,6 +248,13 @@ const menuItemsOriginal = [
 	return item;
 });
 
+/**
+ * Returns a deep clone of the original context menu items with updated titles including command shortcuts.
+ * Each menu item's title is appended with its corresponding keyboard shortcut (if available),
+ * enhancing user visibility of assigned commands.
+ *
+ * @returns {Array<Object>} A cloned array of menu items with updated titles reflecting shortcuts.
+ */
 function getMenuItemsClone() {
 	const clone = structuredClone(menuItemsOriginal);
 	clone.forEach((el) => {

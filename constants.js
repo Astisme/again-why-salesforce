@@ -108,6 +108,13 @@ export function sendExtensionMessage(message, callback = null) {
 	}
 	sendMessage(message, callback);
 }
+
+/**
+ * Retrieves extension settings for the specified keys.
+ *
+ * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
+ * @returns {Promise<Object>} A promise that resolves to an object containing the requested settings.
+ */
 export async function getSettings(keys = null) {
 	return await sendExtensionMessage({ what: "get-settings", keys });
 }
@@ -229,6 +236,12 @@ export function getCssRule(styleId, value = null) {
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";
 export const TAB_ON_LEFT = "tab_position_left";
+
+/**
+ * Opens the extension's settings page.
+ *
+ * Uses `runtime.openOptionsPage` if available; otherwise, falls back to opening the settings URL directly.
+ */
 export function openSettingsPage() {
 	if (BROWSER.runtime.openOptionsPage) {
 		BROWSER.runtime.openOptionsPage();

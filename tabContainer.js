@@ -194,6 +194,13 @@ export default class TabContainer extends Array {
 	 * @private
 	 */
 	async _initialize(tabs = null) {
+        /**
+         * Checks if the given tabs are valid and adds them to the context if so.
+         *
+         * @param {Object} context - The context object with an addTabs method.
+         * @param {Array} tabs - The tabs to validate and add.
+         * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
+         */
 		async function checkAddTabs(context, tabs) {
 			if (TabContainer.isValid(tabs, false)) {
 				return await context.addTabs(tabs);

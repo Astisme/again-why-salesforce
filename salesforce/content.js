@@ -53,6 +53,11 @@ import {
 import { createImportModal } from "./import.js";
 
 let allTabs;
+/**
+ * Asynchronously retrieves all tabs, initializing them if needed.
+ *
+ * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
+ */
 async function getAllTabs_async() {
 	if (allTabs == null) {
 		allTabs = await TabContainer.create();
@@ -60,12 +65,24 @@ async function getAllTabs_async() {
 	return allTabs;
 }
 
+/**
+ * Synchronously returns the TabContainer instance of all tabs if initialized.
+ *
+ * @throws {Error} Throws if the TabContainer is not yet initialized.
+ * @returns {TabContainer} The initialized TabContainer instance.
+ */
 export function getAllTabs() {
 	if (allTabs == null || allTabs instanceof Promise) {
 		throw new Error(["allTabs", "error_not_initilized"]);
 	}
 	return allTabs;
 }
+
+/**
+ * Ensures availability of the TabContainer instance, initializing it if necessary.
+ *
+ * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
+ */
 export async function ensureAllTabsAvailability() {
 	try {
 		return getAllTabs();
@@ -78,27 +95,57 @@ export async function ensureAllTabsAvailability() {
  * The main UL on Salesforce Setup
  */
 let setupTabUl;
+/**
+ * Returns the main UL element in Salesforce Setup.
+ *
+ * @returns {HTMLElement} The main UL element in Salesforce Setup.
+ */
 export function getSetupTabUl() {
 	return setupTabUl;
 }
+
 /**
  * Where modals should be inserted in Salesforce Setup
  */
 let modalHanger;
+
 /**
  * Contains the current href, always up-to-date
  */
 let href = globalThis.location.href;
+/**
+ * Returns the current href string, always up-to-date.
+ *
+ * @returns {string} The current page href.
+ */
 export function getCurrentHref() {
 	return href;
 }
 
+
+/**
+ * Whether the user was previously on a saved tab.
+ */
 let wasOnSavedTab;
+/**
+ * Returns whether the user was previously on a saved tab.
+ *
+ * @returns {boolean} True if was on a saved tab, false otherwise.
+ */
 export function getWasOnSavedTab() {
 	return wasOnSavedTab;
 }
 
+
+/**
+ * Whether the user is currently on a saved tab.
+ */
 let isCurrentlyOnSavedTab;
+/**
+ * Returns whether the user is currently on a saved tab.
+ *
+ * @returns {boolean} True if currently on a saved tab, false otherwise.
+ */
 export function getIsCurrentlyOnSavedTab() {
 	return isCurrentlyOnSavedTab;
 }
@@ -108,7 +155,12 @@ export function getIsCurrentlyOnSavedTab() {
  */
 let fromHrefUpdate = false;
 
-// add lightning-navigation to the page in order to use it
+/**
+ * Dynamically injects the Salesforce Lightning Navigation script into the page
+ * if relevant settings allow it.
+ *
+ * @returns {Promise<void>} Resolves when the script is added or skipped.
+ */
 async function checkAddLightningNavigation() {
 	const settings = await getSettings([
 		LINK_NEW_BROWSER,
@@ -283,6 +335,13 @@ function onHrefUpdate() {
 	isOnSavedTab(true, afterHrefUpdate);
 }
 
+/**
+ * Checks the user setting for keeping tabs on the left side and moves the setupTabUl element accordingly.
+ * If the setting is disabled or not found, moves setupTabUl after the ObjectManager element.
+ * Otherwise, moves setupTabUl before the Home element.
+ *
+ * @returns {Promise<void>} Resolves after repositioning the setupTabUl element based on user preference.
+ */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
 	if (keep_tabs_on_left == null || !keep_tabs_on_left.enabled) {
@@ -755,6 +814,16 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	});
 }
 
+/**
+ * Prompts the user with a confirmation dialog to update the extension to a new version.
+ * Displays a translated message including the old and new version and a link.
+ *
+ * @param {Object} options - Options for the update prompt.
+ * @param {string} options.version - The new version of the extension.
+ * @param {string} options.link - The URL to the update or release notes.
+ * @param {string} options.oldversion - The current installed version before update.
+ * @returns {Promise<void>} Resolves after the prompt and possible navigation.
+ */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const confirm_msg = await translator.translate([
@@ -767,6 +836,13 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 	}
 }
 
+/**
+ * Initiates a download of a JSON file with the given content and filename.
+ *
+ * @param {Object} message - Message containing the data for download.
+ * @param {string} message.payload - The JSON string content to download.
+ * @param {string} [message.filename="download.json"] - The filename for the download.
+ */
 function launchDownload(message) {
 	const jsonText = message.payload;
 	const filename = message.filename || "download.json";
@@ -784,7 +860,11 @@ function launchDownload(message) {
 	URL.revokeObjectURL(url);
 }
 
-// listen from saves from the action / background page
+/**
+ * Listens for messages from the background page and routes commands to appropriate handlers.
+ * Supports tab management, notifications, modal dialogs, extension update prompts, and more.
+ * Catches errors and displays them as toast notifications.
+ */
 function listenToBackgroundPage() {
 	BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
 		if (message == null || message.what == null) {
@@ -930,7 +1010,11 @@ function listenToBackgroundPage() {
 	});
 }
 
-// listen to possible updates from other modules
+
+/**
+ * Listens for "order" messages posted from the window to reorder tabs accordingly.
+ * Ignores messages not originating from the current window context.
+ */
 function listenToReorderedTabs() {
 	addEventListener("message", (e) => {
 		if (e.source != window) {
@@ -943,7 +1027,14 @@ function listenToReorderedTabs() {
 	});
 }
 
-// Simple Analytics - 100% privacy-first analytics - https://github.com/simpleanalytics
+/**
+ * Checks user settings and inserts Simple Analytics script into the document
+ * unless analytics collection is explicitly disabled.
+ * Modifies Content-Security-Policy meta tag to allow the analytics domains.
+ * https://github.com/simpleanalytics
+ *
+ * @returns {Promise<void>} Resolves once analytics script is injected or skipped.
+ */
 async function checkInsertAnalytics() {
 	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
 	if (prevent_analytics != null && prevent_analytics.enabled === true) {
@@ -977,7 +1068,15 @@ async function checkInsertAnalytics() {
 	whereToAppend.appendChild(img);
 }
 
-// launch all starting functions
+/**
+ * Main bootstrap function that initializes the extension:
+ * - Loads all tabs asynchronously.
+ * - Injects Lightning navigation script if needed.
+ * - Sets up message listeners.
+ * - Sets up reordered tab listener.
+ * - Loads Salesforce setup tabs with delay.
+ * - Inserts analytics script.
+ */
 function main() {
 	getAllTabs_async();
 	checkAddLightningNavigation();

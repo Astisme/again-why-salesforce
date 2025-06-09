@@ -456,6 +456,13 @@ const availableCommands = await sendExtensionMessage({
 		CMD_OPEN_SETTINGS,
 	],
 });
+
+/**
+ * Returns the substring of the input string before the first occurrence of the separator "+-+".
+ *
+ * @param {string} i18n - The input string containing the separator.
+ * @returns {string} The substring before the separator, or the whole string if the separator is not found.
+ */
 function sliceBeforeSeparator(i18n) {
 	return i18n.slice(0, i18n.indexOf("+-+"));
 }

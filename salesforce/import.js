@@ -152,20 +152,44 @@ function listenToFileUpload(modalParent) {
 		reader.readAsText(file);
 	}
 	const dropArea = document.getElementById(IMPORT_ID);
+    /**
+     * Handles file selection via input change event.
+     * Prevents default behavior and reads the first selected file.
+     *
+     * @param {Event} event - The change event triggered by the file input.
+     */
 	dropArea.addEventListener("change", function (event) {
 		event.preventDefault();
 		readFile(event.target.files[0]);
 	});
+    /**
+     * Handles the dragover event to allow file drop.
+     * Prevents default behavior to enable dropping files on the drop area.
+     *
+     * @param {DragEvent} event - The dragover event triggered when dragging files over the drop area.
+     */
 	dropArea.addEventListener("dragover", function (event) {
 		event.preventDefault();
 		//console.log('dragover')
 		//dropArea.classList.add("slds-has-drag-over");
 	});
+    /**
+     * Handles the dragleave event when dragged files leave the drop area.
+     * Prevents default behavior and can be used to update UI (e.g., remove highlight).
+     *
+     * @param {DragEvent} event - The dragleave event triggered when dragging files leaves the drop area.
+     */
 	dropArea.addEventListener("dragleave", function (event) {
 		event.preventDefault();
 		//console.log('dragleave')
 		//dropArea.classList.remove("slds-has-drag-over");
 	});
+    /**
+     * Handles the drop event of files onto the drop area.
+     * Prevents default behavior and reads all dropped files.
+     *
+     * @param {DragEvent} event - The drop event containing the dropped files.
+     */
 	dropArea.addEventListener("drop", function (event) {
 		event.preventDefault();
 		Array.from(event.dataTransfer.files).forEach((f) => readFile(f));
@@ -192,6 +216,13 @@ async function showFileImport() {
 	listenToFileUpload(modalParent);
 }
 
+/**
+ * Displays the file import modal to the user.
+ * If an error occurs during the display, shows an error toast notification.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
 export async function createImportModal() {
 	try {
 		await showFileImport();

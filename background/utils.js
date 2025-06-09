@@ -137,6 +137,14 @@ export function exportHandler(tabs = null) {
 	_exportHandler(tabs);
 }
 
+/**
+ * Checks for extension updates and notifies the user if a newer version is available.
+ * - Skips the check if the user has disabled update notifications or if the last check was within 7 days.
+ * - Compares the current version with the latest GitHub release.
+ * - If an update is available, a notification is triggered with update details.
+ *
+ * @returns {Promise<void>} A promise that resolves when the update check process completes.
+ */
 export async function checkForUpdates() {
 	// check user settings
 	const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
@@ -152,6 +160,14 @@ export async function checkForUpdates() {
 	) {
 		return;
 	}
+    /**
+     * Compares two semantic version strings to determine if the latest version is newer.
+     * Versions are expected in dot-separated format (e.g., "1.2.3"). Missing segments are treated as 0.
+     *
+     * @param {string} latest - The latest version string.
+     * @param {string} current - The current version string.
+     * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
+     */
 	function isNewerVersion(latest, current) {
 		const latestParts = latest.split(".").map(Number);
 		const currentParts = current.split(".").map(Number);

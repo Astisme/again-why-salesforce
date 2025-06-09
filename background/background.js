@@ -31,11 +31,13 @@ import {
 import { checkAddRemoveContextMenus } from "./context-menus.js";
 
 /**
- * Retrieves data from the browser"s synced storage and invokes the provided callback with the data.
+ * Retrieves data from browser storage under the specified key.
  *
- * @param {Function} callback - The function to be called once the data is retrieved.
- *                              The retrieved value is passed as an argument to the callback.
- * @throws {Error} If the callback is not provided.
+ * Supports both callback and Promise-based usage.
+ *
+ * @param {function} [callback] - Optional callback to handle the retrieved data.
+ * @param {string} [key=WHY_KEY] - The storage key to retrieve data from.
+ * @returns {Promise<any>|void} Returns a Promise if no callback is provided, otherwise void.
  */
 export function bg_getStorage(callback, key = WHY_KEY) {
 	/**
@@ -67,6 +69,16 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 	getFromStorage(callback);
 }
 
+/**
+ * Retrieves settings from background storage based on specified keys.
+ * If `settingKeys` is null, returns all settings.
+ * Supports optional callback usage or returns a Promise with the result.
+ *
+ * @param {string|string[]|null} [settingKeys=null] - Single key or array of keys to retrieve. If null, all settings are returned.
+ * @param {string} [key=SETTINGS_KEY] - The storage key namespace to retrieve settings from.
+ * @param {Function|null} [callback=null] - Optional callback to handle the retrieved settings.
+ * @returns {Promise<Object|Object[]>|void} A Promise resolving to the requested settings, or void if a callback is provided.
+ */
 export async function bg_getSettings(
 	settingKeys = null,
 	key = SETTINGS_KEY,
@@ -163,8 +175,27 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	return BROWSER.storage.sync.set(set, callback?.(set[key]));
 }
 
-// courtesy of derroman/salesforce-user-language-switcher
+/**
+ * Retrieves current user information from the Salesforce userinfo API.
+ * Determines the API host and authorization headers based on the provided URL,
+ * fetches the user info, and returns it as JSON.
+ * courtesy of derroman/salesforce-user-language-switcher
+ *
+ * @param {string} currentUrl - The current Salesforce URL.
+ * @returns {Promise<Object|undefined>} A promise resolving to the user info object or undefined on error.
+ */
 async function getCurrentUserInfo(currentUrl) {
+    /**
+     * Determines the Salesforce API host and constructs authorization headers based on the current URL.
+     * - Validates the URL against supported Salesforce domains.
+     * - Normalizes certain Salesforce subdomains to the main domain.
+     * - Retrieves the session ID cookie ("sid") for authentication.
+     * - Returns the API host origin and headers needed for authorized requests.
+     *
+     * @param {string} currentUrl - The current Salesforce URL.
+     * @returns {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
+     * @throws {Error} Throws if required authentication cookies are not found.
+     */
 	async function getAPIHostAndHeaders(currentUrl) {
 		const url = new URL(currentUrl);
 		let origin = url.origin;
@@ -211,6 +242,14 @@ async function getCurrentUserInfo(currentUrl) {
 	}
 }
 
+/**
+ * Retrieves the Salesforce language setting for the current user.
+ * Attempts to fetch language info from Salesforce user data and stores it;
+ * falls back to stored locale if unavailable.
+ *
+ * @param {Function|null} [callback=null] - Optional callback to receive the language.
+ * @returns {Promise<string|any>|void} The language code or nothing if callback is provided.
+ */
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
@@ -222,6 +261,15 @@ export async function bg_getSalesforceLanguage(callback = null) {
 	}
 }
 
+/**
+ * Retrieves all or specified command shortcuts available in the browser extension.
+ * Filters commands to those that have assigned shortcuts.
+ * Supports optional callback or returns a Promise.
+ *
+ * @param {string[]|null} [commands=null] - Array of command names to filter. If null, returns all commands with shortcuts.
+ * @param {Function|null} [callback=null] - Optional callback to receive the commands.
+ * @returns {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
+ */
 export async function bg_getCommandLinks(commands = null, callback = null) {
 	const allCommands = await BROWSER.commands.getAll();
 	const availableCommands = allCommands.filter((singleCommand) =>
@@ -305,6 +353,10 @@ function listenToExtensionMessages() {
 	});
 }
 
+/**
+ * Listens for extension command events and executes appropriate actions
+ * based on the current Salesforce Setup page context and command received.
+ */
 function listenToExtensionCommands() {
 	BROWSER.commands.onCommand.addListener(async (command) => {
 		// check the current page is Salesforce Setup
@@ -344,6 +396,10 @@ function listenToExtensionCommands() {
 	});
 }
 
+/**
+ * Ensures default organizational style settings exist;
+ * if none are found, creates and saves default styles for org-specific tabs.
+ */
 async function setDefalutOrgStyle() {
 	const orgStyles = await bg_getSettings(undefined, ORG_TAB_STYLE_KEY);
 	if (orgStyles == null) {
@@ -359,6 +415,13 @@ async function setDefalutOrgStyle() {
 	}
 }
 
+/**
+ * Sets up various browser event listeners for the extension, including:
+ * - Debounced context menu checks on tab/window changes
+ * - Handling extension startup and installation events
+ * - Opening release notes after updates
+ * - Responding to tab activation and window focus changes
+ */
 function setExtensionBrowserListeners() {
 	/**
 	 * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
@@ -435,6 +498,10 @@ function setExtensionBrowserListeners() {
   */
 }
 
+/**
+ * Main entry point to initialize extension listeners, default styles,
+ * command listeners, message listeners, and context menu checks.
+ */
 function main() {
 	setExtensionBrowserListeners();
 	setDefalutOrgStyle();

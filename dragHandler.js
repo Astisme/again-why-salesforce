@@ -4,6 +4,14 @@ let container;
 let closestTag;
 let dragSrcEl = null;
 
+/**
+ * Handles the dragstart event on draggable elements.
+ * Sets the cursor style to grabbing, stores the source element being dragged,
+ * and sets the allowed drag effect and drag data.
+ * Prevents drag if the dragged target is not marked draggable.
+ *
+ * @param {DragEvent} e - The dragstart event.
+ */
 function handleDragStart(e) {
 	// Check if the dragged element is an icon (or any other specific element) within the row
 	if (e.target.dataset.draggable === "true") {
@@ -17,6 +25,14 @@ function handleDragStart(e) {
 	}
 }
 
+/**
+ * Handles the dragover event on potential drop targets.
+ * Prevents the default to allow dropping and sets the drop effect to move.
+ * (Optionally highlights the target element for UI feedback - currently commented out.)
+ *
+ * @param {DragEvent} e - The dragover event.
+ * @returns {boolean} Returns false to indicate default behavior is prevented.
+ */
 function handleDragOver(e) {
 	e.preventDefault();
 	// Highlight the target td where the dragged td will be inserted
@@ -33,9 +49,20 @@ function handleDragOver(e) {
 	return false;
 }
 
+/**
+ * Placeholder for handling the drag event during dragging.
+ *
+ * @param {DragEvent} e - The drag event.
+ */
 function handleDrag(_) {
 }
 
+/**
+ * Placeholder for handling the dragend event.
+ * Typically used to clean up any visual changes or reset state after dragging ends.
+ *
+ * @param {DragEvent} e - The dragend event.
+ */
 function handleDragEnd(_) {
 }
 
