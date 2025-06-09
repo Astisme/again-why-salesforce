@@ -321,7 +321,7 @@ export async function showFavouriteButton(count = 0) {
  */
 export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
-	if (!favourite.classList.contains("hidden")) favourite.click();
+	if (!favourite.classList.contains("hidden")) favourite.closest('button').click(); // otherwise we would click on the svg
 	else {
 		const message = save ? "error_useless_save" : "error_useless_remove";
 		showToast(message, true, true);
