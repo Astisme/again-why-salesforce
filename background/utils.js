@@ -160,14 +160,14 @@ export async function checkForUpdates() {
 	) {
 		return;
 	}
-    /**
-     * Compares two semantic version strings to determine if the latest version is newer.
-     * Versions are expected in dot-separated format (e.g., "1.2.3"). Missing segments are treated as 0.
-     *
-     * @param {string} latest - The latest version string.
-     * @param {string} current - The current version string.
-     * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
-     */
+	/**
+	 * Compares two semantic version strings to determine if the latest version is newer.
+	 * Versions are expected in dot-separated format (e.g., "1.2.3"). Missing segments are treated as 0.
+	 *
+	 * @param {string} latest - The latest version string.
+	 * @param {string} current - The current version string.
+	 * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
+	 */
 	function isNewerVersion(latest, current) {
 		const latestParts = latest.split(".").map(Number);
 		const currentParts = current.split(".").map(Number);

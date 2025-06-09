@@ -122,7 +122,6 @@ export function getCurrentHref() {
 	return href;
 }
 
-
 /**
  * Whether the user was previously on a saved tab.
  */
@@ -135,7 +134,6 @@ let wasOnSavedTab;
 export function getWasOnSavedTab() {
 	return wasOnSavedTab;
 }
-
 
 /**
  * Whether the user is currently on a saved tab.
@@ -1009,7 +1007,6 @@ function listenToBackgroundPage() {
 		}
 	});
 }
-
 
 /**
  * Listens for "order" messages posted from the window to reorder tabs accordingly.

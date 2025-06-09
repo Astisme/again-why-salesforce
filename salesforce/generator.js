@@ -1037,7 +1037,7 @@ export async function generateSldsModal(modalTitle) {
  * @param {boolean} [radio0def.checked=false] - Whether this radio button is checked by default.
  * @param {Object} [radio1def] - Definition for the second radio button (same shape as radio0def).
  * @param {...Object} otherRadioDefs - Additional radio button definitions.
- * 
+ *
  * @returns {{ radioGroup: HTMLDivElement, getSelectedRadioButtonValue: () => string|undefined }}
  *   An object containing:
  *   - radioGroup: the container <div> element with all radio buttons appended.
@@ -1074,11 +1074,11 @@ export function generateRadioButtons(name, radio0def = {
 		innerSpan.appendChild(labelEl);
 		radioGroup.appendChild(innerSpan);
 	});
-    /**
-     * Returns the value of the currently selected (checked) radio button from the group.
-     *
-     * @returns {string|undefined} The value of the checked radio button, or undefined if none are checked.
-     */
+	/**
+	 * Returns the value of the currently selected (checked) radio button from the group.
+	 *
+	 * @returns {string|undefined} The value of the checked radio button, or undefined if none are checked.
+	 */
 	function getSelectedRadioButtonValue() {
 		return allRadioInputs.filter((inp) => inp.checked)?.[0]?.value;
 	}

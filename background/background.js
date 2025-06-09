@@ -185,17 +185,17 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
  * @returns {Promise<Object|undefined>} A promise resolving to the user info object or undefined on error.
  */
 async function getCurrentUserInfo(currentUrl) {
-    /**
-     * Determines the Salesforce API host and constructs authorization headers based on the current URL.
-     * - Validates the URL against supported Salesforce domains.
-     * - Normalizes certain Salesforce subdomains to the main domain.
-     * - Retrieves the session ID cookie ("sid") for authentication.
-     * - Returns the API host origin and headers needed for authorized requests.
-     *
-     * @param {string} currentUrl - The current Salesforce URL.
-     * @returns {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
-     * @throws {Error} Throws if required authentication cookies are not found.
-     */
+	/**
+	 * Determines the Salesforce API host and constructs authorization headers based on the current URL.
+	 * - Validates the URL against supported Salesforce domains.
+	 * - Normalizes certain Salesforce subdomains to the main domain.
+	 * - Retrieves the session ID cookie ("sid") for authentication.
+	 * - Returns the API host origin and headers needed for authorized requests.
+	 *
+	 * @param {string} currentUrl - The current Salesforce URL.
+	 * @returns {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
+	 * @throws {Error} Throws if required authentication cookies are not found.
+	 */
 	async function getAPIHostAndHeaders(currentUrl) {
 		const url = new URL(currentUrl);
 		let origin = url.origin;
