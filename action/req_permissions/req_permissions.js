@@ -6,7 +6,7 @@ await ensureTranslatorAvailability();
 const whichPermissions = new URL(globalThis.location.href).searchParams.get(
 	"whichid",
 );
-const popuplink = await BROWSER.runtime.getURL("action/popup/popup.html");
+const popuplink = BROWSER.runtime.getURL("action/popup/popup.html");
 
 if (whichPermissions == null || whichPermissions === "hostpermissions") {
 	const noPerm = document.getElementById("no-permissions");
@@ -44,7 +44,18 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 } else if (whichPermissions === "download") {
 	document.getElementById("host_permissions").classList.add("hidden");
 	document.getElementById("download").classList.remove("hidden");
-	document.getElementById("no-permissions-down").href = popuplink;
+	const setOriginalPopup = () =>
+		BROWSER.action.setPopup({
+			popup: popuplink,
+		});
+	document.getElementById("no-permissions-down").addEventListener(
+		"click",
+		(e) => {
+			e.preventDefault();
+			setOriginalPopup();
+			globalThis.location = popuplink;
+		},
+	);
 	document.getElementById("allow-permissions-down").addEventListener(
 		"click",
 		(e) => {
@@ -52,9 +63,7 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 			BROWSER.permissions.request({
 				permissions: ["downloads"],
 			});
-			BROWSER.action.setPopup({
-				popup: popuplink,
-			});
+			setOriginalPopup();
 			setTimeout(close, 100);
 		},
 	);
