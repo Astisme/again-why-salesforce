@@ -52,9 +52,8 @@ export const SALESFORCE_URL_PATTERN =
 export const FRAME_PATTERNS = [
 	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
 	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
-	`${HTTPS}*${MY_SALESFORCE_COM}/*`,
 ];
-// add `/setup/lightning/` to the framePatterns
+// add `/setup/lightning/*` to the framePatterns
 export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
 	`${item.substring(0, item.length - 2)}${SETUP_LIGHTNING}*`
 );
@@ -65,17 +64,7 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.", "\\.")}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
-const MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN =
-	`*${PROTOCOL_SEPARATOR}*${MY_SALESFORCE_SETUP_COM}${SETUP_LIGHTNING}*`;
-const LIGHTNING_FORCE_COM_OPERATING_PATTERN =
-	`*${PROTOCOL_SEPARATOR}*${LIGHTNING_FORCE_COM}${SETUP_LIGHTNING}*`;
-const MY_SALESFORCE_COM_OPERATING_PATTERN =
-	`*${PROTOCOL_SEPARATOR}*${MY_SALESFORCE_COM}/*`;
-export const OPERATING_PATTERNS = [
-	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-	MY_SALESFORCE_COM_OPERATING_PATTERN,
-];
+export const MANIFEST = BROWSER.runtime.getManifest();
 /**
  * Sends a message to the background script with the specified message.
  *
@@ -280,3 +269,4 @@ export const CMD_IMPORT = "cmd-import";
 export const CMD_EXPORT_ALL = "cmd-export-all";
 export const WHAT_UPDATE_EXTENSION = "update-extension";
 export const WHAT_EXPORT = "export";
+export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP = "export-perm-open-popup";

@@ -1,6 +1,8 @@
 import ensureTranslatorAvailability from "/translator.js";
 import {
+    BROWSER,
 	EXTENSION_NAME,
+    FOLLOW_SF_LANG,
 	GENERIC_TAB_STYLE_KEY,
 	getCssRule,
 	getCssSelector,
@@ -34,6 +36,7 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
+    MANIFEST,
 } from "/constants.js";
 
 ensureTranslatorAvailability();
@@ -889,15 +892,35 @@ async function restoreGeneralSettings() {
 		}
 		saveCheckboxOptions(e, link_new_browser_el);
 	});
+    let oldUserLanguage = user_language_select.value;
 	user_language_select.addEventListener("change", (e) => {
-		sendExtensionMessage({
-			what: "set",
-			key: SETTINGS_KEY,
-			set: [{
-				id: USER_LANGUAGE,
-				enabled: e.target.value,
-			}],
-		});
+        const cookiesPermObj = {
+            permissions: ["cookies"],
+            origins: MANIFEST.optional_host_permissions,
+        };
+        const languageMessage = {
+            what: "set",
+            key: SETTINGS_KEY,
+            set: [{
+                id: USER_LANGUAGE,
+                enabled: e.target.value,
+            }],
+        };
+        const sendLanguageMessage = () => {
+            sendExtensionMessage(languageMessage)
+            oldUserLanguage = e.target.value;
+        }
+        if(e.target.value === FOLLOW_SF_LANG){ // the user wants to follow the language on salesforce
+            BROWSER.permissions.request(cookiesPermObj)
+            .then(resp => {
+                if(resp === true){ // the extension has the cookies permission
+                    sendLanguageMessage();
+                } else
+                    user_language_select.value = oldUserLanguage;
+            })
+        }
+        else
+            sendLanguageMessage();
 	});
 	generalSettingsListenersSet = true;
 }

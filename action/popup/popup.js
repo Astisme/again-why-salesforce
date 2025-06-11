@@ -8,9 +8,10 @@ import {
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	openSettingsPage,
-	OPERATING_PATTERNS,
+	FRAME_PATTERNS,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
+    ISSAFARI,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -65,7 +66,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		// we're in Salesforce Setup
 		// check if we have all the optional permissions available
 		const permissionsAvailable = await BROWSER.permissions.contains({
-			origins: OPERATING_PATTERNS,
+			origins: FRAME_PATTERNS,
 		});
 		if (
 			!permissionsAvailable &&
@@ -75,7 +76,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		) {
 			// if we do not have them, redirect to the request permission page
 			globalThis.location = await BROWSER.runtime.getURL(
-				"action/req_permissions/req_permissions.html",
+				"action/req_permissions/req_permissions.html?whichid=hostpermissions",
 			);
 			// nothing else will happen from this file
 		}
@@ -127,7 +128,14 @@ function importHandler() {
  * Sends a message that will start the export procedure.
  */
 function pop_exportHandler() {
-	sendExtensionMessage({ what: "export" }, close);
+    if(ISSAFARI || BROWSER.downloads != null){
+        sendExtensionMessage({ what: "export" }, close);
+        return;
+    }
+    BROWSER.permissions.request({
+        permissions: ["downloads"],
+    })
+	setTimeout(close, 100);
 }
 
 /**

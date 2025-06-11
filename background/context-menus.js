@@ -37,7 +37,13 @@ import {
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
+import {
+	bg_getCurrentBrowserTab,
+	bg_notify,
+	checkForUpdates,
+	checkLaunchExport,
+  exportHandler,
+} from "./utils.js";
 import {
 	bg_getCommandLinks,
 	bg_getSalesforceLanguage,
@@ -441,7 +447,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
 		case CXM_EXPORT_TABS:
-			exportHandler();
+      checkLaunchExport();
 			return;
 		case cxm_open_settings:
 			openSettingsPage();
@@ -459,6 +465,14 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			break;
 		case CXM_IMPORT_TABS:
 			message.what = "add";
+			break;
+		case CXM_PAGE_SAVE_TAB:
+		case CXM_REMOVE_TAB:
+			message.tabUrl = Tab.minifyURL(info.pageUrl);
+			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
+			break;
+		case cxm_open_settings:
+			openSettingsPage();
 			break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl ?? info.pageUrl);

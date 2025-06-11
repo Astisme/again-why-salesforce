@@ -1116,7 +1116,7 @@ export async function generateOpenOtherOrgModal(miniURL, label) {
 		required: true,
 		placeholder: "other_org_placeholder",
 		style:
-			"width: 100%; height: 3em; resize: horizontal; line-height: 32px;",
+			"width: 100%; height: 3em; resize: horizontal; word-break: break-all; overflow-y: hidden; white-space: nowrap;",
 		isTextArea: true,
 	});
 	divParent.appendChild(inputParent);

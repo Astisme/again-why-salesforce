@@ -27,6 +27,7 @@ import {
 	bg_notify,
 	checkForUpdates,
 	exportHandler,
+  checkLaunchExport,
 } from "./utils.js";
 import { checkAddRemoveContextMenus } from "./context-menus.js";
 
@@ -324,7 +325,7 @@ function listenToExtensionMessages() {
 				//return false; // we won"t call sendResponse
 				break;
 			case "export":
-				exportHandler(request.tabs);
+        checkLaunchExport(request.tabs);
 				sendResponse(null);
 				//return false;
 				break;
@@ -384,7 +385,7 @@ function listenToExtensionCommands() {
 				openSettingsPage();
 				break;
 			case CMD_EXPORT_ALL:
-				exportHandler();
+        checkLaunchExport();
 				break;
 			default:
 				bg_notify({

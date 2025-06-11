@@ -35,6 +35,7 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	WHAT_EXPORT,
 	WHAT_UPDATE_EXTENSION,
+    WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
@@ -986,6 +987,20 @@ function listenToBackgroundPage() {
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);
 					break;
+        case WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP:
+            if(message.ok)
+                showToast(
+                    "req_downloads_open_popup",
+                    true,
+                    true,
+                );
+            else
+                showToast(
+                    "error_req_downloads",
+                    false,
+                    false,
+                );
+            break;
 				case WHAT_EXPORT:
 					launchDownload(message);
 					break;
