@@ -21,7 +21,7 @@ if(whichPermissions == null || whichPermissions === "hostpermissions"){
     /**
      * Sets the `noPerm` item in localStorage then switches to the standard popup
      */
-    function setNoPerm(e) {
+    const setNoPerm = (e) => {
         e.preventDefault();
         localStorage.setItem("noPerm", "true");
         globalThis.location = noPerm.href;

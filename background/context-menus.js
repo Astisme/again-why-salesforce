@@ -40,9 +40,7 @@ import ensureTranslatorAvailability from "/translator.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
-	checkForUpdates,
 	checkLaunchExport,
-  exportHandler,
 } from "./utils.js";
 import {
 	bg_getCommandLinks,
@@ -470,9 +468,6 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_REMOVE_TAB:
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
-			break;
-		case cxm_open_settings:
-			openSettingsPage();
 			break;
 		default:
 			message.tabUrl = Tab.minifyURL(info.linkUrl ?? info.pageUrl);

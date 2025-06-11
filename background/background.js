@@ -26,7 +26,6 @@ import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
 	checkForUpdates,
-	exportHandler,
   checkLaunchExport,
 } from "./utils.js";
 import { checkAddRemoveContextMenus } from "./context-menus.js";
