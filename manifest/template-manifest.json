@@ -2,19 +2,22 @@
 	"manifest_version": 3,
 	"name": "__MSG_extension_label__",
 	"version": "1.4.8",
+    "default_locale": "en",
+    "description": "__MSG_extension_description__",
 	"permissions": [
 		"storage",
-		"activeTab",
-		"contextMenus",
-		"downloads",
-		"cookies"
+		"contextMenus"
 	],
-	"default_locale": "en",
-	"description": "__MSG_extension_description__",
 	"host_permissions": [
 		"*://*.my.salesforce-setup.com/lightning/setup/*",
-		"*://*.lightning.force.com/lightning/setup/*",
-		"*://*.my.salesforce.com/"
+		"*://*.lightning.force.com/lightning/setup/*"
+    ],
+    "optional_permissions": [
+        "downloads",
+        "cookies"
+    ],
+	"optional_host_permissions": [
+		"*://*.my.salesforce.com/*"
 	],
 	"homepage_url": "https://github.com/Astisme/again-why-salesforce",
 	"content_scripts": [

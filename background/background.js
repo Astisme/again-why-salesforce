@@ -22,7 +22,7 @@ import {
 	SUPPORTED_SALESFORCE_URLS,
 	WHY_KEY,
 } from "/constants.js";
-import { bg_getCurrentBrowserTab, bg_notify, exportHandler } from "./utils.js";
+import { bg_getCurrentBrowserTab, bg_notify, checkLaunchExport, } from "./utils.js";
 
 /**
  * Retrieves data from the browser"s synced storage and invokes the provided callback with the data.
@@ -269,7 +269,7 @@ BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
 			//return false; // we won"t call sendResponse
 			break;
 		case "export":
-			exportHandler(request.tabs);
+			checkLaunchExport(request.tabs);
 			sendResponse(null);
 			//return false;
 			break;
@@ -323,7 +323,7 @@ BROWSER.commands.onCommand.addListener(async (command) => {
 			openSettingsPage();
 			break;
 		case CMD_EXPORT_ALL:
-			exportHandler();
+            checkLaunchExport();
 			break;
 		default:
 			bg_notify({

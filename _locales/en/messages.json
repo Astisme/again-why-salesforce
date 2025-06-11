@@ -1,4 +1,20 @@
 {
+	"req_downloads_open_popup": {
+		"message": "Please open the extension popup from the extenions menu of your browser.",
+		"description": "[toast] ask the user to click on the extension popup to continue"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "This operation will only be requested once.",
+		"description": "[req_permission] description to enable downloads permission"
+	},
+	"req_downloads_perm_header": {
+		"message": "Please enable the Downloads permission\nto start the requested Export.",
+		"description": "[req_permission] call to action to enable downloads permission"
+	},
+	"enable": {
+		"message": "Enable",
+		"description": "[req_permission] button to enable permissions"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -522,9 +538,9 @@
 		"message": "Automatically open $salesforce_setup page when clicking on the popup while on a Salesforce page.",
 		"description": "[setting] when the user opens the popup while on a Salesforce website"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Language option to fall back to English if locale is unsupported or does not present the translation"
+	"opt_en_default": {
+		"message": "en (Default and Fallback)",
+		"description": "Default language option of the extension"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Keep favourite Tabs on the left of Home and Object Manager.",
@@ -550,9 +566,13 @@
 		"message": "page in the same tab when clicking on the popup.",
 		"description": "[setting] prevent opening a new browser tab"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Default)",
-		"description": "Option to use Salesforce’s language setting. This option is the default for the extension."
+	"opt_pick_language": {
+		"message": "Pick extension language",
+		"description": "[setting] label to propt the user to pick their preferred language"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Follow Salesforce Language (reads Salesforce Cookies)",
+		"description": "Option to use Salesforce’s language setting. Tho use this option, users must allow the extension to read Salesforce cookies."
 	},
 	"opt_skip_link_detection": {
 		"message": "Skip automatic check of Salesforce Id.",

@@ -40,7 +40,7 @@ import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
 	checkForUpdates,
-	exportHandler,
+	checkLaunchExport,
 } from "./utils.js";
 import {
 	bg_getCommandLinks,
@@ -493,7 +493,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.what = "add";
 			break;
 		case CXM_EXPORT_TABS:
-			exportHandler();
+            checkLaunchExport();
 			break;
 		case CXM_PAGE_SAVE_TAB:
 		case CXM_REMOVE_TAB:

@@ -6,6 +6,7 @@ import {
 	ISCHROME,
 	NO_UPDATE_NOTIFICATION,
 	WHAT_UPDATE_EXTENSION,
+    WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 } from "/constants.js";
 import { bg_getSettings, bg_getStorage } from "./background.js";
 
@@ -118,11 +119,34 @@ function _exportHandler(tabs) {
  *
  * @param {Array|null} tabs - An array of tab objects to be exported as a JSON file. If null, the function fetches the tab data from storage.
  */
-export function exportHandler(tabs = null) {
-	if (tabs == null) {
-		return bg_getStorage(_exportHandler);
-	}
-	_exportHandler(tabs);
+function exportHandler(tabs = null) {
+    if (tabs == null) {
+        return bg_getStorage(_exportHandler);
+    }
+    _exportHandler(tabs);
+}
+
+function requestExportPermission(){
+    const req_perm_link = BROWSER.runtime.getURL("action/req_permissions/req_permissions.html")
+    if(req_perm_link == null)
+        return false;
+    BROWSER.action.setPopup({
+        popup: `${req_perm_link}?whichid=download`
+    });
+    return true;
+}
+
+export function checkLaunchExport(tabs = null){
+    if(ISSAFARI || BROWSER.downloads != null){
+        // downloads permission has already been granted
+        exportHandler(tabs);
+        return;
+    }
+    // show toast message to request the user to open the popup
+    bg_notify({
+        what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+        ok: requestExportPermission(),
+    });
 }
 
 let checked = false;
