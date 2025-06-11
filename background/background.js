@@ -26,7 +26,7 @@ import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
 	checkForUpdates,
-  checkLaunchExport,
+	checkLaunchExport,
 } from "./utils.js";
 import { checkAddRemoveContextMenus } from "./context-menus.js";
 
@@ -324,7 +324,7 @@ function listenToExtensionMessages() {
 				//return false; // we won"t call sendResponse
 				break;
 			case "export":
-        checkLaunchExport(request.tabs);
+				checkLaunchExport(request.tabs);
 				sendResponse(null);
 				//return false;
 				break;
@@ -384,7 +384,7 @@ function listenToExtensionCommands() {
 				openSettingsPage();
 				break;
 			case CMD_EXPORT_ALL:
-        checkLaunchExport();
+				checkLaunchExport();
 				break;
 			default:
 				bg_notify({

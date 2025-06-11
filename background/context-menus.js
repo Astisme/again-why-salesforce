@@ -445,7 +445,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
 		case CXM_EXPORT_TABS:
-      checkLaunchExport();
+			checkLaunchExport();
 			return;
 		case cxm_open_settings:
 			openSettingsPage();
