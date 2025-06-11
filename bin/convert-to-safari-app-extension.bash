@@ -73,11 +73,11 @@ if [ ! -w "$MOUNT_DIR" ]; then
 fi
 
 # Copy background images to hidden .background folder in DMG
-if [ -f "images/background-dmg.png" ]; then
-    echo "Setting up background images..."
+if [ -f "assets/build/dmg-bkg.png" ]; then
+    echo "Setting up background assets..."
     mkdir -p "$MOUNT_DIR/.background"
     # Copy the regular resolution image
-    cp "images/background-dmg.png" "$MOUNT_DIR/.background/background-dmg.png" || {
+    cp "assets/build/dmg-bkg.png" "$MOUNT_DIR/.background/dmg-bkg.png" || {
         echo "Warning: Could not copy background image"
     }
   # Use AppleScript to customize the DMG appearance
@@ -97,8 +97,8 @@ tell application "Finder"
         end try
         set label position of viewOptions to bottom
         set text size of viewOptions to 12
-        if exists file ".background:background-dmg.png" then
-          set background picture of viewOptions to file ".background:background-dmg.png"
+        if exists file ".background:dmg-bkg.png" then
+          set background picture of viewOptions to file ".background:dmg-bkg.png"
         end if
         set position of item "$EXT_NAME.app" of container window to {150, 215}
         set position of item "Applications" of container window to {450, 215}
@@ -115,45 +115,33 @@ fi
 # Hide background folder
 SetFile -a V "$MOUNT_DIR/.background" 2>/dev/null || chflags hidden "$MOUNT_DIR/.background" 2>/dev/null
 
-# Create and add custom volume icon from existing assets (do this BEFORE mounting)
+# Create and add custom volume icon from existing images (do this BEFORE mounting)
 VOLUME_ICON_ICNS="$BACKGROUND_DIR/VolumeIcon.icns"
-if [ ! -f "$VOLUME_ICON_ICNS" ] && [ -d "assets/icons" ]; then
+if [ ! -f "$VOLUME_ICON_ICNS" ] && [ -d "assets/build" ]; then
     echo "Creating volume icon from existing assets..."
     # Create iconset directory in the proper location
     ICONSET_DIR="$BACKGROUND_DIR/VolumeIcon.iconset"
     mkdir -p "$ICONSET_DIR"
     
     # Copy and rename existing PNGs to iconset format
-    [ -f "assets/icons/awsf-16.png" ] && cp "assets/icons/awsf-16.png" "$ICONSET_DIR/icon_16x16.png"
-    [ -f "assets/icons/awsf-32.png" ] && cp "assets/icons/awsf-32.png" "$ICONSET_DIR/icon_16x16@2x.png"
-    [ -f "assets/icons/awsf-32.png" ] && cp "assets/icons/awsf-32.png" "$ICONSET_DIR/icon_32x32.png"
-    [ -f "assets/icons/awsf-64.png" ] && cp "assets/icons/awsf-64.png" "$ICONSET_DIR/icon_32x32@2x.png"
-    [ -f "assets/icons/awsf-128.png" ] && cp "assets/icons/awsf-128.png" "$ICONSET_DIR/icon_128x128.png"
-    [ -f "assets/icons/awsf-256.png" ] && cp "assets/icons/awsf-256.png" "$ICONSET_DIR/icon_128x128@2x.png"
-    [ -f "assets/icons/awsf-256.png" ] && cp "assets/icons/awsf-256.png" "$ICONSET_DIR/icon_256x256.png"
-    [ -f "assets/icons/awsf-512.png" ] && cp "assets/icons/awsf-512.png" "$ICONSET_DIR/icon_256x256@2x.png"
-    [ -f "assets/icons/awsf-512.png" ] && cp "assets/icons/awsf-512.png" "$ICONSET_DIR/icon_512x512.png"
-    [ -f "assets/icons/awsf-1024.png" ] && cp "assets/icons/awsf-1024.png" "$ICONSET_DIR/icon_512x512@2x.png"
+    [ -f "assets/build/dmg-img.png" ] && cp "assets/build/dmg-img.png" "$ICONSET_DIR/icon_32x32@2x.png"
     
     # Check if we have at least one icon
     if [ "$(ls -1 "$ICONSET_DIR" 2>/dev/null | wc -l)" -gt 0 ]; then
         # Convert iconset to icns
-        if iconutil -c icns "$ICONSET_DIR" -o "$VOLUME_ICON_ICNS" 2>/dev/null; then
+        if iconutil -c icns "$ICONSET_DIR" -o "$VOLUME_ICON_ICNS"; then
             echo "✓ Created volume icon: $VOLUME_ICON_ICNS"
         else
             echo "✗ Failed to create .icns file with iconutil"
             # Fallback: try using the largest PNG directly (some tools accept this)
-            if [ -f "assets/pics/awsf-512.png" ]; then
-                cp "assets/pics/awsf-512.png" "$VOLUME_ICON_ICNS.png"
+            if [ -f "assets/build/dmg-img.png" ]; then
+                cp "assets/build/dmg-img.png" "$VOLUME_ICON_ICNS.png"
                 echo "→ Using PNG fallback: $VOLUME_ICON_ICNS.png"
             fi
         fi
     else
-        echo "✗ No icon files found in assets/pics/"
+        echo "✗ No icon files found in assets/build"
     fi
-    
-    # Clean up iconset directory
-    rm -rf "$ICONSET_DIR"
 fi
 
 # Add custom volume icon to DMG
