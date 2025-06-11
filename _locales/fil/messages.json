@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] pinapayagan ang user na i-drop ang kanilang mga file sa tinukoy na lugar"
 	},
+	"enable": {
+		"message": "Paganahin",
+		"description": "[humingi_pahintulot] button para paganahin ang mga pahintulot"
+	},
 	"error_adding_tab": {
 		"message": "Error sa pagdagdag ng Tab.",
 		"description": "[error] Pangkalahatang error sa pagdagdag ng Tab"
@@ -543,9 +547,9 @@
 		"message": "Awtomatikong buksan ang $salesforce_setup page kapag nag-click sa popup habang nasa Salesforce page.",
 		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang Salesforce website"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Pagpipilian ng wika upang bumalik sa Ingles kung hindi suportado ang locale o walang pagsasalin"
+	"opt_en_default": {
+		"message": "en (Default at Fallback)",
+		"description": "Default na opsyon ng wika ng extension"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Panatilihin ang paboritong Tabs sa kaliwa ng Home at Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "Palaging buksan ang $salesforce_setup page sa parehong Tab kapag nag-click sa popup.",
 		"description": "[setting]"
 	},
+	"opt_pick_language": {
+		"message": "Pumili ng wika ng extension",
+		"description": "[setting] label upang hilingin sa gumagamit na piliin ang kanilang gustong wika"
+	},
 	"opt_prevent_analytics": {
 		"message": "Pigilan ang paggamit ng Simple Analytics (hindi lalabas sa bilang ng mga user).",
 		"description": "[setting] pinapayagan ang user na pigilan ang pagpapadala ng anonymous analytics"
@@ -579,9 +587,9 @@
 		"message": "buksan ang pahina sa parehong tab kapag na-click ang popup.",
 		"description": "[setting] pigil sa pagbubukas ng bagong tab"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Default)",
-		"description": "Pagpipilian na gamitin ang setting ng wika ng Salesforce. Ito ang default para sa extension."
+	"opt_sf_lang_cookies": {
+		"message": "Sundin ang Salesforce Language (binabasa ang Salesforce Cookies)",
+		"description": "Opsyon na gamitin ang setting ng wika ng Salesforce. Upang magamit ang opsyong ito, dapat payagan ng extension ang pagbabasa ng Salesforce cookies."
 	},
 	"opt_skip_link_detection": {
 		"message": "Laktawan ang awtomatikong tsek ng Salesforce Id.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Alisin ang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+	},
+	"req_downloads_open_popup": {
+		"message": "Paki-buksan ang popup ng extension mula sa menu ng extensions ng iyong browser.",
+		"description": "[toast] hilingin sa user na mag-click sa popup ng extension upang magpatuloy"
+	},
+	"req_downloads_perm_header": {
+		"message": "Paki-enable ang Downloads permission\npara simulan ang hinihinging Export.",
+		"description": "[humingi_pahintulot] call to action upang paganahin ang pahintulot sa pag-download"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ang operasyong ito ay hihilingin lamang ng isang beses.",
+		"description": "[humingi_pahintulot] paglalarawan upang paganahin ang pahintulot sa pag-download"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Huwag nang tanungin muli.",

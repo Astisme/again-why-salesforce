@@ -167,6 +167,10 @@
 		"message": "Upuść",
 		"description": "[import] pozwól użytkownikowi upuścić pliki na wyznaczony obszar"
 	},
+	"enable": {
+		"message": "Włącz",
+		"description": "[poproś_o_pozwolenie] przycisk do włączania uprawnień"
+	},
 	"error_adding_tab": {
 		"message": "Błąd podczas dodawania Tab.",
 		"description": "[błąd] Ogólny błąd używany podczas dodawania Tab"
@@ -543,9 +547,9 @@
 		"message": "Automatycznie otwieraj stronę $salesforce_setup po kliknięciu wyskakującego okienka, gdy jesteś na stronie Salesforce.",
 		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na stronie Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Opcja języka powrotu do angielskiego, jeśli lokalizacja nie jest obsługiwana lub nie ma tłumaczenia"
+	"opt_en_default": {
+		"message": "en (Domyślny i awaryjny)",
+		"description": "Domyślna opcja językowa rozszerzenia"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Zachowaj ulubione karty po lewej stronie Strony głównej i Menedżera obiektów.",
@@ -567,6 +571,10 @@
 		"message": "Zawsze otwieraj stronę $salesforce_setup w tej samej Tab po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie]"
 	},
+	"opt_pick_language": {
+		"message": "Wybierz język rozszerzenia",
+		"description": "[ustawienie] etykieta, która prosi użytkownika o wybranie preferowanego języka"
+	},
 	"opt_prevent_analytics": {
 		"message": "Zablokuj korzystanie z Simple Analytics (nie pojawi się w liczbie użytkowników).",
 		"description": "[ustawienie] pozwala użytkownikowi zablokować wysyłanie anonimowych danych analitycznych"
@@ -579,9 +587,9 @@
 		"message": "otwórz stronę w tej samej karcie po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie] zapobiegaj otwieraniu nowej karty"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Domyślne)",
-		"description": "Opcja użycia ustawienia języka Salesforce. Ta opcja jest domyślna dla rozszerzenia."
+	"opt_sf_lang_cookies": {
+		"message": "Użyj języka Salesforce (odczytuje pliki cookie Salesforce)",
+		"description": "Opcja użycia ustawienia języka Salesforce. Aby skorzystać z tej opcji, użytkownicy muszą zezwolić rozszerzeniu na odczytywanie plików cookie Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Pomiń automatyczne sprawdzanie identyfikatora Salesforce.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Usuń Tab",
 		"description": "[alt] tekst alternatywny, gdy obrazy nie działają"
+	},
+	"req_downloads_open_popup": {
+		"message": "Proszę otworzyć wyskakujące okienko rozszerzenia z menu rozszerzeń przeglądarki.",
+		"description": "[komunikat] poproś użytkownika, aby kliknął wyskakujące okienko rozszerzenia, aby kontynuować"
+	},
+	"req_downloads_perm_header": {
+		"message": "Proszę włączyć uprawnienie do pobierania\naby rozpocząć żądany eksport.",
+		"description": "[poproś_o_pozwolenie] wezwanie do działania w celu włączenia uprawnienia do pobierania"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ta operacja zostanie poproszona tylko raz.",
+		"description": "[poproś_o_pozwolenie] opis włączenia uprawnienia do pobierania"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nie pytaj ponownie.",

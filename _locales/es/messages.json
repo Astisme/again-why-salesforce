@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] permite al usuario soltar sus archivos en el área especificada"
 	},
+	"enable": {
+		"message": "Habilitar",
+		"description": "[solicitar_permiso] botón para habilitar permisos"
+	},
 	"error_adding_tab": {
 		"message": "Error al agregar Tab.",
 		"description": "[error] error genérico al agregar una Tab"
@@ -542,9 +546,9 @@
 		"message": "Abrir automáticamente la página de $salesforce_setup al hacer clic en la ventana emergente si se está en una página de Salesforce.",
 		"description": "[configuración] cuando el usuario abre la ventana emergente mientras está en un sitio web de Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Opción de idioma para volver al inglés si la configuración regional no es compatible o no presenta la traducción"
+	"opt_en_default": {
+		"message": "en (Predeterminado y de reserva)",
+		"description": "Opción de idioma predeterminada de la extensión"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantener Tabs favoritos a la izquierda de Inicio y Object Manager.",
@@ -566,6 +570,10 @@
 		"message": "Abrir siempre la página de $salesforce_setup en la misma Tab al hacer clic en la ventana emergente.",
 		"description": "[configuración]"
 	},
+	"opt_pick_language": {
+		"message": "Elegir idioma de la extensión",
+		"description": "[configuración] etiqueta para pedir al usuario que elija su idioma preferido"
+	},
 	"opt_prevent_analytics": {
 		"message": "Evitar el uso de Simple Analytics (no aparecerá en el conteo de usuarios).",
 		"description": "[configuración] permite al usuario evitar enviar análisis anónimos"
@@ -578,9 +586,9 @@
 		"message": "página en la misma pestaña al hacer clic en el popup.",
 		"description": "[configuración] evitar abrir una nueva pestaña del navegador"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Predeterminado)",
-		"description": "Opción para usar la configuración de idioma de Salesforce. Esta opción es la predeterminada para la extensión."
+	"opt_sf_lang_cookies": {
+		"message": "Seguir el idioma de Salesforce (lee las cookies de Salesforce)",
+		"description": "Opción para usar la configuración de idioma de Salesforce. Para usar esta opción, los usuarios deben permitir que la extensión lea las cookies de Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Omitir verificación automática de Id de Salesforce.",
@@ -613,6 +621,18 @@
 	"remove_tab": {
 		"message": "Eliminar Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
+	},
+	"req_downloads_open_popup": {
+		"message": "Por favor, abra la ventana emergente de la extensión desde el menú de extensiones de su navegador.",
+		"description": "[brindis] pida al usuario que haga clic en la ventana emergente de la extensión para continuar"
+	},
+	"req_downloads_perm_header": {
+		"message": "Por favor, habilite el permiso de Descargas\npara iniciar la Exportación solicitada.",
+		"description": "[solicitar_permiso] llamada a la acción para habilitar el permiso de descargas"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Esta operación solo se solicitará una vez.",
+		"description": "[solicitar_permiso] descripción para habilitar el permiso de descargas"
 	},
 	"req_permissions_dont_ask": {
 		"message": "No preguntar de nuevo.",

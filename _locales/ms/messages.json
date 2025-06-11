@@ -167,6 +167,10 @@
 		"message": "Lepaskan",
 		"description": "[import] biarkan pengguna meletakkan fail mereka ke kawasan yang ditentukan"
 	},
+	"enable": {
+		"message": "Dayakan",
+		"description": "[minta_izin] butang untuk mendayakan kebenaran"
+	},
 	"error_adding_tab": {
 		"message": "Ralat semasa menambah Tab.",
 		"description": "[ralat] Ralat generik yang digunakan semasa menambah Tab"
@@ -543,9 +547,9 @@
 		"message": "Salesforce पृष्ठावर असताना पॉपअपवर क्लिक केल्यावर $salesforce_setup पृष्ठ स्वयंचलितपणे उघडा.",
 		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर असताना पॉपअप उघडतो"
 	},
-	"opt_en_fallback": {
-		"message": "en (Sandaran)",
-		"description": "Pilihan bahasa untuk kembali ke Bahasa Inggeris jika locale tidak disokong atau tiada terjemahan"
+	"opt_en_default": {
+		"message": "en (Default dan Fallback)",
+		"description": "Pilihan bahasa lalai sambungan"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kekalkan Tab kegemaran di sebelah kiri Home dan Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_setup पृष्ठ त्याच Tab मध्ये उघडा.",
 		"description": "[सेटिंग]"
 	},
+	"opt_pick_language": {
+		"message": "Pilih bahasa sambungan",
+		"description": "[tetapan] label untuk menggesa pengguna memilih bahasa pilihan mereka"
+	},
 	"opt_prevent_analytics": {
 		"message": "Halang penggunaan Simple Analytics (tidak termasuk dalam kiraan pengguna).",
 		"description": "[tetapan] benarkan pengguna menghalang penghantaran analitik tanpa nama"
@@ -579,9 +587,9 @@
 		"message": "halaman dalam tab yang sama apabila mengklik popup.",
 		"description": "[tetapan] elakkan membuka tab pelayar baharu"
 	},
-	"opt_sf_lang_default": {
-		"message": "Bahasa Salesforce (Lalai)",
-		"description": "Pilihan untuk menggunakan tetapan bahasa Salesforce. Pilihan ini adalah lalai untuk sambungan ini."
+	"opt_sf_lang_cookies": {
+		"message": "Ikut Bahasa Salesforce (membaca Cookies Salesforce)",
+		"description": "Pilihan untuk menggunakan tetapan bahasa Salesforce. Untuk menggunakan pilihan ini, pengguna mesti membenarkan sambungan membaca kuki Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Langkau semakan ID Salesforce automatik.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Buang Tab",
 		"description": "[alt] teks alternatif apabila gambar tidak berfungsi"
+	},
+	"req_downloads_open_popup": {
+		"message": "Sila buka popup sambungan daripada menu sambungan pelayar anda.",
+		"description": "[toast] minta pengguna untuk mengklik pada popup sambungan untuk meneruskan"
+	},
+	"req_downloads_perm_header": {
+		"message": "Sila dayakan kebenaran Muat Turun\nuntuk memulakan Eksport yang diminta.",
+		"description": "[minta_izin] panggilan untuk bertindak untuk mendayakan kebenaran muat turun"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Operasi ini hanya akan diminta sekali.",
+		"description": "[minta_izin] penerangan untuk mendayakan kebenaran muat turun"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Jangan tanya lagi.",

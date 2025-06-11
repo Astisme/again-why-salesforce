@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] tillader brugeren at droppe deres filer på det angivne område"
 	},
+	"enable": {
+		"message": "Aktiver",
+		"description": "[anmod_tilladelse] knap for at aktivere tilladelser"
+	},
 	"error_adding_tab": {
 		"message": "Fejl ved tilføjelse af Tab.",
 		"description": "[fejl] Generisk fejl ved tilføjelse af en Tab"
@@ -543,9 +547,9 @@
 		"message": "Åbn automatisk $salesforce_setup-siden, når du klikker på pop op-vinduet, mens du er på en Salesforce-side.",
 		"description": "[indstilling] når brugeren åbner pop op-vinduet på et Salesforce-websted"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Sprogmulighed for at falde tilbage til engelsk, hvis lokalet ikke understøttes eller ikke viser oversættelsen"
+	"opt_en_default": {
+		"message": "en (Standard og fallback)",
+		"description": "Standardsprogmulighed for udvidelsen"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behold favorit-Tabs til venstre for Hjem og Objektstyring.",
@@ -567,6 +571,10 @@
 		"message": "Åbn altid $salesforce_setup-siden i samme Tab, når du klikker på pop op-vinduet.",
 		"description": "[indstilling]"
 	},
+	"opt_pick_language": {
+		"message": "Vælg udvidelsessprog",
+		"description": "[indstilling] etiket til at bede brugeren om at vælge deres foretrukne sprog"
+	},
 	"opt_prevent_analytics": {
 		"message": "Forhindr brug af Simple Analytics (bliver ikke talt med i brugerantal).",
 		"description": "[indstilling] lader brugeren forhindre afsendelse af anonym analyse"
@@ -579,9 +587,9 @@
 		"message": "side i den samme fane ved klik på pop-up.",
 		"description": "[indstilling] forhindr åbning af en ny browser-fane"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce-sprog (Standard)",
-		"description": "Mulighed for at bruge Salesforces sprogindstilling. Dette er standardindstillingen for udvidelsen."
+	"opt_sf_lang_cookies": {
+		"message": "Følg Salesforce-sprog (læser Salesforce-cookies)",
+		"description": "Mulighed for at bruge Salesforces sprogindstilling. For at bruge denne mulighed skal brugere give udvidelsen tilladelse til at læse Salesforce-cookies."
 	},
 	"opt_skip_link_detection": {
 		"message": "Spring automatisk kontrol af Salesforce ID over.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Fjern Tab",
 		"description": "[alt] alternativ tekst når billeder ikke vises"
+	},
+	"req_downloads_open_popup": {
+		"message": "Åbn venligst udvidelsens pop op fra udvidelsesmenuen i din browser.",
+		"description": "[meddelelse] bed brugeren om at klikke på udvidelsens pop op for at fortsætte"
+	},
+	"req_downloads_perm_header": {
+		"message": "Aktiver venligst downloadtilladelsen\nfor at starte den anmodede eksport.",
+		"description": "[anmod_tilladelse] opfordring til handling for at aktivere downloadtilladelse"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Denne handling vil kun blive anmodet én gang.",
+		"description": "[anmod_tilladelse] beskrivelse for at aktivere downloadtilladelse"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Spørg ikke igen.",

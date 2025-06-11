@@ -167,6 +167,10 @@
 		"message": "Nomest",
 		"description": "[importēšana] ļauj lietotājam nomest savus failus uz norādītās zonas"
 	},
+	"enable": {
+		"message": "Iespējot",
+		"description": "[pieprasīt_atļauju] poga atļauju iespējošanai"
+	},
 	"error_adding_tab": {
 		"message": "Kļūda pievienojot Tab.",
 		"description": "[kļūda] Vispārīga kļūda, ko izmanto, pievienojot Tab"
@@ -543,9 +547,9 @@
 		"message": "Automātiski atvērt $salesforce_setup lapu, noklikšķinot uz uznirstošā loga, ja esat Salesforce lapā.",
 		"description": "[iestatījums] kad lietotājs atver uznirstošo logu Salesforce vietnē"
 	},
-	"opt_en_fallback": {
-		"message": "en (Rezerves)",
-		"description": "Valodas opcija, lai izmantotu angļu valodu, ja lokalizācija netiek atbalstīta vai nav pieejams tulkojums"
+	"opt_en_default": {
+		"message": "en (Noklusējums un rezerves)",
+		"description": "Paplašinājuma noklusējuma valodas opcija"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Saglabāt iecienītākās Tabs kreisajā pusē no Home un Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "Vienmēr atvērt $salesforce_setup lapu tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums]"
 	},
+	"opt_pick_language": {
+		"message": "Izvēlieties paplašinājuma valodu",
+		"description": "[iestatījums] etiķete, lai mudinātu lietotāju izvēlēties vēlamo valodu"
+	},
 	"opt_prevent_analytics": {
 		"message": "Novērst Simple Analytics izmantošanu (netiks ieskaitīts lietotāju skaitā).",
 		"description": "[iestatījums] ļauj lietotājam novērst anonīmas analītikas sūtīšanu"
@@ -579,9 +587,9 @@
 		"message": "lapa tajā pašā cilnē, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums] nepieļaut jaunas pārlūka cilnes atvēršanu"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce valoda (Noklusējuma)",
-		"description": "Opcija izmantot Salesforce valodas iestatījumu. Šī opcija ir paplašinājuma noklusējuma iestatījums."
+	"opt_sf_lang_cookies": {
+		"message": "Sekojiet Salesforce valodai (lasa Salesforce sīkfailus)",
+		"description": "Iespēja izmantot Salesforce valodu iestatījumu. Lai izmantotu šo iespēju, lietotājiem jāļauj paplašinājumam lasīt Salesforce sīkfailus."
 	},
 	"opt_skip_link_detection": {
 		"message": "Izlaist automātisko Salesforce ID pārbaudi.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Noņemt Tab",
 		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
+	},
+	"req_downloads_open_popup": {
+		"message": "Lūdzu, atveriet paplašinājuma uznirstošo logu no savas pārlūkprogrammas paplašinājumu izvēlnes.",
+		"description": "[paziņojums] lūdziet lietotājam noklikšķināt uz paplašinājuma uznirstošā loga, lai turpinātu"
+	},
+	"req_downloads_perm_header": {
+		"message": "Lūdzu, iespējojiet lejupielāžu atļauju,\nlai sāktu pieprasīto eksportu.",
+		"description": "[pieprasīt_atļauju] aicinājums veikt darbību, lai iespējotu lejupielāžu atļauju"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Šī darbība tiks pieprasīta tikai vienu reizi.",
+		"description": "[pieprasīt_atļauju] apraksts lejupielāžu atļaujas iespējošanai"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Vairs nejautāt.",

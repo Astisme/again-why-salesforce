@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] lubab kasutajal lohistada oma faile määratud alale"
 	},
+	"enable": {
+		"message": "Luba",
+		"description": "[nõua_luba] nupp lubade lubamiseks"
+	},
 	"error_adding_tab": {
 		"message": "Viga Tabsi lisamisel.",
 		"description": "[error] Üldine viga Tabsi lisamisel"
@@ -543,9 +547,9 @@
 		"message": "Automaatselt ava $salesforce_setup leht, kui klõpsate hüpikaknal, kui olete Salesforce'i lehel.",
 		"description": "[seadistus] kui kasutaja avab hüpikakna Salesforce'i veebisaidil"
 	},
-	"opt_en_fallback": {
-		"message": "en (Varuvariant)",
-		"description": "Keele valik inglise keelele tagasi minekuks, kui lokaat ei ole toetatud või puudub tõlge"
+	"opt_en_default": {
+		"message": "en (Vaikimisi ja tagavaraks)",
+		"description": "Laienduse vaikimisi keelevalik"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hoia lemmikud Tabs Home ja Object Manager'i vasakul küljel.",
@@ -567,6 +571,10 @@
 		"message": "Ava alati $salesforce_setup leht samas Tab, kui klõpsate hüpikaknal.",
 		"description": "[seadistus]"
 	},
+	"opt_pick_language": {
+		"message": "Valige laienduse keel",
+		"description": "[seade] silt, mis palub kasutajal valida eelistatud keel"
+	},
 	"opt_prevent_analytics": {
 		"message": "Takista Simple Analytics kasutamist (ei kuvata kasutajate arvus).",
 		"description": "[seade] võimaldab kasutajal takistada anonüümsete analüütikate saatmist"
@@ -579,9 +587,9 @@
 		"message": "leht samas vahekaardis hüpikaknale klõpsates.",
 		"description": "[seade] ära ava uut brauseri vahekaarti"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce'i keel (Vaikimisi)",
-		"description": "Valik Salesforce'i keeleseade kasutamiseks. See valik on laienduse vaikimisi seade."
+	"opt_sf_lang_cookies": {
+		"message": "Jälgi Salesforce'i keelt (loeb Salesforce'i küpsiseid)",
+		"description": "Võimalus kasutada Salesforce'i keele seadistust. Selle valiku kasutamiseks peavad kasutajad lubama laiendusel Salesforce'i küpsiseid lugeda."
 	},
 	"opt_skip_link_detection": {
 		"message": "Jäta Salesforce’i ID automaatkontroll vahele.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Eemalda Tab",
 		"description": "[alt] alternatiivtekst, kui pildid ei tööta"
+	},
+	"req_downloads_open_popup": {
+		"message": "Palun avage laienduse hüpikaken oma brauseri laienduste menüüst.",
+		"description": "[teade] paluge kasutajal jätkamiseks laienduse hüpikaknale klõpsata"
+	},
+	"req_downloads_perm_header": {
+		"message": "Palun lubage allalaadimise luba,\net alustada soovitud eksporti.",
+		"description": "[nõua_luba] üleskutse allalaadimise loa lubamiseks"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Seda toimingut küsitakse ainult üks kord.",
+		"description": "[nõua_luba] allalaadimise loa lubamise kirjeldus"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ära küsi uuesti.",

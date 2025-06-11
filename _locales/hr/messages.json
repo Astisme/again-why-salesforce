@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] omogućuje korisniku da ispusti svoje datoteke na zadano područje"
 	},
+	"enable": {
+		"message": "Omogući",
+		"description": "[zahtjev_dopuštenja] gumb za omogućavanje dopuštenja"
+	},
 	"error_adding_tab": {
 		"message": "Pogreška pri dodavanju Tab-a.",
 		"description": "[error] Opća pogreška pri dodavanju Tab-a"
@@ -543,9 +547,9 @@
 		"message": "Automatski otvori stranicu $salesforce_setup kada kliknete na skočni prozor dok ste na Salesforce stranici.",
 		"description": "[postavka] kada korisnik otvori skočni prozor dok je na Salesforce web stranici"
 	},
-	"opt_en_fallback": {
-		"message": "en (Rezervno)",
-		"description": "Jezična opcija za povratak na engleski ako lokalizacija nije podržana ili ne prikazuje prijevod"
+	"opt_en_default": {
+		"message": "en (Zadano i rezervno)",
+		"description": "Zadana jezična opcija proširenja"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Zadrži omiljene Tabove na lijevoj strani Početne stranice i Upravitelja objekata.",
@@ -567,6 +571,10 @@
 		"message": "Uvijek otvori stranicu $salesforce_setup u istom Tab kada kliknete na skočni prozor.",
 		"description": "[postavka]"
 	},
+	"opt_pick_language": {
+		"message": "Odaberite jezik proširenja",
+		"description": "[postavka] oznaka za poticanje korisnika da odabere željeni jezik"
+	},
 	"opt_prevent_analytics": {
 		"message": "Spriječi korištenje Simple Analytics (neće se prikazivati u broju korisnika).",
 		"description": "[postavka] omogućuje korisniku da spriječi slanje anonimnih analiza"
@@ -579,9 +587,9 @@
 		"message": "stranica na istom tabu pri kliku na skočni prozor.",
 		"description": "[postavka] spriječi otvaranje novog pregledničkog taba"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce jezik (Zadano)",
-		"description": "Opcija za korištenje Salesforce postavke jezika. Ova opcija je zadana za proširenje."
+	"opt_sf_lang_cookies": {
+		"message": "Pratite Salesforce jezik (čita Salesforce kolačiće)",
+		"description": "Opcija za korištenje jezične postavke Salesforcea. Da bi koristili ovu opciju, korisnici moraju dopustiti proširenju čitanje Salesforce kolačića."
 	},
 	"opt_skip_link_detection": {
 		"message": "Preskoči automatsku provjeru Salesforce ID-ja.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Ukloni Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"req_downloads_open_popup": {
+		"message": "Molimo otvorite skočni prozor proširenja iz izbornika proširenja vašeg preglednika.",
+		"description": "[obavijest] zamolite korisnika da klikne na skočni prozor proširenja za nastavak"
+	},
+	"req_downloads_perm_header": {
+		"message": "Molimo omogućite dopuštenje za preuzimanja\nza početak zatraženog izvoza.",
+		"description": "[zahtjev_dopuštenja] poziv na radnju za omogućavanje dopuštenja za preuzimanja"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ova će operacija biti zatražena samo jednom.",
+		"description": "[zahtjev_dopuštenja] opis za omogućavanje dopuštenja za preuzimanja"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nemoj pitati ponovo.",

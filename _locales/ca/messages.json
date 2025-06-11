@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] permet a l’usuari deixar anar els seus fitxers a l’àrea especificada"
 	},
+	"enable": {
+		"message": "Activa",
+		"description": "[sol·licitud_permís] botó per habilitar permisos"
+	},
 	"error_adding_tab": {
 		"message": "Error en afegir Tab.",
 		"description": "[error] Error genèric en afegir una Tab"
@@ -543,9 +547,9 @@
 		"message": "Obre automàticament la pàgina $salesforce_setup en fer clic a la finestra emergent si ets en una pàgina de Salesforce.",
 		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web de Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Alternativa)",
-		"description": "Opció d'idioma per tornar a l'anglès si la configuració regional no és compatible o no presenta la traducció"
+	"opt_en_default": {
+		"message": "en (Per defecte i de reserva)",
+		"description": "Opció de llengua per defecte de l'extensió"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantenir Tabs preferits a l'esquerra d'Inici i Gestor d'objectes.",
@@ -567,6 +571,10 @@
 		"message": "Obre sempre la pàgina $salesforce_setup a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
 	},
+	"opt_pick_language": {
+		"message": "Tria l'idioma de l'extensió",
+		"description": "[configuració] etiqueta per demanar a l'usuari que triï el seu idioma preferit"
+	},
 	"opt_prevent_analytics": {
 		"message": "Evitar l’ús de Simple Analytics (no es comptarà en el recompte d’usuaris).",
 		"description": "[configuració] permet a l’usuari evitar l'enviament d'analítiques anònimes"
@@ -579,9 +587,9 @@
 		"message": "pàgina a la mateixa pestanya en fer clic a la finestra emergent.",
 		"description": "[configuració] evita obrir una nova pestanya del navegador"
 	},
-	"opt_sf_lang_default": {
-		"message": "Idioma de Salesforce (Predeterminat)",
-		"description": "Opció per utilitzar la configuració d'idioma de Salesforce. Aquesta opció és la predeterminada per a l'extensió."
+	"opt_sf_lang_cookies": {
+		"message": "Segueix l'idioma de Salesforce (llegeix les galetes de Salesforce)",
+		"description": "Opció per utilitzar la configuració de llengua de Salesforce. Per utilitzar aquesta opció, els usuaris han de permetre que l'extensió llegeixi les galetes de Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Saltar la comprovació automàtica de l’ID de Salesforce.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Eliminar Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"req_downloads_open_popup": {
+		"message": "Si us plau, obriu la finestra emergent de l'extensió des del menú d'extensions del vostre navegador.",
+		"description": "[tostada] demanar a l'usuari que faci clic a la finestra emergent de l'extensió per continuar"
+	},
+	"req_downloads_perm_header": {
+		"message": "Si us plau, habiliteu el permís de descàrregues\nper iniciar l'exportació sol·licitada.",
+		"description": "[sol·licitud_permís] crida a l'acció per habilitar el permís de descàrregues"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Aquesta operació només es sol·licitarà una vegada.",
+		"description": "[sol·licitud_permís] descripció per habilitar el permís de descàrregues"
 	},
 	"req_permissions_dont_ask": {
 		"message": "No demanis-ho de nou.",

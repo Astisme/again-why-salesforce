@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] lehetővé teszi a felhasználónak, hogy fájljait a megadott területre húzza"
 	},
+	"enable": {
+		"message": "Engedélyezés",
+		"description": "[engedély_kérése] gomb az engedélyek engedélyezéséhez"
+	},
 	"error_adding_tab": {
 		"message": "Hiba Tab hozzáadásakor.",
 		"description": "[error] Általános hiba Tab hozzáadásakor"
@@ -543,9 +547,9 @@
 		"message": "Automatikusan nyissa meg a $salesforce_setup oldalt, amikor a felugró ablakra kattint, miközben Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy Salesforce webhelyen"
 	},
-	"opt_en_fallback": {
-		"message": "en (Tartalék)",
-		"description": "Nyelvi lehetőség az angolra való visszalépéshez, ha a területi beállítás nem támogatott vagy nem jeleníti meg a fordítást"
+	"opt_en_default": {
+		"message": "en (Alapértelmezett és tartalék)",
+		"description": "Az extension alapértelmezett nyelvi opciója"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kedvenc Tabs megtartása a Kezdőlap és az Objektumkezelő bal oldalán.",
@@ -567,6 +571,10 @@
 		"message": "Mindig nyissa meg a $salesforce_setup oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
 		"description": "[beállítás]"
 	},
+	"opt_pick_language": {
+		"message": "Válassza ki az extension nyelvét",
+		"description": "[beállítás] címke, amely arra kéri a felhasználót, hogy válassza ki a kívánt nyelvet"
+	},
 	"opt_prevent_analytics": {
 		"message": "Egyszerű elemzések használatának megakadályozása (nem jelenik meg a felhasználószámban).",
 		"description": "[beállítás] lehetővé teszi a felhasználónak, hogy megakadályozza az anonim elemzések küldését"
@@ -579,9 +587,9 @@
 		"message": "oldal ugyanazon a fülön a felugró ablak kattintásakor.",
 		"description": "[beállítás] ne nyisson új böngészőfület"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Nyelv (Alapértelmezett)",
-		"description": "Opció a Salesforce nyelvi beállításának használatára. Ez az opció a bővítmény alapértelmezett beállítása."
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce nyelv követése (Salesforce cookie-k olvasása)",
+		"description": "Lehetőség a Salesforce nyelvi beállításának használatára. Ehhez a felhasználóknak engedélyezniük kell az extension számára a Salesforce cookie-k olvasását."
 	},
 	"opt_skip_link_detection": {
 		"message": "Salesforce ID automatikus ellenőrzésének kihagyása.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Tab eltávolítása",
 		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
+	},
+	"req_downloads_open_popup": {
+		"message": "Kérjük, nyissa meg az extension előugró ablakát a böngészője extension menüjéből.",
+		"description": "[értesítés] kérje meg a felhasználót, hogy kattintson az extension előugró ablakára a folytatáshoz"
+	},
+	"req_downloads_perm_header": {
+		"message": "Kérjük, engedélyezze a letöltési engedélyt\na kért exportálás megkezdéséhez.",
+		"description": "[engedély_kérése] felhívás a letöltési engedély engedélyezésére"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ez a művelet csak egyszer lesz kérve.",
+		"description": "[engedély_kérése] leírás a letöltési engedély engedélyezéséhez"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ne kérdezze újra.",

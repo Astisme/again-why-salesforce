@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] به کاربر اجازه می‌دهد فایل‌های خود را در منطقه‌ی مشخص شده رها کند"
 	},
+	"enable": {
+		"message": "فعال کردن",
+		"description": "[درخواست_مجوز] دکمه برای فعال کردن مجوزها"
+	},
 	"error_adding_tab": {
 		"message": "خطا در افزودن Tab.",
 		"description": "[error] خطای عمومی در افزودن Tab"
@@ -543,9 +547,9 @@
 		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce هستید، صفحه $salesforce_setup را به طور خودکار باز کنید.",
 		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت Salesforce است باز می کند"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "گزینه زبان برای بازگشت به انگلیسی اگر زبان منطقه‌ای پشتیبانی نشود یا ترجمه نداشته باشد"
+	"opt_en_default": {
+		"message": "en (پیش‌فرض و بازگشتی)",
+		"description": "گزینه زبان پیش‌فرض افزونه"
 	},
 	"opt_keep_tabs_left": {
 		"message": "نگه‌داشتن Tabهای علاقه‌مند در سمت چپ Home و Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "همیشه صفحه $salesforce_setup را در همان Tab هنگام کلیک بر روی پنجره بازشو باز کنید.",
 		"description": "[تنظیمات]"
 	},
+	"opt_pick_language": {
+		"message": "زبان افزونه را انتخاب کنید",
+		"description": "[تنظیمات] برچسبی برای درخواست از کاربر برای انتخاب زبان مورد نظر خود"
+	},
 	"opt_prevent_analytics": {
 		"message": "جلوگیری از استفاده از Simple Analytics (در شمارش کاربران نمایش داده نمی‌شود).",
 		"description": "[تنظیم] اجازه می‌دهد کاربر از ارسال تحلیل‌های ناشناس جلوگیری کند"
@@ -579,9 +587,9 @@
 		"message": "باز کردن صفحه در همان برگه هنگام کلیک روی پاپ‌آپ.",
 		"description": "[تنظیم] جلوگیری از باز شدن یک برگه جدید مرورگر"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (پیش‌فرض)",
-		"description": "گزینه استفاده از تنظیمات زبان Salesforce. این گزینه پیش‌فرض برای افزونه است."
+	"opt_sf_lang_cookies": {
+		"message": "زبان Salesforce را دنبال کنید (کوکی‌های Salesforce را می‌خواند)",
+		"description": "گزینه ای برای استفاده از تنظیمات زبان Salesforce. برای استفاده از این گزینه، کاربران باید به افزونه اجازه خواندن کوکی های Salesforce را بدهند."
 	},
 	"opt_skip_link_detection": {
 		"message": "رد کردن بررسی خودکار شناسه Salesforce.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "حذف Tab",
 		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
+	},
+	"req_downloads_open_popup": {
+		"message": "لطفاً پنجره بازشوی افزونه را از منوی افزونه‌های مرورگر خود باز کنید.",
+		"description": "[اعلان] از کاربر بخواهید برای ادامه روی پنجره بازشوی افزونه کلیک کند"
+	},
+	"req_downloads_perm_header": {
+		"message": "لطفاً مجوز دانلودها را فعال کنید\nتا صادرات درخواستی آغاز شود.",
+		"description": "[درخواست_مجوز] فراخوان برای فعال کردن مجوز دانلودها"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "این عملیات فقط یک بار درخواست خواهد شد.",
+		"description": "[درخواست_مجوز] توضیحات برای فعال کردن مجوز دانلودها"
 	},
 	"req_permissions_dont_ask": {
 		"message": "دیگر نپرس.",

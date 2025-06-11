@@ -1,20 +1,4 @@
 {
-	"req_downloads_open_popup": {
-		"message": "Please open the extension popup from the extenions menu of your browser.",
-		"description": "[toast] ask the user to click on the extension popup to continue"
-	},
-	"req_downloads_perm_paragraph": {
-		"message": "This operation will only be requested once.",
-		"description": "[req_permission] description to enable downloads permission"
-	},
-	"req_downloads_perm_header": {
-		"message": "Please enable the Downloads permission\nto start the requested Export.",
-		"description": "[req_permission] call to action to enable downloads permission"
-	},
-	"enable": {
-		"message": "Enable",
-		"description": "[req_permission] button to enable permissions"
-	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -182,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] let the user drop their files onto the specified area"
+	},
+	"enable": {
+		"message": "Enable",
+		"description": "[req_permission] button to enable permissions"
 	},
 	"error_adding_tab": {
 		"message": "Error when adding Tab.",
@@ -582,6 +570,10 @@
 		"message": "Always open $salesforce_setup page in the same tab when clicking on the popup.",
 		"description": "[setting]"
 	},
+	"opt_pick_language": {
+		"message": "Pick extension language",
+		"description": "[setting] label to propt the user to pick their preferred language"
+	},
 	"opt_prevent_analytics": {
 		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
 		"description": "[setting] let the user prevent them from sending anonymous analytics"
@@ -593,10 +585,6 @@
 	"opt_same_tab_popup": {
 		"message": "page in the same tab when clicking on the popup.",
 		"description": "[setting] prevent opening a new browser tab"
-	},
-	"opt_pick_language": {
-		"message": "Pick extension language",
-		"description": "[setting] label to propt the user to pick their preferred language"
 	},
 	"opt_sf_lang_cookies": {
 		"message": "Follow Salesforce Language (reads Salesforce Cookies)",
@@ -633,6 +621,18 @@
 	"remove_tab": {
 		"message": "Remove Tab",
 		"description": "[alt] alternative text when pictures do not work"
+	},
+	"req_downloads_open_popup": {
+		"message": "Please open the extension popup from the extenions menu of your browser.",
+		"description": "[toast] ask the user to click on the extension popup to continue"
+	},
+	"req_downloads_perm_header": {
+		"message": "Please enable the Downloads permission\nto start the requested Export.",
+		"description": "[req_permission] call to action to enable downloads permission"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "This operation will only be requested once.",
+		"description": "[req_permission] description to enable downloads permission"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Do not ask again.",

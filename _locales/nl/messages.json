@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] laat de gebruiker hun bestanden op het opgegeven gebied neerzetten"
 	},
+	"enable": {
+		"message": "Inschakelen",
+		"description": "[toestemming_aanvragen] knop om machtigingen in te schakelen"
+	},
 	"error_adding_tab": {
 		"message": "Fout bij het toevoegen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het toevoegen van een Tab"
@@ -543,9 +547,9 @@
 		"message": "Open automatisch de $salesforce_setup-pagina wanneer u op de pop-up klikt terwijl u op een Salesforce-pagina bent.",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een Salesforce-website is"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Taaloptie om terug te vallen op Engels als de landinstelling niet wordt ondersteund of de vertaling niet weergeeft"
+	"opt_en_default": {
+		"message": "en (Standaard en terugval)",
+		"description": "Standaardtaaloptie van de extensie"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Houd favoriete Tabs links van Home en Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "Open de $salesforce_setup-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
 	},
+	"opt_pick_language": {
+		"message": "Kies extensietaal",
+		"description": "[instelling] label om de gebruiker te vragen zijn voorkeurstaal te kiezen"
+	},
 	"opt_prevent_analytics": {
 		"message": "Gebruik van Simple Analytics voorkomen (niet zichtbaar in gebruikersstatistieken).",
 		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat anonieme analyses worden verzonden"
@@ -579,9 +587,9 @@
 		"message": "pagina in hetzelfde tabblad bij het klikken op de popup.",
 		"description": "[instelling] voorkom het openen van een nieuw browsertabblad"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Taal (Standaard)",
-		"description": "Optie om de taalinstelling van Salesforce te gebruiken. Deze optie is de standaard voor de extensie."
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce-taal volgen (leest Salesforce-cookies)",
+		"description": "Optie om de taalinstelling van Salesforce te gebruiken. Om deze optie te gebruiken, moeten gebruikers de extensie toestaan Salesforce-cookies te lezen."
 	},
 	"opt_skip_link_detection": {
 		"message": "Automatische controle van Salesforce-id overslaan.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Tab verwijderen",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"req_downloads_open_popup": {
+		"message": "Open de extensie-popup vanuit het extensie-menu van uw browser.",
+		"description": "[melding] vraag de gebruiker om op de extensie-popup te klikken om door te gaan"
+	},
+	"req_downloads_perm_header": {
+		"message": "Schakel de Downloads-toestemming in\nom de gevraagde export te starten.",
+		"description": "[toestemming_aanvragen] oproep tot actie om de Downloads-toestemming in te schakelen"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Deze bewerking wordt slechts één keer aangevraagd.",
+		"description": "[toestemming_aanvragen] beschrijving om de Downloads-toestemming in te schakelen"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Niet opnieuw vragen.",

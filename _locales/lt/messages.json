@@ -167,6 +167,10 @@
 		"message": "Numesti",
 		"description": "[importas] leisti vartotojui numesti savo failus į nurodytą sritį"
 	},
+	"enable": {
+		"message": "Įjungti",
+		"description": "[prašyti_leidimo] mygtukas leidimams įjungti"
+	},
 	"error_adding_tab": {
 		"message": "Klaida pridedant Tab.",
 		"description": "[klaida] Bendra klaida naudojama pridedant Tab"
@@ -543,9 +547,9 @@
 		"message": "Automatiškai atidaryti $salesforce_setup puslapį spustelėjus iškylantįjį langą, kai esate „Salesforce“ puslapyje.",
 		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą „Salesforce“ svetainėje"
 	},
-	"opt_en_fallback": {
-		"message": "en (Atsarginis)",
-		"description": "Kalbos parinktis grįžti į anglų kalbą, jei lokalė nepalaikoma arba neatvaizduoja vertimo"
+	"opt_en_default": {
+		"message": "en (Numatytasis ir atsarginis)",
+		"description": "Numatytoji plėtinio kalbos parinktis"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Palikti mėgstamus Tabus kairėje nuo Namų ir Objektų tvarkyklės.",
@@ -567,6 +571,10 @@
 		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_setup puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
 	},
+	"opt_pick_language": {
+		"message": "Pasirinkite plėtinio kalbą",
+		"description": "[nustatymas] etiketė, skirta vartotojui pasirinkti pageidaujamą kalbą"
+	},
 	"opt_prevent_analytics": {
 		"message": "Užkirsti kelią Simple Analytics naudojimui (nerodoma naudotojų skaičiuje).",
 		"description": "[nustatymas] leidžia vartotojui užkirsti kelią anoniminiams analizės duomenų siuntimui"
@@ -579,9 +587,9 @@
 		"message": "puslapis tame pačiame skirtuke spustelėjus iššokantį langą.",
 		"description": "[nustatymas] neleisti atidaryti naujo naršyklės skirtuko"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce kalba (Numatytoji)",
-		"description": "Parinktis naudoti Salesforce kalbos nustatymą. Ši parinktis yra numatytoji plėtiniui."
+	"opt_sf_lang_cookies": {
+		"message": "Sekite Salesforce kalbą (skaito Salesforce slapukus)",
+		"description": "Parinktis naudoti Salesforce kalbos nustatymą. Norėdami naudoti šią parinktį, vartotojai turi leisti plėtiniui skaityti Salesforce slapukus."
 	},
 	"opt_skip_link_detection": {
 		"message": "Praleisti automatinį Salesforce ID patikrinimą.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Pašalinti Tab",
 		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
+	},
+	"req_downloads_open_popup": {
+		"message": "Prašome atidaryti plėtinio iššokantįjį langą iš savo naršyklės plėtinių meniu.",
+		"description": "[pranešimas] paprašykite vartotojo spustelėti plėtinio iššokantįjį langą, kad tęstų"
+	},
+	"req_downloads_perm_header": {
+		"message": "Prašome įjungti atsisiuntimų leidimą\nnorėdami pradėti prašomą eksportą.",
+		"description": "[prašyti_leidimo] raginimas veikti, kad būtų įjungtas atsisiuntimų leidimas"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ši operacija bus prašoma tik vieną kartą.",
+		"description": "[prašyti_leidimo] atsisiuntimų leidimo įjungimo aprašymas"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Daugiau neklausti.",

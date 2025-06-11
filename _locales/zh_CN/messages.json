@@ -167,6 +167,10 @@
 		"message": "拖放",
 		"description": "[导入] 允许用户将文件拖放到指定区域"
 	},
+	"enable": {
+		"message": "启用",
+		"description": "[请求_权限] 启用权限的按钮"
+	},
 	"error_adding_tab": {
 		"message": "添加 Tab 时出错。",
 		"description": "[错误] 添加 Tab 时使用的一般错误"
@@ -543,9 +547,9 @@
 		"message": "当在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_setup 页面。",
 		"description": "[设置] 当用户在 Salesforce 网站上打开弹出窗口时"
 	},
-	"opt_en_fallback": {
-		"message": "en (备用)",
-		"description": "当本地不受支持或未提供翻译时回退到英文的语言选项"
+	"opt_en_default": {
+		"message": "en (默认和备用)",
+		"description": "扩展的默认语言选项"
 	},
 	"opt_keep_tabs_left": {
 		"message": "将收藏的 Tabs 保持在首页和对象管理器的左侧。",
@@ -567,6 +571,10 @@
 		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_setup 页面。",
 		"description": "[设置]"
 	},
+	"opt_pick_language": {
+		"message": "选择扩展语言",
+		"description": "[设置] 提示用户选择他们喜欢的语言的标签"
+	},
 	"opt_prevent_analytics": {
 		"message": "防止使用Simple Analytics（不会出现在用户统计中）。",
 		"description": "[设置] 允许用户阻止发送匿名分析数据"
@@ -579,9 +587,9 @@
 		"message": "点击弹出窗口时在同一标签页中打开页面。",
 		"description": "[设置] 防止打开新的浏览器标签页"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (默认)",
-		"description": "使用 Salesforce 语言设置的选项。此选项为扩展的默认值。"
+	"opt_sf_lang_cookies": {
+		"message": "跟随 Salesforce 语言（读取 Salesforce Cookie）",
+		"description": "使用 Salesforce 语言设置的选项。要使用此选项，用户必须允许扩展读取 Salesforce Cookie。"
 	},
 	"opt_skip_link_detection": {
 		"message": "跳过 Salesforce Id 的自动检查。",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "移除 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"
+	},
+	"req_downloads_open_popup": {
+		"message": "请从浏览器的扩展菜单中打开扩展弹出窗口。",
+		"description": "[提示] 要求用户点击扩展弹出窗口以继续"
+	},
+	"req_downloads_perm_header": {
+		"message": "请启用下载权限\n以开始请求的导出。",
+		"description": "[请求_权限] 启用下载权限的行动号召"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "此操作只会被请求一次。",
+		"description": "[请求_权限] 启用下载权限的描述"
 	},
 	"req_permissions_dont_ask": {
 		"message": "不再询问。",

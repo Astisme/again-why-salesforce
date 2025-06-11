@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] Ermöglicht es dem Benutzer, seine Dateien in den angegebenen Bereich zu ziehen"
 	},
+	"enable": {
+		"message": "Aktivieren",
+		"description": "[Berechtigung_anfordern] Schaltfläche zum Aktivieren von Berechtigungen"
+	},
 	"error_adding_tab": {
 		"message": "Fehler beim Hinzufügen eines Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Hinzufügen eines Tabs"
@@ -542,9 +546,9 @@
 		"message": "Öffnen Sie die $salesforce_setup-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich auf einer Salesforce-Seite befinden.",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer Salesforce-Website befindet"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Sprachauswahl, um auf Englisch zurückzufallen, wenn das Gebietsschema nicht unterstützt wird oder keine Übersetzung anbietet"
+	"opt_en_default": {
+		"message": "en (Standard und Fallback)",
+		"description": "Standard-Sprachoption der Erweiterung"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Favorisierte Tabs links von Startseite und Objekt-Manager belassen.",
@@ -566,6 +570,10 @@
 		"message": "Öffnen Sie die $salesforce_setup-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
 		"description": "[Einstellung]"
 	},
+	"opt_pick_language": {
+		"message": "Sprache der Erweiterung auswählen",
+		"description": "[Einstellung] Beschriftung, um den Benutzer aufzufordern, seine bevorzugte Sprache auszuwählen"
+	},
 	"opt_prevent_analytics": {
 		"message": "Verwendung von Simple Analytics verhindern (erscheint nicht in der Nutzeranzahl).",
 		"description": "[Einstellung] Ermöglicht dem Benutzer, das Senden anonymer Analysen zu verhindern"
@@ -578,9 +586,9 @@
 		"message": "Seite im selben Tab öffnen, wenn auf das Popup geklickt wird.",
 		"description": "[Einstellung] Verhindert das Öffnen eines neuen Browser-Tabs"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Standard)",
-		"description": "Option zur Verwendung der Salesforce-Spracheneinstellung. Standard für die Erweiterung."
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce-Sprache folgen (liest Salesforce-Cookies)",
+		"description": "Option zur Verwendung der Salesforce-Spracheinstellung. Um diese Option zu nutzen, müssen Benutzer der Erweiterung erlauben, Salesforce-Cookies zu lesen."
 	},
 	"opt_skip_link_detection": {
 		"message": "Automatische Überprüfung der Salesforce-ID überspringen.",
@@ -613,6 +621,18 @@
 	"remove_tab": {
 		"message": "Tab entfernen",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"req_downloads_open_popup": {
+		"message": "Bitte öffnen Sie das Erweiterungs-Popup aus dem Erweiterungsmenü Ihres Browsers.",
+		"description": "[Toast] bitten Sie den Benutzer, auf das Erweiterungs-Popup zu klicken, um fortzufahren"
+	},
+	"req_downloads_perm_header": {
+		"message": "Bitte aktivieren Sie die Download-Berechtigung,\num den angeforderten Export zu starten.",
+		"description": "[Berechtigung_anfordern] Aufruf zum Handeln, um die Download-Berechtigung zu aktivieren"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Dieser Vorgang wird nur einmal angefordert.",
+		"description": "[Berechtigung_anfordern] Beschreibung zur Aktivierung der Download-Berechtigung"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nicht erneut fragen.",

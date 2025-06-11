@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] ተጠቃሚው ፋይሎቹን ወደ ውስጥ ለማድረግ ያስችላል"
 	},
+	"enable": {
+		"message": "አንቃ",
+		"description": "[ፍቃድ ይጠይቁ] ፍቃዶችን ለማንቃት አዝራር"
+	},
 	"error_adding_tab": {
 		"message": "Tab ሲያክል ስህተት።",
 		"description": "[error] Tab ሲያክሉ የተፈጠረ አጠቃላይ ስህተት"
@@ -543,9 +547,9 @@
 		"message": "በ Salesforce ገጽ ላይ በሚሆኑበት ጊዜ ብቅ-ባይ ላይ ጠቅ ሲያደርጉ የ $salesforce_setup ገጽን በራስ-ሰር ይክፈቱ።",
 		"description": "[ቅንብር] ተጠቃሚው በ Salesforce ድር ጣቢያ ላይ እያለ ብቅ-ባይ ሲከፍት"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "ቋንቋ አማራጭ ለመመለስ ወደ እንግሊዝኛ ቋንቋ ከእንደ ተደጋጋሚ ቦታው ወይም ከትርጉሙ የጎደለ"
+	"opt_en_default": {
+		"message": "en (ነባሪ እና ምትኬ)",
+		"description": "የቅጥያው ነባሪ ቋንቋ አማራጭ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ተወዳጆቹን Tabs ወደ home እና Object Manager ግራ ይዝሉ።",
@@ -567,6 +571,10 @@
 		"message": "ብቅ-ባይ ላይ ጠቅ ሲያደርጉ ሁልጊዜ የ $salesforce_setup ገጽን በተመሳሳይ Tab ውስጥ ይክፈቱ።",
 		"description": "[ቅንብር]"
 	},
+	"opt_pick_language": {
+		"message": "የቅጥያ ቋንቋ ይምረጡ",
+		"description": "[ማስተካከያ] ተጠቃሚው የሚመርጠውን ቋንቋ እንዲመርጥ የሚጠይቅ መለያ"
+	},
 	"opt_prevent_analytics": {
 		"message": "የSimple Analytics አጠቃቀምን ከማድረግ አውጣ (በተጠቃሚ ብዛት ውስጥ አይቈጠርም)።",
 		"description": "[ቅንብር] ተጠቃሚውን ያልታወቀ ትንተና እንዳይላክ እንዲከለክል ያስችላል"
@@ -579,9 +587,9 @@
 		"message": "ፖፕአፕ ጠቅ ሲደርስ በተመሳሳይ ትርጉም ውስጥ ገፅ ክፈት።",
 		"description": "[ቅንብር] አዲስ ትርጉም ትርጉም አትከፈት"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (በነበር) ",
-		"description": "Salesforce የቋንቋ ቅንብር ለመጠቀም አማራጭ። ይህ አማራጭ ለእርዳታው በነበር ነው።"
+	"opt_sf_lang_cookies": {
+		"message": "የ Salesforce ቋንቋን ተከተል (የ Salesforce ኩኪዎችን ያነባል)",
+		"description": "የ Salesforce ቋንቋ ቅንብርን ለመጠቀም አማራጭ። ይህንን አማራጭ ለመጠቀም ተጠቃሚዎች ቅጥያው የ Salesforce ኩኪዎችን እንዲያነብ መፍቀድ አለባቸው።"
 	},
 	"opt_skip_link_detection": {
 		"message": "Salesforce መለያ   ቁጥጥር  ማድረግን   ተልኮት።",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Tab አስወግድ",
 		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
+	},
+	"req_downloads_open_popup": {
+		"message": "እባክዎ የቅጥያ ብቅ-ባይን ከእርስዎ አሳሽ የቅጥያዎች ምናሌ ይክፈቱ።",
+		"description": "[ማስታወቂያ] ተጠቃሚው ለመቀጠል በቅጥያ ብቅ-ባይ ላይ እንዲጫን ይጠይቁ"
+	},
+	"req_downloads_perm_header": {
+		"message": "እባክዎ የተጠየቀውን ኤክስፖርት ለመጀመር የማውረድ ፍቃድን ያንቁ።",
+		"description": "[ፍቃድ ይጠይቁ] የማውረድ ፍቃድን ለማንቃት ጥሪ"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "ይህ ክወና አንድ ጊዜ ብቻ ይጠየቃል።",
+		"description": "[ፍቃድ ይጠይቁ] የማውረድ ፍቃድ ለማንቃት መግለጫ"
 	},
 	"req_permissions_dont_ask": {
 		"message": "እንደገና አትጠይቅ።",

@@ -167,6 +167,10 @@
 		"message": "Déposer",
 		"description": "[import] laisser l'utilisateur déposer ses fichiers sur la zone spécifiée"
 	},
+	"enable": {
+		"message": "Activer",
+		"description": "[demander_autorisation] bouton pour activer les autorisations"
+	},
 	"error_adding_tab": {
 		"message": "Erreur lors de l'ajout de Tab.",
 		"description": "[erreur] Erreur générique utilisée lors de l'ajout d'un Tab"
@@ -542,9 +546,9 @@
 		"message": "Ouvrir automatiquement la page $salesforce_setup en cliquant sur la fenêtre contextuelle lorsque vous êtes sur une page Salesforce.",
 		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site Web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Option de langue pour revenir à l'anglais si la locale n'est pas prise en charge ou n'affiche pas la traduction"
+	"opt_en_default": {
+		"message": "en (Par défaut et de secours)",
+		"description": "Option de langue par défaut de l'extension"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Garder les Tabs favoris à gauche de Accueil et Gestionnaire d'objets.",
@@ -566,6 +570,10 @@
 		"message": "Toujours ouvrir la page $salesforce_setup dans le même Tab en cliquant sur la fenêtre contextuelle.",
 		"description": "[paramètre]"
 	},
+	"opt_pick_language": {
+		"message": "Choisir la langue de l'extension",
+		"description": "[paramètre] libellé pour inviter l'utilisateur à choisir sa langue préférée"
+	},
 	"opt_prevent_analytics": {
 		"message": "Empêcher l’utilisation de Simple Analytics (n’apparaît pas dans les comptes utilisateurs).",
 		"description": "[paramètre] permet à l’utilisateur d’empêcher l’envoi d’analyses anonymes"
@@ -578,9 +586,9 @@
 		"message": "page dans le même onglet lors du clic sur la fenêtre contextuelle.",
 		"description": "[paramètre] éviter l'ouverture d'un nouvel onglet du navigateur"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Par défaut)",
-		"description": "Option pour utiliser le paramètre de langue de Salesforce. Cette option est la valeur par défaut pour l'extension."
+	"opt_sf_lang_cookies": {
+		"message": "Suivre la langue Salesforce (lit les cookies Salesforce)",
+		"description": "Option d'utilisation du paramètre de langue de Salesforce. Pour utiliser cette option, les utilisateurs doivent autoriser l'extension à lire les cookies Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Ignorer la vérification automatique de l'ID Salesforce.",
@@ -613,6 +621,18 @@
 	"remove_tab": {
 		"message": "Supprimer le Tab",
 		"description": "[alt] Texte alternatif quand les images ne fonctionnent pas."
+	},
+	"req_downloads_open_popup": {
+		"message": "Veuillez ouvrir la fenêtre contextuelle de l'extension depuis le menu des extensions de votre navigateur.",
+		"description": "[toast] demander à l'utilisateur de cliquer sur la fenêtre contextuelle de l'extension pour continuer"
+	},
+	"req_downloads_perm_header": {
+		"message": "Veuillez activer l'autorisation de téléchargement\npour démarrer l'exportation demandée.",
+		"description": "[demander_autorisation] appel à l'action pour activer l'autorisation de téléchargement"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Cette opération ne sera demandée qu'une seule fois.",
+		"description": "[demander_autorisation] description pour activer l'autorisation de téléchargement"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ne plus demander.",

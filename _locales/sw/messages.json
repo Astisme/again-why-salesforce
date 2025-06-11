@@ -167,6 +167,10 @@
 		"message": "Shusha",
 		"description": "[импорт] ruhusu mtumiaji kushusha faili zao kwenye eneo maalum"
 	},
+	"enable": {
+		"message": "Washa",
+		"description": "[omba_ruhusa] kitufe cha kuwezesha ruhusa"
+	},
 	"error_adding_tab": {
 		"message": "Hitilafu wakati wa kuongeza Tab.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuongeza Tab"
@@ -543,9 +547,9 @@
 		"message": "Fungua ukurasa wa $salesforce_setup kiotomatiki unapobofya kwenye ibukizi ukiwa kwenye ukurasa wa Salesforce.",
 		"description": "[mpangilio] mtumiaji anapofungua ibukizi akiwa kwenye tovuti ya Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Mbadala)",
-		"description": "Chaguo la lugha kurudi kwenye Kiingereza ikiwa eneo haliauniwi au halina tafsiri"
+	"opt_en_default": {
+		"message": "en (Chaguo-msingi na Mbadala)",
+		"description": "Chaguo la lugha chaguomsingi la kiendelezi"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Weka Tab unazopenda kushoto kwa Home na Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "Fungua ukurasa wa $salesforce_setup kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
 	},
+	"opt_pick_language": {
+		"message": "Chagua lugha ya kiendelezi",
+		"description": "[mpangilio] lebo ya kumpa mtumiaji kuchagua lugha anayopendelea"
+	},
 	"opt_prevent_analytics": {
 		"message": "Zuia matumizi ya Simple Analytics (usiwe sehemu ya hesabu ya watumiaji).",
 		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kutuma takwimu za uchanganuzi zisizo na majina"
@@ -579,9 +587,9 @@
 		"message": "ukurasa katika kichupo hicho hicho wakati unabonyeza popup.",
 		"description": "[mpangilio] zuia kufungua kichupo kipya cha kivinjari"
 	},
-	"opt_sf_lang_default": {
-		"message": "Lugha ya Salesforce (Chaguo-Msingi)",
-		"description": "Chaguo la kutumia mpangilio wa lugha ya Salesforce. Hili ni chaguo-msingi la programu-jalizi."
+	"opt_sf_lang_cookies": {
+		"message": "Fuata Lugha ya Salesforce (inasoma Vidakuzi vya Salesforce)",
+		"description": "Chaguo la kutumia mpangilio wa lugha wa Salesforce. Ili kutumia chaguo hili, watumiaji lazima waruhusu kiendelezi kusoma vidakuzi vya Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Ruka ukaguzi wa moja kwa moja wa Kitambulisho cha Salesforce (ID).",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Ondoa Tab",
 		"description": "[alt] maandishi mbadala wakati picha hazifanyi kazi"
+	},
+	"req_downloads_open_popup": {
+		"message": "Tafadhali fungua popup ya kiendelezi kutoka kwenye menyu ya viendelezi ya kivinjari chako.",
+		"description": "[ujumbe] mwambie mtumiaji kubofya popup ya kiendelezi ili kuendelea"
+	},
+	"req_downloads_perm_header": {
+		"message": "Tafadhali wezesha ruhusa ya Vipakuzi\nili kuanza Usafirishaji ulioombwa.",
+		"description": "[omba_ruhusa] wito wa hatua ya kuwezesha ruhusa ya vipakuzi"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Operesheni hii itaombwa mara moja tu.",
+		"description": "[omba_ruhusa] maelezo ya kuwezesha ruhusa ya vipakuzi"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Usiulize tena.",

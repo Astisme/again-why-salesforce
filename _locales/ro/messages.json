@@ -167,6 +167,10 @@
 		"message": "Trageți",
 		"description": "[import] permite utilizatorului să tragă fișierele lor în zona specificată"
 	},
+	"enable": {
+		"message": "Activează",
+		"description": "[solicită_permisiune] buton pentru a activa permisiunile"
+	},
 	"error_adding_tab": {
 		"message": "Eroare la adăugarea Tab.",
 		"description": "[eroare] Eroare generică utilizată la adăugarea unui Tab"
@@ -543,9 +547,9 @@
 		"message": "Deschideți automat pagina $salesforce_setup atunci când faceți clic pe fereastra pop-up în timp ce vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Alternativ)",
-		"description": "Opțiune de limbă pentru a reveni la engleză dacă localizarea nu este acceptată sau nu prezintă traducerea"
+	"opt_en_default": {
+		"message": "en (Implicit și de rezervă)",
+		"description": "Opțiunea de limbă implicită a extensiei"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Păstrează Tab-urile favorite în partea stângă a Home și Object Manager.",
@@ -567,6 +571,10 @@
 		"message": "Deschideți întotdeauna pagina $salesforce_setup în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
 	},
+	"opt_pick_language": {
+		"message": "Alege limba extensiei",
+		"description": "[setare] etichetă pentru a solicita utilizatorului să își aleagă limba preferată"
+	},
 	"opt_prevent_analytics": {
 		"message": "Împiedică utilizarea Simple Analytics (nu va fi contorizat la numărul de utilizatori).",
 		"description": "[setare] permite utilizatorului să oprească trimiterea de analize anonime"
@@ -579,9 +587,9 @@
 		"message": "pagina în aceeași filă la clic pe popup.",
 		"description": "[setare] pentru a preveni deschiderea unei file noi"
 	},
-	"opt_sf_lang_default": {
-		"message": "Limba Salesforce (Implicit)",
-		"description": "Opțiune pentru a utiliza setarea de limbă Salesforce. Această opțiune este implicită pentru extensie."
+	"opt_sf_lang_cookies": {
+		"message": "Urmărește limba Salesforce (citește cookie-urile Salesforce)",
+		"description": "Opțiune de utilizare a setării de limbă Salesforce. Pentru a utiliza această opțiune, utilizatorii trebuie să permită extensiei să citească cookie-urile Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Omitere verificare automată a ID-ului Salesforce.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Eliminați Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"req_downloads_open_popup": {
+		"message": "Vă rugăm să deschideți fereastra pop-up a extensiei din meniul de extensii al browserului dumneavoastră.",
+		"description": "[notificare] cereți utilizatorului să facă clic pe fereastra pop-up a extensiei pentru a continua"
+	},
+	"req_downloads_perm_header": {
+		"message": "Vă rugăm să activați permisiunea de Descărcări\npentru a începe exportul solicitat.",
+		"description": "[solicită_permisiune] apel la acțiune pentru a activa permisiunea de descărcări"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Această operațiune va fi solicitată o singură dată.",
+		"description": "[solicită_permisiune] descriere pentru a activa permisiunea de descărcări"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nu mai întrebați.",

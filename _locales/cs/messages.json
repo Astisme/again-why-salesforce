@@ -167,6 +167,10 @@
 		"message": "Drop",
 		"description": "[import] umožňuje uživateli přetáhnout své soubory do určené oblasti"
 	},
+	"enable": {
+		"message": "Povolit",
+		"description": "[žádost_oprávnění] tlačítko pro povolení oprávnění"
+	},
 	"error_adding_tab": {
 		"message": "Chyba při přidávání Tab.",
 		"description": "[error] Obecná chyba při přidávání Tab"
@@ -543,9 +547,9 @@
 		"message": "Automaticky otevřít stránku $salesforce_setup po kliknutí na vyskakovací okno, pokud jste na stránce Salesforce.",
 		"description": "[nastavení] když uživatel otevře vyskakovací okno na webové stránce Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Náhradní)",
-		"description": "Možnost jazyka pro návrat k angličtině, pokud místní nastavení není podporováno nebo nezobrazuje překlad"
+	"opt_en_default": {
+		"message": "en (Výchozí a záložní)",
+		"description": "Výchozí jazyková možnost rozšíření"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Ponechat oblíbené Tabs nalevo od Domovské stránky a Správce objektů.",
@@ -567,6 +571,10 @@
 		"message": "Po kliknutí na vyskakovací okno vždy otevřít stránku $salesforce_setup ve stejné Tab.",
 		"description": "[nastavení]"
 	},
+	"opt_pick_language": {
+		"message": "Vyberte jazyk rozšíření",
+		"description": "[nastavení] štítek, který uživatele vyzve k výběru preferovaného jazyka"
+	},
 	"opt_prevent_analytics": {
 		"message": "Zabránit použití Simple Analytics (nebude započítáno mezi uživatele).",
 		"description": "[nastavení] umožňuje uživateli zabránit odesílání anonymní analytiky"
@@ -579,9 +587,9 @@
 		"message": "stránku ve stejném panelu při kliknutí na vyskakovací okno.",
 		"description": "[nastavení] zabránit otevření nového panelu prohlížeče"
 	},
-	"opt_sf_lang_default": {
-		"message": "Jazyk Salesforce (Výchozí)",
-		"description": "Možnost použít nastavení jazyka Salesforce. Tato možnost je výchozí pro rozšíření."
+	"opt_sf_lang_cookies": {
+		"message": "Následujte jazyk Salesforce (čte soubory cookie Salesforce)",
+		"description": "Možnost použít nastavení jazyka Salesforce. Chcete-li použít tuto možnost, uživatelé musí povolit rozšíření čtení souborů cookie Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Přeskočit automatickou kontrolu ID Salesforce.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Odebrat Tab",
 		"description": "[alt] alternativní text, pokud se obrázky nezobrazí"
+	},
+	"req_downloads_open_popup": {
+		"message": "Otevřete vyskakovací okno rozšíření z nabídky rozšíření vašeho prohlížeče.",
+		"description": "[oznámení] požádejte uživatele, aby klikl na vyskakovací okno rozšíření pro pokračování"
+	},
+	"req_downloads_perm_header": {
+		"message": "Povolte prosím oprávnění ke stažení\nk zahájení požadovaného exportu.",
+		"description": "[žádost_oprávnění] výzva k akci pro povolení oprávnění ke stažení"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Tato operace bude vyžádána pouze jednou.",
+		"description": "[žádost_oprávnění] popis pro povolení oprávnění ke stažení"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Neptat se znovu.",

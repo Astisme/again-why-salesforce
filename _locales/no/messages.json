@@ -167,6 +167,10 @@
 		"message": "Slipp",
 		"description": "[импорт] la brukeren slippe filene sine på det angitte området"
 	},
+	"enable": {
+		"message": "Aktiver",
+		"description": "[be_om_tillatelse] knapp for å aktivere tillatelser"
+	},
 	"error_adding_tab": {
 		"message": "Feil ved tillegging av Tab.",
 		"description": "[feil] Generisk feil brukt ved tillegging av en Tab"
@@ -543,9 +547,9 @@
 		"message": "Åpne $salesforce_setup-siden automatisk når du klikker på popup-vinduet mens du er på en Salesforce-side.",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et Salesforce-nettsted"
 	},
-	"opt_en_fallback": {
-		"message": "en (Reserve)",
-		"description": "Språkalternativ for å falle tilbake til engelsk hvis lokalet ikke støttes eller ikke viser oversettelsen"
+	"opt_en_default": {
+		"message": "en (Standard og reserve)",
+		"description": "Standard språkvalg for utvidelsen"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hold favoritt-Tabs til venstre for Hjem og Objektbehandler.",
@@ -567,6 +571,10 @@
 		"message": "Åpne alltid $salesforce_setup-siden i samme Tab når du klikker på popup-vinduet.",
 		"description": "[innstilling]"
 	},
+	"opt_pick_language": {
+		"message": "Velg utvidelsesspråk",
+		"description": "[innstilling] etikett for å be brukeren om å velge foretrukket språk"
+	},
 	"opt_prevent_analytics": {
 		"message": "Hindre bruk av Simple Analytics (blir ikke telt med i brukerstatistikk).",
 		"description": "[innstilling] lar brukeren forhindre sending av anonym analyse"
@@ -579,9 +587,9 @@
 		"message": "side i samme fane når du klikker på popup.",
 		"description": "[innstilling] forhindre åpning av en ny nettleserfane"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce-språk (Standard)",
-		"description": "Alternativ for å bruke Salesforce sin språkinnstilling. Dette alternativet er standard for utvidelsen."
+	"opt_sf_lang_cookies": {
+		"message": "Følg Salesforce-språk (leser Salesforce-informasjonskapsler)",
+		"description": "Mulighet til å bruke Salesforces språkinnstilling. For å bruke dette alternativet, må brukere tillate utvidelsen å lese Salesforce-informasjonskapsler."
 	},
 	"opt_skip_link_detection": {
 		"message": "Hopp over automatisk kontroll av Salesforce-ID.",
@@ -614,6 +622,18 @@
 	"remove_tab": {
 		"message": "Fjern Tab",
 		"description": "[alt] alternativ tekst når bilder ikke vises"
+	},
+	"req_downloads_open_popup": {
+		"message": "Vennligst åpne utvidelsens popup fra utvidelsesmenyen i nettleseren din.",
+		"description": "[toast] be brukeren om å klikke på utvidelsens popup for å fortsette"
+	},
+	"req_downloads_perm_header": {
+		"message": "Aktiver nedlastingstillatelsen\nfor å starte den forespurte eksporten.",
+		"description": "[be_om_tillatelse] oppfordring til handling for å aktivere nedlastingstillatelse"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Denne operasjonen vil kun bli forespurt én gang.",
+		"description": "[be_om_tillatelse] beskrivelse for å aktivere nedlastingstillatelse"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ikke spør igjen.",

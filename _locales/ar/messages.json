@@ -167,6 +167,10 @@
 		"message": "إسقاط",
 		"description": "[import] يسمح للمستخدم بإسقاط ملفاته في المنطقة المحددة"
 	},
+	"enable": {
+		"message": "تمكين",
+		"description": "[طلب_إذن] زر لتمكين الأذونات"
+	},
 	"error_adding_tab": {
 		"message": "خطأ أثناء إضافة Tab.",
 		"description": "[error] خطأ عام عند إضافة Tab"
@@ -542,9 +546,9 @@
 		"message": "افتح صفحة $salesforce_setup تلقائيًا عند النقر على النافذة المنبثقة أثناء التواجد على صفحة Salesforce.",
 		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على موقع Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "خيار اللغة للرجوع إلى الإنجليزية إذا لم يتم دعم الإعداد الإقليمي أو لم يقدم الترجمة"
+	"opt_en_default": {
+		"message": "en (افتراضي واحتياطي)",
+		"description": "خيار اللغة الافتراضي للإضافة"
 	},
 	"opt_keep_tabs_left": {
 		"message": "احتفظ بعلامات التبويب المفضلة على يسار الصفحة الرئيسية ومدير الكائنات.",
@@ -566,6 +570,10 @@
 		"message": "افتح دائمًا صفحة $salesforce_setup في نفس الـ Tab عند النقر على النافذة المنبثقة.",
 		"description": "[إعداد]"
 	},
+	"opt_pick_language": {
+		"message": "اختر لغة الإضافة",
+		"description": "[إعداد] تسمية لتوجيه المستخدم لاختيار لغته المفضلة"
+	},
 	"opt_prevent_analytics": {
 		"message": "منع استخدام Simple Analytics (لن يظهر في عدد المستخدمين).",
 		"description": "[الإعداد] يتيح للمستخدم منع إرسال تحليلات مجهولة"
@@ -578,9 +586,9 @@
 		"message": "الصفحة في نفس العلامة عند النقر على المنبثق.",
 		"description": "[إعداد] منع فتح علامة تبويب جديدة"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (الافتراضي)",
-		"description": "خيار لاستخدام إعداد اللغة في Salesforce. هذا الخيار هو الافتراضي للإضافة."
+	"opt_sf_lang_cookies": {
+		"message": "اتبع لغة Salesforce (يقرأ ملفات تعريف الارتباط لـ Salesforce)",
+		"description": "خيار لاستخدام إعداد لغة Salesforce. لاستخدام هذا الخيار، يجب أن يسمح المستخدمون للإضافة بقراءة ملفات تعريف الارتباط لـ Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "تخطي التحقق التلقائي من معرف Salesforce.",
@@ -613,6 +621,18 @@
 	"remove_tab": {
 		"message": "إزالة الـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"req_downloads_open_popup": {
+		"message": "الرجاء فتح نافذة الإضافة المنبثقة من قائمة الإضافات في متصفحك.",
+		"description": "[تنبيه] اطلب من المستخدم النقر على نافذة الإضافة المنبثقة للمتابعة"
+	},
+	"req_downloads_perm_header": {
+		"message": "الرجاء تمكين إذن التنزيلات\nلبدء التصدير المطلوب.",
+		"description": "[طلب_إذن] دعوة لاتخاذ إجراء لتمكين إذن التنزيلات"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "سيتم طلب هذه العملية مرة واحدة فقط.",
+		"description": "[طلب_إذن] وصف لتمكين إذن التنزيلات"
 	},
 	"req_permissions_dont_ask": {
 		"message": "عدم السؤال مرة أخرى",
