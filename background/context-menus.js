@@ -424,7 +424,7 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
 		if (error != null && error.message !== "") {
 			const translator = await ensureTranslatorAvailability();
 			const msg = await translator.translate("error_cxm_check");
-			console.error(msg, error);
+			console.error(msg, error.message);
 		}
 	}
 }
