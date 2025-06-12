@@ -563,6 +563,10 @@
 		"message": "Visa inte versionsinformation efter uppdatering.",
 		"description": "[inställning] låter användaren förhindra att tillägget visar versionsinformation efter uppdatering"
 	},
+	"opt_no_update_notification": {
+		"message": "Varna inte om tillgängliga uppdateringar.",
+		"description": "[inställning] låter användaren förhindra tillägget från att söka efter nya versioner"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Öppna alltid $salesforce_login-sidan i samma Tab när du klickar på popup-fönstret.",
 		"description": "[inställning]"

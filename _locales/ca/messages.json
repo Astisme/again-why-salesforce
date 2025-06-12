@@ -563,6 +563,10 @@
 		"message": "No mostrar les notes de llançament de l'actualització.",
 		"description": "[configuració] permet a l’usuari evitar que l’extensió mostri les notes de llançament després d’actualitzar-se"
 	},
+	"opt_no_update_notification": {
+		"message": "No avisis de les actualitzacions disponibles.",
+		"description": "[configuració] permet a l'usuari evitar que l'extensió cerqui noves versions"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Obre sempre la pàgina $salesforce_login a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"

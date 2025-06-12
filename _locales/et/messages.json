@@ -563,6 +563,10 @@
 		"message": "Ära näita uuenduste väljalaseteateid.",
 		"description": "[seade] võimaldab kasutajal takistada laiendusel uuenduste väljalaseteateid kuvamast"
 	},
+	"opt_no_update_notification": {
+		"message": "Ärge hoiatage saadaolevate värskenduste eest.",
+		"description": "[seadistus] laseb kasutajal takistada laiendusel uute versioonide otsimist"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Ava alati $salesforce_login leht samas Tab, kui klõpsate hüpikaknal.",
 		"description": "[seadistus]"

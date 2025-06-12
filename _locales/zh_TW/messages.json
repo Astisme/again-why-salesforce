@@ -563,6 +563,10 @@
 		"message": "不顯示更新的發行說明。",
 		"description": "[設定] 允許使用者阻止擴充功能在更新後顯示發行說明"
 	},
+	"opt_no_update_notification": {
+		"message": "不要警告有可用的更新。",
+		"description": "[設定] 允許使用者阻止擴充功能搜尋新版本"
+	},
 	"opt_open_login_same_tab": {
 		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_login 頁面。",
 		"description": "[設定]"

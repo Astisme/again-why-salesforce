@@ -563,6 +563,10 @@
 		"message": "Vis ikke opdateringsnoter.",
 		"description": "[indstilling] lader brugeren forhindre udvidelsen i at vise versionsnoter efter opdatering"
 	},
+	"opt_no_update_notification": {
+		"message": "Advar ikke om tilgængelige opdateringer.",
+		"description": "[indstilling] lader brugeren forhindre udvidelsen i at søge efter nye udgivelser"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Åbn altid $salesforce_login-siden i samme Tab, når du klikker på pop op-vinduet.",
 		"description": "[indstilling]"

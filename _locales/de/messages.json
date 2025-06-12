@@ -562,6 +562,10 @@
 		"message": "Update-Release-Notes nicht anzeigen.",
 		"description": "[Einstellung] Ermöglicht dem Benutzer, zu verhindern, dass die Erweiterung Release-Notes nach einem Update anzeigt"
 	},
+	"opt_no_update_notification": {
+		"message": "Nicht vor verfügbaren Updates warnen.",
+		"description": "[Einstellung] Ermöglicht dem Benutzer zu verhindern, dass die Erweiterung nach neuen Versionen sucht"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Öffnen Sie die $salesforce_login-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
 		"description": "[Einstellung]"

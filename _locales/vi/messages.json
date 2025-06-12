@@ -562,6 +562,10 @@
 		"message": "Không hiển thị ghi chú cập nhật.",
 		"description": "[cài đặt] cho phép người dùng ngăn tiện ích hiển thị ghi chú sau khi cập nhật"
 	},
+	"opt_no_update_notification": {
+		"message": "Không cảnh báo về các bản cập nhật có sẵn.",
+		"description": "[cài đặt] cho phép người dùng ngăn tiện ích mở rộng tìm kiếm các bản phát hành mới"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Luôn mở trang $salesforce_login trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
 		"description": "[cài đặt]"

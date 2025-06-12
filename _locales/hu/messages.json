@@ -563,6 +563,10 @@
 		"message": "Frissítési kiadási megjegyzések ne jelenjenek meg.",
 		"description": "[beállítás] lehetővé teszi a felhasználó számára, hogy megakadályozza a bővítmény frissítés utáni kiadási megjegyzéseinek megjelenítését"
 	},
+	"opt_no_update_notification": {
+		"message": "Ne figyelmeztessen az elérhető frissítésekre.",
+		"description": "[beállítás] lehetővé teszi a felhasználó számára, hogy megakadályozza a bővítményt az új kiadások keresésében"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Mindig nyissa meg a $salesforce_login oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
 		"description": "[beállítás]"

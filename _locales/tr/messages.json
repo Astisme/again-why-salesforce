@@ -563,6 +563,10 @@
 		"message": "Güncelleme sürüm notlarını gösterme.",
 		"description": "[ayar] kullanıcının eklentinin güncelleme sonrası sürüm notlarını göstermesini engellemesini sağlar"
 	},
+	"opt_no_update_notification": {
+		"message": "Mevcut güncellemeler hakkında uyarma.",
+		"description": "[ayarlar] kullanıcının uzantının yeni sürümleri aramasını engellemesine izin verir"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Açılır pencereye tıklandığında $salesforce_login sayfasını her zaman aynı Tab sekmesinde aç.",
 		"description": "[ayar]"

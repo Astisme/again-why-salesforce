@@ -563,6 +563,10 @@
 		"message": "Nie pokazuj informacji o wydaniu aktualizacji.",
 		"description": "[ustawienie] pozwala użytkownikowi uniemożliwić rozszerzeniu wyświetlanie informacji o wersji po aktualizacji"
 	},
+	"opt_no_update_notification": {
+		"message": "Nie ostrzegaj o dostępnych aktualizacjach.",
+		"description": "[ustawienie] pozwala użytkownikowi uniemożliwić rozszerzeniu wyszukiwanie nowych wersji"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Zawsze otwieraj stronę $salesforce_login w tej samej Tab po kliknięciu wyskakującego okienka.",
 		"description": "[ustawienie]"

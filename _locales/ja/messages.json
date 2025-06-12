@@ -562,6 +562,10 @@
 		"message": "アップデートのリリースノートを表示しない。",
 		"description": "[設定] 拡張機能が更新後にリリースノートを表示しないようにする設定"
 	},
+	"opt_no_update_notification": {
+		"message": "利用可能なアップデートについて警告しないでください。",
+		"description": "[設定] ユーザーが拡張機能で新しいリリースを検索できないようにします"
+	},
 	"opt_open_login_same_tab": {
 		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_loginページを開きます。",
 		"description": "[設定]"

@@ -563,6 +563,10 @@
 		"message": "Não mostrar notas de versão da atualização.",
 		"description": "[definição] permite que o utilizador impeça a extensão de mostrar notas de versão após a atualização"
 	},
+	"opt_no_update_notification": {
+		"message": "Não avisar sobre atualizações disponíveis.",
+		"description": "[definição] permite ao utilizador impedir que a extensão procure novos lançamentos"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Abrir sempre a página $salesforce_login no mesmo Tab ao clicar no pop-up.",
 		"description": "[definição]"

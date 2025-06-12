@@ -563,6 +563,10 @@
 		"message": "Nerodyti naujinimo išleidimo pastabų.",
 		"description": "[nustatymas] leidžia vartotojui neleisti plėtiniui rodyti išleidimo pastabų po atnaujinimo"
 	},
+	"opt_no_update_notification": {
+		"message": "Neįspėti apie galimus naujinimus.",
+		"description": "[nustatymas] leidžia vartotojui neleisti plėtiniui ieškoti naujų leidimų"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_login puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"

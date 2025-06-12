@@ -563,6 +563,10 @@
 		"message": "Nemoj prikazivati bilješke o izdanju ažuriranja.",
 		"description": "[postavka] omogućuje korisniku da spriječi prikaz bilješki o izdanju nakon ažuriranja proširenja"
 	},
+	"opt_no_update_notification": {
+		"message": "Ne upozoravaj na dostupna ažuriranja.",
+		"description": "[postavka] omogućuje korisniku da spriječi proširenje u traženju novih izdanja"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Uvijek otvori stranicu $salesforce_login u istom Tab kada kliknete na skočni prozor.",
 		"description": "[postavka]"

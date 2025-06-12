@@ -563,6 +563,10 @@
 		"message": "Nerādīt atjauninājuma izlaiduma piezīmes.",
 		"description": "[iestatījums] ļauj lietotājam novērst piezīmju parādīšanu pēc paplašinājuma atjaunināšanas"
 	},
+	"opt_no_update_notification": {
+		"message": "Nebrīdināt par pieejamajiem atjauninājumiem.",
+		"description": "[iestatījums] ļauj lietotājam liegt paplašinājumam meklēt jaunus laidienus"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Vienmēr atvērt $salesforce_login lapu tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums]"

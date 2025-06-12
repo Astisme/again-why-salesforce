@@ -563,6 +563,10 @@
 		"message": "Release-opmerkingen bij updates niet tonen.",
 		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat de extensie release-opmerkingen toont na een update"
 	},
+	"opt_no_update_notification": {
+		"message": "Niet waarschuwen voor beschikbare updates.",
+		"description": "[instelling] laat de gebruiker voorkomen dat de extensie naar nieuwe releases zoekt"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Open de $salesforce_login-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"

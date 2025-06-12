@@ -563,6 +563,10 @@
 		"message": "Jangan tunjukkan nota keluaran kemas kini.",
 		"description": "[tetapan] benarkan pengguna menghalang sambungan daripada memaparkan nota keluaran selepas dikemas kini"
 	},
+	"opt_no_update_notification": {
+		"message": "Jangan beri amaran tentang kemas kini yang tersedia.",
+		"description": "[tetapan] benarkan pengguna menghalang sambungan daripada mencari keluaran baharu"
+	},
 	"opt_open_login_same_tab": {
 		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_login पृष्ठ त्याच Tab मध्ये उघडा.",
 		"description": "[सेटिंग]"

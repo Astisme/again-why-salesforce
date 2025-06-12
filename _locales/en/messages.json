@@ -562,6 +562,10 @@
 		"message": "Do not show update release notes.",
 		"description": "[setting] let the user prevent the extension from showing release notes after it is updated"
 	},
+	"opt_no_update_notification": {
+		"message": "Do not warn about available updates.",
+		"description": "[setting] let the user prevent the extension from search for new releases"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Always open $salesforce_login page in the same tab when clicking on the popup.",
 		"description": "[setting]"

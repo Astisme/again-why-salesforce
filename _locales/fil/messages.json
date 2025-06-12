@@ -563,6 +563,10 @@
 		"message": "Huwag ipakita ang mga update release notes.",
 		"description": "[setting] pinapayagan ang user na pigilan ang extension sa pagpapakita ng release notes matapos itong ma-update"
 	},
+	"opt_no_update_notification": {
+		"message": "Huwag mag-warn tungkol sa mga available na update.",
+		"description": "[setting] hayaan ang user na pigilan ang extension sa paghahanap ng mga bagong release"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Palaging buksan ang $salesforce_login page sa parehong Tab kapag nag-click sa popup.",
 		"description": "[setting]"

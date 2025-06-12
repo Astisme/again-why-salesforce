@@ -563,6 +563,10 @@
 		"message": "不显示更新发布说明。",
 		"description": "[设置] 允许用户阻止扩展更新后显示发布说明"
 	},
+	"opt_no_update_notification": {
+		"message": "不要警告有可用的更新。",
+		"description": "[设置] 允许用户阻止扩展程序搜索新版本"
+	},
 	"opt_open_login_same_tab": {
 		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_login 页面。",
 		"description": "[设置]"

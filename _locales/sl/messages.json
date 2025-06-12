@@ -563,6 +563,10 @@
 		"message": "Ne prikaži opomb ob izdaji posodobitev.",
 		"description": "[nastavitev] uporabniku omogoči, da prepreči prikaz opomb ob posodobitvah razširitve"
 	},
+	"opt_no_update_notification": {
+		"message": "Ne opozarjaj na razpoložljive posodobitve.",
+		"description": "[nastavitev] uporabniku omogoči, da prepreči razširitvi iskanje novih izdaj"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Vedno odprite stran $salesforce_login v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"

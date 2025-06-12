@@ -1,55 +1,84 @@
-# Privacy Policy
+# Again, Why Salesforce – Privacy Policy
 
-The "Again, Why Salesforce" browser extension communicates directly between the user's web browser and the Salesforce page (and servers when using the extension in the same language as your Salesforce account, which is the default).
+_Last updated: June 12, 2025_
 
-To count the number of users, we rely on Simple Analytics to which the extension sends only a simple message which is completely useless for fingerprinting our users. You may read more about this service [here](https://www.simpleanalytics.com/#why). You may opt-out from being counted from the extension's settings screen. The code that's responsible for following your choice is located [here](/salesforce/content.js) (search for `checkInsertAnalytics`).
+**Again, Why Salesforce** is a browser extension that communicates directly between your web browser and the Salesforce page (and Salesforce servers when using the extension in the same language as your Salesforce account). We do **not** collect or store any personal or identifiable information.
 
-To validate the accuracy of this description, we encourage you to do the following:
+---
 
-- Inspect the source code [here](https://www.github.com/Astisme/again-why-salesforce);
-- Ask a friend or an AI agent to explain the source code;
-- Monitor the network traffic in your browser.
+## 1. Analytics & User Counting  
+- We rely on [Simple Analytics](https://www.simpleanalytics.com/#why) to count daily active users.  
+- Only anonymous, non-identifiable “ping” messages are sent. No IP addresses, cookies, or device fingerprints.  
+- You can opt-out of analytics in the extension’s **Settings** at any time; see "Opt-Out" below.
 
-## Local Storage
+---
 
-The extension uses the browser's localStorage to save your theme preferences for better performance. You may inspect what is stored by following [this tutorial](https://developer.chrome.com/docs/devtools/storage/localstorage). We do not use local storage objects for any other purpose. You may erase the local storage objects by deleting your browser's history without affecting the functionality of the extension (after a page reload).
+## 2. Local Storage  
+- We use the browser’s `localStorage` solely to save your **theme preferences** for faster load times.  
+- Such preferences are currently used by the popup linked to the extension icon.
+- No other personal data or browsing history is stored.  
+- You can clear this by deleting browser history; the extension will continue to function after a page reload.
 
-## Browser Storage
+---
 
-The extension uses the browser's storage to sync the data you create while using the extension for a seamless experience.
+## 3. Browser Storage (Sync)  
+- All data you create in the extension (Tabs, settings, decorations) is saved via the browser’s **sync storage** API for a seamless experience across devices.  
+- You can view or edit this directly via your browser’s developer tools:  
+  - Chrome/Edge: DevTools ▶ Application ▶ Storage ▶ Extension Storage  
+  - Firefox: DevTools ▶ Storage Inspector
+- To view or edit the data without relying on the extension, please look at [the official documentation](https://developer.chrome.com/docs/devtools/storage/extensionstorage).
+- For more information about how your data is stored and synced, please see [the official documentation](https://developer.chrome.com/docs/extensions/reference/api/storage#property-sync).
 
-For more information about how your data is stored and synced, please see [the official documentation](https://developer.chrome.com/docs/extensions/reference/api/storage#property-sync).
+---
 
-To view or edit the data without relying on the extension, please look at [the official documentation](https://developer.chrome.com/docs/devtools/storage/extensionstorage).
+## 4. Tab Data (In-Memory)  
+- While running, the extension keeps your **Tab** data in memory (key: `againWhySalesforce`, variable: `WHY_KEY`).  
+- This powers the Lightning Setup page sidebar, showing your custom Tabs alongside the standard "Home" and "Object Manager".
+- Nothing is persisted here beyond your current session (everything is automatically deleted when you reload the page or when you close your browser tab/window).
 
-### Tab data
+---
 
-When running, the extension stores the Tab data in-memory and keeps it updated even if you use Salesforce in multiple browser tabs or windows (or even different computers!).
+## 5. Settings & Decoration Preferences  
+All settings live in browser storage and are scoped to this extension only:
 
-The Tabs will only be shown into the Salesforce Lightning Setup page to the right of the standard "Home" and "Object Manager" buttons (by default).
+| Key                            | Variable Name              | Description                                  |
+| ------------------------------ | -------------------------- | -------------------------------------------- |
+| `settings`                     | `SETTINGS_KEY`             | General extension preferences                |
+| `settings-tab_generic_style`   | `GENERIC_TAB_STYLE_KEY`    | Styles for generic (all-org) Tab decorations |
+| `settings-tab_org_style`       | `ORG_TAB_STYLE_KEY`        | Styles for org-specific Tab decorations      |
 
-This data is saved using the key `againWhySalesforce`, saved with variable name `WHY_KEY`.
+You can reset or remove these at any time via your browser’s extension storage settings as presented at point 3 above.
 
-### General Settings
+---
 
-While using this extension, you may want to customize your experience. You may do so heading to the Settings page.
+## 6. Data Retention & Deletion  
+- **Analytics**: Purged automatically after **30 days**.  
+- **Settings**: Persisted until you clear browser data or uninstall the extension.  
+- As we do not store any data beyond what your browser controls, there's nothing for you to request the deletion of.
 
-Any update you make in the general settings tab, is saved by the extension and will affect its functionality.
+---
 
-This data is saved using the key `settings`, saved with variable name `SETTINGS_KEY`.
+## 7. Opt-Out
+Even though we don’t collect personal data, you may disable analytics at any time via **Settings** → **Analytics** toggle.
 
-### Tab decoration preferences
+---
 
-The way you want your Tabs to appear is saved into objects which tell the extension the bare minimum about how to style your Tabs and whether these should be used when the Tab is active or inactive.
+## 8. Security Measures  
+- **Sandboxed Storage**: All data is held within browser-managed storage, preventing cross-site access.  
+- **Least-Privilege**: We request only the permissions necessary for core functionality. Permissions which may be useful but not at the core of the extension will be requested at the moment you interact with them.
+- **Breach Notification**: In the unlikely event of a vulnerability, we’ll publish a notice in our extension release notes within **72 hours**.
 
-To change the style of your Tabs, head to the Settings page!
+---
 
-These data is used only to create `style` elements that are appended into the `head` of the Salesforce Setup page you're currently visiting. The inserted styles affect only the Tabs created by this extension.
+## 9. Third-Party Disclosures  
+- **Simple Analytics**  
+  - Provides fully anonymous usage counts with no identifiers shared.  
+- **Browser Vendors (Chrome, Firefox, Edge, Safari)**  
+  - Manage storage under their respective privacy policies.
 
-#### Generic Tab decoration preferences
+---
 
-This data is saved using the key `settings-tab_generic_style`, saved with variable name `GENERIC_TAB_STYLE_KEY`.
+## 10. Contact & Policy Updates  
+If you have questions or wish to request data removal beyond what your browser controls, please contact us on [github](https://github.com/astisme/again-why-salesforce).
 
-#### Org Tab decoration preferences
-
-This data is saved using the key `settings-tab_org_style`, saved with variable name `ORG_TAB_STYLE_KEY`.
+We’ll notify you of policy changes via extension release notes.

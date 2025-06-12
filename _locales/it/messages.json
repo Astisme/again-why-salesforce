@@ -562,6 +562,10 @@
 		"message": "Non mostrare le note di rilascio dell’aggiornamento.",
 		"description": "[impostazione] consente all'utente di impedire che l'estensione mostri le note di rilascio dopo l'aggiornamento"
 	},
+	"opt_no_update_notification": {
+		"message": "Non avvisare della disponibilità di aggiornamenti.",
+		"description": "[impostazione] consente all'utente di impedire all'estensione di cercare nuove versioni"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Apri sempre la pagina $salesforce_login nella stessa Tab quando si fa clic sul popup.",
 		"description": "[impostazione]"

@@ -563,6 +563,10 @@
 		"message": "Nu afișa notele de lansare ale actualizării.",
 		"description": "[setare] permite utilizatorului să împiedice afișarea notelor de lansare după actualizarea extensiei"
 	},
+	"opt_no_update_notification": {
+		"message": "Nu avertizați cu privire la actualizările disponibile.",
+		"description": "[setare] permite utilizatorului să împiedice extensia să caute versiuni noi"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Deschideți întotdeauna pagina $salesforce_login în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"

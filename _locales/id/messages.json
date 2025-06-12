@@ -562,6 +562,10 @@
 		"message": "Jangan tampilkan catatan rilis pembaruan.",
 		"description": "[pengaturan] memungkinkan pengguna untuk mencegah ekstensi menampilkan catatan rilis setelah diperbarui"
 	},
+	"opt_no_update_notification": {
+		"message": "Jangan peringatkan tentang pembaruan yang tersedia.",
+		"description": "[pengaturan] biarkan pengguna mencegah ekstensi mencari rilis baru"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Selalu buka halaman $salesforce_login di Tab yang sama saat mengeklik popup.",
 		"description": "[pengaturan]"

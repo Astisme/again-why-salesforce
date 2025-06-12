@@ -562,6 +562,10 @@
 		"message": "Ne pas afficher les notes de mise à jour.",
 		"description": "[paramètre] permet à l’utilisateur d’empêcher l’extension d’afficher les notes de mise à jour après sa mise à jour"
 	},
+	"opt_no_update_notification": {
+		"message": "Ne pas avertir des mises à jour disponibles.",
+		"description": "[paramètre] permet à l'utilisateur d'empêcher l'extension de rechercher de nouvelles versions"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Toujours ouvrir la page $salesforce_login dans le même Tab en cliquant sur la fenêtre contextuelle.",
 		"description": "[paramètre]"

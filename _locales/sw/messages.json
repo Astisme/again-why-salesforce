@@ -563,6 +563,10 @@
 		"message": "Usionyeshe maelezo ya masasisho.",
 		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kiendelezi kuonyesha maelezo ya masasisho baada ya kusasishwa"
 	},
+	"opt_no_update_notification": {
+		"message": "Usionye kuhusu sasisho zinazopatikana.",
+		"description": "[mpangilio] ruhusu mtumiaji kuzuia kiendelezi kutafuta matoleo mapya"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Fungua ukurasa wa $salesforce_login kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"

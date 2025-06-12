@@ -563,6 +563,10 @@
 		"message": "የእድሳት ማስታወቂያዎችን አታሳይ።",
 		"description": "[ቅንብር] ተጠቃሚውን ከእድሳት በኋላ እንዳይመልከት እንዲከለክል ያስችላል"
 	},
+	"opt_no_update_notification": {
+		"message": "ስለሚገኙ ዝማኔዎች አታስጠንቅቅ።",
+		"description": "[ቅንብር] ተጠቃሚው ቅጥያው አዲስ የተለቀቁትን እንዳይፈልግ ይፍቀዱለት"
+	},
 	"opt_open_login_same_tab": {
 		"message": "ብቅ-ባይ ላይ ጠቅ ሲያደርጉ ሁልጊዜ የ $salesforce_login ገጽን በተመሳሳይ Tab ውስጥ ይክፈቱ።",
 		"description": "[ቅንብር]"

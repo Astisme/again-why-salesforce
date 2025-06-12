@@ -563,6 +563,10 @@
 		"message": "업데이트 릴리즈 노트 표시 안 함.",
 		"description": "[설정] 사용자가 업데이트 후 확장 프로그램이 릴리즈 노트를 표시하지 못하도록 함"
 	},
+	"opt_no_update_notification": {
+		"message": "사용 가능한 업데이트에 대해 경고하지 마십시오.",
+		"description": "[설정] 사용자가 확장 프로그램이 새 릴리스를 검색하지 못하도록 허용"
+	},
 	"opt_open_login_same_tab": {
 		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_login 페이지를 엽니다.",
 		"description": "[설정]"

@@ -563,6 +563,10 @@
 		"message": "Nezobrazovať poznámky k vydaniu aktualizácie.",
 		"description": "[nastavenie] umožňuje používateľovi zabrániť zobrazeniu poznámok po aktualizácii rozšírenia"
 	},
+	"opt_no_update_notification": {
+		"message": "Neupozorňovať na dostupné aktualizácie.",
+		"description": "[nastavenie] umožňuje používateľovi zabrániť rozšíreniu vo vyhľadávaní nových vydaní"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Po kliknutí na vyskakovacie okno vždy otvoriť stránku $salesforce_login v tej istej Tab.",
 		"description": "[nastavenie]"

@@ -563,6 +563,10 @@
 		"message": "Älä näytä päivitysten julkaisutietoja.",
 		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää laajennusta näyttämästä julkaisutietoja päivityksen jälkeen"
 	},
+	"opt_no_update_notification": {
+		"message": "Älä varoita saatavilla olevista päivityksistä.",
+		"description": "[asetus] antaa käyttäjän estää laajennusta etsimästä uusia julkaisuja"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Avaa $salesforce_login-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
