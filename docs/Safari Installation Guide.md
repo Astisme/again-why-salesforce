@@ -1,7 +1,7 @@
 # Safari Installation Guide
 
-Welcome! This guide will walk you through installing the **"Again, Why Salesforce"** Safari extension on macOS.  
-Because this app is not distributed through the Mac App Store, there are a few extra steps to enable it — especially for Safari.  
+Welcome! This guide will walk you through installing the **"Again, Why Salesforce"** Safari extension on macOS.\
+Because this app is not distributed through the Mac App Store, there are a few extra steps to enable it — especially for Safari.\
 Don't worry! Follow the instructions below and you'll be up and running in just a few minutes.
 
 ## Download the Installer
@@ -52,7 +52,7 @@ In the opened window, drag and drop the **"Again, Why Salesforce"** application 
 
 ## Open the Extension App
 
-Navigate to the **Applications** folder and open the **"Again, Why Salesforce"** app.  
+Navigate to the **Applications** folder and open the **"Again, Why Salesforce"** app.\
 Then, open **Safari** as well.
 
 ## Setup Safari
