@@ -466,7 +466,7 @@ function setExtensionBrowserListeners() {
 				return;
 			}
 			BROWSER.tabs.create({
-				url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
+				url: `${homepage}/tree/main/docs/CHANGELOG.md`,
 			});
 		}
 		/* TODO add tutorial on install

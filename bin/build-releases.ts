@@ -10,7 +10,7 @@ const browsers: string[] = [
 	//"edge",
 ];
 const artifacts: string[] = [];
-const releaseNotes: string = process.env.RELEASE_NOTES ?? "CHANGELOG.md";
+const releaseNotes: string = process.env.RELEASE_NOTES ?? "docs/CHANGELOG.md";
 const triggeringTag: string = process.env.TRIGGERING_TAG;
 const tagVersion: string = process.env.TAG_VERSION;
 const prerelease: boolean = process.env.PRERELEASE === "true";
