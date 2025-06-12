@@ -869,7 +869,7 @@ async function restoreGeneralSettings() {
 	}
 	const settings = await getSettings();
 	if (settings != null) {
-		settings instanceof Array
+        Array.isArray(settings)
 			? settings.forEach((set) => setCurrentChoice(set))
 			: setCurrentChoice(settings);
 	}
@@ -1068,7 +1068,7 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 	}
 	const settings = await getStyleSettings(key);
 	if (settings != null) {
-		settings instanceof Array
+        Array.isArray(settings)
 			? setCurrentChoice({ id: key, value: settings })
 			: setCurrentChoice(settings);
 	}
