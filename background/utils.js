@@ -4,11 +4,15 @@ import {
 	BROWSER_NAME,
 	EXTENSION_NAME,
 	ISCHROME,
+	ISFIREFOX,
+	ISSAFARI,
 	NO_UPDATE_NOTIFICATION,
+	SETTINGS_KEY,
+	WHAT_EXPORT,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
-    WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 } from "/constants.js";
-import { bg_getSettings, bg_getStorage } from "./background.js";
+import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -64,20 +68,16 @@ export function bg_getCurrentBrowserTab(callback = null) {
  * Sends the same message back to other parts of the extension.
  *
  * @param {JSONObject} message - the message to be sent
- * @param {int} count = 0 - how many times the function has been called
  */
-export async function bg_notify(message, count = 0) {
+export async function bg_notify(message) {
 	if (message == null) {
 		throw new Error("error_no_message");
 	}
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
 		BROWSER.tabs.sendMessage(browserTab.id, message);
-	} catch (error) {
+	} catch (_) {
 		console.trace();
-		if (error == null || error.message === "") {
-			setTimeout(() => bg_notify(count + 1), 500);
-		}
 	}
 }
 
@@ -89,13 +89,14 @@ export async function bg_notify(message, count = 0) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-	if (!ISCHROME) {
+	const filename = `${EXTENSION_NAME}.json`;
+	if (ISFIREFOX) {
 		// Firefox implementation
 		const blob = new Blob([jsonData], { type: "application/json" });
 		const url = URL.createObjectURL(blob);
 		BROWSER.downloads.download({
 			url,
-			filename: `${EXTENSION_NAME}.json`,
+			filename,
 		}).then(() => {
 			BROWSER.downloads.onChanged.addListener((e) => {
 				if (e.state.current === "complete") {
@@ -103,15 +104,26 @@ function _exportHandler(tabs) {
 				}
 			});
 		});
-	} else {
+		return;
+	} else if (ISCHROME) {
 		// Chrome implementation
 		const dataStr = "data:application/json;charset=utf-8," +
 			encodeURIComponent(jsonData);
 		chrome.downloads.download({
 			url: dataStr,
-			filename: `${EXTENSION_NAME}.json`,
+			filename,
 		});
+		return;
+	} else if (ISSAFARI) {
+		// Safari: send a message to the content script
+		bg_notify({
+			what: WHAT_EXPORT,
+			filename,
+			payload: jsonData,
+		});
+		return;
 	}
+	console.warn(["error_export", ISCHROME, ISFIREFOX, ISSAFARI]);
 }
 
 /**
@@ -120,49 +132,69 @@ function _exportHandler(tabs) {
  * @param {Array|null} tabs - An array of tab objects to be exported as a JSON file. If null, the function fetches the tab data from storage.
  */
 function exportHandler(tabs = null) {
-    if (tabs == null) {
-        return bg_getStorage(_exportHandler);
-    }
-    _exportHandler(tabs);
+	if (tabs == null) {
+		return bg_getStorage(_exportHandler);
+	}
+	_exportHandler(tabs);
 }
 
-function requestExportPermission(){
-    const req_perm_link = BROWSER.runtime.getURL("action/req_permissions/req_permissions.html")
-    if(req_perm_link == null)
-        return false;
-    BROWSER.action.setPopup({
-        popup: `${req_perm_link}?whichid=download`
-    });
-    return true;
+function requestExportPermission() {
+	const req_perm_link = BROWSER.runtime.getURL(
+		"action/req_permissions/req_permissions.html",
+	);
+	if (req_perm_link == null) {
+		return false;
+	}
+	BROWSER.action.setPopup({
+		popup: `${req_perm_link}?whichid=download`,
+	});
+	return true;
 }
 
-export function checkLaunchExport(tabs = null){
-    if(ISSAFARI || BROWSER.downloads != null){
-        // downloads permission has already been granted
-        exportHandler(tabs);
-        return;
-    }
-    // show toast message to request the user to open the popup
-    bg_notify({
-        what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
-        ok: requestExportPermission(),
-    });
-}
-
-let checked = false;
-export async function checkForUpdates() {
-	if (checked) {
+export function checkLaunchExport(tabs = null) {
+	if (ISSAFARI || BROWSER.downloads != null) {
+		// downloads permission has already been granted
+		exportHandler(tabs);
 		return;
 	}
-	checked = true;
+	// show toast message to request the user to open the popup
+	bg_notify({
+		what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+		ok: requestExportPermission(),
+	});
+}
+
+/**
+ * Checks for extension updates and notifies the user if a newer version is available.
+ * - Skips the check if the user has disabled update notifications or if the last check was within 7 days.
+ * - Compares the current version with the latest GitHub release.
+ * - If an update is available, a notification is triggered with update details.
+ *
+ * @returns {Promise<void>} A promise that resolves when the update check process completes.
+ */
+export async function checkForUpdates() {
 	// check user settings
 	const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
 	if (
 		no_update_notification != null &&
-		no_update_notification.enabled === true
+		(
+			no_update_notification.enabled === true || // the user does not want to be notified
+			Math.floor(
+					(new Date() - new Date(no_update_notification.date)) /
+						(1000 * 60 * 60 * 24),
+				) <= 7 // the date difference is less than a week
+		)
 	) {
 		return;
 	}
+	/**
+	 * Compares two semantic version strings to determine if the latest version is newer.
+	 * Versions are expected in dot-separated format (e.g., "1.2.3"). Missing segments are treated as 0.
+	 *
+	 * @param {string} latest - The latest version string.
+	 * @param {string} current - The current version string.
+	 * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
+	 */
 	function isNewerVersion(latest, current) {
 		const latestParts = latest.split(".").map(Number);
 		const currentParts = current.split(".").map(Number);
@@ -181,6 +213,12 @@ export async function checkForUpdates() {
 		}
 		return false; // Versions are equal
 	}
+	// set last date saved as today
+	bg_setStorage(
+		[{ id: NO_UPDATE_NOTIFICATION, date: new Date().toJSON() }],
+		null,
+		SETTINGS_KEY,
+	);
 	try {
 		const manifest = BROWSER.runtime.getManifest();
 		const currentVersion = manifest.version;
@@ -211,12 +249,6 @@ export async function checkForUpdates() {
 		).tag_name.replace(/^.*-v/, "");
 		// Compare versions and open homepage if update is available
 		if (isNewerVersion(latestVersion, currentVersion)) {
-			console.log([
-				"update_available",
-				currentVersion,
-				"→",
-				latestVersion,
-			]);
 			bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: currentVersion,

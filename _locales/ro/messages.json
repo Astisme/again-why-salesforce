@@ -63,13 +63,17 @@
 		"message": "Continuați",
 		"description": "textContent pentru butoanele care permit executarea acțiunii curente"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Toate Tabs vizibile",
-		"description": "[meniu-contextual]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Toate Tab-urile generice",
+		"description": "[meniul contextual]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Resetați la valorile implicite",
-		"description": "[meniu-contextual]"
+		"message": "😨 Elimină toate Tab",
+		"description": "[meniu contextual]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Toate Tab-urile vizibile",
+		"description": "[meniul contextual]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportați Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Acest Tab",
 		"description": "[meniu-contextual]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Resetează Tab-urile implicite",
+		"description": "[meniul contextual]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Etichetă pentru meniul de setări"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Trageți",
 		"description": "[import] permite utilizatorului să tragă fișierele lor în zona specificată"
+	},
+	"enable": {
+		"message": "Activează",
+		"description": "[solicită_permisiune] buton pentru a activa permisiunile"
 	},
 	"error_adding_tab": {
 		"message": "Eroare la adăugarea Tab.",
@@ -327,9 +339,17 @@
 		"message": "Eroare la eliminarea Tab.",
 		"description": "[eroare] Eroare generică utilizată la eliminarea unui Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Eroare la eliminarea tuturor Tab-urilor vizibile.",
+		"description": "[eroare] Eroare generală la eliminarea tuturor Tab-urilor vizibile"
+	},
 	"error_required_params": {
 		"message": "Parametrii necesari pentru funcție nu au fost transmiși",
 		"description": "[eroare] dezvoltatorul a încercat să apeleze o funcție fără parametrii necesari"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Eroare la resetarea Tab-urilor implicite.",
+		"description": "[eroare] Eroare generală la resetarea Tab-urilor la valorile implicite"
 	},
 	"error_sync_nothing": {
 		"message": "Nu se pot sincroniza Tabs nule!",
@@ -427,6 +447,10 @@
 		"message": "fișiere",
 		"description": "mai multe fișiere"
 	},
+	"flows": {
+		"message": "Fluxuri",
+		"description": "[tab implicit] Etichetă pentru Tab-ul implicit de fluxuri"
+	},
 	"general": {
 		"message": "General",
 		"description": "Etichetă pentru categoria de setări generale"
@@ -523,9 +547,9 @@
 		"message": "Deschideți automat pagina $salesforce_setup atunci când faceți clic pe fereastra pop-up în timp ce vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Alternativ)",
-		"description": "Opțiune de limbă pentru a reveni la engleză dacă localizarea nu este acceptată sau nu prezintă traducerea"
+	"opt_en_default": {
+		"message": "en (Implicit și de rezervă)",
+		"description": "Opțiunea de limbă implicită a extensiei"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Păstrează Tab-urile favorite în partea stângă a Home și Object Manager.",
@@ -535,6 +559,10 @@
 		"message": "Deschide întotdeauna linkurile într-o filă nouă a browserului.",
 		"description": "[setare] când utilizatorul face clic pe un Tab favorit, să se deschidă într-o filă nouă"
 	},
+	"opt_no_release_notes": {
+		"message": "Nu afișa notele de lansare ale actualizării.",
+		"description": "[setare] permite utilizatorului să împiedice afișarea notelor de lansare după actualizarea extensiei"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Deschideți întotdeauna pagina $salesforce_login în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Deschideți întotdeauna pagina $salesforce_setup în același Tab atunci când faceți clic pe fereastra pop-up.",
 		"description": "[setare]"
+	},
+	"opt_pick_language": {
+		"message": "Alege limba extensiei",
+		"description": "[setare] etichetă pentru a solicita utilizatorului să își aleagă limba preferată"
+	},
+	"opt_prevent_analytics": {
+		"message": "Împiedică utilizarea Simple Analytics (nu va fi contorizat la numărul de utilizatori).",
+		"description": "[setare] permite utilizatorului să oprească trimiterea de analize anonime"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Împiedică utilizarea navigării Lightning (încărcare mai rapidă în timpul utilizării).",
@@ -551,9 +587,9 @@
 		"message": "pagina în aceeași filă la clic pe popup.",
 		"description": "[setare] pentru a preveni deschiderea unei file noi"
 	},
-	"opt_sf_lang_default": {
-		"message": "Limba Salesforce (Implicit)",
-		"description": "Opțiune pentru a utiliza setarea de limbă Salesforce. Această opțiune este implicită pentru extensie."
+	"opt_sf_lang_cookies": {
+		"message": "Urmărește limba Salesforce (citește cookie-urile Salesforce)",
+		"description": "Opțiune de utilizare a setării de limbă Salesforce. Pentru a utiliza această opțiune, utilizatorii trebuie să permită extensiei să citească cookie-urile Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Omitere verificare automată a ID-ului Salesforce.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Eliminați Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"req_downloads_open_popup": {
+		"message": "Vă rugăm să deschideți fereastra pop-up a extensiei din meniul de extensii al browserului dumneavoastră.",
+		"description": "[notificare] cereți utilizatorului să facă clic pe fereastra pop-up a extensiei pentru a continua"
+	},
+	"req_downloads_perm_header": {
+		"message": "Vă rugăm să activați permisiunea de Descărcări\npentru a începe exportul solicitat.",
+		"description": "[solicită_permisiune] apel la acțiune pentru a activa permisiunea de descărcări"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Această operațiune va fi solicitată o singură dată.",
+		"description": "[solicită_permisiune] descriere pentru a activa permisiunea de descărcări"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nu mai întrebați.",

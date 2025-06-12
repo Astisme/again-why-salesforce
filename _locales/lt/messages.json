@@ -63,13 +63,17 @@
 		"message": "Tęsti",
 		"description": "mygtukų, leidžiančių vykdyti dabartinį veiksmą, textContent"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Visi matomi Tabs",
-		"description": "[kontekstinis_meniu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Visos bendros Tab",
+		"description": "[konteksto meniu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Atstatyti į numatytuosius",
-		"description": "[kontekstinis_meniu]"
+		"message": "😨 Pašalinti visas Tab",
+		"description": "[kontekstinis meniu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Visos matomos Tab",
+		"description": "[konteksto meniu]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksportuoti Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Šis Tab",
 		"description": "[kontekstinis_meniu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Atstatyti numatytąsias Tabs",
+		"description": "[konteksto meniu]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Nustatymų meniu etiketė"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Numesti",
 		"description": "[importas] leisti vartotojui numesti savo failus į nurodytą sritį"
+	},
+	"enable": {
+		"message": "Įjungti",
+		"description": "[prašyti_leidimo] mygtukas leidimams įjungti"
 	},
 	"error_adding_tab": {
 		"message": "Klaida pridedant Tab.",
@@ -327,9 +339,17 @@
 		"message": "Klaida šalinant Tab.",
 		"description": "[klaida] Bendra klaida naudojama šalinant Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Klaida pašalinant visas matomas Tabs.",
+		"description": "[klaida] Bendro pobūdžio klaida pašalinant visas matomas Tabs"
+	},
 	"error_required_params": {
 		"message": "Būtini funkcijos parametrai nebuvo perduoti",
 		"description": "[klaida] kūrėjas bandė iškviesti funkciją be reikiamų parametrų"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Klaida atstatant Tabs į numatytąsias reikšmes.",
+		"description": "[klaida] Bendro pobūdžio klaida atstatant Tabs į numatytąsias reikšmes"
 	},
 	"error_sync_nothing": {
 		"message": "Negalima sinchronizuoti null Tabs!",
@@ -427,6 +447,10 @@
 		"message": "failai",
 		"description": "keli failai"
 	},
+	"flows": {
+		"message": "Srautai",
+		"description": "[numatytoji Tab] Etiketė numatytajai Srautų Tab"
+	},
 	"general": {
 		"message": "Bendri",
 		"description": "Etiketė bendrai nustatymų kategorijai"
@@ -523,9 +547,9 @@
 		"message": "Automatiškai atidaryti $salesforce_setup puslapį spustelėjus iškylantįjį langą, kai esate „Salesforce“ puslapyje.",
 		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą „Salesforce“ svetainėje"
 	},
-	"opt_en_fallback": {
-		"message": "en (Atsarginis)",
-		"description": "Kalbos parinktis grįžti į anglų kalbą, jei lokalė nepalaikoma arba neatvaizduoja vertimo"
+	"opt_en_default": {
+		"message": "en (Numatytasis ir atsarginis)",
+		"description": "Numatytoji plėtinio kalbos parinktis"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Palikti mėgstamus Tabus kairėje nuo Namų ir Objektų tvarkyklės.",
@@ -535,6 +559,10 @@
 		"message": "Visada atidaryti nuorodas naujame naršyklės skirtuke.",
 		"description": "[nustatymas] kai vartotojas spusteli mėgstamą Tab, atidaryti naujame naršyklės skirtuke"
 	},
+	"opt_no_release_notes": {
+		"message": "Nerodyti naujinimo išleidimo pastabų.",
+		"description": "[nustatymas] leidžia vartotojui neleisti plėtiniui rodyti išleidimo pastabų po atnaujinimo"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_login puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_setup puslapį tame pačiame Tab.",
 		"description": "[nustatymas]"
+	},
+	"opt_pick_language": {
+		"message": "Pasirinkite plėtinio kalbą",
+		"description": "[nustatymas] etiketė, skirta vartotojui pasirinkti pageidaujamą kalbą"
+	},
+	"opt_prevent_analytics": {
+		"message": "Užkirsti kelią Simple Analytics naudojimui (nerodoma naudotojų skaičiuje).",
+		"description": "[nustatymas] leidžia vartotojui užkirsti kelią anoniminiams analizės duomenų siuntimui"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Neleisti naudoti „Lightning“ naršymo (naudojant greitesnis įkėlimas).",
@@ -551,9 +587,9 @@
 		"message": "puslapis tame pačiame skirtuke spustelėjus iššokantį langą.",
 		"description": "[nustatymas] neleisti atidaryti naujo naršyklės skirtuko"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce kalba (Numatytoji)",
-		"description": "Parinktis naudoti Salesforce kalbos nustatymą. Ši parinktis yra numatytoji plėtiniui."
+	"opt_sf_lang_cookies": {
+		"message": "Sekite Salesforce kalbą (skaito Salesforce slapukus)",
+		"description": "Parinktis naudoti Salesforce kalbos nustatymą. Norėdami naudoti šią parinktį, vartotojai turi leisti plėtiniui skaityti Salesforce slapukus."
 	},
 	"opt_skip_link_detection": {
 		"message": "Praleisti automatinį Salesforce ID patikrinimą.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Pašalinti Tab",
 		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
+	},
+	"req_downloads_open_popup": {
+		"message": "Prašome atidaryti plėtinio iššokantįjį langą iš savo naršyklės plėtinių meniu.",
+		"description": "[pranešimas] paprašykite vartotojo spustelėti plėtinio iššokantįjį langą, kad tęstų"
+	},
+	"req_downloads_perm_header": {
+		"message": "Prašome įjungti atsisiuntimų leidimą\nnorėdami pradėti prašomą eksportą.",
+		"description": "[prašyti_leidimo] raginimas veikti, kad būtų įjungtas atsisiuntimų leidimas"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ši operacija bus prašoma tik vieną kartą.",
+		"description": "[prašyti_leidimo] atsisiuntimų leidimo įjungimo aprašymas"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Daugiau neklausti.",

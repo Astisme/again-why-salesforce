@@ -1,5 +1,4 @@
 "use strict";
-import "./context-menus.js"; // initiate context-menu loop
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
@@ -15,6 +14,7 @@ import {
 	LOCALE_KEY,
 	MY_SALESFORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
+	NO_RELEASE_NOTES,
 	openSettingsPage,
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
@@ -22,14 +22,22 @@ import {
 	SUPPORTED_SALESFORCE_URLS,
 	WHY_KEY,
 } from "/constants.js";
-import { bg_getCurrentBrowserTab, bg_notify, checkLaunchExport, } from "./utils.js";
+import {
+	bg_getCurrentBrowserTab,
+	bg_notify,
+	checkForUpdates,
+	checkLaunchExport,
+} from "./utils.js";
+import { checkAddRemoveContextMenus } from "./context-menus.js";
 
 /**
- * Retrieves data from the browser"s synced storage and invokes the provided callback with the data.
+ * Retrieves data from browser storage under the specified key.
  *
- * @param {Function} callback - The function to be called once the data is retrieved.
- *                              The retrieved value is passed as an argument to the callback.
- * @throws {Error} If the callback is not provided.
+ * Supports both callback and Promise-based usage.
+ *
+ * @param {function} [callback] - Optional callback to handle the retrieved data.
+ * @param {string} [key=WHY_KEY] - The storage key to retrieve data from.
+ * @returns {Promise<any>|void} Returns a Promise if no callback is provided, otherwise void.
  */
 export function bg_getStorage(callback, key = WHY_KEY) {
 	/**
@@ -61,6 +69,16 @@ export function bg_getStorage(callback, key = WHY_KEY) {
 	getFromStorage(callback);
 }
 
+/**
+ * Retrieves settings from background storage based on specified keys.
+ * If `settingKeys` is null, returns all settings.
+ * Supports optional callback usage or returns a Promise with the result.
+ *
+ * @param {string|string[]|null} [settingKeys=null] - Single key or array of keys to retrieve. If null, all settings are returned.
+ * @param {string} [key=SETTINGS_KEY] - The storage key namespace to retrieve settings from.
+ * @param {Function|null} [callback=null] - Optional callback to handle the retrieved settings.
+ * @returns {Promise<Object|Object[]>|void} A Promise resolving to the requested settings, or void if a callback is provided.
+ */
 export async function bg_getSettings(
 	settingKeys = null,
 	key = SETTINGS_KEY,
@@ -94,7 +112,7 @@ export async function bg_getSettings(
  * @param {Array} tabs - The tabs to store.
  * @param {function} callback - The callback to execute after storing the data.
  */
-async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
+export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
 	switch (key) {
 		case SETTINGS_KEY: {
@@ -108,7 +126,7 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 					);
 					if (existingItems.length > 0) {
 						existingItems.forEach((existing) =>
-							existing.enabled = item.enabled
+							Object.assign(existing, item)
 						);
 					} else {
 						settingsArray.push(item);
@@ -157,8 +175,27 @@ async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	return BROWSER.storage.sync.set(set, callback?.(set[key]));
 }
 
-// courtesy of derroman/salesforce-user-language-switcher
+/**
+ * Retrieves current user information from the Salesforce userinfo API.
+ * Determines the API host and authorization headers based on the provided URL,
+ * fetches the user info, and returns it as JSON.
+ * courtesy of derroman/salesforce-user-language-switcher
+ *
+ * @param {string} currentUrl - The current Salesforce URL.
+ * @returns {Promise<Object|undefined>} A promise resolving to the user info object or undefined on error.
+ */
 async function getCurrentUserInfo(currentUrl) {
+	/**
+	 * Determines the Salesforce API host and constructs authorization headers based on the current URL.
+	 * - Validates the URL against supported Salesforce domains.
+	 * - Normalizes certain Salesforce subdomains to the main domain.
+	 * - Retrieves the session ID cookie ("sid") for authentication.
+	 * - Returns the API host origin and headers needed for authorized requests.
+	 *
+	 * @param {string} currentUrl - The current Salesforce URL.
+	 * @returns {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
+	 * @throws {Error} Throws if required authentication cookies are not found.
+	 */
 	async function getAPIHostAndHeaders(currentUrl) {
 		const url = new URL(currentUrl);
 		let origin = url.origin;
@@ -205,6 +242,14 @@ async function getCurrentUserInfo(currentUrl) {
 	}
 }
 
+/**
+ * Retrieves the Salesforce language setting for the current user.
+ * Attempts to fetch language info from Salesforce user data and stores it;
+ * falls back to stored locale if unavailable.
+ *
+ * @param {Function|null} [callback=null] - Optional callback to receive the language.
+ * @returns {Promise<string|any>|void} The language code or nothing if callback is provided.
+ */
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
@@ -216,6 +261,15 @@ export async function bg_getSalesforceLanguage(callback = null) {
 	}
 }
 
+/**
+ * Retrieves all or specified command shortcuts available in the browser extension.
+ * Filters commands to those that have assigned shortcuts.
+ * Supports optional callback or returns a Promise.
+ *
+ * @param {string[]|null} [commands=null] - Array of command names to filter. If null, returns all commands with shortcuts.
+ * @param {Function|null} [callback=null] - Optional callback to receive the commands.
+ * @returns {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
+ */
 export async function bg_getCommandLinks(commands = null, callback = null) {
 	const allCommands = await BROWSER.commands.getAll();
 	const availableCommands = allCommands.filter((singleCommand) =>
@@ -246,94 +300,106 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  * @param {function} sendResponse - The function to send a response back.
  * @returns {boolean} Whether the message was handled asynchronously.
  */
-BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
-	if (request == null || request.what == null) {
-		console.error({ error: "error_invalid_request", request });
-		sendResponse(null);
-		return false;
-	}
-	switch (request.what) {
-		case "get":
-			bg_getStorage(sendResponse, request.key);
-			break;
-		case "set":
-			bg_setStorage(request.set, sendResponse, request.key);
-			break;
-		case "saved":
-		case "add":
-		case "theme":
-		case "error":
-		case "warning":
+function listenToExtensionMessages() {
+	BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
+		if (request == null || request.what == null) {
+			console.error({ error: "error_invalid_request", request });
 			sendResponse(null);
-			setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
-			//return false; // we won"t call sendResponse
-			break;
-		case "export":
-			checkLaunchExport(request.tabs);
-			sendResponse(null);
-			//return false;
-			break;
-		case "browser-tab":
-			bg_getCurrentBrowserTab(sendResponse);
-			break;
-		case "get-sf-language":
-			bg_getSalesforceLanguage(sendResponse);
-			break;
-		case "get-settings":
-			bg_getSettings(request.keys, undefined, sendResponse);
-			break;
-		case "get-style-settings":
-			bg_getSettings(undefined, request.key, sendResponse);
-			break;
-		case "get-commands":
-			bg_getCommandLinks(request.commands, sendResponse);
-			break;
-		default:
-			if (!["import"].includes(request.what)) {
-				console.error({ error: "error_unknown_request", request });
-			}
-			break;
-	}
-	return true;
-});
+			return false;
+		}
+		switch (request.what) {
+			case "get":
+				bg_getStorage(sendResponse, request.key);
+				break;
+			case "set":
+				bg_setStorage(request.set, sendResponse, request.key);
+				break;
+			case "saved":
+			case "add":
+			case "theme":
+			case "error":
+			case "warning":
+				sendResponse(null);
+				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
+				//return false; // we won"t call sendResponse
+				break;
+			case "export":
+				checkLaunchExport(request.tabs);
+				sendResponse(null);
+				//return false;
+				break;
+			case "browser-tab":
+				bg_getCurrentBrowserTab(sendResponse);
+				break;
+			case "get-sf-language":
+				bg_getSalesforceLanguage(sendResponse);
+				break;
+			case "get-settings":
+				bg_getSettings(request.keys, undefined, sendResponse);
+				break;
+			case "get-style-settings":
+				bg_getSettings(undefined, request.key, sendResponse);
+				break;
+			case "get-commands":
+				bg_getCommandLinks(request.commands, sendResponse);
+				break;
+			default:
+				if (!["import"].includes(request.what)) {
+					console.error({ error: "error_unknown_request", request });
+				}
+				break;
+		}
+		return true;
+	});
+}
 
-BROWSER.commands.onCommand.addListener(async (command) => {
-	// check the current page is Salesforce Setup
-	const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
-	if (
-		broswerTabUrl == null ||
-		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
-	) {
-		// we're not in Salesforce Setup
-		return;
-	}
-	const message = { what: command };
-	switch (command) {
-		case CMD_IMPORT:
-			message.what = "add";
-			/* falls through */
-		case CMD_SAVE_AS_TAB:
-		case CMD_REMOVE_TAB:
-		case CMD_TOGGLE_ORG:
-		case CMD_UPDATE_TAB:
-		case CMD_OPEN_OTHER_ORG:
-			bg_notify(message);
-			break;
-		case CMD_OPEN_SETTINGS:
-			openSettingsPage();
-			break;
-		case CMD_EXPORT_ALL:
-            checkLaunchExport();
-			break;
-		default:
-			bg_notify({
-				what: "warning",
-				message: `Received unknown command: ${command}`,
-			});
-			break;
-	}
-});
+/**
+ * Listens for extension command events and executes appropriate actions
+ * based on the current Salesforce Setup page context and command received.
+ */
+function listenToExtensionCommands() {
+	BROWSER.commands.onCommand.addListener(async (command) => {
+		// check the current page is Salesforce Setup
+		const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
+		if (
+			broswerTabUrl == null ||
+			!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+		) {
+			// we're not in Salesforce Setup
+			return;
+		}
+		const message = { what: command };
+		switch (command) {
+			case CMD_IMPORT:
+				message.what = "add";
+				/* falls through */
+			case CMD_SAVE_AS_TAB:
+			case CMD_REMOVE_TAB:
+			case CMD_TOGGLE_ORG:
+			case CMD_UPDATE_TAB:
+			case CMD_OPEN_OTHER_ORG:
+				bg_notify(message);
+				break;
+			case CMD_OPEN_SETTINGS:
+				openSettingsPage();
+				break;
+			case CMD_EXPORT_ALL:
+				checkLaunchExport();
+				break;
+			default:
+				bg_notify({
+					what: "warning",
+					message: `Received unknown command: ${command}`,
+				});
+				break;
+		}
+	});
+}
 
+/**
+ * Ensures default organizational style settings exist;
+ * if none are found, creates and saves default styles for org-specific tabs.
+ */
 async function setDefalutOrgStyle() {
 	const orgStyles = await bg_getSettings(undefined, ORG_TAB_STYLE_KEY);
 	if (orgStyles == null) {
@@ -348,4 +414,100 @@ async function setDefalutOrgStyle() {
 		bg_setStorage(request.set, () => {}, request.key);
 	}
 }
-setDefalutOrgStyle();
+
+/**
+ * Sets up various browser event listeners for the extension, including:
+ * - Debounced context menu checks on tab/window changes
+ * - Handling extension startup and installation events
+ * - Opening release notes after updates
+ * - Responding to tab activation and window focus changes
+ */
+function setExtensionBrowserListeners() {
+	/**
+	 * Creates a debounced version of a function that delays its execution until after a specified delay period has passed since the last call.
+	 * The returned debounced function can be called multiple times, but the actual execution of the original function will only happen once the
+	 * specified delay has passed since the last invocation.
+	 *
+	 * @param {Function} fn - The function to debounce.
+	 * @param {number} [delay=150] - The delay in milliseconds before the function is executed after the last invocation.
+	 * @returns {Function} A debounced version of the provided function.
+	 */
+	function debounce(fn, delay = 150) {
+		let timeout;
+		return (...args) => {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => fn(...args), delay);
+		};
+	}
+	// Debounced version for high-frequency events
+	const debouncedCheckMenus = debounce(checkAddRemoveContextMenus);
+	// when the browser starts
+	BROWSER.runtime.onStartup.addListener(() =>
+		checkAddRemoveContextMenus("startup")
+	);
+	// when the extension is installed / updated
+	BROWSER.runtime.onInstalled.addListener(async (details) => {
+		checkAddRemoveContextMenus("installed");
+		if (details.reason === "update") {
+			// the extension has been updated
+			// check user settings
+			const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
+			if (no_release_notes != null && no_release_notes.enabled === true) {
+				return;
+			}
+			// get the extension version
+			const manifest = BROWSER.runtime.getManifest();
+			const version = manifest.version;
+			// open github to show the release notes
+			const homepage = manifest.homepage_url;
+			// Validate homepage URL (must be GitHub)
+			if (!homepage || !homepage.includes("github.com")) {
+				console.error("no_manifest_github");
+				return;
+			}
+			BROWSER.tabs.create({
+				url: `${homepage}/tree/main/docs/Release Notes/v${version}.md`,
+			});
+		}
+		/* TODO add tutorial on install
+      if (details.reason == "install") {
+      }
+      */
+	});
+	// when the extension is activated by the BROWSER
+	self.addEventListener(
+		"activate",
+		() => checkAddRemoveContextMenus("activate"),
+	);
+	// when the tab changes
+	BROWSER.tabs.onActivated.addListener(() =>
+		debouncedCheckMenus("highlighted", checkForUpdates)
+	);
+	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
+	// when window changes
+	//BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
+	BROWSER.windows.onFocusChanged.addListener(() =>
+		checkAddRemoveContextMenus("focuschanged")
+	);
+
+	/*
+  // TODO update uninstall url
+  BROWSER.runtime.setUninstallURL("https://www.duckduckgo.com/", () => {
+      removeMenuItems()
+  });
+  */
+}
+
+/**
+ * Main entry point to initialize extension listeners, default styles,
+ * command listeners, message listeners, and context menu checks.
+ */
+function main() {
+	setExtensionBrowserListeners();
+	setDefalutOrgStyle();
+	listenToExtensionMessages();
+	listenToExtensionCommands();
+	checkAddRemoveContextMenus();
+}
+
+main();

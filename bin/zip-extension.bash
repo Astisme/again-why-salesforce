@@ -11,19 +11,17 @@ if [[ ! "$BROWSER" =~ ^(firefox|chrome|edge|safari)$ ]]; then
   exit 1
 fi
 
-# Define prefix
-AWSF="awsf"
+TAG_VERSION=$(git describe --tags --exact-match HEAD 2>/dev/null | sed 's/^v//')
+if [ -z "$TAG_VERSION" ]; then
+    echo "No tag found on current commit"
+    exit 1
+fi
 
-# Extract manifest version
-MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)  # Get version from manifest
-
-BROWSER_VERSION_NAME="${AWSF}-$BROWSER-v$MANIFEST_VERSION"
-
-# Set variables
+BROWSER_VERSION_NAME="awsf-$BROWSER-v$TAG_VERSION"
 ZIP_NAME="${BROWSER_VERSION_NAME}.zip"
 
 # Verify manifest.json exists
 ls manifest.json >/dev/null 2>&1 || { echo "manifest.json not found!"; exit 1; }
 
 # Zip $BROWSER extension
-zip -r "bin/$ZIP_NAME" _locales action assets *.js background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js LICENSE README.md manifest.json -x "*/README.md" >/dev/null 2>&1
+zip -r "bin/$ZIP_NAME" settings _locales action assets *.js background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js LICENSE README.md manifest.json -x "*/README.md" >/dev/null 2>&1

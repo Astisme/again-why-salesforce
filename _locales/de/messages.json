@@ -63,13 +63,17 @@
 		"message": "Fortfahren",
 		"description": "Text für Schaltflächen, die die aktuelle Aktion erlauben"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Alle sichtbaren Tabs",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle generischen Tabs",
+		"description": "[Kontextmenü]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Auf Standard zurücksetzen",
-		"description": "[context-menu]"
+		"message": "😨 Alle Tab entfernen",
+		"description": "[Kontextmenü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle sichtbaren Tabs",
+		"description": "[Kontextmenü]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabs exportieren",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Diesen Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Standard-Tabs zurücksetzen",
+		"description": "[Kontextmenü]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Bezeichnung für das Einstellungsmenü"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] Ermöglicht es dem Benutzer, seine Dateien in den angegebenen Bereich zu ziehen"
+	},
+	"enable": {
+		"message": "Aktivieren",
+		"description": "[Berechtigung_anfordern] Schaltfläche zum Aktivieren von Berechtigungen"
 	},
 	"error_adding_tab": {
 		"message": "Fehler beim Hinzufügen eines Tabs.",
@@ -327,9 +339,17 @@
 		"message": "Fehler beim Entfernen des Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Entfernen eines Tabs"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Fehler beim Entfernen aller sichtbaren Tabs.",
+		"description": "[Fehler] Allgemeiner Fehler beim Entfernen aller sichtbaren Tabs"
+	},
 	"error_required_params": {
 		"message": "Die erforderlichen Parameter für die Funktion wurden nicht übergeben",
 		"description": "[Fehler] Der Entwickler hat versucht, die Funktion ohne die notwendigen Parameter aufzurufen"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Fehler beim Zurücksetzen der Standard-Tabs.",
+		"description": "[Fehler] Allgemeiner Fehler beim Zurücksetzen der Tabs auf den Standard"
 	},
 	"error_sync_nothing": {
 		"message": "Leere Tabs können nicht synchronisiert werden!",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "Dateien",
 		"description": "Mehrere Dateien"
+	},
+	"flows": {
+		"message": "Flows",
+		"description": "[Standard-Tab] Bezeichnung für den Standard-Flows-Tab"
 	},
 	"general": {
 		"message": "Allgemein",
@@ -522,9 +546,9 @@
 		"message": "Öffnen Sie die $salesforce_setup-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich auf einer Salesforce-Seite befinden.",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer Salesforce-Website befindet"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Sprachauswahl, um auf Englisch zurückzufallen, wenn das Gebietsschema nicht unterstützt wird oder keine Übersetzung anbietet"
+	"opt_en_default": {
+		"message": "en (Standard und Fallback)",
+		"description": "Standard-Sprachoption der Erweiterung"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Favorisierte Tabs links von Startseite und Objekt-Manager belassen.",
@@ -534,6 +558,10 @@
 		"message": "Links immer in einem neuen Browser-Tab öffnen.",
 		"description": "[Einstellung] wenn der Benutzer auf einen Favoriten klickt, in neuem Tab öffnen"
 	},
+	"opt_no_release_notes": {
+		"message": "Update-Release-Notes nicht anzeigen.",
+		"description": "[Einstellung] Ermöglicht dem Benutzer, zu verhindern, dass die Erweiterung Release-Notes nach einem Update anzeigt"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Öffnen Sie die $salesforce_login-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
 		"description": "[Einstellung]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Öffnen Sie die $salesforce_setup-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
 		"description": "[Einstellung]"
+	},
+	"opt_pick_language": {
+		"message": "Sprache der Erweiterung auswählen",
+		"description": "[Einstellung] Beschriftung, um den Benutzer aufzufordern, seine bevorzugte Sprache auszuwählen"
+	},
+	"opt_prevent_analytics": {
+		"message": "Verwendung von Simple Analytics verhindern (erscheint nicht in der Nutzeranzahl).",
+		"description": "[Einstellung] Ermöglicht dem Benutzer, das Senden anonymer Analysen zu verhindern"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Verwendung von Lightning Navigation verhindern (schnellere Ladezeit bei Nutzung).",
@@ -550,9 +586,9 @@
 		"message": "Seite im selben Tab öffnen, wenn auf das Popup geklickt wird.",
 		"description": "[Einstellung] Verhindert das Öffnen eines neuen Browser-Tabs"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Standard)",
-		"description": "Option zur Verwendung der Salesforce-Spracheneinstellung. Standard für die Erweiterung."
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce-Sprache folgen (liest Salesforce-Cookies)",
+		"description": "Option zur Verwendung der Salesforce-Spracheinstellung. Um diese Option zu nutzen, müssen Benutzer der Erweiterung erlauben, Salesforce-Cookies zu lesen."
 	},
 	"opt_skip_link_detection": {
 		"message": "Automatische Überprüfung der Salesforce-ID überspringen.",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Tab entfernen",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"req_downloads_open_popup": {
+		"message": "Bitte öffnen Sie das Erweiterungs-Popup aus dem Erweiterungsmenü Ihres Browsers.",
+		"description": "[Toast] bitten Sie den Benutzer, auf das Erweiterungs-Popup zu klicken, um fortzufahren"
+	},
+	"req_downloads_perm_header": {
+		"message": "Bitte aktivieren Sie die Download-Berechtigung,\num den angeforderten Export zu starten.",
+		"description": "[Berechtigung_anfordern] Aufruf zum Handeln, um die Download-Berechtigung zu aktivieren"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Dieser Vorgang wird nur einmal angefordert.",
+		"description": "[Berechtigung_anfordern] Beschreibung zur Aktivierung der Download-Berechtigung"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nicht erneut fragen.",

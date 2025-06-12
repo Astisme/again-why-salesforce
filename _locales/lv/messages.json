@@ -63,13 +63,17 @@
 		"message": "Turpināt",
 		"description": "textContent pogām, kas atļauj izpildīt pašreizējo darbību"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Visas redzamās Tabs",
-		"description": "[konteksta_izvēlne]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Visas vispārīgās Tab",
+		"description": "[konteksta izvēlne]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Atiestatīt uz noklusējumu",
-		"description": "[konteksta_izvēlne]"
+		"message": "😨 Noņemt visas Tab",
+		"description": "[konteksta izvēlne]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Visas redzamās Tab",
+		"description": "[konteksta izvēlne]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksportēt Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Šis Tab",
 		"description": "[konteksta_izvēlne]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Atiestatīt noklusētās Tab",
+		"description": "[konteksta izvēlne]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Iestatījumu izvēlnes etiķete"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Nomest",
 		"description": "[importēšana] ļauj lietotājam nomest savus failus uz norādītās zonas"
+	},
+	"enable": {
+		"message": "Iespējot",
+		"description": "[pieprasīt_atļauju] poga atļauju iespējošanai"
 	},
 	"error_adding_tab": {
 		"message": "Kļūda pievienojot Tab.",
@@ -327,9 +339,17 @@
 		"message": "Kļūda dzēšot Tab.",
 		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Kļūda, noņemot visas redzamās Tab.",
+		"description": "[kļūda] Vispārēja kļūda, noņemot visas redzamās Tab"
+	},
 	"error_required_params": {
 		"message": "Funkcijai nepieciešamie parametri netika nodoti",
 		"description": "[kļūda] izstrādātājs mēģināja izsaukt funkciju bez nepieciešamajiem parametriem"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Kļūda, atjaunojot noklusētās Tab.",
+		"description": "[kļūda] Vispārēja kļūda, atjaunojot Tab uz noklusējumu"
 	},
 	"error_sync_nothing": {
 		"message": "Nevar sinhronizēt null Tabs!",
@@ -427,6 +447,10 @@
 		"message": "faili",
 		"description": "vairāki faili"
 	},
+	"flows": {
+		"message": "Plūsmas",
+		"description": "[noklusējuma-tab] Noklusējuma Plūsmas Tab etiķete"
+	},
 	"general": {
 		"message": "Vispārīgi",
 		"description": "Etiķete vispārīgo iestatījumu kategorijai"
@@ -523,9 +547,9 @@
 		"message": "Automātiski atvērt $salesforce_setup lapu, noklikšķinot uz uznirstošā loga, ja esat Salesforce lapā.",
 		"description": "[iestatījums] kad lietotājs atver uznirstošo logu Salesforce vietnē"
 	},
-	"opt_en_fallback": {
-		"message": "en (Rezerves)",
-		"description": "Valodas opcija, lai izmantotu angļu valodu, ja lokalizācija netiek atbalstīta vai nav pieejams tulkojums"
+	"opt_en_default": {
+		"message": "en (Noklusējums un rezerves)",
+		"description": "Paplašinājuma noklusējuma valodas opcija"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Saglabāt iecienītākās Tabs kreisajā pusē no Home un Object Manager.",
@@ -535,6 +559,10 @@
 		"message": "Vienmēr atvērt saites jaunā pārlūka cilnē.",
 		"description": "[iestatījums] kad lietotājs noklikšķina uz iecienītākā Tab, atvērt jaunā pārlūka cilnē"
 	},
+	"opt_no_release_notes": {
+		"message": "Nerādīt atjauninājuma izlaiduma piezīmes.",
+		"description": "[iestatījums] ļauj lietotājam novērst piezīmju parādīšanu pēc paplašinājuma atjaunināšanas"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Vienmēr atvērt $salesforce_login lapu tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Vienmēr atvērt $salesforce_setup lapu tajā pašā Tab, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums]"
+	},
+	"opt_pick_language": {
+		"message": "Izvēlieties paplašinājuma valodu",
+		"description": "[iestatījums] etiķete, lai mudinātu lietotāju izvēlēties vēlamo valodu"
+	},
+	"opt_prevent_analytics": {
+		"message": "Novērst Simple Analytics izmantošanu (netiks ieskaitīts lietotāju skaitā).",
+		"description": "[iestatījums] ļauj lietotājam novērst anonīmas analītikas sūtīšanu"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Neļaut izmantot Lightning navigāciju (ātrāka ielāde, kad tiek izmantota).",
@@ -551,9 +587,9 @@
 		"message": "lapa tajā pašā cilnē, noklikšķinot uz uznirstošā loga.",
 		"description": "[iestatījums] nepieļaut jaunas pārlūka cilnes atvēršanu"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce valoda (Noklusējuma)",
-		"description": "Opcija izmantot Salesforce valodas iestatījumu. Šī opcija ir paplašinājuma noklusējuma iestatījums."
+	"opt_sf_lang_cookies": {
+		"message": "Sekojiet Salesforce valodai (lasa Salesforce sīkfailus)",
+		"description": "Iespēja izmantot Salesforce valodu iestatījumu. Lai izmantotu šo iespēju, lietotājiem jāļauj paplašinājumam lasīt Salesforce sīkfailus."
 	},
 	"opt_skip_link_detection": {
 		"message": "Izlaist automātisko Salesforce ID pārbaudi.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Noņemt Tab",
 		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
+	},
+	"req_downloads_open_popup": {
+		"message": "Lūdzu, atveriet paplašinājuma uznirstošo logu no savas pārlūkprogrammas paplašinājumu izvēlnes.",
+		"description": "[paziņojums] lūdziet lietotājam noklikšķināt uz paplašinājuma uznirstošā loga, lai turpinātu"
+	},
+	"req_downloads_perm_header": {
+		"message": "Lūdzu, iespējojiet lejupielāžu atļauju,\nlai sāktu pieprasīto eksportu.",
+		"description": "[pieprasīt_atļauju] aicinājums veikt darbību, lai iespējotu lejupielāžu atļauju"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Šī darbība tiks pieprasīta tikai vienu reizi.",
+		"description": "[pieprasīt_atļauju] apraksts lejupielāžu atļaujas iespējošanai"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Vairs nejautāt.",

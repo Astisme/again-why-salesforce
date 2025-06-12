@@ -1,14 +1,15 @@
 import ensureTranslatorAvailability from "/translator.js";
 import {
-    BROWSER,
+	BROWSER,
 	EXTENSION_NAME,
-    FOLLOW_SF_LANG,
+	FOLLOW_SF_LANG,
 	GENERIC_TAB_STYLE_KEY,
 	getCssRule,
 	getCssSelector,
 	getSettings,
 	getStyleSettings,
 	LINK_NEW_BROWSER,
+	MANIFEST,
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
 	ORG_TAB_STYLE_KEY,
@@ -16,6 +17,7 @@ import {
 	POPUP_OPEN_LOGIN,
 	POPUP_OPEN_SETUP,
 	POPUP_SETUP_NEW_TAB,
+	PREVENT_ANALYTICS,
 	sendExtensionMessage,
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
@@ -35,7 +37,6 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
-    MANIFEST,
 } from "/constants.js";
 
 ensureTranslatorAvailability();
@@ -75,6 +76,7 @@ const no_release_notes_el = document.getElementById(NO_RELEASE_NOTES);
 const no_update_notification_el = document.getElementById(
 	NO_UPDATE_NOTIFICATION,
 );
+const prevent_analytics_el = document.getElementById(PREVENT_ANALYTICS);
 const user_language_select = document.getElementById(USER_LANGUAGE);
 
 const generalContainer = document.getElementById("general-container");
@@ -820,6 +822,9 @@ function setCurrentChoice(setting) {
 		case NO_UPDATE_NOTIFICATION:
 			no_update_notification_el.checked = setting.enabled;
 			break;
+		case PREVENT_ANALYTICS:
+			prevent_analytics_el.checked = setting.enabled;
+			break;
 		case USER_LANGUAGE:
 			user_language_select.value = setting.enabled;
 			break;
@@ -850,6 +855,7 @@ const allCheckboxes = [
 	tab_on_left_el,
 	no_release_notes_el,
 	no_update_notification_el,
+	prevent_analytics_el,
 ];
 
 let generalSettingsListenersSet = false;
@@ -886,35 +892,36 @@ async function restoreGeneralSettings() {
 		}
 		saveCheckboxOptions(e, link_new_browser_el);
 	});
-    let oldUserLanguage = user_language_select.value;
+	let oldUserLanguage = user_language_select.value;
 	user_language_select.addEventListener("change", (e) => {
-        const cookiesPermObj = {
-            permissions: ["cookies"],
-            origins: MANIFEST.optional_host_permissions,
-        };
-        const languageMessage = {
-            what: "set",
-            key: SETTINGS_KEY,
-            set: [{
-                id: USER_LANGUAGE,
-                enabled: e.target.value,
-            }],
-        };
-        const sendLanguageMessage = () => {
-            sendExtensionMessage(languageMessage)
-            oldUserLanguage = e.target.value;
-        }
-        if(e.target.value === FOLLOW_SF_LANG){ // the user wants to follow the language on salesforce
-            BROWSER.permissions.request(cookiesPermObj)
-            .then(resp => {
-                if(resp === true){ // the extension has the cookies permission
-                    sendLanguageMessage();
-                } else
-                    user_language_select.value = oldUserLanguage;
-            })
-        }
-        else
-            sendLanguageMessage();
+		const cookiesPermObj = {
+			permissions: ["cookies"],
+			origins: MANIFEST.optional_host_permissions,
+		};
+		const languageMessage = {
+			what: "set",
+			key: SETTINGS_KEY,
+			set: [{
+				id: USER_LANGUAGE,
+				enabled: e.target.value,
+			}],
+		};
+		const sendLanguageMessage = () => {
+			sendExtensionMessage(languageMessage);
+			oldUserLanguage = e.target.value;
+		};
+		if (e.target.value === FOLLOW_SF_LANG) { // the user wants to follow the language on salesforce
+			BROWSER.permissions.request(cookiesPermObj)
+				.then((resp) => {
+					if (resp === true) { // the extension has the cookies permission
+						sendLanguageMessage();
+					} else {
+						user_language_select.value = oldUserLanguage;
+					}
+				});
+		} else {
+			sendLanguageMessage();
+		}
 	});
 	generalSettingsListenersSet = true;
 }

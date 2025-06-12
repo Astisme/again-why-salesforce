@@ -63,13 +63,17 @@
 		"message": "Continuar",
 		"description": "text per als botons que permeten executar l'acció actual"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tots els Tab visibles",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Totes les Tab genèriques",
+		"description": "[menú contextual]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Restablir per defecte",
-		"description": "[context-menu]"
+		"message": "😨 Elimina totes les Tab",
+		"description": "[menú contextual]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Totes les Tab visibles",
+		"description": "[menú contextual]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportar Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Aquest Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Restableix les Tab per defecte",
+		"description": "[menú contextual]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Etiqueta per al menú de configuració"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] permet a l’usuari deixar anar els seus fitxers a l’àrea especificada"
+	},
+	"enable": {
+		"message": "Activa",
+		"description": "[sol·licitud_permís] botó per habilitar permisos"
 	},
 	"error_adding_tab": {
 		"message": "Error en afegir Tab.",
@@ -327,9 +339,17 @@
 		"message": "Error en eliminar Tab.",
 		"description": "[error] Error genèric en eliminar una Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "S'ha produït un error en eliminar totes les Tab visibles.",
+		"description": "[error] Error genèric en eliminar totes les Tab visibles"
+	},
 	"error_required_params": {
 		"message": "No s'han passat els paràmetres requerits per a la funció",
 		"description": "[error] el desenvolupador ha intentat cridar la funció sense els paràmetres necessaris"
+	},
+	"error_resetting_default_tabs": {
+		"message": "S'ha produït un error en restablir les Tab per defecte.",
+		"description": "[error] Error genèric en restablir les Tab als valors per defecte"
 	},
 	"error_sync_nothing": {
 		"message": "No es poden sincronitzar Tabs buits!",
@@ -427,6 +447,10 @@
 		"message": "fitxers",
 		"description": "diversos fitxers"
 	},
+	"flows": {
+		"message": "Fluxos",
+		"description": "[tab per defecte] Etiqueta per a la Tab de Fluxos per defecte"
+	},
 	"general": {
 		"message": "General",
 		"description": "Etiqueta per a la categoria de configuració general"
@@ -523,9 +547,9 @@
 		"message": "Obre automàticament la pàgina $salesforce_setup en fer clic a la finestra emergent si ets en una pàgina de Salesforce.",
 		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web de Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Alternativa)",
-		"description": "Opció d'idioma per tornar a l'anglès si la configuració regional no és compatible o no presenta la traducció"
+	"opt_en_default": {
+		"message": "en (Per defecte i de reserva)",
+		"description": "Opció de llengua per defecte de l'extensió"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantenir Tabs preferits a l'esquerra d'Inici i Gestor d'objectes.",
@@ -535,6 +559,10 @@
 		"message": "Obre sempre els enllaços en una nova pestanya del navegador.",
 		"description": "[configuració] en fer clic a una Tab preferida, obre-la en una nova pestanya del navegador"
 	},
+	"opt_no_release_notes": {
+		"message": "No mostrar les notes de llançament de l'actualització.",
+		"description": "[configuració] permet a l’usuari evitar que l’extensió mostri les notes de llançament després d’actualitzar-se"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Obre sempre la pàgina $salesforce_login a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Obre sempre la pàgina $salesforce_setup a la mateixa Tab en fer clic a la finestra emergent.",
 		"description": "[configuració]"
+	},
+	"opt_pick_language": {
+		"message": "Tria l'idioma de l'extensió",
+		"description": "[configuració] etiqueta per demanar a l'usuari que triï el seu idioma preferit"
+	},
+	"opt_prevent_analytics": {
+		"message": "Evitar l’ús de Simple Analytics (no es comptarà en el recompte d’usuaris).",
+		"description": "[configuració] permet a l’usuari evitar l'enviament d'analítiques anònimes"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Impedeix l'ús de la navegació Lightning (càrrega més ràpida quan s'utilitza).",
@@ -551,9 +587,9 @@
 		"message": "pàgina a la mateixa pestanya en fer clic a la finestra emergent.",
 		"description": "[configuració] evita obrir una nova pestanya del navegador"
 	},
-	"opt_sf_lang_default": {
-		"message": "Idioma de Salesforce (Predeterminat)",
-		"description": "Opció per utilitzar la configuració d'idioma de Salesforce. Aquesta opció és la predeterminada per a l'extensió."
+	"opt_sf_lang_cookies": {
+		"message": "Segueix l'idioma de Salesforce (llegeix les galetes de Salesforce)",
+		"description": "Opció per utilitzar la configuració de llengua de Salesforce. Per utilitzar aquesta opció, els usuaris han de permetre que l'extensió llegeixi les galetes de Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Saltar la comprovació automàtica de l’ID de Salesforce.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Eliminar Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"req_downloads_open_popup": {
+		"message": "Si us plau, obriu la finestra emergent de l'extensió des del menú d'extensions del vostre navegador.",
+		"description": "[tostada] demanar a l'usuari que faci clic a la finestra emergent de l'extensió per continuar"
+	},
+	"req_downloads_perm_header": {
+		"message": "Si us plau, habiliteu el permís de descàrregues\nper iniciar l'exportació sol·licitada.",
+		"description": "[sol·licitud_permís] crida a l'acció per habilitar el permís de descàrregues"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Aquesta operació només es sol·licitarà una vegada.",
+		"description": "[sol·licitud_permís] descripció per habilitar el permís de descàrregues"
 	},
 	"req_permissions_dont_ask": {
 		"message": "No demanis-ho de nou.",

@@ -63,13 +63,17 @@
 		"message": "Doorgaan",
 		"description": "textContent voor knoppen die toestaan dat de huidige actie wordt uitgevoerd"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Alle zichtbare Tabs",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle algemene Tab",
+		"description": "[contextmenu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Herstellen naar standaard",
-		"description": "[context-menu]"
+		"message": "😨 Alle Tab verwijderen",
+		"description": "[contextmenu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle zichtbare Tab",
+		"description": "[contextmenu]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabs exporteren",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Deze Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Standaard Tabs resetten",
+		"description": "[contextmenu]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Label voor het instellingenmenu"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] laat de gebruiker hun bestanden op het opgegeven gebied neerzetten"
+	},
+	"enable": {
+		"message": "Inschakelen",
+		"description": "[toestemming_aanvragen] knop om machtigingen in te schakelen"
 	},
 	"error_adding_tab": {
 		"message": "Fout bij het toevoegen van Tab.",
@@ -327,9 +339,17 @@
 		"message": "Fout bij het verwijderen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het verwijderen van een Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Fout bij het verwijderen van alle zichtbare Tab.",
+		"description": "[fout] Algemene fout bij het verwijderen van alle zichtbare Tab"
+	},
 	"error_required_params": {
 		"message": "De vereiste parameters voor de functie zijn niet doorgegeven",
 		"description": "[fout] de ontwikkelaar heeft geprobeerd een functie aan te roepen zonder de benodigde parameters"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Fout bij het terugzetten van de standaard Tabs.",
+		"description": "[fout] Algemene fout bij het terugzetten van de Tabs naar standaard"
 	},
 	"error_sync_nothing": {
 		"message": "Kan null Tabs niet synchroniseren!",
@@ -427,6 +447,10 @@
 		"message": "bestanden",
 		"description": "meerdere bestanden"
 	},
+	"flows": {
+		"message": "Stromen",
+		"description": "[standaard-tab] Label voor de standaard Stromen Tab"
+	},
 	"general": {
 		"message": "Algemeen",
 		"description": "Label voor de algemene instellingencategorie"
@@ -523,9 +547,9 @@
 		"message": "Open automatisch de $salesforce_setup-pagina wanneer u op de pop-up klikt terwijl u op een Salesforce-pagina bent.",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een Salesforce-website is"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Taaloptie om terug te vallen op Engels als de landinstelling niet wordt ondersteund of de vertaling niet weergeeft"
+	"opt_en_default": {
+		"message": "en (Standaard en terugval)",
+		"description": "Standaardtaaloptie van de extensie"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Houd favoriete Tabs links van Home en Object Manager.",
@@ -535,6 +559,10 @@
 		"message": "Altijd links openen in een nieuw browsertabblad.",
 		"description": "[instelling] als de gebruiker op een favoriet Tab klikt, openen in een nieuw browsertabblad"
 	},
+	"opt_no_release_notes": {
+		"message": "Release-opmerkingen bij updates niet tonen.",
+		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat de extensie release-opmerkingen toont na een update"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Open de $salesforce_login-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Open de $salesforce_setup-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
 		"description": "[instelling]"
+	},
+	"opt_pick_language": {
+		"message": "Kies extensietaal",
+		"description": "[instelling] label om de gebruiker te vragen zijn voorkeurstaal te kiezen"
+	},
+	"opt_prevent_analytics": {
+		"message": "Gebruik van Simple Analytics voorkomen (niet zichtbaar in gebruikersstatistieken).",
+		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat anonieme analyses worden verzonden"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Gebruik van Lightning-navigatie voorkomen (snellere laadtijd bij gebruik).",
@@ -551,9 +587,9 @@
 		"message": "pagina in hetzelfde tabblad bij het klikken op de popup.",
 		"description": "[instelling] voorkom het openen van een nieuw browsertabblad"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Taal (Standaard)",
-		"description": "Optie om de taalinstelling van Salesforce te gebruiken. Deze optie is de standaard voor de extensie."
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce-taal volgen (leest Salesforce-cookies)",
+		"description": "Optie om de taalinstelling van Salesforce te gebruiken. Om deze optie te gebruiken, moeten gebruikers de extensie toestaan Salesforce-cookies te lezen."
 	},
 	"opt_skip_link_detection": {
 		"message": "Automatische controle van Salesforce-id overslaan.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Tab verwijderen",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"req_downloads_open_popup": {
+		"message": "Open de extensie-popup vanuit het extensie-menu van uw browser.",
+		"description": "[melding] vraag de gebruiker om op de extensie-popup te klikken om door te gaan"
+	},
+	"req_downloads_perm_header": {
+		"message": "Schakel de Downloads-toestemming in\nom de gevraagde export te starten.",
+		"description": "[toestemming_aanvragen] oproep tot actie om de Downloads-toestemming in te schakelen"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Deze bewerking wordt slechts één keer aangevraagd.",
+		"description": "[toestemming_aanvragen] beschrijving om de Downloads-toestemming in te schakelen"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Niet opnieuw vragen.",

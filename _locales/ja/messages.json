@@ -63,13 +63,17 @@
 		"message": "続行",
 		"description": "現在の操作の実行を許可するボタンのtextContent"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 表示されているすべての Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 すべての汎用Tab",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 デフォルトにリセットする",
-		"description": "[context-menu]"
+		"message": "😨 すべてのTabを削除",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 すべての表示中のTab",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tab をエクスポートする",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ この Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 デフォルトTabにリセット",
+		"description": "[コンテキストメニュー]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "設定メニューのラベル"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "ドロップ",
 		"description": "[インポート] ユーザーが指定されたエリアにファイルをドロップできるようにします"
+	},
+	"enable": {
+		"message": "有効にする",
+		"description": "[権限_要求] 権限を有効にするボタン"
 	},
 	"error_adding_tab": {
 		"message": "Tab の追加中にエラーが発生しました。",
@@ -327,9 +339,17 @@
 		"message": "Tab の削除中にエラーが発生しました。",
 		"description": "[エラー] Tab の削除中に使用される一般的なエラー"
 	},
+	"error_removing_visible_tabs": {
+		"message": "すべての表示中のTabの削除中にエラーが発生しました。",
+		"description": "[エラー] すべての表示中のTabを削除する際の一般的なエラー"
+	},
 	"error_required_params": {
 		"message": "関数に必要なパラメータが渡されませんでした",
 		"description": "[エラー] 開発者が必要なパラメータなしで関数を呼び出そうとしました"
+	},
+	"error_resetting_default_tabs": {
+		"message": "デフォルトのTabにリセット中にエラーが発生しました。",
+		"description": "[エラー] Tabをデフォルトにリセットする際の一般的なエラー"
 	},
 	"error_sync_nothing": {
 		"message": "空の Tabs は同期できません！",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "ファイル",
 		"description": "複数のファイル"
+	},
+	"flows": {
+		"message": "フロー",
+		"description": "[デフォルト-tab] デフォルトのフローTabのラベル"
 	},
 	"general": {
 		"message": "一般",
@@ -522,9 +546,9 @@
 		"message": "Salesforceページにいるときにポップアップをクリックすると、$salesforce_setupページを自動的に開きます。",
 		"description": "[設定] ユーザーがSalesforceウェブサイトでポップアップを開いたとき"
 	},
-	"opt_en_fallback": {
-		"message": "en（フォールバック）",
-		"description": "ロケールがサポートされないか翻訳がない場合に英語に戻す言語オプション"
+	"opt_en_default": {
+		"message": "en (デフォルトおよびフォールバック)",
+		"description": "拡張機能のデフォルト言語オプション"
 	},
 	"opt_keep_tabs_left": {
 		"message": "お気に入りのTabsをホームとオブジェクトマネージャーの左に保持します。",
@@ -534,6 +558,10 @@
 		"message": "リンクを常に新しいブラウザタブで開きます。",
 		"description": "[設定] お気に入りのTabをクリックしたときに新しいタブで開く"
 	},
+	"opt_no_release_notes": {
+		"message": "アップデートのリリースノートを表示しない。",
+		"description": "[設定] 拡張機能が更新後にリリースノートを表示しないようにする設定"
+	},
 	"opt_open_login_same_tab": {
 		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_loginページを開きます。",
 		"description": "[設定]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_setupページを開きます。",
 		"description": "[設定]"
+	},
+	"opt_pick_language": {
+		"message": "拡張機能の言語を選択",
+		"description": "[設定] ユーザーに希望の言語を選択させるためのラベル"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analyticsの使用を防止（ユーザー数にカウントされません）。",
+		"description": "[設定] 匿名解析の送信を防止する設定"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Lightningナビゲーションの使用を禁止します（使用中は読み込みが高速になります）。",
@@ -550,9 +586,9 @@
 		"message": "ポップアップをクリックしたときに同じタブでページを開きます。",
 		"description": "[設定] 新しいブラウザタブの開放を防止"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language（デフォルト）",
-		"description": "Salesforceの言語設定を使用するオプション。拡張機能のデフォルトです。"
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce 言語に従う (Salesforce クッキーを読み取る)",
+		"description": "Salesforce の言語設定を使用するオプション。このオプションを使用するには、ユーザーは拡張機能に Salesforce クッキーの読み取りを許可する必要があります。"
 	},
 	"opt_skip_link_detection": {
 		"message": "Salesforce IDの自動チェックをスキップします。",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Tab を削除する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"req_downloads_open_popup": {
+		"message": "ブラウザの拡張機能メニューから拡張機能のポップアップを開いてください。",
+		"description": "[トースト] 続行するために拡張機能のポップアップをクリックするようユーザーに依頼"
+	},
+	"req_downloads_perm_header": {
+		"message": "要求されたエクスポートを開始するために\nダウンロード権限を有効にしてください。",
+		"description": "[権限_要求] ダウンロード権限を有効にするための行動喚起"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "この操作は一度だけ要求されます。",
+		"description": "[権限_要求] ダウンロード権限を有効にするための説明"
 	},
 	"req_permissions_dont_ask": {
 		"message": "二度と聞かない",

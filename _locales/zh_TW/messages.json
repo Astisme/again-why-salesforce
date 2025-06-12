@@ -63,13 +63,17 @@
 		"message": "繼續",
 		"description": "用於允許當前操作執行的按鈕的文字內容"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 所有可見的 Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 所有通用Tab",
+		"description": "[右鍵選單]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 重設為預設",
-		"description": "[context-menu]"
+		"message": "😨 移除所有 Tab",
+		"description": "[右鍵選單]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 所有可見Tab",
+		"description": "[右鍵選單]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ 匯出 Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ This Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 重設預設Tab",
+		"description": "[右鍵選單]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "設定選單的標籤"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "拖曳",
 		"description": "[匯入] 允許使用者將其檔案拖曳到指定區域"
+	},
+	"enable": {
+		"message": "啟用",
+		"description": "[要求_權限] 啟用權限的按鈕"
 	},
 	"error_adding_tab": {
 		"message": "新增 Tab 時發生錯誤。",
@@ -327,9 +339,17 @@
 		"message": "移除 Tab 時發生錯誤。",
 		"description": "[錯誤] 移除 Tab 時使用的一般錯誤"
 	},
+	"error_removing_visible_tabs": {
+		"message": "移除所有可見Tab時發生錯誤。",
+		"description": "[錯誤] 移除所有可見Tab時的通用錯誤"
+	},
 	"error_required_params": {
 		"message": "未傳遞函數所需的參數",
 		"description": "[錯誤] 開發人員嘗試呼叫函數但未提供必要的參數"
+	},
+	"error_resetting_default_tabs": {
+		"message": "重設為預設Tab時發生錯誤。",
+		"description": "[錯誤] 將Tab重設為預設時的通用錯誤"
 	},
 	"error_sync_nothing": {
 		"message": "無法同步空的 Tab！",
@@ -427,6 +447,10 @@
 		"message": "files",
 		"description": "multiple files"
 	},
+	"flows": {
+		"message": "流程",
+		"description": "[預設-tab] 預設流程Tab的標籤"
+	},
 	"general": {
 		"message": "一般",
 		"description": "一般設定類別的標籤"
@@ -523,9 +547,9 @@
 		"message": "當在 Salesforce 頁面上時，按一下快顯視窗時自動開啟 $salesforce_setup 頁面。",
 		"description": "[設定] 當使用者在 Salesforce 網站上開啟快顯視窗時"
 	},
-	"opt_en_fallback": {
-		"message": "en (備用)",
-		"description": "當地區設定不支援或沒有提供翻譯時，回退到英文的語言選項"
+	"opt_en_default": {
+		"message": "en (預設和備用)",
+		"description": "擴充功能預設語言選項"
 	},
 	"opt_keep_tabs_left": {
 		"message": "將收藏的 Tab 保持在首頁和物件管理器的左側。",
@@ -535,6 +559,10 @@
 		"message": "始終在新瀏覽器標籤中打開鏈接。",
 		"description": "[設定] 當用戶點擊收藏的 Tab 時，在新標籤中打開"
 	},
+	"opt_no_release_notes": {
+		"message": "不顯示更新的發行說明。",
+		"description": "[設定] 允許使用者阻止擴充功能在更新後顯示發行說明"
+	},
 	"opt_open_login_same_tab": {
 		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_login 頁面。",
 		"description": "[設定]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "按一下快顯視窗時，一律在相同的 Tab 中開啟 $salesforce_setup 頁面。",
 		"description": "[設定]"
+	},
+	"opt_pick_language": {
+		"message": "選擇擴充功能語言",
+		"description": "[設定] 提示使用者選擇偏好語言的標籤"
+	},
+	"opt_prevent_analytics": {
+		"message": "防止使用Simple Analytics（不會計入使用者統計）。",
+		"description": "[設定] 允許使用者阻止傳送匿名分析資料"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "防止使用 Lightning 導覽 (使用時載入速度更快)。",
@@ -551,9 +587,9 @@
 		"message": "單擊彈出窗口時在同一標籤中打開頁面。",
 		"description": "[設定] 阻止打開新瀏覽器標籤"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce 語言（預設）",
-		"description": "使用 Salesforce 的語言設定的選項。此選項是擴充功能的預設值。"
+	"opt_sf_lang_cookies": {
+		"message": "遵循 Salesforce 語言 (讀取 Salesforce Cookie)",
+		"description": "使用 Salesforce 語言設定的選項。要使用此選項，使用者必須允許擴充功能讀取 Salesforce Cookie。"
 	},
 	"opt_skip_link_detection": {
 		"message": "跳過自動檢測 Salesforce ID。",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Remove Tab",
 		"description": "[alt] 當圖片無法顯示時的替代文字"
+	},
+	"req_downloads_open_popup": {
+		"message": "請從瀏覽器的擴充功能選單中開啟擴充功能彈出視窗。",
+		"description": "[提示] 要求使用者點擊擴充功能彈出視窗以繼續"
+	},
+	"req_downloads_perm_header": {
+		"message": "請啟用下載權限\n以開始請求的匯出。",
+		"description": "[要求_權限] 啟用下載權限的呼籲行動"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "此操作只會被要求一次。",
+		"description": "[要求_權限] 啟用下載權限的描述"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Do not ask again.",

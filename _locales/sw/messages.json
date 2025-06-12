@@ -63,13 +63,17 @@
 		"message": "Endelea",
 		"description": "textContent kwa vitufe vinavyoruhusu kitendo cha sasa kitekelezwe"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tabs zote zinazoonekana",
-		"description": "[menu-ya-mukhtadha]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tab zote za kawaida",
+		"description": "[menyu ya muktadha]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Weka Upya kuwa Chaguomsingi",
-		"description": "[menu-ya-mukhtadha]"
+		"message": "😨 Ondoa Tab zote",
+		"description": "[menyu ya muktadha]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tab zote zinazoonekana",
+		"description": "[menyu ya muktadha]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Hamisha Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Tab Hii",
 		"description": "[menu-ya-mukhtadha]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Weka Tab chaguomsingi upya",
+		"description": "[menyu ya muktadha]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Lebo ya menyu ya mipangilio"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Shusha",
 		"description": "[импорт] ruhusu mtumiaji kushusha faili zao kwenye eneo maalum"
+	},
+	"enable": {
+		"message": "Washa",
+		"description": "[omba_ruhusa] kitufe cha kuwezesha ruhusa"
 	},
 	"error_adding_tab": {
 		"message": "Hitilafu wakati wa kuongeza Tab.",
@@ -327,9 +339,17 @@
 		"message": "Hitilafu wakati wa kuondoa Tab.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Hitilafu ilipotokea kuondoa Tab zote zinazoonekana.",
+		"description": "[hitilafu] Hitilafu ya jumla wakati wa kuondoa Tab zote zinazoonekana"
+	},
 	"error_required_params": {
 		"message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
 		"description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Hitilafu ilipotokea kurejesha Tab kuwa za chaguomsingi.",
+		"description": "[hitilafu] Hitilafu ya jumla ilipotokea wakati wa kurejesha Tab kuwa za chaguomsingi"
 	},
 	"error_sync_nothing": {
 		"message": "Haiwezi kusawazisha Tabs batili (null)!",
@@ -427,6 +447,10 @@
 		"message": "faili",
 		"description": "faili nyingi"
 	},
+	"flows": {
+		"message": "Mitiririko",
+		"description": "[tab chaguomsingi] Lebo kwa Tab ya chaguomsingi ya Mitiririko"
+	},
 	"general": {
 		"message": "Jumla",
 		"description": "Lebo ya kategoria ya mipangilio ya jumla"
@@ -523,9 +547,9 @@
 		"message": "Fungua ukurasa wa $salesforce_setup kiotomatiki unapobofya kwenye ibukizi ukiwa kwenye ukurasa wa Salesforce.",
 		"description": "[mpangilio] mtumiaji anapofungua ibukizi akiwa kwenye tovuti ya Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Mbadala)",
-		"description": "Chaguo la lugha kurudi kwenye Kiingereza ikiwa eneo haliauniwi au halina tafsiri"
+	"opt_en_default": {
+		"message": "en (Chaguo-msingi na Mbadala)",
+		"description": "Chaguo la lugha chaguomsingi la kiendelezi"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Weka Tab unazopenda kushoto kwa Home na Object Manager.",
@@ -535,6 +559,10 @@
 		"message": "Kila mara fungua viungo katika kichupo kipya cha kivinjari.",
 		"description": "[mpangilio] wakati mtumiaji anabonyeza Tab ya kupenda, fungua katika kichupo kipya cha kivinjari"
 	},
+	"opt_no_release_notes": {
+		"message": "Usionyeshe maelezo ya masasisho.",
+		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kiendelezi kuonyesha maelezo ya masasisho baada ya kusasishwa"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Fungua ukurasa wa $salesforce_login kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Fungua ukurasa wa $salesforce_setup kila wakati kwenye Tab moja unapobofya kwenye ibukizi.",
 		"description": "[mpangilio]"
+	},
+	"opt_pick_language": {
+		"message": "Chagua lugha ya kiendelezi",
+		"description": "[mpangilio] lebo ya kumpa mtumiaji kuchagua lugha anayopendelea"
+	},
+	"opt_prevent_analytics": {
+		"message": "Zuia matumizi ya Simple Analytics (usiwe sehemu ya hesabu ya watumiaji).",
+		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kutuma takwimu za uchanganuzi zisizo na majina"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Zuia matumizi ya Usogezaji wa Lightning (upakiaji wa haraka zaidi unapotumiwa).",
@@ -551,9 +587,9 @@
 		"message": "ukurasa katika kichupo hicho hicho wakati unabonyeza popup.",
 		"description": "[mpangilio] zuia kufungua kichupo kipya cha kivinjari"
 	},
-	"opt_sf_lang_default": {
-		"message": "Lugha ya Salesforce (Chaguo-Msingi)",
-		"description": "Chaguo la kutumia mpangilio wa lugha ya Salesforce. Hili ni chaguo-msingi la programu-jalizi."
+	"opt_sf_lang_cookies": {
+		"message": "Fuata Lugha ya Salesforce (inasoma Vidakuzi vya Salesforce)",
+		"description": "Chaguo la kutumia mpangilio wa lugha wa Salesforce. Ili kutumia chaguo hili, watumiaji lazima waruhusu kiendelezi kusoma vidakuzi vya Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Ruka ukaguzi wa moja kwa moja wa Kitambulisho cha Salesforce (ID).",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Ondoa Tab",
 		"description": "[alt] maandishi mbadala wakati picha hazifanyi kazi"
+	},
+	"req_downloads_open_popup": {
+		"message": "Tafadhali fungua popup ya kiendelezi kutoka kwenye menyu ya viendelezi ya kivinjari chako.",
+		"description": "[ujumbe] mwambie mtumiaji kubofya popup ya kiendelezi ili kuendelea"
+	},
+	"req_downloads_perm_header": {
+		"message": "Tafadhali wezesha ruhusa ya Vipakuzi\nili kuanza Usafirishaji ulioombwa.",
+		"description": "[omba_ruhusa] wito wa hatua ya kuwezesha ruhusa ya vipakuzi"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Operesheni hii itaombwa mara moja tu.",
+		"description": "[omba_ruhusa] maelezo ya kuwezesha ruhusa ya vipakuzi"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Usiulize tena.",

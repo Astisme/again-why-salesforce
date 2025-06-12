@@ -63,13 +63,17 @@
 		"message": "Continua",
 		"description": "testo per i bottoni che permettono all'azione corrente di essere eseguita"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tutte le Tab visibili",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tutte le Tab generiche",
+		"description": "[menu contestuale]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Ripristina Tab predefinite",
-		"description": "[context-menu]"
+		"message": "😨 Rimuovi tutte le Tab",
+		"description": "[menu contestuale]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tutte le Tab visibili",
+		"description": "[menu contestuale]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Esporta Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Questa Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Ripristina le Tab predefinite",
+		"description": "[menu contestuale]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Etichetta per il menu delle impostazioni"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Trascina",
 		"description": "[import] consente all'utente di trascinare i propri file sull'area specificata"
+	},
+	"enable": {
+		"message": "Abilita",
+		"description": "[richiedi_permesso] pulsante per abilitare i permessi"
 	},
 	"error_adding_tab": {
 		"message": "Errore durante l'aggiunta di Tab.",
@@ -327,9 +339,17 @@
 		"message": "Errore durante la rimozione di Tab.",
 		"description": "[errore] Errore generico usato durante la rimozione di un Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Errore durante la rimozione di tutte le Tab visibili.",
+		"description": "[errore] Errore generico durante la rimozione di tutte le Tab visibili"
+	},
 	"error_required_params": {
 		"message": "I parametri richiesti per la funzione non sono stati passati",
 		"description": "[errore] lo sviluppatore ha provato a chiamare una funzione senza i parametri necessari"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Errore durante il ripristino delle Tab predefinite.",
+		"description": "[errore] Errore generico durante il ripristino delle Tab predefinite"
 	},
 	"error_sync_nothing": {
 		"message": "Impossibile sincronizzare Tab nulle!",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "più file",
 		"description": "molteplici file"
+	},
+	"flows": {
+		"message": "Flussi",
+		"description": "[tab predefinita] Etichetta per la Tab Flussi predefinita"
 	},
 	"general": {
 		"message": "Generale",
@@ -522,9 +546,9 @@
 		"message": "Apri automaticamente la pagina $salesforce_setup quando si fa clic sul popup mentre si è su una pagina Salesforce.",
 		"description": "[impostazione] quando l'utente apre il popup mentre si trova su un sito Web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Opzione di lingua per tornare all'inglese se la località non è supportata o non presenta la traduzione"
+	"opt_en_default": {
+		"message": "en (Predefinito e di riserva)",
+		"description": "Opzione lingua predefinita dell'estensione"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantieni i Tab preferiti a sinistra di Home e Gestione Oggetti.",
@@ -534,6 +558,10 @@
 		"message": "Apri sempre i link in una nuova scheda del browser.",
 		"description": "[impostazione] quando l'utente fa clic su un Tab preferito, aprilo in una nuova scheda"
 	},
+	"opt_no_release_notes": {
+		"message": "Non mostrare le note di rilascio dell’aggiornamento.",
+		"description": "[impostazione] consente all'utente di impedire che l'estensione mostri le note di rilascio dopo l'aggiornamento"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Apri sempre la pagina $salesforce_login nella stessa Tab quando si fa clic sul popup.",
 		"description": "[impostazione]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Apri sempre la pagina $salesforce_setup nella stessa Tab quando si fa clic sul popup.",
 		"description": "[impostazione]"
+	},
+	"opt_pick_language": {
+		"message": "Scegli la lingua dell'estensione",
+		"description": "[impostazione] etichetta per chiedere all'utente di scegliere la lingua preferita"
+	},
+	"opt_prevent_analytics": {
+		"message": "Impedisci l'uso di Simple Analytics (non verrà contato nel numero di utenti).",
+		"description": "[impostazione] consente all'utente di impedire l'invio di analisi anonime"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Impedisci l’uso di Lightning Navigation (caricamento più veloce quando è attivo).",
@@ -550,9 +586,9 @@
 		"message": "apri la pagina nella stessa scheda quando fai clic sul popup.",
 		"description": "[impostazione] impedisci l'apertura di una nuova scheda"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Predefinito)",
-		"description": "Opzione per utilizzare le impostazioni della lingua di Salesforce. Questa opzione è predefinita per l'estensione."
+	"opt_sf_lang_cookies": {
+		"message": "Segui la lingua di Salesforce (legge i cookie di Salesforce)",
+		"description": "Opzione per usare l'impostazione della lingua di Salesforce. Per usare questa opzione, gli utenti devono permettere all'estensione di leggere i cookie di Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Salta il controllo automatico dell'ID Salesforce.",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Rimuovi Tab",
 		"description": "[alt] testo alternativo quando le immagini non funzionano"
+	},
+	"req_downloads_open_popup": {
+		"message": "Si prega di aprire il popup dell'estensione dal menu delle estensioni del browser.",
+		"description": "[avviso] chiedere all'utente di fare clic sul popup dell'estensione per continuare"
+	},
+	"req_downloads_perm_header": {
+		"message": "Si prega di abilitare il permesso di Download\nper avviare l'Esportazione richiesta.",
+		"description": "[richiedi_permesso] invito all'azione per abilitare il permesso di download"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Questa operazione verrà richiesta solo una volta.",
+		"description": "[richiedi_permesso] descrizione per abilitare il permesso di download"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Non chiedere più.",

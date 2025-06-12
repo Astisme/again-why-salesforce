@@ -1,6 +1,7 @@
 // deno-lint-ignore-file no-control-regex
 const process = require('node:process');
 const fs = require('fs');
+
 module.exports = async function commentOnPr({
 	github,
 	context,
@@ -18,7 +19,7 @@ module.exports = async function commentOnPr({
 		core.error(`⛔ Could not read ${logFile}: ${e.message}`);
 		process.exit(1);
 	}
-
+	
 	if (!raw.trim()) {
 		core.info(`${logFile} is empty; nothing to do.`);
 		try {
@@ -28,14 +29,49 @@ module.exports = async function commentOnPr({
         }
 		return;
 	}
-
+	
 	// remove ANSI escapes & any other noisy lines
 	let clean = raw.replace(/\x1b\[[0-9;]*m/g, '');
-	for (const rx of stripPatterns) {
-		clean = clean.replace(rx, '');
+	
+	// Fix: Handle stripPatterns more safely
+	for (const pattern of stripPatterns) {
+		try {
+			// If it's already a RegExp, use it directly
+			if (pattern instanceof RegExp) {
+				clean = clean.replace(pattern, '');
+			} 
+			// If it's a string, create a RegExp with global flag
+			else if (typeof pattern === 'string') {
+				const regex = new RegExp(pattern, 'gm');
+				clean = clean.replace(regex, '');
+			}
+			// Skip invalid patterns
+			else {
+				core.warning(`Invalid pattern in stripPatterns: ${pattern}`);
+			}
+		} catch (e) {
+			core.warning(`Failed to apply pattern ${pattern}: ${e.message}`);
+		}
 	}
-
-	if (!matchPattern.test(clean)) {
+	
+	// Ensure matchPattern is a valid RegExp
+	let shouldMatch = false;
+	try {
+		if (matchPattern instanceof RegExp) {
+			shouldMatch = matchPattern.test(clean);
+		} else if (typeof matchPattern === 'string') {
+			const regex = new RegExp(matchPattern);
+			shouldMatch = regex.test(clean);
+		} else {
+			// Default to true if matchPattern is invalid
+			shouldMatch = true;
+		}
+	} catch (e) {
+		core.warning(`Invalid matchPattern: ${e.message}`);
+		shouldMatch = true; // Default to reporting errors if pattern is invalid
+	}
+	
+	if (!shouldMatch) {
 		core.info(`✅ No ${title.toLowerCase()} to report.`);
 		try {
             fs.unlinkSync(logFile);
@@ -44,19 +80,18 @@ module.exports = async function commentOnPr({
         }
 		return;
 	}
-
+	
 	// post the comment
 	await github.rest.issues.createComment({
 		owner:			context.repo.owner,
 		repo:			context.repo.repo,
 		issue_number:   context.issue.number,
 		body:		    `## ${title}:
-
 \`\`\`
 ${clean}
 \`\`\``,
 	});
-
+	
 	// fail the job
 	process.exit(1);
 };

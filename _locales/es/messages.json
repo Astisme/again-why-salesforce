@@ -63,13 +63,17 @@
 		"message": "Continuar",
 		"description": "Texto para botones que permiten que se ejecute la acción actual"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Todos los Tabs visibles",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Todas las Tabs genéricas",
+		"description": "[menú contextual]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Restablecer a predeterminado",
-		"description": "[context-menu]"
+		"message": "😨 Eliminar todas las Tab",
+		"description": "[menú contextual]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Todas las Tabs visibles",
+		"description": "[menú contextual]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportar Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Este Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Restablecer Tabs predeterminadas",
+		"description": "[menú contextual]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Etiqueta para el menú de configuración"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] permite al usuario soltar sus archivos en el área especificada"
+	},
+	"enable": {
+		"message": "Habilitar",
+		"description": "[solicitar_permiso] botón para habilitar permisos"
 	},
 	"error_adding_tab": {
 		"message": "Error al agregar Tab.",
@@ -327,9 +339,17 @@
 		"message": "Error al eliminar Tab.",
 		"description": "[error] error genérico al eliminar una Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Error al eliminar todas las Tabs visibles.",
+		"description": "[error] Error genérico utilizado al eliminar todas las Tabs visibles"
+	},
 	"error_required_params": {
 		"message": "No se pasaron los parámetros necesarios para la función",
 		"description": "[error] el desarrollador intentó invocar la función sin los parámetros necesarios"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Error al restablecer las Tabs a las predeterminadas.",
+		"description": "[error] Error genérico utilizado al restablecer las Tabs a sus valores predeterminados"
 	},
 	"error_sync_nothing": {
 		"message": "¡No se pueden sincronizar Tabs nulos!",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "archivos",
 		"description": "Varios archivos"
+	},
+	"flows": {
+		"message": "Flujos",
+		"description": "[pestaña predeterminada] Etiqueta para la pestaña Flujos predeterminada"
 	},
 	"general": {
 		"message": "General",
@@ -522,9 +546,9 @@
 		"message": "Abrir automáticamente la página de $salesforce_setup al hacer clic en la ventana emergente si se está en una página de Salesforce.",
 		"description": "[configuración] cuando el usuario abre la ventana emergente mientras está en un sitio web de Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Opción de idioma para volver al inglés si la configuración regional no es compatible o no presenta la traducción"
+	"opt_en_default": {
+		"message": "en (Predeterminado y de reserva)",
+		"description": "Opción de idioma predeterminada de la extensión"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantener Tabs favoritos a la izquierda de Inicio y Object Manager.",
@@ -534,6 +558,10 @@
 		"message": "Abrir siempre enlaces en una nueva pestaña del navegador.",
 		"description": "[configuración] cuando el usuario hace clic en un Tab favorito, abrirlo en una nueva pestaña del navegador"
 	},
+	"opt_no_release_notes": {
+		"message": "No mostrar notas de la versión de la actualización.",
+		"description": "[configuración] permite al usuario evitar que la extensión muestre notas de la versión después de actualizarse"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Abrir siempre la página de $salesforce_login en la misma Tab al hacer clic en la ventana emergente.",
 		"description": "[configuración]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Abrir siempre la página de $salesforce_setup en la misma Tab al hacer clic en la ventana emergente.",
 		"description": "[configuración]"
+	},
+	"opt_pick_language": {
+		"message": "Elegir idioma de la extensión",
+		"description": "[configuración] etiqueta para pedir al usuario que elija su idioma preferido"
+	},
+	"opt_prevent_analytics": {
+		"message": "Evitar el uso de Simple Analytics (no aparecerá en el conteo de usuarios).",
+		"description": "[configuración] permite al usuario evitar enviar análisis anónimos"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Evitar el uso de Lightning Navigation (carga más rápida cuando está en uso).",
@@ -550,9 +586,9 @@
 		"message": "página en la misma pestaña al hacer clic en el popup.",
 		"description": "[configuración] evitar abrir una nueva pestaña del navegador"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Predeterminado)",
-		"description": "Opción para usar la configuración de idioma de Salesforce. Esta opción es la predeterminada para la extensión."
+	"opt_sf_lang_cookies": {
+		"message": "Seguir el idioma de Salesforce (lee las cookies de Salesforce)",
+		"description": "Opción para usar la configuración de idioma de Salesforce. Para usar esta opción, los usuarios deben permitir que la extensión lea las cookies de Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Omitir verificación automática de Id de Salesforce.",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Eliminar Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
+	},
+	"req_downloads_open_popup": {
+		"message": "Por favor, abra la ventana emergente de la extensión desde el menú de extensiones de su navegador.",
+		"description": "[brindis] pida al usuario que haga clic en la ventana emergente de la extensión para continuar"
+	},
+	"req_downloads_perm_header": {
+		"message": "Por favor, habilite el permiso de Descargas\npara iniciar la Exportación solicitada.",
+		"description": "[solicitar_permiso] llamada a la acción para habilitar el permiso de descargas"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Esta operación solo se solicitará una vez.",
+		"description": "[solicitar_permiso] descripción para habilitar el permiso de descargas"
 	},
 	"req_permissions_dont_ask": {
 		"message": "No preguntar de nuevo.",

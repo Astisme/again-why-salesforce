@@ -63,13 +63,17 @@
 		"message": "Continuar",
 		"description": "textContent para botões que permitem a execução da ação atual"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Todas as Tabs visíveis",
-		"description": "[menu-de-contexto]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Todas as Tabs genéricas",
+		"description": "[menu de contexto]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Redefinir para Padrão",
-		"description": "[menu-de-contexto]"
+		"message": "😨 Remover todas as Tab",
+		"description": "[menu de contexto]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Todas as Tabs visíveis",
+		"description": "[menu de contexto]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportar Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Esta Tab",
 		"description": "[menu-de-contexto]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Redefinir Tabs padrão",
+		"description": "[menu de contexto]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Rótulo para o menu de configurações"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Soltar",
 		"description": "[import] permitir que o usuário solte seus arquivos na área especificada"
+	},
+	"enable": {
+		"message": "Habilitar",
+		"description": "[solicitar_permissao] botão para habilitar permissões"
 	},
 	"error_adding_tab": {
 		"message": "Erro ao adicionar Tab.",
@@ -327,9 +339,17 @@
 		"message": "Erro ao remover Tab.",
 		"description": "[erro] Erro genérico usado ao remover um Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Erro ao remover todas as Tabs visíveis.",
+		"description": "[erro] Erro genérico ao remover todas as Tabs visíveis"
+	},
 	"error_required_params": {
 		"message": "Os parâmetros necessários para a função não foram passados",
 		"description": "[erro] o desenvolvedor tentou chamar uma função sem os parâmetros necessários"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Erro ao redefinir para Tabs padrão.",
+		"description": "[erro] Erro genérico ao redefinir as Tabs para o padrão"
 	},
 	"error_sync_nothing": {
 		"message": "Não é possível sincronizar Tabs nulas!",
@@ -427,6 +447,10 @@
 		"message": "arquivos",
 		"description": "múltiplos arquivos"
 	},
+	"flows": {
+		"message": "Fluxos",
+		"description": "[tab padrão] Rótulo da Tab padrão de Fluxos"
+	},
 	"general": {
 		"message": "Geral",
 		"description": "Rótulo para a categoria de configurações gerais"
@@ -523,9 +547,9 @@
 		"message": "Abrir automaticamente a página $salesforce_setup ao clicar no pop-up enquanto estiver em uma página do Salesforce.",
 		"description": "[configuração] quando o usuário abre o pop-up enquanto está em um site do Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Opção de idioma para voltar ao inglês se a localidade não for suportada ou não apresentar a tradução"
+	"opt_en_default": {
+		"message": "en (Padrão e Reserva)",
+		"description": "Opção de idioma padrão da extensão"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Manter Tabs favoritos à esquerda de Início e Gerenciador de Objetos.",
@@ -535,6 +559,10 @@
 		"message": "Abrir sempre links em uma nova guia do navegador.",
 		"description": "[configuração] quando o usuário clica em um Tab favorito, abri-lo em uma nova guia do navegador"
 	},
+	"opt_no_release_notes": {
+		"message": "Não mostrar notas de atualização.",
+		"description": "[configuração] permite ao usuário impedir que a extensão mostre notas de atualização após ser atualizada"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Sempre abrir a página $salesforce_login na mesma Tab ao clicar no pop-up.",
 		"description": "[configuração]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Sempre abrir a página $salesforce_setup na mesma Tab ao clicar no pop-up.",
 		"description": "[configuração]"
+	},
+	"opt_pick_language": {
+		"message": "Escolha o idioma da extensão",
+		"description": "[configuração] rótulo para solicitar ao usuário que escolha seu idioma preferido"
+	},
+	"opt_prevent_analytics": {
+		"message": "Impedir o uso do Simple Analytics (não contar nas estatísticas de usuários).",
+		"description": "[configuração] permite ao usuário impedir o envio de análises anônimas"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Impedir o uso da Navegação Lightning (carregamento mais rápido quando em uso).",
@@ -551,9 +587,9 @@
 		"message": "página na mesma guia ao clicar no popup.",
 		"description": "[configuração] impedir a abertura de uma nova guia do navegador"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Padrão)",
-		"description": "Opção para usar a configuração de idioma da Salesforce. Esta opção é padrão para a extensão."
+	"opt_sf_lang_cookies": {
+		"message": "Seguir Idioma do Salesforce (lê Cookies do Salesforce)",
+		"description": "Opção para usar a configuração de idioma do Salesforce. Para usar esta opção, os usuários devem permitir que a extensão leia os cookies do Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Pular verificação automática de Id do Salesforce.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Remover Tab",
 		"description": "[alt] texto alternativo quando as imagens não funcionam"
+	},
+	"req_downloads_open_popup": {
+		"message": "Por favor, abra o popup da extensão no menu de extensões do seu navegador.",
+		"description": "[aviso] peça ao usuário para clicar no popup da extensão para continuar"
+	},
+	"req_downloads_perm_header": {
+		"message": "Por favor, habilite a permissão de Downloads\npara iniciar a Exportação solicitada.",
+		"description": "[solicitar_permissao] chamada para ação para habilitar a permissão de downloads"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Esta operação será solicitada apenas uma vez.",
+		"description": "[solicitar_permissao] descrição para habilitar a permissão de downloads"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Não perguntar novamente.",

@@ -79,8 +79,9 @@ class TranslationService {
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
 		singleton.currentLanguage = await singleton.loadLanguageBackground();
-		await singleton.updatePageTranslations();
-		singleton.setListenerForLanguageChange();
+		if (await singleton.updatePageTranslations()) {
+			singleton.setListenerForLanguageChange();
+		}
 		return singleton;
 	}
 
@@ -190,9 +191,13 @@ class TranslationService {
 
 	/**
 	 * Update all translatable elements on the page
+	 * @returns {boolean} whether the page translations have been setup or not
 	 */
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
+		if (document == null) {
+			return false;
+		}
 		const elements = document.querySelectorAll(
 			`[${TranslationService.TRANSLATE_ELEMENT_ATTRIBUTE}]:not([${TranslationService.ATTRIBUTE_EXCLUDE}="true"])`,
 		);
@@ -229,6 +234,14 @@ class TranslationService {
 	}
 }
 
+/**
+ * Asynchronously retrieves the translator instance, initializing it if necessary.
+ *
+ * If the translator has not been initialized, it creates a new instance.
+ * If initialization is already in progress (i.e., `singleton` is a Promise), it waits for it to complete.
+ *
+ * @returns {Promise<TranslationService>} A promise that resolves to the translator instance.
+ */
 async function getTranslator_async() {
 	if (singleton == null) {
 		singleton = await TranslationService.create();
@@ -238,6 +251,14 @@ async function getTranslator_async() {
 	return singleton;
 }
 
+/**
+ * Returns the initialized translator instance.
+ *
+ * Throws an error if the translator has not been initialized or is still initializing.
+ *
+ * @throws {Error} If the translator is not yet initialized.
+ * @returns {TranslationService} The initialized translator instance.
+ */
 function getTranslator() {
 	if (singleton == null || singleton instanceof Promise) {
 		throw new Error("error_translator_not_initialized");
@@ -245,6 +266,13 @@ function getTranslator() {
 	return singleton;
 }
 
+/**
+ * Ensures that the translator service is available.
+ *
+ * Returns the initialized translator if available, otherwise attempts to initialize and return it.
+ *
+ * @returns {Promise<TranslationService>} A promise that resolves to the translator instance.
+ */
 export default async function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();

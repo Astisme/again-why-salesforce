@@ -29,11 +29,20 @@ switch (browser) {
 		break;
 	}
 
-	case "safari":
+	case "safari": {
 		delete manifest.minimum_chrome_version;
 		delete manifest.browser_specific_settings.gecko;
+		delete manifest.background.type;
+		delete manifest.background.scripts;
+		delete manifest.incognito;
+		const notAllowedPermissions = [
+			"downloads",
+		];
+		manifest.permissions = manifest.permissions.filter((perm) =>
+			!notAllowedPermissions.includes(perm)
+		);
 		break;
-
+	}
 	default:
 		console.error(
 			`Usage: ${process.argv[0]} ${

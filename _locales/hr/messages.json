@@ -63,13 +63,17 @@
 		"message": "Nastavi",
 		"description": "tekst za gumbe koji omogućuju izvršenje trenutne radnje"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Svi vidljivi Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Sve generičke Tabove",
+		"description": "[kontekstni izbornik]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Poništi na zadano",
-		"description": "[context-menu]"
+		"message": "😨 Ukloni sve Tab",
+		"description": "[kontekstni izbornik]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Sve vidljive Tabove",
+		"description": "[kontekstni izbornik]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Izvezi Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Ovaj Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Resetiraj zadane Tabove",
+		"description": "[kontekstni izbornik]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Oznaka za izbornik postavki"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] omogućuje korisniku da ispusti svoje datoteke na zadano područje"
+	},
+	"enable": {
+		"message": "Omogući",
+		"description": "[zahtjev_dopuštenja] gumb za omogućavanje dopuštenja"
 	},
 	"error_adding_tab": {
 		"message": "Pogreška pri dodavanju Tab-a.",
@@ -327,9 +339,17 @@
 		"message": "Pogreška pri uklanjanju Tab-a.",
 		"description": "[error] Opća pogreška pri uklanjanju Tab-a"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Pogreška pri uklanjanju svih vidljivih Tabova.",
+		"description": "[pogreška] Opća pogreška pri uklanjanju svih vidljivih Tabova"
+	},
 	"error_required_params": {
 		"message": "Potrebni parametri za funkciju nisu proslijeđeni",
 		"description": "[pogreška] programer je pokušao pozvati funkciju bez potrebnih parametara"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Pogreška pri resetiranju zadanih Tabova.",
+		"description": "[pogreška] Opća pogreška pri resetiranju Tabova na zadane"
 	},
 	"error_sync_nothing": {
 		"message": "Ne mogu se sinkronizirati prazni Tabovi!",
@@ -427,6 +447,10 @@
 		"message": "datoteke",
 		"description": "više datoteka"
 	},
+	"flows": {
+		"message": "Tokovi",
+		"description": "[zadani-tab] Oznaka za zadani tab Tokovi"
+	},
 	"general": {
 		"message": "Općenito",
 		"description": "Oznaka za kategoriju općih postavki"
@@ -523,9 +547,9 @@
 		"message": "Automatski otvori stranicu $salesforce_setup kada kliknete na skočni prozor dok ste na Salesforce stranici.",
 		"description": "[postavka] kada korisnik otvori skočni prozor dok je na Salesforce web stranici"
 	},
-	"opt_en_fallback": {
-		"message": "en (Rezervno)",
-		"description": "Jezična opcija za povratak na engleski ako lokalizacija nije podržana ili ne prikazuje prijevod"
+	"opt_en_default": {
+		"message": "en (Zadano i rezervno)",
+		"description": "Zadana jezična opcija proširenja"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Zadrži omiljene Tabove na lijevoj strani Početne stranice i Upravitelja objekata.",
@@ -535,6 +559,10 @@
 		"message": "Uvijek otvori poveznice u novom pregledničkom tabu.",
 		"description": "[postavka] pri kliku na omiljeni Tab, otvori ga u novom pregledničkom tabu"
 	},
+	"opt_no_release_notes": {
+		"message": "Nemoj prikazivati bilješke o izdanju ažuriranja.",
+		"description": "[postavka] omogućuje korisniku da spriječi prikaz bilješki o izdanju nakon ažuriranja proširenja"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Uvijek otvori stranicu $salesforce_login u istom Tab kada kliknete na skočni prozor.",
 		"description": "[postavka]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Uvijek otvori stranicu $salesforce_setup u istom Tab kada kliknete na skočni prozor.",
 		"description": "[postavka]"
+	},
+	"opt_pick_language": {
+		"message": "Odaberite jezik proširenja",
+		"description": "[postavka] oznaka za poticanje korisnika da odabere željeni jezik"
+	},
+	"opt_prevent_analytics": {
+		"message": "Spriječi korištenje Simple Analytics (neće se prikazivati u broju korisnika).",
+		"description": "[postavka] omogućuje korisniku da spriječi slanje anonimnih analiza"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Spriječi upotrebu navigacije Lightning (brže učitavanje tijekom upotrebe).",
@@ -551,9 +587,9 @@
 		"message": "stranica na istom tabu pri kliku na skočni prozor.",
 		"description": "[postavka] spriječi otvaranje novog pregledničkog taba"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce jezik (Zadano)",
-		"description": "Opcija za korištenje Salesforce postavke jezika. Ova opcija je zadana za proširenje."
+	"opt_sf_lang_cookies": {
+		"message": "Pratite Salesforce jezik (čita Salesforce kolačiće)",
+		"description": "Opcija za korištenje jezične postavke Salesforcea. Da bi koristili ovu opciju, korisnici moraju dopustiti proširenju čitanje Salesforce kolačića."
 	},
 	"opt_skip_link_detection": {
 		"message": "Preskoči automatsku provjeru Salesforce ID-ja.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Ukloni Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"req_downloads_open_popup": {
+		"message": "Molimo otvorite skočni prozor proširenja iz izbornika proširenja vašeg preglednika.",
+		"description": "[obavijest] zamolite korisnika da klikne na skočni prozor proširenja za nastavak"
+	},
+	"req_downloads_perm_header": {
+		"message": "Molimo omogućite dopuštenje za preuzimanja\nza početak zatraženog izvoza.",
+		"description": "[zahtjev_dopuštenja] poziv na radnju za omogućavanje dopuštenja za preuzimanja"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ova će operacija biti zatražena samo jednom.",
+		"description": "[zahtjev_dopuštenja] opis za omogućavanje dopuštenja za preuzimanja"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Nemoj pitati ponovo.",

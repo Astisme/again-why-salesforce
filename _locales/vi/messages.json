@@ -63,13 +63,17 @@
 		"message": "Tiếp tục",
 		"description": "textContent cho các nút cho phép hành động hiện tại thực thi"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tất cả các Tab hiển thị",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tất cả Tab chung",
+		"description": "[trình đơn ngữ cảnh]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Đặt lại về mặc định",
-		"description": "[context-menu]"
+		"message": "😨 Xóa tất cả Tab",
+		"description": "[menu ngữ cảnh]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tất cả Tab hiển thị",
+		"description": "[trình đơn ngữ cảnh]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Xuất Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Xóa Tab này",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Đặt lại Tab mặc định",
+		"description": "[trình đơn ngữ cảnh]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Nhãn cho menu cài đặt"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Thả",
 		"description": "[import] cho phép người dùng kéo thả tệp của họ vào khu vực được chỉ định"
+	},
+	"enable": {
+		"message": "Bật",
+		"description": "[yêu_cầu_quyền] nút để bật quyền"
 	},
 	"error_adding_tab": {
 		"message": "Lỗi khi thêm Tab.",
@@ -327,9 +339,17 @@
 		"message": "Lỗi khi xóa Tab.",
 		"description": "[lỗi] Lỗi chung được sử dụng khi xóa Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Lỗi khi xóa tất cả các Tab hiển thị.",
+		"description": "[lỗi] Lỗi chung khi xóa tất cả các Tab hiển thị"
+	},
 	"error_required_params": {
 		"message": "Các tham số bắt buộc cho hàm không được truyền",
 		"description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm mà không có các tham số cần thiết"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Lỗi khi đặt lại các Tab mặc định.",
+		"description": "[lỗi] Lỗi chung khi đặt lại các Tab về mặc định"
 	},
 	"error_sync_nothing": {
 		"message": "Không thể đồng bộ các Tabs rỗng!",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "tệp",
 		"description": "nhiều tệp"
+	},
+	"flows": {
+		"message": "Luồng",
+		"description": "[tab mặc định] Nhãn cho Tab Luồng mặc định"
 	},
 	"general": {
 		"message": "Chung",
@@ -522,9 +546,9 @@
 		"message": "Tự động mở trang $salesforce_setup khi nhấp vào cửa sổ bật lên khi đang ở trên trang Salesforce.",
 		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên trang web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Tùy chọn ngôn ngữ để quay lại tiếng Anh nếu ngôn ngữ khu vực không được hỗ trợ hoặc không có bản dịch"
+	"opt_en_default": {
+		"message": "en (Mặc định và Dự phòng)",
+		"description": "Tùy chọn ngôn ngữ mặc định của tiện ích mở rộng"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Giữ Tabs yêu thích ở bên trái Home và Object Manager.",
@@ -534,6 +558,10 @@
 		"message": "Luôn mở liên kết trong tab trình duyệt mới.",
 		"description": "[cài đặt] khi người dùng nhấp vào Tab yêu thích, mở nó trong tab mới"
 	},
+	"opt_no_release_notes": {
+		"message": "Không hiển thị ghi chú cập nhật.",
+		"description": "[cài đặt] cho phép người dùng ngăn tiện ích hiển thị ghi chú sau khi cập nhật"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Luôn mở trang $salesforce_login trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
 		"description": "[cài đặt]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Luôn mở trang $salesforce_setup trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
 		"description": "[cài đặt]"
+	},
+	"opt_pick_language": {
+		"message": "Chọn ngôn ngữ tiện ích mở rộng",
+		"description": "[cài_đặt] nhãn để nhắc người dùng chọn ngôn ngữ ưa thích của họ"
+	},
+	"opt_prevent_analytics": {
+		"message": "Ngăn chặn việc sử dụng Simple Analytics (không được tính vào số lượng người dùng).",
+		"description": "[cài đặt] cho phép người dùng ngăn gửi dữ liệu phân tích ẩn danh"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Ngăn chặn việc sử dụng Điều hướng Lightning (tải nhanh hơn khi sử dụng).",
@@ -550,9 +586,9 @@
 		"message": "mở trang trong cùng tab khi nhấp popup.",
 		"description": "[cài đặt] ngăn mở tab trình duyệt mới"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Mặc định)",
-		"description": "Tùy chọn sử dụng cài đặt ngôn ngữ Salesforce. Đây là tùy chọn mặc định cho tiện ích mở rộng."
+	"opt_sf_lang_cookies": {
+		"message": "Theo dõi Ngôn ngữ Salesforce (đọc Cookies Salesforce)",
+		"description": "Tùy chọn để sử dụng cài đặt ngôn ngữ của Salesforce. Để sử dụng tùy chọn này, người dùng phải cho phép tiện ích mở rộng đọc cookie Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Bỏ qua kiểm tra tự động ID Salesforce.",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Xóa Tab",
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
+	},
+	"req_downloads_open_popup": {
+		"message": "Vui lòng mở cửa sổ bật lên của tiện ích mở rộng từ menu tiện ích mở rộng của trình duyệt.",
+		"description": "[thông_báo] yêu cầu người dùng nhấp vào cửa sổ bật lên của tiện ích mở rộng để tiếp tục"
+	},
+	"req_downloads_perm_header": {
+		"message": "Vui lòng bật quyền Tải xuống\nđể bắt đầu Xuất khẩu được yêu cầu.",
+		"description": "[yêu_cầu_quyền] kêu gọi hành động để bật quyền tải xuống"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Thao tác này sẽ chỉ được yêu cầu một lần.",
+		"description": "[yêu_cầu_quyền] mô tả để bật quyền tải xuống"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Không hỏi lại nữa",

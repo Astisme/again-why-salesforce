@@ -63,13 +63,17 @@
 		"message": "Jatka",
 		"description": "tekstisisältö painikkeille, jotka sallivat nykyisen toiminnon suorittamisen"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Kaikki näkyvät Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Kaikki yleiset Tab",
+		"description": "[kontekstivalikko]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Nollaa oletus",
-		"description": "[context-menu]"
+		"message": "😨 Poista kaikki Tab",
+		"description": "[pikavalikko]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Kaikki näkyvät Tab",
+		"description": "[kontekstivalikko]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Vie Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Tämä Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Palauta oletus Tabit",
+		"description": "[kontekstivalikko]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Asetusvalikon nimiö"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] antaa käyttäjän pudottaa tiedostonsa määritettyyn alueeseen"
+	},
+	"enable": {
+		"message": "Ota käyttöön",
+		"description": "[pyydä_lupa] painike lupien käyttöönottoon"
 	},
 	"error_adding_tab": {
 		"message": "Virhe Tabin lisäämisessä.",
@@ -327,9 +339,17 @@
 		"message": "Virhe Tabin poistamisessa.",
 		"description": "[error] Yleinen virhe Tabin poistamisessa"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Virhe kaikkia näkyviä Tab-poistoja suoritettaessa.",
+		"description": "[virhe] Yleinen virhe kaikkia näkyviä Tab-poistoja suoritettaessa"
+	},
 	"error_required_params": {
 		"message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
 		"description": "[virhe] kehittäjä yritti kutsua toimintoa ilman tarvittavia parametreja"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Virhe oletus Tabien palautuksessa.",
+		"description": "[virhe] Yleinen virhe Tabien palautuksessa oletusarvoon"
 	},
 	"error_sync_nothing": {
 		"message": "Tyhjiä Tabeja ei voida synkronoida!",
@@ -427,6 +447,10 @@
 		"message": "tiedostot",
 		"description": "useita tiedostoja"
 	},
+	"flows": {
+		"message": "Virtaukset",
+		"description": "[oletus-tab] Oletusvirtaus Tabin tunniste"
+	},
 	"general": {
 		"message": "Yleiset",
 		"description": "Nimike yleisille asetuskategorioille"
@@ -523,9 +547,9 @@
 		"message": "Avaa $salesforce_setup-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
 		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan Salesforce-verkkosivustolla"
 	},
-	"opt_en_fallback": {
-		"message": "en (Varavaihtoehto)",
-		"description": "Kielivaihtoehto englanniksi palaamiseksi, jos kielialue ei ole tuettu tai käännöstä ei ole saatavilla"
+	"opt_en_default": {
+		"message": "en (Oletus ja varajärjestelmä)",
+		"description": "Laajennuksen oletuskieliasetus"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pidä suosikki-Tabit Kodin ja Objektien hallinnan vasemmalla puolella.",
@@ -535,6 +559,10 @@
 		"message": "Avaa linkit aina uudessa selainvälilehdessä.",
 		"description": "[asetus] kun klikkaat suosikkitabiä, avaa se uudessa selainvälilehdessä"
 	},
+	"opt_no_release_notes": {
+		"message": "Älä näytä päivitysten julkaisutietoja.",
+		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää laajennusta näyttämästä julkaisutietoja päivityksen jälkeen"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Avaa $salesforce_login-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Avaa $salesforce_setup-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
 		"description": "[asetus]"
+	},
+	"opt_pick_language": {
+		"message": "Valitse laajennuksen kieli",
+		"description": "[asetus] otsikko, joka kehottaa käyttäjää valitsemaan haluamansa kielen"
+	},
+	"opt_prevent_analytics": {
+		"message": "Estä Simple Analyticsin käyttö (ei näy käyttäjämäärissä).",
+		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää anonyymien analytiikkojen lähettämisen"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Estä Lightning-navigoinnin käyttö (nopeampi lataus käytössä).",
@@ -551,9 +587,9 @@
 		"message": "sivu samalla välilehdellä ponnahdusikkunan klikkauksessa.",
 		"description": "[asetus] estää uuden selainvälilehden avaamisen"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce-kieli (Oletus)",
-		"description": "Vaihtoehto Salesforcen kieliasetuksen käyttämiseksi. Tämä on laajennuksen oletusasetus."
+	"opt_sf_lang_cookies": {
+		"message": "Seuraa Salesforce-kieltä (lukee Salesforce-evästeitä)",
+		"description": "Mahdollisuus käyttää Salesforcen kieliasetusta. Tämän vaihtoehdon käyttämiseksi käyttäjien on sallittava laajennuksen lukea Salesforcen evästeitä."
 	},
 	"opt_skip_link_detection": {
 		"message": "Ohita Salesforce -tunnuksen automaattinen tarkistus.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Poista Tab",
 		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
+	},
+	"req_downloads_open_popup": {
+		"message": "Avaa laajennuksen ponnahdusikkuna selaimen laajennusvalikosta.",
+		"description": "[ilmoitus] pyydä käyttäjää napsauttamaan laajennuksen ponnahdusikkunaa jatkaaksesi"
+	},
+	"req_downloads_perm_header": {
+		"message": "Ota latausoikeus käyttöön\nkäynnistääksesi pyydetyn viennin.",
+		"description": "[pyydä_lupa] toimintakehotus latausoikeuden ottamiseksi käyttöön"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Tätä toimintoa pyydetään vain kerran.",
+		"description": "[pyydä_lupa] kuvaus latausoikeuden käyttöönotosta"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Älä kysy uudelleen.",

@@ -194,6 +194,13 @@ export default class TabContainer extends Array {
 	 * @private
 	 */
 	async _initialize(tabs = null) {
+		/**
+		 * Checks if the given tabs are valid and adds them to the context if so.
+		 *
+		 * @param {Object} context - The context object with an addTabs method.
+		 * @param {Array} tabs - The tabs to validate and add.
+		 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
+		 */
 		async function checkAddTabs(context, tabs) {
 			if (TabContainer.isValid(tabs, false)) {
 				return await context.addTabs(tabs);
@@ -238,10 +245,12 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<void>} - A promise that resolves once the default tabs are successfully set.
 	 */
 	async setDefaultTabs() {
+		const flows = await translator.translate("flows");
+		const users = await translator.translate("users");
 		return await this.replaceTabs([
 			{ label: "⚡", url: "/lightning" },
-			{ label: "Flows", url: "/lightning/app/standard__FlowsApp" },
-			{ label: "Users", url: "ManageUsers/home" },
+			{ label: flows, url: "/lightning/app/standard__FlowsApp" },
+			{ label: users, url: "ManageUsers/home" },
 		], {
 			resetTabs: true,
 			removeOrgTabs: true,
@@ -493,8 +502,14 @@ export default class TabContainer extends Array {
 		removeOrgTabs = false,
 		sync = true,
 		keepTabsNotThisOrg = null,
+		removeThisOrgTabs = null,
 	} = {}) {
-		if (resetTabs || removeOrgTabs) {
+		if (
+			resetTabs && removeOrgTabs && keepTabsNotThisOrg == null &&
+			removeThisOrgTabs == null
+		) {
+			this.splice(0, this.length);
+		} else if (resetTabs || removeOrgTabs) {
 			this.splice(
 				0,
 				this.length,
@@ -505,10 +520,17 @@ export default class TabContainer extends Array {
 						// else, clear existing tabs which do not have an org set
 						if (!removeOrgTabs) {
 							return tab.org != null;
-						} else if (keepTabsNotThisOrg != null) {
+						} else if (
+							keepTabsNotThisOrg != null ||
+							removeThisOrgTabs != null
+						) {
 							return tab.org != null &&
-								tab.org !== keepTabsNotThisOrg;
+								(keepTabsNotThisOrg == null ||
+									tab.org !== keepTabsNotThisOrg) &&
+								(removeThisOrgTabs == null ||
+									tab.org !== removeThisOrgTabs);
 							// if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
+							// if removeThisOrgTabs, clear existing tabs and existing tabs with an org set and matching the removeThisOrgTabs string
 						} else {
 							// else, clear existing tabs
 							return false;
@@ -518,7 +540,9 @@ export default class TabContainer extends Array {
 						// else, keep only non-org-specific tabs
 						return tab.org == null ||
 							(keepTabsNotThisOrg != null &&
-								tab.org !== keepTabsNotThisOrg);
+								tab.org === keepTabsNotThisOrg) ||
+							(removeThisOrgTabs != null &&
+								tab.org !== removeThisOrgTabs);
 					}
 				}),
 			);

@@ -63,13 +63,17 @@
 		"message": "Nadaljuj",
 		"description": "textContent za gumbe, ki omogočajo izvedbo trenutnega dejanja"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Vsi vidni Tabs",
-		"description": "[kontekstni_meni]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Vse splošne Tab",
+		"description": "[meni z desnim klikom]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Ponastavi na privzeto",
-		"description": "[kontekstni_meni]"
+		"message": "😨 Odstrani vse Tab",
+		"description": "[kontekstni meni]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Vse vidne Tab",
+		"description": "[meni z desnim klikom]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Izvozi Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Ta Tab",
 		"description": "[kontekstni_meni]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Ponastavi privzete Tab",
+		"description": "[meni z desnim klikom]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Oznaka za meni z nastavitvami"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Spusti",
 		"description": "[uvoz] omogoči uporabniku, da spusti svoje datoteke na določeno območje"
+	},
+	"enable": {
+		"message": "Omogoči",
+		"description": "[zahtevaj_dovoljenje] gumb za omogočanje dovoljenj"
 	},
 	"error_adding_tab": {
 		"message": "Napaka pri dodajanju Tab.",
@@ -327,9 +339,17 @@
 		"message": "Napaka pri odstranjevanju Tab.",
 		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Napaka pri odstranjevanju vseh vidnih Tab.",
+		"description": "[napaka] Splošna napaka pri odstranjevanju vseh vidnih Tab"
+	},
 	"error_required_params": {
 		"message": "Zahtevani parametri za funkcijo niso bili posredovani",
 		"description": "[napaka] razvijalec je poskusil poklicati funkcijo brez potrebnih parametrov"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Napaka pri ponastavljanju na privzete Tab.",
+		"description": "[napaka] Splošna napaka pri ponastavitvi Tab na privzete"
 	},
 	"error_sync_nothing": {
 		"message": "Ni mogoče sinhronizirati ničelnih (null) Tabs!",
@@ -427,6 +447,10 @@
 		"message": "datoteke",
 		"description": "več datotek"
 	},
+	"flows": {
+		"message": "Tokovi",
+		"description": "[privzeti-tab] Oznaka za privzeti Tab z Tokovi"
+	},
 	"general": {
 		"message": "Splošno",
 		"description": "Oznaka za kategorijo splošnih nastavitev"
@@ -523,9 +547,9 @@
 		"message": "Samodejno odpri stran $salesforce_setup, ko kliknete pojavno okno, medtem ko ste na strani Salesforce.",
 		"description": "[nastavitev] ko uporabnik odpre pojavno okno na spletnem mestu Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Nadomestno)",
-		"description": "Jezikovna možnost za uporabo angleščine, če jezik ni podprt ali ne prikazuje prevoda"
+	"opt_en_default": {
+		"message": "en (Privzeto in nadomestno)",
+		"description": "Privzeta jezikovna možnost razširitve"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Naj priljubljeni Tabi ostanejo na levi strani Doma in Upravitelja objektov.",
@@ -535,6 +559,10 @@
 		"message": "Vedno odpri povezave v novem zavihku brskalnika.",
 		"description": "[nastavitev] ko uporabnik klikne na priljubljen zavihek, odpri v novem zavihku brskalnika"
 	},
+	"opt_no_release_notes": {
+		"message": "Ne prikaži opomb ob izdaji posodobitev.",
+		"description": "[nastavitev] uporabniku omogoči, da prepreči prikaz opomb ob posodobitvah razširitve"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Vedno odprite stran $salesforce_login v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Vedno odprite stran $salesforce_setup v istem Tab, ko kliknete pojavno okno.",
 		"description": "[nastavitev]"
+	},
+	"opt_pick_language": {
+		"message": "Izberite jezik razširitve",
+		"description": "[nastavitev] oznaka, ki uporabniku sporoča, naj izbere želeni jezik"
+	},
+	"opt_prevent_analytics": {
+		"message": "Prepreči uporabo Simple Analytics (ne boš vključen v štetje uporabnikov).",
+		"description": "[nastavitev] uporabniku omogoči preprečitev pošiljanja anonimne analitike"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Prepreči uporabo navigacije Lightning (hitrejše nalaganje med uporabo).",
@@ -551,9 +587,9 @@
 		"message": "stran v istem zavihku ob kliku na pojavno okno.",
 		"description": "[nastavitev] prepreči odpiranje novega zavihka brskalnika"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce jezik (Privzeto)",
-		"description": "Možnost za uporabo Salesforce jezikovne nastavitve. Ta možnost je privzeta za razširitev."
+	"opt_sf_lang_cookies": {
+		"message": "Sledite jeziku Salesforce (bere piškotke Salesforce)",
+		"description": "Možnost uporabe jezikovne nastavitve Salesforce. Za uporabo te možnosti morajo uporabniki dovoliti razširitvi branje piškotkov Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Preskoči samodejno preverjanje ID-ja Salesforce.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Odstrani Tab",
 		"description": "[alt] alternativno besedilo, ko slike ne delujejo"
+	},
+	"req_downloads_open_popup": {
+		"message": "Prosimo, odprite pojavno okno razširitve iz menija razširitev vašega brskalnika.",
+		"description": "[obvestilo] prosite uporabnika, naj klikne na pojavno okno razširitve za nadaljevanje"
+	},
+	"req_downloads_perm_header": {
+		"message": "Prosimo, omogočite dovoljenje za prenose\nza začetek zahtevanega izvoza.",
+		"description": "[zahtevaj_dovoljenje] poziv k dejanju za omogočanje dovoljenja za prenose"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ta operacija bo zahtevana samo enkrat.",
+		"description": "[zahtevaj_dovoljenje] opis za omogočanje dovoljenja za prenose"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ne sprašuj več.",

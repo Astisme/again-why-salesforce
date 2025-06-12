@@ -63,12 +63,16 @@
 		"message": "继续",
 		"description": "允许当前操作执行的按钮的文本内容"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 所有可见的 Tabs",
+	"cxm_empty_generic_tabs": {
+		"message": "😊 所有通用Tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 重置为默认值",
+		"message": "😨 删除所有 Tab",
+		"description": "[上下文菜单]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 所有可见Tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_export_tabs": {
@@ -131,6 +135,10 @@
 		"message": "1️⃣ 这个 Tab",
 		"description": "[上下文菜单]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 重置默认Tab",
+		"description": "[上下文菜单]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "设置菜单的标签"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "拖放",
 		"description": "[导入] 允许用户将文件拖放到指定区域"
+	},
+	"enable": {
+		"message": "启用",
+		"description": "[请求_权限] 启用权限的按钮"
 	},
 	"error_adding_tab": {
 		"message": "添加 Tab 时出错。",
@@ -327,9 +339,17 @@
 		"message": "移除 Tab 时出错。",
 		"description": "[错误] 移除 Tab 时使用的一般错误"
 	},
+	"error_removing_visible_tabs": {
+		"message": "删除所有可见Tab时出错。",
+		"description": "[错误] 删除所有可见Tab时的通用错误"
+	},
 	"error_required_params": {
 		"message": "函数所需的参数未传递",
 		"description": "[错误] 开发者尝试调用函数但未提供必要的参数"
+	},
+	"error_resetting_default_tabs": {
+		"message": "重置为默认Tab时出错。",
+		"description": "[错误] 将Tab重置为默认时的通用错误"
 	},
 	"error_sync_nothing": {
 		"message": "无法同步空的 Tabs！",
@@ -427,6 +447,10 @@
 		"message": "文件",
 		"description": "多个文件"
 	},
+	"flows": {
+		"message": "流程",
+		"description": "[默认-tab] 默认流程Tab的标签"
+	},
 	"general": {
 		"message": "常规",
 		"description": "常规设置类别的标签"
@@ -523,9 +547,9 @@
 		"message": "当在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_setup 页面。",
 		"description": "[设置] 当用户在 Salesforce 网站上打开弹出窗口时"
 	},
-	"opt_en_fallback": {
-		"message": "en (备用)",
-		"description": "当本地不受支持或未提供翻译时回退到英文的语言选项"
+	"opt_en_default": {
+		"message": "en (默认和备用)",
+		"description": "扩展的默认语言选项"
 	},
 	"opt_keep_tabs_left": {
 		"message": "将收藏的 Tabs 保持在首页和对象管理器的左侧。",
@@ -535,6 +559,10 @@
 		"message": "点击收藏的 Tab 时始终在新的浏览器标签中打开链接。",
 		"description": "[设置] 当用户点击收藏的 Tab 时，在新的浏览器标签中打开它"
 	},
+	"opt_no_release_notes": {
+		"message": "不显示更新发布说明。",
+		"description": "[设置] 允许用户阻止扩展更新后显示发布说明"
+	},
 	"opt_open_login_same_tab": {
 		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_login 页面。",
 		"description": "[设置]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "点击弹出窗口时，始终在同一 Tab 中打开 $salesforce_setup 页面。",
 		"description": "[设置]"
+	},
+	"opt_pick_language": {
+		"message": "选择扩展语言",
+		"description": "[设置] 提示用户选择他们喜欢的语言的标签"
+	},
+	"opt_prevent_analytics": {
+		"message": "防止使用Simple Analytics（不会出现在用户统计中）。",
+		"description": "[设置] 允许用户阻止发送匿名分析数据"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "阻止使用Lightning导航（使用时加载更快）。",
@@ -551,9 +587,9 @@
 		"message": "点击弹出窗口时在同一标签页中打开页面。",
 		"description": "[设置] 防止打开新的浏览器标签页"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (默认)",
-		"description": "使用 Salesforce 语言设置的选项。此选项为扩展的默认值。"
+	"opt_sf_lang_cookies": {
+		"message": "跟随 Salesforce 语言（读取 Salesforce Cookie）",
+		"description": "使用 Salesforce 语言设置的选项。要使用此选项，用户必须允许扩展读取 Salesforce Cookie。"
 	},
 	"opt_skip_link_detection": {
 		"message": "跳过 Salesforce Id 的自动检查。",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "移除 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"
+	},
+	"req_downloads_open_popup": {
+		"message": "请从浏览器的扩展菜单中打开扩展弹出窗口。",
+		"description": "[提示] 要求用户点击扩展弹出窗口以继续"
+	},
+	"req_downloads_perm_header": {
+		"message": "请启用下载权限\n以开始请求的导出。",
+		"description": "[请求_权限] 启用下载权限的行动号召"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "此操作只会被请求一次。",
+		"description": "[请求_权限] 启用下载权限的描述"
 	},
 	"req_permissions_dont_ask": {
 		"message": "不再询问。",

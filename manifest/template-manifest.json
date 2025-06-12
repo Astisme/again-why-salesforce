@@ -2,8 +2,8 @@
 	"manifest_version": 3,
 	"name": "__MSG_extension_label__",
 	"version": "1.4.8",
-    "default_locale": "en",
-    "description": "__MSG_extension_description__",
+	"default_locale": "en",
+	"description": "__MSG_extension_description__",
 	"permissions": [
 		"storage",
 		"contextMenus"
@@ -11,11 +11,11 @@
 	"host_permissions": [
 		"*://*.my.salesforce-setup.com/lightning/setup/*",
 		"*://*.lightning.force.com/lightning/setup/*"
-    ],
-    "optional_permissions": [
-        "downloads",
-        "cookies"
-    ],
+	],
+	"optional_permissions": [
+		"downloads",
+		"cookies"
+	],
 	"optional_host_permissions": [
 		"*://*.my.salesforce.com/*"
 	],
@@ -29,7 +29,8 @@
 			"js": [
 				"salesforce/bundledContent.js"
 			],
-			"run_at": "document_end"
+			"run_at": "document_end",
+			"all_frames": false
 		}
 	],
 	"web_accessible_resources": [
@@ -77,7 +78,7 @@
 			"strict_min_version": "112.0"
 		},
 		"safari": {
-			"strict_min_version": "14"
+			"strict_min_version": "14.0"
 		}
 	},
 	"incognito": "spanning",

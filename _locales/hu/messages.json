@@ -63,13 +63,17 @@
 		"message": "Folytatás",
 		"description": "szöveg azokhoz a gombokhoz, melyek lehetővé teszik a jelenlegi művelet végrehajtását"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Minden látható Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Minden általános Tab",
+		"description": "[helyi menü]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Alaphelyzetbe állítás",
-		"description": "[context-menu]"
+		"message": "😨 Minden Tab eltávolítása",
+		"description": "[helyi menü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Minden látható Tab",
+		"description": "[helyi menü]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Tabok exportálása",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Ez a Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Alapértelmezett Tabok visszaállítása",
+		"description": "[helyi menü]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "A beállítások menü címkéje"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] lehetővé teszi a felhasználónak, hogy fájljait a megadott területre húzza"
+	},
+	"enable": {
+		"message": "Engedélyezés",
+		"description": "[engedély_kérése] gomb az engedélyek engedélyezéséhez"
 	},
 	"error_adding_tab": {
 		"message": "Hiba Tab hozzáadásakor.",
@@ -327,9 +339,17 @@
 		"message": "Hiba Tab eltávolításakor.",
 		"description": "[error] Általános hiba Tab eltávolításakor"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Hiba történt az összes látható Tab eltávolításakor.",
+		"description": "[hiba] Általános hiba az összes látható Tab eltávolításakor"
+	},
 	"error_required_params": {
 		"message": "A függvényhez szükséges paraméterek nem lettek átadva",
 		"description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt a szükséges paraméterek nélkül"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Hiba történt az alapértelmezett Tabok visszaállításakor.",
+		"description": "[hiba] Általános hiba a Tabok alapértelmezett értékekre való visszaállításakor"
 	},
 	"error_sync_nothing": {
 		"message": "Üres Tabokat nem lehet szinkronizálni!",
@@ -427,6 +447,10 @@
 		"message": "fájlok",
 		"description": "több fájl"
 	},
+	"flows": {
+		"message": "Folyamatok",
+		"description": "[alapértelmezett-tab] Az alapértelmezett Folyamatok Tab jelölése"
+	},
 	"general": {
 		"message": "Általános",
 		"description": "Címke az általános beállítások kategóriához"
@@ -523,9 +547,9 @@
 		"message": "Automatikusan nyissa meg a $salesforce_setup oldalt, amikor a felugró ablakra kattint, miközben Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy Salesforce webhelyen"
 	},
-	"opt_en_fallback": {
-		"message": "en (Tartalék)",
-		"description": "Nyelvi lehetőség az angolra való visszalépéshez, ha a területi beállítás nem támogatott vagy nem jeleníti meg a fordítást"
+	"opt_en_default": {
+		"message": "en (Alapértelmezett és tartalék)",
+		"description": "Az extension alapértelmezett nyelvi opciója"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kedvenc Tabs megtartása a Kezdőlap és az Objektumkezelő bal oldalán.",
@@ -535,6 +559,10 @@
 		"message": "Linkek megnyitása mindig új böngészőfülön.",
 		"description": "[beállítás] kedvenc Tab-ra kattintva nyissa meg új fülön"
 	},
+	"opt_no_release_notes": {
+		"message": "Frissítési kiadási megjegyzések ne jelenjenek meg.",
+		"description": "[beállítás] lehetővé teszi a felhasználó számára, hogy megakadályozza a bővítmény frissítés utáni kiadási megjegyzéseinek megjelenítését"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Mindig nyissa meg a $salesforce_login oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
 		"description": "[beállítás]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Mindig nyissa meg a $salesforce_setup oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
 		"description": "[beállítás]"
+	},
+	"opt_pick_language": {
+		"message": "Válassza ki az extension nyelvét",
+		"description": "[beállítás] címke, amely arra kéri a felhasználót, hogy válassza ki a kívánt nyelvet"
+	},
+	"opt_prevent_analytics": {
+		"message": "Egyszerű elemzések használatának megakadályozása (nem jelenik meg a felhasználószámban).",
+		"description": "[beállítás] lehetővé teszi a felhasználónak, hogy megakadályozza az anonim elemzések küldését"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "A Lightning navigáció használatának megakadályozása (használat közben gyorsabb betöltés).",
@@ -551,9 +587,9 @@
 		"message": "oldal ugyanazon a fülön a felugró ablak kattintásakor.",
 		"description": "[beállítás] ne nyisson új böngészőfület"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Nyelv (Alapértelmezett)",
-		"description": "Opció a Salesforce nyelvi beállításának használatára. Ez az opció a bővítmény alapértelmezett beállítása."
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce nyelv követése (Salesforce cookie-k olvasása)",
+		"description": "Lehetőség a Salesforce nyelvi beállításának használatára. Ehhez a felhasználóknak engedélyezniük kell az extension számára a Salesforce cookie-k olvasását."
 	},
 	"opt_skip_link_detection": {
 		"message": "Salesforce ID automatikus ellenőrzésének kihagyása.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Tab eltávolítása",
 		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
+	},
+	"req_downloads_open_popup": {
+		"message": "Kérjük, nyissa meg az extension előugró ablakát a böngészője extension menüjéből.",
+		"description": "[értesítés] kérje meg a felhasználót, hogy kattintson az extension előugró ablakára a folytatáshoz"
+	},
+	"req_downloads_perm_header": {
+		"message": "Kérjük, engedélyezze a letöltési engedélyt\na kért exportálás megkezdéséhez.",
+		"description": "[engedély_kérése] felhívás a letöltési engedély engedélyezésére"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ez a művelet csak egyszer lesz kérve.",
+		"description": "[engedély_kérése] leírás a letöltési engedély engedélyezéséhez"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ne kérdezze újra.",

@@ -63,12 +63,16 @@
 		"message": "Magpatuloy",
 		"description": "textContent para sa mga button na nagpapahintulot sa kasalukuyang aksyon na maisakatuparan"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Lahat ng nakikitang Tabs",
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Lahat ng pangkaraniwang Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 I-reset sa Default",
+		"message": "😨 Alisin ang lahat ng Tab",
+		"description": "[konteksto na menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Lahat ng nakikitang Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_export_tabs": {
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Itong Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 I-reset ang Default na Tab",
+		"description": "[context-menu]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Label para sa menu ng mga setting"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] pinapayagan ang user na i-drop ang kanilang mga file sa tinukoy na lugar"
+	},
+	"enable": {
+		"message": "Paganahin",
+		"description": "[humingi_pahintulot] button para paganahin ang mga pahintulot"
 	},
 	"error_adding_tab": {
 		"message": "Error sa pagdagdag ng Tab.",
@@ -327,9 +339,17 @@
 		"message": "Error sa pagtanggal ng Tab.",
 		"description": "[error] Pangkalahatang error sa pagtanggal ng Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Error sa pagtanggal ng lahat ng nakikitang Tab.",
+		"description": "[error] Pangkalahatang error na ginagamit habang tinatanggal ang lahat ng nakikitang Tab"
+	},
 	"error_required_params": {
 		"message": "Hindi naipasa ang mga kinakailangang parameter para sa function",
 		"description": "[error] sinubukan ng developer na tawagin ang function nang walang kinakailangang mga parameter"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Error sa pag-reset sa default na Tab.",
+		"description": "[error] Pangkalahatang error na ginagamit habang nirereset ang Tab sa kanilang default"
 	},
 	"error_sync_nothing": {
 		"message": "Hindi ma-sync ang mga null na Tab!",
@@ -427,6 +447,10 @@
 		"message": "mga file",
 		"description": "maramihang file"
 	},
+	"flows": {
+		"message": "Mga daloy",
+		"description": "[default-tab] Label para sa default na Flows Tab"
+	},
 	"general": {
 		"message": "Pangkalahatan",
 		"description": "Label para sa kategorya ng pangkalahatang mga setting"
@@ -523,9 +547,9 @@
 		"message": "Awtomatikong buksan ang $salesforce_setup page kapag nag-click sa popup habang nasa Salesforce page.",
 		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang Salesforce website"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Pagpipilian ng wika upang bumalik sa Ingles kung hindi suportado ang locale o walang pagsasalin"
+	"opt_en_default": {
+		"message": "en (Default at Fallback)",
+		"description": "Default na opsyon ng wika ng extension"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Panatilihin ang paboritong Tabs sa kaliwa ng Home at Object Manager.",
@@ -535,6 +559,10 @@
 		"message": "Laging buksan ang mga link sa bagong tab ng browser.",
 		"description": "[setting] kapag nag-click ang user sa paboritong Tab, buksan sa bagong tab"
 	},
+	"opt_no_release_notes": {
+		"message": "Huwag ipakita ang mga update release notes.",
+		"description": "[setting] pinapayagan ang user na pigilan ang extension sa pagpapakita ng release notes matapos itong ma-update"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Palaging buksan ang $salesforce_login page sa parehong Tab kapag nag-click sa popup.",
 		"description": "[setting]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Palaging buksan ang $salesforce_setup page sa parehong Tab kapag nag-click sa popup.",
 		"description": "[setting]"
+	},
+	"opt_pick_language": {
+		"message": "Pumili ng wika ng extension",
+		"description": "[setting] label upang hilingin sa gumagamit na piliin ang kanilang gustong wika"
+	},
+	"opt_prevent_analytics": {
+		"message": "Pigilan ang paggamit ng Simple Analytics (hindi lalabas sa bilang ng mga user).",
+		"description": "[setting] pinapayagan ang user na pigilan ang pagpapadala ng anonymous analytics"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag ginagamit).",
@@ -551,9 +587,9 @@
 		"message": "buksan ang pahina sa parehong tab kapag na-click ang popup.",
 		"description": "[setting] pigil sa pagbubukas ng bagong tab"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Default)",
-		"description": "Pagpipilian na gamitin ang setting ng wika ng Salesforce. Ito ang default para sa extension."
+	"opt_sf_lang_cookies": {
+		"message": "Sundin ang Salesforce Language (binabasa ang Salesforce Cookies)",
+		"description": "Opsyon na gamitin ang setting ng wika ng Salesforce. Upang magamit ang opsyong ito, dapat payagan ng extension ang pagbabasa ng Salesforce cookies."
 	},
 	"opt_skip_link_detection": {
 		"message": "Laktawan ang awtomatikong tsek ng Salesforce Id.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Alisin ang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+	},
+	"req_downloads_open_popup": {
+		"message": "Paki-buksan ang popup ng extension mula sa menu ng extensions ng iyong browser.",
+		"description": "[toast] hilingin sa user na mag-click sa popup ng extension upang magpatuloy"
+	},
+	"req_downloads_perm_header": {
+		"message": "Paki-enable ang Downloads permission\npara simulan ang hinihinging Export.",
+		"description": "[humingi_pahintulot] call to action upang paganahin ang pahintulot sa pag-download"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ang operasyong ito ay hihilingin lamang ng isang beses.",
+		"description": "[humingi_pahintulot] paglalarawan upang paganahin ang pahintulot sa pag-download"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Huwag nang tanungin muli.",

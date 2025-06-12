@@ -63,13 +63,17 @@
 		"message": "Teruskan",
 		"description": "textContent untuk butang yang membenarkan tindakan semasa dilaksanakan"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Semua Tabs yang kelihatan",
-		"description": "[menu-konteks]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Semua Tab umum",
+		"description": "[menu konteks]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Tetapkan Semula kepada Lalai",
-		"description": "[menu-konteks]"
+		"message": "😨 Alih semua Tab",
+		"description": "[menu konteks]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Semua Tab kelihatan",
+		"description": "[menu konteks]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksport Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Tab Ini",
 		"description": "[menu-konteks]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Tetapkan semula Tab lalai",
+		"description": "[menu konteks]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "सेटिंग्ज मेनूसाठी लेबल"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Lepaskan",
 		"description": "[import] biarkan pengguna meletakkan fail mereka ke kawasan yang ditentukan"
+	},
+	"enable": {
+		"message": "Dayakan",
+		"description": "[minta_izin] butang untuk mendayakan kebenaran"
 	},
 	"error_adding_tab": {
 		"message": "Ralat semasa menambah Tab.",
@@ -327,9 +339,17 @@
 		"message": "Ralat semasa mengalih keluar Tab.",
 		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Ralat semasa mengalih keluar semua Tab kelihatan.",
+		"description": "[ralat] Ralat umum semasa mengalih keluar semua Tab kelihatan"
+	},
 	"error_required_params": {
 		"message": "Parameter yang diperlukan untuk fungsi tidak dihantar",
 		"description": "[ralat] pembangun cuba memanggil fungsi tanpa parameter yang diperlukan"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Ralat semasa menetapkan semula Tab lalai.",
+		"description": "[ralat] Ralat umum semasa menetapkan semula Tab kepada lalai"
 	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyegerakkan Tab nol (null)!",
@@ -427,6 +447,10 @@
 		"message": "fail",
 		"description": "berbilang fail"
 	},
+	"flows": {
+		"message": "Aliran",
+		"description": "[tab lalai] Label untuk Tab Aliran lalai"
+	},
 	"general": {
 		"message": "Umum",
 		"description": "Label untuk kategori tetapan umum"
@@ -523,9 +547,9 @@
 		"message": "Salesforce पृष्ठावर असताना पॉपअपवर क्लिक केल्यावर $salesforce_setup पृष्ठ स्वयंचलितपणे उघडा.",
 		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर असताना पॉपअप उघडतो"
 	},
-	"opt_en_fallback": {
-		"message": "en (Sandaran)",
-		"description": "Pilihan bahasa untuk kembali ke Bahasa Inggeris jika locale tidak disokong atau tiada terjemahan"
+	"opt_en_default": {
+		"message": "en (Default dan Fallback)",
+		"description": "Pilihan bahasa lalai sambungan"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kekalkan Tab kegemaran di sebelah kiri Home dan Object Manager.",
@@ -535,6 +559,10 @@
 		"message": "Sentiasa buka pautan dalam tab pelayar baharu.",
 		"description": "[tetapan] apabila pengguna mengklik Tab kegemaran, buka dalam tab pelayar baharu"
 	},
+	"opt_no_release_notes": {
+		"message": "Jangan tunjukkan nota keluaran kemas kini.",
+		"description": "[tetapan] benarkan pengguna menghalang sambungan daripada memaparkan nota keluaran selepas dikemas kini"
+	},
 	"opt_open_login_same_tab": {
 		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_login पृष्ठ त्याच Tab मध्ये उघडा.",
 		"description": "[सेटिंग]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "पॉपअपवर क्लिक केल्यावर नेहमी $salesforce_setup पृष्ठ त्याच Tab मध्ये उघडा.",
 		"description": "[सेटिंग]"
+	},
+	"opt_pick_language": {
+		"message": "Pilih bahasa sambungan",
+		"description": "[tetapan] label untuk menggesa pengguna memilih bahasa pilihan mereka"
+	},
+	"opt_prevent_analytics": {
+		"message": "Halang penggunaan Simple Analytics (tidak termasuk dalam kiraan pengguna).",
+		"description": "[tetapan] benarkan pengguna menghalang penghantaran analitik tanpa nama"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat apabila digunakan).",
@@ -551,9 +587,9 @@
 		"message": "halaman dalam tab yang sama apabila mengklik popup.",
 		"description": "[tetapan] elakkan membuka tab pelayar baharu"
 	},
-	"opt_sf_lang_default": {
-		"message": "Bahasa Salesforce (Lalai)",
-		"description": "Pilihan untuk menggunakan tetapan bahasa Salesforce. Pilihan ini adalah lalai untuk sambungan ini."
+	"opt_sf_lang_cookies": {
+		"message": "Ikut Bahasa Salesforce (membaca Cookies Salesforce)",
+		"description": "Pilihan untuk menggunakan tetapan bahasa Salesforce. Untuk menggunakan pilihan ini, pengguna mesti membenarkan sambungan membaca kuki Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Langkau semakan ID Salesforce automatik.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Buang Tab",
 		"description": "[alt] teks alternatif apabila gambar tidak berfungsi"
+	},
+	"req_downloads_open_popup": {
+		"message": "Sila buka popup sambungan daripada menu sambungan pelayar anda.",
+		"description": "[toast] minta pengguna untuk mengklik pada popup sambungan untuk meneruskan"
+	},
+	"req_downloads_perm_header": {
+		"message": "Sila dayakan kebenaran Muat Turun\nuntuk memulakan Eksport yang diminta.",
+		"description": "[minta_izin] panggilan untuk bertindak untuk mendayakan kebenaran muat turun"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Operasi ini hanya akan diminta sekali.",
+		"description": "[minta_izin] penerangan untuk mendayakan kebenaran muat turun"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Jangan tanya lagi.",

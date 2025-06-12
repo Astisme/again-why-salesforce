@@ -63,13 +63,17 @@
 		"message": "Pokračovat",
 		"description": "text u tlačítek, které umožňují provést aktuální akci"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Všechny viditelné Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Všechny obecné Tab",
+		"description": "[kontextová nabídka]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Obnovit výchozí",
-		"description": "[context-menu]"
+		"message": "😨 Odebrat všechny Tab",
+		"description": "[kontextová nabídka]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Všechny viditelné Tab",
+		"description": "[kontextová nabídka]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exportovat Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Tento Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Obnovit výchozí Tab",
+		"description": "[kontextová nabídka]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Štítek pro nabídku nastavení"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] umožňuje uživateli přetáhnout své soubory do určené oblasti"
+	},
+	"enable": {
+		"message": "Povolit",
+		"description": "[žádost_oprávnění] tlačítko pro povolení oprávnění"
 	},
 	"error_adding_tab": {
 		"message": "Chyba při přidávání Tab.",
@@ -327,9 +339,17 @@
 		"message": "Chyba při odstraňování Tab.",
 		"description": "[error] Obecná chyba při odstraňování Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Chyba při odstraňování všech viditelných Tab.",
+		"description": "[chyba] Obecná chyba při odstraňování všech viditelných Tab"
+	},
 	"error_required_params": {
 		"message": "Nepředány požadované parametry pro funkci",
 		"description": "[chyba] vývojář se pokusil volat funkci bez potřebných parametrů"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Chyba při obnovení výchozích Tab.",
+		"description": "[chyba] Obecná chyba při obnovení Tab do výchozího stavu"
 	},
 	"error_sync_nothing": {
 		"message": "Nelze synchronizovat prázdné Taby!",
@@ -427,6 +447,10 @@
 		"message": "soubory",
 		"description": "více souborů"
 	},
+	"flows": {
+		"message": "Toky",
+		"description": "[výchozí-tab] Štítek pro výchozí Tab Toky"
+	},
 	"general": {
 		"message": "Obecné",
 		"description": "Štítek pro kategorii obecných nastavení"
@@ -523,9 +547,9 @@
 		"message": "Automaticky otevřít stránku $salesforce_setup po kliknutí na vyskakovací okno, pokud jste na stránce Salesforce.",
 		"description": "[nastavení] když uživatel otevře vyskakovací okno na webové stránce Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Náhradní)",
-		"description": "Možnost jazyka pro návrat k angličtině, pokud místní nastavení není podporováno nebo nezobrazuje překlad"
+	"opt_en_default": {
+		"message": "en (Výchozí a záložní)",
+		"description": "Výchozí jazyková možnost rozšíření"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Ponechat oblíbené Tabs nalevo od Domovské stránky a Správce objektů.",
@@ -535,6 +559,10 @@
 		"message": "Vždy otevírat odkazy v novém panelu prohlížeče.",
 		"description": "[nastavení] při kliknutí na oblíbenou Tab ji otevřít v novém panelu prohlížeče"
 	},
+	"opt_no_release_notes": {
+		"message": "Nezobrazovat poznámky k vydání aktualizace.",
+		"description": "[nastavení] umožňuje uživateli zabránit zobrazení poznámek k vydání po aktualizaci rozšíření"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Po kliknutí na vyskakovací okno vždy otevřít stránku $salesforce_login ve stejné Tab.",
 		"description": "[nastavení]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Po kliknutí na vyskakovací okno vždy otevřít stránku $salesforce_setup ve stejné Tab.",
 		"description": "[nastavení]"
+	},
+	"opt_pick_language": {
+		"message": "Vyberte jazyk rozšíření",
+		"description": "[nastavení] štítek, který uživatele vyzve k výběru preferovaného jazyka"
+	},
+	"opt_prevent_analytics": {
+		"message": "Zabránit použití Simple Analytics (nebude započítáno mezi uživatele).",
+		"description": "[nastavení] umožňuje uživateli zabránit odesílání anonymní analytiky"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Zabránit používání navigace Lightning (rychlejší načítání během používání).",
@@ -551,9 +587,9 @@
 		"message": "stránku ve stejném panelu při kliknutí na vyskakovací okno.",
 		"description": "[nastavení] zabránit otevření nového panelu prohlížeče"
 	},
-	"opt_sf_lang_default": {
-		"message": "Jazyk Salesforce (Výchozí)",
-		"description": "Možnost použít nastavení jazyka Salesforce. Tato možnost je výchozí pro rozšíření."
+	"opt_sf_lang_cookies": {
+		"message": "Následujte jazyk Salesforce (čte soubory cookie Salesforce)",
+		"description": "Možnost použít nastavení jazyka Salesforce. Chcete-li použít tuto možnost, uživatelé musí povolit rozšíření čtení souborů cookie Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Přeskočit automatickou kontrolu ID Salesforce.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Odebrat Tab",
 		"description": "[alt] alternativní text, pokud se obrázky nezobrazí"
+	},
+	"req_downloads_open_popup": {
+		"message": "Otevřete vyskakovací okno rozšíření z nabídky rozšíření vašeho prohlížeče.",
+		"description": "[oznámení] požádejte uživatele, aby klikl na vyskakovací okno rozšíření pro pokračování"
+	},
+	"req_downloads_perm_header": {
+		"message": "Povolte prosím oprávnění ke stažení\nk zahájení požadovaného exportu.",
+		"description": "[žádost_oprávnění] výzva k akci pro povolení oprávnění ke stažení"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Tato operace bude vyžádána pouze jednou.",
+		"description": "[žádost_oprávnění] popis pro povolení oprávnění ke stažení"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Neptat se znovu.",

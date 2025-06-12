@@ -63,13 +63,17 @@
 		"message": "Fortsett",
 		"description": "tekst for knapper som lar den nåværende handlingen bli utført"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Alle synlige Tab",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle generiske Tab",
+		"description": "[kontekstmeny]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Tilbakestill til standard",
-		"description": "[context-menu]"
+		"message": "😨 Fjern alle Tab",
+		"description": "[kontekstmeny]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle synlige Tab",
+		"description": "[kontekstmeny]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Eksporter Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Denne Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Tilbakestill standard-Tab",
+		"description": "[kontekstmeny]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Etikett for innstillingsmenyen"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Slipp",
 		"description": "[импорт] la brukeren slippe filene sine på det angitte området"
+	},
+	"enable": {
+		"message": "Aktiver",
+		"description": "[be_om_tillatelse] knapp for å aktivere tillatelser"
 	},
 	"error_adding_tab": {
 		"message": "Feil ved tillegging av Tab.",
@@ -327,9 +339,17 @@
 		"message": "Feil ved fjerning av Tab.",
 		"description": "[feil] Generisk feil brukt ved fjerning av en Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Feil ved fjerning av alle synlige Tab.",
+		"description": "[feil] Generisk feil ved fjerning av alle synlige Tab"
+	},
 	"error_required_params": {
 		"message": "De nødvendige parameterne for funksjonen ble ikke sendt med",
 		"description": "[feil] utvikleren prøvde å kalle en funksjon uten de nødvendige parameterne"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Feil ved tilbakestilling til standard-Tab.",
+		"description": "[feil] Generisk feil ved tilbakestilling av Tab til standard"
 	},
 	"error_sync_nothing": {
 		"message": "Kan ikke synkronisere tomme Tabber!",
@@ -427,6 +447,10 @@
 		"message": "filer",
 		"description": "flere filer"
 	},
+	"flows": {
+		"message": "Flyter",
+		"description": "[standard-tab] Etikett for standard Flyter-Tab"
+	},
 	"general": {
 		"message": "Generelt",
 		"description": "Etikett for kategorien generelle innstillinger"
@@ -523,9 +547,9 @@
 		"message": "Åpne $salesforce_setup-siden automatisk når du klikker på popup-vinduet mens du er på en Salesforce-side.",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et Salesforce-nettsted"
 	},
-	"opt_en_fallback": {
-		"message": "en (Reserve)",
-		"description": "Språkalternativ for å falle tilbake til engelsk hvis lokalet ikke støttes eller ikke viser oversettelsen"
+	"opt_en_default": {
+		"message": "en (Standard og reserve)",
+		"description": "Standard språkvalg for utvidelsen"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hold favoritt-Tabs til venstre for Hjem og Objektbehandler.",
@@ -535,6 +559,10 @@
 		"message": "Åpne alltid lenker i en ny nettleserfane.",
 		"description": "[innstilling] når brukeren klikker på en favoritt-Tab, åpne i en ny nettleserfane"
 	},
+	"opt_no_release_notes": {
+		"message": "Ikke vis oppdateringsnotater.",
+		"description": "[innstilling] lar brukeren forhindre utvidelsen fra å vise oppdateringsnotater etter oppdatering"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Åpne alltid $salesforce_login-siden i samme Tab når du klikker på popup-vinduet.",
 		"description": "[innstilling]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Åpne alltid $salesforce_setup-siden i samme Tab når du klikker på popup-vinduet.",
 		"description": "[innstilling]"
+	},
+	"opt_pick_language": {
+		"message": "Velg utvidelsesspråk",
+		"description": "[innstilling] etikett for å be brukeren om å velge foretrukket språk"
+	},
+	"opt_prevent_analytics": {
+		"message": "Hindre bruk av Simple Analytics (blir ikke telt med i brukerstatistikk).",
+		"description": "[innstilling] lar brukeren forhindre sending av anonym analyse"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Forhindre bruk av Lightning-navigasjon (raskere lasting ved bruk).",
@@ -551,9 +587,9 @@
 		"message": "side i samme fane når du klikker på popup.",
 		"description": "[innstilling] forhindre åpning av en ny nettleserfane"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce-språk (Standard)",
-		"description": "Alternativ for å bruke Salesforce sin språkinnstilling. Dette alternativet er standard for utvidelsen."
+	"opt_sf_lang_cookies": {
+		"message": "Følg Salesforce-språk (leser Salesforce-informasjonskapsler)",
+		"description": "Mulighet til å bruke Salesforces språkinnstilling. For å bruke dette alternativet, må brukere tillate utvidelsen å lese Salesforce-informasjonskapsler."
 	},
 	"opt_skip_link_detection": {
 		"message": "Hopp over automatisk kontroll av Salesforce-ID.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "Fjern Tab",
 		"description": "[alt] alternativ tekst når bilder ikke vises"
+	},
+	"req_downloads_open_popup": {
+		"message": "Vennligst åpne utvidelsens popup fra utvidelsesmenyen i nettleseren din.",
+		"description": "[toast] be brukeren om å klikke på utvidelsens popup for å fortsette"
+	},
+	"req_downloads_perm_header": {
+		"message": "Aktiver nedlastingstillatelsen\nfor å starte den forespurte eksporten.",
+		"description": "[be_om_tillatelse] oppfordring til handling for å aktivere nedlastingstillatelse"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Denne operasjonen vil kun bli forespurt én gang.",
+		"description": "[be_om_tillatelse] beskrivelse for å aktivere nedlastingstillatelse"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ikke spør igjen.",

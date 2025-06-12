@@ -97,6 +97,13 @@ export function sendExtensionMessage(message, callback = null) {
 	}
 	sendMessage(message, callback);
 }
+
+/**
+ * Retrieves extension settings for the specified keys.
+ *
+ * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
+ * @returns {Promise<Object>} A promise that resolves to an object containing the requested settings.
+ */
 export async function getSettings(keys = null) {
 	return await sendExtensionMessage({ what: "get-settings", keys });
 }
@@ -111,6 +118,7 @@ export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
 export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
 export const NO_RELEASE_NOTES = "no_release_notes";
 export const NO_UPDATE_NOTIFICATION = "no_update_notification";
+export const PREVENT_ANALYTICS = "prevent_analytics";
 // decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
@@ -217,6 +225,12 @@ export function getCssRule(styleId, value = null) {
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";
 export const TAB_ON_LEFT = "tab_position_left";
+
+/**
+ * Opens the extension's settings page.
+ *
+ * Uses `runtime.openOptionsPage` if available; otherwise, falls back to opening the settings URL directly.
+ */
 export function openSettingsPage() {
 	if (BROWSER.runtime.openOptionsPage) {
 		BROWSER.runtime.openOptionsPage();
@@ -236,7 +250,9 @@ export const CXM_REMOVE_TAB = "remove-tab";
 export const CXM_REMOVE_OTHER_TABS = "remove-other-tabs";
 export const CXM_REMOVE_LEFT_TABS = "remove-left-tabs";
 export const CXM_REMOVE_RIGHT_TABS = "remove-right-tabs";
-export const CXM_EMPTY_NO_ORG_TABS = "empty-no-org-tabs";
+export const CXM_EMPTY_VISIBLE_TABS = "empty-visible-tabs";
+export const CXM_EMPTY_GENERIC_TABS = "empty-generic-tabs";
+export const CXM_RESET_DEFAULT_TABS = "reset-default";
 export const CXM_EMPTY_TABS = "empty-tabs";
 export const CXM_IMPORT_TABS = "import-tabs";
 export const CXM_EXPORT_TABS = "export-tabs";
@@ -252,4 +268,6 @@ export const CMD_OPEN_OTHER_ORG = "cmd-open-other-org";
 export const CMD_IMPORT = "cmd-import";
 export const CMD_EXPORT_ALL = "cmd-export-all";
 export const WHAT_UPDATE_EXTENSION = "update-extension";
-export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP = "export-perm-open-popup";
+export const WHAT_EXPORT = "export";
+export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
+	"export-perm-open-popup";

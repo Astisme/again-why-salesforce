@@ -63,13 +63,17 @@
 		"message": "המשך",
 		"description": "תוכן טקסט עבור כפתורים שמאפשרים את ביצוע הפעולה הנוכחית"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 כל ה-Tab הנראים",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 כל ה-Tab הכלליים",
+		"description": "[תפריט הקשר]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 אפס לברירת מחדל",
-		"description": "[context-menu]"
+		"message": "😨 הסר את כל Tab",
+		"description": "[תפריט הקשר]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 כל ה-Tab הגלויים",
+		"description": "[תפריט הקשר]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ ייצוא Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Tab זה",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 אפס את ברירת המחדל של ה-Tab",
+		"description": "[תפריט הקשר]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "תווית לתפריט ההגדרות"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] מאפשר למשתמש לשחרר את הקבצים שלו באזור המיועד"
+	},
+	"enable": {
+		"message": "הפעל",
+		"description": "[בקש_הרשאה] כפתור להפעלת הרשאות"
 	},
 	"error_adding_tab": {
 		"message": "שגיאה בהוספת Tab.",
@@ -327,9 +339,17 @@
 		"message": "שגיאה בהסרת Tab.",
 		"description": "[error] שגיאה כללית בהסרת Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "שגיאה בעת הסרת כל ה-Tab הגלויים.",
+		"description": "[שגיאה] שגיאה כללית בעת הסרת כל ה-Tab הגלויים"
+	},
 	"error_required_params": {
 		"message": "הפרמטרים הנדרשים לפונקציה לא הועברו",
 		"description": "[שגיאה] המפתח ניסה לקרוא לפונקציה ללא הפרמטרים הדרושים"
+	},
+	"error_resetting_default_tabs": {
+		"message": "שגיאה בעת איפוס ל-Tab ברירת מחדל.",
+		"description": "[שגיאה] שגיאה כללית בעת איפוס ה-Tab לברירת המחדל שלהם"
 	},
 	"error_sync_nothing": {
 		"message": "לא ניתן לסנכרן Tab ריקים!",
@@ -427,6 +447,10 @@
 		"message": "קבצים",
 		"description": "קבצים מרובים"
 	},
+	"flows": {
+		"message": "זרימות",
+		"description": "[Tab ברירת מחדל] תווית עבור Tab זרימות ברירת מחדל"
+	},
 	"general": {
 		"message": "כללי",
 		"description": "תווית לקטגוריית ההגדרות הכלליות"
@@ -523,9 +547,9 @@
 		"message": "פתח אוטומטית את דף $salesforce_setup בעת לחיצה על החלון הקופץ כשאתה נמצא בדף Salesforce.",
 		"description": "[הגדרה] כשהמשתמש פותח את החלון הקופץ באתר Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "אפשרות שפה לחזרה לאנגלית אם האזור אינו נתמך או אינו מציג את התרגום"
+	"opt_en_default": {
+		"message": "en (ברירת מחדל וגיבוי)",
+		"description": "אפשרות שפת ברירת המחדל של התוסף"
 	},
 	"opt_keep_tabs_left": {
 		"message": "שמור Tabs מועדפים משמאל לדף הבית ולמנהל האובייקטים.",
@@ -535,6 +559,10 @@
 		"message": "פתח קישורים תמיד בכרטיסייה חדשה בדפדפן.",
 		"description": "[הגדרה] בעת לחיצה על Tab מועדף, פתח אותו בכרטיסייה חדשה בדפדפן"
 	},
+	"opt_no_release_notes": {
+		"message": "אל תציג הערות גרסה לאחר עדכון.",
+		"description": "[הגדרה] מאפשר למשתמש למנוע מהתוסף להציג הערות גרסה לאחר עדכון"
+	},
 	"opt_open_login_same_tab": {
 		"message": "פתח תמיד את דף $salesforce_login באותו Tab בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה]"
@@ -542,6 +570,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "פתח תמיד את דף $salesforce_setup באותו Tab בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה]"
+	},
+	"opt_pick_language": {
+		"message": "בחר שפת הרחבה",
+		"description": "[הגדרה] תווית להנחיית המשתמש לבחור את השפה המועדפת עליו"
+	},
+	"opt_prevent_analytics": {
+		"message": "מנע שימוש ב-Simple Analytics (לא ייכלל בספירת המשתמשים).",
+		"description": "[הגדרה] מאפשר למשתמש למנוע שליחת נתוני אנליטיקה אנונימיים"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "מנע שימוש בניווט Lightning (טעינה מהירה יותר בעת שימוש).",
@@ -551,9 +587,9 @@
 		"message": "דף באותה הכרטיסייה בעת לחיצה על החלון הקופץ.",
 		"description": "[הגדרה] מניעת פתיחת כרטיסיית דפדפן חדשה"
 	},
-	"opt_sf_lang_default": {
-		"message": "שפת Salesforce (ברירת מחדל)",
-		"description": "אפשרות להשתמש בהגדרת השפה של Salesforce. אפשרות זו היא ברירת המחדל של התוסף."
+	"opt_sf_lang_cookies": {
+		"message": "עקוב אחר שפת Salesforce (קורא קובצי Cookie של Salesforce)",
+		"description": "אפשרות לשימוש בהגדרת השפה של Salesforce. כדי להשתמש באפשרות זו, המשתמשים חייבים לאפשר לתוסף לקרוא קובצי Cookie של Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "דלג על בדיקת ID של Salesforce אוטומטית.",
@@ -586,6 +622,18 @@
 	"remove_tab": {
 		"message": "הסר Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"
+	},
+	"req_downloads_open_popup": {
+		"message": "אנא פתח את חלון קופץ של התוסף מתפריט התוספים של הדפדפן שלך.",
+		"description": "[הודעה] בקש מהמשתמש ללחוץ על חלון קופץ של התוסף כדי להמשיך"
+	},
+	"req_downloads_perm_header": {
+		"message": "אנא אפשר את הרשאת ההורדות\nכדי להתחיל את הייצוא המבוקש.",
+		"description": "[בקש_הרשאה] קריאה לפעולה כדי לאפשר הרשאת הורדות"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "פעולה זו תתבקש פעם אחת בלבד.",
+		"description": "[בקש_הרשאה] תיאור להפעלת הרשאת הורדות"
 	},
 	"req_permissions_dont_ask": {
 		"message": "אל תשאל שוב.",

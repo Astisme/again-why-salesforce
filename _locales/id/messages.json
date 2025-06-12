@@ -63,13 +63,17 @@
 		"message": "Lanjutkan",
 		"description": "textContent untuk tombol yang memungkinkan tindakan saat ini dieksekusi"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Semua Tab yang terlihat",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Semua Tab umum",
+		"description": "[menu-konteks]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Setel ulang ke default",
-		"description": "[context-menu]"
+		"message": "😨 Hapus semua Tab",
+		"description": "[menu konteks]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Semua Tab terlihat",
+		"description": "[menu-konteks]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Ekspor Tab",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Hapus Tab ini",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Reset Tab Default",
+		"description": "[menu-konteks]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Label untuk menu pengaturan"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] memungkinkan pengguna menjatuhkan file mereka ke area yang ditentukan"
+	},
+	"enable": {
+		"message": "Aktifkan",
+		"description": "[minta_izin] tombol untuk mengaktifkan izin"
 	},
 	"error_adding_tab": {
 		"message": "Kesalahan saat menambah Tab.",
@@ -327,9 +339,17 @@
 		"message": "Kesalahan saat menghapus Tab.",
 		"description": "[error] Kesalahan umum saat menghapus Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Kesalahan saat menghapus semua Tab terlihat.",
+		"description": "[error] Kesalahan umum saat menghapus semua Tab terlihat"
+	},
 	"error_required_params": {
 		"message": "Parameter yang diperlukan untuk fungsi tidak dilewatkan",
 		"description": "[kesalahan] pengembang mencoba memanggil fungsi tanpa parameter yang diperlukan"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Kesalahan saat mengatur ulang ke Tab Default.",
+		"description": "[error] Kesalahan umum saat mengatur ulang Tab ke defaultnya"
 	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyinkronkan Tabs kosong!",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "file",
 		"description": "beberapa file"
+	},
+	"flows": {
+		"message": "Alur",
+		"description": "[default-tab] Label untuk Tab Alur default"
 	},
 	"general": {
 		"message": "Umum",
@@ -522,9 +546,9 @@
 		"message": "Buka halaman $salesforce_setup secara otomatis saat mengeklik popup saat berada di halaman Salesforce.",
 		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Opsi bahasa untuk kembali ke bahasa Inggris jika lokal tidak didukung atau tidak menampilkan terjemahan"
+	"opt_en_default": {
+		"message": "en (Default dan Fallback)",
+		"description": "Opsi bahasa default ekstensi"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pertahankan Tabs favorit di kiri Beranda dan Manajer Objek.",
@@ -534,6 +558,10 @@
 		"message": "Selalu buka tautan di tab baru browser.",
 		"description": "[pengaturan] ketika pengguna mengklik Tab favorit, buka di tab baru browser"
 	},
+	"opt_no_release_notes": {
+		"message": "Jangan tampilkan catatan rilis pembaruan.",
+		"description": "[pengaturan] memungkinkan pengguna untuk mencegah ekstensi menampilkan catatan rilis setelah diperbarui"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Selalu buka halaman $salesforce_login di Tab yang sama saat mengeklik popup.",
 		"description": "[pengaturan]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Selalu buka halaman $salesforce_setup di Tab yang sama saat mengeklik popup.",
 		"description": "[pengaturan]"
+	},
+	"opt_pick_language": {
+		"message": "Pilih bahasa ekstensi",
+		"description": "[pengaturan] label untuk meminta pengguna memilih bahasa pilihan mereka"
+	},
+	"opt_prevent_analytics": {
+		"message": "Cegah penggunaan Simple Analytics (tidak muncul dalam jumlah pengguna).",
+		"description": "[pengaturan] memungkinkan pengguna mencegah pengiriman analitik anonim"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat saat digunakan).",
@@ -550,9 +586,9 @@
 		"message": "halaman di tab yang sama saat mengklik popup.",
 		"description": "[pengaturan] mencegah pembukaan tab baru browser"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Default)",
-		"description": "Opsi untuk menggunakan pengaturan bahasa Salesforce. Opsi ini adalah default untuk ekstensi."
+	"opt_sf_lang_cookies": {
+		"message": "Ikuti Bahasa Salesforce (membaca Cookies Salesforce)",
+		"description": "Opsi untuk menggunakan pengaturan bahasa Salesforce. Untuk menggunakan opsi ini, pengguna harus mengizinkan ekstensi untuk membaca cookie Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Lewati pemeriksaan otomatis ID Salesforce.",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Hapus Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"req_downloads_open_popup": {
+		"message": "Silakan buka popup ekstensi dari menu ekstensi browser Anda.",
+		"description": "[peringatan] minta pengguna untuk mengklik popup ekstensi untuk melanjutkan"
+	},
+	"req_downloads_perm_header": {
+		"message": "Mohon aktifkan izin Unduhan\nuntuk memulai Ekspor yang diminta.",
+		"description": "[minta_izin] panggilan untuk bertindak untuk mengaktifkan izin unduhan"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Operasi ini hanya akan diminta sekali.",
+		"description": "[minta_izin] deskripsi untuk mengaktifkan izin unduhan"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Jangan tanya lagi.",

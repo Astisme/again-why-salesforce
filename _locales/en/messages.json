@@ -1,20 +1,4 @@
 {
-	"req_downloads_open_popup": {
-		"message": "Please open the extension popup from the extenions menu of your browser.",
-		"description": "[toast] ask the user to click on the extension popup to continue"
-	},
-	"req_downloads_perm_paragraph": {
-		"message": "This operation will only be requested once.",
-		"description": "[req_permission] description to enable downloads permission"
-	},
-	"req_downloads_perm_header": {
-		"message": "Please enable the Downloads permission\nto start the requested Export.",
-		"description": "[req_permission] call to action to enable downloads permission"
-	},
-	"enable": {
-		"message": "Enable",
-		"description": "[req_permission] button to enable permissions"
-	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -79,12 +63,16 @@
 		"message": "Continue",
 		"description": "textContent for buttons that allow the current action to execute"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 All visible Tabs",
+	"cxm_empty_generic_tabs": {
+		"message": "😊 All generic Tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Reset to Default",
+		"message": "😨 Remove all Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 All visible Tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_export_tabs": {
@@ -147,6 +135,10 @@
 		"message": "1️⃣ This tTb",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Reset Default Tabs",
+		"description": "[context-menu]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Label for the settings menu"
@@ -174,6 +166,10 @@
 	"drop": {
 		"message": "Drop",
 		"description": "[import] let the user drop their files onto the specified area"
+	},
+	"enable": {
+		"message": "Enable",
+		"description": "[req_permission] button to enable permissions"
 	},
 	"error_adding_tab": {
 		"message": "Error when adding Tab.",
@@ -343,12 +339,20 @@
 		"message": "Error when removing Tab.",
 		"description": "[error] Generic error used while removing a Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Error when removing all visible Tabs.",
+		"description": "[error] Generic error used while removing all visible Tabs"
+	},
 	"error_required_params": {
 		"message": "The required parameters for the function were not passed",
 		"description": "[error] the developer tried to call a function without the necessary parameters"
 	},
+	"error_resetting_default_tabs": {
+		"message": "Error when resetting to default Tabs.",
+		"description": "[error] Generic error used while resetting the Tabs to their default"
+	},
 	"error_sync_nothing": {
-		"message": "Cannot sync null tabs!",
+		"message": "Cannot sync null Tabs!",
 		"description": "[error] tried to synchronize nothing"
 	},
 	"error_tab_constructor": {
@@ -427,7 +431,7 @@
 		"description": "[popup] title on export button"
 	},
 	"extension_description": {
-		"message": "Create and manage custom tabs in the available space on Salesforce Lightning Setup page.",
+		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
 		"description": "[manifest] The description of this extension"
 	},
 	"extension_label": {
@@ -441,6 +445,10 @@
 	"files": {
 		"message": "files",
 		"description": "multiple files"
+	},
+	"flows": {
+		"message": "Flows",
+		"description": "[default-tab] Label for the default Flows Tab"
 	},
 	"general": {
 		"message": "General",
@@ -550,6 +558,10 @@
 		"message": "Always open links in a new browser tab.",
 		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
 	},
+	"opt_no_release_notes": {
+		"message": "Do not show update release notes.",
+		"description": "[setting] let the user prevent the extension from showing release notes after it is updated"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Always open $salesforce_login page in the same tab when clicking on the popup.",
 		"description": "[setting]"
@@ -558,6 +570,14 @@
 		"message": "Always open $salesforce_setup page in the same tab when clicking on the popup.",
 		"description": "[setting]"
 	},
+	"opt_pick_language": {
+		"message": "Pick extension language",
+		"description": "[setting] label to propt the user to pick their preferred language"
+	},
+	"opt_prevent_analytics": {
+		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
+		"description": "[setting] let the user prevent them from sending anonymous analytics"
+	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Prevent use of Lightning Navigation (faster loading when in use).",
 		"description": "[setting] do not allow Lightning Navigation with explanation of feature"
@@ -565,10 +585,6 @@
 	"opt_same_tab_popup": {
 		"message": "page in the same tab when clicking on the popup.",
 		"description": "[setting] prevent opening a new browser tab"
-	},
-	"opt_pick_language": {
-		"message": "Pick extension language",
-		"description": "[setting] label to propt the user to pick their preferred language"
 	},
 	"opt_sf_lang_cookies": {
 		"message": "Follow Salesforce Language (reads Salesforce Cookies)",
@@ -605,6 +621,18 @@
 	"remove_tab": {
 		"message": "Remove Tab",
 		"description": "[alt] alternative text when pictures do not work"
+	},
+	"req_downloads_open_popup": {
+		"message": "Please open the extension popup from the extenions menu of your browser.",
+		"description": "[toast] ask the user to click on the extension popup to continue"
+	},
+	"req_downloads_perm_header": {
+		"message": "Please enable the Downloads permission\nto start the requested Export.",
+		"description": "[req_permission] call to action to enable downloads permission"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "This operation will only be requested once.",
+		"description": "[req_permission] description to enable downloads permission"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Do not ask again.",

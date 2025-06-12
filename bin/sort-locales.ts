@@ -43,6 +43,14 @@ async function* findLocaleMessageFiles(
 	}
 }
 
+/**
+ * Main function that traverses locale message files in the _locales directory,
+ * reads and parses each JSON file, sorts its keys, and writes the sorted content back.
+ * Logs success or failure for each file and exits with code 1 if any file fails to process.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
 async function main() {
 	const baseDir = "_locales";
 	try {

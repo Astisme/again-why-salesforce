@@ -7,11 +7,11 @@ import {
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
-	openSettingsPage,
 	FRAME_PATTERNS,
+	ISSAFARI,
+	openSettingsPage,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
-    ISSAFARI,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -128,13 +128,13 @@ function importHandler() {
  * Sends a message that will start the export procedure.
  */
 function pop_exportHandler() {
-    if(ISSAFARI || BROWSER.downloads != null){
-        sendExtensionMessage({ what: "export" }, close);
-        return;
-    }
-    BROWSER.permissions.request({
-        permissions: ["downloads"],
-    })
+	if (ISSAFARI || BROWSER.downloads != null) {
+		sendExtensionMessage({ what: "export" }, close);
+		return;
+	}
+	BROWSER.permissions.request({
+		permissions: ["downloads"],
+	});
 	setTimeout(close, 100);
 }
 
@@ -464,10 +464,17 @@ const availableCommands = await sendExtensionMessage({
 		CMD_OPEN_SETTINGS,
 	],
 });
+
+/**
+ * Returns the substring of the input string before the first occurrence of the separator "+-+".
+ *
+ * @param {string} i18n - The input string containing the separator.
+ * @returns {string} The substring before the separator, or the whole string if the separator is not found.
+ */
 function sliceBeforeSeparator(i18n) {
 	return i18n.slice(0, i18n.indexOf("+-+"));
 }
-availableCommands.forEach(async (ac) => {
+availableCommands?.forEach(async (ac) => {
 	switch (ac.name) {
 		case CMD_EXPORT_ALL:
 			exportBtn.title = await translator.translate([

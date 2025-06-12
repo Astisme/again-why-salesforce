@@ -63,13 +63,17 @@
 		"message": "Continuer",
 		"description": "contenu textuel pour les boutons qui autorisent l'exécution de l'action en cours"
 	},
-	"cxm_empty_no_org_tabs": {
-		"message": "👀 Tous les Tabs visibles",
-		"description": "[context-menu]"
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tous les Tabs génériques",
+		"description": "[menu-contextuel]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Réinitialiser par défaut",
-		"description": "[context-menu]"
+		"message": "😨 Supprimer tous les Tab",
+		"description": "[menu contextuel]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tous les Tabs visibles",
+		"description": "[menu-contextuel]"
 	},
 	"cxm_export_tabs": {
 		"message": "⬇️ Exporter Tabs",
@@ -131,6 +135,10 @@
 		"message": "1️⃣ Ce Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_reset_default": {
+		"message": "🧐 Réinitialiser les Tabs par défaut",
+		"description": "[menu-contextuel]"
+	},
 	"cxm_settings": {
 		"message": "⚙️ $settings",
 		"description": "Libellé du menu des paramètres"
@@ -158,6 +166,10 @@
 	"drop": {
 		"message": "Déposer",
 		"description": "[import] laisser l'utilisateur déposer ses fichiers sur la zone spécifiée"
+	},
+	"enable": {
+		"message": "Activer",
+		"description": "[demander_autorisation] bouton pour activer les autorisations"
 	},
 	"error_adding_tab": {
 		"message": "Erreur lors de l'ajout de Tab.",
@@ -327,9 +339,17 @@
 		"message": "Erreur lors de la suppression de Tab.",
 		"description": "[erreur] Erreur générique utilisée lors de la suppression d'un Tab"
 	},
+	"error_removing_visible_tabs": {
+		"message": "Erreur lors de la suppression de tous les Tabs visibles.",
+		"description": "[erreur] Erreur générique utilisée lors de la suppression de tous les Tabs visibles"
+	},
 	"error_required_params": {
 		"message": "Les paramètres requis pour la fonction n'ont pas été fournis",
 		"description": "[erreur] le développeur a tenté d'appeler la fonction sans les paramètres nécessaires"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Erreur lors de la réinitialisation des Tabs par défaut.",
+		"description": "[erreur] Erreur générique utilisée lors de la réinitialisation des Tabs à leur valeur par défaut"
 	},
 	"error_sync_nothing": {
 		"message": "Impossible de synchroniser des Tabs nuls !",
@@ -425,6 +445,10 @@
 	"files": {
 		"message": "fichiers",
 		"description": "plusieurs fichiers"
+	},
+	"flows": {
+		"message": "Flux",
+		"description": "[onglet-par-défaut] Étiquette pour l’onglet Flux par défaut"
 	},
 	"general": {
 		"message": "Général",
@@ -522,9 +546,9 @@
 		"message": "Ouvrir automatiquement la page $salesforce_setup en cliquant sur la fenêtre contextuelle lorsque vous êtes sur une page Salesforce.",
 		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site Web Salesforce"
 	},
-	"opt_en_fallback": {
-		"message": "en (Fallback)",
-		"description": "Option de langue pour revenir à l'anglais si la locale n'est pas prise en charge ou n'affiche pas la traduction"
+	"opt_en_default": {
+		"message": "en (Par défaut et de secours)",
+		"description": "Option de langue par défaut de l'extension"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Garder les Tabs favoris à gauche de Accueil et Gestionnaire d'objets.",
@@ -534,6 +558,10 @@
 		"message": "Toujours ouvrir les liens dans un nouvel onglet du navigateur.",
 		"description": "[paramètre] lorsque l'utilisateur clique sur un Tab favori, l'ouvrir dans un nouvel onglet du navigateur"
 	},
+	"opt_no_release_notes": {
+		"message": "Ne pas afficher les notes de mise à jour.",
+		"description": "[paramètre] permet à l’utilisateur d’empêcher l’extension d’afficher les notes de mise à jour après sa mise à jour"
+	},
 	"opt_open_login_same_tab": {
 		"message": "Toujours ouvrir la page $salesforce_login dans le même Tab en cliquant sur la fenêtre contextuelle.",
 		"description": "[paramètre]"
@@ -541,6 +569,14 @@
 	"opt_open_setup_same_tab": {
 		"message": "Toujours ouvrir la page $salesforce_setup dans le même Tab en cliquant sur la fenêtre contextuelle.",
 		"description": "[paramètre]"
+	},
+	"opt_pick_language": {
+		"message": "Choisir la langue de l'extension",
+		"description": "[paramètre] libellé pour inviter l'utilisateur à choisir sa langue préférée"
+	},
+	"opt_prevent_analytics": {
+		"message": "Empêcher l’utilisation de Simple Analytics (n’apparaît pas dans les comptes utilisateurs).",
+		"description": "[paramètre] permet à l’utilisateur d’empêcher l’envoi d’analyses anonymes"
 	},
 	"opt_prevent_lightning_navigation": {
 		"message": "Empêcher l'utilisation de la navigation Lightning (chargement plus rapide lors de l'utilisation).",
@@ -550,9 +586,9 @@
 		"message": "page dans le même onglet lors du clic sur la fenêtre contextuelle.",
 		"description": "[paramètre] éviter l'ouverture d'un nouvel onglet du navigateur"
 	},
-	"opt_sf_lang_default": {
-		"message": "Salesforce Language (Par défaut)",
-		"description": "Option pour utiliser le paramètre de langue de Salesforce. Cette option est la valeur par défaut pour l'extension."
+	"opt_sf_lang_cookies": {
+		"message": "Suivre la langue Salesforce (lit les cookies Salesforce)",
+		"description": "Option d'utilisation du paramètre de langue de Salesforce. Pour utiliser cette option, les utilisateurs doivent autoriser l'extension à lire les cookies Salesforce."
 	},
 	"opt_skip_link_detection": {
 		"message": "Ignorer la vérification automatique de l'ID Salesforce.",
@@ -585,6 +621,18 @@
 	"remove_tab": {
 		"message": "Supprimer le Tab",
 		"description": "[alt] Texte alternatif quand les images ne fonctionnent pas."
+	},
+	"req_downloads_open_popup": {
+		"message": "Veuillez ouvrir la fenêtre contextuelle de l'extension depuis le menu des extensions de votre navigateur.",
+		"description": "[toast] demander à l'utilisateur de cliquer sur la fenêtre contextuelle de l'extension pour continuer"
+	},
+	"req_downloads_perm_header": {
+		"message": "Veuillez activer l'autorisation de téléchargement\npour démarrer l'exportation demandée.",
+		"description": "[demander_autorisation] appel à l'action pour activer l'autorisation de téléchargement"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Cette opération ne sera demandée qu'une seule fois.",
+		"description": "[demander_autorisation] description pour activer l'autorisation de téléchargement"
 	},
 	"req_permissions_dont_ask": {
 		"message": "Ne plus demander.",
