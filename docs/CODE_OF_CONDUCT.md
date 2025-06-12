@@ -30,7 +30,7 @@ Project maintainers are responsible for clarifying the standards of acceptable b
 
 If you see or are subject to unacceptable behavior, please contact one of the project maintainers:
 
-- **Astisme**: https://github.com/Astisme
+- **Astisme**: againwhysalesforce@duck.com
 
 All reports will be kept confidential.
 

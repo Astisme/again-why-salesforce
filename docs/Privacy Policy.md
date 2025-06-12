@@ -79,6 +79,6 @@ Even though we don’t collect personal data, you may disable analytics at any t
 ---
 
 ## 10. Contact & Policy Updates  
-If you have questions or wish to request data removal beyond what your browser controls, please contact us on [github](https://github.com/astisme/again-why-salesforce).
+If you have questions or wish to request data removal beyond what your browser controls, please contact us [via email](mailto:againwhysalesforce@duck.com) (`againwhysalesforce@duck.com`).
 
 We’ll notify you of policy changes via extension release notes.

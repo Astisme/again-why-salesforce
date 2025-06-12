@@ -9,7 +9,7 @@
 
 ## Badges
 
-[![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)](https://www.github.com/Astisme/releases)
+[![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)](https://github.com/Astisme/releases)
 [![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white)](https://github.com/Astisme/again-why-salesforce/commits/main/)
 [![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636)](https://github.com/Astisme/again-why-salesforce/blob/main/LICENSE)
 [![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce)](https://github.com/Astisme/again-why-salesforce/#)
@@ -107,7 +107,7 @@ Then load the unpacked extension in your browser’s developer mode.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](/CONTRIBUTING.md) for details on code style, tests, and commit conventions. Then:
+Please read [CONTRIBUTING.md](/docs/CONTRIBUTING.md) for details on code style, tests, and commit conventions. Then:
 
 1. Fork the repo
 2. Pick an unassigned issue and comment to claim it

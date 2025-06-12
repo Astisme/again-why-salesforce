@@ -106,7 +106,7 @@ shownRedirectBtn.addEventListener("click", (e) => {
 	currentTab == null && !openPageInSameTab
 		? nss_getCurrentBrowserTab(createTab, shownRedirectBtn.href)
 		: createTab(shownRedirectBtn.href);
-	setTimeout(() => close(), 200);
+	setTimeout(close, 200);
 });
 
 const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;

@@ -10,10 +10,10 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ### Salesforce
 
 1. Custom `<ul>` element for Tab storage (we were relying on one available in Salesforce Setup before)
-1. Keyboard shortcuts for common actions
-1. On-screen notification when a new extension version is available
-1. "Update Tab" directly from a Salesforce Setup modal via context menu (without opening the popup)
-1. Option to open "Open in Another Org" links in the same browser tab or in a new tab
+2. Keyboard shortcuts for common actions
+3. On-screen notification when a new extension version is available
+4. "Update Tab" directly from a Salesforce Setup modal via context menu (without opening the popup)
+5. Option to open "Open in Another Org" links in the same browser tab or in a new tab
 
 ### Popup
 
@@ -21,15 +21,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 ### Updates to the extension
 
-1. Full localization support for all languages
-1. New extension settings page
-1. Safari rollout, plus a dedicated Safari Installation Guide
-1. Simple Analytics integration for user metrics
+1. Full localization support for all languages listed [here](/_locales)
+2. New extension settings page
+3. Safari rollout, plus a dedicated Safari Installation Guide
+4. Simple Analytics integration for user metrics
 
 ### Updates to the repository
 
-1. CHANGELOG.md, CONTRIBUTING.md and CODE_OF_CONDUCT.md added
-1. README reordered for better flow
+1. CHANGELOG.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md and SECURITY.md added
+2. README.md reordered for better flow
 
 ## 🛠 Changed
 
