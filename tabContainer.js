@@ -735,6 +735,16 @@ export default class TabContainer extends Array {
 		return mapped;
 	}
 
+    /**
+     * Retrieves a Tab matching the specified label and URL criteria.
+     * Throws an error if the URL is not provided or if no suitable Tab is found.
+     * If multiple matches exist and no label is specified, an error is thrown.
+     *
+     * @param {string|null} [label=null] - Optional label to further filter matching Tabs.
+     * @param {string|null} [url=null] - URL to match; required.
+     * @returns {Promise<object>} A promise that resolves to the first matching Tab object.
+     * @throws {Error} If `url` is null, if no Tabs match, or if multiple Tabs match when `label` is not specified.
+     */
 	async getMatchingTab(label = null, url = null) {
 		if (url == null) {
 			const msg = await translator.translate("error_no_url");

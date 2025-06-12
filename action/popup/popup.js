@@ -465,34 +465,42 @@ const availableCommands = await sendExtensionMessage({
 	],
 });
 
+const translatorSeparator = translator.getSeparator();
 /**
- * Returns the substring of the input string before the first occurrence of the separator "+-+".
+ * Returns the substring of the input string before the first occurrence of the separator used by the translator.
  *
  * @param {string} i18n - The input string containing the separator.
  * @returns {string} The substring before the separator, or the whole string if the separator is not found.
  */
 function sliceBeforeSeparator(i18n) {
-	return i18n.slice(0, i18n.indexOf("+-+"));
+	return i18n.slice(0, i18n.indexOf(translatorSeparator));
+}
+
+const datasetAttribute = translator.getTranslateAttributeDataset();
+/**
+ * Translates and appends a keyboard shortcut hint to a button’s localized text.
+ *
+ * @param {HTMLElement} button - The button element whose dataset contains the text to translate.
+ * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
+ * @returns {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
+ */
+async function addShortcutText(button, shortcut){
+    return await translator.translate([
+        sliceBeforeSeparator(button.dataset[datasetAttribute]),
+        `(${shortcut})`,
+    ]);
+
 }
 availableCommands?.forEach(async (ac) => {
 	switch (ac.name) {
 		case CMD_EXPORT_ALL:
-			exportBtn.title = await translator.translate([
-				sliceBeforeSeparator(exportBtn.dataset.i18n),
-				`(${ac.shortcut})`,
-			]);
-			break;
+			exportBtn.title = await addShortcutText(exportBtn, ac.shortcut);
+            break;
 		case CMD_IMPORT:
-			importBtn.title = await translator.translate([
-				sliceBeforeSeparator(importBtn.dataset.i18n),
-				`(${ac.shortcut})`,
-			]);
+			importBtn.title = await addShortcutText(importBtn, ac.shortcut);
 			break;
 		case CMD_OPEN_SETTINGS:
-			settingsBtn.title = await translator.translate([
-				sliceBeforeSeparator(settingsBtn.dataset.i18n),
-				`(${ac.shortcut})`,
-			]);
+			settingsBtn.title = await addShortcutText(settingsBtn, ac.shortcut);
 			break;
 		default:
 			break;

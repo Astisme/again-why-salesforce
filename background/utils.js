@@ -138,6 +138,14 @@ function exportHandler(tabs = null) {
 	_exportHandler(tabs);
 }
 
+/**
+ * Attempts to set the browser action popup to the export-permission request page.
+ * If the URL for the permission page cannot be obtained, no popup is set.
+ *
+ * @returns {boolean}  
+ *   `true` if the popup was successfully set to the permission request page;  
+ *   `false` if the permission page URL could not be retrieved.
+ */
 function requestExportPermission() {
 	const req_perm_link = BROWSER.runtime.getURL(
 		"action/req_permissions/req_permissions.html",
@@ -151,6 +159,14 @@ function requestExportPermission() {
 	return true;
 }
 
+/**
+ * Checks whether downloads permission is already granted and launches the export handler.
+ * If not, it triggers a notification prompting the user to open a popup to grant permission.
+ *
+ * @param {object[]|null} [tabs=null] 
+ *   Optional array of tab objects to pass through to the export handler.
+ * @returns {void}
+ */
 export function checkLaunchExport(tabs = null) {
 	if (ISSAFARI || BROWSER.downloads != null) {
 		// downloads permission has already been granted

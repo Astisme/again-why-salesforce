@@ -46,6 +46,7 @@ All settings live in browser storage and are scoped to this extension only:
 | `settings`                     | `SETTINGS_KEY`             | General extension preferences                |
 | `settings-tab_generic_style`   | `GENERIC_TAB_STYLE_KEY`    | Styles for generic (all-org) Tab decorations |
 | `settings-tab_org_style`       | `ORG_TAB_STYLE_KEY`        | Styles for org-specific Tab decorations      |
+| `_locale`                      | `LOCALE_KEY`               | Stores Salesforce language (if available)    |
 
 You can reset or remove these at any time via your browser’s extension storage settings as presented at point 3 above.
 

@@ -14,9 +14,11 @@ let singleton = null;
  */
 class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
-	static TRANSLATE_ELEMENT_ATTRIBUTE = "data-i18n";
+    static TRANSLATE_DATASET = "i18n";
+	static TRANSLATE_ELEMENT_ATTRIBUTE = `data-${TranslationService.TRANSLATE_DATASET}`;
 	static TRANSLATE_SEPARATOR = "+-+";
 	static ATTRIBUTE_EXCLUDE = "data-exclude-automatic-i18n";
+
 	/** @type {string} Current language code */
 	currentLanguage = TranslationService.FALLBACK_LANGUAGE;
 	/** @type {Object.<string, Object.<string, string>>} Cache organized by language */
@@ -34,6 +36,15 @@ class TranslationService {
 		}
 	}
 
+    /**
+     * Attempts to load a new language file if the specified language is not null
+     * and not the “follow Salesforce language” sentinel.
+     *
+     * @param {string|null} [language=null] - The language code to load, or null to skip.
+     * @returns {Promise<boolean>} 
+     *   Resolves to `true` if a new language file was loaded;  
+     *   `false` if no loading was necessary or the language was null or FOLLOW_SF_LANG.
+     */
 	async loadNewLanguage(language = null) {
 		if (
 			language == null ||
@@ -45,6 +56,14 @@ class TranslationService {
 		return true;
 	}
 
+    /**
+     * Determines the user’s preferred language from settings or Salesforce,
+     * then attempts to load it via loadNewLanguage.
+     *
+     * @returns {Promise<string|null>}
+     *   Resolves to the language code that was successfully loaded;
+     *   or `null` if neither the user’s preference nor Salesforce language could be loaded.
+     */
 	async loadLanguageBackground() {
 		const userLanguage = (await sendExtensionMessage({
 			what: "get-settings",
@@ -66,9 +85,14 @@ class TranslationService {
 		return null;
 	}
 
-	/**
-	 * Load user's language preference from storage
-	 */
+    /**
+     * Initializes or returns the singleton TranslationService instance,
+     * preloading fallback and active translations, and sets up change listeners.
+     *
+     * @returns {Promise<TranslationService>}
+     *   Resolves to the singleton TranslationService, with fallback and current
+     *   language files loaded, and page translations applied.
+     */
 	static async create() {
 		if (singleton != null) {
 			await singleton.loadLanguageBackground();
@@ -85,11 +109,16 @@ class TranslationService {
 		return singleton;
 	}
 
-	/**
-	 * Lazy-load translations from external files
-	 * @param {string} language - Language code to load
-	 * @returns {Promise<Object>} Loaded translations
-	 */
+    /**
+     * Loads the translation JSON for the specified language, caching the result.
+     * Falls back to a parent locale (e.g., "en" from "en_US") or the default fallback language on error.
+     *
+     * @param {string|null} [language=null] - The language code (e.g., "en", "fr_FR") to load.
+     * @throws {Error} Throws `"error_required_params"` if `language` is null.
+     * @returns {Promise<Object>} Resolves to the loaded message map for the language.
+     *   If the file is already cached, returns the cached object.
+     *   On failure, attempts parent locale or returns the fallback language cache.
+     */
 	async loadLanguageFile(language = null) {
 		if (language == null) {
 			console.trace();
@@ -119,12 +148,19 @@ class TranslationService {
 		}
 	}
 
-	/**
-	 * Translate a key to the current language
-	 * @param {string} key - The translation key
-	 * @returns {string} Translated text
-	 */
-	async _translate(key, connector = " ", isError = false) {
+    /**
+     * Retrieves the translated message for a given key from the current language cache,
+     * falling back to a region-agnostic locale or the default fallback language.
+     * Throws an error if no translation is found.
+     *
+     * @private
+     * @param {string} key - The translation key to look up.
+     * @param {string} [connector=" "] - The string used to join compound error messages.
+     * @param {boolean} [isError=false] - Internal flag to avoid infinite recursion when translating error keys.
+     * @returns {Promise<string>} Resolves to the translated message.
+     * @throws {Error} If the key is missing in all locale caches, throws an Error with a translated error message prefix.
+     */
+	async #_translate(key, connector = " ", isError = false) {
 		// Check language-specific cache first
 		if (this.caches[this.currentLanguage]?.[key]?.message != null) {
 			return this.caches[this.currentLanguage][key].message;
@@ -146,7 +182,7 @@ class TranslationService {
 		if (translation == null) {
 			let errorMsg = "error_missing_key"; // fallback
 			if (isError === false) {
-				errorMsg = await this._translate(
+				errorMsg = await this.#_translate(
 					errorMsg,
 					connector,
 					true,
@@ -157,6 +193,16 @@ class TranslationService {
 		return translation;
 	}
 
+    /**
+     * Translates one or more keys into the current language, processing nested placeholder tokens.
+     * If given an array of keys, translates each and joins them with the connector.
+     * For single-key translations, replaces tokens prefixed with `$` by recursively translating the inner key.
+     * On any error during lookup, returns the original key string.
+     *
+     * @param {string|string[]} key - A single translation key or an array of keys to translate.
+     * @param {string} [connector=" "] - The delimiter used to join multiple translated parts.
+     * @returns {Promise<string>} Resolves to the fully translated string or the original key on failure.
+     */
 	async translate(key, connector = " ") {
 		// get all inner translations
 		if (Array.isArray(key)) {
@@ -169,7 +215,7 @@ class TranslationService {
 		}
 		// key is not an Array
 		try {
-			const keyTranslate = await this._translate(key);
+			const keyTranslate = await this.#_translate(key);
 			if (keyTranslate.indexOf("$") < 0) {
 				return keyTranslate;
 			}
@@ -180,7 +226,7 @@ class TranslationService {
 					messageTranslated += ` ${word}`;
 					continue;
 				}
-				const innerTranslation = await this._translate(word.slice(1));
+				const innerTranslation = await this.#_translate(word.slice(1));
 				messageTranslated += ` ${innerTranslation}`;
 			}
 			return messageTranslated.slice(1);
@@ -189,10 +235,15 @@ class TranslationService {
 		}
 	}
 
-	/**
-	 * Update all translatable elements on the page
-	 * @returns {boolean} whether the page translations have been setup or not
-	 */
+    /**
+     * Updates all translatable elements on the page to the specified language.
+     * Selects elements with the translate attribute and applies translated text or attributes.
+     *
+     * @param {string} [language=this.currentLanguage] - The language code to apply for translation.
+     * @returns {Promise<boolean>}  
+     *   Resolves to `false` if the `document` object is unavailable;  
+     *   otherwise resolves after all elements have been updated.
+     */
 	async updatePageTranslations(language = this.currentLanguage) {
 		this.currentLanguage = language ?? TranslationService.FALLBACK_LANGUAGE;
 		if (document == null) {
@@ -222,6 +273,12 @@ class TranslationService {
 		}
 	}
 
+    /**
+     * Registers a listener on browser storage changes to re-run page translations
+     * when the user’s language setting is modified.
+     *
+     * @returns {void}
+     */
 	setListenerForLanguageChange() {
 		BROWSER.storage.onChanged.addListener((changes) => {
 			const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter(
@@ -232,6 +289,26 @@ class TranslationService {
 			}
 		});
 	}
+
+    /**
+     * Retrieves the separator string used to split translation keys
+     * from the static translation attribute.
+     *
+     * @returns {string} The configured translation separator.
+     */
+    getSeparator() {
+        return TranslationService.TRANSLATE_SEPARATOR;
+    }
+
+    /**
+     * Retrieves the dataset attribute name used on elements
+     * to hold translation keys.
+     *
+     * @returns {string} The dataset key for translation attributes.
+     */
+    getTranslateAttributeDataset(){
+        return TranslationService.TRANSLATE_DATASET;
+    }
 }
 
 /**
