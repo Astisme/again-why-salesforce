@@ -484,18 +484,17 @@ const datasetAttribute = translator.getTranslateAttributeDataset();
  * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
  * @returns {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
  */
-async function addShortcutText(button, shortcut){
-    return await translator.translate([
-        sliceBeforeSeparator(button.dataset[datasetAttribute]),
-        `(${shortcut})`,
-    ]);
-
+async function addShortcutText(button, shortcut) {
+	return await translator.translate([
+		sliceBeforeSeparator(button.dataset[datasetAttribute]),
+		`(${shortcut})`,
+	]);
 }
 availableCommands?.forEach(async (ac) => {
 	switch (ac.name) {
 		case CMD_EXPORT_ALL:
 			exportBtn.title = await addShortcutText(exportBtn, ac.shortcut);
-            break;
+			break;
 		case CMD_IMPORT:
 			importBtn.title = await addShortcutText(importBtn, ac.shortcut);
 			break;

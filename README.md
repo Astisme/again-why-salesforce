@@ -1,4 +1,3 @@
-
 <a href="https://github.com/Astisme/again-why-salesforce">
   <img src="https://github.com/Astisme/again-why-salesforce/blob/main/assets/icons/awsf-128.png?raw=true" align="right" title="Well hello there!" />
 </a>
@@ -83,12 +82,12 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 ## Browser Support
 
- Browser | Minimum Version 
- ------- | --------------- 
- Chrome  | 90+             
- Firefox | 88+             
- Edge    | 90+          
- Safari    | 16.4             
+| Browser | Minimum Version |
+| ------- | --------------- |
+| Chrome  | 90+             |
+| Firefox | 88+             |
+| Edge    | 90+             |
+| Safari  | 16.4            |
 
 ---
 
