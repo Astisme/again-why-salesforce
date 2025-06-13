@@ -26,11 +26,11 @@ function doLightningNavigation(details) {
 				break;
 			}
 			default: {
-				console.error("Invalid navigation type");
+				console.error("Invalid navigation type"); // do not translate as this will be sent from inside Salesforce
 			}
 		}
 	} catch (error) {
-		console.error(`Navigation failed: ${error.message}`);
+		console.error(`Navigation failed: ${error.message}`); // do not translate as this will be sent from inside Salesforce
 		if (details.fallbackURL) {
 			open(details.fallbackURL, "_top");
 		}

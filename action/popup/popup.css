@@ -157,3 +157,13 @@ input {
 .duplicate {
 	background-color: var(--warning) !important;
 }
+
+svg#open-settings {
+	height: 2rem;
+	min-width: 2rem;
+	margin-left: 0.5rem;
+
+	& > g > g {
+		fill: var(--color);
+	}
+}

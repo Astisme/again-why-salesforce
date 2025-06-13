@@ -1,0 +1,866 @@
+{
+	"allow": {
+		"message": "İzin Ver",
+		"description": "[izin_iste] izinlere izin verme düğmesi"
+	},
+	"available": {
+		"message": "Mevcut",
+		"description": "Eklenebilecek öğeler için bölüm başlığı"
+	},
+	"bold": {
+		"message": "Kalın",
+		"description": "Kalın metin için yazı tipi stili seçeneği"
+	},
+	"cancel": {
+		"message": "İptal",
+		"description": "mevcut eylemin yürütülmesini engelleyen düğmeler için başlık veya textContent"
+	},
+	"cancel_close": {
+		"message": "İptal et ve kapat",
+		"description": "modalların kapatma düğmesi için başlık veya textContent"
+	},
+	"chosen": {
+		"message": "Seçildi",
+		"description": "Seçilen öğeler için bölüm başlığı"
+	},
+	"cmd_export_all": {
+		"message": "Kaydedilmiş tüm Tabs'ı dışa aktarmak için modalı göster",
+		"description": "[komut açıklaması] kullanıcı tüm Tabs'ı dışa aktarmak istiyor"
+	},
+	"cmd_import": {
+		"message": "Yeni Tabs'ı içe aktarmak için modalı göster",
+		"description": "[komut açıklaması] kullanıcı yeni Tabs'ı içe aktarmak istiyor"
+	},
+	"cmd_open_other_org": {
+		"message": "Mevcut sayfayı başka bir Org'da açmak için modalı göster",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı başka bir Org'da açmak istiyor"
+	},
+	"cmd_remove_tab": {
+		"message": "Mevcut sayfayı Tab listesinden kaldır (kaydedilmişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı kaldırmak istiyor"
+	},
+	"cmd_save_as_tab": {
+		"message": "Mevcut sayfayı Tab listesine kaydet (kaydedilmemişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı kaydetmek istiyor"
+	},
+	"cmd_toggle_org": {
+		"message": "Mevcut sayfanın Org değerini değiştir (kaydedilmişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfa için Org'ı değiştirmek istiyor"
+	},
+	"cmd_update_tab": {
+		"message": "Mevcut sayfayı güncellemek için modalı göster (kaydedilmişse)",
+		"description": "[komut açıklaması] kullanıcı mevcut sayfayı güncellemek istiyor"
+	},
+	"confirm_another_org": {
+		"message": "Bu bağlantının açılmasını onaylayın.",
+		"description": "[başka-kuruluş-aç-modal] oluşturulan bağlantıyı açmak için kullanıcıdan onay isteyin."
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label uygulamasının yeni bir sürümü şimdi mevcut!",
+		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
+	},
+	"continue": {
+		"message": "Devam",
+		"description": "mevcut eylemin yürütülmesine izin veren düğmeler için textContent"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tüm genel Tab'lar",
+		"description": "[bağlam menüsü]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Tüm Tab öğelerini kaldır",
+		"description": "[bağlam menüsü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tüm görünür Tab'lar",
+		"description": "[bağlam menüsü]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs Dışa Aktar",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[içerik-menüsü]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab Taşı",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Başa al",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Sona al",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Sola taşı",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Sağa taşı",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Başka Kuruluşta Aç",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[içerik-menüsü]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[içerik-menüsü]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(ları) Kaldır",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Soldaki Tabs",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Diğer Tabs",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Sağdaki Tabs",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Bu Tab",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Varsayılan Tab'ları Sıfırla",
+		"description": "[bağlam menüsü]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Ayarlar menüsü için etiket"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab Güncelle",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Kuruluşu Değiştir",
+		"description": "[bağlam-menüsü]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Diğer Güncellemeler",
+		"description": "[bağlam-menüsü]"
+	},
+	"delete": {
+		"message": "Sil",
+		"description": "[açılır-pencere] bir satırı sil"
+	},
+	"delete_all": {
+		"message": "Tüm Tabs $delete",
+		"description": "[popup] tüm Tabs boşaltmak için çöp kutusundaki başlık"
+	},
+	"drop": {
+		"message": "Bırakın",
+		"description": "[içe aktarma] kullanıcının dosyalarını belirtilen alana sürükleyip bırakmasına izin verin"
+	},
+	"enable": {
+		"message": "Etkinleştir",
+		"description": "[izin_iste] izinleri etkinleştirmek için düğme"
+	},
+	"error_adding_tab": {
+		"message": "Tab eklenirken hata.",
+		"description": "[hata] Tab eklenirken kullanılan genel hata"
+	},
+	"error_check_update": {
+		"message": "Güncellemeler denetlenirken hata oluştu",
+		"description": "[hata] uzantı güncellemeleri denetlenirken genel hata"
+	},
+	"error_close_other_modal": {
+		"message": "Lütfen önce diğer modalı kapatın!",
+		"description": "[bildirim] Kullanıcı 1'den fazla modal açmaya çalıştı"
+	},
+	"error_cxm_check": {
+		"message": "Menü öğeleri kontrol edilirken hata oluştu",
+		"description": "[hata] bağlam menüsü öğeleri bulunamadı"
+	},
+	"error_cxm_create": {
+		"message": "Menü öğeleri oluşturulurken hata oluştu",
+		"description": "[hata] bağlam menüsü öğeleri başlatılamadı"
+	},
+	"error_cxm_remove": {
+		"message": "Menü öğeleri kaldırılırken hata oluştu",
+		"description": "[hata] bağlam menüsü öğeleri kaldırılamadı"
+	},
+	"error_duplicate_tab": {
+		"message": "Bu Tab zaten var",
+		"description": "[hata] Tab yineleniyor"
+	},
+	"error_expand_url": {
+		"message": "Boş bir URL genişletilemez!",
+		"description": "[hata] genişletilecek URL iletilmedi"
+	},
+	"error_expand_url_no_base": {
+		"message": "Bir URL, ana bilgisayarı olmadan genişletilemez!",
+		"description": "[hata] genişletmek için kullanılan temel URL iletilmedi"
+	},
+	"error_extract_empty_url": {
+		"message": "Boş URL'den kuruluş adı çıkarılamaz!",
+		"description": "[hata] kuruluş adının alınacağı URL iletilmedi"
+	},
+	"error_failed_sync": {
+		"message": "Senkronize edilemedi.",
+		"description": "[hata] Tabs kullanıcından senkronize edilemediğinde genel hata"
+	},
+	"error_failed_to_fetch": {
+		"message": "Harici kaynaklar alınamadı",
+		"description": "[hata] Harici bir web sitesine yapılan çağrı başarılı olmadı"
+	},
+	"error_get_with_no_org": {
+		"message": "Kuruluş belirtilmezse Tabs alınamaz.",
+		"description": "[hata] kuruluş bilgisi göndermeden kuruluşa göre Tabs aramaya çalışıldı"
+	},
+	"error_import": {
+		"message": "İçe aktarma sırasında hata:\n",
+		"description": "[hata] içe aktarma işlemi sırasında bir hata oluştu"
+	},
+	"error_invalid_key": {
+		"message": "Fonskiyon'a geçirilen anahtar parametresi geçerli değil",
+		"description": "[hata] geliştirici geçersiz bir parametre ile bir fonksiyon çağırmaya çalıştı"
+	},
+	"error_invalid_request": {
+		"message": "Geçersiz istek.",
+		"description": "[hata] Hatalı biçimlendirilmiş bir mesaj alındıktan sonra genel hata"
+	},
+	"error_invalid_tab": {
+		"message": "Geçersiz Tab",
+		"description": "[hata] Tab geçerli değil"
+	},
+	"error_link_with_id": {
+		"message": "Bu sayfa başka bir Kuruluşta bulunamaz, çünkü bir Kimlik içeriyor!",
+		"description": "[başka-kuruluş-aç-modal] bağlantının başka bir kuruluşta bulunmayabileceği konusunda kullanıcıya uyarı"
+	},
+	"error_many_matching_tab": {
+		"message": "1'den fazla eşleşen Tab bulundu.",
+		"description": "[hata] birçok Tab alındı"
+	},
+	"error_many_tabs_found": {
+		"message": "Birden fazla Tab bulundu.",
+		"description": "[hata] çok sayıda Tabs alındı"
+	},
+	"error_minify_url": {
+		"message": "Boş bir URL küçültülemez!",
+		"description": "[hata] küçültülecek URL iletilmedi"
+	},
+	"error_missing_favourite_id": {
+		"message": "Kimlik olmadan favori resim alınamaz",
+		"description": "[hata] favori kimliği iletilmedi"
+	},
+	"error_missing_key": {
+		"message": "Anahtar hiçbir yerde bulunamadı",
+		"description": "[hata] dosyalarda çeviri bulunamadı"
+	},
+	"error_no_array": {
+		"message": "Geçersiz dizi veya dizi iletilmedi",
+		"description": "[hata] geçerli bir dizi alınmadı"
+	},
+	"error_no_browser_tab": {
+		"message": "Mevcut tarayıcı sekmesi bulunamadı.",
+		"description": "[hata] arka plan sayfası etkin bir tarayıcı sekmesi kuramadı"
+	},
+	"error_no_callback": {
+		"message": "Lütfen bir geri arama sağlayın",
+		"description": "[hata] yöntemin sonunda çağrılacak fonksiyon iletilmedi"
+	},
+	"error_no_cookies": {
+		"message": "Eşleşen çerez bulunamadı",
+		"description": "[hata] Salesforce çerezleri döndürülmedi"
+	},
+	"error_no_data": {
+		"message": "Veri olmadan Tab tanımlanamaz.",
+		"description": "[hata] veri göndermeden bir Tab almaya çalışıldı"
+	},
+	"error_no_headers": {
+		"message": "Başlıklar bulunamadı.",
+		"description": "[hata] Uzantı, favori düğmesinin nereye konulacağını bulamadı"
+	},
+	"error_no_matching_tab": {
+		"message": "Eşleşen Tab bulunamadı.",
+		"description": "[hata] hiçbir Tab alınmadı"
+	},
+	"error_no_message": {
+		"message": "Gönderilecek bir mesaj belirtilmedi.",
+		"description": "[hata] kodun diğer bölümlerine gönderilecek mesaj bulunamadı"
+	},
+	"error_no_object": {
+		"message": "Kontrol edilecek nesne yok!",
+		"description": "[hata] nesne iletilmedi"
+	},
+	"error_no_setup_tab": {
+		"message": "Kurulum sekmesi bulunamadı.",
+		"description": "[hata] Uzantı, favori Tabs'in nereye konulacağını bulamadı."
+	},
+	"error_no_url": {
+		"message": "Kontrol edilecek URL yok!",
+		"description": "[hata] kontrol edilecek URL iletilmedi"
+	},
+	"error_not_initialized": {
+		"message": "henüz başlatılmadı.",
+		"description": "[hata] Bir değişken hazır olmadığında genel hata"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs işlenirken hata.",
+		"description": "[hata] Tabs işlenirken genel hata"
+	},
+	"error_redirect": {
+		"message": "Yeniden yönlendirilemiyor. Lütfen sayfayı yenileyin.",
+		"description": "[hata] Sayfa yeniden yönlendirmesinde genel hata."
+	},
+	"error_remove_not_favourite": {
+		"message": "Favori olmayan bir Tab kaldırılamaz!",
+		"description": "[hata] kullanıcı henüz kaydedilmemiş bir Tab kaldırmaya çalıştı"
+	},
+	"error_removing_all_tabs": {
+		"message": "Tüm Tabs kaldırılırken hata.",
+		"description": "[hata] Tüm Tabs kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Genel Tabs kaldırılırken hata.",
+		"description": "[hata] Genel Tabs kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_other_tabs": {
+		"message": "Diğer Tabs kaldırılırken hata.",
+		"description": "[hata] Diğer Tabs kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_tab": {
+		"message": "Tab kaldırılırken hata.",
+		"description": "[hata] Tab kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Tüm görünür Tab'lar kaldırılırken hata oluştu.",
+		"description": "[hata] Tüm görünür Tab'lar kaldırılırken kullanılan genel hata"
+	},
+	"error_required_params": {
+		"message": "Fonksiyon için gerekli parametreler geçilmedi",
+		"description": "[hata] geliştirici gerekli parametreler olmadan bir fonksiyon çağırmaya çalıştı"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Tab'lar varsayılanlara sıfırlanırken hata oluştu.",
+		"description": "[hata] Tab'ları varsayılanlarına sıfırlarken kullanılan genel hata"
+	},
+	"error_sync_nothing": {
+		"message": "Boş Tabs senkronize edilemez!",
+		"description": "[hata] hiçbir şeyi senkronize etmeye çalışıldı"
+	},
+	"error_tab_constructor": {
+		"message": "Tab sınıfını kullanmak için new Tab() yerine Tab.create() kullanın",
+		"description": "[hata] geliştiriciye Tab sınıfını nasıl kullanacağını söyleyin"
+	},
+	"error_tab_label": {
+		"message": "Etiket boş olmayan bir dize olmalıdır",
+		"description": "[hata] kullanıcı etiketsiz bir Tab oluşturmaya çalıştı"
+	},
+	"error_tab_not_found": {
+		"message": "Tab bulunamadı.",
+		"description": "[hata] Tab dizide bulunamadı"
+	},
+	"error_tab_object_creation": {
+		"message": "Bir nesne ile çağırırken başka bir şey iletmeyin.",
+		"description": "[hata] geliştirici tarafından uygulama hatası"
+	},
+	"error_tab_org": {
+		"message": "Kuruluş bir dize veya tanımsız olmalıdır",
+		"description": "[hata] kullanıcı geçersiz kuruluş değeriyle bir Tab oluşturmaya çalıştı"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Beklenmeyen anahtarlar bulundu:",
+		"description": "[hata] kullanıcı desteklenmeyen bazı özelliklerle bir Tab oluşturmaya çalıştı"
+	},
+	"error_tab_url": {
+		"message": "URL boş olmayan bir dize olmalıdır",
+		"description": "[hata] kullanıcı URL'siz bir Tab oluşturmaya çalıştı"
+	},
+	"error_tab_url_saved": {
+		"message": "Bu URL ile bir Tab zaten kaydedildi!",
+		"description": "[hata] Kullanıcı zaten favorilere eklenmiş bir Tab kaydetmeye çalıştı"
+	},
+	"error_tabcont_initialize": {
+		"message": "Şununla başlatılamıyor:",
+		"description": "[hata] Tab konteyneri başlatılamadı"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Geçersiz Tab(lar) algılandı.\nİlk oluşum:",
+		"description": "[hata] geçersiz Tabs iletildi"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer sınıfını kullanmak için new TabContainer() yerine TabContainer.create() kullanın",
+		"description": "[hata] geliştiriciye TabContainer sınıfını nasıl kullanacağını söyleyin"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService sınıfını kullanmak için new TranslationService() yerine TranslationService.create() kullanın",
+		"description": "[hata] geliştiriciye TranslationService sınıfını nasıl kullanacağını söyleyin"
+	},
+	"error_translator_not_initialized": {
+		"message": "çevirmen henüz başlatılmadı.",
+		"description": "[hata] TranslationService hazır değildi"
+	},
+	"error_unknown_message": {
+		"message": "Bilinmeyen mesaj alındı",
+		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
+	},
+	"error_unknown_request": {
+		"message": "Bilinmeyen istek.",
+		"description": "[hata] Tanınmayan bir mesaj alındıktan sonra genel hata"
+	},
+	"error_useless_remove": {
+		"message": "Kaldırılamıyor:\nDaha önce kaydedilmemiş bir sayfa kaldırılamaz",
+		"description": "[hata] kullanıcı henüz kaydedilmemiş bir sayfayı kaldırmaya çalıştı"
+	},
+	"error_useless_save": {
+		"message": "Kaydedilemiyor:\nBu sayfa zaten kaydedilmiş!",
+		"description": "[hata] kullanıcı zaten kaydedilmiş bir sayfayı kaydetmeye çalıştı"
+	},
+	"export": {
+		"message": "Dışa Aktar",
+		"description": "[açılır-pencere] dışa aktarma düğmesi"
+	},
+	"export_title": {
+		"message": "Tüm Tabs Dışa Aktar",
+		"description": "[açılır-pencere] dışa aktarma düğmesi üzerindeki başlık"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning Kurulum sayfasındaki mevcut alanda özel Tabs oluşturun ve yönetin.",
+		"description": "[manifest] Bu uzantının açıklaması"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Bu uzantının adı"
+	},
+	"file": {
+		"message": "dosya",
+		"description": "tek dosya"
+	},
+	"files": {
+		"message": "dosyalar",
+		"description": "birden çok dosya"
+	},
+	"flows": {
+		"message": "Akışlar",
+		"description": "[varsayılan-tab] Varsayılan Akışlar Tab'ı için etiket"
+	},
+	"general": {
+		"message": "Genel",
+		"description": "Genel ayarlar kategorisi için etiket"
+	},
+	"import": {
+		"message": "İçe Aktar",
+		"description": "[açılır-pencere] içe aktarma düğmesi"
+	},
+	"import_duplicate_description": {
+		"message": "Yinelenen Tabs yok sayılacaktır.<br />Aynı URL'ye sahip iki Tab yinelenen olarak kabul edilir.",
+		"description": "[içe-aktar] içe aktarma işleminin ne yaptığının açıklaması"
+	},
+	"import_invalid_file": {
+		"message": "Geçersiz dosya türü.\nYalnızca JSON dosyaları desteklenir.",
+		"description": "[hata] içe aktarma için kullanılan dosya bir JSON değil"
+	},
+	"import_successful": {
+		"message": "Başarıyla içe aktarıldı",
+		"description": "[içe-aktar] içe aktarma tamamlandı. Bundan sonra, kaç kaydın içe aktarıldığı gösterilecektir"
+	},
+	"import_tabs": {
+		"message": "Tabs İçe Aktar",
+		"description": "[modal-başlığı] içe aktarma işlemi için"
+	},
+	"import_title": {
+		"message": "JSON dosyasından $import_tabs",
+		"description": "[popup] içe aktarma düğmesindeki başlık"
+	},
+	"insert_another": {
+		"message": "Başka bir tane ekle",
+		"description": "[hata-başka-kuruluş-aç-modal] kullanıcı modalda aynı kuruluşu eklediğinde gösterilen mesaj"
+	},
+	"insert_another_org": {
+		"message": "Eklenen Kuruluş mevcut olan!\nLütfen başka bir Kuruluş ekleyin.",
+		"description": "[hata-başka-kuruluş-aç-modal] kullanıcı modalda aynı kuruluşu eklediğinde gösterilen mesaj"
+	},
+	"insert_valid_org": {
+		"message": "Lütfen geçerli bir Kuruluş girin!",
+		"description": "[hata-başka-kuruluş-aç-modal] kullanıcı modalda yanlış bir URL girdiğinde gösterilen mesaj"
+	},
+	"italic": {
+		"message": "İtalik",
+		"description": "İtalik metin için yazı tipi stili seçeneği"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce'un özel gezinme teknolojisi"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce'a Giriş Yap",
+		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce giriş sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"mycustomorg": {
+		"message": "benimözelkuruluşum",
+		"description": "Tab Güncelle modalı için yer tutucu"
+	},
+	"no_manifest_github": {
+		"message": "Manifestte geçersiz veya eksik GitHub homepage_url",
+		"description": "Manifestin homepage_url anahtarı bir GitHub bağlantısı kullanmıyor"
+	},
+	"no_match": {
+		"message": "Herhangi bir eylemle eşleşmedi",
+		"description": "[hata] Salesforce'ta anahtar istenen eylemle eşleşemediğinde"
+	},
+	"nss_invalid_url": {
+		"message": "Geçersiz URL tespit edildi.",
+		"description": "[SalesforceKurulumuDeğil] geçersiz bir URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Bu bir $salesforce_lightning Kurulum sayfası değil.",
+		"description": "[notSalesforceSetup] kullanıcı bir Salesforce sayfasında değil."
+	},
+	"open_here": {
+		"message": "Bu Tab sekmesinde aç.",
+		"description": "[open-other-org-modal] kullanıcının aynı tarayıcı sekmesinde açmasına izin veren radyo düğmesi"
+	},
+	"open_new_tab": {
+		"message": "Yeni bir Tab sekmesinde aç.",
+		"description": "[open-other-org-modal] kullanıcının yeni bir tarayıcı sekmesinde açmasına izin veren radyo düğmesi."
+	},
+	"open_settings": {
+		"message": "Uzantı Ayarlarını Aç",
+		"description": "[açılır pencere] ayarlar sayfasına yönlendirme düğmesi"
+	},
+	"open_setup": {
+		"message": "Kurulumu Aç",
+		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"opt_automatic_open_login": {
+		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklandığında $salesforce_login sayfasını otomatik olarak aç.",
+		"description": "[ayar] kullanıcı rastgele bir web sitesindeyken açılır pencereyi açtığında"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Bir Salesforce sayfasındayken açılır pencereye tıklandığında $salesforce_setup sayfasını otomatik olarak aç.",
+		"description": "[ayar] kullanıcı bir Salesforce web sitesindeyken açılır pencereyi açtığında"
+	},
+	"opt_en_default": {
+		"message": "en (Varsayılan ve Geri Dönüş)",
+		"description": "Uzantının varsayılan dil seçeneği"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Favori Sekmeleri Ana Sayfa ve Nesne Yöneticisi solunda tut.",
+		"description": "Gezinme çubuğunun soluna favori Sekmeleri sabitleme"
+	},
+	"opt_link_new_browser": {
+		"message": "Bağlantıları her zaman yeni bir tarayıcı sekmesinde aç.",
+		"description": "[ayar] kullanıcı favori Sekmeye tıkladığında yeni sekmede aç"
+	},
+	"opt_no_release_notes": {
+		"message": "Güncelleme sürüm notlarını gösterme.",
+		"description": "[ayar] kullanıcının eklentinin güncelleme sonrası sürüm notlarını göstermesini engellemesini sağlar"
+	},
+	"opt_no_update_notification": {
+		"message": "Mevcut güncellemeler hakkında uyarma.",
+		"description": "[ayarlar] kullanıcının uzantının yeni sürümleri aramasını engellemesine izin verir"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Açılır pencereye tıklandığında $salesforce_login sayfasını her zaman aynı Tab sekmesinde aç.",
+		"description": "[ayar]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Açılır pencereye tıklandığında $salesforce_setup sayfasını her zaman aynı Tab sekmesinde aç.",
+		"description": "[ayar]"
+	},
+	"opt_pick_language": {
+		"message": "Uzantı dilini seçin",
+		"description": "[ayarlar] kullanıcıya tercih ettiği dili seçmesini söyleyen etiket"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics kullanımını engelle (kullanıcı sayımlarında görünmez).",
+		"description": "[ayar] kullanıcının anonim analiz göndermesini engellemesini sağlar"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightning Navigasyon kullanımını engelleyin (kullanımdayken daha hızlı yükleme).",
+		"description": "[ayarlama] özellik açıklamasıyla Lightning Navigasyon'a izin verme"
+	},
+	"opt_same_tab_popup": {
+		"message": "Popup'a tıklandığında sayfayı aynı sekmede aç.",
+		"description": "[ayar] yeni tarayıcı sekmesi açılmasını önle"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce Dilini Takip Et (Salesforce Çerezlerini Okur)",
+		"description": "Salesforce'un dil ayarını kullanma seçeneği. Bu seçeneği kullanmak için kullanıcıların uzantının Salesforce çerezlerini okumasına izin vermesi gerekir."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce Kimliği otomatik denetlemesini atla.",
+		"description": "[ayar] Sekmeyi favoriye eklerken bağlantıda kimlik denetimini önle"
+	},
+	"or_drop": {
+		"message": "Veya $drop",
+		"description": "[içe aktarma] kullanıcının dosyaları faresiyle taşımasına ve bırakmasına izin verin"
+	},
+	"org_link": {
+		"message": "Kuruluş Bağlantısı",
+		"description": "[giriş-etiketi]"
+	},
+	"other_org_info": {
+		"message": "Diğer Kuruluş bilgisi",
+		"description": "[modal-başlığı]"
+	},
+	"other_org_placeholder": {
+		"message": "diğer-kuruluş",
+		"description": "[giriş-yer-tutucusu]"
+	},
+	"overwrite_tabs": {
+		"message": "Kaydedilmiş Tabs üzerine yaz.",
+		"description": "[etiket] içe aktarma işlemi sırasında tüm kaydedilmiş Tabs sil"
+	},
+	"preserve_org_tabs": {
+		"message": "Diğer kuruluşlar için Tabs koru.",
+		"description": "[etiket] içe aktarma işlemi sırasında tüm kuruluşa özgü Tabs tut"
+	},
+	"remove_tab": {
+		"message": "Tab Kaldır",
+		"description": "[alt] resimler çalışmadığında alternatif metin"
+	},
+	"req_downloads_open_popup": {
+		"message": "Lütfen uzantı açılır penceresini tarayıcınızın uzantılar menüsünden açın.",
+		"description": "[uyarı] kullanıcıdan devam etmek için uzantı açılır penceresine tıklamasını isteyin"
+	},
+	"req_downloads_perm_header": {
+		"message": "İstenen Dışa Aktarma işlemini başlatmak için\nLütfen İndirme iznini etkinleştirin.",
+		"description": "[izin_iste] indirme iznini etkinleştirmek için eylem çağrısı"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Bu işlem yalnızca bir kez istenir.",
+		"description": "[izin_iste] indirme iznini etkinleştirme açıklaması"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Tekrar sorma.",
+		"description": "[izin_iste] kullanıcı izinleri kalıcı olarak vermek istemediğinde etiket"
+	},
+	"req_permissions_header": {
+		"message": "Lütfen $salesforce_setup sayfalarına\notomatik olarak erişmemize izin verin.",
+		"description": "[req_permission] izin isteme sayfasının başlığı"
+	},
+	"req_permissions_paragraph": {
+		"message": "İsterseniz, bir $salesforce_setup sayfasına gider gitmez\nbu uzantıyı her seferinde tıklamak zorunda kalmadan\nfavori Tabs sekmelerinizin görünmesini sağlayabilirsiniz.",
+		"description": "[req_permission] izinlerin neden istendiğini açıklayan metin"
+	},
+	"required": {
+		"message": "gerekli",
+		"description": "[giriş] bir giriş alanını zorunlu olarak işaretler"
+	},
+	"required_info": {
+		"message": "= Gerekli Bilgi",
+		"description": "[modal] kullanıcıya bazı bilgilerin zorunlu olduğunu söyler"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[SalesforceKurulumuDeğil] Salesforce Lightning platformu"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforce oturum açma sayfası (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "Herhangi bir Salesforce Kurulum sayfası (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Kaydet",
+		"description": "Değişiklikleri uygula ve bellekte sakla"
+	},
+	"save_tab": {
+		"message": "Tab Olarak Kaydet",
+		"description": "[alt] resimler çalışmadığında alternatif metin"
+	},
+	"set_gen_preview": {
+		"message": "Sekme Önizleme",
+		"description": "Genel Sekme görünümünü önizlemek için etiket"
+	},
+	"set_gen_styler": {
+		"message": "Sekme Stilcisi",
+		"description": "Genel Sekmelerin stilini yapılandırmak için etiket"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Genel yapılandırma seçenekleri bölüm başlığı"
+	},
+	"set_move_available": {
+		"message": "Mevcut'a Taşı",
+		"description": "Seçilen öğeleri Mevcut'a taşımak için düğme başlığı"
+	},
+	"set_move_chosen": {
+		"message": "Seçildi'ye Taşı",
+		"description": "Seçilen öğeleri Seçildi'ye taşımak için düğme başlığı"
+	},
+	"set_org_preview": {
+		"message": "Organizasyon Önizleme",
+		"description": "Organizasyona özel Sekme görünümünü önizlemek için etiket"
+	},
+	"set_org_styler": {
+		"message": "Organizasyon Stilcisi",
+		"description": "Organizasyona özel Sekmelerin stilini yapılandırmak için etiket"
+	},
+	"set_tab_background_active_label": {
+		"message": "Etkin genel Sekmeleriniz için arka plan rengini girin.",
+		"description": "Etkin genel Sekmeler için arka plan rengini ayarlama etiketi"
+	},
+	"set_tab_background_label": {
+		"message": "Organizasyon Sekmeleriniz için arka plan rengini girin.",
+		"description": "Organizasyona özel Sekmeler için arka plan rengini ayarlama etiketi"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Etkin organizasyon Sekmeleriniz için kenarlık rengini girin.",
+		"description": "Etkin organizasyona özel Sekmeler için kenarlık rengini ayarlama etiketi"
+	},
+	"set_tab_border_color_label": {
+		"message": "Genel Sekmeleriniz için kenarlık rengini girin.",
+		"description": "Genel Sekmeler için kenarlık rengini ayarlama etiketi"
+	},
+	"set_tab_color_active_label": {
+		"message": "Etkin genel Sekmeleriniz için metin rengini girin.",
+		"description": "Etkin genel Sekmeler için metin rengini ayarlama etiketi"
+	},
+	"set_tab_color_label": {
+		"message": "Organizasyon Sekmeleriniz için metin rengini girin.",
+		"description": "Organizasyona özel Sekmeler için metin rengini ayarlama etiketi"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Etkin organizasyon Sekmeleriniz için bir veya daha fazla dekorasyon stili seçin.",
+		"description": "Etkin organizasyona özel Sekmeler için dekorasyon stilleri seçme istemi"
+	},
+	"set_tab_decoration_label": {
+		"message": "Genel Sekmeleriniz için bir veya daha fazla dekorasyon stili seçin.",
+		"description": "Genel Sekmeler için dekorasyon stilleri seçme istemi"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Etkin genel Sekmeleriniz için üzerine gelme arka plan rengini girin.",
+		"description": "Etkin genel Sekmeler için üzerine gelme arka plan rengini ayarlama etiketi"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Organizasyon Sekmeleriniz için üzerine gelme arka plan rengini girin.",
+		"description": "Organizasyona özel Sekmeler için üzerine gelme arka plan rengini ayarlama etiketi"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Etkin organizasyon Sekmeleriniz için gölge rengini girin.",
+		"description": "Etkin organizasyona özel Sekmeler için gölge rengini ayarlama etiketi"
+	},
+	"set_tab_shadow_label": {
+		"message": "Genel Sekmeleriniz için gölge rengini girin.",
+		"description": "Genel Sekmeler için gölge rengini ayarlama etiketi"
+	},
+	"set_tab_top_active_label": {
+		"message": "Etkin genel Sekmelerinizin üst çubuğu için rengi girin.",
+		"description": "Etkin genel Sekmeler için üst çubuk rengini ayarlama etiketi"
+	},
+	"set_toggle_preview": {
+		"message": "Etkin durumu değiştirmek için tıklayın.",
+		"description": "Etkin durum değiştirici kontrolün araç ipucu metni"
+	},
+	"settings": {
+		"message": "Ayarlar",
+		"description": "Ayarlar menüsü etiketi"
+	},
+	"setup_page": {
+		"message": "Kurulum Sayfası",
+		"description": "[SalesforceKurulumuDeğil] Salesforce ayarlarını değiştirmek için kullanılan sayfa"
+	},
+	"skip": {
+		"message": "Atla",
+		"description": "[izin_iste] izinlere izin VERMEME düğmesi"
+	},
+	"successfully_imported": {
+		"message": "Başarıyla içe aktarıldı",
+		"description": "[bildirim] kullanıcı harici bir dosyadan Tabs ekledi"
+	},
+	"tab_explain": {
+		"message": "Her öğenin 'label' ve 'url' dize olarak olmalıdır. Ek olarak, her öğenin 'org' dize olarak olabilir.",
+		"description": "[hata] bir Tab'in nasıl oluşturulması gerektiğini açıklar"
+	},
+	"tab_information": {
+		"message": "Tab bilgisi",
+		"description": "Tab güncelleme modalı için başlık"
+	},
+	"tab_label": {
+		"message": "Tab Etiketi",
+		"description": "Tab'in Etiket özelliği, adı"
+	},
+	"tab_org": {
+		"message": "Tab Kuruluşu",
+		"description": "Tab'in Kuruluş özelliği, tek bir Salesforce Kuruluşu içinse"
+	},
+	"tab_url": {
+		"message": "Tab URL'si",
+		"description": "Tab'in URL özelliği, işaret ettiği yer"
+	},
+	"table_delete": {
+		"message": "Tab Sil",
+		"description": "[açılır-pencere] silme düğmesi olan sütun için yardımcı metin"
+	},
+	"table_org": {
+		"message": "Kuruluş Tab'i mi",
+		"description": "[açılır-pencere] kuruluş onay kutusu olan sütun için yardımcı metin"
+	},
+	"table_row_label": {
+		"message": "Bu URL için etiketi girin",
+		"description": "[açılır-pencere] Tab adı olan giriş alanı"
+	},
+	"table_row_org": {
+		"message": "Bu Tab'in yalnızca bu Kuruluş için kullanılabilir olmasını istiyorsanız tıklayın.",
+		"description": "[açılır-pencere] Tab'i kuruluşa özgü olarak değiştirmek için onay kutusu"
+	},
+	"table_row_org_name": {
+		"message": "Bu Tab'in kullanılabilir olduğu Kuruluş.",
+		"description": "[açılır-pencere] kuruluş adı olan giriş alanı"
+	},
+	"table_row_url": {
+		"message": "Yönlendirilmek istediğiniz alt_URL'yi girin.",
+		"description": "[açılır-pencere] Tab URL'si olan giriş alanı"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "kullanıcının favori bağlantıları"
+	},
+	"tabs_saved": {
+		"message": "Tabs kaydedildi.",
+		"description": "[bildirim] Tabs başarıyla saklandı."
+	},
+	"theme_dark": {
+		"message": "Temayı Koyu Olarak Değiştir",
+		"description": "[açılır-pencere] temayı değiştirmek için ay üzerindeki başlık"
+	},
+	"theme_light": {
+		"message": "Temayı Açık Olarak Değiştir",
+		"description": "[açılır-pencere] temayı değiştirmek için güneş üzerindeki başlık"
+	},
+	"underline": {
+		"message": "Altı Çizili",
+		"description": "Sekme metnini altı çizili yapmak için dekorasyon stili seçeneği"
+	},
+	"underline_wavy": {
+		"message": "Dalgalı Altı Çizili",
+		"description": "Sekme metnine dalgalı altı çizili uygulamak için dekorasyon stili seçeneği"
+	},
+	"update_available": {
+		"message": "Güncelleme mevcut",
+		"description": "uzantı için yeni bir güncelleme mevcut"
+	},
+	"upload": {
+		"message": "Yükle",
+		"description": "[içe-aktar] kullanıcının dosyalarına göz atmasına ve doğru olanı seçmesine izin verin"
+	},
+	"users": {
+		"message": "Kullanıcılar",
+		"description": "ManageUsers/home ile ilgili sayfanın adı"
+	},
+	"where_to": {
+		"message": "Nereye?",
+		"description": "[başka-kuruluş-aç-modal] modal için geri dönüş başlığı"
+	}
+}

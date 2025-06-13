@@ -1,5 +1,7 @@
 "use strict";
 import { EXTENSION_NAME } from "/constants.js";
+import ensureTranslatorAvailability from "/translator.js";
+
 import {
 	generateCheckboxWithLabel,
 	generateSection,
@@ -51,18 +53,20 @@ const reader = new FileReader();
  *   inputContainer: HTMLInputElement
  * }} An object containing the modal's parent element, the save button, the close button, and the file input element.
  */
-function generateSldsImport() {
-	const { modalParent, article, saveButton, closeButton } = generateSldsModal(
-		"Import Tabs",
-	);
+async function generateSldsImport() {
+	const translator = await ensureTranslatorAvailability();
+	const { modalParent, article, saveButton, closeButton } =
+		await generateSldsModal(
+			await translator.translate("import_tabs"),
+		);
 	closeButton.id = CLOSE_MODAL_ID;
-	const { section, divParent } = generateSection();
+	const { section, divParent } = await generateSection();
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
 	divParent.style.alignItems = "center";
 	divParent.style.flexDirection = "column";
 	article.appendChild(section);
-	const { fileInputWrapper, inputContainer } = generateSldsFileInput(
+	const { fileInputWrapper, inputContainer } = await generateSldsFileInput(
 		IMPORT_ID,
 		IMPORT_FILE_ID,
 		".json,application/json",
@@ -73,19 +77,20 @@ function generateSldsImport() {
 	style.textContent = ".hidden { display: none; }";
 	divParent.appendChild(style);
 	const duplicateWarning = document.createElement("span");
-	duplicateWarning.innerHTML =
-		"Duplicate tabs will be ignored.<br />Two tabs are considered duplicates if they have the same URL.";
+	duplicateWarning.textContent = await translator.translate(
+		"import_duplicate_description",
+	);
 	duplicateWarning.style.textAlign = "center";
 	divParent.append(duplicateWarning);
-	const overwriteCheckbox = generateCheckboxWithLabel(
+	const overwriteCheckbox = await generateCheckboxWithLabel(
 		OVERWRITE_ID,
-		"Overwrite saved tabs.",
+		"overwrite_tabs",
 		false,
 	);
 	divParent.appendChild(overwriteCheckbox);
-	const otherOrgCheckbox = generateCheckboxWithLabel(
+	const otherOrgCheckbox = await generateCheckboxWithLabel(
 		OTHER_ORG_ID,
-		"Preserve tabs for other orgs.",
+		"preserve_org_tabs",
 		true,
 	);
 	otherOrgCheckbox.classList.add("hidden");
@@ -108,21 +113,10 @@ reader.onload = async (e) => {
 		);
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
-		showToast(`Successfully imported ${importedNum} tabs.`, true);
-		if (jsonString.includes("tabTitle")) {
-			// export and toast
-			chrome.runtime.sendMessage({
-				message: { what: "export", tabs: allTabs },
-			});
-			showToast(
-				"You've imported using the deprecated 'tabTitle'!\nThe download of the updated file has begun.\nFrom now on, use the newly downloaded file please.\nThe use of such file will be discontinued with a later release.",
-				false,
-				true,
-			);
-		}
+		showToast(["import_successful", importedNum, "tabs"], true);
 	} catch (error) {
 		showToast(
-			`Error during import:\n${error.message}`,
+			["error_import", error.message],
 			false,
 		);
 	}
@@ -149,7 +143,7 @@ function listenToFileUpload(modalParent) {
 	function readFile(file) {
 		if (file.type !== "application/json") {
 			return showToast(
-				`Invalid file type.\nOnly JSON files are supported.`,
+				"import_invalid_file",
 				false,
 			);
 		}
@@ -158,20 +152,44 @@ function listenToFileUpload(modalParent) {
 		reader.readAsText(file);
 	}
 	const dropArea = document.getElementById(IMPORT_ID);
+	/**
+	 * Handles file selection via input change event.
+	 * Prevents default behavior and reads the first selected file.
+	 *
+	 * @param {Event} event - The change event triggered by the file input.
+	 */
 	dropArea.addEventListener("change", function (event) {
 		event.preventDefault();
 		readFile(event.target.files[0]);
 	});
+	/**
+	 * Handles the dragover event to allow file drop.
+	 * Prevents default behavior to enable dropping files on the drop area.
+	 *
+	 * @param {DragEvent} event - The dragover event triggered when dragging files over the drop area.
+	 */
 	dropArea.addEventListener("dragover", function (event) {
 		event.preventDefault();
 		//console.log('dragover')
 		//dropArea.classList.add("slds-has-drag-over");
 	});
+	/**
+	 * Handles the dragleave event when dragged files leave the drop area.
+	 * Prevents default behavior and can be used to update UI (e.g., remove highlight).
+	 *
+	 * @param {DragEvent} event - The dragleave event triggered when dragging files leaves the drop area.
+	 */
 	dropArea.addEventListener("dragleave", function (event) {
 		event.preventDefault();
 		//console.log('dragleave')
 		//dropArea.classList.remove("slds-has-drag-over");
 	});
+	/**
+	 * Handles the drop event of files onto the drop area.
+	 * Prevents default behavior and reads all dropped files.
+	 *
+	 * @param {DragEvent} event - The drop event containing the dropped files.
+	 */
 	dropArea.addEventListener("drop", function (event) {
 		event.preventDefault();
 		Array.from(event.dataTransfer.files).forEach((f) => readFile(f));
@@ -182,15 +200,15 @@ function listenToFileUpload(modalParent) {
  * Displays the file import modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
  */
-function showFileImport() {
+async function showFileImport() {
 	if (
 		getSetupTabUl().querySelector(`#${IMPORT_ID}`) != null ||
 		document.getElementById(MODAL_ID) != null
 	) {
-		return showToast("Close the other modal first!", false);
+		return showToast("error_close_other_modal", false);
 	}
 
-	const { modalParent, saveButton } = generateSldsImport();
+	const { modalParent, saveButton } = await generateSldsImport();
 
 	getModalHanger().appendChild(modalParent);
 
@@ -198,13 +216,17 @@ function showFileImport() {
 	listenToFileUpload(modalParent);
 }
 
-// listen from saves from the action page
-chrome.runtime.onMessage.addListener(function (message, _, sendResponse) {
-	if (message == null || message.what == null) {
-		return;
+/**
+ * Displays the file import modal to the user.
+ * If an error occurs during the display, shows an error toast notification.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
+export async function createImportModal() {
+	try {
+		await showFileImport();
+	} catch (error) {
+		showToast(error, false);
 	}
-	if (message.what == "add") {
-		sendResponse(null);
-		showFileImport();
-	}
-});
+}

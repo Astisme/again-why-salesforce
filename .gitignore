@@ -2,4 +2,8 @@ manifest.json
 .vscode
 deno.lock
 bin/*.zip
+bin/*.dmg
 */bundled*
+missing-keys-report.json
+dmg_staging
+safari-*/

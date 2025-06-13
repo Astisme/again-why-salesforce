@@ -1,14 +1,23 @@
 // deno-lint-ignore-file no-window
 "use strict";
-import { handleSwitchColorTheme, initTheme } from "../themeHandler.js";
 import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 import {
-	LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-	MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
+	BROWSER,
+	CMD_EXPORT_ALL,
+	CMD_IMPORT,
+	CMD_OPEN_SETTINGS,
+	FRAME_PATTERNS,
+	ISSAFARI,
+	openSettingsPage,
+	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
+import ensureTranslatorAvailability from "/translator.js";
 
+import { handleSwitchColorTheme } from "../themeHandler.js";
+
+const translator = await ensureTranslatorAvailability();
 const allTabs = await TabContainer.create();
 
 const html = document.documentElement;
@@ -24,7 +33,6 @@ let loggers = [];
  * Initializes the theme SVG elements based on the current theme and updates visibility.
  */
 function initThemeSvg() {
-	initTheme();
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
 	elementToShow.classList.remove("invisible", "hidden");
@@ -33,47 +41,11 @@ function initThemeSvg() {
 initThemeSvg();
 
 /**
- * Sends a message to the background script with the specified message.
- *
- * @param {Object} message - The message to send.
- * @param {function} callback - The callback to execute after sending the message.
- */
-function pop_sendMessage(message, callback) {
-	/**
-	 * Invoke the runtime to send the message
-	 *
-	 * @param {Object} message - The message to send
-	 * @param {function} callback - The callback to execute after sending the message
-	 */
-	function sendMessage(message, callback) {
-		return chrome.runtime.sendMessage(
-			{ message },
-			callback,
-		);
-	}
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			sendMessage(
-				message,
-				(response) => {
-					if (chrome.runtime.lastError) {
-						reject(chrome.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
-	sendMessage(message, callback);
-}
-
-/**
  * Finds the current tab of the browser then calls the callback, if available. otherwise returns a Promise
  * @param {function|undefined} callback - the function to call when the result is found.
  */
 function pop_getCurrentBrowserTab(callback) {
-	return pop_sendMessage({ what: "browser-tab" }, callback);
+	return sendExtensionMessage({ what: "browser-tab" }, callback);
 }
 
 // Get the current tab. If it's not salesforce setup, redirect the popup
@@ -85,7 +57,7 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
 	) {
 		// we're not in Salesforce Setup
-		window.location.href = chrome.runtime.getURL(
+		window.location.href = BROWSER.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
 				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
 			}`,
@@ -93,11 +65,8 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 	} else {
 		// we're in Salesforce Setup
 		// check if we have all the optional permissions available
-		const permissionsAvailable = await chrome.permissions.contains({
-			origins: [
-				MY_SALESFORCE_SETUP_COM_OPERATING_PATTERN,
-				LIGHTNING_FORCE_COM_OPERATING_PATTERN,
-			],
+		const permissionsAvailable = await BROWSER.permissions.contains({
+			origins: FRAME_PATTERNS,
 		});
 		if (
 			!permissionsAvailable &&
@@ -106,8 +75,8 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 				"true"
 		) {
 			// if we do not have them, redirect to the request permission page
-			globalThis.location = await chrome.runtime.getURL(
-				"action/req_permissions/req_permissions.html",
+			globalThis.location = await BROWSER.runtime.getURL(
+				"action/req_permissions/req_permissions.html?whichid=hostpermissions",
 			);
 			// nothing else will happen from this file
 		}
@@ -133,7 +102,7 @@ function switchTheme() {
  * Sends a message indicating that data has been saved successfully.
  */
 function pop_afterSet() {
-	pop_sendMessage({ what: "saved" });
+	sendExtensionMessage({ what: "saved" });
 }
 
 /**
@@ -152,14 +121,21 @@ async function pop_extractOrgName(browserTab = null) {
  * Sends a message that will create an import modal in the Salesforce page.
  */
 function importHandler() {
-	pop_sendMessage({ what: "add" }, close);
+	sendExtensionMessage({ what: "add" }, close);
 }
 
 /**
  * Sends a message that will start the export procedure.
  */
 function pop_exportHandler() {
-	pop_sendMessage({ what: "export" }, close);
+	if (ISSAFARI || BROWSER.downloads != null) {
+		sendExtensionMessage({ what: "export" }, close);
+		return;
+	}
+	BROWSER.permissions.request({
+		permissions: ["downloads"],
+	});
+	setTimeout(close, 100);
 }
 
 /**
@@ -234,9 +210,9 @@ function inputLabelUrlListener(type) {
 		// check eventual duplicates
 		if (allTabs.exists({ url })) {
 			// show warning in salesforce
-			pop_sendMessage({
+			sendExtensionMessage({
 				what: "warning",
-				message: "A tab with this URL has already been saved!",
+				message: "error_tab_url_saved",
 				action: "make-bold",
 				url,
 			});
@@ -354,6 +330,7 @@ async function loadTabs(browserTab = null) {
 	}
 	// leave a blank at the bottom
 	tabAppendElement.append(createElement());
+	translator.updatePageTranslations();
 }
 
 /**
@@ -420,7 +397,7 @@ async function findTabsFromRows(orgName = null) {
 		// only needed when not rendering these tabs
 		//...allTabs.getTabsByOrg(orgName, false),
 	} catch (err) {
-		console.error("Error processing tabs:", err);
+		console.error("error_processing_tabs", err);
 		return [];
 	}
 }
@@ -467,6 +444,64 @@ document.getElementById("theme-selector").addEventListener(
 	"click",
 	switchTheme,
 );
-document.getElementById("import").addEventListener("click", importHandler);
-document.getElementById("export").addEventListener("click", pop_exportHandler);
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
+
+const importBtn = document.getElementById("import");
+importBtn.addEventListener("click", importHandler);
+const exportBtn = document.getElementById("export");
+exportBtn.addEventListener("click", pop_exportHandler);
+const settingsBtn = document.getElementById("open-settings");
+settingsBtn.addEventListener(
+	"click",
+	openSettingsPage,
+);
+
+const availableCommands = await sendExtensionMessage({
+	what: "get-commands",
+	commands: [
+		CMD_EXPORT_ALL,
+		CMD_IMPORT,
+		CMD_OPEN_SETTINGS,
+	],
+});
+
+const translatorSeparator = translator.getSeparator();
+/**
+ * Returns the substring of the input string before the first occurrence of the separator used by the translator.
+ *
+ * @param {string} i18n - The input string containing the separator.
+ * @returns {string} The substring before the separator, or the whole string if the separator is not found.
+ */
+function sliceBeforeSeparator(i18n) {
+	return i18n.slice(0, i18n.indexOf(translatorSeparator));
+}
+
+const datasetAttribute = translator.getTranslateAttributeDataset();
+/**
+ * Translates and appends a keyboard shortcut hint to a button’s localized text.
+ *
+ * @param {HTMLElement} button - The button element whose dataset contains the text to translate.
+ * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
+ * @returns {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
+ */
+async function addShortcutText(button, shortcut) {
+	return await translator.translate([
+		sliceBeforeSeparator(button.dataset[datasetAttribute]),
+		`(${shortcut})`,
+	]);
+}
+availableCommands?.forEach(async (ac) => {
+	switch (ac.name) {
+		case CMD_EXPORT_ALL:
+			exportBtn.title = await addShortcutText(exportBtn, ac.shortcut);
+			break;
+		case CMD_IMPORT:
+			importBtn.title = await addShortcutText(importBtn, ac.shortcut);
+			break;
+		case CMD_OPEN_SETTINGS:
+			settingsBtn.title = await addShortcutText(settingsBtn, ac.shortcut);
+			break;
+		default:
+			break;
+	}
+});

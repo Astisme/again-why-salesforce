@@ -74,6 +74,7 @@ button {
 	justify-content: center;
 	margin-left: 0.25rem;
 	width: 4rem;
+	min-width: fit-content;
 	min-height: 2.3rem;
 	color: var(--color);
 	background-color: var(--button-background-color);
@@ -146,5 +147,10 @@ html[data-theme="dark"] :is(.button, button) {
 .visibility-transition {
 	transition-property: opacity;
 	transition-duration: var(--transition-duration);
-	transition-timing-function: 1s;
+	transition-timing-function: var(--transition-timing-function);
+}
+
+input {
+	color: var(--color);
+	background-color: var(--background-color);
 }
