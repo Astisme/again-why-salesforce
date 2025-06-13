@@ -456,10 +456,8 @@ function setExtensionBrowserListeners() {
 				return;
 			}
 			// get the extension version
-			const manifest = BROWSER.runtime.getManifest();
-			const version = manifest.version;
 			// open github to show the release notes
-			const homepage = manifest.homepage_url;
+			const homepage = BROWSER.runtime.getManifest().homepage_url;
 			// Validate homepage URL (must be GitHub)
 			if (!homepage || !homepage.includes("github.com")) {
 				console.error("no_manifest_github");
