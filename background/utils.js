@@ -142,8 +142,8 @@ function exportHandler(tabs = null) {
  * Attempts to set the browser action popup to the export-permission request page.
  * If the URL for the permission page cannot be obtained, no popup is set.
  *
- * @returns {boolean}  
- *   `true` if the popup was successfully set to the permission request page;  
+ * @returns {boolean}
+ *   `true` if the popup was successfully set to the permission request page;
  *   `false` if the permission page URL could not be retrieved.
  */
 function requestExportPermission() {
@@ -163,7 +163,7 @@ function requestExportPermission() {
  * Checks whether downloads permission is already granted and launches the export handler.
  * If not, it triggers a notification prompting the user to open a popup to grant permission.
  *
- * @param {object[]|null} [tabs=null] 
+ * @param {object[]|null} [tabs=null]
  *   Optional array of tab objects to pass through to the export handler.
  * @returns {void}
  */

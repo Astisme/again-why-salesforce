@@ -365,15 +365,15 @@ async function checkKeepTabsOnLeft() {
  */
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
-        // write error in the console
-        (async () => {
-            const translator = await ensureTranslatorAvailability();
-            const label = await translator.translate("extension_label");
-            const fail = await translator.translate("error_no_setup_tab");
-            console.error(`${label} - ${fail}`);
-            setTimeout(delayLoadSetupTabs, 5000);
-        })();
-        return;
+		// write error in the console
+		(async () => {
+			const translator = await ensureTranslatorAvailability();
+			const label = await translator.translate("extension_label");
+			const fail = await translator.translate("error_no_setup_tab");
+			console.error(`${label} - ${fail}`);
+			setTimeout(delayLoadSetupTabs, 5000);
+		})();
+		return;
 	}
 	const parentOfSetupTabUl =
 		(document.querySelector("ul.pinnedItems.slds-grid") ??
