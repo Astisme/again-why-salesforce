@@ -396,7 +396,8 @@ let intervalCxm = null;
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 export async function checkAddRemoveContextMenus(what, callback = null) {
-	if (intervalCxm == null) {
+    const isFirstLaunch = intervalCxm == null;
+	if (isFirstLaunch) {
 		// Start periodic check
 		intervalCxm = setInterval(async () => {
 			if (!areMenuItemsVisible) {
@@ -409,7 +410,8 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
 		if (browserTabUrl == null) {
 			return;
 		}
-		await removeMenuItems();
+		if(!isFirstLaunch)
+            await removeMenuItems();
 		if (
 			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
 		) {
@@ -480,9 +482,6 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	}
 	bg_notify(message);
 });
-
-// create persistent menuItems
-//checkAddRemoveContextMenus();
 
 BROWSER.storage.onChanged.addListener((changes) => {
 	const pickedLanguageObj = changes[SETTINGS_KEY]?.newValue?.filter((el) =>

@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { process } from "node:process";
+import { env, exit } from "node:process";
 
 // Builds browser extensions for all supported browsers and creates a GitHub release
 const browsers: string[] = [
@@ -10,10 +10,10 @@ const browsers: string[] = [
 	//"edge",
 ];
 const artifacts: string[] = [];
-const releaseNotes: string = process.env.RELEASE_NOTES ?? "docs/CHANGELOG.md";
-const triggeringTag: string = process.env.TRIGGERING_TAG;
-const tagVersion: string = process.env.TAG_VERSION;
-const prerelease: boolean = process.env.PRERELEASE === "true";
+const releaseNotes: string = env.RELEASE_NOTES ?? "see release notes at docs/CHANGELOG.md";
+const triggeringTag: string = env.TRIGGERING_TAG;
+const tagVersion: string = env.TAG_VERSION;
+const prerelease: boolean = env.PRERELEASE === "true";
 
 console.log("Building browser extensions...");
 let errorHappened: boolean = false;
@@ -48,8 +48,6 @@ const releaseCommand = [
 	"--title",
 	`"${triggeringTag}"`,
 	"--notes",
-	`"See release notes at ${releaseNotes}"`,
-	"--notes-file",
 	releaseNotes,
 	"--generate-notes",
 	"--latest",
@@ -61,6 +59,6 @@ try {
 	execSync(releaseCommand, { stdio: "inherit" });
 } catch (error) {
 	console.error("✗ Failed to create release:", error);
-	process.exit(1);
+	exit(1);
 }
 console.log(`✓ Release ${triggeringTag} created successfully`);
