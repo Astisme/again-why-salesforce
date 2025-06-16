@@ -12,8 +12,11 @@ jobs:
     setup-and-build:
         runs-on: macos-latest
         defaults:
-          run:
-            shell: bash
+            run:
+                shell: bash
+
+        env:
+            GH_TOKEN: ${{ github.token }}
 
         steps:
             - name: Setup repo
@@ -34,7 +37,7 @@ jobs:
                   $0 ~ "^# "ver"$" {print_flag=1; next}
                   $0 ~ "^# v[0-9]+\\.[0-9]+\\.[0-9]+" && print_flag {exit}
                   print_flag {print}
-                ' "$FILE")" >> $GITHUB_ENV
+                ' "docs/CHANGELOG.md")" >> $GITHUB_ENV
                 echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
 
             - name: Setup Deno
