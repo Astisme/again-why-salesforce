@@ -49,7 +49,7 @@ const releaseCommand = [
 	"--title",
 	`"${triggeringTag}"`,
 	"--notes",
-	releaseNotes,
+	`"${releaseNotes}"`,
 	"--generate-notes",
 	"--latest",
 	prerelease ? "--prerelease" : "",

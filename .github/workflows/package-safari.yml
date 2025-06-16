@@ -3,7 +3,7 @@ name: Create Safari Release
 on:
   push:
     tags:
-      - "safari-v*.*.*"
+      - "v*.*.*"
 
 permissions:
     contents: write
@@ -45,7 +45,11 @@ jobs:
           echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
           # Extract substring before any additional '-' (like '-alpha')
           PURE_VERSION=${TAG_VERSION%%-*}
-          echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
+          echo "RELEASE_NOTES=$(awk -v ver="v$PURE_VERSION" '
+            $0 ~ "^# "ver"$" {print_flag=1; next}
+            $0 ~ "^# v[0-9]+\\.[0-9]+\\.[0-9]+" && print_flag {exit}
+            print_flag {print}
+          ' "$FILE")" >> $GITHUB_ENV
           OUTPUT_DIR=bin
           echo "OUTPUT_DIR=$OUTPUT_DIR" >> $GITHUB_ENV
           echo "ZIP_NAME=$OUTPUT_DIR/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV

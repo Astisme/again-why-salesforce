@@ -10,7 +10,11 @@ permissions:
 
 jobs:
     setup-and-build:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
+        defaults:
+          run:
+            shell: bash
+
         steps:
             - name: Setup repo
               uses: actions/checkout@v4
