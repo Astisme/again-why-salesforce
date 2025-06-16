@@ -51,7 +51,7 @@ const releaseCommand = [
 	"--notes",
 	`"${releaseNotes}"`,
 	"--generate-notes",
-	"--latest",
+	!prerelease && !errorHappened ? "--latest" : "",
 	prerelease ? "--prerelease" : "",
 	errorHappened ? "--draft" : "",
 	artifacts.join(" "),
