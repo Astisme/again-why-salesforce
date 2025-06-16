@@ -21,9 +21,34 @@ let errorHappened: boolean = false;
 for (const browser of browsers) {
 	console.log(`Building ${browser}...`);
 	try {
-		await new Deno.Command("deno", {
-			args: ["task", `build-${browser}`],
-		}).output();
+        const cmd = new Deno.Command("deno", {
+          args: ["task", `build-${browser}`],
+          stdout: "piped",
+          stderr: "piped",
+        });
+        const child = cmd.spawn();
+        // Stream stdout
+        (async () => {
+          const reader = child.stdout
+            .pipeThrough(new TextDecoderStream())
+            [Symbol.asyncIterator]();
+
+          for await (const chunk of reader) {
+            Deno.stdout.write(new TextEncoder().encode(chunk));
+          }
+        })();
+        // Stream stderr
+        (async () => {
+          const reader = child.stderr
+            .pipeThrough(new TextDecoderStream())
+            [Symbol.asyncIterator]();
+
+          for await (const chunk of reader) {
+            Deno.stderr.write(new TextEncoder().encode(chunk));
+          }
+        })();
+        const { code } = await child.status;
+        console.log(`Process exited with code ${code}`);
 	} catch (error) {
 		console.error(`✗ Failed to build ${browser}:`, error);
 		errorHappened = true;
