@@ -61,52 +61,53 @@ For Safari users, we recommend checking out our [installtion guide](https://gith
 Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 ## Wonderful Features
+
 TODO: Update to animated GIF
 
 ### Commands
 
 Use keyboard shortcuts when on Salesforce Setup to execute frequently used actions.
 
-<img src="/images/commands.png" height="200" title="Commands"/>     
+<img src="/images/commands.png" height="200" title="Commands"/>
 
 ### Context Menus
 
 Right-click on the page or on the Tabs to execute actions.
 
-<img src="/images/context-menu.png" height="200" title="Context Menu"/>     
+<img src="/images/context-menu.png" height="200" title="Context Menu"/>
 
 ### Open in Another Org
 
 Launch a Setup Tab in a different org with one click. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
 
-<img src="/images/open-other-org.png" height="200" title="Open Other Org"/> 
+<img src="/images/open-other-org.png" height="200" title="Open Other Org"/>
 
 ### Org-specific Tabs
 
 Customize Tabs per Salesforce org profile. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
 
-<img src="/images/popup-dark.png" height="200" title="Org-specific Tabs"/>  
+<img src="/images/popup-dark.png" height="200" title="Org-specific Tabs"/>
 
 ### Fast Save
 
 Quickly add or remove Tabs from within the Salesforce Setup page. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Save-a-Tab)
 
-<img src="/images/remove-tab.png" height="200" title="Fast Save"/>          
+<img src="/images/remove-tab.png" height="200" title="Fast Save"/>
 
 ### Import Tabs
 
 Bulk-import Tab configurations from another org. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
 
-<img src="/images/import-modal.png" height="200" title="Import Modal"/>     
+<img src="/images/import-modal.png" height="200" title="Import Modal"/>
 
 ## Browser Support
 
- Browser | Minimum Version 
- ------- | --------------- 
- Chrome  | 90+             
- Edge    | 90+          
- Firefox | 88+             
- Safari  | 16.0
+| Browser | Minimum Version |
+| ------- | --------------- |
+| Chrome  | 90+             |
+| Edge    | 90+             |
+| Firefox | 88+             |
+| Safari  | 16.0            |
 
 ## Dev Instructions
 
