@@ -11,7 +11,7 @@ const browsers: string[] = [
 ];
 const artifacts: string[] = [];
 const releaseNotes: string = env.RELEASE_NOTES ??
-	"see release notes at docs/CHANGELOG.md";
+	"docs/CHANGELOG.md";
 const triggeringTag: string = env.TRIGGERING_TAG;
 const tagVersion: string = env.TAG_VERSION;
 const prerelease: boolean = env.PRERELEASE === "true";
