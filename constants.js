@@ -65,6 +65,7 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 export const MANIFEST = BROWSER.runtime.getManifest();
+export const EXTENSION_VERSION = MANIFEST.version;
 /**
  * Sends a message to the background script with the specified message.
  *

@@ -1,6 +1,6 @@
 # Again, Why Salesforce – Privacy Policy
 
-_Last updated: June 12, 2025_
+_Last updated: June 2025_
 
 **Again, Why Salesforce** is a browser extension that communicates directly between your web browser and the Salesforce page (and Salesforce servers when using the extension in the same language as your Salesforce account). We do **not** collect or store any personal or identifiable information.
 
@@ -8,9 +8,11 @@ _Last updated: June 12, 2025_
 
 ## 1. Analytics & User Counting
 
-- We rely on [Simple Analytics](https://www.simpleanalytics.com/#why) to count daily active users.
-- Only anonymous, non-identifiable “ping” messages are sent. No IP addresses, cookies, or device fingerprints.
+- We rely on [Simple Analytics](https://www.simpleanalytics.com/#why) to have an estimate on user numbers and most used extension version.
+- Only anonymous, non-identifiable "ping" messages are sent. No IP addresses, cookies, or device fingerprints.
 - You can opt-out of analytics in the extension’s **Settings** at any time; see "Opt-Out" below.
+- All of these data is **automatically deleted** after 30 days.
+- The Analytics Data is always available [at this link](https://dashboard.simpleanalytics.com/extension.again.whysalesforce)
 
 ---
 
@@ -92,4 +94,4 @@ Even though we don’t collect personal data, you may disable analytics at any t
 
 If you have questions or wish to request data removal beyond what your browser controls, please contact us [via email](mailto:againwhysalesforce@duck.com) (`againwhysalesforce@duck.com`).
 
-We’ll notify you of policy changes via extension release notes.
+We'll notify you of policy changes via extension release notes.

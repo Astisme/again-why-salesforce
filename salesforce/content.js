@@ -24,6 +24,7 @@ import {
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
+    EXTENSION_VERSION,
 	getSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
@@ -1079,7 +1080,7 @@ async function checkInsertAnalytics() {
 	}
 	const img = document.createElement("img");
 	img.src =
-		"https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F";
+		`https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F${EXTENSION_VERSION}`;
 	img.alt = "";
 	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
 	whereToAppend.appendChild(img);

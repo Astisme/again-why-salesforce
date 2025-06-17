@@ -75,10 +75,9 @@ const releaseCommand = [
 	`"${triggeringTag}"`,
 	"--notes-file",
 	`"${releaseNotes}"`,
-	//"--generate-notes",
-	!prerelease && !errorHappened ? "--latest" : "",
-	prerelease ? "--prerelease" : "",
-	errorHappened ? "--draft" : "",
+	errorHappened ? "--draft" : (
+        prerelease ? "--prerelease" : "--latest" 
+    ),
 	artifacts.join(" "),
 ].filter(Boolean).join(" ");
 try {

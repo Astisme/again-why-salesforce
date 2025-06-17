@@ -41,7 +41,7 @@
 
 Click on your preferred browser icon to go to the extension store.
 
-For Safari users, we recommend checking out our [installtion guide](https://github.com/Astisme/again-why-salesforce/wiki/Safari-Installation).
+For Safari users, we recommend checking out our [installation guide](https://github.com/Astisme/again-why-salesforce/wiki/Safari-Installation).
 
 <a href="https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi" target="_blank">
   <img src="https://www.google.com/chrome/static/images/chrome-logo-m100.svg" title="Add to Chrome" width="80px" height="80px" align="right"/>
