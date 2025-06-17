@@ -41,9 +41,9 @@ switch (browser) {
 		manifest.permissions = manifest.permissions.filter((perm) =>
 			!notAllowedPermissions.includes(perm)
 		);
-		manifest.optional_permissions = manifest.optional_permissions.filter((optional_perm) =>
-			!notAllowedPermissions.includes(optional_perm)
-		);
+		manifest.optional_permissions = manifest.optional_permissions.filter((
+			optional_perm,
+		) => !notAllowedPermissions.includes(optional_perm));
 		break;
 	}
 	default:

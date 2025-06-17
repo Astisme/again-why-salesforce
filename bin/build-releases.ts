@@ -76,8 +76,8 @@ const releaseCommand = [
 	"--notes-file",
 	`"${releaseNotes}"`,
 	errorHappened ? "--draft" : (
-        prerelease ? "--prerelease" : "--latest" 
-    ),
+		prerelease ? "--prerelease" : "--latest"
+	),
 	artifacts.join(" "),
 ].filter(Boolean).join(" ");
 try {
