@@ -111,10 +111,9 @@ export const mockBrowser = {
 		getURL: (path: string): string => {
 			return path;
 		},
-    getManifest: (): object => {
-      return {
-      };
-    },
+		getManifest: (): object => {
+			return {};
+		},
 	},
 	i18n: {
 		getMessage: (_: string): string => {
