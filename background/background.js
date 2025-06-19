@@ -460,7 +460,7 @@ function setExtensionBrowserListeners() {
 			// open github to show the release notes
 			const homepage = MANIFEST.homepage_url;
 			// Validate homepage URL (must be GitHub)
-			if (!homepage || !homepage.startsWith("https://github.com")) {
+			if (!homepage || !homepage.startsWith("https://github.com/")) {
 				console.error("no_manifest_github");
 				return;
 			}

@@ -243,7 +243,7 @@ export async function checkForUpdates() {
 		const urlParts = homepageUrl?.split("github.com/");
 		// Validate homepage URL (must be GitHub)
 		if (
-			!homepageUrl || !homepageUrl.startsWith("https://github.com") ||
+			!homepageUrl || !homepageUrl.startsWith("https://github.com/") ||
 			urlParts.length < 2
 		) {
 			console.error("no_manifest_github");
