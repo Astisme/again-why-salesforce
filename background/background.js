@@ -12,6 +12,7 @@ import {
 	GENERIC_TAB_STYLE_KEY,
 	LIGHTNING_FORCE_COM,
 	LOCALE_KEY,
+	MANIFEST,
 	MY_SALESFORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
 	NO_RELEASE_NOTES,
@@ -457,9 +458,9 @@ function setExtensionBrowserListeners() {
 			}
 			// get the extension version
 			// open github to show the release notes
-			const homepage = BROWSER.runtime.getManifest().homepage_url;
+			const homepage = MANIFEST.homepage_url;
 			// Validate homepage URL (must be GitHub)
-			if (!homepage || !homepage.includes("github.com")) {
+			if (!homepage || !homepage.startsWith("https://github.com")) {
 				console.error("no_manifest_github");
 				return;
 			}

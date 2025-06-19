@@ -6,6 +6,7 @@ import {
 	ISCHROME,
 	ISFIREFOX,
 	ISSAFARI,
+	MANIFEST,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
 	WHAT_EXPORT,
@@ -236,14 +237,13 @@ export async function checkForUpdates() {
 		SETTINGS_KEY,
 	);
 	try {
-		const manifest = BROWSER.runtime.getManifest();
-		const currentVersion = manifest.version;
-		const homepageUrl = manifest.homepage_url;
+		const currentVersion = MANIFEST.version;
+		const homepageUrl = MANIFEST.homepage_url;
 		// Parse GitHub username and repo from homepage URL
 		const urlParts = homepageUrl?.split("github.com/");
 		// Validate homepage URL (must be GitHub)
 		if (
-			!homepageUrl || !homepageUrl.includes("github.com") ||
+			!homepageUrl || !homepageUrl.startsWith("https://github.com") ||
 			urlParts.length < 2
 		) {
 			console.error("no_manifest_github");
