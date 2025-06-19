@@ -34,7 +34,7 @@ export const mockBrowser = {
 		sendMessage: (
 			mess: Message,
 			callback?: (response?: any) => void,
-		): void => {
+		): Promise<any> | undefined => {
 			// Clear any previous errors
 			delete (chrome.runtime as any).lastError;
 
@@ -62,7 +62,21 @@ export const mockBrowser = {
 
 			if (callback) {
 				callback(response);
-			} else return response;
+				return;
+			}
+			return response;
+		},
+		getURL: (path: string): string => {
+			return path;
+		},
+    getManifest: (): object => {
+      return {
+      };
+    },
+	},
+	i18n: {
+		getMessage: (_: string): string => {
+			return "Again, Why Salesforce";
 		},
 	},
 };
