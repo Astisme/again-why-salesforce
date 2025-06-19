@@ -6,17 +6,16 @@
 
 > A lightweight Chrome/Edge/Firefox/Safari extension that lets you create and manage custom Setup Tabs for your most-used Salesforce Setup pages.
 
-## Badges
 
 [![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)](https://github.com/Astisme/again-why-salesforce/releases)
 [![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white)](https://github.com/Astisme/again-why-salesforce/commits/main/)
 [![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636)](https://github.com/Astisme/again-why-salesforce/blob/main/LICENSE)
 [![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce)](https://github.com/Astisme/again-why-salesforce/#)
 [![Chrome users](https://img.shields.io/chrome-web-store/users/bceeoimjhgjbihanbiifgpndmkklajbi?label=Chrome%20Users&color=blue)](https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi)
-[![Firefox users](https://img.shields.io/amo/users/again@why.salesforce?label=Firefox%20Users&color=red)](https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/)
 [![Edge users](https://img.shields.io/badge/dynamic/json?label=Edge%20Users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fdfdjpokbfeaamjcomllncennmfhpldmm)](https://microsoftedge.microsoft.com/addons/detail/dfdjpokbfeaamjcomllncennmfhpldmm)
+[![Firefox users](https://img.shields.io/amo/users/again@why.salesforce?label=Firefox%20Users&color=red)](https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/)
 [![Safari users](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsimpleanalytics.com%2Fextension.again.whysalesforce.json%3Fversion%3D5%26fields%3Dvisitors%26start%3Dtoday-7d%26info%3Dfalse%26browser_name%3DSafari&query=visitors&label=Safari%20Users)](https://github.com/Astisme/again-why-salesforce/releases)
-<a href="https://dashboard.simpleanalytics.com/extension.again.whysalesforce" referrerpolicy="origin" target="_blank"><picture><source srcset="https://simpleanalyticsbadges.com/extension.again.whysalesforce?mode=dark" media="(prefers-color-scheme: dark)" /><img src="https://simpleanalyticsbadges.com/extension.again.whysalesforce?mode=light" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" height="20px" /></picture></a>
+<a href="https://dashboard.simpleanalytics.com/extension.again.whysalesforce" referrerpolicy="origin" target="_blank"><picture><source srcset="https://simpleanalyticsbadges.com/extension.again.whysalesforce?mode=dark&counter=false" media="(prefers-color-scheme: dark)" /><img src="https://simpleanalyticsbadges.com/extension.again.whysalesforce?mode=light&counter=false" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" height="20px" /></picture></a>
 
 <!--
 ![Chrome stars](https://img.shields.io/chrome-web-store/stars/:storeId)
@@ -29,22 +28,17 @@
 
 ## Table of Contents
 
-1. [Install](#install)
+1. [Fast Install](#fast-install)
 2. [Wonderful Features](#wonderful-features)
-3. [Usage Example](#usage-example)
-4. [Browser Support](#browser-support)
-5. [Dev Instructions](#dev-instructions)
-6. [Contributing](#contributing)
-7. [Contributors](#contributors)
+3. [Browser Support](#browser-support)
+4. [Dev Instructions](#dev-instructions)
+5. [Contributing](#contributing)
+6. [Contributors](#contributors)
 
-## Install
+## Fast Install
 
-Click on your preferred browser icon to go to the extension store.
-
-For Safari users, we recommend checking out our [installation guide](https://github.com/Astisme/again-why-salesforce/wiki/Safari-Installation).
-
-<a href="https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi" target="_blank">
-  <img src="https://www.google.com/chrome/static/images/chrome-logo-m100.svg" title="Add to Chrome" width="80px" height="80px" align="right"/>
+<a href="https://github.com/Astisme/again-why-salesforce/releases" target="_top">
+  <img src="https://developer.apple.com/assets/elements/icons/safari-macos-11/safari-macos-11-128x128_2x.png" title="Add to Safari" width="80px" height="80px" align="right"/>
 </a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/" target="_blank">
   <img src="https://www.mozilla.org/media/protocol/img/logos/firefox/browser/logo.eb1324e44442.svg" title="Add to Firefox" width="80px" height="80px" align="right"/>
@@ -52,9 +46,14 @@ For Safari users, we recommend checking out our [installation guide](https://git
 <a href="https://microsoftedge.microsoft.com/addons/detail/dfdjpokbfeaamjcomllncennmfhpldmm" target="_blank">
   <img src="https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/2c3f3c46bd764335beec466a0acfde0e.png" title="Add to Edge" width="80px" height="80px" align="right"/>
 </a>
-<a href="https://github.com/Astisme/again-why-salesforce/releases" target="_top">
-  <img src="https://developer.apple.com/assets/elements/icons/safari-macos-11/safari-macos-11-128x128_2x.png" title="Add to Safari" width="80px" height="80px" align="right"/>
+<a href="https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi" target="_blank">
+  <img src="https://www.google.com/chrome/static/images/chrome-logo-m100.svg" title="Add to Chrome" width="80px" height="80px" align="right"/>
 </a>
+
+Click on your preferred browser icon to go to the extension store.
+
+For Safari users, we recommend checking out our [installation guide](https://github.com/Astisme/again-why-salesforce/wiki/Safari-Installation).
+
 
 ## Wonderful Features
 
@@ -119,7 +118,7 @@ For Safari users, we recommend checking out our [installation guide](https://git
 | Chrome  | 120             |
 | Edge    | 120             |
 | Firefox | 112             |
-| Safari  | 14.0            |
+| Safari  | 14              |
 
 <p align="center">
 	<img src="/images/browsers.gif" width="50%" title="Supported Browsers"/>
@@ -127,26 +126,26 @@ For Safari users, we recommend checking out our [installation guide](https://git
 
 ## Dev Instructions
 
-If you prefer to self-host or start contibuting, run:
+If you prefer to self-host or start contibuting, run one of the following commands to generate the `manifest.json` file:
 
 - **Chrome**: `deno task dev-chrome`
 - **Edge**: `deno task dev-chrome`
 - **Firefox**: `deno task dev-firefox`
 - **Safari**: `deno task dev-safari`
 
-Then load the unpacked extension in your browser’s developer mode.
+Then load the unpacked extension in your browser’s developer mode (search online `how to load unpacked extension for ` + your browser).
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](/docs/CONTRIBUTING.md) for details on code style, tests, and commit conventions. Then:
 
-1. Fork the repo
-2. Pick an unassigned issue and comment to claim it
-3. Submit a PR following our semantic commit guidelines
+1. [Fork the repo](https://github.com/Astisme/again-why-salesforce/fork).
+2. Pick an unassigned issue and comment to claim it.
+3. Submit a PR following our guidelines.
 
 ## Contributors
 
-- [Warren Walters](https://www.linkedin.com/in/walters954/) (First creator and owner of [Why Salesforce](https://github.com/walters954/why-salesforce)
+- [Warren Walters](https://www.linkedin.com/in/walters954/) (First creator and owner of [Why Salesforce](https://github.com/walters954/why-salesforce))
 - [Chris Rouse](https://www.linkedin.com/in/chris-rouse/) (Why Salesforce's port to Firefox)
 - [Astisme](https://github.com/Astisme/) (Owner and maintainer of Again, Why Salesforce)
 
