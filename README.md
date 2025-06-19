@@ -64,39 +64,50 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 ### Settings and Tab Styles
 
+<p align="center">
 Update the extension settings and set the Tab style to make them your own!
-
-<img src="/images/settings-and-decorations.gif" height="200" title="Settings and Decorations"/>
+    <img src="/images/settings-and-decorations.gif" width="50%" title="Settings and Decorations"/>
+</p>
 
 ### Commands
 
-Use keyboard shortcuts when on Salesforce Setup to execute frequently used actions.
 
-<img src="/images/commands.gif" height="200" title="Commands"/>
+<p align="center">
+Use keyboard shortcuts when on Salesforce Setup to execute frequently used actions.
+	<img src="/images/commands.gif" width="50%" title="Commands"/>
+</p>
 
 ### Context Menus
 
-Right-click on the page or on the Tabs to execute actions.
 
-<img src="/images/context-menus.gif" height="200" title="Context Menu"/>
+<p align="center">
+Right-click on the page or on the Tabs to execute actions.
+	<img src="/images/context-menus.gif" width="50%" title="Context Menu"/>
+</p>
 
 ### Open in Another Org
 
-Launch a Setup Tab in a different org with one click. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
 
-<img src="/images/open-other-org.gif" height="200" title="Open Other Org"/>
+<p align="center">
+Launch a Setup Tab in a different org with one click. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
+	<img src="/images/open-other-org.gif" width="50%" title="Open Other Org"/>
+</p>
 
 ### Org-specific Tabs
 
-Customize Tabs per Salesforce org profile. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
 
-<img src="/images/org-specific-tabs.gif" height="200" title="Org-specific Tabs"/>
+<p align="center">
+Customize Tabs per Salesforce org profile. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
+	<img src="/images/org-specific-tabs.gif" width="50%" title="Org-specific Tabs"/>
+</p>
 
 ### Import Tabs
 
-Bulk-import Tab configurations from another org. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
 
-<img src="/images/import.gif" height="200" title="Import functionality"/>
+<p align="center">
+Bulk-import Tab configurations from another org. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
+	<img src="/images/import.gif" width="50%" title="Import functionality"/>
+</p>
 
 ## Browser Support
 
@@ -107,7 +118,9 @@ Bulk-import Tab configurations from another org. [Read the wiki](https://github.
 | Firefox | 88+             |
 | Safari  | 16.0            |
 
-<img src="/images/browsers.gif" height="200" title="Supported Browsers"/>
+<p align="center">
+	<img src="/images/browsers.gif" width="50%" title="Supported Browsers"/>
+</p>
 
 ## Dev Instructions
 
