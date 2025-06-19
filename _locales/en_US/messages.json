@@ -7,6 +7,14 @@
 		"message": "Cannot remove a non favorite Tab!",
 		"description": "[error] the user tried to remove a Tab which was not saved yet"
 	},
+	"extension_description": {
+		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
+		"description": "[manifest] The description of this extension"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "The name of this extension"
+	},
 	"opt_keep_tabs_left": {
 		"message": "Keep favorite Tabs on the left of Home and Object Manager.",
 		"description": "Toggle to pin favorite Tabs to the left side of the navigation bar"
