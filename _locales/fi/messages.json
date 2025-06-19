@@ -1,0 +1,866 @@
+{
+	"allow": {
+		"message": "Salli",
+		"description": "[req_permission] painike, jolla myönnetään oikeudet"
+	},
+	"available": {
+		"message": "Saatavilla",
+		"description": "Osionotsikko kohteille, jotka voidaan lisätä"
+	},
+	"bold": {
+		"message": "Lihavoitu",
+		"description": "Fonttityylivalinta lihavoidulle tekstille"
+	},
+	"cancel": {
+		"message": "Peruuta",
+		"description": "otsikko tai tekstisisältö niille painikkeille, jotka estävät nykyisen toiminnon suorittamisen"
+	},
+	"cancel_close": {
+		"message": "Peruuta ja sulje",
+		"description": "otsikko tai tekstisisältö modal-ikkunan sulkemispainikkeelle"
+	},
+	"chosen": {
+		"message": "Valittu",
+		"description": "Osionotsikko kohteille, jotka on valittu"
+	},
+	"cmd_export_all": {
+		"message": "Näytä modaalinen ikkuna kaikkien tallennettujen Tabsien vientiin",
+		"description": "[command description] käyttäjä haluaa viedä kaikki Tabsit"
+	},
+	"cmd_import": {
+		"message": "Näytä modaalinen ikkuna uusien Tabsien tuomiseen",
+		"description": "[command description] käyttäjä haluaa tuoda uusia Tabsia"
+	},
+	"cmd_open_other_org": {
+		"message": "Näytä modaalinen ikkuna nykyisen sivun avaamiseksi toisessa Orgissa",
+		"description": "[command description] käyttäjä haluaa avata nykyisen sivun toisessa Orgissa"
+	},
+	"cmd_remove_tab": {
+		"message": "Poista nykyinen sivu Tab-listalta (jos tallennettu)",
+		"description": "[command description] käyttäjä haluaa poistaa nykyisen sivun"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tallenna nykyinen sivu Tab-listalle (jos ei vielä tallennettu)",
+		"description": "[command description] käyttäjä haluaa tallentaa nykyisen sivun"
+	},
+	"cmd_toggle_org": {
+		"message": "Näytä modaalinen ikkuna Org-arvon vaihtamiseksi nykyisellä sivulla (jos tallennettu)",
+		"description": "[command description] käyttäjä haluaa vaihtaa Org-arvon nykyisellä sivulla"
+	},
+	"cmd_update_tab": {
+		"message": "Näytä modaalinen ikkuna nykyisen sivun päivittämiseksi (jos tallennettu)",
+		"description": "[command description] käyttäjä haluaa päivittää nykyisen sivun"
+	},
+	"confirm_another_org": {
+		"message": "Vahvista tämän linkin avaaminen.",
+		"description": "[open-other-org-modal] pyytää käyttäjältä vahvistusta rakennetun linkin avaamiseen."
+	},
+	"confirm_update_extension": {
+		"message": "Uusi versio $extension_label on nyt saatavilla!",
+		"description": "tuntematon viesti on vastaanotettu kuuntelijalta"
+	},
+	"continue": {
+		"message": "Jatka",
+		"description": "tekstisisältö painikkeille, jotka sallivat nykyisen toiminnon suorittamisen"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Kaikki yleiset Tab",
+		"description": "[kontekstivalikko]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Poista kaikki Tab",
+		"description": "[pikavalikko]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Kaikki näkyvät Tab",
+		"description": "[kontekstivalikko]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Vie Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[pikavalikko]"
+	},
+	"cxm_move": {
+		"message": "🧭 Siirrä Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Aseta ensimmäiseksi",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Aseta viimeiseksi",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Siirrä vasemmalle",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Siirrä oikealle",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Avaa toisessa organisaatiossa",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[pikavalikko]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[pikavalikko]"
+	},
+	"cxm_remove": {
+		"message": "💥 Poista Tab(t)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Vasemmalla olevat Tabit",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Muut Tabit",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Oikealla olevat Tabit",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Tämä Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Palauta oletus Tabit",
+		"description": "[kontekstivalikko]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Asetusvalikon nimiö"
+	},
+	"cxm_update": {
+		"message": "✏️ Päivitä Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Vaihda organisaatiota",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Muut päivitykset",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Poista",
+		"description": "[popup] poista rivi"
+	},
+	"delete_all": {
+		"message": "$delete kaikki Tabs",
+		"description": "[ponnahdusikkuna] otsikko roskakorissa kaikkien Tabs tyhjentämiseksi"
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] antaa käyttäjän pudottaa tiedostonsa määritettyyn alueeseen"
+	},
+	"enable": {
+		"message": "Ota käyttöön",
+		"description": "[pyydä_lupa] painike lupien käyttöönottoon"
+	},
+	"error_adding_tab": {
+		"message": "Virhe Tabin lisäämisessä.",
+		"description": "[error] Yleinen virhe Tabin lisäämisessä"
+	},
+	"error_check_update": {
+		"message": "Virhe tarkistettaessa päivityksiä",
+		"description": "[virhe] yleinen virhe tarkistettaessa laajennuspäivityksiä"
+	},
+	"error_close_other_modal": {
+		"message": "Sulje ensin toinen modal!",
+		"description": "[toast] Käyttäjä yritti avata useampaa kuin yhtä modalia"
+	},
+	"error_cxm_check": {
+		"message": "Virhe valikon kohteiden tarkistuksessa",
+		"description": "[error] kontekstivalikon kohteita ei löytynyt"
+	},
+	"error_cxm_create": {
+		"message": "Virhe valikon kohteiden luomisessa",
+		"description": "[error] kontekstivalikon kohteita ei voitu alustaa"
+	},
+	"error_cxm_remove": {
+		"message": "Virhe valikon kohteiden poistamisessa",
+		"description": "[error] kontekstivalikon kohteita ei voitu poistaa"
+	},
+	"error_duplicate_tab": {
+		"message": "Tämä Tab on jo olemassa",
+		"description": "[error] Tab on kaksoiskappale"
+	},
+	"error_expand_url": {
+		"message": "Tyhjää URL-osoitetta ei voi laajentaa!",
+		"description": "[error] laajennettavaa URL-osoitetta ei annettu"
+	},
+	"error_expand_url_no_base": {
+		"message": "URL-osoitetta ei voi laajentaa ilman isäntää!",
+		"description": "[error] laajennettavan URL-osoitteen perusosoitetta ei annettu"
+	},
+	"error_extract_empty_url": {
+		"message": "Tyhjästä URL-osoitteesta ei voi poimia organisaation nimeä!",
+		"description": "[error] URL-osoitetta, josta organisaation nimi pitäisi poimia, ei annettu"
+	},
+	"error_failed_sync": {
+		"message": "Synkronointi epäonnistui.",
+		"description": "[error] Yleinen virhe Tabsien synkronoinnissa käyttäjän kanssa"
+	},
+	"error_failed_to_fetch": {
+		"message": "Ulkopuolisten resurssien noutaminen epäonnistui",
+		"description": "[virhe] Kutsu ulkoiselle verkkosivustolle ei onnistunut"
+	},
+	"error_get_with_no_org": {
+		"message": "Tabeja ei voida hakea ilman, että organisaatio on määritelty.",
+		"description": "[error] yritettiin hakea Tabeja ilman organisaatiotietoja"
+	},
+	"error_import": {
+		"message": "Virhe tuonnissa:\n",
+		"description": "[error] tuontiprosessissa ilmeni virhe"
+	},
+	"error_invalid_key": {
+		"message": "Toiminnolle lähetetty key-parametri on virheellinen",
+		"description": "[virhe] kehittäjä yritti kutsua toimintoa virheellisellä parametrilla"
+	},
+	"error_invalid_request": {
+		"message": "Virheellinen pyyntö.",
+		"description": "[error] Yleinen virhe virheellisen muotoilun viestin vastaanoton jälkeen"
+	},
+	"error_invalid_tab": {
+		"message": "Virheellinen Tab",
+		"description": "[error] Tab ei ole kelvollinen"
+	},
+	"error_link_with_id": {
+		"message": "Tätä sivua ei voi olla toisessa organisaatiossa, koska se sisältää Id:n!",
+		"description": "[open-other-org-modal] varoitus käyttäjälle, että linkki ei välttämättä ole olemassa toisessa organisaatiossa"
+	},
+	"error_many_matching_tab": {
+		"message": "Löytyi useampi kuin yksi vastaava Tab.",
+		"description": "[error] Tabeja palautettiin liikaa"
+	},
+	"error_many_tabs_found": {
+		"message": "Löydettiin enemmän kuin yksi Tab.",
+		"description": "[error] Useita Tabs-eja haettiin"
+	},
+	"error_minify_url": {
+		"message": "Tyhjää URL-osoitetta ei voi pienentää!",
+		"description": "[error] pienennettävää URL-osoitetta ei annettu"
+	},
+	"error_missing_favourite_id": {
+		"message": "Suosikkikuvaa ei voi hakea ilman Id:tä",
+		"description": "[error] suosikkikuvan id:tä ei annettu"
+	},
+	"error_missing_key": {
+		"message": "Avain ei löytynyt mistään",
+		"description": "[error] käännöstä ei löytynyt tiedostoista"
+	},
+	"error_no_array": {
+		"message": "Virheellinen taulukko tai taulukkoa ei annettu",
+		"description": "[error] kelvollista taulukkoa ei vastaanotettu"
+	},
+	"error_no_browser_tab": {
+		"message": "Aktiivista selaimen välilehteä ei löytynyt.",
+		"description": "[error] taustasivu ei onnistunut tunnistamaan aktiivista selaimen välilehteä"
+	},
+	"error_no_callback": {
+		"message": "Anna callback-funktio",
+		"description": "[error] metodiin loppuun kutsuttavaa funktiota ei annettu"
+	},
+	"error_no_cookies": {
+		"message": "Yhteensopivia evästeitä ei löytynyt",
+		"description": "[error] Salesforcen evästeitä ei palautettu"
+	},
+	"error_no_data": {
+		"message": "Tabia ei voi tunnistaa ilman tietoja.",
+		"description": "[error] yritettiin hakea Tabiä ilman datan lähettämistä"
+	},
+	"error_no_headers": {
+		"message": "Otsikoita ei löytynyt.",
+		"description": "[error] laajennus ei löytänyt paikkaa, johon suosikkipainike asetettaisiin"
+	},
+	"error_no_matching_tab": {
+		"message": "Yhtään vastaavaa Tabiä ei löytynyt.",
+		"description": "[error] vastaavia Tabeja ei palautettu"
+	},
+	"error_no_message": {
+		"message": "Lähetettävää viestiä ei määritelty.",
+		"description": "[error] viestiä ei löytynyt muun koodin osien lähettämistä varten"
+	},
+	"error_no_object": {
+		"message": "Tarkistettavaa objektia ei annettu!",
+		"description": "[error] objektia ei annettu tarkistettavaksi"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tabia ei löytynyt.",
+		"description": "[error] laajennus ei löytänyt paikkaa, johon tallennetut Tabit asetettaisiin"
+	},
+	"error_no_url": {
+		"message": "URL-osoitetta ei annettu tarkistettavaksi!",
+		"description": "[error] URL-osoitetta ei annettu tarkistettavaksi"
+	},
+	"error_not_initialized": {
+		"message": "Ei ole vielä alustettu.",
+		"description": "[error] Yleinen virhe, kun muuttuja ei ole valmis"
+	},
+	"error_processing_tabs": {
+		"message": "Virhe Tabsien käsittelyssä.",
+		"description": "[error] Yleinen virhe Tabsien käsittelyssä"
+	},
+	"error_redirect": {
+		"message": "Uudelleenohjaus ei onnistu. Päivitä sivu, ole hyvä.",
+		"description": "[error] Yleinen virhe sivun uudelleenohjauksessa"
+	},
+	"error_remove_not_favourite": {
+		"message": "Tabia, joka ei ole suosikki, ei voi poistaa!",
+		"description": "[error] käyttäjä yritti poistaa Tabiä, jota ei ole vielä tallennettu"
+	},
+	"error_removing_all_tabs": {
+		"message": "Virhe kaikkien Tabsien poistamisessa.",
+		"description": "[error] Yleinen virhe kaikkien Tabsien poistamisessa"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Virhe geneeristen Tabsien poistamisessa.",
+		"description": "[error] Yleinen virhe geneeristen Tabsien poistamisessa"
+	},
+	"error_removing_other_tabs": {
+		"message": "Virhe muiden Tabsien poistamisessa.",
+		"description": "[error] Yleinen virhe muiden Tabsien poistamisessa"
+	},
+	"error_removing_tab": {
+		"message": "Virhe Tabin poistamisessa.",
+		"description": "[error] Yleinen virhe Tabin poistamisessa"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Virhe kaikkia näkyviä Tab-poistoja suoritettaessa.",
+		"description": "[virhe] Yleinen virhe kaikkia näkyviä Tab-poistoja suoritettaessa"
+	},
+	"error_required_params": {
+		"message": "Toiminnolle vaadittuja parametreja ei ole välitetty",
+		"description": "[virhe] kehittäjä yritti kutsua toimintoa ilman tarvittavia parametreja"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Virhe oletus Tabien palautuksessa.",
+		"description": "[virhe] Yleinen virhe Tabien palautuksessa oletusarvoon"
+	},
+	"error_sync_nothing": {
+		"message": "Tyhjiä Tabeja ei voida synkronoida!",
+		"description": "[error] yritettiin synkronoida tyhjää sisältöä"
+	},
+	"error_tab_constructor": {
+		"message": "Käytä Tab.create() sen sijaan, että käyttäisit new Tab()",
+		"description": "[error] Kerro kehittäjälle, miten Tab-luokkaa käytetään"
+	},
+	"error_tab_label": {
+		"message": "Tunnisteen tulee olla ei-tyhjä merkkijono",
+		"description": "[error] käyttäjä yritti luoda Tabiä ilman tunnistetta"
+	},
+	"error_tab_not_found": {
+		"message": "Tabia ei löytynyt.",
+		"description": "[error] Tabiä ei sisällytetty taulukkoon"
+	},
+	"error_tab_object_creation": {
+		"message": "Kun kutsutaan objektilla, älä lähetä mitään muuta.",
+		"description": "[error] toteutusvirhe kehittäjän puolelta"
+	},
+	"error_tab_org": {
+		"message": "Organisaation tulee olla merkkijono tai undefined",
+		"description": "[error] käyttäjä yritti luoda Tabiä virheellisellä organisaatioarvolla"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Odottamattomia avaimia löytyi:",
+		"description": "[error] käyttäjä yritti luoda Tabiä ominaisuuksilla, joita ei tueta"
+	},
+	"error_tab_url": {
+		"message": "URL-osoitteen tulee olla ei-tyhjä merkkijono",
+		"description": "[error] käyttäjä yritti luoda Tabiä ilman URL-osoitetta"
+	},
+	"error_tab_url_saved": {
+		"message": "Tällä URLilla oleva Tab on jo tallennettu!",
+		"description": "[error] Käyttäjä yritti tallentaa jo tallennetun Tabin"
+	},
+	"error_tabcont_initialize": {
+		"message": "Ei voi alustaa seuraavilla",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Virheellisiä Tabeja havaittu.\nEnsimmäinen tapaus:",
+		"description": "[error] virheelliset Tabit on toimitettu"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Käytä TabContainer.create() sen sijaan, että käyttäisit new TabContainer()",
+		"description": "[error] Kerro kehittäjälle, miten TabContainer-luokkaa käytetään"
+	},
+	"error_translationservice_constructor": {
+		"message": "Käytä TranslationService.create() sen sijaan, että käyttäisit new TranslationService()",
+		"description": "[error] Kerro kehittäjälle, miten TranslationService-luokkaa käytetään"
+	},
+	"error_translator_not_initialized": {
+		"message": "translatoria ei ole vielä alustettu.",
+		"description": "[error] TranslationService ei ollut valmis"
+	},
+	"error_unknown_message": {
+		"message": "Tuntematon viesti vastaanotettu",
+		"description": "tuntematon viesti on vastaanotettu kuuntelijalta"
+	},
+	"error_unknown_request": {
+		"message": "Tuntematon pyyntö.",
+		"description": "[error] Yleinen virhe tuntemattoman viestin vastaanoton jälkeen"
+	},
+	"error_useless_remove": {
+		"message": "Ei voi poistaa:\nSivua, jota ei ole aiemmin tallennettu, ei voi poistaa",
+		"description": "[error] käyttäjä yritti poistaa sivua, jota ei ollut tallennettu"
+	},
+	"error_useless_save": {
+		"message": "Ei voi tallentaa:\nTämä sivu on jo tallennettu!",
+		"description": "[error] käyttäjä yritti tallentaa sivua, joka on jo tallennettu"
+	},
+	"export": {
+		"message": "Vie",
+		"description": "[popup] vientipainike"
+	},
+	"export_title": {
+		"message": "Vie kaikki Tabit",
+		"description": "[popup] vientipainikkeen otsikko"
+	},
+	"extension_description": {
+		"message": "Luo ja hallinnoi mukautettuja Tabeja käytettävissä olevassa tilassa Salesforce Lightning Setup -sivulla.",
+		"description": "[manifest] Tämän laajennuksen kuvaus"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Tämän laajennuksen nimi"
+	},
+	"file": {
+		"message": "tiedosto",
+		"description": "yksi tiedosto"
+	},
+	"files": {
+		"message": "tiedostot",
+		"description": "useita tiedostoja"
+	},
+	"flows": {
+		"message": "Virtaukset",
+		"description": "[oletus-tab] Oletusvirtaus Tabin tunniste"
+	},
+	"general": {
+		"message": "Yleiset",
+		"description": "Nimike yleisille asetuskategorioille"
+	},
+	"import": {
+		"message": "Tuo",
+		"description": "[popup] tuontipainike"
+	},
+	"import_duplicate_description": {
+		"message": "Duplikaatit Tabit ohitetaan.<br />Kaksi Tabiä katsotaan duplikaateiksi, jos niillä on sama URL.",
+		"description": "[import] kuvaus tuontiprosessista"
+	},
+	"import_invalid_file": {
+		"message": "Virheellinen tiedostotyyppi.\nVain JSON-tiedostot ovat tuettuja.",
+		"description": "[error] tuontiin käytetty tiedosto ei ole JSON"
+	},
+	"import_successful": {
+		"message": "Tuonti onnistui",
+		"description": "[import] tuonti on suoritettu. Tämän jälkeen näytetään tuontien määrä"
+	},
+	"import_tabs": {
+		"message": "Tuo Tab",
+		"description": "[modal-title] tuontiprosessia varten"
+	},
+	"import_title": {
+		"message": "$import_tabs JSON-tiedostosta",
+		"description": "[ponnahdusikkuna] otsikko tuontipainikkeessa"
+	},
+	"insert_another": {
+		"message": "Lisää toinen",
+		"description": "[error-open-other-org-modal] viesti, kun käyttäjä syöttää saman organisaation"
+	},
+	"insert_another_org": {
+		"message": "Syötetty Organisaatio on nykyinen!\nSyötä toinen Organisaatio, kiitos.",
+		"description": "[error-open-other-org-modal] viesti, kun käyttäjä syöttää saman organisaation"
+	},
+	"insert_valid_org": {
+		"message": "Syötä kelvollinen Organisaatio, kiitos!",
+		"description": "[error-open-other-org-modal] viesti, kun käyttäjä syöttää virheellisen URL:n"
+	},
+	"italic": {
+		"message": "Kursivoitu",
+		"description": "Fonttityylivalinta kursivoidulle tekstille"
+	},
+	"lightning_navigation": {
+		"message": "Lightning-navigointi",
+		"description": "Salesforcen mukautettu navigointiteknologia"
+	},
+	"login_to_salesforce": {
+		"message": "Kirjaudu Salesforceen",
+		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforcen kirjautumissivulle"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "paikkamerkki Tab-modalin päivitykselle"
+	},
+	"no_manifest_github": {
+		"message": "Manifestin GitHub homepage_url on virheellinen tai puuttuu",
+		"description": "Manifestin homepage_url-avain ei käytä GitHub-linkkiä"
+	},
+	"no_match": {
+		"message": "Yhtään vastaavaa toimintoa ei löytynyt",
+		"description": "[error] kun switch-lause ei löydä pyydettyä toimintoa"
+	},
+	"nss_invalid_url": {
+		"message": "Virheellinen URL havaittu.",
+		"description": "[eiSalesforce-asetus] virheellinen URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Tämä ei ole $salesforce_lightning asennussivu.",
+		"description": "[notSalesforceSetup] käyttäjä ei ole Salesforce-sivulla."
+	},
+	"open_here": {
+		"message": "Avaa tässä Tab.",
+		"description": "[open-other-org-modal] valintanappi, jonka avulla käyttäjä voi avata samassa selaimen Tab"
+	},
+	"open_new_tab": {
+		"message": "Avaa uudessa Tab.",
+		"description": "[open-other-org-modal] valintanappi, jonka avulla käyttäjä voi avata uudessa selaimen Tab."
+	},
+	"open_settings": {
+		"message": "Avaa laajennuksen asetukset",
+		"description": "[ponnahdusikkuna] painike ohjatakseen asetussivulle"
+	},
+	"open_setup": {
+		"message": "Avaa Setup",
+		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
+	},
+	"opt_automatic_open_login": {
+		"message": "Avaa $salesforce_login-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
+		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan satunnaisella verkkosivustolla"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Avaa $salesforce_setup-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
+		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan Salesforce-verkkosivustolla"
+	},
+	"opt_en_default": {
+		"message": "en (Oletus ja varajärjestelmä)",
+		"description": "Laajennuksen oletuskieliasetus"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Pidä suosikki-Tabit Kodin ja Objektien hallinnan vasemmalla puolella.",
+		"description": "Valinta suosikki-Tabien kiinnittämiseksi navigointipalkin vasemmalle puolelle"
+	},
+	"opt_link_new_browser": {
+		"message": "Avaa linkit aina uudessa selainvälilehdessä.",
+		"description": "[asetus] kun klikkaat suosikkitabiä, avaa se uudessa selainvälilehdessä"
+	},
+	"opt_no_release_notes": {
+		"message": "Älä näytä päivitysten julkaisutietoja.",
+		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää laajennusta näyttämästä julkaisutietoja päivityksen jälkeen"
+	},
+	"opt_no_update_notification": {
+		"message": "Älä varoita saatavilla olevista päivityksistä.",
+		"description": "[asetus] antaa käyttäjän estää laajennusta etsimästä uusia julkaisuja"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Avaa $salesforce_login-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
+		"description": "[asetus]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Avaa $salesforce_setup-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
+		"description": "[asetus]"
+	},
+	"opt_pick_language": {
+		"message": "Valitse laajennuksen kieli",
+		"description": "[asetus] otsikko, joka kehottaa käyttäjää valitsemaan haluamansa kielen"
+	},
+	"opt_prevent_analytics": {
+		"message": "Estä Simple Analyticsin käyttö (ei näy käyttäjämäärissä).",
+		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää anonyymien analytiikkojen lähettämisen"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Estä Lightning-navigoinnin käyttö (nopeampi lataus käytössä).",
+		"description": "[asetus] älä salli Lightning-navigointia ominaisuuden selityksen kanssa"
+	},
+	"opt_same_tab_popup": {
+		"message": "sivu samalla välilehdellä ponnahdusikkunan klikkauksessa.",
+		"description": "[asetus] estää uuden selainvälilehden avaamisen"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Seuraa Salesforce-kieltä (lukee Salesforce-evästeitä)",
+		"description": "Mahdollisuus käyttää Salesforcen kieliasetusta. Tämän vaihtoehdon käyttämiseksi käyttäjien on sallittava laajennuksen lukea Salesforcen evästeitä."
+	},
+	"opt_skip_link_detection": {
+		"message": "Ohita Salesforce -tunnuksen automaattinen tarkistus.",
+		"description": "[asetus] tallentaessa suosikkitabiä, älä tarkista linkin tunnusta"
+	},
+	"or_drop": {
+		"message": "Tai $drop",
+		"description": "[tuo] anna käyttäjän siirtää tiedostoja hiirellä ja vapauttaa ne"
+	},
+	"org_link": {
+		"message": "Organisaatiolinkki",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Toisen Organisaation tiedot",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "muu-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Korvaa tallennetut Tabit.",
+		"description": "[label] poista kaikki tallennetut Tabit tuonnin aikana"
+	},
+	"preserve_org_tabs": {
+		"message": "Säilytä Tabit muille organisaatioille.",
+		"description": "[label] säilytä kaikki organisaatiokohtaiset Tabit tuonnin aikana"
+	},
+	"remove_tab": {
+		"message": "Poista Tab",
+		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
+	},
+	"req_downloads_open_popup": {
+		"message": "Avaa laajennuksen ponnahdusikkuna selaimen laajennusvalikosta.",
+		"description": "[ilmoitus] pyydä käyttäjää napsauttamaan laajennuksen ponnahdusikkunaa jatkaaksesi"
+	},
+	"req_downloads_perm_header": {
+		"message": "Ota latausoikeus käyttöön\nkäynnistääksesi pyydetyn viennin.",
+		"description": "[pyydä_lupa] toimintakehotus latausoikeuden ottamiseksi käyttöön"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Tätä toimintoa pyydetään vain kerran.",
+		"description": "[pyydä_lupa] kuvaus latausoikeuden käyttöönotosta"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Älä kysy uudelleen.",
+		"description": "[req_permission] merkintä, kun käyttäjä ei halua antaa oikeuksia pysyvästi"
+	},
+	"req_permissions_header": {
+		"message": "Salli meidän käyttää\n$salesforce_setup-sivuja automaattisesti.",
+		"description": "[req_permission] käyttöoikeuksien pyyntösivun otsikko"
+	},
+	"req_permissions_paragraph": {
+		"message": "Jos haluat, voit saada suosikki Tabs näkyviin\nheti, kun siirryt $salesforce_setup-sivulle\nilman, että sinun tarvitsee napsauttaa tätä laajennusta joka kerta.",
+		"description": "[req_permission] teksti, joka selittää, miksi käyttöoikeuksia pyydetään"
+	},
+	"required": {
+		"message": "pakollinen",
+		"description": "[input] merkitsee, että syötekenttä on pakollinen"
+	},
+	"required_info": {
+		"message": "= Pakolliset tiedot",
+		"description": "[modal] ilmoittaa käyttäjälle, että tietyt tiedot ovat pakollisia"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning -alusta"
+	},
+	"salesforce_login": {
+		"message": "Salesforce -kirjautuminen",
+		"description": "Salesforcen kirjautumissivu (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce -asetukset",
+		"description": "mitkä tahansa Salesforce -asetussivut (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Tallenna",
+		"description": "Ota muutokset käyttöön ja tallenna ne muistiin"
+	},
+	"save_tab": {
+		"message": "Tallenna Tabina",
+		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
+	},
+	"set_gen_preview": {
+		"message": "Tab-esikatselu",
+		"description": "Nimike yleisten Tabien ulkoasun esikatselulle"
+	},
+	"set_gen_styler": {
+		"message": "Tab-tyylittäjä",
+		"description": "Nimike yleisten Tabien tyylin määrittämiselle"
+	},
+	"set_general_settings": {
+		"message": "Yleiset asetukset",
+		"description": "Osionotsikko yleisille määritysvalinnoille"
+	},
+	"set_move_available": {
+		"message": "Siirrä saataville",
+		"description": "Painikkeen otsikko valittujen kohteiden siirtämiseksi takaisin Saatavilla-osioon"
+	},
+	"set_move_chosen": {
+		"message": "Siirrä valittuihin",
+		"description": "Painikkeen otsikko valittujen kohteiden siirtämiseksi Valittu-osioon"
+	},
+	"set_org_preview": {
+		"message": "Organisaation esikatselu",
+		"description": "Nimike organisaatiokohtaisten Tabien ulkoasun esikatselulle"
+	},
+	"set_org_styler": {
+		"message": "Organisaation tyylittäjä",
+		"description": "Nimike organisaatiokohtaisten Tabien tyylin määrittämiselle"
+	},
+	"set_tab_background_active_label": {
+		"message": "Lisää taustaväri aktiivisille yleisille Tabeille.",
+		"description": "Nimike taustavärin asettamiseksi aktiivisille yleisille Tabeille"
+	},
+	"set_tab_background_label": {
+		"message": "Lisää taustaväri organisaation Tabeille.",
+		"description": "Nimike taustavärin asettamiseksi organisaatiokohtaisille Tabeille"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Lisää reunaväri aktiivisille organisaation Tabeille.",
+		"description": "Nimike reunavärin asettamiseksi aktiivisille organisaatiokohtaisille Tabeille"
+	},
+	"set_tab_border_color_label": {
+		"message": "Lisää reunaväri yleisille Tabeille.",
+		"description": "Nimike reunavärin asettamiseksi yleisille Tabeille"
+	},
+	"set_tab_color_active_label": {
+		"message": "Lisää tekstiväri aktiivisille yleisille Tabeille.",
+		"description": "Nimike tekstivärin asettamiseksi aktiivisille yleisille Tabeille"
+	},
+	"set_tab_color_label": {
+		"message": "Lisää tekstiväri organisaation Tabeille.",
+		"description": "Nimike tekstivärin asettamiseksi organisaatiokohtaisille Tabeille"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Valitse yksi tai useampi koristelutyyli aktiivisille organisaation Tabeille.",
+		"description": "Kehote koristelutyylin valitsemiseksi aktiivisille organisaatiokohtaisille Tabeille"
+	},
+	"set_tab_decoration_label": {
+		"message": "Valitse yksi tai useampi koristelutyyli yleisille Tabeille.",
+		"description": "Kehote koristelutyylin valitsemiseksi yleisille Tabeille"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Lisää leijutuksen taustaväri aktiivisille yleisille Tabeille.",
+		"description": "Nimike leijutuksen taustavärin asettamiseksi aktiivisille yleisille Tabeille"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Lisää leijutuksen taustaväri organisaation Tabeille.",
+		"description": "Nimike leijutuksen taustavärin asettamiseksi organisaatiokohtaisille Tabeille"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Lisää varjoväri aktiivisille organisaation Tabeille.",
+		"description": "Nimike varjovärin asettamiseksi aktiivisille organisaatiokohtaisille Tabeille"
+	},
+	"set_tab_shadow_label": {
+		"message": "Lisää varjoväri yleisille Tabeille.",
+		"description": "Nimike varjovärin asettamiseksi yleisille Tabeille"
+	},
+	"set_tab_top_active_label": {
+		"message": "Lisää väri aktiivisten yleisten Tabien yläosassa olevalle palkille.",
+		"description": "Nimike yläpalkin värin asettamiseksi aktiivisille yleisille Tabeille"
+	},
+	"set_toggle_preview": {
+		"message": "Napsauta vaihtaaksesi aktiivista tilaa.",
+		"description": "Työkaluvihjeen teksti aktiivisen tilan vaihtamiseksi"
+	},
+	"settings": {
+		"message": "Asetukset",
+		"description": "Nimike asetusvalikkoa varten"
+	},
+	"setup_page": {
+		"message": "Setup-sivu",
+		"description": "[notSalesforceSetup] sivu Salesforce-asetusten muokkaamiseksi"
+	},
+	"skip": {
+		"message": "Ohita",
+		"description": "[req_permission] painike oikeuksien epäämiseksi"
+	},
+	"successfully_imported": {
+		"message": "Tuonti onnistui",
+		"description": "[toast] käyttäjä toi Tabit ulkoisesta tiedostosta onnistuneesti"
+	},
+	"tab_explain": {
+		"message": "Jokaisessa kohteessa tulee olla 'label' ja 'url' merkkijonoina. Lisäksi jokaisessa kohteessa voi olla 'org' merkkijonona.",
+		"description": "[error] selittää, kuinka Tab tulee rakentaa"
+	},
+	"tab_information": {
+		"message": "Tab-tiedot",
+		"description": "otsikko Tabin päivitys-modalille"
+	},
+	"tab_label": {
+		"message": "Tabin tunniste",
+		"description": "Tabin Label-ominaisuus, sen nimi"
+	},
+	"tab_org": {
+		"message": "Tabin organisaatio",
+		"description": "Tabin Org-ominaisuus, jos se on tarkoitettu tietylle Salesforce-organisaatiolle"
+	},
+	"tab_url": {
+		"message": "Tabin URL",
+		"description": "Tabin URL-ominaisuus, mihin linkittää"
+	},
+	"table_delete": {
+		"message": "Poista Tab",
+		"description": "[popup] aputeksti sarakkeelle, jossa on poistonappi"
+	},
+	"table_org": {
+		"message": "Onko Tab organisaatiokohtainen",
+		"description": "[popup] aputeksti sarakkeelle, jossa on checkbox organisaatiolle"
+	},
+	"table_row_label": {
+		"message": "Syötä tämän URL:n tunniste",
+		"description": "[popup] syötekenttä Tabin nimelle"
+	},
+	"table_row_org": {
+		"message": "Klikkaa, jos haluat tämän Tabin olevan saatavilla vain tälle organisaatiolle.",
+		"description": "[popup] checkbox Tabin vaihtamiseksi organisaatiokohtaiseksi"
+	},
+	"table_row_org_name": {
+		"message": "Organisaatio, jolle tämä Tab on saatavilla.",
+		"description": "[popup] syötekenttä organisaation nimelle"
+	},
+	"table_row_url": {
+		"message": "Syötä sub_URL, jonne haluat ohjautua.",
+		"description": "[popup] syötekenttä Tabin URL:lle"
+	},
+	"tabs": {
+		"message": "Tabit",
+		"description": "käyttäjän suosikkilinkit"
+	},
+	"tabs_saved": {
+		"message": "Tabit tallennettu.",
+		"description": "[toast] Tabit tallennettiin onnistuneesti."
+	},
+	"theme_dark": {
+		"message": "Vaihda tummaan teemaan",
+		"description": "[popup] kuun kuvakkeen otsikko teeman vaihtamiseksi"
+	},
+	"theme_light": {
+		"message": "Vaihda vaaleaan teemaan",
+		"description": "[popup] auringon kuvakkeen otsikko teeman vaihtamiseksi"
+	},
+	"underline": {
+		"message": "Alleviivaus",
+		"description": "Koristelutyyli Tab-tekstin alleviivaamiseksi"
+	},
+	"underline_wavy": {
+		"message": "Aaltomainen alleviivaus",
+		"description": "Koristelutyyli aaltomaisen alleviivauksen lisäämiseksi Tab-tekstiin"
+	},
+	"update_available": {
+		"message": "Päivitys saatavilla",
+		"description": "uusi päivitys laajennukseen on saatavilla"
+	},
+	"upload": {
+		"message": "Lähetä",
+		"description": "[import] sallii käyttäjän selata tiedostojaan ja valita oikean"
+	},
+	"users": {
+		"message": "Käyttäjät",
+		"description": "ManageUsers/home -sivun nimi"
+	},
+	"where_to": {
+		"message": "Mihin?",
+		"description": "[open-other-org-modal] vaihtoehtoinen otsikko modalille"
+	}
+}

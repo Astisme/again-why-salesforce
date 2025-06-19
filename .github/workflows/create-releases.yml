@@ -3,56 +3,48 @@ name: Create all Releases
 on:
   push:
     tags:
-      - "chrome-v*.*.*"
-      - "firefox-v*.*.*"
-      - "edge-v*.*.*"
-      - "safari-v*.*.*"
+      - "v*.*.*"
 
 permissions:
     contents: write
 
 jobs:
     setup-and-build:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
+        defaults:
+            run:
+                shell: bash
+
+        env:
+            GH_TOKEN: ${{ github.token }}
+
         steps:
             - name: Setup repo
               uses: actions/checkout@v4
 
             - name: Define variables
               run: |
-                AWSF=awsf
                 TAG="${GITHUB_REF_NAME}"
                 echo "TRIGGERING_TAG=$TAG" >> $GITHUB_ENV
-                # Extract substring before '-v'
-                BROWSER=${TAG%%-v*}
-                echo "BROWSER=$BROWSER" >> $GITHUB_ENV
+                # Extract substring after 'v'
+                TAG_VERSION=${TAG##*v}
                 # Get version from manifest
-                MANIFEST_VERSION=$(grep -oP '"version":\s*"\K[0-9.]+' manifest/template-manifest.json)
-                BROWSER_VERSION_NAME="$AWSF-$BROWSER-v$MANIFEST_VERSION"
-                # Extract substring after '-v'
-                TAG_VERSION=${TAG##*-v}
+                MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' manifest/template-manifest.json)
                 echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
                 # Extract substring before any additional '-' (like '-alpha')
                 PURE_VERSION=${TAG_VERSION%%-*}
-                echo "RELEASE_NOTES=./docs/Release Notes/v$PURE_VERSION.md" >> $GITHUB_ENV
-                echo "ZIP_NAME=bin/$BROWSER_VERSION_NAME.zip" >> $GITHUB_ENV
+                awk -v ver="v$PURE_VERSION" '
+                  $0 ~ "^# "ver"$" {print_flag=1; next}
+                  $0 ~ "^# v[0-9]+\\.[0-9]+\\.[0-9]+" && print_flag {exit}
+                  print_flag {print}
+                ' "docs/CHANGELOG.md" > release-notes.txt
+                echo "RELEASE_NOTES=./release-notes.txt" >> $GITHUB_ENV
+                echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
 
             - name: Setup Deno
               uses: denoland/setup-deno@v2
               with:
                   deno-version: v2.x
 
-            - name: Build Extension
-              run: deno task build-${{ env.BROWSER }}
-
-            - name: Create ${{ env.BROWSER }} Release
-              uses: softprops/action-gh-release@v2
-              with:
-                name: ${{ env.BROWSER_VERSION_NAME }}
-                body: See release notes at ${{ env.RELEASE_NOTES }}.
-                body_path: ${{ env.RELEASE_NOTES }}
-                generate_release_notes: true
-                make_latest: true
-                tag_name: ${{ env.TRIGGERING_TAG }}
-                prerelease: ${{ env.PRERELEASE }}
-                files: ${{ env.ZIP_NAME }}
+            - name: Build Extension Releases and Publish them
+              run: deno task release

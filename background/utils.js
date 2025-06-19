@@ -1,7 +1,18 @@
 "use strict";
-import { BROWSER, EXTENSION_NAME } from "/constants.js";
-import { bg_getStorage } from "./background.js";
-import { ISCHROME } from "../constants.js";
+import {
+	BROWSER,
+	BROWSER_NAME,
+	EXTENSION_NAME,
+	ISCHROME,
+	ISFIREFOX,
+	ISSAFARI,
+	NO_UPDATE_NOTIFICATION,
+	SETTINGS_KEY,
+	WHAT_EXPORT,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_UPDATE_EXTENSION,
+} from "/constants.js";
+import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -14,7 +25,7 @@ import { ISCHROME } from "../constants.js";
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
  * @returns {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
  */
-export function bg_getCurrentBrowserTab(callback) {
+export function bg_getCurrentBrowserTab(callback = null) {
 	/**
 	 * Queries the browser for the current active tab in the current window.
 	 * If the tab is not found or an error occurs, the function will retry up to 5 times before throwing an error.
@@ -32,12 +43,12 @@ export function bg_getCurrentBrowserTab(callback) {
 		const browserTabs = await BROWSER.tabs.query(queryParams);
 		if (
 			BROWSER.runtime.lastError || browserTabs == null ||
-			browserTabs[0] == null
+			browserTabs == [] || browserTabs[0] == null
 		) {
 			if (count > 5) {
-				throw new Error("Could not find current tab.");
+				throw new Error("error_no_browser_tab");
 			}
-			queryTabs(callback, count + 1);
+			await queryTabs(callback, count + 1);
 		} else callback(browserTabs[0]);
 	}
 	if (callback == null) {
@@ -57,17 +68,16 @@ export function bg_getCurrentBrowserTab(callback) {
  * Sends the same message back to other parts of the extension.
  *
  * @param {JSONObject} message - the message to be sent
- * @param {int} count = 0 - how many times the function has been called
  */
-export async function bg_notify(message, count = 0) {
+export async function bg_notify(message) {
+	if (message == null) {
+		throw new Error("error_no_message");
+	}
 	try {
 		const browserTab = await bg_getCurrentBrowserTab();
 		BROWSER.tabs.sendMessage(browserTab.id, message);
-	} catch (error) {
+	} catch (_) {
 		console.trace();
-		if (error == null || error.message === "") {
-			setTimeout(() => bg_notify(count + 1), 500);
-		}
 	}
 }
 
@@ -79,13 +89,14 @@ export async function bg_notify(message, count = 0) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-	if (!ISCHROME) {
+	const filename = `${EXTENSION_NAME}.json`;
+	if (ISFIREFOX) {
 		// Firefox implementation
 		const blob = new Blob([jsonData], { type: "application/json" });
 		const url = URL.createObjectURL(blob);
 		BROWSER.downloads.download({
 			url,
-			filename: `${EXTENSION_NAME}.json`,
+			filename,
 		}).then(() => {
 			BROWSER.downloads.onChanged.addListener((e) => {
 				if (e.state.current === "complete") {
@@ -93,15 +104,26 @@ function _exportHandler(tabs) {
 				}
 			});
 		});
-	} else {
+		return;
+	} else if (ISCHROME) {
 		// Chrome implementation
 		const dataStr = "data:application/json;charset=utf-8," +
 			encodeURIComponent(jsonData);
 		chrome.downloads.download({
 			url: dataStr,
-			filename: `${EXTENSION_NAME}.json`,
+			filename,
 		});
+		return;
+	} else if (ISSAFARI) {
+		// Safari: send a message to the content script
+		bg_notify({
+			what: WHAT_EXPORT,
+			filename,
+			payload: jsonData,
+		});
+		return;
 	}
+	console.warn(["error_export", ISCHROME, ISFIREFOX, ISSAFARI]);
 }
 
 /**
@@ -109,9 +131,149 @@ function _exportHandler(tabs) {
  *
  * @param {Array|null} tabs - An array of tab objects to be exported as a JSON file. If null, the function fetches the tab data from storage.
  */
-export function exportHandler(tabs = null) {
+function exportHandler(tabs = null) {
 	if (tabs == null) {
 		return bg_getStorage(_exportHandler);
 	}
 	_exportHandler(tabs);
+}
+
+/**
+ * Attempts to set the browser action popup to the export-permission request page.
+ * If the URL for the permission page cannot be obtained, no popup is set.
+ *
+ * @returns {boolean}
+ *   `true` if the popup was successfully set to the permission request page;
+ *   `false` if the permission page URL could not be retrieved.
+ */
+function requestExportPermission() {
+	const req_perm_link = BROWSER.runtime.getURL(
+		"action/req_permissions/req_permissions.html",
+	);
+	if (req_perm_link == null) {
+		return false;
+	}
+	BROWSER.action.setPopup({
+		popup: `${req_perm_link}?whichid=download`,
+	});
+	return true;
+}
+
+/**
+ * Checks whether downloads permission is already granted and launches the export handler.
+ * If not, it triggers a notification prompting the user to open a popup to grant permission.
+ *
+ * @param {object[]|null} [tabs=null]
+ *   Optional array of tab objects to pass through to the export handler.
+ * @returns {void}
+ */
+export function checkLaunchExport(tabs = null) {
+	if (ISSAFARI || BROWSER.downloads != null) {
+		// downloads permission has already been granted
+		exportHandler(tabs);
+		return;
+	}
+	// show toast message to request the user to open the popup
+	bg_notify({
+		what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+		ok: requestExportPermission(),
+	});
+}
+
+/**
+ * Checks for extension updates and notifies the user if a newer version is available.
+ * - Skips the check if the user has disabled update notifications or if the last check was within 7 days.
+ * - Compares the current version with the latest GitHub release.
+ * - If an update is available, a notification is triggered with update details.
+ *
+ * @returns {Promise<void>} A promise that resolves when the update check process completes.
+ */
+export async function checkForUpdates() {
+	// check user settings
+	const no_update_notification = await bg_getSettings(NO_UPDATE_NOTIFICATION);
+	if (
+		no_update_notification != null &&
+		(
+			no_update_notification.enabled === true || // the user does not want to be notified
+			Math.floor(
+					(new Date() - new Date(no_update_notification.date)) /
+						(1000 * 60 * 60 * 24),
+				) <= 7 // the date difference is less than a week
+		)
+	) {
+		return;
+	}
+	/**
+	 * Compares two semantic version strings to determine if the latest version is newer.
+	 * Versions are expected in dot-separated format (e.g., "1.2.3"). Missing segments are treated as 0.
+	 *
+	 * @param {string} latest - The latest version string.
+	 * @param {string} current - The current version string.
+	 * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
+	 */
+	function isNewerVersion(latest, current) {
+		const latestParts = latest.split(".").map(Number);
+		const currentParts = current.split(".").map(Number);
+		for (
+			let i = 0;
+			i < Math.max(latestParts.length, currentParts.length);
+			i++
+		) {
+			const latestPart = latestParts[i] || 0;
+			const currentPart = currentParts[i] || 0;
+			if (latestPart > currentPart) {
+				return true;
+			} else if (latestPart < currentPart) {
+				return false;
+			}
+		}
+		return false; // Versions are equal
+	}
+	// set last date saved as today
+	bg_setStorage(
+		[{ id: NO_UPDATE_NOTIFICATION, date: new Date().toJSON() }],
+		null,
+		SETTINGS_KEY,
+	);
+	try {
+		const manifest = BROWSER.runtime.getManifest();
+		const currentVersion = manifest.version;
+		const homepageUrl = manifest.homepage_url;
+		// Parse GitHub username and repo from homepage URL
+		const urlParts = homepageUrl?.split("github.com/");
+		// Validate homepage URL (must be GitHub)
+		if (
+			!homepageUrl || !homepageUrl.includes("github.com") ||
+			urlParts.length < 2
+		) {
+			console.error("no_manifest_github");
+			return;
+		}
+		const repoPath = urlParts[1].replace(/\.git$/, "");
+		// Fetch latest release data from GitHub API
+		const response = await fetch(
+			`https://api.github.com/repos/${repoPath}/releases`,
+		);
+		if (!response.ok) {
+			console.error("error_failed_to_fetch", response.status);
+			return;
+		}
+		const releases = await response.json();
+		// Find the latest non-prerelease version
+		const latestVersion = releases.find((release) =>
+			!release.prerelease && release.tag_name.startsWith(BROWSER_NAME)
+		).tag_name.replace(/^.*-v/, "");
+		// Compare versions and open homepage if update is available
+		if (isNewerVersion(latestVersion, currentVersion)) {
+			bg_notify({
+				what: WHAT_UPDATE_EXTENSION,
+				oldversion: currentVersion,
+				version: latestVersion,
+				link: homepageUrl,
+				//link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
+			});
+		}
+	} catch (error) {
+		console.error("error_check_update", error);
+	}
 }
