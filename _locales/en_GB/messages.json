@@ -1,4 +1,12 @@
 {
+	"extension_description": {
+		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
+		"description": "[manifest] The description of this extension"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "The name of this extension"
+	},
 	"set_tab_background_active_label": {
 		"message": "Insert the background colour for your active generic Tabs.",
 		"description": "Label to set background colour for active generic Tabs"
