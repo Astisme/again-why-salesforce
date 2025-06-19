@@ -29,13 +29,12 @@
 ## Table of Contents
 
 1. [Install](#install)
-2. [Demo](#demo)
-3. [Wonderful Features](#wonderful-features)
-4. [Usage Example](#usage-example)
-5. [Browser Support](#browser-support)
-6. [Dev Instructions](#dev-instructions)
-7. [Contributing](#contributing)
-8. [Contributors](#contributors)
+2. [Wonderful Features](#wonderful-features)
+3. [Usage Example](#usage-example)
+4. [Browser Support](#browser-support)
+5. [Dev Instructions](#dev-instructions)
+6. [Contributing](#contributing)
+7. [Contributors](#contributors)
 
 ## Install
 
@@ -55,10 +54,6 @@ For Safari users, we recommend checking out our [installation guide](https://git
 <a href="https://github.com/Astisme/again-why-salesforce/releases" target="_top">
   <img src="https://developer.apple.com/assets/elements/icons/safari-macos-11/safari-macos-11-128x128_2x.png" title="Add to Safari" width="80px" height="80px" align="right"/>
 </a>
-
-## Demo
-
-Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 ## Wonderful Features
 
