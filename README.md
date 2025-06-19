@@ -66,20 +66,15 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 <p align="center">
     Update the extension settings and set the Tab style to make them your own!
-</p>
-
-<p align="center">
+    <br />
     <img src="/images/settings-and-decorations.gif" width="50%" title="Settings and Decorations"/>
-
 </p>
 
 ### Commands
 
 <p align="center">
     Use keyboard shortcuts when on Salesforce Setup to execute frequently used actions.
-</p>
-
-<p align="center">
+    <br />
 	<img src="/images/commands.gif" width="50%" title="Commands"/>
 </p>
 
@@ -87,9 +82,7 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 <p align="center">
     Right-click on the page or on the Tabs to execute actions.
-</p>
-
-<p align="center">
+    <br />
 	<img src="/images/context-menus.gif" width="50%" title="Context Menu"/>
 </p>
 
@@ -97,9 +90,7 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 <p align="center">
     Launch a Setup Tab in a different org with one click. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
-</p>
-
-<p align="center">
+    <br />
 	<img src="/images/open-other-org.gif" width="50%" title="Open Other Org"/>
 </p>
 
@@ -107,9 +98,7 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 <p align="center">
     Customize Tabs per Salesforce org profile. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
-</p>
-
-<p align="center">
+    <br />
 	<img src="/images/org-specific-tabs.gif" width="50%" title="Org-specific Tabs"/>
 </p>
 
@@ -117,9 +106,7 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 
 <p align="center">
     Bulk-import Tab configurations from another org. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
-</p>
-
-<p align="center">
+    <br />
 	<img src="/images/import.gif" width="50%" title="Import functionality"/>
 </p>
 
