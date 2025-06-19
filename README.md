@@ -16,6 +16,7 @@
 [![Firefox users](https://img.shields.io/amo/users/again@why.salesforce?label=Firefox%20Users&color=red)](https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/)
 [![Edge users](https://img.shields.io/badge/dynamic/json?label=Edge%20Users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fdfdjpokbfeaamjcomllncennmfhpldmm)](https://microsoftedge.microsoft.com/addons/detail/dfdjpokbfeaamjcomllncennmfhpldmm)
 [![Safari users](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsimpleanalytics.com%2Fextension.again.whysalesforce.json%3Fversion%3D5%26fields%3Dvisitors%26start%3Dtoday-7d%26info%3Dfalse%26browser_name%3DSafari&query=visitors&label=Safari%20Users)](https://github.com/Astisme/again-why-salesforce/releases)
+<a href="https://dashboard.simpleanalytics.com/extension.again.whysalesforce" referrerpolicy="origin" target="_blank"><picture><source srcset="https://simpleanalyticsbadges.com/extension.again.whysalesforce?mode=dark" media="(prefers-color-scheme: dark)" /><img src="https://simpleanalyticsbadges.com/extension.again.whysalesforce?mode=light" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" height="20px" /></picture></a>
 
 <!--
 ![Chrome stars](https://img.shields.io/chrome-web-store/stars/:storeId)
