@@ -71,14 +71,12 @@ Update the extension settings and set the Tab style to make them your own!
 
 ### Commands
 
-
 <p align="center">
 Use keyboard shortcuts when on Salesforce Setup to execute frequently used actions.
 	<img src="/images/commands.gif" width="50%" title="Commands"/>
 </p>
 
 ### Context Menus
-
 
 <p align="center">
 Right-click on the page or on the Tabs to execute actions.
@@ -87,7 +85,6 @@ Right-click on the page or on the Tabs to execute actions.
 
 ### Open in Another Org
 
-
 <p align="center">
 Launch a Setup Tab in a different org with one click. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
 	<img src="/images/open-other-org.gif" width="50%" title="Open Other Org"/>
@@ -95,14 +92,12 @@ Launch a Setup Tab in a different org with one click. [Read the wiki](https://gi
 
 ### Org-specific Tabs
 
-
 <p align="center">
 Customize Tabs per Salesforce org profile. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
 	<img src="/images/org-specific-tabs.gif" width="50%" title="Org-specific Tabs"/>
 </p>
 
 ### Import Tabs
-
 
 <p align="center">
 Bulk-import Tab configurations from another org. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
