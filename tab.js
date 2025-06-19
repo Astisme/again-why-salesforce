@@ -17,8 +17,7 @@ export default class Tab {
 	/**
 	 * All the keys which are available inside a Tab.
 	 */
-	static allowedKeys = new Set(["label", "url", "org", "tabTitle"]);
-	// TODO tabTitle will be removed in a later version
+	static allowedKeys = new Set(["label", "url", "org"]);
 
 	/**
 	 * Creates a new instance of a `Tab` with the specified label, URL, and optional organization.
@@ -33,7 +32,7 @@ export default class Tab {
 	 */
 	constructor(label, url, org = undefined, secret) {
 		if (secret !== _tabSecret) {
-			throw new Error("Use Tab.create() instead of new Tab()");
+			throw new Error("error_tab_constructor");
 		}
 		this.label = label;
 		this.url = url;
@@ -57,7 +56,7 @@ export default class Tab {
 		if (labelOrTab && typeof labelOrTab === "object") {
 			if (url || org) {
 				throw new Error(
-					"When calling with an object, do not pass anything else.",
+					"error_tab_object_creation",
 				);
 			}
 			const tab = labelOrTab;
@@ -67,12 +66,11 @@ export default class Tab {
 			);
 			if (unexpectedKeys.length > 0) {
 				throw new Error(
-					`Unexpected keys found: ${unexpectedKeys.join(", ")}`,
+					["error_tab_unexpected_keys", unexpectedKeys.join(", ")],
 				);
 			}
-			// TODO tabTitle will be removed in a later version
 			const createdTab = Tab.create(
-				tab.label ?? tab.tabTitle,
+				tab.label,
 				tab.url,
 				tab.org,
 			);
@@ -82,13 +80,13 @@ export default class Tab {
 		const label = labelOrTab;
 		// Check types of parameters
 		if (typeof label !== "string" || label.trim() === "") {
-			throw new Error("Label must be a non-empty string");
+			throw new Error("error_tab_label");
 		}
 		if (typeof url !== "string" || url.trim() === "") {
-			throw new Error("URL must be a non-empty string");
+			throw new Error("error_tab_url");
 		}
 		if (typeof org !== "string" && org != null) {
-			throw new Error("Org must be a string or undefined");
+			throw new Error("error_tab_org");
 		}
 		const miniURL = Tab.minifyURL(url);
 		let orgName;
@@ -129,7 +127,7 @@ export default class Tab {
 	 */
 	static minifyURL(url = null) {
 		if (url == null || url == "") {
-			throw new Error("Cannot minify an empty URL!");
+			throw new Error("error_minify_url");
 		}
 		// remove org-specific url
 		if (url.includes(LIGHTNING_FORCE_COM)) {
@@ -188,10 +186,10 @@ export default class Tab {
 	 */
 	static expandURL(url = null, baseUrl = null) {
 		if (baseUrl == null || !baseUrl.startsWith(HTTPS)) {
-			throw new Error("Cannot expand a URL without its host!");
+			throw new Error("error_expand_url_no_base");
 		}
 		if (url == null || url === "") {
-			throw new Error("Cannot expand an empty URL!");
+			throw new Error("error_expand_url");
 		}
 		if (
 			url.startsWith(HTTPS) &&
@@ -220,7 +218,7 @@ export default class Tab {
 	 */
 	static containsSalesforceId(url = null) {
 		if (url == null) {
-			throw new Error("No URL to check!");
+			throw new Error("error_no_url");
 		}
 		return SALESFORCE_ID_PATTERN.test(decodeURIComponent(url));
 	}
@@ -234,7 +232,7 @@ export default class Tab {
 	 */
 	static extractOrgName(url = null) {
 		if (url == null) {
-			throw new Error("Cannot extract org name from empty URL!");
+			throw new Error("error_extract_empty_url");
 		}
 		let host = new URL(
 			url.startsWith(HTTPS) ? url : `${HTTPS}${url}`,
@@ -260,7 +258,7 @@ export default class Tab {
 	 */
 	static isTab(tab) {
 		if (tab == null) {
-			throw new Error("No object to be checked!");
+			throw new Error("error_no_object");
 		}
 		return tab instanceof Tab;
 	}
@@ -276,8 +274,7 @@ export default class Tab {
 		try {
 			Tab.create(tab);
 			return true;
-		} catch (error) {
-			console.log("Invalid Tab: ", error.message);
+		} catch (_) {
 			// error on creation of tab
 			return false;
 		}
@@ -324,28 +321,50 @@ export default class Tab {
 
 	/**
 	 * Update a Tab based on the options passed.
+	 * @param {Object} tab - an Object containing the following data
+	 * @param {*} tab.label - the new label for the Tab
+	 * @param {*} tab.url - the new url for the Tab
+	 * @param {*} tab.org - the new org for the Tab
+	 * @returns {Tab} The updated Tab
+	 */
+	update({ label, url, org } = {}) {
+		if (label == null && url == null && org == null) {
+			return this;
+		}
+		if (label != null) {
+			this.label = label;
+		}
+		if (url != null) {
+			this.url = Tab.minifyURL(url);
+		}
+		if (org != null) {
+			this.org = org !== "" ? Tab.extractOrgName(org) : undefined;
+		}
+		return this;
+	}
+
+	/**
+	 * Update a Tab based on the options passed.
 	 * @param {Tab} tabToUpdate - the Tab to be updated
 	 * @param {Object} param1 - an Object containing the following data
 	 * @param {*} param1.label - the new label for the Tab
 	 * @param {*} param1.url - the new url for the Tab
 	 * @param {*} param1.org - the new org for the Tab
-	 * @returns {Tab} The updated Tab
+	 * @returns {Tab} A new Tab with the updated values
 	 */
-	/*
-    static updateTab(tabToUpdate, {label,url,org} = {}){
-        if(tabToUpdate == null)
-            throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
-
-        if(label == null && url == null && org == null)
-            return tabToUpdate;
-
-        label != null && (tabToUpdate.label = label);
-        url != null && (tabToUpdate.url = url);
-        org != null && (tabToUpdate.org = org);
-
-        return tabToUpdate;
-    }
-    */
+	static update(tabToUpdate, { label, url, org } = {}) {
+		if (tabToUpdate == null || !Tab.isValid(tabToUpdate)) {
+			throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
+		}
+		if (label == null && url == null && org == null) {
+			return tabToUpdate;
+		}
+		return Tab.create(
+			label ?? tabToUpdate.label,
+			url ?? tabToUpdate.url,
+			org != null ? (org !== "" ? org : undefined) : tabToUpdate.org,
+		);
+	}
 
 	/**
 	 * Returns a string representation of the `Tab` instance as its hash code.

@@ -1,0 +1,866 @@
+{
+	"allow": {
+		"message": "Permiteți",
+		"description": "[cerere_permisiune] buton pentru a permite permisiuni"
+	},
+	"available": {
+		"message": "Disponibil",
+		"description": "Antet de secțiune pentru elementele care pot fi adăugate"
+	},
+	"bold": {
+		"message": "Aldin",
+		"description": "Opțiune de stil pentru text aldin"
+	},
+	"cancel": {
+		"message": "Anulați",
+		"description": "titlu sau textContent pentru butoanele care împiedică executarea acțiunii curente"
+	},
+	"cancel_close": {
+		"message": "Anulați și închideți",
+		"description": "titlu sau textContent pentru butonul de închidere al modalelor"
+	},
+	"chosen": {
+		"message": "Ales",
+		"description": "Antet de secțiune pentru elementele care au fost selectate"
+	},
+	"cmd_export_all": {
+		"message": "Afișează modalul pentru a exporta toate Tabs salvate",
+		"description": "[descrierea comenzii] utilizatorul dorește să exporte toate Tabs"
+	},
+	"cmd_import": {
+		"message": "Afișează modalul pentru a importa Tabs noi",
+		"description": "[descrierea comenzii] utilizatorul dorește să importe Tabs noi"
+	},
+	"cmd_open_other_org": {
+		"message": "Afișează modalul pentru a deschide pagina curentă într-o altă Org",
+		"description": "[descrierea comenzii] utilizatorul dorește să deschidă pagina curentă într-o altă Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Elimină pagina curentă din lista de Tabs (dacă este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să elimine pagina curentă"
+	},
+	"cmd_save_as_tab": {
+		"message": "Salvează pagina curentă în lista de Tabs (dacă nu este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să salveze pagina curentă"
+	},
+	"cmd_toggle_org": {
+		"message": "Comută valoarea Org a paginii curente (dacă este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să comute Org pentru pagina curentă"
+	},
+	"cmd_update_tab": {
+		"message": "Afișează modalul pentru a actualiza pagina curentă (dacă este salvată)",
+		"description": "[descrierea comenzii] utilizatorul dorește să actualizeze pagina curentă"
+	},
+	"confirm_another_org": {
+		"message": "Confirmați deschiderea acestui link.",
+		"description": "[modal-deschide-altă-org] solicitați confirmarea utilizatorului pentru a deschide linkul construit."
+	},
+	"confirm_update_extension": {
+		"message": "O nouă versiune a $extension_label este acum disponibilă!",
+		"description": "un mesaj necunoscut a fost primit de la un ascultător"
+	},
+	"continue": {
+		"message": "Continuați",
+		"description": "textContent pentru butoanele care permit executarea acțiunii curente"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Toate Tab-urile generice",
+		"description": "[meniul contextual]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Elimină toate Tab",
+		"description": "[meniu contextual]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Toate Tab-urile vizibile",
+		"description": "[meniul contextual]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Exportați Tabs",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_move": {
+		"message": "🧭 Mutați Tab",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Faceți primul",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Faceți ultimul",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Mutați la stânga",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Mutați la dreapta",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Deschideți în altă Org",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_remove": {
+		"message": "💥 Eliminați Tab(uri)",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs la stânga",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Alte Tabs",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs la dreapta",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Acest Tab",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Resetează Tab-urile implicite",
+		"description": "[meniul contextual]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Etichetă pentru meniul de setări"
+	},
+	"cxm_update": {
+		"message": "✏️ Actualizați Tab",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Comutați Org",
+		"description": "[meniu-contextual]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Alte actualizări",
+		"description": "[meniu-contextual]"
+	},
+	"delete": {
+		"message": "Ștergeți",
+		"description": "[popup] ștergeți un rând"
+	},
+	"delete_all": {
+		"message": "$delete toate Tabs",
+		"description": "[fereastră-pop-up] titlu pe coșul de gunoi pentru a goli toate Tabs"
+	},
+	"drop": {
+		"message": "Trageți",
+		"description": "[import] permite utilizatorului să tragă fișierele lor în zona specificată"
+	},
+	"enable": {
+		"message": "Activează",
+		"description": "[solicită_permisiune] buton pentru a activa permisiunile"
+	},
+	"error_adding_tab": {
+		"message": "Eroare la adăugarea Tab.",
+		"description": "[eroare] Eroare generică utilizată la adăugarea unui Tab"
+	},
+	"error_check_update": {
+		"message": "Eroare la verificarea actualizărilor",
+		"description": "[eroare] eroare generică la verificarea actualizărilor extensiei"
+	},
+	"error_close_other_modal": {
+		"message": "Închideți mai întâi celălalt modal!",
+		"description": "[toast] Utilizatorul a încercat să deschidă mai mult de 1 modal"
+	},
+	"error_cxm_check": {
+		"message": "Eroare la verificarea elementelor de meniu",
+		"description": "[eroare] elementele meniului contextual nu au putut fi găsite"
+	},
+	"error_cxm_create": {
+		"message": "Eroare la crearea elementelor de meniu",
+		"description": "[eroare] elementele meniului contextual nu au putut fi inițializate"
+	},
+	"error_cxm_remove": {
+		"message": "Eroare la eliminarea elementelor de meniu",
+		"description": "[eroare] elementele meniului contextual nu au putut fi eliminate"
+	},
+	"error_duplicate_tab": {
+		"message": "Acest Tab există deja",
+		"description": "[eroare] Tab-ul este duplicat"
+	},
+	"error_expand_url": {
+		"message": "Nu se poate extinde un URL gol!",
+		"description": "[eroare] url-ul de extins nu a fost transmis"
+	},
+	"error_expand_url_no_base": {
+		"message": "Nu se poate extinde un URL fără gazda sa!",
+		"description": "[eroare] url-ul de bază folosit pentru extindere nu a fost transmis"
+	},
+	"error_extract_empty_url": {
+		"message": "Nu se poate extrage numele Org dintr-un URL gol!",
+		"description": "[eroare] url-ul din care să se recupereze numele Org nu a fost transmis"
+	},
+	"error_failed_sync": {
+		"message": "Sincronizare eșuată.",
+		"description": "[eroare] Eroare generică atunci când Tab-urile nu au putut fi sincronizate de la utilizator"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nu s-au putut prelua resursele externe",
+		"description": "[eroare] Apelul către un site web extern nu a avut succes"
+	},
+	"error_get_with_no_org": {
+		"message": "Nu se pot obține Tabs dacă Org nu este specificată.",
+		"description": "[eroare] s-a încercat căutarea Tabs după Org fără a trimite informații despre Org"
+	},
+	"error_import": {
+		"message": "Eroare în timpul importului:\n",
+		"description": "[eroare] a apărut o eroare în timpul procesului de import"
+	},
+	"error_invalid_key": {
+		"message": "Parametrul cheie transmis funcției nu este valid",
+		"description": "[eroare] dezvoltatorul a încercat să apeleze o funcție cu un parametru invalid"
+	},
+	"error_invalid_request": {
+		"message": "Solicitare invalidă.",
+		"description": "[eroare] Eroare generică după primirea unui mesaj formatat incorect"
+	},
+	"error_invalid_tab": {
+		"message": "Tab invalid",
+		"description": "[eroare] Tab-ul nu este valid"
+	},
+	"error_link_with_id": {
+		"message": "Această pagină nu poate exista în altă Org, deoarece conține un Id!",
+		"description": "[modal-deschide-altă-org] avertisment pentru utilizator că linkul s-ar putea să nu existe în altă Org"
+	},
+	"error_many_matching_tab": {
+		"message": "S-au găsit mai mult de 1 Tab corespunzător.",
+		"description": "[eroare] s-au recuperat multe Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "S-au găsit mai mult de un Tab.",
+		"description": "[eroare] multe Tabs au fost preluate"
+	},
+	"error_minify_url": {
+		"message": "Nu se poate minimiza un URL gol!",
+		"description": "[eroare] url-ul de redus nu a fost transmis"
+	},
+	"error_missing_favourite_id": {
+		"message": "Nu se poate obține imaginea favorită fără Id",
+		"description": "[eroare] nu s-a transmis niciun Id favorit"
+	},
+	"error_missing_key": {
+		"message": "Cheia nu a fost găsită nicăieri",
+		"description": "[eroare] nu s-a găsit nicio traducere în fișiere"
+	},
+	"error_no_array": {
+		"message": "Matrice invalidă sau nicio matrice nu a fost transmisă",
+		"description": "[eroare] nu s-a primit o matrice validă"
+	},
+	"error_no_browser_tab": {
+		"message": "Nu s-a putut găsi fila curentă a browserului.",
+		"description": "[eroare] pagina de fundal nu a putut stabili o filă activă a browserului"
+	},
+	"error_no_callback": {
+		"message": "Vă rugăm să furnizați un apel invers (callback)",
+		"description": "[eroare] funcția de apelat la sfârșitul metodei nu a fost transmisă"
+	},
+	"error_no_cookies": {
+		"message": "Nu s-au găsit cookie-uri corespunzătoare",
+		"description": "[eroare] cookie-urile Salesforce nu au fost returnate"
+	},
+	"error_no_data": {
+		"message": "Nu se poate identifica Tab fără date.",
+		"description": "[eroare] s-a încercat obținerea unui Tab fără a trimite date"
+	},
+	"error_no_headers": {
+		"message": "Nu s-au putut găsi antetele.",
+		"description": "[eroare] Extensia nu a putut găsi unde să plaseze butonul favorit"
+	},
+	"error_no_matching_tab": {
+		"message": "Nu s-au găsit Tabs corespunzătoare.",
+		"description": "[eroare] nu s-au recuperat Tabs"
+	},
+	"error_no_message": {
+		"message": "Nu s-a specificat un mesaj de trimis.",
+		"description": "[eroare] nu s-a găsit niciun mesaj de trimis către alte părți ale codului"
+	},
+	"error_no_object": {
+		"message": "Niciun obiect de verificat!",
+		"description": "[eroare] obiectul nu a fost transmis"
+	},
+	"error_no_setup_tab": {
+		"message": "Nu s-a putut găsi fila Configurare (Setup).",
+		"description": "[eroare] Extensia nu a putut găsi unde să plaseze Tabs favorite."
+	},
+	"error_no_url": {
+		"message": "Niciun URL de verificat!",
+		"description": "[eroare] url-ul de verificat nu a fost transmis"
+	},
+	"error_not_initialized": {
+		"message": "nu a fost încă inițializat.",
+		"description": "[eroare] Eroare generică pentru când o variabilă nu este gata"
+	},
+	"error_processing_tabs": {
+		"message": "Eroare la procesarea Tabs.",
+		"description": "[eroare] Eroare generică la procesarea Tabs"
+	},
+	"error_redirect": {
+		"message": "Nu se poate redirecta. Vă rugăm să reîncărcați pagina.",
+		"description": "[eroare] Eroare generică la redirecționarea paginii."
+	},
+	"error_remove_not_favourite": {
+		"message": "Nu se poate elimina un Tab care nu este favorit!",
+		"description": "[eroare] utilizatorul a încercat să elimine un Tab care nu fusese încă salvat"
+	},
+	"error_removing_all_tabs": {
+		"message": "Eroare la eliminarea tuturor Tabs.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea tuturor Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Eroare la eliminarea Tabs generice.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea Tabs generice"
+	},
+	"error_removing_other_tabs": {
+		"message": "Eroare la eliminarea altor Tabs.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea altor Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Eroare la eliminarea Tab.",
+		"description": "[eroare] Eroare generică utilizată la eliminarea unui Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Eroare la eliminarea tuturor Tab-urilor vizibile.",
+		"description": "[eroare] Eroare generală la eliminarea tuturor Tab-urilor vizibile"
+	},
+	"error_required_params": {
+		"message": "Parametrii necesari pentru funcție nu au fost transmiși",
+		"description": "[eroare] dezvoltatorul a încercat să apeleze o funcție fără parametrii necesari"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Eroare la resetarea Tab-urilor implicite.",
+		"description": "[eroare] Eroare generală la resetarea Tab-urilor la valorile implicite"
+	},
+	"error_sync_nothing": {
+		"message": "Nu se pot sincroniza Tabs nule!",
+		"description": "[eroare] s-a încercat sincronizarea a nimic"
+	},
+	"error_tab_constructor": {
+		"message": "Folosiți Tab.create() în loc de new Tab() pentru a utiliza clasa Tab",
+		"description": "[eroare] spune dezvoltatorului cum să folosească clasa Tab"
+	},
+	"error_tab_label": {
+		"message": "Eticheta trebuie să fie un șir nevid",
+		"description": "[eroare] utilizatorul a încercat să creeze un Tab fără etichetă"
+	},
+	"error_tab_not_found": {
+		"message": "Tab nu a fost găsit.",
+		"description": "[eroare] Tab-ul nu a fost inclus în matrice"
+	},
+	"error_tab_object_creation": {
+		"message": "Când apelați cu un obiect, nu transmiteți nimic altceva.",
+		"description": "[eroare] eroare de implementare de către dezvoltator"
+	},
+	"error_tab_org": {
+		"message": "Org trebuie să fie un șir sau nedefinit (undefined)",
+		"description": "[eroare] utilizatorul a încercat să creeze un Tab cu o valoare Org invalidă"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "S-au găsit chei neașteptate:",
+		"description": "[eroare] utilizatorul a încercat să creeze un Tab cu unele proprietăți nesuportate"
+	},
+	"error_tab_url": {
+		"message": "URL-ul trebuie să fie un șir nevid",
+		"description": "[eroare] utilizatorul a încercat să creeze un Tab fără URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Un Tab cu acest URL a fost deja salvat!",
+		"description": "[eroare] Utilizatorul a încercat să salveze un Tab deja preferat"
+	},
+	"error_tabcont_initialize": {
+		"message": "Nu se poate inițializa cu",
+		"description": "[eroare] inițializarea containerului Tab a eșuat"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Tab(uri) invalid(e) detectat(e).\nPrima apariție:",
+		"description": "[eroare] s-au transmis Tabs invalide"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Folosiți TabContainer.create() în loc de new TabContainer() pentru a utiliza clasa TabContainer",
+		"description": "[eroare] spune dezvoltatorului cum să folosească clasa TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Folosiți TranslationService.create() în loc de new TranslationService() pentru a utiliza clasa TranslationService",
+		"description": "[eroare] spune dezvoltatorului cum să folosească clasa TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "traducătorul nu a fost încă inițializat.",
+		"description": "[eroare] TranslationService nu era gata"
+	},
+	"error_unknown_message": {
+		"message": "Mesaj necunoscut primit",
+		"description": "un mesaj necunoscut a fost primit de la un ascultător"
+	},
+	"error_unknown_request": {
+		"message": "Solicitare necunoscută.",
+		"description": "[eroare] Eroare generică după primirea unui mesaj care nu a fost recunoscut"
+	},
+	"error_useless_remove": {
+		"message": "Nu se poate elimina:\nNu se poate elimina o pagină care nu a fost salvată anterior",
+		"description": "[eroare] utilizatorul a încercat să elimine o pagină care nu fusese încă salvată"
+	},
+	"error_useless_save": {
+		"message": "Nu se poate salva:\nAceastă pagină a fost deja salvată!",
+		"description": "[eroare] utilizatorul a încercat să salveze o pagină care fusese deja salvată"
+	},
+	"export": {
+		"message": "Exportați",
+		"description": "[popup] buton de export"
+	},
+	"export_title": {
+		"message": "Exportați toate Tabs",
+		"description": "[popup] titlu pe butonul de export"
+	},
+	"extension_description": {
+		"message": "Creați și gestionați Tabs personalizate în spațiul disponibil pe pagina de Configurare Salesforce Lightning.",
+		"description": "[manifest] Descrierea acestei extensii"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Numele acestei extensii"
+	},
+	"file": {
+		"message": "fișier",
+		"description": "fișier unic"
+	},
+	"files": {
+		"message": "fișiere",
+		"description": "mai multe fișiere"
+	},
+	"flows": {
+		"message": "Fluxuri",
+		"description": "[tab implicit] Etichetă pentru Tab-ul implicit de fluxuri"
+	},
+	"general": {
+		"message": "General",
+		"description": "Etichetă pentru categoria de setări generale"
+	},
+	"import": {
+		"message": "Importați",
+		"description": "[popup] buton de import"
+	},
+	"import_duplicate_description": {
+		"message": "Tabs duplicate vor fi ignorate.<br />Două Tabs sunt considerate duplicate dacă au același URL.",
+		"description": "[import] descrierea a ceea ce face procesul de import"
+	},
+	"import_invalid_file": {
+		"message": "Tip de fișier invalid.\nSunt acceptate doar fișiere JSON.",
+		"description": "[eroare] fișierul utilizat pentru import nu este JSON"
+	},
+	"import_successful": {
+		"message": "Importat cu succes",
+		"description": "[import] importul a fost finalizat. După aceasta, se va afișa numărul de înregistrări importate"
+	},
+	"import_tabs": {
+		"message": "Importați Tabs",
+		"description": "[titlu-modal] pentru procesul de import"
+	},
+	"import_title": {
+		"message": "$import_tabs din fișierul JSON",
+		"description": "[fereastră-pop-up] titlu pe butonul de import"
+	},
+	"insert_another": {
+		"message": "Introduceți altul",
+		"description": "[eroare-modal-deschide-altă-org] mesaj pentru când utilizatorul introduce aceeași Org în modal"
+	},
+	"insert_another_org": {
+		"message": "Org introdusă este cea curentă!\nVă rugăm introduceți altă Org.",
+		"description": "[eroare-modal-deschide-altă-org] mesaj pentru când utilizatorul introduce aceeași Org în modal"
+	},
+	"insert_valid_org": {
+		"message": "Vă rugăm introduceți o Org validă!",
+		"description": "[eroare-modal-deschide-altă-org] mesaj pentru când utilizatorul introduce un URL greșit în modal"
+	},
+	"italic": {
+		"message": "Italic",
+		"description": "Opțiune de stil pentru text italic"
+	},
+	"lightning_navigation": {
+		"message": "Navigație Lightning",
+		"description": "tehnologia personalizată de navigare a Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Conectați-vă la Salesforce",
+		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de conectare Salesforce"
+	},
+	"mycustomorg": {
+		"message": "organizațiameapersonalizată",
+		"description": "placeholder pentru modalul Actualizare Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url GitHub invalid sau lipsă în manifest",
+		"description": "Cheia homepage_url a manifestului nu utilizează o legătură GitHub"
+	},
+	"no_match": {
+		"message": "Nu s-a potrivit cu nicio acțiune",
+		"description": "[eroare] în Salesforce când comutatorul nu poate potrivi acțiunea solicitată"
+	},
+	"nss_invalid_url": {
+		"message": "Adresă URL nevalidă detectată.",
+		"description": "[nuEsteConfigurareSalesforce] o adresă URL nevalidă"
+	},
+	"nss_not_setup_page": {
+		"message": "Aceasta nu este o pagină de Configurare $salesforce_lightning.",
+		"description": "[notSalesforceSetup] utilizatorul nu se află pe o pagină Salesforce."
+	},
+	"open_here": {
+		"message": "Deschide în acest Tab.",
+		"description": "[open-other-org-modal] buton radio pentru a permite utilizatorului să deschidă în același Tab de browser"
+	},
+	"open_new_tab": {
+		"message": "Deschide într-un Tab nou.",
+		"description": "[open-other-org-modal] buton radio pentru a permite utilizatorului să deschidă într-un Tab nou de browser."
+	},
+	"open_settings": {
+		"message": "Deschide Setările Extensiei",
+		"description": "[pop-up] buton pentru redirecționare către pagina de setări"
+	},
+	"open_setup": {
+		"message": "Deschideți Configurare",
+		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
+	},
+	"opt_automatic_open_login": {
+		"message": "Deschideți automat pagina $salesforce_login atunci când faceți clic pe fereastra pop-up în timp ce nu vă aflați pe o pagină Salesforce.",
+		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web aleatoriu"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Deschideți automat pagina $salesforce_setup atunci când faceți clic pe fereastra pop-up în timp ce vă aflați pe o pagină Salesforce.",
+		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web Salesforce"
+	},
+	"opt_en_default": {
+		"message": "en (Implicit și de rezervă)",
+		"description": "Opțiunea de limbă implicită a extensiei"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Păstrează Tab-urile favorite în partea stângă a Home și Object Manager.",
+		"description": "Comutator pentru a fixa Tab-urile favorite în partea stângă a barei de navigare"
+	},
+	"opt_link_new_browser": {
+		"message": "Deschide întotdeauna linkurile într-o filă nouă a browserului.",
+		"description": "[setare] când utilizatorul face clic pe un Tab favorit, să se deschidă într-o filă nouă"
+	},
+	"opt_no_release_notes": {
+		"message": "Nu afișa notele de lansare ale actualizării.",
+		"description": "[setare] permite utilizatorului să împiedice afișarea notelor de lansare după actualizarea extensiei"
+	},
+	"opt_no_update_notification": {
+		"message": "Nu avertizați cu privire la actualizările disponibile.",
+		"description": "[setare] permite utilizatorului să împiedice extensia să caute versiuni noi"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Deschideți întotdeauna pagina $salesforce_login în același Tab atunci când faceți clic pe fereastra pop-up.",
+		"description": "[setare]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Deschideți întotdeauna pagina $salesforce_setup în același Tab atunci când faceți clic pe fereastra pop-up.",
+		"description": "[setare]"
+	},
+	"opt_pick_language": {
+		"message": "Alege limba extensiei",
+		"description": "[setare] etichetă pentru a solicita utilizatorului să își aleagă limba preferată"
+	},
+	"opt_prevent_analytics": {
+		"message": "Împiedică utilizarea Simple Analytics (nu va fi contorizat la numărul de utilizatori).",
+		"description": "[setare] permite utilizatorului să oprească trimiterea de analize anonime"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Împiedică utilizarea navigării Lightning (încărcare mai rapidă în timpul utilizării).",
+		"description": "[setare] nu permite navigarea Lightning cu explicația funcției"
+	},
+	"opt_same_tab_popup": {
+		"message": "pagina în aceeași filă la clic pe popup.",
+		"description": "[setare] pentru a preveni deschiderea unei file noi"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Urmărește limba Salesforce (citește cookie-urile Salesforce)",
+		"description": "Opțiune de utilizare a setării de limbă Salesforce. Pentru a utiliza această opțiune, utilizatorii trebuie să permită extensiei să citească cookie-urile Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Omitere verificare automată a ID-ului Salesforce.",
+		"description": "[setare] când adăugați un Tab favorit, să nu se verifice dacă linkul conține un ID Salesforce"
+	},
+	"or_drop": {
+		"message": "Sau $drop",
+		"description": "[import] permiteți utilizatorului să mute fișiere cu mouse-ul și să le elibereze"
+	},
+	"org_link": {
+		"message": "Link Org",
+		"description": "[etichetă-intrare]"
+	},
+	"other_org_info": {
+		"message": "Informații altă Org",
+		"description": "[titlu-modal]"
+	},
+	"other_org_placeholder": {
+		"message": "altă-org",
+		"description": "[placeholder-intrare]"
+	},
+	"overwrite_tabs": {
+		"message": "Suprascrieți Tabs salvate.",
+		"description": "[etichetă] ștergeți toate Tabs salvate în timpul procesului de import"
+	},
+	"preserve_org_tabs": {
+		"message": "Păstrați Tabs pentru alte org.",
+		"description": "[etichetă] păstrați toate Tabs specifice Org în timpul procesului de import"
+	},
+	"remove_tab": {
+		"message": "Eliminați Tab",
+		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"req_downloads_open_popup": {
+		"message": "Vă rugăm să deschideți fereastra pop-up a extensiei din meniul de extensii al browserului dumneavoastră.",
+		"description": "[notificare] cereți utilizatorului să facă clic pe fereastra pop-up a extensiei pentru a continua"
+	},
+	"req_downloads_perm_header": {
+		"message": "Vă rugăm să activați permisiunea de Descărcări\npentru a începe exportul solicitat.",
+		"description": "[solicită_permisiune] apel la acțiune pentru a activa permisiunea de descărcări"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Această operațiune va fi solicitată o singură dată.",
+		"description": "[solicită_permisiune] descriere pentru a activa permisiunea de descărcări"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Nu mai întrebați.",
+		"description": "[cerere_permisiune] etichetă când utilizatorul nu dorește să permită permisiuni permanent"
+	},
+	"req_permissions_header": {
+		"message": "Vă rugăm să ne permiteți să accesăm\nautomat paginile $salesforce_setup.",
+		"description": "[req_permission] antetul paginii pentru solicitarea permisiunilor"
+	},
+	"req_permissions_paragraph": {
+		"message": "Dacă doriți, puteți face ca Tabs preferate să apară\nde îndată ce navigați la o pagină $salesforce_setup\nfără a fi nevoie să faceți clic pe această extensie de fiecare dată.",
+		"description": "[req_permission] text pentru a explica de ce sunt solicitate permisiunile"
+	},
+	"required": {
+		"message": "obligatoriu",
+		"description": "[intrare] marchează un câmp de intrare ca fiind obligatoriu"
+	},
+	"required_info": {
+		"message": "= Informații obligatorii",
+		"description": "[modal] informează utilizatorul că unele informații sunt obligatorii"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[nuEsteConfigurareSalesforce] platforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Autentificare Salesforce",
+		"description": "pagina de autentificare Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Configurare Salesforce",
+		"description": "orice pagină Setup Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Salvare",
+		"description": "Aplicați modificările și stocați-le în memorie"
+	},
+	"save_tab": {
+		"message": "Salvați ca Tab",
+		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"set_gen_preview": {
+		"message": "Previzualizare Tab",
+		"description": "Etichetă pentru previzualizarea aspectului Tab-urilor generice"
+	},
+	"set_gen_styler": {
+		"message": "Stilizator Tab",
+		"description": "Etichetă pentru configurarea stilului Tab-urilor generice"
+	},
+	"set_general_settings": {
+		"message": "Setări Generale",
+		"description": "Antet de secțiune pentru opțiunile de configurare generale"
+	},
+	"set_move_available": {
+		"message": "Mutare la Disponibil",
+		"description": "Titlu buton pentru a muta elementele selectate înapoi la Disponibil"
+	},
+	"set_move_chosen": {
+		"message": "Mutare la Ales",
+		"description": "Titlu buton pentru a muta elementele selectate la Ales"
+	},
+	"set_org_preview": {
+		"message": "Previzualizare Organizație",
+		"description": "Etichetă pentru previzualizarea aspectului Tab-urilor specifice organizației"
+	},
+	"set_org_styler": {
+		"message": "Stilizator Organizație",
+		"description": "Etichetă pentru configurarea stilului Tab-urilor specifice organizației"
+	},
+	"set_tab_background_active_label": {
+		"message": "Introduceți culoarea de fundal pentru Tab-urile generice active.",
+		"description": "Etichetă pentru setarea culorii de fundal pentru Tab-urile generice active"
+	},
+	"set_tab_background_label": {
+		"message": "Introduceți culoarea de fundal pentru Tab-urile organizației.",
+		"description": "Etichetă pentru setarea culorii de fundal pentru Tab-urile specifice organizației"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Introduceți culoarea marginii pentru Tab-urile active ale organizației.",
+		"description": "Etichetă pentru setarea culorii marginii pentru Tab-urile specifice organizației active"
+	},
+	"set_tab_border_color_label": {
+		"message": "Introduceți culoarea marginii pentru Tab-urile generice.",
+		"description": "Etichetă pentru setarea culorii marginii pentru Tab-urile generice"
+	},
+	"set_tab_color_active_label": {
+		"message": "Introduceți culoarea textului pentru Tab-urile generice active.",
+		"description": "Etichetă pentru setarea culorii textului pentru Tab-urile generice active"
+	},
+	"set_tab_color_label": {
+		"message": "Introduceți culoarea textului pentru Tab-urile organizației.",
+		"description": "Etichetă pentru setarea culorii textului pentru Tab-urile specifice organizației"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Alegeți unul sau mai multe stiluri de decorare pentru Tab-urile active ale organizației.",
+		"description": "Prompt pentru selectarea stilurilor de decorare pentru Tab-urile specifice organizației active"
+	},
+	"set_tab_decoration_label": {
+		"message": "Alegeți unul sau mai multe stiluri de decorare pentru Tab-urile generice.",
+		"description": "Prompt pentru selectarea stilurilor de decorare pentru Tab-urile generice"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Introduceți culoarea de fundal la planare pentru Tab-urile generice active.",
+		"description": "Etichetă pentru setarea culorii de fundal la planare pentru Tab-urile generice active"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Introduceți culoarea de fundal la planare pentru Tab-urile organizației.",
+		"description": "Etichetă pentru setarea culorii de fundal la planare pentru Tab-urile specifice organizației"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Introduceți culoarea umbrei pentru Tab-urile active ale organizației.",
+		"description": "Etichetă pentru setarea culorii umbrei pentru Tab-urile specifice organizației active"
+	},
+	"set_tab_shadow_label": {
+		"message": "Introduceți culoarea umbrei pentru Tab-urile generice.",
+		"description": "Etichetă pentru setarea culorii umbrei pentru Tab-urile generice"
+	},
+	"set_tab_top_active_label": {
+		"message": "Introduceți culoarea pentru bara din partea de sus a Tab-urilor generice active.",
+		"description": "Etichetă pentru setarea culorii barei superioare pentru Tab-urile generice active"
+	},
+	"set_toggle_preview": {
+		"message": "Clic pentru a comuta starea activă.",
+		"description": "Text pentru descrierea instrumentului de control pentru comutarea stării active"
+	},
+	"settings": {
+		"message": "Setări",
+		"description": "Etichetă pentru meniul de setări"
+	},
+	"setup_page": {
+		"message": "Pagină de configurare",
+		"description": "[nuEsteConfigurareSalesforce] pagina utilizată pentru a modifica setările Salesforce"
+	},
+	"skip": {
+		"message": "Omiteți",
+		"description": "[cerere_permisiune] buton pentru a NU permite permisiuni"
+	},
+	"successfully_imported": {
+		"message": "Importat cu succes",
+		"description": "[toast] utilizatorul a adăugat Tabs dintr-un fișier extern"
+	},
+	"tab_explain": {
+		"message": "Fiecare element trebuie să aibă 'label' și 'url' ca șiruri. În plus, fiecare element poate avea un 'org' ca șir.",
+		"description": "[eroare] explică cum ar trebui construit un Tab"
+	},
+	"tab_information": {
+		"message": "Informații Tab",
+		"description": "titlu pentru modalul de actualizare Tab"
+	},
+	"tab_label": {
+		"message": "Etichetă Tab",
+		"description": "Proprietatea Label a Tab-ului, numele său"
+	},
+	"tab_org": {
+		"message": "Org Tab",
+		"description": "Proprietatea Org a Tab-ului, dacă este pentru o singură Organizație Salesforce"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "Proprietatea URL a Tab-ului, unde indică"
+	},
+	"table_delete": {
+		"message": "Ștergeți Tab",
+		"description": "[popup] text ajutător pentru coloana cu butonul de ștergere"
+	},
+	"table_org": {
+		"message": "Este Tab Org",
+		"description": "[popup] text ajutător pentru coloana cu caseta de selectare Org"
+	},
+	"table_row_label": {
+		"message": "Introduceți eticheta pentru acest URL",
+		"description": "[popup] câmp de intrare cu numele Tab-ului"
+	},
+	"table_row_org": {
+		"message": "Faceți clic dacă doriți ca acest Tab să fie disponibil doar pentru această Org.",
+		"description": "[popup] casetă de selectare pentru a comuta Tab-ul să fie specific Org"
+	},
+	"table_row_org_name": {
+		"message": "Org pentru care este disponibil acest Tab.",
+		"description": "[popup] câmp de intrare cu numele Org"
+	},
+	"table_row_url": {
+		"message": "Introduceți sub_URL-ul unde doriți să fiți redirecționat.",
+		"description": "[popup] câmp de intrare cu URL-ul Tab-ului"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "linkurile favorite ale utilizatorului"
+	},
+	"tabs_saved": {
+		"message": "Tabs salvate.",
+		"description": "[toast] Tabs au fost stocate cu succes."
+	},
+	"theme_dark": {
+		"message": "Schimbați tema la întunecat",
+		"description": "[popup] titlu pe lună pentru a comuta tema"
+	},
+	"theme_light": {
+		"message": "Schimbați tema la luminos",
+		"description": "[popup] titlu pe soare pentru a comuta tema"
+	},
+	"underline": {
+		"message": "Subliniat",
+		"description": "Opțiune de stil de decorare pentru sublinierea textului Tab"
+	},
+	"underline_wavy": {
+		"message": "Subliniat Ondulat",
+		"description": "Opțiune de stil de decorare pentru aplicarea unei sublinieri ondulate la textul Tab"
+	},
+	"update_available": {
+		"message": "Actualizare disponibilă",
+		"description": "o nouă actualizare pentru extensie este disponibilă"
+	},
+	"upload": {
+		"message": "Încărcați",
+		"description": "[import] permiteți utilizatorului să navigheze prin fișierele sale și să aleagă cel corect"
+	},
+	"users": {
+		"message": "Utilizatori",
+		"description": "Numele paginii legate de ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Unde?",
+		"description": "[modal-deschide-altă-org] titlu de rezervă pentru modal"
+	}
+}

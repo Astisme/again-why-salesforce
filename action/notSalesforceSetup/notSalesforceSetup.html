@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="./notSalesforceSetup.css" />
 		<link rel="stylesheet" href="../basic.css" />
 		<script src="./notSalesforceSetup.js" type="module"></script>
+		<script src="/translator.js" type="module"></script>
 	</head>
 
 	<body>
@@ -16,14 +17,25 @@
 			<object data="../logo/logo.html" type="text/html"></object>
 		</header>
 		<div>
-			<h3>This is not a Salesforce Lightning Setup Page</h3>
-			<a id="login" class="button" href="https://login.salesforce.com">
+			<h3 id="plain" data-i18n="nss_not_setup_page">
+				This is not a Salesforce Lightning Setup page.
+			</h3>
+			<h3 id="invalid-url" class="hidden" data-i18n="nss_invalid_url">
+				Invalid URL detected.
+			</h3>
+			<a
+				id="login"
+				class="button"
+				href="https://login.salesforce.com"
+				data-i18n="login_to_salesforce"
+			>
 				Login to Salesforce
 			</a>
 			<a
 				id="go-setup"
 				class="hidden highlight button"
 				href="/lightning/setup"
+				data-i18n="open_setup"
 			>
 				Open Setup
 			</a>

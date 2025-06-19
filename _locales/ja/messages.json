@@ -1,0 +1,865 @@
+{
+	"allow": {
+		"message": "許可する",
+		"description": "[req_permission] 許可を与えるためのボタン"
+	},
+	"available": {
+		"message": "利用可能",
+		"description": "追加できる項目のセクション見出し"
+	},
+	"bold": {
+		"message": "太字",
+		"description": "太字テキスト用のフォントスタイルオプション"
+	},
+	"cancel": {
+		"message": "キャンセル",
+		"description": "現在の操作の実行を防ぐボタンのタイトルまたはtextContent"
+	},
+	"cancel_close": {
+		"message": "キャンセルして閉じる",
+		"description": "モーダルの閉じるボタンのタイトルまたはtextContent"
+	},
+	"chosen": {
+		"message": "選択済み",
+		"description": "選択された項目のセクション見出し"
+	},
+	"cmd_export_all": {
+		"message": "保存されているすべての Tabs をエクスポートするモーダルを表示する",
+		"description": "[コマンド説明] ユーザーはすべての Tabs をエクスポートしたいと考えています"
+	},
+	"cmd_import": {
+		"message": "新しい Tabs をインポートするモーダルを表示する",
+		"description": "[コマンド説明] ユーザーは新しい Tabs をインポートしたいと考えています"
+	},
+	"cmd_open_other_org": {
+		"message": "現在のページを別の Org で開くモーダルを表示する",
+		"description": "[コマンド説明] ユーザーは現在のページを別の Org で開きたいと考えています"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab リストから現在のページを削除する（保存されている場合）",
+		"description": "[コマンド説明] ユーザーは現在のページを削除したいと考えています"
+	},
+	"cmd_save_as_tab": {
+		"message": "現在のページを Tab リストに保存する（保存されていない場合）",
+		"description": "[コマンド説明] ユーザーは現在のページを保存したいと考えています"
+	},
+	"cmd_toggle_org": {
+		"message": "現在のページの Org 値を切り替える（保存されている場合）",
+		"description": "[コマンド説明] ユーザーは現在のページの Org を切り替えたいと考えています"
+	},
+	"cmd_update_tab": {
+		"message": "現在のページを更新するモーダルを表示する（保存されている場合）",
+		"description": "[コマンド説明] ユーザーは現在のページを更新したいと考えています"
+	},
+	"confirm_another_org": {
+		"message": "このリンクを開くことを確認してください。",
+		"description": "[open-other-org-modal] 作成されたリンクを開くためにユーザーに確認を求めます"
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label の新しいバージョンが利用可能になりました！",
+		"description": "リスナーから不明なメッセージを受信しました"
+	},
+	"continue": {
+		"message": "続行",
+		"description": "現在の操作の実行を許可するボタンのtextContent"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 すべての汎用Tab",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 すべてのTabを削除",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 すべての表示中のTab",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tab をエクスポートする",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab を移動する",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ 最初に配置する",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ 最後に配置する",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 左に移動する",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 右に移動する",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 他の Org で開く",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(たち) を削除する",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 左側の Tab を削除する",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ 他の Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 右側の Tab を削除する",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ この Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 デフォルトTabにリセット",
+		"description": "[コンテキストメニュー]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "設定メニューのラベル"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab を更新する",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Org を切り替える",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 その他の更新",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "削除する",
+		"description": "[popup] 行を削除する"
+	},
+	"delete_all": {
+		"message": "すべてのTabsを$delete",
+		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"
+	},
+	"drop": {
+		"message": "ドロップ",
+		"description": "[インポート] ユーザーが指定されたエリアにファイルをドロップできるようにします"
+	},
+	"enable": {
+		"message": "有効にする",
+		"description": "[権限_要求] 権限を有効にするボタン"
+	},
+	"error_adding_tab": {
+		"message": "Tab の追加中にエラーが発生しました。",
+		"description": "[エラー] Tab の追加中に使用される一般的なエラー"
+	},
+	"error_check_update": {
+		"message": "アップデート確認中にエラーが発生しました",
+		"description": "[エラー] 拡張機能のアップデート確認中の一般的なエラー"
+	},
+	"error_close_other_modal": {
+		"message": "まず他のモーダルを閉じてください！",
+		"description": "[toast] 複数のモーダルが開かれようとしました"
+	},
+	"error_cxm_check": {
+		"message": "メニュー項目の確認エラー",
+		"description": "[エラー] コンテキストメニュー項目が見つかりませんでした"
+	},
+	"error_cxm_create": {
+		"message": "メニュー項目の作成エラー",
+		"description": "[エラー] コンテキストメニュー項目を初期化できませんでした"
+	},
+	"error_cxm_remove": {
+		"message": "メニュー項目の削除エラー",
+		"description": "[エラー] コンテキストメニュー項目を削除できませんでした"
+	},
+	"error_duplicate_tab": {
+		"message": "この Tab は既に存在します",
+		"description": "[error] Tab が重複しています。"
+	},
+	"error_expand_url": {
+		"message": "空の URL は展開できません！",
+		"description": "[error] 展開する URL が渡されませんでした"
+	},
+	"error_expand_url_no_base": {
+		"message": "ホストなしで URL を展開できません！",
+		"description": "[error] 展開するための基本 URL が渡されませんでした"
+	},
+	"error_extract_empty_url": {
+		"message": "空の URL から Org 名を抽出できません！",
+		"description": "[error] Org 名を抽出するための URL が渡されませんでした"
+	},
+	"error_failed_sync": {
+		"message": "同期に失敗しました。",
+		"description": "[エラー] ユーザーから Tabs を同期できなかった場合の一般的なエラー"
+	},
+	"error_failed_to_fetch": {
+		"message": "外部リソースの取得に失敗しました",
+		"description": "[エラー] 外部ウェブサイトへの呼び出しが成功しませんでした"
+	},
+	"error_get_with_no_org": {
+		"message": "Org が指定されないと Tabs を取得できません。",
+		"description": "[error] Org 情報なしで Tabs を取得しようとしました。"
+	},
+	"error_import": {
+		"message": "インポート中にエラーが発生しました：\n",
+		"description": "[error] インポートプロセス中にエラーが発生しました"
+	},
+	"error_invalid_key": {
+		"message": "関数に渡されたキーパラメータが無効です",
+		"description": "[エラー] 開発者が無効なパラメータで関数を呼び出そうとしました"
+	},
+	"error_invalid_request": {
+		"message": "無効なリクエスト。",
+		"description": "[エラー] フォーマットが不正なメッセージを受信した後の一般的なエラー"
+	},
+	"error_invalid_tab": {
+		"message": "無効な Tab",
+		"description": "[error] Tab が無効です。"
+	},
+	"error_link_with_id": {
+		"message": "このページは Id を含むため、別の Org に存在できません！",
+		"description": "[open-other-org-modal] 別の Org にこのリンクが存在しない可能性があることを警告します"
+	},
+	"error_many_matching_tab": {
+		"message": "一致する Tab が複数見つかりました。",
+		"description": "[error] 複数の一致する Tab が取得されました。"
+	},
+	"error_many_tabs_found": {
+		"message": "複数の Tab が見つかりました。",
+		"description": "[エラー] 多くの Tabs が取得されました"
+	},
+	"error_minify_url": {
+		"message": "空の URL は短縮できません！",
+		"description": "[error] 短縮する URL が渡されませんでした"
+	},
+	"error_missing_favourite_id": {
+		"message": "Id なしではお気に入り画像を取得できません",
+		"description": "[error] お気に入り Id が渡されませんでした"
+	},
+	"error_missing_key": {
+		"message": "キーが見つかりません",
+		"description": "[error] ファイル内に翻訳が見つかりませんでした"
+	},
+	"error_no_array": {
+		"message": "無効な配列か、配列が渡されませんでした",
+		"description": "[error] 有効な配列が渡されませんでした。"
+	},
+	"error_no_browser_tab": {
+		"message": "現在のブラウザタブが見つかりませんでした。",
+		"description": "[error] アクティブなブラウザタブが見つかりませんでした。"
+	},
+	"error_no_callback": {
+		"message": "callback を提供してください",
+		"description": "[error] callback 関数が渡されませんでした。"
+	},
+	"error_no_cookies": {
+		"message": "一致する cookies が見つかりませんでした",
+		"description": "[error] Salesforce の cookies が返されませんでした。"
+	},
+	"error_no_data": {
+		"message": "データなしでは Tab を識別できません。",
+		"description": "[error] Tab を識別するためのデータが渡されませんでした。"
+	},
+	"error_no_headers": {
+		"message": "ヘッダーが見つかりませんでした。",
+		"description": "[error] お気に入りボタンを配置する場所のヘッダーが見つかりませんでした"
+	},
+	"error_no_matching_tab": {
+		"message": "一致する Tab が見つかりませんでした。",
+		"description": "[error] 一致する Tab が取得されませんでした。"
+	},
+	"error_no_message": {
+		"message": "送信するメッセージが指定されていません。",
+		"description": "[error] 他のコード部分に送信するメッセージが指定されていません。"
+	},
+	"error_no_object": {
+		"message": "確認するためのオブジェクトが渡されませんでした！",
+		"description": "[error] オブジェクトが渡されませんでした"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab が見つかりませんでした。",
+		"description": "[error] お気に入りの Tabs を配置する場所が見つかりませんでした"
+	},
+	"error_no_url": {
+		"message": "確認するための URL がありません！",
+		"description": "[error] 確認する URL が渡されませんでした"
+	},
+	"error_not_initialized": {
+		"message": "はまだ初期化されていませんでした。",
+		"description": "[エラー] 変数が準備できていない場合の一般的なエラー"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs の処理中にエラーが発生しました。",
+		"description": "[エラー] Tabs の処理中の一般的なエラー"
+	},
+	"error_redirect": {
+		"message": "リダイレクトできません。ページを更新してください。",
+		"description": "[エラー] ページ リダイレクトに関する一般的なエラー。"
+	},
+	"error_remove_not_favourite": {
+		"message": "お気に入りでない Tab は削除できません！",
+		"description": "[error] まだ保存されていない Tab を削除しようとしました"
+	},
+	"error_removing_all_tabs": {
+		"message": "すべての Tabs を削除中にエラーが発生しました。",
+		"description": "[エラー] すべての Tabs を削除中に使用される一般的なエラー"
+	},
+	"error_removing_generic_tabs": {
+		"message": "汎用 Tabs を削除中にエラーが発生しました。",
+		"description": "[エラー] 汎用 Tabs を削除中に使用される一般的なエラー"
+	},
+	"error_removing_other_tabs": {
+		"message": "他の Tabs を削除中にエラーが発生しました。",
+		"description": "[エラー] 他の Tabs を削除中に使用される一般的なエラー"
+	},
+	"error_removing_tab": {
+		"message": "Tab の削除中にエラーが発生しました。",
+		"description": "[エラー] Tab の削除中に使用される一般的なエラー"
+	},
+	"error_removing_visible_tabs": {
+		"message": "すべての表示中のTabの削除中にエラーが発生しました。",
+		"description": "[エラー] すべての表示中のTabを削除する際の一般的なエラー"
+	},
+	"error_required_params": {
+		"message": "関数に必要なパラメータが渡されませんでした",
+		"description": "[エラー] 開発者が必要なパラメータなしで関数を呼び出そうとしました"
+	},
+	"error_resetting_default_tabs": {
+		"message": "デフォルトのTabにリセット中にエラーが発生しました。",
+		"description": "[エラー] Tabをデフォルトにリセットする際の一般的なエラー"
+	},
+	"error_sync_nothing": {
+		"message": "空の Tabs は同期できません！",
+		"description": "[error] 同期すべきものがありません。"
+	},
+	"error_tab_constructor": {
+		"message": "新しい Tab() の代わりに Tab.create() を使用してください",
+		"description": "[エラー] 開発者に Tab クラスの使用方法を伝えます"
+	},
+	"error_tab_label": {
+		"message": "ラベルは空でない文字列でなければなりません",
+		"description": "[error] ラベルなしで Tab を作成しようとしました"
+	},
+	"error_tab_not_found": {
+		"message": "Tab が見つかりませんでした。",
+		"description": "[error] Tab がリストに含まれていません。"
+	},
+	"error_tab_object_creation": {
+		"message": "オブジェクトで呼び出す際、余計なものは渡さないでください。",
+		"description": "[error] 開発者による実装エラー"
+	},
+	"error_tab_org": {
+		"message": "Org は文字列または未定義でなければなりません",
+		"description": "[error] 無効な Org 値で Tab を作成しようとしました"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "予期しないキーが見つかりました：",
+		"description": "[error] サポートされていないプロパティで Tab の作成が試みられました"
+	},
+	"error_tab_url": {
+		"message": "URL は空でない文字列でなければなりません",
+		"description": "[error] URL なしで Tab を作成しようとしました"
+	},
+	"error_tab_url_saved": {
+		"message": "この URL を持つ Tab は既に保存されています！",
+		"description": "[エラー] ユーザーが既にブックマークされている Tab を保存しようとしました"
+	},
+	"error_tabcont_initialize": {
+		"message": "これでは初期化できません："
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "無効な Tabs が検出されました。\n最初の出現：",
+		"description": "[error] 無効な Tabs が渡されました。"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "新しい TabContainer() の代わりに TabContainer.create() を使用してください",
+		"description": "[エラー] 開発者に TabContainer クラスの使用方法を伝えます"
+	},
+	"error_translationservice_constructor": {
+		"message": "新しい TranslationService() の代わりに TranslationService.create() を使用してください",
+		"description": "[エラー] 開発者に TranslationService クラスの使用方法を伝えます"
+	},
+	"error_translator_not_initialized": {
+		"message": "翻訳ツールはまだ初期化されていません。",
+		"description": "[エラー] TranslationService が準備できていませんでした"
+	},
+	"error_unknown_message": {
+		"message": "不明なメッセージを受信しました",
+		"description": "リスナーから不明なメッセージが受信されました"
+	},
+	"error_unknown_request": {
+		"message": "不明なリクエスト。",
+		"description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
+	},
+	"error_useless_remove": {
+		"message": "削除できません：\n一度も保存されていないページは削除できません",
+		"description": "[error] まだ保存されていないページの削除が試みられました"
+	},
+	"error_useless_save": {
+		"message": "保存できません：\nこのページはすでに保存されています！",
+		"description": "[error] すでに保存されたページを再び保存しようとしました"
+	},
+	"export": {
+		"message": "エクスポートする",
+		"description": "[popup] エクスポートボタン"
+	},
+	"export_title": {
+		"message": "すべての Tabs をエクスポートする",
+		"description": "[popup] エクスポートボタンのタイトル"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning Setup ページ上の利用可能なスペースでカスタム Tabs を作成および管理する。",
+		"description": "[manifest] この拡張機能の説明"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "[manifest] この拡張機能の名前"
+	},
+	"file": {
+		"message": "ファイル",
+		"description": "単一のファイル"
+	},
+	"files": {
+		"message": "ファイル",
+		"description": "複数のファイル"
+	},
+	"flows": {
+		"message": "フロー",
+		"description": "[デフォルト-tab] デフォルトのフローTabのラベル"
+	},
+	"general": {
+		"message": "一般",
+		"description": "一般設定カテゴリのラベル"
+	},
+	"import": {
+		"message": "インポートする",
+		"description": "[popup] インポートボタン"
+	},
+	"import_duplicate_description": {
+		"message": "重複するTabは無視されます。<br />同じURLを持つ2つのTabは重複していると見なされます。",
+		"description": "[インポート] インポート処理の内容の説明"
+	},
+	"import_invalid_file": {
+		"message": "無効なファイルタイプです。\nJSON ファイルのみがサポートされます。",
+		"description": "[error] インポートに使用されたファイルは JSON ではありません"
+	},
+	"import_successful": {
+		"message": "インポートに成功しました",
+		"description": "[インポート] インポートが完了しました。この後、インポートされたレコード数が表示されます"
+	},
+	"import_tabs": {
+		"message": "Tabをインポート",
+		"description": "[モーダルタイトル] インポート処理用"
+	},
+	"import_title": {
+		"message": "JSONファイルから$import_tabs",
+		"description": "[ポップアップ] インポートボタンのタイトル"
+	},
+	"insert_another": {
+		"message": "別のものを挿入する",
+		"description": "[error-open-other-org-modal] 同じ Org がモーダルに入力された場合のメッセージ"
+	},
+	"insert_another_org": {
+		"message": "入力された Org は現在のものです！\n別の Org を入力してください。",
+		"description": "[error-open-other-org-modal] 同じ Org が入力された場合のメッセージ"
+	},
+	"insert_valid_org": {
+		"message": "有効な Org を入力してください！",
+		"description": "[error-open-other-org-modal] 間違った URL がモーダルに入力された場合のメッセージ"
+	},
+	"italic": {
+		"message": "斜体",
+		"description": "斜体テキスト用のフォントスタイルオプション"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforceのカスタムナビゲーション技術"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce にログインする",
+		"description": "[notSalesforceSetup] Salesforce ログインページにリダイレクトするための呼びかけ"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "Update Tab モーダルのプレースホルダー"
+	},
+	"no_manifest_github": {
+		"message": "マニフェスト内のGitHub homepage_urlが無効または欠落しています",
+		"description": "マニフェストのhomepage_urlキーはGitHubリンクを使用していません"
+	},
+	"no_match": {
+		"message": "一致するアクションが見つかりませんでした",
+		"description": "[error] リクエストされたアクションが利用可能なものと一致しません"
+	},
+	"nss_invalid_url": {
+		"message": "無効なURLが検出されました。",
+		"description": "[Salesforceセットアップ以外] 無効なURL"
+	},
+	"nss_not_setup_page": {
+		"message": "これは $salesforce_lightning の設定ページではありません。",
+		"description": "[notSalesforceSetup] ユーザーはSalesforceページにいません。"
+	},
+	"open_here": {
+		"message": "このTabで開く。",
+		"description": "[open-other-org-modal] ユーザーが同じブラウザTabで開くことを許可するラジオボタン"
+	},
+	"open_new_tab": {
+		"message": "新しいTabで開く。",
+		"description": "[open-other-org-modal] ユーザーが新しいブラウザTabで開くことを許可するラジオボタン。"
+	},
+	"open_settings": {
+		"message": "拡張機能設定を開く",
+		"description": "[ポップアップ] 設定ページにリダイレクトするボタン"
+	},
+	"open_setup": {
+		"message": "Setup を開く",
+		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforceページにいないときにポップアップをクリックすると、$salesforce_loginページを自動的に開きます。",
+		"description": "[設定] ユーザーがランダムなウェブサイトでポップアップを開いたとき"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforceページにいるときにポップアップをクリックすると、$salesforce_setupページを自動的に開きます。",
+		"description": "[設定] ユーザーがSalesforceウェブサイトでポップアップを開いたとき"
+	},
+	"opt_en_default": {
+		"message": "en (デフォルトおよびフォールバック)",
+		"description": "拡張機能のデフォルト言語オプション"
+	},
+	"opt_keep_tabs_left": {
+		"message": "お気に入りのTabsをホームとオブジェクトマネージャーの左に保持します。",
+		"description": "ナビゲーションバーの左側にお気に入りのTabsを固定するトグル"
+	},
+	"opt_link_new_browser": {
+		"message": "リンクを常に新しいブラウザタブで開きます。",
+		"description": "[設定] お気に入りのTabをクリックしたときに新しいタブで開く"
+	},
+	"opt_no_release_notes": {
+		"message": "アップデートのリリースノートを表示しない。",
+		"description": "[設定] 拡張機能が更新後にリリースノートを表示しないようにする設定"
+	},
+	"opt_no_update_notification": {
+		"message": "利用可能なアップデートについて警告しないでください。",
+		"description": "[設定] ユーザーが拡張機能で新しいリリースを検索できないようにします"
+	},
+	"opt_open_login_same_tab": {
+		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_loginページを開きます。",
+		"description": "[設定]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_setupページを開きます。",
+		"description": "[設定]"
+	},
+	"opt_pick_language": {
+		"message": "拡張機能の言語を選択",
+		"description": "[設定] ユーザーに希望の言語を選択させるためのラベル"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analyticsの使用を防止（ユーザー数にカウントされません）。",
+		"description": "[設定] 匿名解析の送信を防止する設定"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightningナビゲーションの使用を禁止します（使用中は読み込みが高速になります）。",
+		"description": "[設定] 機能の説明付きでLightningナビゲーションを許可しない"
+	},
+	"opt_same_tab_popup": {
+		"message": "ポップアップをクリックしたときに同じタブでページを開きます。",
+		"description": "[設定] 新しいブラウザタブの開放を防止"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce 言語に従う (Salesforce クッキーを読み取る)",
+		"description": "Salesforce の言語設定を使用するオプション。このオプションを使用するには、ユーザーは拡張機能に Salesforce クッキーの読み取りを許可する必要があります。"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce IDの自動チェックをスキップします。",
+		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
+	},
+	"or_drop": {
+		"message": "または$drop",
+		"description": "[インポート] ユーザーがマウスでファイルを移動してドロップできるようにする"
+	},
+	"org_link": {
+		"message": "Org リンク",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "その他の Org 情報",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "other-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "保存された Tabs を上書きする。",
+		"description": "[label] インポート中に保存されたすべての Tabs を削除する"
+	},
+	"preserve_org_tabs": {
+		"message": "他の Org の Tabs を保持する。",
+		"description": "[label] インポート中に Org 固有の Tabs を保持する"
+	},
+	"remove_tab": {
+		"message": "Tab を削除する",
+		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"req_downloads_open_popup": {
+		"message": "ブラウザの拡張機能メニューから拡張機能のポップアップを開いてください。",
+		"description": "[トースト] 続行するために拡張機能のポップアップをクリックするようユーザーに依頼"
+	},
+	"req_downloads_perm_header": {
+		"message": "要求されたエクスポートを開始するために\nダウンロード権限を有効にしてください。",
+		"description": "[権限_要求] ダウンロード権限を有効にするための行動喚起"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "この操作は一度だけ要求されます。",
+		"description": "[権限_要求] ダウンロード権限を有効にするための説明"
+	},
+	"req_permissions_dont_ask": {
+		"message": "二度と聞かない",
+		"description": "[req_permission] 常に許可しない場合のラベル"
+	},
+	"req_permissions_header": {
+		"message": "$salesforce_setupページへの\n自動アクセスを許可してください。",
+		"description": "[req_permission] 権限を要求するページのヘッダー"
+	},
+	"req_permissions_paragraph": {
+		"message": "必要に応じて、$salesforce_setupページに移動するとすぐに\nお気に入りのTabsを表示できます。\n毎回この拡張機能をクリックする必要はありません。",
+		"description": "[req_permission] 権限が要求される理由を説明するテキスト"
+	},
+	"required": {
+		"message": "必須",
+		"description": "[input] 入力フィールドが必須であることを示します"
+	},
+	"required_info": {
+		"message": "= 必要な情報",
+		"description": "[modal] 一部の情報が必須であることを示します"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning プラットフォーム"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforceログインページ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "任意のSalesforce設定ページ (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "保存",
+		"description": "変更を適用してメモリに保存します"
+	},
+	"save_tab": {
+		"message": "Tab として保存する",
+		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"set_gen_preview": {
+		"message": "Tab プレビュー",
+		"description": "汎用 Tab の外観をプレビューするラベル"
+	},
+	"set_gen_styler": {
+		"message": "Tab スタイラー",
+		"description": "汎用 Tab のスタイルを設定するラベル"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "全体的な設定オプションのセクション見出し"
+	},
+	"set_move_available": {
+		"message": "利用可能に移動",
+		"description": "選択した項目を「利用可能」に戻すボタンのタイトル"
+	},
+	"set_move_chosen": {
+		"message": "選択済みに移動",
+		"description": "選択した項目を「選択済み」に移動するボタンのタイトル"
+	},
+	"set_org_preview": {
+		"message": "Org プレビュー",
+		"description": "組織固有の Tab の外観をプレビューするラベル"
+	},
+	"set_org_styler": {
+		"message": "Org スタイラー",
+		"description": "組織固有の Tab のスタイルを設定するラベル"
+	},
+	"set_tab_background_active_label": {
+		"message": "アクティブな一般Tabsの背景色を入力します。",
+		"description": "アクティブな一般Tabsの背景色を設定するラベル"
+	},
+	"set_tab_background_label": {
+		"message": "組織Tabsの背景色を入力します。",
+		"description": "組織専用Tabsの背景色を設定するラベル"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "アクティブな組織Tabsのボーダーカラーを入力します。",
+		"description": "アクティブな組織専用Tabsのボーダーカラーを設定するラベル"
+	},
+	"set_tab_border_color_label": {
+		"message": "一般Tabsのボーダーカラーを入力します。",
+		"description": "一般Tabsのボーダーカラーを設定するラベル"
+	},
+	"set_tab_color_active_label": {
+		"message": "アクティブな一般Tabsのテキスト色を入力します。",
+		"description": "アクティブな一般Tabsのテキスト色を設定するラベル"
+	},
+	"set_tab_color_label": {
+		"message": "組織Tabsのテキスト色を入力します。",
+		"description": "組織専用Tabsのテキスト色を設定するラベル"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "アクティブな組織Tabsの装飾スタイルを1つ以上選択します。",
+		"description": "アクティブな組織専用Tabsの装飾スタイルを選択するプロンプト"
+	},
+	"set_tab_decoration_label": {
+		"message": "一般Tabsの装飾スタイルを1つ以上選択します。",
+		"description": "一般Tabsの装飾スタイルを選択するプロンプト"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "アクティブな一般Tabsのホバーバックグラウンド色を入力します。",
+		"description": "アクティブな一般Tabsのホバーバックグラウンド色を設定するラベル"
+	},
+	"set_tab_hover_background_label": {
+		"message": "組織Tabsのホバーバックグラウンド色を入力します。",
+		"description": "組織専用Tabsのホバーバックグラウンド色を設定するラベル"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "アクティブな組織Tabsのシャドウカラーを入力します。",
+		"description": "アクティブな組織専用Tabsのシャドウカラーを設定するラベル"
+	},
+	"set_tab_shadow_label": {
+		"message": "一般Tabsのシャドウカラーを入力します。",
+		"description": "一般Tabsのシャドウカラーを設定するラベル"
+	},
+	"set_tab_top_active_label": {
+		"message": "アクティブな一般Tabsの上部バーの色を入力します。",
+		"description": "アクティブな一般Tabsの上部バーの色を設定するラベル"
+	},
+	"set_toggle_preview": {
+		"message": "クリックしてアクティブ状態を切り替えます。",
+		"description": "アクティブ状態切り替えコントロールのツールチップテキスト"
+	},
+	"settings": {
+		"message": "設定",
+		"description": "設定メニューのラベル"
+	},
+	"setup_page": {
+		"message": "Setup ページ",
+		"description": "[notSalesforceSetup] Salesforce の設定を変更するためのページ"
+	},
+	"skip": {
+		"message": "スキップする",
+		"description": "[req_permission] 許可を与えないためのボタン"
+	},
+	"successfully_imported": {
+		"message": "正常にインポートされました",
+		"description": "[toast] 外部ファイルから Tabs が追加されました"
+	},
+	"tab_explain": {
+		"message": "各項目は 'label' と 'url' を文字列として持つ必要があります。さらに、各項目は 'org' を文字列として持つことができます。",
+		"description": "[error] Tab の作成方法を説明します。"
+	},
+	"tab_information": {
+		"message": "Tab 情報",
+		"description": "Update Tab モーダルのタイトル"
+	},
+	"tab_label": {
+		"message": "Tab ラベル",
+		"description": "[popup] Tab 名の列ヘッダー"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "単一のSalesforce組織の場合の、TabのOrgプロパティ"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "[popup] Tab の URL の列ヘッダー"
+	},
+	"table_delete": {
+		"message": "Tab を削除する",
+		"description": "[popup] 削除ボタン付き列の補助テキスト"
+	},
+	"table_org": {
+		"message": "Is Org Tab",
+		"description": "[popup] Org チェックボックス付き列の補助テキスト"
+	},
+	"table_row_label": {
+		"message": "この URL のためのラベルを入力してください",
+		"description": "[popup] Tab 名の入力フィールド"
+	},
+	"table_row_org": {
+		"message": "この Tab をこの Org のみにする場合はクリックしてください。",
+		"description": "[popup] Org 固有の Tab にするためのチェックボックス"
+	},
+	"table_row_org_name": {
+		"message": "この Tab が利用可能な Org",
+		"description": "[popup] Org 名の入力フィールド"
+	},
+	"table_row_url": {
+		"message": "リダイレクト先の sub_URL を入力してください。",
+		"description": "[popup] Tab の URL の入力フィールド"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "お気に入りのリンク"
+	},
+	"tabs_saved": {
+		"message": "Tabs が保存されました。",
+		"description": "[toast] Tabs が正常に保存されました。"
+	},
+	"theme_dark": {
+		"message": "ダークテーマに変更する",
+		"description": "[popup] テーマ変更用に月の上にあるタイトル"
+	},
+	"theme_light": {
+		"message": "ライトテーマに変更する",
+		"description": "[popup] テーマ変更用に太陽の上にあるタイトル"
+	},
+	"underline": {
+		"message": "下線",
+		"description": "Tabテキストに下線を引く装飾スタイルオプション"
+	},
+	"underline_wavy": {
+		"message": "波線下線",
+		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
+	},
+	"update_available": {
+		"message": "アップデート利用可能",
+		"description": "拡張機能の新しいアップデートが利用可能です"
+	},
+	"upload": {
+		"message": "アップロード",
+		"description": "[インポート] ユーザーが自分のファイルを参照して適切なものを選択できるようにします"
+	},
+	"users": {
+		"message": "ユーザー",
+		"description": "ManageUsers/home に関連するページの名前"
+	},
+	"where_to": {
+		"message": "どこへ？",
+		"description": "[open-other-org-modal] モーダルの代替タイトル"
+	}
+}

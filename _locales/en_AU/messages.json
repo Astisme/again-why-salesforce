@@ -1,0 +1,46 @@
+{
+	"set_tab_background_active_label": {
+		"message": "Insert the background colour for your active generic Tabs.",
+		"description": "Label to set background colour for active generic Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Insert the background colour for your org Tabs.",
+		"description": "Label to set background colour for org-specific Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Insert the border colour for your active org Tabs.",
+		"description": "Label to set border colour for active org-specific Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Insert the border colour for your generic Tabs.",
+		"description": "Label to set border colour for generic Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Insert the colour of the text for your active generic Tabs.",
+		"description": "Label to set text colour for active generic Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Insert the colour of the text for your org Tabs.",
+		"description": "Label to set text colour for org-specific Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Insert the hover background colour for your active generic Tabs.",
+		"description": "Label to set hover background colour for active generic Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Insert the hover background colour for your org Tabs.",
+		"description": "Label to set hover background colour for org-specific Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Insert the shadow colour for your active org Tabs.",
+		"description": "Label to set shadow colour for active org-specific Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Insert the shadow colour for your generic Tabs.",
+		"description": "Label to set shadow colour for generic Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Insert the colour for the bar at the top of your active generic Tabs.",
+		"description": "Label to set top-bar colour for active generic Tabs"
+	}
+}

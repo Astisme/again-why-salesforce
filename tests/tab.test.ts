@@ -58,25 +58,6 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 		assertEquals(tab.org, "testorg");
 	});
 
-	await t.step("creates tab from valid object with tabTitle", () => {
-		const tab = Tab.create({
-			tabTitle: "Profile",
-			url: "https://example.com/profile",
-		});
-		assertEquals(tab.label, "Profile");
-		assertEquals(tab.url, "https://example.com/profile");
-		assertEquals(tab.org, undefined);
-	});
-
-	await t.step("tab is valid from valid object with tabTitle", () => {
-		assert(
-			Tab.isValid({
-				tabTitle: "Profile",
-				url: "https://example.com/profile",
-			}),
-		);
-	});
-
 	await t.step(
 		"throws error when object contains unexpected keys",
 		() => {
@@ -89,7 +70,18 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 					});
 				},
 				Error,
-				"Unexpected keys found: invalidKey",
+				"error_tab_unexpected_keys",
+			);
+			assertThrows(
+				() => {
+					Tab.create({
+						tabTitle: "Test",
+						url: "https://example.com",
+						org: "value",
+					});
+				},
+				Error,
+				"error_tab_unexpected_keys",
 			);
 		},
 	);
@@ -105,7 +97,7 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 					}, "extraParam");
 				},
 				Error,
-				"When calling with an object, do not pass anything else.",
+				"error_tab_object_creation",
 			);
 		},
 	);
@@ -118,7 +110,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 				Tab.create("", "https://example.com");
 			},
 			Error,
-			"Label must be a non-empty string",
+			"error_tab_label",
 		);
 	});
 
@@ -134,7 +126,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 				Tab.create("Test", "");
 			},
 			Error,
-			"URL must be a non-empty string",
+			"error_tab_url",
 		);
 	});
 
@@ -150,7 +142,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 				Tab.create("Test", "https://example.com", 123);
 			},
 			Error,
-			"Org must be a string or undefined",
+			"error_tab_org",
 		);
 	});
 
@@ -182,7 +174,7 @@ await Deno.test("Tab Constructor Protection", () => {
 			new Tab("Test", "https://example.com", undefined, Symbol("fake"));
 		},
 		Error,
-		"Use Tab.create() instead of new Tab()",
+		"error_tab_constructor",
 	);
 });
 
@@ -527,5 +519,73 @@ await Deno.test("URL manipulation", async (t) => {
 
 	await t.step("extractOrgName", () => {
 		assert(true);
+	});
+});
+
+await Deno.test("Update", async (t) => {
+	const newlabel = "new label";
+	const oldlabel = "old label";
+	const newurl = "new-url";
+	const oldurl = "old-url";
+	const neworg = "neworg";
+	const oldorg = "oldorg";
+	await t.step("Update Tab", () => {
+		const tab = Tab.create(oldlabel, oldurl);
+		assertEquals(tab.update({ label: newlabel }).label, newlabel);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.update({ url: newurl }).url, newurl);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, newurl);
+		assertEquals(tab.update({ org: neworg }).org, neworg);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, newurl);
+		assertEquals(tab.org, neworg);
+		assertEquals(tab.update({ org: "" }).org, undefined);
+		assertEquals(tab.label, newlabel);
+		assertEquals(tab.url, newurl);
+		assertEquals(tab.org, undefined);
+	});
+
+	await t.step("Update Tab Static", () => {
+		const tab = Tab.create(oldlabel, oldurl, oldorg);
+		const updatedlabel = Tab.update(tab, { label: newlabel });
+		assertEquals(updatedlabel.label, newlabel);
+		assertEquals(updatedlabel.url, tab.url);
+		assertEquals(updatedlabel.org, tab.org);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		const updatedurl = Tab.update(tab, { url: newurl });
+		assertEquals(updatedurl.label, tab.label);
+		assertEquals(updatedurl.url, newurl);
+		assertEquals(updatedurl.org, tab.org);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		const updatedorg = Tab.update(tab, { org: neworg });
+		assertEquals(updatedorg.label, tab.label);
+		assertEquals(updatedorg.url, tab.url);
+		assertEquals(updatedorg.org, neworg);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		const undefinedorg = Tab.update(tab, { org: "" });
+		assertEquals(undefinedorg.label, tab.label);
+		assertEquals(undefinedorg.url, tab.url);
+		assertEquals(undefinedorg.org, undefined);
+		assertEquals(tab.label, oldlabel);
+		assertEquals(tab.url, oldurl);
+		assertEquals(tab.org, oldorg);
+		assertThrows(
+			() => Tab.update(null),
+			Error,
+			"Unknown tab",
+		);
+		assertThrows(
+			() => Tab.update({ url: "https://example.com" }),
+			Error,
+			"Unknown tab",
+		);
 	});
 });
