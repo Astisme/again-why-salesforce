@@ -89,26 +89,32 @@ Watch a quick walkthrough: [Demo Video](https://youtu.be/BtlKRvac9ZQ)
 ### Open in Another Org
 
 <p align="center">
-    Launch a Setup Tab in a different org with one click. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
+    Launch a Setup Tab in a different org with one click.
     <br />
 	<img src="/images/open-other-org.gif" width="50%" title="Open Other Org"/>
 </p>
 
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org)
+
 ### Org-specific Tabs
 
 <p align="center">
-    Customize Tabs per Salesforce org profile. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
+    Customize Tabs per Salesforce org profile.
     <br />
 	<img src="/images/org-specific-tabs.gif" width="50%" title="Org-specific Tabs"/>
 </p>
 
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/What-is-a-Tab).
+
 ### Import Tabs
 
 <p align="center">
-    Bulk-import Tab configurations from another org. [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
+    Bulk-import Tab configurations from another org.
     <br />
 	<img src="/images/import.gif" width="50%" title="Import functionality"/>
 </p>
+
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Open-Other-Org).
 
 ## Browser Support
 
