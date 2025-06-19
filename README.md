@@ -6,7 +6,6 @@
 
 > A lightweight Chrome/Edge/Firefox/Safari extension that lets you create and manage custom Setup Tabs for your most-used Salesforce Setup pages.
 
-
 [![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)](https://github.com/Astisme/again-why-salesforce/releases)
 [![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white)](https://github.com/Astisme/again-why-salesforce/commits/main/)
 [![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636)](https://github.com/Astisme/again-why-salesforce/blob/main/LICENSE)
@@ -53,7 +52,6 @@
 Click on your preferred browser icon to go to the extension store.
 
 For Safari users, we recommend checking out our [installation guide](https://github.com/Astisme/again-why-salesforce/wiki/Safari-Installation).
-
 
 ## Wonderful Features
 
@@ -133,7 +131,7 @@ If you prefer to self-host or start contibuting, run one of the following comman
 - **Firefox**: `deno task dev-firefox`
 - **Safari**: `deno task dev-safari`
 
-Then load the unpacked extension in your browser’s developer mode (search online `how to load unpacked extension for ` + your browser).
+Then load the unpacked extension in your browser’s developer mode (search online `how to load unpacked extension for` + your browser).
 
 ## Contributing
 
