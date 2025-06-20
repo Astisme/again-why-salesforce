@@ -250,7 +250,6 @@ await Deno.test("Utility methods", async (t) => {
 	await t.step("equals", () => {
 		assertFalse(tab_with_org.equals());
 		assertFalse(tab_with_org.equals({ label: "Text" }));
-		assert(tab_with_org.equals({ label: "Test" }));
 		assertFalse(tab_with_org.equals({ org: "testOrg" }));
 		assert(tab_with_org.equals({ org: "testorg" }));
 		// label
@@ -270,10 +269,10 @@ await Deno.test("Utility methods", async (t) => {
 			url: "https://example.com",
 			org: "testorg",
 		}));
-		assert(tab_with_org.equals({
+		assertFalse(tab_with_org.equals({
 			label: "Test",
 		}));
-		assert(tab_with_org.equals({
+		assertFalse(tab_with_org.equals({
 			label: "Test",
 			url: "https://example.com",
 		}));
@@ -303,10 +302,10 @@ await Deno.test("Utility methods", async (t) => {
 			label: "Test",
 			org: "testorg",
 		}));
-		assert(tab_with_org.equals({
+		assertFalse(tab_with_org.equals({
 			url: "https://example.com",
 		}));
-		assert(tab_with_org.equals({
+		assertFalse(tab_with_org.equals({
 			url: "https://example.com",
 			label: "Test",
 		}));
@@ -358,8 +357,53 @@ await Deno.test("Utility methods", async (t) => {
 		assert(tab_no_org.equals(object_no_org));
 		assert(tab_no_org.equals(tab_no_org));
 		assert(tab_with_org.equals(object_with_org));
-		assert(tab_with_org.equals(object_no_org));
+		assertFalse(tab_with_org.equals(object_no_org));
 		assert(tab_with_org.equals(tab_with_org));
+	});
+
+	await t.step("isDuplicate", () => {
+		assertFalse(tab_with_org.isDuplicate());
+		assertFalse(tab_with_org.isDuplicate({ label: "Text" }));
+		assertFalse(tab_with_org.isDuplicate({ org: "testorg" }));
+		// url
+		assertFalse(tab_with_org.isDuplicate({
+			url: "https://www.example.com",
+		}));
+		assertFalse(tab_with_org.isDuplicate({
+			url: "https://www.example.com",
+			org: "testorg",
+		}));
+		assertFalse(tab_with_org.isDuplicate({
+			url: "https://example.com",
+		}));
+		assert(tab_with_org.isDuplicate({
+			url: "https://example.com",
+			org: "testorg",
+		}));
+		// org
+		assertFalse(tab_with_org.isDuplicate({
+			org: "testOrg",
+		}));
+		assertFalse(tab_with_org.isDuplicate({
+			org: "testOrg",
+			url: "https://example.com",
+		}));
+		assertFalse(tab_with_org.isDuplicate({
+			org: "testorg",
+		}));
+		assert(tab_with_org.isDuplicate({
+			org: "testorg",
+			url: "https://example.com",
+		}));
+		// objects
+		assertFalse(tab_no_org.isDuplicate(tab_with_org));
+		assertFalse(tab_no_org.isDuplicate(object_with_org));
+		assert(tab_no_org.isDuplicate(object_no_org));
+		assert(tab_no_org.isDuplicate(tab_no_org));
+		assert(tab_with_org.isDuplicate(tab_with_org));
+		assert(tab_with_org.isDuplicate(object_with_org));
+		assertFalse(tab_with_org.isDuplicate(object_no_org));
+		assertFalse(tab_with_org.isDuplicate(tab_no_org));
 	});
 });
 

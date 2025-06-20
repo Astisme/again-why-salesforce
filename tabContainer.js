@@ -274,7 +274,7 @@ export default class TabContainer extends Array {
 			]);
 			throw new Error(msg);
 		}
-		if (this.exists(tab)) {
+		if (this.exists(tab, true)) {
 			const msg = await translator.translate([
 				"error_duplicate_tab",
 				JSON.stringify(tab),
@@ -426,27 +426,44 @@ export default class TabContainer extends Array {
 	/**
 	 * Checks if a tab with the specified data (label, url, and organization) exists in the container.
 	 *
-	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
-	 * @param {string|null} [tab.label=null] - The label of the tab to check for.
+	 * @param {Object} - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
 	 * @param {string|null} [tab.url=null] - The URL of the tab to check for.
 	 * @param {Object|null} [tab.org=null] - The organization associated with the tab to check for.
 	 * @returns {boolean} - `true` if a tab with the specified data exists, otherwise `false`.
 	 */
-	exists({ label = null, url = null, org = null } = {}) {
+	exists({ url = null, org = null } = {}, checkDuplicate = false) {
+		if (this.length === 0) {
+			return false;
+		}
 		if (url != null) {
 			url = Tab.minifyURL(url);
 		}
 		if (org != null) {
 			org = Tab.extractOrgName(org);
 		}
-		return this.length !== 0 &&
-			this.some((tb) =>
-				tb.equals({
-					label,
+		return this.some((tb) =>
+			checkDuplicate
+				? tb.isDuplicate({
 					url,
 					org,
 				})
-			);
+				: tb.equals({
+					url,
+					org,
+				})
+		);
+	}
+
+	/**
+	 * Checks if a tab with the specified data (url and organization) exists in the container. Checks both with the org and without the org
+	 *
+	 * @param {Object} - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
+	 * @param {string|null} [tab.url=null] - The URL of the tab to check for.
+	 * @param {Object|null} [tab.org=null] - The organization associated with the tab to check for.
+	 * @returns {boolean} - `true` if a tab with the specified data exists, otherwise `false`.
+	 */
+	existsWithOrWithoutOrg({ url = null, org = null } = {}) {
+		return this.exists({ url, org }) || this.exists({ url });
 	}
 
 	/**

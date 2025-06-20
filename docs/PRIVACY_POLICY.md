@@ -10,6 +10,7 @@ _Last updated: June 2025_
 
 - We rely on [Simple Analytics](https://www.simpleanalytics.com/#why) to have an estimate on user numbers and most used extension version.
 - Only anonymous, non-identifiable "ping" messages are sent. No IP addresses, cookies, or device fingerprints.
+- You'll only send 1 ping per day, and a special ping is sent when you install the extension.
 - You can opt-out of analytics in the extension’s **Settings** at any time; see "Opt-Out" below.
 - All of these data is **automatically deleted** after 30 days.
 - The Analytics Data is always available [at this link](https://dashboard.simpleanalytics.com/extension.again.whysalesforce)

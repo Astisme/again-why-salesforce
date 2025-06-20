@@ -115,8 +115,8 @@ function _exportHandler(tabs) {
 			filename,
 		});
 		return;
-	} else if (ISSAFARI) {
-		// Safari: send a message to the content script
+	} else {
+		// Safari and unidentified browsers: send a message to the content script
 		bg_notify({
 			what: WHAT_EXPORT,
 			filename,
@@ -124,7 +124,6 @@ function _exportHandler(tabs) {
 		});
 		return;
 	}
-	console.warn(["error_export", ISCHROME, ISFIREFOX, ISSAFARI]);
 }
 
 /**
@@ -196,10 +195,13 @@ export async function checkForUpdates() {
 		no_update_notification != null &&
 		(
 			no_update_notification.enabled === true || // the user does not want to be notified
-			Math.floor(
-					(new Date() - new Date(no_update_notification.date)) /
-						(1000 * 60 * 60 * 24),
-				) <= 7 // the date difference is less than a week
+			(
+				no_update_notification.date != null &&
+				Math.floor(
+						(new Date() - new Date(no_update_notification.date)) /
+							(1000 * 60 * 60 * 24),
+					) <= 7 // the date difference is less than a week
+			)
 		)
 	) {
 		return;

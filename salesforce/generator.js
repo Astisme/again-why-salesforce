@@ -377,20 +377,22 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const descriptionDiv = document.createElement("div");
 	descriptionDiv.id = "toastDescription7382:0";
 	descriptionDiv.setAttribute("data-aura-rendered-by", "7390:0");
-	const messageSpan = document.createElement("span");
-	messageSpan.classList.add(
-		"toastMessage",
-		"slds-text-heading--small",
-		"forceActionsText",
-	);
-	messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
-	messageSpan.setAttribute("data-aura-class", "forceActionsText");
-	messageSpan.textContent = (await translator.translate(message)).replaceAll(
+	const translatedMessageSplit = (await translator.translate(message)).split(
 		"\n",
-		"<br />",
 	);
+	translatedMessageSplit.forEach((msg_split) => {
+		const messageSpan = document.createElement("div");
+		messageSpan.classList.add(
+			"toastMessage",
+			"slds-text-heading--small",
+			"forceActionsText",
+		);
+		messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
+		messageSpan.setAttribute("data-aura-class", "forceActionsText");
+		messageSpan.textContent = msg_split;
+		descriptionDiv.appendChild(messageSpan);
+	});
 	// Assemble the message
-	descriptionDiv.appendChild(messageSpan);
 	contentInner.appendChild(descriptionDiv);
 	toastContent.appendChild(contentInner);
 	// Assemble the toast

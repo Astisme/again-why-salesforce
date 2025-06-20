@@ -53,6 +53,7 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
+import { sendExtensionMessage, SETTINGS_KEY } from "../constants.js";
 
 let allTabs;
 /**
@@ -185,14 +186,16 @@ async function checkAddLightningNavigation() {
  * @param {string|null} [what=null] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
  * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
  */
-function sf_afterSet(what = null, tabs = null) {
+function sf_afterSet(what = null, tabs = null, shouldReload = true) {
 	if (setupTabUl == null) {
 		return;
 	}
 	if (what == null || what === "saved") {
 		showToast(["extension_label", "tabs_saved"]);
 	}
-	reloadTabs(tabs);
+	if (shouldReload === true) {
+		reloadTabs(tabs);
+	}
 }
 
 /**
@@ -309,7 +312,7 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
 	const url = Tab.minifyURL(href);
 	wasOnSavedTab = isCurrentlyOnSavedTab;
 	allTabs = await ensureAllTabsAvailability();
-	isCurrentlyOnSavedTab = allTabs.exists({ url });
+	isCurrentlyOnSavedTab = allTabs.existsWithOrWithoutOrg({ url, org: href });
 	if (isFromHrefUpdate) {
 		callback(isCurrentlyOnSavedTab);
 	}
@@ -450,7 +453,6 @@ async function reorderTabs() {
 	try {
 		// Get the list of tabs
 		const tabs = Array.from(setupTabUl.children)
-			.slice(3) // remove Salesforce's tabs
 			.map((tab) => {
 				const a = tab.querySelector("a");
 				if (a == null) {
@@ -488,7 +490,7 @@ async function reorderTabs() {
 			removeOrgTabs: true,
 			//keepTabsNotThisOrg: Tab.extractOrgName(href),
 		});
-		sf_afterSet();
+		sf_afterSet(undefined, tabs, false);
 	} catch (error) {
 		showToast(error.message, false);
 	}
@@ -1055,9 +1057,31 @@ function listenToReorderedTabs() {
  */
 async function checkInsertAnalytics() {
 	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
-	if (prevent_analytics != null && prevent_analytics.enabled === true) {
+	const isNewUser = prevent_analytics.date == null;
+	if (
+		prevent_analytics != null &&
+		(
+			prevent_analytics.enabled === true || // the user does not want to send analytics call
+			(
+				!isNewUser &&
+				Math.floor(
+						(new Date() - new Date(prevent_analytics.date)) /
+							(1000 * 60 * 60 * 24),
+					) <= 0 // the date difference is less than a day
+			)
+		)
+	) {
 		return;
 	}
+	// set last date saved as today (no need to wait for promise fullfillment)
+	sendExtensionMessage({
+		what: "set",
+		key: SETTINGS_KEY,
+		set: [{
+			id: PREVENT_ANALYTICS,
+			date: new Date().toJSON(),
+		}],
+	});
 	const whereToAppend = document.head || document.documentElement;
 	const cspMeta = document.querySelector(
 		'meta[http-equiv="Content-Security-Policy"]',
@@ -1074,13 +1098,15 @@ async function checkInsertAnalytics() {
 		meta.setAttribute("http-equiv", "Content-Security-Policy");
 		meta.setAttribute(
 			"content",
-			"default-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com;",
+			"default-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com;",
 		);
 		whereToAppend.appendChild(meta);
 	}
 	const img = document.createElement("img");
 	img.src =
-		`https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F${EXTENSION_VERSION}`;
+		`https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F${EXTENSION_VERSION}${
+			isNewUser ? "/new-user" : ""
+		}`;
 	img.alt = "";
 	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
 	whereToAppend.appendChild(img);

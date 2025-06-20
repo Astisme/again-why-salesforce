@@ -14,6 +14,8 @@ import {
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
+import { setupDrag } from "../../dragHandler.js";
+setupDrag();
 
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
@@ -208,7 +210,7 @@ function inputLabelUrlListener(type) {
 		const url = Tab.minifyURL(value);
 		element.value = url;
 		// check eventual duplicates
-		if (allTabs.exists({ url })) {
+		if (allTabs.existsWithOrWithoutOrg({ url, org: value })) {
 			// show warning in salesforce
 			sendExtensionMessage({
 				what: "warning",
