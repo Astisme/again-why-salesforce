@@ -316,7 +316,29 @@ export default class Tab {
 		return !(label == null && url == null && org == null) &&
 			(label == null || label === this.label) &&
 			(url == null || url === this.url) &&
-			(org == null || (this.org != null && org === this.org));
+			((org == null && this.org == null) || org === this.org);
+	}
+
+	/**
+	 * Compares the current `Tab` instance to another object for equality based on the `url`, and possibly on the `org` properties.
+	 * Two Tabs are duplicaters if they have the same `url` and the same `org` properties.
+	 * If two Tabs have the same `url`, but different `org` (and viceversa) they are NOT duplicates.
+	 *
+	 * @param {Object} [param] - The object to compare against.
+	 * @param {string|null} [param.url=null] - The URL to compare.
+	 * @param {string|null} [param.org=null] - The organization to compare.
+	 * @returns {boolean} - Returns `true` if the `Tab` is duplicate to the provided object based on the specified properties, otherwise `false`.
+	 */
+	isDuplicate({ url = null, org = null } = {}) {
+		return url != null &&
+			url === this.url &&
+			(
+				( // could be passed one as null and the other one as undefined
+					org == null &&
+					this.org == null
+				) ||
+				org === this.org
+			);
 	}
 
 	/**

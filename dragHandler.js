@@ -1,3 +1,5 @@
+import { EXTENSION_NAME } from "/constants.js";
+
 let table;
 let ul;
 let container;
@@ -86,10 +88,10 @@ function handleDrop(e) {
 	const dragSrcIndex = [...parent.children].indexOf(dragSrcEl); // Get the index of the dragged row
 	if (targetIndex > dragSrcIndex) {
 		// If the target row is after the dragged row, insert the dragged row before the target row
-		parent.insertBefore(dragSrcEl, targetRow);
+		targetRow.insertAdjacentElement("afterend", dragSrcEl);
 	} else {
 		// If the target row is before the dragged row, insert the dragged row after the target row
-		parent.insertBefore(dragSrcEl, targetRow.nextSibling);
+		targetRow.insertAdjacentElement("beforebegin", dragSrcEl);
 	}
 	e.target.style.cursor = "grab";
 	postMessage({ what: "order" }, "*");
@@ -114,7 +116,7 @@ function createListeners() {
  */
 export function setupDrag() {
 	table = document.getElementById("sortable-table");
-	ul = document.getElementsByClassName("tabBarItems slds-grid")[0];
+	ul = document.getElementById(EXTENSION_NAME);
 	container = table ?? ul;
 	closestTag = table != null ? "tr" : "li";
 	if (container != null) createListeners();

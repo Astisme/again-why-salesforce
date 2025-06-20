@@ -166,7 +166,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 
 		assert(await container.addTab({ label: "Unique", url: "unique-url" }));
 		assert(
-			await container.addTab({ label: "New Tabb", url: "unique-url" }),
+			await container.addTab({ label: "New Tabb", url: "unique-url-1" }),
 		);
 		assert(
 			await container.addTab({ label: "New Tab", url: "unique-url2" }),
@@ -192,7 +192,7 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 			await container.addTabs([
 				{ label: "Org1 Tab", url: "url1", org: "org1" },
 				{ label: "Org2 Tab", url: "url2", org: "org2" },
-				{ label: "Org2 Tab2", url: "url2", org: "org2" },
+				{ label: "Org2 Tab2", url: "url22", org: "org2" },
 				{ label: "No Org Tab", url: "url3" },
 			]),
 		);
@@ -355,7 +355,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 			]),
 		);
 		assertEquals(container.length, 7);
@@ -387,7 +387,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 			]),
 		);
 		assertEquals(container.length, 5);
@@ -425,7 +425,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 			]),
 		);
 		assertEquals(container.length, 7);
@@ -445,7 +445,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 			]),
 		);
 		assertEquals(container.length, 7);
@@ -472,7 +472,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 				{ label: "Org Tab3", url: "urll", org: "test-org2" },
 			]),
 		);
@@ -494,21 +494,42 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			2,
 		);
 
-		assertEquals(container.getTabsByData({ label: "Org Tab" }).length, 1);
-		assertEquals(container.getTabsByData({ url: "urll" }).length, 3);
+		assertEquals(container.getTabsByData({ label: "Org Tab" }).length, 0);
+		assertEquals(
+			container.getTabsByData({ label: "Org Tab", org: "test-org" })
+				.length,
+			1,
+		);
+		assertEquals(container.getTabsByData({ url: "urll" }).length, 0);
+		assertEquals(
+			container.getTabsByData({ url: "urll", org: "test-org1" }).length,
+			1,
+		);
 		assertEquals(
 			container.getTabsByData({ org: "test-org1", url: "urll" }).length,
-			2,
+			1,
 		);
 		assertEquals(
 			container.getTabsByData({ label: "Org Tab" }, false).length,
+			8,
+		);
+		assertEquals(
+			container.getTabsByData(
+				{ label: "Org Tab", org: "test-org" },
+				false,
+			).length,
 			7,
 		);
-		assertEquals(container.getTabsByData({ url: "urll" }, false).length, 5);
+		assertEquals(container.getTabsByData({ url: "urll" }, false).length, 8);
+		assertEquals(
+			container.getTabsByData({ url: "urll", org: "test-org1" }, false)
+				.length,
+			7,
+		);
 		assertEquals(
 			container.getTabsByData({ org: "test-org1", url: "urll" }, false)
 				.length,
-			6,
+			7,
 		);
 		assertEquals(container.length, 8);
 	});
@@ -522,7 +543,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 				{ label: "Org Tab3", url: "urll", org: "test-org2" },
 			]),
 		);
@@ -558,20 +579,20 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 			"error_many_tabs_found",
 		);
 		// equal to getTabsByData
+		assertThrows(
+			() => container.getSingleTabByData({ label: "Org Tab" }),
+			Error,
+			"error_tab_not_found",
+		);
 		assertEquals(
-			container.getSingleTabByData({ label: "Org Tab" }).label,
+			container.getSingleTabByData({ label: "Org Tab", org: "test-org" })
+				.label,
 			"Org Tab",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ url: "urll" }),
 			Error,
-			"error_many_tabs_found",
-		);
-		assertThrows(
-			() =>
-				container.getSingleTabByData({ org: "test-org1", url: "urll" }),
-			Error,
-			"error_many_tabs_found",
+			"error_tab_not_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ label: "Org Tab" }, false),
@@ -605,7 +626,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "normal-url", org: "test-org1" },
 				{ label: "Org Tab3", url: "urll", org: "test-org2" },
 			]),
 		);
@@ -623,8 +644,14 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container.getTabIndex({ org: "test-org" }), 3);
 		assertEquals(container.getTabIndex({ org: "test-org1" }), 5);
 
-		assertEquals(container.getTabIndex({ label: "Org Tab" }), 3);
-		assertEquals(container.getTabIndex({ url: "urll" }), 5);
+		assertEquals(
+			container.getTabIndex({ label: "Org Tab", org: "test-org" }),
+			3,
+		);
+		assertEquals(
+			container.getTabIndex({ url: "urll", org: "test-org1" }),
+			5,
+		);
 		assertEquals(
 			container.getTabIndex({ org: "test-org2", url: "urll" }),
 			7,
@@ -643,21 +670,63 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org2" },
+				{ label: "Org Tab3", url: "url3", org: "test-org1" },
+				{ label: "Org Tab3", url: "url3", org: "test-org2" },
 			]),
 		);
 		assertEquals(container.length, 8);
-		assert(container.exists({ org: "test-org" }));
-		assert(container.exists({ org: "test-org1" }));
+		assertFalse(
+			container.exists({ org: "test-org" }, true),
+			"does not exist with org only",
+		);
+		assert(container.exists({ url: "url", org: "test-org" }, true));
+		assert(container.exists({ url: "url3", org: "test-org1" }, true));
 
-		assert(container.exists({ label: "Org Tab" }));
-		assert(container.exists({ url: "urll" }));
-		assert(container.exists({ org: "test-org2", url: "urll" }));
-		assert(container.exists({ org: "test-org2" }));
-		assertFalse(container.exists({ org: "not-present" }));
-		assertFalse(container.exists({ url: "url-not-present" }));
+		assertFalse(container.exists({ label: "Org Tab" }, true));
+		assertFalse(
+			container.exists({ url: "urll" }, true),
+			"does not exist with url only",
+		);
+		assert(container.exists({ url: "urll", org: "test-org1" }, true));
+		assert(container.exists({ org: "test-org2", url: "url3" }, true));
+		assertFalse(container.exists({ org: "test-org2" }, true));
+		assertFalse(container.exists({ org: "not-present" }, true));
+		assertFalse(
+			container.exists({ url: "urll", org: "not-present" }, true),
+		);
+		assertFalse(container.exists({ url: "url-not-present" }, true));
+		assertFalse(
+			container.exists({ url: "url-not-present", org: "test-org" }, true),
+		);
 		assertEquals(container.length, 8);
+
+		assert(
+			container.exists({ org: "test-org" }, false),
+		);
+		assert(container.exists({ url: "url", org: "test-org" }, false));
+		assert(container.exists({ url: "url3", org: "test-org1" }, false));
+
+		assertFalse(container.exists({ label: "Org Tab" }, false));
+		assertFalse(
+			container.exists({ url: "urll" }, false),
+		);
+		assert(
+			container.exists({ url: "urll", org: "test-org1" }, false),
+		);
+		assert(container.exists({ url: "urll", org: "test-org1" }, false));
+		assert(container.exists({ org: "test-org2", url: "url3" }, false));
+		assert(container.exists({ org: "test-org2" }, false));
+		assertFalse(container.exists({ org: "not-present" }, false));
+		assertFalse(
+			container.exists({ url: "urll", org: "not-present" }, false),
+		);
+		assertFalse(container.exists({ url: "url-not-present" }, false));
+		assertFalse(
+			container.exists(
+				{ url: "url-not-present", org: "test-org" },
+				false,
+			),
+		);
 	});
 
 	await t.step("toJSON", async () => {
@@ -958,7 +1027,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 				{ label: "Org Tab", url: "url", org: "test-org" },
 				{ label: "Normal Tab", url: "normal-url" },
 				{ label: "Org Tab2", url: "urll", org: "test-org1" },
-				{ label: "Org Tab3", url: "urll", org: "test-org1" },
+				{ label: "Org Tab3", url: "url3", org: "test-org1" },
 			]),
 		);
 		assertEquals(container.length, 7);
@@ -975,7 +1044,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[3].url, "url");
 		assertEquals(container[4].url, "normal-url");
 		assertEquals(container[5].url, "urll");
-		assertEquals(container[6].url, "urll");
+		assertEquals(container[6].url, "url3");
 		matchStorageToContainer(container);
 		assertEquals(
 			await container.moveTab({ url: "normal-url" }, {
@@ -990,7 +1059,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 		assertEquals(container[3].url, "url");
 		assertEquals(container[4].url, "urll");
 		assertEquals(container[5].url, "normal-url");
-		assertEquals(container[6].url, "urll");
+		assertEquals(container[6].url, "url3");
 		matchStorageToContainer(container);
 	});
 

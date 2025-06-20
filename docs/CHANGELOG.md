@@ -3,6 +3,45 @@
 All notable changes to this project are documented here.\
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
 
+# v2.0.1
+
+## 🚀 Added
+
+### Updates to the extension
+
+1. Created Tab.isDuplicate() to check if a Tab exists with or without org.
+2. Updated use of TabContainer.exists(), for duplicate prevention and check for current href link.
+3. Track new users on the extension using `/version/new-user`
+
+## 🛠 Changed
+
+### Salesforce
+
+1. Send ping for analytics only once a day (added `date` key to check for this).
+
+### Background
+
+1. Allow export on browsers other than Chrome / Firefox / Safari (removed strict check for Safari after Chrome and Firefox).
+
+### Updates to the extension
+
+1. A Tab was considered duplicate only based on the `url`; now multiple Tabs may exist with the same `url` but different `org` values.
+
+### Updates to the repository
+
+1. Updated [Privacy Policy](https://github.com/Astisme/again-why-salesforce/blob/main/docs/PRIVACY_POLICY.md) to reflect new storage options used for analytics.
+
+## 🐛 Fixed
+
+### Salesforce
+
+1. Fixed toast message showing html break (`<br />`) by inserting more `div` elements when there's a line break in the text (`\n`) instead of one single `span` with the text only.
+2. Fix drag and drop of Tabs not working (due to using our own `ul` from v2.0.0).
+
+### Popup
+
+1. Fix drag and drop of Tabs not working (due to using our own `ul` from v2.0.0).
+
 # v2.0.0
 
 ## 🚀 Added

@@ -282,7 +282,8 @@ export async function showFavouriteButton(count = 0) {
 		console.error(`${EXTENSION_LABEL} - ${failHead}`);
 		return setTimeout(() => showFavouriteButton(), 5000);
 	}
-	const url = Tab.minifyURL(getCurrentHref());
+	const currentHref = getCurrentHref();
+	const url = Tab.minifyURL(currentHref);
 	// Do not add favourite button on Home and Object Manager
 	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
 	if (standardTabs.includes(url)) {
@@ -302,7 +303,7 @@ export async function showFavouriteButton(count = 0) {
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
 		allTabs = await ensureAllTabsAvailability();
-		toggleFavouriteButton(allTabs.exists({ url }));
+		toggleFavouriteButton(allTabs.exists({ url, org: currentHref }));
 		return;
 	}
 	const button = await generateFavouriteButton();
