@@ -312,11 +312,14 @@ export default class Tab {
 	 * @param {string|null} [param.org=null] - The organization to compare.
 	 * @returns {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
 	 */
-	equals({ label = null, url = null, org = null } = {}) {
+	equals({ label = null, url = null, org = null } = {}, strict = true) {
 		return !(label == null && url == null && org == null) &&
 			(label == null || label === this.label) &&
 			(url == null || url === this.url) &&
-			((org == null && this.org == null) || org === this.org);
+            (
+                ( strict && ((org == null && this.org == null) || org === this.org) ) ||
+                ( !strict && (org == null || org === this.org) )
+            );
 	}
 
 	/**

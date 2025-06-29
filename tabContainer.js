@@ -371,7 +371,7 @@ export default class TabContainer extends Array {
 				label,
 				url,
 				org,
-			})
+			}, false)
 		);
 	}
 

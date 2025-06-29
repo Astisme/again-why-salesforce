@@ -444,6 +444,7 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
 BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
+    console.log(info)
 	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
