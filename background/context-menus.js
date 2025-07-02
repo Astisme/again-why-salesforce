@@ -444,9 +444,6 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
 BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
-    console.log(info)
-	const message = { what: info.menuItemId };
-	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
 		case CXM_EXPORT_TABS:
 			checkLaunchExport();
@@ -454,6 +451,10 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case cxm_open_settings:
 			openSettingsPage();
 			return;
+	}
+	const message = { what: info.menuItemId };
+	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+	switch (info.menuItemId) {
 		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);
@@ -472,15 +473,19 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_REMOVE_TAB:
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
+			message.org = Tab.extractOrgName(info.pageUrl ?? browserTabUrl);
 			break;
-		default:
-			message.tabUrl = Tab.minifyURL(info.linkUrl ?? info.pageUrl);
+		default: {
+			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
+			message.tabUrl = Tab.minifyURL(url);
 			message.url = Tab.expandURL(
-				info.linkUrl ?? info.pageUrl,
+				url,
 				browserTabUrl,
 			);
 			message.label = info.linkText;
+			message.org = Tab.extractOrgName(url);
 			break;
+		}
 	}
 	bg_notify(message);
 });

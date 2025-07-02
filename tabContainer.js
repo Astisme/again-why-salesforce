@@ -358,7 +358,11 @@ export default class TabContainer extends Array {
 	 * @param {boolean} [match=true] - A flag indicating whether to return tabs that exactly match the specified tab data (`true`), or those that do not match (`false`). Defaults to `true`.
 	 * @returns {Array<Tab>} - An array of tabs that match the specified tab data condition.
 	 */
-	getTabsByData({ label = null, url = null, org = null } = {}, match = true) {
+	getTabsByData(
+		{ label = null, url = null, org = null } = {},
+		match = true,
+		strict = false,
+	) {
 		if (label == null && url == null) {
 			if (org == null) {
 				return [];
@@ -371,7 +375,7 @@ export default class TabContainer extends Array {
 				label,
 				url,
 				org,
-			}, false)
+			}, strict)
 		);
 	}
 
@@ -385,12 +389,38 @@ export default class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if it finds 0 Tabs or more than 1 Tab.
 	 * @returns {Tab} - A Tab that matches the specified tab data condition.
 	 */
-	getSingleTabByData(tab, match = true) {
-		const matchingTabs = this.getTabsByData(tab, match);
+	getSingleTabByData(tab, match = true, isRetry = false) {
+		const matchingTabs = this.getTabsByData(tab, match, isRetry);
 		if (matchingTabs.length === 0) {
-			throw new Error("error_tab_not_found");
+			if (isRetry) {
+				throw new Error("error_tab_not_found");
+			}
+			return this.getSingleTabByData(
+				{
+					label: tab.label,
+					url: tab.url,
+					org: undefined,
+				},
+				match,
+				true,
+			);
 		}
 		if (matchingTabs.length > 1) {
+			if (
+				!match || (tab.url == null && tab.org == null) ||
+				(tab.url == null && tab.org != null)
+			) {
+				throw new Error("error_many_tabs_found");
+			}
+			const filteredTabs = matchingTabs.filter((tb) =>
+				tb.org == null || tb.org === tab.org
+			);
+			if (filteredTabs.length === 1) {
+				return filteredTabs[0];
+			}
+			if (filteredTabs.length >= 1) {
+				return filteredTabs.filter((tb) => tb.org != null)?.[0];
+			}
 			throw new Error("error_many_tabs_found");
 		}
 		return matchingTabs[0];
@@ -668,6 +698,7 @@ export default class TabContainer extends Array {
 			}
 		}
 		if (invalidTab != null) {
+			console.trace();
 			throw new Error([
 				"error_tabcont_invalid_tabs",
 				JSON.stringify(invalidTab),
@@ -753,43 +784,12 @@ export default class TabContainer extends Array {
 	}
 
 	/**
-	 * Retrieves a Tab matching the specified label and URL criteria.
-	 * Throws an error if the URL is not provided or if no suitable Tab is found.
-	 * If multiple matches exist and no label is specified, an error is thrown.
-	 *
-	 * @param {string|null} [label=null] - Optional label to further filter matching Tabs.
-	 * @param {string|null} [url=null] - URL to match; required.
-	 * @returns {Promise<object>} A promise that resolves to the first matching Tab object.
-	 * @throws {Error} If `url` is null, if no Tabs match, or if multiple Tabs match when `label` is not specified.
-	 */
-	async getMatchingTab(label = null, url = null) {
-		if (url == null) {
-			const msg = await translator.translate("error_no_url");
-			throw new Error(msg);
-		}
-		const matchingTabs = this.getTabsByData({ label, url });
-		if (matchingTabs.length === 0) {
-			const msg = await translator.translate("error_no_matching_tab");
-			throw new Error(msg);
-		}
-		const matchTab = matchingTabs[0];
-		if (label == null) {
-			if (matchingTabs.length > 1) {
-				const msg = await translator.translate(
-					"error_many_matching_tab",
-				);
-				throw new Error(msg);
-			}
-		}
-		return matchTab;
-	}
-
-	/**
 	 * Moves a tab to a new position in the `TabContainer`. The tab can be moved to the beginning or end of the container, or just to an adjacent position.
 	 *
 	 * @param {Object} [tab={ label: null, url: null }] - The tab data used to identify the tab to move. The object can include `label` and `url` properties.
 	 * @param {string|null} [tab.label=null] - The label of the tab to move.
 	 * @param {string|null} [tab.url=null] - The URL of the tab to move.
+	 * @param {string|null} [tab.org=null] - The current org.
 	 * @param {Object} [options={ moveBefore: true, fullMovement: false }] - Options for the movement behavior.
 	 * @param {boolean} [options.moveBefore=true] - A flag indicating whether to move the tab before the current one (`true`) or after (`false`).
 	 * @param {boolean} [options.fullMovement=false] - A flag indicating whether to move the tab to the start or end of the container (`true`), or just to an adjacent position (`false`).
@@ -813,36 +813,14 @@ export default class TabContainer extends Array {
 	 * ==> tabs = ["a", "b", "d", "e", "c"]
 	 */
 	async moveTab(
-		{ label = null, url = null } = {},
+		inputTab = { label: null, url: null, org: null },
 		{ moveBefore = true, fullMovement = false } = {},
 	) {
-		/*
-		if (url == null) {
-            const msg = await translator.translate("error_no_url");
-			throw new Error(msg);
-		}
-		const matchingTabs = this.getTabsByData({ label, url });
-		if (matchingTabs.length === 0) {
-            const msg = await translator.translate("error_no_matching_tab");
-			throw new Error(msg);
-		}
-		const matchTab = matchingTabs[0];
-		if (label == null) {
-			if (matchingTabs.length > 1) {
-                const msg = await translator.translate("error_many_matching_tab");
-                throw new Error(msg);
-			}
-			label = matchTab.label;
-		}
-        */
-		const matchTab = await this.getMatchingTab(label, url);
-		if (label == null) {
-			label = matchTab.label;
-		}
-		const index = this.getTabIndex({ label, url });
-		const [tab] = this.splice(index, 1);
+		const matchTab = this.getSingleTabByData(inputTab);
+		const currentIndex = this.getTabIndex(matchTab);
 		let newIndex;
 		if (fullMovement) {
+			const [tab] = this.splice(currentIndex, 1);
 			if (moveBefore) {
 				this.unshift(tab);
 				newIndex = 0;
@@ -851,11 +829,21 @@ export default class TabContainer extends Array {
 				newIndex = this.length - 1;
 			}
 		} else {
-			newIndex = moveBefore
-				? Math.max(0, index - 1)
-				: Math.min(this.length, index + 1);
+			// check that the new index place does not contain a not-this-org Tab
+			let correctedIndexFound = false;
+			let i = 1;
+			while (!correctedIndexFound && i < this.length) {
+				newIndex = moveBefore
+					? Math.max(0, currentIndex - i)
+					: Math.min(this.length, currentIndex + i);
+				const targetTabAtIndex = this[newIndex];
+				correctedIndexFound = inputTab.org == null ||
+					targetTabAtIndex?.org == null ||
+					targetTabAtIndex?.org === inputTab.org;
+				i++;
+			}
 			// from newIndex, remove 0 tabs and insert `tab` in their place
-			this.splice(newIndex, 0, tab);
+			this.splice(newIndex, 0, ...this.splice(currentIndex, 1));
 		}
 		await this.syncTabs();
 		return newIndex;
@@ -875,7 +863,7 @@ export default class TabContainer extends Array {
 			const msg = await translator.translate("error_no_data");
 			throw new Error(msg);
 		}
-		const index = this.getTabIndex(tab);
+		const index = this.getTabIndex(this.getSingleTabByData(tab));
 		const initialLength = this.length;
 		this.splice(index, 1);
 		if (!await this.syncTabs()) {
@@ -890,6 +878,7 @@ export default class TabContainer extends Array {
 	 * @param {Object} [tab={ label: null, url: null }] - The tab data used to identify the tab to keep. The object can include `label` and `url` properties.
 	 * @param {string|null} [tab.label=null] - The label of the tab to keep.
 	 * @param {string|null} [tab.url=null] - The URL of the tab to keep.
+	 * @param {string|null} [tab.org=null] - The Org of the tab to keep.
 	 * @param {Object} [options={ removeBefore: null }] - Options for removing tabs.
 	 * @param {boolean|null} [options.removeBefore=null] - A flag indicating whether to remove tabs before (`true`), after (`false`), or no tabs (`null`).
 	 * @throws {Error} - Throws an error if no matching tab is found, if more than one matching tab is found, or if no valid `url` is provided.
@@ -904,21 +893,36 @@ export default class TabContainer extends Array {
 	 * removeOtherTabs("b",false) ==> tabs = ["a", "b"]
 	 */
 	async removeOtherTabs(
-		{ label = null, url = null } = {},
+		tab = { label: null, url: null, org: null },
 		{ removeBefore = null } = {},
 	) {
-		const matchTab = await this.getMatchingTab(label, url);
-		if (label == null) {
-			label = matchTab.label;
-		}
+		const matchTab = this.getSingleTabByData(tab);
 		// remove all tabs but this one
 		if (removeBefore == null) {
 			return await this.syncTabs([matchTab]);
 		}
-		const index = this.getTabIndex({ label, url });
-		removeBefore
-			? this.splice(0, index)
-			: this.splice(index + 1, this.length);
+		/**
+		 * Checks if a Tab is org-specific and whether its `org` property is different from the one of the Tab received by the outer function.
+		 *
+		 * @param {Object} [tb] - The Tab that needs to be checked
+		 * @param {string|null} [tab.org=null] - The Org of the Tab to check.
+		 */
+		function getTabsNotThisOrg(tb) {
+			return tb.org != null && tb.org !== tab.org;
+		}
+		const index = this.getTabIndex(matchTab);
+		// prevent org tabs which are not for this org to be deleted unwillingly
+		if (removeBefore) {
+			this.unshift(
+				...this.splice(0, index)
+					.filter(getTabsNotThisOrg),
+			);
+		} else {
+			this.push(
+				...this.splice(index + 1, this.length)
+					.filter(getTabsNotThisOrg),
+			);
+		}
 		return await this.syncTabs();
 	}
 

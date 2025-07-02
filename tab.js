@@ -69,12 +69,11 @@ export default class Tab {
 					["error_tab_unexpected_keys", unexpectedKeys.join(", ")],
 				);
 			}
-			const createdTab = Tab.create(
+			return Tab.create(
 				tab.label,
 				tab.url,
 				tab.org,
 			);
-			return createdTab;
 		}
 		// Original method signature (label, url, org)
 		const label = labelOrTab;
@@ -316,10 +315,11 @@ export default class Tab {
 		return !(label == null && url == null && org == null) &&
 			(label == null || label === this.label) &&
 			(url == null || url === this.url) &&
-            (
-                ( strict && ((org == null && this.org == null) || org === this.org) ) ||
-                ( !strict && (org == null || org === this.org) )
-            );
+			(
+				(strict &&
+					((org == null && this.org == null) || org === this.org)) ||
+				(!strict && (org == null || org === this.org))
+			);
 	}
 
 	/**
