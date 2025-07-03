@@ -199,13 +199,11 @@ function getFavouriteImage(favouriteId, button = null) {
  */
 function toggleFavouriteButton(isSaved = null, button = null) {
 	// will use the class identifier if there was an error with the image (and was removed)
-	const star = getFavouriteImage(STAR_ID, button);
-	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 	if (isSaved == null) {
-		star.classList.toggle("hidden");
-		slashedStar.classList.toggle("hidden");
 		return;
 	}
+	const star = getFavouriteImage(STAR_ID, button);
+	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 	if (isSaved) {
 		star.classList.add("hidden");
 		slashedStar.classList.remove("hidden");
@@ -254,16 +252,18 @@ async function actionFavourite() {
 	const url = Tab.minifyURL(getCurrentHref());
 	if (getIsCurrentlyOnSavedTab()) {
 		allTabs = await ensureAllTabsAvailability();
-		const tabToRemove = allTabs.getTabsByData({ url })[0];
-		if (tabToRemove == null) {
+		try {
+			const tabToRemove = allTabs.getSingleTabByData({
+				url,
+				org: Tab.extractOrgName(getCurrentHref()),
+			});
+			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
+		} catch (_) {
 			showToast("error_remove_not_favourite", false, true);
-			return;
 		}
-		await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
 	} else {
 		await addTab(url);
 	}
-	toggleFavouriteButton();
 }
 
 /**
@@ -303,7 +303,12 @@ export async function showFavouriteButton(count = 0) {
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
 		allTabs = await ensureAllTabsAvailability();
-		toggleFavouriteButton(allTabs.exists({ url, org: currentHref }));
+		toggleFavouriteButton(
+			allTabs.existsWithOrWithoutOrg({
+				url,
+				org: Tab.extractOrgName(currentHref),
+			}),
+		);
 		return;
 	}
 	const button = await generateFavouriteButton();
