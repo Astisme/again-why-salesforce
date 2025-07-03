@@ -445,11 +445,11 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
  */
 BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 	switch (info.menuItemId) {
-		case CXM_EXPORT_TABS:
-			checkLaunchExport();
-			return;
 		case cxm_open_settings:
 			openSettingsPage();
+			return;
+		case CXM_EXPORT_TABS:
+			checkLaunchExport();
 			return;
 	}
 	const message = { what: info.menuItemId };
