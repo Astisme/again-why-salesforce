@@ -1097,19 +1097,19 @@ async function checkInsertAnalytics() {
 	) {
 		return;
 	}
-  {
-    // set last date saved as today (no need to wait for promise fullfillment)
-    const today = new Date();
-    today.setUTCHours(0,0,0,0);
-    sendExtensionMessage({
-      what: "set",
-      key: SETTINGS_KEY,
-      set: [{
-        id: PREVENT_ANALYTICS,
-        date: today.toJSON(),
-      }],
-    });
-  }
+	{
+		// set last date saved as today (no need to wait for promise fullfillment)
+		const today = new Date();
+		today.setUTCHours(0, 0, 0, 0);
+		sendExtensionMessage({
+			what: "set",
+			key: SETTINGS_KEY,
+			set: [{
+				id: PREVENT_ANALYTICS,
+				date: today.toJSON(),
+			}],
+		});
+	}
 	const whereToAppend = document.head || document.documentElement;
 	const cspMeta = document.querySelector(
 		'meta[http-equiv="Content-Security-Policy"]',
