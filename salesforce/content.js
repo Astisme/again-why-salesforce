@@ -589,7 +589,6 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	} = await generateOpenOtherOrgModal(
 		url, // if the url is "", we may still open the link in another Org without any issue
 		label ??
-			allTabs.getTabsByData({ url })[0]?.label ??
 			whereTo,
 	);
 	getModalHanger().appendChild(modalParent);
@@ -669,7 +668,11 @@ const ACTION_TOGGLE_ORG = "toggle-org";
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
  */
-export async function performActionOnTabs(action, tab = null, options = null) {
+export async function performActionOnTabs(
+	action,
+	tab = undefined,
+	options = undefined,
+) {
 	try {
 		allTabs = await ensureAllTabsAvailability();
 		switch (action) {
@@ -740,14 +743,18 @@ export async function performActionOnTabs(action, tab = null, options = null) {
  * @param {Object} [param0={}] - An Object containing the data used to identify a Tab
  * @param {string} param0.label - The label of the Tab to find
  * @param {string} param0.url - The Url of the Tab to find
+ * @param {string} param0.org - The Org of the Tab to find
  * @throws when it fails to sync the Tabs.
  */
-async function toggleOrg({ label, url } = {}) {
-	if (label == null && url == null) {
-		url = Tab.minifyURL(getCurrentHref());
+async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
+	if (inputTab.url == null) {
+		inputTab.url = Tab.minifyURL(getCurrentHref());
+	}
+	if (inputTab.org == null) {
+		inputTab.org = Tab.extractOrgName(getCurrentHref());
 	}
 	allTabs = await ensureAllTabsAvailability();
-	const matchingTab = allTabs.getSingleTabByData({ label, url });
+	const matchingTab = allTabs.getSingleTabByData(inputTab);
 	matchingTab.update({
 		org: matchingTab.org == null ? getCurrentHref() : "",
 	});
@@ -767,13 +774,22 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", false);
 	}
-	if (tab.label == null && tab.url == null && tab.org == null) {
-		tab = allTabs.getSingleTabByData({
-			url: Tab.minifyURL(getCurrentHref()),
-		});
-	}
+	const tabIsEmpty = tab.label == null && tab.url == null && tab.org == null;
 	allTabs = await ensureAllTabsAvailability();
-	const matchingTab = allTabs.getSingleTabByData(tab);
+	let matchingTab = null;
+	try {
+		matchingTab = allTabs.getSingleTabByData(
+			tabIsEmpty
+				? {
+					url: Tab.minifyURL(getCurrentHref()),
+					org: Tab.extractOrgName(getCurrentHref()),
+				}
+				: tab,
+		);
+	} catch (e) {
+		showToast(e.message, false, false);
+		return;
+	}
 	const {
 		modalParent,
 		saveButton,
@@ -903,58 +919,68 @@ function listenToBackgroundPage() {
 					createImportModal();
 					break;
 				case CXM_OPEN_OTHER_ORG:
-				case CMD_OPEN_OTHER_ORG: {
-					const label = message.linkTabLabel;
-					const url = message.linkTabUrl ?? message.pageTabUrl;
-					showModalOpenOtherOrg({ label, url });
+				case CMD_OPEN_OTHER_ORG:
+					showModalOpenOtherOrg({
+						label: message.linkTabLabel,
+						url: message.linkTabUrl ?? message.pageTabUrl ??
+							message.url,
+						org: message.org,
+					});
 					break;
-				}
 				case CXM_MOVE_FIRST:
 					await performActionOnTabs(ACTION_MOVE, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					}, { moveBefore: true, fullMovement: true });
 					break;
 				case CXM_MOVE_LEFT:
 					await performActionOnTabs(ACTION_MOVE, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					}, { moveBefore: true, fullMovement: false });
 					break;
 				case CXM_MOVE_RIGHT:
 					await performActionOnTabs(ACTION_MOVE, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					}, { moveBefore: false, fullMovement: false });
 					break;
 				case CXM_MOVE_LAST:
 					await performActionOnTabs(ACTION_MOVE, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					}, { moveBefore: false, fullMovement: true });
 					break;
 				case CXM_REMOVE_TAB:
 					await performActionOnTabs(ACTION_REMOVE_THIS, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					});
 					break;
 				case CXM_REMOVE_OTHER_TABS:
 					await performActionOnTabs(ACTION_REMOVE_OTHER, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					});
 					break;
 				case CXM_REMOVE_LEFT_TABS:
 					await performActionOnTabs(ACTION_REMOVE_OTHER, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					}, { removeBefore: true });
 					break;
 				case CXM_REMOVE_RIGHT_TABS:
 					await performActionOnTabs(ACTION_REMOVE_OTHER, {
 						label: message.label,
 						url: message.tabUrl,
+						org: message.org,
 					}, { removeBefore: false });
 					break;
 				case CXM_EMPTY_GENERIC_TABS:
@@ -975,14 +1001,16 @@ function listenToBackgroundPage() {
 				case CMD_TOGGLE_ORG:
 					await performActionOnTabs(ACTION_TOGGLE_ORG, {
 						label: message.label,
-						url: message.tabUrl,
+						url: message.tabUrl ?? message.url,
+						org: message.org,
 					});
 					break;
 				case CXM_UPDATE_TAB:
 				case CMD_UPDATE_TAB:
 					showModalUpdateTab({
 						label: message.label,
-						url: message.tabUrl,
+						url: message.tabUrl ?? message.url,
+						org: message.org,
 					});
 					break;
 				case CXM_EMPTY_VISIBLE_TABS:
@@ -1057,7 +1085,7 @@ function listenToReorderedTabs() {
  */
 async function checkInsertAnalytics() {
 	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
-	const isNewUser = prevent_analytics.date == null;
+	const isNewUser = prevent_analytics?.date == null;
 	if (
 		prevent_analytics != null &&
 		(
@@ -1073,15 +1101,19 @@ async function checkInsertAnalytics() {
 	) {
 		return;
 	}
-	// set last date saved as today (no need to wait for promise fullfillment)
-	sendExtensionMessage({
-		what: "set",
-		key: SETTINGS_KEY,
-		set: [{
-			id: PREVENT_ANALYTICS,
-			date: new Date().toJSON(),
-		}],
-	});
+	{
+		// set last date saved as today (no need to wait for promise fullfillment)
+		const today = new Date();
+		today.setUTCHours(0, 0, 0, 0);
+		sendExtensionMessage({
+			what: "set",
+			key: SETTINGS_KEY,
+			set: [{
+				id: PREVENT_ANALYTICS,
+				date: today.toJSON(),
+			}],
+		});
+	}
 	const whereToAppend = document.head || document.documentElement;
 	const cspMeta = document.querySelector(
 		'meta[http-equiv="Content-Security-Policy"]',

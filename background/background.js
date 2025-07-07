@@ -23,6 +23,7 @@ import {
 	SUPPORTED_SALESFORCE_URLS,
 	WHY_KEY,
 } from "/constants.js";
+import Tab from "/tab.js";
 import {
 	bg_getCurrentBrowserTab,
 	bg_notify,
@@ -361,39 +362,43 @@ function listenToExtensionMessages() {
 function listenToExtensionCommands() {
 	BROWSER.commands.onCommand.addListener(async (command) => {
 		// check the current page is Salesforce Setup
-		const broswerTabUrl = (await bg_getCurrentBrowserTab())?.url;
+		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 		if (
-			broswerTabUrl == null ||
-			!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+			browserTabUrl == null ||
+			!browserTabUrl.match(SETUP_LIGHTNING_PATTERN)
 		) {
 			// we're not in Salesforce Setup
 			return;
 		}
-		const message = { what: command };
+		switch (command) {
+			case CMD_OPEN_SETTINGS:
+				openSettingsPage();
+				return;
+			case CMD_EXPORT_ALL:
+				checkLaunchExport();
+				return;
+		}
+		const message = {
+			what: command,
+			url: Tab.minifyURL(browserTabUrl),
+			org: Tab.extractOrgName(browserTabUrl),
+		};
 		switch (command) {
 			case CMD_IMPORT:
 				message.what = "add";
-				/* falls through */
+				break;
 			case CMD_SAVE_AS_TAB:
 			case CMD_REMOVE_TAB:
 			case CMD_TOGGLE_ORG:
 			case CMD_UPDATE_TAB:
 			case CMD_OPEN_OTHER_ORG:
-				bg_notify(message);
-				break;
-			case CMD_OPEN_SETTINGS:
-				openSettingsPage();
-				break;
-			case CMD_EXPORT_ALL:
-				checkLaunchExport();
 				break;
 			default:
-				bg_notify({
-					what: "warning",
-					message: `Received unknown command: ${command}`,
-				});
+				message.what = "warning";
+				message.message = `Received unknown command: ${command}`;
 				break;
 		}
+		bg_notify(message);
 	});
 }
 
