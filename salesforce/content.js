@@ -743,14 +743,18 @@ export async function performActionOnTabs(
  * @param {Object} [param0={}] - An Object containing the data used to identify a Tab
  * @param {string} param0.label - The label of the Tab to find
  * @param {string} param0.url - The Url of the Tab to find
+ * @param {string} param0.org - The Org of the Tab to find
  * @throws when it fails to sync the Tabs.
  */
-async function toggleOrg({ label, url } = {}) {
-	if (label == null && url == null) {
-		url = Tab.minifyURL(getCurrentHref());
+async function toggleOrg(inputTab = {label: null, url: null, org: null}) {
+	if (inputTab.url == null) {
+		inputTab.url = Tab.minifyURL(getCurrentHref());
 	}
+    if(inputTab.org == null){
+        inputTab.org = Tab.extractOrgName(getCurrentHref());
+    }
 	allTabs = await ensureAllTabsAvailability();
-	const matchingTab = allTabs.getSingleTabByData({ label, url });
+	const matchingTab = allTabs.getSingleTabByData(inputTab);
 	matchingTab.update({
 		org: matchingTab.org == null ? getCurrentHref() : "",
 	});
@@ -997,7 +1001,7 @@ function listenToBackgroundPage() {
 				case CMD_TOGGLE_ORG:
 					await performActionOnTabs(ACTION_TOGGLE_ORG, {
 						label: message.label,
-						url: message.tabUrl,
+						url: message.tabUrl ?? message.url,
 						org: message.org,
 					});
 					break;
