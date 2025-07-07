@@ -746,13 +746,13 @@ export async function performActionOnTabs(
  * @param {string} param0.org - The Org of the Tab to find
  * @throws when it fails to sync the Tabs.
  */
-async function toggleOrg(inputTab = {label: null, url: null, org: null}) {
+async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
 	if (inputTab.url == null) {
 		inputTab.url = Tab.minifyURL(getCurrentHref());
 	}
-    if(inputTab.org == null){
-        inputTab.org = Tab.extractOrgName(getCurrentHref());
-    }
+	if (inputTab.org == null) {
+		inputTab.org = Tab.extractOrgName(getCurrentHref());
+	}
 	allTabs = await ensureAllTabsAvailability();
 	const matchingTab = allTabs.getSingleTabByData(inputTab);
 	matchingTab.update({
