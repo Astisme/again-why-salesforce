@@ -3,6 +3,47 @@
 All notable changes to this project are documented here.\
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
 
+# v2.0.2
+
+## 🛠 Changed
+
+### Tab Management
+
+1. Refactored how Tabs are identified and manipulated to include `org` (organization) as a first-class property alongside `label` and `url`.
+2. All Tab management operations (move, remove, update, etc.) now consistently distinguish Tabs with the same URL but different orgs.
+3. Improved the logic for moving Tabs: Tabs now skip over org-specific Tabs that don't match when reordering.
+4. Enhanced removal of Tabs to prevent deleting org-specific Tabs from other orgs by mistake.
+
+### API & Internals
+
+1. Refactored `TabContainer.getTabsByData` and related functions to support strict and flexible organization matching.
+2. Updated `TabContainer.getSingleTabByData` to better handle ambiguous/multiple matches and provide clearer errors.
+3. Improved test coverage for org-specific Tab operations, edge cases, and ambiguity handling.
+
+### UI & Salesforce Integration
+
+1. Context menu and keyboard commands now pass org information when acting on Tabs.
+2. Tab operations in Salesforce content scripts now consistently use org data, ensuring correct Tab manipulation across orgs.
+3. Updated the favourite button and logic to detect org-specific Tabs.
+
+## 🐛 Fixed
+
+### Tab Management
+
+1. Fixed bugs where actions could affect the wrong Tab if multiple Tabs shared the same URL but belonged to different orgs.
+2. Resolved edge cases in Tab reordering and context menu handling involving org-specific Tabs.
+3. Improved error messages and prevention of ambiguous Tab operations.
+
+### UI
+
+1. Addressed inconsistent state of the favourite button when multiple Tabs have the same URL but different orgs.
+2. Fixed potential UI errors when updating or toggling Tabs with incomplete org information.
+
+## 🧪 Tests
+
+1. Significantly expanded automated tests for Tab management, especially for edge cases involving org-specific and ambiguous Tabs.
+2. Added new test steps for moving and removing org Tabs, verifying correct behavior and error handling in complex scenarios.
+
 # v2.0.1
 
 ## 🚀 Added
