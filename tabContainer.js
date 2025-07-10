@@ -926,47 +926,36 @@ export default class TabContainer extends Array {
 		return await this.syncTabs();
 	}
 
-	/**
-	 * changed to async and not aligned anything
+  /**
+	 * Sorts the tabs in the container by a specified property and order.
+	 * After sorting, it synchronizes the changes.
+	 *
+	 * @param {Object} [options={}] - The sorting options.
+	 * @param {string} [options.sortBy='label'] - The property to sort by. Valid options found at Tab.allowedKeys.
+	 * @param {boolean} [options.sortAsc=true] - The sorting direction. Set to `true` for ascending order and `false` for descending.
+	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the sorting and synchronization are successful.
+	 * @throws {Error} - Throws an error if an invalid `sortBy` property is provided.
 	 */
-	/*
-    static async removeDuplicates(tabs) {
-        if (!TabContainer.isValid(tabs, false)) {
-            throw new Error("Cannot remove duplicates from an invalid container.");
-        }
-
-        // make sure we have Tabs
-        //tabs = await Promise.all(
-            //tabs.map(tab =>
-                //Tab.create(tab)
-            //)
-        //);
-
-
-        // all elements of the array are Tabs
-        const uniqueTabs = new Map();
-        tabs.forEach(tab => {
-            //const key = tab.hashCode();
-            const key = JSON.stringify(tab);
-            if (!uniqueTabs.has(key)) {
-                uniqueTabs.set(key, tab);
-            }
-        });
-
-        return new TabContainer(
-            Array.from(uniqueTabs.values()),
-            _tabContainerSecret,
-        );
+	async sort({ sortBy = 'label', sortAsc = true } = {}) {
+    // Check for unexpected keys
+    if (Tab.allowedKeys.has(sortBy)) {
+      throw new Error(
+        ["error_tab_unexpected_keys", sortBy],
+      );
     }
-    */
-
-	/*
-    isEmpty(){
-      return this.length === 0;
-    }
-
-    isNotEmpty(){
-      return !this.isEmpty();
-    }
-  */
+    const sortFactor = sortAsc ? 1 : -1;
+		super.sort((a, b) => {
+			const valA = a[sortBy];
+			const valB = b[sortBy];
+			// Treat null or undefined values as "smaller" to ensure they are grouped together
+			if (valA == null && valB != null) return -sortFactor;
+			if (valA != null && valB == null) return sortFactor;
+			if (valA == null && valB == null) return 0;
+			// Perform case-insensitive comparison for strings
+      // Adjust direction for descending order
+			return sortFactor * String(valA).localeCompare(String(valB), undefined, { sensitivity: 'base' });
+		});
+		// Persist the new order
+		return await this.syncTabs();
+	}
 }
