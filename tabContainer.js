@@ -6,6 +6,11 @@ let translator = null;
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
 export default class TabContainer extends Array {
+
+  isSorted = false;
+  isSortedAsc = false;
+  isSortedDesc = false;
+
 	/**
 	 * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
 	 * Throws an error if the provided secret does not match the expected secret value.
@@ -121,6 +126,7 @@ export default class TabContainer extends Array {
 		const temp = this.slice(start + deleteCount);
 		this.length = start;
 		this.push(...items, ...temp);
+    this.checkSetSorted();
 		return removedItems;
 	}
 
@@ -159,6 +165,7 @@ export default class TabContainer extends Array {
 		for (let i = start; i < end && i < this.length; i++) {
 			sliced.push(this[i]);
 		}
+    this.checkSetSorted();
 		return sliced;
 	}
 
@@ -211,9 +218,11 @@ export default class TabContainer extends Array {
 		const addedSomething = await checkAddTabs(this, savedTabs) &&
 			savedTabs.length > 0;
 		if (tabs == null && addedSomething) {
+      this.checkSetSorted();
 			return true;
 		}
 		if (await checkAddTabs(this, tabs) || addedSomething) {
+      this.checkSetSorted();
 			return true;
 		}
 		return await this.setDefaultTabs();
@@ -236,6 +245,7 @@ export default class TabContainer extends Array {
 			});
 			return this;
 		}
+    this.checkSetSorted();
 		return tabs;
 	}
 
@@ -282,6 +292,7 @@ export default class TabContainer extends Array {
 			throw new Error(msg);
 		}
 		this.push(Tab.create(tab));
+    this.checkSetSorted();
 		if (sync) {
 			return await this.syncTabs();
 		}
@@ -955,7 +966,55 @@ export default class TabContainer extends Array {
       // Adjust direction for descending order
 			return sortFactor * String(valA).localeCompare(String(valB), undefined, { sensitivity: 'base' });
 		});
+    this.isSorted = true;
+    this.isSortedAsc = sortAsc;
+    this.isSortedDesc = !sortAsc;
 		// Persist the new order
 		return await this.syncTabs();
 	}
+
+
+  /**
+   * Checks if the provided tabs are sorted by one of the allowed keys
+   * ('label', 'url', or 'org') in either ascending or descending order.
+   * 
+   * Sets the following properties on the instance:
+   * - `isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
+   * - `isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
+   * - `isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
+   * - `isSortedDesc`: `true` if sorted in descending order, `false` otherwise
+   * 
+   * Rules:
+   * - If `isSorted` is `false`, both `isSortedAsc` and `isSortedDesc` will also be `false`.
+   * - If `isSorted` is `true`, exactly one of `isSortedAsc` or `isSortedDesc` will be `true`.
+   *
+   * @param {Array<Object>} [tabs=this] - The array of tab objects to evaluate. Defaults to `this` if not provided.
+   */
+  checkSetSorted(tabs = this) {
+    this.isSorted = false;
+    this.isSortedBy = null;
+    this.isSortedAsc = false;
+    this.isSortedDesc = false;
+    for (const key of Tab.allowedKeys) {
+      let asc = true;
+      let desc = true;
+      for (let i = 1; i < tabs.length; i++) {
+        const prev = tabs[i - 1][key];
+        const curr = tabs[i][key];
+        const prevVal = prev == null ? '' : String(prev).toLowerCase();
+        const currVal = curr == null ? '' : String(curr).toLowerCase();
+        if (prevVal > currVal) asc = false;
+        if (prevVal < currVal) desc = false;
+        if (!asc && !desc) break; // No need to continue checking
+      }
+      if (asc || desc) {
+        this.isSorted = true;
+        this.isSortedBy = key;
+        this.isSortedAsc = asc;
+        this.isSortedDesc = desc;
+        break; // Exit after first detected sort order
+      }
+      return this.isSorted;
+    }
+  }
 }

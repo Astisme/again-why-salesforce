@@ -259,6 +259,9 @@ export const CXM_IMPORT_TABS = "import-tabs";
 export const CXM_EXPORT_TABS = "export-tabs";
 export const CXM_PAGE_SAVE_TAB = "page-save-tab";
 export const CXM_PAGE_REMOVE_TAB = "page-remove-tab";
+export const CXM_SORT_LABEL = "sort-label";
+export const CXM_SORT_URL = "sort-url";
+export const CXM_SORT_ORG = "sort-org";
 // commands (keyboard shortcuts)
 export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
 export const CMD_REMOVE_TAB = "cmd-remove-tab";
