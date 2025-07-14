@@ -217,6 +217,26 @@ const menuItemsOriginal = [
 		parentId: "remove",
 	},
 
+	{ id: "sort", title: "cxm_sort", contexts: ["link"] },
+	{
+		id: CXM_SORT_LABEL,
+		title: "cxm_sort_label",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+	{
+		id: CXM_SORT_URL,
+		title: "cxm_sort_url",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+	{
+		id: CXM_SORT_ORG,
+		title: "cxm_sort_org",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+
 	{
 		id: CXM_IMPORT_TABS,
 		title: "cxm_import_tabs",
@@ -478,6 +498,10 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			message.org = Tab.extractOrgName(info.pageUrl ?? browserTabUrl);
 			break;
+        case CXM_SORT_LABEL:
+        case CXM_SORT_URL:
+        case CXM_SORT_ORG:
+            break;
 		default: {
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
 			message.tabUrl = Tab.minifyURL(url);

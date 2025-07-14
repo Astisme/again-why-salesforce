@@ -126,7 +126,6 @@ export default class TabContainer extends Array {
 		const temp = this.slice(start + deleteCount);
 		this.length = start;
 		this.push(...items, ...temp);
-    this.checkSetSorted();
 		return removedItems;
 	}
 
@@ -165,7 +164,6 @@ export default class TabContainer extends Array {
 		for (let i = start; i < end && i < this.length; i++) {
 			sliced.push(this[i]);
 		}
-    this.checkSetSorted();
 		return sliced;
 	}
 
@@ -218,11 +216,9 @@ export default class TabContainer extends Array {
 		const addedSomething = await checkAddTabs(this, savedTabs) &&
 			savedTabs.length > 0;
 		if (tabs == null && addedSomething) {
-      this.checkSetSorted();
 			return true;
 		}
 		if (await checkAddTabs(this, tabs) || addedSomething) {
-      this.checkSetSorted();
 			return true;
 		}
 		return await this.setDefaultTabs();
@@ -245,7 +241,6 @@ export default class TabContainer extends Array {
 			});
 			return this;
 		}
-    this.checkSetSorted();
 		return tabs;
 	}
 
@@ -276,7 +271,7 @@ export default class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
-	async addTab(tab, sync = true) {
+	async addTab(tab, sync = true, fromAddTabs = false) {
 		if (!Tab.isValid(tab)) {
 			const msg = await translator.translate([
 				"error_invalid_tab",
@@ -292,10 +287,11 @@ export default class TabContainer extends Array {
 			throw new Error(msg);
 		}
 		this.push(Tab.create(tab));
-    this.checkSetSorted();
 		if (sync) {
 			return await this.syncTabs();
-		}
+		} else if(!fromAddTabs) {
+            this.checkSetSorted();
+        }
 		return true;
 	}
 
@@ -316,7 +312,7 @@ export default class TabContainer extends Array {
 		let addedAll = true;
 		for (const tab of tabs) {
 			try {
-				await this.addTab(tab, false);
+				await this.addTab(tab, false, true);
 			} catch (error) {
 				const msg = await translator.translate("error_duplicate_tab");
 				if (!error.message.startsWith(msg)) {
@@ -327,7 +323,9 @@ export default class TabContainer extends Array {
 		}
 		if (sync) {
 			await this.syncTabs();
-		}
+		} else {
+            this.checkSetSorted();
+        }
 		return addedAll;
 	}
 
@@ -657,6 +655,7 @@ export default class TabContainer extends Array {
 
 	/**
 	 * Synchronizes the tabs in the `TabContainer`. Optionally replaces the current tabs before synchronization.
+	 * Last function called by other entry points.
 	 *
 	 * @param {Array|null} [tabs=null] - An optional array of tabs to replace the current tabs before synchronization. If not provided, the current tabs are used.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
@@ -666,6 +665,7 @@ export default class TabContainer extends Array {
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
 			return false;
 		}
+        this.checkSetSorted();
 		return await TabContainer._syncTabs(tabs ?? this);
 	}
 
@@ -988,9 +988,9 @@ export default class TabContainer extends Array {
    * - If `isSorted` is `false`, both `isSortedAsc` and `isSortedDesc` will also be `false`.
    * - If `isSorted` is `true`, exactly one of `isSortedAsc` or `isSortedDesc` will be `true`.
    *
-   * @param {Array<Object>} [tabs=this] - The array of tab objects to evaluate. Defaults to `this` if not provided.
+   * @returns {boolean} whether the tabs in input are sorted or not.
    */
-  checkSetSorted(tabs = this) {
+  checkSetSorted() {
     this.isSorted = false;
     this.isSortedBy = null;
     this.isSortedAsc = false;
@@ -998,9 +998,9 @@ export default class TabContainer extends Array {
     for (const key of Tab.allowedKeys) {
       let asc = true;
       let desc = true;
-      for (let i = 1; i < tabs.length; i++) {
-        const prev = tabs[i - 1][key];
-        const curr = tabs[i][key];
+      for (let i = 1; i < this.length; i++) {
+        const prev = this[i - 1][key];
+        const curr = this[i][key];
         const prevVal = prev == null ? '' : String(prev).toLowerCase();
         const currVal = curr == null ? '' : String(curr).toLowerCase();
         if (prevVal > currVal) asc = false;
@@ -1014,7 +1014,7 @@ export default class TabContainer extends Array {
         this.isSortedDesc = desc;
         break; // Exit after first detected sort order
       }
-      return this.isSorted;
     }
+    return this.isSorted;
   }
 }
