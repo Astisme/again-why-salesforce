@@ -222,8 +222,8 @@ export async function checkForUpdates() {
 			i < Math.max(latestParts.length, currentParts.length);
 			i++
 		) {
-			const latestPart = latestParts[i] || 0;
-			const currentPart = currentParts[i] || 0;
+			const latestPart = latestParts[i] ?? 0;
+			const currentPart = currentParts[i] ?? 0;
 			if (latestPart > currentPart) {
 				return true;
 			} else if (latestPart < currentPart) {
@@ -262,11 +262,16 @@ export async function checkForUpdates() {
 		}
 		const releases = await response.json();
 		// Find the latest non-prerelease version
-		const latestVersion = releases.find((release) =>
-			!release.prerelease && release.tag_name.startsWith(BROWSER_NAME)
-		).tag_name.replace(/^.*-v/, "");
+		const latestVersion = releases.
+            filter((release) =>
+                !release.prerelease && isNewerVersion(release.tag_name.replace(/^.*(-)?v/, ""), currentVersion)
+            )
+            .sort((a, b) => {
+                return new Date(b.created_at) - new Date(a.created_at)
+            })
+            ?.[0].tag_name.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
-		if (isNewerVersion(latestVersion, currentVersion)) {
+		if (latestVersion != null) {
 			bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: currentVersion,
