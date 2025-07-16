@@ -87,6 +87,21 @@ export const mockBrowser = {
 					response = language;
 					break;
 				case "get-settings":
+                case "get-style-settings":
+                    const settings = mockStorage[message.key ?? SETTINGS_KEY];
+                    if(message.keys == null || settings == null){
+                        response = settings;
+                    } else {
+                        if(!Array.isArray(message.keys))
+                           message.keys = [message.keys];
+                        const requestedSettings = settings.filter((setting) =>
+                            message.keys.includes(setting.id)
+                        );
+                        response = message.keys.length > 1
+                            ? requestedSettings
+                            : requestedSettings[0];
+                    }
+                    /*
 					switch (message.keys) {
 						case USER_LANGUAGE:
 							response = language;
@@ -97,7 +112,11 @@ export const mockBrowser = {
 							);
 							break;
 					}
+                    */
 					break;
+                case "echo":
+                    response = message.echo;
+                    break;
 				default:
 					setError(`Unknown message type ${message.what}`);
 					break;

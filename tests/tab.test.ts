@@ -1,4 +1,3 @@
-import "./mocks.ts";
 import {
 	assert,
 	assertEquals,
