@@ -24,29 +24,47 @@ export interface InternalMessage {
 	keys?: string | string[];
 }
 
-const language = "fr";
+mockStorage.settings.push({ enabled: "fr", id: USER_LANGUAGE });
 
 type ContextMenuClickInfo = {
-    menuItemId: string;
-    [key: string]: any; // optional: to match full API structure
+	menuItemId: string;
+	[key: string]: any; // optional: to match full API structure
 };
 
 type BrowserTab = {
-    id: number;
-    url: string;
-    active: boolean;
-    currentWindow: boolean;
+	id: number;
+	url: string;
+	active: boolean;
+	currentWindow: boolean;
+};
+
+type Command = {
+	name: string;
+	description?: string;
+	shortcut?: string;
+	[key: string]: any;
+};
+type ContextMenu = {
+	name: string;
+};
+type Cookie = {
+	domain: string;
+	name: string;
 };
 
 type OnClickedCallback = (info: ContextMenuClickInfo, tab: BrowserTab) => void;
 type OnStartupCallback = () => void;
-type OnInstalledCallback = (details: { reason: string; [key: string]: any }) => void;
-type OnActivatedCallback = (activeInfo: { tabId: number; windowId: number }) => void;
+type OnInstalledCallback = (
+	details: { reason: string; [key: string]: any },
+) => void;
+type OnActivatedCallback = (
+	activeInfo: { tabId: number; windowId: number },
+) => void;
 type OnFocusChangedCallback = (windowId: number) => void;
 type OnMessageCallback = (
-    message: any,
-    sender: string,
-    sendResponse: (response?: any) => void
+	message: any,
+	sender: string,
+	sendResponse: (response?: any) => void,
 ) => boolean | void;
 type OnCommandCallback = (command: string) => void;
 
@@ -54,22 +72,23 @@ export const mockBrowser = {
 	storage: {
 		sync: {
 			get: (keys: string[], callback): Promise<object> => {
-                const makeResponse = () => {
-                    const response = {};
-                    keys.forEach((key) => {
-                        if (key === WHY_KEY) {
-                            response[WHY_KEY] = mockStorage.tabs;
-                        } else {
-                            response[key] = mockStorage[key];
-                        }
-                    });
-                    return response;
-                }
-                if(callback == null)
-                    return new Promise((resolve, _) => {
-                        resolve(makeResponse())
-                    });
-                callback(makeResponse());
+				const makeResponse = () => {
+					const response = {};
+					keys.forEach((key) => {
+						if (key === WHY_KEY) {
+							response[WHY_KEY] = mockStorage.tabs;
+						} else {
+							response[key] = mockStorage[key];
+						}
+					});
+					return response;
+				};
+				if (callback == null) {
+					return new Promise((resolve, _) => {
+						resolve(makeResponse());
+					});
+				}
+				callback(makeResponse());
 			},
 			// deno-lint-ignore require-await
 			set: async (data: { tabs: any[] }): Promise<boolean> => {
@@ -116,39 +135,28 @@ export const mockBrowser = {
 					break;
 				//case "get-language":
 				case "get-sf-language":
-					response = language;
+					response = "en";
 					break;
 				case "get-settings":
-                case "get-style-settings":
-                    const settings = mockStorage[message.key ?? SETTINGS_KEY];
-                    if(message.keys == null || settings == null){
-                        response = settings;
-                    } else {
-                        if(!Array.isArray(message.keys))
-                           message.keys = [message.keys];
-                        const requestedSettings = settings.filter((setting) =>
-                            message.keys.includes(setting.id)
-                        );
-                        response = message.keys.length > 1
-                            ? requestedSettings
-                            : requestedSettings[0];
-                    }
-                    /*
-					switch (message.keys) {
-						case USER_LANGUAGE:
-							response = language;
-							break;
-						default:
-							setError(
-								`Unknown message keys for ${message.what}: ${message.keys}`,
-							);
-							break;
+				case "get-style-settings":
+					const settings = mockStorage[message.key ?? SETTINGS_KEY];
+					if (message.keys == null || settings == null) {
+						response = settings;
+					} else {
+						if (!Array.isArray(message.keys)) {
+							message.keys = [message.keys];
+						}
+						const requestedSettings = settings.filter((setting) =>
+							message.keys.includes(setting.id)
+						);
+						response = message.keys.length > 1
+							? requestedSettings
+							: requestedSettings[0];
 					}
-                    */
 					break;
-                case "echo":
-                    response = message.echo;
-                    break;
+				case "echo":
+					response = message.echo;
+					break;
 				default:
 					setError(`Unknown message type ${message.what}`);
 					break;
@@ -159,120 +167,157 @@ export const mockBrowser = {
 			}
 			return response;
 		},
-        onMessage: {
-            _listeners: [] as OnMessageCallback[],
-            addListener(callback: OnMessageCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerMessage(
-                message: any,
-                sender: string = "",
-                sendResponse: (response?: any) => void = () => {}
-            ): void {
-                this._listeners.forEach(listener => listener(message, sender, sendResponse));
-            }
-        },
+		onMessage: {
+			_listeners: [] as OnMessageCallback[],
+			addListener(callback: OnMessageCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerMessage(
+				message: any,
+				sender: string = "",
+				sendResponse: (response?: any) => void = () => {},
+			): void {
+				this._listeners.forEach((listener) =>
+					listener(message, sender, sendResponse)
+				);
+			},
+		},
 		getURL: (path: string): string => {
 			return path;
 		},
 		getManifest: (): object => {
 			return manifest;
 		},
-        onStartup: {
-            _listeners: [] as OnStartupCallback[],
-            addListener(callback: OnStartupCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerStartup(): void {
-                this._listeners.forEach(listener => listener());
-            }
-        },
-        onInstalled: {
-            _listeners: [] as OnInstalledCallback[],
-            addListener(callback: OnInstalledCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerInstalled(details: { reason: string; [key: string]: any }): void {
-                this._listeners.forEach(listener => listener(details));
-            }
-        }
+		onStartup: {
+			_listeners: [] as OnStartupCallback[],
+			addListener(callback: OnStartupCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerStartup(): void {
+				this._listeners.forEach((listener) => listener());
+			},
+		},
+		onInstalled: {
+			_listeners: [] as OnInstalledCallback[],
+			addListener(callback: OnInstalledCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerInstalled(
+				details: { reason: string; [key: string]: any },
+			): void {
+				this._listeners.forEach((listener) => listener(details));
+			},
+		},
 	},
 	i18n: {
 		getMessage: (_: string): string => {
 			return "Again, Why Salesforce";
 		},
 	},
-    contextMenus: {
-        onClicked: {
-            _listeners: [] as OnClickedCallback[],
-            addListener(callback: OnClickedCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerClick(info: ContextMenuClickInfo, tab: BrowserTab): void {
-                this._listeners.forEach(listener => listener(info, tab));
-            }
-        }
-    },
-    tabs: {
-        onActivated: {
-            _listeners: [] as OnActivatedCallback[],
-            addListener(callback: OnActivatedCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerActivated(activeInfo: { tabId: number; windowId: number }): void {
-                this._listeners.forEach(listener => listener(activeInfo));
-            }
-        },
-        _mockBrowserTabs: [] as BrowserTab[],
-        // Allows you to set mock tab data in tests
-        setMockBrowserTabs(tabs: BrowserTab[]): void {
-            this._mockBrowserTabs = tabs;
-        },
-        query(queryInfo: Partial<BrowserTab>): Promise<BrowserTab[]> {
-            const result = this._mockBrowserTabs.filter(tab => {
-                return Object.entries(queryInfo).every(([key, value]) => tab[key as keyof BrowserTab] === value);
-            });
-            return Promise.resolve(result);
-        },
-        sendMessage(tabId: number, message: Message, options?: any): Promise<any> {
-            return new Promise((resolve, reject) => {
-                resolve(true);
-            });
-        }
-    },
-    windows: {
-        onFocusChanged: {
-            _listeners: [] as OnFocusChangedCallback[],
-            addListener(callback: OnFocusChangedCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerFocusChanged(windowId: number): void {
-                this._listeners.forEach(listener => listener(windowId));
-            }
-        }
-    },
-    commands: {
-        onCommand: {
-            _listeners: [] as OnCommandCallback[],
-            addListener(callback: OnCommandCallback): void {
-                this._listeners.push(callback);
-            },
-            triggerCommand(command: string): void {
-                this._listeners.forEach(listener => listener(command));
-            }
-        }
-    },
-    action: {
-        _popupMap: new Map<number | undefined, string>(),
-        setPopup(details: { tabId?: number; popup: string }): Promise<void> {
-            this._popupMap.set(details.tabId, details.popup);
-            return Promise.resolve();
-        },
-        // Optional helper for testing: get the popup set for a tab
-        getPopup(tabId?: number): string | undefined {
-            return this._popupMap.get(tabId);
-        }
-    }
+	contextMenus: {
+		onClicked: {
+			_listeners: [] as OnClickedCallback[],
+			addListener(callback: OnClickedCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerClick(info: ContextMenuClickInfo, tab: BrowserTab): void {
+				this._listeners.forEach((listener) => listener(info, tab));
+			},
+		},
+		_contextMenus: [] as ContextMenu[],
+		removeAll(): void {
+			this._contextMenus = [] as ContextMenu[];
+		},
+		create(cm: ContextMenu): void {
+			this._contextMenus.push(cm);
+		},
+	},
+	tabs: {
+		onActivated: {
+			_listeners: [] as OnActivatedCallback[],
+			addListener(callback: OnActivatedCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerActivated(
+				activeInfo: { tabId: number; windowId: number },
+			): void {
+				this._listeners.forEach((listener) => listener(activeInfo));
+			},
+		},
+		_mockBrowserTabs: [] as BrowserTab[],
+		// Allows you to set mock tab data in tests
+		setMockBrowserTabs(tabs: BrowserTab[]): void {
+			this._mockBrowserTabs = tabs;
+		},
+		query(queryInfo: Partial<BrowserTab>): Promise<BrowserTab[]> {
+			const result = this._mockBrowserTabs.filter((tab) => {
+				return Object.entries(queryInfo).every(([key, value]) =>
+					tab[key as keyof BrowserTab] === value
+				);
+			});
+			return Promise.resolve(result);
+		},
+		sendMessage(
+			tabId: number,
+			message: Message,
+			options?: any,
+		): Promise<any> {
+			return new Promise((resolve, reject) => {
+				resolve(true);
+			});
+		},
+	},
+	windows: {
+		onFocusChanged: {
+			_listeners: [] as OnFocusChangedCallback[],
+			addListener(callback: OnFocusChangedCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerFocusChanged(windowId: number): void {
+				this._listeners.forEach((listener) => listener(windowId));
+			},
+		},
+	},
+	commands: {
+		onCommand: {
+			_listeners: [] as OnCommandCallback[],
+			addListener(callback: OnCommandCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerCommand(command: string): void {
+				this._listeners.forEach((listener) => listener(command));
+			},
+		},
+		_mockCommands: [] as Command[],
+		// Allows you to define the available commands in tests
+		setMockCommands(commands: Command[]): void {
+			this._mockCommands = commands;
+		},
+		getAll(): Promise<Command[]> {
+			return Promise.resolve(this._mockCommands);
+		},
+	},
+	action: {
+		_popupMap: new Map<number | undefined, string>(),
+		setPopup(details: { tabId?: number; popup: string }): Promise<void> {
+			this._popupMap.set(details.tabId, details.popup);
+			return Promise.resolve();
+		},
+		// Optional helper for testing: get the popup set for a tab
+		getPopup(tabId?: number): string | undefined {
+			return this._popupMap.get(tabId);
+		},
+	},
+	cookies: {
+		_cookies: [] as Cookie[],
+		getAll(which: Cookie): Promise<Cookie[]> {
+			return Promise.resolve(
+				this._cookies.filter((c: Cookie) =>
+					c.domain === which.domain && c.name === which.name
+				),
+			);
+		},
+	},
 };
 
 declare global {
@@ -335,7 +380,9 @@ export const translations = {
 		},
 	},
 };
-/*
+
+const og_fetch = fetch;
+
 globalThis.fetch = (path) => ({
 	json: () => {
 		// extract from `/_locales/${language}/messages.json`
@@ -343,7 +390,11 @@ globalThis.fetch = (path) => ({
 			"/_locales/".length,
 			path.length - "/messages.json".length,
 		);
-		return translations[language];
+		if (language != null && language !== "") {
+			return translations[language];
+		} else {
+			return og_fetch(path)
+				.then((res) => res.json());
+		}
 	},
 });
-*/

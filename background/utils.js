@@ -262,14 +262,18 @@ export async function checkForUpdates() {
 		}
 		const releases = await response.json();
 		// Find the latest non-prerelease version
-		const latestVersion = releases.
-            filter((release) =>
-                !release.prerelease && isNewerVersion(release.tag_name.replace(/^.*(-)?v/, ""), currentVersion)
-            )
-            .sort((a, b) => {
-                return new Date(b.created_at) - new Date(a.created_at)
-            })
-            ?.[0].tag_name.replace(/^.*(-)?v/, "");
+		const latestVersion = releases
+			.filter((release) =>
+				!release.prerelease &&
+				isNewerVersion(
+					release.tag_name.replace(/^.*(-)?v/, ""),
+					currentVersion,
+				)
+			)
+			.sort((a, b) => {
+				return new Date(b.created_at) - new Date(a.created_at);
+			})
+			?.[0].tag_name.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
 		if (latestVersion != null) {
 			bg_notify({

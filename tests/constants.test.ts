@@ -286,9 +286,9 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 });
 
 Deno.test("getCssSelector builds correct selector", () => {
-    const extensionNameClass = ".again-why-salesforce";
-    const sldsActiveClass = ".slds-is-active";
-    const hasOrgTab = ":has(.is-org-tab)";
+	const extensionNameClass = ".again-why-salesforce";
+	const sldsActiveClass = ".slds-is-active";
+	const hasOrgTab = ":has(.is-org-tab)";
 	assertEquals(
 		getCssSelector(),
 		`${extensionNameClass}:not(${sldsActiveClass}):not(${hasOrgTab})`,
