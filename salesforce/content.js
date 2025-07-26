@@ -12,6 +12,9 @@ import {
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
+  CXM_SORT_LABEL,
+  CXM_SORT_URL,
+  CXM_SORT_ORG,
 	CXM_MOVE_RIGHT,
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
@@ -656,6 +659,7 @@ const ACTION_REMOVE_GENERIC_TABS = "remove-generic-tabs";
 const ACTION_RESET_DEFAULT = "reset-default";
 const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
+const ACTION_SORT = "sort";
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -725,6 +729,10 @@ export async function performActionOnTabs(
 					throw new Error("error_resetting_default_tabs");
 				}
 				break;
+      case ACTION_SORT:
+        if(!await allTabs.sort(options))
+					throw new Error("error_sorting_tabs", options);
+        break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -1019,6 +1027,15 @@ function listenToBackgroundPage() {
 				case CXM_RESET_DEFAULT_TABS:
 					await performActionOnTabs(ACTION_RESET_DEFAULT);
 					break;
+        case CXM_SORT_LABEL:
+					await performActionOnTabs(ACTION_SORT, undefined, {sortBy: 'label', sortAsc: allTabs.isSortedBy !== "label" || !allTabs.isSortedAsc});
+          break;
+        case CXM_SORT_URL:
+					await performActionOnTabs(ACTION_SORT, undefined, {sortBy: 'url', sortAsc: allTabs.isSortedBy !== "url" || !allTabs.isSortedAsc});
+          break;
+        case CXM_SORT_ORG:
+					await performActionOnTabs(ACTION_SORT, undefined, {sortBy: 'org', sortAsc: allTabs.isSortedBy !== "org" || !allTabs.isSortedAsc});
+          break;
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);
 					break;

@@ -2,12 +2,14 @@ import { BROWSER, WHY_KEY } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
+let fromSortFunction = false;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
 export default class TabContainer extends Array {
 
   isSorted = false;
+  isSortedBy = null;
   isSortedAsc = false;
   isSortedDesc = false;
 
@@ -660,11 +662,12 @@ export default class TabContainer extends Array {
 	 * @param {Array|null} [tabs=null] - An optional array of tabs to replace the current tabs before synchronization. If not provided, the current tabs are used.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
 	 */
-	async syncTabs(tabs = null) {
+	async syncTabs(tabs = null, checkSort = true) {
 		// replace tabs already checks the tabs
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
 			return false;
 		}
+    if(checkSort)
         this.checkSetSorted();
 		return await TabContainer._syncTabs(tabs ?? this);
 	}
@@ -949,7 +952,7 @@ export default class TabContainer extends Array {
 	 */
 	async sort({ sortBy = 'label', sortAsc = true } = {}) {
     // Check for unexpected keys
-    if (Tab.allowedKeys.has(sortBy)) {
+    if (!Tab.allowedKeys.has(sortBy)) {
       throw new Error(
         ["error_tab_unexpected_keys", sortBy],
       );
@@ -967,10 +970,12 @@ export default class TabContainer extends Array {
 			return sortFactor * String(valA).localeCompare(String(valB), undefined, { sensitivity: 'base' });
 		});
     this.isSorted = true;
+    this.isSortedBy = sortBy;
     this.isSortedAsc = sortAsc;
     this.isSortedDesc = !sortAsc;
 		// Persist the new order
-		return await this.syncTabs();
+    fromSortFunction = true;
+		return await this.syncTabs(undefined, false);
 	}
 
 
@@ -991,6 +996,10 @@ export default class TabContainer extends Array {
    * @returns {boolean} whether the tabs in input are sorted or not.
    */
   checkSetSorted() {
+    if(fromSortFunction){
+      fromSortFunction = false;
+      return;
+    }
     this.isSorted = false;
     this.isSortedBy = null;
     this.isSortedAsc = false;

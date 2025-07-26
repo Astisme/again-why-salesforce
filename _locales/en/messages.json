@@ -1,4 +1,24 @@
 {
+	"cxm_sort": {
+		"message": "🎯 Sort Tabs",
+		"description": "context menu to let users sort their Tabs automatically (parent menu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 by Label",
+		"description": "context menu to let users sort their Tabs by label"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 by Url",
+		"description": "context menu to let users sort their Tabs by url"
+	},
+	"cxm_sort_org": {
+		"message": "👽 by Org",
+		"description": "context menu to let users sort their Tabs by org"
+	},
+	"error_sorting_tabs": {
+		"message": "Error while sorting the Tabs",
+		"description": "[error] shown in a toast message"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
