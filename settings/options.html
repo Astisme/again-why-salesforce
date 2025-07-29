@@ -161,9 +161,34 @@
 			</div>
 		</div>
 
-		<div id="general-container" class="container">
+		<div id="save-confirm" class="invisible visibility-transition toastContainer slds-notify_container" style="pointer-events: none; top: 3%">
+            <div role="alertdialog" aria-describedby="toastDescription7382:0" aria-label="success" data-key="success" class="slds-theme--success slds-notify--toast slds-notify forceToastMessage" data-aura-rendered-by="7384:0" data-aura-class="forceToastMessage">
+                <lightning-icon icon-name="utility:success" class="slds-icon-utility-success toastIcon slds-m-right--small slds-no-flex slds-align-top slds-icon_container" data-data-rendering-service-uid="1478" data-aura-rendered-by="7386:0">
+                    <span style="--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent);" part="boundary">
+                        <lightning-primitive-icon size="small" variant="inverse">
+                            <svg class="slds-icon slds-icon_small" focusable="false" data-key="success" aria-hidden="true" viewBox="0 0 520 520" part="icon">
+                                <g>
+                                <path d="M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z">
+                                </path>
+                                </g>
+                            </svg>
+                        </lightning-primitive-icon>
+                    </span>
+                    <span class="slds-assistive-text">success</span>
+                </lightning-icon>
+                <div class="toastContent slds-notify__content" data-aura-rendered-by="7387:0">
+                    <div class="slds-align-middle slds-hyphenate" data-aura-rendered-by="7388:0">
+                        <div id="toastDescription7382:0" data-aura-rendered-by="7390:0">
+                            <div class="toastMessage slds-text-heading--small forceActionsText" data-aura-rendered-by="7395:0" data-aura-class="forceActionsText" data-i18n="opt_confirm_save">Settings were saved!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+		<div id="general-container" class="container center-columns">
 			<div id="language-container">
-				<label for="select-lang" data-i18n="opt_pick_language"
+				<label for="picked-language" data-i18n="opt_pick_language"
 				>Pick extension language</label>
 				<div class="select-wrapper">
 					<select id="picked-language">
@@ -367,6 +392,49 @@
 					</label>
 				</li>
 			</ul>
+			<hr>
+
+			<div id="sort-container" class="flex-row">
+                <div class="flex-row">
+                    <input
+                        id="keep_sorted"
+                        type="checkbox"
+                    />
+                    <label for="keep_sorted">
+                        <span data-i18n="opt_keep_sort">
+                            Keep Tabs sorted.
+                        </span>
+                    </label>
+                </div>
+				<div id="sort-wrapper" class="invisible visibility-transition">
+                    <label for="picked-sort" data-i18n="opt_pick_sort"
+                        >Pick by which field should the Tabs be sorted</label>
+                    <div class="select-wrapper">
+                        <select id="picked-sort">
+                            <option
+                                value="label"
+                                selected=""
+                                data-i18n="cxm_sort_label"
+                            >
+                                🥱 by Label
+                            </option>
+                            <option
+                                value="url"
+                                data-i18n="cxm_sort_url"
+                            >
+                                🤖 by Url
+                            </option>
+                            <option
+                                value="org"
+                                data-i18n="cxm_sort_org"
+                            >
+                                👽 by Org
+                            </option>
+                        </select>
+                    </div>
+				</div>
+			</div>
+
 		</div>
 
 		<div id="tab_generic_style-container" class="half-container hidden">
@@ -1916,7 +1984,7 @@
 			</div>
 		</div>
 
-		<div id="save-container" class="hidden">
+		<div id="save-container">
 			<button class="highlight" data-i18n="save">Save</button>
 		</div>
 	</body>

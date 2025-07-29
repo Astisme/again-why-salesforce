@@ -1,4 +1,16 @@
 {
+	"opt_pick_sort": {
+		"message": "Pick by which field should the Tabs be sorted",
+		"description": "[setting] now the user can pick by which key to keep the Tabs sorted by"
+	},
+	"opt_keep_sort": {
+		"message": "Keep Tabs sorted.",
+		"description": "[setting] allow the user to keep their Tabs sorted by one of their keys"
+	},
+	"opt_confirm_save": {
+		"message": "Settings were saved!",
+		"description": "[popup]"
+	},
 	"cxm_sort": {
 		"message": "🎯 Sort Tabs",
 		"description": "context menu to let users sort their Tabs automatically (parent menu)"

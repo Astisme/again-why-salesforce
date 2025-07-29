@@ -1,6 +1,7 @@
-import { BROWSER, WHY_KEY } from "/constants.js";
+import { BROWSER, WHY_KEY, PERSIST_SORT } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
+import { getSettings } from "./constants.js";
 let translator = null;
 let fromSortFunction = false;
 
@@ -292,7 +293,7 @@ export default class TabContainer extends Array {
 		if (sync) {
 			return await this.syncTabs();
 		} else if(!fromAddTabs) {
-            this.checkSetSorted();
+            await this.checkSetSorted();
         }
 		return true;
 	}
@@ -326,7 +327,7 @@ export default class TabContainer extends Array {
 		if (sync) {
 			await this.syncTabs();
 		} else {
-            this.checkSetSorted();
+            await this.checkSetSorted();
         }
 		return addedAll;
 	}
@@ -668,7 +669,7 @@ export default class TabContainer extends Array {
 			return false;
 		}
     if(checkSort)
-        this.checkSetSorted();
+        await this.checkSetSorted();
 		return await TabContainer._syncTabs(tabs ?? this);
 	}
 
@@ -947,10 +948,10 @@ export default class TabContainer extends Array {
 	 * @param {Object} [options={}] - The sorting options.
 	 * @param {string} [options.sortBy='label'] - The property to sort by. Valid options found at Tab.allowedKeys.
 	 * @param {boolean} [options.sortAsc=true] - The sorting direction. Set to `true` for ascending order and `false` for descending.
-	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the sorting and synchronization are successful.
+	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the sorting and (optional) synchronization are successful.
 	 * @throws {Error} - Throws an error if an invalid `sortBy` property is provided.
 	 */
-	async sort({ sortBy = 'label', sortAsc = true } = {}) {
+	async sort({ sortBy = 'label', sortAsc = true } = {}, sync = true) {
     // Check for unexpected keys
     if (!Tab.allowedKeys.has(sortBy)) {
       throw new Error(
@@ -974,8 +975,11 @@ export default class TabContainer extends Array {
     this.isSortedAsc = sortAsc;
     this.isSortedDesc = !sortAsc;
 		// Persist the new order
-    fromSortFunction = true;
-		return await this.syncTabs(undefined, false);
+        if(sync){
+            fromSortFunction = true;
+            return await this.syncTabs(undefined, false);
+        }
+        return true;
 	}
 
 
@@ -995,11 +999,14 @@ export default class TabContainer extends Array {
    *
    * @returns {boolean} whether the tabs in input are sorted or not.
    */
-  checkSetSorted() {
+  async checkSetSorted() {
     if(fromSortFunction){
       fromSortFunction = false;
       return;
     }
+      // check if the user wants to keep the Tabs always sorted
+      if(await this.checkShouldKeepSorted()) // if true, has already sorted and set the variables
+          return;
     this.isSorted = false;
     this.isSortedBy = null;
     this.isSortedAsc = false;
@@ -1026,4 +1033,15 @@ export default class TabContainer extends Array {
     }
     return this.isSorted;
   }
+
+    async checkShouldKeepSorted(){
+        const persistSort = await getSettings(PERSIST_SORT);
+        if(persistSort == null || persistSort.enabled === null)
+            return false; // not set or esplicitly set as not enabled
+        // Tabs should be kept sorted by persistSort.enabled
+        return await this.sort({
+            sortBy: persistSort.enabled,
+            sortAsc: persistSort.ascending ?? true,
+        }, false);
+    }
 }
