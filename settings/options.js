@@ -849,20 +849,24 @@ function setCurrentChoice(setting) {
 const keep_sorted_el = document.getElementById("keep_sorted");
 const sortContainer = document.getElementById("sort-wrapper");
 const picked_sort_select = document.getElementById("picked-sort");
+const picked_sort_direction_select = document.getElementById("picked-sort-direction");
 const invisible = "invisible";
 
 /**
  * Wrapper for sendExtensionMessage for the PERSIST_SORT setting.
  *
- * @param {string|null} [value=null] - the value to be saved. null === no selection
+ * @param {string|null} [enabled=null] - the value to keep the sort by. null === no selection
+ * @param {string|null} [direction=null] - the direction to sort (ascending / descending). null === no selection
+ * @see Tab.allowedKeys for enabled
  */
-function savePickedSort(value = null){
+function savePickedSort(enabled = null, direction = null){
     sendExtensionMessage({
         what: "set",
         key: SETTINGS_KEY,
         set: [{
             id: PERSIST_SORT,
-            enabled: value,
+            enabled,
+            ascending: direction == null ? null : direction === "ascending",
         }],
     });
 }
@@ -870,7 +874,7 @@ function savePickedSort(value = null){
 keep_sorted_el.addEventListener("click", (e) => {
     if(e.currentTarget.checked){
         sortContainer.classList.remove(invisible);
-        savePickedSort(picked_sort_select.value);
+        savePickedSort(picked_sort_select.value, picked_sort_direction_select.value);
         return;
     }
     sortContainer.classList.add(invisible);
@@ -962,7 +966,10 @@ async function restoreGeneralSettings() {
 		}
 	});
     picked_sort_select.addEventListener("change", e => {
-        savePickedSort(e.target.value);
+        savePickedSort(e.target.value, picked_sort_direction_select.value);
+    });
+    picked_sort_direction_select.addEventListener("change", e => {
+        savePickedSort(picked_sort_select.value, e.target.value);
     });
 	generalSettingsListenersSet = true;
 }

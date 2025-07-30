@@ -1,4 +1,12 @@
 {
+	"ascending": {
+		"message": "Ascending (A-Z)",
+		"description": ""
+	},
+	"descending": {
+		"message": "Descending (Z-A)",
+		"description": ""
+	},
 	"opt_pick_sort": {
 		"message": "Pick by which field should the Tabs be sorted",
 		"description": "[setting] now the user can pick by which key to keep the Tabs sorted by"

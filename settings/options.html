@@ -409,28 +409,47 @@
 				<div id="sort-wrapper" class="invisible visibility-transition">
                     <label for="picked-sort" data-i18n="opt_pick_sort"
                         >Pick by which field should the Tabs be sorted</label>
-                    <div class="select-wrapper">
-                        <select id="picked-sort">
-                            <option
-                                value="label"
-                                selected=""
-                                data-i18n="cxm_sort_label"
-                            >
-                                🥱 by Label
-                            </option>
-                            <option
-                                value="url"
-                                data-i18n="cxm_sort_url"
-                            >
-                                🤖 by Url
-                            </option>
-                            <option
-                                value="org"
-                                data-i18n="cxm_sort_org"
-                            >
-                                👽 by Org
-                            </option>
-                        </select>
+                    <div class="flex-row">
+                        <div class="select-wrapper">
+                            <select id="picked-sort">
+                                <option
+                                    value="label"
+                                    selected=""
+                                    data-i18n="cxm_sort_label"
+                                >
+                                    🥱 by Label
+                                </option>
+                                <option
+                                    value="url"
+                                    data-i18n="cxm_sort_url"
+                                >
+                                    🤖 by Url
+                                </option>
+                                <option
+                                    value="org"
+                                    data-i18n="cxm_sort_org"
+                                >
+                                    👽 by Org
+                                </option>
+                            </select>
+                        </div>
+                        <div class="select-wrapper">
+                            <select id="picked-sort-direction">
+                                <option
+                                    value="ascending"
+                                    selected=""
+                                    data-i18n="ascending"
+                                >
+                                    Ascending (A-Z)
+                                </option>
+                                <option
+                                    value="descending"
+                                    data-i18n="descending"
+                                >
+                                    Descending (Z-A)
+                                </option>
+                            </select>
+                        </div>
                     </div>
 				</div>
 			</div>

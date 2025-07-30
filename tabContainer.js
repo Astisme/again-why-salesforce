@@ -1034,6 +1034,10 @@ export default class TabContainer extends Array {
     return this.isSorted;
   }
 
+    /**
+     * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
+     * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
+     */
     async checkShouldKeepSorted(){
         const persistSort = await getSettings(PERSIST_SORT);
         if(persistSort == null || persistSort.enabled === null)
