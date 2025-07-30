@@ -9,10 +9,22 @@ const _tabContainerSecret = Symbol("tabContainerSecret");
 
 export default class TabContainer extends Array {
 
-  isSorted = false;
-  isSortedBy = null;
-  isSortedAsc = false;
-  isSortedDesc = false;
+  #isSorted = false;
+    get isSorted(){
+        return this.#isSorted;
+    }
+  #isSortedBy = null;
+    get isSortedBy(){
+        return this.#isSortedBy;
+    }
+  #isSortedAsc = false;
+    get isSortedAsc(){
+        return this.#isSortedAsc;
+    }
+  #isSortedDesc = false;
+    get isSortedDesc(){
+        return this.#isSortedDesc;
+    }
 
 	/**
 	 * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
@@ -970,10 +982,10 @@ export default class TabContainer extends Array {
       // Adjust direction for descending order
 			return sortFactor * String(valA).localeCompare(String(valB), undefined, { sensitivity: 'base' });
 		});
-    this.isSorted = true;
-    this.isSortedBy = sortBy;
-    this.isSortedAsc = sortAsc;
-    this.isSortedDesc = !sortAsc;
+    this.#isSorted = true;
+    this.#isSortedBy = sortBy;
+    this.#isSortedAsc = sortAsc;
+    this.#isSortedDesc = !sortAsc;
 		// Persist the new order
         if(sync){
             fromSortFunction = true;
@@ -988,14 +1000,14 @@ export default class TabContainer extends Array {
    * ('label', 'url', or 'org') in either ascending or descending order.
    * 
    * Sets the following properties on the instance:
-   * - `isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
-   * - `isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
-   * - `isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
-   * - `isSortedDesc`: `true` if sorted in descending order, `false` otherwise
+   * - `#isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
+   * - `#isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
+   * - `#isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
+   * - `#isSortedDesc`: `true` if sorted in descending order, `false` otherwise
    * 
    * Rules:
-   * - If `isSorted` is `false`, both `isSortedAsc` and `isSortedDesc` will also be `false`.
-   * - If `isSorted` is `true`, exactly one of `isSortedAsc` or `isSortedDesc` will be `true`.
+   * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
+   * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
    *
    * @returns {boolean} whether the tabs in input are sorted or not.
    */
@@ -1007,10 +1019,10 @@ export default class TabContainer extends Array {
       // check if the user wants to keep the Tabs always sorted
       if(await this.checkShouldKeepSorted()) // if true, has already sorted and set the variables
           return;
-    this.isSorted = false;
-    this.isSortedBy = null;
-    this.isSortedAsc = false;
-    this.isSortedDesc = false;
+    this.#isSorted = false;
+    this.#isSortedBy = null;
+    this.#isSortedAsc = false;
+    this.#isSortedDesc = false;
     for (const key of Tab.allowedKeys) {
       let asc = true;
       let desc = true;
@@ -1024,14 +1036,14 @@ export default class TabContainer extends Array {
         if (!asc && !desc) break; // No need to continue checking
       }
       if (asc || desc) {
-        this.isSorted = true;
-        this.isSortedBy = key;
-        this.isSortedAsc = asc;
-        this.isSortedDesc = desc;
+        this.#isSorted = true;
+        this.#isSortedBy = key;
+        this.#isSortedAsc = asc;
+        this.#isSortedDesc = desc;
         break; // Exit after first detected sort order
       }
     }
-    return this.isSorted;
+    return this.#isSorted;
   }
 
     /**

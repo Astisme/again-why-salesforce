@@ -4,6 +4,7 @@ const WHY_KEY = "againWhySalesforce";
 const LOCALE_KEY = "_locale";
 const SETTINGS_KEY = "settings";
 const USER_LANGUAGE = "picked-language";
+const PERSIST_SORT = "persist_sort";
 
 export interface MockStorage {
 	tabs: Tab[];
@@ -91,6 +92,9 @@ export const mockBrowser = {
 						case USER_LANGUAGE:
 							response = language;
 							break;
+                        case PERSIST_SORT:
+                            response = null;
+                            break;
 						default:
 							setError(
 								`Unknown message keys for ${message.what}: ${message.keys}`,
