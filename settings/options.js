@@ -1,6 +1,5 @@
 import ensureTranslatorAvailability from "/translator.js";
 import {
-    PERSIST_SORT,
 	BROWSER,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
@@ -14,6 +13,7 @@ import {
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
 	ORG_TAB_STYLE_KEY,
+	PERSIST_SORT,
 	POPUP_LOGIN_NEW_TAB,
 	POPUP_OPEN_LOGIN,
 	POPUP_OPEN_SETUP,
@@ -849,7 +849,9 @@ function setCurrentChoice(setting) {
 const keep_sorted_el = document.getElementById("keep_sorted");
 const sortContainer = document.getElementById("sort-wrapper");
 const picked_sort_select = document.getElementById("picked-sort");
-const picked_sort_direction_select = document.getElementById("picked-sort-direction");
+const picked_sort_direction_select = document.getElementById(
+	"picked-sort-direction",
+);
 const invisible = "invisible";
 
 /**
@@ -859,26 +861,29 @@ const invisible = "invisible";
  * @param {string|null} [direction=null] - the direction to sort (ascending / descending). null === no selection
  * @see Tab.allowedKeys for enabled
  */
-function savePickedSort(enabled = null, direction = null){
-    sendExtensionMessage({
-        what: "set",
-        key: SETTINGS_KEY,
-        set: [{
-            id: PERSIST_SORT,
-            enabled,
-            ascending: direction == null ? null : direction === "ascending",
-        }],
-    });
+function savePickedSort(enabled = null, direction = null) {
+	sendExtensionMessage({
+		what: "set",
+		key: SETTINGS_KEY,
+		set: [{
+			id: PERSIST_SORT,
+			enabled,
+			ascending: direction == null ? null : direction === "ascending",
+		}],
+	});
 }
 
 keep_sorted_el.addEventListener("click", (e) => {
-    if(e.currentTarget.checked){
-        sortContainer.classList.remove(invisible);
-        savePickedSort(picked_sort_select.value, picked_sort_direction_select.value);
-        return;
-    }
-    sortContainer.classList.add(invisible);
-    savePickedSort();
+	if (e.currentTarget.checked) {
+		sortContainer.classList.remove(invisible);
+		savePickedSort(
+			picked_sort_select.value,
+			picked_sort_direction_select.value,
+		);
+		return;
+	}
+	sortContainer.classList.add(invisible);
+	savePickedSort();
 });
 
 const allCheckboxes = [
@@ -911,29 +916,29 @@ async function restoreGeneralSettings() {
 			: setCurrentChoice(settings);
 	}
 	allCheckboxes.forEach((el) => {
-        switch (el) {
-            case link_new_browser_el:
-            case use_lightning_navigation_el:
-                return;
-            default:
-                break;
-        }
-        el.addEventListener("change", saveCheckboxOptions);
+		switch (el) {
+			case link_new_browser_el:
+			case use_lightning_navigation_el:
+				return;
+			default:
+				break;
+		}
+		el.addEventListener("change", saveCheckboxOptions);
 	});
-    link_new_browser_el.addEventListener("change", e => {
-        // click on dependent setting
-        if (el.target.checked) {
-            use_lightning_navigation_el.checked = true;
-        }
-        saveCheckboxOptions(e, use_lightning_navigation_el);
-    })
-    use_lightning_navigation_el.addEventListener("change", e => {
-        // click on dependent setting
-        if (el.target.checked) {
-            link_new_browser_el.checked = true;
-        }
-        saveCheckboxOptions(e, link_new_browser_el);
-    })
+	link_new_browser_el.addEventListener("change", (e) => {
+		// click on dependent setting
+		if (el.target.checked) {
+			use_lightning_navigation_el.checked = true;
+		}
+		saveCheckboxOptions(e, use_lightning_navigation_el);
+	});
+	use_lightning_navigation_el.addEventListener("change", (e) => {
+		// click on dependent setting
+		if (el.target.checked) {
+			link_new_browser_el.checked = true;
+		}
+		saveCheckboxOptions(e, link_new_browser_el);
+	});
 	let oldUserLanguage = user_language_select.value;
 	user_language_select.addEventListener("change", (e) => {
 		const cookiesPermObj = {
@@ -965,12 +970,12 @@ async function restoreGeneralSettings() {
 			sendLanguageMessage();
 		}
 	});
-    picked_sort_select.addEventListener("change", e => {
-        savePickedSort(e.target.value, picked_sort_direction_select.value);
-    });
-    picked_sort_direction_select.addEventListener("change", e => {
-        savePickedSort(picked_sort_select.value, e.target.value);
-    });
+	picked_sort_select.addEventListener("change", (e) => {
+		savePickedSort(e.target.value, picked_sort_direction_select.value);
+	});
+	picked_sort_direction_select.addEventListener("change", (e) => {
+		savePickedSort(picked_sort_select.value, e.target.value);
+	});
 	generalSettingsListenersSet = true;
 }
 
@@ -1270,7 +1275,10 @@ tabOrgManagerHeader.addEventListener("click", () => {
 restoreGeneralSettings();
 
 const saveToast = document.getElementById("save-confirm");
-document.querySelector("#save-container > button").addEventListener("click", () => {
-    saveToast.classList.remove(invisible);
-    setTimeout(() => saveToast.classList.add(invisible), 2500);
-});
+document.querySelector("#save-container > button").addEventListener(
+	"click",
+	() => {
+		saveToast.classList.remove(invisible);
+		setTimeout(() => saveToast.classList.add(invisible), 2500);
+	},
+);

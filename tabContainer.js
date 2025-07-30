@@ -1,4 +1,4 @@
-import { BROWSER, WHY_KEY, PERSIST_SORT } from "/constants.js";
+import { BROWSER, PERSIST_SORT, WHY_KEY } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { getSettings } from "./constants.js";
@@ -8,23 +8,22 @@ let fromSortFunction = false;
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
 export default class TabContainer extends Array {
-
-  #isSorted = false;
-    get isSorted(){
-        return this.#isSorted;
-    }
-  #isSortedBy = null;
-    get isSortedBy(){
-        return this.#isSortedBy;
-    }
-  #isSortedAsc = false;
-    get isSortedAsc(){
-        return this.#isSortedAsc;
-    }
-  #isSortedDesc = false;
-    get isSortedDesc(){
-        return this.#isSortedDesc;
-    }
+	#isSorted = false;
+	get isSorted() {
+		return this.#isSorted;
+	}
+	#isSortedBy = null;
+	get isSortedBy() {
+		return this.#isSortedBy;
+	}
+	#isSortedAsc = false;
+	get isSortedAsc() {
+		return this.#isSortedAsc;
+	}
+	#isSortedDesc = false;
+	get isSortedDesc() {
+		return this.#isSortedDesc;
+	}
 
 	/**
 	 * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
@@ -304,9 +303,9 @@ export default class TabContainer extends Array {
 		this.push(Tab.create(tab));
 		if (sync) {
 			return await this.syncTabs();
-		} else if(!fromAddTabs) {
-            await this.checkSetSorted();
-        }
+		} else if (!fromAddTabs) {
+			await this.checkSetSorted();
+		}
 		return true;
 	}
 
@@ -339,8 +338,8 @@ export default class TabContainer extends Array {
 		if (sync) {
 			await this.syncTabs();
 		} else {
-            await this.checkSetSorted();
-        }
+			await this.checkSetSorted();
+		}
 		return addedAll;
 	}
 
@@ -680,8 +679,9 @@ export default class TabContainer extends Array {
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
 			return false;
 		}
-    if(checkSort)
-        await this.checkSetSorted();
+		if (checkSort) {
+			await this.checkSetSorted();
+		}
 		return await TabContainer._syncTabs(tabs ?? this);
 	}
 
@@ -953,7 +953,7 @@ export default class TabContainer extends Array {
 		return await this.syncTabs();
 	}
 
-  /**
+	/**
 	 * Sorts the tabs in the container by a specified property and order.
 	 * After sorting, it synchronizes the changes.
 	 *
@@ -963,14 +963,14 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the sorting and (optional) synchronization are successful.
 	 * @throws {Error} - Throws an error if an invalid `sortBy` property is provided.
 	 */
-	async sort({ sortBy = 'label', sortAsc = true } = {}, sync = true) {
-    // Check for unexpected keys
-    if (!Tab.allowedKeys.has(sortBy)) {
-      throw new Error(
-        ["error_tab_unexpected_keys", sortBy],
-      );
-    }
-    const sortFactor = sortAsc ? 1 : -1;
+	async sort({ sortBy = "label", sortAsc = true } = {}, sync = true) {
+		// Check for unexpected keys
+		if (!Tab.allowedKeys.has(sortBy)) {
+			throw new Error(
+				["error_tab_unexpected_keys", sortBy],
+			);
+		}
+		const sortFactor = sortAsc ? 1 : -1;
 		super.sort((a, b) => {
 			const valA = a[sortBy];
 			const valB = b[sortBy];
@@ -979,85 +979,89 @@ export default class TabContainer extends Array {
 			if (valA != null && valB == null) return sortFactor;
 			if (valA == null && valB == null) return 0;
 			// Perform case-insensitive comparison for strings
-      // Adjust direction for descending order
-			return sortFactor * String(valA).localeCompare(String(valB), undefined, { sensitivity: 'base' });
+			// Adjust direction for descending order
+			return sortFactor *
+				String(valA).localeCompare(String(valB), undefined, {
+					sensitivity: "base",
+				});
 		});
-    this.#isSorted = true;
-    this.#isSortedBy = sortBy;
-    this.#isSortedAsc = sortAsc;
-    this.#isSortedDesc = !sortAsc;
+		this.#isSorted = true;
+		this.#isSortedBy = sortBy;
+		this.#isSortedAsc = sortAsc;
+		this.#isSortedDesc = !sortAsc;
 		// Persist the new order
-        if(sync){
-            fromSortFunction = true;
-            return await this.syncTabs(undefined, false);
-        }
-        return true;
+		if (sync) {
+			fromSortFunction = true;
+			return await this.syncTabs(undefined, false);
+		}
+		return true;
 	}
 
+	/**
+	 * Checks if the provided tabs are sorted by one of the allowed keys
+	 * ('label', 'url', or 'org') in either ascending or descending order.
+	 *
+	 * Sets the following properties on the instance:
+	 * - `#isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
+	 * - `#isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
+	 * - `#isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
+	 * - `#isSortedDesc`: `true` if sorted in descending order, `false` otherwise
+	 *
+	 * Rules:
+	 * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
+	 * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
+	 *
+	 * @returns {boolean} whether the tabs in input are sorted or not.
+	 */
+	async checkSetSorted() {
+		if (fromSortFunction) {
+			fromSortFunction = false;
+			return;
+		}
+		// check if the user wants to keep the Tabs always sorted
+		if (await this.checkShouldKeepSorted()) { // if true, has already sorted and set the variables
+			return;
+		}
+		this.#isSorted = false;
+		this.#isSortedBy = null;
+		this.#isSortedAsc = false;
+		this.#isSortedDesc = false;
+		for (const key of Tab.allowedKeys) {
+			let asc = true;
+			let desc = true;
+			for (let i = 1; i < this.length; i++) {
+				const prev = this[i - 1][key];
+				const curr = this[i][key];
+				const prevVal = prev == null ? "" : String(prev).toLowerCase();
+				const currVal = curr == null ? "" : String(curr).toLowerCase();
+				if (prevVal > currVal) asc = false;
+				if (prevVal < currVal) desc = false;
+				if (!asc && !desc) break; // No need to continue checking
+			}
+			if (asc || desc) {
+				this.#isSorted = true;
+				this.#isSortedBy = key;
+				this.#isSortedAsc = asc;
+				this.#isSortedDesc = desc;
+				break; // Exit after first detected sort order
+			}
+		}
+		return this.#isSorted;
+	}
 
-  /**
-   * Checks if the provided tabs are sorted by one of the allowed keys
-   * ('label', 'url', or 'org') in either ascending or descending order.
-   * 
-   * Sets the following properties on the instance:
-   * - `#isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
-   * - `#isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
-   * - `#isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
-   * - `#isSortedDesc`: `true` if sorted in descending order, `false` otherwise
-   * 
-   * Rules:
-   * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
-   * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
-   *
-   * @returns {boolean} whether the tabs in input are sorted or not.
-   */
-  async checkSetSorted() {
-    if(fromSortFunction){
-      fromSortFunction = false;
-      return;
-    }
-      // check if the user wants to keep the Tabs always sorted
-      if(await this.checkShouldKeepSorted()) // if true, has already sorted and set the variables
-          return;
-    this.#isSorted = false;
-    this.#isSortedBy = null;
-    this.#isSortedAsc = false;
-    this.#isSortedDesc = false;
-    for (const key of Tab.allowedKeys) {
-      let asc = true;
-      let desc = true;
-      for (let i = 1; i < this.length; i++) {
-        const prev = this[i - 1][key];
-        const curr = this[i][key];
-        const prevVal = prev == null ? '' : String(prev).toLowerCase();
-        const currVal = curr == null ? '' : String(curr).toLowerCase();
-        if (prevVal > currVal) asc = false;
-        if (prevVal < currVal) desc = false;
-        if (!asc && !desc) break; // No need to continue checking
-      }
-      if (asc || desc) {
-        this.#isSorted = true;
-        this.#isSortedBy = key;
-        this.#isSortedAsc = asc;
-        this.#isSortedDesc = desc;
-        break; // Exit after first detected sort order
-      }
-    }
-    return this.#isSorted;
-  }
-
-    /**
-     * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
-     * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
-     */
-    async checkShouldKeepSorted(){
-        const persistSort = await getSettings(PERSIST_SORT);
-        if(persistSort == null || persistSort.enabled === null)
-            return false; // not set or esplicitly set as not enabled
-        // Tabs should be kept sorted by persistSort.enabled
-        return await this.sort({
-            sortBy: persistSort.enabled,
-            sortAsc: persistSort.ascending ?? true,
-        }, false);
-    }
+	/**
+	 * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
+	 * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
+	 */
+	async checkShouldKeepSorted() {
+		const persistSort = await getSettings(PERSIST_SORT);
+		if (persistSort == null || persistSort.enabled === null) {
+			return false; // not set or esplicitly set as not enabled
+		}
+		// Tabs should be kept sorted by persistSort.enabled
+		return await this.sort({
+			sortBy: persistSort.enabled,
+			sortAsc: persistSort.ascending ?? true,
+		}, false);
+	}
 }

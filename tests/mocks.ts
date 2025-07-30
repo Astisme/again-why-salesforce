@@ -92,9 +92,9 @@ export const mockBrowser = {
 						case USER_LANGUAGE:
 							response = language;
 							break;
-                        case PERSIST_SORT:
-                            response = null;
-                            break;
+						case PERSIST_SORT:
+							response = null;
+							break;
 						default:
 							setError(
 								`Unknown message keys for ${message.what}: ${message.keys}`,

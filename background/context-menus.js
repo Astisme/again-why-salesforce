@@ -28,9 +28,9 @@ import {
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
 	CXM_RESET_DEFAULT_TABS,
-  CXM_SORT_LABEL,
-  CXM_SORT_URL,
-  CXM_SORT_ORG,
+	CXM_SORT_LABEL,
+	CXM_SORT_ORG,
+	CXM_SORT_URL,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
@@ -498,10 +498,10 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			message.org = Tab.extractOrgName(info.pageUrl ?? browserTabUrl);
 			break;
-        case CXM_SORT_LABEL:
-        case CXM_SORT_URL:
-        case CXM_SORT_ORG:
-            break;
+		case CXM_SORT_LABEL:
+		case CXM_SORT_URL:
+		case CXM_SORT_ORG:
+			break;
 		default: {
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
 			message.tabUrl = Tab.minifyURL(url);

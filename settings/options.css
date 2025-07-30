@@ -133,7 +133,7 @@ ul.settings {
 
 hr {
 	margin: 1rem 0;
-    width: 85%;
+	width: 85%;
 }
 
 .slds-dueling-list__column {
@@ -153,11 +153,11 @@ hr {
 }
 
 #sort-container {
-    width: 85%;
-    justify-content: space-evenly;
-    & > div:has(input) {
-        margin-right: 1rem;
-    }
+	width: 85%;
+	justify-content: space-evenly;
+	& > div:has(input) {
+		margin-right: 1rem;
+	}
 }
 
 #save-container {
