@@ -280,16 +280,18 @@ async function init(tabs = null) {
 		if (orgName == null) {
 			orgName = Tab.extractOrgName(href);
 		}
+        const frag = document.createDocumentFragment();
 		allTabs.forEach((row) => {
 			// TODO add option to hide or show not-this-org tabs
 			// hide not-this-org tabs
-			setupTabUl.appendChild(
+			frag.appendChild(
 				generateRowTemplate(
 					row,
 					!(row.org == null || row.org === orgName),
 				),
 			);
 		});
+        setupTabUl.appendChild(frag);
 	}
 	isOnSavedTab();
 	checkKeepTabsOnLeft();
