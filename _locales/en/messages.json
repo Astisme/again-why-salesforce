@@ -1,47 +1,11 @@
 {
-	"ascending": {
-		"message": "Ascending (A-Z)",
-		"description": ""
-	},
-	"descending": {
-		"message": "Descending (Z-A)",
-		"description": ""
-	},
-	"opt_pick_sort": {
-		"message": "Pick by which field should the Tabs be sorted",
-		"description": "[setting] now the user can pick by which key to keep the Tabs sorted by"
-	},
-	"opt_keep_sort": {
-		"message": "Keep Tabs sorted.",
-		"description": "[setting] allow the user to keep their Tabs sorted by one of their keys"
-	},
-	"opt_confirm_save": {
-		"message": "Settings were saved!",
-		"description": "[popup]"
-	},
-	"cxm_sort": {
-		"message": "🎯 Sort Tabs",
-		"description": "context menu to let users sort their Tabs automatically (parent menu)"
-	},
-	"cxm_sort_label": {
-		"message": "🥱 by Label",
-		"description": "context menu to let users sort their Tabs by label"
-	},
-	"cxm_sort_url": {
-		"message": "🤖 by Url",
-		"description": "context menu to let users sort their Tabs by url"
-	},
-	"cxm_sort_org": {
-		"message": "👽 by Org",
-		"description": "context menu to let users sort their Tabs by org"
-	},
-	"error_sorting_tabs": {
-		"message": "Error while sorting the Tabs",
-		"description": "[error] shown in a toast message"
-	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
+	},
+	"ascending": {
+		"message": "Ascending (A-Z)",
+		"description": ""
 	},
 	"available": {
 		"message": "Available",
@@ -183,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Label for the settings menu"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sort Tabs",
+		"description": "context menu to let users sort their Tabs automatically (parent menu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 by Label",
+		"description": "context menu to let users sort their Tabs by label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 by Org",
+		"description": "context menu to let users sort their Tabs by org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 by Url",
+		"description": "context menu to let users sort their Tabs by url"
+	},
 	"cxm_update": {
 		"message": "✏️ Update Tab",
 		"description": "[context-menu]"
@@ -202,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete all Tabs",
 		"description": "[popup] title on the bin to empty all Tabs"
+	},
+	"descending": {
+		"message": "Descending (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -390,6 +374,10 @@
 	"error_resetting_default_tabs": {
 		"message": "Error when resetting to default Tabs.",
 		"description": "[error] Generic error used while resetting the Tabs to their default"
+	},
+	"error_sorting_tabs": {
+		"message": "Error while sorting the Tabs",
+		"description": "[error] shown in a toast message"
 	},
 	"error_sync_nothing": {
 		"message": "Cannot sync null Tabs!",
@@ -586,9 +574,17 @@
 		"message": "Automatically open $salesforce_setup page when clicking on the popup while on a Salesforce page.",
 		"description": "[setting] when the user opens the popup while on a Salesforce website"
 	},
+	"opt_confirm_save": {
+		"message": "Settings were saved!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Default and Fallback)",
 		"description": "Default language option of the extension"
+	},
+	"opt_keep_sort": {
+		"message": "Keep Tabs sorted.",
+		"description": "[setting] allow the user to keep their Tabs sorted by one of their keys"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Keep favourite Tabs on the left of Home and Object Manager.",
@@ -617,6 +613,10 @@
 	"opt_pick_language": {
 		"message": "Pick extension language",
 		"description": "[setting] label to propt the user to pick their preferred language"
+	},
+	"opt_pick_sort": {
+		"message": "Pick by which field should the Tabs be sorted",
+		"description": "[setting] now the user can pick by which key to keep the Tabs sorted by"
 	},
 	"opt_prevent_analytics": {
 		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
