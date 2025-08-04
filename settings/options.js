@@ -884,14 +884,23 @@ function setCurrentChoice(setting) {
  * @see Tab.allowedKeys for enabled
  */
 function savePickedSort(enabled = null, direction = null) {
+    const set = [{
+        id: PERSIST_SORT,
+        enabled,
+        ascending: direction == null ? null : direction === "ascending",
+    }]
+    if(enabled){
+        // TAB_ADD_FRONT cannot be set
+        set.push({
+            id: TAB_ADD_FRONT,
+            enabled: false,
+        });
+        tab_add_front_el.checked = false;
+    }
 	sendExtensionMessage({
 		what: "set",
 		key: SETTINGS_KEY,
-		set: [{
-			id: PERSIST_SORT,
-			enabled,
-			ascending: direction == null ? null : direction === "ascending",
-		}],
+		set,
 	});
 }
 
@@ -942,7 +951,7 @@ async function restoreGeneralSettings() {
 	allCheckboxes.forEach((el) => {
 		switch (el) {
 			case link_new_browser_el:
-			case use_lightning_navigation_el:
+            case tab_add_front_el:
 				return;
 			default:
 				break;
@@ -951,18 +960,19 @@ async function restoreGeneralSettings() {
 	});
 	link_new_browser_el.addEventListener("change", (e) => {
 		// click on dependent setting
-		if (el.target.checked) {
+		if (e.target.checked) {
 			use_lightning_navigation_el.checked = true;
 		}
 		saveCheckboxOptions(e, use_lightning_navigation_el);
 	});
-	use_lightning_navigation_el.addEventListener("change", (e) => {
+    tab_add_front_el.addEventListener('change', e => {
 		// click on dependent setting
-		if (el.target.checked) {
-			link_new_browser_el.checked = true;
+        console.log(e.target.checked,keep_sorted_el.checked);
+		if (e.target.checked && keep_sorted_el.checked) {
+			keep_sorted_el.click();
 		}
-		saveCheckboxOptions(e, link_new_browser_el);
-	});
+		saveCheckboxOptions(e);
+    });
 	let oldUserLanguage = user_language_select.value;
 	user_language_select.addEventListener("change", (e) => {
 		const cookiesPermObj = {
