@@ -1,4 +1,4 @@
-import { BROWSER, PERSIST_SORT, TAB_ADD_FRONT, TAB_AS_ORG, WHY_KEY, getSettings } from "/constants.js";
+import { BROWSER, PERSIST_SORT, WHY_KEY, getSettings } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
