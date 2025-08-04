@@ -1,4 +1,4 @@
-import { BROWSER, PERSIST_SORT, WHY_KEY, getSettings } from "/constants.js";
+import { BROWSER, getSettings, PERSIST_SORT, WHY_KEY } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
@@ -299,11 +299,12 @@ export default class TabContainer extends Array {
 			]);
 			throw new Error(msg);
 		}
-        const newTab = Tab.create(tab);
-        if(!addInFront)
-            this.push(newTab);
-        else
-            this.unshift(newTab);
+		const newTab = Tab.create(tab);
+		if (!addInFront) {
+			this.push(newTab);
+		} else {
+			this.unshift(newTab);
+		}
 		if (sync) {
 			return await this.syncTabs();
 		} else if (!fromAddTabs) {

@@ -1,7 +1,5 @@
 import ensureTranslatorAvailability from "/translator.js";
 import {
-    TAB_ADD_FRONT,
-    TAB_AS_ORG,
 	BROWSER,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
@@ -25,6 +23,8 @@ import {
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
+	TAB_ADD_FRONT,
+	TAB_AS_ORG,
 	TAB_GENERIC_STYLE,
 	TAB_ON_LEFT,
 	TAB_ORG_STYLE,
@@ -848,16 +848,18 @@ function setCurrentChoice(setting) {
 		case USER_LANGUAGE:
 			user_language_select.value = setting.enabled;
 			break;
-        case PERSIST_SORT: {
-            const isEnabled = setting.enabled != null;
-            keep_sorted_el.checked = isEnabled;
-            if(isEnabled){
-                picked_sort_select.value = setting.enabled;
-                picked_sort_direction_select.value = setting.ascending ? "ascending" : "descending";
-                sortContainer.classList.remove(invisible);
-            }
-            break;
-        }
+		case PERSIST_SORT: {
+			const isEnabled = setting.enabled != null;
+			keep_sorted_el.checked = isEnabled;
+			if (isEnabled) {
+				picked_sort_select.value = setting.enabled;
+				picked_sort_direction_select.value = setting.ascending
+					? "ascending"
+					: "descending";
+				sortContainer.classList.remove(invisible);
+			}
+			break;
+		}
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
 			const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
