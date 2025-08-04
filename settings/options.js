@@ -1,5 +1,7 @@
 import ensureTranslatorAvailability from "/translator.js";
 import {
+    TAB_ADD_FRONT,
+    TAB_AS_ORG,
 	BROWSER,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
@@ -43,6 +45,7 @@ import {
 ensureTranslatorAvailability();
 const preventDefaultOverride = "user-set";
 const hidden = "hidden";
+const invisible = "invisible";
 
 /**
  * Saves checkbox state and dependent checkbox states to settings
@@ -74,12 +77,21 @@ const popup_open_setup_el = document.getElementById(POPUP_OPEN_SETUP);
 const popup_login_new_tab_el = document.getElementById(POPUP_LOGIN_NEW_TAB);
 const popup_setup_new_tab_el = document.getElementById(POPUP_SETUP_NEW_TAB);
 const tab_on_left_el = document.getElementById(TAB_ON_LEFT);
+const tab_add_front_el = document.getElementById(TAB_ADD_FRONT);
+const tab_as_org_el = document.getElementById(TAB_AS_ORG);
 const no_release_notes_el = document.getElementById(NO_RELEASE_NOTES);
 const no_update_notification_el = document.getElementById(
 	NO_UPDATE_NOTIFICATION,
 );
 const prevent_analytics_el = document.getElementById(PREVENT_ANALYTICS);
 const user_language_select = document.getElementById(USER_LANGUAGE);
+
+const keep_sorted_el = document.getElementById("keep_sorted");
+const sortContainer = document.getElementById("sort-wrapper");
+const picked_sort_select = document.getElementById("picked-sort");
+const picked_sort_direction_select = document.getElementById(
+	"picked-sort-direction",
+);
 
 const generalContainer = document.getElementById("general-container");
 const generalHeader = document.getElementById("general-settings");
@@ -818,6 +830,12 @@ function setCurrentChoice(setting) {
 		case TAB_ON_LEFT:
 			tab_on_left_el.checked = setting.enabled;
 			break;
+		case TAB_ADD_FRONT:
+			tab_add_front_el.checked = setting.enabled;
+			break;
+		case TAB_AS_ORG:
+			tab_as_org_el.checked = setting.enabled;
+			break;
 		case NO_RELEASE_NOTES:
 			no_release_notes_el.checked = setting.enabled;
 			break;
@@ -830,6 +848,16 @@ function setCurrentChoice(setting) {
 		case USER_LANGUAGE:
 			user_language_select.value = setting.enabled;
 			break;
+        case PERSIST_SORT: {
+            const isEnabled = setting.enabled != null;
+            keep_sorted_el.checked = isEnabled;
+            if(isEnabled){
+                picked_sort_select.value = setting.enabled;
+                picked_sort_direction_select.value = setting.ascending ? "ascending" : "descending";
+                sortContainer.classList.remove(invisible);
+            }
+            break;
+        }
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
 			const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
@@ -845,14 +873,6 @@ function setCurrentChoice(setting) {
 			break;
 	}
 }
-
-const keep_sorted_el = document.getElementById("keep_sorted");
-const sortContainer = document.getElementById("sort-wrapper");
-const picked_sort_select = document.getElementById("picked-sort");
-const picked_sort_direction_select = document.getElementById(
-	"picked-sort-direction",
-);
-const invisible = "invisible";
 
 /**
  * Wrapper for sendExtensionMessage for the PERSIST_SORT setting.
@@ -895,6 +915,8 @@ const allCheckboxes = [
 	popup_login_new_tab_el,
 	popup_setup_new_tab_el,
 	tab_on_left_el,
+	tab_add_front_el,
+	tab_as_org_el,
 	no_release_notes_el,
 	no_update_notification_el,
 	prevent_analytics_el,

@@ -1,7 +1,6 @@
-import { BROWSER, PERSIST_SORT, WHY_KEY } from "/constants.js";
+import { BROWSER, PERSIST_SORT, TAB_ADD_FRONT, TAB_AS_ORG, WHY_KEY, getSettings } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { getSettings } from "./constants.js";
 let translator = null;
 let fromSortFunction = false;
 
@@ -285,7 +284,7 @@ export default class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
-	async addTab(tab, sync = true, fromAddTabs = false) {
+	async addTab(tab, sync = true, fromAddTabs = false, addInFront = false) {
 		if (!Tab.isValid(tab)) {
 			const msg = await translator.translate([
 				"error_invalid_tab",
@@ -300,11 +299,15 @@ export default class TabContainer extends Array {
 			]);
 			throw new Error(msg);
 		}
-		this.push(Tab.create(tab));
+        const newTab = Tab.create(tab);
+        if(!addInFront)
+            this.push(newTab);
+        else
+            this.unshift(newTab);
 		if (sync) {
 			return await this.syncTabs();
 		} else if (!fromAddTabs) {
-			await this.checkSetSorted();
+			return await this.checkSetSorted();
 		}
 		return true;
 	}
@@ -1016,11 +1019,11 @@ export default class TabContainer extends Array {
 	async checkSetSorted() {
 		if (fromSortFunction) {
 			fromSortFunction = false;
-			return;
+			return true;
 		}
 		// check if the user wants to keep the Tabs always sorted
 		if (await this.checkShouldKeepSorted()) { // if true, has already sorted and set the variables
-			return;
+			return true;
 		}
 		this.#isSorted = false;
 		this.#isSortedBy = null;

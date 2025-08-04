@@ -1,4 +1,12 @@
 {
+	"opt_add_tabs_front": {
+		"message": "Add new Tabs in front.",
+		"description": "[settings] let the user add all new Tabs in front"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Add new Tabs as Org Tabs.",
+		"description": "[settings] let the user add all new Tabs as org-specific"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
