@@ -1,12 +1,4 @@
 {
-	"opt_add_tabs_front": {
-		"message": "Add new Tabs in front.",
-		"description": "[settings] let the user add all new Tabs in front"
-	},
-	"opt_add_tabs_as_org": {
-		"message": "Add new Tabs as Org Tabs.",
-		"description": "[settings] let the user add all new Tabs as org-specific"
-	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -573,6 +565,14 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_setup page"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Add new Tabs as Org Tabs.",
+		"description": "[settings] let the user add all new Tabs as org-specific"
+	},
+	"opt_add_tabs_front": {
+		"message": "Add new Tabs in front.",
+		"description": "[settings] let the user add all new Tabs in front"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automatically open $salesforce_login page when clicking on the popup while not on a Salesforce page.",
