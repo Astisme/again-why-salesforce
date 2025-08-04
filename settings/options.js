@@ -13,6 +13,7 @@ import {
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
 	ORG_TAB_STYLE_KEY,
+	PERSIST_SORT,
 	POPUP_LOGIN_NEW_TAB,
 	POPUP_OPEN_LOGIN,
 	POPUP_OPEN_SETUP,
@@ -22,6 +23,8 @@ import {
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
+	TAB_ADD_FRONT,
+	TAB_AS_ORG,
 	TAB_GENERIC_STYLE,
 	TAB_ON_LEFT,
 	TAB_ORG_STYLE,
@@ -41,6 +44,8 @@ import {
 
 ensureTranslatorAvailability();
 const preventDefaultOverride = "user-set";
+const hidden = "hidden";
+const invisible = "invisible";
 
 /**
  * Saves checkbox state and dependent checkbox states to settings
@@ -72,12 +77,21 @@ const popup_open_setup_el = document.getElementById(POPUP_OPEN_SETUP);
 const popup_login_new_tab_el = document.getElementById(POPUP_LOGIN_NEW_TAB);
 const popup_setup_new_tab_el = document.getElementById(POPUP_SETUP_NEW_TAB);
 const tab_on_left_el = document.getElementById(TAB_ON_LEFT);
+const tab_add_front_el = document.getElementById(TAB_ADD_FRONT);
+const tab_as_org_el = document.getElementById(TAB_AS_ORG);
 const no_release_notes_el = document.getElementById(NO_RELEASE_NOTES);
 const no_update_notification_el = document.getElementById(
 	NO_UPDATE_NOTIFICATION,
 );
 const prevent_analytics_el = document.getElementById(PREVENT_ANALYTICS);
 const user_language_select = document.getElementById(USER_LANGUAGE);
+
+const keep_sorted_el = document.getElementById("keep_sorted");
+const sortContainer = document.getElementById("sort-wrapper");
+const picked_sort_select = document.getElementById("picked-sort");
+const picked_sort_direction_select = document.getElementById(
+	"picked-sort-direction",
+);
 
 const generalContainer = document.getElementById("general-container");
 const generalHeader = document.getElementById("general-settings");
@@ -816,6 +830,12 @@ function setCurrentChoice(setting) {
 		case TAB_ON_LEFT:
 			tab_on_left_el.checked = setting.enabled;
 			break;
+		case TAB_ADD_FRONT:
+			tab_add_front_el.checked = setting.enabled;
+			break;
+		case TAB_AS_ORG:
+			tab_as_org_el.checked = setting.enabled;
+			break;
 		case NO_RELEASE_NOTES:
 			no_release_notes_el.checked = setting.enabled;
 			break;
@@ -828,6 +848,18 @@ function setCurrentChoice(setting) {
 		case USER_LANGUAGE:
 			user_language_select.value = setting.enabled;
 			break;
+		case PERSIST_SORT: {
+			const isEnabled = setting.enabled != null;
+			keep_sorted_el.checked = isEnabled;
+			if (isEnabled) {
+				picked_sort_select.value = setting.enabled;
+				picked_sort_direction_select.value = setting.ascending
+					? "ascending"
+					: "descending";
+				sortContainer.classList.remove(invisible);
+			}
+			break;
+		}
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
 			const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
@@ -844,6 +876,47 @@ function setCurrentChoice(setting) {
 	}
 }
 
+/**
+ * Wrapper for sendExtensionMessage for the PERSIST_SORT setting.
+ *
+ * @param {string|null} [enabled=null] - the value to keep the sort by. null === no selection
+ * @param {string|null} [direction=null] - the direction to sort (ascending / descending). null === no selection
+ * @see Tab.allowedKeys for enabled
+ */
+function savePickedSort(enabled = null, direction = null) {
+	const set = [{
+		id: PERSIST_SORT,
+		enabled,
+		ascending: direction == null ? null : direction === "ascending",
+	}];
+	if (enabled) {
+		// TAB_ADD_FRONT cannot be set
+		set.push({
+			id: TAB_ADD_FRONT,
+			enabled: false,
+		});
+		tab_add_front_el.checked = false;
+	}
+	sendExtensionMessage({
+		what: "set",
+		key: SETTINGS_KEY,
+		set,
+	});
+}
+
+keep_sorted_el.addEventListener("click", (e) => {
+	if (e.currentTarget.checked) {
+		sortContainer.classList.remove(invisible);
+		savePickedSort(
+			picked_sort_select.value,
+			picked_sort_direction_select.value,
+		);
+		return;
+	}
+	sortContainer.classList.add(invisible);
+	savePickedSort();
+});
+
 const allCheckboxes = [
 	link_new_browser_el,
 	skip_link_detection_el,
@@ -853,6 +926,8 @@ const allCheckboxes = [
 	popup_login_new_tab_el,
 	popup_setup_new_tab_el,
 	tab_on_left_el,
+	tab_add_front_el,
+	tab_as_org_el,
 	no_release_notes_el,
 	no_update_notification_el,
 	prevent_analytics_el,
@@ -874,9 +949,14 @@ async function restoreGeneralSettings() {
 			: setCurrentChoice(settings);
 	}
 	allCheckboxes.forEach((el) => {
-		if (el !== link_new_browser_el && el !== use_lightning_navigation_el) {
-			el.addEventListener("change", saveCheckboxOptions);
+		switch (el) {
+			case link_new_browser_el:
+			case tab_add_front_el:
+				return;
+			default:
+				break;
 		}
+		el.addEventListener("change", saveCheckboxOptions);
 	});
 	link_new_browser_el.addEventListener("change", (e) => {
 		// click on dependent setting
@@ -885,12 +965,13 @@ async function restoreGeneralSettings() {
 		}
 		saveCheckboxOptions(e, use_lightning_navigation_el);
 	});
-	use_lightning_navigation_el.addEventListener("change", (e) => {
+	tab_add_front_el.addEventListener("change", (e) => {
 		// click on dependent setting
-		if (!e.target.checked) {
-			link_new_browser_el.checked = false;
+		console.log(e.target.checked, keep_sorted_el.checked);
+		if (e.target.checked && keep_sorted_el.checked) {
+			keep_sorted_el.click();
 		}
-		saveCheckboxOptions(e, link_new_browser_el);
+		saveCheckboxOptions(e);
 	});
 	let oldUserLanguage = user_language_select.value;
 	user_language_select.addEventListener("change", (e) => {
@@ -922,6 +1003,12 @@ async function restoreGeneralSettings() {
 		} else {
 			sendLanguageMessage();
 		}
+	});
+	picked_sort_select.addEventListener("change", (e) => {
+		savePickedSort(e.target.value, picked_sort_direction_select.value);
+	});
+	picked_sort_direction_select.addEventListener("change", (e) => {
+		savePickedSort(picked_sort_select.value, e.target.value);
 	});
 	generalSettingsListenersSet = true;
 }
@@ -1110,7 +1197,7 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 		: ul_active_org_decoration_chosen;
 	const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
 	// create event listeners
-	tabPreview.classList.remove("hidden");
+	tabPreview.classList.remove(hidden);
 	allInputs.forEach((el) =>
 		el.addEventListener("change", (e) => saveTabOptions(e, key))
 	);
@@ -1164,7 +1251,6 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 	}
 }
 
-const saveContainer = document.getElementById("save-container");
 /**
  * Activates one element and shows it, while deactivating and hiding others.
  * @param {HTMLElement} elementToActivate - Element to set as active.
@@ -1182,29 +1268,29 @@ function showRelevantSettings_HideOthers(
 		el.classList.add(SLDS_ACTIVE);
 	});
 	elementsToShow.forEach((el) => {
-		el.classList.remove("hidden");
+		el.classList.remove(hidden);
 	});
 	elementsToDeactivate.forEach((el) => {
 		el.classList.remove(SLDS_ACTIVE);
 	});
 	elementsToHide.forEach((el) => {
-		el.classList.add("hidden");
+		el.classList.add(hidden);
 	});
 }
 
 generalHeader.addEventListener("click", () => {
 	restoreGeneralSettings();
 	showRelevantSettings_HideOthers([generalHeader], [generalContainer], [
-		tabGenericManagerContainer,
+		tabGenericManagerHeader,
 		tabOrgManagerHeader,
-	], [tabGenericManagerContainer, tabOrgManagerContainer, saveContainer]);
+	], [tabGenericManagerContainer, tabOrgManagerContainer]);
 });
 
 tabGenericManagerHeader.addEventListener("click", () => {
 	restoreTabSettings(GENERIC_TAB_STYLE_KEY);
 	showRelevantSettings_HideOthers(
 		[tabGenericManagerHeader],
-		[tabGenericManagerContainer, saveContainer],
+		[tabGenericManagerContainer],
 		[generalHeader, tabOrgManagerHeader],
 		[generalContainer, tabOrgManagerContainer],
 	);
@@ -1214,10 +1300,19 @@ tabOrgManagerHeader.addEventListener("click", () => {
 	restoreTabSettings(ORG_TAB_STYLE_KEY);
 	showRelevantSettings_HideOthers(
 		[tabOrgManagerHeader],
-		[tabOrgManagerContainer, saveContainer],
+		[tabOrgManagerContainer],
 		[generalHeader, tabGenericManagerHeader],
 		[generalContainer, tabGenericManagerContainer],
 	);
 });
 
 restoreGeneralSettings();
+
+const saveToast = document.getElementById("save-confirm");
+document.querySelector("#save-container > button").addEventListener(
+	"click",
+	() => {
+		saveToast.classList.remove(invisible);
+		setTimeout(() => saveToast.classList.add(invisible), 2500);
+	},
+);
