@@ -25,7 +25,6 @@
 }
 .help-icon .tooltip {
 	position: absolute;
-	bottom: 100%;
 	left: 50%;
 	transform: translateX(-50%);
 	margin-bottom: 6px;
@@ -40,6 +39,11 @@
 	white-space: break-spaces;
 	width: 20em;
 	text-align: center;
+  /* default: above the icon */
+  bottom: calc(100% + 6px);
+  top: auto;
+  z-index: 2;
+  display: block;
 }
 .help-icon .button:focus + .tooltip,
 .help-icon .button:hover + .tooltip {
@@ -55,4 +59,20 @@
 	border-width: 6px;
 	border-style: solid;
 	border-color: #253858 transparent transparent transparent;
+}
+
+.tooltip[data-show-top="false"] {
+  /* flipped: below the icon */
+  top: calc(100% + 6px);
+  bottom: auto;
+  &::after{
+  /* arrow now pointing upwards */
+  border-color: transparent transparent #253858 transparent;
+  top: -12px;           /* move arrow above the box */
+  }
+}
+
+.tooltip::after {
+  /* default arrow pointing downwards */
+  border-color: #253858 transparent transparent transparent;
 }

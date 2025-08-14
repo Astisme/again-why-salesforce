@@ -1,6 +1,6 @@
 class HelpAws extends HTMLElement {
   static get observedAttributes() {
-    return ['href', 'target', 'rel'];
+    return ['href', 'target', 'rel', 'data-show-top'];
   }
 
   constructor() {
@@ -9,10 +9,12 @@ class HelpAws extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' });
     shadow.appendChild(tpl.content.cloneNode(true));
     this._anchor = shadow.querySelector('a.button');
-const linkEl = document.createElement('link');
-linkEl.setAttribute('rel', 'stylesheet');
-linkEl.setAttribute('href', new URL('./help.css', import.meta.url));
-this.shadowRoot.appendChild(linkEl);
+    this._tooltip = this.shadowRoot.querySelector('.tooltip');
+    const linkEl = document.createElement('link');
+    linkEl.setAttribute('rel', 'stylesheet');
+    linkEl.setAttribute('href', new URL('./help.css', import.meta.url));
+    this.shadowRoot.appendChild(linkEl);
+      this._tooltip.setAttribute('data-show-top',this.getAttribute("data-show-top") ?? "true");
   }
 
 
@@ -21,7 +23,7 @@ this.shadowRoot.appendChild(linkEl);
     this._syncLink();
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(_, oldValue, newValue) {
     // Whenever href, target, or rel changes, re-sync the anchor
     if (oldValue !== newValue) {
       this._syncLink();
