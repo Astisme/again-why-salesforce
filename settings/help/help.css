@@ -78,6 +78,6 @@
 }
 
 .link-tip {
-    font-style: italic;
-    color: var(--warning);
+	font-style: italic;
+	color: var(--warning);
 }

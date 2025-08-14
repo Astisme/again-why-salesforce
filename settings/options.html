@@ -35,7 +35,15 @@
 					</svg>
 					<span class="assistive" hidden data-i18n="help">Help</span>
 				</a>
-				<div class="tooltip" role="tooltip"><slot name="text">Nothing to see here...</slot><div class="link-tip hidden" data-i18n="help_tip_click_link">Click to be redirected to the documentation for this setting!</div></div>
+				<div class="tooltip" role="tooltip">
+					<slot name="text">Nothing to see here...</slot><div
+						class="link-tip hidden"
+						data-i18n="help_tip_click_link"
+					>
+						Click to be redirected to the documentation for this
+						setting!
+					</div>
+				</div>
 			</div>
 		</template>
 		<script src="/settings/help/help.js" type="module"></script>

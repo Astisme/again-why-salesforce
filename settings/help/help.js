@@ -18,7 +18,7 @@ class HelpAws extends HTMLElement {
 			"data-show-top",
 			this.getAttribute("data-show-top") ?? "true",
 		);
-        this._linkTip = this.shadowRoot.querySelector(".link-tip");
+		this._linkTip = this.shadowRoot.querySelector(".link-tip");
 	}
 
 	connectedCallback() {
@@ -35,12 +35,12 @@ class HelpAws extends HTMLElement {
 
 	_syncLink() {
 		// Read host attributes or fall back to sensible defaults
-        const elHref = this.getAttribute("href");
-        if(elHref != null){
-            this._linkTip.classList.remove('hidden');
-        } else {
-            this._linkTip.classList.add('hidden');
-        }
+		const elHref = this.getAttribute("href");
+		if (elHref != null) {
+			this._linkTip.classList.remove("hidden");
+		} else {
+			this._linkTip.classList.add("hidden");
+		}
 		const href = elHref ?? "#";
 		const target = this.getAttribute("target") ?? "_blank";
 		const rel = this.getAttribute("rel");
