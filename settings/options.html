@@ -16,26 +16,32 @@
 		<link rel="stylesheet" href="/settings/help/help.css" />
 		<link rel="stylesheet" href="./options.css" />
 		<script defer src="./options.js" type="module"></script>
-<template id="help-template">
-    <div class="help-icon">
-  <a class="button" aria-describedby="tooltip">
-      <!-- default built-in icon slot fallback -->
-      <svg focusable="false" aria-hidden="true" viewBox="0 0 520 520" class="slds-button__icon">
-            <g>
-                <path
-                    d="M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
-                >
-                </path>
-            </g>
-      </svg>
-    <span class="assistive" hidden><slot data-i18n="help">Help</slot></span>
-  </a>
-  <div class="tooltip" role="tooltip">
-    <slot name="text">Nothing to see here...</slot>
-  </div>
-  </div>
-</template>
-        <script src="/settings/help/help.js" type="module"></script>
+		<template id="help-template">
+			<div class="help-icon">
+				<a class="button" aria-describedby="tooltip">
+					<!-- default built-in icon slot fallback -->
+					<svg
+						focusable="false"
+						aria-hidden="true"
+						viewBox="0 0 520 520"
+						class="slds-button__icon"
+					>
+						<g>
+							<path
+								d="M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
+							>
+							</path>
+						</g>
+					</svg>
+					<span class="assistive" hidden><slot data-i18n="help"
+						>Help</slot></span>
+				</a>
+				<div class="tooltip" role="tooltip">
+					<slot name="text">Nothing to see here...</slot>
+				</div>
+			</div>
+		</template>
+		<script src="/settings/help/help.js" type="module"></script>
 	</head>
 
 	<body>
@@ -259,12 +265,15 @@
 			<div id="language-container">
 				<label for="picked-language" data-i18n="opt_pick_language"
 				>Pick extension language</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                        data-show-top="false"
-                    >
-                        <span slot="text" data-i18n="help_pick_language">Set the UI language for the extension only. If something hasn't been translated, the english version will be used instead.</span>
-                    </help-aws>
+				<help-aws
+					href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					data-show-top="false"
+				>
+					<span slot="text" data-i18n="help_pick_language"
+					>Set the UI language for the extension only. If something
+						hasn't been translated, the english version will be used
+						instead.</span>
+				</help-aws>
 				<div class="select-wrapper">
 					<select id="picked-language">
 						<option
@@ -349,11 +358,13 @@
 					>
 						Always open links in a new browser tab.
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_link_new_browser">When enabled, every saved Tab will open the related page in a new tab.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_link_new_browser"
+						>When enabled, every saved Tab will open the related
+							page in a new tab.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input id="skip_link_detection" type="checkbox" />
@@ -363,11 +374,15 @@
 					>
 						Skip automatic check of Salesforce Id.
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_skip_link_detection">Disables the extension check verifying that a URL fragment matches the format of Salesforce record/object IDs (used to automatically set the saved Tab as an Org Tab).</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_skip_link_detection"
+						>Disables the extension check verifying that a URL
+							fragment matches the format of Salesforce
+							record/object IDs (used to automatically set the
+							saved Tab as an Org Tab).</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -380,11 +395,16 @@
 							when unchecked).
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_prevent_lightning_navigation">Bypasses the Lightning Navigation API and opens links via full-page reload, which can be faster in some org setups.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span
+							slot="text"
+							data-i18n="help_prevent_lightning_navigation"
+						>Bypasses the Lightning Navigation API and opens links
+							via full-page reload, which can be faster in some
+							org setups.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -398,11 +418,14 @@
 							page.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_automatic_open_login">If you click the extension popup outside of a Salesforce domain, takes you to the Salesforce login page automatically.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_automatic_open_login"
+						>If you click the extension popup outside of a
+							Salesforce domain, takes you to the Salesforce login
+							page automatically.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -415,11 +438,14 @@
 							clicking on the popup while on a Salesforce page.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_automatic_open_setup">If you click the extension popup inside of a Salesforce domain but not on a Setup page, takes you to the Salesforce Setup page automatically.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_automatic_open_setup"
+						>If you click the extension popup inside of a Salesforce
+							domain but not on a Setup page, takes you to the
+							Salesforce Setup page automatically.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -432,11 +458,14 @@
 							when clicking on the popup.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_open_login_same_tab">If you click the extension popup outside of a Salesforce domain, the login page will be opened in the current browser tab.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_open_login_same_tab"
+						>If you click the extension popup outside of a
+							Salesforce domain, the login page will be opened in
+							the current browser tab.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -449,11 +478,15 @@
 							when clicking on the popup.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_open_setup_same_tab">If you click the extension popup inside of a Salesforce domain but not on a Setup page, the Salesforce Setup page will be opened in the current browser tab.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_open_setup_same_tab"
+						>If you click the extension popup inside of a Salesforce
+							domain but not on a Setup page, the Salesforce Setup
+							page will be opened in the current browser
+							tab.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -466,11 +499,14 @@
 							Manager.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_keep_tabs_left">Pins your saved Tabs before the standard navigation menu (Home / Object Manager) in Setup, instead of after it.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_keep_tabs_left"
+						>Pins your saved Tabs before the standard navigation
+							menu (Home / Object Manager) in Setup, instead of
+							after it.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -482,11 +518,14 @@
 							Add new Tabs in front.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_add_tabs_front">Newly favorited Tabs are inserted at the front of your Tab list in the Setup bar rather than appended at the end.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_add_tabs_front"
+						>Newly favorited Tabs are inserted at the front of your
+							Tab list in the Setup bar rather than appended at
+							the end.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -498,11 +537,14 @@
 							Add new Tabs as Org Tabs.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_add_tabs_as_org">Marks new Tabs as Org Tabs, so they're visible only when logged into that particular Salesforce Org's.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_add_tabs_as_org"
+						>Marks new Tabs as Org Tabs, so they're visible only
+							when logged into that particular Salesforce
+							Org's.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -514,11 +556,13 @@
 							Do not show update release notes.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_no_release_notes">Suppresses the automatic display of release note notifications after the extension updates.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_no_release_notes"
+						>Suppresses the automatic display of release note
+							notifications after the extension updates.</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -530,11 +574,17 @@
 							Do not warn about available updates.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_no_update_notification">Disables periodic update reminder popups, keeping the extension UI clean (when you've disabled automatic updates of the extension from your browser's settings).</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span
+							slot="text"
+							data-i18n="help_no_update_notification"
+						>Disables periodic update reminder popups, keeping the
+							extension UI clean (when you've disabled automatic
+							updates of the extension from your browser's
+							settings).</span>
+					</help-aws>
 				</li>
 				<li>
 					<input
@@ -547,11 +597,13 @@
 							user counts).
 						</span>
 					</label>
-                    <help-aws
-                        href="https://dashboard.simpleanalytics.com/extension.again.whysalesforce"
-                    >
-                        <span slot="text" data-i18n="help_prevent_analytics">Disables basic telemetry collection. The extension won’t appear in anonymous usage metrics.</span>
-                    </help-aws>
+					<help-aws
+						href="https://dashboard.simpleanalytics.com/extension.again.whysalesforce"
+					>
+						<span slot="text" data-i18n="help_prevent_analytics"
+						>Disables basic telemetry collection. The extension
+							won’t appear in anonymous usage metrics.</span>
+					</help-aws>
 				</li>
 			</ul>
 			<hr>
@@ -567,11 +619,14 @@
 							Keep Tabs sorted.
 						</span>
 					</label>
-                    <help-aws
-                        href="https://github.com/Astisme/again-why-salesforce/wiki/"
-                    >
-                        <span slot="text" data-i18n="help_keep_sort">When enabled, your Tabs are kept in sorted order—either by label, URL or Org; depending on what you pick.</span>
-                    </help-aws>
+					<help-aws
+						href="https://github.com/Astisme/again-why-salesforce/wiki/"
+					>
+						<span slot="text" data-i18n="help_keep_sort"
+						>When enabled, your Tabs are kept in sorted order—either
+							by label, URL or Org; depending on what you
+							pick.</span>
+					</help-aws>
 				</div>
 				<div id="sort-wrapper" class="invisible visibility-transition">
 					<label for="picked-sort" data-i18n="opt_pick_sort"
