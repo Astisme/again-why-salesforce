@@ -3,6 +3,10 @@
 		"message": "Tillat",
 		"description": "[req_permission] knapp for å gi tillatelser"
 	},
+	"ascending": {
+		"message": "Stigende (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Tilgjengelig",
 		"description": "Seksjonshode for elementer som kan legges til"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etikett for innstillingsmenyen"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sorter Tab-er",
+		"description": "kontekstmeny for å la brukere sortere Tab-ene sine automatisk (hovedmeny)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 etter etikett",
+		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter etikett"
+	},
+	"cxm_sort_org": {
+		"message": "👽 etter Org",
+		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 etter nettadresse",
+		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter nettadresse"
+	},
 	"cxm_update": {
 		"message": "✏️ Oppdater Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[popup] tittel på papirkurven for å tømme alle Tabs"
+	},
+	"descending": {
+		"message": "Synkende (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Slipp",
@@ -351,6 +375,10 @@
 		"message": "Feil ved tilbakestilling til standard-Tab.",
 		"description": "[feil] Generisk feil ved tilbakestilling av Tab til standard"
 	},
+	"error_sorting_tabs": {
+		"message": "Feil under sortering av Tab-ene",
+		"description": "[error] vist i en toast-melding"
+	},
 	"error_sync_nothing": {
 		"message": "Kan ikke synkronisere tomme Tabber!",
 		"description": "[error] det ble forsøkt å synkronisere ingenting"
@@ -455,6 +483,70 @@
 		"message": "Generelt",
 		"description": "Etikett for kategorien generelle innstillinger"
 	},
+	"help": {
+		"message": "Hjelp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Merk nye Tab-er som Org Tab-er, slik at de bare er synlige når du er logget på den spesifikke Salesforce-organisasjonen.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nylig favoritt-merkede Tab-er settes inn foran Tab-listen din i oppsettlinjen i stedet for å legges til på slutten.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Hvis du klikker på utvidelsens popup utenfor et Salesforce-domene, blir du automatisk tatt til Salesforce-påloggingssiden.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Hvis du klikker på utvidelsens popup inne i et Salesforce-domene, men ikke på en oppsettside, blir du automatisk tatt til Salesforce-oppsettsiden.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Når aktivert, holdes Tab-ene dine i sortert rekkefølge—enten etter etikett, URL eller Org; avhengig av hva du velger.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fester de lagrede Tab-ene dine foran standard navigasjonsmenyen (Hjem / Object Manager) i Oppsett, i stedet for etter den.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Når aktivert, vil hver lagret Tab åpne den relaterte siden i en ny fane.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Undertrykker den automatiske visningen av notifikasjoner for utgivelsesnotater etter at utvidelsen oppdateres.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Deaktiverer periodiske påminnelses-popup-er for oppdatering, og holder utvidelsens UI ren (når du har deaktivert automatiske oppdateringer av utvidelsen fra nettleserens innstillinger).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Hvis du klikker på utvidelsens popup utenfor et Salesforce-domene, vil påloggingssiden bli åpnet i den nåværende nettleserfanen.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Hvis du klikker på utvidelsens popup inne i et Salesforce-domene, men ikke på en oppsettside, vil Salesforce-oppsettsiden bli åpnet i den nåværende nettleserfanen.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Angi UI-språket kun for utvidelsen. Hvis noe ikke er oversatt, vil den engelske versjonen bli brukt i stedet.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Deaktiverer grunnleggende telemetri-innsamling. Utvidelsen vil ikke vises i anonyme bruksmetrikker.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omgår Lightning Navigation API og åpner lenker via en fullstendig side-oppdatering, noe som kan være raskere i noen organisasjons-oppsett.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Deaktiverer utvidelses-sjekken som verifiserer at en URL-fragment matcher formatet for Salesforce-rekord-/objekt-ID-er (brukes til å automatisk sette den lagrede Tab-en som en Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importer",
 		"description": "[popup] importknapp"
@@ -539,6 +631,14 @@
 		"message": "Åpne Setup",
 		"description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforce Setup-siden"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Legg til nye Tab-er som Org Tab-er.",
+		"description": "[settings] la brukeren legge til alle nye Tab-er som org-spesifikke"
+	},
+	"opt_add_tabs_front": {
+		"message": "Legg til nye Tab-er foran.",
+		"description": "[settings] la brukeren legge til alle nye Tab-er foran"
+	},
 	"opt_automatic_open_login": {
 		"message": "Åpne $salesforce_login-siden automatisk når du klikker på popup-vinduet mens du ikke er på en Salesforce-side.",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et tilfeldig nettsted"
@@ -547,9 +647,17 @@
 		"message": "Åpne $salesforce_setup-siden automatisk når du klikker på popup-vinduet mens du er på en Salesforce-side.",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et Salesforce-nettsted"
 	},
+	"opt_confirm_save": {
+		"message": "Innstillingene ble lagret!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Standard og reserve)",
 		"description": "Standard språkvalg for utvidelsen"
+	},
+	"opt_keep_sort": {
+		"message": "Hold Tab-ene sortert.",
+		"description": "[setting] la brukeren holde Tab-ene sine sortert etter en av nøklene deres"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hold favoritt-Tabs til venstre for Hjem og Objektbehandler.",
@@ -579,13 +687,17 @@
 		"message": "Velg utvidelsesspråk",
 		"description": "[innstilling] etikett for å be brukeren om å velge foretrukket språk"
 	},
+	"opt_pick_sort": {
+		"message": "Velg hvilket felt Tab-ene skal sorteres etter",
+		"description": "[setting] nå kan brukeren velge hvilken nøkkel Tab-ene skal holdes sortert etter"
+	},
 	"opt_prevent_analytics": {
 		"message": "Hindre bruk av Simple Analytics (blir ikke telt med i brukerstatistikk).",
 		"description": "[innstilling] lar brukeren forhindre sending av anonym analyse"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Forhindre bruk av Lightning-navigasjon (raskere lasting ved bruk).",
-		"description": "[innstilling] ikke tillat Lightning-navigasjon med forklaring av funksjonen"
+		"message": "Forhindre bruk av Lightning Navigation (raskere lasting når ikke avkrysset).",
+		"description": "[setting] ikke tillat Lightning Navigation med forklaring av funksjonen"
 	},
 	"opt_same_tab_popup": {
 		"message": "side i samme fane når du klikker på popup.",

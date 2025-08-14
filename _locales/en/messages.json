@@ -482,6 +482,70 @@
 		"message": "General",
 		"description": "Label for the general settings category"
 	},
+	"help": {
+		"message": "Help",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marks new Tabs as Org Tabs, so they're visible only when logged into that particular Salesforce Org's.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Newly favorited Tabs are inserted at the front of your Tab list in the Setup bar rather than appended at the end.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "If you click the extension popup outside of a Salesforce domain, takes you to the Salesforce login page automatically.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "If you click the extension popup inside of a Salesforce domain but not on a Setup page, takes you to the Salesforce Setup page automatically.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "When enabled, your Tabs are kept in sorted order—either by label, URL or Org; depending on what you pick.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pins your saved Tabs before the standard navigation menu (Home / Object Manager) in Setup, instead of after it.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "When enabled, every saved Tab will open the related page in a new tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Suppresses the automatic display of release note notifications after the extension updates.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Disables periodic update reminder popups, keeping the extension UI clean (when you've disabled automatic updates of the extension from your browser's settings).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "If you click the extension popup outside of a Salesforce domain, the login page will be opened in the current browser tab.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "If you click the extension popup inside of a Salesforce domain but not on a Setup page, the Salesforce Setup page will be opened in the current browser tab.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Set the UI language for the extension only. If something hasn't been translated, the english version will be used instead.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Disables basic telemetry collection. The extension won’t appear in anonymous usage metrics.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Bypasses the Lightning Navigation API and opens links via full-page reload, which can be faster in some org setups.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Disables the extension check verifying that a URL fragment matches the format of Salesforce record/object IDs (used to automatically set the saved Tab as an Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] import button"
@@ -631,7 +695,7 @@
 		"description": "[setting] let the user prevent them from sending anonymous analytics"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Prevent use of Lightning Navigation (faster loading when in use).",
+		"message": "Prevent use of Lightning Navigation (faster loading when unchecked).",
 		"description": "[setting] do not allow Lightning Navigation with explanation of feature"
 	},
 	"opt_same_tab_popup": {

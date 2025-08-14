@@ -3,6 +3,10 @@
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"
 	},
+	"ascending": {
+		"message": "Tăng dần (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Có sẵn",
 		"description": "Tiêu đề phần cho các mục có thể thêm"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Nhãn cho menu cài đặt"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sắp xếp Tab",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ tự động (menu cha)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 theo Nhãn",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo nhãn"
+	},
+	"cxm_sort_org": {
+		"message": "👽 theo Tổ chức",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo tổ chức"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 theo Url",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo url"
+	},
 	"cxm_update": {
 		"message": "✏️ Cập nhật Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete tất cả các Tab",
 		"description": "[popup] tiêu đề trên thùng rác để làm trống tất cả các Tab"
+	},
+	"descending": {
+		"message": "Giảm dần (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Thả",
@@ -351,6 +375,10 @@
 		"message": "Lỗi khi đặt lại các Tab mặc định.",
 		"description": "[lỗi] Lỗi chung khi đặt lại các Tab về mặc định"
 	},
+	"error_sorting_tabs": {
+		"message": "Lỗi khi sắp xếp Tab",
+		"description": "[error] hiển thị trong thông báo nhanh"
+	},
 	"error_sync_nothing": {
 		"message": "Không thể đồng bộ các Tabs rỗng!",
 		"description": "[error] Đã cố đồng bộ những gì không có."
@@ -454,6 +482,70 @@
 		"message": "Chung",
 		"description": "Nhãn cho danh mục cài đặt chung"
 	},
+	"help": {
+		"message": "Trợ giúp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Đánh dấu Tab mới là Tab Tổ chức, vì vậy chúng chỉ hiển thị khi đã đăng nhập vào Tổ chức Salesforce cụ thể đó.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Các Tab được đánh dấu yêu thích gần đây được chèn vào phía trước danh sách Tab của bạn trong thanh Thiết lập thay vì được thêm vào cuối.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng bên ngoài một miền Salesforce, bạn sẽ tự động được đưa đến trang đăng nhập của Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng bên trong một miền Salesforce nhưng không phải trên trang Thiết lập, bạn sẽ tự động được đưa đến trang Thiết lập của Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Khi được bật, các Tab của bạn sẽ được giữ ở trạng thái đã sắp xếp—theo nhãn, URL hoặc Tổ chức; tùy thuộc vào lựa chọn của bạn.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Ghim các Tab đã lưu của bạn trước menu điều hướng tiêu chuẩn (Trang chủ / Trình quản lý đối tượng) trong Thiết lập, thay vì sau đó.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Khi được bật, mọi Tab đã lưu sẽ mở trang liên quan trong một Tab mới.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Chặn hiển thị tự động các thông báo ghi chú phát hành sau khi tiện ích mở rộng được cập nhật.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Vô hiệu hóa các cửa sổ bật lên nhắc nhở cập nhật định kỳ, giữ cho giao diện người dùng của tiện ích mở rộng sạch sẽ (khi bạn đã vô hiệu hóa các cập nhật tự động của tiện ích mở rộng khỏi cài đặt trình duyệt của mình).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Nếu bạn nhấp vào cửa sổ pop-up tiện ích mở rộng bên ngoài một miền Salesforce, trang đăng nhập sẽ được mở trong Tab trình duyệt hiện tại.",
+		"description": "[cài đặt-trợ giúp] cho $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Nếu bạn nhấp vào cửa sổ pop-up tiện ích mở rộng bên trong một miền Salesforce nhưng không phải trên trang Setup, trang Salesforce Setup sẽ được mở trong Tab trình duyệt hiện tại.",
+		"description": "[cài đặt-trợ giúp] cho $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Chỉ đặt ngôn ngữ giao diện người dùng cho tiện ích mở rộng. Nếu có điều gì đó chưa được dịch, phiên bản tiếng Anh sẽ được sử dụng thay thế.",
+		"description": "[cài đặt-trợ giúp] cho $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Vô hiệu hóa việc thu thập dữ liệu từ xa cơ bản. Tiện ích mở rộng sẽ không xuất hiện trong các số liệu sử dụng ẩn danh.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Bỏ qua API Điều hướng Lightning và mở các liên kết thông qua việc tải lại trang đầy đủ, điều này có thể nhanh hơn trong một số thiết lập tổ chức.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Vô hiệu hóa kiểm tra tiện ích mở rộng xác minh rằng một đoạn URL khớp với định dạng của ID bản ghi/đối tượng Salesforce (được sử dụng để tự động đặt Tab đã lưu là một Tab Tổ chức).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Nhập",
 		"description": "[popup] Nút nhập"
@@ -538,6 +630,14 @@
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Thêm Tab mới là Tab Tổ chức.",
+		"description": "[settings] cho phép người dùng thêm tất cả các Tab mới dưới dạng tổ chức cụ thể"
+	},
+	"opt_add_tabs_front": {
+		"message": "Thêm Tab mới vào phía trước.",
+		"description": "[settings] cho phép người dùng thêm tất cả các Tab mới vào phía trước"
+	},
 	"opt_automatic_open_login": {
 		"message": "Tự động mở trang $salesforce_login khi nhấp vào cửa sổ bật lên trong khi không ở trên trang Salesforce.",
 		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên một trang web ngẫu nhiên"
@@ -546,9 +646,17 @@
 		"message": "Tự động mở trang $salesforce_setup khi nhấp vào cửa sổ bật lên khi đang ở trên trang Salesforce.",
 		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên trang web Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Cài đặt đã được lưu!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Mặc định và Dự phòng)",
 		"description": "Tùy chọn ngôn ngữ mặc định của tiện ích mở rộng"
+	},
+	"opt_keep_sort": {
+		"message": "Giữ Tab được sắp xếp.",
+		"description": "[setting] cho phép người dùng giữ Tab của họ được sắp xếp theo một trong các khóa của họ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Giữ Tabs yêu thích ở bên trái Home và Object Manager.",
@@ -578,13 +686,17 @@
 		"message": "Chọn ngôn ngữ tiện ích mở rộng",
 		"description": "[cài_đặt] nhãn để nhắc người dùng chọn ngôn ngữ ưa thích của họ"
 	},
+	"opt_pick_sort": {
+		"message": "Chọn trường mà các Tab nên được sắp xếp",
+		"description": "[setting] giờ đây người dùng có thể chọn khóa nào để giữ cho các Tab được sắp xếp"
+	},
 	"opt_prevent_analytics": {
 		"message": "Ngăn chặn việc sử dụng Simple Analytics (không được tính vào số lượng người dùng).",
 		"description": "[cài đặt] cho phép người dùng ngăn gửi dữ liệu phân tích ẩn danh"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Ngăn chặn việc sử dụng Điều hướng Lightning (tải nhanh hơn khi sử dụng).",
-		"description": "[cài đặt] không cho phép Điều hướng Lightning với giải thích về tính năng"
+		"message": "Ngăn chặn việc sử dụng Điều hướng Lightning (tải nhanh hơn khi bỏ chọn).",
+		"description": "[setting] không cho phép Điều hướng Lightning với giải thích về tính năng"
 	},
 	"opt_same_tab_popup": {
 		"message": "mở trang trong cùng tab khi nhấp popup.",
