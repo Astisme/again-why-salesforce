@@ -907,14 +907,9 @@ function savePickedSort(enabled = null, direction = null) {
 keep_sorted_el.addEventListener("click", (e) => {
 	if (e.currentTarget.checked) {
 		sortContainer.classList.remove(invisible);
-		savePickedSort(
-			picked_sort_select.value,
-			picked_sort_direction_select.value,
-		);
-		return;
-	}
-	sortContainer.classList.add(invisible);
-	savePickedSort();
+	} else {
+        sortContainer.classList.add(invisible);
+    }
 });
 
 const allCheckboxes = [
@@ -1011,12 +1006,6 @@ async function restoreGeneralSettings() {
 		} else {
 			sendLanguageMessage();
 		}
-	});
-	picked_sort_select.addEventListener("change", (e) => {
-		savePickedSort(e.target.value, picked_sort_direction_select.value);
-	});
-	picked_sort_direction_select.addEventListener("change", (e) => {
-		savePickedSort(picked_sort_select.value, e.target.value);
 	});
 	generalSettingsListenersSet = true;
 }
@@ -1321,6 +1310,7 @@ document.querySelector("#save-container > button").addEventListener(
 	"click",
 	() => {
 		saveToast.classList.remove(invisible);
+        savePickedSort(keep_sorted_el.checked && picked_sort_select.value, picked_sort_direction_select.value);
 		setTimeout(() => saveToast.classList.add(invisible), 2500);
 	},
 );
