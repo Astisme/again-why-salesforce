@@ -76,3 +76,8 @@
 	/* default arrow pointing downwards */
 	border-color: #253858 transparent transparent transparent;
 }
+
+.link-tip {
+    font-style: italic;
+    color: var(--warning);
+}

@@ -951,6 +951,7 @@ async function restoreGeneralSettings() {
 	allCheckboxes.forEach((el) => {
 		switch (el) {
 			case link_new_browser_el:
+			case use_lightning_navigation_el:
 			case tab_add_front_el:
 				return;
 			default:
@@ -964,6 +965,13 @@ async function restoreGeneralSettings() {
 			use_lightning_navigation_el.checked = true;
 		}
 		saveCheckboxOptions(e, use_lightning_navigation_el);
+	});
+	use_lightning_navigation_el.addEventListener("change", (e) => {
+		// click on dependent setting
+		if (!e.target.checked) {
+			link_new_browser_el.checked = false;
+		}
+		saveCheckboxOptions(e, link_new_browser_el);
 	});
 	tab_add_front_el.addEventListener("change", (e) => {
 		// click on dependent setting
