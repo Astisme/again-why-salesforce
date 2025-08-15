@@ -908,8 +908,8 @@ keep_sorted_el.addEventListener("click", (e) => {
 	if (e.currentTarget.checked) {
 		sortContainer.classList.remove(invisible);
 	} else {
-        sortContainer.classList.add(invisible);
-    }
+		sortContainer.classList.add(invisible);
+	}
 });
 
 const allCheckboxes = [
@@ -1310,7 +1310,10 @@ document.querySelector("#save-container > button").addEventListener(
 	"click",
 	() => {
 		saveToast.classList.remove(invisible);
-        savePickedSort(keep_sorted_el.checked && picked_sort_select.value, picked_sort_direction_select.value);
+		savePickedSort(
+			keep_sorted_el.checked && picked_sort_select.value,
+			picked_sort_direction_select.value,
+		);
 		setTimeout(() => saveToast.classList.add(invisible), 2500);
 	},
 );
