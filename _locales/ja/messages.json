@@ -3,6 +3,10 @@
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
 	},
+	"ascending": {
+		"message": "昇順（A-Z）",
+		"description": ""
+	},
 	"available": {
 		"message": "利用可能",
 		"description": "追加できる項目のセクション見出し"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "設定メニューのラベル"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabsをソート",
+		"description": "ユーザーがTabsを自動的にソートできるようにするコンテキストメニュー（親メニュー）"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ラベル順",
+		"description": "ユーザーがTabsをラベルでソートできるようにするコンテキストメニュー"
+	},
+	"cxm_sort_org": {
+		"message": "👽 組織順",
+		"description": "ユーザーがTabsを組織でソートできるようにするコンテキストメニュー"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url順",
+		"description": "ユーザーがTabsをURLでソートできるようにするコンテキストメニュー"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab を更新する",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "すべてのTabsを$delete",
 		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"
+	},
+	"descending": {
+		"message": "降順（Z-A）",
+		"description": ""
 	},
 	"drop": {
 		"message": "ドロップ",
@@ -351,6 +375,10 @@
 		"message": "デフォルトのTabにリセット中にエラーが発生しました。",
 		"description": "[エラー] Tabをデフォルトにリセットする際の一般的なエラー"
 	},
+	"error_sorting_tabs": {
+		"message": "Tabsのソート中にエラーが発生しました",
+		"description": "[error] トーストメッセージに表示されます"
+	},
 	"error_sync_nothing": {
 		"message": "空の Tabs は同期できません！",
 		"description": "[error] 同期すべきものがありません。"
@@ -454,6 +482,70 @@
 		"message": "一般",
 		"description": "一般設定カテゴリのラベル"
 	},
+	"help": {
+		"message": "ヘルプ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "新しいTabsをOrg Tabsとしてマークします。これにより、特定のSalesforce組織にログインしている場合にのみ表示されます。",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "新しくお気に入りに登録されたTabsは、設定バーのTabリストの最後にではなく、先頭に挿入されます。",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Salesforceドメイン外で拡張機能のポップアップをクリックすると、自動的にSalesforceのログインページに移動します。",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Salesforceドメイン内で、ただし設定ページ以外で拡張機能のポップアップをクリックすると、自動的にSalesforceの設定ページに移動します。",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "有効にすると、Tabsはラベル、URL、または組織のいずれかによって、ソートされた順序に保たれます。どちらを選択するかによって異なります。",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "設定の標準ナビゲーションメニュー（Home / Object Manager）の後ではなく、前に保存したTabsを固定します。",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "有効にすると、保存された各Tabが関連ページを新しいTabで開きます。",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "拡張機能の更新後にリリースノートの通知が自動的に表示されるのを抑制します。",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "定期的な更新リマインダーのポップアップを無効にし、拡張機能のUIをきれいに保ちます（ブラウザの設定から拡張機能の自動更新を無効にした場合）。",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Salesforceドメイン外で拡張機能のポップアップをクリックすると、ログインページが現在のブラウザのTabで開きます。",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Salesforceドメイン内で、ただし設定ページ以外で拡張機能のポップアップをクリックすると、Salesforceの設定ページが現在のブラウザのTabで開きます。",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "拡張機能専用のUI言語を設定します。未翻訳の部分は、代わりに英語版が使用されます。",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "基本的なテレメトリ収集を無効にします。拡張機能は匿名利用メトリクスに表示されません。",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning Navigation APIをバイパスし、ページ全体のリロードを介してリンクを開きます。これにより、一部の組織設定では高速になる場合があります。",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "URLフラグメントがSalesforceのレコード/オブジェクトIDの形式と一致するかどうかを確認する拡張機能のチェックを無効にします（保存されたTabをOrg Tabとして自動的に設定するために使用されます）。",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "インポートする",
 		"description": "[popup] インポートボタン"
@@ -538,6 +630,14 @@
 		"message": "Setup を開く",
 		"description": "[notSalesforceSetup] Salesforce Setup ページに移動するための呼びかけ"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "新しいTabsをOrg Tabsとして追加します。",
+		"description": "[settings] ユーザーがすべての新しいTabsを組織固有として追加できるようにする"
+	},
+	"opt_add_tabs_front": {
+		"message": "新しいTabsを先頭に追加します。",
+		"description": "[settings] ユーザーがすべての新しいTabsを先頭に追加できるようにする"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforceページにいないときにポップアップをクリックすると、$salesforce_loginページを自動的に開きます。",
 		"description": "[設定] ユーザーがランダムなウェブサイトでポップアップを開いたとき"
@@ -546,9 +646,17 @@
 		"message": "Salesforceページにいるときにポップアップをクリックすると、$salesforce_setupページを自動的に開きます。",
 		"description": "[設定] ユーザーがSalesforceウェブサイトでポップアップを開いたとき"
 	},
+	"opt_confirm_save": {
+		"message": "設定が保存されました！",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (デフォルトおよびフォールバック)",
 		"description": "拡張機能のデフォルト言語オプション"
+	},
+	"opt_keep_sort": {
+		"message": "Tabsをソートされたままにします。",
+		"description": "[setting] ユーザーがTabsをいずれかのキーでソートされたままにできるようにする"
 	},
 	"opt_keep_tabs_left": {
 		"message": "お気に入りのTabsをホームとオブジェクトマネージャーの左に保持します。",
@@ -578,13 +686,17 @@
 		"message": "拡張機能の言語を選択",
 		"description": "[設定] ユーザーに希望の言語を選択させるためのラベル"
 	},
+	"opt_pick_sort": {
+		"message": "Tabsをどのフィールドでソートするかを選択します",
+		"description": "[setting] ユーザーはTabsをどのキーでソートされたままにするかを選択できるようになりました"
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analyticsの使用を防止（ユーザー数にカウントされません）。",
 		"description": "[設定] 匿名解析の送信を防止する設定"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Lightningナビゲーションの使用を禁止します（使用中は読み込みが高速になります）。",
-		"description": "[設定] 機能の説明付きでLightningナビゲーションを許可しない"
+		"message": "Lightning Navigationの使用を防止します（チェックを外すと読み込みが速くなります）。",
+		"description": "[setting] 機能の説明とともにLightning Navigationを許可しない"
 	},
 	"opt_same_tab_popup": {
 		"message": "ポップアップをクリックしたときに同じタブでページを開きます。",

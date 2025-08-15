@@ -3,6 +3,10 @@
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"
 	},
+	"ascending": {
+		"message": "Kasvav (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Saadaval",
 		"description": "Jaotise pealkiri elementidele, mida saab lisada"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Seadete menüü silt"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sorteeri Tabs",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs automaatselt sortida (vanemmenüü)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 sildi järgi",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs sildi järgi sortida"
+	},
+	"cxm_sort_org": {
+		"message": "👽 organisatsiooni järgi",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs organisatsiooni järgi sortida"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL-i järgi",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs URL-i järgi sortida"
+	},
 	"cxm_update": {
 		"message": "✏️ Uuenda Tab",
 		"description": "[kontekstimenüü]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete kõik Tabs",
 		"description": "[hüpikaken] prügikasti pealkiri kõigi Tabs tühjendamiseks"
+	},
+	"descending": {
+		"message": "Kahanev (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Viga Tabide lähtestamisel vaikeseadetele.",
 		"description": "[viga] Üldine viga, mida kasutatakse Tabide lähtestamisel vaikeseadetele"
 	},
+	"error_sorting_tabs": {
+		"message": "Tabs-ide sorteerimisel ilmnes viga",
+		"description": "[error] kuvatakse hüpikteates"
+	},
 	"error_sync_nothing": {
 		"message": "Null (null) Tabs ei saa sünkroonida!",
 		"description": "[viga] üritati sünkroonida mitte midagi"
@@ -455,6 +483,70 @@
 		"message": "Üldine",
 		"description": "Silt üldiste seadete kategooria jaoks"
 	},
+	"help": {
+		"message": "Abi",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Märgib uued Tabs Org Tabs-ideks, nii et need on nähtavad ainult siis, kui olete sellesse konkreetsesse Salesforce'i organisatsiooni sisse logitud.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Äsja lemmikuks lisatud Tabs sisestatakse seadistusriba Tab-ide loendi ette, mitte ei lisata lõppu.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Kui klõpsate laienduse hüpikaknale väljaspool Salesforce'i domeeni, viib see teid automaatselt Salesforce'i sisselogimislehele.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Kui klõpsate laienduse hüpikaknale Salesforce'i domeeni sees, kuid mitte seadistuslehel, viib see teid automaatselt Salesforce'i seadistuslehele.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Kui see on lubatud, hoitakse teie Tabs sorteeritud järjekorras - kas sildi, URL-i või organisatsiooni järgi; olenevalt sellest, mida valite.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Kinnitab teie salvestatud Tabs enne standardset navigeerimismenüüd (Home / Object Manager) seadistuses, mitte pärast seda.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Kui see on lubatud, avab iga salvestatud Tab seotud lehe uues Tab-is.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Pärsib väljalaskemärkuste märguannete automaatse kuvamise pärast laienduse värskendamist.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Keelab perioodilised värskenduste meeldetuletuste hüpikaknad, hoides laienduse kasutajaliidese puhtana (kui olete brauseri seadetes laienduse automaatsed värskendused keelanud).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Kui klõpsate laienduse hüpikaknale väljaspool Salesforce'i domeeni, avaneb sisselogimisleht praeguses brauseri Tab-is.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Kui klõpsate laienduse hüpikaknale Salesforce'i domeeni sees, kuid mitte seadistuslehel, avaneb Salesforce'i seadistusleht praeguses brauseri Tab-is.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Määrake laienduse jaoks ainult kasutajaliidese keel. Kui midagi pole tõlgitud, kasutatakse selle asemel ingliskeelset versiooni.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Keelab põhiliste telemeetriaandmete kogumise. Laiendus ei ilmu anonüümsetesse kasutusmõõdikutesse.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Väldib Lightning Navigation API-d ja avab lingid täislehe uuesti laadimisega, mis võib mõnes organisatsiooni seadistuses olla kiirem.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Keelab laienduse kontrolli, mis kontrollib, kas URL-i fragment vastab Salesforce'i kirje/objekti ID-de vormingule (kasutatakse salvestatud Tab automaatseks määramiseks Org Tab-iks).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Impordi",
 		"description": "[hüpikaken] importimisnupp"
@@ -539,6 +631,14 @@
 		"message": "Ava Seadistus",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Lisa uued Tabs Org Tabs-idena.",
+		"description": "[settings] laseb kasutajal lisada kõik uued Tabs org-spetsiifilistena"
+	},
+	"opt_add_tabs_front": {
+		"message": "Lisa uued Tabs ette.",
+		"description": "[settings] laseb kasutajal lisada kõik uued Tabs ette"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automaatselt ava $salesforce_login leht, kui klõpsate hüpikaknal, kui te ei ole Salesforce'i lehel.",
 		"description": "[seadistus] kui kasutaja avab hüpikakna juhuslikul veebisaidil"
@@ -547,9 +647,17 @@
 		"message": "Automaatselt ava $salesforce_setup leht, kui klõpsate hüpikaknal, kui olete Salesforce'i lehel.",
 		"description": "[seadistus] kui kasutaja avab hüpikakna Salesforce'i veebisaidil"
 	},
+	"opt_confirm_save": {
+		"message": "Seaded salvestati!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Vaikimisi ja tagavaraks)",
 		"description": "Laienduse vaikimisi keelevalik"
+	},
+	"opt_keep_sort": {
+		"message": "Hoia Tabs sorteeritud.",
+		"description": "[setting] võimaldab kasutajal hoida oma Tabs sorteeritud ühe oma võtme järgi"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Hoia lemmikud Tabs Home ja Object Manager'i vasakul küljel.",
@@ -579,13 +687,17 @@
 		"message": "Valige laienduse keel",
 		"description": "[seade] silt, mis palub kasutajal valida eelistatud keel"
 	},
+	"opt_pick_sort": {
+		"message": "Valige, millise välja järgi tuleks Tabs sortida",
+		"description": "[setting] nüüd saab kasutaja valida, millise võtme järgi Tabs sorteeritud hoida"
+	},
 	"opt_prevent_analytics": {
 		"message": "Takista Simple Analytics kasutamist (ei kuvata kasutajate arvus).",
 		"description": "[seade] võimaldab kasutajal takistada anonüümsete analüütikate saatmist"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Takista Lightningu navigeerimise kasutamist (kasutamisel kiirem laadimine).",
-		"description": "[seadistus] ära luba Lightningu navigeerimist funktsiooni selgitusega"
+		"message": "Väldige Lightning Navigation'i kasutamist (kiirem laadimine, kui märkimata).",
+		"description": "[setting] ei luba Lightning Navigation'it koos funktsiooni selgitusega"
 	},
 	"opt_same_tab_popup": {
 		"message": "leht samas vahekaardis hüpikaknale klõpsates.",
