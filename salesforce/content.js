@@ -772,13 +772,7 @@ async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
 		inputTab.org = Tab.extractOrgName(getCurrentHref());
 	}
 	allTabs = await ensureAllTabsAvailability();
-	const matchingTab = allTabs.getSingleTabByData(inputTab);
-	matchingTab.update({
-		org: matchingTab.org == null ? getCurrentHref() : "",
-	});
-	if (!await allTabs.syncTabs()) {
-		throw new Error("error_failed_sync");
-	}
+    await allTabs.updateTab(inputTab, matchingTab.org == null ? getCurrentHref() : "");
 }
 
 /**
@@ -837,18 +831,11 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		matchingTab.update({
-			label: labelContainer.value !== ""
-				? labelContainer.value
-				: matchingTab.label,
-			url: urlContainer.value !== ""
-				? urlContainer.value
-				: matchingTab.url,
+        await allTabs.updateTab(matchingTab, {
+			label: labelContainer.value,
+			url: urlContainer.value,
 			org: orgContainer.value,
 		});
-		if (!await allTabs.syncTabs()) {
-			throw new Error("error_failed_sync");
-		}
 		sf_afterSet();
 		closeButton.click();
 	});

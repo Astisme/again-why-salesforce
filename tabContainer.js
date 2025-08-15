@@ -1,8 +1,7 @@
-import { BROWSER, getSettings, PERSIST_SORT, WHY_KEY } from "/constants.js";
+import { BROWSER, getSettings, PERSIST_SORT, WHY_KEY, sendExtensionMessage, SETTINGS_KEY  } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
-let fromSortFunction = false;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
@@ -676,16 +675,16 @@ export default class TabContainer extends Array {
 	 * Last function called by other entry points.
 	 *
 	 * @param {Array|null} [tabs=null] - An optional array of tabs to replace the current tabs before synchronization. If not provided, the current tabs are used.
+	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
+	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function (like the moveTab function).
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
 	 */
-	async syncTabs(tabs = null, checkSort = true) {
+	async syncTabs(tabs = null, fromSortFunction = false, fromInvalidateSortFunction = false) {
 		// replace tabs already checks the tabs
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
 			return false;
 		}
-		if (checkSort) {
-			await this.checkSetSorted();
-		}
+        await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
 		return await TabContainer._syncTabs(tabs ?? this);
 	}
 
@@ -876,7 +875,7 @@ export default class TabContainer extends Array {
 			// from newIndex, remove 0 tabs and insert `tab` in their place
 			this.splice(newIndex, 0, ...this.splice(currentIndex, 1));
 		}
-		await this.syncTabs();
+		await this.syncTabs(undefined, undefined, true);
 		return newIndex;
 	}
 
@@ -995,8 +994,7 @@ export default class TabContainer extends Array {
 		this.#isSortedDesc = !sortAsc;
 		// Persist the new order
 		if (sync) {
-			fromSortFunction = true;
-			return await this.syncTabs(undefined, false);
+			return await this.syncTabs(undefined, true);
 		}
 		return true;
 	}
@@ -1015,21 +1013,35 @@ export default class TabContainer extends Array {
 	 * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
 	 * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
 	 *
+	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
+	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function
 	 * @returns {boolean} whether the tabs in input are sorted or not.
 	 */
-	async checkSetSorted() {
+	async checkSetSorted(fromSortFunction = false, fromInvalidateSortFunction = false) {
 		if (fromSortFunction) {
-			fromSortFunction = false;
-			return true;
-		}
-		// check if the user wants to keep the Tabs always sorted
-		if (await this.checkShouldKeepSorted()) { // if true, has already sorted and set the variables
+            // already sorted everything
 			return true;
 		}
 		this.#isSorted = false;
 		this.#isSortedBy = null;
 		this.#isSortedAsc = false;
 		this.#isSortedDesc = false;
+        if(fromInvalidateSortFunction){
+            // update the sort setting persisted (do not wait for response)
+            sendExtensionMessage({
+                what: "set",
+                key: SETTINGS_KEY,
+                set: [{
+                    id: PERSIST_SORT,
+                    enabled: false,
+                }]
+            });
+            // check if, out of luck, the array is still sorted
+        }
+		// check if the user wants to keep the Tabs always sorted
+		if (await this.checkShouldKeepSorted()) { // if true, has already sorted and set the variables
+			return true;
+		}
 		for (const key of Tab.allowedKeys) {
 			let asc = true;
 			let desc = true;
@@ -1068,4 +1080,18 @@ export default class TabContainer extends Array {
 			sortAsc: persistSort.ascending ?? true,
 		}, false);
 	}
+
+    /**
+     * Takes care of updating a single Tab and synchronize the Array
+     *
+     * @param {Tab} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - the Tab that has to be updated; it MUST be a Tab which is already present in the Array
+     * @param {{ label: undefined; url: undefined; org: undefined; }} [updateTo={label: undefined, url: undefined, org: undefined}] - an Object which contains the keys that have to be updated
+     *
+     * @returns {boolean} whether the Tab was updated AND the array was synced
+     */
+    async updateTab(tabToUpdate = { label: undefined, url: undefined, org: undefined }, updateTo = { label: undefined, url: undefined, org: undefined }){
+        const matchingTab = this.getSingleTabByData(tabToUpdate);
+        matchingTab.update(updateTo);
+        return await this.syncTabs();
+    }
 }

@@ -10,9 +10,11 @@ import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 
 function matchStorageToContainer(container: TabContainer) {
-	assertEquals(mockStorage.tabs.length, container.length);
+    if(mockStorage.tabs.length !== container.length)
+        console.log('match',mockStorage.tabs, container);
+	assertEquals(mockStorage.tabs.length, container.length, "lenghts should be the same");
 	for (const i in container) {
-		assertEquals(mockStorage.tabs[i].url, container[i].url);
+		assertEquals(mockStorage.tabs[i].url, container[i].url, "each item should be the same");
 	}
 }
 
@@ -131,21 +133,20 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 	await t.step("adds a single tab", async () => {
 		mockStorage.tabs = [];
 		const container = await TabContainer.create();
-
 		assert(await container.addTab({ label: "New Tab", url: "new-url" }));
 		const lastTab = container[container.length - 1];
 		assertEquals(lastTab.label, "New Tab");
 		assertEquals(lastTab.url, "new-url");
-
+		matchStorageToContainer(container);
 		assert(await container.addTab({ label: "New Tabb", url: "new-urll" }));
 		const newLastTab = container[container.length - 1];
 		assertEquals(newLastTab.label, "New Tabb");
 		assertEquals(newLastTab.url, "new-urll");
+		matchStorageToContainer(container);
 	});
 
 	await t.step("adds multiple tabs", async () => {
 		const container = await TabContainer.create();
-
 		assert(
 			await container.addTabs([
 				{ label: "Tab1", url: "url1" },
@@ -159,11 +160,11 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 		assertEquals(container[container.length - 3].url, "url1");
 		assertEquals(container[container.length - 2].url, "url2");
 		assertEquals(container[container.length - 1].url, "url3");
+		matchStorageToContainer(container);
 	});
 
 	await t.step("prevents duplicate tabs", async () => {
 		const container = await TabContainer.create();
-
 		assert(await container.addTab({ label: "Unique", url: "unique-url" }));
 		assert(
 			await container.addTab({ label: "New Tabb", url: "unique-url-1" }),
@@ -1436,5 +1437,244 @@ await Deno.test("TabContainer - Error on Invalid Tabs", async (t) => {
 				}]),
 			Error,
 		);
+	});
+});
+
+await Deno.test("TabContainer - Update Tab", async () => {
+    mockStorage.tabs = [];
+    const container = await TabContainer.create();
+    assertEquals(container.length, 3);
+    assertEquals(container[0].url, "/lightning");
+    assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+    assertEquals(container[2].url, "ManageUsers/home");
+    assert(await container.updateTab({ url: "/lightning" }, { url: "/lightning/test" }));
+    assertEquals(container[0].url, "/lightning/test");
+    assertEquals(container[0].label, "⚡");
+    assertEquals(container[0].org, undefined);
+    assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+    assertEquals(container[2].url, "ManageUsers/home");
+    matchStorageToContainer(container);
+    assert(await container.updateTab({ url: "ManageUsers/home" }, { org: "a" }));
+    assertEquals(container[0].org, undefined);
+    assertEquals(container[1].org, undefined);
+    assertEquals(container[2].org, "a");
+    assertEquals(container[2].label, "users");
+    assertEquals(container[2].url, "ManageUsers/home");
+    matchStorageToContainer(container);
+    assert(await container.updateTab({ url: "ManageUsers/home" }, { org: "", url: "", label: "" }));
+    assertEquals(container[0].org, undefined);
+    assertEquals(container[1].org, undefined);
+    assertEquals(container[2].org, undefined);
+    assertEquals(container[2].label, "users");
+    assertEquals(container[2].url, "ManageUsers/home");
+    matchStorageToContainer(container);
+});
+
+await Deno.test("TabContainer - Sort Tabs", async (t) => {
+
+	await t.step("By label ascending", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+        assert(await container.sort());
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "label");
+        assert(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        assertEquals(container[0].label, "⚡");
+        assertEquals(container[1].label, "flows");
+        assertEquals(container[2].label, "users");
+        // update tabs to add org (so they all are scrambled)
+        assert(await container.updateTab(container[0], { org: "a" }));
+        assert(await container.updateTab(container[1], { org: "c" }));
+        assert(await container.updateTab(container[2], { org: "b" }));
+        // move around because they were already sorted
+        await container.moveTab({ label: "flows" }, { moveBefore: true });
+        assertFalse(container.isSorted, "After moving a Tab, they should not be sorted");
+        assertFalse(container.isSorted);
+        assertEquals(container.isSortedBy, null);
+        assertFalse(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        assertEquals(container[0].label, "flows");
+        assertEquals(container[1].label, "⚡");
+        assertEquals(container[2].label, "users");
+        // sort again
+        assert(await container.sort({ sortBy: "label", sortAsc: true }));
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "label");
+        assert(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        assertEquals(container[0].label, "⚡");
+        assertEquals(container[1].label, "flows");
+        assertEquals(container[2].label, "users");
+	});
+
+	await t.step("By label descending", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+        assertEquals(container[0].label, "⚡");
+        assertEquals(container[1].label, "flows");
+        assertEquals(container[2].label, "users");
+        assert(container.isSorted, 'should detect is alredy sorted');
+        assert(container.isSortedBy === "label" || container.isSortedBy === "url", "for this particular case, the array is already sorted both by label and url");
+        assert(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        // add new Tab because they were already sorted
+        assert(await container.addTab({ label: "mylabel", url: "/myurl" }));
+        // update tabs to add org (so they all are scrambled)
+        assert(await container.updateTab(container[0], { org: "a" }));
+        assert(await container.updateTab(container[1], { org: "c" }));
+        assert(await container.updateTab(container[2], { org: "b" }));
+		matchStorageToContainer(container);
+        assertFalse(container.isSorted, "After adding this Tab, they should not be sorted");
+        assertEquals(container.isSortedBy, null);
+        assertFalse(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        assertEquals(container[0].label, "⚡");
+        assertEquals(container[1].label, "flows");
+        assertEquals(container[2].label, "users");
+        assertEquals(container[3].label, "mylabel");
+        // sort array
+        assert(await container.sort({ sortBy: "label", sortAsc: false }));
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "label");
+        assertFalse(container.isSortedAsc);
+        assert(container.isSortedDesc);
+        assertEquals(container[0].label, "users");
+        assertEquals(container[1].label, "mylabel");
+        assertEquals(container[2].label, "flows");
+        assertEquals(container[3].label, "⚡");
+	});
+
+	await t.step("By URL ascending", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+        // add new Tabs to scramble
+        assert(await container.addTabs([
+            { label: "flows", url: "flows", org: "e"},
+            { label: "assignment", url: "assignment", org: "a"},
+            { label: "field", url: "field"},
+        ]));
+        // now should all be random
+		matchStorageToContainer(container);
+        assertFalse(container.isSorted);
+        assertEquals(container.isSortedBy, null);
+        assertFalse(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        // sort by URL ascending
+        assert(await container.sort({ sortBy: "url", sortAsc: true }));
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "url");
+        assert(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "assignment");
+		assertEquals(container[3].url, "field");
+		assertEquals(container[4].url, "flows");
+		assertEquals(container[5].url, "ManageUsers/home");
+	});
+
+	await t.step("By URL descending", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+        // move around because they were already sorted
+        container.moveTab({ label: "flows" }, { moveBefore: true });
+        // add orgs
+        assert(await container.updateTab(container[0], { org: "a" }));
+        assert(await container.updateTab(container[1], { org: "c" }));
+        assert(await container.updateTab(container[2], { org: "b" }));
+        // now should all be random
+		matchStorageToContainer(container);
+        assertFalse(container.isSorted);
+        assertEquals(container.isSortedBy, null);
+        assertFalse(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        // sort by URL descending
+        assert(await container.sort({ sortBy: "url", sortAsc: false }));
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "url");
+        assertFalse(container.isSortedAsc);
+        assert(container.isSortedDesc);
+        assertEquals(container[0].url, "ManageUsers/home");
+        assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "/lightning");
+	});
+
+	await t.step("By org ascending", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+        // move around because they were already sorted
+        container.moveTab({ label: "flows" }, { moveBefore: true });
+        // add orgs
+        assert(await container.updateTab(container[0], { org: "a" }));
+        assert(await container.updateTab(container[1], { org: "c" }));
+        // now should all be random
+		matchStorageToContainer(container);
+        assertFalse(container.isSorted);
+        assertEquals(container.isSortedBy, null);
+        assertFalse(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        // sort by org ascending
+        assert(await container.sort({ sortBy: "org", sortAsc: true }));
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "org");
+        assert(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        assertEquals(container[0].org, undefined);
+		assertEquals(container[1].org, "a");
+		assertEquals(container[2].org, "c");
+	});
+
+	await t.step("By org descending", async () => {
+		mockStorage.tabs = [];
+		const container = await TabContainer.create();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+        // move around because they were already sorted
+        container.moveTab({ label: "flows" }, { moveBefore: true });
+        // add orgs
+        assert(await container.updateTab(container[0], { org: "a" }));
+        assert(await container.updateTab(container[1], { org: "c" }));
+        // now should all be random
+		matchStorageToContainer(container);
+        assertFalse(container.isSorted);
+        assertEquals(container.isSortedBy, null);
+        assertFalse(container.isSortedAsc);
+        assertFalse(container.isSortedDesc);
+        // sort by org descending
+        assert(await container.sort({ sortBy: "org", sortAsc: false }));
+		matchStorageToContainer(container);
+        assert(container.isSorted);
+        assertEquals(container.isSortedBy, "org");
+        assertFalse(container.isSortedAsc);
+        assert(container.isSortedDesc);
+		assertEquals(container[0].org, "c");
+		assertEquals(container[1].org, "a");
+        assertEquals(container[2].org, undefined);
 	});
 });
