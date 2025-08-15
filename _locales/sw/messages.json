@@ -3,6 +3,10 @@
 		"message": "Ruhusu",
 		"description": "[omba_ruhusa] kitufe cha kuruhusu ruhusa"
 	},
+	"ascending": {
+		"message": "Kupanda (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Zinazopatikana",
 		"description": "Kichwa cha sehemu ya vipengee vinavyoweza kuongezwa"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Lebo ya menyu ya mipangilio"
 	},
+	"cxm_sort": {
+		"message": "🎯 Panga Tab-zako",
+		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kiotomatiki (menyu mama)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 kwa Lebo",
+		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kwa lebo"
+	},
+	"cxm_sort_org": {
+		"message": "👽 kwa Org",
+		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kwa org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 kwa Url",
+		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kwa url"
+	},
 	"cxm_update": {
 		"message": "✏️ Sasisha Tab",
 		"description": "[menu-ya-mukhtadha]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete Tabs zote",
 		"description": "[ibukizi] kichwa kwenye pipa la taka ili kumwaga Tabs zote"
+	},
+	"descending": {
+		"message": "Kushuka (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Shusha",
@@ -351,6 +375,10 @@
 		"message": "Hitilafu ilipotokea kurejesha Tab kuwa za chaguomsingi.",
 		"description": "[hitilafu] Hitilafu ya jumla ilipotokea wakati wa kurejesha Tab kuwa za chaguomsingi"
 	},
+	"error_sorting_tabs": {
+		"message": "Hitilafu wakati wa kupanga Tab-zako",
+		"description": "[error] inayoonyeshwa katika ujumbe wa arifa"
+	},
 	"error_sync_nothing": {
 		"message": "Haiwezi kusawazisha Tabs batili (null)!",
 		"description": "[hitilafu] ilijaribu kusawazisha hakuna kitu"
@@ -455,6 +483,70 @@
 		"message": "Jumla",
 		"description": "Lebo ya kategoria ya mipangilio ya jumla"
 	},
+	"help": {
+		"message": "Usaidizi",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Huashiria Tab-zako mpya kama Tab-zako za Org, kwa hivyo zinaonekana tu wakati umeingia kwenye Org maalum ya Salesforce.",
+		"description": "[settings-help] kwa $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tab-zako mpya zilizopendwa huwekwa mbele ya orodha ya Tab-zako kwenye upau wa Usanidi badala ya kuongezwa mwishoni.",
+		"description": "[settings-help] kwa $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ukibofya dirisha ibukizi la kiendelezi nje ya kikoa cha Salesforce, utapelekwa kwenye ukurasa wa kuingia wa Salesforce kiotomatiki.",
+		"description": "[settings-help] kwa $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ukibofya dirisha ibukizi la kiendelezi ndani ya kikoa cha Salesforce lakini si kwenye ukurasa wa Usanidi, utapelekwa kwenye ukurasa wa Usanidi wa Salesforce kiotomatiki.",
+		"description": "[settings-help] kwa $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Inapowezeshwa, Tab-zako zako huwekwa katika mpangilio uliopangwa—kwa lebo, URL au Org; kulingana na unachochagua.",
+		"description": "[settings-help] kwa $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Hukata Tab-zako ulizohifadhi kabla ya menyu ya kawaida ya urambazaji (Mwanzo / Kidhibiti cha Kipengee) katika Usanidi, badala ya baada yake.",
+		"description": "[settings-help] kwa $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Inapowezeshwa, kila Tab iliyohifadhiwa itafungua ukurasa unaohusiana katika Tab mpya.",
+		"description": "[settings-help] kwa $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Huzima onyesho la kiotomatiki la arifa za maelezo ya toleo baada ya kiendelezi kusasishwa.",
+		"description": "[settings-help] kwa $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Huzima madirisha ibukizi ya vikumbusho vya sasisho mara kwa mara, kuweka UI ya kiendelezi safi (wakati umezima masasisho ya kiotomatiki ya kiendelezi kutoka kwa mipangilio ya kivinjari chako).",
+		"description": "[settings-help] kwa $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ukibofya kidukizo cha kiendelezi nje ya kikoa cha Salesforce, ukurasa wa kuingia utafunguliwa kwenye Tab ya sasa ya kivinjari.",
+		"description": "[mipangilio-msaada] kwa $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ukibofya kidukizo cha kiendelezi ndani ya kikoa cha Salesforce lakini si kwenye ukurasa wa Setup, ukurasa wa Salesforce Setup utafunguliwa kwenye Tab ya sasa ya kivinjari.",
+		"description": "[mipangilio-msaada] kwa $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Weka lugha ya UI kwa ajili ya kiendelezi pekee. Ikiwa kuna kitu hakijatafsiriwa, toleo la Kiingereza litatumika badala yake.",
+		"description": "[mipangilio-msaada] kwa $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Huzima ukusanyaji wa msingi wa telemetri. Kiendelezi hakitaonekana katika metriki za matumizi zisizojulikana.",
+		"description": "[settings-help] kwa $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Hupita API ya Urambazaji wa Lightning na kufungua viungo kupitia upakiaji upya wa ukurasa mzima, ambayo inaweza kuwa haraka katika baadhi ya usanidi wa org.",
+		"description": "[settings-help] kwa $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Huzima ukaguzi wa kiendelezi unaothibitisha kuwa sehemu ya URL inalingana na umbizo la vitambulisho vya rekodi/kipengee cha Salesforce (kinachotumiwa kuweka kiotomatiki Tab iliyohifadhiwa kama Tab ya Org).",
+		"description": "[settings-help] kwa $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Ingiza",
 		"description": "[ibukizi] kitufe cha kuingiza"
@@ -539,6 +631,14 @@
 		"message": "Fungua Usanidi",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa Usanidi wa Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Ongeza Tab-zako mpya kama Tab-zako za Org.",
+		"description": "[settings] mruhusu mtumiaji kuongeza Tab-zako zote mpya kama maalum kwa org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Ongeza Tab-zako mpya mbele.",
+		"description": "[settings] mruhusu mtumiaji kuongeza Tab-zako zote mpya mbele"
+	},
 	"opt_automatic_open_login": {
 		"message": "Fungua ukurasa wa $salesforce_login kiotomatiki unapobofya kwenye ibukizi ukiwa hauko kwenye ukurasa wa Salesforce.",
 		"description": "[mpangilio] mtumiaji anapofungua ibukizi akiwa kwenye tovuti isiyo ya mpangilio"
@@ -547,9 +647,17 @@
 		"message": "Fungua ukurasa wa $salesforce_setup kiotomatiki unapobofya kwenye ibukizi ukiwa kwenye ukurasa wa Salesforce.",
 		"description": "[mpangilio] mtumiaji anapofungua ibukizi akiwa kwenye tovuti ya Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Mipangilio imehifadhiwa!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Chaguo-msingi na Mbadala)",
 		"description": "Chaguo la lugha chaguomsingi la kiendelezi"
+	},
+	"opt_keep_sort": {
+		"message": "Weka Tab-zako zikiwa zimepangwa.",
+		"description": "[setting] mruhusu mtumiaji kuweka Tab-zako zake zikiwa zimepangwa kwa moja ya funguo zao"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Weka Tab unazopenda kushoto kwa Home na Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "Chagua lugha ya kiendelezi",
 		"description": "[mpangilio] lebo ya kumpa mtumiaji kuchagua lugha anayopendelea"
 	},
+	"opt_pick_sort": {
+		"message": "Chagua ni uga gani Tab-zako zipangwe nao",
+		"description": "[setting] sasa mtumiaji anaweza kuchagua ni ufunguo gani wa kuweka Tab-zako zikiwa zimepangwa"
+	},
 	"opt_prevent_analytics": {
 		"message": "Zuia matumizi ya Simple Analytics (usiwe sehemu ya hesabu ya watumiaji).",
 		"description": "[kipendeleo] ruhusu mtumiaji kuzuia kutuma takwimu za uchanganuzi zisizo na majina"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Zuia matumizi ya Usogezaji wa Lightning (upakiaji wa haraka zaidi unapotumiwa).",
-		"description": "[mpangilio] usiruhusu Usogezaji wa Lightning na maelezo ya kipengele"
+		"message": "Zuia matumizi ya Urambazaji wa Lightning (upakiaji wa haraka zaidi wakati haujachaguliwa).",
+		"description": "[setting] usiruhusu Urambazaji wa Lightning na maelezo ya kipengele"
 	},
 	"opt_same_tab_popup": {
 		"message": "ukurasa katika kichupo hicho hicho wakati unabonyeza popup.",
