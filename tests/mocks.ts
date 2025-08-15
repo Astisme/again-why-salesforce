@@ -5,6 +5,7 @@ const LOCALE_KEY = "_locale";
 const SETTINGS_KEY = "settings";
 const USER_LANGUAGE = "picked-language";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
+const PERSIST_SORT = "persist_sort";
 
 export interface MockStorage {
 	tabs: Tab[];
@@ -138,6 +139,20 @@ export const mockBrowser = {
 					response = "en";
 					break;
 				case "get-settings":
+					switch (message.keys) {
+						case USER_LANGUAGE:
+							response = language;
+							break;
+						case PERSIST_SORT:
+							response = null;
+							break;
+						default:
+							setError(
+								`Unknown message keys for ${message.what}: ${message.keys}`,
+							);
+							break;
+					}
+					break;
 				case "get-style-settings":
 					const settings = mockStorage[message.key ?? SETTINGS_KEY];
 					if (message.keys == null || settings == null) {

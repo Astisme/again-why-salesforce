@@ -87,18 +87,17 @@ ul.settings {
 	}
 }
 
-#language-container {
+#language-container,
+#sort-container {
 	label {
-		display: block;
 		font-size: 14px;
 		margin-bottom: 4px;
 		color: #16325c;
 	}
 	.select-wrapper {
 		position: relative;
-		width: min-content;
+		width: fit-content;
 		& select {
-			width: min-content;
 			padding: 8px 32px 8px 12px;
 			font-size: 14px;
 			line-height: 1.4;
@@ -133,12 +132,7 @@ ul.settings {
 
 hr {
 	margin: 1rem 0;
-}
-
-#save-container {
-	display: flex;
-	justify-content: center;
-	padding-bottom: 1rem;
+	width: 85%;
 }
 
 .slds-dueling-list__column {
@@ -149,4 +143,24 @@ hr {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#sort-container {
+	width: 85%;
+	justify-content: space-evenly;
+	& > div:has(input) {
+		margin-right: 1rem;
+	}
+}
+
+#save-container {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 1rem;
 }
