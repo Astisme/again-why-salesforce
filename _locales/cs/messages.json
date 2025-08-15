@@ -3,6 +3,10 @@
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"
 	},
+	"ascending": {
+		"message": "Vzestupně (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Dostupné",
 		"description": "Záhlaví sekce pro položky, které lze přidat"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Štítek pro nabídku nastavení"
 	},
+	"cxm_sort": {
+		"message": "🎯 Seřadit Tabs",
+		"description": "kontextové menu, které uživatelům umožňuje automaticky seřadit jejich Tabs (hlavní menu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 podle Štítku",
+		"description": "kontextové menu, které uživatelům umožňuje seřadit jejich Tabs podle štítku"
+	},
+	"cxm_sort_org": {
+		"message": "👽 podle Organizace",
+		"description": "kontextové menu, které uživatelům umožňuje seřadit jejich Tabs podle organizace"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 podle Url",
+		"description": "kontextové menu, které uživatelům umožňuje seřadit jejich Tabs podle adresy URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Aktualizovat Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete všechny Tabs",
 		"description": "[vyskakovací-okno] název na koši pro vyprázdnění všech Tabs"
+	},
+	"descending": {
+		"message": "Sestupně (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Chyba při obnovení výchozích Tab.",
 		"description": "[chyba] Obecná chyba při obnovení Tab do výchozího stavu"
 	},
+	"error_sorting_tabs": {
+		"message": "Chyba při řazení Tabs",
+		"description": "[error] zobrazeno ve vyskakovací zprávě"
+	},
 	"error_sync_nothing": {
 		"message": "Nelze synchronizovat prázdné Taby!",
 		"description": "[error] pokus o synchronizaci prázdných Tabů"
@@ -455,6 +483,70 @@
 		"message": "Obecné",
 		"description": "Štítek pro kategorii obecných nastavení"
 	},
+	"help": {
+		"message": "Nápověda",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Označí nové Tabs jako Org Tabs, takže jsou viditelné pouze po přihlášení do dané organizace Salesforce.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nově oblíbené Tabs se vkládají na začátek seznamu Tabs v panelu nastavení, spíše než na konec.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Pokud kliknete na vyskakovací okno rozšíření mimo doménu Salesforce, automaticky vás přesměruje na přihlašovací stránku Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Pokud kliknete na vyskakovací okno rozšíření uvnitř domény Salesforce, ale ne na stránce nastavení, automaticky vás přesměruje na stránku nastavení Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Po aktivaci jsou vaše Tabs uspořádány v seřazeném pořadí – buď podle štítku, adresy URL nebo organizace; v závislosti na tom, co si vyberete.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Připne vaše uložené Tabs před standardní navigační menu (Home / Object Manager) v nastavení, namísto za něj.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Po aktivaci se každá uložená Tab otevře související stránku v nové Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Potlačí automatické zobrazování oznámení o poznámkách k vydání po aktualizaci rozšíření.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Zakáže vyskakovací okna s pravidelnými připomenutími aktualizací, čímž udržuje uživatelské rozhraní rozšíření čisté (pokud jste zakázali automatické aktualizace rozšíření v nastavení prohlížeče).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Pokud kliknete na vyskakovací okno rozšíření mimo doménu Salesforce, přihlašovací stránka se otevře v aktuálním Tab prohlížeče.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Pokud kliknete na vyskakovací okno rozšíření v doméně Salesforce, ale ne na stránce nastavení, stránka nastavení Salesforce se otevře v aktuálním Tab prohlížeče.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Nastaví jazyk uživatelského rozhraní pouze pro rozšíření. Pokud něco nebylo přeloženo, bude místo toho použita anglická verze.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Zakáže základní shromažďování telemetrických dat. Rozšíření se neobjeví v anonymních metrikách použití.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Obchází rozhraní API Lightning Navigation a otevírá odkazy prostřednictvím opětovného načtení celé stránky, což může být u některých nastavení organizace rychlejší.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Zakáže kontrolu rozšíření, která ověřuje, zda se fragment URL shoduje s formátem ID záznamů/objektů Salesforce (používá se k automatickému nastavení uloženého Tab jako Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importovat",
 		"description": "[popup] importní tlačítko"
@@ -539,6 +631,14 @@
 		"message": "Otevřít Setup",
 		"description": "[notSalesforceSetup] výzva tlačítka pro přesměrování uživatele na stránku Salesforce Setup"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Přidat nové Tabs jako Org Tabs.",
+		"description": "[settings] umožnit uživateli přidat všechny nové Tabs jako specifické pro organizaci"
+	},
+	"opt_add_tabs_front": {
+		"message": "Přidat nové Tabs dopředu.",
+		"description": "[settings] umožnit uživateli přidat všechny nové Tabs dopředu"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automaticky otevřít stránku $salesforce_login po kliknutí na vyskakovací okno, pokud nejste na stránce Salesforce.",
 		"description": "[nastavení] když uživatel otevře vyskakovací okno na náhodné webové stránce"
@@ -547,9 +647,17 @@
 		"message": "Automaticky otevřít stránku $salesforce_setup po kliknutí na vyskakovací okno, pokud jste na stránce Salesforce.",
 		"description": "[nastavení] když uživatel otevře vyskakovací okno na webové stránce Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Nastavení bylo uloženo!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Výchozí a záložní)",
 		"description": "Výchozí jazyková možnost rozšíření"
+	},
+	"opt_keep_sort": {
+		"message": "Ponechat Tabs seřazené.",
+		"description": "[setting] umožnit uživateli udržovat Tabs seřazené podle jednoho z jejich klíčů"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Ponechat oblíbené Tabs nalevo od Domovské stránky a Správce objektů.",
@@ -579,13 +687,17 @@
 		"message": "Vyberte jazyk rozšíření",
 		"description": "[nastavení] štítek, který uživatele vyzve k výběru preferovaného jazyka"
 	},
+	"opt_pick_sort": {
+		"message": "Vyberte, podle kterého pole se mají Tabs seřadit",
+		"description": "[setting] nyní si uživatel může vybrat, podle kterého klíče má Tabs udržovat seřazené"
+	},
 	"opt_prevent_analytics": {
 		"message": "Zabránit použití Simple Analytics (nebude započítáno mezi uživatele).",
 		"description": "[nastavení] umožňuje uživateli zabránit odesílání anonymní analytiky"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Zabránit používání navigace Lightning (rychlejší načítání během používání).",
-		"description": "[nastavení] nepovolit navigaci Lightning s vysvětlením funkce"
+		"message": "Zabránit používání Lightning Navigation (rychlejší načítání, pokud není zaškrtnuto).",
+		"description": "[setting] nedovolit Lightning Navigation s vysvětlením funkce"
 	},
 	"opt_same_tab_popup": {
 		"message": "stránku ve stejném panelu při kliknutí na vyskakovací okno.",

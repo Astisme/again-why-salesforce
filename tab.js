@@ -345,7 +345,7 @@ export default class Tab {
 	}
 
 	/**
-	 * Update a Tab based on the options passed.
+	 * Update a Tab based on the options passed. YOU MUST take care of syncing after updating the Tab
 	 * @param {Object} tab - an Object containing the following data
 	 * @param {*} tab.label - the new label for the Tab
 	 * @param {*} tab.url - the new url for the Tab
@@ -356,10 +356,10 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return this;
 		}
-		if (label != null) {
+		if (label != null && label !== "") {
 			this.label = label;
 		}
-		if (url != null) {
+		if (url != null && url !== "") {
 			this.url = Tab.minifyURL(url);
 		}
 		if (org != null) {

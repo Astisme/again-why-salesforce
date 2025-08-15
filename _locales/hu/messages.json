@@ -3,6 +3,10 @@
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"
 	},
+	"ascending": {
+		"message": "Növekvő (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Elérhető",
 		"description": "Szakaszfejléc a hozzáadható elemekhez"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "A beállítások menü címkéje"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabs-ek rendezése",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy automatikusan rendezzék a Tabs-jeiket (szülő menü)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 címke szerint",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy címke szerint rendezzék a Tabs-jeiket"
+	},
+	"cxm_sort_org": {
+		"message": "👽 szervezet szerint",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy szervezet szerint rendezzék a Tabs-jeiket"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL szerint",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy URL szerint rendezzék a Tabs-jeiket"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab frissítése",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete az összes Tabs",
 		"description": "[felugró-ablak] cím a kukán az összes Tabs kiürítéséhez"
+	},
+	"descending": {
+		"message": "Csökkenő (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Hiba történt az alapértelmezett Tabok visszaállításakor.",
 		"description": "[hiba] Általános hiba a Tabok alapértelmezett értékekre való visszaállításakor"
 	},
+	"error_sorting_tabs": {
+		"message": "Hiba a Tabs-ek rendezésekor",
+		"description": "[error] egy felugró üzenetben jelenik meg"
+	},
 	"error_sync_nothing": {
 		"message": "Üres Tabokat nem lehet szinkronizálni!",
 		"description": "[error] üres Tabok szinkronizálása kísérlet történt"
@@ -455,6 +483,70 @@
 		"message": "Általános",
 		"description": "Címke az általános beállítások kategóriához"
 	},
+	"help": {
+		"message": "Súgó",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Az új Tabs-eket Org Tabs-ként jelöli meg, így csak akkor láthatók, ha be van jelentkezve abba a adott Salesforce-szervezetbe.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Az újonnan kedvenc Tabs-ek a beállítási sáv Tab-listájának elejére kerülnek, nem pedig a végére.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon kívül, az automatikusan a Salesforce bejelentkezési oldalára viszi.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon belül, de nem a beállítási oldalon, az automatikusan a Salesforce beállítási oldalára viszi.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Ha engedélyezve van, a Tabs-jei rendezett sorrendben maradnak – címke, URL vagy szervezet szerint; attól függően, hogy mit választ.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Rögzíti a mentett Tabs-jeit a szabványos navigációs menü (Home / Object Manager) elé a beállításokban, nem pedig utána.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Ha engedélyezve van, minden mentett Tab megnyitja a kapcsolódó oldalt egy új Tab-ban.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Elnyomja a kiadási jegyzetek értesítéseinek automatikus megjelenítését a bővítmény frissítése után.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Letiltja a rendszeres frissítési emlékeztető felugró ablakokat, így a bővítmény felhasználói felülete tiszta marad (ha letiltotta a bővítmény automatikus frissítéseit a böngésző beállításaiban).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon kívül, a bejelentkezési oldal az aktuális böngésző Tab-ban nyílik meg.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon belül, de nem a beállítási oldalon, a Salesforce beállítási oldala az aktuális böngésző Tab-ban nyílik meg.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Állítsa be a felhasználói felület nyelvét csak a bővítményhez. Ha valami nem lett lefordítva, helyette az angol verzió lesz használva.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Letiltja az alapvető telemetriagyűjtést. A bővítmény nem fog megjelenni az anonim használati mérőszámokban.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Megkerüli a Lightning Navigation API-t, és teljes oldal újratöltésével nyitja meg a hivatkozásokat, ami gyorsabb lehet egyes szervezetbeállításokban.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Letiltja a bővítmény ellenőrzését, amely ellenőrzi, hogy egy URL-töredék megfelel-e a Salesforce rekord-/objektumazonosítóinak formátumának (amelyet a mentett Tab automatikus Org Tab-ként való beállítására használnak).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importálás",
 		"description": "[popup] import gomb"
@@ -539,6 +631,14 @@
 		"message": "Setup megnyitása",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Új Tabs-ek hozzáadása Org Tabs-ként.",
+		"description": "[settings] lehetővé teszi a felhasználó számára, hogy az összes új Tabs-et szervezetspecifikusként adja hozzá"
+	},
+	"opt_add_tabs_front": {
+		"message": "Új Tabs-ek hozzáadása elölre.",
+		"description": "[settings] lehetővé teszi a felhasználó számára, hogy az összes új Tabs-et elölre adja hozzá"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatikusan nyissa meg a $salesforce_login oldalt, amikor a felugró ablakra kattint, miközben nem Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy véletlenszerű webhelyen"
@@ -547,9 +647,17 @@
 		"message": "Automatikusan nyissa meg a $salesforce_setup oldalt, amikor a felugró ablakra kattint, miközben Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy Salesforce webhelyen"
 	},
+	"opt_confirm_save": {
+		"message": "A beállítások mentve!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Alapértelmezett és tartalék)",
 		"description": "Az extension alapértelmezett nyelvi opciója"
+	},
+	"opt_keep_sort": {
+		"message": "Tartsa a Tabs-eket rendezve.",
+		"description": "[setting] lehetővé teszi a felhasználó számára, hogy a Tabs-jeit az egyik kulcsuk szerint rendezve tartsa"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kedvenc Tabs megtartása a Kezdőlap és az Objektumkezelő bal oldalán.",
@@ -579,13 +687,17 @@
 		"message": "Válassza ki az extension nyelvét",
 		"description": "[beállítás] címke, amely arra kéri a felhasználót, hogy válassza ki a kívánt nyelvet"
 	},
+	"opt_pick_sort": {
+		"message": "Válassza ki, melyik mező szerint legyenek rendezve a Tabs-ek",
+		"description": "[setting] most a felhasználó választhatja ki, hogy melyik kulcs szerint maradjanak rendezve a Tabs-ek"
+	},
 	"opt_prevent_analytics": {
 		"message": "Egyszerű elemzések használatának megakadályozása (nem jelenik meg a felhasználószámban).",
 		"description": "[beállítás] lehetővé teszi a felhasználónak, hogy megakadályozza az anonim elemzések küldését"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "A Lightning navigáció használatának megakadályozása (használat közben gyorsabb betöltés).",
-		"description": "[beállítás] ne engedélyezze a Lightning navigációt a funkció magyarázatával"
+		"message": "Akadályozza meg a Lightning Navigation használatát (gyorsabb betöltés, ha nincs bejelölve).",
+		"description": "[setting] ne engedélyezze a Lightning Navigation-t a funkció magyarázatával"
 	},
 	"opt_same_tab_popup": {
 		"message": "oldal ugyanazon a fülön a felugró ablak kattintásakor.",

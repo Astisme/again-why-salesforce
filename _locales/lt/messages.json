@@ -3,6 +3,10 @@
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"
 	},
+	"ascending": {
+		"message": "Didėjanti (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Galimi",
 		"description": "Skyriaus antraštė elementams, kuriuos galima pridėti"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Nustatymų meniu etiketė"
 	},
+	"cxm_sort": {
+		"message": "🎯 Rūšiuoti Tab'us",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams automatiškai rūšiuoti savo Tab'us (pagrindinis meniu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 pagal žymę",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal žymę"
+	},
+	"cxm_sort_org": {
+		"message": "👽 pagal Org",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal Org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 pagal URL",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Atnaujinti Tab",
 		"description": "[kontekstinis_meniu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete visus Tabs",
 		"description": "[iškylantis-langas] pavadinimas šiukšliadėžėje, norint ištuštinti visus Tabs"
+	},
+	"descending": {
+		"message": "Mažėjanti (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Numesti",
@@ -351,6 +375,10 @@
 		"message": "Klaida atstatant Tabs į numatytąsias reikšmes.",
 		"description": "[klaida] Bendro pobūdžio klaida atstatant Tabs į numatytąsias reikšmes"
 	},
+	"error_sorting_tabs": {
+		"message": "Klaida rūšiuojant Tab'us",
+		"description": "[error] rodomas iššokančiajame pranešime"
+	},
 	"error_sync_nothing": {
 		"message": "Negalima sinchronizuoti null Tabs!",
 		"description": "[klaida] bandyta sinchronizuoti nieko"
@@ -455,6 +483,70 @@
 		"message": "Bendri",
 		"description": "Etiketė bendrai nustatymų kategorijai"
 	},
+	"help": {
+		"message": "Pagalba",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Pažymi naujus Tab'us kaip Org Tab'us, todėl jie matomi tik tada, kai esate prisijungę prie tos konkrečios „Salesforce Org“.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Naujai įtraukti Tab'ai įterpiami į Tab'ų sąrašo priekį, o ne pridedami pabaigoje.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą už „Salesforce“ domeno ribų, automatiškai būsite nukreipti į „Salesforce“ prisijungimo puslapį.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą „Salesforce“ domene, bet ne sąrankos puslapyje, automatiškai būsite nukreipti į „Salesforce“ sąrankos puslapį.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Kai įjungta, jūsų Tab'ai yra rūšiuojami pagal etiketę, URL arba Org, priklausomai nuo to, ką pasirinksite.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Prisega jūsų išsaugotus Tab'us prieš standartinį naršymo meniu (pagrindinis / objektų tvarkyklė) sąrankoje, o ne po jo.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Kai įjungta, kiekvienas išsaugotas Tab'as atvers susijusį puslapį naujame Tab'e.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Neleidžia automatiškai rodyti pranešimų apie išleidimo pastabas po plėtinio atnaujinimo.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Išjungia periodinius atnaujinimo priminimo iššokančiuosius langus, kad plėtinio vartotojo sąsaja būtų švari (kai naršyklės nustatymuose išjungėte automatinį plėtinio atnaujinimą).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą už „Salesforce“ domeno ribų, prisijungimo puslapis bus atidarytas dabartiniame naršyklės Tab'e.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą „Salesforce“ domene, bet ne sąrankos puslapyje, „Salesforce“ sąrankos puslapis bus atidarytas dabartiniame naršyklės Tab'e.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Nustatykite vartotojo sąsajos kalbą tik plėtiniui. Jei kažkas nebuvo išversta, vietoj to bus naudojama angliška versija.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Išjungia pagrindinį telemetrijos rinkimą. Plėtinys nebus rodomas anoniminėje naudojimo metrikos ataskaitoje.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Apeina „Lightning Navigation“ API ir atidaro nuorodas iš naujo įkeliant visą puslapį, o tai gali būti greičiau kai kuriose organizacijos konfigūracijose.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Išjungia plėtinio patikrinimą, patvirtinantį, kad URL fragmentas atitinka „Salesforce“ įrašo / objekto ID formatą (naudojamą automatiškai nustatyti išsaugotą Tab'ą kaip Org Tab'ą).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importuoti",
 		"description": "[iškylantysis_langas] importavimo mygtukas"
@@ -539,6 +631,14 @@
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Pridėti naujus Tab'us kaip Org Tab'us.",
+		"description": "[settings] leiskite vartotojui pridėti visus naujus Tab'us kaip specifinius organizacijai"
+	},
+	"opt_add_tabs_front": {
+		"message": "Pridėti naujus Tab'us priekyje.",
+		"description": "[settings] leisti vartotojui pridėti visus naujus Tab'us priekyje"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatiškai atidaryti $salesforce_login puslapį spustelėjus iškylantįjį langą, kai nesate „Salesforce“ puslapyje.",
 		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą atsitiktinėje svetainėje"
@@ -547,9 +647,17 @@
 		"message": "Automatiškai atidaryti $salesforce_setup puslapį spustelėjus iškylantįjį langą, kai esate „Salesforce“ puslapyje.",
 		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą „Salesforce“ svetainėje"
 	},
+	"opt_confirm_save": {
+		"message": "Nustatymai buvo išsaugoti!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Numatytasis ir atsarginis)",
 		"description": "Numatytoji plėtinio kalbos parinktis"
+	},
+	"opt_keep_sort": {
+		"message": "Išsaugoti Tab'us surūšiuotus.",
+		"description": "[setting] leisti vartotojui išlaikyti savo Tab'us surūšiuotus pagal vieną iš jų raktų"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Palikti mėgstamus Tabus kairėje nuo Namų ir Objektų tvarkyklės.",
@@ -579,13 +687,17 @@
 		"message": "Pasirinkite plėtinio kalbą",
 		"description": "[nustatymas] etiketė, skirta vartotojui pasirinkti pageidaujamą kalbą"
 	},
+	"opt_pick_sort": {
+		"message": "Pasirinkite, pagal kurį lauką turėtų būti rūšiuojami Tab'ai",
+		"description": "[setting] dabar vartotojas gali pasirinkti, pagal kurį raktą išlaikyti Tab'us surūšiuotus"
+	},
 	"opt_prevent_analytics": {
 		"message": "Užkirsti kelią Simple Analytics naudojimui (nerodoma naudotojų skaičiuje).",
 		"description": "[nustatymas] leidžia vartotojui užkirsti kelią anoniminiams analizės duomenų siuntimui"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Neleisti naudoti „Lightning“ naršymo (naudojant greitesnis įkėlimas).",
-		"description": "[nustatymas] neleisti „Lightning“ naršymo su funkcijos paaiškinimu"
+		"message": "Neleisti naudoti „Lightning Navigation“ (pažymėjus atšaukiamai, įkeliama greičiau).",
+		"description": "[setting] neleiskite naudoti „Lightning Navigation“ su funkcijos paaiškinimu"
 	},
 	"opt_same_tab_popup": {
 		"message": "puslapis tame pačiame skirtuke spustelėjus iššokantį langą.",
