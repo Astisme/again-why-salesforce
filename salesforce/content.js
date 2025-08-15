@@ -772,7 +772,10 @@ async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
 		inputTab.org = Tab.extractOrgName(getCurrentHref());
 	}
 	allTabs = await ensureAllTabsAvailability();
-    await allTabs.updateTab(inputTab, matchingTab.org == null ? getCurrentHref() : "");
+	await allTabs.updateTab(
+		inputTab,
+		matchingTab.org == null ? getCurrentHref() : "",
+	);
 }
 
 /**
@@ -831,7 +834,7 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-        await allTabs.updateTab(matchingTab, {
+		await allTabs.updateTab(matchingTab, {
 			label: labelContainer.value,
 			url: urlContainer.value,
 			org: orgContainer.value,
