@@ -3,6 +3,45 @@
 All notable changes to this project are documented here.\
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
 
+<!--
+# Next release
+## 🚀 Added
+## 🛠 Changed
+## 🐛 Fixed
+## 🧪 Tests
+-->
+
+# Next release v2.1.0
+
+## 🚀 Added
+
+### Tab Management
+
+1. Allow sorting options for saved Tabs (by Label, by URL, by Org; ascending and descending). [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Sort-Tabs)
+2. New context menus (right-click on any Tab) to sort the Tabs one-shot.
+2. New setting: "Keep Tabs sorted" to always have the Tabs sorted.
+1. Always add new Tabs as "Org Tabs".
+2. Always add new Tabs at the front of your favourites.
+
+### Settings
+1. Added interactive help icons next to all settings in the Options page.
+1. Clicking the help icon opens documentation for each setting if a URL was provided.
+1. Ensured settings interactions do not conflict (e.g., disabling "Add Tabs in Front" when persistent sorting is enabled).
+
+## 🛠 Changed
+
+### Salesforce
+
+1. Refreshed Settings layout for better clarity and grouping.
+2. Improved Settings responsiveness and visual feedback, including toast notifications when settings are saved.
+1. TabContainer now tracks sorting state and direction.
+1. Updated README with new wiki page.
+
+<!--
+## 🐛 Fixed
+## 🧪 Tests
+-->
+
 # v2.0.2
 
 ## 🛠 Changed
