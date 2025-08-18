@@ -711,7 +711,11 @@ export default class TabContainer extends Array {
 			const msg = await translator.translate("error_sync_nothing");
 			throw new Error(msg);
 		}
-		await sendExtensionMessage({ what: "set", set: TabContainer.toJSON(tabs), key: WHY_KEY });
+		await sendExtensionMessage({
+			what: "set",
+			set: TabContainer.toJSON(tabs),
+			key: WHY_KEY,
+		});
 		if (BROWSER.runtime.lastError) {
 			throw new Error(BROWSER.runtime.lastError);
 		}

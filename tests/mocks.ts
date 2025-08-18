@@ -29,8 +29,8 @@ export interface InternalMessage {
 }
 
 mockStorage.settings.push(...[
-    { enabled: "fr", id: USER_LANGUAGE },
-    { enabled: false, id: "persist_sort" },
+	{ enabled: "fr", id: USER_LANGUAGE },
+	{ enabled: false, id: "persist_sort" },
 ]);
 
 type ContextMenuClickInfo = {
@@ -82,7 +82,7 @@ export const mockBrowser = {
 				const makeResponse = () => {
 					const response = {};
 					keys.forEach((key) => {
-                        response[key] = mockStorage[key];
+						response[key] = mockStorage[key];
 					});
 					return response;
 				};
@@ -94,10 +94,13 @@ export const mockBrowser = {
 				callback(makeResponse());
 			},
 			// deno-lint-ignore require-await
-			set: async (data: { key: string, set: object[] }): Promise<boolean> => {
-                console.log('m',data, data.key)
-                mockStorage[data.key] = data[data.key] ?? data[WHY_KEY] ?? data.set;
-                console.log('mk',mockStorage,mockStorage[data.key])
+			set: async (
+				data: { key: string; set: object[] },
+			): Promise<boolean> => {
+				console.log("m", data, data.key);
+				mockStorage[data.key] = data[data.key] ?? data[WHY_KEY] ??
+					data.set;
+				console.log("mk", mockStorage, mockStorage[data.key]);
 				return true;
 			},
 		},
@@ -136,29 +139,35 @@ export const mockBrowser = {
 					response = "en";
 					break;
 				case "get-settings": {
-                    response = [];
-                    const keys = Array.isArray(message.keys) ? message.keys : [message.keys];
-                    for(const key of keys){
-                        if(typeof key === 'string'){
-                            const foundSetting = mockStorage.settings.filter(s => s.id === key);
-                            if(foundSetting != null && foundSetting.length > 0)
-                                response.push(...foundSetting);
-                            else {
-                                response = undefined;
-                                break;
-                            }
-                        }
-                        else if(key == null)
-                            response = mockStorage.settings;
-                        else {
-                            response = undefined;
-                            setError(
-                                `Unknown message key: ${key}`,
-                            );
-                        }
-                    }
-                    if(Array.isArray(response) && response.length === 1)
-                        response = response[0];
+					response = [];
+					const keys = Array.isArray(message.keys)
+						? message.keys
+						: [message.keys];
+					for (const key of keys) {
+						if (typeof key === "string") {
+							const foundSetting = mockStorage.settings.filter(
+								(s) => s.id === key,
+							);
+							if (
+								foundSetting != null && foundSetting.length > 0
+							) {
+								response.push(...foundSetting);
+							} else {
+								response = undefined;
+								break;
+							}
+						} else if (key == null) {
+							response = mockStorage.settings;
+						} else {
+							response = undefined;
+							setError(
+								`Unknown message key: ${key}`,
+							);
+						}
+					}
+					if (Array.isArray(response) && response.length === 1) {
+						response = response[0];
+					}
 					break;
 				}
 				case "get-style-settings": {
@@ -177,7 +186,7 @@ export const mockBrowser = {
 							: requestedSettings[0];
 					}
 					break;
-                }
+				}
 				case "echo":
 					response = message.echo;
 					break;
