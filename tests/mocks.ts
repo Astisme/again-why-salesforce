@@ -127,31 +127,38 @@ export const mockBrowser = {
 				case "get-sf-language":
 					response = "en";
 					break;
-				case "get-settings":
-                    response = [];
-                    const keys = Array.isArray(message.keys) ? message.keys : [message.keys];
-                    for(const key of keys){
-                        if(typeof key === 'string'){
-                            const foundSetting = mockStorage.settings.filter(s => s.id === key);
-                            if(foundSetting != null && foundSetting.length > 0)
-                                response.push(...foundSetting);
-                            else {
-                                response = undefined;
-                                break;
-                            }
-                        }
-                        else if(key == null)
-                            response = mockStorage.settings;
-                        else {
-                            response = undefined;
-                            setError(
-                                `Unknown message key: ${key}`,
-                            );
-                        }
-                    }
-                    if(Array.isArray(response) && response.length === 1)
-                        response = response[0];
+				case "get-settings": {
+					response = [];
+					const keys = Array.isArray(message.keys)
+						? message.keys
+						: [message.keys];
+					for (const key of keys) {
+						if (typeof key === "string") {
+							const foundSetting = mockStorage.settings.filter(
+								(s) => s.id === key,
+							);
+							if (
+								foundSetting != null && foundSetting.length > 0
+							) {
+								response.push(...foundSetting);
+							} else {
+								response = undefined;
+								break;
+							}
+						} else if (key == null) {
+							response = mockStorage.settings;
+						} else {
+							response = undefined;
+							setError(
+								`Unknown message key: ${key}`,
+							);
+						}
+					}
+					if (Array.isArray(response) && response.length === 1) {
+						response = response[0];
+					}
 					break;
+				}
 				case "get-style-settings": {
 					const settings = mockStorage[message.key];
 					if (message.keys == null || settings == null) {
@@ -168,7 +175,7 @@ export const mockBrowser = {
 							: requestedSettings[0];
 					}
 					break;
-                }
+				}
 				case "echo":
 					response = message.echo;
 					break;

@@ -104,7 +104,7 @@ class TranslationService {
 		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
 		// load translations for user picked language or salesforce language
 		singleton.currentLanguage = await singleton.loadLanguageBackground();
-        console.log(singleton.currentLanguage);
+		console.log(singleton.currentLanguage);
 		if (await singleton.updatePageTranslations()) {
 			singleton.setListenerForLanguageChange();
 		}
