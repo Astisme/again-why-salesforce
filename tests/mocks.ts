@@ -1,20 +1,23 @@
 // deno-lint-ignore-file no-explicit-any
 import Tab from "/tab.js";
 const WHY_KEY = "againWhySalesforce";
-const LOCALE_KEY = "_locale";
-const SETTINGS_KEY = "settings";
 const USER_LANGUAGE = "picked-language";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
-const PERSIST_SORT = "persist_sort";
 
 export interface MockStorage {
-	tabs: Tab[];
+	againWhySalesforce: Tab[];
 	settings: object[];
+	"settings-tab_generic_style": object[] | undefined;
+	"settings-tab_org_style": object[] | undefined;
+	_locale: string;
 }
 // Mock browser APIs
 export const mockStorage: MockStorage = {
-	tabs: [],
+	againWhySalesforce: [],
 	settings: [],
+	"settings-tab_generic_style": undefined,
+	"settings-tab_org_style": undefined,
+	_locale: "fr",
 };
 
 export interface InternalMessage {
@@ -25,7 +28,10 @@ export interface InternalMessage {
 	keys?: string | string[];
 }
 
-mockStorage.settings.push({ enabled: "fr", id: USER_LANGUAGE });
+mockStorage.settings.push(...[
+    { enabled: "fr", id: USER_LANGUAGE },
+    { enabled: false, id: "persist_sort" },
+]);
 
 type ContextMenuClickInfo = {
 	menuItemId: string;
@@ -76,11 +82,7 @@ export const mockBrowser = {
 				const makeResponse = () => {
 					const response = {};
 					keys.forEach((key) => {
-						if (key === WHY_KEY) {
-							response[WHY_KEY] = mockStorage.tabs;
-						} else {
-							response[key] = mockStorage[key];
-						}
+                        response[key] = mockStorage[key];
 					});
 					return response;
 				};
@@ -92,14 +94,10 @@ export const mockBrowser = {
 				callback(makeResponse());
 			},
 			// deno-lint-ignore require-await
-			set: async (data: { tabs: any[] }): Promise<boolean> => {
-				if (data[WHY_KEY]) {
-					mockStorage.tabs = data[WHY_KEY];
-				} else if (data[LOCALE_KEY]) {
-					mockStorage[LOCALE_KEY] = data[LOCALE_KEY];
-				} else if (data[SETTINGS_KEY]) {
-					mockStorage[SETTINGS_KEY] = data[SETTINGS_KEY];
-				}
+			set: async (data: { key: string, set: object[] }): Promise<boolean> => {
+                console.log('m',data, data.key)
+                mockStorage[data.key] = data[data.key] ?? data[WHY_KEY] ?? data.set;
+                console.log('mk',mockStorage,mockStorage[data.key])
 				return true;
 			},
 		},
@@ -134,27 +132,39 @@ export const mockBrowser = {
 						setError("Set data is missing");
 					}
 					break;
-				//case "get-language":
 				case "get-sf-language":
 					response = "en";
 					break;
 				case "get-settings":
-					switch (message.keys) {
-						case USER_LANGUAGE:
-							response = language;
-							break;
-						case PERSIST_SORT:
-							response = null;
-							break;
-						default:
-							setError(
-								`Unknown message keys for ${message.what}: ${message.keys}`,
-							);
-							break;
-					}
+                    response = [];
+                    const keys = Array.isArray(message.keys) ? message.keys : [message.keys];
+                    for(const key of keys){
+                        if(typeof key === 'string'){
+                            const foundSetting = mockStorage.settings.filter(s => s.id === key);
+                            if(foundSetting != null && foundSetting.length > 0)
+                                response.push(...foundSetting);
+                            else {
+                                response = undefined;
+                                setError(
+                                    `Unknown message key: ${key}`,
+                                );
+                                break;
+                            }
+                        }
+                        else if(key == null)
+                            response = mockStorage.settings;
+                        else {
+                            response = undefined;
+                            setError(
+                                `Unknown message key: ${key}`,
+                            );
+                        }
+                    }
+                    if(Array.isArray(response) && response.length === 1)
+                        response = response[0];
 					break;
 				case "get-style-settings": {
-					const settings = mockStorage[message.key ?? SETTINGS_KEY];
+					const settings = mockStorage[message.key];
 					if (message.keys == null || settings == null) {
 						response = settings;
 					} else {
