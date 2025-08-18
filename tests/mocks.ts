@@ -135,7 +135,7 @@ export const mockBrowser = {
 				case "get-sf-language":
 					response = "en";
 					break;
-				case "get-settings":
+				case "get-settings": {
                     response = [];
                     const keys = Array.isArray(message.keys) ? message.keys : [message.keys];
                     for(const key of keys){
@@ -163,6 +163,7 @@ export const mockBrowser = {
                     if(Array.isArray(response) && response.length === 1)
                         response = response[0];
 					break;
+				}
 				case "get-style-settings": {
 					const settings = mockStorage[message.key];
 					if (message.keys == null || settings == null) {
