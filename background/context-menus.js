@@ -408,6 +408,7 @@ async function removeMenuItems() {
 	}
 }
 
+// deno-lint-ignore no-var
 var intervalCxm = null; // is var so that it does not break tests
 /**
  * Returns the current interval (for tests)

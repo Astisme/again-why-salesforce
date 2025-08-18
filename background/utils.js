@@ -1,7 +1,6 @@
 "use strict";
 import {
 	BROWSER,
-	BROWSER_NAME,
 	EXTENSION_NAME,
 	ISCHROME,
 	ISFIREFOX,

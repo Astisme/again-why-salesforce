@@ -153,7 +153,7 @@ export const mockBrowser = {
 							break;
 					}
 					break;
-				case "get-style-settings":
+				case "get-style-settings": {
 					const settings = mockStorage[message.key ?? SETTINGS_KEY];
 					if (message.keys == null || settings == null) {
 						response = settings;
@@ -169,6 +169,7 @@ export const mockBrowser = {
 							: requestedSettings[0];
 					}
 					break;
+                }
 				case "echo":
 					response = message.echo;
 					break;
@@ -273,11 +274,11 @@ export const mockBrowser = {
 			return Promise.resolve(result);
 		},
 		sendMessage(
-			tabId: number,
-			message: Message,
-			options?: any,
+			_tabId: number,
+			_message: Message,
+			_options?: any,
 		): Promise<any> {
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve, _) => {
 				resolve(true);
 			});
 		},

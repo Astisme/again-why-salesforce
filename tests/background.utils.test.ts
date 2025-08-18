@@ -75,7 +75,7 @@ Deno.test("checkLaunchExport behavior", async (t) => {
 
 	await t.step("accepts an explicit tabs array parameter", () => {
 		const dummyTabs = [{ id: 1, url: "https://foo.bar" }];
-		checkLaunchExport(dummyTabs as any);
+		checkLaunchExport(dummyTabs);
 	});
 });
 
