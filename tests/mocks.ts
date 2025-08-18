@@ -145,9 +145,6 @@ export const mockBrowser = {
                                 response.push(...foundSetting);
                             else {
                                 response = undefined;
-                                setError(
-                                    `Unknown message key: ${key}`,
-                                );
                                 break;
                             }
                         }
