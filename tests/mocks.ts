@@ -1,7 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
 import Tab from "/tab.js";
-const WHY_KEY = "againWhySalesforce";
-const USER_LANGUAGE = "picked-language";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
 
 export interface MockStorage {
@@ -29,7 +27,7 @@ export interface InternalMessage {
 }
 
 mockStorage.settings.push(...[
-    { enabled: "fr", id: USER_LANGUAGE },
+    { enabled: "fr", id: "picked-language" },
     { enabled: false, id: "persist_sort" },
 ]);
 
@@ -79,26 +77,20 @@ export const mockBrowser = {
 	storage: {
 		sync: {
 			get: (keys: string[], callback): Promise<object> => {
-				const makeResponse = () => {
-					const response = {};
-					keys.forEach((key) => {
-                        response[key] = mockStorage[key];
-					});
-					return response;
-				};
+                const response = {};
+                keys.forEach((key) => {
+                    response[key] = mockStorage[key];
+                });
 				if (callback == null) {
-					return new Promise((resolve, _) => {
-						resolve(makeResponse());
-					});
+					return new Promise((resolve, _) => resolve(response));
 				}
-				callback(makeResponse());
+				return callback(response);
 			},
-			// deno-lint-ignore require-await
-			set: async (data: { key: string, set: object[] }): Promise<boolean> => {
-                console.log('m',data, data.key)
-                mockStorage[data.key] = data[data.key] ?? data[WHY_KEY] ?? data.set;
-                console.log('mk',mockStorage,mockStorage[data.key])
-				return true;
+			set: (data: object, callback): Promise<boolean> => {
+                Object.assign(mockStorage, data)
+                if(callback == null)
+                    return new Promise((resolve, _) => resolve(true));
+                return callback(true);
 			},
 		},
 		onChanged: {
@@ -145,9 +137,6 @@ export const mockBrowser = {
                                 response.push(...foundSetting);
                             else {
                                 response = undefined;
-                                setError(
-                                    `Unknown message key: ${key}`,
-                                );
                                 break;
                             }
                         }
@@ -343,6 +332,9 @@ export const mockBrowser = {
 				),
 			);
 		},
+        setMockCookies(cookies: Cookie[]): void {
+            this._cookies = cookies;
+        }
 	},
 };
 
@@ -409,18 +401,23 @@ export const translations = {
 
 const og_fetch = fetch;
 
-globalThis.fetch = (path) => ({
+globalThis.fetch = (path: string) => ({
 	json: () => {
-		// extract from `/_locales/${language}/messages.json`
-		const language = path.substring(
-			"/_locales/".length,
-			path.length - "/messages.json".length,
-		);
-		if (language != null && language !== "") {
-			return translations[language];
-		} else {
-			return og_fetch(path)
-				.then((res) => res.json());
-		}
+        if(path.includes("locales")){
+            // extract from `/_locales/${language}/messages.json`
+            const language = path.substring(
+                "/_locales/".length,
+                path.length - "/messages.json".length,
+            );
+            if (language != null && language !== "") {
+                return translations[language];
+            } else {
+                return og_fetch(path)
+                .then((res) => res.json());
+            }
+        }
+        else if(path.includes("oauth2/userinfo")){
+            return { language: "sf-lang-en" };
+        }
 	},
 });
