@@ -99,7 +99,9 @@ export async function bg_getSettings(
 	const requestedSettings = settings.filter((setting) =>
 		settingKeys.includes(setting.id)
 	);
-    const response = settingKeys.length === 1 && key === SETTINGS_KEY ? requestedSettings[0] : requestedSettings;
+	const response = settingKeys.length === 1 && key === SETTINGS_KEY
+		? requestedSettings[0]
+		: requestedSettings;
 	if (callback == null) {
 		return response;
 	}
@@ -116,9 +118,10 @@ export async function bg_getSettings(
  */
 export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
-    const changedToArray = !Array.isArray(tobeset);
-    if(changedToArray)
-        tobeset = [tobeset];
+	const changedToArray = !Array.isArray(tobeset);
+	if (changedToArray) {
+		tobeset = [tobeset];
+	}
 	switch (key) {
 		case SETTINGS_KEY: {
 			// get the settings array
@@ -174,14 +177,16 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 			break;
 		}
 		default: // WHY_KEY, LOCALE_KEY
-            if(changedToArray)
-                tobeset = tobeset[0];
+			if (changedToArray) {
+				tobeset = tobeset[0];
+			}
 			set[key] = tobeset;
 			break;
 	}
-    const syncSet = BROWSER.storage.sync.set;
-    if(callback == null)
-        return syncSet(set);
+	const syncSet = BROWSER.storage.sync.set;
+	if (callback == null) {
+		return syncSet(set);
+	}
 	return syncSet(set, () => callback(set[key]));
 }
 
@@ -292,8 +297,9 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
 		callback(availableCommands);
 		return;
 	}
-    if(!Array.isArray(commands))
-        commands = [commands];
+	if (!Array.isArray(commands)) {
+		commands = [commands];
+	}
 	const requestedCommands = availableCommands.filter((ac) =>
 		commands.includes(ac.name)
 	);

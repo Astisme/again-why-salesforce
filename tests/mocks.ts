@@ -27,8 +27,8 @@ export interface InternalMessage {
 }
 
 mockStorage.settings.push(...[
-    { enabled: "fr", id: "picked-language" },
-    { enabled: false, id: "persist_sort" },
+	{ enabled: "fr", id: "picked-language" },
+	{ enabled: false, id: "persist_sort" },
 ]);
 
 type ContextMenuClickInfo = {
@@ -77,20 +77,21 @@ export const mockBrowser = {
 	storage: {
 		sync: {
 			get: (keys: string[], callback): Promise<object> => {
-                const response = {};
-                keys.forEach((key) => {
-                    response[key] = mockStorage[key];
-                });
+				const response = {};
+				keys.forEach((key) => {
+					response[key] = mockStorage[key];
+				});
 				if (callback == null) {
 					return new Promise((resolve, _) => resolve(response));
 				}
 				return callback(response);
 			},
 			set: (data: object, callback): Promise<boolean> => {
-                Object.assign(mockStorage, data)
-                if(callback == null)
-                    return new Promise((resolve, _) => resolve(true));
-                return callback(true);
+				Object.assign(mockStorage, data);
+				if (callback == null) {
+					return new Promise((resolve, _) => resolve(true));
+				}
+				return callback(true);
 			},
 		},
 		onChanged: {
@@ -339,9 +340,9 @@ export const mockBrowser = {
 				),
 			);
 		},
-        setMockCookies(cookies: Cookie[]): void {
-            this._cookies = cookies;
-        }
+		setMockCookies(cookies: Cookie[]): void {
+			this._cookies = cookies;
+		},
 	},
 };
 
@@ -410,21 +411,20 @@ const og_fetch = fetch;
 
 globalThis.fetch = (path: string) => ({
 	json: () => {
-        if(path.includes("locales")){
-            // extract from `/_locales/${language}/messages.json`
-            const language = path.substring(
-                "/_locales/".length,
-                path.length - "/messages.json".length,
-            );
-            if (language != null && language !== "") {
-                return translations[language];
-            } else {
-                return og_fetch(path)
-                .then((res) => res.json());
-            }
-        }
-        else if(path.includes("oauth2/userinfo")){
-            return { language: "sf-lang-en" };
-        }
+		if (path.includes("locales")) {
+			// extract from `/_locales/${language}/messages.json`
+			const language = path.substring(
+				"/_locales/".length,
+				path.length - "/messages.json".length,
+			);
+			if (language != null && language !== "") {
+				return translations[language];
+			} else {
+				return og_fetch(path)
+					.then((res) => res.json());
+			}
+		} else if (path.includes("oauth2/userinfo")) {
+			return { language: "sf-lang-en" };
+		}
 	},
 });
