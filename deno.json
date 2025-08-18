@@ -11,7 +11,7 @@
 		]
 	},
 	"tasks": {
-		"test": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --allow-net",
+		"test": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --allow-net tests",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add _locales/*/messages.json",

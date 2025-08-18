@@ -1,4 +1,4 @@
-import { mockStorage } from "./mocks.ts";
+import { mockStorage } from "../mocks.ts";
 import {
 	assert,
 	assertEquals,
