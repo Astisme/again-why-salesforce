@@ -183,7 +183,7 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 			set[key] = tobeset;
 			break;
 	}
-	const syncSet = BROWSER.storage.sync.set;
+	const syncSet = BROWSER.storage.sync.set.bind(BROWSER.storage.sync);
 	if (callback == null) {
 		return syncSet(set);
 	}
@@ -330,6 +330,7 @@ function listenToExtensionMessages() {
 				bg_getStorage(sendResponse, request.key);
 				break;
 			case "set":
+                console.log(request);
 				bg_setStorage(request.set, sendResponse, request.key);
 				break;
 			case "saved":
