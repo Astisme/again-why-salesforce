@@ -10,17 +10,17 @@ import Tab from "/tab.js";
 import TabContainer from "/tabContainer.js";
 
 function matchStorageToContainer(container: TabContainer) {
-	if (mockStorage.tabs.length !== container.length) {
-		console.log("match", mockStorage.tabs, container);
+	if (mockStorage.againWhySalesforce.length !== container.length) {
+		console.log("match", mockStorage.againWhySalesforce, container);
 	}
 	assertEquals(
-		mockStorage.tabs.length,
+		mockStorage.againWhySalesforce.length,
 		container.length,
 		"lenghts should be the same",
 	);
 	for (const i in container) {
 		assertEquals(
-			mockStorage.tabs[i].url,
+			mockStorage.againWhySalesforce[i].url,
 			container[i].url,
 			"each item should be the same",
 		);
@@ -31,7 +31,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	await t.step(
 		"initializes with default tabs when no saved tabs exist",
 		async () => {
-			mockStorage.tabs = [];
+			mockStorage.againWhySalesforce = [];
 			const container = await TabContainer.create();
 
 			assertEquals(container.length, 3); // Default tabs count
@@ -39,7 +39,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[1].label, "flows");
 			assertEquals(container[2].label, "users");
 
-			mockStorage.tabs = [];
+			mockStorage.againWhySalesforce = [];
 			container.length = 0;
 			assert(await container._initialize());
 
@@ -51,7 +51,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	);
 
 	await t.step("initializes with saved tabs from storage", async () => {
-		mockStorage.tabs = [
+		mockStorage.againWhySalesforce = [
 			{ label: "Test", url: "test-url" },
 		];
 
@@ -61,7 +61,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 		assertEquals(container[0].label, "Test");
 		assertEquals(container[0].url, "test-url");
 
-		mockStorage.tabs = [
+		mockStorage.againWhySalesforce = [
 			{ label: "Test", url: "test-url" },
 		];
 		container.length = 0;
@@ -72,7 +72,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	});
 
 	await t.step("initializes with tabs passed as input", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 
 		const emptyContainer = await TabContainer.create([]);
 		assertEquals(emptyContainer.length, 0);
@@ -84,7 +84,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 		assertEquals(container[0].label, "Test");
 		assertEquals(container[0].url, "test-url");
 
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		container.length = 0;
 		assert(
 			await container._initialize([
@@ -99,7 +99,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	await t.step(
 		"does not initialize with bad tabs passed as input",
 		async () => {
-			mockStorage.tabs = [];
+			mockStorage.againWhySalesforce = [];
 
 			// this should get ignored
 			const container = await TabContainer.create(
@@ -111,7 +111,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[1].label, "flows");
 			assertEquals(container[2].label, "users");
 
-			mockStorage.tabs = [];
+			mockStorage.againWhySalesforce = [];
 			container.length = 0;
 			assert(
 				await container._initialize(
@@ -123,7 +123,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[1].label, "flows");
 			assertEquals(container[2].label, "users");
 
-			mockStorage.tabs = [];
+			mockStorage.againWhySalesforce = [];
 			container.length = 0;
 			assert(
 				await container._initialize(
@@ -140,7 +140,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 
 await Deno.test("TabContainer - Tab Management", async (t) => {
 	await t.step("adds a single tab", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assert(await container.addTab({ label: "New Tab", url: "new-url" }));
 		const lastTab = container[container.length - 1];
@@ -195,7 +195,7 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 
 await Deno.test("TabContainer - Organization Filtering", async (t) => {
 	await t.step("filters tabs by organization", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 
 		assert(
@@ -348,7 +348,7 @@ await Deno.test("TabContainer - replaceTabs edge cases", async (t) => {
 
 await Deno.test("TabContainer - Utility functions", async (t) => {
 	await t.step("slice", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		{
@@ -384,7 +384,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("splice", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container.splice(0, 1).length, 1);
@@ -408,7 +408,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("filter", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(
@@ -426,7 +426,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("getTabsWithOrg", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -446,7 +446,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("getTabsByOrg", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -473,7 +473,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("getTabsByData", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -545,7 +545,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("getSingleTabByData", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assert(
@@ -647,7 +647,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("getTabIndex", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -691,7 +691,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("exists", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -760,7 +760,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("toJSON", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -795,7 +795,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("toString", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -836,7 +836,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("isValid", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assert(TabContainer.isValid(container, false));
@@ -867,7 +867,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("map", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		const newContainer = container.map((_) => "I'm a string!");
@@ -877,7 +877,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("setDefaultTabs", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create([]);
 		assertEquals(container.length, 0);
 		assert(await container.setDefaultTabs());
@@ -893,11 +893,11 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 
 await Deno.test("TabContainer - Synchronization", async (t) => {
 	await t.step("syncs tabs with storage", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 
 		assertEquals(container.length, 3);
-		assertEquals(mockStorage.tabs.length, 3);
+		assertEquals(mockStorage.againWhySalesforce.length, 3);
 		assert(
 			await container.addTab(
 				{ label: "Sync Test", url: "sync-url" },
@@ -905,11 +905,11 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			),
 		);
 		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 3);
+		assertEquals(mockStorage.againWhySalesforce.length, 3);
 
 		assert(await container.syncTabs());
 		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 4);
+		assertEquals(mockStorage.againWhySalesforce.length, 4);
 
 		assert(
 			await container.syncTabs([{
@@ -918,7 +918,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			}]),
 		);
 		assertEquals(container.length, 1);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 		assertRejects(
 			async () =>
 				await container.syncTabs({
@@ -929,7 +929,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			"error_no_array",
 		);
 		assertEquals(container.length, 0);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 
 		assert(
 			await TabContainer._syncTabs([{
@@ -938,7 +938,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			}]),
 		);
 		assertEquals(container.length, 0);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 		assertRejects(
 			async () =>
 				await TabContainer._syncTabs({
@@ -953,13 +953,13 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		arr.push(await Tab.create("Sync Test", "sync-url3"));
 		assert(await TabContainer._syncTabs(arr));
 		assertEquals(container.length, 0);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 	});
 });
 
 await Deno.test("TabContainer - Import", async (t) => {
 	await t.step("import tabs from JSON string", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 
@@ -1002,7 +1002,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 	});
 
 	await t.step("does not import tabs from wrong JSON string", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertRejects(
@@ -1045,7 +1045,7 @@ await Deno.test("TabContainer - Import", async (t) => {
 
 await Deno.test("TabContainer - Move Tab", async (t) => {
 	await t.step("make a tab be the first of the array", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1106,7 +1106,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 	});
 
 	await t.step("make a tab be the last of the array", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1128,7 +1128,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 	});
 
 	await t.step("move a tab left/up one spot in the array", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1145,7 +1145,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 	});
 
 	await t.step("move a tab right/down one spot in the array", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1167,7 +1167,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 	});
 
 	await t.step("move a tab right/down other org Tabs", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1237,7 +1237,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 	});
 
 	await t.step("move a Tab left/up other org Tabs", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1292,7 +1292,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 
 await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 	await t.step("remove this tab", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1316,7 +1316,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 	});
 
 	await t.step("remove all other tabs", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1329,7 +1329,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 	});
 
 	await t.step("remove tabs before/on the left", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1376,7 +1376,7 @@ await Deno.test("TabContainer - Remove Tab(s)", async (t) => {
 	});
 
 	await t.step("remove tabs after", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1450,7 +1450,7 @@ await Deno.test("TabContainer - Error on Invalid Tabs", async (t) => {
 });
 
 await Deno.test("TabContainer - Update Tab", async () => {
-	mockStorage.tabs = [];
+	mockStorage.againWhySalesforce = [];
 	const container = await TabContainer.create();
 	assertEquals(container.length, 3);
 	assertEquals(container[0].url, "/lightning");
@@ -1493,7 +1493,7 @@ await Deno.test("TabContainer - Update Tab", async () => {
 
 await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	await t.step("By label ascending", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1538,7 +1538,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	});
 
 	await t.step("By label descending", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].label, "⚡");
@@ -1583,7 +1583,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	});
 
 	await t.step("By URL ascending", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1619,7 +1619,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	});
 
 	await t.step("By URL descending", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1650,7 +1650,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	});
 
 	await t.step("By org ascending", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
@@ -1680,7 +1680,7 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 	});
 
 	await t.step("By org descending", async () => {
-		mockStorage.tabs = [];
+		mockStorage.againWhySalesforce = [];
 		const container = await TabContainer.create();
 		assertEquals(container.length, 3);
 		assertEquals(container[0].url, "/lightning");
