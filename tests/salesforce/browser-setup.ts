@@ -26,6 +26,7 @@ const browser = await puppeteer.launch({
     "--disable-backgrounding-occluded-windows",
     "--disable-renderer-backgrounding",
     "--enable-features=NavigatorDoNotTrack",
+    "--remote-debugging-port=9222" // Enable remote debugging
   ]
 });
 
@@ -40,6 +41,7 @@ try {
   console.log("⏳ Waiting for login...");
   await page.waitForNavigation({ waitUntil: 'networkidle0' });
   // Setup console monitoring
+  /*
   page.on('console', msg => {
     console.log(`[PAGE ${msg.type()}] ${msg.text()}`);
   });
@@ -59,12 +61,31 @@ try {
       }
     }
   }
+  */
   console.log("📋 Navigating to setup page...");
   await page.goto(SF_SETUP_URL);
   await page.waitForSelector(`#${EXTENSION_NAME}`);
   console.log("✅ Browser ready for testing!");
   // Keep browser open
-  setTimeout(browser.close, 30000);
+  //setTimeout(browser.close, 30000);
+  //await new Promise(()=>{});
+
+  // Write browser endpoint info for tests to connect
+  const browserWSEndpoint = browser.wsEndpoint();
+  await Deno.writeTextFile("/tmp/browser-endpoint", browserWSEndpoint);
+  console.log(`Browser WebSocket endpoint: ${browserWSEndpoint}`);
+
+  // Keep browser alive until tests complete
+  // Listen for SIGTERM to gracefully close
+  let shouldExit = false;
+  Deno.addSignalListener("SIGTERM", () => {
+    shouldExit = true;
+    browser.close();
+  });
+  while (!shouldExit) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  await browser.close();
 } catch (error) {
   console.error("❌ Setup failed:", error);
   await browser.close();
