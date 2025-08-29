@@ -1242,7 +1242,8 @@ export async function generateSldsFileInput(
 		const msg_drop = await translator.translate("drop");
 		dropFilesSpan.textContent = `${msg_drop} ${
 			singleFile ? msg_file : msg_files
-		}`, dropzoneBodySpan.appendChild(dropFilesSpan);
+		}`;
+        dropzoneBodySpan.appendChild(dropFilesSpan);
 	}
 	const dragOverDiv = document.createElement("div");
 	dragOverDiv.classList.add("drag-over-body");
