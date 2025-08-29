@@ -89,7 +89,8 @@ export function getAllTabs() {
 export async function ensureAllTabsAvailability() {
 	try {
 		return getAllTabs();
-	} catch (_) {
+	} catch (e) {
+        console.info(e);
 		return await getAllTabs_async();
 	}
 }
@@ -563,7 +564,8 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 			const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
 			label = matchingTab.label;
 			url = matchingTab.url;
-		} catch (_) {
+		} catch (e) {
+            console.info(e);
 			url = minyURL;
 		}
 	}
