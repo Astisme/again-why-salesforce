@@ -76,21 +76,17 @@ async function handleLightningLinkClick(e) {
 		LINK_NEW_BROWSER,
 		USE_LIGHTNING_NAVIGATION,
 	]);
-	const target = settings != null &&
-			settings.some((setting) =>
-				setting.id === LINK_NEW_BROWSER && setting.enabled
-			)
+	const target = settings?.some((setting) =>
+            setting.id === LINK_NEW_BROWSER && setting.enabled
+        )
 		? "_blank"
 		: (currentTarget !== "" ? currentTarget : getLinkTarget(metaCtrl, url));
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
 	if (
 		target === "_blank" || url === getCurrentHref() ||
-		(
-			settings != null &&
-			settings.some((setting) =>
-				setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled
-			)
-		)
+        settings?.some((setting) =>
+            setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled
+        )
 	) {
 		open(url, target);
 	} else {
