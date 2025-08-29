@@ -169,8 +169,7 @@ async function checkAddLightningNavigation() {
 		USE_LIGHTNING_NAVIGATION,
 	]);
 	if (
-		settings != null &&
-		settings.some((setting) => setting.enabled)
+		settings?.some((setting) => setting.enabled)
 	) {
 		return;
 	}
@@ -348,7 +347,7 @@ function onHrefUpdate() {
  */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
-	if (keep_tabs_on_left == null || !keep_tabs_on_left.enabled) {
+	if (keep_tabs_on_left?.enabled) {
 		// move setupTabUl after ObjectManager
 		setupTabUl.parentElement.insertAdjacentElement("beforeend", setupTabUl);
 	} else {
@@ -891,7 +890,7 @@ function launchDownload(message) {
  */
 function listenToBackgroundPage() {
 	BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
-		if (message == null || message.what == null) {
+		if (message?.what == null) {
 			return;
 		}
 		sendResponse(null);
