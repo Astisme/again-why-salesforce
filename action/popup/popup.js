@@ -53,15 +53,14 @@ function pop_getCurrentBrowserTab(callback) {
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-	const broswerTabUrl = browserTab?.url;
+	const browserTabUrl = browserTab?.url;
 	if (
-		broswerTabUrl == null ||
-		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+		!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)
 	) {
 		// we're not in Salesforce Setup
 		window.location.href = BROWSER.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
-				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
+				browserTabUrl != null ? "?url=" + browserTabUrl : ""
 			}`,
 		);
 	} else {
