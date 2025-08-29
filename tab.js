@@ -30,7 +30,7 @@ export default class Tab {
 	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
 	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
 	 */
-	constructor(label, url, org = undefined, secret) {
+	constructor(label, url, org = undefined, secret = null) {
 		if (secret !== _tabSecret) {
 			throw new Error("error_tab_constructor");
 		}
