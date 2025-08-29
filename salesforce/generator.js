@@ -76,11 +76,12 @@ async function handleLightningLinkClick(e) {
 		LINK_NEW_BROWSER,
 		USE_LIGHTNING_NAVIGATION,
 	]);
+    const fallbackTarget = currentTarget !== "" ? currentTarget : getLinkTarget(metaCtrl, url);
 	const target = settings?.some((setting) =>
             setting.id === LINK_NEW_BROWSER && setting.enabled
         )
 		? "_blank"
-		: (currentTarget !== "" ? currentTarget : getLinkTarget(metaCtrl, url));
+		: fallbackTarget;
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
 	if (
 		target === "_blank" || url === getCurrentHref() ||
