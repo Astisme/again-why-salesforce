@@ -85,7 +85,7 @@ function removeKeysFromLocaleFile(
  * Creates a signature for a set of missing keys to use as a grouping identifier
  */
 function createKeySignature(keys: string[]): string {
-	return keys.sort((a,b)=>a.localeCompare(b)).join(",");
+	return keys.toSorted((a,b)=>a.localeCompare(b)).join(",");
 }
 
 /**
