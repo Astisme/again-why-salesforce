@@ -192,9 +192,9 @@ export default class Tab {
 		}
 		if (
 			url.startsWith(HTTPS) &&
-			!MY_SALESFORCE_SETUP_COM.exec(url) &&
-			!MY_SALESFORCE_COM.exec(url) &&
-			!LIGHTNING_FORCE_COM.exec(url)
+			!url.match(MY_SALESFORCE_SETUP_COM) &&
+			!url.match(MY_SALESFORCE_COM) &&
+			!url.match(LIGHTNING_FORCE_COM)
 		) {
 			return url;
 		}
