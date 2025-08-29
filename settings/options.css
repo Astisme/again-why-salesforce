@@ -53,14 +53,11 @@ ul.settings {
 
 .slds-dueling-list__options {
 	overflow: hidden;
+	height: 8rem;
 }
 
 .slds-listbox_vertical .slds-listbox__option:hover {
 	background-color: transparent;
-}
-
-.slds-dueling-list__options {
-	height: 8rem;
 }
 
 .button, button {
