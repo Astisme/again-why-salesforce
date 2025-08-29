@@ -232,7 +232,7 @@ class TranslationService {
 			}
 			return messageTranslated.slice(1);
 		} catch (e) {
-            console.info(e);
+			console.info(e);
 			return key;
 		}
 	}
@@ -355,7 +355,7 @@ export default async function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
 	} catch (e) {
-        console.info(e);
+		console.info(e);
 		return await getTranslator_async();
 	}
 }

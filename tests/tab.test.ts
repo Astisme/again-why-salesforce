@@ -171,8 +171,13 @@ await Deno.test("Tab Creation - Instance Reuse", async (t) => {
 await Deno.test("Tab Constructor Protection", () => {
 	assertThrows(
 		() => {
-			const tb = new Tab("Test", "https://example.com", undefined, Symbol("fake"));
-            console.log(tb);
+			const tb = new Tab(
+				"Test",
+				"https://example.com",
+				undefined,
+				Symbol("fake"),
+			);
+			console.log(tb);
 		},
 		Error,
 		"error_tab_constructor",

@@ -274,7 +274,7 @@ export default class Tab {
 			Tab.create(tab);
 			return true;
 		} catch (e) {
-            console.info(e);
+			console.info(e);
 			// error on creation of tab
 			return false;
 		}
@@ -385,7 +385,7 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return tabToUpdate;
 		}
-        const orginput = org !== "" ? org : undefined;
+		const orginput = org !== "" ? org : undefined;
 		return Tab.create(
 			label ?? tabToUpdate.label,
 			url ?? tabToUpdate.url,
