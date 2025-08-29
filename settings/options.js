@@ -1103,97 +1103,109 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 	) {
 		return;
 	}
-	const settings = await getStyleSettings(key);
-	if (settings != null) {
-		Array.isArray(settings)
-			? setCurrentChoice({ id: key, value: settings })
-			: setCurrentChoice(settings);
-	}
-	// gather correct resources
-	const isGeneric = key === GENERIC_TAB_STYLE_KEY;
-	const allInputs = isGeneric ? allGenericInputs : allOrgInputs;
-	const allDecorations = isGeneric
-		? allGenericDecorations
-		: allOrgDecorations;
-	const allInactiveDecorations = isGeneric
-		? allInactiveGenericDecorations
-		: allInactiveOrgDecorations;
-	const allActiveDecorations = isGeneric
-		? allActiveGenericDecorations
-		: allActiveOrgDecorations;
-	const btn_inactive_available = isGeneric
-		? btn_inactive_generic_available
-		: btn_inactive_org_available;
-	const btn_inactive_chosen = isGeneric
-		? btn_inactive_generic_chosen
-		: btn_inactive_org_chosen;
-	const btn_active_available = isGeneric
-		? btn_active_generic_available
-		: btn_active_org_available;
-	const btn_active_chosen = isGeneric
-		? btn_active_generic_chosen
-		: btn_active_org_chosen;
-	const ul_inactive_decoration_available = isGeneric
-		? ul_inactive_generic_decoration_available
-		: ul_inactive_org_decoration_available;
-	const ul_inactive_decoration_chosen = isGeneric
-		? ul_inactive_generic_decoration_chosen
-		: ul_inactive_org_decoration_chosen;
-	const ul_active_decoration_available = isGeneric
-		? ul_active_generic_decoration_available
-		: ul_active_org_decoration_available;
-	const ul_active_decoration_chosen = isGeneric
-		? ul_active_generic_decoration_chosen
-		: ul_active_org_decoration_chosen;
-	const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
-	// create event listeners
-	tabPreview.classList.remove("hidden");
-	allInputs.forEach((el) =>
-		el.addEventListener("change", (e) => saveTabOptions(e, key))
-	);
-	allDecorations.forEach((el) => el.addEventListener("click", flipSelected));
-	// move to available
-	btn_inactive_available.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_inactive_decoration_available,
-				allInactiveDecorations,
-				false,
-				key,
-			),
-	);
-	btn_active_available.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_active_decoration_available,
-				allActiveDecorations,
-				false,
-				key,
-			),
-	);
-	// move to chosen
-	btn_inactive_chosen.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_inactive_decoration_chosen,
-				allInactiveDecorations,
-				true,
-				key,
-			),
-	);
-	btn_active_chosen.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_active_decoration_chosen,
-				allActiveDecorations,
-				true,
-				key,
-			),
-	);
+    /**
+     * Restores saved style settings from storage and applies them to the current UI state.
+     * @param {string} key - Storage key for the settings
+     * @returns {Promise<void>}
+     */
+    async function restoreSettings(key) {
+        const settings = await getStyleSettings(key);
+        if (settings != null) {
+            const choice = Array.isArray(settings) 
+                ? { id: key, value: settings }
+                : settings;
+            setCurrentChoice(choice);
+        }
+    }
+    /**
+     * Gathers all UI element references needed for tab styling based on the key type.
+     * @param {string} key - Tab style key determining which resource set to use
+     * @returns {Object} Object containing all necessary UI element references
+     */
+    function getTabResources(key) {
+        /**
+         * Gets button element references for moving decorations between available/chosen states.
+         * @param {boolean} isGeneric - Whether to get generic or org-specific button references
+         * @returns {Object} Object containing button element references
+         */
+        function getButtonReferences(isGeneric) {
+            return {
+                inactiveAvailable: isGeneric ? btn_inactive_generic_available : btn_inactive_org_available,
+                inactiveChosen: isGeneric ? btn_inactive_generic_chosen : btn_inactive_org_chosen,
+                activeAvailable: isGeneric ? btn_active_generic_available : btn_active_org_available,
+                activeChosen: isGeneric ? btn_active_generic_chosen : btn_active_org_chosen
+            };
+        }
+        /**
+         * Gets decoration list element references for organizing available/chosen decorations.
+         * @param {boolean} isGeneric - Whether to get generic or org-specific list references
+         * @returns {Object} Object containing list element references
+         */
+        function getListReferences(isGeneric) {
+            return {
+                inactiveAvailable: isGeneric ? ul_inactive_generic_decoration_available : ul_inactive_org_decoration_available,
+                inactiveChosen: isGeneric ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_chosen,
+                activeAvailable: isGeneric ? ul_active_generic_decoration_available : ul_active_org_decoration_available,
+                activeChosen: isGeneric ? ul_active_generic_decoration_chosen : ul_active_org_decoration_chosen
+            };
+        }
+        const isGeneric = key === GENERIC_TAB_STYLE_KEY;
+        return {
+            isGeneric,
+            allInputs: isGeneric ? allGenericInputs : allOrgInputs,
+            allDecorations: isGeneric ? allGenericDecorations : allOrgDecorations,
+            allInactiveDecorations: isGeneric ? allInactiveGenericDecorations : allInactiveOrgDecorations,
+            allActiveDecorations: isGeneric ? allActiveGenericDecorations : allActiveOrgDecorations,
+            buttons: getButtonReferences(isGeneric),
+            lists: getListReferences(isGeneric),
+            tabPreview: isGeneric ? tabGenericPreview : tabOrgPreview
+        };
+    }
+    /**
+     * Sets up all event listeners for tab styling UI elements.
+     * Includes input change handlers, decoration click handlers, and button move handlers.
+     * @param {Object} resources - UI element references from getTabResources
+     * @param {string} key - Tab style key for saving settings
+     */
+    function setupUIListeners(resources, key) {
+        /**
+         * Sets up event listeners for buttons that move decorations between available/chosen lists.
+         * @param {Object} resources - UI element references containing buttons and lists
+         * @param {string} key - Tab style key for saving settings
+         */
+        function setupMoveButtonListeners(resources, key) {
+            const { buttons, lists, allInactiveDecorations, allActiveDecorations } = resources;
+            // Move to available buttons
+            buttons.inactiveAvailable.addEventListener("click", () =>
+                moveSelectedDecorationsTo(lists.inactiveAvailable, allInactiveDecorations, false, key)
+            );
+            buttons.activeAvailable.addEventListener("click", () =>
+                moveSelectedDecorationsTo(lists.activeAvailable, allActiveDecorations, false, key)
+            );
+            // Move to chosen buttons
+            buttons.inactiveChosen.addEventListener("click", () =>
+                moveSelectedDecorationsTo(lists.inactiveChosen, allInactiveDecorations, true, key)
+            );
+            buttons.activeChosen.addEventListener("click", () =>
+                moveSelectedDecorationsTo(lists.activeChosen, allActiveDecorations, true, key)
+            );
+        }
+        // Show preview tab
+        resources.tabPreview.classList.remove("hidden");
+        // Input change listeners
+        resources.allInputs.forEach(el => 
+            el.addEventListener("change", e => saveTabOptions(e, key))
+        );
+        // Decoration selection listeners
+        resources.allDecorations.forEach(el => 
+            el.addEventListener("click", flipSelected)
+        );
+        // Button move listeners
+        setupMoveButtonListeners(resources, key);
+    }
+	await restoreSettings(key);
+	const resources = getTabResources(key);
+	setupUIListeners(resources, key);
 	if (isGeneric) {
 		genericTabListenersSet = true;
 	} else {
