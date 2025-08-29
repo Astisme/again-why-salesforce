@@ -22,8 +22,9 @@ const interval = setInterval(() => {
 	try {
 		allTabs = getAllTabs();
 		clearInterval(interval);
-	} catch (_) {
+	} catch (e) {
 		// wait next interval
+		console.info(e);
 	}
 }, 100);
 
@@ -170,8 +171,6 @@ function listenToFileUpload(modalParent) {
 	 */
 	dropArea.addEventListener("dragover", function (event) {
 		event.preventDefault();
-		//console.log('dragover')
-		//dropArea.classList.add("slds-has-drag-over");
 	});
 	/**
 	 * Handles the dragleave event when dragged files leave the drop area.
@@ -181,8 +180,6 @@ function listenToFileUpload(modalParent) {
 	 */
 	dropArea.addEventListener("dragleave", function (event) {
 		event.preventDefault();
-		//console.log('dragleave')
-		//dropArea.classList.remove("slds-has-drag-over");
 	});
 	/**
 	 * Handles the drop event of files onto the drop area.

@@ -25,8 +25,8 @@ function updateTheme(theme) {
 BROWSER.runtime.onMessage.addListener(function (mess, _, sendResponse) {
 	const message = mess.message;
 	if (
-		message == null || message.what == null || message.what !== "theme" ||
-		message.theme == null
+		message?.what == null || message?.what !== "theme" ||
+		message?.theme == null
 	) {
 		return;
 	}

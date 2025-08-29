@@ -3,6 +3,10 @@
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"
 	},
+	"ascending": {
+		"message": "升序 (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "可用",
 		"description": "可添加项目的部分标题"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "设置菜单的标签"
 	},
+	"cxm_sort": {
+		"message": "🎯 排序 Tab",
+		"description": "上下文菜单，让用户自动排序他们的 Tab（父菜单）"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 按标签",
+		"description": "上下文菜单，让用户按标签排序他们的 Tab"
+	},
+	"cxm_sort_org": {
+		"message": "👽 按组织",
+		"description": "上下文菜单，让用户按组织排序他们的 Tab"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 按 URL",
+		"description": "上下文菜单，让用户按 URL 排序他们的 Tab"
+	},
 	"cxm_update": {
 		"message": "✏️ 更新 Tab",
 		"description": "[上下文菜单]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete 所有 Tab",
 		"description": "[弹出窗口] 回收站上用于清空所有 Tab 的标题"
+	},
+	"descending": {
+		"message": "降序 (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "拖放",
@@ -351,6 +375,10 @@
 		"message": "重置为默认Tab时出错。",
 		"description": "[错误] 将Tab重置为默认时的通用错误"
 	},
+	"error_sorting_tabs": {
+		"message": "排序 Tab 时出错",
+		"description": "[error] 在 toast 消息中显示"
+	},
 	"error_sync_nothing": {
 		"message": "无法同步空的 Tabs！",
 		"description": "[错误] 尝试同步无内容"
@@ -455,6 +483,70 @@
 		"message": "常规",
 		"description": "常规设置类别的标签"
 	},
+	"help": {
+		"message": "帮助",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "将新 Tab 标记为 Org Tab，因此它们仅在登录该特定 Salesforce Org 时可见。",
+		"description": "[$opt_add_tabs_as_org] 的 [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "新收藏的 Tab 会插入到设置栏中你的 Tab 列表前面，而不是追加到末尾。",
+		"description": "[$opt_add_tabs_front] 的 [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "如果你在 Salesforce 域外点击扩展程序弹窗，将自动把你带到 Salesforce 登录页面。",
+		"description": "[$opt_automatic_open_login] 的 [settings-help]"
+	},
+	"help_automatic_open_setup": {
+		"message": "如果你在 Salesforce 域内点击扩展程序弹窗，但不在设置页面上，将自动把你带到 Salesforce 设置页面。",
+		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
+	},
+	"help_keep_sort": {
+		"message": "启用后，你的 Tab 将保持排序状态 — 无论是按标签、URL 还是组织；具体取决于你的选择。",
+		"description": "[$opt_keep_sort] 的 [settings-help]"
+	},
+	"help_keep_tabs_left": {
+		"message": "将你保存的 Tab 固定在设置中的标准导航菜单（主页 / 对象管理器）之前，而不是之后。",
+		"description": "[$opt_keep_tabs_left] 的 [settings-help]"
+	},
+	"help_link_new_browser": {
+		"message": "启用后，每个保存的 Tab 都将在新 Tab 中打开相关页面。",
+		"description": "[$opt_link_new_browser] 的 [settings-help]"
+	},
+	"help_no_release_notes": {
+		"message": "更新扩展程序后，禁止自动显示版本说明通知。",
+		"description": "[$opt_no_release_notes] 的 [settings-help]"
+	},
+	"help_no_update_notification": {
+		"message": "禁用定期更新提醒弹窗，保持扩展程序 UI 整洁（当你在浏览器设置中禁用扩展程序的自动更新时）。",
+		"description": "[$opt_no_update_notification] 的 [settings-help]"
+	},
+	"help_open_login_same_tab": {
+		"message": "如果您在 Salesforce 域外点击扩展弹出窗口，登录页面将在当前浏览器 Tab 中打开。",
+		"description": "[设置-帮助] 用于 $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "如果您在 Salesforce 域内但不在 Setup 页面上点击扩展弹出窗口，Salesforce Setup 页面将在当前浏览器 Tab 中打开。",
+		"description": "[设置-帮助] 用于 $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "仅为扩展设置 UI 语言。如果某些内容尚未翻译，则会使用英文版本。",
+		"description": "[设置-帮助] 用于 $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "禁用基本遥测数据收集。扩展程序不会出现在匿名使用指标中。",
+		"description": "[$opt_prevent_analytics] 的 [settings-help]"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "绕过 Lightning Navigation API 并通过全页重新加载打开链接，这在某些组织设置中可能更快。",
+		"description": "[$opt_prevent_lightning_navigation] 的 [settings-help]"
+	},
+	"help_skip_link_detection": {
+		"message": "禁用扩展程序检查，该检查验证 URL 片段是否与 Salesforce 记录/对象 ID 的格式匹配（用于自动将保存的 Tab 设置为 Org Tab）。",
+		"description": "[$opt_skip_link_detection] 的 [settings-help]"
+	},
 	"import": {
 		"message": "导入",
 		"description": "[弹出窗口] 导入按钮"
@@ -539,6 +631,14 @@
 		"message": "打开设置",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 设置页面"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "将新 Tab 添加为 Org Tab。",
+		"description": "[settings] 允许用户将所有新 Tab 添加为特定于组织的 Tab"
+	},
+	"opt_add_tabs_front": {
+		"message": "将新 Tab 添加到前面。",
+		"description": "[settings] 允许用户将所有新 Tab 添加到前面"
+	},
 	"opt_automatic_open_login": {
 		"message": "当不在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_login 页面。",
 		"description": "[设置] 当用户在随机网站上打开弹出窗口时"
@@ -547,9 +647,17 @@
 		"message": "当在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_setup 页面。",
 		"description": "[设置] 当用户在 Salesforce 网站上打开弹出窗口时"
 	},
+	"opt_confirm_save": {
+		"message": "设置已保存！",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (默认和备用)",
 		"description": "扩展的默认语言选项"
+	},
+	"opt_keep_sort": {
+		"message": "保持 Tab 排序。",
+		"description": "[setting] 允许用户根据其中一个键保持其 Tab 的排序"
 	},
 	"opt_keep_tabs_left": {
 		"message": "将收藏的 Tabs 保持在首页和对象管理器的左侧。",
@@ -579,13 +687,17 @@
 		"message": "选择扩展语言",
 		"description": "[设置] 提示用户选择他们喜欢的语言的标签"
 	},
+	"opt_pick_sort": {
+		"message": "选择 Tab 应按哪个字段排序",
+		"description": "[setting] 现在用户可以选择按哪个键保持 Tab 排序"
+	},
 	"opt_prevent_analytics": {
 		"message": "防止使用Simple Analytics（不会出现在用户统计中）。",
 		"description": "[设置] 允许用户阻止发送匿名分析数据"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "阻止使用Lightning导航（使用时加载更快）。",
-		"description": "[设置] 不允许使用Lightning导航，并解释该功能"
+		"message": "阻止使用 Lightning Navigation（未选中时加载更快）。",
+		"description": "[setting] 不允许使用 Lightning Navigation 并附带功能说明"
 	},
 	"opt_same_tab_popup": {
 		"message": "点击弹出窗口时在同一标签页中打开页面。",

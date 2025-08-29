@@ -52,23 +52,6 @@ function handleDragOver(e) {
 }
 
 /**
- * Placeholder for handling the drag event during dragging.
- *
- * @param {DragEvent} e - The drag event.
- */
-function handleDrag(_) {
-}
-
-/**
- * Placeholder for handling the dragend event.
- * Typically used to clean up any visual changes or reset state after dragging ends.
- *
- * @param {DragEvent} e - The dragend event.
- */
-function handleDragEnd(_) {
-}
-
-/**
  * Handles the "drop" event for drag-and-drop functionality.
  * It swaps the positions of the dragged row and the target row within the parent element (typically a table body).
  *
@@ -103,9 +86,7 @@ function handleDrop(e) {
  */
 function createListeners() {
 	container.addEventListener("dragstart", handleDragStart, false); // when dragging begins
-	container.addEventListener("drag", handleDrag, false); // while it is being dragged
 	container.addEventListener("dragover", handleDragOver, false); // while over a valid target
-	container.addEventListener("dragend", handleDragEnd, false); // when mouse released
 	container.addEventListener("drop", handleDrop, false); // when element is dropped
 }
 

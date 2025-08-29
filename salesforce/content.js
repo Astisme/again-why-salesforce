@@ -21,6 +21,9 @@ import {
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
 	CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_LABEL,
+	CXM_SORT_ORG,
+	CXM_SORT_URL,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
@@ -89,7 +92,8 @@ export function getAllTabs() {
 export async function ensureAllTabsAvailability() {
 	try {
 		return getAllTabs();
-	} catch (_) {
+	} catch (e) {
+		console.info(e);
 		return await getAllTabs_async();
 	}
 }
@@ -168,8 +172,7 @@ async function checkAddLightningNavigation() {
 		USE_LIGHTNING_NAVIGATION,
 	]);
 	if (
-		settings != null &&
-		settings.some((setting) => setting.enabled)
+		settings?.some((setting) => setting.enabled)
 	) {
 		return;
 	}
@@ -277,16 +280,18 @@ async function init(tabs = null) {
 		if (orgName == null) {
 			orgName = Tab.extractOrgName(href);
 		}
+		const frag = document.createDocumentFragment();
 		allTabs.forEach((row) => {
 			// TODO add option to hide or show not-this-org tabs
 			// hide not-this-org tabs
-			setupTabUl.appendChild(
+			frag.appendChild(
 				generateRowTemplate(
 					row,
 					!(row.org == null || row.org === orgName),
 				),
 			);
 		});
+		setupTabUl.appendChild(frag);
 	}
 	isOnSavedTab();
 	checkKeepTabsOnLeft();
@@ -303,7 +308,7 @@ async function init(tabs = null) {
  * @param {Function} [callback] - A callback function to be invoked with the result of the saved tab check.
  * @returns {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
  */
-export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
+export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
 		fromHrefUpdate = false;
 		return;
@@ -347,7 +352,7 @@ function onHrefUpdate() {
  */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
-	if (keep_tabs_on_left == null || !keep_tabs_on_left.enabled) {
+	if (keep_tabs_on_left?.enabled) {
 		// move setupTabUl after ObjectManager
 		setupTabUl.parentElement.insertAdjacentElement("beforeend", setupTabUl);
 	} else {
@@ -563,7 +568,8 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 			const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
 			label = matchingTab.label;
 			url = matchingTab.url;
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			url = minyURL;
 		}
 	}
@@ -607,6 +613,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		lastInput = value;
 	});
+	let lastExtracted = null;
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const linkTarget = getSelectedRadioButtonValue();
@@ -614,10 +621,9 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		if (inputVal == null || inputVal === "") {
 			return showToast(["insert_another", "org_link"], false, true);
 		}
-		let alreadyExtracted = false;
 		const newTarget = Tab.extractOrgName(inputVal);
-		if (alreadyExtracted) return; // could be called more than once
-		alreadyExtracted = true;
+		if (lastExtracted === newTarget) return; // could be called more than once
+		lastExtracted = newTarget;
 		if (
 			!newTarget.match(
 				SALESFORCE_URL_PATTERN,
@@ -656,6 +662,7 @@ const ACTION_REMOVE_GENERIC_TABS = "remove-generic-tabs";
 const ACTION_RESET_DEFAULT = "reset-default";
 const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
+const ACTION_SORT = "sort";
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -690,7 +697,14 @@ export async function performActionOnTabs(
 				}
 				break;
 			case ACTION_ADD:
-				if (!await allTabs.addTab(tab)) {
+				if (
+					!await allTabs.addTab(
+						tab,
+						undefined,
+						undefined,
+						options?.addInFront,
+					)
+				) {
 					throw new Error("error_adding_tab");
 				}
 				break;
@@ -725,6 +739,11 @@ export async function performActionOnTabs(
 					throw new Error("error_resetting_default_tabs");
 				}
 				break;
+			case ACTION_SORT:
+				if (!await allTabs.sort(options)) {
+					throw new Error("error_sorting_tabs", options);
+				}
+				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -754,13 +773,10 @@ async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
 		inputTab.org = Tab.extractOrgName(getCurrentHref());
 	}
 	allTabs = await ensureAllTabsAvailability();
-	const matchingTab = allTabs.getSingleTabByData(inputTab);
-	matchingTab.update({
-		org: matchingTab.org == null ? getCurrentHref() : "",
-	});
-	if (!await allTabs.syncTabs()) {
-		throw new Error("error_failed_sync");
-	}
+	await allTabs.updateTab(
+		inputTab,
+		matchingTab.org == null ? getCurrentHref() : "",
+	);
 }
 
 /**
@@ -819,18 +835,11 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		matchingTab.update({
-			label: labelContainer.value !== ""
-				? labelContainer.value
-				: matchingTab.label,
-			url: urlContainer.value !== ""
-				? urlContainer.value
-				: matchingTab.url,
+		await allTabs.updateTab(matchingTab, {
+			label: labelContainer.value,
+			url: urlContainer.value,
 			org: orgContainer.value,
 		});
-		if (!await allTabs.syncTabs()) {
-			throw new Error("error_failed_sync");
-		}
 		sf_afterSet();
 		closeButton.click();
 	});
@@ -889,7 +898,7 @@ function launchDownload(message) {
  */
 function listenToBackgroundPage() {
 	BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
-		if (message == null || message.what == null) {
+		if (message?.what == null) {
 			return;
 		}
 		sendResponse(null);
@@ -1018,6 +1027,27 @@ function listenToBackgroundPage() {
 					break;
 				case CXM_RESET_DEFAULT_TABS:
 					await performActionOnTabs(ACTION_RESET_DEFAULT);
+					break;
+				case CXM_SORT_LABEL:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "label",
+						sortAsc: allTabs.isSortedBy !== "label" ||
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_URL:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "url",
+						sortAsc: allTabs.isSortedBy !== "url" ||
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_ORG:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "org",
+						sortAsc: allTabs.isSortedBy !== "org" ||
+							!allTabs.isSortedAsc,
+					});
 					break;
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);

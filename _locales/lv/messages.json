@@ -3,6 +3,10 @@
 		"message": "Atļaut",
 		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"
 	},
+	"ascending": {
+		"message": "Augošā secībā (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Pieejams",
 		"description": "Sadaļas virsraksts vienumiem, kurus var pievienot"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Iestatījumu izvēlnes etiķete"
 	},
+	"cxm_sort": {
+		"message": "🎯 Kārtot cilnes",
+		"description": "Konteksta izvēlne, kas ļauj lietotājiem automātiski kārtot savas cilnes (galvenā izvēlne)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 pēc iezīmes",
+		"description": "Konteksta izvēlne, kas ļauj lietotājiem kārtot savas cilnes pēc iezīmes"
+	},
+	"cxm_sort_org": {
+		"message": "👽 pēc org",
+		"description": "Konteksta izvēlne, kas ļauj lietotājiem kārtot savas cilnes pēc org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 pēc URL",
+		"description": "Konteksta izvēlne, kas ļauj lietotājiem kārtot savas cilnes pēc URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Atjaunināt Tab",
 		"description": "[konteksta_izvēlne]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete visas Tabs",
 		"description": "[uznirstošais-logs] nosaukums miskastē, lai iztukšotu visas Tabs"
+	},
+	"descending": {
+		"message": "Dilstošā secībā (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Nomest",
@@ -351,6 +375,10 @@
 		"message": "Kļūda, atjaunojot noklusētās Tab.",
 		"description": "[kļūda] Vispārēja kļūda, atjaunojot Tab uz noklusējumu"
 	},
+	"error_sorting_tabs": {
+		"message": "Kļūda, kārtojot cilnes",
+		"description": "[error] parādīts paziņojumā"
+	},
 	"error_sync_nothing": {
 		"message": "Nevar sinhronizēt null Tabs!",
 		"description": "[kļūda] mēģināja sinhronizēt neko"
@@ -455,6 +483,70 @@
 		"message": "Vispārīgi",
 		"description": "Etiķete vispārīgo iestatījumu kategorijai"
 	},
+	"help": {
+		"message": "Palīdzība",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Atzīmē jaunas cilnes kā org cilnes, lai tās būtu redzamas tikai tad, kad esat pieteicies šajā konkrētajā Salesforce org.",
+		"description": "[settings-help] priekš $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Jaunās izlases cilnes tiek ievietotas jūsu cilņu saraksta sākumā, nevis pievienotas beigās.",
+		"description": "[settings-help] priekš $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ja noklikšķināt uz paplašinājuma uznirstošā loga ārpus Salesforce domēna, jūs automātiski nonāksit Salesforce pieteikšanās lapā.",
+		"description": "[settings-help] priekš $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ja noklikšķināt uz paplašinājuma uznirstošā loga Salesforce domēnā, bet ne iestatīšanas lapā, jūs automātiski nonāksit Salesforce iestatīšanas lapā.",
+		"description": "[settings-help] priekš $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Ja ir iespējots, jūsu cilnes tiek kārtotas pēc iezīmes, URL vai org, atkarībā no tā, ko izvēlaties.",
+		"description": "[settings-help] priekš $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Piesprauž jūsu saglabātās cilnes pirms standarta navigācijas izvēlnes (Sākums / Objektu pārvaldnieks) sadaļā Iestatīšana, nevis pēc tās.",
+		"description": "[settings-help] priekš $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Ja ir iespējots, katra saglabātā cilne atvērs saistīto lapu jaunā cilnē.",
+		"description": "[settings-help] priekš $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Aptur paziņojumu par izlaiduma piezīmēm automātisku parādīšanu pēc paplašinājuma atjaunināšanas.",
+		"description": "[settings-help] priekš $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Atspējo periodiskus atjauninājumu atgādinājumu uznirstošos logus, saglabājot paplašinājuma lietotāja saskarni tīru (ja pārlūkprogrammas iestatījumos esat atspējojis paplašinājuma automātiskos atjauninājumus).",
+		"description": "[settings-help] priekš $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ja noklikšķināt uz paplašinājuma uznirstošā loga ārpus Salesforce domēna, pieteikšanās lapa tiks atvērta pašreizējā pārlūkprogrammas cilnē.",
+		"description": "[settings-help] priekš $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ja noklikšķināt uz paplašinājuma uznirstošā loga Salesforce domēnā, bet ne iestatīšanas lapā, Salesforce iestatīšanas lapa tiks atvērta pašreizējā pārlūkprogrammas cilnē.",
+		"description": "[settings-help] priekš $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Iestatiet lietotāja saskarnes valodu tikai paplašinājumam. Ja kaut kas nav tulkots, tā vietā tiks izmantota angļu valodas versija.",
+		"description": "[settings-help] priekš $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Atspējo pamata telemetrijas vākšanu. Paplašinājums netiks parādīts anonīmajā lietojuma metrikā.",
+		"description": "[settings-help] priekš $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Apiet Lightning navigācijas API un atver saites, pilnībā pārlādējot lapu, kas dažos org iestatījumos var būt ātrāk.",
+		"description": "[settings-help] priekš $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Atspējo paplašinājuma pārbaudi, kas pārbauda, vai URL fragments atbilst Salesforce ierakstu/objektu ID formātam (tiek izmantots, lai automātiski iestatītu saglabāto cilni kā org cilni).",
+		"description": "[settings-help] priekš $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importēt",
 		"description": "[uznirstošais_logs] importēšanas poga"
@@ -539,6 +631,14 @@
 		"message": "Atvērt iestatīšanu",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Pievienot jaunas cilnes kā Org cilnes.",
+		"description": "[settings] ļauj lietotājam pievienot visas jaunās cilnes kā organizācijai specifiskas"
+	},
+	"opt_add_tabs_front": {
+		"message": "Pievienot jaunas cilnes priekšpusē.",
+		"description": "[settings] ļauj lietotājam pievienot visas jaunās cilnes priekšpusē"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automātiski atvērt $salesforce_login lapu, noklikšķinot uz uznirstošā loga, ja neesat Salesforce lapā.",
 		"description": "[iestatījums] kad lietotājs atver uznirstošo logu nejaušā vietnē"
@@ -547,9 +647,17 @@
 		"message": "Automātiski atvērt $salesforce_setup lapu, noklikšķinot uz uznirstošā loga, ja esat Salesforce lapā.",
 		"description": "[iestatījums] kad lietotājs atver uznirstošo logu Salesforce vietnē"
 	},
+	"opt_confirm_save": {
+		"message": "Iestatījumi ir saglabāti!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Noklusējums un rezerves)",
 		"description": "Paplašinājuma noklusējuma valodas opcija"
+	},
+	"opt_keep_sort": {
+		"message": "Saglabāt cilnes sakārtotas.",
+		"description": "[setting] ļauj lietotājam saglabāt savas cilnes sakārtotas pēc viena no to atslēgām"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Saglabāt iecienītākās Tabs kreisajā pusē no Home un Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "Izvēlieties paplašinājuma valodu",
 		"description": "[iestatījums] etiķete, lai mudinātu lietotāju izvēlēties vēlamo valodu"
 	},
+	"opt_pick_sort": {
+		"message": "Izvēlieties, pēc kura lauka jākārto cilnes",
+		"description": "[setting] tagad lietotājs var izvēlēties, pēc kuras atslēgas saglabāt cilnes sakārtotas"
+	},
 	"opt_prevent_analytics": {
 		"message": "Novērst Simple Analytics izmantošanu (netiks ieskaitīts lietotāju skaitā).",
 		"description": "[iestatījums] ļauj lietotājam novērst anonīmas analītikas sūtīšanu"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Neļaut izmantot Lightning navigāciju (ātrāka ielāde, kad tiek izmantota).",
-		"description": "[iestatījums] neatļaut Lightning navigāciju ar funkcijas skaidrojumu"
+		"message": "Novērst Lightning navigācijas izmantošanu (ātrāka ielāde, ja nav atzīmēts).",
+		"description": "[setting] neļauj izmantot Lightning navigāciju ar funkcijas skaidrojumu"
 	},
 	"opt_same_tab_popup": {
 		"message": "lapa tajā pašā cilnē, noklikšķinot uz uznirstošā loga.",

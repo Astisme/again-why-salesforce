@@ -3,6 +3,10 @@
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
 	},
+	"ascending": {
+		"message": "Naik (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Tersedia",
 		"description": "Judul bagian untuk item yang dapat ditambahkan"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Label untuk menu pengaturan"
 	},
+	"cxm_sort": {
+		"message": "🎯 Urutkan Tabs",
+		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka secara otomatis (menu induk)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 menurut Label",
+		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka menurut label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 menurut Org",
+		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka menurut organisasi"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 menurut Url",
+		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka menurut URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Perbarui Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete semua Tabs",
 		"description": "[popup] judul di tempat sampah untuk mengosongkan semua Tabs"
+	},
+	"descending": {
+		"message": "Turun (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Kesalahan saat mengatur ulang ke Tab Default.",
 		"description": "[error] Kesalahan umum saat mengatur ulang Tab ke defaultnya"
 	},
+	"error_sorting_tabs": {
+		"message": "Kesalahan saat mengurutkan Tabs",
+		"description": "[error] ditampilkan dalam pesan toast"
+	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyinkronkan Tabs kosong!",
 		"description": "[error] Mencoba menyinkronkan sesuatu yang kosong."
@@ -454,6 +482,70 @@
 		"message": "Umum",
 		"description": "Label untuk kategori pengaturan umum"
 	},
+	"help": {
+		"message": "Bantuan",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Menandai Tab baru sebagai Org Tabs, sehingga hanya terlihat saat Anda masuk ke Org Salesforce tertentu tersebut.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tab yang baru difavoritkan dimasukkan di depan daftar Tab Anda di bilah Setup, bukan ditambahkan di bagian akhir.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Jika Anda mengeklik popup ekstensi di luar domain Salesforce, Anda akan dibawa ke halaman login Salesforce secara otomatis.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Jika Anda mengeklik popup ekstensi di dalam domain Salesforce tetapi tidak di halaman Setup, Anda akan dibawa ke halaman Setup Salesforce secara otomatis.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Saat diaktifkan, Tab Anda akan diurutkan—baik berdasarkan label, URL, atau Org; tergantung pada pilihan Anda.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Menyematkan Tab yang Anda simpan sebelum menu navigasi standar (Home / Object Manager) di Setup, alih-alih setelahnya.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Saat diaktifkan, setiap Tab yang disimpan akan membuka halaman terkait di Tab baru.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Menekan tampilan otomatis notifikasi catatan rilis setelah ekstensi diperbarui.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Menonaktifkan popup pengingat pembaruan berkala, menjaga UI ekstensi tetap bersih (ketika Anda telah menonaktifkan pembaruan otomatis ekstensi dari pengaturan browser Anda).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Jika Anda mengeklik popup ekstensi di luar domain Salesforce, halaman login akan dibuka di Tab browser saat ini.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Jika Anda mengeklik popup ekstensi di dalam domain Salesforce tetapi tidak di halaman Setup, halaman Setup Salesforce akan dibuka di Tab browser saat ini.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Setel bahasa UI untuk ekstensi saja. Jika ada sesuatu yang belum diterjemahkan, versi bahasa Inggris akan digunakan sebagai gantinya.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Menonaktifkan pengumpulan telemetri dasar. Ekstensi tidak akan muncul dalam metrik penggunaan anonim.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Melewati API Lightning Navigation dan membuka tautan melalui pemuatan ulang halaman penuh, yang dapat lebih cepat di beberapa pengaturan organisasi.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Menonaktifkan pemeriksaan ekstensi yang memverifikasi bahwa fragmen URL cocok dengan format ID record/objek Salesforce (digunakan untuk secara otomatis menetapkan Tab yang disimpan sebagai Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Impor",
 		"description": "[popup] Tombol impor"
@@ -538,6 +630,14 @@
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Tambahkan Tab baru sebagai Org Tabs.",
+		"description": "[settings] biarkan pengguna menambahkan semua Tab baru sebagai khusus-org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Tambahkan Tab baru di depan.",
+		"description": "[settings] biarkan pengguna menambahkan semua Tab baru di depan"
+	},
 	"opt_automatic_open_login": {
 		"message": "Buka halaman $salesforce_login secara otomatis saat mengeklik popup saat tidak di halaman Salesforce.",
 		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web acak"
@@ -546,9 +646,17 @@
 		"message": "Buka halaman $salesforce_setup secara otomatis saat mengeklik popup saat berada di halaman Salesforce.",
 		"description": "[pengaturan] saat pengguna membuka popup saat berada di situs web Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Pengaturan disimpan!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Default dan Fallback)",
 		"description": "Opsi bahasa default ekstensi"
+	},
+	"opt_keep_sort": {
+		"message": "Biarkan Tab diurutkan.",
+		"description": "[setting] izinkan pengguna untuk menjaga Tab mereka diurutkan oleh salah satu kunci mereka"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pertahankan Tabs favorit di kiri Beranda dan Manajer Objek.",
@@ -578,13 +686,17 @@
 		"message": "Pilih bahasa ekstensi",
 		"description": "[pengaturan] label untuk meminta pengguna memilih bahasa pilihan mereka"
 	},
+	"opt_pick_sort": {
+		"message": "Pilih bidang mana yang harus digunakan untuk mengurutkan Tabs",
+		"description": "[setting] sekarang pengguna dapat memilih kunci mana yang akan digunakan untuk mengurutkan Tab"
+	},
 	"opt_prevent_analytics": {
 		"message": "Cegah penggunaan Simple Analytics (tidak muncul dalam jumlah pengguna).",
 		"description": "[pengaturan] memungkinkan pengguna mencegah pengiriman analitik anonim"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat saat digunakan).",
-		"description": "[pengaturan] jangan izinkan Navigasi Lightning dengan penjelasan fitur"
+		"message": "Cegah penggunaan Lightning Navigation (pemuatan lebih cepat saat tidak dicentang).",
+		"description": "[setting] jangan izinkan Lightning Navigation dengan penjelasan fitur"
 	},
 	"opt_same_tab_popup": {
 		"message": "halaman di tab yang sama saat mengklik popup.",

@@ -3,6 +3,10 @@
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"
 	},
+	"ascending": {
+		"message": "Oplopend (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Beschikbaar",
 		"description": "Sectiekop voor items die kunnen worden toegevoegd"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Label voor het instellingenmenu"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabbladen sorteren",
+		"description": "contextmenu om gebruikers hun Tabbladen automatisch te laten sorteren (hoofdmenu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 op label",
+		"description": "contextmenu om gebruikers hun Tabbladen op label te laten sorteren"
+	},
+	"cxm_sort_org": {
+		"message": "👽 op Org",
+		"description": "contextmenu om gebruikers hun Tabbladen op org te laten sorteren"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 op URL",
+		"description": "contextmenu om gebruikers hun Tabbladen op URL te laten sorteren"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab bijwerken",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[popup] titel op de prullenbak om alle Tabs te legen"
+	},
+	"descending": {
+		"message": "Aflopend (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Fout bij het terugzetten van de standaard Tabs.",
 		"description": "[fout] Algemene fout bij het terugzetten van de Tabs naar standaard"
 	},
+	"error_sorting_tabs": {
+		"message": "Fout bij het sorteren van de Tabbladen",
+		"description": "[error] getoond in een toastbericht"
+	},
 	"error_sync_nothing": {
 		"message": "Kan null Tabs niet synchroniseren!",
 		"description": "[fout] geprobeerd niets te synchroniseren"
@@ -455,6 +483,70 @@
 		"message": "Algemeen",
 		"description": "Label voor de algemene instellingencategorie"
 	},
+	"help": {
+		"message": "Hulp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Markeert nieuwe Tabbladen als Org-Tabbladen, zodat ze alleen zichtbaar zijn als u bent ingelogd bij die specifieke Salesforce Org.",
+		"description": "[settings-help] voor $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nieuw als favoriet ingestelde Tabbladen worden vooraan in uw Tabbladlijst in de Setup-balk ingevoegd, in plaats van achteraan te worden toegevoegd.",
+		"description": "[settings-help] voor $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Als u buiten een Salesforce-domein op de pop-up van de extensie klikt, wordt u automatisch naar de inlogpagina van Salesforce gebracht.",
+		"description": "[settings-help] voor $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Als u binnen een Salesforce-domein op de pop-up van de extensie klikt, maar niet op een Setup-pagina, wordt u automatisch naar de Salesforce Setup-pagina gebracht.",
+		"description": "[settings-help] voor $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Wanneer ingeschakeld, worden uw Tabbladen gesorteerd op label, URL of Org; afhankelijk van wat u kiest.",
+		"description": "[settings-help] voor $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pint uw opgeslagen Tabbladen voor het standaardnavigatiemenu (Home / Object Manager) in Setup, in plaats van erna.",
+		"description": "[settings-help] voor $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Wanneer ingeschakeld, opent elk opgeslagen Tabblad de gerelateerde pagina in een nieuw Tabblad.",
+		"description": "[settings-help] voor $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Onderdrukt de automatische weergave van release-opmerkingen-meldingen na het updaten van de extensie.",
+		"description": "[settings-help] voor $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Schakelt periodieke updateherinneringspop-ups uit, waardoor de UI van de extensie schoon blijft (wanneer u de automatische updates van de extensie via de instellingen van uw browser hebt uitgeschakeld).",
+		"description": "[settings-help] voor $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Als u buiten een Salesforce-domein op de pop-up van de extensie klikt, wordt de inlogpagina geopend in het huidige browsertabblad.",
+		"description": "[settings-help] voor $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Als u binnen een Salesforce-domein op de pop-up van de extensie klikt, maar niet op een Setup-pagina, wordt de Salesforce Setup-pagina geopend in het huidige browsertabblad.",
+		"description": "[settings-help] voor $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Stel de UI-taal in voor alleen de extensie. Als iets niet is vertaald, wordt de Engelse versie gebruikt.",
+		"description": "[settings-help] voor $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Schakelt basis telemetrieverzameling uit. De extensie verschijnt niet in anonieme gebruiksstatistieken.",
+		"description": "[settings-help] voor $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omzeilt de Lightning Navigation API en opent links via een volledige herlaadbeurt van de pagina, wat sneller kan zijn in sommige org-instellingen.",
+		"description": "[settings-help] voor $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Schakelt de extensiecontrole uit die verifieert of een URL-fragment overeenkomt met de indeling van Salesforce-record-/object-ID's (gebruikt om de opgeslagen Tab automatisch in te stellen als een Org-Tab).",
+		"description": "[settings-help] voor $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importeren",
 		"description": "[popup] importknop"
@@ -539,6 +631,14 @@
 		"message": "Setup openen",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Nieuwe Tabbladen toevoegen als Org-Tabbladen.",
+		"description": "[settings] de gebruiker in staat stellen om alle nieuwe Tabbladen als org-specifiek toe te voegen"
+	},
+	"opt_add_tabs_front": {
+		"message": "Nieuwe Tabbladen vooraan toevoegen.",
+		"description": "[settings] de gebruiker in staat stellen om alle nieuwe Tabbladen vooraan toe te voegen"
+	},
 	"opt_automatic_open_login": {
 		"message": "Open automatisch de $salesforce_login-pagina wanneer u op de pop-up klikt terwijl u niet op een Salesforce-pagina bent.",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een willekeurige website is"
@@ -547,9 +647,17 @@
 		"message": "Open automatisch de $salesforce_setup-pagina wanneer u op de pop-up klikt terwijl u op een Salesforce-pagina bent.",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een Salesforce-website is"
 	},
+	"opt_confirm_save": {
+		"message": "Instellingen zijn opgeslagen!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Standaard en terugval)",
 		"description": "Standaardtaaloptie van de extensie"
+	},
+	"opt_keep_sort": {
+		"message": "Tabbladen gesorteerd houden.",
+		"description": "[setting] de gebruiker in staat stellen om zijn Tabbladen gesorteerd te houden op een van hun sleutels"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Houd favoriete Tabs links van Home en Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "Kies extensietaal",
 		"description": "[instelling] label om de gebruiker te vragen zijn voorkeurstaal te kiezen"
 	},
+	"opt_pick_sort": {
+		"message": "Kies op welk veld de Tabbladen moeten worden gesorteerd",
+		"description": "[setting] de gebruiker kan nu kiezen op welke sleutel de Tabbladen gesorteerd moeten blijven"
+	},
 	"opt_prevent_analytics": {
 		"message": "Gebruik van Simple Analytics voorkomen (niet zichtbaar in gebruikersstatistieken).",
 		"description": "[instelling] Hiermee kan de gebruiker voorkomen dat anonieme analyses worden verzonden"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Gebruik van Lightning-navigatie voorkomen (snellere laadtijd bij gebruik).",
-		"description": "[instelling] Lightning-navigatie met uitleg van de functie niet toestaan"
+		"message": "Gebruik van Lightning-navigatie voorkomen (sneller laden wanneer uitgeschakeld).",
+		"description": "[setting] Lightning-navigatie niet toestaan met uitleg over de functie"
 	},
 	"opt_same_tab_popup": {
 		"message": "pagina in hetzelfde tabblad bij het klikken op de popup.",

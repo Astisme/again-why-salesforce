@@ -3,6 +3,10 @@
 		"message": "Επιτρέπω",
 		"description": "[αίτηση-άδειας] κουμπί για να επιτρέψετε τις άδειες"
 	},
+	"ascending": {
+		"message": "Αύξουσα (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Διαθέσιμο",
 		"description": "Επικεφαλίδα ενότητας για στοιχεία που μπορούν να προστεθούν"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Ετικέτα για το μενού ρυθμίσεων"
 	},
+	"cxm_sort": {
+		"message": "🎯 Ταξινόμηση Tabs",
+		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους αυτόματα (μητρικό μενού)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 με Ετικέτα",
+		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά ετικέτα"
+	},
+	"cxm_sort_org": {
+		"message": "👽 με Org",
+		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά οργανισμό"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 με Url",
+		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Ενημέρωση Tab",
 		"description": "[μενού-πλαισίου]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete όλες τις Tabs",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος στον κάδο για εκκαθάριση όλων των Tabs"
+	},
+	"descending": {
+		"message": "Φθίνουσα (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Σφάλμα κατά την επαναφορά των προεπιλεγμένων Tab.",
 		"description": "[σφάλμα] Γενικό σφάλμα κατά την επαναφορά των Tab στην προεπιλογή τους"
 	},
+	"error_sorting_tabs": {
+		"message": "Σφάλμα κατά την ταξινόμηση των Tabs",
+		"description": "[error] που εμφανίζεται σε ένα μήνυμα toast"
+	},
 	"error_sync_nothing": {
 		"message": "Δεν μπορεί να συγχρονιστούν κενά Tab!",
 		"description": "[σφάλμα] προσπαθήθηκε ο συγχρονισμός κενών Tab"
@@ -455,6 +483,70 @@
 		"message": "Γενικά",
 		"description": "Ετικέτα για την κατηγορία γενικών ρυθμίσεων"
 	},
+	"help": {
+		"message": "Βοήθεια",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Μαρκάρει τις νέες Tabs ως Org Tabs, έτσι ώστε να είναι ορατές μόνο όταν είστε συνδεδεμένοι σε αυτήν τη συγκεκριμένη Org Salesforce.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Οι νέες αγαπημένες Tabs εισάγονται στην αρχή της λίστας Tabs στη γραμμή Setup και όχι στο τέλος.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εκτός του τομέα του Salesforce, σας μεταφέρει αυτόματα στη σελίδα σύνδεσης του Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εντός ενός τομέα Salesforce, αλλά όχι σε μια σελίδα ρύθμισης, σας μεταφέρει αυτόματα στη σελίδα ρύθμισης του Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Όταν είναι ενεργοποιημένο, οι Tabs σας διατηρούνται σε ταξινομημένη σειρά—είτε με ετικέτα, URL ή Org. ανάλογα με το τι θα επιλέξετε.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Καρφιτσώνει τις αποθηκευμένες Tabs σας πριν από το τυπικό μενού πλοήγησης (Home / Object Manager) στο Setup, αντί για μετά από αυτό.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Όταν είναι ενεργοποιημένο, κάθε αποθηκευμένη Tab θα ανοίγει τη σχετική σελίδα σε μια νέα Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Καταστέλλει την αυτόματη εμφάνιση ειδοποιήσεων σημειώσεων έκδοσης μετά την ενημέρωση της επέκτασης.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Απενεργοποιεί τα περιοδικά αναδυόμενα παράθυρα υπενθύμισης ενημέρωσης, διατηρώντας καθαρή τη διεπαφή χρήστη της επέκτασης (όταν έχετε απενεργοποιήσει τις αυτόματες ενημερώσεις της επέκτασης από τις ρυθμίσεις του προγράμματος περιήγησής σας).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εκτός του τομέα του Salesforce, η σελίδα σύνδεσης θα ανοίξει στην τρέχουσα Tab του προγράμματος περιήγησης.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εντός ενός τομέα Salesforce, αλλά όχι σε μια σελίδα ρύθμισης, η σελίδα ρύθμισης του Salesforce θα ανοίξει στην τρέχουσα Tab του προγράμματος περιήγησης.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Ορίστε τη γλώσσα διεπαφής χρήστη μόνο για την επέκταση. Εάν κάτι δεν έχει μεταφραστεί, θα χρησιμοποιηθεί η αγγλική έκδοση.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Απενεργοποιεί τη βασική συλλογή τηλεμετρίας. Η επέκταση δεν θα εμφανίζεται στις ανώνυμες μετρήσεις χρήσης.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Παρακάμπτει το API Lightning Navigation και ανοίγει συνδέσμους μέσω πλήρους επαναφόρτωσης σελίδας, κάτι που μπορεί να είναι ταχύτερο σε ορισμένες ρυθμίσεις οργανισμού.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Απενεργοποιεί τον έλεγχο της επέκτασης που επαληθεύει ότι ένα τμήμα URL ταιριάζει με τη μορφή αναγνωριστικών εγγραφής/αντικειμένου Salesforce (χρησιμοποιείται για αυτόματη ρύθμιση του αποθηκευμένου Tab ως Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Εισαγωγή",
 		"description": "[αναδυόμενο-παράθυρο] κουμπί εισαγωγής"
@@ -539,6 +631,14 @@
 		"message": "Άνοιγμα Setup",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη σε σελίδα Salesforce Setup"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Προσθήκη νέων Tabs ως Org Tabs.",
+		"description": "[settings] επιτρέπει στον χρήστη να προσθέτει όλες τις νέες Tabs ως ειδικές για τον οργανισμό"
+	},
+	"opt_add_tabs_front": {
+		"message": "Προσθήκη νέων Tabs μπροστά.",
+		"description": "[settings] επιτρέπει στον χρήστη να προσθέτει όλες τις νέες Tabs μπροστά"
+	},
 	"opt_automatic_open_login": {
 		"message": "Αυτόματο άνοιγμα της σελίδας $salesforce_login όταν κάνετε κλικ στο αναδυόμενο παράθυρο ενώ δεν βρίσκεστε σε σελίδα Salesforce.",
 		"description": "[ρύθμιση] όταν ο χρήστης ανοίγει το αναδυόμενο παράθυρο ενώ βρίσκεται σε έναν τυχαίο ιστότοπο"
@@ -547,9 +647,17 @@
 		"message": "Αυτόματο άνοιγμα της σελίδας $salesforce_setup όταν κάνετε κλικ στο αναδυόμενο παράθυρο ενώ βρίσκεστε σε σελίδα Salesforce.",
 		"description": "[ρύθμιση] όταν ο χρήστης ανοίγει το αναδυόμενο παράθυρο ενώ βρίσκεται σε έναν ιστότοπο Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Οι ρυθμίσεις αποθηκεύτηκαν!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Προεπιλογή και Εφεδρικό)",
 		"description": "Προεπιλεγμένη επιλογή γλώσσας της επέκτασης"
+	},
+	"opt_keep_sort": {
+		"message": "Διατήρηση των Tabs ταξινομημένων.",
+		"description": "[setting] επιτρέπει στον χρήστη να διατηρεί τις Tabs του ταξινομημένες με βάση ένα από τα κλειδιά τους"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Διατήρηση αγαπημένων Tabs στα αριστερά της Αρχικής σελίδας και του Διαχειριστή Αντικειμένων.",
@@ -579,13 +687,17 @@
 		"message": "Επιλέξτε γλώσσα επέκτασης",
 		"description": "[ρύθμιση] ετικέτα για να ζητήσετε από τον χρήστη να επιλέξει την προτιμώμενη γλώσσα του"
 	},
+	"opt_pick_sort": {
+		"message": "Επιλέξτε με ποιο πεδίο θα πρέπει να ταξινομούνται οι Tabs",
+		"description": "[setting] τώρα ο χρήστης μπορεί να επιλέξει με ποιο κλειδί θα διατηρεί τις Tabs ταξινομημένες"
+	},
 	"opt_prevent_analytics": {
 		"message": "Αποτροπή χρήσης του Simple Analytics (δεν καταμετράται στους χρήστες).",
 		"description": "[ρύθμιση] επιτρέπει στον χρήστη να αποτρέψει την αποστολή ανώνυμων αναλύσεων"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Αποτροπή χρήσης της πλοήγησης Lightning (ταχύτερη φόρτωση όταν χρησιμοποιείται).",
-		"description": "[ρύθμιση] να μην επιτρέπεται η πλοήγηση Lightning με επεξήγηση της λειτουργίας"
+		"message": "Αποτροπή χρήσης του Lightning Navigation (ταχύτερη φόρτωση όταν δεν είναι επιλεγμένο).",
+		"description": "[setting] δεν επιτρέπεται το Lightning Navigation με επεξήγηση της λειτουργίας"
 	},
 	"opt_same_tab_popup": {
 		"message": "σελίδα στην ίδια καρτέλα κατά το κλικ στο αναδυόμενο παράθυρο.",

@@ -30,7 +30,7 @@ export default class Tab {
 	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
 	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
 	 */
-	constructor(label, url, org = undefined, secret) {
+	constructor(label, url, org = undefined, secret = null) {
 		if (secret !== _tabSecret) {
 			throw new Error("error_tab_constructor");
 		}
@@ -184,7 +184,7 @@ export default class Tab {
 	 * SetupOneHome/home
 	 */
 	static expandURL(url = null, baseUrl = null) {
-		if (baseUrl == null || !baseUrl.startsWith(HTTPS)) {
+		if (!baseUrl?.startsWith(HTTPS)) {
 			throw new Error("error_expand_url_no_base");
 		}
 		if (url == null || url === "") {
@@ -273,7 +273,8 @@ export default class Tab {
 		try {
 			Tab.create(tab);
 			return true;
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			// error on creation of tab
 			return false;
 		}
@@ -345,7 +346,7 @@ export default class Tab {
 	}
 
 	/**
-	 * Update a Tab based on the options passed.
+	 * Update a Tab based on the options passed. YOU MUST take care of syncing after updating the Tab
 	 * @param {Object} tab - an Object containing the following data
 	 * @param {*} tab.label - the new label for the Tab
 	 * @param {*} tab.url - the new url for the Tab
@@ -356,10 +357,10 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return this;
 		}
-		if (label != null) {
+		if (label != null && label !== "") {
 			this.label = label;
 		}
-		if (url != null) {
+		if (url != null && url !== "") {
 			this.url = Tab.minifyURL(url);
 		}
 		if (org != null) {
@@ -384,10 +385,11 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return tabToUpdate;
 		}
+		const orginput = org !== "" ? org : undefined;
 		return Tab.create(
 			label ?? tabToUpdate.label,
 			url ?? tabToUpdate.url,
-			org != null ? (org !== "" ? org : undefined) : tabToUpdate.org,
+			org != null ? orginput : tabToUpdate.org,
 		);
 	}
 

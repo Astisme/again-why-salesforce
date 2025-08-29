@@ -3,6 +3,10 @@
 		"message": "Benarkan",
 		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"
 	},
+	"ascending": {
+		"message": "Menaik (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Tersedia",
 		"description": "Tajuk bahagian untuk item yang boleh ditambah"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "सेटिंग्ज मेनूसाठी लेबल"
 	},
+	"cxm_sort": {
+		"message": "🎯 Isiharkan Tab",
+		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka secara automatik (menu induk)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 mengikut Label",
+		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka mengikut label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 mengikut Org",
+		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka mengikut org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 mengikut Url",
+		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka mengikut url"
+	},
 	"cxm_update": {
 		"message": "✏️ Kemas kini Tab",
 		"description": "[menu-konteks]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete सर्व Tabs",
 		"description": "[पॉपअप] सर्व Tabs रिकामे करण्यासाठी बिनवरील शीर्षक"
+	},
+	"descending": {
+		"message": "Menurun (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Lepaskan",
@@ -351,6 +375,10 @@
 		"message": "Ralat semasa menetapkan semula Tab lalai.",
 		"description": "[ralat] Ralat umum semasa menetapkan semula Tab kepada lalai"
 	},
+	"error_sorting_tabs": {
+		"message": "Ralat semasa mengisih Tab",
+		"description": "[error] ditunjukkan dalam mesej pemberitahuan"
+	},
 	"error_sync_nothing": {
 		"message": "Tidak dapat menyegerakkan Tab nol (null)!",
 		"description": "[ralat] cuba menyegerakkan tiada apa-apa"
@@ -455,6 +483,70 @@
 		"message": "Umum",
 		"description": "Label untuk kategori tetapan umum"
 	},
+	"help": {
+		"message": "Bantuan",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Menandakan Tab baharu sebagai Tab Org, jadi ia kelihatan hanya apabila log masuk ke Salesforce Org yang tertentu.",
+		"description": "[settings-help] untuk $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tab yang baru difavoritkan disisipkan di bahagian hadapan senarai Tab anda di bar persediaan dan bukannya ditambahkan di hujung.",
+		"description": "[settings-help] untuk $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Jika anda mengklik pop timbul sambungan di luar domain Salesforce, anda akan dibawa ke halaman log masuk Salesforce secara automatik.",
+		"description": "[settings-help] untuk $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Jika anda mengklik pop timbul sambungan di dalam domain Salesforce tetapi bukan pada halaman Persediaan, anda akan dibawa ke halaman Persediaan Salesforce secara automatik.",
+		"description": "[settings-help] untuk $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Apabila diaktifkan, Tab anda akan disusun mengikut label, URL atau Org; bergantung pada pilihan anda.",
+		"description": "[settings-help] untuk $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Menyematkan Tab anda yang disimpan sebelum menu navigasi standard (Laman Utama / Pengurus Objek) dalam Persediaan, dan bukannya selepasnya.",
+		"description": "[settings-help] untuk $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Apabila diaktifkan, setiap Tab yang disimpan akan membuka halaman berkaitan dalam Tab baharu.",
+		"description": "[settings-help] untuk $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Menyekat paparan automatik pemberitahuan nota keluaran selepas sambungan dikemas kini.",
+		"description": "[settings-help] untuk $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Melumpuhkan pop timbul peringatan kemas kini berkala, memastikan UI sambungan bersih (apabila anda telah melumpuhkan kemas kini automatik sambungan daripada tetapan pelayar anda).",
+		"description": "[settings-help] untuk $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Jika anda mengklik pop timbul sambungan di luar domain Salesforce, halaman log masuk akan dibuka dalam Tab pelayar semasa.",
+		"description": "[settings-help] untuk $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Jika anda mengklik pop timbul sambungan di dalam domain Salesforce tetapi bukan pada halaman Persediaan, halaman Persediaan Salesforce akan dibuka dalam Tab pelayar semasa.",
+		"description": "[settings-help] untuk $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Tetapkan bahasa UI untuk sambungan sahaja. Jika sesuatu belum diterjemahkan, versi bahasa Inggeris akan digunakan sebagai gantinya.",
+		"description": "[settings-help] untuk $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Melumpuhkan pengumpulan telemetri asas. Sambungan tidak akan muncul dalam metrik penggunaan tanpa nama.",
+		"description": "[settings-help] untuk $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Memintas API Navigasi Lightning dan membuka pautan melalui muat semula halaman penuh, yang boleh menjadi lebih pantas dalam beberapa persediaan org.",
+		"description": "[settings-help] untuk $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Melumpuhkan semakan sambungan yang mengesahkan bahawa fragmen URL sepadan dengan format ID rekod/objek Salesforce (digunakan untuk menetapkan Tab yang disimpan sebagai Tab Org secara automatik).",
+		"description": "[settings-help] untuk $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] butang import"
@@ -539,6 +631,14 @@
 		"message": "Buka Persediaan",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman Persediaan Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Tambah Tab baharu sebagai Tab Org.",
+		"description": "[settings] benarkan pengguna menambah semua Tab baharu sebagai khusus org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Tambah Tab baharu di hadapan.",
+		"description": "[settings] benarkan pengguna menambah semua Tab baharu di hadapan"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce पृष्ठावर नसताना पॉपअपवर क्लिक केल्यावर $salesforce_login पृष्ठ स्वयंचलितपणे उघडा.",
 		"description": "[सेटिंग] जेव्हा वापरकर्ता यादृच्छिक वेबसाइटवर असताना पॉपअप उघडतो"
@@ -547,9 +647,17 @@
 		"message": "Salesforce पृष्ठावर असताना पॉपअपवर क्लिक केल्यावर $salesforce_setup पृष्ठ स्वयंचलितपणे उघडा.",
 		"description": "[सेटिंग] जेव्हा वापरकर्ता Salesforce वेबसाइटवर असताना पॉपअप उघडतो"
 	},
+	"opt_confirm_save": {
+		"message": "Tetapan telah disimpan!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Default dan Fallback)",
 		"description": "Pilihan bahasa lalai sambungan"
+	},
+	"opt_keep_sort": {
+		"message": "Pastikan Tab diisih.",
+		"description": "[setting] benarkan pengguna memastikan Tab mereka diisih mengikut salah satu kekunci mereka"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Kekalkan Tab kegemaran di sebelah kiri Home dan Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "Pilih bahasa sambungan",
 		"description": "[tetapan] label untuk menggesa pengguna memilih bahasa pilihan mereka"
 	},
+	"opt_pick_sort": {
+		"message": "Pilih medan yang perlu digunakan untuk mengisih Tab",
+		"description": "[setting] kini pengguna boleh memilih kunci yang perlu digunakan untuk memastikan Tab diisih"
+	},
 	"opt_prevent_analytics": {
 		"message": "Halang penggunaan Simple Analytics (tidak termasuk dalam kiraan pengguna).",
 		"description": "[tetapan] benarkan pengguna menghalang penghantaran analitik tanpa nama"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih cepat apabila digunakan).",
-		"description": "[tetapan] jangan benarkan Navigasi Lightning dengan penjelasan ciri"
+		"message": "Cegah penggunaan Navigasi Lightning (pemuatan lebih pantas apabila tidak ditandakan).",
+		"description": "[setting] jangan benarkan Navigasi Lightning dengan penjelasan ciri"
 	},
 	"opt_same_tab_popup": {
 		"message": "halaman dalam tab yang sama apabila mengklik popup.",

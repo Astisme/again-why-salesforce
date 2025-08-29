@@ -4,6 +4,7 @@ const WHY_KEY = "againWhySalesforce";
 const LOCALE_KEY = "_locale";
 const SETTINGS_KEY = "settings";
 const USER_LANGUAGE = "picked-language";
+const PERSIST_SORT = "persist_sort";
 
 export interface MockStorage {
 	tabs: Tab[];
@@ -37,7 +38,7 @@ export const mockBrowser = {
 						response[key] = mockStorage[key];
 					}
 				});
-				return new Promise((resolve, _) => resolve(response));
+				return Promise.resolve(response);
 			},
 			// deno-lint-ignore require-await
 			set: async (data: { tabs: any[] }): Promise<boolean> => {
@@ -90,6 +91,9 @@ export const mockBrowser = {
 					switch (message.keys) {
 						case USER_LANGUAGE:
 							response = language;
+							break;
+						case PERSIST_SORT:
+							response = null;
 							break;
 						default:
 							setError(

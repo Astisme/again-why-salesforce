@@ -3,6 +3,10 @@
 		"message": "Pahintulutan",
 		"description": "[req_permission] button para pahintulutan ang mga pahintulot"
 	},
+	"ascending": {
+		"message": "Pataas (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Magagamit",
 		"description": "Pamagat ng seksyon para sa mga item na maaaring idagdag"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Label para sa menu ng mga setting"
 	},
+	"cxm_sort": {
+		"message": "🎯 I-sort ang mga Tabs",
+		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs nang awtomatiko (parent menu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ayon sa Label",
+		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs ayon sa label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 ayon sa Org",
+		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs ayon sa org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 ayon sa Url",
+		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs ayon sa url"
+	},
 	"cxm_update": {
 		"message": "✏️ I-update ang Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete lahat ng Tabs",
 		"description": "[popup] pamagat sa basurahan para alisan ng laman ang lahat ng Tabs"
+	},
+	"descending": {
+		"message": "Pababa (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Error sa pag-reset sa default na Tab.",
 		"description": "[error] Pangkalahatang error na ginagamit habang nirereset ang Tab sa kanilang default"
 	},
+	"error_sorting_tabs": {
+		"message": "Error habang sinu-sort ang mga Tabs",
+		"description": "[error] na ipinapakita sa isang toast message"
+	},
 	"error_sync_nothing": {
 		"message": "Hindi ma-sync ang mga null na Tab!",
 		"description": "[error] sinubukang i-synchronize ang wala"
@@ -455,6 +483,70 @@
 		"message": "Pangkalahatan",
 		"description": "Label para sa kategorya ng pangkalahatang mga setting"
 	},
+	"help": {
+		"message": "Tulong",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Minamarkahan ang mga bagong Tabs bilang Org Tabs, kaya makikita lang ang mga ito kapag naka-log in sa partikular na Salesforce Org na iyon.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Ang mga bagong paboritong Tabs ay ipinapasok sa harap ng iyong Tab list sa Setup bar sa halip na idinidagdag sa dulo.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Kung iki-click mo ang extension popup sa labas ng Salesforce domain, dadalhin ka nito sa Salesforce login page nang awtomatiko.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Kung iki-click mo ang extension popup sa loob ng Salesforce domain pero hindi sa isang Setup page, dadalhin ka nito sa Salesforce Setup page nang awtomatiko.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Kapag naka-enable, pinapanatiling naka-sort order ang iyong mga Tabs—sa pamamagitan ng label, URL o Org; depende sa pipiliin mo.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Ipi-pin ang iyong mga na-save na Tabs bago ang standard navigation menu (Home / Object Manager) sa Setup, sa halip na pagkatapos nito.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Kapag naka-enable, bubuksan ng bawat na-save na Tab ang kaugnay na page sa isang bagong Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Sinisira ang awtomatikong pagpapakita ng mga release note notification pagkatapos mag-update ang extension.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Dine-disable ang mga periodic update reminder popup, na pinapanatiling malinis ang UI ng extension (kapag dine-disable mo ang mga awtomatikong update ng extension mula sa mga setting ng iyong browser).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Kung iki-click mo ang extension popup sa labas ng Salesforce domain, bubuksan ang login page sa kasalukuyang Tab ng browser.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Kung iki-click mo ang extension popup sa loob ng Salesforce domain pero hindi sa isang Setup page, bubuksan ang Salesforce Setup page sa kasalukuyang Tab ng browser.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Itakda ang wika ng UI para sa extension lang. Kung may hindi pa naisasalin, gagamitin ang bersyon sa English sa halip.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Dine-disable ang basic telemetry collection. Hindi lalabas ang extension sa mga anonymous usage metric.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Dina-bypass ang Lightning Navigation API at binubuksan ang mga link sa pamamagitan ng full-page reload, na maaaring mas mabilis sa ilang set-up ng org.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Dine-disable ang pag-check ng extension na nagbe-verify na tumutugma ang isang URL fragment sa format ng mga ID ng record/object ng Salesforce (ginagamit para awtomatikong itakda ang na-save na Tab bilang isang Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "I-import",
 		"description": "[popup] button ng pag-import"
@@ -539,6 +631,14 @@
 		"message": "Buksan ang Setup",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce Setup page"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Magdagdag ng mga bagong Tabs bilang Org Tabs.",
+		"description": "[settings] hayaan ang user na magdagdag ng lahat ng bagong Tabs bilang partikular sa org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Magdagdag ng mga bagong Tabs sa harap.",
+		"description": "[settings] hayaan ang user na magdagdag ng lahat ng bagong Tabs sa harap"
+	},
 	"opt_automatic_open_login": {
 		"message": "Awtomatikong buksan ang $salesforce_login page kapag nag-click sa popup habang wala sa Salesforce page.",
 		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang random na website"
@@ -547,9 +647,17 @@
 		"message": "Awtomatikong buksan ang $salesforce_setup page kapag nag-click sa popup habang nasa Salesforce page.",
 		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang Salesforce website"
 	},
+	"opt_confirm_save": {
+		"message": "Nai-save ang mga setting!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Default at Fallback)",
 		"description": "Default na opsyon ng wika ng extension"
+	},
+	"opt_keep_sort": {
+		"message": "Panatilihing naka-sort ang mga Tabs.",
+		"description": "[setting] payagan ang user na panatilihing naka-sort ang kanilang mga Tabs ayon sa isa sa kanilang mga key"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Panatilihin ang paboritong Tabs sa kaliwa ng Home at Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "Pumili ng wika ng extension",
 		"description": "[setting] label upang hilingin sa gumagamit na piliin ang kanilang gustong wika"
 	},
+	"opt_pick_sort": {
+		"message": "Pumili kung saang field dapat i-sort ang mga Tabs",
+		"description": "[setting] ngayon ay maaaring pumili ang user kung saang key pananatilihing naka-sort ang mga Tabs"
+	},
 	"opt_prevent_analytics": {
 		"message": "Pigilan ang paggamit ng Simple Analytics (hindi lalabas sa bilang ng mga user).",
 		"description": "[setting] pinapayagan ang user na pigilan ang pagpapadala ng anonymous analytics"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag ginagamit).",
-		"description": "[setting] huwag payagan ang Lightning Navigation na may paliwanag ng feature"
+		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag hindi naka-check).",
+		"description": "[setting] huwag payagan ang Lightning Navigation na may paliwanag sa feature"
 	},
 	"opt_same_tab_popup": {
 		"message": "buksan ang pahina sa parehong tab kapag na-click ang popup.",

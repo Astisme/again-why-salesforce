@@ -3,6 +3,10 @@
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
 	},
+	"ascending": {
+		"message": "Ascending (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Available",
 		"description": "Section header for items that can be added"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Label for the settings menu"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sort Tabs",
+		"description": "context menu to let users sort their Tabs automatically (parent menu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 by Label",
+		"description": "context menu to let users sort their Tabs by label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 by Org",
+		"description": "context menu to let users sort their Tabs by org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 by Url",
+		"description": "context menu to let users sort their Tabs by url"
+	},
 	"cxm_update": {
 		"message": "✏️ Update Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete all Tabs",
 		"description": "[popup] title on the bin to empty all Tabs"
+	},
+	"descending": {
+		"message": "Descending (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Error when resetting to default Tabs.",
 		"description": "[error] Generic error used while resetting the Tabs to their default"
 	},
+	"error_sorting_tabs": {
+		"message": "Error while sorting the Tabs",
+		"description": "[error] shown in a toast message"
+	},
 	"error_sync_nothing": {
 		"message": "Cannot sync null Tabs!",
 		"description": "[error] tried to synchronize nothing"
@@ -454,6 +482,70 @@
 		"message": "General",
 		"description": "Label for the general settings category"
 	},
+	"help": {
+		"message": "Help",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marks new Tabs as Org Tabs, so they're visible only when logged into that particular Salesforce Org's.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Newly favorited Tabs are inserted at the front of your Tab list in the Setup bar rather than appended at the end.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "If you click the extension popup outside of a Salesforce domain, takes you to the Salesforce login page automatically.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "If you click the extension popup inside of a Salesforce domain but not on a Setup page, takes you to the Salesforce Setup page automatically.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "When enabled, your Tabs are kept in sorted order—either by label, URL or Org; depending on what you pick.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pins your saved Tabs before the standard navigation menu (Home / Object Manager) in Setup, instead of after it.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "When enabled, every saved Tab will open the related page in a new tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Suppresses the automatic display of release note notifications after the extension updates.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Disables periodic update reminder popups, keeping the extension UI clean (when you've disabled automatic updates of the extension from your browser's settings).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "If you click the extension popup outside of a Salesforce domain, the login page will be opened in the current browser tab.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "If you click the extension popup inside of a Salesforce domain but not on a Setup page, the Salesforce Setup page will be opened in the current browser tab.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Set the UI language for the extension only. If something hasn't been translated, the english version will be used instead.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Disables basic telemetry collection. The extension won’t appear in anonymous usage metrics.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Bypasses the Lightning Navigation API and opens links via full-page reload, which can be faster in some org setups.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Disables the extension check verifying that a URL fragment matches the format of Salesforce record/object IDs (used to automatically set the saved Tab as an Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] import button"
@@ -538,6 +630,14 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_setup page"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Add new Tabs as Org Tabs.",
+		"description": "[settings] let the user add all new Tabs as org-specific"
+	},
+	"opt_add_tabs_front": {
+		"message": "Add new Tabs in front.",
+		"description": "[settings] let the user add all new Tabs in front"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatically open $salesforce_login page when clicking on the popup while not on a Salesforce page.",
 		"description": "[setting] when the user opens the popup while on a random website"
@@ -546,9 +646,17 @@
 		"message": "Automatically open $salesforce_setup page when clicking on the popup while on a Salesforce page.",
 		"description": "[setting] when the user opens the popup while on a Salesforce website"
 	},
+	"opt_confirm_save": {
+		"message": "Settings were saved!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Default and Fallback)",
 		"description": "Default language option of the extension"
+	},
+	"opt_keep_sort": {
+		"message": "Keep Tabs sorted.",
+		"description": "[setting] allow the user to keep their Tabs sorted by one of their keys"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Keep favourite Tabs on the left of Home and Object Manager.",
@@ -578,12 +686,16 @@
 		"message": "Pick extension language",
 		"description": "[setting] label to propt the user to pick their preferred language"
 	},
+	"opt_pick_sort": {
+		"message": "Pick by which field should the Tabs be sorted",
+		"description": "[setting] now the user can pick by which key to keep the Tabs sorted by"
+	},
 	"opt_prevent_analytics": {
 		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
 		"description": "[setting] let the user prevent them from sending anonymous analytics"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Prevent use of Lightning Navigation (faster loading when in use).",
+		"message": "Prevent use of Lightning Navigation (faster loading when unchecked).",
 		"description": "[setting] do not allow Lightning Navigation with explanation of feature"
 	},
 	"opt_same_tab_popup": {
