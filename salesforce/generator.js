@@ -317,9 +317,9 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	) {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const toastType = isSuccess
-		? (isWarning ? "info" : "success")
-		: (isWarning ? "warning" : "error");
+    const successType = isWarning ? "info" : "success";
+    const errorType = isWarning ? "warning" : "error";
+    const toastType = isSuccess ? successType : errorType;
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
