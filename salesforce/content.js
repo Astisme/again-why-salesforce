@@ -608,6 +608,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		lastInput = value;
 	});
+    let lastExtracted = null;
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const linkTarget = getSelectedRadioButtonValue();
@@ -615,10 +616,9 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		if (inputVal == null || inputVal === "") {
 			return showToast(["insert_another", "org_link"], false, true);
 		}
-		let alreadyExtracted = false;
 		const newTarget = Tab.extractOrgName(inputVal);
-		if (alreadyExtracted) return; // could be called more than once
-		alreadyExtracted = true;
+		if (lastExtracted === newTarget) return; // could be called more than once
+        lastExtracted = newTarget;
 		if (
 			!newTarget.match(
 				SALESFORCE_URL_PATTERN,
