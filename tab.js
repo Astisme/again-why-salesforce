@@ -184,7 +184,7 @@ export default class Tab {
 	 * SetupOneHome/home
 	 */
 	static expandURL(url = null, baseUrl = null) {
-		if (baseUrl == null || !baseUrl.startsWith(HTTPS)) {
+		if (!baseUrl?.startsWith(HTTPS)) {
 			throw new Error("error_expand_url_no_base");
 		}
 		if (url == null || url === "") {
