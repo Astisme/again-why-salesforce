@@ -323,12 +323,10 @@ function listenToExtensionMessages() {
 			case "warning":
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
-				//return false; // we won"t call sendResponse
 				break;
 			case "export":
 				checkLaunchExport(request.tabs);
 				sendResponse(null);
-				//return false;
 				break;
 			case "browser-tab":
 				bg_getCurrentBrowserTab(sendResponse);
