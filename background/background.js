@@ -109,65 +109,73 @@ export async function bg_getSettings(
 }
 
 /**
- * Stores the provided tabs data in the browser"s storage and invokes the callback.
+ * Finds the already stored settings and merges them with the new ones passed as input by matching them with the id field
  *
- * @param {Array} tabs - The tabs to store.
+ * @param {Array} newsettings - The settings to be stored
+ * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
+ */
+async function mergeSettings(newsettings, key = SETTINGS_KEY){
+    // get the settings array
+    const isStyleKey = key === GENERIC_TAB_STYLE_KEY || key === ORG_TAB_STYLE_KEY;
+    const settingsArray = !isStyleKey ? await bg_getSettings() : await bg_getSettings(null, key);
+    if (settingsArray == null)
+        return newsettings;
+    for (const item of newsettings) {
+        // check if the item.id is already present
+        const existingItems = settingsArray.filter((setting) =>
+            setting.id === item.id &&
+            (
+                !isStyleKey ||
+                (
+                    setting.forActive == null ||
+                    setting.forActive === item.forActive
+                )
+            )
+        );
+        if (existingItems.length <= 0) {
+            // add the new setting
+            settingsArray.push(item);
+            continue;
+        }
+        if(isStyleKey){
+            if (item.value == null || item.value === "") {
+                // the item has been removed
+                existingItems.forEach((el) => {
+                    const index = settingsArray.indexOf(el);
+                    if (index >= 0) {
+                        settingsArray.splice(index, 1);
+                    }
+                });
+            } else {
+                // the item has been updated
+                existingItems.forEach((existing) =>
+                    existing.value = item.value
+                );
+            }
+        } else {
+            // update the object reference (inside the settingsArray)
+            existingItems.forEach((existing) =>
+                Object.assign(existing, item)
+            );
+        }
+    }
+    return settingsArray;
+}
+
+/**
+ * Stores the provided tabs data in the browser's storage and invokes the callback.
+ *
+ * @param {Array} tobeset - The object to be stored
  * @param {function} callback - The callback to execute after storing the data.
+ * @param {string} [key=WHY_KEY] - The key of the map where to store the tobeset array
  */
 export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
 	switch (key) {
-		case SETTINGS_KEY: {
-			// get the settings array
-			const settingsArray = await bg_getSettings();
-			if (settingsArray != null) {
-				for (const item of tobeset) {
-					// check if the item.id is already present
-					const existingItems = settingsArray.filter((setting) =>
-						setting.id === item.id
-					);
-					if (existingItems.length > 0) {
-						existingItems.forEach((existing) =>
-							Object.assign(existing, item)
-						);
-					} else {
-						settingsArray.push(item);
-					}
-				}
-			}
-			set[SETTINGS_KEY] = settingsArray ?? tobeset;
-			break;
-		}
+		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
-			const settingsArray = await bg_getSettings(null, key);
-			if (settingsArray != null) {
-				for (const item of tobeset) {
-					// check if the item.id is already present
-					const existingItems = settingsArray.filter((setting) =>
-						setting.id === item.id &&
-						(setting.forActive == null ||
-							setting.forActive === item.forActive)
-					);
-					if (existingItems.length > 0) {
-						if (item.value == null || item.value === "") { // the item has been removed
-							existingItems.forEach((el) => {
-								const index = settingsArray.indexOf(el);
-								if (index >= 0) {
-									settingsArray.splice(index, 1);
-								}
-							});
-						} else {
-							existingItems.forEach((existing) =>
-								existing.value = item.value
-							);
-						}
-					} else {
-						settingsArray.push(item);
-					}
-				}
-			}
-			set[key] = settingsArray ?? tobeset;
+			set[key] = mergeSettings(tobeset, key);
 			break;
 		}
 		default:
