@@ -22,8 +22,9 @@ const interval = setInterval(() => {
 	try {
 		allTabs = getAllTabs();
 		clearInterval(interval);
-	} catch (_) {
+	} catch (e) {
 		// wait next interval
+        console.info(e);
 	}
 }, 100);
 
