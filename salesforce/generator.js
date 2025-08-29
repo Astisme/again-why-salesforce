@@ -145,80 +145,103 @@ function wereSettingsUpdated(settings) {
  * @returns {Promise<void>} Resolves once styles are updated.
  */
 export async function generateStyleFromSettings() {
+    /**
+     * Processes a style list by building CSS and appending to document head.
+     * @param {Array} styleList - Array of style elements to process
+     * @param {boolean} isGeneric - Whether this is for generic tab styles
+     */
+    function processStyleList(styleList, isGeneric) {
+        /**
+         * Gets existing style element or creates a new one.
+         * @param {boolean} isGeneric - Whether this is for generic tab styles
+         * @returns {HTMLStyleElement} The style element
+         */
+        function getOrCreateStyleElement(isGeneric) {
+            const styleId = `${EXTENSION_NAME}-${isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY}`;
+            const existingStyle = document.getElementById(styleId);
+            if (existingStyle != null) {
+                existingStyle.textContent = "";
+                return existingStyle;
+            }
+            const style = document.createElement("style");
+            style.id = styleId;
+            return style;
+        }
+        /**
+         * Builds CSS rules for active/inactive tabs and separates pseudo rules.
+         * @param {Array} styleList - Array of style elements
+         * @param {boolean} isGeneric - Whether this is for generic tab styles
+         * @returns {Object} Object containing activeCss, inactiveCss, and pseudoRules
+         */
+        function buildCssRules(styleList, isGeneric) {
+            /**
+             * Checks if a style ID requires pseudo-selector handling.
+             * @param {string} id - The style ID to check
+             * @returns {boolean} True if this is a pseudo rule
+             */
+            function isPseudoRule(id) {
+                return id === TAB_STYLE_HOVER || id === TAB_STYLE_TOP;
+            }
+            let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
+            let activeCss = `${getCssSelector(false, isGeneric)} {`;
+            const pseudoRules = [];
+            for(const element of styleList){
+                if (isPseudoRule(element.id)) {
+                    pseudoRules.push(element);
+                    return;
+                }
+                const rule = getCssRule(element.id, element.value);
+                if (element.forActive) {
+                    activeCss += rule;
+                } else {
+                    inactiveCss += rule;
+                }
+            };
+        }
+        /**
+         * Appends pseudo-selector rules to the style element.
+         * @param {HTMLStyleElement} style - The style element to append to
+         * @param {Array} pseudoRules - Array of pseudo rules to process
+         * @param {boolean} isGeneric - Whether this is for generic tab styles
+         */
+        function appendPseudoRules(style, pseudoRules, isGeneric) {
+            /**
+             * Maps style IDs to their corresponding pseudo-selectors.
+             * @param {string} id - The style ID
+             * @returns {string} The pseudo-selector string
+             */
+            function getPseudoSelector(id) {
+                switch (id) {
+                    case TAB_STYLE_HOVER: return ":hover";
+                    case TAB_STYLE_TOP: return "::before";
+                    default: return "";
+                }
+            }
+            for (const rule of pseudoRules) {
+                const pseudoSelector = getPseudoSelector(rule.id);
+                const selector = getCssSelector(!rule.forActive, isGeneric, pseudoSelector);
+                style.textContent += `${selector}{ ${getCssRule(rule.id, rule.value)} }`;
+            }
+        }
+        const style = getOrCreateStyleElement(isGeneric);
+        const { activeCss, inactiveCss, pseudoRules } = buildCssRules(styleList);
+        style.textContent = `${inactiveCss} } ${activeCss} }`;
+        appendPseudoRules(style, pseudoRules, isGeneric);
+        document.head.appendChild(style);
+    }
 	const settings = await getAllStyleSettings();
-	if (settings == null) {
-		return;
-	}
-	const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
-	const orgStyleList = settings[ORG_TAB_STYLE_KEY];
-	if (!wereSettingsUpdated(settings)) {
+	if (settings == null || !wereSettingsUpdated(settings)) {
 		return;
 	}
 	oldSettings = settings;
-	for (let i = 0; i < 2; i++) {
-		const styleList = i === 0 ? genericStyleList : orgStyleList;
-		if (styleList == null) {
-			continue;
+	const styleLists = [
+		{ list: settings[GENERIC_TAB_STYLE_KEY], isGeneric: true },
+		{ list: settings[ORG_TAB_STYLE_KEY], isGeneric: false }
+	];
+	for (const { list: styleList, isGeneric } of styleLists) {
+		if (styleList?.length > 0) {
+			processStyleList(styleList, isGeneric);
 		}
-		if (styleList.length === 0) {
-			return;
-		}
-		const isGeneric = styleList === genericStyleList;
-		let style = null;
-		{
-			const styleId = `${EXTENSION_NAME}-${
-				isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY
-			}`;
-			const oldStyle = document.getElementById(styleId);
-			if (oldStyle != null) {
-				style = oldStyle;
-				style.textContent = "";
-			} else {
-				style = document.createElement("style");
-				style.id = styleId;
-			}
-		}
-		let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
-		let activeCss = `${getCssSelector(false, isGeneric)} {`;
-		const rulesWhichNeedPseudoSelector = [];
-		styleList
-			.forEach((element) => {
-				if (
-					element.id === TAB_STYLE_HOVER ||
-					element.id === TAB_STYLE_TOP
-				) {
-					rulesWhichNeedPseudoSelector.push(element);
-					return;
-				}
-				const rule = getCssRule(element.id, element.value);
-				if (element.forActive) {
-					activeCss += rule;
-				} else {
-					inactiveCss += rule;
-				}
-			});
-		style.textContent = `${inactiveCss} } ${activeCss} }`;
-		for (const el of rulesWhichNeedPseudoSelector) {
-			let elementPseudoSelector = "";
-			switch (el.id) {
-				case TAB_STYLE_HOVER:
-					elementPseudoSelector = ":hover";
-					break;
-				case TAB_STYLE_TOP:
-					elementPseudoSelector = "::before";
-					break;
-				default:
-					break;
-			}
-			style.textContent += `${
-				getCssSelector(
-					!el.forActive,
-					isGeneric,
-					elementPseudoSelector,
-				)
-			}{ ${getCssRule(el.id, el.value)} }`;
-		}
-		document.head.appendChild(style);
 	}
 }
 
