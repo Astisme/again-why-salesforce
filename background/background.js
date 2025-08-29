@@ -304,7 +304,7 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  */
 function listenToExtensionMessages() {
 	BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
-		if (request == null || request.what == null) {
+		if (request?.what == null) {
 			console.error({ error: "error_invalid_request", request });
 			sendResponse(null);
 			return false;
