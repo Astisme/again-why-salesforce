@@ -739,7 +739,6 @@ export async function generateSldsModal(modalTitle) {
 			modalTitle != null && modalTitle !== "" ? ": " + modalTitle : ""
 		}`,
 	);
-	//dialog.addEventListener("wheel", e => e.preventDefault());
 	modalParent.appendChild(dialog);
 	const modalContainer = document.createElement("div");
 	modalContainer.classList.add("modal-container", "slds-modal__container");
@@ -900,81 +899,6 @@ export async function generateSldsModal(modalTitle) {
 	actionsContainerDiv.classList.add("actionsContainer");
 	actionsContainerDiv.setAttribute("data-aura-rendered-by", "1149:0");
 	buttonContainerDiv.appendChild(actionsContainerDiv);
-	/*
-	const pageErrorDiv = document.createElement("div");
-	pageErrorDiv.classList.add("pageError", "hideEl");
-	pageErrorDiv.setAttribute("data-aura-rendered-by", "1150:0");
-	actionsContainerDiv.appendChild(pageErrorDiv);
-	const pageErrorIconDiv = document.createElement("div");
-	pageErrorIconDiv.classList.add("pageErrorIcon");
-	pageErrorIconDiv.setAttribute("data-aura-rendered-by", "1151:0");
-	pageErrorDiv.appendChild(pageErrorIconDiv);
-	const errorButton = document.createElement("button");
-	errorButton.classList.add(
-		"slds-button",
-		"slds-button_neutral",
-		"pageErrorIconButton",
-		"uiButton",
-	);
-	errorButton.setAttribute("aria-live", "off");
-	errorButton.setAttribute("type", "button");
-	errorButton.setAttribute("title", "Error");
-	errorButton.setAttribute("aria-label", "");
-	errorButton.setAttribute("data-aura-rendered-by", "1155:0");
-	errorButton.setAttribute("data-aura-class", "uiButton");
-	pageErrorIconDiv.appendChild(errorButton);
-	const lightningIcon = document.createElement("lightning-icon");
-	lightningIcon.classList.add(
-		"slds-icon-utility-warning",
-		"slds-icon_container",
-	);
-	lightningIcon.setAttribute("icon-name", "utility:warning");
-	lightningIcon.setAttribute("data-data-rendering-service-uid", "338");
-	lightningIcon.setAttribute("data-aura-rendered-by", "1153:0");
-	errorButton.appendChild(lightningIcon);
-	const spanElement = document.createElement("span");
-	spanElement.setAttribute(
-		"style",
-		"--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)",
-	);
-	spanElement.setAttribute("part", "boundary");
-	lightningIcon.appendChild(spanElement);
-	const lightningPrimitiveIcon = document.createElement(
-		"lightning-primitive-icon",
-	);
-	lightningPrimitiveIcon.setAttribute("exportparts", "icon");
-	lightningPrimitiveIcon.setAttribute("size", "x-small");
-	lightningPrimitiveIcon.setAttribute("variant", "error");
-	spanElement.appendChild(lightningPrimitiveIcon);
-	const svgElement = document.createElementNS(
-		"http://www.w3.org/2000/svg",
-		"svg",
-	);
-	svgElement.classList.add(
-		"slds-icon",
-		"slds-icon-text-error",
-		"slds-icon_x-small",
-	);
-	svgElement.setAttribute("focusable", "false");
-	svgElement.setAttribute("aria-hidden", "true");
-	svgElement.setAttribute("viewBox", "0 0 520 520");
-	svgElement.setAttribute("part", "icon");
-	lightningPrimitiveIcon.appendChild(svgElement);
-	const gElement = document.createElementNS(
-		"http://www.w3.org/2000/svg",
-		"g",
-	);
-	svgElement.appendChild(gElement);
-	const pathElement = document.createElementNS(
-		"http://www.w3.org/2000/svg",
-		"path",
-	);
-	pathElement.setAttribute(
-		"d",
-		"M514 425L285 55a28 28 0 00-50 0L6 425c-14 23 0 55 25 55h458c25 0 40-32 25-55zm-254-25c-17 0-30-13-30-30s13-30 30-30 30 13 30 30-13 30-30 30zm30-90c0 6-4 10-10 10h-40c-6 0-10-4-10-10V180c0-6 4-10 10-10h40c6 0 10 4 10 10v130z",
-	);
-	gElement.appendChild(pathElement);
-    */
 	const buttonContainerInnerDiv = document.createElement("div");
 	buttonContainerInnerDiv.classList.add("button-container-inner");
 	buttonContainerInnerDiv.setAttribute("data-aura-rendered-by", "1161:0");
@@ -1422,43 +1346,6 @@ export async function generateSldsFileInput(
 		}`;
 		fileSelectorLabel.appendChild(orDropFilesSpan);
 	}
-	/*
-        const helpTextDiv = document.createElement("div");
-    helpTextDiv.classList.add("slds-form-element__help");
-    helpTextDiv.setAttribute("data-name", "fileInput");
-    helpTextDiv.setAttribute("part", "help-text");
-    helpTextDiv.setAttribute("role", "status");
-    primitiveInputFile.appendChild(helpTextDiv);
-    const hiddenPlaceholderDiv = document.createElement("div");
-    hiddenPlaceholderDiv.classList.add("slds-hide");
-    const forcePlaceholder = document.createElement("force-placeholder2");
-    const placeholderBodyDiv = document.createElement("div");
-    placeholderBodyDiv.classList.add("body","slds-grid","slds-grid_vertical-align-center","slds-p-around_large");
-    const placeholderFigureDiv = document.createElement("div");
-    placeholderFigureDiv.classList.add("slds-media__figure","slds-avatar","slds-m-right_small");
-    const placeholderTextContainerDiv = document.createElement("div");
-    placeholderTextContainerDiv.classList.add("text-container");
-    const placeholderTextDiv1 = document.createElement("div");
-    placeholderTextDiv1.classList.add("text","slds-m-bottom_small");
-    const placeholderTextDiv2 = document.createElement("div");
-    placeholderTextDiv2.classList.add("text","text-medium");
-    placeholderTextContainerDiv.appendChild(placeholderTextDiv1);
-    placeholderTextContainerDiv.appendChild(placeholderTextDiv2);
-    placeholderBodyDiv.appendChild(placeholderFigureDiv);
-    placeholderBodyDiv.appendChild(placeholderTextContainerDiv);
-    forcePlaceholder.appendChild(placeholderBodyDiv);
-    hiddenPlaceholderDiv.appendChild(forcePlaceholder);
-    const abstractList = document.createElement("ul");
-    abstractList.classList.add("uiAbstractList");
-    const emptyContentDiv = document.createElement("div");
-    emptyContentDiv.classList.add("emptyContent","hidden");
-    const emptyContentInnerDiv = document.createElement("div");
-    emptyContentInnerDiv.classList.add("emptyContentInner","slds-text-align_center","slds-text-align--center");
-    emptyContentDiv.appendChild(emptyContentInnerDiv);
-    dragOverDiv.appendChild(hiddenPlaceholderDiv);
-    dragOverDiv.appendChild(abstractList);
-    dragOverDiv.appendChild(emptyContentDiv);
-    */
 	return { fileInputWrapper, inputContainer };
 }
 
