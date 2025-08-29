@@ -202,7 +202,7 @@ export async function generateStyleFromSettings() {
 					inactiveCss += rule;
 				}
 			}
-            return { activeCss, inactiveCss, pseudoRules };
+			return { activeCss, inactiveCss, pseudoRules };
 		}
 		/**
 		 * Appends pseudo-selector rules to the style element.
