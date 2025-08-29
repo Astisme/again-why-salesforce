@@ -740,7 +740,8 @@ export default class TabContainer extends Array {
 			} else {
 				try {
 					pushTab = Tab.create(tab);
-				} catch (_) {
+				} catch (e) {
+                    console.info(e);
 					// do not add a failing tab to the JSON
 					continue;
 				}
