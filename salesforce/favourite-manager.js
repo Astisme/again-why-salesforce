@@ -1,5 +1,6 @@
 "use strict";
 import Tab from "/tab.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import {
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
@@ -16,8 +17,6 @@ import ensureTranslatorAvailability from "/translator.js";
 import {
 	ACTION_ADD,
 	ACTION_REMOVE_THIS,
-	ensureAllTabsAvailability,
-	getAllTabs,
 	getCurrentHref,
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
@@ -25,16 +24,6 @@ import {
 	performActionOnTabs,
 	showToast,
 } from "./content.js";
-
-let allTabs;
-const interval = setInterval(() => {
-	try {
-		allTabs = getAllTabs();
-		clearInterval(interval);
-	} catch (_) {
-		// wait next interval
-	}
-}, 100);
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;
 const STAR_ID = `${EXTENSION_NAME}-star`;
@@ -232,7 +221,7 @@ async function addTab(url) {
 		TAB_AS_ORG,
 	]);
 	const href = getCurrentHref();
-	let org = undefined;
+	let org;
 	if (
 		(
 			settings != null &&
@@ -277,14 +266,15 @@ async function addTab(url) {
 async function actionFavourite() {
 	const url = Tab.minifyURL(getCurrentHref());
 	if (getIsCurrentlyOnSavedTab()) {
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		try {
 			const tabToRemove = allTabs.getSingleTabByData({
 				url,
 				org: Tab.extractOrgName(getCurrentHref()),
 			});
 			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
-		} catch (_) {
+		} catch (e) {
+			console.warn(e);
 			showToast("error_remove_not_favourite", false, true);
 		}
 	} else {
@@ -328,7 +318,7 @@ export async function showFavouriteButton(count = 0) {
 	const oldButton = header.querySelector(`#${BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		toggleFavouriteButton(
 			allTabs.existsWithOrWithoutOrg({
 				url,

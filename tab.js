@@ -30,7 +30,7 @@ export default class Tab {
 	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
 	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
 	 */
-	constructor(label, url, org = undefined, secret) {
+	constructor(label, url, org = undefined, secret = null) {
 		if (secret !== _tabSecret) {
 			throw new Error("error_tab_constructor");
 		}
@@ -184,7 +184,7 @@ export default class Tab {
 	 * SetupOneHome/home
 	 */
 	static expandURL(url = null, baseUrl = null) {
-		if (baseUrl == null || !baseUrl.startsWith(HTTPS)) {
+		if (!baseUrl?.startsWith(HTTPS)) {
 			throw new Error("error_expand_url_no_base");
 		}
 		if (url == null || url === "") {
@@ -273,7 +273,8 @@ export default class Tab {
 		try {
 			Tab.create(tab);
 			return true;
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			// error on creation of tab
 			return false;
 		}
@@ -384,10 +385,11 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return tabToUpdate;
 		}
+		const orginput = org !== "" ? org : undefined;
 		return Tab.create(
 			label ?? tabToUpdate.label,
 			url ?? tabToUpdate.url,
-			org != null ? (org !== "" ? org : undefined) : tabToUpdate.org,
+			org != null ? orginput : tabToUpdate.org,
 		);
 	}
 

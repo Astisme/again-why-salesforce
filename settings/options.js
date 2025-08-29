@@ -212,12 +212,6 @@ const allGenericDecorations = [
 	...allInactiveGenericDecorations,
 	...allActiveGenericDecorations,
 ];
-/*
-const allGenericTabSettings = [
-    ...allGenericInputs,
-    ...allGenericDecorations,
-];
-*/
 
 const tab_inactive_org_setting_background_el = document.getElementById(
 	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-${inactive}`,
@@ -309,12 +303,6 @@ const allOrgDecorations = [
 	...allInactiveOrgDecorations,
 	...allActiveOrgDecorations,
 ];
-/*
-const allOrgTabSettings = [
-    ...allOrgInputs,
-    ...allOrgDecorations,
-];
-*/
 
 const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
@@ -469,331 +457,398 @@ function setPreviewAndInputValue(
 	updateViews = true,
 ) {
 	const isForInactive = !setting.forActive;
-	let relatedInput = null;
-	let chosenUl = null;
-	let moveToChosen = null;
-	let styleId = null;
-	const wasPicked = setting.value != null && setting.value !== "";
-	switch (setting.id) {
-		case TAB_STYLE_COLOR:
-			if (isForInactive) {
-				if (isGeneric) {
-					relatedInput = tab_inactive_generic_setting_color_el;
-					styleId = colorStyleGenericInactiveId;
-				} else {
-					relatedInput = tab_inactive_org_setting_color_el;
-					styleId = colorStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_color_el;
-					styleId = colorStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_color_el;
-					styleId = colorStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_COLOR, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_BACKGROUND:
-			if (isForInactive) {
-				if (isGeneric) {
-					relatedInput = tab_inactive_generic_setting_background_el;
-					styleId = backgroundStyleGenericInactiveId;
-				} else {
-					relatedInput = tab_inactive_org_setting_background_el;
-					styleId = backgroundStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_background_el;
-					styleId = backgroundStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_background_el;
-					styleId = backgroundStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_BACKGROUND, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_BORDER:
-			if (isForInactive) {
-				if (isGeneric) {
-					relatedInput = tab_inactive_generic_setting_border_color_el;
-					styleId = borderStyleGenericInactiveId;
-				} else {
-					relatedInput = tab_inactive_org_setting_border_color_el;
-					styleId = borderStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_border_color_el;
-					styleId = borderStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_border_color_el;
-					styleId = borderStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_BORDER, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_SHADOW:
-			if (isForInactive) {
-				if (isGeneric) {
-					relatedInput = tab_inactive_generic_setting_shadow_el;
-					styleId = shadowStyleGenericInactiveId;
-				} else {
-					relatedInput = tab_inactive_org_setting_shadow_el;
-					styleId = shadowStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_shadow_el;
-					styleId = shadowStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_shadow_el;
-					styleId = shadowStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_SHADOW, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_HOVER:
-			if (isForInactive) {
-				if (isGeneric) {
-					relatedInput =
-						tab_inactive_generic_setting_hover_background_el;
-					styleId = hoverStyleGenericInactiveId;
-				} else {
-					relatedInput = tab_inactive_org_setting_hover_background_el;
-					styleId = hoverStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					relatedInput =
-						tab_active_generic_setting_hover_background_el;
-					styleId = hoverStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_hover_background_el;
-					styleId = hoverStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric, ":hover")}{ ${
-						getCssRule(TAB_STYLE_HOVER, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_TOP:
-			if (isForInactive) {
-				break;
-			}
-			updateStyle(
-				isGeneric ? topStyleGenericActiveId : topStyleOrgActiveId,
-				wasPicked
-					? `${
-						getCssSelector(isForInactive, isGeneric, "::before")
-					}{ ${getCssRule(TAB_STYLE_TOP, setting.value)} }`
-					: null,
-			);
-			relatedInput = isGeneric
-				? tab_active_generic_setting_top_background_el
-				: tab_active_org_setting_top_background_el;
-			break;
-		case TAB_STYLE_BOLD:
-			if (isForInactive) {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_inactive_generic_decoration_chosen
-						: ul_inactive_generic_decoration_available;
-					moveToChosen =
-						tab_inactive_generic_setting_decoration_bold_el;
-					styleId = boldStyleGenericInactiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_inactive_org_decoration_chosen
-						: ul_inactive_org_decoration_available;
-					moveToChosen = tab_inactive_org_setting_decoration_bold_el;
-					styleId = boldStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_active_generic_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_generic_setting_decoration_bold_el;
-					styleId = boldStyleGenericActiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_active_org_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen = tab_active_org_setting_decoration_bold_el;
-					styleId = boldStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_BOLD, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_ITALIC:
-			if (isForInactive) {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_inactive_generic_decoration_chosen
-						: ul_inactive_org_decoration_available;
-					moveToChosen =
-						tab_inactive_generic_setting_decoration_italic_el;
-					styleId = italicStyleGenericInactiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_inactive_org_decoration_chosen
-						: ul_inactive_org_decoration_available;
-					moveToChosen =
-						tab_inactive_org_setting_decoration_italic_el;
-					styleId = italicStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_active_generic_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_generic_setting_decoration_italic_el;
-					styleId = italicStyleGenericActiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_active_org_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen = tab_active_org_setting_decoration_italic_el;
-					styleId = italicStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_ITALIC, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		case TAB_STYLE_UNDERLINE:
-			if (isForInactive) {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_inactive_generic_decoration_chosen
-						: ul_inactive_org_decoration_available;
-					moveToChosen =
-						tab_inactive_generic_setting_decoration_underline_el;
-					styleId = underlineStyleGenericInactiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_inactive_org_decoration_chosen
-						: ul_inactive_org_decoration_available;
-					moveToChosen =
-						tab_inactive_org_setting_decoration_underline_el;
-					styleId = underlineStyleOrgInactiveId;
-				}
-			} else {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_active_generic_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_generic_setting_decoration_underline_el;
-					styleId = underlineStyleGenericActiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_active_org_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_org_setting_decoration_underline_el;
-					styleId = underlineStyleOrgActiveId;
-				}
-			}
-			updateStyle(
-				styleId,
-				wasPicked
-					? `${getCssSelector(isForInactive, isGeneric)}{ ${
-						getCssRule(TAB_STYLE_UNDERLINE, setting.value)
-					} }`
-					: null,
-			);
-			break;
-		/*
-        case TAB_STYLE_WAVY:
-            if(isForInactive){
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_inactive_generic_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_generic_setting_decoration_underline_wavy_el;
-                    styleId = wavyStyleGenericInactiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_inactive_org_decoration_chosen : ul_inactive_org_decoration_available;
-                    moveToChosen = tab_inactive_org_setting_decoration_underline_wavy_el;
-                    styleId = wavyStyleOrgInactiveId;
-                }
-            } else {
-                if(isGeneric){
-                    chosenUl = wasPicked ? ul_active_generic_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_generic_setting_decoration_underline_wavy_el;
-                    styleId = wavyStyleGenericActiveId;
-                } else {
-                    chosenUl = wasPicked ? ul_active_org_decoration_chosen : ul_active_org_decoration_available;
-                    moveToChosen = tab_active_org_setting_decoration_underline_wavy_el;
-                    styleId = wavyStyleOrgActiveId;
-                }
-            }
-            updateStyle(styleId, wasPicked ? `${getCssSelector(isForInactive, isGeneric)}{ ${getCssRule(TAB_STYLE_WAVY, setting.value)} }` : null);
-            break;
-        */
-		default:
-			if (setting.id !== preventDefaultOverride) {
-				console.error(`Unmatched style setting id: ${setting.id}`);
-			}
-			break;
-	}
-	if (!updateViews) {
+	// Handle special case for TAB_STYLE_TOP (active only)
+	if (setting.id === TAB_STYLE_TOP && isForInactive) {
 		return;
 	}
-	if (chosenUl != null && moveToChosen != null) {
-		chosenUl.insertAdjacentElement("beforeend", moveToChosen);
+	/**
+	 * Returns configuration mappings for all supported tab style types.
+	 * Each style type maps to element references, style IDs, and decoration containers
+	 * organized by active/inactive state and generic/org variants.
+	 * @returns {Object} Configuration object with style type keys and element/ID mappings
+	 */
+	function getStyleConfigurations() {
+		return {
+			[TAB_STYLE_COLOR]: {
+				type: "input",
+				elements: {
+					inactive: {
+						generic: tab_inactive_generic_setting_color_el,
+						org: tab_inactive_org_setting_color_el,
+					},
+					active: {
+						generic: tab_active_generic_setting_color_el,
+						org: tab_active_org_setting_color_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: colorStyleGenericInactiveId,
+						org: colorStyleOrgInactiveId,
+					},
+					active: {
+						generic: colorStyleGenericActiveId,
+						org: colorStyleOrgActiveId,
+					},
+				},
+			},
+			[TAB_STYLE_BACKGROUND]: {
+				type: "input",
+				elements: {
+					inactive: {
+						generic: tab_inactive_generic_setting_background_el,
+						org: tab_inactive_org_setting_background_el,
+					},
+					active: {
+						generic: tab_active_generic_setting_background_el,
+						org: tab_active_org_setting_background_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: backgroundStyleGenericInactiveId,
+						org: backgroundStyleOrgInactiveId,
+					},
+					active: {
+						generic: backgroundStyleGenericActiveId,
+						org: backgroundStyleOrgActiveId,
+					},
+				},
+			},
+			[TAB_STYLE_BORDER]: {
+				type: "input",
+				elements: {
+					inactive: {
+						generic: tab_inactive_generic_setting_border_color_el,
+						org: tab_inactive_org_setting_border_color_el,
+					},
+					active: {
+						generic: tab_active_generic_setting_border_color_el,
+						org: tab_active_org_setting_border_color_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: borderStyleGenericInactiveId,
+						org: borderStyleOrgInactiveId,
+					},
+					active: {
+						generic: borderStyleGenericActiveId,
+						org: borderStyleOrgActiveId,
+					},
+				},
+			},
+			[TAB_STYLE_SHADOW]: {
+				type: "input",
+				elements: {
+					inactive: {
+						generic: tab_inactive_generic_setting_shadow_el,
+						org: tab_inactive_org_setting_shadow_el,
+					},
+					active: {
+						generic: tab_active_generic_setting_shadow_el,
+						org: tab_active_org_setting_shadow_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: shadowStyleGenericInactiveId,
+						org: shadowStyleOrgInactiveId,
+					},
+					active: {
+						generic: shadowStyleGenericActiveId,
+						org: shadowStyleOrgActiveId,
+					},
+				},
+			},
+			[TAB_STYLE_HOVER]: {
+				type: "input",
+				elements: {
+					inactive: {
+						generic:
+							tab_inactive_generic_setting_hover_background_el,
+						org: tab_inactive_org_setting_hover_background_el,
+					},
+					active: {
+						generic: tab_active_generic_setting_hover_background_el,
+						org: tab_active_org_setting_hover_background_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: hoverStyleGenericInactiveId,
+						org: hoverStyleOrgInactiveId,
+					},
+					active: {
+						generic: hoverStyleGenericActiveId,
+						org: hoverStyleOrgActiveId,
+					},
+				},
+			},
+			[TAB_STYLE_TOP]: {
+				type: "input",
+				elements: {
+					active: {
+						generic: tab_active_generic_setting_top_background_el,
+						org: tab_active_org_setting_top_background_el,
+					},
+				},
+				styleIds: {
+					active: {
+						generic: topStyleGenericActiveId,
+						org: topStyleOrgActiveId,
+					},
+				},
+			},
+			[TAB_STYLE_BOLD]: {
+				type: "decoration",
+				elements: {
+					inactive: {
+						generic:
+							tab_inactive_generic_setting_decoration_bold_el,
+						org: tab_inactive_org_setting_decoration_bold_el,
+					},
+					active: {
+						generic: tab_active_generic_setting_decoration_bold_el,
+						org: tab_active_org_setting_decoration_bold_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: boldStyleGenericInactiveId,
+						org: boldStyleOrgInactiveId,
+					},
+					active: {
+						generic: boldStyleGenericActiveId,
+						org: boldStyleOrgActiveId,
+					},
+				},
+				chosenUls: {
+					inactive: {
+						generic: ul_inactive_generic_decoration_chosen,
+						org: ul_inactive_org_decoration_chosen,
+					},
+					active: {
+						generic: ul_active_generic_decoration_chosen,
+						org: ul_active_org_decoration_chosen,
+					},
+				},
+				availableUls: {
+					inactive: {
+						generic: ul_inactive_generic_decoration_available,
+						org: ul_inactive_org_decoration_available,
+					},
+					active: {
+						generic: ul_active_generic_decoration_available,
+						org: ul_active_org_decoration_available,
+					},
+				},
+			},
+			[TAB_STYLE_ITALIC]: {
+				type: "decoration",
+				elements: {
+					inactive: {
+						generic:
+							tab_inactive_generic_setting_decoration_italic_el,
+						org: tab_inactive_org_setting_decoration_italic_el,
+					},
+					active: {
+						generic:
+							tab_active_generic_setting_decoration_italic_el,
+						org: tab_active_org_setting_decoration_italic_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: italicStyleGenericInactiveId,
+						org: italicStyleOrgInactiveId,
+					},
+					active: {
+						generic: italicStyleGenericActiveId,
+						org: italicStyleOrgActiveId,
+					},
+				},
+				chosenUls: {
+					inactive: {
+						generic: ul_inactive_generic_decoration_chosen,
+						org: ul_inactive_org_decoration_chosen,
+					},
+					active: {
+						generic: ul_active_generic_decoration_chosen,
+						org: ul_active_org_decoration_chosen,
+					},
+				},
+				availableUls: {
+					inactive: {
+						generic: ul_inactive_generic_decoration_available,
+						org: ul_inactive_org_decoration_available,
+					},
+					active: {
+						generic: ul_active_generic_decoration_available,
+						org: ul_active_org_decoration_available,
+					},
+				},
+			},
+			[TAB_STYLE_UNDERLINE]: {
+				type: "decoration",
+				elements: {
+					inactive: {
+						generic:
+							tab_inactive_generic_setting_decoration_underline_el,
+						org: tab_inactive_org_setting_decoration_underline_el,
+					},
+					active: {
+						generic:
+							tab_active_generic_setting_decoration_underline_el,
+						org: tab_active_org_setting_decoration_underline_el,
+					},
+				},
+				styleIds: {
+					inactive: {
+						generic: underlineStyleGenericInactiveId,
+						org: underlineStyleOrgInactiveId,
+					},
+					active: {
+						generic: underlineStyleGenericActiveId,
+						org: underlineStyleOrgActiveId,
+					},
+				},
+				chosenUls: {
+					inactive: {
+						generic: ul_inactive_generic_decoration_chosen,
+						org: ul_inactive_org_decoration_chosen,
+					},
+					active: {
+						generic: ul_active_generic_decoration_chosen,
+						org: ul_active_org_decoration_chosen,
+					},
+				},
+				availableUls: {
+					inactive: {
+						generic: ul_inactive_generic_decoration_available,
+						org: ul_inactive_org_decoration_available,
+					},
+					active: {
+						generic: ul_active_generic_decoration_available,
+						org: ul_active_org_decoration_available,
+					},
+				},
+			},
+		};
 	}
-	if (relatedInput != null) {
-		relatedInput.value = setting.value;
+	/**
+	 * Extracts element references from configuration based on tab state and type.
+	 * Handles both input elements and decoration list containers.
+	 * @param {Object} config - Style configuration object containing element mappings
+	 * @param {boolean} isForInactive - Whether targeting inactive tabs
+	 * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
+	 * @param {boolean} wasPicked - Whether the style value is set (affects chosen/available lists)
+	 * @returns {Object} Object containing input element and decoration list references
+	 */
+	function getElementReferences(config, isForInactive, isGeneric, wasPicked) {
+		const state = isForInactive ? "inactive" : "active";
+		const variant = isGeneric ? "generic" : "org";
+		const elements = {
+			input: config.elements?.[state]?.[variant],
+			moveToChosen: config.elements?.[state]?.[variant],
+		};
+		if (config.type === "decoration") {
+			elements.chosenUl = wasPicked
+				? config.chosenUls?.[state]?.[variant]
+				: config.availableUls?.[state]?.[variant];
+		}
+		return elements;
+	}
+	/**
+	 * Retrieves the appropriate style ID from configuration based on tab state and type.
+	 * @param {Object} config - Style configuration object containing styleIds mappings
+	 * @param {boolean} isForInactive - Whether targeting inactive tabs
+	 * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
+	 * @returns {string|undefined} Style ID for CSS rule application, or undefined if not found
+	 */
+	function getStyleId(config, isForInactive, isGeneric) {
+		const state = isForInactive ? "inactive" : "active";
+		const variant = isGeneric ? "generic" : "org";
+		return config.styleIds?.[state]?.[variant];
+	}
+	/**
+	 * Constructs a complete CSS rule string for the given style setting.
+	 * Returns null if no value is set, otherwise builds selector and rule combination.
+	 * @param {Object} setting - Style setting containing id and value
+	 * @param {boolean} isForInactive - Whether targeting inactive tabs
+	 * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
+	 * @param {boolean} wasPicked - Whether the style value is set (non-null/non-empty)
+	 * @returns {string|null} Complete CSS rule string, or null if no value set
+	 */
+	function buildCssRule(setting, isForInactive, isGeneric, wasPicked) {
+		if (!wasPicked) return null;
+		/**
+		 * Determines the appropriate CSS pseudo-selector for specific style types.
+		 * Some styles require pseudo-selectors like :hover or ::before for proper application.
+		 * @param {string} styleId - The style type identifier (TAB_STYLE_* constant)
+		 * @returns {string|null} Pseudo-selector string (:hover, ::before) or null for standard selectors
+		 */
+		function getPseudoSelector(styleId) {
+			switch (styleId) {
+				case TAB_STYLE_HOVER:
+					return ":hover";
+				case TAB_STYLE_TOP:
+					return "::before";
+				default:
+					return null;
+			}
+		}
+		const pseudoSelector = getPseudoSelector(setting.id);
+		const cssSelector = getCssSelector(
+			isForInactive,
+			isGeneric,
+			pseudoSelector,
+		);
+		const cssRule = getCssRule(setting.id, setting.value);
+		return `${cssSelector}{ ${cssRule} }`;
+	}
+	/**
+	 * Updates DOM elements with new style values and moves decoration elements between lists.
+	 * For decoration styles, moves elements between "chosen" and "available" lists based on wasPicked state.
+	 * For input styles, sets the input element's value property.
+	 * @param {Object} elements - Object containing element references (input, chosenUl, moveToChosen)
+	 * @param {string|null} value - The style value to set in input elements
+	 */
+	function updateUIElements(elements, value) {
+		if (elements.chosenUl && elements.moveToChosen) {
+			elements.chosenUl.insertAdjacentElement(
+				"beforeend",
+				elements.moveToChosen,
+			);
+		}
+		if (elements.input) {
+			elements.input.value = value;
+		}
+	}
+	const wasPicked = setting.value != null && setting.value !== "";
+	// Configuration object for each style type
+	const styleConfigs = getStyleConfigurations();
+	const config = styleConfigs[setting.id];
+	if (config == null) {
+		if (setting.id !== preventDefaultOverride) {
+			console.error(`Unmatched style setting id: ${setting.id}`);
+		}
+		return;
+	}
+	// Get element references and style ID for current configuration
+	const elements = getElementReferences(
+		config,
+		isForInactive,
+		isGeneric,
+		wasPicked,
+	);
+	const styleId = getStyleId(config, isForInactive, isGeneric);
+	// Apply CSS style
+	const cssRule = buildCssRule(setting, isForInactive, isGeneric, wasPicked);
+	updateStyle(styleId, cssRule);
+	// Update UI elements if requested
+	if (updateViews) {
+		updateUIElements(elements, setting.value);
 	}
 }
 
@@ -849,7 +904,8 @@ function setCurrentChoice(setting) {
 			user_language_select.value = setting.enabled;
 			break;
 		case PERSIST_SORT: {
-			const isEnabled = setting.enabled != null;
+			const isEnabled = setting.enabled != null &&
+				setting.enabled != false;
 			keep_sorted_el.checked = isEnabled;
 			if (isEnabled) {
 				picked_sort_select.value = setting.enabled;
@@ -1150,97 +1206,164 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 	) {
 		return;
 	}
-	const settings = await getStyleSettings(key);
-	if (settings != null) {
-		Array.isArray(settings)
-			? setCurrentChoice({ id: key, value: settings })
-			: setCurrentChoice(settings);
+	/**
+	 * Restores saved style settings from storage and applies them to the current UI state.
+	 * @param {string} key - Storage key for the settings
+	 * @returns {Promise<void>}
+	 */
+	async function restoreSettings(key) {
+		const settings = await getStyleSettings(key);
+		if (settings != null) {
+			const choice = Array.isArray(settings)
+				? { id: key, value: settings }
+				: settings;
+			setCurrentChoice(choice);
+		}
 	}
-	// gather correct resources
-	const isGeneric = key === GENERIC_TAB_STYLE_KEY;
-	const allInputs = isGeneric ? allGenericInputs : allOrgInputs;
-	const allDecorations = isGeneric
-		? allGenericDecorations
-		: allOrgDecorations;
-	const allInactiveDecorations = isGeneric
-		? allInactiveGenericDecorations
-		: allInactiveOrgDecorations;
-	const allActiveDecorations = isGeneric
-		? allActiveGenericDecorations
-		: allActiveOrgDecorations;
-	const btn_inactive_available = isGeneric
-		? btn_inactive_generic_available
-		: btn_inactive_org_available;
-	const btn_inactive_chosen = isGeneric
-		? btn_inactive_generic_chosen
-		: btn_inactive_org_chosen;
-	const btn_active_available = isGeneric
-		? btn_active_generic_available
-		: btn_active_org_available;
-	const btn_active_chosen = isGeneric
-		? btn_active_generic_chosen
-		: btn_active_org_chosen;
-	const ul_inactive_decoration_available = isGeneric
-		? ul_inactive_generic_decoration_available
-		: ul_inactive_org_decoration_available;
-	const ul_inactive_decoration_chosen = isGeneric
-		? ul_inactive_generic_decoration_chosen
-		: ul_inactive_org_decoration_chosen;
-	const ul_active_decoration_available = isGeneric
-		? ul_active_generic_decoration_available
-		: ul_active_org_decoration_available;
-	const ul_active_decoration_chosen = isGeneric
-		? ul_active_generic_decoration_chosen
-		: ul_active_org_decoration_chosen;
-	const tabPreview = isGeneric ? tabGenericPreview : tabOrgPreview;
-	// create event listeners
-	tabPreview.classList.remove(hidden);
-	allInputs.forEach((el) =>
-		el.addEventListener("change", (e) => saveTabOptions(e, key))
-	);
-	allDecorations.forEach((el) => el.addEventListener("click", flipSelected));
-	// move to available
-	btn_inactive_available.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_inactive_decoration_available,
+	/**
+	 * Gathers all UI element references needed for tab styling based on the key type.
+	 * @param {string} key - Tab style key determining which resource set to use
+	 * @returns {Object} Object containing all necessary UI element references
+	 */
+	function getTabResources(key) {
+		/**
+		 * Gets button element references for moving decorations between available/chosen states.
+		 * @param {boolean} isGeneric - Whether to get generic or org-specific button references
+		 * @returns {Object} Object containing button element references
+		 */
+		function getButtonReferences(isGeneric) {
+			return {
+				inactiveAvailable: isGeneric
+					? btn_inactive_generic_available
+					: btn_inactive_org_available,
+				inactiveChosen: isGeneric
+					? btn_inactive_generic_chosen
+					: btn_inactive_org_chosen,
+				activeAvailable: isGeneric
+					? btn_active_generic_available
+					: btn_active_org_available,
+				activeChosen: isGeneric
+					? btn_active_generic_chosen
+					: btn_active_org_chosen,
+			};
+		}
+		/**
+		 * Gets decoration list element references for organizing available/chosen decorations.
+		 * @param {boolean} isGeneric - Whether to get generic or org-specific list references
+		 * @returns {Object} Object containing list element references
+		 */
+		function getListReferences(isGeneric) {
+			return {
+				inactiveAvailable: isGeneric
+					? ul_inactive_generic_decoration_available
+					: ul_inactive_org_decoration_available,
+				inactiveChosen: isGeneric
+					? ul_inactive_generic_decoration_chosen
+					: ul_inactive_org_decoration_chosen,
+				activeAvailable: isGeneric
+					? ul_active_generic_decoration_available
+					: ul_active_org_decoration_available,
+				activeChosen: isGeneric
+					? ul_active_generic_decoration_chosen
+					: ul_active_org_decoration_chosen,
+			};
+		}
+		const isGeneric = key === GENERIC_TAB_STYLE_KEY;
+		return {
+			isGeneric,
+			allInputs: isGeneric ? allGenericInputs : allOrgInputs,
+			allDecorations: isGeneric
+				? allGenericDecorations
+				: allOrgDecorations,
+			allInactiveDecorations: isGeneric
+				? allInactiveGenericDecorations
+				: allInactiveOrgDecorations,
+			allActiveDecorations: isGeneric
+				? allActiveGenericDecorations
+				: allActiveOrgDecorations,
+			buttons: getButtonReferences(isGeneric),
+			lists: getListReferences(isGeneric),
+			tabPreview: isGeneric ? tabGenericPreview : tabOrgPreview,
+		};
+	}
+	/**
+	 * Sets up all event listeners for tab styling UI elements.
+	 * Includes input change handlers, decoration click handlers, and button move handlers.
+	 * @param {Object} resources - UI element references from getTabResources
+	 * @param {string} key - Tab style key for saving settings
+	 */
+	function setupUIListeners(resources, key) {
+		/**
+		 * Sets up event listeners for buttons that move decorations between available/chosen lists.
+		 * @param {Object} resources - UI element references containing buttons and lists
+		 * @param {string} key - Tab style key for saving settings
+		 */
+		function setupMoveButtonListeners(resources, key) {
+			const {
+				buttons,
+				lists,
 				allInactiveDecorations,
-				false,
-				key,
-			),
-	);
-	btn_active_available.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_active_decoration_available,
 				allActiveDecorations,
-				false,
-				key,
-			),
-	);
-	// move to chosen
-	btn_inactive_chosen.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_inactive_decoration_chosen,
-				allInactiveDecorations,
-				true,
-				key,
-			),
-	);
-	btn_active_chosen.addEventListener(
-		"click",
-		() =>
-			moveSelectedDecorationsTo(
-				ul_active_decoration_chosen,
-				allActiveDecorations,
-				true,
-				key,
-			),
-	);
+			} = resources;
+			// Move to available buttons
+			buttons.inactiveAvailable.addEventListener(
+				"click",
+				() =>
+					moveSelectedDecorationsTo(
+						lists.inactiveAvailable,
+						allInactiveDecorations,
+						false,
+						key,
+					),
+			);
+			buttons.activeAvailable.addEventListener(
+				"click",
+				() =>
+					moveSelectedDecorationsTo(
+						lists.activeAvailable,
+						allActiveDecorations,
+						false,
+						key,
+					),
+			);
+			// Move to chosen buttons
+			buttons.inactiveChosen.addEventListener(
+				"click",
+				() =>
+					moveSelectedDecorationsTo(
+						lists.inactiveChosen,
+						allInactiveDecorations,
+						true,
+						key,
+					),
+			);
+			buttons.activeChosen.addEventListener(
+				"click",
+				() =>
+					moveSelectedDecorationsTo(
+						lists.activeChosen,
+						allActiveDecorations,
+						true,
+						key,
+					),
+			);
+		}
+		// Show preview tab
+		resources.tabPreview.classList.remove("hidden");
+		// Input change listeners
+		resources.allInputs.forEach((el) =>
+			el.addEventListener("change", (e) => saveTabOptions(e, key))
+		);
+		// Decoration selection listeners
+		resources.allDecorations.forEach((el) =>
+			el.addEventListener("click", flipSelected)
+		);
+		// Button move listeners
+		setupMoveButtonListeners(resources, key);
+	}
+	await restoreSettings(key);
+	const resources = getTabResources(key);
+	setupUIListeners(resources, key);
 	if (isGeneric) {
 		genericTabListenersSet = true;
 	} else {

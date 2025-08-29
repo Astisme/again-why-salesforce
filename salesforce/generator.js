@@ -76,20 +76,20 @@ async function handleLightningLinkClick(e) {
 		LINK_NEW_BROWSER,
 		USE_LIGHTNING_NAVIGATION,
 	]);
-	const target = settings != null &&
-			settings.some((setting) =>
+	const fallbackTarget = currentTarget !== ""
+		? currentTarget
+		: getLinkTarget(metaCtrl, url);
+	const target =
+		settings?.some((setting) =>
 				setting.id === LINK_NEW_BROWSER && setting.enabled
 			)
-		? "_blank"
-		: (currentTarget !== "" ? currentTarget : getLinkTarget(metaCtrl, url));
+			? "_blank"
+			: fallbackTarget;
 	// open link into new page when requested or if the user is clicking the favourite tab one more time
 	if (
 		target === "_blank" || url === getCurrentHref() ||
-		(
-			settings != null &&
-			settings.some((setting) =>
-				setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled
-			)
+		settings?.some((setting) =>
+			setting.id === USE_LIGHTNING_NAVIGATION && setting.enabled
 		)
 	) {
 		open(url, target);
@@ -148,49 +148,51 @@ function wereSettingsUpdated(settings) {
  * @returns {Promise<void>} Resolves once styles are updated.
  */
 export async function generateStyleFromSettings() {
-	const settings = await getAllStyleSettings();
-	if (settings == null) {
-		return;
-	}
-	const genericStyleList = settings[GENERIC_TAB_STYLE_KEY];
-	const orgStyleList = settings[ORG_TAB_STYLE_KEY];
-	if (!wereSettingsUpdated(settings)) {
-		return;
-	}
-	oldSettings = settings;
-	for (let i = 0; i < 2; i++) {
-		const styleList = i === 0 ? genericStyleList : orgStyleList;
-		if (styleList == null) {
-			continue;
-		}
-		if (styleList.length === 0) {
-			return;
-		}
-		const isGeneric = styleList === genericStyleList;
-		let style = null;
-		{
+	/**
+	 * Processes a style list by building CSS and appending to document head.
+	 * @param {Array} styleList - Array of style elements to process
+	 * @param {boolean} isGeneric - Whether this is for generic tab styles
+	 */
+	function processStyleList(styleList, isGeneric) {
+		/**
+		 * Gets existing style element or creates a new one.
+		 * @param {boolean} isGeneric - Whether this is for generic tab styles
+		 * @returns {HTMLStyleElement} The style element
+		 */
+		function getOrCreateStyleElement(isGeneric) {
 			const styleId = `${EXTENSION_NAME}-${
 				isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY
 			}`;
-			const oldStyle = document.getElementById(styleId);
-			if (oldStyle != null) {
-				style = oldStyle;
-				style.textContent = "";
-			} else {
-				style = document.createElement("style");
-				style.id = styleId;
+			const existingStyle = document.getElementById(styleId);
+			if (existingStyle != null) {
+				existingStyle.textContent = "";
+				return existingStyle;
 			}
+			const style = document.createElement("style");
+			style.id = styleId;
+			return style;
 		}
-		let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
-		let activeCss = `${getCssSelector(false, isGeneric)} {`;
-		const rulesWhichNeedPseudoSelector = [];
-		styleList
-			.forEach((element) => {
-				if (
-					element.id === TAB_STYLE_HOVER ||
-					element.id === TAB_STYLE_TOP
-				) {
-					rulesWhichNeedPseudoSelector.push(element);
+		/**
+		 * Builds CSS rules for active/inactive tabs and separates pseudo rules.
+		 * @param {Array} styleList - Array of style elements
+		 * @param {boolean} isGeneric - Whether this is for generic tab styles
+		 * @returns {Object} Object containing activeCss, inactiveCss, and pseudoRules
+		 */
+		function buildCssRules(styleList, isGeneric) {
+			/**
+			 * Checks if a style ID requires pseudo-selector handling.
+			 * @param {string} id - The style ID to check
+			 * @returns {boolean} True if this is a pseudo rule
+			 */
+			function isPseudoRule(id) {
+				return id === TAB_STYLE_HOVER || id === TAB_STYLE_TOP;
+			}
+			let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
+			let activeCss = `${getCssSelector(false, isGeneric)} {`;
+			const pseudoRules = [];
+			for (const element of styleList) {
+				if (isPseudoRule(element.id)) {
+					pseudoRules.push(element);
 					return;
 				}
 				const rule = getCssRule(element.id, element.value);
@@ -199,29 +201,65 @@ export async function generateStyleFromSettings() {
 				} else {
 					inactiveCss += rule;
 				}
-			});
-		style.textContent = `${inactiveCss} } ${activeCss} }`;
-		for (const el of rulesWhichNeedPseudoSelector) {
-			let elementPseudoSelector = "";
-			switch (el.id) {
-				case TAB_STYLE_HOVER:
-					elementPseudoSelector = ":hover";
-					break;
-				case TAB_STYLE_TOP:
-					elementPseudoSelector = "::before";
-					break;
-				default:
-					break;
 			}
-			style.textContent += `${
-				getCssSelector(
-					!el.forActive,
-					isGeneric,
-					elementPseudoSelector,
-				)
-			}{ ${getCssRule(el.id, el.value)} }`;
+			return { activeCss, inactiveCss, pseudoRules };
 		}
+		/**
+		 * Appends pseudo-selector rules to the style element.
+		 * @param {HTMLStyleElement} style - The style element to append to
+		 * @param {Array} pseudoRules - Array of pseudo rules to process
+		 * @param {boolean} isGeneric - Whether this is for generic tab styles
+		 */
+		function appendPseudoRules(style, pseudoRules, isGeneric) {
+			/**
+			 * Maps style IDs to their corresponding pseudo-selectors.
+			 * @param {string} id - The style ID
+			 * @returns {string} The pseudo-selector string
+			 */
+			function getPseudoSelector(id) {
+				switch (id) {
+					case TAB_STYLE_HOVER:
+						return ":hover";
+					case TAB_STYLE_TOP:
+						return "::before";
+					default:
+						return "";
+				}
+			}
+			for (const rule of pseudoRules) {
+				const pseudoSelector = getPseudoSelector(rule.id);
+				const selector = getCssSelector(
+					!rule.forActive,
+					isGeneric,
+					pseudoSelector,
+				);
+				style.textContent += `${selector}{ ${
+					getCssRule(rule.id, rule.value)
+				} }`;
+			}
+		}
+		const style = getOrCreateStyleElement(isGeneric);
+		const { activeCss, inactiveCss, pseudoRules } = buildCssRules(
+			styleList,
+			isGeneric,
+		);
+		style.textContent = `${inactiveCss} } ${activeCss} }`;
+		appendPseudoRules(style, pseudoRules, isGeneric);
 		document.head.appendChild(style);
+	}
+	const settings = await getAllStyleSettings();
+	if (settings == null || !wereSettingsUpdated(settings)) {
+		return;
+	}
+	oldSettings = settings;
+	const styleLists = [
+		{ list: settings[GENERIC_TAB_STYLE_KEY], isGeneric: true },
+		{ list: settings[ORG_TAB_STYLE_KEY], isGeneric: false },
+	];
+	for (const { list: styleList, isGeneric } of styleLists) {
+		if (styleList?.length > 0) {
+			processStyleList(styleList, isGeneric);
+		}
 	}
 }
 
@@ -297,9 +335,9 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	) {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const toastType = isSuccess
-		? (isWarning ? "info" : "success")
-		: (isWarning ? "warning" : "error");
+	const successType = isWarning ? "info" : "success";
+	const errorType = isWarning ? "warning" : "error";
+	const toastType = isSuccess ? successType : errorType;
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
@@ -719,7 +757,6 @@ export async function generateSldsModal(modalTitle) {
 			modalTitle != null && modalTitle !== "" ? ": " + modalTitle : ""
 		}`,
 	);
-	//dialog.addEventListener("wheel", e => e.preventDefault());
 	modalParent.appendChild(dialog);
 	const modalContainer = document.createElement("div");
 	modalContainer.classList.add("modal-container", "slds-modal__container");
@@ -880,81 +917,6 @@ export async function generateSldsModal(modalTitle) {
 	actionsContainerDiv.classList.add("actionsContainer");
 	actionsContainerDiv.setAttribute("data-aura-rendered-by", "1149:0");
 	buttonContainerDiv.appendChild(actionsContainerDiv);
-	/*
-	const pageErrorDiv = document.createElement("div");
-	pageErrorDiv.classList.add("pageError", "hideEl");
-	pageErrorDiv.setAttribute("data-aura-rendered-by", "1150:0");
-	actionsContainerDiv.appendChild(pageErrorDiv);
-	const pageErrorIconDiv = document.createElement("div");
-	pageErrorIconDiv.classList.add("pageErrorIcon");
-	pageErrorIconDiv.setAttribute("data-aura-rendered-by", "1151:0");
-	pageErrorDiv.appendChild(pageErrorIconDiv);
-	const errorButton = document.createElement("button");
-	errorButton.classList.add(
-		"slds-button",
-		"slds-button_neutral",
-		"pageErrorIconButton",
-		"uiButton",
-	);
-	errorButton.setAttribute("aria-live", "off");
-	errorButton.setAttribute("type", "button");
-	errorButton.setAttribute("title", "Error");
-	errorButton.setAttribute("aria-label", "");
-	errorButton.setAttribute("data-aura-rendered-by", "1155:0");
-	errorButton.setAttribute("data-aura-class", "uiButton");
-	pageErrorIconDiv.appendChild(errorButton);
-	const lightningIcon = document.createElement("lightning-icon");
-	lightningIcon.classList.add(
-		"slds-icon-utility-warning",
-		"slds-icon_container",
-	);
-	lightningIcon.setAttribute("icon-name", "utility:warning");
-	lightningIcon.setAttribute("data-data-rendering-service-uid", "338");
-	lightningIcon.setAttribute("data-aura-rendered-by", "1153:0");
-	errorButton.appendChild(lightningIcon);
-	const spanElement = document.createElement("span");
-	spanElement.setAttribute(
-		"style",
-		"--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)",
-	);
-	spanElement.setAttribute("part", "boundary");
-	lightningIcon.appendChild(spanElement);
-	const lightningPrimitiveIcon = document.createElement(
-		"lightning-primitive-icon",
-	);
-	lightningPrimitiveIcon.setAttribute("exportparts", "icon");
-	lightningPrimitiveIcon.setAttribute("size", "x-small");
-	lightningPrimitiveIcon.setAttribute("variant", "error");
-	spanElement.appendChild(lightningPrimitiveIcon);
-	const svgElement = document.createElementNS(
-		"http://www.w3.org/2000/svg",
-		"svg",
-	);
-	svgElement.classList.add(
-		"slds-icon",
-		"slds-icon-text-error",
-		"slds-icon_x-small",
-	);
-	svgElement.setAttribute("focusable", "false");
-	svgElement.setAttribute("aria-hidden", "true");
-	svgElement.setAttribute("viewBox", "0 0 520 520");
-	svgElement.setAttribute("part", "icon");
-	lightningPrimitiveIcon.appendChild(svgElement);
-	const gElement = document.createElementNS(
-		"http://www.w3.org/2000/svg",
-		"g",
-	);
-	svgElement.appendChild(gElement);
-	const pathElement = document.createElementNS(
-		"http://www.w3.org/2000/svg",
-		"path",
-	);
-	pathElement.setAttribute(
-		"d",
-		"M514 425L285 55a28 28 0 00-50 0L6 425c-14 23 0 55 25 55h458c25 0 40-32 25-55zm-254-25c-17 0-30-13-30-30s13-30 30-30 30 13 30 30-13 30-30 30zm30-90c0 6-4 10-10 10h-40c-6 0-10-4-10-10V180c0-6 4-10 10-10h40c6 0 10 4 10 10v130z",
-	);
-	gElement.appendChild(pathElement);
-    */
 	const buttonContainerInnerDiv = document.createElement("div");
 	buttonContainerInnerDiv.classList.add("button-container-inner");
 	buttonContainerInnerDiv.setAttribute("data-aura-rendered-by", "1161:0");
@@ -1298,7 +1260,8 @@ export async function generateSldsFileInput(
 		const msg_drop = await translator.translate("drop");
 		dropFilesSpan.textContent = `${msg_drop} ${
 			singleFile ? msg_file : msg_files
-		}`, dropzoneBodySpan.appendChild(dropFilesSpan);
+		}`;
+		dropzoneBodySpan.appendChild(dropFilesSpan);
 	}
 	const dragOverDiv = document.createElement("div");
 	dragOverDiv.classList.add("drag-over-body");
@@ -1402,43 +1365,6 @@ export async function generateSldsFileInput(
 		}`;
 		fileSelectorLabel.appendChild(orDropFilesSpan);
 	}
-	/*
-        const helpTextDiv = document.createElement("div");
-    helpTextDiv.classList.add("slds-form-element__help");
-    helpTextDiv.setAttribute("data-name", "fileInput");
-    helpTextDiv.setAttribute("part", "help-text");
-    helpTextDiv.setAttribute("role", "status");
-    primitiveInputFile.appendChild(helpTextDiv);
-    const hiddenPlaceholderDiv = document.createElement("div");
-    hiddenPlaceholderDiv.classList.add("slds-hide");
-    const forcePlaceholder = document.createElement("force-placeholder2");
-    const placeholderBodyDiv = document.createElement("div");
-    placeholderBodyDiv.classList.add("body","slds-grid","slds-grid_vertical-align-center","slds-p-around_large");
-    const placeholderFigureDiv = document.createElement("div");
-    placeholderFigureDiv.classList.add("slds-media__figure","slds-avatar","slds-m-right_small");
-    const placeholderTextContainerDiv = document.createElement("div");
-    placeholderTextContainerDiv.classList.add("text-container");
-    const placeholderTextDiv1 = document.createElement("div");
-    placeholderTextDiv1.classList.add("text","slds-m-bottom_small");
-    const placeholderTextDiv2 = document.createElement("div");
-    placeholderTextDiv2.classList.add("text","text-medium");
-    placeholderTextContainerDiv.appendChild(placeholderTextDiv1);
-    placeholderTextContainerDiv.appendChild(placeholderTextDiv2);
-    placeholderBodyDiv.appendChild(placeholderFigureDiv);
-    placeholderBodyDiv.appendChild(placeholderTextContainerDiv);
-    forcePlaceholder.appendChild(placeholderBodyDiv);
-    hiddenPlaceholderDiv.appendChild(forcePlaceholder);
-    const abstractList = document.createElement("ul");
-    abstractList.classList.add("uiAbstractList");
-    const emptyContentDiv = document.createElement("div");
-    emptyContentDiv.classList.add("emptyContent","hidden");
-    const emptyContentInnerDiv = document.createElement("div");
-    emptyContentInnerDiv.classList.add("emptyContentInner","slds-text-align_center","slds-text-align--center");
-    emptyContentDiv.appendChild(emptyContentInnerDiv);
-    dragOverDiv.appendChild(hiddenPlaceholderDiv);
-    dragOverDiv.appendChild(abstractList);
-    dragOverDiv.appendChild(emptyContentDiv);
-    */
 	return { fileInputWrapper, inputContainer };
 }
 
