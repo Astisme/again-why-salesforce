@@ -361,13 +361,8 @@ function listenToExtensionCommands() {
 	BROWSER.commands.onCommand.addListener(async (command) => {
 		// check the current page is Salesforce Setup
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (
-			browserTabUrl == null ||
-			!browserTabUrl.match(SETUP_LIGHTNING_PATTERN)
-		) {
-			// we're not in Salesforce Setup
+		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) // we're not in Salesforce Setup
 			return;
-		}
 		switch (command) {
 			case CMD_OPEN_SETTINGS:
 				openSettingsPage();
@@ -463,7 +458,7 @@ function setExtensionBrowserListeners() {
 			// open github to show the release notes
 			const homepage = MANIFEST.homepage_url;
 			// Validate homepage URL (must be GitHub)
-			if (!homepage || !homepage.startsWith("https://github.com/")) {
+			if (!homepage?.startsWith("https://github.com/")) {
 				console.error("no_manifest_github");
 				return;
 			}
