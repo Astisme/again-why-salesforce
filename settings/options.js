@@ -198,12 +198,6 @@ const allGenericDecorations = [
 	...allInactiveGenericDecorations,
 	...allActiveGenericDecorations,
 ];
-/*
-const allGenericTabSettings = [
-    ...allGenericInputs,
-    ...allGenericDecorations,
-];
-*/
 
 const tab_inactive_org_setting_background_el = document.getElementById(
 	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-${inactive}`,
@@ -295,12 +289,6 @@ const allOrgDecorations = [
 	...allInactiveOrgDecorations,
 	...allActiveOrgDecorations,
 ];
-/*
-const allOrgTabSettings = [
-    ...allOrgInputs,
-    ...allOrgDecorations,
-];
-*/
 
 const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
@@ -470,14 +458,12 @@ function setPreviewAndInputValue(
 					relatedInput = tab_inactive_org_setting_color_el;
 					styleId = colorStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_color_el;
-					styleId = colorStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_color_el;
-					styleId = colorStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                relatedInput = tab_active_generic_setting_color_el;
+                styleId = colorStyleGenericActiveId;
+            } else {
+                relatedInput = tab_active_org_setting_color_el;
+                styleId = colorStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
@@ -497,15 +483,13 @@ function setPreviewAndInputValue(
 					relatedInput = tab_inactive_org_setting_background_el;
 					styleId = backgroundStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_background_el;
-					styleId = backgroundStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_background_el;
-					styleId = backgroundStyleOrgActiveId;
-				}
-			}
+			} else if (isGeneric) {
+                relatedInput = tab_active_generic_setting_background_el;
+                styleId = backgroundStyleGenericActiveId;
+            } else {
+                relatedInput = tab_active_org_setting_background_el;
+                styleId = backgroundStyleOrgActiveId;
+            }
 			updateStyle(
 				styleId,
 				wasPicked
@@ -524,14 +508,12 @@ function setPreviewAndInputValue(
 					relatedInput = tab_inactive_org_setting_border_color_el;
 					styleId = borderStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_border_color_el;
-					styleId = borderStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_border_color_el;
-					styleId = borderStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                relatedInput = tab_active_generic_setting_border_color_el;
+                styleId = borderStyleGenericActiveId;
+            } else {
+                relatedInput = tab_active_org_setting_border_color_el;
+                styleId = borderStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
@@ -551,14 +533,12 @@ function setPreviewAndInputValue(
 					relatedInput = tab_inactive_org_setting_shadow_el;
 					styleId = shadowStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					relatedInput = tab_active_generic_setting_shadow_el;
-					styleId = shadowStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_shadow_el;
-					styleId = shadowStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                relatedInput = tab_active_generic_setting_shadow_el;
+                styleId = shadowStyleGenericActiveId;
+            } else {
+                relatedInput = tab_active_org_setting_shadow_el;
+                styleId = shadowStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
@@ -579,15 +559,13 @@ function setPreviewAndInputValue(
 					relatedInput = tab_inactive_org_setting_hover_background_el;
 					styleId = hoverStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					relatedInput =
-						tab_active_generic_setting_hover_background_el;
-					styleId = hoverStyleGenericActiveId;
-				} else {
-					relatedInput = tab_active_org_setting_hover_background_el;
-					styleId = hoverStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                relatedInput =
+                    tab_active_generic_setting_hover_background_el;
+                styleId = hoverStyleGenericActiveId;
+            } else {
+                relatedInput = tab_active_org_setting_hover_background_el;
+                styleId = hoverStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
@@ -630,21 +608,19 @@ function setPreviewAndInputValue(
 					moveToChosen = tab_inactive_org_setting_decoration_bold_el;
 					styleId = boldStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_active_generic_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_generic_setting_decoration_bold_el;
-					styleId = boldStyleGenericActiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_active_org_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen = tab_active_org_setting_decoration_bold_el;
-					styleId = boldStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                chosenUl = wasPicked
+                    ? ul_active_generic_decoration_chosen
+                    : ul_active_org_decoration_available;
+                moveToChosen =
+                    tab_active_generic_setting_decoration_bold_el;
+                styleId = boldStyleGenericActiveId;
+            } else {
+                chosenUl = wasPicked
+                    ? ul_active_org_decoration_chosen
+                    : ul_active_org_decoration_available;
+                moveToChosen = tab_active_org_setting_decoration_bold_el;
+                styleId = boldStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
@@ -672,21 +648,19 @@ function setPreviewAndInputValue(
 						tab_inactive_org_setting_decoration_italic_el;
 					styleId = italicStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_active_generic_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_generic_setting_decoration_italic_el;
-					styleId = italicStyleGenericActiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_active_org_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen = tab_active_org_setting_decoration_italic_el;
-					styleId = italicStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                chosenUl = wasPicked
+                    ? ul_active_generic_decoration_chosen
+                    : ul_active_org_decoration_available;
+                moveToChosen =
+                    tab_active_generic_setting_decoration_italic_el;
+                styleId = italicStyleGenericActiveId;
+            } else {
+                chosenUl = wasPicked
+                    ? ul_active_org_decoration_chosen
+                    : ul_active_org_decoration_available;
+                moveToChosen = tab_active_org_setting_decoration_italic_el;
+                styleId = italicStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
@@ -714,22 +688,20 @@ function setPreviewAndInputValue(
 						tab_inactive_org_setting_decoration_underline_el;
 					styleId = underlineStyleOrgInactiveId;
 				}
-			} else {
-				if (isGeneric) {
-					chosenUl = wasPicked
-						? ul_active_generic_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_generic_setting_decoration_underline_el;
-					styleId = underlineStyleGenericActiveId;
-				} else {
-					chosenUl = wasPicked
-						? ul_active_org_decoration_chosen
-						: ul_active_org_decoration_available;
-					moveToChosen =
-						tab_active_org_setting_decoration_underline_el;
-					styleId = underlineStyleOrgActiveId;
-				}
+			} else if (isGeneric) {
+                chosenUl = wasPicked
+                    ? ul_active_generic_decoration_chosen
+                    : ul_active_org_decoration_available;
+                moveToChosen =
+                    tab_active_generic_setting_decoration_underline_el;
+                styleId = underlineStyleGenericActiveId;
+            } else {
+                chosenUl = wasPicked
+                    ? ul_active_org_decoration_chosen
+                    : ul_active_org_decoration_available;
+                moveToChosen =
+                    tab_active_org_setting_decoration_underline_el;
+                styleId = underlineStyleOrgActiveId;
 			}
 			updateStyle(
 				styleId,
