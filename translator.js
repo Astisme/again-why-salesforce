@@ -223,7 +223,7 @@ class TranslationService {
 			let messageTranslated = "";
 			const words = keyTranslate.split(/\s+/);
 			for (const word of words) {
-				if (!word.startsWith("\$")) {
+				if (!word.startsWith("$")) {
 					messageTranslated += ` ${word}`;
 					continue;
 				}
