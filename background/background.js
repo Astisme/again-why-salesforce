@@ -175,7 +175,7 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
-			set[key] = mergeSettings(tobeset, key);
+			set[key] = await mergeSettings(tobeset, key);
 			break;
 		}
 		default:
