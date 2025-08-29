@@ -43,7 +43,8 @@ if (page != null) { // we're in a salesforce page
 			// update the bold on the text
 			willOpenLogin = false;
 		}
-	} catch (_) {
+	} catch (e) {
+		console.warn(e);
 		sfsetupTextEl.classList.add("hidden");
 		invalidUrl.classList.remove("hidden");
 	}

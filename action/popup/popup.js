@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import Tab from "/tab.js";
-import TabContainer from "/tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
@@ -20,7 +20,7 @@ setupDrag();
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
 const translator = await ensureTranslatorAvailability();
-const allTabs = await TabContainer.create();
+const allTabs = await ensureAllTabsAvailability();
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -53,15 +53,14 @@ function pop_getCurrentBrowserTab(callback) {
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-	const broswerTabUrl = browserTab?.url;
+	const browserTabUrl = browserTab?.url;
 	if (
-		broswerTabUrl == null ||
-		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+		!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)
 	) {
 		// we're not in Salesforce Setup
 		window.location.href = BROWSER.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
-				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
+				browserTabUrl != null ? "?url=" + browserTabUrl : ""
 			}`,
 		);
 	} else {
@@ -415,14 +414,11 @@ async function findTabsFromRows(orgName = null) {
  * @returns {Promise<void>} A promise that resolves once the tabs have been saved and optionally rows reloaded.
  */
 async function saveTabs(doReload = true, tabs = null) {
-	//const orgName = await pop_extractOrgName();
 	if (!TabContainer.isValid(tabs)) {
-		//tabs = await findTabsFromRows(orgName);
 		tabs = await findTabsFromRows();
 	}
 	await allTabs.replaceTabs(tabs, {
 		removeOrgTabs: true,
-		//keepTabsNotThisOrg: orgName,
 	});
 	if (doReload) {
 		await reloadRows();

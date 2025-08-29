@@ -38,7 +38,7 @@ export const mockBrowser = {
 						response[key] = mockStorage[key];
 					}
 				});
-				return new Promise((resolve, _) => resolve(response));
+				return Promise.resolve(response);
 			},
 			// deno-lint-ignore require-await
 			set: async (data: { tabs: any[] }): Promise<boolean> => {
