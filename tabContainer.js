@@ -297,7 +297,6 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all tabs were added successfully (excluding duplicates), otherwise `false` if any tab could not be added.
 	 */
 	async addTabs(tabs, sync = true) {
-		//this.push(...tabs);
 		if (tabs.length === 0 && sync === false) {
 			return true;
 		}
