@@ -54,9 +54,9 @@ export function bg_getCurrentBrowserTab(callback = null) {
 	}
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
-            queryTabs(resolve)
-                .then((q) => resolve(q))
-                .catch((e) => reject(e));
+			queryTabs(resolve)
+				.then((q) => resolve(q))
+				.catch((e) => reject(e));
 		});
 	}
 	queryTabs(callback);
@@ -70,8 +70,8 @@ export async function bg_notify(message) {
 	if (message == null) {
 		throw new Error("error_no_message");
 	}
-    const browserTab = await bg_getCurrentBrowserTab();
-    BROWSER.tabs.sendMessage(browserTab.id, message);
+	const browserTab = await bg_getCurrentBrowserTab();
+	BROWSER.tabs.sendMessage(browserTab.id, message);
 }
 
 /**

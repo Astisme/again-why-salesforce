@@ -24,7 +24,7 @@ const interval = setInterval(() => {
 		clearInterval(interval);
 	} catch (e) {
 		// wait next interval
-        console.info(e);
+		console.info(e);
 	}
 }, 100);
 

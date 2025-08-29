@@ -90,7 +90,7 @@ export async function ensureAllTabsAvailability() {
 	try {
 		return getAllTabs();
 	} catch (e) {
-        console.info(e);
+		console.info(e);
 		return await getAllTabs_async();
 	}
 }
@@ -564,7 +564,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 			label = matchingTab.label;
 			url = matchingTab.url;
 		} catch (e) {
-            console.info(e);
+			console.info(e);
 			url = minyURL;
 		}
 	}
@@ -608,7 +608,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		lastInput = value;
 	});
-    let lastExtracted = null;
+	let lastExtracted = null;
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const linkTarget = getSelectedRadioButtonValue();
@@ -618,7 +618,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		const newTarget = Tab.extractOrgName(inputVal);
 		if (lastExtracted === newTarget) return; // could be called more than once
-        lastExtracted = newTarget;
+		lastExtracted = newTarget;
 		if (
 			!newTarget.match(
 				SALESFORCE_URL_PATTERN,

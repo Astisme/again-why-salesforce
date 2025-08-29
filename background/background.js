@@ -114,52 +114,54 @@ export async function bg_getSettings(
  * @param {Array} newsettings - The settings to be stored
  * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
  */
-async function mergeSettings(newsettings, key = SETTINGS_KEY){
-    // get the settings array
-    const isStyleKey = key === GENERIC_TAB_STYLE_KEY || key === ORG_TAB_STYLE_KEY;
-    const settingsArray = !isStyleKey ? await bg_getSettings() : await bg_getSettings(null, key);
-    if (settingsArray == null)
-        return newsettings;
-    for (const item of newsettings) {
-        // check if the item.id is already present
-        const existingItems = settingsArray.filter((setting) =>
-            setting.id === item.id &&
-            (
-                !isStyleKey ||
-                (
-                    setting.forActive == null ||
-                    setting.forActive === item.forActive
-                )
-            )
-        );
-        if (existingItems.length <= 0) {
-            // add the new setting
-            settingsArray.push(item);
-            continue;
-        }
-        if(isStyleKey){
-            if (item.value == null || item.value === "") {
-                // the item has been removed
-                existingItems.forEach((el) => {
-                    const index = settingsArray.indexOf(el);
-                    if (index >= 0) {
-                        settingsArray.splice(index, 1);
-                    }
-                });
-            } else {
-                // the item has been updated
-                existingItems.forEach((existing) =>
-                    existing.value = item.value
-                );
-            }
-        } else {
-            // update the object reference (inside the settingsArray)
-            existingItems.forEach((existing) =>
-                Object.assign(existing, item)
-            );
-        }
-    }
-    return settingsArray;
+async function mergeSettings(newsettings, key = SETTINGS_KEY) {
+	// get the settings array
+	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
+		key === ORG_TAB_STYLE_KEY;
+	const settingsArray = !isStyleKey
+		? await bg_getSettings()
+		: await bg_getSettings(null, key);
+	if (settingsArray == null) {
+		return newsettings;
+	}
+	for (const item of newsettings) {
+		// check if the item.id is already present
+		const existingItems = settingsArray.filter((setting) =>
+			setting.id === item.id &&
+			(
+				!isStyleKey ||
+				(
+					setting.forActive == null ||
+					setting.forActive === item.forActive
+				)
+			)
+		);
+		if (existingItems.length <= 0) {
+			// add the new setting
+			settingsArray.push(item);
+			continue;
+		}
+		if (isStyleKey) {
+			if (item.value == null || item.value === "") {
+				// the item has been removed
+				existingItems.forEach((el) => {
+					const index = settingsArray.indexOf(el);
+					if (index >= 0) {
+						settingsArray.splice(index, 1);
+					}
+				});
+			} else {
+				// the item has been updated
+				existingItems.forEach((existing) =>
+					existing.value = item.value
+				);
+			}
+		} else {
+			// update the object reference (inside the settingsArray)
+			existingItems.forEach((existing) => Object.assign(existing, item));
+		}
+	}
+	return settingsArray;
 }
 
 /**
@@ -369,8 +371,9 @@ function listenToExtensionCommands() {
 	BROWSER.commands.onCommand.addListener(async (command) => {
 		// check the current page is Salesforce Setup
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) // we're not in Salesforce Setup
+		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) { // we're not in Salesforce Setup
 			return;
+		}
 		switch (command) {
 			case CMD_OPEN_SETTINGS:
 				openSettingsPage();

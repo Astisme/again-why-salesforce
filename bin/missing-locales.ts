@@ -85,7 +85,7 @@ function removeKeysFromLocaleFile(
  * Creates a signature for a set of missing keys to use as a grouping identifier
  */
 function createKeySignature(keys: string[]): string {
-	return keys.toSorted((a,b)=>a.localeCompare(b)).join(",");
+	return keys.toSorted((a, b) => a.localeCompare(b)).join(",");
 }
 
 /**
@@ -104,27 +104,30 @@ function getLocaleDirectories(localesDir: string): string[] {
  * Process a single locale file and return missing keys or error status
  */
 function processLocaleFile(
-	//localeDir: string, 
-	localeFilePath: string, 
-	englishFile: any
-): { status: 'success' | 'missing' | 'error'; missingKeys?: string[] } {
+	//localeDir: string,
+	localeFilePath: string,
+	englishFile: any,
+): { status: "success" | "missing" | "error"; missingKeys?: string[] } {
 	if (!fs.existsSync(localeFilePath)) {
-		return { status: 'missing' };
+		return { status: "missing" };
 	}
 
 	try {
 		const localeContent = fs.readFileSync(localeFilePath, "utf8");
 		const localeFile = JSON.parse(localeContent);
-		const { missingKeys, removedKeys } = compareLocaleKeys(englishFile, localeFile);
+		const { missingKeys, removedKeys } = compareLocaleKeys(
+			englishFile,
+			localeFile,
+		);
 
 		if (removedKeys.length > 0) {
 			removeKeysFromLocaleFile(localeFilePath, localeFile, removedKeys);
 		}
 
-		return { status: 'success', missingKeys };
+		return { status: "success", missingKeys };
 	} catch (error) {
 		console.error(`Error processing file ${localeFilePath}:`, error);
-		return { status: 'error' };
+		return { status: "error" };
 	}
 }
 
@@ -132,7 +135,7 @@ function processLocaleFile(
  * Group locales by their missing keys using signatures
  */
 function groupLocalesByMissingKeys(
-	localeResults: { locale: string; missingKeys: string[] }[]
+	localeResults: { locale: string; missingKeys: string[] }[],
 ): { [groupId: string]: LocaleMissingKeys } {
 	const groupedResults: { [groupId: string]: LocaleMissingKeys } = {};
 	const signatureMap: { [signature: string]: number } = {};
@@ -140,7 +143,7 @@ function groupLocalesByMissingKeys(
 
 	for (const result of localeResults) {
 		const signature = createKeySignature(result.missingKeys);
-		
+
 		if (signatureMap[signature] === undefined) {
 			signatureMap[signature] = groupCounter++;
 			groupedResults[signatureMap[signature].toString()] = {
@@ -154,7 +157,7 @@ function groupLocalesByMissingKeys(
 	}
 
 	// Sort locales alphabetically within each group
-	Object.values(groupedResults).forEach(group => {
+	Object.values(groupedResults).forEach((group) => {
 		group.locales.sort();
 	});
 
@@ -165,11 +168,11 @@ function groupLocalesByMissingKeys(
  * Create English missing keys report from all missing keys
  */
 function createEnglishMissingKeysReport(
-	allMissingKeys: Set<string>, 
-	englishFile: any
+	allMissingKeys: Set<string>,
+	englishFile: any,
 ): EnglishMissingKeys {
 	const englishMissingKeys: EnglishMissingKeys = {};
-	
+
 	allMissingKeys.forEach((key) => {
 		if (englishFile[key]) {
 			englishMissingKeys[key] = {
@@ -186,10 +189,10 @@ function createEnglishMissingKeysReport(
  * Helper function to add locales to special groups (missing_files, error_files)
  */
 function addToSpecialGroup(
-	groupedReport: GroupedMissingKeys, 
-	groupId: string, 
-	locale: string, 
-	keys: string[]
+	groupedReport: GroupedMissingKeys,
+	groupId: string,
+	locale: string,
+	keys: string[],
 ): void {
 	if (!groupedReport[groupId]) {
 		groupedReport[groupId] = {
@@ -205,45 +208,61 @@ function addToSpecialGroup(
  */
 function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 	const groupedReport: GroupedMissingKeys = {};
-	
+
 	// Read the English reference file
 	const englishFilePath = path.join(localesDir, "en", "messages.json");
 	if (!fs.existsSync(englishFilePath)) {
-		throw new Error("English reference file not found at: " + englishFilePath);
+		throw new Error(
+			"English reference file not found at: " + englishFilePath,
+		);
 	}
-	
+
 	const englishContent = fs.readFileSync(englishFilePath, "utf8");
 	const englishFile = JSON.parse(englishContent);
-	
+
 	// Get filtered locale directories
 	const localeDirs = getLocaleDirectories(localesDir);
-	
+
 	// Process each locale file
 	const allMissingKeys = new Set<string>();
 	const localeResults: { locale: string; missingKeys: string[] }[] = [];
-	
+
 	for (const localeDir of localeDirs) {
-		const localeFilePath = path.join(localesDir, localeDir, "messages.json");
+		const localeFilePath = path.join(
+			localesDir,
+			localeDir,
+			"messages.json",
+		);
 		const result = processLocaleFile(localeFilePath, englishFile);
-		
-		if (result.status === 'missing') {
-			addToSpecialGroup(groupedReport, "missing_files", localeDir, ["FILE_NOT_FOUND"]);
-		} else if (result.status === 'error') {
-			addToSpecialGroup(groupedReport, "error_files", localeDir, ["FILE_ERROR"]);
+
+		if (result.status === "missing") {
+			addToSpecialGroup(groupedReport, "missing_files", localeDir, [
+				"FILE_NOT_FOUND",
+			]);
+		} else if (result.status === "error") {
+			addToSpecialGroup(groupedReport, "error_files", localeDir, [
+				"FILE_ERROR",
+			]);
 		} else if (result.missingKeys && result.missingKeys.length > 0) {
-			localeResults.push({ locale: localeDir, missingKeys: result.missingKeys });
-			result.missingKeys.forEach(key => allMissingKeys.add(key));
+			localeResults.push({
+				locale: localeDir,
+				missingKeys: result.missingKeys,
+			});
+			result.missingKeys.forEach((key) => allMissingKeys.add(key));
 		}
 	}
-	
+
 	// Group locales by missing keys and add to report
 	const groupedLocales = groupLocalesByMissingKeys(localeResults);
 	Object.assign(groupedReport, groupedLocales);
-	
+
 	// Add English missing keys report
-	const englishReport = createEnglishMissingKeysReport(allMissingKeys, englishFile);
+	const englishReport = createEnglishMissingKeysReport(
+		allMissingKeys,
+		englishFile,
+	);
 	Object.assign(groupedReport, englishReport);
-	
+
 	return groupedReport;
 }
 

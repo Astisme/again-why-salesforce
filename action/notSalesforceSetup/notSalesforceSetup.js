@@ -44,7 +44,7 @@ if (page != null) { // we're in a salesforce page
 			willOpenLogin = false;
 		}
 	} catch (e) {
-        console.warn(e);
+		console.warn(e);
 		sfsetupTextEl.classList.add("hidden");
 		invalidUrl.classList.remove("hidden");
 	}

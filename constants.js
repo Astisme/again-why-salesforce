@@ -184,7 +184,9 @@ export function getCssSelector(
 	isGeneric = true,
 	pseudoElement = "",
 ) {
-	const activeClass = isInactive ? `:not(${SLDS_ACTIVE_CLASS})` : SLDS_ACTIVE_CLASS;
+	const activeClass = isInactive
+		? `:not(${SLDS_ACTIVE_CLASS})`
+		: SLDS_ACTIVE_CLASS;
 	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
 	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pseudoElement}`;
 }

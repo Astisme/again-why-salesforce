@@ -31,7 +31,7 @@ const interval = setInterval(() => {
 		clearInterval(interval);
 	} catch (e) {
 		// wait next interval
-        console.info(e);
+		console.info(e);
 	}
 }, 100);
 
@@ -229,7 +229,7 @@ async function addTab(url) {
 	const href = getCurrentHref();
 	let org;
 	if (
-        skip_link_detection?.enabled === false &&
+		skip_link_detection?.enabled === false &&
 		Tab.containsSalesforceId(href)
 	) {
 		org = Tab.extractOrgName(href);
@@ -257,7 +257,7 @@ async function actionFavourite() {
 			});
 			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
 		} catch (e) {
-            console.warn(e);
+			console.warn(e);
 			showToast("error_remove_not_favourite", false, true);
 		}
 	} else {

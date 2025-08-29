@@ -14,7 +14,7 @@ function sortObjectKeys<T>(obj: T): T {
 		) as unknown as T;
 	} else if (obj !== null && typeof obj === "object") {
 		const entries = Object.keys(obj)
-			.sort((a,b)=>a.localeCompare(b))
+			.sort((a, b) => a.localeCompare(b))
 			.map((key) => {
 				const val = (obj as any)[key];
 				return [
