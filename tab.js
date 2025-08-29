@@ -385,10 +385,11 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return tabToUpdate;
 		}
+        const orginput = org !== "" ? org : undefined;
 		return Tab.create(
 			label ?? tabToUpdate.label,
 			url ?? tabToUpdate.url,
-			org != null ? (org !== "" ? org : undefined) : tabToUpdate.org,
+			org != null ? orginput : tabToUpdate.org,
 		);
 	}
 
