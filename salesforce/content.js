@@ -303,7 +303,7 @@ async function init(tabs = null) {
  * @param {Function} [callback] - A callback function to be invoked with the result of the saved tab check.
  * @returns {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
  */
-export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
+export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
 		fromHrefUpdate = false;
 		return;
