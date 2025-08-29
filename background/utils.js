@@ -70,12 +70,8 @@ export async function bg_notify(message) {
 	if (message == null) {
 		throw new Error("error_no_message");
 	}
-	try {
-		const browserTab = await bg_getCurrentBrowserTab();
-		BROWSER.tabs.sendMessage(browserTab.id, message);
-	} catch (_) {
-		console.trace();
-	}
+    const browserTab = await bg_getCurrentBrowserTab();
+    BROWSER.tabs.sendMessage(browserTab.id, message);
 }
 
 /**
