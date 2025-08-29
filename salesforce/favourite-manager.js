@@ -8,6 +8,8 @@ import {
 	getSettings,
 	sendExtensionMessage,
 	SKIP_LINK_DETECTION,
+	TAB_ADD_FRONT,
+	TAB_AS_ORG,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -225,16 +227,43 @@ function toggleFavouriteButton(isSaved = null, button = null) {
  */
 async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
-	const skip_link_detection = await getSettings(SKIP_LINK_DETECTION);
+	const settings = await getSettings([
+		SKIP_LINK_DETECTION,
+		TAB_ADD_FRONT,
+		TAB_AS_ORG,
+	]);
 	const href = getCurrentHref();
 	let org;
 	if (
-		skip_link_detection?.enabled === false &&
-		Tab.containsSalesforceId(href)
+		(
+			settings != null &&
+			Array.isArray(settings) &&
+			settings.some((s) => s.id === TAB_AS_ORG && s.enabled)
+		) ||
+		(
+			(
+				settings == null ||
+				(
+					Array.isArray(settings) &&
+					settings.some((s) =>
+						s.id === SKIP_LINK_DETECTION && !s.enabled
+					)
+				)
+			) &&
+			Tab.containsSalesforceId(href)
+		)
 	) {
 		org = Tab.extractOrgName(href);
 	}
-	await performActionOnTabs(ACTION_ADD, { label, url, org });
+	await performActionOnTabs(
+		ACTION_ADD,
+		{ label, url, org },
+		{
+			addInFront: settings != null &&
+				Array.isArray(settings) &&
+				settings.some((s) => s.id === TAB_ADD_FRONT && s.enabled),
+		},
+	);
 }
 
 /**

@@ -21,6 +21,9 @@ import {
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
 	CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_LABEL,
+	CXM_SORT_ORG,
+	CXM_SORT_URL,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
@@ -277,16 +280,18 @@ async function init(tabs = null) {
 		if (orgName == null) {
 			orgName = Tab.extractOrgName(href);
 		}
+		const frag = document.createDocumentFragment();
 		allTabs.forEach((row) => {
 			// TODO add option to hide or show not-this-org tabs
 			// hide not-this-org tabs
-			setupTabUl.appendChild(
+			frag.appendChild(
 				generateRowTemplate(
 					row,
 					!(row.org == null || row.org === orgName),
 				),
 			);
 		});
+		setupTabUl.appendChild(frag);
 	}
 	isOnSavedTab();
 	checkKeepTabsOnLeft();
@@ -657,6 +662,7 @@ const ACTION_REMOVE_GENERIC_TABS = "remove-generic-tabs";
 const ACTION_RESET_DEFAULT = "reset-default";
 const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
+const ACTION_SORT = "sort";
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -691,7 +697,14 @@ export async function performActionOnTabs(
 				}
 				break;
 			case ACTION_ADD:
-				if (!await allTabs.addTab(tab)) {
+				if (
+					!await allTabs.addTab(
+						tab,
+						undefined,
+						undefined,
+						options?.addInFront,
+					)
+				) {
 					throw new Error("error_adding_tab");
 				}
 				break;
@@ -726,6 +739,11 @@ export async function performActionOnTabs(
 					throw new Error("error_resetting_default_tabs");
 				}
 				break;
+			case ACTION_SORT:
+				if (!await allTabs.sort(options)) {
+					throw new Error("error_sorting_tabs", options);
+				}
+				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -755,13 +773,10 @@ async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
 		inputTab.org = Tab.extractOrgName(getCurrentHref());
 	}
 	allTabs = await ensureAllTabsAvailability();
-	const matchingTab = allTabs.getSingleTabByData(inputTab);
-	matchingTab.update({
-		org: matchingTab.org == null ? getCurrentHref() : "",
-	});
-	if (!await allTabs.syncTabs()) {
-		throw new Error("error_failed_sync");
-	}
+	await allTabs.updateTab(
+		inputTab,
+		matchingTab.org == null ? getCurrentHref() : "",
+	);
 }
 
 /**
@@ -820,18 +835,11 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 	});
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		matchingTab.update({
-			label: labelContainer.value !== ""
-				? labelContainer.value
-				: matchingTab.label,
-			url: urlContainer.value !== ""
-				? urlContainer.value
-				: matchingTab.url,
+		await allTabs.updateTab(matchingTab, {
+			label: labelContainer.value,
+			url: urlContainer.value,
 			org: orgContainer.value,
 		});
-		if (!await allTabs.syncTabs()) {
-			throw new Error("error_failed_sync");
-		}
 		sf_afterSet();
 		closeButton.click();
 	});
@@ -1019,6 +1027,27 @@ function listenToBackgroundPage() {
 					break;
 				case CXM_RESET_DEFAULT_TABS:
 					await performActionOnTabs(ACTION_RESET_DEFAULT);
+					break;
+				case CXM_SORT_LABEL:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "label",
+						sortAsc: allTabs.isSortedBy !== "label" ||
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_URL:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "url",
+						sortAsc: allTabs.isSortedBy !== "url" ||
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_ORG:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "org",
+						sortAsc: allTabs.isSortedBy !== "org" ||
+							!allTabs.isSortedAsc,
+					});
 					break;
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);
