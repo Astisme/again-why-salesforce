@@ -414,14 +414,11 @@ async function findTabsFromRows(orgName = null) {
  * @returns {Promise<void>} A promise that resolves once the tabs have been saved and optionally rows reloaded.
  */
 async function saveTabs(doReload = true, tabs = null) {
-	//const orgName = await pop_extractOrgName();
 	if (!TabContainer.isValid(tabs)) {
-		//tabs = await findTabsFromRows(orgName);
 		tabs = await findTabsFromRows();
 	}
 	await allTabs.replaceTabs(tabs, {
 		removeOrgTabs: true,
-		//keepTabsNotThisOrg: orgName,
 	});
 	if (doReload) {
 		await reloadRows();
