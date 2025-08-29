@@ -97,7 +97,6 @@ function _exportHandler(tabs) {
 				}
 			});
 		});
-		return;
 	} else if (ISCHROME) {
 		// Chrome implementation
 		const dataStr = "data:application/json;charset=utf-8," +
@@ -106,7 +105,6 @@ function _exportHandler(tabs) {
 			url: dataStr,
 			filename,
 		});
-		return;
 	} else {
 		// Safari and unidentified browsers: send a message to the content script
 		bg_notify({
@@ -114,7 +112,6 @@ function _exportHandler(tabs) {
 			filename,
 			payload: jsonData,
 		});
-		return;
 	}
 }
 
