@@ -231,7 +231,8 @@ class TranslationService {
 				messageTranslated += ` ${innerTranslation}`;
 			}
 			return messageTranslated.slice(1);
-		} catch (_) {
+		} catch (e) {
+            console.info(e);
 			return key;
 		}
 	}
@@ -353,7 +354,8 @@ function getTranslator() {
 export default async function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
-	} catch (_) {
+	} catch (e) {
+        console.info(e);
 		return await getTranslator_async();
 	}
 }
