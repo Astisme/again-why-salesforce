@@ -36,13 +36,13 @@ function compareLocaleKeys(
 	const removedKeys: string[] = [];
 	// Find keys in English file but not in locale file (missing)
 	for (const key in englishFile) {
-		if (!Object.prototype.hasOwnProperty.call(localeFile, key)) {
+		if (!Object.hasOwn(localeFile, key)) {
 			missingKeys.push(key);
 		}
 	}
 	// Find keys in locale file but not in English file (removed)
 	for (const key in localeFile) {
-		if (!Object.prototype.hasOwnProperty.call(englishFile, key)) {
+		if (!Object.hasOwn(englishFile, key)) {
 			removedKeys.push(key);
 		}
 	}
