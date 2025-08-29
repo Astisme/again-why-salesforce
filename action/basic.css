@@ -145,3 +145,11 @@ input {
 	color: var(--color);
 	background-color: var(--background-color);
 }
+
+iframe {
+	transition-property: background-color;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+    border: none;
+    height: 2.1rem !important;
+}
