@@ -48,7 +48,7 @@ export const SALESFORCE_ID_PATTERN = new RegExp(
 	"i",
 );
 export const SALESFORCE_URL_PATTERN =
-	/^[a-zA-Z0-9\-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
+	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
 export const FRAME_PATTERNS = [
 	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
 	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
@@ -58,10 +58,10 @@ export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
 	`${item.substring(0, item.length - 2)}${SETUP_LIGHTNING}*`
 );
 export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
-	item.replaceAll("\*", ".*")
+	item.replaceAll("*", ".*")
 );
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.", "\\.")}.*$`,
+	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 export const MANIFEST = BROWSER.runtime.getManifest();
