@@ -217,7 +217,7 @@ async function getCurrentUserInfo(currentUrl) {
 			);
 		}
 		const cookies = await BROWSER.cookies.getAll({
-			domain: origin.replace("https:\/\/", ""),
+			domain: origin.replace("https://", ""),
 			name: "sid",
 		});
 		if (cookies.length === 0) {
