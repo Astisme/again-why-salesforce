@@ -273,7 +273,8 @@ export default class Tab {
 		try {
 			Tab.create(tab);
 			return true;
-		} catch (_) {
+		} catch (e) {
+            console.info(e);
 			// error on creation of tab
 			return false;
 		}
