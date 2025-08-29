@@ -227,12 +227,9 @@ async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
 	const skip_link_detection = await getSettings(SKIP_LINK_DETECTION);
 	const href = getCurrentHref();
-	let org = undefined;
+	let org;
 	if (
-		(
-			skip_link_detection == null ||
-			skip_link_detection.enabled === false
-		) &&
+        skip_link_detection?.enabled === false &&
 		Tab.containsSalesforceId(href)
 	) {
 		org = Tab.extractOrgName(href);
