@@ -31,8 +31,9 @@ const interval = setInterval(() => {
 	try {
 		allTabs = getAllTabs();
 		clearInterval(interval);
-	} catch (_) {
+	} catch (e) {
 		// wait next interval
+		console.info(e);
 	}
 }, 100);
 
@@ -232,7 +233,7 @@ async function addTab(url) {
 		TAB_AS_ORG,
 	]);
 	const href = getCurrentHref();
-	let org = undefined;
+	let org;
 	if (
 		(
 			settings != null &&
@@ -284,7 +285,8 @@ async function actionFavourite() {
 				org: Tab.extractOrgName(getCurrentHref()),
 			});
 			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
-		} catch (_) {
+		} catch (e) {
+			console.warn(e);
 			showToast("error_remove_not_favourite", false, true);
 		}
 	} else {

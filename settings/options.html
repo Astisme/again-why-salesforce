@@ -58,9 +58,9 @@
 			<div class="slds-context-bar__primary navLeft navBar">
 				<div class="navexSetupNav">
 					<div class="slds-context-bar__item slds-no-hover">
-						<div
-							role="navigation"
+						<nav
 							class="appLauncher slds-context-bar__icon-action"
+							aria-label="title"
 						>
 							<one-app-launcher-header>
 								<button
@@ -79,7 +79,7 @@
 									</div>
 								</button>
 							</one-app-launcher-header>
-						</div>
+						</nav>
 						<div
 							class="appName slds-context-bar__label-action slds-context-bar__app-name"
 						>
@@ -93,17 +93,14 @@
 				</div>
 			</div>
 			<div class="slds-context-bar__secondary navCenter tabBarContainer">
-				<div
-					role="navigation"
+				<nav
 					class="tabContainer oneConsoleTabContainer slds-grid active navexConsoleTabContainer"
+					aria-label="navigation"
 				>
 					<div role="tablist" class="tabBar slds-grid resizing">
-						<!--  style="overflow-x: auto; overflow-y: hidden; scrollbar-width: thin;" -->
-
-						<ul role="presentation" class="tabBarItems slds-grid">
+						<ul class="tabBarItems slds-grid">
 							<li
 								id="general-settings"
-								role="presentation"
 								class="oneConsoleTabItem tabItem slds-context-bar__item borderRight slds-is-active active hideAnimation navexConsoleTabItem"
 							>
 								<a
@@ -189,7 +186,7 @@
 							</li>
 						</ul>
 					</div>
-				</div>
+				</nav>
 			</div>
 		</div>
 
@@ -707,17 +704,14 @@
 								<ul
 									id="tab_generic_style-set_decoration_available-inactive"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 									<li
 										id="tab_generic_style-bold-inactive"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="bold"
 									>
 										<!-- set aria-selected="true" from js -->
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -733,12 +727,10 @@
 									</li>
 									<li
 										id="tab_generic_style-italic-inactive"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="italic"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -754,12 +746,10 @@
 									</li>
 									<li
 										id="tab_generic_style-underline-inactive"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="underline"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -774,8 +764,8 @@
 										</div>
 									</li>
 									<!--
-                                        <li id="tab_generic_style-wavy-inactive" role="presentation" class="slds-listbox__item" data-style-key="wavy">
-                                        <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <li id="tab_generic_style-wavy-inactive" class="slds-listbox__item" data-style-key="wavy">
+                                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                                         <span class="slds-media__body">
                                         <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
                                         </span>
@@ -832,7 +822,6 @@
 								<ul
 									id="tab_generic_style-set_decoration_chosen-inactive"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 								</ul>
 							</div>
@@ -1073,17 +1062,14 @@
 								<ul
 									id="tab_generic_style-set_decoration_available-active"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 									<li
 										id="tab_generic_style-bold-active"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="bold"
 									>
 										<!-- set aria-selected="true" from js -->
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1099,12 +1085,10 @@
 									</li>
 									<li
 										id="tab_generic_style-italic-active"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="italic"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1120,12 +1104,10 @@
 									</li>
 									<li
 										id="tab_generic_style-underline-active"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="underline"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1140,8 +1122,8 @@
 										</div>
 									</li>
 									<!--
-                        <li id="tab_generic_style-wavy-active" role="presentation" class="slds-listbox__item" data-style-key="wavy">
-                        <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                        <li id="tab_generic_style-wavy-active" class="slds-listbox__item" data-style-key="wavy">
+                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                         <span class="slds-media__body">
                         <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
                         </span>
@@ -1198,7 +1180,6 @@
 								<ul
 									id="tab_generic_style-set_decoration_chosen-active"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 								</ul>
 							</div>
@@ -1481,17 +1462,14 @@
 								<ul
 									id="tab_org_style-set_decoration_available-inactive"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 									<li
 										id="tab_org_style-bold-inactive"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="bold"
 									>
 										<!-- set aria-selected="true" from js -->
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1507,12 +1485,10 @@
 									</li>
 									<li
 										id="tab_org_style-italic-inactive"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="italic"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1528,12 +1504,10 @@
 									</li>
 									<li
 										id="tab_org_style-underline-inactive"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="underline"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1548,8 +1522,8 @@
 										</div>
 									</li>
 									<!--
-                        <li id="tab_org_style-wavy-inactive" role="presentation" class="slds-listbox__item" data-style-key="wavy">
-                        <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                        <li id="tab_org_style-wavy-inactive" class="slds-listbox__item" data-style-key="wavy">
+                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                         <span class="slds-media__body">
                         <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
                         </span>
@@ -1606,7 +1580,6 @@
 								<ul
 									id="tab_org_style-set_decoration_chosen-inactive"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 								</ul>
 							</div>
@@ -1845,17 +1818,14 @@
 								<ul
 									id="tab_org_style-set_decoration_available-active"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 									<li
 										id="tab_org_style-bold-active"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="bold"
 									>
 										<!-- set aria-selected="true" from js -->
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1871,12 +1841,10 @@
 									</li>
 									<li
 										id="tab_org_style-italic-active"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="italic"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1892,12 +1860,10 @@
 									</li>
 									<li
 										id="tab_org_style-underline-active"
-										role="presentation"
 										class="slds-listbox__item"
 										data-style-key="underline"
 									>
 										<div
-											role="option"
 											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
 											aria-selected="false"
 										>
@@ -1912,8 +1878,8 @@
 										</div>
 									</li>
 									<!--
-                        <li id="tab_org_style-wavy-active" role="presentation" class="slds-listbox__item" data-style-key="wavy">
-                        <div role="option" class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                        <li id="tab_org_style-wavy-active" class="slds-listbox__item" data-style-key="wavy">
+                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
                         <span class="slds-media__body">
                         <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
                         </span>
@@ -1970,7 +1936,6 @@
 								<ul
 									id="tab_org_style-set_decoration_chosen-active"
 									class="slds-listbox slds-listbox_vertical"
-									role="listbox"
 								>
 								</ul>
 							</div>

@@ -223,7 +223,7 @@ class TranslationService {
 			let messageTranslated = "";
 			const words = keyTranslate.split(/\s+/);
 			for (const word of words) {
-				if (!word.startsWith("\$")) {
+				if (!word.startsWith("$")) {
 					messageTranslated += ` ${word}`;
 					continue;
 				}
@@ -231,7 +231,8 @@ class TranslationService {
 				messageTranslated += ` ${innerTranslation}`;
 			}
 			return messageTranslated.slice(1);
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			return key;
 		}
 	}
@@ -263,7 +264,6 @@ class TranslationService {
 			const translation = (await this.translate(
 				key,
 			)).replaceAll("\n", "<br />");
-			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;
 			if (attributes.length === 0) {
 				attributes.push("textContent");
@@ -354,7 +354,8 @@ function getTranslator() {
 export default async function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
-	} catch (_) {
+	} catch (e) {
+		console.info(e);
 		return await getTranslator_async();
 	}
 }
