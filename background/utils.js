@@ -54,13 +54,9 @@ export function bg_getCurrentBrowserTab(callback = null) {
 	}
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
-			try {
-				queryTabs(resolve)
-					.then((q) => resolve(q))
-					.catch((e) => reject(e));
-			} catch (error) {
-				reject(error);
-			}
+            queryTabs(resolve)
+                .then((q) => resolve(q))
+                .catch((e) => reject(e));
 		});
 	}
 	queryTabs(callback);
