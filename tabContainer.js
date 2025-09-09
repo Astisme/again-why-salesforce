@@ -1033,16 +1033,22 @@ export default class TabContainer extends Array {
 		fromSortFunction = false,
 		fromInvalidateSortFunction = false,
 	) {
-		if (fromSortFunction) {
-			// already sorted everything
-			return true;
+		/**
+		 * Sets the sort state properties based on detected sorting
+		 * @param {string} key - The key that tabs are sorted by
+		 * @param {boolean} isAscending - Whether the sort is ascending
+		 */
+		function setSortState(key = null, isAscending = null) {
+			this.#isSorted = key != null;
+			this.#isSortedBy = key;
+			this.#isSortedAsc = isAscending === true ?? false;
+			this.#isSortedDesc = isAscending === false ?? false;
 		}
-		this.#isSorted = false;
-		this.#isSortedBy = null;
-		this.#isSortedAsc = false;
-		this.#isSortedDesc = false;
-		if (fromInvalidateSortFunction) {
-			// update the sort setting persisted (do not wait for response)
+		/**
+		 * Handles the invalidation of sort function by updating persisted settings
+		 */
+		function handleInvalidateSort() {
+			// Update the sort setting persisted (do not wait for response)
 			sendExtensionMessage({
 				what: "set",
 				key: SETTINGS_KEY,
@@ -1051,33 +1057,77 @@ export default class TabContainer extends Array {
 					enabled: false,
 				}],
 			});
-			// check if, out of luck, the array is still sorted
 		}
-		// check if the user wants to keep the Tabs always sorted
-		if (await this.checkShouldKeepSorted()) { // if true, has already sorted and set the variables
+		/**
+		 * Detects if the current tabs are sorted by any allowed key
+		 * @returns {boolean} true if tabs are sorted, false otherwise
+		 */
+		function detectSortOrder() {
+			/**
+			 * Checks if tabs are sorted by a specific key
+			 * @param {string} key - The key to check sorting for
+			 * @returns {{isSorted: boolean, isAscending: boolean}} Sort result
+			 */
+			function checkSortOrderForKey(key) {
+				/**
+				 * Compares two tab values for sorting
+				 * @param {*} prev - Previous value
+				 * @param {*} curr - Current value
+				 * @returns {number} Comparison result (-1, 0, 1)
+				 */
+				function compareTabValues(prev, curr) {
+					const prevVal = prev == null
+						? ""
+						: String(prev).toLowerCase();
+					const currVal = curr == null
+						? ""
+						: String(curr).toLowerCase();
+
+					if (prevVal < currVal) return -1;
+					if (prevVal > currVal) return 1;
+					return 0;
+				}
+				let asc = true;
+				let desc = true;
+				for (let i = 1; i < this.length; i++) {
+					const comparison = compareTabValues(
+						this[i - 1][key],
+						this[i][key],
+					);
+					if (comparison > 0) asc = false;
+					if (comparison < 0) desc = false;
+					if (!asc && !desc) {
+						break; // No need to continue checking
+					}
+				}
+				return {
+					isSorted: asc || desc,
+					isAscending: asc && !desc,
+				};
+			}
+			for (const key of Tab.allowedKeys) {
+				const sortResult = checkSortOrderForKey(key);
+				if (sortResult.isSorted) {
+					setSortState(key, sortResult.isAscending);
+					break;
+				}
+			}
+			return this.#isSorted;
+		}
+		if (fromSortFunction) {
+			// already sorted everything
 			return true;
 		}
-		for (const key of Tab.allowedKeys) {
-			let asc = true;
-			let desc = true;
-			for (let i = 1; i < this.length; i++) {
-				const prev = this[i - 1][key];
-				const curr = this[i][key];
-				const prevVal = prev == null ? "" : String(prev).toLowerCase();
-				const currVal = curr == null ? "" : String(curr).toLowerCase();
-				if (prevVal > currVal) asc = false;
-				if (prevVal < currVal) desc = false;
-				if (!asc && !desc) break; // No need to continue checking
-			}
-			if (asc || desc) {
-				this.#isSorted = true;
-				this.#isSortedBy = key;
-				this.#isSortedAsc = asc;
-				this.#isSortedDesc = desc;
-				break; // Exit after first detected sort order
-			}
+		setSortState();
+		if (fromInvalidateSortFunction) {
+			handleInvalidateSort();
+			// check if, out of luck, the array is still sorted (do not return)
 		}
-		return this.#isSorted;
+		// Check if the user wants to keep the Tabs always sorted
+		if (await this.checkShouldKeepSorted()) {
+			return true;
+		}
+		return detectSortOrder();
 	}
 
 	/**
