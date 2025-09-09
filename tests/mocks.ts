@@ -82,14 +82,14 @@ export const mockBrowser = {
 					response[key] = mockStorage[key];
 				});
 				if (callback == null) {
-					return new Promise((resolve, _) => resolve(response));
+					return Promise.resolve(response));
 				}
 				return callback(response);
 			},
 			set: (data: object, callback): Promise<boolean> => {
 				Object.assign(mockStorage, data);
 				if (callback == null) {
-					return new Promise((resolve, _) => resolve(true));
+					return Promise.resolve(true));
 				}
 				return callback(true);
 			},
