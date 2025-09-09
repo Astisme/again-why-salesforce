@@ -78,7 +78,7 @@ export class TabContainer extends Array {
 			 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
 			 */
 			async function checkAddTabs(tabs) {
-				if (tabs.length <= 0 || !TabContainer.isValid(tabs, false)) {
+				if (tabs == null || tabs.length <= 0 || !TabContainer.isValid(tabs, false)) {
 					return false;
 				}
 				return await singletonAllTabs.addTabs(tabs);

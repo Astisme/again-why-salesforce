@@ -160,8 +160,11 @@ input {
 	background-color: var(--warning) !important;
 }
 
-svg#open-settings {
+svg {
 	height: 2rem;
+}
+
+svg#open-settings {
 	min-width: 2rem;
 	margin-left: 0.5rem;
 
@@ -173,6 +176,7 @@ svg#open-settings {
 svg#review {
   stroke: var(--color);
 }
+
 svg#sponsor {
   fill: var(--color);
   height: 1.8rem;

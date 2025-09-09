@@ -9,18 +9,45 @@ import {
 	CMD_OPEN_SETTINGS,
 	FRAME_PATTERNS,
 	ISSAFARI,
+  ISCHROME,
+  ISFIREFOX,
+  ISEDGE,
 	openSettingsPage,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { setupDrag } from "../../dragHandler.js";
+import { setupDrag } from "/dragHandler.js";
 setupDrag();
 
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
 const translator = await ensureTranslatorAvailability();
 const allTabs = await ensureAllTabsAvailability();
+
+const hiddenClass = "hidden";
+console.log(allTabs.length)
+if(allTabs.length >= 8){
+  if(!ISSAFARI){
+    const reviewSvg = document.getElementById("review");
+    reviewSvg?.classList.remove(hiddenClass);
+    reviewSvg?.addEventListener("click", () => {
+      if(ISEDGE)
+        return open("https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description");
+      if(ISCHROME)
+        return open("https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews");
+      if(ISFIREFOX)
+        return open("https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/");
+    });
+  }
+  if(allTabs.length >= 16){
+    const sponsorSvg = document.getElementById("sponsor");
+    sponsorSvg?.classList.remove(hiddenClass);
+    sponsorSvg?.addEventListener("click", () => {
+      open("https://alfredoit.dev/en/sponsor/");
+    });
+  }
+}
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -37,8 +64,8 @@ let loggers = [];
 function initThemeSvg() {
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToShow.classList.remove("invisible", "hidden");
-	elementToHide.classList.add("invisible", "hidden");
+	elementToShow.classList.remove("invisible", hiddenClass);
+	elementToHide.classList.add("invisible", hiddenClass);
 }
 initThemeSvg();
 
@@ -91,8 +118,8 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 function switchTheme() {
 	const elementToShow = html.dataset.theme === "light" ? sun : moon;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToHide.classList.add("invisible", "hidden");
-	elementToShow.classList.remove("hidden");
+	elementToHide.classList.add("invisible", hiddenClass);
+	elementToShow.classList.remove(hiddenClass);
 	setTimeout(() => {
 		elementToShow.classList.remove("invisible");
 	}, 200);

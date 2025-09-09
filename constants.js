@@ -9,8 +9,10 @@ function detectBrowser() {
 	if (userAgent.indexOf("firefox") !== -1) {
 		return "firefox";
 	}
+  if(userAgent.indexOf("edg") !== -1)
+    return "edge";
 	// Chrome detection (including Edge and other Chromium-based browsers)
-	if (userAgent.indexOf("chrome") !== -1 || userAgent.indexOf("edg") !== -1) {
+	if (userAgent.indexOf("chrome") !== -1) {
 		return "chrome";
 	}
 	// Safari detection (after checking for Chrome since Chrome includes "safari" in its user agent)
@@ -20,7 +22,8 @@ function detectBrowser() {
 	return undefined;
 }
 export const BROWSER_NAME = detectBrowser();
-export const ISCHROME = BROWSER_NAME === "chrome";
+export const ISEDGE = BROWSER_NAME === "edge";
+export const ISCHROME = BROWSER_NAME === "chrome" || ISEDGE;
 export const ISFIREFOX = BROWSER_NAME === "firefox";
 export const ISSAFARI = BROWSER_NAME === "safari";
 export const BROWSER = ISCHROME ? chrome : browser;
