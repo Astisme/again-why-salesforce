@@ -791,6 +791,10 @@
 		"message": "Sačuvaj kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
 	},
+	"send_tip": {
+		"message": "Пошаљите нам напојницу ❤️",
+		"description": "[popup] наслов за svg за подстицање слања напојнице"
+	},
 	"set_gen_preview": {
 		"message": "Tab Преглед",
 		"description": "Ознака за преглед изгледа генеричког Tab-а"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Kamo?",
 		"description": "[open-other-org-modal] alternativni naslov za modal"
+	},
+	"write_review": {
+		"message": "Напишите рецензију!",
+		"description": "[popup] наслов за svg за тражење писања рецензије"
 	}
 }

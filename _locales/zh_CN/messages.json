@@ -791,6 +791,10 @@
 		"message": "另存为 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"
 	},
+	"send_tip": {
+		"message": "发送小费 ❤️",
+		"description": "[popup] 提示发送小费的 svg 标题"
+	},
 	"set_gen_preview": {
 		"message": "Tab 预览",
 		"description": "预览通用 Tab 外观的标签"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "去哪里？",
 		"description": "[打开其他组织模态框] 模态框的备用标题"
+	},
+	"write_review": {
+		"message": "写评论！",
+		"description": "[popup] 要求写评论的 svg 标题"
 	}
 }

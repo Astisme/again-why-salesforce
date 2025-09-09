@@ -791,6 +791,10 @@
 		"message": "Tab으로 저장",
 		"description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
 	},
+	"send_tip": {
+		"message": "팁을 보내주세요 ❤️",
+		"description": "[popup] 팁 전송을 요청하는 svg의 제목"
+	},
 	"set_gen_preview": {
 		"message": "Tab 미리보기",
 		"description": "일반 Tab 모양을 미리보는 레이블"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "어디로?",
 		"description": "[다른_조직_열기_모달] 모달의 대체 제목"
+	},
+	"write_review": {
+		"message": "리뷰를 작성해 주세요!",
+		"description": "[popup] 리뷰 작성을 요청하는 svg의 제목"
 	}
 }

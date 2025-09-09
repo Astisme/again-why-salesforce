@@ -790,6 +790,10 @@
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
 	},
+	"send_tip": {
+		"message": "Kirimkan kami tip ❤️",
+		"description": "[popup] judul untuk svg untuk meminta pengiriman tip"
+	},
 	"set_gen_preview": {
 		"message": "Pratinjau Tab",
 		"description": "Label untuk melihat pratinjau tampilan Tab umum"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Ke mana?",
 		"description": "[open-other-org-modal] Judul alternatif untuk modal"
+	},
+	"write_review": {
+		"message": "Tulis ulasan!",
+		"description": "[popup] judul untuk svg untuk meminta penulisan ulasan"
 	}
 }

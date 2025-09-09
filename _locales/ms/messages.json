@@ -791,6 +791,10 @@
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] teks alternatif apabila gambar tidak berfungsi"
 	},
+	"send_tip": {
+		"message": "Hantarkan kami tip ❤️",
+		"description": "[popup] tajuk untuk svg untuk meminta penghantaran tip"
+	},
 	"set_gen_preview": {
 		"message": "Pratonton Tab",
 		"description": "Label untuk pratonton rupa Tab umum"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Ke mana?",
 		"description": "[buka-modal-org-lain] tajuk sandaran untuk modal"
+	},
+	"write_review": {
+		"message": "Tulis ulasan!",
+		"description": "[popup] tajuk untuk svg untuk meminta penulisan ulasan"
 	}
 }

@@ -791,6 +791,10 @@
 		"message": "Save as Tab",
 		"description": "[alt] 當圖片無法顯示時的替代文字"
 	},
+	"send_tip": {
+		"message": "發送小費 ❤️",
+		"description": "[popup] 提示發送小費的 svg 標題"
+	},
 	"set_gen_preview": {
 		"message": "Tab 預覽",
 		"description": "預覽一般 Tab 外觀的標籤"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] 模態視窗的備用標題"
+	},
+	"write_review": {
+		"message": "撰寫評論！",
+		"description": "[popup] 要求撰寫評論的 svg 標題"
 	}
 }

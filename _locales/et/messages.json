@@ -791,6 +791,10 @@
 		"message": "Salvesta kui Tab",
 		"description": "[alt] alternatiivtekst, kui pildid ei tööta"
 	},
+	"send_tip": {
+		"message": "Saada meile jootraha ❤️",
+		"description": "[popup] svg-i pealkiri jootraha saatmise küsimiseks"
+	},
 	"set_gen_preview": {
 		"message": "Tab eelvaade",
 		"description": "Silt üldiste Tab'ide välimuse eelvaatamiseks"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Kuhu?",
 		"description": "[ava_teine_org_modaal] varupealkiri modaali jaoks"
+	},
+	"write_review": {
+		"message": "Kirjuta arvustus!",
+		"description": "[popup] svg-i pealkiri arvustuse kirjutamise taotlemiseks"
 	}
 }

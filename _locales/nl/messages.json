@@ -791,6 +791,10 @@
 		"message": "Opslaan als Tab",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
 	},
+	"send_tip": {
+		"message": "Stuur ons een fooi ❤️",
+		"description": "[popup] titel voor svg om te vragen om een fooi te sturen"
+	},
 	"set_gen_preview": {
 		"message": "Tab Voorbeeld",
 		"description": "Label voor het bekijken van de algemene Tab-weergave"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Waarheen?",
 		"description": "[open-andere-org-modal] fallback-titel voor de modal"
+	},
+	"write_review": {
+		"message": "Schrijf een recensie!",
+		"description": "[popup] titel voor svg om te vragen om een recensie te schrijven"
 	}
 }

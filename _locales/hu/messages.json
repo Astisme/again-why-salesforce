@@ -791,6 +791,10 @@
 		"message": "Mentés Tabként",
 		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
 	},
+	"send_tip": {
+		"message": "Küldj nekünk egy tippet ❤️",
+		"description": "[popup] cím svg-hez, hogy küldjön egy tippet"
+	},
 	"set_gen_preview": {
 		"message": "Tab Előnézet",
 		"description": "Címke az általános Tab megjelenésének előnézetéhez"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Hová?",
 		"description": "[open-other-org-modal] alternatív cím a modális ablakhoz"
+	},
+	"write_review": {
+		"message": "Írj véleményt!",
+		"description": "[popup] cím svg-hez, hogy vélemény írását kérje"
 	}
 }
