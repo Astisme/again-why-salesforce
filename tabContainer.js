@@ -1035,16 +1035,16 @@ export class TabContainer extends Array {
 		 * @param {string} key - The key that tabs are sorted by
 		 * @param {boolean} isAscending - Whether the sort is ascending
 		 */
-		function setSortState(key = null, isAscending = null) {
+		const setSortState = (key = null, isAscending = null) => {
 			this.#isSorted = key != null;
 			this.#isSortedBy = key;
 			this.#isSortedAsc = isAscending === true;
 			this.#isSortedDesc = isAscending === false;
-		}
+		};
 		/**
 		 * Handles the invalidation of sort function by updating persisted settings
 		 */
-		function handleInvalidateSort() {
+		const handleInvalidateSort = () => {
 			// Update the sort setting persisted (do not wait for response)
 			sendExtensionMessage({
 				what: "set",
@@ -1054,39 +1054,35 @@ export class TabContainer extends Array {
 					enabled: false,
 				}],
 			});
-		}
+		};
 		/**
 		 * Detects if the current tabs are sorted by any allowed key
 		 * @returns {boolean} true if tabs are sorted, false otherwise
 		 */
-		function detectSortOrder() {
+		const detectSortOrder = () => {
 			/**
 			 * Checks if tabs are sorted by a specific key
 			 * @param {string} key - The key to check sorting for
 			 * @returns {{isSorted: boolean, isAscending: boolean}} Sort result
 			 */
-			function checkSortOrderForKey(key) {
+			const checkSortOrderForKey = (key) => {
 				/**
 				 * Compares two tab values for sorting
 				 * @param {*} prev - Previous value
 				 * @param {*} curr - Current value
 				 * @returns {number} Comparison result (-1, 0, 1)
 				 */
-				function compareTabValues(prev, curr) {
-					const prevVal = prev == null
-						? ""
-						: String(prev);
-					const currVal = curr == null
-						? ""
-						: String(curr);
-                    return String(prevVal).localeCompare(
-                        String(currVal),
-                        undefined,
-                        {
-                            sensitivity: "base",
-                        },
-                    );
-				}
+				const compareTabValues = (prev, curr) => {
+					const prevVal = prev == null ? "" : String(prev);
+					const currVal = curr == null ? "" : String(curr);
+					return String(prevVal).localeCompare(
+						String(currVal),
+						undefined,
+						{
+							sensitivity: "base",
+						},
+					);
+				};
 				let asc = true;
 				let desc = true;
 				for (let i = 1; i < this.length; i++) {
@@ -1094,7 +1090,7 @@ export class TabContainer extends Array {
 						this[i - 1][key],
 						this[i][key],
 					);
-                    if (comparison === 0) continue;
+					if (comparison === 0) continue;
 					if (comparison > 0) asc = false;
 					if (comparison < 0) desc = false;
 					if (!asc && !desc) {
@@ -1105,7 +1101,7 @@ export class TabContainer extends Array {
 					isSorted: asc || desc,
 					isAscending: asc && !desc,
 				};
-			}
+			};
 			for (const key of Tab.allowedKeys) {
 				const sortResult = checkSortOrderForKey(key);
 				if (sortResult.isSorted) {
@@ -1114,7 +1110,7 @@ export class TabContainer extends Array {
 				}
 			}
 			return this.#isSorted;
-		}
+		};
 		if (fromSortFunction) {
 			// already sorted everything
 			return true;

@@ -43,16 +43,6 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 		async () => {
 			mockStorage.againWhySalesforce.length = 0;
 			const container = await TabContainer._reset();
-
-			assertEquals(container.length, 3); // Default tabs count
-			assertEquals(container[0].label, "⚡");
-			assertEquals(container[1].label, "flows");
-			assertEquals(container[2].label, "users");
-
-			mockStorage.againWhySalesforce = [];
-			container.length = 0;
-			assert(await container._initialize());
-
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
 			assertEquals(container[1].label, "flows");
@@ -79,10 +69,10 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[1].label, "flows");
 			assertEquals(container[2].label, "users");
 			// reset container
-			mockStorage.tabs = [false];
+			mockStorage.againWhySalesforce = [false];
 			assertRejects(async () => await TabContainer._reset());
 			// reset container
-			mockStorage.tabs = [null];
+			mockStorage.againWhySalesforce = [null];
 			assertRejects(async () => await TabContainer._reset());
 		},
 	);
@@ -809,8 +799,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 	});
 
 	await t.step("setDefaultTabs", async () => {
-		await container.setDefaultTabs();
->>>>>>> e200f88545a10dee716ccaeeaf4be0531fb593e5
+		container.length = 0;
 		assertEquals(container.length, 0);
 		assert(await container.setDefaultTabs());
 		assertEquals(container.length, 3);

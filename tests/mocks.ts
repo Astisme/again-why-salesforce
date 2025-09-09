@@ -1,6 +1,13 @@
 // deno-lint-ignore-file no-explicit-any
 import Tab from "/tab.js";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
+enum StorageKeys {
+	WHY_KEY = "againWhySalesforce",
+	LOCALE_KEY = "_locale",
+	SETTINGS_KEY = "settings",
+	GENERIC_TAB_STYLE_KEY = "settings-tab_generic_style",
+	ORG_TAB_STYLE_KEY = "settings-tab_org_style",
+}
 
 export interface MockStorage {
 	againWhySalesforce: Tab[];
@@ -82,19 +89,17 @@ export const mockBrowser = {
 					response[key] = mockStorage[key];
 				});
 				if (callback == null) {
-					return Promise.resolve(response));
+					return Promise.resolve(response);
 				}
 				return callback(response);
 			},
 			// deno-lint-ignore require-await
 			set: async (data: { tabs: any[] }): Promise<boolean> => {
-				if (data[WHY_KEY]) {
-					mockStorage.tabs = data[WHY_KEY];
-				} else if (data[LOCALE_KEY]) {
-					mockStorage[LOCALE_KEY] = data[LOCALE_KEY];
-				} else if (data[SETTINGS_KEY]) {
-					mockStorage[SETTINGS_KEY] = data[SETTINGS_KEY];
-        }
+				const validKeys = Object.values(StorageKeys);
+				const foundKey = validKeys.find((key) => data[key]);
+				if (foundKey) {
+					mockStorage[foundKey] = data[foundKey];
+				}
 			},
 		},
 		onChanged: {
