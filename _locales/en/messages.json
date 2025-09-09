@@ -1,4 +1,12 @@
 {
+	"write_review": {
+		"message": "Write a review!",
+		"description": "[popup] title for svg to request writing a review"
+	},
+	"send_tip": {
+		"message": "Send us a tip ❤️",
+		"description": "[popup] title for svg to prompt sending a tip"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
