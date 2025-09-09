@@ -99,9 +99,9 @@ export async function bg_getSettings(
 	const requestedSettings = settings.filter((setting) =>
 		settingKeys.includes(setting.id)
 	);
-	const response = settingKeys.length > 1
-		? requestedSettings
-		: requestedSettings[0];
+	const response = settingKeys.length === 1 && key === SETTINGS_KEY
+		? requestedSettings[0]
+		: requestedSettings;
 	if (callback == null) {
 		return response;
 	}
@@ -170,9 +170,14 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
  * @param {Array} tobeset - The object to be stored
  * @param {function} callback - The callback to execute after storing the data.
  * @param {string} [key=WHY_KEY] - The key of the map where to store the tobeset array
+ * @returns {Promise} the promise from BROWSER.storage.sync.set
  */
 export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
+	const changedToArray = !Array.isArray(tobeset);
+	if (changedToArray) {
+		tobeset = [tobeset];
+	}
 	switch (key) {
 		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
@@ -180,11 +185,18 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 			set[key] = await mergeSettings(tobeset, key);
 			break;
 		}
-		default:
+		default: // WHY_KEY, LOCALE_KEY
+			if (changedToArray) {
+				tobeset = tobeset[0];
+			}
 			set[key] = tobeset;
 			break;
 	}
-	return BROWSER.storage.sync.set(set, callback?.(set[key]));
+	const syncSet = BROWSER.storage.sync.set.bind(BROWSER.storage.sync);
+	if (callback == null) {
+		return syncSet(set);
+	}
+	return syncSet(set, () => callback(set[key]));
 }
 
 /**
@@ -294,6 +306,9 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
 		callback(availableCommands);
 		return;
 	}
+	if (!Array.isArray(commands)) {
+		commands = [commands];
+	}
 	const requestedCommands = availableCommands.filter((ac) =>
 		commands.includes(ac.name)
 	);
@@ -324,6 +339,7 @@ function listenToExtensionMessages() {
 				bg_getStorage(sendResponse, request.key);
 				break;
 			case "set":
+				console.log(request);
 				bg_setStorage(request.set, sendResponse, request.key);
 				break;
 			case "saved":
