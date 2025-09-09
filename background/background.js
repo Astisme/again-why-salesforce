@@ -339,7 +339,7 @@ function listenToExtensionMessages() {
 				bg_getStorage(sendResponse, request.key);
 				break;
 			case "set":
-                console.log(request);
+				console.log(request);
 				bg_setStorage(request.set, sendResponse, request.key);
 				break;
 			case "saved":
