@@ -109,11 +109,67 @@ export async function bg_getSettings(
 }
 
 /**
- * Stores the provided tabs data in the browser"s storage and invokes the callback.
+ * Finds the already stored settings and merges them with the new ones passed as input by matching them with the id field
  *
- * @param {Array} tobeset - The data to be stored
+ * @param {Array} newsettings - The settings to be stored
+ * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
+ */
+async function mergeSettings(newsettings, key = SETTINGS_KEY) {
+	// get the settings array
+	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
+		key === ORG_TAB_STYLE_KEY;
+	const settingsArray = !isStyleKey
+		? await bg_getSettings()
+		: await bg_getSettings(null, key);
+	if (settingsArray == null) {
+		return newsettings;
+	}
+	for (const item of newsettings) {
+		// check if the item.id is already present
+		const existingItems = settingsArray.filter((setting) =>
+			setting.id === item.id &&
+			(
+				!isStyleKey ||
+				(
+					setting.forActive == null ||
+					setting.forActive === item.forActive
+				)
+			)
+		);
+		if (existingItems.length <= 0) {
+			// add the new setting
+			settingsArray.push(item);
+			continue;
+		}
+		if (isStyleKey) {
+			if (item.value == null || item.value === "") {
+				// the item has been removed
+				existingItems.forEach((el) => {
+					const index = settingsArray.indexOf(el);
+					if (index >= 0) {
+						settingsArray.splice(index, 1);
+					}
+				});
+			} else {
+				// the item has been updated
+				existingItems.forEach((existing) =>
+					existing.value = item.value
+				);
+			}
+		} else {
+			// update the object reference (inside the settingsArray)
+			existingItems.forEach((existing) => Object.assign(existing, item));
+		}
+	}
+	return settingsArray;
+}
+
+/**
+ * Stores the provided tabs data in the browser's storage and invokes the callback.
+ *
+ * @param {Array} tobeset - The object to be stored
  * @param {function} callback - The callback to execute after storing the data.
- * @param {string} [key=WHY_KEY] - The key under which to store the data
+ * @param {string} [key=WHY_KEY] - The key of the map where to store the tobeset array
  * @returns {Promise} the promise from BROWSER.storage.sync.set
  */
 export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
@@ -123,57 +179,10 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 		tobeset = [tobeset];
 	}
 	switch (key) {
-		case SETTINGS_KEY: {
-			// get the settings array
-			const settingsArray = await bg_getSettings();
-			if (settingsArray != null) {
-				for (const item of tobeset) {
-					// check if the item.id is already present
-					const existingItems = settingsArray.filter((setting) =>
-						setting.id === item.id
-					);
-					if (existingItems.length > 0) {
-						existingItems.forEach((existing) =>
-							Object.assign(existing, item)
-						);
-					} else {
-						settingsArray.push(item);
-					}
-				}
-			}
-			set[SETTINGS_KEY] = settingsArray ?? tobeset;
-			break;
-		}
+		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
-			const settingsArray = await bg_getSettings(null, key);
-			if (settingsArray != null) {
-				for (const item of tobeset) {
-					// check if the item.id is already present
-					const existingItems = settingsArray.filter((setting) =>
-						setting.id === item.id &&
-						(setting.forActive == null ||
-							setting.forActive === item.forActive)
-					);
-					if (existingItems.length > 0) {
-						if (item.value == null || item.value === "") { // the item has been removed
-							existingItems.forEach((el) => {
-								const index = settingsArray.indexOf(el);
-								if (index >= 0) {
-									settingsArray.splice(index, 1);
-								}
-							});
-						} else {
-							existingItems.forEach((existing) =>
-								existing.value = item.value
-							);
-						}
-					} else {
-						settingsArray.push(item);
-					}
-				}
-			}
-			set[key] = settingsArray ?? tobeset;
+			set[key] = await mergeSettings(tobeset, key);
 			break;
 		}
 		default: // WHY_KEY, LOCALE_KEY
@@ -230,7 +239,7 @@ async function getCurrentUserInfo(currentUrl) {
 			);
 		}
 		const cookies = await BROWSER.cookies.getAll({
-			domain: origin.replace("https:\/\/", ""),
+			domain: origin.replace("https://", ""),
 			name: "sid",
 		});
 		if (cookies.length === 0) {
@@ -320,7 +329,7 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  */
 function listenToExtensionMessages() {
 	BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
-		if (request == null || request.what == null) {
+		if (request?.what == null) {
 			console.error({ error: "error_invalid_request", request });
 			sendResponse(null);
 			return false;
@@ -340,12 +349,10 @@ function listenToExtensionMessages() {
 			case "warning":
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
-				//return false; // we won"t call sendResponse
 				break;
 			case "export":
 				checkLaunchExport(request.tabs);
 				sendResponse(null);
-				//return false;
 				break;
 			case "browser-tab":
 				bg_getCurrentBrowserTab(sendResponse);
@@ -380,11 +387,7 @@ function listenToExtensionCommands() {
 	BROWSER.commands.onCommand.addListener(async (command) => {
 		// check the current page is Salesforce Setup
 		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (
-			browserTabUrl == null ||
-			!browserTabUrl.match(SETUP_LIGHTNING_PATTERN)
-		) {
-			// we're not in Salesforce Setup
+		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) { // we're not in Salesforce Setup
 			return;
 		}
 		switch (command) {
@@ -482,7 +485,7 @@ function setExtensionBrowserListeners() {
 			// open github to show the release notes
 			const homepage = MANIFEST.homepage_url;
 			// Validate homepage URL (must be GitHub)
-			if (!homepage || !homepage.startsWith("https://github.com/")) {
+			if (!homepage?.startsWith("https://github.com/")) {
 				console.error("no_manifest_github");
 				return;
 			}

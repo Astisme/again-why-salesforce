@@ -14,7 +14,11 @@
 	<body>
 		<div id="top">
 			<header>
-				<iframe src="../logo/logo.html" type="text/html"></iframe>
+				<iframe
+					src="/action/logo/logo.html"
+					type="text/html"
+					title="logo"
+				></iframe>
 				<div id="actions">
 					<div id="theme-selector">
 						<svg
@@ -134,16 +138,16 @@
 			<table id="sortable-table">
 				<thead>
 					<tr>
-						<th scope="col">
+						<th>
 							<span><!-- used for the svg --></span>
 						</th>
-						<th scope="col">
+						<th>
 							<span data-i18n="tab_label">Tab Label</span>
 						</th>
-						<th scope="col">
+						<th>
 							<span data-i18n="tab_url">Tab URL</span>
 						</th>
-						<th scope="col">
+						<th>
 							<span
 								class="slds-assistive-text"
 								data-i18n="table_org"
@@ -151,7 +155,7 @@
 								Is Org Tab
 							</span>
 						</th>
-						<th scope="col">
+						<th>
 							<span
 								class="slds-assistive-text"
 								data-i18n="table_delete"
@@ -167,7 +171,7 @@
 
 		<template id="tr_template">
 			<tr class="tab" draggable="false" data-draggable="false">
-				<td scope="row">
+				<td>
 					<svg
 						data-draggable="false"
 						viewBox="0 0 72 72"
@@ -207,7 +211,7 @@
 						</g>
 					</svg>
 				</td>
-				<td data-label="Tab Label" scope="row">
+				<td data-label="Tab Label">
 					<div>
 						<input
 							type="text"

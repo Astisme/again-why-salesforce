@@ -92,7 +92,8 @@ export function getAllTabs() {
 export async function ensureAllTabsAvailability() {
 	try {
 		return getAllTabs();
-	} catch (_) {
+	} catch (e) {
+		console.info(e);
 		return await getAllTabs_async();
 	}
 }
@@ -171,8 +172,7 @@ async function checkAddLightningNavigation() {
 		USE_LIGHTNING_NAVIGATION,
 	]);
 	if (
-		settings != null &&
-		settings.some((setting) => setting.enabled)
+		settings?.some((setting) => setting.enabled)
 	) {
 		return;
 	}
@@ -308,7 +308,7 @@ async function init(tabs = null) {
  * @param {Function} [callback] - A callback function to be invoked with the result of the saved tab check.
  * @returns {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
  */
-export async function isOnSavedTab(isFromHrefUpdate = false, callback) {
+export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
 		fromHrefUpdate = false;
 		return;
@@ -352,7 +352,7 @@ function onHrefUpdate() {
  */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
-	if (keep_tabs_on_left == null || !keep_tabs_on_left.enabled) {
+	if (keep_tabs_on_left?.enabled) {
 		// move setupTabUl after ObjectManager
 		setupTabUl.parentElement.insertAdjacentElement("beforeend", setupTabUl);
 	} else {
@@ -568,7 +568,8 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 			const matchingTab = allTabs.getSingleTabByData({ url: minyURL });
 			label = matchingTab.label;
 			url = matchingTab.url;
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			url = minyURL;
 		}
 	}
@@ -612,6 +613,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		lastInput = value;
 	});
+	let lastExtracted = null;
 	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
 		const linkTarget = getSelectedRadioButtonValue();
@@ -619,10 +621,9 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		if (inputVal == null || inputVal === "") {
 			return showToast(["insert_another", "org_link"], false, true);
 		}
-		let alreadyExtracted = false;
 		const newTarget = Tab.extractOrgName(inputVal);
-		if (alreadyExtracted) return; // could be called more than once
-		alreadyExtracted = true;
+		if (lastExtracted === newTarget) return; // could be called more than once
+		lastExtracted = newTarget;
 		if (
 			!newTarget.match(
 				SALESFORCE_URL_PATTERN,
@@ -897,7 +898,7 @@ function launchDownload(message) {
  */
 function listenToBackgroundPage() {
 	BROWSER.runtime.onMessage.addListener(async (message, _, sendResponse) => {
-		if (message == null || message.what == null) {
+		if (message?.what == null) {
 			return;
 		}
 		sendResponse(null);

@@ -86,12 +86,15 @@ export const mockBrowser = {
 				}
 				return callback(response);
 			},
-			set: (data: object, callback): Promise<boolean> => {
-				Object.assign(mockStorage, data);
-				if (callback == null) {
-					return Promise.resolve(true));
-				}
-				return callback(true);
+			// deno-lint-ignore require-await
+			set: async (data: { tabs: any[] }): Promise<boolean> => {
+				if (data[WHY_KEY]) {
+					mockStorage.tabs = data[WHY_KEY];
+				} else if (data[LOCALE_KEY]) {
+					mockStorage[LOCALE_KEY] = data[LOCALE_KEY];
+				} else if (data[SETTINGS_KEY]) {
+					mockStorage[SETTINGS_KEY] = data[SETTINGS_KEY];
+        }
 			},
 		},
 		onChanged: {
