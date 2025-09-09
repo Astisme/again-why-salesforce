@@ -10,6 +10,11 @@
 			"*bundled*"
 		]
 	},
+	"lint": {
+		"exclude": [
+			"./tests/salesforce/*"
+		]
+	},
 	"tasks": {
 		"test": "deno task test-gen && deno task test-bg",
 		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
