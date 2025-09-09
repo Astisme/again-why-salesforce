@@ -408,7 +408,14 @@ async function removeMenuItems() {
 	}
 }
 
-let intervalCxm = null;
+// deno-lint-ignore no-var
+var intervalCxm = null; // is var so that it does not break tests
+/**
+ * Returns the current interval (for tests)
+ */
+export function getIntervalCxm() {
+	return intervalCxm;
+}
 /**
  * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
  * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.

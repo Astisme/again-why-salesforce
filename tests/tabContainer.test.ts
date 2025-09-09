@@ -10,17 +10,17 @@ import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 
 function matchStorageToContainer(container: TabContainer) {
-	if (mockStorage.tabs.length !== container.length) {
-		console.log("match", mockStorage.tabs, container);
+	if (mockStorage.againWhySalesforce.length !== container.length) {
+		console.log("match", mockStorage.againWhySalesforce, container);
 	}
 	assertEquals(
-		mockStorage.tabs.length,
+		mockStorage.againWhySalesforce.length,
 		container.length,
 		"lenghts should be the same",
 	);
 	for (const i in container) {
 		assertEquals(
-			mockStorage.tabs[i].url,
+			mockStorage.againWhySalesforce[i].url,
 			container[i].url,
 			"each item should be the same",
 		);
@@ -41,8 +41,18 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	await t.step(
 		"initializes with default tabs when no saved tabs exist",
 		async () => {
-			mockStorage.tabs.length = 0;
+			mockStorage.againWhySalesforce.length = 0;
 			const container = await TabContainer._reset();
+
+			assertEquals(container.length, 3); // Default tabs count
+			assertEquals(container[0].label, "⚡");
+			assertEquals(container[1].label, "flows");
+			assertEquals(container[2].label, "users");
+
+			mockStorage.againWhySalesforce = [];
+			container.length = 0;
+			assert(await container._initialize());
+
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
 			assertEquals(container[1].label, "flows");
@@ -51,7 +61,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	);
 
 	await t.step("initializes with saved tabs from storage", async () => {
-		mockStorage.tabs = [
+		mockStorage.againWhySalesforce = [
 			{ label: "Test", url: "test-url" },
 		];
 		const container = await TabContainer._reset();
@@ -135,7 +145,6 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 await Deno.test("TabContainer - Organization Filtering", async (t) => {
 	await t.step("filters tabs by organization", async () => {
 		await container.setDefaultTabs();
-
 		assert(
 			await container.addTabs([
 				{ label: "Org1 Tab", url: "url1", org: "org1" },
@@ -801,7 +810,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 
 	await t.step("setDefaultTabs", async () => {
 		await container.setDefaultTabs();
-		container.length = 0;
+>>>>>>> e200f88545a10dee716ccaeeaf4be0531fb593e5
 		assertEquals(container.length, 0);
 		assert(await container.setDefaultTabs());
 		assertEquals(container.length, 3);
@@ -819,7 +828,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		await container.setDefaultTabs();
 
 		assertEquals(container.length, 3);
-		assertEquals(mockStorage.tabs.length, 3);
+		assertEquals(mockStorage.againWhySalesforce.length, 3);
 		assert(
 			await container.addTab(
 				{ label: "Sync Test", url: "sync-url" },
@@ -827,11 +836,11 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			),
 		);
 		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 3);
+		assertEquals(mockStorage.againWhySalesforce.length, 3);
 
 		assert(await container.syncTabs());
 		assertEquals(container.length, 4);
-		assertEquals(mockStorage.tabs.length, 4);
+		assertEquals(mockStorage.againWhySalesforce.length, 4);
 
 		assert(
 			await container.syncTabs([{
@@ -840,7 +849,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			}]),
 		);
 		assertEquals(container.length, 1);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 		assertRejects(
 			async () =>
 				await container.syncTabs({
@@ -851,7 +860,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			"error_no_array",
 		);
 		assertEquals(container.length, 0);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 
 		assert(
 			await TabContainer._syncTabs([{
@@ -860,7 +869,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 			}]),
 		);
 		assertEquals(container.length, 0);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 		assertRejects(
 			async () =>
 				await TabContainer._syncTabs({
@@ -875,7 +884,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		arr.push(await Tab.create("Sync Test", "sync-url3"));
 		assert(await TabContainer._syncTabs(arr));
 		assertEquals(container.length, 0);
-		assertEquals(mockStorage.tabs.length, 1);
+		assertEquals(mockStorage.againWhySalesforce.length, 1);
 	});
 });
 

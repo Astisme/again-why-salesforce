@@ -80,6 +80,9 @@ export function sendExtensionMessage(message, callback = null) {
 	 * @param {function} callback - The callback to execute after sending the message
 	 */
 	function sendMessage(message, callback) {
+		if (message.key == null && message.keys == null) {
+			message.key = WHY_KEY;
+		}
 		return BROWSER.runtime.sendMessage(message, callback);
 	}
 	if (callback == null) {
