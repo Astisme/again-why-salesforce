@@ -9,8 +9,9 @@ function detectBrowser() {
 	if (userAgent.indexOf("firefox") !== -1) {
 		return "firefox";
 	}
-  if(userAgent.indexOf("edg") !== -1)
-    return "edge";
+	if (userAgent.indexOf("edg") !== -1) {
+		return "edge";
+	}
 	// Chrome detection (including Edge and other Chromium-based browsers)
 	if (userAgent.indexOf("chrome") !== -1) {
 		return "chrome";

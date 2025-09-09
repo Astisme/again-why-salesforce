@@ -31,7 +31,7 @@ header {
 	& > iframe {
 		border: none;
 		height: 2.1rem !important;
-    width: 14rem;
+		width: 14rem;
 	}
 
 	& > div#actions {
@@ -44,7 +44,7 @@ header {
 
 		& > img, & > svg {
 			height: 2rem;
-      padding-left: 0.1rem;
+			padding-left: 0.1rem;
 		}
 	}
 }
@@ -174,10 +174,10 @@ svg#open-settings {
 }
 
 svg#review {
-  stroke: var(--color);
+	stroke: var(--color);
 }
 
 svg#sponsor {
-  fill: var(--color);
-  height: 1.8rem;
+	fill: var(--color);
+	height: 1.8rem;
 }

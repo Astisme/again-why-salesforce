@@ -8,10 +8,10 @@ import {
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	FRAME_PATTERNS,
+	ISCHROME,
+	ISEDGE,
+	ISFIREFOX,
 	ISSAFARI,
-  ISCHROME,
-  ISFIREFOX,
-  ISEDGE,
 	openSettingsPage,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
@@ -26,27 +26,36 @@ const translator = await ensureTranslatorAvailability();
 const allTabs = await ensureAllTabsAvailability();
 
 const hiddenClass = "hidden";
-console.log(allTabs.length)
-if(allTabs.length >= 8){
-  if(!ISSAFARI){
-    const reviewSvg = document.getElementById("review");
-    reviewSvg?.classList.remove(hiddenClass);
-    reviewSvg?.addEventListener("click", () => {
-      if(ISEDGE)
-        return open("https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description");
-      if(ISCHROME)
-        return open("https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews");
-      if(ISFIREFOX)
-        return open("https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/");
-    });
-  }
-  if(allTabs.length >= 16){
-    const sponsorSvg = document.getElementById("sponsor");
-    sponsorSvg?.classList.remove(hiddenClass);
-    sponsorSvg?.addEventListener("click", () => {
-      open("https://alfredoit.dev/en/sponsor/");
-    });
-  }
+console.log(allTabs.length);
+if (allTabs.length >= 8) {
+	if (!ISSAFARI) {
+		const reviewSvg = document.getElementById("review");
+		reviewSvg?.classList.remove(hiddenClass);
+		reviewSvg?.addEventListener("click", () => {
+			if (ISEDGE) {
+				return open(
+					"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description",
+				);
+			}
+			if (ISCHROME) {
+				return open(
+					"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews",
+				);
+			}
+			if (ISFIREFOX) {
+				return open(
+					"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/",
+				);
+			}
+		});
+	}
+	if (allTabs.length >= 16) {
+		const sponsorSvg = document.getElementById("sponsor");
+		sponsorSvg?.classList.remove(hiddenClass);
+		sponsorSvg?.addEventListener("click", () => {
+			open("https://alfredoit.dev/en/sponsor/");
+		});
+	}
 }
 
 const html = document.documentElement;
