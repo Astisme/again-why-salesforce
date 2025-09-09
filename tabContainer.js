@@ -1011,74 +1011,117 @@ export default class TabContainer extends Array {
 		return true;
 	}
 
-	/**
-	 * Checks if the provided tabs are sorted by one of the allowed keys
-	 * ('label', 'url', or 'org') in either ascending or descending order.
-	 *
-	 * Sets the following properties on the instance:
-	 * - `#isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
-	 * - `#isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
-	 * - `#isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
-	 * - `#isSortedDesc`: `true` if sorted in descending order, `false` otherwise
-	 *
-	 * Rules:
-	 * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
-	 * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
-	 *
-	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
-	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function
-	 * @returns {boolean} whether the tabs in input are sorted or not.
-	 */
-	async checkSetSorted(
-		fromSortFunction = false,
-		fromInvalidateSortFunction = false,
-	) {
-		if (fromSortFunction) {
-			// already sorted everything
-			return true;
-		}
-		this.#isSorted = false;
-		this.#isSortedBy = null;
-		this.#isSortedAsc = false;
-		this.#isSortedDesc = false;
-		if (fromInvalidateSortFunction) {
-			// update the sort setting persisted (do not wait for response)
-			sendExtensionMessage({
-				what: "set",
-				key: SETTINGS_KEY,
-				set: [{
-					id: PERSIST_SORT,
-					enabled: false,
-				}],
-			});
-			// check if, out of luck, the array is still sorted
-		}
-		// check if the user wants to keep the Tabs always sorted
-		if (await this.checkShouldKeepSorted()) { // if true, has already sorted and set the variables
-			return true;
-		}
-		for (const key of Tab.allowedKeys) {
-			let asc = true;
-			let desc = true;
-			for (let i = 1; i < this.length; i++) {
-				const prev = this[i - 1][key];
-				const curr = this[i][key];
-				const prevVal = prev == null ? "" : String(prev).toLowerCase();
-				const currVal = curr == null ? "" : String(curr).toLowerCase();
-				if (prevVal > currVal) asc = false;
-				if (prevVal < currVal) desc = false;
-				if (!asc && !desc) break; // No need to continue checking
-			}
-			if (asc || desc) {
-				this.#isSorted = true;
-				this.#isSortedBy = key;
-				this.#isSortedAsc = asc;
-				this.#isSortedDesc = desc;
-				break; // Exit after first detected sort order
-			}
-		}
-		return this.#isSorted;
-	}
+  /**
+   * Checks if the provided tabs are sorted by one of the allowed keys
+   * ('label', 'url', or 'org') in either ascending or descending order.
+   *
+   * Sets the following properties on the instance:
+   * - `#isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
+   * - `#isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
+   * - `#isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
+   * - `#isSortedDesc`: `true` if sorted in descending order, `false` otherwise
+   *
+   * Rules:
+   * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
+   * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
+   *
+   * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
+   * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function
+   * @returns {boolean} whether the tabs in input are sorted or not.
+   */
+  async checkSetSorted(
+    fromSortFunction = false,
+    fromInvalidateSortFunction = false,
+  ) {
+    /**
+     * Sets the sort state properties based on detected sorting
+     * @param {string} key - The key that tabs are sorted by
+     * @param {boolean} isAscending - Whether the sort is ascending
+     */
+    function setSortState(key = null, isAscending = null) {
+      this.#isSorted = key != null;
+      this.#isSortedBy = key;
+      this.#isSortedAsc = isAscending ?? false;
+      this.#isSortedDesc = !isAscending ?? false;
+    }
+    /**
+     * Handles the invalidation of sort function by updating persisted settings
+     */
+    function handleInvalidateSort() {
+      // Update the sort setting persisted (do not wait for response)
+      sendExtensionMessage({
+        what: "set",
+        key: SETTINGS_KEY,
+        set: [{
+          id: PERSIST_SORT,
+          enabled: false,
+        }],
+      });
+    }
+    /**
+     * Detects if the current tabs are sorted by any allowed key
+     * @returns {boolean} true if tabs are sorted, false otherwise
+     */
+    function detectSortOrder() {
+      /**
+       * Checks if tabs are sorted by a specific key
+       * @param {string} key - The key to check sorting for
+       * @returns {{isSorted: boolean, isAscending: boolean}} Sort result
+       */
+      function checkSortOrderForKey(key) {
+        /**
+         * Compares two tab values for sorting
+         * @param {*} prev - Previous value
+         * @param {*} curr - Current value
+         * @returns {number} Comparison result (-1, 0, 1)
+         */
+        function compareTabValues(prev, curr) {
+          const prevVal = prev == null ? "" : String(prev).toLowerCase();
+          const currVal = curr == null ? "" : String(curr).toLowerCase();
+          
+          if (prevVal < currVal) return -1;
+          if (prevVal > currVal) return 1;
+          return 0;
+        }
+        let asc = true;
+        let desc = true;
+        for (let i = 1; i < this.length; i++) {
+          const comparison = compareTabValues(this[i - 1][key], this[i][key]);
+          if (comparison > 0) asc = false;
+          if (comparison < 0) desc = false;
+          if (!asc && !desc) {
+            break; // No need to continue checking
+          }
+        }
+        return {
+          isSorted: asc || desc,
+          isAscending: asc && !desc
+        };
+      }
+      for (const key of Tab.allowedKeys) {
+        const sortResult = checkSortOrderForKey(key);
+        if (sortResult.isSorted) {
+          setSortState(key, sortResult.isAscending);
+          break;
+        }
+      }
+      return this.#isSorted;
+    }
+    if (fromSortFunction) {
+      // already sorted everything
+      return true;
+    }
+    setSortState();
+    if (fromInvalidateSortFunction) {
+      handleInvalidateSort();
+			// check if, out of luck, the array is still sorted (do not return)
+    }
+    // Check if the user wants to keep the Tabs always sorted
+    if (await this.checkShouldKeepSorted()) {
+      return true;
+    }
+    return detectSortOrder();
+  }
 
 	/**
 	 * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
