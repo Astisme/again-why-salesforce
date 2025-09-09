@@ -250,8 +250,7 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
 	 */
 	async getSavedTabs(replace = true) {
-		const res = await BROWSER.storage.sync.get([WHY_KEY]);
-		const tabs = res[WHY_KEY];
+		const tabs = await sendExtensionMessage({ what: "get", key: WHY_KEY });
 		if (replace) {
 			await this.replaceTabs(tabs, {
 				resetTabs: true,
@@ -711,9 +710,11 @@ export default class TabContainer extends Array {
 			const msg = await translator.translate("error_sync_nothing");
 			throw new Error(msg);
 		}
-		const set = {};
-		set[WHY_KEY] = TabContainer.toJSON(tabs);
-		await BROWSER.storage.sync.set(set);
+		await sendExtensionMessage({
+			what: "set",
+			set: TabContainer.toJSON(tabs),
+			key: WHY_KEY,
+		});
 		if (BROWSER.runtime.lastError) {
 			throw new Error(BROWSER.runtime.lastError);
 		}
@@ -1085,7 +1086,7 @@ export default class TabContainer extends Array {
 	 */
 	async checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);
-		if (persistSort == null || persistSort.enabled === null) {
+		if (persistSort == null || persistSort.enabled === false) {
 			return false; // not set or esplicitly set as not enabled
 		}
 		// Tabs should be kept sorted by persistSort.enabled
