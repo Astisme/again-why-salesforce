@@ -791,6 +791,10 @@
 		"message": "Salvați ca Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"
 	},
+	"send_tip": {
+		"message": "Trimite-ne un pont ❤️",
+		"description": "[popup] titlu pentru svg pentru a solicita trimiterea unui pont"
+	},
 	"set_gen_preview": {
 		"message": "Previzualizare Tab",
 		"description": "Etichetă pentru previzualizarea aspectului Tab-urilor generice"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Unde?",
 		"description": "[modal-deschide-altă-org] titlu de rezervă pentru modal"
+	},
+	"write_review": {
+		"message": "Scrie o recenzie!",
+		"description": "[popup] titlu pentru svg pentru a solicita scrierea unei recenzii"
 	}
 }

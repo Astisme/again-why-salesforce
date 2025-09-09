@@ -791,6 +791,10 @@
 		"message": "Hifadhi kama Tab",
 		"description": "[alt] maandishi mbadala wakati picha hazifanyi kazi"
 	},
+	"send_tip": {
+		"message": "Tutumie dokezo ❤️",
+		"description": "[popup] kichwa cha svg cha kuhamasisha kutuma dokezo"
+	},
 	"set_gen_preview": {
 		"message": "Hakiki Tab",
 		"description": "Lebo ya kuhakiki mwonekano wa Tab za kawaida"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Wapi?",
 		"description": "[fungua-modal-org-nyingine] kichwa mbadala kwa modal"
+	},
+	"write_review": {
+		"message": "Andika ukaguzi!",
+		"description": "[popup] kichwa cha svg cha kuomba uandishi wa ukaguzi"
 	}
 }

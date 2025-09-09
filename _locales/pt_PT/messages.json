@@ -791,6 +791,10 @@
 		"message": "Guardar como Tab",
 		"description": "[alt] texto alternativo quando as imagens não funcionam"
 	},
+	"send_tip": {
+		"message": "Envie-nos uma gorjeta ❤️",
+		"description": "[popup] título para svg para solicitar o envio de uma gorjeta"
+	},
 	"set_gen_preview": {
 		"message": "Pré-visualização de Tab",
 		"description": "Etiqueta para pré-visualizar a aparência de Tab genérico"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Para onde?",
 		"description": "[modal-abrir-outra-org] título alternativo para o modal"
+	},
+	"write_review": {
+		"message": "Escreva uma avaliação!",
+		"description": "[popup] título para svg para solicitar a escrita de uma avaliação"
 	}
 }

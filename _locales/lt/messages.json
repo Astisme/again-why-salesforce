@@ -791,6 +791,10 @@
 		"message": "Išsaugoti kaip Tab",
 		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
 	},
+	"send_tip": {
+		"message": "Atsiųskite mums patarimą ❤️",
+		"description": "[popup] svg antraštė, skirta paraginti siųsti patarimą"
+	},
 	"set_gen_preview": {
 		"message": "Tab peržiūra",
 		"description": "Etiketė bendrinių Tabų išvaizdos peržiūrai"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Kur?",
 		"description": "[atidaryti_kitą_org_modal] atsarginis pavadinimas modaliniam langui"
+	},
+	"write_review": {
+		"message": "Parašykite apžvalgą!",
+		"description": "[popup] svg antraštė, skirta prašyti parašyti apžvalgą"
 	}
 }

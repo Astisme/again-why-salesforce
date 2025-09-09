@@ -790,6 +790,10 @@
 		"message": "Lưu dưới dạng Tab",
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
 	},
+	"send_tip": {
+		"message": "Gửi cho chúng tôi một mẹo ❤️",
+		"description": "[popup] tiêu đề cho svg để nhắc nhở gửi một mẹo"
+	},
 	"set_gen_preview": {
 		"message": "Xem trước Tab",
 		"description": "Nhãn để xem trước giao diện Tab chung"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Đi đâu?",
 		"description": "[open-other-org-modal] Tiêu đề dự phòng cho modal"
+	},
+	"write_review": {
+		"message": "Viết đánh giá!",
+		"description": "[popup] tiêu đề cho svg để yêu cầu viết đánh giá"
 	}
 }

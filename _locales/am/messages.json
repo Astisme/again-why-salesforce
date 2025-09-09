@@ -791,6 +791,10 @@
 		"message": "እንደ Tab አስቀምጥ",
 		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
 	},
+	"send_tip": {
+		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
+		"description": "[popup] ምክር ለመላክ የሚጠይቅ የ svg ርዕስ"
+	},
 	"set_gen_preview": {
 		"message": "Tab ቅድመ እይታ",
 		"description": "የአጠቃላይ Tabs የመልኩን ለመቅድመ እይታ ምድብ"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "ወዴት?",
 		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] ለሞዳሉ አማራጭ ርዕስ"
+	},
+	"write_review": {
+		"message": "ግምገማ ይጻፉ!",
+		"description": "[popup] ለsvg ግምገማ ለመጻፍ የሚጠይቅ ርዕስ"
 	}
 }

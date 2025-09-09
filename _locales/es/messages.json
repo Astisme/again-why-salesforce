@@ -790,6 +790,10 @@
 		"message": "Guardar como Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
 	},
+	"send_tip": {
+		"message": "Envíanos una propina ❤️",
+		"description": "[popup] título para svg para solicitar el envío de una propina"
+	},
 	"set_gen_preview": {
 		"message": "Vista previa de Tab",
 		"description": "Etiqueta para previsualizar la apariencia de Tab genérica"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "¿A dónde?",
 		"description": "[open-other-org-modal] Título alternativo para el modal."
+	},
+	"write_review": {
+		"message": "¡Escribe una reseña!",
+		"description": "[popup] título para svg para solicitar escribir una reseña"
 	}
 }

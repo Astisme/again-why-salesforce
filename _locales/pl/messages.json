@@ -791,6 +791,10 @@
 		"message": "Zapisz jako Tab",
 		"description": "[alt] tekst alternatywny, gdy obrazy nie działają"
 	},
+	"send_tip": {
+		"message": "Wyślij nam napiwek ❤️",
+		"description": "[popup] tytuł svg do prośby o wysłanie napiwku"
+	},
 	"set_gen_preview": {
 		"message": "Podgląd karty",
 		"description": "Etykieta do podglądu wyglądu kart ogólnych"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Dokąd?",
 		"description": "[modal-otwórz-inną-org] zapasowy tytuł dla okna modalnego"
+	},
+	"write_review": {
+		"message": "Napisz recenzję!",
+		"description": "[popup] tytuł svg do prośby o napisanie recenzji"
 	}
 }

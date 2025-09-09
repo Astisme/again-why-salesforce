@@ -791,6 +791,10 @@
 		"message": "Запази като Tab",
 		"description": "[alt] алтернативен текст когато изображенията не се показват"
 	},
+	"send_tip": {
+		"message": "Изпратете ни бакшиш ❤️",
+		"description": "[popup] заглавие на svg за подкана за изпращане на бакшиш"
+	},
 	"set_gen_preview": {
 		"message": "Tab Преглед",
 		"description": "Етикет за предварителен преглед на общия изглед на Tab"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Към къде?",
 		"description": "[open-other-org-modal] алтернативно заглавие за модалния прозорец"
+	},
+	"write_review": {
+		"message": "Напишете отзив!",
+		"description": "[popup] заглавие на svg за искане за писане на отзив"
 	}
 }

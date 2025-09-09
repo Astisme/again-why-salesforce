@@ -791,6 +791,10 @@
 		"message": "Shrani kot Tab",
 		"description": "[alt] alternativno besedilo, ko slike ne delujejo"
 	},
+	"send_tip": {
+		"message": "Pošljite nam namig ❤️",
+		"description": "[popup] naslov za svg za poziv k pošiljanju namiga"
+	},
 	"set_gen_preview": {
 		"message": "Predogled Taba",
 		"description": "Oznaka za predogled videza splošnih Tabov"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Kam?",
 		"description": "[odpri_drugo_org_modalno_okno] rezervni naslov za modalno okno"
+	},
+	"write_review": {
+		"message": "Napišite recenzijo!",
+		"description": "[popup] naslov za svg za zahtevo po pisanju recenzije"
 	}
 }

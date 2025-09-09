@@ -791,6 +791,10 @@
 		"message": "Tab Olarak Kaydet",
 		"description": "[alt] resimler çalışmadığında alternatif metin"
 	},
+	"send_tip": {
+		"message": "Bize bir bahşiş gönderin ❤️",
+		"description": "[popup] bahşiş gönderme uyarısı için svg başlığı"
+	},
 	"set_gen_preview": {
 		"message": "Sekme Önizleme",
 		"description": "Genel Sekme görünümünü önizlemek için etiket"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Nereye?",
 		"description": "[başka-kuruluş-aç-modal] modal için geri dönüş başlığı"
+	},
+	"write_review": {
+		"message": "Bir inceleme yazın!",
+		"description": "[popup] inceleme yazılmasını talep etmek için svg başlığı"
 	}
 }

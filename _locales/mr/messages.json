@@ -790,6 +790,10 @@
 		"message": "Tab म्हणून जतन करा",
 		"description": "[alt] प्रतिमांदृष्ट अयशस्वी झाल्यास पर्यायी मजकूर"
 	},
+	"send_tip": {
+		"message": "आम्हाला एक टिप पाठवा ❤️",
+		"description": "[popup] टिप पाठवण्यासाठी प्रॉम्प्ट करण्यासाठी svg साठी शीर्षक"
+	},
 	"set_gen_preview": {
 		"message": "Tab पूर्वावलोकन",
 		"description": "सामान्य Tab चे स्वरूप पूर्वावलोकन करण्यासाठी लेबल"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "कोठे?",
 		"description": "[open-other-org-modal] modal साठी पर्यायी शीर्षक"
+	},
+	"write_review": {
+		"message": "एक पुनरावलोकन लिहा!",
+		"description": "[popup] पुनरावलोकन लिहिण्याची विनंती करण्यासाठी svg साठी शीर्षक"
 	}
 }

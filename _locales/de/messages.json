@@ -790,6 +790,10 @@
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
 	},
+	"send_tip": {
+		"message": "Senden Sie uns ein Trinkgeld ❤️",
+		"description": "[popup] Titel für SVG, um das Senden eines Trinkgeldes anzufordern"
+	},
 	"set_gen_preview": {
 		"message": "Tab-Vorschau",
 		"description": "Bezeichnung zum Vorschau des generischen Tab-Aussehens"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Wohin?",
 		"description": "[open-other-org-modal] Alternativer Titel für das Modal."
+	},
+	"write_review": {
+		"message": "Eine Rezension schreiben!",
+		"description": "[popup] Titel für SVG, um eine Rezension zu schreiben"
 	}
 }

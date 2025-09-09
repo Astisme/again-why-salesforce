@@ -790,6 +790,10 @@
 		"message": "Tab として保存する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
 	},
+	"send_tip": {
+		"message": "チップを送る ❤️",
+		"description": "[popup] チップを送るよう促すためのSVGタイトル"
+	},
 	"set_gen_preview": {
 		"message": "Tab プレビュー",
 		"description": "汎用 Tab の外観をプレビューするラベル"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "どこへ？",
 		"description": "[open-other-org-modal] モーダルの代替タイトル"
+	},
+	"write_review": {
+		"message": "レビューを書く！",
+		"description": "[popup] レビューの書き込みをリクエストするためのSVGタイトル"
 	}
 }

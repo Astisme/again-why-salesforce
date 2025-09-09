@@ -791,6 +791,10 @@
 		"message": "I-save bilang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
 	},
+	"send_tip": {
+		"message": "Magpadala sa amin ng tip ❤️",
+		"description": "[popup] pamagat para sa svg upang mag-prompt ng pagpapadala ng isang tip"
+	},
 	"set_gen_preview": {
 		"message": "Paunang‑tanaw ng Tab",
 		"description": "Label para tingnan ang hitsura ng pangkalahatang Tab"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Saan papunta?",
 		"description": "[open-other-org-modal] fallback na pamagat para sa modal"
+	},
+	"write_review": {
+		"message": "Sumulat ng isang review!",
+		"description": "[popup] pamagat para sa svg upang humiling ng pagsulat ng isang review"
 	}
 }

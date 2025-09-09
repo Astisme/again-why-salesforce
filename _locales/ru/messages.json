@@ -790,6 +790,10 @@
 		"message": "Сохранить как Tab",
 		"description": "[alt] Альтернативный текст, если изображения не отображаются"
 	},
+	"send_tip": {
+		"message": "Отправить нам чаевые ❤️",
+		"description": "[popup] заголовок для svg для запроса отправки чаевых"
+	},
 	"set_gen_preview": {
 		"message": "Предпросмотр Tab",
 		"description": "Метка для предпросмотра внешнего вида общего Tab"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Куда?",
 		"description": "[open-other-org-modal] Альтернативное название для модального окна"
+	},
+	"write_review": {
+		"message": "Написать отзыв!",
+		"description": "[popup] заголовок для svg для запроса написания отзыва"
 	}
 }

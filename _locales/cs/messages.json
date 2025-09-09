@@ -791,6 +791,10 @@
 		"message": "Uložit jako Tab",
 		"description": "[alt] alternativní text, pokud se obrázky nezobrazí"
 	},
+	"send_tip": {
+		"message": "Pošlete nám tip ❤️",
+		"description": "[popup] titul pro svg k odeslání tipu"
+	},
 	"set_gen_preview": {
 		"message": "Tab Náhled",
 		"description": "Štítek pro náhled vzhledu obecných Tab"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Kam?",
 		"description": "[open-other-org-modal] alternativní titulek modálního okna"
+	},
+	"write_review": {
+		"message": "Napsat recenzi!",
+		"description": "[popup] titul pro svg pro vyžádání napsání recenze"
 	}
 }

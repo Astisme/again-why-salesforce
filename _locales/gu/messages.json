@@ -791,6 +791,10 @@
 		"message": "Save as Tab",
 		"description": "[alt] ચિત્રો કામ ન કરતી વખતે વિકલ્પિક લખાણ"
 	},
+	"send_tip": {
+		"message": "અમને એક ટિપ મોકલો ❤️",
+		"description": "[popup] ટિપ મોકલવા માટે પ્રોમ્પ્ટ કરવા માટે svg માટે શીર્ષક"
+	},
 	"set_gen_preview": {
 		"message": "Tab પૂર્વદર્શન",
 		"description": "આટ સામાન્ય Tab દેખાવ પૂર્વદર્શન માટે લેબલ"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] મોડલ માટેનું ફ્લેબેક ટાઇટલ"
+	},
+	"write_review": {
+		"message": "સમીક્ષા લખો!",
+		"description": "[popup] સમીક્ષા લખવાની વિનંતી કરવા માટે svg માટે શીર્ષક"
 	}
 }

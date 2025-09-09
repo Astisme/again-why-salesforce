@@ -791,6 +791,10 @@
 		"message": "Desar com a Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"
 	},
+	"send_tip": {
+		"message": "Envia'ns una propina ❤️",
+		"description": "[popup] títol per a svg per sol·licitar l'enviament d'una propina"
+	},
 	"set_gen_preview": {
 		"message": "Tab Previsualització",
 		"description": "Etiqueta per previsualitzar l'aparença genèrica de Tab"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "On?",
 		"description": "[open-other-org-modal] títol alternatiu per al diàleg modal"
+	},
+	"write_review": {
+		"message": "Escriu una ressenya!",
+		"description": "[popup] títol per a svg per sol·licitar escriure una ressenya"
 	}
 }
