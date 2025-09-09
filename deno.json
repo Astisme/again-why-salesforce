@@ -11,12 +11,12 @@
 		]
 	},
 	"tasks": {
-		"test": "deno task test-gen && deno task test-bg && deno task test-sf",
-        "test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts", 
-        "test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
-        "test-sf": "deno task start-browser & BROWSER_PID=$! && sleep 10 && deno test --no-check --parallel  --import=tests/mocks.ts -A ./tests/salesforce/*.test.ts",
-        "start-browser": "deno task setup-chrome && deno run -A ./tests/salesforce/browser-setup.ts",
-        "setup-chrome": "bash ./tests/salesforce/setup-chrome.sh && deno task dev-chrome",
+		"test": "deno task test-gen && deno task test-bg",
+		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
+		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
+		"test-sf": "deno task start-browser & BROWSER_PID=$! && sleep 10 && deno test --no-check --parallel  --import=tests/mocks.ts -A ./tests/salesforce/*.test.ts",
+		"start-browser": "deno task setup-chrome && deno run -A ./tests/salesforce/browser-setup.ts",
+		"setup-chrome": "bash ./tests/salesforce/setup-chrome.sh && deno task dev-chrome",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add _locales/*/messages.json",
