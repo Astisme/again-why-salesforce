@@ -31,6 +31,7 @@ header {
 	& > iframe {
 		border: none;
 		height: 2.1rem !important;
+		width: 14rem;
 	}
 
 	& > div#actions {
@@ -41,8 +42,9 @@ header {
 			cursor: pointer;
 		}
 
-		& > img {
+		& > img, & > svg {
 			height: 2rem;
+			padding-left: 0.1rem;
 		}
 	}
 }
@@ -158,12 +160,24 @@ input {
 	background-color: var(--warning) !important;
 }
 
-svg#open-settings {
+svg {
 	height: 2rem;
+}
+
+svg#open-settings {
 	min-width: 2rem;
 	margin-left: 0.5rem;
 
 	& > g > g {
 		fill: var(--color);
 	}
+}
+
+svg#review {
+	stroke: var(--color);
+}
+
+svg#sponsor {
+	fill: var(--color);
+	height: 1.8rem;
 }

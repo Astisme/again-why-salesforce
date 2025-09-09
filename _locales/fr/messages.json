@@ -790,6 +790,10 @@
 		"message": "Enregistrer comme Tab",
 		"description": "[alt] Texte alternatif quand les images ne fonctionnent pas."
 	},
+	"send_tip": {
+		"message": "Envoyez-nous un pourboire ❤️",
+		"description": "[popup] titre pour svg pour inviter à envoyer un pourboire"
+	},
 	"set_gen_preview": {
 		"message": "Aperçu Tab",
 		"description": "Étiquette pour prévisualiser l’apparence du Tab générique"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Où aller ?",
 		"description": "[open-other-org-modal] Titre alternatif pour le modal."
+	},
+	"write_review": {
+		"message": "Écrire une évaluation !",
+		"description": "[popup] titre pour svg pour demander d'écrire une évaluation"
 	}
 }

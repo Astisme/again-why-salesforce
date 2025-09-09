@@ -790,6 +790,10 @@
 		"message": "Tab గా సేవ్ చేయండి",
 		"description": "[alt] చిత్రాలు చూపించకపోతే ప్రత్యామ్నాయ టెక్స్ట్"
 	},
+	"send_tip": {
+		"message": "మాకు ఒక చిట్కా పంపండి ❤️",
+		"description": "[popup] ఒక చిట్కా పంపమని ప్రేరేపించడానికి svg కోసం శీర్షిక"
+	},
 	"set_gen_preview": {
 		"message": "Tab ప్రివ్యూ",
 		"description": "సాధారణ Tab రూపాన్ని ముందుగా చూడటానికి లేబుల్"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "ఎక్కడ?",
 		"description": "[open-other-org-modal] modal కోసం ప్రత్యామ్నాయ శీర్షిక"
+	},
+	"write_review": {
+		"message": "ఒక సమీక్ష రాయండి!",
+		"description": "[popup] సమీక్ష రాయమని అభ్యర్థించడానికి svg కోసం శీర్షిక"
 	}
 }

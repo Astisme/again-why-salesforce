@@ -791,6 +791,10 @@
 		"message": "שמור כ-Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"
 	},
+	"send_tip": {
+		"message": "שלח לנו טיפ ❤️",
+		"description": "[popup] כותרת ל-svg כדי להניע שליחת טיפ"
+	},
 	"set_gen_preview": {
 		"message": "Tab תצוגה מקדימה",
 		"description": "תווית לתצוגה מקדימה של מראה Tab גנרי"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "לאן?",
 		"description": "[open-other-org-modal] כותרת חלופית לחלון המודאלי"
+	},
+	"write_review": {
+		"message": "כתוב ביקורת!",
+		"description": "[popup] כותרת ל-svg כדי לבקש כתיבת ביקורת"
 	}
 }

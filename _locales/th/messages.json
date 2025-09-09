@@ -791,6 +791,10 @@
 		"message": "Save as Tab",
 		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"
 	},
+	"send_tip": {
+		"message": "ส่งทิปให้เรา ❤️",
+		"description": "[popup] หัวข้อสำหรับ svg เพื่อแจ้งให้ส่งทิป"
+	},
 	"set_gen_preview": {
 		"message": "ตัวอย่าง Tab",
 		"description": "ป้ายกำกับสำหรับดูตัวอย่างลักษณะ Tab ทั่วไป"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] ชื่อสำรองสำหรับโมดอล"
+	},
+	"write_review": {
+		"message": "เขียนรีวิว!",
+		"description": "[popup] หัวข้อสำหรับ svg เพื่อขอให้เขียนรีวิว"
 	}
 }

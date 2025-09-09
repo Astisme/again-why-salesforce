@@ -78,7 +78,10 @@ export class TabContainer extends Array {
 			 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
 			 */
 			async function checkAddTabs(tabs) {
-				if (tabs.length <= 0 || !TabContainer.isValid(tabs, false)) {
+				if (
+					tabs == null || tabs.length <= 0 ||
+					!TabContainer.isValid(tabs, false)
+				) {
 					return false;
 				}
 				return await singletonAllTabs.addTabs(tabs);
@@ -1133,7 +1136,7 @@ export class TabContainer extends Array {
 	 */
 	async checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);
-		if (persistSort?.enabled == null || persistSort?.enabled == false) {
+		if (!persistSort?.enabled) {
 			return false; // not set or esplicitly set as not enabled
 		}
 		// Tabs should be kept sorted by persistSort.enabled

@@ -791,6 +791,10 @@
 		"message": "Tallenna Tabina",
 		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
 	},
+	"send_tip": {
+		"message": "Lähetä meille vinkki ❤️",
+		"description": "[popup] otsikko svg:lle pyytää vinkin lähettämistä"
+	},
 	"set_gen_preview": {
 		"message": "Tab-esikatselu",
 		"description": "Nimike yleisten Tabien ulkoasun esikatselulle"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Mihin?",
 		"description": "[open-other-org-modal] vaihtoehtoinen otsikko modalille"
+	},
+	"write_review": {
+		"message": "Kirjoita arvostelu!",
+		"description": "[popup] otsikko svg:lle pyytää arvostelun kirjoittamista"
 	}
 }
