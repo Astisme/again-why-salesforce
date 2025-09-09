@@ -293,9 +293,7 @@ export const mockBrowser = {
 			_message: Message,
 			_options?: any,
 		): Promise<any> {
-			return new Promise((resolve, _) => {
-				resolve(true);
-			});
+			return Promise.resolve(true);
 		},
 	},
 	windows: {

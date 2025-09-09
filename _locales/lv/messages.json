@@ -791,6 +791,10 @@
 		"message": "Saglabāt kā Tab",
 		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
 	},
+	"send_tip": {
+		"message": "Sūtiet mums dzeramnaudu ❤️",
+		"description": "[popup] svg virsraksts, lai mudinātu sūtīt dzeramnaudu"
+	},
 	"set_gen_preview": {
 		"message": "Tab priekšskatījums",
 		"description": "Etiķete vispārīgo Tab izskatu priekšskatīšanai"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Uz kurieni?",
 		"description": "[atvērt_citu_org_modal] rezerves virsraksts modālajam logam"
+	},
+	"write_review": {
+		"message": "Raksti atsauksmi!",
+		"description": "[popup] svg virsraksts, lai lūgtu uzrakstīt atsauksmi"
 	}
 }

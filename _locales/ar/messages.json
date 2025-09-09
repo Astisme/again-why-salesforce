@@ -790,6 +790,10 @@
 		"message": "احفظ كـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
 	},
+	"send_tip": {
+		"message": "أرسل لنا إكرامية ❤️",
+		"description": "[popup] عنوان svg للمطالبة بإرسال إكرامية"
+	},
 	"set_gen_preview": {
 		"message": "معاينة Tab",
 		"description": "التسمية لمعاينة المظهر العام للـ Tab"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "أين؟",
 		"description": "[open-other-org-modal] عنوان بديل للنافذة المنبثقة"
+	},
+	"write_review": {
+		"message": "اكتب مراجعة!",
+		"description": "[popup] عنوان svg لطلب كتابة مراجعة"
 	}
 }

@@ -790,6 +790,10 @@
 		"message": "Salva come Tab",
 		"description": "[alt] testo alternativo quando le immagini non funzionano"
 	},
+	"send_tip": {
+		"message": "Inviaci un consiglio ❤️",
+		"description": "[popup] titolo per svg per richiedere l'invio di un consiglio"
+	},
 	"set_gen_preview": {
 		"message": "Anteprima Tab",
 		"description": "Etichetta per anteporre l'aspetto dei Tab generici"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Dove?",
 		"description": "[open-other-org-modal] titolo di riserva per il modal"
+	},
+	"write_review": {
+		"message": "Scrivi una recensione!",
+		"description": "[popup] titolo per svg per richiedere la scrittura di una recensione"
 	}
 }

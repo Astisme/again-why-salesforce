@@ -790,6 +790,10 @@
 		"message": "Save as Tab",
 		"description": "[alt] alternative text when pictures do not work"
 	},
+	"send_tip": {
+		"message": "Send us a tip ❤️",
+		"description": "[popup] title for svg to prompt sending a tip"
+	},
 	"set_gen_preview": {
 		"message": "Tab Preview",
 		"description": "Label for previewing generic Tab appearance"
@@ -973,5 +977,9 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] fallback title for the modal"
+	},
+	"write_review": {
+		"message": "Write a review!",
+		"description": "[popup] title for svg to request writing a review"
 	}
 }

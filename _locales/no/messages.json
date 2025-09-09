@@ -791,6 +791,10 @@
 		"message": "Lagre som Tab",
 		"description": "[alt] alternativ tekst når bilder ikke vises"
 	},
+	"send_tip": {
+		"message": "Send oss et tips ❤️",
+		"description": "[popup] tittel for svg for å be om å sende et tips"
+	},
 	"set_gen_preview": {
 		"message": "Tab-forhåndsvisning",
 		"description": "Etikett for forhåndsvisning av generiske Tabs utseende"
@@ -974,5 +978,9 @@
 	"where_to": {
 		"message": "Til hvor?",
 		"description": "[open-other-org-modal] alternativ tittel for modal"
+	},
+	"write_review": {
+		"message": "Skriv en anmeldelse!",
+		"description": "[popup] tittel for svg for å be om å skrive en anmeldelse"
 	}
 }
