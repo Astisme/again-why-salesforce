@@ -1,4 +1,5 @@
 "use strict";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import { EXTENSION_NAME } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -9,24 +10,7 @@ import {
 	generateSldsModal,
 	MODAL_ID,
 } from "./generator.js";
-import {
-	ensureAllTabsAvailability,
-	getAllTabs,
-	getModalHanger,
-	getSetupTabUl,
-	showToast,
-} from "./content.js";
-
-let allTabs;
-const interval = setInterval(() => {
-	try {
-		allTabs = getAllTabs();
-		clearInterval(interval);
-	} catch (e) {
-		// wait next interval
-		console.info(e);
-	}
-}, 100);
+import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
 
 let overwritePick;
 let otherOrgPick;
@@ -106,7 +90,7 @@ async function generateSldsImport() {
 reader.onload = async (e) => {
 	try {
 		const jsonString = e.target.result;
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		const importedNum = await allTabs.importTabs(
 			jsonString,
 			overwritePick,

@@ -904,7 +904,8 @@ function setCurrentChoice(setting) {
 			user_language_select.value = setting.enabled;
 			break;
 		case PERSIST_SORT: {
-			const isEnabled = setting.enabled != null;
+			const isEnabled = setting.enabled != null &&
+				setting.enabled != false;
 			keep_sorted_el.checked = isEnabled;
 			if (isEnabled) {
 				picked_sort_select.value = setting.enabled;

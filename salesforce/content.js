@@ -34,6 +34,8 @@ import {
 	LINK_NEW_BROWSER,
 	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
+	sendExtensionMessage,
+	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
@@ -43,7 +45,7 @@ import {
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
-import TabContainer from "/tabContainer.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import { setupDrag } from "/dragHandler.js";
 
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
@@ -56,47 +58,6 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
-import { sendExtensionMessage, SETTINGS_KEY } from "../constants.js";
-
-let allTabs;
-/**
- * Asynchronously retrieves all tabs, initializing them if needed.
- *
- * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
- */
-async function getAllTabs_async() {
-	if (allTabs == null) {
-		allTabs = await TabContainer.create();
-	} else await allTabs;
-	return allTabs;
-}
-
-/**
- * Synchronously returns the TabContainer instance of all tabs if initialized.
- *
- * @throws {Error} Throws if the TabContainer is not yet initialized.
- * @returns {TabContainer} The initialized TabContainer instance.
- */
-export function getAllTabs() {
-	if (allTabs == null || allTabs instanceof Promise) {
-		throw new Error(["allTabs", "error_not_initilized"]);
-	}
-	return allTabs;
-}
-
-/**
- * Ensures availability of the TabContainer instance, initializing it if necessary.
- *
- * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
- */
-export async function ensureAllTabsAvailability() {
-	try {
-		return getAllTabs();
-	} catch (e) {
-		console.info(e);
-		return await getAllTabs_async();
-	}
-}
 
 /**
  * The main UL on Salesforce Setup
@@ -263,12 +224,11 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
  * @returns {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
  */
 async function init(tabs = null) {
-	let orgName = null;
-	allTabs = await ensureAllTabsAvailability();
+	const orgName = Tab.extractOrgName(href);
+	const allTabs = await ensureAllTabsAvailability();
 	if (tabs == null) {
 		await allTabs.getSavedTabs(true);
 	} else {
-		orgName = Tab.extractOrgName(href);
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
@@ -277,9 +237,6 @@ async function init(tabs = null) {
 		});
 	}
 	if (allTabs.length > 0) {
-		if (orgName == null) {
-			orgName = Tab.extractOrgName(href);
-		}
 		const frag = document.createDocumentFragment();
 		allTabs.forEach((row) => {
 			// TODO add option to hide or show not-this-org tabs
@@ -295,7 +252,7 @@ async function init(tabs = null) {
 	}
 	isOnSavedTab();
 	checkKeepTabsOnLeft();
-	await showFavouriteButton();
+	showFavouriteButton();
 }
 
 /**
@@ -316,7 +273,7 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	fromHrefUpdate = isFromHrefUpdate;
 	const url = Tab.minifyURL(href);
 	wasOnSavedTab = isCurrentlyOnSavedTab;
-	allTabs = await ensureAllTabsAvailability();
+	const allTabs = await ensureAllTabsAvailability();
 	isCurrentlyOnSavedTab = allTabs.existsWithOrWithoutOrg({ url, org: href });
 	if (isFromHrefUpdate) {
 		callback(isCurrentlyOnSavedTab);
@@ -352,16 +309,13 @@ function onHrefUpdate() {
  */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
-	if (keep_tabs_on_left?.enabled) {
-		// move setupTabUl after ObjectManager
-		setupTabUl.parentElement.insertAdjacentElement("beforeend", setupTabUl);
-	} else {
-		// move setupTabUl before Home
-		setupTabUl.parentElement.insertAdjacentElement(
-			"afterbegin",
-			setupTabUl,
-		);
-	}
+	const beforeOrAfter = keep_tabs_on_left?.enabled
+		? "afterbegin"
+		: "beforeend";
+	setupTabUl.parentElement.insertAdjacentElement(
+		beforeOrAfter,
+		setupTabUl,
+	);
 }
 
 /**
@@ -439,8 +393,8 @@ function delayLoadSetupTabs(count = 0) {
  */
 function reloadTabs(tabs = null) {
 	// remove the tabs that are already in the page
-	while (setupTabUl.childElementCount > 0) {
-		setupTabUl.removeChild(setupTabUl.lastChild);
+	if (setupTabUl.childElementCount > 0) {
+		setupTabUl.innerHTML = null;
 	}
 	generateStyleFromSettings();
 	init(tabs);
@@ -489,7 +443,7 @@ async function reorderTabs() {
 				}
 			})
 			.filter((tab) => tab != null);
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
@@ -561,7 +515,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", false);
 	}
-	allTabs = await ensureAllTabsAvailability();
+	const allTabs = await ensureAllTabsAvailability();
 	if (label == null && url == null) {
 		const minyURL = Tab.minifyURL(getCurrentHref());
 		try {
@@ -681,7 +635,7 @@ export async function performActionOnTabs(
 	options = undefined,
 ) {
 	try {
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		switch (action) {
 			case ACTION_MOVE:
 				await allTabs.moveTab(tab, options);
@@ -750,7 +704,7 @@ export async function performActionOnTabs(
 				return console.error(noMatch, action);
 			}
 		}
-		sf_afterSet();
+		sf_afterSet(undefined, allTabs);
 	} catch (error) {
 		console.warn({ action, tab, options });
 		showToast(error.message, false);
@@ -772,11 +726,14 @@ async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
 	if (inputTab.org == null) {
 		inputTab.org = Tab.extractOrgName(getCurrentHref());
 	}
-	allTabs = await ensureAllTabsAvailability();
-	await allTabs.updateTab(
-		inputTab,
-		matchingTab.org == null ? getCurrentHref() : "",
-	);
+	const allTabs = await ensureAllTabsAvailability();
+	const matchingTab = allTabs.getSingleTabByData(inputTab);
+	matchingTab.update({
+		org: matchingTab.org == null ? getCurrentHref() : "",
+	});
+	if (!await allTabs.syncTabs()) {
+		throw new Error("error_failed_sync");
+	}
 }
 
 /**
@@ -791,7 +748,7 @@ async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
 		return showToast("error_close_other_modal", false);
 	}
 	const tabIsEmpty = tab.label == null && tab.url == null && tab.org == null;
-	allTabs = await ensureAllTabsAvailability();
+	const allTabs = await ensureAllTabsAvailability();
 	let matchingTab = null;
 	try {
 		matchingTab = allTabs.getSingleTabByData(
@@ -902,7 +859,7 @@ function listenToBackgroundPage() {
 			return;
 		}
 		sendResponse(null);
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		try {
 			switch (message.what) {
 				// hot reload (from context-menus.js)
@@ -1184,7 +1141,7 @@ async function checkInsertAnalytics() {
  * - Inserts analytics script.
  */
 function main() {
-	getAllTabs_async();
+	ensureAllTabsAvailability();
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
 	listenToReorderedTabs();

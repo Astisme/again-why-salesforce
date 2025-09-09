@@ -9,10 +9,11 @@ import {
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
+let singletonAllTabs = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
-export default class TabContainer extends Array {
+export class TabContainer extends Array {
 	#isSorted = false;
 	get isSorted() {
 		return this.#isSorted;
@@ -54,21 +55,48 @@ export default class TabContainer extends Array {
 	/**
 	 * Creates and initializes a new `TabContainer` instance.
 	 *
-	 * @param {Array|null} [tabs=null] - An optional array of tabs to initialize the container with. If not provided, defaults to null.
 	 * @returns {Promise<TabContainer>} - A promise that resolves to the newly created and initialized `TabContainer` instance.
 	 * @throws {Error} - Throws an error if the `TabContainer` cannot be initialized with the provided `tabs`.
 	 */
-	static async create(tabs = null) {
-		translator = await ensureTranslatorAvailability();
-		const tabcont = new TabContainer(_tabContainerSecret);
-		if (!await tabcont._initialize(tabs)) {
-			const msg = await translator.translate([
-				"error_tabcont_initialize",
-				JSON.stringify(tabs),
-			]);
-			throw new Error(msg);
+	static async create() {
+		if (singletonAllTabs != null) {
+			return singletonAllTabs;
 		}
-		return tabcont;
+		translator = await ensureTranslatorAvailability();
+		singletonAllTabs = new TabContainer(_tabContainerSecret);
+		/**
+		 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
+		 *
+		 * @returns {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
+		 * @private
+		 */
+		async function initialize() {
+			/**
+			 * Checks if the given tabs are valid and adds them to the context if so.
+			 *
+			 * @param {Array} tabs - The tabs to validate and add.
+			 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
+			 */
+			async function checkAddTabs(tabs) {
+				if (tabs.length <= 0 || !TabContainer.isValid(tabs, false)) {
+					return false;
+				}
+				return await singletonAllTabs.addTabs(tabs);
+			}
+			const savedTabs = await singletonAllTabs.getSavedTabs(false);
+			if (await checkAddTabs(savedTabs)) {
+				return true;
+			}
+			return await singletonAllTabs.setDefaultTabs();
+		}
+		if (!await initialize()) {
+			throw new Error(
+				await translator.translate([
+					"error_tabcont_initialize",
+				]),
+			);
+		}
+		return singletonAllTabs;
 	}
 
 	/**
@@ -208,39 +236,6 @@ export default class TabContainer extends Array {
 			}
 		}
 		return filtered;
-	}
-
-	/**
-	 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
-	 *
-	 * @param {Array|null} [tabs=null] - An optional array of tabs to initialize the container with. If not provided, defaults to null.
-	 * @returns {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
-	 * @private
-	 */
-	async _initialize(tabs = null) {
-		/**
-		 * Checks if the given tabs are valid and adds them to the context if so.
-		 *
-		 * @param {Object} context - The context object with an addTabs method.
-		 * @param {Array} tabs - The tabs to validate and add.
-		 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
-		 */
-		async function checkAddTabs(context, tabs) {
-			if (TabContainer.isValid(tabs, false)) {
-				return await context.addTabs(tabs);
-			}
-			return false;
-		}
-		const savedTabs = await this.getSavedTabs(false);
-		const addedSomething = await checkAddTabs(this, savedTabs) &&
-			savedTabs.length > 0;
-		if (tabs == null && addedSomething) {
-			return true;
-		}
-		if (await checkAddTabs(this, tabs) || addedSomething) {
-			return true;
-		}
-		return await this.setDefaultTabs();
 	}
 
 	/**
@@ -583,7 +578,9 @@ export default class TabContainer extends Array {
 		keepTabsNotThisOrg = null,
 		removeThisOrgTabs = null,
 	} = {}) {
-		if (
+		if (newTabs === this) {
+			return true;
+		} else if (
 			resetTabs && removeOrgTabs && keepTabsNotThisOrg == null &&
 			removeThisOrgTabs == null
 		) {
@@ -1062,10 +1059,18 @@ export default class TabContainer extends Array {
 			for (let i = 1; i < this.length; i++) {
 				const prev = this[i - 1][key];
 				const curr = this[i][key];
-				const prevVal = prev == null ? "" : String(prev).toLowerCase();
-				const currVal = curr == null ? "" : String(curr).toLowerCase();
-				if (prevVal > currVal) asc = false;
-				if (prevVal < currVal) desc = false;
+				const prevVal = prev == null ? "" : String(prev);
+				const currVal = curr == null ? "" : String(curr);
+				const compare = String(prevVal).localeCompare(
+					String(currVal),
+					undefined,
+					{
+						sensitivity: "base",
+					},
+				);
+				if (compare === 0) continue;
+				if (compare > 0) asc = false;
+				if (compare < 0) desc = false;
 				if (!asc && !desc) break; // No need to continue checking
 			}
 			if (asc || desc) {
@@ -1085,7 +1090,7 @@ export default class TabContainer extends Array {
 	 */
 	async checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);
-		if (persistSort == null || persistSort.enabled === null) {
+		if (persistSort?.enabled == null || persistSort?.enabled == false) {
 			return false; // not set or esplicitly set as not enabled
 		}
 		// Tabs should be kept sorted by persistSort.enabled
@@ -1110,5 +1115,56 @@ export default class TabContainer extends Array {
 		const matchingTab = this.getSingleTabByData(tabToUpdate);
 		matchingTab.update(updateTo);
 		return await this.syncTabs();
+	}
+
+	/**
+	 * Resets the singleton and returns a new instance. Only for use in tests!
+	 *
+	 * @returns {Promise<TabContainer>} the new instance
+	 */
+	static async _reset() {
+		singletonAllTabs = null;
+		return await ensureAllTabsAvailability();
+	}
+}
+
+/**
+ * Asynchronously retrieves all tabs, initializing them if needed.
+ *
+ * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
+ */
+async function getAllTabs_async() {
+	if (singletonAllTabs == null) {
+		singletonAllTabs = await TabContainer.create();
+	} else if (singletonAllTabs instanceof Promise) {
+		await singletonAllTabs;
+	}
+	return singletonAllTabs;
+}
+
+/**
+ * Synchronously returns the TabContainer instance of all tabs if initialized.
+ *
+ * @throws {Error} Throws if the TabContainer is not yet initialized.
+ * @returns {TabContainer} The initialized TabContainer instance.
+ */
+function getAllTabs() {
+	if (singletonAllTabs == null || singletonAllTabs instanceof Promise) {
+		throw new Error(["singletonAllTabs", "error_not_initilized"]);
+	}
+	return singletonAllTabs;
+}
+
+/**
+ * Ensures availability of the TabContainer instance, initializing it if necessary.
+ *
+ * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
+ */
+export async function ensureAllTabsAvailability() {
+	try {
+		return getAllTabs();
+	} catch (e) {
+		console.info(e);
+		return await getAllTabs_async();
 	}
 }

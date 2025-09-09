@@ -35,15 +35,8 @@
 					</svg>
 					<span class="assistive" hidden data-i18n="help">Help</span>
 				</a>
-				<div class="tooltip" role="tooltip">
-					<slot name="text">Nothing to see here...</slot><div
-						class="link-tip hidden"
-						data-i18n="help_tip_click_link"
-					>
-						Click to be redirected to the documentation for this
-						setting!
-					</div>
-				</div>
+				<!-- deno-fmt-ignore -->
+				<div class="tooltip" role="tooltip"><slot name="text">Nothing to see here...</slot><div class="link-tip hidden" data-i18n="help_tip_click_link">Click to be redirected to the documentation for this setting!</div></div>
 			</div>
 		</template>
 		<script src="/settings/help/help.js" type="module"></script>
@@ -598,6 +591,10 @@
 							Prevent use of Simple Analytics (do not show up in
 							user counts).
 						</span>
+						<a
+							href="https://dashboard.simpleanalytics.com/extension.again.whysalesforce"
+							style="text-decoration: underline"
+						>Simple Analytics</a>
 					</label>
 					<help-aws
 						href="https://github.com/Astisme/again-why-salesforce/wiki/No-Simple-Analytics"

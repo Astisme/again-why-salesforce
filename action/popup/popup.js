@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import Tab from "/tab.js";
-import TabContainer from "/tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
@@ -20,7 +20,7 @@ setupDrag();
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
 const translator = await ensureTranslatorAvailability();
-const allTabs = await TabContainer.create();
+const allTabs = await ensureAllTabsAvailability();
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");

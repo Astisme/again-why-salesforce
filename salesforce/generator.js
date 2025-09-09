@@ -241,6 +241,7 @@ export async function generateStyleFromSettings() {
 		const style = getOrCreateStyleElement(isGeneric);
 		const { activeCss, inactiveCss, pseudoRules } = buildCssRules(
 			styleList,
+			isGeneric,
 		);
 		style.textContent = `${inactiveCss} } ${activeCss} }`;
 		appendPseudoRules(style, pseudoRules, isGeneric);
