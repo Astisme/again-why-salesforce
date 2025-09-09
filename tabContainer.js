@@ -1042,7 +1042,7 @@ export default class TabContainer extends Array {
 			this.#isSorted = key != null;
 			this.#isSortedBy = key;
 			this.#isSortedAsc = isAscending ?? false;
-			this.#isSortedDesc = !isAscending ?? false;
+			this.#isSortedDesc = (!isAscending) ?? false;
 		}
 		/**
 		 * Handles the invalidation of sort function by updating persisted settings
