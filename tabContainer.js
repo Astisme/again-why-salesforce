@@ -1136,7 +1136,7 @@ export class TabContainer extends Array {
 	 */
 	async checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);
-		if (persistSort?.enabled == null || persistSort?.enabled == false) {
+		if (!persistSort?.enabled) {
 			return false; // not set or esplicitly set as not enabled
 		}
 		// Tabs should be kept sorted by persistSort.enabled
