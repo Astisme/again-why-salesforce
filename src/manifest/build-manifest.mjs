@@ -15,17 +15,17 @@ switch (browser) {
 	case "edge": {
 		delete manifest.background.scripts;
 		delete manifest.browser_specific_settings;
-		const commandsToKeep = [
+		const commandsToKeep = new Set([
 			"cmd-save-as-tab",
 			"cmd-remove-tab",
 			"cmd-update-tab",
 			"cmd-open-other-org",
-		];
-		Object.keys(manifest.commands).forEach((com) => {
-			if (!commandsToKeep.includes(com)) {
+		]);
+		for (const com of Object.keys(manifest.commands)) {
+			if (!commandsToKeep.has(com)) {
 				delete manifest.commands[com]["suggested_key"];
 			}
-		});
+		}
 		break;
 	}
 
@@ -35,15 +35,15 @@ switch (browser) {
 		delete manifest.background.type;
 		delete manifest.background.scripts;
 		delete manifest.incognito;
-		const notAllowedPermissions = [
+		const notAllowedPermissions = new Set([
 			"downloads",
-		];
+		]);
 		manifest.permissions = manifest.permissions.filter((perm) =>
-			!notAllowedPermissions.includes(perm)
+			!notAllowedPermissions.has(perm)
 		);
 		manifest.optional_permissions = manifest.optional_permissions.filter((
 			optional_perm,
-		) => !notAllowedPermissions.includes(optional_perm));
+		) => !notAllowedPermissions.has(optional_perm));
 		break;
 	}
 	default:
@@ -55,4 +55,4 @@ switch (browser) {
 		throw new Error(`Unknown browser: ${browser}`);
 }
 
-writeFileSync("manifest.json", JSON.stringify(manifest, null, 4));
+writeFileSync("./src/manifest.json", JSON.stringify(manifest, null, 4));

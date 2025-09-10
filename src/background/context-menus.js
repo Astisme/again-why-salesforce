@@ -72,7 +72,7 @@ let link_cmd_export_all = null;
  */
 async function updateCommandLinks() {
 	const commandLinks = await bg_getCommandLinks();
-	commandLinks.forEach((cmdLink) => {
+	for (const cmdLink of commandLinks) {
 		switch (cmdLink.name) {
 			case CMD_SAVE_AS_TAB:
 				link_cmd_save_as_tab = cmdLink.shortcut;
@@ -101,7 +101,7 @@ async function updateCommandLinks() {
 			default:
 				break;
 		}
-	});
+	}
 }
 
 /**
@@ -284,7 +284,7 @@ const menuItemsOriginal = [
  */
 function getMenuItemsClone() {
 	const clone = structuredClone(menuItemsOriginal);
-	clone.forEach((el) => {
+	for (const el of clone) {
 		switch (el.id) {
 			case CXM_PAGE_SAVE_TAB:
 				if (link_cmd_save_as_tab != null) {
@@ -353,7 +353,7 @@ function getMenuItemsClone() {
 			default:
 				break;
 		}
-	});
+	}
 	return clone;
 }
 

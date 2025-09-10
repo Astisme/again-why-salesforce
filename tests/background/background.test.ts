@@ -1,9 +1,5 @@
 import { mockStorage } from "../mocks.ts";
-import {
-	assert,
-	assertEquals,
-	assertFalse,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
 
 import {
 	bg_getCommandLinks,
@@ -49,7 +45,7 @@ await Deno.test("bg_getStorage behavior", async (t) => {
 		assert(Array.isArray(tabs));
 		assertEquals(tabs.length, 4);
 		assertEquals(tabs[0].label, "a");
-		assertEquals(tabs[tabs.length - 1].label, "i");
+		assertEquals(tabs.at(-1).label, "i");
 		const newtabs = await bg_getStorage(undefined, WHY_KEY);
 		assertEquals(newtabs, tabs);
 		bg_getStorage((calledtabs) => {
@@ -62,8 +58,8 @@ await Deno.test("bg_getStorage behavior", async (t) => {
 		assert(settings != null);
 		assert(Array.isArray(settings));
 		assertEquals(settings.length, 3);
-		assert(settings.filter((s) => s.id === NO_RELEASE_NOTES)[0].enabled);
-		assertFalse(settings.filter((s) => s.id === TAB_ADD_FRONT)[0].enabled);
+		assert(settings.find((s) => s.id === NO_RELEASE_NOTES).enabled);
+		assertFalse(settings.find((s) => s.id === TAB_ADD_FRONT).enabled);
 	});
 
 	await t.step("get locale", async () => {
@@ -94,8 +90,8 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		assert(settings != null);
 		assert(Array.isArray(settings));
 		assertEquals(settings.length, 3);
-		assert(settings.filter((s) => s.id === NO_RELEASE_NOTES)[0].enabled);
-		assertFalse(settings.filter((s) => s.id === TAB_ADD_FRONT)[0].enabled);
+		assert(settings.find((s) => s.id === NO_RELEASE_NOTES).enabled);
+		assertFalse(settings.find((s) => s.id === TAB_ADD_FRONT).enabled);
 		const newsettings = await bg_getSettings(undefined, SETTINGS_KEY);
 		assertEquals(newsettings, settings);
 		bg_getSettings(
@@ -121,10 +117,10 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		assert(Array.isArray(relatedsettings));
 		assertEquals(relatedsettings.length, 2);
 		assert(
-			relatedsettings.filter((s) => s.id === NO_RELEASE_NOTES)[0].enabled,
+			relatedsettings.find((s) => s.id === NO_RELEASE_NOTES).enabled,
 		);
 		assertFalse(
-			relatedsettings.filter((s) => s.id === TAB_ADD_FRONT)[0].enabled,
+			relatedsettings.find((s) => s.id === TAB_ADD_FRONT).enabled,
 		);
 		assertEquals(
 			relatedsettings.filter((s) =>

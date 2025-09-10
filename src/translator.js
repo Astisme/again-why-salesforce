@@ -220,7 +220,7 @@ class TranslationService {
 		// key is not an Array
 		try {
 			const keyTranslate = await this.#_translate(key);
-			if (keyTranslate.indexOf("$") < 0) {
+			if (!keyTranslate.includes("$")) {
 				return keyTranslate;
 			}
 			let messageTranslated = "";

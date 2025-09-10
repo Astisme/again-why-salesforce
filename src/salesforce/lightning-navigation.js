@@ -39,7 +39,7 @@ function doLightningNavigation(details) {
 
 // listen to possible updates from tableDragHandler
 addEventListener("message", (e) => {
-	if (e.source != window) {
+	if (e.source != globalThis) {
 		return;
 	}
 	const what = e.data.what;

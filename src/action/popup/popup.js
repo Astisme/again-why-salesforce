@@ -1,12 +1,14 @@
-// deno-lint-ignore-file no-window
 "use strict";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
+	CHROME_LINK,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
+	EDGE_LINK,
+	FIREFOX_LINK,
 	FRAME_PATTERNS,
 	ISCHROME,
 	ISEDGE,
@@ -15,6 +17,8 @@ import {
 	openSettingsPage,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
+	SPONSOR_LINK_EN,
+	SPONSOR_LINK_IT,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { setupDrag } from "/dragHandler.js";
@@ -26,26 +30,19 @@ const translator = await ensureTranslatorAvailability();
 const allTabs = await ensureAllTabsAvailability();
 
 const hiddenClass = "hidden";
-console.log(allTabs.length);
 if (allTabs.length >= 8) {
 	if (!ISSAFARI) {
 		const reviewSvg = document.getElementById("review");
 		reviewSvg?.classList.remove(hiddenClass);
 		reviewSvg?.addEventListener("click", () => {
 			if (ISEDGE) {
-				return open(
-					"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description",
-				);
+				return open(EDGE_LINK);
 			}
 			if (ISCHROME) {
-				return open(
-					"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews",
-				);
+				return open(CHROME_LINK);
 			}
 			if (ISFIREFOX) {
-				return open(
-					"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/",
-				);
+				return open(FIREFOX_LINK);
 			}
 		});
 	}
@@ -53,7 +50,11 @@ if (allTabs.length >= 8) {
 		const sponsorSvg = document.getElementById("sponsor");
 		sponsorSvg?.classList.remove(hiddenClass);
 		sponsorSvg?.addEventListener("click", () => {
-			open("https://alfredoit.dev/en/sponsor/");
+			open(
+				translator.currentLanguage === "it"
+					? SPONSOR_LINK_IT
+					: SPONSOR_LINK_EN,
+			);
 		});
 	}
 }
@@ -91,15 +92,8 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
 	const browserTabUrl = browserTab?.url;
 	if (
-		!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)
+		browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)
 	) {
-		// we're not in Salesforce Setup
-		window.location.href = BROWSER.runtime.getURL(
-			`action/notSalesforceSetup/notSalesforceSetup.html${
-				browserTabUrl != null ? "?url=" + browserTabUrl : ""
-			}`,
-		);
-	} else {
 		// we're in Salesforce Setup
 		// check if we have all the optional permissions available
 		const permissionsAvailable = await BROWSER.permissions.contains({
@@ -118,6 +112,13 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 			// nothing else will happen from this file
 		}
 		await loadTabs(browserTab);
+	} else {
+		// we're not in Salesforce Setup
+		globalThis.location.href = BROWSER.runtime.getURL(
+			`action/notSalesforceSetup/notSalesforceSetup.html${
+				browserTabUrl == null ? "" : "?url=" + browserTabUrl
+			}`,
+		);
 	}
 });
 
@@ -188,9 +189,12 @@ function deleteTab() {
  * Enables or disables the elements of the last td available in the popup.
  *
  * @param {boolean} [enable=true] - if enabling or disabling the elements in the last td
+ * @param {HTMLElement} [tr] - the tr to which the function has to work. default to the last element on the tabAppendElement
  */
-function updateTabAttributes(enable = true) {
-	const tr = tabAppendElement.querySelector("tr:last-child");
+function updateTabAttributes(
+	enable = true,
+	tr = tabAppendElement.querySelector("tr:last-child"),
+) {
 	const deleteButton = tr.querySelector("button.delete");
 	if (enable) {
 		deleteButton.removeAttribute("disabled");
@@ -221,7 +225,7 @@ function addTab() {
 function removeTab() {
 	// if list is empty, there's nothing to disable
 	if (tabAppendElement.childElementCount >= 2) {
-		tabAppendElement.removeChild(tabAppendElement.lastChild);
+		tabAppendElement.lastChild.remove();
 		loggers.pop();
 		updateTabAttributes(false);
 	}
@@ -287,20 +291,41 @@ function inputLabelUrlListener(type) {
 /**
  * Creates a new tab element for the popup and sets up event listeners for label and url input fields.
  *
+ * @param {string} label - The label of the tab used for the element
+ * @param {string} url - The url of the tab used for the element
+ * @param {string} org - The org of the tab used for the element
+ * @param {boolean} isDisabled - If the element should be disabled (true)
+ * @param {boolean} isThisOrgTab - If the element has an org which is the current one
  * @returns {HTMLElement} The created tab element.
  */
-function createElement() {
-	const element = tabTemplate.content.firstElementChild.cloneNode(true);
-	// deleteButton
-	element.querySelector("button.delete").addEventListener("click", deleteTab);
-	const label = element.querySelector(".label");
-	const url = element.querySelector(".url");
+function createElement(
+	{ label = null, url = null, org = null } = {},
+	isDisabled = true,
+	isThisOrgTab = false,
+) {
 	/**
 	 * Checks if both the label and URL fields are not empty, and if so, calls the `saveTabs` function with `false` as an argument.
 	 */
 	function checkSaveTab() {
-		if (label.value !== "" && url.value !== "") {
+		if (labelEl.value !== "" && urlEl.value !== "") {
 			saveTabs(false);
+		}
+	}
+	const element = tabTemplate.content.firstElementChild.cloneNode(true);
+	const labelEl = element.querySelector(".label");
+	labelEl.value = label;
+	const urlEl = element.querySelector(".url");
+	urlEl.value = url;
+	const onlyOrgEl = element.querySelector(".only-org");
+	onlyOrgEl.checked = org != null;
+	onlyOrgEl.addEventListener("click", checkSaveTab);
+	const deleteButton = element.querySelector("button.delete");
+	deleteButton.addEventListener("click", deleteTab);
+	if (!isDisabled) {
+		deleteButton.removeAttribute("disabled");
+		if (!isThisOrgTab) {
+			element.querySelector(".org").value = org;
+			element.style.display = "none";
 		}
 	}
 	/**
@@ -322,10 +347,10 @@ function createElement() {
 		element.dataset.element_index = loggers.length;
 		element.addEventListener("focusout", checkSaveTab);
 	}
-	setInfoForDrag(label, () => inputLabelUrlListener("label"));
-	setInfoForDrag(url, () => inputLabelUrlListener("url"));
-	element.querySelector(".only-org").addEventListener("click", checkSaveTab);
-	loggers.push({ label, url, last_input: {} }); // set last_input as an empty object
+	setInfoForDrag(labelEl, () => inputLabelUrlListener("label"));
+	setInfoForDrag(urlEl, () => inputLabelUrlListener("url"));
+	const logger = { label: labelEl, url: urlEl, last_input: { label, url } };
+	loggers.push(logger);
 	return element;
 }
 
@@ -347,26 +372,20 @@ async function loadTabs(browserTab = null) {
 		return addTab();
 	}
 	const orgName = await pop_extractOrgName(browserTab);
+	const frag = document.createDocumentFragment();
 	for (const tab of allTabs) {
 		// Default: hide not-this-org org-specific tabs
-		const element = createElement();
-		element.querySelector(".label").value = tab.label;
-		element.querySelector(".url").value = tab.url;
-		element.querySelector(".only-org").checked = tab.org != null;
-		element.querySelector(".delete").removeAttribute("disabled");
-		if (tab.org != null && tab.org !== orgName) {
-			element.querySelector(".org").value = tab.org;
-			element.style.display = "none";
-		}
-		const logger = loggers.pop();
-		logger.last_input.label = tab.label;
-		logger.last_input.url = tab.url;
-		loggers.push(logger);
-		tabAppendElement.append(element);
-		updateTabAttributes();
+		const element = createElement(
+			tab,
+			false,
+			tab.org == null || tab.org === orgName,
+		);
+		frag.append(element);
+		updateTabAttributes(undefined, element);
 	}
 	// leave a blank at the bottom
-	tabAppendElement.append(createElement());
+	frag.append(createElement());
+	tabAppendElement.append(frag);
 	translator.updatePageTranslations();
 }
 
@@ -379,8 +398,8 @@ async function loadTabs(browserTab = null) {
  * @returns {Promise<void>} A promise that resolves after the tabs have been reloaded.
  */
 async function reloadRows() {
-	while (tabAppendElement.childElementCount > 0) {
-		tabAppendElement.removeChild(tabAppendElement.lastChild);
+	if (tabAppendElement.childElementCount > 0) {
+		tabAppendElement.innerHTML = null;
 	}
 	loggers = [];
 	await loadTabs();
@@ -471,7 +490,7 @@ function emptyTabs() {
 
 // listen to possible updates from tableDragHandler
 addEventListener("message", (e) => {
-	e.source == window && e.data.what === "order" && saveTabs();
+	e.source == globalThis && e.data.what === "order" && saveTabs();
 });
 
 document.getElementById("theme-selector").addEventListener(
@@ -479,6 +498,31 @@ document.getElementById("theme-selector").addEventListener(
 	switchTheme,
 );
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
+
+const translatorSeparator = translator.getSeparator();
+const datasetAttribute = translator.getTranslateAttributeDataset();
+/**
+ * Translates and appends a keyboard shortcut hint to a button’s localized text.
+ *
+ * @param {HTMLElement} button - The button element whose dataset contains the text to translate.
+ * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
+ * @returns {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
+ */
+async function addShortcutText(button, shortcut) {
+	/**
+	 * Returns the substring of the input string before the first occurrence of the separator used by the translator.
+	 *
+	 * @param {string} i18n - The input string containing the separator.
+	 * @returns {string} The substring before the separator, or the whole string if the separator is not found.
+	 */
+	function sliceBeforeSeparator(i18n) {
+		return i18n.slice(0, i18n.indexOf(translatorSeparator));
+	}
+	return await translator.translate([
+		sliceBeforeSeparator(button.dataset[datasetAttribute]),
+		`(${shortcut})`,
+	]);
+}
 
 const importBtn = document.getElementById("import");
 importBtn.addEventListener("click", importHandler);
@@ -498,33 +542,7 @@ const availableCommands = await sendExtensionMessage({
 		CMD_OPEN_SETTINGS,
 	],
 });
-
-const translatorSeparator = translator.getSeparator();
-/**
- * Returns the substring of the input string before the first occurrence of the separator used by the translator.
- *
- * @param {string} i18n - The input string containing the separator.
- * @returns {string} The substring before the separator, or the whole string if the separator is not found.
- */
-function sliceBeforeSeparator(i18n) {
-	return i18n.slice(0, i18n.indexOf(translatorSeparator));
-}
-
-const datasetAttribute = translator.getTranslateAttributeDataset();
-/**
- * Translates and appends a keyboard shortcut hint to a button’s localized text.
- *
- * @param {HTMLElement} button - The button element whose dataset contains the text to translate.
- * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
- * @returns {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
- */
-async function addShortcutText(button, shortcut) {
-	return await translator.translate([
-		sliceBeforeSeparator(button.dataset[datasetAttribute]),
-		`(${shortcut})`,
-	]);
-}
-availableCommands?.forEach(async (ac) => {
+for (const ac of availableCommands) {
 	switch (ac.name) {
 		case CMD_EXPORT_ALL:
 			exportBtn.title = await addShortcutText(exportBtn, ac.shortcut);
@@ -538,4 +556,4 @@ availableCommands?.forEach(async (ac) => {
 		default:
 			break;
 	}
-});
+}

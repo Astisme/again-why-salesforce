@@ -12,15 +12,11 @@ import {
 } from "./generator.js";
 import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
 
-let overwritePick;
-let otherOrgPick;
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
 const OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
 const OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
 const CLOSE_MODAL_ID = `${EXTENSION_NAME}-modal-close`;
-
-const reader = new FileReader();
 
 /**
  * Generates an SLDS import modal for importing tabs.
@@ -87,25 +83,48 @@ async function generateSldsImport() {
 	return { modalParent, saveButton, closeButton, inputContainer };
 }
 
-reader.onload = async (e) => {
+/**
+ * Reads and processes JSON files using modern Promise-based API.
+ *
+ * @param {File|File[]} files - The file(s) to read and validate.
+ * @param {HTMLElement} modalParent - The parent element of the modal containing option checkboxes.
+ * @returns {Promise<void>}
+ */
+async function readFile(files, modalParent) {
+	const fileArray = Array.isArray(files) ? files : [files];
+	const validFileArray = [];
+	// Validate all files first
+	for (const file of fileArray) {
+		if (file.type === "application/json") {
+			validFileArray.push(file);
+		} else {
+			showToast("import_invalid_file", false);
+		}
+	}
+
 	try {
-		const jsonString = e.target.result;
+		const overwritePick =
+			modalParent.querySelector(`#${OVERWRITE_ID}`).checked;
+		const otherOrgPick =
+			modalParent.querySelector(`#${OTHER_ORG_ID}`).checked;
 		const allTabs = await ensureAllTabsAvailability();
-		const importedNum = await allTabs.importTabs(
-			jsonString,
-			overwritePick,
-			otherOrgPick,
-		);
+		const oldTabsLength = allTabs.length;
+		for (const file of validFileArray) {
+			const jsonString = await file.text();
+			await allTabs.importTabs(
+				jsonString,
+				overwritePick,
+				otherOrgPick,
+			);
+		}
+		const totalImported = allTabs.length - oldTabsLength;
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
-		showToast(["import_successful", importedNum, "tabs"], true);
+		showToast(["import_successful", totalImported, "tabs"], true);
 	} catch (error) {
-		showToast(
-			["error_import", error.message],
-			false,
-		);
+		showToast(["error_import", error.message], false);
 	}
-};
+}
 
 /**
  * Attaches event listeners to handle file uploads via both file selection and drag-and-drop.
@@ -119,23 +138,6 @@ reader.onload = async (e) => {
  * @param {HTMLElement} modalParent - The parent element of the modal that contains the file input and option checkboxes.
  */
 function listenToFileUpload(modalParent) {
-	/**
-	 * Reads the content of a JSON file and processes it. If the file is not of the correct type, shows an error toast.
-	 *
-	 * @param {File} file - The file to read and validate.
-	 * @returns {void}
-	 */
-	function readFile(file) {
-		if (file.type !== "application/json") {
-			return showToast(
-				"import_invalid_file",
-				false,
-			);
-		}
-		overwritePick = modalParent.querySelector(`#${OVERWRITE_ID}`).checked;
-		otherOrgPick = modalParent.querySelector(`#${OTHER_ORG_ID}`).checked;
-		reader.readAsText(file);
-	}
 	const dropArea = document.getElementById(IMPORT_ID);
 	/**
 	 * Handles file selection via input change event.
@@ -145,7 +147,7 @@ function listenToFileUpload(modalParent) {
 	 */
 	dropArea.addEventListener("change", function (event) {
 		event.preventDefault();
-		readFile(event.target.files[0]);
+		readFile(event.target.files[0], modalParent);
 	});
 	/**
 	 * Handles the dragover event to allow file drop.
@@ -173,7 +175,7 @@ function listenToFileUpload(modalParent) {
 	 */
 	dropArea.addEventListener("drop", function (event) {
 		event.preventDefault();
-		Array.from(event.dataTransfer.files).forEach((f) => readFile(f));
+		readFile(Array.from(event.dataTransfer.files), modalParent);
 	});
 }
 

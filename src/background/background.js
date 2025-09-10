@@ -118,9 +118,9 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	// get the settings array
 	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
 		key === ORG_TAB_STYLE_KEY;
-	const settingsArray = !isStyleKey
-		? await bg_getSettings()
-		: await bg_getSettings(null, key);
+	const settingsArray = await bg_getSettings(
+		...(isStyleKey ? [null, key] : []),
+	);
 	if (settingsArray == null) {
 		return newsettings;
 	}
@@ -141,24 +141,22 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 			settingsArray.push(item);
 			continue;
 		}
-		if (isStyleKey) {
-			if (item.value == null || item.value === "") {
-				// the item has been removed
-				existingItems.forEach((el) => {
-					const index = settingsArray.indexOf(el);
+		for (const existing of existingItems) {
+			if (isStyleKey) {
+				if (item.value == null || item.value === "") {
+					// the item has been removed
+					const index = settingsArray.indexOf(existing);
 					if (index >= 0) {
 						settingsArray.splice(index, 1);
 					}
-				});
+				} else {
+					// the item has been updated
+					existing.value = item.value;
+				}
 			} else {
-				// the item has been updated
-				existingItems.forEach((existing) =>
-					existing.value = item.value
-				);
+				// update the object reference (inside the settingsArray)
+				Object.assign(existing, item);
 			}
-		} else {
-			// update the object reference (inside the settingsArray)
-			existingItems.forEach((existing) => Object.assign(existing, item));
 		}
 	}
 	return settingsArray;
@@ -277,11 +275,11 @@ async function getCurrentUserInfo(currentUrl) {
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
 	const language = (await getCurrentUserInfo(currentUrl))?.language;
-	if (language != null) {
+	if (language == null) {
+		return bg_getStorage(callback, LOCALE_KEY);
+	} else {
 		bg_setStorage(language, callback, LOCALE_KEY);
 		return language;
-	} else {
-		return bg_getStorage(callback, LOCALE_KEY);
 	}
 }
 

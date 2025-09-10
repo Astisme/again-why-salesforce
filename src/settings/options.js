@@ -53,18 +53,20 @@ const invisible = "invisible";
  * @param {...HTMLElement} dependentCheckboxElements - Dependent checkbox elements whose states should also be saved
  */
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
-	const set = { what: "set", key: SETTINGS_KEY, set: [] };
-	const setting = {};
-	setting.id = e.target.id;
-	setting.enabled = this?.checked ?? e.target.checked;
-	set.set.push(setting);
-	dependentCheckboxElements.forEach((dc) => {
-		const setting = {};
-		setting.id = dc.id;
-		setting.enabled = dc.checked;
-		set.set.push(setting);
+	const set_msg = { what: "set", key: SETTINGS_KEY };
+	const set = [];
+	set.push({
+		id: e.target.id,
+		enabled: this?.checked ?? e.target.checked,
 	});
-	sendExtensionMessage(set);
+	for (const dc of dependentCheckboxElements) {
+		set.push({
+			id: dc.id,
+			enabled: dc.checked,
+		});
+	}
+	Object.assign(set_msg, { set });
+	sendExtensionMessage(set_msg);
 }
 
 const link_new_browser_el = document.getElementById(LINK_NEW_BROWSER);
@@ -816,8 +818,7 @@ function setPreviewAndInputValue(
 	 */
 	function updateUIElements(elements, value) {
 		if (elements.chosenUl && elements.moveToChosen) {
-			elements.chosenUl.insertAdjacentElement(
-				"beforeend",
+			elements.chosenUl.append(
 				elements.moveToChosen,
 			);
 		}
@@ -918,11 +919,13 @@ function setCurrentChoice(setting) {
 		case GENERIC_TAB_STYLE_KEY:
 		case ORG_TAB_STYLE_KEY: {
 			const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY;
-			Array.isArray(setting.value)
-				? setting.value.forEach((set) =>
-					setPreviewAndInputValue(set, isGeneric)
-				)
-				: setPreviewAndInputValue(setting.value, isGeneric);
+			if (Array.isArray(setting.value)) {
+				for (const set of setting.value) {
+					setPreviewAndInputValue(set, isGeneric);
+				}
+			} else {
+				setPreviewAndInputValue(setting.value, isGeneric);
+			}
 			break;
 		}
 		default:
@@ -994,11 +997,15 @@ async function restoreGeneralSettings() {
 	}
 	const settings = await getSettings();
 	if (settings != null) {
-		Array.isArray(settings)
-			? settings.forEach((set) => setCurrentChoice(set))
-			: setCurrentChoice(settings);
+		if (Array.isArray(settings)) {
+			for (const set of settings) {
+				setCurrentChoice(set);
+			}
+		} else {
+			setCurrentChoice(settings);
+		}
 	}
-	allCheckboxes.forEach((el) => {
+	for (const el of allCheckboxes) {
 		switch (el) {
 			case link_new_browser_el:
 			case use_lightning_navigation_el:
@@ -1008,7 +1015,7 @@ async function restoreGeneralSettings() {
 				break;
 		}
 		el.addEventListener("change", saveCheckboxOptions);
-	});
+	}
 	link_new_browser_el.addEventListener("change", (e) => {
 		// click on dependent setting
 		if (e.target.checked) {
@@ -1127,7 +1134,7 @@ function saveTabDecorations(
 	isAdding = true,
 	key = GENERIC_TAB_STYLE_KEY,
 ) {
-	const set = {
+	const set_msg = {
 		what: "set",
 		key,
 		set: [{
@@ -1135,16 +1142,17 @@ function saveTabDecorations(
 			value: "no-default",
 		}],
 	};
-	selectedLis.forEach((li) => {
-		const setting = {};
+	for (const li of selectedLis) {
 		const styleKey = li.dataset.styleKey;
-		setting.id = styleKey;
-		setting.forActive = !li.id.endsWith(inactive);
-		setting.value = isAdding ? styleKey : "";
+		const setting = {
+			id: styleKey,
+			forActive: !li.id.endsWith(inactive),
+			value: isAdding ? styleKey : "",
+		};
 		setPreviewAndInputValue(setting, key === GENERIC_TAB_STYLE_KEY, false);
-		set.set.push(setting);
-	});
-	sendExtensionMessage(set);
+		set_msg.set.push(setting);
+	}
+	sendExtensionMessage(set_msg);
 }
 
 /**
@@ -1179,11 +1187,10 @@ function moveSelectedDecorationsTo(
 	}
 	const selectedDecorations = allDecorations
 		.filter((el) => el.ariaSelected === "true");
-	selectedDecorations
-		.forEach((el) => {
-			moveHereElement.insertAdjacentElement("beforeend", el);
-			el.ariaSelected = false;
-		});
+	for (const el of selectedDecorations) {
+		moveHereElement.append(el);
+		el.ariaSelected = false;
+	}
 	saveTabDecorations(selectedDecorations, isAdding, key);
 }
 
@@ -1350,13 +1357,13 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY) {
 		// Show preview tab
 		resources.tabPreview.classList.remove("hidden");
 		// Input change listeners
-		resources.allInputs.forEach((el) =>
-			el.addEventListener("change", (e) => saveTabOptions(e, key))
-		);
+		for (const el of resources.allInputs) {
+			el.addEventListener("change", (e) => saveTabOptions(e, key));
+		}
 		// Decoration selection listeners
-		resources.allDecorations.forEach((el) =>
-			el.addEventListener("click", flipSelected)
-		);
+		for (const el of resources.allDecorations) {
+			el.addEventListener("click", flipSelected);
+		}
 		// Button move listeners
 		setupMoveButtonListeners(resources, key);
 	}
@@ -1383,18 +1390,18 @@ function showRelevantSettings_HideOthers(
 	elementsToDeactivate,
 	elementsToHide,
 ) {
-	elementsToActivate.forEach((el) => {
+	for (const el of elementsToActivate) {
 		el.classList.add(SLDS_ACTIVE);
-	});
-	elementsToShow.forEach((el) => {
+	}
+	for (const el of elementsToShow) {
 		el.classList.remove(hidden);
-	});
-	elementsToDeactivate.forEach((el) => {
+	}
+	for (const el of elementsToDeactivate) {
 		el.classList.remove(SLDS_ACTIVE);
-	});
-	elementsToHide.forEach((el) => {
+	}
+	for (const el of elementsToHide) {
 		el.classList.add(hidden);
-	});
+	}
 }
 
 generalHeader.addEventListener("click", () => {
@@ -1425,8 +1432,6 @@ tabOrgManagerHeader.addEventListener("click", () => {
 	);
 });
 
-restoreGeneralSettings();
-
 const saveToast = document.getElementById("save-confirm");
 document.querySelector("#save-container > button").addEventListener(
 	"click",
@@ -1439,3 +1444,5 @@ document.querySelector("#save-container > button").addEventListener(
 		setTimeout(() => saveToast.classList.add(invisible), 2500);
 	},
 );
+
+await restoreGeneralSettings();

@@ -14,10 +14,7 @@ class HelpAws extends HTMLElement {
 		linkEl.setAttribute("rel", "stylesheet");
 		linkEl.setAttribute("href", new URL("./help.css", import.meta.url));
 		this.shadowRoot.appendChild(linkEl);
-		this._tooltip.setAttribute(
-			"data-show-top",
-			this.getAttribute("data-show-top") ?? "true",
-		);
+		this._tooltip.dataset.showTop = this.dataset.showTop ?? "true";
 		this._linkTip = this.shadowRoot.querySelector(".link-tip");
 	}
 
@@ -36,10 +33,10 @@ class HelpAws extends HTMLElement {
 	_syncLink() {
 		// Read host attributes or fall back to sensible defaults
 		const elHref = this.getAttribute("href");
-		if (elHref != null) {
-			this._linkTip.classList.remove("hidden");
-		} else {
+		if (elHref == null) {
 			this._linkTip.classList.add("hidden");
+		} else {
+			this._linkTip.classList.remove("hidden");
 		}
 		const href = elHref ?? "#";
 		const target = this.getAttribute("target") ?? "_blank";
@@ -47,16 +44,16 @@ class HelpAws extends HTMLElement {
 
 		this._anchor.setAttribute("href", href);
 
-		if (target !== null) {
-			this._anchor.setAttribute("target", target);
-		} else {
+		if (target === null) {
 			this._anchor.removeAttribute("target");
+		} else {
+			this._anchor.setAttribute("target", target);
 		}
 
-		if (rel !== null) {
-			this._anchor.setAttribute("rel", rel);
-		} else {
+		if (rel === null) {
 			this._anchor.removeAttribute("rel");
+		} else {
+			this._anchor.setAttribute("rel", rel);
 		}
 	}
 }

@@ -106,8 +106,6 @@ async function generateFavouriteButton() {
 	button.setAttribute("type", "button");
 	button.setAttribute("aria-live", "off");
 	button.setAttribute("aria-label", "");
-	button.setAttribute("data-aura-rendered-by", "3:829;a");
-	button.setAttribute("data-aura-class", "uiButton");
 	button.addEventListener(
 		"click",
 		actionFavourite,
@@ -115,7 +113,6 @@ async function generateFavouriteButton() {
 	const span = document.createElement("span");
 	span.classList.add("label", "bBody");
 	span.setAttribute("dir", "ltr");
-	span.setAttribute("data-aura-rendered-by", "6:829;a");
 	button.appendChild(span);
 	const commands = [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB];
 	const connectedCommands = await sendExtensionMessage({
@@ -124,7 +121,7 @@ async function generateFavouriteButton() {
 	});
 	let starCmd = null;
 	let slashedStarCmd = null;
-	connectedCommands?.forEach((cc) => {
+	for (const cc of connectedCommands) {
 		switch (cc.name) {
 			case CMD_SAVE_AS_TAB:
 				starCmd = cc.shortcut;
@@ -135,19 +132,19 @@ async function generateFavouriteButton() {
 			default:
 				break;
 		}
-	});
+	}
 	const translator = await ensureTranslatorAvailability();
 	const star = createStarSvg({
 		id: STAR_ID,
 		alt: `${await translator.translate("save_tab")}${
-			starCmd != null ? ` (${starCmd})` : ""
+			starCmd == null ? "" : ` (${starCmd})`
 		}`,
 	}, false);
 	span.appendChild(star);
 	const slashedStar = createStarSvg({
 		id: SLASHED_STAR_ID,
 		alt: `${await translator.translate("remove_tab")}${
-			slashedStarCmd != null ? ` (${slashedStarCmd})` : ""
+			slashedStarCmd == null ? "" : ` (${slashedStarCmd})`
 		}`,
 	}, true);
 	slashedStar.classList.add("hidden");
@@ -343,10 +340,10 @@ export async function showFavouriteButton(count = 0) {
  */
 export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
-	if (!favourite.classList.contains("hidden")) {
-		favourite.closest("button").click(); // otherwise we would click on the svg
-	} else {
+	if (favourite.classList.contains("hidden")) {
 		const message = save ? "error_useless_save" : "error_useless_remove";
 		showToast(message, true, true);
+	} else {
+		favourite.closest("button").click(); // otherwise we would click on the svg
 	}
 }

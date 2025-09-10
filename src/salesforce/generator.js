@@ -76,9 +76,9 @@ async function handleLightningLinkClick(e) {
 		LINK_NEW_BROWSER,
 		USE_LIGHTNING_NAVIGATION,
 	]);
-	const fallbackTarget = currentTarget !== ""
-		? currentTarget
-		: getLinkTarget(metaCtrl, url);
+	const fallbackTarget = currentTarget === ""
+		? getLinkTarget(metaCtrl, url)
+		: currentTarget;
 	const target =
 		settings?.some((setting) =>
 				setting.id === LINK_NEW_BROWSER && setting.enabled
@@ -288,12 +288,12 @@ export function generateRowTemplate(
 		"navexConsoleTabItem",
 		EXTENSION_NAME,
 	);
-	li.setAttribute("data-aura-class", "navexConsoleTabItem");
+	li.dataset.auraClass = "navexConsoleTabItem";
 	if (hide) {
 		li.style.display = "none";
 	}
 	const a = document.createElement("a");
-	a.setAttribute("data-draggable", "true");
+	a.dataset.draggable = "true";
 	a.setAttribute("role", "tab");
 	a.setAttribute("tabindex", "-1");
 	a.setAttribute("title", miniURL); // popup showing where the Tab is pointing to
@@ -347,12 +347,11 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 		"slds-is-relative",
 	);
 	toastContainer.style.pointerEvents = "none";
-	toastContainer.setAttribute("data-aura-rendered-by", "7381:0");
 	const toast = document.createElement("div");
 	toast.setAttribute("role", "alertdialog");
 	toast.setAttribute("aria-describedby", "toastDescription7382:0");
 	toast.setAttribute("aria-label", toastType);
-	toast.setAttribute("data-key", toastType);
+	toast.dataset.key = toastType;
 	toast.classList.add(
 		`slds-theme--${toastType}`,
 		"slds-notify--toast",
@@ -360,8 +359,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 		"slds-notify--toast",
 		"forceToastMessage",
 	);
-	toast.setAttribute("data-aura-rendered-by", "7384:0");
-	toast.setAttribute("data-aura-class", "forceToastMessage");
+	toast.dataset.auraClass = "forceToastMessage";
 	const iconContainer = document.createElement("lightning-icon");
 	iconContainer.setAttribute("icon-name", `utility:${toastType}`);
 	iconContainer.classList.add(
@@ -372,8 +370,6 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 		"slds-align-top",
 		"slds-icon_container",
 	);
-	iconContainer.setAttribute("data-data-rendering-service-uid", "1478");
-	iconContainer.setAttribute("data-aura-rendered-by", "7386:0");
 	const boundarySpan = document.createElement("span");
 	boundarySpan.style.cssText =
 		"--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)";
@@ -384,7 +380,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.classList.add("slds-icon", "slds-icon_small");
 	svg.setAttribute("focusable", "false");
-	svg.setAttribute("data-key", toastType);
+	svg.dataset.key = toastType;
 	svg.setAttribute("aria-hidden", "true");
 	svg.setAttribute("viewBox", "0 0 520 520");
 	svg.setAttribute("part", "icon");
@@ -408,28 +404,24 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	iconContainer.appendChild(assistiveText);
 	const toastContent = document.createElement("div");
 	toastContent.classList.add("toastContent", "slds-notify__content");
-	toastContent.setAttribute("data-aura-rendered-by", "7387:0");
 	const contentInner = document.createElement("div");
 	contentInner.classList.add("slds-align-middle", "slds-hyphenate");
-	contentInner.setAttribute("data-aura-rendered-by", "7388:0");
 	const descriptionDiv = document.createElement("div");
 	descriptionDiv.id = "toastDescription7382:0";
-	descriptionDiv.setAttribute("data-aura-rendered-by", "7390:0");
 	const translatedMessageSplit = (await translator.translate(message)).split(
 		"\n",
 	);
-	translatedMessageSplit.forEach((msg_split) => {
+	for (const msg_split of translatedMessageSplit) {
 		const messageSpan = document.createElement("div");
 		messageSpan.classList.add(
 			"toastMessage",
 			"slds-text-heading--small",
 			"forceActionsText",
 		);
-		messageSpan.setAttribute("data-aura-rendered-by", "7395:0");
-		messageSpan.setAttribute("data-aura-class", "forceActionsText");
+		messageSpan.dataset.auraClass = "forceActionsText";
 		messageSpan.textContent = msg_split;
 		descriptionDiv.appendChild(messageSpan);
-	});
+	}
 	// Assemble the message
 	contentInner.appendChild(descriptionDiv);
 	toastContent.appendChild(contentInner);
@@ -661,7 +653,6 @@ export async function generateSection(sectionTitle = null) {
 			"slds-p-around_x-small",
 			"slds-theme_shade",
 		);
-		h3.setAttribute("data-target-reveals", "");
 		innerDiv.appendChild(h3);
 		const span = document.createElement("span");
 		span.setAttribute("lwc-mlenr16lk9", "");
@@ -728,10 +719,8 @@ export async function generateSldsModal(modalTitle) {
 		"open",
 		"active",
 	);
-	modalParent.setAttribute(
-		"data-aura-class",
-		"uiModal--medium uiModal--recordActionWrapper uiModal forceModal",
-	);
+	modalParent.dataset.auraClass =
+		"uiModal--medium uiModal--recordActionWrapper uiModal forceModal";
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
@@ -821,7 +810,7 @@ export async function generateSldsModal(modalTitle) {
 		"slds-modal__content",
 		"slds-p-around_medium",
 	);
-	modalBody.setAttribute("data-scoped-scroll", "true");
+	modalBody.dataset.scopedScroll = "true";
 	modalContainer.appendChild(modalBody);
 	const viewModeDiv = document.createElement("div");
 	viewModeDiv.classList.add(
@@ -831,8 +820,7 @@ export async function generateSldsModal(modalTitle) {
 		"active",
 		"lafPageHost",
 	);
-	viewModeDiv.setAttribute("data-aura-rendered-by", "1096:0");
-	viewModeDiv.setAttribute("data-aura-class", "lafPageHost");
+	viewModeDiv.dataset.auraClass = "lafPageHost";
 	modalBody.appendChild(viewModeDiv);
 	const actionWrapperDiv = document.createElement("form");
 	actionWrapperDiv.classList.add(
@@ -840,12 +828,10 @@ export async function generateSldsModal(modalTitle) {
 		"inlinePanel",
 		"oneRecordActionWrapper",
 	);
-	actionWrapperDiv.setAttribute("data-aura-rendered-by", "1139:0");
-	actionWrapperDiv.setAttribute("data-aura-class", "oneRecordActionWrapper");
+	actionWrapperDiv.dataset.auraClass = "oneRecordActionWrapper";
 	viewModeDiv.appendChild(actionWrapperDiv);
 	const actionBodyDiv = document.createElement("div");
 	actionBodyDiv.classList.add("actionBody");
-	actionBodyDiv.setAttribute("data-aura-rendered-by", "1140:0");
 	actionWrapperDiv.appendChild(actionBodyDiv);
 	const fieldContainerDiv = document.createElement("div");
 	fieldContainerDiv.classList.add(
@@ -857,11 +843,7 @@ export async function generateSldsModal(modalTitle) {
 		"full-width",
 		"forceDetailPanelDesktop",
 	);
-	fieldContainerDiv.setAttribute("data-aura-rendered-by", "1177:0");
-	fieldContainerDiv.setAttribute(
-		"data-aura-class",
-		"forceDetailPanelDesktop",
-	);
+	fieldContainerDiv.dataset.auraClass = "forceDetailPanelDesktop";
 	actionBodyDiv.appendChild(fieldContainerDiv);
 	const article = document.createElement("article");
 	article.setAttribute("aria-labelledby", MODAL_ID);
@@ -897,7 +879,6 @@ export async function generateSldsModal(modalTitle) {
 	legend.append(await translator.translate("required_info"));
 	const footerContainer = document.createElement("div");
 	footerContainer.classList.add("inlineFooter");
-	footerContainer.setAttribute("data-aura-rendered-by", "1215:0");
 	footerContainer.style.borderTop =
 		"var(--slds-g-sizing-border-2, var(--lwc-borderWidthThick, 2px)) solid var(--slds-g-color-border-1, var(--lwc-colorBorder, rgb(229, 229, 229)))";
 	actionWrapperDiv.appendChild(footerContainer);
@@ -907,19 +888,13 @@ export async function generateSldsModal(modalTitle) {
 		"slds-text-align_center",
 		"forceRecordEditActions",
 	);
-	buttonContainerDiv.setAttribute("data-aura-rendered-by", "1148:0");
-	buttonContainerDiv.setAttribute(
-		"data-aura-class",
-		"forceRecordEditActions",
-	);
+	buttonContainerDiv.dataset.auraClass = "forceRecordEditActions";
 	footerContainer.appendChild(buttonContainerDiv);
 	const actionsContainerDiv = document.createElement("div");
 	actionsContainerDiv.classList.add("actionsContainer");
-	actionsContainerDiv.setAttribute("data-aura-rendered-by", "1149:0");
 	buttonContainerDiv.appendChild(actionsContainerDiv);
 	const buttonContainerInnerDiv = document.createElement("div");
 	buttonContainerInnerDiv.classList.add("button-container-inner");
-	buttonContainerInnerDiv.setAttribute("data-aura-rendered-by", "1161:0");
 	actionsContainerDiv.appendChild(buttonContainerInnerDiv);
 	const cancelButton = document.createElement("button");
 	cancelButton.classList.add(
@@ -934,14 +909,12 @@ export async function generateSldsModal(modalTitle) {
 	const msg_cancel = await translator.translate("cancel");
 	cancelButton.setAttribute("title", msg_cancel);
 	cancelButton.setAttribute("aria-label", "");
-	cancelButton.setAttribute("data-aura-rendered-by", "1364:0");
-	cancelButton.setAttribute("data-aura-class", "uiButton forceActionButton");
+	cancelButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(cancelButton);
 	cancelButton.addEventListener("click", () => closeButton.click());
 	const cancelSpan = document.createElement("span");
 	cancelSpan.classList.add("label", "bBody");
 	cancelSpan.setAttribute("dir", "ltr");
-	cancelSpan.setAttribute("data-aura-rendered-by", "1367:0");
 	cancelSpan.textContent = msg_cancel;
 	cancelButton.appendChild(cancelSpan);
 	const saveButton = document.createElement("button");
@@ -958,13 +931,11 @@ export async function generateSldsModal(modalTitle) {
 	const msg_continue = await translator.translate("continue");
 	saveButton.setAttribute("title", msg_continue);
 	saveButton.setAttribute("aria-label", "");
-	saveButton.setAttribute("data-aura-rendered-by", "1380:0");
-	saveButton.setAttribute("data-aura-class", "uiButton forceActionButton");
+	saveButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(saveButton);
 	const saveSpan = document.createElement("span");
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
-	saveSpan.setAttribute("data-aura-rendered-by", "1383:0");
 	saveSpan.textContent = msg_continue;
 	saveButton.appendChild(saveSpan);
 	/**
@@ -1007,21 +978,33 @@ export async function generateSldsModal(modalTitle) {
  *   - radioGroup: the container <div> element with all radio buttons appended.
  *   - getSelectedRadioButtonValue: a function that returns the value of the currently selected radio button or undefined if none selected.
  */
-export function generateRadioButtons(name, radio0def = {
-	id: null,
-	value: null,
-	label: null,
-	checked: false,
-}, radio1def = {
-	id: null,
-	value: null,
-	label: null,
-	checked: false,
-}, ...otherRadioDefs) {
+export function generateRadioButtons(name, {
+	id: radio0Id = null,
+	value: radio0Value = null,
+	label: radio0Label = null,
+	checked: radio0Checked = false,
+} = {}, {
+	id: radio1Id = null,
+	value: radio1Value = null,
+	label: radio1Label = null,
+	checked: radio1Checked = false,
+} = {}, ...otherRadioDefs) {
+	const radio0def = {
+		id: radio0Id,
+		value: radio0Value,
+		label: radio0Label,
+		checked: radio0Checked,
+	};
+	const radio1def = {
+		id: radio1Id,
+		value: radio1Value,
+		label: radio1Label,
+		checked: radio1Checked,
+	};
 	const allRadioInputs = [];
 	const radioGroup = document.createElement("div");
 	otherRadioDefs.push(radio0def, radio1def);
-	otherRadioDefs.forEach((raddef) => {
+	for (const raddef of otherRadioDefs) {
 		const innerSpan = document.createElement("span");
 		const radio = document.createElement("input");
 		radio.type = "radio";
@@ -1037,14 +1020,14 @@ export function generateRadioButtons(name, radio0def = {
 		labelEl.style.marginLeft = "0.5em";
 		innerSpan.appendChild(labelEl);
 		radioGroup.appendChild(innerSpan);
-	});
+	}
 	/**
 	 * Returns the value of the currently selected (checked) radio button from the group.
 	 *
 	 * @returns {string|undefined} The value of the checked radio button, or undefined if none are checked.
 	 */
 	function getSelectedRadioButtonValue() {
-		return allRadioInputs.filter((inp) => inp.checked)?.[0]?.value;
+		return allRadioInputs.find((inp) => inp.checked)?.value;
 	}
 	return { radioGroup, getSelectedRadioButtonValue };
 }
@@ -1087,7 +1070,7 @@ export async function generateOpenOtherOrgModal(miniURL, label) {
 	const linkEnd = document.createElement("span");
 	linkEnd.append(
 		`${LIGHTNING_FORCE_COM}${
-			!miniURL.startsWith("/") ? SETUP_LIGHTNING : ""
+			miniURL.startsWith("/") ? "" : SETUP_LIGHTNING
 		}${miniURL}`,
 	);
 	linkEnd.style.width = "fit-content";
@@ -1171,7 +1154,7 @@ export async function generateSldsFileInput(
 		"MEDIUM",
 		"forceRelatedListPreview",
 	);
-	fileInputWrapper.setAttribute("data-aura-class", "forceRelatedListPreview");
+	fileInputWrapper.dataset.auraClass = "forceRelatedListPreview";
 	fileInputWrapper.style.width = "100%";
 	const innerDiv = document.createElement("div");
 	fileInputWrapper.appendChild(innerDiv);
@@ -1181,10 +1164,8 @@ export async function generateSldsFileInput(
 		"forceContentFileDroppableZone",
 		"forceContentRelatedListPreviewFileList",
 	);
-	cardBodyDiv.setAttribute(
-		"data-aura-class",
-		"forceContentFileDroppableZone forceContentRelatedListPreviewFileList",
-	);
+	cardBodyDiv.dataset.auraClass =
+		"forceContentFileDroppableZone forceContentRelatedListPreviewFileList";
 	innerDiv.appendChild(cardBodyDiv);
 	const msg_file = await translator.translate("file");
 	const msg_files = await translator.translate("files");
@@ -1218,8 +1199,7 @@ export async function generateSldsFileInput(
 			"slds-icon_container forceIcon",
 		);
 		lightningIcon.setAttribute("icon-name", "utility:upload");
-		lightningIcon.setAttribute("data-data-rendering-service-uid", "742");
-		lightningIcon.setAttribute("data-aura-class", "forceIcon");
+		lightningIcon.dataset.auraClass = "forceIcon";
 		dropzoneBodySpan.appendChild(lightningIcon);
 		const iconSpan = document.createElement("span");
 		iconSpan.style.setProperty(
@@ -1268,7 +1248,6 @@ export async function generateSldsFileInput(
 	cardBodyDiv.appendChild(dragOverDiv);
 	const lightningInput = document.createElement("lightning-input");
 	lightningInput.classList.add("slds-form-element", "lightningInput");
-	lightningInput.setAttribute("data-data-rendering-service-uid", "743");
 	dragOverDiv.appendChild(lightningInput);
 	const primitiveInputFile = document.createElement(
 		"lightning-primitive-input-file",
@@ -1337,7 +1316,7 @@ export async function generateSldsFileInput(
 	);
 	buttonSvg.classList.add("slds-button__icon", "slds-button__icon_left");
 	buttonSvg.setAttribute("focusable", "false");
-	buttonSvg.setAttribute("data-key", "upload");
+	buttonSvg.dataset.key = "upload";
 	buttonSvg.setAttribute("aria-hidden", "true");
 	buttonSvg.setAttribute("viewBox", "0 0 520 520");
 	buttonSvg.setAttribute("part", "icon");

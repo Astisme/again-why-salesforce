@@ -71,10 +71,10 @@ function handleDrop(e) {
 	const dragSrcIndex = [...parent.children].indexOf(dragSrcEl); // Get the index of the dragged row
 	if (targetIndex > dragSrcIndex) {
 		// If the target row is after the dragged row, insert the dragged row before the target row
-		targetRow.insertAdjacentElement("afterend", dragSrcEl);
+		targetRow.after(dragSrcEl);
 	} else {
 		// If the target row is before the dragged row, insert the dragged row after the target row
-		targetRow.insertAdjacentElement("beforebegin", dragSrcEl);
+		targetRow.before(dragSrcEl);
 	}
 	e.target.style.cursor = "grab";
 	postMessage({ what: "order" }, "*");
@@ -99,7 +99,7 @@ export function setupDrag() {
 	table = document.getElementById("sortable-table");
 	ul = document.getElementById(EXTENSION_NAME);
 	container = table ?? ul;
-	closestTag = table != null ? "tr" : "li";
-	if (container != null) createListeners();
-	else setTimeout(() => setupDrag(), 500);
+	closestTag = table == null ? "li" : "tr";
+	if (container == null) setTimeout(() => setupDrag(), 500);
+	else createListeners();
 }

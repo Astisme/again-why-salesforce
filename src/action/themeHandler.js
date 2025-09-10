@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-window
 import { sendExtensionMessage } from "/constants.js";
 const html = document.documentElement;
 let systemColorListener = null;
@@ -42,7 +41,7 @@ function handleSystemColorSchemeChange(e) {
  */
 export function systemColorSchemeListener(enable = true) {
 	if (
-		window.matchMedia == null || enable == null ||
+		globalThis.matchMedia == null || enable == null ||
 		(enable && systemColorListener != null) ||
 		(!enable && systemColorListener == null)
 	) {
@@ -52,7 +51,9 @@ export function systemColorSchemeListener(enable = true) {
 	localStorage.setItem("userTheme", "system");
 	if (enable) {
 		// If enabling, add the systemColorListener
-		systemColorListener = window.matchMedia("(prefers-color-scheme: dark)");
+		systemColorListener = globalThis.matchMedia(
+			"(prefers-color-scheme: dark)",
+		);
 		systemColorListener.addEventListener(
 			"change",
 			handleSystemColorSchemeChange,
@@ -83,9 +84,9 @@ export function handleSwitchColorTheme() {
  */
 export function initTheme() {
 	html.dataset.usertheme = localStorage.getItem("userTheme") ?? "system";
-	html.dataset.theme = html.dataset.usertheme !== "system"
-		? html.dataset.usertheme
-		: null;
+	html.dataset.theme = html.dataset.usertheme === "system"
+		? null
+		: html.dataset.usertheme;
 	// call other function to match system theme
 	systemColorSchemeListener(html.dataset.usertheme === "system");
 }

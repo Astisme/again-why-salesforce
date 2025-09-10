@@ -156,7 +156,7 @@ export default class Tab {
 			);
 		}
 		if (url.endsWith("/")) {
-			url = url.slice(0, url.length - 1);
+			url = url.slice(0, -1);
 		}
 		if (url.length === 0) {
 			url = "/";
@@ -192,9 +192,9 @@ export default class Tab {
 		}
 		if (
 			url.startsWith(HTTPS) &&
-			!url.match(MY_SALESFORCE_SETUP_COM) &&
-			!url.match(MY_SALESFORCE_COM) &&
-			!url.match(LIGHTNING_FORCE_COM)
+			!url.includes(MY_SALESFORCE_SETUP_COM) &&
+			!url.includes(MY_SALESFORCE_COM) &&
+			!url.includes(LIGHTNING_FORCE_COM)
 		) {
 			return url;
 		}
@@ -364,7 +364,7 @@ export default class Tab {
 			this.url = Tab.minifyURL(url);
 		}
 		if (org != null) {
-			this.org = org !== "" ? Tab.extractOrgName(org) : undefined;
+			this.org = org === "" ? undefined : Tab.extractOrgName(org);
 		}
 		return this;
 	}
@@ -385,11 +385,11 @@ export default class Tab {
 		if (label == null && url == null && org == null) {
 			return tabToUpdate;
 		}
-		const orginput = org !== "" ? org : undefined;
+		const orginput = org === "" ? undefined : org;
 		return Tab.create(
 			label ?? tabToUpdate.label,
 			url ?? tabToUpdate.url,
-			org != null ? orginput : tabToUpdate.org,
+			org == null ? tabToUpdate.org : orginput,
 		);
 	}
 

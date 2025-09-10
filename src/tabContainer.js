@@ -303,10 +303,10 @@ export class TabContainer extends Array {
 			throw new Error(msg);
 		}
 		const newTab = Tab.create(tab);
-		if (!addInFront) {
-			this.push(newTab);
-		} else {
+		if (addInFront) {
 			this.unshift(newTab);
+		} else {
+			this.push(newTab);
 		}
 		if (sync) {
 			return await this.syncTabs();
@@ -329,24 +329,21 @@ export class TabContainer extends Array {
 			return true;
 		}
 		TabContainer.errorOnInvalidTabs(tabs);
-		let addedAll = true;
 		for (const tab of tabs) {
 			try {
 				await this.addTab(tab, false, true);
 			} catch (error) {
 				const msg = await translator.translate("error_duplicate_tab");
 				if (!error.message.startsWith(msg)) {
-					addedAll = false; // count duplicates as inserted
 					throw error;
 				}
 			}
 		}
 		if (sync) {
-			await this.syncTabs();
+			return await this.syncTabs();
 		} else {
-			await this.checkSetSorted();
+			return await this.checkSetSorted();
 		}
-		return addedAll;
 	}
 
 	/**
@@ -415,6 +412,8 @@ export class TabContainer extends Array {
 	 * @param {string|null} [tab.label=null] - The label of the tab to filter by.
 	 * @param {string|null} [tab.url=null] - The URL of the tab to filter by.
 	 * @param {Object|null} [tab.org=null] - The organization associated with the tab to filter by.
+	 * @param {boolean} [match=true] - A flag indicating whether to return tabs that exactly match the specified tab data (`true`), or those that do not match (`false`). Defaults to `true`.
+	 * @param {boolean} [isRetry=false] - If the call to this function is subsequent to the first one. Internal use.
 	 * @throws {Error} - Throws an error if it finds 0 Tabs or more than 1 Tab.
 	 * @returns {Tab} - A Tab that matches the specified tab data condition.
 	 */
@@ -434,25 +433,43 @@ export class TabContainer extends Array {
 				true,
 			);
 		}
-		if (matchingTabs.length > 1) {
-			if (
-				!match || (tab.url == null && tab.org == null) ||
-				(tab.url == null && tab.org != null)
-			) {
-				throw new Error("error_many_tabs_found");
-			}
-			const filteredTabs = matchingTabs.filter((tb) =>
-				tb.org == null || tb.org === tab.org
-			);
-			if (filteredTabs.length === 1) {
-				return filteredTabs[0];
-			}
-			if (filteredTabs.length >= 1) {
-				return filteredTabs.filter((tb) => tb.org != null)?.[0];
-			}
+		if (matchingTabs.length === 1) {
+			return matchingTabs[0];
+		}
+		if (
+			!match || (tab.url == null && tab.org == null) ||
+			(tab.url == null && tab.org != null)
+		) {
 			throw new Error("error_many_tabs_found");
 		}
-		return matchingTabs[0];
+		// try to filter by org
+		const filteredTabs = matchingTabs.filter((tb) =>
+			tb.org == null || tb.org === tab.org
+		);
+		if (filteredTabs.length === 0) {
+			throw new Error("error_tab_not_found");
+		}
+		if (filteredTabs.length === 1) {
+			return filteredTabs[0];
+		}
+		// filteredTabs should contain both a Tab with no org and a Tab with the same org
+		// prefer to return the Tab with the same org
+		if (tab.org != null) {
+			const orgTabs = filteredTabs.filter((tb) => tb.org === tab.org);
+			if (orgTabs.length === 1) {
+				return orgTabs[0];
+			}
+		}
+		const noorgTabs = filteredTabs.filter((tb) => tb.org == null);
+		if (noorgTabs.length === 1) {
+			return noorgTabs[0];
+		}
+		// nothing to do. we found more than one org Tab and more than one generic Tab
+		// note: we should never get here because the TabContainer checks for duplicates before adding
+		// we could get in here if the Tab passed as input did not have an org and filteredTabs only contained org tabs
+		// in this case, we could not filter above and got here
+		console.info({ tab, match, isRetry, matchingTabs, filteredTabs });
+		throw new Error("error_many_tabs_found");
 	}
 
 	/**
@@ -855,9 +872,10 @@ export class TabContainer extends Array {
 	 * ==> tabs = ["a", "b", "d", "e", "c"]
 	 */
 	async moveTab(
-		inputTab = { label: null, url: null, org: null },
+		{ label = null, url = null, org = null } = {},
 		{ moveBefore = true, fullMovement = false } = {},
 	) {
+		const inputTab = { label, url, org };
 		const matchTab = this.getSingleTabByData(inputTab);
 		const currentIndex = this.getTabIndex(matchTab);
 		let newIndex;
@@ -900,7 +918,8 @@ export class TabContainer extends Array {
 	 * @param {string} tab.org - the org of the Tab to remove
 	 * @returns {boolean} - Whether a tab was removed
 	 */
-	async remove(tab = { label: null, url: null, org: null }) {
+	async remove({ label = null, url = null, org = null } = {}) {
+		const tab = { label, url, org };
 		if (tab.label == null && tab.url == null && tab.org == null) {
 			const msg = await translator.translate("error_no_data");
 			throw new Error(msg);
@@ -935,9 +954,10 @@ export class TabContainer extends Array {
 	 * removeOtherTabs("b",false) ==> tabs = ["a", "b"]
 	 */
 	async removeOtherTabs(
-		tab = { label: null, url: null, org: null },
+		{ label = null, url = null, org = null } = {},
 		{ removeBefore = null } = {},
 	) {
+		const tab = { label, url, org };
 		const matchTab = this.getSingleTabByData(tab);
 		// remove all tabs but this one
 		if (removeBefore == null) {
@@ -1155,11 +1175,27 @@ export class TabContainer extends Array {
 	 * @returns {boolean} whether the Tab was updated AND the array was synced
 	 */
 	async updateTab(
-		tabToUpdate = { label: undefined, url: undefined, org: undefined },
-		updateTo = { label: undefined, url: undefined, org: undefined },
+		{
+			label: tabLabel = undefined,
+			url: tabUrl = undefined,
+			org: tabOrg = undefined,
+		} = {},
+		{
+			label: updateLabel = undefined,
+			url: updateUrl = undefined,
+			org: updateOrg = undefined,
+		} = {},
 	) {
-		const matchingTab = this.getSingleTabByData(tabToUpdate);
-		matchingTab.update(updateTo);
+		const matchingTab = this.getSingleTabByData({
+			label: tabLabel,
+			url: tabUrl,
+			org: tabOrg,
+		});
+		matchingTab.update({
+			label: updateLabel,
+			url: updateUrl,
+			org: updateOrg,
+		});
 		return await this.syncTabs();
 	}
 

@@ -195,7 +195,7 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
 	);
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
-		hanger.removeChild(document.getElementById(toastElement.id));
+		toastElement.remove();
 	}, calculateReadingTime(toastElement.textContent));
 	if (isSuccess) {
 		if (isWarning) {
@@ -238,7 +238,7 @@ async function init(tabs = null) {
 	}
 	if (allTabs.length > 0) {
 		const frag = document.createDocumentFragment();
-		allTabs.forEach((row) => {
+		for (const row of allTabs) {
 			// TODO add option to hide or show not-this-org tabs
 			// hide not-this-org tabs
 			frag.appendChild(
@@ -247,7 +247,7 @@ async function init(tabs = null) {
 					!(row.org == null || row.org === orgName),
 				),
 			);
-		});
+		}
 		setupTabUl.appendChild(frag);
 	}
 	isOnSavedTab();
@@ -472,9 +472,9 @@ function makeDuplicatesBold(miniURL) {
 	 * For each duplicatetabs, toggles the slds-theme--warning class
 	 */
 	function toggleWarning() {
-		duplicatetabs.forEach((tab) =>
-			tab.classList.toggle("slds-theme--warning")
-		);
+		for (const tab of duplicatetabs) {
+			tab.classList.toggle("slds-theme--warning");
+		}
 	}
 	toggleWarning();
 	setTimeout(
@@ -593,7 +593,7 @@ async function showModalOpenOtherOrg({ label = null, url = null } = {}) {
 		}
 		const targetUrl = new URL(
 			`${HTTPS}${newTarget}${LIGHTNING_FORCE_COM}${
-				!url.startsWith("/") ? SETUP_LIGHTNING : ""
+				url.startsWith("/") ? "" : SETUP_LIGHTNING
 			}${url}`,
 		);
 		const confirm_msg = await translator.translate([
@@ -719,7 +719,8 @@ export async function performActionOnTabs(
  * @param {string} param0.org - The Org of the Tab to find
  * @throws when it fails to sync the Tabs.
  */
-async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
+async function toggleOrg({ label = null, url = null, org = null } = {}) {
+	const inputTab = { label, url, org };
 	if (inputTab.url == null) {
 		inputTab.url = Tab.minifyURL(getCurrentHref());
 	}
@@ -743,10 +744,13 @@ async function toggleOrg(inputTab = { label: null, url: null, org: null }) {
  * @param {string} tab.url - The Url of the Tab to update
  * @param {string} tab.org - The Org of the Tab to update
  */
-async function showModalUpdateTab(tab = { label: null, url: null, org: null }) {
+async function showModalUpdateTab(
+	{ label = null, url = null, org = null } = {},
+) {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", false);
 	}
+	const tab = { label, url, org };
 	const tabIsEmpty = tab.label == null && tab.url == null && tab.org == null;
 	const allTabs = await ensureAllTabsAvailability();
 	let matchingTab = null;
@@ -844,7 +848,7 @@ function launchDownload(message) {
 	document.body.appendChild(a);
 	a.click();
 	// Cleanup
-	document.body.removeChild(a);
+	a.remove();
 	URL.revokeObjectURL(url);
 }
 
@@ -1052,7 +1056,7 @@ function listenToBackgroundPage() {
  */
 function listenToReorderedTabs() {
 	addEventListener("message", (e) => {
-		if (e.source != window) {
+		if (e.source != globalThis) {
 			return;
 		}
 		const what = e.data.what;
@@ -1080,7 +1084,7 @@ async function checkInsertAnalytics() {
 			(
 				!isNewUser &&
 				Math.floor(
-						(new Date() - new Date(prevent_analytics.date)) /
+						(Date.now() - new Date(prevent_analytics.date)) /
 							(1000 * 60 * 60 * 24),
 					) <= 0 // the date difference is less than a day
 			)

@@ -186,7 +186,7 @@ export async function checkForUpdates() {
 			(
 				no_update_notification.date != null &&
 				Math.floor(
-						(new Date() - new Date(no_update_notification.date)) /
+						(Date.now() - new Date(no_update_notification.date)) /
 							(1000 * 60 * 60 * 24),
 					) <= 7 // the date difference is less than a week
 			)

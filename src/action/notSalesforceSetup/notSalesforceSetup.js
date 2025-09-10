@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-window
 import {
 	BROWSER,
 	getSettings,
@@ -25,7 +24,7 @@ const loginId = "login";
 const setupId = "go-setup";
 let willOpenLogin = true;
 
-const page = new URLSearchParams(window.location.search).get("url");
+const page = new URLSearchParams(globalThis.location.search).get("url");
 if (page != null) { // we're in a salesforce page
 	let domain = null;
 	try {
@@ -113,14 +112,13 @@ shownRedirectBtn.addEventListener("click", (e) => {
 const automaticClick = willOpenLogin ? POPUP_OPEN_LOGIN : POPUP_OPEN_SETUP;
 const useSameTab = willOpenLogin ? POPUP_LOGIN_NEW_TAB : POPUP_SETUP_NEW_TAB;
 const settings = await getSettings([automaticClick, useSameTab]);
-openPageInSameTab = settings != null &&
-	settings.filter((setting) => setting.id === useSameTab && setting.enabled)
-			.length > 0;
+openPageInSameTab = settings?.some((setting) =>
+	setting.id === useSameTab && setting.enabled
+);
 if (
-	settings != null &&
-	settings.filter((setting) =>
-			setting.id === automaticClick && setting.enabled
-		).length > 0
+	settings?.some((setting) =>
+		setting.id === automaticClick && setting.enabled
+	)
 ) {
 	shownRedirectBtn.click();
 } else await ensureTranslatorAvailability();

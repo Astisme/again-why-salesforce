@@ -6,18 +6,18 @@
 function detectBrowser() {
 	const userAgent = navigator.userAgent.toLowerCase();
 	// Firefox detection (including Firefox-based browsers)
-	if (userAgent.indexOf("firefox") !== -1) {
+	if (userAgent.includes("firefox")) {
 		return "firefox";
 	}
-	if (userAgent.indexOf("edg") !== -1) {
+	if (userAgent.includes("edg")) {
 		return "edge";
 	}
 	// Chrome detection (including Edge and other Chromium-based browsers)
-	if (userAgent.indexOf("chrome") !== -1) {
+	if (userAgent.includes("chrome")) {
 		return "chrome";
 	}
 	// Safari detection (after checking for Chrome since Chrome includes "safari" in its user agent)
-	if (userAgent.indexOf("safari") !== -1) {
+	if (userAgent.includes("safari")) {
 		return "safari";
 	}
 	return undefined;
@@ -51,25 +51,42 @@ export const SALESFORCE_ID_PATTERN = new RegExp(
 	`(?:^|\\/|=)((?:${SALESFORCE_ID_PREFIX})[0-9a-zA-Z]{12,15})(?=$|\\/|\\?|&)`,
 	"i",
 );
+const MY_SALESFORCE_SETUP_COM_ESCAPED = MY_SALESFORCE_SETUP_COM.replaceAll(
+	".",
+	String.raw`\.`,
+);
+const LIGHTNING_FORCE_COM_ESCAPED = LIGHTNING_FORCE_COM.replaceAll(".", String.raw`\.`);
 export const SALESFORCE_URL_PATTERN =
 	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
 export const FRAME_PATTERNS = [
-	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
-	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
+	`${HTTPS}*${MY_SALESFORCE_SETUP_COM_ESCAPED}/*`,
+	`${HTTPS}*${LIGHTNING_FORCE_COM_ESCAPED}/*`,
 ];
 // add `/setup/lightning/*` to the framePatterns
 export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
-	`${item.substring(0, item.length - 2)}${SETUP_LIGHTNING}*`
+	`${item.substring(0, -2)}${SETUP_LIGHTNING}*`
 );
 export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
 	item.replaceAll("*", ".*")
 );
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`,
+	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM_ESCAPED}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 export const MANIFEST = BROWSER.runtime.getManifest();
 export const EXTENSION_VERSION = MANIFEST.version;
+/**
+ * Invoke the runtime to send the message
+ *
+ * @param {Object} message - The message to send
+ * @param {function} callback - The callback to execute after sending the message
+ */
+function sendMessage(message, callback) {
+	if (message.key == null && message.keys == null) {
+		message.key = WHY_KEY;
+	}
+	return BROWSER.runtime.sendMessage(message, callback);
+}
 /**
  * Sends a message to the background script with the specified message.
  *
@@ -77,18 +94,6 @@ export const EXTENSION_VERSION = MANIFEST.version;
  * @param {function} callback - The callback to execute after sending the message.
  */
 export function sendExtensionMessage(message, callback = null) {
-	/**
-	 * Invoke the runtime to send the message
-	 *
-	 * @param {Object} message - The message to send
-	 * @param {function} callback - The callback to execute after sending the message
-	 */
-	function sendMessage(message, callback) {
-		if (message.key == null && message.keys == null) {
-			message.key = WHY_KEY;
-		}
-		return BROWSER.runtime.sendMessage(message, callback);
-	}
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
 			sendMessage(
@@ -287,3 +292,14 @@ export const WHAT_UPDATE_EXTENSION = "update-extension";
 export const WHAT_EXPORT = "export";
 export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 	"export-perm-open-popup";
+export const EDGE_LINK =
+	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
+export const CHROME_LINK =
+	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
+export const FIREFOX_LINK =
+	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
+const SPONSOR_DOMAIN = "https://alfredoit.dev";
+export const SPONSOR_LINK_EN =
+	`${SPONSOR_DOMAIN}/en/sponsor/?email=againwhysalesforce@duck.com`;
+export const SPONSOR_LINK_IT =
+	`${SPONSOR_DOMAIN}/it/sponsor/?email=againwhysalesforce@duck.com`;
