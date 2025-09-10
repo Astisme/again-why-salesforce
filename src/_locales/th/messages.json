@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "อนุญาต",
+		"description": "[req_permission] ปุ่มสำหรับอนุญาตการเข้าถึง"
+	},
+	"ascending": {
+		"message": "จากน้อยไปมาก (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "มีให้ใช้งาน",
+		"description": "หัวข้อส่วนสำหรับรายการที่สามารถเพิ่มได้"
+	},
+	"bold": {
+		"message": "ตัวหนา",
+		"description": "ตัวเลือกรูปแบบตัวอักษรสำหรับข้อความตัวหนา"
+	},
+	"cancel": {
+		"message": "ยกเลิก",
+		"description": "หัวเรื่องหรือเนื้อความสำหรับปุ่มที่ป้องกันไม่ให้ดำเนินการปัจจุบัน"
+	},
+	"cancel_close": {
+		"message": "ยกเลิกและปิด",
+		"description": "หัวเรื่องหรือเนื้อความสำหรับปุ่มปิดของโมดอล"
+	},
+	"chosen": {
+		"message": "ที่เลือกไว้",
+		"description": "หัวข้อส่วนสำหรับรายการที่ถูกเลือกแล้ว"
+	},
+	"cmd_export_all": {
+		"message": "แสดงโมดอลเพื่อส่งออก Tabs ที่บันทึกไว้ทั้งหมด",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการส่งออก Tabs ทั้งหมด"
+	},
+	"cmd_import": {
+		"message": "แสดงโมดอลเพื่อนำเข้า Tabs ใหม่",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการนำเข้า Tabs ใหม่"
+	},
+	"cmd_open_other_org": {
+		"message": "แสดงโมดอลเพื่อเปิดหน้าปัจจุบันใน Org อื่น",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการเปิดหน้าปัจจุบันใน Org อื่น"
+	},
+	"cmd_remove_tab": {
+		"message": "ลบหน้าปัจจุบันออกจากรายการ Tab (หากบันทึกไว้)",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการลบหน้าปัจจุบัน"
+	},
+	"cmd_save_as_tab": {
+		"message": "บันทึกหน้าปัจจุบันในรายการ Tab (หากยังไม่ได้บันทึก)",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการบันทึกหน้าปัจจุบัน"
+	},
+	"cmd_toggle_org": {
+		"message": "สลับค่า Org ของหน้าปัจจุบัน (หากบันทึกไว้)",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการสลับ Org สำหรับหน้าปัจจุบัน"
+	},
+	"cmd_update_tab": {
+		"message": "แสดงโมดอลเพื่ออัปเดตหน้าปัจจุบัน (หากบันทึกไว้)",
+		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการอัปเดตหน้าปัจจุบัน"
+	},
+	"confirm_another_org": {
+		"message": "ยืนยันการเปิดลิงก์นี้",
+		"description": "[open-other-org-modal] ขอการยืนยันจากผู้ใช้เพื่อเปิดลิงก์ที่สร้างขึ้น"
+	},
+	"confirm_update_extension": {
+		"message": "เวอร์ชันใหม่ของ $extension_label พร้อมใช้งานแล้ว!",
+		"description": "ได้รับข้อความที่ไม่รู้จักจากผู้ฟัง"
+	},
+	"continue": {
+		"message": "ดำเนินการต่อ",
+		"description": "เนื้อความสำหรับปุ่มที่อนุญาตให้ดำเนินการปัจจุบันทำงาน"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 แท็บทั่วไปทั้งหมด",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 ลบ Tab ทั้งหมด",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 แท็บที่มองเห็นทั้งหมด",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ ส่งออก Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_move": {
+		"message": "🧭 ย้าย Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ ทำให้เป็น Tab แรก",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ ทำให้เป็น Tab สุดท้าย",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 ย้ายไปทางซ้าย",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 ย้ายไปทางขวา",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 เปิดใน Org อื่น",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_remove": {
+		"message": "💥 ลบ Tab(s)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tab ด้านซ้าย",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Tab อื่นๆ",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tab ด้านขวา",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ This Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 รีเซ็ตแท็บเริ่มต้น",
+		"description": "[เมนูบริบท]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
+	},
+	"cxm_sort": {
+		"message": "🎯 จัดเรียง Tab-s",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ของตนโดยอัตโนมัติ (เมนูหลัก)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ตามป้ายกำกับ",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ตามป้ายกำกับ"
+	},
+	"cxm_sort_org": {
+		"message": "👽 ตาม Org",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ตาม org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 ตาม URL",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ตาม url"
+	},
+	"cxm_update": {
+		"message": "✏️ อัปเดต Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 เปลี่ยน Org",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 อัปเดตอื่นๆ",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "ลบ",
+		"description": "[popup] ลบแถว"
+	},
+	"delete_all": {
+		"message": "$delete Tabs ทั้งหมด",
+		"description": "[ป๊อปอัป] ชื่อบนถังขยะเพื่อล้าง Tabs ทั้งหมด"
+	},
+	"descending": {
+		"message": "จากมากไปน้อย (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "วาง",
+		"description": "[นำเข้า] ให้ผู้ใช้ลากไฟล์ของตนลงในพื้นที่ที่กำหนด"
+	},
+	"enable": {
+		"message": "เปิดใช้งาน",
+		"description": "[ร้องขอ_สิทธิ์] ปุ่มเพื่อเปิดใช้งานสิทธิ์"
+	},
+	"error_adding_tab": {
+		"message": "ข้อผิดพลาดในการเพิ่ม Tab",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะเพิ่ม Tab"
+	},
+	"error_check_update": {
+		"message": "ข้อผิดพลาดในการตรวจสอบการอัปเดต",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปขณะตรวจสอบการอัปเดตส่วนขยาย"
+	},
+	"error_close_other_modal": {
+		"message": "กรุณาปิดโมดอลอื่นก่อน!",
+		"description": "[toast] ผู้ใช้พยายามเปิดโมดอลมากกว่าหนึ่ง"
+	},
+	"error_cxm_check": {
+		"message": "เกิดข้อผิดพลาดในการตรวจสอบเมนู",
+		"description": "[error] ไม่พบรายการในเมนูบริบท"
+	},
+	"error_cxm_create": {
+		"message": "เกิดข้อผิดพลาดในการสร้างรายการเมนู",
+		"description": "[error] ไม่สามารถเริ่มต้นรายการในเมนูบริบทได้"
+	},
+	"error_cxm_remove": {
+		"message": "เกิดข้อผิดพลาดในการลบรายการเมนู",
+		"description": "[error] ไม่สามารถกำจัดรายการในเมนูบริบทได้"
+	},
+	"error_duplicate_tab": {
+		"message": "Tab นี้มีอยู่แล้ว",
+		"description": "[error] Tab ซ้ำกัน"
+	},
+	"error_expand_url": {
+		"message": "ไม่สามารถขยาย URL ที่ว่างเปล่าได้!",
+		"description": "[error] ไม่ได้ส่ง URL ที่จะขยาย"
+	},
+	"error_expand_url_no_base": {
+		"message": "ไม่สามารถขยาย URL โดยไม่มี host!",
+		"description": "[error] ไม่ได้ส่ง URL พื้นฐานสำหรับขยาย"
+	},
+	"error_extract_empty_url": {
+		"message": "ไม่สามารถดึงชื่อ Org จาก URL ที่ว่างเปล่าได้!",
+		"description": "[error] ไม่ได้ส่ง URL ที่จะดึงชื่อ Org"
+	},
+	"error_failed_sync": {
+		"message": "согласовать ไม่สำเร็จ",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปเมื่อ Tab ไม่สามารถ sincronizar จากผู้ใช้ได้"
+	},
+	"error_failed_to_fetch": {
+		"message": "ดึงข้อมูลทรัพยากรภายนอกไม่สำเร็จ",
+		"description": "[ข้อผิดพลาด] การเรียกใช้เว็บไซต์ภายนอกไม่สำเร็จ"
+	},
+	"error_get_with_no_org": {
+		"message": "ไม่สามารถรับ Tab ได้หาก Org ไม่ได้ระบุ",
+		"description": "[error] พยายามค้นหา Tab โดยไม่มีข้อมูล Org"
+	},
+	"error_import": {
+		"message": "เกิดข้อผิดพลาดระหว่างการนำเข้า:\n",
+		"description": "[error] เกิดข้อผิดพลาดระหว่างกระบวนการนำเข้า"
+	},
+	"error_invalid_key": {
+		"message": "ఫంక్షన్‌కు పంపబడిన కీ పారామీటర్ చెల్లదు",
+		"description": "[లోపం] చెల్లని పారామీటర్‌తో డెవలపర్ ఫంక్షన్‌ను కాల్ చేయడానికి ప్రయత్నించారు"
+	},
+	"error_invalid_request": {
+		"message": "คำขอไม่ถูกต้อง.",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปหลังจากได้รับข้อความที่มีรูปแบบไม่ถูกต้อง"
+	},
+	"error_invalid_tab": {
+		"message": "Tab ไม่ถูกต้อง",
+		"description": "[error] Tab ไม่ถูกต้อง"
+	},
+	"error_link_with_id": {
+		"message": "ไม่สามารถมีหน้าเพจนี้ใน Org อื่นได้ เพราะมี Id อยู่!",
+		"description": "[open-other-org-modal] เตือนผู้ใช้ว่าอาจไม่มีลิงก์นี้ใน Org อื่น"
+	},
+	"error_many_matching_tab": {
+		"message": "พบ Tab ที่ตรงกันมากกว่าหนึ่งรายการ",
+		"description": "[error] มี Tab มากเกินไปที่ถูกดึงออกมา"
+	},
+	"error_many_tabs_found": {
+		"message": "พบมากกว่าหนึ่ง Tab.",
+		"description": "[ข้อผิดพลาด] ดึง Tabs มาหลายรายการ"
+	},
+	"error_minify_url": {
+		"message": "ไม่สามารถย่อ URL ที่ว่างเปล่าได้!",
+		"description": "[error] ไม่ได้ส่ง URL ที่จะย่อ"
+	},
+	"error_missing_favourite_id": {
+		"message": "ไม่สามารถรับรูปโปรดได้โดยไม่ส่ง Id",
+		"description": "[error] ไม่ได้ส่ง id ของรูปโปรด"
+	},
+	"error_missing_key": {
+		"message": "ไม่พบคีย์ที่ไหนเลย",
+		"description": "[error] ไม่พบคำแปลในไฟล์"
+	},
+	"error_no_array": {
+		"message": "อาร์เรย์ไม่ถูกต้องหรือไม่ได้ส่งอาร์เรย์มา",
+		"description": "[error] ไม่ได้รับอาร์เรย์ที่ถูกต้อง"
+	},
+	"error_no_browser_tab": {
+		"message": "ไม่พบแท็บเบราเซอร์ปัจจุบัน",
+		"description": "[error] หน้าพื้นหลังไม่สามารถระบุแท็บเบราเซอร์ที่ใช้งานอยู่ได้"
+	},
+	"error_no_callback": {
+		"message": "กรุณาส่ง callback",
+		"description": "[error] ไม่ได้ส่งฟังก์ชัน callback สำหรับเรียกตอนท้ายของเมธอด"
+	},
+	"error_no_cookies": {
+		"message": "ไม่พบ cookies ที่ตรงกัน",
+		"description": "[error] ไม่ได้รับ cookies ของ Salesforce"
+	},
+	"error_no_data": {
+		"message": "ไม่สามารถระบุ Tab ได้โดยไม่มีข้อมูล",
+		"description": "[error] พยายามรับ Tab โดยไม่ได้ส่งข้อมูล"
+	},
+	"error_no_headers": {
+		"message": "ไม่พบหัวเรื่อง",
+		"description": "[error] ส่วนขยายไม่สามารถระบุที่วางปุ่มโปรดได้"
+	},
+	"error_no_matching_tab": {
+		"message": "ไม่พบ Tab ที่ตรงกัน",
+		"description": "[error] ไม่ได้รับ Tab ที่ตรงกัน"
+	},
+	"error_no_message": {
+		"message": "ไม่ได้ระบุข้อความสำหรับการส่ง",
+		"description": "[error] ไม่พบข้อความที่จะส่งไปยังส่วนอื่นๆ ของโค้ด"
+	},
+	"error_no_object": {
+		"message": "ไม่ได้ส่งอ็อบเจ็กต์สำหรับตรวจสอบ!",
+		"description": "[error] ไม่ได้ส่งอ็อบเจ็กต์มาให้ตรวจสอบ"
+	},
+	"error_no_setup_tab": {
+		"message": "ไม่พบ Setup Tab",
+		"description": "[error] ส่วนขยายไม่สามารถระบุที่วาง Tab ที่โปรดได้"
+	},
+	"error_no_url": {
+		"message": "ไม่พบ URL สำหรับตรวจสอบ",
+		"description": "[error] ไม่ได้ส่ง URL สำหรับตรวจสอบ"
+	},
+	"error_not_initialized": {
+		"message": "ยังไม่ได้รับการเริ่มต้น.",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปเมื่อตัวแปรยังไม่พร้อม"
+	},
+	"error_processing_tabs": {
+		"message": "ข้อผิดพลาดในการประมวลผล Tabs.",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปขณะประมวลผล Tabs"
+	},
+	"error_redirect": {
+		"message": "ไม่สามารถ redirect ได้ กรุณารีเฟรชหน้าใหม่",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปในการเปลี่ยนเส้นทางหน้าเว็บ"
+	},
+	"error_remove_not_favourite": {
+		"message": "ไม่สามารถลบ Tab ที่ไม่ใช่โปรดได้",
+		"description": "[error] ผู้ใช้พยายามลบ Tab ที่ยังไม่ได้บันทึก"
+	},
+	"error_removing_all_tabs": {
+		"message": "ข้อผิดพลาดในการลบ Tabs ทั้งหมด",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tabs ทั้งหมด"
+	},
+	"error_removing_generic_tabs": {
+		"message": "ข้อผิดพลาดในการลบ Tabs ทั่วไป",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tabs ทั่วไป"
+	},
+	"error_removing_other_tabs": {
+		"message": "ข้อผิดพลาดในการลบ Tabs อื่นๆ",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tabs อื่นๆ"
+	},
+	"error_removing_tab": {
+		"message": "ข้อผิดพลาดในการลบ Tab",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบ Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "เกิดข้อผิดพลาดเมื่อพยายามลบแท็บที่มองเห็นทั้งหมด",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะลบแท็บที่มองเห็นทั้งหมด"
+	},
+	"error_required_params": {
+		"message": "ఫంక్షన్ కోసం అవసరమైన పారామీటర్లు పంపబడలేదు",
+		"description": "[లోపం] అవసరమైన పారామీటర్లు లేకుండా డెవలపర్ ఫంక్షన్‌ను కాల్ చేయడానికి ప్రయత్నించారు"
+	},
+	"error_resetting_default_tabs": {
+		"message": "เกิดข้อผิดพลาดเมื่อพยายามรีเซ็ตแท็บเป็นค่าเริ่มต้น",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะรีเซ็ตแท็บเป็นค่าเริ่มต้น"
+	},
+	"error_sorting_tabs": {
+		"message": "ข้อผิดพลาดขณะจัดเรียง Tab-s",
+		"description": "[error] แสดงในข้อความแจ้งเตือน"
+	},
+	"error_sync_nothing": {
+		"message": "ไม่สามารถซิงค์ Tab ว่างได้",
+		"description": "[error] พยายามซิงค์ Tab ที่ไม่มีอะไร"
+	},
+	"error_tab_constructor": {
+		"message": "ใช้ Tab.create() แทน new Tab() เพื่อใช้คลาส Tab",
+		"description": "[ข้อผิดพลาด] บอกนักพัฒนาวิธีใช้คลาส Tab"
+	},
+	"error_tab_label": {
+		"message": "Label ต้องเป็นสตริงที่ไม่ว่างเปล่า",
+		"description": "[error] ผู้ใช้พยายามสร้าง Tab โดยไม่มี Label"
+	},
+	"error_tab_not_found": {
+		"message": "ไม่พบ Tab",
+		"description": "[error] Tab ไม่ได้ถูกรวมในอาร์เรย์"
+	},
+	"error_tab_object_creation": {
+		"message": "เมื่อเรียกด้วยอ็อบเจ็กต์ อย่าส่งอะไรมากไปกว่านั้น",
+		"description": "[error] ข้อผิดพลาดด้านการใช้งานโดยนักพัฒนา"
+	},
+	"error_tab_org": {
+		"message": "Org ต้องเป็นสตริงหรือ undefined",
+		"description": "[error] ผู้ใช้พยายามสร้าง Tab ด้วยค่า org ที่ไม่ถูกต้อง"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "พบคีย์ที่ไม่คาดคิด:",
+		"description": "[error] ผู้ใช้พยายามสร้าง Tab ด้วยคุณสมบัติที่ไม่รองรับ"
+	},
+	"error_tab_url": {
+		"message": "URL ต้องเป็นสตริงที่ไม่ว่างเปล่า",
+		"description": "[error] ผู้ใช้พยายามสร้าง Tab โดยไม่มี URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab ที่มี URL นี้ได้ถูกบันทึกแล้ว!",
+		"description": "[ข้อผิดพลาด] ผู้ใช้พยายามบันทึก Tab ที่ชื่นชอบแล้ว"
+	},
+	"error_tabcont_initialize": {
+		"message": "ไม่สามารถเริ่มต้นด้วย",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "พบ Tab ที่ไม่ถูกต้อง.\nการเกิดขึ้นครั้งแรก:",
+		"description": "[error] ส่ง Tab ที่ไม่ถูกต้องมา"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "ใช้ TabContainer.create() แทน new TabContainer() เพื่อใช้คลาส TabContainer",
+		"description": "[ข้อผิดพลาด] บอกนักพัฒนาวิธีใช้คลาส TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "ใช้ TranslationService.create() แทน new TranslationService() เพื่อใช้คลาส TranslationService",
+		"description": "[ข้อผิดพลาด] บอกนักพัฒนาวิธีใช้คลาส TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "ตัวแปลยังไม่ได้รับการเริ่มต้น.",
+		"description": "[ข้อผิดพลาด] TranslationService ยังไม่พร้อม"
+	},
+	"error_unknown_message": {
+		"message": "ได้รับข้อความที่ไม่รู้จัก",
+		"description": "ได้รับข้อความที่ไม่รู้จักจากผู้ฟัง"
+	},
+	"error_unknown_request": {
+		"message": "คำขอไม่ทราบ.",
+		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปหลังจากได้รับข้อความที่ไม่รู้จัก"
+	},
+	"error_useless_remove": {
+		"message": "ไม่สามารถลบได้:\nไม่สามารถลบหน้าที่ไม่ได้บันทึกไว้",
+		"description": "[error] ผู้ใช้พยายามลบหน้าที่ยังไม่ได้บันทึก"
+	},
+	"error_useless_save": {
+		"message": "ไม่สามารถบันทึกได้:\nหน้านี้ถูกบันทึกไปแล้ว!",
+		"description": "[error] ผู้ใช้พยายามบันทึกหน้าที่บันทึกไปแล้ว"
+	},
+	"export": {
+		"message": "ส่งออก",
+		"description": "[popup] ปุ่มส่งออก"
+	},
+	"export_title": {
+		"message": "ส่งออก Tab ทั้งหมด",
+		"description": "[popup] หัวเรื่องบนปุ่มส่งออก"
+	},
+	"extension_description": {
+		"message": "Create and manage custom Tab in the available space on Salesforce Lightning Setup page.",
+		"description": "[manifest] รายละเอียดของส่วนเสริมนี้"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "ชื่อของส่วนเสริมนี้"
+	},
+	"file": {
+		"message": "file",
+		"description": "single file"
+	},
+	"files": {
+		"message": "files",
+		"description": "multiple files"
+	},
+	"flows": {
+		"message": "โฟลว์",
+		"description": "[แท็บเริ่มต้น] ป้ายชื่อสำหรับแท็บโฟลว์เริ่มต้น"
+	},
+	"general": {
+		"message": "ทั่วไป",
+		"description": "ป้ายกำกับสำหรับหมวดการตั้งค่าทั่วไป"
+	},
+	"help": {
+		"message": "ความช่วยเหลือ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "ทำเครื่องหมาย Tab-s ใหม่เป็น Org Tab-s เพื่อให้มองเห็นได้เฉพาะเมื่อลงชื่อเข้าใช้ Salesforce Org นั้น",
+		"description": "[settings-help] สำหรับ $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tab-s ที่เพิ่งบันทึกเป็นรายการโปรดจะถูกแทรกไว้ที่ด้านหน้าของรายการ Tab-s ของคุณในแถบ Setup แทนที่จะเพิ่มที่ส่วนท้าย",
+		"description": "[settings-help] สำหรับ $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายที่อยู่นอกโดเมน Salesforce คุณจะถูกนำไปที่หน้าลงชื่อเข้าใช้ของ Salesforce โดยอัตโนมัติ",
+		"description": "[settings-help] สำหรับ $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายภายในโดเมน Salesforce แต่ไม่อยู่ในหน้า Setup คุณจะถูกนำไปที่หน้า Setup ของ Salesforce โดยอัตโนมัติ",
+		"description": "[settings-help] สำหรับ $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "เมื่อเปิดใช้งาน Tab-s ของคุณจะถูกจัดเรียงตามลำดับ—ไม่ว่าจะตามป้ายกำกับ, URL หรือ Org; ขึ้นอยู่กับสิ่งที่คุณเลือก",
+		"description": "[settings-help] สำหรับ $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "ตรึง Tab-s ที่คุณบันทึกไว้ก่อนเมนูการนำทางมาตรฐาน (หน้าหลัก / Object Manager) ใน Setup แทนที่จะเป็นหลังจากนั้น",
+		"description": "[settings-help] สำหรับ $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "เมื่อเปิดใช้งาน Tab-s ที่บันทึกไว้แต่ละรายการจะเปิดหน้าเว็บที่เกี่ยวข้องใน Tab ใหม่",
+		"description": "[settings-help] สำหรับ $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "ระงับการแสดงการแจ้งเตือนบันทึกการเปิดตัวโดยอัตโนมัติหลังจากที่ส่วนขยายได้รับการอัปเดต",
+		"description": "[settings-help] สำหรับ $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "ปิดการใช้งานป๊อปอัปแจ้งเตือนการอัปเดตเป็นระยะ ทำให้ UI ของส่วนขยายสะอาด (เมื่อคุณปิดการใช้งานการอัปเดตอัตโนมัติของส่วนขยายจากการตั้งค่าเบราว์เซอร์ของคุณ)",
+		"description": "[settings-help] สำหรับ $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายที่อยู่นอกโดเมน Salesforce หน้าลงชื่อเข้าใช้จะเปิดใน Tab-เบราว์เซอร์ปัจจุบัน",
+		"description": "[settings-help] สำหรับ $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายภายในโดเมน Salesforce แต่ไม่อยู่ในหน้า Setup หน้า Setup ของ Salesforce จะเปิดใน Tab-เบราว์เซอร์ปัจจุบัน",
+		"description": "[settings-help] สำหรับ $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "ตั้งค่าภาษา UI สำหรับส่วนขยายเท่านั้น หากยังไม่มีการแปล เวอร์ชันภาษาอังกฤษจะถูกใช้แทน",
+		"description": "[settings-help] สำหรับ $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "ปิดการใช้งานการรวบรวมข้อมูลระยะไกลพื้นฐาน ส่วนขยายจะไม่ปรากฏในเมตริกการใช้งานที่ไม่ระบุชื่อ",
+		"description": "[settings-help] สำหรับ $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "ข้าม Lightning Navigation API และเปิดลิงก์ผ่านการโหลดหน้าเว็บใหม่ทั้งหมด ซึ่งอาจเร็วกว่าในการตั้งค่า org บางอย่าง",
+		"description": "[settings-help] สำหรับ $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "ปิดการใช้งานการตรวจสอบส่วนขยายที่ยืนยันว่าส่วนของ URL ตรงกับรูปแบบของ Salesforce record/object ID (ใช้เพื่อตั้งค่า Tab ที่บันทึกไว้เป็น Org Tab โดยอัตโนมัติ)",
+		"description": "[settings-help] สำหรับ $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "คลิกเพื่อเปลี่ยนเส้นทางไปยังเอกสารสำหรับตั้งค่านี้!",
+		"description": "[การตั้งค่า-ความช่วยเหลือ] คำกระตุ้นการตัดสินใจเพื่อให้ผู้ใช้สามารถอ่านเพิ่มเติมเกี่ยวกับการตั้งค่าที่เฉพาะเจาะจง"
+	},
+	"import": {
+		"message": "Import",
+		"description": "[popup] import button"
+	},
+	"import_duplicate_description": {
+		"message": "Duplicate Tab will be ignored.<br />Two Tab are considered duplicates if they have the same URL.",
+		"description": "[import] รายละเอียดของกระบวนการนำเข้า"
+	},
+	"import_invalid_file": {
+		"message": "Invalid file type.\nOnly JSON files are supported.",
+		"description": "[error] ไฟล์ที่ใช้สำหรับนำเข้าไม่ใช่ JSON"
+	},
+	"import_successful": {
+		"message": "Successfully imported",
+		"description": "[import] การนำเข้าสำเร็จ หลังจากนี้จะแสดงจำนวนระเบียนที่ถูกนำเข้า"
+	},
+	"import_tabs": {
+		"message": "Import Tabs",
+		"description": "[modal-title] สำหรับกระบวนการนำเข้า"
+	},
+	"import_title": {
+		"message": "$import_tabs จากไฟล์ JSON",
+		"description": "[ป๊อปอัป] ชื่อบนปุ่มนำเข้า"
+	},
+	"insert_another": {
+		"message": "Insert another",
+		"description": "[error-open-other-org-modal] ข้อความสำหรับเมื่อผู้ใช้ใส่องค์กรเดียวกันในโมดอล"
+	},
+	"insert_another_org": {
+		"message": "The inserted Org is the current one!\nPlease insert another Org.",
+		"description": "[error-open-other-org-modal] ข้อความสำหรับเมื่อผู้ใช้ใส่องค์กรเดียวกันในโมดอล"
+	},
+	"insert_valid_org": {
+		"message": "Please insert a valid Org!",
+		"description": "[error-open-other-org-modal] ข้อความสำหรับเมื่อผู้ใช้ใส่ URL ผิดในโมดอล"
+	},
+	"italic": {
+		"message": "ตัวเอียง",
+		"description": "ตัวเลือกรูปแบบตัวอักษรสำหรับข้อความตัวเอียง"
+	},
+	"lightning_navigation": {
+		"message": "การนำทาง Lightning",
+		"description": "เทคโนโลยีการนำทางที่ปรับแต่งโดย Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Login to Salesforce",
+		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้าล็อกอินของ Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "placeholder สำหรับโมดอล Update Tab"
+	},
+	"no_manifest_github": {
+		"message": "GitHub homepage_url ใน manifest ไม่ถูกต้องหรือไม่พบ",
+		"description": "คีย์ homepage_url ของ manifest ไม่ได้ใช้ลิงก์ GitHub"
+	},
+	"no_match": {
+		"message": "Did not match any action",
+		"description": "[error] ใน Salesforce เมื่อ switch ไม่สามารถจับคู่การกระทำที่ร้องขอได้"
+	},
+	"nss_invalid_url": {
+		"message": "Hindi balidong URL ang natukoy.",
+		"description": "[hindiSetupNgSalesforce] isang URL na hindi balido"
+	},
+	"nss_not_setup_page": {
+		"message": "นี่ไม่ใช่หน้าการตั้งค่า $salesforce_lightning",
+		"description": "[notSalesforceSetup] ผู้ใช้ไม่ได้อยู่ในหน้า Salesforce"
+	},
+	"open_here": {
+		"message": "เปิดใน Tab นี้",
+		"description": "[open-other-org-modal] ปุ่มตัวเลือกเพื่อให้ผู้ใช้เปิดใน Tab เบราว์เซอร์เดียวกัน"
+	},
+	"open_new_tab": {
+		"message": "เปิดใน Tab ใหม่",
+		"description": "[open-other-org-modal] ปุ่มตัวเลือกเพื่อให้ผู้ใช้เปิดใน Tab เบราว์เซอร์ใหม่"
+	},
+	"open_settings": {
+		"message": "เปิดการตั้งค่าส่วนขยาย",
+		"description": "[ป๊อปอัป] ปุ่มเพื่อเปลี่ยนเส้นทางไปยังหน้าการตั้งค่า"
+	},
+	"open_setup": {
+		"message": "Open Setup",
+		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "เพิ่ม Tab-s ใหม่เป็น Org Tab-s",
+		"description": "[settings] ให้ผู้ใช้เพิ่ม Tab-s ใหม่ทั้งหมดเป็นเฉพาะ org"
+	},
+	"opt_add_tabs_front": {
+		"message": "เพิ่ม Tab-s ใหม่ไว้ด้านหน้า",
+		"description": "[settings] ให้ผู้ใช้เพิ่ม Tab-s ใหม่ทั้งหมดไว้ด้านหน้า"
+	},
+	"opt_automatic_open_login": {
+		"message": "เปิดหน้า $salesforce_login โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปในขณะที่ไม่ได้อยู่บนหน้า Salesforce",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์แบบสุ่ม"
+	},
+	"opt_automatic_open_setup": {
+		"message": "เปิดหน้า $salesforce_setup โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปขณะอยู่บนหน้า Salesforce",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์ Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "บันทึกการตั้งค่าแล้ว!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (ค่าเริ่มต้นและตัวสำรอง)",
+		"description": "ตัวเลือกภาษาเริ่มต้นของส่วนขยาย"
+	},
+	"opt_keep_sort": {
+		"message": "จัดเรียง Tab-s ไว้",
+		"description": "[setting] อนุญาตให้ผู้ใช้จัดเรียง Tab-s ตามหนึ่งในคีย์ของพวกเขา"
+	},
+	"opt_keep_tabs_left": {
+		"message": "เก็บ Tab โปรดไว้ทางซ้ายของ Home และ Object Manager",
+		"description": "ตัวเลือกเพื่อปักหมุด Tab โปรดไว้ที่ด้านซ้ายของแถบนำทาง"
+	},
+	"opt_link_new_browser": {
+		"message": "เปิดลิงก์เสมอในแท็บเบราว์เซอร์ใหม่",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้คลิก Tab ที่ชื่นชอบ ให้เปิดในแท็บเบราว์เซอร์ใหม่"
+	},
+	"opt_no_release_notes": {
+		"message": "ไม่แสดงบันทึกการอัปเดต",
+		"description": "[การตั้งค่า] อนุญาตให้ผู้ใช้ป้องกันไม่ให้ส่วนขยายแสดงบันทึกการอัปเดตหลังจากอัปเดตแล้ว"
+	},
+	"opt_no_update_notification": {
+		"message": "อย่าเตือนเกี่ยวกับการอัปเดตที่มีอยู่",
+		"description": "[การตั้งค่า] ให้ผู้ใช้ป้องกันไม่ให้ส่วนขยายค้นหาการเปิดตัวใหม่"
+	},
+	"opt_open_login_same_tab": {
+		"message": "เปิดหน้า $salesforce_login ใน Tab เดียวกันเสมอเมื่อคลิกที่ป๊อปอัป",
+		"description": "[การตั้งค่า]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "เปิดหน้า $salesforce_setup ใน Tab เดียวกันเสมอเมื่อคลิกที่ป๊อปอัป",
+		"description": "[การตั้งค่า]"
+	},
+	"opt_pick_language": {
+		"message": "เลือกภาษาของส่วนขยาย",
+		"description": "[การตั้งค่า] ป้ายกำกับเพื่อแจ้งให้ผู้ใช้เลือกภาษาที่ต้องการ"
+	},
+	"opt_pick_sort": {
+		"message": "เลือกฟิลด์ที่จะใช้จัดเรียง Tab-s",
+		"description": "[setting] ตอนนี้ผู้ใช้สามารถเลือกคีย์ที่จะใช้จัดเรียง Tab-s ได้แล้ว"
+	},
+	"opt_prevent_analytics": {
+		"message": "ป้องกันการใช้ Simple Analytics (จะไม่แสดงในจำนวนผู้ใช้)",
+		"description": "[การตั้งค่า] อนุญาตให้ผู้ใช้ป้องกันการส่งข้อมูลวิเคราะห์แบบไม่ระบุตัวตน"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "ป้องกันการใช้ Lightning Navigation (โหลดเร็วขึ้นเมื่อไม่ได้เลือก)",
+		"description": "[setting] ไม่อนุญาตให้ใช้ Lightning Navigation พร้อมคำอธิบายคุณสมบัติ"
+	},
+	"opt_same_tab_popup": {
+		"message": "หน้าในแท็บเดียวกันเมื่อคลิกป็อปอัป",
+		"description": "[การตั้งค่า] ป้องกันการเปิดแท็บเบราว์เซอร์ใหม่"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "ติดตามภาษา Salesforce (อ่านคุกกี้ Salesforce)",
+		"description": "ตัวเลือกในการใช้การตั้งค่าภาษาของ Salesforce หากต้องการใช้ตัวเลือกนี้ ผู้ใช้ต้องอนุญาตให้ส่วนขยายอ่านคุกกี้ Salesforce"
+	},
+	"opt_skip_link_detection": {
+		"message": "ข้ามการตรวจสอบ ID Salesforce อัตโนมัติ",
+		"description": "[การตั้งค่า] เมื่อผู้ใช้เพิ่ม Tab ที่ชื่นชอบ ให้ข้ามการตรวจสอบว่ามี ID ในลิงก์ที่บันทึก"
+	},
+	"or_drop": {
+		"message": "หรือ $drop",
+		"description": "[นำเข้า] ให้ผู้ใช้ย้ายไฟล์ด้วยเมาส์และปล่อยไฟล์เหล่านั้น"
+	},
+	"org_link": {
+		"message": "Org Link",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Other Org info",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "other-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Overwrite saved Tabs.",
+		"description": "[label] ลบ Tab ที่บันทึกไว้ทั้งหมดในระหว่างกระบวนการนำเข้า"
+	},
+	"preserve_org_tabs": {
+		"message": "Preserve Tabs for other orgs.",
+		"description": "[label] เก็บ Tab เฉพาะองค์กรทั้งหมดในระหว่างกระบวนการนำเข้า"
+	},
+	"remove_tab": {
+		"message": "Remove Tab",
+		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"
+	},
+	"req_downloads_open_popup": {
+		"message": "โปรดเปิดส่วนขยายป๊อปอัปจากเมนูส่วนขยายของเบราว์เซอร์ของคุณ",
+		"description": "[ข้อความแจ้ง] ขอให้ผู้ใช้คลิกที่ส่วนขยายป๊อปอัปเพื่อดำเนินการต่อ"
+	},
+	"req_downloads_perm_header": {
+		"message": "โปรดเปิดใช้งานสิทธิ์ดาวน์โหลด\nเพื่อเริ่มต้นการส่งออกที่ร้องขอ",
+		"description": "[ร้องขอ_สิทธิ์] การเรียกให้ดำเนินการเพื่อเปิดใช้งานสิทธิ์ดาวน์โหลด"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "การดำเนินการนี้จะถูกร้องขอเพียงครั้งเดียว",
+		"description": "[ร้องขอ_สิทธิ์] คำอธิบายเพื่อเปิดใช้งานสิทธิ์ดาวน์โหลด"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Do not ask again.",
+		"description": "[req_permission] ป้ายเมื่อผู้ใช้ไม่ต้องการให้ขออนุญาตอีกต่อไป"
+	},
+	"req_permissions_header": {
+		"message": "โปรดอนุญาตให้เราเข้าถึง\nหน้า $salesforce_setup โดยอัตโนมัติ",
+		"description": "[req_permission] ส่วนหัวของหน้าเพื่อขอสิทธิ์"
+	},
+	"req_permissions_paragraph": {
+		"message": "หากคุณต้องการ คุณสามารถให้ Tabs ที่คุณชื่นชอบปรากฏขึ้น\nทันทีที่คุณไปที่หน้า $salesforce_setup\nโดยไม่ต้องคลิกส่วนขยายนี้ทุกครั้ง",
+		"description": "[req_permission] ข้อความเพื่ออธิบายว่าทำไมจึงมีการร้องขอการอนุญาต"
+	},
+	"required": {
+		"message": "required",
+		"description": "[input] ทำเครื่องหมายช่องป้อนข้อมูลว่าเป็นช่องที่จำเป็น"
+	},
+	"required_info": {
+		"message": "= Required Information",
+		"description": "[modal] แจ้งให้ผู้ใช้ทราบว่ามีข้อมูลที่จำเป็นต้องกรอก"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] แพลตฟอร์ม Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "เข้าสู่ระบบ Salesforce",
+		"description": "หน้าล็อกอิน Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "การตั้งค่า Salesforce",
+		"description": "หน้าใดๆ ของการตั้งค่า Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "บันทึก",
+		"description": "ใช้การเปลี่ยนแปลงและจัดเก็บไว้ในหน่วยความจำ"
+	},
+	"save_tab": {
+		"message": "Save as Tab",
+		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"
+	},
+	"send_tip": {
+		"message": "ส่งทิปให้เรา ❤️",
+		"description": "[popup] หัวข้อสำหรับ svg เพื่อแจ้งให้ส่งทิป"
+	},
+	"set_gen_preview": {
+		"message": "ตัวอย่าง Tab",
+		"description": "ป้ายกำกับสำหรับดูตัวอย่างลักษณะ Tab ทั่วไป"
+	},
+	"set_gen_styler": {
+		"message": "ตัวจัดรูปแบบ Tab",
+		"description": "ป้ายกำกับสำหรับการกำหนดค่ารูปแบบของ Tab ทั่วไป"
+	},
+	"set_general_settings": {
+		"message": "การตั้งค่าทั่วไป",
+		"description": "หัวข้อส่วนสำหรับตัวเลือกการกำหนดค่าโดยรวม"
+	},
+	"set_move_available": {
+		"message": "ย้ายไปที่มีให้ใช้งาน",
+		"description": "ชื่อปุ่มเพื่อย้ายรายการที่เลือกกลับไปยังรายการที่มีให้ใช้งาน"
+	},
+	"set_move_chosen": {
+		"message": "ย้ายไปที่เลือกไว้",
+		"description": "ชื่อปุ่มเพื่อย้ายรายการที่เลือกไปยังรายการที่เลือกไว้"
+	},
+	"set_org_preview": {
+		"message": "ตัวอย่างองค์กร",
+		"description": "ป้ายกำกับสำหรับดูตัวอย่างลักษณะ Tab เฉพาะองค์กร"
+	},
+	"set_org_styler": {
+		"message": "ตัวจัดรูปแบบองค์กร",
+		"description": "ป้ายกำกับสำหรับการกำหนดค่ารูปแบบของ Tab เฉพาะองค์กร"
+	},
+	"set_tab_background_active_label": {
+		"message": "ใส่สีพื้นหลังสำหรับ Tab ทั่วไปที่ใช้งานอยู่ของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีพื้นหลังสำหรับ Tab ทั่วไปที่ใช้งานอยู่"
+	},
+	"set_tab_background_label": {
+		"message": "ใส่สีพื้นหลังสำหรับ Tab องค์กรของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีพื้นหลังสำหรับ Tab เฉพาะองค์กร"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "ใส่สีขอบสำหรับ Tab องค์กรที่ใช้งานอยู่ของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีขอบสำหรับ Tab เฉพาะองค์กรที่ใช้งานอยู่"
+	},
+	"set_tab_border_color_label": {
+		"message": "ใส่สีขอบสำหรับ Tab ทั่วไปของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีขอบสำหรับ Tab ทั่วไป"
+	},
+	"set_tab_color_active_label": {
+		"message": "ใส่สีของข้อความสำหรับ Tab ทั่วไปที่ใช้งานอยู่ของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีข้อความสำหรับ Tab ทั่วไปที่ใช้งานอยู่"
+	},
+	"set_tab_color_label": {
+		"message": "ใส่สีของข้อความสำหรับ Tab องค์กรของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีข้อความสำหรับ Tab เฉพาะองค์กร"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "เลือกรูปแบบการตกแต่งหนึ่งหรือหลายรูปแบบสำหรับ Tab องค์กรที่ใช้งานอยู่ของคุณ",
+		"description": "ข้อความแจ้งให้เลือกรูปแบบการตกแต่งสำหรับ Tab เฉพาะองค์กรที่ใช้งานอยู่"
+	},
+	"set_tab_decoration_label": {
+		"message": "เลือกรูปแบบการตกแต่งหนึ่งหรือหลายรูปแบบสำหรับ Tab ทั่วไปของคุณ",
+		"description": "ข้อความแจ้งให้เลือกรูปแบบการตกแต่งสำหรับ Tab ทั่วไป"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "ใส่สีพื้นหลังเมื่อวางเมาส์สำหรับ Tab ทั่วไปที่ใช้งานอยู่ของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีพื้นหลังเมื่อวางเมาส์สำหรับ Tab ทั่วไปที่ใช้งานอยู่"
+	},
+	"set_tab_hover_background_label": {
+		"message": "ใส่สีพื้นหลังเมื่อวางเมาส์สำหรับ Tab องค์กรของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีพื้นหลังเมื่อวางเมาส์สำหรับ Tab เฉพาะองค์กร"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "ใส่สีเงาสำหรับ Tab องค์กรที่ใช้งานอยู่ของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีเงาสำหรับ Tab เฉพาะองค์กรที่ใช้งานอยู่"
+	},
+	"set_tab_shadow_label": {
+		"message": "ใส่สีเงาสำหรับ Tab ทั่วไปของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีเงาสำหรับ Tab ทั่วไป"
+	},
+	"set_tab_top_active_label": {
+		"message": "ใส่สีสำหรับแถบที่ด้านบนของ Tab ทั่วไปที่ใช้งานอยู่ของคุณ",
+		"description": "ป้ายกำกับเพื่อตั้งค่าสีแถบด้านบนสำหรับ Tab ทั่วไปที่ใช้งานอยู่"
+	},
+	"set_toggle_preview": {
+		"message": "คลิกเพื่อสลับสถานะการใช้งาน",
+		"description": "ข้อความคำแนะนำสำหรับการควบคุมการสลับสถานะการใช้งาน"
+	},
+	"settings": {
+		"message": "การตั้งค่า",
+		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
+	},
+	"setup_page": {
+		"message": "Setup Page",
+		"description": "[notSalesforceSetup] หน้าเพจที่ใช้สำหรับแก้ไขการตั้งค่าของ Salesforce"
+	},
+	"skip": {
+		"message": "Skip",
+		"description": "[req_permission] ปุ่มสำหรับไม่อนุญาตการเข้าถึง"
+	},
+	"successfully_imported": {
+		"message": "Successfully imported",
+		"description": "[toast] ผู้ใช้เพิ่ม Tab จากไฟล์ภายนอกเรียบร้อยแล้ว"
+	},
+	"tab_explain": {
+		"message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
+		"description": "[error] อธิบายวิธีสร้าง Tab"
+	},
+	"tab_information": {
+		"message": "Tab information",
+		"description": "หัวข้อของโมดอลสำหรับการอัปเดต Tab"
+	},
+	"tab_label": {
+		"message": "Tab Label",
+		"description": "คุณสมบัติ Label ของ Tab, ชื่อของมัน"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "คุณสมบัติ Org ของ Tab, ถ้าเป็นของ Salesforce Organization เดียว"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "คุณสมบัติ URL ของ Tab, ที่ที่มันชี้ไป"
+	},
+	"table_delete": {
+		"message": "Delete Tab",
+		"description": "[popup] ข้อความช่วยสำหรับคอลัมน์ที่มีปุ่มลบ"
+	},
+	"table_org": {
+		"message": "Is Org Tab",
+		"description": "[popup] ข้อความช่วยสำหรับคอลัมน์ที่มีช่องทำเครื่องหมายองค์กร"
+	},
+	"table_row_label": {
+		"message": "Enter the label for this URL",
+		"description": "[popup] ช่องกรอกข้อมูลสำหรับชื่อ Tab"
+	},
+	"table_row_org": {
+		"message": "Click if you want this Tab to be available for this Org only.",
+		"description": "[popup] ช่องทำเครื่องหมายเพื่อสลับ Tab ให้เป็นเฉพาะขององค์กร"
+	},
+	"table_row_org_name": {
+		"message": "The Org for which this Tab is available.",
+		"description": "[popup] ช่องกรอกข้อมูลสำหรับชื่อองค์กร"
+	},
+	"table_row_url": {
+		"message": "Enter the sub_URL where you want to be redirected.",
+		"description": "[popup] ช่องกรอกข้อมูลสำหรับ URL ของ Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "ลิงก์โปรดของผู้ใช้"
+	},
+	"tabs_saved": {
+		"message": "Tabs saved.",
+		"description": "[toast] บันทึก Tab เรียบร้อยแล้ว"
+	},
+	"theme_dark": {
+		"message": "Change Theme to Dark",
+		"description": "[popup] หัวข้อบนรูปพระจันทร์สำหรับสลับธีม"
+	},
+	"theme_light": {
+		"message": "Change Theme to Light",
+		"description": "[popup] หัวข้อบนรูปพระอาทิตย์สำหรับสลับธีม"
+	},
+	"underline": {
+		"message": "ขีดเส้นใต้",
+		"description": "ตัวเลือกรูปแบบการตกแต่งเพื่อขีดเส้นใต้ข้อความ Tab"
+	},
+	"underline_wavy": {
+		"message": "ขีดเส้นใต้แบบคลื่น",
+		"description": "ตัวเลือกรูปแบบการตกแต่งเพื่อใช้เส้นใต้แบบคลื่นกับข้อความ Tab"
+	},
+	"update_available": {
+		"message": "มีการอัปเดต",
+		"description": "มีการอัปเดตใหม่สำหรับส่วนขยาย"
+	},
+	"upload": {
+		"message": "Upload",
+		"description": "[import] ให้ผู้ใช้เรียกดูไฟล์และเลือกไฟล์ที่ถูกต้อง"
+	},
+	"users": {
+		"message": "Users",
+		"description": "ชื่อของหน้าที่เกี่ยวข้องกับ ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Where to?",
+		"description": "[open-other-org-modal] ชื่อสำรองสำหรับโมดอล"
+	},
+	"write_review": {
+		"message": "เขียนรีวิว!",
+		"description": "[popup] หัวข้อสำหรับ svg เพื่อขอให้เขียนรีวิว"
+	}
+}

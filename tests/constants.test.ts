@@ -3,7 +3,7 @@ import {
 	assertEquals,
 	assertFalse,
 	assertRejects,
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
+} from "@std/testing/asserts";
 
 import {
 	GENERIC_TAB_STYLE_KEY,

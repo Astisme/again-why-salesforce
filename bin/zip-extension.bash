@@ -21,8 +21,11 @@ BROWSER_VERSION_NAME="awsf-$BROWSER-v$TAG_VERSION"
 ZIP_NAME="${BROWSER_VERSION_NAME}.zip"
 
 # Verify manifest.json exists
-ls manifest.json >/dev/null 2>&1 || { echo "manifest.json not found!"; exit 1; }
+ls src/manifest.json >/dev/null 2>&1 || { echo "manifest.json not found!"; exit 1; }
 
 # Zip $BROWSER extension
-zip -r "bin/$ZIP_NAME" settings _locales action assets *.js background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js LICENSE README.md manifest.json -x "*/README.md" >/dev/null 2>&1
+cd src
+zip -r "../bin/$ZIP_NAME" settings _locales action assets/icons assets/svgs *.js background/bundledBackground.js salesforce/bundledContent.js salesforce/lightning-navigation.js manifest.json -x "*/README.md" >/dev/null 2>&1
+cd ..
+zip "bin/$ZIP_NAME" LICENSE README.md 
 echo "Created $ZIP_NAME"

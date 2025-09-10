@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "@std/testing/asserts";
 import { mockBrowser, translations } from "./mocks.ts";
 declare global {
 	var chrome: typeof mockBrowser;

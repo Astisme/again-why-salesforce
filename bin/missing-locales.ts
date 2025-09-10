@@ -157,9 +157,9 @@ function groupLocalesByMissingKeys(
 	}
 
 	// Sort locales alphabetically within each group
-	Object.values(groupedResults).forEach((group) => {
+	for (const group of Object.values(groupedResults)) {
 		group.locales.sort();
-	});
+	}
 
 	return groupedResults;
 }
@@ -173,14 +173,14 @@ function createEnglishMissingKeysReport(
 ): EnglishMissingKeys {
 	const englishMissingKeys: EnglishMissingKeys = {};
 
-	allMissingKeys.forEach((key) => {
+	for (const key of allMissingKeys) {
 		if (englishFile[key]) {
 			englishMissingKeys[key] = {
 				message: englishFile[key].message ?? "",
 				description: englishFile[key].description ?? "",
 			};
 		}
-	});
+	}
 
 	return englishMissingKeys;
 }
@@ -248,7 +248,9 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 				locale: localeDir,
 				missingKeys: result.missingKeys,
 			});
-			result.missingKeys.forEach((key) => allMissingKeys.add(key));
+			for (const key of result.missingKeys) {
+				allMissingKeys.add(key);
+			}
 		}
 	}
 
@@ -270,7 +272,7 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
  * Main execution
  */
 function main() {
-	const localesDir = path.resolve("_locales");
+	const localesDir = path.resolve("src/_locales");
 	if (!fs.existsSync(localesDir)) {
 		console.error("_locales directory not found!");
 		process.exit(1);

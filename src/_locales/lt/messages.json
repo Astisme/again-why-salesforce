@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Leisti",
+		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"
+	},
+	"ascending": {
+		"message": "Didėjanti (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Galimi",
+		"description": "Skyriaus antraštė elementams, kuriuos galima pridėti"
+	},
+	"bold": {
+		"message": "Paryškintas",
+		"description": "Šrifto stiliaus parinktis paryškintam tekstui"
+	},
+	"cancel": {
+		"message": "Atšaukti",
+		"description": "mygtukų, neleidžiančių vykdyti dabartinio veiksmo, pavadinimas arba textContent"
+	},
+	"cancel_close": {
+		"message": "Atšaukti ir uždaryti",
+		"description": "modalinių langų uždarymo mygtuko pavadinimas arba textContent"
+	},
+	"chosen": {
+		"message": "Pasirinkti",
+		"description": "Skyriaus antraštė elementams, kurie buvo pasirinkti"
+	},
+	"cmd_export_all": {
+		"message": "Rodyti modalą visų išsaugotų Tabs eksportavimui",
+		"description": "[komandos aprašymas] vartotojas nori eksportuoti visus Tabs"
+	},
+	"cmd_import": {
+		"message": "Rodyti modalą naujų Tabs importavimui",
+		"description": "[komandos aprašymas] vartotojas nori importuoti naujus Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Rodyti modalą atidaryti dabartinį puslapį kitoje Org",
+		"description": "[komandos aprašymas] vartotojas nori atidaryti dabartinį puslapį kitoje Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Pašalinti dabartinį puslapį iš Tabs sąrašo (jei išsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori pašalinti dabartinį puslapį"
+	},
+	"cmd_save_as_tab": {
+		"message": "Išsaugoti dabartinį puslapį Tabs sąraše (jei neišsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori išsaugoti dabartinį puslapį"
+	},
+	"cmd_toggle_org": {
+		"message": "Perjungti dabartinio puslapio Org reikšmę (jei išsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori perjungti Org dabartiniam puslapiui"
+	},
+	"cmd_update_tab": {
+		"message": "Rodyti modalą dabartinio puslapio atnaujinimui (jei išsaugotas)",
+		"description": "[komandos aprašymas] vartotojas nori atnaujinti dabartinį puslapį"
+	},
+	"confirm_another_org": {
+		"message": "Patvirtinkite šios nuorodos atidarymą.",
+		"description": "[atidaryti_kitą_org_modal] prašyti vartotojo patvirtinimo atidaryti sukurtą nuorodą."
+	},
+	"confirm_update_extension": {
+		"message": "Nauja $extension_label versija jau pasiekiama!",
+		"description": "iš klausytojo gautas nežinomas pranešimas"
+	},
+	"continue": {
+		"message": "Tęsti",
+		"description": "mygtukų, leidžiančių vykdyti dabartinį veiksmą, textContent"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Visos bendros Tab",
+		"description": "[konteksto meniu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Pašalinti visas Tab",
+		"description": "[kontekstinis meniu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Visos matomos Tab",
+		"description": "[konteksto meniu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Eksportuoti Tabs",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstinis-meniu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Perkelti Tab",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Padaryti pirmu",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Padaryti paskutiniu",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Perkelti kairėn",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Perkelti dešinėn",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Atidaryti kitoje Org",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[kontekstinis-meniu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[kontekstinis-meniu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Pašalinti Tab(s)",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs kairėje",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Kiti Tabs",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs dešinėje",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Šis Tab",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Atstatyti numatytąsias Tabs",
+		"description": "[konteksto meniu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Nustatymų meniu etiketė"
+	},
+	"cxm_sort": {
+		"message": "🎯 Rūšiuoti Tab'us",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams automatiškai rūšiuoti savo Tab'us (pagrindinis meniu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 pagal žymę",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal žymę"
+	},
+	"cxm_sort_org": {
+		"message": "👽 pagal Org",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal Org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 pagal URL",
+		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal URL"
+	},
+	"cxm_update": {
+		"message": "✏️ Atnaujinti Tab",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Perjungti Org",
+		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Kiti atnaujinimai",
+		"description": "[kontekstinis_meniu]"
+	},
+	"delete": {
+		"message": "Ištrinti",
+		"description": "[iškylantysis_langas] ištrinti eilutę"
+	},
+	"delete_all": {
+		"message": "$delete visus Tabs",
+		"description": "[iškylantis-langas] pavadinimas šiukšliadėžėje, norint ištuštinti visus Tabs"
+	},
+	"descending": {
+		"message": "Mažėjanti (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Numesti",
+		"description": "[importas] leisti vartotojui numesti savo failus į nurodytą sritį"
+	},
+	"enable": {
+		"message": "Įjungti",
+		"description": "[prašyti_leidimo] mygtukas leidimams įjungti"
+	},
+	"error_adding_tab": {
+		"message": "Klaida pridedant Tab.",
+		"description": "[klaida] Bendra klaida naudojama pridedant Tab"
+	},
+	"error_check_update": {
+		"message": "Klaida tikrinant atnaujinimus",
+		"description": "[klaida] bendra klaida tikrinant plėtinio atnaujinimus"
+	},
+	"error_close_other_modal": {
+		"message": "Pirmiausia uždarykite kitą modalinį langą!",
+		"description": "[pranešimas] Vartotojas bandė atidaryti daugiau nei 1 modalinį langą"
+	},
+	"error_cxm_check": {
+		"message": "Klaida tikrinant meniu elementus",
+		"description": "[klaida] nepavyko rasti kontekstinio meniu elementų"
+	},
+	"error_cxm_create": {
+		"message": "Klaida kuriant meniu elementus",
+		"description": "[klaida] nepavyko inicijuoti kontekstinio meniu elementų"
+	},
+	"error_cxm_remove": {
+		"message": "Klaida šalinant meniu elementus",
+		"description": "[klaida] nepavyko pašalinti kontekstinio meniu elementų"
+	},
+	"error_duplicate_tab": {
+		"message": "Šis Tab jau egzistuoja",
+		"description": "[klaida] Tab dubliuojasi"
+	},
+	"error_expand_url": {
+		"message": "Negalima išplėsti tuščio URL!",
+		"description": "[klaida] URL, kurį reikia išplėsti, neperduotas"
+	},
+	"error_expand_url_no_base": {
+		"message": "Negalima išplėsti URL be jo prieglobos!",
+		"description": "[klaida] bazinis URL, naudotas išplėtimui, neperduotas"
+	},
+	"error_extract_empty_url": {
+		"message": "Negalima išgauti Org pavadinimo iš tuščio URL!",
+		"description": "[klaida] URL, iš kurio reikia gauti Org pavadinimą, neperduotas"
+	},
+	"error_failed_sync": {
+		"message": "Sinchronizuoti nepavyko.",
+		"description": "[klaida] Bendra klaida, kai Tabs nepavyko sinchronizuoti iš vartotojo"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nepavyko gauti išorinių resursų",
+		"description": "[klaida] Skambutis į išorinę svetainę nebuvo sėkmingas"
+	},
+	"error_get_with_no_org": {
+		"message": "Negalima gauti Tabs, jei Org nenurodyta.",
+		"description": "[klaida] bandyta ieškoti Tabs pagal Org nesiunčiant Org informacijos"
+	},
+	"error_import": {
+		"message": "Klaida importuojant:\n",
+		"description": "[klaida] importavimo proceso metu įvyko klaida"
+	},
+	"error_invalid_key": {
+		"message": "Funkcijai perduotas rakto parametras yra neteisingas",
+		"description": "[klaida] kūrėjas bandė iškviesti funkciją su neteisingu parametru"
+	},
+	"error_invalid_request": {
+		"message": "Neleistina užklausa.",
+		"description": "[klaida] Bendra klaida gavus blogai suformatuotą žinutę"
+	},
+	"error_invalid_tab": {
+		"message": "Neteisingas Tab",
+		"description": "[klaida] Tab negalioja"
+	},
+	"error_link_with_id": {
+		"message": "Šis puslapis negali egzistuoti kitoje Org, nes jame yra Id!",
+		"description": "[atidaryti_kitą_org_modal] įspėjimas vartotojui, kad nuoroda gali neegzistuoti kitoje Org"
+	},
+	"error_many_matching_tab": {
+		"message": "Rasta daugiau nei 1 atitinkantis Tab.",
+		"description": "[klaida] gauta daug Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Rasta daugiau nei vienas Tab.",
+		"description": "[klaida] rasta daug Tabs"
+	},
+	"error_minify_url": {
+		"message": "Negalima sumažinti tuščio URL!",
+		"description": "[klaida] URL, kurį reikia sumažinti, neperduotas"
+	},
+	"error_missing_favourite_id": {
+		"message": "Negalima gauti mėgstamo paveikslėlio be Id",
+		"description": "[klaida] mėgstamo Id neperduotas"
+	},
+	"error_missing_key": {
+		"message": "Raktas niekur nerastas",
+		"description": "[klaida] failuose vertimo nerasta"
+	},
+	"error_no_array": {
+		"message": "Perduotas neteisingas masyvas arba masyvas neperduotas",
+		"description": "[klaida] negautas galiojantis masyvas"
+	},
+	"error_no_browser_tab": {
+		"message": "Nepavyko rasti dabartinio naršyklės skirtuko.",
+		"description": "[klaida] foninis puslapis negalėjo nustatyti aktyvaus naršyklės skirtuko"
+	},
+	"error_no_callback": {
+		"message": "Prašome pateikti atgalinio ryšio funkciją (callback)",
+		"description": "[klaida] funkcija, kurią reikia iškviesti metodo pabaigoje, neperduota"
+	},
+	"error_no_cookies": {
+		"message": "Nerasta atitinkančių slapukų",
+		"description": "[klaida] Salesforce slapukai negrąžinti"
+	},
+	"error_no_data": {
+		"message": "Negalima identifikuoti Tab be duomenų.",
+		"description": "[klaida] bandyta gauti Tab nesiunčiant duomenų"
+	},
+	"error_no_headers": {
+		"message": "Nepavyko rasti antraščių.",
+		"description": "[klaida] Plėtinys negalėjo rasti, kur įdėti mėgstamiausių mygtuką"
+	},
+	"error_no_matching_tab": {
+		"message": "Nerasta jokių atitinkančių Tabs.",
+		"description": "[klaida] negauta jokių Tabs"
+	},
+	"error_no_message": {
+		"message": "Nenurodytas pranešimas siuntimui.",
+		"description": "[klaida] nerastas pranešimas siuntimui į kitas kodo dalis"
+	},
+	"error_no_object": {
+		"message": "Nėra objekto tikrinimui!",
+		"description": "[klaida] objektas neperduotas"
+	},
+	"error_no_setup_tab": {
+		"message": "Nepavyko rasti Sąrankos (Setup) skirtuko.",
+		"description": "[klaida] Plėtinys negalėjo rasti, kur įdėti mėgstamiausius Tabs."
+	},
+	"error_no_url": {
+		"message": "Nėra URL tikrinimui!",
+		"description": "[klaida] URL tikrinimui neperduotas"
+	},
+	"error_not_initialized": {
+		"message": "dar nebuvo inicializuotas.",
+		"description": "[klaida] Bendra klaida, kai kintamasis nėra paruoštas"
+	},
+	"error_processing_tabs": {
+		"message": "Klaida apdorojant Tabs.",
+		"description": "[klaida] Bendra klaida apdorojant Tabs"
+	},
+	"error_redirect": {
+		"message": "Negalima peradresuoti. Prašome atnaujinti puslapį.",
+		"description": "[klaida] Bendra klaida perskirstant puslapį."
+	},
+	"error_remove_not_favourite": {
+		"message": "Negalima pašalinti ne mėgstamo Tab!",
+		"description": "[klaida] vartotojas bandė pašalinti Tab, kuris dar nebuvo išsaugotas"
+	},
+	"error_removing_all_tabs": {
+		"message": "Klaida šalinant visus Tabs.",
+		"description": "[klaida] Bendra klaida naudojama šalinant visus Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Klaida šalinant bendrus Tabs.",
+		"description": "[klaida] Bendra klaida naudojama šalinant bendrus Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Klaida šalinant kitus Tabs.",
+		"description": "[klaida] Bendra klaida naudojama šalinant kitus Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Klaida šalinant Tab.",
+		"description": "[klaida] Bendra klaida naudojama šalinant Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Klaida pašalinant visas matomas Tabs.",
+		"description": "[klaida] Bendro pobūdžio klaida pašalinant visas matomas Tabs"
+	},
+	"error_required_params": {
+		"message": "Būtini funkcijos parametrai nebuvo perduoti",
+		"description": "[klaida] kūrėjas bandė iškviesti funkciją be reikiamų parametrų"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Klaida atstatant Tabs į numatytąsias reikšmes.",
+		"description": "[klaida] Bendro pobūdžio klaida atstatant Tabs į numatytąsias reikšmes"
+	},
+	"error_sorting_tabs": {
+		"message": "Klaida rūšiuojant Tab'us",
+		"description": "[error] rodomas iššokančiajame pranešime"
+	},
+	"error_sync_nothing": {
+		"message": "Negalima sinchronizuoti null Tabs!",
+		"description": "[klaida] bandyta sinchronizuoti nieko"
+	},
+	"error_tab_constructor": {
+		"message": "Naudokite Tab.create() vietoj new Tab()",
+		"description": "[klaida] nurodykite kūrėjui, kaip naudoti Tab klasę"
+	},
+	"error_tab_label": {
+		"message": "Etiketė turi būti ne tuščia eilutė",
+		"description": "[klaida] vartotojas bandė sukurti Tab be etiketės"
+	},
+	"error_tab_not_found": {
+		"message": "Tab nerastas.",
+		"description": "[klaida] Tab nebuvo įtrauktas į masyvą"
+	},
+	"error_tab_object_creation": {
+		"message": "Kviečiant su objektu, nieko kito neperduokite.",
+		"description": "[klaida] kūrėjo įgyvendinimo klaida"
+	},
+	"error_tab_org": {
+		"message": "Org turi būti eilutė arba neapibrėžta (undefined)",
+		"description": "[klaida] vartotojas bandė sukurti Tab su neteisinga Org reikšme"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Rasti netikėti raktai:",
+		"description": "[klaida] vartotojas bandė sukurti Tab su kai kuriomis nepalaikomomis savybėmis"
+	},
+	"error_tab_url": {
+		"message": "URL turi būti ne tuščia eilutė",
+		"description": "[klaida] vartotojas bandė sukurti Tab be URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab su šiuo URL jau buvo išsaugotas!",
+		"description": "[klaida] Vartotojas bandė išsaugoti jau mėgstamą Tab"
+	},
+	"error_tabcont_initialize": {
+		"message": "Negalima inicijuoti su",
+		"description": "[klaida] nepavyko inicijuoti Tab konteinerio"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Aptikta neteisingų Tab(s).\nPirmas pasitaikymas:",
+		"description": "[klaida] perduoti neteisingi Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Naudokite TabContainer.create() vietoj new TabContainer()",
+		"description": "[klaida] nurodykite kūrėjui, kaip naudoti TabContainer klasę"
+	},
+	"error_translationservice_constructor": {
+		"message": "Naudokite TranslationService.create() vietoj new TranslationService()",
+		"description": "[klaida] nurodykite kūrėjui, kaip naudoti TranslationService klasę"
+	},
+	"error_translator_not_initialized": {
+		"message": "vertėjas dar nebuvo inicializuotas.",
+		"description": "[klaida] TranslationService nebuvo paruoštas"
+	},
+	"error_unknown_message": {
+		"message": "Gauta nežinoma žinutė",
+		"description": "iš klausytojo gauta nežinoma žinutė"
+	},
+	"error_unknown_request": {
+		"message": "Nežinoma užklausa.",
+		"description": "[klaida] Bendra klaida gavus neatpažintą žinutę"
+	},
+	"error_useless_remove": {
+		"message": "Negalima pašalinti:\nNegalima pašalinti puslapio, kuris anksčiau nebuvo išsaugotas",
+		"description": "[klaida] vartotojas bandė pašalinti puslapį, kuris dar nebuvo išsaugotas"
+	},
+	"error_useless_save": {
+		"message": "Negalima išsaugoti:\nŠis puslapis jau išsaugotas!",
+		"description": "[klaida] vartotojas bandė išsaugoti puslapį, kuris jau buvo išsaugotas"
+	},
+	"export": {
+		"message": "Eksportuoti",
+		"description": "[iškylantysis_langas] eksportavimo mygtukas"
+	},
+	"export_title": {
+		"message": "Eksportuoti visus Tabs",
+		"description": "[iškylantysis_langas] pavadinimas ant eksportavimo mygtuko"
+	},
+	"extension_description": {
+		"message": "Kurkite ir tvarkykite pasirinktinius Tabs laisvoje vietoje Salesforce Lightning sąrankos puslapyje.",
+		"description": "[manifestas] Šio plėtinio aprašymas"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Šio plėtinio pavadinimas"
+	},
+	"file": {
+		"message": "failas",
+		"description": "vienas failas"
+	},
+	"files": {
+		"message": "failai",
+		"description": "keli failai"
+	},
+	"flows": {
+		"message": "Srautai",
+		"description": "[numatytoji Tab] Etiketė numatytajai Srautų Tab"
+	},
+	"general": {
+		"message": "Bendri",
+		"description": "Etiketė bendrai nustatymų kategorijai"
+	},
+	"help": {
+		"message": "Pagalba",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Pažymi naujus Tab'us kaip Org Tab'us, todėl jie matomi tik tada, kai esate prisijungę prie tos konkrečios „Salesforce Org“.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Naujai įtraukti Tab'ai įterpiami į Tab'ų sąrašo priekį, o ne pridedami pabaigoje.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą už „Salesforce“ domeno ribų, automatiškai būsite nukreipti į „Salesforce“ prisijungimo puslapį.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą „Salesforce“ domene, bet ne sąrankos puslapyje, automatiškai būsite nukreipti į „Salesforce“ sąrankos puslapį.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Kai įjungta, jūsų Tab'ai yra rūšiuojami pagal etiketę, URL arba Org, priklausomai nuo to, ką pasirinksite.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Prisega jūsų išsaugotus Tab'us prieš standartinį naršymo meniu (pagrindinis / objektų tvarkyklė) sąrankoje, o ne po jo.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Kai įjungta, kiekvienas išsaugotas Tab'as atvers susijusį puslapį naujame Tab'e.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Neleidžia automatiškai rodyti pranešimų apie išleidimo pastabas po plėtinio atnaujinimo.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Išjungia periodinius atnaujinimo priminimo iššokančiuosius langus, kad plėtinio vartotojo sąsaja būtų švari (kai naršyklės nustatymuose išjungėte automatinį plėtinio atnaujinimą).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą už „Salesforce“ domeno ribų, prisijungimo puslapis bus atidarytas dabartiniame naršyklės Tab'e.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Jei spustelite plėtinio iššokantįjį langą „Salesforce“ domene, bet ne sąrankos puslapyje, „Salesforce“ sąrankos puslapis bus atidarytas dabartiniame naršyklės Tab'e.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Nustatykite vartotojo sąsajos kalbą tik plėtiniui. Jei kažkas nebuvo išversta, vietoj to bus naudojama angliška versija.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Išjungia pagrindinį telemetrijos rinkimą. Plėtinys nebus rodomas anoniminėje naudojimo metrikos ataskaitoje.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Apeina „Lightning Navigation“ API ir atidaro nuorodas iš naujo įkeliant visą puslapį, o tai gali būti greičiau kai kuriose organizacijos konfigūracijose.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Išjungia plėtinio patikrinimą, patvirtinantį, kad URL fragmentas atitinka „Salesforce“ įrašo / objekto ID formatą (naudojamą automatiškai nustatyti išsaugotą Tab'ą kaip Org Tab'ą).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Spustelėkite, kad būtumėte nukreipti į šio nustatymo dokumentaciją!",
+		"description": "[nustatymų-pagalba] raginimas veikti, leidžiantis vartotojui perskaityti daugiau apie konkretų nustatymą"
+	},
+	"import": {
+		"message": "Importuoti",
+		"description": "[iškylantysis_langas] importavimo mygtukas"
+	},
+	"import_duplicate_description": {
+		"message": "Pasikartojantys Tabs bus ignoruojami.<br />Du Tabs laikomi pasikartojančiais, jei jie turi tą patį URL.",
+		"description": "[importuoti] aprašymas, ką daro importavimo procesas"
+	},
+	"import_invalid_file": {
+		"message": "Neteisingas failo tipas.\nPalaikomi tik JSON failai.",
+		"description": "[klaida] importavimui naudojamas failas nėra JSON"
+	},
+	"import_successful": {
+		"message": "Sėkmingai importuota",
+		"description": "[importuoti] importavimas baigtas. Po to bus parodyta, kiek įrašų buvo importuota"
+	},
+	"import_tabs": {
+		"message": "Importuoti Tabs",
+		"description": "[modal_pavadinimas] importavimo procesui"
+	},
+	"import_title": {
+		"message": "$import_tabs iš JSON failo",
+		"description": "[iškylantis-langas] pavadinimas importavimo mygtuke"
+	},
+	"insert_another": {
+		"message": "Įterpti kitą",
+		"description": "[klaida_atidaryti_kitą_org_modal] pranešimas, kai vartotojas įterpia tą pačią Org modaliniame lange"
+	},
+	"insert_another_org": {
+		"message": "Įterpta Org yra dabartinė!\nPrašome įterpti kitą Org.",
+		"description": "[klaida_atidaryti_kitą_org_modal] pranešimas, kai vartotojas įterpia tą pačią Org modaliniame lange"
+	},
+	"insert_valid_org": {
+		"message": "Prašome įterpti galiojančią Org!",
+		"description": "[klaida_atidaryti_kitą_org_modal] pranešimas, kai vartotojas įterpia neteisingą URL modaliniame lange"
+	},
+	"italic": {
+		"message": "Kursyvas",
+		"description": "Šrifto stiliaus parinktis kursyviniam tekstui"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "„Salesforce“ pasirinktinė navigacijos technologija"
+	},
+	"login_to_salesforce": {
+		"message": "Prisijungti prie Salesforce",
+		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce prisijungimo puslapį"
+	},
+	"mycustomorg": {
+		"message": "manopasirinktineorg",
+		"description": "užpildas Atnaujinti Tab modaliniam langui"
+	},
+	"no_manifest_github": {
+		"message": "Neteisingas arba trūkstamas GitHub homepage_url manifeste",
+		"description": "Manifesto homepage_url raktas nenaudoja GitHub nuorodos"
+	},
+	"no_match": {
+		"message": "Neatitiko jokio veiksmo",
+		"description": "[klaida] Salesforce, kai perjungiklis negali suderinti prašomo veiksmo"
+	},
+	"nss_invalid_url": {
+		"message": "Aptiktas netinkamas URL.",
+		"description": "[neSalesforceNustatymas] netinkamas URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Tai nėra $salesforce_lightning sąrankos puslapis.",
+		"description": "[notSalesforceSetup] vartotojas nėra „Salesforce“ puslapyje."
+	},
+	"open_here": {
+		"message": "Atidaryti šiame Tab.",
+		"description": "[open-other-org-modal] radijo mygtukas, leidžiantis vartotojui atidaryti tame pačiame naršyklės Tab"
+	},
+	"open_new_tab": {
+		"message": "Atidaryti naujame Tab.",
+		"description": "[open-other-org-modal] radijo mygtukas, leidžiantis vartotojui atidaryti naujame naršyklės Tab."
+	},
+	"open_settings": {
+		"message": "Atidaryti plėtinio nustatymus",
+		"description": "[iššokantis langas] mygtukas, skirtas nukreipti į nustatymų puslapį"
+	},
+	"open_setup": {
+		"message": "Atidaryti Sąranką",
+		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Pridėti naujus Tab'us kaip Org Tab'us.",
+		"description": "[settings] leiskite vartotojui pridėti visus naujus Tab'us kaip specifinius organizacijai"
+	},
+	"opt_add_tabs_front": {
+		"message": "Pridėti naujus Tab'us priekyje.",
+		"description": "[settings] leisti vartotojui pridėti visus naujus Tab'us priekyje"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automatiškai atidaryti $salesforce_login puslapį spustelėjus iškylantįjį langą, kai nesate „Salesforce“ puslapyje.",
+		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą atsitiktinėje svetainėje"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automatiškai atidaryti $salesforce_setup puslapį spustelėjus iškylantįjį langą, kai esate „Salesforce“ puslapyje.",
+		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą „Salesforce“ svetainėje"
+	},
+	"opt_confirm_save": {
+		"message": "Nustatymai buvo išsaugoti!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Numatytasis ir atsarginis)",
+		"description": "Numatytoji plėtinio kalbos parinktis"
+	},
+	"opt_keep_sort": {
+		"message": "Išsaugoti Tab'us surūšiuotus.",
+		"description": "[setting] leisti vartotojui išlaikyti savo Tab'us surūšiuotus pagal vieną iš jų raktų"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Palikti mėgstamus Tabus kairėje nuo Namų ir Objektų tvarkyklės.",
+		"description": "Jungiklis prisegti mėgstamus Tabus kairėje navigacijos juostos pusėje"
+	},
+	"opt_link_new_browser": {
+		"message": "Visada atidaryti nuorodas naujame naršyklės skirtuke.",
+		"description": "[nustatymas] kai vartotojas spusteli mėgstamą Tab, atidaryti naujame naršyklės skirtuke"
+	},
+	"opt_no_release_notes": {
+		"message": "Nerodyti naujinimo išleidimo pastabų.",
+		"description": "[nustatymas] leidžia vartotojui neleisti plėtiniui rodyti išleidimo pastabų po atnaujinimo"
+	},
+	"opt_no_update_notification": {
+		"message": "Neįspėti apie galimus naujinimus.",
+		"description": "[nustatymas] leidžia vartotojui neleisti plėtiniui ieškoti naujų leidimų"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_login puslapį tame pačiame Tab.",
+		"description": "[nustatymas]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Spustelėjus iškylantįjį langą, visada atidarykite $salesforce_setup puslapį tame pačiame Tab.",
+		"description": "[nustatymas]"
+	},
+	"opt_pick_language": {
+		"message": "Pasirinkite plėtinio kalbą",
+		"description": "[nustatymas] etiketė, skirta vartotojui pasirinkti pageidaujamą kalbą"
+	},
+	"opt_pick_sort": {
+		"message": "Pasirinkite, pagal kurį lauką turėtų būti rūšiuojami Tab'ai",
+		"description": "[setting] dabar vartotojas gali pasirinkti, pagal kurį raktą išlaikyti Tab'us surūšiuotus"
+	},
+	"opt_prevent_analytics": {
+		"message": "Užkirsti kelią Simple Analytics naudojimui (nerodoma naudotojų skaičiuje).",
+		"description": "[nustatymas] leidžia vartotojui užkirsti kelią anoniminiams analizės duomenų siuntimui"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Neleisti naudoti „Lightning Navigation“ (pažymėjus atšaukiamai, įkeliama greičiau).",
+		"description": "[setting] neleiskite naudoti „Lightning Navigation“ su funkcijos paaiškinimu"
+	},
+	"opt_same_tab_popup": {
+		"message": "puslapis tame pačiame skirtuke spustelėjus iššokantį langą.",
+		"description": "[nustatymas] neleisti atidaryti naujo naršyklės skirtuko"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Sekite Salesforce kalbą (skaito Salesforce slapukus)",
+		"description": "Parinktis naudoti Salesforce kalbos nustatymą. Norėdami naudoti šią parinktį, vartotojai turi leisti plėtiniui skaityti Salesforce slapukus."
+	},
+	"opt_skip_link_detection": {
+		"message": "Praleisti automatinį Salesforce ID patikrinimą.",
+		"description": "[nustatymas] kai vartotojas prideda mėgstamą Tab, nepatikrinti, ar nuorodoje yra ID"
+	},
+	"or_drop": {
+		"message": "Arba $drop",
+		"description": "[importuoti] leiskite vartotojui perkelti failus pele ir juos paleisti"
+	},
+	"org_link": {
+		"message": "Org nuoroda",
+		"description": "[įvesties_etiketė]"
+	},
+	"other_org_info": {
+		"message": "Kitos Org informacija",
+		"description": "[modal_pavadinimas]"
+	},
+	"other_org_placeholder": {
+		"message": "kita-org",
+		"description": "[įvesties_užpildas]"
+	},
+	"overwrite_tabs": {
+		"message": "Perrašyti išsaugotus Tabs.",
+		"description": "[etiketė] ištrinti visus išsaugotus Tabs importavimo proceso metu"
+	},
+	"preserve_org_tabs": {
+		"message": "Išsaugoti Tabs kitoms Org.",
+		"description": "[etiketė] išlaikyti visus Org specifinius Tabs importavimo proceso metu"
+	},
+	"remove_tab": {
+		"message": "Pašalinti Tab",
+		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
+	},
+	"req_downloads_open_popup": {
+		"message": "Prašome atidaryti plėtinio iššokantįjį langą iš savo naršyklės plėtinių meniu.",
+		"description": "[pranešimas] paprašykite vartotojo spustelėti plėtinio iššokantįjį langą, kad tęstų"
+	},
+	"req_downloads_perm_header": {
+		"message": "Prašome įjungti atsisiuntimų leidimą\nnorėdami pradėti prašomą eksportą.",
+		"description": "[prašyti_leidimo] raginimas veikti, kad būtų įjungtas atsisiuntimų leidimas"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ši operacija bus prašoma tik vieną kartą.",
+		"description": "[prašyti_leidimo] atsisiuntimų leidimo įjungimo aprašymas"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Daugiau neklausti.",
+		"description": "[prašyti_leidimo] etiketė, kai vartotojas nenori visam laikui leisti leidimų"
+	},
+	"req_permissions_header": {
+		"message": "Leiskite mums automatiškai pasiekti\n$salesforce_setup puslapius.",
+		"description": "[req_permission] leidimų prašymo puslapio antraštė"
+	},
+	"req_permissions_paragraph": {
+		"message": "Jei norite, galite rodyti mėgstamiausius Tabs\nkai tik pereisite į $salesforce_setup puslapį,\nkas kartą nespaudžiant šio plėtinio.",
+		"description": "[req_permission] tekstas, paaiškinantis, kodėl prašoma leidimų"
+	},
+	"required": {
+		"message": "privaloma",
+		"description": "[įvestis] pažymi įvesties lauką kaip privalomą"
+	},
+	"required_info": {
+		"message": "= Privaloma informacija",
+		"description": "[modal] nurodo vartotojui, kad kai kuri informacija yra privaloma"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[neSalesforceSąranka] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Salesforce prisijungimas",
+		"description": "Salesforce prisijungimo puslapis (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce nustatymai",
+		"description": "bet kuris Salesforce nustatymų puslapis (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Išsaugoti",
+		"description": "Taikyti pakeitimus ir išsaugoti juos atmintyje"
+	},
+	"save_tab": {
+		"message": "Išsaugoti kaip Tab",
+		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
+	},
+	"send_tip": {
+		"message": "Atsiųskite mums patarimą ❤️",
+		"description": "[popup] svg antraštė, skirta paraginti siųsti patarimą"
+	},
+	"set_gen_preview": {
+		"message": "Tab peržiūra",
+		"description": "Etiketė bendrinių Tabų išvaizdos peržiūrai"
+	},
+	"set_gen_styler": {
+		"message": "Tab stilizavimas",
+		"description": "Etiketė bendrinių Tabų stiliui konfigūruoti"
+	},
+	"set_general_settings": {
+		"message": "Bendri nustatymai",
+		"description": "Skyriaus antraštė bendriems konfigūracijos pasirinkimams"
+	},
+	"set_move_available": {
+		"message": "Perkelti į Galimus",
+		"description": "Mygtuko pavadinimas perkelti pasirinktus elementus atgal į Galimus"
+	},
+	"set_move_chosen": {
+		"message": "Perkelti į Pasirinktus",
+		"description": "Mygtuko pavadinimas perkelti pasirinktus elementus į Pasirinktus"
+	},
+	"set_org_preview": {
+		"message": "Organizacijos peržiūra",
+		"description": "Etiketė organizacijai būdingų Tabų išvaizdos peržiūrai"
+	},
+	"set_org_styler": {
+		"message": "Organizacijos stilizavimas",
+		"description": "Etiketė organizacijai būdingų Tabų stiliui konfigūruoti"
+	},
+	"set_tab_background_active_label": {
+		"message": "Įveskite fono spalvą jūsų aktyviems bendriniams Tabams.",
+		"description": "Etiketė fono spalvos nustatymui aktyviems bendriniams Tabams"
+	},
+	"set_tab_background_label": {
+		"message": "Įveskite fono spalvą jūsų organizacijos Tabams.",
+		"description": "Etiketė fono spalvos nustatymui organizacijai būdingiems Tabams"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Įveskite rėmelio spalvą jūsų aktyviems organizacijos Tabams.",
+		"description": "Etiketė rėmelio spalvos nustatymui aktyviems organizacijai būdingiems Tabams"
+	},
+	"set_tab_border_color_label": {
+		"message": "Įveskite rėmelio spalvą jūsų bendriniams Tabams.",
+		"description": "Etiketė rėmelio spalvos nustatymui bendriniams Tabams"
+	},
+	"set_tab_color_active_label": {
+		"message": "Įveskite teksto spalvą jūsų aktyviems bendriniams Tabams.",
+		"description": "Etiketė teksto spalvos nustatymui aktyviems bendriniams Tabams"
+	},
+	"set_tab_color_label": {
+		"message": "Įveskite teksto spalvą jūsų organizacijos Tabams.",
+		"description": "Etiketė teksto spalvos nustatymui organizacijai būdingiems Tabams"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Pasirinkite vieną ar daugiau dekoravimo stilių jūsų aktyviems organizacijos Tabams.",
+		"description": "Raginimas pasirinkti dekoravimo stilius aktyviems organizacijai būdingiems Tabams"
+	},
+	"set_tab_decoration_label": {
+		"message": "Pasirinkite vieną ar daugiau dekoravimo stilių jūsų bendriniams Tabams.",
+		"description": "Raginimas pasirinkti dekoravimo stilius bendriniams Tabams"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Įveskite užvedimo fono spalvą jūsų aktyviems bendriniams Tabams.",
+		"description": "Etiketė užvedimo fono spalvos nustatymui aktyviems bendriniams Tabams"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Įveskite užvedimo fono spalvą jūsų organizacijos Tabams.",
+		"description": "Etiketė užvedimo fono spalvos nustatymui organizacijai būdingiems Tabams"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Įveskite šešėlio spalvą jūsų aktyviems organizacijos Tabams.",
+		"description": "Etiketė šešėlio spalvos nustatymui aktyviems organizacijai būdingiems Tabams"
+	},
+	"set_tab_shadow_label": {
+		"message": "Įveskite šešėlio spalvą jūsų bendriniams Tabams.",
+		"description": "Etiketė šešėlio spalvos nustatymui bendriniams Tabams"
+	},
+	"set_tab_top_active_label": {
+		"message": "Įveskite spalvą juostai jūsų aktyvių bendrinių Tabų viršuje.",
+		"description": "Etiketė viršutinės juostos spalvos nustatymui aktyviems bendriniams Tabams"
+	},
+	"set_toggle_preview": {
+		"message": "Spustelėkite, kad perjungtumėte aktyvią būseną.",
+		"description": "Įrankio patarimo tekstas aktyvios būsenos perjungimo valdikliui"
+	},
+	"settings": {
+		"message": "Nustatymai",
+		"description": "Etiketė nustatymų meniu"
+	},
+	"setup_page": {
+		"message": "Sąrankos puslapis",
+		"description": "[neSalesforceSąranka] puslapis, naudojamas Salesforce nustatymams keisti"
+	},
+	"skip": {
+		"message": "Praleisti",
+		"description": "[prašyti_leidimo] mygtukas NEleisti leidimų"
+	},
+	"successfully_imported": {
+		"message": "Sėkmingai importuota",
+		"description": "[pranešimas] vartotojas pridėjo Tabs iš išorinio failo"
+	},
+	"tab_explain": {
+		"message": "Kiekvienas elementas turi turėti 'label' ir 'url' kaip eilutes. Be to, kiekvienas elementas gali turėti 'org' kaip eilutę.",
+		"description": "[klaida] paaiškina, kaip turėtų būti sukonstruotas Tab"
+	},
+	"tab_information": {
+		"message": "Tab informacija",
+		"description": "pavadinimas atnaujinimo Tab modaliniam langui"
+	},
+	"tab_label": {
+		"message": "Tab etiketė",
+		"description": "Tab etiketės (Label) savybė, jos pavadinimas"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "Tab Org savybė, jei ji skirta vienai Salesforce organizacijai"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab URL savybė, kur ji nukreipia"
+	},
+	"table_delete": {
+		"message": "Ištrinti Tab",
+		"description": "[iškylantysis_langas] pagalbinis tekstas stulpeliui su ištrynimo mygtuku"
+	},
+	"table_org": {
+		"message": "Yra Org Tab",
+		"description": "[iškylantysis_langas] pagalbinis tekstas stulpeliui su Org žymimuoju laukeliu"
+	},
+	"table_row_label": {
+		"message": "Įveskite šio URL etiketę",
+		"description": "[iškylantysis_langas] įvesties laukas su Tab pavadinimu"
+	},
+	"table_row_org": {
+		"message": "Spustelėkite, jei norite, kad šis Tab būtų prieinamas tik šiai Org.",
+		"description": "[iškylantysis_langas] žymimasis laukelis, skirtas Tab perjungti į Org specifinį"
+	},
+	"table_row_org_name": {
+		"message": "Org, kuriai šis Tab yra prieinamas.",
+		"description": "[iškylantysis_langas] įvesties laukas su Org pavadinimu"
+	},
+	"table_row_url": {
+		"message": "Įveskite antrinį_URL, kur norite būti nukreipti.",
+		"description": "[iškylantysis_langas] įvesties laukas su Tab URL"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "vartotojo mėgstamiausios nuorodos"
+	},
+	"tabs_saved": {
+		"message": "Tabs išsaugoti.",
+		"description": "[pranešimas] Tabs sėkmingai išsaugoti."
+	},
+	"theme_dark": {
+		"message": "Keisti temą į tamsią",
+		"description": "[iškylantysis_langas] pavadinimas ant mėnulio, kad perjungtumėte temą"
+	},
+	"theme_light": {
+		"message": "Keisti temą į šviesią",
+		"description": "[iškylantysis_langas] pavadinimas ant saulės, kad perjungtumėte temą"
+	},
+	"underline": {
+		"message": "Pabraukimas",
+		"description": "Dekoravimo stiliaus parinktis Tab teksto pabraukimui"
+	},
+	"underline_wavy": {
+		"message": "Banguotas pabraukimas",
+		"description": "Dekoravimo stiliaus parinktis banguoto pabraukimo taikymui Tab tekstui"
+	},
+	"update_available": {
+		"message": "Atnaujinimas pasiekiamas",
+		"description": "pasiekiamas naujas plėtinio atnaujinimas"
+	},
+	"upload": {
+		"message": "Įkelti",
+		"description": "[importuoti] leiskite vartotojui naršyti savo failus ir pasirinkti tinkamą"
+	},
+	"users": {
+		"message": "Vartotojai",
+		"description": "Puslapio, susijusio su ManageUsers/home, pavadinimas"
+	},
+	"where_to": {
+		"message": "Kur?",
+		"description": "[atidaryti_kitą_org_modal] atsarginis pavadinimas modaliniam langui"
+	},
+	"write_review": {
+		"message": "Parašykite apžvalgą!",
+		"description": "[popup] svg antraštė, skirta prašyti parašyti apžvalgą"
+	}
+}

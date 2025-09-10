@@ -1,0 +1,989 @@
+{
+	"allow": {
+		"message": "അനുമതി",
+		"description": "[req_permission] ബട്ടൺ അനുമതികള്‍ അനുവദിക്കാന്‍"
+	},
+	"ascending": {
+		"message": "ആരോഹണക്രമത്തിൽ (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "ലഭ്യമാണ്",
+		"description": "ചേർക്കാവുന്ന आइറ്റങ്ങൾക്കുള്ള വിഭാഗം ശീർഷകം"
+	},
+	"bold": {
+		"message": "ബോൾഡ്",
+		"description": "ടെക്സ്റ്റ് ദൊജി ഷൈലി ഓപ്‌ഷൻ"
+	},
+	"cancel": {
+		"message": "റദ്ദാക്കുക",
+		"description": "നിലവിലെ പ്രവര്‍ത്തനം നടപ്പാക്കാതിരിക്കാനുള്ള ബട്ടണുകളുടെ തലക്കെട്ടോ ടെക്സ്റ്റ് ഉള്ളടക്കമോ"
+	},
+	"cancel_close": {
+		"message": "റദ്ദാക്കുക, അടയ്ക്കുക",
+		"description": "മോഡലിന്റെ അടയ്ക്കുന്ന ബട്ടണിന് തലക്കെട്ടോ ടെക്സ്റ്റ് ഉള്ളടക്കമോ"
+	},
+	"chosen": {
+		"message": "തിരഞ്ഞെടുക്കപ്പെട്ടത്",
+		"description": "തിരഞ്ഞെടുക്കപ്പെട്ട आइറ്റങ്ങൾക്കുള്ള വിഭാഗം ശീർഷകം"
+	},
+	"cmd_export_all": {
+		"message": "സംരക്ഷിച്ച എല്ലാ Tab-കളും экспорт ചെയ്യാനുള്ള Модал കാണിക്കുക",
+		"description": "[കമാൻഡ് വിവരണം] എല്ലാ Tab-കളും экспорട്ട് ചെയ്യാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"cmd_import": {
+		"message": "പുതിയ Tab-കൾ импорт ചെയ്യാനുള്ള മോഡൽ കാണിക്കുക",
+		"description": "[കമാൻഡ് വിവരണം] പുതിയ Tab-കൾ имപോർട്ട് ചെയ്യാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"cmd_open_other_org": {
+		"message": "നിലവിലെ പേജ് മറ്റൊരു Org-ൽ തുറക്കാനുള്ള മോഡൽ കാണിക്കുക",
+		"description": "[കമാൻഡ് വിവരണം] നിലവിലെ പേജ് മറ്റൊരു Org-ൽ തുറക്കാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab ലിസ്റ്റിൽ നിന്ന് നിലവിലെ പേജ് നീക്കം ചെയ്യുക (സംരക്ഷിച്ചിട്ടുണ്ടെങ്കിൽ)",
+		"description": "[കമാൻഡ് വിവരണം] നിലവിലെ പേജ് നീക്കം ചെയ്യാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tab ലിസ്റ്റിൽ നിലവിലെ പേജ് സംരക്ഷിക്കുക (സംരക്ഷിച്ചിട്ടില്ലെങ്കിൽ)",
+		"description": "[കമാൻഡ് വിവരണം] നിലവിലെ പേജ് സംരക്ഷിക്കാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"cmd_toggle_org": {
+		"message": "നിലവിലെ പേജിന്റെ Org മൂല്യം ടോഗിൾ ചെയ്യുക (സംരക്ഷിച്ചിട്ടുണ്ടെങ്കിൽ)",
+		"description": "[കമാൻഡ് വിവരണം] നിലവിലെ പേജിനായുള്ള Org ടോഗിൾ ചെയ്യാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"cmd_update_tab": {
+		"message": "നിലവിലെ പേജ് അപ്ഡേറ്റ് ചെയ്യാനുള്ള മോഡൽ കാണിക്കുക (സംരക്ഷിച്ചിട്ടുണ്ടെങ്കിൽ)",
+		"description": "[കമാൻഡ് വിവരണം] നിലവിലെ പേജ് അപ്ഡേറ്റ് ചെയ്യാൻ ഉപയോക്താവ് ആഗ്രഹിക്കുന്നു"
+	},
+	"confirm_another_org": {
+		"message": "ഈ ലിങ്ക് തുറക്കുന്നത് സ്ഥിരീകരിക്കുക.",
+		"description": "[open-other-org-modal] നിര്‍മ്മിച്ച ലിങ്ക് തുറക്കുന്നതിന് ഉപയോക്താവിന്റെ സ്ഥിരീകരണം ആവശ്യപ്പെടുക."
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label-ന്റെ ഒരു പുതിയ പതിപ്പ് ഇപ്പോൾ ലഭ്യമാണ്!",
+		"description": "ഒരു ലിസണറിൽ നിന്ന് ഒരു അജ്ഞാത സന്ദേശം ലഭിച്ചു"
+	},
+	"continue": {
+		"message": "തുടരുക",
+		"description": "നിലവിലെ പ്രവര്‍ത്തനം നടത്തുന്നതിനുള്ള ബട്ടണുകളുടെ ടെക്സ്റ്റ് ഉള്ളടക്കം"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 എല്ലാ സാധാരണ Tabകൾ",
+		"description": "[സന്ദർഭ മെനു]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 എല്ലാ Tabകളും നീക്കം ചെയ്യുക",
+		"description": "[സന്ദർഭമെനു]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 എല്ലാ ദൃശ്യമായ Tabകൾ",
+		"description": "[സന്ദർഭ മെനു]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs എക്സ്പോര്‍ട്ട് ചെയ്യുക",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[സന്ദർഭ-മെനു]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab ന്റെ സ്ഥാനം മാറ്റുക",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ ആദ്യത്തില്‍ കൊണ്ടുവരിക്കുക",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ അവസാനത്തില്‍ കൊണ്ടുവരിക്കുക",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 ഇടത്തേക്ക് മാറ്റുക",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 വലത്തേക്ക് മാറ്റുക",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 മറ്റൊരു ഓര്‍ഗനൈസേഷനില്‍ തുറക്കുക",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[സന്ദർഭ-മെനു]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[സന്ദർഭ-മെനു]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(കള്‍) മായ്ക്കുക",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 ഇടത്തുനിന്നുള്ള Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ മറ്റുള്ള Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 വലത്തുനിന്നുള്ള Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ This tTb",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 ഡീഫോൾട്ട് Tabകൾ റീസെറ്റ് ചെയ്യുക",
+		"description": "[സന്ദർഭ മെനു]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "ക്രമീകരണ മെനുവിനായുള്ള ലേബൽ"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tab-കൾ അടുക്കുക",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ സ്വയമേവ അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു (മാതൃ മെനു)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ലേബൽ പ്രകാരം",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ ലേബൽ പ്രകാരം അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു"
+	},
+	"cxm_sort_org": {
+		"message": "👽 ഓർഗ് പ്രകാരം",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ ഓർഗ് പ്രകാരം അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL പ്രകാരം",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ URL പ്രകാരം അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab അപ്‌ഡേറ്റ് ചെയ്യുക",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 ഓര്‍ഗ്നൈസേഷന്‍ മാറ്റം",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 മറ്റ് അപ്‌ഡേറ്റുകള്‍",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "ഡിലീറ്റ് ചെയ്യുക",
+		"description": "[popup] ഒരു വരി നീക്കം ചെയ്യുക"
+	},
+	"delete_all": {
+		"message": "$delete എല്ലാ Tabs",
+		"description": "[പോപ്പ്അപ്പ്] എല്ലാ Tabs-ഉം ശൂന്യമാക്കാൻ ബിന്നിലെ ശീർഷകം"
+	},
+	"descending": {
+		"message": "അവരോഹണ ക്രമത്തിൽ (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "ഇടുക",
+		"description": "[ഇംപോർട്ട്] ഉപയോക്താവിനെ അവരുടെ ഫയലുകൾ നിർദ്ദിഷ്ട സ്ഥലത്തേക്ക് ഡ്രോപ്പ് ചെയ്യാൻ അനുവദിക്കുക"
+	},
+	"enable": {
+		"message": "പ്രവർത്തനക്ഷമമാക്കുക",
+		"description": "[അനുമതി_ചോദിക്കുക] അനുമതികൾ പ്രവർത്തനക്ഷമമാക്കാനുള്ള ബട്ടൺ"
+	},
+	"error_adding_tab": {
+		"message": "Tab ചേർക്കുമ്പോൾ പിശക്.",
+		"description": "[പിശക്] Tab ചേർക്കുമ്പോൾ ഉപയോഗിക്കുന്ന സാധാരണ പിശക്"
+	},
+	"error_check_update": {
+		"message": "അപ്ഡേറ്റുകൾ പരിശോധിക്കുന്നതിൽ പിശക്",
+		"description": "[പിശക്] എക്സ്റ്റൻഷൻ അപ്ഡേറ്റുകൾ പരിശോധിക്കുമ്പോൾ സാധാരണ പിശക്"
+	},
+	"error_close_other_modal": {
+		"message": "മറ്റൊരു മോഡല്‍ ആദ്യം അടയ്ക്കുക!",
+		"description": "[toast] ഒരേ സമയം ഒന്നിലധികം മോഡല്‍ തുറക്കാന്‍ ഉപയോക്താവ് ശ്രമിച്ചു"
+	},
+	"error_cxm_check": {
+		"message": "മെനു ഐറ്റങ്ങളെ പരിശോധിക്കുമ്പോള്‍ പിശക്",
+		"description": "[error] context-menu ഐറ്റങ്ങളെ കണ്ടെത്താനായില്ല"
+	},
+	"error_cxm_create": {
+		"message": "മെനു ഐറ്റങ്ങളെ സൃഷ്ടിക്കുമ്പോള്‍ പിശക്",
+		"description": "[error] context-menu ഐറ്റങ്ങളെ പ്രാരംഭിപ്പിക്കാനായില്ല"
+	},
+	"error_cxm_remove": {
+		"message": "മെനു ഐറ്റങ്ങളെ നീക്കുമ്പോള്‍ പിശക്",
+		"description": "[error] context-menu ഐറ്റങ്ങളെ നീക്കാനായില്ല"
+	},
+	"error_duplicate_tab": {
+		"message": "ഈ Tab ഇതിനകം ഉണ്ട്",
+		"description": "[error] Tab പകര്‍ച്ച സംഭവിച്ചു"
+	},
+	"error_expand_url": {
+		"message": "ശൂന്യമായ URL വಿಸ್ತരിക്കാനാകില്ല!",
+		"description": "[error] വಿಸ್ತരിക്കേണ്ട URL നല്‍കാനായില്ല"
+	},
+	"error_expand_url_no_base": {
+		"message": "ഹോസ്റ്റ് ഇല്ലാതെ URL വಿಸ್ತരിക്കാനാകില്ല!",
+		"description": "[error] വಿಸ್ತരിക്കാന്‍ ഉപയോഗിക്കുന്ന അടിസ്ഥാന URL നല്‍കാനായില്ല"
+	},
+	"error_extract_empty_url": {
+		"message": "ശൂന്യമായ URL-ല്‍ നിന്ന് ഓര്‍ഗാനൈസേഷന്‍ പേര് എടുക്കാനാകില്ല!",
+		"description": "[error] ഓര്‍ഗാനൈസേഷന്‍ പേര് എടുക്കാന്‍ വേണ്ട URL നല്‍കിയില്ല"
+	},
+	"error_failed_sync": {
+		"message": "സമന്വയിക്കാൻ പരാജയപ്പെട്ടു.",
+		"description": "[പിശക്] ഉപയോക്താവിൽ നിന്ന് Tab-കൾക്ക് സമന്വയിപ്പിക്കാൻ കഴിയാതിരുന്നപ്പോഴുള്ള സാധാരണ പിശക്"
+	},
+	"error_failed_to_fetch": {
+		"message": "ബാഹ്യ ഉറവിടങ്ങൾ ലഭ്യമാക്കുന്നതിൽ പരാജയപ്പെട്ടു",
+		"description": "[പിശക്] ഒരു ബാഹ്യ വെബ്സൈറ്റിലേക്കുള്ള കോൾ വിജയിച്ചില്ല"
+	},
+	"error_get_with_no_org": {
+		"message": "ഓര്‍ഗനൈസേഷന്‍ വ്യക്തമല്ലാത്ത പക്ഷം Tabs ലഭ്യമാവില്ല.",
+		"description": "[error] ഓര്‍ഗനൈസേഷന്‍ വിവരം നല്‍കാതെ Tabs തേടിയതാണ്"
+	},
+	"error_import": {
+		"message": "ഇറക്കുമ്പോള്‍ പിശക്:\n",
+		"description": "[error] ഇറക്കുമതി പ്രക്രിയയില്‍ പിശക് സംഭവിച്ചു"
+	},
+	"error_invalid_key": {
+		"message": "ഫംഗ്ഷനിലേക്ക് കൈമാറിയ കീ പാരാമീറ്റർ സാധുവല്ല",
+		"description": "[പിശക്] ഡെവലപ്പർ അസാധുവായ പാരാമീറ്റർ ഉപയോഗിച്ച് ഒരു ഫംഗ്ഷൻ വിളിക്കാൻ ശ്രമിച്ചു"
+	},
+	"error_invalid_request": {
+		"message": "അസാധുവായ അഭ്യർത്ഥന.",
+		"description": "[പിശക്] മോശം ഫോർമാറ്റിലുള്ള ഒരു സന്ദേശം ലഭിച്ചതിനു ശേഷമുള്ള സാധാരണ പിശക്"
+	},
+	"error_invalid_tab": {
+		"message": "അസാധുവായ Tab",
+		"description": "[error] Tab ശരിയായതല്ല"
+	},
+	"error_link_with_id": {
+		"message": "ഈ പേജ് മറ്റൊരു ഓര്‍ഗില്‍ ഉണ്ടാകില്ല, കാരണം അതില്‍ ഒരു Id ഉണ്ട്!",
+		"description": "[open-other-org-modal] ലിങ്ക് മറ്റൊരു ഓര്‍ഗില്‍ ഉണ്ടായിരിക്കണമെന്ന ബോധിപ്പിക്കല്‍"
+	},
+	"error_many_matching_tab": {
+		"message": "ഒരു വിട വിപരീതമായി 1-ന് മേല്‍ പൊരുത്തപ്പെടുന്ന Tab കണ്ടെത്തി.",
+		"description": "[error] ഒരുപാട് Tabs ലഭിച്ചു"
+	},
+	"error_many_tabs_found": {
+		"message": " ഒന്നിൽ കൂടുതൽ Tab കണ്ടെത്തി.",
+		"description": "[പിശക്] നിരവധി Tab-കൾ ലഭ്യമാക്കി"
+	},
+	"error_minify_url": {
+		"message": "ശൂന്യമായ URL ചെറുക്കാനാകില്ല!",
+		"description": "[error] ചെറുക്കേണ്ട URL നല്‍കാനായില്ല"
+	},
+	"error_missing_favourite_id": {
+		"message": "Id ഇല്ലാതെ ഇഷ്ടപ്പെട്ട ഇമേജ് ലഭിക്കാനാകില്ല",
+		"description": "[error] ഏതൊരു ഇഷ്ടപ്പെട്ട Id നല്‍കിയില്ല"
+	},
+	"error_missing_key": {
+		"message": "കീ എവിടെയും കണ്ടെത്തിയില്ല",
+		"description": "[error] ഫയലുകളിലെ വിവർത്തനമൊന്നും കണ്ടെത്തിയില്ല"
+	},
+	"error_no_array": {
+		"message": "അസാധുവായ അറേ അല്ലെങ്കില്‍ അറേ നല്‍കിയില്ല",
+		"description": "[error] സാധുവായ അറേ ലഭ്യമായില്ല"
+	},
+	"error_no_browser_tab": {
+		"message": "നിലവിലെ ബ്രൗസര്‍ Tab കണ്ടെത്താനായില്ല.",
+		"description": "[error] ആക്ടീവ് ബ്രൗസര്‍ Tab സ്ഥാപിക്കാന്‍ ബാക്ക്‌ഗ്രൗണ്ട് പേജ് വിഫലമായിരുന്നു"
+	},
+	"error_no_callback": {
+		"message": "ദയവായി callback നല്‍കുക",
+		"description": "[error] ഒടുക്കത്തില്‍ വിളിക്കുന്ന ഫങ്ഷന് നല്‍കാനായില്ല"
+	},
+	"error_no_cookies": {
+		"message": "സമാനമായ കുക്കീസ് കണ്ടെത്താനായില്ല",
+		"description": "[error] Salesforce കുക്കീസ് ലഭ്യമാകാത്തതു കണ്ടു"
+	},
+	"error_no_data": {
+		"message": "ഡാറ്റ ഇല്ലാതെ Tab തിരിച്ചറിയാനാകില്ല.",
+		"description": "[error] ഡാറ്റ നല്‍കാതെ Tab തേടിയതാണ്"
+	},
+	"error_no_headers": {
+		"message": "തലക്കെട്ടുകള്‍ കണ്ടെത്താന്‍ പരാജയപ്പെട്ടു.",
+		"description": "[error] ഇഷ്ടപ്പെട്ട ബട്ടണ്‍ സ്ഥാപിക്കുന്നതിനായി ഹെഡറുകള്‍ കണ്ടെത്താനായില്ല"
+	},
+	"error_no_matching_tab": {
+		"message": "പൊരുത്തപ്പെടുന്ന Tabs ഒന്നും കണ്ടെത്തിയില്ല.",
+		"description": "[error] Tabs കിട്ടിയില്ല"
+	},
+	"error_no_message": {
+		"message": "അടയ്ക്കാനുള്ള സന്ദേശം നല്‍കിയില്ല.",
+		"description": "[error] കോഡിലെ മറ്റു ഭാഗങ്ങളിലേക്ക് അയയ്ക്കാനുള്ള സന്ദേശം ലഭ്യമല്ല"
+	},
+	"error_no_object": {
+		"message": "പരിശോധനയ്ക്ക് വസ്തു നല്‍കിയിട്ടില്ല!",
+		"description": "[error] വസ്തു നല്‍കിയിട്ടില്ല"
+	},
+	"error_no_setup_tab": {
+		"message": "സെറ്റപ്പ് Tab കണ്ടെത്താനായില്ല.",
+		"description": "[error] ഇഷ്ടപ്പെട്ട Tabs സ്ഥാപിക്കുന്നതിനായി സെറ്റപ്പ് Tab ലഭ്യമാകുന്നില്ല"
+	},
+	"error_no_url": {
+		"message": "പരിശോധിക്കാന്‍ URL നല്‍കിയിട്ടില്ല!",
+		"description": "[error] പരിശോധിക്കാന്‍ URL നല്‍കാനായില്ല"
+	},
+	"error_not_initialized": {
+		"message": "ഇതുവരെ ആരംഭിച്ചിട്ടില്ല.",
+		"description": "[പിശക്] ഒരു വേരിയബിൾ തയ്യാറാകാത്തപ്പോഴുള്ള സാധാരണ പിശക്"
+	},
+	"error_processing_tabs": {
+		"message": "Tab-കൾ പ്രോസസ്സ് ചെയ്യുമ്പോൾ പിശക്.",
+		"description": "[പിശക്] Tab-കൾ പ്രോസസ്സ് ചെയ്യുമ്പോൾ സാധാരണ പിശക്"
+	},
+	"error_redirect": {
+		"message": "редирект ചെയ്യാൻ കഴിയില്ല. പേജ് പുതുക്കുക.",
+		"description": "[പിശക്] പേജ് റീഡയറക്ഷനിൽ ഉള്ള സാധാരണ പിശക്."
+	},
+	"error_remove_not_favourite": {
+		"message": "ഇഷ്ടപ്പെട്ടതല്ലാത്ത Tab നീക്കാനാകില്ല!",
+		"description": "[error] സംരക്ഷിക്കപ്പെട്ടതല്ലാത്ത Tab നീക്കാന്‍ ഉപയോക്താവ് ശ്രമിച്ചു"
+	},
+	"error_removing_all_tabs": {
+		"message": "എല്ലാ Tab-കളും നീക്കം ചെയ്യുമ്പോൾ പിശക്.",
+		"description": "[പിശക്] എല്ലാ Tab-കളും നീക്കം ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന സാധാരണ പിശക്"
+	},
+	"error_removing_generic_tabs": {
+		"message": "സാധാരണ Tab-കൾ നീക്കം ചെയ്യുമ്പോൾ പിശക്.",
+		"description": "[പിശക്] സാധാരണ Tab-കൾ നീക്കം ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന സാധാരണ പിശക്"
+	},
+	"error_removing_other_tabs": {
+		"message": "മറ്റ് Tab-കൾ നീക്കം ചെയ്യുമ്പോൾ പിശക്.",
+		"description": "[പിശക്] മറ്റ് Tab-കൾ നീക്കം ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന സാധാരണ പിശക്"
+	},
+	"error_removing_tab": {
+		"message": "Tab നീക്കം ചെയ്യുമ്പോൾ പിശക്.",
+		"description": "[പിശക്] Tab നീക്കം ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന സാധാരണ പിശക്"
+	},
+	"error_removing_visible_tabs": {
+		"message": "എല്ലാ ദൃശ്യമായ Tabകൾ നീക്കംചെയ്യുമ്പോൾ പിശക് സംഭവിച്ചു.",
+		"description": "[പിശക്] എല്ലാ ദൃശ്യമായ Tabകൾ നീക്കംചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന പൊതുപിശക്"
+	},
+	"error_required_params": {
+		"message": "ഫംഗ്ഷന് ആവശ്യമായ പാരാമീറ്ററുകൾ കൈമാറിയിട്ടില്ല",
+		"description": "[പിശക്] ഡെവലപ്പർ ആവശ്യമായ പാരാമീറ്ററുകളില്ലാതെ ഒരു ഫംഗ്ഷൻ വിളിക്കാൻ ശ്രമിച്ചു"
+	},
+	"error_resetting_default_tabs": {
+		"message": "ഡീഫോൾട്ട് Tabകൾക്ക് റീസെറ്റ് ചെയ്യുമ്പോൾ പിശക് സംഭവിച്ചു.",
+		"description": "[പിശക്] Tabകൾ ഡീഫോൾട്ടിലേക്ക് റീസെറ്റ് ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന പൊതുപിശക്"
+	},
+	"error_sorting_tabs": {
+		"message": "Tab-കൾ അടുക്കുന്നതിൽ പിശക്",
+		"description": "[error] ഒരു ടോസ്റ്റ് സന്ദേശത്തിൽ കാണിക്കുന്നു"
+	},
+	"error_sync_nothing": {
+		"message": "ശൂന്യമായ Tabs സിന്‍ക് ചെയ്യാനാകില്ല!",
+		"description": "[error] എന്തും സിന്‍ക് ചെയ്യാന്‍ ശ്രമിച്ചു"
+	},
+	"error_tab_constructor": {
+		"message": "Tab ക്ലാസ് ഉപയോഗിക്കുന്നതിന് new Tab() ന് പകരം Tab.create() ഉപയോഗിക്കുക",
+		"description": "[പിശക്] Tab ക്ലാസ് എങ്ങനെ ഉപയോഗിക്കണമെന്ന് ഡെവലപ്പർക്ക് നിർദ്ദേശം നൽകുക"
+	},
+	"error_tab_label": {
+		"message": "ലെബല്‍ ശൂന്യമല്ലാത്ത സ്ട്രിംഗ് ആയിരിക്കണം",
+		"description": "[error] ലേബല്‍ ചേര്‍ക്കാതെ Tab സൃഷ്ടിക്കാനായി ഉപയോക്താവ് ശ്രമിച്ചു"
+	},
+	"error_tab_not_found": {
+		"message": "Tab കണ്ടെത്തിയില്ല.",
+		"description": "[error] അറേയുടെ ഭാഗമായിരുന്ന Tab ഉള്‍ക്കൊള്ളാനായില്ല"
+	},
+	"error_tab_object_creation": {
+		"message": "ഒരു വസ്തുവിലൂടെ വിളിക്കുമ്പോൾ, മറ്റൊന്നും നല്‍കരുത്.",
+		"description": "[error] ഡെവലപ്പറുടെ പിശക്"
+	},
+	"error_tab_org": {
+		"message": "ഓര്‍ഗനൈസേഷന്‍ സ്ട്രിംഗ് അല്ലെങ്കില്‍ നിർവ്വചിക്കാത്തതായിരിക്കണം",
+		"description": "[error] തെറ്റ് വരുന്ന ഓര്‍ഗനൈസേഷന്‍ മൂല്യത്തോടെ Tab സൃഷ്ടിക്കാന്‍ ശ്രമിച്ചു"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "അപ്രതീക്ഷിത കീകളാണ് കണ്ടെത്തിയത്:",
+		"description": "[error] പിന്തുണയില്ലാത്ത ഗുണങ്ങളോടെയുള്ള Tab സൃഷ്ടിക്കാനുള്ള ശ്രമം"
+	},
+	"error_tab_url": {
+		"message": "URL ശൂന്യമല്ലാത്ത സ്ട്രിംഗ് ആയിരിക്കണം",
+		"description": "[error] URL ഇല്ലാതെ Tab സൃഷ്ടിക്കാന്‍ ശ്രമിച്ചു"
+	},
+	"error_tab_url_saved": {
+		"message": "ഈ URL ഉള്ള ഒരു Tab ഇതിനകം സംരക്ഷിച്ചിട്ടുണ്ട്!",
+		"description": "[പിശക്] ഉപയോക്താവ് ഇതിനകം ഇഷ്ടപ്പെട്ട ഒരു Tab സംരക്ഷിക്കാൻ ശ്രമിച്ചു"
+	},
+	"error_tabcont_initialize": {
+		"message": "ഇത് കൊണ്ടു ആരംഭിക്കാന്‍ കഴിയില്ല"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "അസാധുവായ Tab(കള്‍) കണ്ടെത്തി.\nആദ്യ സംഭവനം:",
+		"description": "[error] അസാധുവായ Tabs നല്‍കിയിട്ടുണ്ട്"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer ക്ലാസ് ഉപയോഗിക്കുന്നതിന് new TabContainer() ന് പകരം TabContainer.create() ഉപയോഗിക്കുക",
+		"description": "[പിശക്] TabContainer ക്ലാസ് എങ്ങനെ ഉപയോഗിക്കണമെന്ന് ഡെവലപ്പർക്ക് നിർദ്ദേശം നൽകുക"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService ക്ലാസ് ഉപയോഗിക്കുന്നതിന് new TranslationService() ന് പകരം TranslationService.create() ഉപയോഗിക്കുക",
+		"description": "[പിശക്] TranslationService ക്ലാസ് എങ്ങനെ ഉപയോഗിക്കണമെന്ന് ഡെവലപ്പർക്ക് നിർദ്ദേശം നൽകുക"
+	},
+	"error_translator_not_initialized": {
+		"message": "ട്രാൻസ്ലേറ്റർ ഇതുവരെ ആരംഭിച്ചിട്ടില്ല.",
+		"description": "[പിശക്] TranslationService തയ്യാറായിരുന്നില്ല"
+	},
+	"error_unknown_message": {
+		"message": "അറിയാത്ത സന്ദേശം ലഭിച്ചു",
+		"description": "കേൾവിക്കാരനിൽ നിന്ന് അറിയാത്ത സന്ദേശം ലഭിച്ചു"
+	},
+	"error_unknown_request": {
+		"message": "അജ്ഞാതമായ അഭ്യർത്ഥന.",
+		"description": "[പിശക്] തിരിച്ചറിയാൻ കഴിയാത്ത ഒരു സന്ദേശം ലഭിച്ചതിനു ശേഷമുള്ള സാധാരണ പിശക്"
+	},
+	"error_useless_remove": {
+		"message": "നീക്കം ചെയ്യാനാകില്ല:\nമുമ്പ് സംരക്ഷിക്കപ്പെട്ട പേജ് നീക്കാനാകില്ല",
+		"description": "[error] സംരക്ഷിക്കാത്ത പേജ് നീക്കം ചെയ്യാന്‍ ഉപയോക്താവ് ശ്രമിച്ചു"
+	},
+	"error_useless_save": {
+		"message": "സംരക്ഷിക്കാന്‍ കഴിയില്ല:\nഈ പേജ് ഇതിനകം സംരക്ഷിച്ചതാണ്!",
+		"description": "[error] ഇതിനകം സംരക്ഷിച്ച പേജ് വീണ്ടും സംരക്ഷിക്കാന്‍ ശ്രമിച്ചു"
+	},
+	"export": {
+		"message": "എക്സ്പോര്‍ട്ട് ചെയ്യുക",
+		"description": "[popup] എക്സ്പോര്‍ട്ട് ബട്ടണ്‍"
+	},
+	"export_title": {
+		"message": "എല്ലാ Tabs എക്സ്പോര്‍ട്ട് ചെയ്യുക",
+		"description": "[popup] എക്സ്പോര്‍ട്ട് ബട്ടണിന്റെ തലക്കെട്ട്"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning സെറ്റപ്പ് പേജിലെ ലഭ്യമായ സ്ഥലത്ത് കസ്റ്റം Tabs സൃഷ്ടിക്കുകയും പരിപാലിക്കുകയും ചെയ്യുക.",
+		"description": "[manifest] ഈ എക്‌സ്റ്റന്‍ഷന്റെ വിവരണം"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "ഈ എക്‌സ്റ്റന്‍ഷന്റെ പേര്"
+	},
+	"file": {
+		"message": "ഫയല്‍",
+		"description": "ഒന്ന് ഫയല്‍"
+	},
+	"files": {
+		"message": "ഫയലുകള്‍",
+		"description": "പല ഫയലുകള്‍"
+	},
+	"flows": {
+		"message": "പ്രവാഹങ്ങൾ",
+		"description": "[ഡീഫോൾട്ട്-tab] ഡീഫോൾട്ട് പ്രവാഹങ്ങളുടെ Tab ലേബൽ"
+	},
+	"general": {
+		"message": "സാധാരണ",
+		"description": "സാധാരണ സെറ്റിങ്ങുകൾ വിഭാഗത്തിന് ലേബൽ"
+	},
+	"help": {
+		"message": "സഹായം",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "പുതിയ Tab-കളെ Org Tab-കളായി അടയാളപ്പെടുത്തുന്നു, അതിനാൽ ആ പ്രത്യേക Salesforce Org-ൽ ലോഗിൻ ചെയ്യുമ്പോൾ മാത്രമേ അവ ദൃശ്യമാകൂ.",
+		"description": "[$opt_add_tabs_as_org] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "പുതുതായി പ്രിയപ്പെട്ടതാക്കിയ Tab-കൾ നിങ്ങളുടെ Tab പട്ടികയുടെ അവസാനം ചേർക്കുന്നതിനുപകരം, സെറ്റപ്പ് ബാറിലെ നിങ്ങളുടെ Tab പട്ടികയുടെ മുൻഭാഗത്തേക്ക് ചേർക്കുന്നു.",
+		"description": "[$opt_add_tabs_front] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "ഒരു Salesforce ഡൊമൈനിന് പുറത്തുവെച്ച് നിങ്ങൾ എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്താൽ, നിങ്ങളെ സ്വയമേവ Salesforce ലോഗിൻ പേജിലേക്ക് കൊണ്ടുപോകുന്നു.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "നിങ്ങൾ ഒരു Salesforce ഡൊമൈനിനുള്ളിൽ വെച്ച് എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുകയാണെങ്കിലും, അത് ഒരു സെറ്റപ്പ് പേജിൽ അല്ലെങ്കിൽ, നിങ്ങളെ സ്വയമേവ Salesforce സെറ്റപ്പ് പേജിലേക്ക് കൊണ്ടുപോകുന്നു.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "ഇത് പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, നിങ്ങൾ തിരഞ്ഞെടുക്കുന്നതിനെ ആശ്രയിച്ച്, നിങ്ങളുടെ Tab-കൾ ലേബൽ, URL അല്ലെങ്കിൽ Org പ്രകാരം അടുക്കിവെക്കും.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "സെറ്റപ്പിലെ സ്റ്റാൻഡേർഡ് നാവിഗേഷൻ മെനുവിന് (ഹോം / ഒബ്ജക്റ്റ് മാനേജർ) ശേഷം എന്നതിനുപകരം അതിനുമുമ്പായി നിങ്ങളുടെ സംരക്ഷിച്ച Tab-കളെ പിൻ ചെയ്യുന്നു.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "ഇത് പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, സംരക്ഷിച്ച ഓരോ Tab-ഉം പുതിയ ഒരു Tab-ൽ ബന്ധപ്പെട്ട പേജ് തുറക്കും.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "എക്സ്റ്റൻഷൻ അപ്‌ഡേറ്റുകൾക്ക് ശേഷം റിലീസ് നോട്ട് അറിയിപ്പുകൾ സ്വയമേവ പ്രദർശിപ്പിക്കുന്നത് തടയുന്നു.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "ആവർത്തിച്ചുള്ള അപ്‌ഡേറ്റ് ഓർമ്മപ്പെടുത്തൽ പോപ്പ്അപ്പുകൾ പ്രവർത്തനരഹിതമാക്കുകയും എക്സ്റ്റൻഷൻ UI ശുദ്ധമായി സൂക്ഷിക്കുകയും ചെയ്യുന്നു (നിങ്ങളുടെ ബ്രൗസറിന്റെ ക്രമീകരണങ്ങളിൽ നിന്ന് എക്സ്റ്റൻഷന്റെ സ്വയമേവയുള്ള അപ്‌ഡേറ്റുകൾ പ്രവർത്തനരഹിതമാക്കിയിട്ടുണ്ടെങ്കിൽ).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "നിങ്ങൾ ഒരു Salesforce ഡൊമൈനിന് പുറത്ത് എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുകയാണെങ്കിൽ, നിലവിലെ ബ്രൗസർ Tab-ൽ ലോഗിൻ പേജ് തുറക്കും.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "നിങ്ങൾ ഒരു Salesforce ഡൊമൈനിനുള്ളിൽ എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുകയാണെങ്കിൽ, ഒരു സെറ്റപ്പ് പേജിൽ അല്ലാത്തപക്ഷം, Salesforce സെറ്റപ്പ് പേജ് നിലവിലെ ബ്രൗസർ Tab-ൽ തുറക്കും.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "എക്സ്റ്റൻഷനു വേണ്ടി മാത്രം UI ഭാഷ സജ്ജമാക്കുക. എന്തെങ്കിലും വിവർത്തനം ചെയ്തിട്ടില്ലെങ്കിൽ, പകരം ഇംഗ്ലീഷ് പതിപ്പ് ഉപയോഗിക്കും.",
+		"description": "[$opt_pick_language] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_prevent_analytics": {
+		"message": "അടിസ്ഥാന ടെലിമെട്രി ശേഖരണം പ്രവർത്തനരഹിതമാക്കുന്നു. എക്സ്റ്റൻഷൻ അജ്ഞാത ഉപയോഗ മെട്രിക്കുകളിൽ ദൃശ്യമാകില്ല.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning നാവിഗേഷൻ API-യെ മറികടക്കുകയും മുഴുവൻ പേജും വീണ്ടും ലോഡ് ചെയ്യുന്നതിലൂടെ ലിങ്കുകൾ തുറക്കുകയും ചെയ്യുന്നു, ഇത് ചില org ക്രമീകരണങ്ങളിൽ വേഗത്തിലായിരിക്കും.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "ഒരു URL ഫ്രാഗ്‌മെന്റ് Salesforce റെക്കോർഡ്/ഒബ്ജക്റ്റ് ഐഡികളുടെ ഫോർമാറ്റുമായി പൊരുത്തപ്പെടുന്നുണ്ടോയെന്ന് പരിശോധിക്കുന്ന എക്സ്റ്റൻഷൻ പരിശോധന പ്രവർത്തനരഹിതമാക്കുന്നു (സംരക്ഷിച്ച Tab ഒരു Org Tab ആയി സ്വയമേവ സജ്ജീകരിക്കുന്നതിന് ഉപയോഗിക്കുന്നു).",
+		"description": "[$opt_skip_link_detection] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_tip_click_link": {
+		"message": "ഈ സജ്ജീകരണത്തിനായുള്ള ഡോക്യുമെന്റേഷനിലേക്ക് റീഡയറക്‌ട് ചെയ്യാൻ ക്ലിക്കുചെയ്യുക!",
+		"description": "[സജ്ജീകരണങ്ങൾ-സഹായം] ഒരു പ്രത്യേക സജ്ജീകരണത്തെക്കുറിച്ച് കൂടുതൽ വായിക്കാൻ ഉപയോക്താവിനെ അനുവദിക്കുന്നതിനുള്ള കോൾ ടു ആക്ഷൻ"
+	},
+	"import": {
+		"message": "ഇറക്കി വരിക്കുക",
+		"description": "[popup] ഇറക്കുമതി ബട്ടണ്‍"
+	},
+	"import_duplicate_description": {
+		"message": "പകര്‍ച്ച Tabs അവഗണിക്കും.<br />ഒരു URL ഉണ്ടെങ്കില്‍ രണ്ട് Tabs പകര്‍ച്ചയാണെന്ന് കരുതും.",
+		"description": "[import] ഇറക്കുമതി പ്രക്രിയയുടെ വിവരണം"
+	},
+	"import_invalid_file": {
+		"message": "അസാധുവായ ഫയല്‍ തരം.\nകേവലം JSON ഫയലുകള്‍ പിന്തുണയ്ക്കുന്നു.",
+		"description": "[error] ഇറക്കുമതിക്ക് ഉപയോഗിച്ച ഫയല്‍ JSON അല്ല"
+	},
+	"import_successful": {
+		"message": "യശಸ್ವിയായി ഇറക്കി വന്നു",
+		"description": "[import] ഇറക്കുമതി പൂർത്തിയായതായി, ഇറക്കുമതി ചെയ്ത റെക്കോര്‍ഡുകളുടെ എണ്ണം കാണിക്കും"
+	},
+	"import_tabs": {
+		"message": "Tabs ഇറക്കി വരിക്കുക",
+		"description": "[modal-title] ഇറക്കുമതി പ്രക്രിയയ്ക്കുള്ള"
+	},
+	"import_title": {
+		"message": "JSON ഫയലിൽ നിന്ന് $import_tabs",
+		"description": "[പോപ്പ്അപ്പ്] ഇറക്കുമതി ബട്ടണിലെ ശീർഷകം"
+	},
+	"insert_another": {
+		"message": "മറ്റ് ഒന്നും ചേര്‍ക്കുക",
+		"description": "[error-open-other-org-modal] ഒരേ ഓര്‍ഗിന് വീണ്ടും ചേര്‍ക്കുമ്പോള്‍ പ്രദര്‍ശിപ്പിക്കുന്ന സന്ദേശം"
+	},
+	"insert_another_org": {
+		"message": "ചേര്‍ത്ത ഓര്‍ഗൻ നിലവിലേയ്ക്ക് തന്നെ!\nദയവായി മറ്റൊന്നും ചേര്‍ക്കുക.",
+		"description": "[error-open-other-org-modal] ഒരേ ഓര്‍ഗിന് വീണ്ടും ചേര്‍ത്തപ്പൊഴുള്ള സന്ദേശം"
+	},
+	"insert_valid_org": {
+		"message": "ദയവായി ശരിയായ ഓര്‍ഗൻ ചേര്‍ക്കുക!",
+		"description": "[error-open-other-org-modal] തെറ്റായ URL ചേര്‍ത്തപ്പഴുള്ള സന്ദേശം"
+	},
+	"italic": {
+		"message": "ഇറ്റാലിക്",
+		"description": "ഇറ്റാലിക് ടെക്സ്റ്റ്‌ക്കായുള്ള ഫോണ്ട് ശൈലി ഓപ്‌ഷൻ"
+	},
+	"lightning_navigation": {
+		"message": "ലൈറ്റ്‌നിംഗ് നാവിഗേഷൻ",
+		"description": "സെയിൽസ്ഫോഴ്സിന്റെ കസ്റ്റം നാവിഗേഷൻ സാങ്കേതികവിദ്യ"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce-ലേക്ക് ലോഗിന്‍ ചെയ്യുക",
+		"description": "[notSalesforceSetup] Salesforce ലോഗിന്‍ പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "Update Tab മോഡലിനു വേണ്ടി പ്ലേസ്‌ഹോള്‍ഡര്‍"
+	},
+	"no_manifest_github": {
+		"message": "മാനിഫെസ്റ്റിൽ അസാധുവായ അല്ലെങ്കിൽ കാണാത്ത GitHub homepage_url",
+		"description": "മാനിഫെസ്റ്റിന്റെ homepage_url കീ GitHub ലിങ്ക് ഉപയോഗിക്കുന്നില്ല"
+	},
+	"no_match": {
+		"message": "ഏതെങ്കിലും പ്രവര്‍ത്തനവുമായി പൊരുത്തപ്പെടുന്നില്ല",
+		"description": "[error] Salesforce-ല്‍ ആവശ്യപ്പെട്ട പ്രവര്‍ത്തനവുമായി പൊരുത്തപ്പെടുന്നില്ല"
+	},
+	"nss_invalid_url": {
+		"message": "അസാധുവായ URL കണ്ടെത്തി.",
+		"description": "[Salesforce സജ്ജീകരണമല്ല] ഒരു അസാധുവായ URL"
+	},
+	"nss_not_setup_page": {
+		"message": "ഇതൊരു $salesforce_lightning സജ്ജീകരണ പേജ് അല്ല.",
+		"description": "[notSalesforceSetup] ഉപയോക്താവ് ഒരു Salesforce പേജിലല്ല."
+	},
+	"open_here": {
+		"message": "ഈ Tab-ൽ തുറക്കുക.",
+		"description": "[open-other-org-modal] ഉപയോക്താവിനെ ഒരേ ബ്രൗസർ Tab-ൽ തുറക്കാൻ അനുവദിക്കുന്ന റേഡിയോ ബട്ടൺ"
+	},
+	"open_new_tab": {
+		"message": "ഒരു പുതിയ Tab-ൽ തുറക്കുക.",
+		"description": "[open-other-org-modal] ഉപയോക്താവിനെ ഒരു പുതിയ ബ്രൗസർ Tab-ൽ തുറക്കാൻ അനുവദിക്കുന്ന റേഡിയോ ബട്ടൺ."
+	},
+	"open_settings": {
+		"message": "വിപുലീകരണ ക്രമീകരണങ്ങൾ തുറക്കുക",
+		"description": "[പോപ്പ്അപ്പ്] ക്രമീകരണ പേജിലേക്ക് റീഡയറക്‌ട് ചെയ്യാനുള്ള ബട്ടൺ"
+	},
+	"open_setup": {
+		"message": "സെറ്റപ്പ് തുറക്കുക",
+		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "പുതിയ Tab-കൾ Org Tab-കളായി ചേർക്കുക.",
+		"description": "[settings] എല്ലാ പുതിയ Tab-കളും Org-ന് അനുസരിച്ച് ചേർക്കാൻ ഉപയോക്താവിനെ അനുവദിക്കുക"
+	},
+	"opt_add_tabs_front": {
+		"message": "പുതിയ Tab-കൾ മുൻഭാഗത്ത് ചേർക്കുക.",
+		"description": "[settings] എല്ലാ പുതിയ Tab-കളും മുൻഭാഗത്ത് ചേർക്കാൻ ഉപയോക്താവിനെ അനുവദിക്കുക"
+	},
+	"opt_automatic_open_login": {
+		"message": "ഒരു Salesforce പേജിൽ അല്ലാത്തപ്പോൾ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ $salesforce_login പേജ് സ്വയം തുറക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഒരു റാൻഡം വെബ്‌സൈറ്റിൽ ആയിരിക്കുമ്പോൾ പോപ്പ്അപ്പ് തുറക്കുമ്പോൾ"
+	},
+	"opt_automatic_open_setup": {
+		"message": "ഒരു Salesforce പേജിൽ ആയിരിക്കുമ്പോൾ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ $salesforce_setup പേജ് സ്വയം തുറക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഒരു Salesforce വെബ്‌സൈറ്റിൽ ആയിരിക്കുമ്പോൾ പോപ്പ്അപ്പ് തുറക്കുമ്പോൾ"
+	},
+	"opt_confirm_save": {
+		"message": "ക്രമീകരണങ്ങൾ സംരക്ഷിച്ചു!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (സ്ഥിരസ്ഥിതിയും ഫാൾബാക്കും)",
+		"description": "വിപുലീകരണത്തിന്റെ സ്ഥിരസ്ഥിതി ഭാഷാ ഓപ്ഷൻ"
+	},
+	"opt_keep_sort": {
+		"message": "Tab-കൾ അടുക്കിവെക്കുക.",
+		"description": "[setting] ഉപയോക്താവിന് അവരുടെ Tab-കൾ അവയുടെ ഒരു കീ പ്രകാരം അടുക്കി നിലനിർത്താൻ അനുവദിക്കുക"
+	},
+	"opt_keep_tabs_left": {
+		"message": "ഫേവറിറ്റ് Tabs നെ Home‌യും Object Managerഉം ഡിപ്പാർട്ട്മെന്റിന്റെ ഇടതുവശത്ത് സൂക്ഷിക്കുക.",
+		"description": "നാവിഗേഷൻ ബാറിന്റെ ഇടതു വശത്ത് പ്രിയപ്പെട്ട Tabs പിനുചെയ്യുന്നതിനുള്ള ടോഗിൾ"
+	},
+	"opt_link_new_browser": {
+		"message": "ലിങ്കുകൾ എല്ലായ്പ്പോഴും പുതിയ ബ്രൗസർ ടാബിൽ തുറക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് പ്രിയപ്പെട്ട ടാബിൽ ക്ലിക് ചെയ്യുമ്പോൾ പുതിയ ബ്രൗസർ ടാബിൽ തുറക്കാൻ"
+	},
+	"opt_no_release_notes": {
+		"message": "അപ്പ്‌ഡേറ്റ് റിലീസ് നോട്ടുകൾ കാണിക്കരുത്.",
+		"description": "[സെറ്റിംഗ്] അപ്പ്‌ഡേറ്റ് ചെയ്തപ്പോൾ എക്സ്റ്റെൻഷൻ റിലീസ് നോട്ടുകൾ കാണിക്കുന്നത് തടയാൻ ഉപയോക്താവിന് അനുവദിക്കുന്നു"
+	},
+	"opt_no_update_notification": {
+		"message": "ലഭ്യമായ അപ്‌ഡേറ്റുകളെക്കുറിച്ച് മുന്നറിയിപ്പ് നൽകരുത്.",
+		"description": "[ക്രമീകരണം] പുതിയ റിലീസുകൾക്കായി തിരയുന്നതിൽ നിന്ന് വിപുലീകരണത്തെ തടയാൻ ഉപയോക്താവിനെ അനുവദിക്കുക"
+	},
+	"opt_open_login_same_tab": {
+		"message": "പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ എല്ലായ്പ്പോഴും $salesforce_login പേജ് ഒരേ Tab-ൽ തുറക്കുക.",
+		"description": "[ക്രമീകരണം]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ എല്ലായ്പ്പോഴും $salesforce_setup പേജ് ഒരേ Tab-ൽ തുറക്കുക.",
+		"description": "[ക്രമീകരണം]"
+	},
+	"opt_pick_language": {
+		"message": "വിപുലീകരണ ഭാഷ തിരഞ്ഞെടുക്കുക",
+		"description": "[സജ്ജീകരണം] ഉപയോക്താവിനോട് ഇഷ്ടപ്പെട്ട ഭാഷ തിരഞ്ഞെടുക്കാൻ ആവശ്യപ്പെടുന്ന ലേബൽ"
+	},
+	"opt_pick_sort": {
+		"message": "ഏത് ഫീൽഡ് പ്രകാരം Tab-കൾ അടുക്കിവെക്കണമെന്ന് തിരഞ്ഞെടുക്കുക",
+		"description": "[setting] ഇപ്പോൾ ഉപയോക്താവിന് ഏത് കീ പ്രകാരം Tab-കൾ അടുക്കിവെക്കണമെന്ന് തിരഞ്ഞെടുക്കാം"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics ഉപയോഗം തടയുക (ഉപയോക്തൃ എണ്ണത്തിൽ കണക്കാക്കപ്പെടില്ല).",
+		"description": "[സെറ്റിംഗ്] ഉപയോക്താവിന് അനാമക വിശകലനങ്ങൾ അയക്കുന്നത് തടയാൻ അനുവാദം നൽകുന്നു"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightning നാവിഗേഷൻ ഉപയോഗിക്കുന്നത് തടയുക (ടിക്ക് ചെയ്യുമ്പോൾ വേഗത്തിൽ ലോഡ് ചെയ്യും).",
+		"description": "[setting] ഫീച്ചറിന്റെ വിശദീകരണത്തോടുകൂടി Lightning നാവിഗേഷൻ അനുവദിക്കരുത്"
+	},
+	"opt_same_tab_popup": {
+		"message": "പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ ഒരേ ടാബില്‍ പേജ്.",
+		"description": "[ക്രമീകരണം] പുതിയ ബ്രൗസർ ടാബ് തുറക്കാതെ നിർത്താൻ"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce ഭാഷ പിന്തുടരുക (Salesforce കുക്കികൾ വായിക്കുന്നു)",
+		"description": "Salesforce-ന്റെ ഭാഷാ ക്രമീകരണം ഉപയോഗിക്കാനുള്ള ഓപ്ഷൻ. ഈ ഓപ്ഷൻ ഉപയോഗിക്കുന്നതിന്, ഉപയോക്താക്കൾ വിപുലീകരണത്തിന് Salesforce കുക്കികൾ വായിക്കാൻ അനുമതി നൽകണം."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ഐഡി സ്വയenchുന്ന പരിശോധന ഒഴിവാക്കുക.",
+		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഫേവറിറ്റ് ടാബ് ചേർക്കുമ്പോൾ ലിങ്കിൽ ഐഡി ഉണ്ടോയെന്ന് പരിശോധിക്കാതെ വിടാം"
+	},
+	"or_drop": {
+		"message": "അല്ലെങ്കിൽ $drop",
+		"description": "[ഇറക്കുമതി ചെയ്യുക] ഉപയോക്താവിനെ അവരുടെ മൗസ് ഉപയോഗിച്ച് ഫയലുകൾ നീക്കാനും അവ റിലീസ് ചെയ്യാനും അനുവദിക്കുക"
+	},
+	"org_link": {
+		"message": "ഓര്‍ഗന്‍ ലിങ്ക്",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "മറ്റ് ഓര്‍ഗന്റെ വിവരങ്ങള്‍",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "other-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "സംരക്ഷിച്ച Tabs ഒട്ടും മാറ്റുക.",
+		"description": "[label] ഇറക്കുമതി പ്രക്രിയയില്‍ സംരക്ഷിച്ച Tabs മായ്ക്കാന്‍"
+	},
+	"preserve_org_tabs": {
+		"message": "മറ്റ് ഓര്‍ഗനൈസേഷനിലെ Tabs നിലനിര്‍ത്തുക.",
+		"description": "[label] ഇറക്കുമതി പ്രക്രിയയില്‍ ഓര്‍ഗ-വിശേഷ Tabs നിലനിര്‍ത്താന്‍"
+	},
+	"remove_tab": {
+		"message": "Tab നീക്കുക",
+		"description": "[alt] ചിത്രങ്ങള്‍ പ്രവര്‍ത്തിക്കാതെ പോയാല്‍ ബദല്‍ ടെക്സ്റ്റ്"
+	},
+	"req_downloads_open_popup": {
+		"message": "നിങ്ങളുടെ ബ്രൗസറിന്റെ വിപുലീകരണ മെനുവിൽ നിന്ന് വിപുലീകരണ പോപ്പ്അപ്പ് തുറക്കുക.",
+		"description": "[ടോസ്റ്റ്] തുടരാൻ വിപുലീകരണ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യാൻ ഉപയോക്താവിനോട് ആവശ്യപ്പെടുക"
+	},
+	"req_downloads_perm_header": {
+		"message": "ആവശ്യപ്പെട്ട കയറ്റുമതി ആരംഭിക്കുന്നതിന്\nദയവായി ഡൗൺലോഡ് അനുമതി പ്രവർത്തനക്ഷമമാക്കുക.",
+		"description": "[അനുമതി_ചോദിക്കുക] ഡൗൺലോഡ് അനുമതി പ്രവർത്തനക്ഷമമാക്കാനുള്ള ആഹ്വാനം"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "ഈ പ്രവർത്തനം ഒരിക്കൽ മാത്രം അഭ്യർത്ഥിക്കും.",
+		"description": "[അനുമതി_ചോദിക്കുക] ഡൗൺലോഡ് അനുമതി പ്രവർത്തനക്ഷമമാക്കുന്നതിനുള്ള വിവരണം"
+	},
+	"req_permissions_dont_ask": {
+		"message": "മറ്റു ചോദിക്കരുത്.",
+		"description": "[req_permission] ഉപയോക്താവ് സ്ഥിരമായി അനുമതി ചോദിക്കാതെ ഇരിക്കാൻ"
+	},
+	"req_permissions_header": {
+		"message": "$salesforce_setup പേജുകൾ സ്വയം ആക്‌സസ് ചെയ്യാൻ ഞങ്ങളെ അനുവദിക്കുക.",
+		"description": "[req_permission] അനുമതികൾ അഭ്യർത്ഥിക്കുന്നതിനുള്ള പേജിന്റെ തലക്കെട്ട്"
+	},
+	"req_permissions_paragraph": {
+		"message": "നിങ്ങൾക്ക് വേണമെങ്കിൽ, നിങ്ങൾ ഒരു $salesforce_setup പേജിലേക്ക് നാവിഗേറ്റ് ചെയ്യുമ്പോൾ തന്നെ\nഓരോ തവണയും ഈ വിപുലീകരണത്തിൽ ക്ലിക്ക് ചെയ്യാതെ തന്നെ\nനിങ്ങളുടെ പ്രിയപ്പെട്ട Tabs ദൃശ്യമാകും.",
+		"description": "[req_permission] അനുമതികൾ എന്തിനാണ് അഭ്യർത്ഥിക്കുന്നതെന്ന് വിശദീകരിക്കുന്ന വാചകം"
+	},
+	"required": {
+		"message": "അനിവാര്യമാണ്",
+		"description": "[input] ആവശ്യമായ ഫീല്‍ഡ് അടയാളപ്പെടുത്തുന്നു"
+	},
+	"required_info": {
+		"message": "= ആവശ്യമായ വിവരം",
+		"description": "[modal] ചില വിവരങ്ങള്‍ ആവശ്യമാണ് എന്ന് ഉപയോക്താവിന് പറയുകയും ചെയ്യുന്നു"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning പ്ലാറ്റ്‌ഫോം"
+	},
+	"salesforce_login": {
+		"message": "Salesforce ലോഗിൻ",
+		"description": "Salesforce ലോഗിൻ പേജ് (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce ക്രമീകരണങ്ങൾ",
+		"description": "ഏതെങ്കിലും Salesforce ക്രമീകരണ പേജ് (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "സേവ് ചെയ്യുക",
+		"description": "മാറ്റങ്ങൾ പ്രയോഗിച്ച് മെമ്മറിയിൽ സൂക്ഷിക്കുക"
+	},
+	"save_tab": {
+		"message": "Tab എന്ന നിലയില്‍ സംരക്ഷിക്കുക",
+		"description": "[alt] ചിത്രങ്ങള്‍ പ്രവര്‍ത്തിക്കാത്തപ്പോള്‍ ബദല്‍ ടെക്സ്റ്റ്"
+	},
+	"send_tip": {
+		"message": "ഞങ്ങൾക്ക് ഒരു നുറുങ്ങ് അയക്കുക ❤️",
+		"description": "[popup] ഒരു നുറുങ്ങ് അയക്കാൻ ആവശ്യപ്പെടുന്നതിനുള്ള svg-ന്റെ തലക്കെട്ട്"
+	},
+	"set_gen_preview": {
+		"message": "Tab മുൻനിര ദൃശ്യം",
+		"description": " പൊതുവായ Tab രൂപം മുന്‍നിരയിൽ കാണാനുള്ള ലേബൽ"
+	},
+	"set_gen_styler": {
+		"message": "Tab സ്റ്റൈലർ",
+		"description": " പൊതുവായ Tab ശൈലി ക്രമീകരിക്കാൻ ലേബൽ"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "സമൂഹീകൃത ഓവർആൾ കോൺഫിഗറേഷൻ ഓപ്‌ഷനുകൾക്കുള്ള വിഭാഗം ശീർഷകം"
+	},
+	"set_move_available": {
+		"message": "ലഭ്യത്തിലേക്ക് മാറ്റുക",
+		"description": "തിരഞ്ഞെടുക്കപ്പെട്ട आइറ്റങ്ങൾ Availableലേക്ക് മടക്കി അയക്കാനുള്ള ബട്ടൺ ശീർഷകം"
+	},
+	"set_move_chosen": {
+		"message": "തിരഞ്ഞെടുക്കപ്പെട്ടതിലേക്ക് മാറ്റുക",
+		"description": "തിരഞ്ഞെടുക്കപ്പെട്ട आइറ്റങ്ങൾ Chosenലേക്ക് അയക്കാനുള്ള ബട്ടൺ ശീർഷകം"
+	},
+	"set_org_preview": {
+		"message": "Org മുൻനിര ദൃശ്യം",
+		"description": "വര്‍ഗ്ഗംനിര്‍ദ്ദിഷ്ട Tab രൂപം മുന്‍നിരയില്‍ കാണാനുള്ള ലേബൽ"
+	},
+	"set_org_styler": {
+		"message": "Org സ്റ്റൈലർ",
+		"description": "വർഗ്ഗംനിര്‍ദ്ദിഷ്ട Tab ശൈലി ക്രമീകരിക്കാൻ ലേബൽ"
+	},
+	"set_tab_background_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ജനറൽ Tabs-നുള്ള പശ്ചാത്തല നിറം നൽകുക.",
+		"description": "സജീവ ജനറൽ Tabs-നായി പശ്ചാത്തല നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_background_label": {
+		"message": "നിങ്ങളുടെ ഓർഗ് Tabs-നുള്ള പശ്ചാത്തല നിറം നൽകുക.",
+		"description": "ഓർഗ്-നിർദിഷ്ട Tabs-നായി പശ്ചാത്തല നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ഓർഗ് Tabs-നുള്ള ബോർഡർ നിറം നൽകുക.",
+		"description": "സജീവ ഓർഗ്-നിർദിഷ്ട Tabs-നായി ബോർഡർ നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_border_color_label": {
+		"message": "നിങ്ങളുടെ ജനറൽ Tabs-നുള്ള ബോർഡർ നിറം നൽകുക.",
+		"description": "ജനറൽ Tabs-നായി ബോർഡർ നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_color_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ജനറൽ Tabs-നുള്ള ടെക്സ്റ്റ് നിറം നൽകുക.",
+		"description": "സജീവ ജനറൽ Tabs-നായി ടെക്സ്റ്റ് നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_color_label": {
+		"message": "നിങ്ങളുടെ ഓർഗ് Tabs-നുള്ള ടെക്സ്റ്റ് നിറം നൽകുക.",
+		"description": "ഓർഗ്-നിർദിഷ്ട Tabs-നായി ടെക്സ്റ്റ് നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ഓർഗ് Tabs-നുള്ള ഒരു അല്ലെങ്കിൽ കൂടുതൽ അലങ്കാര ശൈലികൾ തിരഞ്ഞെടുക്കുക.",
+		"description": "സജീവ ഓർഗ്-നിർദിഷ്ട Tabs-നായി അലങ്കാര ശൈലികൾ തിരഞ്ഞെടുക്കാൻ ഉള്ള നിർദ്ദേശം"
+	},
+	"set_tab_decoration_label": {
+		"message": "നിങ്ങളുടെ ജനറൽ Tabs-നുള്ള ഒരു അല്ലെങ്കിൽ കൂടുതൽ അലങ്കാര ശൈലികൾ തിരഞ്ഞെടുക്കുക.",
+		"description": "ജനറൽ Tabs-നായി അലങ്കാര ശൈലികൾ തിരഞ്ഞെടുക്കാനുള്ള നിർദ്ദേശം"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ജനറൽ Tabs-നുള്ള ഹോവർ പശ്ചാത്തല നിറം നൽകുക.",
+		"description": "സജീവ ജനറൽ Tabs-നായി ഹോവർ പശ്ചാത്തല നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_hover_background_label": {
+		"message": "നിങ്ങളുടെ ഓർഗ് Tabs-നുള്ള ഹോവർ പശ്ചാത്തല നിറം നൽകുക.",
+		"description": "ഓർഗ്-നിർദിഷ്ട Tabs-നായി ഹോവർ പശ്ചാത്തല നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ഓർഗ് Tabs-നുള്ള ഷാഡോ നിറം നൽകുക.",
+		"description": "സജീവ ഓർഗ്-നിർദിഷ്ട Tabs-നായി ഷാഡോ നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_shadow_label": {
+		"message": "നിങ്ങളുടെ ജനറൽ Tabs-നുള്ള ഷാഡോ നിറം നൽകുക.",
+		"description": "ജനറൽ Tabs-നായി ഷാഡോ നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_tab_top_active_label": {
+		"message": "നിങ്ങളുടെ സജീവ ജനറൽ Tabs-നുള്ള ടോപ്പ് ബാർ നിറം നൽകുക.",
+		"description": "സജീവ جنرل Tabs-നായി ടോപ്പ് ബാർ നിറം ക്രമീകരിക്കാൻ ഉള്ള ലേബൽ"
+	},
+	"set_toggle_preview": {
+		"message": "സജീവ അവസ്ഥ ടോക്കിൽ ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക.",
+		"description": "സജീവ അവസ്ഥ ടോഗിൾ നിയന്ത്രണത്തിന് ടൂൾടിപ്പ്"
+	},
+	"settings": {
+		"message": "സെറ്റിംഗ്സ്",
+		"description": "സെറ്റിംഗ്സ് മെനുവിന് ലേബൽ"
+	},
+	"setup_page": {
+		"message": "സെറ്റപ്പ് പേജ്",
+		"description": "[notSalesforceSetup] Salesforce ക്രമീകരണങ്ങള്‍ മാറ്റാനുള്ള പേജ്"
+	},
+	"skip": {
+		"message": "വെട്ടിക്കളയുക",
+		"description": "[req_permission] അനുമതി അനുവദിക്കാതെ പോകുന്ന ബട്ടൺ"
+	},
+	"successfully_imported": {
+		"message": "യശസ്വിയായി ഇറക്കി വന്നു",
+		"description": "[toast] ഒരു പുറത്തുഫയലില്‍ നിന്നും Tabs കൂട്ടിച്ചേര്‍ത്തത്"
+	},
+	"tab_explain": {
+		"message": "പ്രതിയൊരുത്തിലും 'label' ഉം 'url' ഉം സ്ട്രിങ്ങ് ആയിരിക്കണം. കൂടാതെ, ഓരോ ഐറ്റത്തിനും 'org' എന്ന സ്ട്രിംഗ് ഉണ്ടാകാം.",
+		"description": "[error] Tab എങ്ങനെ ഘടിപ്പിക്കണമെന്ന് വിശദീകരിക്കുന്നു"
+	},
+	"tab_information": {
+		"message": "Tab വിവരങ്ങള്‍",
+		"description": "Update Tab മോഡലിന്റെ തലക്കെട്ട്"
+	},
+	"tab_label": {
+		"message": "Tab ലേബല്‍",
+		"description": "Tab-ന്റെ ലേബല്‍, അതിന്റെ പേര്"
+	},
+	"tab_org": {
+		"message": "Tab ഓര്‍ഗന്‍",
+		"description": "ഏതെങ്കിലും Salesforce ഓര്‍ഗനൈസേഷനില്‍ മാത്രം ഉപയോഗിക്കുന്ന Tab-ന്റെ ഓര്‍ഗന്‍"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab കാണിക്കുന്ന URL"
+	},
+	"table_delete": {
+		"message": "Tab ഡിലീറ്റ് ചെയ്യുക",
+		"description": "[popup] ഡിലീറ്റ് ബട്ടണ്‍ ഉള്ള കോളത്തിനുള്ള സഹായ ടെക്സ്റ്റ്"
+	},
+	"table_org": {
+		"message": "ഓര്‍ഗന്‍ Tab ആണോ?",
+		"description": "[popup] ഓര്‍ഗന്‍ checkbox ഉള്ള കോളത്തിനുള്ള സഹായ ടെക്സ്റ്റ്"
+	},
+	"table_row_label": {
+		"message": "ഈ URL-ന് ലേബല്‍ നല്‍കുക",
+		"description": "[popup] Tab-ന്റെ പേര് നല്‍കാനുള്ള ഇന്‍പുട്ട് ഫീല്‍ഡ്"
+	},
+	"table_row_org": {
+		"message": "ഈ Tab പ്രധാനം ഈ ഓര്‍ഗനായി ലഭ്യമാക്കാന്‍ ക്ലിക്ക് ചെയ്യുക.",
+		"description": "[popup] Tab-നെ ഓര്‍ഗ-വിശേഷമാക്കി മാറ്റുന്ന checkbox"
+	},
+	"table_row_org_name": {
+		"message": "ഈ Tab ലഭ്യമാകുന്ന ഓര്‍ഗന്‍",
+		"description": "[popup] ഓര്‍ഗന്റെ പേര് നല്‍കാനുള്ള ഇന്‍പുട്ട് ഫീല്‍ഡ്"
+	},
+	"table_row_url": {
+		"message": "നിങ്ങള്‍ തിരിച്ചു പോകേണ്ട സബ്_URL എന്‍ട്രി ചെയ്യുക.",
+		"description": "[popup] Tab-ന്റെ URL എന്‍ട്രി ചെയ്യാനുള്ള ഇന്‍പുട്ട് ഫീല്‍ഡ്"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "ഉപയോക്താവിന്റെ ഇഷ്ട ലിങ്കുകള്‍"
+	},
+	"tabs_saved": {
+		"message": "Tabs സംരക്ഷിച്ചു.",
+		"description": "[toast] Tabs വിജയകരമായി സംഗ്രഹിച്ചു"
+	},
+	"theme_dark": {
+		"message": "ഡാര്‍ക്ക് തീമിലേക്ക് മാറ്റുക",
+		"description": "[popup] തീം മാറ്റാന്‍ ചന്ദ്രന്റെ ഇമേജ് ഉള്ള തലക്കെട്ട്"
+	},
+	"theme_light": {
+		"message": "ലൈറ്റ് തീമിലേക്ക് മാറ്റുക",
+		"description": "[popup] തീം മാറ്റാന്‍ സൂര്യന്റെ ഇമേജ് ഉള്ള തലക്കെട്ട്"
+	},
+	"underline": {
+		"message": "അടിവര രേഖ",
+		"description": "Tab ടെക്സ്റ്റിന്റെ താഴെയുള്ള അടിവര രേഖയ്ക്ക് അലങ്കാര ശൈലി ഓപ്‌ഷൻ"
+	},
+	"underline_wavy": {
+		"message": "തരംഗാകാര അണ്ടർലൈൻ",
+		"description": "Tab ടെക്സ്റ്റിന്റെ താഴെ തരംഗാകാര അടിവര രേഖ അനുബന്ധിക്കാൻ അലങ്കാര ശൈലി ഓപ്‌ഷൻ"
+	},
+	"update_available": {
+		"message": "അപ്ഡേറ്റ് ലഭ്യമാണ്",
+		"description": "എക്സ്റ്റൻഷന് പുതിയ അപ്ഡേറ്റ് ലഭ്യമാണ്"
+	},
+	"upload": {
+		"message": "അപ്പ്‌ലോഡ് ചെയ്യുക",
+		"description": "[import] ഉപയോക്താവ് ഫയലുകള്‍ ബ്രൗസ് ചെയ്ത് തിരഞ്ഞെടുക്കാന്‍"
+	},
+	"users": {
+		"message": "ഉപയോക്താക്കള്‍",
+		"description": "ManageUsers/home-ുമായി ബന്ധപ്പെട്ട പേജിന്റെ പേര്"
+	},
+	"where_to": {
+		"message": "എവിടേക്ക്?",
+		"description": "[open-other-org-modal] മോഡലിനുള്ള ബാക്കപ്പിലുള്ള തലക്കെട്ട്"
+	},
+	"write_review": {
+		"message": "ഒരു അവലോകനം എഴുതുക!",
+		"description": "[popup] ഒരു അവലോകനം എഴുതാൻ ആവശ്യപ്പെടുന്നതിനുള്ള svg-ന്റെ തലക്കെട്ട്"
+	}
+}

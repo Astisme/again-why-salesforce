@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Luba",
+		"description": "[loa_taotlus] nupp lubade andmiseks"
+	},
+	"ascending": {
+		"message": "Kasvav (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Saadaval",
+		"description": "Jaotise pealkiri elementidele, mida saab lisada"
+	},
+	"bold": {
+		"message": "Paks",
+		"description": "Fondi stiili valik paksu teksti jaoks"
+	},
+	"cancel": {
+		"message": "Tühista",
+		"description": "nuppude pealkiri või textContent, mis takistavad praeguse toimingu täitmist"
+	},
+	"cancel_close": {
+		"message": "Tühista ja sulge",
+		"description": "modaalide sulgemisnupu pealkiri või textContent"
+	},
+	"chosen": {
+		"message": "Valitud",
+		"description": "Jaotise pealkiri elementidele, mis on valitud"
+	},
+	"cmd_export_all": {
+		"message": "Kuva dialoog kõigi salvestatud Tabside eksportimiseks",
+		"description": "[command description] kasutaja soovib eksportida kõiki Tabse"
+	},
+	"cmd_import": {
+		"message": "Kuva dialoog uute Tabside importimiseks",
+		"description": "[command description] kasutaja soovib importida uusi Tabse"
+	},
+	"cmd_open_other_org": {
+		"message": "Kuva dialoog praeguse lehe avamiseks teises Org-is",
+		"description": "[command description] kasutaja soovib avada praeguse lehe teises Org-is"
+	},
+	"cmd_remove_tab": {
+		"message": "Eemalda praegune leht Tabside loendist (kui salvestatud)",
+		"description": "[command description] kasutaja soovib eemaldada praeguse lehe"
+	},
+	"cmd_save_as_tab": {
+		"message": "Salvesta praegune leht Tabside loendisse (kui pole salvestatud)",
+		"description": "[command description] kasutaja soovib salvestada praeguse lehe"
+	},
+	"cmd_toggle_org": {
+		"message": "Kuva dialoog Org väärtuse vahetamiseks praegusel lehel (kui salvestatud)",
+		"description": "[command description] kasutaja soovib vahetada Org väärtust praegusel lehel"
+	},
+	"cmd_update_tab": {
+		"message": "Kuva dialoog praeguse lehe värskendamiseks (kui salvestatud)",
+		"description": "[command description] kasutaja soovib värskendada praegust lehte"
+	},
+	"confirm_another_org": {
+		"message": "Kinnita selle lingi avamine.",
+		"description": "[ava_teine_org_modaal] küsi kasutajalt kinnitust konstrueeritud lingi avamiseks."
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label uus versioon on nüüd saadaval!",
+		"description": "kuulajalt on saadud tundmatu teade"
+	},
+	"continue": {
+		"message": "Jätka",
+		"description": "nuppude textContent, mis lubavad praeguse toimingu täita"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Kõik üldised Tabid",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Eemalda kõik Tabid",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Kõik nähtavad Tabid",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Ekspordi Tabs",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_move": {
+		"message": "🧭 Liiguta Tab",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Tee esimeseks",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Tee viimaseks",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Liiguta vasakule",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Liiguta paremale",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Ava teises Org'is",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_remove": {
+		"message": "💥 Eemalda Tab(id)",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs vasakul",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Muud Tabs",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs paremal",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ See Tab",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Lähtesta vaikimisi Tabid",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Seadete menüü silt"
+	},
+	"cxm_sort": {
+		"message": "🎯 Sorteeri Tabs",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs automaatselt sortida (vanemmenüü)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 sildi järgi",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs sildi järgi sortida"
+	},
+	"cxm_sort_org": {
+		"message": "👽 organisatsiooni järgi",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs organisatsiooni järgi sortida"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL-i järgi",
+		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs URL-i järgi sortida"
+	},
+	"cxm_update": {
+		"message": "✏️ Uuenda Tab",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Lülita Org",
+		"description": "[kontekstimenüü]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Muud uuendused",
+		"description": "[kontekstimenüü]"
+	},
+	"delete": {
+		"message": "Kustuta",
+		"description": "[hüpikaken] kustuta rida"
+	},
+	"delete_all": {
+		"message": "$delete kõik Tabs",
+		"description": "[hüpikaken] prügikasti pealkiri kõigi Tabs tühjendamiseks"
+	},
+	"descending": {
+		"message": "Kahanev (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] lubab kasutajal lohistada oma faile määratud alale"
+	},
+	"enable": {
+		"message": "Luba",
+		"description": "[nõua_luba] nupp lubade lubamiseks"
+	},
+	"error_adding_tab": {
+		"message": "Viga Tabsi lisamisel.",
+		"description": "[error] Üldine viga Tabsi lisamisel"
+	},
+	"error_check_update": {
+		"message": "Viga värskenduste kontrollimisel",
+		"description": "[viga] üldine viga laienduse värskenduste kontrollimisel"
+	},
+	"error_close_other_modal": {
+		"message": "Palun sulgege esmalt teine modaalaken!",
+		"description": "[teavitus] Kasutaja üritas avada rohkem kui 1 modaalakent"
+	},
+	"error_cxm_check": {
+		"message": "Viga menüüelementide kontrollimisel",
+		"description": "[viga] kontekstimenüü elemente ei leitud"
+	},
+	"error_cxm_create": {
+		"message": "Viga menüüelementide loomisel",
+		"description": "[viga] kontekstimenüü elemente ei saanud lähtestada"
+	},
+	"error_cxm_remove": {
+		"message": "Viga menüüelementide eemaldamisel",
+		"description": "[viga] kontekstimenüü elemente ei saanud eemaldada"
+	},
+	"error_duplicate_tab": {
+		"message": "See Tab on juba olemas",
+		"description": "[viga] Tab on dubleeritud"
+	},
+	"error_expand_url": {
+		"message": "Tühja URL-i ei saa laiendada!",
+		"description": "[viga] laiendatavat URL-i ei edastatud"
+	},
+	"error_expand_url_no_base": {
+		"message": "URL-i ei saa laiendada ilma selle hostita!",
+		"description": "[viga] laiendamiseks kasutatud baas-URL-i ei edastatud"
+	},
+	"error_extract_empty_url": {
+		"message": "Org nime ei saa tühjast URL-ist eraldada!",
+		"description": "[viga] URL-i, millest Org nimi eraldada, ei edastatud"
+	},
+	"error_failed_sync": {
+		"message": "Sünkroonimine ebaõnnestus.",
+		"description": "[error] Üldine viga Tabside kasutajaga sünkroonimisel"
+	},
+	"error_failed_to_fetch": {
+		"message": "Väliste ressursside hankimine nurjus",
+		"description": "[viga] Kõne välisele veebisaidile ei õnnestunud"
+	},
+	"error_get_with_no_org": {
+		"message": "Tabs ei saa hankida, kui Org pole määratud.",
+		"description": "[viga] üritati otsida Tabs Org järgi ilma Org teavet saatmata"
+	},
+	"error_import": {
+		"message": "Viga importimisel:\n",
+		"description": "[viga] importimisprotsessi käigus ilmnes viga"
+	},
+	"error_invalid_key": {
+		"message": "Funktsioonile edastatud key-parameeter on kehtetu",
+		"description": "[viga] arendaja proovis funktsiooni kutsuda kehtetu parameetriga"
+	},
+	"error_invalid_request": {
+		"message": "Kehtetu päring.",
+		"description": "[error] Üldine viga pärast valesti vormindatud sõnumi vastuvõttu"
+	},
+	"error_invalid_tab": {
+		"message": "Kehtetu Tab",
+		"description": "[viga] Tab ei kehti"
+	},
+	"error_link_with_id": {
+		"message": "See leht ei saa eksisteerida teises Org'is, kuna see sisaldab ID-d!",
+		"description": "[ava_teine_org_modaal] hoiatus kasutajale, et link ei pruugi teises Org'is eksisteerida"
+	},
+	"error_many_matching_tab": {
+		"message": "Leiti rohkem kui 1 sobiv Tab.",
+		"description": "[viga] hangiti palju Tabs'e"
+	},
+	"error_many_tabs_found": {
+		"message": "Leiti rohkem kui üks Tab.",
+		"description": "[error] Tagastati mitu Tabsi"
+	},
+	"error_minify_url": {
+		"message": "Tühja URL-i ei saa minimeerida!",
+		"description": "[viga] minimeeritavat URL-i ei edastatud"
+	},
+	"error_missing_favourite_id": {
+		"message": "Lemmikpilti ei saa hankida ilma ID-ta",
+		"description": "[viga] lemmik-ID-d ei edastatud"
+	},
+	"error_missing_key": {
+		"message": "Võtit ei leitud kuskilt",
+		"description": "[viga] failidest ei leitud tõlget"
+	},
+	"error_no_array": {
+		"message": "Edastati kehtetu massiiv või massiivi ei edastatud",
+		"description": "[viga] ei saanud kehtivat massiivi"
+	},
+	"error_no_browser_tab": {
+		"message": "Praegust brauseri vahekaarti ei leitud.",
+		"description": "[viga] taustaleht ei suutnud luua aktiivset brauseri vahekaarti"
+	},
+	"error_no_callback": {
+		"message": "Palun esitage tagasihelistamisfunktsioon (callback)",
+		"description": "[viga] meetodi lõpus kutsutavat funktsiooni ei edastatud"
+	},
+	"error_no_cookies": {
+		"message": "Sobivaid küpsiseid ei leitud",
+		"description": "[viga] Salesforce'i küpsiseid ei tagastatud"
+	},
+	"error_no_data": {
+		"message": "Tab ei saa tuvastada ilma andmeteta.",
+		"description": "[viga] üritati hankida Tab ilma andmeid saatmata"
+	},
+	"error_no_headers": {
+		"message": "Päiseid ei leitud.",
+		"description": "[viga] Laiendus ei leidnud kohta, kuhu lemmiknupp paigutada"
+	},
+	"error_no_matching_tab": {
+		"message": "Sobivaid Tabs ei leitud.",
+		"description": "[viga] ühtegi Tabs ei hangitud"
+	},
+	"error_no_message": {
+		"message": "Saatmiseks mõeldud sõnumit ei määratud.",
+		"description": "[viga] koodi teistele osadele saatmiseks mõeldud sõnumit ei leitud"
+	},
+	"error_no_object": {
+		"message": "Kontrollitavat objekti pole!",
+		"description": "[viga] objekti ei edastatud"
+	},
+	"error_no_setup_tab": {
+		"message": "Seadistuse (Setup) vahekaarti ei leitud.",
+		"description": "[viga] Laiendus ei leidnud kohta, kuhu lemmik Tabs paigutada."
+	},
+	"error_no_url": {
+		"message": "Kontrollitavat URL-i pole!",
+		"description": "[viga] kontrollitavat URL-i ei edastatud"
+	},
+	"error_not_initialized": {
+		"message": "Pole veel initsialiseeritud.",
+		"description": "[error] Üldine viga muutuja ettevalmistatumisel"
+	},
+	"error_processing_tabs": {
+		"message": "Viga Tabside töötlemisel.",
+		"description": "[error] Üldine viga Tabside töötlemisel"
+	},
+	"error_redirect": {
+		"message": "Ümbersuunamine ebaõnnestus. Palun värskenda lehte.",
+		"description": "[error] Üldine viga lehe ümbersuunamisel"
+	},
+	"error_remove_not_favourite": {
+		"message": "Mitte-lemmikut Tab ei saa eemaldada!",
+		"description": "[viga] kasutaja üritas eemaldada Tab, mida polnud veel salvestatud"
+	},
+	"error_removing_all_tabs": {
+		"message": "Viga kõigi Tabside eemaldamisel.",
+		"description": "[error] Üldine viga kõigi Tabside eemaldamisel"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Viga üldiste Tabside eemaldamisel.",
+		"description": "[error] Üldine viga üldiste Tabside eemaldamisel"
+	},
+	"error_removing_other_tabs": {
+		"message": "Viga teiste Tabside eemaldamisel.",
+		"description": "[error] Üldine viga teiste Tabside eemaldamisel"
+	},
+	"error_removing_tab": {
+		"message": "Viga Tabsi eemaldamisel.",
+		"description": "[error] Üldine viga Tabsi eemaldamisel"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Viga kõigi nähtavate Tabide eemaldamisel.",
+		"description": "[viga] Üldine viga, mida kasutatakse kõigi nähtavate Tabide eemaldamisel"
+	},
+	"error_required_params": {
+		"message": "Funktsioonile vajalikke parameetreid ei edastatud",
+		"description": "[viga] arendaja proovis funktsiooni kutsuda ilma vajalike parameetriteta"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Viga Tabide lähtestamisel vaikeseadetele.",
+		"description": "[viga] Üldine viga, mida kasutatakse Tabide lähtestamisel vaikeseadetele"
+	},
+	"error_sorting_tabs": {
+		"message": "Tabs-ide sorteerimisel ilmnes viga",
+		"description": "[error] kuvatakse hüpikteates"
+	},
+	"error_sync_nothing": {
+		"message": "Null (null) Tabs ei saa sünkroonida!",
+		"description": "[viga] üritati sünkroonida mitte midagi"
+	},
+	"error_tab_constructor": {
+		"message": "Kasuta Tab.create() asemel new Tab()",
+		"description": "[error] Teavita arendajat, kuidas kasutada Tab klassi"
+	},
+	"error_tab_label": {
+		"message": "Silt peab olema mittetühi string",
+		"description": "[viga] kasutaja üritas luua Tab ilma sildita"
+	},
+	"error_tab_not_found": {
+		"message": "Tab ei leitud.",
+		"description": "[viga] Tab ei sisaldunud massiivis"
+	},
+	"error_tab_object_creation": {
+		"message": "Objektiga kutsudes ärge edastage midagi muud.",
+		"description": "[viga] arendaja implementeerimisviga"
+	},
+	"error_tab_org": {
+		"message": "Org peab olema string või määratlemata (undefined)",
+		"description": "[viga] kasutaja üritas luua Tab kehtetu Org väärtusega"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Leiti ootamatuid võtmeid:",
+		"description": "[viga] kasutaja üritas luua Tab mõne toetamata omadusega"
+	},
+	"error_tab_url": {
+		"message": "URL peab olema mittetühi string",
+		"description": "[viga] kasutaja üritas luua Tab ilma URL-ita"
+	},
+	"error_tab_url_saved": {
+		"message": "Selle URL-iga Tab on juba salvestatud!",
+		"description": "[error] Kasutaja üritas salvestada juba salvestatud Tabsi"
+	},
+	"error_tabcont_initialize": {
+		"message": "Ei saa lähtestada:",
+		"description": "[viga] Tab konteineri lähtestamine ebaõnnestus"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Tuvastati kehtetu(id) Tab(id).\nEsimene esinemine:",
+		"description": "[viga] edastati kehtetud Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Kasuta TabContainer.create() asemel new TabContainer()",
+		"description": "[error] Teavita arendajat, kuidas kasutada TabContainer klassi"
+	},
+	"error_translationservice_constructor": {
+		"message": "Kasuta TranslationService.create() asemel new TranslationService()",
+		"description": "[error] Teavita arendajat, kuidas kasutada TranslationService klassi"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator pole veel initsialiseeritud.",
+		"description": "[error] TranslationService ei olnud veel valmis"
+	},
+	"error_unknown_message": {
+		"message": "Vastu võetud tundmatu sõnum",
+		"description": "listenerilt on vastu võetud tundmatu sõnum"
+	},
+	"error_unknown_request": {
+		"message": "Tundmatu päring.",
+		"description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
+	},
+	"error_useless_remove": {
+		"message": "Ei saa eemaldada:\nEi saa eemaldada lehte, mida pole varem salvestatud",
+		"description": "[viga] kasutaja üritas eemaldada lehte, mida polnud veel salvestatud"
+	},
+	"error_useless_save": {
+		"message": "Ei saa salvestada:\nSee leht on juba salvestatud!",
+		"description": "[viga] kasutaja üritas salvestada lehte, mis oli juba salvestatud"
+	},
+	"export": {
+		"message": "Ekspordi",
+		"description": "[hüpikaken] eksportimisnupp"
+	},
+	"export_title": {
+		"message": "Ekspordi kõik Tabs",
+		"description": "[hüpikaken] pealkiri eksportimisnupul"
+	},
+	"extension_description": {
+		"message": "Looge ja hallake kohandatud Tabs'e Salesforce Lightning seadistuslehe saadaolevas ruumis.",
+		"description": "[manifest] Selle laienduse kirjeldus"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Selle laienduse nimi"
+	},
+	"file": {
+		"message": "fail",
+		"description": "üks fail"
+	},
+	"files": {
+		"message": "failid",
+		"description": "mitu faili"
+	},
+	"flows": {
+		"message": "Voogud",
+		"description": "[vaikimisi-tab] Silt vaikimisi Voogude Tabile"
+	},
+	"general": {
+		"message": "Üldine",
+		"description": "Silt üldiste seadete kategooria jaoks"
+	},
+	"help": {
+		"message": "Abi",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Märgib uued Tabs Org Tabs-ideks, nii et need on nähtavad ainult siis, kui olete sellesse konkreetsesse Salesforce'i organisatsiooni sisse logitud.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Äsja lemmikuks lisatud Tabs sisestatakse seadistusriba Tab-ide loendi ette, mitte ei lisata lõppu.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Kui klõpsate laienduse hüpikaknale väljaspool Salesforce'i domeeni, viib see teid automaatselt Salesforce'i sisselogimislehele.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Kui klõpsate laienduse hüpikaknale Salesforce'i domeeni sees, kuid mitte seadistuslehel, viib see teid automaatselt Salesforce'i seadistuslehele.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Kui see on lubatud, hoitakse teie Tabs sorteeritud järjekorras - kas sildi, URL-i või organisatsiooni järgi; olenevalt sellest, mida valite.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Kinnitab teie salvestatud Tabs enne standardset navigeerimismenüüd (Home / Object Manager) seadistuses, mitte pärast seda.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Kui see on lubatud, avab iga salvestatud Tab seotud lehe uues Tab-is.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Pärsib väljalaskemärkuste märguannete automaatse kuvamise pärast laienduse värskendamist.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Keelab perioodilised värskenduste meeldetuletuste hüpikaknad, hoides laienduse kasutajaliidese puhtana (kui olete brauseri seadetes laienduse automaatsed värskendused keelanud).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Kui klõpsate laienduse hüpikaknale väljaspool Salesforce'i domeeni, avaneb sisselogimisleht praeguses brauseri Tab-is.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Kui klõpsate laienduse hüpikaknale Salesforce'i domeeni sees, kuid mitte seadistuslehel, avaneb Salesforce'i seadistusleht praeguses brauseri Tab-is.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Määrake laienduse jaoks ainult kasutajaliidese keel. Kui midagi pole tõlgitud, kasutatakse selle asemel ingliskeelset versiooni.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Keelab põhiliste telemeetriaandmete kogumise. Laiendus ei ilmu anonüümsetesse kasutusmõõdikutesse.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Väldib Lightning Navigation API-d ja avab lingid täislehe uuesti laadimisega, mis võib mõnes organisatsiooni seadistuses olla kiirem.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Keelab laienduse kontrolli, mis kontrollib, kas URL-i fragment vastab Salesforce'i kirje/objekti ID-de vormingule (kasutatakse salvestatud Tab automaatseks määramiseks Org Tab-iks).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Klõpsake, et suunduda selle sätte dokumentatsiooni juurde!",
+		"description": "[seadete-abi] üleskutse tegevusele, et lasta kasutajal konkreetse sätte kohta rohkem lugeda"
+	},
+	"import": {
+		"message": "Impordi",
+		"description": "[hüpikaken] importimisnupp"
+	},
+	"import_duplicate_description": {
+		"message": "Dubleeritud Tabs ignoreeritakse.<br />Kaks Tabs loetakse dubleerituks, kui neil on sama URL.",
+		"description": "[import] kirjeldus sellest, mida importimisprotsess teeb"
+	},
+	"import_invalid_file": {
+		"message": "Kehtetu failitüüp.\nToetatud on ainult JSON-failid.",
+		"description": "[viga] importimiseks kasutatud fail ei ole JSON"
+	},
+	"import_successful": {
+		"message": "Edukalt imporditud",
+		"description": "[import] importimine lõpetatud. Pärast seda näidatakse, mitu kirjet imporditi"
+	},
+	"import_tabs": {
+		"message": "Impordi Tabs",
+		"description": "[modaal_pealkiri] importimisprotsessi jaoks"
+	},
+	"import_title": {
+		"message": "$import_tabs JSON-failist",
+		"description": "[hüpikaken] impordinupu pealkiri"
+	},
+	"insert_another": {
+		"message": "Sisesta teine",
+		"description": "[viga_ava_teine_org_modaal] sõnum, kui kasutaja sisestab modaali sama Org'i"
+	},
+	"insert_another_org": {
+		"message": "Sisestatud Org on praegune!\nPalun sisestage teine Org.",
+		"description": "[viga_ava_teine_org_modaal] sõnum, kui kasutaja sisestab modaali sama Org'i"
+	},
+	"insert_valid_org": {
+		"message": "Palun sisestage kehtiv Org!",
+		"description": "[viga_ava_teine_org_modaal] sõnum, kui kasutaja sisestab modaali vale URL-i"
+	},
+	"italic": {
+		"message": "Kaldkiri",
+		"description": "Fondi stiili valik kaldkirja jaoks"
+	},
+	"lightning_navigation": {
+		"message": "Lightningi navigeerimine",
+		"description": "Salesforce’i kohandatud navigeerimistehnoloogia"
+	},
+	"login_to_salesforce": {
+		"message": "Logi sisse Salesforce'i",
+		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i sisselogimislehele"
+	},
+	"mycustomorg": {
+		"message": "minukohandatudorg",
+		"description": "kohatäide Uuenda Tab modaali jaoks"
+	},
+	"no_manifest_github": {
+		"message": "Kehtetu või puuduv GitHub homepage_url manifestis",
+		"description": "Manifesti homepage_url võti ei kasuta GitHubi linki"
+	},
+	"no_match": {
+		"message": "Ei vastanud ühelegi toimingule",
+		"description": "[viga] Salesforce'is, kui lüliti ei suuda sobitada nõutud toimingut"
+	},
+	"nss_invalid_url": {
+		"message": "Tuvastati kehtetu URL.",
+		"description": "[mitteSalesforce'iSeadistus] kehtetu URL"
+	},
+	"nss_not_setup_page": {
+		"message": "See ei ole $salesforce_lightning seadistusleht.",
+		"description": "[notSalesforceSetup] kasutaja ei ole Salesforce'i lehel."
+	},
+	"open_here": {
+		"message": "Ava siin Tab.",
+		"description": "[open-other-org-modal] raadionupp, mis laseb kasutajal avada samas brauseri Tab"
+	},
+	"open_new_tab": {
+		"message": "Ava uues Tab.",
+		"description": "[open-other-org-modal] raadionupp, mis laseb kasutajal avada uues brauseri Tab."
+	},
+	"open_settings": {
+		"message": "Ava laienduse seaded",
+		"description": "[hüpikaken] nupp seadete lehele suunamiseks"
+	},
+	"open_setup": {
+		"message": "Ava Seadistus",
+		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i seadistuslehele"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Lisa uued Tabs Org Tabs-idena.",
+		"description": "[settings] laseb kasutajal lisada kõik uued Tabs org-spetsiifilistena"
+	},
+	"opt_add_tabs_front": {
+		"message": "Lisa uued Tabs ette.",
+		"description": "[settings] laseb kasutajal lisada kõik uued Tabs ette"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automaatselt ava $salesforce_login leht, kui klõpsate hüpikaknal, kui te ei ole Salesforce'i lehel.",
+		"description": "[seadistus] kui kasutaja avab hüpikakna juhuslikul veebisaidil"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automaatselt ava $salesforce_setup leht, kui klõpsate hüpikaknal, kui olete Salesforce'i lehel.",
+		"description": "[seadistus] kui kasutaja avab hüpikakna Salesforce'i veebisaidil"
+	},
+	"opt_confirm_save": {
+		"message": "Seaded salvestati!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Vaikimisi ja tagavaraks)",
+		"description": "Laienduse vaikimisi keelevalik"
+	},
+	"opt_keep_sort": {
+		"message": "Hoia Tabs sorteeritud.",
+		"description": "[setting] võimaldab kasutajal hoida oma Tabs sorteeritud ühe oma võtme järgi"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Hoia lemmikud Tabs Home ja Object Manager'i vasakul küljel.",
+		"description": "Lüliti lemmik Tabs'ide kinnitamiseks navigeerimisriba vasakule küljele"
+	},
+	"opt_link_new_browser": {
+		"message": "Ava lingid alati uues brauseri vahekaardis.",
+		"description": "[seade] kui klõpsate lemmikul Tabil, avage see uues brauseri vahekaardis"
+	},
+	"opt_no_release_notes": {
+		"message": "Ära näita uuenduste väljalaseteateid.",
+		"description": "[seade] võimaldab kasutajal takistada laiendusel uuenduste väljalaseteateid kuvamast"
+	},
+	"opt_no_update_notification": {
+		"message": "Ärge hoiatage saadaolevate värskenduste eest.",
+		"description": "[seadistus] laseb kasutajal takistada laiendusel uute versioonide otsimist"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Ava alati $salesforce_login leht samas Tab, kui klõpsate hüpikaknal.",
+		"description": "[seadistus]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Ava alati $salesforce_setup leht samas Tab, kui klõpsate hüpikaknal.",
+		"description": "[seadistus]"
+	},
+	"opt_pick_language": {
+		"message": "Valige laienduse keel",
+		"description": "[seade] silt, mis palub kasutajal valida eelistatud keel"
+	},
+	"opt_pick_sort": {
+		"message": "Valige, millise välja järgi tuleks Tabs sortida",
+		"description": "[setting] nüüd saab kasutaja valida, millise võtme järgi Tabs sorteeritud hoida"
+	},
+	"opt_prevent_analytics": {
+		"message": "Takista Simple Analytics kasutamist (ei kuvata kasutajate arvus).",
+		"description": "[seade] võimaldab kasutajal takistada anonüümsete analüütikate saatmist"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Väldige Lightning Navigation'i kasutamist (kiirem laadimine, kui märkimata).",
+		"description": "[setting] ei luba Lightning Navigation'it koos funktsiooni selgitusega"
+	},
+	"opt_same_tab_popup": {
+		"message": "leht samas vahekaardis hüpikaknale klõpsates.",
+		"description": "[seade] ära ava uut brauseri vahekaarti"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Jälgi Salesforce'i keelt (loeb Salesforce'i küpsiseid)",
+		"description": "Võimalus kasutada Salesforce'i keele seadistust. Selle valiku kasutamiseks peavad kasutajad lubama laiendusel Salesforce'i küpsiseid lugeda."
+	},
+	"opt_skip_link_detection": {
+		"message": "Jäta Salesforce’i ID automaatkontroll vahele.",
+		"description": "[seade] salvestades lemmiku Tab, ära kontrolli lingi ID-d"
+	},
+	"or_drop": {
+		"message": "Või $drop",
+		"description": "[import] lase kasutajal faile hiirega liigutada ja vabastada"
+	},
+	"org_link": {
+		"message": "Org link",
+		"description": "[sisendi_silt]"
+	},
+	"other_org_info": {
+		"message": "Teise Org info",
+		"description": "[modaal_pealkiri]"
+	},
+	"other_org_placeholder": {
+		"message": "teine-org",
+		"description": "[sisendi_kohatäide]"
+	},
+	"overwrite_tabs": {
+		"message": "Kirjuta salvestatud Tabs üle.",
+		"description": "[silt] kustuta kõik salvestatud Tabs importimisprotsessi käigus"
+	},
+	"preserve_org_tabs": {
+		"message": "Säilita Tabs teiste Org'ide jaoks.",
+		"description": "[silt] säilita kõik Org-spetsiifilised Tabs importimisprotsessi käigus"
+	},
+	"remove_tab": {
+		"message": "Eemalda Tab",
+		"description": "[alt] alternatiivtekst, kui pildid ei tööta"
+	},
+	"req_downloads_open_popup": {
+		"message": "Palun avage laienduse hüpikaken oma brauseri laienduste menüüst.",
+		"description": "[teade] paluge kasutajal jätkamiseks laienduse hüpikaknale klõpsata"
+	},
+	"req_downloads_perm_header": {
+		"message": "Palun lubage allalaadimise luba,\net alustada soovitud eksporti.",
+		"description": "[nõua_luba] üleskutse allalaadimise loa lubamiseks"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Seda toimingut küsitakse ainult üks kord.",
+		"description": "[nõua_luba] allalaadimise loa lubamise kirjeldus"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Ära küsi uuesti.",
+		"description": "[loa_taotlus] silt, kui kasutaja ei soovi lube püsivalt anda"
+	},
+	"req_permissions_header": {
+		"message": "Palun lubage meil automaatselt juurde pääseda\n$salesforce_setup lehtedele.",
+		"description": "[req_permission] lubade taotlemise lehe päis"
+	},
+	"req_permissions_paragraph": {
+		"message": "Soovi korral võite lasta oma lemmik Tabs ilmuda\nkohe, kui navigeerite $salesforce_setup lehele,\nilma et peaksite iga kord seda laiendust klõpsama.",
+		"description": "[req_permission] tekst, mis selgitab, miks lube taotletakse"
+	},
+	"required": {
+		"message": "nõutud",
+		"description": "[sisend] märgib sisendvälja kohustuslikuks"
+	},
+	"required_info": {
+		"message": "= Nõutud teave",
+		"description": "[modaal] ütleb kasutajale, et osa teavet on kohustuslik"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[poleSalesforceSeadistus] Salesforce Lightning platvorm"
+	},
+	"salesforce_login": {
+		"message": "Salesforce’i sisselogimine",
+		"description": "Salesforce’i sisselogimisleht (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce’i seadistamine",
+		"description": "kõik Salesforce’i seadistuslehed (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Salvesta",
+		"description": "Rakenda muudatused ja salvesta need mällu"
+	},
+	"save_tab": {
+		"message": "Salvesta kui Tab",
+		"description": "[alt] alternatiivtekst, kui pildid ei tööta"
+	},
+	"send_tip": {
+		"message": "Saada meile jootraha ❤️",
+		"description": "[popup] svg-i pealkiri jootraha saatmise küsimiseks"
+	},
+	"set_gen_preview": {
+		"message": "Tab eelvaade",
+		"description": "Silt üldiste Tab'ide välimuse eelvaatamiseks"
+	},
+	"set_gen_styler": {
+		"message": "Tab stiilide muutja",
+		"description": "Silt üldiste Tab'ide stiili konfigureerimiseks"
+	},
+	"set_general_settings": {
+		"message": "Üldised seaded",
+		"description": "Jaotise pealkiri üldistele konfigureerimisvalikutele"
+	},
+	"set_move_available": {
+		"message": "Liiguta Saadaval hulka",
+		"description": "Nupu pealkiri valitud elementide liigutamiseks tagasi Saadaval hulka"
+	},
+	"set_move_chosen": {
+		"message": "Liiguta Valitud hulka",
+		"description": "Nupu pealkiri valitud elementide liigutamiseks Valitud hulka"
+	},
+	"set_org_preview": {
+		"message": "Organisatsiooni eelvaade",
+		"description": "Silt organisatsioonipõhiste Tab'ide välimuse eelvaatamiseks"
+	},
+	"set_org_styler": {
+		"message": "Organisatsiooni stiilide muutja",
+		"description": "Silt organisatsioonipõhiste Tab'ide stiili konfigureerimiseks"
+	},
+	"set_tab_background_active_label": {
+		"message": "Sisesta taustavärv oma aktiivsetele üldistele Tabs'idele.",
+		"description": "Silt aktiivsete üldiste Tab'ide taustavärvi määramiseks"
+	},
+	"set_tab_background_label": {
+		"message": "Sisesta taustavärv oma organisatsiooni Tabs'idele.",
+		"description": "Silt organisatsioonipõhiste Tab'ide taustavärvi määramiseks"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Sisesta piirde värv oma aktiivsetele organisatsiooni Tabs'idele.",
+		"description": "Silt aktiivsete organisatsioonipõhiste Tab'ide piirde värvi määramiseks"
+	},
+	"set_tab_border_color_label": {
+		"message": "Sisesta piirde värv oma üldistele Tabs'idele.",
+		"description": "Silt üldiste Tab'ide piirde värvi määramiseks"
+	},
+	"set_tab_color_active_label": {
+		"message": "Sisesta teksti värv oma aktiivsetele üldistele Tabs'idele.",
+		"description": "Silt aktiivsete üldiste Tab'ide teksti värvi määramiseks"
+	},
+	"set_tab_color_label": {
+		"message": "Sisesta teksti värv oma organisatsiooni Tabs'idele.",
+		"description": "Silt organisatsioonipõhiste Tab'ide teksti värvi määramiseks"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Vali üks või mitu kujundusstiili oma aktiivsetele organisatsiooni Tabs'idele.",
+		"description": "Viip aktiivsete organisatsioonipõhiste Tab'ide kujundusstiilide valimiseks"
+	},
+	"set_tab_decoration_label": {
+		"message": "Vali üks või mitu kujundusstiili oma üldistele Tabs'idele.",
+		"description": "Viip üldiste Tab'ide kujundusstiilide valimiseks"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Sisesta hõljumise taustavärv oma aktiivsetele üldistele Tabs'idele.",
+		"description": "Silt aktiivsete üldiste Tab'ide hõljumise taustavärvi määramiseks"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Sisesta hõljumise taustavärv oma organisatsiooni Tabs'idele.",
+		"description": "Silt organisatsioonipõhiste Tab'ide hõljumise taustavärvi määramiseks"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Sisesta varju värv oma aktiivsetele organisatsiooni Tabs'idele.",
+		"description": "Silt aktiivsete organisatsioonipõhiste Tab'ide varju värvi määramiseks"
+	},
+	"set_tab_shadow_label": {
+		"message": "Sisesta varju värv oma üldistele Tabs'idele.",
+		"description": "Silt üldiste Tab'ide varju värvi määramiseks"
+	},
+	"set_tab_top_active_label": {
+		"message": "Sisesta värv ribale oma aktiivsete üldiste Tabs'ide ülaosas.",
+		"description": "Silt aktiivsete üldiste Tab'ide ülariba värvi määramiseks"
+	},
+	"set_toggle_preview": {
+		"message": "Klõpsa aktiivse oleku lülitamiseks.",
+		"description": "Tööriista vihje tekst aktiivse oleku lülitamise juhtelemendile"
+	},
+	"settings": {
+		"message": "Seaded",
+		"description": "Silt seadete menüü jaoks"
+	},
+	"setup_page": {
+		"message": "Seadistusleht",
+		"description": "[poleSalesforceSeadistus] leht, mida kasutatakse Salesforce'i seadete muutmiseks"
+	},
+	"skip": {
+		"message": "Jäta vahele",
+		"description": "[loa_taotlus] nupp lubade MITTE andmiseks"
+	},
+	"successfully_imported": {
+		"message": "Edukalt imporditud",
+		"description": "[teavitus] kasutaja lisas Tabs välisest failist"
+	},
+	"tab_explain": {
+		"message": "Igal elemendil peab olema 'label' ja 'url' stringidena. Lisaks võib igal elemendil olla 'org' stringina.",
+		"description": "[viga] selgitab, kuidas Tab peaks olema konstrueeritud"
+	},
+	"tab_information": {
+		"message": "Tab info",
+		"description": "pealkiri uuenda Tab modaali jaoks"
+	},
+	"tab_label": {
+		"message": "Tab silt",
+		"description": "Tab sildi (Label) omadus, selle nimi"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "Tab Org omadus, kui see on mõeldud ühele Salesforce'i organisatsioonile"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab URL omadus, kuhu see viitab"
+	},
+	"table_delete": {
+		"message": "Kustuta Tab",
+		"description": "[hüpikaken] abitekst veerule kustutamisnupuga"
+	},
+	"table_org": {
+		"message": "On Org Tab",
+		"description": "[hüpikaken] abitekst veerule Org märkeruuduga"
+	},
+	"table_row_label": {
+		"message": "Sisesta selle URL-i silt",
+		"description": "[hüpikaken] sisendväli Tab nimega"
+	},
+	"table_row_org": {
+		"message": "Klõpsake, kui soovite, et see Tab oleks saadaval ainult selle Org jaoks.",
+		"description": "[hüpikaken] märkeruut Tab Org-spetsiifiliseks lülitamiseks"
+	},
+	"table_row_org_name": {
+		"message": "Org, millele see Tab on saadaval.",
+		"description": "[hüpikaken] sisendväli Org nimega"
+	},
+	"table_row_url": {
+		"message": "Sisestage alam_URL, kuhu soovite ümber suunata.",
+		"description": "[hüpikaken] sisendväli Tab URL-iga"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "kasutaja lemmiklingid"
+	},
+	"tabs_saved": {
+		"message": "Tabs salvestatud.",
+		"description": "[teavitus] Tabs salvestati edukalt."
+	},
+	"theme_dark": {
+		"message": "Muuda teema tumedaks",
+		"description": "[hüpikaken] pealkiri kuul teema vahetamiseks"
+	},
+	"theme_light": {
+		"message": "Muuda teema heledaks",
+		"description": "[hüpikaken] pealkiri päikesel teema vahetamiseks"
+	},
+	"underline": {
+		"message": "Allajoonitud",
+		"description": "Kujundusstiili valik Tab'i teksti allajoonimiseks"
+	},
+	"underline_wavy": {
+		"message": "Laineline alljoonitus",
+		"description": "Kujundusstiili valik lainelise joone lisamiseks Tab'i teksti alla"
+	},
+	"update_available": {
+		"message": "Värskendus saadaval",
+		"description": "laienduse jaoks on saadaval uus värskendus"
+	},
+	"upload": {
+		"message": "Laadi üles",
+		"description": "[import] lase kasutajal oma faile sirvida ja valida õige"
+	},
+	"users": {
+		"message": "Kasutajad",
+		"description": "Lehe nimi, mis on seotud ManageUsers/home'ga"
+	},
+	"where_to": {
+		"message": "Kuhu?",
+		"description": "[ava_teine_org_modaal] varupealkiri modaali jaoks"
+	},
+	"write_review": {
+		"message": "Kirjuta arvustus!",
+		"description": "[popup] svg-i pealkiri arvustuse kirjutamise taotlemiseks"
+	}
+}

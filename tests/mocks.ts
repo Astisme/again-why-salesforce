@@ -33,10 +33,10 @@ export interface InternalMessage {
 	keys?: string | string[];
 }
 
-mockStorage.settings.push(...[
+mockStorage.settings.push(
 	{ enabled: "fr", id: "picked-language" },
 	{ enabled: false, id: "persist_sort" },
-]);
+);
 
 type ContextMenuClickInfo = {
 	menuItemId: string;
@@ -85,9 +85,9 @@ export const mockBrowser = {
 		sync: {
 			get: (keys: string[], callback): Promise<object> => {
 				const response = {};
-				keys.forEach((key) => {
+				for (const key of keys) {
 					response[key] = mockStorage[key];
-				});
+				}
 				if (callback == null) {
 					return Promise.resolve(response);
 				}
@@ -119,10 +119,10 @@ export const mockBrowser = {
 			let response: any;
 			switch (message.what) {
 				case "get":
-					if (message.key != null) {
-						response = mockStorage[message.key];
-					} else {
+					if (message.key == null) {
 						setError("Missing get key");
+					} else {
+						response = mockStorage[message.key];
 					}
 					break;
 				case "set":
@@ -208,9 +208,9 @@ export const mockBrowser = {
 				sender: string = "",
 				sendResponse: (response?: any) => void = () => {},
 			): void {
-				this._listeners.forEach((listener) =>
-					listener(message, sender, sendResponse)
-				);
+				for (const listener of this._listeners) {
+					listener(message, sender, sendResponse);
+				}
 			},
 		},
 		getURL: (path: string): string => {
@@ -225,7 +225,9 @@ export const mockBrowser = {
 				this._listeners.push(callback);
 			},
 			triggerStartup(): void {
-				this._listeners.forEach((listener) => listener());
+				for (const listener of this._listeners) {
+					listener();
+				}
 			},
 		},
 		onInstalled: {
@@ -236,7 +238,9 @@ export const mockBrowser = {
 			triggerInstalled(
 				details: { reason: string; [key: string]: any },
 			): void {
-				this._listeners.forEach((listener) => listener(details));
+				for (const listener of this._listeners) {
+					listener(details);
+				}
 			},
 		},
 	},
@@ -252,7 +256,9 @@ export const mockBrowser = {
 				this._listeners.push(callback);
 			},
 			triggerClick(info: ContextMenuClickInfo, tab: BrowserTab): void {
-				this._listeners.forEach((listener) => listener(info, tab));
+				for (const listener of this._listeners) {
+					listener(info, tab);
+				}
 			},
 		},
 		_contextMenus: [] as ContextMenu[],
@@ -272,7 +278,9 @@ export const mockBrowser = {
 			triggerActivated(
 				activeInfo: { tabId: number; windowId: number },
 			): void {
-				this._listeners.forEach((listener) => listener(activeInfo));
+				for (const listener of this._listeners) {
+					listener(activeInfo);
+				}
 			},
 		},
 		_mockBrowserTabs: [] as BrowserTab[],
@@ -303,7 +311,9 @@ export const mockBrowser = {
 				this._listeners.push(callback);
 			},
 			triggerFocusChanged(windowId: number): void {
-				this._listeners.forEach((listener) => listener(windowId));
+				for (const listener of this._listeners) {
+					listener(windowId);
+				}
 			},
 		},
 	},
@@ -314,7 +324,9 @@ export const mockBrowser = {
 				this._listeners.push(callback);
 			},
 			triggerCommand(command: string): void {
-				this._listeners.forEach((listener) => listener(command));
+				for (const listener of this._listeners) {
+					listener(command);
+				}
 			},
 		},
 		_mockCommands: [] as Command[],

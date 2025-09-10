@@ -1,0 +1,989 @@
+{
+	"allow": {
+		"message": "Cho phép",
+		"description": "[req_permission] Nút để cho cấp quyền"
+	},
+	"ascending": {
+		"message": "Tăng dần (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Có sẵn",
+		"description": "Tiêu đề phần cho các mục có thể thêm"
+	},
+	"bold": {
+		"message": "Đậm",
+		"description": "Tùy chọn kiểu phông chữ cho văn bản đậm"
+	},
+	"cancel": {
+		"message": "Hủy",
+		"description": "tiêu đề hoặc textContent cho các nút ngăn hành động hiện tại thực thi"
+	},
+	"cancel_close": {
+		"message": "Hủy và đóng",
+		"description": "tiêu đề hoặc textContent cho nút đóng của cửa sổ bật lên"
+	},
+	"chosen": {
+		"message": "Đã chọn",
+		"description": "Tiêu đề phần cho các mục đã được chọn"
+	},
+	"cmd_export_all": {
+		"message": "Hiển thị modal để xuất tất cả Tabs đã lưu",
+		"description": "[mô tả lệnh] người dùng muốn xuất tất cả Tabs"
+	},
+	"cmd_import": {
+		"message": "Hiển thị modal để import Tabs mới",
+		"description": "[mô tả lệnh] người dùng muốn nhập Tabs mới"
+	},
+	"cmd_open_other_org": {
+		"message": "Hiển thị modal để mở trang hiện tại trong một Org khác",
+		"description": "[mô tả lệnh] người dùng muốn mở trang hiện tại trong một Org khác"
+	},
+	"cmd_remove_tab": {
+		"message": "Xóa trang hiện tại khỏi danh sách Tab (nếu đã lưu)",
+		"description": "[mô tả lệnh] người dùng muốn xóa trang hiện tại"
+	},
+	"cmd_save_as_tab": {
+		"message": "Lưu trang hiện tại vào danh sách Tab (nếu chưa lưu)",
+		"description": "[mô tả lệnh] người dùng muốn lưu trang hiện tại"
+	},
+	"cmd_toggle_org": {
+		"message": "Chuyển đổi giá trị Org của trang hiện tại (nếu đã lưu)",
+		"description": "[mô tả lệnh] người dùng muốn chuyển đổi Org cho trang hiện tại"
+	},
+	"cmd_update_tab": {
+		"message": "Hiển thị modal để cập nhật trang hiện tại (nếu đã lưu)",
+		"description": "[mô tả lệnh] người dùng muốn cập nhật trang hiện tại"
+	},
+	"confirm_another_org": {
+		"message": "Xác nhận mở liên kết này.",
+		"description": "[open-other-org-modal] Yêu cầu xác nhận từ người dùng để mở liên kết đã được tạo."
+	},
+	"confirm_update_extension": {
+		"message": "Một phiên bản mới của $extension_label hiện đã có sẵn!",
+		"description": "một tin nhắn không xác định đã được nhận từ một người nghe"
+	},
+	"continue": {
+		"message": "Tiếp tục",
+		"description": "textContent cho các nút cho phép hành động hiện tại thực thi"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tất cả Tab chung",
+		"description": "[trình đơn ngữ cảnh]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Xóa tất cả Tab",
+		"description": "[menu ngữ cảnh]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tất cả Tab hiển thị",
+		"description": "[trình đơn ngữ cảnh]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Xuất Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[menu-ngữ-cảnh]"
+	},
+	"cxm_move": {
+		"message": "🧭 Di chuyển Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Đặt đầu tiên",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Đặt cuối cùng",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Di chuyển sang trái",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Di chuyển sang phải",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Mở ở Org khác",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[menu-ngữ-cảnh]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[menu-ngữ-cảnh]"
+	},
+	"cxm_remove": {
+		"message": "💥 Xóa Tab(s)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Xóa các Tab bên trái",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Các Tab khác",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Xóa các Tab bên phải",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Xóa Tab này",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Đặt lại Tab mặc định",
+		"description": "[trình đơn ngữ cảnh]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Nhãn cho menu cài đặt"
+	},
+	"cxm_sort": {
+		"message": "🎯 Sắp xếp Tab",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ tự động (menu cha)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 theo Nhãn",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo nhãn"
+	},
+	"cxm_sort_org": {
+		"message": "👽 theo Tổ chức",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo tổ chức"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 theo Url",
+		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo url"
+	},
+	"cxm_update": {
+		"message": "✏️ Cập nhật Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Chuyển Org",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Các cập nhật khác",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Xóa",
+		"description": "[popup] Xóa một dòng"
+	},
+	"delete_all": {
+		"message": "$delete tất cả các Tab",
+		"description": "[popup] tiêu đề trên thùng rác để làm trống tất cả các Tab"
+	},
+	"descending": {
+		"message": "Giảm dần (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Thả",
+		"description": "[import] cho phép người dùng kéo thả tệp của họ vào khu vực được chỉ định"
+	},
+	"enable": {
+		"message": "Bật",
+		"description": "[yêu_cầu_quyền] nút để bật quyền"
+	},
+	"error_adding_tab": {
+		"message": "Lỗi khi thêm Tab.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi thêm Tab"
+	},
+	"error_check_update": {
+		"message": "Lỗi khi kiểm tra cập nhật",
+		"description": "[lỗi] lỗi chung khi kiểm tra cập nhật tiện ích mở rộng"
+	},
+	"error_close_other_modal": {
+		"message": "Vui lòng đóng modal khác trước!",
+		"description": "[toast] Đã cố mở nhiều modal cùng lúc."
+	},
+	"error_cxm_check": {
+		"message": "Lỗi khi kiểm tra các mục menu",
+		"description": "[lỗi] không thể tìm thấy các mục menu ngữ cảnh"
+	},
+	"error_cxm_create": {
+		"message": "Lỗi khi tạo các mục menu",
+		"description": "[lỗi] không thể khởi tạo các mục menu ngữ cảnh"
+	},
+	"error_cxm_remove": {
+		"message": "Lỗi khi xóa các mục menu",
+		"description": "[lỗi] không thể loại bỏ các mục menu ngữ cảnh"
+	},
+	"error_duplicate_tab": {
+		"message": "Tab này đã tồn tại",
+		"description": "[error] Tab bị trùng lặp."
+	},
+	"error_expand_url": {
+		"message": "Không thể mở rộng URL rỗng!",
+		"description": "[error] URL để mở rộng không được cung cấp."
+	},
+	"error_expand_url_no_base": {
+		"message": "Không thể mở rộng URL nếu không có host!",
+		"description": "[error] URL cơ bản để mở rộng không được cung cấp."
+	},
+	"error_extract_empty_url": {
+		"message": "Không thể trích xuất tên Org từ URL rỗng!",
+		"description": "[error] URL để trích xuất tên Org không được cung cấp."
+	},
+	"error_failed_sync": {
+		"message": "Sync không thành công.",
+		"description": "[lỗi] Lỗi chung khi Tabs không thể đồng bộ hóa từ người dùng"
+	},
+	"error_failed_to_fetch": {
+		"message": "Không thể tải tài nguyên bên ngoài",
+		"description": "[lỗi] Cuộc gọi đến một trang web bên ngoài không thành công"
+	},
+	"error_get_with_no_org": {
+		"message": "Không thể lấy Tabs nếu không xác định Org.",
+		"description": "[error] Đã cố lấy Tabs mà không có thông tin Org."
+	},
+	"error_import": {
+		"message": "Lỗi khi nhập khẩu:\n",
+		"description": "[error] Có lỗi xảy ra trong quá trình nhập khẩu."
+	},
+	"error_invalid_key": {
+		"message": "Tham số khóa được truyền cho hàm không hợp lệ",
+		"description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm với một tham số không hợp lệ"
+	},
+	"error_invalid_request": {
+		"message": "Yêu cầu không hợp lệ.",
+		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo được định dạng sai"
+	},
+	"error_invalid_tab": {
+		"message": "Tab không hợp lệ",
+		"description": "[error] Tab không hợp lệ."
+	},
+	"error_link_with_id": {
+		"message": "Trang này không thể tồn tại trong Org khác, vì nó chứa Id!",
+		"description": "[open-other-org-modal] Cảnh báo rằng liên kết có thể không tồn tại trong Org khác."
+	},
+	"error_many_matching_tab": {
+		"message": "Đã tìm thấy nhiều hơn một Tab phù hợp.",
+		"description": "[error] Nhiều Tabs phù hợp được lấy."
+	},
+	"error_many_tabs_found": {
+		"message": "Tìm thấy nhiều hơn một Tab.",
+		"description": "[lỗi] nhiều Tabs đã được truy xuất"
+	},
+	"error_minify_url": {
+		"message": "Không thể thu gọn URL rỗng!",
+		"description": "[error] URL để thu gọn không được cung cấp."
+	},
+	"error_missing_favourite_id": {
+		"message": "Không thể lấy hình ảnh yêu thích mà không có Id",
+		"description": "[error] Id yêu thích không được cung cấp."
+	},
+	"error_missing_key": {
+		"message": "Không tìm thấy khóa ở đâu cả",
+		"description": "[error] Không tìm thấy bản dịch trong các file"
+	},
+	"error_no_array": {
+		"message": "Mảng không hợp lệ hoặc không được cung cấp",
+		"description": "[error] Mảng hợp lệ không được gửi."
+	},
+	"error_no_browser_tab": {
+		"message": "Không tìm thấy tab trình duyệt hiện tại.",
+		"description": "[error] Không có tab trình duyệt hoạt động được tìm thấy."
+	},
+	"error_no_callback": {
+		"message": "Vui lòng cung cấp callback",
+		"description": "[error] Hàm callback không được cung cấp."
+	},
+	"error_no_cookies": {
+		"message": "Không tìm thấy cookies phù hợp",
+		"description": "[error] Không có Salesforce cookies được trả về."
+	},
+	"error_no_data": {
+		"message": "Không thể xác định Tab nếu không có dữ liệu.",
+		"description": "[error] Dữ liệu để xác định Tab không được cung cấp."
+	},
+	"error_no_headers": {
+		"message": "Không tìm thấy tiêu đề cột.",
+		"description": "[error] Tiện ích không tìm thấy vị trí để đặt nút yêu thích."
+	},
+	"error_no_matching_tab": {
+		"message": "Không tìm thấy Tab phù hợp.",
+		"description": "[error] Không có Tabs phù hợp được lấy."
+	},
+	"error_no_message": {
+		"message": "Không có thông điệp nào được chỉ định để gửi.",
+		"description": "[error] Không có thông điệp nào được xác định để gửi đến các phần khác của mã."
+	},
+	"error_no_object": {
+		"message": "Không có đối tượng để kiểm tra!",
+		"description": "[error] Không có đối tượng được cung cấp."
+	},
+	"error_no_setup_tab": {
+		"message": "Không tìm thấy Setup Tab",
+		"description": "[error] Tiện ích không tìm thấy vị trí để đặt các Tabs yêu thích."
+	},
+	"error_no_url": {
+		"message": "Không có URL để kiểm tra!",
+		"description": "[error] URL để kiểm tra không được cung cấp."
+	},
+	"error_not_initialized": {
+		"message": "chưa được khởi tạo.",
+		"description": "[lỗi] Lỗi chung khi một biến chưa sẵn sàng"
+	},
+	"error_processing_tabs": {
+		"message": "Lỗi xử lý Tabs.",
+		"description": "[lỗi] Lỗi chung khi xử lý Tabs"
+	},
+	"error_redirect": {
+		"message": "Không thể redirect. Vui lòng làm mới trang.",
+		"description": "[lỗi] Lỗi chung khi chuyển hướng trang."
+	},
+	"error_remove_not_favourite": {
+		"message": "Không thể xóa Tab không phải yêu thích!",
+		"description": "[error] Người dùng đã cố xóa Tab chưa được lưu dưới dạng yêu thích."
+	},
+	"error_removing_all_tabs": {
+		"message": "Lỗi khi xóa tất cả Tabs.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa tất cả Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Lỗi khi xóa các Tabs chung.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs chung"
+	},
+	"error_removing_other_tabs": {
+		"message": "Lỗi khi xóa các Tabs khác.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs khác"
+	},
+	"error_removing_tab": {
+		"message": "Lỗi khi xóa Tab.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Lỗi khi xóa tất cả các Tab hiển thị.",
+		"description": "[lỗi] Lỗi chung khi xóa tất cả các Tab hiển thị"
+	},
+	"error_required_params": {
+		"message": "Các tham số bắt buộc cho hàm không được truyền",
+		"description": "[lỗi] nhà phát triển đã cố gắng gọi một hàm mà không có các tham số cần thiết"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Lỗi khi đặt lại các Tab mặc định.",
+		"description": "[lỗi] Lỗi chung khi đặt lại các Tab về mặc định"
+	},
+	"error_sorting_tabs": {
+		"message": "Lỗi khi sắp xếp Tab",
+		"description": "[error] hiển thị trong thông báo nhanh"
+	},
+	"error_sync_nothing": {
+		"message": "Không thể đồng bộ các Tabs rỗng!",
+		"description": "[error] Đã cố đồng bộ những gì không có."
+	},
+	"error_tab_constructor": {
+		"message": "Sử dụng Tab.create() thay vì new Tab() để sử dụng lớp Tab",
+		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp Tab"
+	},
+	"error_tab_label": {
+		"message": "Nhãn không được để trống",
+		"description": "[error] Đã cố tạo Tab mà không có nhãn."
+	},
+	"error_tab_not_found": {
+		"message": "Không tìm thấy Tab.",
+		"description": "[error] Tab không có trong danh sách."
+	},
+	"error_tab_object_creation": {
+		"message": "Khi gọi với một đối tượng, đừng truyền thứ gì khác.",
+		"description": "[error] Lỗi triển khai từ phía lập trình viên."
+	},
+	"error_tab_org": {
+		"message": "Org phải là một chuỗi hoặc không xác định",
+		"description": "[error] Đã cố tạo Tab với giá trị Org không hợp lệ."
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Đã tìm thấy các khóa không mong đợi:",
+		"description": "[error] Người dùng đã cố tạo Tab với các thuộc tính không được hỗ trợ."
+	},
+	"error_tab_url": {
+		"message": "URL không được để trống",
+		"description": "[error] Đã cố tạo Tab mà không có URL."
+	},
+	"error_tab_url_saved": {
+		"message": "Một Tab với URL này đã được lưu!",
+		"description": "[lỗi] Người dùng đã cố gắng lưu một Tab đã được yêu thích"
+	},
+	"error_tabcont_initialize": {
+		"message": "Không thể khởi tạo với"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Phát hiện các Tabs không hợp lệ.\nLần xuất hiện đầu tiên:",
+		"description": "[error] Các Tabs không hợp lệ đã được cung cấp."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Sử dụng TabContainer.create() thay vì new TabContainer() để sử dụng lớp TabContainer",
+		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Sử dụng TranslationService.create() thay vì new TranslationService() để sử dụng lớp TranslationService",
+		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "trình dịch chưa được khởi tạo.",
+		"description": "[lỗi] TranslationService chưa sẵn sàng"
+	},
+	"error_unknown_message": {
+		"message": "Đã nhận tin nhắn không xác định",
+		"description": "một tin nhắn không xác định đã được nhận từ người nghe"
+	},
+	"error_unknown_request": {
+		"message": "Yêu cầu không xác định.",
+		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo không được nhận dạng"
+	},
+	"error_useless_remove": {
+		"message": "Không thể xóa:\nKhông thể xóa một trang chưa từng được lưu.",
+		"description": "[error] Đã cố xóa trang chưa được lưu."
+	},
+	"error_useless_save": {
+		"message": "Không thể lưu:\nTrang này đã được lưu rồi!",
+		"description": "[error] Đã cố lưu trang đã được lưu trước đó."
+	},
+	"export": {
+		"message": "Xuất",
+		"description": "[popup] Nút xuất"
+	},
+	"export_title": {
+		"message": "Xuất tất cả các Tabs",
+		"description": "[popup] Tiêu đề trên nút xuất"
+	},
+	"extension_description": {
+		"message": "Tạo và quản lý các custom Tabs trong không gian có sẵn trên trang Cài đặt Salesforce Lightning.",
+		"description": "[manifest] Mô tả của tiện ích mở rộng này"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "[manifest] Tên của tiện ích mở rộng này"
+	},
+	"file": {
+		"message": "tệp",
+		"description": "tệp đơn"
+	},
+	"files": {
+		"message": "tệp",
+		"description": "nhiều tệp"
+	},
+	"flows": {
+		"message": "Luồng",
+		"description": "[tab mặc định] Nhãn cho Tab Luồng mặc định"
+	},
+	"general": {
+		"message": "Chung",
+		"description": "Nhãn cho danh mục cài đặt chung"
+	},
+	"help": {
+		"message": "Trợ giúp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Đánh dấu Tab mới là Tab Tổ chức, vì vậy chúng chỉ hiển thị khi đã đăng nhập vào Tổ chức Salesforce cụ thể đó.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Các Tab được đánh dấu yêu thích gần đây được chèn vào phía trước danh sách Tab của bạn trong thanh Thiết lập thay vì được thêm vào cuối.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng bên ngoài một miền Salesforce, bạn sẽ tự động được đưa đến trang đăng nhập của Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng bên trong một miền Salesforce nhưng không phải trên trang Thiết lập, bạn sẽ tự động được đưa đến trang Thiết lập của Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Khi được bật, các Tab của bạn sẽ được giữ ở trạng thái đã sắp xếp—theo nhãn, URL hoặc Tổ chức; tùy thuộc vào lựa chọn của bạn.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Ghim các Tab đã lưu của bạn trước menu điều hướng tiêu chuẩn (Trang chủ / Trình quản lý đối tượng) trong Thiết lập, thay vì sau đó.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Khi được bật, mọi Tab đã lưu sẽ mở trang liên quan trong một Tab mới.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Chặn hiển thị tự động các thông báo ghi chú phát hành sau khi tiện ích mở rộng được cập nhật.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Vô hiệu hóa các cửa sổ bật lên nhắc nhở cập nhật định kỳ, giữ cho giao diện người dùng của tiện ích mở rộng sạch sẽ (khi bạn đã vô hiệu hóa các cập nhật tự động của tiện ích mở rộng khỏi cài đặt trình duyệt của mình).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Nếu bạn nhấp vào cửa sổ pop-up tiện ích mở rộng bên ngoài một miền Salesforce, trang đăng nhập sẽ được mở trong Tab trình duyệt hiện tại.",
+		"description": "[cài đặt-trợ giúp] cho $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Nếu bạn nhấp vào cửa sổ pop-up tiện ích mở rộng bên trong một miền Salesforce nhưng không phải trên trang Setup, trang Salesforce Setup sẽ được mở trong Tab trình duyệt hiện tại.",
+		"description": "[cài đặt-trợ giúp] cho $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Chỉ đặt ngôn ngữ giao diện người dùng cho tiện ích mở rộng. Nếu có điều gì đó chưa được dịch, phiên bản tiếng Anh sẽ được sử dụng thay thế.",
+		"description": "[cài đặt-trợ giúp] cho $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Vô hiệu hóa việc thu thập dữ liệu từ xa cơ bản. Tiện ích mở rộng sẽ không xuất hiện trong các số liệu sử dụng ẩn danh.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Bỏ qua API Điều hướng Lightning và mở các liên kết thông qua việc tải lại trang đầy đủ, điều này có thể nhanh hơn trong một số thiết lập tổ chức.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Vô hiệu hóa kiểm tra tiện ích mở rộng xác minh rằng một đoạn URL khớp với định dạng của ID bản ghi/đối tượng Salesforce (được sử dụng để tự động đặt Tab đã lưu là một Tab Tổ chức).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Nhấp để được chuyển hướng đến tài liệu cho cài đặt này!",
+		"description": "[cài đặt-trợ giúp] lời kêu gọi hành động để người dùng đọc thêm về một cài đặt cụ thể"
+	},
+	"import": {
+		"message": "Nhập",
+		"description": "[popup] Nút nhập"
+	},
+	"import_duplicate_description": {
+		"message": "Các Tab trùng lặp sẽ bị bỏ qua.<br />Hai Tab được coi là trùng lặp nếu chúng có cùng URL.",
+		"description": "[nhập] mô tả về những gì quy trình nhập thực hiện"
+	},
+	"import_invalid_file": {
+		"message": "Loại file không hợp lệ.\nChỉ hỗ trợ các file JSON.",
+		"description": "[error] File sử dụng để nhập khẩu không phải là JSON."
+	},
+	"import_successful": {
+		"message": "Nhập thành công",
+		"description": "[nhập] quá trình nhập đã hoàn tất. Sau đó, một số lượng bản ghi đã được nhập sẽ được hiển thị"
+	},
+	"import_tabs": {
+		"message": "Nhập Tab",
+		"description": "[tiêu đề-modal] cho quá trình nhập"
+	},
+	"import_title": {
+		"message": "$import_tabs từ tệp JSON",
+		"description": "[popup] tiêu đề trên nút nhập"
+	},
+	"insert_another": {
+		"message": "Chèn thêm một cái nữa",
+		"description": "[error-open-other-org-modal] Thông báo khi cùng một Org được nhập vào modal"
+	},
+	"insert_another_org": {
+		"message": "Org được nhập vào là hiện tại!\nVui lòng nhập Org khác.",
+		"description": "[error-open-other-org-modal] Thông báo khi cùng một Org được nhập vào modal"
+	},
+	"insert_valid_org": {
+		"message": "Vui lòng nhập Org hợp lệ!",
+		"description": "[error-open-other-org-modal] Thông báo khi URL sai được nhập vào modal"
+	},
+	"italic": {
+		"message": "Nghiêng",
+		"description": "Tùy chọn kiểu phông chữ cho văn bản nghiêng"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Công nghệ điều hướng tùy chỉnh của Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Đăng nhập vào Salesforce",
+		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang đăng nhập Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "placeholder cho modal Cập nhật Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url GitHub không hợp lệ hoặc bị thiếu trong manifest",
+		"description": "Khóa homepage_url của manifest không sử dụng liên kết GitHub"
+	},
+	"no_match": {
+		"message": "Không tìm thấy hành động phù hợp",
+		"description": "[error] Hành động được yêu cầu trong Salesforce không khớp với bất kỳ hành động nào có sẵn."
+	},
+	"nss_invalid_url": {
+		"message": "Đã phát hiện URL không hợp lệ.",
+		"description": "[khôngPhảiThiếtLậpSalesforce] một URL không hợp lệ"
+	},
+	"nss_not_setup_page": {
+		"message": "Đây không phải là trang Thiết lập $salesforce_lightning.",
+		"description": "[notSalesforceSetup] người dùng không ở trên trang Salesforce."
+	},
+	"open_here": {
+		"message": "Mở trong Tab này.",
+		"description": "[open-other-org-modal] nút radio để cho phép người dùng mở trong cùng một Tab trình duyệt"
+	},
+	"open_new_tab": {
+		"message": "Mở trong một Tab mới.",
+		"description": "[open-other-org-modal] nút radio để cho phép người dùng mở trong một Tab trình duyệt mới."
+	},
+	"open_settings": {
+		"message": "Mở Cài đặt Tiện ích",
+		"description": "[popup] nút để chuyển hướng đến trang cài đặt"
+	},
+	"open_setup": {
+		"message": "Mở Cài đặt",
+		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Thêm Tab mới là Tab Tổ chức.",
+		"description": "[settings] cho phép người dùng thêm tất cả các Tab mới dưới dạng tổ chức cụ thể"
+	},
+	"opt_add_tabs_front": {
+		"message": "Thêm Tab mới vào phía trước.",
+		"description": "[settings] cho phép người dùng thêm tất cả các Tab mới vào phía trước"
+	},
+	"opt_automatic_open_login": {
+		"message": "Tự động mở trang $salesforce_login khi nhấp vào cửa sổ bật lên trong khi không ở trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên một trang web ngẫu nhiên"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Tự động mở trang $salesforce_setup khi nhấp vào cửa sổ bật lên khi đang ở trên trang Salesforce.",
+		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên trang web Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "Cài đặt đã được lưu!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Mặc định và Dự phòng)",
+		"description": "Tùy chọn ngôn ngữ mặc định của tiện ích mở rộng"
+	},
+	"opt_keep_sort": {
+		"message": "Giữ Tab được sắp xếp.",
+		"description": "[setting] cho phép người dùng giữ Tab của họ được sắp xếp theo một trong các khóa của họ"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Giữ Tabs yêu thích ở bên trái Home và Object Manager.",
+		"description": "Công tắc để ghim Tabs yêu thích vào bên trái thanh điều hướng"
+	},
+	"opt_link_new_browser": {
+		"message": "Luôn mở liên kết trong tab trình duyệt mới.",
+		"description": "[cài đặt] khi người dùng nhấp vào Tab yêu thích, mở nó trong tab mới"
+	},
+	"opt_no_release_notes": {
+		"message": "Không hiển thị ghi chú cập nhật.",
+		"description": "[cài đặt] cho phép người dùng ngăn tiện ích hiển thị ghi chú sau khi cập nhật"
+	},
+	"opt_no_update_notification": {
+		"message": "Không cảnh báo về các bản cập nhật có sẵn.",
+		"description": "[cài đặt] cho phép người dùng ngăn tiện ích mở rộng tìm kiếm các bản phát hành mới"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Luôn mở trang $salesforce_login trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
+		"description": "[cài đặt]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Luôn mở trang $salesforce_setup trong cùng một Tab khi nhấp vào cửa sổ bật lên.",
+		"description": "[cài đặt]"
+	},
+	"opt_pick_language": {
+		"message": "Chọn ngôn ngữ tiện ích mở rộng",
+		"description": "[cài_đặt] nhãn để nhắc người dùng chọn ngôn ngữ ưa thích của họ"
+	},
+	"opt_pick_sort": {
+		"message": "Chọn trường mà các Tab nên được sắp xếp",
+		"description": "[setting] giờ đây người dùng có thể chọn khóa nào để giữ cho các Tab được sắp xếp"
+	},
+	"opt_prevent_analytics": {
+		"message": "Ngăn chặn việc sử dụng Simple Analytics (không được tính vào số lượng người dùng).",
+		"description": "[cài đặt] cho phép người dùng ngăn gửi dữ liệu phân tích ẩn danh"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Ngăn chặn việc sử dụng Điều hướng Lightning (tải nhanh hơn khi bỏ chọn).",
+		"description": "[setting] không cho phép Điều hướng Lightning với giải thích về tính năng"
+	},
+	"opt_same_tab_popup": {
+		"message": "mở trang trong cùng tab khi nhấp popup.",
+		"description": "[cài đặt] ngăn mở tab trình duyệt mới"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Theo dõi Ngôn ngữ Salesforce (đọc Cookies Salesforce)",
+		"description": "Tùy chọn để sử dụng cài đặt ngôn ngữ của Salesforce. Để sử dụng tùy chọn này, người dùng phải cho phép tiện ích mở rộng đọc cookie Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Bỏ qua kiểm tra tự động ID Salesforce.",
+		"description": "[cài đặt] khi yêu thích Tab, ngăn kiểm tra ID trong liên kết"
+	},
+	"or_drop": {
+		"message": "Hoặc $drop",
+		"description": "[nhập] cho phép người dùng di chuyển các tệp bằng chuột của họ và thả chúng"
+	},
+	"org_link": {
+		"message": "Liên kết Org",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Thông tin Org khác",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "org-khác",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Ghi đè các Tabs đã lưu.",
+		"description": "[label] Xóa hết các Tabs đã lưu trong quá trình nhập khẩu"
+	},
+	"preserve_org_tabs": {
+		"message": "Bảo lưu các Tabs cho Org khác.",
+		"description": "[label] Giữ lại các Tabs dành riêng cho Org trong quá trình nhập khẩu"
+	},
+	"remove_tab": {
+		"message": "Xóa Tab",
+		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
+	},
+	"req_downloads_open_popup": {
+		"message": "Vui lòng mở cửa sổ bật lên của tiện ích mở rộng từ menu tiện ích mở rộng của trình duyệt.",
+		"description": "[thông_báo] yêu cầu người dùng nhấp vào cửa sổ bật lên của tiện ích mở rộng để tiếp tục"
+	},
+	"req_downloads_perm_header": {
+		"message": "Vui lòng bật quyền Tải xuống\nđể bắt đầu Xuất khẩu được yêu cầu.",
+		"description": "[yêu_cầu_quyền] kêu gọi hành động để bật quyền tải xuống"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Thao tác này sẽ chỉ được yêu cầu một lần.",
+		"description": "[yêu_cầu_quyền] mô tả để bật quyền tải xuống"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Không hỏi lại nữa",
+		"description": "[req_permission] Nhãn khi người dùng không muốn được hỏi lại mãi mãi"
+	},
+	"req_permissions_header": {
+		"message": "Vui lòng cho phép chúng tôi truy cập\ncác trang $salesforce_setup một cách tự động.",
+		"description": "[req_permission] tiêu đề của trang để yêu cầu quyền"
+	},
+	"req_permissions_paragraph": {
+		"message": "Nếu bạn muốn, bạn có thể hiển thị các Tab yêu thích của mình\nngay khi bạn điều hướng đến trang $salesforce_setup\nmà không cần phải nhấp vào tiện ích mở rộng này mỗi lần.",
+		"description": "[req_permission] văn bản giải thích lý do tại sao các quyền được yêu cầu"
+	},
+	"required": {
+		"message": "bắt buộc",
+		"description": "[input] Đánh dấu một trường nhập liệu là bắt buộc"
+	},
+	"required_info": {
+		"message": "= Thông tin bắt buộc",
+		"description": "[modal] Cho biết cho người dùng rằng một số thông tin là bắt buộc"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Nền tảng Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "trang đăng nhập Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "bất kỳ trang cài đặt Salesforce nào (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Lưu",
+		"description": "Áp dụng các thay đổi và lưu trữ chúng trong bộ nhớ"
+	},
+	"save_tab": {
+		"message": "Lưu dưới dạng Tab",
+		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
+	},
+	"send_tip": {
+		"message": "Gửi cho chúng tôi một mẹo ❤️",
+		"description": "[popup] tiêu đề cho svg để nhắc nhở gửi một mẹo"
+	},
+	"set_gen_preview": {
+		"message": "Xem trước Tab",
+		"description": "Nhãn để xem trước giao diện Tab chung"
+	},
+	"set_gen_styler": {
+		"message": "Bộ tạo kiểu Tab",
+		"description": "Nhãn để cấu hình kiểu cho Tab chung"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Tiêu đề phần cho các tùy chọn cấu hình chung"
+	},
+	"set_move_available": {
+		"message": "Di chuyển đến Có sẵn",
+		"description": "Tiêu đề nút để di chuyển các mục đã chọn trở lại Có sẵn"
+	},
+	"set_move_chosen": {
+		"message": "Di chuyển đến Đã chọn",
+		"description": "Tiêu đề nút để di chuyển các mục đã chọn đến Đã chọn"
+	},
+	"set_org_preview": {
+		"message": "Xem trước Org",
+		"description": "Nhãn để xem trước giao diện Tab dành riêng cho Org"
+	},
+	"set_org_styler": {
+		"message": "Bộ tạo kiểu Org",
+		"description": "Nhãn để cấu hình kiểu cho Tab dành riêng cho Org"
+	},
+	"set_tab_background_active_label": {
+		"message": "Nhập màu nền cho Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu nền cho Tabs chung đang hoạt động"
+	},
+	"set_tab_background_label": {
+		"message": "Nhập màu nền cho Tabs tổ chức của bạn.",
+		"description": "Nhãn để đặt màu nền cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Nhập màu viền cho Tabs tổ chức đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu viền cho Tabs tổ chức đang hoạt động"
+	},
+	"set_tab_border_color_label": {
+		"message": "Nhập màu viền cho Tabs chung của bạn.",
+		"description": "Nhãn để đặt màu viền cho Tabs chung"
+	},
+	"set_tab_color_active_label": {
+		"message": "Nhập màu văn bản cho Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu văn bản cho Tabs chung đang hoạt động"
+	},
+	"set_tab_color_label": {
+		"message": "Nhập màu văn bản cho Tabs tổ chức của bạn.",
+		"description": "Nhãn để đặt màu văn bản cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Chọn một hoặc nhiều kiểu trang trí cho Tabs tổ chức đang hoạt động của bạn.",
+		"description": "Lời nhắc chọn kiểu trang trí cho Tabs tổ chức đang hoạt động"
+	},
+	"set_tab_decoration_label": {
+		"message": "Chọn một hoặc nhiều kiểu trang trí cho Tabs chung của bạn.",
+		"description": "Lời nhắc chọn kiểu trang trí cho Tabs chung"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Nhập màu nền khi hover cho Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu nền khi hover cho Tabs chung đang hoạt động"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Nhập màu nền khi hover cho Tabs tổ chức của bạn.",
+		"description": "Nhãn để đặt màu nền khi hover cho Tabs dành riêng cho tổ chức"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Nhập màu bóng cho Tabs tổ chức đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu bóng cho Tabs tổ chức đang hoạt động"
+	},
+	"set_tab_shadow_label": {
+		"message": "Nhập màu bóng cho Tabs chung của bạn.",
+		"description": "Nhãn để đặt màu bóng cho Tabs chung"
+	},
+	"set_tab_top_active_label": {
+		"message": "Nhập màu cho thanh trên cùng của Tabs chung đang hoạt động của bạn.",
+		"description": "Nhãn để đặt màu thanh trên cùng của Tabs chung đang hoạt động"
+	},
+	"set_toggle_preview": {
+		"message": "Nhấp để chuyển trạng thái hoạt động.",
+		"description": "Văn bản tooltip cho điều khiển chuyển đổi trạng thái hoạt động"
+	},
+	"settings": {
+		"message": "Cài đặt",
+		"description": "Nhãn cho menu cài đặt"
+	},
+	"setup_page": {
+		"message": "Trang Cài đặt",
+		"description": "[notSalesforceSetup] Trang dùng để thay đổi cài đặt của Salesforce"
+	},
+	"skip": {
+		"message": "Bỏ qua",
+		"description": "[req_permission] Nút để không cho cấp quyền"
+	},
+	"successfully_imported": {
+		"message": "Nhập khẩu thành công",
+		"description": "[toast] Người dùng đã thêm các Tabs từ file bên ngoài."
+	},
+	"tab_explain": {
+		"message": "Mỗi mục phải có 'label' và 'url' dưới dạng chuỗi. Ngoài ra, mỗi mục có thể có 'org' dưới dạng chuỗi.",
+		"description": "[error] Giải thích cách tạo Tab đúng cách."
+	},
+	"tab_information": {
+		"message": "Thông tin Tab",
+		"description": "tiêu đề cho modal Cập nhật Tab"
+	},
+	"tab_label": {
+		"message": "Nhãn Tab",
+		"description": "[popup] Tiêu đề cột cho tên Tab"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "thuộc tính Org của Tab, nếu nó dành cho một Tổ chức Salesforce duy nhất"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "[popup] Tiêu đề cột cho URL của Tab"
+	},
+	"table_delete": {
+		"message": "Xóa Tab",
+		"description": "[popup] Văn bản trợ giúp cho cột có nút xóa"
+	},
+	"table_org": {
+		"message": "Là Org Tab",
+		"description": "[popup] Văn bản trợ giúp cho cột có hộp kiểm Org"
+	},
+	"table_row_label": {
+		"message": "Nhập nhãn cho URL này",
+		"description": "[popup] Trường nhập cho tên Tab"
+	},
+	"table_row_org": {
+		"message": "Bấm nếu bạn muốn Tab này chỉ dành cho Org này.",
+		"description": "[popup] Hộp kiểm để chuyển Tab thành dành riêng cho Org"
+	},
+	"table_row_org_name": {
+		"message": "Org mà Tab này dành cho",
+		"description": "[popup] Trường nhập cho tên Org"
+	},
+	"table_row_url": {
+		"message": "Nhập sub_URL nơi bạn muốn được chuyển hướng.",
+		"description": "[popup] Trường nhập cho URL của Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "Các liên kết yêu thích của người dùng."
+	},
+	"tabs_saved": {
+		"message": "Đã lưu các Tabs.",
+		"description": "[toast] Các Tabs đã được lưu thành công."
+	},
+	"theme_dark": {
+		"message": "Chuyển sang Giao diện Tối",
+		"description": "[popup] Tiêu đề trên mặt trăng để chuyển giao diện"
+	},
+	"theme_light": {
+		"message": "Chuyển sang Giao diện Sáng",
+		"description": "[popup] Tiêu đề trên mặt trời để chuyển giao diện"
+	},
+	"underline": {
+		"message": "Gạch chân",
+		"description": "Tùy chọn kiểu trang trí để gạch chân văn bản Tab"
+	},
+	"underline_wavy": {
+		"message": "Gạch chân gợn sóng",
+		"description": "Tùy chọn kiểu trang trí để áp dụng gạch chân gợn sóng cho văn bản Tab"
+	},
+	"update_available": {
+		"message": "Cập nhật khả dụng",
+		"description": "một bản cập nhật mới cho tiện ích mở rộng có sẵn"
+	},
+	"upload": {
+		"message": "Tải lên",
+		"description": "[nhập] cho phép người dùng duyệt qua các tệp của họ và chọn đúng tệp"
+	},
+	"users": {
+		"message": "Người dùng",
+		"description": "Tên trang liên quan đến ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Đi đâu?",
+		"description": "[open-other-org-modal] Tiêu đề dự phòng cho modal"
+	},
+	"write_review": {
+		"message": "Viết đánh giá!",
+		"description": "[popup] tiêu đề cho svg để yêu cầu viết đánh giá"
+	}
+}

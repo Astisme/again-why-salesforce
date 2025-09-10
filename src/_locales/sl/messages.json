@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Dovoli",
+		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"
+	},
+	"ascending": {
+		"message": "Naraščajoče (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Na voljo",
+		"description": "Naslov razdelka za elemente, ki jih je mogoče dodati"
+	},
+	"bold": {
+		"message": "Krepko",
+		"description": "Možnost sloga pisave za krepko besedilo"
+	},
+	"cancel": {
+		"message": "Prekliči",
+		"description": "naslov ali textContent za gumbe, ki preprečujejo izvedbo trenutnega dejanja"
+	},
+	"cancel_close": {
+		"message": "Prekliči in zapri",
+		"description": "naslov ali textContent za gumb za zapiranje modalnih oken"
+	},
+	"chosen": {
+		"message": "Izbrano",
+		"description": "Naslov razdelka za elemente, ki so bili izbrani"
+	},
+	"cmd_export_all": {
+		"message": "Prikaži modal za izvoz vseh shranjenih Tabs",
+		"description": "[opis ukaza] uporabnik želi izvoziti vse Tabs"
+	},
+	"cmd_import": {
+		"message": "Prikaži modal za uvoz novih Tabs",
+		"description": "[opis ukaza] uporabnik želi uvoziti nove Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Prikaži modal za odprtje trenutne strani v drugi Org",
+		"description": "[opis ukaza] uporabnik želi odpreti trenutno stran v drugi Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Odstrani trenutno stran s seznama Tabs (če je shranjena)",
+		"description": "[opis ukaza] uporabnik želi odstraniti trenutno stran"
+	},
+	"cmd_save_as_tab": {
+		"message": "Shrani trenutno stran na seznam Tabs (če ni shranjena)",
+		"description": "[opis ukaza] uporabnik želi shraniti trenutno stran"
+	},
+	"cmd_toggle_org": {
+		"message": "Preklopi vrednost Org trenutne strani (če je shranjena)",
+		"description": "[opis ukaza] uporabnik želi preklopiti Org za trenutno stran"
+	},
+	"cmd_update_tab": {
+		"message": "Prikaži modal za posodobitev trenutne strani (če je shranjena)",
+		"description": "[opis ukaza] uporabnik želi posodobiti trenutno stran"
+	},
+	"confirm_another_org": {
+		"message": "Potrdite odpiranje te povezave.",
+		"description": "[odpri_drugo_org_modalno_okno] zahtevaj potrditev od uporabnika za odpiranje ustvarjene povezave."
+	},
+	"confirm_update_extension": {
+		"message": "Nova različica $extension_label je zdaj na voljo!",
+		"description": "neznano sporočilo je bilo prejeto od poslušalca"
+	},
+	"continue": {
+		"message": "Nadaljuj",
+		"description": "textContent za gumbe, ki omogočajo izvedbo trenutnega dejanja"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Vse splošne Tab",
+		"description": "[meni z desnim klikom]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Odstrani vse Tab",
+		"description": "[kontekstni meni]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Vse vidne Tab",
+		"description": "[meni z desnim klikom]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Izvozi Tabs",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstni-meni]"
+	},
+	"cxm_move": {
+		"message": "🧭 Premakni Tab",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Postavi na začetek",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Postavi na konec",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Premakni levo",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Premakni desno",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Odpri v drugi Org",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[kontekstni-meni]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[kontekstni-meni]"
+	},
+	"cxm_remove": {
+		"message": "💥 Odstrani Tab(e)",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs na levi",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Drugi Tabs",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs na desni",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Ta Tab",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Ponastavi privzete Tab",
+		"description": "[meni z desnim klikom]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Oznaka za meni z nastavitvami"
+	},
+	"cxm_sort": {
+		"message": "🎯 Razvrsti Tab-e",
+		"description": "kontekstni meni za samodejno razvrščanje Tab-ov uporabnikov (nadrejeni meni)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 po oznaki",
+		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po oznaki"
+	},
+	"cxm_sort_org": {
+		"message": "👽 po Org",
+		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 po URL-ju",
+		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po URL-ju"
+	},
+	"cxm_update": {
+		"message": "✏️ Posodobi Tab",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Preklopi Org",
+		"description": "[kontekstni_meni]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Druge posodobitve",
+		"description": "[kontekstni_meni]"
+	},
+	"delete": {
+		"message": "Izbriši",
+		"description": "[pojavno_okno] izbriši vrstico"
+	},
+	"delete_all": {
+		"message": "$delete vse Tabs",
+		"description": "[pojavno-okno] naslov na košu za izpraznitev vseh Tabs"
+	},
+	"descending": {
+		"message": "Padajoče (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Spusti",
+		"description": "[uvoz] omogoči uporabniku, da spusti svoje datoteke na določeno območje"
+	},
+	"enable": {
+		"message": "Omogoči",
+		"description": "[zahtevaj_dovoljenje] gumb za omogočanje dovoljenj"
+	},
+	"error_adding_tab": {
+		"message": "Napaka pri dodajanju Tab.",
+		"description": "[napaka] Splošna napaka, uporabljena pri dodajanju Tab"
+	},
+	"error_check_update": {
+		"message": "Napaka pri preverjanju posodobitev",
+		"description": "[napaka] splošna napaka pri preverjanju posodobitev razširitve"
+	},
+	"error_close_other_modal": {
+		"message": "Najprej zaprite drugo modalno okno!",
+		"description": "[toast] Uporabnik je poskusil odpreti več kot 1 modalno okno"
+	},
+	"error_cxm_check": {
+		"message": "Napaka pri preverjanju menijskih elementov",
+		"description": "[napaka] elementov kontekstnega menija ni bilo mogoče najti"
+	},
+	"error_cxm_create": {
+		"message": "Napaka pri ustvarjanju menijskih elementov",
+		"description": "[napaka] elementov kontekstnega menija ni bilo mogoče inicializirati"
+	},
+	"error_cxm_remove": {
+		"message": "Napaka pri odstranjevanju menijskih elementov",
+		"description": "[napaka] elementov kontekstnega menija ni bilo mogoče odstraniti"
+	},
+	"error_duplicate_tab": {
+		"message": "Ta Tab že obstaja",
+		"description": "[napaka] Tab je podvojen"
+	},
+	"error_expand_url": {
+		"message": "Praznega URL-ja ni mogoče razširiti!",
+		"description": "[napaka] url za razširitev ni bil posredovan"
+	},
+	"error_expand_url_no_base": {
+		"message": "URL-ja ni mogoče razširiti brez njegovega gostitelja!",
+		"description": "[napaka] osnovni url, uporabljen za razširitev, ni bil posredovan"
+	},
+	"error_extract_empty_url": {
+		"message": "Imena Org ni mogoče izvleči iz praznega URL-ja!",
+		"description": "[napaka] url, iz katerega naj se pridobi ime Org, ni bil posredovan"
+	},
+	"error_failed_sync": {
+		"message": "Sinhronizacija ni uspela.",
+		"description": "[napaka] Splošna napaka, ko Tab-ov ni bilo mogoče sinhronizirati od uporabnika"
+	},
+	"error_failed_to_fetch": {
+		"message": "Pridobivanje zunanjih virov ni uspelo",
+		"description": "[napaka] Klic na zunanje spletno mesto ni bil uspešen"
+	},
+	"error_get_with_no_org": {
+		"message": "Ni mogoče pridobiti Tabs, če Org ni določena.",
+		"description": "[napaka] poskus iskanja Tabs po Org brez pošiljanja informacij o Org"
+	},
+	"error_import": {
+		"message": "Napaka med uvozom:\n",
+		"description": "[napaka] med postopkom uvoza je prišlo do napake"
+	},
+	"error_invalid_key": {
+		"message": "Parameter ključa, posredovan funkciji, ni veljaven",
+		"description": "[napaka] razvijalec je poskusil poklicati funkcijo z neveljavnim parametrom"
+	},
+	"error_invalid_request": {
+		"message": "Neveljavna zahteva.",
+		"description": "[napaka] Splošna napaka po prejemu sporočila s slabim formatom"
+	},
+	"error_invalid_tab": {
+		"message": "Neveljaven Tab",
+		"description": "[napaka] Tab ni veljaven"
+	},
+	"error_link_with_id": {
+		"message": "Ta stran ne more obstajati v drugi Org, ker vsebuje Id!",
+		"description": "[odpri_drugo_org_modalno_okno] opozorilo uporabniku, da povezava morda ne obstaja v drugi Org"
+	},
+	"error_many_matching_tab": {
+		"message": "Najdenih več kot 1 ujemajoč Tab.",
+		"description": "[napaka] pridobljenih je bilo veliko Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Najdenih več kot en Tab.",
+		"description": "[napaka] pridobljenih je bilo veliko Tabs"
+	},
+	"error_minify_url": {
+		"message": "Praznega URL-ja ni mogoče pomanjšati!",
+		"description": "[napaka] url za zmanjšanje ni bil posredovan"
+	},
+	"error_missing_favourite_id": {
+		"message": "Priljubljene slike ni mogoče pridobiti brez Id-ja",
+		"description": "[napaka] Id priljubljenega ni bil posredovan"
+	},
+	"error_missing_key": {
+		"message": "Ključa ni bilo mogoče najti nikjer",
+		"description": "[napaka] v datotekah ni bilo najdenega prevoda"
+	},
+	"error_no_array": {
+		"message": "Posredovana je bila neveljavna tabela ali pa ni bila posredovana nobena tabela",
+		"description": "[napaka] ni bila prejeta veljavna tabela"
+	},
+	"error_no_browser_tab": {
+		"message": "Trenutnega zavihka brskalnika ni bilo mogoče najti.",
+		"description": "[napaka] stran v ozadju ni mogla vzpostaviti aktivnega zavihka brskalnika"
+	},
+	"error_no_callback": {
+		"message": "Prosimo, navedite povratni klic (callback)",
+		"description": "[napaka] funkcija za klic na koncu metode ni bila posredovana"
+	},
+	"error_no_cookies": {
+		"message": "Ni bilo najdenih ujemajočih piškotkov",
+		"description": "[napaka] piškotki Salesforce niso bili vrnjeni"
+	},
+	"error_no_data": {
+		"message": "Tab ni mogoče identificirati brez podatkov.",
+		"description": "[napaka] poskus pridobitve Tab brez pošiljanja podatkov"
+	},
+	"error_no_headers": {
+		"message": "Neuspešno iskanje glav.",
+		"description": "[napaka] Razširitev ni mogla najti mesta za gumb priljubljenih"
+	},
+	"error_no_matching_tab": {
+		"message": "Ni bilo najdenih ujemajočih Tabs.",
+		"description": "[napaka] nobenih Tabs ni bilo pridobljenih"
+	},
+	"error_no_message": {
+		"message": "Sporočilo za pošiljanje ni bilo določeno.",
+		"description": "[napaka] ni bilo najdenega sporočila za pošiljanje drugim delom kode"
+	},
+	"error_no_object": {
+		"message": "Ni objekta za preverjanje!",
+		"description": "[napaka] objekt ni bil posredovan"
+	},
+	"error_no_setup_tab": {
+		"message": "Neuspešno iskanje zavihka Setup.",
+		"description": "[napaka] Razširitev ni mogla najti mesta za priljubljene Tabs."
+	},
+	"error_no_url": {
+		"message": "Ni URL-ja za preverjanje!",
+		"description": "[napaka] url za preverjanje ni bil posredovan"
+	},
+	"error_not_initialized": {
+		"message": "še ni bil inicializiran.",
+		"description": "[napaka] Splošna napaka, ko spremenljivka ni pripravljena"
+	},
+	"error_processing_tabs": {
+		"message": "Napaka pri obdelavi Tabs.",
+		"description": "[napaka] Splošna napaka pri obdelavi Tabs"
+	},
+	"error_redirect": {
+		"message": "Ne morem preusmeriti. Prosimo, osvežite stran.",
+		"description": "[napaka] Splošna napaka pri preusmeritvi strani."
+	},
+	"error_remove_not_favourite": {
+		"message": "Ni mogoče odstraniti Tab, ki ni priljubljen!",
+		"description": "[napaka] uporabnik je poskusil odstraniti Tab, ki še ni bil shranjen"
+	},
+	"error_removing_all_tabs": {
+		"message": "Napaka pri odstranjevanju vseh Tabs.",
+		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju vseh Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Napaka pri odstranjevanju splošnih Tabs.",
+		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju splošnih Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Napaka pri odstranjevanju drugih Tabs.",
+		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju drugih Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Napaka pri odstranjevanju Tab.",
+		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Napaka pri odstranjevanju vseh vidnih Tab.",
+		"description": "[napaka] Splošna napaka pri odstranjevanju vseh vidnih Tab"
+	},
+	"error_required_params": {
+		"message": "Zahtevani parametri za funkcijo niso bili posredovani",
+		"description": "[napaka] razvijalec je poskusil poklicati funkcijo brez potrebnih parametrov"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Napaka pri ponastavljanju na privzete Tab.",
+		"description": "[napaka] Splošna napaka pri ponastavitvi Tab na privzete"
+	},
+	"error_sorting_tabs": {
+		"message": "Napaka pri razvrščanju Tab-ov",
+		"description": "[error] prikazano v obvestilu"
+	},
+	"error_sync_nothing": {
+		"message": "Ni mogoče sinhronizirati ničelnih (null) Tabs!",
+		"description": "[napaka] poskus sinhronizacije ničesar"
+	},
+	"error_tab_constructor": {
+		"message": "Uporabite Tab.create() namesto new Tab() za uporabo razreda Tab",
+		"description": "[napaka] povejte razvijalcu, kako uporabljati razred Tab"
+	},
+	"error_tab_label": {
+		"message": "Oznaka mora biti neprazen niz",
+		"description": "[napaka] uporabnik je poskusil ustvariti Tab brez oznake"
+	},
+	"error_tab_not_found": {
+		"message": "Tab ni bil najden.",
+		"description": "[napaka] Tab ni bil vključen v tabelo"
+	},
+	"error_tab_object_creation": {
+		"message": "Pri klicanju z objektom ne posredujte ničesar drugega.",
+		"description": "[napaka] napaka implementacije s strani razvijalca"
+	},
+	"error_tab_org": {
+		"message": "Org mora biti niz ali nedefiniran (undefined)",
+		"description": "[napaka] uporabnik je poskusil ustvariti Tab z neveljavno vrednostjo Org"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Najdeni nepričakovani ključi:",
+		"description": "[napaka] uporabnik je poskusil ustvariti Tab z nekaterimi nepodprtimi lastnostmi"
+	},
+	"error_tab_url": {
+		"message": "URL mora biti neprazen niz",
+		"description": "[napaka] uporabnik je poskusil ustvariti Tab brez url-ja"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab s tem URL-jem je že shranjen!",
+		"description": "[napaka] Uporabnik je poskusil shraniti že priljubljen Tab"
+	},
+	"error_tabcont_initialize": {
+		"message": "Ni mogoče inicializirati z",
+		"description": "[napaka] inicializacija vsebnika Tab ni uspela"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Zaznan(i) neveljaven(i) Tab(i).\nPrva pojavitev:",
+		"description": "[napaka] posredovani so bili neveljavni Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Uporabite TabContainer.create() namesto new TabContainer() za uporabo razreda TabContainer",
+		"description": "[napaka] povejte razvijalcu, kako uporabljati razred TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Uporabite TranslationService.create() namesto new TranslationService() za uporabo razreda TranslationService",
+		"description": "[napaka] povejte razvijalcu, kako uporabljati razred TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "prevajalnik še ni bil inicializiran.",
+		"description": "[napaka] TranslationService ni bil pripravljen"
+	},
+	"error_unknown_message": {
+		"message": "Prejeto neznano sporočilo",
+		"description": "od poslušalca je bilo prejeto neznano sporočilo"
+	},
+	"error_unknown_request": {
+		"message": "Neznana zahteva.",
+		"description": "[napaka] Splošna napaka po prejemu sporočila, ki ni bilo prepoznano"
+	},
+	"error_useless_remove": {
+		"message": "Ni mogoče odstraniti:\nNi mogoče odstraniti strani, ki še ni bila shranjena",
+		"description": "[napaka] uporabnik je poskusil odstraniti stran, ki še ni bila shranjena"
+	},
+	"error_useless_save": {
+		"message": "Ni mogoče shraniti:\nTa stran je že bila shranjena!",
+		"description": "[napaka] uporabnik je poskusil shraniti stran, ki je že bila shranjena"
+	},
+	"export": {
+		"message": "Izvozi",
+		"description": "[pojavno_okno] gumb za izvoz"
+	},
+	"export_title": {
+		"message": "Izvozi vse Tabs",
+		"description": "[pojavno_okno] naslov na gumbu za izvoz"
+	},
+	"extension_description": {
+		"message": "Ustvarite in upravljajte zavihke po meri v razpoložljivem prostoru na strani za nastavitev Salesforce Lightning.",
+		"description": "[manifest] Opis te razširitve"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Ime te razširitve"
+	},
+	"file": {
+		"message": "datoteka",
+		"description": "ena datoteka"
+	},
+	"files": {
+		"message": "datoteke",
+		"description": "več datotek"
+	},
+	"flows": {
+		"message": "Tokovi",
+		"description": "[privzeti-tab] Oznaka za privzeti Tab z Tokovi"
+	},
+	"general": {
+		"message": "Splošno",
+		"description": "Oznaka za kategorijo splošnih nastavitev"
+	},
+	"help": {
+		"message": "Pomoč",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Označuje nove Tab-e kot Tab-e Org, tako da so vidni le, ko ste prijavljeni v to določeno org. v Salesforce.",
+		"description": "[settings-help] za $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Na novo priljubljeni Tab-i so vstavljeni na začetek seznama Tab-ov v nastavitvah namesto na konec.",
+		"description": "[settings-help] za $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Če kliknete pojavno okno razširitve zunaj domene Salesforce, boste samodejno preusmerjeni na stran za prijavo v Salesforce.",
+		"description": "[settings-help] za $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Če kliknete pojavno okno razširitve znotraj domene Salesforce, vendar ne na strani z nastavitvami, boste samodejno preusmerjeni na stran z nastavitvami v Salesforce.",
+		"description": "[settings-help] za $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Ko je omogočeno, so vaši Tab-i ohranjeni v razvrščenem vrstnem redu – po oznaki, URL-ju ali org.; odvisno od tega, kaj izberete.",
+		"description": "[settings-help] za $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pripne shranjene Tab-e pred standardni navigacijski meni (Domov / Upravitelj predmetov) v nastavitvah, namesto za njim.",
+		"description": "[settings-help] za $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Ko je omogočeno, bo vsak shranjen Tab odprl povezano stran v novem Tab-u.",
+		"description": "[settings-help] za $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Zatira samodejni prikaz obvestil o opombah ob izdaji po posodobitvi razširitve.",
+		"description": "[settings-help] za $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Onemogoči pojavna okna s periodičnimi opomniki za posodobitev, kar ohranja uporabniški vmesnik razširitve čist (ko ste onemogočili samodejne posodobitve razširitve v nastavitvah brskalnika).",
+		"description": "[settings-help] za $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Če kliknete na pojavno okno razširitve zunaj domene Salesforce, se bo stran za prijavo odprla v trenutnem Tab-u brskalnika.",
+		"description": "[nastavitve-pomoč] za $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Če kliknete na pojavno okno razširitve znotraj domene Salesforce, vendar ne na strani za Setup, se bo stran Salesforce Setup odprla v trenutnem Tab-u brskalnika.",
+		"description": "[nastavitve-pomoč] za $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Nastavite jezik uporabniškega vmesnika samo za razširitev. Če kaj ni bilo prevedeno, bo namesto tega uporabljena angleška različica.",
+		"description": "[nastavitve-pomoč] za $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Onemogoči osnovno zbiranje telemetrije. Razširitev se ne bo prikazala v anonimnih meritvah uporabe.",
+		"description": "[settings-help] za $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Obide API za navigacijo Lightning in odpre povezave s ponovnim nalaganjem celotne strani, kar je lahko hitreje v nekaterih nastavitvah org.",
+		"description": "[settings-help] za $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Onemogoči preverjanje razširitve, ki potrjuje, da se fragment URL-ja ujema z obliko ID-jev zapisov/objektov v Salesforce (uporablja se za samodejno nastavitev shranjenega Tab-a kot Tab-a Org).",
+		"description": "[settings-help] za $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Kliknite za preusmeritev na dokumentacijo za to nastavitev!",
+		"description": "[nastavitve-pomoč] poziv k dejanju, ki uporabniku omogoča, da prebere več o določeni nastavitvi"
+	},
+	"import": {
+		"message": "Uvozi",
+		"description": "[pojavno_okno] gumb za uvoz"
+	},
+	"import_duplicate_description": {
+		"message": "Podvojeni Tabs bodo prezrti.<br />Dva Tabs se štejeta za podvojena, če imata isti URL.",
+		"description": "[uvoz] opis tega, kaj naredi postopek uvoza"
+	},
+	"import_invalid_file": {
+		"message": "Neveljavna vrsta datoteke.\nPodprte so samo datoteke JSON.",
+		"description": "[napaka] datoteka, uporabljena za uvoz, ni JSON"
+	},
+	"import_successful": {
+		"message": "Uspešno uvoženo",
+		"description": "[uvoz] uvoz je bil zaključen. Po tem bo prikazano število uvoženih zapisov"
+	},
+	"import_tabs": {
+		"message": "Uvozi Tabs",
+		"description": "[naslov_modalnega_okna] za postopek uvoza"
+	},
+	"import_title": {
+		"message": "$import_tabs iz datoteke JSON",
+		"description": "[pojavno-okno] naslov na gumbu za uvoz"
+	},
+	"insert_another": {
+		"message": "Vstavi drugega",
+		"description": "[napaka_odpri_drugo_org_modalno_okno] sporočilo, ko uporabnik vstavi isto Org v modalno okno"
+	},
+	"insert_another_org": {
+		"message": "Vstavljena Org je trenutna!\nProsimo, vstavite drugo Org.",
+		"description": "[napaka_odpri_drugo_org_modalno_okno] sporočilo, ko uporabnik vstavi isto Org v modalno okno"
+	},
+	"insert_valid_org": {
+		"message": "Prosimo, vstavite veljavno Org!",
+		"description": "[napaka_odpri_drugo_org_modalno_okno] sporočilo, ko uporabnik vstavi napačen url v modalno okno"
+	},
+	"italic": {
+		"message": "Ležeče",
+		"description": "Možnost sloga pisave za ležeče besedilo"
+	},
+	"lightning_navigation": {
+		"message": "Lightning navigacija",
+		"description": "Prilagojena navigacijska tehnologija Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Prijava v Salesforce",
+		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na prijavno stran Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mojalastnaorg",
+		"description": "ograda za modalno okno Posodobi Tab"
+	},
+	"no_manifest_github": {
+		"message": "Neveljavna ali manjkajoča GitHub homepage_url v manifestu",
+		"description": "Ključ homepage_url manifesta ne uporablja povezave GitHub"
+	},
+	"no_match": {
+		"message": "Ni se ujemalo z nobenim dejanjem",
+		"description": "[napaka] v Salesforce, ko stikalo ne more najti zahtevanega dejanja"
+	},
+	"nss_invalid_url": {
+		"message": "Zaznan je neveljaven URL naslov.",
+		"description": "[niNastavitevSalesforce] neveljaven URL naslov"
+	},
+	"nss_not_setup_page": {
+		"message": "To ni stran za nastavitev $salesforce_lightning.",
+		"description": "[notSalesforceSetup] uporabnik ni na strani Salesforce."
+	},
+	"open_here": {
+		"message": "Odpri v tem Tab.",
+		"description": "[open-other-org-modal] izbirni gumb, ki uporabniku omogoča odpiranje v istem Tab brskalnika"
+	},
+	"open_new_tab": {
+		"message": "Odpri v novem Tab.",
+		"description": "[open-other-org-modal] izbirni gumb, ki uporabniku omogoča odpiranje v novem Tab brskalnika."
+	},
+	"open_settings": {
+		"message": "Odpri nastavitve razširitve",
+		"description": "[pojokno] gumb za preusmeritev na stran z nastavitvami"
+	},
+	"open_setup": {
+		"message": "Odpri Nastavitev",
+		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Dodaj nove Tab-e kot Tab-e Org.",
+		"description": "[settings] omogočite uporabniku, da doda vse nove Tab-e kot specifične za org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Dodaj nove Tab-e spredaj.",
+		"description": "[settings] omogočite uporabniku, da doda vse nove Tab-e spredaj"
+	},
+	"opt_automatic_open_login": {
+		"message": "Samodejno odpri stran $salesforce_login, ko kliknete pojavno okno, medtem ko niste na strani Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno na naključnem spletnem mestu"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Samodejno odpri stran $salesforce_setup, ko kliknete pojavno okno, medtem ko ste na strani Salesforce.",
+		"description": "[nastavitev] ko uporabnik odpre pojavno okno na spletnem mestu Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "Nastavitve so bile shranjene!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Privzeto in nadomestno)",
+		"description": "Privzeta jezikovna možnost razširitve"
+	},
+	"opt_keep_sort": {
+		"message": "Ohrani Tab-e razvrščene.",
+		"description": "[setting] omogoči uporabniku, da ohrani svoje Tab-e razvrščene po enem od njihovih ključev"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Naj priljubljeni Tabi ostanejo na levi strani Doma in Upravitelja objektov.",
+		"description": "Stikalo za pripenjanje priljubljenih Tabov na levo stran navigacijske vrstice"
+	},
+	"opt_link_new_browser": {
+		"message": "Vedno odpri povezave v novem zavihku brskalnika.",
+		"description": "[nastavitev] ko uporabnik klikne na priljubljen zavihek, odpri v novem zavihku brskalnika"
+	},
+	"opt_no_release_notes": {
+		"message": "Ne prikaži opomb ob izdaji posodobitev.",
+		"description": "[nastavitev] uporabniku omogoči, da prepreči prikaz opomb ob posodobitvah razširitve"
+	},
+	"opt_no_update_notification": {
+		"message": "Ne opozarjaj na razpoložljive posodobitve.",
+		"description": "[nastavitev] uporabniku omogoči, da prepreči razširitvi iskanje novih izdaj"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Vedno odprite stran $salesforce_login v istem Tab, ko kliknete pojavno okno.",
+		"description": "[nastavitev]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Vedno odprite stran $salesforce_setup v istem Tab, ko kliknete pojavno okno.",
+		"description": "[nastavitev]"
+	},
+	"opt_pick_language": {
+		"message": "Izberite jezik razširitve",
+		"description": "[nastavitev] oznaka, ki uporabniku sporoča, naj izbere želeni jezik"
+	},
+	"opt_pick_sort": {
+		"message": "Izberite, po katerem polju naj bodo Tab-i razvrščeni",
+		"description": "[setting] zdaj lahko uporabnik izbere, po katerem ključu naj Tab-i ostanejo razvrščeni"
+	},
+	"opt_prevent_analytics": {
+		"message": "Prepreči uporabo Simple Analytics (ne boš vključen v štetje uporabnikov).",
+		"description": "[nastavitev] uporabniku omogoči preprečitev pošiljanja anonimne analitike"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Prepreči uporabo navigacije Lightning (hitrejše nalaganje, če ni označeno).",
+		"description": "[setting] ne dovoli navigacije Lightning z razlago funkcije"
+	},
+	"opt_same_tab_popup": {
+		"message": "stran v istem zavihku ob kliku na pojavno okno.",
+		"description": "[nastavitev] prepreči odpiranje novega zavihka brskalnika"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Sledite jeziku Salesforce (bere piškotke Salesforce)",
+		"description": "Možnost uporabe jezikovne nastavitve Salesforce. Za uporabo te možnosti morajo uporabniki dovoliti razširitvi branje piškotkov Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Preskoči samodejno preverjanje ID-ja Salesforce.",
+		"description": "[nastavitev] ko uporabnik doda priljubljen zavihek, ne preverjaj, ali je v povezavi ID"
+	},
+	"or_drop": {
+		"message": "Ali $drop",
+		"description": "[uvozi] dovolite uporabniku, da premika datoteke z miško in jih spusti"
+	},
+	"org_link": {
+		"message": "Povezava Org",
+		"description": "[oznaka_vnosa]"
+	},
+	"other_org_info": {
+		"message": "Informacije o drugi Org",
+		"description": "[naslov_modalnega_okna]"
+	},
+	"other_org_placeholder": {
+		"message": "druga-org",
+		"description": "[ograda_vnosa]"
+	},
+	"overwrite_tabs": {
+		"message": "Prepiši shranjene Tabs.",
+		"description": "[oznaka] izbriši vse shranjene Tabs med postopkom uvoza"
+	},
+	"preserve_org_tabs": {
+		"message": "Ohrani Tabs za druge Org.",
+		"description": "[oznaka] ohrani vse Tabs, specifične za Org, med postopkom uvoza"
+	},
+	"remove_tab": {
+		"message": "Odstrani Tab",
+		"description": "[alt] alternativno besedilo, ko slike ne delujejo"
+	},
+	"req_downloads_open_popup": {
+		"message": "Prosimo, odprite pojavno okno razširitve iz menija razširitev vašega brskalnika.",
+		"description": "[obvestilo] prosite uporabnika, naj klikne na pojavno okno razširitve za nadaljevanje"
+	},
+	"req_downloads_perm_header": {
+		"message": "Prosimo, omogočite dovoljenje za prenose\nza začetek zahtevanega izvoza.",
+		"description": "[zahtevaj_dovoljenje] poziv k dejanju za omogočanje dovoljenja za prenose"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ta operacija bo zahtevana samo enkrat.",
+		"description": "[zahtevaj_dovoljenje] opis za omogočanje dovoljenja za prenose"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Ne sprašuj več.",
+		"description": "[zahtevaj_dovoljenje] oznaka, ko uporabnik ne želi trajno dovoliti dovoljenj"
+	},
+	"req_permissions_header": {
+		"message": "Dovolite nam samodejni dostop\ndo strani $salesforce_setup.",
+		"description": "[req_permission] glava strani za zahtevanje dovoljenj"
+	},
+	"req_permissions_paragraph": {
+		"message": "Če želite, lahko svoje priljubljene Tabs prikažete\ntakoj, ko se pomaknete na stran $salesforce_setup,\nne da bi morali vsakič klikniti to razširitev.",
+		"description": "[req_permission] besedilo, ki pojasnjuje, zakaj se zahtevajo dovoljenja"
+	},
+	"required": {
+		"message": "zahtevano",
+		"description": "[vnos] označi vnosno polje kot obvezno"
+	},
+	"required_info": {
+		"message": "= Zahtevane informacije",
+		"description": "[modalno_okno] sporoči uporabniku, da so nekatere informacije obvezne"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[niSalesforceNastavitev] platforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Salesforce prijava",
+		"description": "Stran za prijavo v Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce nastavitve",
+		"description": "katerakoli stran z nastavitvami Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Shrani",
+		"description": "Uporabi spremembe in jih shrani v pomnilnik"
+	},
+	"save_tab": {
+		"message": "Shrani kot Tab",
+		"description": "[alt] alternativno besedilo, ko slike ne delujejo"
+	},
+	"send_tip": {
+		"message": "Pošljite nam namig ❤️",
+		"description": "[popup] naslov za svg za poziv k pošiljanju namiga"
+	},
+	"set_gen_preview": {
+		"message": "Predogled Taba",
+		"description": "Oznaka za predogled videza splošnih Tabov"
+	},
+	"set_gen_styler": {
+		"message": "Oblikovalnik Tabov",
+		"description": "Oznaka za konfiguriranje sloga splošnih Tabov"
+	},
+	"set_general_settings": {
+		"message": "Splošne nastavitve",
+		"description": "Naslov razdelka za splošne možnosti konfiguracije"
+	},
+	"set_move_available": {
+		"message": "Premakni med Na voljo",
+		"description": "Naslov gumba za premik izbranih elementov nazaj med Na voljo"
+	},
+	"set_move_chosen": {
+		"message": "Premakni med Izbrano",
+		"description": "Naslov gumba za premik izbranih elementov med Izbrano"
+	},
+	"set_org_preview": {
+		"message": "Predogled organizacije",
+		"description": "Oznaka za predogled videza Tabov specifičnih za organizacijo"
+	},
+	"set_org_styler": {
+		"message": "Oblikovalnik organizacije",
+		"description": "Oznaka za konfiguriranje sloga Tabov specifičnih za organizacijo"
+	},
+	"set_tab_background_active_label": {
+		"message": "Vnesite barvo ozadja za vaše aktivne splošne Tabe.",
+		"description": "Oznaka za nastavitev barve ozadja za aktivne splošne Tabe"
+	},
+	"set_tab_background_label": {
+		"message": "Vnesite barvo ozadja za vaše organizacijske Tabe.",
+		"description": "Oznaka za nastavitev barve ozadja za Tabe specifične za organizacijo"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Vnesite barvo obrobe za vaše aktivne organizacijske Tabe.",
+		"description": "Oznaka za nastavitev barve obrobe za aktivne Tabe specifične za organizacijo"
+	},
+	"set_tab_border_color_label": {
+		"message": "Vnesite barvo obrobe za vaše splošne Tabe.",
+		"description": "Oznaka za nastavitev barve obrobe za splošne Tabe"
+	},
+	"set_tab_color_active_label": {
+		"message": "Vnesite barvo besedila za vaše aktivne splošne Tabe.",
+		"description": "Oznaka za nastavitev barve besedila za aktivne splošne Tabe"
+	},
+	"set_tab_color_label": {
+		"message": "Vnesite barvo besedila za vaše organizacijske Tabe.",
+		"description": "Oznaka za nastavitev barve besedila za Tabe specifične za organizacijo"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Izberite enega ali več slogov okrasitve za vaše aktivne organizacijske Tabe.",
+		"description": "Poziv za izbiro slogov okrasitve za aktivne Tabe specifične za organizacijo"
+	},
+	"set_tab_decoration_label": {
+		"message": "Izberite enega ali več slogov okrasitve za vaše splošne Tabe.",
+		"description": "Poziv za izbiro slogov okrasitve za splošne Tabe"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Vnesite barvo ozadja ob prehodu miške za vaše aktivne splošne Tabe.",
+		"description": "Oznaka za nastavitev barve ozadja ob prehodu miške za aktivne splošne Tabe"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Vnesite barvo ozadja ob prehodu miške za vaše organizacijske Tabe.",
+		"description": "Oznaka za nastavitev barve ozadja ob prehodu miške za Tabe specifične za organizacijo"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Vnesite barvo sence za vaše aktivne organizacijske Tabe.",
+		"description": "Oznaka za nastavitev barve sence za aktivne Tabe specifične za organizacijo"
+	},
+	"set_tab_shadow_label": {
+		"message": "Vnesite barvo sence za vaše splošne Tabe.",
+		"description": "Oznaka za nastavitev barve sence za splošne Tabe"
+	},
+	"set_tab_top_active_label": {
+		"message": "Vnesite barvo za vrstico na vrhu vaših aktivnih splošnih Tabov.",
+		"description": "Oznaka za nastavitev barve zgornje vrstice za aktivne splošne Tabe"
+	},
+	"set_toggle_preview": {
+		"message": "Kliknite za preklop aktivnega stanja.",
+		"description": "Besedilo namiga orodja za kontrolnik za preklop aktivnega stanja"
+	},
+	"settings": {
+		"message": "Nastavitve",
+		"description": "Oznaka za meni nastavitev"
+	},
+	"setup_page": {
+		"message": "Stran za nastavitev",
+		"description": "[niSalesforceNastavitev] stran, uporabljena za spreminjanje nastavitev Salesforce"
+	},
+	"skip": {
+		"message": "Preskoči",
+		"description": "[zahtevaj_dovoljenje] gumb za NE dovoljenje dovoljenj"
+	},
+	"successfully_imported": {
+		"message": "Uspešno uvoženo",
+		"description": "[toast] uporabnik je dodal Tabs iz zunanje datoteke"
+	},
+	"tab_explain": {
+		"message": "Vsak element mora imeti 'label' in 'url' kot niza. Poleg tega ima lahko vsak element 'org' kot niz.",
+		"description": "[napaka] pojasnjuje, kako naj bo Tab sestavljen"
+	},
+	"tab_information": {
+		"message": "Informacije o Tab",
+		"description": "naslov za modalno okno posodobitve Tab"
+	},
+	"tab_label": {
+		"message": "Oznaka Tab",
+		"description": "Lastnost Label Tab, njegovo ime"
+	},
+	"tab_org": {
+		"message": "Org Tab",
+		"description": "Lastnost Org Tab, če je za eno samo organizacijo Salesforce"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "Lastnost URL Tab, kamor kaže"
+	},
+	"table_delete": {
+		"message": "Izbriši Tab",
+		"description": "[pojavno_okno] pomožno besedilo za stolpec z gumbom za brisanje"
+	},
+	"table_org": {
+		"message": "Je Org Tab",
+		"description": "[pojavno_okno] pomožno besedilo za stolpec s potrditvenim poljem Org"
+	},
+	"table_row_label": {
+		"message": "Vnesite oznako za ta URL",
+		"description": "[pojavno_okno] vnosno polje z imenom Tab"
+	},
+	"table_row_org": {
+		"message": "Kliknite, če želite, da je ta Tab na voljo samo za to Org.",
+		"description": "[pojavno_okno] potrditveno polje za preklop Tab, da je specifičen za Org"
+	},
+	"table_row_org_name": {
+		"message": "Org, za katero je ta Tab na voljo.",
+		"description": "[pojavno_okno] vnosno polje z imenom Org"
+	},
+	"table_row_url": {
+		"message": "Vnesite pod_URL, kamor želite biti preusmerjeni.",
+		"description": "[pojavno_okno] vnosno polje z url-jem Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "uporabnikove priljubljene povezave"
+	},
+	"tabs_saved": {
+		"message": "Tabs shranjeni.",
+		"description": "[toast] Tabs so bili uspešno shranjeni."
+	},
+	"theme_dark": {
+		"message": "Spremeni temo v temno",
+		"description": "[pojavno_okno] naslov na luni za preklop teme"
+	},
+	"theme_light": {
+		"message": "Spremeni temo v svetlo",
+		"description": "[pojavno_okno] naslov na soncu za preklop teme"
+	},
+	"underline": {
+		"message": "Podčrtano",
+		"description": "Možnost sloga okrasitve za podčrtovanje besedila Taba"
+	},
+	"underline_wavy": {
+		"message": "Valovito podčrtano",
+		"description": "Možnost sloga okrasitve za uporabo valovitega podčrtovanja na besedilu Taba"
+	},
+	"update_available": {
+		"message": "Posodobitev na voljo",
+		"description": "na voljo je nova posodobitev razširitve"
+	},
+	"upload": {
+		"message": "Naloži",
+		"description": "[uvoz] dovoli uporabniku, da brska po svojih datotekah in izbere pravo"
+	},
+	"users": {
+		"message": "Uporabniki",
+		"description": "Ime strani, povezano z ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Kam?",
+		"description": "[odpri_drugo_org_modalno_okno] rezervni naslov za modalno okno"
+	},
+	"write_review": {
+		"message": "Napišite recenzijo!",
+		"description": "[popup] naslov za svg za zahtevo po pisanju recenzije"
+	}
+}

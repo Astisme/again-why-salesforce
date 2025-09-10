@@ -3,7 +3,7 @@ import {
 	assertEquals,
 	assertFalse,
 	assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "@std/testing/asserts";
 import Tab from "/tab.js";
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {

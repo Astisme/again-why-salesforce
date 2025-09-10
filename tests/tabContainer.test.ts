@@ -5,7 +5,7 @@ import {
 	assertFalse,
 	assertRejects,
 	assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "@std/testing/asserts";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 
@@ -82,12 +82,12 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 	await t.step("adds a single tab", async () => {
 		await container.setDefaultTabs();
 		assert(await container.addTab({ label: "New Tab", url: "new-url" }));
-		const lastTab = container[container.length - 1];
+		const lastTab = container.at(-1);
 		assertEquals(lastTab.label, "New Tab");
 		assertEquals(lastTab.url, "new-url");
 		matchStorageToContainer(container);
 		assert(await container.addTab({ label: "New Tabb", url: "new-urll" }));
-		const newLastTab = container[container.length - 1];
+		const newLastTab = container.at(-1);
 		assertEquals(newLastTab.label, "New Tabb");
 		assertEquals(newLastTab.url, "new-urll");
 		matchStorageToContainer(container);
@@ -102,12 +102,12 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 				{ label: "Tab3", url: "url3" },
 			]),
 		);
-		assertEquals(container[container.length - 3].label, "Tab1");
-		assertEquals(container[container.length - 2].label, "Tab2");
-		assertEquals(container[container.length - 1].label, "Tab3");
-		assertEquals(container[container.length - 3].url, "url1");
-		assertEquals(container[container.length - 2].url, "url2");
-		assertEquals(container[container.length - 1].url, "url3");
+		assertEquals(container.at(-3).label, "Tab1");
+		assertEquals(container.at(-2).label, "Tab2");
+		assertEquals(container.at(-1).label, "Tab3");
+		assertEquals(container.at(-3).url, "url1");
+		assertEquals(container.at(-2).url, "url2");
+		assertEquals(container.at(-1).url, "url3");
 		matchStorageToContainer(container);
 	});
 
@@ -155,11 +155,11 @@ await Deno.test("TabContainer - Organization Filtering", async (t) => {
 
 		const noOrgTabs = container.getTabsWithOrg(false);
 		assertEquals(noOrgTabs.length, 4);
-		assertEquals(noOrgTabs[noOrgTabs.length - 1].label, "No Org Tab");
+		assertEquals(noOrgTabs.at(-1).label, "No Org Tab");
 
 		const onlyOrgTabs = container.getTabsWithOrg();
 		assertEquals(onlyOrgTabs.length, 3);
-		assertEquals(onlyOrgTabs[onlyOrgTabs.length - 1].label, "Org2 Tab2");
+		assertEquals(onlyOrgTabs.at(-1).label, "Org2 Tab2");
 	});
 });
 
@@ -529,7 +529,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertThrows(
 			() => container.getSingleTabByData({ url: "urll" }),
 			Error,
-			"error_many_tabs_found",
+			"error_tab_not_found",
 		);
 		assertThrows(
 			() => container.getSingleTabByData({ label: "Org Tab" }, false),
@@ -795,7 +795,9 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		const newContainer = container.map((_) => "I'm a string!");
 		assertEquals(container.length, 3);
 		assertEquals(newContainer.length, 3);
-		newContainer.forEach((el) => assertEquals(el, "I'm a string!"));
+		for (const el of newContainer) {
+			assertEquals(el, "I'm a string!");
+		}
 	});
 
 	await t.step("setDefaultTabs", async () => {
