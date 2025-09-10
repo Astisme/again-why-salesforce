@@ -3,6 +3,10 @@
 		"message": "Permitir",
 		"description": "[req_permission] Botón para permitir permisos"
 	},
+	"ascending": {
+		"message": "Ascendente (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Disponible",
 		"description": "Encabezado de sección para elementos que se pueden agregar"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etiqueta para el menú de configuración"
 	},
+	"cxm_sort": {
+		"message": "🎯 Ordenar Tabs",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs automáticamente (menú principal)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 por Etiqueta",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por etiqueta"
+	},
+	"cxm_sort_org": {
+		"message": "👽 por Org",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por organización"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 por Url",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualizar Tab",
 		"description": "[menú contextual]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete todas las Tabs",
 		"description": "[emergente] título en la papelera para vaciar todas las Tabs"
+	},
+	"descending": {
+		"message": "Descendente (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Error al restablecer las Tabs a las predeterminadas.",
 		"description": "[error] Error genérico utilizado al restablecer las Tabs a sus valores predeterminados"
 	},
+	"error_sorting_tabs": {
+		"message": "Error al ordenar las Tabs",
+		"description": "[error] mostrado en un mensaje de brindis"
+	},
 	"error_sync_nothing": {
 		"message": "¡No se pueden sincronizar Tabs nulos!",
 		"description": "[error] Se intentó sincronizar nada."
@@ -454,6 +482,70 @@
 		"message": "General",
 		"description": "Etiqueta para la categoría de configuración general"
 	},
+	"help": {
+		"message": "Ayuda",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marca las nuevas Tabs como Org Tabs, por lo que solo son visibles cuando se inicia sesión en esa organización de Salesforce en particular.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Las Tabs recién favoritas se insertan al principio de su lista de Tabs en la barra de configuración en lugar de agregarse al final.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Si hace clic en la ventana emergente de la extensión fuera de un dominio de Salesforce, lo llevará a la página de inicio de sesión de Salesforce automáticamente.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Si hace clic en la ventana emergente de la extensión dentro de un dominio de Salesforce pero no en una página de configuración, lo llevará a la página de configuración de Salesforce automáticamente.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Cuando está habilitado, sus Tabs se mantienen en orden clasificado, ya sea por etiqueta, URL u organización; dependiendo de lo que elija.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fija sus Tabs guardadas antes del menú de navegación estándar (Home / Object Manager) en la configuración, en lugar de después.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Cuando está habilitado, cada Tab guardada abrirá la página relacionada en una nueva Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Suprime la visualización automática de las notificaciones de notas de la versión después de que la extensión se actualice.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Desactiva las ventanas emergentes de recordatorio de actualización periódicas, manteniendo limpia la interfaz de usuario de la extensión (cuando ha deshabilitado las actualizaciones automáticas de la extensión desde la configuración de su navegador).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Si hace clic en la ventana emergente de la extensión fuera de un dominio de Salesforce, la página de inicio de sesión se abrirá en la Tab del navegador actual.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Si hace clic en la ventana emergente de la extensión dentro de un dominio de Salesforce pero no en una página de configuración, la página de configuración de Salesforce se abrirá en la Tab del navegador actual.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Establezca el idioma de la interfaz de usuario solo para la extensión. Si algo no se ha traducido, se utilizará la versión en inglés en su lugar.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Desactiva la recopilación de telemetría básica. La extensión no aparecerá en las métricas de uso anónimas.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omite la API de Lightning Navigation y abre enlaces a través de una recarga de página completa, lo que puede ser más rápido en algunas configuraciones de la organización.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Desactiva la comprobación de la extensión que verifica que un fragmento de URL coincida con el formato de los ID de registro/objeto de Salesforce (utilizado para establecer automáticamente la Tab guardada como un Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importar",
 		"description": "[popup] Botón de importación"
@@ -538,6 +630,14 @@
 		"message": "Abrir Configuración",
 		"description": "[notSalesforceSetup] Llamado a la acción para ir a la página de Configuración de Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Agregar nuevas Tabs como Org Tabs.",
+		"description": "[settings] permite al usuario agregar todas las Tabs nuevas como específicas de la organización"
+	},
+	"opt_add_tabs_front": {
+		"message": "Agregar nuevas Tabs al frente.",
+		"description": "[settings] permite al usuario agregar todas las Tabs nuevas al frente"
+	},
 	"opt_automatic_open_login": {
 		"message": "Abrir automáticamente la página de $salesforce_login al hacer clic en la ventana emergente si no se está en una página de Salesforce.",
 		"description": "[configuración] cuando el usuario abre la ventana emergente mientras está en un sitio web aleatorio"
@@ -546,9 +646,17 @@
 		"message": "Abrir automáticamente la página de $salesforce_setup al hacer clic en la ventana emergente si se está en una página de Salesforce.",
 		"description": "[configuración] cuando el usuario abre la ventana emergente mientras está en un sitio web de Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "¡Se guardaron los ajustes!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Predeterminado y de reserva)",
 		"description": "Opción de idioma predeterminada de la extensión"
+	},
+	"opt_keep_sort": {
+		"message": "Mantener las Tabs ordenadas.",
+		"description": "[setting] permite al usuario mantener sus Tabs ordenadas por una de sus claves"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantener Tabs favoritos a la izquierda de Inicio y Object Manager.",
@@ -578,13 +686,17 @@
 		"message": "Elegir idioma de la extensión",
 		"description": "[configuración] etiqueta para pedir al usuario que elija su idioma preferido"
 	},
+	"opt_pick_sort": {
+		"message": "Elija por qué campo se deben ordenar las Tabs",
+		"description": "[setting] ahora el usuario puede elegir por qué clave mantener las Tabs ordenadas"
+	},
 	"opt_prevent_analytics": {
 		"message": "Evitar el uso de Simple Analytics (no aparecerá en el conteo de usuarios).",
 		"description": "[configuración] permite al usuario evitar enviar análisis anónimos"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Evitar el uso de Lightning Navigation (carga más rápida cuando está en uso).",
-		"description": "[setting] no permitir Lightning Navigation con explicación de la característica"
+		"message": "Evitar el uso de Lightning Navigation (carga más rápida cuando no está marcada).",
+		"description": "[setting] no permitir Lightning Navigation con explicación de la función"
 	},
 	"opt_same_tab_popup": {
 		"message": "página en la misma pestaña al hacer clic en el popup.",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "Guardar como Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
+	},
+	"send_tip": {
+		"message": "Envíanos una propina ❤️",
+		"description": "[popup] título para svg para solicitar el envío de una propina"
 	},
 	"set_gen_preview": {
 		"message": "Vista previa de Tab",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "¿A dónde?",
 		"description": "[open-other-org-modal] Título alternativo para el modal."
+	},
+	"write_review": {
+		"message": "¡Escribe una reseña!",
+		"description": "[popup] título para svg para solicitar escribir una reseña"
 	}
 }

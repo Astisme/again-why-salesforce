@@ -3,6 +3,10 @@
 		"message": "ಅನುಮತಿಸಿ",
 		"description": "[ಅನುಮತಿ_ಕೋರಿಕೆ] ಬಟನ್ ಅನುಮತಿಗಳನ್ನು ನೀಡಲು"
 	},
+	"ascending": {
+		"message": "ಆರೋಹಣ (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "ಲಭ್ಯವಿದೆ",
 		"description": "ಸೇರಿಸಬಹುದಾದ ಐಟಂಗಳಿಗಾಗಿ ವಿಭಾಗ ಶೀರ್ಷಿಕೆ"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಮೆನುಗಾಗಿ ಲೇಬಲ್"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabs ಅನ್ನು ವಿಂಗಡಿಸಿ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು (ಪೋಷಕ ಮೆನು)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ಲೇಬಲ್ ಮೂಲಕ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಲೇಬಲ್ ಮೂಲಕ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org ಮೂಲಕ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಸಂಸ್ಥೆಯ ಮೂಲಕ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url ಮೂಲಕ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು URL ಮೂಲಕ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab ನವೀಕರಿಸಿ",
 		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete ಎಲ್ಲಾ Tabs",
 		"description": "[ಪಾಪ್‌ಅಪ್] ಎಲ್ಲಾ Tabs ಖಾಲಿ ಮಾಡಲು ಬಿನ್ ಮೇಲಿನ ಶೀರ್ಷಿಕೆ"
+	},
+	"descending": {
+		"message": "ಅವರೋಹಣ (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "ಡ್ರಾಪ್",
@@ -351,6 +375,10 @@
 		"message": "ಡೀಫಾಲ್ಟ್ Tabಗಳಿಗೆ ಮರುಹೊಂದಿಸುವಾಗ ದೋಷವಾಯಿತು.",
 		"description": "[ದೋಷ] Tabಗಳನ್ನು ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸುವಾಗ ಬಳಕೆಯಾಗುವ ಸಾಮಾನ್ಯ ದೋಷ"
 	},
+	"error_sorting_tabs": {
+		"message": "Tabs ಅನ್ನು ವಿಂಗಡಿಸುವಾಗ ದೋಷ",
+		"description": "[error] ಟೋಸ್ಟ್ ಸಂದೇಶದಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ"
+	},
 	"error_sync_nothing": {
 		"message": "ಖಾಲಿ Tabs ಸಿಂಕ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ!",
 		"description": "[ದೋಷ] ಏನನ್ನೂ ಸಿಂಕ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
@@ -454,6 +482,70 @@
 		"message": "ಸಾಮಾನ್ಯ",
 		"description": "ಸಾಮಾನ್ಯ ಸೆಟ್ಟಿಂಗ್ಗಳ ವಿಭಾಗಕ್ಕೆ ಲೇಬಲ್"
 	},
+	"help": {
+		"message": "ಸಹಾಯ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "ಹೊಸ Tabs ಅನ್ನು Org Tabs ಎಂದು ಗುರುತಿಸುತ್ತದೆ, ಆದ್ದರಿಂದ ನೀವು ನಿರ್ದಿಷ್ಟ Salesforce Org ಗೆ ಲಾಗ್ ಇನ್ ಮಾಡಿದಾಗ ಮಾತ್ರ ಅವು ಗೋಚರಿಸುತ್ತವೆ.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "ಹೊಸದಾಗಿ ಮೆಚ್ಚಿನ Tabs ಅನ್ನು ಸೆಟಪ್ ಬಾರ್‌ನಲ್ಲಿ ನಿಮ್ಮ Tab ಪಟ್ಟಿಯ ಕೊನೆಯಲ್ಲಿ ಸೇರಿಸುವ ಬದಲು ಅದರ ಮುಂಭಾಗದಲ್ಲಿ ಸೇರಿಸಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಹೊರಗೆ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, ಅದು ನಿಮ್ಮನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ Salesforce ಲಾಗಿನ್ ಪುಟಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಒಳಗೆ ಆದರೆ ಸೆಟಪ್ ಪುಟದಲ್ಲಿಲ್ಲದಿದ್ದಾಗ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, ಅದು ನಿಮ್ಮನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ನಿಮ್ಮ Tabs ಅನ್ನು ವಿಂಗಡಿಸಿದ ಕ್ರಮದಲ್ಲಿ ಇರಿಸಲಾಗುತ್ತದೆ—ಲೇಬಲ್, URL ಅಥವಾ Org ಮೂಲಕ; ನೀವು ಯಾವುದನ್ನು ಆರಿಸುತ್ತೀರಿ ಎಂಬುದರ ಮೇಲೆ ಅವಲಂಬಿತವಾಗಿರುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "ಸೆಟಪ್‌ನಲ್ಲಿ ಪ್ರಮಾಣಿತ ನ್ಯಾವಿಗೇಷನ್ ಮೆನು (Home / Object Manager) ನಂತರದ ಬದಲು ಅದರ ಮೊದಲು ನಿಮ್ಮ ಉಳಿಸಿದ Tabs ಅನ್ನು ಪಿನ್ ಮಾಡುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ಪ್ರತಿ ಉಳಿಸಿದ Tab ಸಂಬಂಧಿತ ಪುಟವನ್ನು ಹೊಸ Tab ನಲ್ಲಿ ತೆರೆಯುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "ವಿಸ್ತರಣೆಯು ಅಪ್‌ಡೇಟ್ ಆದ ನಂತರ ಬಿಡುಗಡೆ ಟಿಪ್ಪಣಿಗಳ ಅಧಿಸೂಚನೆಗಳ ಸ್ವಯಂಚಾಲಿತ ಪ್ರದರ್ಶನವನ್ನು ನಿಗ್ರಹಿಸುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "ಆವರ್ತಕ ಅಪ್‌ಡೇಟ್ ಜ್ಞಾಪನೆ ಪಾಪ್‌ಅಪ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ, ವಿಸ್ತರಣೆಯ UI ಅನ್ನು ಸ್ವಚ್ಛವಾಗಿ ಇರಿಸುತ್ತದೆ (ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಂದ ವಿಸ್ತರಣೆಯ ಸ್ವಯಂಚಾಲಿತ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ನೀವು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದಾಗ).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಹೊರಗೆ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, ಲಾಗಿನ್ ಪುಟವನ್ನು ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಒಳಗೆ ಆದರೆ ಸೆಟಪ್ ಪುಟದಲ್ಲಿಲ್ಲದಿದ್ದಾಗ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, Salesforce ಸೆಟಪ್ ಪುಟವನ್ನು ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "ವಿಸ್ತರಣೆಗಾಗಿ ಮಾತ್ರ UI ಭಾಷೆಯನ್ನು ಹೊಂದಿಸಿ. ಏನಾದರೂ ಭಾಷಾಂತರಿಸದಿದ್ದರೆ, ಅದರ ಬದಲಿಗೆ ಇಂಗ್ಲಿಷ್ ಆವೃತ್ತಿಯನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "ಮೂಲಭೂತ ಟೆಲಿಮೆಟ್ರಿ ಸಂಗ್ರಹಣೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ. ವಿಸ್ತರಣೆಯು ಅನಾಮಧೇಯ ಬಳಕೆಯ ಮೆಟ್ರಿಕ್‌ಗಳಲ್ಲಿ ಗೋಚರಿಸುವುದಿಲ್ಲ.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ API ಅನ್ನು ಬೈಪಾಸ್ ಮಾಡುತ್ತದೆ ಮತ್ತು ಸಂಪೂರ್ಣ-ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡುವ ಮೂಲಕ ಲಿಂಕ್‌ಗಳನ್ನು ತೆರೆಯುತ್ತದೆ, ಇದು ಕೆಲವು ಸಂಸ್ಥೆ ಸೆಟಪ್‌ಗಳಲ್ಲಿ ವೇಗವಾಗಿರಬಹುದು.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "URL ಫ್ರಾಗ್ಮೆಂಟ್ Salesforce ರೆಕಾರ್ಡ್/ಆಬ್ಜೆಕ್ಟ್ ಐಡಿಗಳ ಸ್ವರೂಪಕ್ಕೆ ಹೊಂದಿಕೆಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸುವ ವಿಸ್ತರಣೆಯ ಪರಿಶೀಲನೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ (ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಉಳಿಸಿದ Tab ಅನ್ನು Org Tab ಆಗಿ ಹೊಂದಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "ಆಮದುಮಾಡಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ಆಮದು ಬಟನ್"
@@ -538,6 +630,14 @@
 		"message": "ಸೆಟಪ್ ತೆರೆಯಿರಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆ"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Org Tabs ಆಗಿ ಹೊಸ Tabs ಅನ್ನು ಸೇರಿಸಿ.",
+		"description": "[settings] ಬಳಕೆದಾರರು ಎಲ್ಲಾ ಹೊಸ Tabs ಅನ್ನು org-ನಿರ್ದಿಷ್ಟ ಎಂದು ಸೇರಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
+	"opt_add_tabs_front": {
+		"message": "ಮುಂಭಾಗದಲ್ಲಿ ಹೊಸ Tabs ಅನ್ನು ಸೇರಿಸಿ.",
+		"description": "[settings] ಬಳಕೆದಾರರು ಎಲ್ಲಾ ಹೊಸ Tabs ಅನ್ನು ಮುಂಭಾಗದಲ್ಲಿ ಸೇರಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce ಪುಟದಲ್ಲಿ ಇಲ್ಲದಿರುವಾಗ ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ $salesforce_login ಪುಟವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ.",
 		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು ಯಾದೃಚ್ಛಿಕ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿದ್ದಾಗ ಪಾಪ್‌ಅಪ್ ತೆರೆದಾಗ"
@@ -546,9 +646,17 @@
 		"message": "Salesforce ಪುಟದಲ್ಲಿದ್ದಾಗ ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ $salesforce_setup ಪುಟವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ.",
 		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿದ್ದಾಗ ಪಾಪ್‌ಅಪ್ ತೆರೆದಾಗ"
 	},
+	"opt_confirm_save": {
+		"message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಲಾಗಿದೆ!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (ಡೀಫಾಲ್ಟ್ ಮತ್ತು ಫಾಲ್‌ಬ್ಯಾಕ್)",
 		"description": "ವಿಸ್ತರಣೆಯ ಡೀಫಾಲ್ಟ್ ಭಾಷಾ ಆಯ್ಕೆ"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs ಅನ್ನು ವಿಂಗಡಿಸಿ ಇರಿಸಿ.",
+		"description": "[setting] ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಅವರ ಕೀಗಳಲ್ಲಿ ಒಂದರಿಂದ ವಿಂಗಡಿಸಿ ಇರಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ಪ್ರಿಯ Tabsಗಳನ್ನು Home ಮತ್ತು Object Managerನ ಎಡಭಾಗದಲ್ಲಿರಿಸಿ.",
@@ -578,13 +686,17 @@
 		"message": "ವಿಸ್ತರಣೆ ಭಾಷೆಯನ್ನು ಆರಿಸಿ",
 		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರಿಗೆ ತಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಪ್ರಾಂಪ್ಟ್ ಮಾಡಲು ಲೇಬಲ್"
 	},
+	"opt_pick_sort": {
+		"message": "Tabs ಅನ್ನು ಯಾವ ಫೀಲ್ಡ್ ಮೂಲಕ ವಿಂಗಡಿಸಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+		"description": "[setting] ಈಗ ಬಳಕೆದಾರರು Tabs ಅನ್ನು ಯಾವ ಕೀ ಮೂಲಕ ವಿಂಗಡಿಸಿ ಇಡಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆ ಮಾಡಬಹುದು"
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analytics ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ (ಬಳಕೆದಾರರ ಎಣಿಕೆಯಲ್ಲಿ ಕಾಣಿಸದು).",
 		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರಿಗೆ ಅನಾಮಕ ವಿಶ್ಲೇಷಣೆಯನ್ನು ಕಳುಹಿಸುವುದನ್ನು ತಡೆಯಲು ಅವಕಾಶ ನೀಡುತ್ತದೆ"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ (ಬಳಕೆಯಲ್ಲಿರುವಾಗ ವೇಗವಾಗಿ ಲೋಡ್ ಆಗುತ್ತದೆ).",
-		"description": "[ಸೆಟ್ಟಿಂಗ್] ವೈಶಿಷ್ಟ್ಯದ ವಿವರಣೆಯೊಂದಿಗೆ ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ ಅನ್ನು ಅನುಮತಿಸಬೇಡಿ"
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ (ಅನ್‌ಚೆಕ್ ಮಾಡಿದಾಗ ವೇಗವಾಗಿ ಲೋಡ್ ಆಗುತ್ತದೆ).",
+		"description": "[setting] ವೈಶಿಷ್ಟ್ಯದ ವಿವರಣೆಯೊಂದಿಗೆ ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ಅವಕಾಶ ನೀಡಬೇಡಿ"
 	},
 	"opt_same_tab_popup": {
 		"message": "ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಅದೇ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಪುಟ.",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "Tab ಆಗಿ ಉಳಿಸಿ",
 		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"
+	},
+	"send_tip": {
+		"message": "ನಮಗೆ ಒಂದು ಸಲಹೆ ಕಳುಹಿಸಿ ❤️",
+		"description": "[popup] ಸಲಹೆ ಕಳುಹಿಸಲು ಪ್ರೇರೇಪಿಸುವ svg ಗಾಗಿ ಶೀರ್ಷಿಕೆ"
 	},
 	"set_gen_preview": {
 		"message": "Tab ಪೂರ್ವದೃಶ್ಯ",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "ಎಲ್ಲಿ?",
 		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್] ಮೊಡಲ್ ಗೆ ಜಾಗಾರ್ಷಕ ಶೀರ್ಷಿಕೆ"
+	},
+	"write_review": {
+		"message": "ಒಂದು ವಿಮರ್ಶೆ ಬರೆಯಿರಿ!",
+		"description": "[popup] ವಿಮರ್ಶೆ ಬರೆಯಲು ವಿನಂತಿಸುವ svg ಗಾಗಿ ಶೀರ್ಷಿಕೆ"
 	}
 }

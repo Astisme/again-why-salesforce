@@ -3,6 +3,10 @@
 		"message": "Permiteți",
 		"description": "[cerere_permisiune] buton pentru a permite permisiuni"
 	},
+	"ascending": {
+		"message": "Ascendent (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Disponibil",
 		"description": "Antet de secțiune pentru elementele care pot fi adăugate"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etichetă pentru meniul de setări"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sortează Tab-urile",
+		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile automat (meniu părinte)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 după Etichetă",
+		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după etichetă"
+	},
+	"cxm_sort_org": {
+		"message": "👽 după Org",
+		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 după URL",
+		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualizați Tab",
 		"description": "[meniu-contextual]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete toate Tabs",
 		"description": "[fereastră-pop-up] titlu pe coșul de gunoi pentru a goli toate Tabs"
+	},
+	"descending": {
+		"message": "Descendent (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Trageți",
@@ -351,6 +375,10 @@
 		"message": "Eroare la resetarea Tab-urilor implicite.",
 		"description": "[eroare] Eroare generală la resetarea Tab-urilor la valorile implicite"
 	},
+	"error_sorting_tabs": {
+		"message": "Eroare la sortarea Tab-urilor",
+		"description": "[error] afișat într-un mesaj de notificare"
+	},
 	"error_sync_nothing": {
 		"message": "Nu se pot sincroniza Tabs nule!",
 		"description": "[eroare] s-a încercat sincronizarea a nimic"
@@ -455,6 +483,70 @@
 		"message": "General",
 		"description": "Etichetă pentru categoria de setări generale"
 	},
+	"help": {
+		"message": "Ajutor",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marchează Tab-urile noi ca Tab-uri Org, astfel încât acestea să fie vizibile numai când sunteți conectat la acea Org Salesforce particulară.",
+		"description": "[settings-help] pentru $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tab-urile nou adăugate la favorite sunt inserate în fața listei dvs. de Tab-uri din bara de configurare, în loc să fie adăugate la sfârșit.",
+		"description": "[settings-help] pentru $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Dacă faceți clic pe pop-up-ul extensiei în afara unui domeniu Salesforce, veți fi direcționat automat către pagina de autentificare Salesforce.",
+		"description": "[settings-help] pentru $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Dacă faceți clic pe pop-up-ul extensiei într-un domeniu Salesforce, dar nu pe o pagină de configurare, veți fi direcționat automat către pagina de configurare Salesforce.",
+		"description": "[settings-help] pentru $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Când este activată, Tab-urile dvs. sunt păstrate în ordine sortată — fie după etichetă, URL sau Org; în funcție de ceea ce alegeți.",
+		"description": "[settings-help] pentru $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fixează Tab-urile salvate înainte de meniul de navigare standard (Acasă / Object Manager) în Configurare, în loc de după acesta.",
+		"description": "[settings-help] pentru $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Când este activat, fiecare Tab salvat va deschide paginaa aferentă într-un Tab nou.",
+		"description": "[settings-help] pentru $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Suprimă afișarea automată a notificărilor cu note de lansare după actualizarea extensiei.",
+		"description": "[settings-help] pentru $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Dezactivează pop-up-urile periodice de memento-uri de actualizare, păstrând interfața de utilizare a extensiei curată (atunci când ați dezactivat actualizările automate ale extensiei din setările browserului dvs.).",
+		"description": "[settings-help] pentru $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Dacă dați clic pe fereastra pop-up a extensiei în afara unui domeniu Salesforce, pagina de conectare se va deschide în Tab-ul curent al browserului.",
+		"description": "[ajutor-setări] pentru $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Dacă dați clic pe fereastra pop-up a extensiei în interiorul unui domeniu Salesforce, dar nu pe o pagină de Setup, pagina de Setup Salesforce se va deschide în Tab-ul curent al browserului.",
+		"description": "[ajutor-setări] pentru $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Setează limba interfeței de utilizator numai pentru extensie. Dacă ceva nu a fost tradus, va fi folosită versiunea în engleză.",
+		"description": "[ajutor-setări] pentru $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Dezactivează colectarea de telemetrie de bază. Extensia nu va apărea în valorile de utilizare anonime.",
+		"description": "[settings-help] pentru $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Ocolește API-ul de navigare Lightning și deschide link-urile printr-o reîncărcare completă a paginii, ceea ce poate fi mai rapid în unele configurații de org.",
+		"description": "[settings-help] pentru $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Dezactivează verificarea extensiei care verifică dacă un fragment de URL se potrivește cu formatul ID-urilor de înregistrare/obiect Salesforce (utilizat pentru a seta automat Tab-ul salvat ca Tab Org).",
+		"description": "[settings-help] pentru $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importați",
 		"description": "[popup] buton de import"
@@ -539,6 +631,14 @@
 		"message": "Deschideți Configurare",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Adăugați Tab-uri noi ca Tab-uri Org.",
+		"description": "[settings] permite utilizatorului să adauge toate Tab-urile noi ca fiind specifice org-ului"
+	},
+	"opt_add_tabs_front": {
+		"message": "Adăugați Tab-uri noi în față.",
+		"description": "[settings] permite utilizatorului să adauge toate Tab-urile noi în față"
+	},
 	"opt_automatic_open_login": {
 		"message": "Deschideți automat pagina $salesforce_login atunci când faceți clic pe fereastra pop-up în timp ce nu vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web aleatoriu"
@@ -547,9 +647,17 @@
 		"message": "Deschideți automat pagina $salesforce_setup atunci când faceți clic pe fereastra pop-up în timp ce vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Setările au fost salvate!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Implicit și de rezervă)",
 		"description": "Opțiunea de limbă implicită a extensiei"
+	},
+	"opt_keep_sort": {
+		"message": "Păstrați Tab-urile sortate.",
+		"description": "[setting] permite utilizatorului să-și păstreze Tab-urile sortate după una dintre cheile lor"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Păstrează Tab-urile favorite în partea stângă a Home și Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "Alege limba extensiei",
 		"description": "[setare] etichetă pentru a solicita utilizatorului să își aleagă limba preferată"
 	},
+	"opt_pick_sort": {
+		"message": "Alegeți după ce câmp ar trebui să fie sortate Tab-urile",
+		"description": "[setting] acum utilizatorul poate alege după ce cheie să-și păstreze Tab-urile sortate"
+	},
 	"opt_prevent_analytics": {
 		"message": "Împiedică utilizarea Simple Analytics (nu va fi contorizat la numărul de utilizatori).",
 		"description": "[setare] permite utilizatorului să oprească trimiterea de analize anonime"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Împiedică utilizarea navigării Lightning (încărcare mai rapidă în timpul utilizării).",
-		"description": "[setare] nu permite navigarea Lightning cu explicația funcției"
+		"message": "Împiedică utilizarea navigării Lightning (încărcare mai rapidă când este debifată).",
+		"description": "[setting] nu permite navigarea Lightning cu o explicație a funcției"
 	},
 	"opt_same_tab_popup": {
 		"message": "pagina în aceeași filă la clic pe popup.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Salvați ca Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"send_tip": {
+		"message": "Trimite-ne un pont ❤️",
+		"description": "[popup] titlu pentru svg pentru a solicita trimiterea unui pont"
 	},
 	"set_gen_preview": {
 		"message": "Previzualizare Tab",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Unde?",
 		"description": "[modal-deschide-altă-org] titlu de rezervă pentru modal"
+	},
+	"write_review": {
+		"message": "Scrie o recenzie!",
+		"description": "[popup] titlu pentru svg pentru a solicita scrierea unei recenzii"
 	}
 }

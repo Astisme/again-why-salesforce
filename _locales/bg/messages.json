@@ -3,6 +3,10 @@
 		"message": "Позволи",
 		"description": "[req_permission] бутон за разрешаване на права"
 	},
+	"ascending": {
+		"message": "Възходящ (А-Я)",
+		"description": ""
+	},
 	"available": {
 		"message": "Налично",
 		"description": "Заглавие на секция за елементи, които могат да бъдат добавени"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Етикет за менюто с настройки"
 	},
+	"cxm_sort": {
+		"message": "🎯 Сортиране на Tabs",
+		"description": "контекстно меню, което позволява на потребителите автоматично да сортират своите Tabs (основно меню)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 по Етикет",
+		"description": "контекстно меню, което позволява на потребителите да сортират своите Tabs по етикет"
+	},
+	"cxm_sort_org": {
+		"message": "👽 по Org",
+		"description": "контекстно меню, което позволява на потребителите да сортират своите Tabs по организация"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 по Url",
+		"description": "контекстно меню, което позволява на потребителите да сортират своите Tabs по URL адрес"
+	},
 	"cxm_update": {
 		"message": "✏️ Актуализирай Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete всички Tabs",
 		"description": "[изскачащ прозорец] заглавие на кошчето за изпразване на всички Tabs"
+	},
+	"descending": {
+		"message": "Низходящ (Я-А)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Грешка при нулиране на подразбиращите се Tab.",
 		"description": "[грешка] Обща грешка при нулиране на Tab до подразбиращи се стойности"
 	},
+	"error_sorting_tabs": {
+		"message": "Грешка при сортиране на Tabs",
+		"description": "[error] показано в изскачащо съобщение"
+	},
 	"error_sync_nothing": {
 		"message": "Не може да се синхронизират празни Tab!",
 		"description": "[error] се опита да се синхронизира нищо"
@@ -455,6 +483,70 @@
 		"message": "Общи",
 		"description": "Етикет за категорията общи настройки"
 	},
+	"help": {
+		"message": "Помощ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Маркира новите Tabs като Org Tabs, така че те да се виждат само когато сте влезли в конкретната организация на Salesforce.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Новомаркираните Tabs се вмъкват в началото на вашия списък с Tabs в лентата за настройка, вместо да се добавят в края.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението извън домейн на Salesforce, автоматично ще бъдете отведени до страницата за вход в Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението в домейн на Salesforce, но не на страница за настройка, автоматично ще бъдете отведени до страницата за настройка на Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Когато е активирано, вашите Tabs се поддържат в сортиран ред - по етикет, URL адрес или организация; в зависимост от това, което изберете.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Закача вашите запазени Tabs преди стандартното меню за навигация (Home / Object Manager) в Setup, вместо след него.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Когато е активирано, всеки запазен Tab ще отваря свързаната страница в нов Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Предотвратява автоматичното показване на известия за бележки по изданието след актуализиране на разширението.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Деактивира периодичните изскачащи прозорци за напомняне за актуализация, поддържайки потребителския интерфейс на разширението чист (когато сте деактивирали автоматичните актуализации на разширението от настройките на вашия браузър).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението извън домейн на Salesforce, страницата за вход ще се отвори в текущия Tab на браузъра.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението в домейн на Salesforce, но не на страница за настройка, страницата за настройка на Salesforce ще се отвори в текущия Tab на браузъра.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Задайте езика на потребителския интерфейс само за разширението. Ако нещо не е преведено, вместо него ще се използва английската версия.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Деактивира събирането на основни телеметрични данни. Разширението няма да се появява в анонимни показатели за използване.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Заобикаля API на Lightning Navigation и отваря връзки чрез презареждане на цялата страница, което може да е по-бързо в някои настройки на организацията.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Деактивира проверката на разширението, която проверява дали фрагментът на URL адреса съответства на формата на идентификатори на записи/обекти на Salesforce (използва се за автоматично задаване на записания Tab като Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Импортирай",
 		"description": "[popup] бутон за импортиране"
@@ -539,6 +631,14 @@
 		"message": "Отвори Setup",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към Salesforce Setup страницата"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Добавяне на нови Tabs като Org Tabs.",
+		"description": "[settings] позволява на потребителя да добавя всички нови Tabs като специфични за организацията"
+	},
+	"opt_add_tabs_front": {
+		"message": "Добавяне на нови Tabs отпред.",
+		"description": "[settings] позволява на потребителя да добавя всички нови Tabs отпред"
+	},
 	"opt_automatic_open_login": {
 		"message": "Автоматично отваряне на страницата $salesforce_login при щракване върху изскачащия прозорец, когато не сте на страница на Salesforce.",
 		"description": "[настройка] когато потребителят отвори изскачащия прозорец, докато е на произволен уебсайт"
@@ -547,9 +647,17 @@
 		"message": "Автоматично отваряне на страницата $salesforce_setup при щракване върху изскачащия прозорец, когато сте на страница на Salesforce.",
 		"description": "[настройка] когато потребителят отвори изскачащия прозорец, докато е на уебсайт на Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Настройките бяха запазени!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (По подразбиране и резервен)",
 		"description": "Език по подразбиране на разширението"
+	},
+	"opt_keep_sort": {
+		"message": "Поддържане на Tabs сортирани.",
+		"description": "[setting] позволява на потребителя да поддържа Tabs сортирани по един от техните ключове"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Запазване на любими Tabs вляво от Начало и Мениджър на обекти.",
@@ -579,13 +687,17 @@
 		"message": "Изберете език на разширението",
 		"description": "[настройка] етикет, който подканва потребителя да избере предпочитания от него език"
 	},
+	"opt_pick_sort": {
+		"message": "Изберете по кое поле да бъдат сортирани Tabs",
+		"description": "[setting] сега потребителят може да избере по кой ключ да поддържа Tabs сортирани"
+	},
 	"opt_prevent_analytics": {
 		"message": "Предотвратете използването на Simple Analytics (няма да се показва в броя на потребителите).",
 		"description": "[настройка] Позволява на потребителя да предотврати изпращането на анонимни анализи"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Предотвратяване на използването на Lightning навигация (по-бързо зареждане, когато се използва).",
-		"description": "[настройка] не позволявайте Lightning навигация с обяснение на функцията"
+		"message": "Предотвратяване на използването на Lightning Navigation (по-бързо зареждане, когато не е отметнато).",
+		"description": "[setting] не позволява Lightning Navigation с обяснение на функцията"
 	},
 	"opt_same_tab_popup": {
 		"message": "страница в същия раздел при щракване върху изскачащия прозорец.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Запази като Tab",
 		"description": "[alt] алтернативен текст когато изображенията не се показват"
+	},
+	"send_tip": {
+		"message": "Изпратете ни бакшиш ❤️",
+		"description": "[popup] заглавие на svg за подкана за изпращане на бакшиш"
 	},
 	"set_gen_preview": {
 		"message": "Tab Преглед",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Към къде?",
 		"description": "[open-other-org-modal] алтернативно заглавие за модалния прозорец"
+	},
+	"write_review": {
+		"message": "Напишете отзив!",
+		"description": "[popup] заглавие на svg за искане за писане на отзив"
 	}
 }

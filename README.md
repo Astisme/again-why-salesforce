@@ -63,6 +63,8 @@ For Safari users, we recommend checking out our [installation guide](https://git
     <img src="/images/settings-and-decorations.gif" width="50%" title="Settings and Decorations"/>
 </p>
 
+[Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Settings)
+
 ### Commands
 
 <p align="center">

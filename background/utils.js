@@ -1,7 +1,6 @@
 "use strict";
 import {
 	BROWSER,
-	BROWSER_NAME,
 	EXTENSION_NAME,
 	ISCHROME,
 	ISFIREFOX,
@@ -54,13 +53,9 @@ export function bg_getCurrentBrowserTab(callback = null) {
 	}
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
-			try {
-				queryTabs(resolve)
-					.then((q) => resolve(q))
-					.catch((e) => reject(e));
-			} catch (error) {
-				reject(error);
-			}
+			queryTabs(resolve)
+				.then((q) => resolve(q))
+				.catch((e) => reject(e));
 		});
 	}
 	queryTabs(callback);
@@ -74,12 +69,8 @@ export async function bg_notify(message) {
 	if (message == null) {
 		throw new Error("error_no_message");
 	}
-	try {
-		const browserTab = await bg_getCurrentBrowserTab();
-		BROWSER.tabs.sendMessage(browserTab.id, message);
-	} catch (_) {
-		console.trace();
-	}
+	const browserTab = await bg_getCurrentBrowserTab();
+	BROWSER.tabs.sendMessage(browserTab.id, message);
 }
 
 /**
@@ -105,7 +96,6 @@ function _exportHandler(tabs) {
 				}
 			});
 		});
-		return;
 	} else if (ISCHROME) {
 		// Chrome implementation
 		const dataStr = "data:application/json;charset=utf-8," +
@@ -114,7 +104,6 @@ function _exportHandler(tabs) {
 			url: dataStr,
 			filename,
 		});
-		return;
 	} else {
 		// Safari and unidentified browsers: send a message to the content script
 		bg_notify({
@@ -122,7 +111,6 @@ function _exportHandler(tabs) {
 			filename,
 			payload: jsonData,
 		});
-		return;
 	}
 }
 
@@ -222,8 +210,8 @@ export async function checkForUpdates() {
 			i < Math.max(latestParts.length, currentParts.length);
 			i++
 		) {
-			const latestPart = latestParts[i] || 0;
-			const currentPart = currentParts[i] || 0;
+			const latestPart = latestParts[i] ?? 0;
+			const currentPart = currentParts[i] ?? 0;
 			if (latestPart > currentPart) {
 				return true;
 			} else if (latestPart < currentPart) {
@@ -245,7 +233,7 @@ export async function checkForUpdates() {
 		const urlParts = homepageUrl?.split("github.com/");
 		// Validate homepage URL (must be GitHub)
 		if (
-			!homepageUrl || !homepageUrl.startsWith("https://github.com/") ||
+			!homepageUrl?.startsWith("https://github.com/") ||
 			urlParts.length < 2
 		) {
 			console.error("no_manifest_github");
@@ -262,11 +250,20 @@ export async function checkForUpdates() {
 		}
 		const releases = await response.json();
 		// Find the latest non-prerelease version
-		const latestVersion = releases.find((release) =>
-			!release.prerelease && release.tag_name.startsWith(BROWSER_NAME)
-		).tag_name.replace(/^.*-v/, "");
+		const latestVersion = releases
+			.filter((release) =>
+				!release.prerelease &&
+				isNewerVersion(
+					release.tag_name.replace(/^.*(-)?v/, ""),
+					currentVersion,
+				)
+			)
+			.sort((a, b) => {
+				return new Date(b.created_at) - new Date(a.created_at);
+			})
+			?.[0].tag_name.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
-		if (isNewerVersion(latestVersion, currentVersion)) {
+		if (latestVersion != null) {
 			bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: currentVersion,

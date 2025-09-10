@@ -3,6 +3,10 @@
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"
 	},
+	"ascending": {
+		"message": "Stigande (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Tillgänglig",
 		"description": "Avsnittsrubrik för objekt som kan läggas till"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etikett för inställningsmenyn"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sortera Tab-bar",
+		"description": "kontextmeny för att låta användare sortera sina Tab-bar automatiskt (huvudmeny)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 efter etikett",
+		"description": "kontextmeny för att låta användare sortera sina Tab-bar efter etikett"
+	},
+	"cxm_sort_org": {
+		"message": "👽 efter Org",
+		"description": "kontextmeny för att låta användare sortera sina Tab-bar efter org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 efter Url",
+		"description": "kontextmeny för att låta användare sortera sina Tab-bar efter url"
+	},
 	"cxm_update": {
 		"message": "✏️ Uppdatera Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete alla Tabs",
 		"description": "[popup] titel på papperskorgen för att tömma alla Tabs"
+	},
+	"descending": {
+		"message": "Fallande (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Släpp",
@@ -351,6 +375,10 @@
 		"message": "Fel vid återställning till standard-Tab.",
 		"description": "[fel] Generiskt fel vid återställning av Tab till standardläge"
 	},
+	"error_sorting_tabs": {
+		"message": "Fel vid sortering av Tab-bar",
+		"description": "[error] visas i ett toast-meddelande"
+	},
 	"error_sync_nothing": {
 		"message": "Kan inte synkronisera tomma Tabbar!",
 		"description": "[error] försök att synkronisera ingenting"
@@ -455,6 +483,70 @@
 		"message": "Allmänt",
 		"description": "Etikett för kategorin allmänna inställningar"
 	},
+	"help": {
+		"message": "Hjälp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Markerar nya Tab-bar som Org Tab-bar, så att de bara är synliga när du är inloggad på den specifika Salesforce-organiseringen.",
+		"description": "[settings-help] för $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nya favoritmärkta Tab-bar sätts in i början av din Tab-lista i inställningsfältet istället för att läggas till i slutet.",
+		"description": "[settings-help] för $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Om du klickar på tilläggs-popup-en utanför en Salesforce-domän, tas du automatiskt till Salesforce-inloggningssidan.",
+		"description": "[settings-help] för $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Om du klickar på tilläggs-popup-en inuti en Salesforce-domän men inte på en inställningssida, tas du automatiskt till Salesforce-inställningssidan.",
+		"description": "[settings-help] för $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "När den är aktiverad hålls dina Tab-bar i sorterad ordning – antingen efter etikett, URL eller Org; beroende på vad du väljer.",
+		"description": "[settings-help] för $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fäster dina sparade Tab-bar före standardnavigeringsmenyn (Hem / Objektansvarig) i inställningarna, istället för efter den.",
+		"description": "[settings-help] för $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "När den är aktiverad, öppnar varje sparad Tab den relaterade sidan i en ny Tab.",
+		"description": "[settings-help] för $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Undertrycker den automatiska visningen av meddelanden om utgivningsanteckningar efter att tillägget har uppdaterats.",
+		"description": "[settings-help] för $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Inaktiverar periodiska påminnelse-popup-er för uppdateringar, vilket håller tilläggets UI rent (när du har inaktiverat automatiska uppdateringar av tillägget från din webbläsares inställningar).",
+		"description": "[settings-help] för $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Om du klickar på tilläggs-pop-upen utanför en Salesforce-domän, kommer inloggningssidan att öppnas i den aktuella webbläsar-Tab.",
+		"description": "[inställningar-hjälp] för $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Om du klickar på tilläggs-pop-upen inom en Salesforce-domän men inte på en Setup-sida, kommer Salesforce Setup-sidan att öppnas i den aktuella webbläsar-Tab.",
+		"description": "[inställningar-hjälp] för $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Ställ in UI-språket endast för tillägget. Om något inte har översatts, kommer den engelska versionen att användas istället.",
+		"description": "[inställningar-hjälp] för $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Inaktiverar grundläggande telemetriinsamling. Tillägget kommer inte att visas i anonym användningsstatistik.",
+		"description": "[settings-help] för $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Går förbi Lightning Navigation API och öppnar länkar via en fullständig omladdning av sidan, vilket kan vara snabbare i vissa organisationsinställningar.",
+		"description": "[settings-help] för $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Inaktiverar tilläggs-kontrollen som verifierar att ett URL-fragment matchar formatet för Salesforce-post-/objekt-ID:n (används för att automatiskt ställa in den sparade Tab-en som en Org Tab).",
+		"description": "[settings-help] för $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importera",
 		"description": "[popup] importknapp"
@@ -539,6 +631,14 @@
 		"message": "Öppna Setup",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce Setup-sidan"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Lägg till nya Tab-bar som Org Tab-bar.",
+		"description": "[settings] låt användaren lägga till alla nya Tab-bar som org-specifika"
+	},
+	"opt_add_tabs_front": {
+		"message": "Lägg till nya Tab-bar i början.",
+		"description": "[settings] låt användaren lägga till alla nya Tab-bar i början"
+	},
 	"opt_automatic_open_login": {
 		"message": "Öppna $salesforce_login-sidan automatiskt när du klickar på popup-fönstret när du inte är på en Salesforce-sida.",
 		"description": "[inställning] när användaren öppnar popup-fönstret på en slumpmässig webbplats"
@@ -547,9 +647,17 @@
 		"message": "Öppna $salesforce_setup-sidan automatiskt när du klickar på popup-fönstret när du är på en Salesforce-sida.",
 		"description": "[inställning] när användaren öppnar popup-fönstret på en Salesforce-webbplats"
 	},
+	"opt_confirm_save": {
+		"message": "Inställningarna sparades!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Standard och återställning)",
 		"description": "Standard språkval för tillägget"
+	},
+	"opt_keep_sort": {
+		"message": "Håll Tab-bar sorterade.",
+		"description": "[setting] låt användaren hålla sina Tab-bar sorterade efter en av deras nycklar"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behåll favorit-Tabs till vänster om Hem och Objekthanteraren.",
@@ -579,13 +687,17 @@
 		"message": "Välj tilläggsspråk",
 		"description": "[inställning] etikett som uppmanar användaren att välja önskat språk"
 	},
+	"opt_pick_sort": {
+		"message": "Välj vilket fält Tab-bar ska sorteras efter",
+		"description": "[setting] nu kan användaren välja vilken nyckel Tab-bar ska hållas sorterade efter"
+	},
 	"opt_prevent_analytics": {
 		"message": "Förhindra användning av Simple Analytics (räknas inte i användarantalet).",
 		"description": "[inställning] låter användaren hindra sändning av anonym analysdata"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Förhindra användning av Lightning-navigering (snabbare laddning vid användning).",
-		"description": "[inställning] tillåt inte Lightning-navigering med förklaring av funktionen"
+		"message": "Förhindra användning av Lightning-navigering (snabbare laddning när den inte är markerad).",
+		"description": "[setting] tillåt inte Lightning-navigering med förklaring av funktionen"
 	},
 	"opt_same_tab_popup": {
 		"message": "sida i samma flik när du klickar på popup.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Spara som Tab",
 		"description": "[alt] alternativ text när bilder inte visas"
+	},
+	"send_tip": {
+		"message": "Skicka oss ett tips ❤️",
+		"description": "[popup] titel för svg för att be om att skicka ett tips"
 	},
 	"set_gen_preview": {
 		"message": "Tab Förhandsgranskning",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Vart?",
 		"description": "[open-other-org-modal] alternativ rubrik för modaldialogen"
+	},
+	"write_review": {
+		"message": "Skriv en recension!",
+		"description": "[popup] titel för svg för att begära att skriva en recension"
 	}
 }

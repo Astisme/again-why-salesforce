@@ -3,6 +3,10 @@
 		"message": "Dozvoli",
 		"description": "[req_permission] dugme za dozvolu privilegija"
 	},
+	"ascending": {
+		"message": "Растуће (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Доступно",
 		"description": "Заглавље одељка за ставке које се могу додати"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Ознака за мени подешавања"
 	},
+	"cxm_sort": {
+		"message": "🎯 Сортирај Tab-ове",
+		"description": "контекстни мени који омогућава корисницима да аутоматски сортирају своје Tab-ове (родитељски мени)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 по ознаци",
+		"description": "контекстни мени који омогућава корисницима да сортирају своје Tab-ове по ознаци"
+	},
+	"cxm_sort_org": {
+		"message": "👽 по Орг",
+		"description": "контекстни мени који омогућава корисницима да сортирају своје Tab-ове по орг"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 по URL-у",
+		"description": "контекстни мени који омогућава корисницима да сортирају своје Tab-ове по URL-у"
+	},
 	"cxm_update": {
 		"message": "✏️ Ažuriraj Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete све Tabs",
 		"description": "[искачући-прозор] наслов на канти за пражњење свих Tabs"
+	},
+	"descending": {
+		"message": "Опадајуће (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Испусти",
@@ -351,6 +375,10 @@
 		"message": "Грешка приликом ресетовања Tab на подразумеване.",
 		"description": "[грешка] Општа грешка приликом ресетовања Tab на подразумеване"
 	},
+	"error_sorting_tabs": {
+		"message": "Грешка при сортирању Tab-ова",
+		"description": "[error] приказано у поруци"
+	},
 	"error_sync_nothing": {
 		"message": "Ne mogu se sinhronizovati prazni Tabovi!",
 		"description": "[error] pokušano je sinhronizovanje praznog sadržaja"
@@ -455,6 +483,70 @@
 		"message": "Опште",
 		"description": "Ознака за категорију општих подешавања"
 	},
+	"help": {
+		"message": "Помоћ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Означава нове Tab-ове као Tab-ове Орг, тако да су видљиви само када сте пријављени у ту одређену Salesforce Орг.",
+		"description": "[settings-help] за $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Ново фаворизовани Tab-ови се убацују на почетак ваше листе Tab-ова у траци подешавања, уместо да се додају на крај.",
+		"description": "[settings-help] за $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ако кликнете на искачући прозор проширења изван Salesforce домена, аутоматски ћете бити преусмерени на страницу за пријављивање у Salesforce.",
+		"description": "[settings-help] за $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ако кликнете на искачући прозор проширења унутар Salesforce домена, али не на страници за подешавање, аутоматски ћете бити преусмерени на страницу за подешавање у Salesforce-у.",
+		"description": "[settings-help] за $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Када је омогућено, ваши Tab-ови се држе у сортираном редоследу – по ознаци, URL-у или Орг; у зависности од тога шта одаберете.",
+		"description": "[settings-help] за $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Закачи ваше сачуване Tab-ове пре стандардног менија за навигацију (Почетна / Управљач објектима) у подешавању, уместо после њега.",
+		"description": "[settings-help] за $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Када је омогућено, сваки сачувани Tab ће отворити сродну страницу у новом Tab-у.",
+		"description": "[settings-help] за $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Онемогућава аутоматско приказивање обавештења о напоменама о издању након ажурирања проширења.",
+		"description": "[settings-help] за $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Онемогућава искачуће прозоре за периодично подсећање на ажурирање, одржавајући кориснички интерфејс проширења чистим (када сте онемогућили аутоматска ажурирања проширења из подешавања прегледача).",
+		"description": "[settings-help] за $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ако кликнете на искачући прозор проширења изван Salesforce домена, страница за пријаву ће се отворити у тренутној Tab-у прегледача.",
+		"description": "[подешавања-помоћ] за $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ако кликнете на искачући прозор проширења унутар Salesforce домена, али не на страници за Setup, страница Salesforce Setup ће се отворити у тренутној Tab-у прегледача.",
+		"description": "[подешавања-помоћ] за $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Подесите језик корисничког интерфејса само за проширење. Ако нешто није преведено, уместо тога ће бити коришћена енглеска верзија.",
+		"description": "[подешавања-помоћ] за $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Онемогућава основно прикупљање телеметрије. Проширење се неће појавити у анонимним метрикама употребе.",
+		"description": "[settings-help] за $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Заобилази Lightning Navigation API и отвара везе путем поновног учитавања целе странице, што може бити брже у неким поставкама орг.",
+		"description": "[settings-help] за $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Онемогућава проверу проширења која проверава да ли се URL фрагмент подудара са форматом Salesforce ID-ова записа/објеката (користи се за аутоматско постављање сачуваног Tab-а као Орг Tab-а).",
+		"description": "[settings-help] за $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Uvezi",
 		"description": "[popup] dugme za uvoz"
@@ -539,6 +631,14 @@
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na dugmetu za preusmeravanje korisnika na Salesforce Setup stranicu"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Додајте нове Tab-ове као Орг Tab-ове.",
+		"description": "[settings] омогућите кориснику да дода све нове Tab-ове као специфичне за орг"
+	},
+	"opt_add_tabs_front": {
+		"message": "Додајте нове Tab-ове напред.",
+		"description": "[settings] омогућите кориснику да дода све нове Tab-ове напред"
+	},
 	"opt_automatic_open_login": {
 		"message": "Аутоматски отвори $salesforce_login страницу када кликнете на искачући прозор док нисте на Salesforce страници.",
 		"description": "[подешавање] када корисник отвори искачући прозор док је на насумичној веб локацији"
@@ -547,9 +647,17 @@
 		"message": "Аутоматски отвори $salesforce_setup страницу када кликнете на искачући прозор док сте на Salesforce страници.",
 		"description": "[подешавање] када корисник отвори искачући прозор док је на Salesforce веб локацији"
 	},
+	"opt_confirm_save": {
+		"message": "Подешавања су сачувана!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Подразумевано и резервно)",
 		"description": "Подразумевана језичка опција екстензије"
+	},
+	"opt_keep_sort": {
+		"message": "Држите Tab-ове сортиране.",
+		"description": "[setting] омогућите кориснику да држи своје Tab-ове сортиране по једном од њихових кључева"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Задржи омиљене Tabs лево од Почетне странице и Менаџера објеката.",
@@ -579,13 +687,17 @@
 		"message": "Изаберите језик екстензије",
 		"description": "[подешавање] ознака која подстиче корисника да изабере жељени језик"
 	},
+	"opt_pick_sort": {
+		"message": "Изаберите по којем пољу Tab-ови треба да се сортирају",
+		"description": "[setting] сада корисник може да изабере по којем кључу ће Tab-ови остати сортирани"
+	},
 	"opt_prevent_analytics": {
 		"message": "Спречи коришћење Simple Analytics (неће бити укључено у број корисника).",
 		"description": "[подешавање] омогућава кориснику да спречи слање анонимне анализе"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Spreči korišćenje Lightning navigacije (brže učitavanje tokom korišćenja).",
-		"description": "[podešavanje] ne dozvoli Lightning navigaciju sa objašnjenjem funkcije"
+		"message": "Спречите коришћење Lightning навигације (брже учитавање када није означено).",
+		"description": "[setting] не дозвољавајте Lightning навигацију уз објашњење функције"
 	},
 	"opt_same_tab_popup": {
 		"message": "страница у истом картици приликом клика на искачући прозор.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Sačuvaj kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"send_tip": {
+		"message": "Пошаљите нам напојницу ❤️",
+		"description": "[popup] наслов за svg за подстицање слања напојнице"
 	},
 	"set_gen_preview": {
 		"message": "Tab Преглед",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Kamo?",
 		"description": "[open-other-org-modal] alternativni naslov za modal"
+	},
+	"write_review": {
+		"message": "Напишите рецензију!",
+		"description": "[popup] наслов за svg за тражење писања рецензије"
 	}
 }

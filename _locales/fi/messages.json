@@ -3,6 +3,10 @@
 		"message": "Salli",
 		"description": "[req_permission] painike, jolla myönnetään oikeudet"
 	},
+	"ascending": {
+		"message": "Nouseva (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Saatavilla",
 		"description": "Osionotsikko kohteille, jotka voidaan lisätä"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Asetusvalikon nimiö"
 	},
+	"cxm_sort": {
+		"message": "🎯 Lajittele Tabs",
+		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä automaattisesti (päävalikko)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 tunnisteen mukaan",
+		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä tunnisteen mukaan"
+	},
+	"cxm_sort_org": {
+		"message": "👽 organisaation mukaan",
+		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä organisaation mukaan"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL-osoitteen mukaan",
+		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä URL-osoitteen mukaan"
+	},
 	"cxm_update": {
 		"message": "✏️ Päivitä Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete kaikki Tabs",
 		"description": "[ponnahdusikkuna] otsikko roskakorissa kaikkien Tabs tyhjentämiseksi"
+	},
+	"descending": {
+		"message": "Laskeva (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Virhe oletus Tabien palautuksessa.",
 		"description": "[virhe] Yleinen virhe Tabien palautuksessa oletusarvoon"
 	},
+	"error_sorting_tabs": {
+		"message": "Virhe Tabs-välilehtien lajittelussa",
+		"description": "[error] näytetään leijuvassa viestissä"
+	},
 	"error_sync_nothing": {
 		"message": "Tyhjiä Tabeja ei voida synkronoida!",
 		"description": "[error] yritettiin synkronoida tyhjää sisältöä"
@@ -455,6 +483,70 @@
 		"message": "Yleiset",
 		"description": "Nimike yleisille asetuskategorioille"
 	},
+	"help": {
+		"message": "Ohje",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Merkitsee uudet Tabs-välilehdet Org Tabs -välilehdiksi, joten ne ovat näkyvissä vain, kun olet kirjautunut sisään kyseiseen Salesforce-organisaatioon.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Äskettäin suosikeiksi merkityt Tabs-välilehdet lisätään asennuspalkin Tab-luettelon alkuun sen sijaan, että ne lisättäisiin loppuun.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Jos napsautat laajennuksen ponnahdusikkunaa Salesforce-verkkotunnuksen ulkopuolella, sinut ohjataan automaattisesti Salesforce-kirjautumissivulle.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Jos napsautat laajennuksen ponnahdusikkunaa Salesforce-verkkotunnuksen sisällä, mutta et asennussivulla, sinut ohjataan automaattisesti Salesforce-asennussivulle.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Kun tämä on käytössä, Tabs-välilehdet pysyvät lajiteltuina – joko tunnisteen, URL-osoitteen tai organisaation mukaan; riippuen siitä, minkä valitset.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Kiinnittää tallennetut Tabs-välilehdet ennen vakionavigointivalikkoa (Home / Object Manager) asennuksessa sen sijaan, että ne olisivat sen jälkeen.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Kun tämä on käytössä, jokainen tallennettu Tab avaa siihen liittyvän sivun uudessa Tab-issa.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Estää julkaisutiedotteiden ilmoitusten automaattisen näyttämisen laajennuksen päivittämisen jälkeen.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Poistaa käytöstä säännölliset päivitysmuistutusponnahdusikkunat, mikä pitää laajennuksen käyttöliittymän siistinä (kun olet poistanut laajennuksen automaattiset päivitykset käytöstä selaimesi asetuksista).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Jos napsautat laajennuksen ponnahdusikkunaa Salesforce-verkkotunnuksen ulkopuolella, kirjautumissivu avataan nykyisessä selain Tab-issa.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Jos napsautat laajennuksen ponnahdusikkunaa Salesforce-verkkotunnuksen sisällä, mutta et asennussivulla, Salesforce-asennussivu avataan nykyisessä selain Tab-issa.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Aseta käyttöliittymän kieli vain laajennukselle. Jos jotain ei ole käännetty, käytetään sen sijaan englanninkielistä versiota.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Poistaa käytöstä perustelemetrikeräyksen. Laajennus ei näy anonyymeissä käyttötilastoissa.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Ohittaa Lightning Navigation -sovellusliittymän ja avaa linkit koko sivun uudelleenlatauksella, mikä voi olla nopeampaa joissakin organisaatioasetuksissa.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Poistaa käytöstä laajennuksen tarkistuksen, joka varmistaa, että URL-fragmentti vastaa Salesforce-tietueen/objektin tunnusten muotoa (käytetään tallennetun Tab automaattiseen asettamiseen Org Tabiksi).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Tuo",
 		"description": "[popup] tuontipainike"
@@ -539,6 +631,14 @@
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Lisää uudet Tabs-välilehdet Org Tabs -välilehdiksi.",
+		"description": "[settings] antaa käyttäjän lisätä kaikki uudet Tabs-välilehdet organisaatiokohtaisina"
+	},
+	"opt_add_tabs_front": {
+		"message": "Lisää uudet Tabs-välilehdet eteen.",
+		"description": "[settings] antaa käyttäjän lisätä kaikki uudet Tabs-välilehdet eteen"
+	},
 	"opt_automatic_open_login": {
 		"message": "Avaa $salesforce_login-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
 		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan satunnaisella verkkosivustolla"
@@ -547,9 +647,17 @@
 		"message": "Avaa $salesforce_setup-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
 		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan Salesforce-verkkosivustolla"
 	},
+	"opt_confirm_save": {
+		"message": "Asetukset tallennettiin!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Oletus ja varajärjestelmä)",
 		"description": "Laajennuksen oletuskieliasetus"
+	},
+	"opt_keep_sort": {
+		"message": "Pidä Tabs-välilehdet lajiteltuina.",
+		"description": "[setting] antaa käyttäjän pitää Tabs-välilehtensä lajiteltuina jonkin avaimensa mukaan"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Pidä suosikki-Tabit Kodin ja Objektien hallinnan vasemmalla puolella.",
@@ -579,13 +687,17 @@
 		"message": "Valitse laajennuksen kieli",
 		"description": "[asetus] otsikko, joka kehottaa käyttäjää valitsemaan haluamansa kielen"
 	},
+	"opt_pick_sort": {
+		"message": "Valitse, minkä kentän mukaan Tabs-välilehdet tulisi lajitella",
+		"description": "[setting] nyt käyttäjä voi valita, minkä avaimen mukaan Tabs-välilehdet pysyvät lajiteltuina"
+	},
 	"opt_prevent_analytics": {
 		"message": "Estä Simple Analyticsin käyttö (ei näy käyttäjämäärissä).",
 		"description": "[asetus] antaa käyttäjälle mahdollisuuden estää anonyymien analytiikkojen lähettämisen"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Estä Lightning-navigoinnin käyttö (nopeampi lataus käytössä).",
-		"description": "[asetus] älä salli Lightning-navigointia ominaisuuden selityksen kanssa"
+		"message": "Estä Lightning Navigation -navigoinnin käyttö (nopeampi lataus, kun valintaa ei ole tehty).",
+		"description": "[setting] älä salli Lightning Navigation -navigointia ominaisuuden selityksen kanssa"
 	},
 	"opt_same_tab_popup": {
 		"message": "sivu samalla välilehdellä ponnahdusikkunan klikkauksessa.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Tallenna Tabina",
 		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
+	},
+	"send_tip": {
+		"message": "Lähetä meille vinkki ❤️",
+		"description": "[popup] otsikko svg:lle pyytää vinkin lähettämistä"
 	},
 	"set_gen_preview": {
 		"message": "Tab-esikatselu",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Mihin?",
 		"description": "[open-other-org-modal] vaihtoehtoinen otsikko modalille"
+	},
+	"write_review": {
+		"message": "Kirjoita arvostelu!",
+		"description": "[popup] otsikko svg:lle pyytää arvostelun kirjoittamista"
 	}
 }

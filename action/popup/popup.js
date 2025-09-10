@@ -1,26 +1,62 @@
 // deno-lint-ignore-file no-window
 "use strict";
 import Tab from "/tab.js";
-import TabContainer from "/tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	FRAME_PATTERNS,
+	ISCHROME,
+	ISEDGE,
+	ISFIREFOX,
 	ISSAFARI,
 	openSettingsPage,
 	sendExtensionMessage,
 	SETUP_LIGHTNING_PATTERN,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { setupDrag } from "../../dragHandler.js";
+import { setupDrag } from "/dragHandler.js";
 setupDrag();
 
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
 const translator = await ensureTranslatorAvailability();
-const allTabs = await TabContainer.create();
+const allTabs = await ensureAllTabsAvailability();
+
+const hiddenClass = "hidden";
+console.log(allTabs.length);
+if (allTabs.length >= 8) {
+	if (!ISSAFARI) {
+		const reviewSvg = document.getElementById("review");
+		reviewSvg?.classList.remove(hiddenClass);
+		reviewSvg?.addEventListener("click", () => {
+			if (ISEDGE) {
+				return open(
+					"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description",
+				);
+			}
+			if (ISCHROME) {
+				return open(
+					"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews",
+				);
+			}
+			if (ISFIREFOX) {
+				return open(
+					"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/",
+				);
+			}
+		});
+	}
+	if (allTabs.length >= 16) {
+		const sponsorSvg = document.getElementById("sponsor");
+		sponsorSvg?.classList.remove(hiddenClass);
+		sponsorSvg?.addEventListener("click", () => {
+			open("https://alfredoit.dev/en/sponsor/");
+		});
+	}
+}
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -37,8 +73,8 @@ let loggers = [];
 function initThemeSvg() {
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToShow.classList.remove("invisible", "hidden");
-	elementToHide.classList.add("invisible", "hidden");
+	elementToShow.classList.remove("invisible", hiddenClass);
+	elementToHide.classList.add("invisible", hiddenClass);
 }
 initThemeSvg();
 
@@ -53,15 +89,14 @@ function pop_getCurrentBrowserTab(callback) {
 // Get the current tab. If it's not salesforce setup, redirect the popup
 pop_getCurrentBrowserTab(async (browserTab) => {
 	// is null if the extension cannot access the current tab
-	const broswerTabUrl = browserTab?.url;
+	const browserTabUrl = browserTab?.url;
 	if (
-		broswerTabUrl == null ||
-		!broswerTabUrl.match(SETUP_LIGHTNING_PATTERN)
+		!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)
 	) {
 		// we're not in Salesforce Setup
 		window.location.href = BROWSER.runtime.getURL(
 			`action/notSalesforceSetup/notSalesforceSetup.html${
-				broswerTabUrl != null ? "?url=" + broswerTabUrl : ""
+				browserTabUrl != null ? "?url=" + browserTabUrl : ""
 			}`,
 		);
 	} else {
@@ -92,8 +127,8 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 function switchTheme() {
 	const elementToShow = html.dataset.theme === "light" ? sun : moon;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToHide.classList.add("invisible", "hidden");
-	elementToShow.classList.remove("hidden");
+	elementToHide.classList.add("invisible", hiddenClass);
+	elementToShow.classList.remove(hiddenClass);
 	setTimeout(() => {
 		elementToShow.classList.remove("invisible");
 	}, 200);
@@ -415,14 +450,11 @@ async function findTabsFromRows(orgName = null) {
  * @returns {Promise<void>} A promise that resolves once the tabs have been saved and optionally rows reloaded.
  */
 async function saveTabs(doReload = true, tabs = null) {
-	//const orgName = await pop_extractOrgName();
 	if (!TabContainer.isValid(tabs)) {
-		//tabs = await findTabsFromRows(orgName);
 		tabs = await findTabsFromRows();
 	}
 	await allTabs.replaceTabs(tabs, {
 		removeOrgTabs: true,
-		//keepTabsNotThisOrg: orgName,
 	});
 	if (doReload) {
 		await reloadRows();

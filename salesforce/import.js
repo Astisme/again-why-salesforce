@@ -1,4 +1,5 @@
 "use strict";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import { EXTENSION_NAME } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -9,23 +10,7 @@ import {
 	generateSldsModal,
 	MODAL_ID,
 } from "./generator.js";
-import {
-	ensureAllTabsAvailability,
-	getAllTabs,
-	getModalHanger,
-	getSetupTabUl,
-	showToast,
-} from "./content.js";
-
-let allTabs;
-const interval = setInterval(() => {
-	try {
-		allTabs = getAllTabs();
-		clearInterval(interval);
-	} catch (_) {
-		// wait next interval
-	}
-}, 100);
+import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
 
 let overwritePick;
 let otherOrgPick;
@@ -105,7 +90,7 @@ async function generateSldsImport() {
 reader.onload = async (e) => {
 	try {
 		const jsonString = e.target.result;
-		allTabs = await ensureAllTabsAvailability();
+		const allTabs = await ensureAllTabsAvailability();
 		const importedNum = await allTabs.importTabs(
 			jsonString,
 			overwritePick,
@@ -170,8 +155,6 @@ function listenToFileUpload(modalParent) {
 	 */
 	dropArea.addEventListener("dragover", function (event) {
 		event.preventDefault();
-		//console.log('dragover')
-		//dropArea.classList.add("slds-has-drag-over");
 	});
 	/**
 	 * Handles the dragleave event when dragged files leave the drop area.
@@ -181,8 +164,6 @@ function listenToFileUpload(modalParent) {
 	 */
 	dropArea.addEventListener("dragleave", function (event) {
 		event.preventDefault();
-		//console.log('dragleave')
-		//dropArea.classList.remove("slds-has-drag-over");
 	});
 	/**
 	 * Handles the drop event of files onto the drop area.

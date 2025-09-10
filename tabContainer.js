@@ -1,11 +1,36 @@
-import { BROWSER, WHY_KEY } from "/constants.js";
+import {
+	BROWSER,
+	getSettings,
+	PERSIST_SORT,
+	sendExtensionMessage,
+	SETTINGS_KEY,
+	WHY_KEY,
+} from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 let translator = null;
+let singletonAllTabs = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
-export default class TabContainer extends Array {
+export class TabContainer extends Array {
+	#isSorted = false;
+	get isSorted() {
+		return this.#isSorted;
+	}
+	#isSortedBy = null;
+	get isSortedBy() {
+		return this.#isSortedBy;
+	}
+	#isSortedAsc = false;
+	get isSortedAsc() {
+		return this.#isSortedAsc;
+	}
+	#isSortedDesc = false;
+	get isSortedDesc() {
+		return this.#isSortedDesc;
+	}
+
 	/**
 	 * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
 	 * Throws an error if the provided secret does not match the expected secret value.
@@ -30,21 +55,51 @@ export default class TabContainer extends Array {
 	/**
 	 * Creates and initializes a new `TabContainer` instance.
 	 *
-	 * @param {Array|null} [tabs=null] - An optional array of tabs to initialize the container with. If not provided, defaults to null.
 	 * @returns {Promise<TabContainer>} - A promise that resolves to the newly created and initialized `TabContainer` instance.
 	 * @throws {Error} - Throws an error if the `TabContainer` cannot be initialized with the provided `tabs`.
 	 */
-	static async create(tabs = null) {
-		translator = await ensureTranslatorAvailability();
-		const tabcont = new TabContainer(_tabContainerSecret);
-		if (!await tabcont._initialize(tabs)) {
-			const msg = await translator.translate([
-				"error_tabcont_initialize",
-				JSON.stringify(tabs),
-			]);
-			throw new Error(msg);
+	static async create() {
+		if (singletonAllTabs != null) {
+			return singletonAllTabs;
 		}
-		return tabcont;
+		translator = await ensureTranslatorAvailability();
+		singletonAllTabs = new TabContainer(_tabContainerSecret);
+		/**
+		 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
+		 *
+		 * @returns {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
+		 * @private
+		 */
+		async function initialize() {
+			/**
+			 * Checks if the given tabs are valid and adds them to the context if so.
+			 *
+			 * @param {Array} tabs - The tabs to validate and add.
+			 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
+			 */
+			async function checkAddTabs(tabs) {
+				if (
+					tabs == null || tabs.length <= 0 ||
+					!TabContainer.isValid(tabs, false)
+				) {
+					return false;
+				}
+				return await singletonAllTabs.addTabs(tabs);
+			}
+			const savedTabs = await singletonAllTabs.getSavedTabs(false);
+			if (await checkAddTabs(savedTabs)) {
+				return true;
+			}
+			return await singletonAllTabs.setDefaultTabs();
+		}
+		if (!await initialize()) {
+			throw new Error(
+				await translator.translate([
+					"error_tabcont_initialize",
+				]),
+			);
+		}
+		return singletonAllTabs;
 	}
 
 	/**
@@ -187,47 +242,13 @@ export default class TabContainer extends Array {
 	}
 
 	/**
-	 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
-	 *
-	 * @param {Array|null} [tabs=null] - An optional array of tabs to initialize the container with. If not provided, defaults to null.
-	 * @returns {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
-	 * @private
-	 */
-	async _initialize(tabs = null) {
-		/**
-		 * Checks if the given tabs are valid and adds them to the context if so.
-		 *
-		 * @param {Object} context - The context object with an addTabs method.
-		 * @param {Array} tabs - The tabs to validate and add.
-		 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
-		 */
-		async function checkAddTabs(context, tabs) {
-			if (TabContainer.isValid(tabs, false)) {
-				return await context.addTabs(tabs);
-			}
-			return false;
-		}
-		const savedTabs = await this.getSavedTabs(false);
-		const addedSomething = await checkAddTabs(this, savedTabs) &&
-			savedTabs.length > 0;
-		if (tabs == null && addedSomething) {
-			return true;
-		}
-		if (await checkAddTabs(this, tabs) || addedSomething) {
-			return true;
-		}
-		return await this.setDefaultTabs();
-	}
-
-	/**
 	 * Retrieves the saved tabs from the browser's runtime and optionally replaces the current tabs.
 	 *
 	 * @param {boolean} [replace=true] - A flag indicating whether to replace the current tabs with the retrieved ones. Defaults to `true`.
 	 * @returns {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
 	 */
 	async getSavedTabs(replace = true) {
-		const res = await BROWSER.storage.sync.get([WHY_KEY]);
-		const tabs = res[WHY_KEY];
+		const tabs = await sendExtensionMessage({ what: "get", key: WHY_KEY });
 		if (replace) {
 			await this.replaceTabs(tabs, {
 				resetTabs: true,
@@ -266,7 +287,7 @@ export default class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
-	async addTab(tab, sync = true) {
+	async addTab(tab, sync = true, fromAddTabs = false, addInFront = false) {
 		if (!Tab.isValid(tab)) {
 			const msg = await translator.translate([
 				"error_invalid_tab",
@@ -281,9 +302,16 @@ export default class TabContainer extends Array {
 			]);
 			throw new Error(msg);
 		}
-		this.push(Tab.create(tab));
+		const newTab = Tab.create(tab);
+		if (!addInFront) {
+			this.push(newTab);
+		} else {
+			this.unshift(newTab);
+		}
 		if (sync) {
 			return await this.syncTabs();
+		} else if (!fromAddTabs) {
+			return await this.checkSetSorted();
 		}
 		return true;
 	}
@@ -297,7 +325,6 @@ export default class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all tabs were added successfully (excluding duplicates), otherwise `false` if any tab could not be added.
 	 */
 	async addTabs(tabs, sync = true) {
-		//this.push(...tabs);
 		if (tabs.length === 0 && sync === false) {
 			return true;
 		}
@@ -305,7 +332,7 @@ export default class TabContainer extends Array {
 		let addedAll = true;
 		for (const tab of tabs) {
 			try {
-				await this.addTab(tab, false);
+				await this.addTab(tab, false, true);
 			} catch (error) {
 				const msg = await translator.translate("error_duplicate_tab");
 				if (!error.message.startsWith(msg)) {
@@ -316,6 +343,8 @@ export default class TabContainer extends Array {
 		}
 		if (sync) {
 			await this.syncTabs();
+		} else {
+			await this.checkSetSorted();
 		}
 		return addedAll;
 	}
@@ -551,7 +580,9 @@ export default class TabContainer extends Array {
 		keepTabsNotThisOrg = null,
 		removeThisOrgTabs = null,
 	} = {}) {
-		if (
+		if (newTabs === this) {
+			return true;
+		} else if (
 			resetTabs && removeOrgTabs && keepTabsNotThisOrg == null &&
 			removeThisOrgTabs == null
 		) {
@@ -646,15 +677,23 @@ export default class TabContainer extends Array {
 
 	/**
 	 * Synchronizes the tabs in the `TabContainer`. Optionally replaces the current tabs before synchronization.
+	 * Last function called by other entry points.
 	 *
 	 * @param {Array|null} [tabs=null] - An optional array of tabs to replace the current tabs before synchronization. If not provided, the current tabs are used.
+	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
+	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function (like the moveTab function).
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
 	 */
-	async syncTabs(tabs = null) {
+	async syncTabs(
+		tabs = null,
+		fromSortFunction = false,
+		fromInvalidateSortFunction = false,
+	) {
 		// replace tabs already checks the tabs
 		if (tabs != null && !await this.replaceTabs(tabs, { sync: false })) {
 			return false;
 		}
+		await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
 		return await TabContainer._syncTabs(tabs ?? this);
 	}
 
@@ -671,9 +710,11 @@ export default class TabContainer extends Array {
 			const msg = await translator.translate("error_sync_nothing");
 			throw new Error(msg);
 		}
-		const set = {};
-		set[WHY_KEY] = TabContainer.toJSON(tabs);
-		await BROWSER.storage.sync.set(set);
+		await sendExtensionMessage({
+			what: "set",
+			set: TabContainer.toJSON(tabs),
+			key: WHY_KEY,
+		});
 		if (BROWSER.runtime.lastError) {
 			throw new Error(BROWSER.runtime.lastError);
 		}
@@ -741,7 +782,8 @@ export default class TabContainer extends Array {
 			} else {
 				try {
 					pushTab = Tab.create(tab);
-				} catch (_) {
+				} catch (e) {
+					console.info(e);
 					// do not add a failing tab to the JSON
 					continue;
 				}
@@ -845,7 +887,7 @@ export default class TabContainer extends Array {
 			// from newIndex, remove 0 tabs and insert `tab` in their place
 			this.splice(newIndex, 0, ...this.splice(currentIndex, 1));
 		}
-		await this.syncTabs();
+		await this.syncTabs(undefined, undefined, true);
 		return newIndex;
 	}
 
@@ -927,46 +969,248 @@ export default class TabContainer extends Array {
 	}
 
 	/**
-	 * changed to async and not aligned anything
+	 * Sorts the tabs in the container by a specified property and order.
+	 * After sorting, it synchronizes the changes.
+	 *
+	 * @param {Object} [options={}] - The sorting options.
+	 * @param {string} [options.sortBy='label'] - The property to sort by. Valid options found at Tab.allowedKeys.
+	 * @param {boolean} [options.sortAsc=true] - The sorting direction. Set to `true` for ascending order and `false` for descending.
+	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the sorting and (optional) synchronization are successful.
+	 * @throws {Error} - Throws an error if an invalid `sortBy` property is provided.
 	 */
-	/*
-    static async removeDuplicates(tabs) {
-        if (!TabContainer.isValid(tabs, false)) {
-            throw new Error("Cannot remove duplicates from an invalid container.");
-        }
+	async sort({ sortBy = "label", sortAsc = true } = {}, sync = true) {
+		// Check for unexpected keys
+		if (!Tab.allowedKeys.has(sortBy)) {
+			throw new Error(
+				["error_tab_unexpected_keys", sortBy],
+			);
+		}
+		const sortFactor = sortAsc ? 1 : -1;
+		super.sort((a, b) => {
+			const valA = a[sortBy];
+			const valB = b[sortBy];
+			// Treat null or undefined values as "smaller" to ensure they are grouped together
+			if (valA == null && valB != null) return -sortFactor;
+			if (valA != null && valB == null) return sortFactor;
+			if (valA == null && valB == null) return 0;
+			// Perform case-insensitive comparison for strings
+			// Adjust direction for descending order
+			return sortFactor *
+				String(valA).localeCompare(String(valB), undefined, {
+					sensitivity: "base",
+				});
+		});
+		this.#isSorted = true;
+		this.#isSortedBy = sortBy;
+		this.#isSortedAsc = sortAsc;
+		this.#isSortedDesc = !sortAsc;
+		// Persist the new order
+		if (sync) {
+			return await this.syncTabs(undefined, true);
+		}
+		return true;
+	}
 
-        // make sure we have Tabs
-        //tabs = await Promise.all(
-            //tabs.map(tab =>
-                //Tab.create(tab)
-            //)
-        //);
+	/**
+	 * Checks if the provided tabs are sorted by one of the allowed keys
+	 * ('label', 'url', or 'org') in either ascending or descending order.
+	 *
+	 * Sets the following properties on the instance:
+	 * - `#isSorted`: `true` if the tabs are sorted by any key, otherwise `false`
+	 * - `#isSortedBy`: the key the tabs are sorted by (`'label'`, `'url'`, or `'org'`), or `null`
+	 * - `#isSortedAsc`: `true` if sorted in ascending order, `false` otherwise
+	 * - `#isSortedDesc`: `true` if sorted in descending order, `false` otherwise
+	 *
+	 * Rules:
+	 * - If `#isSorted` is `false`, both `#isSortedAsc` and `#isSortedDesc` will also be `false`.
+	 * - If `#isSorted` is `true`, exactly one of `#isSortedAsc` or `#isSortedDesc` will be `true`.
+	 *
+	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
+	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function
+	 * @returns {boolean} whether the tabs in input are sorted or not.
+	 */
+	async checkSetSorted(
+		fromSortFunction = false,
+		fromInvalidateSortFunction = false,
+	) {
+		/**
+		 * Sets the sort state properties based on detected sorting
+		 * @param {string} key - The key that tabs are sorted by
+		 * @param {boolean} isAscending - Whether the sort is ascending
+		 */
+		const setSortState = (key = null, isAscending = null) => {
+			this.#isSorted = key != null;
+			this.#isSortedBy = key;
+			this.#isSortedAsc = isAscending === true;
+			this.#isSortedDesc = isAscending === false;
+		};
+		/**
+		 * Handles the invalidation of sort function by updating persisted settings
+		 */
+		const handleInvalidateSort = () => {
+			// Update the sort setting persisted (do not wait for response)
+			sendExtensionMessage({
+				what: "set",
+				key: SETTINGS_KEY,
+				set: [{
+					id: PERSIST_SORT,
+					enabled: false,
+				}],
+			});
+		};
+		/**
+		 * Detects if the current tabs are sorted by any allowed key
+		 * @returns {boolean} true if tabs are sorted, false otherwise
+		 */
+		const detectSortOrder = () => {
+			/**
+			 * Checks if tabs are sorted by a specific key
+			 * @param {string} key - The key to check sorting for
+			 * @returns {{isSorted: boolean, isAscending: boolean}} Sort result
+			 */
+			const checkSortOrderForKey = (key) => {
+				/**
+				 * Compares two tab values for sorting
+				 * @param {*} prev - Previous value
+				 * @param {*} curr - Current value
+				 * @returns {number} Comparison result (-1, 0, 1)
+				 */
+				const compareTabValues = (prev, curr) => {
+					const prevVal = prev == null ? "" : String(prev);
+					const currVal = curr == null ? "" : String(curr);
+					return String(prevVal).localeCompare(
+						String(currVal),
+						undefined,
+						{
+							sensitivity: "base",
+						},
+					);
+				};
+				let asc = true;
+				let desc = true;
+				for (let i = 1; i < this.length; i++) {
+					const comparison = compareTabValues(
+						this[i - 1][key],
+						this[i][key],
+					);
+					if (comparison === 0) continue;
+					if (comparison > 0) asc = false;
+					if (comparison < 0) desc = false;
+					if (!asc && !desc) {
+						break; // No need to continue checking
+					}
+				}
+				return {
+					isSorted: asc || desc,
+					isAscending: asc && !desc,
+				};
+			};
+			for (const key of Tab.allowedKeys) {
+				const sortResult = checkSortOrderForKey(key);
+				if (sortResult.isSorted) {
+					setSortState(key, sortResult.isAscending);
+					break;
+				}
+			}
+			return this.#isSorted;
+		};
+		if (fromSortFunction) {
+			// already sorted everything
+			return true;
+		}
+		setSortState();
+		if (fromInvalidateSortFunction) {
+			handleInvalidateSort();
+			// check if, out of luck, the array is still sorted (do not return)
+		}
+		// Check if the user wants to keep the Tabs always sorted
+		if (await this.checkShouldKeepSorted()) {
+			return true;
+		}
+		return detectSortOrder();
+	}
 
+	/**
+	 * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
+	 * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
+	 */
+	async checkShouldKeepSorted() {
+		const persistSort = await getSettings(PERSIST_SORT);
+		if (!persistSort?.enabled) {
+			return false; // not set or esplicitly set as not enabled
+		}
+		// Tabs should be kept sorted by persistSort.enabled
+		return await this.sort({
+			sortBy: persistSort.enabled,
+			sortAsc: persistSort.ascending ?? true,
+		}, false);
+	}
 
-        // all elements of the array are Tabs
-        const uniqueTabs = new Map();
-        tabs.forEach(tab => {
-            //const key = tab.hashCode();
-            const key = JSON.stringify(tab);
-            if (!uniqueTabs.has(key)) {
-                uniqueTabs.set(key, tab);
-            }
-        });
+	/**
+	 * Takes care of updating a single Tab and synchronize the Array
+	 *
+	 * @param {Tab} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - the Tab that has to be updated; it MUST be a Tab which is already present in the Array
+	 * @param {{ label: undefined; url: undefined; org: undefined; }} [updateTo={label: undefined, url: undefined, org: undefined}] - an Object which contains the keys that have to be updated
+	 *
+	 * @returns {boolean} whether the Tab was updated AND the array was synced
+	 */
+	async updateTab(
+		tabToUpdate = { label: undefined, url: undefined, org: undefined },
+		updateTo = { label: undefined, url: undefined, org: undefined },
+	) {
+		const matchingTab = this.getSingleTabByData(tabToUpdate);
+		matchingTab.update(updateTo);
+		return await this.syncTabs();
+	}
 
-        return new TabContainer(
-            Array.from(uniqueTabs.values()),
-            _tabContainerSecret,
-        );
-    }
-    */
+	/**
+	 * Resets the singleton and returns a new instance. Only for use in tests!
+	 *
+	 * @returns {Promise<TabContainer>} the new instance
+	 */
+	static async _reset() {
+		singletonAllTabs = null;
+		return await ensureAllTabsAvailability();
+	}
+}
 
-	/*
-    isEmpty(){
-      return this.length === 0;
-    }
+/**
+ * Asynchronously retrieves all tabs, initializing them if needed.
+ *
+ * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
+ */
+async function getAllTabs_async() {
+	if (singletonAllTabs == null) {
+		singletonAllTabs = await TabContainer.create();
+	} else if (singletonAllTabs instanceof Promise) {
+		await singletonAllTabs;
+	}
+	return singletonAllTabs;
+}
 
-    isNotEmpty(){
-      return !this.isEmpty();
-    }
-  */
+/**
+ * Synchronously returns the TabContainer instance of all tabs if initialized.
+ *
+ * @throws {Error} Throws if the TabContainer is not yet initialized.
+ * @returns {TabContainer} The initialized TabContainer instance.
+ */
+function getAllTabs() {
+	if (singletonAllTabs == null || singletonAllTabs instanceof Promise) {
+		throw new Error(["singletonAllTabs", "error_not_initilized"]);
+	}
+	return singletonAllTabs;
+}
+
+/**
+ * Ensures availability of the TabContainer instance, initializing it if necessary.
+ *
+ * @returns {Promise<TabContainer>} The TabContainer instance representing all tabs.
+ */
+export async function ensureAllTabsAvailability() {
+	try {
+		return getAllTabs();
+	} catch (e) {
+		console.info(e);
+		return await getAllTabs_async();
+	}
 }

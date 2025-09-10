@@ -3,6 +3,10 @@
 		"message": "אפשר",
 		"description": "[req_permission] כפתור לאישור הרשאות"
 	},
+	"ascending": {
+		"message": "עולה (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "זמין",
 		"description": "כותרת מקטע לפריטים שניתן להוסיף"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "תווית לתפריט ההגדרות"
 	},
+	"cxm_sort": {
+		"message": "🎯 מיין Tabs",
+		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם באופן אוטומטי (תפריט ראשי)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 לפי תווית",
+		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם לפי תווית"
+	},
+	"cxm_sort_org": {
+		"message": "👽 לפי Org",
+		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם לפי ארגון"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 לפי Url",
+		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם לפי URL"
+	},
 	"cxm_update": {
 		"message": "✏️ עדכן Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete את כל ה-Tabs",
 		"description": "[חלון-קופץ] כותרת על סל המיחזור לריקון כל ה-Tabs"
+	},
+	"descending": {
+		"message": "יורד (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "שגיאה בעת איפוס ל-Tab ברירת מחדל.",
 		"description": "[שגיאה] שגיאה כללית בעת איפוס ה-Tab לברירת המחדל שלהם"
 	},
+	"error_sorting_tabs": {
+		"message": "שגיאה בעת מיון ה-Tabs",
+		"description": "[error] מוצגת בהודעה קופצת"
+	},
 	"error_sync_nothing": {
 		"message": "לא ניתן לסנכרן Tab ריקים!",
 		"description": "[error] ניסה לסנכרן Tab ללא תוכן"
@@ -455,6 +483,70 @@
 		"message": "כללי",
 		"description": "תווית לקטגוריית ההגדרות הכלליות"
 	},
+	"help": {
+		"message": "עזרה",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "מסמן Tabs חדשים כ-Org Tabs, כך שהם גלויים רק כאשר אתה מחובר לאותו ארגון Salesforce מסוים.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tabs חדשים שסומנו כמועדפים מוכנסים לחזית רשימת ה-Tabs שלך בסרגל ההגדרה במקום להתווסף בסוף.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "אם תלחץ על התוסף הקופץ מחוץ לדומיין של Salesforce, הוא יעביר אותך באופן אוטומטי לדף הכניסה של Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "אם תלחץ על התוסף הקופץ בתוך דומיין של Salesforce אך לא בדף הגדרה, הוא יעביר אותך באופן אוטומטי לדף ההגדרה של Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "כאשר הוא מופעל, ה-Tabs שלך נשמרים בסדר ממוין—או לפי תווית, URL או Org; תלוי במה שתבחר.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "מצמיד את ה-Tabs השמורים שלך לפני תפריט הניווט הסטנדרטי (Home / Object Manager) בהגדרה, במקום אחריו.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "כאשר הוא מופעל, כל Tab שנשמר יפתח את הדף הקשור ב-Tab חדש.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "מדכא את ההצגה האוטומטית של הודעות על הערות שחרור לאחר עדכון התוסף.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "משבית חלונות קופצים של תזכורות עדכון תקופתיות, ושומר על ממשק המשתמש של התוסף נקי (כאשר השביתת את העדכונים האוטומטיים של התוסף מהגדרות הדפדפן שלך).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "אם תלחץ על התוסף הקופץ מחוץ לדומיין של Salesforce, דף הכניסה ייפתח ב-Tab הנוכחי של הדפדפן.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "אם תלחץ על התוסף הקופץ בתוך דומיין של Salesforce אך לא בדף הגדרה, דף ההגדרה של Salesforce ייפתח ב-Tab הנוכחי של הדפדפן.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "הגדר את שפת ממשק המשתמש עבור התוסף בלבד. אם משהו לא תורגם, תיעשה במקומו שימוש בגרסה האנגלית.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "משבית איסוף טלמטריה בסיסי. התוסף לא יופיע במדדי שימוש אנונימיים.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "עוקף את ממשק ה-API של Lightning Navigation ופותח קישורים באמצעות טעינה מחדש של דף מלא, מה שיכול להיות מהיר יותר בהגדרות ארגון מסוימות.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "משבית את בדיקת התוסף שמאמתת שקטע URL תואם לפורמט של מזהי רשומות/אובייקטים של Salesforce (משמש להגדרת ה-Tab השמור באופן אוטומטי כ-Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "ייבא",
 		"description": "[popup] כפתור ייבוא"
@@ -539,6 +631,14 @@
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "הוסף Tabs חדשים כ-Org Tabs.",
+		"description": "[settings] אפשר למשתמש להוסיף את כל ה-Tabs החדשים כספציפיים לארגון"
+	},
+	"opt_add_tabs_front": {
+		"message": "הוסף Tabs חדשים מקדימה.",
+		"description": "[settings] אפשר למשתמש להוסיף את כל ה-Tabs החדשים מקדימה"
+	},
 	"opt_automatic_open_login": {
 		"message": "פתח אוטומטית את דף $salesforce_login בעת לחיצה על החלון הקופץ כשאינך נמצא בדף Salesforce.",
 		"description": "[הגדרה] כשהמשתמש פותח את החלון הקופץ באתר אקראי"
@@ -547,9 +647,17 @@
 		"message": "פתח אוטומטית את דף $salesforce_setup בעת לחיצה על החלון הקופץ כשאתה נמצא בדף Salesforce.",
 		"description": "[הגדרה] כשהמשתמש פותח את החלון הקופץ באתר Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "ההגדרות נשמרו!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (ברירת מחדל וגיבוי)",
 		"description": "אפשרות שפת ברירת המחדל של התוסף"
+	},
+	"opt_keep_sort": {
+		"message": "שמור על ה-Tabs ממוינים.",
+		"description": "[setting] אפשר למשתמש לשמור על ה-Tabs שלו ממוינים לפי אחד המפתחות שלהם"
 	},
 	"opt_keep_tabs_left": {
 		"message": "שמור Tabs מועדפים משמאל לדף הבית ולמנהל האובייקטים.",
@@ -579,13 +687,17 @@
 		"message": "בחר שפת הרחבה",
 		"description": "[הגדרה] תווית להנחיית המשתמש לבחור את השפה המועדפת עליו"
 	},
+	"opt_pick_sort": {
+		"message": "בחר לפי איזה שדה יש למיין את ה-Tabs",
+		"description": "[setting] כעת המשתמש יכול לבחור לפי איזה מפתח לשמור על ה-Tabs ממוינים"
+	},
 	"opt_prevent_analytics": {
 		"message": "מנע שימוש ב-Simple Analytics (לא ייכלל בספירת המשתמשים).",
 		"description": "[הגדרה] מאפשר למשתמש למנוע שליחת נתוני אנליטיקה אנונימיים"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "מנע שימוש בניווט Lightning (טעינה מהירה יותר בעת שימוש).",
-		"description": "[הגדרה] אל תאפשר ניווט Lightning עם הסבר על התכונה"
+		"message": "מנע שימוש ב-Lightning Navigation (טעינה מהירה יותר כאשר לא מסומן).",
+		"description": "[setting] אל תאפשר Lightning Navigation עם הסבר על התכונה"
 	},
 	"opt_same_tab_popup": {
 		"message": "דף באותה הכרטיסייה בעת לחיצה על החלון הקופץ.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "שמור כ-Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"
+	},
+	"send_tip": {
+		"message": "שלח לנו טיפ ❤️",
+		"description": "[popup] כותרת ל-svg כדי להניע שליחת טיפ"
 	},
 	"set_gen_preview": {
 		"message": "Tab תצוגה מקדימה",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "לאן?",
 		"description": "[open-other-org-modal] כותרת חלופית לחלון המודאלי"
+	},
+	"write_review": {
+		"message": "כתוב ביקורת!",
+		"description": "[popup] כותרת ל-svg כדי לבקש כתיבת ביקורת"
 	}
 }

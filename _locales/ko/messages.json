@@ -3,6 +3,10 @@
 		"message": "허용",
 		"description": "[권한_요청] 권한을 허용하는 버튼"
 	},
+	"ascending": {
+		"message": "오름차순 (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "사용 가능",
 		"description": "추가할 수 있는 항목의 섹션 헤더"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "설정 메뉴의 레이블"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tab 정렬",
+		"description": "사용자가 Tab을 자동으로 정렬할 수 있는 컨텍스트 메뉴(상위 메뉴)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 라벨순",
+		"description": "사용자가 라벨별로 Tab을 정렬할 수 있는 컨텍스트 메뉴"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org순",
+		"description": "사용자가 Org별로 Tab을 정렬할 수 있는 컨텍스트 메뉴"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url순",
+		"description": "사용자가 url별로 Tab을 정렬할 수 있는 컨텍스트 메뉴"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab 업데이트",
 		"description": "[컨텍스트_메뉴]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "모든 Tabs $delete",
 		"description": "[팝업] 모든 Tabs를 비우기 위한 휴지통의 제목"
+	},
+	"descending": {
+		"message": "내림차순 (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "드롭",
@@ -351,6 +375,10 @@
 		"message": "기본 Tab 재설정 중 오류가 발생했습니다.",
 		"description": "[오류] Tab를 기본값으로 재설정할 때 사용되는 일반 오류"
 	},
+	"error_sorting_tabs": {
+		"message": "Tab 정렬 중 오류가 발생했습니다.",
+		"description": "[error] 토스트 메시지에 표시됨"
+	},
 	"error_sync_nothing": {
 		"message": "null Tabs는 동기화할 수 없습니다!",
 		"description": "[오류] 아무것도 동기화하려고 시도했습니다."
@@ -455,6 +483,70 @@
 		"message": "일반",
 		"description": "일반 설정 범주 라벨"
 	},
+	"help": {
+		"message": "도움말",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "새 Tab을 Org Tab으로 표시하여 해당 특정 Salesforce Org에 로그인했을 때만 표시됩니다.",
+		"description": "[$opt_add_tabs_as_org]에 대한 [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "새롭게 즐겨찾기에 추가한 Tab이 Tab 목록의 끝에 추가되지 않고 설정 바의 Tab 목록 맨 앞에 삽입됩니다.",
+		"description": "[$opt_add_tabs_front]에 대한 [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "Salesforce 도메인 외부에서 확장 프로그램 팝업을 클릭하면 Salesforce 로그인 페이지로 자동으로 이동합니다.",
+		"description": "[$opt_automatic_open_login]에 대한 [settings-help]"
+	},
+	"help_automatic_open_setup": {
+		"message": "Salesforce 도메인 내에서 확장 프로그램 팝업을 클릭했지만 설정 페이지에 없는 경우 Salesforce 설정 페이지로 자동으로 이동합니다.",
+		"description": "[$opt_automatic_open_setup]에 대한 [settings-help]"
+	},
+	"help_keep_sort": {
+		"message": "활성화하면 Tab이 라벨, URL 또는 Org에 따라 정렬된 상태로 유지됩니다. 어떤 것을 선택하든 상관없이요.",
+		"description": "[$opt_keep_sort]에 대한 [settings-help]"
+	},
+	"help_keep_tabs_left": {
+		"message": "설정에서 저장된 Tab을 표준 탐색 메뉴(홈/개체 관리자) 뒤에 배치하는 대신 앞에 고정합니다.",
+		"description": "[$opt_keep_tabs_left]에 대한 [settings-help]"
+	},
+	"help_link_new_browser": {
+		"message": "활성화하면 저장된 모든 Tab이 새 Tab에서 관련 페이지를 엽니다.",
+		"description": "[$opt_link_new_browser]에 대한 [settings-help]"
+	},
+	"help_no_release_notes": {
+		"message": "확장 프로그램 업데이트 후 릴리스 노트 알림이 자동으로 표시되지 않도록 합니다.",
+		"description": "[$opt_no_release_notes]에 대한 [settings-help]"
+	},
+	"help_no_update_notification": {
+		"message": "주기적인 업데이트 알림 팝업을 비활성화하여 확장 프로그램 UI를 깔끔하게 유지합니다(브라우저 설정에서 확장 프로그램의 자동 업데이트를 비활성화한 경우).",
+		"description": "[$opt_no_update_notification]에 대한 [settings-help]"
+	},
+	"help_open_login_same_tab": {
+		"message": "Salesforce 도메인 외부에서 확장 프로그램 팝업을 클릭하면 현재 브라우저 Tab에서 로그인 페이지가 열립니다.",
+		"description": "[$opt_open_login_same_tab]에 대한 [settings-help]"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Salesforce 도메인 내에서 확장 프로그램 팝업을 클릭했지만 설정 페이지에 없는 경우 현재 브라우저 Tab에서 Salesforce 설정 페이지가 열립니다.",
+		"description": "[$opt_open_setup_same_tab]에 대한 [settings-help]"
+	},
+	"help_pick_language": {
+		"message": "확장 프로그램에만 UI 언어를 설정합니다. 번역되지 않은 내용이 있으면 대신 영어 버전이 사용됩니다.",
+		"description": "[$opt_pick_language]에 대한 [settings-help]"
+	},
+	"help_prevent_analytics": {
+		"message": "기본 텔레메트리 수집을 비활성화합니다. 확장 프로그램이 익명의 사용량 측정항목에 표시되지 않습니다.",
+		"description": "[$opt_prevent_analytics]에 대한 [settings-help]"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning 탐색 API를 우회하고 전체 페이지 다시 로드를 통해 링크를 엽니다. 일부 Org 설정에서는 더 빠를 수 있습니다.",
+		"description": "[$opt_prevent_lightning_navigation]에 대한 [settings-help]"
+	},
+	"help_skip_link_detection": {
+		"message": "URL 조각이 Salesforce 레코드/개체 ID 형식과 일치하는지 확인하는 확장 프로그램 검사(저장된 Tab을 Org Tab으로 자동 설정하는 데 사용됨)를 비활성화합니다.",
+		"description": "[$opt_skip_link_detection]에 대한 [settings-help]"
+	},
 	"import": {
 		"message": "가져오기",
 		"description": "[팝업] 가져오기 버튼"
@@ -539,6 +631,14 @@
 		"message": "설정 열기",
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 설정 페이지로 리디렉션하는 버튼의 클릭 유도문안"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "새 Tab을 Org Tab으로 추가합니다.",
+		"description": "[settings] 사용자가 모든 새 Tab을 Org별로 추가하도록 허용"
+	},
+	"opt_add_tabs_front": {
+		"message": "새 Tab을 맨 앞에 추가합니다.",
+		"description": "[settings] 사용자가 모든 새 Tab을 맨 앞에 추가하도록 허용"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce 페이지에 있지 않을 때 팝업을 클릭하면 $salesforce_login 페이지를 자동으로 엽니다.",
 		"description": "[설정] 사용자가 임의의 웹사이트에서 팝업을 열 때"
@@ -547,9 +647,17 @@
 		"message": "Salesforce 페이지에 있을 때 팝업을 클릭하면 $salesforce_setup 페이지를 자동으로 엽니다.",
 		"description": "[설정] 사용자가 Salesforce 웹사이트에서 팝업을 열 때"
 	},
+	"opt_confirm_save": {
+		"message": "설정이 저장되었습니다!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (기본 및 대체)",
 		"description": "확장 프로그램의 기본 언어 옵션"
+	},
+	"opt_keep_sort": {
+		"message": "Tab을 정렬된 상태로 유지합니다.",
+		"description": "[setting] 사용자가 Tab을 키 중 하나로 정렬된 상태로 유지하도록 허용"
 	},
 	"opt_keep_tabs_left": {
 		"message": "홈 및 개체 관리자 왼쪽에 즐겨찾기 Tabs 유지.",
@@ -579,13 +687,17 @@
 		"message": "확장 프로그램 언어 선택",
 		"description": "[설정] 사용자가 선호하는 언어를 선택하도록 안내하는 레이블"
 	},
+	"opt_pick_sort": {
+		"message": "Tab을 정렬할 필드를 선택합니다.",
+		"description": "[setting] 이제 사용자가 Tab을 정렬된 상태로 유지할 키를 선택할 수 있습니다."
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analytics 사용 방지 (사용자 수 집계에 포함되지 않음).",
 		"description": "[설정] 사용자가 익명 분석 전송을 방지할 수 있음"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Lightning 탐색 사용을 방지합니다(사용 중일 때 로딩 속도 향상).",
-		"description": "[설정] 기능 설명과 함께 Lightning 탐색을 허용하지 않음"
+		"message": "Lightning 탐색 사용을 방지합니다(선택 취소하면 더 빠르게 로드됨).",
+		"description": "[setting] 기능에 대한 설명과 함께 Lightning 탐색을 허용하지 않음"
 	},
 	"opt_same_tab_popup": {
 		"message": "팝업 클릭 시 동일한 탭에서 페이지 열기.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Tab으로 저장",
 		"description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+	},
+	"send_tip": {
+		"message": "팁을 보내주세요 ❤️",
+		"description": "[popup] 팁 전송을 요청하는 svg의 제목"
 	},
 	"set_gen_preview": {
 		"message": "Tab 미리보기",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "어디로?",
 		"description": "[다른_조직_열기_모달] 모달의 대체 제목"
+	},
+	"write_review": {
+		"message": "리뷰를 작성해 주세요!",
+		"description": "[popup] 리뷰 작성을 요청하는 svg의 제목"
 	}
 }

@@ -3,6 +3,10 @@
 		"message": "اجازه دادن",
 		"description": "[درخواست_مجوز] دکمه برای اجازه دادن مجوزها"
 	},
+	"ascending": {
+		"message": "صعودی (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "در دسترس",
 		"description": "سربرگ بخشی برای آیتم‌هایی که می‌توان اضافه کرد"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "برچسب برای منوی تنظیمات"
 	},
+	"cxm_sort": {
+		"message": "🎯 مرتب‌سازی Tabs",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی خودکار Tabs خود (منوی والد)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 بر اساس برچسب",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی Tabs خود بر اساس برچسب"
+	},
+	"cxm_sort_org": {
+		"message": "👽 بر اساس Org",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی Tabs خود بر اساس سازمان"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 بر اساس Url",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی Tabs خود بر اساس URL"
+	},
 	"cxm_update": {
 		"message": "✏️ به‌روزرسانی Tab",
 		"description": "[منوی_زمینه]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete همه Tabs",
 		"description": "[پنجره-بازشو] عنوان روی سطل زباله برای خالی کردن همه Tabs"
+	},
+	"descending": {
+		"message": "نزولی (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "خطا هنگام بازنشانی Tabها به حالت پیش‌فرض.",
 		"description": "[خطا] خطای عمومی هنگام بازنشانی Tabها به حالت پیش‌فرض"
 	},
+	"error_sorting_tabs": {
+		"message": "خطا در مرتب‌سازی Tabs",
+		"description": "[error] نمایش داده شده در یک پیام کوچک"
+	},
 	"error_sync_nothing": {
 		"message": "نمی‌توان Tabs تهی را همگام‌سازی کرد!",
 		"description": "[خطا] تلاش برای همگام‌سازی هیچ‌چیز"
@@ -455,6 +483,70 @@
 		"message": "عمومی",
 		"description": "برچسب برای دسته تنظیمات عمومی"
 	},
+	"help": {
+		"message": "راهنما",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Tabs جدید را به عنوان Org Tabs علامت‌گذاری می‌کند، بنابراین آنها فقط زمانی قابل مشاهده هستند که به آن Org Salesforce خاص وارد شده باشید.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tabs مورد علاقه جدید به جای اضافه شدن در انتها، در جلوی لیست Tabs شما در نوار تنظیمات قرار می‌گیرند.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "اگر روی پنجره بازشو افزونه خارج از دامنه Salesforce کلیک کنید، به صورت خودکار شما را به صفحه ورود به Salesforce می‌برد.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "اگر روی پنجره بازشو افزونه در داخل یک دامنه Salesforce اما نه در یک صفحه تنظیمات کلیک کنید، به صورت خودکار شما را به صفحه تنظیمات Salesforce می‌برد.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "هنگامی که فعال باشد، Tabs شما به ترتیب مرتب شده نگهداری می‌شود—یا بر اساس برچسب، URL یا Org؛ بسته به آنچه انتخاب می‌کنید.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Tabs ذخیره‌شده شما را قبل از منوی ناوبری استاندارد (Home / Object Manager) در تنظیمات، به جای بعد از آن، پین می‌کند.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "هنگامی که فعال باشد، هر Tab ذخیره‌شده صفحه مرتبط را در یک Tab جدید باز خواهد کرد.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "نمایش خودکار اعلان‌های یادداشت‌های انتشار را پس از به‌روزرسانی افزونه، سرکوب می‌کند.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "پنجره‌های بازشوی یادآوری به‌روزرسانی دوره‌ای را غیرفعال می‌کند و رابط کاربری افزونه را تمیز نگه می‌دارد (هنگامی که به‌روزرسانی‌های خودکار افزونه را از تنظیمات مرورگر خود غیرفعال کرده‌اید).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "اگر روی پنجره بازشو افزونه خارج از دامنه Salesforce کلیک کنید، صفحه ورود در Tab فعلی مرورگر باز خواهد شد.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "اگر روی پنجره بازشو افزونه در داخل یک دامنه Salesforce اما نه در یک صفحه تنظیمات کلیک کنید، صفحه تنظیمات Salesforce در Tab فعلی مرورگر باز خواهد شد.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "فقط زبان رابط کاربری را برای افزونه تنظیم کنید. اگر چیزی ترجمه نشده باشد، به جای آن از نسخه انگلیسی استفاده خواهد شد.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "جمع‌آوری داده‌های تله‌متری پایه را غیرفعال می‌کند. افزونه در معیارهای استفاده ناشناس ظاهر نمی‌شود.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "از Lightning Navigation API عبور می‌کند و لینک‌ها را از طریق بارگذاری مجدد کامل صفحه باز می‌کند، که می‌تواند در برخی تنظیمات سازمانی سریع‌تر باشد.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "بررسی افزونه را که تأیید می‌کند آیا یک قطعه URL با فرمت شناسه‌های رکورد/شیء Salesforce مطابقت دارد یا خیر، غیرفعال می‌کند (برای تنظیم خودکار Tab ذخیره‌شده به عنوان یک Org Tab استفاده می‌شود).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "ورود",
 		"description": "[پنجره_بازشو] دکمه ورود"
@@ -539,6 +631,14 @@
 		"message": "باز کردن تنظیمات",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "اضافه کردن Tabs جدید به عنوان Org Tabs.",
+		"description": "[settings] به کاربر اجازه می‌دهد تمام Tabs جدید را به عنوان مخصوص سازمان اضافه کند"
+	},
+	"opt_add_tabs_front": {
+		"message": "اضافه کردن Tabs جدید در جلو.",
+		"description": "[settings] به کاربر اجازه می‌دهد تمام Tabs جدید را در جلو اضافه کند"
+	},
 	"opt_automatic_open_login": {
 		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce نیستید، صفحه $salesforce_login را به طور خودکار باز کنید.",
 		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت تصادفی است باز می کند"
@@ -547,9 +647,17 @@
 		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce هستید، صفحه $salesforce_setup را به طور خودکار باز کنید.",
 		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت Salesforce است باز می کند"
 	},
+	"opt_confirm_save": {
+		"message": "تنظیمات ذخیره شدند!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (پیش‌فرض و بازگشتی)",
 		"description": "گزینه زبان پیش‌فرض افزونه"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs را مرتب نگه دارید.",
+		"description": "[setting] به کاربر اجازه می‌دهد Tabs خود را بر اساس یکی از کلیدهای خود مرتب نگه دارد"
 	},
 	"opt_keep_tabs_left": {
 		"message": "نگه‌داشتن Tabهای علاقه‌مند در سمت چپ Home و Object Manager.",
@@ -579,13 +687,17 @@
 		"message": "زبان افزونه را انتخاب کنید",
 		"description": "[تنظیمات] برچسبی برای درخواست از کاربر برای انتخاب زبان مورد نظر خود"
 	},
+	"opt_pick_sort": {
+		"message": "انتخاب کنید Tabs بر اساس کدام فیلد باید مرتب شوند",
+		"description": "[setting] اکنون کاربر می‌تواند انتخاب کند که Tabs را بر اساس کدام کلید مرتب نگه دارد"
+	},
 	"opt_prevent_analytics": {
 		"message": "جلوگیری از استفاده از Simple Analytics (در شمارش کاربران نمایش داده نمی‌شود).",
 		"description": "[تنظیم] اجازه می‌دهد کاربر از ارسال تحلیل‌های ناشناس جلوگیری کند"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "از استفاده از ناوبری Lightning جلوگیری کنید (هنگام استفاده بارگیری سریعتر است).",
-		"description": "[تنظیم] اجازه ندهید ناوبری Lightning با توضیح ویژگی استفاده شود"
+		"message": "جلوگیری از استفاده از Lightning Navigation (بارگذاری سریع‌تر وقتی علامت‌گذاری نشده است).",
+		"description": "[setting] عدم اجازه به Lightning Navigation با توضیح ویژگی"
 	},
 	"opt_same_tab_popup": {
 		"message": "باز کردن صفحه در همان برگه هنگام کلیک روی پاپ‌آپ.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "ذخیره به عنوان Tab",
 		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
+	},
+	"send_tip": {
+		"message": "یک نکته برای ما ارسال کنید ❤️",
+		"description": "[popup] عنوان برای svg برای درخواست ارسال یک نکته"
 	},
 	"set_gen_preview": {
 		"message": "پیش‌نمایش Tab",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "کجا؟",
 		"description": "[مودال_بازکردن_سازمان_دیگر] عنوان جایگزین برای مودال"
+	},
+	"write_review": {
+		"message": "یک نقد بنویسید!",
+		"description": "[popup] عنوان برای svg برای درخواست نوشتن یک نقد"
 	}
 }

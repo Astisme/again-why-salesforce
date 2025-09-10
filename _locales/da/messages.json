@@ -3,6 +3,10 @@
 		"message": "Tillad",
 		"description": "[req_permission] knap for at tillade tilladelser"
 	},
+	"ascending": {
+		"message": "Stigende (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Tilgængelig",
 		"description": "Sektionsoverskrift for elementer, der kan tilføjes"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etiket til indstillingsmenuen"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sorter Tabs",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs automatisk (forældremenu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 efter Label",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 efter Org",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter organisation"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 efter Url",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Opdater Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[popup] titel på papirkurven for at tømme alle Tabs"
+	},
+	"descending": {
+		"message": "Faldende (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Fejl ved nulstilling til standard-Tab.",
 		"description": "[fejl] Generisk fejl ved nulstilling af Tab til standard"
 	},
+	"error_sorting_tabs": {
+		"message": "Fejl under sortering af Tabs",
+		"description": "[error] vist i en toast-meddelelse"
+	},
 	"error_sync_nothing": {
 		"message": "Kan ikke synkronisere tomme Tabs!",
 		"description": "[error] der blev forsøgt at synkronisere ingenting"
@@ -455,6 +483,70 @@
 		"message": "Generelt",
 		"description": "Etiket for kategorien med generelle indstillinger"
 	},
+	"help": {
+		"message": "Hjælp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marker nye Tabs som Org Tabs, så de kun er synlige, når du er logget ind på den specifikke Salesforce Org.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nyligt favoriserede Tabs indsættes foran på din Tab-liste i opsætningslinjen i stedet for at blive tilføjet i slutningen.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet uden for et Salesforce-domæne, fører det dig automatisk til Salesforce-loginsiden.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet inden for et Salesforce-domæne, men ikke på en opsætningsside, fører det dig automatisk til Salesforce-opsætningssiden.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Når aktiveret, holdes dine Tabs i sorteret rækkefølge – enten efter label, URL eller Org; afhængigt af hvad du vælger.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fastgør dine gemte Tabs før standardnavigationsmenuen (Home / Object Manager) i opsætningen, i stedet for efter den.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Når aktiveret, vil hver gemt Tab åbne den relaterede side i en ny Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Undertrykker den automatiske visning af meddelelser om frigivelsesnoter, efter at udvidelsen er opdateret.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Deaktiverer pop op-vinduer med periodiske påmindelser om opdatering, hvilket holder udvidelsens UI ren (når du har deaktiveret automatiske opdateringer af udvidelsen fra din browsers indstillinger).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet uden for et Salesforce-domæne, åbnes loginsiden i den nuværende browser-Tab.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet inden for et Salesforce-domæne, men ikke på en opsætningsside, åbnes Salesforce-opsætningssiden i den nuværende browser-Tab.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Indstil UI-sproget for kun udvidelsen. Hvis noget ikke er oversat, vil den engelske version blive brugt i stedet.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Deaktiverer grundlæggende telemetrisamling. Udvidelsen vil ikke vises i anonyme brugsstatistikker.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omgår Lightning Navigation API'en og åbner links via en fuld sidegenindlæsning, hvilket kan være hurtigere i nogle organisationers opsætninger.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Deaktiverer udvidelseskontrollen, der verificerer, at et URL-fragment matcher formatet for Salesforce-post/objekt-ID'er (bruges til automatisk at indstille den gemte Tab som en Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importer",
 		"description": "[popup] importknap"
@@ -539,6 +631,14 @@
 		"message": "Åbn Setup",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Tilføj nye Tabs som Org Tabs.",
+		"description": "[settings] lad brugeren tilføje alle nye Tabs som organisationsspecifikke"
+	},
+	"opt_add_tabs_front": {
+		"message": "Tilføj nye Tabs foran.",
+		"description": "[settings] lad brugeren tilføje alle nye Tabs foran"
+	},
 	"opt_automatic_open_login": {
 		"message": "Åbn automatisk $salesforce_login-siden, når du klikker på pop op-vinduet, mens du ikke er på en Salesforce-side.",
 		"description": "[indstilling] når brugeren åbner pop op-vinduet på et tilfældigt websted"
@@ -547,9 +647,17 @@
 		"message": "Åbn automatisk $salesforce_setup-siden, når du klikker på pop op-vinduet, mens du er på en Salesforce-side.",
 		"description": "[indstilling] når brugeren åbner pop op-vinduet på et Salesforce-websted"
 	},
+	"opt_confirm_save": {
+		"message": "Indstillinger blev gemt!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Standard og fallback)",
 		"description": "Standardsprogmulighed for udvidelsen"
+	},
+	"opt_keep_sort": {
+		"message": "Hold Tabs sorteret.",
+		"description": "[setting] lad brugeren holde deres Tabs sorteret efter en af deres nøgler"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Behold favorit-Tabs til venstre for Hjem og Objektstyring.",
@@ -579,13 +687,17 @@
 		"message": "Vælg udvidelsessprog",
 		"description": "[indstilling] etiket til at bede brugeren om at vælge deres foretrukne sprog"
 	},
+	"opt_pick_sort": {
+		"message": "Vælg hvilket felt Tabs skal sorteres efter",
+		"description": "[setting] nu kan brugeren vælge, hvilken nøgle der skal holdes Tabs sorteret efter"
+	},
 	"opt_prevent_analytics": {
 		"message": "Forhindr brug af Simple Analytics (bliver ikke talt med i brugerantal).",
 		"description": "[indstilling] lader brugeren forhindre afsendelse af anonym analyse"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Forhindr brug af Lightning-navigation (hurtigere indlæsning ved brug).",
-		"description": "[indstilling] tillad ikke Lightning-navigation med forklaring af funktionen"
+		"message": "Forhindre brug af Lightning Navigation (hurtigere indlæsning, når den ikke er markeret).",
+		"description": "[setting] tillad ikke Lightning Navigation med forklaring af funktionen"
 	},
 	"opt_same_tab_popup": {
 		"message": "side i den samme fane ved klik på pop-up.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Gem som Tab",
 		"description": "[alt] alternativ tekst når billeder ikke vises"
+	},
+	"send_tip": {
+		"message": "Send os et tip ❤️",
+		"description": "[popup] titel for svg for at bede om at sende et tip"
 	},
 	"set_gen_preview": {
 		"message": "Tab-forhåndsvisning",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Hvorhen?",
 		"description": "[open-other-org-modal] alternativ titel for modal"
+	},
+	"write_review": {
+		"message": "Skriv en anmeldelse!",
+		"description": "[popup] titel for svg for at anmode om at skrive en anmeldelse"
 	}
 }

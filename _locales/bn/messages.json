@@ -3,6 +3,10 @@
 		"message": "অনুমতি দিন",
 		"description": "[req_permission] অনুমতি দেওয়ার জন্য বোতাম"
 	},
+	"ascending": {
+		"message": "আরোহী (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "প্রাপ্য",
 		"description": "যেসব আইটেম যোগ করা যাবে সেগুলির জন্য সেকশন হেডার"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "সেটিংস মেনুর জন্য লেবেল"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabs সাজান",
+		"description": "ব্যবহারকারীদের স্বয়ংক্রিয়ভাবে তাদের Tabs সাজাতে দেওয়ার জন্য প্রসঙ্গ মেনু (পিতামাতা মেনু)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 লেবেল দ্বারা",
+		"description": "ব্যবহারকারীদের লেবেল অনুসারে তাদের Tabs সাজাতে দেওয়ার জন্য প্রসঙ্গ মেনু"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org দ্বারা",
+		"description": "ব্যবহারকারীদের সংস্থা অনুসারে তাদের Tabs সাজাতে দেওয়ার জন্য প্রসঙ্গ মেনু"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL দ্বারা",
+		"description": "ব্যবহারকারীদের URL অনুসারে তাদের Tabs সাজাতে দেওয়ার জন্য প্রসঙ্গ মেনু"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab আপডেট করুন",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete সমস্ত Tabs",
 		"description": "[পপআপ] সমস্ত Tabs খালি করার জন্য বিনে শিরোনাম"
+	},
+	"descending": {
+		"message": "অবতরণ (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "ডিফল্ট Tab রিসেট করার সময় ত্রুটি হয়েছে।",
 		"description": "[ত্রুটি] Tab গুলো তাদের ডিফল্ট অবস্থায় ফিরিয়ে আনার সময় ব্যবহৃত সাধারণ ত্রুটি"
 	},
+	"error_sorting_tabs": {
+		"message": "Tabs সাজানোর সময় ত্রুটি",
+		"description": "[error] একটি টোস্ট বার্তায় দেখানো হয়েছে"
+	},
 	"error_sync_nothing": {
 		"message": "খালি Tabs সিঙ্ক করা যাবে না!",
 		"description": "[error] কিছু সিঙ্ক করার চেষ্টা করা হয়েছে"
@@ -454,6 +482,70 @@
 		"message": "সাধারণ",
 		"description": "সাধারণ সেটিংস ক্যাটেগরির জন্য লেবেল"
 	},
+	"help": {
+		"message": "সহায়তা",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "নতুন Tabsকে Org Tabs হিসাবে চিহ্নিত করে, যাতে আপনি যখন সেই নির্দিষ্ট Salesforce Org-এ লগ ইন করবেন তখনই সেগুলি দৃশ্যমান হবে।",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "নতুন পছন্দের Tabs আপনার সেটআপ বারে Tab তালিকার শেষে যুক্ত হওয়ার পরিবর্তে সামনে যুক্ত করা হয়।",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "আপনি যদি একটি Salesforce ডোমেনের বাইরে এক্সটেনশনের পপআপে ক্লিক করেন, তাহলে আপনাকে স্বয়ংক্রিয়ভাবে Salesforce লগইন পৃষ্ঠায় নিয়ে যাবে।",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "আপনি যদি একটি Salesforce ডোমেনের ভিতরে কিন্তু একটি সেটআপ পৃষ্ঠায় না থেকে এক্সটেনশনের পপআপে ক্লিক করেন, তাহলে আপনাকে স্বয়ংক্রিয়ভাবে Salesforce সেটআপ পৃষ্ঠায় নিয়ে যাবে।",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "সক্ষম করা হলে, আপনার Tabs সাজানো ক্রমানুসারে রাখা হয়—হয় লেবেল, URL বা Org দ্বারা; আপনি যা বেছে নেবেন তার উপর নির্ভর করে।",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "সেটআপে স্ট্যান্ডার্ড নেভিগেশন মেনু (Home / Object Manager)-এর আগে আপনার সংরক্ষিত Tabs পিন করে, এটির পরে নয়।",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "সক্ষম করা হলে, প্রতিটি সংরক্ষিত Tab একটি নতুন Tab-এ সংশ্লিষ্ট পৃষ্ঠাটি খুলবে।",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "এক্সটেনশন আপডেট হওয়ার পরে রিলিজ নোট বিজ্ঞপ্তিগুলির স্বয়ংক্রিয় প্রদর্শন দমন করে।",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "পর্যায়ক্রমিক আপডেট রিমাইন্ডার পপআপগুলি অক্ষম করে, এক্সটেনশনের UI পরিষ্কার রাখে (যখন আপনি আপনার ব্রাউজারের সেটিংস থেকে এক্সটেনশনের স্বয়ংক্রিয় আপডেটগুলি অক্ষম করেছেন)।",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "আপনি যদি একটি Salesforce ডোমেনের বাইরে এক্সটেনশনের পপআপে ক্লিক করেন, তাহলে লগইন পৃষ্ঠাটি বর্তমান ব্রাউজার Tab-এ খোলা হবে।",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "আপনি যদি একটি Salesforce ডোমেনের ভিতরে কিন্তু একটি সেটআপ পৃষ্ঠায় না থেকে এক্সটেনশনের পপআপে ক্লিক করেন, তাহলে Salesforce সেটআপ পৃষ্ঠাটি বর্তমান ব্রাউজার Tab-এ খোলা হবে।",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "শুধুমাত্র এক্সটেনশনের জন্য UI ভাষা সেট করুন। যদি কোনো কিছু অনুবাদ না করা হয়, তাহলে তার পরিবর্তে ইংরেজি সংস্করণ ব্যবহার করা হবে।",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "মৌলিক টেলিমেট্রি সংগ্রহ অক্ষম করে। এক্সটেনশনটি বেনামী ব্যবহারের মেট্রিক্সে উপস্থিত হবে না।",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "লাইটনিং নেভিগেশন এপিআইকে বাইপাস করে এবং পুরো-পৃষ্ঠা পুনরায় লোড করার মাধ্যমে লিঙ্ক খোলে, যা কিছু সংস্থা সেটআপে দ্রুত হতে পারে।",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "এক্সটেনশনের চেকিং অক্ষম করে যা যাচাই করে যে একটি URL অংশ Salesforce রেকর্ড/অবজেক্ট আইডি-এর বিন্যাসের সাথে মেলে কিনা (স্বয়ংক্রিয়ভাবে সংরক্ষিত Tab কে একটি Org Tab হিসাবে সেট করতে ব্যবহৃত হয়)।",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "আমদানি করুন",
 		"description": "[popup] আমদানি বাটন"
@@ -538,6 +630,14 @@
 		"message": "Setup খুলুন",
 		"description": "[notSalesforceSetup] Salesforce Setup পৃষ্ঠায় যাওয়ার জন্য কল-টু-অ্যাকশন"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "নতুন Tabs কে Org Tabs হিসাবে যুক্ত করুন।",
+		"description": "[settings] ব্যবহারকারীকে সমস্ত নতুন Tabs সংস্থা-নির্দিষ্ট হিসাবে যুক্ত করার অনুমতি দিন"
+	},
+	"opt_add_tabs_front": {
+		"message": "সামনে নতুন Tabs যুক্ত করুন।",
+		"description": "[settings] ব্যবহারকারীকে সামনে সমস্ত নতুন Tabs যুক্ত করার অনুমতি দিন"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce পৃষ্ঠায় না থাকাকালীন পপআপে ক্লিক করার সময় স্বয়ংক্রিয়ভাবে $salesforce_login পৃষ্ঠা খুলুন।",
 		"description": "[সেটিং] যখন ব্যবহারকারী একটি এলোমেলো ওয়েবসাইটে থাকাকালীন পপআপ খোলে"
@@ -546,9 +646,17 @@
 		"message": "Salesforce পৃষ্ঠায় থাকাকালীন পপআপে ক্লিক করার সময় স্বয়ংক্রিয়ভাবে $salesforce_setup পৃষ্ঠা খুলুন।",
 		"description": "[সেটিং] যখন ব্যবহারকারী একটি Salesforce ওয়েবসাইটে থাকাকালীন পপআপ খোলে"
 	},
+	"opt_confirm_save": {
+		"message": "সেটিংস সংরক্ষণ করা হয়েছে!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (ডিফল্ট এবং ফলব্যাক)",
 		"description": "এক্সটেনশনের ডিফল্ট ভাষা বিকল্প"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs সাজানো রাখুন।",
+		"description": "[setting] ব্যবহারকারীকে তাদের একটি কী দ্বারা তাদের Tabs সাজানো রাখতে দিন"
 	},
 	"opt_keep_tabs_left": {
 		"message": "পছন্দসই Tabs-গুলো হোম এবং অবজেক্ট ম্যানেজারের বাম দিকে রাখুন।",
@@ -578,13 +686,17 @@
 		"message": "এক্সটেনশন ভাষা নির্বাচন করুন",
 		"description": "[সেটিং] ব্যবহারকারীকে তাদের পছন্দের ভাষা বেছে নিতে প্রম্পট করার জন্য লেবেল"
 	},
+	"opt_pick_sort": {
+		"message": "Tabs কোন ক্ষেত্র দ্বারা সাজানো উচিত তা চয়ন করুন",
+		"description": "[setting] এখন ব্যবহারকারী Tabs সাজানো রাখার জন্য কোন কী দ্বারা বাছাই করতে পারে"
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analytics এর ব্যবহার প্রতিরোধ করুন (ব্যবহারকারীর সংখ্যায় দেখাবে না)।",
 		"description": "[সেটিং] ব্যবহারকারীকে গোপনীয় বিশ্লেষণ পাঠানো থেকে আটকানোর সুযোগ দেয়"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "লাইটনিং নেভিগেশন ব্যবহার করা বন্ধ করুন (ব্যবহারের সময় দ্রুত লোড হয়)।",
-		"description": "[সেটিং] ফিচারের ব্যাখ্যা সহ লাইটনিং নেভিগেশন অনুমোদন করবেন না"
+		"message": "লাইটনিং নেভিগেশন ব্যবহার প্রতিরোধ করুন (চিহ্নহীন অবস্থায় দ্রুত লোডিং)।",
+		"description": "[setting] ফিচারের ব্যাখ্যা সহ লাইটনিং নেভিগেশনকে অনুমতি দেবেন না"
 	},
 	"opt_same_tab_popup": {
 		"message": "পপআপ ক্লিক করার সময় একই ট্যাবে পেজ খুলুন।",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "Tab হিসেবে সংরক্ষণ করুন",
 		"description": "[alt] ছবি কাজ না করলে বিকল্প পাঠ"
+	},
+	"send_tip": {
+		"message": "আমাদের একটি টিপ পাঠান ❤️",
+		"description": "[popup] একটি টিপ পাঠানোর অনুরোধের জন্য svg-এর শিরোনাম"
 	},
 	"set_gen_preview": {
 		"message": "Tab প্রাকদর্শন",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "কোথায়?",
 		"description": "[open-other-org-modal] modal-এর বিকল্প শিরোনাম"
+	},
+	"write_review": {
+		"message": "একটি পর্যালোচনা লিখুন!",
+		"description": "[popup] একটি পর্যালোচনা লেখার অনুরোধের জন্য svg-এর শিরোনাম"
 	}
 }

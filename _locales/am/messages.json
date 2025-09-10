@@ -3,6 +3,10 @@
 		"message": "ፍቀድ",
 		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ለመፍቀድ የሚሆን አዝራር"
 	},
+	"ascending": {
+		"message": "ወደ ላይ መውጣት (ሀ-ዠ)",
+		"description": ""
+	},
 	"available": {
 		"message": "ይገኛል",
 		"description": "ሊታካል የሚችሉ ንጥሎች የክፍል ርዕሰ መልዕክት"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "ለቅንብሮች ምናሌ መለያ"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabsን ደርድር",
+		"description": "ተጠቃሚዎች Tabsን በራስ-ሰር እንዲደርድሩ የሚያስችል የአውድ ምናሌ (ዋና ምናሌ)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 በመለያ",
+		"description": "ተጠቃሚዎች Tabsን በመለያ እንዲደርድሩ የሚያስችል የአውድ ምናሌ"
+	},
+	"cxm_sort_org": {
+		"message": "👽 በOrg",
+		"description": "ተጠቃሚዎች Tabsን በድርጅት እንዲደርድሩ የሚያስችል የአውድ ምናሌ"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 በUrl",
+		"description": "ተጠቃሚዎች Tabsን በዩአርኤል እንዲደርድሩ የሚያስችል የአውድ ምናሌ"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab አዘምን",
 		"description": "[አውድ_ምናሌ]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete ሁሉንም Tabs",
 		"description": "[ብቅ-ባይ] ሁሉንም Tabs ባዶ ለማድረግ መጣያ ላይ ያለ ርዕስ"
+	},
+	"descending": {
+		"message": "ወደ ታች መውረድ (ዠ-ሀ)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Tab ወደ ነባሪ ማስጀመር ላይ ስህተት ተፈጥሯል።",
 		"description": "[ስህተት] Tab ወደ ነባሪ ማስጀመር ላይ የተነሳ አጠቃላይ ስህተት"
 	},
+	"error_sorting_tabs": {
+		"message": "Tabsን ሲደረድሩ ስህተት ተፈጥሯል",
+		"description": "[error] በቶስት መልዕክት ውስጥ የሚታይ"
+	},
 	"error_sync_nothing": {
 		"message": "ባዶ (null) Tabs ማመሳሰል አይቻልም!",
 		"description": "[ስህተት] ምንም ነገር ለማመሳሰል ሞክሯል"
@@ -455,6 +483,70 @@
 		"message": "የአጠቃላይ",
 		"description": "የአጠቃላይ ቅንብሮች ምድብ ለመለያ"
 	},
+	"help": {
+		"message": "እገዛ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "አዳዲስ Tabsን እንደ Org Tabs ምልክት ያደርጋል፣ ስለዚህም በዚያ የተወሰነ የSalesforce Org ሲገቡ ብቻ ይታያሉ።",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "በአዲስ የተወዳጅ Tabs በSetup አሞሌ ውስጥ ባለው የ Tab ዝርዝርዎ መጨረሻ ላይ ከመታከል ይልቅ ከፊት ይገባሉ።",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "ከSalesforce ጎራ ውጪ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ በራስ-ሰር ወደ Salesforce መግቢያ ገጽ ይወስድዎታል።",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "በSalesforce ጎራ ውስጥ ነገር ግን በSetup ገጽ ላይ ካልሆኑ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ በራስ-ሰር ወደ Salesforce Setup ገጽ ይወስድዎታል።",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "ሲነቃ፣ የእርስዎ Tabs በመለያ፣ ዩአርኤል ወይም Org በቅደም ተከተል ይቀመጣሉ፤ እርስዎ በሚመርጡት ላይ ተመስርቶ።",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "የተቀመጡትን Tabs በቅንብር ውስጥ ካለው መደበኛ የአሰሳ ምናሌ (መነሻ / የነገር አስተዳዳሪ) በፊት ይሰኩት፣ ከሱ በኋላ አይደለም።",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "ሲነቃ፣ እያንዳንዱ የተቀመጠ Tab ተዛማጅ ገጹን በአዲስ tab ውስጥ ይከፍታል።",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "ቅጥያው ከተዘመነ በኋላ የመልቀቅ ማስታወሻ ማሳወቂያዎችን በራስ-ሰር ማሳየትን ይከለክላል።",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "የቅጥያ በይነገጹን ንፁህ በማድረግ ወቅታዊ የማዘመኛ አስታዋሽ ብቅ-ባዮችን ያሰናክላል (የቅጥያውን በራስ-ሰር ማዘመን ከአሳሽዎ ቅንብሮች ላይ ሲያሰናክሉ)።",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "ከSalesforce ጎራ ውጭ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ የመግቢያ ገጹ አሁን ባለው የሰርፍ Tab ውስጥ ይከፈታል።",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "በSalesforce ጎራ ውስጥ ነገር ግን በSetup ገጽ ላይ ካልሆኑ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ የSalesforce Setup ገጽ አሁን ባለው የሰርፍ Tab ውስጥ ይከፈታል።",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "የቅጥያውን የዩአይ ቋንቋ ብቻ ያቀናብሩ። የሆነ ነገር ካልተተረጎመ፣ የእንግሊዝኛ እትም በምትኩ ጥቅም ላይ ይውላል።",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "መሰረታዊ የመለኪያ መረጃ ስብስብን ያሰናክላል። ቅጥያው በማንነት በሌለባቸው የአጠቃቀም መለኪያዎች ውስጥ አይታይም።",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "የመብረቅ አሰሳ ኤፒአይን ያልፋል እና አገናኞችን ሙሉ ገጽ እንደገና በመጫን ይከፍታል፣ ይህም በአንዳንድ የድርጅት ማዋቀሮች ውስጥ ፈጣን ሊሆን ይችላል።",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "የዩአርኤል ቁርጥራጭ የSalesforce መዝገብ/ነገር መታወቂያዎችን ቅርጸት የሚያሟላ መሆኑን የሚያረጋግጥ የቅጥያውን ማጣሪያ ያሰናክላል (በራስ-ሰር የተቀመጠውን Tab እንደ Org Tab ለማቀናበር ይጠቅማል)።",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "አስመጣ",
 		"description": "[ብቅ_ባይ] የማስመጫ አዝራር"
@@ -539,6 +631,14 @@
 		"message": "ማዋቀሪያ (Setup) ክፈት",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce የማዋቀሪያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "አዲስ Tabsን እንደ Org Tabs ጨምር።",
+		"description": "[settings] ተጠቃሚው ሁሉንም አዲስ Tabs እንደ ድርጅት-ተኮር እንዲያክሉ ፍቀድ"
+	},
+	"opt_add_tabs_front": {
+		"message": "አዲስ Tabsን ከፊት ጨምር።",
+		"description": "[settings] ተጠቃሚው ሁሉንም አዲስ Tabs ከፊት እንዲያክሉ ፍቀድ"
+	},
 	"opt_automatic_open_login": {
 		"message": "በ Salesforce ገጽ ላይ ባልሆኑበት ጊዜ ብቅ-ባይ ላይ ጠቅ ሲያደርጉ የ $salesforce_login ገጽን በራስ-ሰር ይክፈቱ።",
 		"description": "[ቅንብር] ተጠቃሚው በዘፈቀደ ድር ጣቢያ ላይ እያለ ብቅ-ባይ ሲከፍት"
@@ -547,9 +647,17 @@
 		"message": "በ Salesforce ገጽ ላይ በሚሆኑበት ጊዜ ብቅ-ባይ ላይ ጠቅ ሲያደርጉ የ $salesforce_setup ገጽን በራስ-ሰር ይክፈቱ።",
 		"description": "[ቅንብር] ተጠቃሚው በ Salesforce ድር ጣቢያ ላይ እያለ ብቅ-ባይ ሲከፍት"
 	},
+	"opt_confirm_save": {
+		"message": "ቅንብሮች ተቀምጠዋል!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (ነባሪ እና ምትኬ)",
 		"description": "የቅጥያው ነባሪ ቋንቋ አማራጭ"
+	},
+	"opt_keep_sort": {
+		"message": "Tabsን ደርድር።",
+		"description": "[setting] ተጠቃሚው Tabsን በአንድ ቁልፎቻቸው እንዲደርድሩ ፍቀድ"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ተወዳጆቹን Tabs ወደ home እና Object Manager ግራ ይዝሉ።",
@@ -579,13 +687,17 @@
 		"message": "የቅጥያ ቋንቋ ይምረጡ",
 		"description": "[ማስተካከያ] ተጠቃሚው የሚመርጠውን ቋንቋ እንዲመርጥ የሚጠይቅ መለያ"
 	},
+	"opt_pick_sort": {
+		"message": "Tabs መደርደር ያለባቸው በየትኛው መስክ እንደሆነ ምረጥ",
+		"description": "[setting] አሁን ተጠቃሚው Tabs እንዲደረደሩበት የሚፈልጉትን ቁልፍ መምረጥ ይችላል"
+	},
 	"opt_prevent_analytics": {
 		"message": "የSimple Analytics አጠቃቀምን ከማድረግ አውጣ (በተጠቃሚ ብዛት ውስጥ አይቈጠርም)።",
 		"description": "[ቅንብር] ተጠቃሚውን ያልታወቀ ትንተና እንዳይላክ እንዲከለክል ያስችላል"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "የLightning Navigation አጠቃቀምን ይከላከሉ (ጥቅም ላይ ሲውል በፍጥነት ይጫናል)።",
-		"description": "[ቅንብር] የባህሪ ማብራሪያ ያለው Lightning Navigation አትፍቀድ"
+		"message": "የመብረቅ አሰሳን መጠቀም መከላከል (ምልክት ሳይደረግበት ፈጣን ጭነት)።",
+		"description": "[setting] የባህሪው ማብራሪያ ጋር የመብረቅ አሰሳን አለመፍቀድ"
 	},
 	"opt_same_tab_popup": {
 		"message": "ፖፕአፕ ጠቅ ሲደርስ በተመሳሳይ ትርጉም ውስጥ ገፅ ክፈት።",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "እንደ Tab አስቀምጥ",
 		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
+	},
+	"send_tip": {
+		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
+		"description": "[popup] ምክር ለመላክ የሚጠይቅ የ svg ርዕስ"
 	},
 	"set_gen_preview": {
 		"message": "Tab ቅድመ እይታ",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "ወዴት?",
 		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] ለሞዳሉ አማራጭ ርዕስ"
+	},
+	"write_review": {
+		"message": "ግምገማ ይጻፉ!",
+		"description": "[popup] ለsvg ግምገማ ለመጻፍ የሚጠይቅ ርዕስ"
 	}
 }

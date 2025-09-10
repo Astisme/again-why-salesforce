@@ -9,8 +9,11 @@ function detectBrowser() {
 	if (userAgent.indexOf("firefox") !== -1) {
 		return "firefox";
 	}
+	if (userAgent.indexOf("edg") !== -1) {
+		return "edge";
+	}
 	// Chrome detection (including Edge and other Chromium-based browsers)
-	if (userAgent.indexOf("chrome") !== -1 || userAgent.indexOf("edg") !== -1) {
+	if (userAgent.indexOf("chrome") !== -1) {
 		return "chrome";
 	}
 	// Safari detection (after checking for Chrome since Chrome includes "safari" in its user agent)
@@ -20,7 +23,8 @@ function detectBrowser() {
 	return undefined;
 }
 export const BROWSER_NAME = detectBrowser();
-export const ISCHROME = BROWSER_NAME === "chrome";
+export const ISEDGE = BROWSER_NAME === "edge";
+export const ISCHROME = BROWSER_NAME === "chrome" || ISEDGE;
 export const ISFIREFOX = BROWSER_NAME === "firefox";
 export const ISSAFARI = BROWSER_NAME === "safari";
 export const BROWSER = ISCHROME ? chrome : browser;
@@ -48,7 +52,7 @@ export const SALESFORCE_ID_PATTERN = new RegExp(
 	"i",
 );
 export const SALESFORCE_URL_PATTERN =
-	/^[a-zA-Z0-9\-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
+	/^[a-zA-Z0-9-]+(--[a-zA-Z0-9]+\.sandbox)?(\.develop)?$/g;
 export const FRAME_PATTERNS = [
 	`${HTTPS}*${MY_SALESFORCE_SETUP_COM}/*`,
 	`${HTTPS}*${LIGHTNING_FORCE_COM}/*`,
@@ -58,10 +62,10 @@ export const CONTEXT_MENU_PATTERNS = FRAME_PATTERNS.map((item) =>
 	`${item.substring(0, item.length - 2)}${SETUP_LIGHTNING}*`
 );
 export const CONTEXT_MENU_PATTERNS_REGEX = CONTEXT_MENU_PATTERNS.map((item) =>
-	item.replaceAll("\*", ".*")
+	item.replaceAll("*", ".*")
 );
 export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
-	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM.replaceAll("\.", "\\.")}.*$`,
+	`^${HTTPS}[a-zA-Z0-9.-]+${LIGHTNING_FORCE_COM}.*$`,
 );
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 export const MANIFEST = BROWSER.runtime.getManifest();
@@ -80,6 +84,9 @@ export function sendExtensionMessage(message, callback = null) {
 	 * @param {function} callback - The callback to execute after sending the message
 	 */
 	function sendMessage(message, callback) {
+		if (message.key == null && message.keys == null) {
+			message.key = WHY_KEY;
+		}
 		return BROWSER.runtime.sendMessage(message, callback);
 	}
 	if (callback == null) {
@@ -117,9 +124,13 @@ export const POPUP_OPEN_LOGIN = "popup_open_login";
 export const POPUP_OPEN_SETUP = "popup_open_setup";
 export const POPUP_LOGIN_NEW_TAB = "popup_login_new_tab";
 export const POPUP_SETUP_NEW_TAB = "popup_setup_new_tab";
+export const TAB_ON_LEFT = "tab_position_left";
+export const TAB_ADD_FRONT = "tab_add_front";
+export const TAB_AS_ORG = "tab_as_org";
 export const NO_RELEASE_NOTES = "no_release_notes";
 export const NO_UPDATE_NOTIFICATION = "no_update_notification";
 export const PREVENT_ANALYTICS = "prevent_analytics";
+export const PERSIST_SORT = "persist_sort";
 // decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
@@ -184,9 +195,11 @@ export function getCssSelector(
 	isGeneric = true,
 	pseudoElement = "",
 ) {
-	return `.${EXTENSION_NAME}${
-		isInactive ? `:not(${SLDS_ACTIVE_CLASS})` : SLDS_ACTIVE_CLASS
-	}${isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB}${pseudoElement}`;
+	const activeClass = isInactive
+		? `:not(${SLDS_ACTIVE_CLASS})`
+		: SLDS_ACTIVE_CLASS;
+	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
+	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pseudoElement}`;
 }
 
 /**
@@ -225,7 +238,6 @@ export function getCssRule(styleId, value = null) {
 }
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";
-export const TAB_ON_LEFT = "tab_position_left";
 
 /**
  * Opens the extension's settings page.
@@ -259,6 +271,9 @@ export const CXM_IMPORT_TABS = "import-tabs";
 export const CXM_EXPORT_TABS = "export-tabs";
 export const CXM_PAGE_SAVE_TAB = "page-save-tab";
 export const CXM_PAGE_REMOVE_TAB = "page-remove-tab";
+export const CXM_SORT_LABEL = "sort-label";
+export const CXM_SORT_URL = "sort-url";
+export const CXM_SORT_ORG = "sort-org";
 // commands (keyboard shortcuts)
 export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
 export const CMD_REMOVE_TAB = "cmd-remove-tab";

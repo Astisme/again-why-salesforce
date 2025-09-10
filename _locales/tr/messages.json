@@ -3,6 +3,10 @@
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"
 	},
+	"ascending": {
+		"message": "Artan (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Mevcut",
 		"description": "Eklenebilecek öğeler için bölüm başlığı"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Ayarlar menüsü için etiket"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tab-leri Sırala",
+		"description": "kullanıcıların Tab-lerini otomatik olarak sıralamalarını sağlayan bağlam menüsü (üst menü)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 Etikete göre",
+		"description": "kullanıcıların Tab-lerini etikete göre sıralamalarını sağlayan bağlam menüsü"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org'a göre",
+		"description": "kullanıcıların Tab-lerini org'a göre sıralamalarını sağlayan bağlam menüsü"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url'ye göre",
+		"description": "kullanıcıların Tab-lerini url'ye göre sıralamalarını sağlayan bağlam menüsü"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab Güncelle",
 		"description": "[bağlam-menüsü]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "Tüm Tabs $delete",
 		"description": "[popup] tüm Tabs boşaltmak için çöp kutusundaki başlık"
+	},
+	"descending": {
+		"message": "Azalan (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Bırakın",
@@ -351,6 +375,10 @@
 		"message": "Tab'lar varsayılanlara sıfırlanırken hata oluştu.",
 		"description": "[hata] Tab'ları varsayılanlarına sıfırlarken kullanılan genel hata"
 	},
+	"error_sorting_tabs": {
+		"message": "Tab-ler sıralanırken hata oluştu",
+		"description": "[error] bir bildirim mesajında gösterilir"
+	},
 	"error_sync_nothing": {
 		"message": "Boş Tabs senkronize edilemez!",
 		"description": "[hata] hiçbir şeyi senkronize etmeye çalışıldı"
@@ -455,6 +483,70 @@
 		"message": "Genel",
 		"description": "Genel ayarlar kategorisi için etiket"
 	},
+	"help": {
+		"message": "Yardım",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Yeni Tab-leri Org Tab-leri olarak işaretler, böylece yalnızca belirli bir Salesforce Org'a giriş yaptığınızda görünürler.",
+		"description": "[$opt_add_tabs_as_org] için [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "Yeni favorilere eklenen Tab-ler, Tab listenizin sonuna eklenmek yerine Kurulum çubuğundaki Tab listenizin önüne eklenir.",
+		"description": "[$opt_add_tabs_front] için [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "Bir Salesforce etki alanının dışında uzantı açılır penceresini tıklarsanız, otomatik olarak Salesforce oturum açma sayfasına yönlendirilirsiniz.",
+		"description": "[$opt_automatic_open_login] için [settings-help]"
+	},
+	"help_automatic_open_setup": {
+		"message": "Bir Salesforce etki alanının içinde uzantı açılır penceresini tıklarsanız, ancak bir Kurulum sayfasında değilseniz, otomatik olarak Salesforce Kurulum sayfasına yönlendirilirsiniz.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Etkinleştirildiğinde, Tab-leriniz seçiminize bağlı olarak etiket, URL veya Org'a göre sıralanmış olarak tutulur.",
+		"description": "[$opt_keep_sort] için [settings-help]"
+	},
+	"help_keep_tabs_left": {
+		"message": "Kaydedilen Tab-lerinizi Kurulumdaki standart gezinme menüsünden (Ana Sayfa / Nesne Yöneticisi) sonra yerine önce sabitler.",
+		"description": "[settings-help] için $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Etkinleştirildiğinde, kaydedilen her Tab, ilgili sayfayı yeni bir Tab'de açar.",
+		"description": "[settings-help] için $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Uzantı güncellendikten sonra sürüm notu bildirimlerinin otomatik olarak görüntülenmesini engeller.",
+		"description": "[settings-help] için $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Uzantının kullanıcı arayüzünü temiz tutarak periyodik güncelleme hatırlatma açılır pencerelerini devre dışı bırakır (tarayıcınızın ayarlarından uzantının otomatik güncellemelerini devre dışı bıraktığınızda).",
+		"description": "[settings-help] için $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Salesforce etki alanının dışında uzantı açılır penceresine tıklarsanız, oturum açma sayfası mevcut tarayıcı Tab'ında açılacaktır.",
+		"description": "[ayarlar-yardım] için $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Salesforce etki alanı içinde ancak bir Setup sayfasında değilken uzantı açılır penceresine tıklarsanız, Salesforce Setup sayfası mevcut tarayıcı Tab'ında açılacaktır.",
+		"description": "[ayarlar-yardım] için $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Yalnızca uzantı için kullanıcı arayüzü dilini ayarlayın. Bir şey çevrilmemişse, onun yerine İngilizce versiyonu kullanılacaktır.",
+		"description": "[ayarlar-yardım] için $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Temel telemetri toplamayı devre dışı bırakır. Uzantı anonim kullanım metriklerinde görünmez.",
+		"description": "[settings-help] için $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning Gezinme API'sini atlar ve bazı org kurulumlarında daha hızlı olabilen tam sayfa yeniden yükleme yoluyla bağlantıları açar.",
+		"description": "[settings-help] için $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "URL parçasının Salesforce kayıt/nesne kimlikleri biçimiyle eşleştiğini doğrulayan uzantı kontrolünü devre dışı bırakır (kaydedilen Tab'i otomatik olarak bir Org Tab'i olarak ayarlamak için kullanılır).",
+		"description": "[$opt_skip_link_detection] için [settings-help]"
+	},
 	"import": {
 		"message": "İçe Aktar",
 		"description": "[açılır-pencere] içe aktarma düğmesi"
@@ -539,6 +631,14 @@
 		"message": "Kurulumu Aç",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce Kurulum sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Yeni Tab-leri Org Tab-leri olarak ekle.",
+		"description": "[settings] kullanıcının tüm yeni Tab-leri org'a özgü olarak eklemesine izin ver"
+	},
+	"opt_add_tabs_front": {
+		"message": "Yeni Tab-leri öne ekle.",
+		"description": "[settings] kullanıcının tüm yeni Tab-leri öne eklemesine izin ver"
+	},
 	"opt_automatic_open_login": {
 		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklandığında $salesforce_login sayfasını otomatik olarak aç.",
 		"description": "[ayar] kullanıcı rastgele bir web sitesindeyken açılır pencereyi açtığında"
@@ -547,9 +647,17 @@
 		"message": "Bir Salesforce sayfasındayken açılır pencereye tıklandığında $salesforce_setup sayfasını otomatik olarak aç.",
 		"description": "[ayar] kullanıcı bir Salesforce web sitesindeyken açılır pencereyi açtığında"
 	},
+	"opt_confirm_save": {
+		"message": "Ayarlar kaydedildi!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Varsayılan ve Geri Dönüş)",
 		"description": "Uzantının varsayılan dil seçeneği"
+	},
+	"opt_keep_sort": {
+		"message": "Tab-leri sıralanmış olarak tut.",
+		"description": "[setting] kullanıcının Tab-lerini anahtarlarından birine göre sıralanmış olarak tutmasına izin ver"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Favori Sekmeleri Ana Sayfa ve Nesne Yöneticisi solunda tut.",
@@ -579,13 +687,17 @@
 		"message": "Uzantı dilini seçin",
 		"description": "[ayarlar] kullanıcıya tercih ettiği dili seçmesini söyleyen etiket"
 	},
+	"opt_pick_sort": {
+		"message": "Tab-lerin hangi alana göre sıralanması gerektiğini seçin",
+		"description": "[setting] artık kullanıcı Tab-leri sıralanmış olarak tutmak için hangi anahtarı seçeceğini belirleyebilir"
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analytics kullanımını engelle (kullanıcı sayımlarında görünmez).",
 		"description": "[ayar] kullanıcının anonim analiz göndermesini engellemesini sağlar"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Lightning Navigasyon kullanımını engelleyin (kullanımdayken daha hızlı yükleme).",
-		"description": "[ayarlama] özellik açıklamasıyla Lightning Navigasyon'a izin verme"
+		"message": "Lightning Gezinme kullanımını engelle (işaret kaldırıldığında daha hızlı yüklenir).",
+		"description": "[setting] özelliğin açıklamasıyla birlikte Lightning Gezinme'ye izin verme"
 	},
 	"opt_same_tab_popup": {
 		"message": "Popup'a tıklandığında sayfayı aynı sekmede aç.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Tab Olarak Kaydet",
 		"description": "[alt] resimler çalışmadığında alternatif metin"
+	},
+	"send_tip": {
+		"message": "Bize bir bahşiş gönderin ❤️",
+		"description": "[popup] bahşiş gönderme uyarısı için svg başlığı"
 	},
 	"set_gen_preview": {
 		"message": "Sekme Önizleme",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Nereye?",
 		"description": "[başka-kuruluş-aç-modal] modal için geri dönüş başlığı"
+	},
+	"write_review": {
+		"message": "Bir inceleme yazın!",
+		"description": "[popup] inceleme yazılmasını talep etmek için svg başlığı"
 	}
 }

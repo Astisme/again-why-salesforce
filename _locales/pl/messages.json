@@ -3,6 +3,10 @@
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"
 	},
+	"ascending": {
+		"message": "Rosnąco (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Dostępne",
 		"description": "Nagłówek sekcji dla elementów, które można dodać"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etykieta menu ustawień"
 	},
+	"cxm_sort": {
+		"message": "🎯 Sortuj karty",
+		"description": "menu kontekstowe, które umożliwia użytkownikom automatyczne sortowanie kart (menu nadrzędne)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 wg etykiety",
+		"description": "menu kontekstowe, które umożliwia użytkownikom sortowanie kart wg etykiety"
+	},
+	"cxm_sort_org": {
+		"message": "👽 wg org.",
+		"description": "menu kontekstowe, które umożliwia użytkownikom sortowanie kart wg org."
+	},
+	"cxm_sort_url": {
+		"message": "🤖 wg URL-a",
+		"description": "menu kontekstowe, które umożliwia użytkownikom sortowanie kart wg URL-a"
+	},
 	"cxm_update": {
 		"message": "✏️ Aktualizuj Tab",
 		"description": "[menu-kontekstowe]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete wszystkie Tabs",
 		"description": "[wyskakujące-okienko] tytuł na koszu, aby opróżnić wszystkie Tabs"
+	},
+	"descending": {
+		"message": "Malejąco (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Upuść",
@@ -351,6 +375,10 @@
 		"message": "Błąd podczas przywracania domyślnych Tab.",
 		"description": "[błąd] Ogólny błąd podczas przywracania Tab do domyślnych ustawień"
 	},
+	"error_sorting_tabs": {
+		"message": "Błąd podczas sortowania kart",
+		"description": "[error] wyświetlany w komunikacie typu toast"
+	},
 	"error_sync_nothing": {
 		"message": "Nie można zsynchronizować pustych Tabs!",
 		"description": "[błąd] próbowano zsynchronizować nic"
@@ -455,6 +483,70 @@
 		"message": "Ogólne",
 		"description": "Etykieta dla kategorii ustawień ogólnych"
 	},
+	"help": {
+		"message": "Pomoc",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Oznacza nowe karty jako karty org., więc są one widoczne tylko po zalogowaniu się do tej konkretnej org. Salesforce.",
+		"description": "[settings-help] dla $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nowo dodane do ulubionych karty są wstawiane na początku Twojej listy kart na pasku konfiguracji, a nie dodawane na końcu.",
+		"description": "[settings-help] dla $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia poza domeną Salesforce, automatycznie przeniesie Cię ono na stronę logowania Salesforce.",
+		"description": "[settings-help] dla $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia w domenie Salesforce, ale nie na stronie konfiguracji, automatycznie przeniesie Cię ono na stronę konfiguracji Salesforce.",
+		"description": "[settings-help] dla $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Gdy włączone, Twoje karty są utrzymywane w posortowanej kolejności – albo wg etykiety, URL-a lub org., w zależności od tego, co wybierzesz.",
+		"description": "[settings-help] dla $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Przypina zapisane karty przed standardowym menu nawigacyjnym (Strona główna / Menedżer obiektów) w konfiguracji, zamiast po nim.",
+		"description": "[settings-help] dla $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Gdy włączone, każda zapisana karta otworzy powiązaną stronę w nowej karcie.",
+		"description": "[settings-help] dla $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Powstrzymuje automatyczne wyświetlanie powiadomień o uwagach do wersji po zaktualizowaniu rozszerzenia.",
+		"description": "[settings-help] dla $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Wyłącza okresowe wyskakujące okienka z przypomnieniem o aktualizacji, utrzymując interfejs użytkownika rozszerzenia w czystości (gdy wyłączyłeś automatyczne aktualizacje rozszerzenia w ustawieniach przeglądarki).",
+		"description": "[settings-help] dla $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia poza domeną Salesforce, strona logowania zostanie otwarta w bieżącej karcie przeglądarki.",
+		"description": "[settings-help] dla $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia w domenie Salesforce, ale nie na stronie konfiguracji, strona konfiguracji Salesforce zostanie otwarta w bieżącej karcie przeglądarki.",
+		"description": "[settings-help] dla $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Ustawia język interfejsu użytkownika tylko dla rozszerzenia. Jeśli coś nie zostało przetłumaczone, zamiast tego zostanie użyta wersja angielska.",
+		"description": "[settings-help] dla $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Wyłącza podstawowe zbieranie telemetrii. Rozszerzenie nie pojawi się w anonimowych metrykach użycia.",
+		"description": "[settings-help] dla $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omija interfejs API nawigacji Lightning i otwiera łącza poprzez pełne ponowne ładowanie strony, co może być szybsze w niektórych konfiguracjach org.",
+		"description": "[settings-help] dla $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Wyłącza sprawdzanie rozszerzenia, które weryfikuje, czy fragment URL-a pasuje do formatu identyfikatorów rekordu/obiektu Salesforce (używane do automatycznego ustawiania zapisanej karty jako karty org.).",
+		"description": "[settings-help] dla $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importuj",
 		"description": "[popup] przycisk importu"
@@ -539,6 +631,14 @@
 		"message": "Otwórz Konfigurację",
 		"description": "[nieKonfiguracjaSalesforce] wezwanie do działania na przycisku, aby przekierować użytkownika na stronę Konfiguracji Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Dodaj nowe karty jako karty org.",
+		"description": "[settings] zezwalaj użytkownikowi na dodawanie wszystkich nowych kart jako specyficznych dla org."
+	},
+	"opt_add_tabs_front": {
+		"message": "Dodaj nowe karty z przodu.",
+		"description": "[settings] zezwalaj użytkownikowi na dodawanie wszystkich nowych kart z przodu"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatycznie otwieraj stronę $salesforce_login po kliknięciu wyskakującego okienka, gdy nie jesteś na stronie Salesforce.",
 		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na losowej stronie internetowej"
@@ -547,9 +647,17 @@
 		"message": "Automatycznie otwieraj stronę $salesforce_setup po kliknięciu wyskakującego okienka, gdy jesteś na stronie Salesforce.",
 		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na stronie Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Ustawienia zostały zapisane!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Domyślny i awaryjny)",
 		"description": "Domyślna opcja językowa rozszerzenia"
+	},
+	"opt_keep_sort": {
+		"message": "Utrzymuj karty posortowane.",
+		"description": "[setting] zezwól użytkownikowi na utrzymywanie kart posortowanych według jednego z ich kluczy"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Zachowaj ulubione karty po lewej stronie Strony głównej i Menedżera obiektów.",
@@ -579,13 +687,17 @@
 		"message": "Wybierz język rozszerzenia",
 		"description": "[ustawienie] etykieta, która prosi użytkownika o wybranie preferowanego języka"
 	},
+	"opt_pick_sort": {
+		"message": "Wybierz, wg którego pola mają być sortowane karty",
+		"description": "[setting] teraz użytkownik może wybrać, wg którego klucza utrzymywać karty posortowane"
+	},
 	"opt_prevent_analytics": {
 		"message": "Zablokuj korzystanie z Simple Analytics (nie pojawi się w liczbie użytkowników).",
 		"description": "[ustawienie] pozwala użytkownikowi zablokować wysyłanie anonimowych danych analitycznych"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Zapobiegaj używaniu nawigacji Lightning (szybsze ładowanie podczas używania).",
-		"description": "[ustawienie] nie zezwalaj na nawigację Lightning z wyjaśnieniem funkcji"
+		"message": "Zapobiegaj używaniu nawigacji Lightning (szybsze ładowanie, gdy jest odznaczone).",
+		"description": "[setting] nie zezwalaj na nawigację Lightning z wyjaśnieniem funkcji"
 	},
 	"opt_same_tab_popup": {
 		"message": "otwórz stronę w tej samej karcie po kliknięciu wyskakującego okienka.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Zapisz jako Tab",
 		"description": "[alt] tekst alternatywny, gdy obrazy nie działają"
+	},
+	"send_tip": {
+		"message": "Wyślij nam napiwek ❤️",
+		"description": "[popup] tytuł svg do prośby o wysłanie napiwku"
 	},
 	"set_gen_preview": {
 		"message": "Podgląd karty",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Dokąd?",
 		"description": "[modal-otwórz-inną-org] zapasowy tytuł dla okna modalnego"
+	},
+	"write_review": {
+		"message": "Napisz recenzję!",
+		"description": "[popup] tytuł svg do prośby o napisanie recenzji"
 	}
 }

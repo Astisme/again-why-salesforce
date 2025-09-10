@@ -3,6 +3,10 @@
 		"message": "अनुमति दें",
 		"description": "[req_permission] अनुमतियाँ देने के लिए बटन"
 	},
+	"ascending": {
+		"message": "आरोही (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "उपलब्ध",
 		"description": "ऐसे आइटम्स के लिए अनुभाग शीर्षक जिन्हें जोड़ा जा सकता है"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "सेटिंग्स मेनू के लिए लेबल"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabs को सॉर्ट करें",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को अपने Tabs को स्वचालित रूप से सॉर्ट करने देता है (पैरेंट मेनू)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 लेबल द्वारा",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को अपने Tabs को लेबल द्वारा सॉर्ट करने देता है"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org द्वारा",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को Org द्वारा अपने Tabs को सॉर्ट करने देता है"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url द्वारा",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को URL द्वारा अपने Tabs को सॉर्ट करने देता है"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab अपडेट करें",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete सभी Tabs",
 		"description": "[पॉपअप] सभी Tabs को खाली करने के लिए बिन पर शीर्षक"
+	},
+	"descending": {
+		"message": "अवरोही (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "डिफ़ॉल्ट Tabs रीसेट करते समय त्रुटि।",
 		"description": "[त्रुटि] Tabs को उनके डिफ़ॉल्ट पर रीसेट करते समय प्रयुक्त सामान्य त्रुटि"
 	},
+	"error_sorting_tabs": {
+		"message": "Tabs को सॉर्ट करते समय त्रुटि",
+		"description": "[error] एक टोस्ट संदेश में दिखाया गया"
+	},
 	"error_sync_nothing": {
 		"message": "खाली Tabs को सिंक नहीं किया जा सकता!",
 		"description": "[error] कुछ सिंक करने की कोशिश की गई।"
@@ -454,6 +482,70 @@
 		"message": "सामान्य",
 		"description": "सामान्य सेटिंग्स श्रेणी के लिए लेबल"
 	},
+	"help": {
+		"message": "सहायता",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "नए Tabs को Org Tabs के रूप में चिह्नित करता है, ताकि वे केवल तभी दिखाई दें जब आप उस विशेष Salesforce Org में लॉग इन हों।",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "नए पसंदीदा Tabs को सेटअप बार में आपकी Tab सूची के अंत में जोड़ने के बजाय सामने डाला जाता है।",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "यदि आप Salesforce डोमेन के बाहर एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो यह आपको स्वचालित रूप से Salesforce लॉगिन पृष्ठ पर ले जाएगा।",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "यदि आप Salesforce डोमेन के भीतर लेकिन सेटअप पृष्ठ पर नहीं एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो यह आपको स्वचालित रूप से Salesforce सेटअप पृष्ठ पर ले जाएगा।",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "जब सक्षम किया जाता है, तो आपके Tabs को सॉर्ट किए गए क्रम में रखा जाता है—या तो लेबल, URL या Org द्वारा; आप जो चुनते हैं उसके आधार पर।",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "आपके सहेजे गए Tabs को सेटअप में मानक नेविगेशन मेनू (Home / Object Manager) से पहले पिन करता है, इसके बजाय इसके बाद नहीं।",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "जब सक्षम किया जाता है, तो प्रत्येक सहेजा गया Tab संबंधित पृष्ठ को एक नए Tab में खोलेगा।",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "एक्सटेंशन के अपडेट होने के बाद रिलीज़ नोट नोटिफ़िकेशन के स्वचालित प्रदर्शन को दबाता है।",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "आवधिक अपडेट रिमाइंडर्स पॉपअप को अक्षम करता है, जिससे एक्सटेंशन UI साफ रहता है (जब आपने अपने ब्राउज़र की सेटिंग्स से एक्सटेंशन के स्वचालित अपडेट को अक्षम कर दिया हो)।",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "यदि आप Salesforce डोमेन के बाहर एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो लॉगिन पृष्ठ वर्तमान ब्राउज़र Tab में खोला जाएगा।",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "यदि आप Salesforce डोमेन के भीतर लेकिन सेटअप पृष्ठ पर नहीं एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो Salesforce सेटअप पृष्ठ वर्तमान ब्राउज़र Tab में खोला जाएगा।",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "केवल एक्सटेंशन के लिए UI भाषा सेट करें। अगर कुछ भी अनुवादित नहीं हुआ है, तो इसके बजाय अंग्रेजी संस्करण का उपयोग किया जाएगा।",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "बुनियादी टेलीमेट्री संग्रह को अक्षम करता है। एक्सटेंशन अनाम उपयोग मेट्रिक्स में दिखाई नहीं देगा।",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "लाइटनिंग नेविगेशन एपीआई को बायपास करता है और पूर्ण-पृष्ठ रीलोड के माध्यम से लिंक खोलता है, जो कुछ ऑर्ग सेटअप में तेज़ हो सकता है।",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "एक्सटेंशन जांच को अक्षम करता है जो सत्यापित करता है कि एक URL फ़्रेग्मेंट Salesforce रिकॉर्ड/ऑब्जेक्ट ID के प्रारूप से मेल खाता है (स्वचालित रूप से सहेजे गए Tab को Org Tab के रूप में सेट करने के लिए उपयोग किया जाता है)।",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "आयात करें",
 		"description": "[popup] आयात बटन"
@@ -538,6 +630,14 @@
 		"message": "Setup खोलें",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठ पर जाने के लिए कॉल टू एक्शन"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "नए Tabs को Org Tabs के रूप में जोड़ें।",
+		"description": "[settings] उपयोगकर्ता को सभी नए Tabs को ऑर्ग-विशिष्ट के रूप में जोड़ने दें"
+	},
+	"opt_add_tabs_front": {
+		"message": "नए Tabs को सामने जोड़ें।",
+		"description": "[settings] उपयोगकर्ता को सभी नए Tabs को सामने जोड़ने दें"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce पृष्ठ पर न होने पर पॉपअप पर क्लिक करते समय $salesforce_login पृष्ठ को स्वचालित रूप से खोलें।",
 		"description": "[सेटिंग] जब उपयोगकर्ता किसी यादृच्छिक वेबसाइट पर पॉपअप खोलता है"
@@ -546,9 +646,17 @@
 		"message": "Salesforce पृष्ठ पर होने पर पॉपअप पर क्लिक करते समय $salesforce_setup पृष्ठ को स्वचालित रूप से खोलें।",
 		"description": "[सेटिंग] जब उपयोगकर्ता Salesforce वेबसाइट पर पॉपअप खोलता है"
 	},
+	"opt_confirm_save": {
+		"message": "सेटिंग्स सहेजी गईं!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (डिफ़ॉल्ट और फ़ॉलबैक)",
 		"description": "एक्सटेंशन का डिफ़ॉल्ट भाषा विकल्प"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs को सॉर्टेड रखें।",
+		"description": "[setting] उपयोगकर्ता को उनकी Tabs को उनके एक कुंजी द्वारा सॉर्टेड रखने दें"
 	},
 	"opt_keep_tabs_left": {
 		"message": "मनपसंद Tabs को होम और ऑब्जेक्ट मैनेजर के बाएँ रखें।",
@@ -578,13 +686,17 @@
 		"message": "एक्सटेंशन भाषा चुनें",
 		"description": "[सेटिंग] उपयोगकर्ता को अपनी पसंदीदा भाषा चुनने के लिए संकेत देने वाला लेबल"
 	},
+	"opt_pick_sort": {
+		"message": "चुनें कि Tabs को किस फ़ील्ड द्वारा सॉर्ट किया जाना चाहिए",
+		"description": "[setting] अब उपयोगकर्ता चुन सकता है कि किस कुंजी द्वारा Tabs को सॉर्टेड रखना है"
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analytics के उपयोग को रोकें (उपयोगकर्ता गणना में शामिल नहीं होगा)।",
 		"description": "[सेटिंग] उपयोगकर्ता को गुमनाम एनालिटिक्स भेजने से रोकने देता है"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "लाइटनिंग नेविगेशन के उपयोग को रोकें (उपयोग में होने पर तेज़ी से लोड होता है)।",
-		"description": "[सेटिंग] सुविधा की व्याख्या के साथ लाइटनिंग नेविगेशन की अनुमति न दें"
+		"message": "लाइटनिंग नेविगेशन का उपयोग रोकें (अनचेक होने पर तेज़ी से लोड हो रहा है)।",
+		"description": "[setting] सुविधा की व्याख्या के साथ लाइटनिंग नेविगेशन की अनुमति न दें"
 	},
 	"opt_same_tab_popup": {
 		"message": "पॉपअप क्लिक करते समय उसी टैब में पेज खोलें।",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "Tab के रूप में सहेजें",
 		"description": "[alt] जब चित्र काम नहीं करते, तो वैकल्पिक पाठ।"
+	},
+	"send_tip": {
+		"message": "हमें एक टिप भेजें ❤️",
+		"description": "[popup] एक टिप भेजने के लिए svg के लिए शीर्षक"
 	},
 	"set_gen_preview": {
 		"message": "Tab पूर्वावलोकन",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "कहाँ?",
 		"description": "[open-other-org-modal] modal के लिए fallback शीर्षक"
+	},
+	"write_review": {
+		"message": "एक समीक्षा लिखें!",
+		"description": "[popup] एक समीक्षा लिखने का अनुरोध करने के लिए svg के लिए शीर्षक"
 	}
 }

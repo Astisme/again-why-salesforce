@@ -3,6 +3,10 @@
 		"message": "Permitir",
 		"description": "[req_permissão] botão para permitir permissões"
 	},
+	"ascending": {
+		"message": "Crescente (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Disponível",
 		"description": "Cabeçalho de seção para itens que podem ser adicionados"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Rótulo para o menu de configurações"
 	},
+	"cxm_sort": {
+		"message": "🎯 Classificar Abas",
+		"description": "menu de contexto para permitir que os usuários classifiquem suas Abas automaticamente (menu pai)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 por Rótulo",
+		"description": "menu de contexto para permitir que os usuários classifiquem suas Abas por rótulo"
+	},
+	"cxm_sort_org": {
+		"message": "👽 por Org",
+		"description": "menu de contexto para permitir que os usuários classifiquem suas Abas por org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 por URL",
+		"description": "menu de contexto para permitir que os usuários classifiquem suas Abas por URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Atualizar Tab",
 		"description": "[menu-de-contexto]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete todas as Tabs",
 		"description": "[popup] título na lixeira para esvaziar todas as Tabs"
+	},
+	"descending": {
+		"message": "Decrescente (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Soltar",
@@ -351,6 +375,10 @@
 		"message": "Erro ao redefinir para Tabs padrão.",
 		"description": "[erro] Erro genérico ao redefinir as Tabs para o padrão"
 	},
+	"error_sorting_tabs": {
+		"message": "Erro ao classificar as Abas",
+		"description": "[error] exibido em uma mensagem de notificação"
+	},
 	"error_sync_nothing": {
 		"message": "Não é possível sincronizar Tabs nulas!",
 		"description": "[erro] tentou sincronizar nada"
@@ -455,6 +483,70 @@
 		"message": "Geral",
 		"description": "Rótulo para a categoria de configurações gerais"
 	},
+	"help": {
+		"message": "Ajuda",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marca as novas Abas como Abas da Org, para que elas sejam visíveis apenas quando logado na Org da Salesforce em particular.",
+		"description": "[settings-help] para $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Abas recém-favoritadas são inseridas na frente da sua lista de Abas na barra de configuração, em vez de serem adicionadas ao final.",
+		"description": "[settings-help] para $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Se você clicar no popup da extensão fora de um domínio do Salesforce, será levado automaticamente para a página de login do Salesforce.",
+		"description": "[settings-help] para $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Se você clicar no popup da extensão dentro de um domínio do Salesforce, mas não em uma página de configuração, será levado automaticamente para a página de configuração do Salesforce.",
+		"description": "[settings-help] para $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Quando ativado, suas Abas são mantidas em ordem de classificação — por rótulo, URL ou Org; dependendo do que você escolher.",
+		"description": "[settings-help] para $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fixa suas Abas salvas antes do menu de navegação padrão (Página inicial / Gerenciador de Objetos) em Configuração, em vez de depois dele.",
+		"description": "[settings-help] para $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Quando ativado, cada Aba salva abrirá a página relacionada em uma nova aba.",
+		"description": "[settings-help] para $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Suprime a exibição automática de notificações de notas de versão após a extensão ser atualizada.",
+		"description": "[settings-help] para $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Desativa popups de lembrete de atualização periódicos, mantendo a interface da extensão limpa (quando você desabilitou as atualizações automáticas da extensão nas configurações do seu navegador).",
+		"description": "[settings-help] para $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Se você clicar no pop-up da extensão fora de um domínio do Salesforce, a página de login será aberta na Tab atual do navegador.",
+		"description": "[configurações-ajuda] para $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Se você clicar no pop-up da extensão dentro de um domínio do Salesforce, mas não em uma página de Setup, a página de Setup do Salesforce será aberta na Tab atual do navegador.",
+		"description": "[configurações-ajuda] para $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Definir apenas o idioma da UI para a extensão. Se algo não tiver sido traduzido, a versão em inglês será usada em seu lugar.",
+		"description": "[configurações-ajuda] para $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Desativa a coleta básica de telemetria. A extensão não aparecerá em métricas de uso anônimas.",
+		"description": "[settings-help] para $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Ignora a API de navegação Lightning e abre links via recarregamento de página completa, o que pode ser mais rápido em algumas configurações de org.",
+		"description": "[settings-help] para $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Desativa a verificação da extensão que verifica se um fragmento de URL corresponde ao formato de IDs de registro/objeto do Salesforce (usado para definir automaticamente a Aba salva como uma Aba da Org).",
+		"description": "[settings-help] para $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importar",
 		"description": "[popup] botão de importação"
@@ -539,6 +631,14 @@
 		"message": "Abrir Configuração",
 		"description": "[naoEhConfigSalesforce] chamada para ação em um botão para redirecionar o usuário para uma página de Configuração do Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Adicionar novas Abas como Abas da Org.",
+		"description": "[settings] permite que o usuário adicione todas as novas Abas como específicas da org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Adicionar novas Abas na frente.",
+		"description": "[settings] permite que o usuário adicione todas as novas Abas na frente"
+	},
 	"opt_automatic_open_login": {
 		"message": "Abrir automaticamente a página $salesforce_login ao clicar no pop-up enquanto não estiver em uma página do Salesforce.",
 		"description": "[configuração] quando o usuário abre o pop-up enquanto está em um site aleatório"
@@ -547,9 +647,17 @@
 		"message": "Abrir automaticamente a página $salesforce_setup ao clicar no pop-up enquanto estiver em uma página do Salesforce.",
 		"description": "[configuração] quando o usuário abre o pop-up enquanto está em um site do Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Configurações salvas!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Padrão e Reserva)",
 		"description": "Opção de idioma padrão da extensão"
+	},
+	"opt_keep_sort": {
+		"message": "Manter Abas classificadas.",
+		"description": "[setting] permite que o usuário mantenha suas Abas classificadas por uma de suas chaves"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Manter Tabs favoritos à esquerda de Início e Gerenciador de Objetos.",
@@ -579,13 +687,17 @@
 		"message": "Escolha o idioma da extensão",
 		"description": "[configuração] rótulo para solicitar ao usuário que escolha seu idioma preferido"
 	},
+	"opt_pick_sort": {
+		"message": "Escolha por qual campo as Abas devem ser classificadas",
+		"description": "[setting] agora o usuário pode escolher por qual chave manter as Abas classificadas"
+	},
 	"opt_prevent_analytics": {
 		"message": "Impedir o uso do Simple Analytics (não contar nas estatísticas de usuários).",
 		"description": "[configuração] permite ao usuário impedir o envio de análises anônimas"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Impedir o uso da Navegação Lightning (carregamento mais rápido quando em uso).",
-		"description": "[configuração] não permitir a Navegação Lightning com explicação do recurso"
+		"message": "Impedir o uso de Navegação Lightning (carregamento mais rápido quando desmarcado).",
+		"description": "[setting] não permitir Navegação Lightning com explicação do recurso"
 	},
 	"opt_same_tab_popup": {
 		"message": "página na mesma guia ao clicar no popup.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Salvar como Tab",
 		"description": "[alt] texto alternativo quando as imagens não funcionam"
+	},
+	"send_tip": {
+		"message": "Envie-nos uma gorjeta ❤️",
+		"description": "[popup] título para svg para solicitar o envio de uma gorjeta"
 	},
 	"set_gen_preview": {
 		"message": "Visualização de Tab",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Para onde?",
 		"description": "[modal-abrir-outra-org] título alternativo para o modal"
+	},
+	"write_review": {
+		"message": "Escreva uma avaliação!",
+		"description": "[popup] título para svg para solicitar a escrita de uma avaliação"
 	}
 }

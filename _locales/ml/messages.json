@@ -3,6 +3,10 @@
 		"message": "അനുമതി",
 		"description": "[req_permission] ബട്ടൺ അനുമതികള്‍ അനുവദിക്കാന്‍"
 	},
+	"ascending": {
+		"message": "ആരോഹണക്രമത്തിൽ (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "ലഭ്യമാണ്",
 		"description": "ചേർക്കാവുന്ന आइറ്റങ്ങൾക്കുള്ള വിഭാഗം ശീർഷകം"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "ക്രമീകരണ മെനുവിനായുള്ള ലേബൽ"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tab-കൾ അടുക്കുക",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ സ്വയമേവ അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു (മാതൃ മെനു)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ലേബൽ പ്രകാരം",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ ലേബൽ പ്രകാരം അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു"
+	},
+	"cxm_sort_org": {
+		"message": "👽 ഓർഗ് പ്രകാരം",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ ഓർഗ് പ്രകാരം അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL പ്രകാരം",
+		"description": "ഉപയോക്താക്കൾക്ക് അവരുടെ Tab-കൾ URL പ്രകാരം അടുക്കുന്നതിനുള്ള ഒരു സന്ദർഭ മെനു"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab അപ്‌ഡേറ്റ് ചെയ്യുക",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete എല്ലാ Tabs",
 		"description": "[പോപ്പ്അപ്പ്] എല്ലാ Tabs-ഉം ശൂന്യമാക്കാൻ ബിന്നിലെ ശീർഷകം"
+	},
+	"descending": {
+		"message": "അവരോഹണ ക്രമത്തിൽ (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "ഇടുക",
@@ -351,6 +375,10 @@
 		"message": "ഡീഫോൾട്ട് Tabകൾക്ക് റീസെറ്റ് ചെയ്യുമ്പോൾ പിശക് സംഭവിച്ചു.",
 		"description": "[പിശക്] Tabകൾ ഡീഫോൾട്ടിലേക്ക് റീസെറ്റ് ചെയ്യുമ്പോൾ ഉപയോഗിക്കുന്ന പൊതുപിശക്"
 	},
+	"error_sorting_tabs": {
+		"message": "Tab-കൾ അടുക്കുന്നതിൽ പിശക്",
+		"description": "[error] ഒരു ടോസ്റ്റ് സന്ദേശത്തിൽ കാണിക്കുന്നു"
+	},
 	"error_sync_nothing": {
 		"message": "ശൂന്യമായ Tabs സിന്‍ക് ചെയ്യാനാകില്ല!",
 		"description": "[error] എന്തും സിന്‍ക് ചെയ്യാന്‍ ശ്രമിച്ചു"
@@ -454,6 +482,70 @@
 		"message": "സാധാരണ",
 		"description": "സാധാരണ സെറ്റിങ്ങുകൾ വിഭാഗത്തിന് ലേബൽ"
 	},
+	"help": {
+		"message": "സഹായം",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "പുതിയ Tab-കളെ Org Tab-കളായി അടയാളപ്പെടുത്തുന്നു, അതിനാൽ ആ പ്രത്യേക Salesforce Org-ൽ ലോഗിൻ ചെയ്യുമ്പോൾ മാത്രമേ അവ ദൃശ്യമാകൂ.",
+		"description": "[$opt_add_tabs_as_org] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "പുതുതായി പ്രിയപ്പെട്ടതാക്കിയ Tab-കൾ നിങ്ങളുടെ Tab പട്ടികയുടെ അവസാനം ചേർക്കുന്നതിനുപകരം, സെറ്റപ്പ് ബാറിലെ നിങ്ങളുടെ Tab പട്ടികയുടെ മുൻഭാഗത്തേക്ക് ചേർക്കുന്നു.",
+		"description": "[$opt_add_tabs_front] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "ഒരു Salesforce ഡൊമൈനിന് പുറത്തുവെച്ച് നിങ്ങൾ എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്താൽ, നിങ്ങളെ സ്വയമേവ Salesforce ലോഗിൻ പേജിലേക്ക് കൊണ്ടുപോകുന്നു.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "നിങ്ങൾ ഒരു Salesforce ഡൊമൈനിനുള്ളിൽ വെച്ച് എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുകയാണെങ്കിലും, അത് ഒരു സെറ്റപ്പ് പേജിൽ അല്ലെങ്കിൽ, നിങ്ങളെ സ്വയമേവ Salesforce സെറ്റപ്പ് പേജിലേക്ക് കൊണ്ടുപോകുന്നു.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "ഇത് പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, നിങ്ങൾ തിരഞ്ഞെടുക്കുന്നതിനെ ആശ്രയിച്ച്, നിങ്ങളുടെ Tab-കൾ ലേബൽ, URL അല്ലെങ്കിൽ Org പ്രകാരം അടുക്കിവെക്കും.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "സെറ്റപ്പിലെ സ്റ്റാൻഡേർഡ് നാവിഗേഷൻ മെനുവിന് (ഹോം / ഒബ്ജക്റ്റ് മാനേജർ) ശേഷം എന്നതിനുപകരം അതിനുമുമ്പായി നിങ്ങളുടെ സംരക്ഷിച്ച Tab-കളെ പിൻ ചെയ്യുന്നു.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "ഇത് പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, സംരക്ഷിച്ച ഓരോ Tab-ഉം പുതിയ ഒരു Tab-ൽ ബന്ധപ്പെട്ട പേജ് തുറക്കും.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "എക്സ്റ്റൻഷൻ അപ്‌ഡേറ്റുകൾക്ക് ശേഷം റിലീസ് നോട്ട് അറിയിപ്പുകൾ സ്വയമേവ പ്രദർശിപ്പിക്കുന്നത് തടയുന്നു.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "ആവർത്തിച്ചുള്ള അപ്‌ഡേറ്റ് ഓർമ്മപ്പെടുത്തൽ പോപ്പ്അപ്പുകൾ പ്രവർത്തനരഹിതമാക്കുകയും എക്സ്റ്റൻഷൻ UI ശുദ്ധമായി സൂക്ഷിക്കുകയും ചെയ്യുന്നു (നിങ്ങളുടെ ബ്രൗസറിന്റെ ക്രമീകരണങ്ങളിൽ നിന്ന് എക്സ്റ്റൻഷന്റെ സ്വയമേവയുള്ള അപ്‌ഡേറ്റുകൾ പ്രവർത്തനരഹിതമാക്കിയിട്ടുണ്ടെങ്കിൽ).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "നിങ്ങൾ ഒരു Salesforce ഡൊമൈനിന് പുറത്ത് എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുകയാണെങ്കിൽ, നിലവിലെ ബ്രൗസർ Tab-ൽ ലോഗിൻ പേജ് തുറക്കും.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "നിങ്ങൾ ഒരു Salesforce ഡൊമൈനിനുള്ളിൽ എക്സ്റ്റൻഷൻ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുകയാണെങ്കിൽ, ഒരു സെറ്റപ്പ് പേജിൽ അല്ലാത്തപക്ഷം, Salesforce സെറ്റപ്പ് പേജ് നിലവിലെ ബ്രൗസർ Tab-ൽ തുറക്കും.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "എക്സ്റ്റൻഷനു വേണ്ടി മാത്രം UI ഭാഷ സജ്ജമാക്കുക. എന്തെങ്കിലും വിവർത്തനം ചെയ്തിട്ടില്ലെങ്കിൽ, പകരം ഇംഗ്ലീഷ് പതിപ്പ് ഉപയോഗിക്കും.",
+		"description": "[$opt_pick_language] എന്നതിനായുള്ള [settings-help]"
+	},
+	"help_prevent_analytics": {
+		"message": "അടിസ്ഥാന ടെലിമെട്രി ശേഖരണം പ്രവർത്തനരഹിതമാക്കുന്നു. എക്സ്റ്റൻഷൻ അജ്ഞാത ഉപയോഗ മെട്രിക്കുകളിൽ ദൃശ്യമാകില്ല.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning നാവിഗേഷൻ API-യെ മറികടക്കുകയും മുഴുവൻ പേജും വീണ്ടും ലോഡ് ചെയ്യുന്നതിലൂടെ ലിങ്കുകൾ തുറക്കുകയും ചെയ്യുന്നു, ഇത് ചില org ക്രമീകരണങ്ങളിൽ വേഗത്തിലായിരിക്കും.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "ഒരു URL ഫ്രാഗ്‌മെന്റ് Salesforce റെക്കോർഡ്/ഒബ്ജക്റ്റ് ഐഡികളുടെ ഫോർമാറ്റുമായി പൊരുത്തപ്പെടുന്നുണ്ടോയെന്ന് പരിശോധിക്കുന്ന എക്സ്റ്റൻഷൻ പരിശോധന പ്രവർത്തനരഹിതമാക്കുന്നു (സംരക്ഷിച്ച Tab ഒരു Org Tab ആയി സ്വയമേവ സജ്ജീകരിക്കുന്നതിന് ഉപയോഗിക്കുന്നു).",
+		"description": "[$opt_skip_link_detection] എന്നതിനായുള്ള [settings-help]"
+	},
 	"import": {
 		"message": "ഇറക്കി വരിക്കുക",
 		"description": "[popup] ഇറക്കുമതി ബട്ടണ്‍"
@@ -538,6 +630,14 @@
 		"message": "സെറ്റപ്പ് തുറക്കുക",
 		"description": "[notSalesforceSetup] Salesforce സെറ്റപ്പ് പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "പുതിയ Tab-കൾ Org Tab-കളായി ചേർക്കുക.",
+		"description": "[settings] എല്ലാ പുതിയ Tab-കളും Org-ന് അനുസരിച്ച് ചേർക്കാൻ ഉപയോക്താവിനെ അനുവദിക്കുക"
+	},
+	"opt_add_tabs_front": {
+		"message": "പുതിയ Tab-കൾ മുൻഭാഗത്ത് ചേർക്കുക.",
+		"description": "[settings] എല്ലാ പുതിയ Tab-കളും മുൻഭാഗത്ത് ചേർക്കാൻ ഉപയോക്താവിനെ അനുവദിക്കുക"
+	},
 	"opt_automatic_open_login": {
 		"message": "ഒരു Salesforce പേജിൽ അല്ലാത്തപ്പോൾ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ $salesforce_login പേജ് സ്വയം തുറക്കുക.",
 		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഒരു റാൻഡം വെബ്‌സൈറ്റിൽ ആയിരിക്കുമ്പോൾ പോപ്പ്അപ്പ് തുറക്കുമ്പോൾ"
@@ -546,9 +646,17 @@
 		"message": "ഒരു Salesforce പേജിൽ ആയിരിക്കുമ്പോൾ പോപ്പ്അപ്പിൽ ക്ലിക്ക് ചെയ്യുമ്പോൾ $salesforce_setup പേജ് സ്വയം തുറക്കുക.",
 		"description": "[ക്രമീകരണം] ഉപയോക്താവ് ഒരു Salesforce വെബ്‌സൈറ്റിൽ ആയിരിക്കുമ്പോൾ പോപ്പ്അപ്പ് തുറക്കുമ്പോൾ"
 	},
+	"opt_confirm_save": {
+		"message": "ക്രമീകരണങ്ങൾ സംരക്ഷിച്ചു!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (സ്ഥിരസ്ഥിതിയും ഫാൾബാക്കും)",
 		"description": "വിപുലീകരണത്തിന്റെ സ്ഥിരസ്ഥിതി ഭാഷാ ഓപ്ഷൻ"
+	},
+	"opt_keep_sort": {
+		"message": "Tab-കൾ അടുക്കിവെക്കുക.",
+		"description": "[setting] ഉപയോക്താവിന് അവരുടെ Tab-കൾ അവയുടെ ഒരു കീ പ്രകാരം അടുക്കി നിലനിർത്താൻ അനുവദിക്കുക"
 	},
 	"opt_keep_tabs_left": {
 		"message": "ഫേവറിറ്റ് Tabs നെ Home‌യും Object Managerഉം ഡിപ്പാർട്ട്മെന്റിന്റെ ഇടതുവശത്ത് സൂക്ഷിക്കുക.",
@@ -578,13 +686,17 @@
 		"message": "വിപുലീകരണ ഭാഷ തിരഞ്ഞെടുക്കുക",
 		"description": "[സജ്ജീകരണം] ഉപയോക്താവിനോട് ഇഷ്ടപ്പെട്ട ഭാഷ തിരഞ്ഞെടുക്കാൻ ആവശ്യപ്പെടുന്ന ലേബൽ"
 	},
+	"opt_pick_sort": {
+		"message": "ഏത് ഫീൽഡ് പ്രകാരം Tab-കൾ അടുക്കിവെക്കണമെന്ന് തിരഞ്ഞെടുക്കുക",
+		"description": "[setting] ഇപ്പോൾ ഉപയോക്താവിന് ഏത് കീ പ്രകാരം Tab-കൾ അടുക്കിവെക്കണമെന്ന് തിരഞ്ഞെടുക്കാം"
+	},
 	"opt_prevent_analytics": {
 		"message": "Simple Analytics ഉപയോഗം തടയുക (ഉപയോക്തൃ എണ്ണത്തിൽ കണക്കാക്കപ്പെടില്ല).",
 		"description": "[സെറ്റിംഗ്] ഉപയോക്താവിന് അനാമക വിശകലനങ്ങൾ അയക്കുന്നത് തടയാൻ അനുവാദം നൽകുന്നു"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "ലൈറ്റ്നിംഗ് നാവിഗേഷൻ ഉപയോഗിക്കുന്നത് തടയുക (ഉപയോഗിക്കുമ്പോൾ വേഗത്തിൽ ലോഡുചെയ്യുന്നു).",
-		"description": "[ക്രമീകരണം] ഈ സൗകര്യത്തെക്കുറിച്ചുള്ള വിശദീകരണത്തോടൊപ്പം ലൈറ്റ്നിംഗ് നാവിഗേഷൻ അനുവദിക്കരുത്"
+		"message": "Lightning നാവിഗേഷൻ ഉപയോഗിക്കുന്നത് തടയുക (ടിക്ക് ചെയ്യുമ്പോൾ വേഗത്തിൽ ലോഡ് ചെയ്യും).",
+		"description": "[setting] ഫീച്ചറിന്റെ വിശദീകരണത്തോടുകൂടി Lightning നാവിഗേഷൻ അനുവദിക്കരുത്"
 	},
 	"opt_same_tab_popup": {
 		"message": "പോപ്-അപ്പ് ക്ലിക്കുചെയ്യുമ്പോൾ ഒരേ ടാബില്‍ പേജ്.",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "Tab എന്ന നിലയില്‍ സംരക്ഷിക്കുക",
 		"description": "[alt] ചിത്രങ്ങള്‍ പ്രവര്‍ത്തിക്കാത്തപ്പോള്‍ ബദല്‍ ടെക്സ്റ്റ്"
+	},
+	"send_tip": {
+		"message": "ഞങ്ങൾക്ക് ഒരു നുറുങ്ങ് അയക്കുക ❤️",
+		"description": "[popup] ഒരു നുറുങ്ങ് അയക്കാൻ ആവശ്യപ്പെടുന്നതിനുള്ള svg-ന്റെ തലക്കെട്ട്"
 	},
 	"set_gen_preview": {
 		"message": "Tab മുൻനിര ദൃശ്യം",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "എവിടേക്ക്?",
 		"description": "[open-other-org-modal] മോഡലിനുള്ള ബാക്കപ്പിലുള്ള തലക്കെട്ട്"
+	},
+	"write_review": {
+		"message": "ഒരു അവലോകനം എഴുതുക!",
+		"description": "[popup] ഒരു അവലോകനം എഴുതാൻ ആവശ്യപ്പെടുന്നതിനുള്ള svg-ന്റെ തലക്കെട്ട്"
 	}
 }

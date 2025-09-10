@@ -7,3 +7,4 @@ bin/*.dmg
 missing-keys-report.json
 dmg_staging
 safari-*/
+.env

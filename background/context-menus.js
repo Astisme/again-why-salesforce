@@ -28,6 +28,9 @@ import {
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
 	CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_LABEL,
+	CXM_SORT_ORG,
+	CXM_SORT_URL,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
@@ -214,6 +217,26 @@ const menuItemsOriginal = [
 		parentId: "remove",
 	},
 
+	{ id: "sort", title: "cxm_sort", contexts: ["link"] },
+	{
+		id: CXM_SORT_LABEL,
+		title: "cxm_sort_label",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+	{
+		id: CXM_SORT_URL,
+		title: "cxm_sort_url",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+	{
+		id: CXM_SORT_ORG,
+		title: "cxm_sort_org",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+
 	{
 		id: CXM_IMPORT_TABS,
 		title: "cxm_import_tabs",
@@ -385,7 +408,14 @@ async function removeMenuItems() {
 	}
 }
 
-let intervalCxm = null;
+// deno-lint-ignore no-var
+var intervalCxm = null; // is var so that it does not break tests
+/**
+ * Returns the current interval (for tests)
+ */
+export function getIntervalCxm() {
+	return intervalCxm;
+}
 /**
  * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
  * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
@@ -474,6 +504,10 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			message.tabUrl = Tab.minifyURL(info.pageUrl);
 			message.url = Tab.expandURL(info.pageUrl, browserTabUrl);
 			message.org = Tab.extractOrgName(info.pageUrl ?? browserTabUrl);
+			break;
+		case CXM_SORT_LABEL:
+		case CXM_SORT_URL:
+		case CXM_SORT_ORG:
 			break;
 		default: {
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;

@@ -3,6 +3,10 @@
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
 	},
+	"ascending": {
+		"message": "Aufsteigend (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Verfügbar",
 		"description": "Abschnittsüberschrift für Elemente, die hinzugefügt werden können"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Bezeichnung für das Einstellungsmenü"
 	},
+	"cxm_sort": {
+		"message": "🎯 Tabs sortieren",
+		"description": "Kontextmenü, mit dem Benutzer ihre Tabs automatisch sortieren können (Hauptmenü)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 nach Label",
+		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach Beschriftung sortieren können"
+	},
+	"cxm_sort_org": {
+		"message": "👽 nach Org",
+		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach Organisation sortieren können"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 nach Url",
+		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach URL sortieren können"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab aktualisieren",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[Popup] Titel im Papierkorb, um alle Tabs zu leeren"
+	},
+	"descending": {
+		"message": "Absteigend (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "Fehler beim Zurücksetzen der Standard-Tabs.",
 		"description": "[Fehler] Allgemeiner Fehler beim Zurücksetzen der Tabs auf den Standard"
 	},
+	"error_sorting_tabs": {
+		"message": "Fehler beim Sortieren der Tabs",
+		"description": "[error] in einer Toast-Meldung angezeigt"
+	},
 	"error_sync_nothing": {
 		"message": "Leere Tabs können nicht synchronisiert werden!",
 		"description": "[error] Es wurde versucht, nichts zu synchronisieren."
@@ -454,6 +482,70 @@
 		"message": "Allgemein",
 		"description": "Bezeichnung für die Kategorie Allgemeine Einstellungen"
 	},
+	"help": {
+		"message": "Hilfe",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Markiert neue Tabs als Org Tabs, sodass sie nur sichtbar sind, wenn Sie bei dieser speziellen Salesforce-Organisation angemeldet sind.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Neu favorisierte Tabs werden am Anfang Ihrer Tab-Liste in der Setup-Leiste eingefügt, anstatt am Ende angefügt zu werden.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Wenn Sie außerhalb einer Salesforce-Domäne auf das Erweiterungs-Popup klicken, gelangen Sie automatisch zur Salesforce-Anmeldeseite.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Wenn Sie innerhalb einer Salesforce-Domäne, aber nicht auf einer Einrichtungsseite auf das Erweiterungs-Popup klicken, gelangen Sie automatisch zur Salesforce-Einrichtungsseite.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Wenn aktiviert, werden Ihre Tabs in sortierter Reihenfolge gehalten – entweder nach Beschriftung, URL oder Org; je nachdem, was Sie auswählen.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pinnt Ihre gespeicherten Tabs vor dem Standard-Navigationsmenü (Home / Object Manager) in Setup an, anstatt danach.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Wenn aktiviert, öffnet jeder gespeicherte Tab die zugehörige Seite in einem neuen Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Unterdrückt die automatische Anzeige von Versionshinweisen, nachdem die Erweiterung aktualisiert wurde.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Deaktiviert periodische Erinnerungs-Popups für Updates, wodurch die Benutzeroberfläche der Erweiterung sauber bleibt (wenn Sie automatische Updates der Erweiterung in Ihren Browsereinstellungen deaktiviert haben).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Wenn Sie außerhalb einer Salesforce-Domäne auf das Erweiterungs-Popup klicken, wird die Anmeldeseite in der aktuellen Browser-Tab geöffnet.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Wenn Sie innerhalb einer Salesforce-Domäne, aber nicht auf einer Einrichtungsseite auf das Erweiterungs-Popup klicken, wird die Salesforce-Einrichtungsseite in der aktuellen Browser-Tab geöffnet.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Stellt die UI-Sprache nur für die Erweiterung ein. Wenn etwas nicht übersetzt wurde, wird stattdessen die englische Version verwendet.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Deaktiviert die grundlegende Telemetrie-Erfassung. Die Erweiterung wird in anonymen Nutzungsmetriken nicht angezeigt.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Umgeht die Lightning-Navigation-API und öffnet Links über eine vollständige Seitenneuladung, was in einigen Org-Setups schneller sein kann.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Deaktiviert die Erweiterungsprüfung, die überprüft, ob ein URL-Fragment mit dem Format von Salesforce-Datensatz-/Objekt-IDs übereinstimmt (wird verwendet, um den gespeicherten Tab automatisch als Org Tab festzulegen).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importieren",
 		"description": "[popup] Import-Knopf"
@@ -538,6 +630,14 @@
 		"message": "Setup öffnen",
 		"description": "[notSalesforceSetup] Aufruf, um zur Salesforce Setup-Seite zu navigieren"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Neue Tabs als Org Tabs hinzufügen.",
+		"description": "[settings] ermöglicht es dem Benutzer, alle neuen Tabs als org-spezifisch hinzuzufügen"
+	},
+	"opt_add_tabs_front": {
+		"message": "Neue Tabs vorne hinzufügen.",
+		"description": "[settings] ermöglicht es dem Benutzer, alle neuen Tabs vorne hinzuzufügen"
+	},
 	"opt_automatic_open_login": {
 		"message": "Öffnen Sie die $salesforce_login-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich nicht auf einer Salesforce-Seite befinden.",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer zufälligen Website befindet"
@@ -546,9 +646,17 @@
 		"message": "Öffnen Sie die $salesforce_setup-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich auf einer Salesforce-Seite befinden.",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer Salesforce-Website befindet"
 	},
+	"opt_confirm_save": {
+		"message": "Einstellungen wurden gespeichert!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Standard und Fallback)",
 		"description": "Standard-Sprachoption der Erweiterung"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs sortiert halten.",
+		"description": "[setting] ermöglicht es dem Benutzer, seine Tabs nach einem ihrer Schlüssel sortiert zu halten"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Favorisierte Tabs links von Startseite und Objekt-Manager belassen.",
@@ -578,13 +686,17 @@
 		"message": "Sprache der Erweiterung auswählen",
 		"description": "[Einstellung] Beschriftung, um den Benutzer aufzufordern, seine bevorzugte Sprache auszuwählen"
 	},
+	"opt_pick_sort": {
+		"message": "Wählen Sie, nach welchem Feld die Tabs sortiert werden sollen",
+		"description": "[setting] jetzt kann der Benutzer wählen, nach welchem Schlüssel die Tabs sortiert bleiben sollen"
+	},
 	"opt_prevent_analytics": {
 		"message": "Verwendung von Simple Analytics verhindern (erscheint nicht in der Nutzeranzahl).",
 		"description": "[Einstellung] Ermöglicht dem Benutzer, das Senden anonymer Analysen zu verhindern"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Verwendung von Lightning Navigation verhindern (schnellere Ladezeit bei Nutzung).",
-		"description": "[setting] Lightning Navigation nicht zulassen mit Erklärung der Funktion"
+		"message": "Verwendung von Lightning Navigation verhindern (schnelleres Laden, wenn nicht markiert).",
+		"description": "[setting] Lightning Navigation nicht mit Erklärung der Funktion zulassen"
 	},
 	"opt_same_tab_popup": {
 		"message": "Seite im selben Tab öffnen, wenn auf das Popup geklickt wird.",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"send_tip": {
+		"message": "Senden Sie uns ein Trinkgeld ❤️",
+		"description": "[popup] Titel für SVG, um das Senden eines Trinkgeldes anzufordern"
 	},
 	"set_gen_preview": {
 		"message": "Tab-Vorschau",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "Wohin?",
 		"description": "[open-other-org-modal] Alternativer Titel für das Modal."
+	},
+	"write_review": {
+		"message": "Eine Rezension schreiben!",
+		"description": "[popup] Titel für SVG, um eine Rezension zu schreiben"
 	}
 }

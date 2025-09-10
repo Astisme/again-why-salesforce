@@ -6,7 +6,7 @@ import {
 	USER_LANGUAGE,
 } from "/constants.js";
 const _translationSecret = Symbol("translationSecret");
-let singleton = null;
+let singletonTranslator = null;
 
 /**
  * Service for handling text translations in a browser extension.
@@ -87,27 +87,30 @@ class TranslationService {
 	}
 
 	/**
-	 * Initializes or returns the singleton TranslationService instance,
+	 * Initializes or returns the singletonTranslator TranslationService instance,
 	 * preloading fallback and active translations, and sets up change listeners.
 	 *
 	 * @returns {Promise<TranslationService>}
-	 *   Resolves to the singleton TranslationService, with fallback and current
+	 *   Resolves to the singletonTranslator TranslationService, with fallback and current
 	 *   language files loaded, and page translations applied.
 	 */
 	static async create() {
-		if (singleton != null) {
-			await singleton.loadLanguageBackground();
-			return singleton;
+		if (singletonTranslator != null) {
+			await singletonTranslator.loadLanguageBackground();
+			return singletonTranslator;
 		}
-		singleton = new TranslationService(_translationSecret);
+		singletonTranslator = new TranslationService(_translationSecret);
 		// load the default language for fallback cases
-		await singleton.loadLanguageFile(TranslationService.FALLBACK_LANGUAGE);
+		await singletonTranslator.loadLanguageFile(
+			TranslationService.FALLBACK_LANGUAGE,
+		);
 		// load translations for user picked language or salesforce language
-		singleton.currentLanguage = await singleton.loadLanguageBackground();
-		if (await singleton.updatePageTranslations()) {
-			singleton.setListenerForLanguageChange();
+		singletonTranslator.currentLanguage = await singletonTranslator
+			.loadLanguageBackground();
+		if (await singletonTranslator.updatePageTranslations()) {
+			singletonTranslator.setListenerForLanguageChange();
 		}
-		return singleton;
+		return singletonTranslator;
 	}
 
 	/**
@@ -223,7 +226,7 @@ class TranslationService {
 			let messageTranslated = "";
 			const words = keyTranslate.split(/\s+/);
 			for (const word of words) {
-				if (!word.startsWith("\$")) {
+				if (!word.startsWith("$")) {
 					messageTranslated += ` ${word}`;
 					continue;
 				}
@@ -231,7 +234,8 @@ class TranslationService {
 				messageTranslated += ` ${innerTranslation}`;
 			}
 			return messageTranslated.slice(1);
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			return key;
 		}
 	}
@@ -263,7 +267,6 @@ class TranslationService {
 			const translation = (await this.translate(
 				key,
 			)).replaceAll("\n", "<br />");
-			//const translation = await BROWSER.i18n.getMessage(key);
 			if (attributes == null) continue;
 			if (attributes.length === 0) {
 				attributes.push("textContent");
@@ -316,17 +319,17 @@ class TranslationService {
  * Asynchronously retrieves the translator instance, initializing it if necessary.
  *
  * If the translator has not been initialized, it creates a new instance.
- * If initialization is already in progress (i.e., `singleton` is a Promise), it waits for it to complete.
+ * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
  *
  * @returns {Promise<TranslationService>} A promise that resolves to the translator instance.
  */
 async function getTranslator_async() {
-	if (singleton == null) {
-		singleton = await TranslationService.create();
-	} else if (singleton instanceof Promise) {
-		await singleton;
+	if (singletonTranslator == null) {
+		singletonTranslator = await TranslationService.create();
+	} else if (singletonTranslator instanceof Promise) {
+		await singletonTranslator;
 	}
-	return singleton;
+	return singletonTranslator;
 }
 
 /**
@@ -338,10 +341,10 @@ async function getTranslator_async() {
  * @returns {TranslationService} The initialized translator instance.
  */
 function getTranslator() {
-	if (singleton == null || singleton instanceof Promise) {
+	if (singletonTranslator == null || singletonTranslator instanceof Promise) {
 		throw new Error("error_translator_not_initialized");
 	}
-	return singleton;
+	return singletonTranslator;
 }
 
 /**
@@ -354,7 +357,8 @@ function getTranslator() {
 export default async function ensureTranslatorAvailability() {
 	try {
 		return getTranslator();
-	} catch (_) {
+	} catch (e) {
+		console.info(e);
 		return await getTranslator_async();
 	}
 }

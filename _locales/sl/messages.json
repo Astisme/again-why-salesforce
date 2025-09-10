@@ -3,6 +3,10 @@
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"
 	},
+	"ascending": {
+		"message": "Naraščajoče (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Na voljo",
 		"description": "Naslov razdelka za elemente, ki jih je mogoče dodati"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Oznaka za meni z nastavitvami"
 	},
+	"cxm_sort": {
+		"message": "🎯 Razvrsti Tab-e",
+		"description": "kontekstni meni za samodejno razvrščanje Tab-ov uporabnikov (nadrejeni meni)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 po oznaki",
+		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po oznaki"
+	},
+	"cxm_sort_org": {
+		"message": "👽 po Org",
+		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 po URL-ju",
+		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po URL-ju"
+	},
 	"cxm_update": {
 		"message": "✏️ Posodobi Tab",
 		"description": "[kontekstni_meni]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete vse Tabs",
 		"description": "[pojavno-okno] naslov na košu za izpraznitev vseh Tabs"
+	},
+	"descending": {
+		"message": "Padajoče (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Spusti",
@@ -351,6 +375,10 @@
 		"message": "Napaka pri ponastavljanju na privzete Tab.",
 		"description": "[napaka] Splošna napaka pri ponastavitvi Tab na privzete"
 	},
+	"error_sorting_tabs": {
+		"message": "Napaka pri razvrščanju Tab-ov",
+		"description": "[error] prikazano v obvestilu"
+	},
 	"error_sync_nothing": {
 		"message": "Ni mogoče sinhronizirati ničelnih (null) Tabs!",
 		"description": "[napaka] poskus sinhronizacije ničesar"
@@ -455,6 +483,70 @@
 		"message": "Splošno",
 		"description": "Oznaka za kategorijo splošnih nastavitev"
 	},
+	"help": {
+		"message": "Pomoč",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Označuje nove Tab-e kot Tab-e Org, tako da so vidni le, ko ste prijavljeni v to določeno org. v Salesforce.",
+		"description": "[settings-help] za $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Na novo priljubljeni Tab-i so vstavljeni na začetek seznama Tab-ov v nastavitvah namesto na konec.",
+		"description": "[settings-help] za $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Če kliknete pojavno okno razširitve zunaj domene Salesforce, boste samodejno preusmerjeni na stran za prijavo v Salesforce.",
+		"description": "[settings-help] za $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Če kliknete pojavno okno razširitve znotraj domene Salesforce, vendar ne na strani z nastavitvami, boste samodejno preusmerjeni na stran z nastavitvami v Salesforce.",
+		"description": "[settings-help] za $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Ko je omogočeno, so vaši Tab-i ohranjeni v razvrščenem vrstnem redu – po oznaki, URL-ju ali org.; odvisno od tega, kaj izberete.",
+		"description": "[settings-help] za $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pripne shranjene Tab-e pred standardni navigacijski meni (Domov / Upravitelj predmetov) v nastavitvah, namesto za njim.",
+		"description": "[settings-help] za $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Ko je omogočeno, bo vsak shranjen Tab odprl povezano stran v novem Tab-u.",
+		"description": "[settings-help] za $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Zatira samodejni prikaz obvestil o opombah ob izdaji po posodobitvi razširitve.",
+		"description": "[settings-help] za $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Onemogoči pojavna okna s periodičnimi opomniki za posodobitev, kar ohranja uporabniški vmesnik razširitve čist (ko ste onemogočili samodejne posodobitve razširitve v nastavitvah brskalnika).",
+		"description": "[settings-help] za $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Če kliknete na pojavno okno razširitve zunaj domene Salesforce, se bo stran za prijavo odprla v trenutnem Tab-u brskalnika.",
+		"description": "[nastavitve-pomoč] za $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Če kliknete na pojavno okno razširitve znotraj domene Salesforce, vendar ne na strani za Setup, se bo stran Salesforce Setup odprla v trenutnem Tab-u brskalnika.",
+		"description": "[nastavitve-pomoč] za $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Nastavite jezik uporabniškega vmesnika samo za razširitev. Če kaj ni bilo prevedeno, bo namesto tega uporabljena angleška različica.",
+		"description": "[nastavitve-pomoč] za $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Onemogoči osnovno zbiranje telemetrije. Razširitev se ne bo prikazala v anonimnih meritvah uporabe.",
+		"description": "[settings-help] za $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Obide API za navigacijo Lightning in odpre povezave s ponovnim nalaganjem celotne strani, kar je lahko hitreje v nekaterih nastavitvah org.",
+		"description": "[settings-help] za $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Onemogoči preverjanje razširitve, ki potrjuje, da se fragment URL-ja ujema z obliko ID-jev zapisov/objektov v Salesforce (uporablja se za samodejno nastavitev shranjenega Tab-a kot Tab-a Org).",
+		"description": "[settings-help] za $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Uvozi",
 		"description": "[pojavno_okno] gumb za uvoz"
@@ -539,6 +631,14 @@
 		"message": "Odpri Nastavitev",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na stran za nastavitev Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Dodaj nove Tab-e kot Tab-e Org.",
+		"description": "[settings] omogočite uporabniku, da doda vse nove Tab-e kot specifične za org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Dodaj nove Tab-e spredaj.",
+		"description": "[settings] omogočite uporabniku, da doda vse nove Tab-e spredaj"
+	},
 	"opt_automatic_open_login": {
 		"message": "Samodejno odpri stran $salesforce_login, ko kliknete pojavno okno, medtem ko niste na strani Salesforce.",
 		"description": "[nastavitev] ko uporabnik odpre pojavno okno na naključnem spletnem mestu"
@@ -547,9 +647,17 @@
 		"message": "Samodejno odpri stran $salesforce_setup, ko kliknete pojavno okno, medtem ko ste na strani Salesforce.",
 		"description": "[nastavitev] ko uporabnik odpre pojavno okno na spletnem mestu Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "Nastavitve so bile shranjene!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Privzeto in nadomestno)",
 		"description": "Privzeta jezikovna možnost razširitve"
+	},
+	"opt_keep_sort": {
+		"message": "Ohrani Tab-e razvrščene.",
+		"description": "[setting] omogoči uporabniku, da ohrani svoje Tab-e razvrščene po enem od njihovih ključev"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Naj priljubljeni Tabi ostanejo na levi strani Doma in Upravitelja objektov.",
@@ -579,13 +687,17 @@
 		"message": "Izberite jezik razširitve",
 		"description": "[nastavitev] oznaka, ki uporabniku sporoča, naj izbere želeni jezik"
 	},
+	"opt_pick_sort": {
+		"message": "Izberite, po katerem polju naj bodo Tab-i razvrščeni",
+		"description": "[setting] zdaj lahko uporabnik izbere, po katerem ključu naj Tab-i ostanejo razvrščeni"
+	},
 	"opt_prevent_analytics": {
 		"message": "Prepreči uporabo Simple Analytics (ne boš vključen v štetje uporabnikov).",
 		"description": "[nastavitev] uporabniku omogoči preprečitev pošiljanja anonimne analitike"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Prepreči uporabo navigacije Lightning (hitrejše nalaganje med uporabo).",
-		"description": "[nastavitev] ne dovoli navigacije Lightning z razlago funkcije"
+		"message": "Prepreči uporabo navigacije Lightning (hitrejše nalaganje, če ni označeno).",
+		"description": "[setting] ne dovoli navigacije Lightning z razlago funkcije"
 	},
 	"opt_same_tab_popup": {
 		"message": "stran v istem zavihku ob kliku na pojavno okno.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Shrani kot Tab",
 		"description": "[alt] alternativno besedilo, ko slike ne delujejo"
+	},
+	"send_tip": {
+		"message": "Pošljite nam namig ❤️",
+		"description": "[popup] naslov za svg za poziv k pošiljanju namiga"
 	},
 	"set_gen_preview": {
 		"message": "Predogled Taba",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Kam?",
 		"description": "[odpri_drugo_org_modalno_okno] rezervni naslov za modalno okno"
+	},
+	"write_review": {
+		"message": "Napišite recenzijo!",
+		"description": "[popup] naslov za svg za zahtevo po pisanju recenzije"
 	}
 }

@@ -3,6 +3,10 @@
 		"message": "อนุญาต",
 		"description": "[req_permission] ปุ่มสำหรับอนุญาตการเข้าถึง"
 	},
+	"ascending": {
+		"message": "จากน้อยไปมาก (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "มีให้ใช้งาน",
 		"description": "หัวข้อส่วนสำหรับรายการที่สามารถเพิ่มได้"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
 	},
+	"cxm_sort": {
+		"message": "🎯 จัดเรียง Tab-s",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ของตนโดยอัตโนมัติ (เมนูหลัก)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ตามป้ายกำกับ",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ตามป้ายกำกับ"
+	},
+	"cxm_sort_org": {
+		"message": "👽 ตาม Org",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ตาม org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 ตาม URL",
+		"description": "เมนูบริบทเพื่อให้ผู้ใช้จัดเรียง Tab-s ตาม url"
+	},
 	"cxm_update": {
 		"message": "✏️ อัปเดต Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete Tabs ทั้งหมด",
 		"description": "[ป๊อปอัป] ชื่อบนถังขยะเพื่อล้าง Tabs ทั้งหมด"
+	},
+	"descending": {
+		"message": "จากมากไปน้อย (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "วาง",
@@ -351,6 +375,10 @@
 		"message": "เกิดข้อผิดพลาดเมื่อพยายามรีเซ็ตแท็บเป็นค่าเริ่มต้น",
 		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปที่ใช้ขณะรีเซ็ตแท็บเป็นค่าเริ่มต้น"
 	},
+	"error_sorting_tabs": {
+		"message": "ข้อผิดพลาดขณะจัดเรียง Tab-s",
+		"description": "[error] แสดงในข้อความแจ้งเตือน"
+	},
 	"error_sync_nothing": {
 		"message": "ไม่สามารถซิงค์ Tab ว่างได้",
 		"description": "[error] พยายามซิงค์ Tab ที่ไม่มีอะไร"
@@ -455,6 +483,70 @@
 		"message": "ทั่วไป",
 		"description": "ป้ายกำกับสำหรับหมวดการตั้งค่าทั่วไป"
 	},
+	"help": {
+		"message": "ความช่วยเหลือ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "ทำเครื่องหมาย Tab-s ใหม่เป็น Org Tab-s เพื่อให้มองเห็นได้เฉพาะเมื่อลงชื่อเข้าใช้ Salesforce Org นั้น",
+		"description": "[settings-help] สำหรับ $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tab-s ที่เพิ่งบันทึกเป็นรายการโปรดจะถูกแทรกไว้ที่ด้านหน้าของรายการ Tab-s ของคุณในแถบ Setup แทนที่จะเพิ่มที่ส่วนท้าย",
+		"description": "[settings-help] สำหรับ $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายที่อยู่นอกโดเมน Salesforce คุณจะถูกนำไปที่หน้าลงชื่อเข้าใช้ของ Salesforce โดยอัตโนมัติ",
+		"description": "[settings-help] สำหรับ $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายภายในโดเมน Salesforce แต่ไม่อยู่ในหน้า Setup คุณจะถูกนำไปที่หน้า Setup ของ Salesforce โดยอัตโนมัติ",
+		"description": "[settings-help] สำหรับ $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "เมื่อเปิดใช้งาน Tab-s ของคุณจะถูกจัดเรียงตามลำดับ—ไม่ว่าจะตามป้ายกำกับ, URL หรือ Org; ขึ้นอยู่กับสิ่งที่คุณเลือก",
+		"description": "[settings-help] สำหรับ $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "ตรึง Tab-s ที่คุณบันทึกไว้ก่อนเมนูการนำทางมาตรฐาน (หน้าหลัก / Object Manager) ใน Setup แทนที่จะเป็นหลังจากนั้น",
+		"description": "[settings-help] สำหรับ $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "เมื่อเปิดใช้งาน Tab-s ที่บันทึกไว้แต่ละรายการจะเปิดหน้าเว็บที่เกี่ยวข้องใน Tab ใหม่",
+		"description": "[settings-help] สำหรับ $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "ระงับการแสดงการแจ้งเตือนบันทึกการเปิดตัวโดยอัตโนมัติหลังจากที่ส่วนขยายได้รับการอัปเดต",
+		"description": "[settings-help] สำหรับ $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "ปิดการใช้งานป๊อปอัปแจ้งเตือนการอัปเดตเป็นระยะ ทำให้ UI ของส่วนขยายสะอาด (เมื่อคุณปิดการใช้งานการอัปเดตอัตโนมัติของส่วนขยายจากการตั้งค่าเบราว์เซอร์ของคุณ)",
+		"description": "[settings-help] สำหรับ $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายที่อยู่นอกโดเมน Salesforce หน้าลงชื่อเข้าใช้จะเปิดใน Tab-เบราว์เซอร์ปัจจุบัน",
+		"description": "[settings-help] สำหรับ $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "หากคุณคลิกป๊อปอัปส่วนขยายภายในโดเมน Salesforce แต่ไม่อยู่ในหน้า Setup หน้า Setup ของ Salesforce จะเปิดใน Tab-เบราว์เซอร์ปัจจุบัน",
+		"description": "[settings-help] สำหรับ $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "ตั้งค่าภาษา UI สำหรับส่วนขยายเท่านั้น หากยังไม่มีการแปล เวอร์ชันภาษาอังกฤษจะถูกใช้แทน",
+		"description": "[settings-help] สำหรับ $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "ปิดการใช้งานการรวบรวมข้อมูลระยะไกลพื้นฐาน ส่วนขยายจะไม่ปรากฏในเมตริกการใช้งานที่ไม่ระบุชื่อ",
+		"description": "[settings-help] สำหรับ $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "ข้าม Lightning Navigation API และเปิดลิงก์ผ่านการโหลดหน้าเว็บใหม่ทั้งหมด ซึ่งอาจเร็วกว่าในการตั้งค่า org บางอย่าง",
+		"description": "[settings-help] สำหรับ $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "ปิดการใช้งานการตรวจสอบส่วนขยายที่ยืนยันว่าส่วนของ URL ตรงกับรูปแบบของ Salesforce record/object ID (ใช้เพื่อตั้งค่า Tab ที่บันทึกไว้เป็น Org Tab โดยอัตโนมัติ)",
+		"description": "[settings-help] สำหรับ $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] import button"
@@ -539,6 +631,14 @@
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "เพิ่ม Tab-s ใหม่เป็น Org Tab-s",
+		"description": "[settings] ให้ผู้ใช้เพิ่ม Tab-s ใหม่ทั้งหมดเป็นเฉพาะ org"
+	},
+	"opt_add_tabs_front": {
+		"message": "เพิ่ม Tab-s ใหม่ไว้ด้านหน้า",
+		"description": "[settings] ให้ผู้ใช้เพิ่ม Tab-s ใหม่ทั้งหมดไว้ด้านหน้า"
+	},
 	"opt_automatic_open_login": {
 		"message": "เปิดหน้า $salesforce_login โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปในขณะที่ไม่ได้อยู่บนหน้า Salesforce",
 		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์แบบสุ่ม"
@@ -547,9 +647,17 @@
 		"message": "เปิดหน้า $salesforce_setup โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปขณะอยู่บนหน้า Salesforce",
 		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์ Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "บันทึกการตั้งค่าแล้ว!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (ค่าเริ่มต้นและตัวสำรอง)",
 		"description": "ตัวเลือกภาษาเริ่มต้นของส่วนขยาย"
+	},
+	"opt_keep_sort": {
+		"message": "จัดเรียง Tab-s ไว้",
+		"description": "[setting] อนุญาตให้ผู้ใช้จัดเรียง Tab-s ตามหนึ่งในคีย์ของพวกเขา"
 	},
 	"opt_keep_tabs_left": {
 		"message": "เก็บ Tab โปรดไว้ทางซ้ายของ Home และ Object Manager",
@@ -579,13 +687,17 @@
 		"message": "เลือกภาษาของส่วนขยาย",
 		"description": "[การตั้งค่า] ป้ายกำกับเพื่อแจ้งให้ผู้ใช้เลือกภาษาที่ต้องการ"
 	},
+	"opt_pick_sort": {
+		"message": "เลือกฟิลด์ที่จะใช้จัดเรียง Tab-s",
+		"description": "[setting] ตอนนี้ผู้ใช้สามารถเลือกคีย์ที่จะใช้จัดเรียง Tab-s ได้แล้ว"
+	},
 	"opt_prevent_analytics": {
 		"message": "ป้องกันการใช้ Simple Analytics (จะไม่แสดงในจำนวนผู้ใช้)",
 		"description": "[การตั้งค่า] อนุญาตให้ผู้ใช้ป้องกันการส่งข้อมูลวิเคราะห์แบบไม่ระบุตัวตน"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Pigilan ang paggamit ng Lightning Navigation (mas mabilis na pag-load kapag ginagamit).",
-		"description": "[setting] huwag payagan ang Lightning Navigation na may paliwanag ng feature"
+		"message": "ป้องกันการใช้ Lightning Navigation (โหลดเร็วขึ้นเมื่อไม่ได้เลือก)",
+		"description": "[setting] ไม่อนุญาตให้ใช้ Lightning Navigation พร้อมคำอธิบายคุณสมบัติ"
 	},
 	"opt_same_tab_popup": {
 		"message": "หน้าในแท็บเดียวกันเมื่อคลิกป็อปอัป",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"
+	},
+	"send_tip": {
+		"message": "ส่งทิปให้เรา ❤️",
+		"description": "[popup] หัวข้อสำหรับ svg เพื่อแจ้งให้ส่งทิป"
 	},
 	"set_gen_preview": {
 		"message": "ตัวอย่าง Tab",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] ชื่อสำรองสำหรับโมดอล"
+	},
+	"write_review": {
+		"message": "เขียนรีวิว!",
+		"description": "[popup] หัวข้อสำหรับ svg เพื่อขอให้เขียนรีวิว"
 	}
 }

@@ -3,6 +3,10 @@
 		"message": "Permetre",
 		"description": "[req_permission] botó per permetre permisos"
 	},
+	"ascending": {
+		"message": "Ascendent (A-Z)",
+		"description": ""
+	},
 	"available": {
 		"message": "Disponible",
 		"description": "Capçalera de secció per als elements que es poden afegir"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "Etiqueta per al menú de configuració"
 	},
+	"cxm_sort": {
+		"message": "🎯 Ordenar Tabs",
+		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs automàticament (menú pare)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 per Etiqueta",
+		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs per etiqueta"
+	},
+	"cxm_sort_org": {
+		"message": "👽 per Org",
+		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs per organització"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 per Url",
+		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs per URL"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualitzar Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete totes les Tabs",
 		"description": "[finestra-emergent] títol a la paperera per buidar totes les Tabs"
+	},
+	"descending": {
+		"message": "Descendent (Z-A)",
+		"description": ""
 	},
 	"drop": {
 		"message": "Drop",
@@ -351,6 +375,10 @@
 		"message": "S'ha produït un error en restablir les Tab per defecte.",
 		"description": "[error] Error genèric en restablir les Tab als valors per defecte"
 	},
+	"error_sorting_tabs": {
+		"message": "Error en ordenar les Tabs",
+		"description": "[error] mostrat en un missatge d'avís"
+	},
 	"error_sync_nothing": {
 		"message": "No es poden sincronitzar Tabs buits!",
 		"description": "[error] s'ha intentat sincronitzar cap Tab"
@@ -455,6 +483,70 @@
 		"message": "General",
 		"description": "Etiqueta per a la categoria de configuració general"
 	},
+	"help": {
+		"message": "Ajuda",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marca les Tabs noves com a Org Tabs, de manera que només siguin visibles quan s'ha iniciat la sessió en aquesta organització de Salesforce en particular.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Les Tabs afegides recentment s'insereixen al principi de la llista de Tabs a la barra de configuració en lloc d'afegir-se al final.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Si fas clic a la finestra emergent de l'extensió fora d'un domini de Salesforce, et portarà automàticament a la pàgina d'inici de sessió de Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Si fas clic a la finestra emergent de l'extensió dins d'un domini de Salesforce, però no en una pàgina de configuració, et portarà automàticament a la pàgina de configuració de Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Quan està habilitat, les teves Tabs es mantenen en ordre classificat, ja sigui per etiqueta, URL o organització; depenent del que triïs.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Ancla les teves Tabs guardades abans del menú de navegació estàndard (Home / Object Manager) a Setup, en lloc de després.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Quan està habilitat, cada Tab guardada obrirà la pàgina relacionada en una Tab nova.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Suprimeix la visualització automàtica de les notificacions de notes de la versió després que l'extensió s'actualitzi.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Deshabilita les finestres emergents de recordatori d'actualització periòdiques, mantenint neta la interfície d'usuari de l'extensió (quan has deshabilitat les actualitzacions automàtiques de l'extensió des de la configuració del teu navegador).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Si fas clic a la finestra emergent de l'extensió fora d'un domini de Salesforce, la pàgina d'inici de sessió s'obrirà a la Tab del navegador actual.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Si fas clic a la finestra emergent de l'extensió dins d'un domini de Salesforce, però no en una pàgina de configuració, la pàgina de configuració de Salesforce s'obrirà a la Tab del navegador actual.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Defineix l'idioma de la interfície d'usuari només per a l'extensió. Si alguna cosa no s'ha traduït, s'utilitzarà la versió anglesa.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Deshabilita la recopilació bàsica de telemetria. L'extensió no apareixerà a les mètriques d'ús anònimes.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omet l'API de Lightning Navigation i obre enllaços mitjançant la recàrrega de la pàgina completa, que pot ser més ràpid en algunes configuracions d'organització.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Deshabilita la comprovació de l'extensió que verifica que un fragment d'URL coincideixi amb el format d'identificadors de registre/objecte de Salesforce (utilitzat per establir automàticament el Tab guardat com a Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "Importar",
 		"description": "[popup] botó d'importació"
@@ -539,6 +631,14 @@
 		"message": "Obrir Setup",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "Afegeix Tabs noves com a Org Tabs.",
+		"description": "[settings] permet a l'usuari afegir totes les Tabs noves com a específiques d'una organització"
+	},
+	"opt_add_tabs_front": {
+		"message": "Afegeix Tabs noves al davant.",
+		"description": "[settings] permet a l'usuari afegir totes les Tabs noves al davant"
+	},
 	"opt_automatic_open_login": {
 		"message": "Obre automàticament la pàgina $salesforce_login en fer clic a la finestra emergent si no ets en una pàgina de Salesforce.",
 		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web aleatori"
@@ -547,9 +647,17 @@
 		"message": "Obre automàticament la pàgina $salesforce_setup en fer clic a la finestra emergent si ets en una pàgina de Salesforce.",
 		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web de Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "S'han desat els paràmetres!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (Per defecte i de reserva)",
 		"description": "Opció de llengua per defecte de l'extensió"
+	},
+	"opt_keep_sort": {
+		"message": "Mantenir les Tabs ordenades.",
+		"description": "[setting] permet a l'usuari mantenir les seves Tabs ordenades per una de les seves claus"
 	},
 	"opt_keep_tabs_left": {
 		"message": "Mantenir Tabs preferits a l'esquerra d'Inici i Gestor d'objectes.",
@@ -579,13 +687,17 @@
 		"message": "Tria l'idioma de l'extensió",
 		"description": "[configuració] etiqueta per demanar a l'usuari que triï el seu idioma preferit"
 	},
+	"opt_pick_sort": {
+		"message": "Tria per quin camp s'han d'ordenar les Tabs",
+		"description": "[setting] ara l'usuari pot triar per quina clau mantenir les Tabs ordenades"
+	},
 	"opt_prevent_analytics": {
 		"message": "Evitar l’ús de Simple Analytics (no es comptarà en el recompte d’usuaris).",
 		"description": "[configuració] permet a l’usuari evitar l'enviament d'analítiques anònimes"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "Impedeix l'ús de la navegació Lightning (càrrega més ràpida quan s'utilitza).",
-		"description": "[configuració] no permetis la navegació Lightning amb l'explicació de la funció"
+		"message": "Evita l'ús de Lightning Navigation (càrrega més ràpida quan no està marcat).",
+		"description": "[setting] no permetre Lightning Navigation amb l'explicació de la funció"
 	},
 	"opt_same_tab_popup": {
 		"message": "pàgina a la mateixa pestanya en fer clic a la finestra emergent.",
@@ -678,6 +790,10 @@
 	"save_tab": {
 		"message": "Desar com a Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"send_tip": {
+		"message": "Envia'ns una propina ❤️",
+		"description": "[popup] títol per a svg per sol·licitar l'enviament d'una propina"
 	},
 	"set_gen_preview": {
 		"message": "Tab Previsualització",
@@ -862,5 +978,9 @@
 	"where_to": {
 		"message": "On?",
 		"description": "[open-other-org-modal] títol alternatiu per al diàleg modal"
+	},
+	"write_review": {
+		"message": "Escriu una ressenya!",
+		"description": "[popup] títol per a svg per sol·licitar escriure una ressenya"
 	}
 }

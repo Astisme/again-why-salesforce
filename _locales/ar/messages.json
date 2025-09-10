@@ -3,6 +3,10 @@
 		"message": "السماح",
 		"description": "[req_permission] زر للسماح بالأذونات"
 	},
+	"ascending": {
+		"message": "تصاعدي (أ-ي)",
+		"description": ""
+	},
 	"available": {
 		"message": "متاح",
 		"description": "رأس قسم للعناصر التي يمكن إضافتها"
@@ -143,6 +147,22 @@
 		"message": "⚙️ $settings",
 		"description": "تسمية قائمة الإعدادات"
 	},
+	"cxm_sort": {
+		"message": "🎯 فرز Tabs",
+		"description": "قائمة سياق للسماح للمستخدمين بفرز Tabs تلقائيًا (القائمة الرئيسية)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 حسب التسمية",
+		"description": "قائمة سياق للسماح للمستخدمين بفرز Tabs حسب التسمية"
+	},
+	"cxm_sort_org": {
+		"message": "👽 حسب Org",
+		"description": "قائمة سياق للسماح للمستخدمين بفرز Tabs حسب المؤسسة"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 حسب Url",
+		"description": "قائمة سياق للسماح للمستخدمين بفرز Tabs حسب عنوان URL"
+	},
 	"cxm_update": {
 		"message": "✏️ تحديث الـ Tab",
 		"description": "[context-menu]"
@@ -162,6 +182,10 @@
 	"delete_all": {
 		"message": "$delete كل Tabs",
 		"description": "[نافذة منبثقة] عنوان على سلة المهملات لإفراغ كل Tabs"
+	},
+	"descending": {
+		"message": "تنازلي (ي-أ)",
+		"description": ""
 	},
 	"drop": {
 		"message": "إسقاط",
@@ -351,6 +375,10 @@
 		"message": "حدث خطأ عند إعادة تعيين الـ Tabs الافتراضية.",
 		"description": "[خطأ] خطأ عام يُستخدم عند إعادة تعيين الـ Tabs إلى الإعدادات الافتراضية"
 	},
+	"error_sorting_tabs": {
+		"message": "خطأ أثناء فرز Tabs",
+		"description": "[error] يظهر في رسالة منبثقة"
+	},
 	"error_sync_nothing": {
 		"message": "لا يمكن مزامنة الـ Tabs الفارغة!",
 		"description": "[error] تمت محاولة مزامنة لا شيء"
@@ -454,6 +482,70 @@
 		"message": "عام",
 		"description": "علامة لفئة الإعدادات العامة"
 	},
+	"help": {
+		"message": "مساعدة",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "يضع علامة على Tabs الجديدة كـ Org Tabs، بحيث تكون مرئية فقط عند تسجيل الدخول إلى Org الخاص بـ Salesforce.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "يتم إدراج Tabs المفضلة حديثًا في مقدمة قائمة Tabs في شريط الإعداد بدلاً من إضافتها في النهاية.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "إذا نقرت على النافذة المنبثقة للإضافة خارج نطاق Salesforce، فستنتقل تلقائيًا إلى صفحة تسجيل الدخول في Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "إذا نقرت على النافذة المنبثقة للإضافة داخل نطاق Salesforce ولكن ليس في صفحة الإعداد، فستنتقل تلقائيًا إلى صفحة الإعداد في Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "عند التمكين، يتم الاحتفاظ بـ Tabs الخاصة بك بالترتيب المحدد - إما حسب التسمية أو عنوان URL أو Org؛ حسب ما تختاره.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "يثبّت Tabs المحفوظة قبل قائمة التنقل القياسية (Home / Object Manager) في الإعداد، بدلاً من بعدها.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "عند التمكين، سيفتح كل Tab محفوظ الصفحة ذات الصلة في Tab جديد.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "يمنع العرض التلقائي لإشعارات ملاحظات الإصدار بعد تحديث الإضافة.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "يعطّل النوافذ المنبثقة للتذكير بالتحديثات الدورية، مما يحافظ على نظافة واجهة المستخدم الخاصة بالإضافة (عند تعطيل التحديثات التلقائية للإضافة من إعدادات المتصفح الخاص بك).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "إذا نقرت على النافذة المنبثقة للإضافة خارج نطاق Salesforce، فسيتم فتح صفحة تسجيل الدخول في Tab المتصفح الحالي.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "إذا نقرت على النافذة المنبثقة للإضافة داخل نطاق Salesforce ولكن ليس في صفحة الإعداد، فسيتم فتح صفحة الإعداد في Salesforce في Tab المتصفح الحالي.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "عيّن لغة واجهة المستخدم الخاصة بالإضافة فقط. إذا لم يتم ترجمة شيء ما، فسيتم استخدام النسخة الإنجليزية بدلاً من ذلك.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "يعطّل جمع بيانات القياس عن بعد الأساسية. لن تظهر الإضافة في مقاييس الاستخدام المجهولة.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "يتجاوز واجهة برمجة تطبيقات Lightning Navigation ويفتح الروابط عبر إعادة تحميل الصفحة بالكامل، مما قد يكون أسرع في بعض إعدادات المؤسسة.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "يعطّل فحص الإضافة الذي يتحقق من أن جزء عنوان URL يطابق تنسيق معرفات سجل/كائن Salesforce (يُستخدم لتعيين Tab المحفوظ تلقائيًا كـ Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
 	"import": {
 		"message": "استيراد",
 		"description": "[popup] زر الاستيراد"
@@ -538,6 +630,14 @@
 		"message": "فتح الإعداد",
 		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
 	},
+	"opt_add_tabs_as_org": {
+		"message": "إضافة Tabs جديدة كـ Org Tabs.",
+		"description": "[settings] السماح للمستخدم بإضافة جميع Tabs الجديدة كمؤسسة محددة"
+	},
+	"opt_add_tabs_front": {
+		"message": "إضافة Tabs جديدة في الأمام.",
+		"description": "[settings] السماح للمستخدم بإضافة جميع Tabs الجديدة في الأمام"
+	},
 	"opt_automatic_open_login": {
 		"message": "افتح صفحة $salesforce_login تلقائيًا عند النقر على النافذة المنبثقة أثناء عدم التواجد على صفحة Salesforce.",
 		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على موقع ويب عشوائي"
@@ -546,9 +646,17 @@
 		"message": "افتح صفحة $salesforce_setup تلقائيًا عند النقر على النافذة المنبثقة أثناء التواجد على صفحة Salesforce.",
 		"description": "[إعداد] عندما يفتح المستخدم النافذة المنبثقة أثناء تواجده على موقع Salesforce"
 	},
+	"opt_confirm_save": {
+		"message": "تم حفظ الإعدادات!",
+		"description": "[popup]"
+	},
 	"opt_en_default": {
 		"message": "en (افتراضي واحتياطي)",
 		"description": "خيار اللغة الافتراضي للإضافة"
+	},
+	"opt_keep_sort": {
+		"message": "الاحتفاظ بـ Tabs مصنفة.",
+		"description": "[setting] السماح للمستخدم بالاحتفاظ بـ Tabs مصنفة حسب أحد مفاتيحها"
 	},
 	"opt_keep_tabs_left": {
 		"message": "احتفظ بعلامات التبويب المفضلة على يسار الصفحة الرئيسية ومدير الكائنات.",
@@ -578,13 +686,17 @@
 		"message": "اختر لغة الإضافة",
 		"description": "[إعداد] تسمية لتوجيه المستخدم لاختيار لغته المفضلة"
 	},
+	"opt_pick_sort": {
+		"message": "اختر الحقل الذي يجب أن يتم فرز Tabs به",
+		"description": "[setting] الآن يمكن للمستخدم اختيار المفتاح الذي يرغب في الاحتفاظ بـ Tabs مصنفة به"
+	},
 	"opt_prevent_analytics": {
 		"message": "منع استخدام Simple Analytics (لن يظهر في عدد المستخدمين).",
 		"description": "[الإعداد] يتيح للمستخدم منع إرسال تحليلات مجهولة"
 	},
 	"opt_prevent_lightning_navigation": {
-		"message": "منع استخدام تنقل Lightning (تحميل أسرع عند الاستخدام).",
-		"description": "[إعداد] عدم السماح بتنقل Lightning مع شرح الميزة"
+		"message": "منع استخدام Lightning Navigation (تحميل أسرع عند عدم التحديد).",
+		"description": "[setting] عدم السماح بـ Lightning Navigation مع شرح الميزة"
 	},
 	"opt_same_tab_popup": {
 		"message": "الصفحة في نفس العلامة عند النقر على المنبثق.",
@@ -677,6 +789,10 @@
 	"save_tab": {
 		"message": "احفظ كـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"send_tip": {
+		"message": "أرسل لنا إكرامية ❤️",
+		"description": "[popup] عنوان svg للمطالبة بإرسال إكرامية"
 	},
 	"set_gen_preview": {
 		"message": "معاينة Tab",
@@ -861,5 +977,9 @@
 	"where_to": {
 		"message": "أين؟",
 		"description": "[open-other-org-modal] عنوان بديل للنافذة المنبثقة"
+	},
+	"write_review": {
+		"message": "اكتب مراجعة!",
+		"description": "[popup] عنوان svg لطلب كتابة مراجعة"
 	}
 }
