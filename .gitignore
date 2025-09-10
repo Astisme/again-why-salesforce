@@ -3,7 +3,7 @@ manifest.json
 deno.lock
 bin/*.zip
 bin/*.dmg
-*/bundled*
+**/bundled*
 missing-keys-report.json
 dmg_staging
 safari-*/

@@ -1,12 +1,12 @@
 <a href="https://github.com/Astisme/again-why-salesforce">
-  <img src="/assets/icons/awsf-128.png?raw=true" align="right" title="Well hello there!" />
+  <img src="/src/assets/icons/awsf-128.png?raw=true" align="right" title="Well hello there!" />
 </a>
 
 # Again, Why Salesforce
 
 > A lightweight Chrome/Edge/Firefox/Safari extension that lets you create and manage custom Setup Tabs for your most-used Salesforce Setup pages.
 
-[![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=manifest%2Ftemplate-manifest.json&label=Version)](https://github.com/Astisme/again-why-salesforce/releases)
+[![Release version](https://img.shields.io/github/manifest-json/v/Astisme/again-why-salesforce?filename=src%2Fmanifest%2Ftemplate-manifest.json&label=Version)](https://github.com/Astisme/again-why-salesforce/releases)
 [![Last commit](https://img.shields.io/github/last-commit/Astisme/again-why-salesforce?labelColor=black&color=white)](https://github.com/Astisme/again-why-salesforce/commits/main/)
 [![License](https://img.shields.io/github/license/Astisme/again-why-salesforce?color=238636)](https://github.com/Astisme/again-why-salesforce/blob/main/LICENSE)
 [![Code size](https://img.shields.io/github/languages/code-size/Astisme/again-why-salesforce)](https://github.com/Astisme/again-why-salesforce/#)
@@ -129,11 +129,13 @@ For Safari users, we recommend checking out our [installation guide](https://git
 If you prefer to self-host or start contibuting, run one of the following commands to generate the `manifest.json` file:
 
 - **Chrome**: `deno task dev-chrome`
-- **Edge**: `deno task dev-chrome`
+- **Edge**: `deno task dev-edge`
 - **Firefox**: `deno task dev-firefox`
 - **Safari**: `deno task dev-safari`
 
 Then load the unpacked extension in your browser’s developer mode (search online `how to load unpacked extension for` + your browser).
+
+The `manifest.json` file is located [in the `src` directory](/src).
 
 ## Contributing
 

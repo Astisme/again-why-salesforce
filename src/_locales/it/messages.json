@@ -1,0 +1,1045 @@
+{
+	"allow": {
+		"message": "Consenti",
+		"description": "[req_permission] pulsante per concedere le autorizzazioni"
+	},
+	"ascending": {
+		"message": "Crescente (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Disponibile",
+		"description": "Intestazione di sezione per gli elementi che possono essere aggiunti"
+	},
+	"bold": {
+		"message": "Grassetto",
+		"description": "Opzione di stile del carattere per il testo in grassetto"
+	},
+	"cancel": {
+		"message": "Cancella",
+		"description": "titolo o testo per i bottoni che evitano che l'azione corrente venga eseguita"
+	},
+	"cancel_close": {
+		"message": "Cancella e chiudi",
+		"description": "titolo o testo per il bottone di chiusura dei modali"
+	},
+	"chosen": {
+		"message": "Scelto",
+		"description": "Intestazione di sezione per gli elementi selezionati"
+	},
+	"cmd_export_all": {
+		"message": "Mostra il modale per esportare tutti i Tabs salvati",
+		"description": "[descrizione comando] l'utente vuole esportare tutti i Tabs"
+	},
+	"cmd_import": {
+		"message": "Mostra il modale per importare nuovi Tabs",
+		"description": "[descrizione comando] l'utente vuole importare nuovi Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Mostra il modale per aprire la pagina corrente in un'altra Org",
+		"description": "[descrizione comando] l'utente vuole aprire la pagina corrente in un'altra Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Rimuovi la pagina corrente dall'elenco dei Tabs (se salvata)",
+		"description": "[descrizione comando] l'utente vuole rimuovere la pagina corrente"
+	},
+	"cmd_save_as_tab": {
+		"message": "Salva la pagina corrente nell'elenco dei Tabs (se non salvata)",
+		"description": "[descrizione comando] l'utente vuole salvare la pagina corrente"
+	},
+	"cmd_toggle_org": {
+		"message": "Attiva/disattiva il valore Org della pagina corrente (se salvata)",
+		"description": "[descrizione comando] l'utente vuole attivare/disattivare l'Org per la pagina corrente"
+	},
+	"cmd_update_tab": {
+		"message": "Mostra il modale per aggiornare la pagina corrente (se salvata)",
+		"description": "[descrizione comando] l'utente vuole aggiornare la pagina corrente"
+	},
+	"confirm_another_org": {
+		"message": "Conferma l'apertura di questo link.",
+		"description": "[open-other-org-modal] richiesta di conferma all'utente per aprire il link costruito."
+	},
+	"confirm_update_extension": {
+		"message": "Una nuova versione di $extension_label è ora disponibile!",
+		"description": "un messaggio sconosciuto è stato ricevuto da un listener"
+	},
+	"continue": {
+		"message": "Continua",
+		"description": "testo per i bottoni che permettono all'azione corrente di essere eseguita"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Tutte le Tab generiche",
+		"description": "[menu contestuale]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Rimuovi tutte le Tab",
+		"description": "[menu contestuale]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Tutte le Tab visibili",
+		"description": "[menu contestuale]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Esporta Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[menu-contestuale]"
+	},
+	"cxm_move": {
+		"message": "🧭 Sposta Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Porta al primo posto",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Porta all'ultimo posto",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Sposta a sinistra",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Sposta a destra",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Apri in un'altra Org",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[menu-contestuale]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[menu-contestuale]"
+	},
+	"cxm_remove": {
+		"message": "💥 Rimuovi Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tab a sinistra",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Altre Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tab a destra",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Questa Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Ripristina le Tab predefinite",
+		"description": "[menu contestuale]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Etichetta per il menu delle impostazioni"
+	},
+	"cxm_sort": {
+		"message": "🎯 Ordina Tabs",
+		"description": "menu contestuale per consentire agli utenti di ordinare le proprie Tabs automaticamente (menu padre)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 per Etichetta",
+		"description": "menu contestuale per consentire agli utenti di ordinare le proprie Tabs per etichetta"
+	},
+	"cxm_sort_org": {
+		"message": "👽 per Org",
+		"description": "menu contestuale per consentire agli utenti di ordinare le proprie Tabs per organizzazione"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 per Url",
+		"description": "menu contestuale per consentire agli utenti di ordinare le proprie Tabs per URL"
+	},
+	"cxm_update": {
+		"message": "✏️ Aggiorna Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Attiva/Disattiva Org",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Altri Aggiornamenti",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Elimina",
+		"description": "[popup] elimina una riga"
+	},
+	"delete_all": {
+		"message": "$delete tutte le Tabs",
+		"description": "[popup] titolo sul cestino per svuotare tutte le Tabs"
+	},
+	"descending": {
+		"message": "Decrescente (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Trascina",
+		"description": "[import] consente all'utente di trascinare i propri file sull'area specificata"
+	},
+	"enable": {
+		"message": "Abilita",
+		"description": "[richiedi_permesso] pulsante per abilitare i permessi"
+	},
+	"error_adding_tab": {
+		"message": "Errore durante l'aggiunta di Tab.",
+		"description": "[errore] Errore generico usato durante l'aggiunta di un Tab"
+	},
+	"error_check_update": {
+		"message": "Errore durante la verifica degli aggiornamenti",
+		"description": "[errore] errore generico durante la verifica degli aggiornamenti dell'estensione"
+	},
+	"error_close_other_modal": {
+		"message": "Chiudi prima l'altro modal!",
+		"description": "[toast] l'utente ha tentato di aprire più di un modal"
+	},
+	"error_cxm_check": {
+		"message": "Errore nel controllo degli elementi del menu",
+		"description": "[error] non è stato possibile trovare gli elementi del menu contestuale"
+	},
+	"error_cxm_create": {
+		"message": "Errore nella creazione degli elementi del menu",
+		"description": "[error] non è stato possibile inizializzare gli elementi del menu contestuale"
+	},
+	"error_cxm_remove": {
+		"message": "Errore nella rimozione degli elementi del menu",
+		"description": "[error] non è stato possibile eliminare gli elementi del menu contestuale"
+	},
+	"error_duplicate_tab": {
+		"message": "Questa Tab esiste già",
+		"description": "[error] la Tab è duplicata"
+	},
+	"error_expand_url": {
+		"message": "Impossibile espandere un URL vuoto!",
+		"description": "[error] non è stato passato l'URL da espandere"
+	},
+	"error_expand_url_no_base": {
+		"message": "Impossibile espandere un URL senza il suo host!",
+		"description": "[error] non è stato passato l'URL base per espandere"
+	},
+	"error_extract_empty_url": {
+		"message": "Impossibile estrarre il nome dell'Org da un URL vuoto!",
+		"description": "[error] non è stato passato l'URL da cui estrarre il nome dell'Org"
+	},
+	"error_failed_sync": {
+		"message": "Sincronizzazione fallita.",
+		"description": "[errore] Errore generico quando i Tabs non sono potuti essere sincronizzati dall'utente"
+	},
+	"error_failed_to_fetch": {
+		"message": "Impossibile recuperare risorse esterne",
+		"description": "[errore] La chiamata a un sito web esterno non è riuscita"
+	},
+	"error_get_with_no_org": {
+		"message": "Impossibile ottenere le Tab se l'Org non è specificato.",
+		"description": "[error] tentativo di cercare le Tab per Org senza fornire informazioni sull'Org"
+	},
+	"error_import": {
+		"message": "Errore durante l'importazione:\n",
+		"description": "[error] si è verificato un errore durante il processo di importazione"
+	},
+	"error_invalid_key": {
+		"message": "Il parametro chiave passato alla funzione non è valido",
+		"description": "[errore] lo sviluppatore ha provato a chiamare una funzione con un parametro non valido"
+	},
+	"error_invalid_request": {
+		"message": "Richiesta non valida.",
+		"description": "[errore] Errore generico dopo aver ricevuto un messaggio mal formattato"
+	},
+	"error_invalid_tab": {
+		"message": "Tab non valida",
+		"description": "[error] la Tab non è valida"
+	},
+	"error_link_with_id": {
+		"message": "Questa pagina non può esistere in un'altra Org, perché contiene un Id!",
+		"description": "[open-other-org-modal] avviso per l'utente che il link potrebbe non esistere in un'altra Org"
+	},
+	"error_many_matching_tab": {
+		"message": "Trovate più di una Tab corrispondente.",
+		"description": "[error] sono state trovate troppe Tab"
+	},
+	"error_many_tabs_found": {
+		"message": "Trovato più di un Tab.",
+		"description": "[errore] sono stati recuperati molti Tabs"
+	},
+	"error_minify_url": {
+		"message": "Impossibile ridurre un URL vuoto!",
+		"description": "[error] non è stato passato l'URL da ridurre"
+	},
+	"error_missing_favourite_id": {
+		"message": "Impossibile ottenere l'immagine preferita senza l'Id",
+		"description": "[error] non è stato passato nessun id preferito"
+	},
+	"error_missing_key": {
+		"message": "Chiave non trovata ovunque",
+		"description": "[error] nessuna traduzione trovata nei file"
+	},
+	"error_no_array": {
+		"message": "Array non valido o non è stato passato alcun array",
+		"description": "[error] non è stato ricevuto un array valido"
+	},
+	"error_no_browser_tab": {
+		"message": "Impossibile trovare la Tab corrente del browser.",
+		"description": "[error] la pagina in background non ha potuto stabilire una Tab attiva del browser"
+	},
+	"error_no_callback": {
+		"message": "Fornisci un callback",
+		"description": "[error] non è stata passata una funzione di callback"
+	},
+	"error_no_cookies": {
+		"message": "Cookie corrispondenti non trovati",
+		"description": "[error] non è stato passato alcun id preferito"
+	},
+	"error_no_data": {
+		"message": "Impossibile identificare una Tab senza dati.",
+		"description": "[error] tentativo di ottenere una Tab senza fornire dati"
+	},
+	"error_no_headers": {
+		"message": "Impossibile trovare le intestazioni.",
+		"description": "[error] l'estensione non ha trovato dove posizionare il pulsante preferito"
+	},
+	"error_no_matching_tab": {
+		"message": "Non sono state trovate Tab corrispondenti.",
+		"description": "[error] nessuna Tab è stata trovata"
+	},
+	"error_no_message": {
+		"message": "Non è stato specificato un messaggio da inviare.",
+		"description": "[error] nessun messaggio da inviare ad altre parti del codice"
+	},
+	"error_no_object": {
+		"message": "Nessun oggetto da controllare!",
+		"description": "[error] non è stato passato l'oggetto"
+	},
+	"error_no_setup_tab": {
+		"message": "Impossibile trovare la Tab di Setup.",
+		"description": "[error] l'estensione non ha trovato dove posizionare le Tab preferite."
+	},
+	"error_no_url": {
+		"message": "Nessun URL da controllare!",
+		"description": "[error] non è stato passato l'URL da controllare"
+	},
+	"error_not_initialized": {
+		"message": "non era ancora inizializzato.",
+		"description": "[errore] Errore generico per quando una variabile non è pronta"
+	},
+	"error_processing_tabs": {
+		"message": "Errore durante l'elaborazione dei Tabs.",
+		"description": "[errore] Errore generico durante l'elaborazione dei Tabs"
+	},
+	"error_redirect": {
+		"message": "Impossibile reindirizzare. Si prega di aggiornare la pagina.",
+		"description": "[errore] Errore generico sul reindirizzamento della pagina."
+	},
+	"error_remove_not_favourite": {
+		"message": "Impossibile rimuovere una Tab non preferita!",
+		"description": "[error] l'utente ha tentato di rimuovere una Tab che non era stata ancora salvata"
+	},
+	"error_removing_all_tabs": {
+		"message": "Errore durante la rimozione di tutti i Tabs.",
+		"description": "[errore] Errore generico usato durante la rimozione di tutti i Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Errore durante la rimozione di Tabs generici.",
+		"description": "[errore] Errore generico usato durante la rimozione di Tabs generici"
+	},
+	"error_removing_other_tabs": {
+		"message": "Errore durante la rimozione di altri Tabs.",
+		"description": "[errore] Errore generico usato durante la rimozione di altri Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Errore durante la rimozione di Tab.",
+		"description": "[errore] Errore generico usato durante la rimozione di un Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Errore durante la rimozione di tutte le Tab visibili.",
+		"description": "[errore] Errore generico durante la rimozione di tutte le Tab visibili"
+	},
+	"error_required_params": {
+		"message": "I parametri richiesti per la funzione non sono stati passati",
+		"description": "[errore] lo sviluppatore ha provato a chiamare una funzione senza i parametri necessari"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Errore durante il ripristino delle Tab predefinite.",
+		"description": "[errore] Errore generico durante il ripristino delle Tab predefinite"
+	},
+	"error_sorting_tabs": {
+		"message": "Errore durante l'ordinamento delle Tabs",
+		"description": "[error] mostrato in un messaggio popup"
+	},
+	"error_sync_nothing": {
+		"message": "Impossibile sincronizzare Tab nulle!",
+		"description": "[error] tentativo di sincronizzare nulla"
+	},
+	"error_tab_constructor": {
+		"message": "Utilizzare Tab.create() invece di new Tab()",
+		"description": "[errore] indicare allo sviluppatore come utilizzare la classe Tab"
+	},
+	"error_tab_label": {
+		"message": "L'etichetta deve essere una stringa non vuota",
+		"description": "[error] l'utente ha tentato di creare una Tab senza etichetta"
+	},
+	"error_tab_not_found": {
+		"message": "Tab non trovata.",
+		"description": "[error] la Tab non è stata trovata nell'array"
+	},
+	"error_tab_object_creation": {
+		"message": "Quando si chiama con un oggetto, non passare altro.",
+		"description": "[error] errore di implementazione da parte dello sviluppatore"
+	},
+	"error_tab_org": {
+		"message": "L'Org deve essere una stringa o indefinito",
+		"description": "[error] l'utente ha tentato di creare una Tab con un valore di Org non valido"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Trovate chiavi inaspettate:",
+		"description": "[error] l'utente ha tentato di creare una Tab con proprietà non supportate"
+	},
+	"error_tab_url": {
+		"message": "L'URL deve essere una stringa non vuota",
+		"description": "[error] l'utente ha tentato di creare una Tab senza URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Un Tab con questo URL è già stato salvato!",
+		"description": "[errore] L'utente ha provato a salvare un Tab già preferito"
+	},
+	"error_tabcont_initialize": {
+		"message": "Impossibile inizializzare con"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Tab non valide rilevate.\nPrima occorrenza:",
+		"description": "[error] sono state passate Tab non valide"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Utilizzare TabContainer.create() invece di new TabContainer()",
+		"description": "[errore] indicare allo sviluppatore come utilizzare la classe TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Utilizzare TranslationService.create() invece di new TranslationService()",
+		"description": "[errore] indicare allo sviluppatore come utilizzare la classe TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "il traduttore non era ancora inizializzato.",
+		"description": "[errore] il TranslationService non era pronto"
+	},
+	"error_unknown_message": {
+		"message": "Messaggio sconosciuto ricevuto",
+		"description": "un messaggio sconosciuto è stato ricevuto da un listener"
+	},
+	"error_unknown_request": {
+		"message": "Richiesta sconosciuta.",
+		"description": "[errore] Errore generico dopo aver ricevuto un messaggio non riconosciuto"
+	},
+	"error_useless_remove": {
+		"message": "Impossibile rimuovere:\nNon si può rimuovere una pagina che non è mai stata salvata",
+		"description": "[error] l'utente ha tentato di rimuovere una pagina non ancora salvata"
+	},
+	"error_useless_save": {
+		"message": "Impossibile salvare:\nQuesta pagina è già stata salvata!",
+		"description": "[error] l'utente ha tentato di salvare una pagina già salvata"
+	},
+	"export": {
+		"message": "Esporta",
+		"description": "[popup] pulsante di esportazione"
+	},
+	"export_title": {
+		"message": "Esporta tutte le Tab",
+		"description": "[popup] titolo sul pulsante di esportazione"
+	},
+	"extension_description": {
+		"message": "Crea e gestisci Tab personalizzati nello spazio disponibile sulla pagina di Setup di Salesforce Lightning.",
+		"description": "[manifest] La descrizione di questa estensione"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Il nome di questa estensione"
+	},
+	"file": {
+		"message": "un file",
+		"description": "singolo file"
+	},
+	"files": {
+		"message": "più file",
+		"description": "molteplici file"
+	},
+	"flows": {
+		"message": "Flussi",
+		"description": "[tab predefinita] Etichetta per la Tab Flussi predefinita"
+	},
+	"general": {
+		"message": "Generale",
+		"description": "Etichetta per la categoria delle impostazioni generali"
+	},
+	"help": {
+		"message": "Aiuto",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Contrassegna le nuove Tabs come Org Tabs, in modo che siano visibili solo quando si è connessi a quella specifica organizzazione Salesforce.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Le nuove Tabs preferite vengono inserite all'inizio dell'elenco di Tabs nella barra di configurazione anziché aggiunte alla fine.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Se fai clic sul popup dell'estensione al di fuori di un dominio Salesforce, verrai automaticamente indirizzato alla pagina di accesso di Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Se fai clic sul popup dell'estensione all'interno di un dominio Salesforce ma non su una pagina di impostazione, verrai automaticamente indirizzato alla pagina di impostazione di Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Quando abilitato, le tue Tabs vengono mantenute in ordine ordinato—per etichetta, URL o organizzazione; a seconda di ciò che scegli.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Appunta le tue Tabs salvate prima del menu di navigazione standard (Home / Object Manager) in Setup, invece che dopo.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Quando abilitato, ogni Tab salvata aprirà la pagina correlata in una nuova Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Sopprime la visualizzazione automatica delle notifiche delle note di rilascio dopo l'aggiornamento dell'estensione.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Disabilita i popup di promemoria di aggiornamento periodici, mantenendo pulita l'interfaccia utente dell'estensione (quando hai disabilitato gli aggiornamenti automatici dell'estensione dalle impostazioni del tuo browser).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Se fai clic sul popup dell'estensione al di fuori di un dominio Salesforce, la pagina di accesso si aprirà nella Tab del browser corrente.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Se fai clic sul popup dell'estensione all'interno di un dominio Salesforce ma non su una pagina di impostazione, la pagina di impostazione di Salesforce si aprirà nella Tab del browser corrente.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Imposta la lingua dell'interfaccia utente solo per l'estensione. Se qualcosa non è stato tradotto, verrà utilizzata la versione inglese.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Disabilita la raccolta di telemetria di base. L'estensione non apparirà nelle metriche di utilizzo anonime.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Ignora l'API di Lightning Navigation e apre i collegamenti tramite un ricaricamento completo della pagina, il che può essere più veloce in alcune configurazioni di organizzazione.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Disabilita il controllo dell'estensione che verifica che un frammento URL corrisponda al formato degli ID di record/oggetto di Salesforce (utilizzato per impostare automaticamente la Tab salvata come Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Clicca per essere reindirizzato alla documentazione per questa impostazione!",
+		"description": "[aiuto-impostazioni] invito all'azione per consentire all'utente di leggere di più su una impostazione specifica"
+	},
+	"import": {
+		"message": "Importa",
+		"description": "[popup] pulsante di importazione"
+	},
+	"import_duplicate_description_0": {
+		"message": "Le Tab duplicate verranno ignorate.",
+		"description": "[importa] descrizione di ciò che fa il processo di importazione parte 0"
+	},
+	"import_duplicate_description_1": {
+		"message": "Due Tab sono considerate duplicate se hanno lo stesso URL.",
+		"description": "[importa] descrizione di ciò che fa il processo di importazione parte 1"
+	},
+	"import_invalid_file": {
+		"message": "Tipo di file non valido.\nSono supportati solo file JSON.",
+		"description": "[error] il file utilizzato per l'importazione non è un JSON"
+	},
+	"import_successful": {
+		"message": "Importati con successo",
+		"description": "[import] il processo d'importazione è stato completato. Dopo questo, un numero che riporta quanti record siano stati importati verrà mostrato"
+	},
+	"import_tabs": {
+		"message": "Importa Tab",
+		"description": "[modal-title] per il processo d'importazione"
+	},
+	"import_title": {
+		"message": "$import_tabs da file JSON",
+		"description": "[popup] titolo sul pulsante di importazione"
+	},
+	"insert_another": {
+		"message": "Inserisci un'altra",
+		"description": "[error-open-other-org-modal] messaggio quando l'utente inserisce la stessa Org nel modal"
+	},
+	"insert_another_org": {
+		"message": "L'Org inserita è quella corrente!\nInserisci un'altra Org.",
+		"description": "[error-open-other-org-modal] messaggio quando l'utente inserisce la stessa Org nel modal"
+	},
+	"insert_valid_org": {
+		"message": "Inserisci una Org valida!",
+		"description": "[error-open-other-org-modal] messaggio quando l'utente inserisce un URL errato nel modal"
+	},
+	"italic": {
+		"message": "Corsivo",
+		"description": "Opzione di stile del carattere per il testo in corsivo"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Tecnologia di navigazione personalizzata di Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Accedi a Salesforce",
+		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente alla pagina di login di Salesforce"
+	},
+	"mycustomorg": {
+		"message": "lamiaorgpersonale",
+		"description": "placeholder per il modal di aggiornamento Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url di GitHub non valido o mancante nel manifest",
+		"description": "La chiave homepage_url del manifest non utilizza un link GitHub"
+	},
+	"no_match": {
+		"message": "Nessuna azione corrispondente trovata",
+		"description": "[error] in Salesforce quando non viene trovata alcuna azione corrispondente"
+	},
+	"nss_invalid_url": {
+		"message": "URL non valida rilevata.",
+		"description": "[notSalesforceSetup] un URL che non è valido"
+	},
+	"nss_not_setup_page": {
+		"message": "Questa non è una pagina di configurazione di $salesforce_lightning.",
+		"description": "[notSalesforceSetup] l'utente non si trova su una pagina Salesforce."
+	},
+	"open_here": {
+		"message": "Apri in questa Tab.",
+		"description": "[open-other-org-modal] pulsante di opzione per consentire all'utente di aprire nella stessa Tab del browser"
+	},
+	"open_new_tab": {
+		"message": "Apri in una nuova Tab.",
+		"description": "[open-other-org-modal] pulsante di opzione per consentire all'utente di aprire in una nuova Tab del browser."
+	},
+	"open_settings": {
+		"message": "Apri Impostazioni Estensione",
+		"description": "[popup] pulsante per reindirizzare alla pagina delle impostazioni"
+	},
+	"open_setup": {
+		"message": "Apri Setup",
+		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente a una pagina di Setup di Salesforce"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Aggiungi nuove Tabs come Org Tabs.",
+		"description": "[settings] consente all'utente di aggiungere tutte le nuove Tabs come specifiche dell'organizzazione"
+	},
+	"opt_add_tabs_front": {
+		"message": "Aggiungi nuove Tabs davanti.",
+		"description": "[settings] consente all'utente di aggiungere tutte le nuove Tabs davanti"
+	},
+	"opt_automatic_open_login": {
+		"message": "Apri automaticamente la pagina $salesforce_login quando si fa clic sul popup mentre non si è su una pagina Salesforce.",
+		"description": "[impostazione] quando l'utente apre il popup mentre si trova su un sito Web casuale"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Apri automaticamente la pagina $salesforce_setup quando si fa clic sul popup mentre si è su una pagina Salesforce.",
+		"description": "[impostazione] quando l'utente apre il popup mentre si trova su un sito Web Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "Le impostazioni sono state salvate!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Predefinito e di riserva)",
+		"description": "Opzione lingua predefinita dell'estensione"
+	},
+	"opt_keep_sort": {
+		"message": "Mantieni le Tabs ordinate.",
+		"description": "[setting] consente all'utente di mantenere le proprie Tabs ordinate in base a una delle loro chiavi"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Mantieni i Tab preferiti a sinistra di Home e Gestione Oggetti.",
+		"description": "Interruttore per fissare i Tab preferiti sul lato sinistro della barra di navigazione"
+	},
+	"opt_link_new_browser": {
+		"message": "Apri sempre i link in una nuova scheda del browser.",
+		"description": "[impostazione] quando l'utente fa clic su un Tab preferito, aprilo in una nuova scheda"
+	},
+	"opt_no_release_notes": {
+		"message": "Non mostrare le note di rilascio dell’aggiornamento.",
+		"description": "[impostazione] consente all'utente di impedire che l'estensione mostri le note di rilascio dopo l'aggiornamento"
+	},
+	"opt_no_update_notification": {
+		"message": "Non avvisare della disponibilità di aggiornamenti.",
+		"description": "[impostazione] consente all'utente di impedire all'estensione di cercare nuove versioni"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Apri sempre la pagina $salesforce_login nella stessa Tab quando si fa clic sul popup.",
+		"description": "[impostazione]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Apri sempre la pagina $salesforce_setup nella stessa Tab quando si fa clic sul popup.",
+		"description": "[impostazione]"
+	},
+	"opt_pick_language": {
+		"message": "Scegli la lingua dell'estensione",
+		"description": "[impostazione] etichetta per chiedere all'utente di scegliere la lingua preferita"
+	},
+	"opt_pick_sort": {
+		"message": "Scegli in base a quale campo ordinare le Tabs",
+		"description": "[setting] ora l'utente può scegliere in base a quale chiave mantenere le Tabs ordinate"
+	},
+	"opt_prevent_analytics": {
+		"message": "Impedisci l'uso di Simple Analytics (non verrà contato nel numero di utenti).",
+		"description": "[impostazione] consente all'utente di impedire l'invio di analisi anonime"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Impedisci l'uso di Lightning Navigation (caricamento più veloce quando non è selezionato).",
+		"description": "[setting] non consente Lightning Navigation con spiegazione della funzione"
+	},
+	"opt_same_tab_popup": {
+		"message": "apri la pagina nella stessa scheda quando fai clic sul popup.",
+		"description": "[impostazione] impedisci l'apertura di una nuova scheda"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Segui la lingua di Salesforce (legge i cookie di Salesforce)",
+		"description": "Opzione per usare l'impostazione della lingua di Salesforce. Per usare questa opzione, gli utenti devono permettere all'estensione di leggere i cookie di Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salta il controllo automatico dell'ID Salesforce.",
+		"description": "[impostazione] quando aggiungi un Tab ai preferiti, impedisci il controllo dell'ID nel link"
+	},
+	"or_drop": {
+		"message": "O $drop",
+		"description": "[importa] consenti all'utente di spostare i file con il mouse e rilasciarli"
+	},
+	"org_link": {
+		"message": "Link Org",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Altre informazioni Org",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "altra-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Sovrascrivi le Tab salvate.",
+		"description": "[label] elimina tutte le Tab salvate durante il processo di importazione"
+	},
+	"preserve_org_tabs": {
+		"message": "Conserva le Tab per altre Org.",
+		"description": "[label] conserva tutte le Tab specifiche per l'Org durante il processo di importazione"
+	},
+	"remove_tab": {
+		"message": "Rimuovi Tab",
+		"description": "[alt] testo alternativo quando le immagini non funzionano"
+	},
+	"req_downloads_open_popup": {
+		"message": "Si prega di aprire il popup dell'estensione dal menu delle estensioni del browser.",
+		"description": "[avviso] chiedere all'utente di fare clic sul popup dell'estensione per continuare"
+	},
+	"req_downloads_perm_header": {
+		"message": "Si prega di abilitare il permesso di Download\nper avviare l'Esportazione richiesta.",
+		"description": "[richiedi_permesso] invito all'azione per abilitare il permesso di download"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Questa operazione verrà richiesta solo una volta.",
+		"description": "[richiedi_permesso] descrizione per abilitare il permesso di download"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Non chiedere più.",
+		"description": "[req_permission] etichetta quando l'utente non vuole concedere le autorizzazioni in modo permanente"
+	},
+	"req_permissions_header": {
+		"message": "Consentici di accedere\nautomaticamente alle pagine $salesforce_setup.",
+		"description": "[req_permission] intestazione della pagina per richiedere le autorizzazioni"
+	},
+	"req_permissions_paragraph": {
+		"message": "Se lo desideri, puoi visualizzare le tue Tabs preferite\nnon appena accedi a una pagina $salesforce_setup\nsenza dover fare clic su questa estensione ogni volta.",
+		"description": "[req_permission] testo per spiegare perché vengono richieste le autorizzazioni"
+	},
+	"required": {
+		"message": "obbligatorio",
+		"description": "[input] indica che un campo di inserimento è obbligatorio"
+	},
+	"required_info": {
+		"message": "= Informazioni Obbligatorie",
+		"description": "[modal] informa l'utente che alcune informazioni sono obbligatorie"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] la piattaforma Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "la pagina di accesso di Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "qualsiasi pagina di configurazione Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Salva",
+		"description": "Applica le modifiche e memorizzale"
+	},
+	"save_tab": {
+		"message": "Salva come Tab",
+		"description": "[alt] testo alternativo quando le immagini non funzionano"
+	},
+	"send_tip": {
+		"message": "Inviaci un consiglio ❤️",
+		"description": "[popup] titolo per svg per richiedere l'invio di un consiglio"
+	},
+	"set_gen_preview": {
+		"message": "Anteprima Tab",
+		"description": "Etichetta per anteporre l'aspetto dei Tab generici"
+	},
+	"set_gen_styler": {
+		"message": "Stilista Tab",
+		"description": "Etichetta per configurare lo stile dei Tab generici"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "Intestazione di sezione per le opzioni di configurazione generali"
+	},
+	"set_move_available": {
+		"message": "Sposta in Disponibile",
+		"description": "Titolo del pulsante per spostare gli elementi selezionati in Disponibile"
+	},
+	"set_move_chosen": {
+		"message": "Sposta in Scelto",
+		"description": "Titolo del pulsante per spostare gli elementi selezionati in Scelto"
+	},
+	"set_org_preview": {
+		"message": "Anteprima Org",
+		"description": "Etichetta per anteporre l'aspetto dei Tab specifici dell'organizzazione"
+	},
+	"set_org_styler": {
+		"message": "Stilista Org",
+		"description": "Etichetta per configurare lo stile dei Tab specifici dell'organizzazione"
+	},
+	"set_tab_generic_background_active_label": {
+		"message": "Inserisci il colore di sfondo per le tue Tab generiche attive.",
+		"description": "Etichetta per impostare il colore di sfondo per le Tab generiche attive"
+	},
+	"set_tab_generic_background_label": {
+		"message": "Inserisci il colore di sfondo per le tue Tab generiche.",
+		"description": "Etichetta per impostare il colore di sfondo per le Tab generiche"
+	},
+	"set_tab_generic_border_color_active_label": {
+		"message": "Inserisci il colore del bordo per le tue Tab generiche attive.",
+		"description": "Etichetta per impostare il colore del bordo per le Tab generiche attive"
+	},
+	"set_tab_generic_border_color_label": {
+		"message": "Inserisci il colore del bordo per le tue Tab generiche.",
+		"description": "Etichetta per impostare il colore del bordo per le Tab generiche"
+	},
+	"set_tab_generic_color_active_label": {
+		"message": "Inserisci il colore del testo per le tue Tab generiche attive.",
+		"description": "Etichetta per impostare il colore del testo per le Tab generiche attive"
+	},
+	"set_tab_generic_color_label": {
+		"message": "Inserisci il colore del testo per le tue Tab generiche.",
+		"description": "Etichetta per impostare il colore del testo per le Tab generiche"
+	},
+	"set_tab_generic_decoration_active_label": {
+		"message": "Scegli uno o più stili di decorazione per le tue Tab generiche attive.",
+		"description": "Richiesta per selezionare gli stili di decorazione per le Tab generiche attive"
+	},
+	"set_tab_generic_decoration_label": {
+		"message": "Scegli uno o più stili di decorazione per le tue Tab generiche.",
+		"description": "Richiesta per selezionare gli stili di decorazione per le Tab generiche"
+	},
+	"set_tab_generic_hover_background_active_label": {
+		"message": "Inserisci il colore di sfondo al passaggio del mouse (hover) per le tue Tab generiche attive.",
+		"description": "Etichetta per impostare il colore di sfondo al passaggio del mouse (hover) per le Tab generiche attive"
+	},
+	"set_tab_generic_hover_background_label": {
+		"message": "Inserisci il colore di sfondo al passaggio del mouse (hover) per le tue Tab generiche.",
+		"description": "Etichetta per impostare il colore di sfondo al passaggio del mouse (hover) per le Tab generiche"
+	},
+	"set_tab_generic_shadow_active_label": {
+		"message": "Inserisci il colore dell'ombra per le tue Tab generiche attive.",
+		"description": "Etichetta per impostare il colore dell'ombra per le Tab generiche attive"
+	},
+	"set_tab_generic_shadow_label": {
+		"message": "Inserisci il colore dell'ombra per le tue Tab generiche.",
+		"description": "Etichetta per impostare il colore dell'ombra per le Tab generiche"
+	},
+	"set_tab_generic_top_active_label": {
+		"message": "Inserisci il colore per la barra nella parte superiore delle tue Tab generiche attive.",
+		"description": "Etichetta per impostare il colore della barra superiore per le Tab generiche attive"
+	},
+	"set_tab_org_background_active_label": {
+		"message": "Inserisci il colore di sfondo per le tue Tab org attive.",
+		"description": "Etichetta per impostare il colore di sfondo per le Tab org attive"
+	},
+	"set_tab_org_background_label": {
+		"message": "Inserisci il colore di sfondo per le tue Tab org.",
+		"description": "Etichetta per impostare il colore di sfondo per le Tab specifiche dell'organizzazione (org-specific)"
+	},
+	"set_tab_org_border_color_active_label": {
+		"message": "Inserisci il colore del bordo per le tue Tab org attive.",
+		"description": "Etichetta per impostare il colore del bordo per le Tab attive specifiche dell'organizzazione (org-specific)"
+	},
+	"set_tab_org_border_color_label": {
+		"message": "Inserisci il colore del bordo per le tue Tab org.",
+		"description": "Etichetta per impostare il colore del bordo per le Tab org"
+	},
+	"set_tab_org_color_active_label": {
+		"message": "Inserisci il colore del testo per le tue Tab org attive.",
+		"description": "Etichetta per impostare il colore del testo per le Tab org attive"
+	},
+	"set_tab_org_color_label": {
+		"message": "Inserisci il colore del testo per le tue Tab org.",
+		"description": "Etichetta per impostare il colore del testo per le Tab specifiche dell'organizzazione (org-specific)"
+	},
+	"set_tab_org_decoration_active_label": {
+		"message": "Scegli uno o più stili di decorazione per le tue Tab org attive.",
+		"description": "Richiesta per selezionare gli stili di decorazione per le Tab attive specifiche dell'organizzazione (org-specific)"
+	},
+	"set_tab_org_decoration_label": {
+		"message": "Scegli uno o più stili di decorazione per le tue Tab org.",
+		"description": "Richiesta per selezionare gli stili di decorazione per le Tab org"
+	},
+	"set_tab_org_hover_background_active_label": {
+		"message": "Inserisci il colore di sfondo al passaggio del mouse (hover) per le tue Tab org attive.",
+		"description": "Etichetta per impostare il colore di sfondo al passaggio del mouse (hover) per le Tab org attive"
+	},
+	"set_tab_org_hover_background_label": {
+		"message": "Inserisci il colore di sfondo al passaggio del mouse (hover) per le tue Tab org.",
+		"description": "Etichetta per impostare il colore di sfondo al passaggio del mouse (hover) per le Tab specifiche dell'organizzazione (org-specific)"
+	},
+	"set_tab_org_shadow_active_label": {
+		"message": "Inserisci il colore dell'ombra per le tue Tab org attive.",
+		"description": "Etichetta per impostare il colore dell'ombra per le Tab attive specifiche dell'organizzazione (org-specific)"
+	},
+	"set_tab_org_shadow_label": {
+		"message": "Inserisci il colore dell'ombra per le tue Tab org.",
+		"description": "Etichetta per impostare il colore dell'ombra per le Tab org"
+	},
+	"set_tab_org_top_active_label": {
+		"message": "Inserisci il colore per la barra nella parte superiore delle tue Tab org attive.",
+		"description": "Etichetta per impostare il colore della barra superiore per le Tab org attive"
+	},
+	"set_toggle_preview": {
+		"message": "Fai clic per alternare lo stato attivo.",
+		"description": "Testo del suggerimento strumenti per il controllo di alternanza dello stato attivo"
+	},
+	"settings": {
+		"message": "Impostazioni",
+		"description": "Etichetta per il menu delle impostazioni"
+	},
+	"setup_page": {
+		"message": "Pagina di Setup",
+		"description": "[notSalesforceSetup] la pagina usata per modificare le impostazioni di Salesforce"
+	},
+	"skip": {
+		"message": "Salta",
+		"description": "[req_permission] pulsante per NON concedere le autorizzazioni"
+	},
+	"successfully_imported": {
+		"message": "Importato con successo",
+		"description": "[toast] l'utente ha aggiunto Tab da un file esterno"
+	},
+	"tab_explain": {
+		"message": "Ogni elemento deve avere 'label' e 'url' come stringhe. Inoltre, ogni elemento può avere anche un 'org' come stringa.",
+		"description": "[error] spiega come deve essere costruita una Tab"
+	},
+	"tab_information": {
+		"message": "Informazioni Tab",
+		"description": "titolo per il modal di aggiornamento Tab"
+	},
+	"tab_label": {
+		"message": "Etichetta Tab",
+		"description": "[popup] intestazione della colonna per il nome della Tab"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "la proprietà Org della Tab, se è per una singola organizzazione Salesforce"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "[popop] intestazione della colonna per l'URL della Tab"
+	},
+	"table_delete": {
+		"message": "Elimina Tab",
+		"description": "[popup] testo di supporto per la colonna con il pulsante di eliminazione"
+	},
+	"table_org": {
+		"message": "È Tab Org",
+		"description": "[popup] testo di supporto per la colonna con la casella di controllo Org"
+	},
+	"table_row_label": {
+		"message": "Inserisci l'etichetta per questo URL",
+		"description": "[popup] campo di inserimento con il nome della Tab"
+	},
+	"table_row_org": {
+		"message": "Clicca se vuoi che questa Tab sia disponibile solo per questo Org.",
+		"description": "[popup] casella di controllo per rendere la Tab specifica per l'Org"
+	},
+	"table_row_org_name": {
+		"message": "L'Org per cui questa Tab è disponibile.",
+		"description": "[popup] campo di inserimento con il nome dell'Org"
+	},
+	"table_row_url": {
+		"message": "Inserisci il sub_URL dove desideri essere reindirizzato.",
+		"description": "[popup] campo di inserimento con l'URL della Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "i link preferiti dell'utente"
+	},
+	"tabs_saved": {
+		"message": "Tab salvate.",
+		"description": "[toast] le Tab sono state salvate con successo."
+	},
+	"theme_dark": {
+		"message": "Cambia Tema in Scuro",
+		"description": "[popup] titolo sulla luna per cambiare tema"
+	},
+	"theme_light": {
+		"message": "Cambia Tema in Chiaro",
+		"description": "[popup] titolo sul sole per cambiare tema"
+	},
+	"underline": {
+		"message": "Sottolinea",
+		"description": "Opzione di stile decorativo per sottolineare il testo della Tab"
+	},
+	"underline_wavy": {
+		"message": "Sottolineatura ondulata",
+		"description": "Opzione di stile decorativo per applicare una sottolineatura ondulata al testo della Tab"
+	},
+	"update_available": {
+		"message": "Aggiornamento disponibile",
+		"description": "è disponibile un nuovo aggiornamento per l'estensione"
+	},
+	"upload": {
+		"message": "Carica",
+		"description": "[import] permetti all'utente di cercare tra i propri file e scegliere quello giusto"
+	},
+	"users": {
+		"message": "Utenti",
+		"description": "Il nome della pagina corrata a ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Dove?",
+		"description": "[open-other-org-modal] titolo di riserva per il modal"
+	},
+	"write_review": {
+		"message": "Scrivi una recensione!",
+		"description": "[popup] titolo per svg per richiedere la scrittura di una recensione"
+	}
+}

@@ -1,7 +1,4 @@
-import {
-	assert,
-	assertRejects,
-} from "https://deno.land/std/testing/asserts.ts";
+import { assert, assertRejects } from "@std/testing/asserts";
 
 import {
 	bg_getCurrentBrowserTab,
