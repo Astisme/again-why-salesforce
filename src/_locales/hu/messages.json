@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Engedélyez",
+		"description": "[req_permission] gomb, hogy engedélyeket adjon"
+	},
+	"ascending": {
+		"message": "Növekvő (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Elérhető",
+		"description": "Szakaszfejléc a hozzáadható elemekhez"
+	},
+	"bold": {
+		"message": "Félkövér",
+		"description": "Betűstílus opció félkövér szöveghez"
+	},
+	"cancel": {
+		"message": "Mégsem",
+		"description": "cím vagy szöveg azokhoz a gombokhoz, amelyek megakadályozzák a jelenlegi művelet végrehajtását"
+	},
+	"cancel_close": {
+		"message": "Mégsem és bezár",
+		"description": "cím vagy szöveg azokhoz a gombokhoz, amelyek bezárják a modális ablakokat"
+	},
+	"chosen": {
+		"message": "Kiválasztott",
+		"description": "Szakaszfejléc a kiválasztott elemekhez"
+	},
+	"cmd_export_all": {
+		"message": "Mutasd a párbeszédet az összes mentett Tab exportálásához",
+		"description": "[command description] a felhasználó az összes Tab exportálását kéri"
+	},
+	"cmd_import": {
+		"message": "Mutasd a párbeszédet új Tab-ek importálásához",
+		"description": "[command description] a felhasználó új Tab-ek importálását kéri"
+	},
+	"cmd_open_other_org": {
+		"message": "Mutasd a párbeszédet az aktuális oldal másik Org-ban való megnyitásához",
+		"description": "[command description] a felhasználó az aktuális oldal másik Org-ban való megnyitását kéri"
+	},
+	"cmd_remove_tab": {
+		"message": "Távolítsd el az aktuális oldalt a Tab-listából (ha el van mentve)",
+		"description": "[command description] a felhasználó az aktuális oldal eltávolítását kéri"
+	},
+	"cmd_save_as_tab": {
+		"message": "Mentsd el az aktuális oldalt a Tab-listára (ha még nincs elmentve)",
+		"description": "[command description] a felhasználó az aktuális oldal elmentését kéri"
+	},
+	"cmd_toggle_org": {
+		"message": "Mutasd a párbeszédet az aktuális oldal Org értékének váltásához (ha el van mentve)",
+		"description": "[command description] a felhasználó az aktuális oldal Org értékének váltását kéri"
+	},
+	"cmd_update_tab": {
+		"message": "Mutasd a párbeszédet az aktuális oldal frissítéséhez (ha el van mentve)",
+		"description": "[command description] a felhasználó az aktuális oldal frissítését kéri"
+	},
+	"confirm_another_org": {
+		"message": "Erősítse meg ennek a linknek a megnyitását.",
+		"description": "[open-other-org-modal] felhasználói megerősítés kérése a generált link megnyitásához."
+	},
+	"confirm_update_extension": {
+		"message": "A(z) $extension_label új verziója már elérhető!",
+		"description": "ismeretlen üzenet érkezett egy figyelőtől"
+	},
+	"continue": {
+		"message": "Folytatás",
+		"description": "szöveg azokhoz a gombokhoz, melyek lehetővé teszik a jelenlegi művelet végrehajtását"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Minden általános Tab",
+		"description": "[helyi menü]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Minden Tab eltávolítása",
+		"description": "[helyi menü]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Minden látható Tab",
+		"description": "[helyi menü]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabok exportálása",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[helyi-menü]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab mozgatása",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Elsővé tesz",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Utolsóvá tesz",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Balra mozgat",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Jobbra mozgat",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Megnyitás másik Szervezetben",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[helyi-menü]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[helyi-menü]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(ok) eltávolítása",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Bal oldali Tabok",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Egyéb Tabok",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Jobb oldali Tabok",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Ez a Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Alapértelmezett Tabok visszaállítása",
+		"description": "[helyi menü]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "A beállítások menü címkéje"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tabs-ek rendezése",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy automatikusan rendezzék a Tabs-jeiket (szülő menü)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 címke szerint",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy címke szerint rendezzék a Tabs-jeiket"
+	},
+	"cxm_sort_org": {
+		"message": "👽 szervezet szerint",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy szervezet szerint rendezzék a Tabs-jeiket"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL szerint",
+		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy URL szerint rendezzék a Tabs-jeiket"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab frissítése",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Szervezet váltása",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Egyéb frissítések",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Törlés",
+		"description": "[popup] sor törlése"
+	},
+	"delete_all": {
+		"message": "$delete az összes Tabs",
+		"description": "[felugró-ablak] cím a kukán az összes Tabs kiürítéséhez"
+	},
+	"descending": {
+		"message": "Csökkenő (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] lehetővé teszi a felhasználónak, hogy fájljait a megadott területre húzza"
+	},
+	"enable": {
+		"message": "Engedélyezés",
+		"description": "[engedély_kérése] gomb az engedélyek engedélyezéséhez"
+	},
+	"error_adding_tab": {
+		"message": "Hiba Tab hozzáadásakor.",
+		"description": "[error] Általános hiba Tab hozzáadásakor"
+	},
+	"error_check_update": {
+		"message": "Hiba a frissítések ellenőrzésekor",
+		"description": "[hiba] általános hiba a bővítményfrissítések ellenőrzésekor"
+	},
+	"error_close_other_modal": {
+		"message": "Előbb zárja be a másik ablakot!",
+		"description": "[toast] A felhasználó több modális ablakot próbált megnyitni"
+	},
+	"error_cxm_check": {
+		"message": "Hiba a menüpontok ellenőrzésekor",
+		"description": "[error] a kontextusmenü elemei nem találhatók"
+	},
+	"error_cxm_create": {
+		"message": "Hiba a menüpontok létrehozásakor",
+		"description": "[error] a kontextusmenü elemei nem inicializálhatók"
+	},
+	"error_cxm_remove": {
+		"message": "Hiba a menüpontok eltávolításakor",
+		"description": "[error] a kontextusmenü elemei nem törölhetők"
+	},
+	"error_duplicate_tab": {
+		"message": "Ez a Tab már létezik",
+		"description": "[error] a Tab duplikált"
+	},
+	"error_expand_url": {
+		"message": "Üres URL-t nem lehet kibővíteni!",
+		"description": "[error] nincs megadva a kibővítendő URL"
+	},
+	"error_expand_url_no_base": {
+		"message": "URL-t host nélkül nem lehet kibővíteni!",
+		"description": "[error] nincs megadva az alap URL a kibővítéshez"
+	},
+	"error_extract_empty_url": {
+		"message": "Üres URL-ből nem lehet kivonni a szervezet nevét!",
+		"description": "[error] nincs megadva az URL, amiből a szervezet neve kivonható"
+	},
+	"error_failed_sync": {
+		"message": "Szinkronizálás sikertelen.",
+		"description": "[error] Általános hiba a Tab-ek felhasználóval való szinkronizálásakor"
+	},
+	"error_failed_to_fetch": {
+		"message": "Külső erőforrások lekérése sikertelen",
+		"description": "[hiba] A külső webhelyre irányuló hívás nem sikerült"
+	},
+	"error_get_with_no_org": {
+		"message": "Tabokat nem lehet lekérni, ha a szervezet nincs megadva.",
+		"description": "[error] próbálták a Tab keresését szervezet nélkül"
+	},
+	"error_import": {
+		"message": "Hiba az importálás során:\n",
+		"description": "[error] hiba történt az import folyamat során"
+	},
+	"error_invalid_key": {
+		"message": "A függvénynek átadott kulcsparaméter érvénytelen",
+		"description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt érvénytelen paraméterrel"
+	},
+	"error_invalid_request": {
+		"message": "Érvénytelen kérés.",
+		"description": "[error] Általános hiba helytelen formátumú üzenet fogadása után"
+	},
+	"error_invalid_tab": {
+		"message": "Érvénytelen Tab",
+		"description": "[error] a Tab nem érvényes"
+	},
+	"error_link_with_id": {
+		"message": "Ez az oldal nem létezhet másik szervezetben, mert tartalmaz egy Azonosítót!",
+		"description": "[open-other-org-modal] figyelmeztetés, hogy a link nem létezhet más szervezetben"
+	},
+	"error_many_matching_tab": {
+		"message": "Több mint 1 egyező Tab található.",
+		"description": "[error] több Tab-ot talált"
+	},
+	"error_many_tabs_found": {
+		"message": "Több mint egy Tab található.",
+		"description": "[error] Több Tab került lekérésre"
+	},
+	"error_minify_url": {
+		"message": "Üres URL-t nem lehet lerövidíteni!",
+		"description": "[error] nincs megadva az URL a lerövidítéshez"
+	},
+	"error_missing_favourite_id": {
+		"message": "Kedvenc kép azonosító nélkül nem érhető el",
+		"description": "[error] nem lett megadva a kedvenc kép azonosítója"
+	},
+	"error_missing_key": {
+		"message": "Kulcs sehol sem található",
+		"description": "[error] nincs fordítás azonosítva a fájlokban"
+	},
+	"error_no_array": {
+		"message": "Érvénytelen vagy hiányzó tömb",
+		"description": "[error] érvénytelen tömb került megadásra"
+	},
+	"error_no_browser_tab": {
+		"message": "Nem található aktív böngésző lap.",
+		"description": "[error] a háttéroldal nem tudta meghatározni az aktív böngésző lapot"
+	},
+	"error_no_callback": {
+		"message": "Kérem, adjon meg egy callback függvényt",
+		"description": "[error] a metódus végén meghívandó függvény nem lett megadva"
+	},
+	"error_no_cookies": {
+		"message": "Nem találhatók megfelelő cookie-k",
+		"description": "[error] a Salesforce cookie-k nem kerültek visszaadásra"
+	},
+	"error_no_data": {
+		"message": "Nincs adat a Tab azonosításához.",
+		"description": "[error] próbáltak Tabot lekérni adatok nélkül"
+	},
+	"error_no_headers": {
+		"message": "Fejléc nem található.",
+		"description": "[error] a kiterjesztés nem találta, hova helyezze a kedvenc gombot"
+	},
+	"error_no_matching_tab": {
+		"message": "Nem található egyező Tab.",
+		"description": "[error] nem érkezett vissza egyező Tab"
+	},
+	"error_no_message": {
+		"message": "Nincs megadva üzenet elküldésre.",
+		"description": "[error] nem talált üzenetet a kód egyéb részeinek elküldésére"
+	},
+	"error_no_object": {
+		"message": "Nincs megadva objektum az ellenőrzéshez!",
+		"description": "[error] nem lett megadva az ellenőrizendő objektum"
+	},
+	"error_no_setup_tab": {
+		"message": "A Setup Tab nem található.",
+		"description": "[error] a kiterjesztés nem tudta meghatározni, hova helyezze a kedvenc Tabokat"
+	},
+	"error_no_url": {
+		"message": "Nincs URL megadva az ellenőrzéshez!",
+		"description": "[error] nincs megadva az ellenőrizendő URL"
+	},
+	"error_not_initialized": {
+		"message": "Még nincs inicializálva.",
+		"description": "[error] Általános hiba, ha egy változó nem készült el"
+	},
+	"error_processing_tabs": {
+		"message": "Hiba a Tab-ek feldolgozásakor.",
+		"description": "[error] Általános hiba a Tab-ek feldolgozásakor"
+	},
+	"error_redirect": {
+		"message": "Átirányítás nem lehetséges. Kérlek, frissítsd az oldalt.",
+		"description": "[error] Általános hiba az oldal átirányításakor"
+	},
+	"error_remove_not_favourite": {
+		"message": "Nem távolítható el egy nem kedvenc Tab!",
+		"description": "[error] a felhasználó nem mentett Tabot próbált meg eltávolítani"
+	},
+	"error_removing_all_tabs": {
+		"message": "Hiba az összes Tab eltávolításakor.",
+		"description": "[error] Általános hiba az összes Tab eltávolításakor"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Hiba az általános Tab-ek eltávolításakor.",
+		"description": "[error] Általános hiba az általános Tab-ek eltávolításakor"
+	},
+	"error_removing_other_tabs": {
+		"message": "Hiba más Tab-ek eltávolításakor.",
+		"description": "[error] Általános hiba más Tab-ek eltávolításakor"
+	},
+	"error_removing_tab": {
+		"message": "Hiba Tab eltávolításakor.",
+		"description": "[error] Általános hiba Tab eltávolításakor"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Hiba történt az összes látható Tab eltávolításakor.",
+		"description": "[hiba] Általános hiba az összes látható Tab eltávolításakor"
+	},
+	"error_required_params": {
+		"message": "A függvényhez szükséges paraméterek nem lettek átadva",
+		"description": "[hiba] a fejlesztő megpróbált meghívni egy függvényt a szükséges paraméterek nélkül"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Hiba történt az alapértelmezett Tabok visszaállításakor.",
+		"description": "[hiba] Általános hiba a Tabok alapértelmezett értékekre való visszaállításakor"
+	},
+	"error_sorting_tabs": {
+		"message": "Hiba a Tabs-ek rendezésekor",
+		"description": "[error] egy felugró üzenetben jelenik meg"
+	},
+	"error_sync_nothing": {
+		"message": "Üres Tabokat nem lehet szinkronizálni!",
+		"description": "[error] üres Tabok szinkronizálása kísérlet történt"
+	},
+	"error_tab_constructor": {
+		"message": "Használd a Tab.create() metódust a new Tab() helyett",
+		"description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a Tab osztályt"
+	},
+	"error_tab_label": {
+		"message": "A címke nem lehet üres karakterlánc",
+		"description": "[error] a felhasználó üres címkével próbált Tabot létrehozni"
+	},
+	"error_tab_not_found": {
+		"message": "A Tab nem található.",
+		"description": "[error] a Tab nem szerepel a tömbben"
+	},
+	"error_tab_object_creation": {
+		"message": "Objektum használata esetén ne adjon meg semmi mást.",
+		"description": "[error] fejlesztői hibából adódó implementációs hiba"
+	},
+	"error_tab_org": {
+		"message": "A szervezetnek karakterláncnak vagy undefined-nek kell lennie",
+		"description": "[error] a felhasználó érvénytelen szervezet értékkel próbált Tabot létrehozni"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Váratlan kulcsok találhatók:",
+		"description": "[error] a felhasználó nem támogatott tulajdonságokkal próbált Tabot létrehozni"
+	},
+	"error_tab_url": {
+		"message": "Az URL-nek nem lehet üres karakterlánc",
+		"description": "[error] a felhasználó üres url-lel próbált Tabot létrehozni"
+	},
+	"error_tab_url_saved": {
+		"message": "Ezzel az URL-lel rendelkező Tab már el van mentve!",
+		"description": "[error] A felhasználó már elmentett Tab mentésével próbálkozott"
+	},
+	"error_tabcont_initialize": {
+		"message": "Nem lehet inicializálni a következővel",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Érvénytelen Tab(ok) találhatók.\nElső előfordulás:",
+		"description": "[error] érvénytelen Tabok kerültek megadásra"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Használd a TabContainer.create() metódust a new TabContainer() helyett",
+		"description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a TabContainer osztályt"
+	},
+	"error_translationservice_constructor": {
+		"message": "Használd a TranslationService.create() metódust a new TranslationService() helyett",
+		"description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a TranslationService osztályt"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator még nincs inicializálva.",
+		"description": "[error] A TranslationService még nem volt készen"
+	},
+	"error_unknown_message": {
+		"message": "Ismeretlen üzenet érkezett",
+		"description": "ismeretlen üzenet érkezett egy hallgatótól"
+	},
+	"error_unknown_request": {
+		"message": "Ismeretlen kérés.",
+		"description": "[error] Általános hiba ismeretlen üzenet fogadása után"
+	},
+	"error_useless_remove": {
+		"message": "Nem lehet eltávolítani:\nNem lehet eltávolítani egy korábban nem mentett oldalt",
+		"description": "[error] a felhasználó olyan oldalt próbált meg eltávolítani, amelyet még nem mentett"
+	},
+	"error_useless_save": {
+		"message": "Nem lehet elmenteni:\nEz az oldal már el lett mentve!",
+		"description": "[error] a felhasználó már mentett oldalt próbált meg újra elmenteni"
+	},
+	"export": {
+		"message": "Exportálás",
+		"description": "[popup] export gomb"
+	},
+	"export_title": {
+		"message": "Összes Tab exportálása",
+		"description": "[popup] export gomb cím"
+	},
+	"extension_description": {
+		"message": "Egyéni Tabok létrehozása és kezelése a Salesforce Lightning Setup oldalán rendelkezésre álló területen.",
+		"description": "[manifest] Az ezen kiterjesztés leírása"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Ennek a kiterjesztésnek a neve"
+	},
+	"file": {
+		"message": "fájl",
+		"description": "egyetlen fájl"
+	},
+	"files": {
+		"message": "fájlok",
+		"description": "több fájl"
+	},
+	"flows": {
+		"message": "Folyamatok",
+		"description": "[alapértelmezett-tab] Az alapértelmezett Folyamatok Tab jelölése"
+	},
+	"general": {
+		"message": "Általános",
+		"description": "Címke az általános beállítások kategóriához"
+	},
+	"help": {
+		"message": "Súgó",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Az új Tabs-eket Org Tabs-ként jelöli meg, így csak akkor láthatók, ha be van jelentkezve abba a adott Salesforce-szervezetbe.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Az újonnan kedvenc Tabs-ek a beállítási sáv Tab-listájának elejére kerülnek, nem pedig a végére.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon kívül, az automatikusan a Salesforce bejelentkezési oldalára viszi.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon belül, de nem a beállítási oldalon, az automatikusan a Salesforce beállítási oldalára viszi.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Ha engedélyezve van, a Tabs-jei rendezett sorrendben maradnak – címke, URL vagy szervezet szerint; attól függően, hogy mit választ.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Rögzíti a mentett Tabs-jeit a szabványos navigációs menü (Home / Object Manager) elé a beállításokban, nem pedig utána.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Ha engedélyezve van, minden mentett Tab megnyitja a kapcsolódó oldalt egy új Tab-ban.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Elnyomja a kiadási jegyzetek értesítéseinek automatikus megjelenítését a bővítmény frissítése után.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Letiltja a rendszeres frissítési emlékeztető felugró ablakokat, így a bővítmény felhasználói felülete tiszta marad (ha letiltotta a bővítmény automatikus frissítéseit a böngésző beállításaiban).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon kívül, a bejelentkezési oldal az aktuális böngésző Tab-ban nyílik meg.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon belül, de nem a beállítási oldalon, a Salesforce beállítási oldala az aktuális böngésző Tab-ban nyílik meg.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Állítsa be a felhasználói felület nyelvét csak a bővítményhez. Ha valami nem lett lefordítva, helyette az angol verzió lesz használva.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Letiltja az alapvető telemetriagyűjtést. A bővítmény nem fog megjelenni az anonim használati mérőszámokban.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Megkerüli a Lightning Navigation API-t, és teljes oldal újratöltésével nyitja meg a hivatkozásokat, ami gyorsabb lehet egyes szervezetbeállításokban.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Letiltja a bővítmény ellenőrzését, amely ellenőrzi, hogy egy URL-töredék megfelel-e a Salesforce rekord-/objektumazonosítóinak formátumának (amelyet a mentett Tab automatikus Org Tab-ként való beállítására használnak).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Kattintson az adott beállítás dokumentációjához való átirányításhoz!",
+		"description": "[beállítások-segítség] felhívás a cselekvésre, amely lehetővé teszi a felhasználó számára, hogy többet olvasson egy adott beállításról"
+	},
+	"import": {
+		"message": "Importálás",
+		"description": "[popup] import gomb"
+	},
+	"import_duplicate_description": {
+		"message": "A duplikált Tabok figyelmen kívül lesznek hagyva.<br />Két Tab duplikáltnak minősül, ha ugyanaz az URL-je van.",
+		"description": "[import] az importálási folyamat leírása"
+	},
+	"import_invalid_file": {
+		"message": "Érvénytelen fájltípus.\nCsak JSON fájlok támogatottak.",
+		"description": "[error] az importáláshoz használt fájl nem JSON típusú"
+	},
+	"import_successful": {
+		"message": "Sikeresen importálva",
+		"description": "[import] az importálás befejeződött. Ezt követően megjelenik az importált rekordok száma"
+	},
+	"import_tabs": {
+		"message": "Tabok importálása",
+		"description": "[modal-title] az importálási folyamathoz"
+	},
+	"import_title": {
+		"message": "$import_tabs JSON fájlból",
+		"description": "[felugró-ablak] cím az importálás gombon"
+	},
+	"insert_another": {
+		"message": "Másik beszúrása",
+		"description": "[error-open-other-org-modal] üzenet, amikor a felhasználó ugyanazt a szervezetet adja meg"
+	},
+	"insert_another_org": {
+		"message": "A megadott Szervezet a jelenlegi!\nKérem, adjon meg egy másik Szervezetet.",
+		"description": "[error-open-other-org-modal] üzenet, amikor a felhasználó ugyanazt a szervezetet adja meg"
+	},
+	"insert_valid_org": {
+		"message": "Kérem, érvényes Szervezetet adjon meg!",
+		"description": "[error-open-other-org-modal] üzenet, amikor a felhasználó hibás URL-t adott meg"
+	},
+	"italic": {
+		"message": "Dőlt",
+		"description": "Betűstílus opció dőlt szöveghez"
+	},
+	"lightning_navigation": {
+		"message": "Lightning navigáció",
+		"description": "A Salesforce egyedi navigációs technológiája"
+	},
+	"login_to_salesforce": {
+		"message": "Bejelentkezés a Salesforce-ba",
+		"description": "[notSalesforceSetup] felhívás gomb a Salesforce bejelentkezési oldalára való átnyomásra"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "helyettesítő az Update Tab modális ablakhoz"
+	},
+	"no_manifest_github": {
+		"message": "Érvénytelen vagy hiányzó GitHub homepage_url a manifesztben",
+		"description": "A manifeszt homepage_url kulcsa nem használ GitHub linket"
+	},
+	"no_match": {
+		"message": "Nem egyezik semmilyen művelet",
+		"description": "[error] amikor a kapcsoló nem tudja egyeztetni a kért műveletet"
+	},
+	"nss_invalid_url": {
+		"message": "Érvénytelen URL-t észleltünk.",
+		"description": "[nemSalesforceBeállítás] érvénytelen URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Ez nem egy $salesforce_lightning beállítási oldal.",
+		"description": "[notSalesforceSetup] a felhasználó nem Salesforce oldalon van."
+	},
+	"open_here": {
+		"message": "Megnyitás ezen a Tab.",
+		"description": "[open-other-org-modal] választógomb, amellyel a felhasználó ugyanabban a böngésző Tab nyithatja meg"
+	},
+	"open_new_tab": {
+		"message": "Megnyitás új Tab.",
+		"description": "[open-other-org-modal] választógomb, amellyel a felhasználó új böngésző Tab nyithatja meg."
+	},
+	"open_settings": {
+		"message": "Bővítmény beállításainak megnyitása",
+		"description": "[előugró ablak] gomb a beállítások oldalra történő átirányításhoz"
+	},
+	"open_setup": {
+		"message": "Setup megnyitása",
+		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Új Tabs-ek hozzáadása Org Tabs-ként.",
+		"description": "[settings] lehetővé teszi a felhasználó számára, hogy az összes új Tabs-et szervezetspecifikusként adja hozzá"
+	},
+	"opt_add_tabs_front": {
+		"message": "Új Tabs-ek hozzáadása elölre.",
+		"description": "[settings] lehetővé teszi a felhasználó számára, hogy az összes új Tabs-et elölre adja hozzá"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automatikusan nyissa meg a $salesforce_login oldalt, amikor a felugró ablakra kattint, miközben nem Salesforce oldalon van.",
+		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy véletlenszerű webhelyen"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automatikusan nyissa meg a $salesforce_setup oldalt, amikor a felugró ablakra kattint, miközben Salesforce oldalon van.",
+		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy Salesforce webhelyen"
+	},
+	"opt_confirm_save": {
+		"message": "A beállítások mentve!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Alapértelmezett és tartalék)",
+		"description": "Az extension alapértelmezett nyelvi opciója"
+	},
+	"opt_keep_sort": {
+		"message": "Tartsa a Tabs-eket rendezve.",
+		"description": "[setting] lehetővé teszi a felhasználó számára, hogy a Tabs-jeit az egyik kulcsuk szerint rendezve tartsa"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Kedvenc Tabs megtartása a Kezdőlap és az Objektumkezelő bal oldalán.",
+		"description": "Kapcsoló a kedvenc Tabs rögzítéséhez a navigációs sáv bal oldalára"
+	},
+	"opt_link_new_browser": {
+		"message": "Linkek megnyitása mindig új böngészőfülön.",
+		"description": "[beállítás] kedvenc Tab-ra kattintva nyissa meg új fülön"
+	},
+	"opt_no_release_notes": {
+		"message": "Frissítési kiadási megjegyzések ne jelenjenek meg.",
+		"description": "[beállítás] lehetővé teszi a felhasználó számára, hogy megakadályozza a bővítmény frissítés utáni kiadási megjegyzéseinek megjelenítését"
+	},
+	"opt_no_update_notification": {
+		"message": "Ne figyelmeztessen az elérhető frissítésekre.",
+		"description": "[beállítás] lehetővé teszi a felhasználó számára, hogy megakadályozza a bővítményt az új kiadások keresésében"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Mindig nyissa meg a $salesforce_login oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
+		"description": "[beállítás]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Mindig nyissa meg a $salesforce_setup oldalt ugyanazon a Tab, amikor a felugró ablakra kattint.",
+		"description": "[beállítás]"
+	},
+	"opt_pick_language": {
+		"message": "Válassza ki az extension nyelvét",
+		"description": "[beállítás] címke, amely arra kéri a felhasználót, hogy válassza ki a kívánt nyelvet"
+	},
+	"opt_pick_sort": {
+		"message": "Válassza ki, melyik mező szerint legyenek rendezve a Tabs-ek",
+		"description": "[setting] most a felhasználó választhatja ki, hogy melyik kulcs szerint maradjanak rendezve a Tabs-ek"
+	},
+	"opt_prevent_analytics": {
+		"message": "Egyszerű elemzések használatának megakadályozása (nem jelenik meg a felhasználószámban).",
+		"description": "[beállítás] lehetővé teszi a felhasználónak, hogy megakadályozza az anonim elemzések küldését"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Akadályozza meg a Lightning Navigation használatát (gyorsabb betöltés, ha nincs bejelölve).",
+		"description": "[setting] ne engedélyezze a Lightning Navigation-t a funkció magyarázatával"
+	},
+	"opt_same_tab_popup": {
+		"message": "oldal ugyanazon a fülön a felugró ablak kattintásakor.",
+		"description": "[beállítás] ne nyisson új böngészőfület"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce nyelv követése (Salesforce cookie-k olvasása)",
+		"description": "Lehetőség a Salesforce nyelvi beállításának használatára. Ehhez a felhasználóknak engedélyezniük kell az extension számára a Salesforce cookie-k olvasását."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ID automatikus ellenőrzésének kihagyása.",
+		"description": "[beállítás] kedvenc Tab mentésekor ne ellenőrizze az ID-t"
+	},
+	"or_drop": {
+		"message": "Vagy $drop",
+		"description": "[importálás] engedélyezze a felhasználónak, hogy az egérrel mozgassa a fájlokat, és elengedje őket"
+	},
+	"org_link": {
+		"message": "Szervezet Link",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Másik Szervezet adatai",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "masik-szervezet",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Mentett Tabok felülírása.",
+		"description": "[label] az összes mentett Tab törlése importálás során"
+	},
+	"preserve_org_tabs": {
+		"message": "Tabok megőrzése más szervezetek számára.",
+		"description": "[label] az összes szervezet specifikus Tab megőrzése importálás során"
+	},
+	"remove_tab": {
+		"message": "Tab eltávolítása",
+		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
+	},
+	"req_downloads_open_popup": {
+		"message": "Kérjük, nyissa meg az extension előugró ablakát a böngészője extension menüjéből.",
+		"description": "[értesítés] kérje meg a felhasználót, hogy kattintson az extension előugró ablakára a folytatáshoz"
+	},
+	"req_downloads_perm_header": {
+		"message": "Kérjük, engedélyezze a letöltési engedélyt\na kért exportálás megkezdéséhez.",
+		"description": "[engedély_kérése] felhívás a letöltési engedély engedélyezésére"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ez a művelet csak egyszer lesz kérve.",
+		"description": "[engedély_kérése] leírás a letöltési engedély engedélyezéséhez"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Ne kérdezze újra.",
+		"description": "[req_permission] címke, amikor a felhasználó nem kívánja véglegesen az engedélyt megadni"
+	},
+	"req_permissions_header": {
+		"message": "Kérjük, engedélyezze számunkra a $salesforce_setup oldalak\nautomatikus elérését.",
+		"description": "[req_permission] az engedélykérő oldal fejléce"
+	},
+	"req_permissions_paragraph": {
+		"message": "Ha szeretné, megjelenítheti kedvenc Tabs\namint egy $salesforce_setup oldalra navigál,\nanélkül, hogy minden alkalommal erre a bővítményre kellene kattintania.",
+		"description": "[req_permission] szöveg, amely elmagyarázza, miért kérik az engedélyeket"
+	},
+	"required": {
+		"message": "kötelező",
+		"description": "[input] megjelöl egy kötelező mezőt"
+	},
+	"required_info": {
+		"message": "= Kötelező Információk",
+		"description": "[modal] jelzi a felhasználónak, hogy bizonyos adatok megadása kötelező"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] a Salesforce Lightning platformja"
+	},
+	"salesforce_login": {
+		"message": "Salesforce bejelentkezés",
+		"description": "A Salesforce bejelentkezőoldala (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce beállítás",
+		"description": "Bármely Salesforce beállítási oldal (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Mentés",
+		"description": "Módosítások alkalmazása és tárolása a memóriában"
+	},
+	"save_tab": {
+		"message": "Mentés Tabként",
+		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
+	},
+	"send_tip": {
+		"message": "Küldj nekünk egy tippet ❤️",
+		"description": "[popup] cím svg-hez, hogy küldjön egy tippet"
+	},
+	"set_gen_preview": {
+		"message": "Tab Előnézet",
+		"description": "Címke az általános Tab megjelenésének előnézetéhez"
+	},
+	"set_gen_styler": {
+		"message": "Tab-stílusbeállító",
+		"description": "Címke az általános Tab stílusának konfigurálásához"
+	},
+	"set_general_settings": {
+		"message": "Általános Beállítások",
+		"description": "Szakaszfejléc az általános konfigurációs lehetőségekhez"
+	},
+	"set_move_available": {
+		"message": "Áthelyezés az Elérhetőbe",
+		"description": "Gomb címe a kiválasztott elemek visszajuttatásához az Elérhetőbe"
+	},
+	"set_move_chosen": {
+		"message": "Áthelyezés a Kiválasztottba",
+		"description": "Gomb címe a kiválasztott elemek áthelyezéséhez a Kiválasztottba"
+	},
+	"set_org_preview": {
+		"message": "Szervezet Előnézet",
+		"description": "Címke a szervezet-specifikus Tab megjelenésének előnézetéhez"
+	},
+	"set_org_styler": {
+		"message": "Org-stílusbeállító",
+		"description": "Címke az Org-specifikus Tab stílusának konfigurálásához"
+	},
+	"set_tab_background_active_label": {
+		"message": "Adja meg az aktív általános Tabs háttérszínét.",
+		"description": "Címke az aktív általános Tabs háttérszínének beállításához"
+	},
+	"set_tab_background_label": {
+		"message": "Adja meg a szervezet Tabs háttérszínét.",
+		"description": "Címke a szervezet-specifikus Tabs háttérszínének beállításához"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Adja meg az aktív szervezet Tabs szegélyszínét.",
+		"description": "Címke az aktív szervezet-specifikus Tabs szegélyszínének beállításához"
+	},
+	"set_tab_border_color_label": {
+		"message": "Adja meg az általános Tabs szegélyszínét.",
+		"description": "Címke az általános Tabs szegélyszínének beállításához"
+	},
+	"set_tab_color_active_label": {
+		"message": "Adja meg az aktív általános Tabs szövegszínét.",
+		"description": "Címke az aktív általános Tabs szövegszínének beállításához"
+	},
+	"set_tab_color_label": {
+		"message": "Adja meg a szervezet Tabs szövegszínét.",
+		"description": "Címke a szervezet-specifikus Tabs szövegszínének beállításához"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Válasszon egy vagy több dekorációs stílust az aktív szervezet Tabs számára.",
+		"description": "Felkérés dekorációs stílusok kiválasztására az aktív szervezet-specifikus Tabs számára"
+	},
+	"set_tab_decoration_label": {
+		"message": "Válasszon egy vagy több dekorációs stílust az általános Tabs számára.",
+		"description": "Felkérés dekorációs stílusok kiválasztására az általános Tabs számára"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Adja meg az aktív általános Tabs fölé vitt egérmutató háttérszínét.",
+		"description": "Címke az aktív általános Tabs fölé vitt egérmutató háttérszínének beállításához"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Adja meg a szervezet Tabs fölé vitt egérmutató háttérszínét.",
+		"description": "Címke a szervezet-specifikus Tabs fölé vitt egérmutató háttérszínének beállításához"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Adja meg az aktív szervezet Tabs árnyékszínét.",
+		"description": "Címke az aktív szervezet-specifikus Tabs árnyékszínének beállításához"
+	},
+	"set_tab_shadow_label": {
+		"message": "Adja meg az általános Tabs árnyékszínét.",
+		"description": "Címke az általános Tabs árnyékszínének beállításához"
+	},
+	"set_tab_top_active_label": {
+		"message": "Adja meg az aktív általános Tabs tetején lévő sáv színét.",
+		"description": "Címke az aktív általános Tabs felső sáv színének beállításához"
+	},
+	"set_toggle_preview": {
+		"message": "Kattintson az aktív állapot váltásához.",
+		"description": "Eszköztipp szöveg az aktív állapot váltó vezérlőhöz"
+	},
+	"settings": {
+		"message": "Beállítások",
+		"description": "Címke a beállítások menühöz"
+	},
+	"setup_page": {
+		"message": "Setup oldal",
+		"description": "[notSalesforceSetup] a Salesforce beállításait módosító oldal"
+	},
+	"skip": {
+		"message": "Kihagyás",
+		"description": "[req_permission] gomb, amellyel nem ad engedélyt"
+	},
+	"successfully_imported": {
+		"message": "Sikeresen importálva",
+		"description": "[toast] a felhasználó Tabokat adott hozzá egy külső fájlból"
+	},
+	"tab_explain": {
+		"message": "Minden elemnek tartalmaznia kell 'label' és 'url' mezőket karakterlánc formájában. Ezen felül minden elem tartalmazhat egy 'org' mezőt is karakterláncként.",
+		"description": "[error] leírja, hogyan kell felépíteni egy Tabot"
+	},
+	"tab_information": {
+		"message": "Tab információk",
+		"description": "cím az Update Tab modális ablakhoz"
+	},
+	"tab_label": {
+		"message": "Tab Címke",
+		"description": "a Tab Label tulajdonsága, a neve"
+	},
+	"tab_org": {
+		"message": "Tab Szervezet",
+		"description": "a Tab Org tulajdonsága, ha az egy adott Salesforce Szervezethez tartozik"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "a Tab URL tulajdonsága, mely az adott oldalra mutat"
+	},
+	"table_delete": {
+		"message": "Tab törlése",
+		"description": "[popup] segédszöveg a törlés gombos oszlophoz"
+	},
+	"table_org": {
+		"message": "Szervezet Tab-e",
+		"description": "[popup] segédszöveg a szervezet jelölős mezős oszlophoz"
+	},
+	"table_row_label": {
+		"message": "Adja meg ennek az URL-nek a címkéjét",
+		"description": "[popup] beviteli mező a Tab nevéhez"
+	},
+	"table_row_org": {
+		"message": "Kattintson, ha csak ehhez a Szervezethez szeretné elérhetővé tenni ezt a Tabot.",
+		"description": "[popup] jelölőnégyzet a szervezet-specifikus Tab váltásához"
+	},
+	"table_row_org_name": {
+		"message": "A Szervezet neve, amelyhez ez a Tab tartozik.",
+		"description": "[popup] beviteli mező a szervezet nevéhez"
+	},
+	"table_row_url": {
+		"message": "Adja meg azt a sub_URL-t, ahova át szeretne irányítani.",
+		"description": "[popup] beviteli mező a Tab URL-jéhez"
+	},
+	"tabs": {
+		"message": "Tabok",
+		"description": "a felhasználó kedvenc linkjei"
+	},
+	"tabs_saved": {
+		"message": "A Tabok elmentve.",
+		"description": "[toast] A Tabok sikeresen el lettek mentve."
+	},
+	"theme_dark": {
+		"message": "Téma váltás Sötétre",
+		"description": "[popup] ikon címe a holdon, a téma váltásához"
+	},
+	"theme_light": {
+		"message": "Téma váltás Világosra",
+		"description": "[popup] ikon címe a napon, a téma váltásához"
+	},
+	"underline": {
+		"message": "Aláhúzás",
+		"description": "Dekorációs stílus opció a Tab szöveg aláhúzásához"
+	},
+	"underline_wavy": {
+		"message": "Hullámos Aláhúzás",
+		"description": "Dekorációs stílus opció hullámos aláhúzás alkalmazásához a Tab szövegen"
+	},
+	"update_available": {
+		"message": "Frissítés elérhető",
+		"description": "új frissítés érhető el a bővítményhez"
+	},
+	"upload": {
+		"message": "Feltöltés",
+		"description": "[import] lehetővé teszi a felhasználónak, hogy böngésszen a fájljai között és kiválassza a megfelelőt"
+	},
+	"users": {
+		"message": "Felhasználók",
+		"description": "az oldal neve, amely a ManageUsers/home-hoz tartozik"
+	},
+	"where_to": {
+		"message": "Hová?",
+		"description": "[open-other-org-modal] alternatív cím a modális ablakhoz"
+	},
+	"write_review": {
+		"message": "Írj véleményt!",
+		"description": "[popup] cím svg-hez, hogy vélemény írását kérje"
+	}
+}

@@ -28,7 +28,7 @@ for (const browser of browsers) {
 		});
 		const child = cmd.spawn();
 		// Stream stdout
-		(async () => {
+		{
 			const reader = child.stdout
 				.pipeThrough(new TextDecoderStream())
 				[Symbol.asyncIterator]();
@@ -36,9 +36,9 @@ for (const browser of browsers) {
 			for await (const chunk of reader) {
 				Deno.stdout.write(new TextEncoder().encode(chunk));
 			}
-		})();
+		}
 		// Stream stderr
-		(async () => {
+		{
 			const reader = child.stderr
 				.pipeThrough(new TextDecoderStream())
 				[Symbol.asyncIterator]();
@@ -46,7 +46,7 @@ for (const browser of browsers) {
 			for await (const chunk of reader) {
 				Deno.stderr.write(new TextEncoder().encode(chunk));
 			}
-		})();
+		}
 		const { code } = await child.status;
 		console.log(`Process exited with code ${code}`);
 	} catch (error) {
@@ -56,7 +56,7 @@ for (const browser of browsers) {
 	}
 	const browserVersionName = `awsf-${browser}-v${tagVersion}`;
 	const zipPath = `bin/${browserVersionName}.${
-		browser !== "safari" ? "zip" : "dmg"
+		browser === "safari" ? "dmg" : "zip"
 	}`;
 	if (existsSync(zipPath)) {
 		artifacts.push(zipPath);
@@ -75,9 +75,8 @@ const releaseCommand = [
 	`"${triggeringTag}"`,
 	"--notes-file",
 	`"${releaseNotes}"`,
-	errorHappened ? "--draft" : (
-		prerelease ? "--prerelease" : "--latest"
-	),
+	errorHappened ? "--draft" : "",
+	!errorHappened && prerelease ? "--prerelease" : "--latest",
 	artifacts.join(" "),
 ].filter(Boolean).join(" ");
 try {

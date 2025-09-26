@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "ፍቀድ",
+		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ለመፍቀድ የሚሆን አዝራር"
+	},
+	"ascending": {
+		"message": "ወደ ላይ መውጣት (ሀ-ዠ)",
+		"description": ""
+	},
+	"available": {
+		"message": "ይገኛል",
+		"description": "ሊታካል የሚችሉ ንጥሎች የክፍል ርዕሰ መልዕክት"
+	},
+	"bold": {
+		"message": "ብልጥግና",
+		"description": "ብልጥግና ጽሑፍ የፊደል አወታት አማራጭ"
+	},
+	"cancel": {
+		"message": "ሰርዝ",
+		"description": "የአሁኑን ድርጊት እንዳይፈጸም የሚከለክሉ የአዝራሮች ርዕስ ወይም የጽሑፍ ይዘት"
+	},
+	"cancel_close": {
+		"message": "ሰርዝ እና ዝጋ",
+		"description": "የሞዳል መዝጊያ አዝራር ርዕስ ወይም የጽሑፍ ይዘት"
+	},
+	"chosen": {
+		"message": "ተመርጧል",
+		"description": "ተመርጡ የሆኑ ንጥሎች የክፍል ርዕሰ መልዕክት"
+	},
+	"cmd_export_all": {
+		"message": "የተቀመጡትን ሁሉንም Tabs ለማስወገድ ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ሁሉንም Tabs ለማስወገድ ይፈልጋል"
+	},
+	"cmd_import": {
+		"message": "አዲስ Tabs ለመጫን ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው አዲስ Tabs ለመጫን ይፈልጋል"
+	},
+	"cmd_open_other_org": {
+		"message": "ያሁኑን ገጽ በሌላ Org ለማክፈት ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ በሌላ Org ለመክፈት ይፈልጋል"
+	},
+	"cmd_remove_tab": {
+		"message": "ያሁኑን ገጽ ከTab ዝርዝር ሲሆን ለማስወገድ ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማስወገድ ይፈልጋል"
+	},
+	"cmd_save_as_tab": {
+		"message": "ያሁኑን ገጽ ከTab ዝርዝር ሲሆን ለማስመዝገብ ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማስመዝገብ ይፈልጋል"
+	},
+	"cmd_toggle_org": {
+		"message": "ያሁኑን ገጽ የOrg እሴት ሲቀየር ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ የOrg እሴት ለመቀየር ይፈልጋል"
+	},
+	"cmd_update_tab": {
+		"message": "ተቀመጠ ገጽ ሲሆን ለማዘመን ቁልፍ አሳይ",
+		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማዘመን ይፈልጋል"
+	},
+	"confirm_another_org": {
+		"message": "ይህን ሊንክ መክፈት ያረጋግጡ።",
+		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] የተገነባውን ሊንክ ለመክፈት ከተጠቃሚው ማረጋገጫ ይጠይቁ።"
+	},
+	"confirm_update_extension": {
+		"message": "አዲስ የ $extension_label ስሪት አሁን ይገኛል!",
+		"description": "ያልታወቀ መልዕክት ከተቀባይ ደርሷል"
+	},
+	"continue": {
+		"message": "ቀጥል",
+		"description": "የአሁኑን ድርጊት እንዲፈጸም የሚፈቅዱ የአዝራሮች የጽሑፍ ይዘት"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 ሁሉም አጠቃላይ Tab",
+		"description": "[አውታረ ምናሌ]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 ሁሉንም Tab አስወግድ",
+		"description": "[እንቅስቃሴ ምናሌ]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 ሁሉም የሚታዩ Tab",
+		"description": "[አውታረ ምናሌ]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs ወደ ውጪ ላክ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[የአውድ-ምናሌ]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab አንቀሳቅስ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ መጀመሪያ ላይ አድርግ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ መጨረሻ ላይ አድርግ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_move_left": {
+		"message": "👈 ወደ ግራ አንቀሳቅስ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_move_right": {
+		"message": "👉 ወደ ቀኝ አንቀሳቅስ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 በሌላ ድርጅት ክፈት",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[የአውድ-ምናሌ]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[የአውድ-ምናሌ]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(ዎች) አስወግድ",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 በግራ ያሉ Tabs",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ ሌሎች Tabs",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 በቀኝ ያሉ Tabs",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ ይህ Tab",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 ነባሪ Tab ወደ መነሻ አስጀምር",
+		"description": "[አውታረ ምናሌ]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "ለቅንብሮች ምናሌ መለያ"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tabsን ደርድር",
+		"description": "ተጠቃሚዎች Tabsን በራስ-ሰር እንዲደርድሩ የሚያስችል የአውድ ምናሌ (ዋና ምናሌ)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 በመለያ",
+		"description": "ተጠቃሚዎች Tabsን በመለያ እንዲደርድሩ የሚያስችል የአውድ ምናሌ"
+	},
+	"cxm_sort_org": {
+		"message": "👽 በOrg",
+		"description": "ተጠቃሚዎች Tabsን በድርጅት እንዲደርድሩ የሚያስችል የአውድ ምናሌ"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 በUrl",
+		"description": "ተጠቃሚዎች Tabsን በዩአርኤል እንዲደርድሩ የሚያስችል የአውድ ምናሌ"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab አዘምን",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_update_org": {
+		"message": "📌 ድርጅት ቀያይር",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 ሌሎች ዝማኔዎች",
+		"description": "[አውድ_ምናሌ]"
+	},
+	"delete": {
+		"message": "ሰርዝ",
+		"description": "[ብቅ_ባይ] ረድፍ ሰርዝ"
+	},
+	"delete_all": {
+		"message": "$delete ሁሉንም Tabs",
+		"description": "[ብቅ-ባይ] ሁሉንም Tabs ባዶ ለማድረግ መጣያ ላይ ያለ ርዕስ"
+	},
+	"descending": {
+		"message": "ወደ ታች መውረድ (ዠ-ሀ)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] ተጠቃሚው ፋይሎቹን ወደ ውስጥ ለማድረግ ያስችላል"
+	},
+	"enable": {
+		"message": "አንቃ",
+		"description": "[ፍቃድ ይጠይቁ] ፍቃዶችን ለማንቃት አዝራር"
+	},
+	"error_adding_tab": {
+		"message": "Tab ሲያክል ስህተት።",
+		"description": "[error] Tab ሲያክሉ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_check_update": {
+		"message": "ማሻሻያዎችን ሲፈተሽ ስህተት ተከስቷል",
+		"description": "[ስህተት] የኤክስቴንሽን ማሻሻያዎችን ሲፈተሽ የተለመደ ስህተት"
+	},
+	"error_close_other_modal": {
+		"message": "እባክዎ መጀመሪያ ሌላውን ሞዳል ዝጋ!",
+		"description": "[ቶስት] ተጠቃሚው ከ1 በላይ ሞዳል ለመክፈት ሞክሯል"
+	},
+	"error_cxm_check": {
+		"message": "የምናሌ ንጥሎችን በማረጋገጥ ላይ ስህተት",
+		"description": "[ስህተት] የአውድ ምናሌ ንጥሎችን ማግኘት አልተቻለም"
+	},
+	"error_cxm_create": {
+		"message": "የምናሌ ንጥሎችን በመፍጠር ላይ ስህተት",
+		"description": "[ስህተት] የአውድ ምናሌ ንጥሎችን ማስጀመር አልተቻለም"
+	},
+	"error_cxm_remove": {
+		"message": "የምናሌ ንጥሎችን በማስወገድ ላይ ስህተት",
+		"description": "[ስህተት] የአውድ ምናሌ ንጥሎችን ማስወገድ አልተቻለም"
+	},
+	"error_duplicate_tab": {
+		"message": "ይህ Tab አስቀድሞ አለ",
+		"description": "[ስህተት] Tab ተደጋግሟል"
+	},
+	"error_expand_url": {
+		"message": "ባዶ URL ማስፋት አይቻልም!",
+		"description": "[ስህተት] የሚስፋፋው URL አልተላለፈም"
+	},
+	"error_expand_url_no_base": {
+		"message": "URLን ያለ አስተናጋጁ ማስፋት አይቻልም!",
+		"description": "[ስህተት] ለማስፋፋት ያገለገለው መሠረታዊ URL አልተላለፈም"
+	},
+	"error_extract_empty_url": {
+		"message": "ከባዶ URL የድርጅት ስም ማውጣት አይቻልም!",
+		"description": "[ስህተት] የድርጅት ስም የሚወጣበት URL አልተላለፈም"
+	},
+	"error_failed_sync": {
+		"message": "ስምርት መዛመድ አልተሳካም።",
+		"description": "[error] ሰብስ በተጠቃሚው ላይ Tabs ሊዛመዱ አልቻሉም"
+	},
+	"error_failed_to_fetch": {
+		"message": "ውጫዊ ምንጮችን ለማምጣት አልተሳካም",
+		"description": "[ስህተት] ወደ ውጫዊ ድህረ ገጽ የተደረገው ጥሪ አልተሳካም"
+	},
+	"error_get_with_no_org": {
+		"message": "ድርጅት ካልተገለጸ Tabs ማግኘት አይቻልም።",
+		"description": "[ስህተት] የድርጅት መረጃ ሳይልክ በድርጅት Tabs ለመፈለግ ሞክሯል"
+	},
+	"error_import": {
+		"message": "በማስመጣት ወቅት ስህተት፦\n",
+		"description": "[ስህተት] በማስመጣት ሂደት ወቅት ስህተት ተከስቷል"
+	},
+	"error_invalid_key": {
+		"message": "ወደ ተግባሩ የተላከው የቁልፍ ፓራሜተር የተሳሳተ ነው",
+		"description": "[ችግር] አባል በልኩል ፓራሜተር ተግባሩን ለመጥለቅ ሞክሮ"
+	},
+	"error_invalid_request": {
+		"message": "የተሳሳተ ትእዛዝ።",
+		"description": "[error] በትክክል ካልተቀበረ መልዕክት የተፈጠረ ስህተት"
+	},
+	"error_invalid_tab": {
+		"message": "ልክ ያልሆነ Tab",
+		"description": "[ስህተት] Tab ልክ ያልሆነ ነው"
+	},
+	"error_link_with_id": {
+		"message": "ይህ ገጽ መለያ (Id) ስላለው በሌላ ድርጅት ውስጥ ሊኖር አይችልም!",
+		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] ሊንኩ በሌላ ድርጅት ውስጥ ላይኖር እንደሚችል ለተጠቃሚው ማስጠንቀቂያ"
+	},
+	"error_many_matching_tab": {
+		"message": "ከ1 በላይ የሚዛመድ Tab ተገኝቷል።",
+		"description": "[ስህተት] ብዙ Tabs ተመልሰዋል"
+	},
+	"error_many_tabs_found": {
+		"message": "ከአንድ በላይ Tab ተገኘ።",
+		"description": "[error] ብዙ Tabs ተመርመሩ"
+	},
+	"error_minify_url": {
+		"message": "ባዶ URL ማሳጠር አይቻልም!",
+		"description": "[ስህተት] የሚቀነሰው URL አልተላለፈም"
+	},
+	"error_missing_favourite_id": {
+		"message": "ያለ መለያ (Id) ተመራጭ ምስል ማግኘት አይቻልም",
+		"description": "[ስህተት] የተመራጭ መለያ (Id) አልተላለፈም"
+	},
+	"error_missing_key": {
+		"message": "ቁልፍ የትም አልተገኘም",
+		"description": "[ስህተት] በፋይሎቹ ውስጥ ምንም ትርጉም አልተገኘም"
+	},
+	"error_no_array": {
+		"message": "ልክ ያልሆነ ድርድር ወይም ምንም ድርድር አልተላለፈም",
+		"description": "[ስህተት] ልክ የሆነ ድርድር አልተቀበለም"
+	},
+	"error_no_browser_tab": {
+		"message": "የአሁኑን የአሳሽ ትር ማግኘት አልተቻለም።",
+		"description": "[ስህተት] የጀርባ ገጽ ንቁ የአሳሽ ትር መመስረት አልቻለም"
+	},
+	"error_no_callback": {
+		"message": "እባክዎ መልሶ ጥሪ (callback) ያቅርቡ",
+		"description": "[ስህተት] በዘዴው መጨረሻ ላይ የሚጠራው ተግባር አልተላለፈም"
+	},
+	"error_no_cookies": {
+		"message": "የሚዛመዱ ኩኪዎች አልተገኙም",
+		"description": "[ስህተት] የ Salesforce ኩኪዎች አልተመለሱም"
+	},
+	"error_no_data": {
+		"message": "ያለ ውሂብ Tabን መለየት አይቻልም።",
+		"description": "[ስህተት] ውሂብ ሳይልክ Tab ለማግኘት ሞክሯል"
+	},
+	"error_no_headers": {
+		"message": "ራስጌዎችን ማግኘት አልተሳካም።",
+		"description": "[ስህተት] ቅጥያው ተመራጭ አዝራሩን የት እንደሚያስቀምጥ ማግኘት አልቻለም"
+	},
+	"error_no_matching_tab": {
+		"message": "ምንም የሚዛመድ Tabs አልተገኘም።",
+		"description": "[ስህተት] ምንም Tabs አልተመለሱም"
+	},
+	"error_no_message": {
+		"message": "የሚላክ መልእክት አልተገለጸም።",
+		"description": "[ስህተት] ወደ ሌሎች የኮዱ ክፍሎች የሚላክ መልእክት አልተገኘም"
+	},
+	"error_no_object": {
+		"message": "ምንም የሚመረመር ነገር የለም!",
+		"description": "[ስህተት] ነገሩ አልተላለፈም"
+	},
+	"error_no_setup_tab": {
+		"message": "የማዋቀሪያ (Setup) ትርን ማግኘት አልተሳካም።",
+		"description": "[ስህተት] ቅጥያው ተመራጭ Tabs የት እንደሚያስቀምጥ ማግኘት አልቻለም።"
+	},
+	"error_no_url": {
+		"message": "ምንም የሚመረመር URL የለም!",
+		"description": "[ስህተት] የሚመረመረው URL አልተላለፈም"
+	},
+	"error_not_initialized": {
+		"message": "አልተጀመረም።",
+		"description": "[error] ተለዋዋጭ እስካላዘጋጀ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs ሲያቀርብ ስህተት።",
+		"description": "[error] Tabs ሲያቀርቡ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_redirect": {
+		"message": "ማመላለሻ አይቻልም። ወደ ገጹ እባክዎን ዳግም ይጫኑ።",
+		"description": "[error] በገጽ መመላለሻ ላይ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_remove_not_favourite": {
+		"message": "ተመራጭ ያልሆነ Tabን ማስወገድ አይቻልም!",
+		"description": "[ስህተት] ተጠቃሚው ገና ያልተቀመጠ Tabን ለማስወገድ ሞክሯል"
+	},
+	"error_removing_all_tabs": {
+		"message": "ሁሉንም Tabs ሲወገድ ስህተት።",
+		"description": "[error] ሁሉንም Tabs ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Generic Tabs ሲወገድ ስህተት።",
+		"description": "[error] Generic Tabs ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_other_tabs": {
+		"message": "ሌሎች Tabs ሲወገድ ስህተት።",
+		"description": "[error] ሌሎች Tabs ሲወግዱ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_tab": {
+		"message": "Tab ሲወገድ ስህተት።",
+		"description": "[error] Tab ሲወግድ የተፈጠረ አጠቃላይ ስህተት"
+	},
+	"error_removing_visible_tabs": {
+		"message": "ሁሉንም የሚታዩትን Tab ማስወገድ ላይ ስህተት ተፈጥሯል።",
+		"description": "[ስህተት] ሁሉንም የሚታዩትን Tab በማስወገድ ላይ የተነሳ አጠቃላይ ስህተት"
+	},
+	"error_required_params": {
+		"message": "ለተግባሩ የሚፈለጉት ፓራሜተሮች አልተላኩም",
+		"description": "[ችግር] አባል የሚያስፈልጉት ፓራሜተሮች ባይኖሩ ተግባሩን ለመጥለቅ ሞክሮ"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Tab ወደ ነባሪ ማስጀመር ላይ ስህተት ተፈጥሯል።",
+		"description": "[ስህተት] Tab ወደ ነባሪ ማስጀመር ላይ የተነሳ አጠቃላይ ስህተት"
+	},
+	"error_sorting_tabs": {
+		"message": "Tabsን ሲደረድሩ ስህተት ተፈጥሯል",
+		"description": "[error] በቶስት መልዕክት ውስጥ የሚታይ"
+	},
+	"error_sync_nothing": {
+		"message": "ባዶ (null) Tabs ማመሳሰል አይቻልም!",
+		"description": "[ስህተት] ምንም ነገር ለማመሳሰል ሞክሯል"
+	},
+	"error_tab_constructor": {
+		"message": "new Tab() በመጠቀም በተቃራኒ Tab.create() አጠቀም",
+		"description": "[error] የTab ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+	},
+	"error_tab_label": {
+		"message": "መለያ ባዶ ያልሆነ ሕብረቁምፊ መሆን አለበት",
+		"description": "[ስህተት] ተጠቃሚው ያለ መለያ Tab ለመፍጠር ሞክሯል"
+	},
+	"error_tab_not_found": {
+		"message": "Tab አልተገኘም።",
+		"description": "[ስህተት] Tab በድርድሩ ውስጥ አልተካተተም"
+	},
+	"error_tab_object_creation": {
+		"message": "በነገር ሲጠሩ ሌላ ምንም ነገር አያስተላልፉ።",
+		"description": "[ስህተት] በገንቢው የተፈጠረ የአፈጻጸም ስህተት"
+	},
+	"error_tab_org": {
+		"message": "ድርጅት ሕብረቁምፊ ወይም ያልተገለጸ (undefined) መሆን አለበት",
+		"description": "[ስህተት] ተጠቃሚው ልክ ያልሆነ የድርጅት እሴት ያለው Tab ለመፍጠር ሞክሯል"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "ያልተጠበቁ ቁልፎች ተገኝተዋል፦",
+		"description": "[ስህተት] ተጠቃሚው ባልተደገፉ አንዳንድ ባህሪያት Tab ለመፍጠር ሞክሯል"
+	},
+	"error_tab_url": {
+		"message": "URL ባዶ ያልሆነ ሕብረቁምፊ መሆን አለበት",
+		"description": "[ስህተት] ተጠቃሚው ያለ URL Tab ለመፍጠር ሞክሯል"
+	},
+	"error_tab_url_saved": {
+		"message": "በዚህ URL ያለው Tab አስቀድሞ ተቀመጠ።",
+		"description": "[error] ተጠቃሚው አስቀድሞ የተመዘገበውን Tab ለመቆም ሞከረ"
+	},
+	"error_tabcont_initialize": {
+		"message": "በዚህ ማስጀመር አይቻልም፦",
+		"description": "[ስህተት] የTab መያዣ ማስጀመር አልተሳካም"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "ልክ ያልሆነ Tab(ዎች) ተገኝቷል።\nየመጀመሪያ መከሰት፦",
+		"description": "[ስህተት] ልክ ያልሆኑ Tabs ተላልፈዋል"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "new TabContainer() በመጠቀም በተቃራኒ TabContainer.create() አጠቀም",
+		"description": "[error] የTabContainer ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+	},
+	"error_translationservice_constructor": {
+		"message": "new TranslationService() በመጠቀም በተቃራኒ TranslationService.create() አጠቀም",
+		"description": "[error] የTranslationService ክፍል እንዴት እንደሚጠቀሙ ለአነባብሰኛው ያሳውቁ"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator አልተጀመረም።",
+		"description": "[error] የTranslationService መነሻ አልተዘጋጀም"
+	},
+	"error_unknown_message": {
+		"message": "ያልታወቀ መልዕክት ተቀብሏል",
+		"description": "ያልታወቀ መልዕክት ከአድማጭ ተቀብሏል"
+	},
+	"error_unknown_request": {
+		"message": "ያልታወቀ ትእዛዝ።",
+		"description": "[error] እርዳታ ሲጠየቅ ያልታወቀ መልዕክት የተቀበለ ስህተት"
+	},
+	"error_useless_remove": {
+		"message": "ማስወገድ አይቻልም፦\nከዚህ በፊት ያልተቀመጠ ገጽ ማስወገድ አይቻልም",
+		"description": "[ስህተት] ተጠቃሚው ገና ያልተቀመጠ ገጽ ለማስወገድ ሞክሯል"
+	},
+	"error_useless_save": {
+		"message": "ማስቀመጥ አይቻልም፦\nይህ ገጽ አስቀድሞ ተቀምጧል!",
+		"description": "[ስህተት] ተጠቃሚው አስቀድሞ የተቀመጠ ገጽ ለማስቀመጥ ሞክሯል"
+	},
+	"export": {
+		"message": "ወደ ውጪ ላክ",
+		"description": "[ብቅ_ባይ] ወደ ውጪ መላኪያ አዝራር"
+	},
+	"export_title": {
+		"message": "ሁሉንም Tabs ወደ ውጪ ላክ",
+		"description": "[ብቅ_ባይ] ወደ ውጪ መላኪያ አዝራር ላይ ያለ ርዕስ"
+	},
+	"extension_description": {
+		"message": "በ Salesforce Lightning የማዋቀሪያ ገጽ ላይ በሚገኘው ባዶ ቦታ ላይ ብጁ Tabs ይፍጠሩ እና ያስተዳድሩ።",
+		"description": "[ማኒፌስት] የዚህ ቅጥያ መግለጫ"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "የዚህ ቅጥያ ስም"
+	},
+	"file": {
+		"message": "ፋይል",
+		"description": "ነጠላ ፋይል"
+	},
+	"files": {
+		"message": "ፋይሎች",
+		"description": "በርካታ ፋይሎች"
+	},
+	"flows": {
+		"message": "ፍሎዎች",
+		"description": "[ነባሪ-tab] ለነባሪ ፍሎ Tab መለያ"
+	},
+	"general": {
+		"message": "የአጠቃላይ",
+		"description": "የአጠቃላይ ቅንብሮች ምድብ ለመለያ"
+	},
+	"help": {
+		"message": "እገዛ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "አዳዲስ Tabsን እንደ Org Tabs ምልክት ያደርጋል፣ ስለዚህም በዚያ የተወሰነ የSalesforce Org ሲገቡ ብቻ ይታያሉ።",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "በአዲስ የተወዳጅ Tabs በSetup አሞሌ ውስጥ ባለው የ Tab ዝርዝርዎ መጨረሻ ላይ ከመታከል ይልቅ ከፊት ይገባሉ።",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "ከSalesforce ጎራ ውጪ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ በራስ-ሰር ወደ Salesforce መግቢያ ገጽ ይወስድዎታል።",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "በSalesforce ጎራ ውስጥ ነገር ግን በSetup ገጽ ላይ ካልሆኑ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ በራስ-ሰር ወደ Salesforce Setup ገጽ ይወስድዎታል።",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "ሲነቃ፣ የእርስዎ Tabs በመለያ፣ ዩአርኤል ወይም Org በቅደም ተከተል ይቀመጣሉ፤ እርስዎ በሚመርጡት ላይ ተመስርቶ።",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "የተቀመጡትን Tabs በቅንብር ውስጥ ካለው መደበኛ የአሰሳ ምናሌ (መነሻ / የነገር አስተዳዳሪ) በፊት ይሰኩት፣ ከሱ በኋላ አይደለም።",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "ሲነቃ፣ እያንዳንዱ የተቀመጠ Tab ተዛማጅ ገጹን በአዲስ tab ውስጥ ይከፍታል።",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "ቅጥያው ከተዘመነ በኋላ የመልቀቅ ማስታወሻ ማሳወቂያዎችን በራስ-ሰር ማሳየትን ይከለክላል።",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "የቅጥያ በይነገጹን ንፁህ በማድረግ ወቅታዊ የማዘመኛ አስታዋሽ ብቅ-ባዮችን ያሰናክላል (የቅጥያውን በራስ-ሰር ማዘመን ከአሳሽዎ ቅንብሮች ላይ ሲያሰናክሉ)።",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "ከSalesforce ጎራ ውጭ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ የመግቢያ ገጹ አሁን ባለው የሰርፍ Tab ውስጥ ይከፈታል።",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "በSalesforce ጎራ ውስጥ ነገር ግን በSetup ገጽ ላይ ካልሆኑ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ የSalesforce Setup ገጽ አሁን ባለው የሰርፍ Tab ውስጥ ይከፈታል።",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "የቅጥያውን የዩአይ ቋንቋ ብቻ ያቀናብሩ። የሆነ ነገር ካልተተረጎመ፣ የእንግሊዝኛ እትም በምትኩ ጥቅም ላይ ይውላል።",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "መሰረታዊ የመለኪያ መረጃ ስብስብን ያሰናክላል። ቅጥያው በማንነት በሌለባቸው የአጠቃቀም መለኪያዎች ውስጥ አይታይም።",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "የመብረቅ አሰሳ ኤፒአይን ያልፋል እና አገናኞችን ሙሉ ገጽ እንደገና በመጫን ይከፍታል፣ ይህም በአንዳንድ የድርጅት ማዋቀሮች ውስጥ ፈጣን ሊሆን ይችላል።",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "የዩአርኤል ቁርጥራጭ የSalesforce መዝገብ/ነገር መታወቂያዎችን ቅርጸት የሚያሟላ መሆኑን የሚያረጋግጥ የቅጥያውን ማጣሪያ ያሰናክላል (በራስ-ሰር የተቀመጠውን Tab እንደ Org Tab ለማቀናበር ይጠቅማል)።",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "ስለዚህ መቼት ተጨማሪ መረጃ ለማግኘት ጠቅ ያድርጉ!",
+		"description": "[ቅንብሮች-እርዳታ] ተጠቃሚው ስለ አንድ የተወሰነ መቼት የበለጠ እንዲያነብ ለማስቻል የሚደረግ ጥሪ"
+	},
+	"import": {
+		"message": "አስመጣ",
+		"description": "[ብቅ_ባይ] የማስመጫ አዝራር"
+	},
+	"import_duplicate_description": {
+		"message": "ተደጋጋሚ Tabs ችላ ይባላሉ።<br />ሁለት Tabs አንድ አይነት URL ካላቸው እንደ ተደጋጋሚ ይቆጠራሉ።",
+		"description": "[አስመጣ] የማስመጣት ሂደቱ ምን እንደሚሰራ መግለጫ"
+	},
+	"import_invalid_file": {
+		"message": "ልክ ያልሆነ የፋይል አይነት።\nየJSON ፋይሎች ብቻ ነው የሚደገፉት።",
+		"description": "[ስህተት] ለማስመጣት ያገለገለው ፋይል JSON አይደለም"
+	},
+	"import_successful": {
+		"message": "በተሳካ ሁኔታ አስመጥቷል",
+		"description": "[አስመጣ] ማስመጣቱ ተጠናቅቋል። ከዚህ በኋላ ስንት መዝገቦች እንደገቡ ይታያል"
+	},
+	"import_tabs": {
+		"message": "Tabs አስመጣ",
+		"description": "[ሞዳል_ርዕስ] ለማስመጣት ሂደት"
+	},
+	"import_title": {
+		"message": "$import_tabs ከJSON ፋይል",
+		"description": "[ብቅ-ባይ] የማስመጫ ቁልፍ ላይ ያለ ርዕስ"
+	},
+	"insert_another": {
+		"message": "ሌላ አስገባ",
+		"description": "[ስህተት_ሌላ_ድርጅት_ክፈት_ሞዳል] ተጠቃሚው በሞዳሉ ውስጥ ተመሳሳይ ድርጅት ሲያስገባ የሚታይ መልእክት"
+	},
+	"insert_another_org": {
+		"message": "የገባው ድርጅት የአሁኑ ነው!\nእባክዎ ሌላ ድርጅት ያስገቡ።",
+		"description": "[ስህተት_ሌላ_ድርጅት_ክፈት_ሞዳል] ተጠቃሚው በሞዳሉ ውስጥ ተመሳሳይ ድርጅት ሲያስገባ የሚታይ መልእክት"
+	},
+	"insert_valid_org": {
+		"message": "እባክዎ ልክ የሆነ ድርጅት ያስገቡ!",
+		"description": "[ስህተት_ሌላ_ድርጅት_ክፈት_ሞዳል] ተጠቃሚው በሞዳሉ ውስጥ የተሳሳተ URL ሲያስገባ የሚታይ መልእክት"
+	},
+	"italic": {
+		"message": "አንደኛ",
+		"description": "አንደኛ ጽሑፍ የፊደል አወታት አማራጭ"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce የተለመዱ ትንታኔ ቴክኖሎጂ"
+	},
+	"login_to_salesforce": {
+		"message": "ወደ Salesforce ግባ",
+		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce መግቢያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
+	},
+	"mycustomorg": {
+		"message": "የኔብጁድርጅት",
+		"description": "ለ Tab አዘምን ሞዳል ቦታ ያዥ"
+	},
+	"no_manifest_github": {
+		"message": "በማኒፌስት ውስጥ ልክ ያልሆነ ወይም የሌለ የጊትሀብ homepage_url",
+		"description": "የማኒፌስቱ homepage_url ቁልፍ የጊትሀብ ማገናኛን አይጠቀምም"
+	},
+	"no_match": {
+		"message": "ከማንኛውም ድርጊት ጋር አልተዛመደም",
+		"description": "[ስህተት] በ Salesforce ውስጥ መቀየሪያው የተጠየቀውን ድርጊት ማዛመድ በማይችልበት ጊዜ"
+	},
+	"nss_invalid_url": {
+		"message": "ልክ ያልሆነ ዩአርኤል ተገኝቷል።",
+		"description": "[SalesforceSetup አይደለም] ልክ ያልሆነ ዩአርኤል።"
+	},
+	"nss_not_setup_page": {
+		"message": "ይህ የ $salesforce_lightning ማዋቀሪያ ገጽ አይደለም።",
+		"description": "[notSalesforceSetup] ተጠቃሚው በ Salesforce ገጽ ላይ የለም።"
+	},
+	"open_here": {
+		"message": "በዚህ Tab ውስጥ ክፈት።",
+		"description": "[open-other-org-modal] ተጠቃሚው በተመሳሳይ የአሳሽ Tab እንዲከፍት የሚያስችል የሬዲዮ ቁልፍ"
+	},
+	"open_new_tab": {
+		"message": "በአዲስ Tab ውስጥ ክፈት።",
+		"description": "[open-other-org-modal] ተጠቃሚው በአዲስ የአሳሽ Tab እንዲከፍት የሚያስችል የሬዲዮ ቁልፍ።"
+	},
+	"open_settings": {
+		"message": "የቅጥያ ቅንብሮችን ክፈት",
+		"description": "[ብቅ-ባይ] ወደ ቅንብሮች ገጽ የሚያዞር አዝራር"
+	},
+	"open_setup": {
+		"message": "ማዋቀሪያ (Setup) ክፈት",
+		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce የማዋቀሪያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "አዲስ Tabsን እንደ Org Tabs ጨምር።",
+		"description": "[settings] ተጠቃሚው ሁሉንም አዲስ Tabs እንደ ድርጅት-ተኮር እንዲያክሉ ፍቀድ"
+	},
+	"opt_add_tabs_front": {
+		"message": "አዲስ Tabsን ከፊት ጨምር።",
+		"description": "[settings] ተጠቃሚው ሁሉንም አዲስ Tabs ከፊት እንዲያክሉ ፍቀድ"
+	},
+	"opt_automatic_open_login": {
+		"message": "በ Salesforce ገጽ ላይ ባልሆኑበት ጊዜ ብቅ-ባይ ላይ ጠቅ ሲያደርጉ የ $salesforce_login ገጽን በራስ-ሰር ይክፈቱ።",
+		"description": "[ቅንብር] ተጠቃሚው በዘፈቀደ ድር ጣቢያ ላይ እያለ ብቅ-ባይ ሲከፍት"
+	},
+	"opt_automatic_open_setup": {
+		"message": "በ Salesforce ገጽ ላይ በሚሆኑበት ጊዜ ብቅ-ባይ ላይ ጠቅ ሲያደርጉ የ $salesforce_setup ገጽን በራስ-ሰር ይክፈቱ።",
+		"description": "[ቅንብር] ተጠቃሚው በ Salesforce ድር ጣቢያ ላይ እያለ ብቅ-ባይ ሲከፍት"
+	},
+	"opt_confirm_save": {
+		"message": "ቅንብሮች ተቀምጠዋል!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (ነባሪ እና ምትኬ)",
+		"description": "የቅጥያው ነባሪ ቋንቋ አማራጭ"
+	},
+	"opt_keep_sort": {
+		"message": "Tabsን ደርድር።",
+		"description": "[setting] ተጠቃሚው Tabsን በአንድ ቁልፎቻቸው እንዲደርድሩ ፍቀድ"
+	},
+	"opt_keep_tabs_left": {
+		"message": "ተወዳጆቹን Tabs ወደ home እና Object Manager ግራ ይዝሉ።",
+		"description": "በዳሰሳ በትንሽ ትንሽ Tabs ወደ ግራ ማስቀመጫ ቁልፍ"
+	},
+	"opt_link_new_browser": {
+		"message": "መገናኛዎቹን ሁልጊዜ በአዲስ ትርጉም በብራውዘር ትርጉም ክፈት።",
+		"description": "[ቅንብር] ተወዳጅ Tab ላይ ሲጫን በአዲስ ትርጉም ክፈት"
+	},
+	"opt_no_release_notes": {
+		"message": "የእድሳት ማስታወቂያዎችን አታሳይ።",
+		"description": "[ቅንብር] ተጠቃሚውን ከእድሳት በኋላ እንዳይመልከት እንዲከለክል ያስችላል"
+	},
+	"opt_no_update_notification": {
+		"message": "ስለሚገኙ ዝማኔዎች አታስጠንቅቅ።",
+		"description": "[ቅንብር] ተጠቃሚው ቅጥያው አዲስ የተለቀቁትን እንዳይፈልግ ይፍቀዱለት"
+	},
+	"opt_open_login_same_tab": {
+		"message": "ብቅ-ባይ ላይ ጠቅ ሲያደርጉ ሁልጊዜ የ $salesforce_login ገጽን በተመሳሳይ Tab ውስጥ ይክፈቱ።",
+		"description": "[ቅንብር]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ብቅ-ባይ ላይ ጠቅ ሲያደርጉ ሁልጊዜ የ $salesforce_setup ገጽን በተመሳሳይ Tab ውስጥ ይክፈቱ።",
+		"description": "[ቅንብር]"
+	},
+	"opt_pick_language": {
+		"message": "የቅጥያ ቋንቋ ይምረጡ",
+		"description": "[ማስተካከያ] ተጠቃሚው የሚመርጠውን ቋንቋ እንዲመርጥ የሚጠይቅ መለያ"
+	},
+	"opt_pick_sort": {
+		"message": "Tabs መደርደር ያለባቸው በየትኛው መስክ እንደሆነ ምረጥ",
+		"description": "[setting] አሁን ተጠቃሚው Tabs እንዲደረደሩበት የሚፈልጉትን ቁልፍ መምረጥ ይችላል"
+	},
+	"opt_prevent_analytics": {
+		"message": "የSimple Analytics አጠቃቀምን ከማድረግ አውጣ (በተጠቃሚ ብዛት ውስጥ አይቈጠርም)።",
+		"description": "[ቅንብር] ተጠቃሚውን ያልታወቀ ትንተና እንዳይላክ እንዲከለክል ያስችላል"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "የመብረቅ አሰሳን መጠቀም መከላከል (ምልክት ሳይደረግበት ፈጣን ጭነት)።",
+		"description": "[setting] የባህሪው ማብራሪያ ጋር የመብረቅ አሰሳን አለመፍቀድ"
+	},
+	"opt_same_tab_popup": {
+		"message": "ፖፕአፕ ጠቅ ሲደርስ በተመሳሳይ ትርጉም ውስጥ ገፅ ክፈት።",
+		"description": "[ቅንብር] አዲስ ትርጉም ትርጉም አትከፈት"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "የ Salesforce ቋንቋን ተከተል (የ Salesforce ኩኪዎችን ያነባል)",
+		"description": "የ Salesforce ቋንቋ ቅንብርን ለመጠቀም አማራጭ። ይህንን አማራጭ ለመጠቀም ተጠቃሚዎች ቅጥያው የ Salesforce ኩኪዎችን እንዲያነብ መፍቀድ አለባቸው።"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce መለያ   ቁጥጥር  ማድረግን   ተልኮት።",
+		"description": "[ቅንብር] በTab ማስቀመጫ ሲለዋዋጭ መለያ ቦታ አትፈት"
+	},
+	"or_drop": {
+		"message": "ወይም $drop",
+		"description": "[ማስመጣት] ተጠቃሚው ፋይሎችን በመዳፊት እንዲያንቀሳቅስ እና እንዲለቅ ፍቀድለት"
+	},
+	"org_link": {
+		"message": "የድርጅት ሊንክ",
+		"description": "[የግቤት_መለያ]"
+	},
+	"other_org_info": {
+		"message": "የሌላ ድርጅት መረጃ",
+		"description": "[ሞዳል_ርዕስ]"
+	},
+	"other_org_placeholder": {
+		"message": "ሌላ-ድርጅት",
+		"description": "[የግቤት_ቦታ_ያዥ]"
+	},
+	"overwrite_tabs": {
+		"message": "የተቀመጡ Tabs ድገም።",
+		"description": "[መለያ] በማስመጣት ሂደት ወቅት ሁሉንም የተቀመጡ Tabs ሰርዝ"
+	},
+	"preserve_org_tabs": {
+		"message": "ለሌሎች ድርጅቶች Tabs ጠብቅ።",
+		"description": "[መለያ] በማስመጣት ሂደት ወቅት ሁሉንም ለድርጅት-ተኮር የሆኑ Tabs አቆይ"
+	},
+	"remove_tab": {
+		"message": "Tab አስወግድ",
+		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
+	},
+	"req_downloads_open_popup": {
+		"message": "እባክዎ የቅጥያ ብቅ-ባይን ከእርስዎ አሳሽ የቅጥያዎች ምናሌ ይክፈቱ።",
+		"description": "[ማስታወቂያ] ተጠቃሚው ለመቀጠል በቅጥያ ብቅ-ባይ ላይ እንዲጫን ይጠይቁ"
+	},
+	"req_downloads_perm_header": {
+		"message": "እባክዎ የተጠየቀውን ኤክስፖርት ለመጀመር የማውረድ ፍቃድን ያንቁ።",
+		"description": "[ፍቃድ ይጠይቁ] የማውረድ ፍቃድን ለማንቃት ጥሪ"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "ይህ ክወና አንድ ጊዜ ብቻ ይጠየቃል።",
+		"description": "[ፍቃድ ይጠይቁ] የማውረድ ፍቃድ ለማንቃት መግለጫ"
+	},
+	"req_permissions_dont_ask": {
+		"message": "እንደገና አትጠይቅ።",
+		"description": "[ፍቃድ_ጠይቅ] ተጠቃሚው ፍቃዶችን በቋሚነት መፍቀድ በማይፈልግበት ጊዜ የሚታይ መለያ"
+	},
+	"req_permissions_header": {
+		"message": "እባክዎ የ $salesforce_setup ገጾችን\nበራስ-ሰር እንድንደርስ ይፍቀዱልን።",
+		"description": "[req_permission] የፍቃድ መጠየቂያ ገጽ ራስጌ"
+	},
+	"req_permissions_paragraph": {
+		"message": "ከፈለጉ፣ ወደ $salesforce_setup ገጽ በሚሄዱበት ጊዜ ሁሉ\nይህን ቅጥያ ጠቅ ማድረግ ሳያስፈልግዎት\nየሚወዷቸው Tabs እንዲታዩ ማድረግ ይችላሉ።",
+		"description": "[req_permission] ፈቃዶቹ ለምን እንደሚጠየቁ የሚያብራራ ጽሑፍ"
+	},
+	"required": {
+		"message": "ያስፈልጋል",
+		"description": "[ግቤት] የግቤት መስክን እንደ አስገዳጅ ምልክት ያደርጋል"
+	},
+	"required_info": {
+		"message": "= አስፈላጊ መረጃ",
+		"description": "[ሞዳል] አንዳንድ መረጃዎች አስገዳጅ እንደሆኑ ለተጠቃሚው ይነግረዋል"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[SalesforceSetupአይደለም] የ Salesforce Lightning መድረክ"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforce መዝገብ ገፅ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "ማንኛውም Salesforce ቅንብር ገፅ (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "አስቀምጥ",
+		"description": "ለውጦችን ተግብር እና በማስታወሻ ውስጥ አስቀምጣቸው"
+	},
+	"save_tab": {
+		"message": "እንደ Tab አስቀምጥ",
+		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
+	},
+	"send_tip": {
+		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
+		"description": "[popup] ምክር ለመላክ የሚጠይቅ የ svg ርዕስ"
+	},
+	"set_gen_preview": {
+		"message": "Tab ቅድመ እይታ",
+		"description": "የአጠቃላይ Tabs የመልኩን ለመቅድመ እይታ ምድብ"
+	},
+	"set_gen_styler": {
+		"message": "Styler Tab",
+		"description": "የአጠቃላይ Tabs ቅጥር ለመቅናት ምድብ"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "ለአጠቃላይ የቅንብር አማራጮች የክፍል ርዕሰ መልዕክት"
+	},
+	"set_move_available": {
+		"message": "ወደ ይገኛል ይንቀሳቀሱ",
+		"description": "የተመረጡ ንጥሎች ወደ ይገኛል ለማውጣት የቁልፍ ርዕሰ መልዕክት"
+	},
+	"set_move_chosen": {
+		"message": "ወደ ተመርጧል ይንቀሳቀሱ",
+		"description": "የተመረጡ ንጥሎች ወደ ተመርጧል ለማውጣት የቁልፍ ርዕሰ መልዕክት"
+	},
+	"set_org_preview": {
+		"message": "Org ቅድመ እይታ",
+		"description": "የድርጅት  Tabs መልኩን ለመቅድመ እይታ ምድብ"
+	},
+	"set_org_styler": {
+		"message": "Styler Org",
+		"description": "የድርጅት  Tabs ቅጥር ለመቅናት ምድብ"
+	},
+	"set_tab_background_active_label": {
+		"message": "ለእርዳታው ያሉትን በአጠቃላይ Tabs አጽዳቂ ቀለም ያክሉ።",
+		"description": "የአጠቃላይ Tabs በአጠቃላይ በመጠቀም ቀለም ለመተካት ምድብ"
+	},
+	"set_tab_background_label": {
+		"message": "ለድርጅት  Tabs አጽዳቂ ቀለም ያክሉ።",
+		"description": "የድርጅት  Tabs በአጠቃላይ በመጠቀም ቀለም ለመተካት ምድብ"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "ለአገልግሎት በድርጅት  Tabs ያሉትን አገግም ቀለም ያክሉ።",
+		"description": "የሚበልጥ በድርጅት  Tabs የቅጥር ቀለም ለመተካት ምድብ"
+	},
+	"set_tab_border_color_label": {
+		"message": "የአጠቃላይ Tab የድንጋጤ ቀለም አስገባ",
+		"description": "ለአጠቃላይ Tab የድንጋጤ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_color_active_label": {
+		"message": "ለተነሳ አጠቃላይ Tab የጽሑፍ ቀለም አስገባ",
+		"description": "ለተነሳ አጠቃላይ Tab የጽሑፍ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_color_label": {
+		"message": "ለድርጅት-የተለመዱ Tab የጽሑፍ ቀለም አስገባ",
+		"description": "ለድርጅት-የተለመዱ Tab የጽሑፍ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "ለተነሳ ድርጅት-የተለመዱ Tab አንድ ወይም ከዚያ በላይ የአምጣጥ ቅርጾች ይምረጡ",
+		"description": "ለተነሳ ድርጅት-የተለመዱ Tab የአምጣጥ ቅርጾች ለመምረጥ መለያ"
+	},
+	"set_tab_decoration_label": {
+		"message": "ለአጠቃላይ Tab አንድ ወይም ከዚያ በላይ የአምጣጥ ቅርጾች ይምረጡ",
+		"description": "ለአጠቃላይ Tab የአምጣጥ ቅርጾች ለመምረጥ መለያ"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "ለተነሳ አጠቃላይ Tab የሚሸውበት የጀርባ ቀለም አስገባ",
+		"description": "ለተነሳ አጠቃላይ Tab የሚሸውበት የጀርባ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_hover_background_label": {
+		"message": "ለድርጅት-የተለመዱ Tab የሚሸውበት የጀርባ ቀለም አስገባ",
+		"description": "ለድርጅት-የተለመዱ Tab የሚሸውበት የጀርባ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "ለተነሳ ድርጅት-የተለመዱ Tab የጥላ ቀለም አስገባ",
+		"description": "ለተነሳ ድርጅት-የተለመዱ Tab የጥላ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_shadow_label": {
+		"message": "ለአጠቃላይ Tab የጥላ ቀለም አስገባ",
+		"description": "ለአጠቃላይ Tab የጥላ ቀለም ለመያዝ መለያ"
+	},
+	"set_tab_top_active_label": {
+		"message": "ለተነሳ አጠቃላይ Tab በላይ ያለው የመስመር ቀለም አስገባ",
+		"description": "ለተነሳ አጠቃላይ Tab የላይ መስመር ቀለም ለመያዝ መለያ"
+	},
+	"set_toggle_preview": {
+		"message": "Click to toggle active state.",
+		"description": "የሁኔታ በተዘዋዋሪ ሁኔታ መቀየር ለመቆጣጠር ማሳያ ጥቆማ"
+	},
+	"settings": {
+		"message": "ቅንብሮች",
+		"description": "ለቅንብሮች ማውጫ መለያ"
+	},
+	"setup_page": {
+		"message": "የማዋቀሪያ ገጽ",
+		"description": "[SalesforceSetupአይደለም] የ Salesforce ቅንብሮችን ለመቀየር የሚያገለግል ገጽ"
+	},
+	"skip": {
+		"message": "ዝለል",
+		"description": "[ፍቃድ_ጠይቅ] ፍቃዶችን ላለመፍቀድ የሚሆን አዝራር"
+	},
+	"successfully_imported": {
+		"message": "በተሳካ ሁኔታ አስመጥቷል",
+		"description": "[ቶስት] ተጠቃሚው Tabs ከውጭ ፋይል አክሏል"
+	},
+	"tab_explain": {
+		"message": "እያንዳንዱ ንጥል 'label' እና 'url' እንደ ሕብረቁምፊ ሊኖረው ይገባል። በተጨማሪም፣ እያንዳንዱ ንጥል 'org' እንደ ሕብረቁምፊ ሊኖረው ይችላል።",
+		"description": "[ስህተት] Tab እንዴት መገንባት እንዳለበት ያብራራል"
+	},
+	"tab_information": {
+		"message": "የ Tab መረጃ",
+		"description": "ለ Tab አዘምን ሞዳል ርዕስ"
+	},
+	"tab_label": {
+		"message": "የ Tab መለያ",
+		"description": "የTab መለያ (Label) ባህሪ፣ ስሙ"
+	},
+	"tab_org": {
+		"message": "የ Tab ድርጅት",
+		"description": "የTab ድርጅት (Org) ባህሪ፣ ለአንድ ነጠላ የ Salesforce ድርጅት ከሆነ"
+	},
+	"tab_url": {
+		"message": "የ Tab URL",
+		"description": "የTab URL ባህሪ፣ ወዴት እንደሚያመለክት"
+	},
+	"table_delete": {
+		"message": "Tab ሰርዝ",
+		"description": "[ብቅ_ባይ] የመሰረዣ አዝራር ላለው አምድ አጋዥ ጽሑፍ"
+	},
+	"table_org": {
+		"message": "የድርጅት Tab ነው?",
+		"description": "[ብቅ_ባይ] የድርጅት አመልካች ሳጥን ላለው አምድ አጋዥ ጽሑፍ"
+	},
+	"table_row_label": {
+		"message": "ለዚህ URL መለያ ያስገቡ",
+		"description": "[ብቅ_ባይ] የTab ስም ያለው የግቤት መስክ"
+	},
+	"table_row_org": {
+		"message": "ይህ Tab ለዚህ ድርጅት ብቻ እንዲገኝ ከፈለጉ ጠቅ ያድርጉ።",
+		"description": "[ብቅ_ባይ] Tabን ወደ ድርጅት-ተኮር ለመቀየር የሚሆን አመልካች ሳጥን"
+	},
+	"table_row_org_name": {
+		"message": "ይህ Tab የሚገኝበት ድርጅት።",
+		"description": "[ብቅ_ባይ] የድርጅት ስም ያለው የግቤት መስክ"
+	},
+	"table_row_url": {
+		"message": "መዞር ወደሚፈልጉበት ንዑስ_URL ያስገቡ።",
+		"description": "[ብቅ_ባይ] የTab URL ያለው የግቤት መስክ"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "የተጠቃሚው ተመራጭ ሊንኮች"
+	},
+	"tabs_saved": {
+		"message": "Tabs ተቀምጠዋል።",
+		"description": "[ቶስት] Tabs በተሳካ ሁኔታ ተከማችተዋል።"
+	},
+	"theme_dark": {
+		"message": "ገጽታን ወደ ጨለማ ቀይር",
+		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በጨረቃ ላይ ያለ ርዕስ"
+	},
+	"theme_light": {
+		"message": "ገጽታን ወደ ብርሃን ቀይር",
+		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በፀሐይ ላይ ያለ ርዕስ"
+	},
+	"underline": {
+		"message": "በመስመር ታቦት",
+		"description": "ለTab ጽሑፍ መስመር ታቦት የቅርጽ አማራጭ"
+	},
+	"underline_wavy": {
+		"message": "በመስመር ሞጎጮ",
+		"description": "በTab ጽሑፍ ላይ በመስመር ሞጎጮ መስመር የማቆሚያ የቅርጽ አማራጭ"
+	},
+	"update_available": {
+		"message": "ማሻሻያ ይገኛል",
+		"description": "ለኤክስቴንሽኑ አዲስ ማሻሻያ ይገኛል"
+	},
+	"upload": {
+		"message": "ስቀል",
+		"description": "[አስመጣ] ተጠቃሚው ፋይሎቻቸውን እንዲያስስ እና ትክክለኛውን እንዲመርጥ ፍቀድ"
+	},
+	"users": {
+		"message": "ተጠቃሚዎች",
+		"description": "ከ ManageUsers/home ጋር የተያያዘው የገጽ ስም"
+	},
+	"where_to": {
+		"message": "ወዴት?",
+		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] ለሞዳሉ አማራጭ ርዕስ"
+	},
+	"write_review": {
+		"message": "ግምገማ ይጻፉ!",
+		"description": "[popup] ለsvg ግምገማ ለመጻፍ የሚጠይቅ ርዕስ"
+	}
+}

@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "@std/testing/asserts";
 import { mockBrowser, translations } from "./mocks.ts";
 declare global {
 	var chrome: typeof mockBrowser;
@@ -9,22 +9,6 @@ declare global {
 globalThis.chrome = mockBrowser as any;
 import ensureTranslatorAvailability from "/translator.js";
 const translate_element_attribute = "data-i18n";
-
-/*
-Deno.test("TranslationService - singleton pattern", async () => {
-	const service1 = await TranslationService.create();
-	const service2 = await TranslationService.create();
-	assertEquals(service1, service2, "Should return the same instance");
-});
-
-Deno.test("TranslationService - constructor protection", () => {
-	assertThrows(
-		() => new TranslationService(Symbol("wrong")),
-		Error,
-		"Use TranslationService.create()",
-	);
-});
-*/
 
 Deno.test("TranslationService - load user preference", async () => {
 	const service = await ensureTranslatorAvailability();

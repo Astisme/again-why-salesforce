@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "அனுமதி",
+		"description": "[req_permission] அனுமதிகளை அனுமதிக்க பொத்தான்"
+	},
+	"ascending": {
+		"message": "ஏறுவரிசை (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "கிடைக்கக்கூடியவை",
+		"description": "சேர்க்கக்கூடிய உருப்படிகளுக்கான பிரிவு தலைப்பு"
+	},
+	"bold": {
+		"message": "தடிமன்",
+		"description": "தடிமனான உரைக்கான எழுத்துரு பாணி விருப்பம்"
+	},
+	"cancel": {
+		"message": "ரத்துசெய்",
+		"description": "தற்போதைய செயலைச் செயல்படுத்துவதைத் தடுக்கும் பொத்தான்களுக்கான தலைப்பு அல்லது textContent"
+	},
+	"cancel_close": {
+		"message": "ரத்துசெய்து மூடு",
+		"description": "மோடல்களின் மூடு பொத்தானுக்கான தலைப்பு அல்லது textContent"
+	},
+	"chosen": {
+		"message": "தேர்ந்தெடுக்கப்பட்டவை",
+		"description": "தேர்ந்தெடுக்கப்பட்ட உருப்படிகளுக்கான பிரிவு தலைப்பு"
+	},
+	"cmd_export_all": {
+		"message": "சேமிக்கப்பட்ட அனைத்து Tabs ஐயும் экспоர்ட் செய்ய modal ஐக் காட்டு",
+		"description": "[கட்டளை விளக்கம்] பயனர் அனைத்து Tabs ஐயும் ஏற்றுமதி செய்ய விரும்புகிறார்"
+	},
+	"cmd_import": {
+		"message": "புதிய Tabs ஐ импорт செய்ய modal ஐக் காட்டு",
+		"description": "[கட்டளை விளக்கம்] பயனர் புதிய Tabs ஐ இறக்குமதி செய்ய விரும்புகிறார்"
+	},
+	"cmd_open_other_org": {
+		"message": "தற்போதைய பக்கத்தை மற்றொரு Org இல் திறக்க modal ஐக் காட்டு",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை மற்றொரு Org இல் திறக்க விரும்புகிறார்"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab பட்டியலிலிருந்து தற்போதைய பக்கத்தை அகற்று (சேமிக்கப்பட்டிருந்தால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை அகற்ற விரும்புகிறார்"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tab பட்டியலில் தற்போதைய பக்கத்தை சேமி (சேமிக்கப்படாவிட்டால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை சேமிக்க விரும்புகிறார்"
+	},
+	"cmd_toggle_org": {
+		"message": "தற்போதைய பக்கத்தின் Org மதிப்பை மாற்று (சேமிக்கப்பட்டிருந்தால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்திற்கான Org ஐ மாற்ற விரும்புகிறார்"
+	},
+	"cmd_update_tab": {
+		"message": "தற்போதைய பக்கத்தை புதுப்பிக்க modal ஐக் காட்டு (சேமிக்கப்பட்டிருந்தால்)",
+		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை புதுப்பிக்க விரும்புகிறார்"
+	},
+	"confirm_another_org": {
+		"message": "இந்த இணைப்பைத் திறப்பதை உறுதிப்படுத்தவும்.",
+		"description": "[open-other-org-modal] கட்டமைக்கப்பட்ட இணைப்பைத் திறக்க பயனரிடமிருந்து உறுதிப்படுத்தல் கோரவும்."
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label இன் புதிய பதிப்பு இப்போது கிடைக்கிறது!",
+		"description": "ஒரு கேட்பவரிடமிருந்து அறியப்படாத செய்தி பெறப்பட்டது"
+	},
+	"continue": {
+		"message": "தொடர்க",
+		"description": "தற்போதைய செயலைச் செயல்படுத்த அனுமதிக்கும் பொத்தான்களுக்கான textContent"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 அனைத்து பொது Tabகள்",
+		"description": "[context-menu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 அனைத்து Tabகளையும் அகற்று",
+		"description": "[சூழ்நிலை மெனு]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 அனைத்து காட்சி Tabகள்",
+		"description": "[context-menu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs ஏற்றுமதி செய்",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab நகர்த்து",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ முதலாவதாக ஆக்கு",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ கடைசியாக ஆக்கு",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_move_left": {
+		"message": "👈 இடதுபுறம் நகர்த்து",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_move_right": {
+		"message": "👉 வலதுபுறம் நகர்த்து",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 மற்றொரு Org இல் திற",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(களை) அகற்று",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 இடதுபுறம் உள்ள Tabs",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ மற்ற Tabs",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 வலதுபுறம் உள்ள Tabs",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ இந்த Tab",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 இயல்புநிலை Tabகளை மீட்டமைக்கவும்",
+		"description": "[context-menu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "அமைப்புகள் மெனுவிற்கான லேபிள்"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tab-களை வரிசைப்படுத்து",
+		"description": "பயனர்கள் தங்கள் Tab-களை தானாக வரிசைப்படுத்த அனுமதிக்கும் சூழல் மெனு (பெற்றோர் மெனு)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 லேபிள் மூலம்",
+		"description": "பயனர்கள் தங்கள் Tab-களை லேபிள் மூலம் வரிசைப்படுத்த அனுமதிக்கும் சூழல் மெனு"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org மூலம்",
+		"description": "பயனர்கள் தங்கள் Tab-களை Org மூலம் வரிசைப்படுத்த அனுமதிக்கும் சூழல் மெனு"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 URL மூலம்",
+		"description": "பயனர்கள் தங்கள் Tab-களை URL மூலம் வரிசைப்படுத்த அனுமதிக்கும் சூழல் மெனு"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab புதுப்பி",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Org நிலைமாற்று",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 மற்ற புதுப்பிப்புகள்",
+		"description": "[சூழல்-பட்டி]"
+	},
+	"delete": {
+		"message": "நீக்கு",
+		"description": "[popup] ஒரு வரிசையை நீக்கு"
+	},
+	"delete_all": {
+		"message": "$delete அனைத்து Tabs",
+		"description": "[பாப்அப்] அனைத்து Tabsகளையும் காலி செய்ய தொட்டியில் உள்ள தலைப்பு"
+	},
+	"descending": {
+		"message": "இறங்குவரிசை (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "இழுத்து விடு",
+		"description": "[இறக்குமதி] பயனர் தங்கள் கோப்புகளை குறிப்பிட்ட பகுதிக்கு இழுத்து விட அனுமதிக்கவும்"
+	},
+	"enable": {
+		"message": "இயக்கு",
+		"description": "[அனுமதி_கேட்கவும்] அனுமதிகளை இயக்க பொத்தான்"
+	},
+	"error_adding_tab": {
+		"message": "Tab சேர்க்கும்போது பிழை.",
+		"description": "[பிழை] Tab சேர்க்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_check_update": {
+		"message": "புதுப்பிப்புகளைச் சரிபார்க்கும்போது பிழை",
+		"description": "[பிழை] நீட்டிப்பு புதுப்பிப்புகளைச் சரிபார்க்கும்போது பொதுவான பிழை"
+	},
+	"error_close_other_modal": {
+		"message": "முதலில் மற்ற மோடலை மூடவும்!",
+		"description": "[toast] பயனர் 1 க்கும் மேற்பட்ட மோடலைத் திறக்க முயன்றார்"
+	},
+	"error_cxm_check": {
+		"message": "பட்டி உருப்படிகளைச் சரிபார்க்கும்போது பிழை",
+		"description": "[பிழை] சூழல் பட்டி உருப்படிகளைக் கண்டுபிடிக்க முடியவில்லை"
+	},
+	"error_cxm_create": {
+		"message": "பட்டி உருப்படிகளை உருவாக்கும்போது பிழை",
+		"description": "[பிழை] சூழல் பட்டி உருப்படிகளைத் தொடங்க முடியவில்லை"
+	},
+	"error_cxm_remove": {
+		"message": "பட்டி உருப்படிகளை அகற்றும் போது பிழை",
+		"description": "[பிழை] சூழல் பட்டி உருப்படிகளை அகற்ற முடியவில்லை"
+	},
+	"error_duplicate_tab": {
+		"message": "இந்த Tab ஏற்கனவே உள்ளது",
+		"description": "[பிழை] Tab நகலாக உள்ளது"
+	},
+	"error_expand_url": {
+		"message": "வெற்று URL ஐ விரிவாக்க முடியாது!",
+		"description": "[பிழை] விரிவாக்க வேண்டிய url அனுப்பப்படவில்லை"
+	},
+	"error_expand_url_no_base": {
+		"message": "URL ஐ அதன் ஹோஸ்ட் இல்லாமல் விரிவாக்க முடியாது!",
+		"description": "[பிழை] விரிவாக்கத்திற்குப் பயன்படுத்தப்பட்ட அடிப்படை url அனுப்பப்படவில்லை"
+	},
+	"error_extract_empty_url": {
+		"message": "வெற்று URL இலிருந்து Org பெயரைப் பிரித்தெடுக்க முடியாது!",
+		"description": "[பிழை] Org பெயரைப் பெற வேண்டிய url அனுப்பப்படவில்லை"
+	},
+	"error_failed_sync": {
+		"message": "ஒத்திசைக்கத் தவறிவிட்டது.",
+		"description": "[பிழை] பயனரிடமிருந்து Tabs ஒத்திசைக்க முடியாதபோது பொதுவான பிழை"
+	},
+	"error_failed_to_fetch": {
+		"message": "வெளிப்புற ஆதாரங்களைப் பெற முடியவில்லை",
+		"description": "[பிழை] ஒரு வெளிப்புற வலைத்தளத்திற்கான அழைப்பு வெற்றியடையவில்லை"
+	},
+	"error_get_with_no_org": {
+		"message": "Org குறிப்பிடப்படவில்லை என்றால் Tabs பெற முடியாது.",
+		"description": "[பிழை] Org தகவல் அனுப்பாமல் Org வாரியாக Tabs தேட முயன்றது"
+	},
+	"error_import": {
+		"message": "இறக்குமதி செய்யும் போது பிழை:\n",
+		"description": "[பிழை] இறக்குமதி செயல்முறையின் போது ஒரு பிழை ஏற்பட்டது"
+	},
+	"error_invalid_key": {
+		"message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
+		"description": "[hitilafu] msanidi programu alijaribu kuita kazi kwa kigezo batili"
+	},
+	"error_invalid_request": {
+		"message": "தவறான கோரிக்கை.",
+		"description": "[பிழை] தவறாக வடிவமைக்கப்பட்ட செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
+	},
+	"error_invalid_tab": {
+		"message": "செல்லாத Tab",
+		"description": "[பிழை] Tab செல்லுபடியாகாது"
+	},
+	"error_link_with_id": {
+		"message": "இந்த பக்கம் மற்றொரு Org இல் இருக்க முடியாது, ஏனெனில் இதில் ஒரு Id உள்ளது!",
+		"description": "[open-other-org-modal] இணைப்பு மற்றொரு Org இல் இல்லாமல் போகலாம் என்று பயனருக்கு எச்சரிக்கை"
+	},
+	"error_many_matching_tab": {
+		"message": "1 க்கும் மேற்பட்ட பொருந்தும் Tab கண்டுபிடிக்கப்பட்டது.",
+		"description": "[பிழை] பல Tabs பெறப்பட்டன"
+	},
+	"error_many_tabs_found": {
+		"message": "ஒன்றுக்கு மேற்பட்ட Tab கண்டறியப்பட்டது.",
+		"description": "[பிழை] பல Tabs பெறப்பட்டது"
+	},
+	"error_minify_url": {
+		"message": "வெற்று URL ஐ சிறிதாக்க முடியாது!",
+		"description": "[பிழை] குறைக்க வேண்டிய url அனுப்பப்படவில்லை"
+	},
+	"error_missing_favourite_id": {
+		"message": "Id இல்லாமல் பிடித்தமான படத்தைப் பெற முடியாது",
+		"description": "[பிழை] பிடித்தமான id அனுப்பப்படவில்லை"
+	},
+	"error_missing_key": {
+		"message": "சாவி எங்கும் கண்டுபிடிக்கப்படவில்லை",
+		"description": "[பிழை] கோப்புகளில் மொழிபெயர்ப்பு எதுவும் இல்லை"
+	},
+	"error_no_array": {
+		"message": "செல்லாத வரிசை அல்லது வரிசை எதுவும் அனுப்பப்படவில்லை",
+		"description": "[பிழை] செல்லுபடியாகும் வரிசை பெறப்படவில்லை"
+	},
+	"error_no_browser_tab": {
+		"message": "தற்போதைய உலாவி Tab ஐ கண்டுபிடிக்க முடியவில்லை.",
+		"description": "[பிழை] பின்னணிப் பக்கம் செயலில் உள்ள உலாவி Tab ஐ நிறுவ முடியவில்லை"
+	},
+	"error_no_callback": {
+		"message": "தயவுசெய்து ஒரு callback வழங்கவும்",
+		"description": "[பிழை] முறையின் முடிவில் அழைக்க வேண்டிய செயல்பாடு அனுப்பப்படவில்லை"
+	},
+	"error_no_cookies": {
+		"message": "பொருந்தும் குக்கீககள் கண்டுபிடிக்கப்படவில்லை",
+		"description": "[பிழை] Salesforce குக்கீகள் திருப்பி அனுப்பப்படவில்லை"
+	},
+	"error_no_data": {
+		"message": "தரவு இல்லாமல் Tab ஐ அடையாளம் காண முடியாது.",
+		"description": "[பிழை] தரவு அனுப்பாமல் ஒரு Tab ஐ பெற முயன்றது"
+	},
+	"error_no_headers": {
+		"message": "தலைப்புகளைக் கண்டுபிடிக்க முடியவில்லை.",
+		"description": "[பிழை] நீட்டிப்புக்கு பிடித்தமான பொத்தானை எங்கு வைப்பது என்று கண்டுபிடிக்க முடியவில்லை"
+	},
+	"error_no_matching_tab": {
+		"message": "பொருந்தும் Tabs எதுவும் கண்டுபிடிக்கப்படவில்லை.",
+		"description": "[பிழை] எந்த Tabs உம் பெறப்படவில்லை"
+	},
+	"error_no_message": {
+		"message": "அனுப்ப வேண்டிய செய்தி குறிப்பிடப்படவில்லை.",
+		"description": "[பிழை] குறியீட்டின் மற்ற பகுதிகளுக்கு அனுப்ப வேண்டிய செய்தி இல்லை"
+	},
+	"error_no_object": {
+		"message": "சரிபார்க்க எந்த பொருளும் இல்லை!",
+		"description": "[பிழை] பொருள் அனுப்பப்படவில்லை"
+	},
+	"error_no_setup_tab": {
+		"message": "அமைப்பு (Setup) Tab ஐ கண்டுபிடிக்க முடியவில்லை.",
+		"description": "[பிழை] நீட்டிப்புக்கு பிடித்தமான Tabs ஐ எங்கு வைப்பது என்று கண்டுபிடிக்க முடியவில்லை."
+	},
+	"error_no_url": {
+		"message": "சரிபார்க்க எந்த URL உம் இல்லை!",
+		"description": "[பிழை] சரிபார்க்க வேண்டிய url அனுப்பப்படவில்லை"
+	},
+	"error_not_initialized": {
+		"message": "இன்னும் தொடங்கப்படவில்லை.",
+		"description": "[பிழை] மாறி தயாராக இல்லாதபோது பொதுவான பிழை"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs செயலாக்கப் பிழை.",
+		"description": "[பிழை] Tabs செயல்படுத்தும்போது பொதுவான பிழை"
+	},
+	"error_redirect": {
+		"message": "திசைதிருப்ப முடியாது. தயவுசெய்து பக்கத்தை புதுப்பிக்கவும்.",
+		"description": "[பிழை] பக்க வழிமாற்றத்தில் உள்ள பொதுவான பிழை."
+	},
+	"error_remove_not_favourite": {
+		"message": "பிடித்தமில்லாத Tab ஐ அகற்ற முடியாது!",
+		"description": "[பிழை] பயனர் இன்னும் சேமிக்கப்படாத Tab ஐ அகற்ற முயன்றார்"
+	},
+	"error_removing_all_tabs": {
+		"message": "அனைத்து Tabs நீக்கும்போது பிழை.",
+		"description": "[பிழை] அனைத்து Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_generic_tabs": {
+		"message": "பொதுவான Tabs நீக்கும்போது பிழை.",
+		"description": "[பிழை] பொதுவான Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_other_tabs": {
+		"message": "பிற Tabs நீக்கும்போது பிழை.",
+		"description": "[பிழை] பிற Tabs நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_tab": {
+		"message": "Tab நீக்கும்போது பிழை.",
+		"description": "[பிழை] Tab நீக்கும்போது பயன்படுத்தப்படும் பொதுவான பிழை"
+	},
+	"error_removing_visible_tabs": {
+		"message": "அனைத்து காட்சி Tabகளையும் அகற்றும் போது பிழை ஏற்பட்டது.",
+		"description": "[error] அனைத்து காட்சி Tabகளையும் அகற்றும் போது பயன்படுத்தப்படும் பொதுப்பிழை"
+	},
+	"error_required_params": {
+		"message": "Vigezo vinavyohitajika kwa ajili ya kazi havijapitishwa",
+		"description": "[hitilafu] msanidi programu alijaribu kuita kazi bila vigezo muhimu"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Tabகளை இயல்புநிலைக்கு மீட்டமைக்கும் போது பிழை ஏற்பட்டது.",
+		"description": "[error] Tabகளை இயல்புநிலைக்கு மீட்டமைக்கும் போது பயன்படுத்தப்படும் பொதுப்பிழை"
+	},
+	"error_sorting_tabs": {
+		"message": "Tab-களை வரிசைப்படுத்தும் போது பிழை",
+		"description": "[error] ஒரு டோஸ்ட் செய்தியில் காட்டப்பட்டுள்ளது"
+	},
+	"error_sync_nothing": {
+		"message": "null Tabs ஐ ஒத்திசைக்க முடியாது!",
+		"description": "[பிழை] எதையும் ஒத்திசைக்க முயன்றது"
+	},
+	"error_tab_constructor": {
+		"message": "Tab வகுப்பைப் பயன்படுத்த new Tab() பதிலாக Tab.create() ஐப் பயன்படுத்தவும்",
+		"description": "[பிழை] Tab வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+	},
+	"error_tab_label": {
+		"message": "லேபிள் காலியாக இல்லாத ஒரு சரமாக இருக்க வேண்டும்",
+		"description": "[பிழை] பயனர் லேபிள் இல்லாத ஒரு Tab ஐ உருவாக்க முயன்றார்"
+	},
+	"error_tab_not_found": {
+		"message": "Tab கண்டுபிடிக்கப்படவில்லை.",
+		"description": "[பிழை] Tab வரிசையில் சேர்க்கப்படவில்லை"
+	},
+	"error_tab_object_creation": {
+		"message": "ஒரு பொருளுடன் அழைக்கும்போது, வேறு எதையும் அனுப்ப வேண்டாம்.",
+		"description": "[பிழை] டெவலப்பரால் செயலாக்க பிழை"
+	},
+	"error_tab_org": {
+		"message": "Org ஒரு சரமாக அல்லது வரையறுக்கப்படாததாக (undefined) இருக்க வேண்டும்",
+		"description": "[பிழை] பயனர் செல்லாத Org மதிப்புடன் ஒரு Tab ஐ உருவாக்க முயன்றார்"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "எதிர்பாராத விசைகள் கண்டுபிடிக்கப்பட்டன:",
+		"description": "[பிழை] பயனர் சில ஆதரவற்ற பண்புகளுடன் ஒரு Tab ஐ உருவாக்க முயன்றார்"
+	},
+	"error_tab_url": {
+		"message": "URL காலியாக இல்லாத ஒரு சரமாக இருக்க வேண்டும்",
+		"description": "[பிழை] பயனர் url இல்லாத ஒரு Tab ஐ உருவாக்க முயன்றார்"
+	},
+	"error_tab_url_saved": {
+		"message": "இந்த URL உடன் ஒரு Tab ஏற்கனவே சேமிக்கப்பட்டுள்ளது!",
+		"description": "[பிழை] பயனர் ஏற்கனவே விரும்பிய Tab ஐ சேமிக்க முயன்றார்"
+	},
+	"error_tabcont_initialize": {
+		"message": "இதனுடன் தொடங்க முடியாது:",
+		"description": "[பிழை] Tab கொள்கலன் தொடக்கம் தோல்வியடைந்தது"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "செல்லாத Tab(கள்) கண்டறியப்பட்டது.\nமுதல் நிகழ்வு:",
+		"description": "[பிழை] செல்லாத Tabs அனுப்பப்பட்டன"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "TabContainer வகுப்பைப் பயன்படுத்த new TabContainer() பதிலாக TabContainer.create() ஐப் பயன்படுத்தவும்",
+		"description": "[பிழை] TabContainer வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+	},
+	"error_translationservice_constructor": {
+		"message": "TranslationService வகுப்பைப் பயன்படுத்த new TranslationService() பதிலாக TranslationService.create() ஐப் பயன்படுத்தவும்",
+		"description": "[பிழை] TranslationService வகுப்பை எவ்வாறு பயன்படுத்துவது என்பதை டெவலப்பரிடம் தெரிவிக்கவும்"
+	},
+	"error_translator_not_initialized": {
+		"message": "மொழிபெயர்ப்பாளர் இன்னும் தொடங்கப்படவில்லை.",
+		"description": "[பிழை] TranslationService தயாராக இல்லை"
+	},
+	"error_unknown_message": {
+		"message": "அறியப்படாத செய்தி பெறப்பட்டது",
+		"description": "ஒரு கேட்பவரிடமிருந்து அறியப்படாத செய்தி பெறப்பட்டது"
+	},
+	"error_unknown_request": {
+		"message": "அறியப்படாத கோரிக்கை.",
+		"description": "[பிழை] அறியப்படாத செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
+	},
+	"error_useless_remove": {
+		"message": "அகற்ற முடியாது:\nமுன்பு சேமிக்கப்படாத பக்கத்தை அகற்ற முடியாது",
+		"description": "[பிழை] பயனர் இன்னும் சேமிக்கப்படாத பக்கத்தை அகற்ற முயன்றார்"
+	},
+	"error_useless_save": {
+		"message": "சேமிக்க முடியாது:\nஇந்தப் பக்கம் ஏற்கனவே சேமிக்கப்பட்டுள்ளது!",
+		"description": "[பிழை] பயனர் ஏற்கனவே சேமிக்கப்பட்ட பக்கத்தை சேமிக்க முயன்றார்"
+	},
+	"export": {
+		"message": "ஏற்றுமதி செய்",
+		"description": "[popup] ஏற்றுமதி பொத்தான்"
+	},
+	"export_title": {
+		"message": "அனைத்து Tabs ஏற்றுமதி செய்",
+		"description": "[popup] ஏற்றுமதி பொத்தானின் மீதான தலைப்பு"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning அமைப்பு பக்கத்தில் உள்ள கிடைக்கக்கூடிய இடத்தில் தனிப்பயன் Tabs ஐ உருவாக்கி நிர்வகிக்கவும்.",
+		"description": "[manifest] இந்த நீட்டிப்பின் விளக்கம்"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "இந்த நீட்டிப்பின் பெயர்"
+	},
+	"file": {
+		"message": "கோப்பு",
+		"description": "ஒற்றை கோப்பு"
+	},
+	"files": {
+		"message": "கோப்புகள்",
+		"description": "பல கோப்புகள்"
+	},
+	"flows": {
+		"message": "ஓட்டங்கள்",
+		"description": "[default-tab] இயல்புநிலை ஓட்ட Tabக்கான லேபிள்"
+	},
+	"general": {
+		"message": "பொது",
+		"description": "பொது அமைப்புகள் பிரிவுக்கான லேபிள்"
+	},
+	"help": {
+		"message": "உதவி",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "புதிய Tab-களை Org Tab-களாகக் குறிக்கிறது, எனவே அந்த குறிப்பிட்ட Salesforce Org-ல் உள்நுழையும்போது மட்டுமே அவை தெரியும்.",
+		"description": "[$opt_add_tabs_as_org]க்கான [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "புதிதாக விருப்பமான Tab-கள் உங்கள் Tab பட்டியலின் முடிவில் சேர்க்கப்படுவதற்குப் பதிலாக, Setup பட்டியில் உள்ள உங்கள் Tab பட்டியலின் முன்பக்கத்தில் செருகப்படுகின்றன.",
+		"description": "[$opt_add_tabs_front]க்கான [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "Salesforce டொமைனுக்கு வெளியே நீட்டிப்பு பாப்அப்பைக் கிளிக் செய்தால், அது தானாகவே உங்களை Salesforce உள்நுழைவுப் பக்கத்திற்கு அழைத்துச் செல்லும்.",
+		"description": "[$opt_automatic_open_login]க்கான [settings-help]"
+	},
+	"help_automatic_open_setup": {
+		"message": "Salesforce டொமைனில் நீட்டிப்பு பாப்அப்பைக் கிளிக் செய்தால், ஆனால் Setup பக்கத்தில் இல்லை என்றால், அது தானாகவே உங்களை Salesforce Setup பக்கத்திற்கு அழைத்துச் செல்லும்.",
+		"description": "[$opt_automatic_open_setup]க்கான [settings-help]"
+	},
+	"help_keep_sort": {
+		"message": "இயக்கப்படும்போது, உங்கள் Tab-கள் லேபிள், URL அல்லது Org-இன் படி வரிசைப்படுத்தப்பட்ட வரிசையில் வைக்கப்படும்; நீங்கள் எதைத் தேர்வு செய்கிறீர்களோ அதைப் பொறுத்து.",
+		"description": "[$opt_keep_sort]க்கான [settings-help]"
+	},
+	"help_keep_tabs_left": {
+		"message": "Setup-இல் உள்ள நிலையான வழிசெலுத்தல் மெனுவிற்கு (முகப்பு / Object Manager)ப் பிறகு என்பதற்குப் பதிலாக அதற்கு முன் உங்கள் சேமிக்கப்பட்ட Tab-களைப் பின் செய்கிறது.",
+		"description": "[$opt_keep_tabs_left]க்கான [settings-help]"
+	},
+	"help_link_new_browser": {
+		"message": "இயக்கப்படும்போது, சேமிக்கப்பட்ட ஒவ்வொரு Tab-உம் தொடர்புடைய பக்கத்தை ஒரு புதிய Tab-இல் திறக்கும்.",
+		"description": "[$opt_link_new_browser]க்கான [settings-help]"
+	},
+	"help_no_release_notes": {
+		"message": "நீட்டிப்பு புதுப்பிக்கப்பட்ட பிறகு, வெளியீட்டு குறிப்பு அறிவிப்புகளின் தானியங்கி காட்சியை நிறுத்துகிறது.",
+		"description": "[$opt_no_release_notes]க்கான [settings-help]"
+	},
+	"help_no_update_notification": {
+		"message": "காலமுறை புதுப்பிப்பு நினைவூட்டல் பாப்அப்களை முடக்குகிறது, நீட்டிப்பு UI-ஐ சுத்தமாக வைத்திருக்கும் (உங்கள் உலாவியின் அமைப்புகளிலிருந்து நீட்டிப்பின் தானியங்கி புதுப்பிப்புகளை முடக்கியிருக்கும்போது).",
+		"description": "[$opt_no_update_notification]க்கான [settings-help]"
+	},
+	"help_open_login_same_tab": {
+		"message": "Salesforce டொமைனுக்கு வெளியே நீட்டிப்பு பாப்அப்பைக் கிளிக் செய்தால், உள்நுழைவுப் பக்கம் தற்போதைய உலாவி Tab-இல் திறக்கப்படும்.",
+		"description": "[$opt_open_login_same_tab]க்கான [settings-help]"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Salesforce டொமைனில் நீட்டிப்பு பாப்அப்பைக் கிளிக் செய்தால், ஆனால் Setup பக்கத்தில் இல்லை என்றால், Salesforce Setup பக்கம் தற்போதைய உலாவி Tab-இல் திறக்கப்படும்.",
+		"description": "[$opt_open_setup_same_tab]க்கான [settings-help]"
+	},
+	"help_pick_language": {
+		"message": "நீட்டிப்புக்கு மட்டும் UI மொழியை அமைக்கவும். ஏதாவது மொழிபெயர்க்கப்படாமல் இருந்தால், அதற்குப் பதிலாக ஆங்கிலப் பதிப்பு பயன்படுத்தப்படும்.",
+		"description": "[$opt_pick_language]க்கான [settings-help]"
+	},
+	"help_prevent_analytics": {
+		"message": "அடிப்படை டெலிமெட்ரி சேகரிப்பை முடக்குகிறது. அநாமதேய பயன்பாட்டு அளவீடுகளில் நீட்டிப்பு தோன்றாது.",
+		"description": "[$opt_prevent_analytics]க்கான [settings-help]"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning Navigation API-ஐத் தவிர்த்து, முழுப் பக்க மறுஏற்றம் வழியாக இணைப்புகளைத் திறக்கிறது, இது சில org அமைப்புகளில் வேகமாக இருக்கலாம்.",
+		"description": "[$opt_prevent_lightning_navigation]க்கான [settings-help]"
+	},
+	"help_skip_link_detection": {
+		"message": "URL துண்டு Salesforce பதிவு/பொருள் ID-களின் வடிவமைப்புடன் பொருந்துகிறதா என்பதைச் சரிபார்க்கும் நீட்டிப்புச் சரிபார்ப்பை முடக்குகிறது (சேமிக்கப்பட்ட Tab-ஐ ஒரு Org Tab-ஆக தானாக அமைக்கப் பயன்படுகிறது).",
+		"description": "[$opt_skip_link_detection]க்கான [settings-help]"
+	},
+	"help_tip_click_link": {
+		"message": "இந்த அமைப்பிற்கான ஆவணங்களுக்குத் திருப்பிவிடப்பட கிளிக் செய்யவும்!",
+		"description": "[அமைப்புகள்-உதவி] ஒரு குறிப்பிட்ட அமைப்பைப் பற்றி மேலும் படிக்க பயனரை அனுமதிப்பதற்கான அழைப்பு நடவடிக்கை"
+	},
+	"import": {
+		"message": "இறக்குமதி செய்",
+		"description": "[popup] இறக்குமதி பொத்தான்"
+	},
+	"import_duplicate_description": {
+		"message": "நகல் Tabs புறக்கணிக்கப்படும்.<br />ஒரே URL ஐக் கொண்டிருந்தால் இரண்டு Tabs நகல்களாகக் கருதப்படும்.",
+		"description": "[இறக்குமதி] இறக்குமதி செயல்முறை என்ன செய்கிறது என்பதன் விளக்கம்"
+	},
+	"import_invalid_file": {
+		"message": "செல்லாத கோப்பு வகை.\nJSON கோப்புகள் மட்டுமே ஆதரிக்கப்படுகின்றன.",
+		"description": "[பிழை] இறக்குமதிக்கு பயன்படுத்தப்பட்ட கோப்பு JSON அல்ல"
+	},
+	"import_successful": {
+		"message": "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது",
+		"description": "[இறக்குமதி] இறக்குமதி முடிந்தது. இதற்குப் பிறகு, எத்தனை பதிவுகள் இறக்குமதி செய்யப்பட்டன என்பது காண்பிக்கப்படும்"
+	},
+	"import_tabs": {
+		"message": "Tabs இறக்குமதி செய்",
+		"description": "[modal-தலைப்பு] இறக்குமதி செயல்முறைக்கு"
+	},
+	"import_title": {
+		"message": "JSON கோப்பிலிருந்து $import_tabs",
+		"description": "[பாப்அப்] இறக்குமதி பொத்தானில் உள்ள தலைப்பு"
+	},
+	"insert_another": {
+		"message": "மற்றொன்றைச் செருகு",
+		"description": "[error-open-other-org-modal] பயனர் மோடலில் அதே Org ஐச் செருகும்போது செய்தி"
+	},
+	"insert_another_org": {
+		"message": "செருகப்பட்ட Org தற்போதையது!\nதயவுசெய்து மற்றொரு Org ஐச் செருகவும்.",
+		"description": "[error-open-other-org-modal] பயனர் மோடலில் அதே Org ஐச் செருகும்போது செய்தி"
+	},
+	"insert_valid_org": {
+		"message": "தயவுசெய்து செல்லுபடியாகும் Org ஐச் செருகவும்!",
+		"description": "[error-open-other-org-modal] பயனர் மோடலில் தவறான url ஐச் செருகும்போது செய்தி"
+	},
+	"italic": {
+		"message": "சாய்வு",
+		"description": "சாய்வு உரைக்கான எழுத்துரு பாணி விருப்பம்"
+	},
+	"lightning_navigation": {
+		"message": "லைட்னிங் நெவிகேஷன்",
+		"description": "Salesforce-இன் தனிப்பயன் வழிசெலுத்தல் தொழில்நுட்பம்"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce இல் உள்நுழைக",
+		"description": "[notSalesforceSetup] பயனரை Salesforce உள்நுழைவு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
+	},
+	"mycustomorg": {
+		"message": "எனதுதனிப்பயன்org",
+		"description": "புதுப்பிப்பு Tab மோடலுக்கான placeholder"
+	},
+	"no_manifest_github": {
+		"message": "மேனிஃபெஸ்டில் தவறான அல்லது காணாத GitHub homepage_url",
+		"description": "மேனிஃபெஸ்டின் homepage_url விசை GitHub இணைப்பைப் பயன்படுத்தவில்லை"
+	},
+	"no_match": {
+		"message": "எந்தச் செயலுடனும் பொருந்தவில்லை",
+		"description": "[பிழை] Salesforce இல் சுவிட்ச் கோரப்பட்ட செயலைப் பொருத்த முடியாதபோது"
+	},
+	"nss_invalid_url": {
+		"message": "செல்லாத URL கண்டறியப்பட்டது.",
+		"description": "[Salesforce அமைவு இல்லை] செல்லாத URL"
+	},
+	"nss_not_setup_page": {
+		"message": "இது $salesforce_lightning அமைவுப் பக்கம் அல்ல.",
+		"description": "[notSalesforceSetup] பயனர் Salesforce பக்கத்தில் இல்லை."
+	},
+	"open_here": {
+		"message": "இந்த Tab-இல் திறக்கவும்.",
+		"description": "[open-other-org-modal] பயனரை அதே உலாவி Tab-இல் திறக்க அனுமதிக்கும் ரேடியோ பொத்தான்"
+	},
+	"open_new_tab": {
+		"message": "புதிய Tab-இல் திறக்கவும்.",
+		"description": "[open-other-org-modal] பயனரை புதிய உலாவி Tab-இல் திறக்க அனுமதிக்கும் ரேடியோ பொத்தான்."
+	},
+	"open_settings": {
+		"message": "நீட்டிப்பு அமைப்புகளைத் திறக்கவும்",
+		"description": "[பாப்அப்] அமைப்புகள் பக்கத்திற்குத் திசைதிருப்ப பொத்தான்"
+	},
+	"open_setup": {
+		"message": "அமைப்பைத் திற",
+		"description": "[notSalesforceSetup] பயனரை Salesforce அமைப்பு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "புதிய Tab-களை Org Tab-களாகச் சேர்.",
+		"description": "[settings] அனைத்து புதிய Tab-களையும் org-க்கு குறிப்பிட்டதாகச் சேர்க்க பயனரை அனுமதிக்கிறது"
+	},
+	"opt_add_tabs_front": {
+		"message": "புதிய Tab-களை முன்பக்கத்தில் சேர்.",
+		"description": "[settings] அனைத்து புதிய Tab-களையும் முன்பக்கத்தில் சேர்க்க பயனரை அனுமதிக்கிறது"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforce பக்கத்தில் இல்லாதபோது பாப்அப்பைக் கிளிக் செய்யும் போது $salesforce_login பக்கத்தைத் தானாகத் திறக்கவும்.",
+		"description": "[அமைப்பு] பயனர் ஒரு சீரற்ற இணையதளத்தில் இருக்கும்போது பாப்அப்பைத் திறக்கும்போது"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforce பக்கத்தில் இருக்கும்போது பாப்அப்பைக் கிளிக் செய்யும் போது $salesforce_setup பக்கத்தைத் தானாகத் திறக்கவும்.",
+		"description": "[அமைப்பு] பயனர் Salesforce இணையதளத்தில் இருக்கும்போது பாப்அப்பைத் திறக்கும்போது"
+	},
+	"opt_confirm_save": {
+		"message": "அமைப்புகள் சேமிக்கப்பட்டது!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (இயல்புநிலை மற்றும் பின்னிடைவு)",
+		"description": "நீட்டிப்பின் இயல்புநிலை மொழி விருப்பம்"
+	},
+	"opt_keep_sort": {
+		"message": "Tab-களை வரிசைப்படுத்தியே வைத்திரு.",
+		"description": "[setting] பயனரை அவர்களின் Tab-களை அவர்களின் ஒரு கீ மூலம் வரிசைப்படுத்தியபடி வைத்திருக்க அனுமதிக்கிறது"
+	},
+	"opt_keep_tabs_left": {
+		"message": "பிடித்த Tab-களை Home மற்றும் Object Manager-இன் இடது பக்கத்தில் வைக்கவும்.",
+		"description": "பிடித்த Tab-களை வழிசெலுத்தல் பட்டியின் இடது பக்கத்தில் பொருத்துவதற்கான மாற்றி"
+	},
+	"opt_link_new_browser": {
+		"message": "இணைகளை எப்பொழுதும் புதிய உலாவிக் குத்தகையில் திறக்கவும்.",
+		"description": "[அமைப்பு] பயனர் பொலிவு Indigo Tab-ஐ சொடுக்கும்போது புதிய உலாவிக் குத்தகையில் திறக்க"
+	},
+	"opt_no_release_notes": {
+		"message": "புதுப்பிப்பு வெளியீட்டு குறிப்பு காட்சியிட வேண்டாம்.",
+		"description": "[setting] மேம்படுத்தப்பட்டபின் விரிவாக்கம் வெளியீட்டு குறிப்புகளை காட்சியிடாமல் தடுக்கும் வசதி"
+	},
+	"opt_no_update_notification": {
+		"message": "கிடைக்கக்கூடிய புதுப்பிப்புகள் குறித்து எச்சரிக்க வேண்டாம்.",
+		"description": "[அமைப்பு] புதிய வெளியீடுகளைத் தேடுவதிலிருந்து நீட்டிப்பைத் தடுக்க பயனரை அனுமதிக்கவும்"
+	},
+	"opt_open_login_same_tab": {
+		"message": "பாப்அப்பைக் கிளிக் செய்யும் போது எப்போதும் $salesforce_login பக்கத்தை அதே Tab-இல் திறக்கவும்.",
+		"description": "[அமைப்பு]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "பாப்அப்பைக் கிளிக் செய்யும் போது எப்போதும் $salesforce_setup பக்கத்தை அதே Tab-இல் திறக்கவும்.",
+		"description": "[அமைப்பு]"
+	},
+	"opt_pick_language": {
+		"message": "நீட்டிப்பு மொழியைத் தேர்ந்தெடுங்கள்",
+		"description": "[அமைப்பு] பயனர் விரும்பிய மொழியைத் தேர்ந்தெடுக்க தூண்டும் லேபிள்"
+	},
+	"opt_pick_sort": {
+		"message": "Tab-கள் எந்த புலத்தால் வரிசைப்படுத்தப்பட வேண்டும் என்பதைத் தேர்ந்தெடு",
+		"description": "[setting] இப்போது பயனர் Tab-களை வரிசைப்படுத்தியபடி வைத்திருக்க எந்த கீ-ஐ தேர்வு செய்யலாம்"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics பயன்பாட்டைத் தடுக்கும் (பயனர் எண்ணிக்கையில் தோன்றாது).",
+		"description": "[setting] பயனருக்கு அனாமிக தகவல்களை அனுப்புவதில் தடுப்பதற்கான வசதி"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightning Navigation பயன்பாட்டைத் தடு (சரிபார்க்கப்படாமல் இருக்கும்போது வேகமாக ஏற்றப்படும்).",
+		"description": "[setting] அம்சத்தின் விளக்கத்துடன் Lightning Navigation-ஐ அனுமதிக்க வேண்டாம்"
+	},
+	"opt_same_tab_popup": {
+		"message": "Popup-ஐ சொடுக்கும்போது அதே குத்தகையில் பக்கம்.",
+		"description": "[அமைப்பு] புதிய உலாவிக் குத்தகையைத் திறக்காமல் தடுக்கும்"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce மொழியைப் பின்தொடரவும் (Salesforce குக்கீகளைப் படிக்கும்)",
+		"description": "Salesforce இன் மொழி அமைப்பைப் பயன்படுத்துவதற்கான விருப்பம். இந்த விருப்பத்தைப் பயன்படுத்த, Salesforce குக்கீகளைப் படிக்க நீட்டிப்புக்கு பயனர்கள் அனுமதிக்க வேண்டும்."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ஐடி தானாகச் சோதிப்பதை தவிர்க்கவும்.",
+		"description": "[அமைப்பு] பயனர் Tabs-ஐ சேமிக்கும்போது, இணைப்பில் ஐடி உள்ளதா என்பதைத் தானாகச் சோதிக்காது"
+	},
+	"or_drop": {
+		"message": "அல்லது $drop",
+		"description": "[இறக்குமதி] பயனர் தங்கள் சுட்டியைக் கொண்டு கோப்புகளை நகர்த்தி அவற்றை வெளியிட அனுமதிக்கவும்"
+	},
+	"org_link": {
+		"message": "Org இணைப்பு",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "மற்ற Org தகவல்",
+		"description": "[modal-தலைப்பு]"
+	},
+	"other_org_placeholder": {
+		"message": "மற்ற-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "சேமித்த Tabs ஐ மேலெழுது.",
+		"description": "[label] இறக்குமதி செயல்முறையின் போது அனைத்து சேமித்த Tabs ஐயும் நீக்கு"
+	},
+	"preserve_org_tabs": {
+		"message": "மற்ற org க்களுக்கான Tabs ஐப் பாதுகா.",
+		"description": "[label] இறக்குமதி செயல்முறையின் போது அனைத்து Org-குறிப்பிட்ட Tabs ஐயும் வைத்திரு"
+	},
+	"remove_tab": {
+		"message": "Tab அகற்று",
+		"description": "[alt] படங்கள் வேலை செய்யாதபோது மாற்று உரை"
+	},
+	"req_downloads_open_popup": {
+		"message": "உங்கள் உலாவியின் நீட்டிப்புகள் மெனுவிலிருந்து நீட்டிப்பு பாப்அப்பைத் திறக்கவும்.",
+		"description": "[அறிவிப்பு] தொடர நீட்டிப்பு பாப்அப்பைக் கிளிக் செய்ய பயனரிடம் கேட்கவும்"
+	},
+	"req_downloads_perm_header": {
+		"message": "கோரப்பட்ட ஏற்றுமதியைத் தொடங்க\nதயவுசெய்து பதிவிறக்க அனுமதியை இயக்கவும்.",
+		"description": "[அனுமதி_கேட்கவும்] பதிவிறக்க அனுமதியை இயக்க நடவடிக்கைக்கான அழைப்பு"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "இந்த செயல்பாடு ஒருமுறை மட்டுமே கோரப்படும்.",
+		"description": "[அனுமதி_கேட்கவும்] பதிவிறக்க அனுமதியை இயக்குவதற்கான விளக்கம்"
+	},
+	"req_permissions_dont_ask": {
+		"message": "மீண்டும் கேட்க வேண்டாம்.",
+		"description": "[req_permission] பயனர் நிரந்தரமாக அனுமதிகளை அனுமதிக்க விரும்பாதபோது லேபிள்"
+	},
+	"req_permissions_header": {
+		"message": "$salesforce_setup பக்கங்களை தானாக அணுக\nஎங்களை அனுமதிக்கவும்.",
+		"description": "[req_permission] அனுமதிகளைக் கோருவதற்கான பக்கத்தின் தலைப்பு"
+	},
+	"req_permissions_paragraph": {
+		"message": "நீங்கள் விரும்பினால், ஒவ்வொரு முறையும் இந்த நீட்டிப்பைக் கிளிக் செய்யாமல்\n$salesforce_setup பக்கத்திற்குச் செல்லும்போது\nஉங்களுக்குப் பிடித்தமான Tabs தோன்றும்படி செய்யலாம்.",
+		"description": "[req_permission] அனுமதிகள் ஏன் கோரப்படுகின்றன என்பதை விளக்கும் உரை"
+	},
+	"required": {
+		"message": "தேவை",
+		"description": "[input] ஒரு உள்ளீட்டு புலத்தை கட்டாயமாகக் குறிக்கிறது"
+	},
+	"required_info": {
+		"message": "= தேவையான தகவல்",
+		"description": "[modal] சில தகவல்கள் கட்டாயமானவை என்று பயனருக்குத் தெரிவிக்கிறது"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning தளம்"
+	},
+	"salesforce_login": {
+		"message": "Salesforce உள்நுழைவு",
+		"description": "Salesforce உள்நுழைவு பக்கம் (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce அமைப்புகள்",
+		"description": "எந்த Salesforce அமைப்புகள் பக்கம் (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "சேமி",
+		"description": "மாற்றங்களைப் பிரயோகித்து அவற்றை நினைவகத்தில் சேமிக்கவும்"
+	},
+	"save_tab": {
+		"message": "Tab ஆக சேமி",
+		"description": "[alt] படங்கள் வேலை செய்யாதபோது மாற்று உரை"
+	},
+	"send_tip": {
+		"message": "எங்களுக்கு ஒரு உதவிக்குறிப்பை அனுப்பவும் ❤️",
+		"description": "[popup] ஒரு உதவிக்குறிப்பை அனுப்புமாறு தூண்டுவதற்கான svg-க்கான தலைப்பு"
+	},
+	"set_gen_preview": {
+		"message": "Tab முன்னோட்டம்",
+		"description": "பொதுவான Tab தோற்றத்தை முன்னோட்டம் காண்பதற்கான லேபிள்"
+	},
+	"set_gen_styler": {
+		"message": "Tab அலங்காரம்",
+		"description": "பொதுவான Tab-களின் பாணியை உள்ளமைப்பதற்கான லேபிள்"
+	},
+	"set_general_settings": {
+		"message": "பொது அமைப்புகள்",
+		"description": "ஒட்டுமொத்த உள்ளமைவு விருப்பங்களுக்கான பிரிவு தலைப்பு"
+	},
+	"set_move_available": {
+		"message": "கிடைக்கக்கூடியவற்றிற்கு நகர்த்து",
+		"description": "தேர்ந்தெடுக்கப்பட்ட உருப்படிகளை கிடைக்கக்கூடியவற்றுக்கு திருப்பி அனுப்புவதற்கான பொத்தான் தலைப்பு"
+	},
+	"set_move_chosen": {
+		"message": "தேர்ந்தெடுக்கப்பட்டவற்றிற்கு நகர்த்து",
+		"description": "தேர்ந்தெடுக்கப்பட்ட உருப்படிகளை தேர்ந்தெடுக்கப்பட்டவற்றுக்கு நகர்த்துவதற்கான பொத்தான் தலைப்பு"
+	},
+	"set_org_preview": {
+		"message": "நிறுவன முன்னோட்டம்",
+		"description": "நிறுவனம் சார்ந்த Tab தோற்றத்தை முன்னோட்டம் காண்பதற்கான லேபிள்"
+	},
+	"set_org_styler": {
+		"message": "நிறுவன அலங்காரம்",
+		"description": "நிறுவனம் சார்ந்த Tab-களின் பாணியை உள்ளமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_background_active_label": {
+		"message": "உங்கள் செயலில் உள்ள பொதுவான Tab-களுக்கான பின்னணி நிறத்தை உள்ளிடவும்.",
+		"description": "செயலில் உள்ள பொதுவான Tab-களுக்கான பின்னணி நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_background_label": {
+		"message": "உங்கள் நிறுவன Tab-களுக்கான பின்னணி நிறத்தை உள்ளிடவும்.",
+		"description": "நிறுவனம் சார்ந்த Tab-களுக்கான பின்னணி நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "உங்கள் செயலில் உள்ள நிறுவன Tab-களுக்கான எல்லை நிறத்தை உள்ளிடவும்.",
+		"description": "செயலில் உள்ள நிறுவனம் சார்ந்த Tab-களுக்கான எல்லை நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_border_color_label": {
+		"message": "உங்கள் பொதுவான Tab-களுக்கான எல்லை நிறத்தை உள்ளிடவும்.",
+		"description": "பொதுவான Tab-களுக்கான எல்லை நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_color_active_label": {
+		"message": "உங்கள் செயலில் உள்ள பொதுவான Tab-களுக்கான உரை நிறத்தை உள்ளிடவும்.",
+		"description": "செயலில் உள்ள பொதுவான Tab-களுக்கான உரை நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_color_label": {
+		"message": "உங்கள் நிறுவன Tab-களுக்கான உரை நிறத்தை உள்ளிடவும்.",
+		"description": "நிறுவனம் சார்ந்த Tab-களுக்கான உரை நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "உங்கள் செயலில் உள்ள நிறுவன Tab-களுக்கான ஒன்று அல்லது அதற்கு மேற்பட்ட அலங்கார பாணிகளைத் தேர்ந்தெடுக்கவும்.",
+		"description": "செயலில் உள்ள நிறுவனம் சார்ந்த Tab-களுக்கான அலங்கார பாணிகளைத் தேர்ந்தெடுப்பதற்கான உரை"
+	},
+	"set_tab_decoration_label": {
+		"message": "உங்கள் பொதுவான Tab-களுக்கான ஒன்று அல்லது அதற்கு மேற்பட்ட அலங்கார பாணிகளைத் தேர்ந்தெடுக்கவும்.",
+		"description": "பொதுவான Tab-களுக்கான அலங்கார பாணிகளைத் தேர்ந்தெடுப்பதற்கான உரை"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "உங்கள் செயலில் உள்ள பொதுவான Tab-களுக்கான சுட்டி வைக்கும் போதான பின்னணி நிறத்தை உள்ளிடவும்.",
+		"description": "செயலில் உள்ள பொதுவான Tab-களுக்கான சுட்டி வைக்கும் போதான பின்னணி நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_hover_background_label": {
+		"message": "உங்கள் நிறுவன Tab-களுக்கான சுட்டி வைக்கும் போதான பின்னணி நிறத்தை உள்ளிடவும்.",
+		"description": "நிறுவனம் சார்ந்த Tab-களுக்கான சுட்டி வைக்கும் போதான பின்னணி நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "உங்கள் செயலில் உள்ள நிறுவன Tab-களுக்கான நிழல் நிறத்தை உள்ளிடவும்.",
+		"description": "செயலில் உள்ள நிறுவனம் சார்ந்த Tab-களுக்கான நிழல் நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_shadow_label": {
+		"message": "உங்கள் பொதுவான Tab-களுக்கான நிழல் நிறத்தை உள்ளிடவும்.",
+		"description": "பொதுவான Tab-களுக்கான நிழல் நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_tab_top_active_label": {
+		"message": "உங்கள் செயலில் உள்ள பொதுவான Tab-களின் மேல் பகுதியில் உள்ள பட்டைக்கான நிறத்தை உள்ளிடவும்.",
+		"description": "செயலில் உள்ள பொதுவான Tab-களுக்கான மேல்-பட்டை நிறத்தை அமைப்பதற்கான லேபிள்"
+	},
+	"set_toggle_preview": {
+		"message": "செயலில் உள்ள நிலையை மாற்ற கிளிக் செய்யவும்.",
+		"description": "செயலில் உள்ள நிலையை மாற்றும் கட்டுப்பாட்டிற்கான கருவி உதவிக்குறிப்பு உரை"
+	},
+	"settings": {
+		"message": "அமைப்புகள்",
+		"description": "அமைப்புகள் மெனுவிற்கான லேபிள்"
+	},
+	"setup_page": {
+		"message": "அமைப்பு பக்கம்",
+		"description": "[notSalesforceSetup] Salesforce அமைப்புகளை மாற்றப் பயன்படுத்தப்படும் பக்கம்"
+	},
+	"skip": {
+		"message": "தவிர்",
+		"description": "[req_permission] அனுமதிகளை அனுமதிக்காத பொத்தான்"
+	},
+	"successfully_imported": {
+		"message": "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது",
+		"description": "[toast] பயனர் வெளிப்புற கோப்பிலிருந்து Tabs ஐச் சேர்த்தார்"
+	},
+	"tab_explain": {
+		"message": "ஒவ்வொரு உருப்படியும் 'label' மற்றும் 'url' ஐ சரங்களாகக் கொண்டிருக்க வேண்டும். கூடுதலாக, ஒவ்வொரு உருப்படியும் 'org' ஐ சரமாக கொண்டிருக்கலாம்.",
+		"description": "[பிழை] ஒரு Tab எப்படி கட்டமைக்கப்பட வேண்டும் என்பதை விளக்குகிறது"
+	},
+	"tab_information": {
+		"message": "Tab தகவல்",
+		"description": "புதுப்பிப்பு Tab மோடலுக்கான தலைப்பு"
+	},
+	"tab_label": {
+		"message": "Tab லேபிள்",
+		"description": "Tab இன் லேபிள் பண்பு, அதன் பெயர்"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "Tab இன் Org பண்பு, அது ஒரு ஒற்றை Salesforce நிறுவனத்திற்கானது என்றால்"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab இன் URL பண்பு, அது எங்கு சுட்டுகிறது"
+	},
+	"table_delete": {
+		"message": "Tab நீக்கு",
+		"description": "[popup] நீக்கு பொத்தானுடன் கூடிய நிரலுக்கான உதவி உரை"
+	},
+	"table_org": {
+		"message": "Org Tab ஆக உள்ளதா",
+		"description": "[popup] Org தேர்வுப்பெட்டியுடன் கூடிய நிரலுக்கான உதவி உரை"
+	},
+	"table_row_label": {
+		"message": "இந்த URL க்கான லேபிளை உள்ளிடவும்",
+		"description": "[popup] Tab பெயருடன் உள்ளீட்டு புலம்"
+	},
+	"table_row_org": {
+		"message": "இந்த Tab இந்த Org க்கு மட்டுமே கிடைக்க வேண்டுமென்றால் கிளிக் செய்யவும்.",
+		"description": "[popup] Tab ஐ Org-குறிப்பிட்டதாக நிலைமாற்ற தேர்வுப்பெட்டி"
+	},
+	"table_row_org_name": {
+		"message": "இந்த Tab கிடைக்கும் Org.",
+		"description": "[popup] Org பெயருடன் உள்ளீட்டு புலம்"
+	},
+	"table_row_url": {
+		"message": "நீங்கள் திருப்பிவிடப்பட விரும்பும் துணை_URL ஐ உள்ளிடவும்.",
+		"description": "[popup] Tab url உடன் உள்ளீட்டு புலம்"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "பயனரின் பிடித்தமான இணைப்புகள்"
+	},
+	"tabs_saved": {
+		"message": "Tabs சேமிக்கப்பட்டது.",
+		"description": "[toast] Tabs வெற்றிகரமாக சேமிக்கப்பட்டது."
+	},
+	"theme_dark": {
+		"message": "கருப்பொருளை இருண்டதாக மாற்று",
+		"description": "[popup] கருப்பொருளை மாற்ற சந்திரனின் மீதான தலைப்பு"
+	},
+	"theme_light": {
+		"message": "கருப்பொருளை வெளிச்சமாக மாற்று",
+		"description": "[popup] கருப்பொருளை மாற்ற சூரியனின் மீதான தலைப்பு"
+	},
+	"underline": {
+		"message": "அடிக்கோடு",
+		"description": "Tab உரைக்கு அடிக்கோடிடுவதற்கான அலங்கார பாணி விருப்பம்"
+	},
+	"underline_wavy": {
+		"message": "அலை அடிக்கோடு",
+		"description": "Tab உரைக்கு அலை வடிவ அடிக்கோட்டைப் பயன்படுத்துவதற்கான அலங்கார பாணி விருப்பம்"
+	},
+	"update_available": {
+		"message": "புதுப்பிப்பு கிடைக்கிறது",
+		"description": "நீட்டிப்புக்கான புதிய புதுப்பிப்பு கிடைக்கிறது"
+	},
+	"upload": {
+		"message": "பதிவேற்று",
+		"description": "[இறக்குமதி] பயனர் தங்கள் கோப்புகளை உலவ மற்றும் சரியானதைத் தேர்ந்தெடுக்க அனுமதிக்கவும்"
+	},
+	"users": {
+		"message": "பயனர்கள்",
+		"description": "ManageUsers/home உடன் தொடர்புடைய பக்கத்தின் பெயர்"
+	},
+	"where_to": {
+		"message": "எங்கே?",
+		"description": "[open-other-org-modal] மோடலுக்கான பின்னடைவு தலைப்பு"
+	},
+	"write_review": {
+		"message": "ஒரு மதிப்பாய்வு எழுதுங்கள்!",
+		"description": "[popup] ஒரு மதிப்பாய்வை எழுதக் கோருவதற்கான svg-க்கான தலைப்பு"
+	}
+}

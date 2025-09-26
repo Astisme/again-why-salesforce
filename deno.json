@@ -10,19 +10,30 @@
 			"*bundled*"
 		]
 	},
+	"lint": {
+		"exclude": [
+			"./tests/salesforce/*"
+		]
+	},
 	"tasks": {
-		"test": "deno test --no-check --parallel --quiet",
+		"test": "deno task test-gen && deno task test-bg",
+		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
+		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
+		"test-sf": "deno task start-browser & BROWSER_PID=$! && sleep 10 && deno test --no-check --parallel  --import=tests/mocks.ts -A ./tests/salesforce/*.test.ts",
+		"start-browser": "deno task setup-chrome && deno run -A ./tests/salesforce/browser-setup.ts",
+		"setup-chrome": "bash ./tests/salesforce/setup-chrome.sh && deno task dev-chrome",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
-		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add _locales/*/messages.json",
+		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",
 		"locale-check": "deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
 		"bundle": "deno run -A bin/build.ts",
+		"checks": "deno task locales && deno task fmt && deno task lint && deno task test",
 
-		"dev-firefox": "deno --allow-write manifest/build-manifest.mjs firefox && deno task bundle",
-		"dev-chrome": "deno --allow-write manifest/build-manifest.mjs chrome && deno task bundle",
-		"dev-edge": "deno --allow-write manifest/build-manifest.mjs edge && deno task bundle",
-		"dev-safari": "deno --allow-write manifest/build-manifest.mjs safari && deno task bundle",
+		"dev-firefox": "deno --allow-write src/manifest/build-manifest.mjs firefox && deno task bundle",
+		"dev-chrome": "deno --allow-write src/manifest/build-manifest.mjs chrome && deno task bundle",
+		"dev-edge": "deno --allow-write src/manifest/build-manifest.mjs edge && deno task bundle",
+		"dev-safari": "deno --allow-write src/manifest/build-manifest.mjs safari && deno task bundle",
 
 		"build-firefox": "deno task dev-firefox && bash bin/zip-extension.bash firefox",
 		"build-chrome": "deno task dev-chrome && bash bin/zip-extension.bash chrome",
@@ -32,12 +43,11 @@
 		"release": "deno --allow-read --allow-run --allow-env bin/build-releases.ts"
 	},
 	"imports": {
-		"/": "./",
+		"/": "./src/",
 		"./": "./",
 		"@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.1",
-		"esbuild": "npm:esbuild@^0.25.0"
-	},
-	"test": {
-		"include": ["tests/*.test.ts"]
+		"esbuild": "npm:esbuild@^0.25.0",
+		"puppeteer": "npm:puppeteer@^24.17.0",
+		"@std/testing/asserts": "https://deno.land/std/testing/asserts.ts"
 	}
 }

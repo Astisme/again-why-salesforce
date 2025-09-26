@@ -3,6 +3,79 @@
 All notable changes to this project are documented here.\
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
 
+<!--
+# Next release
+## 🚀 Added
+## 🛠 Changed
+## 🐛 Fixed
+## 🧪 Tests
+-->
+
+# v2.1.0
+
+## 🚀 Added
+
+### Salesforce
+
+1. Allow sorting options for saved Tabs (by Label, by URL, by Org; ascending and descending). [Read the wiki](https://github.com/Astisme/again-why-salesforce/wiki/Sort-Tabs)
+2. Context menus (right-click Tab) now offer one-shot sort actions.
+3. New setting: "Keep Tabs sorted" to always auto-sort Tabs.
+
+### Popup
+
+1. Added new button to send a review from your browser's store page (detected dynamically).
+2. Added new button to [sponsor the project](https://alfredoit.dev/en/sponsor/) (any amount is appreciated).
+
+### Settings
+
+1. Interactive help icons next to every setting in the Options page.
+2. Clicking a help icon opens documentation if a URL is provided.
+3. Ensured settings interactions do not conflict (e.g., disabling "Add Tabs in Front" when persistent sorting is enabled).
+4. Improved layout, grouping, and responsiveness; added toast notifications for saved settings.
+5. New Setting to always add new Tabs as "Org Tabs".
+6. New Setting to always place new Tabs at the front.
+
+### Localization
+
+1. New translation strings for Tab sorting (ascending, descending, by Label, URL, Org) in all supported languages.
+2. Help/documentation strings for every setting.
+3. UI strings for context menu sort actions, sorting errors, and new manifest descriptions.
+
+## 🛠 Changed
+
+### Salesforce
+
+1. TabContainer now tracks sorting state and direction.
+2. Improved feedback for Tab sorting actions.
+
+### Settings
+
+1. Refreshed settings layout and grouping for clarity.
+2. Improved responsiveness and visual feedback (toasts) for settings changes.
+
+### Documentation
+
+1. Updated README with a link to the new wiki page for Tab Sorting.
+2. Documentation/help references throughout settings and README.
+
+### Repo
+
+1. Created `src` folder and moved extension-related scripts into it.
+2. Updated `deno.json` to point to `src` instead of `./` for imports.
+3. Refactored other files accordingly.
+
+## 🐛 Fixed
+
+### General
+
+1. Improved interaction between persistent sorting and manual Tab placement settings to prevent conflicting behaviors.
+
+## 🧪 Tests
+
+1. Extended test coverage for Tab sorting, persistent sorting, and settings UI interactions.
+2. Created tests for background files.
+3. Created scaffolding for tests of salesforce and popup files.
+
 # v2.0.2
 
 ## 🛠 Changed

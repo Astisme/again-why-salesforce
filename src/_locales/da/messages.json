@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Tillad",
+		"description": "[req_permission] knap for at tillade tilladelser"
+	},
+	"ascending": {
+		"message": "Stigende (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Tilgængelig",
+		"description": "Sektionsoverskrift for elementer, der kan tilføjes"
+	},
+	"bold": {
+		"message": "Fed",
+		"description": "Skrifttypemulighed for fed tekst"
+	},
+	"cancel": {
+		"message": "Annuller",
+		"description": "titel eller tekstindhold for knapper, der forhindrer den aktuelle handling i at blive udført"
+	},
+	"cancel_close": {
+		"message": "Annuller og luk",
+		"description": "titel eller tekstindhold for lukkeknappen på modaler"
+	},
+	"chosen": {
+		"message": "Valgt",
+		"description": "Sektionsoverskrift for elementer, der er blevet valgt"
+	},
+	"cmd_export_all": {
+		"message": "Vis modal for at eksportere alle gemte Tabs",
+		"description": "[kommando beskrivelse] brugeren vil eksportere alle Tabs"
+	},
+	"cmd_import": {
+		"message": "Vis modal for at importere nye Tabs",
+		"description": "[kommando beskrivelse] brugeren vil importere nye Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Vis modal for at åbne den aktuelle side i en anden Org",
+		"description": "[kommando beskrivelse] brugeren vil åbne den aktuelle side i en anden Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Fjern den aktuelle side fra Tab-listen (hvis gemt)",
+		"description": "[kommando beskrivelse] brugeren vil fjerne den aktuelle side"
+	},
+	"cmd_save_as_tab": {
+		"message": "Gem den aktuelle side i Tab-listen (hvis ikke gemt)",
+		"description": "[kommando beskrivelse] brugeren vil gemme den aktuelle side"
+	},
+	"cmd_toggle_org": {
+		"message": "Vis modal for at skifte Org-værdien for den aktuelle side (hvis gemt)",
+		"description": "[kommando beskrivelse] brugeren vil skifte Org for den aktuelle side"
+	},
+	"cmd_update_tab": {
+		"message": "Vis modal for at opdatere den aktuelle side (hvis gemt)",
+		"description": "[kommando beskrivelse] brugeren vil opdatere den aktuelle side"
+	},
+	"confirm_another_org": {
+		"message": "Bekræft åbning af dette link.",
+		"description": "[open-other-org-modal] anmodning om bekræftelse fra brugeren for at åbne det konstruerede link."
+	},
+	"confirm_update_extension": {
+		"message": "En ny version af $extension_label er nu tilgængelig!",
+		"description": "en ukendt meddelelse er modtaget fra en lytter"
+	},
+	"continue": {
+		"message": "Fortsæt",
+		"description": "tekstindhold for knapper, der muliggør den aktuelle handling"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Alle generiske Tab",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Fjern alle Tab",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Alle synlige Tab",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Eksporter Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Flyt Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Gør til første",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Gør til sidste",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Flyt til venstre",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Flyt til højre",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Åbn i en anden Organisation",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Fjern Tab(s)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tab til venstre",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Andre Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tab til højre",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Denne Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Nulstil standard-Tab",
+		"description": "[kontekstmenu]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Etiket til indstillingsmenuen"
+	},
+	"cxm_sort": {
+		"message": "🎯 Sorter Tabs",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs automatisk (forældremenu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 efter Label",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter label"
+	},
+	"cxm_sort_org": {
+		"message": "👽 efter Org",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter organisation"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 efter Url",
+		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter URL"
+	},
+	"cxm_update": {
+		"message": "✏️ Opdater Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Skift Organisation",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Andre opdateringer",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Slet",
+		"description": "[popup] slet en række"
+	},
+	"delete_all": {
+		"message": "$delete alle Tabs",
+		"description": "[popup] titel på papirkurven for at tømme alle Tabs"
+	},
+	"descending": {
+		"message": "Faldende (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] tillader brugeren at droppe deres filer på det angivne område"
+	},
+	"enable": {
+		"message": "Aktiver",
+		"description": "[anmod_tilladelse] knap for at aktivere tilladelser"
+	},
+	"error_adding_tab": {
+		"message": "Fejl ved tilføjelse af Tab.",
+		"description": "[fejl] Generisk fejl ved tilføjelse af en Tab"
+	},
+	"error_check_update": {
+		"message": "Fejl under kontrol efter opdateringer",
+		"description": "[fejl] generel fejl under kontrol efter udvidelsesopdateringer"
+	},
+	"error_close_other_modal": {
+		"message": "Luk det andet modal først!",
+		"description": "[toast] Brugeren forsøgte at åbne mere end et modal vindue"
+	},
+	"error_cxm_check": {
+		"message": "Fejl ved kontrol af menupunkter",
+		"description": "[error] kontekstmenuens elementer blev ikke fundet"
+	},
+	"error_cxm_create": {
+		"message": "Fejl ved oprettelse af menupunkter",
+		"description": "[error] kontekstmenuens elementer kunne ikke initialiseres"
+	},
+	"error_cxm_remove": {
+		"message": "Fejl ved fjernelse af menupunkter",
+		"description": "[error] kontekstmenuens elementer kunne ikke fjernes"
+	},
+	"error_duplicate_tab": {
+		"message": "Denne Tab findes allerede",
+		"description": "[error] Tabben er en dublet"
+	},
+	"error_expand_url": {
+		"message": "Kan ikke udvide en tom URL!",
+		"description": "[error] der blev ikke angivet en URL til udvidelse"
+	},
+	"error_expand_url_no_base": {
+		"message": "Kan ikke udvide en URL uden dens vært!",
+		"description": "[error] der blev ikke angivet en basis-URL til udvidelse"
+	},
+	"error_extract_empty_url": {
+		"message": "Kan ikke udtrække organisationsnavn fra en tom URL!",
+		"description": "[error] der blev ikke angivet en URL, hvorfra organisationsnavnet skal udtrækkes"
+	},
+	"error_failed_sync": {
+		"message": "Synkronisering mislykkedes.",
+		"description": "[fejl] Generisk fejl ved synkronisering af Tabs med brugeren"
+	},
+	"error_failed_to_fetch": {
+		"message": "Kunne ikke hente eksterne ressourcer",
+		"description": "[fejl] Kaldet til et eksternt websted lykkedes ikke"
+	},
+	"error_get_with_no_org": {
+		"message": "Kan ikke hente Tabs, hvis organisation ikke er specificeret.",
+		"description": "[error] forsøg på at søge efter Tabs uden at sende organisationsinformation"
+	},
+	"error_import": {
+		"message": "Fejl ved import:\n",
+		"description": "[error] der opstod en fejl under importprocessen"
+	},
+	"error_invalid_key": {
+		"message": "Den nøgleparameter, der blev sendt til funktionen, er ugyldig",
+		"description": "[fejl] udvikleren forsøgte at kalde funktionen med en ugyldig parameter"
+	},
+	"error_invalid_request": {
+		"message": "Ugyldig anmodning.",
+		"description": "[fejl] Generisk fejl efter modtagelse af en besked i forkert format"
+	},
+	"error_invalid_tab": {
+		"message": "Ugyldig Tab",
+		"description": "[error] Tabben er ikke gyldig"
+	},
+	"error_link_with_id": {
+		"message": "Denne side kan ikke eksistere i en anden Organisation, fordi den indeholder et Id!",
+		"description": "[open-other-org-modal] advarsel til brugeren om, at linket muligvis ikke findes i en anden organisation"
+	},
+	"error_many_matching_tab": {
+		"message": "Der blev fundet mere end 1 matchende Tab.",
+		"description": "[error] der blev returneret for mange Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Der blev fundet mere end én Tab.",
+		"description": "[fejl] Flere Tabs blev hentet"
+	},
+	"error_minify_url": {
+		"message": "Kan ikke minimere en tom URL!",
+		"description": "[error] der blev ikke angivet en URL til minimering"
+	},
+	"error_missing_favourite_id": {
+		"message": "Kan ikke hente favoritbillede uden Id",
+		"description": "[error] der blev ikke angivet et id for favoritbilledet"
+	},
+	"error_missing_key": {
+		"message": "Nøgle ikke fundet overhovedet",
+		"description": "[error] ingen oversættelse blev fundet i filerne"
+	},
+	"error_no_array": {
+		"message": "Ugyldig array eller ingen array blev angivet",
+		"description": "[error] der blev ikke modtaget et gyldigt array"
+	},
+	"error_no_browser_tab": {
+		"message": "Kunne ikke finde en aktiv browserfane.",
+		"description": "[error] baggrundssiden kunne ikke identificere en aktiv browserfane"
+	},
+	"error_no_callback": {
+		"message": "Angiv venligst en callback-funktion",
+		"description": "[error] der blev ikke angivet en funktion at kalde i slutningen af metoden"
+	},
+	"error_no_cookies": {
+		"message": "Matchende cookies blev ikke fundet",
+		"description": "[error] Salesforce-cookies blev ikke returneret"
+	},
+	"error_no_data": {
+		"message": "Kan ikke identificere en Tab uden data.",
+		"description": "[error] forsøg på at hente en Tab uden at sende data"
+	},
+	"error_no_headers": {
+		"message": "Kunne ikke finde overskrifter.",
+		"description": "[error] udvidelsen kunne ikke finde, hvor den skulle placere favoritknappen"
+	},
+	"error_no_matching_tab": {
+		"message": "Ingen matchende Tabs blev fundet.",
+		"description": "[error] der blev ikke returneret nogen matchende Tabs"
+	},
+	"error_no_message": {
+		"message": "Ingen besked er specificeret til afsendelse.",
+		"description": "[error] der blev ikke fundet nogen besked til afsendelse til andre dele af koden"
+	},
+	"error_no_object": {
+		"message": "Intet objekt blev angivet til kontrol!",
+		"description": "[error] intet objekt blev angivet til kontrol"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab blev ikke fundet.",
+		"description": "[error] udvidelsen kunne ikke finde, hvor den skulle placere de gemte Tabs"
+	},
+	"error_no_url": {
+		"message": "Ingen URL blev angivet til kontrol!",
+		"description": "[error] der blev ikke angivet en URL til kontrol"
+	},
+	"error_not_initialized": {
+		"message": "Ikke initialiseret endnu.",
+		"description": "[fejl] Generisk fejl når en variabel ikke er klar"
+	},
+	"error_processing_tabs": {
+		"message": "Fejl ved behandling af Tabs.",
+		"description": "[fejl] Generisk fejl ved behandling af Tabs"
+	},
+	"error_redirect": {
+		"message": "Kan ikke omdirigere. Opdater venligst siden.",
+		"description": "[fejl] Generisk fejl ved sideomdirigering"
+	},
+	"error_remove_not_favourite": {
+		"message": "Kan ikke fjerne en Tab, der ikke er favorit!",
+		"description": "[error] brugeren forsøgte at fjerne en Tab, der endnu ikke var gemt"
+	},
+	"error_removing_all_tabs": {
+		"message": "Fejl ved fjernelse af alle Tabs.",
+		"description": "[fejl] Generisk fejl ved fjernelse af alle Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Fejl ved fjernelse af generiske Tabs.",
+		"description": "[fejl] Generisk fejl ved fjernelse af generiske Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Fejl ved fjernelse af andre Tabs.",
+		"description": "[fejl] Generisk fejl ved fjernelse af andre Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Fejl ved fjernelse af Tab.",
+		"description": "[fejl] Generisk fejl ved fjernelse af en Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Fejl ved fjernelse af alle synlige Tab.",
+		"description": "[fejl] Generisk fejl ved fjernelse af alle synlige Tab"
+	},
+	"error_required_params": {
+		"message": "De krævede parametre til funktionen blev ikke overført",
+		"description": "[fejl] udvikleren forsøgte at kalde funktionen uden de nødvendige parametre"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Fejl ved nulstilling til standard-Tab.",
+		"description": "[fejl] Generisk fejl ved nulstilling af Tab til standard"
+	},
+	"error_sorting_tabs": {
+		"message": "Fejl under sortering af Tabs",
+		"description": "[error] vist i en toast-meddelelse"
+	},
+	"error_sync_nothing": {
+		"message": "Kan ikke synkronisere tomme Tabs!",
+		"description": "[error] der blev forsøgt at synkronisere ingenting"
+	},
+	"error_tab_constructor": {
+		"message": "Brug Tab.create() i stedet for new Tab()",
+		"description": "[fejl] Informer udvikleren om, hvordan man bruger klassen Tab"
+	},
+	"error_tab_label": {
+		"message": "Etiketten skal være en ikke-tom streng",
+		"description": "[error] brugeren forsøgte at oprette en Tab uden en etiket"
+	},
+	"error_tab_not_found": {
+		"message": "Tab blev ikke fundet.",
+		"description": "[error] Tab blev ikke inkluderet i array'et"
+	},
+	"error_tab_object_creation": {
+		"message": "Ved kald med et objekt, skal der ikke sendes andet med.",
+		"description": "[error] implementeringsfejl fra udviklers side"
+	},
+	"error_tab_org": {
+		"message": "Organisationen skal være en streng eller undefined",
+		"description": "[error] brugeren forsøgte at oprette en Tab med en ugyldig organisationsværdi"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Uventede nøgler fundet:",
+		"description": "[error] brugeren forsøgte at oprette en Tab med ikke-understøttede egenskaber"
+	},
+	"error_tab_url": {
+		"message": "URL skal være en ikke-tom streng",
+		"description": "[error] brugeren forsøgte at oprette en Tab uden URL"
+	},
+	"error_tab_url_saved": {
+		"message": "En Tab med denne URL er allerede gemt!",
+		"description": "[fejl] Brugeren forsøgte at gemme en allerede gemt Tab"
+	},
+	"error_tabcont_initialize": {
+		"message": "Kan ikke initialiseres med",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Ugyldige Tab(s) fundet.\nFørste forekomst:",
+		"description": "[error] ugyldige Tabs blev modtaget"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Brug TabContainer.create() i stedet for new TabContainer()",
+		"description": "[fejl] Informer udvikleren om, hvordan man bruger klassen TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Brug TranslationService.create() i stedet for new TranslationService()",
+		"description": "[fejl] Informer udvikleren om, hvordan man bruger klassen TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator er endnu ikke initialiseret.",
+		"description": "[fejl] TranslationService var ikke klar"
+	},
+	"error_unknown_message": {
+		"message": "Ukendt meddelelse modtaget",
+		"description": "en ukendt meddelelse er modtaget fra en lytter"
+	},
+	"error_unknown_request": {
+		"message": "Ukendt anmodning.",
+		"description": "[fejl] Generisk fejl efter modtagelse af en ukendt besked"
+	},
+	"error_useless_remove": {
+		"message": "Kan ikke fjernes:\nDet er ikke muligt at fjerne en side, som ikke er blevet gemt tidligere",
+		"description": "[error] brugeren forsøgte at fjerne en side, der endnu ikke var gemt"
+	},
+	"error_useless_save": {
+		"message": "Kan ikke gemmes:\nDenne side er allerede gemt!",
+		"description": "[error] brugeren forsøgte at gemme en side, der allerede var gemt"
+	},
+	"export": {
+		"message": "Eksporter",
+		"description": "[popup] eksportknap"
+	},
+	"export_title": {
+		"message": "Eksporter alle Tabs",
+		"description": "[popup] titel på eksportknappen"
+	},
+	"extension_description": {
+		"message": "Opret og administrer tilpassede Tabs i det tilgængelige rum på Salesforce Lightning Setup-siden.",
+		"description": "[manifest] Beskrivelse af denne udvidelse"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Navnet på denne udvidelse"
+	},
+	"file": {
+		"message": "fil",
+		"description": "en enkelt fil"
+	},
+	"files": {
+		"message": "filer",
+		"description": "flere filer"
+	},
+	"flows": {
+		"message": "Flows",
+		"description": "[standard-tab] Etiket til standard Flows-Tab"
+	},
+	"general": {
+		"message": "Generelt",
+		"description": "Etiket for kategorien med generelle indstillinger"
+	},
+	"help": {
+		"message": "Hjælp",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Marker nye Tabs som Org Tabs, så de kun er synlige, når du er logget ind på den specifikke Salesforce Org.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Nyligt favoriserede Tabs indsættes foran på din Tab-liste i opsætningslinjen i stedet for at blive tilføjet i slutningen.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet uden for et Salesforce-domæne, fører det dig automatisk til Salesforce-loginsiden.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet inden for et Salesforce-domæne, men ikke på en opsætningsside, fører det dig automatisk til Salesforce-opsætningssiden.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Når aktiveret, holdes dine Tabs i sorteret rækkefølge – enten efter label, URL eller Org; afhængigt af hvad du vælger.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Fastgør dine gemte Tabs før standardnavigationsmenuen (Home / Object Manager) i opsætningen, i stedet for efter den.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Når aktiveret, vil hver gemt Tab åbne den relaterede side i en ny Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Undertrykker den automatiske visning af meddelelser om frigivelsesnoter, efter at udvidelsen er opdateret.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Deaktiverer pop op-vinduer med periodiske påmindelser om opdatering, hvilket holder udvidelsens UI ren (når du har deaktiveret automatiske opdateringer af udvidelsen fra din browsers indstillinger).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet uden for et Salesforce-domæne, åbnes loginsiden i den nuværende browser-Tab.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Hvis du klikker på udvidelsespop op-vinduet inden for et Salesforce-domæne, men ikke på en opsætningsside, åbnes Salesforce-opsætningssiden i den nuværende browser-Tab.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Indstil UI-sproget for kun udvidelsen. Hvis noget ikke er oversat, vil den engelske version blive brugt i stedet.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Deaktiverer grundlæggende telemetrisamling. Udvidelsen vil ikke vises i anonyme brugsstatistikker.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Omgår Lightning Navigation API'en og åbner links via en fuld sidegenindlæsning, hvilket kan være hurtigere i nogle organisationers opsætninger.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Deaktiverer udvidelseskontrollen, der verificerer, at et URL-fragment matcher formatet for Salesforce-post/objekt-ID'er (bruges til automatisk at indstille den gemte Tab som en Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Klik for at blive omdirigeret til dokumentationen for denne indstilling!",
+		"description": "[indstillinger-hjælp] opfordring til handling for at lade brugeren læse mere om en specifik indstilling"
+	},
+	"import": {
+		"message": "Importer",
+		"description": "[popup] importknap"
+	},
+	"import_duplicate_description": {
+		"message": "Duplikerede Tabs vil blive ignoreret.<br />To Tabs betragtes som duplikater, hvis de har den samme URL.",
+		"description": "[import] beskrivelse af importprocessen"
+	},
+	"import_invalid_file": {
+		"message": "Ugyldig filtype.\nKun JSON-filer understøttes.",
+		"description": "[error] filen til import er ikke en JSON-fil"
+	},
+	"import_successful": {
+		"message": "Importen lykkedes",
+		"description": "[import] importen er fuldført. Herefter vises antallet af importerede poster"
+	},
+	"import_tabs": {
+		"message": "Importer Tab",
+		"description": "[modal-title] til importprocessen"
+	},
+	"import_title": {
+		"message": "$import_tabs fra JSON-fil",
+		"description": "[popup] titel på importknappen"
+	},
+	"insert_another": {
+		"message": "Indsæt en anden",
+		"description": "[error-open-other-org-modal] meddelelse når brugeren indtaster samme organisation"
+	},
+	"insert_another_org": {
+		"message": "Den indtastede Organisation er den aktuelle!\nIndtast venligst en anden Organisation.",
+		"description": "[error-open-other-org-modal] meddelelse når brugeren indtaster samme organisation"
+	},
+	"insert_valid_org": {
+		"message": "Indtast venligst en gyldig Organisation!",
+		"description": "[error-open-other-org-modal] meddelelse når brugeren indtaster en forkert URL"
+	},
+	"italic": {
+		"message": "Kursiv",
+		"description": "Skrifttypemulighed for kursiv tekst"
+	},
+	"lightning_navigation": {
+		"message": "Lightning-navigation",
+		"description": "Salesforce’s tilpassede navigations-teknologi"
+	},
+	"login_to_salesforce": {
+		"message": "Log ind på Salesforce",
+		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforces login-side"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "pladsholder til opdatering af Tab-modal"
+	},
+	"no_manifest_github": {
+		"message": "Ugyldig eller manglende GitHub homepage_url i manifestet",
+		"description": "Nøglen homepage_url i manifestet bruger ikke et GitHub-link"
+	},
+	"no_match": {
+		"message": "Ingen matchende handling fundet",
+		"description": "[error] når switch-sætningen ikke kan matche den anmodede handling"
+	},
+	"nss_invalid_url": {
+		"message": "Ugyldig URL registreret.",
+		"description": "[ikkeSalesforceSetup] en ugyldig URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Dette er ikke en $salesforce_lightning opsætningsside.",
+		"description": "[notSalesforceSetup] brugeren er ikke på en Salesforce-side."
+	},
+	"open_here": {
+		"message": "Åbn i denne Tab.",
+		"description": "[open-other-org-modal] radioknap, der lader brugeren åbne i samme browser-Tab"
+	},
+	"open_new_tab": {
+		"message": "Åbn i en ny Tab.",
+		"description": "[open-other-org-modal] radioknap, der lader brugeren åbne i en ny browser-Tab."
+	},
+	"open_settings": {
+		"message": "Åbn udvidelsesindstillinger",
+		"description": "[pop op] knap til at omdirigere til indstillingssiden"
+	},
+	"open_setup": {
+		"message": "Åbn Setup",
+		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforce Setup-siden"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Tilføj nye Tabs som Org Tabs.",
+		"description": "[settings] lad brugeren tilføje alle nye Tabs som organisationsspecifikke"
+	},
+	"opt_add_tabs_front": {
+		"message": "Tilføj nye Tabs foran.",
+		"description": "[settings] lad brugeren tilføje alle nye Tabs foran"
+	},
+	"opt_automatic_open_login": {
+		"message": "Åbn automatisk $salesforce_login-siden, når du klikker på pop op-vinduet, mens du ikke er på en Salesforce-side.",
+		"description": "[indstilling] når brugeren åbner pop op-vinduet på et tilfældigt websted"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Åbn automatisk $salesforce_setup-siden, når du klikker på pop op-vinduet, mens du er på en Salesforce-side.",
+		"description": "[indstilling] når brugeren åbner pop op-vinduet på et Salesforce-websted"
+	},
+	"opt_confirm_save": {
+		"message": "Indstillinger blev gemt!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Standard og fallback)",
+		"description": "Standardsprogmulighed for udvidelsen"
+	},
+	"opt_keep_sort": {
+		"message": "Hold Tabs sorteret.",
+		"description": "[setting] lad brugeren holde deres Tabs sorteret efter en af deres nøgler"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Behold favorit-Tabs til venstre for Hjem og Objektstyring.",
+		"description": "Mulighed for at fastgøre favorit-Tabs til venstre side af navigationslinjen"
+	},
+	"opt_link_new_browser": {
+		"message": "Åbn altid links i en ny browser-fane.",
+		"description": "[indstilling] når du klikker på en favorit-Tab, åbnes den i en ny browser-fane"
+	},
+	"opt_no_release_notes": {
+		"message": "Vis ikke opdateringsnoter.",
+		"description": "[indstilling] lader brugeren forhindre udvidelsen i at vise versionsnoter efter opdatering"
+	},
+	"opt_no_update_notification": {
+		"message": "Advar ikke om tilgængelige opdateringer.",
+		"description": "[indstilling] lader brugeren forhindre udvidelsen i at søge efter nye udgivelser"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Åbn altid $salesforce_login-siden i samme Tab, når du klikker på pop op-vinduet.",
+		"description": "[indstilling]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Åbn altid $salesforce_setup-siden i samme Tab, når du klikker på pop op-vinduet.",
+		"description": "[indstilling]"
+	},
+	"opt_pick_language": {
+		"message": "Vælg udvidelsessprog",
+		"description": "[indstilling] etiket til at bede brugeren om at vælge deres foretrukne sprog"
+	},
+	"opt_pick_sort": {
+		"message": "Vælg hvilket felt Tabs skal sorteres efter",
+		"description": "[setting] nu kan brugeren vælge, hvilken nøgle der skal holdes Tabs sorteret efter"
+	},
+	"opt_prevent_analytics": {
+		"message": "Forhindr brug af Simple Analytics (bliver ikke talt med i brugerantal).",
+		"description": "[indstilling] lader brugeren forhindre afsendelse af anonym analyse"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Forhindre brug af Lightning Navigation (hurtigere indlæsning, når den ikke er markeret).",
+		"description": "[setting] tillad ikke Lightning Navigation med forklaring af funktionen"
+	},
+	"opt_same_tab_popup": {
+		"message": "side i den samme fane ved klik på pop-up.",
+		"description": "[indstilling] forhindr åbning af en ny browser-fane"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Følg Salesforce-sprog (læser Salesforce-cookies)",
+		"description": "Mulighed for at bruge Salesforces sprogindstilling. For at bruge denne mulighed skal brugere give udvidelsen tilladelse til at læse Salesforce-cookies."
+	},
+	"opt_skip_link_detection": {
+		"message": "Spring automatisk kontrol af Salesforce ID over.",
+		"description": "[indstilling] når der gemmes en favorit-Tab, forhindr kontrol af ID i linket"
+	},
+	"or_drop": {
+		"message": "Eller $drop",
+		"description": "[importer] lad brugeren flytte filer med musen og slippe dem"
+	},
+	"org_link": {
+		"message": "Organisationslink",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Oplysninger om en anden Organisation",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "anden-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Overskriv gemte Tabs.",
+		"description": "[label] slet alle gemte Tabs under import"
+	},
+	"preserve_org_tabs": {
+		"message": "Bevar Tabs for andre organisationer.",
+		"description": "[label] behold alle organisationsspecifikke Tabs under import"
+	},
+	"remove_tab": {
+		"message": "Fjern Tab",
+		"description": "[alt] alternativ tekst når billeder ikke vises"
+	},
+	"req_downloads_open_popup": {
+		"message": "Åbn venligst udvidelsens pop op fra udvidelsesmenuen i din browser.",
+		"description": "[meddelelse] bed brugeren om at klikke på udvidelsens pop op for at fortsætte"
+	},
+	"req_downloads_perm_header": {
+		"message": "Aktiver venligst downloadtilladelsen\nfor at starte den anmodede eksport.",
+		"description": "[anmod_tilladelse] opfordring til handling for at aktivere downloadtilladelse"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Denne handling vil kun blive anmodet én gang.",
+		"description": "[anmod_tilladelse] beskrivelse for at aktivere downloadtilladelse"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Spørg ikke igen.",
+		"description": "[req_permission] mærkat når brugeren ikke ønsker at give tilladelser permanent"
+	},
+	"req_permissions_header": {
+		"message": "Tillad os venligst at få adgang til\n$salesforce_setup-sider automatisk.",
+		"description": "[req_permission] sidehoved på siden for at anmode om tilladelser"
+	},
+	"req_permissions_paragraph": {
+		"message": "Hvis du ønsker det, kan du få dine foretrukne Tabs vist\nså snart du navigerer til en $salesforce_setup-side\nuden at skulle klikke på denne udvidelse hver gang.",
+		"description": "[req_permission] tekst, der forklarer, hvorfor tilladelserne anmodes om"
+	},
+	"required": {
+		"message": "påkrævet",
+		"description": "[input] angiver at et inputfelt er påkrævet"
+	},
+	"required_info": {
+		"message": "= Påkrævet information",
+		"description": "[modal] informerer brugeren om, at visse oplysninger er påkrævede"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning-platformen"
+	},
+	"salesforce_login": {
+		"message": "Salesforce-login",
+		"description": "Salesforce-login-siden (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce-opsætning",
+		"description": "enhver Salesforce-opsætningsside (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Gem",
+		"description": "Anvend ændringer og gem dem i hukommelsen"
+	},
+	"save_tab": {
+		"message": "Gem som Tab",
+		"description": "[alt] alternativ tekst når billeder ikke vises"
+	},
+	"send_tip": {
+		"message": "Send os et tip ❤️",
+		"description": "[popup] titel for svg for at bede om at sende et tip"
+	},
+	"set_gen_preview": {
+		"message": "Tab-forhåndsvisning",
+		"description": "Etiket til forhåndsvisning af generiske Tabs udseende"
+	},
+	"set_gen_styler": {
+		"message": "Tab-styler",
+		"description": "Etiket til konfigurering af stilen for generiske Tabs"
+	},
+	"set_general_settings": {
+		"message": "Generelle indstillinger",
+		"description": "Sektionsoverskrift for overordnede konfigurationsmuligheder"
+	},
+	"set_move_available": {
+		"message": "Flyt til Tilgængelig",
+		"description": "Knaptitel til at flytte valgte elementer tilbage til Tilgængelig"
+	},
+	"set_move_chosen": {
+		"message": "Flyt til Valgt",
+		"description": "Knaptitel til at flytte valgte elementer til Valgt"
+	},
+	"set_org_preview": {
+		"message": "Organisations-forhåndsvisning",
+		"description": "Etiket til forhåndsvisning af organisationsspecifikke Tabs"
+	},
+	"set_org_styler": {
+		"message": "Organisations-styler",
+		"description": "Etiket til konfigurering af stilen for organisationsspecifikke Tabs"
+	},
+	"set_tab_background_active_label": {
+		"message": "Indsæt baggrundsfarven for dine aktive generiske Tabs.",
+		"description": "Etiket til indstilling af baggrundsfarve for aktive generiske Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Indsæt baggrundsfarven for dine organisations-Tabs.",
+		"description": "Etiket til indstilling af baggrundsfarve for organisationsspecifikke Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Indsæt kantfarven for dine aktive organisations-Tabs.",
+		"description": "Etiket til indstilling af kantfarve for aktive organisationsspecifikke Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Indsæt kantfarven for dine generiske Tabs.",
+		"description": "Etiket til indstilling af kantfarve for generiske Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Indsæt tekstfarven for dine aktive generiske Tabs.",
+		"description": "Etiket til indstilling af tekstfarve for aktive generiske Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Indsæt tekstfarven for dine organisations-Tabs.",
+		"description": "Etiket til indstilling af tekstfarve for organisationsspecifikke Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Vælg en eller flere dekorationsstile for dine aktive organisations-Tabs.",
+		"description": "Prompt til at vælge dekorationsstile for aktive organisationsspecifikke Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Vælg en eller flere dekorationsstile for dine generiske Tabs.",
+		"description": "Prompt til at vælge dekorationsstile for generiske Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Indsæt hover-baggrundsfarven for dine aktive generiske Tabs.",
+		"description": "Etiket til indstilling af hover-baggrundsfarve for aktive generiske Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Indsæt hover-baggrundsfarven for dine organisations-Tabs.",
+		"description": "Etiket til indstilling af hover-baggrundsfarve for organisationsspecifikke Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Indsæt skyggefarven for dine aktive organisations-Tabs.",
+		"description": "Etiket til indstilling af skyggefarve for aktive organisationsspecifikke Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Indsæt skyggefarven for dine generiske Tabs.",
+		"description": "Etiket til indstilling af skyggefarve for generiske Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Indsæt farven for bjælken øverst på dine aktive generiske Tabs.",
+		"description": "Etiket til indstilling af topbjælkefarve for aktive generiske Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Klik for at skifte aktiv tilstand.",
+		"description": "Værktøjstip for kontrollen til at skifte aktiv tilstand"
+	},
+	"settings": {
+		"message": "Indstillinger",
+		"description": "Etiket for indstillingsmenuen"
+	},
+	"setup_page": {
+		"message": "Setup-side",
+		"description": "[notSalesforceSetup] siden til ændring af Salesforce-indstillinger"
+	},
+	"skip": {
+		"message": "Spring over",
+		"description": "[req_permission] knap til at afvise at give tilladelser"
+	},
+	"successfully_imported": {
+		"message": "Importen var succesfuld",
+		"description": "[toast] brugeren importerede Tabs fra en ekstern fil med succes"
+	},
+	"tab_explain": {
+		"message": "Hvert element skal have 'label' og 'url' som strenge. Derudover kan hvert element have 'org' som streng.",
+		"description": "[error] forklarer, hvordan en Tab skal konstrueres"
+	},
+	"tab_information": {
+		"message": "Tab-information",
+		"description": "titel for Tab-opdateringsmodalen"
+	},
+	"tab_label": {
+		"message": "Tab-etiket",
+		"description": "Tab'ens Label-egenskab, dens navn"
+	},
+	"tab_org": {
+		"message": "Tab-organisation",
+		"description": "Tab'ens Org-egenskab, hvis den er for en specifik Salesforce-organisation"
+	},
+	"tab_url": {
+		"message": "Tab-URL",
+		"description": "Tab'ens URL-egenskab, hvor den linker hen"
+	},
+	"table_delete": {
+		"message": "Slet Tab",
+		"description": "[popup] hjælpe tekst for kolonnen med slet-knappen"
+	},
+	"table_org": {
+		"message": "Er Tab organisatorisk",
+		"description": "[popup] hjælpe tekst for kolonnen med checkbox for organisation"
+	},
+	"table_row_label": {
+		"message": "Indtast etiketten for denne URL",
+		"description": "[popup] inputfelt for Tab-navn"
+	},
+	"table_row_org": {
+		"message": "Klik, hvis du ønsker at denne Tab kun skal være tilgængelig for denne organisation.",
+		"description": "[popup] checkbox til at skifte Tab til at være organisationsspecifik"
+	},
+	"table_row_org_name": {
+		"message": "Organisationen, for hvilken denne Tab er tilgængelig.",
+		"description": "[popup] inputfelt for organisationsnavn"
+	},
+	"table_row_url": {
+		"message": "Indtast sub_URL, hvor du ønsker at blive omdirigeret.",
+		"description": "[popup] inputfelt for Tab-URL"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "brugerens favorittlinks"
+	},
+	"tabs_saved": {
+		"message": "Tabs gemt.",
+		"description": "[toast] Tabs blev gemt med succes."
+	},
+	"theme_dark": {
+		"message": "Skift tema til mørkt",
+		"description": "[popup] titel for måneikonet for at skifte tema"
+	},
+	"theme_light": {
+		"message": "Skift tema til lyst",
+		"description": "[popup] titel for solikonet for at skifte tema"
+	},
+	"underline": {
+		"message": "Understreget",
+		"description": "Dekorationsstilmulighed for at understrege Tab-tekst"
+	},
+	"underline_wavy": {
+		"message": "Bølget understreget",
+		"description": "Dekorationsstilmulighed for at anvende en bølget understregning på Tab-tekst"
+	},
+	"update_available": {
+		"message": "Opdatering tilgængelig",
+		"description": "en ny opdatering til udvidelsen er tilgængelig"
+	},
+	"upload": {
+		"message": "Upload",
+		"description": "[import] lader brugeren gennemse deres filer og vælge den rigtige"
+	},
+	"users": {
+		"message": "Brugere",
+		"description": "navnet på siden relateret til ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Hvorhen?",
+		"description": "[open-other-org-modal] alternativ titel for modal"
+	},
+	"write_review": {
+		"message": "Skriv en anmeldelse!",
+		"description": "[popup] titel for svg for at anmode om at skrive en anmeldelse"
+	}
+}

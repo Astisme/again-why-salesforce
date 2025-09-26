@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "اجازه دادن",
+		"description": "[درخواست_مجوز] دکمه برای اجازه دادن مجوزها"
+	},
+	"ascending": {
+		"message": "صعودی (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "در دسترس",
+		"description": "سربرگ بخشی برای آیتم‌هایی که می‌توان اضافه کرد"
+	},
+	"bold": {
+		"message": "بولد",
+		"description": "گزینه سبک قلم برای متن بولد"
+	},
+	"cancel": {
+		"message": "لغو",
+		"description": "عنوان یا محتوای متنی برای دکمه‌هایی که از اجرای عمل فعلی جلوگیری می‌کنند"
+	},
+	"cancel_close": {
+		"message": "لغو و بستن",
+		"description": "عنوان یا محتوای متنی برای دکمه بستن مودال‌ها"
+	},
+	"chosen": {
+		"message": "انتخاب‌شده",
+		"description": "سربرگ بخشی برای آیتم‌هایی که انتخاب شده‌اند"
+	},
+	"cmd_export_all": {
+		"message": "نمایش مودال برای صدور همه‌ی Tabs ذخیره‌شده",
+		"description": "[command description] کاربر می‌خواهد همه‌ی Tabs را صادر کند"
+	},
+	"cmd_import": {
+		"message": "نمایش مودال برای وارد کردن Tabs جدید",
+		"description": "[command description] کاربر می‌خواهد Tabs جدید وارد کند"
+	},
+	"cmd_open_other_org": {
+		"message": "نمایش مودال برای باز کردن صفحه‌ی جاری در یک Org دیگر",
+		"description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را در یک Org دیگر باز کند"
+	},
+	"cmd_remove_tab": {
+		"message": "حذف صفحه‌ی جاری از فهرست Tabs (در صورت ذخیره‌شده بودن)",
+		"description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را حذف کند"
+	},
+	"cmd_save_as_tab": {
+		"message": "ذخیره‌ی صفحه‌ی جاری در فهرست Tabs (در صورت ذخیره‌نشده بودن)",
+		"description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را ذخیره کند"
+	},
+	"cmd_toggle_org": {
+		"message": "نمایش مودال برای تغییر مقدار Org صفحه‌ی جاری (در صورت ذخیره‌شده بودن)",
+		"description": "[command description] کاربر می‌خواهد Org صفحه‌ی جاری را تغییر دهد"
+	},
+	"cmd_update_tab": {
+		"message": "نمایش مودال برای به‌روزرسانی صفحه‌ی جاری (در صورت ذخیره‌شده بودن)",
+		"description": "[command description] کاربر می‌خواهد صفحه‌ی جاری را به‌روزرسانی کند"
+	},
+	"confirm_another_org": {
+		"message": "باز کردن این لینک را تأیید کنید.",
+		"description": "[مودال_بازکردن_سازمان_دیگر] درخواست تأیید از کاربر برای باز کردن لینک ساخته شده."
+	},
+	"confirm_update_extension": {
+		"message": "نسخه جدیدی از $extension_label اکنون در دسترس است!",
+		"description": "یک پیام ناشناس از یک شنونده دریافت شده است"
+	},
+	"continue": {
+		"message": "ادامه",
+		"description": "محتوای متنی برای دکمه‌هایی که اجازه اجرای عمل فعلی را می‌دهند"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 همه‌ی Tabهای عمومی",
+		"description": "[منوی زمینه‌ای]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 حذف تمام Tab",
+		"description": "[منوی زمینه‌ای]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 همه‌ی Tabهای قابل مشاهده",
+		"description": "[منوی زمینه‌ای]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ صدور Tabs",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[منوی-زمینه]"
+	},
+	"cxm_move": {
+		"message": "🧭 انتقال Tab",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ انتقال به اول",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ انتقال به آخر",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_move_left": {
+		"message": "👈 انتقال به چپ",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_move_right": {
+		"message": "👉 انتقال به راست",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 باز کردن در سازمان دیگر",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[منوی-زمینه]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[منوی-زمینه]"
+	},
+	"cxm_remove": {
+		"message": "💥 حذف Tab(ها)",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs سمت چپ",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Tabs دیگر",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs سمت راست",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ این Tab",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 بازنشانی Tabهای پیش‌فرض",
+		"description": "[منوی زمینه‌ای]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "برچسب برای منوی تنظیمات"
+	},
+	"cxm_sort": {
+		"message": "🎯 مرتب‌سازی Tabs",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی خودکار Tabs خود (منوی والد)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 بر اساس برچسب",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی Tabs خود بر اساس برچسب"
+	},
+	"cxm_sort_org": {
+		"message": "👽 بر اساس Org",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی Tabs خود بر اساس سازمان"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 بر اساس Url",
+		"description": "منوی متنی برای اجازه دادن به کاربران برای مرتب‌سازی Tabs خود بر اساس URL"
+	},
+	"cxm_update": {
+		"message": "✏️ به‌روزرسانی Tab",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_update_org": {
+		"message": "📌 تغییر وضعیت سازمان",
+		"description": "[منوی_زمینه]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 به‌روزرسانی‌های دیگر",
+		"description": "[منوی_زمینه]"
+	},
+	"delete": {
+		"message": "حذف",
+		"description": "[پنجره_بازشو] حذف یک ردیف"
+	},
+	"delete_all": {
+		"message": "$delete همه Tabs",
+		"description": "[پنجره-بازشو] عنوان روی سطل زباله برای خالی کردن همه Tabs"
+	},
+	"descending": {
+		"message": "نزولی (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] به کاربر اجازه می‌دهد فایل‌های خود را در منطقه‌ی مشخص شده رها کند"
+	},
+	"enable": {
+		"message": "فعال کردن",
+		"description": "[درخواست_مجوز] دکمه برای فعال کردن مجوزها"
+	},
+	"error_adding_tab": {
+		"message": "خطا در افزودن Tab.",
+		"description": "[error] خطای عمومی در افزودن Tab"
+	},
+	"error_check_update": {
+		"message": "خطا در بررسی به‌روزرسانی‌ها",
+		"description": "[خطا] خطای عمومی هنگام بررسی به‌روزرسانی‌های افزونه"
+	},
+	"error_close_other_modal": {
+		"message": "لطفاً ابتدا مودال دیگر را ببندید!",
+		"description": "[اعلان_کوتاه] کاربر سعی کرد بیش از 1 مودال باز کند"
+	},
+	"error_cxm_check": {
+		"message": "خطا در بررسی آیتم‌های منو",
+		"description": "[خطا] آیتم‌های منوی زمینه یافت نشدند"
+	},
+	"error_cxm_create": {
+		"message": "خطا در ایجاد آیتم‌های منو",
+		"description": "[خطا] آیتم‌های منوی زمینه مقداردهی اولیه نشدند"
+	},
+	"error_cxm_remove": {
+		"message": "خطا در حذف آیتم‌های منو",
+		"description": "[خطا] آیتم‌های منوی زمینه حذف نشدند"
+	},
+	"error_duplicate_tab": {
+		"message": "این Tab از قبل وجود دارد",
+		"description": "[خطا] Tab تکراری است"
+	},
+	"error_expand_url": {
+		"message": "نمی‌توان URL خالی را گسترش داد!",
+		"description": "[خطا] URL مورد نظر برای گسترش ارسال نشده است"
+	},
+	"error_expand_url_no_base": {
+		"message": "نمی‌توان URL را بدون میزبان آن گسترش داد!",
+		"description": "[خطا] URL پایه مورد استفاده برای گسترش ارسال نشده است"
+	},
+	"error_extract_empty_url": {
+		"message": "نمی‌توان نام سازمان را از URL خالی استخراج کرد!",
+		"description": "[خطا] URL که نام سازمان باید از آن بازیابی شود ارسال نشده است"
+	},
+	"error_failed_sync": {
+		"message": "همگام‌سازی ناموفق بود.",
+		"description": "[error] خطای عمومی در همگام‌سازی Tabs با کاربر"
+	},
+	"error_failed_to_fetch": {
+		"message": "دریافت منابع خارجی ناموفق بود",
+		"description": "[خطا] تماس با وب‌سایت خارجی موفقیت‌آمیز نبود"
+	},
+	"error_get_with_no_org": {
+		"message": "در صورت مشخص نشدن سازمان، نمی‌توان Tabs را دریافت کرد.",
+		"description": "[خطا] تلاش برای جستجوی Tabs بر اساس سازمان بدون ارسال اطلاعات سازمان"
+	},
+	"error_import": {
+		"message": "خطا در هنگام ورود:\n",
+		"description": "[خطا] خطایی در طول فرآیند ورود رخ داده است"
+	},
+	"error_invalid_key": {
+		"message": "پارامتر key ارسال شده به تابع نامعتبر است",
+		"description": "[خطا] توسعه‌دهنده سعی کرد تابع را با پارامتر نامعتبر فراخوانی کند"
+	},
+	"error_invalid_request": {
+		"message": "درخواست نامعتبر.",
+		"description": "[error] خطای عمومی پس از دریافت پیام با فرمت نادرست"
+	},
+	"error_invalid_tab": {
+		"message": "Tab نامعتبر",
+		"description": "[خطا] Tab معتبر نیست"
+	},
+	"error_link_with_id": {
+		"message": "این صفحه نمی‌تواند در سازمان دیگری وجود داشته باشد، زیرا حاوی یک شناسه (Id) است!",
+		"description": "[مودال_بازکردن_سازمان_دیگر] هشدار به کاربر مبنی بر اینکه لینک ممکن است در سازمان دیگری وجود نداشته باشد"
+	},
+	"error_many_matching_tab": {
+		"message": "بیش از 1 Tab مطابق یافت شد.",
+		"description": "[خطا] Tabs زیادی بازیابی شدند"
+	},
+	"error_many_tabs_found": {
+		"message": "بیش از یک Tab یافت شد.",
+		"description": "[error] چندین Tab بازیابی شدند"
+	},
+	"error_minify_url": {
+		"message": "نمی‌توان URL خالی را کوچک کرد!",
+		"description": "[خطا] URL مورد نظر برای کاهش ارسال نشده است"
+	},
+	"error_missing_favourite_id": {
+		"message": "بدون شناسه نمی‌توان تصویر مورد علاقه را دریافت کرد",
+		"description": "[خطا] شناسه مورد علاقه ارسال نشده است"
+	},
+	"error_missing_key": {
+		"message": "کلید در هیچ کجا یافت نشد",
+		"description": "[خطا] هیچ ترجمه‌ای در فایل‌ها یافت نشد"
+	},
+	"error_no_array": {
+		"message": "آرایه نامعتبر یا هیچ آرایه‌ای ارسال نشده است",
+		"description": "[خطا] آرایه معتبری دریافت نشد"
+	},
+	"error_no_browser_tab": {
+		"message": "تب مرورگر فعلی یافت نشد.",
+		"description": "[خطا] صفحه پس‌زمینه نتوانست یک تب فعال مرورگر ایجاد کند"
+	},
+	"error_no_callback": {
+		"message": "لطفاً یک تابع بازخوانی (callback) ارائه دهید",
+		"description": "[خطا] تابعی که باید در انتهای متد فراخوانی شود ارسال نشده است"
+	},
+	"error_no_cookies": {
+		"message": "کوکی‌های منطبق یافت نشد",
+		"description": "[خطا] کوکی‌های Salesforce بازگردانده نشدند"
+	},
+	"error_no_data": {
+		"message": "بدون داده نمی‌توان Tab را شناسایی کرد.",
+		"description": "[خطا] تلاش برای دریافت Tab بدون ارسال داده"
+	},
+	"error_no_headers": {
+		"message": "یافتن سرصفحه‌ها ناموفق بود.",
+		"description": "[خطا] افزونه نتوانست مکان قرار دادن دکمه مورد علاقه را پیدا کند"
+	},
+	"error_no_matching_tab": {
+		"message": "هیچ Tab مطابقی یافت نشد.",
+		"description": "[خطا] هیچ Tabی بازیابی نشد"
+	},
+	"error_no_message": {
+		"message": "پیامی برای ارسال مشخص نشده است.",
+		"description": "[خطا] هیچ پیامی برای ارسال به بخش‌های دیگر کد یافت نشد"
+	},
+	"error_no_object": {
+		"message": "هیچ شیئی برای بررسی وجود ندارد!",
+		"description": "[خطا] شیء ارسال نشده است"
+	},
+	"error_no_setup_tab": {
+		"message": "یافتن تب Setup ناموفق بود.",
+		"description": "[خطا] افزونه نتوانست مکان قرار دادن Tabs مورد علاقه را پیدا کند."
+	},
+	"error_no_url": {
+		"message": "هیچ URL برای بررسی وجود ندارد!",
+		"description": "[خطا] URL مورد نظر برای بررسی ارسال نشده است"
+	},
+	"error_not_initialized": {
+		"message": "هنوز مقداردهی اولیه نشده است.",
+		"description": "[error] خطای عمومی زمانی که متغیر آماده نیست"
+	},
+	"error_processing_tabs": {
+		"message": "خطا در پردازش Tabs.",
+		"description": "[error] خطای عمومی در پردازش Tabs"
+	},
+	"error_redirect": {
+		"message": "امکان هدایت مجدد وجود ندارد. لطفاً صفحه را مجدداً بارگذاری کنید.",
+		"description": "[error] خطای عمومی در هدایت صفحه"
+	},
+	"error_remove_not_favourite": {
+		"message": "نمی‌توان Tab غیر مورد علاقه را حذف کرد!",
+		"description": "[خطا] کاربر سعی کرد یک Tab را که هنوز ذخیره نشده بود حذف کند"
+	},
+	"error_removing_all_tabs": {
+		"message": "خطا در حذف همه‌ی Tabs.",
+		"description": "[error] خطای عمومی در حذف همه‌ی Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "خطا در حذف Tabs عمومی.",
+		"description": "[error] خطای عمومی در حذف Tabs عمومی"
+	},
+	"error_removing_other_tabs": {
+		"message": "خطا در حذف سایر Tabs.",
+		"description": "[error] خطای عمومی در حذف سایر Tabs"
+	},
+	"error_removing_tab": {
+		"message": "خطا در حذف Tab.",
+		"description": "[error] خطای عمومی در حذف Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "خطا هنگام حذف همه‌ی Tabهای قابل مشاهده.",
+		"description": "[خطا] خطای عمومی هنگام حذف همه‌ی Tabهای قابل مشاهده"
+	},
+	"error_required_params": {
+		"message": "پارامترهای لازم برای تابع ارسال نشده‌اند",
+		"description": "[خطا] توسعه‌دهنده سعی کرد بدون پارامترهای مورد نیاز تابع را فراخوانی کند"
+	},
+	"error_resetting_default_tabs": {
+		"message": "خطا هنگام بازنشانی Tabها به حالت پیش‌فرض.",
+		"description": "[خطا] خطای عمومی هنگام بازنشانی Tabها به حالت پیش‌فرض"
+	},
+	"error_sorting_tabs": {
+		"message": "خطا در مرتب‌سازی Tabs",
+		"description": "[error] نمایش داده شده در یک پیام کوچک"
+	},
+	"error_sync_nothing": {
+		"message": "نمی‌توان Tabs تهی را همگام‌سازی کرد!",
+		"description": "[خطا] تلاش برای همگام‌سازی هیچ‌چیز"
+	},
+	"error_tab_constructor": {
+		"message": "به‌جای new Tab() از Tab.create() استفاده کنید",
+		"description": "[error] به توسعه‌دهنده توضیح دهید چگونه از کلاس Tab استفاده کند"
+	},
+	"error_tab_label": {
+		"message": "برچسب باید یک رشته غیر خالی باشد",
+		"description": "[خطا] کاربر سعی کرد یک Tab بدون برچسب ایجاد کند"
+	},
+	"error_tab_not_found": {
+		"message": "Tab یافت نشد.",
+		"description": "[خطا] Tab در آرایه گنجانده نشده بود"
+	},
+	"error_tab_object_creation": {
+		"message": "هنگام فراخوانی با یک شیء، چیز دیگری ارسال نکنید.",
+		"description": "[خطا] خطای پیاده‌سازی توسط توسعه‌دهنده"
+	},
+	"error_tab_org": {
+		"message": "سازمان باید یک رشته یا تعریف نشده (undefined) باشد",
+		"description": "[خطا] کاربر سعی کرد یک Tab با مقدار سازمان نامعتبر ایجاد کند"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "کلیدهای غیرمنتظره یافت شد:",
+		"description": "[خطا] کاربر سعی کرد یک Tab با برخی ویژگی‌های پشتیبانی نشده ایجاد کند"
+	},
+	"error_tab_url": {
+		"message": "URL باید یک رشته غیر خالی باشد",
+		"description": "[خطا] کاربر سعی کرد یک Tab بدون URL ایجاد کند"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab ای با این URL قبلاً ذخیره شده است!",
+		"description": "[error] کاربر تلاش کرد Tab ای که قبلاً ذخیره شده بود را ذخیره کند"
+	},
+	"error_tabcont_initialize": {
+		"message": "نمی‌توان با این مقداردهی اولیه کرد:",
+		"description": "[خطا] مقداردهی اولیه نگهدارنده Tab ناموفق بود"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Tab(های) نامعتبر شناسایی شد.\nاولین وقوع:",
+		"description": "[خطا] Tabs نامعتبر ارسال شد"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "به‌جای new TabContainer() از TabContainer.create() استفاده کنید",
+		"description": "[error] به توسعه‌دهنده توضیح دهید چگونه از کلاس TabContainer استفاده کند"
+	},
+	"error_translationservice_constructor": {
+		"message": "به‌جای new TranslationService() از TranslationService.create() استفاده کنید",
+		"description": "[error] به توسعه‌دهنده توضیح دهید چگونه از کلاس TranslationService استفاده کند"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator هنوز مقداردهی اولیه نشده است.",
+		"description": "[error] سرویس ترجمه (TranslationService) آماده نبود"
+	},
+	"error_unknown_message": {
+		"message": "پیام ناشناخته دریافت شد",
+		"description": "یک پیام ناشناخته از شنونده دریافت شده است"
+	},
+	"error_unknown_request": {
+		"message": "درخواست ناشناخته.",
+		"description": "[error] خطای عمومی پس از دریافت پیام ناشناخته"
+	},
+	"error_useless_remove": {
+		"message": "نمی‌توان حذف کرد:\nنمی‌توان صفحه‌ای را که قبلاً ذخیره نشده است حذف کرد",
+		"description": "[خطا] کاربر سعی کرد صفحه‌ای را که هنوز ذخیره نشده بود حذف کند"
+	},
+	"error_useless_save": {
+		"message": "نمی‌توان ذخیره کرد:\nاین صفحه قبلاً ذخیره شده است!",
+		"description": "[خطا] کاربر سعی کرد صفحه‌ای را که قبلاً ذخیره شده بود ذخیره کند"
+	},
+	"export": {
+		"message": "صدور",
+		"description": "[پنجره_بازشو] دکمه صدور"
+	},
+	"export_title": {
+		"message": "صدور همه Tabs",
+		"description": "[پنجره_بازشو] عنوان روی دکمه صدور"
+	},
+	"extension_description": {
+		"message": "Tabs سفارشی را در فضای موجود در صفحه تنظیمات Salesforce Lightning ایجاد و مدیریت کنید.",
+		"description": "[مانیفست] توضیحات این افزونه"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "نام این افزونه"
+	},
+	"file": {
+		"message": "فایل",
+		"description": "فایل تکی"
+	},
+	"files": {
+		"message": "فایل‌ها",
+		"description": "فایل‌های چندگانه"
+	},
+	"flows": {
+		"message": "جریان‌ها",
+		"description": "[Tab پیش‌فرض] برچسب برای Tab جریان پیش‌فرض"
+	},
+	"general": {
+		"message": "عمومی",
+		"description": "برچسب برای دسته تنظیمات عمومی"
+	},
+	"help": {
+		"message": "راهنما",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Tabs جدید را به عنوان Org Tabs علامت‌گذاری می‌کند، بنابراین آنها فقط زمانی قابل مشاهده هستند که به آن Org Salesforce خاص وارد شده باشید.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Tabs مورد علاقه جدید به جای اضافه شدن در انتها، در جلوی لیست Tabs شما در نوار تنظیمات قرار می‌گیرند.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "اگر روی پنجره بازشو افزونه خارج از دامنه Salesforce کلیک کنید، به صورت خودکار شما را به صفحه ورود به Salesforce می‌برد.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "اگر روی پنجره بازشو افزونه در داخل یک دامنه Salesforce اما نه در یک صفحه تنظیمات کلیک کنید، به صورت خودکار شما را به صفحه تنظیمات Salesforce می‌برد.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "هنگامی که فعال باشد، Tabs شما به ترتیب مرتب شده نگهداری می‌شود—یا بر اساس برچسب، URL یا Org؛ بسته به آنچه انتخاب می‌کنید.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Tabs ذخیره‌شده شما را قبل از منوی ناوبری استاندارد (Home / Object Manager) در تنظیمات، به جای بعد از آن، پین می‌کند.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "هنگامی که فعال باشد، هر Tab ذخیره‌شده صفحه مرتبط را در یک Tab جدید باز خواهد کرد.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "نمایش خودکار اعلان‌های یادداشت‌های انتشار را پس از به‌روزرسانی افزونه، سرکوب می‌کند.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "پنجره‌های بازشوی یادآوری به‌روزرسانی دوره‌ای را غیرفعال می‌کند و رابط کاربری افزونه را تمیز نگه می‌دارد (هنگامی که به‌روزرسانی‌های خودکار افزونه را از تنظیمات مرورگر خود غیرفعال کرده‌اید).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "اگر روی پنجره بازشو افزونه خارج از دامنه Salesforce کلیک کنید، صفحه ورود در Tab فعلی مرورگر باز خواهد شد.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "اگر روی پنجره بازشو افزونه در داخل یک دامنه Salesforce اما نه در یک صفحه تنظیمات کلیک کنید، صفحه تنظیمات Salesforce در Tab فعلی مرورگر باز خواهد شد.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "فقط زبان رابط کاربری را برای افزونه تنظیم کنید. اگر چیزی ترجمه نشده باشد، به جای آن از نسخه انگلیسی استفاده خواهد شد.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "جمع‌آوری داده‌های تله‌متری پایه را غیرفعال می‌کند. افزونه در معیارهای استفاده ناشناس ظاهر نمی‌شود.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "از Lightning Navigation API عبور می‌کند و لینک‌ها را از طریق بارگذاری مجدد کامل صفحه باز می‌کند، که می‌تواند در برخی تنظیمات سازمانی سریع‌تر باشد.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "بررسی افزونه را که تأیید می‌کند آیا یک قطعه URL با فرمت شناسه‌های رکورد/شیء Salesforce مطابقت دارد یا خیر، غیرفعال می‌کند (برای تنظیم خودکار Tab ذخیره‌شده به عنوان یک Org Tab استفاده می‌شود).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "برای هدایت شدن به مستندات این تنظیم، کلیک کنید!",
+		"description": "[کمک-تنظیمات] فراخوانی برای اقدام تا کاربر بتواند در مورد یک تنظیم خاص بیشتر بخواند"
+	},
+	"import": {
+		"message": "ورود",
+		"description": "[پنجره_بازشو] دکمه ورود"
+	},
+	"import_duplicate_description": {
+		"message": "Tabs تکراری نادیده گرفته خواهند شد.<br />دو Tab در صورتی تکراری در نظر گرفته می‌شوند که URL یکسانی داشته باشند.",
+		"description": "[ورود] توضیح کاری که فرآیند ورود انجام می‌دهد"
+	},
+	"import_invalid_file": {
+		"message": "نوع فایل نامعتبر است.\nفقط فایل‌های JSON پشتیبانی می‌شوند.",
+		"description": "[خطا] فایل مورد استفاده برای ورود JSON نیست"
+	},
+	"import_successful": {
+		"message": "با موفقیت وارد شد",
+		"description": "[ورود] ورود کامل شد. پس از این، تعداد رکوردهای وارد شده نمایش داده خواهد شد"
+	},
+	"import_tabs": {
+		"message": "ورود Tabs",
+		"description": "[عنوان_مودال] برای فرآیند ورود"
+	},
+	"import_title": {
+		"message": "$import_tabs از فایل JSON",
+		"description": "[پنجره-بازشو] عنوان روی دکمه وارد کردن"
+	},
+	"insert_another": {
+		"message": "درج دیگری",
+		"description": "[خطا_مودال_بازکردن_سازمان_دیگر] پیام برای زمانی که کاربر همان سازمان را در مودال وارد می‌کند"
+	},
+	"insert_another_org": {
+		"message": "سازمان وارد شده سازمان فعلی است!\nلطفاً سازمان دیگری وارد کنید.",
+		"description": "[خطا_مودال_بازکردن_سازمان_دیگر] پیام برای زمانی که کاربر همان سازمان را در مودال وارد می‌کند"
+	},
+	"insert_valid_org": {
+		"message": "لطفاً یک سازمان معتبر وارد کنید!",
+		"description": "[خطا_مودال_بازکردن_سازمان_دیگر] پیام برای زمانی که کاربر URL اشتباهی را در مودال وارد می‌کند"
+	},
+	"italic": {
+		"message": "ایتالیک",
+		"description": "گزینه سبک قلم برای متن ایتالیک"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "فناوری ناوبری سفارشی Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "ورود به Salesforce",
+		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه ورود Salesforce"
+	},
+	"mycustomorg": {
+		"message": "سازمان_سفارشی_من",
+		"description": "متن جایگزین برای مودال به‌روزرسانی Tab"
+	},
+	"no_manifest_github": {
+		"message": "homepage_url نامعتبر یا گم شده گیت‌هاب در مانیفست",
+		"description": "کلید homepage_url مانیفست از لینک گیت‌هاب استفاده نمی‌کند"
+	},
+	"no_match": {
+		"message": "با هیچ عملی مطابقت نداشت",
+		"description": "[خطا] در Salesforce زمانی که سوئیچ نمی‌تواند عمل درخواستی را مطابقت دهد"
+	},
+	"nss_invalid_url": {
+		"message": "URL نامعتبر شناسایی شد.",
+		"description": "[غیر راه‌اندازی Salesforce] یک URL که معتبر نیست"
+	},
+	"nss_not_setup_page": {
+		"message": "این یک صفحه تنظیمات $salesforce_lightning نیست.",
+		"description": "[notSalesforceSetup] کاربر در صفحه Salesforce نیست."
+	},
+	"open_here": {
+		"message": "در این Tab باز شود.",
+		"description": "[open-other-org-modal] دکمه رادیویی برای اینکه کاربر بتواند در همان Tab مرورگر باز کند"
+	},
+	"open_new_tab": {
+		"message": "در یک Tab جدید باز شود.",
+		"description": "[open-other-org-modal] دکمه رادیویی برای اینکه کاربر بتواند در یک Tab مرورگر جدید باز کند."
+	},
+	"open_settings": {
+		"message": "باز کردن تنظیمات افزونه",
+		"description": "[پاپ‌آپ] دکمه برای هدایت مجدد به صفحه تنظیمات"
+	},
+	"open_setup": {
+		"message": "باز کردن تنظیمات",
+		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه تنظیمات Salesforce"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "اضافه کردن Tabs جدید به عنوان Org Tabs.",
+		"description": "[settings] به کاربر اجازه می‌دهد تمام Tabs جدید را به عنوان مخصوص سازمان اضافه کند"
+	},
+	"opt_add_tabs_front": {
+		"message": "اضافه کردن Tabs جدید در جلو.",
+		"description": "[settings] به کاربر اجازه می‌دهد تمام Tabs جدید را در جلو اضافه کند"
+	},
+	"opt_automatic_open_login": {
+		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce نیستید، صفحه $salesforce_login را به طور خودکار باز کنید.",
+		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت تصادفی است باز می کند"
+	},
+	"opt_automatic_open_setup": {
+		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce هستید، صفحه $salesforce_setup را به طور خودکار باز کنید.",
+		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت Salesforce است باز می کند"
+	},
+	"opt_confirm_save": {
+		"message": "تنظیمات ذخیره شدند!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (پیش‌فرض و بازگشتی)",
+		"description": "گزینه زبان پیش‌فرض افزونه"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs را مرتب نگه دارید.",
+		"description": "[setting] به کاربر اجازه می‌دهد Tabs خود را بر اساس یکی از کلیدهای خود مرتب نگه دارد"
+	},
+	"opt_keep_tabs_left": {
+		"message": "نگه‌داشتن Tabهای علاقه‌مند در سمت چپ Home و Object Manager.",
+		"description": "تغییر برای سنجاق کردن Tabهای علاقه‌مند به سمت چپ نوار ناوبری"
+	},
+	"opt_link_new_browser": {
+		"message": "همیشه پیوندها را در یک برگه جدید مرورگر باز کن.",
+		"description": "[تنظیم] هنگام کلیک روی یک Tab علاقه‌مند، آن را در یک برگه جدید باز کن"
+	},
+	"opt_no_release_notes": {
+		"message": "نمایش نکات انتشار به‌روزرسانی را غیرفعال کن.",
+		"description": "[تنظیم] اجازه می‌دهد کاربر از نمایش نکات انتشار پس از به‌روزرسانی جلوگیری کند"
+	},
+	"opt_no_update_notification": {
+		"message": "درباره به‌روزرسانی‌های موجود هشدار ندهید.",
+		"description": "[تنظیمات] به کاربر اجازه می‌دهد از جستجوی افزونه برای نسخه‌های جدید جلوگیری کند"
+	},
+	"opt_open_login_same_tab": {
+		"message": "همیشه صفحه $salesforce_login را در همان Tab هنگام کلیک بر روی پنجGLE_TTS_CURSORپنجره بازشو باز کنید.",
+		"description": "[تنظیمات]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "همیشه صفحه $salesforce_setup را در همان Tab هنگام کلیک بر روی پنجره بازشو باز کنید.",
+		"description": "[تنظیمات]"
+	},
+	"opt_pick_language": {
+		"message": "زبان افزونه را انتخاب کنید",
+		"description": "[تنظیمات] برچسبی برای درخواست از کاربر برای انتخاب زبان مورد نظر خود"
+	},
+	"opt_pick_sort": {
+		"message": "انتخاب کنید Tabs بر اساس کدام فیلد باید مرتب شوند",
+		"description": "[setting] اکنون کاربر می‌تواند انتخاب کند که Tabs را بر اساس کدام کلید مرتب نگه دارد"
+	},
+	"opt_prevent_analytics": {
+		"message": "جلوگیری از استفاده از Simple Analytics (در شمارش کاربران نمایش داده نمی‌شود).",
+		"description": "[تنظیم] اجازه می‌دهد کاربر از ارسال تحلیل‌های ناشناس جلوگیری کند"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "جلوگیری از استفاده از Lightning Navigation (بارگذاری سریع‌تر وقتی علامت‌گذاری نشده است).",
+		"description": "[setting] عدم اجازه به Lightning Navigation با توضیح ویژگی"
+	},
+	"opt_same_tab_popup": {
+		"message": "باز کردن صفحه در همان برگه هنگام کلیک روی پاپ‌آپ.",
+		"description": "[تنظیم] جلوگیری از باز شدن یک برگه جدید مرورگر"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "زبان Salesforce را دنبال کنید (کوکی‌های Salesforce را می‌خواند)",
+		"description": "گزینه ای برای استفاده از تنظیمات زبان Salesforce. برای استفاده از این گزینه، کاربران باید به افزونه اجازه خواندن کوکی های Salesforce را بدهند."
+	},
+	"opt_skip_link_detection": {
+		"message": "رد کردن بررسی خودکار شناسه Salesforce.",
+		"description": "[تنظیم] هنگام انتخاب یک Tab به علاقه‌مندها، بررسی شناسه لینک را انجام نده"
+	},
+	"or_drop": {
+		"message": "یا $drop",
+		"description": "[وارد کردن] به کاربر اجازه دهید فایل ها را با ماوس خود جابجا کرده و رها کند"
+	},
+	"org_link": {
+		"message": "لینک سازمان",
+		"description": "[برچسب_ورودی]"
+	},
+	"other_org_info": {
+		"message": "اطلاعات سازمان دیگر",
+		"description": "[عنوان_مودال]"
+	},
+	"other_org_placeholder": {
+		"message": "سازمان-دیگر",
+		"description": "[متن_جایگزین_ورودی]"
+	},
+	"overwrite_tabs": {
+		"message": "بازنویسی Tabs ذخیره شده.",
+		"description": "[برچسب] حذف همه Tabs ذخیره شده در طول فرآیند ورود"
+	},
+	"preserve_org_tabs": {
+		"message": "حفظ Tabs برای سازمان‌های دیگر.",
+		"description": "[برچسب] حفظ همه Tabs مخصوص سازمان در طول فرآیند ورود"
+	},
+	"remove_tab": {
+		"message": "حذف Tab",
+		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
+	},
+	"req_downloads_open_popup": {
+		"message": "لطفاً پنجره بازشوی افزونه را از منوی افزونه‌های مرورگر خود باز کنید.",
+		"description": "[اعلان] از کاربر بخواهید برای ادامه روی پنجره بازشوی افزونه کلیک کند"
+	},
+	"req_downloads_perm_header": {
+		"message": "لطفاً مجوز دانلودها را فعال کنید\nتا صادرات درخواستی آغاز شود.",
+		"description": "[درخواست_مجوز] فراخوان برای فعال کردن مجوز دانلودها"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "این عملیات فقط یک بار درخواست خواهد شد.",
+		"description": "[درخواست_مجوز] توضیحات برای فعال کردن مجوز دانلودها"
+	},
+	"req_permissions_dont_ask": {
+		"message": "دیگر نپرس.",
+		"description": "[درخواست_مجوز] برچسب زمانی که کاربر نمی‌خواهد به طور دائم مجوزها را اجازه دهد"
+	},
+	"req_permissions_header": {
+		"message": "لطفاً به ما اجازه دهید به طور خودکار به صفحات $salesforce_setup\n دسترسی پیدا کنیم.",
+		"description": "[req_permission] سرصفحه صفحه برای درخواست مجوزها"
+	},
+	"req_permissions_paragraph": {
+		"message": "اگر می خواهید، می توانید Tabs مورد علاقه خود را به محض رفتن به صفحه $salesforce_setup\n بدون نیاز به کلیک بر روی این برنامه افزودنی در هر بار، ظاهر کنید.",
+		"description": "[req_permission] متنی برای توضیح اینکه چرا مجوزها درخواست می شوند"
+	},
+	"required": {
+		"message": "الزامی",
+		"description": "[ورودی] یک فیلد ورودی را به عنوان اجباری علامت‌گذاری می‌کند"
+	},
+	"required_info": {
+		"message": "= اطلاعات الزامی",
+		"description": "[مودال] به کاربر می‌گوید که برخی اطلاعات اجباری است"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[نه_صفحه_تنظیمات_Salesforce] پلتفرم Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "صفحه ورود Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "هر صفحه تنظیماتی در Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "ذخیره",
+		"description": "اعمال تغییرات و ذخیره آن‌ها در حافظه"
+	},
+	"save_tab": {
+		"message": "ذخیره به عنوان Tab",
+		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
+	},
+	"send_tip": {
+		"message": "یک نکته برای ما ارسال کنید ❤️",
+		"description": "[popup] عنوان برای svg برای درخواست ارسال یک نکته"
+	},
+	"set_gen_preview": {
+		"message": "پیش‌نمایش Tab",
+		"description": "برچسب برای پیش‌نمایش ظاهر تب عمومی"
+	},
+	"set_gen_styler": {
+		"message": "استایل‌دهنده Tab",
+		"description": "برچسب برای پیکربندی سبک تب عمومی"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "سربرگ بخشی برای گزینه‌های پیکربندی عمومی"
+	},
+	"set_move_available": {
+		"message": "انتقال به در دسترس",
+		"description": "عنوان دکمه برای انتقال آیتم‌های انتخاب‌شده به در دسترس"
+	},
+	"set_move_chosen": {
+		"message": "انتقال به انتخاب‌شده",
+		"description": "عنوان دکمه برای انتقال آیتم‌های انتخاب‌شده به انتخاب‌شده"
+	},
+	"set_org_preview": {
+		"message": "پیش‌نمایش Org",
+		"description": "برچسب برای پیش‌نمایش ظاهر تب مخصوص Org"
+	},
+	"set_org_styler": {
+		"message": "استایل‌دهنده Org",
+		"description": "برچسب برای پیکربندی سبک تب مخصوص Org"
+	},
+	"set_tab_background_active_label": {
+		"message": "رنگ پس‌زمینه را برای Tabهای عمومی فعال خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ پس‌زمینه Tabهای عمومی فعال"
+	},
+	"set_tab_background_label": {
+		"message": "رنگ پس‌زمینه را برای Tabهای سازمان خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ پس‌زمینه Tabهای مخصوص سازمان"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "رنگ حاشیه را برای Tabهای سازمان فعال خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ حاشیه Tabهای سازمان فعال"
+	},
+	"set_tab_border_color_label": {
+		"message": "رنگ حاشیه را برای Tabهای عمومی خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ حاشیه Tabهای عمومی"
+	},
+	"set_tab_color_active_label": {
+		"message": "رنگ متن را برای Tabهای عمومی فعال خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ متن Tabهای عمومی فعال"
+	},
+	"set_tab_color_label": {
+		"message": "رنگ متن را برای Tabهای سازمان خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ متن Tabهای مخصوص سازمان"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "یک یا چند سبک تزئینی برای Tabهای سازمان فعال خود انتخاب کنید.",
+		"description": "هشدار برای انتخاب سبک‌های تزئینی برای Tabهای سازمان فعال"
+	},
+	"set_tab_decoration_label": {
+		"message": "یک یا چند سبک تزئینی برای Tabهای عمومی خود انتخاب کنید.",
+		"description": "هشدار برای انتخاب سبک‌های تزئینی برای Tabهای عمومی"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "رنگ پس‌زمینه هنگام هاور را برای Tabهای عمومی فعال خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ پس‌زمینه هنگام هاور Tabهای عمومی فعال"
+	},
+	"set_tab_hover_background_label": {
+		"message": "رنگ پس‌زمینه هنگام هاور را برای Tabهای سازمان خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ پس‌زمینه هنگام هاور Tabهای مخصوص سازمان"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "رنگ سایه را برای Tabهای سازمان فعال خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ سایه Tabهای سازمان فعال"
+	},
+	"set_tab_shadow_label": {
+		"message": "رنگ سایه را برای Tabهای عمومی خود وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ سایه Tabهای عمومی"
+	},
+	"set_tab_top_active_label": {
+		"message": "رنگ نوار بالایی Tabهای عمومی فعال خود را وارد کنید.",
+		"description": "برچسب برای تنظیم رنگ نوار بالایی Tabهای عمومی فعال"
+	},
+	"set_toggle_preview": {
+		"message": "برای تغییر وضعیت فعال کلیک کنید.",
+		"description": "متن راهنمای ابزار برای کنترل تغییر وضعیت فعال"
+	},
+	"settings": {
+		"message": "تنظیمات",
+		"description": "برچسب برای منوی تنظیمات"
+	},
+	"setup_page": {
+		"message": "صفحه تنظیمات",
+		"description": "[نه_صفحه_تنظیمات_Salesforce] صفحه‌ای که برای تغییر تنظیمات Salesforce استفاده می‌شود"
+	},
+	"skip": {
+		"message": "رد شدن",
+		"description": "[درخواست_مجوز] دکمه برای عدم اجازه مجوزها"
+	},
+	"successfully_imported": {
+		"message": "با موفقیت وارد شد",
+		"description": "[اعلان_کوتاه] کاربر Tabs را از یک فایل خارجی اضافه کرد"
+	},
+	"tab_explain": {
+		"message": "هر آیتم باید 'label' و 'url' را به صورت رشته داشته باشد. علاوه بر این، هر آیتم ممکن است یک 'org' به صورت رشته داشته باشد.",
+		"description": "[خطا] توضیح می‌دهد که چگونه یک Tab باید ساخته شود"
+	},
+	"tab_information": {
+		"message": "اطلاعات Tab",
+		"description": "عنوان برای مودال به‌روزرسانی Tab"
+	},
+	"tab_label": {
+		"message": "برچسب Tab",
+		"description": "ویژگی برچسب (Label) Tab، نام آن"
+	},
+	"tab_org": {
+		"message": "سازمان Tab",
+		"description": "ویژگی سازمان (Org) Tab، اگر برای یک سازمان Salesforce واحد باشد"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "ویژگی URL Tab، جایی که به آن اشاره می‌کند"
+	},
+	"table_delete": {
+		"message": "حذف Tab",
+		"description": "[پنجره_بازشو] متن کمکی برای ستون با دکمه حذف"
+	},
+	"table_org": {
+		"message": "Tab سازمان است",
+		"description": "[پنجره_بازشو] متن کمکی برای ستون با چک‌باکس سازمان"
+	},
+	"table_row_label": {
+		"message": "برچسب این URL را وارد کنید",
+		"description": "[پنجره_بازشو] فیلد ورودی با نام Tab"
+	},
+	"table_row_org": {
+		"message": "اگر می‌خواهید این Tab فقط برای این سازمان در دسترس باشد، کلیک کنید.",
+		"description": "[پنجره_بازشو] چک‌باکس برای تغییر وضعیت Tab به مخصوص سازمان"
+	},
+	"table_row_org_name": {
+		"message": "سازمانی که این Tab برای آن در دسترس است.",
+		"description": "[پنجره_بازشو] فیلد ورودی با نام سازمان"
+	},
+	"table_row_url": {
+		"message": "زیر URLی که می‌خواهید به آن هدایت شوید را وارد کنید.",
+		"description": "[پنجره_بازشو] فیلد ورودی با URL Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "لینک‌های مورد علاقه کاربر"
+	},
+	"tabs_saved": {
+		"message": "Tabs ذخیره شد.",
+		"description": "[اعلان_کوتاه] Tabs با موفقیت ذخیره شدند."
+	},
+	"theme_dark": {
+		"message": "تغییر پوسته به تیره",
+		"description": "[پنجره_بازشو] عنوان روی ماه برای تغییر پوسته"
+	},
+	"theme_light": {
+		"message": "تغییر پوسته به روشن",
+		"description": "[پنجره_بازشو] عنوان روی خورشید برای تغییر پوسته"
+	},
+	"underline": {
+		"message": "زیرخط",
+		"description": "گزینه سبک تزئینی برای زیرخط‌گذاری متن Tab"
+	},
+	"underline_wavy": {
+		"message": "زیرخط موجی",
+		"description": "گزینه سبک تزئینی برای اعمال زیرخط موجی به متن Tab"
+	},
+	"update_available": {
+		"message": "به‌روزرسانی در دسترس است",
+		"description": "یک به‌روزرسانی جدید برای افزونه در دسترس است"
+	},
+	"upload": {
+		"message": "بارگذاری",
+		"description": "[ورود] به کاربر اجازه دهید فایل‌های خود را مرور کرده و فایل مناسب را انتخاب کند"
+	},
+	"users": {
+		"message": "کاربران",
+		"description": "نام صفحه مربوط به ManageUsers/home"
+	},
+	"where_to": {
+		"message": "کجا؟",
+		"description": "[مودال_بازکردن_سازمان_دیگر] عنوان جایگزین برای مودال"
+	},
+	"write_review": {
+		"message": "یک نقد بنویسید!",
+		"description": "[popup] عنوان برای svg برای درخواست نوشتن یک نقد"
+	}
+}

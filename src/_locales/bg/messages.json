@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Позволи",
+		"description": "[req_permission] бутон за разрешаване на права"
+	},
+	"ascending": {
+		"message": "Възходящ (А-Я)",
+		"description": ""
+	},
+	"available": {
+		"message": "Налично",
+		"description": "Заглавие на секция за елементи, които могат да бъдат добавени"
+	},
+	"bold": {
+		"message": "Получер",
+		"description": "Опция за стил на шрифта за получер текст"
+	},
+	"cancel": {
+		"message": "Отказ",
+		"description": "заглавие или текст за бутоните, които предотвратяват изпълнението на текущото действие"
+	},
+	"cancel_close": {
+		"message": "Отказ и затваряне",
+		"description": "заглавие или текст за бутона, който затваря модалните прозорци"
+	},
+	"chosen": {
+		"message": "Избрано",
+		"description": "Заглавие на секция за елементи, които са избрани"
+	},
+	"cmd_export_all": {
+		"message": "Покажи модал за експортиране на всички запазени Tabs",
+		"description": "[command description] потребителят иска да експортира всички Tabs"
+	},
+	"cmd_import": {
+		"message": "Покажи модал за импортиране на нови Tabs",
+		"description": "[command description] потребителят иска да импортира нови Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Покажи модал за отваряне на текущата страница в друга Org",
+		"description": "[command description] потребителят иска да отвори текущата страница в друга Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Премахни текущата страница от списъка с Tabs (ако е запазена)",
+		"description": "[command description] потребителят иска да премахне текущата страница"
+	},
+	"cmd_save_as_tab": {
+		"message": "Запази текущата страница в списъка с Tabs (ако не е запазена)",
+		"description": "[command description] потребителят иска да запази текущата страница"
+	},
+	"cmd_toggle_org": {
+		"message": "Покажи модал за превключване на стойността на Org на текущата страница (ако е запазена)",
+		"description": "[command description] потребителят иска да превключи Org на текущата страница"
+	},
+	"cmd_update_tab": {
+		"message": "Покажи модал за обновяване на текущата страница (ако е запазена)",
+		"description": "[command description] потребителят иска да обнови текущата страница"
+	},
+	"confirm_another_org": {
+		"message": "Потвърдете отварянето на този линк.",
+		"description": "[open-other-org-modal] заявка за потвърждение от потребителя за отваряне на конструирания линк."
+	},
+	"confirm_update_extension": {
+		"message": "Нова версия на $extension_label е налична!",
+		"description": "получено е неизвестно съобщение от слушател"
+	},
+	"continue": {
+		"message": "Продължи",
+		"description": "текст за бутоните, които позволяват изпълнението на текущото действие"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Всички общи Tab",
+		"description": "[контекстно меню]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Премахване на всички Tab",
+		"description": "[контекстно меню]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Всички видими Tab",
+		"description": "[контекстно меню]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Експортирай Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[контекстно-меню]"
+	},
+	"cxm_move": {
+		"message": "🧭 Премести Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Направи първи",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Направи последен",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Премести наляво",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Премести надясно",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Отвори в друга Организация",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[контекстно-меню]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[контекстно-меню]"
+	},
+	"cxm_remove": {
+		"message": "💥 Премахни Tab(ове)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tab отляво",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Други Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tab отдясно",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Този Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Нулиране на подразбиращите се Tab",
+		"description": "[контекстно меню]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Етикет за менюто с настройки"
+	},
+	"cxm_sort": {
+		"message": "🎯 Сортиране на Tabs",
+		"description": "контекстно меню, което позволява на потребителите автоматично да сортират своите Tabs (основно меню)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 по Етикет",
+		"description": "контекстно меню, което позволява на потребителите да сортират своите Tabs по етикет"
+	},
+	"cxm_sort_org": {
+		"message": "👽 по Org",
+		"description": "контекстно меню, което позволява на потребителите да сортират своите Tabs по организация"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 по Url",
+		"description": "контекстно меню, което позволява на потребителите да сортират своите Tabs по URL адрес"
+	},
+	"cxm_update": {
+		"message": "✏️ Актуализирай Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Смени Организация",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Други актуализации",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Изтрий",
+		"description": "[popup] изтрий ред"
+	},
+	"delete_all": {
+		"message": "$delete всички Tabs",
+		"description": "[изскачащ прозорец] заглавие на кошчето за изпразване на всички Tabs"
+	},
+	"descending": {
+		"message": "Низходящ (Я-А)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] позволява на потребителя да плъзне файловете си в определената зона"
+	},
+	"enable": {
+		"message": "Разреши",
+		"description": "[заявка_разрешение] бутон за разрешаване на разрешения"
+	},
+	"error_adding_tab": {
+		"message": "Грешка при добавяне на Tab.",
+		"description": "[error] Общa грешка при добавяне на Tab"
+	},
+	"error_check_update": {
+		"message": "Грешка при проверка за актуализации",
+		"description": "[грешка] обща грешка при проверка за актуализации на разширението"
+	},
+	"error_close_other_modal": {
+		"message": "Затвори първо другия прозорец!",
+		"description": "[toast] Потребителят се опита да отвори повече от един модален прозорец"
+	},
+	"error_cxm_check": {
+		"message": "Грешка при проверката на елементите от менюто",
+		"description": "[error] елементите на контекстното меню не бяха намерени"
+	},
+	"error_cxm_create": {
+		"message": "Грешка при създаването на елементите от менюто",
+		"description": "[error] не можа да се инициализират елементите на контекстното меню"
+	},
+	"error_cxm_remove": {
+		"message": "Грешка при премахването на елементите от менюто",
+		"description": "[error] не можаха да се премахнат елементите от контекстното меню"
+	},
+	"error_duplicate_tab": {
+		"message": "Този Tab вече съществува",
+		"description": "[error] Tab-ът е дублиран"
+	},
+	"error_expand_url": {
+		"message": "Не може да се разшири празен URL!",
+		"description": "[error] не е подаден URL за разширяване"
+	},
+	"error_expand_url_no_base": {
+		"message": "Не може да се разшири URL без неговия хост!",
+		"description": "[error] не е подадена базова URL за разширяване"
+	},
+	"error_extract_empty_url": {
+		"message": "Не може да се извлече името на организацията от празен URL!",
+		"description": "[error] не е подаден URL, от който да се извлече името на организацията"
+	},
+	"error_failed_sync": {
+		"message": "Синхронизацията се провали.",
+		"description": "[error] Общa грешка при синхронизиране на Tabs с потребителя"
+	},
+	"error_failed_to_fetch": {
+		"message": "Неуспешно извличане на външни ресурси",
+		"description": "[грешка] Извикването към външен уебсайт не беше успешно"
+	},
+	"error_get_with_no_org": {
+		"message": "Не може да се получат Tab, ако организацията не е посочена.",
+		"description": "[error] се опитва да се търсят Tab без подадена информация за организация"
+	},
+	"error_import": {
+		"message": "Грешка при импорта:\n",
+		"description": "[error] възникна грешка по време на процеса на импортиране"
+	},
+	"error_invalid_key": {
+		"message": "Параметърът key, подаден на функцията, е невалиден",
+		"description": "[грешка] разработчикът се опита да извика функция с невалиден параметър"
+	},
+	"error_invalid_request": {
+		"message": "Невалидно запитване.",
+		"description": "[error] Общa грешка след получаване на съобщение с неправилен формат"
+	},
+	"error_invalid_tab": {
+		"message": "Невалиден Tab",
+		"description": "[error] Tab-ът не е валиден"
+	},
+	"error_link_with_id": {
+		"message": "Тази страница не може да съществува в друга Организация, защото съдържа Id!",
+		"description": "[open-other-org-modal] предупреждение към потребителя, че линкът може да не съществува в друга организация"
+	},
+	"error_many_matching_tab": {
+		"message": "Намерени са повече от един съответстващ Tab.",
+		"description": "[error] върнати са твърде много Tab"
+	},
+	"error_many_tabs_found": {
+		"message": "Намерени са повече от един Tab.",
+		"description": "[error] Върнати са множество Tabs"
+	},
+	"error_minify_url": {
+		"message": "Не може да се намали празен URL!",
+		"description": "[error] не е подаден URL за намаляване"
+	},
+	"error_missing_favourite_id": {
+		"message": "Не може да се получи любима картинка без Id",
+		"description": "[error] не е подаден id на любимата картинка"
+	},
+	"error_missing_key": {
+		"message": "Ключът не беше намерен никъде",
+		"description": "[error] не беше намерен превод във файловете"
+	},
+	"error_no_array": {
+		"message": "Невалиден масив или не беше подаден масив",
+		"description": "[error] не беше получен валиден масив"
+	},
+	"error_no_browser_tab": {
+		"message": "Не можа да се намери активна разделка в браузъра.",
+		"description": "[error] фоновата страница не можа да установи активна разделка в браузъра"
+	},
+	"error_no_callback": {
+		"message": "Моля, задайте callback функция",
+		"description": "[error] не беше подадена функция за повикване в края на метода"
+	},
+	"error_no_cookies": {
+		"message": "Не бяха намерени съвпадащи бисквитки",
+		"description": "[error] не бяха върнати бисквитки на Salesforce"
+	},
+	"error_no_data": {
+		"message": "Не може да се идентифицира Tab без данни.",
+		"description": "[error] се опита да се получи Tab без да се изпратят данни"
+	},
+	"error_no_headers": {
+		"message": "Не бяха намерени заглавия.",
+		"description": "[error] разширението не можа да установи къде да постави бутона за любими"
+	},
+	"error_no_matching_tab": {
+		"message": "Не бяха намерени съвпадащи Tab.",
+		"description": "[error] не бяха върнати съвпадащи Tab"
+	},
+	"error_no_message": {
+		"message": "Не беше зададено съобщение за изпращане.",
+		"description": "[error] не беше намерено съобщение за изпращане към други части на кода"
+	},
+	"error_no_object": {
+		"message": "Не е подаден обект за проверка!",
+		"description": "[error] не беше подаден обект за проверка"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab не беше намерен.",
+		"description": "[error] разширението не можа да установи къде да постави любимите Tab"
+	},
+	"error_no_url": {
+		"message": "Не беше подаден URL за проверка!",
+		"description": "[error] не беше подаден URL за проверка"
+	},
+	"error_not_initialized": {
+		"message": "Все още не е инициализиран.",
+		"description": "[error] Общa грешка когато променлива не е готова"
+	},
+	"error_processing_tabs": {
+		"message": "Грешка при обработка на Tabs.",
+		"description": "[error] Общa грешка при обработка на Tabs"
+	},
+	"error_redirect": {
+		"message": "Не може да се пренасочи. Моля, презаредете страницата.",
+		"description": "[error] Общa грешка при пренасочване на страница"
+	},
+	"error_remove_not_favourite": {
+		"message": "Не може да се премахне Tab, който не е любимо!",
+		"description": "[error] потребителят се опита да премахне Tab, който още не е запазен"
+	},
+	"error_removing_all_tabs": {
+		"message": "Грешка при премахване на всички Tabs.",
+		"description": "[error] Общa грешка при премахване на всички Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Грешка при премахване на обобщени Tabs.",
+		"description": "[error] Общa грешка при премахване на обобщени Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Грешка при премахване на други Tabs.",
+		"description": "[error] Общa грешка при премахване на други Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Грешка при премахване на Tab.",
+		"description": "[error] Общa грешка при премахване на Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Грешка при премахване на всички видими Tab.",
+		"description": "[грешка] Обща грешка при премахване на всички видими Tab"
+	},
+	"error_required_params": {
+		"message": "Не са подадени необходимите параметри за функцията",
+		"description": "[грешка] разработчикът се опита да извика функция без необходимите параметри"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Грешка при нулиране на подразбиращите се Tab.",
+		"description": "[грешка] Обща грешка при нулиране на Tab до подразбиращи се стойности"
+	},
+	"error_sorting_tabs": {
+		"message": "Грешка при сортиране на Tabs",
+		"description": "[error] показано в изскачащо съобщение"
+	},
+	"error_sync_nothing": {
+		"message": "Не може да се синхронизират празни Tab!",
+		"description": "[error] се опита да се синхронизира нищо"
+	},
+	"error_tab_constructor": {
+		"message": "Използвайте Tab.create() вместо new Tab()",
+		"description": "[error] Информирайте разработчика как да използва класа Tab"
+	},
+	"error_tab_label": {
+		"message": "Етикетът трябва да бъде непразен низ",
+		"description": "[error] потребителят се опита да създаде Tab без етикет"
+	},
+	"error_tab_not_found": {
+		"message": "Tab не беше намерен.",
+		"description": "[error] Tab не беше включен в масива"
+	},
+	"error_tab_object_creation": {
+		"message": "При извикване с обект, не подавайте нищо друго.",
+		"description": "[error] грешка в имплементацията от страна на разработчика"
+	},
+	"error_tab_org": {
+		"message": "Организацията трябва да бъде низ или undefined",
+		"description": "[error] потребителят се опита да създаде Tab с невалидна стойност за организация"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Намерени са неочаквани ключове:",
+		"description": "[error] потребителят се опита да създаде Tab със свойства, които не се поддържат"
+	},
+	"error_tab_url": {
+		"message": "URL трябва да бъде непразен низ",
+		"description": "[error] потребителят се опита да създаде Tab без URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab с този URL вече е запазен!",
+		"description": "[error] Потребителят се опита да запази вече запазен Tab"
+	},
+	"error_tabcont_initialize": {
+		"message": "Не може да се инициализира с",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Открити са невалидни Tab(ове).\nПърво срещане:",
+		"description": "[error] подадени са невалидни Tab"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Използвайте TabContainer.create() вместо new TabContainer()",
+		"description": "[error] Информирайте разработчика как да използва класа TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Използвайте TranslationService.create() вместо new TranslationService()",
+		"description": "[error] Информирайте разработчика как да използва класа TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator все още не е инициализиран.",
+		"description": "[error] TranslationService не е бил готов"
+	},
+	"error_unknown_message": {
+		"message": "Получено неизвестно съобщение",
+		"description": "получено е неизвестно съобщение от слушател"
+	},
+	"error_unknown_request": {
+		"message": "Непознато запитване.",
+		"description": "[error] Общa грешка след получаване на непознато съобщение"
+	},
+	"error_useless_remove": {
+		"message": "Не може да се премахне:\nНе може да се премахне страница, която не е била запазена предварително",
+		"description": "[error] потребителят се опита да премахне страница, която още не е била запазена"
+	},
+	"error_useless_save": {
+		"message": "Не може да се запази:\nТази страница вече е запазена!",
+		"description": "[error] потребителят се опита да запази страница, която вече е запазена"
+	},
+	"export": {
+		"message": "Експортирай",
+		"description": "[popup] бутон за експортиране"
+	},
+	"export_title": {
+		"message": "Експортирай всички Tab",
+		"description": "[popup] заглавие на бутона за експортиране"
+	},
+	"extension_description": {
+		"message": "Създайте и управлявайте персонализирани Tab в наличното пространство на страницата Salesforce Lightning Setup.",
+		"description": "[manifest] Описание на това разширение"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Името на това разширение"
+	},
+	"file": {
+		"message": "файл",
+		"description": "един файл"
+	},
+	"files": {
+		"message": "файлове",
+		"description": "няколко файла"
+	},
+	"flows": {
+		"message": "Потоци",
+		"description": "[подразбиращ се-tab] Етикет за подразбиращия се Tab за потоци"
+	},
+	"general": {
+		"message": "Общи",
+		"description": "Етикет за категорията общи настройки"
+	},
+	"help": {
+		"message": "Помощ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Маркира новите Tabs като Org Tabs, така че те да се виждат само когато сте влезли в конкретната организация на Salesforce.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Новомаркираните Tabs се вмъкват в началото на вашия списък с Tabs в лентата за настройка, вместо да се добавят в края.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението извън домейн на Salesforce, автоматично ще бъдете отведени до страницата за вход в Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението в домейн на Salesforce, но не на страница за настройка, автоматично ще бъдете отведени до страницата за настройка на Salesforce.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Когато е активирано, вашите Tabs се поддържат в сортиран ред - по етикет, URL адрес или организация; в зависимост от това, което изберете.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Закача вашите запазени Tabs преди стандартното меню за навигация (Home / Object Manager) в Setup, вместо след него.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Когато е активирано, всеки запазен Tab ще отваря свързаната страница в нов Tab.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Предотвратява автоматичното показване на известия за бележки по изданието след актуализиране на разширението.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Деактивира периодичните изскачащи прозорци за напомняне за актуализация, поддържайки потребителския интерфейс на разширението чист (когато сте деактивирали автоматичните актуализации на разширението от настройките на вашия браузър).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението извън домейн на Salesforce, страницата за вход ще се отвори в текущия Tab на браузъра.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ако щракнете върху изскачащия прозорец на разширението в домейн на Salesforce, но не на страница за настройка, страницата за настройка на Salesforce ще се отвори в текущия Tab на браузъра.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Задайте езика на потребителския интерфейс само за разширението. Ако нещо не е преведено, вместо него ще се използва английската версия.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Деактивира събирането на основни телеметрични данни. Разширението няма да се появява в анонимни показатели за използване.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Заобикаля API на Lightning Navigation и отваря връзки чрез презареждане на цялата страница, което може да е по-бързо в някои настройки на организацията.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Деактивира проверката на разширението, която проверява дали фрагментът на URL адреса съответства на формата на идентификатори на записи/обекти на Salesforce (използва се за автоматично задаване на записания Tab като Org Tab).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Кликнете, за да бъдете пренасочени към документацията за тази настройка!",
+		"description": "[помощ-настройки] призив за действие, за да може потребителят да прочете повече за конкретна настройка"
+	},
+	"import": {
+		"message": "Импортирай",
+		"description": "[popup] бутон за импортиране"
+	},
+	"import_duplicate_description": {
+		"message": "Дублираните Tab ще бъдат игнорирани.<br />Два Tab се считат за дублирани, ако имат същия URL.",
+		"description": "[import] описание на процеса на импортиране"
+	},
+	"import_invalid_file": {
+		"message": "Невалиден тип файл.\nПоддържат се само JSON файлове.",
+		"description": "[error] файлът, използван за импортиране, не е JSON"
+	},
+	"import_successful": {
+		"message": "Импортирането е успешно",
+		"description": "[import] импортирането е завършено. След това ще бъде показан броят на импортираните записи"
+	},
+	"import_tabs": {
+		"message": "Импортирай Tab",
+		"description": "[modal-title] за процеса на импортиране"
+	},
+	"import_title": {
+		"message": "$import_tabs от JSON файл",
+		"description": "[изскачащ прозорец] заглавие на бутона за импортиране"
+	},
+	"insert_another": {
+		"message": "Вмъкни друг",
+		"description": "[error-open-other-org-modal] съобщение когато потребителят въведе същата организация"
+	},
+	"insert_another_org": {
+		"message": "Въведената Организация е текущата!\nМоля, въведете друга Организация.",
+		"description": "[error-open-other-org-modal] съобщение когато потребителят въведе същата организация"
+	},
+	"insert_valid_org": {
+		"message": "Моля, въведете валидна Организация!",
+		"description": "[error-open-other-org-modal] съобщение когато потребителят въведе грешен URL"
+	},
+	"italic": {
+		"message": "Курсив",
+		"description": "Опция за стил на шрифта за курсивен текст"
+	},
+	"lightning_navigation": {
+		"message": "Lightning навигация",
+		"description": "Персонализирана навигационна технология на Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Влез в Salesforce",
+		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към страницата за вход на Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "заместител за модала за актуализиране на Tab"
+	},
+	"no_manifest_github": {
+		"message": "Невалиден или липсващ GitHub homepage_url в манифеста",
+		"description": "Ключът homepage_url в манифеста не използва GitHub връзка"
+	},
+	"no_match": {
+		"message": "Няма намерено съвпадение за действие",
+		"description": "[error] когато switch не може да съпостави поисканото действие"
+	},
+	"nss_invalid_url": {
+		"message": "Открит е невалиден URL адрес.",
+		"description": "[не е настройка на Salesforce] невалиден URL адрес"
+	},
+	"nss_not_setup_page": {
+		"message": "Това не е страница за настройка на $salesforce_lightning.",
+		"description": "[notSalesforceSetup] потребителят не е на страница на Salesforce."
+	},
+	"open_here": {
+		"message": "Отвори в този Tab.",
+		"description": "[open-other-org-modal] радио бутон, позволяващ на потребителя да отвори в същия Tab на браузъра"
+	},
+	"open_new_tab": {
+		"message": "Отвори в нов Tab.",
+		"description": "[open-other-org-modal] радио бутон, позволяващ на потребителя да отвори в нов Tab на браузъра."
+	},
+	"open_settings": {
+		"message": "Отваряне на настройките на разширението",
+		"description": "[изскачащ прозорец] бутон за пренасочване към страницата с настройки"
+	},
+	"open_setup": {
+		"message": "Отвори Setup",
+		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към Salesforce Setup страницата"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Добавяне на нови Tabs като Org Tabs.",
+		"description": "[settings] позволява на потребителя да добавя всички нови Tabs като специфични за организацията"
+	},
+	"opt_add_tabs_front": {
+		"message": "Добавяне на нови Tabs отпред.",
+		"description": "[settings] позволява на потребителя да добавя всички нови Tabs отпред"
+	},
+	"opt_automatic_open_login": {
+		"message": "Автоматично отваряне на страницата $salesforce_login при щракване върху изскачащия прозорец, когато не сте на страница на Salesforce.",
+		"description": "[настройка] когато потребителят отвори изскачащия прозорец, докато е на произволен уебсайт"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Автоматично отваряне на страницата $salesforce_setup при щракване върху изскачащия прозорец, когато сте на страница на Salesforce.",
+		"description": "[настройка] когато потребителят отвори изскачащия прозорец, докато е на уебсайт на Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "Настройките бяха запазени!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (По подразбиране и резервен)",
+		"description": "Език по подразбиране на разширението"
+	},
+	"opt_keep_sort": {
+		"message": "Поддържане на Tabs сортирани.",
+		"description": "[setting] позволява на потребителя да поддържа Tabs сортирани по един от техните ключове"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Запазване на любими Tabs вляво от Начало и Мениджър на обекти.",
+		"description": "Превключвател за закачане на любими Tabs от лявата страна на навигационната лента"
+	},
+	"opt_link_new_browser": {
+		"message": "Винаги отваряй връзки в нов раздел на браузъра.",
+		"description": "[настройка] при щракване върху любима Tab, отваряй я в нов раздел на браузъра"
+	},
+	"opt_no_release_notes": {
+		"message": "Не показвайте бележки за изданието на актуализацията.",
+		"description": "[настройка] Позволява на потребителя да предотврати показването на бележки след актуализация на разширението"
+	},
+	"opt_no_update_notification": {
+		"message": "Не предупреждавайте за налични актуализации.",
+		"description": "[настройка] позволява на потребителя да попречи на разширението да търси нови версии"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Винаги отваряйте страницата $salesforce_login в същия Tab при щракване върху изскачащия прозорец.",
+		"description": "[настройка]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Винаги отваряйте страницата $salesforce_setup в същия Tab при щракване върху изскачащия прозорец.",
+		"description": "[настройка]"
+	},
+	"opt_pick_language": {
+		"message": "Изберете език на разширението",
+		"description": "[настройка] етикет, който подканва потребителя да избере предпочитания от него език"
+	},
+	"opt_pick_sort": {
+		"message": "Изберете по кое поле да бъдат сортирани Tabs",
+		"description": "[setting] сега потребителят може да избере по кой ключ да поддържа Tabs сортирани"
+	},
+	"opt_prevent_analytics": {
+		"message": "Предотвратете използването на Simple Analytics (няма да се показва в броя на потребителите).",
+		"description": "[настройка] Позволява на потребителя да предотврати изпращането на анонимни анализи"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Предотвратяване на използването на Lightning Navigation (по-бързо зареждане, когато не е отметнато).",
+		"description": "[setting] не позволява Lightning Navigation с обяснение на функцията"
+	},
+	"opt_same_tab_popup": {
+		"message": "страница в същия раздел при щракване върху изскачащия прозорец.",
+		"description": "[настройка] предотврати отварянето на нов раздел"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Следвайте езика на Salesforce (чете бисквитките на Salesforce)",
+		"description": "Опция за използване на езиковата настройка на Salesforce. За да използвате тази опция, потребителите трябва да позволят на разширението да чете бисквитките на Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Пропусни автоматична проверка на Salesforce ID.",
+		"description": "[настройка] при запазване на любима Tab, предотврати проверка за наличието на ID в връзката"
+	},
+	"or_drop": {
+		"message": "Или $drop",
+		"description": "[импортиране] позволете на потребителя да премества файлове с мишката си и да ги пуска"
+	},
+	"org_link": {
+		"message": "Линк към Организация",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Информация за друга Организация",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "друга-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Презапиши запазените Tab",
+		"description": "[label] изтриване на всички запазени Tab при импортиране"
+	},
+	"preserve_org_tabs": {
+		"message": "Запази Tab за други организации",
+		"description": "[label] запази всички организационно-специфични Tab при импортиране"
+	},
+	"remove_tab": {
+		"message": "Премахни Tab",
+		"description": "[alt] алтернативен текст когато изображенията не се показват"
+	},
+	"req_downloads_open_popup": {
+		"message": "Моля, отворете изскачащия прозорец на разширението от менюто за разширения на вашия браузър.",
+		"description": "[известие] помолете потребителя да кликне върху изскачащия прозорец на разширението, за да продължи"
+	},
+	"req_downloads_perm_header": {
+		"message": "Моля, разрешете разрешението за изтегляния\nза да започнете заявения експорт.",
+		"description": "[заявка_разрешение] призив за действие за разрешаване на разрешение за изтегляне"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Тази операция ще бъде поискана само веднъж.",
+		"description": "[заявка_разрешение] описание за разрешаване на разрешение за изтегляне"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Не питай отново",
+		"description": "[req_permission] етикет когато потребителят не иска трайно да дава разрешения"
+	},
+	"req_permissions_header": {
+		"message": "Моля, позволете ни достъп\nдо страниците на $salesforce_setup автоматично.",
+		"description": "[req_permission] заглавка на страницата за искане на разрешения"
+	},
+	"req_permissions_paragraph": {
+		"message": "Ако искате, можете да накарате любимите си Tabs да се показват\nведнага щом навигирате до страница на $salesforce_setup\nбез да се налага да щраквате върху това разширение всеки път.",
+		"description": "[req_permission] текст, обясняващ защо се искат разрешенията"
+	},
+	"required": {
+		"message": "задължително",
+		"description": "[input] маркира поле за въвеждане като задължително"
+	},
+	"required_info": {
+		"message": "= Задължителна информация",
+		"description": "[modal] информира потребителя, че определена информация е задължителна"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] платформата Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Вход в Salesforce",
+		"description": "страница за вход в Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Настройка на Salesforce",
+		"description": "всяка страница за настройка на Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Запази",
+		"description": "Приложи промените и ги запази в паметта"
+	},
+	"save_tab": {
+		"message": "Запази като Tab",
+		"description": "[alt] алтернативен текст когато изображенията не се показват"
+	},
+	"send_tip": {
+		"message": "Изпратете ни бакшиш ❤️",
+		"description": "[popup] заглавие на svg за подкана за изпращане на бакшиш"
+	},
+	"set_gen_preview": {
+		"message": "Tab Преглед",
+		"description": "Етикет за предварителен преглед на общия изглед на Tab"
+	},
+	"set_gen_styler": {
+		"message": "Стил на Tab",
+		"description": "Етикет за конфигуриране на стила на общия Tab"
+	},
+	"set_general_settings": {
+		"message": "Общи Настройки",
+		"description": "Заглавие на секция за общи опции за конфигурация"
+	},
+	"set_move_available": {
+		"message": "Преместване в Налично",
+		"description": "Заглавие на бутон за преместване на избрани елементи обратно в Налично"
+	},
+	"set_move_chosen": {
+		"message": "Преместване в Избрано",
+		"description": "Заглавие на бутон за преместване на избрани елементи в Избрано"
+	},
+	"set_org_preview": {
+		"message": "Org Преглед",
+		"description": "Етикет за предварителен преглед на специфичния за организацията изглед на Tab"
+	},
+	"set_org_styler": {
+		"message": "Стил на Org",
+		"description": "Етикет за конфигуриране на стила на Tab за конкретната Org"
+	},
+	"set_tab_background_active_label": {
+		"message": "Въведете фоновия цвят за вашите активни общи Tabs.",
+		"description": "Етикет за задаване на фонов цвят за активни общи Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Въведете фоновия цвят за вашите Tabs на организацията.",
+		"description": "Етикет за задаване на фонов цвят за специфични за организацията Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Въведете цвета на рамката за вашите активни Tabs на организацията.",
+		"description": "Етикет за задаване на цвят на рамката за активни специфични за организацията Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Въведете цвета на рамката за вашите общи Tabs.",
+		"description": "Етикет за задаване на цвят на рамката за общи Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Въведете цвета на текста за вашите активни общи Tabs.",
+		"description": "Етикет за задаване на цвят на текста за активни общи Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Въведете цвета на текста за вашите Tabs на организацията.",
+		"description": "Етикет за задаване на цвят на текста за специфични за организацията Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Изберете един или повече стилове на декорация за вашите активни Tabs на организацията.",
+		"description": "Подкана за избор на стилове на декорация за активни специфични за организацията Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Изберете един или повече стилове на декорация за вашите общи Tabs.",
+		"description": "Подкана за избор на стилове на декорация за общи Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Въведете фоновия цвят при посочване за вашите активни общи Tabs.",
+		"description": "Етикет за задаване на фонов цвят при посочване за активни общи Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Въведете фоновия цвят при посочване за вашите Tabs на организацията.",
+		"description": "Етикет за задаване на фонов цвят при посочване за специфични за организацията Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Въведете цвета на сянката за вашите активни Tabs на организацията.",
+		"description": "Етикет за задаване на цвят на сянката за активни специфични за организацията Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Въведете цвета на сянката за вашите общи Tabs.",
+		"description": "Етикет за задаване на цвят на сянката за общи Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Въведете цвета за лентата в горната част на вашите активни общи Tabs.",
+		"description": "Етикет за задаване на цвят на горната лента за активни общи Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Кликнете, за да превключите активното състояние.",
+		"description": "Текст на подсказка за контрола за превключване на активно състояние"
+	},
+	"settings": {
+		"message": "Настройки",
+		"description": "Етикет за менюто с настройки"
+	},
+	"setup_page": {
+		"message": "Setup страница",
+		"description": "[notSalesforceSetup] страницата за редактиране на настройките в Salesforce"
+	},
+	"skip": {
+		"message": "Пропусни",
+		"description": "[req_permission] бутон за отказ от даване на разрешения"
+	},
+	"successfully_imported": {
+		"message": "Импортирането е успешно",
+		"description": "[toast] потребителят успешно е импортирал Tab от външен файл"
+	},
+	"tab_explain": {
+		"message": "Всеки елемент трябва да има 'label' и 'url' като низове. Освен това, всеки елемент може да има 'org' като низ.",
+		"description": "[error] обяснява как трябва да се конструира Tab"
+	},
+	"tab_information": {
+		"message": "Информация за Tab",
+		"description": "заглавие за модалния прозорец за актуализиране на Tab"
+	},
+	"tab_label": {
+		"message": "Етикет на Tab",
+		"description": "свойството Label на Tab, неговото име"
+	},
+	"tab_org": {
+		"message": "Организация на Tab",
+		"description": "свойството Org на Tab, ако е за една конкретна Salesforce организация"
+	},
+	"tab_url": {
+		"message": "URL на Tab",
+		"description": "свойството URL на Tab, към което сочи"
+	},
+	"table_delete": {
+		"message": "Изтрий Tab",
+		"description": "[popup] помощен текст за колоната с бутона за изтриване"
+	},
+	"table_org": {
+		"message": "Това ли е организационен Tab",
+		"description": "[popup] помощен текст за колоната с отметката за организация"
+	},
+	"table_row_label": {
+		"message": "Въведете етикета за този URL",
+		"description": "[popup] поле за въвеждане за името на Tab"
+	},
+	"table_row_org": {
+		"message": "Кликнете, ако желаете този Tab да бъде достъпен само за тази организация.",
+		"description": "[popup] отметка за превключване на Tab към организационно специфичен"
+	},
+	"table_row_org_name": {
+		"message": "Организацията, за която този Tab е достъпен.",
+		"description": "[popup] поле за въвеждане за името на организацията"
+	},
+	"table_row_url": {
+		"message": "Въведете sub_URL, към който искате да бъдете пренасочени.",
+		"description": "[popup] поле за въвеждане за URL на Tab"
+	},
+	"tabs": {
+		"message": "Tab",
+		"description": "любимите линкове на потребителя"
+	},
+	"tabs_saved": {
+		"message": "Tab са запазени.",
+		"description": "[toast] Tab са успешно запазени."
+	},
+	"theme_dark": {
+		"message": "Смени темата на тъмна",
+		"description": "[popup] заглавие за иконата на луната за смяна на темата"
+	},
+	"theme_light": {
+		"message": "Смени темата на светла",
+		"description": "[popup] заглавие за иконата на слънцето за смяна на темата"
+	},
+	"underline": {
+		"message": "Подчертаване",
+		"description": "Опция за стил на декорация за подчертаване на текст на Tab"
+	},
+	"underline_wavy": {
+		"message": "Вълнообразно Подчертаване",
+		"description": "Опция за стил на декорация за прилагане на вълнообразно подчертаване върху текст на Tab"
+	},
+	"update_available": {
+		"message": "Налична актуализация",
+		"description": "налична е нова актуализация за разширението"
+	},
+	"upload": {
+		"message": "Качи",
+		"description": "[import] позволява на потребителя да преглежда своите файлове и да избере правилния"
+	},
+	"users": {
+		"message": "Потребители",
+		"description": "името на страницата свързана с ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Към къде?",
+		"description": "[open-other-org-modal] алтернативно заглавие за модалния прозорец"
+	},
+	"write_review": {
+		"message": "Напишете отзив!",
+		"description": "[popup] заглавие на svg за искане за писане на отзив"
+	}
+}

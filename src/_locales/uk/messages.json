@@ -1,0 +1,990 @@
+{
+	"allow": {
+		"message": "Дозволити",
+		"description": "[запит_дозволу] кнопка для надання дозволів"
+	},
+	"ascending": {
+		"message": "За зростанням (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Доступно",
+		"description": "Заголовок розділу для елементів, які можна додати"
+	},
+	"bold": {
+		"message": "Жирний",
+		"description": "Параметр стилю шрифту для жирного тексту"
+	},
+	"cancel": {
+		"message": "Скасувати",
+		"description": "заголовок або textContent для кнопок, які запобігають виконанню поточної дії"
+	},
+	"cancel_close": {
+		"message": "Скасувати та закрити",
+		"description": "заголовок або textContent для кнопки закриття модальних вікон"
+	},
+	"chosen": {
+		"message": "Вибрано",
+		"description": "Заголовок розділу для вибраних елементів"
+	},
+	"cmd_export_all": {
+		"message": "Показати модальне вікно для експорту всіх збережених Tabs",
+		"description": "[опис команди] користувач хоче експортувати всі Tabs"
+	},
+	"cmd_import": {
+		"message": "Показати модальне вікно для імпорту нових Tabs",
+		"description": "[опис команди] користувач хоче імпортувати нові Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Показати модальне вікно для відкриття поточної сторінки в іншому Org",
+		"description": "[опис команди] користувач хоче відкрити поточну сторінку в іншому Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Видалити поточну сторінку зі списку Tabs (якщо збережено)",
+		"description": "[опис команди] користувач хоче видалити поточну сторінку"
+	},
+	"cmd_save_as_tab": {
+		"message": "Зберегти поточну сторінку в списку Tabs (якщо не збережено)",
+		"description": "[опис команди] користувач хоче зберегти поточну сторінку"
+	},
+	"cmd_toggle_org": {
+		"message": "Перемкнути значення Org поточної сторінки (якщо збережено)",
+		"description": "[опис команди] користувач хоче перемкнути Org для поточної сторінки"
+	},
+	"cmd_update_tab": {
+		"message": "Показати модальне вікно для оновлення поточної сторінки (якщо збережено)",
+		"description": "[опис команди] користувач хоче оновити поточну сторінку"
+	},
+	"confirm_another_org": {
+		"message": "Підтвердити відкриття цього посилання.",
+		"description": "[модальне_вікно_відкрити_іншу_орг] запит підтвердження від користувача на відкриття створеного посилання."
+	},
+	"confirm_update_extension": {
+		"message": "Нова версія $extension_label тепер доступна!",
+		"description": "отримано невідоме повідомлення від слухача"
+	},
+	"continue": {
+		"message": "Продовжити",
+		"description": "textContent для кнопок, які дозволяють виконати поточну дію"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Усі загальні Tab",
+		"description": "[контекстне меню]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Видалити всі Tab",
+		"description": "[контекстне меню]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Усі видимі Tab",
+		"description": "[контекстне меню]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Експортувати Tabs",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_move": {
+		"message": "🧭 Перемістити Tab",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Зробити першим",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Зробити останнім",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Перемістити ліворуч",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Перемістити праворуч",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Відкрити в іншій Org",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_remove": {
+		"message": "💥 Видалити Tab(и)",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tabs ліворуч",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Інші Tabs",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tabs праворуч",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Цей Tab",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Скинути стандартні Tab",
+		"description": "[контекстне меню]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Мітка для меню налаштувань"
+	},
+	"cxm_sort": {
+		"message": "🎯 Сортувати Tab-и",
+		"description": "контекстне меню, щоб дозволити користувачам автоматично сортувати свої Tab-и (батьківське меню)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 за Міткою",
+		"description": "контекстне меню, щоб дозволити користувачам сортувати свої Tab-и за міткою"
+	},
+	"cxm_sort_org": {
+		"message": "👽 за Org",
+		"description": "контекстне меню, щоб дозволити користувачам сортувати свої Tab-и за org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 за Url",
+		"description": "контекстне меню, щоб дозволити користувачам сортувати свої Tab-и за url"
+	},
+	"cxm_update": {
+		"message": "✏️ Оновити Tab",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Перемкнути Org",
+		"description": "[контекстне-меню]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Інші оновлення",
+		"description": "[контекстне-меню]"
+	},
+	"delete": {
+		"message": "Видалити",
+		"description": "[спливаюче_вікно] видалити рядок"
+	},
+	"delete_all": {
+		"message": "$delete усі Tabs",
+		"description": "[ спливаюче вікно] заголовок на кошику для очищення всіх Tabs"
+	},
+	"descending": {
+		"message": "За спаданням (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Перетягніть",
+		"description": "[імпорт] дозволити користувачеві перетягувати свої файли в зазначену область"
+	},
+	"enable": {
+		"message": "Увімкнути",
+		"description": "[запит_дозволу] кнопка для увімкнення дозволів"
+	},
+	"error_adding_tab": {
+		"message": "Помилка при додаванні Tab.",
+		"description": "[помилка] Загальна помилка, що використовується при додаванні Tab"
+	},
+	"error_check_update": {
+		"message": "Помилка під час перевірки оновлень",
+		"description": "[помилка] загальна помилка під час перевірки оновлень розширення"
+	},
+	"error_close_other_modal": {
+		"message": "Спочатку закрийте інше модальне вікно!",
+		"description": "[спливаюче_повідомлення] Користувач спробував відкрити більше 1 модального вікна"
+	},
+	"error_cxm_check": {
+		"message": "Помилка перевірки пунктів меню",
+		"description": "[помилка] не вдалося знайти пункти контекстного меню"
+	},
+	"error_cxm_create": {
+		"message": "Помилка створення пунктів меню",
+		"description": "[помилка] не вдалося ініціалізувати пункти контекстного меню"
+	},
+	"error_cxm_remove": {
+		"message": "Помилка видалення пунктів меню",
+		"description": "[помилка] не вдалося видалити пункти контекстного меню"
+	},
+	"error_duplicate_tab": {
+		"message": "Цей Tab вже існує",
+		"description": "[помилка] Tab дублюється"
+	},
+	"error_expand_url": {
+		"message": "Неможливо розширити порожню URL!",
+		"description": "[помилка] URL для розширення не передано"
+	},
+	"error_expand_url_no_base": {
+		"message": "Неможливо розширити URL без її хоста!",
+		"description": "[помилка] базову URL, використану для розширення, не передано"
+	},
+	"error_extract_empty_url": {
+		"message": "Неможливо витягти назву Org з порожньої URL!",
+		"description": "[помилка] URL, з якої потрібно отримати назву Org, не передано"
+	},
+	"error_failed_sync": {
+		"message": "Не вдалося синхронізувати.",
+		"description": "[помилка] Загальна помилка, коли Tabs не вдалося синхронізувати від користувача"
+	},
+	"error_failed_to_fetch": {
+		"message": "Не вдалося отримати зовнішні ресурси",
+		"description": "[помилка] Виклик зовнішнього веб-сайту не був успішним"
+	},
+	"error_get_with_no_org": {
+		"message": "Неможливо отримати Tabs, якщо Org не вказано.",
+		"description": "[помилка] спроба пошуку Tabs за Org без надсилання інформації про Org"
+	},
+	"error_import": {
+		"message": "Помилка під час імпорту:\n",
+		"description": "[помилка] сталася помилка під час процесу імпорту"
+	},
+	"error_invalid_key": {
+		"message": "Параметр ключа, переданий до функції, недійсний",
+		"description": "[помилка] розробник спробував викликати функцію з недійсним параметром"
+	},
+	"error_invalid_request": {
+		"message": "Недійсний запит.",
+		"description": "[помилка] Загальна помилка після отримання повідомлення з невірним форматом"
+	},
+	"error_invalid_tab": {
+		"message": "Недійсний Tab",
+		"description": "[помилка] Tab недійсний"
+	},
+	"error_link_with_id": {
+		"message": "Ця сторінка не може існувати в іншій Org, оскільки вона містить Id!",
+		"description": "[модальне_вікно_відкрити_іншу_орг] попередження для користувача, що посилання може не існувати в іншій Org"
+	},
+	"error_many_matching_tab": {
+		"message": "Знайдено більше 1 відповідного Tab.",
+		"description": "[помилка] отримано багато Tabs"
+	},
+	"error_many_tabs_found": {
+		"message": "Знайдено більше одного Tab.",
+		"description": "[помилка] було отримано багато Tabs"
+	},
+	"error_minify_url": {
+		"message": "Неможливо мінімізувати порожню URL!",
+		"description": "[помилка] URL для скорочення не передано"
+	},
+	"error_missing_favourite_id": {
+		"message": "Неможливо отримати улюблене зображення без Id",
+		"description": "[помилка] Id улюбленого не передано"
+	},
+	"error_missing_key": {
+		"message": "Ключ ніде не знайдено",
+		"description": "[помилка] у файлах не знайдено перекладу"
+	},
+	"error_no_array": {
+		"message": "Передано недійсний масив або масив не передано",
+		"description": "[помилка] не отримано дійсний масив"
+	},
+	"error_no_browser_tab": {
+		"message": "Не вдалося знайти поточну вкладку браузера.",
+		"description": "[помилка] фонова сторінка не змогла встановити активну вкладку браузера"
+	},
+	"error_no_callback": {
+		"message": "Будь ласка, надайте функцію зворотного виклику (callback)",
+		"description": "[помилка] функцію для виклику в кінці методу не передано"
+	},
+	"error_no_cookies": {
+		"message": "Не знайдено відповідних файлів cookie",
+		"description": "[помилка] файли cookie Salesforce не повернуто"
+	},
+	"error_no_data": {
+		"message": "Неможливо ідентифікувати Tab без даних.",
+		"description": "[помилка] спроба отримати Tab без надсилання даних"
+	},
+	"error_no_headers": {
+		"message": "Не вдалося знайти заголовки.",
+		"description": "[помилка] Розширення не змогло знайти місце для розміщення кнопки улюбленого"
+	},
+	"error_no_matching_tab": {
+		"message": "Не знайдено жодного відповідного Tab.",
+		"description": "[помилка] не отримано жодних Tabs"
+	},
+	"error_no_message": {
+		"message": "Не вказано повідомлення для надсилання.",
+		"description": "[помилка] не знайдено повідомлення для надсилання в інші частини коду"
+	},
+	"error_no_object": {
+		"message": "Немає об'єкта для перевірки!",
+		"description": "[помилка] об'єкт не передано"
+	},
+	"error_no_setup_tab": {
+		"message": "Не вдалося знайти вкладку Налаштування (Setup).",
+		"description": "[помилка] Розширення не змогло знайти місце для розміщення улюблених Tabs."
+	},
+	"error_no_url": {
+		"message": "Немає URL для перевірки!",
+		"description": "[помилка] URL для перевірки не передано"
+	},
+	"error_not_initialized": {
+		"message": "ще не був ініціалізований.",
+		"description": "[помилка] Загальна помилка, коли змінна не готова"
+	},
+	"error_processing_tabs": {
+		"message": "Помилка обробки Tabs.",
+		"description": "[помилка] Загальна помилка при обробці Tabs"
+	},
+	"error_redirect": {
+		"message": "Не вдається перенаправити. Будь ласка, оновіть сторінку.",
+		"description": "[помилка] Загальна помилка при перенаправленні сторінки."
+	},
+	"error_remove_not_favourite": {
+		"message": "Неможливо видалити Tab, який не є улюбленим!",
+		"description": "[помилка] користувач спробував видалити Tab, який ще не було збережено"
+	},
+	"error_removing_all_tabs": {
+		"message": "Помилка при видаленні всіх Tabs.",
+		"description": "[помилка] Загальна помилка, що використовується при видаленні всіх Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Помилка при видаленні загальних Tabs.",
+		"description": "[помилка] Загальна помилка, що використовується при видаленні загальних Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Помилка при видаленні інших Tabs.",
+		"description": "[помилка] Загальна помилка, що використовується при видаленні інших Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Помилка при видаленні Tab.",
+		"description": "[помилка] Загальна помилка, що використовується при видаленні Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Помилка при видаленні всіх видимих Tab.",
+		"description": "[помилка] Загальна помилка при видаленні всіх видимих Tab"
+	},
+	"error_required_params": {
+		"message": "Необхідні параметри для функції не були передані",
+		"description": "[помилка] розробник спробував викликати функцію без необхідних параметрів"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Помилка при скиданні Tab до стандартних.",
+		"description": "[помилка] Загальна помилка при скиданні Tab до стандартних"
+	},
+	"error_sorting_tabs": {
+		"message": "Помилка під час сортування Tab-ів",
+		"description": "[error] відображається у сповіщенні"
+	},
+	"error_sync_nothing": {
+		"message": "Неможливо синхронізувати нульові Tabs!",
+		"description": "[помилка] спроба синхронізувати нічого"
+	},
+	"error_tab_constructor": {
+		"message": "Використовуйте Tab.create() замість new Tab() для використання класу Tab",
+		"description": "[помилка] повідомте розробнику, як використовувати клас Tab"
+	},
+	"error_tab_label": {
+		"message": "Мітка має бути непорожнім рядком",
+		"description": "[помилка] користувач спробував створити Tab без мітки"
+	},
+	"error_tab_not_found": {
+		"message": "Tab не знайдено.",
+		"description": "[помилка] Tab не включено до масиву"
+	},
+	"error_tab_object_creation": {
+		"message": "При виклику з об'єктом не передавайте нічого іншого.",
+		"description": "[помилка] помилка реалізації розробником"
+	},
+	"error_tab_org": {
+		"message": "Org має бути рядком або undefined",
+		"description": "[помилка] користувач спробував створити Tab з недійсним значенням Org"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Знайдено неочікувані ключі:",
+		"description": "[помилка] користувач спробував створити Tab з деякими непідтримуваними властивостями"
+	},
+	"error_tab_url": {
+		"message": "URL має бути непорожнім рядком",
+		"description": "[помилка] користувач спробував створити Tab без URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab з цим URL вже збережено!",
+		"description": "[помилка] Користувач спробував зберегти вже улюблений Tab"
+	},
+	"error_tabcont_initialize": {
+		"message": "Неможливо ініціалізувати за допомогою",
+		"description": "[помилка] не вдалося ініціалізувати контейнер Tab"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Виявлено недійсний(-і) Tab(и).\nПерше входження:",
+		"description": "[помилка] передано недійсні Tabs"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Використовуйте TabContainer.create() замість new TabContainer() для використання класу TabContainer",
+		"description": "[помилка] повідомте розробнику, як використовувати клас TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Використовуйте TranslationService.create() замість new TranslationService() для використання класу TranslationService",
+		"description": "[помилка] повідомте розробнику, як використовувати клас TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "перекладач ще не був ініціалізований.",
+		"description": "[помилка] TranslationService не був готовий"
+	},
+	"error_unknown_message": {
+		"message": "Отримано невідоме повідомлення",
+		"description": "отримано невідоме повідомлення від слухача"
+	},
+	"error_unknown_request": {
+		"message": "Невідомий запит.",
+		"description": "[помилка] Загальна помилка після отримання нерозпізнаного повідомлення"
+	},
+	"error_useless_remove": {
+		"message": "Неможливо видалити:\nНеможливо видалити сторінку, яка раніше не була збережена",
+		"description": "[помилка] користувач спробував видалити сторінку, яка ще не була збережена"
+	},
+	"error_useless_save": {
+		"message": "Неможливо зберегти:\nЦю сторінку вже збережено!",
+		"description": "[помилка] користувач спробував зберегти сторінку, яка вже була збережена"
+	},
+	"export": {
+		"message": "Експорт",
+		"description": "[спливаюче_вікно] кнопка експорту"
+	},
+	"export_title": {
+		"message": "Експортувати всі Tabs",
+		"description": "[спливаюче_вікно] заголовок на кнопці експорту"
+	},
+	"extension_description": {
+		"message": "Створюйте та керуйте власними Tabs у доступному просторі на сторінці Налаштування Salesforce Lightning.",
+		"description": "[маніфест] Опис цього розширення"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Назва цього розширення"
+	},
+	"file": {
+		"message": "файл",
+		"description": "один файл"
+	},
+	"files": {
+		"message": "файли",
+		"description": "кілька файлів"
+	},
+	"flows": {
+		"message": "Потоки",
+		"description": "[стандартна вкладка] Позначка для стандартної вкладки Потоки"
+	},
+	"general": {
+		"message": "Загальні",
+		"description": "Позначка для категорії загальних налаштувань"
+	},
+	"help": {
+		"message": "Допомога",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Позначає нові Tab-и як Tab-и Org, тому вони видимі лише тоді, коли ви увійшли до цієї конкретної Org Salesforce.",
+		"description": "[settings-help] для $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Нещодавно вибрані Tab-и вставляються на початок вашого списку Tab-ів у рядку налаштування, а не додаються в кінці.",
+		"description": "[settings-help] для $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Якщо ви натискаєте на спливаюче вікно розширення за межами домену Salesforce, вас автоматично перенаправить на сторінку входу в Salesforce.",
+		"description": "[settings-help] для $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Якщо ви натискаєте на спливаюче вікно розширення в домені Salesforce, але не на сторінці налаштування, вас автоматично перенаправить на сторінку налаштування Salesforce.",
+		"description": "[settings-help] для $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Коли увімкнено, ваші Tab-и зберігаються у відсортованому порядку — за міткою, URL або Org; залежно від того, що ви оберете.",
+		"description": "[settings-help] для $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Закріплює ваші збережені Tab-и перед стандартним меню навігації (Головна / Object Manager) у налаштуванні, а не після нього.",
+		"description": "[settings-help] для $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Коли увімкнено, кожен збережений Tab відкриватиме відповідну сторінку в новому Tab-і.",
+		"description": "[settings-help] для $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Пригнічує автоматичне відображення сповіщень про нотатки до випуску після оновлення розширення.",
+		"description": "[settings-help] для $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Вимикає періодичні спливаючі вікна з нагадуваннями про оновлення, зберігаючи інтерфейс розширення чистим (коли ви вимкнули автоматичні оновлення розширення в налаштуваннях браузера).",
+		"description": "[settings-help] для $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Якщо ви клацнете на спливаючому вікні розширення поза доменом Salesforce, сторінка входу відкриється в поточній вкладці (Tab) браузера.",
+		"description": "[налаштування-довідка] для $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Якщо ви клацнете на спливаючому вікні розширення всередині домену Salesforce, але не на сторінці Setup, сторінка Salesforce Setup відкриється в поточній вкладці (Tab) браузера.",
+		"description": "[налаштування-довідка] для $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Встановити мову інтерфейсу користувача лише для розширення. Якщо щось не було перекладено, замість цього буде використано англійську версію.",
+		"description": "[налаштування-довідка] для $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Вимикає базовий збір телеметрії. Розширення не відображатиметься в анонімних метриках використання.",
+		"description": "[settings-help] для $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Обходить Lightning Navigation API та відкриває посилання через повне перезавантаження сторінки, що може бути швидше в деяких налаштуваннях org.",
+		"description": "[settings-help] для $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Вимикає перевірку розширення, яка перевіряє, чи відповідає фрагмент URL-адреси формату ідентифікаторів записів/об'єктів Salesforce (використовується для автоматичного встановлення збереженого Tab-а як Tab-а Org).",
+		"description": "[settings-help] для $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Натисніть, щоб перейти до документації для цієї настройки!",
+		"description": "[налаштування-довідка] заклик до дії, щоб дозволити користувачеві прочитати більше про певне налаштування"
+	},
+	"import": {
+		"message": "Імпорт",
+		"description": "[спливаюче_вікно] кнопка імпорту"
+	},
+	"import_duplicate_description": {
+		"message": "Дубльовані Tabs буде проігноровано.<br />Два Tabs вважаються дубльованими, якщо вони мають однакову URL.",
+		"description": "[імпорт] опис того, що робить процес імпорту"
+	},
+	"import_invalid_file": {
+		"message": "Недійсний тип файлу.\nПідтримуються лише файли JSON.",
+		"description": "[помилка] файл, використаний для імпорту, не є JSON"
+	},
+	"import_successful": {
+		"message": "Успішно імпортовано",
+		"description": "[імпорт] імпорт завершено. Після цього буде показано кількість імпортованих записів"
+	},
+	"import_tabs": {
+		"message": "Імпортувати Tabs",
+		"description": "[заголовок_модального_вікна] для процесу імпорту"
+	},
+	"import_title": {
+		"message": "$import_tabs з файлу JSON",
+		"description": "[спливаюче вікно] заголовок на кнопці імпорту"
+	},
+	"insert_another": {
+		"message": "Вставити іншу",
+		"description": "[помилка_модального_вікна_відкрити_іншу_орг] повідомлення, коли користувач вставляє ту саму Org у модальне вікно"
+	},
+	"insert_another_org": {
+		"message": "Вставлена Org є поточною!\nБудь ласка, вставте іншу Org.",
+		"description": "[помилка_модального_вікна_відкрити_іншу_орг] повідомлення, коли користувач вставляє ту саму Org у модальне вікно"
+	},
+	"insert_valid_org": {
+		"message": "Будь ласка, вставте дійсну Org!",
+		"description": "[помилка_модального_вікна_відкрити_іншу_орг] повідомлення, коли користувач вставляє неправильну URL у модальне вікно"
+	},
+	"italic": {
+		"message": "Курсив",
+		"description": "Параметр стилю шрифту для курсивного тексту"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Спеціальна технологія навігації Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Увійти в Salesforce",
+		"description": "[неНалаштуванняSalesforce] заклик до дії на кнопці для перенаправлення користувача на сторінку входу Salesforce"
+	},
+	"mycustomorg": {
+		"message": "моя_власна_орг",
+		"description": "заповнювач для модального вікна Оновити Tab"
+	},
+	"no_manifest_github": {
+		"message": "Недійсний або відсутній GitHub homepage_url у маніфесті",
+		"description": "Ключ homepage_url маніфесту не використовує посилання GitHub"
+	},
+	"no_match": {
+		"message": "Не знайдено відповідної дії",
+		"description": "[помилка] у Salesforce, коли перемикач не може зіставити запитувану дію"
+	},
+	"nss_invalid_url": {
+		"message": "Виявлено недійсний URL.",
+		"description": "[неНалаштуванняSalesforce] недійсний URL"
+	},
+	"nss_not_setup_page": {
+		"message": "Це не сторінка налаштування $salesforce_lightning.",
+		"description": "[notSalesforceSetup] користувач не на сторінці Salesforce."
+	},
+	"open_here": {
+		"message": "Відкрити в цій Tab.",
+		"description": "[open-other-org-modal] перемикач, щоб дозволити користувачеві відкрити в тій самій вкладці браузера"
+	},
+	"open_new_tab": {
+		"message": "Відкрити в новій Tab.",
+		"description": "[open-other-org-modal] перемикач, щоб дозволити користувачеві відкрити в новій вкладці браузера."
+	},
+	"open_settings": {
+		"message": "Відкрити налаштування розширення",
+		"description": "[спливаюче вікно] кнопка для перенаправлення на сторінку налаштувань"
+	},
+	"open_setup": {
+		"message": "Відкрити Налаштування",
+		"description": "[неНалаштуванняSalesforce] заклик до дії на кнопці для перенаправлення користувача на сторінку Налаштування Salesforce"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Додати нові Tab-и як Tab-и Org.",
+		"description": "[settings] дозволити користувачеві додавати всі нові Tab-и як специфічні для org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Додати нові Tab-и спереду.",
+		"description": "[settings] дозволити користувачеві додавати всі нові Tab-и спереду"
+	},
+	"opt_automatic_open_login": {
+		"message": "Автоматично відкривати сторінку $salesforce_login, коли клацаєте на спливаюче вікно, не перебуваючи на сторінці Salesforce.",
+		"description": "[налаштування] коли користувач відкриває спливаюче вікно, перебуваючи на випадковому веб-сайті"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Автоматично відкривати сторінку $salesforce_setup, коли клацаєте на спливаюче вікно, перебуваючи на сторінці Salesforce.",
+		"description": "[налаштування] коли користувач відкриває спливаюче вікно, перебуваючи на веб-сайті Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "Налаштування збережено!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (За замовчуванням та запасний)",
+		"description": "Мова розширення за замовчуванням"
+	},
+	"opt_keep_sort": {
+		"message": "Тримати Tab-и відсортованими.",
+		"description": "[setting] дозволити користувачеві тримати свої Tab-и відсортованими за одним із їхніх ключів"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Утримувати обрані Tabs ліворуч від Home і Object Manager.",
+		"description": "Перемикач для кріплення обраних Tabs ліворуч на панелі навігації"
+	},
+	"opt_link_new_browser": {
+		"message": "Завжди відкривати посилання в новій вкладці браузера.",
+		"description": "[налаштування] коли користувач клікає на обраний Tab, відкривати його в новій вкладці"
+	},
+	"opt_no_release_notes": {
+		"message": "Не показувати примітки до оновлень.",
+		"description": "[налаштування] дозволяє користувачу заборонити показ приміток після оновлення розширення"
+	},
+	"opt_no_update_notification": {
+		"message": "Не попереджати про доступні оновлення.",
+		"description": "[налаштування] дозволяє користувачеві заборонити розширенню шукати нові випуски"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Завжди відкривати сторінку $salesforce_login в тій самій Tab, коли клацаєте на спливаюче вікно.",
+		"description": "[налаштування]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Завжди відкривати сторінку $salesforce_setup в тій самій Tab, коли клацаєте на спливаюче вікно.",
+		"description": "[налаштування]"
+	},
+	"opt_pick_language": {
+		"message": "Виберіть мову розширення",
+		"description": "[налаштування] мітка для запиту користувача вибрати бажану мову"
+	},
+	"opt_pick_sort": {
+		"message": "Оберіть, за яким полем слід сортувати Tab-и",
+		"description": "[setting] тепер користувач може вибрати, за яким ключем тримати Tab-и відсортованими"
+	},
+	"opt_prevent_analytics": {
+		"message": "Запобігати використанню Simple Analytics (не відображається у підрахунках користувачів).",
+		"description": "[налаштування] дозволяє користувачу заборонити відправку анонімної аналітики"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Запобігти використанню навігації Lightning (швидше завантаження, коли прапорець знято).",
+		"description": "[setting] не дозволяти навігацію Lightning з поясненням функції"
+	},
+	"opt_same_tab_popup": {
+		"message": "відкривати сторінку в тій самій вкладці при натисканні на спливаюче вікно.",
+		"description": "[налаштування] запобігати відкриттю нової вкладки"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Дотримуватися мови Salesforce (читає файли cookie Salesforce)",
+		"description": "Опція використання мовних налаштувань Salesforce. Щоб використовувати цю опцію, користувачі повинні дозволити розширенню читати файли cookie Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Пропустити автоматичну перевірку ідентифікатора Salesforce.",
+		"description": "[налаштування] при додаванні Tab до обраного не перевіряти ідентифікатор у посиланн"
+	},
+	"or_drop": {
+		"message": "Або $drop",
+		"description": "[імпорт] дозволити користувачеві переміщувати файли за допомогою миші та відпускати їх"
+	},
+	"org_link": {
+		"message": "Посилання на Org",
+		"description": "[мітка_вводу]"
+	},
+	"other_org_info": {
+		"message": "Інформація про іншу Org",
+		"description": "[заголовок_модального_вікна]"
+	},
+	"other_org_placeholder": {
+		"message": "інша-орг",
+		"description": "[заповнювач_вводу]"
+	},
+	"overwrite_tabs": {
+		"message": "Перезаписати збережені Tabs.",
+		"description": "[мітка] видалити всі збережені Tabs під час процесу імпорту"
+	},
+	"preserve_org_tabs": {
+		"message": "Зберегти Tabs для інших орг.",
+		"description": "[мітка] зберегти всі Tabs, специфічні для Org, під час процесу імпорту"
+	},
+	"remove_tab": {
+		"message": "Видалити Tab",
+		"description": "[alt] альтернативний текст, коли зображення не працюють"
+	},
+	"req_downloads_open_popup": {
+		"message": "Будь ласка, відкрийте спливаюче вікно розширення з меню розширень вашого браузера.",
+		"description": "[повідомлення] попросіть користувача натиснути на спливаюче вікно розширення, щоб продовжити"
+	},
+	"req_downloads_perm_header": {
+		"message": "Будь ласка, увімкніть дозвіл на завантаження\nщоб розпочати запитуваний експорт.",
+		"description": "[запит_дозволу] заклик до дії для увімкнення дозволу на завантаження"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Ця операція буде запитуватися лише один раз.",
+		"description": "[запит_дозволу] опис для увімкнення дозволу на завантаження"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Не питати знову.",
+		"description": "[запит_дозволу] мітка, коли користувач не хоче постійно надавати дозволи"
+	},
+	"req_permissions_header": {
+		"message": "Будь ласка, дозвольте нам автоматично отримувати доступ\nдо сторінок $salesforce_setup.",
+		"description": "[req_permission] заголовок сторінки для запиту дозволів"
+	},
+	"req_permissions_paragraph": {
+		"message": "Якщо бажаєте, ваші улюблені Tabs можуть з’являтися\nщойно ви перейдете на сторінку $salesforce_setup,\nбез необхідності щоразу клацати це розширення.",
+		"description": "[req_permission] текст для пояснення, чому запитуються дозволи"
+	},
+	"required": {
+		"message": "обов'язково",
+		"description": "[введення] позначає поле введення як обов'язкове"
+	},
+	"required_info": {
+		"message": "= Обов'язкова інформація",
+		"description": "[модальне_вікно] повідомляє користувачеві, що деяка інформація є обов'язковою"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[неНалаштуванняSalesforce] платформа Salesforce Lightning"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "сторінка входу Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "будь-яка сторінка налаштувань Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Зберегти",
+		"description": "Застосувати зміни та зберегти їх у пам'яті"
+	},
+	"save_tab": {
+		"message": "Зберегти як Tab",
+		"description": "[alt] альтернативний текст, коли зображення не працюють"
+	},
+	"send_tip": {
+		"message": "Надішліть нам чайові ❤️",
+		"description": "[popup] заголовок для svg для підказки надсилання чайових"
+	},
+	"set_gen_preview": {
+		"message": "Попередній перегляд Tab",
+		"description": "Позначка для попереднього перегляду зовнішнього вигляду загальних Tabs"
+	},
+	"set_gen_styler": {
+		"message": "Styler Tab",
+		"description": "Позначка для налаштування стилю загальних Tabs"
+	},
+	"set_general_settings": {
+		"message": "Загальні налаштування",
+		"description": "Заголовок розділу для загальних параметрів конфігурації"
+	},
+	"set_move_available": {
+		"message": "Перемістити до Доступно",
+		"description": "Заголовок кнопки для переміщення вибраних елементів до Доступно"
+	},
+	"set_move_chosen": {
+		"message": "Перемістити до Вибрано",
+		"description": "Заголовок кнопки для переміщення вибраних елементів до Вибрано"
+	},
+	"set_org_preview": {
+		"message": "Попередній перегляд Org",
+		"description": "Позначка для попереднього перегляду зовнішнього вигляду організаційних Tabs"
+	},
+	"set_org_styler": {
+		"message": "Styler Org",
+		"description": "Позначка для налаштування стилю організаційних Tabs"
+	},
+	"set_tab_background_active_label": {
+		"message": "Введіть колір фону для активних загальних Tabs.",
+		"description": "Позначка для встановлення кольору фону активних загальних Tabs"
+	},
+	"set_tab_background_label": {
+		"message": "Введіть колір фону для організаційних Tabs.",
+		"description": "Позначка для встановлення кольору фону організаційних Tabs"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "Введіть колір рамки для активних організаційних Tabs.",
+		"description": "Позначка для встановлення кольору рамки активних організаційних Tabs"
+	},
+	"set_tab_border_color_label": {
+		"message": "Введіть колір рамки для загальних Tabs.",
+		"description": "Позначка для встановлення кольору рамки загальних Tabs"
+	},
+	"set_tab_color_active_label": {
+		"message": "Введіть колір тексту для активних загальних Tabs.",
+		"description": "Позначка для встановлення кольору тексту активних загальних Tabs"
+	},
+	"set_tab_color_label": {
+		"message": "Введіть колір тексту для організаційних Tabs.",
+		"description": "Позначка для встановлення кольору тексту організаційних Tabs"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "Виберіть один або кілька стилів декору для активних організаційних Tabs.",
+		"description": "Запит для вибору стилів декору активних організаційних Tabs"
+	},
+	"set_tab_decoration_label": {
+		"message": "Виберіть один або кілька стилів декору для загальних Tabs.",
+		"description": "Запит для вибору стилів декору загальних Tabs"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "Введіть колір фону при наведенні для активних загальних Tabs.",
+		"description": "Позначка для встановлення кольору фону при наведенні активних загальних Tabs"
+	},
+	"set_tab_hover_background_label": {
+		"message": "Введіть колір фону при наведенні для організаційних Tabs.",
+		"description": "Позначка для встановлення кольору фону при наведенні організаційних Tabs"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "Введіть колір тіні для активних організаційних Tabs.",
+		"description": "Позначка для встановлення кольору тіні активних організаційних Tabs"
+	},
+	"set_tab_shadow_label": {
+		"message": "Введіть колір тіні для загальних Tabs.",
+		"description": "Позначка для встановлення кольору тіні загальних Tabs"
+	},
+	"set_tab_top_active_label": {
+		"message": "Введіть колір верхньої панелі для активних загальних Tabs.",
+		"description": "Позначка для встановлення кольору верхньої панелі активних загальних Tabs"
+	},
+	"set_toggle_preview": {
+		"message": "Натисніть, щоб переключити активний стан.",
+		"description": "Текст підказки інструменту для перемикача активного стану"
+	},
+	"settings": {
+		"message": "Налаштування",
+		"description": "Позначка для меню налаштувань"
+	},
+	"setup_page": {
+		"message": "Сторінка Налаштування",
+		"description": "[неНалаштуванняSalesforce] сторінка, що використовується для зміни налаштувань Salesforce"
+	},
+	"skip": {
+		"message": "Пропустити",
+		"description": "[запит_дозволу] кнопка НЕ дозволяти дозволи"
+	},
+	"successfully_imported": {
+		"message": "Успішно імпортовано",
+		"description": "[спливаюче_повідомлення] користувач додав Tabs із зовнішнього файлу"
+	},
+	"tab_explain": {
+		"message": "Кожен елемент повинен мати 'label' та 'url' як рядки. Додатково, кожен елемент може мати 'org' як рядок.",
+		"description": "[помилка] пояснює, як повинен бути сконструйований Tab"
+	},
+	"tab_information": {
+		"message": "Інформація про Tab",
+		"description": "заголовок для модального вікна оновлення Tab"
+	},
+	"tab_label": {
+		"message": "Мітка Tab",
+		"description": "Властивість Label Tab, її назва"
+	},
+	"tab_org": {
+		"message": "Org Tab",
+		"description": "Властивість Org Tab, якщо вона для однієї Організації Salesforce"
+	},
+	"tab_url": {
+		"message": "URL Tab",
+		"description": "Властивість URL Tab, куди вона вказує"
+	},
+	"table_delete": {
+		"message": "Видалити Tab",
+		"description": "[спливаюче_вікно] допоміжний текст для стовпця з кнопкою видалення"
+	},
+	"table_org": {
+		"message": "Є Tab Org",
+		"description": "[спливаюче_вікно] допоміжний текст для стовпця з прапорцем Org"
+	},
+	"table_row_label": {
+		"message": "Введіть мітку для цієї URL",
+		"description": "[спливаюче_вікно] поле введення з назвою Tab"
+	},
+	"table_row_org": {
+		"message": "Натисніть, якщо ви хочете, щоб цей Tab був доступний лише для цієї Org.",
+		"description": "[спливаюче_вікно] прапорець для перемикання Tab на специфічний для Org"
+	},
+	"table_row_org_name": {
+		"message": "Org, для якої доступний цей Tab.",
+		"description": "[спливаюче_вікно] поле введення з назвою Org"
+	},
+	"table_row_url": {
+		"message": "Введіть sub_URL, куди ви хочете бути перенаправлені.",
+		"description": "[спливаюче_вікно] поле введення з URL Tab"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "улюблені посилання користувача"
+	},
+	"tabs_saved": {
+		"message": "Tabs збережено.",
+		"description": "[спливаюче_повідомлення] Tabs успішно збережено."
+	},
+	"theme_dark": {
+		"message": "Змінити тему на темну",
+		"description": "[спливаюче_вікно] заголовок на місяці для перемикання теми"
+	},
+	"theme_light": {
+		"message": "Змінити тему на світлу",
+		"description": "[спливаюче_вікно] заголовок на сонці для перемикання теми"
+	},
+	"underline": {
+		"message": "Підкреслення",
+		"description": "Параметр стилю декору для підкреслення тексту Tab"
+	},
+	"underline_wavy": {
+		"message": "Хвилясте підкреслення",
+		"description": "Параметр стилю декору для застосування хвилястого підкреслення до тексту Tab"
+	},
+	"update_available": {
+		"message": "Доступне оновлення",
+		"description": "доступне нове оновлення для розширення"
+	},
+	"upload": {
+		"message": "Завантажити",
+		"description": "[імпорт] дозволити користувачеві переглядати свої файли та вибирати потрібний"
+	},
+	"users": {
+		"message": "Користувачі",
+		"description": "Назва сторінки, пов'язаної з ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Куди?",
+		"description": "[модальне_вікно_відкрити_іншу_орг] резервний заголовок для модального вікна"
+	},
+	"write_review": {
+		"message": "Написати відгук!",
+		"description": "[popup] заголовок для svg для запиту написання відгуку"
+	}
+}

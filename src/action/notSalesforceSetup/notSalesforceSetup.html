@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Again, Why Salesforce popup error</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/action/variables.css" />
+		<link rel="stylesheet" href="./notSalesforceSetup.css" />
+		<link rel="stylesheet" href="/action/basic.css" />
+		<script src="./notSalesforceSetup.js" type="module"></script>
+		<script src="/translator.js" type="module"></script>
+	</head>
+
+	<body>
+		<header>
+			<iframe
+				src="/action/logo/logo.html"
+				type="text/html"
+				title="logo"
+			></iframe>
+		</header>
+		<div>
+			<h3 id="plain" data-i18n="nss_not_setup_page">
+				This is not a Salesforce Lightning Setup page.
+			</h3>
+			<h3 id="invalid-url" class="hidden" data-i18n="nss_invalid_url">
+				Invalid URL detected.
+			</h3>
+			<a
+				id="login"
+				class="button"
+				href="https://login.salesforce.com"
+				data-i18n="login_to_salesforce"
+			>
+				Login to Salesforce
+			</a>
+			<a
+				id="go-setup"
+				class="hidden highlight button"
+				href="/lightning/setup"
+				data-i18n="open_setup"
+			>
+				Open Setup
+			</a>
+		</div>
+	</body>
+</html>

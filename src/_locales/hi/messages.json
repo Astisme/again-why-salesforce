@@ -1,0 +1,989 @@
+{
+	"allow": {
+		"message": "अनुमति दें",
+		"description": "[req_permission] अनुमतियाँ देने के लिए बटन"
+	},
+	"ascending": {
+		"message": "आरोही (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "उपलब्ध",
+		"description": "ऐसे आइटम्स के लिए अनुभाग शीर्षक जिन्हें जोड़ा जा सकता है"
+	},
+	"bold": {
+		"message": "बोल्ड",
+		"description": "बोल्ड टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
+	},
+	"cancel": {
+		"message": "रद्द करें",
+		"description": "ऐसे बटनों का शीर्षक या टेक्स्ट जो वर्तमान क्रिया को रोकते हैं।"
+	},
+	"cancel_close": {
+		"message": "रद्द करें और बंद करें",
+		"description": "मोडल के क्लोज बटन का शीर्षक या टेक्स्ट"
+	},
+	"chosen": {
+		"message": "चयनित",
+		"description": "चयनित आइटम्स के लिए अनुभाग शीर्षक"
+	},
+	"cmd_export_all": {
+		"message": "सहेजे गए सभी Tabs को निर्यात करने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता सभी Tabs को निर्यात करना चाहता है"
+	},
+	"cmd_import": {
+		"message": "नए Tabs आयात करने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता नए Tabs आयात करना चाहता है"
+	},
+	"cmd_open_other_org": {
+		"message": "वर्तमान पृष्ठ को अन्य Org में खोलने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अन्य Org में खोलना चाहता है"
+	},
+	"cmd_remove_tab": {
+		"message": "वर्तमान पृष्ठ को Tab सूची से हटाएँ (यदि सहेजा गया हो)",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को हटाना चाहता है"
+	},
+	"cmd_save_as_tab": {
+		"message": "वर्तमान पृष्ठ को Tab सूची में सहेजें (यदि नहीं सहेजा गया हो)",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को सहेजना चाहता है"
+	},
+	"cmd_toggle_org": {
+		"message": "वर्तमान पृष्ठ के Org मान को टॉगल करने के लिए मोडल दिखाएँ (यदि सहेजा गया हो)",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ के Org मान को टॉगल करना चाहता है"
+	},
+	"cmd_update_tab": {
+		"message": "वर्तमान पृष्ठ (यदि सहेजा गया हो) को अपडेट करने के लिए मोडल दिखाएँ",
+		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अपडेट करना चाहता है"
+	},
+	"confirm_another_org": {
+		"message": "इस लिंक को खोलने की पुष्टि करें।",
+		"description": "[open-other-org-modal] निर्मित लिंक खोलने के लिए उपयोगकर्ता से पुष्टि माँगे"
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label का एक नया संस्करण अब उपलब्ध है!",
+		"description": "एक श्रोता से एक अज्ञात संदेश प्राप्त हुआ है"
+	},
+	"continue": {
+		"message": "जारी रखें",
+		"description": "ऐसे बटनों का टेक्स्ट जो वर्तमान क्रिया की अनुमति देते हैं।"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 सभी सामान्य Tab",
+		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 सभी Tab हटाएँ",
+		"description": "[संदर्भ मेनू]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 सभी दिखाई देने वाले Tab",
+		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs निर्यात करें",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab स्थानांतरित करें",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ पहले रखें",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ अंत में रखें",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 बाएँ स्थानांतरित करें",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 दाएँ स्थानांतरित करें",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 अन्य Org में खोलें",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(s) हटाएं",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 बाएँ Tabs हटाएं",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ अन्य Tabs",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 दाएँ Tabs हटाएं",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ यह Tab हटाएं",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 डिफ़ॉल्ट Tabs रीसेट करें",
+		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "सेटिंग्स मेनू के लिए लेबल"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tabs को सॉर्ट करें",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को अपने Tabs को स्वचालित रूप से सॉर्ट करने देता है (पैरेंट मेनू)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 लेबल द्वारा",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को अपने Tabs को लेबल द्वारा सॉर्ट करने देता है"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org द्वारा",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को Org द्वारा अपने Tabs को सॉर्ट करने देता है"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url द्वारा",
+		"description": "संदर्भ मेनू जो उपयोगकर्ताओं को URL द्वारा अपने Tabs को सॉर्ट करने देता है"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab अपडेट करें",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Org टॉगल करें",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 अन्य अपडेट्स",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "हटाएं",
+		"description": "[popup] एक पंक्ति हटाने के लिए"
+	},
+	"delete_all": {
+		"message": "$delete सभी Tabs",
+		"description": "[पॉपअप] सभी Tabs को खाली करने के लिए बिन पर शीर्षक"
+	},
+	"descending": {
+		"message": "अवरोही (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Drop",
+		"description": "[import] उपयोगकर्ता को निर्दिष्ट क्षेत्र में अपनी फ़ाइलें ड्रॉप करने की अनुमति देता है"
+	},
+	"enable": {
+		"message": "सक्षम करें",
+		"description": "[अनुरोध_अनुमति] अनुमतियों को सक्षम करने के लिए बटन"
+	},
+	"error_adding_tab": {
+		"message": "Tab जोड़ने में त्रुटि।",
+		"description": "[error] Tab जोड़ते समय सामान्य त्रुटि"
+	},
+	"error_check_update": {
+		"message": "अपडेट जांचते समय त्रुटि",
+		"description": "[त्रुटि] एक्सटेंशन अपडेट जांचते समय सामान्य त्रुटि"
+	},
+	"error_close_other_modal": {
+		"message": "पहले अन्य modal बंद करें!",
+		"description": "[toast] एक से अधिक modal खोलने का प्रयास किया गया।"
+	},
+	"error_cxm_check": {
+		"message": "मेनू आइटम जाँचने में त्रुटि",
+		"description": "[error] संदर्भ मेनू के आइटम नहीं मिल सके।"
+	},
+	"error_cxm_create": {
+		"message": "मेनू आइटम बनाने में त्रुटि",
+		"description": "[error] संदर्भ मेनू के आइटम प्रारंभ नहीं किए जा सके।"
+	},
+	"error_cxm_remove": {
+		"message": "मेनू आइटम हटाने में त्रुटि",
+		"description": "[error] संदर्भ मेनू के आइटम हटाए नहीं जा सके।"
+	},
+	"error_duplicate_tab": {
+		"message": "यह Tab पहले से मौजूद है",
+		"description": "[error] Tab डुप्लिकेट है।"
+	},
+	"error_expand_url": {
+		"message": "खाली URL को विस्तारित नहीं किया जा सकता!",
+		"description": "[error] विस्तारित करने के लिए कोई URL प्रदान नहीं किया गया।"
+	},
+	"error_expand_url_no_base": {
+		"message": "बिना होस्ट के URL को विस्तारित नहीं किया जा सकता!",
+		"description": "[error] विस्तारित करने के लिए कोई बेस URL प्रदान नहीं किया गया।"
+	},
+	"error_extract_empty_url": {
+		"message": "खाली URL से Org नाम निकाला नहीं जा सकता!",
+		"description": "[error] Org नाम निकालने के लिए कोई URL प्रदान नहीं किया गया।"
+	},
+	"error_failed_sync": {
+		"message": "सिंक विफल हुआ।",
+		"description": "[error] उपयोगकर्ता के साथ Tabs सिंक करने में सामान्य त्रुटि"
+	},
+	"error_failed_to_fetch": {
+		"message": "बाहरी संसाधन लाने में विफल",
+		"description": "[त्रुटि] बाहरी वेबसाइट पर कॉल सफल नहीं हुआ"
+	},
+	"error_get_with_no_org": {
+		"message": "बिना Org के Tabs प्राप्त नहीं किए जा सकते।",
+		"description": "[error] Org जानकारी के बिना Tabs प्राप्त करने की कोशिश की गई।"
+	},
+	"error_import": {
+		"message": "आयात में त्रुटि:\n",
+		"description": "[error] आयात प्रक्रिया के दौरान त्रुटि हुई।"
+	},
+	"error_invalid_key": {
+		"message": "फ़ंक्शन को पास किया गया कुंजी पैरामीटर मान्य नहीं है",
+		"description": "[त्रुटि] डेवलपर ने एक अमान्य पैरामीटर के साथ किसी फ़ंक्शन को कॉल करने का प्रयास किया"
+	},
+	"error_invalid_request": {
+		"message": "अमान्य अनुरोध।",
+		"description": "[error] गलत प्रारूप के संदेश प्राप्त होने के बाद सामान्य त्रुटि"
+	},
+	"error_invalid_tab": {
+		"message": "अमान्य Tab",
+		"description": "[error] Tab अमान्य है।"
+	},
+	"error_link_with_id": {
+		"message": "इस पृष्ठ का किसी अन्य Org में अस्तित्व नहीं हो सकता, क्योंकि इसमें Id है!",
+		"description": "[open-other-org-modal] चेतावनी: लिंक किसी अन्य Org में मौजूद नहीं हो सकता।"
+	},
+	"error_many_matching_tab": {
+		"message": "एक से अधिक मेल खाने वाले Tab पाए गए।",
+		"description": "[error] कई मेल खाते Tab प्राप्त हुए।"
+	},
+	"error_many_tabs_found": {
+		"message": "एक से अधिक Tab मिला।",
+		"description": "[error] कई Tabs पुनर्प्राप्त किए गए"
+	},
+	"error_minify_url": {
+		"message": "खाली URL को छोटा नहीं किया जा सकता!",
+		"description": "[error] छोटा करने के लिए कोई URL प्रदान नहीं किया गया।"
+	},
+	"error_missing_favourite_id": {
+		"message": "Id के बिना पसंदीदा चित्र प्राप्त नहीं किया जा सकता",
+		"description": "[error] कोई पसंदीदा Id प्रदान नहीं किया गया।"
+	},
+	"error_missing_key": {
+		"message": "कुंजी कहीं नहीं मिली",
+		"description": "[error] फाइलों में अनुवाद नहीं मिला"
+	},
+	"error_no_array": {
+		"message": "अमान्य एरे या कोई एरे प्रदान नहीं किया गया",
+		"description": "[error] कोई वैध एरे प्राप्त नहीं हुआ।"
+	},
+	"error_no_browser_tab": {
+		"message": "वर्तमान ब्राउज़र tab नहीं मिला।",
+		"description": "[error] कोई सक्रिय ब्राउज़र tab नहीं मिला।"
+	},
+	"error_no_callback": {
+		"message": "कृपया एक callback प्रदान करें",
+		"description": "[error] कोई callback फ़ंक्शन प्रदान नहीं किया गया।"
+	},
+	"error_no_cookies": {
+		"message": "मेल खाते cookies नहीं मिले",
+		"description": "[error] Salesforce cookies वापस नहीं किए गए।"
+	},
+	"error_no_data": {
+		"message": "डेटा के बिना Tab की पहचान नहीं हो सकती।",
+		"description": "[error] Tab की पहचान के लिए कोई डेटा प्रदान नहीं किया गया।"
+	},
+	"error_no_headers": {
+		"message": "हेडर नहीं मिले।",
+		"description": "[error] एक्सटेंशन को पसंदीदा बटन के लिए हेडर नहीं मिले।"
+	},
+	"error_no_matching_tab": {
+		"message": "कोई मेल खाने वाला Tab नहीं मिला।",
+		"description": "[error] मेल खाते कोई Tab प्राप्त नहीं हुए।"
+	},
+	"error_no_message": {
+		"message": "भेजने के लिए कोई संदेश निर्दिष्ट नहीं किया गया।",
+		"description": "[error] अन्य कोड को भेजने के लिए कोई संदेश निर्दिष्ट नहीं किया गया।"
+	},
+	"error_no_object": {
+		"message": "जांच के लिए कोई ऑब्जेक्ट नहीं है!",
+		"description": "[error] कोई ऑब्जेक्ट प्रदान नहीं किया गया।"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab नहीं मिला।",
+		"description": "[error] एक्सटेंशन पसंदीदा Tabs रखने का स्थान नहीं खोज सका।"
+	},
+	"error_no_url": {
+		"message": "जांच के लिए कोई URL नहीं है!",
+		"description": "[error] जांच के लिए कोई URL प्रदान नहीं किया गया।"
+	},
+	"error_not_initialized": {
+		"message": "अभी तक प्रारंभ नहीं हुआ है।",
+		"description": "[error] जब कोई वेरिएबल तैयार नहीं होता तो सामान्य त्रुटि"
+	},
+	"error_processing_tabs": {
+		"message": "Tabs प्रसंस्करण में त्रुटि।",
+		"description": "[error] Tabs प्रसंस्करण में सामान्य त्रुटि"
+	},
+	"error_redirect": {
+		"message": "पुनर्निदेशन असंभव। कृपया पृष्ठ को पुनः लोड करें।",
+		"description": "[error] पृष्ठ पुनर्निदेशन में सामान्य त्रुटि"
+	},
+	"error_remove_not_favourite": {
+		"message": "अनपसंदीदा Tab हटाया नहीं जा सकता!",
+		"description": "[error] ऐसा Tab हटाने की कोशिश की गई जो अभी तक सहेजा नहीं गया।"
+	},
+	"error_removing_all_tabs": {
+		"message": "सभी Tabs हटाने में त्रुटि।",
+		"description": "[error] सभी Tabs हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_generic_tabs": {
+		"message": "सामान्य Tabs हटाने में त्रुटि।",
+		"description": "[error] सामान्य Tabs हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_other_tabs": {
+		"message": "अन्य Tabs हटाने में त्रुटि।",
+		"description": "[error] अन्य Tabs हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_tab": {
+		"message": "Tab हटाने में त्रुटि।",
+		"description": "[error] Tab हटाते समय सामान्य त्रुटि"
+	},
+	"error_removing_visible_tabs": {
+		"message": "सभी दिखाई देने वाले Tab हटाने में त्रुटि।",
+		"description": "[त्रुटि] सभी दिखाई देने वाले Tab हटाते समय प्रयुक्त सामान्य त्रुटि"
+	},
+	"error_required_params": {
+		"message": "फ़ंक्शन के लिए आवश्यक पैरामीटर पास नहीं किए गए थे",
+		"description": "[त्रुटि] डेवलपर ने आवश्यक पैरामीटर्स के बिना किसी फ़ंक्शन को कॉल करने का प्रयास किया"
+	},
+	"error_resetting_default_tabs": {
+		"message": "डिफ़ॉल्ट Tabs रीसेट करते समय त्रुटि।",
+		"description": "[त्रुटि] Tabs को उनके डिफ़ॉल्ट पर रीसेट करते समय प्रयुक्त सामान्य त्रुटि"
+	},
+	"error_sorting_tabs": {
+		"message": "Tabs को सॉर्ट करते समय त्रुटि",
+		"description": "[error] एक टोस्ट संदेश में दिखाया गया"
+	},
+	"error_sync_nothing": {
+		"message": "खाली Tabs को सिंक नहीं किया जा सकता!",
+		"description": "[error] कुछ सिंक करने की कोशिश की गई।"
+	},
+	"error_tab_constructor": {
+		"message": "new Tab() के बजाय Tab.create() का उपयोग करें",
+		"description": "[error] डेवलपर को बताएं कि Tab क्लास का उपयोग कैसे करें"
+	},
+	"error_tab_label": {
+		"message": "लेबल खाली नहीं होनी चाहिए",
+		"description": "[error] बिना लेबल के Tab बनाने की कोशिश की गई।"
+	},
+	"error_tab_not_found": {
+		"message": "Tab नहीं मिला।",
+		"description": "[error] Tab सूची में शामिल नहीं है।"
+	},
+	"error_tab_object_creation": {
+		"message": "ऑब्जेक्ट के साथ कॉल करते समय, और कुछ न पास करें।",
+		"description": "[error] डेवलपर द्वारा इम्प्लीमेंटेशन त्रुटि।"
+	},
+	"error_tab_org": {
+		"message": "Org एक स्ट्रिंग या अनिर्धारित होनी चाहिए",
+		"description": "[error] अमान्य Org मान के साथ Tab बनाने की कोशिश की गई।"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "अनपेक्षित कुंजियाँ मिलीं:",
+		"description": "[error] ऐसे Tab बनाने की कोशिश की गई जिनकी प्रॉपर्टी समर्थित नहीं है।"
+	},
+	"error_tab_url": {
+		"message": "URL खाली नहीं होनी चाहिए",
+		"description": "[error] बिना URL के Tab बनाने की कोशिश की गई।"
+	},
+	"error_tab_url_saved": {
+		"message": "इस URL के साथ एक Tab पहले से ही सहेजा गया है!",
+		"description": "[error] उपयोगकर्ता ने पहले से सहेजे Tab को सहेजने का प्रयास किया"
+	},
+	"error_tabcont_initialize": {
+		"message": "इसके साथ इनिशियलाइज़ नहीं किया जा सकता"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "अमान्य Tabs पाए गए।\nपहली घटना:",
+		"description": "[error] अमान्य Tabs प्रदान किए गए।"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "new TabContainer() के बजाय TabContainer.create() का उपयोग करें",
+		"description": "[error] डेवलपर को बताएं कि TabContainer क्लास का उपयोग कैसे करें"
+	},
+	"error_translationservice_constructor": {
+		"message": "new TranslationService() के बजाय TranslationService.create() का उपयोग करें",
+		"description": "[error] डेवलपर को बताएं कि TranslationService क्लास का उपयोग कैसे करें"
+	},
+	"error_translator_not_initialized": {
+		"message": "translator अभी तक प्रारंभ नहीं हुआ है।",
+		"description": "[error] TranslationService तैयार नहीं था"
+	},
+	"error_unknown_message": {
+		"message": "अज्ञात संदेश प्राप्त हुआ",
+		"description": "एक श्रोता से एक अज्ञात संदेश प्राप्त हुआ है"
+	},
+	"error_unknown_request": {
+		"message": "अज्ञात अनुरोध।",
+		"description": "[error] अज्ञात संदेश प्राप्त होने के बाद सामान्य त्रुटि"
+	},
+	"error_useless_remove": {
+		"message": "हटाया नहीं जा सकता:\nजिस पृष्ठ को कभी सहेजा ही नहीं गया, उसे हटाया नहीं जा सकता।",
+		"description": "[error] ऐसा पृष्ठ हटाने की कोशिश की गई जो कभी सहेजा नहीं गया।"
+	},
+	"error_useless_save": {
+		"message": "सहेज नहीं सकते:\nयह पृष्ठ पहले से ही सहेजा जा चुका है!",
+		"description": "[error] ऐसा पृष्ठ सहेजने की कोशिश की गई जो पहले से सहेजा जा चुका है।"
+	},
+	"export": {
+		"message": "निर्यात करें",
+		"description": "[popup] निर्यात बटन"
+	},
+	"export_title": {
+		"message": "सभी Tabs निर्यात करें",
+		"description": "[popup] निर्यात बटन पर शीर्षक"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning Setup पृष्ठ पर उपलब्ध स्थान में कस्टम Tabs बनाएँ और प्रबंधित करें।",
+		"description": "[manifest] इस एक्सटेंशन का विवरण"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "[manifest] इस एक्सटेंशन का नाम"
+	},
+	"file": {
+		"message": "फाइल",
+		"description": "एकल फाइल"
+	},
+	"files": {
+		"message": "फाइलें",
+		"description": "कई फाइलें"
+	},
+	"flows": {
+		"message": "प्रवाह",
+		"description": "[डिफ़ॉल्ट-tab] डिफ़ॉल्ट फ्लो Tab के लिए लेबल"
+	},
+	"general": {
+		"message": "सामान्य",
+		"description": "सामान्य सेटिंग्स श्रेणी के लिए लेबल"
+	},
+	"help": {
+		"message": "सहायता",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "नए Tabs को Org Tabs के रूप में चिह्नित करता है, ताकि वे केवल तभी दिखाई दें जब आप उस विशेष Salesforce Org में लॉग इन हों।",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "नए पसंदीदा Tabs को सेटअप बार में आपकी Tab सूची के अंत में जोड़ने के बजाय सामने डाला जाता है।",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "यदि आप Salesforce डोमेन के बाहर एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो यह आपको स्वचालित रूप से Salesforce लॉगिन पृष्ठ पर ले जाएगा।",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "यदि आप Salesforce डोमेन के भीतर लेकिन सेटअप पृष्ठ पर नहीं एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो यह आपको स्वचालित रूप से Salesforce सेटअप पृष्ठ पर ले जाएगा।",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "जब सक्षम किया जाता है, तो आपके Tabs को सॉर्ट किए गए क्रम में रखा जाता है—या तो लेबल, URL या Org द्वारा; आप जो चुनते हैं उसके आधार पर।",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "आपके सहेजे गए Tabs को सेटअप में मानक नेविगेशन मेनू (Home / Object Manager) से पहले पिन करता है, इसके बजाय इसके बाद नहीं।",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "जब सक्षम किया जाता है, तो प्रत्येक सहेजा गया Tab संबंधित पृष्ठ को एक नए Tab में खोलेगा।",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "एक्सटेंशन के अपडेट होने के बाद रिलीज़ नोट नोटिफ़िकेशन के स्वचालित प्रदर्शन को दबाता है।",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "आवधिक अपडेट रिमाइंडर्स पॉपअप को अक्षम करता है, जिससे एक्सटेंशन UI साफ रहता है (जब आपने अपने ब्राउज़र की सेटिंग्स से एक्सटेंशन के स्वचालित अपडेट को अक्षम कर दिया हो)।",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "यदि आप Salesforce डोमेन के बाहर एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो लॉगिन पृष्ठ वर्तमान ब्राउज़र Tab में खोला जाएगा।",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "यदि आप Salesforce डोमेन के भीतर लेकिन सेटअप पृष्ठ पर नहीं एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो Salesforce सेटअप पृष्ठ वर्तमान ब्राउज़र Tab में खोला जाएगा।",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "केवल एक्सटेंशन के लिए UI भाषा सेट करें। अगर कुछ भी अनुवादित नहीं हुआ है, तो इसके बजाय अंग्रेजी संस्करण का उपयोग किया जाएगा।",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "बुनियादी टेलीमेट्री संग्रह को अक्षम करता है। एक्सटेंशन अनाम उपयोग मेट्रिक्स में दिखाई नहीं देगा।",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "लाइटनिंग नेविगेशन एपीआई को बायपास करता है और पूर्ण-पृष्ठ रीलोड के माध्यम से लिंक खोलता है, जो कुछ ऑर्ग सेटअप में तेज़ हो सकता है।",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "एक्सटेंशन जांच को अक्षम करता है जो सत्यापित करता है कि एक URL फ़्रेग्मेंट Salesforce रिकॉर्ड/ऑब्जेक्ट ID के प्रारूप से मेल खाता है (स्वचालित रूप से सहेजे गए Tab को Org Tab के रूप में सेट करने के लिए उपयोग किया जाता है)।",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "इस सेटिंग के लिए दस्तावेज़ पर रीडायरेक्ट होने के लिए क्लिक करें!",
+		"description": "[सेटिंग्स-सहायता] उपयोगकर्ता को किसी विशिष्ट सेटिंग के बारे में और पढ़ने देने के लिए कार्रवाई के लिए कॉल करें"
+	},
+	"import": {
+		"message": "आयात करें",
+		"description": "[popup] आयात बटन"
+	},
+	"import_duplicate_description": {
+		"message": "डुप्लिकेट Tabs को अनदेखा किया जाएगा।<br />यदि दो Tabs की URL समान है, तो उन्हें डुप्लिकेट माना जाएगा।",
+		"description": "[import] आयात प्रक्रिया का विवरण"
+	},
+	"import_invalid_file": {
+		"message": "अमान्य फाइल प्रकार।\nकेवल JSON फाइलें समर्थित हैं।",
+		"description": "[error] आयात के लिए उपयोग की गई फाइल JSON नहीं है।"
+	},
+	"import_successful": {
+		"message": "सफलतापूर्वक आयात किया गया",
+		"description": "[import] आयात पूरा हो गया है; उसके बाद आयात किए गए रिकॉर्ड की संख्या दिखाई जाएगी।"
+	},
+	"import_tabs": {
+		"message": "Tabs आयात करें",
+		"description": "[modal-title] आयात प्रक्रिया के लिए"
+	},
+	"import_title": {
+		"message": "JSON फ़ाइल से $import_tabs",
+		"description": "[पॉपअप] आयात बटन पर शीर्षक"
+	},
+	"insert_another": {
+		"message": "एक और डालें",
+		"description": "[error-open-other-org-modal] जब एक ही Org modal में डाली जाती है, तब संदेश"
+	},
+	"insert_another_org": {
+		"message": "दर्ज की गई Org वर्तमान है!\nकृपया एक और Org दर्ज करें।",
+		"description": "[error-open-other-org-modal] जब एक ही Org दर्ज की जाती है, तब संदेश"
+	},
+	"insert_valid_org": {
+		"message": "कृपया एक मान्य Org दर्ज करें!",
+		"description": "[error-open-other-org-modal] जब गलत URL दर्ज किया जाता है, तब संदेश"
+	},
+	"italic": {
+		"message": "इटैलिक",
+		"description": "इटैलिक टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
+	},
+	"lightning_navigation": {
+		"message": "लाइटनिंग नेविगेशन",
+		"description": "Salesforce की कस्टम नेविगेशन तकनीक"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce में लॉगिन करें",
+		"description": "[notSalesforceSetup] Salesforce लॉगिन पृष्ठ पर जाने के लिए कॉल टू एक्शन"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "Update Tab modal के लिए प्लेसहोल्डर"
+	},
+	"no_manifest_github": {
+		"message": "मेनिफेस्ट में अमान्य या गुम GitHub homepage_url",
+		"description": "मेनिफेस्ट की homepage_url कुंजी GitHub लिंक का उपयोग नहीं करती है"
+	},
+	"no_match": {
+		"message": "कोई मेल खाने वाली क्रिया नहीं मिली",
+		"description": "[error] Salesforce में अनुरोधित क्रिया से मेल नहीं खाई।"
+	},
+	"nss_invalid_url": {
+		"message": "अमान्य URL मिला।",
+		"description": "[Salesforce सेटअप नहीं] एक अमान्य URL"
+	},
+	"nss_not_setup_page": {
+		"message": "यह एक $salesforce_lightning सेटअप पृष्ठ नहीं है।",
+		"description": "[notSalesforceSetup] उपयोगकर्ता Salesforce पृष्ठ पर नहीं है।"
+	},
+	"open_here": {
+		"message": "इस Tab में खोलें।",
+		"description": "[open-other-org-modal] उपयोगकर्ता को उसी ब्राउज़र Tab में खोलने देने के लिए रेडियो बटन"
+	},
+	"open_new_tab": {
+		"message": "एक नए Tab में खोलें।",
+		"description": "[open-other-org-modal] उपयोगकर्ता को एक नए ब्राउज़र Tab में खोलने देने के लिए रेडियो बटन।"
+	},
+	"open_settings": {
+		"message": "एक्सटेंशन सेटिंग खोलें",
+		"description": "[पॉपअप] सेटिंग पेज पर रीडायरेक्ट करने के लिए बटन"
+	},
+	"open_setup": {
+		"message": "Setup खोलें",
+		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठ पर जाने के लिए कॉल टू एक्शन"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "नए Tabs को Org Tabs के रूप में जोड़ें।",
+		"description": "[settings] उपयोगकर्ता को सभी नए Tabs को ऑर्ग-विशिष्ट के रूप में जोड़ने दें"
+	},
+	"opt_add_tabs_front": {
+		"message": "नए Tabs को सामने जोड़ें।",
+		"description": "[settings] उपयोगकर्ता को सभी नए Tabs को सामने जोड़ने दें"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforce पृष्ठ पर न होने पर पॉपअप पर क्लिक करते समय $salesforce_login पृष्ठ को स्वचालित रूप से खोलें।",
+		"description": "[सेटिंग] जब उपयोगकर्ता किसी यादृच्छिक वेबसाइट पर पॉपअप खोलता है"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforce पृष्ठ पर होने पर पॉपअप पर क्लिक करते समय $salesforce_setup पृष्ठ को स्वचालित रूप से खोलें।",
+		"description": "[सेटिंग] जब उपयोगकर्ता Salesforce वेबसाइट पर पॉपअप खोलता है"
+	},
+	"opt_confirm_save": {
+		"message": "सेटिंग्स सहेजी गईं!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (डिफ़ॉल्ट और फ़ॉलबैक)",
+		"description": "एक्सटेंशन का डिफ़ॉल्ट भाषा विकल्प"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs को सॉर्टेड रखें।",
+		"description": "[setting] उपयोगकर्ता को उनकी Tabs को उनके एक कुंजी द्वारा सॉर्टेड रखने दें"
+	},
+	"opt_keep_tabs_left": {
+		"message": "मनपसंद Tabs को होम और ऑब्जेक्ट मैनेजर के बाएँ रखें।",
+		"description": "नेविगेशन बार के बाएँ तरफ पसंदीदा Tabs को पिन करने के लिए टॉगल"
+	},
+	"opt_link_new_browser": {
+		"message": "लिंक पर क्लिक करने पर हमेशा नए ब्राउज़र टैब में खोलें।",
+		"description": "[सेटिंग] जब उपयोगकर्ता पसंदीदा Tab पर क्लिक करे तो नए टैब में खोलें"
+	},
+	"opt_no_release_notes": {
+		"message": "अपडेट रिलीज़ नोट्स न दिखाएं।",
+		"description": "[सेटिंग] उपयोगकर्ता को एक्सटेंशन अपडेट होने के बाद रिलीज़ नोट्स दिखाने से रोकने देता है"
+	},
+	"opt_no_update_notification": {
+		"message": "उपलब्ध अपडेट के बारे में चेतावनी न दें।",
+		"description": "[सेटिंग] उपयोगकर्ता को एक्सटेंशन को नई रिलीज़ खोजने से रोकने दें"
+	},
+	"opt_open_login_same_tab": {
+		"message": "पॉपअप पर क्लिक करते समय हमेशा $salesforce_login पृष्ठ को उसी Tab में खोलें।",
+		"description": "[सेटिंग]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "पॉपअप पर क्लिक करते समय हमेशा $salesforce_setup पृष्ठ को उसी Tab में खोलें।",
+		"description": "[सेटिंग]"
+	},
+	"opt_pick_language": {
+		"message": "एक्सटेंशन भाषा चुनें",
+		"description": "[सेटिंग] उपयोगकर्ता को अपनी पसंदीदा भाषा चुनने के लिए संकेत देने वाला लेबल"
+	},
+	"opt_pick_sort": {
+		"message": "चुनें कि Tabs को किस फ़ील्ड द्वारा सॉर्ट किया जाना चाहिए",
+		"description": "[setting] अब उपयोगकर्ता चुन सकता है कि किस कुंजी द्वारा Tabs को सॉर्टेड रखना है"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics के उपयोग को रोकें (उपयोगकर्ता गणना में शामिल नहीं होगा)।",
+		"description": "[सेटिंग] उपयोगकर्ता को गुमनाम एनालिटिक्स भेजने से रोकने देता है"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "लाइटनिंग नेविगेशन का उपयोग रोकें (अनचेक होने पर तेज़ी से लोड हो रहा है)।",
+		"description": "[setting] सुविधा की व्याख्या के साथ लाइटनिंग नेविगेशन की अनुमति न दें"
+	},
+	"opt_same_tab_popup": {
+		"message": "पॉपअप क्लिक करते समय उसी टैब में पेज खोलें।",
+		"description": "[सेटिंग] नए ब्राउज़र टैब के खुलने से रोकें"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "सेल्सफोर्स भाषा का पालन करें (सेल्सफोर्स कुकीज़ पढ़ता है)",
+		"description": "सेल्सफोर्स की भाषा सेटिंग का उपयोग करने का विकल्प। इस विकल्प का उपयोग करने के लिए, उपयोगकर्ताओं को एक्सटेंशन को सेल्सफोर्स कुकीज़ पढ़ने की अनुमति देनी होगी।"
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce Id की स्वचालित जांच छोड़ें।",
+		"description": "[सेटिंग] Tab को पसंदीदा बनाते समय लिंक में Id की जांच न करें।"
+	},
+	"or_drop": {
+		"message": "या $drop",
+		"description": "[आयात] उपयोगकर्ता को अपने माउस से फ़ाइलों को स्थानांतरित करने और उन्हें छोड़ने दें"
+	},
+	"org_link": {
+		"message": "Org लिंक",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "अन्य Org जानकारी",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "अन्य-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "सहेजे गए Tabs को ओवरराइट करें।",
+		"description": "[label] आयात प्रक्रिया के दौरान सभी सहेजे गए Tabs हटाएँ"
+	},
+	"preserve_org_tabs": {
+		"message": "अन्य Orgs के Tabs संरक्षित रखें।",
+		"description": "[label] आयात प्रक्रिया के दौरान अन्य Org-संबंधी Tabs रखें"
+	},
+	"remove_tab": {
+		"message": "Tab हटाएं",
+		"description": "[alt] जब चित्र काम नहीं करते, तो वैकल्पिक पाठ।"
+	},
+	"req_downloads_open_popup": {
+		"message": "कृपया अपने ब्राउज़र के एक्सटेंशन मेनू से एक्सटेंशन पॉपअप खोलें।",
+		"description": "[टोस्ट] उपयोगकर्ता को जारी रखने के लिए एक्सटेंशन पॉपअप पर क्लिक करने के लिए कहें"
+	},
+	"req_downloads_perm_header": {
+		"message": "अनुरोधित निर्यात शुरू करने के लिए\nकृपया डाउनलोड अनुमति सक्षम करें।",
+		"description": "[अनुरोध_अनुमति] डाउनलोड अनुमति सक्षम करने के लिए कॉल टू एक्शन"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "यह ऑपरेशन केवल एक बार अनुरोध किया जाएगा।",
+		"description": "[अनुरोध_अनुमति] डाउनलोड अनुमति सक्षम करने का विवरण"
+	},
+	"req_permissions_dont_ask": {
+		"message": "फिर न पूछें।",
+		"description": "[req_permission] जब उपयोगकर्ता स्थायी रूप से अनुमति न देने का विकल्प चुनता है, तब लेबल"
+	},
+	"req_permissions_header": {
+		"message": "कृपया हमें स्वचालित रूप से $salesforce_setup पृष्ठों तक पहुंचने की अनुमति दें।",
+		"description": "[req_permission] अनुमतियों का अनुरोध करने के लिए पृष्ठ का हेडर"
+	},
+	"req_permissions_paragraph": {
+		"message": "यदि आप चाहें, तो आप $salesforce_setup पृष्ठ पर नेविगेट करते ही\nअपने पसंदीदा Tabs को प्रदर्शित कर सकते हैं\nबिना हर बार इस एक्सटेंशन पर क्लिक किए।",
+		"description": "[req_permission] यह समझाने के लिए पाठ कि अनुमतियों का अनुरोध क्यों किया जा रहा है"
+	},
+	"required": {
+		"message": "आवश्यक",
+		"description": "[input] अनिवार्य इनपुट फ़ील्ड को चिह्नित करता है"
+	},
+	"required_info": {
+		"message": "= आवश्यक जानकारी",
+		"description": "[modal] उपयोगकर्ता को बताता है कि कुछ जानकारी अनिवार्य है"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning प्लेटफार्म"
+	},
+	"salesforce_login": {
+		"message": "Salesforce लॉगिन",
+		"description": "Salesforce लॉगिन पेज (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce सेटअप",
+		"description": "कोई भी Salesforce सेटअप पेज (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "सहेजें",
+		"description": "बदलाव लागू करें और मेमोरी में संग्रहीत करें"
+	},
+	"save_tab": {
+		"message": "Tab के रूप में सहेजें",
+		"description": "[alt] जब चित्र काम नहीं करते, तो वैकल्पिक पाठ।"
+	},
+	"send_tip": {
+		"message": "हमें एक टिप भेजें ❤️",
+		"description": "[popup] एक टिप भेजने के लिए svg के लिए शीर्षक"
+	},
+	"set_gen_preview": {
+		"message": "Tab पूर्वावलोकन",
+		"description": "सामान्य Tab के रूप को पूर्वावलोकन करने के लिए लेबल"
+	},
+	"set_gen_styler": {
+		"message": "Tab स्टाइलर",
+		"description": "सामान्य Tabs की शैली कॉन्फ़िगर करने के लिए लेबल"
+	},
+	"set_general_settings": {
+		"message": "सामान्य सेटिंग्स",
+		"description": "कुल कॉन्फ़िगरेशन विकल्पों के लिए अनुभाग शीर्षक"
+	},
+	"set_move_available": {
+		"message": "उपलब्ध में ले जाएँ",
+		"description": "चयनित आइटम्स को \"उपलब्ध\" में वापस ले जाने के लिए बटन शीर्षक"
+	},
+	"set_move_chosen": {
+		"message": "चयनित में ले जाएँ",
+		"description": "चयनित आइटम्स को \"चयनित\" में ले जाने के लिए बटन शीर्षक"
+	},
+	"set_org_preview": {
+		"message": "ऑर्ग पूर्वावलोकन",
+		"description": "ऑर्ग-विशेष Tab के रूप को पूर्वावलोकन करने के लिए लेबल"
+	},
+	"set_org_styler": {
+		"message": "ऑर्ग स्टाइलर",
+		"description": "ऑर्ग-विशेष Tabs की शैली कॉन्फ़िगर करने के लिए लेबल"
+	},
+	"set_tab_background_active_label": {
+		"message": "सक्रिय सामान्य Tabs के लिए पृष्ठभूमि रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के पृष्ठभूमि रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_background_label": {
+		"message": "ऑर्ग Tabs के लिए पृष्ठभूमि रंग डालें।",
+		"description": "ऑर्ग-विशेष Tabs के पृष्ठभूमि रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "सक्रिय ऑर्ग Tabs के लिए बॉर्डर रंग डालें।",
+		"description": "सक्रिय ऑर्ग-विशेष Tabs के बॉर्डर रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_border_color_label": {
+		"message": "सामान्य Tabs के लिए बॉर्डर रंग डालें।",
+		"description": "सामान्य Tabs के बॉर्डर रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_color_active_label": {
+		"message": "सक्रिय सामान्य Tabs के लिए टेक्स्ट रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के टेक्स्ट रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_color_label": {
+		"message": "ऑर्ग Tabs के लिए टेक्स्ट रंग डालें।",
+		"description": "ऑर्ग-विशेष Tabs के टेक्स्ट रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "सक्रिय ऑर्ग Tabs के लिए एक या अधिक सजावट शैलियाँ चुनें।",
+		"description": "सक्रिय ऑर्ग-विशेष Tabs के सजावट शैलियाँ चुनने के लिए संकेत"
+	},
+	"set_tab_decoration_label": {
+		"message": "सामान्य Tabs के लिए एक या अधिक सजावट शैलियाँ चुनें।",
+		"description": "सामान्य Tabs के सजावट शैलियाँ चुनने के लिए संकेत"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "सक्रिय सामान्य Tabs के लिए होवर पृष्ठभूमि रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के होवर पृष्ठभूमि رنگ सेट करने के लिए लेबल"
+	},
+	"set_tab_hover_background_label": {
+		"message": "ऑर्ग Tabs के लिए होवर पृष्ठभूमि रंग डालें।",
+		"description": "ऑर्ग-विशेष Tabs के होवर पृष्ठभूमि رنگ सेट करने के लिए लेबल"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "सक्रिय ऑर्ग Tabs के लिए शैडो रंग डालें।",
+		"description": "सक्रिय ऑर्ग-विशेष Tabs के शैडो रंग सेट کرنے के लिए लेबल"
+	},
+	"set_tab_shadow_label": {
+		"message": "सामान्य Tabs के लिए शैडो रंग डालें।",
+		"description": "सामान्य Tabs के शैडो रंग सेट करने के लिए लेबल"
+	},
+	"set_tab_top_active_label": {
+		"message": "सक्रिय सामान्य Tabs के शीर्ष बार के लिए रंग डालें।",
+		"description": "सक्रिय सामान्य Tabs के शीर्ष-बार रंग सेट करने के लिए लेबल"
+	},
+	"set_toggle_preview": {
+		"message": "सक्रिय स्थिति टॉगल करने के लिए क्लिक करें।",
+		"description": "टॉगल सक्रिय स्थिति नियंत्रण के लिए टूलटिप टेक्स्ट"
+	},
+	"settings": {
+		"message": "सेटिंग्स",
+		"description": "सेटिंग मेनू के लिए लेबल"
+	},
+	"setup_page": {
+		"message": "Setup पृष्ठ",
+		"description": "[notSalesforceSetup] Salesforce सेटिंग्स बदलने वाला पृष्ठ"
+	},
+	"skip": {
+		"message": "छोड़ें",
+		"description": "[req_permission] अनुमतियाँ न देने के लिए बटन"
+	},
+	"successfully_imported": {
+		"message": "सफलतापूर्वक आयात किया गया",
+		"description": "[toast] उपयोगकर्ता ने बाहरी फाइल से Tabs जोड़ दिए हैं।"
+	},
+	"tab_explain": {
+		"message": "प्रत्येक आइटम में 'label' और 'url' स्ट्रिंग के रूप में होने चाहिए। साथ ही, प्रत्येक आइटम में 'org' स्ट्रिंग के रूप में हो सकता है।",
+		"description": "[error] बताता है कि Tab कैसे बनाया जाना चाहिए।"
+	},
+	"tab_information": {
+		"message": "Tab जानकारी",
+		"description": "Update Tab modal का शीर्षक"
+	},
+	"tab_label": {
+		"message": "Tab लेबल",
+		"description": "[popup] Tab के नाम वाले कॉलम का हेडर"
+	},
+	"tab_org": {
+		"message": "Tab Org",
+		"description": "Tab की Org प्रॉपर्टी, यदि यह एक एकल Salesforce संगठन के लिए है"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "[popup] Tab की URL वाले कॉलम का हेडर"
+	},
+	"table_delete": {
+		"message": "Tab हटाएं",
+		"description": "[popup] हटाने वाले बटन वाले कॉलम के लिए सहायक पाठ"
+	},
+	"table_org": {
+		"message": "Org Tab है",
+		"description": "[popup] Org चेकबॉक्स वाले कॉलम के लिए सहायक पाठ"
+	},
+	"table_row_label": {
+		"message": "इस URL के लिए लेबल दर्ज करें",
+		"description": "[popup] Tab के नाम के लिए इनपुट फ़ील्ड"
+	},
+	"table_row_org": {
+		"message": "यदि आप चाहते हैं कि यह Tab केवल इस Org के लिए उपलब्ध हो, तो क्लिक करें।",
+		"description": "[popup] Org-विशिष्ट Tab के लिए चेकबॉक्स"
+	},
+	"table_row_org_name": {
+		"message": "जिस Org के लिए यह Tab उपलब्ध है",
+		"description": "[popup] Org के नाम के लिए इनपुट फ़ील्ड"
+	},
+	"table_row_url": {
+		"message": "उस sub_URL को दर्ज करें जहाँ आप पुनर्निर्देशित होना चाहते हैं।",
+		"description": "[popup] Tab की URL के लिए इनपुट फ़ील्ड"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "उपयोगकर्ता के पसंदीदा लिंक।"
+	},
+	"tabs_saved": {
+		"message": "Tabs सहेजे गए।",
+		"description": "[toast] Tabs सफलतापूर्वक सहेजे गए।"
+	},
+	"theme_dark": {
+		"message": "डार्क थीम में बदलें",
+		"description": "[popup] थीम बदलने के लिए चाँद पर शीर्षक"
+	},
+	"theme_light": {
+		"message": "लाइट थीम में बदलें",
+		"description": "[popup] थीम बदलने के लिए सूरज पर शीर्षक"
+	},
+	"underline": {
+		"message": "रेखांकित",
+		"description": "Tab टेक्स्ट के लिए रेखांकित सजावट शैली विकल्प"
+	},
+	"underline_wavy": {
+		"message": "तरंग रेखांकित",
+		"description": "Tab टेक्स्ट पर तरंगाकार रेखांकित लागू करने के लिए सजावट शैली विकल्प"
+	},
+	"update_available": {
+		"message": "अपडेट उपलब्ध",
+		"description": "एक्सटेंशन के लिए एक नया अपडेट उपलब्ध है"
+	},
+	"upload": {
+		"message": "अपलोड करें",
+		"description": "[import] उपयोगकर्ता को उनकी फाइलों में से सही फाइल चुनने की अनुमति देता है।"
+	},
+	"users": {
+		"message": "उपयोगकर्ता",
+		"description": "ManageUsers/home से संबंधित पृष्ठ का नाम"
+	},
+	"where_to": {
+		"message": "कहाँ?",
+		"description": "[open-other-org-modal] modal के लिए fallback शीर्षक"
+	},
+	"write_review": {
+		"message": "एक समीक्षा लिखें!",
+		"description": "[popup] एक समीक्षा लिखने का अनुरोध करने के लिए svg के लिए शीर्षक"
+	}
+}

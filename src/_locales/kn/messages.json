@@ -1,0 +1,989 @@
+{
+	"allow": {
+		"message": "ಅನುಮತಿಸಿ",
+		"description": "[ಅನುಮತಿ_ಕೋರಿಕೆ] ಬಟನ್ ಅನುಮತಿಗಳನ್ನು ನೀಡಲು"
+	},
+	"ascending": {
+		"message": "ಆರೋಹಣ (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "ಲಭ್ಯವಿದೆ",
+		"description": "ಸೇರಿಸಬಹುದಾದ ಐಟಂಗಳಿಗಾಗಿ ವಿಭಾಗ ಶೀರ್ಷಿಕೆ"
+	},
+	"bold": {
+		"message": "ದಪ್ಪ",
+		"description": "ದಪ್ಪ ಪಂಕ್ತಿಗಾಗಿ ಫಾಂಟ್ ಶೈಲಿ ಆಯ್ಕೆ"
+	},
+	"cancel": {
+		"message": "ರದ್ದುಮಾಡಿ",
+		"description": "ಪ್ರಸ್ತುತ ಕ್ರಿಯೆಯನ್ನು ಅನುಷ್ಠಾನಗೊಳ್ಳದಂತೆ ಮಾಡುವ ಬಟನ್‌ಗಳಿಗೆ ಶೀರ್ಷಿಕೆ ಅಥವಾ ಪಠ್ಯ ವಿಷಯ"
+	},
+	"cancel_close": {
+		"message": "ರದ್ದುಮಾಡಿ ಮತ್ತು ಮುಚ್ಚಿ",
+		"description": "ಮೊಡಲ್‌ಗಳ ಮುಚ್ಚುವ ಬಟನ್‌ಗೆ ಶೀರ್ಷಿಕೆ ಅಥವಾ ಪಠ್ಯ ವಿಷಯ"
+	},
+	"chosen": {
+		"message": "ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",
+		"description": "ಆಯ್ಕೆಮಾಡಿದ ಐಟಂಗಳಿಗಾಗಿ ವಿಭಾಗ ಶೀರ್ಷಿಕೆ"
+	},
+	"cmd_export_all": {
+		"message": "ಉಳಿಸಿದ ಎಲ್ಲಾ Tab ಗಳನ್ನು ರಫ್ತು ಮಾಡಲು ಮೋಡಲ್ ತೋರಿಸಿ",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಎಲ್ಲಾ Tab ಗಳನ್ನು ರಫ್ತು ಮಾಡಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"cmd_import": {
+		"message": "ಹೊಸ Tab ಗಳನ್ನು ಆಮದು ಮಾಡಲು ಮೋಡಲ್ ತೋರಿಸಿ",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಹೊಸ Tab ಗಳನ್ನು ಆಮದು ಮಾಡಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"cmd_open_other_org": {
+		"message": "ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ಇನ್ನೊಂದು Org ನಲ್ಲಿ ತೆರೆಯಲು ಮೋಡಲ್ ತೋರಿಸಿ",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ಇನ್ನೊಂದು Org ನಲ್ಲಿ ತೆರೆಯಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab ಪಟ್ಟಿಯಿಂದ ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ತೆಗೆದುಹಾಕಿ (ಉಳಿಸಿದ್ದರೆ)",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ತೆಗೆದುಹಾಕಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"cmd_save_as_tab": {
+		"message": "Tab ಪಟ್ಟಿಯಲ್ಲಿ ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ಉಳಿಸಿ (ಉಳಿಸದಿದ್ದರೆ)",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ಉಳಿಸಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"cmd_toggle_org": {
+		"message": "ಪ್ರಸ್ತುತ ಪುಟದ Org ಮೌಲ್ಯವನ್ನು ಟಾಗಲ್ ಮಾಡಿ (ಉಳಿಸಿದ್ದರೆ)",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಪ್ರಸ್ತುತ ಪುಟಕ್ಕಾಗಿ Org ಅನ್ನು ಟಾಗಲ್ ಮಾಡಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"cmd_update_tab": {
+		"message": "ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ನವೀಕರಿಸಲು ಮೋಡಲ್ ತೋರಿಸಿ (ಉಳಿಸಿದ್ದರೆ)",
+		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ನವೀಕರಿಸಲು ಬಯಸುತ್ತಾರೆ"
+	},
+	"confirm_another_org": {
+		"message": "ಈ ಲಿಂಕ್ ತೆರೆಯುವುದನ್ನು ಖಚಿತಪಡಿಸಿ.",
+		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್] ನಿರ್ಮಿತ ಲಿಂಕ್ ತೆರೆಯಲು ಬಳಕೆದಾರರ ಖಚಿತೀಕರಣ ಕೇಳುವುದು."
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label ನ ಹೊಸ ಆವೃತ್ತಿ ಈಗ ಲಭ್ಯವಿದೆ!",
+		"description": "ಕೇಳುಗರಿಂದ ಅಪರಿಚಿತ ಸಂದೇಶವನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+	},
+	"continue": {
+		"message": "ಮುಂದುವರೆಯಿರಿ",
+		"description": "ಪ್ರಸ್ತುತ ಕ್ರಿಯೆಯನ್ನು ಅನುಷ್ಠಾನಗೊಳ್ಳಲು ಬಟನ್‌ಗಳಿಗೆ ಪಠ್ಯ ವಿಷಯ"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 ಎಲ್ಲಾ ಸಾಮಾನ್ಯ Tabಗಳು",
+		"description": "[ಸಂದರ್ಭ ಮೆನು]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 ಎಲ್ಲಾ Tab ತೆಗೆದುಹಾಕಿ",
+		"description": "[ಸಂದರ್ಭ ಮೆನು]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 ಎಲ್ಲಾ ಗೋಚರಿಸುವ Tabಗಳು",
+		"description": "[ಸಂದರ್ಭ ಮೆನು]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs ರಫ್ತುಮಾಡಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab ಸರಿಸಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ ಮೊದಲನೆಯದಾಗಿ ಮಾಡಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ ಕೊನೆಯದಾಗಿ ಮಾಡಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_move_left": {
+		"message": "👈 ಎಡಕ್ಕೆ ಸರಿಸಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_move_right": {
+		"message": "👉 ಬಲಕ್ಕೆ ಸರಿಸಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 ಇತರ ಸಂಸ್ಥೆಯಲ್ಲಿ ತೆರೆಯಿರಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(ಗಳು) ತೆಗೆದುಹಾಕಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 ಎಡದ Tabs",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ ಇತರ Tabs",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 ಬಲದ Tabs",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ This tTb",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 ಡೀಫಾಲ್ಟ್ Tabಗಳನ್ನು ಮರುಹೊಂದಿಸಿ",
+		"description": "[ಸಂದರ್ಭ ಮೆನು]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಮೆನುಗಾಗಿ ಲೇಬಲ್"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tabs ಅನ್ನು ವಿಂಗಡಿಸಿ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು (ಪೋಷಕ ಮೆನು)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 ಲೇಬಲ್ ಮೂಲಕ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಲೇಬಲ್ ಮೂಲಕ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org ಮೂಲಕ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಸಂಸ್ಥೆಯ ಮೂಲಕ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url ಮೂಲಕ",
+		"description": "ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು URL ಮೂಲಕ ವಿಂಗಡಿಸಲು ಅನುಮತಿಸಲು ಸಂದರ್ಭ ಮೆನು"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab ನವೀಕರಿಸಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_update_org": {
+		"message": "📌 ಸಂಸ್ಥೆ ಮರುಹೊಂದಿಸಿ",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 ಇತರ ನವೀಕರಣಗಳು",
+		"description": "[ಸಂದರ್ಭ-ಮೆನು]"
+	},
+	"delete": {
+		"message": "ತೊಡೆದುಹಾಕಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ಸಾಲನ್ನು ತೆಗೆದುಹಾಕಿ"
+	},
+	"delete_all": {
+		"message": "$delete ಎಲ್ಲಾ Tabs",
+		"description": "[ಪಾಪ್‌ಅಪ್] ಎಲ್ಲಾ Tabs ಖಾಲಿ ಮಾಡಲು ಬಿನ್ ಮೇಲಿನ ಶೀರ್ಷಿಕೆ"
+	},
+	"descending": {
+		"message": "ಅವರೋಹಣ (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "ಡ್ರಾಪ್",
+		"description": "[ಆಮದು] ಬಳಕೆದಾರರು ತಮ್ಮ ಫೈಲ್‌ಗಳನ್ನು ನಿರ್ದಿಷ್ಟಪಡಿಸಿದ ಪ್ರದೇಶದ ಮೇಲೆ ಡ್ರಾಪ್ ಮಾಡಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
+	"enable": {
+		"message": "ಸಕ್ರಿಯಗೊಳಿಸು",
+		"description": "[ಅನುಮತಿ_ಕೇಳಿ] ಅನುಮತಿಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಬಟನ್"
+	},
+	"error_adding_tab": {
+		"message": "Tab ಸೇರಿಸುವಾಗ ದೋಷ.",
+		"description": "[ದೋಷ] Tab ಸೇರಿಸುವಾಗ ಬಳಸುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_check_update": {
+		"message": "ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸುವಾಗ ದೋಷ",
+		"description": "[ದೋಷ] ವಿಸ್ತರಣಾ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸುವಾಗ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_close_other_modal": {
+		"message": "ಮುಂದೆ ಇತರೆ ಮೊಡಲ್ ಮೊದಲು ಮುಚ್ಚಿ!",
+		"description": "[ಟೋಸ್ಟ್] ಬಳಕೆದಾರನು 1ಕ್ಕಿಂತ ಹೆಚ್ಚು ಮೊಡಲ್ ತೆರೆಯಲು ಪ್ರಯತ್ನಿಸಿದ್ದಾನೆ"
+	},
+	"error_cxm_check": {
+		"message": "ಮೆನು ಐಟಂಗಳನ್ನು ಪರಿಶೀಲಿಸುವಲ್ಲಿ ದೋಷ",
+		"description": "[ದೋಷ] ಸಂದರ್ಭ ಮೆನು ಐಟಂಗಳನ್ನು ಕಂಡುಬರಲಿಲ್ಲ"
+	},
+	"error_cxm_create": {
+		"message": "ಮೆನು ಐಟಂಗಳನ್ನು ರಚಿಸುವಲ್ಲಿ ದೋಷ",
+		"description": "[ದೋಷ] ಸಂದರ್ಭ ಮೆನು ಐಟಂಗಳನ್ನು ಆರಂಭಿಸಲಾಗಲಿಲ್ಲ"
+	},
+	"error_cxm_remove": {
+		"message": "ಮೆನು ಐಟಂಗಳನ್ನು ತೆಗೆದುಹಾಕುವಲ್ಲಿ ದೋಷ",
+		"description": "[ದೋಷ] ಸಂದರ್ಭ ಮೆನು ಐಟಂಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗಲಿಲ್ಲ"
+	},
+	"error_duplicate_tab": {
+		"message": "ಈ Tab ಈಗಾಗಲೇ ಇದೆ",
+		"description": "[ದೋಷ] Tab ನಕಲು ಉಂಟಾಗಿದೆ"
+	},
+	"error_expand_url": {
+		"message": "ಖಾಲಿ URL ವಿಸ್ತರಿಸಲಾಗುವುದಿಲ್ಲ!",
+		"description": "[ದೋಷ] ವಿಸ್ತರಿಸಬೇಕಾದ URL ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_expand_url_no_base": {
+		"message": "ಹೋಸ್ಟ್ ಇಲ್ಲದ URL ವಿಸ್ತರಿಸಲಾಗುವುದಿಲ್ಲ!",
+		"description": "[ದೋಷ] ವಿಸ್ತರಿಸಲು ಬಳಸಿದ ಮೂಲ URL ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_extract_empty_url": {
+		"message": "ಖಾಲಿ URL ಇಂದ ಸಂಸ್ಥೆಯ ಹೆಸರನ್ನು ತೆಗೆದುಹಾಕಲಾಗುವುದಿಲ್ಲ!",
+		"description": "[ದೋಷ] ಸಂಸ್ಥೆಯ ಹೆಸರು ಪಡೆಯಲು URL ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_failed_sync": {
+		"message": "ಸಿಂಕ್ ವಿಫಲವಾಗಿದೆ.",
+		"description": "[ದೋಷ] ಬಳಕೆದಾರರಿಂದ Tab ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗದಿದ್ದಾಗ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_failed_to_fetch": {
+		"message": "ಬಾಹ್ಯ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪಡೆಯಲು ವಿಫಲವಾಗಿದೆ",
+		"description": "[ದೋಷ] ಬಾಹ್ಯ ವೆಬ್‌ಸೈಟ್‌ಗೆ ಮಾಡಿದ ಕರೆ ಯಶಸ್ವಿಯಾಗಲಿಲ್ಲ"
+	},
+	"error_get_with_no_org": {
+		"message": "ಸಂಸ್ಥೆ ವಿವರಿಸಲಾಗದಿರುವಾಗ Tabs ಪಡೆಯಲಾಗುವುದಿಲ್ಲ.",
+		"description": "[ದೋಷ] ಸಂಸ್ಥೆ ಮಾಹಿತಿಯನ್ನು ನೀಡದೆ Tabs ಹುಡುಕಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
+	},
+	"error_import": {
+		"message": "ಆಮದು ಮಾಡುವಾಗ ದೋಷ:\n",
+		"description": "[ದೋಷ] ಆಮದು ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ"
+	},
+	"error_invalid_key": {
+		"message": "ಕಾರ್ಯಕ್ಕೆ ರವಾನಿಸಲಾದ ಕೀ ಪ್ಯಾರಾಮೀಟರ್ ಮಾನ್ಯವಾಗಿಲ್ಲ",
+		"description": "[ದೋಷ] ಅಮಾನ್ಯ ಪ್ಯಾರಾಮೀಟರ್‌ನೊಂದಿಗೆ ಡೆವಲಪರ್ ಕಾರ್ಯವನ್ನು ಕರೆಯಲು ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_invalid_request": {
+		"message": "ಅಮಾನ್ಯ ವಿನಂತಿ.",
+		"description": "[ದೋಷ] ಕೆಟ್ಟದಾಗಿ ಫಾರ್ಮ್ಯಾಟ್ ಮಾಡಿದ ಸಂದೇಶವನ್ನು ಪಡೆದ ನಂತರ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_invalid_tab": {
+		"message": "ಅಮಾನ್ಯ Tab",
+		"description": "[ದೋಷ] Tab ಬೌಧ್ಧಿಕವಾಗಿಲ್ಲ"
+	},
+	"error_link_with_id": {
+		"message": "ಈ ಪುಟ ಇತರ ಸಂಸ್ಥೆಯಲ್ಲಿ ಇರಬಹುದು ಎಂಬುದನ್ನು ಕಂಡುಬಲ್ಲದು, ಏಕೆಂದರೆ ಇದರಲ್ಲಿ Id ಇದೆ!",
+		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್] ಲಿಂಕ್ ಇತರ ಸಂಸ್ಥೆಯಲ್ಲಿ ಇರದಿರುವ ಬಗ್ಗೆ ಬಳಕೆದಾರರಿಗೆ ಎಚ್ಚರಿಕೆ"
+	},
+	"error_many_matching_tab": {
+		"message": "1ಕ್ಕಿಂತ ಹೆಚ್ಚು ಹೊಂದಿಕೆಯಾಗುವ Tab ಕಂಡುಬಂದಿದೆ.",
+		"description": "[ದೋಷ] ಅನೇಕ Tabs ಪಡೆದುಕೊಳ್ಳಲಾಗಿದೆ"
+	},
+	"error_many_tabs_found": {
+		"message": "ಒಂದಕ್ಕಿಂತ ಹೆಚ್ಚು Tab ಗಳು ಕಂಡುಬಂದಿವೆ.",
+		"description": "[ದೋಷ] ಅನೇಕ Tab ಗಳನ್ನು ಪಡೆಯಲಾಗಿದೆ"
+	},
+	"error_minify_url": {
+		"message": "ಖಾಲಿ URL ಸಣ್ಣಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ!",
+		"description": "[ದೋಷ] ಕಡಿಮೆ ಮಾಡಬೇಕಾದ URL ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_missing_favourite_id": {
+		"message": "Id ಇಲ್ಲದೆ ಇಷ್ಟದ ಚಿತ್ರವನ್ನು ಪಡೆಯಲಾಗುವುದಿಲ್ಲ",
+		"description": "[ದೋಷ] ಯಾವುದೇ ಇಷ್ಟದ Id ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_missing_key": {
+		"message": "ಕೀ ಎಲ್ಲಿಗೂ ದೊರಕಲಿಲ್ಲ",
+		"description": "[ದೋಷ] ಕಡತಗಳಲ್ಲಿ ಯಾವುದೂ ಅನುವಾದಾ ದೊರಕಲಿಲ್ಲ"
+	},
+	"error_no_array": {
+		"message": "ಅಮಾನ್ಯ ಅರೆ ಅಥವಾ ಅರೆ ಪಾಸು ಮಾಡಲಿಲ್ಲ",
+		"description": "[ದೋಷ] ಮಾನ್ಯ ಅರೆ ದೊರಕಲಿಲ್ಲ"
+	},
+	"error_no_browser_tab": {
+		"message": "ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್ Tab ಸಿಕ್ಕಿಲ್ಲ.",
+		"description": "[ದೋಷ] ಬ್ಯಾಕ್ಗ್ರೌಂಡ್ ಪುಟ ಸಕ್ರಿಯ ಬ್ರೌಸರ್ Tab ಸ್ಥಾಪಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
+	},
+	"error_no_callback": {
+		"message": "ದಯವಿಟ್ಟು callback ಒದಗಿಸಿ",
+		"description": "[ದೋಷ] ವಿಧಾನದ ಅಂತ್ಯದಲ್ಲಿ ಕರೆ ಮಾಡಲು ಫಂಕ್ಷನ್ ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_no_cookies": {
+		"message": "ಸಂಗತ ಕೈಕೂಕೀಸ್ ದೊರಕಲಿಲ್ಲ",
+		"description": "[ದೋಷ] Salesforce ಕೈಕೂಕೀಸ್ ದೊರಕಲಿಲ್ಲ"
+	},
+	"error_no_data": {
+		"message": "ದತ್ತಾಂಶವಿಲ್ಲದೆ Tab ಗುರುತಿಸಲಾಗುವುದಿಲ್ಲ.",
+		"description": "[ದೋಷ] ದತ್ತಾಂಶ ಪಾಸು ಮಾಡದೆ Tab ಪಡೆಯಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
+	},
+	"error_no_headers": {
+		"message": "ಶೀರ್ಷಿಕೆಗಳನ್ನು ಹುಡುಕಲು ವಿಫಲವಾಗಿದೆ.",
+		"description": "[ದೋಷ] extension ಇಷ್ಟದ ಬಟನ್ ಹಾಕಲು ಶೀರ್ಷಿಕೆಗಳ ಸ್ಥಳ ಕಂಡುಬಂದಿಲ್ಲ"
+	},
+	"error_no_matching_tab": {
+		"message": "ಯಾವುದೇ ಹೊಂದಿಕೆಯಾಗುವ Tabs ಸಿಕ್ಕಿಲ್ಲ.",
+		"description": "[ದೋಷ] Tabs ಪಡೆಯಲಿಲ್ಲ"
+	},
+	"error_no_message": {
+		"message": "ಕಳುಹಿಸಲು ಸಂದೇಶ निर्दಿಷ್ಟವಾಗಿಲ್ಲ.",
+		"description": "[ದೋಷ] ಕೋಡ್‌ನ ಇತರ ಭಾಗಗಳಿಗೆ ಕಳುಹಿಸಲು ಸಂದೇಶ ದೊರಕಲಿಲ್ಲ"
+	},
+	"error_no_object": {
+		"message": "ಪರಿಶೀಲನೆಗೆ ವಸ್ತು ನೀಡಲಾಗಿಲ್ಲ!",
+		"description": "[ದೋಷ] ವಸ್ತು ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_no_setup_tab": {
+		"message": "ಸೆಟಪ್ Tab ಕಂಡುಬಂದಿಲ್ಲ.",
+		"description": "[ದೋಷ] extension ಇಷ್ಟದ Tabs ಹಾಕಲು ಸೆಟಪ್ Tab ಸಿಕ್ಕಿಲ್ಲ"
+	},
+	"error_no_url": {
+		"message": "ಪರಿಶೀಲಿಸಲು URL ಇಲ್ಲ!",
+		"description": "[ದೋಷ] ಪರಿಶೀಲಿಸಲು URL ಪಾಸು ಮಾಡಲಾಗಿಲ್ಲ"
+	},
+	"error_not_initialized": {
+		"message": "ಇನ್ನೂ ಆರಂಭಗೊಂಡಿಲ್ಲ.",
+		"description": "[ದೋಷ] ವೇರಿಯೇಬಲ್ ಸಿದ್ಧವಿಲ್ಲದಿದ್ದಾಗ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_processing_tabs": {
+		"message": "Tab ಗಳನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸುವಾಗ ದೋಷ.",
+		"description": "[ದೋಷ] Tab ಗಳನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸುವಾಗ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_redirect": {
+		"message": "ಮರುನಿರ್ದೇಶಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ಪುಟವನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ.",
+		"description": "[ದೋಷ] ಪುಟ ಮರುನಿರ್ದೇಶನದಲ್ಲಿ ಸಾಮಾನ್ಯ ದೋಷ."
+	},
+	"error_remove_not_favourite": {
+		"message": "ಇಷ್ಟದವಲ್ಲದ Tab ತೆಗೆದುಹಾಕಲಾಗುವುದಿಲ್ಲ!",
+		"description": "[ದೋಷ] ಇನ್ನೂ ಉಳಿಸಲಾದವಲ್ಲದ Tab ತೆಗೆದುಹಾಕಲು ಬಳಕೆದಾರ ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_removing_all_tabs": {
+		"message": "ಎಲ್ಲಾ Tab ಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ದೋಷ.",
+		"description": "[ದೋಷ] ಎಲ್ಲಾ Tab ಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ಬಳಸುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_removing_generic_tabs": {
+		"message": "ಸಾಮಾನ್ಯ Tab ಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ದೋಷ.",
+		"description": "[ದೋಷ] ಸಾಮಾನ್ಯ Tab ಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ಬಳಸುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_removing_other_tabs": {
+		"message": "ಇತರ Tab ಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ದೋಷ.",
+		"description": "[ದೋಷ] ಇತರ Tab ಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ಬಳಸುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_removing_tab": {
+		"message": "Tab ತೆಗೆದುಹಾಕುವಾಗ ದೋಷ.",
+		"description": "[ದೋಷ] Tab ತೆಗೆದುಹಾಕುವಾಗ ಬಳಸುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_removing_visible_tabs": {
+		"message": "ಎಲ್ಲಾ ಗೋಚರಿಸುವ Tabಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ದೋಷವಾಯಿತು.",
+		"description": "[ದೋಷ] ಎಲ್ಲಾ ಗೋಚರಿಸುವ Tabಗಳನ್ನು ತೆಗೆದುಹಾಕುವಾಗ ಬಳಕೆಯಾಗುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_required_params": {
+		"message": "ಕಾರ್ಯಕ್ಕಾಗಿ ಅಗತ್ಯವಿರುವ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳನ್ನು ರವಾನಿಸಲಾಗಿಲ್ಲ",
+		"description": "[ದೋಷ] ಅಗತ್ಯ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳಿಲ್ಲದೆ ಡೆವಲಪರ್ ಕಾರ್ಯವನ್ನು ಕರೆಯಲು ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_resetting_default_tabs": {
+		"message": "ಡೀಫಾಲ್ಟ್ Tabಗಳಿಗೆ ಮರುಹೊಂದಿಸುವಾಗ ದೋಷವಾಯಿತು.",
+		"description": "[ದೋಷ] Tabಗಳನ್ನು ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸುವಾಗ ಬಳಕೆಯಾಗುವ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_sorting_tabs": {
+		"message": "Tabs ಅನ್ನು ವಿಂಗಡಿಸುವಾಗ ದೋಷ",
+		"description": "[error] ಟೋಸ್ಟ್ ಸಂದೇಶದಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ"
+	},
+	"error_sync_nothing": {
+		"message": "ಖಾಲಿ Tabs ಸಿಂಕ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ!",
+		"description": "[ದೋಷ] ಏನನ್ನೂ ಸಿಂಕ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
+	},
+	"error_tab_constructor": {
+		"message": "ಹೊಸ Tab() ಬದಲಿಗೆ Tab.create() ಬಳಸಿ",
+		"description": "[ದೋಷ] ಡೆವಲಪರ್‌ಗೆ Tab ವರ್ಗವನ್ನು ಹೇಗೆ ಬಳಸಬೇಕೆಂದು ತಿಳಿಸಿ"
+	},
+	"error_tab_label": {
+		"message": "ಲೆಬಲ್ ಖಾಲಿ ಅಲ್ಲದ ಸ್ಟ್ರಿಂಗ್ ಆಗಿರಬೇಕು",
+		"description": "[ದೋಷ] ಬಳಕೆದಾರ lebel ಇಲ್ಲದೆ Tab ರಚಿಸಲು ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_tab_not_found": {
+		"message": "Tab ಕಂಡುಬಂದಿಲ್ಲ.",
+		"description": "[ದೋಷ] ಅರೆ ಒಳಗೆ Tab ಸೇರಿಸಲಾಗಿಲ್ಲ"
+	},
+	"error_tab_object_creation": {
+		"message": "ಒಬ್ಬ ವಸ್ತುವಿನಿಂದ ಕರೆ ಮಾಡುವಾಗ, ಮತ್ತಷ್ಟು ಯಾವುದನ್ನೂ ಪಾಸು ಮಾಡಬೇಡಿ.",
+		"description": "[ದೋಷ] ಡೆವಲಪರ್ ದೋಷ"
+	},
+	"error_tab_org": {
+		"message": "ಸಂಸ್ಥೆ ಸ್ಟ್ರಿಂಗ್ ಅಥವಾ ಅนิರ್ದಿಷ್ಟಿತವಾಗಿರಬೇಕು",
+		"description": "[ದೋಷ] ತಪ್ಪಾದ ಸಂಸ್ಥೆ ಮೌಲ್ಯದೊಂದಿಗೆ Tab ರಚಿಸಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "ಅನಪೇಕ್ಷಿತ ಕೀಲಿಗಳಿ ಕಂಡುಬಂದವು:",
+		"description": "[ದೋಷ] ಬೆಂಬಲಿಸದ ಗುಣಗಳನ್ನು ಹೊಂದಿರುವ Tab ರಚಿಸಲು ಬಳಕೆದಾರ ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_tab_url": {
+		"message": "URL ಖಾಲಿ ಅಲ್ಲದ ಸ್ಟ್ರಿಂಗ್ ಆಗಿರಬೇಕು",
+		"description": "[ದೋಷ] URL ಇಲ್ಲದೆ Tab ರಚಿಸಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
+	},
+	"error_tab_url_saved": {
+		"message": "ಈ URL ನೊಂದಿಗೆ Tab ಅನ್ನು ಈಗಾಗಲೇ ಉಳಿಸಲಾಗಿದೆ!",
+		"description": "[ದೋಷ] ಬಳಕೆದಾರರು ಈಗಾಗಲೇ ಮೆಚ್ಚಿನ Tab ಅನ್ನು ಉಳಿಸಲು ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_tabcont_initialize": {
+		"message": "ಇದರಿಂದ ಆರಂಭಿಸಲಾಗುವುದಿಲ್ಲ"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "ಅಮಾನ್ಯ Tab(ಗಳು) ಪತ್ತೆಯಾಗಿದೆ.\nಮೊದಲ ಸಂಭವ:",
+		"description": "[ದೋಷ] ಮಾನ್ಯವಲ್ಲದ Tabs ಪಾಸು ಮಾಡಲಾಗಿದೆ"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "ಹೊಸ TabContainer() ಬದಲಿಗೆ TabContainer.create() ಬಳಸಿ",
+		"description": "[ದೋಷ] ಡೆವಲಪರ್‌ಗೆ TabContainer ವರ್ಗವನ್ನು ಹೇಗೆ ಬಳಸಬೇಕೆಂದು ತಿಳಿಸಿ"
+	},
+	"error_translationservice_constructor": {
+		"message": "ಹೊಸ TranslationService() ಬದಲಿಗೆ TranslationService.create() ಬಳಸಿ",
+		"description": "[ದೋಷ] ಡೆವಲಪರ್‌ಗೆ TranslationService ವರ್ಗವನ್ನು ಹೇಗೆ ಬಳಸಬೇಕೆಂದು ತಿಳಿಸಿ"
+	},
+	"error_translator_not_initialized": {
+		"message": "ಭಾಷಾಂತರಕಾರ ಇನ್ನೂ ಆರಂಭಗೊಂಡಿಲ್ಲ.",
+		"description": "[ದೋಷ] TranslationService ಸಿದ್ಧವಾಗಿಲ್ಲ"
+	},
+	"error_unknown_message": {
+		"message": "ಅಪರಿಚಿತ ಸಂದೇಶ ಸ್ವೀಕರಿಸಲಾಗಿದೆ",
+		"description": "ಕೇಳುಗರಿಂದ ಅಪರಿಚಿತ ಸಂದೇಶವನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+	},
+	"error_unknown_request": {
+		"message": "ಅಜ್ಞಾತ ವಿನಂತಿ.",
+		"description": "[ದೋಷ] ಗುರುತಿಸದ ಸಂದೇಶವನ್ನು ಪಡೆದ ನಂತರ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_useless_remove": {
+		"message": "ತೆಗೆದುಹಾಕಲಾಗುವುದಿಲ್ಲ:\nಹಿಂದೆ ಉಳಿಸಲಾದ ಪುಟವನ್ನು ತೆಗೆದುಹಾಕಲು ಸಾಧ್ಯವಿಲ್ಲ",
+		"description": "[ದೋಷ] ಹಿಂದೆ ಉಳಿಸಲಾಗದ ಪುಟವನ್ನು ತೆಗೆದುಹಾಕಲು ಬಳಕೆದಾರ ಪ್ರಯತ್ನಿಸಿದ್ದಾರೆ"
+	},
+	"error_useless_save": {
+		"message": "ಉಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ:\nಈ ಪುಟ ಈಗಾಗಲೇ ಉಳಿಸಲಾಗಿದೆ!",
+		"description": "[ದೋಷ] ಈಗಾಗಲೇ ಉಳಿಸಲಾದ ಪುಟವನ್ನು ಉಳಿಸಲು ಪ್ರಯತ್ನಿಸಲಾಗಿದೆ"
+	},
+	"export": {
+		"message": "ರಫ್ತುಮಾಡಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ರಫ್ತು ಬಟನ್"
+	},
+	"export_title": {
+		"message": "ಎಲ್ಲಾ Tabs ರಫ್ತುಮಾಡಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ರಫ್ತು ಬಟನ್ ಶೀರ್ಷಿಕೆ"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning ಸೆಟಪ್ ಪುಟದ ಲಭ್ಯವಿರುವ ಸ್ಥಳದಲ್ಲಿ ಕಸ್ಟಮ್ Tabs ರಚಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ.",
+		"description": "[ಮಾನಿಫೆಸ್ಟ್] ಈ ವಿಸ್ತರಣೆಯ ವಿವರಣೆ"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "ಈ ವಿಸ್ತರಣೆಯ ಹೆಸರು"
+	},
+	"file": {
+		"message": "ಫೈಲ್",
+		"description": "ಒಂದು ಫೈಲ್"
+	},
+	"files": {
+		"message": "ಫೈಲ್‌ಗಳು",
+		"description": "ಹಲವು ಫೈಲ್‌ಗಳು"
+	},
+	"flows": {
+		"message": "ಪ್ರವಾಹಗಳು",
+		"description": "[ಡೀಫಾಲ್ಟ್-tab] ಡೀಫಾಲ್ಟ್ ಪ್ರವಾಹ Tabಗೆ ಲೇಬಲ್"
+	},
+	"general": {
+		"message": "ಸಾಮಾನ್ಯ",
+		"description": "ಸಾಮಾನ್ಯ ಸೆಟ್ಟಿಂಗ್ಗಳ ವಿಭಾಗಕ್ಕೆ ಲೇಬಲ್"
+	},
+	"help": {
+		"message": "ಸಹಾಯ",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "ಹೊಸ Tabs ಅನ್ನು Org Tabs ಎಂದು ಗುರುತಿಸುತ್ತದೆ, ಆದ್ದರಿಂದ ನೀವು ನಿರ್ದಿಷ್ಟ Salesforce Org ಗೆ ಲಾಗ್ ಇನ್ ಮಾಡಿದಾಗ ಮಾತ್ರ ಅವು ಗೋಚರಿಸುತ್ತವೆ.",
+		"description": "[settings-help] for $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "ಹೊಸದಾಗಿ ಮೆಚ್ಚಿನ Tabs ಅನ್ನು ಸೆಟಪ್ ಬಾರ್‌ನಲ್ಲಿ ನಿಮ್ಮ Tab ಪಟ್ಟಿಯ ಕೊನೆಯಲ್ಲಿ ಸೇರಿಸುವ ಬದಲು ಅದರ ಮುಂಭಾಗದಲ್ಲಿ ಸೇರಿಸಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಹೊರಗೆ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, ಅದು ನಿಮ್ಮನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ Salesforce ಲಾಗಿನ್ ಪುಟಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಒಳಗೆ ಆದರೆ ಸೆಟಪ್ ಪುಟದಲ್ಲಿಲ್ಲದಿದ್ದಾಗ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, ಅದು ನಿಮ್ಮನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ನಿಮ್ಮ Tabs ಅನ್ನು ವಿಂಗಡಿಸಿದ ಕ್ರಮದಲ್ಲಿ ಇರಿಸಲಾಗುತ್ತದೆ—ಲೇಬಲ್, URL ಅಥವಾ Org ಮೂಲಕ; ನೀವು ಯಾವುದನ್ನು ಆರಿಸುತ್ತೀರಿ ಎಂಬುದರ ಮೇಲೆ ಅವಲಂಬಿತವಾಗಿರುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "ಸೆಟಪ್‌ನಲ್ಲಿ ಪ್ರಮಾಣಿತ ನ್ಯಾವಿಗೇಷನ್ ಮೆನು (Home / Object Manager) ನಂತರದ ಬದಲು ಅದರ ಮೊದಲು ನಿಮ್ಮ ಉಳಿಸಿದ Tabs ಅನ್ನು ಪಿನ್ ಮಾಡುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ಪ್ರತಿ ಉಳಿಸಿದ Tab ಸಂಬಂಧಿತ ಪುಟವನ್ನು ಹೊಸ Tab ನಲ್ಲಿ ತೆರೆಯುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "ವಿಸ್ತರಣೆಯು ಅಪ್‌ಡೇಟ್ ಆದ ನಂತರ ಬಿಡುಗಡೆ ಟಿಪ್ಪಣಿಗಳ ಅಧಿಸೂಚನೆಗಳ ಸ್ವಯಂಚಾಲಿತ ಪ್ರದರ್ಶನವನ್ನು ನಿಗ್ರಹಿಸುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "ಆವರ್ತಕ ಅಪ್‌ಡೇಟ್ ಜ್ಞಾಪನೆ ಪಾಪ್‌ಅಪ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ, ವಿಸ್ತರಣೆಯ UI ಅನ್ನು ಸ್ವಚ್ಛವಾಗಿ ಇರಿಸುತ್ತದೆ (ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಂದ ವಿಸ್ತರಣೆಯ ಸ್ವಯಂಚಾಲಿತ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ನೀವು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದಾಗ).",
+		"description": "[settings-help] for $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಹೊರಗೆ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, ಲಾಗಿನ್ ಪುಟವನ್ನು ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "ನೀವು Salesforce ಡೊಮೇನ್‌ನ ಒಳಗೆ ಆದರೆ ಸೆಟಪ್ ಪುಟದಲ್ಲಿಲ್ಲದಿದ್ದಾಗ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ, Salesforce ಸೆಟಪ್ ಪುಟವನ್ನು ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "ವಿಸ್ತರಣೆಗಾಗಿ ಮಾತ್ರ UI ಭಾಷೆಯನ್ನು ಹೊಂದಿಸಿ. ಏನಾದರೂ ಭಾಷಾಂತರಿಸದಿದ್ದರೆ, ಅದರ ಬದಲಿಗೆ ಇಂಗ್ಲಿಷ್ ಆವೃತ್ತಿಯನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.",
+		"description": "[settings-help] for $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "ಮೂಲಭೂತ ಟೆಲಿಮೆಟ್ರಿ ಸಂಗ್ರಹಣೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ. ವಿಸ್ತರಣೆಯು ಅನಾಮಧೇಯ ಬಳಕೆಯ ಮೆಟ್ರಿಕ್‌ಗಳಲ್ಲಿ ಗೋಚರಿಸುವುದಿಲ್ಲ.",
+		"description": "[settings-help] for $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ API ಅನ್ನು ಬೈಪಾಸ್ ಮಾಡುತ್ತದೆ ಮತ್ತು ಸಂಪೂರ್ಣ-ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡುವ ಮೂಲಕ ಲಿಂಕ್‌ಗಳನ್ನು ತೆರೆಯುತ್ತದೆ, ಇದು ಕೆಲವು ಸಂಸ್ಥೆ ಸೆಟಪ್‌ಗಳಲ್ಲಿ ವೇಗವಾಗಿರಬಹುದು.",
+		"description": "[settings-help] for $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "URL ಫ್ರಾಗ್ಮೆಂಟ್ Salesforce ರೆಕಾರ್ಡ್/ಆಬ್ಜೆಕ್ಟ್ ಐಡಿಗಳ ಸ್ವರೂಪಕ್ಕೆ ಹೊಂದಿಕೆಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸುವ ವಿಸ್ತರಣೆಯ ಪರಿಶೀಲನೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ (ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಉಳಿಸಿದ Tab ಅನ್ನು Org Tab ಆಗಿ ಹೊಂದಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ).",
+		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಾಗಿರುವ ದಾಖಲಾತಿಗೆ ಮರುನಿರ್ದೇಶಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ!",
+		"description": "[ಸೆಟ್ಟಿಂಗ್‌ಗಳು-ಸಹಾಯ] ನಿರ್ದಿಷ್ಟ ಸೆಟ್ಟಿಂಗ್‌ ಕುರಿತು ಬಳಕೆದಾರರಿಗೆ ಇನ್ನಷ್ಟು ಓದಲು ಅವಕಾಶ ನೀಡುವ ಕರೆ ಟು ಆಕ್ಷನ್"
+	},
+	"import": {
+		"message": "ಆಮದುಮಾಡಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ಆಮದು ಬಟನ್"
+	},
+	"import_duplicate_description": {
+		"message": "ನಕಲು Tabs ಲೆಕ್ಕಿಸಲಾಗುವುದಿಲ್ಲ.<br />ಒಂದು URL ಹೊಂದಿರುವ ಇಬ್ಬರು Tabs ನಕಲು ಎಂದು ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ.",
+		"description": "[ಆಮದು] ಆಮದು ಪ್ರಕ್ರಿಯೆಯ ವಿವರಣೆ"
+	},
+	"import_invalid_file": {
+		"message": "ಅಮಾನ್ಯ ಫೈಲ್ ಪ್ರಕಾರ.\nಕೇವಲ JSON ಫೈಲ್‌ಗಳು ಬೆಂಬಲಿತವಾಗಿವೆ.",
+		"description": "[ದೋಷ] ಆಮದುಗೆ ಬಳಸಿದ ಫೈಲ್ JSON ಅಲ್ಲ"
+	},
+	"import_successful": {
+		"message": "ಯಶಸ್ವಿಯಾಗಿ ಆಮದುಮಾಡಲಾಗಿದೆ",
+		"description": "[ಆಮದು] ಆಮದು ಪೂರ್ಣಗೊಂಡಿದೆ. ನಂತರ, ಆಮದು ಮಾಡಿದ ದಾಖಲೆಗಳ ಸಂಖ್ಯೆ ತೋರಿಸಲಾಗುತ್ತದೆ"
+	},
+	"import_tabs": {
+		"message": "Tabs ಆಮದುಮಾಡಿ",
+		"description": "[ಮೊಡಲ್-ಶೀರ್ಷಿಕೆ] ಆಮದು ಪ್ರಕ್ರಿಯೆಗೆ"
+	},
+	"import_title": {
+		"message": "JSON ಫೈಲ್‌ನಿಂದ $import_tabs",
+		"description": "[ಪಾಪ್‌ಅಪ್] ಆಮದು ಬಟನ್ ಮೇಲಿನ ಶೀರ್ಷಿಕೆ"
+	},
+	"insert_another": {
+		"message": "ಇನ್ನೊಂದು ಸೇರ್ಪಡೆ ಮಾಡಿ",
+		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್ ದೋಷ] ಒಂದು ಸಂಸ್ಥೆಯನ್ನು ಪುನಃ ಸೇರ್ಪಡೆ ಮಾಡಿದಾಗಿನ ಸಂದೇಶ"
+	},
+	"insert_another_org": {
+		"message": "ಸೇರ್ಪಡೆ ಮಾಡಿದ ಸಂಸ್ಥೆ ಪ್ರಸ್ತುತ ಇತ್ತವಾಗಿದೆ!\nದಯವಿಟ್ಟು ಮತ್ತೊಂದನ್ನು ಸೇರ್ಪಡೆ ಮಾಡಿ.",
+		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್ ದೋಷ] ಒಟ್ಟೆಯ ಸಂಸ್ಥೆಯೇ ಸೇರಿಸಿದಾಗಿನ ಸಂದೇಶ"
+	},
+	"insert_valid_org": {
+		"message": "ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಸಂಸ್ಥೆಯನ್ನು ಸೇರ್ಪಡೆ ಮಾಡಿ!",
+		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್ ದೋಷ] ತಪ್ಪು URL ಸೇರಿಸಿದಾಗಿನ ಸಂದೇಶ"
+	},
+	"italic": {
+		"message": "ಇಟಾಲಿಕ್",
+		"description": "ಇಟಾಲಿಕ್ ಪಂಕ್ತಿಗಾಗಿ ಫಾಂಟ್ ಶೈಲಿ ಆಯ್ಕೆ"
+	},
+	"lightning_navigation": {
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್",
+		"description": "Salesforce ನ ಕಸ್ಟಮ್ ನ್ಯಾವಿಗೇಶನ್ ತಂತ್ರಜ್ಞಾನ"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce ಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
+		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಲಾಗಿನ್ ಪುಟಕ್ಕೆ ದಾರಿ ತೋರುವ ಕರೆ"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "Update Tab ಮೊಡಲ್ ಗಾಗಿ ಸ್ಥಳಾಧಾರ"
+	},
+	"no_manifest_github": {
+		"message": "ಮ್ಯಾನಿಫೆಸ್ಟ್‌ನಲ್ಲಿ ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ GitHub homepage_url",
+		"description": "ಮ್ಯಾನಿಫೆಸ್ಟ್‌ನ homepage_url ಕೀಲಿಯು GitHub ಲಿಂಕ್ ಅನ್ನು ಬಳಸುವುದಿಲ್ಲ"
+	},
+	"no_match": {
+		"message": "ಯಾವುದೇ ಕ್ರಿಯೆ ಹೊಂದಿಕೆಯಾಗಲಿಲ್ಲ",
+		"description": "[ದೋಷ] Salesforce ನಲ್ಲಿ ಅನುಸರಿಸಲ್ಲದ ಕ್ರಿಯೆ ಸಂದರ್ಭ"
+	},
+	"nss_invalid_url": {
+		"message": "ಅಮಾನ್ಯ URL ಪತ್ತೆಯಾಗಿದೆ.",
+		"description": "[Salesforce ಸೆಟಪ್ ಅಲ್ಲ] ಅಮಾನ್ಯ URL"
+	},
+	"nss_not_setup_page": {
+		"message": "ಇದು $salesforce_lightning ಸೆಟಪ್ ಪುಟವಲ್ಲ.",
+		"description": "[notSalesforceSetup] ಬಳಕೆದಾರರು Salesforce ಪುಟದಲ್ಲಿಲ್ಲ."
+	},
+	"open_here": {
+		"message": "ಈ Tab ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+		"description": "[open-other-org-modal] ಬಳಕೆದಾರರಿಗೆ ಅದೇ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲು ಅನುಮತಿಸುವ ರೇಡಿಯೋ ಬಟನ್"
+	},
+	"open_new_tab": {
+		"message": "ಹೊಸ Tab ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+		"description": "[open-other-org-modal] ಬಳಕೆದಾರರಿಗೆ ಹೊಸ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲು ಅನುಮತಿಸುವ ರೇಡಿಯೋ ಬಟನ್."
+	},
+	"open_settings": {
+		"message": "ವಿಸ್ತರಣಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ",
+		"description": "[ಪಾಪ್‌ಅಪ್] ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟಕ್ಕೆ ಮರುನಿರ್ದೇಶಿಸಲು ಬಟನ್"
+	},
+	"open_setup": {
+		"message": "ಸೆಟಪ್ ತೆರೆಯಿರಿ",
+		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆ"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Org Tabs ಆಗಿ ಹೊಸ Tabs ಅನ್ನು ಸೇರಿಸಿ.",
+		"description": "[settings] ಬಳಕೆದಾರರು ಎಲ್ಲಾ ಹೊಸ Tabs ಅನ್ನು org-ನಿರ್ದಿಷ್ಟ ಎಂದು ಸೇರಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
+	"opt_add_tabs_front": {
+		"message": "ಮುಂಭಾಗದಲ್ಲಿ ಹೊಸ Tabs ಅನ್ನು ಸೇರಿಸಿ.",
+		"description": "[settings] ಬಳಕೆದಾರರು ಎಲ್ಲಾ ಹೊಸ Tabs ಅನ್ನು ಮುಂಭಾಗದಲ್ಲಿ ಸೇರಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforce ಪುಟದಲ್ಲಿ ಇಲ್ಲದಿರುವಾಗ ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ $salesforce_login ಪುಟವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು ಯಾದೃಚ್ಛಿಕ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿದ್ದಾಗ ಪಾಪ್‌ಅಪ್ ತೆರೆದಾಗ"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforce ಪುಟದಲ್ಲಿದ್ದಾಗ ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ $salesforce_setup ಪುಟವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Salesforce ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿದ್ದಾಗ ಪಾಪ್‌ಅಪ್ ತೆರೆದಾಗ"
+	},
+	"opt_confirm_save": {
+		"message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಲಾಗಿದೆ!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (ಡೀಫಾಲ್ಟ್ ಮತ್ತು ಫಾಲ್‌ಬ್ಯಾಕ್)",
+		"description": "ವಿಸ್ತರಣೆಯ ಡೀಫಾಲ್ಟ್ ಭಾಷಾ ಆಯ್ಕೆ"
+	},
+	"opt_keep_sort": {
+		"message": "Tabs ಅನ್ನು ವಿಂಗಡಿಸಿ ಇರಿಸಿ.",
+		"description": "[setting] ಬಳಕೆದಾರರು ತಮ್ಮ Tabs ಅನ್ನು ಅವರ ಕೀಗಳಲ್ಲಿ ಒಂದರಿಂದ ವಿಂಗಡಿಸಿ ಇರಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
+	"opt_keep_tabs_left": {
+		"message": "ಪ್ರಿಯ Tabsಗಳನ್ನು Home ಮತ್ತು Object Managerನ ಎಡಭಾಗದಲ್ಲಿರಿಸಿ.",
+		"description": "ನೆವಿಗೇಶನ್ ಬಾರ್‌ನ ಎಡಭಾಗಕ್ಕೆ ಪ್ರಿಯ Tabsವನ್ನು ಪಿನ್ ಮಾಡಲು ಟಾಗಲ್"
+	},
+	"opt_link_new_browser": {
+		"message": "ಲಿಂಕ್‌ಗಳನ್ನು ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಯಾವಾಗಲೂ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು ನೆಚ್ಚಿನ Tab ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ತೆರೆಯಲು"
+	},
+	"opt_no_release_notes": {
+		"message": "ಅಪ್‌ಡೇಟ್ ಬಿಡುಗಡೆ ನೋಟ್ಸ್ ತೋರಿಸಬೇಡಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಅಪ್‌ಡೇಟ್ ಆದ ನಂತರ ವಿಸ್ತರಣೆ ಬಿಡುಗಡೆ ನೋಟ್ಸ್ ತೋರಿಸುವುದನ್ನು ತಡೆಯಲು ಬಳಕೆದಾರರಿಗೆ ಅವಕಾಶ ನೀಡುತ್ತದೆ"
+	},
+	"opt_no_update_notification": {
+		"message": "ಲಭ್ಯವಿರುವ ನವೀಕರಣಗಳ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ನೀಡಬೇಡಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ವಿಸ್ತರಣೆಯನ್ನು ಹೊಸ ಬಿಡುಗಡೆಗಳಿಗಾಗಿ ಹುಡುಕುವುದನ್ನು ತಡೆಯಲು ಬಳಕೆದಾರರಿಗೆ ಅವಕಾಶ ಮಾಡಿಕೊಡಿ"
+	},
+	"opt_open_login_same_tab": {
+		"message": "ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಯಾವಾಗಲೂ $salesforce_login ಪುಟವನ್ನು ಅದೇ Tab ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಯಾವಾಗಲೂ $salesforce_setup ಪುಟವನ್ನು ಅದೇ Tab ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್]"
+	},
+	"opt_pick_language": {
+		"message": "ವಿಸ್ತರಣೆ ಭಾಷೆಯನ್ನು ಆರಿಸಿ",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರಿಗೆ ತಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಪ್ರಾಂಪ್ಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"opt_pick_sort": {
+		"message": "Tabs ಅನ್ನು ಯಾವ ಫೀಲ್ಡ್ ಮೂಲಕ ವಿಂಗಡಿಸಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+		"description": "[setting] ಈಗ ಬಳಕೆದಾರರು Tabs ಅನ್ನು ಯಾವ ಕೀ ಮೂಲಕ ವಿಂಗಡಿಸಿ ಇಡಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆ ಮಾಡಬಹುದು"
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ (ಬಳಕೆದಾರರ ಎಣಿಕೆಯಲ್ಲಿ ಕಾಣಿಸದು).",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರಿಗೆ ಅನಾಮಕ ವಿಶ್ಲೇಷಣೆಯನ್ನು ಕಳುಹಿಸುವುದನ್ನು ತಡೆಯಲು ಅವಕಾಶ ನೀಡುತ್ತದೆ"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಷನ್ ಬಳಕೆಯನ್ನು ತಡೆಯಿರಿ (ಅನ್‌ಚೆಕ್ ಮಾಡಿದಾಗ ವೇಗವಾಗಿ ಲೋಡ್ ಆಗುತ್ತದೆ).",
+		"description": "[setting] ವೈಶಿಷ್ಟ್ಯದ ವಿವರಣೆಯೊಂದಿಗೆ ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್‌ಗೆ ಅವಕಾಶ ನೀಡಬೇಡಿ"
+	},
+	"opt_same_tab_popup": {
+		"message": "ಪಾಪ್ ಅಪ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಅದೇ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಪುಟ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್ ತೆರೆಯುವುದನ್ನು ತಡೆಯಲು"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce ಭಾಷೆಯನ್ನು ಅನುಸರಿಸಿ (Salesforce ಕುಕೀಗಳನ್ನು ಓದುತ್ತದೆ)",
+		"description": "Salesforce ನ ಭಾಷಾ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಬಳಸುವ ಆಯ್ಕೆ. ಈ ಆಯ್ಕೆಯನ್ನು ಬಳಸಲು, ಬಳಕೆದಾರರು ವಿಸ್ತರಣೆಗೆ Salesforce ಕುಕೀಗಳನ್ನು ಓದಲು ಅನುಮತಿಸಬೇಕು."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ಐಡಿ ಸ್ವಯಂಚಾಲಿತ ಪರಿಶೀಲನೆಯನ್ನು ಬಿಟ್ಟಿಟ್ಟು ಹೋಗಿ.",
+		"description": "[ಸೆಟ್ಟಿಂಗ್] ಬಳಕೆದಾರರು Tab ನೆಚ್ಚುಮುನ್ಸು ಸೇರಿಸುವಾಗ, ಉಳಿಸಬೇಕಾದ ಲಿಂಕ್‌ನಲ್ಲಿ ID ಇದ್ದರೆ ಪರಿಶೀಲಿಸುವುದನ್ನು ತಡೆಯಲು"
+	},
+	"or_drop": {
+		"message": "ಅಥವಾ $drop",
+		"description": "[ಆಮದು] ಬಳಕೆದಾರರಿಗೆ ತಮ್ಮ ಮೌಸ್‌ನಿಂದ ಫೈಲ್‌ಗಳನ್ನು ಸರಿಸಲು ಮತ್ತು ಅವುಗಳನ್ನು ಬಿಡಲು ಅನುಮತಿಸಿ"
+	},
+	"org_link": {
+		"message": "ಸಂಸ್ಥೆಯ ಲಿಂಕ್",
+		"description": "[ಇನ್ಪುಟ್-ಲೆಬಲ್]"
+	},
+	"other_org_info": {
+		"message": "ಇತರ ಸಂಸ್ಥೆಯ ಮಾಹಿತಿ",
+		"description": "[ಮೊಡಲ್-ಶೀರ್ಷಿಕೆ]"
+	},
+	"other_org_placeholder": {
+		"message": "ಇತರ-ಸಂಸ್ಥೆ",
+		"description": "[ಇನ್ಪುಟ್-ಸ್ಥಳಾರೋಪಣ]"
+	},
+	"overwrite_tabs": {
+		"message": "ಉಳಿಸಲಾದ Tabs ಮೇಲೆ ಓವರ್‌ರೈಟ್ ಮಾಡು.",
+		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆ ಸಮಯದಲ್ಲಿ ಉಳಿಸಲಾದ Tabs ಅಳಿಸಲು"
+	},
+	"preserve_org_tabs": {
+		"message": "ಇತರ ಸಂಸ್ಥೆಗಳ Tabs ಉಳಿಸಿ.",
+		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆ ಸಮಯದಲ್ಲಿ ಸಂಸ್ಥಾ-ವಿಶೇಷ Tabs ಉಳಿಸಲು"
+	},
+	"remove_tab": {
+		"message": "Tab ತೆಗೆದುಹಾಕಿ",
+		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"
+	},
+	"req_downloads_open_popup": {
+		"message": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನ ವಿಸ್ತರಣೆಗಳ ಮೆನುವಿನಿಂದ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ತೆರೆಯಿರಿ.",
+		"description": "[ಟೋಸ್ಟ್] ಮುಂದುವರಿಯಲು ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಲು ಬಳಕೆದಾರರನ್ನು ಕೇಳಿ"
+	},
+	"req_downloads_perm_header": {
+		"message": "ವಿನಂತಿಸಿದ ರಫ್ತು ಪ್ರಾರಂಭಿಸಲು\nದಯವಿಟ್ಟು ಡೌನ್‌ಲೋಡ್ ಅನುಮತಿಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.",
+		"description": "[ಅನುಮತಿ_ಕೇಳಿ] ಡೌನ್‌ಲೋಡ್ ಅನುಮತಿಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಕರೆ"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "ಈ ಕಾರ್ಯಾಚರಣೆಯನ್ನು ಒಮ್ಮೆ ಮಾತ್ರ ವಿನಂತಿಸಲಾಗುತ್ತದೆ.",
+		"description": "[ಅನುಮತಿ_ಕೇಳಿ] ಡೌನ್‌ಲೋಡ್ ಅನುಮತಿಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವ ವಿವರಣೆ"
+	},
+	"req_permissions_dont_ask": {
+		"message": "ಮತ್ತೆ ಕೇಳಬೇಡಿ.",
+		"description": "[ಅನುಮತಿ_ಕೋರಿಕೆ] ಬಳಕೆದಾರ ಎಂದಿಗೂ ಅನುಮತಿ ಕೇಳದಂತೆ"
+	},
+	"req_permissions_header": {
+		"message": "ದಯವಿಟ್ಟು $salesforce_setup ಪುಟಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪ್ರವೇಶಿಸಲು ನಮಗೆ ಅನುಮತಿಸಿ.",
+		"description": "[req_permission] ಅನುಮತಿಗಳನ್ನು ವಿನಂತಿಸಲು ಪುಟದ ಹೆಡರ್"
+	},
+	"req_permissions_paragraph": {
+		"message": "ನೀವು ಬಯಸಿದರೆ, ನೀವು $salesforce_setup ಪುಟಕ್ಕೆ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಿದ ತಕ್ಷಣ\nನಿಮ್ಮ ಮೆಚ್ಚಿನ Tabs ಕಾಣಿಸಿಕೊಳ್ಳುವಂತೆ ಮಾಡಬಹುದು\nಪ್ರತಿ ಬಾರಿಯೂ ಈ ವಿಸ್ತರಣೆಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡದೆಯೇ.",
+		"description": "[req_permission] ಅನುಮತಿಗಳನ್ನು ಏಕೆ ವಿನಂತಿಸಲಾಗುತ್ತಿದೆ ಎಂಬುದನ್ನು ವಿವರಿಸುವ ಪಠ್ಯ"
+	},
+	"required": {
+		"message": "ಅಗತ್ಯ",
+		"description": "[ಇನ್ಪುಟ್] ಅಗತ್ಯ ಕ್ಷೇತ್ರ ಗುರುತಿಸುತ್ತದೆ"
+	},
+	"required_info": {
+		"message": "= ಅಗತ್ಯ ಮಾಹಿತಿಗಳು",
+		"description": "[ಮೊಡಲ್] ಕೆಲವು ಮಾಹಿತಿಗಳು ಅಗತ್ಯವಿರುವುದನ್ನು ಬಳಕೆದಾರ들에게 ತಿಳಿಸುತ್ತದೆ"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce Lightning ವೇದಿಕೆ"
+	},
+	"salesforce_login": {
+		"message": "Salesforce ಲಾಗಿನ್",
+		"description": "Salesforce ಲಾಗಿನ್ ಪುಟ (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce ಸೆಟ್ಟಿಂಗ್",
+		"description": "ಯಾವುದೇ Salesforce ಸೆಟ್ಟಿಂಗ್ ಪುಟ (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "ಉಳಿಸಿ",
+		"description": "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಿ ಮತ್ತು ಅವುಗಳನ್ನು ಮೆಮೊರಿಯಲ್ಲಿ ಸಂಗ್ರಹಿಸಿ"
+	},
+	"save_tab": {
+		"message": "Tab ಆಗಿ ಉಳಿಸಿ",
+		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"
+	},
+	"send_tip": {
+		"message": "ನಮಗೆ ಒಂದು ಸಲಹೆ ಕಳುಹಿಸಿ ❤️",
+		"description": "[popup] ಸಲಹೆ ಕಳುಹಿಸಲು ಪ್ರೇರೇಪಿಸುವ svg ಗಾಗಿ ಶೀರ್ಷಿಕೆ"
+	},
+	"set_gen_preview": {
+		"message": "Tab ಪೂರ್ವದೃಶ್ಯ",
+		"description": " ಸಾಮಾನ್ಯ Tab ರೂಪರೇಖೆ ಪೂರ್ವದೃಶ್ಯ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_gen_styler": {
+		"message": "Tab ಶೈಲಿಸ್ಟರ್",
+		"description": " ಸಾಮಾನ್ಯ Tab ಶೈಲಿಯನ್ನು ಸಂರಚಿಸುವ ಲೇಬಲ್"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "ಒಟ್ಟಾರೆ ಸಂರಚನಾ ಆಯ್ಕೆಗಳ ವಿಭಾಗ ಶೀರ್ಷಿಕೆ"
+	},
+	"set_move_available": {
+		"message": "ಲಭ್ಯದಲ್ಲಿನಿಗೆ ಸರಿಸು",
+		"description": "ಆಯ್ಕೆಮಾಡಿದ ಐಟಂಗಳನ್ನು Availableಗೆ ಮರುಹೋಗಲು ಬಟನ್ ಶೀರ್ಷಿಕೆ"
+	},
+	"set_move_chosen": {
+		"message": "ಆಯ್ಕೆಮಾಡಿದಕ್ಕೆ ಸರಿಸು",
+		"description": "ಆಯ್ಕೆಮಾಡಿದ ಐಟಂಗಳನ್ನು Chosenಗೆ ಕಳುಹಿಸಲು ಬಟನ್ ಶೀರ್ಷಿಕೆ"
+	},
+	"set_org_preview": {
+		"message": "Org ಪೂರ್ವದೃಶ್ಯ",
+		"description": "ಸಂಸ್ಥಾಪನ ವಿಶೇಷ Tab ರೂಪರೇಖೆ ಪೂರ್ವದೃಶ್ಯ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_org_styler": {
+		"message": "Org ಶೈಲಿಸ್ಟರ್",
+		"description": "ಸಂಸ್ಥಾಪನ ವಿಶೇಷ Tab ಶೈಲಿಯನ್ನು ಸಂರಚಿಸುವ ಲೇಬಲ್"
+	},
+	"set_tab_background_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳಿಗೆ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_background_label": {
+		"message": "ನಿಮ್ಮ ಓರ್ಗ್ Tabsಗಳ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಒರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsಗಳಿಗೆ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_border_color_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಓರ್ಗ್ Tabsಗಳ ಬಾರ್ಡರ್ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಕ್ರಿಯ ಓರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsಗಳಿಗೆ ಬಾರ್ಡರ್ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_border_color_label": {
+		"message": "ನಿಮ್ಮ ಸಾಮಾನ್ಯ Tabsಗಳ ಬಾರ್ಡರ್ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಾಮಾನ್ಯ Tabsಗಳಿಗೆ ಬಾರ್ಡರ್ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_color_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳ ಪಠ್ಯದ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳಿಗೆ ಪಠ್ಯದ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_color_label": {
+		"message": "ನಿಮ್ಮ ಓರ್ಗ್ Tabsಗಳ ಪಠ್ಯದ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಒರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsಗಳಿಗೆ ಪಠ್ಯದ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_decoration_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಓರ್ಗ್ Tabsಗೆ ಒಂದು ಅಥವಾ ಹೆಚ್ಚು ಅಲಂಕಾರ ಶೈಲಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+		"description": "ಸಕ್ರಿಯ ಓರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsಗೆ ಅಲಂಕಾರ ಶೈಲಿಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಸೂಚನೆ"
+	},
+	"set_tab_decoration_label": {
+		"message": "ನಿಮ್ಮ ಸಾಮಾನ್ಯ Tabsಗೆ ಒಂದು ಅಥವಾ ಹೆಚ್ಚು ಅಲಂಕಾರ ಶೈಲಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+		"description": "ಸಾಮಾನ್ಯ Tabsಗೆ ಅಲಂಕಾರ ಶೈಲಿಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಸೂಚನೆ"
+	},
+	"set_tab_hover_background_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳ ಹೋವರ್ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳಿಗೆ ಹೋವರ್ ಸಂದರ್ಭದಲ್ಲಿನ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_hover_background_label": {
+		"message": "ನಿಮ್ಮ ಓರ್ಗ್ Tabsಗಳ ಹೋವರ್ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಒರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabsಗಳಿಗೆ ಹೋವರ್ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_shadow_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಓರ್ಗ್ Tabsಗಳ ಛಾಯಾ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಕ್ರಿಯ ಓರ್ಗ್-ನಿರ್ದಿಷ್ಟ Tabs들에게 ಛಾಯಾ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_shadow_label": {
+		"message": "ನಿಮ್ಮ ಸಾಮಾನ್ಯ Tabsಗಳ ಛಾಯಾ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಾಮಾನ್ಯ Tabs들에게 ಛಾಯಾ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_tab_top_active_label": {
+		"message": "ನಿಮ್ಮ ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabsಗಳ ಮೇಲ್ಭಾಗದ ಪಟ್ಟಿಯ ಬಣ್ಣ ನಮೂದಿಸಿ.",
+		"description": "ಸಕ್ರಿಯ ಸಾಮಾನ್ಯ Tabs들에게 ಮೇಲ್ಭಾಗದ ಪಟ್ಟಿಯ ಬಣ್ಣ ಸೆಟ್ ಮಾಡಲು ಲೇಬಲ್"
+	},
+	"set_toggle_preview": {
+		"message": "ಸಕ್ರಿಯ ಸ್ಥಿತಿಯನ್ನು ಟಾಗಲ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "ಸಕ್ರಿಯ ಸ್ಥಿತಿ ಟಾಗಲ್ ನಿಯಂತ್ರಣದ ಟೂಲ್‌ಟಿಪ್"
+	},
+	"settings": {
+		"message": "ಸೆಟ್ಟಿಂಗ್ಸ್",
+		"description": "ಸೆಟ್ಟಿಂಗ್ಸ್ ಮೆನುಗೆ ಲೇಬಲ್"
+	},
+	"setup_page": {
+		"message": "ಸೆಟಪ್ ಪುಟ",
+		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪರಿಷ್ಕರಿಸುವ ಪುಟ"
+	},
+	"skip": {
+		"message": "ವಿಡುಗಡೆ",
+		"description": "[ಅನುಮತಿ_ಕೋರಿಕೆ] ಅನುಮತಿ ನೀಡದೆ ನಿಲ್ಲುವ ಬಟನ್"
+	},
+	"successfully_imported": {
+		"message": "ಯಶಸ್ವಿಯಾಗಿ ಆಮದುಮಾಡಲಾಗಿದೆ",
+		"description": "[ಟೋಸ್ಟ್] ಆಮದು ಮೂಲಕ Tabs ಸೇರಿಸಲಾಗಿದೆ"
+	},
+	"tab_explain": {
+		"message": "ಪ್ರತಿ ಐಟಂನಲ್ಲಿ 'label' ಮತ್ತು 'url' ಸ್ಟ್ರಿಂಗ್ ಗಳಾಗಿ ಇರಬೇಕು. ಜೊತೆಗೆ, ಪ್ರತಿಯೊಂದು ಐಟಂನಲ್ಲಿ ಆಯ್ಕೆಯಾಗಿರುತ್ತದೆ 'org' ಸ್ಟ್ರಿಂಗ್ ಆಗಿ.",
+		"description": "[ದೋಷ] Tab ಹೇಗೆ ರಚಿಸಬೇಕು ಎಂಬುದು ವಿವರಿಸುತ್ತದೆ"
+	},
+	"tab_information": {
+		"message": "Tab ಮಾಹಿತಿ",
+		"description": "Update Tab ಮೊಡಲ್ ಗೆ ಶೀರ್ಷಿಕೆ"
+	},
+	"tab_label": {
+		"message": "Tab ಲೇಬಲ್",
+		"description": "Tab ನ ಲೇಬಲ್, ಅದರ ಹೆಸರು"
+	},
+	"tab_org": {
+		"message": "Tab ಸಂಸ್ಥೆ",
+		"description": "ಒಂದು Salesforce ಸಂಸ್ಥೆಗೆ ಮಾತ್ರ Tab ಗೆ ಸಂಸ್ಥೆ ಗುಣ"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab ಯಲ್ಲಿ ತೋರಿಸುವ URL"
+	},
+	"table_delete": {
+		"message": "Tab ತೆಗೆಯಿರಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ಡಿಲೀಟ್ ಬಟನ್ ಹೊಂದಿರುವ ಕಾಲಮ್ ಸಹಾಯಕ ಪಠ್ಯ"
+	},
+	"table_org": {
+		"message": "ಸಂಸ್ಥೆಯ Tab ಆಗಿದೆಯೇ?",
+		"description": "[ಪಾಪ್ಅಪ್] ಸಂಸ್ಥಾ checkbox ಹೊಂದಿರುವ ಕಾಲಮ್ ಸಹಾಯಕ ಪಠ್ಯ"
+	},
+	"table_row_label": {
+		"message": "ಈ URL ಗೆ ಲೇಬಲ್ ನಮೂದಿಸಿ",
+		"description": "[ಪಾಪ್ಅಪ್] Tab ಹೆಸರು ಇನ್ಪುಟ್ ಕ್ಷೇತ್ರ"
+	},
+	"table_row_org": {
+		"message": "ಈ Tab ಕೇವಲ ಪ್ರಸ್ತುತ ಸಂಸ್ಥೆಗೆ ಲಭ್ಯವಿರಲು ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "[ಪಾಪ್ಅಪ್] ಸಂಸ್ಥಾ-ವಿಶೇಷವಾಗಿ Tab ಮಾಡಲು checkbox"
+	},
+	"table_row_org_name": {
+		"message": "ಈ Tab ಲಭ್ಯವಿರುವ ಸಂಸ್ಥೆ",
+		"description": "[ಪಾಪ್ಅಪ್] ಸಂಸ್ಥೆ ಹೆಸರು ಇನ್ಪುಟ್ ಕ್ಷೇತ್ರ"
+	},
+	"table_row_url": {
+		"message": "ನೀವು ದಾರಿ ಹೋಗಬೇಕಾದ ಉಪ_URL ನಮೂದಿಸಿ.",
+		"description": "[ಪಾಪ್ಅಪ್] Tab URL ಇನ್ಪುಟ್ ಕ್ಷೇತ್ರ"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "ಬಳಕೆದಾರರ ಇಷ್ಟದ ಲಿಂಕ್‌ಗಳು"
+	},
+	"tabs_saved": {
+		"message": "Tabs ಉಳಿಸಲಾಗಿದೆ.",
+		"description": "[ಟೋಸ್ಟ್] Tabs ಯಶಸ್ವಿಯಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"
+	},
+	"theme_dark": {
+		"message": "ಡಾರ್ಕ್ ಥೀಮ್ ಗೆ ಬದಲಾಯಿಸಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ಥೀಮ್ ಬದಲಿಸಲು ಚಂದಿರ ಚಿತ್ರ ಶೀರ್ಷಿಕೆ"
+	},
+	"theme_light": {
+		"message": "ಲೈಟ್ ಥೀಮ್ ಗೆ ಬದಲಾಯಿಸಿ",
+		"description": "[ಪಾಪ್ಅಪ್] ಥೀಮ್ ಬದಲಿಸಲು ಸೂರ್ಯ ಚಿತ್ರ ಶೀರ್ಷಿಕೆ"
+	},
+	"underline": {
+		"message": "ಅಡಿಯ ರೇಖೆ",
+		"description": "Tab ಪಠ್ಯದ ಕೆಳಗೆ ಅಡಿಯ ರೇಖೆಗಾಗಿ ಅಲಂಕಾರ ಶೈಲಿ ಆಯ್ಕೆ"
+	},
+	"underline_wavy": {
+		"message": "ತರಂಗಾಕಾರ ಅಡಿ ರೇಖೆ",
+		"description": "Tab ಪಠ್ಯದ ಕೆಳಗೆ ತರಂಗಾಕಾರ ಅಡಿ ರೇಖೆಯನ್ನು ಅನ್ವಯಿಸಲು ಅಲಂಕಾರ ಶೈಲಿ ಆಯ್ಕೆ"
+	},
+	"update_available": {
+		"message": "ಅಪ್‌ಡೇಟ್ ಲಭ್ಯವಿದೆ",
+		"description": "ವಿಸ್ತರಣೆಗಾಗಿ ಹೊಸ ಅಪ್‌ಡೇಟ್ ಲಭ್ಯವಿದೆ"
+	},
+	"upload": {
+		"message": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+		"description": "[ಆಮದು] ಬಳಕೆದಾರ ತಮ್ಮ ಫೈಲ್‌ಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ ಆಯ್ಕೆ ಮಾಡಲು"
+	},
+	"users": {
+		"message": "ಬಳಕೆದಾರರು",
+		"description": "ManageUsers/home ಸಂಬಂಧಿಸಿದ ಪುಟದ ಹೆಸರು"
+	},
+	"where_to": {
+		"message": "ಎಲ್ಲಿ?",
+		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್] ಮೊಡಲ್ ಗೆ ಜಾಗಾರ್ಷಕ ಶೀರ್ಷಿಕೆ"
+	},
+	"write_review": {
+		"message": "ಒಂದು ವಿಮರ್ಶೆ ಬರೆಯಿರಿ!",
+		"description": "[popup] ವಿಮರ್ಶೆ ಬರೆಯಲು ವಿನಂತಿಸುವ svg ಗಾಗಿ ಶೀರ್ಷಿಕೆ"
+	}
+}
