@@ -29,7 +29,7 @@ jobs:
                 # Extract substring after 'v'
                 TAG_VERSION=${TAG##*v}
                 # Get version from manifest
-                MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' manifest/template-manifest.json)
+                MANIFEST_VERSION=$(awk '/"version":/ { match($0, /"[0-9.]+"/); print substr($0, RSTART+1, RLENGTH-2) }' src/manifest/template-manifest.json)
                 echo "PRERELEASE=$([ "$TAG_VERSION" != "$MANIFEST_VERSION" ] && echo "true" || echo "false")" >> $GITHUB_ENV
                 # Extract substring before any additional '-' (like '-alpha')
                 PURE_VERSION=${TAG_VERSION%%-*}
