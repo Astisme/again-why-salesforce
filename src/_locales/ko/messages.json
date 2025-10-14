@@ -1,0 +1,1046 @@
+{
+	"allow": {
+		"message": "허용",
+		"description": "[권한_요청] 권한을 허용하는 버튼"
+	},
+	"ascending": {
+		"message": "오름차순 (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "사용 가능",
+		"description": "추가할 수 있는 항목의 섹션 헤더"
+	},
+	"bold": {
+		"message": "굵게",
+		"description": "굵은 텍스트용 글꼴 스타일 옵션"
+	},
+	"cancel": {
+		"message": "취소",
+		"description": "현재 작업 실행을 방지하는 버튼의 제목 또는 textContent"
+	},
+	"cancel_close": {
+		"message": "취소하고 닫기",
+		"description": "모달 닫기 버튼의 제목 또는 textContent"
+	},
+	"chosen": {
+		"message": "선택됨",
+		"description": "선택된 항목의 섹션 헤더"
+	},
+	"cmd_export_all": {
+		"message": "저장된 모든 Tab을 내보내기 위한 모달 표시",
+		"description": "[명령 설명] 사용자가 모든 Tab을 내보내고 싶어합니다"
+	},
+	"cmd_import": {
+		"message": "새로운 Tab을 가져오기 위한 모달 표시",
+		"description": "[명령 설명] 사용자가 새로운 Tab을 가져오고 싶어합니다"
+	},
+	"cmd_open_other_org": {
+		"message": "현재 페이지를 다른 Org에서 열기 위한 모달 표시",
+		"description": "[명령 설명] 사용자가 현재 페이지를 다른 Org에서 열고 싶어합니다"
+	},
+	"cmd_remove_tab": {
+		"message": "Tab 목록에서 현재 페이지를 제거합니다 (저장된 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지를 제거하고 싶어합니다"
+	},
+	"cmd_save_as_tab": {
+		"message": "현재 페이지를 Tab 목록에 저장합니다 (저장되지 않은 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지를 저장하고 싶어합니다"
+	},
+	"cmd_toggle_org": {
+		"message": "현재 페이지의 Org 값을 토글합니다 (저장된 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지의 Org를 토글하고 싶어합니다"
+	},
+	"cmd_update_tab": {
+		"message": "현재 페이지를 업데이트하기 위한 모달 표시 (저장된 경우)",
+		"description": "[명령 설명] 사용자가 현재 페이지를 업데이트하고 싶어합니다"
+	},
+	"confirm_another_org": {
+		"message": "이 링크 열기를 확인합니다.",
+		"description": "[다른_조직_열기_모달] 구성된 링크를 열도록 사용자에게 확인을 요청합니다."
+	},
+	"confirm_update_extension": {
+		"message": "$extension_label 의 새 버전을 지금 사용할 수 있습니다!",
+		"description": "수신기에서 알 수 없는 메시지를 받았습니다."
+	},
+	"continue": {
+		"message": "계속",
+		"description": "현재 작업 실행을 허용하는 버튼의 textContent"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 모든 일반 Tab",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 모든 Tab 제거",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 모든 보이는 Tab",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Tabs 내보내기",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_move": {
+		"message": "🧭 Tab 이동",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ 맨 앞으로 이동",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ 맨 뒤로 이동",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_move_left": {
+		"message": "👈 왼쪽으로 이동",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_move_right": {
+		"message": "👉 오른쪽으로 이동",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 다른 조직에서 열기",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_remove": {
+		"message": "💥 Tab(들) 제거",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 왼쪽의 Tabs",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ 다른 Tabs",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 오른쪽의 Tabs",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ 이 Tab",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 기본 Tab 재설정",
+		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "설정 메뉴의 레이블"
+	},
+	"cxm_sort": {
+		"message": "🎯 Tab 정렬",
+		"description": "사용자가 Tab을 자동으로 정렬할 수 있는 컨텍스트 메뉴(상위 메뉴)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 라벨순",
+		"description": "사용자가 라벨별로 Tab을 정렬할 수 있는 컨텍스트 메뉴"
+	},
+	"cxm_sort_org": {
+		"message": "👽 Org순",
+		"description": "사용자가 Org별로 Tab을 정렬할 수 있는 컨텍스트 메뉴"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 Url순",
+		"description": "사용자가 url별로 Tab을 정렬할 수 있는 컨텍스트 메뉴"
+	},
+	"cxm_update": {
+		"message": "✏️ Tab 업데이트",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_update_org": {
+		"message": "📌 조직 토글",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 기타 업데이트",
+		"description": "[컨텍스트_메뉴]"
+	},
+	"delete": {
+		"message": "삭제",
+		"description": "[팝업] 행 삭제"
+	},
+	"delete_all": {
+		"message": "모든 Tabs $delete",
+		"description": "[팝업] 모든 Tabs를 비우기 위한 휴지통의 제목"
+	},
+	"descending": {
+		"message": "내림차순 (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "드롭",
+		"description": "[가져오기] 사용자가 지정된 영역에 파일을 드롭할 수 있도록 합니다"
+	},
+	"enable": {
+		"message": "활성화",
+		"description": "[권한_요청] 권한을 활성화하는 버튼"
+	},
+	"error_adding_tab": {
+		"message": "Tab 추가 중 오류가 발생했습니다.",
+		"description": "[오류] Tab 추가 시 사용되는 일반 오류"
+	},
+	"error_check_update": {
+		"message": "업데이트 확인 중 오류",
+		"description": "[오류] 확장 프로그램 업데이트 확인 중 일반 오류"
+	},
+	"error_close_other_modal": {
+		"message": "먼저 다른 모달을 닫으십시오!",
+		"description": "[토스트] 사용자가 1개 이상의 모달을 열려고 했습니다."
+	},
+	"error_cxm_check": {
+		"message": "메뉴 항목 확인 오류",
+		"description": "[오류] 컨텍스트 메뉴 항목을 찾을 수 없습니다."
+	},
+	"error_cxm_create": {
+		"message": "메뉴 항목 생성 오류",
+		"description": "[오류] 컨텍스트 메뉴 항목을 초기화할 수 없습니다."
+	},
+	"error_cxm_remove": {
+		"message": "메뉴 항목 제거 오류",
+		"description": "[오류] 컨텍스트 메뉴 항목을 제거할 수 없습니다."
+	},
+	"error_duplicate_tab": {
+		"message": "이 Tab은 이미 존재합니다",
+		"description": "[오류] Tab이 중복되었습니다."
+	},
+	"error_expand_url": {
+		"message": "빈 URL을 확장할 수 없습니다!",
+		"description": "[오류] 확장할 URL이 전달되지 않았습니다."
+	},
+	"error_expand_url_no_base": {
+		"message": "호스트 없이 URL을 확장할 수 없습니다!",
+		"description": "[오류] 확장에 사용된 기본 URL이 전달되지 않았습니다."
+	},
+	"error_extract_empty_url": {
+		"message": "빈 URL에서 조직 이름을 추출할 수 없습니다!",
+		"description": "[오류] 조직 이름을 검색할 URL이 전달되지 않았습니다."
+	},
+	"error_failed_sync": {
+		"message": "동기화에 실패했습니다.",
+		"description": "[오류] 사용자의 Tab을 동기화할 수 없었을 때 발생하는 일반 오류"
+	},
+	"error_failed_to_fetch": {
+		"message": "외부 리소스 가져오기 실패",
+		"description": "[오류] 외부 웹사이트 호출에 실패했습니다"
+	},
+	"error_get_with_no_org": {
+		"message": "조직이 지정되지 않은 경우 Tabs를 가져올 수 없습니다.",
+		"description": "[오류] 조직 정보를 보내지 않고 조직별로 Tabs를 검색하려고 했습니다."
+	},
+	"error_import": {
+		"message": "가져오기 중 오류:\n",
+		"description": "[오류] 가져오기 프로세스 중에 오류가 발생했습니다."
+	},
+	"error_invalid_key": {
+		"message": "함수에 전달된 키 파라미터가 유효하지 않습니다",
+		"description": "[오류] 개발자가 유효하지 않은 파라미터로 함수를 호출하려고 했습니다"
+	},
+	"error_invalid_request": {
+		"message": "잘못된 요청입니다.",
+		"description": "[오류] 잘못된 형식의 메시지를 받은 후 발생하는 일반 오류"
+	},
+	"error_invalid_tab": {
+		"message": "잘못된 Tab",
+		"description": "[오류] Tab이 유효하지 않습니다."
+	},
+	"error_link_with_id": {
+		"message": "이 페이지는 ID를 포함하고 있으므로 다른 조직에 존재할 수 없습니다!",
+		"description": "[다른_조직_열기_모달] 링크가 다른 조직에 존재하지 않을 수 있다는 사용자 경고"
+	},
+	"error_many_matching_tab": {
+		"message": "일치하는 Tab을 1개 이상 찾았습니다.",
+		"description": "[오류] 많은 Tabs가 검색되었습니다."
+	},
+	"error_many_tabs_found": {
+		"message": "한 개 이상의 Tab이 발견되었습니다.",
+		"description": "[오류] 많은 Tab이 검색되었습니다"
+	},
+	"error_minify_url": {
+		"message": "빈 URL을 축소할 수 없습니다!",
+		"description": "[오류] 축소할 URL이 전달되지 않았습니다."
+	},
+	"error_missing_favourite_id": {
+		"message": "ID 없이 즐겨찾기 이미지를 가져올 수 없습니다.",
+		"description": "[오류] 즐겨찾기 ID가 전달되지 않았습니다."
+	},
+	"error_missing_key": {
+		"message": "어디에서도 키를 찾을 수 없습니다.",
+		"description": "[오류] 파일에서 번역을 찾을 수 없습니다."
+	},
+	"error_no_array": {
+		"message": "잘못된 배열이거나 배열이 전달되지 않았습니다.",
+		"description": "[오류] 유효한 배열을 받지 못했습니다."
+	},
+	"error_no_browser_tab": {
+		"message": "현재 브라우저 탭을 찾을 수 없습니다.",
+		"description": "[오류] 백그라운드 페이지에서 활성 브라우저 탭을 설정할 수 없습니다."
+	},
+	"error_no_callback": {
+		"message": "콜백을 제공하십시오.",
+		"description": "[오류] 메서드 끝에서 호출할 함수가 전달되지 않았습니다."
+	},
+	"error_no_cookies": {
+		"message": "일치하는 쿠키를 찾지 못했습니다.",
+		"description": "[오류] Salesforce 쿠키가 반환되지 않았습니다."
+	},
+	"error_no_data": {
+		"message": "데이터 없이 Tab을 식별할 수 없습니다.",
+		"description": "[오류] 데이터를 보내지 않고 Tab을 가져오려고 했습니다."
+	},
+	"error_no_headers": {
+		"message": "헤더를 찾지 못했습니다.",
+		"description": "[오류] 확장 프로그램이 즐겨찾기 버튼을 넣을 위치를 찾지 못했습니다."
+	},
+	"error_no_matching_tab": {
+		"message": "일치하는 Tabs를 찾지 못했습니다.",
+		"description": "[오류] Tabs가 검색되지 않았습니다."
+	},
+	"error_no_message": {
+		"message": "보낼 메시지를 지정하지 않았습니다.",
+		"description": "[오류] 코드의 다른 부분으로 보낼 메시지를 찾을 수 없습니다."
+	},
+	"error_no_object": {
+		"message": "확인할 개체가 없습니다!",
+		"description": "[오류] 개체가 전달되지 않았습니다."
+	},
+	"error_no_setup_tab": {
+		"message": "설정 탭을 찾지 못했습니다.",
+		"description": "[오류] 확장 프로그램이 즐겨찾기 Tabs를 넣을 위치를 찾지 못했습니다."
+	},
+	"error_no_url": {
+		"message": "확인할 URL이 없습니다!",
+		"description": "[오류] 확인할 URL이 전달되지 않았습니다."
+	},
+	"error_not_initialized": {
+		"message": "아직 초기화되지 않았습니다.",
+		"description": "[오류] 변수가 준비되지 않았을 때 발생하는 일반 오류"
+	},
+	"error_processing_tabs": {
+		"message": "Tab 처리 중 오류가 발생했습니다.",
+		"description": "[오류] Tab 처리 시 발생하는 일반 오류"
+	},
+	"error_redirect": {
+		"message": "리디렉션할 수 없습니다. 페이지를 새로고침하세요.",
+		"description": "[오류] 페이지 리디렉션에 대한 일반 오류입니다."
+	},
+	"error_remove_not_favourite": {
+		"message": "즐겨찾기가 아닌 Tab은 제거할 수 없습니다!",
+		"description": "[오류] 사용자가 아직 저장되지 않은 Tab을 제거하려고 했습니다."
+	},
+	"error_removing_all_tabs": {
+		"message": "모든 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 모든 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_generic_tabs": {
+		"message": "일반 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 일반 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_other_tabs": {
+		"message": "다른 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 다른 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_tab": {
+		"message": "Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_removing_visible_tabs": {
+		"message": "모든 보이는 Tab 제거 중 오류가 발생했습니다.",
+		"description": "[오류] 모든 보이는 Tab 제거 시 사용되는 일반 오류"
+	},
+	"error_required_params": {
+		"message": "함수에 필요한 파라미터가 전달되지 않았습니다",
+		"description": "[오류] 개발자가 필요한 파라미터 없이 함수를 호출하려고 했습니다"
+	},
+	"error_resetting_default_tabs": {
+		"message": "기본 Tab 재설정 중 오류가 발생했습니다.",
+		"description": "[오류] Tab를 기본값으로 재설정할 때 사용되는 일반 오류"
+	},
+	"error_sorting_tabs": {
+		"message": "Tab 정렬 중 오류가 발생했습니다.",
+		"description": "[error] 토스트 메시지에 표시됨"
+	},
+	"error_sync_nothing": {
+		"message": "null Tabs는 동기화할 수 없습니다!",
+		"description": "[오류] 아무것도 동기화하려고 시도했습니다."
+	},
+	"error_tab_constructor": {
+		"message": "새로운 Tab() 대신 Tab.create()를 사용하세요",
+		"description": "[오류] 개발자에게 Tab 클래스 사용 방법을 알려줍니다"
+	},
+	"error_tab_label": {
+		"message": "레이블은 비어 있지 않은 문자열이어야 합니다.",
+		"description": "[오류] 사용자가 레이블 없이 Tab을 생성하려고 했습니다."
+	},
+	"error_tab_not_found": {
+		"message": "Tab을 찾을 수 없습니다.",
+		"description": "[오류] Tab이 배열에 포함되지 않았습니다."
+	},
+	"error_tab_object_creation": {
+		"message": "개체로 호출할 때는 다른 것을 전달하지 마십시오.",
+		"description": "[오류] 개발자의 구현 오류"
+	},
+	"error_tab_org": {
+		"message": "조직은 문자열이거나 정의되지 않아야 합니다.",
+		"description": "[오류] 사용자가 잘못된 조직 값으로 Tab을 생성하려고 했습니다."
+	},
+	"error_tab_unexpected_keys": {
+		"message": "예상치 못한 키가 발견되었습니다:",
+		"description": "[오류] 사용자가 지원되지 않는 속성으로 Tab을 생성하려고 했습니다."
+	},
+	"error_tab_url": {
+		"message": "URL은 비어 있지 않은 문자열이어야 합니다.",
+		"description": "[오류] 사용자가 URL 없이 Tab을 생성하려고 했습니다."
+	},
+	"error_tab_url_saved": {
+		"message": "이 URL을 가진 Tab은 이미 저장되었습니다!",
+		"description": "[오류] 사용자가 이미 즐겨찾기에 추가된 Tab을 저장하려고 했습니다"
+	},
+	"error_tabcont_initialize": {
+		"message": "다음으로 초기화할 수 없습니다.",
+		"description": "[오류] Tab 컨테이너 초기화 실패"
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "잘못된 Tab(들)이 감지되었습니다.\n첫 번째 발생:",
+		"description": "[오류] 잘못된 Tabs가 전달되었습니다."
+	},
+	"error_tabcontainer_constructor": {
+		"message": "새로운 TabContainer() 대신 TabContainer.create()를 사용하세요",
+		"description": "[오류] 개발자에게 TabContainer 클래스 사용 방법을 알려줍니다"
+	},
+	"error_translationservice_constructor": {
+		"message": "새로운 TranslationService() 대신 TranslationService.create()를 사용하세요",
+		"description": "[오류] 개발자에게 TranslationService 클래스 사용 방법을 알려줍니다"
+	},
+	"error_translator_not_initialized": {
+		"message": "번역기가 아직 초기화되지 않았습니다.",
+		"description": "[오류] TranslationService가 준비되지 않았습니다"
+	},
+	"error_unknown_message": {
+		"message": "알 수 없는 메시지 수신됨",
+		"description": "리스너로부터 알 수 없는 메시지가 수신되었습니다"
+	},
+	"error_unknown_request": {
+		"message": "알 수 없는 요청입니다.",
+		"description": "[오류] 인식되지 않은 메시지를 받은 후 발생하는 일반 오류"
+	},
+	"error_useless_remove": {
+		"message": "제거할 수 없음:\n이전에 저장되지 않은 페이지는 제거할 수 없습니다.",
+		"description": "[오류] 사용자가 아직 저장되지 않은 페이지를 제거하려고 했습니다."
+	},
+	"error_useless_save": {
+		"message": "저장할 수 없음:\n이 페이지는 이미 저장되었습니다!",
+		"description": "[오류] 사용자가 이미 저장된 페이지를 저장하려고 했습니다."
+	},
+	"export": {
+		"message": "내보내기",
+		"description": "[팝업] 내보내기 버튼"
+	},
+	"export_title": {
+		"message": "모든 Tabs 내보내기",
+		"description": "[팝업] 내보내기 버튼 제목"
+	},
+	"extension_description": {
+		"message": "Salesforce Lightning 설정 페이지의 사용 가능한 공간에 사용자 지정 Tabs를 만들고 관리합니다.",
+		"description": "[매니페스트] 이 확장 프로그램의 설명"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "이 확장 프로그램의 이름"
+	},
+	"file": {
+		"message": "파일",
+		"description": "단일 파일"
+	},
+	"files": {
+		"message": "파일들",
+		"description": "여러 파일"
+	},
+	"flows": {
+		"message": "흐름",
+		"description": "[기본-탭] 기본 흐름 Tab의 라벨"
+	},
+	"general": {
+		"message": "일반",
+		"description": "일반 설정 범주 라벨"
+	},
+	"help": {
+		"message": "도움말",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "새 Tab을 Org Tab으로 표시하여 해당 특정 Salesforce Org에 로그인했을 때만 표시됩니다.",
+		"description": "[$opt_add_tabs_as_org]에 대한 [settings-help]"
+	},
+	"help_add_tabs_front": {
+		"message": "새롭게 즐겨찾기에 추가한 Tab이 Tab 목록의 끝에 추가되지 않고 설정 바의 Tab 목록 맨 앞에 삽입됩니다.",
+		"description": "[$opt_add_tabs_front]에 대한 [settings-help]"
+	},
+	"help_automatic_open_login": {
+		"message": "Salesforce 도메인 외부에서 확장 프로그램 팝업을 클릭하면 Salesforce 로그인 페이지로 자동으로 이동합니다.",
+		"description": "[$opt_automatic_open_login]에 대한 [settings-help]"
+	},
+	"help_automatic_open_setup": {
+		"message": "Salesforce 도메인 내에서 확장 프로그램 팝업을 클릭했지만 설정 페이지에 없는 경우 Salesforce 설정 페이지로 자동으로 이동합니다.",
+		"description": "[$opt_automatic_open_setup]에 대한 [settings-help]"
+	},
+	"help_keep_sort": {
+		"message": "활성화하면 Tab이 라벨, URL 또는 Org에 따라 정렬된 상태로 유지됩니다. 어떤 것을 선택하든 상관없이요.",
+		"description": "[$opt_keep_sort]에 대한 [settings-help]"
+	},
+	"help_keep_tabs_left": {
+		"message": "설정에서 저장된 Tab을 표준 탐색 메뉴(홈/개체 관리자) 뒤에 배치하는 대신 앞에 고정합니다.",
+		"description": "[$opt_keep_tabs_left]에 대한 [settings-help]"
+	},
+	"help_link_new_browser": {
+		"message": "활성화하면 저장된 모든 Tab이 새 Tab에서 관련 페이지를 엽니다.",
+		"description": "[$opt_link_new_browser]에 대한 [settings-help]"
+	},
+	"help_no_release_notes": {
+		"message": "확장 프로그램 업데이트 후 릴리스 노트 알림이 자동으로 표시되지 않도록 합니다.",
+		"description": "[$opt_no_release_notes]에 대한 [settings-help]"
+	},
+	"help_no_update_notification": {
+		"message": "주기적인 업데이트 알림 팝업을 비활성화하여 확장 프로그램 UI를 깔끔하게 유지합니다(브라우저 설정에서 확장 프로그램의 자동 업데이트를 비활성화한 경우).",
+		"description": "[$opt_no_update_notification]에 대한 [settings-help]"
+	},
+	"help_open_login_same_tab": {
+		"message": "Salesforce 도메인 외부에서 확장 프로그램 팝업을 클릭하면 현재 브라우저 Tab에서 로그인 페이지가 열립니다.",
+		"description": "[$opt_open_login_same_tab]에 대한 [settings-help]"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Salesforce 도메인 내에서 확장 프로그램 팝업을 클릭했지만 설정 페이지에 없는 경우 현재 브라우저 Tab에서 Salesforce 설정 페이지가 열립니다.",
+		"description": "[$opt_open_setup_same_tab]에 대한 [settings-help]"
+	},
+	"help_pick_language": {
+		"message": "확장 프로그램에만 UI 언어를 설정합니다. 번역되지 않은 내용이 있으면 대신 영어 버전이 사용됩니다.",
+		"description": "[$opt_pick_language]에 대한 [settings-help]"
+	},
+	"help_prevent_analytics": {
+		"message": "기본 텔레메트리 수집을 비활성화합니다. 확장 프로그램이 익명의 사용량 측정항목에 표시되지 않습니다.",
+		"description": "[$opt_prevent_analytics]에 대한 [settings-help]"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Lightning 탐색 API를 우회하고 전체 페이지 다시 로드를 통해 링크를 엽니다. 일부 Org 설정에서는 더 빠를 수 있습니다.",
+		"description": "[$opt_prevent_lightning_navigation]에 대한 [settings-help]"
+	},
+	"help_skip_link_detection": {
+		"message": "URL 조각이 Salesforce 레코드/개체 ID 형식과 일치하는지 확인하는 확장 프로그램 검사(저장된 Tab을 Org Tab으로 자동 설정하는 데 사용됨)를 비활성화합니다.",
+		"description": "[$opt_skip_link_detection]에 대한 [settings-help]"
+	},
+	"help_tip_click_link": {
+		"message": "클릭하면 이 설정에 대한 문서로 리디렉션됩니다!",
+		"description": "[설정-도움말] 사용자가 특정 설정에 대해 더 자세히 읽을 수 있도록 하는 행동 유도 문구"
+	},
+	"import": {
+		"message": "가져오기",
+		"description": "[팝업] 가져오기 버튼"
+	},
+	"import_duplicate_description_0": {
+		"message": "중복된 Tab은 무시됩니다.",
+		"description": "[가져오기] 가져오기 프로세스가 수행하는 작업에 대한 설명 파트 0"
+	},
+	"import_duplicate_description_1": {
+		"message": "두 Tab의 URL이 같으면 중복으로 간주합니다.",
+		"description": "[가져오기] 가져오기 프로세스가 수행하는 작업에 대한 설명 파트 1"
+	},
+	"import_invalid_file": {
+		"message": "잘못된 파일 형식입니다.\nJSON 파일만 지원됩니다.",
+		"description": "[오류] 가져오기에 사용된 파일이 JSON이 아닙니다."
+	},
+	"import_successful": {
+		"message": "성공적으로 가져왔습니다",
+		"description": "[가져오기] 가져오기가 완료되었습니다. 이 후 가져온 레코드 수가 표시됩니다."
+	},
+	"import_tabs": {
+		"message": "Tabs 가져오기",
+		"description": "[모달_제목] 가져오기 프로세스용"
+	},
+	"import_title": {
+		"message": "JSON 파일에서 $import_tabs",
+		"description": "[팝업] 가져오기 버튼의 제목"
+	},
+	"insert_another": {
+		"message": "다른 것 삽입",
+		"description": "[오류_다른_조직_열기_모달] 사용자가 모달에 동일한 조직을 삽입할 때의 메시지"
+	},
+	"insert_another_org": {
+		"message": "삽입된 조직은 현재 조직입니다!\n다른 조직을 삽입하십시오.",
+		"description": "[오류_다른_조직_열기_모달] 사용자가 모달에 동일한 조직을 삽입할 때의 메시지"
+	},
+	"insert_valid_org": {
+		"message": "유효한 조직을 삽입하십시오!",
+		"description": "[오류_다른_조직_열기_모달] 사용자가 모달에 잘못된 URL을 삽입할 때의 메시지"
+	},
+	"italic": {
+		"message": "기울임꼴",
+		"description": "기울임 텍스트용 글꼴 스타일 옵션"
+	},
+	"lightning_navigation": {
+		"message": "Lightning Navigation",
+		"description": "Salesforce의 맞춤 탐색 기술"
+	},
+	"login_to_salesforce": {
+		"message": "Salesforce에 로그인",
+		"description": "[Salesforce설정아님] 사용자를 Salesforce 로그인 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+	},
+	"mycustomorg": {
+		"message": "내사용자지정조직",
+		"description": "Tab 업데이트 모달의 플레이스홀더"
+	},
+	"no_manifest_github": {
+		"message": "매니페스트에 유효하지 않거나 누락된 GitHub homepage_url",
+		"description": "매니페스트의 homepage_url 키는 GitHub 링크를 사용하지 않습니다"
+	},
+	"no_match": {
+		"message": "어떤 작업과도 일치하지 않았습니다.",
+		"description": "[오류] Salesforce에서 스위치가 요청된 작업과 일치할 수 없을 때"
+	},
+	"nss_invalid_url": {
+		"message": "유효하지 않은 URL이 감지되었습니다.",
+		"description": "[Salesforce 설정 아님] 유효하지 않은 URL"
+	},
+	"nss_not_setup_page": {
+		"message": "이 페이지는 $salesforce_lightning 설정 페이지가 아닙니다.",
+		"description": "[notSalesforceSetup] 사용자가 Salesforce 페이지에 없습니다."
+	},
+	"open_here": {
+		"message": "이 Tab에서 열기.",
+		"description": "[open-other-org-modal] 사용자가 동일한 브라우저 Tab에서 열 수 있도록 하는 라디오 버튼"
+	},
+	"open_new_tab": {
+		"message": "새 Tab에서 열기.",
+		"description": "[open-other-org-modal] 사용자가 새 브라우저 Tab에서 열 수 있도록 하는 라디오 버튼."
+	},
+	"open_settings": {
+		"message": "확장 프로그램 설정 열기",
+		"description": "[팝업] 설정 페이지로 리디렉션하는 버튼"
+	},
+	"open_setup": {
+		"message": "설정 열기",
+		"description": "[Salesforce설정아님] 사용자를 Salesforce 설정 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "새 Tab을 Org Tab으로 추가합니다.",
+		"description": "[settings] 사용자가 모든 새 Tab을 Org별로 추가하도록 허용"
+	},
+	"opt_add_tabs_front": {
+		"message": "새 Tab을 맨 앞에 추가합니다.",
+		"description": "[settings] 사용자가 모든 새 Tab을 맨 앞에 추가하도록 허용"
+	},
+	"opt_automatic_open_login": {
+		"message": "Salesforce 페이지에 있지 않을 때 팝업을 클릭하면 $salesforce_login 페이지를 자동으로 엽니다.",
+		"description": "[설정] 사용자가 임의의 웹사이트에서 팝업을 열 때"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Salesforce 페이지에 있을 때 팝업을 클릭하면 $salesforce_setup 페이지를 자동으로 엽니다.",
+		"description": "[설정] 사용자가 Salesforce 웹사이트에서 팝업을 열 때"
+	},
+	"opt_confirm_save": {
+		"message": "설정이 저장되었습니다!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (기본 및 대체)",
+		"description": "확장 프로그램의 기본 언어 옵션"
+	},
+	"opt_keep_sort": {
+		"message": "Tab을 정렬된 상태로 유지합니다.",
+		"description": "[setting] 사용자가 Tab을 키 중 하나로 정렬된 상태로 유지하도록 허용"
+	},
+	"opt_keep_tabs_left": {
+		"message": "홈 및 개체 관리자 왼쪽에 즐겨찾기 Tabs 유지.",
+		"description": "탐색 모음 왼쪽에 즐겨찾기 Tabs 고정 토글"
+	},
+	"opt_link_new_browser": {
+		"message": "링크를 항상 새 브라우저 탭에서 열기.",
+		"description": "[설정] 즐겨찾기 Tab을 클릭할 때 새 탭에서 열기"
+	},
+	"opt_no_release_notes": {
+		"message": "업데이트 릴리즈 노트 표시 안 함.",
+		"description": "[설정] 사용자가 업데이트 후 확장 프로그램이 릴리즈 노트를 표시하지 못하도록 함"
+	},
+	"opt_no_update_notification": {
+		"message": "사용 가능한 업데이트에 대해 경고하지 마십시오.",
+		"description": "[설정] 사용자가 확장 프로그램이 새 릴리스를 검색하지 못하도록 허용"
+	},
+	"opt_open_login_same_tab": {
+		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_login 페이지를 엽니다.",
+		"description": "[설정]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "팝업을 클릭할 때 항상 동일한 Tab에서 $salesforce_setup 페이지를 엽니다.",
+		"description": "[설정]"
+	},
+	"opt_pick_language": {
+		"message": "확장 프로그램 언어 선택",
+		"description": "[설정] 사용자가 선호하는 언어를 선택하도록 안내하는 레이블"
+	},
+	"opt_pick_sort": {
+		"message": "Tab을 정렬할 필드를 선택합니다.",
+		"description": "[setting] 이제 사용자가 Tab을 정렬된 상태로 유지할 키를 선택할 수 있습니다."
+	},
+	"opt_prevent_analytics": {
+		"message": "Simple Analytics 사용 방지 (사용자 수 집계에 포함되지 않음).",
+		"description": "[설정] 사용자가 익명 분석 전송을 방지할 수 있음"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Lightning 탐색 사용을 방지합니다(선택 취소하면 더 빠르게 로드됨).",
+		"description": "[setting] 기능에 대한 설명과 함께 Lightning 탐색을 허용하지 않음"
+	},
+	"opt_same_tab_popup": {
+		"message": "팝업 클릭 시 동일한 탭에서 페이지 열기.",
+		"description": "[설정] 새 브라우저 탭 열기 방지"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Salesforce 언어 따르기 (Salesforce 쿠키 읽기)",
+		"description": "Salesforce 언어 설정을 사용하는 옵션. 이 옵션을 사용하려면 사용자는 확장 프로그램이 Salesforce 쿠키를 읽도록 허용해야 합니다."
+	},
+	"opt_skip_link_detection": {
+		"message": "Salesforce ID 자동 확인 건너뛰기.",
+		"description": "[설정] Tab을 즐겨찾기에 추가할 때 링크의 ID 확인 방지"
+	},
+	"or_drop": {
+		"message": "또는 $drop",
+		"description": "[가져오기] 사용자가 마우스로 파일을 이동하고 놓을 수 있도록 허용"
+	},
+	"org_link": {
+		"message": "조직 링크",
+		"description": "[입력_레이블]"
+	},
+	"other_org_info": {
+		"message": "다른 조직 정보",
+		"description": "[모달_제목]"
+	},
+	"other_org_placeholder": {
+		"message": "다른 조직",
+		"description": "[입력_플레이스홀더]"
+	},
+	"overwrite_tabs": {
+		"message": "저장된 Tabs 덮어쓰기.",
+		"description": "[레이블] 가져오기 프로세스 중 모든 저장된 Tabs 삭제"
+	},
+	"preserve_org_tabs": {
+		"message": "다른 조직의 Tabs 보존.",
+		"description": "[레이블] 가져오기 프로세스 중 모든 조직별 Tabs 유지"
+	},
+	"remove_tab": {
+		"message": "Tab 제거",
+		"description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+	},
+	"req_downloads_open_popup": {
+		"message": "브라우저의 확장 프로그램 메뉴에서 확장 프로그램 팝업을 열어주세요.",
+		"description": "[알림] 계속하려면 확장 프로그램 팝업을 클릭하도록 사용자에게 요청"
+	},
+	"req_downloads_perm_header": {
+		"message": "요청된 내보내기를 시작하려면\n다운로드 권한을 활성화하세요.",
+		"description": "[권한_요청] 다운로드 권한 활성화를 위한 행동 촉구"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "이 작업은 한 번만 요청됩니다.",
+		"description": "[권한_요청] 다운로드 권한 활성화를 위한 설명"
+	},
+	"req_permissions_dont_ask": {
+		"message": "다시 묻지 않음.",
+		"description": "[권한_요청] 사용자가 영구적으로 권한을 허용하고 싶지 않을 때의 레이블"
+	},
+	"req_permissions_header": {
+		"message": "$salesforce_setup 페이지에 자동으로 액세스할 수 있도록 허용해 주십시오.",
+		"description": "[req_permission] 권한 요청 페이지의 헤더"
+	},
+	"req_permissions_paragraph": {
+		"message": "원하는 경우 $salesforce_setup 페이지로 이동하자마자\n즐겨찾는 Tabs가 나타나도록 할 수 있습니다.\n매번 이 확장 프로그램을 클릭할 필요 없이 말입니다.",
+		"description": "[req_permission] 권한을 요청하는 이유를 설명하는 텍스트"
+	},
+	"required": {
+		"message": "필수",
+		"description": "[입력] 입력 필드를 필수로 표시"
+	},
+	"required_info": {
+		"message": "= 필수 정보",
+		"description": "[모달] 일부 정보가 필수임을 사용자에게 알림"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[Salesforce설정아님] Salesforce Lightning 플랫폼"
+	},
+	"salesforce_login": {
+		"message": "Salesforce Login",
+		"description": "Salesforce 로그인 페이지 (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Salesforce Setup",
+		"description": "모든 Salesforce 설정 페이지 (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "저장",
+		"description": "변경사항을 적용하고 메모리에 저장합니다"
+	},
+	"save_tab": {
+		"message": "Tab으로 저장",
+		"description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+	},
+	"send_tip": {
+		"message": "팁을 보내주세요 ❤️",
+		"description": "[popup] 팁 전송을 요청하는 svg의 제목"
+	},
+	"set_gen_preview": {
+		"message": "Tab 미리보기",
+		"description": "일반 Tab 모양을 미리보는 레이블"
+	},
+	"set_gen_styler": {
+		"message": "Tab 스타일러",
+		"description": "일반 Tabs 스타일 구성 레이블"
+	},
+	"set_general_settings": {
+		"message": "General Settings",
+		"description": "일반 구성 옵션 섹션 헤더"
+	},
+	"set_move_available": {
+		"message": "사용 가능으로 이동",
+		"description": "선택한 항목을 사용 가능으로 되돌리는 버튼 제목"
+	},
+	"set_move_chosen": {
+		"message": "선택됨으로 이동",
+		"description": "선택한 항목을 선택됨으로 이동하는 버튼 제목"
+	},
+	"set_org_preview": {
+		"message": "Org 미리보기",
+		"description": "조직별 Tab 모양을 미리보는 레이블"
+	},
+	"set_org_styler": {
+		"message": "Org 스타일러",
+		"description": "조직별 Tabs 스타일 구성 레이블"
+	},
+	"set_tab_generic_background_active_label": {
+		"message": "활성 일반 Tab의 배경 색상을 삽입하십시오.",
+		"description": "활성 일반 Tab의 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_background_label": {
+		"message": "일반 Tab의 배경 색상을 삽입하십시오.",
+		"description": "일반 Tab의 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_border_color_active_label": {
+		"message": "활성 일반 Tab의 테두리 색상을 삽입하십시오.",
+		"description": "활성 일반 Tab의 테두리 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_border_color_label": {
+		"message": "일반 Tab의 테두리 색상을 삽입하십시오.",
+		"description": "일반 Tab의 테두리 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_color_active_label": {
+		"message": "활성 일반 Tab의 텍스트 색상을 삽입하십시오.",
+		"description": "활성 일반 Tab의 텍스트 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_color_label": {
+		"message": "일반 Tab의 텍스트 색상을 삽입하십시오.",
+		"description": "일반 Tab의 텍스트 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_decoration_active_label": {
+		"message": "활성 일반 Tab의 장식 스타일을 하나 이상 선택하십시오.",
+		"description": "활성 일반 Tab의 장식 스타일을 선택하는 메시지"
+	},
+	"set_tab_generic_decoration_label": {
+		"message": "일반 Tab의 장식 스타일을 하나 이상 선택하십시오.",
+		"description": "일반 Tab의 장식 스타일을 선택하는 메시지"
+	},
+	"set_tab_generic_hover_background_active_label": {
+		"message": "활성 일반 Tab의 호버 배경 색상을 삽입하십시오.",
+		"description": "활성 일반 Tab의 호버 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_hover_background_label": {
+		"message": "일반 Tab의 호버 배경 색상을 삽입하십시오.",
+		"description": "일반 Tab의 호버 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_shadow_active_label": {
+		"message": "활성 일반 Tab의 그림자 색상을 삽입하십시오.",
+		"description": "활성 일반 Tab의 그림자 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_shadow_label": {
+		"message": "일반 Tab의 그림자 색상을 삽입하십시오.",
+		"description": "일반 Tab의 그림자 색상을 설정하는 라벨"
+	},
+	"set_tab_generic_top_active_label": {
+		"message": "활성 일반 Tab 상단의 막대 색상을 삽입하십시오.",
+		"description": "활성 일반 Tab 상단 막대 색상을 설정하는 라벨"
+	},
+	"set_tab_org_background_active_label": {
+		"message": "활성 org Tab의 배경 색상을 삽입하십시오.",
+		"description": "활성 org Tab의 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_org_background_label": {
+		"message": "org Tab의 배경 색상을 삽입하십시오.",
+		"description": "org 특정 Tab의 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_org_border_color_active_label": {
+		"message": "활성 org Tab의 테두리 색상을 삽입하십시오.",
+		"description": "활성 org 특정 Tab의 테두리 색상을 설정하는 라벨"
+	},
+	"set_tab_org_border_color_label": {
+		"message": "org Tab의 테두리 색상을 삽입하십시오.",
+		"description": "org Tab의 테두리 색상을 설정하는 라벨"
+	},
+	"set_tab_org_color_active_label": {
+		"message": "활성 org Tab의 텍스트 색상을 삽입하십시오.",
+		"description": "활성 org Tab의 텍스트 색상을 설정하는 라벨"
+	},
+	"set_tab_org_color_label": {
+		"message": "org Tab의 텍스트 색상을 삽입하십시오.",
+		"description": "org 특정 Tab의 텍스트 색상을 설정하는 라벨"
+	},
+	"set_tab_org_decoration_active_label": {
+		"message": "활성 org Tab의 장식 스타일을 하나 이상 선택하십시오.",
+		"description": "활성 org 특정 Tab의 장식 스타일을 선택하는 메시지"
+	},
+	"set_tab_org_decoration_label": {
+		"message": "org Tab의 장식 스타일을 하나 이상 선택하십시오.",
+		"description": "org Tab의 장식 스타일을 선택하는 메시지"
+	},
+	"set_tab_org_hover_background_active_label": {
+		"message": "활성 org Tab의 호버 배경 색상을 삽입하십시오.",
+		"description": "활성 org Tab의 호버 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_org_hover_background_label": {
+		"message": "org Tab의 호버 배경 색상을 삽입하십시오.",
+		"description": "org 특정 Tab의 호버 배경 색상을 설정하는 라벨"
+	},
+	"set_tab_org_shadow_active_label": {
+		"message": "활성 org Tab의 그림자 색상을 삽입하십시오.",
+		"description": "활성 org 특정 Tab의 그림자 색상을 설정하는 라벨"
+	},
+	"set_tab_org_shadow_label": {
+		"message": "org Tab의 그림자 색상을 삽입하십시오.",
+		"description": "org Tab의 그림자 색상을 설정하는 라벨"
+	},
+	"set_tab_org_top_active_label": {
+		"message": "활성 org Tab 상단의 막대 색상을 삽입하십시오.",
+		"description": "활성 org Tab 상단 막대 색상을 설정하는 라벨"
+	},
+	"set_toggle_preview": {
+		"message": "활성 상태 전환하려면 클릭하세요.",
+		"description": "활성 상태 전환 컨트롤 툴팁 텍스트"
+	},
+	"settings": {
+		"message": "설정",
+		"description": "설정 메뉴 레이블"
+	},
+	"setup_page": {
+		"message": "설정 페이지",
+		"description": "[Salesforce설정아님] Salesforce 설정을 수정하는 데 사용되는 페이지"
+	},
+	"skip": {
+		"message": "건너뛰기",
+		"description": "[권한_요청] 권한을 허용하지 않는 버튼"
+	},
+	"successfully_imported": {
+		"message": "성공적으로 가져왔습니다",
+		"description": "[토스트] 사용자가 외부 파일에서 Tabs를 추가했습니다."
+	},
+	"tab_explain": {
+		"message": "각 항목에는 'label'과 'url'이 문자열로 있어야 합니다. 또한 모든 항목에는 'org'가 문자열로 있을 수 있습니다.",
+		"description": "[오류] Tab을 어떻게 구성해야 하는지 설명합니다."
+	},
+	"tab_information": {
+		"message": "Tab 정보",
+		"description": "Tab 업데이트 모달 제목"
+	},
+	"tab_label": {
+		"message": "Tab 레이블",
+		"description": "Tab의 Label 속성, 이름"
+	},
+	"tab_org": {
+		"message": "Tab 조직",
+		"description": "Tab의 Org 속성, 단일 Salesforce 조직용인 경우"
+	},
+	"tab_url": {
+		"message": "Tab URL",
+		"description": "Tab의 URL 속성, 가리키는 위치"
+	},
+	"table_delete": {
+		"message": "Tab 삭제",
+		"description": "[팝업] 삭제 버튼이 있는 열의 보조 텍스트"
+	},
+	"table_org": {
+		"message": "조직 Tab 여부",
+		"description": "[팝업] 조직 확인란이 있는 열의 보조 텍스트"
+	},
+	"table_row_label": {
+		"message": "이 URL의 레이블을 입력하십시오.",
+		"description": "[팝업] Tab 이름이 있는 입력 필드"
+	},
+	"table_row_org": {
+		"message": "이 Tab이 이 조직에만 사용 가능하게 하려면 클릭하십시오.",
+		"description": "[팝업] Tab을 조직별로 토글하는 확인란"
+	},
+	"table_row_org_name": {
+		"message": "이 Tab을 사용할 수 있는 조직.",
+		"description": "[팝업] 조직 이름이 있는 입력 필드"
+	},
+	"table_row_url": {
+		"message": "리디렉션할 하위 URL을 입력하십시오.",
+		"description": "[팝업] Tab URL이 있는 입력 필드"
+	},
+	"tabs": {
+		"message": "Tabs",
+		"description": "사용자의 즐겨찾는 링크"
+	},
+	"tabs_saved": {
+		"message": "Tabs가 저장되었습니다.",
+		"description": "[토스트] Tabs가 성공적으로 저장되었습니다."
+	},
+	"theme_dark": {
+		"message": "테마를 어둡게 변경",
+		"description": "[팝업] 테마 전환을 위한 달 아이콘 제목"
+	},
+	"theme_light": {
+		"message": "테마를 밝게 변경",
+		"description": "[팝업] 테마 전환을 위한 태양 아이콘 제목"
+	},
+	"underline": {
+		"message": "밑줄",
+		"description": "Tab 텍스트 밑줄 스타일 옵션"
+	},
+	"underline_wavy": {
+		"message": "물결 밑줄",
+		"description": "Tab 텍스트에 물결 밑줄 적용 스타일 옵션"
+	},
+	"update_available": {
+		"message": "업데이트 사용 가능",
+		"description": "확장 프로그램에 대한 새 업데이트를 사용할 수 있습니다"
+	},
+	"upload": {
+		"message": "업로드",
+		"description": "[가져오기] 사용자가 파일을 탐색하고 올바른 파일을 선택하도록 허용"
+	},
+	"users": {
+		"message": "사용자",
+		"description": "ManageUsers/home 관련 페이지 이름"
+	},
+	"where_to": {
+		"message": "어디로?",
+		"description": "[다른_조직_열기_모달] 모달의 대체 제목"
+	},
+	"write_review": {
+		"message": "리뷰를 작성해 주세요!",
+		"description": "[popup] 리뷰 작성을 요청하는 svg의 제목"
+	}
+}

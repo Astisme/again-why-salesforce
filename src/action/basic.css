@@ -1,0 +1,155 @@
+*, :before, :after {
+	box-sizing: border-box;
+	background-color: transparent;
+}
+
+html {
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	line-height: 1.5;
+}
+
+body {
+	padding: 0 !important;
+	margin: 0;
+	font-size: 0.8125rem;
+	background-color: var(--background-color);
+}
+
+header {
+	padding-top: 0.75rem;
+	padding-right: 1rem;
+	padding-bottom: 0;
+	padding-left: 1rem;
+	margin: 0 0 0.75rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	flex: 1;
+	min-width: 0;
+
+	& > object {
+		height: 2.5rem;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.button,
+button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	border: none;
+	border-radius: 0.25rem;
+	text-decoration: none;
+	user-select: none;
+	cursor: pointer;
+	text-transform: none;
+	overflow: visible;
+	font: inherit;
+	text-align: center;
+	justify-content: center;
+	margin-left: 0.25rem;
+	width: 4rem;
+	min-width: fit-content;
+	min-height: 2.3rem;
+	color: var(--color);
+	background-color: var(--button-background-color);
+
+	&:hover {
+		background-color: var(--button-background-color-hover);
+	}
+}
+
+.success {
+	color: var(--color) !important;
+	background-color: var(--success);
+
+	&:hover {
+		background-color: var(--success-hover);
+	}
+}
+
+.error {
+	background-color: var(--error);
+
+	&:hover {
+		background-color: var(--error-hover);
+	}
+}
+
+.highlight {
+	color: var(--white) !important;
+	background-color: var(--highlight);
+
+	&:hover {
+		background-color: var(--highlight-hover);
+	}
+}
+
+:disabled {
+	cursor: not-allowed !important;
+	background-color: var(--shade-hover);
+
+	&:hover {
+		background-color: var(--shade-hover);
+	}
+}
+
+html[data-theme="dark"] :is(.button, button) {
+	color: var(--background-color);
+}
+
+.slds-assistive-text {
+	position: absolute !important;
+	margin: -1px !important;
+	border: 0 !important;
+	padding: 0 !important;
+	width: 1px !important;
+	height: 1px !important;
+	overflow: hidden !important;
+	clip: rect(0 0 0 0) !important;
+	text-transform: none !important;
+	white-space: nowrap !important;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.invisible {
+	opacity: 0;
+}
+
+.visibility-transition {
+	transition-property: opacity;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+}
+
+input {
+	color: var(--color);
+	background-color: var(--background-color);
+}
+
+iframe {
+	transition-property: background-color;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+	border: none;
+	height: 2.1rem !important;
+}

@@ -14,7 +14,7 @@ function sortObjectKeys<T>(obj: T): T {
 		) as unknown as T;
 	} else if (obj !== null && typeof obj === "object") {
 		const entries = Object.keys(obj)
-			.sort()
+			.sort((a, b) => a.localeCompare(b))
 			.map((key) => {
 				const val = (obj as any)[key];
 				return [
@@ -52,7 +52,7 @@ async function* findLocaleMessageFiles(
  * @returns {Promise<void>}
  */
 async function main() {
-	const baseDir = "_locales";
+	const baseDir = "src/_locales";
 	try {
 		let failedOnce = false;
 		for await (const filePath of findLocaleMessageFiles(baseDir)) {
@@ -79,7 +79,4 @@ async function main() {
 	}
 }
 
-main().catch((err) => {
-	console.error(`Unexpected error: ${err}`);
-	Deno.exit(1);
-});
+await main();

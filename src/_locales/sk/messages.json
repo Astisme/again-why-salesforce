@@ -1,0 +1,1046 @@
+{
+	"allow": {
+		"message": "Povoliť",
+		"description": "[req_permission] tlačidlo na povolenie oprávnení"
+	},
+	"ascending": {
+		"message": "Vzostupne (A-Z)",
+		"description": ""
+	},
+	"available": {
+		"message": "Dostupné",
+		"description": "Hlavička sekcie pre položky, ktoré možno pridať"
+	},
+	"bold": {
+		"message": "Tučné",
+		"description": "Možnosť štýlu písma pre tučný text"
+	},
+	"cancel": {
+		"message": "Zrušiť",
+		"description": "názov alebo text pre tlačidlá, ktoré zabraňujú vykonaniu aktuálnej akcie"
+	},
+	"cancel_close": {
+		"message": "Zrušiť a zavrieť",
+		"description": "názov alebo text pre tlačidlo zavretia modálnych okien"
+	},
+	"chosen": {
+		"message": "Vybrané",
+		"description": "Hlavička sekcie pre položky, ktoré boli vybrané"
+	},
+	"cmd_export_all": {
+		"message": "Zobraziť modal na export všetkých uložených Tabs",
+		"description": "[popis príkazu] používateľ chce exportovať všetky Tabs"
+	},
+	"cmd_import": {
+		"message": "Zobraziť modal na import nových Tabs",
+		"description": "[popis príkazu] používateľ chce importovať nové Tabs"
+	},
+	"cmd_open_other_org": {
+		"message": "Zobraziť modal na otvorenie aktuálnej stránky v inej Org",
+		"description": "[popis príkazu] používateľ chce otvoriť aktuálnu stránku v inej Org"
+	},
+	"cmd_remove_tab": {
+		"message": "Odstrániť aktuálnu stránku zo zoznamu Tabs (ak je uložená)",
+		"description": "[popis príkazu] používateľ chce odstrániť aktuálnu stránku"
+	},
+	"cmd_save_as_tab": {
+		"message": "Uložiť aktuálnu stránku do zoznamu Tabs (ak nie je uložená)",
+		"description": "[popis príkazu] používateľ chce uložiť aktuálnu stránku"
+	},
+	"cmd_toggle_org": {
+		"message": "Prepnúť hodnotu Org aktuálnej stránky (ak je uložená)",
+		"description": "[popis príkazu] používateľ chce prepnúť Org pre aktuálnu stránku"
+	},
+	"cmd_update_tab": {
+		"message": "Zobraziť modal na aktualizáciu aktuálnej stránky (ak je uložená)",
+		"description": "[popis príkazu] používateľ chce aktualizovať aktuálnu stránku"
+	},
+	"confirm_another_org": {
+		"message": "Potvrďte otvorenie tohto odkazu.",
+		"description": "[open-other-org-modal] žiadosť o potvrdenie od používateľa na otvorenie vytvoreného odkazu."
+	},
+	"confirm_update_extension": {
+		"message": "Nová verzia $extension_label je teraz k dispozícii!",
+		"description": "od poslucháča bola prijatá neznáma správa"
+	},
+	"continue": {
+		"message": "Pokračovať",
+		"description": "text pre tlačidlá, ktoré umožňujú vykonanie aktuálnej akcie"
+	},
+	"cxm_empty_generic_tabs": {
+		"message": "😊 Všetky všeobecné Tab",
+		"description": "[kontextová ponuka]"
+	},
+	"cxm_empty_tabs": {
+		"message": "😨 Odstrániť všetky Tab",
+		"description": "[kontextové menu]"
+	},
+	"cxm_empty_visible_tabs": {
+		"message": "👀 Všetky viditeľné Tab",
+		"description": "[kontextová ponuka]"
+	},
+	"cxm_export_tabs": {
+		"message": "⬇️ Exportovať Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_import_tabs": {
+		"message": "🆙 $import_tabs",
+		"description": "[kontextové-menu]"
+	},
+	"cxm_move": {
+		"message": "🧭 Presunúť Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_move_first": {
+		"message": "↩️ Nastaviť ako prvý",
+		"description": "[context-menu]"
+	},
+	"cxm_move_last": {
+		"message": "↪️ Nastaviť ako posledný",
+		"description": "[context-menu]"
+	},
+	"cxm_move_left": {
+		"message": "👈 Presunúť doľava",
+		"description": "[context-menu]"
+	},
+	"cxm_move_right": {
+		"message": "👉 Presunúť doprava",
+		"description": "[context-menu]"
+	},
+	"cxm_open_other_org": {
+		"message": "🔗 Otvoriť v inej Organizácii",
+		"description": "[context-menu]"
+	},
+	"cxm_page_remove_tab": {
+		"message": "👋 $remove_tab",
+		"description": "[kontextové-menu]"
+	},
+	"cxm_page_save_tab": {
+		"message": "💾 $save_tab",
+		"description": "[kontextové-menu]"
+	},
+	"cxm_remove": {
+		"message": "💥 Odstrániť Tab(y)",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_left_tabs": {
+		"message": "🔥 Tab-y naľavo",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_other_tabs": {
+		"message": "↔️ Ostatné Tab-y",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_right_tabs": {
+		"message": "🌊 Tab-y napravo",
+		"description": "[context-menu]"
+	},
+	"cxm_remove_tab": {
+		"message": "1️⃣ Tento Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_reset_default": {
+		"message": "🧐 Obnoviť predvolené Tab",
+		"description": "[kontextová ponuka]"
+	},
+	"cxm_settings": {
+		"message": "⚙️ $settings",
+		"description": "Označenie pre ponuku nastavení"
+	},
+	"cxm_sort": {
+		"message": "🎯 Zoradiť Tab-y",
+		"description": "kontextové menu, ktoré umožňuje používateľom automaticky zoradiť ich Tab-y (hlavné menu)"
+	},
+	"cxm_sort_label": {
+		"message": "🥱 podľa štítku",
+		"description": "kontextové menu, ktoré umožňuje používateľom zoradiť ich Tab-y podľa štítku"
+	},
+	"cxm_sort_org": {
+		"message": "👽 podľa Org",
+		"description": "kontextové menu, ktoré umožňuje používateľom zoradiť ich Tab-y podľa org"
+	},
+	"cxm_sort_url": {
+		"message": "🤖 podľa URL",
+		"description": "kontextové menu, ktoré umožňuje používateľom zoradiť ich Tab-y podľa URL"
+	},
+	"cxm_update": {
+		"message": "✏️ Aktualizovať Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "📌 Zmeniť Organizáciu",
+		"description": "[context-menu]"
+	},
+	"cxm_update_tab": {
+		"message": "🧹 Ďalšie aktualizácie",
+		"description": "[context-menu]"
+	},
+	"delete": {
+		"message": "Vymazať",
+		"description": "[popup] vymazať riadok"
+	},
+	"delete_all": {
+		"message": "$delete všetky Tabs",
+		"description": "[vyskakovacie-okno] názov na koši na vyprázdnenie všetkých Tabs"
+	},
+	"descending": {
+		"message": "Zostupne (Z-A)",
+		"description": ""
+	},
+	"drop": {
+		"message": "Pusťte",
+		"description": "[import] umožniť používateľovi pustiť súbory na určenú oblasť"
+	},
+	"enable": {
+		"message": "Povoliť",
+		"description": "[požiadať_o_povolenie] tlačidlo na povolenie oprávnení"
+	},
+	"error_adding_tab": {
+		"message": "Chyba pri pridávaní Tab.",
+		"description": "[chyba] Všeobecná chyba použitá pri pridávaní Tab"
+	},
+	"error_check_update": {
+		"message": "Chyba pri kontrole aktualizácií",
+		"description": "[chyba] všeobecná chyba pri kontrole aktualizácií rozšírenia"
+	},
+	"error_close_other_modal": {
+		"message": "Najprv zatvorte iné modal okno!",
+		"description": "[toast] Používateľ sa pokúsil otvoriť viac ako jedno modal okno"
+	},
+	"error_cxm_check": {
+		"message": "Chyba pri kontrole položiek menu",
+		"description": "[error] Položky kontextového menu neboli nájdené"
+	},
+	"error_cxm_create": {
+		"message": "Chyba pri vytváraní položiek menu",
+		"description": "[error] Položky kontextového menu sa nedali inicializovať"
+	},
+	"error_cxm_remove": {
+		"message": "Chyba pri odstraňovaní položiek menu",
+		"description": "[error] Položky kontextového menu sa nedali odstrániť"
+	},
+	"error_duplicate_tab": {
+		"message": "Tento Tab už existuje",
+		"description": "[error] Tab je duplikát"
+	},
+	"error_expand_url": {
+		"message": "Nemožno rozšíriť prázdne URL!",
+		"description": "[error] Nebolo zadané URL na rozšírenie"
+	},
+	"error_expand_url_no_base": {
+		"message": "Nemožno rozšíriť URL bez hostiteľa!",
+		"description": "[error] Nebola zadaná základná URL na rozšírenie"
+	},
+	"error_extract_empty_url": {
+		"message": "Nemožno získať názov organizácie z prázdneho URL!",
+		"description": "[error] Nebolo zadané URL, z ktorého by sa mal získať názov organizácie"
+	},
+	"error_failed_sync": {
+		"message": "Nepodarilo sa synchronizovať.",
+		"description": "[chyba] Všeobecná chyba, keď sa Tabs nepodarilo synchronizovať od používateľa"
+	},
+	"error_failed_to_fetch": {
+		"message": "Nepodarilo sa načítať externé zdroje",
+		"description": "[chyba] Volanie na externú webovú stránku nebolo úspešné"
+	},
+	"error_get_with_no_org": {
+		"message": "Tab-y nemožno získať, ak nie je zadaná organizácia.",
+		"description": "[error] Pokus o vyhľadanie Tab-ov bez odoslania informácií o organizácii"
+	},
+	"error_import": {
+		"message": "Chyba pri importe:\n",
+		"description": "[error] Nastala chyba počas importného procesu"
+	},
+	"error_invalid_key": {
+		"message": "Parameter kľúča odovzdaný funkcii nie je platný",
+		"description": "[chyba] vývojár sa pokúsil volať funkciu s neplatným parametrom"
+	},
+	"error_invalid_request": {
+		"message": "Neplatná požiadavka.",
+		"description": "[chyba] Všeobecná chyba po prijatí nesprávne formátovanej správy"
+	},
+	"error_invalid_tab": {
+		"message": "Neplatný Tab",
+		"description": "[error] Tab nie je platný"
+	},
+	"error_link_with_id": {
+		"message": "Táto stránka nemôže existovať v inej Organizácii, pretože obsahuje Id!",
+		"description": "[open-other-org-modal] upozornenie pre používateľa, že odkaz nemusí existovať v inej organizácii"
+	},
+	"error_many_matching_tab": {
+		"message": "Nájdených je viac ako jeden zodpovedajúci Tab.",
+		"description": "[error] Bolo vrátených príliš veľa Tab-ov"
+	},
+	"error_many_tabs_found": {
+		"message": "Nájdene viac ako jeden Tab.",
+		"description": "[chyba] bolo načítaných veľa Tabs"
+	},
+	"error_minify_url": {
+		"message": "Nemožno skrátiť prázdne URL!",
+		"description": "[error] Nebolo zadané URL na skrátenie"
+	},
+	"error_missing_favourite_id": {
+		"message": "Nemožno získať obľúbený obrázok bez Id",
+		"description": "[error] Nebolo zadané id obľúbeného obrázka"
+	},
+	"error_missing_key": {
+		"message": "Kľúč nikde nebol nájdený",
+		"description": "[error] Preklad nebol nájdený v súboroch"
+	},
+	"error_no_array": {
+		"message": "Neplatné pole alebo pole nebolo zadané",
+		"description": "[error] Nebolo prijaté platné pole"
+	},
+	"error_no_browser_tab": {
+		"message": "Aktívna záložka prehliadača nebola nájdená.",
+		"description": "[error] Pozadie stránky nedokázalo identifikovať aktívnu záložku prehliadača"
+	},
+	"error_no_callback": {
+		"message": "Prosím zadajte callback funkciu",
+		"description": "[error] Nebola zadaná funkcia, ktorá sa má zavolať na konci metódy"
+	},
+	"error_no_cookies": {
+		"message": "Nenájdené zhody pre cookies",
+		"description": "[error] Cookies Salesforce neboli vrátené"
+	},
+	"error_no_data": {
+		"message": "Tab nemožno identifikovať bez údajov.",
+		"description": "[error] Pokus o získanie Tab-u bez odoslania údajov"
+	},
+	"error_no_headers": {
+		"message": "Nenašli sa žiadne hlavičky.",
+		"description": "[error] Rozšírenie nenašlo, kam umiestniť tlačidlo pre obľúbené"
+	},
+	"error_no_matching_tab": {
+		"message": "Nenašiel sa žiadny zodpovedajúci Tab.",
+		"description": "[error] Neboli vrátené žiadne zodpovedajúce Tab-y"
+	},
+	"error_no_message": {
+		"message": "Nebola zadaná žiadna správa na odoslanie.",
+		"description": "[error] Nebola nájdená žiadna správa na odoslanie do iných častí kódu"
+	},
+	"error_no_object": {
+		"message": "Nebol zadaný objekt na kontrolu!",
+		"description": "[error] Objekt nebol zadaný na kontrolu"
+	},
+	"error_no_setup_tab": {
+		"message": "Setup Tab sa nenašiel.",
+		"description": "[error] Rozšírenie nenašlo, kam umiestniť uložené Tab-y"
+	},
+	"error_no_url": {
+		"message": "Nebola zadaná URL na kontrolu!",
+		"description": "[error] Nebola zadaná URL na kontrolu"
+	},
+	"error_not_initialized": {
+		"message": "nebol ešte inicializovaný.",
+		"description": "[chyba] Všeobecná chyba, keď premenná nie je pripravená"
+	},
+	"error_processing_tabs": {
+		"message": "Chyba spracovania Tabs.",
+		"description": "[chyba] Všeobecná chyba pri spracovaní Tabs"
+	},
+	"error_redirect": {
+		"message": "Nedá sa redirect. Prosím, obnovte stránku.",
+		"description": "[chyba] Všeobecná chyba pri presmerovaní stránky."
+	},
+	"error_remove_not_favourite": {
+		"message": "Tab, ktorý nie je obľúbený, nemožno odstrániť!",
+		"description": "[error] Používateľ sa pokúsil odstrániť Tab, ktorý ešte nebol uložený"
+	},
+	"error_removing_all_tabs": {
+		"message": "Chyba pri odstraňovaní všetkých Tabs.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní všetkých Tabs"
+	},
+	"error_removing_generic_tabs": {
+		"message": "Chyba pri odstraňovaní generických Tabs.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní generických Tabs"
+	},
+	"error_removing_other_tabs": {
+		"message": "Chyba pri odstraňovaní ostatných Tabs.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní ostatných Tabs"
+	},
+	"error_removing_tab": {
+		"message": "Chyba pri odstraňovaní Tab.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní Tab"
+	},
+	"error_removing_visible_tabs": {
+		"message": "Chyba pri odstraňovaní všetkých viditeľných Tab.",
+		"description": "[chyba] Všeobecná chyba pri odstraňovaní všetkých viditeľných Tab"
+	},
+	"error_required_params": {
+		"message": "Požadované parametre pre funkciu neboli odovzdané",
+		"description": "[chyba] vývojár sa pokúsil volať funkciu bez potrebných parametrov"
+	},
+	"error_resetting_default_tabs": {
+		"message": "Chyba pri obnove predvolených Tab.",
+		"description": "[chyba] Všeobecná chyba pri obnove Tab na predvolené hodnoty"
+	},
+	"error_sorting_tabs": {
+		"message": "Chyba pri zoraďovaní Tab-ov",
+		"description": "[error] zobrazené v správe typu toast"
+	},
+	"error_sync_nothing": {
+		"message": "Nemožno zosynchronizovať prázdne Tab-y!",
+		"description": "[error] Pokus o synchronizáciu prázdnych Tab-ov"
+	},
+	"error_tab_constructor": {
+		"message": "Použite Tab.create() namiesto new Tab() na použitie triedy Tab",
+		"description": "[chyba] povedzte vývojárovi, ako použiť triedu Tab"
+	},
+	"error_tab_label": {
+		"message": "Evidenčný štítok musí byť neprazdný reťazec",
+		"description": "[error] Používateľ sa pokúsil vytvoriť Tab bez evidenčného štítku"
+	},
+	"error_tab_not_found": {
+		"message": "Tab sa nenašiel.",
+		"description": "[error] Tab nebol zahrnutý v poli"
+	},
+	"error_tab_object_creation": {
+		"message": "Pri volaní s objektom, neodosielajte nič iné.",
+		"description": "[error] Implementačná chyba zo strany vývojára"
+	},
+	"error_tab_org": {
+		"message": "Organizácia musí byť reťazec alebo undefined",
+		"description": "[error] Používateľ sa pokúsil vytvoriť Tab s neplatnou hodnotou organizácie"
+	},
+	"error_tab_unexpected_keys": {
+		"message": "Neočakávané kľúče nájdené:",
+		"description": "[error] Používateľ sa pokúsil vytvoriť Tab s nepodporovanými vlastnosťami"
+	},
+	"error_tab_url": {
+		"message": "URL musí byť neprazdný reťazec",
+		"description": "[error] Používateľ sa pokúsil vytvoriť Tab bez URL"
+	},
+	"error_tab_url_saved": {
+		"message": "Tab s touto URL bol už uložený!",
+		"description": "[chyba] Používateľ sa pokúsil uložiť Tab, ktorý už bol obľúbený"
+	},
+	"error_tabcont_initialize": {
+		"message": "Nemožno inicializovať s",
+		"description": ""
+	},
+	"error_tabcont_invalid_tabs": {
+		"message": "Nájdené sú neplatné Tab(y).\nPrvý výskyt:",
+		"description": "[error] Boli odovzdané neplatné Tab-y"
+	},
+	"error_tabcontainer_constructor": {
+		"message": "Použite TabContainer.create() namiesto new TabContainer() na použitie triedy TabContainer",
+		"description": "[chyba] povedzte vývojárovi, ako použiť triedu TabContainer"
+	},
+	"error_translationservice_constructor": {
+		"message": "Použite TranslationService.create() namiesto new TranslationService() na použitie triedy TranslationService",
+		"description": "[chyba] povedzte vývojárovi, ako použiť triedu TranslationService"
+	},
+	"error_translator_not_initialized": {
+		"message": "prekladač ešte nebol inicializovaný.",
+		"description": "[chyba] TranslationService nebol pripravený"
+	},
+	"error_unknown_message": {
+		"message": "Prijatá neznáma správa",
+		"description": "bola prijatá neznáma správa od poslucháča"
+	},
+	"error_unknown_request": {
+		"message": "Neznáma požiadavka.",
+		"description": "[chyba] Všeobecná chyba po prijatí správy, ktorá nebola rozpoznaná"
+	},
+	"error_useless_remove": {
+		"message": "Nemožno odstrániť:\nStránku, ktorá nebola predtým uložená, nemožno odstrániť",
+		"description": "[error] Používateľ sa pokúsil odstrániť stránku, ktorá ešte nebola uložená"
+	},
+	"error_useless_save": {
+		"message": "Nemožno uložiť:\nTáto stránka je už uložená!",
+		"description": "[error] Používateľ sa pokúsil uložiť stránku, ktorá už bola uložená"
+	},
+	"export": {
+		"message": "Exportovať",
+		"description": "[popup] exportné tlačidlo"
+	},
+	"export_title": {
+		"message": "Exportovať všetky Tab-y",
+		"description": "[popup] nadpis exportného tlačidla"
+	},
+	"extension_description": {
+		"message": "Vytvorte a spravujte vlastné Tab-y v dostupnom priestore na stránke Salesforce Lightning Setup.",
+		"description": "[manifest] Popis tohto rozšírenia"
+	},
+	"extension_label": {
+		"message": "Again, Why Salesforce",
+		"description": "Názov tohto rozšírenia"
+	},
+	"file": {
+		"message": "súbor",
+		"description": "jeden súbor"
+	},
+	"files": {
+		"message": "súbory",
+		"description": "viacero súborov"
+	},
+	"flows": {
+		"message": "Toku",
+		"description": "[predvolený-tab] Označenie pre predvolený Tab s Tokmi"
+	},
+	"general": {
+		"message": "Všeobecné",
+		"description": "Označenie pre kategóriu všeobecných nastavení"
+	},
+	"help": {
+		"message": "Pomoc",
+		"description": ""
+	},
+	"help_add_tabs_as_org": {
+		"message": "Označuje nové Tab-y ako Tab-y Org, takže sú viditeľné iba po prihlásení do danej konkrétnej Org v Salesforce.",
+		"description": "[settings-help] pre $opt_add_tabs_as_org"
+	},
+	"help_add_tabs_front": {
+		"message": "Novozaložené Tab-y sú vložené na začiatok vášho zoznamu Tab-ov v nastavení, namiesto toho, aby boli pridané na koniec.",
+		"description": "[settings-help] pre $opt_add_tabs_front"
+	},
+	"help_automatic_open_login": {
+		"message": "Ak kliknete na vyskakovacie okno rozšírenia mimo domény Salesforce, automaticky vás to presunie na prihlasovaciu stránku Salesforce.",
+		"description": "[settings-help] pre $opt_automatic_open_login"
+	},
+	"help_automatic_open_setup": {
+		"message": "Ak kliknete na vyskakovacie okno rozšírenia v rámci domény Salesforce, ale nie na stránke nastavenia, automaticky vás to presunie na stránku nastavenia Salesforce.",
+		"description": "[settings-help] pre $opt_automatic_open_setup"
+	},
+	"help_keep_sort": {
+		"message": "Keď je táto možnosť povolená, vaše Tab-y sú udržiavané v zoradenom poradí—buď podľa štítku, URL alebo Org; v závislosti od toho, čo si vyberiete.",
+		"description": "[settings-help] pre $opt_keep_sort"
+	},
+	"help_keep_tabs_left": {
+		"message": "Pripne vaše uložené Tab-y pred štandardné navigačné menu (Domov / Správca objektov) v nastavení, namiesto toho, aby boli po ňom.",
+		"description": "[settings-help] pre $opt_keep_tabs_left"
+	},
+	"help_link_new_browser": {
+		"message": "Keď je táto možnosť povolená, každý uložený Tab otvorí súvisiacu stránku v novom Tab-e.",
+		"description": "[settings-help] pre $opt_link_new_browser"
+	},
+	"help_no_release_notes": {
+		"message": "Potláča automatické zobrazenie upozornení na poznámky k vydaniu po aktualizácii rozšírenia.",
+		"description": "[settings-help] pre $opt_no_release_notes"
+	},
+	"help_no_update_notification": {
+		"message": "Vypne periodické vyskakovacie okná s pripomienkami aktualizácie, čím udržuje UI rozšírenia čisté (keď ste v nastaveniach prehliadača vypli automatické aktualizácie rozšírenia).",
+		"description": "[settings-help] pre $opt_no_update_notification"
+	},
+	"help_open_login_same_tab": {
+		"message": "Ak kliknete na vyskakovacie okno rozšírenia mimo domény Salesforce, prihlasovacia stránka sa otvorí v aktuálnej Tab prehliadača.",
+		"description": "[nastavenia-pomoc] pre $opt_open_login_same_tab"
+	},
+	"help_open_setup_same_tab": {
+		"message": "Ak kliknete na vyskakovacie okno rozšírenia v rámci domény Salesforce, ale nie na stránke Setup, stránka Salesforce Setup sa otvorí v aktuálnej Tab prehliadača.",
+		"description": "[nastavenia-pomoc] pre $opt_open_setup_same_tab"
+	},
+	"help_pick_language": {
+		"message": "Nastaviť jazyk používateľského rozhrania iba pre rozšírenie. Ak niečo nebolo preložené, namiesto toho sa použije anglická verzia.",
+		"description": "[nastavenia-pomoc] pre $opt_pick_language"
+	},
+	"help_prevent_analytics": {
+		"message": "Vypne základný zber telemetrie. Rozšírenie sa nebude zobrazovať v anonymných metrikách používania.",
+		"description": "[settings-help] pre $opt_prevent_analytics"
+	},
+	"help_prevent_lightning_navigation": {
+		"message": "Obchádza API navigácie Lightning a otvára odkazy prostredníctvom úplného opätovného načítania stránky, čo môže byť rýchlejšie v niektorých nastaveniach org.",
+		"description": "[settings-help] pre $opt_prevent_lightning_navigation"
+	},
+	"help_skip_link_detection": {
+		"message": "Vypne kontrolu rozšírenia, ktorá overuje, či sa fragment URL zhoduje s formátom ID záznamov/objektov Salesforce (používa sa na automatické nastavenie uloženého Tab-u ako Tab-u Org).",
+		"description": "[settings-help] pre $opt_skip_link_detection"
+	},
+	"help_tip_click_link": {
+		"message": "Kliknutím budete presmerovaní na dokumentáciu k tomuto nastaveniu!",
+		"description": "[nastavenia-pomoc] výzva na akciu, ktorá používateľovi umožní prečítať si viac o konkrétnom nastavení"
+	},
+	"import": {
+		"message": "Importovať",
+		"description": "[popup] importné tlačidlo"
+	},
+	"import_duplicate_description_0": {
+		"message": "Duplicitné karty Tab sa budú ignorovať.",
+		"description": "[importovať] popis toho, čo robí proces importu, časť 0"
+	},
+	"import_duplicate_description_1": {
+		"message": "Dve karty Tab sa považujú za duplikáty, ak majú rovnakú adresu URL.",
+		"description": "[importovať] popis toho, čo robí proces importu, časť 1"
+	},
+	"import_invalid_file": {
+		"message": "Neplatný typ súboru.\nPodporované sú iba JSON súbory.",
+		"description": "[error] Súbor použitý na import nie je typu JSON"
+	},
+	"import_successful": {
+		"message": "Import bol úspešný",
+		"description": "[import] Import bol dokončený. Následne sa zobrazí počet importovaných záznamov"
+	},
+	"import_tabs": {
+		"message": "Importovať Tab",
+		"description": "[modal-title] pre importný proces"
+	},
+	"import_title": {
+		"message": "$import_tabs zo súboru JSON",
+		"description": "[vyskakovacie-okno] názov na tlačidle importu"
+	},
+	"insert_another": {
+		"message": "Vložiť ďalší",
+		"description": "[error-open-other-org-modal] správa, keď používateľ zadá rovnakú organizáciu"
+	},
+	"insert_another_org": {
+		"message": "Zadaná Organizácia je aktuálna!\nProsím zadajte inú Organizáciu.",
+		"description": "[error-open-other-org-modal] správa, keď používateľ zadá rovnakú organizáciu"
+	},
+	"insert_valid_org": {
+		"message": "Prosím zadajte platnú Organizáciu!",
+		"description": "[error-open-other-org-modal] správa, keď používateľ zadá nesprávnu URL"
+	},
+	"italic": {
+		"message": "Kurzíva",
+		"description": "Možnosť štýlu písma pre kurzívu"
+	},
+	"lightning_navigation": {
+		"message": "Lightning navigácia",
+		"description": "Vlastná navigačná technológia Salesforce"
+	},
+	"login_to_salesforce": {
+		"message": "Prihlásiť sa do Salesforce",
+		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na prihlásovaciu stránku Salesforce"
+	},
+	"mycustomorg": {
+		"message": "mycustomorg",
+		"description": "zástupný text pre modal na aktualizáciu Tab"
+	},
+	"no_manifest_github": {
+		"message": "Neplatná alebo chýbajúca homepage_url GitHubu v manifeste",
+		"description": "Kľúč homepage_url manifestu nepoužíva odkaz na GitHub"
+	},
+	"no_match": {
+		"message": "Nenašiel sa žiadny zodpovedajúci príkaz",
+		"description": "[error] keď príkaz switch nedokáže zodpovedať požadovanú akciu"
+	},
+	"nss_invalid_url": {
+		"message": "Zistená neplatná URL adresa.",
+		"description": "[nieJeNastavenieSalesforce] neplatná URL adresa"
+	},
+	"nss_not_setup_page": {
+		"message": "Toto nie je stránka nastavenia $salesforce_lightning.",
+		"description": "[notSalesforceSetup] používateľ sa nenachádza na stránke Salesforce."
+	},
+	"open_here": {
+		"message": "Otvoriť v tejto Tab.",
+		"description": "[open-other-org-modal] prepínač, ktorý používateľovi umožní otvoriť v tej istej Tab prehliadača"
+	},
+	"open_new_tab": {
+		"message": "Otvoriť v novej Tab.",
+		"description": "[open-other-org-modal] prepínač, ktorý používateľovi umožní otvoriť v novej Tab prehliadača."
+	},
+	"open_settings": {
+		"message": "Otvoriť nastavenia rozšírenia",
+		"description": "[vyskakovacie okno] tlačidlo pre presmerovanie na stránku nastavení"
+	},
+	"open_setup": {
+		"message": "Otvoriť Setup",
+		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
+	},
+	"opt_add_tabs_as_org": {
+		"message": "Pridať nové Tab-y ako Tab-y Org.",
+		"description": "[settings] umožnite používateľovi pridávať všetky nové Tab-y ako špecifické pre org"
+	},
+	"opt_add_tabs_front": {
+		"message": "Pridať nové Tab-y dopredu.",
+		"description": "[settings] umožnite používateľovi pridávať všetky nové Tab-y dopredu"
+	},
+	"opt_automatic_open_login": {
+		"message": "Automaticky otvoriť stránku $salesforce_login po kliknutí na vyskakovacie okno, ak sa nenachádzate na stránke Salesforce.",
+		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno na náhodnej webovej stránke"
+	},
+	"opt_automatic_open_setup": {
+		"message": "Automaticky otvoriť stránku $salesforce_setup po kliknutí na vyskakovacie okno, ak sa nachádzate na stránke Salesforce.",
+		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno na webovej stránke Salesforce"
+	},
+	"opt_confirm_save": {
+		"message": "Nastavenia boli uložené!",
+		"description": "[popup]"
+	},
+	"opt_en_default": {
+		"message": "en (Predvolené a záložné)",
+		"description": "Predvolená jazyková možnosť rozšírenia"
+	},
+	"opt_keep_sort": {
+		"message": "Udržiavať Tab-y zoradené.",
+		"description": "[setting] umožnite používateľovi udržiavať svoje Tab-y zoradené podľa jedného z ich kľúčov"
+	},
+	"opt_keep_tabs_left": {
+		"message": "Ponechať obľúbené Taby naľavo od Domova a Správcu objektov.",
+		"description": "Prepínač na pripnutie obľúbených Tabov na ľavú stranu navigačnej lišty"
+	},
+	"opt_link_new_browser": {
+		"message": "Vždy otvárať odkazy v novej karte prehliadača.",
+		"description": "[nastavenie] pri kliknutí používateľa na obľúbený Tab otvoriť v novej karte prehliadača"
+	},
+	"opt_no_release_notes": {
+		"message": "Nezobrazovať poznámky k vydaniu aktualizácie.",
+		"description": "[nastavenie] umožňuje používateľovi zabrániť zobrazeniu poznámok po aktualizácii rozšírenia"
+	},
+	"opt_no_update_notification": {
+		"message": "Neupozorňovať na dostupné aktualizácie.",
+		"description": "[nastavenie] umožňuje používateľovi zabrániť rozšíreniu vo vyhľadávaní nových vydaní"
+	},
+	"opt_open_login_same_tab": {
+		"message": "Po kliknutí na vyskakovacie okno vždy otvoriť stránku $salesforce_login v tej istej Tab.",
+		"description": "[nastavenie]"
+	},
+	"opt_open_setup_same_tab": {
+		"message": "Po kliknutí na vyskakovacie okno vždy otvoriť stránku $salesforce_setup v tej istej Tab.",
+		"description": "[nastavenie]"
+	},
+	"opt_pick_language": {
+		"message": "Vyberte jazyk rozšírenia",
+		"description": "[nastavenie] štítok, ktorý vyzve používateľa na výber preferovaného jazyka"
+	},
+	"opt_pick_sort": {
+		"message": "Vyberte, podľa ktorého poľa majú byť Tab-y zoradené",
+		"description": "[setting] teraz si používateľ môže vybrať, podľa ktorého kľúča udržať Tab-y zoradené"
+	},
+	"opt_prevent_analytics": {
+		"message": "Zabrániť používaniu Simple Analytics (nezapočíta sa do počtu používateľov).",
+		"description": "[nastavenie] umožňuje používateľovi zabrániť odosielaniu anonymnej analytiky"
+	},
+	"opt_prevent_lightning_navigation": {
+		"message": "Zabrániť používaniu navigácie Lightning (rýchlejšie načítanie, ak nie je zaškrtnuté).",
+		"description": "[setting] neumožňujte navigáciu Lightning s vysvetlením funkcie"
+	},
+	"opt_same_tab_popup": {
+		"message": "stránka v tej istej karte po kliknutí na vyskakovacie okno.",
+		"description": "[nastavenie] zabrániť otvoreniu novej karty prehliadača"
+	},
+	"opt_sf_lang_cookies": {
+		"message": "Postupujte podľa jazyka Salesforce (číta súbory cookie Salesforce)",
+		"description": "Možnosť použiť nastavenie jazyka Salesforce. Ak chcete použiť túto možnosť, používatelia musia povoliť rozšíreniu čítanie súborov cookie Salesforce."
+	},
+	"opt_skip_link_detection": {
+		"message": "Preskočiť automatickú kontrolu ID Salesforce.",
+		"description": "[nastavenie] keď používateľ pridáva obľúbený Tab, nekontrolovať, či je v odkaze ID"
+	},
+	"or_drop": {
+		"message": "Alebo $drop",
+		"description": "[importovať] umožnite používateľovi presúvať súbory myšou a púšťať ich"
+	},
+	"org_link": {
+		"message": "Odkaz na Organizáciu",
+		"description": "[input-label]"
+	},
+	"other_org_info": {
+		"message": "Informácie o inej Organizácii",
+		"description": "[modal-title]"
+	},
+	"other_org_placeholder": {
+		"message": "ina-org",
+		"description": "[input-placeholder]"
+	},
+	"overwrite_tabs": {
+		"message": "Prepísať uložené Tab-y.",
+		"description": "[label] vymazať všetky uložené Tab-y počas importu"
+	},
+	"preserve_org_tabs": {
+		"message": "Zachovať Tab-y pre iné organizácie.",
+		"description": "[label] ponechať všetky organizačne špecifické Tab-y počas importu"
+	},
+	"remove_tab": {
+		"message": "Odstrániť Tab",
+		"description": "[alt] náhradný text, keď obrázky nie sú zobrazené"
+	},
+	"req_downloads_open_popup": {
+		"message": "Otvorte vyskakovacie okno rozšírenia z ponuky rozšírení vášho prehliadača.",
+		"description": "[oznámenie] požiadajte používateľa, aby klikol na vyskakovacie okno rozšírenia pre pokračovanie"
+	},
+	"req_downloads_perm_header": {
+		"message": "Povoľte prosím povolenie na stiahnutie\nna spustenie požadovaného exportu.",
+		"description": "[požiadať_o_povolenie] výzva na akciu na povolenie sťahovania"
+	},
+	"req_downloads_perm_paragraph": {
+		"message": "Táto operácia bude vyžiadaná iba raz.",
+		"description": "[požiadať_o_povolenie] popis pre povolenie sťahovania"
+	},
+	"req_permissions_dont_ask": {
+		"message": "Neptaj sa znova.",
+		"description": "[req_permission] označenie, keď používateľ nechce trvalo udeliť oprávnenia"
+	},
+	"req_permissions_header": {
+		"message": "Povoľte nám, prosím, automatický prístup\nk stránkam $salesforce_setup.",
+		"description": "[req_permission] hlavička stránky na vyžiadanie povolení"
+	},
+	"req_permissions_paragraph": {
+		"message": "Ak chcete, môžete si nechať zobraziť svoje obľúbené Tabs\nhneď po prechode na stránku $salesforce_setup\nbez toho, aby ste museli zakaždým klikať na toto rozšírenie.",
+		"description": "[req_permission] text vysvetľujúci, prečo sa požadujú povolenia"
+	},
+	"required": {
+		"message": "povinné",
+		"description": "[input] označuje, že vstupné pole je povinné"
+	},
+	"required_info": {
+		"message": "= Povinné informácie",
+		"description": "[modal] informuje používateľa, že niektoré údaje sú povinné"
+	},
+	"salesforce_lightning": {
+		"message": "Salesforce Lightning",
+		"description": "[notSalesforceSetup] Salesforce Lightning platforma"
+	},
+	"salesforce_login": {
+		"message": "Prihlásenie do Salesforce",
+		"description": "Stránka na prihlásenie do Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_setup": {
+		"message": "Nastavenia Salesforce",
+		"description": "akákoľvek stránka nastavení Salesforce (https://*.my.salesforce-setup.com/*)"
+	},
+	"save": {
+		"message": "Uložiť",
+		"description": "Použiť zmeny a uložiť ich do pamäte"
+	},
+	"save_tab": {
+		"message": "Uložiť ako Tab",
+		"description": "[alt] náhradný text, keď obrázky nie sú zobrazené"
+	},
+	"send_tip": {
+		"message": "Pošlite nám tip ❤️",
+		"description": "[popup] titul pre svg na podnietenie odoslania tipu"
+	},
+	"set_gen_preview": {
+		"message": "Náhľad Tabu",
+		"description": "Označenie pre náhľad vzhľadu všeobecných Tabov"
+	},
+	"set_gen_styler": {
+		"message": "Úprava štýlu Tabu",
+		"description": "Označenie pre konfiguráciu štýlu všeobecných Tabov"
+	},
+	"set_general_settings": {
+		"message": "Všeobecné nastavenia",
+		"description": "Hlavička sekcie pre celkové možnosti konfigurácie"
+	},
+	"set_move_available": {
+		"message": "Presunúť do Dostupné",
+		"description": "Titulok tlačidla na presun vybraných položiek späť do Dostupné"
+	},
+	"set_move_chosen": {
+		"message": "Presunúť do Vybrané",
+		"description": "Titulok tlačidla na presun vybraných položiek do Vybrané"
+	},
+	"set_org_preview": {
+		"message": "Náhľad organizácie",
+		"description": "Označenie pre náhľad vzhľadu Tabov špecifických pre organizáciu"
+	},
+	"set_org_styler": {
+		"message": "Úprava štýlu organizácie",
+		"description": "Označenie pre konfiguráciu štýlu Tabov špecifických pre organizáciu"
+	},
+	"set_tab_generic_background_active_label": {
+		"message": "Vložte farbu pozadia pre vaše aktívne všeobecné Tab.",
+		"description": "Štítok na nastavenie farby pozadia pre aktívne všeobecné Tab"
+	},
+	"set_tab_generic_background_label": {
+		"message": "Vložte farbu pozadia pre vaše všeobecné Tab.",
+		"description": "Štítok na nastavenie farby pozadia pre všeobecné Tab"
+	},
+	"set_tab_generic_border_color_active_label": {
+		"message": "Vložte farbu orámovania pre vaše aktívne všeobecné Tab.",
+		"description": "Štítok na nastavenie farby orámovania pre aktívne všeobecné Tab"
+	},
+	"set_tab_generic_border_color_label": {
+		"message": "Vložte farbu orámovania pre vaše všeobecné Tab.",
+		"description": "Štítok na nastavenie farby orámovania pre všeobecné Tab"
+	},
+	"set_tab_generic_color_active_label": {
+		"message": "Vložte farbu textu pre vaše aktívne všeobecné Tab.",
+		"description": "Štítok na nastavenie farby textu pre aktívne všeobecné Tab"
+	},
+	"set_tab_generic_color_label": {
+		"message": "Vložte farbu textu pre vaše všeobecné Tab.",
+		"description": "Štítok na nastavenie farby textu pre všeobecné Tab"
+	},
+	"set_tab_generic_decoration_active_label": {
+		"message": "Vyberte jeden alebo viac štýlov dekorácie pre vaše aktívne všeobecné Tab.",
+		"description": "Výzva na výber štýlov dekorácie pre aktívne všeobecné Tab"
+	},
+	"set_tab_generic_decoration_label": {
+		"message": "Vyberte jeden alebo viac štýlov dekorácie pre vaše všeobecné Tab.",
+		"description": "Výzva na výber štýlov dekorácie pre všeobecné Tab"
+	},
+	"set_tab_generic_hover_background_active_label": {
+		"message": "Vložte farbu pozadia pri umiestnení kurzora pre vaše aktívne všeobecné Tab.",
+		"description": "Štítok na nastavenie farby pozadia pri umiestnení kurzora pre aktívne všeobecné Tab"
+	},
+	"set_tab_generic_hover_background_label": {
+		"message": "Vložte farbu pozadia pri umiestnení kurzora pre vaše všeobecné Tab.",
+		"description": "Štítok na nastavenie farby pozadia pri umiestnení kurzora pre všeobecné Tab"
+	},
+	"set_tab_generic_shadow_active_label": {
+		"message": "Vložte farbu tieňa pre vaše aktívne všeobecné Tab.",
+		"description": "Štítok na nastavenie farby tieňa pre aktívne všeobecné Tab"
+	},
+	"set_tab_generic_shadow_label": {
+		"message": "Vložte farbu tieňa pre vaše všeobecné Tab.",
+		"description": "Štítok na nastavenie farby tieňa pre všeobecné Tab"
+	},
+	"set_tab_generic_top_active_label": {
+		"message": "Vložte farbu pre lištu v hornej časti vašich aktívnych všeobecných Tab.",
+		"description": "Štítok na nastavenie farby hornej lišty pre aktívne všeobecné Tab"
+	},
+	"set_tab_org_background_active_label": {
+		"message": "Vložte farbu pozadia pre vaše aktívne org Tab.",
+		"description": "Štítok na nastavenie farby pozadia pre aktívne org Tab"
+	},
+	"set_tab_org_background_label": {
+		"message": "Vložte farbu pozadia pre vaše org Tab.",
+		"description": "Štítok na nastavenie farby pozadia pre Tab špecifické pre org"
+	},
+	"set_tab_org_border_color_active_label": {
+		"message": "Vložte farbu orámovania pre vaše aktívne org Tab.",
+		"description": "Štítok na nastavenie farby orámovania pre aktívne Tab špecifické pre org"
+	},
+	"set_tab_org_border_color_label": {
+		"message": "Vložte farbu orámovania pre vaše org Tab.",
+		"description": "Štítok na nastavenie farby orámovania pre org Tab"
+	},
+	"set_tab_org_color_active_label": {
+		"message": "Vložte farbu textu pre vaše aktívne org Tab.",
+		"description": "Štítok na nastavenie farby textu pre aktívne org Tab"
+	},
+	"set_tab_org_color_label": {
+		"message": "Vložte farbu textu pre vaše org Tab.",
+		"description": "Štítok na nastavenie farby textu pre Tab špecifické pre org"
+	},
+	"set_tab_org_decoration_active_label": {
+		"message": "Vyberte jeden alebo viac štýlov dekorácie pre vaše aktívne org Tab.",
+		"description": "Výzva na výber štýlov dekorácie pre aktívne Tab špecifické pre org"
+	},
+	"set_tab_org_decoration_label": {
+		"message": "Vyberte jeden alebo viac štýlov dekorácie pre vaše org Tab.",
+		"description": "Výzva na výber štýlov dekorácie pre org Tab"
+	},
+	"set_tab_org_hover_background_active_label": {
+		"message": "Vložte farbu pozadia pri umiestnení kurzora pre vaše aktívne org Tab.",
+		"description": "Štítok na nastavenie farby pozadia pri umiestnení kurzora pre aktívne org Tab"
+	},
+	"set_tab_org_hover_background_label": {
+		"message": "Vložte farbu pozadia pri umiestnení kurzora pre vaše org Tab.",
+		"description": "Štítok na nastavenie farby pozadia pri umiestnení kurzora pre Tab špecifické pre org"
+	},
+	"set_tab_org_shadow_active_label": {
+		"message": "Vložte farbu tieňa pre vaše aktívne org Tab.",
+		"description": "Štítok na nastavenie farby tieňa pre aktívne Tab špecifické pre org"
+	},
+	"set_tab_org_shadow_label": {
+		"message": "Vložte farbu tieňa pre vaše org Tab.",
+		"description": "Štítok na nastavenie farby tieňa pre org Tab"
+	},
+	"set_tab_org_top_active_label": {
+		"message": "Vložte farbu pre lištu v hornej časti vašich aktívnych org Tab.",
+		"description": "Štítok na nastavenie farby hornej lišty pre aktívne org Tab"
+	},
+	"set_toggle_preview": {
+		"message": "Kliknite pre prepnutie aktívneho stavu.",
+		"description": "Text popisku nástroja pre ovládanie prepnutia aktívneho stavu"
+	},
+	"settings": {
+		"message": "Nastavenia",
+		"description": "Označenie pre menu nastavení"
+	},
+	"setup_page": {
+		"message": "Setup stránka",
+		"description": "[notSalesforceSetup] stránka na úpravu nastavení Salesforce"
+	},
+	"skip": {
+		"message": "Preskočiť",
+		"description": "[req_permission] tlačidlo na odmietnutie udelenia oprávnení"
+	},
+	"successfully_imported": {
+		"message": "Import bol úspešný",
+		"description": "[toast] Používateľ úspešne importoval Tab-y z externého súboru"
+	},
+	"tab_explain": {
+		"message": "Každý prvok musí mať 'label' a 'url' ako reťazce. Okrem toho môže mať každý prvok 'org' ako reťazec.",
+		"description": "[error] vysvetľuje, ako má byť Tab konštruovaný"
+	},
+	"tab_information": {
+		"message": "Informácie o Tabe",
+		"description": "názov modalu pre aktualizáciu Tab-u"
+	},
+	"tab_label": {
+		"message": "Označenie Tab-u",
+		"description": "vlastnosť Label Tab-u, jeho názov"
+	},
+	"tab_org": {
+		"message": "Organizácia Tab-u",
+		"description": "vlastnosť Org Tab-u, ak je určený pre konkrétnu Salesforce organizáciu"
+	},
+	"tab_url": {
+		"message": "URL Tab-u",
+		"description": "vlastnosť URL Tab-u, na ktorú odkazuje"
+	},
+	"table_delete": {
+		"message": "Vymazať Tab",
+		"description": "[popup] pomocný text pre stĺpec s vymazávacím tlačidlom"
+	},
+	"table_org": {
+		"message": "Je Tab organizačný",
+		"description": "[popup] pomocný text pre stĺpec s zaškrtávacím políčkom pre organizáciu"
+	},
+	"table_row_label": {
+		"message": "Zadajte označenie pre túto URL",
+		"description": "[popup] vstupné pole pre názov Tab-u"
+	},
+	"table_row_org": {
+		"message": "Kliknite, ak chcete, aby bol tento Tab dostupný len pre túto organizáciu.",
+		"description": "[popup] zaškrtávacie políčko pre prepnutie Tab-u do organizačného režimu"
+	},
+	"table_row_org_name": {
+		"message": "Organizácia, pre ktorú je tento Tab dostupný.",
+		"description": "[popup] vstupné pole pre názov organizácie"
+	},
+	"table_row_url": {
+		"message": "Zadajte sub_URL, na ktorý chcete byť presmerovaní.",
+		"description": "[popup] vstupné pole pre URL Tab-u"
+	},
+	"tabs": {
+		"message": "Tab-y",
+		"description": "obľúbené odkazy používateľa"
+	},
+	"tabs_saved": {
+		"message": "Tab-y boli uložené.",
+		"description": "[toast] Tab-y boli úspešne uložené."
+	},
+	"theme_dark": {
+		"message": "Prepni tému na tmavú",
+		"description": "[popup] nadpis pre mesiacovú ikonu na zmenu témy"
+	},
+	"theme_light": {
+		"message": "Prepni tému na svetlú",
+		"description": "[popup] nadpis pre slnečnú ikonu na zmenu témy"
+	},
+	"underline": {
+		"message": "Podčiarknutie",
+		"description": "Možnosť dekoračného štýlu na podčiarknutie textu Tabu"
+	},
+	"underline_wavy": {
+		"message": "Vlnité podčiarknutie",
+		"description": "Možnosť dekoračného štýlu na aplikáciu vlnitého podčiarknutia na text Tabu"
+	},
+	"update_available": {
+		"message": "Aktualizácia k dispozícii",
+		"description": "k dispozícii je nová aktualizácia pre rozšírenie"
+	},
+	"upload": {
+		"message": "Nahraj",
+		"description": "[import] umožňuje používateľovi prehliadať svoje súbory a vybrať ten správny"
+	},
+	"users": {
+		"message": "Používatelia",
+		"description": "názov stránky spojený s ManageUsers/home"
+	},
+	"where_to": {
+		"message": "Kam?",
+		"description": "[open-other-org-modal] alternatívny nadpis pre modal"
+	},
+	"write_review": {
+		"message": "Napísať recenziu!",
+		"description": "[popup] titul pre svg na vyžiadanie napísania recenzie"
+	}
+}

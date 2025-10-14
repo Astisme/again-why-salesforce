@@ -1,10 +1,9 @@
-import "./mocks.ts";
 import {
 	assert,
 	assertEquals,
 	assertFalse,
 	assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "@std/testing/asserts";
 import Tab from "/tab.js";
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {
@@ -171,7 +170,13 @@ await Deno.test("Tab Creation - Instance Reuse", async (t) => {
 await Deno.test("Tab Constructor Protection", () => {
 	assertThrows(
 		() => {
-			new Tab("Test", "https://example.com", undefined, Symbol("fake"));
+			const tb = new Tab(
+				"Test",
+				"https://example.com",
+				undefined,
+				Symbol("fake"),
+			);
+			console.log(tb);
 		},
 		Error,
 		"error_tab_constructor",
