@@ -21,6 +21,8 @@ import {
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
 	CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_CLICK_COUNT,
+	CXM_SORT_CLICK_DATE,
 	CXM_SORT_LABEL,
 	CXM_SORT_ORG,
 	CXM_SORT_URL,
@@ -1041,6 +1043,20 @@ function listenToBackgroundPage() {
 					await performActionOnTabs(ACTION_SORT, undefined, {
 						sortBy: "org",
 						sortAsc: allTabs.isSortedBy !== "org" ||
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_CLICK_COUNT:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "click-count",
+						sortAsc: allTabs.isSortedBy === "click-count" &&
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_CLICK_DATE:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "click-date",
+						sortAsc: allTabs.isSortedBy === "click-date" &&
 							!allTabs.isSortedAsc,
 					});
 					break;

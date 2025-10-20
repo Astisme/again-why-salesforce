@@ -8,6 +8,7 @@ import {
 } from "/constants.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
+
 let translator = null;
 let singletonAllTabs = null;
 
@@ -288,19 +289,18 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
 	async addTab(tab, sync = true, fromAddTabs = false, addInFront = false) {
+		let msg = null;
 		if (!Tab.isValid(tab)) {
-			const msg = await translator.translate([
+			msg = await translator.translate([
 				"error_invalid_tab",
-				JSON.stringify(tab),
 			]);
-			throw new Error(msg);
-		}
-		if (this.exists(tab, true)) {
-			const msg = await translator.translate([
+		} else if (this.exists(tab, true)) {
+			msg = await translator.translate([
 				"error_duplicate_tab",
-				JSON.stringify(tab),
 			]);
-			throw new Error(msg);
+		}
+		if (msg != null) {
+			throw new Error(`${msg} ${JSON.stringify(tab)}`);
 		}
 		const newTab = Tab.create(tab);
 		if (addInFront) {
@@ -671,11 +671,24 @@ export class TabContainer extends Array {
 	 * @param {boolean} [preserveOtherOrg=true] - Whether the org-specific tabs should be preserved
 	 * @returns {number} - Number of tabs successfully imported
 	 */
-	async importTabs(jsonString, resetTabs = false, preserveOtherOrg = true) {
-		const imported = JSON.parse(jsonString);
+	async importTabs(jsonString, {
+		resetTabs = false,
+		preserveOtherOrg = true,
+		importMetadata = false,
+	} = {}) {
+		let imported = JSON.parse(jsonString);
 		TabContainer.errorOnInvalidTabs(imported);
-		const backupTabs = [...this];
+		// imported is now a valid Array of Tabs
+		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
 		try {
+			if (!importMetadata) {
+				imported = JSON.parse(jsonString, (key, value) => {
+					if (Tab.metadataKeys.has(key)) {
+						return undefined;
+					}
+					return value;
+				});
+			}
 			if (
 				await this.replaceTabs(imported, {
 					resetTabs,
@@ -1184,6 +1197,8 @@ export class TabContainer extends Array {
 			label: updateLabel = undefined,
 			url: updateUrl = undefined,
 			org: updateOrg = undefined,
+			[Tab.keyClickCount]: updateClickCount = undefined,
+			[Tab.keyClickDate]: updateClickDate = undefined,
 		} = {},
 	) {
 		const matchingTab = this.getSingleTabByData({
@@ -1195,6 +1210,8 @@ export class TabContainer extends Array {
 			label: updateLabel,
 			url: updateUrl,
 			org: updateOrg,
+			[Tab.keyClickCount]: updateClickCount,
+			[Tab.keyClickDate]: updateClickDate,
 		});
 		return await this.syncTabs();
 	}
@@ -1207,6 +1224,12 @@ export class TabContainer extends Array {
 	static async _reset() {
 		singletonAllTabs = null;
 		return await ensureAllTabsAvailability();
+	}
+
+	async handleClickTabByData(tabData = {}) {
+		this.getSingleTabByData(tabData)
+			?.handleClick();
+		return await this.syncTabs();
 	}
 }
 

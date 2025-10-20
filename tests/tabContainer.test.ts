@@ -895,8 +895,10 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url"},{"label":"orglabel","url":"orgurl","org":"orgorg"}]`,
-				true,
-				false,
+				{
+					resetTabs: true,
+					preserveOtherOrg: false,
+				},
 			),
 			2,
 		);
@@ -905,7 +907,9 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url2"},{"label":"orglabel","url":"orgurl2","org":"orgorg"}]`,
-				true,
+				{
+					resetTabs: true,
+				},
 			),
 			2,
 		);
@@ -914,8 +918,10 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url3"},{"label":"orglabel","url":"orgurl3","org":"orgorg"}]`,
-				false,
-				false,
+				{
+					resetTabs: false,
+					preserveOtherOrg: false,
+				},
 			),
 			2,
 		);
@@ -938,15 +944,20 @@ await Deno.test("TabContainer - Import", async (t) => {
 			async () =>
 				await container.importTabs(
 					`[{"label":"hello","url":"nice-url"},{"unexpected":"orglabel","url":"orgurl","org":"orgorg"}]`,
-					true,
-					false,
+					{
+						resetTabs: true,
+						preserveOtherOrg: false,
+					},
 				),
 			Error,
 		);
 		assertEquals(container.length, 3);
 
 		assertRejects(
-			async () => await container.importTabs(`a simple string`, true),
+			async () =>
+				await container.importTabs(`a simple string`, {
+					resetTabs: true,
+				}),
 			Error,
 		);
 		assertEquals(container.length, 3);
@@ -955,7 +966,9 @@ await Deno.test("TabContainer - Import", async (t) => {
 			async () =>
 				await container.importTabs(
 					`[{"label":"hello","url":"nice-url","whoopsie":{"label":"hello","url":"nice-url"}}`,
-					true,
+					{
+						resetTabs: true,
+					},
 				),
 			Error,
 		);
@@ -1417,9 +1430,27 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		assertEquals(container[1].label, "flows");
 		assertEquals(container[2].label, "users");
 		// update tabs to add org (so they all are scrambled)
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
-		assert(await container.updateTab(container[2], { org: "b" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				"click-count": 0,
+				"click-date": 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				"click-count": 2,
+				"click-date": 2,
+			}),
+		);
+		assert(
+			await container.updateTab(container[2], {
+				org: "b",
+				"click-count": 1,
+				"click-date": 1,
+			}),
+		);
 		// move around because they were already sorted
 		await container.moveTab({ label: "flows" }, { moveBefore: true });
 		assertFalse(
@@ -1461,9 +1492,27 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// add new Tab because they were already sorted
 		assert(await container.addTab({ label: "mylabel", url: "/myurl" }));
 		// update tabs to add org (so they all are scrambled)
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
-		assert(await container.updateTab(container[2], { org: "b" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				"click-count": 0,
+				"click-date": 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				"click-count": 2,
+				"click-date": 2,
+			}),
+		);
+		assert(
+			await container.updateTab(container[2], {
+				org: "b",
+				"click-count": 1,
+				"click-date": 1,
+			}),
+		);
 		matchStorageToContainer(container);
 		assertFalse(
 			container.isSorted,
@@ -1498,9 +1547,26 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// add new Tabs to scramble
 		assert(
 			await container.addTabs([
-				{ label: "flows", url: "flows", org: "e" },
-				{ label: "assignment", url: "assignment", org: "a" },
-				{ label: "field", url: "field" },
+				{
+					label: "flows",
+					url: "flows",
+					org: "e",
+					"click-count": 0,
+					"click-date": 0,
+				},
+				{
+					label: "assignment",
+					url: "assignment",
+					org: "a",
+					"click-count": 2,
+					"click-date": 2,
+				},
+				{
+					label: "field",
+					url: "field",
+					"click-count": 1,
+					"click-date": 1,
+				},
 			]),
 		);
 		// now should all be random
@@ -1533,9 +1599,27 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// move around because they were already sorted
 		container.moveTab({ label: "flows" }, { moveBefore: true });
 		// add orgs
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
-		assert(await container.updateTab(container[2], { org: "b" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				"click-count": 0,
+				"click-date": 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				"click-count": 2,
+				"click-date": 2,
+			}),
+		);
+		assert(
+			await container.updateTab(container[2], {
+				org: "b",
+				"click-count": 1,
+				"click-date": 1,
+			}),
+		);
 		// now should all be random
 		matchStorageToContainer(container);
 		assertFalse(container.isSorted);
@@ -1563,8 +1647,20 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// move around because they were already sorted
 		container.moveTab({ label: "flows" }, { moveBefore: true });
 		// add orgs
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				"click-count": 0,
+				"click-date": 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				"click-count": 2,
+				"click-date": 2,
+			}),
+		);
 		// now should all be random
 		matchStorageToContainer(container);
 		assertFalse(container.isSorted);
@@ -1592,8 +1688,20 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// move around because they were already sorted
 		container.moveTab({ label: "flows" }, { moveBefore: true });
 		// add orgs
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				"click-count": 0,
+				"click-date": 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				"click-count": 2,
+				"click-date": 2,
+			}),
+		);
 		// now should all be random
 		matchStorageToContainer(container);
 		assertFalse(container.isSorted);

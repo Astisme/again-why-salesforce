@@ -28,6 +28,8 @@ import {
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
 	CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_CLICK_COUNT,
+	CXM_SORT_CLICK_DATE,
 	CXM_SORT_LABEL,
 	CXM_SORT_ORG,
 	CXM_SORT_URL,
@@ -247,6 +249,18 @@ const menuItemsOriginal = [
 	{
 		id: CXM_SORT_ORG,
 		title: "cxm_sort_org",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+	{
+		id: CXM_SORT_CLICK_COUNT,
+		title: "cxm_sort_click_count",
+		contexts: ["link"],
+		parentId: "sort",
+	},
+	{
+		id: CXM_SORT_CLICK_DATE,
+		title: "cxm_sort_click_date",
 		contexts: ["link"],
 		parentId: "sort",
 	},
@@ -517,6 +531,8 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_SORT_LABEL:
 		case CXM_SORT_URL:
 		case CXM_SORT_ORG:
+		case CXM_SORT_CLICK_COUNT:
+		case CXM_SORT_CLICK_DATE:
 			break;
 		default: {
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;

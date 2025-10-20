@@ -274,6 +274,8 @@ export const CXM_PAGE_REMOVE_TAB = "page-remove-tab";
 export const CXM_SORT_LABEL = "sort-label";
 export const CXM_SORT_URL = "sort-url";
 export const CXM_SORT_ORG = "sort-org";
+export const CXM_SORT_CLICK_COUNT = "sort-click-count";
+export const CXM_SORT_CLICK_DATE = "sort-last-click-date";
 export const CXM_TMP_HIDE_ORG = "hide-with-org";
 export const CXM_TMP_HIDE_NON_ORG = "hide-without-org";
 // commands (keyboard shortcuts)

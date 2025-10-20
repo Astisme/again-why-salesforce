@@ -14,6 +14,7 @@ import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
+const METADATA_ID = `${IMPORT_ID}-metadata`;
 const OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
 const OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
 const CLOSE_MODAL_ID = `${EXTENSION_NAME}-modal-close`;
@@ -70,6 +71,12 @@ async function generateSldsImport() {
 	);
 	duplicateWarningPart1.style.textAlign = "center";
 	divParent.append(duplicateWarningPart1);
+	const importMetadataCheckbox = await generateCheckboxWithLabel(
+		METADATA_ID,
+		"import_metadata",
+		false,
+	);
+	divParent.appendChild(importMetadataCheckbox);
 	const overwriteCheckbox = await generateCheckboxWithLabel(
 		OVERWRITE_ID,
 		"overwrite_tabs",
@@ -109,6 +116,8 @@ async function readFile(files) {
 	}
 
 	try {
+		const metadataPick =
+			inputModalParent.querySelector(`#${METADATA_ID}`).checked;
 		const overwritePick =
 			inputModalParent.querySelector(`#${OVERWRITE_ID}`).checked;
 		const otherOrgPick =
@@ -119,11 +128,17 @@ async function readFile(files) {
 			const jsonString = await file.text();
 			await allTabs.importTabs(
 				jsonString,
-				overwritePick,
-				otherOrgPick,
+				{
+					resetTabs: overwritePick,
+					preserveOtherOrg: otherOrgPick,
+					importMetadata: metadataPick,
+				},
 			);
 		}
-		const totalImported = allTabs.length - oldTabsLength;
+		let totalImported = allTabs.length;
+		if (!overwritePick) {
+			totalImported -= oldTabsLength;
+		}
 		// remove file import
 		document.getElementById(CLOSE_MODAL_ID).click();
 		showToast(["import_successful", totalImported, "tabs"], true);
