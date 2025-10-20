@@ -11,6 +11,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ## 🧪 Tests
 -->
 
+# Next release
+## 🚀 Added
+### Salesforce
+
+1. New Context menus to **temporarily** hide Org Tabs OR Generic Tabs (#109)
+
 # v2.1.0
 
 ## 🚀 Added
