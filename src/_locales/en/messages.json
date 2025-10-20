@@ -163,6 +163,14 @@
 		"message": "🤖 by Url",
 		"description": "context menu to let users sort their Tabs by url"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣Hide non-Org Tabs",
+		"description": "[context-menu] temporarily hide generic Tabs"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈Hide Org Tabs",
+		"description": "[context-menu] temporarily hide Org Tabs"
+	},
 	"cxm_update": {
 		"message": "✏️ Update Tab",
 		"description": "[context-menu]"
@@ -250,6 +258,10 @@
 	"error_import": {
 		"message": "Error during import:\n",
 		"description": "[error] there was an error during the import process"
+	},
+	"error_internal": {
+		"message": "Internal Error",
+		"description": "[error] generic error"
 	},
 	"error_invalid_key": {
 		"message": "The key parameter passed to the function is not valid",

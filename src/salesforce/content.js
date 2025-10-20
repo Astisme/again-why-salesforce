@@ -24,11 +24,14 @@ import {
 	CXM_SORT_LABEL,
 	CXM_SORT_ORG,
 	CXM_SORT_URL,
+	CXM_TMP_HIDE_NON_ORG,
+	CXM_TMP_HIDE_ORG,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
 	EXTENSION_VERSION,
 	getSettings,
+	HAS_ORG_TAB,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
@@ -625,6 +628,7 @@ const ACTION_RESET_DEFAULT = "reset-default";
 const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
 const ACTION_SORT = "sort";
+const ACTION_TMP_HIDE = "tmp-hide";
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -706,6 +710,14 @@ export async function performActionOnTabs(
 					throw new Error("error_sorting_tabs", options);
 				}
 				break;
+			case ACTION_TMP_HIDE: {
+				const allowedActions = [CXM_TMP_HIDE_ORG, CXM_TMP_HIDE_NON_ORG];
+				if (!allowedActions.includes(options)) {
+					throw new Error("error_internal", options);
+				}
+				hideTabs(options === CXM_TMP_HIDE_ORG);
+				return;
+			}
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -716,6 +728,20 @@ export async function performActionOnTabs(
 	} catch (error) {
 		console.warn({ action, tab, options });
 		showToast(error.message, false);
+	}
+}
+
+/**
+ * From setupTabUl hides all the specified Tabs (Org Tabs by default)
+ * @param {boolean} [hideOrgTabs=true] - If the Tabs to be hidden are the Org Tabs (default) or the generic ones
+ */
+function hideTabs(hideOrgTabs = true) {
+	const selector = hideOrgTabs
+		? `li${HAS_ORG_TAB}`
+		: `li:not(${HAS_ORG_TAB})`;
+	const tabsToHide = setupTabUl.querySelectorAll(selector);
+	for (const tth of tabsToHide) {
+		tth.style.display = "none";
 	}
 }
 
@@ -1017,6 +1043,14 @@ function listenToBackgroundPage() {
 						sortAsc: allTabs.isSortedBy !== "org" ||
 							!allTabs.isSortedAsc,
 					});
+					break;
+				case CXM_TMP_HIDE_ORG:
+				case CXM_TMP_HIDE_NON_ORG:
+					await performActionOnTabs(
+						ACTION_TMP_HIDE,
+						undefined,
+						message.what,
+					);
 					break;
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);
