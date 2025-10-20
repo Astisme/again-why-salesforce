@@ -149,7 +149,7 @@ export const TAB_STYLE_TOP = "top";
 export const SLDS_ACTIVE = "slds-is-active";
 const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
 export const ORG_TAB_CLASS = "is-org-tab";
-const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
+export const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
 
 /**
  * Retrieves saved style settings for the specified key.
@@ -274,6 +274,8 @@ export const CXM_PAGE_REMOVE_TAB = "page-remove-tab";
 export const CXM_SORT_LABEL = "sort-label";
 export const CXM_SORT_URL = "sort-url";
 export const CXM_SORT_ORG = "sort-org";
+export const CXM_TMP_HIDE_ORG = "hide-with-org";
+export const CXM_TMP_HIDE_NON_ORG = "hide-without-org";
 // commands (keyboard shortcuts)
 export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
 export const CMD_REMOVE_TAB = "cmd-remove-tab";
