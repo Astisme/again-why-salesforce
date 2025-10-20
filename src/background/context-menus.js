@@ -31,6 +31,8 @@ import {
 	CXM_SORT_LABEL,
 	CXM_SORT_ORG,
 	CXM_SORT_URL,
+	CXM_TMP_HIDE_NON_ORG,
+	CXM_TMP_HIDE_ORG,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
@@ -213,6 +215,18 @@ const menuItemsOriginal = [
 	{
 		id: CXM_RESET_DEFAULT_TABS,
 		title: "cxm_reset_default",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_TMP_HIDE_NON_ORG,
+		title: "cxm_tmp_hide_non_org",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_TMP_HIDE_ORG,
+		title: "cxm_tmp_hide_org",
 		contexts: ["link"],
 		parentId: "remove",
 	},
