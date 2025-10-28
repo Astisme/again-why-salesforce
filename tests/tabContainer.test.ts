@@ -1789,7 +1789,6 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		assertEquals(container[2].org, undefined);
 	});
 
-	// todo
 	await t.step("By click-count ascending", async () => {
 		await container.setDefaultTabs();
 		assertEquals(container.length, 3);

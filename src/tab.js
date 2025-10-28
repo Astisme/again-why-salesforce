@@ -459,10 +459,10 @@ export default class Tab {
 	 * Increments the click-count and sets the new click-date to now.
 	 */
 	handleClick() {
-		if (this[Tab.keyClickCount] != null) {
-			this[Tab.keyClickCount]++;
-		} else {
+		if (this[Tab.keyClickCount] == null) {
 			this[Tab.keyClickCount] = 1; // the user as just clicked this Tab
+		} else {
+			this[Tab.keyClickCount]++;
 		}
 		this[Tab.keyClickDate] = Date.now();
 	}
