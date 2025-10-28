@@ -417,7 +417,13 @@ export default class Tab {
 			[Tab.keyClickDate]: clickDate,
 		} = {},
 	) {
-		if (label == null && url == null && org == null) {
+		if (
+			label == null &&
+			url == null &&
+			org == null &&
+			clickCount == null &&
+			clickDate == null
+		) {
 			return this;
 		}
 		if (label != null && label !== "") {
@@ -438,30 +444,6 @@ export default class Tab {
 			this[Tab.keyClickDate] = clickDate === "" ? undefined : clickDate;
 		}
 		return this;
-	}
-
-	/**
-	 * Update a Tab based on the options passed.
-	 * @param {Tab} tabToUpdate - the Tab to be updated
-	 * @param {Object} param1 - an Object containing the following data
-	 * @param {*} param1.label - the new label for the Tab
-	 * @param {*} param1.url - the new url for the Tab
-	 * @param {*} param1.org - the new org for the Tab
-	 * @returns {Tab} A new Tab with the updated values
-	 */
-	static update(tabToUpdate, { label, url, org } = {}) {
-		if (tabToUpdate == null || !Tab.isValid(tabToUpdate)) {
-			throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
-		}
-		if (label == null && url == null && org == null) {
-			return tabToUpdate;
-		}
-		const orginput = org === "" ? undefined : org;
-		return Tab.create(
-			label ?? tabToUpdate.label,
-			url ?? tabToUpdate.url,
-			org == null ? tabToUpdate.org : orginput,
-		);
 	}
 
 	/**

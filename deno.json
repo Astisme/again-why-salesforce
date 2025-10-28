@@ -28,7 +28,7 @@
 		"locale-check": "deno --allow-read --allow-write bin/missing-locales.ts",
 		"locales": "deno task locale-check && deno task sort",
 		"bundle": "deno run -A bin/build.ts",
-		"checks": "deno task locales && deno task fmt && deno task lint && deno task test",
+		"checks": "deno task fmt && deno task lint && deno task test && deno task locales",
 
 		"dev-firefox": "deno --allow-write src/manifest/build-manifest.mjs firefox && deno task bundle",
 		"dev-chrome": "deno --allow-write src/manifest/build-manifest.mjs chrome && deno task bundle",
