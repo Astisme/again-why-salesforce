@@ -14,47 +14,80 @@ const _tabSecret = Symbol("tabSecret");
  * It allows to check if an object is a Tab and to transform a Tab into JSON.
  */
 export default class Tab {
+	static keyClickCount = "click-count";
+	static keyClickDate = "click-date";
+	/**
+	 * All the keys which express data about a Tab.
+	 */
+	static metadataKeys = new Set([
+		Tab.keyClickCount,
+		Tab.keyClickDate,
+	]);
 	/**
 	 * All the keys which are available inside a Tab.
 	 */
-	static allowedKeys = new Set(["label", "url", "org"]);
+	static allowedKeys = new Set([
+		"label",
+		"url",
+		"org",
+		...Tab.metadataKeys,
+	]);
 
 	/**
 	 * Creates a new instance of a `Tab` with the specified label, URL, and optional organization.
 	 *
 	 * **Note:** This constructor should not be called directly. Use `Tab.create()` instead.
 	 *
-	 * @param {string} label - The label of the tab.
-	 * @param {string} url - The URL of the tab.
-	 * @param {string|undefined} [org=undefined] - The optional organization associated with the tab.
+	 * @param {string} label - The label of the Tab.
+	 * @param {string} url - The URL of the Tab.
+	 * @param {string|undefined} [org=undefined] - The optional organization associated with the Tab.
+	 * @param {string|null} [clickCount=undefined] - The number of times the Tab was clicked.
+	 * @param {string|null} [clickDate=undefined] - The Date in which the Tab was clicked last.
 	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
 	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
 	 */
-	constructor(label, url, org = undefined, secret = null) {
+	constructor(
+		label,
+		url,
+		org = undefined,
+		clickCount = undefined,
+		clickDate = undefined,
+		secret = null,
+	) {
 		if (secret !== _tabSecret) {
 			throw new Error("error_tab_constructor");
 		}
 		this.label = label;
 		this.url = url;
 		this.org = org;
+		this[Tab.keyClickCount] = clickCount;
+		this[Tab.keyClickDate] = clickDate;
 	}
 
 	/**
 	 * Creates a new `Tab` instance. Can be called with either individual parameters (label, url, org) or an object-style argument.
 	 *
-	 * @param {string|Object} labelOrTab - The label of the tab, or an object representing a tab (with `label`, `url`, and optional `org` properties).
-	 * @param {string|null} [url=null] - The URL of the tab. Ignored if `labelOrTab` is an object.
-	 * @param {string|undefined} [org=undefined] - The optional organization associated with the tab. Ignored if `labelOrTab` is an object.
+	 * @param {string|Object} labelOrTab - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
+	 * @param {string|null} [url=null] - The URL of the Tab. Ignored if `labelOrTab` is an object.
+	 * @param {string|undefined} [org=undefined] - The optional organization associated with the Tab. Ignored if `labelOrTab` is an object.
+	 * @param {string|null} [clickCount=undefined] - The number of times the Tab was clicked. Ignored if `labelOrTab` is an object.
+	 * @param {string|null} [clickDate=undefined] - The Date in which the Tab was clicked last. Ignored if `labelOrTab` is an object.
 	 * @throws {Error} - Throws an error if the parameters are invalid, or if unexpected keys are found in the object.
 	 * @returns {Tab} - A new instance of the `Tab` class.
 	 */
-	static create(labelOrTab, url = null, org = undefined) {
+	static create(
+		labelOrTab,
+		url = null,
+		org = undefined,
+		clickCount = undefined,
+		clickDate = undefined,
+	) {
 		if (Tab.isTab(labelOrTab)) {
 			return labelOrTab;
 		}
 		// Check if first argument is an object (for object-style creation)
 		if (labelOrTab && typeof labelOrTab === "object") {
-			if (url || org) {
+			if (url || org || clickCount || clickDate) {
 				throw new Error(
 					"error_tab_object_creation",
 				);
@@ -73,9 +106,11 @@ export default class Tab {
 				tab.label,
 				tab.url,
 				tab.org,
+				tab[Tab.keyClickCount],
+				tab[Tab.keyClickDate],
 			);
 		}
-		// Original method signature (label, url, org)
+		// Original method signature (label, url, org, clickCount, clickDate)
 		const label = labelOrTab;
 		// Check types of parameters
 		if (typeof label !== "string" || label.trim() === "") {
@@ -92,11 +127,25 @@ export default class Tab {
 		if (org != null) {
 			orgName = Tab.extractOrgName(org);
 		}
+		if (
+			clickCount != null &&
+			(typeof clickCount !== "number" || clickCount < 0)
+		) {
+			throw new Error("error_tab_click_count");
+		}
+		if (
+			clickDate != null &&
+			(typeof clickDate !== "number" || clickDate > Date.now())
+		) {
+			throw new Error("error_tab_click_date");
+		}
 		// Create instance of Tab
 		return new Tab(
 			label,
 			miniURL,
 			orgName,
+			clickCount,
+			clickDate,
 			_tabSecret,
 		);
 	}
@@ -289,8 +338,14 @@ export default class Tab {
 			label: this.label,
 			url: this.url,
 		};
-		if (this.org != null) {
+		if (this.org) {
 			res.org = this.org;
+		}
+		if (this[Tab.keyClickCount]) {
+			res[Tab.keyClickCount] = this[Tab.keyClickCount];
+		}
+		if (this[Tab.keyClickDate]) {
+			res[Tab.keyClickDate] = this[Tab.keyClickDate];
 		}
 		return res;
 	}
@@ -353,8 +408,22 @@ export default class Tab {
 	 * @param {*} tab.org - the new org for the Tab
 	 * @returns {Tab} The updated Tab
 	 */
-	update({ label, url, org } = {}) {
-		if (label == null && url == null && org == null) {
+	update(
+		{
+			label,
+			url,
+			org,
+			[Tab.keyClickCount]: clickCount,
+			[Tab.keyClickDate]: clickDate,
+		} = {},
+	) {
+		if (
+			label == null &&
+			url == null &&
+			org == null &&
+			clickCount == null &&
+			clickDate == null
+		) {
 			return this;
 		}
 		if (label != null && label !== "") {
@@ -366,31 +435,15 @@ export default class Tab {
 		if (org != null) {
 			this.org = org === "" ? undefined : Tab.extractOrgName(org);
 		}
+		if (clickCount != null) {
+			this[Tab.keyClickCount] = clickCount === ""
+				? undefined
+				: clickCount;
+		}
+		if (clickDate != null) {
+			this[Tab.keyClickDate] = clickDate === "" ? undefined : clickDate;
+		}
 		return this;
-	}
-
-	/**
-	 * Update a Tab based on the options passed.
-	 * @param {Tab} tabToUpdate - the Tab to be updated
-	 * @param {Object} param1 - an Object containing the following data
-	 * @param {*} param1.label - the new label for the Tab
-	 * @param {*} param1.url - the new url for the Tab
-	 * @param {*} param1.org - the new org for the Tab
-	 * @returns {Tab} A new Tab with the updated values
-	 */
-	static update(tabToUpdate, { label, url, org } = {}) {
-		if (tabToUpdate == null || !Tab.isValid(tabToUpdate)) {
-			throw new Error(`Unknown tab: ${JSON.stringify(tabToUpdate)}`);
-		}
-		if (label == null && url == null && org == null) {
-			return tabToUpdate;
-		}
-		const orginput = org === "" ? undefined : org;
-		return Tab.create(
-			label ?? tabToUpdate.label,
-			url ?? tabToUpdate.url,
-			org == null ? tabToUpdate.org : orginput,
-		);
 	}
 
 	/**
@@ -400,5 +453,17 @@ export default class Tab {
 	 */
 	hashCode() {
 		return this.toString();
+	}
+
+	/**
+	 * Increments the click-count and sets the new click-date to now.
+	 */
+	handleClick() {
+		if (this[Tab.keyClickCount] == null) {
+			this[Tab.keyClickCount] = 1; // the user as just clicked this Tab
+		} else {
+			this[Tab.keyClickCount]++;
+		}
+		this[Tab.keyClickDate] = Date.now();
 	}
 }

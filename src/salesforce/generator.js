@@ -1,5 +1,6 @@
 "use strict";
 import Tab from "/tab.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import {
 	BROWSER,
 	EXTENSION_LABEL,
@@ -58,6 +59,7 @@ function _getLinkTarget(e, url) {
 		? "_blank"
 		: "_top";
 }
+
 /**
  * Handles the click event for a Lightning Link and determines the appropriate target for navigation.
  *
@@ -72,6 +74,8 @@ async function handleLightningLinkClick(e) {
 		showToast("error_redirect", false);
 		return;
 	}
+	(await ensureAllTabsAvailability())
+		.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const settings = await getSettings([
 		LINK_NEW_BROWSER,
 		USE_LIGHTNING_NAVIGATION,

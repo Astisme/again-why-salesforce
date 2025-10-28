@@ -151,6 +151,14 @@
 		"message": "🎯 Sort Tabs",
 		"description": "context menu to let users sort their Tabs automatically (parent menu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ by Usage",
+		"description": "context menu to let users sort their Tabs by how many times they click their Tabs"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ by Time",
+		"description": "context menu to let users sort their Tabs by when the Tabs were clicked"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 by Label",
 		"description": "context menu to let users sort their Tabs by label"
@@ -164,11 +172,11 @@
 		"description": "context menu to let users sort their Tabs by url"
 	},
 	"cxm_tmp_hide_non_org": {
-		"message": "🫣Hide non-Org Tabs",
+		"message": "🫣 Hide non-Org Tabs",
 		"description": "[context-menu] temporarily hide generic Tabs"
 	},
 	"cxm_tmp_hide_org": {
-		"message": "🙈Hide Org Tabs",
+		"message": "🙈 Hide Org Tabs",
 		"description": "[context-menu] temporarily hide Org Tabs"
 	},
 	"cxm_update": {
@@ -395,6 +403,14 @@
 		"message": "Cannot sync null Tabs!",
 		"description": "[error] tried to synchronize nothing"
 	},
+	"error_tab_click_count": {
+		"message": "Click Count must be a non-negative number",
+		"description": "[error] user tried to create a Tab with a wrong click count"
+	},
+	"error_tab_click_date": {
+		"message": "Click Date must be a number which does not result in a date in the future",
+		"description": "[error] user tried to create a Tab with a wrong click date"
+	},
 	"error_tab_constructor": {
 		"message": "Use Tab.create() instead of new Tab()",
 		"description": "[error] tell the developer how to use the Tab class"
@@ -577,6 +593,10 @@
 	"import_invalid_file": {
 		"message": "Invalid file type.\nOnly JSON files are supported.",
 		"description": "[error] the file used for import is not a JSON"
+	},
+	"import_metadata": {
+		"message": "Import Tab metadata (\"Click Count\", \"Click Date\" etc.).",
+		"description": "[label] import everything found in the file during the import process"
 	},
 	"import_successful": {
 		"message": "Successfully imported",

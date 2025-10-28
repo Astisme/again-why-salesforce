@@ -8,6 +8,7 @@ import {
 } from "@std/testing/asserts";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
+const currentDate = Date.now();
 
 function matchStorageToContainer(container: TabContainer) {
 	if (mockStorage.againWhySalesforce.length !== container.length) {
@@ -53,11 +54,21 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	await t.step("initializes with saved tabs from storage", async () => {
 		mockStorage.againWhySalesforce = [
 			{ label: "Test", url: "test-url" },
+			{
+				label: "Test2",
+				url: "test-url2",
+				[Tab.keyClickCount]: 3,
+				[Tab.keyClickDate]: currentDate,
+			},
 		];
 		const container = await TabContainer._reset();
-		assertEquals(container.length, 1);
+		assertEquals(container.length, 2);
 		assertEquals(container[0].label, "Test");
 		assertEquals(container[0].url, "test-url");
+		assertEquals(container[1].label, "Test2");
+		assertEquals(container[1].url, "test-url2");
+		assertEquals(container[1][Tab.keyClickCount], 3);
+		assertEquals(container[1][Tab.keyClickDate], currentDate);
 	});
 
 	await t.step(
@@ -86,10 +97,17 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 		assertEquals(lastTab.label, "New Tab");
 		assertEquals(lastTab.url, "new-url");
 		matchStorageToContainer(container);
-		assert(await container.addTab({ label: "New Tabb", url: "new-urll" }));
+		assert(
+			await container.addTab({
+				label: "New Tabb",
+				url: "new-urll",
+				[Tab.keyClickCount]: 9,
+			}),
+		);
 		const newLastTab = container.at(-1);
 		assertEquals(newLastTab.label, "New Tabb");
 		assertEquals(newLastTab.url, "new-urll");
+		assertEquals(newLastTab[Tab.keyClickCount], 9);
 		matchStorageToContainer(container);
 	});
 
@@ -98,16 +116,22 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 		assert(
 			await container.addTabs([
 				{ label: "Tab1", url: "url1" },
-				{ label: "Tab2", url: "url2" },
-				{ label: "Tab3", url: "url3" },
+				{ label: "Tab2", url: "url2", org: "test2" },
+				{ label: "Tab3", url: "url3", [Tab.keyClickCount]: 2 },
+				{ label: "Tab4", url: "url4", [Tab.keyClickDate]: currentDate },
 			]),
 		);
-		assertEquals(container.at(-3).label, "Tab1");
-		assertEquals(container.at(-2).label, "Tab2");
-		assertEquals(container.at(-1).label, "Tab3");
-		assertEquals(container.at(-3).url, "url1");
-		assertEquals(container.at(-2).url, "url2");
-		assertEquals(container.at(-1).url, "url3");
+		assertEquals(container.at(-4).label, "Tab1");
+		assertEquals(container.at(-3).label, "Tab2");
+		assertEquals(container.at(-2).label, "Tab3");
+		assertEquals(container.at(-1).label, "Tab4");
+		assertEquals(container.at(-4).url, "url1");
+		assertEquals(container.at(-3).url, "url2");
+		assertEquals(container.at(-2).url, "url3");
+		assertEquals(container.at(-1).url, "url4");
+		assertEquals(container.at(-3).org, "test2");
+		assertEquals(container.at(-2)[Tab.keyClickCount], 2);
+		assertEquals(container.at(-1)[Tab.keyClickDate], currentDate);
 		matchStorageToContainer(container);
 	});
 
@@ -119,6 +143,13 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 		);
 		assert(
 			await container.addTab({ label: "New Tab", url: "unique-url2" }),
+		);
+		assert(
+			await container.addTab({
+				label: "New Tab",
+				url: "unique-url2",
+				org: "test-org2",
+			}),
 		);
 		await assertRejects(
 			async () =>
@@ -895,8 +926,10 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url"},{"label":"orglabel","url":"orgurl","org":"orgorg"}]`,
-				true,
-				false,
+				{
+					resetTabs: true,
+					preserveOtherOrg: false,
+				},
 			),
 			2,
 		);
@@ -905,7 +938,9 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url2"},{"label":"orglabel","url":"orgurl2","org":"orgorg"}]`,
-				true,
+				{
+					resetTabs: true,
+				},
 			),
 			2,
 		);
@@ -914,12 +949,44 @@ await Deno.test("TabContainer - Import", async (t) => {
 		assertEquals(
 			await container.importTabs(
 				`[{"label":"hello","url":"nice-url3"},{"label":"orglabel","url":"orgurl3","org":"orgorg"}]`,
-				false,
-				false,
+				{
+					resetTabs: false,
+					preserveOtherOrg: false,
+				},
 			),
 			2,
 		);
 		assertEquals(container.length, 3);
+
+		assertEquals(
+			await container.importTabs(
+				`[{"label":"hello","url":"nice-url4","${Tab.keyClickCount}":4},{"label":"orglabel","url":"orgurl4","org":"orgorg","${Tab.keyClickDate}":${currentDate}}]`,
+				{
+					importMetadata: true,
+				},
+			),
+			2,
+		);
+		assertEquals(container.length, 5);
+		assertEquals(container.at(-2)[Tab.keyClickCount], 4);
+		assertEquals(container.at(-2)[Tab.keyClickDate], undefined);
+		assertEquals(container.at(-1)[Tab.keyClickCount], undefined);
+		assertEquals(container.at(-1)[Tab.keyClickDate], currentDate);
+		assertEquals(
+			await container.importTabs(
+				`[{"label":"hello","url":"nice-url5","${Tab.keyClickCount}":4,"${Tab.keyClickDate}":${currentDate},"org":"test-org5"}]`,
+				{
+					importMetadata: false,
+				},
+			),
+			1,
+		);
+		assertEquals(container.length, 6);
+		assertEquals(container.at(-1).label, "hello");
+		assertEquals(container.at(-1).url, "nice-url5");
+		assertEquals(container.at(-1).org, "test-org5");
+		assertEquals(container.at(-1)[Tab.keyClickCount], undefined);
+		assertEquals(container.at(-1)[Tab.keyClickDate], undefined);
 	});
 
 	await t.step("does not import tabs from wrong JSON string", async () => {
@@ -938,15 +1005,20 @@ await Deno.test("TabContainer - Import", async (t) => {
 			async () =>
 				await container.importTabs(
 					`[{"label":"hello","url":"nice-url"},{"unexpected":"orglabel","url":"orgurl","org":"orgorg"}]`,
-					true,
-					false,
+					{
+						resetTabs: true,
+						preserveOtherOrg: false,
+					},
 				),
 			Error,
 		);
 		assertEquals(container.length, 3);
 
 		assertRejects(
-			async () => await container.importTabs(`a simple string`, true),
+			async () =>
+				await container.importTabs(`a simple string`, {
+					resetTabs: true,
+				}),
 			Error,
 		);
 		assertEquals(container.length, 3);
@@ -955,7 +1027,9 @@ await Deno.test("TabContainer - Import", async (t) => {
 			async () =>
 				await container.importTabs(
 					`[{"label":"hello","url":"nice-url","whoopsie":{"label":"hello","url":"nice-url"}}`,
-					true,
+					{
+						resetTabs: true,
+					},
 				),
 			Error,
 		);
@@ -1387,6 +1461,14 @@ await Deno.test("TabContainer - Update Tab", async () => {
 	matchStorageToContainer(container);
 	assert(
 		await container.updateTab({ url: "ManageUsers/home" }, {
+			[Tab.keyClickCount]: 1,
+			[Tab.keyClickDate]: currentDate,
+		}),
+	);
+	assertEquals(container[2][Tab.keyClickCount], 1);
+	assertEquals(container[2][Tab.keyClickDate], currentDate);
+	assert(
+		await container.updateTab({ url: "ManageUsers/home" }, {
 			org: "",
 			url: "",
 			label: "",
@@ -1417,9 +1499,27 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		assertEquals(container[1].label, "flows");
 		assertEquals(container[2].label, "users");
 		// update tabs to add org (so they all are scrambled)
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
-		assert(await container.updateTab(container[2], { org: "b" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
+		assert(
+			await container.updateTab(container[2], {
+				org: "b",
+				[Tab.keyClickCount]: 1,
+				[Tab.keyClickDate]: 1,
+			}),
+		);
 		// move around because they were already sorted
 		await container.moveTab({ label: "flows" }, { moveBefore: true });
 		assertFalse(
@@ -1461,9 +1561,27 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// add new Tab because they were already sorted
 		assert(await container.addTab({ label: "mylabel", url: "/myurl" }));
 		// update tabs to add org (so they all are scrambled)
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
-		assert(await container.updateTab(container[2], { org: "b" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
+		assert(
+			await container.updateTab(container[2], {
+				org: "b",
+				[Tab.keyClickCount]: 1,
+				[Tab.keyClickDate]: 1,
+			}),
+		);
 		matchStorageToContainer(container);
 		assertFalse(
 			container.isSorted,
@@ -1498,9 +1616,26 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// add new Tabs to scramble
 		assert(
 			await container.addTabs([
-				{ label: "flows", url: "flows", org: "e" },
-				{ label: "assignment", url: "assignment", org: "a" },
-				{ label: "field", url: "field" },
+				{
+					label: "flows",
+					url: "flows",
+					org: "e",
+					[Tab.keyClickCount]: 0,
+					[Tab.keyClickDate]: 0,
+				},
+				{
+					label: "assignment",
+					url: "assignment",
+					org: "a",
+					[Tab.keyClickCount]: 2,
+					[Tab.keyClickDate]: 2,
+				},
+				{
+					label: "field",
+					url: "field",
+					[Tab.keyClickCount]: 1,
+					[Tab.keyClickDate]: 1,
+				},
 			]),
 		);
 		// now should all be random
@@ -1533,9 +1668,27 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// move around because they were already sorted
 		container.moveTab({ label: "flows" }, { moveBefore: true });
 		// add orgs
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
-		assert(await container.updateTab(container[2], { org: "b" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
+		assert(
+			await container.updateTab(container[2], {
+				org: "b",
+				[Tab.keyClickCount]: 1,
+				[Tab.keyClickDate]: 1,
+			}),
+		);
 		// now should all be random
 		matchStorageToContainer(container);
 		assertFalse(container.isSorted);
@@ -1563,8 +1716,20 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// move around because they were already sorted
 		container.moveTab({ label: "flows" }, { moveBefore: true });
 		// add orgs
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
 		// now should all be random
 		matchStorageToContainer(container);
 		assertFalse(container.isSorted);
@@ -1592,8 +1757,20 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		// move around because they were already sorted
 		container.moveTab({ label: "flows" }, { moveBefore: true });
 		// add orgs
-		assert(await container.updateTab(container[0], { org: "a" }));
-		assert(await container.updateTab(container[1], { org: "c" }));
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
 		// now should all be random
 		matchStorageToContainer(container);
 		assertFalse(container.isSorted);
@@ -1610,5 +1787,178 @@ await Deno.test("TabContainer - Sort Tabs", async (t) => {
 		assertEquals(container[0].org, "c");
 		assertEquals(container[1].org, "a");
 		assertEquals(container[2].org, undefined);
+	});
+
+	await t.step("By click-count ascending", async () => {
+		await container.setDefaultTabs();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+		// move around because they were already sorted
+		container.moveTab({ label: "flows" }, { moveBefore: true });
+		// add orgs
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
+		// now should all be random
+		matchStorageToContainer(container);
+		assertFalse(container.isSorted);
+		assertEquals(container.isSortedBy, null);
+		assertFalse(container.isSortedAsc);
+		assertFalse(container.isSortedDesc);
+		// sort by org ascending
+		assert(
+			await container.sort({ sortBy: Tab.keyClickCount, sortAsc: true }),
+		);
+		matchStorageToContainer(container);
+		assert(container.isSorted);
+		assertEquals(container.isSortedBy, Tab.keyClickCount);
+		assert(container.isSortedAsc);
+		assertFalse(container.isSortedDesc);
+		assertEquals(container[0][Tab.keyClickCount], undefined);
+		assertEquals(container[1][Tab.keyClickCount], 0);
+		assertEquals(container[2][Tab.keyClickCount], 2);
+	});
+
+	await t.step("By click-count descending", async () => {
+		await container.setDefaultTabs();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+		// move around because they were already sorted
+		container.moveTab({ label: "flows" }, { moveBefore: true });
+		// add orgs
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: 0,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: 2,
+			}),
+		);
+		// now should all be random
+		matchStorageToContainer(container);
+		assertFalse(container.isSorted);
+		assertEquals(container.isSortedBy, null);
+		assertFalse(container.isSortedAsc);
+		assertFalse(container.isSortedDesc);
+		// sort by org descending
+		assert(
+			await container.sort({ sortBy: Tab.keyClickCount, sortAsc: false }),
+		);
+		matchStorageToContainer(container);
+		assert(container.isSorted);
+		assertEquals(container.isSortedBy, Tab.keyClickCount);
+		assertFalse(container.isSortedAsc);
+		assert(container.isSortedDesc);
+		assertEquals(container[0][Tab.keyClickCount], 2);
+		assertEquals(container[1][Tab.keyClickCount], 0);
+		assertEquals(container[2][Tab.keyClickCount], undefined);
+	});
+
+	const stepCurrentDate = Date.now() + 1000;
+	await t.step("By click-date ascending", async () => {
+		await container.setDefaultTabs();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+		// move around because they were already sorted
+		container.moveTab({ label: "flows" }, { moveBefore: true });
+		// add orgs
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: currentDate,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: stepCurrentDate,
+			}),
+		);
+		// now should all be random
+		matchStorageToContainer(container);
+		assertFalse(container.isSorted);
+		assertEquals(container.isSortedBy, null);
+		assertFalse(container.isSortedAsc);
+		assertFalse(container.isSortedDesc);
+		// sort by org ascending
+		assert(
+			await container.sort({ sortBy: Tab.keyClickDate, sortAsc: true }),
+		);
+		matchStorageToContainer(container);
+		assert(container.isSorted);
+		assertEquals(container.isSortedBy, Tab.keyClickDate);
+		assert(container.isSortedAsc);
+		assertFalse(container.isSortedDesc);
+		assertEquals(container[0][Tab.keyClickDate], undefined);
+		assertEquals(container[1][Tab.keyClickDate], currentDate);
+		assertEquals(container[2][Tab.keyClickDate], stepCurrentDate);
+	});
+
+	await t.step("By click-date descending", async () => {
+		await container.setDefaultTabs();
+		assertEquals(container.length, 3);
+		assertEquals(container[0].url, "/lightning");
+		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
+		assertEquals(container[2].url, "ManageUsers/home");
+		// move around because they were already sorted
+		container.moveTab({ label: "flows" }, { moveBefore: true });
+		// add orgs
+		assert(
+			await container.updateTab(container[0], {
+				org: "a",
+				[Tab.keyClickCount]: 0,
+				[Tab.keyClickDate]: currentDate,
+			}),
+		);
+		assert(
+			await container.updateTab(container[1], {
+				org: "c",
+				[Tab.keyClickCount]: 2,
+				[Tab.keyClickDate]: stepCurrentDate,
+			}),
+		);
+		// now should all be random
+		matchStorageToContainer(container);
+		assertFalse(container.isSorted);
+		assertEquals(container.isSortedBy, null);
+		assertFalse(container.isSortedAsc);
+		assertFalse(container.isSortedDesc);
+		// sort by org descending
+		assert(
+			await container.sort({ sortBy: Tab.keyClickDate, sortAsc: false }),
+		);
+		matchStorageToContainer(container);
+		assert(container.isSorted);
+		assertEquals(container.isSortedBy, Tab.keyClickDate);
+		assertFalse(container.isSortedAsc);
+		assert(container.isSortedDesc);
+		assertEquals(container[0][Tab.keyClickDate], stepCurrentDate);
+		assertEquals(container[1][Tab.keyClickDate], currentDate);
+		assertEquals(container[2][Tab.keyClickDate], undefined);
 	});
 });

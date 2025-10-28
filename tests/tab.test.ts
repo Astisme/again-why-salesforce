@@ -5,6 +5,7 @@ import {
 	assertThrows,
 } from "@std/testing/asserts";
 import Tab from "/tab.js";
+const currentDate = Date.now();
 
 await Deno.test("Tab Creation - Basic Usage", async (t) => {
 	await t.step("creates tab with required parameters", () => {
@@ -12,6 +13,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Home");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, undefined);
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], undefined);
 	});
 
 	await t.step("creates tab with optional org parameter", () => {
@@ -23,6 +26,52 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Dashboard");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, "testorg");
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], undefined);
+	});
+
+	await t.step("creates tab with optional click-count parameter", () => {
+		const tab = Tab.create(
+			"Dashboard",
+			"https://example.com",
+			undefined,
+			4,
+		);
+		assertEquals(tab.label, "Dashboard");
+		assertEquals(tab.url, "https://example.com");
+		assertEquals(tab.org, undefined);
+		assertEquals(tab[Tab.keyClickCount], 4);
+		assertEquals(tab[Tab.keyClickDate], undefined);
+	});
+
+	await t.step("creates tab with optional click-date parameter", () => {
+		const tab = Tab.create(
+			"Dashboard",
+			"https://example.com",
+			undefined,
+			undefined,
+			currentDate,
+		);
+		assertEquals(tab.label, "Dashboard");
+		assertEquals(tab.url, "https://example.com");
+		assertEquals(tab.org, undefined);
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], currentDate);
+	});
+
+	await t.step("creates tab with all optional parameters", () => {
+		const tab = Tab.create(
+			"Dashboard",
+			"https://example.com",
+			"test-org",
+			7,
+			currentDate,
+		);
+		assertEquals(tab.label, "Dashboard");
+		assertEquals(tab.url, "https://example.com");
+		assertEquals(tab.org, "test-org");
+		assertEquals(tab[Tab.keyClickCount], 7);
+		assertEquals(tab[Tab.keyClickDate], currentDate);
 	});
 
 	await t.step(
@@ -41,6 +90,53 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 					org: "test-org",
 				}),
 			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					[Tab.keyClickCount]: 8,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					org: "test-org",
+					[Tab.keyClickCount]: 8,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					org: "test-org",
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					[Tab.keyClickCount]: 8,
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					org: "test-org",
+					[Tab.keyClickCount]: 8,
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
 		},
 	);
 });
@@ -51,10 +147,14 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 			label: "Settings",
 			url: "https://example.com/settings",
 			org: "testorg",
+			[Tab.keyClickCount]: 8,
+			[Tab.keyClickDate]: currentDate,
 		});
 		assertEquals(tab.label, "Settings");
 		assertEquals(tab.url, "https://example.com/settings");
 		assertEquals(tab.org, "testorg");
+		assertEquals(tab[Tab.keyClickCount], 8);
+		assertEquals(tab[Tab.keyClickDate], currentDate);
 	});
 
 	await t.step(
@@ -94,6 +194,35 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 						label: "Test",
 						url: "https://example.com",
 					}, "extraParam");
+				},
+				Error,
+				"error_tab_object_creation",
+			);
+			assertThrows(
+				() => {
+					Tab.create(
+						{
+							label: "Test",
+							url: "https://example.com",
+						},
+						undefined,
+						123,
+					);
+				},
+				Error,
+				"error_tab_object_creation",
+			);
+			assertThrows(
+				() => {
+					Tab.create(
+						{
+							label: "Test",
+							url: "https://example.com",
+						},
+						undefined,
+						undefined,
+						123,
+					);
 				},
 				Error,
 				"error_tab_object_creation",
@@ -154,6 +283,52 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 			}),
 		);
 	});
+
+	await t.step("throws error when click-count is not a number", () => {
+		assertThrows(
+			() => {
+				Tab.create("Test", "https://example.com", undefined, "123");
+			},
+			Error,
+			"error_tab_click_count",
+		);
+	});
+
+	await t.step("tab is not valid when click-count is not a number", () => {
+		assertFalse(
+			Tab.isValid({
+				label: "Test",
+				url: "https://example.com",
+				[Tab.keyClickCount]: "123",
+			}),
+		);
+	});
+
+	await t.step("throws error when click-date is not a number", () => {
+		assertThrows(
+			() => {
+				Tab.create(
+					"Test",
+					"https://example.com",
+					undefined,
+					undefined,
+					"123",
+				);
+			},
+			Error,
+			"error_tab_click_date",
+		);
+	});
+
+	await t.step("tab is not valid when click-date is not a number", () => {
+		assertFalse(
+			Tab.isValid({
+				label: "Test",
+				url: "https://example.com",
+				[Tab.keyClickDate]: "123",
+			}),
+		);
+	});
 });
 
 await Deno.test("Tab Creation - Instance Reuse", async (t) => {
@@ -170,13 +345,12 @@ await Deno.test("Tab Creation - Instance Reuse", async (t) => {
 await Deno.test("Tab Constructor Protection", () => {
 	assertThrows(
 		() => {
-			const tb = new Tab(
+			new Tab(
 				"Test",
 				"https://example.com",
 				undefined,
 				Symbol("fake"),
 			);
-			console.log(tb);
 		},
 		Error,
 		"error_tab_constructor",
@@ -189,6 +363,7 @@ await Deno.test("Utility methods", async (t) => {
 		"Test",
 		"https://example.com",
 		"testorg",
+		9,
 	);
 	const object_no_org = {
 		label: "Test",
@@ -198,6 +373,7 @@ await Deno.test("Utility methods", async (t) => {
 		label: "Test",
 		url: "https://example.com",
 		org: "testorg",
+		[Tab.keyClickCount]: 9,
 	};
 
 	await t.step("isTab", () => {
@@ -247,7 +423,8 @@ await Deno.test("Utility methods", async (t) => {
 			`{
     "label": "Test",
     "url": "https://example.com",
-    "org": "testorg"
+    "org": "testorg",
+    "${Tab.keyClickCount}": 9
 }`,
 		);
 	});
@@ -577,7 +754,6 @@ await Deno.test("Update", async (t) => {
 	const newurl = "new-url";
 	const oldurl = "old-url";
 	const neworg = "neworg";
-	const oldorg = "oldorg";
 	await t.step("Update Tab", () => {
 		const tab = Tab.create(oldlabel, oldurl);
 		assertEquals(tab.update({ label: newlabel }).label, newlabel);
@@ -594,47 +770,5 @@ await Deno.test("Update", async (t) => {
 		assertEquals(tab.label, newlabel);
 		assertEquals(tab.url, newurl);
 		assertEquals(tab.org, undefined);
-	});
-
-	await t.step("Update Tab Static", () => {
-		const tab = Tab.create(oldlabel, oldurl, oldorg);
-		const updatedlabel = Tab.update(tab, { label: newlabel });
-		assertEquals(updatedlabel.label, newlabel);
-		assertEquals(updatedlabel.url, tab.url);
-		assertEquals(updatedlabel.org, tab.org);
-		assertEquals(tab.label, oldlabel);
-		assertEquals(tab.url, oldurl);
-		assertEquals(tab.org, oldorg);
-		const updatedurl = Tab.update(tab, { url: newurl });
-		assertEquals(updatedurl.label, tab.label);
-		assertEquals(updatedurl.url, newurl);
-		assertEquals(updatedurl.org, tab.org);
-		assertEquals(tab.label, oldlabel);
-		assertEquals(tab.url, oldurl);
-		assertEquals(tab.org, oldorg);
-		const updatedorg = Tab.update(tab, { org: neworg });
-		assertEquals(updatedorg.label, tab.label);
-		assertEquals(updatedorg.url, tab.url);
-		assertEquals(updatedorg.org, neworg);
-		assertEquals(tab.label, oldlabel);
-		assertEquals(tab.url, oldurl);
-		assertEquals(tab.org, oldorg);
-		const undefinedorg = Tab.update(tab, { org: "" });
-		assertEquals(undefinedorg.label, tab.label);
-		assertEquals(undefinedorg.url, tab.url);
-		assertEquals(undefinedorg.org, undefined);
-		assertEquals(tab.label, oldlabel);
-		assertEquals(tab.url, oldurl);
-		assertEquals(tab.org, oldorg);
-		assertThrows(
-			() => Tab.update(null),
-			Error,
-			"Unknown tab",
-		);
-		assertThrows(
-			() => Tab.update({ url: "https://example.com" }),
-			Error,
-			"Unknown tab",
-		);
 	});
 });
