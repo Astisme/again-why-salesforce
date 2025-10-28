@@ -13,8 +13,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Home");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, undefined);
-		assertEquals(tab["click-count"], undefined);
-		assertEquals(tab["click-date"], undefined);
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], undefined);
 	});
 
 	await t.step("creates tab with optional org parameter", () => {
@@ -26,8 +26,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Dashboard");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, "testorg");
-		assertEquals(tab["click-count"], undefined);
-		assertEquals(tab["click-date"], undefined);
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], undefined);
 	});
 
 	await t.step("creates tab with optional click-count parameter", () => {
@@ -40,8 +40,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Dashboard");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, undefined);
-		assertEquals(tab["click-count"], 4);
-		assertEquals(tab["click-date"], undefined);
+		assertEquals(tab[Tab.keyClickCount], 4);
+		assertEquals(tab[Tab.keyClickDate], undefined);
 	});
 
 	await t.step("creates tab with optional click-date parameter", () => {
@@ -55,8 +55,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Dashboard");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, undefined);
-		assertEquals(tab["click-count"], undefined);
-		assertEquals(tab["click-date"], currentDate);
+		assertEquals(tab[Tab.keyClickCount], undefined);
+		assertEquals(tab[Tab.keyClickDate], currentDate);
 	});
 
 	await t.step("creates tab with all optional parameters", () => {
@@ -70,8 +70,8 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 		assertEquals(tab.label, "Dashboard");
 		assertEquals(tab.url, "https://example.com");
 		assertEquals(tab.org, "test-org");
-		assertEquals(tab["click-count"], 7);
-		assertEquals(tab["click-date"], currentDate);
+		assertEquals(tab[Tab.keyClickCount], 7);
+		assertEquals(tab[Tab.keyClickDate], currentDate);
 	});
 
 	await t.step(
@@ -94,22 +94,14 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 				Tab.isValid({
 					label: "Home",
 					url: "https://example.com",
-					"click-count": 8,
+					[Tab.keyClickCount]: 8,
 				}),
 			);
 			assert(
 				Tab.isValid({
 					label: "Home",
 					url: "https://example.com",
-					"click-date": currentDate,
-				}),
-			);
-			assert(
-				Tab.isValid({
-					label: "Home",
-					url: "https://example.com",
-					org: "test-org",
-					"click-count": 8,
+					[Tab.keyClickDate]: currentDate,
 				}),
 			);
 			assert(
@@ -117,15 +109,7 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 					label: "Home",
 					url: "https://example.com",
 					org: "test-org",
-					"click-date": currentDate,
-				}),
-			);
-			assert(
-				Tab.isValid({
-					label: "Home",
-					url: "https://example.com",
-					"click-count": 8,
-					"click-date": currentDate,
+					[Tab.keyClickCount]: 8,
 				}),
 			);
 			assert(
@@ -133,8 +117,24 @@ await Deno.test("Tab Creation - Basic Usage", async (t) => {
 					label: "Home",
 					url: "https://example.com",
 					org: "test-org",
-					"click-count": 8,
-					"click-date": currentDate,
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					[Tab.keyClickCount]: 8,
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
+			assert(
+				Tab.isValid({
+					label: "Home",
+					url: "https://example.com",
+					org: "test-org",
+					[Tab.keyClickCount]: 8,
+					[Tab.keyClickDate]: currentDate,
 				}),
 			);
 		},
@@ -147,14 +147,14 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 			label: "Settings",
 			url: "https://example.com/settings",
 			org: "testorg",
-			"click-count": 8,
-			"click-date": currentDate,
+			[Tab.keyClickCount]: 8,
+			[Tab.keyClickDate]: currentDate,
 		});
 		assertEquals(tab.label, "Settings");
 		assertEquals(tab.url, "https://example.com/settings");
 		assertEquals(tab.org, "testorg");
-		assertEquals(tab["click-count"], 8);
-		assertEquals(tab["click-date"], currentDate);
+		assertEquals(tab[Tab.keyClickCount], 8);
+		assertEquals(tab[Tab.keyClickDate], currentDate);
 	});
 
 	await t.step(
@@ -299,7 +299,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 			Tab.isValid({
 				label: "Test",
 				url: "https://example.com",
-				"click-count": "123",
+				[Tab.keyClickCount]: "123",
 			}),
 		);
 	});
@@ -325,7 +325,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 			Tab.isValid({
 				label: "Test",
 				url: "https://example.com",
-				"click-date": "123",
+				[Tab.keyClickDate]: "123",
 			}),
 		);
 	});
@@ -373,7 +373,7 @@ await Deno.test("Utility methods", async (t) => {
 		label: "Test",
 		url: "https://example.com",
 		org: "testorg",
-		"click-count": 9,
+		[Tab.keyClickCount]: 9,
 	};
 
 	await t.step("isTab", () => {
@@ -424,7 +424,7 @@ await Deno.test("Utility methods", async (t) => {
     "label": "Test",
     "url": "https://example.com",
     "org": "testorg",
-    "click-count": 9
+    "${Tab.keyClickCount}": 9
 }`,
 		);
 	});
