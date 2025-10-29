@@ -1,6 +1,6 @@
 "use strict";
 import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import {
 	BROWSER,
 	CHROME_LINK,
@@ -469,17 +469,17 @@ async function findTabsFromRows(orgName = null) {
 }
 
 /**
- * Saves the tabs by replacing the current tabs with the provided or found tabs, and optionally reloads the rows.
- * - If no valid `tabs` are provided, it retrieves the tabs from the DOM using `findTabsFromRows`.
- * - Replaces the current tabs in `allTabs` with the new set of tabs, applying filters to remove organization-specific tabs and keep non-matching organization tabs.
- * - If `doReload` is true, reloads the tab rows by calling `reloadRows` and then performs post-save actions via `pop_afterSet`.
+ * Saves the Tabs by replacing the current Tabs with the provided or found Tabs, and optionally reloads the rows.
+ * - If no valid `tabs` are provided, it retrieves the Tabs from the DOM using `findTabsFromRows`.
+ * - Replaces the current Tabs in `allTabs` with the new set of Tabs, applying filters to remove organization-specific Tabs and keep non-matching organization Tabs.
+ * - If `doReload` is true, reloads the Tab rows by calling `reloadRows` and then performs post-save actions via `pop_afterSet`.
  *
- * @param {boolean} [doReload=true] - Whether to reload the rows after saving the tabs. Defaults to true.
- * @param {Array<Tab>|null} [tabs=null] - The array of tabs to save. If null, the tabs will be fetched using `findTabsFromRows`.
- * @returns {Promise<void>} A promise that resolves once the tabs have been saved and optionally rows reloaded.
+ * @param {boolean} [doReload=true] - Whether to reload the rows after saving the Tabs. Defaults to true.
+ * @param {boolean} [findTabs=true] - Whether to find the current Tabs from the DOM. Defaults to true.
+ * @returns {Promise<void>} A promise that resolves once the Tabs have been saved and optionally rows reloaded.
  */
-async function saveTabs(doReload = true, tabs = null) {
-	if (!TabContainer.isValid(tabs)) {
+async function saveTabs(doReload = true, findTabs = true) {
+	if (findTabs) {
 		tabs = await findTabsFromRows();
 	}
 	await allTabs.replaceTabs(tabs, {
@@ -495,7 +495,7 @@ async function saveTabs(doReload = true, tabs = null) {
  * Clears all saved tabs and saves the empty list.
  */
 function emptyTabs() {
-	saveTabs(true, []);
+	saveTabs(true, false);
 }
 
 // listen to possible updates from tableDragHandler

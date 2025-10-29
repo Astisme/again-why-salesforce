@@ -297,6 +297,10 @@ export default class Tab {
 		return host;
 	}
 
+	static getTabObj(tab) {
+		return Tab.isTab(tab) ? tab : Tab.create(tab);
+	}
+
 	/**
 	 * Checks if the provided object is an instance of the `Tab` class.
 	 *
@@ -448,11 +452,11 @@ export default class Tab {
 
 	/**
 	 * Returns a string representation of the `Tab` instance as its hash code.
-	 *
+	 * This may be used as an Id for the given Tab
 	 * @returns {string} - The string representation of the `Tab` instance.
 	 */
 	hashCode() {
-		return this.toString();
+		return `${this.url}@${this.org}`;
 	}
 
 	/**

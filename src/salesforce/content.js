@@ -16,6 +16,7 @@ import {
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
 	CXM_PAGE_SAVE_TAB,
+	CXM_PIN_TAB,
 	CXM_REMOVE_LEFT_TABS,
 	CXM_REMOVE_OTHER_TABS,
 	CXM_REMOVE_RIGHT_TABS,
@@ -28,6 +29,7 @@ import {
 	CXM_SORT_URL,
 	CXM_TMP_HIDE_NON_ORG,
 	CXM_TMP_HIDE_ORG,
+	CXM_UNPIN_TAB,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
@@ -720,6 +722,16 @@ export async function performActionOnTabs(
 				hideTabs(options === CXM_TMP_HIDE_ORG);
 				return;
 			}
+			case CXM_PIN_TAB:
+				if (!await allTabs.pinTab(tab)) {
+					throw new Error("error_pin_tab", tab);
+				}
+				break;
+			case CXM_UNPIN_TAB:
+				if (!await allTabs.unpinTab(tab)) {
+					throw new Error("error_unpin_tab", tab);
+				}
+				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -1066,6 +1078,17 @@ function listenToBackgroundPage() {
 						ACTION_TMP_HIDE,
 						undefined,
 						message.what,
+					);
+					break;
+				case CXM_PIN_TAB:
+				case CXM_UNPIN_TAB:
+					await performActionOnTabs(
+						message.what,
+						{
+							label: message.label,
+							url: message.tabUrl ?? message.url,
+							org: message.org,
+						},
 					);
 					break;
 				case WHAT_UPDATE_EXTENSION:

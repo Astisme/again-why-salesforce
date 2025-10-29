@@ -33,6 +33,34 @@ export class TabContainer extends Array {
 	}
 
 	/**
+	 * Number of Tabs which MUST be persisted at the beginning of the Array
+	 */
+	#pinnedTabs = 0;
+
+	static keyPinnedTabsNo = "pinned";
+	static keyTabs = "tabs";
+	/**
+	 * All the keys which express data about a TabContainer.
+	 */
+	static metadataKeys = new Set([
+		TabContainer.keyPinnedTabsNo,
+	]);
+
+	#alreadyCheckedItems = false; // flag to prevent overchecking the same items
+
+	/**
+	 * Sets the sort state properties based on detected sorting
+	 * @param {string} key - The key that tabs are sorted by
+	 * @param {boolean} isAscending - Whether the sort is ascending
+	 */
+	#setSortState(key = null, isAscending = null) {
+		this.#isSorted = key != null;
+		this.#isSortedBy = key;
+		this.#isSortedAsc = isAscending === true;
+		this.#isSortedDesc = isAscending === false;
+	}
+
+	/**
 	 * Constructor for the TabContainer class. Prevents direct instantiation and requires the use of the `TabContainer.create()` method.
 	 * Throws an error if the provided secret does not match the expected secret value.
 	 *
@@ -62,7 +90,7 @@ export class TabContainer extends Array {
 	static async #checkAddTabs(tabs) {
 		if (
 			tabs == null || tabs.length <= 0 ||
-			!TabContainer.isValid(tabs, false)
+			!Array.isArray(tabs)
 		) {
 			return false;
 		}
@@ -104,49 +132,71 @@ export class TabContainer extends Array {
 	}
 
 	/**
+	 * Validates and converts an item to Tab objects
+	 * @param {Object} item - an item to validate
+	 * @returns {Object} an object with `msg` if the item could not be converted to a Tab XOR `tab` if the item was correctly converted.
+	 */
+	#validateItem(item = null) {
+		const res = {};
+		if (this.#alreadyCheckedItems) {
+			res.tab = item;
+			return res;
+		}
+		if (Tab.isValid(item)) {
+			const newTab = Tab.getTabObj(item);
+			if (this.exists(newTab, true)) {
+				res.msg = "error_duplicate_tab";
+			} else {
+				res.tab = newTab;
+			}
+		} else {
+			res.msg = "error_invalid_tab";
+		}
+		return res;
+	}
+
+	/**
+	 * Validates and converts items to Tab objects
+	 * will not throw on errored items (they will be ignored)
+	 * @param {Array} items - Items to validate
+	 * @returns {Array} Array of validated Tab objects
+	 * @throws when items is not an Array
+	 */
+	#validateItems(items = null) {
+		if (!Array.isArray(items)) {
+			throw new Error("error_no_array", items);
+		}
+		// allow for an array to be passed without spread operator (...)
+		if (items.length === 1 && Array.isArray(items[0])) {
+			items = items[0];
+		}
+		return items
+			.map((item) => this.#validateItem(item).tab)
+			.filter((tb) => tb != null);
+	}
+
+	/**
 	 * Adds one or more elements to the end of the TabContainer and returns the new length.
+	 * Items may be passed with spread operator or inside an Array.
 	 *
 	 * @param {...T} items The elements to add to the end of the TabContainer.
 	 * @returns {number} The new length of the TabContainer.
 	 *
 	 * @example
-	 * const container = new TabContainer<Tab>();
-	 * container.push({ id: 1, url: 'example.com' });
-	 * // returns 1, container now has length 1
-	 *
-	 * @example
 	 * // Adding multiple items
-	 * container.push(
-	 *   { id: 2, url: 'test1.com' },
-	 *   { id: 3, url: 'test2.com' }
+	 * push(
+	 *   { label: "l1", url: 'test1.com' },
+	 *   { label: "l2", url: 'test2.com' }
 	 * );
-	 * // returns 3, container now has length 3
+	 * // returns 2, container now has length 2 (if it was empty before)
 	 */
-	/*
-    push(...items) {
-        // Add each item to the end of the container
-        for (let i = 0; i < items.length; i++) {
-            this[this.length] = items[i];
-            this.length++;
-        }
-        return this.length;
-    }
-    async push({sync = true, ...tab} = {}) {
-        console.log('push',sync, tab);
-        if (!Tab.isValid(tab)) { // await is needed
-            throw new Error(`Invalid tab object: ${JSON.stringify(tab)}`);
-        }
-        if (this.exists(tab)) // await is needed
-            throw new Error(`This tab already exists: ${tab.toString()}`);
+	push(...items) {
+		return super.push(...this.#validateItems(items));
+	}
 
-        const validTab = Tab.create(tab);
-        this.push(validTab);
-
-        if (sync)
-            await this.syncTabs();
-        return true;
-    }
-    */
+	unshift(...items) {
+		return super.unshift(...this.#validateItems(items));
+	}
 
 	/**
 	 * Changes the contents of an array by removing, replacing, or adding elements.
@@ -176,7 +226,8 @@ export class TabContainer extends Array {
 		// Create a temporary array to hold the new result
 		const temp = this.slice(start + deleteCount);
 		this.length = start;
-		this.push(...items, ...temp);
+		const tabItems = items.map((item) => Tab.getTabObj(item));
+		this.push(...tabItems, ...temp);
 		return removedItems;
 	}
 
@@ -242,6 +293,22 @@ export class TabContainer extends Array {
 		return filtered;
 	}
 
+	#getTabContainerFromObj(tbContainerObj) {
+		const res = {};
+		res.isUsingOldVersion = Array.isArray(tbContainerObj);
+		if (res.isUsingOldVersion) {
+			// deprecated (old version of saving the Tabs)
+			// the Tabs will automatically get saved in the newer version at the first sync
+			res[TabContainer.keyTabs] = tbContainerObj;
+		} else {
+			// new version of saving the Tabs
+			// in a later release, we'll have to remove the deprecated way of saving them.
+			// currently this is not possible because we're using this for import as well (meaning someone might have "old" versions of their Tabs backed up as json files
+			Object.assign(res, tbContainerObj);
+		}
+		return res;
+	}
+
 	/**
 	 * Retrieves the saved tabs from the browser's runtime and optionally replaces the current tabs.
 	 *
@@ -249,12 +316,15 @@ export class TabContainer extends Array {
 	 * @returns {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
 	 */
 	async getSavedTabs(replace = true) {
-		const tabs = await sendExtensionMessage({ what: "get", key: WHY_KEY });
+		const { [TabContainer.keyTabs]: tabs } = this.#getTabContainerFromObj(
+			await sendExtensionMessage({ what: "get", key: WHY_KEY }),
+		);
 		if (replace) {
 			await this.replaceTabs(tabs, {
 				resetTabs: true,
 				removeOrgTabs: true,
 				sync: false,
+				updatePinnedTabs: false,
 			});
 			return this;
 		}
@@ -269,15 +339,12 @@ export class TabContainer extends Array {
 	async setDefaultTabs() {
 		const flows = await translator.translate("flows");
 		const users = await translator.translate("users");
-		return await this.replaceTabs([
+		this.length = 0;
+		return await this.addTabs([
 			{ label: "⚡", url: "/lightning" },
 			{ label: flows, url: "/lightning/app/standard__FlowsApp" },
 			{ label: users, url: "ManageUsers/home" },
-		], {
-			resetTabs: true,
-			removeOrgTabs: true,
-			sync: true,
-		});
+		]);
 	}
 
 	/**
@@ -289,25 +356,17 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
 	async addTab(tab, sync = true, fromAddTabs = false, addInFront = false) {
-		let msg = null;
-		if (!Tab.isValid(tab)) {
-			msg = await translator.translate([
-				"error_invalid_tab",
-			]);
-		} else if (this.exists(tab, true)) {
-			msg = await translator.translate([
-				"error_duplicate_tab",
-			]);
-		}
+		const { msg, tab: newTab } = this.#validateItem(tab);
 		if (msg != null) {
-			throw new Error(`${msg} ${JSON.stringify(tab)}`);
+			throw new Error(`${await translator.translate([
+				msg,
+			])} ${JSON.stringify(tab)}`);
 		}
-		const newTab = Tab.create(tab);
-		if (addInFront) {
-			this.unshift(newTab);
-		} else {
-			this.push(newTab);
-		}
+		// add in front but after the pinned Tabs else add at the end
+		const newIndex = addInFront ? this.#pinnedTabs : this.length;
+		this.#alreadyCheckedItems = true;
+		this.splice(newIndex, 0, newTab);
+		this.#alreadyCheckedItems = false;
 		if (sync) {
 			return await this.syncTabs();
 		} else if (!fromAddTabs) {
@@ -325,10 +384,13 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all tabs were added successfully (excluding duplicates), otherwise `false` if any tab could not be added.
 	 */
 	async addTabs(tabs, sync = true) {
+		if (!Array.isArray(tabs)) {
+			throw new Error("error_no_array");
+		}
 		if (tabs.length === 0 && sync === false) {
+			// no-op
 			return true;
 		}
-		TabContainer.errorOnInvalidTabs(tabs);
 		for (const tab of tabs) {
 			try {
 				await this.addTab(tab, false, true);
@@ -596,6 +658,7 @@ export class TabContainer extends Array {
 		sync = true,
 		keepTabsNotThisOrg = null,
 		removeThisOrgTabs = null,
+		updatePinnedTabs = true,
 	} = {}) {
 		if (newTabs === this) {
 			return true;
@@ -604,43 +667,55 @@ export class TabContainer extends Array {
 			removeThisOrgTabs == null
 		) {
 			this.splice(0, this.length);
+			if (updatePinnedTabs) {
+				this.#pinnedTabs = 0;
+			}
 		} else if (resetTabs || removeOrgTabs) {
-			this.splice(
-				0,
-				this.length,
-				...this.filter((tab) => {
-					// If resetTabs, clear existing tabs
-					if (resetTabs) {
-						// if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
-						// else, clear existing tabs which do not have an org set
-						if (!removeOrgTabs) {
-							return tab.org != null;
-						} else if (
-							keepTabsNotThisOrg != null ||
-							removeThisOrgTabs != null
-						) {
-							return tab.org != null &&
-								(keepTabsNotThisOrg == null ||
-									tab.org !== keepTabsNotThisOrg) &&
-								(removeThisOrgTabs == null ||
+			// treat the pinned Tabs as their own list
+			const pinnedTabsList = this.splice(0, this.#pinnedTabs);
+			// loop on both this and pinnedTabsList with the same splice function
+			for (const what of [this, pinnedTabsList]) {
+				what.splice(
+					0,
+					what.length,
+					...what.filter((tab) => {
+						// If resetTabs, clear existing tabs
+						if (resetTabs) {
+							// if removeOrgTabs, clear existing tabs and existing tabs with an org set as well
+							// else, clear existing tabs which do not have an org set
+							if (!removeOrgTabs) {
+								return tab.org != null;
+							} else if (
+								keepTabsNotThisOrg != null ||
+								removeThisOrgTabs != null
+							) {
+								return tab.org != null &&
+									(keepTabsNotThisOrg == null ||
+										tab.org !== keepTabsNotThisOrg) &&
+									(removeThisOrgTabs == null ||
+										tab.org !== removeThisOrgTabs);
+								// if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
+								// if removeThisOrgTabs, clear existing tabs and existing tabs with an org set and matching the removeThisOrgTabs string
+							} else {
+								// else, clear existing tabs
+								return false;
+							}
+						} else if (removeOrgTabs) {
+							// if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
+							// else, keep only non-org-specific tabs
+							return tab.org == null ||
+								(keepTabsNotThisOrg != null &&
+									tab.org === keepTabsNotThisOrg) ||
+								(removeThisOrgTabs != null &&
 									tab.org !== removeThisOrgTabs);
-							// if keepTabsNotThisOrg, clear existing tabs and existing tabs with an org set but not matching the keepTabsNotThisOrg string
-							// if removeThisOrgTabs, clear existing tabs and existing tabs with an org set and matching the removeThisOrgTabs string
-						} else {
-							// else, clear existing tabs
-							return false;
 						}
-					} else if (removeOrgTabs) {
-						// if keepTabsNotThisOrg, remove the org tabs which do not match the keepTabsNotThisOrg string
-						// else, keep only non-org-specific tabs
-						return tab.org == null ||
-							(keepTabsNotThisOrg != null &&
-								tab.org === keepTabsNotThisOrg) ||
-							(removeThisOrgTabs != null &&
-								tab.org !== removeThisOrgTabs);
-					}
-				}),
-			);
+					}),
+				);
+			}
+			// set the pinnedTabs to the updated length of the pinnedTabsList
+			if (updatePinnedTabs) {
+				this.#pinnedTabs = pinnedTabsList.length;
+			}
 		}
 		// Add new tabs and sync them
 		return await this.addTabs(newTabs, sync);
@@ -652,7 +727,10 @@ export class TabContainer extends Array {
 	 * @returns {Object} - A JSON object representing the `TabContainer` instance.
 	 */
 	toJSON() {
-		return TabContainer.toJSON(this);
+		return {
+			[TabContainer.keyTabs]: this.map((tb) => tb.toJSON()),
+			[TabContainer.keyPinnedTabsNo]: this.#pinnedTabs,
+		};
 	}
 
 	/**
@@ -661,7 +739,7 @@ export class TabContainer extends Array {
 	 * @returns {string} - A string representing the `TabContainer` instance.
 	 */
 	toString() {
-		return TabContainer.toString(this);
+		return `[\n${this.map((tb) => tb.toString()).join(",\n")}\n]`;
 	}
 
 	/**
@@ -676,40 +754,95 @@ export class TabContainer extends Array {
 		preserveOtherOrg = true,
 		importMetadata = false,
 	} = {}) {
-		let imported = JSON.parse(jsonString);
-		TabContainer.errorOnInvalidTabs(imported);
+		let { [TabContainer.keyTabs]: imported, ...metadata } = this
+			.#getTabContainerFromObj(JSON.parse(jsonString));
+		if (metadata.isUsingOldVersion) {
+			// tell the user to upgrade their backups
+			// todo uncomment and fix tests
+			//sendExtensionMessage({ what: "warning", message: "warn_upgrade_backup" });
+		}
 		// imported is now a valid Array of Tabs
 		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
+		const backupPinnedTabs = this.#pinnedTabs;
 		try {
-			if (!importMetadata) {
-				imported = JSON.parse(jsonString, (key, value) => {
-					if (Tab.metadataKeys.has(key)) {
-						return undefined;
+			let importPinnedTabs;
+			if (importMetadata) {
+				importPinnedTabs = metadata?.[TabContainer.keyPinnedTabsNo];
+				if (importPinnedTabs != null && importPinnedTabs >= 0) {
+					// if the user does not want to reset their Tabs, get the pinned Tabs to be imported and add them to the pinned list
+					if (resetTabs) {
+						this.#pinnedTabs = importPinnedTabs;
+					} else {
+						// merge the already pinned Tabs with the imported pinned Tabs
+						// if pinnedTabs is 0, we'll simply do an unshift of the importPinnedTabsList
+						const pinnedTabsList = this.splice(
+							0,
+							this.#pinnedTabs,
+						);
+						const importPinnedTabsList = imported.splice(
+							0,
+							importPinnedTabs,
+						); // the `imported` array does not have the pinned Tabs anymore
+						const mergedPinnedTabsList = [
+							...pinnedTabsList,
+							...importPinnedTabsList
+								.filter((tb, index, arr) =>
+									arr.findIndex((t) =>
+										t.equals?.(tb) || t === tb
+									) === index
+								)
+								.filter((tb) => !pinnedTabsList.exists(tb)),
+						];
+						// add all the pinned Tabs in `this`
+						this.unshift(...mergedPinnedTabsList);
+						this.#pinnedTabs = mergedPinnedTabsList.length;
 					}
-					return value;
-				});
+				}
+			} else {
+				// remove metadata from the JSON string
+				const metadataKeys = new Set([
+					...Tab.metadataKeys,
+					...TabContainer.metadataKeys,
+				]);
+				const { [TabContainer.keyTabs]: _imported } = this
+					.#getTabContainerFromObj(JSON.parse(
+						jsonString,
+						(key, value) => {
+							if (metadataKeys.has(key)) {
+								return undefined;
+							}
+							return value;
+						},
+					));
+				imported = _imported;
+				// no need to save metadata
 			}
+			// import the Tabs from the JSON string
 			if (
 				await this.replaceTabs(imported, {
 					resetTabs,
 					removeOrgTabs: !preserveOtherOrg,
+					updatePinnedTabs: false,
 				})
 			) {
-				return imported.length;
+				return imported.length + (importPinnedTabs ?? 0);
 			}
 		} catch (error) {
+			console.info(error);
 			this.length = 0;
 			this.push(...backupTabs);
+			this.#pinnedTabs = backupPinnedTabs;
 			throw error;
 		}
 		return 0;
 	}
 
 	/**
-	 * Synchronizes the tabs in the `TabContainer`. Optionally replaces the current tabs before synchronization.
+	 * Synchronizes the Tabs in the `TabContainer`. Optionally replaces the current Tabs before synchronization.
 	 * Last function called by other entry points.
+	 * Calls `checkSetSorted` before synching the Tabs
 	 *
-	 * @param {Array|null} [tabs=null] - An optional array of tabs to replace the current tabs before synchronization. If not provided, the current tabs are used.
+	 * @param {Array|null} [tabs=null] - An optional array of Tabs to replace the current Tabs before synchronization. If not provided, the current Tabs are used.
 	 * @param {boolean} [fromSortFunction=false] - Whether the function was called from the sort function.
 	 * @param {boolean} [fromInvalidateSortFunction=false] - Whether the function was called from a user action which invalidates the sorting function (like the moveTab function).
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful, otherwise `false`.
@@ -724,115 +857,27 @@ export class TabContainer extends Array {
 			return false;
 		}
 		await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
-		return await TabContainer._syncTabs(tabs ?? this);
+		return await this.#syncTabs();
 	}
 
 	/**
-	 * Synchronizes the specified tabs by sending them to the browser's runtime.
+	 * Synchronizes the specified Tabs by sending them to the browser's runtime.
 	 *
-	 * @param {Array|TabContainer|null} [tabs=null] - The tabs to synchronize. If `null`, synchronization is not possible.
+	 * @param {Array|TabContainer|null} [tabs=null] - The Tabs to synchronize. If `null`, synchronization is not possible.
+	 * @param {number} pinnedTabsNo - The positive or 0 number representing the pinned Tabs
 	 * @throws {Error} - Throws an error if `tabs` is `null` or if there is an issue with the runtime message.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the synchronization is successful.
-	 * @private
 	 */
-	static async _syncTabs(tabs = null) {
-		if (tabs == null) {
-			const msg = await translator.translate("error_sync_nothing");
-			throw new Error(msg);
-		}
+	async #syncTabs() {
 		await sendExtensionMessage({
 			what: "set",
-			set: TabContainer.toJSON(tabs),
+			set: this.toJSON(),
 			key: WHY_KEY,
 		});
 		if (BROWSER.runtime.lastError) {
 			throw new Error(BROWSER.runtime.lastError);
 		}
 		return true;
-	}
-
-	/**
-	 * Validates an array of tabs, throwing an error if any tab is invalid or if the provided data is not a valid array.
-	 *
-	 * @param {Array|null} [tabs=null] - The array of tabs to validate.
-	 * @throws {Error} - Throws an error if the array is invalid or if any tab in the array is not valid.
-	 */
-	static errorOnInvalidTabs(tabs = null) {
-		if (!TabContainer.isValid(tabs, false)) {
-			throw new Error("error_no_array", tabs);
-		}
-		let invalidTab = null;
-		for (const tab of tabs) {
-			if (!Tab.isValid(tab)) {
-				invalidTab = tab;
-				break;
-			}
-		}
-		if (invalidTab != null) {
-			console.trace();
-			throw new Error([
-				"error_tabcont_invalid_tabs",
-				JSON.stringify(invalidTab),
-				"tab_explain",
-			]);
-		}
-	}
-
-	/**
-	 * Validates if the provided data is a valid array of tabs. Optionally checks if each tab in the array is valid.
-	 *
-	 * @param {Array|null} tabs - The array of tabs to validate.
-	 * @param {boolean} [strict=true] - A flag that, when `true`, also checks if each individual tab in the array is valid. Defaults to `true`.
-	 * @returns {boolean} - `true` if the tabs are valid (and all tabs are valid if `strict` is `true`), otherwise `false`.
-	 */
-	static isValid(tabs, strict = true) {
-		const basicCheck = tabs != null && Array.isArray(tabs);
-		if (!strict || !basicCheck) {
-			return basicCheck;
-		}
-		const tabValidResults = tabs.map((tab) => Tab.isValid(tab));
-		return tabValidResults.every(Boolean);
-	}
-
-	/**
-	 * Converts an array of tabs to a JSON representation. Validates the tabs before conversion.
-	 *
-	 * @param {Array} tabs - The array of tabs to convert to JSON.
-	 * @throws {Error} - Throws an error if the provided tabs are invalid.
-	 * @returns {Array<Object>} - A JSON array representing the valid tabs.
-	 */
-	static toJSON(tabs) {
-		TabContainer.errorOnInvalidTabs(tabs);
-		const validArray = TabContainer.isValid(tabs) ? tabs : Array.from(tabs);
-		const resultJson = [];
-		for (const tab of validArray) {
-			let pushTab;
-			if (Tab.isTab(tab)) {
-				pushTab = tab;
-			} else {
-				try {
-					pushTab = Tab.create(tab);
-				} catch (e) {
-					console.info(e);
-					// do not add a failing tab to the JSON
-					continue;
-				}
-			}
-			resultJson.push(pushTab.toJSON());
-		}
-		return resultJson;
-	}
-
-	/**
-	 * Converts an array of tabs to a string representation. Validates the tabs before conversion.
-	 *
-	 * @param {Array} tabs - The array of tabs to convert to a string.
-	 * @throws {Error} - Throws an error if the provided tabs are invalid.
-	 * @returns {string} - A string representation of the valid tabs.
-	 */
-	static toString(tabs) {
-		TabContainer.errorOnInvalidTabs(tabs);
-		return `[\n${tabs.map((tab) => tab.toString()).join(",\n")}\n]`;
 	}
 
 	/**
@@ -886,39 +931,53 @@ export class TabContainer extends Array {
 	 */
 	async moveTab(
 		{ label = null, url = null, org = null } = {},
-		{ moveBefore = true, fullMovement = false } = {},
+		{ moveBefore = true, fullMovement = false, sync = true } = {},
 	) {
 		const inputTab = { label, url, org };
 		const matchTab = this.getSingleTabByData(inputTab);
 		const currentIndex = this.getTabIndex(matchTab);
+		// check if the Tab to move is a pinned Tab
+		let minIndex;
+		let maxIndex;
+		if (currentIndex < this.#pinnedTabs) {
+			// is a pinned Tab
+			minIndex = 0;
+			maxIndex = this.#pinnedTabs - 1;
+		} else {
+			// is NOT a pinned Tab
+			minIndex = this.#pinnedTabs;
+			maxIndex = this.length - 1;
+		}
+		// the Tab to be moved is not a pinned Tab
 		let newIndex;
 		if (fullMovement) {
-			const [tab] = this.splice(currentIndex, 1);
-			if (moveBefore) {
-				this.unshift(tab);
-				newIndex = 0;
-			} else {
-				this.push(tab);
-				newIndex = this.length - 1;
-			}
-		} else {
+			// fullMovement but after pinned Tabs
+			// or at the end of the array
+			newIndex = moveBefore ? minIndex : maxIndex;
+		} else { // !fullMovement
 			// check that the new index place does not contain a not-this-org Tab
 			let correctedIndexFound = false;
 			let i = 1;
-			while (!correctedIndexFound && i < this.length) {
+			while (!correctedIndexFound && i <= maxIndex) {
 				newIndex = moveBefore
-					? Math.max(0, currentIndex - i)
-					: Math.min(this.length, currentIndex + i);
+					? Math.max(minIndex, currentIndex - i) // always after the pinned Tabs
+					: Math.min(maxIndex, currentIndex + i);
 				const targetTabAtIndex = this[newIndex];
 				correctedIndexFound = inputTab.org == null ||
 					targetTabAtIndex?.org == null ||
 					targetTabAtIndex?.org === inputTab.org;
 				i++;
 			}
-			// from newIndex, remove 0 tabs and insert `tab` in their place
-			this.splice(newIndex, 0, ...this.splice(currentIndex, 1));
+			// if correctedIndexFound is false, we'll have already set i as maxIndex
 		}
-		await this.syncTabs(undefined, undefined, true);
+		if (newIndex === currentIndex) {
+			throw new Error("error_cannot_move_dir");
+		}
+		// from newIndex, remove 0 tabs and insert `tab` in their place
+		this.splice(newIndex, 0, ...this.splice(currentIndex, 1));
+		if (sync) {
+			await this.syncTabs(undefined, undefined, true);
+		}
 		return newIndex;
 	}
 
@@ -1002,6 +1061,21 @@ export class TabContainer extends Array {
 	}
 
 	/**
+	 * Perform case-insensitive comparison for strings
+	 */
+	#sortFunction(a, b) {
+		a = a == null ? "" : String(a);
+		b = b == null ? "" : String(b);
+		return String(a).localeCompare(
+			String(b),
+			undefined,
+			{
+				sensitivity: "base",
+			},
+		);
+	}
+
+	/**
 	 * Sorts the tabs in the container by a specified property and order.
 	 * After sorting, it synchronizes the changes.
 	 *
@@ -1018,30 +1092,64 @@ export class TabContainer extends Array {
 				["error_tab_unexpected_keys", sortBy],
 			);
 		}
+		// backup pinned Tabs (do not sort them)
+		const pinnedTabsList = this.splice(0, this.#pinnedTabs);
 		const sortFactor = sortAsc ? 1 : -1;
 		super.sort((a, b) => {
-			const valA = a[sortBy];
-			const valB = b[sortBy];
 			// Treat null or undefined values as "smaller" to ensure they are grouped together
-			if (valA == null && valB != null) return -sortFactor;
-			if (valA != null && valB == null) return sortFactor;
-			if (valA == null && valB == null) return 0;
-			// Perform case-insensitive comparison for strings
 			// Adjust direction for descending order
-			return sortFactor *
-				String(valA).localeCompare(String(valB), undefined, {
-					sensitivity: "base",
-				});
+			return sortFactor * this.#sortFunction(a[sortBy], b[sortBy]);
 		});
-		this.#isSorted = true;
-		this.#isSortedBy = sortBy;
-		this.#isSortedAsc = sortAsc;
-		this.#isSortedDesc = !sortAsc;
+		this.#setSortState(sortBy, sortAsc);
+		// readd the pinned Tabs at the beginning
+		this.unshift(...pinnedTabsList);
 		// Persist the new order
 		if (sync) {
 			return await this.syncTabs(undefined, true);
 		}
 		return true;
+	}
+
+	/**
+	 * Handles the invalidation of sort function by updating persisted settings
+	 */
+	#invalidateSort() {
+		// Update the sort setting persisted (do not wait for response)
+		sendExtensionMessage({
+			what: "set",
+			key: SETTINGS_KEY,
+			set: [{
+				id: PERSIST_SORT,
+				enabled: false,
+			}],
+		});
+	}
+
+	/**
+	 * Checks if tabs are sorted by a specific key
+	 * @param {string} key - The key to check sorting for
+	 * @returns {{isSorted: boolean, isAscending: boolean}} Sort result
+	 */
+	#checkSortOrderForKey(key) {
+		let asc = true;
+		let desc = true;
+		for (
+			let i = this.#pinnedTabs + 1;
+			i < this.length && (asc || desc);
+			i++
+		) {
+			const comparison = this.#sortFunction(
+				this[i - 1][key],
+				this[i][key],
+			);
+			if (comparison === 0) continue;
+			if (comparison > 0) asc = false;
+			if (comparison < 0) desc = false;
+		}
+		return {
+			isSorted: asc || desc,
+			isAscending: asc && !desc,
+		};
 	}
 
 	/**
@@ -1066,108 +1174,36 @@ export class TabContainer extends Array {
 		fromSortFunction = false,
 		fromInvalidateSortFunction = false,
 	) {
-		/**
-		 * Sets the sort state properties based on detected sorting
-		 * @param {string} key - The key that tabs are sorted by
-		 * @param {boolean} isAscending - Whether the sort is ascending
-		 */
-		const setSortState = (key = null, isAscending = null) => {
-			this.#isSorted = key != null;
-			this.#isSortedBy = key;
-			this.#isSortedAsc = isAscending === true;
-			this.#isSortedDesc = isAscending === false;
-		};
-		/**
-		 * Handles the invalidation of sort function by updating persisted settings
-		 */
-		const handleInvalidateSort = () => {
-			// Update the sort setting persisted (do not wait for response)
-			sendExtensionMessage({
-				what: "set",
-				key: SETTINGS_KEY,
-				set: [{
-					id: PERSIST_SORT,
-					enabled: false,
-				}],
-			});
-		};
-		/**
-		 * Detects if the current tabs are sorted by any allowed key
-		 * @returns {boolean} true if tabs are sorted, false otherwise
-		 */
-		const detectSortOrder = () => {
-			/**
-			 * Checks if tabs are sorted by a specific key
-			 * @param {string} key - The key to check sorting for
-			 * @returns {{isSorted: boolean, isAscending: boolean}} Sort result
-			 */
-			const checkSortOrderForKey = (key) => {
-				/**
-				 * Compares two tab values for sorting
-				 * @param {*} prev - Previous value
-				 * @param {*} curr - Current value
-				 * @returns {number} Comparison result (-1, 0, 1)
-				 */
-				const compareTabValues = (prev, curr) => {
-					const prevVal = prev == null ? "" : String(prev);
-					const currVal = curr == null ? "" : String(curr);
-					return String(prevVal).localeCompare(
-						String(currVal),
-						undefined,
-						{
-							sensitivity: "base",
-						},
-					);
-				};
-				let asc = true;
-				let desc = true;
-				for (let i = 1; i < this.length; i++) {
-					const comparison = compareTabValues(
-						this[i - 1][key],
-						this[i][key],
-					);
-					if (comparison === 0) continue;
-					if (comparison > 0) asc = false;
-					if (comparison < 0) desc = false;
-					if (!asc && !desc) {
-						break; // No need to continue checking
-					}
-				}
-				return {
-					isSorted: asc || desc,
-					isAscending: asc && !desc,
-				};
-			};
-			for (const key of Tab.allowedKeys) {
-				const sortResult = checkSortOrderForKey(key);
-				if (sortResult.isSorted) {
-					setSortState(key, sortResult.isAscending);
-					break;
-				}
-			}
-			return this.#isSorted;
-		};
 		if (fromSortFunction) {
 			// already sorted everything
 			return true;
 		}
-		setSortState();
 		if (fromInvalidateSortFunction) {
-			handleInvalidateSort();
+			this.#invalidateSort();
 			// check if, out of luck, the array is still sorted (do not return)
 		}
 		// Check if the user wants to keep the Tabs always sorted
-		if (await this.checkShouldKeepSorted()) {
+		if (await this.#checkShouldKeepSorted()) {
 			return true;
 		}
-		return detectSortOrder();
+		// reset the sort state
+		this.#setSortState();
+		// check if the array is still sorted
+		for (const key of Tab.allowedKeys) {
+			const sortResult = this.#checkSortOrderForKey(key);
+			if (sortResult.isSorted) {
+				this.#setSortState(key, sortResult.isAscending);
+				break;
+			}
+		}
+		return this.#isSorted;
 	}
 
 	/**
 	 * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
 	 * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
 	 */
-	async checkShouldKeepSorted() {
+	async #checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);
 		if (!persistSort?.enabled) {
 			return false; // not set or esplicitly set as not enabled
@@ -1229,6 +1265,49 @@ export class TabContainer extends Array {
 	async handleClickTabByData(tabData = {}) {
 		this.getSingleTabByData(tabData)
 			?.handleClick();
+		return await this.syncTabs();
+	}
+
+	async unpinTab(tabData = {}) {
+		// get index of tabData
+		let currentIndex = this.getTabIndex(
+			this.getSingleTabByData(tabData),
+		);
+		if (currentIndex > this.#pinnedTabs) {
+			throw new Error("error_tab_not_pinned");
+		}
+		// move tabData at index == this.#pinnedTabs
+		while (currentIndex < this.#pinnedTabs - 1) {
+			currentIndex = await this.moveTab(tabData, {
+				moveBefore: false,
+				fullMovement: false,
+				sync: false,
+			});
+		}
+		// decrease pinnedTabs by one
+		this.#pinnedTabs--;
+		// sync tabs
+		return await this.syncTabs(undefined, undefined, true);
+	}
+
+	async pinTab(tabData = {}) {
+		try {
+			// pin at the top of the Array
+			await this.moveTab(tabData, {
+				moveBefore: true,
+				fullMovement: true,
+				sync: false,
+			});
+		} catch (err) {
+			// we'll get an error with error_cannot_move_dir if the user wants to pin the already first Tab
+			// in this specific case, we simply do not have to move the Tab, but we still have to add 1 on this.#pinnedTabs
+			if (err.message !== "error_cannot_move_dir") {
+				throw err;
+			}
+		}
+		// increase pinnedTabs by one
+		this.#pinnedTabs++;
+		// sync tabs
 		return await this.syncTabs();
 	}
 }

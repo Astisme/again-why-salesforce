@@ -1,4 +1,36 @@
 {
+	"warn_upgrade_backup": {
+		"message": "Please export your new Tabs as the file you've used won't be supported in future releases.",
+		"description": "[warning] the user imported their Tabs using a deprecated configuration of the json file"
+	},
+	"error_cannot_move": {
+		"message": "This Tab cannot be moved!",
+		"description": "[error] the requested Tab cannot be moved at the moment."
+	},
+	"error_cannot_move_dir": {
+		"message": "This Tab cannot be moved in this direction!",
+		"description": "[error] the requested Tab cannot be moved at the moment."
+	},
+	"error_pin_tab": {
+		"message": "Error while pinning Tab",
+		"description": "[error]"
+	},
+	"error_unpin_tab": {
+		"message": "Error while unpinning Tab",
+		"description": "[error]"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab is not pinned yet!",
+		"description": "[error] user tried to unpin a non-pinned Tab"
+	},
+	"cxm_pin_tab": {
+		"message": "... Pin",
+		"description": "[context-menu] let the user keep this Tab at the beginning of their list"
+	},
+	"cxm_unpin_tab": {
+		"message": "... Unpin",
+		"description": "[context-menu] let the user remove this Tab from their pinned list"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
