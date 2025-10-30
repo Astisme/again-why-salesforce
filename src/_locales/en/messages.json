@@ -23,6 +23,14 @@
 		"message": "Tab is not pinned yet!",
 		"description": "[error] user tried to unpin a non-pinned Tab"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "... Remove Pinned",
+		"description": "[context-menu] let the user remove their pinned Tabs"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "... Remove Unpinned",
+		"description": "[context-menu] let the user remove their not-pinned Tabs"
+	},
 	"cxm_pin_tab": {
 		"message": "... Pin",
 		"description": "[context-menu] let the user keep this Tab at the beginning of their list"
@@ -406,6 +414,26 @@
 	"error_removing_generic_tabs": {
 		"message": "Error when removing generic Tabs.",
 		"description": "[error] Generic error used while removing generic Tabs"
+	},
+	"error_already_pinned": {
+		"message": "This Tab was already pinned.",
+		"description": "[error] the user tried to pin a pinned Tab"
+	},
+	"error_already_unpinned": {
+		"message": "This Tab was already unpinned.",
+		"description": "[error] the user tried to unpin a unpinned Tab"
+	},
+	"error_no_pinned": {
+		"message": "You do not have any pinned Tabs yet!",
+		"description": "[error] the user tried to remove the pinned Tabs but they do not have any pinned Tabs"
+	},
+	"error_removing_pin_tabs": {
+		"message": "Error when removing pinned Tabs.",
+		"description": "[error] Generic error used while removing non-pinned Tabs"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error when removing non-pinned Tabs.",
+		"description": "[error] Generic error used while removing non-pinned Tabs"
 	},
 	"error_removing_other_tabs": {
 		"message": "Error when removing other Tabs.",

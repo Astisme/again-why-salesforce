@@ -106,6 +106,7 @@ export const mockBrowser = {
 			addListener: () => {},
 		},
 	},
+
 	runtime: {
 		sendMessage: (
 			message: InternalMessage,
@@ -115,7 +116,6 @@ export const mockBrowser = {
 			delete (chrome.runtime as any).lastError;
 			const setError = (message: string) =>
 				(chrome.runtime as any).lastError = message;
-
 			let response: any;
 			switch (message.what) {
 				case "get":
@@ -186,6 +186,7 @@ export const mockBrowser = {
 					break;
 				}
 				case "echo":
+        case "warning":
 					response = message.echo;
 					break;
 				default:
@@ -244,11 +245,13 @@ export const mockBrowser = {
 			},
 		},
 	},
+
 	i18n: {
 		getMessage: (_: string): string => {
 			return "Again, Why Salesforce";
 		},
 	},
+
 	contextMenus: {
 		onClicked: {
 			_listeners: [] as OnClickedCallback[],
@@ -269,6 +272,7 @@ export const mockBrowser = {
 			this._contextMenus.push(cm);
 		},
 	},
+
 	tabs: {
 		onActivated: {
 			_listeners: [] as OnActivatedCallback[],
@@ -304,6 +308,7 @@ export const mockBrowser = {
 			return Promise.resolve(true);
 		},
 	},
+
 	windows: {
 		onFocusChanged: {
 			_listeners: [] as OnFocusChangedCallback[],
@@ -317,6 +322,7 @@ export const mockBrowser = {
 			},
 		},
 	},
+
 	commands: {
 		onCommand: {
 			_listeners: [] as OnCommandCallback[],
@@ -338,6 +344,7 @@ export const mockBrowser = {
 			return Promise.resolve(this._mockCommands);
 		},
 	},
+
 	action: {
 		_popupMap: new Map<number | undefined, string>(),
 		setPopup(details: { tabId?: number; popup: string }): Promise<void> {
@@ -349,6 +356,7 @@ export const mockBrowser = {
 			return this._popupMap.get(tabId);
 		},
 	},
+
 	cookies: {
 		_cookies: [] as Cookie[],
 		getAll(which: Cookie): Promise<Cookie[]> {

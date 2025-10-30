@@ -19,8 +19,10 @@ import {
 	CXM_PIN_TAB,
 	CXM_REMOVE_LEFT_TABS,
 	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_PIN_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_REMOVE_UNPIN_TABS,
 	CXM_RESET_DEFAULT_TABS,
 	CXM_SORT_CLICK_COUNT,
 	CXM_SORT_CLICK_DATE,
@@ -732,6 +734,16 @@ export async function performActionOnTabs(
 					throw new Error("error_unpin_tab", tab);
 				}
 				break;
+			case CXM_REMOVE_PIN_TABS:
+				if (!await allTabs.removePinned(true)) {
+					throw new Error("error_removing_pin_tabs");
+				}
+				break;
+			case CXM_REMOVE_UNPIN_TABS:
+				if (!await allTabs.removePinned(false)) {
+					throw new Error("error_removing_unpin_tabs");
+				}
+				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -1000,6 +1012,12 @@ function listenToBackgroundPage() {
 						url: message.tabUrl,
 						org: message.org,
 					}, { removeBefore: false });
+					break;
+				case CXM_REMOVE_PIN_TABS:
+					await performActionOnTabs(CXM_REMOVE_PIN_TABS);
+					break;
+				case CXM_REMOVE_UNPIN_TABS:
+					await performActionOnTabs(CXM_REMOVE_UNPIN_TABS);
 					break;
 				case CXM_EMPTY_GENERIC_TABS:
 					await performActionOnTabs(ACTION_REMOVE_GENERIC_TABS);

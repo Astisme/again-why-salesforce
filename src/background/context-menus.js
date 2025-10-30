@@ -26,8 +26,10 @@ import {
 	CXM_PIN_TAB,
 	CXM_REMOVE_LEFT_TABS,
 	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_PIN_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_REMOVE_UNPIN_TABS,
 	CXM_RESET_DEFAULT_TABS,
 	CXM_SORT_CLICK_COUNT,
 	CXM_SORT_CLICK_DATE,
@@ -207,6 +209,18 @@ const menuItemsOriginal = [
 	{
 		id: CXM_REMOVE_RIGHT_TABS,
 		title: "cxm_remove_right_tabs",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_REMOVE_PIN_TABS,
+		title: "cxm_remove_pin_tabs",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_REMOVE_UNPIN_TABS,
+		title: "cxm_remove_unpin_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
@@ -547,6 +561,8 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_SORT_ORG:
 		case CXM_SORT_CLICK_COUNT:
 		case CXM_SORT_CLICK_DATE:
+		case CXM_REMOVE_PIN_TABS:
+		case CXM_REMOVE_UNPIN_TABS:
 			break;
 		default: {
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;

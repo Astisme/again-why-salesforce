@@ -88,6 +88,9 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
 	 */
 	static async #checkAddTabs(tabs) {
+		if (singletonAllTabs == null) {
+			throw new Error("error_tabcont_initialize");
+		}
 		if (
 			tabs == null || tabs.length <= 0 ||
 			!Array.isArray(tabs)
@@ -103,11 +106,18 @@ export class TabContainer extends Array {
 	 * @private
 	 */
 	static async #initialize() {
+		if (singletonAllTabs == null) {
+			throw new Error("error_tabcont_initialize");
+		}
 		const savedTabs = await singletonAllTabs.getSavedTabs(false);
 		if (await TabContainer.#checkAddTabs(savedTabs)) {
 			return true;
 		}
 		return await singletonAllTabs.setDefaultTabs();
+	}
+
+	static getThrowawayInstance() {
+		return new TabContainer(_tabContainerSecret);
 	}
 	/**
 	 * Creates and initializes a new `TabContainer` instance.
@@ -119,8 +129,8 @@ export class TabContainer extends Array {
 		if (singletonAllTabs != null) {
 			return singletonAllTabs;
 		}
-		translator = await ensureTranslatorAvailability();
 		singletonAllTabs = new TabContainer(_tabContainerSecret);
+		translator = await ensureTranslatorAvailability();
 		if (!await TabContainer.#initialize()) {
 			throw new Error(
 				await translator.translate([
@@ -216,7 +226,7 @@ export class TabContainer extends Array {
 		// Clamp deleteCount so we don’t remove more than available
 		deleteCount = Math.max(0, Math.min(deleteCount, this.length - start));
 		// Create an array directly without using any Array methods
-		const removedItems = [];
+		const removedItems = TabContainer.getThrowawayInstance();
 		// Manually copy the items to be removed
 		for (let i = 0; i < deleteCount; i++) {
 			if (start + i < this.length) {
@@ -258,10 +268,10 @@ export class TabContainer extends Array {
 			? Math.max(this.length + end, 0)
 			: Math.min(end, this.length);
 		// Ensure start is not greater than end
+		const sliced = TabContainer.getThrowawayInstance();
 		if (start >= end) {
-			return [];
+			return sliced;
 		}
-		const sliced = [];
 		// Copy elements to the new array
 		for (let i = start; i < end && i < this.length; i++) {
 			sliced.push(this[i]);
@@ -282,7 +292,7 @@ export class TabContainer extends Array {
 	 */
 	filter(callback) {
 		// Create a new instance of the same class
-		const filtered = [];
+		const filtered = TabContainer.getThrowawayInstance();
 		// Manually iterate through the array and apply the callback
 		for (let i = 0; i < this.length; i++) {
 			const element = this[i];
@@ -340,6 +350,7 @@ export class TabContainer extends Array {
 		const flows = await translator.translate("flows");
 		const users = await translator.translate("users");
 		this.length = 0;
+		this.#pinnedTabs = 0;
 		return await this.addTabs([
 			{ label: "⚡", url: "/lightning" },
 			{ label: flows, url: "/lightning/app/standard__FlowsApp" },
@@ -453,7 +464,7 @@ export class TabContainer extends Array {
 	) {
 		if (label == null && url == null) {
 			if (org == null) {
-				return [];
+				return TabContainer.getThrowawayInstance();
 			} else {
 				return this.getTabsByOrg(org, match);
 			}
@@ -728,7 +739,7 @@ export class TabContainer extends Array {
 	 */
 	toJSON() {
 		return {
-			[TabContainer.keyTabs]: this.map((tb) => tb.toJSON()),
+			[TabContainer.keyTabs]: Array.from(this).map((tb) => tb.toJSON()),
 			[TabContainer.keyPinnedTabsNo]: this.#pinnedTabs,
 		};
 	}
@@ -759,7 +770,7 @@ export class TabContainer extends Array {
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
 			// todo uncomment and fix tests
-			//sendExtensionMessage({ what: "warning", message: "warn_upgrade_backup" });
+			sendExtensionMessage({ what: "warning", message: "warn_upgrade_backup" });
 		}
 		// imported is now a valid Array of Tabs
 		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
@@ -779,6 +790,8 @@ export class TabContainer extends Array {
 							0,
 							this.#pinnedTabs,
 						);
+						console.log(pinnedTabsList instanceof TabContainer);
+						console.log(this instanceof TabContainer);
 						const importPinnedTabsList = imported.splice(
 							0,
 							importPinnedTabs,
@@ -892,7 +905,7 @@ export class TabContainer extends Array {
 	 */
 	map(callback) {
 		// Create a new instance of TabContainer
-		const mapped = [];
+		const mapped = TabContainer.getThrowawayInstance();
 		// Manually iterate and apply the callback
 		for (let i = 0; i < this.length; i++) {
 			mapped[i] = callback(this[i], i, this);
@@ -931,7 +944,12 @@ export class TabContainer extends Array {
 	 */
 	async moveTab(
 		{ label = null, url = null, org = null } = {},
-		{ moveBefore = true, fullMovement = false, sync = true } = {},
+		{
+			moveBefore = true,
+			fullMovement = false,
+			sync = true,
+			pinMovement = null,
+		} = {},
 	) {
 		const inputTab = { label, url, org };
 		const matchTab = this.getSingleTabByData(inputTab);
@@ -970,7 +988,14 @@ export class TabContainer extends Array {
 			}
 			// if correctedIndexFound is false, we'll have already set i as maxIndex
 		}
-		if (newIndex === currentIndex) {
+		if (pinMovement != null) {
+			// moving to pin/unpin but the newIndex sais that the Tab is already pinned/unpinned
+			if (pinMovement && newIndex < this.#pinnedTabs) {
+				throw new Error("error_already_pinned");
+			} else if (!pinMovement && newIndex > this.#pinnedTabs) {
+				throw new Error("error_already_unpinned");
+			}
+		} else if (newIndex === currentIndex) {
 			throw new Error("error_cannot_move_dir");
 		}
 		// from newIndex, remove 0 tabs and insert `tab` in their place
@@ -997,6 +1022,9 @@ export class TabContainer extends Array {
 			throw new Error(msg);
 		}
 		const index = this.getTabIndex(this.getSingleTabByData(tab));
+		if (index < this.#pinnedTabs) {
+			this.#pinnedTabs--;
+		}
 		const initialLength = this.length;
 		this.splice(index, 1);
 		if (!await this.syncTabs()) {
@@ -1014,6 +1042,30 @@ export class TabContainer extends Array {
 	getTabsNotThisOrg(checkTab, inputTab) {
 		return checkTab.org != null && checkTab.org !== inputTab.org;
 	}
+
+	async removePinned(rmPinned = null) {
+		if (rmPinned == null) {
+			throw new Error("error_no_data");
+		}
+		let index;
+		let deleteCount;
+		if (rmPinned) {
+			if (this.#pinnedTabs < 1) {
+				throw new Error("error_no_pinned");
+			}
+			index = 0;
+			deleteCount = this.#pinnedTabs;
+			this.#pinnedTabs = 0;
+		} else {
+			// remove unpinned
+			index = this.#pinnedTabs;
+			deleteCount = this.length;
+		}
+		const initialLength = this.length;
+		this.splice(index, deleteCount);
+		return initialLength > this.length && await this.syncTabs();
+	}
+
 	/**
 	 * Removes all tabs except the specified one, and optionally removes tabs before or after the specified tab.
 	 *
@@ -1036,27 +1088,43 @@ export class TabContainer extends Array {
 	 */
 	async removeOtherTabs(
 		{ label = null, url = null, org = null } = {},
-		{ removeBefore = null } = {},
+		{
+			removeBefore = null,
+		} = {},
 	) {
 		const tab = { label, url, org };
 		const matchTab = this.getSingleTabByData(tab);
+		const index = this.getTabIndex(matchTab);
 		// remove all tabs but this one
 		if (removeBefore == null) {
+			// if the Tab is pinned, it will still be pinned; otherwise no more pinned Tabs will be present
+			// if true => 1; else => 0
+			this.#pinnedTabs = Number(index < this.#pinnedTabs);
 			return await this.syncTabs([matchTab]);
 		}
-		const index = this.getTabIndex(matchTab);
-		// prevent org tabs which are not for this org to be deleted unwillingly
+		const deltaPinnedTabs = Math.max(0, this.#pinnedTabs - index);
+		let minIndex;
+		let deleteCount;
+		let whereIndex;
 		if (removeBefore) {
-			this.unshift(
-				...this.splice(0, index)
-					.filter((t) => this.getTabsNotThisOrg(t, tab)),
-			);
+			minIndex = 0;
+			deleteCount = index;
+			whereIndex = minIndex;
+			this.#pinnedTabs = deltaPinnedTabs;
 		} else {
-			this.push(
-				...this.splice(index + 1, this.length)
-					.filter((t) => this.getTabsNotThisOrg(t, tab)),
-			);
+			minIndex = index + 1;
+			deleteCount = this.length;
+			whereIndex = deleteCount;
+			this.#pinnedTabs -= deltaPinnedTabs;
 		}
+		this.splice(
+			whereIndex,
+			0,
+			...this
+				.splice(minIndex, deleteCount)
+				// prevent org tabs which are not for this org to be deleted unwillingly
+				.filter((t) => this.getTabsNotThisOrg(t, tab)),
+		);
 		return await this.syncTabs();
 	}
 
@@ -1270,18 +1338,19 @@ export class TabContainer extends Array {
 
 	async unpinTab(tabData = {}) {
 		// get index of tabData
-		let currentIndex = this.getTabIndex(
+		const currentIndex = this.getTabIndex(
 			this.getSingleTabByData(tabData),
 		);
 		if (currentIndex > this.#pinnedTabs) {
 			throw new Error("error_tab_not_pinned");
 		}
 		// move tabData at index == this.#pinnedTabs
-		while (currentIndex < this.#pinnedTabs - 1) {
-			currentIndex = await this.moveTab(tabData, {
+		if (currentIndex < this.#pinnedTabs - 1) {
+			await this.moveTab(tabData, {
 				moveBefore: false,
-				fullMovement: false,
+				fullMovement: true,
 				sync: false,
+				pinMovement: false,
 			});
 		}
 		// decrease pinnedTabs by one
@@ -1297,6 +1366,7 @@ export class TabContainer extends Array {
 				moveBefore: true,
 				fullMovement: true,
 				sync: false,
+				pinMovement: true,
 			});
 		} catch (err) {
 			// we'll get an error with error_cannot_move_dir if the user wants to pin the already first Tab
@@ -1319,7 +1389,7 @@ export class TabContainer extends Array {
  */
 async function getAllTabs_async() {
 	if (singletonAllTabs == null) {
-		singletonAllTabs = await TabContainer.create();
+		await TabContainer.create();
 	} else if (singletonAllTabs instanceof Promise) {
 		await singletonAllTabs;
 	}
@@ -1334,7 +1404,7 @@ async function getAllTabs_async() {
  */
 function getAllTabs() {
 	if (singletonAllTabs == null || singletonAllTabs instanceof Promise) {
-		throw new Error(["singletonAllTabs", "error_not_initilized"]);
+		throw new Error(["singleton", "error_not_initilized"]);
 	}
 	return singletonAllTabs;
 }
