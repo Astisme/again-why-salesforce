@@ -14,20 +14,35 @@ let singletonAllTabs = null;
 
 const _tabContainerSecret = Symbol("tabContainerSecret");
 
+/**
+ * The class to manage multiple Tabs (through TabContainer.create()).
+ */
 export class TabContainer extends Array {
 	#isSorted = false;
+  /**
+   * @returns {boolean} - whether the TabContainer is sorted
+   */
 	get isSorted() {
 		return this.#isSorted;
 	}
 	#isSortedBy = null;
+  /**
+   * @returns {string|null} - by which Tab field the TabContainer is sorted by
+   */
 	get isSortedBy() {
 		return this.#isSortedBy;
 	}
 	#isSortedAsc = false;
+  /**
+   * @returns {boolean} - whether the TabContainer is sorted ascending (A-Z)
+   */
 	get isSortedAsc() {
 		return this.#isSortedAsc;
 	}
 	#isSortedDesc = false;
+  /**
+   * @returns {boolean} - whether the TabContainer is sorted descending (Z-A)
+   */
 	get isSortedDesc() {
 		return this.#isSortedDesc;
 	}
@@ -36,6 +51,9 @@ export class TabContainer extends Array {
 	 * Number of Tabs which MUST be persisted at the beginning of the Array
 	 */
 	#pinnedTabs = 0;
+  /**
+   * @returns {number} - the positive integer representing how many pinned Tabs are present
+   */
 	get pinned() { // function name same as TabContainer.keyPinnedTabsNo
 		return this.#pinnedTabs;
 	}
@@ -119,6 +137,9 @@ export class TabContainer extends Array {
 		return await singletonAllTabs.setDefaultTabs();
 	}
 
+  /**
+   * @returns a brand-new non-initialized TabContainer
+   */
 	static getThrowawayInstance() {
 		return new TabContainer(_tabContainerSecret);
 	}
@@ -194,19 +215,18 @@ export class TabContainer extends Array {
 	 *
 	 * @param {...T} items The elements to add to the end of the TabContainer.
 	 * @returns {number} The new length of the TabContainer.
-	 *
-	 * @example
-	 * // Adding multiple items
-	 * push(
-	 *   { label: "l1", url: 'test1.com' },
-	 *   { label: "l2", url: 'test2.com' }
-	 * );
-	 * // returns 2, container now has length 2 (if it was empty before)
 	 */
 	push(...items) {
 		return super.push(...this.#validateItems(items));
 	}
 
+	/**
+	 * Adds one or more elements to the beginning of the TabContainer and returns the new length.
+	 * Items may be passed with spread operator or inside an Array.
+	 *
+	 * @param {...T} items The elements to add to the end of the TabContainer.
+	 * @returns {number} The new length of the TabContainer.
+	 */
 	unshift(...items) {
 		return super.unshift(...this.#validateItems(items));
 	}
@@ -306,6 +326,12 @@ export class TabContainer extends Array {
 		return filtered;
 	}
 
+  /**
+   * Returns the JSON representation of the TabContainer from the JSON in input
+   *
+   * @param {Object|Array} tbContainerObj - the JSON input from which to find the data (Array is old implementation)
+   * @returns {Object} the TabContainer represed in JSON with all the keys from tbContainerObj (if it was an Object) + `isUsingOldVersion` key (boolean)
+   */
 	#getTabContainerFromObj(tbContainerObj) {
 		const res = {};
 		res.isUsingOldVersion = Array.isArray(tbContainerObj);
@@ -1046,22 +1072,29 @@ export class TabContainer extends Array {
 		}
 		const initialLength = this.length;
 		this.splice(index, 1);
-		if (!await this.syncTabs()) {
-			return false;
-		}
-		return this.length < initialLength;
+		return this.length < initialLength && await this.syncTabs();
 	}
 
 	/**
 	 * Checks if a Tab is org-specific and whether its `org` property is different from the one of the Tab received by the outer function.
 	 *
-	 * @param {Object} [tb] - The Tab that needs to be checked
-	 * @param {string|null} [tab.org=null] - The Org of the Tab to check.
+	 * @param {Object} [checkTab] - The Tab that needs to be checked
+	 * @param {Object} [inputTab] - The Tab with the Org to check.
+   * @returns {boolean} whether the Tab is not of this org
 	 */
 	getTabsNotThisOrg(checkTab, inputTab) {
 		return checkTab.org != null && checkTab.org !== inputTab.org;
 	}
 
+  /**
+   * Removes the pinned/unpinned Tab.
+   *
+   * @param {boolean} [rmPinned=null] - whether to remove the pinned Tabs (true) or the unpinned ones (false)
+   * @throws when rmPinned is null
+   * @throws when rmPinned is true but there are currently no pinned Tabs
+   * @throws when rmPinned is false but there are currently no unpinned Tabs
+   * @returns {boolean} whether the Tabs where removed and synced
+   */
 	async removePinned(rmPinned = null) {
 		if (rmPinned == null) {
 			throw new Error("error_no_data");
@@ -1076,13 +1109,16 @@ export class TabContainer extends Array {
 			deleteCount = this.#pinnedTabs;
 			this.#pinnedTabs = 0;
 		} else {
+			if (this.#pinnedTabs >= this.length) {
+				throw new Error("error_no_unpinned");
+			}
 			// remove unpinned
 			index = this.#pinnedTabs;
 			deleteCount = this.length;
 		}
 		const initialLength = this.length;
 		this.splice(index, deleteCount);
-		return initialLength > this.length && await this.syncTabs();
+		return this.length < initialLength && await this.syncTabs();
 	}
 
 	/**
@@ -1352,58 +1388,53 @@ export class TabContainer extends Array {
 		return await ensureAllTabsAvailability();
 	}
 
+	/**
+	 * Invoked when a Tab is clicked. Finds the clicked Tab and calls its click handler
+	 *
+   * @param {Object} [tabData={}] - data used to identify the clicked Tab
+	 * @returns {boolean} whether the data was updated and synced
+	 */
 	async handleClickTabByData(tabData = {}) {
 		this.getSingleTabByData(tabData)
 			?.handleClick();
 		return await this.syncTabs();
 	}
 
-	async unpinTab(tabData = {}) {
-		// get index of tabData
-		const currentIndex = this.getTabIndex(
-			this.getSingleTabByData(tabData),
-		);
-		if (currentIndex > this.#pinnedTabs) {
-			throw new Error("error_tab_not_pinned");
-		}
-		// move tabData at index == this.#pinnedTabs
-		if (currentIndex < this.#pinnedTabs - 1) {
-			await this.moveTab(tabData, {
-				moveBefore: false,
-				fullMovement: true,
-				sync: false,
-				pinMovement: false,
-			});
-		}
-		// decrease pinnedTabs by one
-		this.#pinnedTabs--;
-		// sync tabs
-		return await this.syncTabs({
-			fromInvalidateSortFunction: true,
-		});
-	}
-
-	async pinTab(tabData = {}) {
+  /**
+   * Pins or unpins the given Tab and updates the pinnedTabs value
+   *
+   * @param {Object} [tabData={}] - the Tab data used to identify the Tab to be pinned/unpinned
+   * @param {boolean} [isPin=null] - whether the user wants to pin (true) or unpin (false)
+   * @throws when isPin is null
+   * @throws when the Tab is not yet pinned
+   * @returns {boolean} - whether the Tab was pinned/unpinned and synced
+   */
+  async pinOrUnpin(tabData = {}, isPin = null){
+    if(isPin == null)
+      throw new Error("error_no_data");
 		try {
-			// pin at the top of the Array
+			// if isPin, pin at the top of the Array
+			// if !isPin, move tabData at index == this.#pinnedTabs
 			await this.moveTab(tabData, {
-				moveBefore: true,
+				moveBefore: isPin,
+				pinMovement: isPin,
 				fullMovement: true,
 				sync: false,
-				pinMovement: true,
 			});
 		} catch (err) {
-			// we'll get an error with error_cannot_move_dir if the user wants to pin the already first Tab
+			// we'll get an error with error_cannot_move_dir if the user wants to unpin the already first Tab
 			// in this specific case, we simply do not have to move the Tab, but we still have to add 1 on this.#pinnedTabs
 			if (err.message !== "error_cannot_move_dir") {
 				throw err;
 			}
 		}
-		// increase pinnedTabs by one
-		this.#pinnedTabs++;
+    // update pinnedTabs
+    this.#pinnedTabs += isPin ? 1 : -1;
 		// sync tabs
-		return await this.syncTabs();
-	}
+		return await this.syncTabs({
+      fromInvalidateSortFunction: isPin ? undefined : true,
+		});
+  }
 }
 
 /**

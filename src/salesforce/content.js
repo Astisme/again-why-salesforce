@@ -725,12 +725,12 @@ export async function performActionOnTabs(
 				return;
 			}
 			case CXM_PIN_TAB:
-				if (!await allTabs.pinTab(tab)) {
+				if (!await allTabs.pinOrUnpin(tab, true)) {
 					throw new Error("error_pin_tab", tab);
 				}
 				break;
 			case CXM_UNPIN_TAB:
-				if (!await allTabs.unpinTab(tab)) {
+				if (!await allTabs.pinOrUnpin(tab, false)) {
 					throw new Error("error_unpin_tab", tab);
 				}
 				break;

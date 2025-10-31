@@ -2,6 +2,11 @@
 const process = require('node:process');
 const fs = require('fs');
 
+/**
+ * reads the given logFile and writes a comment with its content on github
+ * if the contents match the matchPattern
+ * the contents are stripped of everything that matches inside stripPatterns
+ */
 module.exports = async function commentOnPr({
 	github,
 	context,

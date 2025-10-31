@@ -1,8 +1,17 @@
+/**
+ * Class to take care of the Help button in the settings
+ */
 class HelpAws extends HTMLElement {
+  /**
+   * getter to know which attributes this class looks at
+   */
 	static get observedAttributes() {
 		return ["href", "target", "rel", "data-show-top"];
 	}
 
+  /**
+   * Creates everything used by the class
+   */
 	constructor() {
 		super();
 		const tpl = document.getElementById("help-template");
@@ -18,20 +27,26 @@ class HelpAws extends HTMLElement {
 		this._linkTip = this.shadowRoot.querySelector(".link-tip");
 	}
 
+  /**
+   * On first connect, sync any attributes already set on the host 
+   */
 	connectedCallback() {
-		// On first connect, sync any attributes already set on the host
 		this._syncLink();
 	}
 
+  /**
+   * Whenever href, target, or rel changes, re-sync the anchor
+   */
 	attributeChangedCallback(_, oldValue, newValue) {
-		// Whenever href, target, or rel changes, re-sync the anchor
 		if (oldValue !== newValue) {
 			this._syncLink();
 		}
 	}
 
+  /**
+   * Read host attributes or fall back to sensible defaults
+   */
 	_syncLink() {
-		// Read host attributes or fall back to sensible defaults
 		const elHref = this.getAttribute("href");
 		if (elHref == null) {
 			this._linkTip.classList.add("hidden");
@@ -41,15 +56,12 @@ class HelpAws extends HTMLElement {
 		const href = elHref ?? "#";
 		const target = this.getAttribute("target") ?? "_blank";
 		const rel = this.getAttribute("rel");
-
 		this._anchor.setAttribute("href", href);
-
 		if (target === null) {
 			this._anchor.removeAttribute("target");
 		} else {
 			this._anchor.setAttribute("target", target);
 		}
-
 		if (rel === null) {
 			this._anchor.removeAttribute("rel");
 		} else {

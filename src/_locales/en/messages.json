@@ -423,6 +423,10 @@
 		"message": "This Tab was already unpinned.",
 		"description": "[error] the user tried to unpin a unpinned Tab"
 	},
+	"error_no_unpinned": {
+		"message": "You do not have any unpinned Tabs!",
+		"description": "[error] the user tried to remove the unpinned Tabs but they do not have any unpinned Tabs"
+	},
 	"error_no_pinned": {
 		"message": "You do not have any pinned Tabs yet!",
 		"description": "[error] the user tried to remove the pinned Tabs but they do not have any pinned Tabs"

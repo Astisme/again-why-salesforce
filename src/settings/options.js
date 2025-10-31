@@ -1041,6 +1041,9 @@ async function restoreGeneralSettings() {
 				enabled: e.target.value,
 			}],
 		};
+    /**
+     * Updates the language used by the whole extension and backups the last language used.
+     */
 		const sendLanguageMessage = () => {
 			sendExtensionMessage(languageMessage);
 			oldUserLanguage = e.target.value;
