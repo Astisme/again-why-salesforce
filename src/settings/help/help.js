@@ -2,16 +2,16 @@
  * Class to take care of the Help button in the settings
  */
 class HelpAws extends HTMLElement {
-  /**
-   * getter to know which attributes this class looks at
-   */
+	/**
+	 * getter to know which attributes this class looks at
+	 */
 	static get observedAttributes() {
 		return ["href", "target", "rel", "data-show-top"];
 	}
 
-  /**
-   * Creates everything used by the class
-   */
+	/**
+	 * Creates everything used by the class
+	 */
 	constructor() {
 		super();
 		const tpl = document.getElementById("help-template");
@@ -27,25 +27,25 @@ class HelpAws extends HTMLElement {
 		this._linkTip = this.shadowRoot.querySelector(".link-tip");
 	}
 
-  /**
-   * On first connect, sync any attributes already set on the host 
-   */
+	/**
+	 * On first connect, sync any attributes already set on the host
+	 */
 	connectedCallback() {
 		this._syncLink();
 	}
 
-  /**
-   * Whenever href, target, or rel changes, re-sync the anchor
-   */
+	/**
+	 * Whenever href, target, or rel changes, re-sync the anchor
+	 */
 	attributeChangedCallback(_, oldValue, newValue) {
 		if (oldValue !== newValue) {
 			this._syncLink();
 		}
 	}
 
-  /**
-   * Read host attributes or fall back to sensible defaults
-   */
+	/**
+	 * Read host attributes or fall back to sensible defaults
+	 */
 	_syncLink() {
 		const elHref = this.getAttribute("href");
 		if (elHref == null) {

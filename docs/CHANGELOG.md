@@ -28,6 +28,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 1. Unused static method Tab.update() (was only used in tests)
 1. Unused static methods in TabContainer (was only used in tests)
+
 > TabContainer._syncTabs()
 
 ## 🧪 Tests

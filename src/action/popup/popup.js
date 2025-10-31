@@ -22,10 +22,9 @@ import {
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { setupDrag } from "/dragHandler.js";
-setupDrag();
-
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
+setupDrag();
 const translator = await ensureTranslatorAvailability();
 const allTabs = await ensureAllTabsAvailability();
 
@@ -66,7 +65,7 @@ const moon = document.getElementById("moon");
 const tabTemplate = document.getElementById("tr_template");
 const tabAppendElement = document.getElementById("tabs");
 
-let loggers = [];
+const loggers = [];
 
 /**
  * Initializes the theme SVG elements based on the current theme and updates visibility.
@@ -411,7 +410,7 @@ async function reloadRows() {
 	if (tabAppendElement.childElementCount > 0) {
 		tabAppendElement.innerHTML = null;
 	}
-	loggers = [];
+	loggers.length = 0;
 	await loadTabs();
 }
 
@@ -509,8 +508,8 @@ document.getElementById("theme-selector").addEventListener(
 );
 document.getElementById("delete-all").addEventListener("click", emptyTabs);
 
-const translatorSeparator = translator.getSeparator();
-const datasetAttribute = translator.getTranslateAttributeDataset();
+const translatorSeparator = translator.separator;
+const datasetAttribute = translator.translateAttributeDataset;
 /**
  * Returns the substring of the input string before the first occurrence of the separator used by the translator.
  *

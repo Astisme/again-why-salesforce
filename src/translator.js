@@ -15,9 +15,27 @@ let singletonTranslator = null;
 class TranslationService {
 	static FALLBACK_LANGUAGE = "en";
 	static TRANSLATE_DATASET = "i18n";
+	/**
+	 * Retrieves the dataset attribute name used on elements
+	 * to hold translation keys.
+	 *
+	 * @returns {string} The dataset key for translation attributes.
+	 */
+	get translateAttributeDataset() {
+		return TranslationService.TRANSLATE_DATASET;
+	}
 	static TRANSLATE_ELEMENT_ATTRIBUTE =
 		`data-${TranslationService.TRANSLATE_DATASET}`;
 	static TRANSLATE_SEPARATOR = "+-+";
+	/**
+	 * Retrieves the separator string used to split translation keys
+	 * from the static translation attribute.
+	 *
+	 * @returns {string} The configured translation separator.
+	 */
+	get separator() {
+		return TranslationService.TRANSLATE_SEPARATOR;
+	}
 	static ATTRIBUTE_EXCLUDE = "data-exclude-automatic-i18n";
 
 	/** @type {string} Current language code */
@@ -292,26 +310,6 @@ class TranslationService {
 				this.updatePageTranslations(pickedLanguageObj[0].enabled);
 			}
 		});
-	}
-
-	/**
-	 * Retrieves the separator string used to split translation keys
-	 * from the static translation attribute.
-	 *
-	 * @returns {string} The configured translation separator.
-	 */
-	getSeparator() {
-		return TranslationService.TRANSLATE_SEPARATOR;
-	}
-
-	/**
-	 * Retrieves the dataset attribute name used on elements
-	 * to hold translation keys.
-	 *
-	 * @returns {string} The dataset key for translation attributes.
-	 */
-	getTranslateAttributeDataset() {
-		return TranslationService.TRANSLATE_DATASET;
 	}
 }
 

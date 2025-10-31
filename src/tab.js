@@ -297,12 +297,12 @@ export default class Tab {
 		return host;
 	}
 
-  /**
-   * Given an Object, returns a Tab of said Object
-   *
-   * @param {Object} tab - The Object representing a Tab (not necessarily an instanceof Tab)
-   * @returns {Tab} - the input Object, now instanceof Tab
-   */
+	/**
+	 * Given an Object, returns a Tab of said Object
+	 *
+	 * @param {Object} tab - The Object representing a Tab (not necessarily an instanceof Tab)
+	 * @returns {Tab} - the input Object, now instanceof Tab
+	 */
 	static getTabObj(tab) {
 		return Tab.isTab(tab) ? tab : Tab.create(tab);
 	}

@@ -155,8 +155,8 @@ await Deno.test("TabContainer - Tab Management", async (t) => {
 				url: "new-first",
 				[Tab.keyClickCount]: 5,
 			}, {
-        addInFront: true,
-      }),
+				addInFront: true,
+			}),
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		const newFirstTab = container[0];
@@ -1070,7 +1070,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		assert(
 			await container.addTab(
 				{ label: "Sync Test", url: "sync-url" },
-        { sync: false },
+				{ sync: false },
 			),
 		);
 		assertEquals(container.length, 4);
@@ -1550,6 +1550,7 @@ await Deno.test("TabContainer - Move Tab", async (t) => {
 			]),
 		);
 		assertEquals(container.length, 7);
+		console.log("aehtisrahetihaeinsrh");
 		assertEquals(
 			await container.moveTab({ url: "url", org: "test-org" }, {
 				moveBefore: false,

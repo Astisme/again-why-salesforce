@@ -44,9 +44,9 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 } else if (whichPermissions === "download") {
 	document.getElementById("host_permissions").classList.add("hidden");
 	document.getElementById("download").classList.remove("hidden");
-  /**
-   * Tells the browser to reset the Popup to the original one
-   */
+	/**
+	 * Tells the browser to reset the Popup to the original one
+	 */
 	const setOriginalPopup = () =>
 		BROWSER.action.setPopup({
 			popup: popuplink,
