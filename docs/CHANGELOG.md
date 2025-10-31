@@ -21,14 +21,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 1. New Context menus to **temporarily** hide Org Tabs OR Generic Tabs (#109)
 2. New Sorting options (settings + context menus): sort **by Usage** (number of times the Tabs were clicked) or **by Date** (last time the Tabs were clicked) (#113)
 3. During import, new option to import the metadata from point 2 or skip such data
+4. New feature to **pin Tabs** at the beginning of the list (#114)
+5. New Context menus to **pin or unpin** Tabs
 
 ## 💥 Removed
 
 1. Unused static method Tab.update() (was only used in tests)
+1. Unused static methods in TabContainer (was only used in tests)
+> TabContainer._syncTabs()
 
 ## 🧪 Tests
 
 1. Added tests for the new metadata fields on Tab and for their sorting options
+2. Added tests for pinned Tabs
 
 # v2.1.0
 
