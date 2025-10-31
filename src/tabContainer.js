@@ -19,30 +19,30 @@ const _tabContainerSecret = Symbol("tabContainerSecret");
  */
 export class TabContainer extends Array {
 	#isSorted = false;
-  /**
-   * @returns {boolean} - whether the TabContainer is sorted
-   */
+	/**
+	 * @returns {boolean} - whether the TabContainer is sorted
+	 */
 	get isSorted() {
 		return this.#isSorted;
 	}
 	#isSortedBy = null;
-  /**
-   * @returns {string|null} - by which Tab field the TabContainer is sorted by
-   */
+	/**
+	 * @returns {string|null} - by which Tab field the TabContainer is sorted by
+	 */
 	get isSortedBy() {
 		return this.#isSortedBy;
 	}
 	#isSortedAsc = false;
-  /**
-   * @returns {boolean} - whether the TabContainer is sorted ascending (A-Z)
-   */
+	/**
+	 * @returns {boolean} - whether the TabContainer is sorted ascending (A-Z)
+	 */
 	get isSortedAsc() {
 		return this.#isSortedAsc;
 	}
 	#isSortedDesc = false;
-  /**
-   * @returns {boolean} - whether the TabContainer is sorted descending (Z-A)
-   */
+	/**
+	 * @returns {boolean} - whether the TabContainer is sorted descending (Z-A)
+	 */
 	get isSortedDesc() {
 		return this.#isSortedDesc;
 	}
@@ -51,9 +51,9 @@ export class TabContainer extends Array {
 	 * Number of Tabs which MUST be persisted at the beginning of the Array
 	 */
 	#pinnedTabs = 0;
-  /**
-   * @returns {number} - the positive integer representing how many pinned Tabs are present
-   */
+	/**
+	 * @returns {number} - the positive integer representing how many pinned Tabs are present
+	 */
 	get pinned() { // function name same as TabContainer.keyPinnedTabsNo
 		return this.#pinnedTabs;
 	}
@@ -135,9 +135,9 @@ export class TabContainer extends Array {
 		return await singletonAllTabs.setDefaultTabs();
 	}
 
-  /**
-   * @returns a brand-new non-initialized TabContainer
-   */
+	/**
+	 * @returns a brand-new non-initialized TabContainer
+	 */
 	static getThrowawayInstance() {
 		return new TabContainer(_tabContainerSecret);
 	}
@@ -320,12 +320,12 @@ export class TabContainer extends Array {
 		return filtered;
 	}
 
-  /**
-   * Returns the JSON representation of the TabContainer from the JSON in input
-   *
-   * @param {Object|Array} tbContainerObj - the JSON input from which to find the data (Array is old implementation)
-   * @returns {Object} the TabContainer represed in JSON with all the keys from tbContainerObj (if it was an Object) + `isUsingOldVersion` key (boolean)
-   */
+	/**
+	 * Returns the JSON representation of the TabContainer from the JSON in input
+	 *
+	 * @param {Object|Array} tbContainerObj - the JSON input from which to find the data (Array is old implementation)
+	 * @returns {Object} the TabContainer represed in JSON with all the keys from tbContainerObj (if it was an Object) + `isUsingOldVersion` key (boolean)
+	 */
 	#getTabContainerFromObj(tbContainerObj) {
 		const res = {};
 		res.isUsingOldVersion = Array.isArray(tbContainerObj);
@@ -394,24 +394,25 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
 	async addTab(tab, {
-    sync = true,
-    addInFront = false
-  } = {}) {
-    const initialLength = this.length;
-    if(addInFront){
-      // add in front but after the pinned Tabs
-      this.splice(this.#pinnedTabs, 0, tab);
-    } else
-      // add at the end
-      this.push(tab);
-    if(this.length <= initialLength){
-      // nothing was added
-      const { msg } = this.#validateItem(tab);
-        throw new Error(`${await translator.translate([
-          msg,
-        ])} ${JSON.stringify(tab)}`);
-    } 
-    return await sync ? this.syncTabs() : this.checkSetSorted();
+		sync = true,
+		addInFront = false,
+	} = {}) {
+		const initialLength = this.length;
+		if (addInFront) {
+			// add in front but after the pinned Tabs
+			this.splice(this.#pinnedTabs, 0, tab);
+		} // add at the end
+		else {
+			this.push(tab);
+		}
+		if (this.length <= initialLength) {
+			// nothing was added
+			const { msg } = this.#validateItem(tab);
+			throw new Error(`${await translator.translate([
+				msg,
+			])} ${JSON.stringify(tab)}`);
+		}
+		return await sync ? this.syncTabs() : this.checkSetSorted();
 	}
 
 	/**
@@ -423,19 +424,19 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
 	async addTabs(tabs, sync = true) {
-    const initialLength = this.length;
-    const addedTabs = this.push(tabs) - initialLength;
-    if(addedTabs < tabs.length){
-      // we did not add all the Tabs in `tabs`
-      for(const tab of tabs){
-        const { msg } = this.#validateItem(tab);
-        if(msg != "error_duplicate_tab"){
-          throw new Error(`${msg} ${JSON.stringify(tab)}`)
-        }
-        // we will continue if all the errors were of duplicate Tabs
-      }
-    }
-    return await sync ? this.syncTabs() : this.checkSetSorted();
+		const initialLength = this.length;
+		const addedTabs = this.push(tabs) - initialLength;
+		if (addedTabs < tabs.length) {
+			// we did not add all the Tabs in `tabs`
+			for (const tab of tabs) {
+				const { msg } = this.#validateItem(tab);
+				if (msg != "error_duplicate_tab") {
+					throw new Error(`${msg} ${JSON.stringify(tab)}`);
+				}
+				// we will continue if all the errors were of duplicate Tabs
+			}
+		}
+		return await sync ? this.syncTabs() : this.checkSetSorted();
 	}
 
 	/**
@@ -1066,21 +1067,21 @@ export class TabContainer extends Array {
 	 *
 	 * @param {Object} [checkTab] - The Tab that needs to be checked
 	 * @param {Object} [inputTab] - The Tab with the Org to check.
-   * @returns {boolean} whether the Tab is not of this org
+	 * @returns {boolean} whether the Tab is not of this org
 	 */
 	getTabsNotThisOrg(checkTab, inputTab) {
 		return checkTab.org != null && checkTab.org !== inputTab.org;
 	}
 
-  /**
-   * Removes the pinned/unpinned Tab.
-   *
-   * @param {boolean} [rmPinned=null] - whether to remove the pinned Tabs (true) or the unpinned ones (false)
-   * @throws when rmPinned is null
-   * @throws when rmPinned is true but there are currently no pinned Tabs
-   * @throws when rmPinned is false but there are currently no unpinned Tabs
-   * @returns {boolean} whether the Tabs where removed and synced
-   */
+	/**
+	 * Removes the pinned/unpinned Tab.
+	 *
+	 * @param {boolean} [rmPinned=null] - whether to remove the pinned Tabs (true) or the unpinned ones (false)
+	 * @throws when rmPinned is null
+	 * @throws when rmPinned is true but there are currently no pinned Tabs
+	 * @throws when rmPinned is false but there are currently no unpinned Tabs
+	 * @returns {boolean} whether the Tabs where removed and synced
+	 */
 	async removePinned(rmPinned = null) {
 		if (rmPinned == null) {
 			throw new Error("error_no_data");
@@ -1377,7 +1378,7 @@ export class TabContainer extends Array {
 	/**
 	 * Invoked when a Tab is clicked. Finds the clicked Tab and calls its click handler
 	 *
-   * @param {Object} [tabData={}] - data used to identify the clicked Tab
+	 * @param {Object} [tabData={}] - data used to identify the clicked Tab
 	 * @returns {boolean} whether the data was updated and synced
 	 */
 	async handleClickTabByData(tabData = {}) {
@@ -1386,18 +1387,19 @@ export class TabContainer extends Array {
 		return await this.syncTabs();
 	}
 
-  /**
-   * Pins or unpins the given Tab and updates the pinnedTabs value
-   *
-   * @param {Object} [tabData={}] - the Tab data used to identify the Tab to be pinned/unpinned
-   * @param {boolean} [isPin=null] - whether the user wants to pin (true) or unpin (false)
-   * @throws when isPin is null
-   * @throws when the Tab is not yet pinned
-   * @returns {boolean} - whether the Tab was pinned/unpinned and synced
-   */
-  async pinOrUnpin(tabData = {}, isPin = null){
-    if(isPin == null)
-      throw new Error("error_no_data");
+	/**
+	 * Pins or unpins the given Tab and updates the pinnedTabs value
+	 *
+	 * @param {Object} [tabData={}] - the Tab data used to identify the Tab to be pinned/unpinned
+	 * @param {boolean} [isPin=null] - whether the user wants to pin (true) or unpin (false)
+	 * @throws when isPin is null
+	 * @throws when the Tab is not yet pinned
+	 * @returns {boolean} - whether the Tab was pinned/unpinned and synced
+	 */
+	async pinOrUnpin(tabData = {}, isPin = null) {
+		if (isPin == null) {
+			throw new Error("error_no_data");
+		}
 		try {
 			// if isPin, pin at the top of the Array
 			// if !isPin, move tabData at index == this.#pinnedTabs
@@ -1414,13 +1416,13 @@ export class TabContainer extends Array {
 				throw err;
 			}
 		}
-    // update pinnedTabs
-    this.#pinnedTabs += isPin ? 1 : -1;
+		// update pinnedTabs
+		this.#pinnedTabs += isPin ? 1 : -1;
 		// sync tabs
 		return await this.syncTabs({
-      fromInvalidateSortFunction: isPin ? undefined : true,
+			fromInvalidateSortFunction: isPin ? undefined : true,
 		});
-  }
+	}
 }
 
 /**
