@@ -381,6 +381,7 @@ await Deno.test("Utility methods", async (t) => {
 		assert(Tab.isTab(tab_with_org));
 		assertFalse(Tab.isTab(object_no_org));
 		assertFalse(Tab.isTab(object_with_org));
+		assertFalse(Tab.isTab(null));
 	});
 
 	await t.step("toJSON", () => {

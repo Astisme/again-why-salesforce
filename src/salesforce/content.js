@@ -672,9 +672,9 @@ export async function performActionOnTabs(
 				if (
 					!await allTabs.addTab(
 						tab,
-						undefined,
-						undefined,
-						options?.addInFront,
+            {
+              addInFront: options?.addInFront,
+            },
 					)
 				) {
 					throw new Error("error_adding_tab");

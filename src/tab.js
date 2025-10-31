@@ -311,13 +311,9 @@ export default class Tab {
 	 * Checks if the provided object is an instance of the `Tab` class.
 	 *
 	 * @param {any} tab - The object to check.
-	 * @throws {Error} - Throws an error if the provided object is null or undefined.
 	 * @returns {boolean} - Returns `true` if the object is an instance of `Tab`, otherwise `false`.
 	 */
 	static isTab(tab) {
-		if (tab == null) {
-			throw new Error("error_no_object");
-		}
 		return tab instanceof Tab;
 	}
 

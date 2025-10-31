@@ -67,8 +67,6 @@ export class TabContainer extends Array {
 		TabContainer.keyPinnedTabsNo,
 	]);
 
-	#alreadyCheckedItems = false; // flag to prevent overchecking the same items
-
 	/**
 	 * Sets the sort state properties based on detected sorting
 	 * @param {string} key - The key that tabs are sorted by
@@ -172,10 +170,6 @@ export class TabContainer extends Array {
 	 */
 	#validateItem(item = null) {
 		const res = {};
-		if (this.#alreadyCheckedItems) {
-			res.tab = item;
-			return res;
-		}
 		if (Tab.isValid(item)) {
 			const newTab = Tab.getTabObj(item);
 			if (this.exists(newTab, true)) {
@@ -399,57 +393,49 @@ export class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
-	async addTab(tab, sync = true, fromAddTabs = false, addInFront = false) {
-		const { msg, tab: newTab } = this.#validateItem(tab);
-		if (msg != null) {
-			throw new Error(`${await translator.translate([
-				msg,
-			])} ${JSON.stringify(tab)}`);
-		}
-		// add in front but after the pinned Tabs else add at the end
-		const newIndex = addInFront ? this.#pinnedTabs : this.length;
-		this.#alreadyCheckedItems = true;
-		this.splice(newIndex, 0, newTab);
-		this.#alreadyCheckedItems = false;
-		if (sync) {
-			return await this.syncTabs();
-		} else if (!fromAddTabs) {
-			return await this.checkSetSorted();
-		}
-		return true;
+	async addTab(tab, {
+    sync = true,
+    addInFront = false
+  } = {}) {
+    const initialLength = this.length;
+    if(addInFront){
+      // add in front but after the pinned Tabs
+      this.splice(this.#pinnedTabs, 0, tab);
+    } else
+      // add at the end
+      this.push(tab);
+    if(this.length <= initialLength){
+      // nothing was added
+      const { msg } = this.#validateItem(tab);
+        throw new Error(`${await translator.translate([
+          msg,
+        ])} ${JSON.stringify(tab)}`);
+    } 
+    return await sync ? this.syncTabs() : this.checkSetSorted();
 	}
 
 	/**
-	 * Adds multiple tabs to the `TabContainer`. If a tab already exists, it is ignored.
+	 * Adds multiple tabs to the `TabContainer`. If a Tab already exists, it is ignored.
 	 *
-	 * @param {Array<Object>} tabs - An array of tab objects to be added to the container.
-	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the tabs after adding. Defaults to `true`.
-	 * @throws {Error} - Throws an error if any tab (other than duplicates) fails to be added.
-	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all tabs were added successfully (excluding duplicates), otherwise `false` if any tab could not be added.
+	 * @param {Array<Object>} tabs - An array of Tab objects to be added to the container.
+	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the Tabs after adding. Defaults to `true`.
+	 * @throws {Error} - Throws an error if any Tab (other than duplicates) fails to be added.
+	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
 	async addTabs(tabs, sync = true) {
-		if (!Array.isArray(tabs)) {
-			throw new Error("error_no_array");
-		}
-		if (tabs.length === 0 && sync === false) {
-			// no-op
-			return true;
-		}
-		for (const tab of tabs) {
-			try {
-				await this.addTab(tab, false, true);
-			} catch (error) {
-				const msg = await translator.translate("error_duplicate_tab");
-				if (!error.message.startsWith(msg)) {
-					throw error;
-				}
-			}
-		}
-		if (sync) {
-			return await this.syncTabs();
-		} else {
-			return await this.checkSetSorted();
-		}
+    const initialLength = this.length;
+    const addedTabs = this.push(tabs) - initialLength;
+    if(addedTabs < tabs.length){
+      // we did not add all the Tabs in `tabs`
+      for(const tab of tabs){
+        const { msg } = this.#validateItem(tab);
+        if(msg != "error_duplicate_tab"){
+          throw new Error(`${msg} ${JSON.stringify(tab)}`)
+        }
+        // we will continue if all the errors were of duplicate Tabs
+      }
+    }
+    return await sync ? this.syncTabs() : this.checkSetSorted();
 	}
 
 	/**
