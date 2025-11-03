@@ -412,7 +412,7 @@ export class TabContainer extends Array {
 				msg,
 			])} ${JSON.stringify(tab)}`);
 		}
-		return await sync ? this.syncTabs() : this.checkSetSorted();
+		return await (sync ? this.syncTabs() : this.checkSetSorted());
 	}
 
 	/**
@@ -439,7 +439,7 @@ export class TabContainer extends Array {
 				// we will continue if all the errors were of duplicate Tabs
 			}
 		}
-		return await sync ? this.syncTabs() : this.checkSetSorted();
+		return await (sync ? this.syncTabs() : this.checkSetSorted());
 	}
 
 	/**
@@ -792,7 +792,6 @@ export class TabContainer extends Array {
 			.#getTabContainerFromObj(JSON.parse(jsonString));
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
-			// todo uncomment and fix tests
 			sendExtensionMessage({
 				what: "warning",
 				message: "warn_upgrade_backup",
@@ -805,167 +804,32 @@ export class TabContainer extends Array {
 			let importPinnedTabs = 0;
 			let importedTabsNo = 0;
 			if (importMetadata) {
-				importPinnedTabs = metadata?.[TabContainer.keyPinnedTabsNo];
-				if (importPinnedTabs != null && importPinnedTabs >= 0) {
-					// check for out of bounds number
-					if (importPinnedTabs > imported.length) {
-						importPinnedTabs = imported.length;
-					}
-					// if the user does not want to reset their Tabs, get the pinned Tabs to be imported and add them to the pinned list
-					if (resetTabs) {
-						this.#pinnedTabs = 0;
-						this.length = 0;
-					} else {
-						// merge the already pinned Tabs with the imported pinned Tabs
-						// if pinnedTabs is 0, we'll simply do an unshift of the importPinnedTabsList
-						const pinnedTabsList = this.splice(
-							0,
-							this.#pinnedTabs,
-						);
-						const importPinnedTabsList = imported.splice(
-							0,
-							importPinnedTabs,
-						); // the `imported` array does not have the pinned Tabs anymore
-						const importPinnedTabsListNoDuplicates =
-							importPinnedTabsList
-								.filter((tb, index, arr) =>
-									// remove internal duplicates
-									(
-										arr.findIndex((t) =>
-											t.equals?.(tb) || t === tb
-										) === index
-									) &&
-									// remove duplicates of the other list
-									!pinnedTabsList.exists(tb)
-								);
-						this.unshift(
-							...pinnedTabsList,
-							...importPinnedTabsListNoDuplicates,
-						);
-						this.#pinnedTabs = pinnedTabsList.length +
-							importPinnedTabsListNoDuplicates.length;
-						importedTabsNo +=
-							importPinnedTabsListNoDuplicates.length;
-					}
-				} else {
-					// guard against pinned Tabs < 0
-					importPinnedTabs = 0;
-				}
-			} else {
-				// remove metadata from the JSON string
-				const metadataKeys = new Set([
-					...Tab.metadataKeys,
-					...TabContainer.metadataKeys,
-				]);
-				const { [TabContainer.keyTabs]: _imported } = this
-					.#getTabContainerFromObj(JSON.parse(
-						jsonString,
-						(key, value) =>
-							metadataKeys.has(key) ? undefined : value,
-					));
-				imported = _imported;
-				// no need to save metadata
-				importPinnedTabs = 0;
-			}
-			// import the Tabs from the JSON string
-			if (
-				await this.replaceTabs(undefined, {
+				const {
+					pinnedTabs: _importPinnedTabs,
+					importedTabs: _importedTabsNo,
+				} = this.#importPinnedTabs({
+					pinnedTabsNo: metadata?.[TabContainer.keyPinnedTabsNo],
+					importedArr: imported,
 					resetTabs,
-					removeOrgTabs: !preserveOtherOrg,
-					updatePinnedTabs: false,
-				})
-			) {
-				const newLen = this.length;
-				if (await this.addTabs(imported)) {
-					importedTabsNo += this.length - newLen;
-					if (resetTabs && importMetadata) {
-						this.#pinnedTabs = importPinnedTabs;
-					}
-					return importedTabsNo;
-				}
-			}
-		} catch (error) {
-			console.info(error);
-			this.length = 0;
-			this.push(...backupTabs);
-			this.#pinnedTabs = backupPinnedTabs;
-			throw error;
-		}
-		return 0;
-	}
-	/*
-	async importTabs(jsonString, {
-		resetTabs = false,
-		preserveOtherOrg = true,
-		importMetadata = false,
-	} = {}) {
-		let { [TabContainer.keyTabs]: imported, ...metadata } = this
-			.#getTabContainerFromObj(JSON.parse(jsonString));
-		if (metadata.isUsingOldVersion) {
-			// tell the user to upgrade their backups
-			sendExtensionMessage({
-				what: "warning",
-				message: "warn_upgrade_backup",
-			});
-		}
-		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
-		const backupPinnedTabs = this.#pinnedTabs;
-		try {
-			let importedTabsNo = 0;
-			let importPinnedTabs = 0;
-			if (importMetadata) {
-				importPinnedTabs = Math.max(
-					0,
-					Math.min(
-						metadata?.[TabContainer.keyPinnedTabsNo] ?? 0,
-						imported.length,
-					),
-				);
-				if (!resetTabs && importPinnedTabs > 0) {
-          // if the user does not want to reset their Tabs, get the pinned Tabs to be imported and add them to the pinned list
-          // merge the already pinned Tabs with the imported pinned Tabs
-          // if pinnedTabs is 0, we'll simply do an unshift of the importPinnedTabsList
-					const pinnedTabsList = this.splice(0, this.#pinnedTabs);
-					const importPinnedTabsList = imported.splice(
-						0,
-						importPinnedTabs,
-					); // the `imported` array does not have the pinned Tabs anymore
-					const uniqueImportedPinned = importPinnedTabsList.filter(
-						(tb, index, arr) =>
-              // remove internal duplicates
-							(
-								arr.findIndex((t) =>
-									t.equals?.(tb) || t === tb
-								) === index
-							) &&
-              // remove duplicates of the other list
-							!pinnedTabsList.exists(tb)
-						,
-					);
-					this.unshift(...pinnedTabsList, ...uniqueImportedPinned);
-					this.#pinnedTabs = pinnedTabsList.length +
-						uniqueImportedPinned.length;
-					importedTabsNo += uniqueImportedPinned.length;
-				} else if (resetTabs) {
-					this.#pinnedTabs = 0;
-					this.length = 0;
-				}
+				});
+				importPinnedTabs = _importPinnedTabs;
+				importedTabsNo = _importedTabsNo;
 			} else {
 				// remove metadata from the JSON string
 				const metadataKeys = new Set([
 					...Tab.metadataKeys,
 					...TabContainer.metadataKeys,
 				]);
-				const { [TabContainer.keyTabs]: _imported } = this.#getTabContainerFromObj(
+				imported = this.#getTabContainerFromObj(
 					JSON.parse(
 						jsonString,
 						(key, value) =>
 							metadataKeys.has(key) ? undefined : value,
 					),
 				)[TabContainer.keyTabs];
-        imported = _imported;
+				// no need to save metadata
 			}
-			// import the Tabs from the JSON string
+			// perform actions on current Array
 			if (
 				await this.replaceTabs(undefined, {
 					resetTabs,
@@ -974,6 +838,7 @@ export class TabContainer extends Array {
 				})
 			) {
 				const newLen = this.length;
+				// import the Tabs from the JSON string (except for pinned Tabs of the list)
 				if (await this.addTabs(imported)) {
 					importedTabsNo += this.length - newLen;
 					if (resetTabs && importMetadata) {
@@ -991,7 +856,61 @@ export class TabContainer extends Array {
 		}
 		return 0;
 	}
-  */
+
+	#importPinnedTabs({
+		pinnedTabsNo = 0,
+		importedArr = [],
+		resetTabs = false,
+	} = {}) {
+		const res = {
+			pinnedTabs: 0,
+			importedTabs: 0,
+		};
+		res.pinnedTabs = Math.max(
+			0,
+			// check for out of bounds number
+			Math.min(
+				pinnedTabsNo ?? 0,
+				importedArr.length,
+			),
+		);
+		if (res.pinnedTabs <= 0) {
+			return res;
+		}
+		// if the user does not want to reset their Tabs, get the pinned Tabs to be imported and add them to the pinned list
+		if (resetTabs) {
+			this.#pinnedTabs = 0;
+			this.length = 0;
+			return res;
+		}
+		// merge the already pinned Tabs with the imported pinned Tabs
+		// if pinnedTabs is 0, we'll simply do an unshift of the importPinnedTabsList
+		const pinnedTabsList = this.splice(
+			0,
+			this.#pinnedTabs,
+		);
+		const uniqueImportPinnedTabsList = importedArr
+			.splice(
+				0,
+				res.pinnedTabs,
+			) // the `importedArr` array does not have the pinned Tabs anymore
+			.filter((tb, index, arr) =>
+				// remove internal duplicates
+				(
+					arr.findIndex((t) => t.equals?.(tb) || t === tb) === index
+				) &&
+				// remove duplicates of the other list
+				!pinnedTabsList.exists(tb)
+			);
+		this.unshift(
+			...pinnedTabsList,
+			...uniqueImportPinnedTabsList,
+		);
+		this.#pinnedTabs = pinnedTabsList.length +
+			uniqueImportPinnedTabsList.length;
+		res.importedTabs = uniqueImportPinnedTabsList.length;
+		return res;
+	}
 
 	/**
 	 * Synchronizes the Tabs in `this` by sending them to the browser's runtime.
