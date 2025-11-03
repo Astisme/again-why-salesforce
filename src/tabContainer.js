@@ -424,12 +424,12 @@ export class TabContainer extends Array {
 	 * @returns {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
 	async addTabs(tabs, sync = true) {
-		if (tabs == null || (tabs?.length === 0 && !sync)) {
+		if (tabs == null || (tabs.length === 0 && !sync)) {
 			return true;
 		}
 		const initialLength = this.length;
 		const addedTabs = this.push(tabs) - initialLength;
-		if (addedTabs < tabs?.length) {
+		if (addedTabs < tabs.length) {
 			// we did not add all the Tabs in `tabs`
 			for (const tab of tabs) {
 				const { msg } = this.#validateItem(tab);
