@@ -167,10 +167,6 @@
 		"message": "✏️ Aggiorna Tab",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Attiva/Disattiva Org",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Altri Aggiornamenti",
 		"description": "[context-menu]"

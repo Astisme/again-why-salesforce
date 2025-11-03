@@ -167,10 +167,6 @@
 		"message": "✏️ Actualitzar Tab",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Canviar Organització",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Altres actualitzacions",
 		"description": "[context-menu]"

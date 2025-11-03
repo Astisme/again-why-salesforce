@@ -167,10 +167,6 @@
 		"message": "✏️ อัปเดต Tab",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 เปลี่ยน Org",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 อัปเดตอื่นๆ",
 		"description": "[context-menu]"

@@ -167,10 +167,6 @@
 		"message": "✏️ Actualizar Tab",
 		"description": "[menú contextual]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Alternar Org",
-		"description": "[menú contextual]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Otras Actualizaciones",
 		"description": "[menú contextual]"

@@ -120,7 +120,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_pin_tab": {
-		"message": "... Pin",
+		"message": "🔒 Pin",
 		"description": "[context-menu] let the user keep this Tab at the beginning of their list"
 	},
 	"cxm_remove": {
@@ -136,7 +136,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_remove_pin_tabs": {
-		"message": "... Remove Pinned",
+		"message": "📌 Remove Pinned",
 		"description": "[context-menu] let the user remove their pinned Tabs"
 	},
 	"cxm_remove_right_tabs": {
@@ -148,7 +148,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_remove_unpin_tabs": {
-		"message": "... Remove Unpinned",
+		"message": "⛓️‍💥 Remove Unpinned",
 		"description": "[context-menu] let the user remove their not-pinned Tabs"
 	},
 	"cxm_reset_default": {
@@ -192,7 +192,7 @@
 		"description": "[context-menu] temporarily hide Org Tabs"
 	},
 	"cxm_unpin_tab": {
-		"message": "... Unpin",
+		"message": "🔓 Unpin",
 		"description": "[context-menu] let the user remove this Tab from their pinned list"
 	},
 	"cxm_update": {
@@ -200,7 +200,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Toggle Org",
+		"message": "👜 Toggle Org",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {

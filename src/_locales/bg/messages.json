@@ -167,10 +167,6 @@
 		"message": "✏️ Актуализирай Tab",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Смени Организация",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Други актуализации",
 		"description": "[context-menu]"

@@ -167,10 +167,6 @@
 		"message": "✏️ Aktualizovat Tab",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Přepnout organizaci",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Další aktualizace",
 		"description": "[context-menu]"

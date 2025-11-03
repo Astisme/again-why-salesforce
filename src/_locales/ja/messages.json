@@ -167,10 +167,6 @@
 		"message": "✏️ Tab を更新する",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Org を切り替える",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 その他の更新",
 		"description": "[context-menu]"

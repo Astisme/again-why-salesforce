@@ -167,10 +167,6 @@
 		"message": "✏️ 更新 Tab",
 		"description": "[上下文菜单]"
 	},
-	"cxm_update_org": {
-		"message": "📌 切换组织",
-		"description": "[上下文菜单]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 其他更新",
 		"description": "[上下文菜单]"

@@ -167,10 +167,6 @@
 		"message": "✏️ Tab frissítése",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Szervezet váltása",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Egyéb frissítések",
 		"description": "[context-menu]"

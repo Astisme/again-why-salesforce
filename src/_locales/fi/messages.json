@@ -167,10 +167,6 @@
 		"message": "✏️ Päivitä Tab",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Vaihda organisaatiota",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Muut päivitykset",
 		"description": "[context-menu]"

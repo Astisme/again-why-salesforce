@@ -167,10 +167,6 @@
 		"message": "✏️ Atnaujinti Tab",
 		"description": "[kontekstinis_meniu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Perjungti Org",
-		"description": "[kontekstinis_meniu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Kiti atnaujinimai",
 		"description": "[kontekstinis_meniu]"

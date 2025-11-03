@@ -167,10 +167,6 @@
 		"message": "✏️ Tab അപ്‌ഡേറ്റ് ചെയ്യുക",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 ഓര്‍ഗ്നൈസേഷന്‍ മാറ്റം",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 മറ്റ് അപ്‌ഡേറ്റുകള്‍",
 		"description": "[context-menu]"

@@ -167,10 +167,6 @@
 		"message": "✏️ Tabను నవీకరించు",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Orgని టాగిల్ చేయి",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 ఇతర నవీకరణలు",
 		"description": "[context-menu]"

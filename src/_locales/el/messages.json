@@ -167,10 +167,6 @@
 		"message": "✏️ Ενημέρωση Tab",
 		"description": "[μενού-πλαισίου]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Εναλλαγή Οργάνωσης",
-		"description": "[μενού-πλαισίου]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Άλλες Ενημερώσεις",
 		"description": "[μενού-πλαισίου]"

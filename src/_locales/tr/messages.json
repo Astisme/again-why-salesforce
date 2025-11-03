@@ -167,10 +167,6 @@
 		"message": "✏️ Tab Güncelle",
 		"description": "[bağlam-menüsü]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Kuruluşu Değiştir",
-		"description": "[bağlam-menüsü]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 Diğer Güncellemeler",
 		"description": "[bağlam-menüsü]"

@@ -167,10 +167,6 @@
 		"message": "✏️ Tab अपडेट करें",
 		"description": "[context-menu]"
 	},
-	"cxm_update_org": {
-		"message": "📌 Org टॉगल करें",
-		"description": "[context-menu]"
-	},
 	"cxm_update_tab": {
 		"message": "🧹 अन्य अपडेट्स",
 		"description": "[context-menu]"
