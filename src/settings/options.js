@@ -41,7 +41,6 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 } from "/constants.js";
-import { getEnabledCategories } from "node:trace_events";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so
@@ -202,7 +201,7 @@ function createStyleIds ({
   if(tabType == null || state == null)
     throw new Error("error_required_params");
   const styleType = tabType === TAB_GENERIC_STYLE ? styleGeneric : styleOrg;
-	const suffix = `${styleType}-${state}${postfix}`;
+	const suffix = `${styleType}-${state}`;
 	return {
 		background: `${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${suffix}`,
 		color: `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${suffix}`,
@@ -239,22 +238,155 @@ function createTabElements ({
 	const bold = getTabElement({tabType, styleType: TAB_STYLE_BOLD, state, prefix, postfix});
 	const italic = getTabElement({tabType, styleType: TAB_STYLE_ITALIC, state, prefix, postfix});
 	const underline = getTabElement({tabType, styleType: TAB_STYLE_UNDERLINE, state, prefix, postfix});
-	const elements = [background, color, border, shadow, hover, ...(top ? [top] : [])];
+	const elements = {
+    [TAB_STYLE_BACKGROUND]: background,
+    [TAB_STYLE_COLOR]: color,
+    [TAB_STYLE_BORDER]: border,
+    [TAB_STYLE_SHADOW]: shadow,
+    [TAB_STYLE_HOVER]: hover,
+    [TAB_STYLE_TOP]: top,
+    [TAB_STYLE_BOLD]: bold,
+    [TAB_STYLE_ITALIC]: italic,
+    [TAB_STYLE_UNDERLINE]: underline,
+  };
 	const decorations = [bold, italic, underline];
   const decorationUls = getDecorationUls({ tabType, state, prefix, postfix });
   const styleIds = createStyleIds({ tabType, state });
 	return { elements, decorations, decorationUls, styleIds };
 };
 
-const inactiveGeneric = createTabElements({ tabType: TAB_GENERIC_STYLE, state: inactive});
-const activeGeneric = createTabElements({ tabType: TAB_GENERIC_STYLE, state: active});
-const inactiveOrg = createTabElements({ tabType: TAB_ORG_STYLE, state: inactive});
-const activeOrg = createTabElements({ tabType: TAB_ORG_STYLE, state: active});
+/**
+ * Creates the complete style configuration object
+ * @returns {Object} Configurations organized by style type
+ */
+function createStyleConfigurations() {
+	const tabConfigs = {
+		inactive: {
+			generic: createTabElements({ tabType: TAB_GENERIC_STYLE, state: inactive}),
+			org: createTabElements({ tabType: TAB_ORG_STYLE, state: inactive}),
+		},
+		active: {
+			generic: createTabElements({ tabType: TAB_GENERIC_STYLE, state: active}),
+			org: createTabElements({ tabType: TAB_ORG_STYLE, state: active}),
+		},
+	};
+	const inputStyles = [TAB_STYLE_BACKGROUND, TAB_STYLE_COLOR, TAB_STYLE_BORDER, TAB_STYLE_SHADOW, TAB_STYLE_HOVER, TAB_STYLE_TOP];
+	const decorationStyles = [TAB_STYLE_BOLD, TAB_STYLE_ITALIC, TAB_STYLE_UNDERLINE];
+	const configs = {};
+  for(const key of [...inputStyles, ...decorationStyles]){
+		configs[key] = {
+			type: "input",
+			elements: {
+				inactive: {
+					generic: tabConfigs.inactive.generic.elements[key],
+					org: tabConfigs.inactive.org.elements[key],
+				},
+				active: {
+					generic: tabConfigs.active.generic.elements[key],
+					org: tabConfigs.active.org.elements[key],
+				},
+			},
+			styleIds: {
+				inactive: {
+					generic: tabConfigs.inactive.generic.styleIds[key],
+					org: tabConfigs.inactive.org.styleIds[key],
+				},
+				active: {
+					generic: tabConfigs.active.generic.styleIds[key],
+					org: tabConfigs.active.org.styleIds[key],
+				},
+			},
+		};
+	};
+  /*
+	configs[TAB_STYLE_TOP] = {
+		type: "input",
+		elements: {
+			active: {
+				generic: tabConfigs.active.generic.top,
+				org: tabConfigs.active.org.top,
+			},
+		},
+		styleIds: {
+			active: {
+				generic: tabConfigs.active.generic.styleIds.top,
+				org: tabConfigs.active.org.styleIds.top,
+			},
+		},
+	};
+  */
+  for(const key of decorationStyles){
+    Object.assign(configs[key], {
+      type: "decoration",
+      chosenUls: {
+        inactive: {
+          generic: tabConfigs.inactive.generic.decorationUls.chosen,
+          org: tabConfigs.inactive.org.decorationUls.chosen,
+        },
+        active: {
+          generic: tabConfigs.active.generic.decorationUls.chosen,
+          org: tabConfigs.active.org.decorationUls.chosen,
+        },
+      },
+      availableUls: {
+        inactive: {
+          generic: tabConfigs.inactive.generic.decorationUls.available,
+          org: tabConfigs.inactive.org.decorationUls.available,
+        },
+        active: {
+          generic: tabConfigs.active.generic.decorationUls.available,
+          org: tabConfigs.active.org.decorationUls.available,
+        },
+      },
+    });
+	};
+	return {
+    configs, 
+    generic: {
+      inputs: [...Object.values(tabConfigs.inactive.generic.elements), ...Object.values(tabConfigs.active.generic.elements)],
+      active: {
+        decorations: tabConfigs.active.generic.decorations,
+        decorationUls: tabConfigs.active.generic.decorationUls,
+      },
+      inactive: {
+        decorations: tabConfigs.inactive.generic.decorations,
+        decorationUls: tabConfigs.inactive.generic.decorationUls,
+      },
+    },
+    org: {
+      inputs: [...Object.values(tabConfigs.inactive.org.elements), ...Object.values(tabConfigs.active.org.elements)],
+      active: {
+        decorations: tabConfigs.active.org.decorations,
+        decorationUls: tabConfigs.active.org.decorationUls,
+      },
+      inactive: {
+        decorations: tabConfigs.inactive.org.decorations,
+        decorationUls: tabConfigs.inactive.org.decorationUls,
+      },
+    },
+  };
+}
 
-const allGenericDecorations = [...inactiveGeneric.decorations, ...activeGeneric.decorations];
-const allGenericInputs = [...inactiveGeneric.inputs, ...activeGeneric.inputs];
-const allOrgDecorations = [...inactiveOrg.decorations, ...activeOrg.decorations];
-const allOrgInputs = [...inactiveOrg.inputs, ...activeOrg.inputs];
+/**
+ * Configuration object with style type keys and element/ID mappings
+ * Each style type maps to element references, style IDs, and decoration containers
+ * organized by active/inactive state and generic/org variants.
+ */
+const {
+  configs: styleConfigurations, 
+    generic: {
+      inputs: allGenericInputs,
+      active: activeGeneric,
+      inactive: inactiveGeneric,
+    },
+    org: {
+      inputs: allOrgInputs,
+      active: activeOrg,
+      inactive: inactiveOrg,
+    },
+} = createStyleConfigurations();
+const allGenericDecorations = [...activeGeneric.decorations, ...inactiveGeneric.decorations];
+const allOrgDecorations = [...activeOrg.decorations, ...inactiveOrg.decorations];
 
 /**
  * Updates or removes a style element in the document head
@@ -277,272 +409,6 @@ function updateStyle(styleId, newStyle = null) {
 	document.head.appendChild(style);
 }
 
-/**
- * Configuration object with style type keys and element/ID mappings
- * Each style type maps to element references, style IDs, and decoration containers
- * organized by active/inactive state and generic/org variants.
- */
-const styleConfigurations = {
-	[TAB_STYLE_COLOR]: {
-		type: "input",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.color,
-				org: inactiveOrg.elements.color,
-			},
-			active: {
-				generic: activeGeneric.elements.color,
-				org: activeOrg.elements.color,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.color,
-				org: inactiveOrg.styleIds.color,
-			},
-			active: {
-				generic: activeGeneric.styleIds.color,
-				org: activeOrg.styleIds.color,
-			},
-		},
-	},
-	[TAB_STYLE_BACKGROUND]: {
-		type: "input",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.background,
-				org: inactiveOrg.elements.background,
-			},
-			active: {
-				generic: activeGeneric.elements.background,
-				org: activeOrg.elements.background,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.background,
-				org: inactiveOrg.styleIds.background,
-			},
-			active: {
-				generic: activeGeneric.styleIds.background,
-				org: activeOrg.styleIds.background,
-			},
-		},
-	},
-	[TAB_STYLE_BORDER]: {
-		type: "input",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.border,
-				org: inactiveOrg.elements.border,
-			},
-			active: {
-				generic: activeGeneric.elements.border,
-				org: activeOrg.elements.border,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.border,
-				org: inactiveOrg.styleIds.border,
-			},
-			active: {
-				generic: activeGeneric.styleIds.border,
-				org: activeOrg.styleIds.border,
-			},
-		},
-	},
-	[TAB_STYLE_SHADOW]: {
-		type: "input",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.shadow,
-				org: inactiveOrg.elements.shadow,
-			},
-			active: {
-				generic: activeGeneric.elements.shadow,
-				org: activeOrg.elements.shadow,
-      },
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.shadow,
-				org: inactiveOrg.styleIds.shadow,
-			},
-			active: {
-				generic: activeGeneric.styleIds.shadow,
-				org: activeOrg.styleIds.shadow,
-			},
-		},
-	},
-	[TAB_STYLE_HOVER]: {
-		type: "input",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.hover,
-				org: inactiveOrg.elements.hover,
-			},
-			active: {
-				generic: activeGeneric.elements.hover,
-				org: activeOrg.elements.hover,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.hover,
-				org: inactiveOrg.styleIds.hover,
-			},
-			active: {
-				generic: activeGeneric.styleIds.hover,
-				org: activeOrg.styleIds.hover,
-			},
-		},
-	},
-	[TAB_STYLE_TOP]: {
-		type: "input",
-		elements: {
-			active: {
-				generic: activeGeneric.elements.top,
-				org: activeGeneric.elements.top,
-			},
-		},
-		styleIds: {
-			active: {
-				generic: activeGeneric.styleIds.top,
-				org: activeOrg.styleIds.top,
-			},
-		},
-	},
-	[TAB_STYLE_BOLD]: {
-		type: "decoration",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.bold,
-				org: inactiveOrg.elements.bold,
-			},
-			active: {
-				generic: activeGeneric.elements.bold,
-				org: activeOrg.elements.bold,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.bold,
-				org: inactiveOrg.styleIds.bold,
-			},
-			active: {
-				generic: activeGeneric.styleIds.bold,
-				org: activeOrg.styleIds.bold,
-			},
-		},
-		chosenUls: {
-			inactive: {
-				generic: inactiveGeneric.decorationUls.chosen,
-				org: inactiveOrg.decorationUls.chosen,
-			},
-			active: {
-				generic: activeGeneric.decorationUls.chosen,
-				org: activeOrg.decorationUls.chosen,
-			},
-		},
-		availableUls: {
-			inactive: {
-				generic: inactiveGeneric.decorationUls.available,
-				org: inactiveOrg.decorationUls.available,
-			},
-			active: {
-				generic: activeGeneric.decorationUls.available,
-				org: activeOrg.decorationUls.available,
-			},
-		},
-	},
-	[TAB_STYLE_ITALIC]: {
-		type: "decoration",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.italic,
-				org: inactiveOrg.elements.italic,
-			},
-			active: {
-				generic: activeGeneric.elements.italic,
-				org: activeOrg.elements.italic,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.italic,
-				org: inactiveOrg.styleIds.italic,
-			},
-			active: {
-				generic: activeGeneric.styleIds.italic,
-				org: activeOrg.styleIds.italic,
-			},
-		},
-		chosenUls: {
-			inactive: {
-				generic: inactiveGeneric.decorationUls.chosen,
-				org: inactiveOrg.decorationUls.chosen,
-			},
-			active: {
-				generic: activeGeneric.decorationUls.chosen,
-				org: activeOrg.decorationUls.chosen,
-			},
-		},
-		availableUls: {
-			inactive: {
-				generic: inactiveGeneric.decorationUls.available,
-				org: inactiveOrg.decorationUls.available,
-			},
-			active: {
-				generic: activeGeneric.decorationUls.available,
-				org: activeOrg.decorationUls.available,
-			},
-		},
-	},
-	[TAB_STYLE_UNDERLINE]: {
-		type: "decoration",
-		elements: {
-			inactive: {
-				generic: inactiveGeneric.elements.underline,
-				org: inactiveOrg.elements.underline,
-			},
-			active: {
-				generic: activeGeneric.elements.underline,
-				org: activeOrg.elements.underline,
-			},
-		},
-		styleIds: {
-			inactive: {
-				generic: inactiveGeneric.styleIds.underline,
-				org: inactiveOrg.styleIds.underline,
-			},
-			active: {
-				generic: activeGeneric.styleIds.underline,
-				org: activeOrg.styleIds.underline,
-			},
-		},
-		chosenUls: {
-			inactive: {
-				generic: inactiveGeneric.decorationUls.chosen,
-				org: inactiveOrg.decorationUls.chosen,
-			},
-			active: {
-				generic: activeGeneric.decorationUls.chosen,
-				org: activeOrg.decorationUls.chosen,
-			},
-		},
-		availableUls: {
-			inactive: {
-				generic: inactiveGeneric.decorationUls.available,
-				org: inactiveOrg.decorationUls.available,
-			},
-			active: {
-				generic: activeGeneric.decorationUls.available,
-				org: activeOrg.decorationUls.available,
-			},
-		},
-	},
-};
 /**
  * Extracts element references from configuration based on tab state and type.
  * Handles both input elements and decoration list containers.
@@ -648,17 +514,15 @@ function setPreviewAndInputValue(
 ) {
 	const isForInactive = !setting.forActive;
 	// Handle special case for TAB_STYLE_TOP (active only)
-	if (setting.id === TAB_STYLE_TOP && isForInactive) {
+	if ((setting.id === TAB_STYLE_TOP && isForInactive) || setting.id === preventDefaultOverride) {
 		return;
 	}
 	const wasPicked = setting.value != null && setting.value !== "";
 	// Configuration object for each style type
 	const config = styleConfigurations[setting.id];
 	if (config == null) {
-		if (setting.id !== preventDefaultOverride) {
-			console.error(`Unmatched style setting id: ${setting.id}`);
-		}
-		return;
+    console.error(`Unmatched style setting id: ${setting.id}`);
+    return;
 	}
 	// Get element references and style ID for current configuration
 	const elements = _getElementReferences(
@@ -685,6 +549,7 @@ function setPreviewAndInputValue(
  * @param {Array|Object} [setting.value] - Value for tab style settings
  */
 function setCurrentChoice(setting) {
+  console.log(setting)
 	switch (setting.id) {
 		case LINK_NEW_BROWSER:
 			link_new_browser_el.checked = setting.enabled;
@@ -1163,7 +1028,7 @@ function _setupUIListeners(resources, key) {
 	resources.tabPreview.classList.remove("hidden");
 	// Input change listeners
 	for (const el of resources.allInputs) {
-		el.addEventListener("change", (e) => saveTabOptions(e, key));
+		el?.addEventListener("change", (e) => saveTabOptions(e, key));
 	}
 	// Decoration selection listeners
 	for (const el of resources.allDecorations) {
