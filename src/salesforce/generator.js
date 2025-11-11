@@ -6,7 +6,7 @@ import {
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	GENERIC_TAB_STYLE_KEY,
-	getAllStyleSettings,
+	getStyleSettings,
 	getCssRule,
 	getCssSelector,
 	getSettings,
@@ -19,6 +19,10 @@ import {
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
 	USE_LIGHTNING_NAVIGATION,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+	PINNED_KEY_FINDER,
+	PIN_TAB_CLASS,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -129,16 +133,9 @@ let oldSettings = null;
  * @returns {boolean} True if settings were updated, otherwise false.
  */
 function wereSettingsUpdated(settings) {
-	return oldSettings == null || !(
-		areArraysEqual(
-			oldSettings[GENERIC_TAB_STYLE_KEY],
-			settings[GENERIC_TAB_STYLE_KEY],
-		) &&
-		areArraysEqual(
-			oldSettings[ORG_TAB_STYLE_KEY],
-			settings[ORG_TAB_STYLE_KEY],
-		)
-	);
+  return oldSettings == null || Object.keys(settings).some(key =>
+    !areArraysEqual(oldSettings[key], settings[key])
+  );
 }
 
 /**
@@ -160,16 +157,23 @@ function _getPseudoSelector(id) {
  * Appends pseudo-selector rules to the style element.
  * @param {HTMLStyleElement} style - The style element to append to
  * @param {Array} pseudoRules - Array of pseudo rules to process
- * @param {boolean} isGeneric - Whether this is for generic tab styles
+ * @param {boolean} isGeneric - Whether this is for generic Tab styles
+ * @param {boolean} isPinned - Whether this is for pinned Tab styles
  */
-function _appendPseudoRules(style, pseudoRules, isGeneric) {
+function _appendPseudoRules({
+  style,
+  pseudoRules,
+  isGeneric,
+  isPinned,
+} = {}) {
 	for (const rule of pseudoRules) {
 		const pseudoSelector = _getPseudoSelector(rule.id);
-		const selector = getCssSelector(
-			!rule.forActive,
+		const selector = getCssSelector({
+			isInactive: !rule.forActive,
 			isGeneric,
-			pseudoSelector,
-		);
+			pseudeElement: pseudoSelector,
+      isPinned,
+    });
 		style.textContent += `${selector}{ ${
 			getCssRule(rule.id, rule.value)
 		} }`;
@@ -185,18 +189,23 @@ function _isPseudoRule(id) {
 }
 /**
  * Builds CSS rules for active/inactive tabs and separates pseudo rules.
- * @param {Array} styleList - Array of style elements
- * @param {boolean} isGeneric - Whether this is for generic tab styles
+ * @param {Array} list - Array of style elements
+ * @param {boolean} isGeneric - Whether this is for generic Tab styles
+ * @param {boolean} isPinned - Whether this is for pinned Tab styles
  * @returns {Object} Object containing activeCss, inactiveCss, and pseudoRules
  */
-function _buildCssRules(styleList, isGeneric) {
-	let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
-	let activeCss = `${getCssSelector(false, isGeneric)} {`;
+function _buildCssRules({
+  list = [],
+  isGeneric = false,
+  isPinned = false,
+} = {}) {
+	let inactiveCss = `${getCssSelector({isInactive: true, isGeneric, isPinned})} { `;
+	let activeCss = `${getCssSelector({isInactive: false, isGeneric, isPinned})} {`;
 	const pseudoRules = [];
-	for (const element of styleList) {
+	for (const element of list) {
 		if (_isPseudoRule(element.id)) {
 			pseudoRules.push(element);
-			return;
+      continue;
 		}
 		const rule = getCssRule(element.id, element.value);
 		if (element.forActive) {
@@ -205,16 +214,22 @@ function _buildCssRules(styleList, isGeneric) {
 			inactiveCss += rule;
 		}
 	}
+  inactiveCss += "}";
+  activeCss += "}";
 	return { activeCss, inactiveCss, pseudoRules };
 }
+
 /**
  * Gets existing style element or creates a new one.
- * @param {boolean} isGeneric - Whether this is for generic tab styles
+ * @param {boolean} isGeneric - Whether this is for generic Tab styles
+ * @param {boolean} isPinned - Whether this is for pinned Tab styles
  * @returns {HTMLStyleElement} The style element
  */
-function _getOrCreateStyleElement(isGeneric) {
-	const styleId = `${EXTENSION_NAME}-${
-		isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY
+function _getOrCreateStyleElement({
+  isGeneric = false,
+  isPinned = false,
+} = {}) {
+	const styleId = `${EXTENSION_NAME}-${PINNED_KEY_FINDER[isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY][isPinned]
 	}`;
 	const existingStyle = document.getElementById(styleId);
 	if (existingStyle != null) {
@@ -225,19 +240,26 @@ function _getOrCreateStyleElement(isGeneric) {
 	style.id = styleId;
 	return style;
 }
+
 /**
  * Processes a style list by building CSS and appending to document head.
  * @param {Array} styleList - Array of style elements to process
- * @param {boolean} isGeneric - Whether this is for generic tab styles
+ * @param {boolean} isGeneric - Whether this is for generic Tab styles
+ * @param {boolean} isPinned - Whether this is for pinned Tab styles
  */
-function _processStyleList(styleList, isGeneric) {
-	const style = _getOrCreateStyleElement(isGeneric);
-	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules(
-		styleList,
+function _processStyleList({
+  list = [],
+  isGeneric = false,
+  isPinned = false,
+} = {}) {
+	const style = _getOrCreateStyleElement({isGeneric, isPinned});
+	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules({
+		list,
 		isGeneric,
-	);
-	style.textContent = `${inactiveCss} } ${activeCss} }`;
-	_appendPseudoRules(style, pseudoRules, isGeneric);
+    isPinned,
+  });
+	style.textContent = `${inactiveCss}${activeCss}`;
+	_appendPseudoRules({style, pseudoRules, isGeneric, isPinned});
 	document.head.appendChild(style);
 }
 /**
@@ -251,18 +273,20 @@ function _processStyleList(styleList, isGeneric) {
  * @returns {Promise<void>} Resolves once styles are updated.
  */
 export async function generateStyleFromSettings() {
-	const settings = await getAllStyleSettings();
+	const settings = await getStyleSettings();
 	if (settings == null || !wereSettingsUpdated(settings)) {
 		return;
 	}
 	oldSettings = settings;
 	const styleLists = [
-		{ list: settings[GENERIC_TAB_STYLE_KEY], isGeneric: true },
-		{ list: settings[ORG_TAB_STYLE_KEY], isGeneric: false },
+		{ list: settings[GENERIC_TAB_STYLE_KEY], isGeneric: true, isPinned: false },
+		{ list: settings[ORG_TAB_STYLE_KEY], isGeneric: false, isPinned: false },
+		{ list: settings[GENERIC_PINNED_TAB_STYLE_KEY], isGeneric: true, isPinned: true },
+		{ list: settings[ORG_PINNED_TAB_STYLE_KEY], isGeneric: false, isPinned: true },
 	];
-	for (const { list: styleList, isGeneric } of styleLists) {
-		if (styleList?.length > 0) {
-			_processStyleList(styleList, isGeneric);
+	for (const el of styleLists) {
+		if (el.list?.length > 0) {
+			_processStyleList(el);
 		}
 	}
 }
@@ -278,7 +302,10 @@ export async function generateStyleFromSettings() {
  */
 export function generateRowTemplate(
 	{ label = null, url = null, org = null } = {},
-	hide = false,
+  {
+    hide = false,
+    isPinned = false,
+  },
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -314,6 +341,9 @@ export function generateRowTemplate(
 		span.classList.add(ORG_TAB_CLASS);
 		span.dataset.org = org;
 	}
+  if(isPinned){
+    span.classList.add(PIN_TAB_CLASS);
+  }
 	a.appendChild(span);
 	// Highlight the tab related to the current page
 	if (getCurrentHref() === expURL) {

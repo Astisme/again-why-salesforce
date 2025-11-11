@@ -77,9 +77,11 @@ export const EXTENSION_VERSION = MANIFEST.version;
  * @param {function} callback - The callback to execute after sending the message
  */
 function sendMessage(message, callback) {
+  /*
 	if (message.key == null && message.keys == null) {
 		message.key = WHY_KEY;
 	}
+  */
 	return BROWSER.runtime.sendMessage(message, callback);
 }
 /**
@@ -134,8 +136,23 @@ export const PERSIST_SORT = "persist_sort";
 // decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
+const PINNED = "pinned";
+export const GENERIC_PINNED_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}-${PINNED}`;
 export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
+export const ORG_PINNED_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
+export const PINNED_KEY_FINDER = {
+  [GENERIC_TAB_STYLE_KEY]: {
+    // true = isPinned
+    [true]: GENERIC_PINNED_TAB_STYLE_KEY,
+    // false = !isPinned
+    [false]: GENERIC_TAB_STYLE_KEY,
+  },
+  [ORG_TAB_STYLE_KEY]: {
+    [true]: ORG_PINNED_TAB_STYLE_KEY,
+    [false]: ORG_TAB_STYLE_KEY,
+  },
+};
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";
@@ -144,42 +161,23 @@ export const TAB_STYLE_HOVER = "hover";
 export const TAB_STYLE_BOLD = "bold";
 export const TAB_STYLE_ITALIC = "italic";
 export const TAB_STYLE_UNDERLINE = "underline";
-//export const TAB_STYLE_WAVY = "wavy";
 export const TAB_STYLE_TOP = "top";
+export const PREVENT_DEFAULT_OVERRIDE = "user-set";
 export const SLDS_ACTIVE = "slds-is-active";
 const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
 export const ORG_TAB_CLASS = "is-org-tab";
 export const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
+export const PIN_TAB_CLASS = "is-pin-tab";
+const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
 
 /**
  * Retrieves saved style settings for the specified key.
  * @async
- * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which style settings to fetch.
+ * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
  * @returns {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
-export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY) {
+export async function getStyleSettings(key = null) {
 	return await sendExtensionMessage({ what: "get-style-settings", key });
-}
-
-/**
- * Retrieves style settings for both generic and org tabs.
- *
- * - Fetches settings for GENERIC_TAB_STYLE_KEY and ORG_TAB_STYLE_KEY.
- * - Returns null if neither setting exists.
- * - Otherwise returns an object mapping each key to its settings.
- * @async
- * @returns {Promise<Object<string, any[] | null> | null>} Object with style arrays for each key, or null.
- */
-export async function getAllStyleSettings() {
-	const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
-	const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
-	if (genericStyles == null && orgStyles == null) {
-		return null;
-	}
-	const result = {};
-	result[GENERIC_TAB_STYLE_KEY] = genericStyles;
-	result[ORG_TAB_STYLE_KEY] = orgStyles;
-	return result;
 }
 
 /**
@@ -190,16 +188,18 @@ export async function getAllStyleSettings() {
  * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
  * @returns {string} The constructed CSS selector.
  */
-export function getCssSelector(
+export function getCssSelector({
 	isInactive = true,
 	isGeneric = true,
+  isPinned = false,
 	pseudoElement = "",
-) {
+} = {}) {
 	const activeClass = isInactive
 		? `:not(${SLDS_ACTIVE_CLASS})`
 		: SLDS_ACTIVE_CLASS;
 	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
-	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pseudoElement}`;
+  const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
+	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pinTabClass}${pseudoElement}`;
 }
 
 /**
@@ -227,9 +227,7 @@ export function getCssRule(styleId, value = null) {
 			return "font-style: italic;";
 		case TAB_STYLE_UNDERLINE:
 			return "text-decoration: underline;";
-		//case TAB_STYLE_WAVY:
-		//return "text-decoration: underline wavy;";
-		case "user-set":
+		case PREVENT_DEFAULT_OVERRIDE:
 			return "";
 		default:
 			console.error(styleId);

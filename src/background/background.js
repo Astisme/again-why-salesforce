@@ -9,6 +9,7 @@ import {
 	CMD_SAVE_AS_TAB,
 	CMD_TOGGLE_ORG,
 	CMD_UPDATE_TAB,
+	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	LIGHTNING_FORCE_COM,
 	LOCALE_KEY,
@@ -17,6 +18,7 @@ import {
 	MY_SALESFORCE_SETUP_COM,
 	NO_RELEASE_NOTES,
 	openSettingsPage,
+	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
@@ -39,10 +41,8 @@ import { checkAddRemoveContextMenus } from "./context-menus.js";
  */
 function _getFromStorage(key, callback) {
 	return BROWSER.storage.sync.get(
-		[key],
-		(items) => {
-			callback(items[key]);
-		},
+		Array.isArray(key) ? key : [key],
+		(items) => callback(Array.isArray(key) ? items : items[key]),
 	);
 }
 /**
@@ -107,6 +107,24 @@ export async function bg_getSettings(
 		return response;
 	}
 	callback(response);
+}
+
+async function bg_getStyleSettings(
+  key = null,
+  callback = null
+){
+  if(key == null)
+    key = [
+      GENERIC_TAB_STYLE_KEY,
+      ORG_TAB_STYLE_KEY,
+      GENERIC_PINNED_TAB_STYLE_KEY,
+      ORG_PINNED_TAB_STYLE_KEY,
+    ];
+  return await bg_getSettings(
+    undefined,
+    key,
+    callback,
+  );
 }
 
 /**
@@ -361,7 +379,7 @@ function listenToExtensionMessages() {
 				bg_getSettings(request.keys, undefined, sendResponse);
 				break;
 			case "get-style-settings":
-				bg_getSettings(undefined, request.key, sendResponse);
+				bg_getStyleSettings(request.key, sendResponse);
 				break;
 			case "get-commands":
 				bg_getCommandLinks(request.commands, sendResponse);
@@ -419,23 +437,35 @@ function listenToExtensionCommands() {
 	});
 }
 
+function createDefaultOrgStyle(key = ORG_TAB_STYLE_KEY){
+    const request = {
+      key,
+      set: [
+        { id: "bold", forActive: false, value: "bold" },
+        { id: "bold", forActive: true, value: "bold" },
+      ],
+    };
+    bg_setStorage(request.set, () => {}, request.key);
+}
+
 /**
  * Ensures default organizational style settings exist;
  * if none are found, creates and saves default styles for org-specific tabs.
  */
 async function setDefalutOrgStyle() {
-	const orgStyles = await bg_getSettings(undefined, ORG_TAB_STYLE_KEY);
-	if (orgStyles == null) {
-		// no style settings have been found. create the default style for org-specific Tabs & send it to the background.
-		const request = {
-			key: ORG_TAB_STYLE_KEY,
-			set: [
-				{ id: "bold", forActive: false, value: "bold" },
-				{ id: "bold", forActive: true, value: "bold" },
-			],
-		};
-		bg_setStorage(request.set, () => {}, request.key);
-	}
+	const orgStyles = await bg_getSettings(undefined, [
+    ORG_TAB_STYLE_KEY,
+    ORG_PINNED_TAB_STYLE_KEY,
+  ]);
+  // if no style settings have been found,
+  // create the default style for org-specific Tabs & send it to the background.
+  // same goes for org-specific pinned Tabs
+  if(orgStyles?.[ORG_TAB_STYLE_KEY] == null){
+    createDefaultOrgStyle(ORG_TAB_STYLE_KEY);
+  }
+  if(orgStyles?.[ORG_PINNED_TAB_STYLE_KEY] == null){
+    createDefaultOrgStyle(ORG_PINNED_TAB_STYLE_KEY);
+  }
 }
 
 /**
