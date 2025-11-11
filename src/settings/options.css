@@ -19,6 +19,11 @@ ul.settings {
 .half-container {
 	display: grid;
 	grid-template-columns: 50% 50%;
+	grid-template-rows: 6em 65em;
+}
+
+.pinned-tabs-toggle-container {
+	grid-column: span 2;
 }
 
 .container {
@@ -157,7 +162,13 @@ hr {
 }
 
 #save-container {
-	display: flex;
-	justify-content: center;
-	padding-bottom: 1rem;
+  position: fixed;
+	bottom: 1rem;
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

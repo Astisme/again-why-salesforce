@@ -41,7 +41,10 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 } from "/constants.js";
+import { getEnabledCategories } from "node:trace_events";
 
+// no need to await as we do not need to call the translator
+// we only need it to translate the text on the screen and it may take the time it needs to do so
 ensureTranslatorAvailability();
 const preventDefaultOverride = "user-set";
 const hidden = "hidden";
@@ -100,19 +103,29 @@ const generalHeader = document.getElementById("general-settings");
 const tabGenericManagerContainer = document.getElementById(
 	`${TAB_GENERIC_STYLE}-container`,
 );
+const pinnedTabGenericManagerContainer = document.getElementById(
+	`pinned_${TAB_GENERIC_STYLE}-container`,
+);
 const tabGenericManagerHeader = document.getElementById(
 	`${TAB_GENERIC_STYLE}-settings`,
 );
 const tabGenericPreview = document.getElementById(
 	`${TAB_GENERIC_STYLE}-preview`,
 );
+const pinnedTabGenericPreview = document.getElementById(
+	`pinned_${TAB_GENERIC_STYLE}-preview`,
+);
 const tabOrgManagerContainer = document.getElementById(
 	`${TAB_ORG_STYLE}-container`,
+);
+const pinnedTabOrgManagerContainer = document.getElementById(
+	`pinned_${TAB_ORG_STYLE}-container`,
 );
 const tabOrgManagerHeader = document.getElementById(
 	`${TAB_ORG_STYLE}-settings`,
 );
 const tabOrgPreview = document.getElementById(`${TAB_ORG_STYLE}-preview`);
+const pinnedTabOrgPreview = document.getElementById(`pinned_${TAB_ORG_STYLE}-preview`);
 
 /**
  * Toggles the active class on a list item containing the target element
@@ -121,306 +134,127 @@ const tabOrgPreview = document.getElementById(`${TAB_ORG_STYLE}-preview`);
 function toggleActivePreview(event) {
 	event.target.closest("li").classList.toggle(SLDS_ACTIVE);
 }
+for(const prev of [
+  tabGenericPreview,
+  tabOrgPreview,
+  pinnedTabGenericPreview,
+  pinnedTabOrgPreview,
+]){
+  prev.addEventListener("click", toggleActivePreview);
+}
 
 const inactive = "inactive";
 const active = "active";
-tabGenericPreview.addEventListener("click", toggleActivePreview);
-tabOrgPreview.addEventListener("click", toggleActivePreview);
 
-const tab_inactive_generic_setting_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-${inactive}`,
-);
-const tab_inactive_generic_setting_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-${inactive}`,
-);
-const tab_inactive_generic_setting_border_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-${inactive}`,
-);
-const tab_inactive_generic_setting_shadow_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-${inactive}`,
-);
-const tab_inactive_generic_setting_hover_background_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-${inactive}`);
-const tab_inactive_generic_setting_decoration_bold_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-${inactive}`,
-);
-const tab_inactive_generic_setting_decoration_italic_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-${inactive}`);
-const tab_inactive_generic_setting_decoration_underline_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-${inactive}`);
-//const tab_inactive_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-${inactive}`);
-
-const tab_active_generic_setting_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BACKGROUND}-${active}`,
-);
-const tab_active_generic_setting_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_COLOR}-${active}`,
-);
-const tab_active_generic_setting_border_color_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BORDER}-${active}`,
-);
-const tab_active_generic_setting_shadow_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_SHADOW}-${active}`,
-);
-const tab_active_generic_setting_hover_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_HOVER}-${active}`,
-);
-const tab_active_generic_setting_top_background_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_TOP}-${active}`,
-);
-const tab_active_generic_setting_decoration_bold_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_BOLD}-${active}`,
-);
-const tab_active_generic_setting_decoration_italic_el = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${TAB_STYLE_ITALIC}-${active}`,
-);
-const tab_active_generic_setting_decoration_underline_el = document
-	.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_UNDERLINE}-${active}`);
-//const tab_active_generic_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_GENERIC_STYLE}-${TAB_STYLE_WAVY}-${active}`);
-
-const allInactiveGenericInputs = [
-	tab_inactive_generic_setting_background_el,
-	tab_inactive_generic_setting_color_el,
-	tab_inactive_generic_setting_border_color_el,
-	tab_inactive_generic_setting_shadow_el,
-	tab_inactive_generic_setting_hover_background_el,
-];
-const allActiveGenericInputs = [
-	tab_active_generic_setting_background_el,
-	tab_active_generic_setting_color_el,
-	tab_active_generic_setting_border_color_el,
-	tab_active_generic_setting_shadow_el,
-	tab_active_generic_setting_hover_background_el,
-	tab_active_generic_setting_top_background_el,
-];
-const allGenericInputs = [
-	...allInactiveGenericInputs,
-	...allActiveGenericInputs,
-];
-
-const allInactiveGenericDecorations = [
-	tab_inactive_generic_setting_decoration_bold_el,
-	tab_inactive_generic_setting_decoration_italic_el,
-	tab_inactive_generic_setting_decoration_underline_el,
-	//tab_inactive_generic_setting_decoration_underline_wavy_el,
-];
-const allActiveGenericDecorations = [
-	tab_active_generic_setting_decoration_bold_el,
-	tab_active_generic_setting_decoration_italic_el,
-	tab_active_generic_setting_decoration_underline_el,
-	//tab_active_generic_setting_decoration_underline_wavy_el,
-];
-const allGenericDecorations = [
-	...allInactiveGenericDecorations,
-	...allActiveGenericDecorations,
-];
-
-const tab_inactive_org_setting_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-${inactive}`,
-);
-const tab_inactive_org_setting_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-${inactive}`,
-);
-const tab_inactive_org_setting_border_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-${inactive}`,
-);
-const tab_inactive_org_setting_shadow_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-${inactive}`,
-);
-const tab_inactive_org_setting_hover_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-${inactive}`,
-);
-const tab_inactive_org_setting_decoration_bold_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-${inactive}`,
-);
-const tab_inactive_org_setting_decoration_italic_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-${inactive}`,
-);
-const tab_inactive_org_setting_decoration_underline_el = document
-	.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-${inactive}`);
-//const tab_inactive_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-${inactive}`);
-
-const tab_active_org_setting_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BACKGROUND}-${active}`,
-);
-const tab_active_org_setting_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_COLOR}-${active}`,
-);
-const tab_active_org_setting_border_color_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BORDER}-${active}`,
-);
-const tab_active_org_setting_shadow_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_SHADOW}-${active}`,
-);
-const tab_active_org_setting_hover_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_HOVER}-${active}`,
-);
-const tab_active_org_setting_top_background_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_TOP}-${active}`,
-);
-const tab_active_org_setting_decoration_bold_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_BOLD}-${active}`,
-);
-const tab_active_org_setting_decoration_italic_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_ITALIC}-${active}`,
-);
-const tab_active_org_setting_decoration_underline_el = document.getElementById(
-	`${TAB_ORG_STYLE}-${TAB_STYLE_UNDERLINE}-${active}`,
-);
-//const tab_active_org_setting_decoration_underline_wavy_el = document.getElementById(`${TAB_ORG_STYLE}-${TAB_STYLE_WAVY}-${active}`);
-
-const allInactiveOrgInputs = [
-	tab_inactive_org_setting_background_el,
-	tab_inactive_org_setting_color_el,
-	tab_inactive_org_setting_border_color_el,
-	tab_inactive_org_setting_shadow_el,
-	tab_inactive_org_setting_hover_background_el,
-];
-const allActiveOrgInputs = [
-	tab_active_org_setting_background_el,
-	tab_active_org_setting_color_el,
-	tab_active_org_setting_border_color_el,
-	tab_active_org_setting_shadow_el,
-	tab_active_org_setting_hover_background_el,
-	tab_active_org_setting_top_background_el,
-];
-const allOrgInputs = [
-	...allInactiveOrgInputs,
-	...allActiveOrgInputs,
-];
-
-const allInactiveOrgDecorations = [
-	tab_inactive_org_setting_decoration_bold_el,
-	tab_inactive_org_setting_decoration_italic_el,
-	tab_inactive_org_setting_decoration_underline_el,
-	//tab_inactive_org_setting_decoration_underline_wavy_el,
-];
-const allActiveOrgDecorations = [
-	tab_active_org_setting_decoration_bold_el,
-	tab_active_org_setting_decoration_italic_el,
-	tab_active_org_setting_decoration_underline_el,
-	//tab_active_org_setting_decoration_underline_wavy_el,
-];
-const allOrgDecorations = [
-	...allInactiveOrgDecorations,
-	...allActiveOrgDecorations,
-];
+/**
+ * Gets element by constructed ID from tab style components
+ * @param {string} tabType - The tab type (e.g., TAB_GENERIC_STYLE, TAB_ORG_STYLE)
+ * @param {string} styleType - The style type (e.g., TAB_STYLE_BACKGROUND, TAB_STYLE_COLOR)
+ * @param {string} state - The state (e.g., active, inactive)
+ * @returns {HTMLElement|null}
+ */
+function getTabElement ({
+  tabType = null,
+  styleType = null,
+  state = null,
+  prefix = "",
+  postfix = "",
+} = {}) {
+  if(tabType == null || styleType == null || state == null){
+    throw new Error("error_required_params")
+  }
+	return document.getElementById(`${prefix}${tabType}-${styleType}-${state}${postfix}`);
+};
 
 const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
-const decorationAvailableInactiveId = `${decorationAvailableId}-${inactive}`;
-const decorationChosenInactiveId = `${decorationChosenId}-${inactive}`;
-const decorationAvailableActiveId = `${decorationAvailableId}-${active}`;
-const decorationChosenActiveId = `${decorationChosenId}-${active}`;
-
-const ul_inactive_generic_decoration_available = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationAvailableInactiveId}`,
-);
-const ul_inactive_generic_decoration_chosen = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationChosenInactiveId}`,
-);
-const ul_active_generic_decoration_available = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationAvailableActiveId}`,
-);
-const ul_active_generic_decoration_chosen = document.getElementById(
-	`${TAB_GENERIC_STYLE}-${decorationChosenActiveId}`,
-);
-
-const ul_inactive_org_decoration_available = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationAvailableInactiveId}`,
-);
-const ul_inactive_org_decoration_chosen = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationChosenInactiveId}`,
-);
-const ul_active_org_decoration_available = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationAvailableActiveId}`,
-);
-const ul_active_org_decoration_chosen = document.getElementById(
-	`${TAB_ORG_STYLE}-${decorationChosenActiveId}`,
-);
+/**
+ * Creates decoration list elements for a given tab type and state
+ * @param {string} tabType - The tab type prefix
+ * @param {string} state - The state (active/inactive)
+ * @returns {Object} Object with available and chosen list elements
+ */
+function getDecorationUls ({
+  tabType = null,
+  state = null,
+  prefix = "",
+  postfix = ""
+} = {}) {
+  if(tabType == null || state == null)
+    throw new Error("error_required_params");
+	const available = document.getElementById(`${prefix}${tabType}-${decorationAvailableId}-${state}${postfix}`);
+	const chosen = document.getElementById(`${prefix}${tabType}-${decorationChosenId}-${state}${postfix}`);
+	return { available, chosen };
+};
 
 const styleGeneric = "style-generic";
-const styleGenericInactive = `${styleGeneric}-${inactive}`;
-const styleGenericActive = `${styleGeneric}-${active}`;
 const styleOrg = "style-org";
-const styleOrgInactive = `${styleOrg}-${inactive}`;
-const styleOrgActive = `${styleOrg}-${active}`;
+/**
+ * Creates style IDs for a given style type and state
+ * @param {string} styleType - The style type (e.g., "style-generic", "style-org")
+ * @param {string} state - The state (active/inactive)
+ * @returns {Object} Object with all style IDs
+ */
+function createStyleIds ({
+  tabType = null,
+  state = null,
+} = {}) {
+  if(tabType == null || state == null)
+    throw new Error("error_required_params");
+  const styleType = tabType === TAB_GENERIC_STYLE ? styleGeneric : styleOrg;
+	const suffix = `${styleType}-${state}${postfix}`;
+	return {
+		background: `${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${suffix}`,
+		color: `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${suffix}`,
+		border: `${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${suffix}`,
+		shadow: `${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${suffix}`,
+		hover: `${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${suffix}`,
+		top: state === active ? `${EXTENSION_NAME}-${TAB_STYLE_TOP}-${suffix}` : undefined,
+		bold: `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${suffix}`,
+		italic: `${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${suffix}`,
+		underline: `${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${suffix}`
+	};
+};
 
-const backgroundStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleGenericInactive}`;
-const colorStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleGenericInactive}`;
-const borderStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleGenericInactive}`;
-const shadowStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleGenericInactive}`;
-const hoverStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleGenericInactive}`;
-const boldStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleGenericInactive}`;
-const italicStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleGenericInactive}`;
-const underlineStyleGenericInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleGenericInactive}`;
-//const wavyStyleGenericInactiveId      = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleGenericInactive}`;
+/**
+ * Creates an object with all tab elements for a given configuration
+ * @param {string} tabType - The tab type prefix
+ * @param {string} state - The state (active/inactive)
+ * @returns {Object} Object with named properties for each element plus arrays
+ */
+function createTabElements ({
+  tabType = null,
+  state = null,
+  prefix = "",
+  postfix = "",
+} = {}) {
+  if(tabType == null || state == null)
+    throw new Error("error_required_params");
+	const background = getTabElement({tabType, styleType: TAB_STYLE_BACKGROUND, state, prefix, postfix});
+	const color = getTabElement({tabType, styleType: TAB_STYLE_COLOR, state, prefix, postfix});
+	const border = getTabElement({tabType, styleType: TAB_STYLE_BORDER, state, prefix, postfix});
+	const shadow = getTabElement({tabType, styleType: TAB_STYLE_SHADOW, state, prefix, postfix});
+	const hover = getTabElement({tabType, styleType: TAB_STYLE_HOVER, state, prefix, postfix});
+	const top = state === active ? getTabElement({tabType, styleType: TAB_STYLE_TOP, state, prefix, postfix}) : null;
+	const bold = getTabElement({tabType, styleType: TAB_STYLE_BOLD, state, prefix, postfix});
+	const italic = getTabElement({tabType, styleType: TAB_STYLE_ITALIC, state, prefix, postfix});
+	const underline = getTabElement({tabType, styleType: TAB_STYLE_UNDERLINE, state, prefix, postfix});
+	const elements = [background, color, border, shadow, hover, ...(top ? [top] : [])];
+	const decorations = [bold, italic, underline];
+  const decorationUls = getDecorationUls({ tabType, state, prefix, postfix });
+  const styleIds = createStyleIds({ tabType, state });
+	return { elements, decorations, decorationUls, styleIds };
+};
 
-const backgroundStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleGenericActive}`;
-const colorStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleGenericActive}`;
-const borderStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleGenericActive}`;
-const shadowStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleGenericActive}`;
-const hoverStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleGenericActive}`;
-const topStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleGenericActive}`;
-const boldStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleGenericActive}`;
-const italicStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleGenericActive}`;
-const underlineStyleGenericActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleGenericActive}`;
-//const wavyStyleGenericActiveId        = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleGenericActive}`;
+const inactiveGeneric = createTabElements({ tabType: TAB_GENERIC_STYLE, state: inactive});
+const activeGeneric = createTabElements({ tabType: TAB_GENERIC_STYLE, state: active});
+const inactiveOrg = createTabElements({ tabType: TAB_ORG_STYLE, state: inactive});
+const activeOrg = createTabElements({ tabType: TAB_ORG_STYLE, state: active});
 
-const backgroundStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleOrgInactive}`;
-const colorStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgInactive}`;
-const borderStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgInactive}`;
-const shadowStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgInactive}`;
-const hoverStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgInactive}`;
-const boldStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgInactive}`;
-const italicStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgInactive}`;
-const underlineStyleOrgInactiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleOrgInactive}`;
-//const wavyStyleOrgInactiveId      = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleOrgInactive}`;
-
-const backgroundStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${styleOrgActive}`;
-const colorStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${styleOrgActive}`;
-const borderStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${styleOrgActive}`;
-const shadowStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${styleOrgActive}`;
-const hoverStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${styleOrgActive}`;
-const topStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_TOP}-${styleOrgActive}`;
-const boldStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${styleOrgActive}`;
-const italicStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${styleOrgActive}`;
-const underlineStyleOrgActiveId =
-	`${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${styleOrgActive}`;
-//const wavyStyleOrgActiveId        = `${EXTENSION_NAME}-${TAB_STYLE_WAVY}-${styleOrgActive}`;
+const allGenericDecorations = [...inactiveGeneric.decorations, ...activeGeneric.decorations];
+const allGenericInputs = [...inactiveGeneric.inputs, ...activeGeneric.inputs];
+const allOrgDecorations = [...inactiveOrg.decorations, ...activeOrg.decorations];
+const allOrgInputs = [...inactiveOrg.inputs, ...activeOrg.inputs];
 
 /**
  * Updates or removes a style element in the document head
@@ -453,22 +287,22 @@ const styleConfigurations = {
 		type: "input",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_color_el,
-				org: tab_inactive_org_setting_color_el,
+				generic: inactiveGeneric.elements.color,
+				org: inactiveOrg.elements.color,
 			},
 			active: {
-				generic: tab_active_generic_setting_color_el,
-				org: tab_active_org_setting_color_el,
+				generic: activeGeneric.elements.color,
+				org: activeOrg.elements.color,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: colorStyleGenericInactiveId,
-				org: colorStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.color,
+				org: inactiveOrg.styleIds.color,
 			},
 			active: {
-				generic: colorStyleGenericActiveId,
-				org: colorStyleOrgActiveId,
+				generic: activeGeneric.styleIds.color,
+				org: activeOrg.styleIds.color,
 			},
 		},
 	},
@@ -476,22 +310,22 @@ const styleConfigurations = {
 		type: "input",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_background_el,
-				org: tab_inactive_org_setting_background_el,
+				generic: inactiveGeneric.elements.background,
+				org: inactiveOrg.elements.background,
 			},
 			active: {
-				generic: tab_active_generic_setting_background_el,
-				org: tab_active_org_setting_background_el,
+				generic: activeGeneric.elements.background,
+				org: activeOrg.elements.background,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: backgroundStyleGenericInactiveId,
-				org: backgroundStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.background,
+				org: inactiveOrg.styleIds.background,
 			},
 			active: {
-				generic: backgroundStyleGenericActiveId,
-				org: backgroundStyleOrgActiveId,
+				generic: activeGeneric.styleIds.background,
+				org: activeOrg.styleIds.background,
 			},
 		},
 	},
@@ -499,22 +333,22 @@ const styleConfigurations = {
 		type: "input",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_border_color_el,
-				org: tab_inactive_org_setting_border_color_el,
+				generic: inactiveGeneric.elements.border,
+				org: inactiveOrg.elements.border,
 			},
 			active: {
-				generic: tab_active_generic_setting_border_color_el,
-				org: tab_active_org_setting_border_color_el,
+				generic: activeGeneric.elements.border,
+				org: activeOrg.elements.border,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: borderStyleGenericInactiveId,
-				org: borderStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.border,
+				org: inactiveOrg.styleIds.border,
 			},
 			active: {
-				generic: borderStyleGenericActiveId,
-				org: borderStyleOrgActiveId,
+				generic: activeGeneric.styleIds.border,
+				org: activeOrg.styleIds.border,
 			},
 		},
 	},
@@ -522,22 +356,22 @@ const styleConfigurations = {
 		type: "input",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_shadow_el,
-				org: tab_inactive_org_setting_shadow_el,
+				generic: inactiveGeneric.elements.shadow,
+				org: inactiveOrg.elements.shadow,
 			},
 			active: {
-				generic: tab_active_generic_setting_shadow_el,
-				org: tab_active_org_setting_shadow_el,
-			},
+				generic: activeGeneric.elements.shadow,
+				org: activeOrg.elements.shadow,
+      },
 		},
 		styleIds: {
 			inactive: {
-				generic: shadowStyleGenericInactiveId,
-				org: shadowStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.shadow,
+				org: inactiveOrg.styleIds.shadow,
 			},
 			active: {
-				generic: shadowStyleGenericActiveId,
-				org: shadowStyleOrgActiveId,
+				generic: activeGeneric.styleIds.shadow,
+				org: activeOrg.styleIds.shadow,
 			},
 		},
 	},
@@ -545,22 +379,22 @@ const styleConfigurations = {
 		type: "input",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_hover_background_el,
-				org: tab_inactive_org_setting_hover_background_el,
+				generic: inactiveGeneric.elements.hover,
+				org: inactiveOrg.elements.hover,
 			},
 			active: {
-				generic: tab_active_generic_setting_hover_background_el,
-				org: tab_active_org_setting_hover_background_el,
+				generic: activeGeneric.elements.hover,
+				org: activeOrg.elements.hover,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: hoverStyleGenericInactiveId,
-				org: hoverStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.hover,
+				org: inactiveOrg.styleIds.hover,
 			},
 			active: {
-				generic: hoverStyleGenericActiveId,
-				org: hoverStyleOrgActiveId,
+				generic: activeGeneric.styleIds.hover,
+				org: activeOrg.styleIds.hover,
 			},
 		},
 	},
@@ -568,14 +402,14 @@ const styleConfigurations = {
 		type: "input",
 		elements: {
 			active: {
-				generic: tab_active_generic_setting_top_background_el,
-				org: tab_active_org_setting_top_background_el,
+				generic: activeGeneric.elements.top,
+				org: activeGeneric.elements.top,
 			},
 		},
 		styleIds: {
 			active: {
-				generic: topStyleGenericActiveId,
-				org: topStyleOrgActiveId,
+				generic: activeGeneric.styleIds.top,
+				org: activeOrg.styleIds.top,
 			},
 		},
 	},
@@ -583,42 +417,42 @@ const styleConfigurations = {
 		type: "decoration",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_decoration_bold_el,
-				org: tab_inactive_org_setting_decoration_bold_el,
+				generic: inactiveGeneric.elements.bold,
+				org: inactiveOrg.elements.bold,
 			},
 			active: {
-				generic: tab_active_generic_setting_decoration_bold_el,
-				org: tab_active_org_setting_decoration_bold_el,
+				generic: activeGeneric.elements.bold,
+				org: activeOrg.elements.bold,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: boldStyleGenericInactiveId,
-				org: boldStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.bold,
+				org: inactiveOrg.styleIds.bold,
 			},
 			active: {
-				generic: boldStyleGenericActiveId,
-				org: boldStyleOrgActiveId,
+				generic: activeGeneric.styleIds.bold,
+				org: activeOrg.styleIds.bold,
 			},
 		},
 		chosenUls: {
 			inactive: {
-				generic: ul_inactive_generic_decoration_chosen,
-				org: ul_inactive_org_decoration_chosen,
+				generic: inactiveGeneric.decorationUls.chosen,
+				org: inactiveOrg.decorationUls.chosen,
 			},
 			active: {
-				generic: ul_active_generic_decoration_chosen,
-				org: ul_active_org_decoration_chosen,
+				generic: activeGeneric.decorationUls.chosen,
+				org: activeOrg.decorationUls.chosen,
 			},
 		},
 		availableUls: {
 			inactive: {
-				generic: ul_inactive_generic_decoration_available,
-				org: ul_inactive_org_decoration_available,
+				generic: inactiveGeneric.decorationUls.available,
+				org: inactiveOrg.decorationUls.available,
 			},
 			active: {
-				generic: ul_active_generic_decoration_available,
-				org: ul_active_org_decoration_available,
+				generic: activeGeneric.decorationUls.available,
+				org: activeOrg.decorationUls.available,
 			},
 		},
 	},
@@ -626,42 +460,42 @@ const styleConfigurations = {
 		type: "decoration",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_decoration_italic_el,
-				org: tab_inactive_org_setting_decoration_italic_el,
+				generic: inactiveGeneric.elements.italic,
+				org: inactiveOrg.elements.italic,
 			},
 			active: {
-				generic: tab_active_generic_setting_decoration_italic_el,
-				org: tab_active_org_setting_decoration_italic_el,
+				generic: activeGeneric.elements.italic,
+				org: activeOrg.elements.italic,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: italicStyleGenericInactiveId,
-				org: italicStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.italic,
+				org: inactiveOrg.styleIds.italic,
 			},
 			active: {
-				generic: italicStyleGenericActiveId,
-				org: italicStyleOrgActiveId,
+				generic: activeGeneric.styleIds.italic,
+				org: activeOrg.styleIds.italic,
 			},
 		},
 		chosenUls: {
 			inactive: {
-				generic: ul_inactive_generic_decoration_chosen,
-				org: ul_inactive_org_decoration_chosen,
+				generic: inactiveGeneric.decorationUls.chosen,
+				org: inactiveOrg.decorationUls.chosen,
 			},
 			active: {
-				generic: ul_active_generic_decoration_chosen,
-				org: ul_active_org_decoration_chosen,
+				generic: activeGeneric.decorationUls.chosen,
+				org: activeOrg.decorationUls.chosen,
 			},
 		},
 		availableUls: {
 			inactive: {
-				generic: ul_inactive_generic_decoration_available,
-				org: ul_inactive_org_decoration_available,
+				generic: inactiveGeneric.decorationUls.available,
+				org: inactiveOrg.decorationUls.available,
 			},
 			active: {
-				generic: ul_active_generic_decoration_available,
-				org: ul_active_org_decoration_available,
+				generic: activeGeneric.decorationUls.available,
+				org: activeOrg.decorationUls.available,
 			},
 		},
 	},
@@ -669,42 +503,42 @@ const styleConfigurations = {
 		type: "decoration",
 		elements: {
 			inactive: {
-				generic: tab_inactive_generic_setting_decoration_underline_el,
-				org: tab_inactive_org_setting_decoration_underline_el,
+				generic: inactiveGeneric.elements.underline,
+				org: inactiveOrg.elements.underline,
 			},
 			active: {
-				generic: tab_active_generic_setting_decoration_underline_el,
-				org: tab_active_org_setting_decoration_underline_el,
+				generic: activeGeneric.elements.underline,
+				org: activeOrg.elements.underline,
 			},
 		},
 		styleIds: {
 			inactive: {
-				generic: underlineStyleGenericInactiveId,
-				org: underlineStyleOrgInactiveId,
+				generic: inactiveGeneric.styleIds.underline,
+				org: inactiveOrg.styleIds.underline,
 			},
 			active: {
-				generic: underlineStyleGenericActiveId,
-				org: underlineStyleOrgActiveId,
+				generic: activeGeneric.styleIds.underline,
+				org: activeOrg.styleIds.underline,
 			},
 		},
 		chosenUls: {
 			inactive: {
-				generic: ul_inactive_generic_decoration_chosen,
-				org: ul_inactive_org_decoration_chosen,
+				generic: inactiveGeneric.decorationUls.chosen,
+				org: inactiveOrg.decorationUls.chosen,
 			},
 			active: {
-				generic: ul_active_generic_decoration_chosen,
-				org: ul_active_org_decoration_chosen,
+				generic: activeGeneric.decorationUls.chosen,
+				org: activeOrg.decorationUls.chosen,
 			},
 		},
 		availableUls: {
 			inactive: {
-				generic: ul_inactive_generic_decoration_available,
-				org: ul_inactive_org_decoration_available,
+				generic: inactiveGeneric.decorationUls.available,
+				org: inactiveOrg.decorationUls.available,
 			},
 			active: {
-				generic: ul_active_generic_decoration_available,
-				org: ul_active_org_decoration_available,
+				generic: activeGeneric.decorationUls.available,
+				org: activeOrg.decorationUls.available,
 			},
 		},
 	},
@@ -1215,17 +1049,17 @@ function _getButtonReferences(isGeneric) {
 function _getListReferences(isGeneric) {
 	return {
 		inactiveAvailable: isGeneric
-			? ul_inactive_generic_decoration_available
-			: ul_inactive_org_decoration_available,
+			? inactiveGeneric.decorationUls.available
+			: inactiveOrg.decorationUls.available,
 		inactiveChosen: isGeneric
-			? ul_inactive_generic_decoration_chosen
-			: ul_inactive_org_decoration_chosen,
+			? inactiveGeneric.decorationUls.chosen
+			: inactiveOrg.decorationUls.chosen,
 		activeAvailable: isGeneric
-			? ul_active_generic_decoration_available
-			: ul_active_org_decoration_available,
+			? activeGeneric.decorationUls.available
+			: activeOrg.decorationUls.available,
 		activeChosen: isGeneric
-			? ul_active_generic_decoration_chosen
-			: ul_active_org_decoration_chosen,
+			? activeGeneric.decorationUls.chosen
+			: activeOrg.decorationUls.chosen,
 	};
 }
 /**
@@ -1239,11 +1073,11 @@ function _getTabResources(isGeneric) {
 		allInputs: isGeneric ? allGenericInputs : allOrgInputs,
 		allDecorations: isGeneric ? allGenericDecorations : allOrgDecorations,
 		allInactiveDecorations: isGeneric
-			? allInactiveGenericDecorations
-			: allInactiveOrgDecorations,
+			? inactiveGeneric.decorations
+			: inactiveOrg.decorations,
 		allActiveDecorations: isGeneric
-			? allActiveGenericDecorations
-			: allActiveOrgDecorations,
+			? activeGeneric.decorations
+			: activeOrg.decorations,
 		buttons: _getButtonReferences(isGeneric),
 		lists: _getListReferences(isGeneric),
 		tabPreview: isGeneric ? tabGenericPreview : tabOrgPreview,
@@ -1396,10 +1230,12 @@ function showRelevantSettings_HideOthers(
 
 generalHeader.addEventListener("click", () => {
 	restoreGeneralSettings();
-	showRelevantSettings_HideOthers([generalHeader], [generalContainer], [
-		tabGenericManagerHeader,
-		tabOrgManagerHeader,
-	], [tabGenericManagerContainer, tabOrgManagerContainer]);
+	showRelevantSettings_HideOthers(
+    [generalHeader],
+    [generalContainer],
+    [tabGenericManagerHeader, tabOrgManagerHeader],
+    [tabGenericManagerContainer, tabOrgManagerContainer],
+  );
 });
 
 tabGenericManagerHeader.addEventListener("click", () => {

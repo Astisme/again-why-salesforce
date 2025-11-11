@@ -1,4 +1,20 @@
 {
+	"style_org_pinned": {
+		"message": "Style pinned org Tabs",
+		"description": "[options] Toggle label to style pinned org Tabs"
+	},
+	"style_generic_pinned": {
+		"message": "Style pinned generic Tabs",
+		"description": "[options] Toggle label to style pinned generic Tabs"
+	},
+	"inactive": {
+		"message": "Inactive",
+		"description": "Used in toggles for inactive state"
+	},
+	"active": {
+		"message": "Active",
+		"description": "Used in toggles for active state"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -894,6 +910,10 @@
 		"message": "Send us a tip ❤️",
 		"description": "[popup] title for svg to prompt sending a tip"
 	},
+	"set_pin_gen_preview": {
+		"message": "Pinned Tab Preview",
+		"description": "Label for previewing generic Tab appearance when pinned"
+	},
 	"set_gen_preview": {
 		"message": "Tab Preview",
 		"description": "Label for previewing generic Tab appearance"
@@ -913,6 +933,10 @@
 	"set_move_chosen": {
 		"message": "Move to Chosen",
 		"description": "Button title to move selected items to Chosen"
+	},
+	"set_pin_org_preview": {
+		"message": "Pinned Org Preview",
+		"description": "Label for previewing org-specific Tab appearance when pinned"
 	},
 	"set_org_preview": {
 		"message": "Org Preview",
