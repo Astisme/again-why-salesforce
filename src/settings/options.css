@@ -19,7 +19,6 @@ ul.settings {
 .half-container {
 	display: grid;
 	grid-template-columns: 50% 50%;
-	grid-template-rows: 6em 65em;
 }
 
 .pinned-tabs-toggle-container {
@@ -28,6 +27,7 @@ ul.settings {
 
 .container {
 	margin: 1rem;
+	margin-bottom: 0;
 }
 
 .dual-listbox-container {
@@ -162,13 +162,18 @@ hr {
 }
 
 #save-container {
-  position: fixed;
-	bottom: 1rem;
-  width: 100%;
+	padding-bottom: 1rem;
+	width: 100%;
 }
 
 .flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#header {
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }

@@ -144,6 +144,40 @@
 								</a>
 							</li>
 							<li
+								id="pinned_tab_generic_style-settings"
+								class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem"
+							>
+								<a
+									role="tab"
+									tabindex="-1"
+									title="Pinned Tab Styler"
+									class="tabHeader slds-context-bar__label-action"
+									data-i18n="set_pin_gen_styler+-+title"
+								>
+									<span
+										class="label slds-truncate"
+										data-i18n="set_pin_gen_styler"
+									>Pinned Tab Styler</span>
+								</a>
+							</li>
+							<li
+								id="pinned_tab_org_style-settings"
+								class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem"
+							>
+								<a
+									role="tab"
+									tabindex="-1"
+									title="Pinned Org Styler"
+									class="tabHeader slds-context-bar__label-action"
+									data-i18n="set_pin_org_styler+-+title"
+								>
+									<span
+										class="label slds-truncate"
+										data-i18n="set_pin_org_styler"
+									>Pinned Org Styler</span>
+								</a>
+							</li>
+							<li
 								id="tab_generic_style-preview"
 								class="hidden oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce"
 							>
@@ -226,16 +260,11 @@
 				role="alertdialog"
 				aria-describedby="toastDescription7382:0"
 				aria-label="success"
-				data-key="success"
 				class="slds-theme--success slds-notify--toast slds-notify forceToastMessage"
-				data-aura-rendered-by="7384:0"
-				data-aura-class="forceToastMessage"
 			>
 				<lightning-icon
 					icon-name="utility:success"
 					class="slds-icon-utility-success toastIcon slds-m-right--small slds-no-flex slds-align-top slds-icon_container"
-					data-data-rendering-service-uid="1478"
-					data-aura-rendered-by="7386:0"
 				>
 					<span
 						style="--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)"
@@ -248,7 +277,6 @@
 							<svg
 								class="slds-icon slds-icon_small"
 								focusable="false"
-								data-key="success"
 								aria-hidden="true"
 								viewBox="0 0 520 520"
 								part="icon"
@@ -266,20 +294,15 @@
 				</lightning-icon>
 				<div
 					class="toastContent slds-notify__content"
-					data-aura-rendered-by="7387:0"
 				>
 					<div
 						class="slds-align-middle slds-hyphenate"
-						data-aura-rendered-by="7388:0"
 					>
 						<div
 							id="toastDescription7382:0"
-							data-aura-rendered-by="7390:0"
 						>
 							<div
 								class="toastMessage slds-text-heading--small forceActionsText"
-								data-aura-rendered-by="7395:0"
-								data-aura-class="forceActionsText"
 								data-i18n="opt_confirm_save"
 							>
 								Settings were saved!
@@ -2237,8 +2260,14 @@
 			</div>
 		</div>
 
-		<div id="pinned_tab_generic_style-container" class="half-container hidden">
-			<div id="pinned_tab_generic_style-inactive-container" class="container">
+		<div
+			id="pinned_tab_generic_style-container"
+			class="half-container hidden"
+		>
+			<div
+				id="pinned_tab_generic_style-inactive-container"
+				class="container"
+			>
 				<div
 					class="slds-form-element_stacked slds-form-element"
 					variant="label-stacked"
@@ -2596,7 +2625,10 @@
 				</div>
 			</div>
 
-			<div id="pinned_tab_generic_style-active-container" class="container">
+			<div
+				id="pinned_tab_generic_style-active-container"
+				class="container"
+			>
 				<div
 					class="slds-form-element_stacked slds-form-element"
 					variant="label-stacked"

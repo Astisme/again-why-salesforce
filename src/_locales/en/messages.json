@@ -918,6 +918,10 @@
 		"message": "Tab Preview",
 		"description": "Label for previewing generic Tab appearance"
 	},
+	"set_pin_gen_styler": {
+		"message": "Pinned Tab Styler",
+		"description": "Label for configuring the style of generic Tabs when pinned"
+	},
 	"set_gen_styler": {
 		"message": "Tab Styler",
 		"description": "Label for configuring the style of generic Tabs"
@@ -941,6 +945,10 @@
 	"set_org_preview": {
 		"message": "Org Preview",
 		"description": "Label for previewing org-specific Tab appearance"
+	},
+	"set_pin_org_styler": {
+		"message": "Pinned Org Styler",
+		"description": "Label for configuring the style of org-specific Tabs when pinned"
 	},
 	"set_org_styler": {
 		"message": "Org Styler",
