@@ -115,9 +115,8 @@ const active = "active";
  * @param {string} state - The state (e.g., active, inactive)
  * @returns {HTMLElement|null}
  */
-function getTabElement({
+function getTabElement(styleType, {
 	tabType = null,
-	styleType = null,
 	state = null,
 	prefix = "",
 	postfix = "",
@@ -168,25 +167,27 @@ const styleOrg = "style-org";
 function createStyleIds({
 	tabType = null,
 	state = null,
+  prefix = "",
   postfix = "",
 } = {}) {
 	if (tabType == null || state == null) {
 		throw new Error("error_required_params");
 	}
 	const styleType = tabType === TAB_GENERIC_STYLE ? styleGeneric : styleOrg;
+  const newPre = prefix !== "" ? `${EXTENSION_NAME}-${prefix}` : EXTENSION_NAME;
 	const suffix = `${styleType}-${state}${postfix}`;
 	return {
-    background: `${EXTENSION_NAME}-${TAB_STYLE_BACKGROUND}-${suffix}`,
-    color: `${EXTENSION_NAME}-${TAB_STYLE_COLOR}-${suffix}`,
-    border: `${EXTENSION_NAME}-${TAB_STYLE_BORDER}-${suffix}`,
-    shadow: `${EXTENSION_NAME}-${TAB_STYLE_SHADOW}-${suffix}`,
-    hover: `${EXTENSION_NAME}-${TAB_STYLE_HOVER}-${suffix}`,
+    background: `${newPre}-${TAB_STYLE_BACKGROUND}-${suffix}`,
+    color: `${newPre}-${TAB_STYLE_COLOR}-${suffix}`,
+    border: `${newPre}-${TAB_STYLE_BORDER}-${suffix}`,
+    shadow: `${newPre}-${TAB_STYLE_SHADOW}-${suffix}`,
+    hover: `${newPre}-${TAB_STYLE_HOVER}-${suffix}`,
     top: state === active
-      ? `${EXTENSION_NAME}-${TAB_STYLE_TOP}-${suffix}`
+      ? `${newPre}-${TAB_STYLE_TOP}-${suffix}`
       : undefined,
-    bold: `${EXTENSION_NAME}-${TAB_STYLE_BOLD}-${suffix}`,
-    italic: `${EXTENSION_NAME}-${TAB_STYLE_ITALIC}-${suffix}`,
-    underline: `${EXTENSION_NAME}-${TAB_STYLE_UNDERLINE}-${suffix}`,
+    bold: `${newPre}-${TAB_STYLE_BOLD}-${suffix}`,
+    italic: `${newPre}-${TAB_STYLE_ITALIC}-${suffix}`,
+    underline: `${newPre}-${TAB_STYLE_UNDERLINE}-${suffix}`,
 	};
 }
 
@@ -229,82 +230,35 @@ function createTabElements({
 	if (tabType == null || state == null) {
 		throw new Error("error_required_params");
 	}
-	const bold = getTabElement({
+  const conf = {
 		tabType,
-		styleType: TAB_STYLE_BOLD,
 		state,
 		prefix,
 		postfix,
-	});
-	const italic = getTabElement({
-		tabType,
-		styleType: TAB_STYLE_ITALIC,
-		state,
-		prefix,
-		postfix,
-	});
-	const underline = getTabElement({
-		tabType,
-		styleType: TAB_STYLE_UNDERLINE,
-		state,
-		prefix,
-		postfix,
-	});
+	};
 	const elements = {
-		[TAB_STYLE_BACKGROUND]: getTabElement({
-			tabType,
-			styleType: TAB_STYLE_BACKGROUND,
-			state,
-			prefix,
-			postfix,
-		}),
-		[TAB_STYLE_COLOR]: getTabElement({
-			tabType,
-			styleType: TAB_STYLE_COLOR,
-			state,
-			prefix,
-			postfix,
-		}),
-		[TAB_STYLE_BORDER]: getTabElement({
-			tabType,
-			styleType: TAB_STYLE_BORDER,
-			state,
-			prefix,
-			postfix,
-		}),
-		[TAB_STYLE_SHADOW]: getTabElement({
-			tabType,
-			styleType: TAB_STYLE_SHADOW,
-			state,
-			prefix,
-			postfix,
-		}),
-		[TAB_STYLE_HOVER]: getTabElement({
-			tabType,
-			styleType: TAB_STYLE_HOVER,
-			state,
-			prefix,
-			postfix,
-		}),
+		[TAB_STYLE_BACKGROUND]: getTabElement(TAB_STYLE_BACKGROUND, conf),
+		[TAB_STYLE_COLOR]: getTabElement(TAB_STYLE_COLOR, conf),
+		[TAB_STYLE_BORDER]: getTabElement(TAB_STYLE_BORDER, conf),
+		[TAB_STYLE_SHADOW]: getTabElement(TAB_STYLE_SHADOW, conf),
+		[TAB_STYLE_HOVER]: getTabElement(TAB_STYLE_HOVER, conf),
 		[TAB_STYLE_TOP]: state === active
-			? getTabElement({
-				tabType,
-				styleType: TAB_STYLE_TOP,
-				state,
-				prefix,
-				postfix,
-			})
+			? getTabElement(TAB_STYLE_TOP, conf)
 			: null,
-		[TAB_STYLE_BOLD]: bold,
-		[TAB_STYLE_ITALIC]: italic,
-		[TAB_STYLE_UNDERLINE]: underline,
+		[TAB_STYLE_BOLD]: getTabElement(TAB_STYLE_BOLD, conf),
+		[TAB_STYLE_ITALIC]: getTabElement(TAB_STYLE_ITALIC, conf),
+		[TAB_STYLE_UNDERLINE]: getTabElement(TAB_STYLE_UNDERLINE, conf),
 	};
 	return {
 		elements,
-		decorations: [bold, italic, underline],
-		decorationUls: getDecorationUls({ tabType, state, prefix, postfix }),
-		styleIds: createStyleIds({ tabType, state, postfix }),
-		moveBtns: getMoveButtons({ tabType, state }),
+    decorations: [
+      elements[TAB_STYLE_BOLD],
+      elements[TAB_STYLE_ITALIC],
+      elements[TAB_STYLE_UNDERLINE],
+    ],
+		decorationUls: getDecorationUls(conf),
+		styleIds: createStyleIds(conf),
+		moveBtns: getMoveButtons(conf),
 	};
 }
 
@@ -453,47 +407,41 @@ function buildInputDecorationConfigs(configs){
   return inputs;
 }
 
-function buildGenericOrgConf(configs){
+function buildStructuredConf(configs){
   return {
-			inputs: {
-        unpinned: [
+    unpinned: {
+      active: {
+          decorations: configs.active.unpinned.decorations,
+          decorationUls: configs.active.unpinned.decorationUls,
+          moveBtns: configs.active.unpinned.moveBtns,
+      },
+      inactive: {
+          decorations: configs.inactive.unpinned.decorations,
+          decorationUls: configs.inactive.unpinned.decorationUls,
+          moveBtns: configs.inactive.unpinned.moveBtns,
+      },
+      inputs: [
           ...Object.values(configs.inactive.unpinned.elements),
           ...Object.values(configs.active.unpinned.elements),
-        ],
-        pinned: [
+      ].filter(Boolean),
+    },
+    pinned: {
+      active: {
+          decorations: configs.active.pinned.decorations,
+          decorationUls: configs.active.pinned.decorationUls,
+          moveBtns: configs.active.pinned.moveBtns,
+      },
+      inactive: {
+          decorations: configs.inactive.pinned.decorations,
+          decorationUls: configs.inactive.pinned.decorationUls,
+          moveBtns: configs.inactive.pinned.moveBtns,
+      },
+      inputs: [
           ...Object.values(configs.inactive.pinned.elements),
           ...Object.values(configs.active.pinned.elements),
-        ],
-			},
-			active: {
-				decorations: {
-          unpinned: configs.active.unpinned.decorations,
-          pinned: configs.active.pinned.decorations,
-        },
-				decorationUls: {
-          unpinned: configs.active.unpinned.decorationUls,
-          pinned: configs.active.pinned.decorationUls,
-        },
-				moveBtns: {
-          unpinned: configs.active.unpinned.moveBtns,
-          pinned: configs.active.pinned.moveBtns,
-        },
-			},
-			inactive: {
-				decorations: {
-          unpinned: configs.inactive.unpinned.decorations,
-          pinned: configs.inactive.pinned.decorations,
-        },
-				decorationUls: {
-          unpinned: configs.inactive.unpinned.decorationUls,
-          pinned: configs.inactive.pinned.decorationUls,
-        },
-				moveBtns: {
-          unpinned: configs.inactive.unpinned.moveBtns,
-          pinned: configs.inactive.pinned.moveBtns,
-        },
-			},
-		}
+      ].filter(Boolean),
+    },
+  }
 }
 
 const pinnedPrefix = `${pinned}_`;
@@ -550,7 +498,7 @@ function createStyleConfigurations() {
   };
 	return {
     configs: buildInputDecorationConfigs(configs),
-		generic: buildGenericOrgConf({
+		generic: buildStructuredConf({
         inactive: {
           unpinned: inactiveGenericUnpinned,
           pinned: inactiveGenericPinned,
@@ -560,14 +508,14 @@ function createStyleConfigurations() {
           pinned: activeGenericPinned,
         },
     }),
-		org: buildGenericOrgConf({
+		org: buildStructuredConf({
         inactive: {
-          unpinned: inactiveGenericUnpinned,
-          pinned: inactiveGenericPinned,
+          unpinned: inactiveOrgUnpinned,
+          pinned: inactiveOrgPinned,
         },
         active: {
-          unpinned: activeGenericUnpinned,
-          pinned: activeGenericPinned,
+          unpinned: activeOrgUnpinned,
+          pinned: activeOrgPinned,
         },
     }),
 	};
@@ -585,22 +533,22 @@ const {
 } = createStyleConfigurations();
 const allGenericDecorations = {
   unpinned: [
-  ...genericTabConf.active.decorations.unpinned,
-  ...genericTabConf.inactive.decorations.unpinned,
+  ...genericTabConf.unpinned.active.decorations,
+  ...genericTabConf.unpinned.inactive.decorations,
   ],
   pinned: [
-  ...genericTabConf.active.decorations.pinned,
-  ...genericTabConf.inactive.decorations.pinned,
+  ...genericTabConf.pinned.active.decorations,
+  ...genericTabConf.pinned.inactive.decorations,
   ],
 };
 const allOrgDecorations = {
   unpinned: [
-    ...orgTabConf.active.decorations.unpinned,
-    ...orgTabConf.inactive.decorations.unpinned,
+    ...orgTabConf.unpinned.active.decorations,
+    ...orgTabConf.unpinned.inactive.decorations,
   ],
   pinned: [
-    ...orgTabConf.active.decorations.pinned,
-    ...orgTabConf.inactive.decorations.pinned,
+    ...orgTabConf.pinned.active.decorations,
+    ...orgTabConf.pinned.inactive.decorations,
   ],
 };
 
@@ -667,8 +615,8 @@ function _getStyleId(config, {
 } = {}) {
 	const state = isForInactive ? "inactive" : "active";
 	const variant = isGeneric ? "generic" : "org";
-  const pinVariant = isPinned ? "pinned" : "unpinned";
-	return `${config.styleIds?.[state]?.[variant]}-${pinVariant}`;
+  const pinKey = getPinKey(isPinned);
+	return `${config.styleIds?.[state]?.[variant]?.[pinKey]}`;
 }
 /**
  * Determines the appropriate CSS pseudo-selector for specific style types.
@@ -730,6 +678,15 @@ function _updateUIElements(elements, value) {
     }
 	}
 }
+
+function isGenericKey(key){
+  return key === GENERIC_TAB_STYLE_KEY || key === GENERIC_PINNED_TAB_STYLE_KEY;
+}
+
+function isPinnedKey(key){
+  return key === GENERIC_PINNED_TAB_STYLE_KEY || key === ORG_PINNED_TAB_STYLE_KEY;
+}
+
 /**
  * Updates CSS styles of the preview Tab based on provided tab style settings
  * Sets inputs fields with the value passed in the setting
@@ -743,8 +700,8 @@ function _updateUIElements(elements, value) {
 function setPreviewAndInputValue(
 	setting,
   {
-    isGeneric = true,
     updateViews = true,
+    isGeneric = true,
     isPinned = false,
   } = {}) {
 	const isForInactive = !setting.forActive;
@@ -988,7 +945,10 @@ function saveTabOptions(e, key = GENERIC_TAB_STYLE_KEY) {
 	setting.id = styleKey;
 	setting.forActive = !target.id.endsWith(inactive);
 	setting.value = e.target.value;
-	setPreviewAndInputValue(setting, {isGeneric: key === GENERIC_TAB_STYLE_KEY});
+	setPreviewAndInputValue(setting, {
+    isGeneric: isGenericKey(key),
+    isPinned: isPinnedKey(key),
+  });
 	set.set.push(setting);
 	sendExtensionMessage(set);
 }
@@ -1019,7 +979,11 @@ function saveTabDecorations(
 			forActive: !li.id.endsWith(inactive),
 			value: isAdding ? styleKey : "",
 		};
-		setPreviewAndInputValue(setting, {isGeneric: key === GENERIC_TAB_STYLE_KEY, updateViews: false});
+		setPreviewAndInputValue(setting, {
+      isGeneric: isGenericKey(key),
+      isPinned: isPinnedKey(key),
+      updateViews: false
+    });
 		set_msg.set.push(setting);
 	}
 	sendExtensionMessage(set_msg);
@@ -1065,65 +1029,25 @@ function moveSelectedDecorationsTo(
 }
 
 /**
- * Gets button element references for moving decorations between available/chosen states.
- * @param {boolean} isGeneric - Whether to get generic or org-specific button references
- * @returns {Object} Object containing button element references
- */
-function _getButtonReferences({
-  isGeneric = true,
-  pinKey = null,
-} = {}) {
-  if(pinKey == null)
-    throw new Error("error_required_params");
-	return {
-    inactive: {
-      available: isGeneric
-        ? genericTabConf.inactive.moveBtns[pinKey]?.available
-        : orgTabConf.inactive.moveBtns[pinKey]?.available,
-      chosen: isGeneric
-			? genericTabConf.inactive.moveBtns[pinKey]?.chosen
-			: orgTabConf.inactive.moveBtns[pinKey]?.chosen,
-    },
-    active: {
-      available: isGeneric
-			? genericTabConf.active.moveBtns[pinKey]?.available
-			: orgTabConf.active.moveBtns[pinKey]?.available,
-      chosen: isGeneric
-			? genericTabConf.active.moveBtns[pinKey]?.chosen
-			: orgTabConf.active.moveBtns[pinKey]?.chosen,
-    },
-	};
-}
-
-/**
- * Gets decoration list element references for organizing available/chosen decorations.
- * @param {boolean} isGeneric - Whether to get generic or org-specific list references
+ * Gets element references for organizing available/chosen elements.
+ * @param {Object} [pinConf=null] the configuration from which to find the data
+ * @param {String} [key=null] the key from which to extract the data
  * @returns {Object} Object containing list element references
  */
-function _getListReferences({
-  isGeneric = true,
-  pinKey = null,
-} = {}) {
-  if(pinKey == null)
+function _getReferencesByKey(pinConf = null, key = null){
+  if(pinConf == null || key == null)
     throw new Error("error_required_params");
 	return {
     inactive: {
-      available: isGeneric
-			? genericTabConf.inactive.decorationUls[pinKey]?.available
-			: orgTabConf.inactive.decorationUls[pinKey]?.available,
-      chosen: isGeneric
-			? genericTabConf.inactive.decorationUls[pinKey]?.chosen
-			: orgTabConf.inactive.decorationUls[pinKey]?.chosen,
+      available: pinConf.inactive[key].available,
+      chosen: pinConf.inactive[key].chosen,
     },
     active: {
-      available: isGeneric
-			? genericTabConf.active.decorationUls[pinKey]?.available
-			: orgTabConf.active.decorationUls[pinKey]?.available,
-      chosen: isGeneric
-			? genericTabConf.active.decorationUls[pinKey]?.chosen
-			: orgTabConf.active.decorationUls[pinKey]?.chosen,
+      available: pinConf.active[key].available,
+      chosen: pinConf.active[key].chosen,
     },
 	};
+
 }
 
 /**
@@ -1137,24 +1061,21 @@ function _getTabResources({
   isPinned = false,
 } = {}) {
   const pinKey = getPinKey(isPinned);
-	const buttons = _getButtonReferences({isGeneric, pinKey});
-	const	lists = _getListReferences({isGeneric, pinKey});
+  const pinConf = isGeneric ? genericTabConf[pinKey] : orgTabConf[pinKey];
+	const buttons = _getReferencesByKey(pinConf, "moveBtns");
+	const	lists = _getReferencesByKey(pinConf, "decorationUls");
 	return {
 		isGeneric,
     isPinned,
-		inputs: isGeneric ? genericTabConf.inputs[pinKey] : orgTabConf.inputs[pinKey],
+		inputs: pinConf.inputs,
 		decorations: isGeneric ? allGenericDecorations[pinKey] : allOrgDecorations[pinKey],
     inactive: {
-      decorations: isGeneric
-        ? genericTabConf.inactive.decorations[pinKey]
-        : orgTabConf.inactive.decorations[pinKey],
+      decorations: pinConf.inactive.decorations,
       moveBtns: buttons.inactive,
       uls: lists.inactive,
     },
     active: {
-      decorations: isGeneric
-        ? genericTabConf.active.decorations[pinKey]
-        : orgTabConf.active.decorations[pinKey],
+      decorations: pinConf.active.decorations,
       moveBtns: buttons.active,
       uls: lists.active,
     },
