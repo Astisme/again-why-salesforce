@@ -1,6 +1,9 @@
 "use strict";
 import {
 	BROWSER,
+  PREVENT_DEFAULT_OVERRIDE,
+  TAB_STYLE_BACKGROUND,
+  TAB_STYLE_BOLD,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_OTHER_ORG,
@@ -444,15 +447,13 @@ function listenToExtensionCommands() {
 	});
 }
 
-function createDefaultOrgStyle(key = ORG_TAB_STYLE_KEY){
-    const request = {
-      key,
-      set: [
-        { id: "bold", forActive: false, value: "bold" },
-        { id: "bold", forActive: true, value: "bold" },
-      ],
-    };
-    bg_setStorage(request.set, () => {}, request.key);
+async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles){
+  await bg_setStorage(
+    styles.filter(Boolean),
+    undefined,
+    key
+  );
+  return styles;
 }
 
 /**
@@ -460,18 +461,46 @@ function createDefaultOrgStyle(key = ORG_TAB_STYLE_KEY){
  * if none are found, creates and saves default styles for org-specific tabs.
  */
 async function setDefalutOrgStyle() {
-	const orgStyles = await bg_getSettings(undefined, [
-    ORG_TAB_STYLE_KEY,
-    ORG_PINNED_TAB_STYLE_KEY,
-  ]);
+	const availableStyles = (await bg_getStyleSettings()) ?? {};
   // if no style settings have been found,
   // create the default style for org-specific Tabs & send it to the background.
   // same goes for org-specific pinned Tabs
-  if(orgStyles?.[ORG_TAB_STYLE_KEY] == null){
-    createDefaultOrgStyle(ORG_TAB_STYLE_KEY);
+  const boldStyle = [
+    { id: TAB_STYLE_BOLD, forActive: false, value: TAB_STYLE_BOLD },
+    { id: TAB_STYLE_BOLD, forActive: true, value: TAB_STYLE_BOLD },
+  ];
+  if(availableStyles[ORG_TAB_STYLE_KEY] == null){
+    availableStyles[ORG_TAB_STYLE_KEY] = await _createDefaultStyle(ORG_TAB_STYLE_KEY, boldStyle);
   }
-  if(orgStyles?.[ORG_PINNED_TAB_STYLE_KEY] == null){
-    createDefaultOrgStyle(ORG_PINNED_TAB_STYLE_KEY);
+  // for pinned Tabs, assign the same current styles used for the unpinned counterparts
+  // but change the color of the background to the default one
+  const pinnedStyles = [
+    { id: TAB_STYLE_BACKGROUND, forActive: false, value: "mistyrose" },
+    { id: TAB_STYLE_BACKGROUND, forActive: true, value: "mistyrose" },
+  ];
+  if(availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null){
+    availableStyles[ORG_PINNED_TAB_STYLE_KEY] = await _createDefaultStyle(
+      ORG_PINNED_TAB_STYLE_KEY,
+      ...availableStyles[ORG_TAB_STYLE_KEY]
+        ?.filter(el => 
+          el.id !== PREVENT_DEFAULT_OVERRIDE &&
+          // override user-set background
+          el.id !== TAB_STYLE_BACKGROUND 
+        ),
+      ...pinnedStyles,
+    );
+  }
+  if(availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null){
+    availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] = await _createDefaultStyle(
+      GENERIC_PINNED_TAB_STYLE_KEY,
+      ...availableStyles[GENERIC_TAB_STYLE_KEY]
+        ?.filter(el => 
+          el.id !== PREVENT_DEFAULT_OVERRIDE &&
+          // override user-set background
+          el.id !== TAB_STYLE_BACKGROUND 
+        ),
+      ...pinnedStyles
+    );
   }
 }
 
