@@ -135,8 +135,11 @@ async function bg_getStyleSettings(
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	// get the settings array
-	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
-		key === ORG_TAB_STYLE_KEY;
+	const isStyleKey = 
+    key === GENERIC_TAB_STYLE_KEY ||
+		key === ORG_TAB_STYLE_KEY ||
+    key === GENERIC_PINNED_TAB_STYLE_KEY ||
+		key === ORG_PINNED_TAB_STYLE_KEY;
 	const settingsArray = await bg_getSettings(
 		...(isStyleKey ? [null, key] : []),
 	);
@@ -198,22 +201,26 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	switch (key) {
 		case SETTINGS_KEY:
 		case GENERIC_TAB_STYLE_KEY:
-		case ORG_TAB_STYLE_KEY: {
+		case ORG_TAB_STYLE_KEY:
+		case GENERIC_PINNED_TAB_STYLE_KEY:
+		case ORG_PINNED_TAB_STYLE_KEY: {
 			set[key] = await mergeSettings(tobeset, key);
 			break;
 		}
-		default: // WHY_KEY, LOCALE_KEY
+    case WHY_KEY:
+    case LOCALE_KEY:
 			if (changedToArray) {
 				tobeset = tobeset[0];
 			}
 			set[key] = tobeset;
-			break;
+      break;
+		default:
+      throw new Error("error_unknown_request",key);
 	}
-	const syncSet = BROWSER.storage.sync.set.bind(BROWSER.storage.sync);
 	if (callback == null) {
-		return syncSet(set);
+		return BROWSER.storage.sync.set(set);
 	}
-	return syncSet(set, () => callback(set[key]));
+	return BROWSER.storage.sync.set(set, () => callback(set[key]));
 }
 
 /**

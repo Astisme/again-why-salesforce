@@ -51,13 +51,24 @@ ensureTranslatorAvailability();
 const hidden = "hidden";
 const invisible = "invisible";
 
+function getObjectToSet({
+  key = null,
+  set = [],
+} = {}){
+  return {
+    what: "set",
+    key,
+    set,
+  };
+}
+
 /**
  * Saves checkbox state and dependent checkbox states to settings
  * @param {Event} e - The event object from the checkbox interaction
  * @param {...HTMLElement} dependentCheckboxElements - Dependent checkbox elements whose states should also be saved
  */
 function saveCheckboxOptions(e, ...dependentCheckboxElements) {
-	const set_msg = { what: "set", key: SETTINGS_KEY };
+	const set_msg = getObjectToSet({ key: SETTINGS_KEY });
 	const set = [];
 	set.push({
 		id: e.target.id,
@@ -655,7 +666,7 @@ function _buildCssRule(setting, {
 	const cssSelector = getCssSelector({
 		isInactive: isForInactive,
 		isGeneric,
-		pseudeElement: pseudoSelector,
+		pseudoElement: pseudoSelector,
     isPinned,
   });
 	const cssRule = getCssRule(setting.id, setting.value);
@@ -788,8 +799,8 @@ function setCurrentChoice(setting) {
 		case ORG_TAB_STYLE_KEY:
 		case GENERIC_PINNED_TAB_STYLE_KEY:
 		case ORG_PINNED_TAB_STYLE_KEY: {
-			const isGeneric = setting.id === GENERIC_TAB_STYLE_KEY || setting.id === GENERIC_PINNED_TAB_STYLE_KEY;
-      const isPinned = setting.id === GENERIC_PINNED_TAB_STYLE_KEY || setting.id === ORG_PINNED_TAB_STYLE_KEY;
+		  const isGeneric = isGenericKey(setting.id);
+      const isPinned = isPinnedKey(setting.id);
 			if (Array.isArray(setting.value)) {
 				for (const set of setting.value) {
 					setPreviewAndInputValue(set, {isGeneric, isPinned});
@@ -826,11 +837,10 @@ function savePickedSort(enabled = null, direction = null) {
 		});
 		tab_add_front_el.checked = false;
 	}
-	sendExtensionMessage({
-		what: "set",
+	sendExtensionMessage(getObjectToSet({
 		key: SETTINGS_KEY,
 		set,
-	});
+	}));
 }
 
 keep_sorted_el.addEventListener("click", (e) => {
@@ -901,14 +911,13 @@ async function restoreGeneralSettings() {
 			permissions: ["cookies"],
 			origins: MANIFEST.optional_host_permissions,
 		};
-		const languageMessage = {
-			what: "set",
+		const languageMessage = getObjectToSet({
 			key: SETTINGS_KEY,
 			set: [{
 				id: USER_LANGUAGE,
 				enabled: e.target.value,
 			}],
-		};
+		});
 		/**
 		 * Updates the language used by the whole extension and backups the last language used.
 		 */
@@ -938,19 +947,19 @@ async function restoreGeneralSettings() {
  * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which Tab type to save settings for
  */
 function saveTabOptions(e, key = GENERIC_TAB_STYLE_KEY) {
-	const set = { what: "set", key, set: [] };
-	const setting = {};
-	const target = e.target;
-	const styleKey = target.dataset.styleKey;
-	setting.id = styleKey;
-	setting.forActive = !target.id.endsWith(inactive);
-	setting.value = e.target.value;
+	const setting = {
+    id: e.target.dataset.styleKey,
+    forActive: !e.target.id.endsWith(inactive),
+    value: e.target.value,
+  };
 	setPreviewAndInputValue(setting, {
     isGeneric: isGenericKey(key),
     isPinned: isPinnedKey(key),
   });
-	set.set.push(setting);
-	sendExtensionMessage(set);
+	sendExtensionMessage(getObjectToSet({
+    key,
+    set: [setting],
+  }));
 }
 
 /**
@@ -964,14 +973,13 @@ function saveTabDecorations(
 	isAdding = true,
 	key = GENERIC_TAB_STYLE_KEY,
 ) {
-	const set_msg = {
-		what: "set",
+	const set_msg = getObjectToSet({
 		key,
 		set: [{
 			id: PREVENT_DEFAULT_OVERRIDE,
 			value: "no-default",
 		}],
-	};
+	});
 	for (const li of selectedLis) {
 		const styleKey = li.dataset.styleKey;
 		const setting = {

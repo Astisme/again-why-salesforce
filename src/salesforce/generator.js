@@ -171,7 +171,7 @@ function _appendPseudoRules({
 		const selector = getCssSelector({
 			isInactive: !rule.forActive,
 			isGeneric,
-			pseudeElement: pseudoSelector,
+			pseudoElement: pseudoSelector,
       isPinned,
     });
 		style.textContent += `${selector}{ ${
