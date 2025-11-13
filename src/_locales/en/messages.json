@@ -1,16 +1,4 @@
 {
-	"style_org_pinned": {
-		"message": "Style pinned org Tabs",
-		"description": "[options] Toggle label to style pinned org Tabs"
-	},
-	"style_generic_pinned": {
-		"message": "Style pinned generic Tabs",
-		"description": "[options] Toggle label to style pinned generic Tabs"
-	},
-	"inactive": {
-		"message": "Inactive",
-		"description": "Used in toggles for inactive state"
-	},
 	"active": {
 		"message": "Active",
 		"description": "Used in toggles for active state"
@@ -686,6 +674,10 @@
 		"message": "$import_tabs from JSON file",
 		"description": "[popup] title on import button"
 	},
+	"inactive": {
+		"message": "Inactive",
+		"description": "Used in toggles for inactive state"
+	},
 	"insert_another": {
 		"message": "Insert another",
 		"description": "[error-open-other-org-modal] message for when the user inserts the same org in the modal"
@@ -910,17 +902,9 @@
 		"message": "Send us a tip ❤️",
 		"description": "[popup] title for svg to prompt sending a tip"
 	},
-	"set_pin_gen_preview": {
-		"message": "Pinned Tab Preview",
-		"description": "Label for previewing generic Tab appearance when pinned"
-	},
 	"set_gen_preview": {
 		"message": "Tab Preview",
 		"description": "Label for previewing generic Tab appearance"
-	},
-	"set_pin_gen_styler": {
-		"message": "Pinned Tab Styler",
-		"description": "Label for configuring the style of generic Tabs when pinned"
 	},
 	"set_gen_styler": {
 		"message": "Tab Styler",
@@ -938,21 +922,29 @@
 		"message": "Move to Chosen",
 		"description": "Button title to move selected items to Chosen"
 	},
-	"set_pin_org_preview": {
-		"message": "Pinned Org Preview",
-		"description": "Label for previewing org-specific Tab appearance when pinned"
-	},
 	"set_org_preview": {
 		"message": "Org Preview",
 		"description": "Label for previewing org-specific Tab appearance"
 	},
-	"set_pin_org_styler": {
-		"message": "Pinned Org Styler",
-		"description": "Label for configuring the style of org-specific Tabs when pinned"
-	},
 	"set_org_styler": {
 		"message": "Org Styler",
 		"description": "Label for configuring the style of org-specific Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "Pinned Tab Preview",
+		"description": "Label for previewing generic Tab appearance when pinned"
+	},
+	"set_pin_gen_styler": {
+		"message": "Pinned Tab Styler",
+		"description": "Label for configuring the style of generic Tabs when pinned"
+	},
+	"set_pin_org_preview": {
+		"message": "Pinned Org Preview",
+		"description": "Label for previewing org-specific Tab appearance when pinned"
+	},
+	"set_pin_org_styler": {
+		"message": "Pinned Org Styler",
+		"description": "Label for configuring the style of org-specific Tabs when pinned"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Insert the background color for your active generic Tabs.",
@@ -1073,6 +1065,14 @@
 	"skip": {
 		"message": "Skip",
 		"description": "[req_permission] button to NOT allow permissons"
+	},
+	"style_generic_pinned": {
+		"message": "Style pinned generic Tabs",
+		"description": "[options] Toggle label to style pinned generic Tabs"
+	},
+	"style_org_pinned": {
+		"message": "Style pinned org Tabs",
+		"description": "[options] Toggle label to style pinned org Tabs"
 	},
 	"successfully_imported": {
 		"message": "Successfully imported",
