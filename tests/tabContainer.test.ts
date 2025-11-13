@@ -6,29 +6,30 @@ import {
 	assertRejects,
 	assertThrows,
 } from "@std/testing/asserts";
+import { WHY_KEY } from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 const currentDate = Date.now();
 
 function matchStorageToContainer(container: TabContainer) {
 	if (
-		mockStorage.againWhySalesforce[TabContainer.keyTabs].length !==
+		mockStorage[WHY_KEY][TabContainer.keyTabs].length !==
 			container.length
 	) {
 		console.log(
 			"match",
-			mockStorage.againWhySalesforce[TabContainer.keyTabs],
+			mockStorage[WHY_KEY][TabContainer.keyTabs],
 			container,
 		);
 	}
 	assertEquals(
-		mockStorage.againWhySalesforce[TabContainer.keyTabs].length,
+		mockStorage[WHY_KEY][TabContainer.keyTabs].length,
 		container.length,
 		"lenghts should be the same",
 	);
 	for (const i in container) {
 		assertEquals(
-			mockStorage.againWhySalesforce[TabContainer.keyTabs][i].url,
+			mockStorage[WHY_KEY][TabContainer.keyTabs][i].url,
 			container[i].url,
 			"each item should be the same",
 		);
@@ -50,7 +51,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	await t.step(
 		"initializes with default tabs when no saved tabs exist",
 		async () => {
-			mockStorage.againWhySalesforce.length = 0;
+			mockStorage[WHY_KEY].length = 0;
 			const container = await TabContainer._reset();
 			assertEquals(container.length, 3); // Default tabs count
 			assertEquals(container[0].label, "⚡");
@@ -61,7 +62,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	);
 
 	await t.step("initializes with saved tabs from storage", async () => {
-		mockStorage.againWhySalesforce = [
+		mockStorage[WHY_KEY] = [
 			{ label: "Test", url: "test-url" },
 			{
 				label: "Test2",
@@ -84,7 +85,7 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 	await t.step(
 		"initializes with saved tabs from storage and pinned tabs from storage",
 		async () => {
-			mockStorage.againWhySalesforce = {
+			mockStorage[WHY_KEY] = {
 				[TabContainer.keyTabs]: [
 					{ label: "Test", url: "test-url" },
 					{
@@ -117,10 +118,10 @@ await Deno.test("TabContainer - Initialization", async (t) => {
 			assertEquals(container[1].label, "flows");
 			assertEquals(container[2].label, "users");
 			// reset container
-			mockStorage.againWhySalesforce = [false];
+			mockStorage[WHY_KEY] = [false];
 			assertRejects(async () => await TabContainer._reset());
 			// reset container
-			mockStorage.againWhySalesforce = [null];
+			mockStorage[WHY_KEY] = [null];
 			assertRejects(async () => await TabContainer._reset());
 		},
 	);
@@ -1064,7 +1065,7 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		assertEquals(container.length, 3);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(
-			mockStorage.againWhySalesforce[TabContainer.keyTabs].length,
+			mockStorage[WHY_KEY][TabContainer.keyTabs].length,
 			3,
 		);
 		assert(
@@ -1075,14 +1076,14 @@ await Deno.test("TabContainer - Synchronization", async (t) => {
 		);
 		assertEquals(container.length, 4);
 		assertEquals(
-			mockStorage.againWhySalesforce[TabContainer.keyTabs].length,
+			mockStorage[WHY_KEY][TabContainer.keyTabs].length,
 			3,
 		);
 		assert(await container.syncTabs());
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(container.length, 4);
 		assertEquals(
-			mockStorage.againWhySalesforce[TabContainer.keyTabs].length,
+			mockStorage[WHY_KEY][TabContainer.keyTabs].length,
 			4,
 		);
 	});

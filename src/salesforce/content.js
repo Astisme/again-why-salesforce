@@ -247,18 +247,17 @@ async function init(tabs = null) {
 	}
 	if (allTabs.length > 0) {
 		const frag = document.createDocumentFragment();
-    const pinnedItems = allTabs.pinned;
-    for(const i in allTabs){
-      const row = allTabs[i];
-			// TODO add option to hide or show not-this-org tabs
+		const pinnedItems = allTabs.pinned;
+		for (const i in allTabs) {
+			const row = allTabs[i];
 			// hide not-this-org tabs
 			frag.appendChild(
 				generateRowTemplate(
 					row,
-          {
-            hide: !(row.org == null || row.org === orgName),
-            isPinned: i < pinnedItems,
-          },
+					{
+						hide: !(row.org == null || row.org === orgName),
+						isPinned: i < pinnedItems,
+					},
 				),
 			);
 		}
@@ -633,10 +632,6 @@ const ACTION_MOVE = "move";
 export const ACTION_REMOVE_THIS = "remove-this";
 const ACTION_REMOVE_OTHER = "remove-other";
 export const ACTION_ADD = "add";
-const ACTION_REMOVE_VISIBLE_TABS = "remove-shown-tabs";
-const ACTION_REMOVE_GENERIC_TABS = "remove-generic-tabs";
-const ACTION_RESET_DEFAULT = "reset-default";
-const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
 const ACTION_SORT = "sort";
 const ACTION_TMP_HIDE = "tmp-hide";
@@ -685,12 +680,12 @@ export async function performActionOnTabs(
 					throw new Error("error_adding_tab");
 				}
 				break;
-			case ACTION_REMOVE_GENERIC_TABS:
+			case CXM_EMPTY_GENERIC_TABS:
 				if (!await allTabs.replaceTabs()) {
 					throw new Error("error_removing_generic_tabs");
 				}
 				break;
-			case ACTION_REMOVE_ALL:
+			case CXM_EMPTY_TABS:
 				if (!await allTabs.replaceTabs([], { removeOrgTabs: true })) {
 					throw new Error("error_removing_all_tabs");
 				}
@@ -698,7 +693,7 @@ export async function performActionOnTabs(
 			case ACTION_TOGGLE_ORG:
 				await toggleOrg(tab);
 				break;
-			case ACTION_REMOVE_VISIBLE_TABS: {
+			case CXM_EMPTY_VISIBLE_TABS: {
 				// The visible Tabs are all the generic ones + the org-specific Tabs for the current Org
 				const thisOrg = Tab.extractOrgName(href);
 				if (
@@ -711,7 +706,7 @@ export async function performActionOnTabs(
 				}
 				break;
 			}
-			case ACTION_RESET_DEFAULT:
+			case CXM_RESET_DEFAULT_TABS:
 				if (!await allTabs.setDefaultTabs()) {
 					throw new Error("error_resetting_default_tabs");
 				}
@@ -950,7 +945,7 @@ function listenToBackgroundPage() {
 				case "error":
 					showToast(message.message, false);
 					break;
-				case "add":
+				case ACTION_ADD:
 					createImportModal();
 					break;
 				case CXM_OPEN_OTHER_ORG:
@@ -1019,16 +1014,12 @@ function listenToBackgroundPage() {
 					}, { removeBefore: false });
 					break;
 				case CXM_REMOVE_PIN_TABS:
-					await performActionOnTabs(CXM_REMOVE_PIN_TABS);
-					break;
 				case CXM_REMOVE_UNPIN_TABS:
-					await performActionOnTabs(CXM_REMOVE_UNPIN_TABS);
-					break;
 				case CXM_EMPTY_GENERIC_TABS:
-					await performActionOnTabs(ACTION_REMOVE_GENERIC_TABS);
-					break;
 				case CXM_EMPTY_TABS:
-					await performActionOnTabs(ACTION_REMOVE_ALL);
+				case CXM_EMPTY_VISIBLE_TABS:
+				case CXM_RESET_DEFAULT_TABS:
+					await performActionOnTabs(message.what);
 					break;
 				case CXM_PAGE_SAVE_TAB:
 				case CMD_SAVE_AS_TAB:
@@ -1053,12 +1044,6 @@ function listenToBackgroundPage() {
 						url: message.tabUrl ?? message.url,
 						org: message.org,
 					});
-					break;
-				case CXM_EMPTY_VISIBLE_TABS:
-					await performActionOnTabs(ACTION_REMOVE_VISIBLE_TABS);
-					break;
-				case CXM_RESET_DEFAULT_TABS:
-					await performActionOnTabs(ACTION_RESET_DEFAULT);
 					break;
 				case CXM_SORT_LABEL:
 					await performActionOnTabs(ACTION_SORT, undefined, {

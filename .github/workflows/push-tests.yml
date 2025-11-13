@@ -23,8 +23,19 @@ jobs:
               with:
                   deno-version: v2.x
 
-            - name: Run linter
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: '18'
+
+            - name: Install eslint
+              run: npm install eslint eslint-plugin-jsdoc
+
+            - name: Run Deno linter
               run: deno task lint
+
+            - name: Run eslint (check JSDocs)
+              run: npx eslint "src/**/*.js"
 
             - name: Run Tests
               run: deno task test

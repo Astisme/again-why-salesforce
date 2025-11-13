@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Ενεργό",
+		"description": "Χρησιμοποιείται σε διακόπτες για την ενεργή κατάσταση"
+	},
+	"active_generic_pin_tabs": {
+		"message": "ενεργά $generic_pin_tabs",
+		"description": "Οι γενικές καρφιτσωμένες Tab καρτέλες του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
+	"active_generic_tabs": {
+		"message": "ενεργά $generic_tabs",
+		"description": "Οι γενικές Tab καρτέλες του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
+	"active_org_pin_tabs": {
+		"message": "ενεργά $org_pin_tabs",
+		"description": "Οι καρφιτσωμένες Tab καρτέλες οργανισμού του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
+	"active_org_tabs": {
+		"message": "ενεργά $org_tabs",
+		"description": "Οι Tab καρτέλες οργανισμού του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
 	"allow": {
 		"message": "Επιτρέπω",
 		"description": "[αίτηση-άδειας] κουμπί για να επιτρέψετε τις άδειες"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[μενού-περιβάλλοντος]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Καρφίτσωμα",
+		"description": "[context-menu] αφήστε τον χρήστη να διατηρήσει αυτήν την Tab καρτέλα στην αρχή της λίστας του"
+	},
 	"cxm_remove": {
 		"message": "💥 Αφαίρεση Tab(s)",
 		"description": "[μενού-πλαισίου]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Άλλα Tab",
 		"description": "[μενού-πλαισίου]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Αφαίρεση Καρφιτσωμένων",
+		"description": "[context-menu] αφήστε τον χρήστη να αφαιρέσει τις καρφιτσωμένες Tab καρτέλες του"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tab στα δεξιά",
 		"description": "[μενού-πλαισίου]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Αυτό το Tab",
 		"description": "[μενού-πλαισίου]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Αφαίρεση μη Καρφιτσωμένων",
+		"description": "[context-menu] αφήστε τον χρήστη να αφαιρέσει τις μη καρφιτσωμένες Tab καρτέλες του"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Επαναφορά προεπιλεγμένων Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Ταξινόμηση Tabs",
 		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους αυτόματα (μητρικό μενού)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ κατά Χρήση",
+		"description": "μενού περιβάλλοντος για να επιτρέψετε στους χρήστες να ταξινομήσουν τις Tab καρτέλες τους με βάση το πόσες φορές κάνουν κλικ στις Tab καρτέλες τους"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ κατά Ώρα",
+		"description": "μενού περιβάλλοντος για να επιτρέψετε στους χρήστες να ταξινομήσουν τις Tab καρτέλες τους με βάση το πότε έγινε κλικ στις Tab καρτέλες"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 με Ετικέτα",
 		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά ετικέτα"
@@ -163,9 +203,25 @@
 		"message": "🤖 με Url",
 		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Απόκρυψη Tab καρτελών μη Οργανισμού",
+		"description": "[context-menu] προσωρινή απόκρυψη γενικών Tab καρτελών"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Απόκρυψη Tab καρτελών Οργανισμού",
+		"description": "[context-menu] προσωρινή απόκρυψη Tab καρτελών Οργανισμού"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Ξεκαρφίτσωμα",
+		"description": "[context-menu] αφήστε τον χρήστη να αφαιρέσει αυτήν την Tab καρτέλα από την καρφιτσωμένη λίστα του"
+	},
 	"cxm_update": {
 		"message": "✏️ Ενημέρωση Tab",
 		"description": "[μενού-πλαισίου]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Εναλλαγή Οργανισμού",
+		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Άλλες Ενημερώσεις",
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Σφάλμα κατά την προσθήκη Tab.",
 		"description": "[error] Γενικό σφάλμα κατά την προσθήκη Tab"
+	},
+	"error_already_pinned": {
+		"message": "Αυτή η Tab καρτέλα ήταν ήδη καρφιτσωμένη.",
+		"description": "[error] ο χρήστης προσπάθησε να καρφιτσώσει μια ήδη καρφιτσωμένη Tab καρτέλα"
+	},
+	"error_already_unpinned": {
+		"message": "Αυτή η Tab καρτέλα ήταν ήδη ξεκαρφιτσωμένη.",
+		"description": "[error] ο χρήστης προσπάθησε να ξεκαρφιτσώσει μια ήδη ξεκαρφιτσωμένη Tab καρτέλα"
+	},
+	"error_cannot_move": {
+		"message": "Αυτή η Tab καρτέλα δεν μπορεί να μετακινηθεί!",
+		"description": "[error] η ζητούμενη Tab καρτέλα δεν μπορεί να μετακινηθεί αυτήν τη στιγμή."
+	},
+	"error_cannot_move_dir": {
+		"message": "Αυτή η Tab καρτέλα δεν μπορεί να μετακινηθεί προς αυτήν την κατεύθυνση!",
+		"description": "[error] η ζητούμενη Tab καρτέλα δεν μπορεί να μετακινηθεί αυτήν τη στιγμή."
 	},
 	"error_check_update": {
 		"message": "Σφάλμα κατά τον έλεγχο για ενημερώσεις",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Σφάλμα κατά την εισαγωγή:\n",
 		"description": "[σφάλμα] παρουσιάστηκε σφάλμα κατά τη διαδικασία εισαγωγής"
+	},
+	"error_internal": {
+		"message": "Εσωτερικό Σφάλμα",
+		"description": "[error] γενικό σφάλμα"
 	},
 	"error_invalid_key": {
 		"message": "Η παράμετρος key που στάλθηκε στη συνάρτηση δεν είναι έγκυρη",
@@ -319,9 +395,17 @@
 		"message": "Δεν δόθηκε αντικείμενο προς έλεγχο!",
 		"description": "[σφάλμα] δεν δόθηκε το αντικείμενο"
 	},
+	"error_no_pinned": {
+		"message": "Δεν έχετε καρφιτσωμένες Tab καρτέλες ακόμα!",
+		"description": "[error] ο χρήστης προσπάθησε να αφαιρέσει τις καρφιτσωμένες Tab καρτέλες, αλλά δεν έχει καμία καρφιτσωμένη Tab καρτέλα"
+	},
 	"error_no_setup_tab": {
 		"message": "Απέτυχε η εύρεση του Setup Tab.",
 		"description": "[σφάλμα] η επέκταση δεν μπόρεσε να εντοπίσει πού να τοποθετήσει τα αγαπημένα Tab"
+	},
+	"error_no_unpinned": {
+		"message": "Δεν έχετε μη καρφιτσωμένες Tab καρτέλες!",
+		"description": "[error] ο χρήστης προσπάθησε να αφαιρέσει τις μη καρφιτσωμένες Tab καρτέλες, αλλά δεν έχει καμία μη καρφιτσωμένη Tab καρτέλα"
 	},
 	"error_no_url": {
 		"message": "Δεν δόθηκε URL για έλεγχο!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Δεν έχει αρχικοποιηθεί ακόμη.",
 		"description": "[error] Γενικό σφάλμα όταν μία μεταβλητή δεν είναι έτοιμη"
+	},
+	"error_pin_tab": {
+		"message": "Σφάλμα κατά το καρφίτσωμα Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Σφάλμα κατά την επεξεργασία των Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Σφάλμα κατά την αφαίρεση άλλων Tabs.",
 		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση άλλων Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση καρφιτσωμένων Tab καρτελών.",
+		"description": "[error] Γενικό σφάλμα που χρησιμοποιείται κατά την αφαίρεση μη καρφιτσωμένων Tab καρτελών"
+	},
 	"error_removing_tab": {
 		"message": "Σφάλμα κατά την αφαίρεση Tab.",
 		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση μη καρφιτσωμένων Tab καρτελών.",
+		"description": "[error] Γενικό σφάλμα που χρησιμοποιείται κατά την αφαίρεση μη καρφιτσωμένων Tab καρτελών"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Σφάλμα κατά την αφαίρεση όλων των ορατών Tab.",
@@ -379,6 +475,14 @@
 		"message": "Δεν μπορεί να συγχρονιστούν κενά Tab!",
 		"description": "[σφάλμα] προσπαθήθηκε ο συγχρονισμός κενών Tab"
 	},
+	"error_tab_click_count": {
+		"message": "Ο Αριθμός Κλικ πρέπει να είναι ένας μη αρνητικός αριθμός",
+		"description": "[error] ο χρήστης προσπάθησε να δημιουργήσει μια Tab καρτέλα με λάθος αριθμό κλικ"
+	},
+	"error_tab_click_date": {
+		"message": "Η Ημερομηνία Κλικ πρέπει να είναι ένας αριθμός που δεν οδηγεί σε μελλοντική ημερομηνία",
+		"description": "[error] ο χρήστης προσπάθησε να δημιουργήσει μια Tab καρτέλα με λάθος ημερομηνία κλικ"
+	},
 	"error_tab_constructor": {
 		"message": "Χρησιμοποιήστε Tab.create() αντί για new Tab()",
 		"description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση Tab"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Το Tab δεν βρέθηκε.",
 		"description": "[σφάλμα] το Tab δεν περιλαμβάνεται στον πίνακα"
+	},
+	"error_tab_not_pinned": {
+		"message": "Η Tab καρτέλα δεν είναι καρφιτσωμένη ακόμα!",
+		"description": "[error] ο χρήστης προσπάθησε να ξεκαρφιτσώσει μια μη καρφιτσωμένη Tab καρτέλα"
 	},
 	"error_tab_object_creation": {
 		"message": "Κατά την κλήση με αντικείμενο, μην περάσετε τίποτα άλλο.",
@@ -439,6 +547,10 @@
 		"message": "Άγνωστο αίτημα.",
 		"description": "[error] Γενικό σφάλμα μετά τη λήψη άγνωστου μηνύματος"
 	},
+	"error_unpin_tab": {
+		"message": "Σφάλμα κατά το ξεκαρφίτσωμα Tab",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Δεν μπορεί να αφαιρεθεί:\nΔεν μπορεί να αφαιρεθεί μια σελίδα που δεν έχει αποθηκευτεί προηγουμένως",
 		"description": "[σφάλμα] ο χρήστης προσπάθησε να αφαιρέσει μια σελίδα που δεν είχε αποθηκευτεί ακόμα"
@@ -478,6 +590,14 @@
 	"general": {
 		"message": "Γενικά",
 		"description": "Ετικέτα για την κατηγορία γενικών ρυθμίσεων"
+	},
+	"generic_pin_tabs": {
+		"message": "γενικές $pinned Tab",
+		"description": "Οι αγαπημένες Tab καρτέλες του χρήστη που δεν είναι ειδικές για οργανισμό"
+	},
+	"generic_tabs": {
+		"message": "γενικές $tabs",
+		"description": "Οι αγαπημένες Tab καρτέλες του χρήστη που δεν είναι ειδικές για οργανισμό"
 	},
 	"help": {
 		"message": "Βοήθεια",
@@ -563,6 +683,10 @@
 		"message": "Μη έγκυρος τύπος αρχείου.\nΥποστηρίζονται μόνο αρχεία JSON.",
 		"description": "[σφάλμα] το αρχείο που χρησιμοποιήθηκε για εισαγωγή δεν είναι JSON"
 	},
+	"import_metadata": {
+		"message": "Εισαγωγή μεταδεδομένων Tab («Αριθμός Κλικ», «Ημερομηνία Κλικ» κ.λπ.).",
+		"description": "[label] εισαγωγή όλων των στοιχείων που βρέθηκαν στο αρχείο κατά τη διαδικασία εισαγωγής"
+	},
 	"import_successful": {
 		"message": "Εισήχθη με επιτυχία",
 		"description": "[εισαγωγή] η εισαγωγή ολοκληρώθηκε. Μετά από αυτό, θα εμφανιστεί ο αριθμός των εγγεγραμμένων εγγραφών"
@@ -574,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs από αρχείο JSON",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος στο κουμπί εισαγωγής"
+	},
+	"inactive": {
+		"message": "Ανενεργό",
+		"description": "Χρησιμοποιείται σε διακόπτες για την ανενεργή κατάσταση"
 	},
 	"insert_another": {
 		"message": "Εισαγωγή άλλου",
@@ -723,6 +851,14 @@
 		"message": "Σύνδεσμος Οργάνωσης",
 		"description": "[ετικέτα-εισόδου]"
 	},
+	"org_pin_tabs": {
+		"message": "$pinned Tab οργανισμού",
+		"description": "Tab καρτέλες που είναι ειδικές για οργανισμό"
+	},
+	"org_tabs": {
+		"message": "$tabs οργανισμού",
+		"description": "Tab καρτέλες που είναι ειδικές για οργανισμό"
+	},
 	"other_org_info": {
 		"message": "Πληροφορίες άλλης Οργάνωσης",
 		"description": "[τίτλος-διαλόγου]"
@@ -734,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Αντικατάσταση αποθηκευμένων Tab.",
 		"description": "[ετικέτα] διαγραφή όλων των αποθηκευμένων Tab κατά τη διαδικασία εισαγωγής"
+	},
+	"pinned": {
+		"message": "Καρφιτσωμένο",
+		"description": "Οι Tab καρτέλες του χρήστη που βρίσκονται πάντα στην αρχή της λίστας"
 	},
 	"preserve_org_tabs": {
 		"message": "Διατήρηση Tab για άλλες οργάνωσεις.",
@@ -826,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Στυλιζαριστής Org",
 		"description": "Ετικέτα για διαμόρφωση του στυλ των Tabs ειδικά για το Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Ετικέτα για προεπισκόπηση της εμφάνισης γενικής Tab καρτέλας όταν είναι καρφιτσωμένη"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Ετικέτα για διαμόρφωση του στυλ των γενικών Tab καρτελών όταν είναι καρφιτσωμένες"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Ετικέτα για προεπισκόπηση της εμφάνισης Tab καρτέλας ειδικής για οργανισμό όταν είναι καρφιτσωμένη"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Ετικέτα για διαμόρφωση του στυλ των Tab καρτελών ειδικών για οργανισμό όταν είναι καρφιτσωμένες"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος πάνω γραμμής για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για ενεργές Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για ενεργές Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για ενεργές Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για ενεργές Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για ενεργές Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για ενεργές Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος πάνω γραμμής για ενεργές Tab καρτέλες οργανισμού"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Εισαγάγετε το χρώμα φόντου για τις ενεργές γενικές Tab-s.",
@@ -947,6 +1207,42 @@
 		"message": "Παράλειψη",
 		"description": "[αίτηση-άδειας] κουμπί για ΜΗ επιτρεπτέ άδειες"
 	},
+	"style_generic_pinned": {
+		"message": "Στυλ καρφιτσωμένων $generic_tabs",
+		"description": "[options] Ετικέτα εναλλαγής για τη διαμόρφωση του στυλ των καρφιτσωμένων γενικών Tab καρτελών"
+	},
+	"style_org_pinned": {
+		"message": "Στυλ καρφιτσωμένων $org_tabs",
+		"description": "[options] Ετικέτα εναλλαγής για τη διαμόρφωση του στυλ των καρφιτσωμένων Tab καρτελών οργανισμού"
+	},
+	"style_settings_background_label": {
+		"message": "Εισαγάγετε το χρώμα φόντου για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου"
+	},
+	"style_settings_border_color_label": {
+		"message": "Εισαγάγετε το χρώμα περιγράμματος για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος"
+	},
+	"style_settings_color_label": {
+		"message": "Εισαγάγετε το χρώμα του κειμένου για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου"
+	},
+	"style_settings_decoration_label": {
+		"message": "Επιλέξτε ένα ή περισσότερα στυλ διακόσμησης για τις",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Εισαγάγετε το χρώμα φόντου κατά την κατάδειξη (hover) για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover)"
+	},
+	"style_settings_shadow_label": {
+		"message": "Εισαγάγετε το χρώμα σκιάς για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς"
+	},
+	"style_settings_top_active_label": {
+		"message": "Εισαγάγετε το χρώμα για τη γραμμή στην κορυφή των ενεργών σας",
+		"description": "Ετικέτα για ρύθμιση του ενεργού χρώματος της πάνω γραμμής"
+	},
 	"successfully_imported": {
 		"message": "Εισήχθη με επιτυχία",
 		"description": "[σημείωμα] ο χρήστης πρόσθεσε Tab από εξωτερικό αρχείο"
@@ -1030,6 +1326,10 @@
 	"users": {
 		"message": "Χρήστες",
 		"description": "Το όνομα της σελίδας που σχετίζεται με ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Παρακαλούμε εξάγετε τις νέες σας Tab καρτέλες καθώς το αρχείο που χρησιμοποιήσατε δεν θα υποστηρίζεται σε μελλοντικές κυκλοφορίες.",
+		"description": "[warning] ο χρήστης εισήγαγε τις Tab καρτέλες του χρησιμοποιώντας μια απαρχαιωμένη διαμόρφωση του αρχείου json"
 	},
 	"where_to": {
 		"message": "Που;",

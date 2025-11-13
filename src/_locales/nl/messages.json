@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Actief",
+		"description": "Gebruikt in schakelaars voor actieve status"
+	},
+	"active_generic_pin_tabs": {
+		"message": "actieve $generic_pin_tabs",
+		"description": "De generieke Vastgezette Tabbladen van de gebruiker die momenteel actief zijn"
+	},
+	"active_generic_tabs": {
+		"message": "actieve $generic_tabs",
+		"description": "De generieke Tabbladen van de gebruiker die momenteel actief zijn"
+	},
+	"active_org_pin_tabs": {
+		"message": "actieve $org_pin_tabs",
+		"description": "De org Vastgezette Tabbladen van de gebruiker die momenteel actief zijn"
+	},
+	"active_org_tabs": {
+		"message": "actieve $org_tabs",
+		"description": "De org Tabbladen van de gebruiker die momenteel actief zijn"
+	},
 	"allow": {
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[contextmenu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Vastzetten",
+		"description": "[context-menu] laat de gebruiker dit Tabblad aan het begin van hun lijst houden"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(s) verwijderen",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Andere Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Vastgezette Verwijderen",
+		"description": "[context-menu] laat de gebruiker hun vastgezette Tabbladen verwijderen"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs aan de rechterkant",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Deze Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Niet-vastgezette Verwijderen",
+		"description": "[context-menu] laat de gebruiker hun niet-vastgezette Tabbladen verwijderen"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Standaard Tabs resetten",
@@ -151,6 +183,14 @@
 		"message": "🎯 Tabbladen sorteren",
 		"description": "contextmenu om gebruikers hun Tabbladen automatisch te laten sorteren (hoofdmenu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ op Gebruik",
+		"description": "contextmenu om gebruikers hun Tabbladen te laten sorteren op hoe vaak ze op hun Tabbladen klikken"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ op Tijd",
+		"description": "contextmenu om gebruikers hun Tabbladen te laten sorteren op wanneer de Tabbladen zijn aangeklikt"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 op label",
 		"description": "contextmenu om gebruikers hun Tabbladen op label te laten sorteren"
@@ -163,8 +203,24 @@
 		"message": "🤖 op URL",
 		"description": "contextmenu om gebruikers hun Tabbladen op URL te laten sorteren"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Niet-Org Tabbladen Verbergen",
+		"description": "[context-menu] tijdelijk generieke Tabbladen verbergen"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Org Tabbladen Verbergen",
+		"description": "[context-menu] tijdelijk Org Tabbladen verbergen"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Losmaken",
+		"description": "[context-menu] laat de gebruiker dit Tabblad van hun vastgezette lijst verwijderen"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab bijwerken",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Org Schakelen",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Fout bij het toevoegen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het toevoegen van een Tab"
+	},
+	"error_already_pinned": {
+		"message": "Dit Tabblad was al vastgezet.",
+		"description": "[fout] de gebruiker probeerde een vastgezet Tabblad vast te zetten"
+	},
+	"error_already_unpinned": {
+		"message": "Dit Tabblad was al losgemaakt.",
+		"description": "[fout] de gebruiker probeerde een losgemaakt Tabblad los te maken"
+	},
+	"error_cannot_move": {
+		"message": "Dit Tabblad kan niet worden verplaatst!",
+		"description": "[fout] het gevraagde Tabblad kan momenteel niet worden verplaatst."
+	},
+	"error_cannot_move_dir": {
+		"message": "Dit Tabblad kan niet in deze richting worden verplaatst!",
+		"description": "[fout] het gevraagde Tabblad kan momenteel niet worden verplaatst."
 	},
 	"error_check_update": {
 		"message": "Fout bij het controleren op updates",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Fout tijdens importeren:\n",
 		"description": "[fout] er is een fout opgetreden tijdens het importproces"
+	},
+	"error_internal": {
+		"message": "Interne Fout",
+		"description": "[fout] algemene fout"
 	},
 	"error_invalid_key": {
 		"message": "De key-parameter die aan de functie is doorgegeven, is niet geldig",
@@ -319,9 +395,17 @@
 		"message": "Geen object om te controleren!",
 		"description": "[fout] het object is niet doorgegeven"
 	},
+	"error_no_pinned": {
+		"message": "U hebt nog geen vastgezette Tabbladen!",
+		"description": "[fout] de gebruiker probeerde de vastgezette Tabbladen te verwijderen maar ze hebben geen vastgezette Tabbladen"
+	},
 	"error_no_setup_tab": {
 		"message": "Kon Setup-tabblad niet vinden.",
 		"description": "[fout] De extensie kon niet vinden waar de favoriete Tabs moesten worden geplaatst."
+	},
+	"error_no_unpinned": {
+		"message": "U hebt geen niet-vastgezette Tabbladen!",
+		"description": "[fout] de gebruiker probeerde de niet-vastgezette Tabbladen te verwijderen maar ze hebben geen niet-vastgezette Tabbladen"
 	},
 	"error_no_url": {
 		"message": "Geen URL om te controleren!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "was nog niet geïnitialiseerd.",
 		"description": "[fout] Algemene fout voor wanneer een variabele niet klaar is"
+	},
+	"error_pin_tab": {
+		"message": "Fout bij het vastzetten van Tabblad",
+		"description": "[fout]"
 	},
 	"error_processing_tabs": {
 		"message": "Fout bij het verwerken van Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Fout bij het verwijderen van andere Tabs.",
 		"description": "[fout] Algemene fout gebruikt bij het verwijderen van andere Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Fout bij het verwijderen van vastgezette Tabbladen.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van niet-vastgezette Tabbladen"
+	},
 	"error_removing_tab": {
 		"message": "Fout bij het verwijderen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het verwijderen van een Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Fout bij het verwijderen van niet-vastgezette Tabbladen.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van niet-vastgezette Tabbladen"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Fout bij het verwijderen van alle zichtbare Tab.",
@@ -379,6 +475,14 @@
 		"message": "Kan null Tabs niet synchroniseren!",
 		"description": "[fout] geprobeerd niets te synchroniseren"
 	},
+	"error_tab_click_count": {
+		"message": "Kliktelling moet een niet-negatief getal zijn",
+		"description": "[fout] gebruiker probeerde een Tabblad te maken met een verkeerde kliktelling"
+	},
+	"error_tab_click_date": {
+		"message": "Klikdatum moet een getal zijn dat niet resulteert in een datum in de toekomst",
+		"description": "[fout] gebruiker probeerde een Tabblad te maken met een verkeerde klikdatum"
+	},
 	"error_tab_constructor": {
 		"message": "Gebruik Tab.create() in plaats van new Tab() om de Tab klasse te gebruiken",
 		"description": "[fout] vertel de ontwikkelaar hoe de Tab klasse te gebruiken"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab is niet gevonden.",
 		"description": "[fout] de Tab was niet opgenomen in de array"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tabblad is nog niet vastgezet!",
+		"description": "[fout] gebruiker probeerde een niet-vastgezet Tabblad los te maken"
 	},
 	"error_tab_object_creation": {
 		"message": "Geef bij het aanroepen met een object niets anders door.",
@@ -439,6 +547,10 @@
 		"message": "Onbekend verzoek.",
 		"description": "[fout] Algemene fout na ontvangst van een niet-herkend bericht"
 	},
+	"error_unpin_tab": {
+		"message": "Fout bij het losmaken van Tabblad",
+		"description": "[fout]"
+	},
 	"error_useless_remove": {
 		"message": "Kan niet verwijderen:\nKan een pagina die nog niet eerder is opgeslagen niet verwijderen",
 		"description": "[fout] de gebruiker probeerde een pagina te verwijderen die nog niet was opgeslagen"
@@ -478,6 +590,14 @@
 	"general": {
 		"message": "Algemeen",
 		"description": "Label voor de algemene instellingencategorie"
+	},
+	"generic_pin_tabs": {
+		"message": "generieke $pinned Tabbladen",
+		"description": "De favoriete Tabbladen van de gebruiker die niet org-specifiek zijn"
+	},
+	"generic_tabs": {
+		"message": "generieke Tabbladen",
+		"description": "De favoriete Tabbladen van de gebruiker die niet org-specifiek zijn"
 	},
 	"help": {
 		"message": "Hulp",
@@ -563,6 +683,10 @@
 		"message": "Ongeldig bestandstype.\nAlleen JSON-bestanden worden ondersteund.",
 		"description": "[fout] het bestand dat voor importeren is gebruikt, is geen JSON"
 	},
+	"import_metadata": {
+		"message": "Tabblad metadata importeren (\"Kliktelling\", \"Klikdatum\" enz.).",
+		"description": "[label] importeer alles wat in het bestand wordt gevonden tijdens het importproces"
+	},
 	"import_successful": {
 		"message": "Succesvol geïmporteerd",
 		"description": "[importeren] importeren is voltooid. Hierna wordt getoond hoeveel records zijn geïmporteerd"
@@ -574,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs van JSON-bestand",
 		"description": "[popup] titel op de importknop"
+	},
+	"inactive": {
+		"message": "Inactief",
+		"description": "Gebruikt in schakelaars voor inactieve status"
 	},
 	"insert_another": {
 		"message": "Nog een invoegen",
@@ -723,6 +851,14 @@
 		"message": "Org Link",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tabbladen",
+		"description": "Tabbladen die org-specifiek zijn"
+	},
+	"org_tabs": {
+		"message": "org Tabbladen",
+		"description": "Tabbladen die org-specifiek zijn"
+	},
 	"other_org_info": {
 		"message": "Info andere Org",
 		"description": "[modal-titel]"
@@ -734,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Opgeslagen Tabs overschrijven.",
 		"description": "[label] verwijder alle opgeslagen Tabs tijdens het importproces"
+	},
+	"pinned": {
+		"message": "Vastgezet",
+		"description": "De Tabbladen van de gebruiker die altijd aan het begin van de lijst worden gevonden"
 	},
 	"preserve_org_tabs": {
 		"message": "Tabs voor andere Orgs behouden.",
@@ -826,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Org-styler",
 		"description": "Label voor het configureren van de stijl van Org-specifieke Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label voor het vooraf bekijken van het uiterlijk van een generiek Tabblad wanneer het is vastgezet"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label voor het configureren van de stijl van generieke Tabbladen wanneer ze zijn vastgezet"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label voor het vooraf bekijken van het uiterlijk van een org-specifiek Tabblad wanneer het is vastgezet"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label voor het configureren van de stijl van org-specifieke Tabbladen wanneer ze zijn vastgezet"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label om de kleur van de bovenste balk in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor actieve org Tabbladen"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor actieve org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor org Tabbladen"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor actieve org Tabbladen"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor actieve org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor org Tabbladen"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor actieve org Tabbladen"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor actieve org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor org Tabbladen"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label om de kleur van de bovenste balk in te stellen voor actieve org Tabbladen"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Voer de achtergrondkleur in voor uw actieve algemene Tab.",
@@ -947,6 +1207,42 @@
 		"message": "Overslaan",
 		"description": "[req_toestemming] knop om toestemmingen NIET toe te staan"
 	},
+	"style_generic_pinned": {
+		"message": "Stijl vastgezette $generic_tabs",
+		"description": "[opties] Schakellabel om vastgezette generieke Tabbladen te stylen"
+	},
+	"style_org_pinned": {
+		"message": "Stijl vastgezette $org_tabs",
+		"description": "[opties] Schakellabel om vastgezette org Tabbladen te stylen"
+	},
+	"style_settings_background_label": {
+		"message": "Voer de achtergrondkleur in voor uw",
+		"description": "Label om de achtergrondkleur in te stellen"
+	},
+	"style_settings_border_color_label": {
+		"message": "Voer de randkleur in voor uw",
+		"description": "Label om de randkleur in te stellen"
+	},
+	"style_settings_color_label": {
+		"message": "Voer de kleur van de tekst in voor uw",
+		"description": "Label om de tekstkleur in te stellen"
+	},
+	"style_settings_decoration_label": {
+		"message": "Kies een of meer decoratiestijlen voor uw",
+		"description": "Vraag om decoratiestijlen te selecteren"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Voer de hover achtergrondkleur in voor uw",
+		"description": "Label om de hover achtergrondkleur in te stellen"
+	},
+	"style_settings_shadow_label": {
+		"message": "Voer de schaduwkleur in voor uw",
+		"description": "Label om de schaduwkleur in te stellen"
+	},
+	"style_settings_top_active_label": {
+		"message": "Voer de kleur in voor de balk bovenaan uw actieve",
+		"description": "Label om de actieve kleur van de bovenste balk in te stellen"
+	},
 	"successfully_imported": {
 		"message": "Succesvol geïmporteerd",
 		"description": "[toast] de gebruiker heeft Tabs toegevoegd vanuit een extern bestand"
@@ -1030,6 +1326,10 @@
 	"users": {
 		"message": "Gebruikers",
 		"description": "De naam van de pagina gerelateerd aan ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Exporteer alstublieft uw nieuwe Tabbladen, aangezien het bestand dat u hebt gebruikt, niet meer wordt ondersteund in toekomstige releases.",
+		"description": "[waarschuwing] de gebruiker heeft zijn Tabbladen geïmporteerd met behulp van een verouderde configuratie van het json-bestand"
 	},
 	"where_to": {
 		"message": "Waarheen?",

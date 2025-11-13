@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Actiu",
+		"description": "S'utilitza en interruptors per a l'estat actiu"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs actius",
+		"description": "Pestanyes (Tab) genèriques fixades de l'usuari que estan actives actualment"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs actius",
+		"description": "Pestanyes (Tab) genèriques de l'usuari que estan actives actualment"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs actius",
+		"description": "Pestanyes (Tab) fixades d'organització de l'usuari que estan actives actualment"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs actius",
+		"description": "Pestanyes (Tab) d'organització de l'usuari que estan actives actualment"
+	},
 	"allow": {
 		"message": "Permetre",
 		"description": "[req_permission] botó per permetre permisos"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menú-contextual]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Fixa",
+		"description": "[context-menu] permet a l'usuari mantenir aquesta Tab al començament de la seva llista"
+	},
 	"cxm_remove": {
 		"message": "💥 Eliminar Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Altres Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Elimina les fixades",
+		"description": "[context-menu] permet a l'usuari eliminar les seves Tab fixades"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs a la dreta",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Aquest Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Elimina les no fixades",
+		"description": "[context-menu] permet a l'usuari eliminar les seves Tab no fixades"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Restableix les Tab per defecte",
@@ -151,6 +183,14 @@
 		"message": "🎯 Ordenar Tabs",
 		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs automàticament (menú pare)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ per Ús",
+		"description": "menú contextual per permetre als usuaris ordenar les seves Tab per quantes vegades fan clic a les seves Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ per Temps",
+		"description": "menú contextual per permetre als usuaris ordenar les seves Tab per quan es va fer clic a les Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 per Etiqueta",
 		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs per etiqueta"
@@ -163,8 +203,24 @@
 		"message": "🤖 per Url",
 		"description": "menú contextual per permetre als usuaris ordenar les seves Tabs per URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Amaga les Tab no d'Organització",
+		"description": "[context-menu] amaga temporalment les Tab genèriques"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Amaga les Tab d'Organització",
+		"description": "[context-menu] amaga temporalment les Tab d'Organització"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Desfixa",
+		"description": "[context-menu] permet a l'usuari eliminar aquesta Tab de la seva llista de fixades"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualitzar Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Commuta Organització",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Error en afegir Tab.",
 		"description": "[error] Error genèric en afegir una Tab"
+	},
+	"error_already_pinned": {
+		"message": "Aquesta Tab ja estava fixada.",
+		"description": "[error] l'usuari va intentar fixar una Tab ja fixada"
+	},
+	"error_already_unpinned": {
+		"message": "Aquesta Tab ja estava desfixada.",
+		"description": "[error] l'usuari va intentar desfixar una Tab ja desfixada"
+	},
+	"error_cannot_move": {
+		"message": "Aquesta Tab no es pot moure!",
+		"description": "[error] la Tab sol·licitada no es pot moure en aquest moment."
+	},
+	"error_cannot_move_dir": {
+		"message": "Aquesta Tab no es pot moure en aquesta direcció!",
+		"description": "[error] la Tab sol·licitada no es pot moure en aquest moment."
 	},
 	"error_check_update": {
 		"message": "Error al comprovar actualitzacions",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Error durant la importació:\n",
 		"description": "[error] s'ha produït un error durant el procés d'importació"
+	},
+	"error_internal": {
+		"message": "Error Intern",
+		"description": "[error] error genèric"
 	},
 	"error_invalid_key": {
 		"message": "El paràmetre key enviat a la funció no és vàlid",
@@ -319,9 +395,17 @@
 		"message": "No s'ha passat cap objecte per comprovar!",
 		"description": "[error] no s'ha passat l'objecte"
 	},
+	"error_no_pinned": {
+		"message": "Encara no teniu cap Tab fixada!",
+		"description": "[error] l'usuari va intentar eliminar les Tab fixades però no en té cap"
+	},
 	"error_no_setup_tab": {
 		"message": "No s'ha trobat el Setup Tab.",
 		"description": "[error] l'extensió no ha pogut trobar on posar els Tabs favorits"
+	},
+	"error_no_unpinned": {
+		"message": "No teniu cap Tab no fixada!",
+		"description": "[error] l'usuari va intentar eliminar les Tab no fixades però no en té cap"
 	},
 	"error_no_url": {
 		"message": "No s'ha passat cap URL per comprovar!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Encara no està inicialitzat.",
 		"description": "[error] Error genèric quan una variable no està preparada"
+	},
+	"error_pin_tab": {
+		"message": "Error en fixar la Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Error en processar les Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Error en eliminar altres Tabs.",
 		"description": "[error] Error genèric en eliminar altres Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Error en eliminar les Tab fixades.",
+		"description": "[error] Error genèric utilitzat en eliminar les Tab no fixades"
+	},
 	"error_removing_tab": {
 		"message": "Error en eliminar Tab.",
 		"description": "[error] Error genèric en eliminar una Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error en eliminar les Tab no fixades.",
+		"description": "[error] Error genèric utilitzat en eliminar les Tab no fixades"
 	},
 	"error_removing_visible_tabs": {
 		"message": "S'ha produït un error en eliminar totes les Tab visibles.",
@@ -379,6 +475,14 @@
 		"message": "No es poden sincronitzar Tabs buits!",
 		"description": "[error] s'ha intentat sincronitzar cap Tab"
 	},
+	"error_tab_click_count": {
+		"message": "El Compte de Clics ha de ser un nombre no negatiu",
+		"description": "[error] l'usuari va intentar crear una Tab amb un compte de clics incorrecte"
+	},
+	"error_tab_click_date": {
+		"message": "La Data de Clic ha de ser un nombre que no resulti en una data futura",
+		"description": "[error] l'usuari va intentar crear una Tab amb una data de clic incorrecta"
+	},
 	"error_tab_constructor": {
 		"message": "Utilitza Tab.create() en lloc de new Tab()",
 		"description": "[error] Informa al desenvolupador com utilitzar la classe Tab"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "No s'ha trobat el Tab.",
 		"description": "[error] el Tab no està inclòs a l'array"
+	},
+	"error_tab_not_pinned": {
+		"message": "La Tab encara no està fixada!",
+		"description": "[error] l'usuari va intentar desfixar una Tab no fixada"
 	},
 	"error_tab_object_creation": {
 		"message": "Quan s'utilitza un objecte, no passeu res més.",
@@ -439,6 +547,10 @@
 		"message": "Sol·licitud desconeguda.",
 		"description": "[error] Error genèric després de rebre un missatge no reconegut"
 	},
+	"error_unpin_tab": {
+		"message": "Error en desfixar la Tab",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "No es pot eliminar:\nNo es pot eliminar una pàgina que no ha estat desada prèviament",
 		"description": "[error] l'usuari ha intentat eliminar una pàgina que encara no s'ha desat"
@@ -478,6 +590,14 @@
 	"general": {
 		"message": "General",
 		"description": "Etiqueta per a la categoria de configuració general"
+	},
+	"generic_pin_tabs": {
+		"message": "$pinned $tabs genèrics",
+		"description": "Tab preferides de l'usuari que no són específiques de l'organització"
+	},
+	"generic_tabs": {
+		"message": "$tabs genèrics",
+		"description": "Tab preferides de l'usuari que no són específiques de l'organització"
 	},
 	"help": {
 		"message": "Ajuda",
@@ -563,6 +683,10 @@
 		"message": "Tipus de fitxer no vàlid.\nNomés es permeten fitxers JSON.",
 		"description": "[error] el fitxer utilitzat per a la importació no és JSON"
 	},
+	"import_metadata": {
+		"message": "Importa les metadades de la Tab (\"Compte de Clics\", \"Data de Clic\" etc.).",
+		"description": "[label] importa tot el que es trobi al fitxer durant el procés d'importació"
+	},
 	"import_successful": {
 		"message": "Importació realitzada amb èxit",
 		"description": "[import] la importació s'ha completat. Després s'indicarà el nombre de registres importats"
@@ -574,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs des d'un fitxer JSON",
 		"description": "[finestra-emergent] títol al botó d'importació"
+	},
+	"inactive": {
+		"message": "Inactiu",
+		"description": "S'utilitza en interruptors per a l'estat inactiu"
 	},
 	"insert_another": {
 		"message": "Inserir un altre",
@@ -723,6 +851,14 @@
 		"message": "Enllaç de l'Organització",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "$pinned $tabs d'organització",
+		"description": "Tab que són específiques de l'organització"
+	},
+	"org_tabs": {
+		"message": "$tabs d'organització",
+		"description": "Tab que són específiques de l'organització"
+	},
 	"other_org_info": {
 		"message": "Informació d'una altra Organització",
 		"description": "[modal-title]"
@@ -734,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Sobre-escriure els Tabs desats.",
 		"description": "[label] esborrar tots els Tabs desats durant la importació"
+	},
+	"pinned": {
+		"message": "Fixada",
+		"description": "Tab de l'usuari que sempre es troben al començament de la llista"
 	},
 	"preserve_org_tabs": {
 		"message": "Conservar els Tabs per a altres organitzacions.",
@@ -826,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Estilitzador d’Org",
 		"description": "Etiqueta per configurar l’estil de Tab específica de l’Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etiqueta per previsualitzar l'aparença de la Tab genèrica quan està fixada"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etiqueta per configurar l'estil de les Tab genèriques quan estan fixades"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etiqueta per previsualitzar l'aparença de la Tab específica de l'organització quan està fixada"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etiqueta per configurar l'estil de les Tab específiques de l'organització quan estan fixades"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etiqueta per establir el color de fons per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etiqueta per establir el color de fons per a les Tab genèriques"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etiqueta per establir el color de la vora per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etiqueta per establir el color de la vora per a les Tab genèriques"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etiqueta per establir el color del text per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etiqueta per establir el color del text per a les Tab genèriques"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Indicació per seleccionar estils de decoració per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Indicació per seleccionar estils de decoració per a les Tab genèriques"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí per a les Tab genèriques"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etiqueta per establir el color de l'ombra per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etiqueta per establir el color de l'ombra per a les Tab genèriques"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etiqueta per establir el color de la barra superior per a les Tab genèriques actives"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etiqueta per establir el color de fons per a les Tab d'organització actives"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etiqueta per establir el color de fons per a les Tab específiques de l'organització"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etiqueta per establir el color de la vora per a les Tab actives específiques de l'organització"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etiqueta per establir el color de la vora per a les Tab d'organització"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etiqueta per establir el color del text per a les Tab d'organització actives"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etiqueta per establir el color del text per a les Tab específiques de l'organització"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Indicació per seleccionar estils de decoració per a les Tab actives específiques de l'organització"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Indicació per seleccionar estils de decoració per a les Tab d'organització"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí per a les Tab d'organització actives"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí per a les Tab específiques de l'organització"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etiqueta per establir el color de l'ombra per a les Tab actives específiques de l'organització"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etiqueta per establir el color de l'ombra per a les Tab d'organització"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etiqueta per establir el color de la barra superior per a les Tab d'organització actives"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Introduïu el color de fons per a les vostres Tab-s genèriques actives.",
@@ -947,6 +1207,42 @@
 		"message": "Saltar",
 		"description": "[req_permission] botó per NO permetre permisos"
 	},
+	"style_generic_pinned": {
+		"message": "Estil de les $generic_tabs fixades",
+		"description": "[options] Etiqueta de commutació per estilitzar les Tab genèriques fixades"
+	},
+	"style_org_pinned": {
+		"message": "Estil de les $org_tabs fixades",
+		"description": "[options] Etiqueta de commutació per estilitzar les Tab d'organització fixades"
+	},
+	"style_settings_background_label": {
+		"message": "Introduïu el color de fons per a les vostres",
+		"description": "Etiqueta per establir el color de fons"
+	},
+	"style_settings_border_color_label": {
+		"message": "Introduïu el color de la vora per a les vostres",
+		"description": "Etiqueta per establir el color de la vora"
+	},
+	"style_settings_color_label": {
+		"message": "Introduïu el color del text per a les vostres",
+		"description": "Etiqueta per establir el color del text"
+	},
+	"style_settings_decoration_label": {
+		"message": "Trieu un o més estils de decoració per a les vostres",
+		"description": "Indicació per seleccionar estils de decoració"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Introduïu el color de fons en passar el ratolí per a les vostres",
+		"description": "Etiqueta per establir el color de fons en passar el ratolí"
+	},
+	"style_settings_shadow_label": {
+		"message": "Introduïu el color de l'ombra per a les vostres",
+		"description": "Etiqueta per establir el color de l'ombra"
+	},
+	"style_settings_top_active_label": {
+		"message": "Introduïu el color per a la barra a la part superior de les vostres actives",
+		"description": "Etiqueta per establir el color actiu de la barra superior"
+	},
 	"successfully_imported": {
 		"message": "Importat amb èxit",
 		"description": "[toast] l'usuari ha importat Tabs des d'un fitxer extern"
@@ -1030,6 +1326,10 @@
 	"users": {
 		"message": "Usuaris",
 		"description": "el nom de la pàgina relacionada amb ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Si us plau, exporteu les vostres noves Tab, ja que el fitxer que heu utilitzat no serà compatible amb futures versions.",
+		"description": "[warning] l'usuari va importar les seves Tab utilitzant una configuració obsoleta del fitxer json"
 	},
 	"where_to": {
 		"message": "On?",

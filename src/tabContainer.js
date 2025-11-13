@@ -401,8 +401,8 @@ export class TabContainer extends Array {
 		if (addInFront) {
 			// add in front but after the pinned Tabs
 			this.splice(this.#pinnedTabs, 0, tab);
-		} // add at the end
-		else {
+		} else {
+			// add at the end
 			this.push(tab);
 		}
 		if (this.length <= initialLength) {
@@ -1178,7 +1178,7 @@ export class TabContainer extends Array {
 			minIndex = index + 1;
 			deleteCount = this.length;
 			whereIndex = deleteCount;
-			this.#pinnedTabs = Math.min(this.#pinnedTabs, index + 1);
+			this.#pinnedTabs = Math.min(this.#pinnedTabs, minIndex);
 		}
 		this.splice(
 			whereIndex,

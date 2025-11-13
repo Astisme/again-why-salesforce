@@ -132,22 +132,57 @@ export const PERSIST_SORT = "persist_sort";
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
 const PINNED = "pinned";
-export const GENERIC_PINNED_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}-${PINNED}`;
+export const GENERIC_PINNED_TAB_STYLE_KEY =
+	`${SETTINGS_KEY}-${TAB_GENERIC_STYLE}-${PINNED}`;
 export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
-export const ORG_PINNED_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
-export const PINNED_KEY_FINDER = {
-  [GENERIC_TAB_STYLE_KEY]: {
-    // true = isPinned
-    [true]: GENERIC_PINNED_TAB_STYLE_KEY,
-    // false = !isPinned
-    [false]: GENERIC_TAB_STYLE_KEY,
-  },
-  [ORG_TAB_STYLE_KEY]: {
-    [true]: ORG_PINNED_TAB_STYLE_KEY,
-    [false]: ORG_TAB_STYLE_KEY,
-  },
+export const ORG_PINNED_TAB_STYLE_KEY =
+	`${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
+const GENERIC_STYLE_KEYS = [
+	GENERIC_TAB_STYLE_KEY,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+];
+export function isGenericKey(key = GENERIC_TAB_STYLE_KEY) {
+	return GENERIC_STYLE_KEYS.includes(key);
+}
+const PINNED_STYLE_KEYS = [
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+];
+export function isPinnedKey(key = GENERIC_TAB_STYLE_KEY) {
+	return PINNED_STYLE_KEYS.includes(key);
+}
+const ALL_STYLE_KEYS = [
+	GENERIC_TAB_STYLE_KEY,
+	ORG_TAB_STYLE_KEY,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+];
+export function isStyleKey(key = GENERIC_TAB_STYLE_KEY) {
+	return ALL_STYLE_KEYS.includes(key);
+}
+const PINNED_KEY_FINDER = {
+	// true = isGeneric
+	[true]: {
+		// true = isPinned
+		[true]: GENERIC_PINNED_TAB_STYLE_KEY,
+		// false = !isPinned
+		[false]: GENERIC_TAB_STYLE_KEY,
+	},
+	// false = !isGeneric
+	[false]: {
+		// true = isPinned
+		[true]: ORG_PINNED_TAB_STYLE_KEY,
+		// false = !isPinned
+		[false]: ORG_TAB_STYLE_KEY,
+	},
 };
+export function getPinnedSpecificKey({
+	isGeneric = true,
+	isPinned = false,
+} = {}) {
+	return PINNED_KEY_FINDER[isGeneric][isPinned];
+}
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";
@@ -186,14 +221,14 @@ export async function getStyleSettings(key = null) {
 export function getCssSelector({
 	isInactive = true,
 	isGeneric = true,
-  isPinned = false,
+	isPinned = false,
 	pseudoElement = "",
 } = {}) {
 	const activeClass = isInactive
 		? `:not(${SLDS_ACTIVE_CLASS})`
 		: SLDS_ACTIVE_CLASS;
 	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
-  const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
+	const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
 	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pinTabClass}${pseudoElement}`;
 }
 

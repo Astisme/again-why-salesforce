@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktívny",
+		"description": "Používa sa v prepínačoch pre aktívny stav"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktívne $generic_pin_tabs",
+		"description": "Generické pripnuté Tab-y používateľa, ktoré sú momentálne aktívne"
+	},
+	"active_generic_tabs": {
+		"message": "aktívne $generic_tabs",
+		"description": "Generické Tab-y používateľa, ktoré sú momentálne aktívne"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktívne $org_pin_tabs",
+		"description": "Org pripnuté Tab-y používateľa, ktoré sú momentálne aktívne"
+	},
+	"active_org_tabs": {
+		"message": "aktívne $org_tabs",
+		"description": "Org Tab-y používateľa, ktoré sú momentálne aktívne"
+	},
 	"allow": {
 		"message": "Povoliť",
 		"description": "[req_permission] tlačidlo na povolenie oprávnení"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontextové-menu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Pripnúť",
+		"description": "[kontextové-menu] umožní používateľovi ponechať si tento Tab na začiatku svojho zoznamu"
+	},
 	"cxm_remove": {
 		"message": "💥 Odstrániť Tab(y)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Ostatné Tab-y",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Odstrániť Pripnuté",
+		"description": "[kontextové-menu] umožní používateľovi odstrániť svoje pripnuté Tab-y"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tab-y napravo",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tento Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Odstrániť Nepripnuté",
+		"description": "[kontextové-menu] umožní používateľovi odstrániť Tab-y, ktoré nie sú pripnuté"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Obnoviť predvolené Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Zoradiť Tab-y",
 		"description": "kontextové menu, ktoré umožňuje používateľom automaticky zoradiť ich Tab-y (hlavné menu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ podľa Použitia",
+		"description": "kontextové menu pre umožnenie používateľom zoradiť si svoje Tab-y podľa počtu kliknutí"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ podľa Času",
+		"description": "kontextové menu pre umožnenie používateľom zoradiť si svoje Tab-y podľa času kliknutia"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 podľa štítku",
 		"description": "kontextové menu, ktoré umožňuje používateľom zoradiť ich Tab-y podľa štítku"
@@ -163,9 +203,25 @@
 		"message": "🤖 podľa URL",
 		"description": "kontextové menu, ktoré umožňuje používateľom zoradiť ich Tab-y podľa URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Skryť Tab-y, ktoré nie sú Org",
+		"description": "[kontextové-menu] dočasne skryť generické Tab-y"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Skryť Org Tab-y",
+		"description": "[kontextové-menu] dočasne skryť Org Tab-y"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Odopnúť",
+		"description": "[kontextové-menu] umožní používateľovi odstrániť tento Tab zo svojho pripnutého zoznamu"
+	},
 	"cxm_update": {
 		"message": "✏️ Aktualizovať Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Prepnúť Org",
+		"description": "[kontextové-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Ďalšie aktualizácie",
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Chyba pri pridávaní Tab.",
 		"description": "[chyba] Všeobecná chyba použitá pri pridávaní Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tento Tab už bol pripnutý.",
+		"description": "[chyba] používateľ sa pokúsil pripnúť už pripnutý Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Tento Tab už bol odopnutý.",
+		"description": "[chyba] používateľ sa pokúsil odopnúť už odopnutý Tab"
+	},
+	"error_cannot_move": {
+		"message": "Tento Tab nie je možné presunúť!",
+		"description": "[chyba] požadovaný Tab nie je možné momentálne presunúť."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tento Tab nie je možné presunúť v tomto smere!",
+		"description": "[chyba] požadovaný Tab nie je možné momentálne presunúť."
 	},
 	"error_check_update": {
 		"message": "Chyba pri kontrole aktualizácií",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Chyba pri importe:\n",
 		"description": "[error] Nastala chyba počas importného procesu"
+	},
+	"error_internal": {
+		"message": "Vnútorná Chyba",
+		"description": "[chyba] všeobecná chyba"
 	},
 	"error_invalid_key": {
 		"message": "Parameter kľúča odovzdaný funkcii nie je platný",
@@ -319,9 +395,17 @@
 		"message": "Nebol zadaný objekt na kontrolu!",
 		"description": "[error] Objekt nebol zadaný na kontrolu"
 	},
+	"error_no_pinned": {
+		"message": "Ešte nemáte žiadne pripnuté Tab-y!",
+		"description": "[chyba] používateľ sa pokúsil odstrániť pripnuté Tab-y, ale nemá žiadne pripnuté Tab-y"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab sa nenašiel.",
 		"description": "[error] Rozšírenie nenašlo, kam umiestniť uložené Tab-y"
+	},
+	"error_no_unpinned": {
+		"message": "Nemáte žiadne nepripnuté Tab-y!",
+		"description": "[chyba] používateľ sa pokúsil odstrániť nepripnuté Tab-y, ale nemá žiadne nepripnuté Tab-y"
 	},
 	"error_no_url": {
 		"message": "Nebola zadaná URL na kontrolu!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "nebol ešte inicializovaný.",
 		"description": "[chyba] Všeobecná chyba, keď premenná nie je pripravená"
+	},
+	"error_pin_tab": {
+		"message": "Chyba pri pripínaní Tab-u",
+		"description": "[chyba]"
 	},
 	"error_processing_tabs": {
 		"message": "Chyba spracovania Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Chyba pri odstraňovaní ostatných Tabs.",
 		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní ostatných Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Chyba pri odstraňovaní pripnutých Tab-ov.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní nepripnutých Tab-ov"
+	},
 	"error_removing_tab": {
 		"message": "Chyba pri odstraňovaní Tab.",
 		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Chyba pri odstraňovaní nepripnutých Tab-ov.",
+		"description": "[chyba] Všeobecná chyba použitá pri odstraňovaní nepripnutých Tab-ov"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Chyba pri odstraňovaní všetkých viditeľných Tab.",
@@ -379,6 +475,14 @@
 		"message": "Nemožno zosynchronizovať prázdne Tab-y!",
 		"description": "[error] Pokus o synchronizáciu prázdnych Tab-ov"
 	},
+	"error_tab_click_count": {
+		"message": "Počet Kliknutí musí byť nezáporné číslo",
+		"description": "[chyba] používateľ sa pokúsil vytvoriť Tab s nesprávnym počtom kliknutí"
+	},
+	"error_tab_click_date": {
+		"message": "Dátum Kliknutia musí byť číslo, ktoré nevytvorí dátum v budúcnosti",
+		"description": "[chyba] používateľ sa pokúsil vytvoriť Tab s nesprávnym dátumom kliknutia"
+	},
 	"error_tab_constructor": {
 		"message": "Použite Tab.create() namiesto new Tab() na použitie triedy Tab",
 		"description": "[chyba] povedzte vývojárovi, ako použiť triedu Tab"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab sa nenašiel.",
 		"description": "[error] Tab nebol zahrnutý v poli"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab ešte nie je pripnutý!",
+		"description": "[chyba] používateľ sa pokúsil odopnúť nepripnutý Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Pri volaní s objektom, neodosielajte nič iné.",
@@ -439,6 +547,10 @@
 		"message": "Neznáma požiadavka.",
 		"description": "[chyba] Všeobecná chyba po prijatí správy, ktorá nebola rozpoznaná"
 	},
+	"error_unpin_tab": {
+		"message": "Chyba pri odopínaní Tab-u",
+		"description": "[chyba]"
+	},
 	"error_useless_remove": {
 		"message": "Nemožno odstrániť:\nStránku, ktorá nebola predtým uložená, nemožno odstrániť",
 		"description": "[error] Používateľ sa pokúsil odstrániť stránku, ktorá ešte nebola uložená"
@@ -478,6 +590,14 @@
 	"general": {
 		"message": "Všeobecné",
 		"description": "Označenie pre kategóriu všeobecných nastavení"
+	},
+	"generic_pin_tabs": {
+		"message": "generické $pinned Tab-y",
+		"description": "Obľúbené Tab-y používateľa, ktoré nie sú špecifické pre organizáciu (org)"
+	},
+	"generic_tabs": {
+		"message": "generické Tab-y",
+		"description": "Obľúbené Tab-y používateľa, ktoré nie sú špecifické pre organizáciu (org)"
 	},
 	"help": {
 		"message": "Pomoc",
@@ -563,6 +683,10 @@
 		"message": "Neplatný typ súboru.\nPodporované sú iba JSON súbory.",
 		"description": "[error] Súbor použitý na import nie je typu JSON"
 	},
+	"import_metadata": {
+		"message": "Importovať metadáta Tab-u (\"Počet Kliknutí\", \"Dátum Kliknutia\" atď.).",
+		"description": "[štítok] importovať všetko nájdené v súbore počas procesu importu"
+	},
 	"import_successful": {
 		"message": "Import bol úspešný",
 		"description": "[import] Import bol dokončený. Následne sa zobrazí počet importovaných záznamov"
@@ -574,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs zo súboru JSON",
 		"description": "[vyskakovacie-okno] názov na tlačidle importu"
+	},
+	"inactive": {
+		"message": "Neaktívny",
+		"description": "Používa sa v prepínačoch pre neaktívny stav"
 	},
 	"insert_another": {
 		"message": "Vložiť ďalší",
@@ -723,6 +851,14 @@
 		"message": "Odkaz na Organizáciu",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab-y",
+		"description": "Tab-y, ktoré sú špecifické pre organizáciu (org)"
+	},
+	"org_tabs": {
+		"message": "org Tab-y",
+		"description": "Tab-y, ktoré sú špecifické pre organizáciu (org)"
+	},
 	"other_org_info": {
 		"message": "Informácie o inej Organizácii",
 		"description": "[modal-title]"
@@ -734,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Prepísať uložené Tab-y.",
 		"description": "[label] vymazať všetky uložené Tab-y počas importu"
+	},
+	"pinned": {
+		"message": "Pripnutý",
+		"description": "Tab-y používateľa, ktoré sa vždy nachádzajú na začiatku zoznamu"
 	},
 	"preserve_org_tabs": {
 		"message": "Zachovať Tab-y pre iné organizácie.",
@@ -826,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Úprava štýlu organizácie",
 		"description": "Označenie pre konfiguráciu štýlu Tabov špecifických pre organizáciu"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Štítok pre náhľad vzhľadu generického Tab-u po pripnutí"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Štítok pre konfiguráciu štýlu generických Tab-ov po pripnutí"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Štítok pre náhľad vzhľadu Tab-u špecifického pre org po pripnutí"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Štítok pre konfiguráciu štýlu Tab-ov špecifických pre org po pripnutí"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pre generické Tab-y"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Štítok na nastavenie farby okraja pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Štítok na nastavenie farby okraja pre generické Tab-y"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Štítok na nastavenie farby textu pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Štítok na nastavenie farby textu pre generické Tab-y"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Výzva na výber štýlov dekorácie pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Výzva na výber štýlov dekorácie pre generické Tab-y"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pri nabehnutí myšou (hover) pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pri nabehnutí myšou (hover) pre generické Tab-y"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Štítok na nastavenie farby tieňa pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Štítok na nastavenie farby tieňa pre generické Tab-y"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Štítok na nastavenie farby horného panela pre aktívne generické Tab-y"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pre aktívne org Tab-y"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pre Tab-y špecifické pre org"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Štítok na nastavenie farby okraja pre aktívne Tab-y špecifické pre org"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Štítok na nastavenie farby okraja pre org Tab-y"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Štítok na nastavenie farby textu pre aktívne org Tab-y"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Štítok na nastavenie farby textu pre Tab-y špecifické pre org"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Výzva na výber štýlov dekorácie pre aktívne Tab-y špecifické pre org"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Výzva na výber štýlov dekorácie pre org Tab-y"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pri nabehnutí myšou (hover) pre aktívne org Tab-y"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Štítok na nastavenie farby pozadia pri nabehnutí myšou (hover) pre Tab-y špecifické pre org"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Štítok na nastavenie farby tieňa pre aktívne Tab-y špecifické pre org"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Štítok na nastavenie farby tieňa pre org Tab-y"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Štítok na nastavenie farby horného panela pre aktívne org Tab-y"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Vložte farbu pozadia pre vaše aktívne všeobecné Tab.",
@@ -947,6 +1207,42 @@
 		"message": "Preskočiť",
 		"description": "[req_permission] tlačidlo na odmietnutie udelenia oprávnení"
 	},
+	"style_generic_pinned": {
+		"message": "Štýl pripnutých $generic_tabs",
+		"description": "[možnosti] Štítok prepínača pre štýlovanie pripnutých generických Tab-ov"
+	},
+	"style_org_pinned": {
+		"message": "Štýl pripnutých $org_tabs",
+		"description": "[možnosti] Štítok prepínača pre štýlovanie pripnutých org Tab-ov"
+	},
+	"style_settings_background_label": {
+		"message": "Zadajte farbu pozadia pre váš",
+		"description": "Štítok na nastavenie farby pozadia"
+	},
+	"style_settings_border_color_label": {
+		"message": "Zadajte farbu okraja pre váš",
+		"description": "Štítok na nastavenie farby okraja"
+	},
+	"style_settings_color_label": {
+		"message": "Zadajte farbu textu pre váš",
+		"description": "Štítok na nastavenie farby textu"
+	},
+	"style_settings_decoration_label": {
+		"message": "Vyberte jeden alebo viac štýlov dekorácie pre váš",
+		"description": "Výzva na výber štýlov dekorácie"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Zadajte farbu pozadia pri nabehnutí myšou (hover) pre váš",
+		"description": "Štítok na nastavenie farby pozadia pri nabehnutí myšou (hover)"
+	},
+	"style_settings_shadow_label": {
+		"message": "Zadajte farbu tieňa pre váš",
+		"description": "Štítok na nastavenie farby tieňa"
+	},
+	"style_settings_top_active_label": {
+		"message": "Zadajte farbu panela v hornej časti vášho aktívneho",
+		"description": "Štítok na nastavenie aktívnej farby horného panela"
+	},
 	"successfully_imported": {
 		"message": "Import bol úspešný",
 		"description": "[toast] Používateľ úspešne importoval Tab-y z externého súboru"
@@ -1030,6 +1326,10 @@
 	"users": {
 		"message": "Používatelia",
 		"description": "názov stránky spojený s ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Prosím, exportujte si svoje nové Tab-y, pretože súbor, ktorý ste použili, nebude podporovaný v budúcich vydaniach.",
+		"description": "[upozornenie] používateľ importoval svoje Tab-y pomocou zastaranej konfigurácie json súboru"
 	},
 	"where_to": {
 		"message": "Kam?",

@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Activo",
+		"description": "Se utiliza en conmutadores para el estado activo"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs activos",
+		"description": "Pestañas (Tab) genéricas ancladas del usuario que están activas actualmente"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs activos",
+		"description": "Pestañas (Tab) genéricas del usuario que están activas actualmente"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs activos",
+		"description": "Pestañas (Tab) ancladas de organización del usuario que están activas actualmente"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs activos",
+		"description": "Pestañas (Tab) de organización del usuario que están activas actualmente"
+	},
 	"allow": {
 		"message": "Permitir",
 		"description": "[req_permission] Botón para permitir permisos"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menú-contextual]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Anclar",
+		"description": "[context-menu] permite al usuario mantener esta Tab al comienzo de su lista"
+	},
 	"cxm_remove": {
 		"message": "💥 Eliminar Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Otros Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Eliminar Ancladas",
+		"description": "[context-menu] permite al usuario eliminar sus Tab ancladas"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs a la derecha",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Este Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Eliminar No Ancladas",
+		"description": "[context-menu] permite al usuario eliminar sus Tab no ancladas"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Restablecer Tabs predeterminadas",
@@ -151,6 +183,14 @@
 		"message": "🎯 Ordenar Tabs",
 		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs automáticamente (menú principal)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ por Uso",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tab por cuántas veces hacen clic en sus Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ por Tiempo",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tab por la fecha en que se hizo clic en las Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 por Etiqueta",
 		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por etiqueta"
@@ -163,9 +203,25 @@
 		"message": "🤖 por Url",
 		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Ocultar Tab No Organizacionales",
+		"description": "[context-menu] ocultar temporalmente Tab genéricas"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Ocultar Tab Organizacionales",
+		"description": "[context-menu] ocultar temporalmente Tab Organizacionales"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Desanclar",
+		"description": "[context-menu] permite al usuario eliminar esta Tab de su lista de ancladas"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualizar Tab",
 		"description": "[menú contextual]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Alternar Organización",
+		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Otras Actualizaciones",
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Error al agregar Tab.",
 		"description": "[error] error genérico al agregar una Tab"
+	},
+	"error_already_pinned": {
+		"message": "Esta Tab ya estaba anclada.",
+		"description": "[error] el usuario intentó anclar una Tab ya anclada"
+	},
+	"error_already_unpinned": {
+		"message": "Esta Tab ya estaba desanclada.",
+		"description": "[error] el usuario intentó desanclar una Tab ya desanclada"
+	},
+	"error_cannot_move": {
+		"message": "¡Esta Tab no se puede mover!",
+		"description": "[error] la Tab solicitada no se puede mover en este momento."
+	},
+	"error_cannot_move_dir": {
+		"message": "¡Esta Tab no se puede mover en esta dirección!",
+		"description": "[error] la Tab solicitada no se puede mover en este momento."
 	},
 	"error_check_update": {
 		"message": "Error al comprobar actualizaciones",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Error durante la importación:\n",
 		"description": "[error] Se produjo un error durante el proceso de importación."
+	},
+	"error_internal": {
+		"message": "Error Interno",
+		"description": "[error] error genérico"
 	},
 	"error_invalid_key": {
 		"message": "El parámetro key pasado a la función no es válido",
@@ -319,9 +395,17 @@
 		"message": "¡No se proporcionó ningún objeto para verificar!",
 		"description": "[error] No se proporcionó ningún objeto."
 	},
+	"error_no_pinned": {
+		"message": "¡Aún no tiene ninguna Tab anclada!",
+		"description": "[error] el usuario intentó eliminar las Tab ancladas pero no tiene ninguna Tab anclada"
+	},
 	"error_no_setup_tab": {
 		"message": "No se encontró la pestaña de Configuración.",
 		"description": "[error] La extensión no pudo encontrar dónde colocar los Tabs favoritos."
+	},
+	"error_no_unpinned": {
+		"message": "¡No tiene ninguna Tab no anclada!",
+		"description": "[error] el usuario intentó eliminar las Tab no ancladas pero no tiene ninguna Tab no anclada"
 	},
 	"error_no_url": {
 		"message": "¡No hay URL para verificar!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Aún no se ha inicializado.",
 		"description": "[error] error genérico cuando una variable no está lista"
+	},
+	"error_pin_tab": {
+		"message": "Error al anclar Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Error al procesar las Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Error al eliminar otras Tabs.",
 		"description": "[error] error genérico al eliminar otras Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Error al eliminar Tab ancladas.",
+		"description": "[error] Error genérico utilizado al eliminar Tab no ancladas"
+	},
 	"error_removing_tab": {
 		"message": "Error al eliminar Tab.",
 		"description": "[error] error genérico al eliminar una Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error al eliminar Tab no ancladas.",
+		"description": "[error] Error genérico utilizado al eliminar Tab no ancladas"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Error al eliminar todas las Tabs visibles.",
@@ -379,6 +475,14 @@
 		"message": "¡No se pueden sincronizar Tabs nulos!",
 		"description": "[error] Se intentó sincronizar nada."
 	},
+	"error_tab_click_count": {
+		"message": "El Recuento de Clics debe ser un número no negativo",
+		"description": "[error] el usuario intentó crear una Tab con un recuento de clics incorrecto"
+	},
+	"error_tab_click_date": {
+		"message": "La Fecha de Clic debe ser un número que no resulte en una fecha futura",
+		"description": "[error] el usuario intentó crear una Tab con una fecha de clic incorrecta"
+	},
 	"error_tab_constructor": {
 		"message": "Utiliza Tab.create() en lugar de new Tab()",
 		"description": "[error] informa al desarrollador cómo usar la clase Tab"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "No se encontró el Tab.",
 		"description": "[error] El Tab no se incluyó en la lista."
+	},
+	"error_tab_not_pinned": {
+		"message": "¡La Tab aún no está anclada!",
+		"description": "[error] el usuario intentó desanclar una Tab no anclada"
 	},
 	"error_tab_object_creation": {
 		"message": "Al llamar con un objeto, no pase nada más.",
@@ -438,6 +546,10 @@
 		"message": "Solicitud desconocida.",
 		"description": "[error] error genérico después de recibir un mensaje no reconocido"
 	},
+	"error_unpin_tab": {
+		"message": "Error al desanclar Tab",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "No se puede eliminar:\nNo se puede eliminar una página que nunca se ha guardado.",
 		"description": "[error] Se intentó eliminar una página que no había sido guardada."
@@ -477,6 +589,14 @@
 	"general": {
 		"message": "General",
 		"description": "Etiqueta para la categoría de configuración general"
+	},
+	"generic_pin_tabs": {
+		"message": "$pinned $tabs genéricas",
+		"description": "Tab favoritas del usuario que no son específicas de la organización"
+	},
+	"generic_tabs": {
+		"message": "$tabs genéricas",
+		"description": "Tab favoritas del usuario que no son específicas de la organización"
 	},
 	"help": {
 		"message": "Ayuda",
@@ -562,6 +682,10 @@
 		"message": "Tipo de archivo no válido.\nSolo se admiten archivos JSON.",
 		"description": "[error] La archivo utilizado para la importación no es un JSON."
 	},
+	"import_metadata": {
+		"message": "Importar metadatos de Tab (\"Recuento de Clics\", \"Fecha de Clic\" etc.).",
+		"description": "[label] importar todo lo que se encuentre en el archivo durante el proceso de importación"
+	},
 	"import_successful": {
 		"message": "Importación exitosa",
 		"description": "[import] La importación se completó; se mostrará la cantidad de registros importados"
@@ -573,6 +697,10 @@
 	"import_title": {
 		"message": "$import_tabs desde archivo JSON",
 		"description": "[emergente] título en el botón de importar"
+	},
+	"inactive": {
+		"message": "Inactivo",
+		"description": "Se utiliza en conmutadores para el estado inactivo"
 	},
 	"insert_another": {
 		"message": "Insertar otro",
@@ -722,6 +850,14 @@
 		"message": "Enlace de Org",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "$pinned $tabs de organización",
+		"description": "Tab que son específicas de la organización"
+	},
+	"org_tabs": {
+		"message": "$tabs de organización",
+		"description": "Tab que son específicas de la organización"
+	},
 	"other_org_info": {
 		"message": "Otra información de Org",
 		"description": "[modal-title]"
@@ -733,6 +869,10 @@
 	"overwrite_tabs": {
 		"message": "Sobrescribir Tabs guardados.",
 		"description": "[label] Elimina todos los Tabs guardados durante el proceso de importación"
+	},
+	"pinned": {
+		"message": "Anclada",
+		"description": "Tab del usuario que siempre se encuentran al comienzo de la lista"
 	},
 	"preserve_org_tabs": {
 		"message": "Conservar Tabs de otras orgs.",
@@ -825,6 +965,126 @@
 	"set_org_styler": {
 		"message": "Estilizador de Org",
 		"description": "Etiqueta para configurar el estilo de Tab específico de la Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etiqueta para la vista previa de la apariencia de la Tab genérica cuando está anclada"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etiqueta para configurar el estilo de las Tab genéricas cuando están ancladas"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etiqueta para la vista previa de la apariencia de la Tab específica de la organización cuando está anclada"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etiqueta para configurar el estilo de las Tab específicas de la organización cuando están ancladas"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de la barra superior para las Tab genéricas activas"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab de organización activas"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab específicas de la organización"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab activas específicas de la organización"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab de organización"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab de organización activas"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab específicas de la organización"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab activas específicas de la organización"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab de organización"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab de organización activas"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab específicas de la organización"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab activas específicas de la organización"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab de organización"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de la barra superior para las Tab de organización activas"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Inserte el color de fondo para sus Tab-s genéricas activas.",
@@ -946,6 +1206,42 @@
 		"message": "Omitir",
 		"description": "[req_permission] Botón para NO permitir permisos"
 	},
+	"style_generic_pinned": {
+		"message": "Estilo de $generic_tabs ancladas",
+		"description": "[options] Etiqueta de conmutación para aplicar estilo a las Tab genéricas ancladas"
+	},
+	"style_org_pinned": {
+		"message": "Estilo de $org_tabs ancladas",
+		"description": "[options] Etiqueta de conmutación para aplicar estilo a las Tab de organización ancladas"
+	},
+	"style_settings_background_label": {
+		"message": "Inserte el color de fondo para sus",
+		"description": "Etiqueta para establecer el color de fondo"
+	},
+	"style_settings_border_color_label": {
+		"message": "Inserte el color del borde para sus",
+		"description": "Etiqueta para establecer el color del borde"
+	},
+	"style_settings_color_label": {
+		"message": "Inserte el color del texto para sus",
+		"description": "Etiqueta para establecer el color del texto"
+	},
+	"style_settings_decoration_label": {
+		"message": "Elija uno o más estilos de decoración para sus",
+		"description": "Indicación para seleccionar estilos de decoración"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Inserte el color de fondo al pasar el ratón para sus",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón"
+	},
+	"style_settings_shadow_label": {
+		"message": "Inserte el color de la sombra para sus",
+		"description": "Etiqueta para establecer el color de la sombra"
+	},
+	"style_settings_top_active_label": {
+		"message": "Inserte el color para la barra en la parte superior de sus activas",
+		"description": "Etiqueta para establecer el color activo de la barra superior"
+	},
 	"successfully_imported": {
 		"message": "Importación exitosa",
 		"description": "[toast] El usuario ha agregado Tabs desde un archivo externo."
@@ -1029,6 +1325,10 @@
 	"users": {
 		"message": "Usuarios",
 		"description": "El nombre de la página relacionada con ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Por favor, exporte sus nuevas Tab ya que el archivo que ha utilizado no será compatible en futuras versiones.",
+		"description": "[warning] el usuario importó sus Tab utilizando una configuración obsoleta del archivo json"
 	},
 	"where_to": {
 		"message": "¿A dónde?",

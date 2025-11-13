@@ -1,9 +1,6 @@
 "use strict";
 import {
 	BROWSER,
-  PREVENT_DEFAULT_OVERRIDE,
-  TAB_STYLE_BACKGROUND,
-  TAB_STYLE_BOLD,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_OTHER_ORG,
@@ -23,9 +20,12 @@ import {
 	openSettingsPage,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
+	PREVENT_DEFAULT_OVERRIDE,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
 	SUPPORTED_SALESFORCE_URLS,
+	TAB_STYLE_BACKGROUND,
+	TAB_STYLE_BOLD,
 	WHY_KEY,
 } from "/constants.js";
 import Tab from "/tab.js";
@@ -113,26 +113,26 @@ export async function bg_getSettings(
 }
 
 async function bg_getStyleSettings(
-  key = null,
-  callback = null
-){
-  if(key == null)
-    key = [
-      GENERIC_TAB_STYLE_KEY,
-      ORG_TAB_STYLE_KEY,
-      GENERIC_PINNED_TAB_STYLE_KEY,
-      ORG_PINNED_TAB_STYLE_KEY,
-    ];
-  const settings = await bg_getSettings(
-    undefined,
-    key,
-    callback,
-  );
-  if(Object.values(settings).every(s =>
-    s?.[1] == null
-  ))
-    return null;
-  return settings;
+	key = null,
+	callback = null,
+) {
+	if (key == null) {
+		key = [
+			GENERIC_TAB_STYLE_KEY,
+			ORG_TAB_STYLE_KEY,
+			GENERIC_PINNED_TAB_STYLE_KEY,
+			ORG_PINNED_TAB_STYLE_KEY,
+		];
+	}
+	const settings = await bg_getSettings(
+		undefined,
+		key,
+		callback,
+	);
+	if (Object.values(settings).every((s) => s?.[1] == null)) {
+		return null;
+	}
+	return settings;
 }
 
 /**
@@ -143,10 +143,9 @@ async function bg_getStyleSettings(
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	// get the settings array
-	const isStyleKey = 
-    key === GENERIC_TAB_STYLE_KEY ||
+	const isStyleKey = key === GENERIC_TAB_STYLE_KEY ||
 		key === ORG_TAB_STYLE_KEY ||
-    key === GENERIC_PINNED_TAB_STYLE_KEY ||
+		key === GENERIC_PINNED_TAB_STYLE_KEY ||
 		key === ORG_PINNED_TAB_STYLE_KEY;
 	const settingsArray = await bg_getSettings(
 		...(isStyleKey ? [null, key] : []),
@@ -215,15 +214,15 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 			set[key] = await mergeSettings(tobeset, key);
 			break;
 		}
-    case WHY_KEY:
-    case LOCALE_KEY:
+		case WHY_KEY:
+		case LOCALE_KEY:
 			if (changedToArray) {
 				tobeset = tobeset[0];
 			}
 			set[key] = tobeset;
-      break;
+			break;
 		default:
-      throw new Error("error_unknown_request",key);
+			throw new Error("error_unknown_request", key);
 	}
 	if (callback == null) {
 		return BROWSER.storage.sync.set(set);
@@ -452,27 +451,32 @@ function listenToExtensionCommands() {
 	});
 }
 
-async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles){
-  await bg_setStorage(
-    styles.filter(Boolean),
-    undefined,
-    key
-  );
-  return styles;
+async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles) {
+	await bg_setStorage(
+		styles.filter(Boolean),
+		undefined,
+		key,
+	);
+	return styles;
 }
 
-async function _createDefaultStyleWrapper(availableStyles, key = ORG_TAB_STYLE_KEY, newKey = ORG_PINNED_TAB_STYLE_KEY, ...styles){
-  const filteredStyles = availableStyles[key]
-    ?.filter(el => 
-      el.id !== PREVENT_DEFAULT_OVERRIDE &&
-      // override user-set background
-      el.id !== TAB_STYLE_BACKGROUND 
-    ) ?? [];
-  return await _createDefaultStyle(
-    newKey,
-    ...filteredStyles,
-    ...styles,
-  );
+async function _createDefaultStyleWrapper(
+	availableStyles,
+	key = ORG_TAB_STYLE_KEY,
+	newKey = ORG_PINNED_TAB_STYLE_KEY,
+	...styles
+) {
+	const filteredStyles = availableStyles[key]
+		?.filter((el) =>
+			el.id !== PREVENT_DEFAULT_OVERRIDE &&
+			// override user-set background
+			el.id !== TAB_STYLE_BACKGROUND
+		) ?? [];
+	return await _createDefaultStyle(
+		newKey,
+		...filteredStyles,
+		...styles,
+	);
 }
 
 /**
@@ -481,38 +485,42 @@ async function _createDefaultStyleWrapper(availableStyles, key = ORG_TAB_STYLE_K
  */
 async function setDefaultOrgStyle() {
 	const availableStyles = (await bg_getStyleSettings()) ?? {};
-  // if no style settings have been found,
-  // create the default style for org-specific Tabs & send it to the background.
-  // same goes for org-specific pinned Tabs
-  const boldStyle = [
-    { id: TAB_STYLE_BOLD, forActive: false, value: TAB_STYLE_BOLD },
-    { id: TAB_STYLE_BOLD, forActive: true, value: TAB_STYLE_BOLD },
-  ];
-  if(availableStyles[ORG_TAB_STYLE_KEY] == null){
-    availableStyles[ORG_TAB_STYLE_KEY] = await _createDefaultStyle(ORG_TAB_STYLE_KEY, ...boldStyle);
-  }
-  // for pinned Tabs, assign the same current styles used for the unpinned counterparts
-  // but change the color of the background to the default one
-  const pinnedStyles = [
-    { id: TAB_STYLE_BACKGROUND, forActive: false, value: "mistyrose" },
-    { id: TAB_STYLE_BACKGROUND, forActive: true, value: "mistyrose" },
-  ];
-  if(availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null){
-    availableStyles[ORG_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
-      availableStyles,
-      ORG_TAB_STYLE_KEY,
-      ORG_PINNED_TAB_STYLE_KEY,
-      ...pinnedStyles,
-    );
-  }
-  if(availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null){
-    availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
-      availableStyles,
-      GENERIC_TAB_STYLE_KEY,
-      GENERIC_PINNED_TAB_STYLE_KEY,
-      ...pinnedStyles,
-    );
-  }
+	// if no style settings have been found,
+	// create the default style for org-specific Tabs & send it to the background.
+	// same goes for org-specific pinned Tabs
+	const boldStyle = [
+		{ id: TAB_STYLE_BOLD, forActive: false, value: TAB_STYLE_BOLD },
+		{ id: TAB_STYLE_BOLD, forActive: true, value: TAB_STYLE_BOLD },
+	];
+	if (availableStyles[ORG_TAB_STYLE_KEY] == null) {
+		availableStyles[ORG_TAB_STYLE_KEY] = await _createDefaultStyle(
+			ORG_TAB_STYLE_KEY,
+			...boldStyle,
+		);
+	}
+	// for pinned Tabs, assign the same current styles used for the unpinned counterparts
+	// but change the color of the background to the default one
+	const pinnedStyles = [
+		{ id: TAB_STYLE_BACKGROUND, forActive: false, value: "mistyrose" },
+		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "mistyrose" },
+	];
+	if (availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null) {
+		availableStyles[ORG_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
+			availableStyles,
+			ORG_TAB_STYLE_KEY,
+			ORG_PINNED_TAB_STYLE_KEY,
+			...pinnedStyles,
+		);
+	}
+	if (availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null) {
+		availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] =
+			_createDefaultStyleWrapper(
+				availableStyles,
+				GENERIC_TAB_STYLE_KEY,
+				GENERIC_PINNED_TAB_STYLE_KEY,
+				...pinnedStyles,
+			);
+	}
 }
 
 /**

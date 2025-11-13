@@ -183,6 +183,15 @@ class TranslationService {
 	 * @throws {Error} If the key is missing in all locale caches, throws an Error with a translated error message prefix.
 	 */
 	async #_translate(key, connector = " ", isError = false) {
+		if (
+			key.includes(" ") &&
+			this.caches[this.currentLanguage]?.[key] == null
+		) {
+			return key;
+		}
+		if (key.startsWith("$")) {
+			key = key.slice(1);
+		}
 		// Check language-specific cache first
 		if (this.caches[this.currentLanguage]?.[key]?.message != null) {
 			return this.caches[this.currentLanguage][key].message;
@@ -228,12 +237,10 @@ class TranslationService {
 	async translate(key, connector = " ") {
 		// get all inner translations
 		if (Array.isArray(key)) {
-			const compoundTranslation = [];
-			for (const k of key) {
-				const kTranslate = await this.translate(k);
-				compoundTranslation.push(kTranslate);
-			}
-			return compoundTranslation.join(connector);
+			return (await Promise.all(
+				key.map((k) => this.translate(k)),
+			))
+				.join(connector);
 		}
 		// key is not an Array
 		try {
@@ -248,10 +255,22 @@ class TranslationService {
 					messageTranslated += ` ${word}`;
 					continue;
 				}
-				const innerTranslation = await this.#_translate(word.slice(1));
-				messageTranslated += ` ${innerTranslation}`;
+				const innerKey = word.slice(1);
+				const innerTranslation = await this.#_translate(innerKey);
+				if (innerTranslation.includes("$")) {
+					messageTranslated += ` ${await this.translate(
+						innerTranslation,
+					)}`;
+				} else {
+					messageTranslated += ` ${innerTranslation}`;
+				}
 			}
-			return messageTranslated.slice(1);
+			const finalTranslation = messageTranslated.slice(1); // remove beginning whitespace
+			// add translation to cache
+			this.caches[this.currentLanguage][key] = {
+				message: finalTranslation,
+			};
+			return finalTranslation;
 		} catch (e) {
 			console.info(e);
 			return key;

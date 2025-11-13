@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktywny",
+		"description": "Używane w przełącznikach dla stanu aktywnego"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktywne $generic_pin_tabs",
+		"description": "Ogólne Pinned Tabs użytkownika, które są aktualnie aktywne"
+	},
+	"active_generic_tabs": {
+		"message": "aktywne $generic_tabs",
+		"description": "Ogólne Tabs użytkownika, które są aktualnie aktywne"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktywne $org_pin_tabs",
+		"description": "Org-specyficzne Pinned Tabs użytkownika, które są aktualnie aktywne"
+	},
+	"active_org_tabs": {
+		"message": "aktywne $org_tabs",
+		"description": "Org-specyficzne Tabs użytkownika, które są aktualnie aktywne"
+	},
 	"allow": {
 		"message": "Zezwól",
 		"description": "[prośba_o_uprawnienia] przycisk zezwalający na uprawnienia"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menu-kontekstowe]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Przypnij",
+		"description": "[menu-kontekstowe] pozwala użytkownikowi zachować ten Tab na początku swojej listy"
+	},
 	"cxm_remove": {
 		"message": "💥 Usuń Tab(y)",
 		"description": "[menu-kontekstowe]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Inne Tabs",
 		"description": "[menu-kontekstowe]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Usuń Przypięte",
+		"description": "[menu-kontekstowe] pozwala użytkownikowi usunąć przypięte Tabs"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs po prawej",
 		"description": "[menu-kontekstowe]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ten Tab",
 		"description": "[menu-kontekstowe]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Usuń Nieprzypięte",
+		"description": "[menu-kontekstowe] pozwala użytkownikowi usunąć Tabs, które nie są przypięte"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Przywróć domyślne Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sortuj karty",
 		"description": "menu kontekstowe, które umożliwia użytkownikom automatyczne sortowanie kart (menu nadrzędne)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ według Użycia",
+		"description": "menu kontekstowe, aby umożliwić użytkownikom sortowanie ich Tabs według liczby kliknięć"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ według Czasu",
+		"description": "menu kontekstowe, aby umożliwić użytkownikom sortowanie ich Tabs według daty kliknięcia"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 wg etykiety",
 		"description": "menu kontekstowe, które umożliwia użytkownikom sortowanie kart wg etykiety"
@@ -163,8 +203,24 @@
 		"message": "🤖 wg URL-a",
 		"description": "menu kontekstowe, które umożliwia użytkownikom sortowanie kart wg URL-a"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Ukryj Tabs nie-Org",
+		"description": "[menu-kontekstowe] tymczasowo ukryj ogólne Tabs"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Ukryj Tabs Org",
+		"description": "[menu-kontekstowe] tymczasowo ukryj Org Tabs"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Odepnij",
+		"description": "[menu-kontekstowe] pozwala użytkownikowi usunąć ten Tab z listy przypiętych"
+	},
 	"cxm_update": {
 		"message": "✏️ Aktualizuj Tab",
+		"description": "[menu-kontekstowe]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Przełącz Org",
 		"description": "[menu-kontekstowe]"
 	},
 	"cxm_update_tab": {
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Błąd podczas dodawania Tab.",
 		"description": "[błąd] Ogólny błąd używany podczas dodawania Tab"
+	},
+	"error_already_pinned": {
+		"message": "Ten Tab był już przypięty.",
+		"description": "[błąd] użytkownik próbował przypiąć już przypięty Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Ten Tab był już odpięty.",
+		"description": "[błąd] użytkownik próbował odpiąć już odpięty Tab"
+	},
+	"error_cannot_move": {
+		"message": "Tego Tab nie można przenieść!",
+		"description": "[błąd] żądany Tab nie może być obecnie przeniesiony."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tego Tab nie można przenieść w tym kierunku!",
+		"description": "[błąd] żądany Tab nie może być obecnie przeniesiony."
 	},
 	"error_check_update": {
 		"message": "Błąd podczas sprawdzania aktualizacji",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Błąd podczas importu:\n",
 		"description": "[błąd] wystąpił błąd podczas procesu importu"
+	},
+	"error_internal": {
+		"message": "Błąd Wewnętrzny",
+		"description": "[błąd] błąd ogólny"
 	},
 	"error_invalid_key": {
 		"message": "Parametr klucza przekazany do funkcji jest nieprawidłowy",
@@ -319,9 +395,17 @@
 		"message": "Brak obiektu do sprawdzenia!",
 		"description": "[błąd] obiekt nie został przekazany"
 	},
+	"error_no_pinned": {
+		"message": "Nie masz jeszcze żadnych przypiętych Tabs!",
+		"description": "[błąd] użytkownik próbował usunąć przypięte Tabs, ale nie ma żadnych przypiętych Tabs"
+	},
 	"error_no_setup_tab": {
 		"message": "Nie udało się znaleźć karty Setup.",
 		"description": "[błąd] Rozszerzenie nie mogło znaleźć miejsca na umieszczenie ulubionych Tabs."
+	},
+	"error_no_unpinned": {
+		"message": "Nie masz żadnych nieprzypiętych Tabs!",
+		"description": "[błąd] użytkownik próbował usunąć nieprzypięte Tabs, ale nie ma żadnych nieprzypiętych Tabs"
 	},
 	"error_no_url": {
 		"message": "Brak adresu URL do sprawdzenia!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "nie został jeszcze zainicjalizowany.",
 		"description": "[błąd] Ogólny błąd, gdy zmienna nie jest gotowa"
+	},
+	"error_pin_tab": {
+		"message": "Błąd podczas przypinania Tab",
+		"description": "[błąd]"
 	},
 	"error_processing_tabs": {
 		"message": "Błąd przetwarzania Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Błąd podczas usuwania innych Tabs.",
 		"description": "[błąd] Ogólny błąd używany podczas usuwania innych Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Błąd podczas usuwania przypiętych Tabs.",
+		"description": "[błąd] Ogólny błąd używany podczas usuwania nieprzypiętych Tabs"
+	},
 	"error_removing_tab": {
 		"message": "Błąd podczas usuwania Tab.",
 		"description": "[błąd] Ogólny błąd używany podczas usuwania Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Błąd podczas usuwania nieprzypiętych Tabs.",
+		"description": "[błąd] Ogólny błąd używany podczas usuwania nieprzypiętych Tabs"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Błąd podczas usuwania wszystkich widocznych Tab.",
@@ -379,6 +475,14 @@
 		"message": "Nie można zsynchronizować pustych Tabs!",
 		"description": "[błąd] próbowano zsynchronizować nic"
 	},
+	"error_tab_click_count": {
+		"message": "Liczba Kliknięć musi być liczbą nieujemną",
+		"description": "[błąd] użytkownik próbował utworzyć Tab z nieprawidłową liczbą kliknięć"
+	},
+	"error_tab_click_date": {
+		"message": "Data Kliknięcia musi być liczbą, która nie powoduje daty w przyszłości",
+		"description": "[błąd] użytkownik próbował utworzyć Tab z nieprawidłową datą kliknięcia"
+	},
 	"error_tab_constructor": {
 		"message": "Użyj Tab.create() zamiast new Tab() aby użyć klasy Tab",
 		"description": "[błąd] poinformuj dewelopera jak używać klasy Tab"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab nie został znaleziony.",
 		"description": "[błąd] Tab nie został zawarty w tablicy"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab nie jest jeszcze przypięty!",
+		"description": "[błąd] użytkownik próbował odpiąć nieprzypięty Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Podczas wywoływania z obiektem nie przekazuj niczego innego.",
@@ -439,6 +547,10 @@
 		"message": "Nieznane żądanie.",
 		"description": "[błąd] Ogólny błąd po otrzymaniu wiadomości, która nie została rozpoznana"
 	},
+	"error_unpin_tab": {
+		"message": "Błąd podczas odpinania Tab",
+		"description": "[błąd]"
+	},
 	"error_useless_remove": {
 		"message": "Nie można usunąć:\nNie można usunąć strony, która nie została wcześniej zapisana",
 		"description": "[błąd] użytkownik próbował usunąć stronę, która nie została jeszcze zapisana"
@@ -478,6 +590,14 @@
 	"general": {
 		"message": "Ogólne",
 		"description": "Etykieta dla kategorii ustawień ogólnych"
+	},
+	"generic_pin_tabs": {
+		"message": "ogólne $pinned Tab-y",
+		"description": "Ulubione Tabs użytkownika, które nie są specyficzne dla organizacji (org-specific)"
+	},
+	"generic_tabs": {
+		"message": "ogólne Tab-y",
+		"description": "Ulubione Tabs użytkownika, które nie są specyficzne dla organizacji (org-specific)"
 	},
 	"help": {
 		"message": "Pomoc",
@@ -563,6 +683,10 @@
 		"message": "Nieprawidłowy typ pliku.\nObsługiwane są tylko pliki JSON.",
 		"description": "[błąd] plik użyty do importu nie jest plikiem JSON"
 	},
+	"import_metadata": {
+		"message": "Importuj metadane Tab (\"Liczba Kliknięć\", \"Data Kliknięcia\" itd.).",
+		"description": "[etykieta] importuj wszystko znalezione w pliku podczas procesu importu"
+	},
 	"import_successful": {
 		"message": "Pomyślnie zaimportowano",
 		"description": "[import] import został zakończony. Po tym zostanie pokazana liczba zaimportowanych rekordów"
@@ -574,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs z pliku JSON",
 		"description": "[wyskakujące-okienko] tytuł na przycisku importu"
+	},
+	"inactive": {
+		"message": "Nieaktywny",
+		"description": "Używane w przełącznikach dla stanu nieaktywnego"
 	},
 	"insert_another": {
 		"message": "Wstaw inny",
@@ -723,6 +851,14 @@
 		"message": "Link Org",
 		"description": "[etykieta-wejściowa]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab-y",
+		"description": "Tabs, które są specyficzne dla organizacji (org-specific)"
+	},
+	"org_tabs": {
+		"message": "org Tab-y",
+		"description": "Tabs, które są specyficzne dla organizacji (org-specific)"
+	},
 	"other_org_info": {
 		"message": "Informacje o innej Org",
 		"description": "[tytuł-modal]"
@@ -734,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Nadpisz zapisane Tabs.",
 		"description": "[etykieta] usuń wszystkie zapisane Tabs podczas procesu importu"
+	},
+	"pinned": {
+		"message": "Przypięty",
+		"description": "Tabs użytkownika, które zawsze znajdują się na początku listy"
 	},
 	"preserve_org_tabs": {
 		"message": "Zachowaj Tabs dla innych org.",
@@ -826,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Stilista org",
 		"description": "Etykieta do konfigurowania stylu kart specyficznych dla organizacji"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etykieta do podglądu wyglądu ogólnego Tab, gdy jest przypięty"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etykieta do konfigurowania stylu ogólnych Tabs, gdy są przypięte"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etykieta do podglądu wyglądu org-specyficznego Tab, gdy jest przypięty"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etykieta do konfigurowania stylu org-specyficznych Tabs, gdy są przypięte"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła dla ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru ramki dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru ramki dla ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tekstu dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tekstu dla ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Monit do wybrania stylów dekoracji dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Monit do wybrania stylów dekoracji dla ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła po najechaniu kursorem dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła po najechaniu kursorem dla ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru cienia dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru cienia dla ogólnych Tabs"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etykieta do ustawienia koloru górnego paska dla aktywnych ogólnych Tabs"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła dla aktywnych Tabs org"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła dla org-specyficznych Tabs"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru ramki dla aktywnych org-specyficznych Tabs"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru ramki dla Tabs org"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tekstu dla aktywnych Tabs org"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tekstu dla org-specyficznych Tabs"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Monit do wybrania stylów dekoracji dla aktywnych org-specyficznych Tabs"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Monit do wybrania stylów dekoracji dla Tabs org"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła po najechaniu kursorem dla aktywnych Tabs org"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru tła po najechaniu kursorem dla org-specyficznych Tabs"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru cienia dla aktywnych org-specyficznych Tabs"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru cienia dla Tabs org"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etykieta do ustawienia koloru górnego paska dla aktywnych Tabs org"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Wprowadź kolor tła dla aktywnych ogólnych Tab.",
@@ -947,6 +1207,42 @@
 		"message": "Pomiń",
 		"description": "[prośba_o_uprawnienia] przycisk NIE zezwalający na uprawnienia"
 	},
+	"style_generic_pinned": {
+		"message": "Styl przypiętych $generic_tabs",
+		"description": "[opcje] Etykieta przełączania do stylizacji przypiętych ogólnych Tabs"
+	},
+	"style_org_pinned": {
+		"message": "Styl przypiętych $org_tabs",
+		"description": "[opcje] Etykieta przełączania do stylizacji przypiętych Tabs org"
+	},
+	"style_settings_background_label": {
+		"message": "Wstaw kolor tła dla Twojego",
+		"description": "Etykieta do ustawienia koloru tła"
+	},
+	"style_settings_border_color_label": {
+		"message": "Wstaw kolor ramki dla Twojego",
+		"description": "Etykieta do ustawienia koloru ramki"
+	},
+	"style_settings_color_label": {
+		"message": "Wstaw kolor tekstu dla Twojego",
+		"description": "Etykieta do ustawienia koloru tekstu"
+	},
+	"style_settings_decoration_label": {
+		"message": "Wybierz jeden lub więcej stylów dekoracji dla Twojego",
+		"description": "Monit do wybrania stylów dekoracji"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Wstaw kolor tła po najechaniu kursorem dla Twojego",
+		"description": "Etykieta do ustawienia koloru tła po najechaniu kursorem"
+	},
+	"style_settings_shadow_label": {
+		"message": "Wstaw kolor cienia dla Twojego",
+		"description": "Etykieta do ustawienia koloru cienia"
+	},
+	"style_settings_top_active_label": {
+		"message": "Wstaw kolor paska na górze Twojego aktywnego",
+		"description": "Etykieta do ustawienia aktywnego koloru górnego paska"
+	},
 	"successfully_imported": {
 		"message": "Pomyślnie zaimportowano",
 		"description": "[toast] użytkownik dodał Tabs z pliku zewnętrznego"
@@ -1030,6 +1326,10 @@
 	"users": {
 		"message": "Użytkownicy",
 		"description": "Nazwa strony związanej z ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Proszę wyeksportować swoje nowe Tabs, ponieważ plik, którego użyłeś, nie będzie obsługiwany w przyszłych wydaniach.",
+		"description": "[ostrzeżenie] użytkownik zaimportował swoje Tabs używając przestarzałej konfiguracji pliku json"
 	},
 	"where_to": {
 		"message": "Dokąd?",

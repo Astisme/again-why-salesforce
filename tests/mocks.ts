@@ -16,15 +16,15 @@ export interface MockStorage {
 	[StorageKeys.SETTINGS_KEY]: object[];
 	[StorageKeys.GENERIC_TAB_STYLE_KEY]: object[] | undefined;
 	[StorageKeys.ORG_TAB_STYLE_KEY]: object[] | undefined;
-	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: object[] | undefined,
-  [StorageKeys.ORG_PINNED_TAB_STYLE_KEY]: object[] | undefined,
+	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: object[] | undefined;
+	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]: object[] | undefined;
 	[StorageKeys.LOCALE_KEY]: string;
 }
 // Mock browser APIs
 export const mockStorage: MockStorage = {
 	[StorageKeys.WHY_KEY]: [],
 	[StorageKeys.SETTINGS_KEY]: [],
-  [StorageKeys.LOCALE_KEY]: "fr",
+	[StorageKeys.LOCALE_KEY]: "fr",
 	[StorageKeys.GENERIC_TAB_STYLE_KEY]: undefined,
 	[StorageKeys.ORG_TAB_STYLE_KEY]: undefined,
 	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: undefined,
@@ -175,28 +175,28 @@ export const mockBrowser = {
 					break;
 				}
 				case "get-style-settings": {
-          const updatedKey = message.key == null;
-          if(updatedKey){
-            message.key = [
-              StorageKeys.GENERIC_TAB_STYLE_KEY,
-              StorageKeys.ORG_TAB_STYLE_KEY,
-              StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY,
-              StorageKeys.ORG_PINNED_TAB_STYLE_KEY,
-            ];
-          }
-					const settings = Array.isArray(message.key) 
-            ? Object.fromEntries(Object.entries(mockStorage).filter(([key]) => 
-              message.key.includes(key)
-            ))
-            : mockStorage[message.key];
-          if(updatedKey && 
-             Object.values(settings).every(s => 
-              s?.[1] == null
-            )
-          ){
-            response = null;
-          }
-          else if (message.keys == null || settings == null) {
+					const updatedKey = message.key == null;
+					if (updatedKey) {
+						message.key = [
+							StorageKeys.GENERIC_TAB_STYLE_KEY,
+							StorageKeys.ORG_TAB_STYLE_KEY,
+							StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY,
+							StorageKeys.ORG_PINNED_TAB_STYLE_KEY,
+						];
+					}
+					const settings = Array.isArray(message.key)
+						? Object.fromEntries(
+							Object.entries(mockStorage).filter(([key]) =>
+								message.key.includes(key)
+							),
+						)
+						: mockStorage[message.key];
+					if (
+						updatedKey &&
+						Object.values(settings).every((s) => s?.[1] == null)
+					) {
+						response = null;
+					} else if (message.keys == null || settings == null) {
 						response = settings;
 					} else {
 						if (!Array.isArray(message.keys)) {
@@ -440,6 +440,21 @@ export const translations = {
 		},
 		"world": {
 			"message": "$hello World",
+		},
+		"salesforce": {
+			"message": "Salesforce",
+		},
+		"sf_login": {
+			"message": "$salesforce Login",
+		},
+		"use_sf_login": {
+			"message": "Use $sf_login",
+		},
+		"you_should": {
+			"message": "You should",
+		},
+		"plz_use_sf_login": {
+			"message": "$you_should $use_sf_login please!",
 		},
 		"error_missing_key": {
 			"message": "Key not found anywhere",

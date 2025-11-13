@@ -24,13 +24,21 @@ jobs:
               with:
                   deno-version: v2.x
 
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: '18'
+
+            - name: Install eslint
+              run: npm install eslint eslint-plugin-jsdoc
+
             - name: Switch to branch
               run: |
                 git fetch origin "${{ github.head_ref }}" 
                 git switch "${{ github.head_ref }}"
                 chmod +x .github/scripts/task-and-push-when-diff.sh
 
-            - name: Run linter
+            - name: Run Deno linter
               continue-on-error: true
               run: deno task lint 2> lint-error.log
 
@@ -49,6 +57,23 @@ jobs:
                     stripPatterns: [
                       /^Download https:\/\/.*\n/gm
                     ]
+                  });
+
+            - name: Run eslint
+              continue-on-error: true
+              run: npx eslint "src/**/*.js" > eslint-error.log
+
+            - name: Comment on PR if eslint fails
+              uses: actions/github-script@v7
+              with:
+                script: |
+                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  await handler({
+                    github,
+                    context,
+                    core,
+                    logFile: "eslint-error.log",
+                    title:   "JSDocs Missing",
                   });
 
             - name: Run tests

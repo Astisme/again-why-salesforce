@@ -17,8 +17,8 @@ import {
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
 	TAB_ADD_FRONT,
+	USER_LANGUAGE,
 	WHY_KEY,
-  USER_LANGUAGE,
 } from "/constants.js";
 
 const oldtabs = [

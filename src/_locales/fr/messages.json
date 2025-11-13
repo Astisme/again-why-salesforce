@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Actif",
+		"description": "Utilisé dans les bascules pour l'état actif"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs actifs",
+		"description": "Onglets (Tab) génériques épinglés de l'utilisateur qui sont actuellement actifs"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs actifs",
+		"description": "Onglets (Tab) génériques de l'utilisateur qui sont actuellement actifs"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs actifs",
+		"description": "Onglets (Tab) d'organisation épinglés de l'utilisateur qui sont actuellement actifs"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs actifs",
+		"description": "Onglets (Tab) d'organisation de l'utilisateur qui sont actuellement actifs"
+	},
 	"allow": {
 		"message": "Autoriser",
 		"description": "[req_permission] Bouton pour autoriser les permissions"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menu-contextuel]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Épingler",
+		"description": "[context-menu] permet à l'utilisateur de garder cet Tab au début de sa liste"
+	},
 	"cxm_remove": {
 		"message": "💥 Supprimer Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Autres Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Retirer les épinglés",
+		"description": "[context-menu] permet à l'utilisateur de retirer ses Tab épinglés"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs à droite",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ce Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Retirer les non épinglés",
+		"description": "[context-menu] permet à l'utilisateur de retirer ses Tab non épinglés"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Réinitialiser les Tabs par défaut",
@@ -151,6 +183,14 @@
 		"message": "🎯 Trier les Tabs",
 		"description": "menu contextuel permettant aux utilisateurs de trier leurs Tabs automatiquement (menu parent)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ par Utilisation",
+		"description": "menu contextuel pour permettre aux utilisateurs de trier leurs Tab par le nombre de fois qu'ils cliquent sur leurs Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ par Heure",
+		"description": "menu contextuel pour permettre aux utilisateurs de trier leurs Tab par le moment où ils ont cliqué sur les Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 par Étiquette",
 		"description": "menu contextuel permettant aux utilisateurs de trier leurs Tabs par étiquette"
@@ -163,8 +203,24 @@
 		"message": "🤖 par Url",
 		"description": "menu contextuel permettant aux utilisateurs de trier leurs Tabs par URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Masquer les Tab non-Organisation",
+		"description": "[context-menu] masquer temporairement les Tab génériques"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Masquer les Tab Organisation",
+		"description": "[context-menu] masquer temporairement les Tab Organisation"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Désépingler",
+		"description": "[context-menu] permet à l'utilisateur de retirer cet Tab de sa liste d'épinglés"
+	},
 	"cxm_update": {
 		"message": "✏️ Mettre à jour Tab",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Basculer Organisation",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Erreur lors de l'ajout de Tab.",
 		"description": "[erreur] Erreur générique utilisée lors de l'ajout d'un Tab"
+	},
+	"error_already_pinned": {
+		"message": "Cet Tab était déjà épinglé.",
+		"description": "[error] l'utilisateur a essayé d'épingler un Tab déjà épinglé"
+	},
+	"error_already_unpinned": {
+		"message": "Cet Tab était déjà désépinglé.",
+		"description": "[error] l'utilisateur a essayé de désépingler un Tab déjà désépinglé"
+	},
+	"error_cannot_move": {
+		"message": "Cet Tab ne peut pas être déplacé!",
+		"description": "[error] l'Tab demandé ne peut pas être déplacé pour le moment."
+	},
+	"error_cannot_move_dir": {
+		"message": "Cet Tab ne peut pas être déplacé dans cette direction!",
+		"description": "[error] l'Tab demandé ne peut pas être déplacé pour le moment."
 	},
 	"error_check_update": {
 		"message": "Erreur lors de la vérification des mises à jour",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Erreur lors de l'importation :\n",
 		"description": "[error] Une erreur s'est produite pendant le processus d'importation."
+	},
+	"error_internal": {
+		"message": "Erreur Interne",
+		"description": "[error] erreur générique"
 	},
 	"error_invalid_key": {
 		"message": "Le paramètre key passé à la fonction n'est pas valide",
@@ -319,9 +395,17 @@
 		"message": "Aucun objet à vérifier n'a été fourni !",
 		"description": "[error] Aucun objet n'a été fourni."
 	},
+	"error_no_pinned": {
+		"message": "Vous n'avez pas encore d'Tab épinglés!",
+		"description": "[error] l'utilisateur a essayé de retirer les Tab épinglés mais il n'a pas d'Tab épinglés"
+	},
 	"error_no_setup_tab": {
 		"message": "Échec de la détection de la page de configuration.",
 		"description": "[error] L'extension n'a pas pu trouver où placer les Tabs favoris."
+	},
+	"error_no_unpinned": {
+		"message": "Vous n'avez pas d'Tab non épinglés!",
+		"description": "[error] l'utilisateur a essayé de retirer les Tab non épinglés mais il n'a pas d'Tab non épinglés"
 	},
 	"error_no_url": {
 		"message": "Aucune URL à vérifier !",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "n'était pas encore initialisé.",
 		"description": "[erreur] Erreur générique lorsqu'une variable n'est pas prête"
+	},
+	"error_pin_tab": {
+		"message": "Erreur lors de l'épinglage de Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Erreur lors du traitement des Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Erreur lors de la suppression d'autres Tabs.",
 		"description": "[erreur] Erreur générique utilisée lors de la suppression d'autres Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Erreur lors du retrait des Tab épinglés.",
+		"description": "[error] Erreur générique utilisée lors du retrait des Tab non épinglés"
+	},
 	"error_removing_tab": {
 		"message": "Erreur lors de la suppression de Tab.",
 		"description": "[erreur] Erreur générique utilisée lors de la suppression d'un Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Erreur lors du retrait des Tab non épinglés.",
+		"description": "[error] Erreur générique utilisée lors du retrait des Tab non épinglés"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Erreur lors de la suppression de tous les Tabs visibles.",
@@ -379,6 +475,14 @@
 		"message": "Impossible de synchroniser des Tabs nuls !",
 		"description": "[error] Aucune synchronisation n'a été effectuée."
 	},
+	"error_tab_click_count": {
+		"message": "Le Compte de Clics doit être un nombre non négatif",
+		"description": "[error] l'utilisateur a essayé de créer un Tab avec un compte de clics incorrect"
+	},
+	"error_tab_click_date": {
+		"message": "La Date de Clic doit être un nombre qui ne donne pas lieu à une date future",
+		"description": "[error] l'utilisateur a essayé de créer un Tab avec une date de clic incorrecte"
+	},
 	"error_tab_constructor": {
 		"message": "Utilisez Tab.create() au lieu de new Tab()",
 		"description": "[erreur] indiquer au développeur comment utiliser la classe Tab"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Le Tab n'a pas été trouvé.",
 		"description": "[error] Le Tab n'est pas inclus dans la liste."
+	},
+	"error_tab_not_pinned": {
+		"message": "L'Tab n'est pas encore épinglé!",
+		"description": "[error] l'utilisateur a essayé de désépingler un Tab non épinglé"
 	},
 	"error_tab_object_creation": {
 		"message": "Lors de l'appel avec un objet, ne passez rien d'autre.",
@@ -438,6 +546,10 @@
 		"message": "Requête inconnue.",
 		"description": "[erreur] Erreur générique après avoir reçu un message non reconnu"
 	},
+	"error_unpin_tab": {
+		"message": "Erreur lors du désépinglage de Tab",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Impossible de supprimer :\nImpossible de supprimer une page qui n'a jamais été enregistrée.",
 		"description": "[error] L'utilisateur a tenté de supprimer une page qui n'avait pas été enregistrée."
@@ -477,6 +589,14 @@
 	"general": {
 		"message": "Général",
 		"description": "Étiquette pour la catégorie de paramètres généraux"
+	},
+	"generic_pin_tabs": {
+		"message": "$pinned $tabs génériques",
+		"description": "Tab préférés de l'utilisateur qui ne sont pas spécifiques à l'organisation"
+	},
+	"generic_tabs": {
+		"message": "$tabs génériques",
+		"description": "Tab préférés de l'utilisateur qui ne sont pas spécifiques à l'organisation"
 	},
 	"help": {
 		"message": "Aide",
@@ -562,6 +682,10 @@
 		"message": "Type de fichier invalide.\nSeuls les fichiers JSON sont supportés.",
 		"description": "[error] Le fichier utilisé pour l'importation n'est pas un JSON."
 	},
+	"import_metadata": {
+		"message": "Importer les métadonnées Tab (\"Compte de Clics\", \"Date de Clic\" etc.).",
+		"description": "[label] importer tout ce qui est trouvé dans le fichier pendant le processus d'importation"
+	},
 	"import_successful": {
 		"message": "Importation réussie",
 		"description": "[import] l'importation a été effectuée. Ensuite, le nombre de lignes importées sera affiché"
@@ -573,6 +697,10 @@
 	"import_title": {
 		"message": "$import_tabs à partir d'un fichier JSON",
 		"description": "[popup] titre sur le bouton d'importation"
+	},
+	"inactive": {
+		"message": "Inactif",
+		"description": "Utilisé dans les bascules pour l'état inactif"
 	},
 	"insert_another": {
 		"message": "Insérer un autre",
@@ -722,6 +850,14 @@
 		"message": "Lien Org",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "$pinned $tabs d'organisation",
+		"description": "Tab qui sont spécifiques à l'organisation"
+	},
+	"org_tabs": {
+		"message": "$tabs d'organisation",
+		"description": "Tab qui sont spécifiques à l'organisation"
+	},
 	"other_org_info": {
 		"message": "Autres infos de l'Org",
 		"description": "[modal-title]"
@@ -733,6 +869,10 @@
 	"overwrite_tabs": {
 		"message": "Écraser les Tabs enregistrés.",
 		"description": "[label] Supprime tous les Tabs enregistrés lors du processus d'importation"
+	},
+	"pinned": {
+		"message": "Épinglé",
+		"description": "Tab de l'utilisateur qui se trouvent toujours au début de la liste"
 	},
 	"preserve_org_tabs": {
 		"message": "Conserver les Tabs pour d'autres orgs.",
@@ -825,6 +965,126 @@
 	"set_org_styler": {
 		"message": "Styliseur Org",
 		"description": "Étiquette pour configurer le style des onglets spécifiques à l’Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Étiquette pour prévisualiser l'apparence des Tab génériques lorsqu'ils sont épinglés"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Étiquette pour configurer le style des Tab génériques lorsqu'ils sont épinglés"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Étiquette pour prévisualiser l'apparence des Tab spécifiques à l'organisation lorsqu'ils sont épinglés"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Étiquette pour configurer le style des Tab spécifiques à l'organisation lorsqu'ils sont épinglés"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan pour les Tab génériques"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur de la bordure pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur de la bordure pour les Tab génériques"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur du texte pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur du texte pour les Tab génériques"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Invite à sélectionner des styles de décoration pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Invite à sélectionner des styles de décoration pour les Tab génériques"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan au survol pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan au survol pour les Tab génériques"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'ombre pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'ombre pour les Tab génériques"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Étiquette pour définir la couleur de la barre supérieure pour les Tab génériques actifs"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan pour les Tab d'organisation actifs"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan pour les Tab spécifiques à l'organisation"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Étiquette pour définir la couleur de la bordure pour les Tab actifs spécifiques à l'organisation"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Étiquette pour définir la couleur de la bordure pour les Tab d'organisation"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Étiquette pour définir la couleur du texte pour les Tab d'organisation actifs"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Étiquette pour définir la couleur du texte pour les Tab spécifiques à l'organisation"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Invite à sélectionner des styles de décoration pour les Tab actifs spécifiques à l'organisation"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Invite à sélectionner des styles de décoration pour les Tab d'organisation"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan au survol pour les Tab d'organisation actifs"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'arrière-plan au survol pour les Tab spécifiques à l'organisation"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'ombre pour les Tab actifs spécifiques à l'organisation"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Étiquette pour définir la couleur d'ombre pour les Tab d'organisation"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Étiquette pour définir la couleur de la barre supérieure pour les Tab d'organisation actifs"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Insérez la couleur de fond pour vos Tab-s génériques actives.",
@@ -946,6 +1206,42 @@
 		"message": "Passer",
 		"description": "[req_permission] Bouton pour NE PAS autoriser les permissions"
 	},
+	"style_generic_pinned": {
+		"message": "Styliser les $generic_tabs épinglés",
+		"description": "[options] Étiquette de bascule pour styliser les Tab génériques épinglés"
+	},
+	"style_org_pinned": {
+		"message": "Styliser les $org_tabs épinglés",
+		"description": "[options] Étiquette de bascule pour styliser les Tab d'organisation épinglés"
+	},
+	"style_settings_background_label": {
+		"message": "Insérer la couleur d'arrière-plan pour vos",
+		"description": "Étiquette pour définir la couleur d'arrière-plan"
+	},
+	"style_settings_border_color_label": {
+		"message": "Insérer la couleur de la bordure pour vos",
+		"description": "Étiquette pour définir la couleur de la bordure"
+	},
+	"style_settings_color_label": {
+		"message": "Insérer la couleur du texte pour vos",
+		"description": "Étiquette pour définir la couleur du texte"
+	},
+	"style_settings_decoration_label": {
+		"message": "Choisissez un ou plusieurs styles de décoration pour vos",
+		"description": "Invite à sélectionner des styles de décoration"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Insérer la couleur d'arrière-plan au survol pour vos",
+		"description": "Étiquette pour définir la couleur d'arrière-plan au survol"
+	},
+	"style_settings_shadow_label": {
+		"message": "Insérer la couleur d'ombre pour vos",
+		"description": "Étiquette pour définir la couleur d'ombre"
+	},
+	"style_settings_top_active_label": {
+		"message": "Insérer la couleur pour la barre en haut de vos actifs",
+		"description": "Étiquette pour définir la couleur active de la barre supérieure"
+	},
 	"successfully_imported": {
 		"message": "Importation réussie",
 		"description": "[toast] L'utilisateur a ajouté des Tabs depuis un fichier externe."
@@ -1029,6 +1325,10 @@
 	"users": {
 		"message": "Utilisateurs",
 		"description": "Le nom de la page liée à ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Veuillez exporter vos nouveaux Tab car le fichier que vous avez utilisé ne sera pas pris en charge dans les futures versions.",
+		"description": "[warning] l'utilisateur a importé ses Tab en utilisant une configuration obsolète du fichier json"
 	},
 	"where_to": {
 		"message": "Où aller ?",

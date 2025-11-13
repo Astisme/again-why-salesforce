@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "活动的",
+		"description": "用于切换按钮以表示活动状态"
+	},
+	"active_generic_pin_tabs": {
+		"message": "活动的 $generic_pin_tabs",
+		"description": "用户当前活动的通用已固定 Tab"
+	},
+	"active_generic_tabs": {
+		"message": "活动的 $generic_tabs",
+		"description": "用户当前活动的通用 Tab"
+	},
+	"active_org_pin_tabs": {
+		"message": "活动的 $org_pin_tabs",
+		"description": "用户当前活动的组织已固定 Tab"
+	},
+	"active_org_tabs": {
+		"message": "活动的 $org_tabs",
+		"description": "用户当前活动的组织 Tab"
+	},
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[上下文菜单]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 固定",
+		"description": "[上下文菜单] 允许用户将此 Tab 保留在列表开头"
+	},
 	"cxm_remove": {
 		"message": "💥 移除 Tab(s)",
 		"description": "[上下文菜单]"
@@ -131,6 +155,10 @@
 		"message": "↔️ 其他 Tabs",
 		"description": "[上下文菜单]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 移除已固定 Tab",
+		"description": "[上下文菜单] 允许用户移除其已固定的 Tab"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 右侧的 Tabs",
 		"description": "[上下文菜单]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ 这个 Tab",
 		"description": "[上下文菜单]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 移除未固定 Tab",
+		"description": "[上下文菜单] 允许用户移除其未固定的 Tab"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 重置默认Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 排序 Tab",
 		"description": "上下文菜单，让用户自动排序他们的 Tab（父菜单）"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ 按使用次数",
+		"description": "上下文菜单，允许用户按点击 Tab 的次数排序"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ 按时间",
+		"description": "上下文菜单，允许用户按点击 Tab 的时间排序"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 按标签",
 		"description": "上下文菜单，让用户按标签排序他们的 Tab"
@@ -163,8 +203,24 @@
 		"message": "🤖 按 URL",
 		"description": "上下文菜单，让用户按 URL 排序他们的 Tab"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 隐藏非组织 Tab",
+		"description": "[上下文菜单] 暂时隐藏通用 Tab"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 隐藏组织 Tab",
+		"description": "[上下文菜单] 暂时隐藏组织 Tab"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 取消固定",
+		"description": "[上下文菜单] 允许用户从其固定列表中移除此 Tab"
+	},
 	"cxm_update": {
 		"message": "✏️ 更新 Tab",
+		"description": "[上下文菜单]"
+	},
+	"cxm_update_org": {
+		"message": "👜 切换组织",
 		"description": "[上下文菜单]"
 	},
 	"cxm_update_tab": {
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "添加 Tab 时出错。",
 		"description": "[错误] 添加 Tab 时使用的一般错误"
+	},
+	"error_already_pinned": {
+		"message": "此 Tab 已被固定。",
+		"description": "[错误] 用户试图固定一个已被固定的 Tab"
+	},
+	"error_already_unpinned": {
+		"message": "此 Tab 已被取消固定。",
+		"description": "[错误] 用户试图取消固定一个已被取消固定的 Tab"
+	},
+	"error_cannot_move": {
+		"message": "此 Tab 无法移动！",
+		"description": "[错误] 所请求的 Tab 目前无法移动。"
+	},
+	"error_cannot_move_dir": {
+		"message": "此 Tab 无法朝此方向移动！",
+		"description": "[错误] 所请求的 Tab 目前无法移动。"
 	},
 	"error_check_update": {
 		"message": "检查更新时出错",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "导入过程中出错：\n",
 		"description": "[错误] 导入过程中发生错误"
+	},
+	"error_internal": {
+		"message": "内部错误",
+		"description": "[错误] 一般错误"
 	},
 	"error_invalid_key": {
 		"message": "传递给函数的键参数无效",
@@ -319,9 +395,17 @@
 		"message": "没有要检查的对象！",
 		"description": "[错误] 未传递对象"
 	},
+	"error_no_pinned": {
+		"message": "您还没有任何已固定的 Tab！",
+		"description": "[错误] 用户试图移除已固定的 Tab，但他们没有任何已固定的 Tab"
+	},
 	"error_no_setup_tab": {
 		"message": "未能找到设置标签页。",
 		"description": "[错误] 扩展程序无法找到放置收藏 Tabs 的位置。"
+	},
+	"error_no_unpinned": {
+		"message": "您没有任何未固定的 Tab！",
+		"description": "[错误] 用户试图移除未固定的 Tab，但他们没有任何未固定的 Tab"
 	},
 	"error_no_url": {
 		"message": "没有要检查的 URL！",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "尚未初始化。",
 		"description": "[错误] 变量未准备就绪时出现的一般错误"
+	},
+	"error_pin_tab": {
+		"message": "固定 Tab 时出错",
+		"description": "[错误]"
 	},
 	"error_processing_tabs": {
 		"message": "处理 Tabs 时出错。",
@@ -355,9 +443,17 @@
 		"message": "移除其他 Tabs 时出错。",
 		"description": "[错误] 移除其他 Tabs 时使用的一般错误"
 	},
+	"error_removing_pin_tabs": {
+		"message": "移除已固定 Tab 时出错。",
+		"description": "[错误] 移除非固定 Tab 时使用的通用错误"
+	},
 	"error_removing_tab": {
 		"message": "移除 Tab 时出错。",
 		"description": "[错误] 移除 Tab 时使用的一般错误"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "移除未固定 Tab 时出错。",
+		"description": "[错误] 移除未固定 Tab 时使用的通用错误"
 	},
 	"error_removing_visible_tabs": {
 		"message": "删除所有可见Tab时出错。",
@@ -379,6 +475,14 @@
 		"message": "无法同步空的 Tabs！",
 		"description": "[错误] 尝试同步无内容"
 	},
+	"error_tab_click_count": {
+		"message": "点击次数必须是非负数",
+		"description": "[错误] 用户试图创建一个点击次数错误的 Tab"
+	},
+	"error_tab_click_date": {
+		"message": "点击日期必须是一个不会导致未来日期的数字",
+		"description": "[错误] 用户试图创建一个点击日期错误的 Tab"
+	},
 	"error_tab_constructor": {
 		"message": "请使用 Tab.create() 而不是 new Tab() 来使用 Tab 类",
 		"description": "[错误] 告诉开发者如何使用 Tab 类"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "未找到 Tab。",
 		"description": "[错误] Tab 未包含在数组中"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab 尚未固定！",
+		"description": "[错误] 用户试图取消固定一个未固定的 Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "使用对象调用时，请勿传递任何其他内容。",
@@ -439,6 +547,10 @@
 		"message": "未知请求。",
 		"description": "[错误] 收到无法识别的消息后出现的一般错误"
 	},
+	"error_unpin_tab": {
+		"message": "取消固定 Tab 时出错",
+		"description": "[错误]"
+	},
 	"error_useless_remove": {
 		"message": "无法移除：\n无法移除之前未保存的页面",
 		"description": "[错误] 用户尝试移除尚未保存的页面"
@@ -478,6 +590,14 @@
 	"general": {
 		"message": "常规",
 		"description": "常规设置类别的标签"
+	},
+	"generic_pin_tabs": {
+		"message": "通用 $pinned Tab",
+		"description": "用户收藏的非组织特定的 Tab"
+	},
+	"generic_tabs": {
+		"message": "通用 Tab",
+		"description": "用户收藏的非组织特定的 Tab"
 	},
 	"help": {
 		"message": "帮助",
@@ -563,6 +683,10 @@
 		"message": "无效的文件类型。\n仅支持 JSON 文件。",
 		"description": "[错误] 用于导入的文件不是 JSON"
 	},
+	"import_metadata": {
+		"message": "导入 Tab 元数据（“点击次数”、“点击日期”等）。",
+		"description": "[标签] 在导入过程中导入文件中找到的所有内容"
+	},
 	"import_successful": {
 		"message": "成功导入",
 		"description": "[导入] 导入已完成。之后将显示导入了多少条记录"
@@ -574,6 +698,10 @@
 	"import_title": {
 		"message": "从 JSON 文件 $import_tabs",
 		"description": "[弹出窗口] 导入按钮上的标题"
+	},
+	"inactive": {
+		"message": "非活动的",
+		"description": "用于切换按钮以表示非活动状态"
 	},
 	"insert_another": {
 		"message": "插入另一个",
@@ -723,6 +851,14 @@
 		"message": "组织链接",
 		"description": "[输入标签]"
 	},
+	"org_pin_tabs": {
+		"message": "组织 $pinned Tab",
+		"description": "组织特定的 Tab"
+	},
+	"org_tabs": {
+		"message": "组织 Tab",
+		"description": "组织特定的 Tab"
+	},
 	"other_org_info": {
 		"message": "其他组织信息",
 		"description": "[模态框标题]"
@@ -734,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "覆盖已保存的 Tabs。",
 		"description": "[标签] 在导入过程中删除所有已保存的 Tabs"
+	},
+	"pinned": {
+		"message": "已固定",
+		"description": "用户的 Tab，始终位于列表的开头"
 	},
 	"preserve_org_tabs": {
 		"message": "保留其他组织的 Tabs。",
@@ -826,6 +966,126 @@
 	"set_org_styler": {
 		"message": "组织样式",
 		"description": "配置组织专用 Tabs 样式的标签"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "预览通用 Tab 固定时外观的标签"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "配置通用 Tab 固定时样式的标签"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "预览组织特定 Tab 固定时外观的标签"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "配置组织特定 Tab 固定时样式的标签"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "选择活动的通用 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "选择通用 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置顶部栏颜色的标签"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "为活动的组织 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "为组织特定 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "为活动的组织特定 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "为组织 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "为活动的组织 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "为组织特定 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "选择活动的组织特定 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "选择组织 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "为活动的组织 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "为组织特定 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "为活动的组织特定 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "为组织 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "为活动的组织 Tab 设置顶部栏颜色的标签"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "插入您的活动通用 Tab 的背景颜色。",
@@ -947,6 +1207,42 @@
 		"message": "跳过",
 		"description": "[请求权限] 不允许权限的按钮"
 	},
+	"style_generic_pinned": {
+		"message": "样式设置已固定的 $generic_tabs",
+		"description": "[选项] 切换标签以设置已固定的通用 Tab 的样式"
+	},
+	"style_org_pinned": {
+		"message": "样式设置已固定的 $org_tabs",
+		"description": "[选项] 切换标签以设置已固定的组织 Tab 的样式"
+	},
+	"style_settings_background_label": {
+		"message": "插入您的背景颜色",
+		"description": "设置背景颜色的标签"
+	},
+	"style_settings_border_color_label": {
+		"message": "插入您的边框颜色",
+		"description": "设置边框颜色的标签"
+	},
+	"style_settings_color_label": {
+		"message": "插入您的文本颜色",
+		"description": "设置文本颜色的标签"
+	},
+	"style_settings_decoration_label": {
+		"message": "为您的 Tab 选择一个或多个装饰样式",
+		"description": "选择装饰样式的提示"
+	},
+	"style_settings_hover_background_label": {
+		"message": "插入您的悬停背景颜色",
+		"description": "设置悬停背景颜色的标签"
+	},
+	"style_settings_shadow_label": {
+		"message": "插入您的阴影颜色",
+		"description": "设置阴影颜色的标签"
+	},
+	"style_settings_top_active_label": {
+		"message": "插入您的活动 Tab 顶部的栏颜色",
+		"description": "设置顶部栏活动颜色的标签"
+	},
 	"successfully_imported": {
 		"message": "成功导入",
 		"description": "[提示信息] 用户从外部文件添加了 Tabs"
@@ -1030,6 +1326,10 @@
 	"users": {
 		"message": "用户",
 		"description": "与 ManageUsers/home 相关的页面名称"
+	},
+	"warn_upgrade_backup": {
+		"message": "请导出您的新 Tab，因为您使用的文件将不再受未来版本支持。",
+		"description": "[警告] 用户使用已弃用的 json 文件配置导入了他们的 Tab"
 	},
 	"where_to": {
 		"message": "去哪里？",

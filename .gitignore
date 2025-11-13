@@ -8,7 +8,5 @@ missing-keys-report.json
 dmg_staging
 safari-*/
 .env
-eslint.config.js
 node_modules/
 package-lock.json
-package.json

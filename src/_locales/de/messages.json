@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktiv",
+		"description": "Wird in Umschaltern für den aktiven Zustand verwendet"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktive $generic_pin_tabs",
+		"description": "Generische angepinnte Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
+	"active_generic_tabs": {
+		"message": "aktive $generic_tabs",
+		"description": "Generische Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktive $org_pin_tabs",
+		"description": "Organisations-spezifische angepinnte Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
+	"active_org_tabs": {
+		"message": "aktive $org_tabs",
+		"description": "Organisations-spezifische Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[Kontextmenü]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Anpinnen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, diese Tab-Karte am Anfang seiner Liste zu behalten"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(s) entfernen",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Andere Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Angepinnte entfernen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, seine angepinnten Tab-Karten zu entfernen"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs rechts",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Diesen Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Nicht angepinnte entfernen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, seine nicht angepinnten Tab-Karten zu entfernen"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Standard-Tabs zurücksetzen",
@@ -151,6 +183,14 @@
 		"message": "🎯 Tabs sortieren",
 		"description": "Kontextmenü, mit dem Benutzer ihre Tabs automatisch sortieren können (Hauptmenü)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ nach Nutzung",
+		"description": "Kontextmenü, um Benutzern das Sortieren ihrer Tab-Karten danach zu ermöglichen, wie oft sie auf ihre Tab-Karten klicken"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ nach Zeit",
+		"description": "Kontextmenü, um Benutzern das Sortieren ihrer Tab-Karten danach zu ermöglichen, wann auf die Tab-Karten geklickt wurde"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 nach Label",
 		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach Beschriftung sortieren können"
@@ -163,8 +203,24 @@
 		"message": "🤖 nach Url",
 		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach URL sortieren können"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Nicht-Org Tab-Karten ausblenden",
+		"description": "[context-menu] generische Tab-Karten vorübergehend ausblenden"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Org Tab-Karten ausblenden",
+		"description": "[context-menu] Org Tab-Karten vorübergehend ausblenden"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Loslösen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, diese Tab-Karte aus seiner angepinnten Liste zu entfernen"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab aktualisieren",
+		"description": "[context-menu]"
+	},
+	"cxm_update_org": {
+		"message": "👜 Org umschalten",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -194,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Fehler beim Hinzufügen eines Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Hinzufügen eines Tabs"
+	},
+	"error_already_pinned": {
+		"message": "Diese Tab-Karte war bereits angepinnt.",
+		"description": "[error] der Benutzer versuchte, eine bereits angepinnte Tab-Karte anzupinnen"
+	},
+	"error_already_unpinned": {
+		"message": "Diese Tab-Karte war bereits losgelöst.",
+		"description": "[error] der Benutzer versuchte, eine bereits losgelöste Tab-Karte loszulösen"
+	},
+	"error_cannot_move": {
+		"message": "Diese Tab-Karte kann nicht verschoben werden!",
+		"description": "[error] die angeforderte Tab-Karte kann momentan nicht verschoben werden."
+	},
+	"error_cannot_move_dir": {
+		"message": "Diese Tab-Karte kann nicht in diese Richtung verschoben werden!",
+		"description": "[error] die angeforderte Tab-Karte kann momentan nicht verschoben werden."
 	},
 	"error_check_update": {
 		"message": "Fehler beim Überprüfen auf Updates",
@@ -246,6 +318,10 @@
 	"error_import": {
 		"message": "Fehler beim Import:\n",
 		"description": "[error] Während des Importvorgangs ist ein Fehler aufgetreten."
+	},
+	"error_internal": {
+		"message": "Interner Fehler",
+		"description": "[error] allgemeiner Fehler"
 	},
 	"error_invalid_key": {
 		"message": "Der an die Funktion übergebene key-Parameter ist ungültig",
@@ -319,9 +395,17 @@
 		"message": "Kein Objekt zum Überprüfen vorhanden!",
 		"description": "[error] Es wurde kein Objekt übergeben."
 	},
+	"error_no_pinned": {
+		"message": "Sie haben noch keine angepinnten Tab-Karten!",
+		"description": "[error] der Benutzer versuchte, die angepinnten Tab-Karten zu entfernen, hat aber keine angepinnten Tab-Karten"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup-Tab konnte nicht gefunden werden.",
 		"description": "[error] Die Erweiterung konnte den Platz für die favorisierten Tabs nicht finden."
+	},
+	"error_no_unpinned": {
+		"message": "Sie haben keine nicht angepinnten Tab-Karten!",
+		"description": "[error] der Benutzer versuchte, die nicht angepinnten Tab-Karten zu entfernen, hat aber keine nicht angepinnten Tab-Karten"
 	},
 	"error_no_url": {
 		"message": "Keine URL zum Überprüfen vorhanden!",
@@ -330,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Noch nicht initialisiert.",
 		"description": "[error] Allgemeiner Fehler, wenn eine Variable nicht bereit ist"
+	},
+	"error_pin_tab": {
+		"message": "Fehler beim Anpinnen der Tab-Karte",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Fehler beim Verarbeiten der Tabs.",
@@ -355,9 +443,17 @@
 		"message": "Fehler beim Entfernen anderer Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Entfernen anderer Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Fehler beim Entfernen angepinnter Tab-Karten.",
+		"description": "[error] Allgemeiner Fehler, der beim Entfernen nicht angepinnter Tab-Karten verwendet wird"
+	},
 	"error_removing_tab": {
 		"message": "Fehler beim Entfernen des Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Entfernen eines Tabs"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Fehler beim Entfernen nicht angepinnter Tab-Karten.",
+		"description": "[error] Allgemeiner Fehler, der beim Entfernen nicht angepinnter Tab-Karten verwendet wird"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Fehler beim Entfernen aller sichtbaren Tabs.",
@@ -379,6 +475,14 @@
 		"message": "Leere Tabs können nicht synchronisiert werden!",
 		"description": "[error] Es wurde versucht, nichts zu synchronisieren."
 	},
+	"error_tab_click_count": {
+		"message": "Die Klickanzahl muss eine nicht-negative Zahl sein",
+		"description": "[error] Benutzer versuchte, eine Tab-Karte mit einer falschen Klickanzahl zu erstellen"
+	},
+	"error_tab_click_date": {
+		"message": "Das Klickdatum muss eine Zahl sein, die nicht zu einem Datum in der Zukunft führt",
+		"description": "[error] Benutzer versuchte, eine Tab-Karte mit einem falschen Klickdatum zu erstellen"
+	},
 	"error_tab_constructor": {
 		"message": "Verwende Tab.create() anstelle von new Tab()",
 		"description": "[error] Entwickler darüber informieren, wie die Klasse Tab verwendet wird"
@@ -390,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab wurde nicht gefunden.",
 		"description": "[error] Der Tab ist in der Liste nicht enthalten."
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab-Karte ist noch nicht angepinnt!",
+		"description": "[error] Benutzer versuchte, eine nicht angepinnte Tab-Karte loszulösen"
 	},
 	"error_tab_object_creation": {
 		"message": "Beim Aufruf mit einem Objekt dürfen keine zusätzlichen Parameter übergeben werden.",
@@ -438,6 +546,10 @@
 		"message": "Unbekannte Anfrage.",
 		"description": "[error] Allgemeiner Fehler nach Empfang einer unbekannten Nachricht"
 	},
+	"error_unpin_tab": {
+		"message": "Fehler beim Loslösen der Tab-Karte",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Kann nicht entfernt werden:\nEine Seite, die nie gespeichert wurde, kann nicht entfernt werden.",
 		"description": "[error] Es wurde versucht, eine Seite zu entfernen, die noch nicht gespeichert wurde."
@@ -477,6 +589,14 @@
 	"general": {
 		"message": "Allgemein",
 		"description": "Bezeichnung für die Kategorie Allgemeine Einstellungen"
+	},
+	"generic_pin_tabs": {
+		"message": "generische $pinned $tabs",
+		"description": "Bevorzugte Tab-Karten des Benutzers, die nicht organisations-spezifisch sind"
+	},
+	"generic_tabs": {
+		"message": "generische $tabs",
+		"description": "Bevorzugte Tab-Karten des Benutzers, die nicht organisations-spezifisch sind"
 	},
 	"help": {
 		"message": "Hilfe",
@@ -562,6 +682,10 @@
 		"message": "Ungültiger Dateityp.\nNur JSON-Dateien werden unterstützt.",
 		"description": "[error] Die für den Import verwendete Datei ist kein JSON."
 	},
+	"import_metadata": {
+		"message": "Tab-Metadaten importieren (\"Klickanzahl\", \"Klickdatum\" usw.).",
+		"description": "[label] alles importieren, was während des Importvorgangs in der Datei gefunden wird"
+	},
 	"import_successful": {
 		"message": "Erfolgreich importiert",
 		"description": "[import] Der Import wurde abgeschlossen. Anschließend wird die Anzahl der importierten Datensätze angezeigt"
@@ -573,6 +697,10 @@
 	"import_title": {
 		"message": "$import_tabs aus JSON-Datei",
 		"description": "[Popup] Titel auf der Import-Schaltfläche"
+	},
+	"inactive": {
+		"message": "Inaktiv",
+		"description": "Wird in Umschaltern für den inaktiven Zustand verwendet"
 	},
 	"insert_another": {
 		"message": "Weiteren einfügen",
@@ -722,6 +850,14 @@
 		"message": "Org-Link",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "Org $pinned $tabs",
+		"description": "Tab-Karten, die organisations-spezifisch sind"
+	},
+	"org_tabs": {
+		"message": "Org $tabs",
+		"description": "Tab-Karten, die organisations-spezifisch sind"
+	},
 	"other_org_info": {
 		"message": "Weitere Org-Informationen",
 		"description": "[modal-title]"
@@ -733,6 +869,10 @@
 	"overwrite_tabs": {
 		"message": "Gespeicherte Tabs überschreiben.",
 		"description": "[label] Löscht alle gespeicherten Tabs während des Importvorgangs"
+	},
+	"pinned": {
+		"message": "Angepinnt",
+		"description": "Tab-Karten des Benutzers, die sich immer am Anfang der Liste befinden"
 	},
 	"preserve_org_tabs": {
 		"message": "Tabs für andere Orgs beibehalten.",
@@ -825,6 +965,126 @@
 	"set_org_styler": {
 		"message": "Org-Styler",
 		"description": "Bezeichnung zum Konfigurieren des Stils orgspezifischer Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Beschriftung zur Vorschau des Erscheinungsbilds generischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Beschriftung zur Konfiguration des Stils generischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Beschriftung zur Vorschau des Erscheinungsbilds organisations-spezifischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Beschriftung zur Konfiguration des Stils organisations-spezifischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Farbe der oberen Leiste für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für aktive Org Tab-Karten"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für aktive organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für Org Tab-Karten"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für aktive Org Tab-Karten"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für aktive organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für Org Tab-Karten"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für aktive Org Tab-Karten"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für aktive organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für Org Tab-Karten"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Farbe der oberen Leiste für aktive Org Tab-Karten"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Geben Sie die Hintergrundfarbe für Ihre aktiven generischen Tab-s ein.",
@@ -946,6 +1206,42 @@
 		"message": "Überspringen",
 		"description": "[req_permission] Schaltfläche, um keine Berechtigungen zu erteilen"
 	},
+	"style_generic_pinned": {
+		"message": "Stil angepinnter $generic_tabs",
+		"description": "[options] Umschaltbeschriftung zum Stylen angepinnter generischer Tab-Karten"
+	},
+	"style_org_pinned": {
+		"message": "Stil angepinnter $org_tabs",
+		"description": "[options] Umschaltbeschriftung zum Stylen angepinnter Org Tab-Karten"
+	},
+	"style_settings_background_label": {
+		"message": "Geben Sie die Hintergrundfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe"
+	},
+	"style_settings_border_color_label": {
+		"message": "Geben Sie die Rahmenfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe"
+	},
+	"style_settings_color_label": {
+		"message": "Geben Sie die Farbe des Textes für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Textfarbe"
+	},
+	"style_settings_decoration_label": {
+		"message": "Wählen Sie einen oder mehrere Dekorationsstile für Ihre aus",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Geben Sie die Hover-Hintergrundfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe"
+	},
+	"style_settings_shadow_label": {
+		"message": "Geben Sie die Schattenfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe"
+	},
+	"style_settings_top_active_label": {
+		"message": "Geben Sie die Farbe für die Leiste oben in Ihren aktiven ein",
+		"description": "Beschriftung zum Festlegen der aktiven Farbe der oberen Leiste"
+	},
 	"successfully_imported": {
 		"message": "Erfolgreich importiert",
 		"description": "[toast] Der Benutzer hat Tabs aus einer externen Datei hinzugefügt."
@@ -1029,6 +1325,10 @@
 	"users": {
 		"message": "Benutzer",
 		"description": "Der Name der Seite, die sich auf ManageUsers/home bezieht"
+	},
+	"warn_upgrade_backup": {
+		"message": "Bitte exportieren Sie Ihre neuen Tab-Karten, da die von Ihnen verwendete Datei in zukünftigen Versionen nicht mehr unterstützt wird.",
+		"description": "[warning] der Benutzer hat seine Tab-Karten mit einer veralteten Konfiguration der json-Datei importiert"
 	},
 	"where_to": {
 		"message": "Wohin?",
