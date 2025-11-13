@@ -247,18 +247,18 @@ async function init(tabs = null) {
 	}
 	if (allTabs.length > 0) {
 		const frag = document.createDocumentFragment();
-    const pinnedItems = allTabs.pinned;
-    for(const i in allTabs){
-      const row = allTabs[i];
+		const pinnedItems = allTabs.pinned;
+		for (const i in allTabs) {
+			const row = allTabs[i];
 			// TODO add option to hide or show not-this-org tabs
 			// hide not-this-org tabs
 			frag.appendChild(
 				generateRowTemplate(
 					row,
-          {
-            hide: !(row.org == null || row.org === orgName),
-            isPinned: i < pinnedItems,
-          },
+					{
+						hide: !(row.org == null || row.org === orgName),
+						isPinned: i < pinnedItems,
+					},
 				),
 			);
 		}
