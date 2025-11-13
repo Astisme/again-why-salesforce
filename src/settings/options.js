@@ -185,7 +185,7 @@ function createStyleIds({
 		throw new Error("error_required_params");
 	}
 	const styleType = tabType === TAB_GENERIC_STYLE ? styleGeneric : styleOrg;
-  const newPre = prefix !== "" ? `${EXTENSION_NAME}-${prefix}` : EXTENSION_NAME;
+  const newPre = prefix === "" ? EXTENSION_NAME : `${EXTENSION_NAME}-${prefix}`;
 	const suffix = `${styleType}-${state}${postfix}`;
 	return {
     background: `${newPre}-${TAB_STYLE_BACKGROUND}-${suffix}`,
