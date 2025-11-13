@@ -81,7 +81,7 @@ export function bg_getStorage(callback, key = WHY_KEY) {
  * Supports optional callback usage or returns a Promise with the result.
  *
  * @param {string|string[]|null} [settingKeys=null] - Single key or array of keys to retrieve. If null, all settings are returned.
- * @param {string} [key=SETTINGS_KEY] - The storage key namespace to retrieve settings from.
+ * @param {string|string[]} [key=SETTINGS_KEY] - The storage key namespace to retrieve settings from.
  * @param {Function|null} [callback=null] - Optional callback to handle the retrieved settings.
  * @returns {Promise<Object|Object[]>|void} A Promise resolving to the requested settings, or void if a callback is provided.
  */
@@ -123,11 +123,16 @@ async function bg_getStyleSettings(
       GENERIC_PINNED_TAB_STYLE_KEY,
       ORG_PINNED_TAB_STYLE_KEY,
     ];
-  return await bg_getSettings(
+  const settings = await bg_getSettings(
     undefined,
     key,
     callback,
   );
+  if(Object.values(settings).every(s =>
+    s?.[1] == null
+  ))
+    return null;
+  return settings;
 }
 
 /**
@@ -456,11 +461,25 @@ async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles){
   return styles;
 }
 
+async function _createDefaultStyleWrapper(availableStyles, key = ORG_TAB_STYLE_KEY, newKey = ORG_PINNED_TAB_STYLE_KEY, ...styles){
+  const filteredStyles = availableStyles[key]
+    ?.filter(el => 
+      el.id !== PREVENT_DEFAULT_OVERRIDE &&
+      // override user-set background
+      el.id !== TAB_STYLE_BACKGROUND 
+    ) ?? [];
+  return await _createDefaultStyle(
+    newKey,
+    ...filteredStyles,
+    ...styles,
+  );
+}
+
 /**
  * Ensures default organizational style settings exist;
  * if none are found, creates and saves default styles for org-specific tabs.
  */
-async function setDefalutOrgStyle() {
+async function setDefaultOrgStyle() {
 	const availableStyles = (await bg_getStyleSettings()) ?? {};
   // if no style settings have been found,
   // create the default style for org-specific Tabs & send it to the background.
@@ -470,7 +489,7 @@ async function setDefalutOrgStyle() {
     { id: TAB_STYLE_BOLD, forActive: true, value: TAB_STYLE_BOLD },
   ];
   if(availableStyles[ORG_TAB_STYLE_KEY] == null){
-    availableStyles[ORG_TAB_STYLE_KEY] = await _createDefaultStyle(ORG_TAB_STYLE_KEY, boldStyle);
+    availableStyles[ORG_TAB_STYLE_KEY] = await _createDefaultStyle(ORG_TAB_STYLE_KEY, ...boldStyle);
   }
   // for pinned Tabs, assign the same current styles used for the unpinned counterparts
   // but change the color of the background to the default one
@@ -479,27 +498,19 @@ async function setDefalutOrgStyle() {
     { id: TAB_STYLE_BACKGROUND, forActive: true, value: "mistyrose" },
   ];
   if(availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null){
-    availableStyles[ORG_PINNED_TAB_STYLE_KEY] = await _createDefaultStyle(
+    availableStyles[ORG_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
+      availableStyles,
+      ORG_TAB_STYLE_KEY,
       ORG_PINNED_TAB_STYLE_KEY,
-      ...availableStyles[ORG_TAB_STYLE_KEY]
-        ?.filter(el => 
-          el.id !== PREVENT_DEFAULT_OVERRIDE &&
-          // override user-set background
-          el.id !== TAB_STYLE_BACKGROUND 
-        ),
       ...pinnedStyles,
     );
   }
   if(availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] == null){
-    availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] = await _createDefaultStyle(
+    availableStyles[GENERIC_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(
+      availableStyles,
+      GENERIC_TAB_STYLE_KEY,
       GENERIC_PINNED_TAB_STYLE_KEY,
-      ...availableStyles[GENERIC_TAB_STYLE_KEY]
-        ?.filter(el => 
-          el.id !== PREVENT_DEFAULT_OVERRIDE &&
-          // override user-set background
-          el.id !== TAB_STYLE_BACKGROUND 
-        ),
-      ...pinnedStyles
+      ...pinnedStyles,
     );
   }
 }
@@ -591,7 +602,7 @@ function setExtensionBrowserListeners() {
  */
 function main() {
 	setExtensionBrowserListeners();
-	setDefalutOrgStyle();
+	setDefaultOrgStyle();
 	listenToExtensionMessages();
 	listenToExtensionCommands();
 	checkAddRemoveContextMenus();

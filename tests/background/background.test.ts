@@ -18,6 +18,7 @@ import {
 	SETTINGS_KEY,
 	TAB_ADD_FRONT,
 	WHY_KEY,
+  USER_LANGUAGE,
 } from "/constants.js";
 
 const oldtabs = [
@@ -26,13 +27,13 @@ const oldtabs = [
 	{ label: "n", url: "s", org: "l" },
 	{ label: "i", url: "r" },
 ];
-mockStorage.againWhySalesforce = oldtabs;
-mockStorage.settings = [
-	{ enabled: "es", id: "picked-language" }, // needed for context menus
+mockStorage[WHY_KEY] = oldtabs;
+mockStorage[SETTINGS_KEY] = [
+	{ enabled: "es", id: USER_LANGUAGE }, // needed for context menus
 	{ enabled: true, id: NO_RELEASE_NOTES },
 	{ enabled: false, id: TAB_ADD_FRONT },
 ];
-mockStorage["settings-tab_org_style"] = [{
+mockStorage[ORG_TAB_STYLE_KEY] = [{
 	id: "italic",
 	forActive: true,
 	value: "italic",
@@ -180,14 +181,14 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 	});
 
 	await t.step("set with GENERIC_TAB_STYLE_KEY", async () => {
-		const oldgenstyle = await getStyleSettings();
+		const oldgenstyle = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
 		assert(oldgenstyle == null);
 		await bg_setStorage(
 			{ id: "underline", forActive: false, value: "underline" },
 			undefined,
 			GENERIC_TAB_STYLE_KEY,
 		);
-		const genstyle = await getStyleSettings();
+		const genstyle = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
 		assert(genstyle != null);
 		assert(Array.isArray(genstyle));
 		assertEquals(genstyle.length, 1);
@@ -199,7 +200,7 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 			undefined,
 			GENERIC_TAB_STYLE_KEY,
 		);
-		const newgenstyle = await getStyleSettings();
+		const newgenstyle = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
 		assert(newgenstyle != null);
 		assert(Array.isArray(newgenstyle));
 		assertEquals(newgenstyle.length, 1);
@@ -208,7 +209,7 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 			undefined,
 			GENERIC_TAB_STYLE_KEY,
 		); // reenable for non-active Tab
-		const bothgenstyle = await getStyleSettings();
+		const bothgenstyle = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
 		assert(bothgenstyle != null);
 		assert(Array.isArray(bothgenstyle));
 		assertEquals(bothgenstyle.length, 2);
