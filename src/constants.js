@@ -138,28 +138,28 @@ export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
 export const ORG_PINNED_TAB_STYLE_KEY =
 	`${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
-const GENERIC_STYLE_KEYS = [
+const GENERIC_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
 	GENERIC_PINNED_TAB_STYLE_KEY,
-];
+]);
 export function isGenericKey(key = GENERIC_TAB_STYLE_KEY) {
-	return GENERIC_STYLE_KEYS.includes(key);
+	return GENERIC_STYLE_KEYS.has(key);
 }
-const PINNED_STYLE_KEYS = [
+const PINNED_STYLE_KEYS = new Set([
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	ORG_PINNED_TAB_STYLE_KEY,
-];
+]);
 export function isPinnedKey(key = GENERIC_TAB_STYLE_KEY) {
-	return PINNED_STYLE_KEYS.includes(key);
+	return PINNED_STYLE_KEYS.has(key);
 }
-const ALL_STYLE_KEYS = [
+const ALL_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	ORG_PINNED_TAB_STYLE_KEY,
-];
+]);
 export function isStyleKey(key = GENERIC_TAB_STYLE_KEY) {
-	return ALL_STYLE_KEYS.includes(key);
+	return ALL_STYLE_KEYS.has(key);
 }
 const PINNED_KEY_FINDER = {
 	// true = isGeneric
