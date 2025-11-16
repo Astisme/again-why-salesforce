@@ -46,7 +46,7 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  const handler = require("./.github/scripts/comment-on-pr.cjs");
                   await handler({
                     github,
                     context,
@@ -67,7 +67,7 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  const handler = require("./.github/scripts/comment-on-pr.cjs");
                   await handler({
                     github,
                     context,
@@ -84,7 +84,7 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  const handler = require("./.github/scripts/comment-on-pr.cjs");
                   await handler({
                     github,
                     context,
@@ -106,7 +106,7 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  const handler = require("./.github/scripts/comment-on-pr.cjs");
                   await handler({
                     github,
                     context,
@@ -126,7 +126,7 @@ jobs:
               uses: actions/github-script@v7
               with:
                 script: |
-                  const handler = require("./.github/scripts/comment-on-pr.js");
+                  const handler = require("./.github/scripts/comment-on-pr.cjs");
                   await handler({
                     github,
                     context,
