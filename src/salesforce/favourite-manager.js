@@ -35,7 +35,7 @@ const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
  * - The `innerElement` parameter allows for further targeting of a nested element within this structure (e.g., a child element or a class).
  *
  * @param {string} [innerElement=""] - A CSS selector string that targets a specific child or inner element within the main structure. Defaults to an empty string, which returns the entire section.
- * @returns {HTMLElement|null} The element matching the selector or `null` if no matching element is found.
+ * @return {HTMLElement|null} The element matching the selector or `null` if no matching element is found.
  */
 function getHeader(innerElement = "") {
 	return document.querySelector(
@@ -53,7 +53,7 @@ function getHeader(innerElement = "") {
  * @param {string} [strokeWidth='2'] - The stroke width (outline star only)
  * @param {string} [fill='none'] - The fill color
  * @param {boolean} [slashed=false] - Whether to create a slashed star
- * @returns {SVGElement} The created star SVG element
+ * @return {SVGElement} The created star SVG element
  */
 function createStarSvg({
 	id = null,
@@ -97,7 +97,7 @@ function createStarSvg({
  * - The button contains a span for the label and image elements for the star icons.
  * - If the image fails to load, it falls back to displaying the text label.
  *
- * @returns {HTMLButtonElement} The generated button element with its child elements (star images and styles).
+ * @return {HTMLButtonElement} The generated button element with its child elements (star images and styles).
  */
 async function generateFavouriteButton() {
 	const button = document.createElement("button");
@@ -163,7 +163,7 @@ async function generateFavouriteButton() {
  *
  * @param {string} favouriteId - The ID or class name of the favourite image element.
  * @param {HTMLButtonElement|null} [button=null] - The button element to limit the search to, or null to search the entire document.
- * @returns {HTMLElement|null} The favourite image element if found, otherwise null.
+ * @return {HTMLElement|null} The favourite image element if found, otherwise null.
  * @throws {Error} Throws an error if `favouriteId` is null.
  */
 function getFavouriteImage(favouriteId, button = null) {
@@ -183,7 +183,7 @@ function getFavouriteImage(favouriteId, button = null) {
  * @param {boolean|null} [isSaved=null] - A flag indicating whether the Tab is saved (true) or not saved (false).
  *                                       If null, both icons are toggled.
  * @param {HTMLButtonElement|null} [button=null] - The button element that contains the star images. Defaults to null (searches the entire document).
- * @returns {void}
+ * @return {void}
  */
 function toggleFavouriteButton(isSaved = null, button = null) {
 	// will use the class identifier if there was an error with the image (and was removed)
@@ -208,7 +208,7 @@ function toggleFavouriteButton(isSaved = null, button = null) {
  * - Calls the `performActionOnTabs` function to add the new Tab with the extracted label, URL, and optional organization.
  *
  * @param {string} url - The URL of the Tab to be added.
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function addTab(url) {
 	const label = getHeader(".breadcrumbDetail").innerText;
@@ -256,7 +256,7 @@ async function addTab(url) {
  * - The function performs actions based on whether the Tab is currently marked as a favourite.
  * - After performing the action, it updates the "Favourite" button's state.
  *
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function actionFavourite() {
 	const url = Tab.minifyURL(getCurrentHref());
@@ -284,7 +284,8 @@ async function actionFavourite() {
  * - The function performs actions based on whether the Tab is currently marked as a favourite.
  * - After performing the action, it updates the "Favourite" button's state.
  *
- * @returns {Promise<void>}
+ * @param {number} [count=0] - the number of times this function has been called (auto increments)
+ * @return {Promise<void>}
  */
 export async function showFavouriteButton(count = 0) {
 	if (count > 5) {
@@ -334,7 +335,7 @@ export async function showFavouriteButton(count = 0) {
  * - If the Tab is already in the desired state (saved or not), it shows a toast message indicating the action cannot be performed.
  *
  * @param {boolean} [save=true] - A flag indicating whether to save (true) or remove (false) the current page from the favourites.
- * @returns {void}
+ * @return {void}
  */
 export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);

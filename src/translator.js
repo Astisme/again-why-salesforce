@@ -19,7 +19,7 @@ class TranslationService {
 	 * Retrieves the dataset attribute name used on elements
 	 * to hold translation keys.
 	 *
-	 * @returns {string} The dataset key for translation attributes.
+	 * @return {string} The dataset key for translation attributes.
 	 */
 	get translateAttributeDataset() {
 		return TranslationService.TRANSLATE_DATASET;
@@ -31,7 +31,7 @@ class TranslationService {
 	 * Retrieves the separator string used to split translation keys
 	 * from the static translation attribute.
 	 *
-	 * @returns {string} The configured translation separator.
+	 * @return {string} The configured translation separator.
 	 */
 	get separator() {
 		return TranslationService.TRANSLATE_SEPARATOR;
@@ -45,7 +45,8 @@ class TranslationService {
 
 	/**
 	 * Initialize translation service with default language
-	 * @constructor
+   * @param {Symbol} secret - the secret to allow the creation of this class
+   * @throws Error when the secret does not match
 	 */
 	constructor(secret) {
 		if (secret !== _translationSecret) {
@@ -60,7 +61,7 @@ class TranslationService {
 	 * and not the “follow Salesforce language” sentinel.
 	 *
 	 * @param {string|null} [language=null] - The language code to load, or null to skip.
-	 * @returns {Promise<boolean>}
+	 * @return {Promise<boolean>}
 	 *   Resolves to `true` if a new language file was loaded;
 	 *   `false` if no loading was necessary or the language was null or FOLLOW_SF_LANG.
 	 */
@@ -79,7 +80,7 @@ class TranslationService {
 	 * Determines the user’s preferred language from settings or Salesforce,
 	 * then attempts to load it via loadNewLanguage.
 	 *
-	 * @returns {Promise<string|null>}
+	 * @return {Promise<string|null>}
 	 *   Resolves to the language code that was successfully loaded;
 	 *   or `null` if neither the user’s preference nor Salesforce language could be loaded.
 	 */
@@ -108,7 +109,7 @@ class TranslationService {
 	 * Initializes or returns the singletonTranslator TranslationService instance,
 	 * preloading fallback and active translations, and sets up change listeners.
 	 *
-	 * @returns {Promise<TranslationService>}
+	 * @return {Promise<TranslationService>}
 	 *   Resolves to the singletonTranslator TranslationService, with fallback and current
 	 *   language files loaded, and page translations applied.
 	 */
@@ -137,7 +138,7 @@ class TranslationService {
 	 *
 	 * @param {string|null} [language=null] - The language code (e.g., "en", "fr_FR") to load.
 	 * @throws {Error} Throws `"error_required_params"` if `language` is null.
-	 * @returns {Promise<Object>} Resolves to the loaded message map for the language.
+	 * @return {Promise<Object>} Resolves to the loaded message map for the language.
 	 *   If the file is already cached, returns the cached object.
 	 *   On failure, attempts parent locale or returns the fallback language cache.
 	 */
@@ -179,7 +180,7 @@ class TranslationService {
 	 * @param {string} key - The translation key to look up.
 	 * @param {string} [connector=" "] - The string used to join compound error messages.
 	 * @param {boolean} [isError=false] - Internal flag to avoid infinite recursion when translating error keys.
-	 * @returns {Promise<string>} Resolves to the translated message.
+	 * @return {Promise<string>} Resolves to the translated message.
 	 * @throws {Error} If the key is missing in all locale caches, throws an Error with a translated error message prefix.
 	 */
 	async #_translate(key, connector = " ", isError = false) {
@@ -232,7 +233,7 @@ class TranslationService {
 	 *
 	 * @param {string|string[]} key - A single translation key or an array of keys to translate.
 	 * @param {string} [connector=" "] - The delimiter used to join multiple translated parts.
-	 * @returns {Promise<string>} Resolves to the fully translated string or the original key on failure.
+	 * @return {Promise<string>} Resolves to the fully translated string or the original key on failure.
 	 */
 	async translate(key, connector = " ") {
 		// get all inner translations
@@ -282,7 +283,7 @@ class TranslationService {
 	 * Selects elements with the translate attribute and applies translated text or attributes.
 	 *
 	 * @param {string} [language=this.currentLanguage] - The language code to apply for translation.
-	 * @returns {Promise<boolean>}
+	 * @return {Promise<boolean>}
 	 *   Resolves to `false` if the `document` object is unavailable;
 	 *   otherwise resolves after all elements have been updated.
 	 */
@@ -318,7 +319,7 @@ class TranslationService {
 	 * Registers a listener on browser storage changes to re-run page translations
 	 * when the user’s language setting is modified.
 	 *
-	 * @returns {void}
+	 * @return {void}
 	 */
 	setListenerForLanguageChange() {
 		BROWSER.storage.onChanged.addListener((changes) => {
@@ -338,7 +339,7 @@ class TranslationService {
  * If the translator has not been initialized, it creates a new instance.
  * If initialization is already in progress (i.e., `singletonTranslator` is a Promise), it waits for it to complete.
  *
- * @returns {Promise<TranslationService>} A promise that resolves to the translator instance.
+ * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
  */
 async function getTranslator_async() {
 	if (singletonTranslator == null) {
@@ -355,7 +356,7 @@ async function getTranslator_async() {
  * Throws an error if the translator has not been initialized or is still initializing.
  *
  * @throws {Error} If the translator is not yet initialized.
- * @returns {TranslationService} The initialized translator instance.
+ * @return {TranslationService} The initialized translator instance.
  */
 function getTranslator() {
 	if (singletonTranslator == null || singletonTranslator instanceof Promise) {
@@ -369,7 +370,7 @@ function getTranslator() {
  *
  * Returns the initialized translator if available, otherwise attempts to initialize and return it.
  *
- * @returns {Promise<TranslationService>} A promise that resolves to the translator instance.
+ * @return {Promise<TranslationService>} A promise that resolves to the translator instance.
  */
 export default async function ensureTranslatorAvailability() {
 	try {

@@ -54,10 +54,21 @@ ensureTranslatorAvailability();
 const hidden = "hidden";
 const invisible = "invisible";
 
+/**
+ * Creates the object used to update the settings
+ *
+ * @param {Object} [param0={}] - an Object with the following parameters
+ * @param {null} [param0.key=null] - the key for which to set the setting
+ * @param {any[]} [param0.set=[]] - the array containing the settings to save
+ * @throws Error when key was not set
+ * @return {Object} the object used to update the settings
+ */
 function getObjectToSet({
 	key = null,
 	set = [],
 } = {}) {
+  if(key == null)
+    throw new Error("error_required_params");
 	return {
 		what: "set",
 		key,
@@ -121,13 +132,16 @@ const picked_sort = {
 
 const inactive = "inactive";
 const active = "active";
-
 /**
  * Gets element by constructed ID from tab style components
- * @param {string} tabType - The tab type (e.g., TAB_GENERIC_STYLE, TAB_ORG_STYLE)
  * @param {string} styleType - The style type (e.g., TAB_STYLE_BACKGROUND, TAB_STYLE_COLOR)
- * @param {string} state - The state (e.g., active, inactive)
- * @returns {HTMLElement|null}
+ * @param {Object} [tabConfig={}] - an Object containing the following parameters
+ * @param {null} [tabConfig.tabType=null] - The Tab type prefix
+ * @param {null} [tabConfig.state=null] - The state (active/inactive)
+ * @param {string} [tabConfig.prefix=""] - the prefix used to get the id
+ * @param {string} [tabConfig.postfix=""] - the suffix used to get the id
+ * @throws Error when tabType and state where not set
+ * @return {HTMLElement|null} the element found by its id
  */
 function getTabElement(styleType, {
 	tabType = null,
@@ -147,9 +161,13 @@ const decorationAvailableId = "set_decoration_available";
 const decorationChosenId = "set_decoration_chosen";
 /**
  * Creates decoration list elements for a given tab type and state
- * @param {string} tabType - The tab type prefix
- * @param {string} state - The state (active/inactive)
- * @returns {Object} Object with available and chosen list elements
+ * @param {Object} [tabConfig={}] - an Object containing the following parameters
+ * @param {null} [tabConfig.tabType=null] - The Tab type prefix
+ * @param {null} [tabConfig.state=null] - The state (active/inactive)
+ * @param {string} [tabConfig.prefix=""] - the prefix used to get the id
+ * @param {string} [tabConfig.postfix=""] - the suffix used to get the id
+ * @throws Error when tabType and state where not set
+ * @return {Object} Object with available and chosen list elements
  */
 function getDecorationUls({
 	tabType = null,
@@ -174,9 +192,13 @@ const styleGeneric = "style-generic";
 const styleOrg = "style-org";
 /**
  * Creates style IDs for a given style type and state
- * @param {string} styleType - The style type (e.g., "style-generic", "style-org")
- * @param {string} state - The state (active/inactive)
- * @returns {Object} Object with all style IDs
+ * @param {Object} [tabConfig={}] - an Object containing the following parameters
+ * @param {null} [tabConfig.tabType=null] - The Tab type prefix
+ * @param {null} [tabConfig.state=null] - The state (active/inactive)
+ * @param {string} [tabConfig.prefix=""] - the prefix used to get the id
+ * @param {string} [tabConfig.postfix=""] - the suffix used to get the id
+ * @throws Error when tabType and state where not set
+ * @return {Object} Object with all style IDs
  */
 function createStyleIds({
 	tabType = null,
@@ -211,7 +233,14 @@ const chosenBtnId = "move-chosen";
 const availableBtnId = "move-available";
 /**
  * Retrieves the arrow buttons which move the decorations between the chosen and available Uls
- * @returns {Object} with chosen (the button to move to chosen) and available (the one to move to available)
+ *
+ * @param {Object} [tabConfig={}] - an Object containing the following parameters
+ * @param {null} [tabConfig.tabType=null] - The Tab type prefix
+ * @param {null} [tabConfig.state=null] - The state (active/inactive)
+ * @param {string} [tabConfig.prefix=""] - the prefix used to get the id
+ * @param {string} [tabConfig.postfix=""] - the suffix used to get the id
+ * @throws Error when tabType and state where not set
+ * @return {Object} with chosen (the button to move to chosen) and available (the one to move to available)
  */
 function getMoveButtons({
 	tabType = null,
@@ -233,9 +262,13 @@ function getMoveButtons({
 
 /**
  * Creates an object with all tab elements for a given configuration
- * @param {string} tabType - The tab type prefix
- * @param {string} state - The state (active/inactive)
- * @returns {Object} Object with named properties for each element plus arrays
+ * @param {Object} [tabConfig={}] - an Object containing the following parameters
+ * @param {null} [tabConfig.tabType=null] - The Tab type prefix
+ * @param {null} [tabConfig.state=null] - The state (active/inactive)
+ * @param {string} [tabConfig.prefix=""] - the prefix used to get the id
+ * @param {string} [tabConfig.postfix=""] - the suffix used to get the id
+ * @throws Error when tabType and state where not set
+ * @return {Object} Object with named properties for each element plus arrays
  */
 function createTabElements({
 	tabType = null,
@@ -283,12 +316,28 @@ const unpinned = "unpinned";
 /**
  * Based on the input value, return a string used as configuration key
  * @param {boolean} [isPinned=false] - true when the element is pinned, false otherwise
- * @returns {string} pinned / unpinned
+ * @return {string} pinned / unpinned
  */
 function getPinKey({ isPinned = false }) {
 	return isPinned ? pinned : unpinned;
 }
 
+/**
+ * Creates the configuration for the input elements
+ *
+ * @param {string[]} styles - the input element ids
+ * @param {Object} configs - an Object from which to find the necessary information
+ * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
+ * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
+ * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
+ * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
+ * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
+ * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
+ * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
+ * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
+ *
+ * @return {Object} an object with all the necessary information for every given style
+ */
 function buildInputConfigs(styles, configs) {
 	const result = {};
 	for (const key of styles) {
@@ -343,6 +392,22 @@ function buildInputConfigs(styles, configs) {
 	return result;
 }
 
+/**
+ * Creates the configuration for the elements to decorate the text
+ *
+ * @param {string[]} styles - the decoration styles
+ * @param {Object} configs - an Object from which to find the necessary information
+ * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
+ * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
+ * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
+ * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
+ * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
+ * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
+ * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
+ * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
+ *
+ * @return {Object} an object with all the necessary information for every given style
+ */
 function buildDecorationConfigs(styles, configs) {
 	const result = {};
 	for (const key of styles) {
@@ -410,6 +475,21 @@ function buildDecorationConfigs(styles, configs) {
 	return result;
 }
 
+/**
+ * Creates a configuration for the style decorations
+ *
+ * @param {Object} configs - an Object from which to find the necessary information
+ * @param {Object} configs.inactiveGenericUnpinned - the configuration for the inactive, generic, unpinned decorations
+ * @param {Object} configs.inactiveGenericPinned - the configuration for the inactive, generic, pinned decorations
+ * @param {Object} configs.inactiveOrgUnpinned - the configuration for the inactive, org, unpinned decorations
+ * @param {Object} configs.inactiveOrgPinned - the configuration for the inactive, org, pinned decorations
+ * @param {Object} configs.activeGenericUnpinned - the configuration for the active, generic, unpinned decorations
+ * @param {Object} configs.activeGenericPinned - the configuration for the active, generic, pinned decorations
+ * @param {Object} configs.activeOrgUnpinned - the configuration for the active, org, unpinned decorations
+ * @param {Object} configs.activeOrgPinned - the configuration for the active, org, pinned decorations
+ *
+ * @return {Object} the better structured configuration, separated by style id
+ */
 function buildInputDecorationConfigs(configs) {
 	const inputStyles = [
 		TAB_STYLE_BACKGROUND,
@@ -437,6 +517,23 @@ function buildInputDecorationConfigs(configs) {
 	return inputs;
 }
 
+/**
+ * Creates the configuration based on the given configs
+ *
+ * @param {Object} configs - the configuration of the Tab elements
+ * @param {Object} configs.inactive - the configuration for the inactive elements
+ * @param {Object} configs.inactive.unpinned - the configuration for the inactive unpinned elements
+ * @param {Object} configs.inactive.pinned - the configuration for the inactive pinned elements
+ * @param {Object} configs.active - the configuration for the active elements
+ * @param {Object} configs.active.unpinned - the configuration for the active unpinned elements
+ * @param {Object} configs.active.pinned - the configuration for the active pinned elements
+ *
+ * @return {Object} a newly structured configuration 
+ * -> unpinned.active
+ * -> unpinned.inactive
+ * -> pinned.active
+ * -> pinned.inactive
+ */
 function buildStructuredConf(configs) {
 	return {
 		unpinned: {
@@ -477,7 +574,7 @@ function buildStructuredConf(configs) {
 const pinnedPrefix = `${pinned}_`;
 /**
  * Creates the complete style configuration object
- * @returns {Object} Configurations organized by style type
+ * @return {Object} Configurations organized by style type
  */
 function createStyleConfigurations() {
 	const inactiveGenericUnpinned = createTabElements({
@@ -630,7 +727,7 @@ function updateStyle(styleId, newStyle = null) {
  * @param {boolean} isForInactive - Whether targeting inactive tabs
  * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
  * @param {boolean} wasPicked - Whether the style value is set (affects chosen/available lists)
- * @returns {Object} Object containing input element and decoration list references
+ * @return {Object} Object containing input element and decoration list references
  */
 function _getElementReferences(config, {
 	isForInactive = true,
@@ -655,7 +752,7 @@ function _getElementReferences(config, {
  * @param {Object} config - Style configuration object containing styleIds mappings
  * @param {boolean} isForInactive - Whether targeting inactive tabs
  * @param {boolean} isGeneric - Whether targeting generic tabs (vs org-specific)
- * @returns {string|undefined} Style ID for CSS rule application, or undefined if not found
+ * @return {string|undefined} Style ID for CSS rule application, or undefined if not found
  */
 function _getStyleId(config, {
 	isForInactive = true,
@@ -670,7 +767,7 @@ function _getStyleId(config, {
  * Determines the appropriate CSS pseudo-selector for specific style types.
  * Some styles require pseudo-selectors like :hover or ::before for proper application.
  * @param {string} styleId - The style type identifier (TAB_STYLE_* constant)
- * @returns {string|null} Pseudo-selector string (:hover, ::before) or null for standard selectors
+ * @return {string|null} Pseudo-selector string (:hover, ::before) or null for standard selectors
  */
 function _getPseudoSelector(styleId) {
 	switch (styleId) {
@@ -690,7 +787,7 @@ function _getPseudoSelector(styleId) {
  * @param {boolean} isGeneric - Whether targeting generic Tabs (vs org-specific)
  * @param {boolean} wasPicked - Whether the style value is set (non-null/non-empty)
  * @param {boolean} isPinned - Whether targeting pinned Tabs (vs org-specific)
- * @returns {string|null} Complete CSS rule string, or null if no value set
+ * @return {string|null} Complete CSS rule string, or null if no value set
  */
 function _buildCssRule(setting, {
 	isForInactive = true,
@@ -884,7 +981,7 @@ keep_sorted_el.addEventListener("click", (e) => {
 const listenersSet = {};
 /**
  * Restores general settings from storage and sets up event listeners
- * @returns {Promise<void>} Promise that resolves when settings are restored and listeners are set
+ * @return {Promise<void>} Promise that resolves when settings are restored and listeners are set
  */
 async function restoreGeneralSettings() {
 	if (listenersSet["settings"]) {
@@ -1089,7 +1186,8 @@ function moveSelectedDecorationsTo({
  * Gets element references for organizing available/chosen elements.
  * @param {Object} [pinConf=null] the configuration from which to find the data
  * @param {String} [key=null] the key from which to extract the data
- * @returns {Object} Object containing list element references
+ * @throws Error when the parameters where not specified
+ * @return {Object} Object containing list element references
  */
 function _getReferencesByKey(pinConf = null, key = null) {
 	if (pinConf == null || key == null) {
@@ -1111,7 +1209,7 @@ function _getReferencesByKey(pinConf = null, key = null) {
  * Gathers all UI element references needed for tab styling based on the key type.
  * @param {boolean} isGeneric - Whether to get generic or org-specific list references
  * @param {boolean} isPinned - Whether to get pinned or unpinned list references
- * @returns {Object} Object containing all necessary UI element references
+ * @return {Object} Object containing all necessary UI element references
  */
 function _getTabResources({
 	isGeneric = true,
@@ -1144,7 +1242,7 @@ function _getTabResources({
 /**
  * Restores saved style settings from storage and applies them to the current UI state.
  * @param {string} key - Storage key for the settings
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function _restoreSettings(key) {
 	const settings = await getStyleSettings(key);
@@ -1260,8 +1358,10 @@ function _setupUIListeners(resources, key) {
 /**
  * Restores Tab style settings and initializes related UI listeners.
  * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Storage key for Tab settings (generic or org).
- * @returns {Promise<void>}
- * @throws {Error} If `key` is invalid.
+ * @param {Object} [param1={}] - an Object specifying the following parameters
+ * @param {boolean} [param1.isPinned=false] - Whether the Tab is pinned or not
+ * @return {Promise<void>}
+ * @throws {Error} If `key` is not a style key
  */
 async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY, {
 	isPinned = false,
@@ -1284,10 +1384,12 @@ async function restoreTabSettings(key = GENERIC_TAB_STYLE_KEY, {
 
 /**
  * Finds elements in the page with a standardized Id, given the changing name.
- * @returns {Object} containing the `container`, `settings` and `preview` elements (if available).
+ * @param {string} [name=null] - the name used by the Id of the container
+ * @throws Error when name was not set
+ * @return {Object} containing the `container`, `settings` and `preview` elements (if available).
  */
 function getContainers(name = null) {
-	if (name == null) {
+	if (name == null || name == "") {
 		throw new Error("error_required_params");
 	}
 	return {

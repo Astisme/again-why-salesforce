@@ -40,7 +40,9 @@ import { checkAddRemoveContextMenus } from "./context-menus.js";
 /**
  * Invoke the runtime to send the message
  *
+ * @param {string|string[]} key - the key (or keys) for which we should retrieve the persisted data
  * @param {function} callback - The callback to execute after sending the message
+ * @return {Promise} containing the requested info for the given key
  */
 function _getFromStorage(key, callback) {
 	return BROWSER.storage.sync.get(
@@ -55,7 +57,7 @@ function _getFromStorage(key, callback) {
  *
  * @param {function} [callback] - Optional callback to handle the retrieved data.
  * @param {string} [key=WHY_KEY] - The storage key to retrieve data from.
- * @returns {Promise<any>|void} Returns a Promise if no callback is provided, otherwise void.
+ * @return {Promise<any>|void} Returns a Promise if no callback is provided, otherwise void.
  */
 export function bg_getStorage(callback, key = WHY_KEY) {
 	if (callback == null) {
@@ -83,7 +85,7 @@ export function bg_getStorage(callback, key = WHY_KEY) {
  * @param {string|string[]|null} [settingKeys=null] - Single key or array of keys to retrieve. If null, all settings are returned.
  * @param {string|string[]} [key=SETTINGS_KEY] - The storage key namespace to retrieve settings from.
  * @param {Function|null} [callback=null] - Optional callback to handle the retrieved settings.
- * @returns {Promise<Object|Object[]>|void} A Promise resolving to the requested settings, or void if a callback is provided.
+ * @return {Promise<Object|Object[]>|void} A Promise resolving to the requested settings, or void if a callback is provided.
  */
 export async function bg_getSettings(
 	settingKeys = null,
@@ -112,6 +114,13 @@ export async function bg_getSettings(
 	callback(response);
 }
 
+/**
+ * Finds the style settings currently persisted, given a key. If not key is requested, returns all available styles
+ *
+ * @param {String} [key=null] - the key for which to find the persisted styles
+ * @param {Function} [callback=null] - a callback to call when the styles have been retrieved
+ * @return {Promise[Object]} the style settings for the requested key
+ */
 async function bg_getStyleSettings(
 	key = null,
 	callback = null,
@@ -140,6 +149,8 @@ async function bg_getStyleSettings(
  *
  * @param {Array} newsettings - The settings to be stored
  * @param {string} [key=SETTINGS_KEY]  - The key of the settings where to merge and store the newsettings array
+ *
+ * @return the merged settings
  */
 async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 	// get the settings array
@@ -197,7 +208,7 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
  * @param {Array} tobeset - The object to be stored
  * @param {function} callback - The callback to execute after storing the data.
  * @param {string} [key=WHY_KEY] - The key of the map where to store the tobeset array
- * @returns {Promise} the promise from BROWSER.storage.sync.set
+ * @return {Promise} the promise from BROWSER.storage.sync.set
  */
 export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 	const set = {};
@@ -238,7 +249,7 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
  * - Returns the API host origin and headers needed for authorized requests.
  *
  * @param {string} currentUrl - The current Salesforce URL.
- * @returns {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
+ * @return {Promise<[string, Object]>|undefined} A promise resolving to a tuple of the API host origin and headers, or undefined if URL is unsupported.
  * @throws {Error} Throws if required authentication cookies are not found.
  */
 async function _getAPIHostAndHeaders(currentUrl) {
@@ -280,7 +291,7 @@ async function _getAPIHostAndHeaders(currentUrl) {
  * courtesy of derroman/salesforce-user-language-switcher
  *
  * @param {string} currentUrl - The current Salesforce URL.
- * @returns {Promise<Object|undefined>} A promise resolving to the user info object or undefined on error.
+ * @return {Promise<Object|undefined>} A promise resolving to the user info object or undefined on error.
  */
 async function getCurrentUserInfo(currentUrl) {
 	try {
@@ -302,7 +313,7 @@ async function getCurrentUserInfo(currentUrl) {
  * falls back to stored locale if unavailable.
  *
  * @param {Function|null} [callback=null] - Optional callback to receive the language.
- * @returns {Promise<string|any>|void} The language code or nothing if callback is provided.
+ * @return {Promise<string|any>|void} The language code or nothing if callback is provided.
  */
 export async function bg_getSalesforceLanguage(callback = null) {
 	const currentUrl = (await bg_getCurrentBrowserTab())?.url;
@@ -322,7 +333,7 @@ export async function bg_getSalesforceLanguage(callback = null) {
  *
  * @param {string[]|null} [commands=null] - Array of command names to filter. If null, returns all commands with shortcuts.
  * @param {Function|null} [callback=null] - Optional callback to receive the commands.
- * @returns {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
+ * @return {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
  */
 export async function bg_getCommandLinks(commands = null, callback = null) {
 	const allCommands = await BROWSER.commands.getAll();
@@ -355,7 +366,7 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
  * @param {Object} request - The incoming message request.
  * @param {Object} _ - The sender object (unused).
  * @param {function} sendResponse - The function to send a response back.
- * @returns {boolean} Whether the message was handled asynchronously.
+ * @return {boolean} Whether the message was handled asynchronously.
  */
 function listenToExtensionMessages() {
 	BROWSER.runtime.onMessage.addListener((request, _, sendResponse) => {
@@ -451,6 +462,13 @@ function listenToExtensionCommands() {
 	});
 }
 
+/**
+ * Persists the styles for the given key
+ *
+ * @param {string} [key=ORG_TAB_STYLE_KEY] - the key for which we want to create the style
+ * @param {...Array[Object]} styles - the new styles to apply for the key
+ * @return {Promise[Array[Object]]} the created styles
+ */
 async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles) {
 	await bg_setStorage(
 		styles.filter(Boolean),
@@ -460,6 +478,15 @@ async function _createDefaultStyle(key = ORG_TAB_STYLE_KEY, ...styles) {
 	return styles;
 }
 
+/**
+ * Wrapper function for _createDefaultStyle; filters the availableStyles before calling it
+ *
+ * @param {Object} availableStyles - the currently saved styles which are in use
+ * @param {string} [key=ORG_TAB_STYLE_KEY] - the key for which the function should inherit the styles from
+ * @param {string} [newKey=ORG_PINNED_TAB_STYLE_KEY] - the key for which we want to create the style
+ * @param {...Array[Object]} styles - the new styles to apply for the newKey
+ * @return {Promise[Array[Object]]} the created styles
+ */
 async function _createDefaultStyleWrapper(
 	availableStyles,
 	key = ORG_TAB_STYLE_KEY,
@@ -530,7 +557,7 @@ async function setDefaultOrgStyle() {
  *
  * @param {Function} fn - The function to debounce.
  * @param {number} [delay=150] - The delay in milliseconds before the function is executed after the last invocation.
- * @returns {Function} A debounced version of the provided function.
+ * @return {Function} A debounced version of the provided function.
  */
 function _debounce(fn, delay = 150) {
 	let timeout;

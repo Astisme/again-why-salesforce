@@ -76,7 +76,7 @@ let link_cmd_export_all = null;
  * Fetches the latest command links using `bg_getCommandLinks` and assigns the associated shortcuts
  * to their respective global variables based on the command name.
  *
- * @returns {Promise<void>} A promise that resolves once the command links have been updated.
+ * @return {Promise<void>} A promise that resolves once the command links have been updated.
  */
 async function updateCommandLinks() {
 	const commandLinks = await bg_getCommandLinks();
@@ -336,7 +336,7 @@ const menuItemsOriginal = [
  * Each menu item's title is appended with its corresponding keyboard shortcut (if available),
  * enhancing user visibility of assigned commands.
  *
- * @returns {Array<Object>} A cloned array of menu items with updated titles reflecting shortcuts.
+ * @return {Array<Object>} A cloned array of menu items with updated titles reflecting shortcuts.
  */
 function getMenuItemsClone() {
 	const clone = structuredClone(menuItemsOriginal);
@@ -469,6 +469,7 @@ async function removeMenuItems() {
 var intervalCxm = null; // is var so that it does not break tests
 /**
  * Returns the current interval (for tests)
+ * @return current interval
  */
 export function getIntervalCxm() {
 	return intervalCxm;
@@ -478,8 +479,8 @@ export function getIntervalCxm() {
  * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
  * The function also triggers a notification if the context menu is updated.
  *
- * @function checkAddRemoveContextMenus
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
+ * @param {function} [callback=null] - A callback to call at the end of the execution
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 export async function checkAddRemoveContextMenus(what, callback = null) {

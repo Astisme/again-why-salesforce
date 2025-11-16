@@ -1,7 +1,7 @@
 "use strict";
 /**
  * Detects the browser name from the navigator object
- * @returns {string|undefined} - 'chrome', 'firefox', 'safari', or undefined
+ * @return {string|undefined} - 'chrome', 'firefox', 'safari', or undefined
  */
 function detectBrowser() {
 	const userAgent = navigator.userAgent.toLowerCase();
@@ -75,6 +75,7 @@ export const EXTENSION_VERSION = MANIFEST.version;
  *
  * @param {Object} message - The message to send
  * @param {function} callback - The callback to execute after sending the message
+ * @return {Promise} from BROWSER.runtime.sendMessage
  */
 function sendMessage(message, callback) {
 	return BROWSER.runtime.sendMessage(message, callback);
@@ -84,6 +85,7 @@ function sendMessage(message, callback) {
  *
  * @param {Object} message - The message to send.
  * @param {function} callback - The callback to execute after sending the message.
+ * @return {Promise} promise resolving based on sendMessage
  */
 export function sendExtensionMessage(message, callback = null) {
 	if (callback == null) {
@@ -107,7 +109,7 @@ export function sendExtensionMessage(message, callback = null) {
  * Retrieves extension settings for the specified keys.
  *
  * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
- * @returns {Promise<Object>} A promise that resolves to an object containing the requested settings.
+ * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
 export async function getSettings(keys = null) {
 	return await sendExtensionMessage({ what: "get-settings", keys });
@@ -142,6 +144,12 @@ const GENERIC_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 ]);
+/**
+ * Checks if a key is a generic key
+ *
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
+ * @return {boolean} true if the key is a generic key
+ */
 export function isGenericKey(key = GENERIC_TAB_STYLE_KEY) {
 	return GENERIC_STYLE_KEYS.has(key);
 }
@@ -149,6 +157,12 @@ const PINNED_STYLE_KEYS = new Set([
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	ORG_PINNED_TAB_STYLE_KEY,
 ]);
+/**
+ * Checks if a key is a pinned key
+ *
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
+ * @return {boolean} true if the key is a pinned key
+ */
 export function isPinnedKey(key = GENERIC_TAB_STYLE_KEY) {
 	return PINNED_STYLE_KEYS.has(key);
 }
@@ -158,6 +172,12 @@ const ALL_STYLE_KEYS = new Set([
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	ORG_PINNED_TAB_STYLE_KEY,
 ]);
+/**
+ * Checks if a key is a style key
+ *
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
+ * @return {boolean} true if the key is a style key
+ */
 export function isStyleKey(key = GENERIC_TAB_STYLE_KEY) {
 	return ALL_STYLE_KEYS.has(key);
 }
@@ -177,6 +197,14 @@ const PINNED_KEY_FINDER = {
 		[false]: ORG_TAB_STYLE_KEY,
 	},
 };
+/**
+ * Returns a style key given the specified parameters
+ *
+ * @param {Object} [param0={}] - an Object used to determine the style key
+ * @param {boolean} [param0.isGeneric=true] - Whether the key to find is Generic
+ * @param {boolean} [param0.isPinned=false] - Whether the key to find is Pinned
+ * @return {string} one of the ALL_STYLE_KEYS
+ */
 export function getPinnedSpecificKey({
 	isGeneric = true,
 	isPinned = false,
@@ -204,7 +232,7 @@ const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
  * Retrieves saved style settings for the specified key.
  * @async
  * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
- * @returns {Promise<Object|null>} The retrieved style settings or null if none exist.
+ * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
 export async function getStyleSettings(key = null) {
 	return await sendExtensionMessage({ what: "get-style-settings", key });
@@ -216,7 +244,7 @@ export async function getStyleSettings(key = null) {
  * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
  * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
  * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
- * @returns {string} The constructed CSS selector.
+ * @return {string} The constructed CSS selector.
  */
 export function getCssSelector({
 	isInactive = true,
@@ -237,7 +265,7 @@ export function getCssSelector({
  *
  * @param {string} styleId - Identifier for the style to generate.
  * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
- * @returns {string} The corresponding CSS rule or an empty string if invalid.
+ * @return {string} The corresponding CSS rule or an empty string if invalid.
  */
 export function getCssRule(styleId, value = null) {
 	switch (styleId) {

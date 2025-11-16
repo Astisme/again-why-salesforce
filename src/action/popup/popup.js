@@ -81,6 +81,7 @@ initThemeSvg();
 /**
  * Finds the current tab of the browser then calls the callback, if available. otherwise returns a Promise
  * @param {function|undefined} callback - the function to call when the result is found.
+ * @return {Promise} from sendExtensionMessage
  */
 function pop_getCurrentBrowserTab(callback) {
 	return sendExtensionMessage({ what: "browser-tab" }, callback);
@@ -137,6 +138,7 @@ function switchTheme() {
 
 /**
  * Sends a message indicating that data has been saved successfully.
+ * @return undefined
  */
 function pop_afterSet() {
 	sendExtensionMessage({ what: "saved" });
@@ -147,7 +149,7 @@ function pop_afterSet() {
  * If no browser tab is provided, the function will retrieve the current tab.
  *
  * @param {object|null} browserTab - The browser tab from which to extract the organization name. If not provided, the current tab will be used.
- * @returns {Promise<string>} A promise that resolves to the extracted organization name from the tab's URL.
+ * @return {Promise<string>} A promise that resolves to the extracted organization name from the tab's URL.
  */
 async function pop_extractOrgName(browserTab = null) {
 	browserTab = browserTab ?? await pop_getCurrentBrowserTab();
@@ -296,6 +298,8 @@ function inputLabelUrlListener(type) {
 
 /**
  * Checks if both the label and URL fields are not empty, and if so, calls the `saveTabs` function with `false` as an argument.
+ * @param {Event} e - the event which is connected to this function
+ * @return undefined
  */
 function _checkSaveTab(e) {
 	const parentTr = e.target.closest("tr");
@@ -332,7 +336,7 @@ function _setInfoForDrag(element, listener) {
  * @param {string} org - The org of the tab used for the element
  * @param {boolean} isDisabled - If the element should be disabled (true)
  * @param {boolean} isThisOrgTab - If the element has an org which is the current one
- * @returns {HTMLElement} The created tab element.
+ * @return {HTMLElement} The created tab element.
  */
 function createElement(
 	{ label = null, url = null, org = null } = {},
@@ -374,7 +378,7 @@ function createElement(
  * - Finally, appends a blank element to leave space at the bottom.
  *
  * @param {object|null} browserTab - The browser tab used to extract the organization name. If not provided, the current tab will be used.
- * @returns {Promise<void>} A promise that resolves once all tabs have been processed and displayed.
+ * @return {Promise<void>} A promise that resolves once all tabs have been processed and displayed.
  */
 async function loadTabs(browserTab = null) {
 	if (allTabs == null || allTabs.length === 0) {
@@ -404,7 +408,7 @@ async function loadTabs(browserTab = null) {
  * - Resets the `loggers` array to an empty state.
  * - Calls `loadTabs()` to reload and display the tabs.
  *
- * @returns {Promise<void>} A promise that resolves after the tabs have been reloaded.
+ * @return {Promise<void>} A promise that resolves after the tabs have been reloaded.
  */
 async function reloadRows() {
 	if (tabAppendElement.childElementCount > 0) {
@@ -425,7 +429,7 @@ async function reloadRows() {
  * - If an error occurs during the tab processing, it is logged to the console.
  *
  * @param {string|null} orgName - The organization name to filter tabs by. If null, the organization name will be extracted from the current browser tab.
- * @returns {Promise<Array<Tab>>} A promise that resolves to an array of `Tab` objects that match the given criteria.
+ * @return {Promise<Array<Tab>>} A promise that resolves to an array of `Tab` objects that match the given criteria.
  */
 async function findTabsFromRows(orgName = null) {
 	// Get the list of tabs
@@ -475,7 +479,7 @@ async function findTabsFromRows(orgName = null) {
  *
  * @param {boolean} [doReload=true] - Whether to reload the rows after saving the Tabs. Defaults to true.
  * @param {boolean} [findTabs=true] - Whether to find the current Tabs from the DOM. Defaults to true.
- * @returns {Promise<void>} A promise that resolves once the Tabs have been saved and optionally rows reloaded.
+ * @return {Promise<void>} A promise that resolves once the Tabs have been saved and optionally rows reloaded.
  */
 async function saveTabs(doReload = true, findTabs = true) {
 	if (findTabs) {
@@ -514,7 +518,7 @@ const datasetAttribute = translator.translateAttributeDataset;
  * Returns the substring of the input string before the first occurrence of the separator used by the translator.
  *
  * @param {string} i18n - The input string containing the separator.
- * @returns {string} The substring before the separator, or the whole string if the separator is not found.
+ * @return {string} The substring before the separator, or the whole string if the separator is not found.
  */
 function _sliceBeforeSeparator(i18n) {
 	return i18n.slice(0, i18n.indexOf(translatorSeparator));
@@ -524,7 +528,7 @@ function _sliceBeforeSeparator(i18n) {
  *
  * @param {HTMLElement} button - The button element whose dataset contains the text to translate.
  * @param {string} shortcut - The keyboard shortcut to display in parentheses after the translated text.
- * @returns {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
+ * @return {Promise<string>} A promise that resolves to the translated text combined with the shortcut hint.
  */
 async function addShortcutText(button, shortcut) {
 	return await translator.translate([

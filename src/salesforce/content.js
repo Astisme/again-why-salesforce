@@ -75,7 +75,7 @@ let setupTabUl;
 /**
  * Returns the main UL element in Salesforce Setup.
  *
- * @returns {HTMLElement} The main UL element in Salesforce Setup.
+ * @return {HTMLElement} The main UL element in Salesforce Setup.
  */
 export function getSetupTabUl() {
 	return setupTabUl;
@@ -93,7 +93,7 @@ let href = globalThis.location.href;
 /**
  * Returns the current href string, always up-to-date.
  *
- * @returns {string} The current page href.
+ * @return {string} The current page href.
  */
 export function getCurrentHref() {
 	return href;
@@ -106,7 +106,7 @@ let wasOnSavedTab;
 /**
  * Returns whether the user was previously on a saved tab.
  *
- * @returns {boolean} True if was on a saved tab, false otherwise.
+ * @return {boolean} True if was on a saved tab, false otherwise.
  */
 export function getWasOnSavedTab() {
 	return wasOnSavedTab;
@@ -119,7 +119,7 @@ let isCurrentlyOnSavedTab;
 /**
  * Returns whether the user is currently on a saved tab.
  *
- * @returns {boolean} True if currently on a saved tab, false otherwise.
+ * @return {boolean} True if currently on a saved tab, false otherwise.
  */
 export function getIsCurrentlyOnSavedTab() {
 	return isCurrentlyOnSavedTab;
@@ -134,7 +134,7 @@ let fromHrefUpdate = false;
  * Dynamically injects the Salesforce Lightning Navigation script into the page
  * if relevant settings allow it.
  *
- * @returns {Promise<void>} Resolves when the script is added or skipped.
+ * @return {Promise<void>} Resolves when the script is added or skipped.
  */
 async function checkAddLightningNavigation() {
 	const settings = await getSettings([
@@ -158,6 +158,7 @@ async function checkAddLightningNavigation() {
  *
  * @param {string|null} [what=null] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
  * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
+ * @param {boolean} [shouldReload=true] - If the Tabs should be reloaded from scratch
  */
 function sf_afterSet(what = null, tabs = null, shouldReload = true) {
 	if (setupTabUl == null) {
@@ -175,7 +176,7 @@ function sf_afterSet(what = null, tabs = null, shouldReload = true) {
  * Calculates the estimated time (in milliseconds) it takes to read a given message.
  *
  * @param {string} message - The message to calculate the reading time for.
- * @returns {number} - The estimated reading time in milliseconds.
+ * @return {number} - The estimated reading time in milliseconds.
  */
 function _calculateReadingTime(message) {
 	const words = message.split(/\s+/).filter((word) => word.length > 0);
@@ -230,7 +231,7 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
  * - It also ensures the presence of a "favourite" button and checks if the current view is for saved tabs.
  *
  * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the saved tabs will be fetched.
- * @returns {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
+ * @return {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
  */
 async function init(tabs = null) {
 	const orgName = Tab.extractOrgName(href);
@@ -276,7 +277,7 @@ async function init(tabs = null) {
  *
  * @param {boolean} [isFromHrefUpdate=false] - A flag indicating if the check is triggered by a URL update.
  * @param {Function} [callback] - A callback function to be invoked with the result of the saved tab check.
- * @returns {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
+ * @return {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
  */
 export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
@@ -296,6 +297,8 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 /**
  * If the user has moved to or from a saved tab, they'll be reloaded to update the highlighted one.
  * otherwise, the favourite button is shown
+ *
+ * @param {boolean} isCurrentlyOnSavedTab - Whether the currently displayed page is a saved Tab
  */
 async function _afterHrefUpdate(isCurrentlyOnSavedTab) {
 	if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();
@@ -318,7 +321,7 @@ function onHrefUpdate() {
  * If the setting is disabled or not found, moves setupTabUl after the ObjectManager element.
  * Otherwise, moves setupTabUl before the Home element.
  *
- * @returns {Promise<void>} Resolves after repositioning the setupTabUl element based on user preference.
+ * @return {Promise<void>} Resolves after repositioning the setupTabUl element based on user preference.
  */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
@@ -338,6 +341,7 @@ async function checkKeepTabsOnLeft() {
  * - It also sets up event listeners for drag behavior and reloads the tabs.
  *
  * @param {number} [count=0] - The number of retry attempts made so far. Defaults to 0.
+ * @return undefined
  */
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
@@ -402,7 +406,7 @@ function delayLoadSetupTabs(count = 0) {
  * - Removes all tabs in the setup tab list (except for hidden ones, "Home", and "Object Manager") and then calls the `init` function to load the new tabs.
  *
  * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the tabs will be fetched again.
- * @returns {void} This function does not return anything, but it reinitializes the tab list as needed.
+ * @return {void} This function does not return anything, but it reinitializes the tab list as needed.
  */
 function reloadTabs(tabs = null) {
 	// remove the tabs that are already in the page
@@ -419,7 +423,7 @@ function reloadTabs(tabs = null) {
  * - Creates `Tab` objects for valid tabs and attempts to store them using `allTabs.replaceTabs`.
  * - If any errors occur during the process, they are caught and displayed using `showToast`.
  *
- * @returns {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
+ * @return {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
  */
 async function reorderTabs() {
 	try {
@@ -469,8 +473,9 @@ async function reorderTabs() {
 }
 
 /**
- * @param {Array[HTMLElement] duplicatetabs - the tabs which are duplicated and need to be highlighted
  * For each duplicatetabs, toggles the slds-theme--warning class
+ *
+ * @param {Array[HTMLElement]} [duplicatetabs=[]] - the tabs which are duplicated and need to be highlighted
  */
 function _toggleWarning(duplicatetabs = []) {
 	for (const tab of duplicatetabs) {
@@ -502,7 +507,7 @@ function makeDuplicatesBold(miniURL) {
  * - If the `modalHanger` is already set, it returns the cached value.
  * - Otherwise, it finds it in the page.
  *
- * @returns {HTMLElement|null} The modal hanger element if found, otherwise null.
+ * @return {HTMLElement|null} The modal hanger element if found, otherwise null.
  */
 export function getModalHanger() {
 	if (modalHanger != null) {
@@ -524,7 +529,7 @@ export function getModalHanger() {
  * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
  * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
  * @param {string|null} [options.org=null] - The org of the current page.
- * @returns {Promise<void>} A promise that resolves once the modal has been displayed and the user interacts with it.
+ * @return {Promise<void>} A promise that resolves once the modal has been displayed and the user interacts with it.
  */
 async function showModalOpenOtherOrg(
 	{ label = null, url = null, org = null } = {},
@@ -646,6 +651,7 @@ const ACTION_TMP_HIDE = "tmp-hide";
  * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
+ * @return undefined
  */
 export async function performActionOnTabs(
 	action,
@@ -803,6 +809,7 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
  * @param {string} tab.label - The label of the Tab to update
  * @param {string} tab.url - The Url of the Tab to update
  * @param {string} tab.org - The Org of the Tab to update
+ * @return undefined
  */
 async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
@@ -874,7 +881,7 @@ async function showModalUpdateTab(
  * @param {string} options.version - The new version of the extension.
  * @param {string} options.link - The URL to the update or release notes.
  * @param {string} options.oldversion - The current installed version before update.
- * @returns {Promise<void>} Resolves after the prompt and possible navigation.
+ * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
 	const translator = await ensureTranslatorAvailability();
@@ -1161,7 +1168,7 @@ function listenToReorderedTabs() {
  * Modifies Content-Security-Policy meta tag to allow the analytics domains.
  * https://github.com/simpleanalytics
  *
- * @returns {Promise<void>} Resolves once analytics script is injected or skipped.
+ * @return {Promise<void>} Resolves once analytics script is injected or skipped.
  */
 async function checkInsertAnalytics() {
 	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);

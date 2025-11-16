@@ -34,13 +34,13 @@ const MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
 
 /**
  * Generates a random number with the specified number of digits.
- *
- * @param {number} digits - The number of digits for the random number. Must be greater than 1.
- * @returns {number} A random number with the specified number of digits
- *
  * - Calculates the lower bound as 10^(digits - 1) (e.g., 10 for 2 digits, 100 for 3 digits).
  * - Multiplies a random value (0 to 1) by the range (9 * 10^(digits - 1)) and adds the lower bound.
  * - Ensures the result is a whole number with the correct number of digits.
+ *
+ * @param {number} digits - The number of digits for the random number. Must be greater than 1.
+ * @return {number} A random number with the specified number of digits
+ * @throws Error when digits <= 1
  */
 function getRng_n_digits(digits = 1) {
 	if (digits <= 1) {
@@ -56,7 +56,7 @@ function getRng_n_digits(digits = 1) {
  *
  * @param {Event} e - The click event triggered by the link.
  * @param {string} url - The URL of the link being clicked.
- * @returns {string} The target for the link, either "_blank" or "_top".
+ * @return {string} The target for the link, either "_blank" or "_top".
  */
 function _getLinkTarget(e, url) {
 	return e.ctrlKey || e.metaKey || !url.includes(SETUP_LIGHTNING)
@@ -115,7 +115,7 @@ async function handleLightningLinkClick(e) {
  * Checks if two arrays are equal in content and order.
  * @param {Array} arr1 - First array to compare.
  * @param {Array} arr2 - Second array to compare.
- * @returns {boolean} True if arrays are equal, otherwise false.
+ * @return {boolean} True if arrays are equal, otherwise false.
  */
 function areArraysEqual(arr1, arr2) {
 	return (arr1 == null && arr2 == null) ||
@@ -130,7 +130,7 @@ let oldSettings = null;
 /**
  * Determines if tab settings have been updated compared to previous settings.
  * @param {Object} settings - Current settings to compare.
- * @returns {boolean} True if settings were updated, otherwise false.
+ * @return {boolean} True if settings were updated, otherwise false.
  */
 function wereSettingsUpdated(settings) {
 	return oldSettings == null ||
@@ -142,7 +142,7 @@ function wereSettingsUpdated(settings) {
 /**
  * Maps style IDs to their corresponding pseudo-selectors.
  * @param {string} id - The style ID
- * @returns {string} The pseudo-selector string
+ * @return {string} The pseudo-selector string
  */
 function _getPseudoSelector(id) {
 	switch (id) {
@@ -183,17 +183,20 @@ function _appendPseudoRules({
 /**
  * Checks if a style ID requires pseudo-selector handling.
  * @param {string} id - The style ID to check
- * @returns {boolean} True if this is a pseudo rule
+ * @return {boolean} True if this is a pseudo rule
  */
 function _isPseudoRule(id) {
 	return id === TAB_STYLE_HOVER || id === TAB_STYLE_TOP;
 }
 /**
  * Builds CSS rules for active/inactive tabs and separates pseudo rules.
- * @param {Array} list - Array of style elements
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
- * @returns {Object} Object containing activeCss, inactiveCss, and pseudoRules
+ *
+ * @param {Object} [param0={}] - an object contains the following parameters
+ * @param {Object[]} [param0.list=[]] - Array of style elements to process
+ * @param {boolean} [param0.isGeneric=false] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ *
+ * @return {Object} Object containing activeCss, inactiveCss, and pseudoRules
  */
 function _buildCssRules({
 	list = [],
@@ -228,7 +231,7 @@ function _buildCssRules({
  * Gets existing style element or creates a new one.
  * @param {boolean} isGeneric - Whether this is for generic Tab styles
  * @param {boolean} isPinned - Whether this is for pinned Tab styles
- * @returns {HTMLStyleElement} The style element
+ * @return {HTMLStyleElement} The style element
  */
 function _getOrCreateStyleElement({
 	isGeneric = false,
@@ -249,9 +252,11 @@ function _getOrCreateStyleElement({
 
 /**
  * Processes a style list by building CSS and appending to document head.
- * @param {Array} styleList - Array of style elements to process
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
+ *
+ * @param {Object} [param0={}] - an object contains the following parameters
+ * @param {Object[]} [param0.list=[]] - Array of style elements to process
+ * @param {boolean} [param0.isGeneric=false] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
  */
 function _processStyleList({
 	list = [],
@@ -276,7 +281,7 @@ function _processStyleList({
  * - Builds separate CSS rules for active vs. inactive tabs.
  * - Handles pseudo-selectors (`:hover`, `::before`) for special rules.
  * - Appends the assembled `<style>` element to the document head.
- * @returns {Promise<void>} Resolves once styles are updated.
+ * @return {Promise<void>} Resolves once styles are updated.
  */
 export async function generateStyleFromSettings() {
 	const settings = await getStyleSettings();
@@ -314,13 +319,18 @@ export async function generateStyleFromSettings() {
 }
 
 /**
- * Generates the HTML for a tab row.
+ * Generates the HTML for a Tab row.
  *
- * @param {Object} row - The tab data object containing label and URL.
- * @param {string} row.label - The label of the tab.
- * @param {string} row.url - The URL of the tab.
- * @param {string} row.org - The org of the org-specific tab.
- * @returns {HTMLElement} - The generated list item element representing the tab.
+ * @param {Object} row - The Tab data object containing label and URL.
+ * @param {string} row.label - The label of the Tab.
+ * @param {string} row.url - The URL of the Tab.
+ * @param {string} row.org - The org of the org-specific Tab.
+ *
+ * @param {Object} conf - the configuration of the row
+ * @param {boolean} [conf.hide=false] - True to hide the row
+ * @param {boolean} [conf.isPinned=false] - True if the row is one of the pinned ones
+ *
+ * @return {HTMLElement} - The generated list item element representing the tab.
  */
 export function generateRowTemplate(
 	{ label = null, url = null, org = null } = {},
@@ -381,7 +391,7 @@ export function generateRowTemplate(
  * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
  * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
  * @throws {Error} Throws an error if required parameters are missing or invalid.
- * @returns {HTMLElement} The generated toast container element.
+ * @return {HTMLElement} The generated toast container element.
  */
 export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const translator = await ensureTranslatorAvailability();
@@ -497,7 +507,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
  * sets the "title" attribute to "required" and the "part" attribute to "required",
  * and sets its text content to an asterisk ("*").
  *
- * @returns {HTMLElement} The <abbr> element representing the required indicator.
+ * @return {HTMLElement} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
 	const translator = await ensureTranslatorAvailability();
@@ -515,15 +525,26 @@ async function generateRequired() {
 /**
  * Creates an input element with specified attributes.
  *
- * @param {Object} options - The configuration object for the input element.
- * @param {string|null} options.id - The id of the input element (optional).
- * @param {string|null} options.label - The label for the input element (optional).
- * @param {string} options.type - The type of the input element (required).
- * @param {string|null} options.placeholder - The placeholder text for the input element (optional).
- * @param {boolean} options.required - A flag indicating whether the input is required (default is false).
- * @param {boolean} options.enabled - A flag indicating whether the input is enabled (default is true).
- * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
- * @returns {HTMLInputElement} The created input element.
+ * @param {Object} [config={}] - Configuration object for the input.
+ * @param {string} config.id - The id for the input.
+ * @param {string} config.label - The label text for the input.
+ * @param {string} [config.type="text"] - The type of the input element (e.g., "text", "password").
+ * @param {boolean} [config.required=false] - Indicates if the input is required.
+ * @param {boolean} [config.enabled=trie] - Indicates if the input is enabled.
+ * @param {null} [config.placeholder=null] - Placeholder text for the input.
+ * @param {null} [config.prepend=null] - Configuration for an input element to prepend.
+ * @param {null} [config.append=null] - Configuration for an input element to append.
+ * @param {null} [config.style=null] - Additional inline styles for the main input element.
+ * @param {null} [config.value=null] - The value to be inserted in the input element.
+ * @param {null} [config.title=null] - The title of the element
+ * @param {boolean} [config.isTextArea=false] - True to create a textarea instead of a simple input field
+ *
+ * @param {Object} [translateConfig={}] - Configuration object for the translation
+ * @param {boolean} [translateConfig.translateLabel=true] - True to translate the label
+ * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
+ * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
+ *
+ * @return {HTMLInputElement} The created input element.
  */
 async function createInputElement(
 	{
@@ -581,25 +602,32 @@ async function createInputElement(
 }
 /**
  * Generates a customizable input element wrapped in a Salesforce-styled form structure.
- *
- * @param {Object} config - Configuration object for the input.
- * @param {string} config.label - The label text for the input.
- * @param {string} [config.type="text"] - The type of the input element (e.g., "text", "password").
- * @param {boolean} [config.required=false] - Indicates if the input is required.
- * @param {string|null} [config.placeholder=null] - Placeholder text for the input.
- * @param {Object|null} [config.prepend=null] - Configuration for an input element to prepend.
- * @param {Object|null} [config.append=null] - Configuration for an input element to append.
- * @param {string|null} [config.style=null] - Additional inline styles for the main input element.
- *
- * @returns {Object} - An object containing:
- *   - `inputParent`: The parent `div` containing the entire input structure.
- *   - `inputContainer`: The main input element.
- *
  * - Dynamically generates a unique `id` for the input using `getRng_n_digits(10)`.
  * - Wraps the input in a Salesforce-styled stacked form element.
  * - Supports additional inputs before (`prepend`) or after (`append`) the main input.
  * - Applies optional attributes like `placeholder`, `required`, and `style`.
  * - Maintains Salesforce Lightning Design System (SLDS) styling conventions.
+ *
+ * @param {Object} [config={}] - Configuration object for the input.
+ * @param {*} config.label - The label text for the input.
+ * @param {string} [config.type="text"] - The type of the input element (e.g., "text", "password").
+ * @param {boolean} [config.required=false] - Indicates if the input is required.
+ * @param {null} [config.placeholder=null] - Placeholder text for the input.
+ * @param {null} [config.prepend=null] - Configuration for an input element to prepend.
+ * @param {null} [config.append=null] - Configuration for an input element to append.
+ * @param {null} [config.style=null] - Additional inline styles for the main input element.
+ * @param {null} [config.value=null] - The value to be inserted in the input element.
+ * @param {null} [config.title=null] - The title of the element
+ * @param {boolean} [config.isTextArea=false] - True to create a textarea instead of a simple input field
+ *
+ * @param {Object} [translateConfig={}] - Configuration object for the translation
+ * @param {boolean} [translateConfig.translateLabel=true] - True to translate the label
+ * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
+ * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
+ *
+ * @return {Object} - An object containing:
+ *   - `inputParent`: The parent `div` containing the entire input structure.
+ *   - `inputContainer`: The main input element.
  */
 async function generateInput({
 	label,
@@ -684,7 +712,7 @@ async function generateInput({
  *
  * @param {string} sectionTitle - The title of the section to be displayed.
  *
- * @returns {Object} - An object containing:
+ * @return {Object} - An object containing:
  *   - `section`: The root `records-record-layout-section` element that wraps the section.
  *   - `divParent`: A container div element for additional content inside the section.
  *
@@ -766,7 +794,7 @@ export async function generateSection(sectionTitle = null) {
  * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
  *
  * @param {string} modalTitle - The title of the modal.
- * @returns {Object} An object containing key elements of the modal:
+ * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - article: The content area within the modal.
  * - saveButton: The save button element for user actions.
@@ -1008,7 +1036,7 @@ export async function generateSldsModal(modalTitle) {
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
 	 *
 	 * @param {KeyboardEvent} event - The keydown event object.
-	 * @returns {void}
+	 * @return {void}
 	 */
 	function keyDownListener(event) {
 		switch (event.key) {
@@ -1037,9 +1065,13 @@ export async function generateSldsModal(modalTitle) {
  * @param {string|null} [radio0def.label=null] - The label text for the radio button.
  * @param {boolean} [radio0def.checked=false] - Whether this radio button is checked by default.
  * @param {Object} [radio1def] - Definition for the second radio button (same shape as radio0def).
+ * @param {string|null} [radio1def.id=null] - The id attribute for the radio input.
+ * @param {string|null} [radio1def.value=null] - The value attribute for the radio input.
+ * @param {string|null} [radio1def.label=null] - The label text for the radio button.
+ * @param {boolean} [radio1def.checked=false] - Whether this radio button is checked by default.
  * @param {...Object} otherRadioDefs - Additional radio button definitions.
  *
- * @returns {{ radioGroup: HTMLDivElement, getSelectedRadioButtonValue: () => string|undefined }}
+ * @return {{ radioGroup: HTMLDivElement, getSelectedRadioButtonValue: () => string|undefined }}
  *   An object containing:
  *   - radioGroup: the container <div> element with all radio buttons appended.
  *   - getSelectedRadioButtonValue: a function that returns the value of the currently selected radio button or undefined if none selected.
@@ -1090,7 +1122,7 @@ export function generateRadioButtons(name, {
 	/**
 	 * Returns the value of the currently selected (checked) radio button from the group.
 	 *
-	 * @returns {string|undefined} The value of the checked radio button, or undefined if none are checked.
+	 * @return {string|undefined} The value of the checked radio button, or undefined if none are checked.
 	 */
 	function getSelectedRadioButtonValue() {
 		return allRadioInputs.find((inp) => inp.checked)?.value;
@@ -1105,7 +1137,7 @@ export function generateRadioButtons(name, {
  * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
  * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
  * @param {string|null} [options.org=null] - The org of the current page.
- * @returns {Object} An object containing key elements of the modal:
+ * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1193,7 +1225,7 @@ export async function generateOpenOtherOrgModal(
  * @param {boolean} [required=true] - Flag indicating if the file input is required.
  * @throws {Error} Throws an error if both `allowDrop` is false and `preventFileSelection` is true.
  * @throws {Error} Throws an error if required parameters are missing.
- * @returns {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
+ * @return {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
@@ -1424,7 +1456,7 @@ export async function generateSldsFileInput(
  * @param {string} id - The unique identifier for the checkbox.
  * @param {string} label - The text to display next to the checkbox.
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
- * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
+ * @return {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
 	const translator = await ensureTranslatorAvailability();
@@ -1450,7 +1482,7 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * @param {string} label - The title of the modal tab.
  * @param {string} url - A partial URL for the target org.
  * @param {string} org - The Org to which the Tab points to.
- * @returns {Object} An object containing key elements of the modal:
+ * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.

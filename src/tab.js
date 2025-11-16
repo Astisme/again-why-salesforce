@@ -73,7 +73,7 @@ export default class Tab {
 	 * @param {string|null} [clickCount=undefined] - The number of times the Tab was clicked. Ignored if `labelOrTab` is an object.
 	 * @param {string|null} [clickDate=undefined] - The Date in which the Tab was clicked last. Ignored if `labelOrTab` is an object.
 	 * @throws {Error} - Throws an error if the parameters are invalid, or if unexpected keys are found in the object.
-	 * @returns {Tab} - A new instance of the `Tab` class.
+	 * @return {Tab} - A new instance of the `Tab` class.
 	 */
 	static create(
 		labelOrTab,
@@ -155,7 +155,7 @@ export default class Tab {
 	 *
 	 * @param {string|null} url - The URL to minify.
 	 * @throws {Error} - Throws an error if the provided URL is empty or invalid.
-	 * @returns {string} The minified URL.
+	 * @return {string} The minified URL.
 	 *
 	 * These links would all collapse into "SetupOneHome/home".
 	 * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
@@ -220,7 +220,7 @@ export default class Tab {
 	 * @param {string|null} url - The URL to expand.
 	 * @param {string|null} baseUrl - The host to prepend to the URL.
 	 * @throws {Error} - Throws an error if either the base URL is not valid, or if the provided URL is empty or invalid.
-	 * @returns {string|null} The expanded URL.
+	 * @return {string|null} The expanded URL.
 	 *
 	 * These links would all collapse into "https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/".
 	 * https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home/
@@ -262,7 +262,7 @@ export default class Tab {
 	 *
 	 * @param {string|null} [url=null] - The URL to check for a Salesforce ID.
 	 * @throws {Error} - Throws an error if the provided URL is null or invalid.
-	 * @returns {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
+	 * @return {boolean} - Returns `true` if the URL contains a Salesforce ID, otherwise `false`.
 	 */
 	static containsSalesforceId(url = null) {
 		if (url == null) {
@@ -276,7 +276,7 @@ export default class Tab {
 	 *
 	 * @param {string|null} [url=null] - The URL from which to extract the organization name.
 	 * @throws {Error} - Throws an error if the provided URL is null or invalid.
-	 * @returns {string} - The extracted organization name.
+	 * @return {string} - The extracted organization name.
 	 */
 	static extractOrgName(url = null) {
 		if (url == null) {
@@ -301,7 +301,7 @@ export default class Tab {
 	 * Given an Object, returns a Tab of said Object
 	 *
 	 * @param {Object} tab - The Object representing a Tab (not necessarily an instanceof Tab)
-	 * @returns {Tab} - the input Object, now instanceof Tab
+	 * @return {Tab} - the input Object, now instanceof Tab
 	 */
 	static getTabObj(tab) {
 		return Tab.isTab(tab) ? tab : Tab.create(tab);
@@ -311,7 +311,7 @@ export default class Tab {
 	 * Checks if the provided object is an instance of the `Tab` class.
 	 *
 	 * @param {any} tab - The object to check.
-	 * @returns {boolean} - Returns `true` if the object is an instance of `Tab`, otherwise `false`.
+	 * @return {boolean} - Returns `true` if the object is an instance of `Tab`, otherwise `false`.
 	 */
 	static isTab(tab) {
 		return tab instanceof Tab;
@@ -322,7 +322,7 @@ export default class Tab {
 	 *
 	 * @param {any} tab - The object to validate.
 	 * @throws {Error} - Catches and logs errors related to invalid tab creation but does not throw an error.
-	 * @returns {boolean} - Returns `true` if the object can be created as a valid `Tab`, otherwise `false`.
+	 * @return {boolean} - Returns `true` if the object can be created as a valid `Tab`, otherwise `false`.
 	 */
 	static isValid(tab) {
 		try {
@@ -337,7 +337,7 @@ export default class Tab {
 
 	/**
 	 * Transforms a Tab into a JSON Object.
-	 * @returns {Object} this Tab transformed into an Object
+	 * @return {Object} this Tab transformed into an Object
 	 */
 	toJSON() {
 		const res = {
@@ -358,7 +358,7 @@ export default class Tab {
 
 	/**
 	 * Transforms a Tab into a JSON String.
-	 * @returns {string} this Tab transformed into a JSON String
+	 * @return {string} this Tab transformed into a JSON String
 	 */
 	toString() {
 		return JSON.stringify(this.toJSON(), null, 4);
@@ -371,7 +371,8 @@ export default class Tab {
 	 * @param {string|null} [param.label=null] - The label to compare.
 	 * @param {string|null} [param.url=null] - The URL to compare.
 	 * @param {string|null} [param.org=null] - The organization to compare.
-	 * @returns {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
+   * @param {boolean} [strict=true] - True to perform a strict check, false to perform a loose check
+	 * @return {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
 	 */
 	equals({ label = null, url = null, org = null } = {}, strict = true) {
 		return !(label == null && url == null && org == null) &&
@@ -392,7 +393,7 @@ export default class Tab {
 	 * @param {Object} [param] - The object to compare against.
 	 * @param {string|null} [param.url=null] - The URL to compare.
 	 * @param {string|null} [param.org=null] - The organization to compare.
-	 * @returns {boolean} - Returns `true` if the `Tab` is duplicate to the provided object based on the specified properties, otherwise `false`.
+	 * @return {boolean} - Returns `true` if the `Tab` is duplicate to the provided object based on the specified properties, otherwise `false`.
 	 */
 	isDuplicate({ url = null, org = null } = {}) {
 		return url != null &&
@@ -412,7 +413,7 @@ export default class Tab {
 	 * @param {*} tab.label - the new label for the Tab
 	 * @param {*} tab.url - the new url for the Tab
 	 * @param {*} tab.org - the new org for the Tab
-	 * @returns {Tab} The updated Tab
+	 * @return {Tab} The updated Tab
 	 */
 	update(
 		{
@@ -455,7 +456,7 @@ export default class Tab {
 	/**
 	 * Returns a string representation of the `Tab` instance as its hash code.
 	 * This may be used as an Id for the given Tab
-	 * @returns {string} - The string representation of the `Tab` instance.
+	 * @return {string} - The string representation of the `Tab` instance.
 	 */
 	hashCode() {
 		return `${this.url}@${this.org}`;
