@@ -26,8 +26,6 @@ jobs:
 
             - name: Setup Node
               uses: actions/setup-node@v3
-              with:
-                node-version: '18'
 
             - name: Install eslint
               run: npm install eslint eslint-plugin-jsdoc
