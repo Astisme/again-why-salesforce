@@ -566,6 +566,30 @@
 		"message": "Export all Tabs",
 		"description": "[popup] title on export button"
 	},
+	"export_tabs": {
+		"message": "Export Tabs",
+		"description": "[modal] title for export tabs modal"
+	},
+	"select_all": {
+		"message": "Select All",
+		"description": "[modal] button to select all tabs in export modal"
+	},
+	"unselect_all": {
+		"message": "Unselect All",
+		"description": "[modal] button to unselect all tabs in export modal"
+	},
+	"no_tabs_to_export": {
+		"message": "No Tabs to export",
+		"description": "[toast] error when there are no tabs to export"
+	},
+	"error_no_tabs_selected": {
+		"message": "No Tabs selected for export",
+		"description": "[toast] error when user tries to export with no tabs selected"
+	},
+	"tabs_exported_successfully": {
+		"message": "Tabs exported successfully",
+		"description": "[toast] success message when tabs are exported"
+	},
 	"extension_description": {
 		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
 		"description": "[manifest] The description of this extension"

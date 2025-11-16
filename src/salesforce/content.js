@@ -49,6 +49,7 @@ import {
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
 	WHAT_EXPORT,
+	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
@@ -67,6 +68,7 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
+import { createExportModal } from "./export.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -954,6 +956,9 @@ function listenToBackgroundPage() {
 					break;
 				case ACTION_ADD:
 					createImportModal();
+					break;
+				case WHAT_SHOW_EXPORT_MODAL:
+					createExportModal();
 					break;
 				case CXM_OPEN_OTHER_ORG:
 				case CMD_OPEN_OTHER_ORG:

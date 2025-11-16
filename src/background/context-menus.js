@@ -45,6 +45,7 @@ import {
 	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
+	WHAT_SHOW_EXPORT_MODAL,
 } from "/constants.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -536,13 +537,13 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case cxm_open_settings:
 			openSettingsPage();
 			return;
-		case CXM_EXPORT_TABS:
-			checkLaunchExport();
-			return;
 	}
 	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
+		case CXM_EXPORT_TABS:
+			message.what = WHAT_SHOW_EXPORT_MODAL;
+			break;
 		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);

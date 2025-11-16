@@ -1548,3 +1548,137 @@ export async function generateUpdateTabModal(label, url, org) {
 		orgContainer,
 	};
 }
+
+/**
+ * Generates a modal dialog for exporting selected tabs.
+ *
+ * This function creates a modal that displays all available tabs with checkboxes,
+ * allowing users to select which tabs to export. It includes a "Select All" / "Unselect All" button
+ * for convenience.
+ *
+ * @param {Array} tabs - An array of Tab objects to display in the export modal.
+ * @return {Object} An object containing key elements of the modal:
+ * - modalParent: The main modal container element.
+ * - saveButton: The export button element for exporting selected tabs.
+ * - closeButton: The close button element for closing the modal.
+ * - selectedTabs: A function that returns an array of selected tab objects.
+ */
+export async function generateSldsExportModal(tabs = []) {
+	const translator = await ensureTranslatorAvailability();
+	const { modalParent, article, saveButton, closeButton } =
+		await generateSldsModal(
+			await translator.translate("export_tabs"),
+		);
+	
+	const { section, divParent } = await generateSection();
+	divParent.style.width = "100%";
+	divParent.style.display = "flex";
+	divParent.style.flexDirection = "column";
+	divParent.style.alignItems = "center";
+	article.appendChild(section);
+
+	// Create select/unselect all button container
+	const buttonContainer = document.createElement("div");
+	buttonContainer.style.marginBottom = "1rem";
+	buttonContainer.style.display = "flex";
+	buttonContainer.style.gap = "0.5rem";
+	divParent.appendChild(buttonContainer);
+
+	// Create checkbox references array
+	const checkboxes = [];
+
+	// Create Select All button
+	const selectAllButton = document.createElement("button");
+	selectAllButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	selectAllButton.textContent = await translator.translate("select_all");
+	selectAllButton.addEventListener("click", () => {
+		checkboxes.forEach(checkbox => checkbox.checked = true);
+		updateSelectAllButtonText();
+	});
+	buttonContainer.appendChild(selectAllButton);
+
+	// Create Unselect All button
+	const unselectAllButton = document.createElement("button");
+	unselectAllButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	unselectAllButton.textContent = await translator.translate("unselect_all");
+	unselectAllButton.addEventListener("click", () => {
+		checkboxes.forEach(checkbox => checkbox.checked = false);
+		updateSelectAllButtonText();
+	});
+	buttonContainer.appendChild(unselectAllButton);
+
+	// Create tabs list container
+	const tabsListContainer = document.createElement("div");
+	tabsListContainer.style.width = "100%";
+	tabsListContainer.style.maxHeight = "400px";
+	tabsListContainer.style.overflowY = "auto";
+	tabsListContainer.style.border = "1px solid #e5e5e5";
+	tabsListContainer.style.borderRadius = "4px";
+	tabsListContainer.style.padding = "0.5rem";
+	divParent.appendChild(tabsListContainer);
+
+	// Create checkboxes for each tab
+	for (const tab of tabs) {
+		const tabLabel = await generateCheckboxWithLabel(
+			`export-tab-${tabs.indexOf(tab)}`,
+			"", // We'll set custom text below
+			true, // Default to checked
+		);
+		
+		// Replace the generic span with our custom tab info
+		const span = tabLabel.querySelector("span");
+		if (span) {
+			span.textContent = `${tab.label} (${Tab.minifyURL(tab.url)})`;
+		}
+
+		const checkbox = tabLabel.querySelector("input[type='checkbox']");
+		if (checkbox) {
+			checkboxes.push(checkbox);
+			// Store tab reference in checkbox for later retrieval
+			checkbox.dataset.tabIndex = tabs.indexOf(tab);
+		}
+
+		tabsListContainer.appendChild(tabLabel);
+	}
+
+	// Function to update select all button text based on checkbox states
+	function updateSelectAllButtonText() {
+		const checkedCount = checkboxes.filter(cb => cb.checked).length;
+		selectAllButton.disabled = checkedCount === checkboxes.length;
+		unselectAllButton.disabled = checkedCount === 0;
+	}
+	updateSelectAllButtonText();
+
+	// Add change listener to all checkboxes to update button states
+	checkboxes.forEach(checkbox => {
+		checkbox.addEventListener("change", updateSelectAllButtonText);
+	});
+
+	// Function to get selected tabs
+	function getSelectedTabs() {
+		return checkboxes
+			.filter(checkbox => checkbox.checked)
+			.map(checkbox => tabs[parseInt(checkbox.dataset.tabIndex)]);
+	}
+
+	// Update save button text to "Export"
+	const saveButtonSpan = saveButton.querySelector("span.label");
+	if (saveButtonSpan) {
+		saveButtonSpan.textContent = await translator.translate("export");
+	}
+
+	return {
+		modalParent,
+		saveButton,
+		closeButton,
+		selectedTabs: getSelectedTabs,
+	};
+}
