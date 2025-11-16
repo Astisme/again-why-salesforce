@@ -1032,7 +1032,7 @@ let activePreview = null;
  * Toggles the `SLDS_ACTIVE` attribute of the currently viewable preview.
  * @param {boolean} [isActive=false] - whether the resource is for active state
  */
-function setActivePreview({isActive = false}) {
+function setActivePreview({ isActive = false }) {
 	if (isActive) {
 		activePreview?.classList.add(SLDS_ACTIVE);
 	} else {
@@ -1048,7 +1048,7 @@ function setActivePreview({isActive = false}) {
 function _flipSelected(event, isActive = false) {
 	const li = event.target.closest("li");
 	li.ariaSelected = li.ariaSelected !== "true";
-	setActivePreview({isActive});
+	setActivePreview({ isActive });
 }
 
 /**
@@ -1235,11 +1235,17 @@ function _setupUIListeners(resources, key) {
 	// Input change listeners
 	for (const el of resources.inputs.inactive) {
 		el?.addEventListener("change", (e) => saveTabOptions(e, key));
-		el?.addEventListener("click", () => setActivePreview({isActive: false}));
+		el?.addEventListener(
+			"click",
+			() => setActivePreview({ isActive: false }),
+		);
 	}
 	for (const el of resources.inputs.active) {
 		el?.addEventListener("change", (e) => saveTabOptions(e, key));
-		el?.addEventListener("click", () => setActivePreview({isActive: true}));
+		el?.addEventListener(
+			"click",
+			() => setActivePreview({ isActive: true }),
+		);
 	}
 	// Decoration selection listeners
 	for (const el of resources.decorations.inactive) {
