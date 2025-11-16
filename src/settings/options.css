@@ -21,8 +21,13 @@ ul.settings {
 	grid-template-columns: 50% 50%;
 }
 
+.pinned-tabs-toggle-container {
+	grid-column: span 2;
+}
+
 .container {
 	margin: 1rem;
+	margin-bottom: 0;
 }
 
 .dual-listbox-container {
@@ -157,7 +162,18 @@ hr {
 }
 
 #save-container {
-	display: flex;
-	justify-content: center;
 	padding-bottom: 1rem;
+	width: 100%;
+}
+
+.flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#header {
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }

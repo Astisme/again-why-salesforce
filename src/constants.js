@@ -1,7 +1,7 @@
 "use strict";
 /**
  * Detects the browser name from the navigator object
- * @returns {string|undefined} - 'chrome', 'firefox', 'safari', or undefined
+ * @return {string|undefined} - 'chrome', 'firefox', 'safari', or undefined
  */
 function detectBrowser() {
 	const userAgent = navigator.userAgent.toLowerCase();
@@ -75,11 +75,9 @@ export const EXTENSION_VERSION = MANIFEST.version;
  *
  * @param {Object} message - The message to send
  * @param {function} callback - The callback to execute after sending the message
+ * @return {Promise} from BROWSER.runtime.sendMessage
  */
 function sendMessage(message, callback) {
-	if (message.key == null && message.keys == null) {
-		message.key = WHY_KEY;
-	}
 	return BROWSER.runtime.sendMessage(message, callback);
 }
 /**
@@ -87,6 +85,7 @@ function sendMessage(message, callback) {
  *
  * @param {Object} message - The message to send.
  * @param {function} callback - The callback to execute after sending the message.
+ * @return {Promise} promise resolving based on sendMessage
  */
 export function sendExtensionMessage(message, callback = null) {
 	if (callback == null) {
@@ -110,7 +109,7 @@ export function sendExtensionMessage(message, callback = null) {
  * Retrieves extension settings for the specified keys.
  *
  * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
- * @returns {Promise<Object>} A promise that resolves to an object containing the requested settings.
+ * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
 export async function getSettings(keys = null) {
 	return await sendExtensionMessage({ what: "get-settings", keys });
@@ -134,8 +133,84 @@ export const PERSIST_SORT = "persist_sort";
 // decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
+const PINNED = "pinned";
+export const GENERIC_PINNED_TAB_STYLE_KEY =
+	`${SETTINGS_KEY}-${TAB_GENERIC_STYLE}-${PINNED}`;
 export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
+export const ORG_PINNED_TAB_STYLE_KEY =
+	`${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
+const GENERIC_STYLE_KEYS = new Set([
+	GENERIC_TAB_STYLE_KEY,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+]);
+/**
+ * Checks if a key is a generic key
+ *
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
+ * @return {boolean} true if the key is a generic key
+ */
+export function isGenericKey(key = GENERIC_TAB_STYLE_KEY) {
+	return GENERIC_STYLE_KEYS.has(key);
+}
+const PINNED_STYLE_KEYS = new Set([
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+]);
+/**
+ * Checks if a key is a pinned key
+ *
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
+ * @return {boolean} true if the key is a pinned key
+ */
+export function isPinnedKey(key = GENERIC_TAB_STYLE_KEY) {
+	return PINNED_STYLE_KEYS.has(key);
+}
+const ALL_STYLE_KEYS = new Set([
+	GENERIC_TAB_STYLE_KEY,
+	ORG_TAB_STYLE_KEY,
+	GENERIC_PINNED_TAB_STYLE_KEY,
+	ORG_PINNED_TAB_STYLE_KEY,
+]);
+/**
+ * Checks if a key is a style key
+ *
+ * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
+ * @return {boolean} true if the key is a style key
+ */
+export function isStyleKey(key = GENERIC_TAB_STYLE_KEY) {
+	return ALL_STYLE_KEYS.has(key);
+}
+const PINNED_KEY_FINDER = {
+	// true = isGeneric
+	[true]: {
+		// true = isPinned
+		[true]: GENERIC_PINNED_TAB_STYLE_KEY,
+		// false = !isPinned
+		[false]: GENERIC_TAB_STYLE_KEY,
+	},
+	// false = !isGeneric
+	[false]: {
+		// true = isPinned
+		[true]: ORG_PINNED_TAB_STYLE_KEY,
+		// false = !isPinned
+		[false]: ORG_TAB_STYLE_KEY,
+	},
+};
+/**
+ * Returns a style key given the specified parameters
+ *
+ * @param {Object} [param0={}] - an Object used to determine the style key
+ * @param {boolean} [param0.isGeneric=true] - Whether the key to find is Generic
+ * @param {boolean} [param0.isPinned=false] - Whether the key to find is Pinned
+ * @return {string} one of the ALL_STYLE_KEYS
+ */
+export function getPinnedSpecificKey({
+	isGeneric = true,
+	isPinned = false,
+} = {}) {
+	return PINNED_KEY_FINDER[isGeneric][isPinned];
+}
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";
@@ -144,42 +219,23 @@ export const TAB_STYLE_HOVER = "hover";
 export const TAB_STYLE_BOLD = "bold";
 export const TAB_STYLE_ITALIC = "italic";
 export const TAB_STYLE_UNDERLINE = "underline";
-//export const TAB_STYLE_WAVY = "wavy";
 export const TAB_STYLE_TOP = "top";
+export const PREVENT_DEFAULT_OVERRIDE = "user-set";
 export const SLDS_ACTIVE = "slds-is-active";
 const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
 export const ORG_TAB_CLASS = "is-org-tab";
 export const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
+export const PIN_TAB_CLASS = "is-pin-tab";
+const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
 
 /**
  * Retrieves saved style settings for the specified key.
  * @async
- * @param {string} [key=GENERIC_TAB_STYLE_KEY] - Key identifying which style settings to fetch.
- * @returns {Promise<Object|null>} The retrieved style settings or null if none exist.
+ * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
+ * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
-export async function getStyleSettings(key = GENERIC_TAB_STYLE_KEY) {
+export async function getStyleSettings(key = null) {
 	return await sendExtensionMessage({ what: "get-style-settings", key });
-}
-
-/**
- * Retrieves style settings for both generic and org tabs.
- *
- * - Fetches settings for GENERIC_TAB_STYLE_KEY and ORG_TAB_STYLE_KEY.
- * - Returns null if neither setting exists.
- * - Otherwise returns an object mapping each key to its settings.
- * @async
- * @returns {Promise<Object<string, any[] | null> | null>} Object with style arrays for each key, or null.
- */
-export async function getAllStyleSettings() {
-	const genericStyles = await getStyleSettings(GENERIC_TAB_STYLE_KEY);
-	const orgStyles = await getStyleSettings(ORG_TAB_STYLE_KEY);
-	if (genericStyles == null && orgStyles == null) {
-		return null;
-	}
-	const result = {};
-	result[GENERIC_TAB_STYLE_KEY] = genericStyles;
-	result[ORG_TAB_STYLE_KEY] = orgStyles;
-	return result;
 }
 
 /**
@@ -188,18 +244,20 @@ export async function getAllStyleSettings() {
  * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
  * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
  * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
- * @returns {string} The constructed CSS selector.
+ * @return {string} The constructed CSS selector.
  */
-export function getCssSelector(
+export function getCssSelector({
 	isInactive = true,
 	isGeneric = true,
+	isPinned = false,
 	pseudoElement = "",
-) {
+} = {}) {
 	const activeClass = isInactive
 		? `:not(${SLDS_ACTIVE_CLASS})`
 		: SLDS_ACTIVE_CLASS;
 	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
-	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pseudoElement}`;
+	const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
+	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pinTabClass}${pseudoElement}`;
 }
 
 /**
@@ -207,7 +265,7 @@ export function getCssSelector(
  *
  * @param {string} styleId - Identifier for the style to generate.
  * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
- * @returns {string} The corresponding CSS rule or an empty string if invalid.
+ * @return {string} The corresponding CSS rule or an empty string if invalid.
  */
 export function getCssRule(styleId, value = null) {
 	switch (styleId) {
@@ -227,9 +285,7 @@ export function getCssRule(styleId, value = null) {
 			return "font-style: italic;";
 		case TAB_STYLE_UNDERLINE:
 			return "text-decoration: underline;";
-		//case TAB_STYLE_WAVY:
-		//return "text-decoration: underline wavy;";
-		case "user-set":
+		case PREVENT_DEFAULT_OVERRIDE:
 			return "";
 		default:
 			console.error(styleId);
@@ -263,6 +319,8 @@ export const CXM_REMOVE_TAB = "remove-tab";
 export const CXM_REMOVE_OTHER_TABS = "remove-other-tabs";
 export const CXM_REMOVE_LEFT_TABS = "remove-left-tabs";
 export const CXM_REMOVE_RIGHT_TABS = "remove-right-tabs";
+export const CXM_REMOVE_PIN_TABS = "remove-pin-tabs";
+export const CXM_REMOVE_UNPIN_TABS = "remove-unpin-tabs";
 export const CXM_EMPTY_VISIBLE_TABS = "empty-visible-tabs";
 export const CXM_EMPTY_GENERIC_TABS = "empty-generic-tabs";
 export const CXM_RESET_DEFAULT_TABS = "reset-default";
@@ -278,6 +336,8 @@ export const CXM_SORT_CLICK_COUNT = "sort-click-count";
 export const CXM_SORT_CLICK_DATE = "sort-click-date";
 export const CXM_TMP_HIDE_ORG = "hide-with-org";
 export const CXM_TMP_HIDE_NON_ORG = "hide-without-org";
+export const CXM_PIN_TAB = "pin-tab";
+export const CXM_UNPIN_TAB = "unpin-tab";
 // commands (keyboard shortcuts)
 export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
 export const CMD_REMOVE_TAB = "cmd-remove-tab";

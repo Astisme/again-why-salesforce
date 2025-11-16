@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Inatumika",
+		"description": "Inatumika katika vijigeuza kwa hali inayotumika"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs zinazotumika",
+		"description": "Tab-s za jumla za mtumiaji zilizobandikwa ambazo zinatumika kwa sasa"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs zinazotumika",
+		"description": "Tab-s za jumla za mtumiaji ambazo zinatumika kwa sasa"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs zinazotumika",
+		"description": "Tab-s za shirika za mtumiaji zilizobandikwa ambazo zinatumika kwa sasa"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs zinazotumika",
+		"description": "Tab-s za shirika za mtumiaji ambazo zinatumika kwa sasa"
+	},
 	"allow": {
 		"message": "Ruhusu",
 		"description": "[omba_ruhusa] kitufe cha kuruhusu ruhusa"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menyu-ya-mukhtadha]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Bandika",
+		"description": "[menyu-ya-mukhtasari] inaruhusu mtumiaji kuweka Tab hii mwanzoni mwa orodha yake"
+	},
 	"cxm_remove": {
 		"message": "💥 Ondoa Tab(s)",
 		"description": "[menu-ya-mukhtadha]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Tabs Nyingine",
 		"description": "[menu-ya-mukhtadha]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Ondoa Zilizobandikwa",
+		"description": "[menyu-ya-mukhtasari] inaruhusu mtumiaji kuondoa Tab-s zake zilizobandikwa"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs upande wa kulia",
 		"description": "[menu-ya-mukhtadha]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab Hii",
 		"description": "[menu-ya-mukhtadha]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Ondoa Zisizobandikwa",
+		"description": "[menyu-ya-mukhtasari] inaruhusu mtumiaji kuondoa Tab-s zake zisizobandikwa"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Weka Tab chaguomsingi upya",
@@ -151,6 +183,14 @@
 		"message": "🎯 Panga Tab-zako",
 		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kiotomatiki (menyu mama)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ kwa Matumizi",
+		"description": "menyu ya mukhtasari ya kuruhusu watumiaji kupanga Tab-s zao kwa idadi ya mara wanazozibofya"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ kwa Wakati",
+		"description": "menyu ya mukhtasari ya kuruhusu watumiaji kupanga Tab-s zao kwa wakati ambapo Tab-s hizo zilibofwa"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 kwa Lebo",
 		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kwa lebo"
@@ -163,13 +203,25 @@
 		"message": "🤖 kwa Url",
 		"description": "menyu ya muktadha ya kuwaruhusu watumiaji kupanga Tab-zako zao kwa url"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Ficha Tab-s zisizo za Shirika",
+		"description": "[menyu-ya-mukhtasari] ficha kwa muda Tab-s za jumla"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Ficha Tab-s za Shirika",
+		"description": "[menyu-ya-mukhtasari] ficha kwa muda Tab-s za Shirika"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Bandua",
+		"description": "[menyu-ya-mukhtasari] inaruhusu mtumiaji kuondoa Tab hii kutoka kwenye orodha yake iliyobandikwa"
+	},
 	"cxm_update": {
 		"message": "✏️ Sasisha Tab",
 		"description": "[menu-ya-mukhtadha]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Geuza Org",
-		"description": "[menu-ya-mukhtadha]"
+		"message": "👜 Geuza Shirika",
+		"description": "[menyu-ya-mukhtasari]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Masasisho Mengine",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Hitilafu wakati wa kuongeza Tab.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuongeza Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tab hii ilikuwa tayari imebandikwa.",
+		"description": "[hitilafu] mtumiaji alijaribu kubandika Tab ambayo tayari imebandikwa"
+	},
+	"error_already_unpinned": {
+		"message": "Tab hii ilikuwa tayari imebanduliwa.",
+		"description": "[hitilafu] mtumiaji alijaribu kubandua Tab ambayo tayari imebanduliwa"
+	},
+	"error_cannot_move": {
+		"message": "Tab hii haiwezi kuhamishwa!",
+		"description": "[hitilafu] Tab iliyoombwa haiwezi kuhamishwa kwa sasa."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tab hii haiwezi kuhamishwa katika mwelekeo huu!",
+		"description": "[hitilafu] Tab iliyoombwa haiwezi kuhamishwa kwa sasa."
 	},
 	"error_check_update": {
 		"message": "Hitilafu wakati wa kuangalia masasisho",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Hitilafu wakati wa kuingiza:\n",
 		"description": "[hitilafu] kulitokea hitilafu wakati wa mchakato wa kuingiza"
+	},
+	"error_internal": {
+		"message": "Hitilafu ya Ndani",
+		"description": "[hitilafu] hitilafu ya jumla"
 	},
 	"error_invalid_key": {
 		"message": "Kigezo cha ufunguo kilichopitishwa kwenye kazi si halali",
@@ -323,9 +395,17 @@
 		"message": "Hakuna kitu cha kukaguliwa!",
 		"description": "[hitilafu] kitu hakikupitishwa"
 	},
+	"error_no_pinned": {
+		"message": "Bado huna Tab-s zilizobandikwa!",
+		"description": "[hitilafu] mtumiaji alijaribu kuondoa Tab-s zilizobandikwa lakini hana Tab-s zilizobandikwa"
+	},
 	"error_no_setup_tab": {
 		"message": "Imeshindwa kupata Tab ya Usanidi (Setup).",
 		"description": "[hitilafu] Kiendelezi hakikuweza kupata mahali pa kuweka Tabs pendwa."
+	},
+	"error_no_unpinned": {
+		"message": "Huna Tab-s zisizobandikwa!",
+		"description": "[hitilafu] mtumiaji alijaribu kuondoa Tab-s zisizobandikwa lakini hana Tab-s zisizobandikwa"
 	},
 	"error_no_url": {
 		"message": "Hakuna URL ya kukaguliwa!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "bado hajaanzishwa.",
 		"description": "[hitilafu] Hitilafu ya jumla kwa wakati kigeugeu hakiko tayari"
+	},
+	"error_pin_tab": {
+		"message": "Hitilafu wakati wa kubandika Tab",
+		"description": "[hitilafu]"
 	},
 	"error_processing_tabs": {
 		"message": "Hitilafu ya kuchakata Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Hitilafu wakati wa kuondoa Tabs zingine.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tabs zingine"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Hitilafu wakati wa kuondoa Tab-s zilizobandikwa.",
+		"description": "[hitilafu] Hitilafu ya jumla inayotumiwa wakati wa kuondoa Tab-s zisizobandikwa"
+	},
 	"error_removing_tab": {
 		"message": "Hitilafu wakati wa kuondoa Tab.",
 		"description": "[hitilafu] Hitilafu ya jumla inayotumika wakati wa kuondoa Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Hitilafu wakati wa kuondoa Tab-s zisizobandikwa.",
+		"description": "[hitilafu] Hitilafu ya jumla inayotumiwa wakati wa kuondoa Tab-s zisizobandikwa"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Hitilafu ilipotokea kuondoa Tab zote zinazoonekana.",
@@ -383,6 +475,14 @@
 		"message": "Haiwezi kusawazisha Tabs batili (null)!",
 		"description": "[hitilafu] ilijaribu kusawazisha hakuna kitu"
 	},
+	"error_tab_click_count": {
+		"message": "Idadi ya Mibofyo lazima iwe nambari isiyo hasi",
+		"description": "[hitilafu] mtumiaji alijaribu kuunda Tab na idadi mbaya ya mibofyo"
+	},
+	"error_tab_click_date": {
+		"message": "Tarehe ya Kubofya lazima iwe nambari ambayo haisababishi tarehe ya baadaye",
+		"description": "[hitilafu] mtumiaji alijaribu kuunda Tab na tarehe mbaya ya kubofya"
+	},
 	"error_tab_constructor": {
 		"message": "Tumia Tab.create() badala ya new Tab() kutumia darasa la Tab",
 		"description": "[hitilafu] mwambie msanidi jinsi ya kutumia darasa la Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab haikupatikana.",
 		"description": "[hitilafu] Tab haikujumuishwa kwenye mpangilio"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab bado haijabandikwa!",
+		"description": "[hitilafu] mtumiaji alijaribu kubandua Tab isiyobandikwa"
 	},
 	"error_tab_object_creation": {
 		"message": "Unapopiga simu na kitu, usipitishe kitu kingine chochote.",
@@ -443,6 +547,10 @@
 		"message": "Ombi lisilojulikana.",
 		"description": "[hitilafu] Hitilafu ya jumla baada ya kupata ujumbe ambao haukutambuliwa"
 	},
+	"error_unpin_tab": {
+		"message": "Hitilafu wakati wa kubandua Tab",
+		"description": "[hitilafu]"
+	},
 	"error_useless_remove": {
 		"message": "Haiwezi kuondoa:\nHaiwezi kuondoa ukurasa ambao haujawahi kuhifadhiwa",
 		"description": "[hitilafu] mtumiaji alijaribu kuondoa ukurasa ambao haukuwa umehifadhiwa bado"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Jumla",
 		"description": "Lebo ya kategoria ya mipangilio ya jumla"
+	},
+	"generic_pin_tabs": {
+		"message": "Tab-s za jumla $pinned",
+		"description": "Tab-s pendwa za mtumiaji ambazo si maalum kwa shirika (org)"
+	},
+	"generic_tabs": {
+		"message": "Tab-s za jumla",
+		"description": "Tab-s pendwa za mtumiaji ambazo si maalum kwa shirika (org)"
 	},
 	"help": {
 		"message": "Usaidizi",
@@ -567,6 +683,10 @@
 		"message": "Aina ya faili si sahihi.\nFaili za JSON pekee ndizo zinazotumika.",
 		"description": "[hitilafu] faili iliyotumika kuingiza si JSON"
 	},
+	"import_metadata": {
+		"message": "Ingiza metadata ya Tab (\"Idadi ya Mibofyo\", \"Tarehe ya Kubofya\" n.k.).",
+		"description": "[lebo] ingiza kila kitu kinachopatikana kwenye faili wakati wa mchakato wa kuingiza"
+	},
 	"import_successful": {
 		"message": "Imeingizwa kwa mafanikio",
 		"description": "[ingiza] kuingiza kumekamilika. Baada ya hapo, idadi ya rekodi zilizoingizwa itaonyeshwa"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs kutoka faili ya JSON",
 		"description": "[ibukizi] kichwa kwenye kitufe cha kuagiza"
+	},
+	"inactive": {
+		"message": "Haifanyi kazi",
+		"description": "Inatumika katika vijigeuza kwa hali isiyofanya kazi"
 	},
 	"insert_another": {
 		"message": "Weka nyingine",
@@ -727,6 +851,14 @@
 		"message": "Kiungo cha Org",
 		"description": "[lebo-ya-kuingiza]"
 	},
+	"org_pin_tabs": {
+		"message": "Tab-s za shirika $pinned",
+		"description": "Tab-s ambazo ni maalum kwa shirika (org)"
+	},
+	"org_tabs": {
+		"message": "Tab-s za shirika",
+		"description": "Tab-s ambazo ni maalum kwa shirika (org)"
+	},
 	"other_org_info": {
 		"message": "Taarifa Nyingine za Org",
 		"description": "[kichwa-cha-modal]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Andika juu ya Tabs zilizohifadhiwa.",
 		"description": "[lebo] futa Tabs zote zilizohifadhiwa wakati wa mchakato wa kuingiza"
+	},
+	"pinned": {
+		"message": "Imebandikwa",
+		"description": "Tab-s za mtumiaji ambazo hupatikana kila wakati mwanzoni mwa orodha"
 	},
 	"preserve_org_tabs": {
 		"message": "Hifadhi Tabs kwa Org nyingine.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Kitengeneza Mtindo wa Shirika",
 		"description": "Lebo ya kusanidi mtindo wa Tab maalum za shirika"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Lebo ya kuhakiki mwonekano wa Tab ya jumla inapobandikwa"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Lebo ya kusanidi mtindo wa Tab-s za jumla zinapobandikwa"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Lebo ya kuhakiki mwonekano wa Tab maalum ya shirika inapobandikwa"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Lebo ya kusanidi mtindo wa Tab-s maalum za shirika zinapobandikwa"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma kwa Tab-s za jumla"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mpaka kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mpaka kwa Tab-s za jumla"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya maandishi kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya maandishi kwa Tab-s za jumla"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Ombi la kuchagua mitindo ya mapambo kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Ombi la kuchagua mitindo ya mapambo kwa Tab-s za jumla"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma ya hover kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma ya hover kwa Tab-s za jumla"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya kivuli kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya kivuli kwa Tab-s za jumla"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya upau wa juu kwa Tab-s za jumla zinazotumika"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma kwa Tab-s za shirika zinazotumika"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma kwa Tab-s maalum za shirika"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mpaka kwa Tab-s maalum za shirika zinazotumika"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mpaka kwa Tab-s za shirika"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya maandishi kwa Tab-s za shirika zinazotumika"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya maandishi kwa Tab-s maalum za shirika"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Ombi la kuchagua mitindo ya mapambo kwa Tab-s maalum za shirika zinazotumika"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Ombi la kuchagua mitindo ya mapambo kwa Tab-s za shirika"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma ya hover kwa Tab-s za shirika zinazotumika"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma ya hover kwa Tab-s maalum za shirika"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya kivuli kwa Tab-s maalum za shirika zinazotumika"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya kivuli kwa Tab-s za shirika"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Lebo ya kuweka rangi ya upau wa juu kwa Tab-s za shirika zinazotumika"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Ingiza rangi ya mandharinyuma kwa Tab zako za jumla zinazotumika.",
@@ -951,6 +1207,42 @@
 		"message": "Ruka",
 		"description": "[omba_ruhusa] kitufe cha KUTORUHUSU ruhusa"
 	},
+	"style_generic_pinned": {
+		"message": "Mtindo wa $generic_tabs zilizobandikwa",
+		"description": "[chaguo] Lebo ya kugeuza ili kubadilisha mtindo wa Tab-s za jumla zilizobandikwa"
+	},
+	"style_org_pinned": {
+		"message": "Mtindo wa $org_tabs zilizobandikwa",
+		"description": "[chaguo] Lebo ya kugeuza ili kubadilisha mtindo wa Tab-s za shirika zilizobandikwa"
+	},
+	"style_settings_background_label": {
+		"message": "Ingiza rangi ya mandharinyuma kwa ajili ya yako",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma"
+	},
+	"style_settings_border_color_label": {
+		"message": "Ingiza rangi ya mpaka kwa ajili ya yako",
+		"description": "Lebo ya kuweka rangi ya mpaka"
+	},
+	"style_settings_color_label": {
+		"message": "Ingiza rangi ya maandishi kwa ajili ya yako",
+		"description": "Lebo ya kuweka rangi ya maandishi"
+	},
+	"style_settings_decoration_label": {
+		"message": "Chagua mtindo mmoja au zaidi ya mapambo kwa ajili ya yako",
+		"description": "Ombi la kuchagua mitindo ya mapambo"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Ingiza rangi ya mandharinyuma ya hover kwa ajili ya yako",
+		"description": "Lebo ya kuweka rangi ya mandharinyuma ya hover"
+	},
+	"style_settings_shadow_label": {
+		"message": "Ingiza rangi ya kivuli kwa ajili ya yako",
+		"description": "Lebo ya kuweka rangi ya kivuli"
+	},
+	"style_settings_top_active_label": {
+		"message": "Ingiza rangi ya upau juu ya yako inayotumika",
+		"description": "Lebo ya kuweka rangi inayotumika ya upau wa juu"
+	},
 	"successfully_imported": {
 		"message": "Imeingizwa kwa mafanikio",
 		"description": "[toast] mtumiaji aliongeza Tabs kutoka kwa faili ya nje"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Watumiaji",
 		"description": "Jina la ukurasa unaohusiana na ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Tafadhali hamisha Tab-s zako mpya kwani faili uliyotumia haitaungwa mkono katika matoleo yajayo.",
+		"description": "[onyo] mtumiaji aliingiza Tab-s zake kwa kutumia usanidi uliopitwa na wakati wa faili ya json"
 	},
 	"where_to": {
 		"message": "Wapi?",

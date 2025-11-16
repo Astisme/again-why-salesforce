@@ -25,6 +25,7 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 
 	/**
 	 * Sets the `noPerm` item in localStorage then switches to the standard popup
+	 * @param {Event} e - the event connected to the event listener
 	 */
 	const setNoPerm = (e) => {
 		e.preventDefault();
@@ -44,6 +45,10 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 } else if (whichPermissions === "download") {
 	document.getElementById("host_permissions").classList.add("hidden");
 	document.getElementById("download").classList.remove("hidden");
+	/**
+	 * Tells the browser to reset the Popup to the original one
+	 * @return undefined
+	 */
 	const setOriginalPopup = () =>
 		BROWSER.action.setPopup({
 			popup: popuplink,

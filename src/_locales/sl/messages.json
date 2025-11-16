@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktiven",
+		"description": "Uporablja se v preklopnih gumbih za aktivno stanje"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktivni $generic_pin_tabs",
+		"description": "Generični pripeti Tab-i uporabnika, ki so trenutno aktivni"
+	},
+	"active_generic_tabs": {
+		"message": "aktivni $generic_tabs",
+		"description": "Generični Tab-i uporabnika, ki so trenutno aktivni"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktivni $org_pin_tabs",
+		"description": "Org pripeti Tab-i uporabnika, ki so trenutno aktivni"
+	},
+	"active_org_tabs": {
+		"message": "aktivni $org_tabs",
+		"description": "Org Tab-i uporabnika, ki so trenutno aktivni"
+	},
 	"allow": {
 		"message": "Dovoli",
 		"description": "[zahtevaj_dovoljenje] gumb za dovoljenje dovoljenj"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstni-meni]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Pripni",
+		"description": "[kontekstni-meni] uporabniku omogoča, da ta Tab obdrži na začetku svojega seznama"
+	},
 	"cxm_remove": {
 		"message": "💥 Odstrani Tab(e)",
 		"description": "[kontekstni_meni]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Drugi Tabs",
 		"description": "[kontekstni_meni]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Odstrani Pripete",
+		"description": "[kontekstni-meni] uporabniku omogoča, da odstrani svoje pripete Tab-e"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs na desni",
 		"description": "[kontekstni_meni]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ta Tab",
 		"description": "[kontekstni_meni]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Odstrani Nepripete",
+		"description": "[kontekstni-meni] uporabniku omogoča, da odstrani svoje nepripete Tab-e"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Ponastavi privzete Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Razvrsti Tab-e",
 		"description": "kontekstni meni za samodejno razvrščanje Tab-ov uporabnikov (nadrejeni meni)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ po Uporabi",
+		"description": "kontekstni meni, ki uporabnikom omogoča razvrščanje Tab-ov glede na število klikov"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ po Času",
+		"description": "kontekstni meni, ki uporabnikom omogoča razvrščanje Tab-ov glede na čas, ko so bili Tab-i kliknjeni"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 po oznaki",
 		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po oznaki"
@@ -163,13 +203,25 @@
 		"message": "🤖 po URL-ju",
 		"description": "kontekstni meni za razvrščanje Tab-ov uporabnikov po URL-ju"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Skrij Tab-e, ki niso Org",
+		"description": "[kontekstni-meni] začasno skrije generične Tab-e"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Skrij Org Tab-e",
+		"description": "[kontekstni-meni] začasno skrije Org Tab-e"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Odpni",
+		"description": "[kontekstni-meni] uporabniku omogoča, da ta Tab odstrani s svojega pripetega seznama"
+	},
 	"cxm_update": {
 		"message": "✏️ Posodobi Tab",
 		"description": "[kontekstni_meni]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Preklopi Org",
-		"description": "[kontekstni_meni]"
+		"message": "👜 Preklopi Org",
+		"description": "[kontekstni-meni]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Druge posodobitve",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Napaka pri dodajanju Tab.",
 		"description": "[napaka] Splošna napaka, uporabljena pri dodajanju Tab"
+	},
+	"error_already_pinned": {
+		"message": "Ta Tab je bil že pripet.",
+		"description": "[napaka] uporabnik je poskušal pripeti že pripet Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Ta Tab je bil že odpet.",
+		"description": "[napaka] uporabnik je poskušal odpneti že odpet Tab"
+	},
+	"error_cannot_move": {
+		"message": "Tega Tab-a ni mogoče premakniti!",
+		"description": "[napaka] zahtevanega Tab-a trenutno ni mogoče premakniti."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tega Tab-a ni mogoče premakniti v tej smeri!",
+		"description": "[napaka] zahtevanega Tab-a trenutno ni mogoče premakniti."
 	},
 	"error_check_update": {
 		"message": "Napaka pri preverjanju posodobitev",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Napaka med uvozom:\n",
 		"description": "[napaka] med postopkom uvoza je prišlo do napake"
+	},
+	"error_internal": {
+		"message": "Notranja Napaka",
+		"description": "[napaka] splošna napaka"
 	},
 	"error_invalid_key": {
 		"message": "Parameter ključa, posredovan funkciji, ni veljaven",
@@ -323,9 +395,17 @@
 		"message": "Ni objekta za preverjanje!",
 		"description": "[napaka] objekt ni bil posredovan"
 	},
+	"error_no_pinned": {
+		"message": "Še nimate pripetih Tab-ov!",
+		"description": "[napaka] uporabnik je poskušal odstraniti pripete Tab-e, vendar nima nobenih pripetih Tab-ov"
+	},
 	"error_no_setup_tab": {
 		"message": "Neuspešno iskanje zavihka Setup.",
 		"description": "[napaka] Razširitev ni mogla najti mesta za priljubljene Tabs."
+	},
+	"error_no_unpinned": {
+		"message": "Nimate nobenih nepripetih Tab-ov!",
+		"description": "[napaka] uporabnik je poskušal odstraniti nepripete Tab-e, vendar nima nobenih nepripetih Tab-ov"
 	},
 	"error_no_url": {
 		"message": "Ni URL-ja za preverjanje!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "še ni bil inicializiran.",
 		"description": "[napaka] Splošna napaka, ko spremenljivka ni pripravljena"
+	},
+	"error_pin_tab": {
+		"message": "Napaka pri pripenjanju Tab-a",
+		"description": "[napaka]"
 	},
 	"error_processing_tabs": {
 		"message": "Napaka pri obdelavi Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Napaka pri odstranjevanju drugih Tabs.",
 		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju drugih Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Napaka pri odstranjevanju pripetih Tab-ov.",
+		"description": "[napaka] Splošna napaka pri odstranjevanju nepripetih Tab-ov"
+	},
 	"error_removing_tab": {
 		"message": "Napaka pri odstranjevanju Tab.",
 		"description": "[napaka] Splošna napaka, uporabljena pri odstranjevanju Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Napaka pri odstranjevanju nepripetih Tab-ov.",
+		"description": "[napaka] Splošna napaka pri odstranjevanju nepripetih Tab-ov"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Napaka pri odstranjevanju vseh vidnih Tab.",
@@ -383,6 +475,14 @@
 		"message": "Ni mogoče sinhronizirati ničelnih (null) Tabs!",
 		"description": "[napaka] poskus sinhronizacije ničesar"
 	},
+	"error_tab_click_count": {
+		"message": "Število Klikov mora biti nenegativno število",
+		"description": "[napaka] uporabnik je poskušal ustvariti Tab z napačnim številom klikov"
+	},
+	"error_tab_click_date": {
+		"message": "Datum Klika mora biti število, ki ne določa datuma v prihodnosti",
+		"description": "[napaka] uporabnik je poskušal ustvariti Tab z napačnim datumom klika"
+	},
 	"error_tab_constructor": {
 		"message": "Uporabite Tab.create() namesto new Tab() za uporabo razreda Tab",
 		"description": "[napaka] povejte razvijalcu, kako uporabljati razred Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab ni bil najden.",
 		"description": "[napaka] Tab ni bil vključen v tabelo"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab še ni pripet!",
+		"description": "[napaka] uporabnik je poskušal odpneti neprijet Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Pri klicanju z objektom ne posredujte ničesar drugega.",
@@ -443,6 +547,10 @@
 		"message": "Neznana zahteva.",
 		"description": "[napaka] Splošna napaka po prejemu sporočila, ki ni bilo prepoznano"
 	},
+	"error_unpin_tab": {
+		"message": "Napaka pri odpenjanju Tab-a",
+		"description": "[napaka]"
+	},
 	"error_useless_remove": {
 		"message": "Ni mogoče odstraniti:\nNi mogoče odstraniti strani, ki še ni bila shranjena",
 		"description": "[napaka] uporabnik je poskusil odstraniti stran, ki še ni bila shranjena"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Splošno",
 		"description": "Oznaka za kategorijo splošnih nastavitev"
+	},
+	"generic_pin_tabs": {
+		"message": "generični $pinned Tab-i",
+		"description": "Priljubljeni Tab-i uporabnika, ki niso specifični za organizacijo (org)"
+	},
+	"generic_tabs": {
+		"message": "generični Tab-i",
+		"description": "Priljubljeni Tab-i uporabnika, ki niso specifični za organizacijo (org)"
 	},
 	"help": {
 		"message": "Pomoč",
@@ -567,6 +683,10 @@
 		"message": "Neveljavna vrsta datoteke.\nPodprte so samo datoteke JSON.",
 		"description": "[napaka] datoteka, uporabljena za uvoz, ni JSON"
 	},
+	"import_metadata": {
+		"message": "Uvozi metapodatke Tab-a (\"Število Klikov\", \"Datum Klika\" itd.).",
+		"description": "[oznaka] uvozi vse, kar je najdeno v datoteki med postopkom uvoza"
+	},
 	"import_successful": {
 		"message": "Uspešno uvoženo",
 		"description": "[uvoz] uvoz je bil zaključen. Po tem bo prikazano število uvoženih zapisov"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs iz datoteke JSON",
 		"description": "[pojavno-okno] naslov na gumbu za uvoz"
+	},
+	"inactive": {
+		"message": "Neaktiven",
+		"description": "Uporablja se v preklopnih gumbih za neaktivno stanje"
 	},
 	"insert_another": {
 		"message": "Vstavi drugega",
@@ -727,6 +851,14 @@
 		"message": "Povezava Org",
 		"description": "[oznaka_vnosa]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab-i",
+		"description": "Tab-i, ki so specifični za organizacijo (org)"
+	},
+	"org_tabs": {
+		"message": "org Tab-i",
+		"description": "Tab-i, ki so specifični za organizacijo (org)"
+	},
 	"other_org_info": {
 		"message": "Informacije o drugi Org",
 		"description": "[naslov_modalnega_okna]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Prepiši shranjene Tabs.",
 		"description": "[oznaka] izbriši vse shranjene Tabs med postopkom uvoza"
+	},
+	"pinned": {
+		"message": "Pripet",
+		"description": "Tab-i uporabnika, ki so vedno na začetku seznama"
 	},
 	"preserve_org_tabs": {
 		"message": "Ohrani Tabs za druge Org.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Oblikovalnik organizacije",
 		"description": "Oznaka za konfiguriranje sloga Tabov specifičnih za organizacijo"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Oznaka za predogled videza generičnega Tab-a, ko je pripet"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Oznaka za konfiguriranje sloga generičnih Tab-ov, ko so pripeti"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Oznaka za predogled videza Tab-a, specifičnega za org, ko je pripet"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Oznaka za konfiguriranje sloga Tab-ov, specifičnih za org, ko so pripeti"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja za generične Tab-e"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve obrobe za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve obrobe za generične Tab-e"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve besedila za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve besedila za generične Tab-e"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Poziv za izbiro stilov dekoracije za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Poziv za izbiro stilov dekoracije za generične Tab-e"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja ob lebdenju (hover) za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja ob lebdenju (hover) za generične Tab-e"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve sence za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve sence za generične Tab-e"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Oznaka za nastavitev barve zgornje vrstice za aktivne generične Tab-e"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja za aktivne org Tab-e"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja za Tab-e, specifične za org"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Oznaka za nastavitev barve obrobe za aktivne Tab-e, specifične za org"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Oznaka za nastavitev barve obrobe za org Tab-e"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Oznaka za nastavitev barve besedila za aktivne org Tab-e"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Oznaka za nastavitev barve besedila za Tab-e, specifične za org"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Poziv za izbiro stilov dekoracije za aktivne Tab-e, specifične za org"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Poziv za izbiro stilov dekoracije za org Tab-e"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja ob lebdenju (hover) za aktivne org Tab-e"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Oznaka za nastavitev barve ozadja ob lebdenju (hover) za Tab-e, specifične za org"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Oznaka za nastavitev barve sence za aktivne Tab-e, specifične za org"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Oznaka za nastavitev barve sence za org Tab-e"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Oznaka za nastavitev barve zgornje vrstice za aktivne org Tab-e"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Vnesite barvo ozadja za vaše aktivne splošne Tab.",
@@ -951,6 +1207,42 @@
 		"message": "Preskoči",
 		"description": "[zahtevaj_dovoljenje] gumb za NE dovoljenje dovoljenj"
 	},
+	"style_generic_pinned": {
+		"message": "Slog pripetih $generic_tabs",
+		"description": "[možnosti] Oznaka preklopnika za slog pripetih generičnih Tab-ov"
+	},
+	"style_org_pinned": {
+		"message": "Slog pripetih $org_tabs",
+		"description": "[možnosti] Oznaka preklopnika za slog pripetih org Tab-ov"
+	},
+	"style_settings_background_label": {
+		"message": "Vnesite barvo ozadja za vaš",
+		"description": "Oznaka za nastavitev barve ozadja"
+	},
+	"style_settings_border_color_label": {
+		"message": "Vnesite barvo obrobe za vaš",
+		"description": "Oznaka za nastavitev barve obrobe"
+	},
+	"style_settings_color_label": {
+		"message": "Vnesite barvo besedila za vaš",
+		"description": "Oznaka za nastavitev barve besedila"
+	},
+	"style_settings_decoration_label": {
+		"message": "Izberite enega ali več stilov dekoracije za vaš",
+		"description": "Poziv za izbiro stilov dekoracije"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Vnesite barvo ozadja ob lebdenju (hover) za vaš",
+		"description": "Oznaka za nastavitev barve ozadja ob lebdenju (hover)"
+	},
+	"style_settings_shadow_label": {
+		"message": "Vnesite barvo sence za vaš",
+		"description": "Oznaka za nastavitev barve sence"
+	},
+	"style_settings_top_active_label": {
+		"message": "Vnesite barvo vrstice na vrhu vašega aktivnega",
+		"description": "Oznaka za nastavitev aktivne barve zgornje vrstice"
+	},
 	"successfully_imported": {
 		"message": "Uspešno uvoženo",
 		"description": "[toast] uporabnik je dodal Tabs iz zunanje datoteke"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Uporabniki",
 		"description": "Ime strani, povezano z ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Prosimo, izvozite svoje nove Tab-e, saj datoteka, ki ste jo uporabili, v prihodnjih izdajah ne bo več podprta.",
+		"description": "[opozorilo] uporabnik je uvozil svoje Tab-e z zastarelo konfiguracijo datoteke json"
 	},
 	"where_to": {
 		"message": "Kam?",

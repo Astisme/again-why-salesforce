@@ -45,6 +45,28 @@ Deno.test("TranslationService - translate method", async () => {
 		"Bonjour Monde",
 		"Placeholder should get translated",
 	);
+	// change lang to en
+	service.loadLanguageFile("en");
+	// check concatenated translations
+	assertEquals(
+		await service.translate("salesforce"),
+		"Salesforce",
+	);
+	assertEquals(
+		await service.translate("sf_login"),
+		"Salesforce Login",
+		"Placeholder should get translated",
+	);
+	assertEquals(
+		await service.translate("use_sf_login"),
+		"Use Salesforce Login",
+		"Placeholder in placeholder should get translated",
+	);
+	assertEquals(
+		await service.translate("plz_use_sf_login"),
+		"You should Use Salesforce Login please!",
+		"Placeholder in placeholder in placeholder should get translated",
+	);
 });
 
 Deno.test("TranslationService - updatePageTranslations", async (t) => {

@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktyvus",
+		"description": "Naudojama jungikliuose aktyviai būsenai"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktyvūs $generic_pin_tabs",
+		"description": "Vartotojo bendrosios Prisegtos Tab, kurios šiuo metu yra aktyvios"
+	},
+	"active_generic_tabs": {
+		"message": "aktyvios $generic_tabs",
+		"description": "Vartotojo bendrosios Tab, kurios šiuo metu yra aktyvios"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktyvūs $org_pin_tabs",
+		"description": "Vartotojo org Prisegtos Tab, kurios šiuo metu yra aktyvios"
+	},
+	"active_org_tabs": {
+		"message": "aktyvios $org_tabs",
+		"description": "Vartotojo org Tab, kurios šiuo metu yra aktyvios"
+	},
 	"allow": {
 		"message": "Leisti",
 		"description": "[prašyti_leidimo] mygtukas leidimams suteikti"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstinis-meniu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Prisegti",
+		"description": "[kontekstinis-meniu] leidžia vartotojui išlaikyti šią Tab sąrašo pradžioje"
+	},
 	"cxm_remove": {
 		"message": "💥 Pašalinti Tab(s)",
 		"description": "[kontekstinis_meniu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Kiti Tabs",
 		"description": "[kontekstinis_meniu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Pašalinti Prisegtas",
+		"description": "[kontekstinis-meniu] leidžia vartotojui pašalinti savo prisegtas Tab"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs dešinėje",
 		"description": "[kontekstinis_meniu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Šis Tab",
 		"description": "[kontekstinis_meniu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Pašalinti Neprisegtas",
+		"description": "[kontekstinis-meniu] leidžia vartotojui pašalinti savo neprisegtas Tab"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Atstatyti numatytąsias Tabs",
@@ -151,6 +183,14 @@
 		"message": "🎯 Rūšiuoti Tab'us",
 		"description": "Kontekstinis meniu, leidžiantis vartotojams automatiškai rūšiuoti savo Tab'us (pagrindinis meniu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ pagal Naudojimą",
+		"description": "kontekstinis meniu, leidžiantis vartotojams rūšiuoti Tab pagal tai, kiek kartų jie spustelėjo savo Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ pagal Laiką",
+		"description": "kontekstinis meniu, leidžiantis vartotojams rūšiuoti Tab pagal tai, kada buvo spustelėtos Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 pagal žymę",
 		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal žymę"
@@ -163,13 +203,25 @@
 		"message": "🤖 pagal URL",
 		"description": "Kontekstinis meniu, leidžiantis vartotojams rūšiuoti savo Tab'us pagal URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Slėpti ne-Org Tab",
+		"description": "[kontekstinis-meniu] laikinai paslėpti bendrąsias Tab"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Slėpti Org Tab",
+		"description": "[kontekstinis-meniu] laikinai paslėpti Org Tab"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Atsegti",
+		"description": "[kontekstinis-meniu] leidžia vartotojui pašalinti šią Tab iš prisegtų sąrašo"
+	},
 	"cxm_update": {
 		"message": "✏️ Atnaujinti Tab",
 		"description": "[kontekstinis_meniu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Perjungti Org",
-		"description": "[kontekstinis_meniu]"
+		"message": "👜 Perjungti Org",
+		"description": "[kontekstinis-meniu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Kiti atnaujinimai",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Klaida pridedant Tab.",
 		"description": "[klaida] Bendra klaida naudojama pridedant Tab"
+	},
+	"error_already_pinned": {
+		"message": "Ši Tab jau buvo prisegta.",
+		"description": "[klaida] vartotojas bandė prisegti jau prisegtą Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Ši Tab jau buvo atsegta.",
+		"description": "[klaida] vartotojas bandė atsegti jau atsegtą Tab"
+	},
+	"error_cannot_move": {
+		"message": "Šios Tab negalima perkelti!",
+		"description": "[klaida] prašomos Tab šiuo metu negalima perkelti."
+	},
+	"error_cannot_move_dir": {
+		"message": "Šios Tab negalima perkelti šia kryptimi!",
+		"description": "[klaida] prašomos Tab šiuo metu negalima perkelti."
 	},
 	"error_check_update": {
 		"message": "Klaida tikrinant atnaujinimus",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Klaida importuojant:\n",
 		"description": "[klaida] importavimo proceso metu įvyko klaida"
+	},
+	"error_internal": {
+		"message": "Vidinė Klaida",
+		"description": "[klaida] bendra klaida"
 	},
 	"error_invalid_key": {
 		"message": "Funkcijai perduotas rakto parametras yra neteisingas",
@@ -323,9 +395,17 @@
 		"message": "Nėra objekto tikrinimui!",
 		"description": "[klaida] objektas neperduotas"
 	},
+	"error_no_pinned": {
+		"message": "Jūs dar neturite prisegtų Tab!",
+		"description": "[klaida] vartotojas bandė pašalinti prisegtas Tab, bet neturi jokių prisegtų Tab"
+	},
 	"error_no_setup_tab": {
 		"message": "Nepavyko rasti Sąrankos (Setup) skirtuko.",
 		"description": "[klaida] Plėtinys negalėjo rasti, kur įdėti mėgstamiausius Tabs."
+	},
+	"error_no_unpinned": {
+		"message": "Jūs neturite neprisegtų Tab!",
+		"description": "[klaida] vartotojas bandė pašalinti neprisegtas Tab, bet neturi jokių neprisegtų Tab"
 	},
 	"error_no_url": {
 		"message": "Nėra URL tikrinimui!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "dar nebuvo inicializuotas.",
 		"description": "[klaida] Bendra klaida, kai kintamasis nėra paruoštas"
+	},
+	"error_pin_tab": {
+		"message": "Klaida prisegant Tab",
+		"description": "[klaida]"
 	},
 	"error_processing_tabs": {
 		"message": "Klaida apdorojant Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Klaida šalinant kitus Tabs.",
 		"description": "[klaida] Bendra klaida naudojama šalinant kitus Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Klaida šalinant prisegtas Tab.",
+		"description": "[klaida] Bendra klaida, naudojama šalinant neprisegtas Tab"
+	},
 	"error_removing_tab": {
 		"message": "Klaida šalinant Tab.",
 		"description": "[klaida] Bendra klaida naudojama šalinant Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Klaida šalinant neprisegtas Tab.",
+		"description": "[klaida] Bendra klaida, naudojama šalinant neprisegtas Tab"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Klaida pašalinant visas matomas Tabs.",
@@ -383,6 +475,14 @@
 		"message": "Negalima sinchronizuoti null Tabs!",
 		"description": "[klaida] bandyta sinchronizuoti nieko"
 	},
+	"error_tab_click_count": {
+		"message": "Paspaudimų Skaičius turi būti neneigiamas skaičius",
+		"description": "[klaida] vartotojas bandė sukurti Tab su neteisingu paspaudimų skaičiumi"
+	},
+	"error_tab_click_date": {
+		"message": "Paspaudimo Data turi būti skaičius, kurio rezultatas nėra būsima data",
+		"description": "[klaida] vartotojas bandė sukurti Tab su neteisinga paspaudimo data"
+	},
 	"error_tab_constructor": {
 		"message": "Naudokite Tab.create() vietoj new Tab()",
 		"description": "[klaida] nurodykite kūrėjui, kaip naudoti Tab klasę"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab nerastas.",
 		"description": "[klaida] Tab nebuvo įtrauktas į masyvą"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab dar neprisegta!",
+		"description": "[klaida] vartotojas bandė atsegti neprisegtą Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Kviečiant su objektu, nieko kito neperduokite.",
@@ -443,6 +547,10 @@
 		"message": "Nežinoma užklausa.",
 		"description": "[klaida] Bendra klaida gavus neatpažintą žinutę"
 	},
+	"error_unpin_tab": {
+		"message": "Klaida atsegant Tab",
+		"description": "[klaida]"
+	},
 	"error_useless_remove": {
 		"message": "Negalima pašalinti:\nNegalima pašalinti puslapio, kuris anksčiau nebuvo išsaugotas",
 		"description": "[klaida] vartotojas bandė pašalinti puslapį, kuris dar nebuvo išsaugotas"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Bendri",
 		"description": "Etiketė bendrai nustatymų kategorijai"
+	},
+	"generic_pin_tabs": {
+		"message": "bendrosios $pinned Tab",
+		"description": "Vartotojo mėgstamos Tab, kurios nėra specifinės org"
+	},
+	"generic_tabs": {
+		"message": "bendrosios Tab",
+		"description": "Vartotojo mėgstamos Tab, kurios nėra specifinės org"
 	},
 	"help": {
 		"message": "Pagalba",
@@ -567,6 +683,10 @@
 		"message": "Neteisingas failo tipas.\nPalaikomi tik JSON failai.",
 		"description": "[klaida] importavimui naudojamas failas nėra JSON"
 	},
+	"import_metadata": {
+		"message": "Importuoti Tab metaduomenis (\"Paspaudimų Skaičius\", \"Paspaudimo Data\" ir t.t.).",
+		"description": "[žymė] importuoti viską, kas rasta faile importavimo proceso metu"
+	},
 	"import_successful": {
 		"message": "Sėkmingai importuota",
 		"description": "[importuoti] importavimas baigtas. Po to bus parodyta, kiek įrašų buvo importuota"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs iš JSON failo",
 		"description": "[iškylantis-langas] pavadinimas importavimo mygtuke"
+	},
+	"inactive": {
+		"message": "Neaktyvus",
+		"description": "Naudojama jungikliuose neaktyviai būsenai"
 	},
 	"insert_another": {
 		"message": "Įterpti kitą",
@@ -727,6 +851,14 @@
 		"message": "Org nuoroda",
 		"description": "[įvesties_etiketė]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab",
+		"description": "Org specifinės Tab"
+	},
+	"org_tabs": {
+		"message": "org Tab",
+		"description": "Org specifinės Tab"
+	},
 	"other_org_info": {
 		"message": "Kitos Org informacija",
 		"description": "[modal_pavadinimas]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Perrašyti išsaugotus Tabs.",
 		"description": "[etiketė] ištrinti visus išsaugotus Tabs importavimo proceso metu"
+	},
+	"pinned": {
+		"message": "Prisegta",
+		"description": "Vartotojo Tab, kurios visada randamos sąrašo pradžioje"
 	},
 	"preserve_org_tabs": {
 		"message": "Išsaugoti Tabs kitoms Org.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Organizacijos stilizavimas",
 		"description": "Etiketė organizacijai būdingų Tabų stiliui konfigūruoti"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Žymė bendrosios Tab išvaizdos peržiūrai, kai ji prisegta"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Žymė bendrųjų Tab stiliaus konfigūravimui, kai jos prisegtos"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Žymė org-specifinės Tab išvaizdos peržiūrai, kai ji prisegta"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Žymė org-specifinių Tab stiliaus konfigūravimui, kai jos prisegtos"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Žymė aktyvių bendrųjų Tab fono spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Žymė bendrųjų Tab fono spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Žymė aktyvių bendrųjų Tab kraštinės spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Žymė bendrųjų Tab kraštinės spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Žymė aktyvių bendrųjų Tab teksto spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Žymė bendrųjų Tab teksto spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Nurodymas pasirinkti aktyvių bendrųjų Tab dekoravimo stilius"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Nurodymas pasirinkti bendrųjų Tab dekoravimo stilius"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Žymė aktyvių bendrųjų Tab fono spalvai užvedus pele nustatyti"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Žymė bendrųjų Tab fono spalvai užvedus pele nustatyti"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Žymė aktyvių bendrųjų Tab šešėlio spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Žymė bendrųjų Tab šešėlio spalvai nustatyti"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Žymė aktyvių bendrųjų Tab viršutinės juostos spalvai nustatyti"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Žymė aktyvių org Tab fono spalvai nustatyti"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Žymė org-specifinių Tab fono spalvai nustatyti"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Žymė aktyvių org-specifinių Tab kraštinės spalvai nustatyti"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Žymė org Tab kraštinės spalvai nustatyti"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Žymė aktyvių org Tab teksto spalvai nustatyti"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Žymė org-specifinių Tab teksto spalvai nustatyti"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Nurodymas pasirinkti aktyvių org-specifinių Tab dekoravimo stilius"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Nurodymas pasirinkti org Tab dekoravimo stilius"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Žymė aktyvių org Tab fono spalvai užvedus pele nustatyti"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Žymė org-specifinių Tab fono spalvai užvedus pele nustatyti"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Žymė aktyvių org-specifinių Tab šešėlio spalvai nustatyti"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Žymė org Tab šešėlio spalvai nustatyti"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Žymė aktyvių org Tab viršutinės juostos spalvai nustatyti"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Įterpkite aktyvių bendrųjų Tab fono spalvą.",
@@ -951,6 +1207,42 @@
 		"message": "Praleisti",
 		"description": "[prašyti_leidimo] mygtukas NEleisti leidimų"
 	},
+	"style_generic_pinned": {
+		"message": "Stilizuoti prisegtas $generic_tabs",
+		"description": "[parinktys] Perjungimo žymė prisegtų bendrųjų Tab stilizavimui"
+	},
+	"style_org_pinned": {
+		"message": "Stilizuoti prisegtas $org_tabs",
+		"description": "[parinktys] Perjungimo žymė prisegtų org Tab stilizavimui"
+	},
+	"style_settings_background_label": {
+		"message": "Įveskite savo fono spalvą",
+		"description": "Žymė fono spalvai nustatyti"
+	},
+	"style_settings_border_color_label": {
+		"message": "Įveskite savo kraštinės spalvą",
+		"description": "Žymė kraštinės spalvai nustatyti"
+	},
+	"style_settings_color_label": {
+		"message": "Įveskite savo teksto spalvą",
+		"description": "Žymė teksto spalvai nustatyti"
+	},
+	"style_settings_decoration_label": {
+		"message": "Pasirinkite vieną ar daugiau dekoravimo stilių savo",
+		"description": "Nurodymas pasirinkti dekoravimo stilius"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Įveskite savo fono spalvą užvedus pele",
+		"description": "Žymė fono spalvai užvedus pele nustatyti"
+	},
+	"style_settings_shadow_label": {
+		"message": "Įveskite savo šešėlio spalvą",
+		"description": "Žymė šešėlio spalvai nustatyti"
+	},
+	"style_settings_top_active_label": {
+		"message": "Įveskite spalvą juostai, esančiai jūsų aktyvaus viršuje",
+		"description": "Žymė viršutinės juostos aktyviai spalvai nustatyti"
+	},
 	"successfully_imported": {
 		"message": "Sėkmingai importuota",
 		"description": "[pranešimas] vartotojas pridėjo Tabs iš išorinio failo"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Vartotojai",
 		"description": "Puslapio, susijusio su ManageUsers/home, pavadinimas"
+	},
+	"warn_upgrade_backup": {
+		"message": "Prašome eksportuoti savo naujas Tab, nes failas, kurį naudojote, nebus palaikomas būsimuose leidimuose.",
+		"description": "[įspėjimas] vartotojas importavo savo Tab naudodamas pasenusią json failo konfigūraciją"
 	},
 	"where_to": {
 		"message": "Kur?",

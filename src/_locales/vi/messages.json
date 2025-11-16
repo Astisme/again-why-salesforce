@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Hoạt động",
+		"description": "Dùng trong các nút chuyển đổi cho trạng thái hoạt động"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs đang hoạt động",
+		"description": "Các Tab đã ghim chung của người dùng hiện đang hoạt động"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs đang hoạt động",
+		"description": "Các Tab chung của người dùng hiện đang hoạt động"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs đang hoạt động",
+		"description": "Các Tab đã ghim của tổ chức người dùng hiện đang hoạt động"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs đang hoạt động",
+		"description": "Các Tab của tổ chức người dùng hiện đang hoạt động"
+	},
 	"allow": {
 		"message": "Cho phép",
 		"description": "[req_permission] Nút để cho cấp quyền"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menu-ngữ-cảnh]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Ghim",
+		"description": "[menu-ngữ-cảnh] cho phép người dùng giữ Tab này ở đầu danh sách của họ"
+	},
 	"cxm_remove": {
 		"message": "💥 Xóa Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Các Tab khác",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Xóa Tab đã Ghim",
+		"description": "[menu-ngữ-cảnh] cho phép người dùng xóa các Tab đã ghim của họ"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Xóa các Tab bên phải",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Xóa Tab này",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Xóa Tab chưa Ghim",
+		"description": "[menu-ngữ-cảnh] cho phép người dùng xóa các Tab chưa được ghim của họ"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Đặt lại Tab mặc định",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sắp xếp Tab",
 		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ tự động (menu cha)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ theo Số lần Sử dụng",
+		"description": "menu ngữ cảnh cho phép người dùng sắp xếp các Tab của họ theo số lần họ nhấp vào Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ theo Thời gian",
+		"description": "menu ngữ cảnh cho phép người dùng sắp xếp các Tab của họ theo thời điểm nhấp vào Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 theo Nhãn",
 		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo nhãn"
@@ -163,13 +203,25 @@
 		"message": "🤖 theo Url",
 		"description": "menu ngữ cảnh để cho phép người dùng sắp xếp Tab của họ theo url"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Ẩn Tab không thuộc Tổ chức",
+		"description": "[menu-ngữ-cảnh] tạm thời ẩn các Tab chung"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Ẩn Tab Tổ chức",
+		"description": "[menu-ngữ-cảnh] tạm thời ẩn các Tab Tổ chức"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Bỏ Ghim",
+		"description": "[menu-ngữ-cảnh] cho phép người dùng xóa Tab này khỏi danh sách đã ghim của họ"
+	},
 	"cxm_update": {
 		"message": "✏️ Cập nhật Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Chuyển Org",
-		"description": "[context-menu]"
+		"message": "👜 Chuyển đổi Tổ chức",
+		"description": "[menu-ngữ-cảnh]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Các cập nhật khác",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Lỗi khi thêm Tab.",
 		"description": "[lỗi] Lỗi chung được sử dụng khi thêm Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tab này đã được ghim.",
+		"description": "[lỗi] người dùng đã cố gắng ghim một Tab đã được ghim"
+	},
+	"error_already_unpinned": {
+		"message": "Tab này đã được bỏ ghim.",
+		"description": "[lỗi] người dùng đã cố gắng bỏ ghim một Tab đã được bỏ ghim"
+	},
+	"error_cannot_move": {
+		"message": "Không thể di chuyển Tab này!",
+		"description": "[lỗi] Tab được yêu cầu không thể di chuyển vào lúc này."
+	},
+	"error_cannot_move_dir": {
+		"message": "Không thể di chuyển Tab này theo hướng này!",
+		"description": "[lỗi] Tab được yêu cầu không thể di chuyển vào lúc này."
 	},
 	"error_check_update": {
 		"message": "Lỗi khi kiểm tra cập nhật",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Lỗi khi nhập khẩu:\n",
 		"description": "[error] Có lỗi xảy ra trong quá trình nhập khẩu."
+	},
+	"error_internal": {
+		"message": "Lỗi Nội bộ",
+		"description": "[lỗi] lỗi chung"
 	},
 	"error_invalid_key": {
 		"message": "Tham số khóa được truyền cho hàm không hợp lệ",
@@ -323,9 +395,17 @@
 		"message": "Không có đối tượng để kiểm tra!",
 		"description": "[error] Không có đối tượng được cung cấp."
 	},
+	"error_no_pinned": {
+		"message": "Bạn chưa có Tab nào được ghim!",
+		"description": "[lỗi] người dùng đã cố gắng xóa các Tab đã ghim nhưng họ không có Tab nào được ghim"
+	},
 	"error_no_setup_tab": {
 		"message": "Không tìm thấy Setup Tab",
 		"description": "[error] Tiện ích không tìm thấy vị trí để đặt các Tabs yêu thích."
+	},
+	"error_no_unpinned": {
+		"message": "Bạn không có Tab nào chưa ghim!",
+		"description": "[lỗi] người dùng đã cố gắng xóa các Tab chưa ghim nhưng họ không có Tab nào chưa ghim"
 	},
 	"error_no_url": {
 		"message": "Không có URL để kiểm tra!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "chưa được khởi tạo.",
 		"description": "[lỗi] Lỗi chung khi một biến chưa sẵn sàng"
+	},
+	"error_pin_tab": {
+		"message": "Lỗi khi ghim Tab",
+		"description": "[lỗi]"
 	},
 	"error_processing_tabs": {
 		"message": "Lỗi xử lý Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Lỗi khi xóa các Tabs khác.",
 		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tabs khác"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Lỗi khi xóa các Tab đã ghim.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tab không được ghim"
+	},
 	"error_removing_tab": {
 		"message": "Lỗi khi xóa Tab.",
 		"description": "[lỗi] Lỗi chung được sử dụng khi xóa Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Lỗi khi xóa các Tab chưa ghim.",
+		"description": "[lỗi] Lỗi chung được sử dụng khi xóa các Tab chưa ghim"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Lỗi khi xóa tất cả các Tab hiển thị.",
@@ -383,6 +475,14 @@
 		"message": "Không thể đồng bộ các Tabs rỗng!",
 		"description": "[error] Đã cố đồng bộ những gì không có."
 	},
+	"error_tab_click_count": {
+		"message": "Số Lần Nhấp phải là một số không âm",
+		"description": "[lỗi] người dùng đã cố gắng tạo một Tab với số lần nhấp sai"
+	},
+	"error_tab_click_date": {
+		"message": "Ngày Nhấp phải là một số không dẫn đến ngày trong tương lai",
+		"description": "[lỗi] người dùng đã cố gắng tạo một Tab với ngày nhấp sai"
+	},
 	"error_tab_constructor": {
 		"message": "Sử dụng Tab.create() thay vì new Tab() để sử dụng lớp Tab",
 		"description": "[lỗi] cho nhà phát triển biết cách sử dụng lớp Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Không tìm thấy Tab.",
 		"description": "[error] Tab không có trong danh sách."
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab chưa được ghim!",
+		"description": "[lỗi] người dùng đã cố gắng bỏ ghim một Tab chưa được ghim"
 	},
 	"error_tab_object_creation": {
 		"message": "Khi gọi với một đối tượng, đừng truyền thứ gì khác.",
@@ -442,6 +546,10 @@
 		"message": "Yêu cầu không xác định.",
 		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo không được nhận dạng"
 	},
+	"error_unpin_tab": {
+		"message": "Lỗi khi bỏ ghim Tab",
+		"description": "[lỗi]"
+	},
 	"error_useless_remove": {
 		"message": "Không thể xóa:\nKhông thể xóa một trang chưa từng được lưu.",
 		"description": "[error] Đã cố xóa trang chưa được lưu."
@@ -481,6 +589,14 @@
 	"general": {
 		"message": "Chung",
 		"description": "Nhãn cho danh mục cài đặt chung"
+	},
+	"generic_pin_tabs": {
+		"message": "$pinned Tab chung",
+		"description": "Các Tab yêu thích của người dùng không thuộc về tổ chức cụ thể"
+	},
+	"generic_tabs": {
+		"message": "Tab chung",
+		"description": "Các Tab yêu thích của người dùng không thuộc về tổ chức cụ thể"
 	},
 	"help": {
 		"message": "Trợ giúp",
@@ -566,6 +682,10 @@
 		"message": "Loại file không hợp lệ.\nChỉ hỗ trợ các file JSON.",
 		"description": "[error] File sử dụng để nhập khẩu không phải là JSON."
 	},
+	"import_metadata": {
+		"message": "Nhập siêu dữ liệu Tab (\"Số Lần Nhấp\", \"Ngày Nhấp\" v.v.).",
+		"description": "[nhãn] nhập mọi thứ tìm thấy trong tệp trong quá trình nhập"
+	},
 	"import_successful": {
 		"message": "Nhập thành công",
 		"description": "[nhập] quá trình nhập đã hoàn tất. Sau đó, một số lượng bản ghi đã được nhập sẽ được hiển thị"
@@ -577,6 +697,10 @@
 	"import_title": {
 		"message": "$import_tabs từ tệp JSON",
 		"description": "[popup] tiêu đề trên nút nhập"
+	},
+	"inactive": {
+		"message": "Không hoạt động",
+		"description": "Dùng trong các nút chuyển đổi cho trạng thái không hoạt động"
 	},
 	"insert_another": {
 		"message": "Chèn thêm một cái nữa",
@@ -726,6 +850,14 @@
 		"message": "Liên kết Org",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "$pinned Tab tổ chức",
+		"description": "Các Tab dành riêng cho tổ chức"
+	},
+	"org_tabs": {
+		"message": "Tab tổ chức",
+		"description": "Các Tab dành riêng cho tổ chức"
+	},
 	"other_org_info": {
 		"message": "Thông tin Org khác",
 		"description": "[modal-title]"
@@ -737,6 +869,10 @@
 	"overwrite_tabs": {
 		"message": "Ghi đè các Tabs đã lưu.",
 		"description": "[label] Xóa hết các Tabs đã lưu trong quá trình nhập khẩu"
+	},
+	"pinned": {
+		"message": "Đã Ghim",
+		"description": "Các Tab của người dùng luôn được tìm thấy ở đầu danh sách"
 	},
 	"preserve_org_tabs": {
 		"message": "Bảo lưu các Tabs cho Org khác.",
@@ -829,6 +965,126 @@
 	"set_org_styler": {
 		"message": "Bộ tạo kiểu Org",
 		"description": "Nhãn để cấu hình kiểu cho Tab dành riêng cho Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Nhãn để xem trước giao diện Tab chung khi được ghim"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Nhãn để cấu hình kiểu của các Tab chung khi được ghim"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Nhãn để xem trước giao diện Tab tổ chức khi được ghim"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Nhãn để cấu hình kiểu của các Tab tổ chức khi được ghim"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Nhãn để đặt màu nền cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Nhãn để đặt màu nền cho các Tab chung"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Nhãn để đặt màu viền cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Nhãn để đặt màu viền cho các Tab chung"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Nhãn để đặt màu chữ cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Nhãn để đặt màu chữ cho các Tab chung"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Lời nhắc chọn kiểu trang trí cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Lời nhắc chọn kiểu trang trí cho các Tab chung"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Nhãn để đặt màu nền khi di chuột cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Nhãn để đặt màu nền khi di chuột cho các Tab chung"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Nhãn để đặt màu đổ bóng cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Nhãn để đặt màu đổ bóng cho các Tab chung"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Nhãn để đặt màu thanh trên cùng cho các Tab chung đang hoạt động"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Nhãn để đặt màu nền cho các Tab tổ chức đang hoạt động"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Nhãn để đặt màu nền cho các Tab tổ chức"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Nhãn để đặt màu viền cho các Tab tổ chức đang hoạt động"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Nhãn để đặt màu viền cho các Tab tổ chức"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Nhãn để đặt màu chữ cho các Tab tổ chức đang hoạt động"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Nhãn để đặt màu chữ cho các Tab tổ chức"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Lời nhắc chọn kiểu trang trí cho các Tab tổ chức đang hoạt động"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Lời nhắc chọn kiểu trang trí cho các Tab tổ chức"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Nhãn để đặt màu nền khi di chuột cho các Tab tổ chức đang hoạt động"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Nhãn để đặt màu nền khi di chuột cho các Tab tổ chức"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Nhãn để đặt màu đổ bóng cho các Tab tổ chức đang hoạt động"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Nhãn để đặt màu đổ bóng cho các Tab tổ chức"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Nhãn để đặt màu thanh trên cùng cho các Tab tổ chức đang hoạt động"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Nhập màu nền cho Tab chung đang hoạt động của bạn.",
@@ -950,6 +1206,42 @@
 		"message": "Bỏ qua",
 		"description": "[req_permission] Nút để không cho cấp quyền"
 	},
+	"style_generic_pinned": {
+		"message": "Kiểu cho $generic_tabs đã ghim",
+		"description": "[tùy-chọn] Nhãn chuyển đổi để tạo kiểu cho các Tab chung đã ghim"
+	},
+	"style_org_pinned": {
+		"message": "Kiểu cho $org_tabs đã ghim",
+		"description": "[tùy-chọn] Nhãn chuyển đổi để tạo kiểu cho các Tab tổ chức đã ghim"
+	},
+	"style_settings_background_label": {
+		"message": "Chèn màu nền cho",
+		"description": "Nhãn để đặt màu nền"
+	},
+	"style_settings_border_color_label": {
+		"message": "Chèn màu viền cho",
+		"description": "Nhãn để đặt màu viền"
+	},
+	"style_settings_color_label": {
+		"message": "Chèn màu chữ cho",
+		"description": "Nhãn để đặt màu chữ"
+	},
+	"style_settings_decoration_label": {
+		"message": "Chọn một hoặc nhiều kiểu trang trí cho",
+		"description": "Lời nhắc để chọn kiểu trang trí"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Chèn màu nền khi di chuột cho",
+		"description": "Nhãn để đặt màu nền khi di chuột"
+	},
+	"style_settings_shadow_label": {
+		"message": "Chèn màu đổ bóng cho",
+		"description": "Nhãn để đặt màu đổ bóng"
+	},
+	"style_settings_top_active_label": {
+		"message": "Chèn màu cho thanh ở trên cùng của",
+		"description": "Nhãn để đặt màu hoạt động của thanh trên cùng"
+	},
 	"successfully_imported": {
 		"message": "Nhập khẩu thành công",
 		"description": "[toast] Người dùng đã thêm các Tabs từ file bên ngoài."
@@ -1033,6 +1325,10 @@
 	"users": {
 		"message": "Người dùng",
 		"description": "Tên trang liên quan đến ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Vui lòng xuất các Tab mới của bạn vì tệp bạn đã sử dụng sẽ không được hỗ trợ trong các bản phát hành tương lai.",
+		"description": "[cảnh-báo] người dùng đã nhập các Tab của họ bằng cấu hình lỗi thời của tệp json"
 	},
 	"where_to": {
 		"message": "Đi đâu?",

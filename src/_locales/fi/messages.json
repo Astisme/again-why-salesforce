@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktiivinen",
+		"description": "Käytetään kytkimissä aktiivisessa tilassa"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktiiviset $generic_pin_tabs",
+		"description": "Käyttäjän yleiset kiinnitetyt Tab-välilehdet, jotka ovat tällä hetkellä aktiivisia"
+	},
+	"active_generic_tabs": {
+		"message": "aktiiviset $generic_tabs",
+		"description": "Käyttäjän yleiset Tab-välilehdet, jotka ovat tällä hetkellä aktiivisia"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktiiviset $org_pin_tabs",
+		"description": "Käyttäjän organisaatiokohtaiset kiinnitetyt Tab-välilehdet, jotka ovat tällä hetkellä aktiivisia"
+	},
+	"active_org_tabs": {
+		"message": "aktiiviset $org_tabs",
+		"description": "Käyttäjän organisaatiokohtaiset Tab-välilehdet, jotka ovat tällä hetkellä aktiivisia"
+	},
 	"allow": {
 		"message": "Salli",
 		"description": "[req_permission] painike, jolla myönnetään oikeudet"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[pikavalikko]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Kiinnitä",
+		"description": "[context-menu] antaa käyttäjän pitää tämän Tab-välilehden listansa alussa"
+	},
 	"cxm_remove": {
 		"message": "💥 Poista Tab(t)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Muut Tabit",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Poista kiinnitetyt",
+		"description": "[context-menu] antaa käyttäjän poistaa kiinnitetyt Tab-välilehtensä"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Oikealla olevat Tabit",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tämä Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Poista ei-kiinnitetyt",
+		"description": "[context-menu] antaa käyttäjän poistaa ei-kiinnitetyt Tab-välilehtensä"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Palauta oletus Tabit",
@@ -151,6 +183,14 @@
 		"message": "🎯 Lajittele Tabs",
 		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä automaattisesti (päävalikko)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ Käyttömäärän mukaan",
+		"description": "kontekstivalikko, jonka avulla käyttäjät voivat lajitella Tab-välilehtensä sen mukaan, kuinka monta kertaa he klikkaavat niitä"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ Ajan mukaan",
+		"description": "kontekstivalikko, jonka avulla käyttäjät voivat lajitella Tab-välilehtensä sen mukaan, milloin niitä on viimeksi klikattu"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 tunnisteen mukaan",
 		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä tunnisteen mukaan"
@@ -163,12 +203,24 @@
 		"message": "🤖 URL-osoitteen mukaan",
 		"description": "kontekstivalikko, jolla käyttäjät voivat lajitella Tabs-välilehtensä URL-osoitteen mukaan"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Piilota ei-organisaatio Tab-välilehdet",
+		"description": "[context-menu] piilota väliaikaisesti yleiset Tab-välilehdet"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Piilota Organisaatio Tab-välilehdet",
+		"description": "[context-menu] piilota väliaikaisesti Organisaatio Tab-välilehdet"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Poista kiinnitys",
+		"description": "[context-menu] antaa käyttäjän poistaa tämän Tab-välilehden kiinnitetystä listastaan"
+	},
 	"cxm_update": {
 		"message": "✏️ Päivitä Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Vaihda organisaatiota",
+		"message": "👜 Vaihda Organisaatio",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Virhe Tabin lisäämisessä.",
 		"description": "[error] Yleinen virhe Tabin lisäämisessä"
+	},
+	"error_already_pinned": {
+		"message": "Tämä Tab oli jo kiinnitetty.",
+		"description": "[error] käyttäjä yritti kiinnittää jo kiinnitetyn Tab-välilehden"
+	},
+	"error_already_unpinned": {
+		"message": "Tämän Tab-välilehden kiinnitys oli jo poistettu.",
+		"description": "[error] käyttäjä yritti poistaa kiinnityksen Tab-välilehdestä, jonka kiinnitys oli jo poistettu"
+	},
+	"error_cannot_move": {
+		"message": "Tätä Tab-välilehteä ei voi siirtää!",
+		"description": "[error] pyydettyä Tab-välilehteä ei voida siirtää tällä hetkellä."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tätä Tab-välilehteä ei voi siirtää tähän suuntaan!",
+		"description": "[error] pyydettyä Tab-välilehteä ei voida siirtää tällä hetkellä."
 	},
 	"error_check_update": {
 		"message": "Virhe tarkistettaessa päivityksiä",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Virhe tuonnissa:\n",
 		"description": "[error] tuontiprosessissa ilmeni virhe"
+	},
+	"error_internal": {
+		"message": "Sisäinen Virhe",
+		"description": "[error] yleinen virhe"
 	},
 	"error_invalid_key": {
 		"message": "Toiminnolle lähetetty key-parametri on virheellinen",
@@ -323,9 +395,17 @@
 		"message": "Tarkistettavaa objektia ei annettu!",
 		"description": "[error] objektia ei annettu tarkistettavaksi"
 	},
+	"error_no_pinned": {
+		"message": "Sinulla ei ole vielä kiinnitettyjä Tab-välilehtiä!",
+		"description": "[error] käyttäjä yritti poistaa kiinnitetyt Tab-välilehdet, mutta hänellä ei ole niitä"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tabia ei löytynyt.",
 		"description": "[error] laajennus ei löytänyt paikkaa, johon tallennetut Tabit asetettaisiin"
+	},
+	"error_no_unpinned": {
+		"message": "Sinulla ei ole ei-kiinnitettyjä Tab-välilehtiä!",
+		"description": "[error] käyttäjä yritti poistaa ei-kiinnitetyt Tab-välilehdet, mutta hänellä ei ole niitä"
 	},
 	"error_no_url": {
 		"message": "URL-osoitetta ei annettu tarkistettavaksi!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Ei ole vielä alustettu.",
 		"description": "[error] Yleinen virhe, kun muuttuja ei ole valmis"
+	},
+	"error_pin_tab": {
+		"message": "Virhe Tab-välilehden kiinnityksessä",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Virhe Tabsien käsittelyssä.",
@@ -359,9 +443,17 @@
 		"message": "Virhe muiden Tabsien poistamisessa.",
 		"description": "[error] Yleinen virhe muiden Tabsien poistamisessa"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Virhe kiinnitettyjen Tab-välilehtien poistamisessa.",
+		"description": "[error] Yleinen virhe, jota käytetään ei-kiinnitettyjen Tab-välilehtien poistamisessa"
+	},
 	"error_removing_tab": {
 		"message": "Virhe Tabin poistamisessa.",
 		"description": "[error] Yleinen virhe Tabin poistamisessa"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Virhe ei-kiinnitettyjen Tab-välilehtien poistamisessa.",
+		"description": "[error] Yleinen virhe, jota käytetään ei-kiinnitettyjen Tab-välilehtien poistamisessa"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Virhe kaikkia näkyviä Tab-poistoja suoritettaessa.",
@@ -383,6 +475,14 @@
 		"message": "Tyhjiä Tabeja ei voida synkronoida!",
 		"description": "[error] yritettiin synkronoida tyhjää sisältöä"
 	},
+	"error_tab_click_count": {
+		"message": "Klikkausmäärän on oltava ei-negatiivinen luku",
+		"description": "[error] käyttäjä yritti luoda Tab-välilehden väärällä klikkausmäärällä"
+	},
+	"error_tab_click_date": {
+		"message": "Klikkauspäivämäärän on oltava luku, joka ei johda tulevaan päivämäärään",
+		"description": "[error] käyttäjä yritti luoda Tab-välilehden väärällä klikkauspäivämäärällä"
+	},
 	"error_tab_constructor": {
 		"message": "Käytä Tab.create() sen sijaan, että käyttäisit new Tab()",
 		"description": "[error] Kerro kehittäjälle, miten Tab-luokkaa käytetään"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tabia ei löytynyt.",
 		"description": "[error] Tabiä ei sisällytetty taulukkoon"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab-välilehti ei ole vielä kiinnitetty!",
+		"description": "[error] käyttäjä yritti poistaa kiinnityksen ei-kiinnitetystä Tab-välilehdestä"
 	},
 	"error_tab_object_creation": {
 		"message": "Kun kutsutaan objektilla, älä lähetä mitään muuta.",
@@ -443,6 +547,10 @@
 		"message": "Tuntematon pyyntö.",
 		"description": "[error] Yleinen virhe tuntemattoman viestin vastaanoton jälkeen"
 	},
+	"error_unpin_tab": {
+		"message": "Virhe Tab-välilehden kiinnityksen poistamisessa",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Ei voi poistaa:\nSivua, jota ei ole aiemmin tallennettu, ei voi poistaa",
 		"description": "[error] käyttäjä yritti poistaa sivua, jota ei ollut tallennettu"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Yleiset",
 		"description": "Nimike yleisille asetuskategorioille"
+	},
+	"generic_pin_tabs": {
+		"message": "yleiset $pinned $tabs",
+		"description": "Käyttäjän suosikki Tab-välilehdet, jotka eivät ole organisaatiokohtaisia"
+	},
+	"generic_tabs": {
+		"message": "yleiset $tabs",
+		"description": "Käyttäjän suosikki Tab-välilehdet, jotka eivät ole organisaatiokohtaisia"
 	},
 	"help": {
 		"message": "Ohje",
@@ -567,6 +683,10 @@
 		"message": "Virheellinen tiedostotyyppi.\nVain JSON-tiedostot ovat tuettuja.",
 		"description": "[error] tuontiin käytetty tiedosto ei ole JSON"
 	},
+	"import_metadata": {
+		"message": "Tuo Tab-välilehden metatiedot (\"Klikkausmäärä\", \"Klikkauspäivämäärä\" jne.).",
+		"description": "[label] tuo kaikki tiedostosta löytyvät tiedot tuontiprosessin aikana"
+	},
 	"import_successful": {
 		"message": "Tuonti onnistui",
 		"description": "[import] tuonti on suoritettu. Tämän jälkeen näytetään tuontien määrä"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs JSON-tiedostosta",
 		"description": "[ponnahdusikkuna] otsikko tuontipainikkeessa"
+	},
+	"inactive": {
+		"message": "Inaktiivinen",
+		"description": "Käytetään kytkimissä inaktiivisessa tilassa"
 	},
 	"insert_another": {
 		"message": "Lisää toinen",
@@ -727,6 +851,14 @@
 		"message": "Organisaatiolinkki",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "organisaation $pinned $tabs",
+		"description": "Tab-välilehdet, jotka ovat organisaatiokohtaisia"
+	},
+	"org_tabs": {
+		"message": "organisaation $tabs",
+		"description": "Tab-välilehdet, jotka ovat organisaatiokohtaisia"
+	},
 	"other_org_info": {
 		"message": "Toisen Organisaation tiedot",
 		"description": "[modal-title]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Korvaa tallennetut Tabit.",
 		"description": "[label] poista kaikki tallennetut Tabit tuonnin aikana"
+	},
+	"pinned": {
+		"message": "Kiinnitetty",
+		"description": "Käyttäjän Tab-välilehdet, jotka löytyvät aina listan alusta"
 	},
 	"preserve_org_tabs": {
 		"message": "Säilytä Tabit muille organisaatioille.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Organisaation tyylittäjä",
 		"description": "Nimike organisaatiokohtaisten Tabien tyylin määrittämiselle"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Tunniste yleisen Tab-välilehden ulkoasun esikatseluun, kun se on kiinnitetty"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Tunniste yleisten Tab-välilehtien tyylin määrittämiseen, kun ne on kiinnitetty"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Tunniste organisaatiokohtaisen Tab-välilehden ulkoasun esikatseluun, kun se on kiinnitetty"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Tunniste organisaatiokohtaisten Tab-välilehtien tyylin määrittämiseen, kun ne on kiinnitetty"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Tunniste aktiivisten yleisten Tab-välilehtien taustavärin asettamiseen"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Tunniste yleisten Tab-välilehtien taustavärin asettamiseen"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Tunniste aktiivisten yleisten Tab-välilehtien reunavärin asettamiseen"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Tunniste yleisten Tab-välilehtien reunavärin asettamiseen"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Tunniste aktiivisten yleisten Tab-välilehtien tekstin värin asettamiseen"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Tunniste yleisten Tab-välilehtien tekstin värin asettamiseen"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Kehote valita koristetyylit aktiivisille yleisille Tab-välilehdille"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Kehote valita koristetyylit yleisille Tab-välilehdille"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Tunniste aktiivisten yleisten Tab-välilehtien hiiren osoituksen taustavärin asettamiseen"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Tunniste yleisten Tab-välilehtien hiiren osoituksen taustavärin asettamiseen"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Tunniste aktiivisten yleisten Tab-välilehtien varjovärin asettamiseen"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Tunniste yleisten Tab-välilehtien varjovärin asettamiseen"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Tunniste aktiivisten yleisten Tab-välilehtien yläpalkin värin asettamiseen"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Tunniste aktiivisten organisaation Tab-välilehtien taustavärin asettamiseen"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Tunniste organisaatiokohtaisten Tab-välilehtien taustavärin asettamiseen"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Tunniste aktiivisten organisaatiokohtaisten Tab-välilehtien reunavärin asettamiseen"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Tunniste organisaation Tab-välilehtien reunavärin asettamiseen"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Tunniste aktiivisten organisaation Tab-välilehtien tekstin värin asettamiseen"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Tunniste organisaatiokohtaisten Tab-välilehtien tekstin värin asettamiseen"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Kehote valita koristetyylit aktiivisille organisaatiokohtaisille Tab-välilehdille"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Kehote valita koristetyylit organisaation Tab-välilehdille"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Tunniste aktiivisten organisaation Tab-välilehtien hiiren osoituksen taustavärin asettamiseen"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Tunniste organisaatiokohtaisten Tab-välilehtien hiiren osoituksen taustavärin asettamiseen"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Tunniste aktiivisten organisaatiokohtaisten Tab-välilehtien varjovärin asettamiseen"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Tunniste organisaation Tab-välilehtien varjovärin asettamiseen"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Tunniste aktiivisten organisaation Tab-välilehtien yläpalkin värin asettamiseen"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Lisää taustaväri aktiivisille yleisille Tab-eillesi.",
@@ -951,6 +1207,42 @@
 		"message": "Ohita",
 		"description": "[req_permission] painike oikeuksien epäämiseksi"
 	},
+	"style_generic_pinned": {
+		"message": "Tyylittele kiinnitetyt $generic_tabs",
+		"description": "[options] Vaihtokytkimen tunniste kiinnitettyjen yleisten Tab-välilehtien tyylin asettamiseen"
+	},
+	"style_org_pinned": {
+		"message": "Tyylittele kiinnitetyt $org_tabs",
+		"description": "[options] Vaihtokytkimen tunniste kiinnitettyjen organisaation Tab-välilehtien tyylin asettamiseen"
+	},
+	"style_settings_background_label": {
+		"message": "Anna taustaväri omillesi",
+		"description": "Tunniste taustavärin asettamiseen"
+	},
+	"style_settings_border_color_label": {
+		"message": "Anna reunaväri omillesi",
+		"description": "Tunniste reunavärin asettamiseen"
+	},
+	"style_settings_color_label": {
+		"message": "Anna tekstin väri omillesi",
+		"description": "Tunniste tekstin värin asettamiseen"
+	},
+	"style_settings_decoration_label": {
+		"message": "Valitse yksi tai useampi koristetyyli omillesi",
+		"description": "Kehote valita koristetyylit"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Anna hiiren osoituksen taustaväri omillesi",
+		"description": "Tunniste hiiren osoituksen taustavärin asettamiseen"
+	},
+	"style_settings_shadow_label": {
+		"message": "Anna varjoväri omillesi",
+		"description": "Tunniste varjovärin asettamiseen"
+	},
+	"style_settings_top_active_label": {
+		"message": "Anna väri aktiivisten Tab-välilehtiesi yläreunassa olevalle palkille",
+		"description": "Tunniste yläpalkin aktiivisen värin asettamiseen"
+	},
 	"successfully_imported": {
 		"message": "Tuonti onnistui",
 		"description": "[toast] käyttäjä toi Tabit ulkoisesta tiedostosta onnistuneesti"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Käyttäjät",
 		"description": "ManageUsers/home -sivun nimi"
+	},
+	"warn_upgrade_backup": {
+		"message": "Vie uudet Tab-välilehtesi, koska käyttämääsi tiedostoa ei tueta tulevissa julkaisuissa.",
+		"description": "[warning] käyttäjä toi Tab-välilehtensä käyttämällä vanhentunutta json-tiedoston konfiguraatiota"
 	},
 	"where_to": {
 		"message": "Mihin?",

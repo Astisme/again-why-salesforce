@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktív",
+		"description": "Váltógombokban használatos az aktív állapotra"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktív $generic_pin_tabs",
+		"description": "A felhasználó általános Rögzített Tabjai, amelyek jelenleg aktívak"
+	},
+	"active_generic_tabs": {
+		"message": "aktív $generic_tabs",
+		"description": "A felhasználó általános Tabjai, amelyek jelenleg aktívak"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktív $org_pin_tabs",
+		"description": "A felhasználó org Rögzített Tabjai, amelyek jelenleg aktívak"
+	},
+	"active_org_tabs": {
+		"message": "aktív $org_tabs",
+		"description": "A felhasználó org Tabjai, amelyek jelenleg aktívak"
+	},
 	"allow": {
 		"message": "Engedélyez",
 		"description": "[req_permission] gomb, hogy engedélyeket adjon"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[helyi-menü]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Rögzítés",
+		"description": "[környezeti-menü] engedélyezi a felhasználónak, hogy ezt a Tabot a lista elején tartsa"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(ok) eltávolítása",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Egyéb Tabok",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Rögzítettek eltávolítása",
+		"description": "[környezeti-menü] engedélyezi a felhasználónak, hogy eltávolítsa a rögzített Tabjait"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Jobb oldali Tabok",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ez a Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Nem Rögzítettek eltávolítása",
+		"description": "[környezeti-menü] engedélyezi a felhasználónak, hogy eltávolítsa a nem rögzített Tabjait"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Alapértelmezett Tabok visszaállítása",
@@ -151,6 +183,14 @@
 		"message": "🎯 Tabs-ek rendezése",
 		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy automatikusan rendezzék a Tabs-jeiket (szülő menü)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ Használat szerint",
+		"description": "környezeti menü, amely lehetővé teszi a felhasználóknak, hogy a Tabjaikat aszerint rendezzék, hányszor kattintottak rájuk"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ Idő szerint",
+		"description": "környezeti menü, amely lehetővé teszi a felhasználóknak, hogy a Tabjaikat aszerint rendezzék, mikor kattintottak rájuk"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 címke szerint",
 		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy címke szerint rendezzék a Tabs-jeiket"
@@ -163,13 +203,25 @@
 		"message": "🤖 URL szerint",
 		"description": "helyi menü, amely lehetővé teszi a felhasználóknak, hogy URL szerint rendezzék a Tabs-jeiket"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Nem org Tabok elrejtése",
+		"description": "[környezeti-menü] ideiglenesen elrejti az általános Tabokat"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Org Tabok elrejtése",
+		"description": "[környezeti-menü] ideiglenesen elrejti az Org Tabokat"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Rögzítés feloldása",
+		"description": "[környezeti-menü] engedélyezi a felhasználónak, hogy eltávolítsa ezt a Tabot a rögzített listájáról"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab frissítése",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Szervezet váltása",
-		"description": "[context-menu]"
+		"message": "👜 Org váltása",
+		"description": "[környezeti-menü]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Egyéb frissítések",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Hiba Tab hozzáadásakor.",
 		"description": "[error] Általános hiba Tab hozzáadásakor"
+	},
+	"error_already_pinned": {
+		"message": "Ez a Tab már rögzítve volt.",
+		"description": "[hiba] a felhasználó megpróbált rögzíteni egy már rögzített Tabot"
+	},
+	"error_already_unpinned": {
+		"message": "Ennek a Tabnak a rögzítése már fel volt oldva.",
+		"description": "[hiba] a felhasználó megpróbálta feloldani egy már feloldott Tab rögzítését"
+	},
+	"error_cannot_move": {
+		"message": "Ez a Tab nem mozgatható!",
+		"description": "[hiba] a kért Tab jelenleg nem mozgatható."
+	},
+	"error_cannot_move_dir": {
+		"message": "Ez a Tab nem mozgatható ebben az irányban!",
+		"description": "[hiba] a kért Tab jelenleg nem mozgatható."
 	},
 	"error_check_update": {
 		"message": "Hiba a frissítések ellenőrzésekor",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Hiba az importálás során:\n",
 		"description": "[error] hiba történt az import folyamat során"
+	},
+	"error_internal": {
+		"message": "Belső Hiba",
+		"description": "[hiba] általános hiba"
 	},
 	"error_invalid_key": {
 		"message": "A függvénynek átadott kulcsparaméter érvénytelen",
@@ -323,9 +395,17 @@
 		"message": "Nincs megadva objektum az ellenőrzéshez!",
 		"description": "[error] nem lett megadva az ellenőrizendő objektum"
 	},
+	"error_no_pinned": {
+		"message": "Még nincsenek rögzített Tabjaid!",
+		"description": "[hiba] a felhasználó megpróbálta eltávolítani a rögzített Tabokat, de nincsenek rögzített Tabjai"
+	},
 	"error_no_setup_tab": {
 		"message": "A Setup Tab nem található.",
 		"description": "[error] a kiterjesztés nem tudta meghatározni, hova helyezze a kedvenc Tabokat"
+	},
+	"error_no_unpinned": {
+		"message": "Nincsenek nem rögzített Tabjaid!",
+		"description": "[hiba] a felhasználó megpróbálta eltávolítani a nem rögzített Tabokat, de nincsenek nem rögzített Tabjai"
 	},
 	"error_no_url": {
 		"message": "Nincs URL megadva az ellenőrzéshez!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Még nincs inicializálva.",
 		"description": "[error] Általános hiba, ha egy változó nem készült el"
+	},
+	"error_pin_tab": {
+		"message": "Hiba a Tab rögzítése közben",
+		"description": "[hiba]"
 	},
 	"error_processing_tabs": {
 		"message": "Hiba a Tab-ek feldolgozásakor.",
@@ -359,9 +443,17 @@
 		"message": "Hiba más Tab-ek eltávolításakor.",
 		"description": "[error] Általános hiba más Tab-ek eltávolításakor"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Hiba a rögzített Tabok eltávolítása közben.",
+		"description": "[hiba] Általános hiba, amelyet a nem rögzített Tabok eltávolítása közben használnak"
+	},
 	"error_removing_tab": {
 		"message": "Hiba Tab eltávolításakor.",
 		"description": "[error] Általános hiba Tab eltávolításakor"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Hiba a nem rögzített Tabok eltávolítása közben.",
+		"description": "[hiba] Általános hiba, amelyet a nem rögzített Tabok eltávolítása közben használnak"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Hiba történt az összes látható Tab eltávolításakor.",
@@ -383,6 +475,14 @@
 		"message": "Üres Tabokat nem lehet szinkronizálni!",
 		"description": "[error] üres Tabok szinkronizálása kísérlet történt"
 	},
+	"error_tab_click_count": {
+		"message": "A Kattintási Számnak nem negatív számnak kell lennie",
+		"description": "[hiba] a felhasználó megpróbált létrehozni egy Tabot helytelen kattintási számmal"
+	},
+	"error_tab_click_date": {
+		"message": "A Kattintás Dátumának olyan számnak kell lennie, amely nem egy jövőbeli dátumot eredményez",
+		"description": "[hiba] a felhasználó megpróbált létrehozni egy Tabot helytelen kattintási dátummal"
+	},
 	"error_tab_constructor": {
 		"message": "Használd a Tab.create() metódust a new Tab() helyett",
 		"description": "[error] Tájékoztasd a fejlesztőt, hogyan használja a Tab osztályt"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "A Tab nem található.",
 		"description": "[error] a Tab nem szerepel a tömbben"
+	},
+	"error_tab_not_pinned": {
+		"message": "A Tab még nincs rögzítve!",
+		"description": "[hiba] a felhasználó megpróbálta feloldani egy nem rögzített Tab rögzítését"
 	},
 	"error_tab_object_creation": {
 		"message": "Objektum használata esetén ne adjon meg semmi mást.",
@@ -443,6 +547,10 @@
 		"message": "Ismeretlen kérés.",
 		"description": "[error] Általános hiba ismeretlen üzenet fogadása után"
 	},
+	"error_unpin_tab": {
+		"message": "Hiba a Tab rögzítésének feloldása közben",
+		"description": "[hiba]"
+	},
 	"error_useless_remove": {
 		"message": "Nem lehet eltávolítani:\nNem lehet eltávolítani egy korábban nem mentett oldalt",
 		"description": "[error] a felhasználó olyan oldalt próbált meg eltávolítani, amelyet még nem mentett"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Általános",
 		"description": "Címke az általános beállítások kategóriához"
+	},
+	"generic_pin_tabs": {
+		"message": "általános $pinned Tabok",
+		"description": "A felhasználó kedvenc Tabjai, amelyek nem org-specifikusak"
+	},
+	"generic_tabs": {
+		"message": "általános Tabok",
+		"description": "A felhasználó kedvenc Tabjai, amelyek nem org-specifikusak"
 	},
 	"help": {
 		"message": "Súgó",
@@ -567,6 +683,10 @@
 		"message": "Érvénytelen fájltípus.\nCsak JSON fájlok támogatottak.",
 		"description": "[error] az importáláshoz használt fájl nem JSON típusú"
 	},
+	"import_metadata": {
+		"message": "Tab metaadatok importálása (\"Kattintási Szám\", \"Kattintási Dátum\" stb.).",
+		"description": "[címke] mindent importál, amit a fájlban talál az importálási folyamat során"
+	},
 	"import_successful": {
 		"message": "Sikeresen importálva",
 		"description": "[import] az importálás befejeződött. Ezt követően megjelenik az importált rekordok száma"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs JSON fájlból",
 		"description": "[felugró-ablak] cím az importálás gombon"
+	},
+	"inactive": {
+		"message": "Inaktív",
+		"description": "Váltógombokban használatos az inaktív állapotra"
 	},
 	"insert_another": {
 		"message": "Másik beszúrása",
@@ -727,6 +851,14 @@
 		"message": "Szervezet Link",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tabok",
+		"description": "Org-specifikus Tabok"
+	},
+	"org_tabs": {
+		"message": "org Tabok",
+		"description": "Org-specifikus Tabok"
+	},
 	"other_org_info": {
 		"message": "Másik Szervezet adatai",
 		"description": "[modal-title]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Mentett Tabok felülírása.",
 		"description": "[label] az összes mentett Tab törlése importálás során"
+	},
+	"pinned": {
+		"message": "Rögzítve",
+		"description": "A felhasználó Tabjai, amelyek mindig a lista elején találhatók"
 	},
 	"preserve_org_tabs": {
 		"message": "Tabok megőrzése más szervezetek számára.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Org-stílusbeállító",
 		"description": "Címke az Org-specifikus Tab stílusának konfigurálásához"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Címke az általános Tab megjelenésének előnézetéhez rögzítéskor"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Címke az általános Tabok stílusának konfigurálásához rögzítéskor"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Címke az org-specifikus Tab megjelenésének előnézetéhez rögzítéskor"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Címke az org-specifikus Tabok stílusának konfigurálásához rögzítéskor"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Címke az aktív általános Tabok háttérszínének beállításához"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Címke az általános Tabok háttérszínének beállításához"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Címke az aktív általános Tabok szegélyszínének beállításához"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Címke az általános Tabok szegélyszínének beállításához"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Címke az aktív általános Tabok szövegszínének beállításához"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Címke az általános Tabok szövegszínének beállításához"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Felszólítás dekorációs stílusok kiválasztására az aktív általános Tabokhoz"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Felszólítás dekorációs stílusok kiválasztására az általános Tabokhoz"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Címke az aktív általános Tabok egérmutatóval való rámutatáskor megjelenő háttérszínének beállításához"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Címke az általános Tabok egérmutatóval való rámutatáskor megjelenő háttérszínének beállításához"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Címke az aktív általános Tabok árnyékszínének beállításához"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Címke az általános Tabok árnyékszínének beállításához"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Címke az aktív általános Tabok felső sávjának színének beállításához"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Címke az aktív org Tabok háttérszínének beállításához"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Címke az org-specifikus Tabok háttérszínének beállításához"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Címke az aktív org-specifikus Tabok szegélyszínének beállításához"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Címke az org Tabok szegélyszínének beállításához"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Címke az aktív org Tabok szövegszínének beállításához"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Címke az org-specifikus Tabok szövegszínének beállításához"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Felszólítás dekorációs stílusok kiválasztására az aktív org-specifikus Tabokhoz"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Felszólítás dekorációs stílusok kiválasztására az org Tabokhoz"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Címke az aktív org Tabok egérmutatóval való rámutatáskor megjelenő háttérszínének beállításához"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Címke az org-specifikus Tabok egérmutatóval való rámutatáskor megjelenő háttérszínének beállításához"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Címke az aktív org-specifikus Tabok árnyékszínének beállításához"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Címke az org Tabok árnyékszínének beállításához"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Címke az aktív org Tabok felső sávjának színének beállításához"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Adja meg az aktív általános (generic) Tab-ok háttérszínét.",
@@ -951,6 +1207,42 @@
 		"message": "Kihagyás",
 		"description": "[req_permission] gomb, amellyel nem ad engedélyt"
 	},
+	"style_generic_pinned": {
+		"message": "Stílus rögzített $generic_tabs",
+		"description": "[beállítások] Váltó címke a rögzített általános Tabok stílusának beállításához"
+	},
+	"style_org_pinned": {
+		"message": "Stílus rögzített $org_tabs",
+		"description": "[beállítások] Váltó címke a rögzített org Tabok stílusának beállításához"
+	},
+	"style_settings_background_label": {
+		"message": "Adja meg a háttérszínt az Ön",
+		"description": "Címke a háttérszín beállításához"
+	},
+	"style_settings_border_color_label": {
+		"message": "Adja meg a szegélyszínt az Ön",
+		"description": "Címke a szegélyszín beállításához"
+	},
+	"style_settings_color_label": {
+		"message": "Adja meg a szöveg színét az Ön",
+		"description": "Címke a szövegszín beállításához"
+	},
+	"style_settings_decoration_label": {
+		"message": "Válasszon egy vagy több dekorációs stílust az Ön",
+		"description": "Felszólítás dekorációs stílusok kiválasztására"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Adja meg az egérmutatóval való rámutatáskor megjelenő háttérszínt az Ön",
+		"description": "Címke az egérmutatóval való rámutatáskor megjelenő háttérszín beállításához"
+	},
+	"style_settings_shadow_label": {
+		"message": "Adja meg az árnyékszínt az Ön",
+		"description": "Címke az árnyékszín beállításához"
+	},
+	"style_settings_top_active_label": {
+		"message": "Adja meg a sáv színét az Ön aktív tetején",
+		"description": "Címke a felső sáv aktív színének beállításához"
+	},
 	"successfully_imported": {
 		"message": "Sikeresen importálva",
 		"description": "[toast] a felhasználó Tabokat adott hozzá egy külső fájlból"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Felhasználók",
 		"description": "az oldal neve, amely a ManageUsers/home-hoz tartozik"
+	},
+	"warn_upgrade_backup": {
+		"message": "Kérjük, exportálja új Tabjait, mivel az Ön által használt fájl a jövőbeli kiadásokban nem lesz támogatott.",
+		"description": "[figyelmeztetés] a felhasználó a json fájl elavult konfigurációját használta a Tabjai importálásához"
 	},
 	"where_to": {
 		"message": "Hová?",

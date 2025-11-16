@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktiv",
+		"description": "Brukes i veksler for aktiv tilstand"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktiv $generic_pin_tabs",
+		"description": "Brukerens generiske festede Tab-er som er aktive for øyeblikket"
+	},
+	"active_generic_tabs": {
+		"message": "aktive $generic_tabs",
+		"description": "Brukerens generiske Tab-er som er aktive for øyeblikket"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktiv $org_pin_tabs",
+		"description": "Brukerens org-festede Tab-er som er aktive for øyeblikket"
+	},
+	"active_org_tabs": {
+		"message": "aktive $org_tabs",
+		"description": "Brukerens org-Tab-er som er aktive for øyeblikket"
+	},
 	"allow": {
 		"message": "Tillat",
 		"description": "[req_permission] knapp for å gi tillatelser"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstmeny]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Fest",
+		"description": "[kontekstmeny] lar brukeren beholde denne Tab-en i begynnelsen av listen sin"
+	},
 	"cxm_remove": {
 		"message": "💥 Fjern Tab(ber)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Andre Tabber",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Fjern Festede",
+		"description": "[kontekstmeny] lar brukeren fjerne de festede Tab-ene sine"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabber til høyre",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Denne Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Fjern Ufestede",
+		"description": "[kontekstmeny] lar brukeren fjerne Tab-ene som ikke er festet"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Tilbakestill standard-Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sorter Tab-er",
 		"description": "kontekstmeny for å la brukere sortere Tab-ene sine automatisk (hovedmeny)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ etter Bruk",
+		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter hvor mange ganger de klikker på Tab-ene sine"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ etter Tid",
+		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter når Tab-ene ble klikket"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 etter etikett",
 		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter etikett"
@@ -163,13 +203,25 @@
 		"message": "🤖 etter nettadresse",
 		"description": "kontekstmeny for å la brukere sortere Tab-ene sine etter nettadresse"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Skjul ikke-Org Tab-er",
+		"description": "[kontekstmeny] skjuler midlertidig generiske Tab-er"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Skjul Org Tab-er",
+		"description": "[kontekstmeny] skjuler midlertidig Org Tab-er"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Løsne",
+		"description": "[kontekstmeny] lar brukeren fjerne denne Tab-en fra den festede listen sin"
+	},
 	"cxm_update": {
 		"message": "✏️ Oppdater Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Bytt Organisasjon",
-		"description": "[context-menu]"
+		"message": "👜 Veksle Org",
+		"description": "[kontekstmeny]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Andre oppdateringer",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Feil ved tillegging av Tab.",
 		"description": "[feil] Generisk feil brukt ved tillegging av en Tab"
+	},
+	"error_already_pinned": {
+		"message": "Denne Tab-en var allerede festet.",
+		"description": "[feil] brukeren prøvde å feste en festet Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Denne Tab-en var allerede løsnet.",
+		"description": "[feil] brukeren prøvde å løsne en løsnet Tab"
+	},
+	"error_cannot_move": {
+		"message": "Denne Tab-en kan ikke flyttes!",
+		"description": "[feil] den forespurte Tab-en kan ikke flyttes for øyeblikket."
+	},
+	"error_cannot_move_dir": {
+		"message": "Denne Tab-en kan ikke flyttes i denne retningen!",
+		"description": "[feil] den forespurte Tab-en kan ikke flyttes for øyeblikket."
 	},
 	"error_check_update": {
 		"message": "Feil under kontroll etter oppdateringer",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Feil ved import:\n",
 		"description": "[error] det oppsto en feil under importprosessen"
+	},
+	"error_internal": {
+		"message": "Intern Feil",
+		"description": "[feil] generell feil"
 	},
 	"error_invalid_key": {
 		"message": "Nøkkelparameteren som ble sendt til funksjonen er ikke gyldig",
@@ -323,9 +395,17 @@
 		"message": "Ingen objekt ble oppgitt for kontroll!",
 		"description": "[error] intet objekt ble sendt inn for kontroll"
 	},
+	"error_no_pinned": {
+		"message": "Du har ingen festede Tab-er ennå!",
+		"description": "[feil] brukeren prøvde å fjerne de festede Tab-ene, men de har ingen festede Tab-er"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab ble ikke funnet.",
 		"description": "[error] utvidelsen kunne ikke finne hvor de lagrede Tab-ene skulle plasseres"
+	},
+	"error_no_unpinned": {
+		"message": "Du har ingen ufestede Tab-er!",
+		"description": "[feil] brukeren prøvde å fjerne de ufestede Tab-ene, men de har ingen ufestede Tab-er"
 	},
 	"error_no_url": {
 		"message": "Ingen URL ble oppgitt for kontroll!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "ble ikke initialisert ennå.",
 		"description": "[feil] Generisk feil for når en variabel ikke er klar"
+	},
+	"error_pin_tab": {
+		"message": "Feil under festing av Tab",
+		"description": "[feil]"
 	},
 	"error_processing_tabs": {
 		"message": "Feil ved behandling av Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Feil ved fjerning av andre Tabs.",
 		"description": "[feil] Generisk feil brukt ved fjerning av andre Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Feil ved fjerning av festede Tab-er.",
+		"description": "[feil] Generell feil brukt under fjerning av ikke-festede Tab-er"
+	},
 	"error_removing_tab": {
 		"message": "Feil ved fjerning av Tab.",
 		"description": "[feil] Generisk feil brukt ved fjerning av en Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Feil ved fjerning av ikke-festede Tab-er.",
+		"description": "[feil] Generell feil brukt under fjerning av ikke-festede Tab-er"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Feil ved fjerning av alle synlige Tab.",
@@ -383,6 +475,14 @@
 		"message": "Kan ikke synkronisere tomme Tabber!",
 		"description": "[error] det ble forsøkt å synkronisere ingenting"
 	},
+	"error_tab_click_count": {
+		"message": "Klikktelling må være et ikke-negativt tall",
+		"description": "[feil] brukeren prøvde å opprette en Tab med feil klikktelling"
+	},
+	"error_tab_click_date": {
+		"message": "Klikkdato må være et tall som ikke resulterer i en dato i fremtiden",
+		"description": "[feil] brukeren prøvde å opprette en Tab med feil klikkdato"
+	},
 	"error_tab_constructor": {
 		"message": "Bruk Tab.create() i stedet for new Tab() for å bruke Tab-klassen",
 		"description": "[feil] fortell utvikleren hvordan man bruker Tab-klassen"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab ble ikke funnet.",
 		"description": "[error] Tab ble ikke inkludert i arrayet"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab er ikke festet ennå!",
+		"description": "[feil] brukeren prøvde å løsne en ikke-festet Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Når du kaller med et objekt, ikke send med noe annet.",
@@ -443,6 +547,10 @@
 		"message": "Ukjent forespørsel.",
 		"description": "[feil] Generisk feil etter å ha mottatt en melding som ikke ble gjenkjent"
 	},
+	"error_unpin_tab": {
+		"message": "Feil under løsning av Tab",
+		"description": "[feil]"
+	},
 	"error_useless_remove": {
 		"message": "Kan ikke fjernes:\nEn side som ikke har vært lagret, kan ikke fjernes",
 		"description": "[error] brukeren forsøkte å fjerne en side som ennå ikke var lagret"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Generelt",
 		"description": "Etikett for kategorien generelle innstillinger"
+	},
+	"generic_pin_tabs": {
+		"message": "generiske $pinned Tab-er",
+		"description": "Brukerens favoritt Tab-er som er ikke-org-spesifikke"
+	},
+	"generic_tabs": {
+		"message": "generiske Tab-er",
+		"description": "Brukerens favoritt Tab-er som er ikke-org-spesifikke"
 	},
 	"help": {
 		"message": "Hjelp",
@@ -567,6 +683,10 @@
 		"message": "Ugyldig filtype.\nKun JSON-filer støttes.",
 		"description": "[error] filen som ble brukt til import er ikke JSON"
 	},
+	"import_metadata": {
+		"message": "Importer Tab metadata (\"Klikktelling\", \"Klikkdato\" osv.).",
+		"description": "[etikett] importer alt som finnes i filen under importprosessen"
+	},
 	"import_successful": {
 		"message": "Importen var vellykket",
 		"description": "[import] importen er fullført. Antallet importerte poster vises deretter"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs fra JSON-fil",
 		"description": "[popup] tittel på importknappen"
+	},
+	"inactive": {
+		"message": "Inaktiv",
+		"description": "Brukes i veksler for inaktiv tilstand"
 	},
 	"insert_another": {
 		"message": "Sett inn en annen",
@@ -727,6 +851,14 @@
 		"message": "Organisasjonslenke",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab-er",
+		"description": "Tab-er som er org-spesifikke"
+	},
+	"org_tabs": {
+		"message": "org Tab-er",
+		"description": "Tab-er som er org-spesifikke"
+	},
 	"other_org_info": {
 		"message": "Informasjon om en annen Organisasjon",
 		"description": "[modal-title]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Skriv over lagrede Tabber.",
 		"description": "[label] slett alle lagrede Tabber under import"
+	},
+	"pinned": {
+		"message": "Festet",
+		"description": "Brukerens Tab-er som alltid finnes i begynnelsen av listen"
 	},
 	"preserve_org_tabs": {
 		"message": "Behold Tabber for andre organisasjoner.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Organisasjons-styler",
 		"description": "Etikett for konfigurering av stilen til organisasjonsspesifikke Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etikett for forhåndsvisning av generisk Tab-utseende når festet"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etikett for konfigurering av stilen til generiske Tab-er når festet"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etikett for forhåndsvisning av org-spesifikt Tab-utseende når festet"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etikett for konfigurering av stilen til org-spesifikke Tab-er når festet"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etikett for å angi bakgrunnsfarge for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etikett for å angi bakgrunnsfarge for generiske Tab-er"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etikett for å angi kantfarge for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etikett for å angi kantfarge for generiske Tab-er"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etikett for å angi tekstfarge for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etikett for å angi tekstfarge for generiske Tab-er"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Spørsmål om å velge dekorasjonsstiler for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Spørsmål om å velge dekorasjonsstiler for generiske Tab-er"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etikett for å angi svevebakgrunnsfarge for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etikett for å angi svevebakgrunnsfarge for generiske Tab-er"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etikett for å angi skyggefarge for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etikett for å angi skyggefarge for generiske Tab-er"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etikett for å angi topplinjefarge for aktive generiske Tab-er"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etikett for å angi bakgrunnsfarge for aktive org Tab-er"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etikett for å angi bakgrunnsfarge for org-spesifikke Tab-er"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etikett for å angi kantfarge for aktive org-spesifikke Tab-er"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etikett for å angi kantfarge for org Tab-er"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etikett for å angi tekstfarge for aktive org Tab-er"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etikett for å angi tekstfarge for org-spesifikke Tab-er"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Spørsmål om å velge dekorasjonsstiler for aktive org-spesifikke Tab-er"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Spørsmål om å velge dekorasjonsstiler for org Tab-er"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etikett for å angi svevebakgrunnsfarge for aktive org Tab-er"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etikett for å angi svevebakgrunnsfarge for org-spesifikke Tab-er"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etikett for å angi skyggefarge for aktive org-spesifikke Tab-er"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etikett for å angi skyggefarge for org Tab-er"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etikett for å angi topplinjefarge for aktive org Tab-er"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Sett inn bakgrunnsfargen for dine aktive generiske Tab-er.",
@@ -951,6 +1207,42 @@
 		"message": "Hopp over",
 		"description": "[req_permission] knapp for å avslå å gi tillatelser"
 	},
+	"style_generic_pinned": {
+		"message": "Stil festede $generic_tabs",
+		"description": "[alternativer] Veksleetikett for å angi stil for festede generiske Tab-er"
+	},
+	"style_org_pinned": {
+		"message": "Stil festede $org_tabs",
+		"description": "[alternativer] Veksleetikett for å angi stil for festede org Tab-er"
+	},
+	"style_settings_background_label": {
+		"message": "Sett inn bakgrunnsfargen for din",
+		"description": "Etikett for å angi bakgrunnsfarge"
+	},
+	"style_settings_border_color_label": {
+		"message": "Sett inn kantfargen for din",
+		"description": "Etikett for å angi kantfarge"
+	},
+	"style_settings_color_label": {
+		"message": "Sett inn fargen på teksten for din",
+		"description": "Etikett for å angi tekstfarge"
+	},
+	"style_settings_decoration_label": {
+		"message": "Velg en eller flere dekorasjonsstiler for din",
+		"description": "Spørsmål om å velge dekorasjonsstiler"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Sett inn svevebakgrunnsfargen for din",
+		"description": "Etikett for å angi svevebakgrunnsfarge"
+	},
+	"style_settings_shadow_label": {
+		"message": "Sett inn skyggefargen for din",
+		"description": "Etikett for å angi skyggefarge"
+	},
+	"style_settings_top_active_label": {
+		"message": "Sett inn fargen for linjen øverst på din aktive",
+		"description": "Etikett for å angi topplinje aktiv farge"
+	},
 	"successfully_imported": {
 		"message": "Importen var vellykket",
 		"description": "[toast] brukeren importerte Tabber fra en ekstern fil med suksess"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Brukere",
 		"description": "navnet på siden knyttet til ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Vennligst eksporter dine nye Tab-er da filen du har brukt ikke vil bli støttet i fremtidige utgivelser.",
+		"description": "[advarsel] brukeren importerte sine Tab-er ved hjelp av en utdatert konfigurasjon av json-filen"
 	},
 	"where_to": {
 		"message": "Til hvor?",

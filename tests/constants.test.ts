@@ -6,13 +6,14 @@ import {
 } from "@std/testing/asserts";
 
 import {
+	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getAllStyleSettings,
 	getCssRule,
 	getCssSelector,
 	getSettings,
 	getStyleSettings,
 	LINK_NEW_BROWSER,
+	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	sendExtensionMessage,
 	SETTINGS_KEY,
@@ -120,7 +121,7 @@ Deno.test("getSettings equals sendExtensionMessage in specific case", async () =
 
 Deno.test("getStyleSettings sends correct message", async (t) => {
 	await t.step("getAllStyleSettings returns null if no styles", async () => {
-		const result = await getAllStyleSettings();
+		const result = await getStyleSettings();
 		assertEquals(result, null);
 	});
 
@@ -188,9 +189,9 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 	});
 
 	await t.step("getAllStyleSettings returns generic styles", async () => {
-		const result = await getAllStyleSettings();
+		const result = await getStyleSettings();
 		assertEquals(result, {
-			"settings-tab_generic_style": [
+			[GENERIC_TAB_STYLE_KEY]: [
 				{
 					id: TAB_STYLE_BORDER,
 					forActive: false,
@@ -207,7 +208,9 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 					value: "#fff",
 				},
 			],
-			"settings-tab_org_style": undefined,
+			[GENERIC_PINNED_TAB_STYLE_KEY]: undefined,
+			[ORG_TAB_STYLE_KEY]: undefined,
+			[ORG_PINNED_TAB_STYLE_KEY]: undefined,
 		});
 	});
 
@@ -245,9 +248,9 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 	});
 
 	await t.step("getAllStyleSettings returns all styles", async () => {
-		const result = await getAllStyleSettings();
+		const result = await getStyleSettings();
 		assertEquals(result, {
-			"settings-tab_generic_style": [
+			[GENERIC_TAB_STYLE_KEY]: [
 				{
 					id: TAB_STYLE_BORDER,
 					forActive: false,
@@ -264,7 +267,8 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 					value: "#fff",
 				},
 			],
-			"settings-tab_org_style": [
+			[GENERIC_PINNED_TAB_STYLE_KEY]: undefined,
+			[ORG_TAB_STYLE_KEY]: [
 				{
 					id: TAB_STYLE_BORDER,
 					forActive: false,
@@ -281,57 +285,151 @@ Deno.test("getStyleSettings sends correct message", async (t) => {
 					value: "#fff",
 				},
 			],
+			[ORG_PINNED_TAB_STYLE_KEY]: undefined,
 		});
 	});
 });
 
 Deno.test("getCssSelector builds correct selector", () => {
 	const extensionNameClass = ".again-why-salesforce";
-	const sldsActiveClass = ".slds-is-active";
+	const isActive = ".slds-is-active";
 	const hasOrgTab = ":has(.is-org-tab)";
+	const isPinTab = ":has(.is-pin-tab)";
+	const notActive = `:not(${isActive})`;
+	const notOrg = `:not(${hasOrgTab})`;
+	const notPin = `:not(${isPinTab})`;
+	// test defaults
 	assertEquals(
 		getCssSelector(),
-		`${extensionNameClass}:not(${sldsActiveClass}):not(${hasOrgTab})`,
+		`${extensionNameClass}${notActive}${notOrg}${notPin}`,
+	);
+	// test all unpinned
+	assertEquals(
+		getCssSelector({
+			isInactive: true,
+			isGeneric: true,
+			pseudoElement: "::after",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${notActive}${notOrg}${notPin}::after`,
 	);
 	assertEquals(
-		getCssSelector(true),
-		`${extensionNameClass}:not(${sldsActiveClass}):not(${hasOrgTab})`,
+		getCssSelector({
+			isInactive: true,
+			isGeneric: false,
+			pseudoElement: "",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${notActive}${hasOrgTab}${notPin}`,
 	);
 	assertEquals(
-		getCssSelector(true, true),
-		`${extensionNameClass}:not(${sldsActiveClass}):not(${hasOrgTab})`,
+		getCssSelector({
+			isInactive: true,
+			isGeneric: false,
+			pseudoElement: "::before",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${notActive}${hasOrgTab}${notPin}::before`,
 	);
 	assertEquals(
-		getCssSelector(true, true, ""),
-		`${extensionNameClass}:not(${sldsActiveClass}):not(${hasOrgTab})`,
+		getCssSelector({
+			isInactive: false,
+			isGeneric: true,
+			pseudoElement: "",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${isActive}${notOrg}${notPin}`,
 	);
 	assertEquals(
-		getCssSelector(true, true, "::after"),
-		`${extensionNameClass}:not(${sldsActiveClass}):not(${hasOrgTab})::after`,
+		getCssSelector({
+			isInactive: false,
+			isGeneric: true,
+			pseudoElement: "::after",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${isActive}${notOrg}${notPin}::after`,
 	);
 	assertEquals(
-		getCssSelector(true, false, ""),
-		`${extensionNameClass}:not(${sldsActiveClass})${hasOrgTab}`,
+		getCssSelector({
+			isInactive: false,
+			isGeneric: false,
+			pseudoElement: "",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${isActive}${hasOrgTab}${notPin}`,
 	);
 	assertEquals(
-		getCssSelector(true, false, "::before"),
-		`${extensionNameClass}:not(${sldsActiveClass})${hasOrgTab}::before`,
+		getCssSelector({
+			isInactive: false,
+			isGeneric: false,
+			pseudoElement: "::before",
+			isPinned: false,
+		}),
+		`${extensionNameClass}${isActive}${hasOrgTab}${notPin}::before`,
+	);
+	// test all pinned
+	assertEquals(
+		getCssSelector({
+			isInactive: true,
+			isGeneric: true,
+			pseudoElement: "::after",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${notActive}${notOrg}${isPinTab}::after`,
 	);
 	assertEquals(
-		getCssSelector(false, true, ""),
-		`${extensionNameClass}${sldsActiveClass}:not(${hasOrgTab})`,
+		getCssSelector({
+			isInactive: true,
+			isGeneric: false,
+			pseudoElement: "",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${notActive}${hasOrgTab}${isPinTab}`,
 	);
 	assertEquals(
-		getCssSelector(false, true, "::after"),
-		`${extensionNameClass}${sldsActiveClass}:not(${hasOrgTab})::after`,
+		getCssSelector({
+			isInactive: true,
+			isGeneric: false,
+			pseudoElement: "::before",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${notActive}${hasOrgTab}${isPinTab}::before`,
 	);
 	assertEquals(
-		getCssSelector(false, false, ""),
-		`${extensionNameClass}${sldsActiveClass}${hasOrgTab}`,
+		getCssSelector({
+			isInactive: false,
+			isGeneric: true,
+			pseudoElement: "",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${isActive}${notOrg}${isPinTab}`,
 	);
 	assertEquals(
-		getCssSelector(false, false, "::before"),
-		`${extensionNameClass}${sldsActiveClass}${hasOrgTab}::before`,
+		getCssSelector({
+			isInactive: false,
+			isGeneric: true,
+			pseudoElement: "::after",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${isActive}${notOrg}${isPinTab}::after`,
+	);
+	assertEquals(
+		getCssSelector({
+			isInactive: false,
+			isGeneric: false,
+			pseudoElement: "",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${isActive}${hasOrgTab}${isPinTab}`,
+	);
+	assertEquals(
+		getCssSelector({
+			isInactive: false,
+			isGeneric: false,
+			pseudoElement: "::before",
+			isPinned: true,
+		}),
+		`${extensionNameClass}${isActive}${hasOrgTab}${isPinTab}::before`,
 	);
 });
 

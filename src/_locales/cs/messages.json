@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktivní",
+		"description": "Používá se v přepínačích pro aktivní stav"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktivní $generic_pin_tabs",
+		"description": "Obecné připnuté Tab karty uživatele, které jsou aktuálně aktivní"
+	},
+	"active_generic_tabs": {
+		"message": "aktivní $generic_tabs",
+		"description": "Obecné Tab karty uživatele, které jsou aktuálně aktivní"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktivní $org_pin_tabs",
+		"description": "Organizační připnuté Tab karty uživatele, které jsou aktuálně aktivní"
+	},
+	"active_org_tabs": {
+		"message": "aktivní $org_tabs",
+		"description": "Organizační Tab karty uživatele, které jsou aktuálně aktivní"
+	},
 	"allow": {
 		"message": "Povolit",
 		"description": "[req_permission] tlačítko pro povolení oprávnění"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontextová-nabídka]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Připnout",
+		"description": "[context-menu] umožní uživateli ponechat tuto Tab kartu na začátku svého seznamu"
+	},
 	"cxm_remove": {
 		"message": "💥 Odebrat Tab(y)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Další Taby",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Odebrat Připnuté",
+		"description": "[context-menu] umožní uživateli odebrat své připnuté Tab karty"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tab vpravo",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tento Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Odebrat Nepřipnuté",
+		"description": "[context-menu] umožní uživateli odebrat své nepřipnuté Tab karty"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Obnovit výchozí Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Seřadit Tabs",
 		"description": "kontextové menu, které uživatelům umožňuje automaticky seřadit jejich Tabs (hlavní menu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ dle Použití",
+		"description": "kontextové menu umožňující uživatelům seřadit své Tab karty podle toho, kolikrát na ně klikli"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ dle Času",
+		"description": "kontextové menu umožňující uživatelům seřadit své Tab karty podle toho, kdy na ně bylo kliknuto"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 podle Štítku",
 		"description": "kontextové menu, které uživatelům umožňuje seřadit jejich Tabs podle štítku"
@@ -163,12 +203,24 @@
 		"message": "🤖 podle Url",
 		"description": "kontextové menu, které uživatelům umožňuje seřadit jejich Tabs podle adresy URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Skrýt Tab karty, které nejsou Org",
+		"description": "[context-menu] dočasně skrýt obecné Tab karty"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Skrýt Tab karty Org",
+		"description": "[context-menu] dočasně skrýt Tab karty Org"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Odepnout",
+		"description": "[context-menu] umožní uživateli odebrat tuto Tab kartu ze svého seznamu připnutých"
+	},
 	"cxm_update": {
 		"message": "✏️ Aktualizovat Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Přepnout organizaci",
+		"message": "👜 Přepnout Org",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Chyba při přidávání Tab.",
 		"description": "[error] Obecná chyba při přidávání Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tato Tab karta již byla připnuta.",
+		"description": "[error] uživatel se pokusil připnout již připnutou Tab kartu"
+	},
+	"error_already_unpinned": {
+		"message": "Tato Tab karta již byla odepnuta.",
+		"description": "[error] uživatel se pokusil odepnout již odepnutou Tab kartu"
+	},
+	"error_cannot_move": {
+		"message": "Tuto Tab kartu nelze přesunout!",
+		"description": "[error] požadovanou Tab kartu nelze v tuto chvíli přesunout."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tuto Tab kartu nelze přesunout tímto směrem!",
+		"description": "[error] požadovanou Tab kartu nelze v tuto chvíli přesunout."
 	},
 	"error_check_update": {
 		"message": "Chyba při kontrole aktualizací",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Chyba při importu:\n",
 		"description": "[error] během importu došlo k chybě"
+	},
+	"error_internal": {
+		"message": "Vnitřní Chyba",
+		"description": "[error] obecná chyba"
 	},
 	"error_invalid_key": {
 		"message": "Parametr key předaný funkci je neplatný",
@@ -323,9 +395,17 @@
 		"message": "Nebyl předán žádný objekt k ověření!",
 		"description": "[error] nebyl předán objekt ke kontrole"
 	},
+	"error_no_pinned": {
+		"message": "Zatím nemáte žádné připnuté Tab karty!",
+		"description": "[error] uživatel se pokusil odebrat připnuté Tab karty, ale nemá žádné připnuté Tab karty"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab nebyl nalezen.",
 		"description": "[error] rozšíření nedokázalo najít, kam umístit uložené Taby"
+	},
+	"error_no_unpinned": {
+		"message": "Nemáte žádné nepřipnuté Tab karty!",
+		"description": "[error] uživatel se pokusil odebrat nepřipnuté Tab karty, ale nemá žádné nepřipnuté Tab karty"
 	},
 	"error_no_url": {
 		"message": "Nebyla předána URL k ověření!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Ještě nebylo inicializováno.",
 		"description": "[error] Obecná chyba, když proměnná není připravena"
+	},
+	"error_pin_tab": {
+		"message": "Chyba při připínání Tab karty",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Chyba při zpracování Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Chyba při odstraňování ostatních Tabs.",
 		"description": "[error] Obecná chyba při odstraňování ostatních Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Chyba při odstraňování připnutých Tab karet.",
+		"description": "[error] Obecná chyba použitá při odstraňování nepřipnutých Tab karet"
+	},
 	"error_removing_tab": {
 		"message": "Chyba při odstraňování Tab.",
 		"description": "[error] Obecná chyba při odstraňování Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Chyba při odstraňování nepřipnutých Tab karet.",
+		"description": "[error] Obecná chyba použitá při odstraňování nepřipnutých Tab karet"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Chyba při odstraňování všech viditelných Tab.",
@@ -383,6 +475,14 @@
 		"message": "Nelze synchronizovat prázdné Taby!",
 		"description": "[error] pokus o synchronizaci prázdných Tabů"
 	},
+	"error_tab_click_count": {
+		"message": "Počet kliknutí musí být nezáporné číslo",
+		"description": "[error] uživatel se pokusil vytvořit Tab kartu s nesprávným počtem kliknutí"
+	},
+	"error_tab_click_date": {
+		"message": "Datum kliknutí musí být číslo, které nevede k datu v budoucnosti",
+		"description": "[error] uživatel se pokusil vytvořit Tab kartu s nesprávným datem kliknutí"
+	},
 	"error_tab_constructor": {
 		"message": "Použijte Tab.create() místo new Tab()",
 		"description": "[error] Informujte vývojáře, jak používat třídu Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab nebyl nalezen.",
 		"description": "[error] Tab nebyl zahrnut v poli"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab karta ještě není připnuta!",
+		"description": "[error] uživatel se pokusil odepnout nepřipnutou Tab kartu"
 	},
 	"error_tab_object_creation": {
 		"message": "Při volání s objektem, nepředávejte nic jiného.",
@@ -443,6 +547,10 @@
 		"message": "Neznámý požadavek.",
 		"description": "[error] Obecná chyba po přijmutí neznámé zprávy"
 	},
+	"error_unpin_tab": {
+		"message": "Chyba při odepínání Tab karty",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Nelze odstranit:\nNelze odstranit stránku, která nebyla předem uložena",
 		"description": "[error] uživatel se pokusil odstranit stránku, která ještě nebyla uložena"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Obecné",
 		"description": "Štítek pro kategorii obecných nastavení"
+	},
+	"generic_pin_tabs": {
+		"message": "obecné $pinned $tabs",
+		"description": "Oblíbené Tab karty uživatele, které nejsou specifické pro organizaci"
+	},
+	"generic_tabs": {
+		"message": "obecné $tabs",
+		"description": "Oblíbené Tab karty uživatele, které nejsou specifické pro organizaci"
 	},
 	"help": {
 		"message": "Nápověda",
@@ -567,6 +683,10 @@
 		"message": "Neplatný typ souboru.\nPodporovány jsou pouze JSON soubory.",
 		"description": "[error] soubor použitý pro import není JSON"
 	},
+	"import_metadata": {
+		"message": "Importovat metadata Tab karty (\"Počet kliknutí\", \"Datum kliknutí\" atd.).",
+		"description": "[label] importovat vše nalezené v souboru během procesu importu"
+	},
 	"import_successful": {
 		"message": "Úspěšně importováno",
 		"description": "[import] import byl úspěšně dokončen. Následně bude zobrazen počet importovaných záznamů"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs z JSON souboru",
 		"description": "[vyskakovací-okno] název na tlačítku importu"
+	},
+	"inactive": {
+		"message": "Neaktivní",
+		"description": "Používá se v přepínačích pro neaktivní stav"
 	},
 	"insert_another": {
 		"message": "Vložit další",
@@ -727,6 +851,14 @@
 		"message": "Odkaz organizace",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "organizační $pinned $tabs",
+		"description": "Tab karty, které jsou specifické pro organizaci"
+	},
+	"org_tabs": {
+		"message": "organizační $tabs",
+		"description": "Tab karty, které jsou specifické pro organizaci"
+	},
 	"other_org_info": {
 		"message": "Informace o jiné organizaci",
 		"description": "[modal-title]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Přepsat uložené Taby.",
 		"description": "[label] smazat všechny uložené Taby během importu"
+	},
+	"pinned": {
+		"message": "Připnutá",
+		"description": "Tab karty uživatele, které se vždy nacházejí na začátku seznamu"
 	},
 	"preserve_org_tabs": {
 		"message": "Zachovat Taby pro jiné organizace.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Stylovač Org",
 		"description": "Štítek pro konfiguraci stylu Tab specifického pro Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Popisek pro náhled vzhledu obecné Tab karty po připnutí"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Popisek pro konfiguraci stylu obecných Tab karet po připnutí"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Popisek pro náhled vzhledu Tab karty specifické pro organizaci po připnutí"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Popisek pro konfiguraci stylu Tab karet specifických pro organizaci po připnutí"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí pro obecné Tab karty"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy ohraničení pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy ohraničení pro obecné Tab karty"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy textu pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy textu pro obecné Tab karty"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Výzva k výběru stylů dekorace pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Výzva k výběru stylů dekorace pro obecné Tab karty"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí při najetí myší pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí při najetí myší pro obecné Tab karty"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy stínu pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy stínu pro obecné Tab karty"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Popisek pro nastavení barvy horního pruhu pro aktivní obecné Tab karty"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí pro aktivní organizační Tab karty"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí pro Tab karty specifické pro organizaci"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Popisek pro nastavení barvy ohraničení pro aktivní Tab karty specifické pro organizaci"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Popisek pro nastavení barvy ohraničení pro organizační Tab karty"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Popisek pro nastavení barvy textu pro aktivní organizační Tab karty"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Popisek pro nastavení barvy textu pro Tab karty specifické pro organizaci"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Výzva k výběru stylů dekorace pro aktivní Tab karty specifické pro organizaci"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Výzva k výběru stylů dekorace pro organizační Tab karty"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí při najetí myší pro aktivní organizační Tab karty"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Popisek pro nastavení barvy pozadí při najetí myší pro Tab karty specifické pro organizaci"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Popisek pro nastavení barvy stínu pro aktivní Tab karty specifické pro organizaci"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Popisek pro nastavení barvy stínu pro organizační Tab karty"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Popisek pro nastavení barvy horního pruhu pro aktivní organizační Tab karty"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Vložte barvu pozadí pro vaše aktivní obecné Tab-y.",
@@ -951,6 +1207,42 @@
 		"message": "Přeskočit",
 		"description": "[req_permission] tlačítko, kterým se neudělí oprávnění"
 	},
+	"style_generic_pinned": {
+		"message": "Styl připnutých $generic_tabs",
+		"description": "[options] Popisek přepínače pro styl připnutých obecných Tab karet"
+	},
+	"style_org_pinned": {
+		"message": "Styl připnutých $org_tabs",
+		"description": "[options] Popisek přepínače pro styl připnutých organizačních Tab karet"
+	},
+	"style_settings_background_label": {
+		"message": "Vložte barvu pozadí pro vaše",
+		"description": "Popisek pro nastavení barvy pozadí"
+	},
+	"style_settings_border_color_label": {
+		"message": "Vložte barvu ohraničení pro vaše",
+		"description": "Popisek pro nastavení barvy ohraničení"
+	},
+	"style_settings_color_label": {
+		"message": "Vložte barvu textu pro vaše",
+		"description": "Popisek pro nastavení barvy textu"
+	},
+	"style_settings_decoration_label": {
+		"message": "Vyberte jeden nebo více stylů dekorace pro vaše",
+		"description": "Výzva k výběru stylů dekorace"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Vložte barvu pozadí při najetí myší pro vaše",
+		"description": "Popisek pro nastavení barvy pozadí při najetí myší"
+	},
+	"style_settings_shadow_label": {
+		"message": "Vložte barvu stínu pro vaše",
+		"description": "Popisek pro nastavení barvy stínu"
+	},
+	"style_settings_top_active_label": {
+		"message": "Vložte barvu pro pruh v horní části vašich aktivních",
+		"description": "Popisek pro nastavení aktivní barvy horního pruhu"
+	},
 	"successfully_imported": {
 		"message": "Úspěšně importováno",
 		"description": "[toast] uživatel úspěšně importoval Taby ze souboru"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Uživatelé",
 		"description": "název stránky související s ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Prosím, exportujte své nové Tab karty, protože soubor, který jste použili, nebude podporován v budoucích vydáních.",
+		"description": "[warning] uživatel importoval své Tab karty pomocí zastaralé konfigurace souboru json"
 	},
 	"where_to": {
 		"message": "Kam?",

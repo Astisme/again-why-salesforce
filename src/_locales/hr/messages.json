@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktivno",
+		"description": "Koristi se u preklopnicima za aktivno stanje"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktivno $generic_pin_tabs",
+		"description": "Korisnikovi opći Prikvačeni Tabovi koji su trenutačno aktivni"
+	},
+	"active_generic_tabs": {
+		"message": "aktivni $generic_tabs",
+		"description": "Korisnikovi opći Tabovi koji su trenutačno aktivni"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktivno $org_pin_tabs",
+		"description": "Korisnikovi org Prikvačeni Tabovi koji su trenutačno aktivni"
+	},
+	"active_org_tabs": {
+		"message": "aktivni $org_tabs",
+		"description": "Korisnikovi org Tabovi koji su trenutačno aktivni"
+	},
 	"allow": {
 		"message": "Dopusti",
 		"description": "[req_permission] gumb za dopuštanje ovlasti"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstni-izbornik]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Prikvači",
+		"description": "[kontekstni-izbornik] omogućite korisniku da zadrži ovaj Tab na početku svoje liste"
+	},
 	"cxm_remove": {
 		"message": "💥 Ukloni Tab(ove)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Ostali Tabovi",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Ukloni Prikvačene",
+		"description": "[kontekstni-izbornik] omogućite korisniku da ukloni svoje prikvačene Tabove"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabovi udesno",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ovaj Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Ukloni Neprikvačene",
+		"description": "[kontekstni-izbornik] omogućite korisniku da ukloni svoje neprikvačene Tabove"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Resetiraj zadane Tabove",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sortiraj Tabs-e",
 		"description": "kontekstni izbornik koji korisnicima omogućuje automatsko sortiranje Tabs-a (roditeljski izbornik)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ prema Korištenju",
+		"description": "kontekstni izbornik za omogućavanje korisnicima da sortiraju svoje Tabove prema broju puta koliko su kliknuli svoje Tabove"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ prema Vremenu",
+		"description": "kontekstni izbornik za omogućavanje korisnicima da sortiraju svoje Tabove prema vremenu kada su Tabovi kliknuti"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 po Oznaci",
 		"description": "kontekstni izbornik koji korisnicima omogućuje sortiranje Tabs-a po oznaci"
@@ -163,13 +203,25 @@
 		"message": "🤖 po Url-u",
 		"description": "kontekstni izbornik koji korisnicima omogućuje sortiranje Tabs-a po URL-u"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Sakrij ne-Org Tabove",
+		"description": "[kontekstni-izbornik] privremeno sakrij opće Tabove"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Sakrij Org Tabove",
+		"description": "[kontekstni-izbornik] privremeno sakrij Org Tabove"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Otkvači",
+		"description": "[kontekstni-izbornik] omogućite korisniku da ukloni ovaj Tab sa svoje prikvačene liste"
+	},
 	"cxm_update": {
 		"message": "✏️ Ažuriraj Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Promijeni Organizaciju",
-		"description": "[context-menu]"
+		"message": "👜 Prebaci Org",
+		"description": "[kontekstni-izbornik]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Ostala ažuriranja",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Pogreška pri dodavanju Tab-a.",
 		"description": "[error] Opća pogreška pri dodavanju Tab-a"
+	},
+	"error_already_pinned": {
+		"message": "Ovaj Tab je već bio prikvačen.",
+		"description": "[greška] korisnik je pokušao prikvačiti prikvačeni Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Ovaj Tab je već bio otkvačen.",
+		"description": "[greška] korisnik je pokušao otkvačiti otkvačeni Tab"
+	},
+	"error_cannot_move": {
+		"message": "Ovaj Tab se ne može pomaknuti!",
+		"description": "[greška] zatraženi Tab se trenutačno ne može pomaknuti."
+	},
+	"error_cannot_move_dir": {
+		"message": "Ovaj Tab se ne može pomaknuti u ovom smjeru!",
+		"description": "[greška] zatraženi Tab se trenutačno ne može pomaknuti."
 	},
 	"error_check_update": {
 		"message": "Greška prilikom provjere ažuriranja",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Greška pri uvozu:\n",
 		"description": "[error] došlo je do greške tijekom procesa uvoza"
+	},
+	"error_internal": {
+		"message": "Interna Greška",
+		"description": "[greška] opća greška"
 	},
 	"error_invalid_key": {
 		"message": "Parametar ključa proslijeđen funkciji nije valjan",
@@ -323,9 +395,17 @@
 		"message": "Nije dostavljen objekt za provjeru!",
 		"description": "[error] objekt nije dostavljen za provjeru"
 	},
+	"error_no_pinned": {
+		"message": "Još nemate prikvačenih Tabova!",
+		"description": "[greška] korisnik je pokušao ukloniti prikvačene Tabove, ali nema prikvačenih Tabova"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab nije pronađen.",
 		"description": "[error] ekstenzija nije uspjela pronaći gdje postaviti omiljene Tabove"
+	},
+	"error_no_unpinned": {
+		"message": "Nemate neprikvačenih Tabova!",
+		"description": "[greška] korisnik je pokušao ukloniti neprikvačene Tabove, ali nema neprikvačenih Tabova"
 	},
 	"error_no_url": {
 		"message": "Nije dostavljen URL za provjeru!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Još nije inicijalizirano.",
 		"description": "[error] Opća pogreška kad varijabla nije spremna"
+	},
+	"error_pin_tab": {
+		"message": "Greška prilikom prikvačivanja Tab",
+		"description": "[greška]"
 	},
 	"error_processing_tabs": {
 		"message": "Pogreška pri obradi Tabs-a.",
@@ -359,9 +443,17 @@
 		"message": "Pogreška pri uklanjanju ostalih Tabs-a.",
 		"description": "[error] Opća pogreška pri uklanjanju ostalih Tabs-a"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Greška prilikom uklanjanja prikvačenih Tabova.",
+		"description": "[greška] Opća greška koja se koristi prilikom uklanjanja neprikvačenih Tabova"
+	},
 	"error_removing_tab": {
 		"message": "Pogreška pri uklanjanju Tab-a.",
 		"description": "[error] Opća pogreška pri uklanjanju Tab-a"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Greška prilikom uklanjanja neprikvačenih Tabova.",
+		"description": "[greška] Opća greška koja se koristi prilikom uklanjanja neprikvačenih Tabova"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Pogreška pri uklanjanju svih vidljivih Tabova.",
@@ -383,6 +475,14 @@
 		"message": "Ne mogu se sinkronizirati prazni Tabovi!",
 		"description": "[error] pokušano je sinkroniziranje praznog sadržaja"
 	},
+	"error_tab_click_count": {
+		"message": "Broj Klikova mora biti nenegativan broj",
+		"description": "[greška] korisnik je pokušao stvoriti Tab s pogrešnim brojem klikova"
+	},
+	"error_tab_click_date": {
+		"message": "Datum Klika mora biti broj koji ne rezultira datumom u budućnosti",
+		"description": "[greška] korisnik je pokušao stvoriti Tab s pogrešnim datumom klika"
+	},
 	"error_tab_constructor": {
 		"message": "Upotrijebite Tab.create() umjesto new Tab()",
 		"description": "[error] Obavijestite programera kako koristiti klasu Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab nije pronađen.",
 		"description": "[error] Tab nije uključen u niz"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab još nije prikvačen!",
+		"description": "[greška] korisnik je pokušao otkvačiti neprikvačeni Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Pri pozivu s objektom, ne šaljite ništa drugo.",
@@ -443,6 +547,10 @@
 		"message": "Nepoznat zahtjev.",
 		"description": "[error] Opća pogreška nakon primitka nepoznate poruke"
 	},
+	"error_unpin_tab": {
+		"message": "Greška prilikom otkvačivanja Tab",
+		"description": "[greška]"
+	},
 	"error_useless_remove": {
 		"message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja nije prethodno spremljena",
 		"description": "[error] korisnik je pokušao ukloniti stranicu koja još nije bila spremljena"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Općenito",
 		"description": "Oznaka za kategoriju općih postavki"
+	},
+	"generic_pin_tabs": {
+		"message": "opći $pinned Tabovi",
+		"description": "Korisnikovi omiljeni Tabovi koji nisu org-specifični"
+	},
+	"generic_tabs": {
+		"message": "opći Tabovi",
+		"description": "Korisnikovi omiljeni Tabovi koji nisu org-specifični"
 	},
 	"help": {
 		"message": "Pomoć",
@@ -567,6 +683,10 @@
 		"message": "Nevažeći tip datoteke.\nPodržani su samo JSON datoteke.",
 		"description": "[error] datoteka korištena za uvoz nije JSON"
 	},
+	"import_metadata": {
+		"message": "Uvezi Tab metapodatke (\"Broj Klikova\", \"Datum Klika\" itd.).",
+		"description": "[oznaka] uvezite sve pronađeno u datoteci tijekom procesa uvoza"
+	},
 	"import_successful": {
 		"message": "Uvoz je uspješan",
 		"description": "[import] uvoz je završen. Nakon toga će biti prikazan broj unesenih zapisa"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs iz JSON datoteke",
 		"description": "[skočni-prozor] naslov na gumbu za uvoz"
+	},
+	"inactive": {
+		"message": "Neaktivno",
+		"description": "Koristi se u preklopnicima za neaktivno stanje"
 	},
 	"insert_another": {
 		"message": "Ubaci još jedan",
@@ -727,6 +851,14 @@
 		"message": "Poveznica do Organizacije",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tabovi",
+		"description": "Tabovi koji su org-specifični"
+	},
+	"org_tabs": {
+		"message": "org Tabovi",
+		"description": "Tabovi koji su org-specifični"
+	},
 	"other_org_info": {
 		"message": "Informacije o drugoj Organizaciji",
 		"description": "[modal-title]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Prepiši spremljene Tabove.",
 		"description": "[label] izbriši sve spremljene Tabove tijekom uvoza"
+	},
+	"pinned": {
+		"message": "Prikvačeno",
+		"description": "Korisnikovi Tabovi koji se uvijek nalaze na početku liste"
 	},
 	"preserve_org_tabs": {
 		"message": "Sačuvaj Tabove za druge organizacije.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Uređivač stila organizacije",
 		"description": "Oznaka za konfiguriranje stila Tabova specifičnih za organizaciju"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Oznaka za pregled izgleda općeg Tab-a kada je prikvačen"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Oznaka za konfiguriranje stila općih Tabova kada su prikvačeni"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Oznaka za pregled izgleda org-specifičnog Tab-a kada je prikvačen"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Oznaka za konfiguriranje stila org-specifičnih Tabova kada su prikvačeni"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za opće Tabove"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za opće Tabove"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za opće Tabove"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za opće Tabove"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za opće Tabove"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za opće Tabove"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje gornje trake za aktivne opće Tabove"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za aktivne org Tabove"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za org-specifične Tabove"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za aktivne org-specifične Tabove"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za org Tabove"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za aktivne org Tabove"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za org-specifične Tabove"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za aktivne org-specifične Tabove"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za org Tabove"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za aktivne org Tabove"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za org-specifične Tabove"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za aktivne org-specifične Tabove"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za org Tabove"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje gornje trake za aktivne org Tabove"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Unesite boju pozadine za vaše aktivne generičke Tab-ove.",
@@ -951,6 +1207,42 @@
 		"message": "Preskoči",
 		"description": "[req_permission] gumb za odbijanje davanja ovlasti"
 	},
+	"style_generic_pinned": {
+		"message": "Stil prikvačeni $generic_tabs",
+		"description": "[opcije] Oznaka prekidača za stiliziranje prikvačenih općih Tabova"
+	},
+	"style_org_pinned": {
+		"message": "Stil prikvačeni $org_tabs",
+		"description": "[opcije] Oznaka prekidača za stiliziranje prikvačenih org Tabova"
+	},
+	"style_settings_background_label": {
+		"message": "Umetnite boju pozadine za vaše",
+		"description": "Oznaka za postavljanje boje pozadine"
+	},
+	"style_settings_border_color_label": {
+		"message": "Umetnite boju obruba za vaše",
+		"description": "Oznaka za postavljanje boje obruba"
+	},
+	"style_settings_color_label": {
+		"message": "Umetnite boju teksta za vaše",
+		"description": "Oznaka za postavljanje boje teksta"
+	},
+	"style_settings_decoration_label": {
+		"message": "Odaberite jedan ili više stilova ukrašavanja za vaše",
+		"description": "Upit za odabir stilova ukrašavanja"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Umetnite boju pozadine pri prelasku miša za vaše",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša"
+	},
+	"style_settings_shadow_label": {
+		"message": "Umetnite boju sjene za vaše",
+		"description": "Oznaka za postavljanje boje sjene"
+	},
+	"style_settings_top_active_label": {
+		"message": "Umetnite boju za traku na vrhu vašeg aktivnog",
+		"description": "Oznaka za postavljanje aktivne boje gornje trake"
+	},
 	"successfully_imported": {
 		"message": "Uvoz je uspješan",
 		"description": "[toast] Tabovi su uspješno spremljeni"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Korisnici",
 		"description": "ime stranice povezane s ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Molimo izvezite svoje nove Tabove jer datoteka koju ste koristili neće biti podržana u budućim izdanjima.",
+		"description": "[upozorenje] korisnik je uvezao svoje Tabove koristeći zastarjelu konfiguraciju json datoteke"
 	},
 	"where_to": {
 		"message": "Kamo?",

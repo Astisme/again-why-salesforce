@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktiv",
+		"description": "Används i växlar för aktivt tillstånd"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktiva $generic_pin_tabs",
+		"description": "Användarens generiska fästa Tab-ar som för närvarande är aktiva"
+	},
+	"active_generic_tabs": {
+		"message": "aktiva $generic_tabs",
+		"description": "Användarens generiska Tab-ar som för närvarande är aktiva"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktiva $org_pin_tabs",
+		"description": "Användarens org fästa Tab-ar som för närvarande är aktiva"
+	},
+	"active_org_tabs": {
+		"message": "aktiva $org_tabs",
+		"description": "Användarens org Tab-ar som för närvarande är aktiva"
+	},
 	"allow": {
 		"message": "Tillåt",
 		"description": "[req_permission] knapp för att tillåta behörigheter"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontextmeny]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Fäst",
+		"description": "[kontext-meny] låter användaren behålla denna Tab i början av sin lista"
+	},
 	"cxm_remove": {
 		"message": "💥 Ta bort Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Andra Tabbar",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Ta Bort Fästa",
+		"description": "[kontext-meny] låter användaren ta bort sina fästa Tab-ar"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabbar till höger",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Den här Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Ta Bort Ofästa",
+		"description": "[kontext-meny] låter användaren ta bort sina icke-fästa Tab-ar"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Återställ standard-Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sortera Tab-bar",
 		"description": "kontextmeny för att låta användare sortera sina Tab-bar automatiskt (huvudmeny)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ efter Användning",
+		"description": "kontextmeny för att låta användare sortera sina Tab-ar efter hur många gånger de klickar på sina Tab-ar"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ efter Tid",
+		"description": "kontextmeny för att låta användare sortera sina Tab-ar efter när Tab-arna klickades"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 efter etikett",
 		"description": "kontextmeny för att låta användare sortera sina Tab-bar efter etikett"
@@ -163,13 +203,25 @@
 		"message": "🤖 efter Url",
 		"description": "kontextmeny för att låta användare sortera sina Tab-bar efter url"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Dölj icke-Org Tab-ar",
+		"description": "[kontext-meny] dölj tillfälligt generiska Tab-ar"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Dölj Org Tab-ar",
+		"description": "[kontext-meny] dölj tillfälligt Org Tab-ar"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Lossa",
+		"description": "[kontext-meny] låter användaren ta bort denna Tab från sin fästa lista"
+	},
 	"cxm_update": {
 		"message": "✏️ Uppdatera Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Byt Organisation",
-		"description": "[context-menu]"
+		"message": "👜 Växla Org",
+		"description": "[kontext-meny]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Andra uppdateringar",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Fel vid tillägg av Tab.",
 		"description": "[fel] Allmänt fel som används vid tillägg av en Tab"
+	},
+	"error_already_pinned": {
+		"message": "Denna Tab var redan fäst.",
+		"description": "[fel] användaren försökte fästa en redan fäst Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Denna Tab var redan ofäst.",
+		"description": "[fel] användaren försökte lossa en redan ofäst Tab"
+	},
+	"error_cannot_move": {
+		"message": "Denna Tab kan inte flyttas!",
+		"description": "[fel] den begärda Tab-en kan inte flyttas just nu."
+	},
+	"error_cannot_move_dir": {
+		"message": "Denna Tab kan inte flyttas i denna riktning!",
+		"description": "[fel] den begärda Tab-en kan inte flyttas just nu."
 	},
 	"error_check_update": {
 		"message": "Fel vid kontroll av uppdateringar",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Fel vid import:\n",
 		"description": "[error] ett fel uppstod under importprocessen"
+	},
+	"error_internal": {
+		"message": "Internt Fel",
+		"description": "[fel] generiskt fel"
 	},
 	"error_invalid_key": {
 		"message": "Nyckelparametern som skickades till funktionen är inte giltig",
@@ -323,9 +395,17 @@
 		"message": "Inget objekt skickades in för kontroll!",
 		"description": "[error] inget objekt skickades in för att kontrolleras"
 	},
+	"error_no_pinned": {
+		"message": "Du har inga fästa Tab-ar än!",
+		"description": "[fel] användaren försökte ta bort de fästa Tab-arna men har inga fästa Tab-ar"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab hittades inte.",
 		"description": "[error] tillägget kunde inte hitta var de sparade Tabbarna skulle placeras"
+	},
+	"error_no_unpinned": {
+		"message": "Du har inga ofästa Tab-ar!",
+		"description": "[fel] användaren försökte ta bort de ofästa Tab-arna men har inga ofästa Tab-ar"
 	},
 	"error_no_url": {
 		"message": "Ingen URL skickades in att kontrollera!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "var inte initialiserad än.",
 		"description": "[fel] Allmänt fel när en variabel inte är redo"
+	},
+	"error_pin_tab": {
+		"message": "Fel vid fästning av Tab",
+		"description": "[fel]"
 	},
 	"error_processing_tabs": {
 		"message": "Fel vid bearbetning av Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Fel vid borttagning av andra Tabs.",
 		"description": "[fel] Allmänt fel som används vid borttagning av andra Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Fel vid borttagning av fästa Tab-ar.",
+		"description": "[fel] Generiskt fel som används vid borttagning av icke-fästa Tab-ar"
+	},
 	"error_removing_tab": {
 		"message": "Fel vid borttagning av Tab.",
 		"description": "[fel] Allmänt fel som används vid borttagning av en Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Fel vid borttagning av icke-fästa Tab-ar.",
+		"description": "[fel] Generiskt fel som används vid borttagning av icke-fästa Tab-ar"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Fel vid borttagning av alla synliga Tab.",
@@ -383,6 +475,14 @@
 		"message": "Kan inte synkronisera tomma Tabbar!",
 		"description": "[error] försök att synkronisera ingenting"
 	},
+	"error_tab_click_count": {
+		"message": "Antal Klick måste vara ett icke-negativt nummer",
+		"description": "[fel] användaren försökte skapa en Tab med ett felaktigt antal klick"
+	},
+	"error_tab_click_date": {
+		"message": "Klickdatum måste vara ett nummer som inte resulterar i ett datum i framtiden",
+		"description": "[fel] användaren försökte skapa en Tab med ett felaktigt klickdatum"
+	},
 	"error_tab_constructor": {
 		"message": "Använd Tab.create() istället för new Tab() för att använda klassen Tab",
 		"description": "[fel] berätta för utvecklaren hur man använder klassen Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tabben hittades inte.",
 		"description": "[error] Tabben inkluderades inte i arrayen"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab är inte fäst än!",
+		"description": "[fel] användaren försökte lossa en icke-fäst Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "När du anropar med ett objekt, skicka inte med något annat.",
@@ -443,6 +547,10 @@
 		"message": "Okänt begäran.",
 		"description": "[fel] Allmänt fel efter att ha mottagit ett meddelande som inte kändes igen"
 	},
+	"error_unpin_tab": {
+		"message": "Fel vid lossning av Tab",
+		"description": "[fel]"
+	},
 	"error_useless_remove": {
 		"message": "Kan inte ta bort:\nKan inte ta bort en sida som inte har sparats tidigare",
 		"description": "[error] användaren försökte ta bort en sida som ännu inte hade sparats"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Allmänt",
 		"description": "Etikett för kategorin allmänna inställningar"
+	},
+	"generic_pin_tabs": {
+		"message": "generiska $pinned Tab-ar",
+		"description": "Användarens favorit-Tab-ar som inte är org-specifika"
+	},
+	"generic_tabs": {
+		"message": "generiska Tab-ar",
+		"description": "Användarens favorit-Tab-ar som inte är org-specifika"
 	},
 	"help": {
 		"message": "Hjälp",
@@ -567,6 +683,10 @@
 		"message": "Ogiltig filtyp.\nEndast JSON-filer stöds.",
 		"description": "[error] filen som användes vid import är inte en JSON-fil"
 	},
+	"import_metadata": {
+		"message": "Importera Tab metadata (\"Antal Klick\", \"Klickdatum\" etc.).",
+		"description": "[etikett] importera allt som finns i filen under importprocessen"
+	},
 	"import_successful": {
 		"message": "Import lyckades",
 		"description": "[import] importen slutfördes. Därefter visas antalet importerade poster"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs från JSON-fil",
 		"description": "[popup] titel på importknappen"
+	},
+	"inactive": {
+		"message": "Inaktiv",
+		"description": "Används i växlar för inaktivt tillstånd"
 	},
 	"insert_another": {
 		"message": "Infoga ytterligare en",
@@ -727,6 +851,14 @@
 		"message": "Organisationslänk",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab-ar",
+		"description": "Tab-ar som är org-specifika"
+	},
+	"org_tabs": {
+		"message": "org Tab-ar",
+		"description": "Tab-ar som är org-specifika"
+	},
 	"other_org_info": {
 		"message": "Information om en annan Organisation",
 		"description": "[modal-title]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Skriv över sparade Tabbar.",
 		"description": "[label] radera alla sparade Tabbar vid import"
+	},
+	"pinned": {
+		"message": "Fäst",
+		"description": "Användarens Tab-ar som alltid finns i början av listan"
 	},
 	"preserve_org_tabs": {
 		"message": "Behåll Tabbar för andra organisationer.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Org-stylare",
 		"description": "Etikett för att konfigurera stilen för Org-specifika Tab"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etikett för förhandsgranskning av generisk Tab-utseende när den är fäst"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etikett för att konfigurera stilen på generiska Tab-ar när de är fästa"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etikett för förhandsgranskning av org-specifik Tab-utseende när den är fäst"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etikett för att konfigurera stilen på org-specifika Tab-ar när de är fästa"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etikett för att ställa in bakgrundsfärg för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etikett för att ställa in bakgrundsfärg för generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etikett för att ställa in kantfärg för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etikett för att ställa in kantfärg för generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etikett för att ställa in textfärg för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etikett för att ställa in textfärg för generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Uppmaning att välja dekorationsstilar för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Uppmaning att välja dekorationsstilar för generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etikett för att ställa in hovringsbakgrundsfärg för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etikett för att ställa in hovringsbakgrundsfärg för generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etikett för att ställa in skuggfärg för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etikett för att ställa in skuggfärg för generiska Tab-ar"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etikett för att ställa in toppfältsfärg för aktiva generiska Tab-ar"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etikett för att ställa in bakgrundsfärg för aktiva org Tab-ar"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etikett för att ställa in bakgrundsfärg för org-specifika Tab-ar"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etikett för att ställa in kantfärg för aktiva org-specifika Tab-ar"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etikett för att ställa in kantfärg för org Tab-ar"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etikett för att ställa in textfärg för aktiva org Tab-ar"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etikett för att ställa in textfärg för org-specifika Tab-ar"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Uppmaning att välja dekorationsstilar för aktiva org-specifika Tab-ar"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Uppmaning att välja dekorationsstilar för org Tab-ar"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etikett för att ställa in hovringsbakgrundsfärg för aktiva org Tab-ar"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etikett för att ställa in hovringsbakgrundsfärg för org-specifika Tab-ar"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etikett för att ställa in skuggfärg för aktiva org-specifika Tab-ar"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etikett för att ställa in skuggfärg för org Tab-ar"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etikett för att ställa in toppfältsfärg för aktiva org Tab-ar"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Ange bakgrundsfärgen för dina aktiva generiska Tab-ar.",
@@ -951,6 +1207,42 @@
 		"message": "Hoppa över",
 		"description": "[req_permission] knapp för att INTE ge behörighet"
 	},
+	"style_generic_pinned": {
+		"message": "Stil fästa $generic_tabs",
+		"description": "[alternativ] Växlingsetikett för att styla fästa generiska Tab-ar"
+	},
+	"style_org_pinned": {
+		"message": "Stil fästa $org_tabs",
+		"description": "[alternativ] Växlingsetikett för att styla fästa org Tab-ar"
+	},
+	"style_settings_background_label": {
+		"message": "Infoga bakgrundsfärgen för din",
+		"description": "Etikett för att ställa in bakgrundsfärg"
+	},
+	"style_settings_border_color_label": {
+		"message": "Infoga kantfärgen för din",
+		"description": "Etikett för att ställa in kantfärg"
+	},
+	"style_settings_color_label": {
+		"message": "Infoga färgen på texten för din",
+		"description": "Etikett för att ställa in textfärg"
+	},
+	"style_settings_decoration_label": {
+		"message": "Välj en eller flera dekorationsstilar för din",
+		"description": "Uppmaning att välja dekorationsstilar"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Infoga hovringsbakgrundsfärgen för din",
+		"description": "Etikett för att ställa in hovringsbakgrundsfärg"
+	},
+	"style_settings_shadow_label": {
+		"message": "Infoga skuggfärgen för din",
+		"description": "Etikett för att ställa in skuggfärg"
+	},
+	"style_settings_top_active_label": {
+		"message": "Infoga färgen för fältet högst upp på din aktiva",
+		"description": "Etikett för att ställa in aktiv toppfältsfärg"
+	},
 	"successfully_imported": {
 		"message": "Import lyckades",
 		"description": "[toast] användaren importerade Tabbar från en extern fil"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Användare",
 		"description": "namnet på sidan relaterad till ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Vänligen exportera dina nya Tab-ar eftersom filen du använde inte kommer att stödjas i framtida utgåvor.",
+		"description": "[varning] användaren importerade sina Tab-ar med en föråldrad konfiguration av json-filen"
 	},
 	"where_to": {
 		"message": "Vart?",

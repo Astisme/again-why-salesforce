@@ -73,6 +73,9 @@ function nss_getCurrentBrowserTab(callback, url) {
  * Creates a new tab with the given URL next to the current tab and it associates the new tab with the current tab (this ensures the same container is used).
  *
  * @param {string} url - the URL to be opened
+ * @param {number} [count=0] - the number of times this function has been called (will autoincrement)
+ * @return undefined
+ * @throws {Error} when the function is called with count > 5
  */
 function createTab(url, count = 0) {
 	if (count > 5) {

@@ -29,7 +29,7 @@ let inputModalParent;
  * "Overwrite saved tabs." and "Preserve tabs for other orgs."
  * Additionally, it assigns an ID to the close button using CLOSE_MODAL_ID.
  *
- * @returns {{
+ * @return {{
  *   saveButton: HTMLElement,
  *   closeButton: HTMLElement,
  *   inputContainer: HTMLInputElement
@@ -101,7 +101,7 @@ async function generateSldsImport() {
  * Reads and processes JSON files using modern Promise-based API.
  *
  * @param {File|File[]} files - The file(s) to read and validate.
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 async function readFile(files) {
 	const fileArray = Array.isArray(files) ? files : [files];
@@ -185,6 +185,7 @@ function listenToFileUpload() {
 /**
  * Displays the file import modal if there are no other open modals.
  * If a modal is already open, shows a toast notification to close the other modal first.
+ * @return undefined
  */
 async function showFileImport() {
 	if (
@@ -207,7 +208,7 @@ async function showFileImport() {
  * If an error occurs during the display, shows an error toast notification.
  *
  * @async
- * @returns {Promise<void>}
+ * @return {Promise<void>}
  */
 export async function createImportModal() {
 	try {

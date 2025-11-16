@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Active",
+		"description": "Used in toggles for active state"
+	},
+	"active_generic_pin_tabs": {
+		"message": "active $generic_pin_tabs",
+		"description": "User's generic Pinned Tabs which are currently active"
+	},
+	"active_generic_tabs": {
+		"message": "active $generic_tabs",
+		"description": "User's generic Tabs which are currently active"
+	},
+	"active_org_pin_tabs": {
+		"message": "active $org_pin_tabs",
+		"description": "User's org Pinned Tabs which are currently active"
+	},
+	"active_org_tabs": {
+		"message": "active $org_tabs",
+		"description": "User's org Tabs which are currently active"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -68,7 +88,7 @@
 		"description": "textContent for buttons that allow the current action to execute"
 	},
 	"cxm_empty_generic_tabs": {
-		"message": "😊 All generic Tabs",
+		"message": "😊 All $generic_tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_empty_tabs": {
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[context-menu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Pin",
+		"description": "[context-menu] let the user keep this Tab at the beginning of their list"
+	},
 	"cxm_remove": {
 		"message": "💥 Remove Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Other Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Remove Pinned",
+		"description": "[context-menu] let the user remove their pinned Tabs"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs to the right",
 		"description": "[context-menu]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Remove Unpinned",
+		"description": "[context-menu] let the user remove their not-pinned Tabs"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Reset Default Tabs",
@@ -179,12 +211,16 @@
 		"message": "🙈 Hide Org Tabs",
 		"description": "[context-menu] temporarily hide Org Tabs"
 	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Unpin",
+		"description": "[context-menu] let the user remove this Tab from their pinned list"
+	},
 	"cxm_update": {
 		"message": "✏️ Update Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Toggle Org",
+		"message": "👜 Toggle Org",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
@@ -214,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Error when adding Tab.",
 		"description": "[error] Generic error used while adding a Tab"
+	},
+	"error_already_pinned": {
+		"message": "This Tab was already pinned.",
+		"description": "[error] the user tried to pin a pinned Tab"
+	},
+	"error_already_unpinned": {
+		"message": "This Tab was already unpinned.",
+		"description": "[error] the user tried to unpin a unpinned Tab"
+	},
+	"error_cannot_move": {
+		"message": "This Tab cannot be moved!",
+		"description": "[error] the requested Tab cannot be moved at the moment."
+	},
+	"error_cannot_move_dir": {
+		"message": "This Tab cannot be moved in this direction!",
+		"description": "[error] the requested Tab cannot be moved at the moment."
 	},
 	"error_check_update": {
 		"message": "Error checking for updates",
@@ -343,9 +395,17 @@
 		"message": "No object to be checked!",
 		"description": "[error] the object was not passed"
 	},
+	"error_no_pinned": {
+		"message": "You do not have any pinned Tabs yet!",
+		"description": "[error] the user tried to remove the pinned Tabs but they do not have any pinned Tabs"
+	},
 	"error_no_setup_tab": {
 		"message": "Failed to find Setup tab.",
 		"description": "[error] The extension could not find where to put the favourite Tabs."
+	},
+	"error_no_unpinned": {
+		"message": "You do not have any unpinned Tabs!",
+		"description": "[error] the user tried to remove the unpinned Tabs but they do not have any unpinned Tabs"
 	},
 	"error_no_url": {
 		"message": "No URL to check!",
@@ -354,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "was not yet initialized.",
 		"description": "[error] Generic error for when a variable is not ready"
+	},
+	"error_pin_tab": {
+		"message": "Error while pinning Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Error processing Tabs.",
@@ -372,16 +436,24 @@
 		"description": "[error] Generic error used while removing all Tabs"
 	},
 	"error_removing_generic_tabs": {
-		"message": "Error when removing generic Tabs.",
+		"message": "Error when removing $generic_tabs",
 		"description": "[error] Generic error used while removing generic Tabs"
 	},
 	"error_removing_other_tabs": {
 		"message": "Error when removing other Tabs.",
 		"description": "[error] Generic error used while removing other Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Error when removing pinned Tabs.",
+		"description": "[error] Generic error used while removing non-pinned Tabs"
+	},
 	"error_removing_tab": {
 		"message": "Error when removing Tab.",
 		"description": "[error] Generic error used while removing a Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error when removing non-pinned Tabs.",
+		"description": "[error] Generic error used while removing non-pinned Tabs"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Error when removing all visible Tabs.",
@@ -422,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab was not found.",
 		"description": "[error] the Tab was not included in the array"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab is not pinned yet!",
+		"description": "[error] user tried to unpin a non-pinned Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "When calling with an object, do not pass anything else.",
@@ -470,6 +546,10 @@
 		"message": "Unknown request.",
 		"description": "[error] Generic error after getting a message which was not recognized"
 	},
+	"error_unpin_tab": {
+		"message": "Error while unpinning Tab",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Cannot remove:\nCannot remove a page that has not been saved before",
 		"description": "[error] the user tried to remove a page that was not saved yet"
@@ -509,6 +589,14 @@
 	"general": {
 		"message": "General",
 		"description": "Label for the general settings category"
+	},
+	"generic_pin_tabs": {
+		"message": "generic $pinned $tabs",
+		"description": "User's favorite Tabs which are non org-specific"
+	},
+	"generic_tabs": {
+		"message": "generic $tabs",
+		"description": "User's favorite Tabs which are non org-specific"
 	},
 	"help": {
 		"message": "Help",
@@ -609,6 +697,10 @@
 	"import_title": {
 		"message": "$import_tabs from JSON file",
 		"description": "[popup] title on import button"
+	},
+	"inactive": {
+		"message": "Inactive",
+		"description": "Used in toggles for inactive state"
 	},
 	"insert_another": {
 		"message": "Insert another",
@@ -758,6 +850,14 @@
 		"message": "Org Link",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned $tabs",
+		"description": "Tabs which are org-specific"
+	},
+	"org_tabs": {
+		"message": "org $tabs",
+		"description": "Tabs which are org-specific"
+	},
 	"other_org_info": {
 		"message": "Other Org info",
 		"description": "[modal-title]"
@@ -769,6 +869,10 @@
 	"overwrite_tabs": {
 		"message": "Overwrite saved Tabs.",
 		"description": "[label] delete all saved Tabs during import process"
+	},
+	"pinned": {
+		"message": "Pinned",
+		"description": "User's Tabs which are always found at the beginning of the list"
 	},
 	"preserve_org_tabs": {
 		"message": "Preserve Tabs for other orgs.",
@@ -862,108 +966,228 @@
 		"message": "Org Styler",
 		"description": "Label for configuring the style of org-specific Tabs"
 	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label for previewing generic Tab appearance when pinned"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label for configuring the style of generic Tabs when pinned"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label for previewing org-specific Tab appearance when pinned"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label for configuring the style of org-specific Tabs when pinned"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label to set background color for active generic Tabs"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label to set background color for generic Tabs"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label to set border color for active generic Tabs"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label to set border color for generic Tabs"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label to set text color for active generic Tabs"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label to set text color for generic Tabs"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Prompt to select decoration styles for active generic Tabs"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Prompt to select decoration styles for generic Tabs"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label to set hover background color for active generic Tabs"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label to set hover background color for generic Tabs"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label to set shadow color for active generic Tabs"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label to set shadow color for generic Tabs"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label to set top-bar color for active generic Tabs"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label to set background color for active org Tabs"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label to set background color for org-specific Tabs"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label to set border color for active org-specific Tabs"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label to set border color for org Tabs"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label to set text color for active org Tabs"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label to set text color for org-specific Tabs"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Prompt to select decoration styles for active org-specific Tabs"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Prompt to select decoration styles for org Tabs"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label to set hover background color for active org Tabs"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label to set hover background color for org-specific Tabs"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label to set shadow color for active org-specific Tabs"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label to set shadow color for org Tabs"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label to set top-bar color for active org Tabs"
+	},
 	"set_tab_generic_background_active_label": {
-		"message": "Insert the background color for your active generic Tabs.",
+		"message": "$style_settings_background_label $active_generic_tabs",
 		"description": "Label to set background color for active generic Tabs"
 	},
 	"set_tab_generic_background_label": {
-		"message": "Insert the background color for your generic Tabs.",
+		"message": "$style_settings_background_label $generic_tabs",
 		"description": "Label to set background color for generic Tabs"
 	},
 	"set_tab_generic_border_color_active_label": {
-		"message": "Insert the border color for your active generic Tabs.",
+		"message": "$style_settings_border_color_label $active_generic_tabs",
 		"description": "Label to set border color for active generic Tabs"
 	},
 	"set_tab_generic_border_color_label": {
-		"message": "Insert the border color for your generic Tabs.",
+		"message": "$style_settings_border_color_label $generic_tabs",
 		"description": "Label to set border color for generic Tabs"
 	},
 	"set_tab_generic_color_active_label": {
-		"message": "Insert the color of the text for your active generic Tabs.",
+		"message": "$style_settings_color_label $active_generic_tabs",
 		"description": "Label to set text color for active generic Tabs"
 	},
 	"set_tab_generic_color_label": {
-		"message": "Insert the color of the text for your generic Tabs.",
+		"message": "$style_settings_color_label $generic_tabs",
 		"description": "Label to set text color for generic Tabs"
 	},
 	"set_tab_generic_decoration_active_label": {
-		"message": "Pick one or more decoration styles for your active generic Tabs.",
+		"message": "$style_settings_decoration_label $active_generic_tabs",
 		"description": "Prompt to select decoration styles for active generic Tabs"
 	},
 	"set_tab_generic_decoration_label": {
-		"message": "Pick one or more decoration styles for your generic Tabs.",
+		"message": "$style_settings_decoration_label $generic_tabs",
 		"description": "Prompt to select decoration styles for generic Tabs"
 	},
 	"set_tab_generic_hover_background_active_label": {
-		"message": "Insert the hover background color for your active generic Tabs.",
+		"message": "$style_settings_hover_background_label $active_generic_tabs",
 		"description": "Label to set hover background color for active generic Tabs"
 	},
 	"set_tab_generic_hover_background_label": {
-		"message": "Insert the hover background color for your generic Tabs.",
+		"message": "$style_settings_hover_background_label $generic_tabs",
 		"description": "Label to set hover background color for generic Tabs"
 	},
 	"set_tab_generic_shadow_active_label": {
-		"message": "Insert the shadow color for your active generic Tabs.",
+		"message": "$style_settings_shadow_label $active_generic_tabs",
 		"description": "Label to set shadow color for active generic Tabs"
 	},
 	"set_tab_generic_shadow_label": {
-		"message": "Insert the shadow color for your generic Tabs.",
+		"message": "$style_settings_shadow_label $generic_tabs",
 		"description": "Label to set shadow color for generic Tabs"
 	},
 	"set_tab_generic_top_active_label": {
-		"message": "Insert the color for the bar at the top of your active generic Tabs.",
+		"message": "$style_settings_top_active_label $generic_tabs",
 		"description": "Label to set top-bar color for active generic Tabs"
 	},
 	"set_tab_org_background_active_label": {
-		"message": "Insert the background color for your active org Tabs.",
+		"message": "$style_settings_background_label $active_org_tabs",
 		"description": "Label to set background color for active org Tabs"
 	},
 	"set_tab_org_background_label": {
-		"message": "Insert the background color for your org Tabs.",
+		"message": "$style_settings_background_label $org_tabs",
 		"description": "Label to set background color for org-specific Tabs"
 	},
 	"set_tab_org_border_color_active_label": {
-		"message": "Insert the border color for your active org Tabs.",
+		"message": "$style_settings_border_color_label $active_org_tabs",
 		"description": "Label to set border color for active org-specific Tabs"
 	},
 	"set_tab_org_border_color_label": {
-		"message": "Insert the border color for your org Tabs.",
+		"message": "$style_settings_border_color_label $org_tabs",
 		"description": "Label to set border color for org Tabs"
 	},
 	"set_tab_org_color_active_label": {
-		"message": "Insert the color of the text for your active org Tabs.",
+		"message": "$style_settings_color_label $active_org_tabs",
 		"description": "Label to set text color for active org Tabs"
 	},
 	"set_tab_org_color_label": {
-		"message": "Insert the color of the text for your org Tabs.",
+		"message": "$style_settings_color_label $org_tabs",
 		"description": "Label to set text color for org-specific Tabs"
 	},
 	"set_tab_org_decoration_active_label": {
-		"message": "Pick one or more decoration styles for your active org Tabs.",
+		"message": "$style_settings_decoration_label $active_org_tabs",
 		"description": "Prompt to select decoration styles for active org-specific Tabs"
 	},
 	"set_tab_org_decoration_label": {
-		"message": "Pick one or more decoration styles for your org Tabs.",
+		"message": "$style_settings_decoration_label $org_tabs",
 		"description": "Prompt to select decoration styles for org Tabs"
 	},
 	"set_tab_org_hover_background_active_label": {
-		"message": "Insert the hover background color for your active org Tabs.",
+		"message": "$style_settings_hover_background_label $active_org_tabs",
 		"description": "Label to set hover background color for active org Tabs"
 	},
 	"set_tab_org_hover_background_label": {
-		"message": "Insert the hover background color for your org Tabs.",
+		"message": "$style_settings_hover_background_label $org_tabs",
 		"description": "Label to set hover background color for org-specific Tabs"
 	},
 	"set_tab_org_shadow_active_label": {
-		"message": "Insert the shadow color for your active org Tabs.",
+		"message": "$style_settings_shadow_label $active_org_tabs",
 		"description": "Label to set shadow color for active org-specific Tabs"
 	},
 	"set_tab_org_shadow_label": {
-		"message": "Insert the shadow color for your org Tabs.",
+		"message": "$style_settings_shadow_label $org_tabs",
 		"description": "Label to set shadow color for org Tabs"
 	},
 	"set_tab_org_top_active_label": {
-		"message": "Insert the color for the bar at the top of your active org Tabs.",
+		"message": "$style_settings_top_active_label $org_tabs",
 		"description": "Label to set top-bar color for active org Tabs"
 	},
 	"set_toggle_preview": {
@@ -981,6 +1205,42 @@
 	"skip": {
 		"message": "Skip",
 		"description": "[req_permission] button to NOT allow permissons"
+	},
+	"style_generic_pinned": {
+		"message": "Style pinned $generic_tabs",
+		"description": "[options] Toggle label to style pinned generic Tabs"
+	},
+	"style_org_pinned": {
+		"message": "Style pinned $org_tabs",
+		"description": "[options] Toggle label to style pinned org Tabs"
+	},
+	"style_settings_background_label": {
+		"message": "Insert the background color for your",
+		"description": "Label to set background color"
+	},
+	"style_settings_border_color_label": {
+		"message": "Insert the border color for your",
+		"description": "Label to set border color"
+	},
+	"style_settings_color_label": {
+		"message": "Insert the color of the text for your",
+		"description": "Label to set text color"
+	},
+	"style_settings_decoration_label": {
+		"message": "Pick one or more decoration styles for your",
+		"description": "Prompt to select decoration styles"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Insert the hover background color for your",
+		"description": "Label to set hover background color"
+	},
+	"style_settings_shadow_label": {
+		"message": "Insert the shadow color for your",
+		"description": "Label to set shadow color"
+	},
+	"style_settings_top_active_label": {
+		"message": "Insert the color for the bar at the top of your active",
+		"description": "Label to set top-bar active color"
 	},
 	"successfully_imported": {
 		"message": "Successfully imported",
@@ -1065,6 +1325,10 @@
 	"users": {
 		"message": "Users",
 		"description": "The name of the page related to ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Please export your new Tabs as the file you've used won't be supported in future releases.",
+		"description": "[warning] the user imported their Tabs using a deprecated configuration of the json file"
 	},
 	"where_to": {
 		"message": "Where to?",

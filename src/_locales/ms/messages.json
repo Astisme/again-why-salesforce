@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktif",
+		"description": "Digunakan dalam togol untuk keadaan aktif"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs aktif",
+		"description": "Tab Disemat generik pengguna yang sedang aktif"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs aktif",
+		"description": "Tab generik pengguna yang sedang aktif"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs aktif",
+		"description": "Tab Disemat org pengguna yang sedang aktif"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs aktif",
+		"description": "Tab org pengguna yang sedang aktif"
+	},
 	"allow": {
 		"message": "Benarkan",
 		"description": "[minta_kebenaran] butang untuk membenarkan kebenaran"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[संदर्भ-मेनू]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Semat",
+		"description": "[menu-konteks] benarkan pengguna menyimpan Tab ini di permulaan senarai mereka"
+	},
 	"cxm_remove": {
 		"message": "💥 Buang Tab(s)",
 		"description": "[menu-konteks]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Tabs Lain",
 		"description": "[menu-konteks]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Alih Keluar Yang Disemat",
+		"description": "[menu-konteks] benarkan pengguna mengalih keluar Tab mereka yang disematkan"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs di sebelah kanan",
 		"description": "[menu-konteks]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab Ini",
 		"description": "[menu-konteks]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Alih Keluar Yang Tidak Disemat",
+		"description": "[menu-konteks] benarkan pengguna mengalih keluar Tab mereka yang tidak disematkan"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Tetapkan semula Tab lalai",
@@ -151,6 +183,14 @@
 		"message": "🎯 Isiharkan Tab",
 		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka secara automatik (menu induk)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ mengikut Penggunaan",
+		"description": "menu konteks untuk membenarkan pengguna mengisih Tab mereka mengikut bilangan kali mereka mengklik Tab mereka"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ mengikut Masa",
+		"description": "menu konteks untuk membenarkan pengguna mengisih Tab mereka mengikut masa Tab diklik"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 mengikut Label",
 		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka mengikut label"
@@ -163,12 +203,24 @@
 		"message": "🤖 mengikut Url",
 		"description": "Menu konteks untuk membolehkan pengguna mengisih Tab mereka mengikut url"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Sembunyikan Tab bukan-Org",
+		"description": "[menu-konteks] sembunyikan Tab generik buat sementara waktu"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Sembunyikan Tab Org",
+		"description": "[menu-konteks] sembunyikan Tab Org buat sementara waktu"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Nyahsemat",
+		"description": "[menu-konteks] benarkan pengguna mengalih keluar Tab ini daripada senarai yang disematkan"
+	},
 	"cxm_update": {
 		"message": "✏️ Kemas kini Tab",
 		"description": "[menu-konteks]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Togol Org",
+		"message": "👜 Togol Org",
 		"description": "[menu-konteks]"
 	},
 	"cxm_update_tab": {
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Ralat semasa menambah Tab.",
 		"description": "[ralat] Ralat generik yang digunakan semasa menambah Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tab ini telah disematkan.",
+		"description": "[ralat] pengguna cuba menyematkan Tab yang telah disematkan"
+	},
+	"error_already_unpinned": {
+		"message": "Tab ini telah dinyahsemat.",
+		"description": "[ralat] pengguna cuba menyahsemat Tab yang telah dinyahsemat"
+	},
+	"error_cannot_move": {
+		"message": "Tab ini tidak boleh dialihkan!",
+		"description": "[ralat] Tab yang diminta tidak boleh dialihkan pada masa ini."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tab ini tidak boleh dialihkan ke arah ini!",
+		"description": "[ralat] Tab yang diminta tidak boleh dialihkan pada masa ini."
 	},
 	"error_check_update": {
 		"message": "Ralat semasa menyemak kemas kini",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Ralat semasa import:\n",
 		"description": "[ralat] terdapat ralat semasa proses import"
+	},
+	"error_internal": {
+		"message": "Ralat Dalaman",
+		"description": "[ralat] ralat generik"
 	},
 	"error_invalid_key": {
 		"message": "Parameter kunci yang dihantar ke fungsi tidak sah",
@@ -323,9 +395,17 @@
 		"message": "Tiada objek untuk disemak!",
 		"description": "[ralat] objek tidak dihantar"
 	},
+	"error_no_pinned": {
+		"message": "Anda belum mempunyai sebarang Tab yang disematkan!",
+		"description": "[ralat] pengguna cuba mengalih keluar Tab yang disematkan tetapi mereka tidak mempunyai sebarang Tab yang disematkan"
+	},
 	"error_no_setup_tab": {
 		"message": "Gagal mencari Tab Persediaan (Setup).",
 		"description": "[ralat] Sambungan tidak dapat mencari tempat untuk meletakkan Tabs kegemaran."
+	},
+	"error_no_unpinned": {
+		"message": "Anda tidak mempunyai sebarang Tab yang tidak disematkan!",
+		"description": "[ralat] pengguna cuba mengalih keluar Tab yang tidak disematkan tetapi mereka tidak mempunyai sebarang Tab yang tidak disematkan"
 	},
 	"error_no_url": {
 		"message": "Tiada URL untuk disemak!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "belum dimulakan lagi.",
 		"description": "[ralat] Ralat generik apabila pembolehubah belum siap"
+	},
+	"error_pin_tab": {
+		"message": "Ralat semasa menyematkan Tab",
+		"description": "[ralat]"
 	},
 	"error_processing_tabs": {
 		"message": "Ralat memproses Tab.",
@@ -359,9 +443,17 @@
 		"message": "Ralat semasa mengalih keluar Tab lain.",
 		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab lain"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Ralat semasa mengalih keluar Tab yang disematkan.",
+		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab yang tidak disematkan"
+	},
 	"error_removing_tab": {
 		"message": "Ralat semasa mengalih keluar Tab.",
 		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Ralat semasa mengalih keluar Tab yang tidak disematkan.",
+		"description": "[ralat] Ralat generik yang digunakan semasa mengalih keluar Tab yang tidak disematkan"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Ralat semasa mengalih keluar semua Tab kelihatan.",
@@ -383,6 +475,14 @@
 		"message": "Tidak dapat menyegerakkan Tab nol (null)!",
 		"description": "[ralat] cuba menyegerakkan tiada apa-apa"
 	},
+	"error_tab_click_count": {
+		"message": "Kiraan Klik mestilah nombor bukan negatif",
+		"description": "[ralat] pengguna cuba membuat Tab dengan kiraan klik yang salah"
+	},
+	"error_tab_click_date": {
+		"message": "Tarikh Klik mestilah nombor yang tidak menghasilkan tarikh pada masa hadapan",
+		"description": "[ralat] pengguna cuba membuat Tab dengan tarikh klik yang salah"
+	},
 	"error_tab_constructor": {
 		"message": "Gunakan Tab.create() bukannya new Tab() untuk menggunakan kelas Tab",
 		"description": "[ralat] beritahu pembangun cara menggunakan kelas Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab tidak ditemui.",
 		"description": "[ralat] Tab tidak disertakan dalam array"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab belum disematkan!",
+		"description": "[ralat] pengguna cuba menyahsemat Tab yang tidak disematkan"
 	},
 	"error_tab_object_creation": {
 		"message": "Apabila memanggil dengan objek, jangan hantar apa-apa lagi.",
@@ -443,6 +547,10 @@
 		"message": "Permintaan tidak diketahui.",
 		"description": "[ralat] Ralat generik selepas menerima mesej yang tidak dikenali"
 	},
+	"error_unpin_tab": {
+		"message": "Ralat semasa menyahsemat Tab",
+		"description": "[ralat]"
+	},
 	"error_useless_remove": {
 		"message": "Tidak dapat membuang:\nTidak dapat membuang halaman yang belum disimpan sebelum ini",
 		"description": "[ralat] pengguna cuba membuang halaman yang belum disimpan lagi"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Umum",
 		"description": "Label untuk kategori tetapan umum"
+	},
+	"generic_pin_tabs": {
+		"message": "Tab $pinned generik",
+		"description": "Tab kegemaran pengguna yang tidak spesifik kepada org"
+	},
+	"generic_tabs": {
+		"message": "Tab generik",
+		"description": "Tab kegemaran pengguna yang tidak spesifik kepada org"
 	},
 	"help": {
 		"message": "Bantuan",
@@ -567,6 +683,10 @@
 		"message": "Jenis fail tidak sah.\nHanya fail JSON disokong.",
 		"description": "[ralat] fail yang digunakan untuk import bukan JSON"
 	},
+	"import_metadata": {
+		"message": "Import metadata Tab (\"Kiraan Klik\", \"Tarikh Klik\" dsb.).",
+		"description": "[label] import semua yang ditemui dalam fail semasa proses import"
+	},
 	"import_successful": {
 		"message": "Berjaya diimport",
 		"description": "[import] import telah selesai. Selepas ini, bilangan rekod yang telah diimport akan ditunjukkan"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "JSON फाइलमधून $import_tabs",
 		"description": "[पॉपअप] आयात बटणावरील शीर्षक"
+	},
+	"inactive": {
+		"message": "Tidak Aktif",
+		"description": "Digunakan dalam togol untuk keadaan tidak aktif"
 	},
 	"insert_another": {
 		"message": "Masukkan yang lain",
@@ -727,6 +851,14 @@
 		"message": "Pautan Org",
 		"description": "[label-input]"
 	},
+	"org_pin_tabs": {
+		"message": "Tab $pinned org",
+		"description": "Tab yang spesifik kepada org"
+	},
+	"org_tabs": {
+		"message": "Tab org",
+		"description": "Tab yang spesifik kepada org"
+	},
 	"other_org_info": {
 		"message": "Maklumat Org Lain",
 		"description": "[tajuk-modal]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Tulis ganti Tabs yang disimpan.",
 		"description": "[label] padam semua Tabs yang disimpan semasa proses import"
+	},
+	"pinned": {
+		"message": "Disematkan",
+		"description": "Tab pengguna yang sentiasa ditemui di permulaan senarai"
 	},
 	"preserve_org_tabs": {
 		"message": "Kekalkan Tabs untuk Org lain.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Penggaya Organisasi",
 		"description": "Label untuk mengkonfigurasi gaya Tab khusus organisasi"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label untuk pratonton penampilan Tab generik apabila disematkan"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label untuk mengkonfigurasi gaya Tab generik apabila disematkan"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label untuk pratonton penampilan Tab spesifik org apabila disematkan"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label untuk mengkonfigurasi gaya Tab spesifik org apabila disematkan"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang untuk Tab generik"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label untuk menetapkan warna sempadan untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label untuk menetapkan warna sempadan untuk Tab generik"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label untuk menetapkan warna teks untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label untuk menetapkan warna teks untuk Tab generik"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Gesaan untuk memilih gaya hiasan untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Gesaan untuk memilih gaya hiasan untuk Tab generik"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang tuding untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang tuding untuk Tab generik"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label untuk menetapkan warna bayangan untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label untuk menetapkan warna bayangan untuk Tab generik"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label untuk menetapkan warna bar atas untuk Tab generik aktif"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang untuk Tab org aktif"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang untuk Tab spesifik org"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label untuk menetapkan warna sempadan untuk Tab spesifik org aktif"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label untuk menetapkan warna sempadan untuk Tab org"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label untuk menetapkan warna teks untuk Tab org aktif"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label untuk menetapkan warna teks untuk Tab spesifik org"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Gesaan untuk memilih gaya hiasan untuk Tab spesifik org aktif"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Gesaan untuk memilih gaya hiasan untuk Tab org"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang tuding untuk Tab org aktif"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label untuk menetapkan warna latar belakang tuding untuk Tab spesifik org"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label untuk menetapkan warna bayangan untuk Tab spesifik org aktif"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label untuk menetapkan warna bayangan untuk Tab org"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label untuk menetapkan warna bar atas untuk Tab org aktif"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Masukkan warna latar belakang untuk Tab generik aktif anda.",
@@ -951,6 +1207,42 @@
 		"message": "Langkau",
 		"description": "[minta_kebenaran] butang untuk TIDAK membenarkan kebenaran"
 	},
+	"style_generic_pinned": {
+		"message": "Gaya Tab $generic_tabs yang disematkan",
+		"description": "[pilihan] Label togol untuk menggayakan Tab generik yang disematkan"
+	},
+	"style_org_pinned": {
+		"message": "Gaya Tab $org_tabs yang disematkan",
+		"description": "[pilihan] Label togol untuk menggayakan Tab org yang disematkan"
+	},
+	"style_settings_background_label": {
+		"message": "Masukkan warna latar belakang untuk anda",
+		"description": "Label untuk menetapkan warna latar belakang"
+	},
+	"style_settings_border_color_label": {
+		"message": "Masukkan warna sempadan untuk anda",
+		"description": "Label untuk menetapkan warna sempadan"
+	},
+	"style_settings_color_label": {
+		"message": "Masukkan warna teks untuk anda",
+		"description": "Label untuk menetapkan warna teks"
+	},
+	"style_settings_decoration_label": {
+		"message": "Pilih satu atau lebih gaya hiasan untuk anda",
+		"description": "Gesaan untuk memilih gaya hiasan"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Masukkan warna latar belakang tuding untuk anda",
+		"description": "Label untuk menetapkan warna latar belakang tuding"
+	},
+	"style_settings_shadow_label": {
+		"message": "Masukkan warna bayangan untuk anda",
+		"description": "Label untuk menetapkan warna bayangan"
+	},
+	"style_settings_top_active_label": {
+		"message": "Masukkan warna untuk bar di bahagian atas $active anda",
+		"description": "Label untuk menetapkan warna aktif bar atas"
+	},
 	"successfully_imported": {
 		"message": "Berjaya diimport",
 		"description": "[toast] pengguna menambah Tabs dari fail luaran"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Pengguna",
 		"description": "Nama halaman yang berkaitan dengan ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Sila eksport Tab baharu anda kerana fail yang anda gunakan tidak akan disokong dalam keluaran akan datang.",
+		"description": "[amaran] pengguna mengimport Tab mereka menggunakan konfigurasi fail json yang tidak lagi digunakan"
 	},
 	"where_to": {
 		"message": "Ke mana?",

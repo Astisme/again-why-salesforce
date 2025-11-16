@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktīvs",
+		"description": "Izmanto pārslēgos aktīvam stāvoklim"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktīvs $generic_pin_tabs",
+		"description": "Lietotāja vispārējās Piespraustās Tab, kas pašlaik ir aktīvas"
+	},
+	"active_generic_tabs": {
+		"message": "aktīvas $generic_tabs",
+		"description": "Lietotāja vispārējās Tab, kas pašlaik ir aktīvas"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktīvs $org_pin_tabs",
+		"description": "Lietotāja org Piespraustās Tab, kas pašlaik ir aktīvas"
+	},
+	"active_org_tabs": {
+		"message": "aktīvas $org_tabs",
+		"description": "Lietotāja org Tab, kas pašlaik ir aktīvas"
+	},
 	"allow": {
 		"message": "Atļaut",
 		"description": "[pieprasīt_atļauju] poga atļauju piešķiršanai"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[konteksta-izvēlne]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Piespraust",
+		"description": "[konteksta-izvēlne] ļauj lietotājam saglabāt šo Tab savas saraksta sākumā"
+	},
 	"cxm_remove": {
 		"message": "💥 Noņemt Tab(s)",
 		"description": "[konteksta_izvēlne]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Citas Tabs",
 		"description": "[konteksta_izvēlne]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Noņemt Piespraustās",
+		"description": "[konteksta-izvēlne] ļauj lietotājam noņemt savas piespraustās Tab"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs pa labi",
 		"description": "[konteksta_izvēlne]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Šis Tab",
 		"description": "[konteksta_izvēlne]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Noņemt Nepiespraustās",
+		"description": "[konteksta-izvēlne] ļauj lietotājam noņemt savas nepiespraustās Tab"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Atiestatīt noklusētās Tab",
@@ -151,6 +183,14 @@
 		"message": "🎯 Kārtot cilnes",
 		"description": "Konteksta izvēlne, kas ļauj lietotājiem automātiski kārtot savas cilnes (galvenā izvēlne)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ pēc Lietojuma",
+		"description": "konteksta izvēlne, kas ļauj lietotājiem kārtot Tab pēc to klikšķu skaita"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ pēc Laika",
+		"description": "konteksta izvēlne, kas ļauj lietotājiem kārtot Tab pēc Tab klikšķināšanas laika"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 pēc iezīmes",
 		"description": "Konteksta izvēlne, kas ļauj lietotājiem kārtot savas cilnes pēc iezīmes"
@@ -163,13 +203,25 @@
 		"message": "🤖 pēc URL",
 		"description": "Konteksta izvēlne, kas ļauj lietotājiem kārtot savas cilnes pēc URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Paslēpt ne-Org Tab",
+		"description": "[konteksta-izvēlne] īslaicīgi paslēpt vispārējās Tab"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Paslēpt Org Tab",
+		"description": "[konteksta-izvēlne] īslaicīgi paslēpt Org Tab"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Atspraust",
+		"description": "[konteksta-izvēlne] ļauj lietotājam noņemt šo Tab no savas piesprausto saraksta"
+	},
 	"cxm_update": {
 		"message": "✏️ Atjaunināt Tab",
 		"description": "[konteksta_izvēlne]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Pārslēgt Org",
-		"description": "[konteksta_izvēlne]"
+		"message": "👜 Pārslēgt Org",
+		"description": "[konteksta-izvēlne]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Citi atjauninājumi",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Kļūda pievienojot Tab.",
 		"description": "[kļūda] Vispārīga kļūda, ko izmanto, pievienojot Tab"
+	},
+	"error_already_pinned": {
+		"message": "Šī Tab jau bija piesprausta.",
+		"description": "[kļūda] lietotājs mēģināja piespraust jau piespraustu Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Šī Tab jau bija atsprausta.",
+		"description": "[kļūda] lietotājs mēģināja atspraust jau atspraustu Tab"
+	},
+	"error_cannot_move": {
+		"message": "Šo Tab nevar pārvietot!",
+		"description": "[kļūda] pieprasīto Tab pašlaik nevar pārvietot."
+	},
+	"error_cannot_move_dir": {
+		"message": "Šo Tab nevar pārvietot šajā virzienā!",
+		"description": "[kļūda] pieprasīto Tab pašlaik nevar pārvietot."
 	},
 	"error_check_update": {
 		"message": "Kļūda, pārbaudot atjauninājumus",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Kļūda importēšanas laikā:\n",
 		"description": "[kļūda] importēšanas procesa laikā radās kļūda"
+	},
+	"error_internal": {
+		"message": "Iekšēja Kļūda",
+		"description": "[kļūda] vispārīga kļūda"
 	},
 	"error_invalid_key": {
 		"message": "Funkcijai nodotais atslēgas parametrs nav derīgs",
@@ -323,9 +395,17 @@
 		"message": "Nav objekta pārbaudei!",
 		"description": "[kļūda] objekts netika nodots"
 	},
+	"error_no_pinned": {
+		"message": "Jums vēl nav nevienas piespraustas Tab!",
+		"description": "[kļūda] lietotājs mēģināja noņemt piespraustās Tab, bet viņam nav nevienas piespraustas Tab"
+	},
 	"error_no_setup_tab": {
 		"message": "Neizdevās atrast Iestatīšanas (Setup) cilni.",
 		"description": "[kļūda] Paplašinājums nevarēja atrast, kur ievietot iecienītākos Tabs."
+	},
+	"error_no_unpinned": {
+		"message": "Jums nav nevienas nepiespraustas Tab!",
+		"description": "[kļūda] lietotājs mēģināja noņemt nepiespraustās Tab, bet viņam nav nevienas nepiespraustas Tab"
 	},
 	"error_no_url": {
 		"message": "Nav URL pārbaudei!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "vēl nebija inicializēts.",
 		"description": "[kļūda] Vispārīga kļūda, kad mainīgais nav gatavs"
+	},
+	"error_pin_tab": {
+		"message": "Kļūda piespraužot Tab",
+		"description": "[kļūda]"
 	},
 	"error_processing_tabs": {
 		"message": "Kļūda apstrādājot Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Kļūda dzēšot citus Tabs.",
 		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot citus Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Kļūda, noņemot piespraustās Tab.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, noņemot nepiespraustās Tab"
+	},
 	"error_removing_tab": {
 		"message": "Kļūda dzēšot Tab.",
 		"description": "[kļūda] Vispārīga kļūda, ko izmanto, dzēšot Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Kļūda, noņemot nepiespraustās Tab.",
+		"description": "[kļūda] Vispārīga kļūda, ko izmanto, noņemot nepiespraustās Tab"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Kļūda, noņemot visas redzamās Tab.",
@@ -383,6 +475,14 @@
 		"message": "Nevar sinhronizēt null Tabs!",
 		"description": "[kļūda] mēģināja sinhronizēt neko"
 	},
+	"error_tab_click_count": {
+		"message": "Klikšķu Skaitam jābūt nenegatīvam skaitlim",
+		"description": "[kļūda] lietotājs mēģināja izveidot Tab ar nepareizu klikšķu skaitu"
+	},
+	"error_tab_click_date": {
+		"message": "Klikšķināšanas Datumam jābūt skaitlim, kas nenozīmē datumu nākotnē",
+		"description": "[kļūda] lietotājs mēģināja izveidot Tab ar nepareizu klikšķināšanas datumu"
+	},
 	"error_tab_constructor": {
 		"message": "Izmantojiet Tab.create() jaunā Tab() vietā",
 		"description": "[kļūda] pastāstiet izstrādātājam, kā lietot Tab klasi"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab netika atrasts.",
 		"description": "[kļūda] Tab nebija iekļauts masīvā"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab vēl nav piesprausta!",
+		"description": "[kļūda] lietotājs mēģināja atspraust nepiespraustu Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Zvanot ar objektu, nenododiet neko citu.",
@@ -443,6 +547,10 @@
 		"message": "Nezināms pieprasījums.",
 		"description": "[kļūda] Vispārīga kļūda pēc neatpazītas ziņas saņemšanas"
 	},
+	"error_unpin_tab": {
+		"message": "Kļūda atspraužot Tab",
+		"description": "[kļūda]"
+	},
 	"error_useless_remove": {
 		"message": "Nevar noņemt:\nNevar noņemt lapu, kas iepriekš nav saglabāta",
 		"description": "[kļūda] lietotājs mēģināja noņemt lapu, kas vēl nebija saglabāta"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Vispārīgi",
 		"description": "Etiķete vispārīgo iestatījumu kategorijai"
+	},
+	"generic_pin_tabs": {
+		"message": "vispārējās $pinned Tab",
+		"description": "Lietotāja iecienītākās Tab, kas nav specifiskas org"
+	},
+	"generic_tabs": {
+		"message": "vispārējās Tab",
+		"description": "Lietotāja iecienītākās Tab, kas nav specifiskas org"
 	},
 	"help": {
 		"message": "Palīdzība",
@@ -567,6 +683,10 @@
 		"message": "Nederīgs faila tips.\nTiek atbalstīti tikai JSON faili.",
 		"description": "[kļūda] importēšanai izmantotais fails nav JSON"
 	},
+	"import_metadata": {
+		"message": "Importēt Tab metadatus (\"Klikšķu Skaits\", \"Klikšķināšanas Datums\" utt.).",
+		"description": "[etiķete] importēt visu, kas atrasts failā importēšanas procesa laikā"
+	},
 	"import_successful": {
 		"message": "Veiksmīgi importēts",
 		"description": "[importēt] importēšana pabeigta. Pēc tam tiks parādīts, cik ierakstu ir importēti"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs no JSON faila",
 		"description": "[uznirstošais-logs] nosaukums importēšanas pogai"
+	},
+	"inactive": {
+		"message": "Neaktīvs",
+		"description": "Izmanto pārslēgos neaktīvam stāvoklim"
 	},
 	"insert_another": {
 		"message": "Ievietot citu",
@@ -727,6 +851,14 @@
 		"message": "Org saite",
 		"description": "[ievades_etiķete]"
 	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab",
+		"description": "Tab, kas ir specifiskas org"
+	},
+	"org_tabs": {
+		"message": "org Tab",
+		"description": "Tab, kas ir specifiskas org"
+	},
 	"other_org_info": {
 		"message": "Citas Org informācija",
 		"description": "[modal_virsraksts]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Pārrakstīt saglabātos Tabs.",
 		"description": "[etiķete] dzēst visus saglabātos Tabs importēšanas procesa laikā"
+	},
+	"pinned": {
+		"message": "Piesprausts",
+		"description": "Lietotāja Tab, kas vienmēr atrodas saraksta sākumā"
 	},
 	"preserve_org_tabs": {
 		"message": "Saglabāt Tabs citām Org.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Organizācijas stila maiņa",
 		"description": "Etiķete organizācijai specifisko Tab stila konfigurēšanai"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etiķete vispārējās Tab izskata priekšskatīšanai, kad tā ir piesprausta"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etiķete vispārējo Tab stila konfigurēšanai, kad tās ir piespraustas"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etiķete org-specifiskās Tab izskata priekšskatīšanai, kad tā ir piesprausta"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etiķete org-specifisko Tab stila konfigurēšanai, kad tās ir piespraustas"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai vispārējām Tab"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etiķete apmales krāsas iestatīšanai aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etiķete apmales krāsas iestatīšanai vispārējām Tab"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etiķete teksta krāsas iestatīšanai aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etiķete teksta krāsas iestatīšanai vispārējām Tab"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Uzvedne dekorācijas stilu izvēlei aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Uzvedne dekorācijas stilu izvēlei vispārējām Tab"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai, kad peles kursors atrodas uz aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai, kad peles kursors atrodas uz vispārējām Tab"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etiķete ēnas krāsas iestatīšanai aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etiķete ēnas krāsas iestatīšanai vispārējām Tab"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etiķete augšējās joslas krāsas iestatīšanai aktīvām vispārējām Tab"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai aktīvām org Tab"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai org-specifiskām Tab"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etiķete apmales krāsas iestatīšanai aktīvām org-specifiskām Tab"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etiķete apmales krāsas iestatīšanai org Tab"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etiķete teksta krāsas iestatīšanai aktīvām org Tab"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etiķete teksta krāsas iestatīšanai org-specifiskām Tab"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Uzvedne dekorācijas stilu izvēlei aktīvām org-specifiskām Tab"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Uzvedne dekorācijas stilu izvēlei org Tab"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai, kad peles kursors atrodas uz aktīvām org Tab"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etiķete fona krāsas iestatīšanai, kad peles kursors atrodas uz org-specifiskām Tab"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etiķete ēnas krāsas iestatīšanai aktīvām org-specifiskām Tab"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etiķete ēnas krāsas iestatīšanai org Tab"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etiķete augšējās joslas krāsas iestatīšanai aktīvām org Tab"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Ievadiet aktīvo vispārīgo Tab fona krāsu.",
@@ -951,6 +1207,42 @@
 		"message": "Izlaist",
 		"description": "[pieprasīt_atļauju] poga NEatļaut atļaujas"
 	},
+	"style_generic_pinned": {
+		"message": "Stils piespraustām $generic_tabs",
+		"description": "[opcijas] Pārslēga etiķete piesprausto vispārējo Tab stilizēšanai"
+	},
+	"style_org_pinned": {
+		"message": "Stils piespraustām $org_tabs",
+		"description": "[opcijas] Pārslēga etiķete piesprausto org Tab stilizēšanai"
+	},
+	"style_settings_background_label": {
+		"message": "Ievadiet fona krāsu savām",
+		"description": "Etiķete fona krāsas iestatīšanai"
+	},
+	"style_settings_border_color_label": {
+		"message": "Ievadiet apmales krāsu savām",
+		"description": "Etiķete apmales krāsas iestatīšanai"
+	},
+	"style_settings_color_label": {
+		"message": "Ievadiet teksta krāsu savām",
+		"description": "Etiķete teksta krāsas iestatīšanai"
+	},
+	"style_settings_decoration_label": {
+		"message": "Izvēlieties vienu vai vairākus dekorācijas stilus savām",
+		"description": "Uzvedne dekorācijas stilu izvēlei"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Ievadiet fona krāsu, kad peles kursors atrodas uz jūsu",
+		"description": "Etiķete fona krāsas iestatīšanai, kad peles kursors atrodas uz"
+	},
+	"style_settings_shadow_label": {
+		"message": "Ievadiet ēnas krāsu savām",
+		"description": "Etiķete ēnas krāsas iestatīšanai"
+	},
+	"style_settings_top_active_label": {
+		"message": "Ievadiet krāsu joslai jūsu aktīvā augšpusē",
+		"description": "Etiķete augšējās joslas aktīvās krāsas iestatīšanai"
+	},
 	"successfully_imported": {
 		"message": "Veiksmīgi importēts",
 		"description": "[paziņojums] lietotājs pievienoja Tabs no ārēja faila"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Lietotāji",
 		"description": "Lapas nosaukums, kas saistīts ar ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Lūdzu, eksportējiet savas jaunās Tab, jo faila, ko izmantojāt, atbalsts nākotnes izlaidumos tiks pārtraukts.",
+		"description": "[brīdinājums] lietotājs importēja savas Tab, izmantojot json faila novecojušu konfigurāciju"
 	},
 	"where_to": {
 		"message": "Uz kurieni?",

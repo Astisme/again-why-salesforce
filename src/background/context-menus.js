@@ -23,10 +23,13 @@ import {
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
 	CXM_PAGE_SAVE_TAB,
+	CXM_PIN_TAB,
 	CXM_REMOVE_LEFT_TABS,
 	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_PIN_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_REMOVE_UNPIN_TABS,
 	CXM_RESET_DEFAULT_TABS,
 	CXM_SORT_CLICK_COUNT,
 	CXM_SORT_CLICK_DATE,
@@ -35,6 +38,7 @@ import {
 	CXM_SORT_URL,
 	CXM_TMP_HIDE_NON_ORG,
 	CXM_TMP_HIDE_ORG,
+	CXM_UNPIN_TAB,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
@@ -72,7 +76,7 @@ let link_cmd_export_all = null;
  * Fetches the latest command links using `bg_getCommandLinks` and assigns the associated shortcuts
  * to their respective global variables based on the command name.
  *
- * @returns {Promise<void>} A promise that resolves once the command links have been updated.
+ * @return {Promise<void>} A promise that resolves once the command links have been updated.
  */
 async function updateCommandLinks() {
 	const commandLinks = await bg_getCommandLinks();
@@ -170,6 +174,18 @@ const menuItemsOriginal = [
 		contexts: ["link"],
 		parentId: "move",
 	},
+	{
+		id: CXM_PIN_TAB,
+		title: "cxm_pin_tab",
+		contexts: ["link"],
+		parentId: "move",
+	},
+	{
+		id: CXM_UNPIN_TAB,
+		title: "cxm_unpin_tab",
+		contexts: ["link"],
+		parentId: "move",
+	},
 
 	{ id: "remove", title: "cxm_remove", contexts: ["link"] },
 	{
@@ -193,6 +209,18 @@ const menuItemsOriginal = [
 	{
 		id: CXM_REMOVE_RIGHT_TABS,
 		title: "cxm_remove_right_tabs",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_REMOVE_PIN_TABS,
+		title: "cxm_remove_pin_tabs",
+		contexts: ["link"],
+		parentId: "remove",
+	},
+	{
+		id: CXM_REMOVE_UNPIN_TABS,
+		title: "cxm_remove_unpin_tabs",
 		contexts: ["link"],
 		parentId: "remove",
 	},
@@ -308,7 +336,7 @@ const menuItemsOriginal = [
  * Each menu item's title is appended with its corresponding keyboard shortcut (if available),
  * enhancing user visibility of assigned commands.
  *
- * @returns {Array<Object>} A cloned array of menu items with updated titles reflecting shortcuts.
+ * @return {Array<Object>} A cloned array of menu items with updated titles reflecting shortcuts.
  */
 function getMenuItemsClone() {
 	const clone = structuredClone(menuItemsOriginal);
@@ -441,6 +469,7 @@ async function removeMenuItems() {
 var intervalCxm = null; // is var so that it does not break tests
 /**
  * Returns the current interval (for tests)
+ * @return current interval
  */
 export function getIntervalCxm() {
 	return intervalCxm;
@@ -450,8 +479,8 @@ export function getIntervalCxm() {
  * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
  * The function also triggers a notification if the context menu is updated.
  *
- * @function checkAddRemoveContextMenus
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
+ * @param {function} [callback=null] - A callback to call at the end of the execution
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 export async function checkAddRemoveContextMenus(what, callback = null) {
@@ -533,6 +562,8 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_SORT_ORG:
 		case CXM_SORT_CLICK_COUNT:
 		case CXM_SORT_CLICK_DATE:
+		case CXM_REMOVE_PIN_TABS:
+		case CXM_REMOVE_UNPIN_TABS:
 			break;
 		default: {
 			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;

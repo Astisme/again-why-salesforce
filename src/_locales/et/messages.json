@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Aktiivne",
+		"description": "Kasutatakse aktiivse oleku lülitites"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktiivsed $generic_pin_tabs",
+		"description": "Kasutaja üldised kinnitatud Tabid, mis on praegu aktiivsed"
+	},
+	"active_generic_tabs": {
+		"message": "aktiivsed $generic_tabs",
+		"description": "Kasutaja üldised Tabid, mis on praegu aktiivsed"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktiivsed $org_pin_tabs",
+		"description": "Kasutaja organisatsioonipõhised kinnitatud Tabid, mis on praegu aktiivsed"
+	},
+	"active_org_tabs": {
+		"message": "aktiivsed $org_tabs",
+		"description": "Kasutaja organisatsioonipõhised Tabid, mis on praegu aktiivsed"
+	},
 	"allow": {
 		"message": "Luba",
 		"description": "[loa_taotlus] nupp lubade andmiseks"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstimenüü]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Kinnita",
+		"description": "[context-menu] laseb kasutajal hoida seda Tabi oma nimekirja alguses"
+	},
 	"cxm_remove": {
 		"message": "💥 Eemalda Tab(id)",
 		"description": "[kontekstimenüü]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Muud Tabs",
 		"description": "[kontekstimenüü]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Eemalda kinnitatud",
+		"description": "[context-menu] laseb kasutajal eemaldada oma kinnitatud Tabid"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs paremal",
 		"description": "[kontekstimenüü]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ See Tab",
 		"description": "[kontekstimenüü]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Eemalda kinnitamata",
+		"description": "[context-menu] laseb kasutajal eemaldada oma kinnitamata Tabid"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Lähtesta vaikimisi Tabid",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sorteeri Tabs",
 		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs automaatselt sortida (vanemmenüü)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ Kasutuse järgi",
+		"description": "kontekstimenüü, mis laseb kasutajatel sorteerida oma Tabe selle järgi, mitu korda nad oma Tabidele klõpsavad"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ Aja järgi",
+		"description": "kontekstimenüü, mis laseb kasutajatel sorteerida oma Tabe selle järgi, millal Tabidele klõpsati"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 sildi järgi",
 		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs sildi järgi sortida"
@@ -163,13 +203,25 @@
 		"message": "🤖 URL-i järgi",
 		"description": "kontekstimenüü, mis võimaldab kasutajatel oma Tabs URL-i järgi sortida"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Peida mitte-Org Tabid",
+		"description": "[context-menu] peida ajutiselt üldised Tabid"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Peida Org Tabid",
+		"description": "[context-menu] peida ajutiselt Org Tabid"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Tühista kinnitamine",
+		"description": "[context-menu] laseb kasutajal eemaldada selle Tabi oma kinnitatud Tabide loendist"
+	},
 	"cxm_update": {
 		"message": "✏️ Uuenda Tab",
 		"description": "[kontekstimenüü]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Lülita Org",
-		"description": "[kontekstimenüü]"
+		"message": "👜 Lülita Org",
+		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Muud uuendused",
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Viga Tabsi lisamisel.",
 		"description": "[error] Üldine viga Tabsi lisamisel"
+	},
+	"error_already_pinned": {
+		"message": "See Tab oli juba kinnitatud.",
+		"description": "[error] kasutaja proovis kinnitada juba kinnitatud Tabi"
+	},
+	"error_already_unpinned": {
+		"message": "See Tab oli juba kinnitamata.",
+		"description": "[error] kasutaja proovis tühistada kinnitamata Tabi kinnitamise"
+	},
+	"error_cannot_move": {
+		"message": "Seda Tabi ei saa liigutada!",
+		"description": "[error] soovitud Tabi ei saa praegu liigutada."
+	},
+	"error_cannot_move_dir": {
+		"message": "Seda Tabi ei saa selles suunas liigutada!",
+		"description": "[error] soovitud Tabi ei saa praegu liigutada."
 	},
 	"error_check_update": {
 		"message": "Viga värskenduste kontrollimisel",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Viga importimisel:\n",
 		"description": "[viga] importimisprotsessi käigus ilmnes viga"
+	},
+	"error_internal": {
+		"message": "Sisemine Viga",
+		"description": "[error] üldine viga"
 	},
 	"error_invalid_key": {
 		"message": "Funktsioonile edastatud key-parameeter on kehtetu",
@@ -323,9 +395,17 @@
 		"message": "Kontrollitavat objekti pole!",
 		"description": "[viga] objekti ei edastatud"
 	},
+	"error_no_pinned": {
+		"message": "Teil ei ole veel ühtegi kinnitatud Tabi!",
+		"description": "[error] kasutaja proovis eemaldada kinnitatud Tabid, kuid tal ei ole ühtegi kinnitatud Tabi"
+	},
 	"error_no_setup_tab": {
 		"message": "Seadistuse (Setup) vahekaarti ei leitud.",
 		"description": "[viga] Laiendus ei leidnud kohta, kuhu lemmik Tabs paigutada."
+	},
+	"error_no_unpinned": {
+		"message": "Teil ei ole ühtegi kinnitamata Tabi!",
+		"description": "[error] kasutaja proovis eemaldada kinnitamata Tabid, kuid tal ei ole ühtegi kinnitamata Tabi"
 	},
 	"error_no_url": {
 		"message": "Kontrollitavat URL-i pole!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "Pole veel initsialiseeritud.",
 		"description": "[error] Üldine viga muutuja ettevalmistatumisel"
+	},
+	"error_pin_tab": {
+		"message": "Viga Tabi kinnitamisel",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Viga Tabside töötlemisel.",
@@ -359,9 +443,17 @@
 		"message": "Viga teiste Tabside eemaldamisel.",
 		"description": "[error] Üldine viga teiste Tabside eemaldamisel"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Viga kinnitatud Tabide eemaldamisel.",
+		"description": "[error] Üldine viga, mida kasutatakse kinnitamata Tabide eemaldamisel"
+	},
 	"error_removing_tab": {
 		"message": "Viga Tabsi eemaldamisel.",
 		"description": "[error] Üldine viga Tabsi eemaldamisel"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Viga kinnitamata Tabide eemaldamisel.",
+		"description": "[error] Üldine viga, mida kasutatakse kinnitamata Tabide eemaldamisel"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Viga kõigi nähtavate Tabide eemaldamisel.",
@@ -383,6 +475,14 @@
 		"message": "Null (null) Tabs ei saa sünkroonida!",
 		"description": "[viga] üritati sünkroonida mitte midagi"
 	},
+	"error_tab_click_count": {
+		"message": "Klõpsude arv peab olema mittenegatiivne number",
+		"description": "[error] kasutaja proovis luua Tabi vale klõpsude arvuga"
+	},
+	"error_tab_click_date": {
+		"message": "Klõpsamise kuupäev peab olema number, mille tulemuseks ei ole tuleviku kuupäev",
+		"description": "[error] kasutaja proovis luua Tabi vale klõpsamise kuupäevaga"
+	},
 	"error_tab_constructor": {
 		"message": "Kasuta Tab.create() asemel new Tab()",
 		"description": "[error] Teavita arendajat, kuidas kasutada Tab klassi"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab ei leitud.",
 		"description": "[viga] Tab ei sisaldunud massiivis"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab ei ole veel kinnitatud!",
+		"description": "[error] kasutaja proovis tühistada kinnitamata Tabi kinnitamise"
 	},
 	"error_tab_object_creation": {
 		"message": "Objektiga kutsudes ärge edastage midagi muud.",
@@ -443,6 +547,10 @@
 		"message": "Tundmatu päring.",
 		"description": "[error] Üldine viga pärast tundmatu sõnumi vastuvõttu"
 	},
+	"error_unpin_tab": {
+		"message": "Viga Tabi kinnitamise tühistamisel",
+		"description": "[error]"
+	},
 	"error_useless_remove": {
 		"message": "Ei saa eemaldada:\nEi saa eemaldada lehte, mida pole varem salvestatud",
 		"description": "[viga] kasutaja üritas eemaldada lehte, mida polnud veel salvestatud"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "Üldine",
 		"description": "Silt üldiste seadete kategooria jaoks"
+	},
+	"generic_pin_tabs": {
+		"message": "üldised $pinned $tabs",
+		"description": "Kasutaja lemmiktabid, mis ei ole organisatsioonipõhised"
+	},
+	"generic_tabs": {
+		"message": "üldised $tabs",
+		"description": "Kasutaja lemmiktabid, mis ei ole organisatsioonipõhised"
 	},
 	"help": {
 		"message": "Abi",
@@ -567,6 +683,10 @@
 		"message": "Kehtetu failitüüp.\nToetatud on ainult JSON-failid.",
 		"description": "[viga] importimiseks kasutatud fail ei ole JSON"
 	},
+	"import_metadata": {
+		"message": "Impordi Tabi metaandmed (\"Klõpsude arv\", \"Klõpsamise kuupäev\" jne).",
+		"description": "[label] impordi kõik, mis failis impordiprotsessi ajal leiti"
+	},
 	"import_successful": {
 		"message": "Edukalt imporditud",
 		"description": "[import] importimine lõpetatud. Pärast seda näidatakse, mitu kirjet imporditi"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs JSON-failist",
 		"description": "[hüpikaken] impordinupu pealkiri"
+	},
+	"inactive": {
+		"message": "Inaktiivne",
+		"description": "Kasutatakse inaktiivse oleku lülitites"
 	},
 	"insert_another": {
 		"message": "Sisesta teine",
@@ -727,6 +851,14 @@
 		"message": "Org link",
 		"description": "[sisendi_silt]"
 	},
+	"org_pin_tabs": {
+		"message": "organisatsiooni $pinned $tabs",
+		"description": "Tabid, mis on organisatsioonipõhised"
+	},
+	"org_tabs": {
+		"message": "organisatsiooni $tabs",
+		"description": "Tabid, mis on organisatsioonipõhised"
+	},
 	"other_org_info": {
 		"message": "Teise Org info",
 		"description": "[modaal_pealkiri]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Kirjuta salvestatud Tabs üle.",
 		"description": "[silt] kustuta kõik salvestatud Tabs importimisprotsessi käigus"
+	},
+	"pinned": {
+		"message": "Kinnitatud",
+		"description": "Kasutaja Tabid, mis asuvad alati nimekirja alguses"
 	},
 	"preserve_org_tabs": {
 		"message": "Säilita Tabs teiste Org'ide jaoks.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Organisatsiooni stiilide muutja",
 		"description": "Silt organisatsioonipõhiste Tab'ide stiili konfigureerimiseks"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Silt kinnitatud üldise Tabi välimuse eelvaatamiseks"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Silt kinnitatud üldiste Tabide stiili konfigureerimiseks"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Silt kinnitatud organisatsioonipõhise Tabi välimuse eelvaatamiseks"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Silt kinnitatud organisatsioonipõhiste Tabide stiili konfigureerimiseks"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Silt aktiivsete üldiste Tabide taustavärvi määramiseks"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Silt üldiste Tabide taustavärvi määramiseks"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Silt aktiivsete üldiste Tabide äärisvärvi määramiseks"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Silt üldiste Tabide äärisvärvi määramiseks"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Silt aktiivsete üldiste Tabide tekstivärvi määramiseks"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Silt üldiste Tabide tekstivärvi määramiseks"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Viip aktiivsete üldiste Tabide kaunistusstiilide valimiseks"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Viip üldiste Tabide kaunistusstiilide valimiseks"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Silt aktiivsete üldiste Tabide hõljumise taustavärvi määramiseks"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Silt üldiste Tabide hõljumise taustavärvi määramiseks"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Silt aktiivsete üldiste Tabide varju värvi määramiseks"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Silt üldiste Tabide varju värvi määramiseks"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Silt aktiivsete üldiste Tabide ülemise riba värvi määramiseks"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Silt aktiivsete organisatsiooni Tabide taustavärvi määramiseks"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Silt organisatsioonipõhiste Tabide taustavärvi määramiseks"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Silt aktiivsete organisatsioonipõhiste Tabide äärisvärvi määramiseks"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Silt organisatsiooni Tabide äärisvärvi määramiseks"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Silt aktiivsete organisatsiooni Tabide tekstivärvi määramiseks"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Silt organisatsioonipõhiste Tabide tekstivärvi määramiseks"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Viip aktiivsete organisatsioonipõhiste Tabide kaunistusstiilide valimiseks"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Viip organisatsiooni Tabide kaunistusstiilide valimiseks"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Silt aktiivsete organisatsiooni Tabide hõljumise taustavärvi määramiseks"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Silt organisatsioonipõhiste Tabide hõljumise taustavärvi määramiseks"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Silt aktiivsete organisatsioonipõhiste Tabide varju värvi määramiseks"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Silt organisatsiooni Tabide varju värvi määramiseks"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Silt aktiivsete organisatsiooni Tabide ülemise riba värvi määramiseks"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Sisestage taustavärv oma aktiivsetele üldistele Tab-idele.",
@@ -951,6 +1207,42 @@
 		"message": "Jäta vahele",
 		"description": "[loa_taotlus] nupp lubade MITTE andmiseks"
 	},
+	"style_generic_pinned": {
+		"message": "Stiili kinnitatud $generic_tabs",
+		"description": "[options] Lüliti silt kinnitatud üldiste Tabide stiili määramiseks"
+	},
+	"style_org_pinned": {
+		"message": "Stiili kinnitatud $org_tabs",
+		"description": "[options] Lüliti silt kinnitatud organisatsiooni Tabide stiili määramiseks"
+	},
+	"style_settings_background_label": {
+		"message": "Sisestage oma taustavärv",
+		"description": "Silt taustavärvi määramiseks"
+	},
+	"style_settings_border_color_label": {
+		"message": "Sisestage oma äärisvärv",
+		"description": "Silt äärisvärvi määramiseks"
+	},
+	"style_settings_color_label": {
+		"message": "Sisestage oma teksti värv",
+		"description": "Silt tekstivärvi määramiseks"
+	},
+	"style_settings_decoration_label": {
+		"message": "Valige oma jaoks üks või mitu kaunistusstiili",
+		"description": "Viip kaunistusstiilide valimiseks"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Sisestage oma hõljumise taustavärv",
+		"description": "Silt hõljumise taustavärvi määramiseks"
+	},
+	"style_settings_shadow_label": {
+		"message": "Sisestage oma varju värv",
+		"description": "Silt varju värvi määramiseks"
+	},
+	"style_settings_top_active_label": {
+		"message": "Sisestage värv oma aktiivse Tabi ülemise riba jaoks",
+		"description": "Silt ülemise riba aktiivse värvi määramiseks"
+	},
 	"successfully_imported": {
 		"message": "Edukalt imporditud",
 		"description": "[teavitus] kasutaja lisas Tabs välisest failist"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Kasutajad",
 		"description": "Lehe nimi, mis on seotud ManageUsers/home'ga"
+	},
+	"warn_upgrade_backup": {
+		"message": "Palun eksportige oma uued Tabid, kuna teie kasutatud faili ei toetata tulevastes väljalasetes.",
+		"description": "[warning] kasutaja importis oma Tabid json-faili aegunud konfiguratsiooni kasutades"
 	},
 	"where_to": {
 		"message": "Kuhu?",

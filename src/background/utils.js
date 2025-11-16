@@ -48,7 +48,7 @@ async function _queryTabs(callback, count = 0) {
  * @param {Function} [callback] - A callback function to handle the retrieved tab. If not provided, a promise is returned.
  * @param {boolean} [fromPopup=false] - A flag indicating whether the function was called from a popup. If true, queries all tabs in the current window.
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
- * @returns {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
+ * @return {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
  */
 export function bg_getCurrentBrowserTab(callback = null) {
 	if (callback == null) {
@@ -118,6 +118,7 @@ function _exportHandler(tabs) {
  * Exports tab data as a JSON file. If no tab data is provided, it retrieves the data from storage.
  *
  * @param {Array|null} tabs - An array of tab objects to be exported as a JSON file. If null, the function fetches the tab data from storage.
+ * @return {Promise} from bg_getStorage
  */
 function exportHandler(tabs = null) {
 	if (tabs == null) {
@@ -130,7 +131,7 @@ function exportHandler(tabs = null) {
  * Attempts to set the browser action popup to the export-permission request page.
  * If the URL for the permission page cannot be obtained, no popup is set.
  *
- * @returns {boolean}
+ * @return {boolean}
  *   `true` if the popup was successfully set to the permission request page;
  *   `false` if the permission page URL could not be retrieved.
  */
@@ -153,7 +154,7 @@ function requestExportPermission() {
  *
  * @param {object[]|null} [tabs=null]
  *   Optional array of tab objects to pass through to the export handler.
- * @returns {void}
+ * @return {void}
  */
 export function checkLaunchExport(tabs = null) {
 	if (ISSAFARI || BROWSER.downloads != null) {
@@ -174,7 +175,7 @@ export function checkLaunchExport(tabs = null) {
  *
  * @param {string} latest - The latest version string.
  * @param {string} current - The current version string.
- * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
+ * @return {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
  */
 function _isNewerVersion(latest, current) {
 	const latestParts = latest.split(".").map(Number);
@@ -200,7 +201,7 @@ function _isNewerVersion(latest, current) {
  * - Compares the current version with the latest GitHub release.
  * - If an update is available, a notification is triggered with update details.
  *
- * @returns {Promise<void>} A promise that resolves when the update check process completes.
+ * @return {Promise<void>} A promise that resolves when the update check process completes.
  */
 export async function checkForUpdates() {
 	// check user settings

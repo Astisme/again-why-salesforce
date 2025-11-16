@@ -1,4 +1,24 @@
 {
+	"active": {
+		"message": "Activ",
+		"description": "Folosit în comutatoare pentru starea activă"
+	},
+	"active_generic_pin_tabs": {
+		"message": "active $generic_pin_tabs",
+		"description": "Tab-urile generice fixate ale utilizatorului care sunt active în prezent"
+	},
+	"active_generic_tabs": {
+		"message": "active $generic_tabs",
+		"description": "Tab-urile generice ale utilizatorului care sunt active în prezent"
+	},
+	"active_org_pin_tabs": {
+		"message": "active $org_pin_tabs",
+		"description": "Tab-urile org fixate ale utilizatorului care sunt active în prezent"
+	},
+	"active_org_tabs": {
+		"message": "active $org_tabs",
+		"description": "Tab-urile org ale utilizatorului care sunt active în prezent"
+	},
 	"allow": {
 		"message": "Permiteți",
 		"description": "[cerere_permisiune] buton pentru a permite permisiuni"
@@ -119,6 +139,10 @@
 		"message": "💾 $save_tab",
 		"description": "[meniu-contextual]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Fixează",
+		"description": "[meniu-contextual] permite utilizatorului să păstreze acest Tab la începutul listei sale"
+	},
 	"cxm_remove": {
 		"message": "💥 Eliminați Tab(uri)",
 		"description": "[meniu-contextual]"
@@ -131,6 +155,10 @@
 		"message": "↔️ Alte Tabs",
 		"description": "[meniu-contextual]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Elimină Tab-uri Fixate",
+		"description": "[meniu-contextual] permite utilizatorului să-și elimine Tab-urile fixate"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs la dreapta",
 		"description": "[meniu-contextual]"
@@ -138,6 +166,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Acest Tab",
 		"description": "[meniu-contextual]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Elimină Tab-uri Nefixate",
+		"description": "[meniu-contextual] permite utilizatorului să-și elimine Tab-urile care nu sunt fixate"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Resetează Tab-urile implicite",
@@ -151,6 +183,14 @@
 		"message": "🎯 Sortează Tab-urile",
 		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile automat (meniu părinte)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ după Utilizare",
+		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după numărul de click-uri"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ după Timp",
+		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după când au fost apăsate"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 după Etichetă",
 		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după etichetă"
@@ -163,12 +203,24 @@
 		"message": "🤖 după URL",
 		"description": "meniu contextual pentru a permite utilizatorilor să-și sorteze Tab-urile după URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Ascunde Tab-uri non-Org",
+		"description": "[meniu-contextual] ascunde temporar Tab-urile generice"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Ascunde Tab-uri Org",
+		"description": "[meniu-contextual] ascunde temporar Tab-urile Org"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Defixează",
+		"description": "[meniu-contextual] permite utilizatorului să elimine acest Tab din lista sa fixată"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualizați Tab",
 		"description": "[meniu-contextual]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Comutați Org",
+		"message": "👜 Comută Org",
 		"description": "[meniu-contextual]"
 	},
 	"cxm_update_tab": {
@@ -198,6 +250,22 @@
 	"error_adding_tab": {
 		"message": "Eroare la adăugarea Tab.",
 		"description": "[eroare] Eroare generică utilizată la adăugarea unui Tab"
+	},
+	"error_already_pinned": {
+		"message": "Acest Tab a fost deja fixat.",
+		"description": "[eroare] utilizatorul a încercat să fixeze un Tab deja fixat"
+	},
+	"error_already_unpinned": {
+		"message": "Acest Tab a fost deja defixat.",
+		"description": "[eroare] utilizatorul a încercat să defixeze un Tab deja defixat"
+	},
+	"error_cannot_move": {
+		"message": "Acest Tab nu poate fi mutat!",
+		"description": "[eroare] Tab-ul solicitat nu poate fi mutat momentan."
+	},
+	"error_cannot_move_dir": {
+		"message": "Acest Tab nu poate fi mutat în această direcție!",
+		"description": "[eroare] Tab-ul solicitat nu poate fi mutat momentan."
 	},
 	"error_check_update": {
 		"message": "Eroare la verificarea actualizărilor",
@@ -250,6 +318,10 @@
 	"error_import": {
 		"message": "Eroare în timpul importului:\n",
 		"description": "[eroare] a apărut o eroare în timpul procesului de import"
+	},
+	"error_internal": {
+		"message": "Eroare Internă",
+		"description": "[eroare] eroare generică"
 	},
 	"error_invalid_key": {
 		"message": "Parametrul cheie transmis funcției nu este valid",
@@ -323,9 +395,17 @@
 		"message": "Niciun obiect de verificat!",
 		"description": "[eroare] obiectul nu a fost transmis"
 	},
+	"error_no_pinned": {
+		"message": "Nu ai Tab-uri fixate încă!",
+		"description": "[eroare] utilizatorul a încercat să elimine Tab-urile fixate, dar nu are niciun Tab fixat"
+	},
 	"error_no_setup_tab": {
 		"message": "Nu s-a putut găsi fila Configurare (Setup).",
 		"description": "[eroare] Extensia nu a putut găsi unde să plaseze Tabs favorite."
+	},
+	"error_no_unpinned": {
+		"message": "Nu ai Tab-uri nefixate!",
+		"description": "[eroare] utilizatorul a încercat să elimine Tab-urile nefixate, dar nu are niciun Tab nefixat"
 	},
 	"error_no_url": {
 		"message": "Niciun URL de verificat!",
@@ -334,6 +414,10 @@
 	"error_not_initialized": {
 		"message": "nu a fost încă inițializat.",
 		"description": "[eroare] Eroare generică pentru când o variabilă nu este gata"
+	},
+	"error_pin_tab": {
+		"message": "Eroare la fixarea Tab-ului",
+		"description": "[eroare]"
 	},
 	"error_processing_tabs": {
 		"message": "Eroare la procesarea Tabs.",
@@ -359,9 +443,17 @@
 		"message": "Eroare la eliminarea altor Tabs.",
 		"description": "[eroare] Eroare generică utilizată la eliminarea altor Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Eroare la eliminarea Tab-urilor fixate.",
+		"description": "[eroare] Eroare generică folosită la eliminarea Tab-urilor nefixate"
+	},
 	"error_removing_tab": {
 		"message": "Eroare la eliminarea Tab.",
 		"description": "[eroare] Eroare generică utilizată la eliminarea unui Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Eroare la eliminarea Tab-urilor nefixate.",
+		"description": "[eroare] Eroare generică folosită la eliminarea Tab-urilor nefixate"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Eroare la eliminarea tuturor Tab-urilor vizibile.",
@@ -383,6 +475,14 @@
 		"message": "Nu se pot sincroniza Tabs nule!",
 		"description": "[eroare] s-a încercat sincronizarea a nimic"
 	},
+	"error_tab_click_count": {
+		"message": "Numărul de Click-uri trebuie să fie un număr non-negativ",
+		"description": "[eroare] utilizatorul a încercat să creeze un Tab cu un număr de click-uri greșit"
+	},
+	"error_tab_click_date": {
+		"message": "Data Click-ului trebuie să fie un număr care nu rezultă într-o dată viitoare",
+		"description": "[eroare] utilizatorul a încercat să creeze un Tab cu o dată de click greșită"
+	},
 	"error_tab_constructor": {
 		"message": "Folosiți Tab.create() în loc de new Tab() pentru a utiliza clasa Tab",
 		"description": "[eroare] spune dezvoltatorului cum să folosească clasa Tab"
@@ -394,6 +494,10 @@
 	"error_tab_not_found": {
 		"message": "Tab nu a fost găsit.",
 		"description": "[eroare] Tab-ul nu a fost inclus în matrice"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab-ul nu este fixat încă!",
+		"description": "[eroare] utilizatorul a încercat să defixeze un Tab nefixat"
 	},
 	"error_tab_object_creation": {
 		"message": "Când apelați cu un obiect, nu transmiteți nimic altceva.",
@@ -443,6 +547,10 @@
 		"message": "Solicitare necunoscută.",
 		"description": "[eroare] Eroare generică după primirea unui mesaj care nu a fost recunoscut"
 	},
+	"error_unpin_tab": {
+		"message": "Eroare la defixarea Tab-ului",
+		"description": "[eroare]"
+	},
 	"error_useless_remove": {
 		"message": "Nu se poate elimina:\nNu se poate elimina o pagină care nu a fost salvată anterior",
 		"description": "[eroare] utilizatorul a încercat să elimine o pagină care nu fusese încă salvată"
@@ -482,6 +590,14 @@
 	"general": {
 		"message": "General",
 		"description": "Etichetă pentru categoria de setări generale"
+	},
+	"generic_pin_tabs": {
+		"message": "Tab-uri generice $pinned",
+		"description": "Tab-urile favorite ale utilizatorului care nu sunt specifice org"
+	},
+	"generic_tabs": {
+		"message": "Tab-uri generice",
+		"description": "Tab-urile favorite ale utilizatorului care nu sunt specifice org"
 	},
 	"help": {
 		"message": "Ajutor",
@@ -567,6 +683,10 @@
 		"message": "Tip de fișier invalid.\nSunt acceptate doar fișiere JSON.",
 		"description": "[eroare] fișierul utilizat pentru import nu este JSON"
 	},
+	"import_metadata": {
+		"message": "Importă metadatele Tab-ului (\"Număr de Click-uri\", \"Data Click-ului\" etc.).",
+		"description": "[etichetă] importă tot ce se găsește în fișier în timpul procesului de import"
+	},
 	"import_successful": {
 		"message": "Importat cu succes",
 		"description": "[import] importul a fost finalizat. După aceasta, se va afișa numărul de înregistrări importate"
@@ -578,6 +698,10 @@
 	"import_title": {
 		"message": "$import_tabs din fișierul JSON",
 		"description": "[fereastră-pop-up] titlu pe butonul de import"
+	},
+	"inactive": {
+		"message": "Inactiv",
+		"description": "Folosit în comutatoare pentru starea inactivă"
 	},
 	"insert_another": {
 		"message": "Introduceți altul",
@@ -727,6 +851,14 @@
 		"message": "Link Org",
 		"description": "[etichetă-intrare]"
 	},
+	"org_pin_tabs": {
+		"message": "Tab-uri org $pinned",
+		"description": "Tab-uri care sunt specifice org"
+	},
+	"org_tabs": {
+		"message": "Tab-uri org",
+		"description": "Tab-uri care sunt specifice org"
+	},
 	"other_org_info": {
 		"message": "Informații altă Org",
 		"description": "[titlu-modal]"
@@ -738,6 +870,10 @@
 	"overwrite_tabs": {
 		"message": "Suprascrieți Tabs salvate.",
 		"description": "[etichetă] ștergeți toate Tabs salvate în timpul procesului de import"
+	},
+	"pinned": {
+		"message": "Fixat",
+		"description": "Tab-urile utilizatorului care se găsesc întotdeauna la începutul listei"
 	},
 	"preserve_org_tabs": {
 		"message": "Păstrați Tabs pentru alte org.",
@@ -830,6 +966,126 @@
 	"set_org_styler": {
 		"message": "Stilizator Organizație",
 		"description": "Etichetă pentru configurarea stilului Tab-urilor specifice organizației"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etichetă pentru previzualizarea aspectului Tab-ului generic când este fixat"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etichetă pentru configurarea stilului Tab-urilor generice când sunt fixate"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etichetă pentru previzualizarea aspectului Tab-ului specific org când este fixat"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etichetă pentru configurarea stilului Tab-urilor specifice org când sunt fixate"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal pentru Tab-urile generice"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea marginii pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea marginii pentru Tab-urile generice"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea textului pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea textului pentru Tab-urile generice"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Prompt pentru a selecta stilurile de decorare pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Prompt pentru a selecta stilurile de decorare pentru Tab-urile generice"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal la trecerea cu mouse-ul (hover) pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal la trecerea cu mouse-ul (hover) pentru Tab-urile generice"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea umbrei pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea umbrei pentru Tab-urile generice"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea barei de sus pentru Tab-urile generice active"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal pentru Tab-urile org active"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal pentru Tab-urile specifice org"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea marginii pentru Tab-urile specifice org active"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea marginii pentru Tab-urile org"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea textului pentru Tab-urile org active"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea textului pentru Tab-urile specifice org"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Prompt pentru a selecta stilurile de decorare pentru Tab-urile specifice org active"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Prompt pentru a selecta stilurile de decorare pentru Tab-urile org"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal la trecerea cu mouse-ul (hover) pentru Tab-urile org active"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea de fundal la trecerea cu mouse-ul (hover) pentru Tab-urile specifice org"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea umbrei pentru Tab-urile specifice org active"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea umbrei pentru Tab-urile org"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etichetă pentru a seta culoarea barei de sus pentru Tab-urile org active"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Introduceți culoarea de fundal pentru Tab-urile generice active.",
@@ -951,6 +1207,42 @@
 		"message": "Omiteți",
 		"description": "[cerere_permisiune] buton pentru a NU permite permisiuni"
 	},
+	"style_generic_pinned": {
+		"message": "Stil Tab-uri generice $pinned",
+		"description": "[opțiuni] Etichetă comutator pentru a stiliza Tab-urile generice fixate"
+	},
+	"style_org_pinned": {
+		"message": "Stil Tab-uri org $pinned",
+		"description": "[opțiuni] Etichetă comutator pentru a stiliza Tab-urile org fixate"
+	},
+	"style_settings_background_label": {
+		"message": "Introduceți culoarea de fundal pentru",
+		"description": "Etichetă pentru a seta culoarea de fundal"
+	},
+	"style_settings_border_color_label": {
+		"message": "Introduceți culoarea marginii pentru",
+		"description": "Etichetă pentru a seta culoarea marginii"
+	},
+	"style_settings_color_label": {
+		"message": "Introduceți culoarea textului pentru",
+		"description": "Etichetă pentru a seta culoarea textului"
+	},
+	"style_settings_decoration_label": {
+		"message": "Alegeți unul sau mai multe stiluri de decorare pentru",
+		"description": "Prompt pentru a selecta stilurile de decorare"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Introduceți culoarea de fundal la trecerea cu mouse-ul (hover) pentru",
+		"description": "Etichetă pentru a seta culoarea de fundal la trecerea cu mouse-ul (hover)"
+	},
+	"style_settings_shadow_label": {
+		"message": "Introduceți culoarea umbrei pentru",
+		"description": "Etichetă pentru a seta culoarea umbrei"
+	},
+	"style_settings_top_active_label": {
+		"message": "Introduceți culoarea pentru bara din partea de sus a",
+		"description": "Etichetă pentru a seta culoarea activă a barei de sus"
+	},
 	"successfully_imported": {
 		"message": "Importat cu succes",
 		"description": "[toast] utilizatorul a adăugat Tabs dintr-un fișier extern"
@@ -1034,6 +1326,10 @@
 	"users": {
 		"message": "Utilizatori",
 		"description": "Numele paginii legate de ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Vă rugăm să exportați noile dvs. Tab-uri, deoarece fișierul pe care l-ați folosit nu va mai fi suportat în versiunile viitoare.",
+		"description": "[avertisment] utilizatorul și-a importat Tab-urile folosind o configurație învechită a fișierului json"
 	},
 	"where_to": {
 		"message": "Unde?",
