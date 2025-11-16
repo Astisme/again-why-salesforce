@@ -4,7 +4,7 @@
 class HelpAws extends HTMLElement {
 	/**
 	 * getter to know which attributes this class looks at
-   * @return {string[]} all the attributes which should be monitored
+	 * @return {string[]} all the attributes which should be monitored
 	 */
 	static get observedAttributes() {
 		return ["href", "target", "rel", "data-show-top"];
@@ -37,10 +37,10 @@ class HelpAws extends HTMLElement {
 
 	/**
 	 * Whenever href, target, or rel changes, re-sync the anchor
-   *
-   * @param {Event} _ - the event connected to this function
-   * @param {string} oldValue - the old attribute value
-   * @param {string} newValue - the new attribute value
+	 *
+	 * @param {Event} _ - the event connected to this function
+	 * @param {string} oldValue - the old attribute value
+	 * @param {string} newValue - the new attribute value
 	 */
 	attributeChangedCallback(_, oldValue, newValue) {
 		if (oldValue !== newValue) {

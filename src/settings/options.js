@@ -67,8 +67,9 @@ function getObjectToSet({
 	key = null,
 	set = [],
 } = {}) {
-  if(key == null)
-    throw new Error("error_required_params");
+	if (key == null) {
+		throw new Error("error_required_params");
+	}
 	return {
 		what: "set",
 		key,
@@ -528,7 +529,7 @@ function buildInputDecorationConfigs(configs) {
  * @param {Object} configs.active.unpinned - the configuration for the active unpinned elements
  * @param {Object} configs.active.pinned - the configuration for the active pinned elements
  *
- * @return {Object} a newly structured configuration 
+ * @return {Object} a newly structured configuration
  * -> unpinned.active
  * -> unpinned.inactive
  * -> pinned.active

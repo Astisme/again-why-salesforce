@@ -45,8 +45,8 @@ class TranslationService {
 
 	/**
 	 * Initialize translation service with default language
-   * @param {Symbol} secret - the secret to allow the creation of this class
-   * @throws Error when the secret does not match
+	 * @param {Symbol} secret - the secret to allow the creation of this class
+	 * @throws Error when the secret does not match
 	 */
 	constructor(secret) {
 		if (secret !== _translationSecret) {

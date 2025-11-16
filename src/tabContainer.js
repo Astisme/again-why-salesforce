@@ -20,7 +20,7 @@ const _tabContainerSecret = Symbol("tabContainerSecret");
 export class TabContainer extends Array {
 	#isSorted = false;
 	/**
-   * Getter for #isSorted
+	 * Getter for #isSorted
 	 * @return {boolean} - whether the TabContainer is sorted
 	 */
 	get isSorted() {
@@ -28,7 +28,7 @@ export class TabContainer extends Array {
 	}
 	#isSortedBy = null;
 	/**
-   * Getter for #isSortedBy
+	 * Getter for #isSortedBy
 	 * @return {string|null} - by which Tab field the TabContainer is sorted by
 	 */
 	get isSortedBy() {
@@ -36,7 +36,7 @@ export class TabContainer extends Array {
 	}
 	#isSortedAsc = false;
 	/**
-   * Getter for #isSortedAsc
+	 * Getter for #isSortedAsc
 	 * @return {boolean} - whether the TabContainer is sorted ascending (A-Z)
 	 */
 	get isSortedAsc() {
@@ -44,7 +44,7 @@ export class TabContainer extends Array {
 	}
 	#isSortedDesc = false;
 	/**
-   * Getter for #isSortedDesc
+	 * Getter for #isSortedDesc
 	 * @return {boolean} - whether the TabContainer is sorted descending (Z-A)
 	 */
 	get isSortedDesc() {
@@ -56,7 +56,7 @@ export class TabContainer extends Array {
 	 */
 	#pinnedTabs = 0;
 	/**
-   * Getter for #pinnedTabs
+	 * Getter for #pinnedTabs
 	 * @return {number} - the positive integer representing how many pinned Tabs are present
 	 */
 	get pinned() { // function name same as TabContainer.keyPinnedTabsNo
@@ -141,7 +141,7 @@ export class TabContainer extends Array {
 	}
 
 	/**
-   * Creates a non-initialized TabContainer instance
+	 * Creates a non-initialized TabContainer instance
 	 * @return a brand-new non-initialized TabContainer
 	 */
 	static getThrowawayInstance() {
@@ -484,7 +484,7 @@ export class TabContainer extends Array {
 	 * @param {string|null} [param.url=null] - The URL of the tab to filter by.
 	 * @param {string|null} [param.org=null] - The organization associated with the tab to filter by.
 	 * @param {boolean} [match=true] - A flag indicating whether to return tabs that exactly match the specified tab data (`true`), or those that do not match (`false`). Defaults to `true`.
-   * @param {boolean} [strict=false] - Wheter to perform a strict check or a loose one
+	 * @param {boolean} [strict=false] - Wheter to perform a strict check or a loose one
 	 * @return {Array<Tab>} - An array of tabs that match the specified tab data condition.
 	 */
 	getTabsByData(
@@ -604,11 +604,11 @@ export class TabContainer extends Array {
 
 	/**
 	 * Checks if a tab with the specified data (label, url, and organization) exists in the container.
-   *
-   * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
-   * @param {string} [tab.url=null] - The URL of the tab to check for.
-   * @param {string} [tab.org=null] - The organization associated with the tab to check for.
-   * @param {boolean} [checkDuplicate=false] - Whether to check for duplicates (true) or for equality (false)
+	 *
+	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
+	 * @param {string} [tab.url=null] - The URL of the tab to check for.
+	 * @param {string} [tab.org=null] - The organization associated with the tab to check for.
+	 * @param {boolean} [checkDuplicate=false] - Whether to check for duplicates (true) or for equality (false)
 	 *
 	 * @return {boolean} - `true` if a tab with the specified data exists, otherwise `false`.
 	 */
@@ -637,10 +637,10 @@ export class TabContainer extends Array {
 
 	/**
 	 * Checks if a tab with the specified data (url and organization) exists in the container. Checks both with the org and without the org
-   *
-   * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
-   * @param {string} [tab.url=null] - The URL of the tab to check for.
-   * @param {string} [tab.org=null] - The organization associated with the tab to check for.
+	 *
+	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
+	 * @param {string} [tab.url=null] - The URL of the tab to check for.
+	 * @param {string} [tab.org=null] - The organization associated with the tab to check for.
 	 * @return {boolean} - `true` if a tab with the specified data exists, otherwise `false`.
 	 */
 	existsWithOrWithoutOrg({ url = null, org = null } = {}) {
@@ -649,19 +649,19 @@ export class TabContainer extends Array {
 
 	/**
 	 * Replace all current tabs
-   *
+	 *
 	 * @param {Array<Tab>} newTabs - New array of tabs to replace existing tabs
-   *
-   * @param {Object} [param1={}] - An Object containing the following keys
-   * @param {boolean} [param1.resetTabs=true] - If `true`, resets `this.tabs`.
-   * @param {boolean} [param1.removeOrgTabs=false] - This parameter changes its function based on the value of resetTabs. In any case, if `true`, removes all org-specific Tabs
+	 *
+	 * @param {Object} [param1={}] - An Object containing the following keys
+	 * @param {boolean} [param1.resetTabs=true] - If `true`, resets `this.tabs`.
+	 * @param {boolean} [param1.removeOrgTabs=false] - This parameter changes its function based on the value of resetTabs. In any case, if `true`, removes all org-specific Tabs
 	 * When `resetTabs=true` and `removeOrgTabs=false`, removes only non-org-specific Tabs (Tabs with `org == null`), sparing org-specific Tabs.
 	 * When `resetTabs=false` and `removeOrgTabs=false`, does nothing.
-   * @param {boolean} [param1.sync=true] - Whether to perform a sync operation
-   * @param {boolean} [param1.keepTabsNotThisOrg=null] - Whether to keep the org-specific Tabs which are not of this Org
-   * @param {string} [param1.removeThisOrgTabs=null] - The Org for which to remove the Org Tabs
-   * @param {boolean} [param1.updatePinnedTabs=true] - Wheter to update the currently pinned Tabs number
-   *
+	 * @param {boolean} [param1.sync=true] - Whether to perform a sync operation
+	 * @param {boolean} [param1.keepTabsNotThisOrg=null] - Whether to keep the org-specific Tabs which are not of this Org
+	 * @param {string} [param1.removeThisOrgTabs=null] - The Org for which to remove the Org Tabs
+	 * @param {boolean} [param1.updatePinnedTabs=true] - Wheter to update the currently pinned Tabs number
+	 *
 	 * @return {Promise<boolean>} - A Promise stating whether the operation was successful
 	 *
 	 * @example
@@ -873,16 +873,16 @@ export class TabContainer extends Array {
 		return 0;
 	}
 
-  /**
-   * Helper function for importTabs used to import the pinned Tabs
-   *
-   * @param {Object} [param0={}] - an object containing the following parameters
-   * @param {number} [param0.pinnedTabsNo=0] - the number of the pinned Tabs to be imported
-   * @param {Tab[]} [param0.importedArr=[]] - an array of Tabs to import
-   * @param {boolean} [param0.resetTabs=false] - whether the currently pinned Tabs should be reset
-   *
-   * @return {Object} containing the number of pinnedTabs and the importTabs number
-   */
+	/**
+	 * Helper function for importTabs used to import the pinned Tabs
+	 *
+	 * @param {Object} [param0={}] - an object containing the following parameters
+	 * @param {number} [param0.pinnedTabsNo=0] - the number of the pinned Tabs to be imported
+	 * @param {Tab[]} [param0.importedArr=[]] - an array of Tabs to import
+	 * @param {boolean} [param0.resetTabs=false] - whether the currently pinned Tabs should be reset
+	 *
+	 * @return {Object} containing the number of pinnedTabs and the importTabs number
+	 */
 	#importPinnedTabs({
 		pinnedTabsNo = 0,
 		importedArr = [],
@@ -1050,7 +1050,7 @@ export class TabContainer extends Array {
 	 * @param {number} [param0.maxIndex=this.length] - the maximum index where to put the Tab
 	 * @param {number} [param0.currentIndex=0] - the index where the Tab is currently located
 	 * @param {null} [param0.org=null] - the org of the Tab
-   * @return {number} the index where to move the Tab
+	 * @return {number} the index where to move the Tab
 	 */
 	#getMoveIndex({
 		fullMovement = false,
@@ -1220,10 +1220,10 @@ export class TabContainer extends Array {
 
 	/**
 	 * Perform case-insensitive comparison for strings
-   *
-   * @param {string} a - the first element
-   * @param {string} b - the second element
-   * @return {integer} negative if a < b; positive if a > b; 0 if a === b
+	 *
+	 * @param {string} a - the first element
+	 * @param {string} b - the second element
+	 * @return {integer} negative if a < b; positive if a > b; 0 if a === b
 	 */
 	#sortFunction(a, b) {
 		a = a == null ? "" : String(a);
@@ -1244,7 +1244,7 @@ export class TabContainer extends Array {
 	 * @param {Object} [options={}] - The sorting options.
 	 * @param {string} [options.sortBy='label'] - The property to sort by. Valid options found at Tab.allowedKeys.
 	 * @param {boolean} [options.sortAsc=true] - The sorting direction. Set to `true` for ascending order and `false` for descending.
-   * @param {boolean} [sync=true] - True to perform a sync operation
+	 * @param {boolean} [sync=true] - True to perform a sync operation
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if the sorting and (optional) synchronization are successful.
 	 * @throws {Error} - Throws an error if an invalid `sortBy` property is provided.
 	 */
@@ -1367,7 +1367,7 @@ export class TabContainer extends Array {
 	/**
 	 * Retrieves the extension settings to know if the user wants to keep their Tabs sorted.
 	 * If the setting is retrieved, proceeds to sort the array by the specified field and in the specified direction.
-   * @return {boolean} whether the TabContainer is sorted
+	 * @return {boolean} whether the TabContainer is sorted
 	 */
 	async #checkShouldKeepSorted() {
 		const persistSort = await getSettings(PERSIST_SORT);

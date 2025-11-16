@@ -371,7 +371,7 @@ export default class Tab {
 	 * @param {string|null} [param.label=null] - The label to compare.
 	 * @param {string|null} [param.url=null] - The URL to compare.
 	 * @param {string|null} [param.org=null] - The organization to compare.
-   * @param {boolean} [strict=true] - True to perform a strict check, false to perform a loose check
+	 * @param {boolean} [strict=true] - True to perform a strict check, false to perform a loose check
 	 * @return {boolean} - Returns `true` if the `Tab` is equal to the provided object based on the specified properties, otherwise `false`.
 	 */
 	equals({ label = null, url = null, org = null } = {}, strict = true) {
