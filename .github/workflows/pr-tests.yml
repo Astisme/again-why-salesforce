@@ -61,7 +61,7 @@ jobs:
 
             - name: Run eslint
               continue-on-error: true
-              run: npx eslint "src/**/*.js" > eslint-error.log
+              run: npx eslint > eslint-error.log
 
             - name: Comment on PR if eslint fails
               uses: actions/github-script@v7
