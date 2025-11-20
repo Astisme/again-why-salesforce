@@ -38,9 +38,9 @@ let inputModalParent;
 async function generateSldsImport() {
 	const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal(
-			await translator.translate("import_tabs"),
-		);
+		await generateSldsModal({
+      modalTitle: await translator.translate("import_tabs"),
+    });
 	inputModalParent = modalParent;
 	closeButton.id = CLOSE_MODAL_ID;
 	const { section, divParent } = await generateSection();

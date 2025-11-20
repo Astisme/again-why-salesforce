@@ -794,13 +794,19 @@ export async function generateSection(sectionTitle = null) {
  * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
  *
  * @param {string} modalTitle - The title of the modal.
+ * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
  * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - article: The content area within the modal.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
+ * - buttonContainer: The container for the footer of the modal
  */
-export async function generateSldsModal(modalTitle) {
+export async function generateSldsModal({
+	modalTitle = "",
+	saveButtonLabel = "continue",
+  maxHeight = "",
+} = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
@@ -904,6 +910,7 @@ export async function generateSldsModal(modalTitle) {
 		"slds-modal__content",
 		"slds-p-around_medium",
 	);
+	modalBody.style.height = maxHeight;
 	modalBody.dataset.scopedScroll = "true";
 	modalContainer.appendChild(modalBody);
 	const viewModeDiv = document.createElement("div");
@@ -930,12 +937,12 @@ export async function generateSldsModal(modalTitle) {
 	const fieldContainerDiv = document.createElement("div");
 	fieldContainerDiv.classList.add(
 		"slds-clearfix",
-		"slds-card",
 		"groupDependentFieldEnabled",
 		"allow-horizontal-form",
 		"wide-input-break",
 		"full-width",
 		"forceDetailPanelDesktop",
+		"slds-p-bottom--none",
 	);
 	fieldContainerDiv.dataset.auraClass = "forceDetailPanelDesktop";
 	actionBodyDiv.appendChild(fieldContainerDiv);
@@ -944,17 +951,14 @@ export async function generateSldsModal(modalTitle) {
 	fieldContainerDiv.appendChild(article);
 	const titleContainer = document.createElement("div");
 	titleContainer.classList.add(
-		"inlineTitle",
-		"slds-p-top--none",
-		"slds-p-horizontal--medium",
-		"slds-p-bottom--medium",
+		"slds-p-around--medium",
 		"slds-text-heading--medium",
 	);
 	titleContainer.style.textAlign = "center";
 	titleContainer.style.display = "flex";
 	titleContainer.style.alignItems = "center";
 	titleContainer.style.justifyContent = "center";
-	article.appendChild(titleContainer);
+	modalHeader.appendChild(titleContainer);
 	const awsIcon = document.createElement("img");
 	awsIcon.src = BROWSER.runtime.getURL("assets/icons/awsf-128.png");
 	awsIcon.style.height = "2rem";
@@ -975,7 +979,7 @@ export async function generateSldsModal(modalTitle) {
 	footerContainer.classList.add("inlineFooter");
 	footerContainer.style.borderTop =
 		"var(--slds-g-sizing-border-2, var(--lwc-borderWidthThick, 2px)) solid var(--slds-g-color-border-1, var(--lwc-colorBorder, rgb(229, 229, 229)))";
-	actionWrapperDiv.appendChild(footerContainer);
+	modalContainer.appendChild(footerContainer);
 	const buttonContainerDiv = document.createElement("div");
 	buttonContainerDiv.classList.add(
 		"button-container",
@@ -1022,7 +1026,7 @@ export async function generateSldsModal(modalTitle) {
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-	const msg_continue = await translator.translate("continue");
+	const msg_continue = await translator.translate(saveButtonLabel);
 	saveButton.setAttribute("title", msg_continue);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.dataset.auraClass = "uiButton forceActionButton";
@@ -1052,7 +1056,13 @@ export async function generateSldsModal(modalTitle) {
 		document.removeEventListener("keydown", keyDownListener);
 	}
 	document.addEventListener("keydown", keyDownListener);
-	return { modalParent, article, saveButton, closeButton };
+	return {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		buttonContainer: buttonContainerInnerDiv,
+	};
 }
 
 /**
@@ -1147,9 +1157,9 @@ export async function generateOpenOtherOrgModal(
 	{ label = null, url = null, org = null } = {},
 ) {
 	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal(
-			label,
-		);
+		await generateSldsModal({
+      modalTitle: label,
+    });
 	const { section, divParent } = await generateSection("other_org_info");
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
@@ -1492,9 +1502,9 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  */
 export async function generateUpdateTabModal(label, url, org) {
 	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal(
-			label,
-		);
+		await generateSldsModal({
+			modalTitle: label,
+    });
 	const { section, divParent } = await generateSection("tab_information");
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
@@ -1550,131 +1560,259 @@ export async function generateUpdateTabModal(label, url, org) {
 }
 
 /**
- * Generates a modal dialog for exporting selected tabs.
- *
- * This function creates a modal that displays all available tabs with checkboxes,
- * allowing users to select which tabs to export. It includes a "Select All" / "Unselect All" button
+ * Creates a table header cell (th)
+ * @param {string} label - The visible label text
+ * @param {string} ariaLabel - The aria-label for accessibility
+ * @param {string[]} classList - Additional CSS classes
+ * @returns {HTMLTableCellElement} The created th element
+ */
+function createTableHeader(label = "", ariaLabel = "", classList = []) {
+	const th = document.createElement("th");
+	th.scope = "col";
+	th.classList.add(...classList);
+	th.setAttribute("aria-label", ariaLabel);
+	th.textContent = label;
+	return th;
+}
+
+/**
+ * Creates a complete table with headers
+ * @param {Array<{label: string, ariaLabel: string, classList?: string[]}>} headers - Array of header configurations
+ * @returns {Object{HTMLTableElement, HTMLTbodyElement}} The created table element and its empty tbody
+ */
+function createTable(headers = []) {
+	const table = document.createElement("table");
+	table.classList.add(
+		"forceRecordLayout",
+		"uiVirtualDataGrid--default",
+		"uiVirtualDataGrid",
+	);
+	table.style.border =
+		"var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorderSeparatorAlt,rgb(201, 201, 201))";
+	table.style.borderRadius = "var(--lwc-borderRadiusMedium,0.25rem)";
+	const thead = document.createElement("thead");
+	thead.style.position = "sticky";
+	thead.style.top = 0;
+	table.appendChild(thead);
+	const tr = document.createElement("tr");
+	thead.appendChild(tr);
+	for (const header of headers) {
+		tr.appendChild(
+			createTableHeader(header.label, header.ariaLabel, header.classList),
+		);
+	}
+	const tbody = document.createElement("tbody");
+	table.appendChild(tbody);
+	return { table, tbody };
+}
+
+/**
+ * Creates a checkbox cell for a table row
+ * @param {number} [tabIndex=0] The index of the checkbox (for later retrieval)
+ * @param {boolean} [checked=false] if the checkbox should be checked by default
+ * @returns {HTMLTableCellElement} The created td element with checkbox
+ */
+function createCheckboxCell(tabIndex = 0, checked = false) {
+	const td = document.createElement("td");
+	td.classList.add(
+		"visualEditorSelectableTable",
+		"containsSelectionCell",
+	);
+	const label = document.createElement("label");
+	td.appendChild(label);
+	label.classList.add("visualEditorTableActionCell");
+	const checkbox = document.createElement("input");
+	label.appendChild(checkbox);
+	checkbox.type = "checkbox";
+	checkbox.name = "assignmentTableCheckbox";
+	checkbox.checked = checked;
+	checkbox.dataset.tabIndex = tabIndex;
+	return { td, checkbox };
+}
+
+/**
+ * Creates a text cell for a table row
+ * @param {string} text - The text content
+ * @param {string} title - The title attribute (optional)
+ * @returns {HTMLTableCellElement} The created td element
+ */
+function createTextCell(text = "", title = "") {
+	const td = document.createElement("td");
+	const span = document.createElement("span");
+	td.appendChild(span);
+	span.classList.add("uiOutputText");
+	span.style.display = "inline-block";
+	span.textContent = text;
+	if (title) {
+		span.title = title;
+	}
+	return td;
+}
+
+/**
+ * Creates a complete table row
+ * @param {Object} [tab={}]
+ * @param {string} [tab.label=null] The Tab Label
+ * @param {string} [tab.url=null] The Tab Url
+ * @param {string|undefined} [tab.org=null] The Tab Org (for org-specific Tabs)
+ * @returns {HTMLTableRowElement} The created tr element
+ */
+function createTableRow(
+	{ label = null, url = null, org = null } = {},
+	index = 0,
+) {
+	const tr = document.createElement("tr");
+	const { td, checkbox } = createCheckboxCell(index, true);
+	tr.appendChild(td);
+	tr.addEventListener("click", () => checkbox.click());
+	tr.appendChild(createTextCell(label));
+	tr.appendChild(createTextCell(url));
+	tr.appendChild(createTextCell(org));
+	return { tr, checkbox };
+}
+
+/**
+ * Creates a Table with checkboxes to select the elements
+ * @param {any[]} [tabs=[]] The Tabs to show in the Table
+ * @param {Object{label,ariaLabel,classList[]}[]} [headers=[]] What should be displayed inside the each `th`
+ * @param {() => void} [changeListener=() => {}] change listener to all checkboxes to update button states
+ * @return Object{checkboxes:HTMLInputElement[],table:HTMLTableElement} all checkboxes created and the table generated
+ */
+function generateTableWithCheckboxes(
+	tabs = [],
+	headers = [],
+	changeListener = () => {},
+) {
+	const res = {
+		checkboxes: [],
+	};
+	const { table, tbody } = createTable(headers);
+	for (let i = 0; i < tabs.length; i++) {
+		const { tr, checkbox } = createTableRow(tabs[i], i);
+		checkbox.addEventListener("change", changeListener);
+		tbody.appendChild(tr);
+		res.checkboxes.push(checkbox);
+	}
+	return Object.assign(res, { table });
+}
+
+/**
+ * Generates a modal dialog for exporting selected Tabs.
+ * This function creates a modal that displays all available Tabs with checkboxes,
+ * allowing users to select which Tabs to export. It includes a "Select All" / "Unselect All" button
  * for convenience.
  *
  * @param {Array} tabs - An array of Tab objects to display in the export modal.
  * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
- * - saveButton: The export button element for exporting selected tabs.
+ * - saveButton: The button element for confirming the selected Tabs.
  * - closeButton: The close button element for closing the modal.
- * - selectedTabs: A function that returns an array of selected tab objects.
+ * - selectedTabs: A function that returns an array of selected Tab objects.
  */
-export async function generateSldsExportModal(tabs = []) {
+export async function generateSldsModalWithTabList(tabs = [], {
+	title = "export_tabs",
+	saveButtonLabel = "export",
+} = {}) {
 	const translator = await ensureTranslatorAvailability();
-	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal(
-			await translator.translate("export_tabs"),
-		);
-	
-	const { section, divParent } = await generateSection();
-	divParent.style.width = "100%";
-	divParent.style.display = "flex";
-	divParent.style.flexDirection = "column";
-	divParent.style.alignItems = "center";
-	article.appendChild(section);
-
-	// Create select/unselect all button container
-	const buttonContainer = document.createElement("div");
-	buttonContainer.style.marginBottom = "1rem";
-	buttonContainer.style.display = "flex";
-	buttonContainer.style.gap = "0.5rem";
-	divParent.appendChild(buttonContainer);
-
-	// Create checkbox references array
-	const checkboxes = [];
-
-	// Create Select All button
+	const { modalParent, article, saveButton, closeButton, buttonContainer } =
+		await generateSldsModal({
+      modalTitle: await translator.translate(title),
+			saveButtonLabel: await translator.translate(saveButtonLabel),
+      maxHeight: "65%",
+    });
+	// counter for how many Tabs are selected
+	const tabConterOpen = document.createElement("span");
+	tabConterOpen.innerHTML = "&nbsp;(";
+	saveButton.appendChild(tabConterOpen);
+	const tabCounter = document.createElement("span");
+	tabCounter.textContent = tabs.length;
+	saveButton.appendChild(tabCounter);
+	const tabCounterClose = document.createElement("span");
+	tabCounterClose.textContent = ")";
+	saveButton.appendChild(tabCounterClose);
+	// Create checkboxes for each Tab
+	const headers = [
+		{ label: "" },
+		{ label: await translator.translate("tab_label") },
+		{ label: await translator.translate("tab_url") },
+		{ label: await translator.translate("tab_org") },
+	];
 	const selectAllButton = document.createElement("button");
+	const unselectAllButton = document.createElement("button");
+	/**
+	 * Function to update select all button text based on checkbox states
+	 */
+	function updateSelectAllButtonText() {
+		// this checkboxes is the one returned from generateTableWithCheckboxes
+		const checkedCount = checkboxes.filter((cb) => cb.checked).length;
+		tabCounter.textContent = checkedCount;
+		selectAllButton.disabled = checkedCount === checkboxes.length;
+		unselectAllButton.disabled = checkedCount === 0;
+		saveButton.disabled = unselectAllButton.disabled;
+	}
+	const { checkboxes, table: tabsListTable } =
+		await generateTableWithCheckboxes(
+			tabs,
+			headers,
+			updateSelectAllButtonText,
+		);
+	// Add Tabs list container
+	const divParent = document.createElement("div");
+	article.appendChild(divParent);
+	divParent.classList.add(
+		"forceBaseListView",
+		"visualEditorModal",
+		"flexipageEditorActivateContent",
+		"flexipageEditorActivateRecordPage",
+		"slds-p-top--none",
+	);
+	divParent.style.padding =
+		"var(--lwc-spacingLarge,1.5rem) var(--lwc-spacingXLarge,2rem)";
+	divParent.appendChild(tabsListTable);
+	// Create select/unselect all button container
+	// Create Select All button
+	selectAllButton.disabled = true;
 	selectAllButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
 		"slds-button_small",
 	);
 	selectAllButton.textContent = await translator.translate("select_all");
-	selectAllButton.addEventListener("click", () => {
-		checkboxes.forEach(checkbox => checkbox.checked = true);
-		updateSelectAllButtonText();
-	});
-	buttonContainer.appendChild(selectAllButton);
-
+	buttonContainer.prepend(selectAllButton);
 	// Create Unselect All button
-	const unselectAllButton = document.createElement("button");
 	unselectAllButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
 		"slds-button_small",
 	);
 	unselectAllButton.textContent = await translator.translate("unselect_all");
-	unselectAllButton.addEventListener("click", () => {
-		checkboxes.forEach(checkbox => checkbox.checked = false);
+	buttonContainer.prepend(unselectAllButton);
+	selectAllButton.addEventListener("click", () => {
+		for (const checkbox of checkboxes) {
+			checkbox.checked = true;
+		}
 		updateSelectAllButtonText();
 	});
-	buttonContainer.appendChild(unselectAllButton);
-
-	// Create tabs list container
-	const tabsListContainer = document.createElement("div");
-	tabsListContainer.style.width = "100%";
-	tabsListContainer.style.maxHeight = "400px";
-	tabsListContainer.style.overflowY = "auto";
-	tabsListContainer.style.border = "1px solid #e5e5e5";
-	tabsListContainer.style.borderRadius = "4px";
-	tabsListContainer.style.padding = "0.5rem";
-	divParent.appendChild(tabsListContainer);
-
-	// Create checkboxes for each tab
-	for (const tab of tabs) {
-		const tabLabel = await generateCheckboxWithLabel(
-			`export-tab-${tabs.indexOf(tab)}`,
-			"", // We'll set custom text below
-			true, // Default to checked
-		);
-		
-		// Replace the generic span with our custom tab info
-		const span = tabLabel.querySelector("span");
-		if (span) {
-			span.textContent = `${tab.label} (${Tab.minifyURL(tab.url)})`;
+	unselectAllButton.addEventListener("click", () => {
+		for (const checkbox of checkboxes) {
+			checkbox.checked = false;
 		}
-
-		const checkbox = tabLabel.querySelector("input[type='checkbox']");
-		if (checkbox) {
-			checkboxes.push(checkbox);
-			// Store tab reference in checkbox for later retrieval
-			checkbox.dataset.tabIndex = tabs.indexOf(tab);
-		}
-
-		tabsListContainer.appendChild(tabLabel);
-	}
-
-	// Function to update select all button text based on checkbox states
-	function updateSelectAllButtonText() {
-		const checkedCount = checkboxes.filter(cb => cb.checked).length;
-		selectAllButton.disabled = checkedCount === checkboxes.length;
-		unselectAllButton.disabled = checkedCount === 0;
-	}
-	updateSelectAllButtonText();
-
-	// Add change listener to all checkboxes to update button states
-	checkboxes.forEach(checkbox => {
-		checkbox.addEventListener("change", updateSelectAllButtonText);
+		updateSelectAllButtonText();
 	});
-
-	// Function to get selected tabs
+	/**
+	 * Function to get selected tabs
+	 * @return {Tab[]} - only the selected Tabs
+	 */
 	function getSelectedTabs() {
-		return checkboxes
-			.filter(checkbox => checkbox.checked)
-			.map(checkbox => tabs[parseInt(checkbox.dataset.tabIndex)]);
+		return {
+			selectedAll: selectAllButton.disabled,
+			tabs: checkboxes
+				.filter((checkbox) => checkbox.checked)
+				.map((checkbox) =>
+					tabs[Number.parseInt(checkbox.dataset.tabIndex)]
+				),
+		};
 	}
-
-	// Update save button text to "Export"
-	const saveButtonSpan = saveButton.querySelector("span.label");
-	if (saveButtonSpan) {
-		saveButtonSpan.textContent = await translator.translate("export");
-	}
-
 	return {
 		modalParent,
 		saveButton,

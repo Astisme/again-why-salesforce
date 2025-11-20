@@ -167,12 +167,8 @@ function importHandler() {
  * Sends a message that will start the export procedure.
  */
 function pop_exportHandler() {
-	if (ISSAFARI || BROWSER.downloads != null) {
-		sendExtensionMessage({ what: "export" }, close);
-		return;
-	}
-	BROWSER.permissions.request({
-		permissions: ["downloads"],
+	sendExtensionMessage({
+		what: "export-check",
 	});
 	setTimeout(close, 100);
 }

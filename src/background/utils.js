@@ -13,6 +13,7 @@ import {
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
+import { TabContainer } from "../tabContainer.js";
 
 /**
  * Queries the browser for the current active tab in the current window.
@@ -81,7 +82,9 @@ export async function bg_notify(message) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-	const filename = `${EXTENSION_NAME}.json`;
+	const filename = `${EXTENSION_NAME}_${
+		tabs[TabContainer.keyTabs]?.length
+	}-Tabs.json`;
 	if (ISFIREFOX) {
 		// Firefox implementation
 		const blob = new Blob([jsonData], { type: "application/json" });
@@ -149,24 +152,32 @@ function requestExportPermission() {
 }
 
 /**
- * Checks whether downloads permission is already granted and launches the export handler.
- * If not, it triggers a notification prompting the user to open a popup to grant permission.
- *
- * @param {object[]|null} [tabs=null]
- *   Optional array of tab objects to pass through to the export handler.
- * @return {void}
+ * show toast message to request the user to open the popup
  */
-export function checkLaunchExport(tabs = null) {
-	if (ISSAFARI || BROWSER.downloads != null) {
-		// downloads permission has already been granted
-		exportHandler(tabs);
-		return;
-	}
-	// show toast message to request the user to open the popup
+function sendMessageRequestExportPermission() {
 	bg_notify({
 		what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 		ok: requestExportPermission(),
 	});
+}
+
+/**
+ * Checks whether downloads permission is already granted and launches the export handler.
+ * If not, it triggers a notification prompting the user to open a popup to grant permission.
+ *
+ * @param {object[]|null} [tabs=null] Optional array of tab objects to pass through to the export handler.
+ * @param {boolean} [checkOnly=false] Whether to check only or launch the export if allowed
+ * @return {boolean|void} boolean when the check is requested
+ */
+export function checkLaunchExport(tabs = null, checkOnly = false) {
+	const isAllowed = ISSAFARI || BROWSER.downloads != null;
+	if (isAllowed) {
+		if (!checkOnly) {
+			// downloads permission has already been granted
+			exportHandler(tabs);
+		}
+	} else sendMessageRequestExportPermission();
+	return isAllowed;
 }
 
 /**

@@ -1,6 +1,7 @@
 "use strict";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
 	CMD_OPEN_OTHER_ORG,
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
@@ -9,6 +10,7 @@ import {
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
+	CXM_EXPORT_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -48,9 +50,8 @@ import {
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
-	WHAT_EXPORT,
-	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -898,30 +899,6 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 }
 
 /**
- * Initiates a download of a JSON file with the given content and filename.
- *
- * @param {Object} message - Message containing the data for download.
- * @param {string} message.payload - The JSON string content to download.
- * @param {string} [message.filename="download.json"] - The filename for the download.
- */
-function launchDownload(message) {
-	const jsonText = message.payload;
-	const filename = message.filename || "download.json";
-	// Create a Blob & object URL
-	const blob = new Blob([jsonText], { type: "application/json" });
-	const url = URL.createObjectURL(blob);
-	// Build <a> and “click” it
-	const a = document.createElement("a");
-	a.href = url;
-	a.download = filename;
-	document.body.appendChild(a);
-	a.click();
-	// Cleanup
-	a.remove();
-	URL.revokeObjectURL(url);
-}
-
-/**
  * Listens for messages from the background page and routes commands to appropriate handlers.
  * Supports tab management, notifications, modal dialogs, extension update prompts, and more.
  * Catches errors and displays them as toast notifications.
@@ -958,6 +935,8 @@ function listenToBackgroundPage() {
 					createImportModal();
 					break;
 				case WHAT_SHOW_EXPORT_MODAL:
+				case CXM_EXPORT_TABS:
+				case CMD_EXPORT_ALL:
 					createExportModal();
 					break;
 				case CXM_OPEN_OTHER_ORG:
@@ -1128,9 +1107,6 @@ function listenToBackgroundPage() {
 							false,
 						);
 					}
-					break;
-				case WHAT_EXPORT:
-					launchDownload(message);
 					break;
 				default:
 					if (message.what != "theme") {
