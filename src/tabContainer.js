@@ -65,11 +65,11 @@ export class TabContainer extends Array {
 	/**
 	 * Setter for #pinnedTabs
 	 * @param {number} pinnedTabs - the positive integer which will become the currently pinned Tabs
-	 * @throws Error when passing a value that is not a number
+	 * @throws TypeError when passing a value that is not a number
 	 */
 	set pinned(pinnedTabs = 0) { // function name same as TabContainer.keyPinnedTabsNo
 		if (typeof pinnedTabs !== "number") {
-			throw new Error("error_required_params");
+			throw new TypeError("error_required_params");
 		}
 		pinnedTabs = pinnedTabs ?? 0;
 		if (pinnedTabs < 0) {

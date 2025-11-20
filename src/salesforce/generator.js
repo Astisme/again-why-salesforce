@@ -1564,7 +1564,7 @@ export async function generateUpdateTabModal(label, url, org) {
  * @param {string} label - The visible label text
  * @param {string} ariaLabel - The aria-label for accessibility
  * @param {string[]} classList - Additional CSS classes
- * @returns {HTMLTableCellElement} The created th element
+ * @return {HTMLTableCellElement} The created th element
  */
 function createTableHeader(label = "", ariaLabel = "", classList = []) {
 	const th = document.createElement("th");
@@ -1578,7 +1578,7 @@ function createTableHeader(label = "", ariaLabel = "", classList = []) {
 /**
  * Creates a complete table with headers
  * @param {Array<{label: string, ariaLabel: string, classList?: string[]}>} headers - Array of header configurations
- * @returns {Object{HTMLTableElement, HTMLTbodyElement}} The created table element and its empty tbody
+ * @return {Object{HTMLTableElement, HTMLTbodyElement}} The created table element and its empty tbody
  */
 function createTable(headers = []) {
 	const table = document.createElement("table");
@@ -1610,7 +1610,7 @@ function createTable(headers = []) {
  * Creates a checkbox cell for a table row
  * @param {number} [tabIndex=0] The index of the checkbox (for later retrieval)
  * @param {boolean} [checked=false] if the checkbox should be checked by default
- * @returns {HTMLTableCellElement} The created td element with checkbox
+ * @return {HTMLTableCellElement} The created td element with checkbox
  */
 function createCheckboxCell(tabIndex = 0, checked = false) {
 	const td = document.createElement("td");
@@ -1634,7 +1634,7 @@ function createCheckboxCell(tabIndex = 0, checked = false) {
  * Creates a text cell for a table row
  * @param {string} text - The text content
  * @param {string} title - The title attribute (optional)
- * @returns {HTMLTableCellElement} The created td element
+ * @return {HTMLTableCellElement} The created td element
  */
 function createTextCell(text = "", title = "") {
 	const td = document.createElement("td");
@@ -1651,11 +1651,12 @@ function createTextCell(text = "", title = "") {
 
 /**
  * Creates a complete table row
- * @param {Object} [tab={}]
+ * @param {Object} [tab={}] object with the following keys
  * @param {string} [tab.label=null] The Tab Label
  * @param {string} [tab.url=null] The Tab Url
  * @param {string|undefined} [tab.org=null] The Tab Org (for org-specific Tabs)
- * @returns {HTMLTableRowElement} The created tr element
+ * @param {number} [index=0] the index of the current row
+ * @return {HTMLTableRowElement} The created tr element
  */
 function createTableRow(
 	{ label = null, url = null, org = null } = {},
@@ -1703,6 +1704,9 @@ function generateTableWithCheckboxes(
  * for convenience.
  *
  * @param {Array} tabs - An array of Tab objects to display in the export modal.
+ * @param {Object} [param1={}] object with the following keys
+ * @param {string} [param1.title="export_tabs"] the title of the modal
+ * @param {string} [param1.saveButtonLabel="export"] the label for the submit button
  * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The button element for confirming the selected Tabs.
