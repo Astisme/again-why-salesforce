@@ -805,7 +805,7 @@ export async function generateSection(sectionTitle = null) {
 export async function generateSldsModal({
 	modalTitle = "",
 	saveButtonLabel = "continue",
-  maxHeight = "",
+	maxHeight = "",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
@@ -1158,8 +1158,8 @@ export async function generateOpenOtherOrgModal(
 ) {
 	const { modalParent, article, saveButton, closeButton } =
 		await generateSldsModal({
-      modalTitle: label,
-    });
+			modalTitle: label,
+		});
 	const { section, divParent } = await generateSection("other_org_info");
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
@@ -1504,7 +1504,7 @@ export async function generateUpdateTabModal(label, url, org) {
 	const { modalParent, article, saveButton, closeButton } =
 		await generateSldsModal({
 			modalTitle: label,
-    });
+		});
 	const { section, divParent } = await generateSection("tab_information");
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
@@ -1720,10 +1720,10 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, saveButton, closeButton, buttonContainer } =
 		await generateSldsModal({
-      modalTitle: await translator.translate(title),
+			modalTitle: await translator.translate(title),
 			saveButtonLabel: await translator.translate(saveButtonLabel),
-      maxHeight: "65%",
-    });
+			maxHeight: "65%",
+		});
 	// counter for how many Tabs are selected
 	const tabConterOpen = document.createElement("span");
 	tabConterOpen.innerHTML = "&nbsp;(";
