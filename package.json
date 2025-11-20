@@ -2,6 +2,6 @@
 	"type": "module",
 	"dependencies": {
 		"eslint": "^9.39.1",
-		"eslint-plugin-jsdoc": "^61.2.1"
+		"eslint-plugin-jsdoc": "^61.4.0"
 	}
 }
