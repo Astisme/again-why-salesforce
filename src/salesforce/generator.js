@@ -805,7 +805,6 @@ export async function generateSection(sectionTitle = null) {
 export async function generateSldsModal({
 	modalTitle = "",
 	saveButtonLabel = "continue",
-	maxHeight = "",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
@@ -910,7 +909,7 @@ export async function generateSldsModal({
 		"slds-modal__content",
 		"slds-p-around_medium",
 	);
-	modalBody.style.height = maxHeight;
+	modalBody.style.maxHeight = "65%";
 	modalBody.dataset.scopedScroll = "true";
 	modalContainer.appendChild(modalBody);
 	const viewModeDiv = document.createElement("div");
@@ -1722,7 +1721,6 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		await generateSldsModal({
 			modalTitle: await translator.translate(title),
 			saveButtonLabel: await translator.translate(saveButtonLabel),
-			maxHeight: "65%",
 		});
 	// counter for how many Tabs are selected
 	const tabConterOpen = document.createElement("span");

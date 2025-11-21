@@ -8,7 +8,7 @@ import {
 	MANIFEST,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
-	WHAT_EXPORT,
+	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
@@ -83,7 +83,7 @@ export async function bg_notify(message) {
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
 	const filename = `${EXTENSION_NAME}_${
-		tabs[TabContainer.keyTabs]?.length
+		Array.isArray(tabs) ? tabs.length : tabs[TabContainer.keyTabs]?.length
 	}-Tabs.json`;
 	if (ISFIREFOX) {
 		// Firefox implementation
@@ -110,7 +110,7 @@ function _exportHandler(tabs) {
 	} else {
 		// Safari and unidentified browsers: send a message to the content script
 		bg_notify({
-			what: WHAT_EXPORT,
+			what: WHAT_EXPORT_FROM_BG,
 			filename,
 			payload: jsonData,
 		});
@@ -152,22 +152,12 @@ function requestExportPermission() {
 }
 
 /**
- * show toast message to request the user to open the popup
- */
-function sendMessageRequestExportPermission() {
-	bg_notify({
-		what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
-		ok: requestExportPermission(),
-	});
-}
-
-/**
  * Checks whether downloads permission is already granted and launches the export handler.
  * If not, it triggers a notification prompting the user to open a popup to grant permission.
  *
- * @param {object[]|null} [tabs=null] Optional array of tab objects to pass through to the export handler.
+ * @param {object[]|null} [tabs=null] Optional array of Tab objects to pass through to the export handler.
  * @param {boolean} [checkOnly=false] Whether to check only or launch the export if allowed
- * @return {boolean|void} boolean when the check is requested
+ * @return {boolean} whether the export of Tabs is allowed
  */
 export function checkLaunchExport(tabs = null, checkOnly = false) {
 	const isAllowed = ISSAFARI || BROWSER.downloads != null;
@@ -176,7 +166,13 @@ export function checkLaunchExport(tabs = null, checkOnly = false) {
 			// downloads permission has already been granted
 			exportHandler(tabs);
 		}
-	} else sendMessageRequestExportPermission();
+	} else {
+		// show toast message to request the user to open the popup
+		bg_notify({
+			what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+			ok: requestExportPermission(),
+		});
+	}
 	return isAllowed;
 }
 

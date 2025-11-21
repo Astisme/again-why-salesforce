@@ -24,6 +24,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 4. New feature to **pin Tabs** at the beginning of the list (#114) they'll have a different background for easier identification
 5. New Context menus to **pin or unpin** Tabs
 6. New Context menus to **remove** pinned / unpinned Tabs
+7. New Export modal to **select which Tabs** to export (#80)
+8. New file `export.js` to deal with export
 
 ### Settings
 
@@ -64,6 +66,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 1. Added tests for the new metadata fields on Tab and for their sorting options
 2. Added tests for pinned Tabs
 3. Added tests for new translator feature
+4. Added tests for pinned Tabs export
 
 # v2.1.0
 

@@ -6,6 +6,8 @@ import {
 	checkForUpdates,
 	checkLaunchExport,
 } from "/background/utils.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
+import { BROWSER } from "/constants.js";
 
 Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 	await t.step("rejects if no tab found after retries", async () => {
@@ -66,13 +68,38 @@ Deno.test("bg_notify behavior", async (t) => {
 });
 
 Deno.test("checkLaunchExport behavior", async (t) => {
-	await t.step("does not throw when downloads available", () => {
-		checkLaunchExport();
+	await t.step("returns false when downloads NOT available", () => {
+		assert(!checkLaunchExport(), "default params");
+		assert(!checkLaunchExport(undefined, false), "checkOnly = false");
+		assert(!checkLaunchExport(undefined, true), "checkOnly = true");
+	});
+
+	BROWSER.downloads = {
+		dowload: () => {},
+	};
+	chrome.dowloads = {
+		dowload: () => {},
+	};
+
+	await t.step("returns true when downloads available", () => {
+		assert(checkLaunchExport(), "default params");
+		assert(checkLaunchExport(undefined, false), "checkOnly = false");
+		assert(checkLaunchExport(undefined, true), "checkOnly = true");
 	});
 
 	await t.step("accepts an explicit tabs array parameter", () => {
 		const dummyTabs = [{ id: 1, url: "https://foo.bar" }];
-		checkLaunchExport(dummyTabs);
+		assert(checkLaunchExport(dummyTabs));
+	});
+
+	await t.step("accepts a TabContainer JSON", async () => {
+		const dummyTabs = await ensureAllTabsAvailability();
+		assert(dummyTabs.length > 0);
+		assert(dummyTabs.pinned === 0);
+		assert(checkLaunchExport(dummyTabs.toJSON()));
+		dummyTabs.pinned = 1;
+		assert(dummyTabs.pinned === 1);
+		assert(checkLaunchExport(dummyTabs.toJSON()));
 	});
 });
 

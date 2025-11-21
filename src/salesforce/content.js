@@ -50,6 +50,7 @@ import {
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
+	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
@@ -899,6 +900,30 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 }
 
 /**
+ * Initiates a download of a JSON file with the given content and filename.
+ *
+ * @param {Object} message - Message containing the data for download.
+ * @param {string} message.payload - The JSON string content to download.
+ * @param {string} [message.filename="download.json"] - The filename for the download.
+ */
+function launchDownload(message) {
+	const jsonText = message.payload;
+	const filename = message.filename || "download.json";
+	// Create a Blob & object URL
+	const blob = new Blob([jsonText], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
+	// Build <a> and “click” it
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = filename;
+	document.body.appendChild(a);
+	a.click();
+	// Cleanup
+	a.remove();
+	URL.revokeObjectURL(url);
+}
+
+/**
  * Listens for messages from the background page and routes commands to appropriate handlers.
  * Supports tab management, notifications, modal dialogs, extension update prompts, and more.
  * Catches errors and displays them as toast notifications.
@@ -1107,6 +1132,9 @@ function listenToBackgroundPage() {
 							false,
 						);
 					}
+					break;
+				case WHAT_EXPORT_FROM_BG:
+					launchDownload(message);
 					break;
 				default:
 					if (message.what != "theme") {
