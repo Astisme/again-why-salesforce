@@ -403,6 +403,10 @@
 		"message": "Impossibile trovare la Tab di Setup.",
 		"description": "[error] l'estensione non ha trovato dove posizionare le Tab preferite."
 	},
+	"error_no_tabs_selected": {
+		"message": "Nessuna Tab Selezionata per l'esportazione",
+		"description": "[toast] errore quando l'utente tenta di esportare senza aver selezionato alcuna Tab"
+	},
 	"error_no_unpinned": {
 		"message": "Non hai Tab non bloccate!",
 		"description": "[errore] l'utente ha provato a rimuovere le Tab non bloccate ma non ne ha"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Esporta",
 		"description": "[popup] pulsante di esportazione"
+	},
+	"export_tabs": {
+		"message": "Esporta Tabs",
+		"description": "[modal] titolo per il modale di esportazione delle Tabs"
 	},
 	"export_title": {
 		"message": "Esporta tutte le Tab",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "Nessuna azione corrispondente trovata",
 		"description": "[error] in Salesforce quando non viene trovata alcuna azione corrispondente"
+	},
+	"no_tabs_to_export": {
+		"message": "Nessuna Tab da esportare",
+		"description": "[toast] errore quando non ci sono Tabs da esportare"
 	},
 	"nss_invalid_url": {
 		"message": "URL non valida rilevata.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Salva come Tab",
 		"description": "[alt] testo alternativo quando le immagini non funzionano"
+	},
+	"select_all": {
+		"message": "Seleziona Tutto",
+		"description": "[modal] pulsante per selezionare tutte le Tabs nel modale di esportazione"
 	},
 	"send_tip": {
 		"message": "Inviaci un consiglio ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "i link preferiti dell'utente"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Esportate con Successo",
+		"description": "[toast] messaggio di successo quando le Tabs vengono esportate"
+	},
 	"tabs_saved": {
 		"message": "Tab salvate.",
 		"description": "[toast] le Tab sono state salvate con successo."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Sottolineatura ondulata",
 		"description": "Opzione di stile decorativo per applicare una sottolineatura ondulata al testo della Tab"
+	},
+	"unselect_all": {
+		"message": "Deseleziona Tutto",
+		"description": "[modal] pulsante per deselezionare tutte le Tabs nel modale di esportazione"
 	},
 	"update_available": {
 		"message": "Aggiornamento disponibile",

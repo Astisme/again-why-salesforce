@@ -403,6 +403,10 @@
 		"message": "Setup Tab nije pronađen.",
 		"description": "[error] ekstenzija nije uspjela pronaći gdje postaviti omiljene Tabove"
 	},
+	"error_no_tabs_selected": {
+		"message": "Nije Odabran Nijedan Tab za izvoz",
+		"description": "[toast] pogreška kada korisnik pokuša izvesti bez odabranih Tabs-a"
+	},
 	"error_no_unpinned": {
 		"message": "Nemate neprikvačenih Tabova!",
 		"description": "[greška] korisnik je pokušao ukloniti neprikvačene Tabove, ali nema neprikvačenih Tabova"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Izvezi",
 		"description": "[popup] gumb za izvoz"
+	},
+	"export_tabs": {
+		"message": "Izvezi Tabs-ove",
+		"description": "[modal] naslov za modal za izvoz Tabs-ova"
 	},
 	"export_title": {
 		"message": "Izvezi sve Tabove",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Nije pronađena odgovarajuća akcija",
 		"description": "[error] kada switch ne može podudariti zatraženu akciju"
+	},
+	"no_tabs_to_export": {
+		"message": "Nema Tabs-ova za izvoz",
+		"description": "[toast] pogreška kada nema Tabs-ova za izvoz"
 	},
 	"nss_invalid_url": {
 		"message": "Otkriven je nevažeći URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Spremi kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"select_all": {
+		"message": "Odaberi Sve",
+		"description": "[modal] gumb za odabir svih Tabs-ova u modalu za izvoz"
 	},
 	"send_tip": {
 		"message": "Pošaljite nam savjet ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabovi",
 		"description": "omiljene veze korisnika"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs-ovi Uspješno Izvezeni",
+		"description": "[toast] poruka o uspjehu prilikom izvoza Tabs-ova"
+	},
 	"tabs_saved": {
 		"message": "Tabovi spremljeni.",
 		"description": "[toast] Tabovi su uspješno spremljeni."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Valovito podcrtano",
 		"description": "Opcija stila ukrašavanja za primjenu valovitog podcrtavanja na tekst Taba"
+	},
+	"unselect_all": {
+		"message": "Poništi Odabir Svih",
+		"description": "[modal] gumb za poništavanje odabira svih Tabs-ova u modalu za izvoz"
 	},
 	"update_available": {
 		"message": "Ažuriranje dostupno",

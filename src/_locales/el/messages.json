@@ -403,6 +403,10 @@
 		"message": "Απέτυχε η εύρεση του Setup Tab.",
 		"description": "[σφάλμα] η επέκταση δεν μπόρεσε να εντοπίσει πού να τοποθετήσει τα αγαπημένα Tab"
 	},
+	"error_no_tabs_selected": {
+		"message": "Δεν έχουν Επιλεγεί Tabs για εξαγωγή",
+		"description": "[toast] σφάλμα όταν ο χρήστης προσπαθεί να εξάγει χωρίς να έχει επιλεγεί κανένα Tab"
+	},
 	"error_no_unpinned": {
 		"message": "Δεν έχετε μη καρφιτσωμένες Tab καρτέλες!",
 		"description": "[error] ο χρήστης προσπάθησε να αφαιρέσει τις μη καρφιτσωμένες Tab καρτέλες, αλλά δεν έχει καμία μη καρφιτσωμένη Tab καρτέλα"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Εξαγωγή",
 		"description": "[αναδυόμενο-παράθυρο] κουμπί εξαγωγής"
+	},
+	"export_tabs": {
+		"message": "Εξαγωγή Tabs",
+		"description": "[modal] τίτλος για το modal εξαγωγής Tabs"
 	},
 	"export_title": {
 		"message": "Εξαγωγή όλων των Tab",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Δεν ταιριάζει καμία ενέργεια",
 		"description": "[σφάλμα] όταν η εντολή ελέγχου δεν μπορεί να ταιριάξει την ζητούμενη ενέργεια"
+	},
+	"no_tabs_to_export": {
+		"message": "Δεν Υπάρχουν Tabs για εξαγωγή",
+		"description": "[toast] σφάλμα όταν δεν υπάρχουν Tabs για εξαγωγή"
 	},
 	"nss_invalid_url": {
 		"message": "Εντοπίστηκε μη έγκυρο URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Αποθήκευση ως Tab",
 		"description": "[εναλλακτικό-κείμενο] εναλλακτικό κείμενο όταν οι εικόνες δεν λειτουργούν"
+	},
+	"select_all": {
+		"message": "Επιλογή Όλων",
+		"description": "[modal] κουμπί για επιλογή όλων των Tabs στο modal εξαγωγής"
 	},
 	"send_tip": {
 		"message": "Στείλτε μας μια συμβουλή ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "τα αγαπημένα links του χρήστη"
 	},
+	"tabs_exported_successfully": {
+		"message": "Τα Tabs Εξήχθησαν Επιτυχώς",
+		"description": "[toast] μήνυμα επιτυχίας όταν εξάγονται Tabs"
+	},
 	"tabs_saved": {
 		"message": "Τα Tab αποθηκεύτηκαν.",
 		"description": "[σημείωμα] Τα Tab αποθηκεύτηκαν με επιτυχία."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Κυματιστή Υπογράμμιση",
 		"description": "Επιλογή στυλ διακόσμησης για εφαρμογή κυματιστής υπογράμμισης στο κείμενο Tab"
+	},
+	"unselect_all": {
+		"message": "Κατάργηση Επιλογής Όλων",
+		"description": "[modal] κουμπί για κατάργηση επιλογής όλων των Tabs στο modal εξαγωγής"
 	},
 	"update_available": {
 		"message": "Διαθέσιμη ενημέρωση",

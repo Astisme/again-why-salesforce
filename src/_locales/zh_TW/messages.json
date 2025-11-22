@@ -403,6 +403,10 @@
 		"message": "找不到 Setup Tab。",
 		"description": "[error] 擴展無法確定放置最愛 Tab 的位置"
 	},
+	"error_no_tabs_selected": {
+		"message": "沒有選擇任何 Tab 進行匯出",
+		"description": "[toast] 使用者嘗試在未選擇任何 Tab 的情況下匯出時發生的錯誤"
+	},
 	"error_no_unpinned": {
 		"message": "您沒有任何未釘選的 Tab！",
 		"description": "[錯誤] 使用者嘗試移除未釘選的 Tab，但他們沒有任何未釘選的 Tab"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "匯出",
 		"description": "[popup] 匯出按鈕"
+	},
+	"export_tabs": {
+		"message": "匯出 Tabs",
+		"description": "[modal] 匯出 Tabs 彈出式視窗的標題"
 	},
 	"export_title": {
 		"message": "匯出所有 Tab",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Did not match any action",
 		"description": "[error] 當 Salesforce 中的 switch 無法匹配請求的動作時"
+	},
+	"no_tabs_to_export": {
+		"message": "沒有 Tabs 可以匯出",
+		"description": "[toast] 沒有 Tabs 可以匯出時發生的錯誤"
 	},
 	"nss_invalid_url": {
 		"message": "偵測到無效的 URL。",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] 當圖片無法顯示時的替代文字"
+	},
+	"select_all": {
+		"message": "全選",
+		"description": "[modal] 在匯出彈出式視窗中選取所有 Tabs 的按鈕"
 	},
 	"send_tip": {
 		"message": "發送小費 ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "使用者的最愛連結"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs 已成功匯出",
+		"description": "[toast] Tabs 成功匯出時的成功訊息"
+	},
 	"tabs_saved": {
 		"message": "Tabs saved.",
 		"description": "[toast] Tab 成功儲存。"
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "波浪底線",
 		"description": "為 Tab 文字添加波浪下劃線的裝飾樣式選項"
+	},
+	"unselect_all": {
+		"message": "取消全選",
+		"description": "[modal] 在匯出彈出式視窗中取消選取所有 Tabs 的按鈕"
 	},
 	"update_available": {
 		"message": "有可用更新",

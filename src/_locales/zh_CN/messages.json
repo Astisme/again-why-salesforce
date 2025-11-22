@@ -403,6 +403,10 @@
 		"message": "未能找到设置标签页。",
 		"description": "[错误] 扩展程序无法找到放置收藏 Tabs 的位置。"
 	},
+	"error_no_tabs_selected": {
+		"message": "未选择任何 Tab 进行导出",
+		"description": "[toast] 用户尝试在未选择任何 Tab 的情况下导出时出错"
+	},
 	"error_no_unpinned": {
 		"message": "您没有任何未固定的 Tab！",
 		"description": "[错误] 用户试图移除未固定的 Tab，但他们没有任何未固定的 Tab"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "导出",
 		"description": "[弹出窗口] 导出按钮"
+	},
+	"export_tabs": {
+		"message": "导出 Tabs",
+		"description": "[modal] 导出 Tabs 模态框的标题"
 	},
 	"export_title": {
 		"message": "导出所有 Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "未匹配任何操作",
 		"description": "[错误] 在 Salesforce 中，当切换无法匹配请求的操作时"
+	},
+	"no_tabs_to_export": {
+		"message": "没有 Tabs 可供导出",
+		"description": "[toast] 没有 Tabs 可供导出时出错"
 	},
 	"nss_invalid_url": {
 		"message": "检测到无效的URL。",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "另存为 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"
+	},
+	"select_all": {
+		"message": "全选",
+		"description": "[modal] 导出模态框中选择所有 Tabs 的按钮"
 	},
 	"send_tip": {
 		"message": "发送小费 ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "用户的收藏链接"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs 导出成功",
+		"description": "[toast] Tabs 导出成功时的提示信息"
+	},
 	"tabs_saved": {
 		"message": "Tabs 已保存。",
 		"description": "[提示信息] Tabs 已成功存储。"
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "波浪下划线",
 		"description": "为 Tab 文本应用波浪下划线的装饰样式选项"
+	},
+	"unselect_all": {
+		"message": "取消全选",
+		"description": "[modal] 导出模态框中取消选择所有 Tabs 的按钮"
 	},
 	"update_available": {
 		"message": "有可用更新",

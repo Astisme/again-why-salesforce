@@ -403,6 +403,10 @@
 		"message": "Setup Tab nije pronađen.",
 		"description": "[error] proširenje nije uspelo da pronađe gde da postavi omiljene Tabove"
 	},
+	"error_no_tabs_selected": {
+		"message": "Није Изабрана Ниједна Tab за извоз",
+		"description": "[toast] грешка када корисник покуша да извезе без изабраних Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Немате незакачених Tab-ова!",
 		"description": "[грешка] корисник је покушао да уклони незакачене Tab-ове, али нема ниједног незакаченог Tab-а"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Izvezi",
 		"description": "[popup] dugme za izvoz"
+	},
+	"export_tabs": {
+		"message": "Извези Tabs",
+		"description": "[modal] наслов за модал за извоз Tabs-а"
 	},
 	"export_title": {
 		"message": "Izvezi sve Tabove",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Nije pronađena odgovarajuća akcija",
 		"description": "[error] kada switch naredba ne može da poklopi zatraženu akciju"
+	},
+	"no_tabs_to_export": {
+		"message": "Нема Tabs за извоз",
+		"description": "[toast] грешка када нема Tabs за извоз"
 	},
 	"nss_invalid_url": {
 		"message": "Otkriven je nevažeći URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Sačuvaj kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"select_all": {
+		"message": "Изабери Све",
+		"description": "[modal] дугме за одабир свих Tabs у модалу за извоз"
 	},
 	"send_tip": {
 		"message": "Пошаљите нам напојницу ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabovi",
 		"description": "omiljeni linkovi korisnika"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Успешно Извезени",
+		"description": "[toast] порука о успеху када су Tabs извезени"
+	},
 	"tabs_saved": {
 		"message": "Tabovi sačuvani.",
 		"description": "[toast] Tabovi su uspešno sačuvani."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Подвучено Таласасто",
 		"description": "Опција стила декорације за примену таласастог подвлачења на текст Tab-а"
+	},
+	"unselect_all": {
+		"message": "Поништи Избор Свих",
+		"description": "[modal] дугме за поништавање избора свих Tabs у модалу за извоз"
 	},
 	"update_available": {
 		"message": "Доступно ажурирање",

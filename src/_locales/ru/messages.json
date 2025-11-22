@@ -403,6 +403,10 @@
 		"message": "Не удалось найти Setup Tab",
 		"description": "[error] Расширение не смогло найти место для размещения избранных Tabs"
 	},
+	"error_no_tabs_selected": {
+		"message": "Не Выбрано Ни Одной Tab для экспорта",
+		"description": "[toast] ошибка, когда пользователь пытается экспортировать без выбранных Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "У вас нет незакрепленных Tab-ов!",
 		"description": "[ошибка] пользователь попытался удалить незакрепленные Tab-ы, но у него нет незакрепленных Tab-ов"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Экспортировать",
 		"description": "[popup] Кнопка экспорта"
+	},
+	"export_tabs": {
+		"message": "Экспортировать Tabs",
+		"description": "[modal] заголовок для модального окна экспорта Tabs"
 	},
 	"export_title": {
 		"message": "Экспортировать все Tabs",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "Не найдено соответствующего действия",
 		"description": "[error] В Salesforce запрошенное действие не совпадает ни с одним доступным действием"
+	},
+	"no_tabs_to_export": {
+		"message": "Нет Tabs для экспорта",
+		"description": "[toast] ошибка, когда нет Tabs для экспорта"
 	},
 	"nss_invalid_url": {
 		"message": "Обнаружен недействительный URL.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Сохранить как Tab",
 		"description": "[alt] Альтернативный текст, если изображения не отображаются"
+	},
+	"select_all": {
+		"message": "Выбрать Все",
+		"description": "[modal] кнопка для выбора всех Tabs в модальном окне экспорта"
 	},
 	"send_tip": {
 		"message": "Отправить нам чаевые ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "Избранные ссылки пользователя"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Успешно Экспортированы",
+		"description": "[toast] сообщение об успехе при экспорте Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tabs сохранены",
 		"description": "[toast] Tabs успешно сохранены"
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Волнистое подчеркивание",
 		"description": "Параметр стиля оформления для применения волнистого подчеркивания к тексту Tab"
+	},
+	"unselect_all": {
+		"message": "Снять Выбор со Всего",
+		"description": "[modal] кнопка для снятия выбора со всех Tabs в модальном окне экспорта"
 	},
 	"update_available": {
 		"message": "Доступно обновление",

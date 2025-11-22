@@ -403,6 +403,10 @@
 		"message": "Setup Tab blev ikke fundet.",
 		"description": "[error] udvidelsen kunne ikke finde, hvor den skulle placere de gemte Tabs"
 	},
+	"error_no_tabs_selected": {
+		"message": "Ingen Tabs Valgt til eksport",
+		"description": "[toast] fejl når brugeren forsøger at eksportere uden valgte Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Du har ingen ikke-fastgjorte Tab'er!",
 		"description": "[error] brugeren forsøgte at fjerne de ikke-fastgjorte Tab'er, men de har ingen ikke-fastgjorte Tab'er"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Eksporter",
 		"description": "[popup] eksportknap"
+	},
+	"export_tabs": {
+		"message": "Eksporter Tabs",
+		"description": "[modal] titel for eksport Tabs modal"
 	},
 	"export_title": {
 		"message": "Eksporter alle Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Ingen matchende handling fundet",
 		"description": "[error] når switch-sætningen ikke kan matche den anmodede handling"
+	},
+	"no_tabs_to_export": {
+		"message": "Ingen Tabs at eksportere",
+		"description": "[toast] fejl når der ikke er nogen Tabs at eksportere"
 	},
 	"nss_invalid_url": {
 		"message": "Ugyldig URL registreret.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Gem som Tab",
 		"description": "[alt] alternativ tekst når billeder ikke vises"
+	},
+	"select_all": {
+		"message": "Vælg Alt",
+		"description": "[modal] knap til at vælge alle Tabs i eksport modalen"
 	},
 	"send_tip": {
 		"message": "Send os et tip ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "brugerens favorittlinks"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Eksporteret Med Succes",
+		"description": "[toast] succesmeddelelse når Tabs er eksporteret"
+	},
 	"tabs_saved": {
 		"message": "Tabs gemt.",
 		"description": "[toast] Tabs blev gemt med succes."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Bølget understreget",
 		"description": "Dekorationsstilmulighed for at anvende en bølget understregning på Tab-tekst"
+	},
+	"unselect_all": {
+		"message": "Fravælg Alt",
+		"description": "[modal] knap til at fravælge alle Tabs i eksport modalen"
 	},
 	"update_available": {
 		"message": "Opdatering tilgængelig",

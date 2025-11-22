@@ -403,6 +403,10 @@
 		"message": "Neuspešno iskanje zavihka Setup.",
 		"description": "[napaka] Razširitev ni mogla najti mesta za priljubljene Tabs."
 	},
+	"error_no_tabs_selected": {
+		"message": "Za izvoz Niso Izbrane Nobene Tab",
+		"description": "[toast] napaka, ko uporabnik poskuša izvoziti brez izbranih Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Nimate nobenih nepripetih Tab-ov!",
 		"description": "[napaka] uporabnik je poskušal odstraniti nepripete Tab-e, vendar nima nobenih nepripetih Tab-ov"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Izvozi",
 		"description": "[pojavno_okno] gumb za izvoz"
+	},
+	"export_tabs": {
+		"message": "Izvozi Tabs",
+		"description": "[modal] naslov za modalno okno za izvoz Tabs"
 	},
 	"export_title": {
 		"message": "Izvozi vse Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Ni se ujemalo z nobenim dejanjem",
 		"description": "[napaka] v Salesforce, ko stikalo ne more najti zahtevanega dejanja"
+	},
+	"no_tabs_to_export": {
+		"message": "Ni Tabs Za Izvoz",
+		"description": "[toast] napaka, ko ni Tabs za izvoz"
 	},
 	"nss_invalid_url": {
 		"message": "Zaznan je neveljaven URL naslov.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Shrani kot Tab",
 		"description": "[alt] alternativno besedilo, ko slike ne delujejo"
+	},
+	"select_all": {
+		"message": "Izberi Vse",
+		"description": "[modal] gumb za izbiro vseh Tabs v modalnem oknu za izvoz"
 	},
 	"send_tip": {
 		"message": "Pošljite nam namig ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "uporabnikove priljubljene povezave"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Uspešno Izvoženi",
+		"description": "[toast] sporočilo o uspehu, ko so Tabs izvoženi"
+	},
 	"tabs_saved": {
 		"message": "Tabs shranjeni.",
 		"description": "[toast] Tabs so bili uspešno shranjeni."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Valovito podčrtano",
 		"description": "Možnost sloga okrasitve za uporabo valovitega podčrtovanja na besedilu Taba"
+	},
+	"unselect_all": {
+		"message": "Prekliči Izbiro Vsega",
+		"description": "[modal] gumb za preklic izbire vseh Tabs v modalnem oknu za izvoz"
 	},
 	"update_available": {
 		"message": "Posodobitev na voljo",

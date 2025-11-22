@@ -403,6 +403,10 @@
 		"message": "Setup Tab খুঁজে পাওয়া যায়নি",
 		"description": "[error] এক্সটেনশন প্রিয় Tabs রাখার উপযুক্ত স্থান খুঁজে পায়নি"
 	},
+	"error_no_tabs_selected": {
+		"message": "রপ্তানির জন্য কোনো Tab নির্বাচন করা হয়নি",
+		"description": "[toast] ব্যবহারকারী কোনো Tab নির্বাচন না করে রপ্তানি করার চেষ্টা করলে ত্রুটি"
+	},
 	"error_no_unpinned": {
 		"message": "আপনার কোনো আনপিন করা Tab নেই!",
 		"description": "[error] ব্যবহারকারী আনপিন করা Tab গুলি সরানোর চেষ্টা করেছেন কিন্তু তাদের কোনো আনপিন করা Tab নেই"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "রপ্তানি করুন",
 		"description": "[popup] রপ্তানি বাটন"
+	},
+	"export_tabs": {
+		"message": "Tabs রপ্তানি করুন",
+		"description": "[modal] Tabs রপ্তানি মোডালের জন্য শিরোনাম"
 	},
 	"export_title": {
 		"message": "সব Tabs রপ্তানি করুন",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "কোনও কার্যক্রম মিলেনি",
 		"description": "[error] Salesforce-এ অনুরোধিত কার্যক্রম উপলব্ধ কার্যক্রমগুলোর সাথে মিলেনি"
+	},
+	"no_tabs_to_export": {
+		"message": "রপ্তানির জন্য কোনো Tab নেই",
+		"description": "[toast] রপ্তানির জন্য কোনো Tab না থাকলে ত্রুটি"
 	},
 	"nss_invalid_url": {
 		"message": "অবৈধ URL সনাক্ত করা হয়েছে।",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Tab হিসেবে সংরক্ষণ করুন",
 		"description": "[alt] ছবি কাজ না করলে বিকল্প পাঠ"
+	},
+	"select_all": {
+		"message": "সবগুলি নির্বাচন করুন",
+		"description": "[modal] রপ্তানি মোডালে সব Tab নির্বাচন করার বোতাম"
 	},
 	"send_tip": {
 		"message": "আমাদের একটি টিপ পাঠান ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "ব্যবহারকারীর প্রিয় লিঙ্কসমূহ"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs সফলভাবে রপ্তানি হয়েছে",
+		"description": "[toast] Tabs সফলভাবে রপ্তানি হলে সাফল্যের বার্তা"
+	},
 	"tabs_saved": {
 		"message": "Tabs সংরক্ষিত হয়েছে",
 		"description": "[toast] Tabs সফলভাবে সংরক্ষিত হয়েছে"
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "ওয়েভি আন্ডারলাইন",
 		"description": "Tab টেক্সটের জন্য ওয়েভি আন্ডারলাইন প্রয়োগ করার ডেকোরেশন স্টাইল অপশন"
+	},
+	"unselect_all": {
+		"message": "সবগুলির নির্বাচন বাতিল করুন",
+		"description": "[modal] রপ্তানি মোডালে সব Tab এর নির্বাচন বাতিল করার বোতাম"
 	},
 	"update_available": {
 		"message": "আপডেট উপলব্ধ",

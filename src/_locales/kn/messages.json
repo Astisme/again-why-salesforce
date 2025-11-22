@@ -403,6 +403,10 @@
 		"message": "ಸೆಟಪ್ Tab ಕಂಡುಬಂದಿಲ್ಲ.",
 		"description": "[ದೋಷ] extension ಇಷ್ಟದ Tabs ಹಾಕಲು ಸೆಟಪ್ Tab ಸಿಕ್ಕಿಲ್ಲ"
 	},
+	"error_no_tabs_selected": {
+		"message": "ರಫ್ತಿಗಾಗಿ ಯಾವುದೇ Tab ಆಯ್ಕೆಮಾಡಲಾಗಿಲ್ಲ",
+		"description": "[toast] ಬಳಕೆದಾರರು ಯಾವುದೇ Tab ಆಯ್ಕೆಮಾಡದೆ ರಫ್ತು ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿದಾಗ ದೋಷ"
+	},
 	"error_no_unpinned": {
 		"message": "ನಿಮ್ಮಲ್ಲಿ ಯಾವುದೇ ಅನ್ಪಿನ್ ಮಾಡಿದ Tabಗಳಿಲ್ಲ!",
 		"description": "[ದೋಷ] ಬಳಕೆದಾರರು ಅನ್ಪಿನ್ ಮಾಡಿದ Tabಗಳನ್ನು ತೆಗೆದುಹಾಕಲು ಪ್ರಯತ್ನಿಸಿದರು ಆದರೆ ಅವರಲ್ಲಿ ಯಾವುದೇ ಅನ್ಪಿನ್ ಮಾಡಿದ Tabಗಳಿಲ್ಲ"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "ರಫ್ತುಮಾಡಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ರಫ್ತು ಬಟನ್"
+	},
+	"export_tabs": {
+		"message": "Tabs ರಫ್ತು ಮಾಡಿ",
+		"description": "[modal] Tabs ರಫ್ತು ಮಾದರಿಗಾಗಿ ಶೀರ್ಷಿಕೆ"
 	},
 	"export_title": {
 		"message": "ಎಲ್ಲಾ Tabs ರಫ್ತುಮಾಡಿ",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "ಯಾವುದೇ ಕ್ರಿಯೆ ಹೊಂದಿಕೆಯಾಗಲಿಲ್ಲ",
 		"description": "[ದೋಷ] Salesforce ನಲ್ಲಿ ಅನುಸರಿಸಲ್ಲದ ಕ್ರಿಯೆ ಸಂದರ್ಭ"
+	},
+	"no_tabs_to_export": {
+		"message": "ರಫ್ತು ಮಾಡಲು ಯಾವುದೇ Tabs ಇಲ್ಲ",
+		"description": "[toast] ರಫ್ತು ಮಾಡಲು ಯಾವುದೇ Tabs ಇಲ್ಲದಿದ್ದಾಗ ದೋಷ"
 	},
 	"nss_invalid_url": {
 		"message": "ಅಮಾನ್ಯ URL ಪತ್ತೆಯಾಗಿದೆ.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Tab ಆಗಿ ಉಳಿಸಿ",
 		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"
+	},
+	"select_all": {
+		"message": "ಎಲ್ಲವನ್ನೂ ಆಯ್ಕೆಮಾಡಿ",
+		"description": "[modal] ರಫ್ತು ಮಾದರಿಯಲ್ಲಿ ಎಲ್ಲಾ Tabs ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಲು ಬಟನ್"
 	},
 	"send_tip": {
 		"message": "ನಮಗೆ ಒಂದು ಸಲಹೆ ಕಳುಹಿಸಿ ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "ಬಳಕೆದಾರರ ಇಷ್ಟದ ಲಿಂಕ್‌ಗಳು"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs ಯಶಸ್ವಿಯಾಗಿ ರಫ್ತುಗೊಂಡಿವೆ",
+		"description": "[toast] Tabs ರಫ್ತುಗೊಂಡಾಗ ಯಶಸ್ಸಿನ ಸಂದೇಶ"
+	},
 	"tabs_saved": {
 		"message": "Tabs ಉಳಿಸಲಾಗಿದೆ.",
 		"description": "[ಟೋಸ್ಟ್] Tabs ಯಶಸ್ವಿಯಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "ತರಂಗಾಕಾರ ಅಡಿ ರೇಖೆ",
 		"description": "Tab ಪಠ್ಯದ ಕೆಳಗೆ ತರಂಗಾಕಾರ ಅಡಿ ರೇಖೆಯನ್ನು ಅನ್ವಯಿಸಲು ಅಲಂಕಾರ ಶೈಲಿ ಆಯ್ಕೆ"
+	},
+	"unselect_all": {
+		"message": "ಎಲ್ಲಾ ಆಯ್ಕೆಯನ್ನು ರದ್ದುಮಾಡಿ",
+		"description": "[modal] ರಫ್ತು ಮಾದರಿಯಲ್ಲಿ ಎಲ್ಲಾ Tabs ಗಳ ಆಯ್ಕೆಯನ್ನು ರದ್ದುಮಾಡಲು ಬಟನ್"
 	},
 	"update_available": {
 		"message": "ಅಪ್‌ಡೇಟ್ ಲಭ್ಯವಿದೆ",

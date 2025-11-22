@@ -403,6 +403,10 @@
 		"message": "فشل في إيجاد Tab الإعداد",
 		"description": "[error] لم يتمكن الامتداد من إيجاد المكان المناسب لوضع الـ Tabs المفضلة"
 	},
+	"error_no_tabs_selected": {
+		"message": "لم يتم تحديد أي Tab للتصدير",
+		"description": "[toast] خطأ عند محاولة المستخدم التصدير دون تحديد أي Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "ليس لديك أي علامات Tab غير مثبتة!",
 		"description": "[error] حاول المستخدم إزالة علامات Tab غير المثبتة ولكنه لا يملك أي علامات Tab غير مثبتة"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "تصدير",
 		"description": "[popup] زر التصدير"
+	},
+	"export_tabs": {
+		"message": "تصدير Tabs",
+		"description": "[modal] عنوان لنموذج تصدير Tabs"
 	},
 	"export_title": {
 		"message": "تصدير كل الـ Tabs",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "لم يتم مطابقة أي إجراء",
 		"description": "[error] في Salesforce، الإجراء المطلوب لم يتطابق مع أي إجراء متاح"
+	},
+	"no_tabs_to_export": {
+		"message": "لا توجد Tabs لتصديرها",
+		"description": "[toast] خطأ عندما لا تكون هناك أي Tabs لتصديرها"
 	},
 	"nss_invalid_url": {
 		"message": "تم الكشف عن عنوان URL غير صالح.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "احفظ كـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"select_all": {
+		"message": "تحديد الكل",
+		"description": "[modal] زر لتحديد جميع Tabs في نموذج التصدير"
 	},
 	"send_tip": {
 		"message": "أرسل لنا إكرامية ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "الروابط المفضلة للمستخدم"
 	},
+	"tabs_exported_successfully": {
+		"message": "تم تصدير Tabs بنجاح",
+		"description": "[toast] رسالة نجاح عند تصدير Tabs"
+	},
 	"tabs_saved": {
 		"message": "تم حفظ الـ Tabs",
 		"description": "[toast] تم حفظ الـ Tabs بنجاح"
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "تسطير متموج",
 		"description": "خيار نمط الزخرفة لتطبيق تسطير متموج على نص Tab"
+	},
+	"unselect_all": {
+		"message": "إلغاء تحديد الكل",
+		"description": "[modal] زر لإلغاء تحديد جميع Tabs في نموذج التصدير"
 	},
 	"update_available": {
 		"message": "تحديث متاح",

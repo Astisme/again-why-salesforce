@@ -403,6 +403,10 @@
 		"message": "Nu s-a putut găsi fila Configurare (Setup).",
 		"description": "[eroare] Extensia nu a putut găsi unde să plaseze Tabs favorite."
 	},
+	"error_no_tabs_selected": {
+		"message": "Nicio Tab Selectată pentru export",
+		"description": "[toast] eroare atunci când utilizatorul încearcă să exporte fără Tabs selectate"
+	},
 	"error_no_unpinned": {
 		"message": "Nu ai Tab-uri nefixate!",
 		"description": "[eroare] utilizatorul a încercat să elimine Tab-urile nefixate, dar nu are niciun Tab nefixat"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Exportați",
 		"description": "[popup] buton de export"
+	},
+	"export_tabs": {
+		"message": "Exportă Tabs",
+		"description": "[modal] titlu pentru modalul de export Tabs"
 	},
 	"export_title": {
 		"message": "Exportați toate Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Nu s-a potrivit cu nicio acțiune",
 		"description": "[eroare] în Salesforce când comutatorul nu poate potrivi acțiunea solicitată"
+	},
+	"no_tabs_to_export": {
+		"message": "Nu Există Tabs de exportat",
+		"description": "[toast] eroare atunci când nu există Tabs de exportat"
 	},
 	"nss_invalid_url": {
 		"message": "Adresă URL nevalidă detectată.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Salvați ca Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"select_all": {
+		"message": "Selectează Tot",
+		"description": "[modal] buton pentru a selecta toate Tabs în modalul de export"
 	},
 	"send_tip": {
 		"message": "Trimite-ne un pont ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "linkurile favorite ale utilizatorului"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Exportate cu Succes",
+		"description": "[toast] mesaj de succes atunci când Tabs sunt exportate"
+	},
 	"tabs_saved": {
 		"message": "Tabs salvate.",
 		"description": "[toast] Tabs au fost stocate cu succes."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Subliniat Ondulat",
 		"description": "Opțiune de stil de decorare pentru aplicarea unei sublinieri ondulate la textul Tab"
+	},
+	"unselect_all": {
+		"message": "Deselectează Tot",
+		"description": "[modal] buton pentru a deselecta toate Tabs în modalul de export"
 	},
 	"update_available": {
 		"message": "Actualizare disponibilă",

@@ -403,6 +403,10 @@
 		"message": "Imeshindwa kupata Tab ya Usanidi (Setup).",
 		"description": "[hitilafu] Kiendelezi hakikuweza kupata mahali pa kuweka Tabs pendwa."
 	},
+	"error_no_tabs_selected": {
+		"message": "Hakuna Tab Zilizochaguliwa kwa kuhamisha",
+		"description": "[toast] hitilafu wakati mtumiaji anajaribu kuhamisha bila kuchagua Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Huna Tab-s zisizobandikwa!",
 		"description": "[hitilafu] mtumiaji alijaribu kuondoa Tab-s zisizobandikwa lakini hana Tab-s zisizobandikwa"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Hamisha",
 		"description": "[ibukizi] kitufe cha kuhamisha"
+	},
+	"export_tabs": {
+		"message": "Hamisha Tabs",
+		"description": "[modal] kichwa cha modal ya kuhamisha Tabs"
 	},
 	"export_title": {
 		"message": "Hamisha Tabs zote",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Haikulingana na kitendo chochote",
 		"description": "[hitilafu] katika Salesforce wakati swichi haiwezi kulinganisha kitendo kilichoombwa"
+	},
+	"no_tabs_to_export": {
+		"message": "Hakuna Tabs za kuhamisha",
+		"description": "[toast] hitilafu wakati hakuna Tabs za kuhamisha"
 	},
 	"nss_invalid_url": {
 		"message": "URL batili imegunduliwa.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Hifadhi kama Tab",
 		"description": "[alt] maandishi mbadala wakati picha hazifanyi kazi"
+	},
+	"select_all": {
+		"message": "Chagua Zote",
+		"description": "[modal] kitufe cha kuchagua Tabs zote kwenye modal ya kuhamisha"
 	},
 	"send_tip": {
 		"message": "Tutumie dokezo ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "viungo pendwa vya mtumiaji"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Zimehamishwa Kwa Mafanikio",
+		"description": "[toast] ujumbe wa mafanikio wakati Tabs zimehamishwa"
+	},
 	"tabs_saved": {
 		"message": "Tabs zimehifadhiwa.",
 		"description": "[toast] Tabs zimehifadhiwa kwa mafanikio."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Pigia mstari wa mawimbi",
 		"description": "Chaguo la mtindo wa mapambo kwa kutumia mstari wa mawimbi kwenye maandishi ya Tab"
+	},
+	"unselect_all": {
+		"message": "Ondoa Uchaguzi wa Zote",
+		"description": "[modal] kitufe cha kuondoa uchaguzi wa Tabs zote kwenye modal ya kuhamisha"
 	},
 	"update_available": {
 		"message": "Masasisho yanapatikana",

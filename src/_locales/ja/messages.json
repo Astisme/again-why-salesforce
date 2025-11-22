@@ -403,6 +403,10 @@
 		"message": "Setup Tab が見つかりませんでした。",
 		"description": "[error] お気に入りの Tabs を配置する場所が見つかりませんでした"
 	},
+	"error_no_tabs_selected": {
+		"message": "エクスポートするTabが選択されていません",
+		"description": "[toast] ユーザーがTabを選択せずにエクスポートしようとしたときのエラー"
+	},
 	"error_no_unpinned": {
 		"message": "ピン留めされていないTabはありません！",
 		"description": "[エラー] ユーザーがピン留めされていないTabを削除しようとしましたが、ピン留めされていないTabがありません"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "エクスポートする",
 		"description": "[popup] エクスポートボタン"
+	},
+	"export_tabs": {
+		"message": "Tabsをエクスポート",
+		"description": "[modal] Tabsのエクスポートモーダルのタイトル"
 	},
 	"export_title": {
 		"message": "すべての Tabs をエクスポートする",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "一致するアクションが見つかりませんでした",
 		"description": "[error] リクエストされたアクションが利用可能なものと一致しません"
+	},
+	"no_tabs_to_export": {
+		"message": "エクスポートするTabsがありません",
+		"description": "[toast] エクスポートするTabsがないときのエラー"
 	},
 	"nss_invalid_url": {
 		"message": "無効なURLが検出されました。",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Tab として保存する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"select_all": {
+		"message": "すべて選択",
+		"description": "[modal] エクスポートモーダルですべてのTabを選択するボタン"
 	},
 	"send_tip": {
 		"message": "チップを送る ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "お気に入りのリンク"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabsが正常にエクスポートされました",
+		"description": "[toast] Tabsがエクスポートされたときの成功メッセージ"
+	},
 	"tabs_saved": {
 		"message": "Tabs が保存されました。",
 		"description": "[toast] Tabs が正常に保存されました。"
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "波線下線",
 		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
+	},
+	"unselect_all": {
+		"message": "すべての選択を解除",
+		"description": "[modal] エクスポートモーダルですべてのTabの選択を解除するボタン"
 	},
 	"update_available": {
 		"message": "アップデート利用可能",

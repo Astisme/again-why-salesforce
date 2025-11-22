@@ -403,6 +403,10 @@
 		"message": "Setup Tab hittades inte.",
 		"description": "[error] tillägget kunde inte hitta var de sparade Tabbarna skulle placeras"
 	},
+	"error_no_tabs_selected": {
+		"message": "Inga Tabs Valda för export",
+		"description": "[toast] fel när användaren försöker exportera utan valda Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Du har inga ofästa Tab-ar!",
 		"description": "[fel] användaren försökte ta bort de ofästa Tab-arna men har inga ofästa Tab-ar"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Exportera",
 		"description": "[popup] exportknapp"
+	},
+	"export_tabs": {
+		"message": "Exportera Tabs",
+		"description": "[modal] rubrik för modalen för export av Tabs"
 	},
 	"export_title": {
 		"message": "Exportera alla Tabbar",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Ingen åtgärd matchade",
 		"description": "[error] när switch-satsen inte kan matcha den begärda åtgärden"
+	},
+	"no_tabs_to_export": {
+		"message": "Inga Tabs att exportera",
+		"description": "[toast] fel när det inte finns några Tabs att exportera"
 	},
 	"nss_invalid_url": {
 		"message": "Ogiltig URL upptäckt.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Spara som Tab",
 		"description": "[alt] alternativ text när bilder inte visas"
+	},
+	"select_all": {
+		"message": "Välj Alla",
+		"description": "[modal] knapp för att välja alla Tabs i exportmodalen"
 	},
 	"send_tip": {
 		"message": "Skicka oss ett tips ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabbar",
 		"description": "användarens favoritlänkar"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Exporterade Framgångsrikt",
+		"description": "[toast] framgångsmeddelande när Tabs exporteras"
+	},
 	"tabs_saved": {
 		"message": "Tabbar sparade.",
 		"description": "[toast] Tabbar sparades framgångsrikt."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Understruken Vågig",
 		"description": "Dekorationsstilalternativ för att applicera en vågig understrykning på Tab-text"
+	},
+	"unselect_all": {
+		"message": "Avmarkera Alla",
+		"description": "[modal] knapp för att avmarkera alla Tabs i exportmodalen"
 	},
 	"update_available": {
 		"message": "Uppdatering tillgänglig",

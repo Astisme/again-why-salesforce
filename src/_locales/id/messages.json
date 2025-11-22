@@ -403,6 +403,10 @@
 		"message": "Setup Tab tidak ditemukan.",
 		"description": "[error] Ekstensi tidak dapat menemukan tempat untuk menyisipkan Tabs favorit."
 	},
+	"error_no_tabs_selected": {
+		"message": "Tidak Ada Tab yang Dipilih untuk ekspor",
+		"description": "[toast] error ketika pengguna mencoba mengekspor tanpa memilih Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Anda tidak memiliki Tab yang tidak disematkan!",
 		"description": "[kesalahan] pengguna mencoba menghapus Tab yang tidak disematkan tetapi mereka tidak memiliki Tab yang tidak disematkan"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Ekspor",
 		"description": "[popup] Tombol ekspor"
+	},
+	"export_tabs": {
+		"message": "Ekspor Tabs",
+		"description": "[modal] judul untuk modal ekspor Tabs"
 	},
 	"export_title": {
 		"message": "Ekspor semua Tabs",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "Tidak ada aksi yang cocok",
 		"description": "[error] Di Salesforce, aksi yang diminta tidak cocok dengan aksi yang tersedia."
+	},
+	"no_tabs_to_export": {
+		"message": "Tidak Ada Tabs untuk diekspor",
+		"description": "[toast] error ketika tidak ada Tabs untuk diekspor"
 	},
 	"nss_invalid_url": {
 		"message": "URL tidak valid terdeteksi.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"select_all": {
+		"message": "Pilih Semua",
+		"description": "[modal] tombol untuk memilih semua Tabs di modal ekspor"
 	},
 	"send_tip": {
 		"message": "Kirimkan kami tip ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "Link favorit pengguna."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Berhasil Diekspor",
+		"description": "[toast] pesan sukses ketika Tabs diekspor"
+	},
 	"tabs_saved": {
 		"message": "Tabs tersimpan.",
 		"description": "[toast] Tabs berhasil disimpan."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Garis bawah bergelombang",
 		"description": "Opsi gaya dekorasi untuk menerapkan garis bawah bergelombang pada teks Tab"
+	},
+	"unselect_all": {
+		"message": "Batalkan Pilihan Semua",
+		"description": "[modal] tombol untuk membatalkan pilihan semua Tabs di modal ekspor"
 	},
 	"update_available": {
 		"message": "Pembaruan tersedia",

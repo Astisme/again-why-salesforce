@@ -403,6 +403,10 @@
 		"message": "የማዋቀሪያ (Setup) ትርን ማግኘት አልተሳካም።",
 		"description": "[ስህተት] ቅጥያው ተመራጭ Tabs የት እንደሚያስቀምጥ ማግኘት አልቻለም።"
 	},
+	"error_no_tabs_selected": {
+		"message": "ምንም Tab ለውጪ መላኪያ አልተመረጠም",
+		"description": "[ቶስት] ተጠቃሚ ምንም Tab ሳይመርጥ ወደ ውጭ ለመላክ ሲሞክር የሚመጣ ስህተት"
+	},
 	"error_no_unpinned": {
 		"message": "ምንም ያልተሰኩ Tabዎች የሉዎትም!",
 		"description": "[error] ተጠቃሚው ያልተሰኩትን Tabዎች ለማስወገድ ሞክሯል ነገር ግን ምንም ያልተሰኩ Tabዎች የሉትም"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "ወደ ውጪ ላክ",
 		"description": "[ብቅ_ባይ] ወደ ውጪ መላኪያ አዝራር"
+	},
+	"export_tabs": {
+		"message": "Tabs ወደ ውጪ ላክ",
+		"description": "[ሞዳል] ለ Tabs ወደ ውጪ መላኪያ ሞዳል ርዕስ"
 	},
 	"export_title": {
 		"message": "ሁሉንም Tabs ወደ ውጪ ላክ",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "ከማንኛውም ድርጊት ጋር አልተዛመደም",
 		"description": "[ስህተት] በ Salesforce ውስጥ መቀየሪያው የተጠየቀውን ድርጊት ማዛመድ በማይችልበት ጊዜ"
+	},
+	"no_tabs_to_export": {
+		"message": "ወደ ውጪ የሚላክ ምንም Tab የለም",
+		"description": "[ቶስት] የሚላክ ምንም Tab በሌለበት ጊዜ የሚመጣ ስህተት"
 	},
 	"nss_invalid_url": {
 		"message": "ልክ ያልሆነ ዩአርኤል ተገኝቷል።",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "እንደ Tab አስቀምጥ",
 		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
+	},
+	"select_all": {
+		"message": "ሁሉንም ምረጥ",
+		"description": "[ሞዳል] በውጪ መላኪያ ሞዳል ውስጥ ሁሉንም Tabs ለመምረጥ የሚጠቅም አዝራር"
 	},
 	"send_tip": {
 		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "የተጠቃሚው ተመራጭ ሊንኮች"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs በተሳካ ሁኔታ ወደ ውጪ ተልከዋል",
+		"description": "[ቶስት] Tabs ወደ ውጪ ሲላኩ የሚመጣ የስኬት መልዕክት"
+	},
 	"tabs_saved": {
 		"message": "Tabs ተቀምጠዋል።",
 		"description": "[ቶስት] Tabs በተሳካ ሁኔታ ተከማችተዋል።"
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "በመስመር ሞጎጮ",
 		"description": "በTab ጽሑፍ ላይ በመስመር ሞጎጮ መስመር የማቆሚያ የቅርጽ አማራጭ"
+	},
+	"unselect_all": {
+		"message": "ምርጫን አንሳ",
+		"description": "[ሞዳል] በውጪ መላኪያ ሞዳል ውስጥ ከሁሉም Tabs ላይ ምርጫን ለማንሳት የሚጠቅም አዝራር"
 	},
 	"update_available": {
 		"message": "ማሻሻያ ይገኛል",
