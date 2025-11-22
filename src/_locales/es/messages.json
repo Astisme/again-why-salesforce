@@ -403,6 +403,10 @@
 		"message": "No se encontró la pestaña de Configuración.",
 		"description": "[error] La extensión no pudo encontrar dónde colocar los Tabs favoritos."
 	},
+	"error_no_tabs_selected": {
+		"message": "No hay Tabs Seleccionadas para exportar",
+		"description": "[toast] error cuando el usuario intenta exportar sin haber seleccionado ninguna Tab"
+	},
 	"error_no_unpinned": {
 		"message": "¡No tiene ninguna Tab no anclada!",
 		"description": "[error] el usuario intentó eliminar las Tab no ancladas pero no tiene ninguna Tab no anclada"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Exportar",
 		"description": "[popup] Botón de exportación"
+	},
+	"export_tabs": {
+		"message": "Exportar Tabs",
+		"description": "[modal] título para el modal de exportación de Tabs"
 	},
 	"export_title": {
 		"message": "Exportar todos los Tabs",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "No se encontró ninguna acción coincidente",
 		"description": "[error] En Salesforce, la acción solicitada no coincide con ninguna acción disponible."
+	},
+	"no_tabs_to_export": {
+		"message": "No hay Tabs para exportar",
+		"description": "[toast] error cuando no hay Tabs para exportar"
 	},
 	"nss_invalid_url": {
 		"message": "URL inválida detectada.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Guardar como Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
+	},
+	"select_all": {
+		"message": "Seleccionar Todo",
+		"description": "[modal] botón para seleccionar todos los Tabs en el modal de exportación"
 	},
 	"send_tip": {
 		"message": "Envíanos una propina ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "Los enlaces favoritos del usuario."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Exportadas Correctamente",
+		"description": "[toast] mensaje de éxito cuando las Tabs se exportan"
+	},
 	"tabs_saved": {
 		"message": "Tabs guardados.",
 		"description": "[toast] Los Tabs se han guardado correctamente."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Subrayado ondulado",
 		"description": "Opción de estilo de decoración para aplicar un subrayado ondulado al texto de Tab"
+	},
+	"unselect_all": {
+		"message": "Deseleccionar Todo",
+		"description": "[modal] botón para deseleccionar todos los Tabs en el modal de exportación"
 	},
 	"update_available": {
 		"message": "Actualización disponible",

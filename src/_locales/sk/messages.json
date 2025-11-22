@@ -403,6 +403,10 @@
 		"message": "Setup Tab sa nenašiel.",
 		"description": "[error] Rozšírenie nenašlo, kam umiestniť uložené Tab-y"
 	},
+	"error_no_tabs_selected": {
+		"message": "Pre export Nie Sú Vybrané Žiadne Tabs",
+		"description": "[toast] chyba, keď sa používateľ pokúsi exportovať bez vybraných Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Nemáte žiadne nepripnuté Tab-y!",
 		"description": "[chyba] používateľ sa pokúsil odstrániť nepripnuté Tab-y, ale nemá žiadne nepripnuté Tab-y"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Exportovať",
 		"description": "[popup] exportné tlačidlo"
+	},
+	"export_tabs": {
+		"message": "Exportovať Tabs",
+		"description": "[modal] názov pre modálne okno exportu Tabs"
 	},
 	"export_title": {
 		"message": "Exportovať všetky Tab-y",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Nenašiel sa žiadny zodpovedajúci príkaz",
 		"description": "[error] keď príkaz switch nedokáže zodpovedať požadovanú akciu"
+	},
+	"no_tabs_to_export": {
+		"message": "Žiadne Tabs Na Export",
+		"description": "[toast] chyba, keď nie sú žiadne Tabs na export"
 	},
 	"nss_invalid_url": {
 		"message": "Zistená neplatná URL adresa.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Uložiť ako Tab",
 		"description": "[alt] náhradný text, keď obrázky nie sú zobrazené"
+	},
+	"select_all": {
+		"message": "Vybrať Všetko",
+		"description": "[modal] tlačidlo na výber všetkých Tabs v modálnom okne exportu"
 	},
 	"send_tip": {
 		"message": "Pošlite nám tip ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tab-y",
 		"description": "obľúbené odkazy používateľa"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Exportované Úspešne",
+		"description": "[toast] správa o úspechu pri exportovaní Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tab-y boli uložené.",
 		"description": "[toast] Tab-y boli úspešne uložené."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Vlnité podčiarknutie",
 		"description": "Možnosť dekoračného štýlu na aplikáciu vlnitého podčiarknutia na text Tabu"
+	},
+	"unselect_all": {
+		"message": "Zrušiť Výber Všetkého",
+		"description": "[modal] tlačidlo na zrušenie výberu všetkých Tabs v modálnom okne exportu"
 	},
 	"update_available": {
 		"message": "Aktualizácia k dispozícii",

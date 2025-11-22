@@ -403,6 +403,10 @@
 		"message": "설정 탭을 찾지 못했습니다.",
 		"description": "[오류] 확장 프로그램이 즐겨찾기 Tabs를 넣을 위치를 찾지 못했습니다."
 	},
+	"error_no_tabs_selected": {
+		"message": "내보낼 Tab이 선택되지 않았습니다",
+		"description": "[toast] 사용자가 Tab을 선택하지 않고 내보내기를 시도할 때의 오류"
+	},
 	"error_no_unpinned": {
 		"message": "고정 해제된 Tab이 없습니다!",
 		"description": "[오류] 사용자가 고정 해제된 Tab을 제거하려고 했지만 고정 해제된 Tab이 없습니다"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "내보내기",
 		"description": "[팝업] 내보내기 버튼"
+	},
+	"export_tabs": {
+		"message": "Tabs 내보내기",
+		"description": "[modal] Tabs 내보내기 모달 제목"
 	},
 	"export_title": {
 		"message": "모든 Tabs 내보내기",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "어떤 작업과도 일치하지 않았습니다.",
 		"description": "[오류] Salesforce에서 스위치가 요청된 작업과 일치할 수 없을 때"
+	},
+	"no_tabs_to_export": {
+		"message": "내보낼 Tabs이 없습니다",
+		"description": "[toast] 내보낼 Tabs이 없을 때의 오류"
 	},
 	"nss_invalid_url": {
 		"message": "유효하지 않은 URL이 감지되었습니다.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Tab으로 저장",
 		"description": "[alt] 그림이 작동하지 않을 때의 대체 텍스트"
+	},
+	"select_all": {
+		"message": "모두 선택",
+		"description": "[modal] 내보내기 모달에서 모든 Tab을 선택하는 버튼"
 	},
 	"send_tip": {
 		"message": "팁을 보내주세요 ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "사용자의 즐겨찾는 링크"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs이 성공적으로 내보내졌습니다",
+		"description": "[toast] Tabs이 내보내졌을 때의 성공 메시지"
+	},
 	"tabs_saved": {
 		"message": "Tabs가 저장되었습니다.",
 		"description": "[토스트] Tabs가 성공적으로 저장되었습니다."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "물결 밑줄",
 		"description": "Tab 텍스트에 물결 밑줄 적용 스타일 옵션"
+	},
+	"unselect_all": {
+		"message": "모두 선택 취소",
+		"description": "[modal] 내보내기 모달에서 모든 Tab의 선택을 취소하는 버튼"
 	},
 	"update_available": {
 		"message": "업데이트 사용 가능",

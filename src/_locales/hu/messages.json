@@ -403,6 +403,10 @@
 		"message": "A Setup Tab nem található.",
 		"description": "[error] a kiterjesztés nem tudta meghatározni, hova helyezze a kedvenc Tabokat"
 	},
+	"error_no_tabs_selected": {
+		"message": "Nincs Tab Kiválasztva az exportáláshoz",
+		"description": "[toast] hiba, amikor a felhasználó megpróbál exportálni kiválasztott Tab nélkül"
+	},
 	"error_no_unpinned": {
 		"message": "Nincsenek nem rögzített Tabjaid!",
 		"description": "[hiba] a felhasználó megpróbálta eltávolítani a nem rögzített Tabokat, de nincsenek nem rögzített Tabjai"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Exportálás",
 		"description": "[popup] export gomb"
+	},
+	"export_tabs": {
+		"message": "Tabs Exportálása",
+		"description": "[modal] cím a Tabs exportáló modálhoz"
 	},
 	"export_title": {
 		"message": "Összes Tab exportálása",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Nem egyezik semmilyen művelet",
 		"description": "[error] amikor a kapcsoló nem tudja egyeztetni a kért műveletet"
+	},
+	"no_tabs_to_export": {
+		"message": "Nincs Exportálható Tab",
+		"description": "[toast] hiba, ha nincs exportálható Tab"
 	},
 	"nss_invalid_url": {
 		"message": "Érvénytelen URL-t észleltünk.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Mentés Tabként",
 		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
+	},
+	"select_all": {
+		"message": "Összes Kijelölése",
+		"description": "[modal] gomb az összes Tab kiválasztására az exportáló modálban"
 	},
 	"send_tip": {
 		"message": "Küldj nekünk egy tippet ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabok",
 		"description": "a felhasználó kedvenc linkjei"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Sikeresen Exportálva",
+		"description": "[toast] sikeres üzenet a Tabs-ok exportálásakor"
+	},
 	"tabs_saved": {
 		"message": "A Tabok elmentve.",
 		"description": "[toast] A Tabok sikeresen el lettek mentve."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Hullámos Aláhúzás",
 		"description": "Dekorációs stílus opció hullámos aláhúzás alkalmazásához a Tab szövegen"
+	},
+	"unselect_all": {
+		"message": "Összes Kijelölésének Megszüntetése",
+		"description": "[modal] gomb az összes Tab kijelölésének megszüntetésére az exportáló modálban"
 	},
 	"update_available": {
 		"message": "Frissítés elérhető",

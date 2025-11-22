@@ -403,6 +403,10 @@
 		"message": "Seadistuse (Setup) vahekaarti ei leitud.",
 		"description": "[viga] Laiendus ei leidnud kohta, kuhu lemmik Tabs paigutada."
 	},
+	"error_no_tabs_selected": {
+		"message": "Ekspordiks ei ole Valitud Ühtegi Tab-i",
+		"description": "[toast] viga, kui kasutaja proovib eksportida ilma valitud Tab-ideta"
+	},
 	"error_no_unpinned": {
 		"message": "Teil ei ole ühtegi kinnitamata Tabi!",
 		"description": "[error] kasutaja proovis eemaldada kinnitamata Tabid, kuid tal ei ole ühtegi kinnitamata Tabi"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Ekspordi",
 		"description": "[hüpikaken] eksportimisnupp"
+	},
+	"export_tabs": {
+		"message": "Ekspordi Tabs-id",
+		"description": "[modal] Tabs-ide ekspordi modaali pealkiri"
 	},
 	"export_title": {
 		"message": "Ekspordi kõik Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Ei vastanud ühelegi toimingule",
 		"description": "[viga] Salesforce'is, kui lüliti ei suuda sobitada nõutud toimingut"
+	},
+	"no_tabs_to_export": {
+		"message": "Eksporditavaid Tabs-e Pole",
+		"description": "[toast] viga, kui eksporditavaid Tabs-e pole"
 	},
 	"nss_invalid_url": {
 		"message": "Tuvastati kehtetu URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Salvesta kui Tab",
 		"description": "[alt] alternatiivtekst, kui pildid ei tööta"
+	},
+	"select_all": {
+		"message": "Vali Kõik",
+		"description": "[modal] nupp kõigi Tabs-ide valimiseks ekspordi modaalis"
 	},
 	"send_tip": {
 		"message": "Saada meile jootraha ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "kasutaja lemmiklingid"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs-id Eksporditud Edukalt",
+		"description": "[toast] eduteade, kui Tabs-id on eksporditud"
+	},
 	"tabs_saved": {
 		"message": "Tabs salvestatud.",
 		"description": "[teavitus] Tabs salvestati edukalt."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Laineline alljoonitus",
 		"description": "Kujundusstiili valik lainelise joone lisamiseks Tab'i teksti alla"
+	},
+	"unselect_all": {
+		"message": "Tühista Valik Kõigilt",
+		"description": "[modal] nupp kõigi Tabs-ide valiku tühistamiseks ekspordi modaalis"
 	},
 	"update_available": {
 		"message": "Värskendus saadaval",

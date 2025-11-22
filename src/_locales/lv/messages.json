@@ -403,6 +403,10 @@
 		"message": "Neizdevās atrast Iestatīšanas (Setup) cilni.",
 		"description": "[kļūda] Paplašinājums nevarēja atrast, kur ievietot iecienītākos Tabs."
 	},
+	"error_no_tabs_selected": {
+		"message": "Eksportam Nav Izvēlēta Neviena Tab",
+		"description": "[toast] kļūda, kad lietotājs mēģina eksportēt, neizvēloties nevienu Tab"
+	},
 	"error_no_unpinned": {
 		"message": "Jums nav nevienas nepiespraustas Tab!",
 		"description": "[kļūda] lietotājs mēģināja noņemt nepiespraustās Tab, bet viņam nav nevienas nepiespraustas Tab"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Eksportēt",
 		"description": "[uznirstošais_logs] eksportēšanas poga"
+	},
+	"export_tabs": {
+		"message": "Eksportēt Tabs",
+		"description": "[modal] Tabs eksportēšanas modālā loga virsraksts"
 	},
 	"export_title": {
 		"message": "Eksportēt visas Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Neatbilda nevienai darbībai",
 		"description": "[kļūda] Salesforce, kad pārslēgs nevar saskaņot pieprasīto darbību"
+	},
+	"no_tabs_to_export": {
+		"message": "Nav Eksportējamu Tab-u",
+		"description": "[toast] kļūda, ja nav neviena Tab, ko eksportēt"
 	},
 	"nss_invalid_url": {
 		"message": "Atrasts nederīgs URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Saglabāt kā Tab",
 		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
+	},
+	"select_all": {
+		"message": "Izvēlēties Visu",
+		"description": "[modal] poga visu Tab izvēlēšanai eksportēšanas modālajā logā"
 	},
 	"send_tip": {
 		"message": "Sūtiet mums dzeramnaudu ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "lietotāja iecienītākās saites"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Eksportētas Veiksmīgi",
+		"description": "[toast] veiksmes ziņojums, kad Tabs ir eksportētas"
+	},
 	"tabs_saved": {
 		"message": "Tabs saglabāti.",
 		"description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Viļņots pasvītrojums",
 		"description": "Dekorācijas stila opcija viļņota pasvītrojuma pievienošanai Tab tekstam"
+	},
+	"unselect_all": {
+		"message": "Atcelt Visu Izvēli",
+		"description": "[modal] poga visu Tab izvēles atcelšanai eksportēšanas modālajā logā"
 	},
 	"update_available": {
 		"message": "Atjauninājums pieejams",

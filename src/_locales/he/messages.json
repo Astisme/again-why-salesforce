@@ -403,6 +403,10 @@
 		"message": "לא נמצא Setup Tab.",
 		"description": "[error] התוסף לא הצליח למצוא היכן למקם את Tab המועדפים"
 	},
+	"error_no_tabs_selected": {
+		"message": "לא נבחרו Tabs לייצוא",
+		"description": "[toast] שגיאה כאשר המשתמש מנסה לייצא ללא Tabs נבחרים"
+	},
 	"error_no_unpinned": {
 		"message": "אין לך לשוניות לא מוצמדות!",
 		"description": "[שגיאה] המשתמש ניסה להסיר את הלשוניות הלא מוצמדות אך אין לו לשוניות לא מוצמדות"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "ייצא",
 		"description": "[popup] כפתור ייצוא"
+	},
+	"export_tabs": {
+		"message": "ייצוא Tabs",
+		"description": "[modal] כותרת עבור מודל ייצוא Tabs"
 	},
 	"export_title": {
 		"message": "ייצא את כל ה-Tab",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "לא נמצאה פעולה תואמת",
 		"description": "[error] כאשר אין התאמה לפעולה המבוקשת"
+	},
+	"no_tabs_to_export": {
+		"message": "אין Tabs לייצוא",
+		"description": "[toast] שגיאה כאשר אין Tabs לייצוא"
 	},
 	"nss_invalid_url": {
 		"message": "אותרה כתובת URL לא חוקית.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "שמור כ-Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"
+	},
+	"select_all": {
+		"message": "בחר הכל",
+		"description": "[modal] כפתור לבחירת כל ה-Tabs במודל הייצוא"
 	},
 	"send_tip": {
 		"message": "שלח לנו טיפ ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "קישורי המועדפים של המשתמש"
 	},
+	"tabs_exported_successfully": {
+		"message": "ה-Tabs יוצאו בהצלחה",
+		"description": "[toast] הודעת הצלחה כאשר ה-Tabs מיוצאים"
+	},
 	"tabs_saved": {
 		"message": "Tabs נשמרו.",
 		"description": "[toast] Tabs נשמרו בהצלחה."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "קו תחתון גלי",
 		"description": "אפשרות סגנון עיטור להחלת קו תחתון גלי על טקסט Tab"
+	},
+	"unselect_all": {
+		"message": "בטל בחירת הכל",
+		"description": "[modal] כפתור לביטול בחירת כל ה-Tabs במודל הייצוא"
 	},
 	"update_available": {
 		"message": "עדכון זמין",

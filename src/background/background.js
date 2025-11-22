@@ -26,6 +26,8 @@ import {
 	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
+	WHAT_EXPORT,
+	WHAT_SHOW_EXPORT_MODAL,
 	WHY_KEY,
 } from "/constants.js";
 import Tab from "/tab.js";
@@ -136,10 +138,19 @@ async function bg_getStyleSettings(
 	const settings = await bg_getSettings(
 		undefined,
 		key,
-		callback,
 	);
-	if (Object.values(settings).every((s) => s?.[1] == null)) {
+	if (
+		Object.values(settings).every(
+			(sett) =>
+				sett == null || sett.every(
+					(s) => s?.value == null,
+				),
+		)
+	) {
 		return null;
+	}
+	if (callback != null) {
+		return callback(settings);
 	}
 	return settings;
 }
@@ -387,10 +398,19 @@ function listenToExtensionMessages() {
 			case "theme":
 			case "error":
 			case "warning":
+			case WHAT_SHOW_EXPORT_MODAL:
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
 				break;
-			case "export":
+			case "export-check":
+				if (checkLaunchExport(undefined, true)) {
+					sendResponse(null);
+					bg_notify({
+						what: WHAT_SHOW_EXPORT_MODAL,
+					});
+				}
+				break;
+			case WHAT_EXPORT:
 				checkLaunchExport(request.tabs);
 				sendResponse(null);
 				break;
@@ -430,22 +450,22 @@ function listenToExtensionCommands() {
 		if (!browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)) { // we're not in Salesforce Setup
 			return;
 		}
-		switch (command) {
-			case CMD_OPEN_SETTINGS:
-				openSettingsPage();
-				return;
-			case CMD_EXPORT_ALL:
-				checkLaunchExport();
-				return;
-		}
 		const message = {
 			what: command,
 			url: Tab.minifyURL(browserTabUrl),
 			org: Tab.extractOrgName(browserTabUrl),
 		};
 		switch (command) {
+			case CMD_OPEN_SETTINGS:
+				openSettingsPage();
+				return;
 			case CMD_IMPORT:
 				message.what = "add";
+				break;
+			case CMD_EXPORT_ALL:
+				if (!checkLaunchExport(undefined, true)) {
+					return;
+				}
 				break;
 			case CMD_SAVE_AS_TAB:
 			case CMD_REMOVE_TAB:

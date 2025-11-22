@@ -403,6 +403,10 @@
 		"message": "No s'ha trobat el Setup Tab.",
 		"description": "[error] l'extensió no ha pogut trobar on posar els Tabs favorits"
 	},
+	"error_no_tabs_selected": {
+		"message": "No s'ha seleccionat cap Tab per a l'exportació",
+		"description": "[toast] error quan l'usuari intenta exportar sense cap Tab seleccionada"
+	},
 	"error_no_unpinned": {
 		"message": "No teniu cap Tab no fixada!",
 		"description": "[error] l'usuari va intentar eliminar les Tab no fixades però no en té cap"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Exportar",
 		"description": "[popup] botó d'exportació"
+	},
+	"export_tabs": {
+		"message": "Exportar Tabs",
+		"description": "[modal] títol del modal d'exportació de Tabs"
 	},
 	"export_title": {
 		"message": "Exportar tots els Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "No coincideix cap acció",
 		"description": "[error] quan la sentència switch no pot coincidir amb l'acció sol·licitada"
+	},
+	"no_tabs_to_export": {
+		"message": "No hi ha Tabs per exportar",
+		"description": "[toast] error quan no hi ha Tabs per exportar"
 	},
 	"nss_invalid_url": {
 		"message": "S'ha detectat una URL no vàlida.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Desar com a Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"select_all": {
+		"message": "Seleccionar-ho Tot",
+		"description": "[modal] botó per seleccionar tots els Tabs al modal d'exportació"
 	},
 	"send_tip": {
 		"message": "Envia'ns una propina ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "els enllaços favorits de l'usuari"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Exportats Correctament",
+		"description": "[toast] missatge d'èxit quan s'exporten Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tabs desats.",
 		"description": "[toast] els Tabs s'han desat amb èxit."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Subratllat Ondulat",
 		"description": "Opció d'estil de decoració per aplicar un subratllat ondulat al text de Tab"
+	},
+	"unselect_all": {
+		"message": "Deseleccionar-ho Tot",
+		"description": "[modal] botó per deseleccionar tots els Tabs al modal d'exportació"
 	},
 	"update_available": {
 		"message": "Actualització disponible",

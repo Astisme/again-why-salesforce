@@ -403,6 +403,10 @@
 		"message": "Nepavyko rasti Sąrankos (Setup) skirtuko.",
 		"description": "[klaida] Plėtinys negalėjo rasti, kur įdėti mėgstamiausius Tabs."
 	},
+	"error_no_tabs_selected": {
+		"message": "Nepasirinkta Nė Viena Tab eksportavimui",
+		"description": "[toast] klaida, kai vartotojas bando eksportuoti nepasirinkęs jokių Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Jūs neturite neprisegtų Tab!",
 		"description": "[klaida] vartotojas bandė pašalinti neprisegtas Tab, bet neturi jokių neprisegtų Tab"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Eksportuoti",
 		"description": "[iškylantysis_langas] eksportavimo mygtukas"
+	},
+	"export_tabs": {
+		"message": "Eksportuoti Tabs",
+		"description": "[modal] Tabs eksportavimo modalinio lango pavadinimas"
 	},
 	"export_title": {
 		"message": "Eksportuoti visus Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Neatitiko jokio veiksmo",
 		"description": "[klaida] Salesforce, kai perjungiklis negali suderinti prašomo veiksmo"
+	},
+	"no_tabs_to_export": {
+		"message": "Nėra Tabs, Kurias Reikia Eksportuoti",
+		"description": "[toast] klaida, kai nėra Tabs, kurias galima eksportuoti"
 	},
 	"nss_invalid_url": {
 		"message": "Aptiktas netinkamas URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Išsaugoti kaip Tab",
 		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
+	},
+	"select_all": {
+		"message": "Pasirinkti Viską",
+		"description": "[modal] mygtukas, skirtas pasirinkti visus Tabs eksportavimo modaliniame lange"
 	},
 	"send_tip": {
 		"message": "Atsiųskite mums patarimą ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "vartotojo mėgstamiausios nuorodos"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Sėkmingai Eksportuoti",
+		"description": "[toast] pranešimas apie sėkmę, kai Tabs yra eksportuoti"
+	},
 	"tabs_saved": {
 		"message": "Tabs išsaugoti.",
 		"description": "[pranešimas] Tabs sėkmingai išsaugoti."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Banguotas pabraukimas",
 		"description": "Dekoravimo stiliaus parinktis banguoto pabraukimo taikymui Tab tekstui"
+	},
+	"unselect_all": {
+		"message": "Panaikinti Visų Pasirinkimą",
+		"description": "[modal] mygtukas, skirtas panaikinti visų Tabs pasirinkimą eksportavimo modaliniame lange"
 	},
 	"update_available": {
 		"message": "Atnaujinimas pasiekiamas",

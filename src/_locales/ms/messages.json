@@ -403,6 +403,10 @@
 		"message": "Gagal mencari Tab Persediaan (Setup).",
 		"description": "[ralat] Sambungan tidak dapat mencari tempat untuk meletakkan Tabs kegemaran."
 	},
+	"error_no_tabs_selected": {
+		"message": "Tiada Tab Dipilih untuk eksport",
+		"description": "[toast] ralat apabila pengguna cuba mengeksport tanpa Tab yang dipilih"
+	},
 	"error_no_unpinned": {
 		"message": "Anda tidak mempunyai sebarang Tab yang tidak disematkan!",
 		"description": "[ralat] pengguna cuba mengalih keluar Tab yang tidak disematkan tetapi mereka tidak mempunyai sebarang Tab yang tidak disematkan"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Eksport",
 		"description": "[popup] butang eksport"
+	},
+	"export_tabs": {
+		"message": "Eksport Tabs",
+		"description": "[modal] tajuk untuk modal eksport Tabs"
 	},
 	"export_title": {
 		"message": "Eksport semua Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Tidak sepadan dengan sebarang tindakan",
 		"description": "[ralat] dalam Salesforce apabila suis tidak dapat memadankan tindakan yang diminta"
+	},
+	"no_tabs_to_export": {
+		"message": "Tiada Tabs untuk dieksport",
+		"description": "[toast] ralat apabila tiada Tabs untuk dieksport"
 	},
 	"nss_invalid_url": {
 		"message": "URL tidak sah dikesan.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] teks alternatif apabila gambar tidak berfungsi"
+	},
+	"select_all": {
+		"message": "Pilih Semua",
+		"description": "[modal] butang untuk memilih semua Tabs dalam modal eksport"
 	},
 	"send_tip": {
 		"message": "Hantarkan kami tip ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "pautan kegemaran pengguna"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Berjaya Dieksport",
+		"description": "[toast] mesej kejayaan apabila Tabs dieksport"
+	},
 	"tabs_saved": {
 		"message": "Tabs disimpan.",
 		"description": "[toast] Tabs berjaya disimpan."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Garis bawah bergelombang",
 		"description": "Pilihan gaya hiasan untuk menerapkan garis bawah bergelombang pada teks Tab"
+	},
+	"unselect_all": {
+		"message": "Nyahpilih Semua",
+		"description": "[modal] butang untuk menyahpilih semua Tabs dalam modal eksport"
 	},
 	"update_available": {
 		"message": "Kemas kini tersedia",

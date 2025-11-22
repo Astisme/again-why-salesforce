@@ -403,6 +403,10 @@
 		"message": "Setup Tab не беше намерен.",
 		"description": "[error] разширението не можа да установи къде да постави любимите Tab"
 	},
+	"error_no_tabs_selected": {
+		"message": "Не са избрани Tabs за експортиране",
+		"description": "[toast] грешка, когато потребителят се опита да експортира без избрани Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Нямате незакачените Tabове!",
 		"description": "[error] потребителят се опита да премахне незакачените Tabове, но няма такива"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Експортирай",
 		"description": "[popup] бутон за експортиране"
+	},
+	"export_tabs": {
+		"message": "Експортиране на Tabs",
+		"description": "[modal] заглавие за модала за експортиране на Tabs"
 	},
 	"export_title": {
 		"message": "Експортирай всички Tab",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Няма намерено съвпадение за действие",
 		"description": "[error] когато switch не може да съпостави поисканото действие"
+	},
+	"no_tabs_to_export": {
+		"message": "Няма Tabs за експортиране",
+		"description": "[toast] грешка, когато няма Tabs за експортиране"
 	},
 	"nss_invalid_url": {
 		"message": "Открит е невалиден URL адрес.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Запази като Tab",
 		"description": "[alt] алтернативен текст когато изображенията не се показват"
+	},
+	"select_all": {
+		"message": "Избиране на Всички",
+		"description": "[modal] бутон за избиране на всички Tabs в модала за експортиране"
 	},
 	"send_tip": {
 		"message": "Изпратете ни бакшиш ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tab",
 		"description": "любимите линкове на потребителя"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Експортирани Успешно",
+		"description": "[toast] съобщение за успех при експортиране на Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tab са запазени.",
 		"description": "[toast] Tab са успешно запазени."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Вълнообразно Подчертаване",
 		"description": "Опция за стил на декорация за прилагане на вълнообразно подчертаване върху текст на Tab"
+	},
+	"unselect_all": {
+		"message": "Отменяне на Избора на Всички",
+		"description": "[modal] бутон за отменяне на избора на всички Tabs в модала за експортиране"
 	},
 	"update_available": {
 		"message": "Налична актуализация",

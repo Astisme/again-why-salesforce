@@ -403,6 +403,10 @@
 		"message": "Setup Tab नहीं मिला।",
 		"description": "[error] एक्सटेंशन पसंदीदा Tabs रखने का स्थान नहीं खोज सका।"
 	},
+	"error_no_tabs_selected": {
+		"message": "निर्यात के लिए कोई Tab चयनित नहीं है",
+		"description": "[toast] जब उपयोगकर्ता कोई Tab चुने बिना निर्यात करने का प्रयास करता है तो त्रुटि"
+	},
 	"error_no_unpinned": {
 		"message": "आपके पास कोई अनपिन किए गए Tab नहीं हैं!",
 		"description": "[त्रुटि] उपयोगकर्ता ने अनपिन किए गए Tab हटाने का प्रयास किया लेकिन उनके पास कोई अनपिन किए गए Tab नहीं हैं"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "निर्यात करें",
 		"description": "[popup] निर्यात बटन"
+	},
+	"export_tabs": {
+		"message": "Tabs निर्यात करें",
+		"description": "[modal] Tabs निर्यात मॉडल के लिए शीर्षक"
 	},
 	"export_title": {
 		"message": "सभी Tabs निर्यात करें",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "कोई मेल खाने वाली क्रिया नहीं मिली",
 		"description": "[error] Salesforce में अनुरोधित क्रिया से मेल नहीं खाई।"
+	},
+	"no_tabs_to_export": {
+		"message": "निर्यात करने के लिए कोई Tabs नहीं है",
+		"description": "[toast] जब निर्यात करने के लिए कोई Tabs नहीं होता है तो त्रुटि"
 	},
 	"nss_invalid_url": {
 		"message": "अमान्य URL मिला।",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Tab के रूप में सहेजें",
 		"description": "[alt] जब चित्र काम नहीं करते, तो वैकल्पिक पाठ।"
+	},
+	"select_all": {
+		"message": "सभी का चयन करें",
+		"description": "[modal] निर्यात मॉडल में सभी Tabs का चयन करने के लिए बटन"
 	},
 	"send_tip": {
 		"message": "हमें एक टिप भेजें ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "उपयोगकर्ता के पसंदीदा लिंक।"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs सफलतापूर्वक निर्यात किए गए",
+		"description": "[toast] जब Tabs निर्यात किए जाते हैं तो सफलता संदेश"
+	},
 	"tabs_saved": {
 		"message": "Tabs सहेजे गए।",
 		"description": "[toast] Tabs सफलतापूर्वक सहेजे गए।"
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "तरंग रेखांकित",
 		"description": "Tab टेक्स्ट पर तरंगाकार रेखांकित लागू करने के लिए सजावट शैली विकल्प"
+	},
+	"unselect_all": {
+		"message": "सभी का चयन हटाएँ",
+		"description": "[modal] निर्यात मॉडल में सभी Tabs का चयन हटाने के लिए बटन"
 	},
 	"update_available": {
 		"message": "अपडेट उपलब्ध",

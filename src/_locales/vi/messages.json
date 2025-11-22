@@ -403,6 +403,10 @@
 		"message": "Không tìm thấy Setup Tab",
 		"description": "[error] Tiện ích không tìm thấy vị trí để đặt các Tabs yêu thích."
 	},
+	"error_no_tabs_selected": {
+		"message": "Chưa Chọn Tab Nào để xuất",
+		"description": "[toast] lỗi khi người dùng cố gắng xuất mà không chọn Tabs nào"
+	},
 	"error_no_unpinned": {
 		"message": "Bạn không có Tab nào chưa ghim!",
 		"description": "[lỗi] người dùng đã cố gắng xóa các Tab chưa ghim nhưng họ không có Tab nào chưa ghim"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Xuất",
 		"description": "[popup] Nút xuất"
+	},
+	"export_tabs": {
+		"message": "Xuất Tabs",
+		"description": "[modal] tiêu đề cho modal xuất Tabs"
 	},
 	"export_title": {
 		"message": "Xuất tất cả các Tabs",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "Không tìm thấy hành động phù hợp",
 		"description": "[error] Hành động được yêu cầu trong Salesforce không khớp với bất kỳ hành động nào có sẵn."
+	},
+	"no_tabs_to_export": {
+		"message": "Không Có Tabs để xuất",
+		"description": "[toast] lỗi khi không có Tabs nào để xuất"
 	},
 	"nss_invalid_url": {
 		"message": "Đã phát hiện URL không hợp lệ.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Lưu dưới dạng Tab",
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
+	},
+	"select_all": {
+		"message": "Chọn Tất Cả",
+		"description": "[modal] nút để chọn tất cả Tabs trong modal xuất"
 	},
 	"send_tip": {
 		"message": "Gửi cho chúng tôi một mẹo ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "Các liên kết yêu thích của người dùng."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Đã Được Xuất Thành Công",
+		"description": "[toast] thông báo thành công khi Tabs được xuất"
+	},
 	"tabs_saved": {
 		"message": "Đã lưu các Tabs.",
 		"description": "[toast] Các Tabs đã được lưu thành công."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Gạch chân gợn sóng",
 		"description": "Tùy chọn kiểu trang trí để áp dụng gạch chân gợn sóng cho văn bản Tab"
+	},
+	"unselect_all": {
+		"message": "Bỏ Chọn Tất Cả",
+		"description": "[modal] nút để bỏ chọn tất cả Tabs trong modal xuất"
 	},
 	"update_available": {
 		"message": "Cập nhật khả dụng",

@@ -403,6 +403,10 @@
 		"message": "ไม่พบ Setup Tab",
 		"description": "[error] ส่วนขยายไม่สามารถระบุที่วาง Tab ที่โปรดได้"
 	},
+	"error_no_tabs_selected": {
+		"message": "ไม่ได้เลือก Tabs สำหรับการส่งออก",
+		"description": "[toast] ข้อผิดพลาดเมื่อผู้ใช้พยายามส่งออกโดยไม่ได้เลือก Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "คุณยังไม่มี Tab ที่ไม่ได้ปักหมุดเลย!",
 		"description": "[ข้อผิดพลาด] ผู้ใช้พยายามลบ Tab ที่ไม่ได้ปักหมุดแต่ไม่มี Tab ที่ไม่ได้ปักหมุด"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "ส่งออก",
 		"description": "[popup] ปุ่มส่งออก"
+	},
+	"export_tabs": {
+		"message": "ส่งออก Tabs",
+		"description": "[modal] ชื่อเรื่องสำหรับโมดอลส่งออก Tabs"
 	},
 	"export_title": {
 		"message": "ส่งออก Tab ทั้งหมด",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Did not match any action",
 		"description": "[error] ใน Salesforce เมื่อ switch ไม่สามารถจับคู่การกระทำที่ร้องขอได้"
+	},
+	"no_tabs_to_export": {
+		"message": "ไม่มี Tabs ให้ส่งออก",
+		"description": "[toast] ข้อผิดพลาดเมื่อไม่มี Tabs ให้ส่งออก"
 	},
 	"nss_invalid_url": {
 		"message": "Hindi balidong URL ang natukoy.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"
+	},
+	"select_all": {
+		"message": "เลือกทั้งหมด",
+		"description": "[modal] ปุ่มสำหรับเลือก Tabs ทั้งหมดในโมดอลส่งออก"
 	},
 	"send_tip": {
 		"message": "ส่งทิปให้เรา ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "ลิงก์โปรดของผู้ใช้"
 	},
+	"tabs_exported_successfully": {
+		"message": "ส่งออก Tabs สำเร็จแล้ว",
+		"description": "[toast] ข้อความแสดงความสำเร็จเมื่อส่งออก Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tabs saved.",
 		"description": "[toast] บันทึก Tab เรียบร้อยแล้ว"
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "ขีดเส้นใต้แบบคลื่น",
 		"description": "ตัวเลือกรูปแบบการตกแต่งเพื่อใช้เส้นใต้แบบคลื่นกับข้อความ Tab"
+	},
+	"unselect_all": {
+		"message": "ยกเลิกการเลือกทั้งหมด",
+		"description": "[modal] ปุ่มสำหรับยกเลิกการเลือก Tabs ทั้งหมดในโมดอลส่งออก"
 	},
 	"update_available": {
 		"message": "มีการอัปเดต",

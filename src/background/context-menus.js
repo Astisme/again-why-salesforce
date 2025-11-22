@@ -60,7 +60,6 @@ import {
 } from "./background.js";
 
 let areMenuItemsVisible = false;
-const cxm_open_settings = "open-settings";
 
 let link_cmd_save_as_tab = null;
 let link_cmd_remove_tab = null;
@@ -315,7 +314,7 @@ const menuItemsOriginal = [
 	},
 
 	{
-		id: cxm_open_settings,
+		id: CMD_OPEN_SETTINGS,
 		title: "cxm_settings",
 		contexts: ["link", "page", "frame"],
 	},
@@ -374,7 +373,7 @@ function getMenuItemsClone() {
 					];
 				}
 				break;
-			case cxm_open_settings:
+			case CMD_OPEN_SETTINGS:
 				if (link_cmd_open_settings != null) {
 					el.title = [
 						el.title,
@@ -532,17 +531,17 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
 BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
-	switch (info.menuItemId) {
-		case cxm_open_settings:
-			openSettingsPage();
-			return;
-		case CXM_EXPORT_TABS:
-			checkLaunchExport();
-			return;
-	}
 	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
 	switch (info.menuItemId) {
+		case CMD_OPEN_SETTINGS:
+			openSettingsPage();
+			return;
+		case CXM_EXPORT_TABS:
+			if (!checkLaunchExport(undefined, true)) {
+				return;
+			}
+			break;
 		case CXM_OPEN_OTHER_ORG:
 			if (info.pageUrl != null) {
 				message.pageTabUrl = Tab.minifyURL(info.pageUrl);

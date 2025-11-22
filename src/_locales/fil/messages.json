@@ -403,6 +403,10 @@
 		"message": "Nabigong mahanap ang Setup tab.",
 		"description": "[error] Hindi mahanap ng extension kung saan ilalagay ang mga paboritong Tabs."
 	},
+	"error_no_tabs_selected": {
+		"message": "Walang Tab na Napili para sa pag-export",
+		"description": "[toast] error kapag sinubukan ng user na mag-export nang walang napiling Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Wala kang naka-unpin na Tab!",
 		"description": "[error] sinubukan ng user na alisin ang mga naka-unpin na Tab ngunit wala silang naka-unpin na Tab"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "I-export",
 		"description": "[popup] button ng pag-export"
+	},
+	"export_tabs": {
+		"message": "I-export ang Tabs",
+		"description": "[modal] pamagat para sa modal ng pag-export ng Tabs"
 	},
 	"export_title": {
 		"message": "I-export lahat ng Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Walang tumugmang aksyon",
 		"description": "[error] sa Salesforce kapag hindi maitugma ng switch ang hiniling na aksyon"
+	},
+	"no_tabs_to_export": {
+		"message": "Walang Tabs na I-e-export",
+		"description": "[toast] error kapag walang Tabs na i-e-export"
 	},
 	"nss_invalid_url": {
 		"message": "Hindi balidong URL ang natukoy.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "I-save bilang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+	},
+	"select_all": {
+		"message": "Piliin Lahat",
+		"description": "[modal] button para piliin lahat ng Tabs sa export modal"
 	},
 	"send_tip": {
 		"message": "Magpadala sa amin ng tip ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "ang mga paboritong link ng user"
 	},
+	"tabs_exported_successfully": {
+		"message": "Matagumpay na Na-export ang Tabs",
+		"description": "[toast] success message kapag na-export ang Tabs"
+	},
 	"tabs_saved": {
 		"message": "Nai-save ang mga Tabs.",
 		"description": "[toast] Matagumpay na naimbak ang mga Tabs."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Wavy Underline",
 		"description": "Pagpipilian ng estilo ng dekorasyon upang mag-apply ng wavy underline sa teksto ng Tab"
+	},
+	"unselect_all": {
+		"message": "Alisin ang Pagkakapili sa Lahat",
+		"description": "[modal] button para alisin ang pagkakapili sa lahat ng Tabs sa export modal"
 	},
 	"update_available": {
 		"message": "May available na update",

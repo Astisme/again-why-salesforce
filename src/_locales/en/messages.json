@@ -403,6 +403,10 @@
 		"message": "Failed to find Setup tab.",
 		"description": "[error] The extension could not find where to put the favourite Tabs."
 	},
+	"error_no_tabs_selected": {
+		"message": "No Tabs selected for export",
+		"description": "[toast] error when user tries to export with no tabs selected"
+	},
 	"error_no_unpinned": {
 		"message": "You do not have any unpinned Tabs!",
 		"description": "[error] the user tried to remove the unpinned Tabs but they do not have any unpinned Tabs"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Export",
 		"description": "[popup] export button"
+	},
+	"export_tabs": {
+		"message": "Export Tabs",
+		"description": "[modal] title for export tabs modal"
 	},
 	"export_title": {
 		"message": "Export all Tabs",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "Did not match any action",
 		"description": "[error] in salesforce when the switch cannot match the requested action"
+	},
+	"no_tabs_to_export": {
+		"message": "No Tabs to export",
+		"description": "[toast] error when there are no tabs to export"
 	},
 	"nss_invalid_url": {
 		"message": "Invalid URL detected.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] alternative text when pictures do not work"
+	},
+	"select_all": {
+		"message": "Select All",
+		"description": "[modal] button to select all tabs in export modal"
 	},
 	"send_tip": {
 		"message": "Send us a tip ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "the user's favourite links"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs exported successfully",
+		"description": "[toast] success message when tabs are exported"
+	},
 	"tabs_saved": {
 		"message": "Tabs saved.",
 		"description": "[toast] Tabs were successfully stored."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Underline Wavy",
 		"description": "Decoration style option to apply a wavy underline to Tab text"
+	},
+	"unselect_all": {
+		"message": "Unselect All",
+		"description": "[modal] button to unselect all tabs in export modal"
 	},
 	"update_available": {
 		"message": "Update available",

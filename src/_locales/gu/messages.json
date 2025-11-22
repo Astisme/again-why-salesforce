@@ -403,6 +403,10 @@
 		"message": "Setup Tab મળ્યો નથી.",
 		"description": "[error] ફેવરિટ Tab મૂકવા માટે એક્સ્ટેંશને জায়গા શોધી શક્યું નથી"
 	},
+	"error_no_tabs_selected": {
+		"message": "નિકાસ માટે કોઈ Tab પસંદ નથી",
+		"description": "[toast] જ્યારે વપરાશકર્તા કોઈ Tab પસંદ કર્યા વિના નિકાસ કરવાનો પ્રયાસ કરે ત્યારે ભૂલ"
+	},
 	"error_no_unpinned": {
 		"message": "તમારી પાસે કોઈ અનપિન કરેલા Tab નથી!",
 		"description": "[ભૂલ] વપરાશકર્તાએ અનપિન કરેલા Tab દૂર કરવાનો પ્રયાસ કર્યો પરંતુ તેમની પાસે કોઈ અનપિન કરેલા Tab નથી"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "એક્સપોર્ટ કરો",
 		"description": "[popup] એક્સપોર્ટ બટન"
+	},
+	"export_tabs": {
+		"message": "Tabs નિકાસ કરો",
+		"description": "[modal] Tabs નિકાસ મોડલ માટે શીર્ષક"
 	},
 	"export_title": {
 		"message": "બધા Tab એક્સપોર્ટ કરો",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Did not match any action",
 		"description": "[error] જ્યારે Salesforce માં switch રિકવેસ્ટેડ ક્રિયા સાથે મેળ ખાતું નથી"
+	},
+	"no_tabs_to_export": {
+		"message": "નિકાસ કરવા માટે કોઈ Tabs નથી",
+		"description": "[toast] જ્યારે નિકાસ કરવા માટે કોઈ Tabs ન હોય ત્યારે ભૂલ"
 	},
 	"nss_invalid_url": {
 		"message": "અમાન્ય URL શોધાયો.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] ચિત્રો કામ ન કરતી વખતે વિકલ્પિક લખાણ"
+	},
+	"select_all": {
+		"message": "બધું પસંદ કરો",
+		"description": "[modal] નિકાસ મોડલમાં બધા Tabs પસંદ કરવા માટેનું બટન"
 	},
 	"send_tip": {
 		"message": "અમને એક ટિપ મોકલો ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "વપરાશકર્તાના ફેવરિટ લિંક્સ"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs સફળતાપૂર્વક નિકાસ થઈ",
+		"description": "[toast] જ્યારે Tabs નિકાસ થાય ત્યારે સફળતા સંદેશ"
+	},
 	"tabs_saved": {
 		"message": "Tabs saved.",
 		"description": "[toast] Tab સફળતાપૂર્વક સ્ટોર થયાં"
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "લહેરદાર અંડરલાઇન",
 		"description": "Tab લખાણ નીચે તરંગી અંડરલાઇન લાગુ કરવા માટે ડેકોરેશન શૈલી વિકલ્પ"
+	},
+	"unselect_all": {
+		"message": "બધાની પસંદગી દૂર કરો",
+		"description": "[modal] નિકાસ મોડલમાં બધા Tabs ની પસંદગી દૂર કરવા માટેનું બટન"
 	},
 	"update_available": {
 		"message": "અપડેટ ઉપલબ્ધ",

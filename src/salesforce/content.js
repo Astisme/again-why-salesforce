@@ -1,6 +1,7 @@
 "use strict";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
 	CMD_OPEN_OTHER_ORG,
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
@@ -9,6 +10,7 @@ import {
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
+	CXM_EXPORT_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -48,8 +50,9 @@ import {
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
-	WHAT_EXPORT,
+	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -67,6 +70,7 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
+import { createExportModal } from "./export.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -955,6 +959,11 @@ function listenToBackgroundPage() {
 				case ACTION_ADD:
 					createImportModal();
 					break;
+				case WHAT_SHOW_EXPORT_MODAL:
+				case CXM_EXPORT_TABS:
+				case CMD_EXPORT_ALL:
+					createExportModal();
+					break;
 				case CXM_OPEN_OTHER_ORG:
 				case CMD_OPEN_OTHER_ORG:
 					showModalOpenOtherOrg({
@@ -1124,7 +1133,7 @@ function listenToBackgroundPage() {
 						);
 					}
 					break;
-				case WHAT_EXPORT:
+				case WHAT_EXPORT_FROM_BG:
 					launchDownload(message);
 					break;
 				default:

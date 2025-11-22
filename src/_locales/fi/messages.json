@@ -403,6 +403,10 @@
 		"message": "Setup Tabia ei löytynyt.",
 		"description": "[error] laajennus ei löytänyt paikkaa, johon tallennetut Tabit asetettaisiin"
 	},
+	"error_no_tabs_selected": {
+		"message": "Viehen Ei Ole Valittu Yhtään Tab-ia",
+		"description": "[toast] virhe, kun käyttäjä yrittää viedä valitsematta yhtään Tab-ia"
+	},
 	"error_no_unpinned": {
 		"message": "Sinulla ei ole ei-kiinnitettyjä Tab-välilehtiä!",
 		"description": "[error] käyttäjä yritti poistaa ei-kiinnitetyt Tab-välilehdet, mutta hänellä ei ole niitä"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Vie",
 		"description": "[popup] vientipainike"
+	},
+	"export_tabs": {
+		"message": "Vie Tabs-it",
+		"description": "[modal] Tabs-ien vientimodaalin otsikko"
 	},
 	"export_title": {
 		"message": "Vie kaikki Tabit",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Yhtään vastaavaa toimintoa ei löytynyt",
 		"description": "[error] kun switch-lause ei löydä pyydettyä toimintoa"
+	},
+	"no_tabs_to_export": {
+		"message": "Ei Vietäviä Tabs-eja",
+		"description": "[toast] virhe, kun vietäviä Tabs-eja ei ole"
 	},
 	"nss_invalid_url": {
 		"message": "Virheellinen URL havaittu.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Tallenna Tabina",
 		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
+	},
+	"select_all": {
+		"message": "Valitse Kaikki",
+		"description": "[modal] painike kaikkien Tabs-ien valitsemiseksi vientimodaalissa"
 	},
 	"send_tip": {
 		"message": "Lähetä meille vinkki ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabit",
 		"description": "käyttäjän suosikkilinkit"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs-it Viety Onnistuneesti",
+		"description": "[toast] onnistumisviesti, kun Tabs-it on viety"
+	},
 	"tabs_saved": {
 		"message": "Tabit tallennettu.",
 		"description": "[toast] Tabit tallennettiin onnistuneesti."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Aaltomainen alleviivaus",
 		"description": "Koristelutyyli aaltomaisen alleviivauksen lisäämiseksi Tab-tekstiin"
+	},
+	"unselect_all": {
+		"message": "Poista Kaikki Valinnat",
+		"description": "[modal] painike kaikkien Tabs-ien valinnan poistamiseksi vientimodaalissa"
 	},
 	"update_available": {
 		"message": "Päivitys saatavilla",

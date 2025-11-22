@@ -62,6 +62,21 @@ export class TabContainer extends Array {
 	get pinned() { // function name same as TabContainer.keyPinnedTabsNo
 		return this.#pinnedTabs;
 	}
+	/**
+	 * Setter for #pinnedTabs
+	 * @param {number} pinnedTabs - the positive integer which will become the currently pinned Tabs
+	 * @throws TypeError when passing a value that is not a number
+	 */
+	set pinned(pinnedTabs = 0) { // function name same as TabContainer.keyPinnedTabsNo
+		if (typeof pinnedTabs !== "number") {
+			throw new TypeError("error_required_params");
+		}
+		pinnedTabs = pinnedTabs ?? 0;
+		if (pinnedTabs < 0) {
+			pinnedTabs = 0;
+		}
+		this.#pinnedTabs = pinnedTabs;
+	}
 
 	static keyPinnedTabsNo = "pinned";
 	static keyTabs = "tabs";

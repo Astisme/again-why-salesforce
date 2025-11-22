@@ -403,6 +403,10 @@
 		"message": "Setup-Tab konnte nicht gefunden werden.",
 		"description": "[error] Die Erweiterung konnte den Platz für die favorisierten Tabs nicht finden."
 	},
+	"error_no_tabs_selected": {
+		"message": "Keine Tabs zum Exportieren Ausgewählt",
+		"description": "[toast] Fehler, wenn der Benutzer versucht zu exportieren, ohne Tabs ausgewählt zu haben"
+	},
 	"error_no_unpinned": {
 		"message": "Sie haben keine nicht angepinnten Tab-Karten!",
 		"description": "[error] der Benutzer versuchte, die nicht angepinnten Tab-Karten zu entfernen, hat aber keine nicht angepinnten Tab-Karten"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "Exportieren",
 		"description": "[popup] Export-Knopf"
+	},
+	"export_tabs": {
+		"message": "Tabs Exportieren",
+		"description": "[modal] Titel für das Modal zum Exportieren von Tabs"
 	},
 	"export_title": {
 		"message": "Alle Tabs exportieren",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "Keine Aktion gefunden, die übereinstimmt",
 		"description": "[error] In Salesforce stimmt die angeforderte Aktion mit keiner verfügbaren Aktion überein."
+	},
+	"no_tabs_to_export": {
+		"message": "Keine Tabs zum Exportieren",
+		"description": "[toast] Fehler, wenn keine Tabs zum Exportieren vorhanden sind"
 	},
 	"nss_invalid_url": {
 		"message": "Ungültige URL erkannt.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"select_all": {
+		"message": "Alle Auswählen",
+		"description": "[modal] Schaltfläche, um alle Tabs im Export-Modal auszuwählen"
 	},
 	"send_tip": {
 		"message": "Senden Sie uns ein Trinkgeld ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "Die favorisierten Links des Benutzers."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Erfolgreich Exportiert",
+		"description": "[toast] Erfolgsmeldung, wenn Tabs exportiert wurden"
+	},
 	"tabs_saved": {
 		"message": "Tabs gespeichert.",
 		"description": "[toast] Tabs wurden erfolgreich gespeichert."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "Wellig unterstreichen",
 		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
+	},
+	"unselect_all": {
+		"message": "Auswahl Aufheben",
+		"description": "[modal] Schaltfläche, um die Auswahl aller Tabs im Export-Modal aufzuheben"
 	},
 	"update_available": {
 		"message": "Update verfügbar",

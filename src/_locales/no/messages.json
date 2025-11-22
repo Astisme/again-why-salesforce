@@ -403,6 +403,10 @@
 		"message": "Setup Tab ble ikke funnet.",
 		"description": "[error] utvidelsen kunne ikke finne hvor de lagrede Tab-ene skulle plasseres"
 	},
+	"error_no_tabs_selected": {
+		"message": "Ingen Tabs Valgt for eksport",
+		"description": "[toast] feil når brukeren prøver å eksportere uten valgte Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Du har ingen ufestede Tab-er!",
 		"description": "[feil] brukeren prøvde å fjerne de ufestede Tab-ene, men de har ingen ufestede Tab-er"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Eksporter",
 		"description": "[popup] eksportknapp"
+	},
+	"export_tabs": {
+		"message": "Eksporter Tabs",
+		"description": "[modal] tittel for eksporter Tabs-modalen"
 	},
 	"export_title": {
 		"message": "Eksporter alle Tabber",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Ingen matchende handling funnet",
 		"description": "[error] når switch-setningen ikke kan matche den forespurte handlingen"
+	},
+	"no_tabs_to_export": {
+		"message": "Ingen Tabs å eksportere",
+		"description": "[toast] feil når det ikke er noen Tabs å eksportere"
 	},
 	"nss_invalid_url": {
 		"message": "Ugyldig URL oppdaget.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Lagre som Tab",
 		"description": "[alt] alternativ tekst når bilder ikke vises"
+	},
+	"select_all": {
+		"message": "Velg Alle",
+		"description": "[modal] knapp for å velge alle Tabs i eksport-modalen"
 	},
 	"send_tip": {
 		"message": "Send oss et tips ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabber",
 		"description": "brukerens favorittlenker"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Eksportert Vellykket",
+		"description": "[toast] suksessmelding når Tabs er eksportert"
+	},
 	"tabs_saved": {
 		"message": "Tabber lagret.",
 		"description": "[toast] Tabber ble lagret med suksess."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Bølget understreking",
 		"description": "Dekorasjonsstilalternativ for å bruke en bølget understreking på Tab-tekst"
+	},
+	"unselect_all": {
+		"message": "Opphev Valg Av Alle",
+		"description": "[modal] knapp for å oppheve valget av alle Tabs i eksport-modalen"
 	},
 	"update_available": {
 		"message": "Oppdatering tilgjengelig",

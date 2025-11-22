@@ -349,8 +349,10 @@ export const CMD_IMPORT = "cmd-import";
 export const CMD_EXPORT_ALL = "cmd-export-all";
 export const WHAT_UPDATE_EXTENSION = "update-extension";
 export const WHAT_EXPORT = "export";
+export const WHAT_SHOW_EXPORT_MODAL = "show-export-modal";
 export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 	"export-perm-open-popup";
+export const WHAT_EXPORT_FROM_BG = "export-bg";
 export const EDGE_LINK =
 	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
 export const CHROME_LINK =

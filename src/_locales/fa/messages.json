@@ -403,6 +403,10 @@
 		"message": "یافتن تب Setup ناموفق بود.",
 		"description": "[خطا] افزونه نتوانست مکان قرار دادن Tabs مورد علاقه را پیدا کند."
 	},
+	"error_no_tabs_selected": {
+		"message": "هیچ Tab برای خروجی انتخاب نشده است",
+		"description": "[toast] خطا هنگامی که کاربر سعی می‌کند بدون انتخاب هیچ Tab، خروجی بگیرد"
+	},
 	"error_no_unpinned": {
 		"message": "شما هیچ Tab پین نشده‌ای ندارید!",
 		"description": "[error] کاربر سعی کرد Tab های پین نشده را حذف کند اما هیچ Tab پین نشده‌ای ندارد"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "صدور",
 		"description": "[پنجره_بازشو] دکمه صدور"
+	},
+	"export_tabs": {
+		"message": "خروجی گرفتن از Tabs",
+		"description": "[modal] عنوان برای مدال خروجی گرفتن از Tabs"
 	},
 	"export_title": {
 		"message": "صدور همه Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "با هیچ عملی مطابقت نداشت",
 		"description": "[خطا] در Salesforce زمانی که سوئیچ نمی‌تواند عمل درخواستی را مطابقت دهد"
+	},
+	"no_tabs_to_export": {
+		"message": "هیچ Tab برای خروجی گرفتن وجود ندارد",
+		"description": "[toast] خطا هنگامی که هیچ Tab برای خروجی گرفتن وجود ندارد"
 	},
 	"nss_invalid_url": {
 		"message": "URL نامعتبر شناسایی شد.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "ذخیره به عنوان Tab",
 		"description": "[متن_جایگزین] متن جایگزین زمانی که تصاویر کار نمی‌کنند"
+	},
+	"select_all": {
+		"message": "انتخاب همه",
+		"description": "[modal] دکمه برای انتخاب تمام Tabs در مدال خروجی"
 	},
 	"send_tip": {
 		"message": "یک نکته برای ما ارسال کنید ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "لینک‌های مورد علاقه کاربر"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs با موفقیت خروجی گرفته شدند",
+		"description": "[toast] پیام موفقیت هنگام خروجی گرفتن از Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tabs ذخیره شد.",
 		"description": "[اعلان_کوتاه] Tabs با موفقیت ذخیره شدند."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "زیرخط موجی",
 		"description": "گزینه سبک تزئینی برای اعمال زیرخط موجی به متن Tab"
+	},
+	"unselect_all": {
+		"message": "لغو انتخاب همه",
+		"description": "[modal] دکمه برای لغو انتخاب تمام Tabs در مدال خروجی"
 	},
 	"update_available": {
 		"message": "به‌روزرسانی در دسترس است",

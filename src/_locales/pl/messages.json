@@ -403,6 +403,10 @@
 		"message": "Nie udało się znaleźć karty Setup.",
 		"description": "[błąd] Rozszerzenie nie mogło znaleźć miejsca na umieszczenie ulubionych Tabs."
 	},
+	"error_no_tabs_selected": {
+		"message": "Nie Wybrano Żadnych Tabs do eksportu",
+		"description": "[toast] błąd, gdy użytkownik próbuje eksportować bez wybranych Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "Nie masz żadnych nieprzypiętych Tabs!",
 		"description": "[błąd] użytkownik próbował usunąć nieprzypięte Tabs, ale nie ma żadnych nieprzypiętych Tabs"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Eksportuj",
 		"description": "[popup] przycisk eksportu"
+	},
+	"export_tabs": {
+		"message": "Eksportuj Tabs",
+		"description": "[modal] tytuł modalu eksportu Tabs"
 	},
 	"export_title": {
 		"message": "Eksportuj wszystkie Tabs",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Nie dopasowano żadnej akcji",
 		"description": "[błąd] w Salesforce, gdy przełącznik nie może dopasować żądanej akcji"
+	},
+	"no_tabs_to_export": {
+		"message": "Brak Tabs do eksportu",
+		"description": "[toast] błąd, gdy nie ma Tabs do eksportu"
 	},
 	"nss_invalid_url": {
 		"message": "Wykryto nieprawidłowy adres URL.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Zapisz jako Tab",
 		"description": "[alt] tekst alternatywny, gdy obrazy nie działają"
+	},
+	"select_all": {
+		"message": "Zaznacz Wszystko",
+		"description": "[modal] przycisk do zaznaczania wszystkich Tabs w modalnym oknie eksportu"
 	},
 	"send_tip": {
 		"message": "Wyślij nam napiwek ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "ulubione linki użytkownika"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Wyeksportowane Pomyślnie",
+		"description": "[toast] komunikat o powodzeniu po wyeksportowaniu Tabs"
+	},
 	"tabs_saved": {
 		"message": "Tabs zapisano.",
 		"description": "[toast] Tabs zostały pomyślnie zapisane."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Fala podkreślenia",
 		"description": "Opcja stylu dekoracji do zastosowania falistego podkreślenia tekstu karty"
+	},
+	"unselect_all": {
+		"message": "Odznacz Wszystko",
+		"description": "[modal] przycisk do odznaczania wszystkich Tabs w modalnym oknie eksportu"
 	},
 	"update_available": {
 		"message": "Aktualizacja dostępna",

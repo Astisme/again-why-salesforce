@@ -403,6 +403,10 @@
 		"message": "Kurulum sekmesi bulunamadı.",
 		"description": "[hata] Uzantı, favori Tabs'in nereye konulacağını bulamadı."
 	},
+	"error_no_tabs_selected": {
+		"message": "Dışa Aktarma İçin Hiçbir Tab Seçilmedi",
+		"description": "[toast] kullanıcı hiçbir Tab seçmeden dışa aktarmaya çalıştığında hata"
+	},
 	"error_no_unpinned": {
 		"message": "Sabitlenmemiş Tab-larınız yok!",
 		"description": "[hata] kullanıcı sabitlenmemiş Tab-ları kaldırmaya çalıştı ancak sabitlenmemiş Tab-ları yok"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Dışa Aktar",
 		"description": "[açılır-pencere] dışa aktarma düğmesi"
+	},
+	"export_tabs": {
+		"message": "Tabs Dışa Aktar",
+		"description": "[modal] Tabs dışa aktarma modu başlığı"
 	},
 	"export_title": {
 		"message": "Tüm Tabs Dışa Aktar",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Herhangi bir eylemle eşleşmedi",
 		"description": "[hata] Salesforce'ta anahtar istenen eylemle eşleşemediğinde"
+	},
+	"no_tabs_to_export": {
+		"message": "Dışa Aktarılacak Tabs Yok",
+		"description": "[toast] dışa aktarılacak Tabs olmadığında hata"
 	},
 	"nss_invalid_url": {
 		"message": "Geçersiz URL tespit edildi.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Tab Olarak Kaydet",
 		"description": "[alt] resimler çalışmadığında alternatif metin"
+	},
+	"select_all": {
+		"message": "Tümünü Seç",
+		"description": "[modal] dışa aktarma modunda tüm Tabs'leri seçme düğmesi"
 	},
 	"send_tip": {
 		"message": "Bize bir bahşiş gönderin ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "kullanıcının favori bağlantıları"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Başarıyla Dışa Aktarıldı",
+		"description": "[toast] Tabs dışa aktarıldığında başarı mesajı"
+	},
 	"tabs_saved": {
 		"message": "Tabs kaydedildi.",
 		"description": "[bildirim] Tabs başarıyla saklandı."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Dalgalı Altı Çizili",
 		"description": "Sekme metnine dalgalı altı çizili uygulamak için dekorasyon stili seçeneği"
+	},
+	"unselect_all": {
+		"message": "Tüm Seçimi Kaldır",
+		"description": "[modal] dışa aktarma modunda tüm Tabs'lerin seçimini kaldırma düğmesi"
 	},
 	"update_available": {
 		"message": "Güncelleme mevcut",

@@ -403,6 +403,10 @@
 		"message": "Kon Setup-tabblad niet vinden.",
 		"description": "[fout] De extensie kon niet vinden waar de favoriete Tabs moesten worden geplaatst."
 	},
+	"error_no_tabs_selected": {
+		"message": "Geen Tabs Geselecteerd voor export",
+		"description": "[toast] fout wanneer de gebruiker probeert te exporteren zonder geselecteerde Tabs"
+	},
 	"error_no_unpinned": {
 		"message": "U hebt geen niet-vastgezette Tabbladen!",
 		"description": "[fout] de gebruiker probeerde de niet-vastgezette Tabbladen te verwijderen maar ze hebben geen niet-vastgezette Tabbladen"
@@ -562,6 +566,10 @@
 	"export": {
 		"message": "Exporteren",
 		"description": "[popup] exportknop"
+	},
+	"export_tabs": {
+		"message": "Tabs Exporteren",
+		"description": "[modal] titel voor de Tabs export modal"
 	},
 	"export_title": {
 		"message": "Alle Tabs exporteren",
@@ -738,6 +746,10 @@
 	"no_match": {
 		"message": "Geen overeenkomst gevonden voor actie",
 		"description": "[fout] in Salesforce wanneer de switch de gevraagde actie niet kan matchen"
+	},
+	"no_tabs_to_export": {
+		"message": "Geen Tabs om te exporteren",
+		"description": "[toast] fout wanneer er geen Tabs zijn om te exporteren"
 	},
 	"nss_invalid_url": {
 		"message": "Ongeldige URL gedetecteerd.",
@@ -934,6 +946,10 @@
 	"save_tab": {
 		"message": "Opslaan als Tab",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"select_all": {
+		"message": "Alles Selecteren",
+		"description": "[modal] knop om alle Tabs te selecteren in de export modal"
 	},
 	"send_tip": {
 		"message": "Stuur ons een fooi ❤️",
@@ -1295,6 +1311,10 @@
 		"message": "Tabs",
 		"description": "de favoriete links van de gebruiker"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Succesvol Geëxporteerd",
+		"description": "[toast] succesbericht wanneer Tabs zijn geëxporteerd"
+	},
 	"tabs_saved": {
 		"message": "Tabs opgeslagen.",
 		"description": "[toast] Tabs zijn succesvol opgeslagen."
@@ -1314,6 +1334,10 @@
 	"underline_wavy": {
 		"message": "Onderstrepen Golvend",
 		"description": "Decoratiestijloptie om een golvende onderstreping toe te passen op Tab-tekst"
+	},
+	"unselect_all": {
+		"message": "Selectie Van Alles Opheffen",
+		"description": "[modal] knop om de selectie van alle Tabs op te heffen in de export modal"
 	},
 	"update_available": {
 		"message": "Update beschikbaar",

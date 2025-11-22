@@ -403,6 +403,10 @@
 		"message": "Setup Tab కనుగొనబడలేదు",
 		"description": "[error] ప్రియమైన Tabs ని ఉంచడానికి సరైన స్థలం కనుగొనబడలేదు"
 	},
+	"error_no_tabs_selected": {
+		"message": "ఎగుమతి కోసం Tab లు ఏవీ ఎంచుకోబడలేదు",
+		"description": "[toast] వినియోగదారుడు Tab లను ఎంచుకోకుండా ఎగుమతి చేయడానికి ప్రయత్నించినప్పుడు లోపం"
+	},
 	"error_no_unpinned": {
 		"message": "మీకు పిన్ చేయని Tab-లు ఏవీ లేవు!",
 		"description": "[లోపం] వినియోగదారు పిన్ చేయని Tab-లను తొలగించడానికి ప్రయత్నించారు కానీ వారికి పిన్ చేయని Tab-లు లేవు"
@@ -561,6 +565,10 @@
 	"export": {
 		"message": "ఎగుమతి చేయండి",
 		"description": "[popup] ఎగుమతి బటన్"
+	},
+	"export_tabs": {
+		"message": "Tabs ను ఎగుమతి చేయండి",
+		"description": "[modal] Tabs ఎగుమతి మోడల్ కోసం శీర్షిక"
 	},
 	"export_title": {
 		"message": "అన్ని Tabs ఎగుమతి చేయండి",
@@ -737,6 +745,10 @@
 	"no_match": {
 		"message": "ఏ చర్యతో సరిపోలడం లేదు",
 		"description": "[error] Salesforceలో కోరుకున్న చర్య అందుబాటులో ఉన్నదీ కాదు"
+	},
+	"no_tabs_to_export": {
+		"message": "ఎగుమతి చేయడానికి Tabs లేవు",
+		"description": "[toast] ఎగుమతి చేయడానికి Tabs లేనప్పుడు లోపం"
 	},
 	"nss_invalid_url": {
 		"message": "తప్పు URL కనుగొనబడింది.",
@@ -933,6 +945,10 @@
 	"save_tab": {
 		"message": "Tab గా సేవ్ చేయండి",
 		"description": "[alt] చిత్రాలు చూపించకపోతే ప్రత్యామ్నాయ టెక్స్ట్"
+	},
+	"select_all": {
+		"message": "అన్నీ ఎంచుకోండి",
+		"description": "[modal] ఎగుమతి మోడల్‌లో అన్ని Tabs ను ఎంచుకోవడానికి బటన్"
 	},
 	"send_tip": {
 		"message": "మాకు ఒక చిట్కా పంపండి ❤️",
@@ -1294,6 +1310,10 @@
 		"message": "Tabs",
 		"description": "వినియోగదారుడి ప్రియమైన లింకులు"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs విజయవంతంగా ఎగుమతి చేయబడ్డాయి",
+		"description": "[toast] Tabs ఎగుమతి చేయబడినప్పుడు విజయ సందేశం"
+	},
 	"tabs_saved": {
 		"message": "Tabs సేవ్ అయ్యాయి",
 		"description": "[toast] Tabs విజయవంతంగా సేవ్ అయ్యాయి."
@@ -1313,6 +1333,10 @@
 	"underline_wavy": {
 		"message": "వేవీ అండర్‌లైన్",
 		"description": "Tab టెక్స్ట్‌కు వేవీ అండర్‌లైన్‌ను వర్తింపజేయడానికి అలంకరణ శైలి ఎంపిక"
+	},
+	"unselect_all": {
+		"message": "అన్నీ ఎంపికను తీసివేయండి",
+		"description": "[modal] ఎగుమతి మోడల్‌లో అన్ని Tabs ఎంపికను తీసివేయడానికి బటన్"
 	},
 	"update_available": {
 		"message": "నవీకరణ అందుబాటులో ఉంది",
