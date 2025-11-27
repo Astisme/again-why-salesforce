@@ -171,12 +171,12 @@ class TranslationService {
 		}
 	}
 
-  /**
-   * retrieves the message related to the given key
-   * @param {string|Array} key - the key for which to find the message
-   * @return {string|undefined} the message found or nothing
-   * @throws TypeError if key is neither a string nor an Array
-   */
+	/**
+	 * retrieves the message related to the given key
+	 * @param {string|Array} key - the key for which to find the message
+	 * @return {string|undefined} the message found or nothing
+	 * @throws TypeError if key is neither a string nor an Array
+	 */
 	#getMessageFromCache(key) {
 		if (Array.isArray(key)) {
 			return undefined;
