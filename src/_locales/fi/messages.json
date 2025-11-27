@@ -675,6 +675,10 @@
 		"message": "Napsauta ohjataksesi uudelleen tämän asetuksen dokumentaatioon!",
 		"description": "[asetukset-apu] toimintakehotus, jonka avulla käyttäjä voi lukea lisää tietystä asetuksesta"
 	},
+	"if_click_popup": {
+		"message": "jos napsautat laajennuksen ponnahdusikkunaa",
+		"description": "[placeholder] käytetään muissa teksteissä"
+	},
 	"import": {
 		"message": "Tuo",
 		"description": "[popup] tuontipainike"
@@ -727,6 +731,10 @@
 		"message": "Kursivoitu",
 		"description": "Fonttityylivalinta kursivoidulle tekstille"
 	},
+	"label": {
+		"message": "Otsikko",
+		"description": "[key] Tab-välilehden nimi"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigointi",
 		"description": "Salesforcen mukautettu navigointiteknologia"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Kirjaudu Salesforceen",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforcen kirjautumissivulle"
+	},
+	"must_non_empty_str": {
+		"message": "täytyy olla ei-tyhjä merkkijono",
+		"description": "[placeholder] käytetään muissa teksteissä"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Tai $drop",
 		"description": "[tuo] anna käyttäjän siirtää tiedostoja hiirellä ja vapauttaa ne"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab-välilehden Salesforce $org"
+	},
 	"org_link": {
 		"message": "Organisaatiolinkki",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Korvaa tallennetut Tabit.",
 		"description": "[label] poista kaikki tallennetut Tabit tuonnin aikana"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "sivu avataan nykyisessä selaimen Tab-välilehdessä",
+		"description": "[placeholder] käytetään muissa teksteissä"
 	},
 	"pinned": {
 		"message": "Kiinnitetty",
@@ -927,6 +947,10 @@
 		"message": "= Pakolliset tiedot",
 		"description": "[modal] ilmoittaa käyttäjälle, että tietyt tiedot ovat pakollisia"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce-verkkotunnus",
+		"description": "[placeholder] käytetään muissa teksteissä"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning -alusta"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce -kirjautuminen",
 		"description": "Salesforcen kirjautumissivu (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce-sivu",
+		"description": "[placeholder] käytetään muissa teksteissä"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce -asetukset",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Valitse Kaikki",
 		"description": "[modal] painike kaikkien Tabs-ien valitsemiseksi vientimodaalissa"
+	},
+	"select_tabs": {
+		"message": "Valitse mitkä $tabs haluat",
+		"description": "[import] anna käyttäjän valita, mitkä $tabs tuodaan ennen niiden tuomista"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] anna käyttäjän valita, mitkä $tabs viedään ennen niiden viemistä"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] anna käyttäjän valita, mitkä $tabs tuodaan ennen niiden tuomista"
 	},
 	"send_tip": {
 		"message": "Lähetä meille vinkki ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Tuonti onnistui",
 		"description": "[toast] käyttäjä toi Tabit ulkoisesta tiedostosta onnistuneesti"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "yksi käyttäjän suosikkilinkeistä"
+	},
 	"tab_explain": {
 		"message": "Jokaisessa kohteessa tulee olla 'label' ja 'url' merkkijonoina. Lisäksi jokaisessa kohteessa voi olla 'org' merkkijonona.",
 		"description": "[error] selittää, kuinka Tab tulee rakentaa"
@@ -1319,6 +1363,10 @@
 		"message": "Tabit tallennettu.",
 		"description": "[toast] Tabit tallennettiin onnistuneesti."
 	},
+	"the_current_page": {
+		"message": "nykyinen sivu",
+		"description": "[placeholder] käytetään muissa teksteissä"
+	},
 	"theme_dark": {
 		"message": "Vaihda tummaan teemaan",
 		"description": "[popup] kuun kuvakkeen otsikko teeman vaihtamiseksi"
@@ -1347,6 +1395,10 @@
 		"message": "Lähetä",
 		"description": "[import] sallii käyttäjän selata tiedostojaan ja valita oikean"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab-välilehden linkki"
+	},
 	"users": {
 		"message": "Käyttäjät",
 		"description": "ManageUsers/home -sivun nimi"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Vie uudet Tab-välilehtesi, koska käyttämääsi tiedostoa ei tueta tulevissa julkaisuissa.",
 		"description": "[warning] käyttäjä toi Tab-välilehtensä käyttämällä vanhentunutta json-tiedoston konfiguraatiota"
+	},
+	"when_click_popup_while": {
+		"message": "sivu, kun napsautat ponnahdusikkunaa samalla, kun",
+		"description": "[placeholder] käytetään muissa teksteissä"
 	},
 	"where_to": {
 		"message": "Mihin?",

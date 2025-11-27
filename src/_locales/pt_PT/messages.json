@@ -675,6 +675,10 @@
 		"message": "Clique para ser redirecionado para a documentação desta definição!",
 		"description": "[definições-ajuda] apelo à ação para permitir que o utilizador leia mais sobre uma definição específica"
 	},
+	"if_click_popup": {
+		"message": "se clicar no pop-up da extensão",
+		"description": "[placeholder] utilizado por outros textos"
+	},
 	"import": {
 		"message": "Importar",
 		"description": "[popup] botão de importação"
@@ -727,6 +731,10 @@
 		"message": "Itálico",
 		"description": "Opção de estilo de fonte para texto em itálico"
 	},
+	"label": {
+		"message": "Etiqueta",
+		"description": "[key] o nome do Tab"
+	},
 	"lightning_navigation": {
 		"message": "Navegação Lightning",
 		"description": "Tecnologia de navegação personalizada da Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Iniciar sessão no Salesforce",
 		"description": "[naoConfigSalesforce] chamada para ação num botão para redirecionar o utilizador para uma página de início de sessão do Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "deve ser uma string não vazia",
+		"description": "[placeholder] utilizado por outros textos"
 	},
 	"mycustomorg": {
 		"message": "minhaorgpersonalizada",
@@ -859,6 +871,10 @@
 		"message": "Ou $drop",
 		"description": "[importar] permitir que o utilizador mova ficheiros com o rato e os solte"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] o $org Salesforce do Tab"
+	},
 	"org_link": {
 		"message": "Ligação da Org",
 		"description": "[rotulo-entrada]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Substituir Tabs guardados.",
 		"description": "[rotulo] eliminar todos os Tabs guardados durante o processo de importação"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "a página será aberta no Tab atual do navegador",
+		"description": "[placeholder] utilizado por outros textos"
 	},
 	"pinned": {
 		"message": "Fixado",
@@ -927,6 +947,10 @@
 		"message": "= Informação Obrigatória",
 		"description": "[modal] informa o utilizador que algumas informações são obrigatórias"
 	},
+	"salesforce_domain": {
+		"message": "Domínio do Salesforce",
+		"description": "[placeholder] utilizado por outros textos"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[naoConfigSalesforce] a plataforma Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Login Salesforce",
 		"description": "a página de Login do Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Página do Salesforce",
+		"description": "[placeholder] utilizado em outros textos"
 	},
 	"salesforce_setup": {
 		"message": "Configuração do Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Selecionar Tudo",
 		"description": "[modal] botão para selecionar todos os Tabs no modal de exportação"
+	},
+	"select_tabs": {
+		"message": "Selecione quais $tabs gostaria de",
+		"description": "[import] permite ao utilizador selecionar quais $tabs importar antes de os importar"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] permite ao utilizador selecionar quais $tabs exportar antes de os exportar"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] permite ao utilizador selecionar quais $tabs importar antes de os importar"
 	},
 	"send_tip": {
 		"message": "Envie-nos uma gorjeta ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Importado com sucesso",
 		"description": "[toast] o utilizador adicionou Tabs de um ficheiro externo"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "uma das hiperligações favoritas do utilizador"
+	},
 	"tab_explain": {
 		"message": "Cada item deve ter 'label' e 'url' como strings. Adicionalmente, cada item pode ter um 'org' como string.",
 		"description": "[erro] explica como um Tab deve ser construído"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs guardados.",
 		"description": "[toast] Os Tabs foram armazenados com sucesso."
 	},
+	"the_current_page": {
+		"message": "a página atual",
+		"description": "[placeholder] utilizado por outros textos"
+	},
 	"theme_dark": {
 		"message": "Mudar Tema para Escuro",
 		"description": "[popup] título na lua para trocar o tema"
@@ -1347,6 +1395,10 @@
 		"message": "Carregar",
 		"description": "[importar] permitir que o utilizador navegue pelos seus ficheiros e escolha o correto"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] a hiperligação do Tab"
+	},
 	"users": {
 		"message": "Utilizadores",
 		"description": "O nome da página relacionada com ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Por favor, exporte os seus novos Tabs, pois o ficheiro que utilizou não será suportado em futuras versões.",
 		"description": "[aviso] o utilizador importou os seus Tabs utilizando uma configuração obsoleta do ficheiro json"
+	},
+	"when_click_popup_while": {
+		"message": "página ao clicar no pop-up enquanto",
+		"description": "[placeholder] utilizado por outros textos"
 	},
 	"where_to": {
 		"message": "Para onde?",

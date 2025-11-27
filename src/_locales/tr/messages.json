@@ -675,6 +675,10 @@
 		"message": "Bu ayarın belgelerine yönlendirilmek için tıklayın!",
 		"description": "[ayarlar-yardım] kullanıcının belirli bir ayar hakkında daha fazla bilgi okumasını sağlamak için eylem çağrısı"
 	},
+	"if_click_popup": {
+		"message": "uzantı açılır penceresine tıklarsanız",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
+	},
 	"import": {
 		"message": "İçe Aktar",
 		"description": "[açılır-pencere] içe aktarma düğmesi"
@@ -727,6 +731,10 @@
 		"message": "İtalik",
 		"description": "İtalik metin için yazı tipi stili seçeneği"
 	},
+	"label": {
+		"message": "Etiket",
+		"description": "[key] Tab'ın adı"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce'un özel gezinme teknolojisi"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce'a Giriş Yap",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce giriş sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"must_non_empty_str": {
+		"message": "boş olmayan bir dize olmalıdır",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"mycustomorg": {
 		"message": "benimözelkuruluşum",
@@ -859,6 +871,10 @@
 		"message": "Veya $drop",
 		"description": "[içe aktarma] kullanıcının dosyaları faresiyle taşımasına ve bırakmasına izin verin"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab'ın Salesforce $org'u"
+	},
 	"org_link": {
 		"message": "Kuruluş Bağlantısı",
 		"description": "[giriş-etiketi]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Kaydedilmiş Tabs üzerine yaz.",
 		"description": "[etiket] içe aktarma işlemi sırasında tüm kaydedilmiş Tabs sil"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "sayfa, mevcut tarayıcı Tab'ında açılacaktır",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"pinned": {
 		"message": "Sabitlenmiş",
@@ -927,6 +947,10 @@
 		"message": "= Gerekli Bilgi",
 		"description": "[modal] kullanıcıya bazı bilgilerin zorunlu olduğunu söyler"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce alanı",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[SalesforceKurulumuDeğil] Salesforce Lightning platformu"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce oturum açma sayfası (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce sayfası",
+		"description": "[placeholder] diğer metinlerde kullanılır"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Tümünü Seç",
 		"description": "[modal] dışa aktarma modunda tüm Tabs'leri seçme düğmesi"
+	},
+	"select_tabs": {
+		"message": "Hangi $tabs'ı istediğinizi seçin",
+		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] kullanıcının dışa aktarmadan önce hangi $tabs'ı dışa aktaracağını seçmesine izin verin"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
 	},
 	"send_tip": {
 		"message": "Bize bir bahşiş gönderin ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Başarıyla içe aktarıldı",
 		"description": "[bildirim] kullanıcı harici bir dosyadan Tabs ekledi"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "kullanıcının favori bağlantılarından biri"
+	},
 	"tab_explain": {
 		"message": "Her öğenin 'label' ve 'url' dize olarak olmalıdır. Ek olarak, her öğenin 'org' dize olarak olabilir.",
 		"description": "[hata] bir Tab'in nasıl oluşturulması gerektiğini açıklar"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs kaydedildi.",
 		"description": "[bildirim] Tabs başarıyla saklandı."
 	},
+	"the_current_page": {
+		"message": "mevcut sayfa",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
+	},
 	"theme_dark": {
 		"message": "Temayı Koyu Olarak Değiştir",
 		"description": "[açılır-pencere] temayı değiştirmek için ay üzerindeki başlık"
@@ -1347,6 +1395,10 @@
 		"message": "Yükle",
 		"description": "[içe-aktar] kullanıcının dosyalarına göz atmasına ve doğru olanı seçmesine izin verin"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab'ın bağlantısı"
+	},
 	"users": {
 		"message": "Kullanıcılar",
 		"description": "ManageUsers/home ile ilgili sayfanın adı"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Lütfen yeni Tab-larınızı dışa aktarın, çünkü kullandığınız dosya gelecekteki sürümlerde desteklenmeyecektir.",
 		"description": "[uyarı] kullanıcı, json dosyasının eski bir yapılandırmasını kullanarak Tab-larını içe aktardı"
+	},
+	"when_click_popup_while": {
+		"message": "açılır pencereye tıklanırken sayfa",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"where_to": {
 		"message": "Nereye?",

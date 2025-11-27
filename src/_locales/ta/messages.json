@@ -675,6 +675,10 @@
 		"message": "இந்த அமைப்பிற்கான ஆவணங்களுக்குத் திருப்பிவிடப்பட கிளிக் செய்யவும்!",
 		"description": "[அமைப்புகள்-உதவி] ஒரு குறிப்பிட்ட அமைப்பைப் பற்றி மேலும் படிக்க பயனரை அனுமதிப்பதற்கான அழைப்பு நடவடிக்கை"
 	},
+	"if_click_popup": {
+		"message": "நீங்கள் நீட்டிப்பு பாப்அப்பைக் கிளிக் செய்தால்",
+		"description": "[placeholder] மற்ற உரைகளால் பயன்படுத்தப்படுகிறது"
+	},
 	"import": {
 		"message": "இறக்குமதி செய்",
 		"description": "[popup] இறக்குமதி பொத்தான்"
@@ -727,6 +731,10 @@
 		"message": "சாய்வு",
 		"description": "சாய்வு உரைக்கான எழுத்துரு பாணி விருப்பம்"
 	},
+	"label": {
+		"message": "லேபிள்",
+		"description": "[key] Tab இன் பெயர்"
+	},
 	"lightning_navigation": {
 		"message": "லைட்னிங் நெவிகேஷன்",
 		"description": "Salesforce-இன் தனிப்பயன் வழிசெலுத்தல் தொழில்நுட்பம்"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce இல் உள்நுழைக",
 		"description": "[notSalesforceSetup] பயனரை Salesforce உள்நுழைவு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
+	},
+	"must_non_empty_str": {
+		"message": "வெற்று இல்லாத சரமாக இருக்க வேண்டும்",
+		"description": "[placeholder] மற்ற உரைகளால் பயன்படுத்தப்படுகிறது"
 	},
 	"mycustomorg": {
 		"message": "எனதுதனிப்பயன்org",
@@ -859,6 +871,10 @@
 		"message": "அல்லது $drop",
 		"description": "[இறக்குமதி] பயனர் தங்கள் சுட்டியைக் கொண்டு கோப்புகளை நகர்த்தி அவற்றை வெளியிட அனுமதிக்கவும்"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab இன் Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org இணைப்பு",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "சேமித்த Tabs ஐ மேலெழுது.",
 		"description": "[label] இறக்குமதி செயல்முறையின் போது அனைத்து சேமித்த Tabs ஐயும் நீக்கு"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "பக்கம் தற்போதைய உலாவி Tab இல் திறக்கப்படும்",
+		"description": "[placeholder] மற்ற உரைகளால் பயன்படுத்தப்படுகிறது"
 	},
 	"pinned": {
 		"message": "குறியிடப்பட்டது",
@@ -927,6 +947,10 @@
 		"message": "= தேவையான தகவல்",
 		"description": "[modal] சில தகவல்கள் கட்டாயமானவை என்று பயனருக்குத் தெரிவிக்கிறது"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce டொமைன்",
+		"description": "[placeholder] மற்ற உரைகளால் பயன்படுத்தப்படுகிறது"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning தளம்"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce உள்நுழைவு",
 		"description": "Salesforce உள்நுழைவு பக்கம் (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce பக்கம்",
+		"description": "[placeholder] மற்ற உரைகளில் பயன்படுத்தப்படுகிறது"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce அமைப்புகள்",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "அனைத்தையும் தேர்ந்தெடு",
 		"description": "[modal] ஏற்றுமதி மோடலில் அனைத்து Tabs-களையும் தேர்ந்தெடுக்க பட்டன்"
+	},
+	"select_tabs": {
+		"message": "நீங்கள் விரும்பும் $tabs ஐத் தேர்ந்தெடுக்கவும்",
+		"description": "[import] பயனரை இறக்குமதி செய்வதற்கு முன் எந்த $tabs இறக்குமதி செய்ய வேண்டும் என்பதைத் தேர்ந்தெடுக்க அனுமதிக்கவும்"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] பயனரை ஏற்றுமதி செய்வதற்கு முன் எந்த $tabs ஏற்றுமதி செய்ய வேண்டும் என்பதைத் தேர்ந்தெடுக்க அனுமதிக்கவும்"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] பயனரை இறக்குமதி செய்வதற்கு முன் எந்த $tabs இறக்குமதி செய்ய வேண்டும் என்பதைத் தேர்ந்தெடுக்க அனுமதிக்கவும்"
 	},
 	"send_tip": {
 		"message": "எங்களுக்கு ஒரு உதவிக்குறிப்பை அனுப்பவும் ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது",
 		"description": "[toast] பயனர் வெளிப்புற கோப்பிலிருந்து Tabs ஐச் சேர்த்தார்"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "பயனரின் விருப்பமான இணைப்புகளில் ஒன்று"
+	},
 	"tab_explain": {
 		"message": "ஒவ்வொரு உருப்படியும் 'label' மற்றும் 'url' ஐ சரங்களாகக் கொண்டிருக்க வேண்டும். கூடுதலாக, ஒவ்வொரு உருப்படியும் 'org' ஐ சரமாக கொண்டிருக்கலாம்.",
 		"description": "[பிழை] ஒரு Tab எப்படி கட்டமைக்கப்பட வேண்டும் என்பதை விளக்குகிறது"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs சேமிக்கப்பட்டது.",
 		"description": "[toast] Tabs வெற்றிகரமாக சேமிக்கப்பட்டது."
 	},
+	"the_current_page": {
+		"message": "தற்போதைய பக்கம்",
+		"description": "[placeholder] மற்ற உரைகளால் பயன்படுத்தப்படுகிறது"
+	},
 	"theme_dark": {
 		"message": "கருப்பொருளை இருண்டதாக மாற்று",
 		"description": "[popup] கருப்பொருளை மாற்ற சந்திரனின் மீதான தலைப்பு"
@@ -1347,6 +1395,10 @@
 		"message": "பதிவேற்று",
 		"description": "[இறக்குமதி] பயனர் தங்கள் கோப்புகளை உலவ மற்றும் சரியானதைத் தேர்ந்தெடுக்க அனுமதிக்கவும்"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab இன் இணைப்பு"
+	},
 	"users": {
 		"message": "பயனர்கள்",
 		"description": "ManageUsers/home உடன் தொடர்புடைய பக்கத்தின் பெயர்"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "நீங்கள் பயன்படுத்திய கோப்பு எதிர்கால வெளியீடுகளில் ஆதரிக்கப்படாது என்பதால், உங்கள் புதிய Tab-களை ஏற்றுமதி செய்யவும்.",
 		"description": "[எச்சரிக்கை] பயனர் json கோப்பின் காலாவதியான உள்ளமைவைப் பயன்படுத்தி தங்கள் Tab-களை இறக்குமதி செய்தார்"
+	},
+	"when_click_popup_while": {
+		"message": "பாப்அப் கிளிக் செய்யும் போது பக்கம்",
+		"description": "[placeholder] மற்ற உரைகளால் பயன்படுத்தப்படுகிறது"
 	},
 	"where_to": {
 		"message": "எங்கே?",

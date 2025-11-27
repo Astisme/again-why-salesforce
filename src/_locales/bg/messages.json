@@ -675,6 +675,10 @@
 		"message": "Кликнете, за да бъдете пренасочени към документацията за тази настройка!",
 		"description": "[помощ-настройки] призив за действие, за да може потребителят да прочете повече за конкретна настройка"
 	},
+	"if_click_popup": {
+		"message": "ако кликнете върху изскачащия прозорец на разширението",
+		"description": "[placeholder] използван от други текстове"
+	},
 	"import": {
 		"message": "Импортирай",
 		"description": "[popup] бутон за импортиране"
@@ -727,6 +731,10 @@
 		"message": "Курсив",
 		"description": "Опция за стил на шрифта за курсивен текст"
 	},
+	"label": {
+		"message": "Етикет",
+		"description": "[key] името на Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning навигация",
 		"description": "Персонализирана навигационна технология на Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Влез в Salesforce",
 		"description": "[notSalesforceSetup] повикване към действие на бутон за пренасочване на потребителя към страницата за вход на Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "трябва да е низ, който не е празен",
+		"description": "[placeholder] използван от други текстове"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Или $drop",
 		"description": "[импортиране] позволете на потребителя да премества файлове с мишката си и да ги пуска"
 	},
+	"org": {
+		"message": "Организация (Org)",
+		"description": "[key] Salesforce $org на Tab"
+	},
 	"org_link": {
 		"message": "Линк към Организация",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Презапиши запазените Tab",
 		"description": "[label] изтриване на всички запазени Tab при импортиране"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "страницата ще бъде отворена в текущия браузърен Tab",
+		"description": "[placeholder] използван от други текстове"
 	},
 	"pinned": {
 		"message": "Закачен",
@@ -927,6 +947,10 @@
 		"message": "= Задължителна информация",
 		"description": "[modal] информира потребителя, че определена информация е задължителна"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce домейн",
+		"description": "[placeholder] използван от други текстове"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] платформата Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Вход в Salesforce",
 		"description": "страница за вход в Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce страница",
+		"description": "[placeholder] използван в други текстове"
 	},
 	"salesforce_setup": {
 		"message": "Настройка на Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Избиране на Всички",
 		"description": "[modal] бутон за избиране на всички Tabs в модала за експортиране"
+	},
+	"select_tabs": {
+		"message": "Изберете кои $tabs бихте искали да",
+		"description": "[import] позволява на потребителя да избере кои $tabs да импортира преди да ги импортира"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] позволява на потребителя да избере кои $tabs да експортира преди да ги експортира"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] позволява на потребителя да избере кои $tabs да импортира преди да ги импортира"
 	},
 	"send_tip": {
 		"message": "Изпратете ни бакшиш ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Импортирането е успешно",
 		"description": "[toast] потребителят успешно е импортирал Tab от външен файл"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "една от любимите връзки на потребителя"
+	},
 	"tab_explain": {
 		"message": "Всеки елемент трябва да има 'label' и 'url' като низове. Освен това, всеки елемент може да има 'org' като низ.",
 		"description": "[error] обяснява как трябва да се конструира Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tab са запазени.",
 		"description": "[toast] Tab са успешно запазени."
 	},
+	"the_current_page": {
+		"message": "текущата страница",
+		"description": "[placeholder] използван от други текстове"
+	},
 	"theme_dark": {
 		"message": "Смени темата на тъмна",
 		"description": "[popup] заглавие за иконата на луната за смяна на темата"
@@ -1347,6 +1395,10 @@
 		"message": "Качи",
 		"description": "[import] позволява на потребителя да преглежда своите файлове и да избере правилния"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] връзката на Tab"
+	},
 	"users": {
 		"message": "Потребители",
 		"description": "името на страницата свързана с ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Моля, експортирайте новите си Tabове, тъй като файлът, който сте използвали, няма да бъде поддържан в бъдещи издания.",
 		"description": "[warning] потребителят е импортирал Tabовете си, използвайки отхвърлена конфигурация на json файла"
+	},
+	"when_click_popup_while": {
+		"message": "страницата при кликване върху изскачащия прозорец, докато",
+		"description": "[placeholder] използван от други текстове"
 	},
 	"where_to": {
 		"message": "Към къде?",

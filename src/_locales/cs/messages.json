@@ -675,6 +675,10 @@
 		"message": "Kliknutím budete přesměrováni na dokumentaci k tomuto nastavení!",
 		"description": "[nápověda-nastavení] výzva k akci, která uživateli umožní přečíst si více o konkrétním nastavení"
 	},
+	"if_click_popup": {
+		"message": "pokud kliknete na vyskakovací okno rozšíření",
+		"description": "[placeholder] používáno jinými texty"
+	},
 	"import": {
 		"message": "Importovat",
 		"description": "[popup] importní tlačítko"
@@ -727,6 +731,10 @@
 		"message": "Kurzíva",
 		"description": "Možnost stylu písma pro text kurzívou"
 	},
+	"label": {
+		"message": "Popisek",
+		"description": "[key] název Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigace",
 		"description": "Vlastní navigační technologie Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Přihlásit se do Salesforce",
 		"description": "[notSalesforceSetup] výzva tlačítka pro přesměrování uživatele na přihlašovací stránku Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "musí být neprázdný řetězec",
+		"description": "[placeholder] používáno jinými texty"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Nebo $drop",
 		"description": "[importovat] umožnit uživateli přesouvat soubory myší a pouštět je"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Salesforce $org pro Tab"
+	},
 	"org_link": {
 		"message": "Odkaz organizace",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Přepsat uložené Taby.",
 		"description": "[label] smazat všechny uložené Taby během importu"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "stránka se otevře v aktuální Tab prohlížeče",
+		"description": "[placeholder] používáno jinými texty"
 	},
 	"pinned": {
 		"message": "Připnutá",
@@ -927,6 +947,10 @@
 		"message": "= Povinné informace",
 		"description": "[modal] informuje uživatele, že některé údaje jsou povinné"
 	},
+	"salesforce_domain": {
+		"message": "Doména Salesforce",
+		"description": "[placeholder] používáno jinými texty"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] platforma Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Přihlášení Salesforce",
 		"description": "stránka přihlášení Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Stránka Salesforce",
+		"description": "[placeholder] používáno v jiných textech"
 	},
 	"salesforce_setup": {
 		"message": "Nastavení Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Vybrat Vše",
 		"description": "[modal] tlačítko pro výběr všech Tabs v modálním okně pro export"
+	},
+	"select_tabs": {
+		"message": "Vyberte, které $tabs chcete",
+		"description": "[import] umožňuje uživateli vybrat, které $tabs se mají importovat před jejich importem"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] umožňuje uživateli vybrat, které $tabs se mají exportovat před jejich exportem"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] umožňuje uživateli vybrat, které $tabs se mají importovat před jejich importem"
 	},
 	"send_tip": {
 		"message": "Pošlete nám tip ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Úspěšně importováno",
 		"description": "[toast] uživatel úspěšně importoval Taby ze souboru"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "jeden z oblíbených odkazů uživatele"
+	},
 	"tab_explain": {
 		"message": "Každá položka musí mít 'label' a 'url' jako řetězce. Navíc může každá položka mít 'org' jako řetězec.",
 		"description": "[error] vysvětluje, jak má být Tab sestaven"
@@ -1319,6 +1363,10 @@
 		"message": "Taby uloženy.",
 		"description": "[toast] Taby byly úspěšně uloženy."
 	},
+	"the_current_page": {
+		"message": "aktuální stránka",
+		"description": "[placeholder] používáno jinými texty"
+	},
 	"theme_dark": {
 		"message": "Změnit téma na tmavé",
 		"description": "[popup] titulek ikony měsíce pro změnu tématu"
@@ -1347,6 +1395,10 @@
 		"message": "Nahrát",
 		"description": "[import] umožňuje uživateli procházet soubory a vybrat ten správný"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] odkaz Tab"
+	},
 	"users": {
 		"message": "Uživatelé",
 		"description": "název stránky související s ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Prosím, exportujte své nové Tab karty, protože soubor, který jste použili, nebude podporován v budoucích vydáních.",
 		"description": "[warning] uživatel importoval své Tab karty pomocí zastaralé konfigurace souboru json"
+	},
+	"when_click_popup_while": {
+		"message": "stránka při kliknutí na vyskakovací okno, zatímco",
+		"description": "[placeholder] používáno jinými texty"
 	},
 	"where_to": {
 		"message": "Kam?",

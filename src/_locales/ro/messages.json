@@ -675,6 +675,10 @@
 		"message": "Faceți clic pentru a fi redirecționat către documentația pentru această setare!",
 		"description": "[setări-ajutor] apel la acțiune pentru a permite utilizatorului să citească mai multe despre o anumită setare"
 	},
+	"if_click_popup": {
+		"message": "dacă faceți clic pe fereastra pop-up a extensiei",
+		"description": "[placeholder] utilizat de alte texte"
+	},
 	"import": {
 		"message": "Importați",
 		"description": "[popup] buton de import"
@@ -727,6 +731,10 @@
 		"message": "Italic",
 		"description": "Opțiune de stil pentru text italic"
 	},
+	"label": {
+		"message": "Etichetă",
+		"description": "[key] numele Tab"
+	},
 	"lightning_navigation": {
 		"message": "Navigație Lightning",
 		"description": "tehnologia personalizată de navigare a Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Conectați-vă la Salesforce",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de conectare Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "trebuie să fie un șir de caractere nevid",
+		"description": "[placeholder] utilizat de alte texte"
 	},
 	"mycustomorg": {
 		"message": "organizațiameapersonalizată",
@@ -859,6 +871,10 @@
 		"message": "Sau $drop",
 		"description": "[import] permiteți utilizatorului să mute fișiere cu mouse-ul și să le elibereze"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] $org-ul Salesforce al Tab"
+	},
 	"org_link": {
 		"message": "Link Org",
 		"description": "[etichetă-intrare]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Suprascrieți Tabs salvate.",
 		"description": "[etichetă] ștergeți toate Tabs salvate în timpul procesului de import"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "pagina va fi deschisă în Tab-ul curent al browser-ului",
+		"description": "[placeholder] utilizat de alte texte"
 	},
 	"pinned": {
 		"message": "Fixat",
@@ -927,6 +947,10 @@
 		"message": "= Informații obligatorii",
 		"description": "[modal] informează utilizatorul că unele informații sunt obligatorii"
 	},
+	"salesforce_domain": {
+		"message": "Domeniu Salesforce",
+		"description": "[placeholder] utilizat de alte texte"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[nuEsteConfigurareSalesforce] platforma Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Autentificare Salesforce",
 		"description": "pagina de autentificare Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Pagina Salesforce",
+		"description": "[placeholder] utilizat în alte texte"
 	},
 	"salesforce_setup": {
 		"message": "Configurare Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Selectează Tot",
 		"description": "[modal] buton pentru a selecta toate Tabs în modalul de export"
+	},
+	"select_tabs": {
+		"message": "Selectați ce $tabs doriți să",
+		"description": "[import] permite utilizatorului să selecteze ce $tabs să importe înainte de a le importa"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] permite utilizatorului să selecteze ce $tabs să exporte înainte de a le exporta"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] permite utilizatorului să selecteze ce $tabs să importe înainte de a le importa"
 	},
 	"send_tip": {
 		"message": "Trimite-ne un pont ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Importat cu succes",
 		"description": "[toast] utilizatorul a adăugat Tabs dintr-un fișier extern"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "unul dintre linkurile favorite ale utilizatorului"
+	},
 	"tab_explain": {
 		"message": "Fiecare element trebuie să aibă 'label' și 'url' ca șiruri. În plus, fiecare element poate avea un 'org' ca șir.",
 		"description": "[eroare] explică cum ar trebui construit un Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs salvate.",
 		"description": "[toast] Tabs au fost stocate cu succes."
 	},
+	"the_current_page": {
+		"message": "pagina curentă",
+		"description": "[placeholder] utilizat de alte texte"
+	},
 	"theme_dark": {
 		"message": "Schimbați tema la întunecat",
 		"description": "[popup] titlu pe lună pentru a comuta tema"
@@ -1347,6 +1395,10 @@
 		"message": "Încărcați",
 		"description": "[import] permiteți utilizatorului să navigheze prin fișierele sale și să aleagă cel corect"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] link-ul Tab"
+	},
 	"users": {
 		"message": "Utilizatori",
 		"description": "Numele paginii legate de ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Vă rugăm să exportați noile dvs. Tab-uri, deoarece fișierul pe care l-ați folosit nu va mai fi suportat în versiunile viitoare.",
 		"description": "[avertisment] utilizatorul și-a importat Tab-urile folosind o configurație învechită a fișierului json"
+	},
+	"when_click_popup_while": {
+		"message": "pagina la care se face clic pe pop-up în timp ce",
+		"description": "[placeholder] utilizat de alte texte"
 	},
 	"where_to": {
 		"message": "Unde?",

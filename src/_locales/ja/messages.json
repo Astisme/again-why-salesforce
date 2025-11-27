@@ -674,6 +674,10 @@
 		"message": "クリックして、この設定のドキュメントにリダイレクトします！",
 		"description": "[設定-ヘルプ] ユーザーが特定の**設定**についてさらに読むことを可能にする行動喚起"
 	},
+	"if_click_popup": {
+		"message": "拡張機能のポップアップをクリックした場合",
+		"description": "[placeholder] 他のテキストで使用されます"
+	},
 	"import": {
 		"message": "インポートする",
 		"description": "[popup] インポートボタン"
@@ -726,6 +730,10 @@
 		"message": "斜体",
 		"description": "斜体テキスト用のフォントスタイルオプション"
 	},
+	"label": {
+		"message": "ラベル",
+		"description": "[key] Tabの名前"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforceのカスタムナビゲーション技術"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce にログインする",
 		"description": "[notSalesforceSetup] Salesforce ログインページにリダイレクトするための呼びかけ"
+	},
+	"must_non_empty_str": {
+		"message": "空ではない文字列である必要があります",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "または$drop",
 		"description": "[インポート] ユーザーがマウスでファイルを移動してドロップできるようにする"
 	},
+	"org": {
+		"message": "組織 (Org)",
+		"description": "[key] TabのSalesforce $org"
+	},
 	"org_link": {
 		"message": "Org リンク",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "保存された Tabs を上書きする。",
 		"description": "[label] インポート中に保存されたすべての Tabs を削除する"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "ページは現在のブラウザ Tab で開かれます",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -926,6 +946,10 @@
 		"message": "= 必要な情報",
 		"description": "[modal] 一部の情報が必須であることを示します"
 	},
+	"salesforce_domain": {
+		"message": "Salesforceドメイン",
+		"description": "[placeholder] 他のテキストで使用されます"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning プラットフォーム"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforceログインページ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforceページ",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "すべて選択",
 		"description": "[modal] エクスポートモーダルですべてのTabを選択するボタン"
+	},
+	"select_tabs": {
+		"message": "どの $tabs を希望するか選択してください",
+		"description": "[import] インポートする前に、ユーザーにどの $tabs をインポートするかを選択させます"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] エクスポートする前に、ユーザーにどの $tabs をエクスポートするかを選択させます"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] インポートする前に、ユーザーにどの $tabs をインポートするかを選択させます"
 	},
 	"send_tip": {
 		"message": "チップを送る ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "正常にインポートされました",
 		"description": "[toast] 外部ファイルから Tabs が追加されました"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ユーザーのお気に入りリンクの1つ"
+	},
 	"tab_explain": {
 		"message": "各項目は 'label' と 'url' を文字列として持つ必要があります。さらに、各項目は 'org' を文字列として持つことができます。",
 		"description": "[error] Tab の作成方法を説明します。"
@@ -1318,6 +1362,10 @@
 		"message": "Tabs が保存されました。",
 		"description": "[toast] Tabs が正常に保存されました。"
 	},
+	"the_current_page": {
+		"message": "現在のページ",
+		"description": "[placeholder] 他のテキストで使用されます"
+	},
 	"theme_dark": {
 		"message": "ダークテーマに変更する",
 		"description": "[popup] テーマ変更用に月の上にあるタイトル"
@@ -1346,6 +1394,10 @@
 		"message": "アップロード",
 		"description": "[インポート] ユーザーが自分のファイルを参照して適切なものを選択できるようにします"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tabのリンク"
+	},
 	"users": {
 		"message": "ユーザー",
 		"description": "ManageUsers/home に関連するページの名前"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "使用したファイルは将来のリリースでサポートされなくなるため、新しいTabをエクスポートしてください。",
 		"description": "[警告] ユーザーがjsonファイルの非推奨の構成を使用してTabをインポートした"
+	},
+	"when_click_popup_while": {
+		"message": "ポップアップをクリックしたときのページ",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"where_to": {
 		"message": "どこへ？",

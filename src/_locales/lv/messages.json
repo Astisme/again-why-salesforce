@@ -675,6 +675,10 @@
 		"message": "Noklikšķiniet, lai tiktu novirzīts uz šī iestatījuma dokumentāciju!",
 		"description": "[iestatījumu-palīdzība] aicinājums rīkoties, lai lietotājs varētu lasīt vairāk par konkrētu iestatījumu"
 	},
+	"if_click_popup": {
+		"message": "ja noklikšķināt uz paplašinājuma uznirstošā loga",
+		"description": "[placeholder] izmanto citi teksti"
+	},
 	"import": {
 		"message": "Importēt",
 		"description": "[uznirstošais_logs] importēšanas poga"
@@ -727,6 +731,10 @@
 		"message": "Slīpraksts",
 		"description": "Fonta stila opcija slīpraksta tekstam"
 	},
+	"label": {
+		"message": "Etiķete",
+		"description": "[key] Tab nosaukums"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce pielāgotās navigācijas tehnoloģija"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Pieteikties Salesforce",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce pieteikšanās lapu"
+	},
+	"must_non_empty_str": {
+		"message": "jābūt netukšai virknei",
+		"description": "[placeholder] izmanto citi teksti"
 	},
 	"mycustomorg": {
 		"message": "manapielagotaorg",
@@ -859,6 +871,10 @@
 		"message": "Vai $drop",
 		"description": "[importēt] ļaujiet lietotājam pārvietot failus ar peli un atlaist tos"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org saite",
 		"description": "[ievades_etiķete]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Pārrakstīt saglabātos Tabs.",
 		"description": "[etiķete] dzēst visus saglabātos Tabs importēšanas procesa laikā"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "lapa tiks atvērta pašreizējā pārlūka Tab",
+		"description": "[placeholder] izmanto citi teksti"
 	},
 	"pinned": {
 		"message": "Piesprausts",
@@ -927,6 +947,10 @@
 		"message": "= Obligātā informācija",
 		"description": "[modal] informē lietotāju, ka daļa informācijas ir obligāta"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domēns",
+		"description": "[placeholder] izmanto citi teksti"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[navSalesforceIestatīšana] Salesforce Lightning platforma"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce pieteikšanās",
 		"description": "Salesforce pieteikšanās lapa (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce lapa",
+		"description": "[placeholder] izmanto citos tekstos"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce iestatījumi",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Izvēlēties Visu",
 		"description": "[modal] poga visu Tab izvēlēšanai eksportēšanas modālajā logā"
+	},
+	"select_tabs": {
+		"message": "Izvēlieties, kurus $tabs vēlaties",
+		"description": "[import] ļaujiet lietotājam izvēlēties, kurus $tabs importēt pirms to importēšanas"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] ļaujiet lietotājam izvēlēties, kurus $tabs eksportēt pirms to eksportēšanas"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ļaujiet lietotājam izvēlēties, kurus $tabs importēt pirms to importēšanas"
 	},
 	"send_tip": {
 		"message": "Sūtiet mums dzeramnaudu ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Veiksmīgi importēts",
 		"description": "[paziņojums] lietotājs pievienoja Tabs no ārēja faila"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "viena no lietotāja iecienītākajām saitēm"
+	},
 	"tab_explain": {
 		"message": "Katram elementam jābūt 'label' un 'url' kā virknēm. Papildus katram elementam var būt 'org' kā virkne.",
 		"description": "[kļūda] izskaidro, kā jābūt konstruētam Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs saglabāti.",
 		"description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
 	},
+	"the_current_page": {
+		"message": "pašreizējā lapa",
+		"description": "[placeholder] izmanto citi teksti"
+	},
 	"theme_dark": {
 		"message": "Mainīt motīvu uz tumšu",
 		"description": "[uznirstošais_logs] virsraksts uz mēness, lai pārslēgtu motīvu"
@@ -1347,6 +1395,10 @@
 		"message": "Augšupielādēt",
 		"description": "[importēt] ļaujiet lietotājam pārlūkot savus failus un izvēlēties pareizo"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab saite"
+	},
 	"users": {
 		"message": "Lietotāji",
 		"description": "Lapas nosaukums, kas saistīts ar ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Lūdzu, eksportējiet savas jaunās Tab, jo faila, ko izmantojāt, atbalsts nākotnes izlaidumos tiks pārtraukts.",
 		"description": "[brīdinājums] lietotājs importēja savas Tab, izmantojot json faila novecojušu konfigurāciju"
+	},
+	"when_click_popup_while": {
+		"message": "lapa, noklikšķinot uz uznirstošā loga, kamēr",
+		"description": "[placeholder] izmanto citi teksti"
 	},
 	"where_to": {
 		"message": "Uz kurieni?",

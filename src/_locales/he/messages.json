@@ -675,6 +675,10 @@
 		"message": "לחץ כדי להיות מופנה מחדש לתיעוד עבור הגדרה זו!",
 		"description": "[הגדרות-עזרה] קריאה לפעולה כדי לאפשר למשתמש לקרוא עוד על הגדרה ספציפית"
 	},
+	"if_click_popup": {
+		"message": "אם תלחץ על החלון הקופץ של התוסף",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
+	},
 	"import": {
 		"message": "ייבא",
 		"description": "[popup] כפתור ייבוא"
@@ -727,6 +731,10 @@
 		"message": "נטוי",
 		"description": "אפשרות סגנון גופן לטקסט נטוי"
 	},
+	"label": {
+		"message": "תווית",
+		"description": "[key] שם ה-Tab"
+	},
 	"lightning_navigation": {
 		"message": "ניווט Lightning",
 		"description": "טכנולוגיית הניווט המותאמת של Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "התחבר ל-Salesforce",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד ההתחברות של Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "חייב להיות מחרוזת שאינה ריקה",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "או $drop",
 		"description": "[ייבוא] אפשר למשתמש להזיז קבצים עם העכבר ולשחרר אותם"
 	},
+	"org": {
+		"message": "ארגון (Org)",
+		"description": "[key] ה-$org של Salesforce של ה-Tab"
+	},
 	"org_link": {
 		"message": "קישור ארגון",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "דרוס את ה-Tabs השמורים.",
 		"description": "[label] מחק את כל ה-Tabs השמורים במהלך הייבוא"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "הדף ייפתח ב-Tab הנוכחי של הדפדפן",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
 	},
 	"pinned": {
 		"message": "מוצמד",
@@ -927,6 +947,10 @@
 		"message": "= מידע נדרש",
 		"description": "[modal] מודיע למשתמש שמידע מסוים הינו חובה"
 	},
+	"salesforce_domain": {
+		"message": "דומיין Salesforce",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] פלטפורמת Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "כניסה ל-Salesforce",
 		"description": "דף הכניסה של Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "דף Salesforce",
+		"description": "[placeholder] בשימוש בטקסטים אחרים"
 	},
 	"salesforce_setup": {
 		"message": "הגדרות Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "בחר הכל",
 		"description": "[modal] כפתור לבחירת כל ה-Tabs במודל הייצוא"
+	},
+	"select_tabs": {
+		"message": "בחר אילו $tabs תרצה",
+		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייבא לפני ייבואם"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייצא לפני ייצואם"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייבא לפני ייבואם"
 	},
 	"send_tip": {
 		"message": "שלח לנו טיפ ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "ייבוא הצליח",
 		"description": "[toast] המשתמש ייבא Tabs מקובץ חיצוני בהצלחה"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "אחד מהקישורים המועדפים של המשתמש"
+	},
 	"tab_explain": {
 		"message": "כל פריט חייב לכלול 'label' ו-'url' כמחרוזות. בנוסף, כל פריט יכול לכלול 'org' כמחרוזת.",
 		"description": "[error] מסביר כיצד יש לבנות Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs נשמרו.",
 		"description": "[toast] Tabs נשמרו בהצלחה."
 	},
+	"the_current_page": {
+		"message": "הדף הנוכחי",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
+	},
 	"theme_dark": {
 		"message": "שנה נושא לחושך",
 		"description": "[popup] כותרת עבור אייקון הירח לשינוי נושא"
@@ -1347,6 +1395,10 @@
 		"message": "העלה",
 		"description": "[import] מאפשר למשתמש לעיין בקבציו ולבחור את המתאים"
 	},
+	"url": {
+		"message": "כתובת URL",
+		"description": "[key] הקישור של ה-Tab"
+	},
 	"users": {
 		"message": "משתמשים",
 		"description": "שם העמוד הקשור ל-ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "אנא ייצא את הלשוניות החדשות שלך מכיוון שהקובץ שבו השתמשת לא יתמך בגרסאות עתידיות.",
 		"description": "[אזהרה] המשתמש ייבא את הלשוניות שלו באמצעות תצורה מיושנת של קובץ ה-json"
+	},
+	"when_click_popup_while": {
+		"message": "דף בעת לחיצה על החלון הקופץ בזמן",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
 	},
 	"where_to": {
 		"message": "לאן?",

@@ -675,6 +675,10 @@
 		"message": "คลิกเพื่อเปลี่ยนเส้นทางไปยังเอกสารสำหรับตั้งค่านี้!",
 		"description": "[การตั้งค่า-ความช่วยเหลือ] คำกระตุ้นการตัดสินใจเพื่อให้ผู้ใช้สามารถอ่านเพิ่มเติมเกี่ยวกับการตั้งค่าที่เฉพาะเจาะจง"
 	},
+	"if_click_popup": {
+		"message": "หากคุณคลิกที่ป๊อปอัปส่วนขยาย",
+		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] import button"
@@ -727,6 +731,10 @@
 		"message": "ตัวเอียง",
 		"description": "ตัวเลือกรูปแบบตัวอักษรสำหรับข้อความตัวเอียง"
 	},
+	"label": {
+		"message": "ป้ายกำกับ",
+		"description": "[key] ชื่อของ Tab"
+	},
 	"lightning_navigation": {
 		"message": "การนำทาง Lightning",
 		"description": "เทคโนโลยีการนำทางที่ปรับแต่งโดย Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้าล็อกอินของ Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "ต้องเป็นสตริงที่ไม่ว่างเปล่า",
+		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "หรือ $drop",
 		"description": "[นำเข้า] ให้ผู้ใช้ย้ายไฟล์ด้วยเมาส์และปล่อยไฟล์เหล่านั้น"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Salesforce $org ของ Tab"
+	},
 	"org_link": {
 		"message": "Org Link",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Overwrite saved Tabs.",
 		"description": "[label] ลบ Tab ที่บันทึกไว้ทั้งหมดในระหว่างกระบวนการนำเข้า"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "หน้าจะถูกเปิดใน Tab เบราว์เซอร์ปัจจุบัน",
+		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
 	},
 	"pinned": {
 		"message": "ปักหมุดแล้ว",
@@ -927,6 +947,10 @@
 		"message": "= Required Information",
 		"description": "[modal] แจ้งให้ผู้ใช้ทราบว่ามีข้อมูลที่จำเป็นต้องกรอก"
 	},
+	"salesforce_domain": {
+		"message": "โดเมน Salesforce",
+		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] แพลตฟอร์ม Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "เข้าสู่ระบบ Salesforce",
 		"description": "หน้าล็อกอิน Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "หน้า Salesforce",
+		"description": "[placeholder] ใช้ในข้อความอื่น ๆ"
 	},
 	"salesforce_setup": {
 		"message": "การตั้งค่า Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "เลือกทั้งหมด",
 		"description": "[modal] ปุ่มสำหรับเลือก Tabs ทั้งหมดในโมดอลส่งออก"
+	},
+	"select_tabs": {
+		"message": "เลือก $tabs ที่คุณต้องการ",
+		"description": "[import] ให้ผู้ใช้เลือก $tabs ที่ต้องการนำเข้าก่อนนำเข้า"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] ให้ผู้ใช้เลือก $tabs ที่ต้องการส่งออกก่อนส่งออก"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ให้ผู้ใช้เลือก $tabs ที่ต้องการนำเข้าก่อนนำเข้า"
 	},
 	"send_tip": {
 		"message": "ส่งทิปให้เรา ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Successfully imported",
 		"description": "[toast] ผู้ใช้เพิ่ม Tab จากไฟล์ภายนอกเรียบร้อยแล้ว"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "หนึ่งในลิงก์โปรดของผู้ใช้"
+	},
 	"tab_explain": {
 		"message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
 		"description": "[error] อธิบายวิธีสร้าง Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs saved.",
 		"description": "[toast] บันทึก Tab เรียบร้อยแล้ว"
 	},
+	"the_current_page": {
+		"message": "หน้าปัจจุบัน",
+		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
+	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] หัวข้อบนรูปพระจันทร์สำหรับสลับธีม"
@@ -1347,6 +1395,10 @@
 		"message": "Upload",
 		"description": "[import] ให้ผู้ใช้เรียกดูไฟล์และเลือกไฟล์ที่ถูกต้อง"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] ลิงก์ของ Tab"
+	},
 	"users": {
 		"message": "Users",
 		"description": "ชื่อของหน้าที่เกี่ยวข้องกับ ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "โปรดส่งออก Tab ใหม่ของคุณเนื่องจากไฟล์ที่คุณใช้จะไม่รองรับในรุ่นถัดไป",
 		"description": "[คำเตือน] ผู้ใช้นำเข้า Tab โดยใช้การกำหนดค่าที่ล้าสมัยของไฟล์ json"
+	},
+	"when_click_popup_while": {
+		"message": "หน้าเมื่อคลิกที่ป๊อปอัปขณะที่",
+		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
 	},
 	"where_to": {
 		"message": "Where to?",

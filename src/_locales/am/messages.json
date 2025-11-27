@@ -675,6 +675,10 @@
 		"message": "ስለዚህ መቼት ተጨማሪ መረጃ ለማግኘት ጠቅ ያድርጉ!",
 		"description": "[ቅንብሮች-እርዳታ] ተጠቃሚው ስለ አንድ የተወሰነ መቼት የበለጠ እንዲያነብ ለማስቻል የሚደረግ ጥሪ"
 	},
+	"if_click_popup": {
+		"message": "የቅጥያውን ብቅ-ባይ ጠቅ ካደረጉ",
+		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
+	},
 	"import": {
 		"message": "አስመጣ",
 		"description": "[ብቅ_ባይ] የማስመጫ አዝራር"
@@ -727,6 +731,10 @@
 		"message": "አንደኛ",
 		"description": "አንደኛ ጽሑፍ የፊደል አወታት አማራጭ"
 	},
+	"label": {
+		"message": "መለያ",
+		"description": "[key] የ Tab ስም"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce የተለመዱ ትንታኔ ቴክኖሎጂ"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "ወደ Salesforce ግባ",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce መግቢያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
+	},
+	"must_non_empty_str": {
+		"message": "ባዶ ያልሆነ ሕብረቁምፊ መሆን አለበት",
+		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
 	},
 	"mycustomorg": {
 		"message": "የኔብጁድርጅት",
@@ -859,6 +871,10 @@
 		"message": "ወይም $drop",
 		"description": "[ማስመጣት] ተጠቃሚው ፋይሎችን በመዳፊት እንዲያንቀሳቅስ እና እንዲለቅ ፍቀድለት"
 	},
+	"org": {
+		"message": "ድርጅት",
+		"description": "[key] የ Tab Salesforce $org"
+	},
 	"org_link": {
 		"message": "የድርጅት ሊንክ",
 		"description": "[የግቤት_መለያ]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "የተቀመጡ Tabs ድገም።",
 		"description": "[መለያ] በማስመጣት ሂደት ወቅት ሁሉንም የተቀመጡ Tabs ሰርዝ"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "ገጹ አሁን ባለው የብሮውዘር Tab ውስጥ ይከፈታል",
+		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
 	},
 	"pinned": {
 		"message": "የተሰካ",
@@ -927,6 +947,10 @@
 		"message": "= አስፈላጊ መረጃ",
 		"description": "[ሞዳል] አንዳንድ መረጃዎች አስገዳጅ እንደሆኑ ለተጠቃሚው ይነግረዋል"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce ጎራ",
+		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[SalesforceSetupአይደለም] የ Salesforce Lightning መድረክ"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce መዝገብ ገፅ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce ገጽ",
+		"description": "[placeholder] በሌሎች ጽሑፎች ውስጥ ጥቅም ላይ የዋለ"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "ሁሉንም ምረጥ",
 		"description": "[ሞዳል] በውጪ መላኪያ ሞዳል ውስጥ ሁሉንም Tabs ለመምረጥ የሚጠቅም አዝራር"
+	},
+	"select_tabs": {
+		"message": "የትኞቹን $tabs እንደፈለጉ ይምረጡ",
+		"description": "[import] ተጠቃሚው ከማስመጣቱ በፊት የትኞቹን $tabs ማስመጣት እንደሚፈልግ እንዲመርጥ ይፍቀዱ"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] ተጠቃሚው ከመላኩ በፊት የትኞቹን $tabs መላክ እንደሚፈልግ እንዲመርጥ ይፍቀዱ"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ተጠቃሚው ከማስመጣቱ በፊት የትኞቹን $tabs ማስመጣት እንደሚፈልግ እንዲመርጥ ይፍቀዱ"
 	},
 	"send_tip": {
 		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "በተሳካ ሁኔታ አስመጥቷል",
 		"description": "[ቶስት] ተጠቃሚው Tabs ከውጭ ፋይል አክሏል"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ከተጠቃሚው ተወዳጅ አገናኞች አንዱ"
+	},
 	"tab_explain": {
 		"message": "እያንዳንዱ ንጥል 'label' እና 'url' እንደ ሕብረቁምፊ ሊኖረው ይገባል። በተጨማሪም፣ እያንዳንዱ ንጥል 'org' እንደ ሕብረቁምፊ ሊኖረው ይችላል።",
 		"description": "[ስህተት] Tab እንዴት መገንባት እንዳለበት ያብራራል"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs ተቀምጠዋል።",
 		"description": "[ቶስት] Tabs በተሳካ ሁኔታ ተከማችተዋል።"
 	},
+	"the_current_page": {
+		"message": "አሁን ያለው ገጽ",
+		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
+	},
 	"theme_dark": {
 		"message": "ገጽታን ወደ ጨለማ ቀይር",
 		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በጨረቃ ላይ ያለ ርዕስ"
@@ -1347,6 +1395,10 @@
 		"message": "ስቀል",
 		"description": "[አስመጣ] ተጠቃሚው ፋይሎቻቸውን እንዲያስስ እና ትክክለኛውን እንዲመርጥ ፍቀድ"
 	},
+	"url": {
+		"message": "ዩአርኤል",
+		"description": "[key] የ Tab አገናኝ"
+	},
 	"users": {
 		"message": "ተጠቃሚዎች",
 		"description": "ከ ManageUsers/home ጋር የተያያዘው የገጽ ስም"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "እባክዎ አዲሶቹን Tabዎችዎን ይላኩ ምክንያቱም የተጠቀሙበት ፋይል ለወደፊት ልቀቶች አይደገፍም።",
 		"description": "[warning] ተጠቃሚው Tabዎቹን በተሰረዘ የjson ፋይል ውቅር ተጠቅሞ አስመጣ"
+	},
+	"when_click_popup_while": {
+		"message": "ብቅ-ባይ ላይ ጠቅ ሲደረግ ገጽ ሳለ",
+		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
 	},
 	"where_to": {
 		"message": "ወዴት?",

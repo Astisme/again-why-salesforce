@@ -675,6 +675,10 @@
 		"message": "Kliknite za preusmeritev na dokumentacijo za to nastavitev!",
 		"description": "[nastavitve-pomoč] poziv k dejanju, ki uporabniku omogoča, da prebere več o določeni nastavitvi"
 	},
+	"if_click_popup": {
+		"message": "če kliknete na pojavno okno razširitve",
+		"description": "[placeholder] uporablja ga druga besedila"
+	},
 	"import": {
 		"message": "Uvozi",
 		"description": "[pojavno_okno] gumb za uvoz"
@@ -727,6 +731,10 @@
 		"message": "Ležeče",
 		"description": "Možnost sloga pisave za ležeče besedilo"
 	},
+	"label": {
+		"message": "Oznaka",
+		"description": "[key] ime Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigacija",
 		"description": "Prilagojena navigacijska tehnologija Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Prijava v Salesforce",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na prijavno stran Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "mora biti neprazen niz",
+		"description": "[placeholder] uporablja ga druga besedila"
 	},
 	"mycustomorg": {
 		"message": "mojalastnaorg",
@@ -859,6 +871,10 @@
 		"message": "Ali $drop",
 		"description": "[uvozi] dovolite uporabniku, da premika datoteke z miško in jih spusti"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Salesforce $org od Tab"
+	},
 	"org_link": {
 		"message": "Povezava Org",
 		"description": "[oznaka_vnosa]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Prepiši shranjene Tabs.",
 		"description": "[oznaka] izbriši vse shranjene Tabs med postopkom uvoza"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "stran se bo odprla v trenutnem Tab brskalnika",
+		"description": "[placeholder] uporablja ga druga besedila"
 	},
 	"pinned": {
 		"message": "Pripet",
@@ -927,6 +947,10 @@
 		"message": "= Zahtevane informacije",
 		"description": "[modalno_okno] sporoči uporabniku, da so nekatere informacije obvezne"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domena",
+		"description": "[placeholder] uporablja ga druga besedila"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[niSalesforceNastavitev] platforma Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce prijava",
 		"description": "Stran za prijavo v Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce stran",
+		"description": "[placeholder] uporablja v drugih besedilih"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce nastavitve",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Izberi Vse",
 		"description": "[modal] gumb za izbiro vseh Tabs v modalnem oknu za izvoz"
+	},
+	"select_tabs": {
+		"message": "Izberite, katere $tabs želite",
+		"description": "[import] omogočite uporabniku, da izbere, katere $tabs naj uvozi pred uvozom"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] omogočite uporabniku, da izbere, katere $tabs naj izvozi pred izvozom"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] omogočite uporabniku, da izbere, katere $tabs naj uvozi pred uvozom"
 	},
 	"send_tip": {
 		"message": "Pošljite nam namig ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Uspešno uvoženo",
 		"description": "[toast] uporabnik je dodal Tabs iz zunanje datoteke"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ena izmed priljubljenih povezav uporabnika"
+	},
 	"tab_explain": {
 		"message": "Vsak element mora imeti 'label' in 'url' kot niza. Poleg tega ima lahko vsak element 'org' kot niz.",
 		"description": "[napaka] pojasnjuje, kako naj bo Tab sestavljen"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs shranjeni.",
 		"description": "[toast] Tabs so bili uspešno shranjeni."
 	},
+	"the_current_page": {
+		"message": "trenutna stran",
+		"description": "[placeholder] uporablja ga druga besedila"
+	},
 	"theme_dark": {
 		"message": "Spremeni temo v temno",
 		"description": "[pojavno_okno] naslov na luni za preklop teme"
@@ -1347,6 +1395,10 @@
 		"message": "Naloži",
 		"description": "[uvoz] dovoli uporabniku, da brska po svojih datotekah in izbere pravo"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab povezava"
+	},
 	"users": {
 		"message": "Uporabniki",
 		"description": "Ime strani, povezano z ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Prosimo, izvozite svoje nove Tab-e, saj datoteka, ki ste jo uporabili, v prihodnjih izdajah ne bo več podprta.",
 		"description": "[opozorilo] uporabnik je uvozil svoje Tab-e z zastarelo konfiguracijo datoteke json"
+	},
+	"when_click_popup_while": {
+		"message": "stran ob kliku na pojavno okno med",
+		"description": "[placeholder] uporablja ga druga besedila"
 	},
 	"where_to": {
 		"message": "Kam?",

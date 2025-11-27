@@ -675,6 +675,10 @@
 		"message": "Klik om doorgestuurd te worden naar de documentatie voor deze instelling!",
 		"description": "[instellingen-hulp] oproep tot actie om de gebruiker meer te laten lezen over een specifieke instelling"
 	},
+	"if_click_popup": {
+		"message": "als u op de extensie-popup klikt",
+		"description": "[placeholder] gebruikt door andere teksten"
+	},
 	"import": {
 		"message": "Importeren",
 		"description": "[popup] importknop"
@@ -727,6 +731,10 @@
 		"message": "Cursief",
 		"description": "Lettertype-optie voor cursieve tekst"
 	},
+	"label": {
+		"message": "Label",
+		"description": "[key] de naam van de Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigatie",
 		"description": "Salesforce’s aangepaste navigatietechnologie"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Inloggen bij Salesforce",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
+	},
+	"must_non_empty_str": {
+		"message": "moet een niet-lege string zijn",
+		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"mycustomorg": {
 		"message": "mijneigenorg",
@@ -859,6 +871,10 @@
 		"message": "Of $drop",
 		"description": "[importeren] laat de gebruiker bestanden met de muis verplaatsen en loslaten"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] de Salesforce $org van de Tab"
+	},
 	"org_link": {
 		"message": "Org Link",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Opgeslagen Tabs overschrijven.",
 		"description": "[label] verwijder alle opgeslagen Tabs tijdens het importproces"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "pagina wordt geopend in de huidige browser Tab",
+		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"pinned": {
 		"message": "Vastgezet",
@@ -927,6 +947,10 @@
 		"message": "= Vereiste informatie",
 		"description": "[modal] vertelt de gebruiker dat sommige info verplicht is"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce-domein",
+		"description": "[placeholder] gebruikt door andere teksten"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[geenSalesforceSetup] het Salesforce Lightning-platform"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce-login",
 		"description": "de Salesforce-loginpagina (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce-pagina",
+		"description": "[placeholder] gebruikt in andere teksten"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce-instellingen",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Alles Selecteren",
 		"description": "[modal] knop om alle Tabs te selecteren in de export modal"
+	},
+	"select_tabs": {
+		"message": "Selecteer welke $tabs u wilt",
+		"description": "[import] laat de gebruiker selecteren welke $tabs geïmporteerd moeten worden voordat ze worden geïmporteerd"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] laat de gebruiker selecteren welke $tabs geëxporteerd moeten worden voordat ze worden geëxporteerd"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] laat de gebruiker selecteren welke $tabs geïmporteerd moeten worden voordat ze worden geïmporteerd"
 	},
 	"send_tip": {
 		"message": "Stuur ons een fooi ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Succesvol geïmporteerd",
 		"description": "[toast] de gebruiker heeft Tabs toegevoegd vanuit een extern bestand"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "een van de favoriete links van de gebruiker"
+	},
 	"tab_explain": {
 		"message": "Elk item moet 'label' en 'url' als strings hebben. Daarnaast kan elk item een 'org' als string hebben.",
 		"description": "[fout] legt uit hoe een Tab moet worden opgebouwd"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs opgeslagen.",
 		"description": "[toast] Tabs zijn succesvol opgeslagen."
 	},
+	"the_current_page": {
+		"message": "de huidige pagina",
+		"description": "[placeholder] gebruikt door andere teksten"
+	},
 	"theme_dark": {
 		"message": "Thema wijzigen naar Donker",
 		"description": "[popup] titel op de maan om thema te wisselen"
@@ -1347,6 +1395,10 @@
 		"message": "Uploaden",
 		"description": "[importeren] laat de gebruiker door zijn bestanden bladeren en de juiste kiezen"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] de link van de Tab"
+	},
 	"users": {
 		"message": "Gebruikers",
 		"description": "De naam van de pagina gerelateerd aan ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Exporteer alstublieft uw nieuwe Tabbladen, aangezien het bestand dat u hebt gebruikt, niet meer wordt ondersteund in toekomstige releases.",
 		"description": "[waarschuwing] de gebruiker heeft zijn Tabbladen geïmporteerd met behulp van een verouderde configuratie van het json-bestand"
+	},
+	"when_click_popup_while": {
+		"message": "pagina bij het klikken op de popup terwijl",
+		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"where_to": {
 		"message": "Waarheen?",

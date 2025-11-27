@@ -675,6 +675,10 @@
 		"message": "برای هدایت شدن به مستندات این تنظیم، کلیک کنید!",
 		"description": "[کمک-تنظیمات] فراخوانی برای اقدام تا کاربر بتواند در مورد یک تنظیم خاص بیشتر بخواند"
 	},
+	"if_click_popup": {
+		"message": "اگر روی پنجره بازشو افزونه کلیک کنید",
+		"description": "[placeholder] استفاده شده توسط متون دیگر"
+	},
 	"import": {
 		"message": "ورود",
 		"description": "[پنجره_بازشو] دکمه ورود"
@@ -727,6 +731,10 @@
 		"message": "ایتالیک",
 		"description": "گزینه سبک قلم برای متن ایتالیک"
 	},
+	"label": {
+		"message": "برچسب",
+		"description": "[key] نام Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "فناوری ناوبری سفارشی Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "ورود به Salesforce",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] فراخوانی برای اقدام روی دکمه برای هدایت کاربر به صفحه ورود Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "باید یک رشته غیر خالی باشد",
+		"description": "[placeholder] استفاده شده توسط متون دیگر"
 	},
 	"mycustomorg": {
 		"message": "سازمان_سفارشی_من",
@@ -859,6 +871,10 @@
 		"message": "یا $drop",
 		"description": "[وارد کردن] به کاربر اجازه دهید فایل ها را با ماوس خود جابجا کرده و رها کند"
 	},
+	"org": {
+		"message": "سازمان (Org)",
+		"description": "[key] $org Salesforce مربوط به Tab"
+	},
 	"org_link": {
 		"message": "لینک سازمان",
 		"description": "[برچسب_ورودی]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "بازنویسی Tabs ذخیره شده.",
 		"description": "[برچسب] حذف همه Tabs ذخیره شده در طول فرآیند ورود"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "صفحه در Tab فعلی مرورگر باز خواهد شد",
+		"description": "[placeholder] استفاده شده توسط متون دیگر"
 	},
 	"pinned": {
 		"message": "پین شده",
@@ -927,6 +947,10 @@
 		"message": "= اطلاعات الزامی",
 		"description": "[مودال] به کاربر می‌گوید که برخی اطلاعات اجباری است"
 	},
+	"salesforce_domain": {
+		"message": "دامنه Salesforce",
+		"description": "[placeholder] استفاده شده توسط متون دیگر"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[نه_صفحه_تنظیمات_Salesforce] پلتفرم Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "صفحه ورود Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "صفحه Salesforce",
+		"description": "[placeholder] استفاده شده در متون دیگر"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "انتخاب همه",
 		"description": "[modal] دکمه برای انتخاب تمام Tabs در مدال خروجی"
+	},
+	"select_tabs": {
+		"message": "انتخاب کنید کدام $tabs را مایلید",
+		"description": "[import] به کاربر اجازه دهید قبل از وارد کردن، $tabs هایی را که می‌خواهند وارد کنند انتخاب کنند"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] به کاربر اجازه دهید قبل از صادر کردن، $tabs هایی را که می‌خواهند صادر کنند انتخاب کنند"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] به کاربر اجازه دهید قبل از وارد کردن، $tabs هایی را که می‌خواهند وارد کنند انتخاب کنند"
 	},
 	"send_tip": {
 		"message": "یک نکته برای ما ارسال کنید ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "با موفقیت وارد شد",
 		"description": "[اعلان_کوتاه] کاربر Tabs را از یک فایل خارجی اضافه کرد"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "یکی از لینک‌های مورد علاقه کاربر"
+	},
 	"tab_explain": {
 		"message": "هر آیتم باید 'label' و 'url' را به صورت رشته داشته باشد. علاوه بر این، هر آیتم ممکن است یک 'org' به صورت رشته داشته باشد.",
 		"description": "[خطا] توضیح می‌دهد که چگونه یک Tab باید ساخته شود"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs ذخیره شد.",
 		"description": "[اعلان_کوتاه] Tabs با موفقیت ذخیره شدند."
 	},
+	"the_current_page": {
+		"message": "صفحه فعلی",
+		"description": "[placeholder] استفاده شده توسط متون دیگر"
+	},
 	"theme_dark": {
 		"message": "تغییر پوسته به تیره",
 		"description": "[پنجره_بازشو] عنوان روی ماه برای تغییر پوسته"
@@ -1347,6 +1395,10 @@
 		"message": "بارگذاری",
 		"description": "[ورود] به کاربر اجازه دهید فایل‌های خود را مرور کرده و فایل مناسب را انتخاب کند"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] لینک Tab"
+	},
 	"users": {
 		"message": "کاربران",
 		"description": "نام صفحه مربوط به ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "لطفاً Tab های جدید خود را صادر کنید زیرا فایلی که استفاده کرده‌اید در نسخه‌های آینده پشتیبانی نخواهد شد.",
 		"description": "[warning] کاربر Tab های خود را با استفاده از یک پیکربندی منسوخ شده فایل json وارد کرده است"
+	},
+	"when_click_popup_while": {
+		"message": "صفحه هنگام کلیک روی پنجره بازشو در حالی که",
+		"description": "[placeholder] استفاده شده توسط متون دیگر"
 	},
 	"where_to": {
 		"message": "کجا؟",

@@ -675,6 +675,10 @@
 		"message": "Feu clic per ser redirigit a la documentació d'aquesta configuració!",
 		"description": "[ajuda-configuració] crida a l'acció per permetre a l'usuari llegir més sobre una configuració específica"
 	},
+	"if_click_popup": {
+		"message": "si feu clic a la finestra emergent de l'extensió",
+		"description": "[placeholder] utilitzat per altres textos"
+	},
 	"import": {
 		"message": "Importar",
 		"description": "[popup] botó d'importació"
@@ -727,6 +731,10 @@
 		"message": "Cursiva",
 		"description": "Opció d'estil de lletra per a text en cursiva"
 	},
+	"label": {
+		"message": "Etiqueta",
+		"description": "[key] el nom del Tab"
+	},
 	"lightning_navigation": {
 		"message": "Navegació Lightning",
 		"description": "Tecnologia de navegació personalitzada de Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Inicia sessió a Salesforce",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina d'inici de sessió de Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "ha de ser una cadena no buida",
+		"description": "[placeholder] utilitzat per altres textos"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "O $drop",
 		"description": "[importar] permet que l'usuari mogui fitxers amb el ratolí i els deixi anar"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] el $org de Salesforce del Tab"
+	},
 	"org_link": {
 		"message": "Enllaç de l'Organització",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Sobre-escriure els Tabs desats.",
 		"description": "[label] esborrar tots els Tabs desats durant la importació"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "la pàgina s'obrirà a la Tab actual del navegador",
+		"description": "[placeholder] utilitzat per altres textos"
 	},
 	"pinned": {
 		"message": "Fixada",
@@ -927,6 +947,10 @@
 		"message": "= Informació Obligatòria",
 		"description": "[modal] informa a l'usuari que certa informació és obligatòria"
 	},
+	"salesforce_domain": {
+		"message": "Domini de Salesforce",
+		"description": "[placeholder] utilitzat per altres textos"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] la plataforma Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Inici de sessió de Salesforce",
 		"description": "la pàgina d’inici de sessió de Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Pàgina de Salesforce",
+		"description": "[placeholder] utilitzat en altres textos"
 	},
 	"salesforce_setup": {
 		"message": "Configuració de Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Seleccionar-ho Tot",
 		"description": "[modal] botó per seleccionar tots els Tabs al modal d'exportació"
+	},
+	"select_tabs": {
+		"message": "Seleccioneu quins $tabs voleu",
+		"description": "[import] permet a l'usuari seleccionar quins $tabs importar abans d'importar-los"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] permet a l'usuari seleccionar quins $tabs exportar abans d'exportar-los"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] permet a l'usuari seleccionar quins $tabs importar abans d'importar-los"
 	},
 	"send_tip": {
 		"message": "Envia'ns una propina ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Importat amb èxit",
 		"description": "[toast] l'usuari ha importat Tabs des d'un fitxer extern"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "un dels enllaços preferits de l'usuari"
+	},
 	"tab_explain": {
 		"message": "Cada element ha de tenir 'label' i 'url' com a cadenes. A més, cada element pot tenir 'org' com a cadena.",
 		"description": "[error] explica com ha de construir-se un Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs desats.",
 		"description": "[toast] els Tabs s'han desat amb èxit."
 	},
+	"the_current_page": {
+		"message": "la pàgina actual",
+		"description": "[placeholder] utilitzat per altres textos"
+	},
 	"theme_dark": {
 		"message": "Canviar Tema a Fosc",
 		"description": "[popup] títol de la icona de la lluna per canviar el tema"
@@ -1347,6 +1395,10 @@
 		"message": "Penjar",
 		"description": "[import] permet a l'usuari navegar pels seus fitxers i seleccionar-ne el correcte"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] l'enllaç del Tab"
+	},
 	"users": {
 		"message": "Usuaris",
 		"description": "el nom de la pàgina relacionada amb ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Si us plau, exporteu les vostres noves Tab, ja que el fitxer que heu utilitzat no serà compatible amb futures versions.",
 		"description": "[warning] l'usuari va importar les seves Tab utilitzant una configuració obsoleta del fitxer json"
+	},
+	"when_click_popup_while": {
+		"message": "pàgina en fer clic a la finestra emergent mentre",
+		"description": "[placeholder] utilitzat per altres textos"
 	},
 	"where_to": {
 		"message": "On?",

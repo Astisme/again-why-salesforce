@@ -674,6 +674,10 @@
 		"message": "Klik untuk diarahkan ke dokumentasi untuk pengaturan ini!",
 		"description": "[bantuan-pengaturan] ajakan bertindak untuk membiarkan pengguna membaca lebih lanjut tentang pengaturan tertentu"
 	},
+	"if_click_popup": {
+		"message": "jika Anda mengklik popup ekstensi",
+		"description": "[placeholder] digunakan oleh teks lain"
+	},
 	"import": {
 		"message": "Impor",
 		"description": "[popup] Tombol impor"
@@ -726,6 +730,10 @@
 		"message": "Miring",
 		"description": "Opsi gaya font untuk teks miring"
 	},
+	"label": {
+		"message": "Label",
+		"description": "[key] nama Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Teknologi navigasi kustom Salesforce"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Login ke Salesforce",
 		"description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "harus berupa string yang tidak kosong",
+		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "Atau $drop",
 		"description": "[impor] biarkan pengguna memindahkan file dengan mouse mereka dan melepaskannya"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] $org Salesforce dari Tab"
+	},
 	"org_link": {
 		"message": "Link Org",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "Timpa Tabs yang disimpan.",
 		"description": "[label] Hapus semua Tabs yang disimpan selama proses impor"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "halaman akan dibuka di Tab browser saat ini",
+		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"pinned": {
 		"message": "Disematkan",
@@ -926,6 +946,10 @@
 		"message": "= Informasi yang diperlukan",
 		"description": "[modal] Memberitahukan pengguna bahwa beberapa informasi wajib diisi"
 	},
+	"salesforce_domain": {
+		"message": "Domain Salesforce",
+		"description": "[placeholder] digunakan oleh teks lain"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Platform Salesforce Lightning"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "halaman login Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Halaman Salesforce",
+		"description": "[placeholder] digunakan di teks lain"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "Pilih Semua",
 		"description": "[modal] tombol untuk memilih semua Tabs di modal ekspor"
+	},
+	"select_tabs": {
+		"message": "Pilih $tabs mana yang Anda inginkan",
+		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diimpor sebelum mengimpornya"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diekspor sebelum mengekspornya"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diimpor sebelum mengimpornya"
 	},
 	"send_tip": {
 		"message": "Kirimkan kami tip ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "Berhasil diimpor",
 		"description": "[toast] Pengguna telah menambahkan Tabs dari file eksternal."
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "salah satu tautan favorit pengguna"
+	},
 	"tab_explain": {
 		"message": "Setiap item harus memiliki 'label' dan 'url' dalam bentuk string. Selain itu, setiap item dapat memiliki 'org' dalam bentuk string.",
 		"description": "[error] Menjelaskan bagaimana Tab harus dibuat."
@@ -1318,6 +1362,10 @@
 		"message": "Tabs tersimpan.",
 		"description": "[toast] Tabs berhasil disimpan."
 	},
+	"the_current_page": {
+		"message": "halaman saat ini",
+		"description": "[placeholder] digunakan oleh teks lain"
+	},
 	"theme_dark": {
 		"message": "Ubah Tema ke Gelap",
 		"description": "[popup] Judul di bulan untuk mengganti tema"
@@ -1346,6 +1394,10 @@
 		"message": "Unggah",
 		"description": "[impor] biarkan pengguna menjelajahi file mereka dan memilih yang benar"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] tautan Tab"
+	},
 	"users": {
 		"message": "Pengguna",
 		"description": "Nama halaman terkait ManageUsers/home"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "Harap ekspor Tab baru Anda karena file yang Anda gunakan tidak akan didukung di rilis mendatang.",
 		"description": "[peringatan] pengguna mengimpor Tab mereka menggunakan konfigurasi file json yang sudah usang"
+	},
+	"when_click_popup_while": {
+		"message": "halaman saat mengklik popup sementara",
+		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"where_to": {
 		"message": "Ke mana?",

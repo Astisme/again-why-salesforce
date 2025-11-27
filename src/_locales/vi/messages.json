@@ -674,6 +674,10 @@
 		"message": "Nhấp để được chuyển hướng đến tài liệu cho cài đặt này!",
 		"description": "[cài đặt-trợ giúp] lời kêu gọi hành động để người dùng đọc thêm về một cài đặt cụ thể"
 	},
+	"if_click_popup": {
+		"message": "nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng",
+		"description": "[placeholder] được sử dụng bởi các văn bản khác"
+	},
 	"import": {
 		"message": "Nhập",
 		"description": "[popup] Nút nhập"
@@ -726,6 +730,10 @@
 		"message": "Nghiêng",
 		"description": "Tùy chọn kiểu phông chữ cho văn bản nghiêng"
 	},
+	"label": {
+		"message": "Nhãn",
+		"description": "[key] tên của Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Công nghệ điều hướng tùy chỉnh của Salesforce"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Đăng nhập vào Salesforce",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang đăng nhập Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "phải là một chuỗi không rỗng",
+		"description": "[placeholder] được sử dụng bởi các văn bản khác"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "Hoặc $drop",
 		"description": "[nhập] cho phép người dùng di chuyển các tệp bằng chuột của họ và thả chúng"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] $org Salesforce của Tab"
+	},
 	"org_link": {
 		"message": "Liên kết Org",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "Ghi đè các Tabs đã lưu.",
 		"description": "[label] Xóa hết các Tabs đã lưu trong quá trình nhập khẩu"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "trang sẽ được mở trong Tab trình duyệt hiện tại",
+		"description": "[placeholder] được sử dụng bởi các văn bản khác"
 	},
 	"pinned": {
 		"message": "Đã Ghim",
@@ -926,6 +946,10 @@
 		"message": "= Thông tin bắt buộc",
 		"description": "[modal] Cho biết cho người dùng rằng một số thông tin là bắt buộc"
 	},
+	"salesforce_domain": {
+		"message": "Tên miền Salesforce",
+		"description": "[placeholder] được sử dụng bởi các văn bản khác"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Nền tảng Salesforce Lightning"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "trang đăng nhập Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Trang Salesforce",
+		"description": "[placeholder] được sử dụng trong các văn bản khác"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "Chọn Tất Cả",
 		"description": "[modal] nút để chọn tất cả Tabs trong modal xuất"
+	},
+	"select_tabs": {
+		"message": "Chọn $tabs bạn muốn",
+		"description": "[import] cho phép người dùng chọn $tabs nào để nhập trước khi nhập chúng"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] cho phép người dùng chọn $tabs nào để xuất trước khi xuất chúng"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] cho phép người dùng chọn $tabs nào để nhập trước khi nhập chúng"
 	},
 	"send_tip": {
 		"message": "Gửi cho chúng tôi một mẹo ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "Nhập khẩu thành công",
 		"description": "[toast] Người dùng đã thêm các Tabs từ file bên ngoài."
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "một trong những liên kết yêu thích của người dùng"
+	},
 	"tab_explain": {
 		"message": "Mỗi mục phải có 'label' và 'url' dưới dạng chuỗi. Ngoài ra, mỗi mục có thể có 'org' dưới dạng chuỗi.",
 		"description": "[error] Giải thích cách tạo Tab đúng cách."
@@ -1318,6 +1362,10 @@
 		"message": "Đã lưu các Tabs.",
 		"description": "[toast] Các Tabs đã được lưu thành công."
 	},
+	"the_current_page": {
+		"message": "trang hiện tại",
+		"description": "[placeholder] được sử dụng bởi các văn bản khác"
+	},
 	"theme_dark": {
 		"message": "Chuyển sang Giao diện Tối",
 		"description": "[popup] Tiêu đề trên mặt trăng để chuyển giao diện"
@@ -1346,6 +1394,10 @@
 		"message": "Tải lên",
 		"description": "[nhập] cho phép người dùng duyệt qua các tệp của họ và chọn đúng tệp"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] liên kết của Tab"
+	},
 	"users": {
 		"message": "Người dùng",
 		"description": "Tên trang liên quan đến ManageUsers/home"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "Vui lòng xuất các Tab mới của bạn vì tệp bạn đã sử dụng sẽ không được hỗ trợ trong các bản phát hành tương lai.",
 		"description": "[cảnh-báo] người dùng đã nhập các Tab của họ bằng cấu hình lỗi thời của tệp json"
+	},
+	"when_click_popup_while": {
+		"message": "trang khi nhấp vào cửa sổ bật lên trong khi",
+		"description": "[placeholder] được sử dụng bởi các văn bản khác"
 	},
 	"where_to": {
 		"message": "Đi đâu?",

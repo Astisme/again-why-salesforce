@@ -674,6 +674,10 @@
 		"message": "ఈ సెట్టింగ్ కోసం డాక్యుమెంటేషన్‌కు దారి మళ్లించడానికి క్లిక్ చేయండి!",
 		"description": "[సెట్టింగ్‌లు-సహాయం] ఒక నిర్దిష్ట సెట్టింగ్ గురించి మరింత చదవడానికి వినియోగదారుని అనుమతించే చర్యకు పిలుపు"
 	},
+	"if_click_popup": {
+		"message": "మీరు పొడిగింపు పాప్‌అప్‌ను క్లిక్ చేస్తే",
+		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
+	},
 	"import": {
 		"message": "దిగుమతి చేయండి",
 		"description": "[popup] దిగుమతి బటన్"
@@ -726,6 +730,10 @@
 		"message": "ఇటాలిక్",
 		"description": "ఇటాలిక్ టెక్స్ట్ కోసం ఫాంట్ స్టైల్ ఎంపిక"
 	},
+	"label": {
+		"message": "లేబుల్",
+		"description": "[key] Tab పేరు"
+	},
 	"lightning_navigation": {
 		"message": "లైట్నింగ్ నావిగేషన్",
 		"description": "Salesforce యొక్క అనుకూల నావిగేషన్ సాంకేతికత"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforceలో లాగిన్ అవ్వండి",
 		"description": "[notSalesforceSetup] Salesforceలో లాగిన్ పేజీకి రీడైరెక్ట్ చేయడానికి కాల్-టు-యాక్షన్"
+	},
+	"must_non_empty_str": {
+		"message": "ఖాళీ లేని స్ట్రింగ్ అయి ఉండాలి",
+		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "లేదా $drop",
 		"description": "[దిగుమతి] వినియోగదారు ఫైల్‌లను వారి మౌస్‌తో తరలించి వాటిని విడుదల చేయడానికి అనుమతించండి"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab యొక్క Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org లింక్",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "సేవ్ చేసిన Tabs ని అప్‌డేట్ చేయండి",
 		"description": "[label] దిగుమతి సమయంలో సేవ్ చేసిన అన్ని Tabs ని తొలగిస్తుంది"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "పేజీ ప్రస్తుత బ్రౌజర్ Tab లో తెరవబడుతుంది",
+		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
 	},
 	"pinned": {
 		"message": "పిన్ చేయబడింది",
@@ -926,6 +946,10 @@
 		"message": "= అవసరమైన సమాచారం",
 		"description": "[modal] కొన్ని వివరాలు తప్పనిసరినని వినియోగదారుడికి తెలియజేస్తుంది"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce డొమైన్",
+		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning ప్లాట్‌ఫారం"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce లాగిన్",
 		"description": "Salesforce లాగిన్ పేజీ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce పేజీ",
+		"description": "[placeholder] ఇతర పాఠాలలో ఉపయోగించబడుతుంది"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce సెటప్",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "అన్నీ ఎంచుకోండి",
 		"description": "[modal] ఎగుమతి మోడల్‌లో అన్ని Tabs ను ఎంచుకోవడానికి బటన్"
+	},
+	"select_tabs": {
+		"message": "మీరు ఏ $tabs ను కావలసి ఉన్నదో ఎంచుకోండి",
+		"description": "[import] వినియోగదారుకు వాటిని దిగుమతి చేయడానికి ముందు ఏ $tabs ను దిగుమతి చేయాలో ఎంచుకోవడానికి అనుమతించండి"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] వినియోగదారుకు వాటిని ఎగుమతి చేయడానికి ముందు ఏ $tabs ను ఎగుమతి చేయాలో ఎంచుకోవడానికి అనుమతించండి"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] వినియోగదారుకు వాటిని దిగుమతి చేయడానికి ముందు ఏ $tabs ను దిగుమతి చేయాలో ఎంచుకోవడానికి అనుమతించండి"
 	},
 	"send_tip": {
 		"message": "మాకు ఒక చిట్కా పంపండి ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "విజయవంతంగా దిగుమతి చేయబడింది",
 		"description": "[toast] వినియోగదారు బాహ్య ఫైల్ నుండి Tabsని జోడించారు"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "వినియోగదారు యొక్క ఇష్టమైన లింకులలో ఒకటి"
+	},
 	"tab_explain": {
 		"message": "ప్రతీ ఐటమ్ 'label' మరియు 'url' అనే స్ట్రింగ్‌లుగా ఉండాలి. అదనంగా, ప్రతీ ఐటమ్ 'org' అనే స్ట్రింగ్‌గా ఉండవచ్చు.",
 		"description": "[error] సరైన Tab ఎలా సృష్టించాలో వివరిస్తుంది"
@@ -1318,6 +1362,10 @@
 		"message": "Tabs సేవ్ అయ్యాయి",
 		"description": "[toast] Tabs విజయవంతంగా సేవ్ అయ్యాయి."
 	},
+	"the_current_page": {
+		"message": "ప్రస్తుత పేజీ",
+		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
+	},
 	"theme_dark": {
 		"message": "డార్క్ థీమ్‌కు మార్చండి",
 		"description": "[popup] థీమ్ మార్చటానికి చంద్రుడిపై టైటిల్"
@@ -1346,6 +1394,10 @@
 		"message": "అప్‌లోడ్ చేయి",
 		"description": "[import] వినియోగదారు వారి ఫైల్‌లను బ్రౌజ్ చేయడానికి మరియు సరైనదాన్ని ఎంచుకోవడానికి అనుమతించు"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab లింక్"
+	},
 	"users": {
 		"message": "వినియోగదారులు",
 		"description": "ManageUsers/home కు సంబంధించిన పేజీ పేరు"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "దయచేసి మీ కొత్త Tab-లను ఎగుమతి చేయండి, ఎందుకంటే మీరు ఉపయోగించిన ఫైల్ భవిష్యత్ విడుదలలలో మద్దతు ఇవ్వబడదు.",
 		"description": "[హెచ్చరిక] వినియోగదారు json ఫైల్ యొక్క వాడుకలో లేని కాన్ఫిగరేషన్‌ను ఉపయోగించి వారి Tab-లను దిగుమతి చేసుకున్నారు"
+	},
+	"when_click_popup_while": {
+		"message": "పాప్‌అప్‌ను క్లిక్ చేస్తున్నప్పుడు పేజీ",
+		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
 	},
 	"where_to": {
 		"message": "ఎక్కడ?",

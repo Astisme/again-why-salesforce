@@ -674,6 +674,10 @@
 		"message": "ഈ സജ്ജീകരണത്തിനായുള്ള ഡോക്യുമെന്റേഷനിലേക്ക് റീഡയറക്‌ട് ചെയ്യാൻ ക്ലിക്കുചെയ്യുക!",
 		"description": "[സജ്ജീകരണങ്ങൾ-സഹായം] ഒരു പ്രത്യേക സജ്ജീകരണത്തെക്കുറിച്ച് കൂടുതൽ വായിക്കാൻ ഉപയോക്താവിനെ അനുവദിക്കുന്നതിനുള്ള കോൾ ടു ആക്ഷൻ"
 	},
+	"if_click_popup": {
+		"message": "നിങ്ങൾ എക്സ്റ്റൻഷൻ പോപ്പപ്പ് ക്ലിക്ക് ചെയ്താൽ",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകൾ ഉപയോഗിക്കുന്നത്"
+	},
 	"import": {
 		"message": "ഇറക്കി വരിക്കുക",
 		"description": "[popup] ഇറക്കുമതി ബട്ടണ്‍"
@@ -726,6 +730,10 @@
 		"message": "ഇറ്റാലിക്",
 		"description": "ഇറ്റാലിക് ടെക്സ്റ്റ്‌ക്കായുള്ള ഫോണ്ട് ശൈലി ഓപ്‌ഷൻ"
 	},
+	"label": {
+		"message": "ലേബൽ",
+		"description": "[key] Tab-ന്റെ പേര്"
+	},
 	"lightning_navigation": {
 		"message": "ലൈറ്റ്‌നിംഗ് നാവിഗേഷൻ",
 		"description": "സെയിൽസ്ഫോഴ്സിന്റെ കസ്റ്റം നാവിഗേഷൻ സാങ്കേതികവിദ്യ"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce-ലേക്ക് ലോഗിന്‍ ചെയ്യുക",
 		"description": "[notSalesforceSetup] Salesforce ലോഗിന്‍ പേജിലേക്ക് തിരിച്ചയക്കാനുള്ള വിളി"
+	},
+	"must_non_empty_str": {
+		"message": "ശൂന്യമല്ലാത്ത സ്ട്രിംഗ് ആയിരിക്കണം",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകൾ ഉപയോഗിക്കുന്നത്"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "അല്ലെങ്കിൽ $drop",
 		"description": "[ഇറക്കുമതി ചെയ്യുക] ഉപയോക്താവിനെ അവരുടെ മൗസ് ഉപയോഗിച്ച് ഫയലുകൾ നീക്കാനും അവ റിലീസ് ചെയ്യാനും അനുവദിക്കുക"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab-ന്റെ Salesforce $org"
+	},
 	"org_link": {
 		"message": "ഓര്‍ഗന്‍ ലിങ്ക്",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "സംരക്ഷിച്ച Tabs ഒട്ടും മാറ്റുക.",
 		"description": "[label] ഇറക്കുമതി പ്രക്രിയയില്‍ സംരക്ഷിച്ച Tabs മായ്ക്കാന്‍"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "പേജ് നിലവിലെ ബ്രൗസർ Tab-ൽ തുറക്കും",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകൾ ഉപയോഗിക്കുന്നത്"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -926,6 +946,10 @@
 		"message": "= ആവശ്യമായ വിവരം",
 		"description": "[modal] ചില വിവരങ്ങള്‍ ആവശ്യമാണ് എന്ന് ഉപയോക്താവിന് പറയുകയും ചെയ്യുന്നു"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce ഡൊമെയ്ൻ",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകൾ ഉപയോഗിക്കുന്നത്"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning പ്ലാറ്റ്‌ഫോം"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce ലോഗിൻ",
 		"description": "Salesforce ലോഗിൻ പേജ് (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce പേജ്",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകളിൽ ഉപയോഗിക്കുന്നത്"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce ക്രമീകരണങ്ങൾ",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "എല്ലാം തിരഞ്ഞെടുക്കുക",
 		"description": "[modal] എക്സ്പോർട്ട് മോഡലിൽ എല്ലാ Tabs-കളും തിരഞ്ഞെടുക്കുന്നതിനുള്ള ബട്ടൺ"
+	},
+	"select_tabs": {
+		"message": "നിങ്ങൾ ആഗ്രഹിക്കുന്ന $tabs ഏതെന്ന് തിരഞ്ഞെടുക്കുക",
+		"description": "[import] ഇറക്കുമതി ചെയ്യുന്നതിനുമുമ്പ് ഏത് $tabs ഇറക്കുമതി ചെയ്യണമെന്ന് ഉപയോക്താവിനെ തിരഞ്ഞെടുക്കാൻ അനുവദിക്കുക"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] എക്സ്പോർട്ട് ചെയ്യുന്നതിനുമുമ്പ് ഏത് $tabs എക്സ്പോർട്ട് ചെയ്യണമെന്ന് ഉപയോക്താവിനെ തിരഞ്ഞെടുക്കാൻ അനുവദിക്കുക"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ഇറക്കുമതി ചെയ്യുന്നതിനുമുമ്പ് ഏത് $tabs ഇറക്കുമതി ചെയ്യണമെന്ന് ഉപയോക്താവിനെ തിരഞ്ഞെടുക്കാൻ അനുവദിക്കുക"
 	},
 	"send_tip": {
 		"message": "ഞങ്ങൾക്ക് ഒരു നുറുങ്ങ് അയക്കുക ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "യശസ്വിയായി ഇറക്കി വന്നു",
 		"description": "[toast] ഒരു പുറത്തുഫയലില്‍ നിന്നും Tabs കൂട്ടിച്ചേര്‍ത്തത്"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ഉപയോക്താവിന്റെ പ്രിയപ്പെട്ട ലിങ്കുകളിൽ ഒന്ന്"
+	},
 	"tab_explain": {
 		"message": "പ്രതിയൊരുത്തിലും 'label' ഉം 'url' ഉം സ്ട്രിങ്ങ് ആയിരിക്കണം. കൂടാതെ, ഓരോ ഐറ്റത്തിനും 'org' എന്ന സ്ട്രിംഗ് ഉണ്ടാകാം.",
 		"description": "[error] Tab എങ്ങനെ ഘടിപ്പിക്കണമെന്ന് വിശദീകരിക്കുന്നു"
@@ -1318,6 +1362,10 @@
 		"message": "Tabs സംരക്ഷിച്ചു.",
 		"description": "[toast] Tabs വിജയകരമായി സംഗ്രഹിച്ചു"
 	},
+	"the_current_page": {
+		"message": "നിലവിലെ പേജ്",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകൾ ഉപയോഗിക്കുന്നത്"
+	},
 	"theme_dark": {
 		"message": "ഡാര്‍ക്ക് തീമിലേക്ക് മാറ്റുക",
 		"description": "[popup] തീം മാറ്റാന്‍ ചന്ദ്രന്റെ ഇമേജ് ഉള്ള തലക്കെട്ട്"
@@ -1346,6 +1394,10 @@
 		"message": "അപ്പ്‌ലോഡ് ചെയ്യുക",
 		"description": "[import] ഉപയോക്താവ് ഫയലുകള്‍ ബ്രൗസ് ചെയ്ത് തിരഞ്ഞെടുക്കാന്‍"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab-ന്റെ ലിങ്ക്"
+	},
 	"users": {
 		"message": "ഉപയോക്താക്കള്‍",
 		"description": "ManageUsers/home-ുമായി ബന്ധപ്പെട്ട പേജിന്റെ പേര്"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "ദയവായി നിങ്ങളുടെ പുതിയ Tab-കൾ എക്‌സ്‌പോർട്ട് ചെയ്യുക, കാരണം നിങ്ങൾ ഉപയോഗിച്ച ഫയൽ ഭാവിയിലെ റിലീസുകളിൽ പിന്തുണയ്‌ക്കില്ല.",
 		"description": "[മുന്നറിയിപ്പ്] ഉപയോക്താവ് json ഫയലിന്റെ കാലഹരണപ്പെട്ട കോൺഫിഗറേഷൻ ഉപയോഗിച്ച് അവരുടെ Tab-കൾ ഇറക്കുമതി ചെയ്തു"
+	},
+	"when_click_popup_while": {
+		"message": "പോപ്പപ്പിൽ ക്ലിക്കുചെയ്യുമ്പോൾ ഉള്ള പേജ്",
+		"description": "[placeholder] മറ്റ് ടെക്സ്റ്റുകൾ ഉപയോഗിക്കുന്നത്"
 	},
 	"where_to": {
 		"message": "എവിടേക്ക്?",

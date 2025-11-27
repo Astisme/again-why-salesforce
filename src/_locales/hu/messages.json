@@ -675,6 +675,10 @@
 		"message": "Kattintson az adott beállítás dokumentációjához való átirányításhoz!",
 		"description": "[beállítások-segítség] felhívás a cselekvésre, amely lehetővé teszi a felhasználó számára, hogy többet olvasson egy adott beállításról"
 	},
+	"if_click_popup": {
+		"message": "ha rákattint az extension felugró ablakára",
+		"description": "[placeholder] más szövegek által használt"
+	},
 	"import": {
 		"message": "Importálás",
 		"description": "[popup] import gomb"
@@ -727,6 +731,10 @@
 		"message": "Dőlt",
 		"description": "Betűstílus opció dőlt szöveghez"
 	},
+	"label": {
+		"message": "Címke",
+		"description": "[key] a Tab neve"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigáció",
 		"description": "A Salesforce egyedi navigációs technológiája"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Bejelentkezés a Salesforce-ba",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce bejelentkezési oldalára való átnyomásra"
+	},
+	"must_non_empty_str": {
+		"message": "nem lehet üres string",
+		"description": "[placeholder] más szövegek által használt"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Vagy $drop",
 		"description": "[importálás] engedélyezze a felhasználónak, hogy az egérrel mozgassa a fájlokat, és elengedje őket"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] a Tab Salesforce $org-ja"
+	},
 	"org_link": {
 		"message": "Szervezet Link",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Mentett Tabok felülírása.",
 		"description": "[label] az összes mentett Tab törlése importálás során"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "az oldal az aktuális böngésző Tab-ban nyílik meg",
+		"description": "[placeholder] más szövegek által használt"
 	},
 	"pinned": {
 		"message": "Rögzítve",
@@ -927,6 +947,10 @@
 		"message": "= Kötelező Információk",
 		"description": "[modal] jelzi a felhasználónak, hogy bizonyos adatok megadása kötelező"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domain",
+		"description": "[placeholder] más szövegek által használt"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] a Salesforce Lightning platformja"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce bejelentkezés",
 		"description": "A Salesforce bejelentkezőoldala (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce oldal",
+		"description": "[placeholder] más szövegekben használt"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce beállítás",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Összes Kijelölése",
 		"description": "[modal] gomb az összes Tab kiválasztására az exportáló modálban"
+	},
+	"select_tabs": {
+		"message": "Válassza ki, mely $tabs-t szeretné",
+		"description": "[import] lehetővé teszi a felhasználó számára, hogy kiválassza, mely $tabs-t importálja az importálás előtt"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] lehetővé teszi a felhasználó számára, hogy kiválassza, mely $tabs-t exportálja az exportálás előtt"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] lehetővé teszi a felhasználó számára, hogy kiválassza, mely $tabs-t importálja az importálás előtt"
 	},
 	"send_tip": {
 		"message": "Küldj nekünk egy tippet ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Sikeresen importálva",
 		"description": "[toast] a felhasználó Tabokat adott hozzá egy külső fájlból"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "a felhasználó egyik kedvenc linkje"
+	},
 	"tab_explain": {
 		"message": "Minden elemnek tartalmaznia kell 'label' és 'url' mezőket karakterlánc formájában. Ezen felül minden elem tartalmazhat egy 'org' mezőt is karakterláncként.",
 		"description": "[error] leírja, hogyan kell felépíteni egy Tabot"
@@ -1319,6 +1363,10 @@
 		"message": "A Tabok elmentve.",
 		"description": "[toast] A Tabok sikeresen el lettek mentve."
 	},
+	"the_current_page": {
+		"message": "az aktuális oldal",
+		"description": "[placeholder] más szövegek által használt"
+	},
 	"theme_dark": {
 		"message": "Téma váltás Sötétre",
 		"description": "[popup] ikon címe a holdon, a téma váltásához"
@@ -1347,6 +1395,10 @@
 		"message": "Feltöltés",
 		"description": "[import] lehetővé teszi a felhasználónak, hogy böngésszen a fájljai között és kiválassza a megfelelőt"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] a Tab linkje"
+	},
 	"users": {
 		"message": "Felhasználók",
 		"description": "az oldal neve, amely a ManageUsers/home-hoz tartozik"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Kérjük, exportálja új Tabjait, mivel az Ön által használt fájl a jövőbeli kiadásokban nem lesz támogatott.",
 		"description": "[figyelmeztetés] a felhasználó a json fájl elavult konfigurációját használta a Tabjai importálásához"
+	},
+	"when_click_popup_while": {
+		"message": "oldal, amikor a felugró ablakra kattint, miközben",
+		"description": "[placeholder] más szövegek által használt"
 	},
 	"where_to": {
 		"message": "Hová?",

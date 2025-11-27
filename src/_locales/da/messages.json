@@ -675,6 +675,10 @@
 		"message": "Klik for at blive omdirigeret til dokumentationen for denne indstilling!",
 		"description": "[indstillinger-hjælp] opfordring til handling for at lade brugeren læse mere om en specifik indstilling"
 	},
+	"if_click_popup": {
+		"message": "hvis du klikker på udvidelsens popup-vindue",
+		"description": "[placeholder] bruges af andre tekster"
+	},
 	"import": {
 		"message": "Importer",
 		"description": "[popup] importknap"
@@ -727,6 +731,10 @@
 		"message": "Kursiv",
 		"description": "Skrifttypemulighed for kursiv tekst"
 	},
+	"label": {
+		"message": "Etiket",
+		"description": "[key] navnet på Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigation",
 		"description": "Salesforce’s tilpassede navigations-teknologi"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Log ind på Salesforce",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforces login-side"
+	},
+	"must_non_empty_str": {
+		"message": "skal være en ikke-tom streng",
+		"description": "[placeholder] bruges af andre tekster"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Eller $drop",
 		"description": "[importer] lad brugeren flytte filer med musen og slippe dem"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab'ens Salesforce $org"
+	},
 	"org_link": {
 		"message": "Organisationslink",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Overskriv gemte Tabs.",
 		"description": "[label] slet alle gemte Tabs under import"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "side vil blive åbnet i den aktuelle browser Tab",
+		"description": "[placeholder] bruges af andre tekster"
 	},
 	"pinned": {
 		"message": "Fastgjort",
@@ -927,6 +947,10 @@
 		"message": "= Påkrævet information",
 		"description": "[modal] informerer brugeren om, at visse oplysninger er påkrævede"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domæne",
+		"description": "[placeholder] bruges af andre tekster"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning-platformen"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce-login",
 		"description": "Salesforce-login-siden (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce side",
+		"description": "[placeholder] bruges i andre tekster"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce-opsætning",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Vælg Alt",
 		"description": "[modal] knap til at vælge alle Tabs i eksport modalen"
+	},
+	"select_tabs": {
+		"message": "Vælg hvilke $tabs du gerne vil",
+		"description": "[import] lad brugeren vælge hvilke $tabs der skal importeres, før de importeres"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] lad brugeren vælge hvilke $tabs der skal eksporteres, før de eksporteres"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] lad brugeren vælge hvilke $tabs der skal importeres, før de importeres"
 	},
 	"send_tip": {
 		"message": "Send os et tip ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Importen var succesfuld",
 		"description": "[toast] brugeren importerede Tabs fra en ekstern fil med succes"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "et af brugerens foretrukne links"
+	},
 	"tab_explain": {
 		"message": "Hvert element skal have 'label' og 'url' som strenge. Derudover kan hvert element have 'org' som streng.",
 		"description": "[error] forklarer, hvordan en Tab skal konstrueres"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs gemt.",
 		"description": "[toast] Tabs blev gemt med succes."
 	},
+	"the_current_page": {
+		"message": "den aktuelle side",
+		"description": "[placeholder] bruges af andre tekster"
+	},
 	"theme_dark": {
 		"message": "Skift tema til mørkt",
 		"description": "[popup] titel for måneikonet for at skifte tema"
@@ -1347,6 +1395,10 @@
 		"message": "Upload",
 		"description": "[import] lader brugeren gennemse deres filer og vælge den rigtige"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab'ens link"
+	},
 	"users": {
 		"message": "Brugere",
 		"description": "navnet på siden relateret til ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Venligst eksporter dine nye Tab'er, da den fil, du har brugt, ikke vil blive understøttet i fremtidige udgivelser.",
 		"description": "[warning] brugeren importerede deres Tab'er ved hjælp af en forældet konfiguration af json-filen"
+	},
+	"when_click_popup_while": {
+		"message": "side når der klikkes på popup-vinduet, mens",
+		"description": "[placeholder] bruges af andre tekster"
 	},
 	"where_to": {
 		"message": "Hvorhen?",

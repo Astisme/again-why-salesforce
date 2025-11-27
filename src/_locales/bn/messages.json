@@ -674,6 +674,10 @@
 		"message": "এই সেটিংসের ডকুমেন্টেশনে পুনর্নির্দেশিত হতে ক্লিক করুন!",
 		"description": "[সেটিংস-সাহায্য] ব্যবহারকারীকে একটি নির্দিষ্ট সেটিং সম্পর্কে আরও পড়তে দেওয়ার জন্য পদক্ষেপের আহ্বান"
 	},
+	"if_click_popup": {
+		"message": "যদি আপনি এক্সটেনশন পপআপ ক্লিক করেন",
+		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
+	},
 	"import": {
 		"message": "আমদানি করুন",
 		"description": "[popup] আমদানি বাটন"
@@ -726,6 +730,10 @@
 		"message": "ইটালিক",
 		"description": "ইটালিক টেক্সটের জন্য ফন্ট স্টাইল অপশন"
 	},
+	"label": {
+		"message": "লেবেল",
+		"description": "[key] Tab-এর নাম"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce-এর কাস্টম নেভিগেশন প্রযুক্তি"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce-এ লগইন করুন",
 		"description": "[notSalesforceSetup] Salesforce লগইন পৃষ্ঠায় পুনঃনির্দেশের জন্য কল-টু-অ্যাকশন"
+	},
+	"must_non_empty_str": {
+		"message": "একটি অ-ফাঁকা স্ট্রিং হতে হবে",
+		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "অথবা $drop",
 		"description": "[আমদানি] ব্যবহারকারীকে তাদের মাউস দিয়ে ফাইলগুলি সরাতে এবং সেগুলি ছেড়ে দিতে দিন"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab-এর Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org লিঙ্ক",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "সংরক্ষিত Tabs ওভাররাইট করুন",
 		"description": "[label] আমদানি প্রক্রিয়ার সময় সংরক্ষিত সব Tabs মুছে ফেলে"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "পৃষ্ঠাটি বর্তমান ব্রাউজার Tab-এ খোলা হবে",
+		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
 	},
 	"pinned": {
 		"message": "পিন করা",
@@ -926,6 +946,10 @@
 		"message": "= প্রয়োজনীয় তথ্য",
 		"description": "[modal] ব্যবহারকারীকে বলে যে কিছু তথ্য বাধ্যতামূলক"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce ডোমেন",
+		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning প্ল্যাটফর্ম"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce লগইন পেজ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce পৃষ্ঠা",
+		"description": "[placeholder] অন্যান্য টেক্সট-এ ব্যবহৃত"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "সবগুলি নির্বাচন করুন",
 		"description": "[modal] রপ্তানি মোডালে সব Tab নির্বাচন করার বোতাম"
+	},
+	"select_tabs": {
+		"message": "কোন $tabs আপনি চান তা নির্বাচন করুন",
+		"description": "[import] ব্যবহারকারীকে কোন $tabs আমদানি করতে হবে তা আমদানির আগে নির্বাচন করতে দিন"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] ব্যবহারকারীকে কোন $tabs রপ্তানি করতে হবে তা রপ্তানির আগে নির্বাচন করতে দিন"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ব্যবহারকারীকে কোন $tabs আমদানি করতে হবে তা আমদানির আগে নির্বাচন করতে দিন"
 	},
 	"send_tip": {
 		"message": "আমাদের একটি টিপ পাঠান ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "সফলভাবে আমদানি হয়েছে",
 		"description": "[toast] ব্যবহারকারী এক বাহ্যিক ফাইল থেকে Tabs যোগ করেছেন"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ব্যবহারকারীর পছন্দের লিঙ্কগুলির মধ্যে একটি"
+	},
 	"tab_explain": {
 		"message": "প্রত্যেকটি আইটেমের 'label' এবং 'url' অবশ্যই স্ট্রিং হিসেবে থাকতে হবে। পাশাপাশি, প্রতিটি আইটেমে 'org' স্ট্রিং হিসেবে থাকতে পারে।",
 		"description": "[error] Tab কীভাবে তৈরি হবে তা ব্যাখ্যা করে"
@@ -1318,6 +1362,10 @@
 		"message": "Tabs সংরক্ষিত হয়েছে",
 		"description": "[toast] Tabs সফলভাবে সংরক্ষিত হয়েছে"
 	},
+	"the_current_page": {
+		"message": "বর্তমান পৃষ্ঠাটি",
+		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
+	},
 	"theme_dark": {
 		"message": "ডার্ক থিমে পরিবর্তন করুন",
 		"description": "[popup] থিম পরিবর্তনের জন্য চাঁদের উপর শিরোনাম"
@@ -1346,6 +1394,10 @@
 		"message": "আপলোড করুন",
 		"description": "[import] ব্যবহারকারীকে তাদের ফাইল ব্রাউজ করতে এবং সঠিকটি বেছে নিতে দিন"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab-এর লিঙ্ক"
+	},
 	"users": {
 		"message": "ব্যবহারকারীগণ",
 		"description": "ManageUsers/home সম্পর্কিত পৃষ্ঠার নাম"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "দয়া করে আপনার নতুন Tab গুলি রপ্তানি করুন কারণ আপনি যে ফাইলটি ব্যবহার করেছেন তা ভবিষ্যতের রিলিজগুলিতে সমর্থিত হবে না।",
 		"description": "[warning] ব্যবহারকারী json ফাইলের একটি বাতিল কনফিগারেশন ব্যবহার করে তাদের Tab গুলি আমদানি করেছেন"
+	},
+	"when_click_popup_while": {
+		"message": "পপআপে ক্লিক করার সময় পৃষ্ঠা",
+		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
 	},
 	"where_to": {
 		"message": "কোথায়?",

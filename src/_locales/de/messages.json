@@ -674,6 +674,10 @@
 		"message": "Klicken Sie, um zur Dokumentation für diese Einstellung weitergeleitet zu werden!",
 		"description": "[einstellungen-hilfe] Handlungsaufforderung, damit der Benutzer mehr über eine bestimmte Einstellung lesen kann"
 	},
+	"if_click_popup": {
+		"message": "wenn Sie auf das Erweiterungs-Popup klicken",
+		"description": "[placeholder] wird von anderen Texten verwendet"
+	},
 	"import": {
 		"message": "Importieren",
 		"description": "[popup] Import-Knopf"
@@ -726,6 +730,10 @@
 		"message": "Kursiv",
 		"description": "Schriftstiloption für kursiven Text"
 	},
+	"label": {
+		"message": "Beschriftung",
+		"description": "[key] der Name des Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce-eigene Navigationstechnologie"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Bei Salesforce anmelden",
 		"description": "[notSalesforceSetup] Aufruf zur Anmeldung bei Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "muss eine nicht-leere Zeichenkette sein",
+		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "Oder $drop",
 		"description": "[Importieren] Ermöglichen Sie dem Benutzer, Dateien mit der Maus zu verschieben und abzulegen"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] die Salesforce $org des Tab"
+	},
 	"org_link": {
 		"message": "Org-Link",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "Gespeicherte Tabs überschreiben.",
 		"description": "[label] Löscht alle gespeicherten Tabs während des Importvorgangs"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "Seite wird im aktuellen Browser Tab geöffnet",
+		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"pinned": {
 		"message": "Angepinnt",
@@ -926,6 +946,10 @@
 		"message": "= Erforderliche Informationen",
 		"description": "[modal] Zeigt an, dass bestimmte Informationen notwendig sind"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce-Domäne",
+		"description": "[placeholder] wird von anderen Texten verwendet"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Die Salesforce Lightning Plattform"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce-Anmeldeseite (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce-Seite",
+		"description": "[placeholder] wird in anderen Texten verwendet"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "Alle Auswählen",
 		"description": "[modal] Schaltfläche, um alle Tabs im Export-Modal auszuwählen"
+	},
+	"select_tabs": {
+		"message": "Wählen Sie, welche $tabs Sie möchten",
+		"description": "[import] lässt den Benutzer auswählen, welche $tabs importiert werden sollen, bevor sie importiert werden"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] lässt den Benutzer auswählen, welche $tabs exportiert werden sollen, bevor sie exportiert werden"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] lässt den Benutzer auswählen, welche $tabs importiert werden sollen, bevor sie importiert werden"
 	},
 	"send_tip": {
 		"message": "Senden Sie uns ein Trinkgeld ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "Erfolgreich importiert",
 		"description": "[toast] Der Benutzer hat Tabs aus einer externen Datei hinzugefügt."
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "einer der Favoriten-Links des Benutzers"
+	},
 	"tab_explain": {
 		"message": "Jedes Element muss 'label' und 'url' als Zeichenketten enthalten. Zusätzlich kann jedes Element ein 'org' als Zeichenkette haben.",
 		"description": "[error] Erklärt, wie ein Tab aufgebaut sein muss."
@@ -1318,6 +1362,10 @@
 		"message": "Tabs gespeichert.",
 		"description": "[toast] Tabs wurden erfolgreich gespeichert."
 	},
+	"the_current_page": {
+		"message": "die aktuelle Seite",
+		"description": "[placeholder] wird von anderen Texten verwendet"
+	},
 	"theme_dark": {
 		"message": "Thema auf Dunkel wechseln",
 		"description": "[popup] Titel auf dem Mond zum Wechseln des Themas"
@@ -1346,6 +1394,10 @@
 		"message": "Hochladen",
 		"description": "[import] Ermöglicht es dem Benutzer, durch seine Dateien zu stöbern und die richtige auszuwählen"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] der Link des Tab"
+	},
 	"users": {
 		"message": "Benutzer",
 		"description": "Der Name der Seite, die sich auf ManageUsers/home bezieht"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "Bitte exportieren Sie Ihre neuen Tab-Karten, da die von Ihnen verwendete Datei in zukünftigen Versionen nicht mehr unterstützt wird.",
 		"description": "[warning] der Benutzer hat seine Tab-Karten mit einer veralteten Konfiguration der json-Datei importiert"
+	},
+	"when_click_popup_while": {
+		"message": "Seite beim Klicken auf das Popup, während",
+		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"where_to": {
 		"message": "Wohin?",
