@@ -105,6 +105,15 @@ async function generateSldsImport() {
 	return { saveButton, closeButton, inputContainer };
 }
 
+/**
+ * Imports the given Tabs
+ * @param {any[]} [tabs=[]] the Tabs to be imported either in a TabContainer or in a File[]
+ * @param {Object} [importConfig={}] an Object with the following keys
+ * @param {boolean} [importConfig.resetTabs=false] whether to reset the Tabs with the ones imported
+ * @param {boolean} [importConfig.preserveOtherOrg=false] whether to preserve the Tabs used in other Orgs
+ * @param {boolean} [importConfig.importMetadata=false] whether to import the metadata from the file
+ * @return undefined - nothing
+ */
 async function launchImport(tabs = [], importConfig = {}) {
 	const allTabs = await ensureAllTabsAvailability();
 	let importedNum = 0;
@@ -127,6 +136,15 @@ async function launchImport(tabs = [], importConfig = {}) {
 	showToast(["import_successful", importedNum, "tabs"], true);
 }
 
+/**
+ * Presents all the Tabs which are about to be imported so the user may pick which ones to actually import, then runs the import with the selected Tabs
+ * @param {File|File[]} files - The file(s) to read and validate.
+ * @param {Object} [importConfig={}] an Object with the following keys
+ * @param {boolean} [importConfig.resetTabs=false] whether to reset the Tabs with the ones imported
+ * @param {boolean} [importConfig.preserveOtherOrg=false] whether to preserve the Tabs used in other Orgs
+ * @param {boolean} [importConfig.importMetadata=false] whether to import the metadata from the file
+ * @return undefined - nothing
+ */
 async function showTabSelectThenImport(files = [], importConfig = {}) {
 	if (document.getElementById(MODAL_ID) != null) {
 		document.getElementById(CLOSE_MODAL_ID).click();

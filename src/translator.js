@@ -171,6 +171,12 @@ class TranslationService {
 		}
 	}
 
+  /**
+   * retrieves the message related to the given key
+   * @param {string|Array} key - the key for which to find the message
+   * @return {string|undefined} the message found or nothing
+   * @throws TypeError if key is neither a string nor an Array
+   */
 	#getMessageFromCache(key) {
 		if (Array.isArray(key)) {
 			return undefined;
@@ -194,9 +200,6 @@ class TranslationService {
 	 * @throws {Error} If the key is missing in all locale caches, throws an Error with a translated error message prefix.
 	 */
 	async #_translate(key, connector = " ", isError = false) {
-		if (typeof key !== "string") {
-			console.error("translator", key);
-		}
 		if (
 			key.includes(" ") &&
 			this.#getMessageFromCache(key) == null
@@ -268,9 +271,6 @@ class TranslationService {
 		}
 		// key is not an Array
 		try {
-			if (key === "help_automatic_open_setup") {
-				console.log(key);
-			}
 			const keyTranslate = await this.#_translate(key);
 			if (!keyTranslate.includes("$")) {
 				return keyTranslate;
