@@ -68,14 +68,11 @@ export class TabContainer extends Array {
 	 * @throws TypeError when passing a value that is not a number
 	 */
 	set pinned(pinnedTabs = 0) { // function name same as TabContainer.keyPinnedTabsNo
+		pinnedTabs = pinnedTabs ?? 0; // takes care of null and undefined
 		if (typeof pinnedTabs !== "number") {
 			throw new TypeError("error_required_params");
 		}
-		pinnedTabs = pinnedTabs ?? 0;
-		if (pinnedTabs < 0) {
-			pinnedTabs = 0;
-		}
-		this.#pinnedTabs = pinnedTabs;
+		this.#pinnedTabs = Math.max(0, Math.min(this.length, pinnedTabs));
 	}
 
 	static keyPinnedTabsNo = "pinned";
@@ -121,24 +118,6 @@ export class TabContainer extends Array {
 	}
 
 	/**
-	 * Checks if the given tabs are valid and adds them to the context if so.
-	 *
-	 * @param {Array} tabs - The tabs to validate and add.
-	 * @return {Promise<boolean>} Resolves to true if tabs were added, otherwise false.
-	 */
-	static async #checkAddTabs(tabs) {
-		if (singletonAllTabs == null) {
-			throw new Error("error_tabcont_initialize");
-		}
-		if (
-			tabs == null || tabs.length <= 0 ||
-			!Array.isArray(tabs)
-		) {
-			return false;
-		}
-		return await singletonAllTabs.addTabs(tabs);
-	}
-	/**
 	 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
 	 *
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
@@ -148,19 +127,36 @@ export class TabContainer extends Array {
 		if (singletonAllTabs == null) {
 			throw new Error("error_tabcont_initialize");
 		}
-		const savedTabs = await singletonAllTabs.getSavedTabs(false);
-		if (await TabContainer.#checkAddTabs(savedTabs)) {
-			return true;
-		}
-		return await singletonAllTabs.setDefaultTabs();
+		const {
+			[TabContainer.keyTabs]: savedTabs,
+			[TabContainer.keyPinnedTabsNo]: pinnedTabs,
+		} = await singletonAllTabs.getSavedTabs(false);
+		return (
+			Array.isArray(savedTabs) &&
+			savedTabs.length > 0 &&
+			await (singletonAllTabs.addTabs(savedTabs, false)) &&
+			Boolean(
+				(singletonAllTabs[TabContainer.keyPinnedTabsNo] = pinnedTabs) ||
+					true,
+			) // set pinned number based on storage (if pinned === 0, do not fail (with true))
+		) || await singletonAllTabs.setDefaultTabs();
 	}
 
 	/**
 	 * Creates a non-initialized TabContainer instance
+	 * @param {Object} [param0={}] an Object with the following keys
+	 * @param {any[]} [param0.tabs=[]] the Tabs which should be inserted in the instance
+	 * @param {number} [param0.pinned=0] the number of pinned Tabs which should be set
 	 * @return a brand-new non-initialized TabContainer
 	 */
-	static getThrowawayInstance() {
-		return new TabContainer(_tabContainerSecret);
+	static getThrowawayInstance({
+		tabs = [],
+		pinned = 0,
+	} = {}) {
+		const res = new TabContainer(_tabContainerSecret);
+		res.push(tabs);
+		res[TabContainer.keyPinnedTabsNo] = pinned;
+		return res;
 	}
 	/**
 	 * Creates and initializes a new `TabContainer` instance.
@@ -219,9 +215,15 @@ export class TabContainer extends Array {
 		if (items.length === 1 && Array.isArray(items[0])) {
 			items = items[0];
 		}
+		const seen = new Set();
 		return items
-			.map((item) => this.#validateItem(item).tab)
-			.filter((tb) => tb != null);
+			.filter((item) => {
+				const key = `${item?.url}|${item?.org}`;
+				const seenLen = seen.size;
+				return seen.add(key).size > seenLen;
+			}) // remove internal duplicates
+			.map((item) => this.#validateItem(item).tab) // validate each item
+			.filter(Boolean); // select only the valid items
 	}
 
 	/**
@@ -370,23 +372,21 @@ export class TabContainer extends Array {
 	 * @return {Promise<Object|TabContainer>} - A promise that resolves to either the `TabContainer` instance (if `replace` is `true`) or the retrieved saved tabs.
 	 */
 	async getSavedTabs(replace = true) {
-		const {
-			[TabContainer.keyTabs]: tabs,
-			[TabContainer.keyPinnedTabsNo]: pinnedTabs,
-		} = this.#getTabContainerFromObj(
+		const res = this.#getTabContainerFromObj(
 			await sendExtensionMessage({ what: "get", key: WHY_KEY }),
 		);
-		this.#pinnedTabs = pinnedTabs ?? 0;
 		if (replace) {
-			await this.replaceTabs(tabs, {
-				resetTabs: true,
-				removeOrgTabs: true,
-				sync: false,
-				updatePinnedTabs: false,
-			});
-			return this;
+			res[TabContainer.keyTabs] = await this.replaceTabs(
+				res[TabContainer.keyTabs],
+				{
+					resetTabs: true,
+					removeOrgTabs: true,
+					sync: false,
+					updatePinnedTabs: true,
+				},
+			);
 		}
-		return tabs;
+		return res;
 	}
 
 	/**
@@ -398,7 +398,7 @@ export class TabContainer extends Array {
 		const flows = await translator.translate("flows");
 		const users = await translator.translate("users");
 		this.length = 0;
-		this.#pinnedTabs = 0;
+		this[TabContainer.keyPinnedTabsNo] = 0;
 		return await this.addTabs([
 			{ label: "⚡", url: "/lightning" },
 			{ label: flows, url: "/lightning/app/standard__FlowsApp" },
@@ -421,7 +421,7 @@ export class TabContainer extends Array {
 		const initialLength = this.length;
 		if (addInFront) {
 			// add in front but after the pinned Tabs
-			this.splice(this.#pinnedTabs, 0, tab);
+			this.splice(this[TabContainer.keyPinnedTabsNo], 0, tab);
 		} else {
 			// add at the end
 			this.push(tab);
@@ -733,11 +733,14 @@ export class TabContainer extends Array {
 		) {
 			this.splice(0, this.length);
 			if (updatePinnedTabs) {
-				this.#pinnedTabs = 0;
+				this[TabContainer.keyPinnedTabsNo] = 0;
 			}
 		} else if (resetTabs || removeOrgTabs) {
 			// treat the pinned Tabs as their own list
-			const pinnedTabsList = this.splice(0, this.#pinnedTabs);
+			const pinnedTabsList = this.splice(
+				0,
+				this[TabContainer.keyPinnedTabsNo],
+			);
 			// loop on both this and pinnedTabsList with the same splice function
 			for (const what of [this, pinnedTabsList]) {
 				what.splice(
@@ -779,7 +782,7 @@ export class TabContainer extends Array {
 			}
 			// set the pinnedTabs to the updated length of the pinnedTabsList
 			if (updatePinnedTabs) {
-				this.#pinnedTabs = pinnedTabsList.length;
+				this[TabContainer.keyPinnedTabsNo] = pinnedTabsList.length;
 			}
 		}
 		// Add new tabs and sync them
@@ -794,7 +797,7 @@ export class TabContainer extends Array {
 	toJSON() {
 		return {
 			[TabContainer.keyTabs]: Array.from(this).map((tb) => tb.toJSON()),
-			[TabContainer.keyPinnedTabsNo]: this.#pinnedTabs,
+			[TabContainer.keyPinnedTabsNo]: this[TabContainer.keyPinnedTabsNo],
 		};
 	}
 
@@ -804,7 +807,7 @@ export class TabContainer extends Array {
 	 * @return {string} - A string representing the `TabContainer` instance.
 	 */
 	toString() {
-		return `[\n${this.map((tb) => tb.toString()).join(",\n")}\n]`;
+		return JSON.stringify(this.toJSON());
 	}
 
 	/**
@@ -830,7 +833,7 @@ export class TabContainer extends Array {
 		}
 		// imported is now a valid Array of Tabs
 		const backupTabs = [...this]; // clones the Tabs inside this; otherwise, we would simply "rename" this.
-		const backupPinnedTabs = this.#pinnedTabs;
+		const backupPinnedTabs = this[TabContainer.keyPinnedTabsNo];
 		try {
 			let importPinnedTabs = 0;
 			let importedTabsNo = 0;
@@ -873,7 +876,7 @@ export class TabContainer extends Array {
 				if (await this.addTabs(imported)) {
 					importedTabsNo += this.length - newLen;
 					if (resetTabs && importMetadata) {
-						this.#pinnedTabs = importPinnedTabs;
+						this[TabContainer.keyPinnedTabsNo] = importPinnedTabs;
 					}
 					return importedTabsNo;
 				}
@@ -882,7 +885,7 @@ export class TabContainer extends Array {
 			console.info(error);
 			this.length = 0;
 			this.push(...backupTabs);
-			this.#pinnedTabs = backupPinnedTabs;
+			this[TabContainer.keyPinnedTabsNo] = backupPinnedTabs;
 			throw error;
 		}
 		return 0;
@@ -920,15 +923,15 @@ export class TabContainer extends Array {
 		}
 		// if the user does not want to reset their Tabs, get the pinned Tabs to be imported and add them to the pinned list
 		if (resetTabs) {
-			this.#pinnedTabs = 0;
 			this.length = 0;
+			this[TabContainer.keyPinnedTabsNo] = 0;
 			return res;
 		}
 		// merge the already pinned Tabs with the imported pinned Tabs
 		// if pinnedTabs is 0, we'll simply do an unshift of the importPinnedTabsList
 		const pinnedTabsList = this.splice(
 			0,
-			this.#pinnedTabs,
+			this[TabContainer.keyPinnedTabsNo],
 		);
 		const uniqueImportPinnedTabsList = importedArr
 			.splice(
@@ -947,7 +950,7 @@ export class TabContainer extends Array {
 			...pinnedTabsList,
 			...uniqueImportPinnedTabsList,
 		);
-		this.#pinnedTabs = pinnedTabsList.length +
+		this[TabContainer.keyPinnedTabsNo] = pinnedTabsList.length +
 			uniqueImportPinnedTabsList.length;
 		res.importedTabs = uniqueImportPinnedTabsList.length;
 		return res;
@@ -1029,20 +1032,24 @@ export class TabContainer extends Array {
 		const currentIndex = this.getTabIndex(
 			this.getSingleTabByData({ label, url, org }),
 		);
-		const isPinned = currentIndex < this.#pinnedTabs;
+		const isPinned = currentIndex < this[TabContainer.keyPinnedTabsNo];
 		const newIndex = this.#getMoveIndex({
 			fullMovement,
 			moveBefore,
-			minIndex: isPinned ? 0 : this.#pinnedTabs,
-			maxIndex: isPinned ? this.#pinnedTabs - 1 : this.length - 1,
+			minIndex: isPinned ? 0 : this[TabContainer.keyPinnedTabsNo],
+			maxIndex: isPinned
+				? this[TabContainer.keyPinnedTabsNo] - 1
+				: this.length - 1,
 			currentIndex,
 			org,
 		});
 		if (pinMovement != null) {
-			if (pinMovement && newIndex < this.#pinnedTabs) {
+			if (pinMovement && newIndex < this[TabContainer.keyPinnedTabsNo]) {
 				throw new Error("error_already_pinned");
 			}
-			if (!pinMovement && newIndex >= this.#pinnedTabs) {
+			if (
+				!pinMovement && newIndex >= this[TabContainer.keyPinnedTabsNo]
+			) {
 				throw new Error("error_already_unpinned");
 			}
 		} else if (newIndex === currentIndex) {
@@ -1116,8 +1123,8 @@ export class TabContainer extends Array {
 			throw new Error(msg);
 		}
 		const index = this.getTabIndex(this.getSingleTabByData(tab));
-		if (index < this.#pinnedTabs) {
-			this.#pinnedTabs--;
+		if (index < this[TabContainer.keyPinnedTabsNo]) {
+			this[TabContainer.keyPinnedTabsNo]--;
 		}
 		const initialLength = this.length;
 		this.splice(index, 1);
@@ -1151,18 +1158,18 @@ export class TabContainer extends Array {
 		let index;
 		let deleteCount;
 		if (rmPinned) {
-			if (this.#pinnedTabs < 1) {
+			if (this[TabContainer.keyPinnedTabsNo] < 1) {
 				throw new Error("error_no_pinned");
 			}
 			index = 0;
-			deleteCount = this.#pinnedTabs;
-			this.#pinnedTabs = 0;
+			deleteCount = this[TabContainer.keyPinnedTabsNo];
+			this[TabContainer.keyPinnedTabsNo] = 0;
 		} else {
-			if (this.#pinnedTabs >= this.length) {
+			if (this[TabContainer.keyPinnedTabsNo] >= this.length) {
 				throw new Error("error_no_unpinned");
 			}
 			// remove unpinned
-			index = this.#pinnedTabs;
+			index = this[TabContainer.keyPinnedTabsNo];
 			deleteCount = this.length;
 		}
 		const initialLength = this.length;
@@ -1205,7 +1212,9 @@ export class TabContainer extends Array {
 			// if true => 1; else => 0
 			this.splice(0, this.length);
 			this.push(matchTab);
-			this.#pinnedTabs = Number(index < this.#pinnedTabs);
+			this[TabContainer.keyPinnedTabsNo] = Number(
+				index < this[TabContainer.keyPinnedTabsNo],
+			);
 			return await this.syncTabs();
 		}
 		let minIndex;
@@ -1215,12 +1224,16 @@ export class TabContainer extends Array {
 			minIndex = 0;
 			deleteCount = index;
 			whereIndex = minIndex;
-			this.#pinnedTabs = Math.max(0, this.#pinnedTabs - index);
+			this[TabContainer.keyPinnedTabsNo] =
+				this[TabContainer.keyPinnedTabsNo] - index;
 		} else {
 			minIndex = index + 1;
 			deleteCount = this.length;
 			whereIndex = deleteCount;
-			this.#pinnedTabs = Math.min(this.#pinnedTabs, minIndex);
+			this[TabContainer.keyPinnedTabsNo] = Math.min(
+				this[TabContainer.keyPinnedTabsNo],
+				minIndex,
+			);
 		}
 		this.splice(
 			whereIndex,
@@ -1271,7 +1284,10 @@ export class TabContainer extends Array {
 			);
 		}
 		// backup pinned Tabs (do not sort them)
-		const pinnedTabsList = this.splice(0, this.#pinnedTabs);
+		const pinnedTabsList = this.splice(
+			0,
+			this[TabContainer.keyPinnedTabsNo],
+		);
 		const sortFactor = sortAsc ? 1 : -1;
 		super.sort((a, b) => {
 			// Treat null or undefined values as "smaller" to ensure they are grouped together
@@ -1314,7 +1330,7 @@ export class TabContainer extends Array {
 		let asc = true;
 		let desc = true;
 		for (
-			let i = this.#pinnedTabs + 1;
+			let i = this[TabContainer.keyPinnedTabsNo] + 1;
 			i < this.length && (asc || desc);
 			i++
 		) {
@@ -1485,7 +1501,7 @@ export class TabContainer extends Array {
 			}
 		}
 		// update pinnedTabs
-		this.#pinnedTabs += isPin ? 1 : -1;
+		this[TabContainer.keyPinnedTabsNo] += isPin ? 1 : -1;
 		// sync tabs
 		return await this.syncTabs({
 			fromInvalidateSortFunction: isPin ? undefined : true,

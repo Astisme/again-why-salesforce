@@ -1,5 +1,5 @@
 "use strict";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import { EXTENSION_NAME } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -8,12 +8,14 @@ import {
 	generateSection,
 	generateSldsFileInput,
 	generateSldsModal,
+	generateSldsModalWithTabList,
 	MODAL_ID,
 } from "./generator.js";
 import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
+const SELECT_TABS_ID = `${IMPORT_ID}-select-tabs`;
 const METADATA_ID = `${IMPORT_ID}-metadata`;
 const OVERWRITE_ID = `${IMPORT_ID}-overwrite`;
 const OTHER_ORG_ID = `${IMPORT_ID}-other-org`;
@@ -71,6 +73,12 @@ async function generateSldsImport() {
 	);
 	duplicateWarningPart1.style.textAlign = "center";
 	divParent.append(duplicateWarningPart1);
+	const selectTabsCheckbox = await generateCheckboxWithLabel(
+		SELECT_TABS_ID,
+		"select_tabs_import",
+		false,
+	);
+	divParent.appendChild(selectTabsCheckbox);
 	const importMetadataCheckbox = await generateCheckboxWithLabel(
 		METADATA_ID,
 		"import_metadata",
@@ -97,6 +105,82 @@ async function generateSldsImport() {
 	return { saveButton, closeButton, inputContainer };
 }
 
+async function launchImport(tabs = [], importConfig = {}) {
+	const allTabs = await ensureAllTabsAvailability();
+	let importedNum = 0;
+	if (tabs instanceof TabContainer) {
+		importedNum = await allTabs.importTabs(
+			tabs.toString(),
+			importConfig,
+		);
+	} else {
+		for (const file of tabs) {
+			const jsonString = await file.text();
+			importedNum += await allTabs.importTabs(
+				jsonString,
+				importConfig,
+			);
+		}
+	}
+	// remove file import modal
+	document.getElementById(CLOSE_MODAL_ID)?.click();
+	showToast(["import_successful", importedNum, "tabs"], true);
+}
+
+async function showTabSelectThenImport(files = [], importConfig = {}) {
+	if (document.getElementById(MODAL_ID) != null) {
+		document.getElementById(CLOSE_MODAL_ID).click();
+	}
+	const fileTabs = await Promise.all(
+		files
+			.map(async (f) => JSON.parse(await f.text())),
+	);
+	const fileTabsIsArray = Array.isArray(fileTabs) && fileTabs.length > 1;
+	const availableTabs = [];
+	for (const ft of fileTabs) {
+		if (Array.isArray(ft)) {
+			availableTabs.push(...ft);
+		} else {
+			const tabs = ft[TabContainer.keyTabs];
+			availableTabs.push(...tabs);
+		}
+	}
+	// the user wants to select which Tabs to import
+	const importTabs = TabContainer.getThrowawayInstance({
+		tabs: availableTabs,
+	}); // ensure no duplicates
+	importTabs.sort({ sortBy: "url" }, false); // sort by label asc without sync
+	const {
+		modalParent,
+		saveButton,
+		closeButton,
+		getSelectedTabs,
+	} = await generateSldsModalWithTabList(
+		importTabs,
+		{
+			title: "import_tabs",
+			saveButtonLabel: "import",
+			explainer: "select_tabs_import",
+		},
+	);
+	getModalHanger().appendChild(modalParent);
+	saveButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		const { tabs: pickedTabs, selectedAll } = getSelectedTabs();
+		if (pickedTabs.length === 0) {
+			return showToast("error_no_tabs_selected", false, true);
+		}
+		closeButton.click();
+		const selectedTabContainer = TabContainer.getThrowawayInstance({
+			tabs: pickedTabs,
+			pinned: fileTabsIsArray || !selectedAll
+				? 0
+				: fileTabs[0][TabContainer.keyPinnedTabsNo],
+		});
+		launchImport(selectedTabContainer, importConfig);
+	});
+}
+
 /**
  * Reads and processes JSON files using modern Promise-based API.
  *
@@ -104,7 +188,9 @@ async function generateSldsImport() {
  * @return {Promise<void>}
  */
 async function readFile(files) {
-	const fileArray = Array.isArray(files) ? files : [files];
+	const fileArray = Array.isArray(files) || files.length > 0
+		? files
+		: [files];
 	const validFileArray = [];
 	// Validate all files first
 	for (const file of fileArray) {
@@ -114,34 +200,24 @@ async function readFile(files) {
 			showToast("import_invalid_file", false);
 		}
 	}
-
 	try {
+		const selectTabsPick =
+			inputModalParent.querySelector(`#${SELECT_TABS_ID}`).checked;
 		const metadataPick =
 			inputModalParent.querySelector(`#${METADATA_ID}`).checked;
 		const overwritePick =
 			inputModalParent.querySelector(`#${OVERWRITE_ID}`).checked;
 		const otherOrgPick =
 			inputModalParent.querySelector(`#${OTHER_ORG_ID}`).checked;
-		const allTabs = await ensureAllTabsAvailability();
-		const oldTabsLength = allTabs.length;
-		for (const file of validFileArray) {
-			const jsonString = await file.text();
-			await allTabs.importTabs(
-				jsonString,
-				{
-					resetTabs: overwritePick,
-					preserveOtherOrg: otherOrgPick,
-					importMetadata: metadataPick,
-				},
-			);
+		const importConfig = {
+			resetTabs: overwritePick,
+			preserveOtherOrg: otherOrgPick,
+			importMetadata: metadataPick,
+		};
+		if (selectTabsPick) {
+			return await showTabSelectThenImport(validFileArray, importConfig);
 		}
-		let totalImported = allTabs.length;
-		if (!overwritePick) {
-			totalImported -= oldTabsLength;
-		}
-		// remove file import
-		document.getElementById(CLOSE_MODAL_ID).click();
-		showToast(["import_successful", totalImported, "tabs"], true);
+		return await launchImport(validFileArray, importConfig);
 	} catch (error) {
 		showToast(["error_import", error.message], false);
 	}
@@ -155,7 +231,7 @@ async function readFile(files) {
  */
 function readChangeFiles(event) {
 	event.preventDefault();
-	readFile(event.target.files[0]);
+	readFile(event.target.files);
 }
 /**
  * Handles the drop event of files onto the drop area.
@@ -195,11 +271,11 @@ async function showFileImport() {
 		return showToast("error_close_other_modal", false);
 	}
 	const { saveButton } = await generateSldsImport();
+	saveButton.remove();
 	if (inputModalParent == null) {
 		return await showFileImport();
 	}
 	getModalHanger().appendChild(inputModalParent);
-	saveButton.remove();
 	listenToFileUpload();
 }
 

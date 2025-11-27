@@ -39,7 +39,7 @@ export interface InternalMessage {
 	keys?: string | string[];
 }
 
-mockStorage.settings.push(
+mockStorage[StorageKeys.SETTINGS_KEY].push(
 	{ enabled: "fr", id: "picked-language" },
 	{ enabled: false, id: "persist_sort" },
 );
@@ -149,9 +149,10 @@ export const mockBrowser = {
 						: [message.keys];
 					for (const key of keys) {
 						if (typeof key === "string") {
-							const foundSetting = mockStorage.settings.filter(
-								(s) => s.id === key,
-							);
+							const foundSetting =
+								mockStorage[StorageKeys.SETTINGS_KEY].filter(
+									(s) => s.id === key,
+								);
 							if (
 								foundSetting != null && foundSetting.length > 0
 							) {
@@ -161,7 +162,7 @@ export const mockBrowser = {
 								break;
 							}
 						} else if (key == null) {
-							response = mockStorage.settings;
+							response = mockStorage[StorageKeys.SETTINGS_KEY];
 						} else {
 							response = undefined;
 							setError(
