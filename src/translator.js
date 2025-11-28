@@ -314,7 +314,8 @@ class TranslationService {
 				this.caches[this.currentLanguage][key] = {};
 			}
 			this.caches[this.currentLanguage][key].message = value;
-		} catch (_) {
+		} catch (e) {
+			console.info(e);
 			// no-op, would be better to add but it's not a necessary feature...
 		}
 	}
