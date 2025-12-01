@@ -382,9 +382,10 @@ export class TabContainer extends Array {
 					resetTabs: true,
 					removeOrgTabs: true,
 					sync: false,
-					updatePinnedTabs: true,
+					updatePinnedTabs: false,
 				},
 			);
+      this[TabContainer.keyPinnedTabsNo] = res[keyPinnedTabsNo];
 		}
 		return res;
 	}
