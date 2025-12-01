@@ -675,6 +675,10 @@
 		"message": "點擊以重新導向到此設定的說明文件！",
 		"description": "[設定-幫助] 行動呼籲，讓使用者閱讀更多關於特定設定的資訊"
 	},
+	"if_click_popup": {
+		"message": "如果您點擊擴充功能彈出視窗",
+		"description": "[placeholder] 由其他文字使用"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] 匯入按鈕"
@@ -727,6 +731,10 @@
 		"message": "斜體",
 		"description": "斜體文字的字體樣式選項"
 	},
+	"label": {
+		"message": "標籤",
+		"description": "[key] Tab的名稱"
+	},
 	"lightning_navigation": {
 		"message": "Lightning 導航",
 		"description": "Salesforce 的自訂導航技術"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce 登入頁"
+	},
+	"must_non_empty_str": {
+		"message": "必須是非空字串",
+		"description": "[placeholder] 由其他文字使用"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "或 $drop",
 		"description": "[匯入] 讓使用者使用滑鼠移動檔案並放開它們"
 	},
+	"org": {
+		"message": "Org (組織)",
+		"description": "[key] Tab的Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org Link",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Overwrite saved Tabs.",
 		"description": "[label] 在匯入過程中刪除所有儲存的 Tab"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "頁面將在目前瀏覽器 Tab 中開啟",
+		"description": "[placeholder] 由其他文字使用"
 	},
 	"pinned": {
 		"message": "已釘選",
@@ -927,6 +947,10 @@
 		"message": "= Required Information",
 		"description": "[modal] 告知使用者某些資訊為必填"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce 網域",
+		"description": "[placeholder] 由其他文字使用"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning 平台"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce 登錄",
 		"description": "Salesforce 登錄頁面 (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce 頁面",
+		"description": "[placeholder] 在其他文字中使用"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce 設定",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "全選",
 		"description": "[modal] 在匯出彈出式視窗中選取所有 Tabs 的按鈕"
+	},
+	"select_tabs": {
+		"message": "選擇您希望的 $tabs",
+		"description": "[import] 允許使用者在匯入前選擇要匯入的 $tabs"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] 允許使用者在匯出前選擇要匯出的 $tabs"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] 允許使用者在匯入前選擇要匯入的 $tabs"
 	},
 	"send_tip": {
 		"message": "發送小費 ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Successfully imported",
 		"description": "[toast] 使用者已成功從外部檔案中新增 Tab"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "使用者喜愛的連結之一"
+	},
 	"tab_explain": {
 		"message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
 		"description": "[error] 解釋如何構造 Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs saved.",
 		"description": "[toast] Tab 成功儲存。"
 	},
+	"the_current_page": {
+		"message": "目前頁面",
+		"description": "[placeholder] 由其他文字使用"
+	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] 切換主題時月亮圖示的標題"
@@ -1347,6 +1395,10 @@
 		"message": "Upload",
 		"description": "[import] 讓使用者瀏覽其檔案並選擇正確檔案"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab的連結"
+	},
 	"users": {
 		"message": "Users",
 		"description": "與 ManageUsers/home 相關之頁面的名稱"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "請匯出您的新 Tab，因為您使用的檔案將不再受未來版本支援。",
 		"description": "[警告] 使用者使用已棄用的 json 檔案配置匯入了他們的 Tab"
+	},
+	"when_click_popup_while": {
+		"message": "點擊彈出視窗時的頁面",
+		"description": "[placeholder] 由其他文字使用"
 	},
 	"where_to": {
 		"message": "Where to?",

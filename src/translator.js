@@ -172,6 +172,22 @@ class TranslationService {
 	}
 
 	/**
+	 * retrieves the message related to the given key
+	 * @param {string|Array} key - the key for which to find the message
+	 * @return {string|undefined} the message found or nothing
+	 * @throws TypeError if key is neither a string nor an Array
+	 */
+	#getMessageFromCache(key) {
+		if (Array.isArray(key)) {
+			return undefined;
+		}
+		if (typeof key !== "string") {
+			throw new TypeError("error_required_params");
+		}
+		return this.caches?.[this.currentLanguage]?.[key]?.message;
+	}
+
+	/**
 	 * Retrieves the translated message for a given key from the current language cache,
 	 * falling back to a region-agnostic locale or the default fallback language.
 	 * Throws an error if no translation is found.
@@ -186,7 +202,7 @@ class TranslationService {
 	async #_translate(key, connector = " ", isError = false) {
 		if (
 			key.includes(" ") &&
-			this.caches[this.currentLanguage]?.[key] == null
+			this.#getMessageFromCache(key) == null
 		) {
 			return key;
 		}
@@ -194,8 +210,9 @@ class TranslationService {
 			key = key.slice(1);
 		}
 		// Check language-specific cache first
-		if (this.caches[this.currentLanguage]?.[key]?.message != null) {
-			return this.caches[this.currentLanguage][key].message;
+		const cacheMessage = this.#getMessageFromCache(key);
+		if (cacheMessage != null) {
+			return cacheMessage;
 		}
 		const loadedLanguage = await this.loadLanguageFile(
 			this.currentLanguage,
@@ -237,6 +254,15 @@ class TranslationService {
 	 */
 	async translate(key, connector = " ") {
 		// get all inner translations
+		const cacheMessage = this.#getMessageFromCache(key);
+		if (
+			key.includes(" ") &&
+			cacheMessage == null
+		) {
+			const translation = await this.translate(key.split(/\s+/));
+			this.#addTranslationToCache(key, translation);
+			return translation;
+		}
 		if (Array.isArray(key)) {
 			return (await Promise.all(
 				key.map((k) => this.translate(k)),
@@ -256,8 +282,7 @@ class TranslationService {
 					messageTranslated += ` ${word}`;
 					continue;
 				}
-				const innerKey = word.slice(1);
-				const innerTranslation = await this.#_translate(innerKey);
+				const innerTranslation = await this.#_translate(word);
 				if (innerTranslation.includes("$")) {
 					messageTranslated += ` ${await this.translate(
 						innerTranslation,
@@ -267,14 +292,31 @@ class TranslationService {
 				}
 			}
 			const finalTranslation = messageTranslated.slice(1); // remove beginning whitespace
-			// add translation to cache
-			this.caches[this.currentLanguage][key] = {
-				message: finalTranslation,
-			};
+			this.#addTranslationToCache(key, finalTranslation);
 			return finalTranslation;
 		} catch (e) {
 			console.info(e);
 			return key;
+		}
+	}
+
+	/**
+	 * add translation to cache
+	 * @param {string} key - the key to add to cache
+	 * @param {string} value - the value associated
+	 */
+	#addTranslationToCache(key, value) {
+		try {
+			if (
+				typeof this.caches[this.currentLanguage][key] !== "object" ||
+				this.caches[this.currentLanguage][key] === null
+			) {
+				this.caches[this.currentLanguage][key] = {};
+			}
+			this.caches[this.currentLanguage][key].message = value;
+		} catch (e) {
+			console.info(e);
+			// no-op, would be better to add but it's not a necessary feature...
 		}
 	}
 

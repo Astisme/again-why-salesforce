@@ -164,7 +164,7 @@ async function checkAddLightningNavigation() {
  * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
  * @param {boolean} [shouldReload=true] - If the Tabs should be reloaded from scratch
  */
-function sf_afterSet(what = null, tabs = null, shouldReload = true) {
+export function sf_afterSet(what = null, tabs = null, shouldReload = true) {
 	if (setupTabUl == null) {
 		return;
 	}

@@ -675,6 +675,10 @@
 		"message": "Bofya ili uelekezwe upya kwenye nyaraka za mpangilio huu!",
 		"description": "[mipangilio-msaada] mwito wa kuchukua hatua wa kumruhusu mtumiaji kusoma zaidi kuhusu mpangilio maalum"
 	},
+	"if_click_popup": {
+		"message": "ukibofya kidirisha ibukizi cha kiendelezi",
+		"description": "[placeholder] hutumiwa na maandishi mengine"
+	},
 	"import": {
 		"message": "Ingiza",
 		"description": "[ibukizi] kitufe cha kuingiza"
@@ -727,6 +731,10 @@
 		"message": "Italiki",
 		"description": "Chaguo la mtindo wa fonti kwa maandishi ya italiki"
 	},
+	"label": {
+		"message": "Lebo",
+		"description": "[key] jina la Tab"
+	},
 	"lightning_navigation": {
 		"message": "Uabiri wa Umeme (Lightning)",
 		"description": "Teknolojia maalum ya uabiri ya Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Ingia kwenye Salesforce",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa kuingia wa Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "lazima iwe kamba isiyo tupu",
+		"description": "[placeholder] hutumiwa na maandishi mengine"
 	},
 	"mycustomorg": {
 		"message": "orgYanguMaalum",
@@ -859,6 +871,10 @@
 		"message": "Au $drop",
 		"description": "[agiza] ruhusu mtumiaji kusogeza faili kwa kipanya chake na kuziachilia"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] $org ya Salesforce ya Tab"
+	},
 	"org_link": {
 		"message": "Kiungo cha Org",
 		"description": "[lebo-ya-kuingiza]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Andika juu ya Tabs zilizohifadhiwa.",
 		"description": "[lebo] futa Tabs zote zilizohifadhiwa wakati wa mchakato wa kuingiza"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "ukurasa utafunguliwa katika Tab ya sasa ya kivinjari",
+		"description": "[placeholder] hutumiwa na maandishi mengine"
 	},
 	"pinned": {
 		"message": "Imebandikwa",
@@ -927,6 +947,10 @@
 		"message": "= Taarifa Inayohitajika",
 		"description": "[modal] humwambia mtumiaji kuwa baadhi ya taarifa ni za lazima"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domain",
+		"description": "[placeholder] hutumiwa na maandishi mengine"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[siUsanidiWaSalesforce] jukwaa la Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Ingia Salesforce",
 		"description": "ukurasa wa kuingia Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce ukurasa",
+		"description": "[placeholder] hutumiwa katika maandishi mengine"
 	},
 	"salesforce_setup": {
 		"message": "Mipangilio ya Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Chagua Zote",
 		"description": "[modal] kitufe cha kuchagua Tabs zote kwenye modal ya kuhamisha"
+	},
+	"select_tabs": {
+		"message": "Chagua $tabs unazotaka",
+		"description": "[import] ruhusu mtumiaji kuchagua $tabs zipi za kuingiza kabla ya kuziingiza"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] ruhusu mtumiaji kuchagua $tabs zipi za kusafirisha kabla ya kuzisafirisha"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ruhusu mtumiaji kuchagua $tabs zipi za kuingiza kabla ya kuziingiza"
 	},
 	"send_tip": {
 		"message": "Tutumie dokezo ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Imeingizwa kwa mafanikio",
 		"description": "[toast] mtumiaji aliongeza Tabs kutoka kwa faili ya nje"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "moja ya viungo vipendwa vya mtumiaji"
+	},
 	"tab_explain": {
 		"message": "Kila kipengee lazima kiwe na 'label' na 'url' kama mifuatano. Zaidi ya hayo, kila kipengee kinaweza kuwa na 'org' kama mfuatano.",
 		"description": "[hitilafu] inaelezea jinsi Tab inavyopaswa kujengwa"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs zimehifadhiwa.",
 		"description": "[toast] Tabs zimehifadhiwa kwa mafanikio."
 	},
+	"the_current_page": {
+		"message": "ukurasa wa sasa",
+		"description": "[placeholder] hutumiwa na maandishi mengine"
+	},
 	"theme_dark": {
 		"message": "Badilisha Mandhari kuwa Giza",
 		"description": "[ibukizi] kichwa kwenye mwezi ili kubadilisha mandhari"
@@ -1347,6 +1395,10 @@
 		"message": "Pakia",
 		"description": "[ingiza] ruhusu mtumiaji kuvinjari faili zake na kuchagua sahihi"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] kiungo cha Tab"
+	},
 	"users": {
 		"message": "Watumiaji",
 		"description": "Jina la ukurasa unaohusiana na ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Tafadhali hamisha Tab-s zako mpya kwani faili uliyotumia haitaungwa mkono katika matoleo yajayo.",
 		"description": "[onyo] mtumiaji aliingiza Tab-s zake kwa kutumia usanidi uliopitwa na wakati wa faili ya json"
+	},
+	"when_click_popup_while": {
+		"message": "ukurasa unapobofya kidirisha ibukizi wakati",
+		"description": "[placeholder] hutumiwa na maandishi mengine"
 	},
 	"where_to": {
 		"message": "Wapi?",

@@ -675,6 +675,10 @@
 		"message": "આ સેટિંગ માટેના દસ્તાવેજો પર રીડાયરેક્ટ થવા માટે ક્લિક કરો!",
 		"description": "[સેટિંગ્સ-સહાય] વપરાશકર્તાને ચોક્કસ સેટિંગ વિશે વધુ વાંચવા દેવા માટેની કાર્યવાહી માટેનો કૉલ"
 	},
+	"if_click_popup": {
+		"message": "જો તમે એક્સ્ટેંશન પોપઅપ પર ક્લિક કરો છો",
+		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
+	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] આયાત બટન"
@@ -727,6 +731,10 @@
 		"message": "ઈટાલિક",
 		"description": "આડું લખાણ માટે ફોન્ટ શૈલી વિકલ્પ"
 	},
+	"label": {
+		"message": "લેબલ",
+		"description": "[key] Tab નું નામ"
+	},
 	"lightning_navigation": {
 		"message": "Lightning નાવિગેશન",
 		"description": "Salesforce ની કસ્ટમ નાવિગેશન તકનીક"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce લૉગિન પૃષ્ઠ પર રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
+	},
+	"must_non_empty_str": {
+		"message": "એક બિન-ખાલી સ્ટ્રિંગ હોવી આવશ્યક છે",
+		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "અથવા $drop",
 		"description": "[આયાત] વપરાશકર્તાને તેમના માઉસ વડે ફાઇલો ખસેડવા અને તેમને છોડવા દો"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab નું Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org Link",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Overwrite saved Tabs.",
 		"description": "[label] આયાત પ્રક્રિયા દરમિયાન તમામ સંગ્રહિત Tabને કાઢી નાખો"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "પૃષ્ઠ વર્તમાન બ્રાઉઝર Tab માં ખુલશે",
+		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -927,6 +947,10 @@
 		"message": "= Required Information",
 		"description": "[modal] વપરાશકર્તાને જણાવે છે કે કેટલીક માહિતી ફરજિયાત છે"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce ડોમેન",
+		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning પ્લેટફોર્મ"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce લોગિન",
 		"description": "Salesforce લોગિન પૃષ્ઠ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce પૃષ્ઠ",
+		"description": "[placeholder] અન્ય ટેક્સ્ટમાં વપરાયેલ"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce સેટઅપ",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "બધું પસંદ કરો",
 		"description": "[modal] નિકાસ મોડલમાં બધા Tabs પસંદ કરવા માટેનું બટન"
+	},
+	"select_tabs": {
+		"message": "તમે કયા $tabs ને પસંદ કરવા માંગો છો તે પસંદ કરો",
+		"description": "[import] વપરાશકર્તાને આયાત કરતા પહેલા કયા $tabs આયાત કરવા માંગો છો તે પસંદ કરવા દો"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] વપરાશકર્તાને નિકાસ કરતા પહેલા કયા $tabs નિકાસ કરવા માંગો છો તે પસંદ કરવા દો"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] વપરાશકર્તાને આયાત કરતા પહેલા કયા $tabs આયાત કરવા માંગો છો તે પસંદ કરવા દો"
 	},
 	"send_tip": {
 		"message": "અમને એક ટિપ મોકલો ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Successfully imported",
 		"description": "[toast] વપરાશકર્તાએ બહારના ફાઇલમાંથી Tab ઉમેર્યા હતા"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "વપરાશકર્તાની મનપસંદ લિંક્સમાંથી એક"
+	},
 	"tab_explain": {
 		"message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
 		"description": "[error] Tab કેવી રીતે બનાવવી તે સમજાવે છે"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs saved.",
 		"description": "[toast] Tab સફળતાપૂર્વક સ્ટોર થયાં"
 	},
+	"the_current_page": {
+		"message": "વર્તમાન પૃષ્ઠ",
+		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
+	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] થીમ સ્વિચ કરવા માટે ચંદ્રમાની ટાઇટલ"
@@ -1347,6 +1395,10 @@
 		"message": "Upload",
 		"description": "[import] વપરાશકર્તાને તેમની ફાઇલો બ્રાઉઝ કરવાની અને યોગ્ય ફાઇલ પસંદ કરવાની મંજૂરી આપે છે"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab ની લિંક"
+	},
 	"users": {
 		"message": "Users",
 		"description": "ManageUsers/home સાથે સંબંધિત પૃષ્ઠનું નામ"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "કૃપા કરીને તમારા નવા Tab ને નિકાસ કરો કારણ કે તમે ઉપયોગ કરેલી ફાઇલ ભવિષ્યના પ્રકાશનમાં સમર્થિત થશે નહીં.",
 		"description": "[ચેતવણી] વપરાશકર્તાએ json ફાઇલના અવમૂલ્યન થયેલા કન્ફિગરેશનનો ઉપયોગ કરીને તેમના Tab આયાત કર્યા છે"
+	},
+	"when_click_popup_while": {
+		"message": "પૉપઅપ પર ક્લિક કરવા પર પૃષ્ઠ જ્યારે",
+		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
 	},
 	"where_to": {
 		"message": "Where to?",

@@ -675,6 +675,10 @@
 		"message": "单击以重定向到此设置的文档！",
 		"description": "[设置-帮助] 行动号召，让用户阅读更多关于特定设置的信息"
 	},
+	"if_click_popup": {
+		"message": "如果您点击扩展程序弹出窗口",
+		"description": "[placeholder] 由其他文本使用"
+	},
 	"import": {
 		"message": "导入",
 		"description": "[弹出窗口] 导入按钮"
@@ -727,6 +731,10 @@
 		"message": "斜体",
 		"description": "斜体文本的字体样式选项"
 	},
+	"label": {
+		"message": "标签",
+		"description": "[key] Tab的名称"
+	},
 	"lightning_navigation": {
 		"message": "闪电导航",
 		"description": "Salesforce 的自定义导航技术"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "登录 Salesforce",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 登录页面"
+	},
+	"must_non_empty_str": {
+		"message": "必须是非空字符串",
+		"description": "[placeholder] 由其他文本使用"
 	},
 	"mycustomorg": {
 		"message": "我的自定义组织",
@@ -859,6 +871,10 @@
 		"message": "或 $drop",
 		"description": "[导入] 允许用户用鼠标移动文件并释放它们"
 	},
+	"org": {
+		"message": "组织 (Org)",
+		"description": "[key] Tab的Salesforce $org"
+	},
 	"org_link": {
 		"message": "组织链接",
 		"description": "[输入标签]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "覆盖已保存的 Tabs。",
 		"description": "[标签] 在导入过程中删除所有已保存的 Tabs"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "页面将在当前浏览器 Tab 中打开",
+		"description": "[placeholder] 由其他文本使用"
 	},
 	"pinned": {
 		"message": "已固定",
@@ -927,6 +947,10 @@
 		"message": "= 必填信息",
 		"description": "[模态框] 告知用户某些信息是强制性的"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce 域名",
+		"description": "[placeholder] 由其他文本使用"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[非 Salesforce 设置页] Salesforce Lightning 平台"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce 登录",
 		"description": "Salesforce 登录页面 (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce 页面",
+		"description": "[placeholder] 在其他文本中使用"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce 设置",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "全选",
 		"description": "[modal] 导出模态框中选择所有 Tabs 的按钮"
+	},
+	"select_tabs": {
+		"message": "选择您希望的 $tabs",
+		"description": "[import] 允许用户在导入前选择要导入的 $tabs"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] 允许用户在导出前选择要导出的 $tabs"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] 允许用户在导入前选择要导入的 $tabs"
 	},
 	"send_tip": {
 		"message": "发送小费 ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "成功导入",
 		"description": "[提示信息] 用户从外部文件添加了 Tabs"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "用户的收藏链接之一"
+	},
 	"tab_explain": {
 		"message": "每个项目必须包含字符串类型的 'label' 和 'url'。此外，每个项目可以包含字符串类型的 'org'。",
 		"description": "[错误] 解释应如何构造 Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs 已保存。",
 		"description": "[提示信息] Tabs 已成功存储。"
 	},
+	"the_current_page": {
+		"message": "当前页面",
+		"description": "[placeholder] 由其他文本使用"
+	},
 	"theme_dark": {
 		"message": "切换主题为深色",
 		"description": "[弹出窗口] 月亮图标上的标题，用于切换主题"
@@ -1347,6 +1395,10 @@
 		"message": "上传",
 		"description": "[导入] 让用户浏览他们的文件并选择正确的文件"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab的链接"
+	},
 	"users": {
 		"message": "用户",
 		"description": "与 ManageUsers/home 相关的页面名称"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "请导出您的新 Tab，因为您使用的文件将不再受未来版本支持。",
 		"description": "[警告] 用户使用已弃用的 json 文件配置导入了他们的 Tab"
+	},
+	"when_click_popup_while": {
+		"message": "在点击弹出窗口时的页面",
+		"description": "[placeholder] 由其他文本使用"
 	},
 	"where_to": {
 		"message": "去哪里？",

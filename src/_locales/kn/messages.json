@@ -674,6 +674,10 @@
 		"message": "ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಾಗಿರುವ ದಾಖಲಾತಿಗೆ ಮರುನಿರ್ದೇಶಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ!",
 		"description": "[ಸೆಟ್ಟಿಂಗ್‌ಗಳು-ಸಹಾಯ] ನಿರ್ದಿಷ್ಟ ಸೆಟ್ಟಿಂಗ್‌ ಕುರಿತು ಬಳಕೆದಾರರಿಗೆ ಇನ್ನಷ್ಟು ಓದಲು ಅವಕಾಶ ನೀಡುವ ಕರೆ ಟು ಆಕ್ಷನ್"
 	},
+	"if_click_popup": {
+		"message": "ನೀವು ವಿಸ್ತರಣೆಯ ಪಾಪ್ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದರೆ",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
+	},
 	"import": {
 		"message": "ಆಮದುಮಾಡಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ಆಮದು ಬಟನ್"
@@ -726,6 +730,10 @@
 		"message": "ಇಟಾಲಿಕ್",
 		"description": "ಇಟಾಲಿಕ್ ಪಂಕ್ತಿಗಾಗಿ ಫಾಂಟ್ ಶೈಲಿ ಆಯ್ಕೆ"
 	},
+	"label": {
+		"message": "ಲೇಬಲ್",
+		"description": "[key] Tab ನ ಹೆಸರು"
+	},
 	"lightning_navigation": {
 		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್",
 		"description": "Salesforce ನ ಕಸ್ಟಮ್ ನ್ಯಾವಿಗೇಶನ್ ತಂತ್ರಜ್ಞಾನ"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce ಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಲಾಗಿನ್ ಪುಟಕ್ಕೆ ದಾರಿ ತೋರುವ ಕರೆ"
+	},
+	"must_non_empty_str": {
+		"message": "ಖಾಲಿಯಿಲ್ಲದ ಸ್ಟ್ರಿಂಗ್ ಆಗಿರಬೇಕು",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "ಅಥವಾ $drop",
 		"description": "[ಆಮದು] ಬಳಕೆದಾರರಿಗೆ ತಮ್ಮ ಮೌಸ್‌ನಿಂದ ಫೈಲ್‌ಗಳನ್ನು ಸರಿಸಲು ಮತ್ತು ಅವುಗಳನ್ನು ಬಿಡಲು ಅನುಮತಿಸಿ"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab ನ Salesforce $org"
+	},
 	"org_link": {
 		"message": "ಸಂಸ್ಥೆಯ ಲಿಂಕ್",
 		"description": "[ಇನ್ಪುಟ್-ಲೆಬಲ್]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "ಉಳಿಸಲಾದ Tabs ಮೇಲೆ ಓವರ್‌ರೈಟ್ ಮಾಡು.",
 		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆ ಸಮಯದಲ್ಲಿ ಉಳಿಸಲಾದ Tabs ಅಳಿಸಲು"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "ಪುಟವು ಪ್ರಸ್ತುತ ಬ್ರೌಸರ್ Tab ನಲ್ಲಿ ತೆರೆಯಲ್ಪಡುತ್ತದೆ",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -926,6 +946,10 @@
 		"message": "= ಅಗತ್ಯ ಮಾಹಿತಿಗಳು",
 		"description": "[ಮೊಡಲ್] ಕೆಲವು ಮಾಹಿತಿಗಳು ಅಗತ್ಯವಿರುವುದನ್ನು ಬಳಕೆದಾರ들에게 ತಿಳಿಸುತ್ತದೆ"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce ಡೊಮೇನ್",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce Lightning ವೇದಿಕೆ"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce ಲಾಗಿನ್",
 		"description": "Salesforce ಲಾಗಿನ್ ಪುಟ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce ಪುಟ",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಲ್ಲಿ ಬಳಸಲಾಗಿದೆ"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce ಸೆಟ್ಟಿಂಗ್",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "ಎಲ್ಲವನ್ನೂ ಆಯ್ಕೆಮಾಡಿ",
 		"description": "[modal] ರಫ್ತು ಮಾದರಿಯಲ್ಲಿ ಎಲ್ಲಾ Tabs ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಲು ಬಟನ್"
+	},
+	"select_tabs": {
+		"message": "ನೀವು ಬಯಸುವ $tabs ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+		"description": "[import] ಬಳಕೆದಾರರಿಗೆ ಅವುಗಳನ್ನು ಆಮದು ಮಾಡುವ ಮೊದಲು ಯಾವ $tabs ಗಳನ್ನು ಆಮದು ಮಾಡಬೇಕೆಂದು ಆಯ್ಕೆ ಮಾಡಲು ಅವಕಾಶ ನೀಡಿ"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] ಬಳಕೆದಾರರಿಗೆ ಅವುಗಳನ್ನು ರಫ್ತು ಮಾಡುವ ಮೊದಲು ಯಾವ $tabs ಗಳನ್ನು ರಫ್ತು ಮಾಡಬೇಕೆಂದು ಆಯ್ಕೆ ಮಾಡಲು ಅವಕಾಶ ನೀಡಿ"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] ಬಳಕೆದಾರರಿಗೆ ಅವುಗಳನ್ನು ಆಮದು ಮಾಡುವ ಮೊದಲು ಯಾವ $tabs ಗಳನ್ನು ಆಮದು ಮಾಡಬೇಕೆಂದು ಆಯ್ಕೆ ಮಾಡಲು ಅವಕಾಶ ನೀಡಿ"
 	},
 	"send_tip": {
 		"message": "ನಮಗೆ ಒಂದು ಸಲಹೆ ಕಳುಹಿಸಿ ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "ಯಶಸ್ವಿಯಾಗಿ ಆಮದುಮಾಡಲಾಗಿದೆ",
 		"description": "[ಟೋಸ್ಟ್] ಆಮದು ಮೂಲಕ Tabs ಸೇರಿಸಲಾಗಿದೆ"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ಬಳಕೆದಾರರ ಮೆಚ್ಚಿನ ಲಿಂಕ್‌ಗಳಲ್ಲಿ ಒಂದು"
+	},
 	"tab_explain": {
 		"message": "ಪ್ರತಿ ಐಟಂನಲ್ಲಿ 'label' ಮತ್ತು 'url' ಸ್ಟ್ರಿಂಗ್ ಗಳಾಗಿ ಇರಬೇಕು. ಜೊತೆಗೆ, ಪ್ರತಿಯೊಂದು ಐಟಂನಲ್ಲಿ ಆಯ್ಕೆಯಾಗಿರುತ್ತದೆ 'org' ಸ್ಟ್ರಿಂಗ್ ಆಗಿ.",
 		"description": "[ದೋಷ] Tab ಹೇಗೆ ರಚಿಸಬೇಕು ಎಂಬುದು ವಿವರಿಸುತ್ತದೆ"
@@ -1318,6 +1362,10 @@
 		"message": "Tabs ಉಳಿಸಲಾಗಿದೆ.",
 		"description": "[ಟೋಸ್ಟ್] Tabs ಯಶಸ್ವಿಯಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"
 	},
+	"the_current_page": {
+		"message": "ಪ್ರಸ್ತುತ ಪುಟ",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
+	},
 	"theme_dark": {
 		"message": "ಡಾರ್ಕ್ ಥೀಮ್ ಗೆ ಬದಲಾಯಿಸಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ಥೀಮ್ ಬದಲಿಸಲು ಚಂದಿರ ಚಿತ್ರ ಶೀರ್ಷಿಕೆ"
@@ -1346,6 +1394,10 @@
 		"message": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
 		"description": "[ಆಮದು] ಬಳಕೆದಾರ ತಮ್ಮ ಫೈಲ್‌ಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ ಆಯ್ಕೆ ಮಾಡಲು"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab ನ ಲಿಂಕ್"
+	},
 	"users": {
 		"message": "ಬಳಕೆದಾರರು",
 		"description": "ManageUsers/home ಸಂಬಂಧಿಸಿದ ಪುಟದ ಹೆಸರು"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಹೊಸ Tabಗಳನ್ನು ರಫ್ತು ಮಾಡಿ ಏಕೆಂದರೆ ನೀವು ಬಳಸಿದ ಫೈಲ್ ಅನ್ನು ಭವಿಷ್ಯದ ಬಿಡುಗಡೆಗಳಲ್ಲಿ ಬೆಂಬಲಿಸಲಾಗುವುದಿಲ್ಲ.",
 		"description": "[ಎಚ್ಚರಿಕೆ] ಬಳಕೆದಾರರು json ಫೈಲ್‌ನ ಅಸಮ್ಮತಿಸಿದ ಕಾನ್ಫಿಗರೇಶನ್ ಅನ್ನು ಬಳಸಿಕೊಂಡು ತಮ್ಮ Tabಗಳನ್ನು ಆಮದು ಮಾಡಿಕೊಂಡಿದ್ದಾರೆ"
+	},
+	"when_click_popup_while": {
+		"message": "ಪಾಪ್ಅಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಇರುವ ಪುಟ",
+		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
 	},
 	"where_to": {
 		"message": "ಎಲ್ಲಿ?",

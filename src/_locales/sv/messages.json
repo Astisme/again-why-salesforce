@@ -675,6 +675,10 @@
 		"message": "Klicka för att omdirigeras till dokumentationen för den här inställningen!",
 		"description": "[inställningar-hjälp] uppmaning till handling för att låta användaren läsa mer om en specifik inställning"
 	},
+	"if_click_popup": {
+		"message": "om du klickar på tilläggs-popupen",
+		"description": "[placeholder] används av andra texter"
+	},
 	"import": {
 		"message": "Importera",
 		"description": "[popup] importknapp"
@@ -727,6 +731,10 @@
 		"message": "Kursiv",
 		"description": "Teckensnittsalternativ för kursiv text"
 	},
+	"label": {
+		"message": "Etikett",
+		"description": "[key] namnet på Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigering",
 		"description": "Salesforces anpassade navigeringsteknik"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Logga in på Salesforce",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce inloggningssida"
+	},
+	"must_non_empty_str": {
+		"message": "måste vara en icke-tom sträng",
+		"description": "[placeholder] används av andra texter"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Eller $drop",
 		"description": "[importera] låt användaren flytta filer med musen och släppa dem"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab-ens Salesforce $org"
+	},
 	"org_link": {
 		"message": "Organisationslänk",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Skriv över sparade Tabbar.",
 		"description": "[label] radera alla sparade Tabbar vid import"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "sidan öppnas i den aktuella webbläsar Tab-en",
+		"description": "[placeholder] används av andra texter"
 	},
 	"pinned": {
 		"message": "Fäst",
@@ -927,6 +947,10 @@
 		"message": "= Obligatorisk information",
 		"description": "[modal] informerar användaren att viss information är obligatorisk"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domän",
+		"description": "[placeholder] används av andra texter"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning-plattformen"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce-inloggning",
 		"description": "Salesforces inloggningssida (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce sida",
+		"description": "[placeholder] används i andra texter"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce-inställningar",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Välj Alla",
 		"description": "[modal] knapp för att välja alla Tabs i exportmodalen"
+	},
+	"select_tabs": {
+		"message": "Välj vilka $tabs du vill",
+		"description": "[import] låt användaren välja vilka $tabs som ska importeras innan de importeras"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] låt användaren välja vilka $tabs som ska exporteras innan de exporteras"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] låt användaren välja vilka $tabs som ska importeras innan de importeras"
 	},
 	"send_tip": {
 		"message": "Skicka oss ett tips ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Import lyckades",
 		"description": "[toast] användaren importerade Tabbar från en extern fil"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "en av användarens favoritlänkar"
+	},
 	"tab_explain": {
 		"message": "Varje objekt måste ha 'label' och 'url' som strängar. Dessutom kan varje objekt ha 'org' som sträng.",
 		"description": "[error] förklarar hur en Tab ska konstrueras"
@@ -1319,6 +1363,10 @@
 		"message": "Tabbar sparade.",
 		"description": "[toast] Tabbar sparades framgångsrikt."
 	},
+	"the_current_page": {
+		"message": "den aktuella sidan",
+		"description": "[placeholder] används av andra texter"
+	},
 	"theme_dark": {
 		"message": "Byt tema till mörkt",
 		"description": "[popup] rubrik för mån-ikonen för att byta tema"
@@ -1347,6 +1395,10 @@
 		"message": "Ladda upp",
 		"description": "[import] låter användaren bläddra bland sina filer och välja rätt"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab-ens länk"
+	},
 	"users": {
 		"message": "Användare",
 		"description": "namnet på sidan relaterad till ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Vänligen exportera dina nya Tab-ar eftersom filen du använde inte kommer att stödjas i framtida utgåvor.",
 		"description": "[varning] användaren importerade sina Tab-ar med en föråldrad konfiguration av json-filen"
+	},
+	"when_click_popup_while": {
+		"message": "sida när du klickar på popupen medan",
+		"description": "[placeholder] används av andra texter"
 	},
 	"where_to": {
 		"message": "Vart?",

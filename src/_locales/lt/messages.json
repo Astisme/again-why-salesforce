@@ -675,6 +675,10 @@
 		"message": "Spustelėkite, kad būtumėte nukreipti į šio nustatymo dokumentaciją!",
 		"description": "[nustatymų-pagalba] raginimas veikti, leidžiantis vartotojui perskaityti daugiau apie konkretų nustatymą"
 	},
+	"if_click_popup": {
+		"message": "jei spustelėsite plėtinio iššokantįjį langą",
+		"description": "[placeholder] naudojamas kituose tekstuose"
+	},
 	"import": {
 		"message": "Importuoti",
 		"description": "[iškylantysis_langas] importavimo mygtukas"
@@ -727,6 +731,10 @@
 		"message": "Kursyvas",
 		"description": "Šrifto stiliaus parinktis kursyviniam tekstui"
 	},
+	"label": {
+		"message": "Etiketė",
+		"description": "[key] Tab pavadinimas"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "„Salesforce“ pasirinktinė navigacijos technologija"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Prisijungti prie Salesforce",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce prisijungimo puslapį"
+	},
+	"must_non_empty_str": {
+		"message": "turi būti netuščia eilutė",
+		"description": "[placeholder] naudojamas kituose tekstuose"
 	},
 	"mycustomorg": {
 		"message": "manopasirinktineorg",
@@ -859,6 +871,10 @@
 		"message": "Arba $drop",
 		"description": "[importuoti] leiskite vartotojui perkelti failus pele ir juos paleisti"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org nuoroda",
 		"description": "[įvesties_etiketė]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Perrašyti išsaugotus Tabs.",
 		"description": "[etiketė] ištrinti visus išsaugotus Tabs importavimo proceso metu"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "puslapis bus atidarytas dabartiniame naršyklės Tab",
+		"description": "[placeholder] naudojamas kituose tekstuose"
 	},
 	"pinned": {
 		"message": "Prisegta",
@@ -927,6 +947,10 @@
 		"message": "= Privaloma informacija",
 		"description": "[modal] nurodo vartotojui, kad kai kuri informacija yra privaloma"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domenas",
+		"description": "[placeholder] naudojamas kituose tekstuose"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[neSalesforceSąranka] Salesforce Lightning platforma"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce prisijungimas",
 		"description": "Salesforce prisijungimo puslapis (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce puslapis",
+		"description": "[placeholder] naudojamas kituose tekstuose"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce nustatymai",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Pasirinkti Viską",
 		"description": "[modal] mygtukas, skirtas pasirinkti visus Tabs eksportavimo modaliniame lange"
+	},
+	"select_tabs": {
+		"message": "Pasirinkite, kuriuos $tabs norėtumėte",
+		"description": "[import] leisti vartotojui pasirinkti, kuriuos $tabs importuoti prieš juos importuojant"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] leisti vartotojui pasirinkti, kuriuos $tabs eksportuoti prieš juos eksportuojant"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] leisti vartotojui pasirinkti, kuriuos $tabs importuoti prieš juos importuojant"
 	},
 	"send_tip": {
 		"message": "Atsiųskite mums patarimą ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Sėkmingai importuota",
 		"description": "[pranešimas] vartotojas pridėjo Tabs iš išorinio failo"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "viena iš vartotojo mėgstamiausių nuorodų"
+	},
 	"tab_explain": {
 		"message": "Kiekvienas elementas turi turėti 'label' ir 'url' kaip eilutes. Be to, kiekvienas elementas gali turėti 'org' kaip eilutę.",
 		"description": "[klaida] paaiškina, kaip turėtų būti sukonstruotas Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs išsaugoti.",
 		"description": "[pranešimas] Tabs sėkmingai išsaugoti."
 	},
+	"the_current_page": {
+		"message": "dabartinis puslapis",
+		"description": "[placeholder] naudojamas kituose tekstuose"
+	},
 	"theme_dark": {
 		"message": "Keisti temą į tamsią",
 		"description": "[iškylantysis_langas] pavadinimas ant mėnulio, kad perjungtumėte temą"
@@ -1347,6 +1395,10 @@
 		"message": "Įkelti",
 		"description": "[importuoti] leiskite vartotojui naršyti savo failus ir pasirinkti tinkamą"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab nuoroda"
+	},
 	"users": {
 		"message": "Vartotojai",
 		"description": "Puslapio, susijusio su ManageUsers/home, pavadinimas"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Prašome eksportuoti savo naujas Tab, nes failas, kurį naudojote, nebus palaikomas būsimuose leidimuose.",
 		"description": "[įspėjimas] vartotojas importavo savo Tab naudodamas pasenusią json failo konfigūraciją"
+	},
+	"when_click_popup_while": {
+		"message": "puslapis, kai spustelėjate iššokantįjį langą, kol",
+		"description": "[placeholder] naudojamas kituose tekstuose"
 	},
 	"where_to": {
 		"message": "Kur?",

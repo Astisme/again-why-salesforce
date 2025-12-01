@@ -1706,15 +1706,17 @@ function generateTableWithCheckboxes(
  * @param {Object} [param1={}] object with the following keys
  * @param {string} [param1.title="export_tabs"] the title of the modal
  * @param {string} [param1.saveButtonLabel="export"] the label for the submit button
+ * @param {string} [param1.explainer="select_tabs_export"] the text used to explain what to do with this modal
  * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The button element for confirming the selected Tabs.
  * - closeButton: The close button element for closing the modal.
- * - selectedTabs: A function that returns an array of selected Tab objects.
+ * - getSelectedTabs: A function that returns an array of selected Tab objects.
  */
 export async function generateSldsModalWithTabList(tabs = [], {
 	title = "export_tabs",
 	saveButtonLabel = "export",
+	explainer = "select_tabs_export",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, saveButton, closeButton, buttonContainer } =
@@ -1722,6 +1724,11 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			modalTitle: await translator.translate(title),
 			saveButtonLabel: await translator.translate(saveButtonLabel),
 		});
+	const explainerEl = document.createElement("span");
+	explainerEl.textContent = await translator.translate(explainer);
+	explainerEl.style.display = "flex";
+	explainerEl.style.justifyContent = "center";
+	article.prepend(explainerEl);
 	// counter for how many Tabs are selected
 	const tabConterOpen = document.createElement("span");
 	tabConterOpen.innerHTML = "&nbsp;(";
@@ -1803,22 +1810,24 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	});
 	/**
 	 * Function to get selected tabs
-	 * @return {Tab[]} - only the selected Tabs
+	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
 	 */
 	function getSelectedTabs() {
+		const selectedAll = selectAllButton.disabled;
+		const selectedTabs = selectedAll ? tabs : checkboxes
+			.filter((checkbox) => checkbox.checked)
+			.map((checkbox) =>
+				tabs[Number.parseInt(checkbox.dataset.tabIndex)]
+			);
 		return {
-			selectedAll: selectAllButton.disabled,
-			tabs: checkboxes
-				.filter((checkbox) => checkbox.checked)
-				.map((checkbox) =>
-					tabs[Number.parseInt(checkbox.dataset.tabIndex)]
-				),
+			selectedAll,
+			tabs: selectedTabs,
 		};
 	}
 	return {
 		modalParent,
 		saveButton,
 		closeButton,
-		selectedTabs: getSelectedTabs,
+		getSelectedTabs,
 	};
 }

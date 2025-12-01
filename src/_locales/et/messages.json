@@ -675,6 +675,10 @@
 		"message": "Klõpsake, et suunduda selle sätte dokumentatsiooni juurde!",
 		"description": "[seadete-abi] üleskutse tegevusele, et lasta kasutajal konkreetse sätte kohta rohkem lugeda"
 	},
+	"if_click_popup": {
+		"message": "kui klõpsate laienduse hüpikaknal",
+		"description": "[placeholder] kasutatud teistes tekstides"
+	},
 	"import": {
 		"message": "Impordi",
 		"description": "[hüpikaken] importimisnupp"
@@ -727,6 +731,10 @@
 		"message": "Kaldkiri",
 		"description": "Fondi stiili valik kaldkirja jaoks"
 	},
+	"label": {
+		"message": "Silt",
+		"description": "[key] Tab'i nimi"
+	},
 	"lightning_navigation": {
 		"message": "Lightningi navigeerimine",
 		"description": "Salesforce’i kohandatud navigeerimistehnoloogia"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Logi sisse Salesforce'i",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i sisselogimislehele"
+	},
+	"must_non_empty_str": {
+		"message": "peab olema mittetühi string",
+		"description": "[placeholder] kasutatud teistes tekstides"
 	},
 	"mycustomorg": {
 		"message": "minukohandatudorg",
@@ -859,6 +871,10 @@
 		"message": "Või $drop",
 		"description": "[import] lase kasutajal faile hiirega liigutada ja vabastada"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab'i Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org link",
 		"description": "[sisendi_silt]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Kirjuta salvestatud Tabs üle.",
 		"description": "[silt] kustuta kõik salvestatud Tabs importimisprotsessi käigus"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "leht avatakse brauseri praeguses Tab'is",
+		"description": "[placeholder] kasutatud teistes tekstides"
 	},
 	"pinned": {
 		"message": "Kinnitatud",
@@ -927,6 +947,10 @@
 		"message": "= Nõutud teave",
 		"description": "[modaal] ütleb kasutajale, et osa teavet on kohustuslik"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce'i domeen",
+		"description": "[placeholder] kasutatud teistes tekstides"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[poleSalesforceSeadistus] Salesforce Lightning platvorm"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce’i sisselogimine",
 		"description": "Salesforce’i sisselogimisleht (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce'i leht",
+		"description": "[placeholder] kasutatud teistes tekstides"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce’i seadistamine",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Vali Kõik",
 		"description": "[modal] nupp kõigi Tabs-ide valimiseks ekspordi modaalis"
+	},
+	"select_tabs": {
+		"message": "Valige, milliseid $tabs te soovite",
+		"description": "[import] lase kasutajal valida, milliseid $tabs importida enne nende importimist"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] lase kasutajal valida, milliseid $tabs eksportida enne nende eksportimist"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] lase kasutajal valida, milliseid $tabs importida enne nende importimist"
 	},
 	"send_tip": {
 		"message": "Saada meile jootraha ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Edukalt imporditud",
 		"description": "[teavitus] kasutaja lisas Tabs välisest failist"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "üks kasutaja lemmiklinkidest"
+	},
 	"tab_explain": {
 		"message": "Igal elemendil peab olema 'label' ja 'url' stringidena. Lisaks võib igal elemendil olla 'org' stringina.",
 		"description": "[viga] selgitab, kuidas Tab peaks olema konstrueeritud"
@@ -1319,6 +1363,10 @@
 		"message": "Tabs salvestatud.",
 		"description": "[teavitus] Tabs salvestati edukalt."
 	},
+	"the_current_page": {
+		"message": "praegune leht",
+		"description": "[placeholder] kasutatud teistes tekstides"
+	},
 	"theme_dark": {
 		"message": "Muuda teema tumedaks",
 		"description": "[hüpikaken] pealkiri kuul teema vahetamiseks"
@@ -1347,6 +1395,10 @@
 		"message": "Laadi üles",
 		"description": "[import] lase kasutajal oma faile sirvida ja valida õige"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab'i link"
+	},
 	"users": {
 		"message": "Kasutajad",
 		"description": "Lehe nimi, mis on seotud ManageUsers/home'ga"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Palun eksportige oma uued Tabid, kuna teie kasutatud faili ei toetata tulevastes väljalasetes.",
 		"description": "[warning] kasutaja importis oma Tabid json-faili aegunud konfiguratsiooni kasutades"
+	},
+	"when_click_popup_while": {
+		"message": "leht hüpikaknal klõpsamisel samal ajal kui",
+		"description": "[placeholder] kasutatud teistes tekstides"
 	},
 	"where_to": {
 		"message": "Kuhu?",

@@ -675,6 +675,10 @@
 		"message": "Κάντε κλικ για να μεταφερθείτε στην τεκμηρίωση για αυτήν τη ρύθμιση!",
 		"description": "[βοήθεια-ρυθμίσεων] παρότρυνση για δράση για να επιτρέψει στον χρήστη να διαβάσει περισσότερα για μια συγκεκριμένη ρύθμιση"
 	},
+	"if_click_popup": {
+		"message": "εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
+	},
 	"import": {
 		"message": "Εισαγωγή",
 		"description": "[αναδυόμενο-παράθυρο] κουμπί εισαγωγής"
@@ -727,6 +731,10 @@
 		"message": "Πλάγια",
 		"description": "Επιλογή στυλ γραμματοσειράς για πλάγιο κείμενο"
 	},
+	"label": {
+		"message": "Ετικέτα",
+		"description": "[key] το όνομα του Tab"
+	},
 	"lightning_navigation": {
 		"message": "Πλοήγηση Lightning",
 		"description": "Προσαρμοσμένη τεχνολογία πλοήγησης της Salesforce"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Σύνδεση στο Salesforce",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη στη σελίδα σύνδεσης του Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "πρέπει να είναι μη κενή συμβολοσειρά",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Ή $drop",
 		"description": "[εισαγωγή] επιτρέψτε στον χρήστη να μετακινήσει αρχεία με το ποντίκι του και να τα αφήσει"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] το Salesforce $org του Tab"
+	},
 	"org_link": {
 		"message": "Σύνδεσμος Οργάνωσης",
 		"description": "[ετικέτα-εισόδου]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Αντικατάσταση αποθηκευμένων Tab.",
 		"description": "[ετικέτα] διαγραφή όλων των αποθηκευμένων Tab κατά τη διαδικασία εισαγωγής"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "η σελίδα θα ανοίξει στην τρέχουσα Tab του προγράμματος περιήγησης",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"pinned": {
 		"message": "Καρφιτσωμένο",
@@ -927,6 +947,10 @@
 		"message": "= Υποχρεωτικές Πληροφορίες",
 		"description": "[διάλογος] ενημερώνει τον χρήστη ότι ορισμένες πληροφορίες είναι υποχρεωτικές"
 	},
+	"salesforce_domain": {
+		"message": "Τομέας Salesforce",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[όχιSalesforceSetup] η πλατφόρμα Salesforce Lightning"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Σύνδεση Salesforce",
 		"description": "η σελίδα σύνδεσης Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Σελίδα Salesforce",
+		"description": "[placeholder] χρησιμοποιείται σε άλλα κείμενα"
 	},
 	"salesforce_setup": {
 		"message": "Ρύθμιση Salesforce",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Επιλογή Όλων",
 		"description": "[modal] κουμπί για επιλογή όλων των Tabs στο modal εξαγωγής"
+	},
+	"select_tabs": {
+		"message": "Επιλέξτε ποια $tabs θα θέλατε να",
+		"description": "[import] αφήστε τον χρήστη να επιλέξει ποιες $tabs θα εισάγει πριν τις εισαγάγει"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] αφήστε τον χρήστη να επιλέξει ποιες $tabs θα εξαγάγει πριν τις εξαγάγει"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] αφήστε τον χρήστη να επιλέξει ποιες $tabs θα εισάγει πριν τις εισαγάγει"
 	},
 	"send_tip": {
 		"message": "Στείλτε μας μια συμβουλή ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Εισήχθη με επιτυχία",
 		"description": "[σημείωμα] ο χρήστης πρόσθεσε Tab από εξωτερικό αρχείο"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "ένας από τους αγαπημένους συνδέσμους του χρήστη"
+	},
 	"tab_explain": {
 		"message": "Κάθε στοιχείο πρέπει να έχει 'label' και 'url' ως συμβολοσειρές. Επιπλέον, κάθε στοιχείο μπορεί να έχει 'org' ως συμβολοσειρά.",
 		"description": "[σφάλμα] εξηγεί πώς πρέπει να κατασκευάζεται ένα Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Τα Tab αποθηκεύτηκαν.",
 		"description": "[σημείωμα] Τα Tab αποθηκεύτηκαν με επιτυχία."
 	},
+	"the_current_page": {
+		"message": "την τρέχουσα σελίδα",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
+	},
 	"theme_dark": {
 		"message": "Αλλαγή Θέματος σε Σκοτεινό",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος στο φεγγάρι για αλλαγή θέματος"
@@ -1347,6 +1395,10 @@
 		"message": "Ανέβασμα",
 		"description": "[εισαγωγή] επιτρέπει στον χρήστη να περιηγηθεί στα αρχεία του και να επιλέξει το σωστό"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] ο σύνδεσμος του Tab"
+	},
 	"users": {
 		"message": "Χρήστες",
 		"description": "Το όνομα της σελίδας που σχετίζεται με ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Παρακαλούμε εξάγετε τις νέες σας Tab καρτέλες καθώς το αρχείο που χρησιμοποιήσατε δεν θα υποστηρίζεται σε μελλοντικές κυκλοφορίες.",
 		"description": "[warning] ο χρήστης εισήγαγε τις Tab καρτέλες του χρησιμοποιώντας μια απαρχαιωμένη διαμόρφωση του αρχείου json"
+	},
+	"when_click_popup_while": {
+		"message": "σελίδα όταν κάνετε κλικ στο αναδυόμενο παράθυρο ενώ",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"where_to": {
 		"message": "Που;",

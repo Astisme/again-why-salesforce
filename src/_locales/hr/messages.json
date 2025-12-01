@@ -675,6 +675,10 @@
 		"message": "Kliknite za preusmjeravanje na dokumentaciju za ovu postavku!",
 		"description": "[postavke-pomoć] poziv na radnju kako bi se korisniku omogućilo da pročita više o određenoj postavci"
 	},
+	"if_click_popup": {
+		"message": "ako kliknete na skočni prozor proširenja",
+		"description": "[placeholder] koristi se drugim tekstovima"
+	},
 	"import": {
 		"message": "Uvezi",
 		"description": "[popup] gumb za uvoz"
@@ -727,6 +731,10 @@
 		"message": "Kurziv",
 		"description": "Opcija stila fonta za kurzivni tekst"
 	},
+	"label": {
+		"message": "Oznaka",
+		"description": "[key] naziv Tab-a"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigacija",
 		"description": "Prilagođena navigacijska tehnologija Salesforcea"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Prijavite se na Salesforce",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na stranicu za prijavu u Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "mora biti neprazan niz znakova",
+		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -859,6 +871,10 @@
 		"message": "Ili $drop",
 		"description": "[uvoz] dopustite korisniku da premješta datoteke mišem i ispušta ih"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Salesforce $org od Tab-a"
+	},
 	"org_link": {
 		"message": "Poveznica do Organizacije",
 		"description": "[input-label]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "Prepiši spremljene Tabove.",
 		"description": "[label] izbriši sve spremljene Tabove tijekom uvoza"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "stranica će se otvoriti u trenutnom preglednikovom Tab-u",
+		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"pinned": {
 		"message": "Prikvačeno",
@@ -927,6 +947,10 @@
 		"message": "= Obavezne informacije",
 		"description": "[modal] obavještava korisnika da su određene informacije obavezne"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domena",
+		"description": "[placeholder] koristi se drugim tekstovima"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning platforma"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce prijava",
 		"description": "stranica za prijavu u Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce stranica",
+		"description": "[placeholder] koristi se u drugim tekstovima"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce postavke",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "Odaberi Sve",
 		"description": "[modal] gumb za odabir svih Tabs-ova u modalu za izvoz"
+	},
+	"select_tabs": {
+		"message": "Odaberite koje $tabs želite",
+		"description": "[import] omogućite korisniku da odabere koje $tabs želi uvesti prije uvoza"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] omogućite korisniku da odabere koje $tabs želi izvesti prije izvoza"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] omogućite korisniku da odabere koje $tabs želi uvesti prije uvoza"
 	},
 	"send_tip": {
 		"message": "Pošaljite nam savjet ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "Uvoz je uspješan",
 		"description": "[toast] Tabovi su uspješno spremljeni"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "jedna od omiljenih poveznica korisnika"
+	},
 	"tab_explain": {
 		"message": "Svaki predmet mora imati 'label' i 'url' kao nizove. Osim toga, svaki predmet može imati 'org' kao niz.",
 		"description": "[error] objašnjava kako treba biti strukturiran Tab"
@@ -1319,6 +1363,10 @@
 		"message": "Tabovi spremljeni.",
 		"description": "[toast] Tabovi su uspješno spremljeni."
 	},
+	"the_current_page": {
+		"message": "trenutna stranica",
+		"description": "[placeholder] koristi se drugim tekstovima"
+	},
 	"theme_dark": {
 		"message": "Promijeni temu u tamnu",
 		"description": "[popup] naslov ikone mjeseca za promjenu teme"
@@ -1347,6 +1395,10 @@
 		"message": "Otpremi",
 		"description": "[import] omogućuje korisniku pregled datoteka i odabir ispravne"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] poveznica Tab-a"
+	},
 	"users": {
 		"message": "Korisnici",
 		"description": "ime stranice povezane s ManageUsers/home"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "Molimo izvezite svoje nove Tabove jer datoteka koju ste koristili neće biti podržana u budućim izdanjima.",
 		"description": "[upozorenje] korisnik je uvezao svoje Tabove koristeći zastarjelu konfiguraciju json datoteke"
+	},
+	"when_click_popup_while": {
+		"message": "stranica pri kliku na skočni prozor dok",
+		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"where_to": {
 		"message": "Kamo?",

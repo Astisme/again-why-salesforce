@@ -674,6 +674,10 @@
 		"message": "انقر ليتم تحويلك إلى الوثائق الخاصة بهذا الإعداد!",
 		"description": "[مساعدة-الإعدادات] دعوة لاتخاذ إجراء للسماح للمستخدم بقراءة المزيد حول إعداد معين"
 	},
+	"if_click_popup": {
+		"message": "إذا نقرت على النافذة المنبثقة للإضافة",
+		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
+	},
 	"import": {
 		"message": "استيراد",
 		"description": "[popup] زر الاستيراد"
@@ -726,6 +730,10 @@
 		"message": "مائل",
 		"description": "خيار نمط الخط للنص المائل"
 	},
+	"label": {
+		"message": "تسمية",
+		"description": "[key] اسم الـ Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "تقنية التنقل المخصصة من Salesforce"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "تسجيل الدخول إلى Salesforce",
 		"description": "[notSalesforceSetup] دعوة لإعادة التوجيه إلى صفحة تسجيل الدخول في Salesforce"
+	},
+	"must_non_empty_str": {
+		"message": "يجب أن تكون سلسلة نصية غير فارغة",
+		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "أو $drop",
 		"description": "[استيراد] اسمح للمستخدم بنقل الملفات باستخدام الفأرة وإفلاتها"
 	},
+	"org": {
+		"message": "المؤسسة (Org)",
+		"description": "[key] $org الخاصة بالـ Salesforce للـ Tab"
+	},
 	"org_link": {
 		"message": "رابط Org",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "استبدال الـ Tabs المحفوظة",
 		"description": "[label] حذف كل الـ Tabs المحفوظة أثناء عملية الاستيراد"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "سيتم فتح الصفحة في $tab المتصفح الحالي",
+		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
 	},
 	"pinned": {
 		"message": "مثبت",
@@ -926,6 +946,10 @@
 		"message": "= المعلومات المطلوبة",
 		"description": "[modal] يخبر المستخدم بأن بعض المعلومات ضرورية"
 	},
+	"salesforce_domain": {
+		"message": "نطاق Salesforce",
+		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] منصة Salesforce Lightning"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "صفحة تسجيل الدخول إلى Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "صفحة Salesforce",
+		"description": "[placeholder] يُستخدم في نصوص أخرى"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "تحديد الكل",
 		"description": "[modal] زر لتحديد جميع Tabs في نموذج التصدير"
+	},
+	"select_tabs": {
+		"message": "حدد أي $tabs تود",
+		"description": "[import] اسمح للمستخدم بتحديد أي $tabs لاستيرادها قبل استيرادها"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] اسمح للمستخدم بتحديد أي $tabs لتصديرها قبل تصديرها"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] اسمح للمستخدم بتحديد أي $tabs لاستيرادها قبل استيرادها"
 	},
 	"send_tip": {
 		"message": "أرسل لنا إكرامية ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "تم الاستيراد بنجاح",
 		"description": "[toast] أضاف المستخدم الـ Tabs من ملف خارجي"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "أحد الروابط المفضلة للمستخدم"
+	},
 	"tab_explain": {
 		"message": "يجب أن يحتوي كل عنصر على 'label' و 'url' كسلاسل. بالإضافة إلى ذلك، يمكن أن يحتوي كل عنصر على 'org' كسلسلة.",
 		"description": "[error] يوضح كيفية إنشاء الـ Tab بشكل صحيح"
@@ -1318,6 +1362,10 @@
 		"message": "تم حفظ الـ Tabs",
 		"description": "[toast] تم حفظ الـ Tabs بنجاح"
 	},
+	"the_current_page": {
+		"message": "الصفحة الحالية",
+		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
+	},
 	"theme_dark": {
 		"message": "تغيير الثيم إلى داكن",
 		"description": "[popup] عنوان على القمر لتغيير الثيم"
@@ -1346,6 +1394,10 @@
 		"message": "تحميل",
 		"description": "[import] السماح للمستخدم بتصفح ملفاته واختيار الملف الصحيح"
 	},
+	"url": {
+		"message": "عنوان URL",
+		"description": "[key] رابط الـ Tab"
+	},
 	"users": {
 		"message": "المستخدمون",
 		"description": "اسم الصفحة المتعلقة بـ ManageUsers/home"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "يرجى تصدير علامات Tab الجديدة الخاصة بك لأن الملف الذي استخدمته لن يكون مدعومًا في الإصدارات المستقبلية.",
 		"description": "[warning] قام المستخدم باستيراد علامات Tab الخاصة به باستخدام تكوين مهمل لملف json"
+	},
+	"when_click_popup_while": {
+		"message": "الصفحة عند النقر على النافذة المنبثقة بينما",
+		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
 	},
 	"where_to": {
 		"message": "أين؟",

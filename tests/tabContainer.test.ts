@@ -1012,20 +1012,7 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 		assertEquals(
 			container.toString(),
-			`[
-{
-    "label": "⚡",
-    "url": "/lightning"
-},
-{
-    "label": "flows",
-    "url": "/lightning/app/standard__FlowsApp"
-},
-{
-    "label": "users",
-    "url": "ManageUsers/home"
-}
-]`,
+			`{"tabs":[{"label":"⚡","url":"/lightning"},{"label":"flows","url":"/lightning/app/standard__FlowsApp"},{"label":"users","url":"ManageUsers/home"}],"pinned":0}`,
 		);
 		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
 	});

@@ -14,15 +14,20 @@ async function showExportModal() {
 		return showToast("error_close_other_modal", false);
 	}
 	const allTabs = await ensureAllTabsAvailability();
-	const { modalParent, saveButton, closeButton, selectedTabs } =
-		await generateSldsModalWithTabList(allTabs, {
-			title: "export_tabs",
-			saveButtonLabel: "export",
-		});
+	const {
+		modalParent,
+		saveButton,
+		closeButton,
+		getSelectedTabs,
+	} = await generateSldsModalWithTabList(allTabs, {
+		title: "export_tabs",
+		saveButtonLabel: "export",
+		explainer: "select_tabs_export",
+	});
 	getModalHanger().appendChild(modalParent);
 	saveButton.addEventListener("click", (e) => {
 		e.preventDefault();
-		const { tabs, selectedAll } = selectedTabs();
+		const { tabs, selectedAll } = getSelectedTabs();
 		if (tabs.length === 0) {
 			return showToast("error_no_tabs_selected", false, true);
 		}

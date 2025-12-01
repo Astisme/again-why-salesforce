@@ -675,6 +675,10 @@
 		"message": "클릭하면 이 설정에 대한 문서로 리디렉션됩니다!",
 		"description": "[설정-도움말] 사용자가 특정 설정에 대해 더 자세히 읽을 수 있도록 하는 행동 유도 문구"
 	},
+	"if_click_popup": {
+		"message": "확장 프로그램 팝업을 클릭하면",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
+	},
 	"import": {
 		"message": "가져오기",
 		"description": "[팝업] 가져오기 버튼"
@@ -727,6 +731,10 @@
 		"message": "기울임꼴",
 		"description": "기울임 텍스트용 글꼴 스타일 옵션"
 	},
+	"label": {
+		"message": "레이블",
+		"description": "[key] Tab의 이름"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce의 맞춤 탐색 기술"
@@ -734,6 +742,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce에 로그인",
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 로그인 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+	},
+	"must_non_empty_str": {
+		"message": "비어 있지 않은 문자열이어야 합니다",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
 	},
 	"mycustomorg": {
 		"message": "내사용자지정조직",
@@ -859,6 +871,10 @@
 		"message": "또는 $drop",
 		"description": "[가져오기] 사용자가 마우스로 파일을 이동하고 놓을 수 있도록 허용"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab의 Salesforce $org"
+	},
 	"org_link": {
 		"message": "조직 링크",
 		"description": "[입력_레이블]"
@@ -882,6 +898,10 @@
 	"overwrite_tabs": {
 		"message": "저장된 Tabs 덮어쓰기.",
 		"description": "[레이블] 가져오기 프로세스 중 모든 저장된 Tabs 삭제"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "페이지가 현재 브라우저 Tab에서 열립니다",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -927,6 +947,10 @@
 		"message": "= 필수 정보",
 		"description": "[모달] 일부 정보가 필수임을 사용자에게 알림"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce 도메인",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[Salesforce설정아님] Salesforce Lightning 플랫폼"
@@ -934,6 +958,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce 로그인 페이지 (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce 페이지",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -950,6 +978,18 @@
 	"select_all": {
 		"message": "모두 선택",
 		"description": "[modal] 내보내기 모달에서 모든 Tab을 선택하는 버튼"
+	},
+	"select_tabs": {
+		"message": "원하는 $tabs 를 선택하세요",
+		"description": "[import] 가져오기 전에 사용자가 어떤 $tabs 를 가져올지 선택할 수 있도록 합니다"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] 내보내기 전에 사용자가 어떤 $tabs 를 내보낼지 선택할 수 있도록 합니다"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] 가져오기 전에 사용자가 어떤 $tabs 를 가져올지 선택할 수 있도록 합니다"
 	},
 	"send_tip": {
 		"message": "팁을 보내주세요 ❤️",
@@ -1263,6 +1303,10 @@
 		"message": "성공적으로 가져왔습니다",
 		"description": "[토스트] 사용자가 외부 파일에서 Tabs를 추가했습니다."
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "사용자의 즐겨찾는 링크 중 하나"
+	},
 	"tab_explain": {
 		"message": "각 항목에는 'label'과 'url'이 문자열로 있어야 합니다. 또한 모든 항목에는 'org'가 문자열로 있을 수 있습니다.",
 		"description": "[오류] Tab을 어떻게 구성해야 하는지 설명합니다."
@@ -1319,6 +1363,10 @@
 		"message": "Tabs가 저장되었습니다.",
 		"description": "[토스트] Tabs가 성공적으로 저장되었습니다."
 	},
+	"the_current_page": {
+		"message": "현재 페이지",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
+	},
 	"theme_dark": {
 		"message": "테마를 어둡게 변경",
 		"description": "[팝업] 테마 전환을 위한 달 아이콘 제목"
@@ -1347,6 +1395,10 @@
 		"message": "업로드",
 		"description": "[가져오기] 사용자가 파일을 탐색하고 올바른 파일을 선택하도록 허용"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab의 링크"
+	},
 	"users": {
 		"message": "사용자",
 		"description": "ManageUsers/home 관련 페이지 이름"
@@ -1354,6 +1406,10 @@
 	"warn_upgrade_backup": {
 		"message": "사용하신 파일은 향후 릴리스에서 지원되지 않으므로 새 Tab을 내보내십시오.",
 		"description": "[경고] 사용자가 json 파일의 더 이상 사용되지 않는 구성을 사용하여 Tab을 가져왔습니다"
+	},
+	"when_click_popup_while": {
+		"message": "팝업을 클릭하는 동안 페이지",
+		"description": "[placeholder] 다른 텍스트에서 사용됨"
 	},
 	"where_to": {
 		"message": "어디로?",

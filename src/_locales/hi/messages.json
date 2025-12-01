@@ -674,6 +674,10 @@
 		"message": "इस सेटिंग के लिए दस्तावेज़ पर रीडायरेक्ट होने के लिए क्लिक करें!",
 		"description": "[सेटिंग्स-सहायता] उपयोगकर्ता को किसी विशिष्ट सेटिंग के बारे में और पढ़ने देने के लिए कार्रवाई के लिए कॉल करें"
 	},
+	"if_click_popup": {
+		"message": "यदि आप एक्सटेंशन पॉपअप पर क्लिक करते हैं",
+		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
+	},
 	"import": {
 		"message": "आयात करें",
 		"description": "[popup] आयात बटन"
@@ -726,6 +730,10 @@
 		"message": "इटैलिक",
 		"description": "इटैलिक टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
 	},
+	"label": {
+		"message": "लेबल",
+		"description": "[key] Tab का नाम"
+	},
 	"lightning_navigation": {
 		"message": "लाइटनिंग नेविगेशन",
 		"description": "Salesforce की कस्टम नेविगेशन तकनीक"
@@ -733,6 +741,10 @@
 	"login_to_salesforce": {
 		"message": "Salesforce में लॉगिन करें",
 		"description": "[notSalesforceSetup] Salesforce लॉगिन पृष्ठ पर जाने के लिए कॉल टू एक्शन"
+	},
+	"must_non_empty_str": {
+		"message": "एक गैर-रिक्त स्ट्रिंग होनी चाहिए",
+		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -858,6 +870,10 @@
 		"message": "या $drop",
 		"description": "[आयात] उपयोगकर्ता को अपने माउस से फ़ाइलों को स्थानांतरित करने और उन्हें छोड़ने दें"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab का Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org लिंक",
 		"description": "[input-label]"
@@ -881,6 +897,10 @@
 	"overwrite_tabs": {
 		"message": "सहेजे गए Tabs को ओवरराइट करें।",
 		"description": "[label] आयात प्रक्रिया के दौरान सभी सहेजे गए Tabs हटाएँ"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "पृष्ठ वर्तमान ब्राउज़र Tab में खोला जाएगा",
+		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -926,6 +946,10 @@
 		"message": "= आवश्यक जानकारी",
 		"description": "[modal] उपयोगकर्ता को बताता है कि कुछ जानकारी अनिवार्य है"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce डोमेन",
+		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning प्लेटफार्म"
@@ -933,6 +957,10 @@
 	"salesforce_login": {
 		"message": "Salesforce लॉगिन",
 		"description": "Salesforce लॉगिन पेज (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce पृष्ठ",
+		"description": "[placeholder] अन्य ग्रंथों में प्रयुक्त"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce सेटअप",
@@ -949,6 +977,18 @@
 	"select_all": {
 		"message": "सभी का चयन करें",
 		"description": "[modal] निर्यात मॉडल में सभी Tabs का चयन करने के लिए बटन"
+	},
+	"select_tabs": {
+		"message": "चुनें कि आप कौन से $tabs चाहते हैं",
+		"description": "[import] उपयोगकर्ता को यह चुनने दें कि आयात करने से पहले कौन से $tabs आयात करने हैं"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] उपयोगकर्ता को यह चुनने दें कि निर्यात करने से पहले कौन से $tabs निर्यात करने हैं"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] उपयोगकर्ता को यह चुनने दें कि आयात करने से पहले कौन से $tabs आयात करने हैं"
 	},
 	"send_tip": {
 		"message": "हमें एक टिप भेजें ❤️",
@@ -1262,6 +1302,10 @@
 		"message": "सफलतापूर्वक आयात किया गया",
 		"description": "[toast] उपयोगकर्ता ने बाहरी फाइल से Tabs जोड़ दिए हैं।"
 	},
+	"tab": {
+		"message": "Tab",
+		"description": "उपयोगकर्ता के पसंदीदा लिंक में से एक"
+	},
 	"tab_explain": {
 		"message": "प्रत्येक आइटम में 'label' और 'url' स्ट्रिंग के रूप में होने चाहिए। साथ ही, प्रत्येक आइटम में 'org' स्ट्रिंग के रूप में हो सकता है।",
 		"description": "[error] बताता है कि Tab कैसे बनाया जाना चाहिए।"
@@ -1318,6 +1362,10 @@
 		"message": "Tabs सहेजे गए।",
 		"description": "[toast] Tabs सफलतापूर्वक सहेजे गए।"
 	},
+	"the_current_page": {
+		"message": "वर्तमान पृष्ठ",
+		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
+	},
 	"theme_dark": {
 		"message": "डार्क थीम में बदलें",
 		"description": "[popup] थीम बदलने के लिए चाँद पर शीर्षक"
@@ -1346,6 +1394,10 @@
 		"message": "अपलोड करें",
 		"description": "[import] उपयोगकर्ता को उनकी फाइलों में से सही फाइल चुनने की अनुमति देता है।"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab का लिंक"
+	},
 	"users": {
 		"message": "उपयोगकर्ता",
 		"description": "ManageUsers/home से संबंधित पृष्ठ का नाम"
@@ -1353,6 +1405,10 @@
 	"warn_upgrade_backup": {
 		"message": "कृपया अपने नए Tab निर्यात करें क्योंकि आपके द्वारा उपयोग की गई फ़ाइल भविष्य के रिलीज़ में समर्थित नहीं होगी।",
 		"description": "[चेतावनी] उपयोगकर्ता ने json फ़ाइल के एक अप्रचलित कॉन्फ़िगरेशन का उपयोग करके अपने Tab आयात किए हैं"
+	},
+	"when_click_popup_while": {
+		"message": "पॉपअप पर क्लिक करने पर पृष्ठ जबकि",
+		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
 	},
 	"where_to": {
 		"message": "कहाँ?",
