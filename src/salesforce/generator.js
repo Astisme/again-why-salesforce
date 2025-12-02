@@ -1831,3 +1831,159 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		getSelectedTabs,
 	};
 }
+
+/**
+ * Generates a modal for managing saved tabs with actions (open, update, remove, pin/unpin).
+ * Similar to popup functionality but displayed in a Salesforce modal.
+ *
+ * @param {Array<Tab>} tabs - Array of saved Tab objects
+ * @return {Promise<Object>} An object containing modalParent, closeButton, and an actionsMap for handling row interactions
+ */
+export async function generateManageTabsModal(tabs = [], {
+	title = "manage_tabs",
+	saveButtonLabel = "save",
+	explainer = "manage_tabs_explainer",
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const { modalParent, article, closeButton } = await generateSldsModal({
+		modalTitle: await translator.translate("cxm_manage_tabs"),
+		saveButtonLabel: null, // no save button needed, all actions are immediate
+	});
+	
+	// Create a table-like structure for tabs
+	const divParent = document.createElement("div");
+	article.appendChild(divParent);
+	divParent.classList.add(
+		"forceBaseListView",
+		"visualEditorModal",
+		"slds-p-top--none",
+		"slds-p-around--medium",
+	);
+	
+	const table = document.createElement("table");
+	table.classList.add("slds-table", "slds-table_striped", "slds-table_bordered");
+	table.style.width = "100%";
+	
+	// Table header
+	const thead = document.createElement("thead");
+	const headerRow = document.createElement("tr");
+	const headers = [
+		await translator.translate("tab_label"),
+		await translator.translate("tab_url"),
+		await translator.translate("tab_org"),
+		await translator.translate("actions"),
+	];
+	
+	for (const headerText of headers) {
+		const th = document.createElement("th");
+		th.scope = "col";
+		th.textContent = headerText;
+		th.style.padding = "0.75rem";
+		th.style.textAlign = "left";
+		th.classList.add("slds-cell-wrap");
+		headerRow.appendChild(th);
+	}
+	thead.appendChild(headerRow);
+	table.appendChild(thead);
+	
+	// Table body with tabs
+	const tbody = document.createElement("tbody");
+	const actionsMap = {}; // map to store action handlers for each tab
+	
+	for (let i = 0; i < tabs.length; i++) {
+		const tab = tabs[i];
+		const row = document.createElement("tr");
+		row.dataset.tabIndex = i;
+		row.classList.add("slds-hint-parent");
+		
+		// Label
+		const labelCell = document.createElement("td");
+		labelCell.textContent = tab.label || "";
+		labelCell.style.padding = "0.75rem";
+		labelCell.classList.add("slds-cell-wrap");
+		row.appendChild(labelCell);
+		
+		// URL
+		const urlCell = document.createElement("td");
+		urlCell.textContent = tab.url || "";
+		urlCell.style.padding = "0.75rem";
+		urlCell.style.wordBreak = "break-all";
+		urlCell.classList.add("slds-cell-wrap");
+		row.appendChild(urlCell);
+		
+		// Org (show if org-specific)
+		const orgCell = document.createElement("td");
+		orgCell.textContent = tab.org || "-";
+		orgCell.style.padding = "0.75rem";
+		orgCell.classList.add("slds-cell-wrap");
+		row.appendChild(orgCell);
+		
+		// Actions
+		const actionsCell = document.createElement("td");
+		actionsCell.style.padding = "0.75rem";
+		actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
+		
+		const actionsContainer = document.createElement("div");
+		actionsContainer.style.display = "flex";
+		actionsContainer.style.gap = "0.5rem";
+		actionsContainer.style.justifyContent = "center";
+		actionsContainer.style.flexWrap = "wrap";
+		
+		// Open button
+		const openBtn = document.createElement("button");
+		openBtn.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
+		openBtn.textContent = await translator.translate("open");
+		openBtn.dataset.action = "open";
+		openBtn.dataset.tabIndex = i;
+		actionsContainer.appendChild(openBtn);
+		
+		// Update button
+		const updateBtn = document.createElement("button");
+		updateBtn.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
+		updateBtn.textContent = await translator.translate("cxm_update_tab");
+		updateBtn.dataset.action = "update";
+		updateBtn.dataset.tabIndex = i;
+		actionsContainer.appendChild(updateBtn);
+		
+		// Remove button
+		const removeBtn = document.createElement("button");
+		removeBtn.classList.add("slds-button", "slds-button_destructive", "slds-button_small");
+		removeBtn.textContent = await translator.translate("cxm_remove_tab");
+		removeBtn.dataset.action = "remove";
+		removeBtn.dataset.tabIndex = i;
+		actionsContainer.appendChild(removeBtn);
+		
+		// Pin/Unpin button
+		const pinBtn = document.createElement("button");
+		pinBtn.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
+		pinBtn.textContent = await translator.translate(
+			tab.pinned ? "cxm_unpin_tab" : "cxm_pin_tab"
+		);
+		pinBtn.dataset.action = tab.pinned ? "unpin" : "pin";
+		pinBtn.dataset.tabIndex = i;
+		actionsContainer.appendChild(pinBtn);
+		
+		actionsCell.appendChild(actionsContainer);
+		row.appendChild(actionsCell);
+		
+		tbody.appendChild(row);
+		
+		// Store action handlers for this tab
+		actionsMap[i] = {
+			open: () => ({ what: "open-tab", url: tab.url, label: tab.label }),
+			update: () => ({ what: "cxm_update_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
+			remove: () => ({ what: "cxm_remove_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
+			pin: () => ({ what: "cxm_pin_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
+			unpin: () => ({ what: "cxm_unpin_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
+		};
+	}
+	
+	table.appendChild(tbody);
+	divParent.appendChild(table);
+	
+	return {
+		modalParent,
+		closeButton,
+		actionsMap,
+	};
+}

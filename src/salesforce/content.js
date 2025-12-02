@@ -11,6 +11,7 @@ import {
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
 	CXM_EXPORT_TABS,
+	CXM_MANAGE_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -67,6 +68,7 @@ import {
 	generateSldsToastMessage,
 	generateStyleFromSettings,
 	generateUpdateTabModal,
+	generateManageTabsModal,
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
@@ -900,6 +902,35 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 }
 
 /**
+ * Shows a modal for managing saved tabs with actions (open, update, remove, pin/unpin).
+ * Displays all saved tabs in a table and handles user interactions via button clicks.
+ *
+ * @return {Promise<void>}
+ */
+async function showManageTabs() {
+	if (document.getElementById(MODAL_ID) != null) {
+		return showToast("error_close_other_modal", false);
+	}
+	const allTabs = await ensureAllTabsAvailability();
+	const { modalParent, closeButton, actionsMap } = await generateManageTabsModal(allTabs);
+	getModalHanger().appendChild(modalParent);
+	// Attach click handlers to all action buttons
+	const actionButtons = modalParent.querySelectorAll("[data-action]");
+	for (const btn of actionButtons) {
+		btn.addEventListener("click", (e) => {
+			e.preventDefault();
+			const tabIndex = Number.parseInt(btn.dataset.tabIndex);
+			const action = btn.dataset.action;
+			if (actionsMap?.[tabIndex]?.[action] != null) {
+				const message = actionsMap[tabIndex][action]();
+				bg_notify(message);
+				closeButton.click();
+			}
+		});
+	}
+}
+
+/**
  * Initiates a download of a JSON file with the given content and filename.
  *
  * @param {Object} message - Message containing the data for download.
@@ -958,6 +989,9 @@ function listenToBackgroundPage() {
 					break;
 				case ACTION_ADD:
 					createImportModal();
+					break;
+				case CXM_MANAGE_TABS:
+					showManageTabs();
 					break;
 				case WHAT_SHOW_EXPORT_MODAL:
 				case CXM_EXPORT_TABS:

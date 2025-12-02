@@ -41,6 +41,7 @@ import {
 	CXM_UNPIN_TAB,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
+	CXM_MANAGE_TABS,
 	FRAME_PATTERNS,
 	openSettingsPage,
 	SETTINGS_KEY,
@@ -314,6 +315,12 @@ const menuItemsOriginal = [
 	},
 
 	{
+		id: CXM_MANAGE_TABS,
+		title: "cxm_manage_tabs",
+		contexts: ["page", "frame"],
+	},
+
+	{
 		id: CMD_OPEN_SETTINGS,
 		title: "cxm_settings",
 		contexts: ["link", "page", "frame"],
@@ -556,6 +563,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_IMPORT_TABS:
 			message.what = "add";
 			break;
+		case CXM_MANAGE_TABS:
 		case CXM_SORT_LABEL:
 		case CXM_SORT_URL:
 		case CXM_SORT_ORG:
