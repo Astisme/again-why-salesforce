@@ -1754,30 +1754,6 @@ function createModalContentContainer(article) {
 }
 
 /**
- * Helper function to create a table header with translated header texts.
- *
- * @param {Array<string>} headerTexts - Array of translated header texts
- * @return {HTMLTableSectionElement} The created thead element
- */
-function createTableHeader(headerTexts) {
-	const thead = document.createElement("thead");
-	const headerRow = document.createElement("tr");
-	
-	for (const headerText of headerTexts) {
-		const th = document.createElement("th");
-		th.scope = "col";
-		th.textContent = headerText;
-		th.style.padding = "0.75rem";
-		th.style.textAlign = "left";
-		th.classList.add("slds-cell-wrap");
-		headerRow.appendChild(th);
-	}
-	
-	thead.appendChild(headerRow);
-	return thead;
-}
-
-/**
  * Helper function to create a styled table cell (td).
  *
  * @param {string} text - The cell content text
@@ -1821,20 +1797,6 @@ function createStyledButton(text, { variant = "neutral", action, tabIndex } = {}
 		btn.dataset.tabIndex = tabIndex;
 	}
 	return btn;
-}
-
-/**
- * Helper function to create a flex container for action buttons.
- *
- * @return {HTMLElement} The created and configured flex container
- */
-function createActionButtonsContainer() {
-	const container = document.createElement("div");
-	container.style.display = "flex";
-	container.style.gap = "0.5rem";
-	container.style.justifyContent = "center";
-	container.style.flexWrap = "wrap";
-	return container;
 }
 
 export async function generateSldsModalWithTabList(tabs = [], {
@@ -1953,37 +1915,29 @@ export async function generateSldsModalWithTabList(tabs = [], {
  * @return {Promise<Object>} An object containing modalParent, closeButton, and an actionsMap for handling row interactions
  */
 export async function generateManageTabsModal(tabs = [], {
-	title = "cxm_manage_tabs",
+	title = "manage_tabs",
+  saveButtonLabel = "save",
 	explainer = "manage_tabs_explainer",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, closeButton } = await generateSldsModal({
 		modalTitle: await translator.translate(title),
-		saveButtonLabel: null, // no save button needed, all actions are immediate
+		saveButtonLabel,
 	});
 	await addModalExplainer(article, explainer);
 	
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
-	
-	const table = document.createElement("table");
-	table.classList.add("slds-table", "slds-table_striped", "slds-table_bordered");
-	table.style.width = "100%";
-	
 	// Table header
-	const headerTexts = [
-		await translator.translate("tab_label"),
-		await translator.translate("tab_url"),
-		await translator.translate("tab_org"),
-		await translator.translate("actions"),
+	const headers = [
+    { label: await translator.translate("tab_label") },
+    { label: await translator.translate("tab_url") },
+    { label: await translator.translate("tab_org") },
+    { label: await translator.translate("actions") },
 	];
-	const thead = createTableHeader(headerTexts);
-	table.appendChild(thead);
-	
-	// Table body with tabs
-	const tbody = document.createElement("tbody");
+	const { table, tbody } = createTable(headers);
+  divParent.appendChild(table);
 	const actionsMap = {}; // map to store action handlers for each tab
-	
 	for (let i = 0; i < tabs.length; i++) {
 		const tab = tabs[i];
 		const row = document.createElement("tr");
@@ -1997,14 +1951,18 @@ export async function generateManageTabsModal(tabs = [], {
 		row.appendChild(createTableCell(tab.url, { wordBreak: true }));
 		
 		// Org (show if org-specific)
-		row.appendChild(createTableCell(tab.org || "-"));
+		row.appendChild(createTableCell(tab.org ?? ""));
 		
 		// Actions
 		const actionsCell = document.createElement("td");
 		actionsCell.style.padding = "0.75rem";
 		actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
 		
-		const actionsContainer = createActionButtonsContainer();
+    const actionsContainer = document.createElement("div");
+    actionsContainer.style.display = "flex";
+    actionsContainer.style.gap = "0.5rem";
+    actionsContainer.style.justifyContent = "center";
+    actionsContainer.style.flexWrap = "wrap";
 		
 		// Open button
 		const openBtn = createStyledButton(
