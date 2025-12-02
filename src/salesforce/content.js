@@ -945,10 +945,17 @@ async function showManageTabs() {
 	 */
 	async function handleActionButtonClick(e) {
 		e.preventDefault();
+		e.stopPropagation();
 		const btn = e.target;
 		const tabIndex = Number.parseInt(btn.dataset.tabIndex);
 		const action = btn.dataset.action;
 		const row = btn.closest("tr");
+		
+		// Close the dropdown menu
+		const dropdownMenu = row.querySelector(".actions-dropdown-menu");
+		if (dropdownMenu) {
+			dropdownMenu.style.display = "none";
+		}
 		
 		// Handle toggle buttons (pin/unpin)
 		if (action === "pin") {

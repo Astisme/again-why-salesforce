@@ -2030,33 +2030,71 @@ export async function createManageTabRow(tab = {}, index = 0, translator) {
 	orgCell.appendChild(orgInput);
 	tr.appendChild(orgCell);
 	
-	// Actions cell
+	// Actions cell with dropdown
 	const actionsCell = document.createElement("td");
 	actionsCell.style.padding = "0.75rem";
 	actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
 	
-	const actionsContainer = createActionButtonsContainer();
+	// Dropdown button
+	const dropdownButton = document.createElement("button");
+	dropdownButton.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
+	dropdownButton.style.position = "relative";
+	dropdownButton.innerHTML = `▼`; // downward arrow
+	dropdownButton.title = await translator.translate("actions");
+	
+	// Dropdown menu container
+	const dropdownMenu = document.createElement("div");
+	dropdownMenu.className = "actions-dropdown-menu";
+	dropdownMenu.style.display = "none";
+	dropdownMenu.style.position = "absolute";
+	dropdownMenu.style.top = "100%";
+	dropdownMenu.style.left = "0";
+	dropdownMenu.style.backgroundColor = "white";
+	dropdownMenu.style.border = "1px solid #d3d3d3";
+	dropdownMenu.style.borderRadius = "0.25rem";
+	dropdownMenu.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+	dropdownMenu.style.zIndex = "1000";
+	dropdownMenu.style.minWidth = "120px";
+	dropdownMenu.style.padding = "0.5rem 0";
 	
 	// Open button
 	const openBtn = createStyledButton(
 		await translator.translate("open"),
 		{ action: "open", tabIndex: index }
 	);
-	actionsContainer.appendChild(openBtn);
+	openBtn.style.width = "100%";
+	openBtn.style.justifyContent = "flex-start";
+	openBtn.style.paddingLeft = "0.75rem";
+	openBtn.style.borderRadius = "0";
+	openBtn.style.border = "none";
+	openBtn.style.textAlign = "left";
+	dropdownMenu.appendChild(openBtn);
 	
 	// Update button
 	const updateBtn = createStyledButton(
 		await translator.translate("cxm_update_tab"),
 		{ action: "update", tabIndex: index }
 	);
-	actionsContainer.appendChild(updateBtn);
+	updateBtn.style.width = "100%";
+	updateBtn.style.justifyContent = "flex-start";
+	updateBtn.style.paddingLeft = "0.75rem";
+	updateBtn.style.borderRadius = "0";
+	updateBtn.style.border = "none";
+	updateBtn.style.textAlign = "left";
+	dropdownMenu.appendChild(updateBtn);
 	
 	// Remove button
 	const removeBtn = createStyledButton(
 		await translator.translate("cxm_remove_tab"),
 		{ variant: "destructive", action: "remove", tabIndex: index }
 	);
-	actionsContainer.appendChild(removeBtn);
+	removeBtn.style.width = "100%";
+	removeBtn.style.justifyContent = "flex-start";
+	removeBtn.style.paddingLeft = "0.75rem";
+	removeBtn.style.borderRadius = "0";
+	removeBtn.style.border = "none";
+	removeBtn.style.textAlign = "left";
+	dropdownMenu.appendChild(removeBtn);
 	
 	// Pin/Unpin button (toggle - only show one at a time)
 	const pinBtn = createStyledButton(
@@ -2064,31 +2102,73 @@ export async function createManageTabRow(tab = {}, index = 0, translator) {
 		{ action: "pin", tabIndex: index }
 	);
 	pinBtn.classList.add("pin-btn");
+	pinBtn.style.width = "100%";
+	pinBtn.style.justifyContent = "flex-start";
+	pinBtn.style.paddingLeft = "0.75rem";
+	pinBtn.style.borderRadius = "0";
+	pinBtn.style.border = "none";
+	pinBtn.style.textAlign = "left";
 	if (tab.pinned) {
 		pinBtn.style.display = "none";
 	}
-	actionsContainer.appendChild(pinBtn);
+	dropdownMenu.appendChild(pinBtn);
 	
 	const unpinBtn = createStyledButton(
 		await translator.translate("cxm_unpin_tab"),
 		{ action: "unpin", tabIndex: index }
 	);
 	unpinBtn.classList.add("unpin-btn");
+	unpinBtn.style.width = "100%";
+	unpinBtn.style.justifyContent = "flex-start";
+	unpinBtn.style.paddingLeft = "0.75rem";
+	unpinBtn.style.borderRadius = "0";
+	unpinBtn.style.border = "none";
+	unpinBtn.style.textAlign = "left";
 	if (!tab.pinned) {
 		unpinBtn.style.display = "none";
 	}
-	actionsContainer.appendChild(unpinBtn);
+	dropdownMenu.appendChild(unpinBtn);
 	
 	// Delete button
 	const deleteBtn = createStyledButton(
 		await translator.translate("delete"),
 		{ action: "delete", tabIndex: index }
 	);
-	deleteBtn.classList.add("slds-button_destructive", "delete-btn");
+	deleteBtn.classList.add("delete-btn");
 	deleteBtn.disabled = tab.label === "" && tab.url === ""; // disabled for empty rows
-	actionsContainer.appendChild(deleteBtn);
+	deleteBtn.style.width = "100%";
+	deleteBtn.style.justifyContent = "flex-start";
+	deleteBtn.style.paddingLeft = "0.75rem";
+	deleteBtn.style.borderRadius = "0";
+	deleteBtn.style.border = "none";
+	deleteBtn.style.textAlign = "left";
+	dropdownMenu.appendChild(deleteBtn);
 	
-	actionsCell.appendChild(actionsContainer);
+	// Dropdown toggle functionality
+	dropdownButton.addEventListener("click", (e) => {
+		e.stopPropagation();
+		const isVisible = dropdownMenu.style.display !== "none";
+		dropdownMenu.style.display = isVisible ? "none" : "block";
+	});
+	
+	// Close dropdown when clicking outside
+	document.addEventListener("click", () => {
+		dropdownMenu.style.display = "none";
+	});
+	
+	// Prevent dropdown from closing when clicking inside
+	dropdownMenu.addEventListener("click", (e) => {
+		e.stopPropagation();
+	});
+	
+	// Position the dropdown relative to button
+	const buttonContainer = document.createElement("div");
+	buttonContainer.style.position = "relative";
+	buttonContainer.style.display = "inline-block";
+	buttonContainer.appendChild(dropdownButton);
+	buttonContainer.appendChild(dropdownMenu);
+	
+	actionsCell.appendChild(buttonContainer);
 	tr.appendChild(actionsCell);
 	
 	return tr;
