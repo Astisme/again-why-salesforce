@@ -69,6 +69,7 @@ import {
 	generateStyleFromSettings,
 	generateUpdateTabModal,
 	generateManageTabsModal,
+	createManageTabRow,
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
@@ -912,22 +913,119 @@ async function showManageTabs() {
 		return showToast("error_close_other_modal", false);
 	}
 	const allTabs = await ensureAllTabsAvailability();
-	const { modalParent, closeButton, actionsMap } = await generateManageTabsModal(allTabs);
+	const { modalParent, closeButton, actionsMap, tbody, loggers, table } = await generateManageTabsModal(allTabs);
 	getModalHanger().appendChild(modalParent);
-	// Attach click handlers to all action buttons
-	const actionButtons = modalParent.querySelectorAll("[data-action]");
-	for (const btn of actionButtons) {
-		btn.addEventListener("click", (e) => {
-			e.preventDefault();
-			const tabIndex = Number.parseInt(btn.dataset.tabIndex);
-			const action = btn.dataset.action;
+	
+	// Setup drag functionality for the manage tabs table
+	setupDrag();
+	
+	/**
+	 * Adds a new empty row to the table
+	 */
+	async function addEmptyTabRow() {
+		const translator = await ensureTranslatorAvailability();
+		const emptyTab = { label: "", url: "", org: null, pinned: false };
+		const newRow = await createManageTabRow(emptyTab, tbody.children.length, translator);
+		tbody.appendChild(newRow);
+		attachButtonListeners(newRow);
+	}
+	
+	/**
+	 * Attaches event listeners to action buttons in a row
+	 */
+	function attachButtonListeners(row) {
+		const buttons = row.querySelectorAll("[data-action]");
+		for (const btn of buttons) {
+			btn.addEventListener("click", handleActionButtonClick);
+		}
+	}
+	
+	/**
+	 * Handles action button clicks
+	 */
+	async function handleActionButtonClick(e) {
+		e.preventDefault();
+		const btn = e.target;
+		const tabIndex = Number.parseInt(btn.dataset.tabIndex);
+		const action = btn.dataset.action;
+		const row = btn.closest("tr");
+		
+		// Handle toggle buttons (pin/unpin)
+		if (action === "pin") {
+			const pinBtn = row.querySelector(".pin-btn");
+			const unpinBtn = row.querySelector(".unpin-btn");
+			pinBtn.style.display = "none";
+			unpinBtn.style.display = "inline-block";
+			if (actionsMap?.[tabIndex]?.["pin"] != null) {
+				const message = actionsMap[tabIndex]["pin"]();
+				bg_notify(message);
+			}
+		} else if (action === "unpin") {
+			const pinBtn = row.querySelector(".pin-btn");
+			const unpinBtn = row.querySelector(".unpin-btn");
+			unpinBtn.style.display = "none";
+			pinBtn.style.display = "inline-block";
+			if (actionsMap?.[tabIndex]?.["unpin"] != null) {
+				const message = actionsMap[tabIndex]["unpin"]();
+				bg_notify(message);
+			}
+		} else if (action === "delete") {
+			// Extract data from inputs if it's not an empty row
+			const labelInput = row.querySelector(".label");
+			const urlInput = row.querySelector(".url");
+			if (labelInput?.value || urlInput?.value) {
+				// This is a real tab, so notify the background
+				if (actionsMap?.[tabIndex]?.["delete"] != null) {
+					const message = actionsMap[tabIndex]["delete"]();
+					bg_notify(message);
+				}
+			}
+			// Remove the row from the table
+			row.remove();
+			// If we just deleted the empty row, add a new one
+			if (tbody.lastElementChild === null || tbody.querySelector("tr:last-child .label")?.value !== "") {
+				addEmptyTabRow();
+			}
+		} else if (action === "open" || action === "update" || action === "remove") {
+			// Regular actions that close the modal
 			if (actionsMap?.[tabIndex]?.[action] != null) {
 				const message = actionsMap[tabIndex][action]();
 				bg_notify(message);
 				closeButton.click();
 			}
-		});
+		}
 	}
+	
+	// Attach listeners to all existing buttons
+	const actionButtons = modalParent.querySelectorAll("[data-action]");
+	for (const btn of actionButtons) {
+		btn.addEventListener("click", handleActionButtonClick);
+	}
+	
+	// Listen for drag events to save on reorder
+	const postMessageListener = (e) => {
+		if (e.data?.what === "order") {
+			// Get current tab order from the table
+			const rows = Array.from(tbody.querySelectorAll("tr"));
+			const reorderedTabs = rows.map((row) => {
+				const labelInput = row.querySelector(".label");
+				const urlInput = row.querySelector(".url");
+				const orgInput = row.querySelector(".org");
+				return {
+					label: labelInput?.value,
+					url: urlInput?.value,
+					org: orgInput?.value || null,
+				};
+			}).filter(tab => tab.label || tab.url); // Filter out empty rows
+			
+			// Send reorder message
+			if (reorderedTabs.length > 0) {
+				sendExtensionMessage({ what: "reorder-tabs", tabs: reorderedTabs });
+			}
+		}
+	};
+	
+	addEventListener("message", postMessageListener);
 }
 
 /**

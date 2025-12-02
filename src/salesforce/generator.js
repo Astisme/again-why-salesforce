@@ -1905,99 +1905,250 @@ export async function generateSldsModalWithTabList(tabs = [], {
 }
 
 /**
- * Generates a modal for managing saved tabs with actions (open, update, remove, pin/unpin).
- * Similar to popup functionality but displayed in a Salesforce modal.
+ * Creates a drag handle SVG icon for reordering rows
+ * @return {SVGSVGElement} The drag handle SVG element
+ */
+function createDragHandle() {
+	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	svg.setAttribute("viewBox", "0 0 24 24");
+	svg.setAttribute("width", "20");
+	svg.setAttribute("height", "20");
+	svg.setAttribute("fill", "currentColor");
+	svg.style.cursor = "grab";
+	svg.dataset.draggable = "true";
+	
+	// Six dots in two columns
+	const rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	rect1.setAttribute("x", "6");
+	rect1.setAttribute("y", "4");
+	rect1.setAttribute("width", "2");
+	rect1.setAttribute("height", "2");
+	svg.appendChild(rect1);
+	
+	const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	rect2.setAttribute("x", "6");
+	rect2.setAttribute("y", "11");
+	rect2.setAttribute("width", "2");
+	rect2.setAttribute("height", "2");
+	svg.appendChild(rect2);
+	
+	const rect3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	rect3.setAttribute("x", "6");
+	rect3.setAttribute("y", "18");
+	rect3.setAttribute("width", "2");
+	rect3.setAttribute("height", "2");
+	svg.appendChild(rect3);
+	
+	const rect4 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	rect4.setAttribute("x", "16");
+	rect4.setAttribute("y", "4");
+	rect4.setAttribute("width", "2");
+	rect4.setAttribute("height", "2");
+	svg.appendChild(rect4);
+	
+	const rect5 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	rect5.setAttribute("x", "16");
+	rect5.setAttribute("y", "11");
+	rect5.setAttribute("width", "2");
+	rect5.setAttribute("height", "2");
+	svg.appendChild(rect5);
+	
+	const rect6 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	rect6.setAttribute("x", "16");
+	rect6.setAttribute("y", "18");
+	rect6.setAttribute("width", "2");
+	rect6.setAttribute("height", "2");
+	svg.appendChild(rect6);
+	
+	return svg;
+}
+
+/**
+ * Creates a table row with editable inputs for label, URL, and org.
+ * Used by generateManageTabsModal for creating editable tab rows.
+ *
+ * @param {Object} tab - The tab object with label, url, org, pinned properties
+ * @param {number} index - The row index for data-row-index
+ * @param {Object} translator - The translator for i18n
+ * @return {Promise<HTMLTableRowElement>} The created tr element
+ */
+export async function createManageTabRow(tab = {}, index = 0, translator) {
+	const tr = document.createElement("tr");
+	tr.dataset.rowIndex = index;
+	tr.classList.add("slds-hint-parent");
+	tr.draggable = true;
+	
+	// Drag handle cell
+	const dragCell = document.createElement("td");
+	dragCell.style.padding = "0.75rem";
+	dragCell.style.width = "30px";
+	dragCell.style.textAlign = "center";
+	dragCell.classList.add("slds-cell-wrap");
+	dragCell.appendChild(createDragHandle());
+	tr.appendChild(dragCell);
+	
+	// Label cell with input
+	const labelCell = document.createElement("td");
+	labelCell.style.padding = "0.75rem";
+	labelCell.classList.add("slds-cell-wrap");
+	const labelInput = document.createElement("input");
+	labelInput.type = "text";
+	labelInput.className = "label";
+	labelInput.value = tab.label || "";
+	labelInput.placeholder = await translator.translate("tab_label");
+	labelInput.style.width = "100%";
+	labelInput.style.padding = "0.25rem";
+	labelCell.appendChild(labelInput);
+	tr.appendChild(labelCell);
+	
+	// URL cell with input
+	const urlCell = document.createElement("td");
+	urlCell.style.padding = "0.75rem";
+	urlCell.classList.add("slds-cell-wrap");
+	const urlInput = document.createElement("input");
+	urlInput.type = "text";
+	urlInput.className = "url";
+	urlInput.value = tab.url || "";
+	urlInput.placeholder = await translator.translate("tab_url");
+	urlInput.style.width = "100%";
+	urlInput.style.padding = "0.25rem";
+	urlInput.style.wordBreak = "break-all";
+	urlCell.appendChild(urlInput);
+	tr.appendChild(urlCell);
+	
+	// Org cell with input
+	const orgCell = document.createElement("td");
+	orgCell.style.padding = "0.75rem";
+	orgCell.classList.add("slds-cell-wrap");
+	const orgInput = document.createElement("input");
+	orgInput.type = "text";
+	orgInput.className = "org";
+	orgInput.value = tab.org || "";
+	orgInput.placeholder = await translator.translate("tab_org");
+	orgInput.style.width = "100%";
+	orgInput.style.padding = "0.25rem";
+	orgCell.appendChild(orgInput);
+	tr.appendChild(orgCell);
+	
+	// Actions cell
+	const actionsCell = document.createElement("td");
+	actionsCell.style.padding = "0.75rem";
+	actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
+	
+	const actionsContainer = createActionButtonsContainer();
+	
+	// Open button
+	const openBtn = createStyledButton(
+		await translator.translate("open"),
+		{ action: "open", tabIndex: index }
+	);
+	actionsContainer.appendChild(openBtn);
+	
+	// Update button
+	const updateBtn = createStyledButton(
+		await translator.translate("cxm_update_tab"),
+		{ action: "update", tabIndex: index }
+	);
+	actionsContainer.appendChild(updateBtn);
+	
+	// Remove button
+	const removeBtn = createStyledButton(
+		await translator.translate("cxm_remove_tab"),
+		{ variant: "destructive", action: "remove", tabIndex: index }
+	);
+	actionsContainer.appendChild(removeBtn);
+	
+	// Pin/Unpin button (toggle - only show one at a time)
+	const pinBtn = createStyledButton(
+		await translator.translate("cxm_pin_tab"),
+		{ action: "pin", tabIndex: index }
+	);
+	pinBtn.classList.add("pin-btn");
+	if (tab.pinned) {
+		pinBtn.style.display = "none";
+	}
+	actionsContainer.appendChild(pinBtn);
+	
+	const unpinBtn = createStyledButton(
+		await translator.translate("cxm_unpin_tab"),
+		{ action: "unpin", tabIndex: index }
+	);
+	unpinBtn.classList.add("unpin-btn");
+	if (!tab.pinned) {
+		unpinBtn.style.display = "none";
+	}
+	actionsContainer.appendChild(unpinBtn);
+	
+	// Delete button
+	const deleteBtn = createStyledButton(
+		await translator.translate("delete"),
+		{ action: "delete", tabIndex: index }
+	);
+	deleteBtn.classList.add("slds-button_destructive", "delete-btn");
+	deleteBtn.disabled = tab.label === "" && tab.url === ""; // disabled for empty rows
+	actionsContainer.appendChild(deleteBtn);
+	
+	actionsCell.appendChild(actionsContainer);
+	tr.appendChild(actionsCell);
+	
+	return tr;
+}
+
+/**
+ * Generates a modal for managing saved tabs with editable fields and drag-to-reorder functionality.
+ * Allows users to edit tabs, add new tabs, and manage pinning/unpinning directly from the modal.
  *
  * @param {Array<Tab>} tabs - Array of saved Tab objects
  * @param {Object} options - Configuration options
- * @param {string} [options.title="cxm_manage_tabs"] - i18n key for modal title
+ * @param {string} [options.title="manage_tabs"] - i18n key for modal title
+ * @param {string} [options.saveButtonLabel="save"] - i18n key for save button label
  * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
- * @return {Promise<Object>} An object containing modalParent, closeButton, and an actionsMap for handling row interactions
+ * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs)
  */
 export async function generateManageTabsModal(tabs = [], {
 	title = "manage_tabs",
-  saveButtonLabel = "save",
+	saveButtonLabel = "save",
 	explainer = "manage_tabs_explainer",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, closeButton } = await generateSldsModal({
 		modalTitle: await translator.translate(title),
-		saveButtonLabel,
+		saveButtonLabel: await translator.translate(saveButtonLabel),
 	});
 	await addModalExplainer(article, explainer);
 	
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
-	// Table header
+	
+	// Table header with drag handle column
 	const headers = [
-    { label: await translator.translate("tab_label") },
-    { label: await translator.translate("tab_url") },
-    { label: await translator.translate("tab_org") },
-    { label: await translator.translate("actions") },
+		{ label: "" }, // drag handle column
+		{ label: await translator.translate("tab_label") },
+		{ label: await translator.translate("tab_url") },
+		{ label: await translator.translate("tab_org") },
+		{ label: await translator.translate("actions") },
 	];
 	const { table, tbody } = createTable(headers);
-  divParent.appendChild(table);
-	const actionsMap = {}; // map to store action handlers for each tab
+	table.id = "manage-tabs-table"; // for drag handler to find it
+	divParent.appendChild(table);
+	
+	const loggers = []; // track input changes
+	const actionsMap = {}; // map to store action handlers for each row
+	
+	// Create rows for all existing tabs
 	for (let i = 0; i < tabs.length; i++) {
 		const tab = tabs[i];
-		const row = document.createElement("tr");
-		row.dataset.tabIndex = i;
-		row.classList.add("slds-hint-parent");
+		const tr = await createManageTabRow(tab, i, translator);
+		tbody.appendChild(tr);
 		
-		// Label
-		row.appendChild(createTableCell(tab.label));
-		
-		// URL
-		row.appendChild(createTableCell(tab.url, { wordBreak: true }));
-		
-		// Org (show if org-specific)
-		row.appendChild(createTableCell(tab.org ?? ""));
-		
-		// Actions
-		const actionsCell = document.createElement("td");
-		actionsCell.style.padding = "0.75rem";
-		actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
-		
-    const actionsContainer = document.createElement("div");
-    actionsContainer.style.display = "flex";
-    actionsContainer.style.gap = "0.5rem";
-    actionsContainer.style.justifyContent = "center";
-    actionsContainer.style.flexWrap = "wrap";
-		
-		// Open button
-		const openBtn = createStyledButton(
-			await translator.translate("open"),
-			{ action: "open", tabIndex: i }
-		);
-		actionsContainer.appendChild(openBtn);
-		
-		// Update button
-		const updateBtn = createStyledButton(
-			await translator.translate("cxm_update_tab"),
-			{ action: "update", tabIndex: i }
-		);
-		actionsContainer.appendChild(updateBtn);
-		
-		// Remove button
-		const removeBtn = createStyledButton(
-			await translator.translate("cxm_remove_tab"),
-			{ variant: "destructive", action: "remove", tabIndex: i }
-		);
-		actionsContainer.appendChild(removeBtn);
-		
-		// Pin/Unpin button
-		const pinBtn = createStyledButton(
-			await translator.translate(
-				tab.pinned ? "cxm_unpin_tab" : "cxm_pin_tab"
-			),
-			{ action: tab.pinned ? "unpin" : "pin", tabIndex: i }
-		);
-		actionsContainer.appendChild(pinBtn);
-		
-		actionsCell.appendChild(actionsContainer);
-		row.appendChild(actionsCell);
-		
-		tbody.appendChild(row);
+		// Store logger for this row
+		const labelInput = tr.querySelector(".label");
+		const urlInput = tr.querySelector(".url");
+		loggers.push({
+			label: labelInput,
+			url: urlInput,
+			last_input: { label: tab.label || "", url: tab.url || "" },
+		});
 		
 		// Store action handlers for this tab
 		actionsMap[i] = {
@@ -2006,15 +2157,26 @@ export async function generateManageTabsModal(tabs = [], {
 			remove: () => ({ what: "cxm_remove_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
 			pin: () => ({ what: "cxm_pin_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
 			unpin: () => ({ what: "cxm_unpin_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
+			delete: () => ({ what: "delete-tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
 		};
 	}
 	
-	table.appendChild(tbody);
-	divParent.appendChild(table);
+	// Add empty row for new tabs
+	const emptyTab = { label: "", url: "", org: null, pinned: false };
+	const emptyRow = await createManageTabRow(emptyTab, tabs.length, translator);
+	tbody.appendChild(emptyRow);
+	loggers.push({
+		label: emptyRow.querySelector(".label"),
+		url: emptyRow.querySelector(".url"),
+		last_input: { label: "", url: "" },
+	});
 	
 	return {
 		modalParent,
 		closeButton,
+		tbody,
 		actionsMap,
+		loggers,
+		table,
 	};
 }
