@@ -1713,6 +1713,130 @@ function generateTableWithCheckboxes(
  * - closeButton: The close button element for closing the modal.
  * - getSelectedTabs: A function that returns an array of selected Tab objects.
  */
+/**
+ * Helper function to add title and explainer to a modal article.
+ * Creates and prepends a centered explainer span with translated text.
+ *
+ * @param {HTMLElement} article - The modal article element
+ * @param {string} explainerKey - The i18n key for the explainer text
+ * @return {Promise<HTMLElement>} The explainer element
+ */
+async function addModalExplainer(article, explainerKey) {
+	const translator = await ensureTranslatorAvailability();
+	const explainerEl = document.createElement("span");
+	explainerEl.textContent = await translator.translate(explainerKey);
+	explainerEl.style.display = "flex";
+	explainerEl.style.justifyContent = "center";
+	article.prepend(explainerEl);
+	return explainerEl;
+}
+
+/**
+ * Helper function to create and append a modal content container (divParent).
+ * Applies standard SLDS styling for modal content areas.
+ *
+ * @param {HTMLElement} article - The modal article element
+ * @return {HTMLElement} The created and appended container element
+ */
+function createModalContentContainer(article) {
+	const divParent = document.createElement("div");
+	article.appendChild(divParent);
+	divParent.classList.add(
+		"forceBaseListView",
+		"visualEditorModal",
+		"flexipageEditorActivateContent",
+		"flexipageEditorActivateRecordPage",
+		"slds-p-top--none",
+	);
+	divParent.style.padding =
+		"var(--lwc-spacingLarge,1.5rem) var(--lwc-spacingXLarge,2rem)";
+	return divParent;
+}
+
+/**
+ * Helper function to create a table header with translated header texts.
+ *
+ * @param {Array<string>} headerTexts - Array of translated header texts
+ * @return {HTMLTableSectionElement} The created thead element
+ */
+function createTableHeader(headerTexts) {
+	const thead = document.createElement("thead");
+	const headerRow = document.createElement("tr");
+	
+	for (const headerText of headerTexts) {
+		const th = document.createElement("th");
+		th.scope = "col";
+		th.textContent = headerText;
+		th.style.padding = "0.75rem";
+		th.style.textAlign = "left";
+		th.classList.add("slds-cell-wrap");
+		headerRow.appendChild(th);
+	}
+	
+	thead.appendChild(headerRow);
+	return thead;
+}
+
+/**
+ * Helper function to create a styled table cell (td).
+ *
+ * @param {string} text - The cell content text
+ * @param {Object} options - Configuration options
+ * @param {boolean} [options.wordBreak=false] - Whether to apply word-break styling
+ * @return {HTMLTableCellElement} The created td element
+ */
+function createTableCell(text, { wordBreak = false } = {}) {
+	const td = document.createElement("td");
+	td.textContent = text || "";
+	td.style.padding = "0.75rem";
+	if (wordBreak) {
+		td.style.wordBreak = "break-all";
+	}
+	td.classList.add("slds-cell-wrap");
+	return td;
+}
+
+/**
+ * Helper function to create a styled button with SLDS classes.
+ *
+ * @param {string} text - The button text
+ * @param {Object} options - Configuration options
+ * @param {string} [options.variant="neutral"] - Button variant: "neutral" or "destructive"
+ * @param {string} [options.action] - The data-action attribute value
+ * @param {number} [options.tabIndex] - The data-tabIndex attribute value
+ * @return {HTMLButtonElement} The created button element
+ */
+function createStyledButton(text, { variant = "neutral", action, tabIndex } = {}) {
+	const btn = document.createElement("button");
+	btn.classList.add(
+		"slds-button",
+		`slds-button_${variant}`,
+		"slds-button_small",
+	);
+	btn.textContent = text;
+	if (action !== undefined) {
+		btn.dataset.action = action;
+	}
+	if (tabIndex !== undefined) {
+		btn.dataset.tabIndex = tabIndex;
+	}
+	return btn;
+}
+
+/**
+ * Helper function to create a flex container for action buttons.
+ *
+ * @return {HTMLElement} The created and configured flex container
+ */
+function createActionButtonsContainer() {
+	const container = document.createElement("div");
+	container.style.display = "flex";
+	container.style.gap = "0.5rem";
+	container.style.justifyContent = "center";
+	container.style.flexWrap = "wrap";
+	return container;
+}
+
 export async function generateSldsModalWithTabList(tabs = [], {
 	title = "export_tabs",
 	saveButtonLabel = "export",
@@ -1724,11 +1848,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			modalTitle: await translator.translate(title),
 			saveButtonLabel: await translator.translate(saveButtonLabel),
 		});
-	const explainerEl = document.createElement("span");
-	explainerEl.textContent = await translator.translate(explainer);
-	explainerEl.style.display = "flex";
-	explainerEl.style.justifyContent = "center";
-	article.prepend(explainerEl);
+	await addModalExplainer(article, explainer);
 	// counter for how many Tabs are selected
 	const tabConterOpen = document.createElement("span");
 	tabConterOpen.innerHTML = "&nbsp;(";
@@ -1766,17 +1886,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			updateSelectAllButtonText,
 		);
 	// Add Tabs list container
-	const divParent = document.createElement("div");
-	article.appendChild(divParent);
-	divParent.classList.add(
-		"forceBaseListView",
-		"visualEditorModal",
-		"flexipageEditorActivateContent",
-		"flexipageEditorActivateRecordPage",
-		"slds-p-top--none",
-	);
-	divParent.style.padding =
-		"var(--lwc-spacingLarge,1.5rem) var(--lwc-spacingXLarge,2rem)";
+	const divParent = createModalContentContainer(article);
 	divParent.appendChild(tabsListTable);
 	// Create select/unselect all button container
 	// Create Select All button
@@ -1837,53 +1947,37 @@ export async function generateSldsModalWithTabList(tabs = [], {
  * Similar to popup functionality but displayed in a Salesforce modal.
  *
  * @param {Array<Tab>} tabs - Array of saved Tab objects
+ * @param {Object} options - Configuration options
+ * @param {string} [options.title="cxm_manage_tabs"] - i18n key for modal title
+ * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
  * @return {Promise<Object>} An object containing modalParent, closeButton, and an actionsMap for handling row interactions
  */
 export async function generateManageTabsModal(tabs = [], {
-	title = "manage_tabs",
-	saveButtonLabel = "save",
+	title = "cxm_manage_tabs",
 	explainer = "manage_tabs_explainer",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const { modalParent, article, closeButton } = await generateSldsModal({
-		modalTitle: await translator.translate("cxm_manage_tabs"),
+		modalTitle: await translator.translate(title),
 		saveButtonLabel: null, // no save button needed, all actions are immediate
 	});
+	await addModalExplainer(article, explainer);
 	
 	// Create a table-like structure for tabs
-	const divParent = document.createElement("div");
-	article.appendChild(divParent);
-	divParent.classList.add(
-		"forceBaseListView",
-		"visualEditorModal",
-		"slds-p-top--none",
-		"slds-p-around--medium",
-	);
+	const divParent = createModalContentContainer(article);
 	
 	const table = document.createElement("table");
 	table.classList.add("slds-table", "slds-table_striped", "slds-table_bordered");
 	table.style.width = "100%";
 	
 	// Table header
-	const thead = document.createElement("thead");
-	const headerRow = document.createElement("tr");
-	const headers = [
+	const headerTexts = [
 		await translator.translate("tab_label"),
 		await translator.translate("tab_url"),
 		await translator.translate("tab_org"),
 		await translator.translate("actions"),
 	];
-	
-	for (const headerText of headers) {
-		const th = document.createElement("th");
-		th.scope = "col";
-		th.textContent = headerText;
-		th.style.padding = "0.75rem";
-		th.style.textAlign = "left";
-		th.classList.add("slds-cell-wrap");
-		headerRow.appendChild(th);
-	}
-	thead.appendChild(headerRow);
+	const thead = createTableHeader(headerTexts);
 	table.appendChild(thead);
 	
 	// Table body with tabs
@@ -1897,70 +1991,49 @@ export async function generateManageTabsModal(tabs = [], {
 		row.classList.add("slds-hint-parent");
 		
 		// Label
-		const labelCell = document.createElement("td");
-		labelCell.textContent = tab.label || "";
-		labelCell.style.padding = "0.75rem";
-		labelCell.classList.add("slds-cell-wrap");
-		row.appendChild(labelCell);
+		row.appendChild(createTableCell(tab.label));
 		
 		// URL
-		const urlCell = document.createElement("td");
-		urlCell.textContent = tab.url || "";
-		urlCell.style.padding = "0.75rem";
-		urlCell.style.wordBreak = "break-all";
-		urlCell.classList.add("slds-cell-wrap");
-		row.appendChild(urlCell);
+		row.appendChild(createTableCell(tab.url, { wordBreak: true }));
 		
 		// Org (show if org-specific)
-		const orgCell = document.createElement("td");
-		orgCell.textContent = tab.org || "-";
-		orgCell.style.padding = "0.75rem";
-		orgCell.classList.add("slds-cell-wrap");
-		row.appendChild(orgCell);
+		row.appendChild(createTableCell(tab.org || "-"));
 		
 		// Actions
 		const actionsCell = document.createElement("td");
 		actionsCell.style.padding = "0.75rem";
 		actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
 		
-		const actionsContainer = document.createElement("div");
-		actionsContainer.style.display = "flex";
-		actionsContainer.style.gap = "0.5rem";
-		actionsContainer.style.justifyContent = "center";
-		actionsContainer.style.flexWrap = "wrap";
+		const actionsContainer = createActionButtonsContainer();
 		
 		// Open button
-		const openBtn = document.createElement("button");
-		openBtn.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
-		openBtn.textContent = await translator.translate("open");
-		openBtn.dataset.action = "open";
-		openBtn.dataset.tabIndex = i;
+		const openBtn = createStyledButton(
+			await translator.translate("open"),
+			{ action: "open", tabIndex: i }
+		);
 		actionsContainer.appendChild(openBtn);
 		
 		// Update button
-		const updateBtn = document.createElement("button");
-		updateBtn.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
-		updateBtn.textContent = await translator.translate("cxm_update_tab");
-		updateBtn.dataset.action = "update";
-		updateBtn.dataset.tabIndex = i;
+		const updateBtn = createStyledButton(
+			await translator.translate("cxm_update_tab"),
+			{ action: "update", tabIndex: i }
+		);
 		actionsContainer.appendChild(updateBtn);
 		
 		// Remove button
-		const removeBtn = document.createElement("button");
-		removeBtn.classList.add("slds-button", "slds-button_destructive", "slds-button_small");
-		removeBtn.textContent = await translator.translate("cxm_remove_tab");
-		removeBtn.dataset.action = "remove";
-		removeBtn.dataset.tabIndex = i;
+		const removeBtn = createStyledButton(
+			await translator.translate("cxm_remove_tab"),
+			{ variant: "destructive", action: "remove", tabIndex: i }
+		);
 		actionsContainer.appendChild(removeBtn);
 		
 		// Pin/Unpin button
-		const pinBtn = document.createElement("button");
-		pinBtn.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
-		pinBtn.textContent = await translator.translate(
-			tab.pinned ? "cxm_unpin_tab" : "cxm_pin_tab"
+		const pinBtn = createStyledButton(
+			await translator.translate(
+				tab.pinned ? "cxm_unpin_tab" : "cxm_pin_tab"
+			),
+			{ action: tab.pinned ? "unpin" : "pin", tabIndex: i }
 		);
-		pinBtn.dataset.action = tab.pinned ? "unpin" : "pin";
-		pinBtn.dataset.tabIndex = i;
 		actionsContainer.appendChild(pinBtn);
 		
 		actionsCell.appendChild(actionsContainer);
