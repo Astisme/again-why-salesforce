@@ -28,6 +28,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 8. New file `export.js` to deal with export
 9. New Import modal to **select which Tabs** to import (#81)
 10. New context menu item to **manage saved tabs without opening the popup** (#120)
+11. Updated logic of draggable items to take into consideration the pinned Tabs
 
 ### Settings
 

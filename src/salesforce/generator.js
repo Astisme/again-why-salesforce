@@ -1,6 +1,6 @@
 "use strict";
 import Tab from "/tab.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
 	EXTENSION_LABEL,
@@ -823,6 +823,9 @@ export async function generateSldsModal({
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
+  const awsfStyle = document.createElement("style");
+  awsfStyle.textContent = ".hidden { display:none; visibility:hidden; }";
+  modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
 	backdropDiv.classList.add(
@@ -1581,6 +1584,7 @@ function createTableHeader(label = "", ariaLabel = "", classList = []) {
  */
 function createTable(headers = []) {
 	const table = document.createElement("table");
+	table.id = "sortable-table"; // for drag handler to find it
 	table.classList.add(
 		"forceRecordLayout",
 		"uiVirtualDataGrid--default",
@@ -1727,6 +1731,7 @@ async function addModalExplainer(article, explainerKey) {
 	explainerEl.textContent = await translator.translate(explainerKey);
 	explainerEl.style.display = "flex";
 	explainerEl.style.justifyContent = "center";
+  explainerEl.style.textAlign = 'center';
 	article.prepend(explainerEl);
 	return explainerEl;
 }
@@ -1761,42 +1766,27 @@ function createModalContentContainer(article) {
  * @param {boolean} [options.wordBreak=false] - Whether to apply word-break styling
  * @return {HTMLTableCellElement} The created td element
  */
-function createTableCell(text, { wordBreak = false } = {}) {
+function createTableCell({
+  value = "",
+  placeholder = "",
+  wordBreak = false,
+  className = "",
+} = {}) {
 	const td = document.createElement("td");
-	td.textContent = text || "";
 	td.style.padding = "0.75rem";
-	if (wordBreak) {
-		td.style.wordBreak = "break-all";
-	}
 	td.classList.add("slds-cell-wrap");
-	return td;
-}
-
-/**
- * Helper function to create a styled button with SLDS classes.
- *
- * @param {string} text - The button text
- * @param {Object} options - Configuration options
- * @param {string} [options.variant="neutral"] - Button variant: "neutral" or "destructive"
- * @param {string} [options.action] - The data-action attribute value
- * @param {number} [options.tabIndex] - The data-tabIndex attribute value
- * @return {HTMLButtonElement} The created button element
- */
-function createStyledButton(text, { variant = "neutral", action, tabIndex } = {}) {
-	const btn = document.createElement("button");
-	btn.classList.add(
-		"slds-button",
-		`slds-button_${variant}`,
-		"slds-button_small",
-	);
-	btn.textContent = text;
-	if (action !== undefined) {
-		btn.dataset.action = action;
+	const input = document.createElement("input");
+	input.type = "text";
+	input.className = className;
+	input.value = value ?? "";
+	input.placeholder = placeholder;
+	input.style.width = "100%";
+	input.style.padding = "0.25rem";
+	if (wordBreak) {
+    input.style.wordBreak = "break-all";
 	}
-	if (tabIndex !== undefined) {
-		btn.dataset.tabIndex = tabIndex;
-	}
-	return btn;
+	td.appendChild(input);
+  return td;
 }
 
 export async function generateSldsModalWithTabList(tabs = [], {
@@ -1916,68 +1906,112 @@ function createDragHandle() {
 	svg.setAttribute("fill", "currentColor");
 	svg.style.cursor = "grab";
 	svg.dataset.draggable = "true";
-	
-	// Six dots in two columns
+	// Six dots on two columns
 	const rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 	rect1.setAttribute("x", "6");
 	rect1.setAttribute("y", "4");
 	rect1.setAttribute("width", "2");
 	rect1.setAttribute("height", "2");
 	svg.appendChild(rect1);
-	
 	const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 	rect2.setAttribute("x", "6");
 	rect2.setAttribute("y", "11");
 	rect2.setAttribute("width", "2");
 	rect2.setAttribute("height", "2");
 	svg.appendChild(rect2);
-	
 	const rect3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 	rect3.setAttribute("x", "6");
 	rect3.setAttribute("y", "18");
 	rect3.setAttribute("width", "2");
 	rect3.setAttribute("height", "2");
 	svg.appendChild(rect3);
-	
 	const rect4 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 	rect4.setAttribute("x", "16");
 	rect4.setAttribute("y", "4");
 	rect4.setAttribute("width", "2");
 	rect4.setAttribute("height", "2");
 	svg.appendChild(rect4);
-	
 	const rect5 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 	rect5.setAttribute("x", "16");
 	rect5.setAttribute("y", "11");
 	rect5.setAttribute("width", "2");
 	rect5.setAttribute("height", "2");
 	svg.appendChild(rect5);
-	
 	const rect6 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 	rect6.setAttribute("x", "16");
 	rect6.setAttribute("y", "18");
 	rect6.setAttribute("width", "2");
 	rect6.setAttribute("height", "2");
 	svg.appendChild(rect6);
-	
 	return svg;
+}
+
+/**
+ * Helper function to create a styled button with SLDS classes.
+ *
+ * @param {string} text - The button text
+ * @param {Object} options - Configuration options
+ * @param {string} [options.variant="neutral"] - Button variant: "neutral" or "destructive"
+ * @param {string} [options.action] - The data-action attribute value
+ * @param {number} [options.tabIndex] - The data-tabIndex attribute value
+ * @return {HTMLButtonElement} The created button element
+ */
+function createStyledButton(text, { variant = "neutral", action, tabIndex } = {}) {
+	const btn = document.createElement("a");
+	btn.classList.add(
+		"slds-button",
+		`slds-button_${variant}`,
+		"slds-button_small",
+	);
+	btn.textContent = text;
+  btn.style.marginLeft = "0";
+	btn.style.width = "100%";
+	btn.style.justifyContent = "flex-start";
+	btn.style.paddingLeft = "0.75rem";
+	btn.style.borderRadius = "0";
+	btn.style.border = "none";
+	btn.style.textAlign = "left";
+	if (action != null) {
+		btn.dataset.action = action;
+	}
+	if (tabIndex != null) {
+		btn.dataset.tabIndex = tabIndex;
+	}
+	return btn;
 }
 
 /**
  * Creates a table row with editable inputs for label, URL, and org.
  * Used by generateManageTabsModal for creating editable tab rows.
  *
- * @param {Object} tab - The tab object with label, url, org, pinned properties
- * @param {number} index - The row index for data-row-index
- * @param {Object} translator - The translator for i18n
+ * @param {Object} [tab={}] an Object with the following keys
+ * @param {string} [tab.label=""] the label of the Tab
+ * @param {string} [tab.url=""] the url of the Tab
+ * @param {string|null} [tab.org=null] the org of the Tab
+ * @param {Object} [config={}] an Object with the following keys
+ * @param {number} [config.index=0] The row index for data-row-index
+ * @param {boolean} [config.pinned=false] whether the Tab is pinned
+ * @param {boolean} [config.draggable=false] whether the tr is draggable
  * @return {Promise<HTMLTableRowElement>} The created tr element
  */
-export async function createManageTabRow(tab = {}, index = 0, translator) {
+export async function createManageTabRow({
+  label = "",
+  url = "",
+  org = null,
+} = {}, {
+  index = 0,
+  pinned = false,
+  draggable = false,
+} = {}) {
+  const translator = await ensureTranslatorAvailability();
 	const tr = document.createElement("tr");
 	tr.dataset.rowIndex = index;
-	tr.classList.add("slds-hint-parent");
-	tr.draggable = true;
-	
+	tr.classList.add(
+    "slds-hint-parent",
+    EXTENSION_NAME,
+  );
+	tr.draggable = draggable;
+	tr.dataset.draggable = draggable;
 	// Drag handle cell
 	const dragCell = document.createElement("td");
 	dragCell.style.padding = "0.75rem";
@@ -1985,193 +2019,113 @@ export async function createManageTabRow(tab = {}, index = 0, translator) {
 	dragCell.style.textAlign = "center";
 	dragCell.classList.add("slds-cell-wrap");
 	dragCell.appendChild(createDragHandle());
+	dragCell.dataset.draggable = draggable;
 	tr.appendChild(dragCell);
-	
 	// Label cell with input
-	const labelCell = document.createElement("td");
-	labelCell.style.padding = "0.75rem";
-	labelCell.classList.add("slds-cell-wrap");
-	const labelInput = document.createElement("input");
-	labelInput.type = "text";
-	labelInput.className = "label";
-	labelInput.value = tab.label || "";
-	labelInput.placeholder = await translator.translate("tab_label");
-	labelInput.style.width = "100%";
-	labelInput.style.padding = "0.25rem";
-	labelCell.appendChild(labelInput);
-	tr.appendChild(labelCell);
-	
+	tr.appendChild(createTableCell({
+    value: label,
+    placeholder: await translator.translate("tab_label"),
+    className: 'label',
+  }));
 	// URL cell with input
-	const urlCell = document.createElement("td");
-	urlCell.style.padding = "0.75rem";
-	urlCell.classList.add("slds-cell-wrap");
-	const urlInput = document.createElement("input");
-	urlInput.type = "text";
-	urlInput.className = "url";
-	urlInput.value = tab.url || "";
-	urlInput.placeholder = await translator.translate("tab_url");
-	urlInput.style.width = "100%";
-	urlInput.style.padding = "0.25rem";
-	urlInput.style.wordBreak = "break-all";
-	urlCell.appendChild(urlInput);
-	tr.appendChild(urlCell);
-	
+	tr.appendChild(createTableCell({
+    value: url,
+    placeholder: await translator.translate("tab_url"),
+    wordBreak: true,
+    className: 'url',
+  }));
 	// Org cell with input
-	const orgCell = document.createElement("td");
-	orgCell.style.padding = "0.75rem";
-	orgCell.classList.add("slds-cell-wrap");
-	const orgInput = document.createElement("input");
-	orgInput.type = "text";
-	orgInput.className = "org";
-	orgInput.value = tab.org || "";
-	orgInput.placeholder = await translator.translate("tab_org");
-	orgInput.style.width = "100%";
-	orgInput.style.padding = "0.25rem";
-	orgCell.appendChild(orgInput);
-	tr.appendChild(orgCell);
-	
+	tr.appendChild(createTableCell({
+    value: org,
+    placeholder: await translator.translate("tab_org"),
+    className: 'org',
+  }));
 	// Actions cell with dropdown
 	const actionsCell = document.createElement("td");
 	actionsCell.style.padding = "0.75rem";
 	actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
-	
+  actionsCell.style.overflow = "visible";
 	// Dropdown button
 	const dropdownButton = document.createElement("button");
 	dropdownButton.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
 	dropdownButton.style.position = "relative";
-	dropdownButton.innerHTML = `▼`; // downward arrow
+	dropdownButton.textContent = `▼`; // downward arrow
 	dropdownButton.title = await translator.translate("actions");
-	
 	// Dropdown menu container
 	const dropdownMenu = document.createElement("div");
-	dropdownMenu.className = "actions-dropdown-menu";
-	dropdownMenu.style.display = "none";
+	dropdownMenu.classList.add("actions-dropdown-menu","hidden");
 	dropdownMenu.style.position = "absolute";
 	dropdownMenu.style.top = "100%";
-	dropdownMenu.style.left = "0";
+	dropdownMenu.style.right = "0";
 	dropdownMenu.style.backgroundColor = "white";
 	dropdownMenu.style.border = "1px solid #d3d3d3";
 	dropdownMenu.style.borderRadius = "0.25rem";
 	dropdownMenu.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
-	dropdownMenu.style.zIndex = "1000";
+	dropdownMenu.style.zIndex = "1";
 	dropdownMenu.style.minWidth = "120px";
 	dropdownMenu.style.padding = "0.5rem 0";
-	
+  dropdownMenu.style.display = "flex";
+  dropdownMenu.style.flexDirection = "column";
 	// Open button
 	const openBtn = createStyledButton(
 		await translator.translate("open"),
 		{ action: "open", tabIndex: index }
 	);
-	openBtn.style.width = "100%";
-	openBtn.style.justifyContent = "flex-start";
-	openBtn.style.paddingLeft = "0.75rem";
-	openBtn.style.borderRadius = "0";
-	openBtn.style.border = "none";
-	openBtn.style.textAlign = "left";
+  openBtn.addEventListener('click', handleLightningLinkClick);
+  if(url){
+    openBtn.href = Tab.expandURL(url, getCurrentHref());
+  }
 	dropdownMenu.appendChild(openBtn);
-	
-	// Update button
-	const updateBtn = createStyledButton(
-		await translator.translate("cxm_update_tab"),
-		{ action: "update", tabIndex: index }
-	);
-	updateBtn.style.width = "100%";
-	updateBtn.style.justifyContent = "flex-start";
-	updateBtn.style.paddingLeft = "0.75rem";
-	updateBtn.style.borderRadius = "0";
-	updateBtn.style.border = "none";
-	updateBtn.style.textAlign = "left";
-	dropdownMenu.appendChild(updateBtn);
-	
-	// Remove button
-	const removeBtn = createStyledButton(
-		await translator.translate("cxm_remove_tab"),
-		{ variant: "destructive", action: "remove", tabIndex: index }
-	);
-	removeBtn.style.width = "100%";
-	removeBtn.style.justifyContent = "flex-start";
-	removeBtn.style.paddingLeft = "0.75rem";
-	removeBtn.style.borderRadius = "0";
-	removeBtn.style.border = "none";
-	removeBtn.style.textAlign = "left";
-	dropdownMenu.appendChild(removeBtn);
-	
 	// Pin/Unpin button (toggle - only show one at a time)
 	const pinBtn = createStyledButton(
 		await translator.translate("cxm_pin_tab"),
 		{ action: "pin", tabIndex: index }
 	);
 	pinBtn.classList.add("pin-btn");
-	pinBtn.style.width = "100%";
-	pinBtn.style.justifyContent = "flex-start";
-	pinBtn.style.paddingLeft = "0.75rem";
-	pinBtn.style.borderRadius = "0";
-	pinBtn.style.border = "none";
-	pinBtn.style.textAlign = "left";
-	if (tab.pinned) {
+	if (pinned) {
+    dragCell.classList.add(PIN_TAB_CLASS);
 		pinBtn.style.display = "none";
 	}
 	dropdownMenu.appendChild(pinBtn);
-	
 	const unpinBtn = createStyledButton(
 		await translator.translate("cxm_unpin_tab"),
 		{ action: "unpin", tabIndex: index }
 	);
 	unpinBtn.classList.add("unpin-btn");
-	unpinBtn.style.width = "100%";
-	unpinBtn.style.justifyContent = "flex-start";
-	unpinBtn.style.paddingLeft = "0.75rem";
-	unpinBtn.style.borderRadius = "0";
-	unpinBtn.style.border = "none";
-	unpinBtn.style.textAlign = "left";
-	if (!tab.pinned) {
+	if (!pinned) {
 		unpinBtn.style.display = "none";
 	}
 	dropdownMenu.appendChild(unpinBtn);
-	
 	// Delete button
 	const deleteBtn = createStyledButton(
 		await translator.translate("delete"),
 		{ action: "delete", tabIndex: index }
 	);
 	deleteBtn.classList.add("delete-btn");
-	deleteBtn.disabled = tab.label === "" && tab.url === ""; // disabled for empty rows
-	deleteBtn.style.width = "100%";
-	deleteBtn.style.justifyContent = "flex-start";
-	deleteBtn.style.paddingLeft = "0.75rem";
-	deleteBtn.style.borderRadius = "0";
-	deleteBtn.style.border = "none";
-	deleteBtn.style.textAlign = "left";
+	deleteBtn.disabled = label === "" && url === ""; // disabled for empty rows
 	dropdownMenu.appendChild(deleteBtn);
-	
 	// Dropdown toggle functionality
 	dropdownButton.addEventListener("click", (e) => {
-		e.stopPropagation();
-		const isVisible = dropdownMenu.style.display !== "none";
-		dropdownMenu.style.display = isVisible ? "none" : "block";
+		e.preventDefault();
+		dropdownMenu.classList.remove("hidden");
 	});
-	
-	// Close dropdown when clicking outside
-	document.addEventListener("click", () => {
-		dropdownMenu.style.display = "none";
-	});
-	
 	// Prevent dropdown from closing when clicking inside
 	dropdownMenu.addEventListener("click", (e) => {
-		e.stopPropagation();
+		e.preventDefault();
 	});
-	
 	// Position the dropdown relative to button
 	const buttonContainer = document.createElement("div");
 	buttonContainer.style.position = "relative";
 	buttonContainer.style.display = "inline-block";
 	buttonContainer.appendChild(dropdownButton);
 	buttonContainer.appendChild(dropdownMenu);
-	
 	actionsCell.appendChild(buttonContainer);
 	tr.appendChild(actionsCell);
-	
-	return tr;
+	return {
+    tr,
+    dropdownMenu,
+    dropdownButton,
+  };
 }
 
 /**
@@ -2191,15 +2145,18 @@ export async function generateManageTabsModal(tabs = [], {
 	explainer = "manage_tabs_explainer",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
-	const { modalParent, article, closeButton } = await generateSldsModal({
+	const { 
+    modalParent,
+    article,
+    closeButton,
+    saveButton 
+  } = await generateSldsModal({
 		modalTitle: await translator.translate(title),
 		saveButtonLabel: await translator.translate(saveButtonLabel),
 	});
 	await addModalExplainer(article, explainer);
-	
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
-	
 	// Table header with drag handle column
 	const headers = [
 		{ label: "" }, // drag handle column
@@ -2209,18 +2166,27 @@ export async function generateManageTabsModal(tabs = [], {
 		{ label: await translator.translate("actions") },
 	];
 	const { table, tbody } = createTable(headers);
-	table.id = "manage-tabs-table"; // for drag handler to find it
 	divParent.appendChild(table);
-	
 	const loggers = []; // track input changes
 	const actionsMap = {}; // map to store action handlers for each row
-	
 	// Create rows for all existing tabs
+  const allDropMenus = [];
+  const allTrs = [];
+  const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
 	for (let i = 0; i < tabs.length; i++) {
 		const tab = tabs[i];
-		const tr = await createManageTabRow(tab, i, translator);
+		const { 
+      tr,
+      dropdownMenu,
+      dropdownButton,
+    } = await createManageTabRow(tab, {
+      index: i,
+      draggable: true,
+      pinned: i < pinnedNumber,
+    });
+    allTrs.push({ tr, dropdownButton });
+    allDropMenus.push(dropdownMenu);
 		tbody.appendChild(tr);
-		
 		// Store logger for this row
 		const labelInput = tr.querySelector(".label");
 		const urlInput = tr.querySelector(".url");
@@ -2229,34 +2195,44 @@ export async function generateManageTabsModal(tabs = [], {
 			url: urlInput,
 			last_input: { label: tab.label || "", url: tab.url || "" },
 		});
-		
 		// Store action handlers for this tab
 		actionsMap[i] = {
-			open: () => ({ what: "open-tab", url: tab.url, label: tab.label }),
-			update: () => ({ what: "cxm_update_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
-			remove: () => ({ what: "cxm_remove_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
-			pin: () => ({ what: "cxm_pin_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
-			unpin: () => ({ what: "cxm_unpin_tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
-			delete: () => ({ what: "delete-tab", tabUrl: tab.url, label: tab.label, org: tab.org }),
+			open: { what: "open-tab", url: tab.url, label: tab.label },
+			pin: { what: "cxm_pin_tab", tabUrl: tab.url, label: tab.label, org: tab.org },
+			unpin: { what: "cxm_unpin_tab", tabUrl: tab.url, label: tab.label, org: tab.org },
+			delete: { what: "delete-tab", tabUrl: tab.url, label: tab.label, org: tab.org },
 		};
 	}
-	
 	// Add empty row for new tabs
-	const emptyTab = { label: "", url: "", org: null, pinned: false };
-	const emptyRow = await createManageTabRow(emptyTab, tabs.length, translator);
+	const {
+    tr: emptyRow,
+    dropdownMenu: lastMenu,
+    dropdownButton: lastButton,
+  } = await createManageTabRow({}, {
+    index: tabs.length,
+  });
+  allTrs.push({ tr: emptyRow, dropdownButton: lastButton });
+  allDropMenus.push(lastMenu);
 	tbody.appendChild(emptyRow);
+	// Close dropdown when clicking outside
+  for(const { tr, dropdownButton } of allTrs){
+    tr.addEventListener("click", (e) => {
+      if(e.target !== dropdownButton)
+        for(const dropdownMenu of allDropMenus)
+          dropdownMenu.classList.add("hidden");
+    });
+  }
 	loggers.push({
 		label: emptyRow.querySelector(".label"),
 		url: emptyRow.querySelector(".url"),
 		last_input: { label: "", url: "" },
 	});
-	
 	return {
 		modalParent,
 		closeButton,
 		tbody,
 		actionsMap,
+    saveButton,
 		loggers,
-		table,
 	};
 }

@@ -44,6 +44,7 @@ import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
+	PIN_TAB_CLASS,
 	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
 	sendExtensionMessage,
@@ -163,15 +164,20 @@ async function checkAddLightningNavigation() {
  * - Displays a toast message indicating that the Salesforce tabs have been saved.
  * - Reloads the tabs by calling `reloadTabs` with the provided tabs.
  *
- * @param {string|null} [what=null] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
- * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
- * @param {boolean} [shouldReload=true] - If the Tabs should be reloaded from scratch
+ * @param {Object} [param0] an object containing the following keys
+ * @param {string} [param0.what="saved"] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
+ * @param {Array<Tab>|null} [param0.tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
+ * @param {boolean} [param0.shouldReload=true] - If the Tabs should be reloaded from scratch
  */
-export function sf_afterSet(what = null, tabs = null, shouldReload = true) {
+export function sf_afterSet({
+  what = "saved",
+  tabs = null,
+  shouldReload = true
+} = {}) {
 	if (setupTabUl == null) {
 		return;
 	}
-	if (what == null || what === "saved") {
+	if (what === "saved") {
 		showToast(["extension_label", "tabs_saved"]);
 	}
 	if (shouldReload === true) {
@@ -251,6 +257,7 @@ async function init(tabs = null) {
 			removeOrgTabs: true,
 			sync: false,
 			keepTabsNotThisOrg: orgName,
+      updatePinnedTabs: false,
 		});
 	}
 	if (allTabs.length > 0) {
@@ -471,9 +478,13 @@ async function reorderTabs() {
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
+      updatePinnedTabs: false,
 			//keepTabsNotThisOrg: Tab.extractOrgName(href),
 		});
-		sf_afterSet(undefined, tabs, false);
+		sf_afterSet({
+      tabs,
+      shouldReload: false,
+    });
 	} catch (error) {
 		showToast(error.message, false);
 	}
@@ -763,7 +774,7 @@ export async function performActionOnTabs(
 				return console.error(noMatch, action);
 			}
 		}
-		sf_afterSet(undefined, allTabs);
+		sf_afterSet({ tabs: allTabs });
 	} catch (error) {
 		console.warn({ action, tab, options });
 		showToast(error.message, false);
@@ -903,6 +914,110 @@ async function promptUpdateExtension({ version, link, oldversion } = {}) {
 }
 
 /**
+ * Handles action button clicks
+ */
+function _handleActionButtonClick(e, {
+  actionsMap,
+  closeButton,
+} = {}) {
+  e.preventDefault();
+  e.stopPropagation();
+  const btn = e.target;
+  const tabIndex = Number.parseInt(btn.dataset.tabIndex);
+  const action = btn.dataset.action;
+  const row = btn.closest("tr");
+  const tbody = row.closest('tbody');
+  // Close the dropdown menu
+  const dropdownMenu = row.querySelector(".actions-dropdown-menu");
+  if (dropdownMenu) {
+    dropdownMenu.style.display = "none";
+  }
+  // Handle toggle buttons (pin/unpin)
+  switch (action) {
+    case "pin":
+    case "unpin": {
+      const isPin = action === "pin";
+      row.querySelector(".pin-btn").style.display = isPin ? "none" : "inline-block";
+      row.querySelector(".unpin-btn").style.display = isPin ? "inline-block" : "none";
+      if(isPin) row.classList.add(PIN_TAB_CLASS);
+      else row.classList.remove(PIN_TAB_CLASS);
+      if (actionsMap?.[tabIndex]?.[action] != null) {
+        sendExtensionMessage(actionsMap[tabIndex][action]);
+      }
+      break;
+    }
+    case "delete": {
+      // Extract data from inputs if it's not an empty row
+      const labelInput = row.querySelector(".label");
+      const urlInput = row.querySelector(".url");
+      if (
+        (labelInput?.value || urlInput?.value) && 
+        (actionsMap?.[tabIndex]?.[action] != null)
+      ){
+        sendExtensionMessage(actionsMap[tabIndex][action]);
+      }
+      // Remove the row from the table if it is NOT the last one
+      if (tbody.lastElementChild?.dataset.rowIndex !== tabIndex) {
+        row.remove();
+      }
+      break;
+    }
+    case "open": {
+      closeButton.click();
+      return;
+    }
+    default:
+      break;
+  }
+  readManagedTabsAndSave({ tbody });
+}
+
+/**
+ * Adds a new empty row to the table with action buttons ready
+ */
+/*
+async function _addEmptyTabRow(config) {
+  const { tr: newRow } = await createManageTabRow(undefined, tbody.children.length);
+  for (const btn of newRow.querySelectorAll("[data-action]")) {
+    btn.addEventListener("click", e => _handleActionButtonClick(e, config));
+  }
+  tbody.appendChild(newRow);
+}
+*/
+function getInputValue({
+  tr = null,
+  selector = "",
+} = {}){
+  const value = tr?.querySelector(selector).value.trim();
+  return value === "" ? undefined : value;
+}
+
+
+async function readManagedTabsAndSave({
+  tbody = null,
+} = {}){
+  // read all Tabs in the tbody
+  const tableTabs = [];
+  for(const tr of tbody.querySelectorAll('tr')){
+    if(tr !== tbody.lastChild){ // lastChild is always empty
+      tableTabs.push(Tab.create({
+        label: getInputValue({ tr, selector: 'input.label' }),
+        url: getInputValue({ tr, selector: 'input.url' }),
+        org: getInputValue({ tr, selector: 'input.org' }),
+      }));
+    }
+  }
+  // send message to save the Tabs as they were read
+  const allTabs = await ensureAllTabsAvailability();
+  await allTabs.replaceTabs(tableTabs, {
+    resetTabs: true,
+    removeOrgTabs: true,
+    updatePinnedTabs: false,
+  });
+  sf_afterSet({ tabs: tableTabs });
+}
+
+/**
  * Shows a modal for managing saved tabs with actions (open, update, remove, pin/unpin).
  * Displays all saved tabs in a table and handles user interactions via button clicks.
  *
@@ -913,126 +1028,35 @@ async function showManageTabs() {
 		return showToast("error_close_other_modal", false);
 	}
 	const allTabs = await ensureAllTabsAvailability();
-	const { modalParent, closeButton, actionsMap, tbody, loggers, table } = await generateManageTabsModal(allTabs);
+	const {
+    modalParent,
+    closeButton,
+    tbody,
+    actionsMap,
+    saveButton,
+    loggers,
+  } = await generateManageTabsModal(allTabs);
 	getModalHanger().appendChild(modalParent);
-	
 	// Setup drag functionality for the manage tabs table
 	setupDrag();
-	
-	/**
-	 * Adds a new empty row to the table
-	 */
-	async function addEmptyTabRow() {
-		const translator = await ensureTranslatorAvailability();
-		const emptyTab = { label: "", url: "", org: null, pinned: false };
-		const newRow = await createManageTabRow(emptyTab, tbody.children.length, translator);
-		tbody.appendChild(newRow);
-		attachButtonListeners(newRow);
-	}
-	
-	/**
-	 * Attaches event listeners to action buttons in a row
-	 */
-	function attachButtonListeners(row) {
-		const buttons = row.querySelectorAll("[data-action]");
-		for (const btn of buttons) {
-			btn.addEventListener("click", handleActionButtonClick);
-		}
-	}
-	
-	/**
-	 * Handles action button clicks
-	 */
-	async function handleActionButtonClick(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		const btn = e.target;
-		const tabIndex = Number.parseInt(btn.dataset.tabIndex);
-		const action = btn.dataset.action;
-		const row = btn.closest("tr");
-		
-		// Close the dropdown menu
-		const dropdownMenu = row.querySelector(".actions-dropdown-menu");
-		if (dropdownMenu) {
-			dropdownMenu.style.display = "none";
-		}
-		
-		// Handle toggle buttons (pin/unpin)
-		if (action === "pin") {
-			const pinBtn = row.querySelector(".pin-btn");
-			const unpinBtn = row.querySelector(".unpin-btn");
-			pinBtn.style.display = "none";
-			unpinBtn.style.display = "inline-block";
-			if (actionsMap?.[tabIndex]?.["pin"] != null) {
-				const message = actionsMap[tabIndex]["pin"]();
-				bg_notify(message);
-			}
-		} else if (action === "unpin") {
-			const pinBtn = row.querySelector(".pin-btn");
-			const unpinBtn = row.querySelector(".unpin-btn");
-			unpinBtn.style.display = "none";
-			pinBtn.style.display = "inline-block";
-			if (actionsMap?.[tabIndex]?.["unpin"] != null) {
-				const message = actionsMap[tabIndex]["unpin"]();
-				bg_notify(message);
-			}
-		} else if (action === "delete") {
-			// Extract data from inputs if it's not an empty row
-			const labelInput = row.querySelector(".label");
-			const urlInput = row.querySelector(".url");
-			if (labelInput?.value || urlInput?.value) {
-				// This is a real tab, so notify the background
-				if (actionsMap?.[tabIndex]?.["delete"] != null) {
-					const message = actionsMap[tabIndex]["delete"]();
-					bg_notify(message);
-				}
-			}
-			// Remove the row from the table
-			row.remove();
-			// If we just deleted the empty row, add a new one
-			if (tbody.lastElementChild === null || tbody.querySelector("tr:last-child .label")?.value !== "") {
-				addEmptyTabRow();
-			}
-		} else if (action === "open" || action === "update" || action === "remove") {
-			// Regular actions that close the modal
-			if (actionsMap?.[tabIndex]?.[action] != null) {
-				const message = actionsMap[tabIndex][action]();
-				bg_notify(message);
-				closeButton.click();
-			}
-		}
-	}
-	
+  saveButton.addEventListener('click', e => {
+    e.preventDefault();
+    readManagedTabsAndSave({ tbody });
+    closeButton.click();
+  });
 	// Attach listeners to all existing buttons
-	const actionButtons = modalParent.querySelectorAll("[data-action]");
-	for (const btn of actionButtons) {
-		btn.addEventListener("click", handleActionButtonClick);
+	for (const btn of modalParent.querySelectorAll("[data-action]")) {
+		btn.addEventListener("click", e => _handleActionButtonClick(e, { actionsMap, closeButton }));
 	}
-	
 	// Listen for drag events to save on reorder
-	const postMessageListener = (e) => {
-		if (e.data?.what === "order") {
-			// Get current tab order from the table
-			const rows = Array.from(tbody.querySelectorAll("tr"));
-			const reorderedTabs = rows.map((row) => {
-				const labelInput = row.querySelector(".label");
-				const urlInput = row.querySelector(".url");
-				const orgInput = row.querySelector(".org");
-				return {
-					label: labelInput?.value,
-					url: urlInput?.value,
-					org: orgInput?.value || null,
-				};
-			}).filter(tab => tab.label || tab.url); // Filter out empty rows
-			
-			// Send reorder message
-			if (reorderedTabs.length > 0) {
-				sendExtensionMessage({ what: "reorder-tabs", tabs: reorderedTabs });
-			}
-		}
-	};
-	
-	addEventListener("message", postMessageListener);
+  addEventListener("message", e => {
+		const message = e.data;
+    e.source.location.href == globalThis.location.href && 
+      message.what === "order" &&
+      message.containerName === "table" &&
+      readManagedTabsAndSave({ tbody });
+  });
+  // Listen when the last row is filled in to add a new empty row
 }
 
 /**
@@ -1081,7 +1105,10 @@ function listenToBackgroundPage() {
 				case "activate":
 				case "highlighted":
 				case "focuschanged":
-					sf_afterSet(message.what, message.tabs);
+					sf_afterSet({
+            what: message.what,
+            tabs: message.tabs
+          });
 					break;
 				case "warning":
 					showToast(message.message, false, true);
@@ -1300,13 +1327,11 @@ function listenToBackgroundPage() {
  */
 function listenToReorderedTabs() {
 	addEventListener("message", (e) => {
-		if (e.source.location != globalThis.location) {
-			return;
-		}
-		const what = e.data.what;
-		if (what === "order") {
-			reorderTabs();
-		}
+		const message = e.data;
+    e.source.location.href == globalThis.location.href && 
+      message.what === "order" &&
+      message.containerName === "ul" &&
+      reorderTabs();
 	});
 }
 
