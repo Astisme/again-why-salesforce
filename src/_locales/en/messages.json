@@ -1,4 +1,12 @@
 {
+	"hide_other_org_tabs": {
+		"message": "Hide $other_org_placeholder $tabs",
+		"description": "[manage-tabs] button label to hide other Org Tabs"
+	},
+	"show_all_tabs": {
+		"message": "Show all $tabs",
+		"description": "[manage-tabs] button label to show all Tabs"
+	},
 	"actions": {
 		"message": "Actions",
 		"description": "Dropdown menu label for tab actions"

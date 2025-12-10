@@ -939,8 +939,9 @@ async function readManagedTabsAndSave({
 	sf_afterSet({ tabs: tableTabs });
 }
 
-let focusedIndex;
-let managedLoggers;
+let focusedIndex = 0;
+let managedLoggers = [];
+const manageTabsButtons = {};
 
 /**
  * Handles action button clicks
@@ -1083,7 +1084,7 @@ async function addTab(tabAppendElement) {
 		]
 	) {
 		setInfoForDrag(el.element, () =>
-			inputLabelUrlListener({
+			inputLabelUrlOrgListener({
 				tabAppendElement,
 				type: el.type,
 			}), el.index);
@@ -1240,9 +1241,9 @@ async function manageTabs_checkDuplicates({
 /**
  * Listens for input changes on the label and URL fields and updates the corresponding values.
  *
- * @param {string} type - The type of input field ("label" or "url").
+ * @param {string} type - The type of input field ("label", "url" or "org").
  */
-function inputLabelUrlListener({
+function inputLabelUrlOrgListener({
 	tabAppendElement = null,
 	type = "label",
 } = {}) {
@@ -1266,6 +1267,16 @@ function inputLabelUrlListener({
 		}, {
 			tabAppendElement,
 		});
+	} else if (type === "org") {
+		const tr = element.closest("tr");
+		const isThisOrgTab = value === "" ||
+			value === Tab.extractOrgName(getCurrentHref());
+		const wasThisOrgTab = tr.dataset.isThisOrgTab;
+		tr.dataset.isThisOrgTab = isThisOrgTab;
+		if (wasThisOrgTab && !isThisOrgTab) {
+			// became a not-this-org Tab
+			manageTabsButtons.hide.removeAttribute("disabled");
+		}
 	}
 	inputObj[type] = value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
@@ -1317,6 +1328,11 @@ async function showManageTabs() {
 		loggers,
 	} = await generateManageTabsModal(allTabs);
 	managedLoggers = loggers;
+	const buttonContainer = saveButton.closest("div");
+	manageTabsButtons.show = buttonContainer.querySelector(".show_all_tabs");
+	manageTabsButtons.hide = buttonContainer.querySelector(
+		".hide_other_org_tabs",
+	);
 	getModalHanger().appendChild(modalParent);
 	// Setup drag functionality for the manage tabs table
 	setupDrag();
@@ -1344,7 +1360,7 @@ async function showManageTabs() {
 	// Listen when the last row is filled in to add a new empty row
 	for (const el of reduceLoggersToElements()) {
 		setInfoForDrag(el.element, () =>
-			inputLabelUrlListener({
+			inputLabelUrlOrgListener({
 				tabAppendElement: tbody,
 				type: el.type,
 			}), el.index);

@@ -1828,9 +1828,21 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		// this checkboxes is the one returned from generateTableWithCheckboxes
 		const checkedCount = checkboxes.filter((cb) => cb.checked).length;
 		tabCounter.textContent = checkedCount;
-		selectAllButton.disabled = checkedCount === checkboxes.length;
-		unselectAllButton.disabled = checkedCount === 0;
-		saveButton.disabled = unselectAllButton.disabled;
+		if (checkedCount === checkboxes.length) {
+			selectAllButton.setAttribute("disabled", true);
+		} else {
+			selectAllButton.removeAttribute("disabled");
+		}
+		if (checkedCount === 0) {
+			unselectAllButton.setAttribute("disabled", true);
+		} else {
+			unselectAllButton.removeAttribute("disabled");
+		}
+		if (unselectAllButton.hasAttribute("disabled")) {
+			saveButton.setAttribute("disabled", true);
+		} else {
+			saveButton.removeAttribute("disabled");
+		}
 	}
 	const { checkboxes, table: tabsListTable } =
 		await generateTableWithCheckboxes(
@@ -1843,7 +1855,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	divParent.appendChild(tabsListTable);
 	// Create select/unselect all button container
 	// Create Select All button
-	selectAllButton.disabled = true;
+	selectAllButton.setAttribute("disabled", true);
 	selectAllButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
@@ -1876,7 +1888,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
 	 */
 	function getSelectedTabs() {
-		const selectedAll = selectAllButton.disabled;
+		const selectedAll = selectAllButton.hasAttribute("disabled");
 		const selectedTabs = selectedAll ? tabs : checkboxes
 			.filter((checkbox) => checkbox.checked)
 			.map((checkbox) =>
@@ -2034,7 +2046,7 @@ export async function createManageTabRow({
 	tr.classList.add(
 		"slds-hint-parent",
 		EXTENSION_NAME,
-		isThisOrgTab ? undefined : "hidden", // TODO add filter to only show this org tabs; hide them by default
+		isThisOrgTab ? undefined : "hidden",
 	);
 	tr.draggable = draggable;
 	tr.dataset.draggable = draggable;
@@ -2208,6 +2220,7 @@ export async function generateManageTabsModal(tabs = [], {
 		article,
 		closeButton,
 		saveButton,
+		buttonContainer,
 	} = await generateSldsModal({
 		modalTitle: await translator.translate(title),
 		saveButtonLabel: await translator.translate(saveButtonLabel),
@@ -2225,6 +2238,54 @@ export async function generateManageTabsModal(tabs = [], {
 	];
 	const { table, tbody } = createTable(headers);
 	divParent.appendChild(table);
+	// add 2 new buttons to hide & show not-this-org Tabs
+
+	// Create Show All button
+	const showAllTabsButton = document.createElement("button");
+	showAllTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+		"show_all_tabs",
+	);
+	showAllTabsButton.textContent = await translator.translate("show_all_tabs");
+	buttonContainer.prepend(showAllTabsButton);
+	// Create Unselect All button
+	const hideOtherOrgTabsButton = document.createElement("button");
+	hideOtherOrgTabsButton.setAttribute("disabled", true);
+	hideOtherOrgTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+		"hide_other_org_tabs",
+	);
+	hideOtherOrgTabsButton.textContent = await translator.translate(
+		"hide_other_org_tabs",
+	);
+	buttonContainer.prepend(hideOtherOrgTabsButton);
+	showAllTabsButton.addEventListener("click", () => {
+		for (
+			const otherOrgTr of tbody.querySelectorAll(
+				"tr[data-is-this-org-tab=false]",
+			)
+		) {
+			otherOrgTr.classList.remove("hidden");
+		}
+		showAllTabsButton.setAttribute("disabled", true);
+		hideOtherOrgTabsButton.removeAttribute("disabled");
+	});
+	hideOtherOrgTabsButton.addEventListener("click", () => {
+		for (
+			const otherOrgTr of tbody.querySelectorAll(
+				"tr[data-is-this-org-tab=false]",
+			)
+		) {
+			otherOrgTr.classList.add("hidden");
+		}
+		hideOtherOrgTabsButton.setAttribute("disabled", true);
+		showAllTabsButton.removeAttribute("disabled");
+	});
+
 	const loggers = []; // track input changes
 	const actionsMap = {}; // map to store action handlers for each row
 	// Create rows for all existing tabs
