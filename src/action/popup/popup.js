@@ -499,11 +499,11 @@ function emptyTabs() {
 
 // listen to possible updates from tableDragHandler
 addEventListener("message", (e) => {
-  const message = e.data;
+	const message = e.data;
 	e.source.location == globalThis &&
-    message.what === "order" &&
-    message.containerName === "table" &&
-    saveTabs();
+		message.what === "order" &&
+		message.containerName === "table" &&
+		saveTabs();
 });
 
 document.getElementById("theme-selector").addEventListener(

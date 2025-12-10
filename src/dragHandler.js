@@ -71,28 +71,31 @@ async function handleDrop(e) {
 	const parent = targetRow.parentNode; // Get the parent node (tbody || ul)
 	const targetIndex = [...parent.children].indexOf(targetRow); // Get the index of the target row
 	const dragSrcIndex = [...parent.children].indexOf(dragSrcEl); // Get the index of the dragged row
-  const pinnedNumber = (await ensureAllTabsAvailability())[TabContainer.keyPinnedTabsNo];
-  const isMovingRight = targetIndex > dragSrcIndex;
-  if(
-    (
-      // is moving from pinned to unpinned
-      dragSrcIndex < pinnedNumber &&
-      pinnedNumber <= targetIndex 
-    ) ||
-    (
-      // is moving from unpinned to pinned
-      targetIndex < pinnedNumber &&
-      pinnedNumber <= dragSrcIndex 
-    )
-  ){
-    // KO illegal movement
-    targetRow = parent.querySelector(`${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`);
-  }
-  if(isMovingRight){
-    targetRow.after(dragSrcEl);
-  } else {
-    targetRow.before(dragSrcEl);
-  }
+	const pinnedNumber =
+		(await ensureAllTabsAvailability())[TabContainer.keyPinnedTabsNo];
+	const isMovingRight = targetIndex > dragSrcIndex;
+	if (
+		(
+			// is moving from pinned to unpinned
+			dragSrcIndex < pinnedNumber &&
+			pinnedNumber <= targetIndex
+		) ||
+		(
+			// is moving from unpinned to pinned
+			targetIndex < pinnedNumber &&
+			pinnedNumber <= dragSrcIndex
+		)
+	) {
+		// KO illegal movement
+		targetRow = parent.querySelector(
+			`${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`,
+		);
+	}
+	if (isMovingRight) {
+		targetRow.after(dragSrcEl);
+	} else {
+		targetRow.before(dragSrcEl);
+	}
 	e.target.style.cursor = "grab";
 	postMessage({ what: "order", containerName }, "*");
 }
@@ -117,7 +120,7 @@ export function setupDrag() {
 	ul = document.getElementById(EXTENSION_NAME);
 	container = table ?? ul;
 	closestTag = table == null ? "li" : "tr";
-  containerName = table == null ? "ul" : "table";
+	containerName = table == null ? "ul" : "table";
 	if (container == null) setTimeout(() => setupDrag(), 500);
 	else createListeners();
 }

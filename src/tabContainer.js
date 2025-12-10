@@ -385,7 +385,8 @@ export class TabContainer extends Array {
 					updatePinnedTabs: false,
 				},
 			);
-			this[TabContainer.keyPinnedTabsNo] = res[TabContainer.keyPinnedTabsNo];
+			this[TabContainer.keyPinnedTabsNo] =
+				res[TabContainer.keyPinnedTabsNo];
 		}
 		return res;
 	}

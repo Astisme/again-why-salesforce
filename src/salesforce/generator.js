@@ -823,9 +823,10 @@ export async function generateSldsModal({
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
-  const awsfStyle = document.createElement("style");
-  awsfStyle.textContent = ".hidden { display:none; visibility:hidden; }";
-  modalParent.appendChild(awsfStyle);
+	const awsfStyle = document.createElement("style");
+	awsfStyle.textContent =
+		".hidden { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }";
+	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
 	backdropDiv.classList.add(
@@ -1731,7 +1732,7 @@ async function addModalExplainer(article, explainerKey) {
 	explainerEl.textContent = await translator.translate(explainerKey);
 	explainerEl.style.display = "flex";
 	explainerEl.style.justifyContent = "center";
-  explainerEl.style.textAlign = 'center';
+	explainerEl.style.textAlign = "center";
 	article.prepend(explainerEl);
 	return explainerEl;
 }
@@ -1767,10 +1768,10 @@ function createModalContentContainer(article) {
  * @return {HTMLTableCellElement} The created td element
  */
 function createTableCell({
-  value = "",
-  placeholder = "",
-  wordBreak = false,
-  className = "",
+	value = "",
+	placeholder = "",
+	className = "",
+	wordBreak = false,
 } = {}) {
 	const td = document.createElement("td");
 	td.style.padding = "0.75rem";
@@ -1783,10 +1784,10 @@ function createTableCell({
 	input.style.width = "100%";
 	input.style.padding = "0.25rem";
 	if (wordBreak) {
-    input.style.wordBreak = "break-all";
+		input.style.wordBreak = "break-all";
 	}
 	td.appendChild(input);
-  return td;
+	return { td, input };
 }
 
 export async function generateSldsModalWithTabList(tabs = [], {
@@ -1898,46 +1899,63 @@ export async function generateSldsModalWithTabList(tabs = [], {
  * Creates a drag handle SVG icon for reordering rows
  * @return {SVGSVGElement} The drag handle SVG element
  */
-function createDragHandle() {
+function createDragHandle(draggable = false) {
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.setAttribute("viewBox", "0 0 24 24");
 	svg.setAttribute("width", "20");
 	svg.setAttribute("height", "20");
 	svg.setAttribute("fill", "currentColor");
-	svg.style.cursor = "grab";
-	svg.dataset.draggable = "true";
+	svg.dataset.draggable = draggable;
 	// Six dots on two columns
-	const rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	const rect1 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
 	rect1.setAttribute("x", "6");
 	rect1.setAttribute("y", "4");
 	rect1.setAttribute("width", "2");
 	rect1.setAttribute("height", "2");
 	svg.appendChild(rect1);
-	const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	const rect2 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
 	rect2.setAttribute("x", "6");
 	rect2.setAttribute("y", "11");
 	rect2.setAttribute("width", "2");
 	rect2.setAttribute("height", "2");
 	svg.appendChild(rect2);
-	const rect3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	const rect3 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
 	rect3.setAttribute("x", "6");
 	rect3.setAttribute("y", "18");
 	rect3.setAttribute("width", "2");
 	rect3.setAttribute("height", "2");
 	svg.appendChild(rect3);
-	const rect4 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	const rect4 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
 	rect4.setAttribute("x", "16");
 	rect4.setAttribute("y", "4");
 	rect4.setAttribute("width", "2");
 	rect4.setAttribute("height", "2");
 	svg.appendChild(rect4);
-	const rect5 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	const rect5 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
 	rect5.setAttribute("x", "16");
 	rect5.setAttribute("y", "11");
 	rect5.setAttribute("width", "2");
 	rect5.setAttribute("height", "2");
 	svg.appendChild(rect5);
-	const rect6 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+	const rect6 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
 	rect6.setAttribute("x", "16");
 	rect6.setAttribute("y", "18");
 	rect6.setAttribute("width", "2");
@@ -1956,15 +1974,19 @@ function createDragHandle() {
  * @param {number} [options.tabIndex] - The data-tabIndex attribute value
  * @return {HTMLButtonElement} The created button element
  */
-function createStyledButton(text, { variant = "neutral", action, tabIndex } = {}) {
+function createStyledButton(
+	text,
+	{ variant = "neutral", action, tabIndex } = {},
+) {
 	const btn = document.createElement("a");
 	btn.classList.add(
 		"slds-button",
 		`slds-button_${variant}`,
 		"slds-button_small",
+		"awsf-td-button",
 	);
 	btn.textContent = text;
-  btn.style.marginLeft = "0";
+	btn.style.marginLeft = "0";
 	btn.style.width = "100%";
 	btn.style.justifyContent = "flex-start";
 	btn.style.paddingLeft = "0.75rem";
@@ -1995,65 +2017,93 @@ function createStyledButton(text, { variant = "neutral", action, tabIndex } = {}
  * @return {Promise<HTMLTableRowElement>} The created tr element
  */
 export async function createManageTabRow({
-  label = "",
-  url = "",
-  org = null,
+	label = "",
+	url = "",
+	org = null,
 } = {}, {
-  index = 0,
-  pinned = false,
-  draggable = false,
+	index = 0,
+	pinned = false,
+	disabled = true,
 } = {}) {
-  const translator = await ensureTranslatorAvailability();
+	const translator = await ensureTranslatorAvailability();
+	const isThisOrgTab = org == null ||
+		org === Tab.extractOrgName(getCurrentHref());
+	const draggable = !disabled;
 	const tr = document.createElement("tr");
 	tr.dataset.rowIndex = index;
 	tr.classList.add(
-    "slds-hint-parent",
-    EXTENSION_NAME,
-  );
+		"slds-hint-parent",
+		EXTENSION_NAME,
+		isThisOrgTab ? undefined : "hidden", // TODO add filter to only show this org tabs; hide them by default
+	);
 	tr.draggable = draggable;
 	tr.dataset.draggable = draggable;
+	tr.dataset.isThisOrgTab = isThisOrgTab;
 	// Drag handle cell
 	const dragCell = document.createElement("td");
 	dragCell.style.padding = "0.75rem";
 	dragCell.style.width = "30px";
 	dragCell.style.textAlign = "center";
+	dragCell.style.cursor = "grab";
 	dragCell.classList.add("slds-cell-wrap");
-	dragCell.appendChild(createDragHandle());
+	dragCell.appendChild(createDragHandle(draggable));
 	dragCell.dataset.draggable = draggable;
 	tr.appendChild(dragCell);
 	// Label cell with input
-	tr.appendChild(createTableCell({
-    value: label,
-    placeholder: await translator.translate("tab_label"),
-    className: 'label',
-  }));
+	const { td: labelTd, input: labelInput } = createTableCell({
+		value: label,
+		placeholder: await translator.translate("tab_label"),
+		className: "label",
+	});
+	tr.appendChild(labelTd);
 	// URL cell with input
-	tr.appendChild(createTableCell({
-    value: url,
-    placeholder: await translator.translate("tab_url"),
-    wordBreak: true,
-    className: 'url',
-  }));
+	const { td: urlTd, input: urlInput } = createTableCell({
+		value: url,
+		placeholder: await translator.translate("tab_url"),
+		className: "url",
+		wordBreak: true,
+	});
+	tr.appendChild(urlTd);
 	// Org cell with input
-	tr.appendChild(createTableCell({
-    value: org,
-    placeholder: await translator.translate("tab_org"),
-    className: 'org',
-  }));
+	const { td: orgTd, input: orgInput } = createTableCell({
+		value: org,
+		placeholder: await translator.translate("tab_org"),
+		className: "org",
+	});
+	tr.appendChild(orgTd);
 	// Actions cell with dropdown
 	const actionsCell = document.createElement("td");
+	tr.appendChild(actionsCell);
 	actionsCell.style.padding = "0.75rem";
 	actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
-  actionsCell.style.overflow = "visible";
+	actionsCell.style.overflow = "visible";
+	// Position the dropdown relative to button
+	const buttonContainer = document.createElement("div");
+	actionsCell.appendChild(buttonContainer);
+	buttonContainer.style.position = "relative";
+	buttonContainer.style.display = "inline-block";
 	// Dropdown button
 	const dropdownButton = document.createElement("button");
-	dropdownButton.classList.add("slds-button", "slds-button_neutral", "slds-button_small");
+	buttonContainer.appendChild(dropdownButton);
+	dropdownButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	if (disabled) {
+		dropdownButton.setAttribute("disabled", true);
+	}
 	dropdownButton.style.position = "relative";
 	dropdownButton.textContent = `▼`; // downward arrow
 	dropdownButton.title = await translator.translate("actions");
+	dropdownButton.dataset.name = "dropdownButton";
 	// Dropdown menu container
 	const dropdownMenu = document.createElement("div");
-	dropdownMenu.classList.add("actions-dropdown-menu","hidden");
+	buttonContainer.appendChild(dropdownMenu);
+	dropdownMenu.classList.add(
+		"actions-dropdown-menu",
+		"hidden",
+	);
 	dropdownMenu.style.position = "absolute";
 	dropdownMenu.style.top = "100%";
 	dropdownMenu.style.right = "0";
@@ -2064,32 +2114,32 @@ export async function createManageTabRow({
 	dropdownMenu.style.zIndex = "1";
 	dropdownMenu.style.minWidth = "120px";
 	dropdownMenu.style.padding = "0.5rem 0";
-  dropdownMenu.style.display = "flex";
-  dropdownMenu.style.flexDirection = "column";
+	dropdownMenu.style.display = "flex";
+	dropdownMenu.style.flexDirection = "column";
 	// Open button
 	const openBtn = createStyledButton(
 		await translator.translate("open"),
-		{ action: "open", tabIndex: index }
+		{ action: "open", tabIndex: index },
 	);
-  openBtn.addEventListener('click', handleLightningLinkClick);
-  if(url){
-    openBtn.href = Tab.expandURL(url, getCurrentHref());
-  }
+	openBtn.addEventListener("click", handleLightningLinkClick);
+	if (url) {
+		openBtn.href = Tab.expandURL(url, getCurrentHref());
+	}
 	dropdownMenu.appendChild(openBtn);
 	// Pin/Unpin button (toggle - only show one at a time)
 	const pinBtn = createStyledButton(
 		await translator.translate("cxm_pin_tab"),
-		{ action: "pin", tabIndex: index }
+		{ action: "pin", tabIndex: index },
 	);
 	pinBtn.classList.add("pin-btn");
 	if (pinned) {
-    dragCell.classList.add(PIN_TAB_CLASS);
+		dragCell.classList.add(PIN_TAB_CLASS);
 		pinBtn.style.display = "none";
 	}
 	dropdownMenu.appendChild(pinBtn);
 	const unpinBtn = createStyledButton(
 		await translator.translate("cxm_unpin_tab"),
-		{ action: "unpin", tabIndex: index }
+		{ action: "unpin", tabIndex: index },
 	);
 	unpinBtn.classList.add("unpin-btn");
 	if (!pinned) {
@@ -2099,33 +2149,41 @@ export async function createManageTabRow({
 	// Delete button
 	const deleteBtn = createStyledButton(
 		await translator.translate("delete"),
-		{ action: "delete", tabIndex: index }
+		{ action: "delete", tabIndex: index },
 	);
 	deleteBtn.classList.add("delete-btn");
-	deleteBtn.disabled = label === "" && url === ""; // disabled for empty rows
+	if (label === "" && url === "") {
+		deleteBtn.setAttribute("disabled", true); // disabled for empty rows
+	}
 	dropdownMenu.appendChild(deleteBtn);
 	// Dropdown toggle functionality
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
-		dropdownMenu.classList.remove("hidden");
+		if (dropdownMenu.className.includes("hidden")) {
+			dropdownMenu.classList.remove("hidden");
+		} else {
+			dropdownMenu.classList.add("hidden");
+		}
 	});
 	// Prevent dropdown from closing when clicking inside
 	dropdownMenu.addEventListener("click", (e) => {
 		e.preventDefault();
 	});
-	// Position the dropdown relative to button
-	const buttonContainer = document.createElement("div");
-	buttonContainer.style.position = "relative";
-	buttonContainer.style.display = "inline-block";
-	buttonContainer.appendChild(dropdownButton);
-	buttonContainer.appendChild(dropdownMenu);
-	actionsCell.appendChild(buttonContainer);
-	tr.appendChild(actionsCell);
 	return {
-    tr,
-    dropdownMenu,
-    dropdownButton,
-  };
+		tr,
+		dropdownMenu,
+		dropdownButton,
+		logger: {
+			label: labelInput,
+			url: urlInput,
+			org: orgInput,
+			last_input: {
+				label,
+				url,
+				org,
+			},
+		},
+	};
 }
 
 /**
@@ -2145,12 +2203,12 @@ export async function generateManageTabsModal(tabs = [], {
 	explainer = "manage_tabs_explainer",
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
-	const { 
-    modalParent,
-    article,
-    closeButton,
-    saveButton 
-  } = await generateSldsModal({
+	const {
+		modalParent,
+		article,
+		closeButton,
+		saveButton,
+	} = await generateSldsModal({
 		modalTitle: await translator.translate(title),
 		saveButtonLabel: await translator.translate(saveButtonLabel),
 	});
@@ -2170,69 +2228,77 @@ export async function generateManageTabsModal(tabs = [], {
 	const loggers = []; // track input changes
 	const actionsMap = {}; // map to store action handlers for each row
 	// Create rows for all existing tabs
-  const allDropMenus = [];
-  const allTrs = [];
-  const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
+	const allDropMenus = [];
+	const allTrs = [];
+	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
 	for (let i = 0; i < tabs.length; i++) {
 		const tab = tabs[i];
-		const { 
-      tr,
-      dropdownMenu,
-      dropdownButton,
-    } = await createManageTabRow(tab, {
-      index: i,
-      draggable: true,
-      pinned: i < pinnedNumber,
-    });
-    allTrs.push({ tr, dropdownButton });
-    allDropMenus.push(dropdownMenu);
-		tbody.appendChild(tr);
-		// Store logger for this row
-		const labelInput = tr.querySelector(".label");
-		const urlInput = tr.querySelector(".url");
-		loggers.push({
-			label: labelInput,
-			url: urlInput,
-			last_input: { label: tab.label || "", url: tab.url || "" },
+		const {
+			tr,
+			dropdownMenu,
+			dropdownButton,
+			logger,
+		} = await createManageTabRow(tab, {
+			index: i,
+			pinned: i < pinnedNumber,
+			disabled: false,
 		});
+		allTrs.push({ tr, dropdownButton });
+		allDropMenus.push(dropdownMenu);
+		loggers.push(logger);
+		tbody.appendChild(tr);
 		// Store action handlers for this tab
 		actionsMap[i] = {
 			open: { what: "open-tab", url: tab.url, label: tab.label },
-			pin: { what: "cxm_pin_tab", tabUrl: tab.url, label: tab.label, org: tab.org },
-			unpin: { what: "cxm_unpin_tab", tabUrl: tab.url, label: tab.label, org: tab.org },
-			delete: { what: "delete-tab", tabUrl: tab.url, label: tab.label, org: tab.org },
+			pin: {
+				what: "cxm_pin_tab",
+				tabUrl: tab.url,
+				label: tab.label,
+				org: tab.org,
+			},
+			unpin: {
+				what: "cxm_unpin_tab",
+				tabUrl: tab.url,
+				label: tab.label,
+				org: tab.org,
+			},
+			delete: {
+				what: "delete-tab",
+				tabUrl: tab.url,
+				label: tab.label,
+				org: tab.org,
+			},
 		};
 	}
 	// Add empty row for new tabs
 	const {
-    tr: emptyRow,
-    dropdownMenu: lastMenu,
-    dropdownButton: lastButton,
-  } = await createManageTabRow({}, {
-    index: tabs.length,
-  });
-  allTrs.push({ tr: emptyRow, dropdownButton: lastButton });
-  allDropMenus.push(lastMenu);
+		tr: emptyRow,
+		dropdownMenu: lastMenu,
+		dropdownButton: lastButton,
+		logger: lastLogger,
+	} = await createManageTabRow({}, {
+		index: tabs.length,
+	});
+	allTrs.push({ tr: emptyRow, dropdownButton: lastButton });
+	allDropMenus.push(lastMenu);
+	loggers.push(lastLogger);
 	tbody.appendChild(emptyRow);
 	// Close dropdown when clicking outside
-  for(const { tr, dropdownButton } of allTrs){
-    tr.addEventListener("click", (e) => {
-      if(e.target !== dropdownButton)
-        for(const dropdownMenu of allDropMenus)
-          dropdownMenu.classList.add("hidden");
-    });
-  }
-	loggers.push({
-		label: emptyRow.querySelector(".label"),
-		url: emptyRow.querySelector(".url"),
-		last_input: { label: "", url: "" },
-	});
+	for (const { tr, dropdownButton } of allTrs) {
+		tr.addEventListener("click", (e) => {
+			if (e.target !== dropdownButton) {
+				for (const dropdownMenu of allDropMenus) {
+					dropdownMenu.classList.add("hidden");
+				}
+			}
+		});
+	}
 	return {
 		modalParent,
 		closeButton,
 		tbody,
 		actionsMap,
-    saveButton,
+		saveButton,
 		loggers,
 	};
 }
