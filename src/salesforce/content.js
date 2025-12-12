@@ -71,6 +71,7 @@ import {
 	generateSldsToastMessage,
 	generateStyleFromSettings,
 	generateUpdateTabModal,
+	manageTabs_updateModalBodyOverflow,
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
@@ -1074,6 +1075,7 @@ async function addTab(tabAppendElement) {
 		index: tabAppendElement.childElementCount,
 	});
 	tabAppendElement.append(tr);
+	manageTabs_updateModalBodyOverflow(tabAppendElement);
 	const index = managedLoggers.length;
 	managedLoggers.push(logger);
 	for (
@@ -1110,6 +1112,7 @@ async function removeTab(
 		tabAppendElement,
 		enable: false,
 	});
+	manageTabs_updateModalBodyOverflow(tabAppendElement);
 	if (!indexWasProvided) {
 		return;
 	}

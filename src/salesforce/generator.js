@@ -2014,6 +2014,19 @@ function createStyledButton(
 	return btn;
 }
 
+export function manageTabs_updateModalBodyOverflow(article = null) {
+	if (article == null) {
+		throw new Error("error_required_params");
+	}
+	const modalBody = article.closest(
+		".modal-body.scrollable.slds-modal__content.slds-p-around_medium",
+	);
+	const trs = modalBody.querySelectorAll("tr.again-why-salesforce");
+	// counted from test on maxHeight = 65%
+	// takes into consideration the empty tr at the bottom
+	modalBody.style.overflowY = trs.length < 12 ? "hidden" : "auto";
+}
+
 /**
  * Creates a table row with editable inputs for label, URL, and org.
  * Used by generateManageTabsModal for creating editable tab rows.
@@ -2239,7 +2252,6 @@ export async function generateManageTabsModal(tabs = [], {
 	const { table, tbody } = createTable(headers);
 	divParent.appendChild(table);
 	// add 2 new buttons to hide & show not-this-org Tabs
-
 	// Create Show All button
 	const showAllTabsButton = document.createElement("button");
 	showAllTabsButton.classList.add(
@@ -2285,7 +2297,6 @@ export async function generateManageTabsModal(tabs = [], {
 		hideOtherOrgTabsButton.setAttribute("disabled", true);
 		showAllTabsButton.removeAttribute("disabled");
 	});
-
 	const loggers = []; // track input changes
 	const actionsMap = {}; // map to store action handlers for each row
 	// Create rows for all existing tabs
@@ -2303,6 +2314,7 @@ export async function generateManageTabsModal(tabs = [], {
 			index: i,
 			pinned: i < pinnedNumber,
 			disabled: false,
+			updateModalBodyOverflow: false,
 		});
 		allTrs.push({ tr, dropdownButton });
 		allDropMenus.push(dropdownMenu);
@@ -2344,6 +2356,7 @@ export async function generateManageTabsModal(tabs = [], {
 	allDropMenus.push(lastMenu);
 	loggers.push(lastLogger);
 	tbody.appendChild(emptyRow);
+	manageTabs_updateModalBodyOverflow(article);
 	// Close dropdown when clicking outside
 	for (const { tr, dropdownButton } of allTrs) {
 		tr.addEventListener("click", (e) => {
