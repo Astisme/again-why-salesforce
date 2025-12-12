@@ -27,6 +27,7 @@ import {
 import ensureTranslatorAvailability from "/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";
+import { updateModalBodyOverflow } from "./manageTabs.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -2014,19 +2015,6 @@ function createStyledButton(
 	return btn;
 }
 
-export function manageTabs_updateModalBodyOverflow(article = null) {
-	if (article == null) {
-		throw new Error("error_required_params");
-	}
-	const modalBody = article.closest(
-		".modal-body.scrollable.slds-modal__content.slds-p-around_medium",
-	);
-	const trs = modalBody.querySelectorAll("tr.again-why-salesforce");
-	// counted from test on maxHeight = 65%
-	// takes into consideration the empty tr at the bottom
-	modalBody.style.overflowY = trs.length < 12 ? "hidden" : "auto";
-}
-
 /**
  * Creates a table row with editable inputs for label, URL, and org.
  * Used by generateManageTabsModal for creating editable tab rows.
@@ -2356,7 +2344,7 @@ export async function generateManageTabsModal(tabs = [], {
 	allDropMenus.push(lastMenu);
 	loggers.push(lastLogger);
 	tbody.appendChild(emptyRow);
-	manageTabs_updateModalBodyOverflow(article);
+	updateModalBodyOverflow(article);
 	// Close dropdown when clicking outside
 	for (const { tr, dropdownButton } of allTrs) {
 		tr.addEventListener("click", (e) => {
