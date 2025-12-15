@@ -76,6 +76,10 @@ function handleActionButtonClick(e, {
 	}
 	// Handle toggle buttons (pin/unpin)
 	switch (action) {
+		case "open": {
+			closeButton.click();
+			return;
+		}
 		case "pin":
 		case "unpin": {
 			const isPin = action === "pin";
@@ -107,10 +111,6 @@ function handleActionButtonClick(e, {
 				row.remove();
 			}
 			break;
-		}
-		case "open": {
-			closeButton.click();
-			return;
 		}
 		default:
 			break;
@@ -231,7 +231,7 @@ async function addTr(tabAppendElement) {
 		]
 	) {
 		setInfoForDrag(el.element, () =>
-			inputLabelUrlOrgListener({
+			trInputListener({
 				tabAppendElement,
 				type: el.type,
 			}), el.index);
@@ -295,6 +295,18 @@ async function removeTr(
 	}
 }
 
+function checkAddDuplicateStyle(tabAppendElement) {
+	const styleId = "awsf-warning";
+	const style = tabAppendElement.querySelector(`#${styleId}`);
+	if (style == null) {
+		const newStyle = document.createElement("style");
+		newStyle.id = styleId;
+		newStyle.textContent =
+			".duplicate { background-color: #dd7a01 !important; }";
+		tabAppendElement.appendChild(newStyle);
+	}
+}
+
 async function checkDuplicates({
 	url,
 	org,
@@ -306,21 +318,10 @@ async function checkDuplicates({
 		return;
 	}
 	// show warning in salesforce
-	new Promise((resolve) => {
-		showToast("error_tab_url_saved", false, true);
-		makeDuplicatesBold(url);
-		resolve();
-	});
-	const styleId = "awsf-warning";
-	let style = tabAppendElement.querySelector(`#${styleId}`);
-	if (style == null) {
-		style = document.createElement("style");
-		style.id = styleId;
-		style.textContent =
-			".duplicate { background-color: #dd7a01 !important; }";
-		tabAppendElement.appendChild(style);
-	}
+	showToast("error_tab_url_saved", false, true);
+	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
+	checkAddDuplicateStyle(tabAppendElement);
 	const trs = Array.from(
 		tabAppendElement.querySelectorAll("tr input.url"),
 	)
@@ -349,7 +350,7 @@ async function checkDuplicates({
  *
  * @param {string} type - The type of input field ("label", "url" or "org").
  */
-function inputLabelUrlOrgListener({
+function trInputListener({
 	tabAppendElement = null,
 	type = "label",
 } = {}) {
@@ -360,41 +361,73 @@ function inputLabelUrlOrgListener({
 	const element = currentObj[type];
 	const value = element.value;
 	const inputObj = currentObj.last_input;
-	const last_input = inputObj[type] || "";
+	const last_input = inputObj[type] ?? "";
 	const delta = value.length - last_input.length;
+	const tr = element.closest("tr");
+	const thisUrlOrg = Tab.extractOrgName(getCurrentHref());
+	let url = value;
+	let org = value;
+	let typeMatched = false;
 	// check if the user copied the url
-	if (delta > 2 && type === "url") {
-		const url = Tab.minifyURL(value);
-		element.value = url;
-		// check eventual duplicates
-		checkDuplicates({
-			url,
-			org: Tab.extractOrgName(getCurrentHref()),
-		}, {
-			tabAppendElement,
-		});
-	} else if (type === "org") {
-		const tr = element.closest("tr");
-		const isThisOrgTab = value === "" ||
-			value === Tab.extractOrgName(getCurrentHref());
-		const wasThisOrgTab = tr.dataset.isThisOrgTab;
-		tr.dataset.isThisOrgTab = isThisOrgTab;
-		if (wasThisOrgTab && !isThisOrgTab) {
-			// became a not-this-org Tab
-			manageTabsButtons.hide.removeAttribute("disabled");
+	switch (type) {
+		case "url": {
+			org = inputObj.org;
+			typeMatched = true;
+			// minify the URL if it was pasted in
+			if (delta > 2) {
+				url = Tab.minifyURL(value);
+				element.value = url;
+				// check eventual duplicates
+				checkDuplicates({
+					url,
+					org: org ?? thisUrlOrg,
+				}, {
+					tabAppendElement,
+				});
+			}
+			break;
 		}
+		case "org": {
+			url = inputObj.url;
+			typeMatched = true;
+			if (value !== "") {
+				org = Tab.extractOrgName(value);
+				element.value = org;
+			}
+			const isThisOrgTab = org === "" ||
+				org === thisUrlOrg;
+			const wasThisOrgTab = tr.dataset.isThisOrgTab === "true";
+			tr.dataset.isThisOrgTab = isThisOrgTab;
+			if (wasThisOrgTab && !isThisOrgTab) {
+				// became a not-this-org Tab
+				manageTabsButtons.hide.removeAttribute("disabled");
+			}
+			break;
+		}
+		default:
+			break;
 	}
-	inputObj[type] = value;
+	if (typeMatched) {
+		// update the "open" button href
+		tr.querySelector("[data-action=open]").href = Tab.expandURL(
+			url,
+			getCurrentHref(),
+			org,
+		);
+	}
+	inputObj[type] = element.value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
-	if (focusedIndex === (managedLoggers.length - 1)) {
-		if (inputObj.label && inputObj.url) {
-			addTr(tabAppendElement);
-		}
+	if (
+		focusedIndex === (managedLoggers.length - 1) &&
+		(inputObj.label && inputObj.url)
+	) {
+		addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
-	else if (focusedIndex === (managedLoggers.length - 2)) {
-		if (!inputObj.label || !inputObj.url) {
-			removeTr(tabAppendElement);
-		}
+	else if (
+		focusedIndex === (managedLoggers.length - 2) &&
+		(!inputObj.label || !inputObj.url)
+	) {
+		removeTr(tabAppendElement);
 	}
 }
 
@@ -452,7 +485,10 @@ export async function createManageTabsModal() {
 	for (const btn of modalParent.querySelectorAll("[data-action]")) {
 		btn.addEventListener(
 			"click",
-			(e) => handleActionButtonClick(e, { actionsMap, closeButton }),
+			(e) => {
+				e.preventDefault();
+				handleActionButtonClick(e, { actionsMap, closeButton });
+			},
 		);
 	}
 	// Listen for drag events to save on reorder
@@ -466,7 +502,7 @@ export async function createManageTabsModal() {
 	// Listen when the last row is filled in to add a new empty row
 	for (const el of reduceLoggersToElements()) {
 		setInfoForDrag(el.element, () =>
-			inputLabelUrlOrgListener({
+			trInputListener({
 				tabAppendElement: tbody,
 				type: el.type,
 			}), el.index);

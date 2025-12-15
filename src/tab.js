@@ -232,25 +232,30 @@ export default class Tab {
 	 * SetupOneHome/home/
 	 * SetupOneHome/home
 	 */
-	static expandURL(url = null, baseUrl = null) {
+	static expandURL(url = null, baseUrl = null, org = null) {
 		if (!baseUrl?.startsWith(HTTPS)) {
 			throw new Error("error_expand_url_no_base");
 		}
 		if (url == null || url === "") {
 			throw new Error("error_expand_url");
 		}
+		baseUrl = new URL(baseUrl).origin;
+		const oldOrg = Tab.extractOrgName(baseUrl);
+		// update the url with the given org name
+		const shouldUpdateOrg = org != null && org !== "" && oldOrg !== org;
 		if (
 			url.startsWith(HTTPS) &&
 			!url.includes(MY_SALESFORCE_SETUP_COM) &&
 			!url.includes(MY_SALESFORCE_COM) &&
 			!url.includes(LIGHTNING_FORCE_COM)
 		) {
-			return url;
+			return shouldUpdateOrg ? url.replace(oldOrg, org) : url;
 		}
-		baseUrl = new URL(baseUrl).origin;
 		url = Tab.minifyURL(url);
 		const isSetupLink = !url.startsWith("/") && url.length > 0;
-		return `${baseUrl}${isSetupLink ? SETUP_LIGHTNING : ""}${url}`;
+		return `${shouldUpdateOrg ? baseUrl.replace(oldOrg, org) : baseUrl}${
+			isSetupLink ? SETUP_LIGHTNING : ""
+		}${url}`;
 	}
 
 	/**

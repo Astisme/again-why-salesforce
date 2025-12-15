@@ -2037,10 +2037,9 @@ export async function createManageTabRow({
 	index = 0,
 	pinned = false,
 	disabled = true,
+	isThisOrgTab = true,
 } = {}) {
 	const translator = await ensureTranslatorAvailability();
-	const isThisOrgTab = org == null ||
-		org === Tab.extractOrgName(getCurrentHref());
 	const draggable = !disabled;
 	const tr = document.createElement("tr");
 	tr.dataset.rowIndex = index;
@@ -2291,8 +2290,14 @@ export async function generateManageTabsModal(tabs = [], {
 	const allDropMenus = [];
 	const allTrs = [];
 	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
+	let notThisOrgTabs = 0;
 	for (let i = 0; i < tabs.length; i++) {
 		const tab = tabs[i];
+		const isThisOrgTab = tab.org == null ||
+			tab.org === Tab.extractOrgName(getCurrentHref());
+		if (!isThisOrgTab) {
+			notThisOrgTabs++;
+		}
 		const {
 			tr,
 			dropdownMenu,
@@ -2302,7 +2307,7 @@ export async function generateManageTabsModal(tabs = [], {
 			index: i,
 			pinned: i < pinnedNumber,
 			disabled: false,
-			updateModalBodyOverflow: false,
+			isThisOrgTab,
 		});
 		allTrs.push({ tr, dropdownButton });
 		allDropMenus.push(dropdownMenu);
@@ -2310,7 +2315,6 @@ export async function generateManageTabsModal(tabs = [], {
 		tbody.appendChild(tr);
 		// Store action handlers for this tab
 		actionsMap[i] = {
-			open: { what: "open-tab", url: tab.url, label: tab.label },
 			pin: {
 				what: "cxm_pin_tab",
 				tabUrl: tab.url,
@@ -2330,6 +2334,10 @@ export async function generateManageTabsModal(tabs = [], {
 				org: tab.org,
 			},
 		};
+	}
+	// disable the showAllTabsButton if needed
+	if (notThisOrgTabs <= 0) {
+		showAllTabsButton.setAttribute("disabled", true);
 	}
 	// Add empty row for new tabs
 	const {
