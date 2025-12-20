@@ -88,6 +88,8 @@ function sendMessage(message, callback) {
  * @return {Promise} promise resolving based on sendMessage
  */
 export function sendExtensionMessage(message, callback = null) {
+  if(message == null)
+    return;
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
 			sendMessage(

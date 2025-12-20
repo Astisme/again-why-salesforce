@@ -23,6 +23,9 @@ import {
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
 	USE_LIGHTNING_NAVIGATION,
+  CXM_PIN_TAB,
+  CXM_UNPIN_TAB,
+  CXM_REMOVE_TAB,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -2141,7 +2144,7 @@ export async function createManageTabRow({
 	// Pin/Unpin button (toggle - only show one at a time)
 	const pinBtn = createStyledButton(
 		await translator.translate("cxm_pin_tab"),
-		{ action: "pin", tabIndex: index },
+		{ action: CXM_PIN_TAB, tabIndex: index },
 	);
 	pinBtn.classList.add("pin-btn");
 	if (pinned) {
@@ -2151,7 +2154,7 @@ export async function createManageTabRow({
 	dropdownMenu.appendChild(pinBtn);
 	const unpinBtn = createStyledButton(
 		await translator.translate("cxm_unpin_tab"),
-		{ action: "unpin", tabIndex: index },
+		{ action: CXM_UNPIN_TAB, tabIndex: index },
 	);
 	unpinBtn.classList.add("unpin-btn");
 	if (!pinned) {
@@ -2161,7 +2164,7 @@ export async function createManageTabRow({
 	// Delete button
 	const deleteBtn = createStyledButton(
 		await translator.translate("delete"),
-		{ action: "delete", tabIndex: index },
+		{ action: CXM_REMOVE_TAB, tabIndex: index },
 	);
 	deleteBtn.classList.add("delete-btn");
 	if (label === "" && url === "") {
@@ -2171,11 +2174,7 @@ export async function createManageTabRow({
 	// Dropdown toggle functionality
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
-		if (dropdownMenu.className.includes("hidden")) {
-			dropdownMenu.classList.remove("hidden");
-		} else {
-			dropdownMenu.classList.add("hidden");
-		}
+    dropdownMenu.classList.toggle('hidden');
 	});
 	// Prevent dropdown from closing when clicking inside
 	dropdownMenu.addEventListener("click", (e) => {
@@ -2315,23 +2314,17 @@ export async function generateManageTabsModal(tabs = [], {
 		tbody.appendChild(tr);
 		// Store action handlers for this tab
 		actionsMap[i] = {
-			pin: {
-				what: "cxm_pin_tab",
-				tabUrl: tab.url,
-				label: tab.label,
-				org: tab.org,
+			[CXM_PIN_TAB]: {
+				what: CXM_PIN_TAB,
+        ...tab,
 			},
-			unpin: {
-				what: "cxm_unpin_tab",
-				tabUrl: tab.url,
-				label: tab.label,
-				org: tab.org,
+			[CXM_UNPIN_TAB]: {
+				what: CXM_UNPIN_TAB,
+        ...tab,
 			},
-			delete: {
-				what: "delete-tab",
-				tabUrl: tab.url,
-				label: tab.label,
-				org: tab.org,
+			[CXM_REMOVE_TAB]: {
+				what: CXM_REMOVE_TAB,
+        ...tab,
 			},
 		};
 	}

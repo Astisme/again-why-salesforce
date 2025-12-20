@@ -1,5 +1,11 @@
 "use strict";
-import { PIN_TAB_CLASS, sendExtensionMessage } from "/constants.js";
+import { 
+  CXM_REMOVE_TAB,
+  CXM_PIN_TAB,
+  CXM_UNPIN_TAB,
+  PIN_TAB_CLASS,
+  sendExtensionMessage,
+} from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import { setupDrag } from "/dragHandler.js";
@@ -55,56 +61,141 @@ async function readManagedTabsAndSave({
 	sf_afterSet({ tabs: tableTabs });
 }
 
+function updateIndexesOnTrsAfterIndex(fromIndex = 0){
+	// update indexes of loggers and elements
+	for (let i = fromIndex; i < managedLoggers.length; i++) {
+		const logger = managedLoggers[i];
+    const tr = logger.label
+      .closest("tr");
+    const buttons = tr
+      .querySelectorAll(
+        "a.awsf-td-button",
+      );
+		for (
+			const el of [
+        { element: logger.label, where: "element_index" },
+        { element: logger.url, where: "element_index" },
+        { element: logger.org, where: "element_index" },
+        { element: tr, where: "rowIndex" },
+        ...Array.from(buttons).map(btn => ({ element: btn, where: "tabIndex" })),
+			]
+		) {
+			el.element.dataset[el.where] = i;
+		}
+	}
+}
+
+function moveTrToGivenIndex({
+  tabAppendElement = null,
+  trToMove = null,
+  currentIndex = null,
+  currentlyPinnedNo = null,
+  isPinning = true,
+} = {}){
+  if(
+		currentIndex == null ||
+		currentlyPinnedNo == null
+  ){
+    throw new Error('error_required_params');
+  }
+  if(
+    (currentIndex <= currentlyPinnedNo && isPinning) ||
+    (currentIndex >= currentlyPinnedNo - 1 && !isPinning)
+  )
+    return; // the tr does not need to be moved.
+  if(
+    tabAppendElement == null ||
+		trToMove == null
+  ){
+    throw new Error('error_required_params');
+  }
+  const targetTr = tabAppendElement.querySelector(`tr:nth-child(${currentlyPinnedNo + 1})`); // nth-child starts from 1
+  targetTr.before(trToMove);
+  const minIndex = Math.max(isPinning ? currentlyPinnedNo : currentlyPinnedNo - 1, 0);
+  updateLoggerIndex(currentIndex, minIndex);
+  updateIndexesOnTrsAfterIndex(Math.min(
+    currentlyPinnedNo,
+    currentIndex
+  ));
+}
+
+function updateLoggerIndex(fromIndex, toIndex){
+  if(fromIndex == null || toIndex == null)
+    throw new Error('error_required_params');
+  if(fromIndex === toIndex)
+    return;
+  const movingLogger = managedLoggers.splice(fromIndex, 1);
+  managedLoggers.splice(toIndex, 0, ...movingLogger);
+}
+
 /**
  * Handles action button clicks
  */
 function handleActionButtonClick(e, {
 	actionsMap,
 	closeButton,
+  allTabs,
 } = {}) {
 	e.preventDefault();
 	e.stopPropagation();
 	const btn = e.currentTarget;
+  const action = btn.dataset.action;
+  if(action === "open"){
+    closeButton.click();
+    return;
+  }
 	const tabIndex = Number.parseInt(btn.dataset.tabIndex);
-	const action = btn.dataset.action;
 	const row = btn.closest("tr");
 	const tbody = row.closest("tbody");
 	// Close the dropdown menu
 	const dropdownMenu = row.querySelector(".actions-dropdown-menu");
 	if (dropdownMenu) {
-		dropdownMenu.style.display = "none";
+		dropdownMenu.classList.add('hidden');
 	}
 	// Handle toggle buttons (pin/unpin)
+  const message = actionsMap?.[tabIndex]?.[action];
+  const pinBtn = row.querySelector(".pin-btn");
+  const unpinBtn = row.querySelector(".unpin-btn");
+  const dragCell = row.querySelector('td.slds-cell-wrap');
 	switch (action) {
-		case "open": {
-			closeButton.click();
-			return;
-		}
-		case "pin":
-		case "unpin": {
-			const isPin = action === "pin";
-			row.querySelector(".pin-btn").style.display = isPin
-				? "none"
-				: "inline-block";
-			row.querySelector(".unpin-btn").style.display = isPin
-				? "inline-block"
-				: "none";
-			if (isPin) row.classList.add(PIN_TAB_CLASS);
-			else row.classList.remove(PIN_TAB_CLASS);
-			if (actionsMap?.[tabIndex]?.[action] != null) {
-				sendExtensionMessage(actionsMap[tabIndex][action]);
-			}
+		case CXM_PIN_TAB: {
+      moveTrToGivenIndex({
+        tabAppendElement: tbody,
+        trToMove: row,
+        currentIndex: tabIndex,
+        currentlyPinnedNo: allTabs[TabContainer.keyPinnedTabsNo],
+        isPinning: true,
+      });
+      allTabs[TabContainer.keyPinnedTabsNo]++;
+      // show other button
+			pinBtn.style.display = "none";
+			unpinBtn.style.display = "inline-block";
+      // add pin class
+      dragCell.classList.add(PIN_TAB_CLASS);
+			break;
+    }
+		case CXM_UNPIN_TAB: {
+      moveTrToGivenIndex({
+        tabAppendElement: tbody,
+        trToMove: row,
+        currentIndex: tabIndex,
+        currentlyPinnedNo: allTabs[TabContainer.keyPinnedTabsNo],
+        isPinning: false,
+      });
+      allTabs[TabContainer.keyPinnedTabsNo]--;
+      // show other button
+			pinBtn.style.display = "inline-block";
+			unpinBtn.style.display = "none";
+      // remove pin class
+      dragCell.classList.remove(PIN_TAB_CLASS);
 			break;
 		}
-		case "delete": {
+		case CXM_REMOVE_TAB: {
 			// Extract data from inputs if it's not an empty row
 			const labelInput = row.querySelector(".label");
 			const urlInput = row.querySelector(".url");
-			if (
-				(labelInput?.value || urlInput?.value) &&
-				(actionsMap?.[tabIndex]?.[action] != null)
-			) {
-				sendExtensionMessage(actionsMap[tabIndex][action]);
+			if (labelInput?.value || urlInput?.value) {
+        sendExtensionMessage(message);
 			}
 			// Remove the row from the table if it is NOT the last one
 			if (tbody.lastElementChild?.dataset.rowIndex !== tabIndex) {
@@ -273,26 +364,7 @@ async function removeTr(
 		tabAppendElement,
 		allTabs,
 	});
-	// update indexes of loggers and elements
-	for (let i = removeIndex; i < managedLoggers.length; i++) {
-		const logger = managedLoggers[i];
-		for (
-			const el of [
-				logger.label,
-				logger.url,
-				logger.org,
-			]
-		) {
-			el.dataset.element_index = i;
-		}
-		for (
-			const btn of logger.label.closest("tr").querySelectorAll(
-				"a.awsf-td-button",
-			)
-		) {
-			btn.dataset.tabIndex = i;
-		}
-	}
+  updateIndexesOnTrsAfterIndex(removeIndex);
 }
 
 function checkAddDuplicateStyle(tabAppendElement) {
@@ -487,17 +559,33 @@ export async function createManageTabsModal() {
 			"click",
 			(e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, { actionsMap, closeButton });
+				handleActionButtonClick(e, { 
+          actionsMap,
+          closeButton,
+          allTabs,
+        });
 			},
 		);
 	}
 	// Listen for drag events to save on reorder
 	addEventListener("message", (e) => {
 		const message = e.data;
-		e.source.location.href == globalThis.location.href &&
+		if(e.source.location.href == globalThis.location.href &&
 			message.what === "order" &&
-			message.containerName === "table" &&
+			message.containerName === "table"){
 			readManagedTabsAndSave({ tbody, allTabs });
+      const currentlyPinnedNo = allTabs[TabContainer.keyPinnedTabsNo];
+      const isMovingToPinned   = message.fromIndex > message.toIndex && message.toIndex  <= currentlyPinnedNo;
+      const isMovingToUnpinned = message.fromIndex < message.toIndex && message.fromIndex < currentlyPinnedNo;
+      // the user cannot manually move to pinned / unpinned. update the toIndex
+      if(isMovingToPinned){
+        message.toIndex = currentlyPinnedNo;
+      } else if (isMovingToUnpinned){
+        message.toIndex = currentlyPinnedNo - 1;
+      }
+      updateLoggerIndex(message.fromIndex, message.toIndex);
+      updateIndexesOnTrsAfterIndex(Math.min(message.toIndex, message.fromIndex));
+    }
 	});
 	// Listen when the last row is filled in to add a new empty row
 	for (const el of reduceLoggersToElements()) {

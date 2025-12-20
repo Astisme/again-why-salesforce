@@ -97,7 +97,12 @@ async function handleDrop(e) {
 		targetRow.before(dragSrcEl);
 	}
 	e.target.style.cursor = "grab";
-	postMessage({ what: "order", containerName }, "*");
+	postMessage({
+    what: "order",
+    containerName,
+    fromIndex: dragSrcIndex,
+    toIndex: targetIndex,
+  }, "*");
 }
 
 /**
