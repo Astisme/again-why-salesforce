@@ -308,7 +308,7 @@ export function updateModalBodyOverflow(article = null) {
 	const modalBody = article.closest(
 		".modal-body.scrollable.slds-modal__content.slds-p-around_medium",
 	);
-    // takes into consideration the empty tr at the bottom
+	// takes into consideration the empty tr at the bottom
 	const table = article.querySelector("#sortable-table");
 	modalBody.style.overflowY = "hidden";
 	let otherElementsInArticleHeight = 0;
@@ -317,18 +317,19 @@ export function updateModalBodyOverflow(article = null) {
 			otherElementsInArticleHeight += el.clientHeight;
 		}
 	}
-    const tr = table.querySelector('tr:nth-child(1)');
+	const tr = table.querySelector("tr:nth-child(1)");
 	const hasOverflow = modalBody.clientHeight -
-                        table.clientHeight -
-                        otherElementsInArticleHeight 
-                    <= tr.clientHeight / 2;
+			table.clientHeight -
+			otherElementsInArticleHeight <=
+		tr.clientHeight / 2;
 	modalBody.style.overflowY = hasOverflow ? "auto" : "hidden";
-  if(!hasOverflow)
-  // automatically scrool to top of modal
-  article.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-  });
+	if (!hasOverflow) {
+		// automatically scrool to top of modal
+		article.scrollIntoView({
+			behavior: "smooth",
+			block: "center",
+		});
+	}
 }
 
 /**
@@ -391,7 +392,7 @@ async function addTr(tabAppendElement = null) {
 		index: tabAppendElement.childElementCount,
 	});
 	tabAppendElement.append(tr);
-	updateModalBodyOverflow(tabAppendElement.closest('article'));
+	updateModalBodyOverflow(tabAppendElement.closest("article"));
 	const index = managedLoggers.length;
 	managedLoggers.push(logger);
 	for (
@@ -435,7 +436,7 @@ async function removeTr(
 		tabAppendElement,
 		enable: false,
 	});
-	updateModalBodyOverflow(tabAppendElement.closest('article'));
+	updateModalBodyOverflow(tabAppendElement.closest("article"));
 	if (!indexWasProvided) {
 		return;
 	}
@@ -560,7 +561,7 @@ function trInputListener({
 				org = Tab.extractOrgName(value);
 				element.value = org;
 			}
-            const thisUrlOrg = Tab.extractOrgName(getCurrentHref());
+			const thisUrlOrg = Tab.extractOrgName(getCurrentHref());
 			const isThisOrgTab = org === "" ||
 				org === thisUrlOrg;
 			const wasThisOrgTab = tr.dataset.isThisOrgTab === "true";
@@ -575,21 +576,21 @@ function trInputListener({
 			break;
 	}
 	if (typeMatched) {
-          // check eventual duplicates
-          checkDuplicates({
-            url: url === "" ? undefined : url,
-            org: org === "" ? undefined : org,
-          }, {
-            tabAppendElement,
-          });
+		// check eventual duplicates
+		checkDuplicates({
+			url: url === "" ? undefined : url,
+			org: org === "" ? undefined : org,
+		}, {
+			tabAppendElement,
+		});
 		// update the "open" button href
-      tr.querySelector("[data-action=open]").href = url === ""
-        ? "#" 
-		: Tab.expandURL(
-			url,
-			getCurrentHref(),
-			org,
-		);
+		tr.querySelector("[data-action=open]").href = url === ""
+			? "#"
+			: Tab.expandURL(
+				url,
+				getCurrentHref(),
+				org,
+			);
 	}
 	inputObj[type] = element.value;
 	// if the user is on the last td, add a new tab if both fields are non-empty.
