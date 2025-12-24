@@ -219,7 +219,7 @@ export default class Tab {
 	 *
 	 * @param {string|null} url - The URL to expand.
 	 * @param {string|null} baseUrl - The host to prepend to the URL.
-   * @param {string|null} [org=null] - The Org to inject in the URL 
+	 * @param {string|null} [org=null] - The Org to inject in the URL
 	 * @throws {Error} - Throws an error if either the base URL is not valid, or if the provided URL is empty or invalid.
 	 * @return {string|null} The expanded URL.
 	 *

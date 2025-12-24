@@ -98,11 +98,11 @@ async function handleDrop(e) {
 	}
 	e.target.style.cursor = "grab";
 	postMessage({
-    what: "order",
-    containerName,
-    fromIndex: dragSrcIndex,
-    toIndex: targetIndex,
-  }, "*");
+		what: "order",
+		containerName,
+		fromIndex: dragSrcIndex,
+		toIndex: targetIndex,
+	}, "*");
 }
 
 /**

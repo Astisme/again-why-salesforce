@@ -3,6 +3,9 @@ import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
+	CXM_PIN_TAB,
+	CXM_REMOVE_TAB,
+	CXM_UNPIN_TAB,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
@@ -23,9 +26,6 @@ import {
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
 	USE_LIGHTNING_NAVIGATION,
-  CXM_PIN_TAB,
-  CXM_UNPIN_TAB,
-  CXM_REMOVE_TAB,
 } from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -975,7 +975,10 @@ export async function generateSldsModal({
 	heading.style.marginLeft = "0.5rem";
 	titleContainer.appendChild(heading);
 	const legend = document.createElement("div");
-	legend.classList.add("required-legend");
+	legend.classList.add(
+		"required-legend",
+		"slds-p-top--none",
+	);
 	article.appendChild(legend);
 	const abbr = document.createElement("abbr");
 	abbr.classList.add("slds-required");
@@ -1737,6 +1740,10 @@ async function addModalExplainer(article, explainerKey) {
 	explainerEl.style.display = "flex";
 	explainerEl.style.justifyContent = "center";
 	explainerEl.style.textAlign = "center";
+	explainerEl.classList.add(
+		"slds-p-around_medium",
+		"slds-p-bottom--none",
+	);
 	article.prepend(explainerEl);
 	return explainerEl;
 }
@@ -2190,7 +2197,7 @@ export async function createManageTabRow({
 	// Dropdown toggle functionality
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
-    dropdownMenu.classList.toggle('hidden');
+		dropdownMenu.classList.toggle("hidden");
 	});
 	// Prevent dropdown from closing when clicking inside
 	dropdownMenu.addEventListener("click", (e) => {
@@ -2332,15 +2339,15 @@ export async function generateManageTabsModal(tabs = [], {
 		actionsMap[i] = {
 			[CXM_PIN_TAB]: {
 				what: CXM_PIN_TAB,
-        ...tab,
+				...tab,
 			},
 			[CXM_UNPIN_TAB]: {
 				what: CXM_UNPIN_TAB,
-        ...tab,
+				...tab,
 			},
 			[CXM_REMOVE_TAB]: {
 				what: CXM_REMOVE_TAB,
-        ...tab,
+				...tab,
 			},
 		};
 	}
