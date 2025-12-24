@@ -1794,6 +1794,19 @@ function createTableCell({
 	return { td, input };
 }
 
+/**
+ * Generates a modal with the given Tabs. Each row can be selected using a checkbox
+ * @param {Tab[]} [tabs=[]] - the Tab array that needs to be shown in the modal
+ * @param {Object} [param1={}] an object with the following keys
+ * @param {string} [param1.title="export_tabs"] the title so that the modal can be recognized
+ * @param {string} [param1.saveButtonLabel="export"] the label used for the submit button
+ * @param {string} [param1.explainer="select_tabs_export"] a brief explanation of what the modal is supposed to do
+ * @return {Object} with these keys
+ *  - modalParent: containing the element to append to show the modal,
+ *  - saveButton: the submit button on which to add related submit logic,
+ *  - closeButton: the cancel button which removes the modal,
+ *  - getSelectedTabs: function to retrieve all currently selected Tabs,
+ */
 export async function generateSldsModalWithTabList(tabs = [], {
 	title = "export_tabs",
 	saveButtonLabel = "export",
@@ -1913,6 +1926,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 
 /**
  * Creates a drag handle SVG icon for reordering rows
+ * @param {boolean} [draggable=false] - whether the handle should be set as draggable or not
  * @return {SVGSVGElement} The drag handle SVG element
  */
 function createDragHandle(draggable = false) {
@@ -2030,6 +2044,8 @@ function createStyledButton(
  * @param {number} [config.index=0] The row index for data-row-index
  * @param {boolean} [config.pinned=false] whether the Tab is pinned
  * @param {boolean} [config.draggable=false] whether the tr is draggable
+ * @param {boolean} [config.disabled=true] whether the tr elements should be disabled
+ * @param {boolean} [config.isThisOrgTab=true] whether the tr contains a Tab related to this Org
  * @return {Promise<HTMLTableRowElement>} The created tr element
  */
 export async function createManageTabRow({

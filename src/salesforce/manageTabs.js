@@ -27,19 +27,31 @@ let focusedIndex = 0;
 let managedLoggers = [];
 const manageTabsButtons = {};
 
+/**
+ * Returns the value from the given selector
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TrHTMLElement} [param0.tr=null] - the tr where to selector is located
+ * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
+ * @return undefined (when the value is null or "") or the trimmed value
+ */
 function getInputValue({
 	tr = null,
 	selector = "",
 } = {}) {
 	const value = tr?.querySelector(selector).value.trim();
-	return value === "" ? undefined : value;
+	return value == null || value === "" ? undefined : value;
 }
 
+/**
+ * Finds all the trs and their inputs to update the currently saved Tabs
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TbodyHTMLElement} [param0.tbody=document.querySelector("#sortable-table tbody")] - the tbody inside the modal where the trs can be found
+ * @param {TabContainer} [param0.allTabs=await ensureAllTabsAvailability()] - the TabContainer instance
+ */
 async function readManagedTabsAndSave({
-	tbody = null,
+	tbody = document.querySelector("#sortable-table tbody"),
 	allTabs = null,
 } = {}) {
-	tbody = tbody ?? document.querySelector("#sortable-table tbody");
 	// read all Tabs in the tbody
 	const tableTabs = [];
 	for (const tr of tbody.querySelectorAll("tr")) {
@@ -51,8 +63,8 @@ async function readManagedTabsAndSave({
 			}));
 		}
 	}
+    allTabs = allTabs ?? await ensureAllTabsAvailability();
 	// send message to save the Tabs as they were read
-	allTabs = allTabs ?? await ensureAllTabsAvailability();
 	await allTabs.replaceTabs(tableTabs, {
 		resetTabs: true,
 		removeOrgTabs: true,
@@ -61,6 +73,10 @@ async function readManagedTabsAndSave({
 	sf_afterSet({ tabs: tableTabs });
 }
 
+/**
+ * Updates all the indexes on every tr after index fromIndex
+ * @param {number} [fromIndex=0] the first index from where to start updating
+ */
 function updateIndexesOnTrsAfterIndex(fromIndex = 0){
 	// update indexes of loggers and elements
 	for (let i = fromIndex; i < managedLoggers.length; i++) {
@@ -85,6 +101,17 @@ function updateIndexesOnTrsAfterIndex(fromIndex = 0){
 	}
 }
 
+/**
+ * Moves a given Tr the currentlyPinnedNo index
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where the trs are appended to
+ * @param {TrHTMLElement} [param0.trToMove=null] - the tr that needs to be moved to the currentlyPinnedNo index
+ * @param {number} [param0.currentIndex=null] - the index where the tr is currently located
+ * @param {number} [param0.currentlyPinnedNo=null] - the index where the tr has to be moved to
+ * @param {boolean} [param0.isPinning=true] - whether the user is pinning or unpinning
+ * @throws Error when currentIndex or currentlyPinnedNo are null
+ * @throws Error (after preliminary check) when tabAppendElement or trToMove are null
+ */
 function moveTrToGivenIndex({
   tabAppendElement = null,
   trToMove = null,
@@ -119,6 +146,13 @@ function moveTrToGivenIndex({
   ));
 }
 
+/**
+ * TODO move up
+ * Takes care of keeping the managedLoggers synced with the Tabs in the TabContainer instance
+ * @param {number} fromIndex - the index where the logger is currently located
+ * @param {number} toIndex - the index where the logger has to be moved to
+ * @throws Error when either fromIndex or toIndex are missing
+ */
 function updateLoggerIndex(fromIndex, toIndex){
   if(fromIndex == null || toIndex == null)
     throw new Error('error_required_params');
@@ -129,7 +163,12 @@ function updateLoggerIndex(fromIndex, toIndex){
 }
 
 /**
- * Handles action button clicks
+ * Handles action button clicks (actions are the ones on the right of each row)
+ * @param {event} e - the event which had this function called
+ * @param {Object} [param1={}] an object with the following keys
+ * @param {Map} param1.actionsMap - the map of the actions, separated by indexes and action name
+ * @param {AHTMLElement} param1.closeButton - the button that closes the popup
+ * @param {TabContainer} param1.allTabs - the TabContainer instance
  */
 function handleActionButtonClick(e, {
 	actionsMap,
@@ -212,8 +251,11 @@ function handleActionButtonClick(e, {
 /**
  * Enables or disables the elements of the last td available in the popup.
  *
- * @param {boolean} [enable=true] - if enabling or disabling the elements in the last td
- * @param {HTMLElement} [tr] - the tr to which the function has to work. default to the last element on the tabAppendElement
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody from where to find the last tr
+ * @param {boolean} [param0.enable=true] - if enabling or disabling the elements in the last td
+ * @param {TrHTMLElement} [param0.tr=null] - the tr to which the function has to work. default to the last element on the tabAppendElement
+ * @throws Error when tabAppendElement == null && tr == null because we cannot find any tr to work on
  */
 function updateTabAttributes({
 	tabAppendElement = null,
@@ -244,6 +286,12 @@ function updateTabAttributes({
 	tr.querySelector("td:has(> svg)").dataset.draggable = enable;
 }
 
+/**
+ * Enables or disables scrolling for the modal body based on how much room is left in the modal
+ * TODO UPDATE for smaller screens
+ * @param {null} [article=null] - the article inside the modal body
+ * @throws Error when article == null
+ */
 export function updateModalBodyOverflow(article = null) {
 	if (article == null) {
 		throw new Error("error_required_params");
@@ -282,8 +330,9 @@ function checkSaveTab(e) {
  * - Sets a custom data attribute (`data-element_index`) to the current length of the `loggers` array.
  * - Adds a focusout event listener to call `checkSaveTab` when the element loses focus.
  *
- * @param {HTMLElement} element - The DOM element to attach event listeners to.
+ * @param {HTMLElement} element - The DOM input element to attach event listeners to.
  * @param {Function} listener - The function to be called on "input" events for the element.
+ * @param {number} index - the index where the element is currently placed at
  */
 function setInfoForDrag(element, listener, index) {
 	element.dataset.element_index = index;
@@ -300,8 +349,12 @@ function setInfoForDrag(element, listener, index) {
 
 /**
  * Adds a new empty tab at the bottom of the popup and enables the previously last child's delete button.
+ * @param {TbodyHTMLElement} [tabAppendElement=null] - the tbody where to add the new tr
+ * @throws Error when tabAppendElement == null
  */
-async function addTr(tabAppendElement) {
+async function addTr(tabAppendElement = null) {
+  if(tabAppendElement == null)
+    throw new Error('error_required_params');
 	// if list is empty, there's nothing to enable
 	if (tabAppendElement.childElementCount >= 1) {
 		updateTabAttributes({ tabAppendElement });
@@ -331,18 +384,24 @@ async function addTr(tabAppendElement) {
 
 /**
  * Removes the last empty tab at the bottom of the popup and disables the newly last child's delete button.
+ * @param {TbodyHTMLElement} [tabAppendElement=null] - the tbody from which to remove the tr
+ * @param {TrHTMLElement} [trToRemove=tabAppendElement?.lastChild] - the tr to be removed
+ * @param {number} [removeIndex=managedLoggers.length - 1] - the index of the tr to be removed
+ * @throws Error when tabAppendElement == null
  */
 async function removeTr(
-	tabAppendElement,
-	trToRemove = null,
+	tabAppendElement = null,
+	trToRemove = tabAppendElement?.querySelector("tr:last-child"),
 	removeIndex = managedLoggers.length - 1,
 ) {
+  if(tabAppendElement == null)
+    throw new Error('error_required_params');
 	// if list is empty, there's nothing to disable
 	if (tabAppendElement.childElementCount < 2) {
 		return;
 	}
 	const indexWasProvided = removeIndex !== managedLoggers.length - 1;
-	(trToRemove ?? tabAppendElement.lastChild).remove();
+	trToRemove.remove();
 	managedLoggers.splice(removeIndex, 1);
 	updateTabAttributes({
 		tabAppendElement,
@@ -367,6 +426,10 @@ async function removeTr(
   updateIndexesOnTrsAfterIndex(removeIndex);
 }
 
+/**
+ * Adds a style element with a selector for duplicate class (if it does not yet exist)
+ * @param {TbodyHTMLElement} tabAppendElement - the tbody element where to append the style
+ */
 function checkAddDuplicateStyle(tabAppendElement) {
 	const styleId = "awsf-warning";
 	const style = tabAppendElement.querySelector(`#${styleId}`);
@@ -379,6 +442,14 @@ function checkAddDuplicateStyle(tabAppendElement) {
 	}
 }
 
+/**
+ * Checks if there are duplicates for a given Tab. If a duplicate exists, adds `duplicate` to the classList
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {string} param0.url - the URL of the Tab
+ * @param {string} param0.org - the Org of the Tab
+ * @param {Object} [param1={}] an object with the following keys
+ * @param {TbodyHTMLElement} param1.tabAppendElement - the tbody to which the trs are appended to
+ */
 async function checkDuplicates({
 	url,
 	org,
@@ -420,7 +491,10 @@ async function checkDuplicates({
 /**
  * Listens for input changes on the label and URL fields and updates the corresponding values.
  *
- * @param {string} type - The type of input field ("label", "url" or "org").
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {null} [param0.tabAppendElement=null] - the tbody where to append the tr
+ * @param {string} [param0.type="label"]  - The type of input field ("label", "url" or "org").
+ * @throws Error when tabAppendElement == null
  */
 function trInputListener({
 	tabAppendElement = null,
@@ -505,7 +579,7 @@ function trInputListener({
 
 /**
  * Reduces an array of loggers to an array of element objects
- * @returns {Array} Array of objects with element and type properties
+ * @return {Array} Array of objects with element and type properties
  */
 function reduceLoggersToElements() {
 	return managedLoggers.reduce((acc, logger) => {
