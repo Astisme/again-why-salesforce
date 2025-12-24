@@ -102,7 +102,7 @@ async function handleDrop(e) {
 		containerName,
 		fromIndex: dragSrcIndex,
 		toIndex: targetIndex,
-	}, "*");
+	}, globalThis.location.href);
 }
 
 /**

@@ -2294,6 +2294,7 @@ export async function generateManageTabsModal(tabs = [], {
 		}
 		showAllTabsButton.setAttribute("disabled", true);
 		hideOtherOrgTabsButton.removeAttribute("disabled");
+        updateModalBodyOverflow(article);
 	});
 	hideOtherOrgTabsButton.addEventListener("click", () => {
 		for (
@@ -2305,6 +2306,7 @@ export async function generateManageTabsModal(tabs = [], {
 		}
 		hideOtherOrgTabsButton.setAttribute("disabled", true);
 		showAllTabsButton.removeAttribute("disabled");
+        updateModalBodyOverflow(article);
 	});
 	const loggers = []; // track input changes
 	const actionsMap = {}; // map to store action handlers for each row
@@ -2368,7 +2370,6 @@ export async function generateManageTabsModal(tabs = [], {
 	allDropMenus.push(lastMenu);
 	loggers.push(lastLogger);
 	tbody.appendChild(emptyRow);
-	updateModalBodyOverflow(article);
 	// Close dropdown when clicking outside
 	for (const { tr, dropdownButton } of allTrs) {
 		tr.addEventListener("click", (e) => {

@@ -518,10 +518,76 @@ async function checkDuplicates({
 }
 
 /**
+ * Adds a new tr if the user has no more empty trs and removes the last empty tr if the user has an empty tr before it
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {Object} [param0.inputObj=managedLoggers[focusedIndex].last_input] - the last_input object of the currently focused logger
+ * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append or remove the tr
+ * @throws Error when tabAppendElement == null
+ */
+function checkAddRemoveLastTr({
+  inputObj = managedLoggers[focusedIndex].last_input,
+  tabAppendElement,
+} = {}){
+	if (tabAppendElement == null) {
+		throw new Error("error_required_params");
+	}
+	// if the user is on the last td, add a new tab if both fields are non-empty.
+	if (
+		focusedIndex === (managedLoggers.length - 1) &&
+		(inputObj.label && inputObj.url)
+	) {
+		addTr(tabAppendElement);
+	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
+	else if (
+		focusedIndex === (managedLoggers.length - 2) &&
+		(!inputObj.label || !inputObj.url)
+	) {
+		removeTr(tabAppendElement);
+	}
+}
+
+/**
+ * Checks if the Tab passed already exists and is a duplicate + updates the href button on the tr
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {string} [param0.url=null] - the URL of the Tab
+ * @param {string} [param0.org=null] - the Org of the Tab
+ * @param {Object} [param1={}] an object with the following keys
+ * @param {TbodyHTMLElement} [param1.tabAppendElement=null] - the tbody where to find the trs
+ * @param {TrHTMLElement} [param1.tr=null] - the tr where the Tab is shown
+ * @throws Error when tabAppendElement == null or tr == null
+ */
+function performAfterChecks({ 
+  url = null,
+  org = null,
+} = {}, {
+  tabAppendElement = null,
+  tr = null,
+} = {}){
+	if (tabAppendElement == null || tr == null) {
+		throw new Error("error_required_params");
+	}
+    // check eventual duplicates
+    checkDuplicates({
+        url: url === "" ? undefined : url,
+        org: org === "" ? undefined : org,
+    }, {
+        tabAppendElement,
+    });
+    // update the "open" button href
+    tr.querySelector("[data-action=open]").href = url == null || url === ""
+        ? "#"
+        : Tab.expandURL(
+            url,
+            getCurrentHref(),
+            org,
+        );
+}
+
+/**
  * Listens for input changes on the label and URL fields and updates the corresponding values.
  *
  * @param {Object} [param0={}] an object with the following keys
- * @param {null} [param0.tabAppendElement=null] - the tbody where to append the tr
+ * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append the tr
  * @param {string} [param0.type="label"]  - The type of input field ("label", "url" or "org").
  * @throws Error when tabAppendElement == null
  */
@@ -542,7 +608,6 @@ function trInputListener({
 	let url = value;
 	let org = value;
 	let typeMatched = false;
-	// check if the user copied the url
 	switch (type) {
 		case "url": {
 			org = inputObj.org;
@@ -576,36 +641,16 @@ function trInputListener({
 			break;
 	}
 	if (typeMatched) {
-		// check eventual duplicates
-		checkDuplicates({
-			url: url === "" ? undefined : url,
-			org: org === "" ? undefined : org,
-		}, {
-			tabAppendElement,
-		});
-		// update the "open" button href
-		tr.querySelector("[data-action=open]").href = url === ""
-			? "#"
-			: Tab.expandURL(
-				url,
-				getCurrentHref(),
-				org,
-			);
+        performAfterChecks({ url, org }, {
+          tabAppendElement,
+          tr,
+        });
 	}
-	inputObj[type] = element.value;
-	// if the user is on the last td, add a new tab if both fields are non-empty.
-	if (
-		focusedIndex === (managedLoggers.length - 1) &&
-		(inputObj.label && inputObj.url)
-	) {
-		addTr(tabAppendElement);
-	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
-	else if (
-		focusedIndex === (managedLoggers.length - 2) &&
-		(!inputObj.label || !inputObj.url)
-	) {
-		removeTr(tabAppendElement);
-	}
+    inputObj[type] = element.value;
+    checkAddRemoveLastTr({
+      inputObj,
+      tabAppendElement,
+    });
 }
 
 /**
@@ -650,6 +695,7 @@ export async function createManageTabsModal() {
 		".hide_other_org_tabs",
 	);
 	getModalHanger().appendChild(modalParent);
+    updateModalBodyOverflow(modalParent.querySelector('article'));
 	// Setup drag functionality for the manage tabs table
 	setupDrag();
 	saveButton.addEventListener("click", (e) => {
