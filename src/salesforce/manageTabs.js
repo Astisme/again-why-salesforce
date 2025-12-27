@@ -727,17 +727,6 @@ export async function createManageTabsModal() {
 			message.containerName === "table"
 		) {
 			readManagedTabsAndSave({ tbody, allTabs });
-			const currentlyPinnedNo = allTabs[TabContainer.keyPinnedTabsNo];
-			const isMovingToPinned = message.fromIndex > message.toIndex &&
-				message.toIndex <= currentlyPinnedNo;
-			const isMovingToUnpinned = message.fromIndex < message.toIndex &&
-				message.fromIndex < currentlyPinnedNo;
-			// the user cannot manually move to pinned / unpinned. update the toIndex
-			if (isMovingToPinned) {
-				message.toIndex = currentlyPinnedNo;
-			} else if (isMovingToUnpinned) {
-				message.toIndex = currentlyPinnedNo - 1;
-			}
 			updateLoggerIndex(message.fromIndex, message.toIndex);
 			updateIndexesOnTrsAfterIndex(
 				Math.min(message.toIndex, message.fromIndex),

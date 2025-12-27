@@ -1,4 +1,24 @@
 {
+	"help_tab_actions": {
+		"message": "Here you'll find a submenu to perform different actions on the $tab in the same row.",
+		"description": "[manage-tabs] explain what the arrow on the right contains"
+	},
+	"help_tab_org": {
+		"message": "This is the Salesforce $org name where this $tab will be shown. If left empty, this $tab will be shown in every Salesforce $org you visit.",
+		"description": "[manage-tabs] explain what the Tab Org is"
+	},
+	"help_tab_url": {
+		"message": "This is the (shortened) link where you'll be redirected when clicking on this $tab",
+		"description": "[manage-tabs] explain what the Tab URL is"
+	},
+	"help_tab_label": {
+		"message": "This is the common name you'll use to remember where this $tab will take you.",
+		"description": "[manage-tabs] explain what the Tab label is"
+	},
+	"help_drag_tabs": {
+		"message": "You may reorder your $tabs by using the dots and dragging it.",
+		"description": "[manage-tabs] explain how to drag the Tabs around"
+	},
 	"actions": {
 		"message": "Actions",
 		"description": "Dropdown menu label for tab actions"

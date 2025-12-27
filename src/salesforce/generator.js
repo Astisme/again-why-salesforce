@@ -1576,12 +1576,21 @@ export async function generateUpdateTabModal(label, url, org) {
  * @param {string[]} classList - Additional CSS classes
  * @return {HTMLTableCellElement} The created th element
  */
-function createTableHeader(label = "", ariaLabel = "", classList = []) {
+function createTableHeader(label = "", ariaLabel = "", classList = [], info = {}) {
 	const th = document.createElement("th");
 	th.scope = "col";
 	th.classList.add(...classList);
 	th.setAttribute("aria-label", ariaLabel);
-	th.textContent = label;
+    const div = document.createElement('div');
+    th.append(div);
+	div.textContent = label;
+    if(Object.keys(info).length > 0){
+      th.style.overflow = "visible";
+      div.style.display = "flex";
+      div.style.alignItems = "center";
+      div.style.justifyContent = "space-around";
+      div.append(generateHelpWith_i_popup(info).root);
+    }
 	return th;
 }
 
@@ -1609,7 +1618,12 @@ function createTable(headers = []) {
 	thead.appendChild(tr);
 	for (const header of headers) {
 		tr.appendChild(
-			createTableHeader(header.label, header.ariaLabel, header.classList),
+			createTableHeader(
+              header.label,
+              header.ariaLabel,
+              header.classList,
+              header.info,
+            ),
 		);
 	}
 	const tbody = document.createElement("tbody");
@@ -2252,11 +2266,41 @@ export async function generateManageTabsModal(tabs = [], {
 	const divParent = createModalContentContainer(article);
 	// Table header with drag handle column
 	const headers = [
-		{ label: "" }, // drag handle column
-		{ label: await translator.translate("tab_label") },
-		{ label: await translator.translate("tab_url") },
-		{ label: await translator.translate("tab_org") },
-		{ label: await translator.translate("actions") },
+		{ label: "", info: 
+            {
+                text: await translator.translate("help_drag_tabs"),
+                link: "",
+              showRight: true,
+            },
+        }, // drag handle column
+		{ label: await translator.translate("tab_label"), info:
+			{
+				text: await translator.translate("help_tab_label"),
+				link: "",
+              showBottom: true,
+			},
+		},
+		{ label: await translator.translate("tab_url"), info:
+			{
+				text: await translator.translate("help_tab_url"),
+				link: "",
+              showBottom: true,
+			},
+		},
+		{ label: await translator.translate("tab_org"), info:
+			{
+				text: await translator.translate("help_tab_org"),
+				link: "",
+              showBottom: true,
+			},
+		},
+		{ label: await translator.translate("actions"), info:
+			{
+				text: await translator.translate("help_tab_actions"),
+				link: "testlinkactions",
+              showLeft: true,
+			},
+		},
 	];
 	const { table, tbody } = createTable(headers);
 	divParent.appendChild(table);
@@ -2387,5 +2431,88 @@ export async function generateManageTabsModal(tabs = [], {
 		actionsMap,
 		saveButton,
 		loggers,
+	};
+}
+
+/**
+ * Generates an i icon which includes information and a possibly a link to the resource
+ * @return {Object} used by the `help.js` class
+ */
+export function generateHelpWith_i_popup({
+  text = null,
+  link = null,
+  showTop = false,
+  showBottom = false,
+  showRight = false,
+  showLeft = false,
+} = {}){
+    const wasCalledWithParams = text != null || link != null;
+	const root = document.createElement("div");
+	root.className = "help-icon";
+	const anchor = document.createElement("a");
+	root.append(anchor);
+	anchor.className = "button";
+	anchor.setAttribute("aria-describedby", "tooltip");
+    if(wasCalledWithParams && link != null && link !== "") anchor.href = link;
+	const svgNS = "http://www.w3.org/2000/svg";
+	const svg = document.createElementNS(svgNS, "svg");
+    anchor.append(svg);
+	svg.setAttribute("focusable", "false");
+	svg.setAttribute("aria-hidden", "true");
+	svg.setAttribute("viewBox", "0 0 520 520");
+	svg.setAttribute("class", "slds-button__icon");
+	const g = document.createElementNS(svgNS, "g");
+	svg.appendChild(g);
+	const path = document.createElementNS(svgNS, "path");
+	g.appendChild(path);
+	path.setAttribute(
+		"d",
+		"M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
+	);
+	const assistive = document.createElement("span");
+    anchor.append(assistive);
+	assistive.className = "assistive";
+	assistive.hidden = true;
+	const tooltip = document.createElement("div");
+	root.append(tooltip);
+	tooltip.className = "tooltip";
+	tooltip.setAttribute("role", "tooltip");
+	let slot;
+    if(wasCalledWithParams){
+      tooltip.dataset.showTop = showTop || (!showTop && !showBottom && !showRight && !showLeft);
+      tooltip.dataset.showBottom = showBottom;
+      tooltip.dataset.showRight = showRight;
+      tooltip.dataset.showLeft = showLeft;
+      slot = document.createElement('span');
+      slot.textContent = text;
+      const linkid = `${EXTENSION_NAME}-helpcss`;
+      if(!document.getElementById(linkid)){
+        const link = document.createElement('link');
+        link.id = linkid;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = BROWSER.runtime.getURL('/components/help/help.css');
+        document.head.appendChild(link);
+      }
+    } else {
+      slot = document.createElement("slot");
+      slot.name = "text";
+      slot.textContent = "Nothing to see here...";
+    }
+    tooltip.append(slot);
+	const linkTip = document.createElement("div");
+	tooltip.append(linkTip);
+	linkTip.classList.add("link-tip", "hidden");
+    (async () => {
+      const translator = await ensureTranslatorAvailability();
+      assistive.textContent = await translator.translate("help");
+      linkTip.textContent = await translator.translate("help_tip_click_link");
+    })()
+	return {
+		root,
+		anchor,
+		tooltip,
+		linkTip,
+        slot,
 	};
 }
