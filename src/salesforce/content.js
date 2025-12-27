@@ -270,7 +270,7 @@ async function init(tabs = null) {
 					{
 						hide: !(row.org == null || row.org === orgName),
 						isPinned: i < pinnedItems,
-                        index: i,
+						index: i,
 					},
 				),
 			);

@@ -133,7 +133,6 @@ document.getElementById("theme-selector").addEventListener(
 	switchTheme,
 );
 
-
 /**
  * Sends a message that will start the export procedure.
  */
@@ -162,7 +161,9 @@ function _sliceBeforeSeparator(i18n) {
  */
 async function addShortcutText(button, shortcut) {
 	return await translator.translate([
-		_sliceBeforeSeparator(button.dataset[translator.translateAttributeDataset]),
+		_sliceBeforeSeparator(
+			button.dataset[translator.translateAttributeDataset],
+		),
 		`(${shortcut})`,
 	]);
 }
@@ -171,7 +172,10 @@ const importBtn = document.getElementById("import");
 /**
  * Sends a message that will create an import modal in the Salesforce page.
  */
-importBtn.addEventListener("click", () => sendExtensionMessage({ what: "add" }, close));
+importBtn.addEventListener(
+	"click",
+	() => sendExtensionMessage({ what: "add" }, close),
+);
 const exportBtn = document.getElementById("export");
 exportBtn.addEventListener("click", pop_exportHandler);
 const settingsBtn = document.getElementById("open-settings");
@@ -207,8 +211,8 @@ for (const ac of availableCommands) {
 const manageTabsBtn = document.getElementById("manage-tabs");
 /**
  * Sends a message that will create the manage Tabs modal in the Salesforce page.
- */ 
+ */
 manageTabsBtn.addEventListener(
 	"click",
-    () => sendExtensionMessage({ what: CXM_MANAGE_TABS }, close),
+	() => sendExtensionMessage({ what: CXM_MANAGE_TABS }, close),
 );

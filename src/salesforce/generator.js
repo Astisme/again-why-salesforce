@@ -342,7 +342,7 @@ export function generateRowTemplate(
 	{
 		hide = false,
 		isPinned = false,
-        index = 0,
+		index = 0,
 	},
 ) {
 	const miniURL = Tab.minifyURL(url);
@@ -357,9 +357,9 @@ export function generateRowTemplate(
 		"navexConsoleTabItem",
 		EXTENSION_NAME,
 	);
-    li.draggable = "true";
+	li.draggable = "true";
 	li.dataset.auraClass = "navexConsoleTabItem";
-    li.dataset.rowIndex = index;
+	li.dataset.rowIndex = index;
 	if (hide) {
 		li.style.display = "none";
 	}

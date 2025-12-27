@@ -675,12 +675,12 @@ function reduceLoggersToElements() {
  * @param {Object} message the object created from the drag handler
  * @param {Object} scaffold the object with tbody and allTabs ready to be used
  */
-function reorderTabsTable(message, scaffold){
-  readManagedTabsAndSave(scaffold);
-  updateLoggerIndex(message.fromIndex, message.toIndex);
-  updateIndexesOnTrsAfterIndex(
-      Math.min(message.toIndex, message.fromIndex),
-  );
+function reorderTabsTable(message, scaffold) {
+	readManagedTabsAndSave(scaffold);
+	updateLoggerIndex(message.fromIndex, message.toIndex);
+	updateIndexesOnTrsAfterIndex(
+		Math.min(message.toIndex, message.fromIndex),
+	);
 }
 
 /**
@@ -712,9 +712,9 @@ export async function createManageTabsModal() {
 	updateModalBodyOverflow(modalParent.querySelector("article"));
 	// Setup drag functionality for the manage tabs table
 	setupDragForTable((mess) => reorderTabsTable(mess, { tbody, allTabs }));
-    closeButton.addEventListener("click", _ => {
-        setupDragForUl(reorderTabsUl);
-    });
+	closeButton.addEventListener("click", (_) => {
+		setupDragForUl(reorderTabsUl);
+	});
 	saveButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		readManagedTabsAndSave({ tbody, allTabs });
