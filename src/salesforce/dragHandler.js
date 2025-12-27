@@ -1,4 +1,4 @@
-import { ensureAllTabsAvailability, TabContainer } from "./tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import { EXTENSION_NAME } from "/constants.js";
 
 let table;
@@ -6,7 +6,8 @@ let ul;
 let container;
 let closestTag;
 let containerName;
-let dragSrcEl = null;
+let dragSrcIndex = null;
+let dragElements = null; //callback
 
 /**
  * Handles the dragstart event on draggable elements.
@@ -18,11 +19,12 @@ let dragSrcEl = null;
  */
 function handleDragStart(e) {
 	// Check if the dragged element is an icon (or any other specific element) within the row
-	if (e.target.dataset.draggable === "true") {
+	if (e.target.draggable === "true" || e.target.dataset.draggable === "true") {
 		e.target.style.cursor = "grabbing";
-		dragSrcEl = e.target.closest(closestTag); // Find the dragged row
+		dragSrcIndex = e.target.closest(closestTag);
+        dragSrcIndex = dragSrcIndex.dataset.rowIndex; // Find the dragged row
 		e.dataTransfer.effectAllowed = "move";
-		e.dataTransfer.setData("text/html", dragSrcEl);
+		//e.dataTransfer.setData("text/html", dragSrcEl);
 	} else {
 		// Prevent dragging if the dragged element is not the specified element
 		e.preventDefault();
@@ -66,20 +68,19 @@ async function handleDrop(e) {
 	let targetRow = e.target.closest(closestTag); // Get the target row
 	if (
 		// moving in the same spot
-		dragSrcEl == this ||
+		dragSrcIndex < 0 ||
 		targetRow == null ||
 		// moving somewhere incorrect
 		targetRow.tagName.toLowerCase() != closestTag ||
+        targetRow.dataset.rowIndex < 0 ||
 		// moving over a non draggable element
 		!targetRow.draggable
 	) {
 		return false;
 	}
 	// Swap the positions of the dragged row and the target row
-	const parent = targetRow.parentNode; // Get the parent node (tbody || ul)
-	const childrenArr = [...parent.children];
-	let targetIndex = childrenArr.indexOf(targetRow); // Get the index of the target row
-	const dragSrcIndex = childrenArr.indexOf(dragSrcEl); // Get the index of the dragged row
+	let targetIndex = targetRow.dataset.rowIndex; // Get the index of the target row
+	const dragSrcEl = container.querySelector(`${closestTag}[data-row-index="${dragSrcIndex}"]`); // Get the of the dragged row
 	const pinnedNumber =
 		(await ensureAllTabsAvailability())[TabContainer.keyPinnedTabsNo];
 	const isMovingRight = targetIndex > dragSrcIndex;
@@ -96,23 +97,26 @@ async function handleDrop(e) {
 		)
 	) {
 		// KO illegal movement
-		targetRow = parent.querySelector(
+		targetRow = container.querySelector(
 			`${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`,
 		);
-		targetIndex = childrenArr.indexOf(targetRow);
-	}
+		targetIndex = Array.from(this.children).indexOf(targetRow);
+	} else {
+      // get targetRow from the parent node
+      targetRow = container.querySelector(`${closestTag}[data-row-index="${targetIndex}"]`);
+    }
 	if (isMovingRight) {
 		targetRow.after(dragSrcEl);
 	} else {
 		targetRow.before(dragSrcEl);
 	}
 	e.target.style.cursor = "grab";
-	postMessage({
+	dragElements({
 		what: "order",
 		containerName,
 		fromIndex: dragSrcIndex,
 		toIndex: targetIndex,
-	}, globalThis.location.href);
+	});
 }
 
 /**
@@ -125,17 +129,28 @@ function createListeners() {
 	container.addEventListener("drop", handleDrop, false); // when element is dropped
 }
 
+function setupDrag(callback){
+	container = table ?? ul;
+	closestTag = table == null ? "li" : "tr";
+	containerName = table == null ? "ul" : "table";
+    dragElements = callback;
+	if (container == null) setTimeout(() => setupDrag(), 500);
+	else createListeners();
+}
+
 /**
  * Sets up the drag-and-drop functionality by initializing the container and event listeners.
  * It selects the appropriate container based on the presence of the table element or the tab bar.
  * If the container is not found, it retries after 500ms.
  */
-export function setupDrag() {
-	table = document.getElementById("sortable-table");
+export function setupDragForUl(callback) {
 	ul = document.getElementById(EXTENSION_NAME);
-	container = table ?? ul;
-	closestTag = table == null ? "li" : "tr";
-	containerName = table == null ? "ul" : "table";
-	if (container == null) setTimeout(() => setupDrag(), 500);
-	else createListeners();
+    table = null;
+    setupDrag(callback);
+}
+
+export function setupDragForTable(callback){
+	table = document.getElementById("sortable-table");
+    ul = null;
+    setupDrag(callback);
 }
