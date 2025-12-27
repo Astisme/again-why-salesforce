@@ -49,6 +49,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 1. Updated the translator to increment the cache when it finds new translations while using placeholders
 2. Updated css selector to check whether a Tab is pinned or not
 3. Heavily refactored `src/settigs/options.js`
+4. `dragHanler` now does not send messages, improving security
 
 ### Settings
 
@@ -61,6 +62,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 ## 💥 Removed
 
+1. Removed difficult to find popup Tab management (#122)
 1. Unused static method Tab.update() (was only used in tests)
 1. Unused static methods in TabContainer (were only used in tests)
 
