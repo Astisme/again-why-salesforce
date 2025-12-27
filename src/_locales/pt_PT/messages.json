@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Ações",
+		"description": "Rótulo do menu suspenso para ações da Tab"
+	},
 	"active": {
 		"message": "Ativo",
 		"description": "Usado em seletores para estado ativo"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menu-de-contexto]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] abrir o modal para gerir as $tabs guardadas diretamente na página de configuração do Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Mover Tab",
@@ -627,6 +635,10 @@
 		"message": "Se clicar no popup da extensão dentro de um domínio do Salesforce, mas não numa página de Configuração, é levado automaticamente para a página de Configuração do Salesforce.",
 		"description": "[settings-help] para $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Pode reordenar as suas $tabs utilizando os pontos e arrastando-as.",
+		"description": "[manage-tabs] explica como arrastar a Tab"
+	},
 	"help_keep_sort": {
 		"message": "Quando ativado, os seus Tab-s são mantidos por ordem de ordenação — por etiqueta, URL ou Org; consoante a sua escolha.",
 		"description": "[settings-help] para $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Desativa a verificação da extensão que verifica se um fragmento de URL corresponde ao formato de IDs de registo/objeto do Salesforce (utilizado para definir automaticamente o Tab guardado como um Tab da Org).",
 		"description": "[settings-help] para $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Aqui encontrará um submenu para realizar diferentes ações na $tab da mesma linha.",
+		"description": "[manage-tabs] explica o que contém a seta à direita"
+	},
+	"help_tab_label": {
+		"message": "Este é o nome comum que usará para se lembrar de para onde esta $tab o levará.",
+		"description": "[manage-tabs] explica o que é o rótulo da Tab"
+	},
+	"help_tab_org": {
+		"message": "Este é o nome da Salesforce $org onde esta $tab será exibida. Se deixado em branco, esta $tab será exibida em todas as Salesforce $org que visitar.",
+		"description": "[manage-tabs] explica o que é a Org da Tab"
+	},
+	"help_tab_url": {
+		"message": "Este é o link (encurtado) para onde será redirecionado ao clicar nesta $tab",
+		"description": "[manage-tabs] explica o que é o URL da Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Clique para ser redirecionado para a documentação desta definição!",
 		"description": "[definições-ajuda] apelo à ação para permitir que o utilizador leia mais sobre uma definição específica"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ocultar $tabs de $other_org_placeholder",
+		"description": "[manage-tabs] rótulo do botão para ocultar outras Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "se clicar no pop-up da extensão",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Iniciar sessão no Salesforce",
 		"description": "[naoConfigSalesforce] chamada para ação num botão para redirecionar o utilizador para uma página de início de sessão do Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gerir $tabs",
+		"description": "[modal-title] modal para gerir as $tabs guardadas com campos editáveis e arrastar para reordenar"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edite, reordene e gira as suas $tabs guardadas diretamente deste modal. Arraste as linhas para reordenar ou use o menu suspenso para mais ações.",
+		"description": "[modal-explainer] explica a funcionalidade do modal de gestão de separadores"
 	},
 	"must_non_empty_str": {
 		"message": "deve ser uma string não vazia",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Página de Configuração",
 		"description": "[naoConfigSalesforce] a página usada para modificar as configurações do Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Mostrar todas as $tabs",
+		"description": "[manage-tabs] rótulo do botão para mostrar todas as Tab"
 	},
 	"skip": {
 		"message": "Ignorar",

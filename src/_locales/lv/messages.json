@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Darbības",
+		"description": "Nolaižamās izvēlnes etiķete Tab darbībām"
+	},
 	"active": {
 		"message": "Aktīvs",
 		"description": "Izmanto pārslēgos aktīvam stāvoklim"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[konteksta-izvēlne]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] atvērt modālo logu saglabāto $tabs pārvaldīšanai tieši Salesforce iestatīšanas lapā"
 	},
 	"cxm_move": {
 		"message": "🧭 Pārvietot Tab",
@@ -627,6 +635,10 @@
 		"message": "Ja noklikšķināt uz paplašinājuma uznirstošā loga Salesforce domēnā, bet ne iestatīšanas lapā, jūs automātiski nonāksit Salesforce iestatīšanas lapā.",
 		"description": "[settings-help] priekš $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Jūs varat pārkārtot savas $tabs, izmantojot punktus un tās velkot.",
+		"description": "[manage-tabs] paskaidrot, kā vilkt Tab"
+	},
 	"help_keep_sort": {
 		"message": "Ja ir iespējots, jūsu cilnes tiek kārtotas pēc iezīmes, URL vai org, atkarībā no tā, ko izvēlaties.",
 		"description": "[settings-help] priekš $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Atspējo paplašinājuma pārbaudi, kas pārbauda, vai URL fragments atbilst Salesforce ierakstu/objektu ID formātam (tiek izmantots, lai automātiski iestatītu saglabāto cilni kā org cilni).",
 		"description": "[settings-help] priekš $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Šeit jūs atradīsiet apakšizvēlni, lai veiktu dažādas darbības ar $tab tajā pašā rindā.",
+		"description": "[manage-tabs] paskaidrot, ko satur bultiņa labajā pusē"
+	},
+	"help_tab_label": {
+		"message": "Šis ir parastais nosaukums, ko izmantosiet, lai atcerētos, uz kurieni šis $tab jūs aizvedīs.",
+		"description": "[manage-tabs] paskaidrot, kas ir Tab etiķete"
+	},
+	"help_tab_org": {
+		"message": "Šis ir Salesforce $org nosaukums, kurā tiks rādīts šis $tab. Ja atstāsiet tukšu, šis $tab tiks rādīts katrā Salesforce $org, ko apmeklējat.",
+		"description": "[manage-tabs] paskaidrot, kas ir Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Šī ir (saīsinātā) saite, uz kuru tiksiet novirzīts, noklikšķinot uz šīs $tab",
+		"description": "[manage-tabs] paskaidrot, kas ir Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "Noklikšķiniet, lai tiktu novirzīts uz šī iestatījuma dokumentāciju!",
 		"description": "[iestatījumu-palīdzība] aicinājums rīkoties, lai lietotājs varētu lasīt vairāk par konkrētu iestatījumu"
+	},
+	"hide_other_org_tabs": {
+		"message": "Paslēpt $other_org_placeholder $tabs",
+		"description": "[manage-tabs] pogas etiķete citu Org Tabs paslēpšanai"
 	},
 	"if_click_popup": {
 		"message": "ja noklikšķināt uz paplašinājuma uznirstošā loga",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Pieteikties Salesforce",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce pieteikšanās lapu"
+	},
+	"manage_tabs": {
+		"message": "Pārvaldīt $tabs",
+		"description": "[modal-title] modālais logs saglabāto $tabs pārvaldīšanai ar rediģējamiem laukiem un vilkšanu, lai pārkārtotu"
+	},
+	"manage_tabs_explainer": {
+		"message": "Rediģējiet, pārkārtojiet un pārvaldiet savas saglabātās $tabs tieši no šī modālā loga. Velciet rindas, lai tās pārkārtotu, vai izmantojojiet nolaižamo izvēlni citām darbībām.",
+		"description": "[modal-explainer] paskaidro cilņu pārvaldības modālā loga funkcionalitāti"
 	},
 	"must_non_empty_str": {
 		"message": "jābūt netukšai virknei",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Iestatīšanas lapa",
 		"description": "[navSalesforceIestatīšana] lapa, ko izmanto Salesforce iestatījumu modificēšanai"
+	},
+	"show_all_tabs": {
+		"message": "Rādīt visas $tabs",
+		"description": "[manage-tabs] pogas etiķete visu Tab rādīšanai"
 	},
 	"skip": {
 		"message": "Izlaist",

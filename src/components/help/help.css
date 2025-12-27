@@ -58,54 +58,54 @@
 }
 
 .tooltip[data-show-bottom="true"]:not(
-  [data-show-top="true"],
-  [data-show-right="true"],
-  [data-show-left="true"],
+	[data-show-top="true"],
+	[data-show-right="true"],
+	[data-show-left="true"]
 ) {
 	top: calc(100% + 6px);
 	bottom: auto;
-    &::after {
-      border-color: transparent transparent #253858 transparent;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+	&::after {
+		border-color: transparent transparent #253858 transparent;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
 
 .tooltip[data-show-right="true"]:not(
-  [data-show-top="true"],
-  [data-show-bottom="true"],
-  [data-show-left="true"],
+	[data-show-top="true"],
+	[data-show-bottom="true"],
+	[data-show-left="true"]
 ) {
 	left: calc(100% + 6px);
 	top: 50%;
 	bottom: auto;
 	transform: translateY(-50%);
-    &::after {
-      top: 50%;
-      left: -6px;
-      transform: translateY(-50%);
-      border-color: transparent #253858 transparent transparent;
-    }
+	&::after {
+		top: 50%;
+		left: -6px;
+		transform: translateY(-50%);
+		border-color: transparent #253858 transparent transparent;
+	}
 }
 
 .tooltip[data-show-left="true"]:not(
-  [data-show-top="true"],
-  [data-show-right="true"],
-  [data-show-bottom="true"],
+	[data-show-top="true"],
+	[data-show-right="true"],
+	[data-show-bottom="true"]
 ) {
 	right: calc(100% + 6px);
 	left: auto;
 	top: 50%;
 	bottom: auto;
 	transform: translateY(-50%);
-    &::after {
-      top: 50%;
-      right: -12px;
-      left: auto;
-      transform: translateY(-50%);
-      border-color: transparent transparent transparent #253858;
-    }
+	&::after {
+		top: 50%;
+		right: -12px;
+		left: auto;
+		transform: translateY(-50%);
+		border-color: transparent transparent transparent #253858;
+	}
 }
 
 .help-icon .button:focus + .tooltip,

@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Aktionen",
+		"description": "Dropdown-Menü-Beschriftung für Tab-Aktionen"
+	},
 	"active": {
 		"message": "Aktiv",
 		"description": "Wird in Umschaltern für den aktiven Zustand verwendet"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[Kontextmenü]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] Öffnen Sie das Modal zur Verwaltung gespeicherter $tabs direkt auf der Salesforce-Setup-Seite"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab verschieben",
@@ -626,6 +634,10 @@
 		"message": "Wenn Sie innerhalb einer Salesforce-Domäne, aber nicht auf einer Einrichtungsseite auf das Erweiterungs-Popup klicken, gelangen Sie automatisch zur Salesforce-Einrichtungsseite.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Sie können Ihre $tabs neu anordnen, indem Sie die Punkte verwenden und sie ziehen.",
+		"description": "[manage-tabs] Erklärung, wie man die Tab zieht"
+	},
 	"help_keep_sort": {
 		"message": "Wenn aktiviert, werden Ihre Tabs in sortierter Reihenfolge gehalten – entweder nach Beschriftung, URL oder Org; je nachdem, was Sie auswählen.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "Deaktiviert die Erweiterungsprüfung, die überprüft, ob ein URL-Fragment mit dem Format von Salesforce-Datensatz-/Objekt-IDs übereinstimmt (wird verwendet, um den gespeicherten Tab automatisch als Org Tab festzulegen).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Hier finden Sie ein Untermenü, um verschiedene Aktionen für den $tab in derselben Zeile auszuführen.",
+		"description": "[manage-tabs] Erklärung, was der Pfeil auf der rechten Seite enthält"
+	},
+	"help_tab_label": {
+		"message": "Dies ist der Name, unter dem Sie sich merken, wohin dieser $tab Sie führt.",
+		"description": "[manage-tabs] Erklärung, was das Tab-Label ist"
+	},
+	"help_tab_org": {
+		"message": "Dies ist der Name der Salesforce $org, in der dieser $tab angezeigt wird. Wenn das Feld leer bleibt, wird dieser $tab in jeder Salesforce $org angezeigt, die Sie besuchen.",
+		"description": "[manage-tabs] Erklärung, was die Tab-Org ist"
+	},
+	"help_tab_url": {
+		"message": "Dies ist der (verkürzte) Link, zu dem Sie weitergeleitet werden, wenn Sie auf diesen $tab klicken.",
+		"description": "[manage-tabs] Erklärung, was die Tab-URL ist"
+	},
 	"help_tip_click_link": {
 		"message": "Klicken Sie, um zur Dokumentation für diese Einstellung weitergeleitet zu werden!",
 		"description": "[einstellungen-hilfe] Handlungsaufforderung, damit der Benutzer mehr über eine bestimmte Einstellung lesen kann"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder $tabs ausblenden",
+		"description": "[manage-tabs] Schaltflächenbeschriftung zum Ausblenden anderer Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "wenn Sie auf das Erweiterungs-Popup klicken",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Bei Salesforce anmelden",
 		"description": "[notSalesforceSetup] Aufruf zur Anmeldung bei Salesforce"
+	},
+	"manage_tabs": {
+		"message": "$tabs verwalten",
+		"description": "[modal-title] Modal zur Verwaltung gespeicherter $tabs mit bearbeitbaren Feldern und Drag-to-Reorder"
+	},
+	"manage_tabs_explainer": {
+		"message": "Bearbeiten, ordnen und verwalten Sie Ihre gespeicherten $tabs direkt in diesem Modal. Ziehen Sie Zeilen, um die Reihenfolge zu ändern, oder nutzen Sie das Dropdown-Menü für weitere Aktionen.",
+		"description": "[modal-explainer] Erklärt die Funktionen des Modals zur Tab-Verwaltung"
 	},
 	"must_non_empty_str": {
 		"message": "muss eine nicht-leere Zeichenkette sein",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Setup-Seite",
 		"description": "[notSalesforceSetup] Seite zur Änderung der Salesforce-Einstellungen"
+	},
+	"show_all_tabs": {
+		"message": "Alle $tabs anzeigen",
+		"description": "[manage-tabs] Schaltflächenbeschriftung zum Anzeigen aller Tab"
 	},
 	"skip": {
 		"message": "Überspringen",

@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Åtgärder",
+		"description": "Etikett för rullgardinsmeny för Tab-åtgärder"
+	},
 	"active": {
 		"message": "Aktiv",
 		"description": "Används i växlar för aktivt tillstånd"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontextmeny]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] öppna modalen för att hantera sparade $tabs direkt på Salesforce Setup-sidan"
 	},
 	"cxm_move": {
 		"message": "🧭 Flytta Tab",
@@ -627,6 +635,10 @@
 		"message": "Om du klickar på tilläggs-popup-en inuti en Salesforce-domän men inte på en inställningssida, tas du automatiskt till Salesforce-inställningssidan.",
 		"description": "[settings-help] för $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Du kan ändra ordningen på dina $tabs genom att använda punkterna och dra dem.",
+		"description": "[manage-tabs] förklara hur man drar i Tab"
+	},
 	"help_keep_sort": {
 		"message": "När den är aktiverad hålls dina Tab-bar i sorterad ordning – antingen efter etikett, URL eller Org; beroende på vad du väljer.",
 		"description": "[settings-help] för $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Inaktiverar tilläggs-kontrollen som verifierar att ett URL-fragment matchar formatet för Salesforce-post-/objekt-ID:n (används för att automatiskt ställa in den sparade Tab-en som en Org Tab).",
 		"description": "[settings-help] för $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Här hittar du en undermeny för att utföra olika åtgärder på den $tab som finns i samma rad.",
+		"description": "[manage-tabs] förklara vad pilen till höger innehåller"
+	},
+	"help_tab_label": {
+		"message": "Detta är det vanliga namnet du använder för att komma ihåg vart denna $tab leder dig.",
+		"description": "[manage-tabs] förklara vad Tab-etiketten är"
+	},
+	"help_tab_org": {
+		"message": "Detta är namnet på den Salesforce $org där denna $tab kommer att visas. Om det lämnas tomt kommer denna $tab att visas i varje Salesforce $org du besöker.",
+		"description": "[manage-tabs] förklara vad Tab Org är"
+	},
+	"help_tab_url": {
+		"message": "Detta är den (förkortade) länken som du omdirigeras till när du klickar på denna $tab",
+		"description": "[manage-tabs] förklara vad Tab-URL:en är"
+	},
 	"help_tip_click_link": {
 		"message": "Klicka för att omdirigeras till dokumentationen för den här inställningen!",
 		"description": "[inställningar-hjälp] uppmaning till handling för att låta användaren läsa mer om en specifik inställning"
+	},
+	"hide_other_org_tabs": {
+		"message": "Dölj $other_org_placeholder $tabs",
+		"description": "[manage-tabs] knappetikett för att dölja andra Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "om du klickar på tilläggs-popupen",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Logga in på Salesforce",
 		"description": "[notSalesforceSetup] uppmaning på en knapp för att omdirigera användaren till Salesforce inloggningssida"
+	},
+	"manage_tabs": {
+		"message": "Hantera $tabs",
+		"description": "[modal-title] modal för att hantera sparade $tabs med redigerbara fält och dra-för-att-ändra-ordning"
+	},
+	"manage_tabs_explainer": {
+		"message": "Redigera, ändra ordning och hantera dina sparade $tabs direkt från denna modal. Dra rader för att ändra ordning, eller använd rullgardinsmenyn för fler åtgärder.",
+		"description": "[modal-explainer] förklarar funktionaliteten i modalen för flikhantering"
 	},
 	"must_non_empty_str": {
 		"message": "måste vara en icke-tom sträng",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup-sida",
 		"description": "[notSalesforceSetup] sidan för att ändra inställningarna i Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Visa alla $tabs",
+		"description": "[manage-tabs] knappetikett för att visa alla Tab"
 	},
 	"skip": {
 		"message": "Hoppa över",

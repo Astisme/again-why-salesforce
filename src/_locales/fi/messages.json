@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Toiminnot",
+		"description": "Pudotusvalikon etiketti Tab-toiminnoille"
+	},
 	"active": {
 		"message": "Aktiivinen",
 		"description": "Käytetään kytkimissä aktiivisessa tilassa"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[pikavalikko]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] avaa modaali-ikkuna tallennettujen $tabs hallintaan suoraan Salesforce Setup -sivulla"
 	},
 	"cxm_move": {
 		"message": "🧭 Siirrä Tab",
@@ -627,6 +635,10 @@
 		"message": "Jos napsautat laajennuksen ponnahdusikkunaa Salesforce-verkkotunnuksen sisällä, mutta et asennussivulla, sinut ohjataan automaattisesti Salesforce-asennussivulle.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Voit muuttaa $tabs järjestystä käyttämällä pisteitä ja vetämällä niitä.",
+		"description": "[manage-tabs] selittää, miten Tab vedetään"
+	},
 	"help_keep_sort": {
 		"message": "Kun tämä on käytössä, Tabs-välilehdet pysyvät lajiteltuina – joko tunnisteen, URL-osoitteen tai organisaation mukaan; riippuen siitä, minkä valitset.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Poistaa käytöstä laajennuksen tarkistuksen, joka varmistaa, että URL-fragmentti vastaa Salesforce-tietueen/objektin tunnusten muotoa (käytetään tallennetun Tab automaattiseen asettamiseen Org Tabiksi).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Täältä löydät alavalikon eri toimintojen suorittamiseen saman rivin $tab-kohdassa.",
+		"description": "[manage-tabs] selittää, mitä oikealla oleva nuoli sisältää"
+	},
+	"help_tab_label": {
+		"message": "Tämä on yleinen nimi, jota käytät muistaaksesi, minne tämä $tab vie sinut.",
+		"description": "[manage-tabs] selittää, mikä Tab-etiketti on"
+	},
+	"help_tab_org": {
+		"message": "Tämä on Salesforce $org -nimi, jossa tämä $tab näytetään. Jos kenttä jätetään tyhjäksi, tämä $tab näytetään jokaisessa Salesforce $org -ympäristössä, jossa vierailet.",
+		"description": "[manage-tabs] selittää, mikä Tab Org on"
+	},
+	"help_tab_url": {
+		"message": "Tämä on (lyhennetty) linkki, johon sinut ohjataan, kun klikkaat tätä $tab-kohtaa",
+		"description": "[manage-tabs] selittää, mikä Tab-URL on"
+	},
 	"help_tip_click_link": {
 		"message": "Napsauta ohjataksesi uudelleen tämän asetuksen dokumentaatioon!",
 		"description": "[asetukset-apu] toimintakehotus, jonka avulla käyttäjä voi lukea lisää tietystä asetuksesta"
+	},
+	"hide_other_org_tabs": {
+		"message": "Piilota $other_org_placeholder $tabs",
+		"description": "[manage-tabs] painikkeen etiketti muiden Org Tabs piilottamiseen"
 	},
 	"if_click_popup": {
 		"message": "jos napsautat laajennuksen ponnahdusikkunaa",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Kirjaudu Salesforceen",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforcen kirjautumissivulle"
+	},
+	"manage_tabs": {
+		"message": "Hallitse $tabs",
+		"description": "[modal-title] modaali-ikkuna tallennettujen $tabs hallintaan muokattavilla kentillä ja vedä ja pudota -järjestämisellä"
+	},
+	"manage_tabs_explainer": {
+		"message": "Muokkaa, järjestä ja hallitse tallennettuja $tabs suoraan tästä modaali-ikkunasta. Vedä rivejä muuttaaksesi järjestystä tai käytä pudotusvalikkoa lisätoimintoihin.",
+		"description": "[modal-explainer] selittää välilehtien hallintamodaalin toiminnan"
 	},
 	"must_non_empty_str": {
 		"message": "täytyy olla ei-tyhjä merkkijono",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup-sivu",
 		"description": "[notSalesforceSetup] sivu Salesforce-asetusten muokkaamiseksi"
+	},
+	"show_all_tabs": {
+		"message": "Näytä kaikki $tabs",
+		"description": "[manage-tabs] painikkeen etiketti kaikkien Tab näyttämiseen"
 	},
 	"skip": {
 		"message": "Ohita",

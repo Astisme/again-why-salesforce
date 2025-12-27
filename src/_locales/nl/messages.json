@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Acties",
+		"description": "Label van het vervolgkeuzemenu voor Tab-acties"
+	},
 	"active": {
 		"message": "Actief",
 		"description": "Gebruikt in schakelaars voor actieve status"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[contextmenu]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] open de modal om opgeslagen $tabs rechtstreeks op de Salesforce Setup-pagina te beheren"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab verplaatsen",
@@ -627,6 +635,10 @@
 		"message": "Als u binnen een Salesforce-domein op de pop-up van de extensie klikt, maar niet op een Setup-pagina, wordt u automatisch naar de Salesforce Setup-pagina gebracht.",
 		"description": "[settings-help] voor $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "U kunt uw $tabs herschikken door de stippen te gebruiken en ze te slepen.",
+		"description": "[manage-tabs] uitleg over het slepen van de Tab"
+	},
 	"help_keep_sort": {
 		"message": "Wanneer ingeschakeld, worden uw Tabbladen gesorteerd op label, URL of Org; afhankelijk van wat u kiest.",
 		"description": "[settings-help] voor $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Schakelt de extensiecontrole uit die verifieert of een URL-fragment overeenkomt met de indeling van Salesforce-record-/object-ID's (gebruikt om de opgeslagen Tab automatisch in te stellen als een Org-Tab).",
 		"description": "[settings-help] voor $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Hier vindt u un submenu om verschillende acties uit te voeren op de $tab in dezelfde rij.",
+		"description": "[manage-tabs] uitleg over wat de pijl aan de rechterkant bevat"
+	},
+	"help_tab_label": {
+		"message": "Dit is de algemene naam die u gebruikt om te onthouden waar deze $tab u naartoe brengt.",
+		"description": "[manage-tabs] uitleg over wat het Tab-label is"
+	},
+	"help_tab_org": {
+		"message": "Dit is de naam van de Salesforce $org waar deze $tab wordt getoond. Indien leeg gelaten, wordt deze $tab getoond in elke Salesforce $org die u bezoekt.",
+		"description": "[manage-tabs] uitleg over wat de Tab Org is"
+	},
+	"help_tab_url": {
+		"message": "Dit is de (verkorte) link waarnaar u wordt doorgestuurd wanneer u op deze $tab klikt",
+		"description": "[manage-tabs] uitleg over wat de Tab-URL is"
+	},
 	"help_tip_click_link": {
 		"message": "Klik om doorgestuurd te worden naar de documentatie voor deze instelling!",
 		"description": "[instellingen-hulp] oproep tot actie om de gebruiker meer te laten lezen over een specifieke instelling"
+	},
+	"hide_other_org_tabs": {
+		"message": "Verberg $other_org_placeholder $tabs",
+		"description": "[manage-tabs] knoplabel om andere Org Tabs te verbergen"
 	},
 	"if_click_popup": {
 		"message": "als u op de extensie-popup klikt",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Inloggen bij Salesforce",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
+	},
+	"manage_tabs": {
+		"message": "$tabs beheren",
+		"description": "[modal-title] modal om opgeslagen $tabs te beheren met bewerkbare velden en slepen om te herschikken"
+	},
+	"manage_tabs_explainer": {
+		"message": "Bewerk, herschik en beheer uw opgeslagen $tabs rechtstreeks vanuit deze modal. Sleep rijen om ze te herschikken, of gebruik het vervolgkeuzemenu voor meer acties.",
+		"description": "[modal-explainer] legt de functionaliteit van de modal voor het beheren van tabbladen uit"
 	},
 	"must_non_empty_str": {
 		"message": "moet een niet-lege string zijn",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup Pagina",
 		"description": "[geenSalesforceSetup] de pagina die wordt gebruikt om de instellingen van Salesforce te wijzigen"
+	},
+	"show_all_tabs": {
+		"message": "Toon alle $tabs",
+		"description": "[manage-tabs] knoplabel om alle Tab te tonen"
 	},
 	"skip": {
 		"message": "Overslaan",

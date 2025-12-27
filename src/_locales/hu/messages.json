@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Műveletek",
+		"description": "Legördülő menü címkéje a Tab műveletekhez"
+	},
 	"active": {
 		"message": "Aktív",
 		"description": "Váltógombokban használatos az aktív állapotra"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[helyi-menü]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] megnyitja a modális ablakot a mentett $tabs kezeléséhez közvetlenül a Salesforce beállítási oldalon"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab mozgatása",
@@ -627,6 +635,10 @@
 		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon belül, de nem a beállítási oldalon, az automatikusan a Salesforce beállítási oldalára viszi.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "A pontok segítségével és húzással átrendezheti a $tabs-ait.",
+		"description": "[manage-tabs] elmagyarázza, hogyan kell húzni a Tab-ot"
+	},
 	"help_keep_sort": {
 		"message": "Ha engedélyezve van, a Tabs-jei rendezett sorrendben maradnak – címke, URL vagy szervezet szerint; attól függően, hogy mit választ.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Letiltja a bővítmény ellenőrzését, amely ellenőrzi, hogy egy URL-töredék megfelel-e a Salesforce rekord-/objektumazonosítóinak formátumának (amelyet a mentett Tab automatikus Org Tab-ként való beállítására használnak).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Itt talál egy almenüt a sorban lévő $tab-on végrehajtható különböző műveletekhez.",
+		"description": "[manage-tabs] elmagyarázza, mit tartalmaz a jobb oldali nyíl"
+	},
+	"help_tab_label": {
+		"message": "Ez az a név, amellyel megjegyzi, hová viszi önt ez a $tab.",
+		"description": "[manage-tabs] elmagyarázza, mi a Tab címkéje"
+	},
+	"help_tab_org": {
+		"message": "Ez annak a Salesforce $org-nak a neve, ahol ez a $tab megjelenik. Ha üresen hagyja, a $tab minden Salesforce $org-ban megjelenik, amelyet meglátogat.",
+		"description": "[manage-tabs] elmagyarázza, mi a Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ez az a (rövidített) link, ahová a rendszer átirányítja, ha erre a $tab-ra kattint",
+		"description": "[manage-tabs] elmagyarázza, mi a Tab URL-je"
+	},
 	"help_tip_click_link": {
 		"message": "Kattintson az adott beállítás dokumentációjához való átirányításhoz!",
 		"description": "[beállítások-segítség] felhívás a cselekvésre, amely lehetővé teszi a felhasználó számára, hogy többet olvasson egy adott beállításról"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder $tabs elrejtése",
+		"description": "[manage-tabs] gombfelirat a többi Org Tabs elrejtéséhez"
 	},
 	"if_click_popup": {
 		"message": "ha rákattint az extension felugró ablakára",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Bejelentkezés a Salesforce-ba",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce bejelentkezési oldalára való átnyomásra"
+	},
+	"manage_tabs": {
+		"message": "$tabs kezelése",
+		"description": "[modal-title] modális ablak a mentett $tabs kezeléséhez szerkeszthető mezőkkel és átrendezéssel"
+	},
+	"manage_tabs_explainer": {
+		"message": "Szerkessze, rendezze át és kezelje mentett $tabs-ait közvetlenül ebből az ablakból. Húzza a sorokat az átrendezéshez, vagy használja a legördülő menüt további műveletekhez.",
+		"description": "[modal-explainer] elmagyarázza a fülkezelő modális ablak funkcióit"
 	},
 	"must_non_empty_str": {
 		"message": "nem lehet üres string",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup oldal",
 		"description": "[notSalesforceSetup] a Salesforce beállításait módosító oldal"
+	},
+	"show_all_tabs": {
+		"message": "Összes $tabs megjelenítése",
+		"description": "[manage-tabs] gombfelirat az összes Tab megjelenítéséhez"
 	},
 	"skip": {
 		"message": "Kihagyás",

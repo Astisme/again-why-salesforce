@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Dejanja",
+		"description": "Oznaka spustnega menija za dejanja Tab"
+	},
 	"active": {
 		"message": "Aktiven",
 		"description": "Uporablja se v preklopnih gumbih za aktivno stanje"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstni-meni]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] odpre modno okno za upravljanje shranjenih $tabs neposredno na strani za nastavitev Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Premakni Tab",
@@ -627,6 +635,10 @@
 		"message": "Če kliknete pojavno okno razširitve znotraj domene Salesforce, vendar ne na strani z nastavitvami, boste samodejno preusmerjeni na stran z nastavitvami v Salesforce.",
 		"description": "[settings-help] za $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Vrstni red svojih $tabs lahko spremenite s pomočjo pik in vlečenjem.",
+		"description": "[manage-tabs] razlaga, kako povleči Tab"
+	},
 	"help_keep_sort": {
 		"message": "Ko je omogočeno, so vaši Tab-i ohranjeni v razvrščenem vrstnem redu – po oznaki, URL-ju ali org.; odvisno od tega, kaj izberete.",
 		"description": "[settings-help] za $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Onemogoči preverjanje razširitve, ki potrjuje, da se fragment URL-ja ujema z obliko ID-jev zapisov/objektov v Salesforce (uporablja se za samodejno nastavitev shranjenega Tab-a kot Tab-a Org).",
 		"description": "[settings-help] za $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Tukaj boste našli podmeni za izvajanje različnih dejanj na $tab v isti vrstici.",
+		"description": "[manage-tabs] razlaga, kaj vsebuje puščica na desni"
+	},
+	"help_tab_label": {
+		"message": "To je običajno ime, ki ga boste uporabili, da si zapomnite, kam vas bo ta $tab popeljal.",
+		"description": "[manage-tabs] razlaga, kaj je oznaka Tab"
+	},
+	"help_tab_org": {
+		"message": "To je ime Salesforce $org, kjer bo ta $tab prikazan. Če ostane prazno, bo ta $tab prikazan v vsakem Salesforce $org, ki ga obiščete.",
+		"description": "[manage-tabs] razlaga, kaj je Tab Org"
+	},
+	"help_tab_url": {
+		"message": "To je (skrajšana) povezava, na katero boste preusmerjeni ob kliku na ta $tab",
+		"description": "[manage-tabs] razlaga, kaj je URL naslov Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Kliknite za preusmeritev na dokumentacijo za to nastavitev!",
 		"description": "[nastavitve-pomoč] poziv k dejanju, ki uporabniku omogoča, da prebere več o določeni nastavitvi"
+	},
+	"hide_other_org_tabs": {
+		"message": "Skrij $tabs za $other_org_placeholder",
+		"description": "[manage-tabs] oznaka gumba za skrivanje drugih Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "če kliknete na pojavno okno razširitve",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Prijava v Salesforce",
 		"description": "[niSalesforceNastavitev] poziv k dejanju na gumbu za preusmeritev uporabnika na prijavno stran Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Upravljanje $tabs",
+		"description": "[modal-title] modno okno za upravljanje shranjenih $tabs z uredljivimi polji in vlečenjem za spreminjanje vrstnega reda"
+	},
+	"manage_tabs_explainer": {
+		"message": "Urejajte, spreminjajte vrstni red in upravljajte svoje shranjene $tabs neposredno iz tega modnega okna. Povlecite vrstice za spremembo vrstnega reda ali uporabite spustni meni za več dejanj.",
+		"description": "[modal-explainer] pojasnjuje funkcionalnost modnega okna za upravljanje zavihkov"
 	},
 	"must_non_empty_str": {
 		"message": "mora biti neprazen niz",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Stran za nastavitev",
 		"description": "[niSalesforceNastavitev] stran, uporabljena za spreminjanje nastavitev Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Prikaži vse $tabs",
+		"description": "[manage-tabs] oznaka gumba za prikaz vseh Tab"
 	},
 	"skip": {
 		"message": "Preskoči",

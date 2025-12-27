@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "작업",
+		"description": "Tab 작업을 위한 드롭다운 메뉴 라벨"
+	},
 	"active": {
 		"message": "활성",
 		"description": "활성 상태에 대한 토글에 사용됨"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[컨텍스트 메뉴]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] Salesforce 설정 페이지에서 직접 저장된 $tabs를 관리하기 위한 모달 열기"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab 이동",
@@ -627,6 +635,10 @@
 		"message": "Salesforce 도메인 내에서 확장 프로그램 팝업을 클릭했지만 설정 페이지에 없는 경우 Salesforce 설정 페이지로 자동으로 이동합니다.",
 		"description": "[$opt_automatic_open_setup]에 대한 [settings-help]"
 	},
+	"help_drag_tabs": {
+		"message": "점 표시를 사용하여 드래그하면 $tabs의 순서를 변경할 수 있습니다.",
+		"description": "[manage-tabs] Tab을 드래그하는 방법 설명"
+	},
 	"help_keep_sort": {
 		"message": "활성화하면 Tab이 라벨, URL 또는 Org에 따라 정렬된 상태로 유지됩니다. 어떤 것을 선택하든 상관없이요.",
 		"description": "[$opt_keep_sort]에 대한 [settings-help]"
@@ -671,9 +683,29 @@
 		"message": "URL 조각이 Salesforce 레코드/개체 ID 형식과 일치하는지 확인하는 확장 프로그램 검사(저장된 Tab을 Org Tab으로 자동 설정하는 데 사용됨)를 비활성화합니다.",
 		"description": "[$opt_skip_link_detection]에 대한 [settings-help]"
 	},
+	"help_tab_actions": {
+		"message": "여기에서 같은 줄에 있는 $tab에 대해 다양한 작업을 수행할 수 있는 하위 메뉴를 찾을 수 있습니다.",
+		"description": "[manage-tabs] 오른쪽 화살표에 포함된 내용 설명"
+	},
+	"help_tab_label": {
+		"message": "이것은 이 $tab이 어디로 이동하는지 기억하기 위해 사용할 일반적인 이름입니다.",
+		"description": "[manage-tabs] Tab 라벨이 무엇인지 설명"
+	},
+	"help_tab_org": {
+		"message": "이것은 이 $tab이 표시될 Salesforce $org 이름입니다. 비워 두면 방문하는 모든 Salesforce $org에 이 $tab이 표시됩니다.",
+		"description": "[manage-tabs] Tab Org가 무엇인지 설명"
+	},
+	"help_tab_url": {
+		"message": "이것은 이 $tab을 클릭했을 때 리다이렉트될 (단축된) 링크입니다.",
+		"description": "[manage-tabs] Tab URL이 무엇인지 설명"
+	},
 	"help_tip_click_link": {
 		"message": "클릭하면 이 설정에 대한 문서로 리디렉션됩니다!",
 		"description": "[설정-도움말] 사용자가 특정 설정에 대해 더 자세히 읽을 수 있도록 하는 행동 유도 문구"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder $tabs 숨기기",
+		"description": "[manage-tabs] 다른 Org Tabs를 숨기기 위한 버튼 라벨"
 	},
 	"if_click_popup": {
 		"message": "확장 프로그램 팝업을 클릭하면",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Salesforce에 로그인",
 		"description": "[Salesforce설정아님] 사용자를 Salesforce 로그인 페이지로 리디렉션하는 버튼의 클릭 유도문안"
+	},
+	"manage_tabs": {
+		"message": "$tabs 관리",
+		"description": "[modal-title] 편집 가능한 필드와 드래그로 순서 변경 기능이 있는 저장된 $tabs 관리 모달"
+	},
+	"manage_tabs_explainer": {
+		"message": "이 모달에서 직접 저장된 $tabs를 편집, 재정렬 및 관리하세요. 행을 드래그하여 순서를 바꾸거나 드롭다운 메뉴를 사용하여 더 많은 작업을 수행할 수 있습니다.",
+		"description": "[modal-explainer] 탭 관리 모달 기능을 설명함"
 	},
 	"must_non_empty_str": {
 		"message": "비어 있지 않은 문자열이어야 합니다",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "설정 페이지",
 		"description": "[Salesforce설정아님] Salesforce 설정을 수정하는 데 사용되는 페이지"
+	},
+	"show_all_tabs": {
+		"message": "모든 $tabs 보기",
+		"description": "[manage-tabs] 모든 Tab을 보기 위한 버튼 라벨"
 	},
 	"skip": {
 		"message": "건너뛰기",

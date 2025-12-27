@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Akce",
+		"description": "Popisek rozbalovací nabídky pro akce Tab"
+	},
 	"active": {
 		"message": "Aktivní",
 		"description": "Používá se v přepínačích pro aktivní stav"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontextová-nabídka]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] otevření modálního okna pro správu uložených $tabs přímo na stránce nastavení Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Posunout Tab",
@@ -627,6 +635,10 @@
 		"message": "Pokud kliknete na vyskakovací okno rozšíření uvnitř domény Salesforce, ale ne na stránce nastavení, automaticky vás přesměruje na stránku nastavení Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Své $tabs můžete přeuspořádat pomocí teček a jejich přetažením.",
+		"description": "[manage-tabs] vysvětlení, jak přetahovat Tab"
+	},
 	"help_keep_sort": {
 		"message": "Po aktivaci jsou vaše Tabs uspořádány v seřazeném pořadí – buď podle štítku, adresy URL nebo organizace; v závislosti na tom, co si vyberete.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Zakáže kontrolu rozšíření, která ověřuje, zda se fragment URL shoduje s formátem ID záznamů/objektů Salesforce (používá se k automatickému nastavení uloženého Tab jako Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Zde najdete podnabídku pro provádění různých akcí s $tab ve stejném řádku.",
+		"description": "[manage-tabs] vysvětlení, co obsahuje šipka vpravo"
+	},
+	"help_tab_label": {
+		"message": "Toto je běžný název, který budete používat k zapamatování si, kam vás tato $tab zavede.",
+		"description": "[manage-tabs] vysvětlení, co je štítek Tab"
+	},
+	"help_tab_org": {
+		"message": "Toto je název Salesforce $org, kde se tato $tab zobrazí. Pokud zůstane prázdné, tato $tab se zobrazí v každé Salesforce $org, kterou navštívíte.",
+		"description": "[manage-tabs] vysvětlení, co je Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Toto je (zkrácený) odkaz, na který budete přesměrováni po kliknutí na tuto $tab",
+		"description": "[manage-tabs] vysvětlení, co je URL adresa Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Kliknutím budete přesměrováni na dokumentaci k tomuto nastavení!",
 		"description": "[nápověda-nastavení] výzva k akci, která uživateli umožní přečíst si více o konkrétním nastavení"
+	},
+	"hide_other_org_tabs": {
+		"message": "Skrýt $tabs pro $other_org_placeholder",
+		"description": "[manage-tabs] popisek tlačítka pro skrytí ostatních Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "pokud kliknete na vyskakovací okno rozšíření",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Přihlásit se do Salesforce",
 		"description": "[notSalesforceSetup] výzva tlačítka pro přesměrování uživatele na přihlašovací stránku Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Spravovat $tabs",
+		"description": "[modal-title] modální okno pro správu uložených $tabs s editovatelnými poli a přetahováním pro změnu pořadí"
+	},
+	"manage_tabs_explainer": {
+		"message": "Upravujte, přeuspořádávejte a spravujte své uložené $tabs přímo z tohoto modálního okna. Přetažením řádků změňte pořadí nebo použijte rozbalovací nabídku pro další akce.",
+		"description": "[modal-explainer] vysvětluje funkčnost modálního okna pro správu karet"
 	},
 	"must_non_empty_str": {
 		"message": "musí být neprázdný řetězec",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Stránka Setup",
 		"description": "[notSalesforceSetup] stránka pro úpravu nastavení Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Zobrazit všechny $tabs",
+		"description": "[manage-tabs] popisek tlačítka pro zobrazení všech Tab"
 	},
 	"skip": {
 		"message": "Přeskočit",

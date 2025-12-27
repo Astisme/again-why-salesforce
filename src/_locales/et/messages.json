@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Toimingud",
+		"description": "Tabi toimingute rippmenüü silt"
+	},
 	"active": {
 		"message": "Aktiivne",
 		"description": "Kasutatakse aktiivse oleku lülitites"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstimenüü]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] ava modaalaken salvestatud $tabs haldamiseks otse Salesforce'i seadistuslehel"
 	},
 	"cxm_move": {
 		"message": "🧭 Liiguta Tab",
@@ -627,6 +635,10 @@
 		"message": "Kui klõpsate laienduse hüpikaknale Salesforce'i domeeni sees, kuid mitte seadistuslehel, viib see teid automaatselt Salesforce'i seadistuslehele.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Saate oma $tabs ümber reastada, kasutades täppe ja neid lohistades.",
+		"description": "[manage-tabs] selgitus, kuidas Tabi lohistada"
+	},
 	"help_keep_sort": {
 		"message": "Kui see on lubatud, hoitakse teie Tabs sorteeritud järjekorras - kas sildi, URL-i või organisatsiooni järgi; olenevalt sellest, mida valite.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Keelab laienduse kontrolli, mis kontrollib, kas URL-i fragment vastab Salesforce'i kirje/objekti ID-de vormingule (kasutatakse salvestatud Tab automaatseks määramiseks Org Tab-iks).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Siit leiate alammenüü samas reas oleva $tab-iga erinevate toimingute tegemiseks.",
+		"description": "[manage-tabs] selgitus, mida parempoolne nool sisaldab"
+	},
+	"help_tab_label": {
+		"message": "See on üldnimetus, mida kasutate meeldejätmiseks, kuhu see $tab teid viib.",
+		"description": "[manage-tabs] selgitus, mis on Tabi silt"
+	},
+	"help_tab_org": {
+		"message": "See on Salesforce'i $org nimi, kus seda $tab-i näidatakse. Kui see jääb tühjaks, kuvatakse seda $tab-i igas Salesforce'i $org-is, mida külastate.",
+		"description": "[manage-tabs] selgitus, mis on Tabi Org"
+	},
+	"help_tab_url": {
+		"message": "See on (lühendatud) link, kuhu teid suunatakse sellele $tab-ile klõpsates",
+		"description": "[manage-tabs] selgitus, mis on Tabi URL"
+	},
 	"help_tip_click_link": {
 		"message": "Klõpsake, et suunduda selle sätte dokumentatsiooni juurde!",
 		"description": "[seadete-abi] üleskutse tegevusele, et lasta kasutajal konkreetse sätte kohta rohkem lugeda"
+	},
+	"hide_other_org_tabs": {
+		"message": "Peida $other_org_placeholder $tabs",
+		"description": "[manage-tabs] nupu silt teiste Org Tabs peitmiseks"
 	},
 	"if_click_popup": {
 		"message": "kui klõpsate laienduse hüpikaknal",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Logi sisse Salesforce'i",
 		"description": "[poleSalesforceSeadistus] kutse tegevusele nupul kasutaja suunamiseks Salesforce'i sisselogimislehele"
+	},
+	"manage_tabs": {
+		"message": "Halda $tabs",
+		"description": "[modal-title] modaalaken salvestatud $tabs haldamiseks muudetavate väljade ja lohistamisega"
+	},
+	"manage_tabs_explainer": {
+		"message": "Muutke, järjestage ümber ja hallake oma salvestatud $tabs otse sellest modaalaknast. Järjestuse muutmiseks lohistage ridu või kasutage lisatoimingute jaoks rippmenüüd.",
+		"description": "[modal-explainer] selgitab vahekaartide haldamise modaalakna funktsionaalsust"
 	},
 	"must_non_empty_str": {
 		"message": "peab olema mittetühi string",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Seadistusleht",
 		"description": "[poleSalesforceSeadistus] leht, mida kasutatakse Salesforce'i seadete muutmiseks"
+	},
+	"show_all_tabs": {
+		"message": "Kuva kõik $tabs",
+		"description": "[manage-tabs] nupu silt kõigi Tab kuvamiseks"
 	},
 	"skip": {
 		"message": "Jäta vahele",

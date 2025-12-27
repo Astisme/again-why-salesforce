@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Radnje",
+		"description": "Oznaka padajućeg izbornika za radnje s Tab"
+	},
 	"active": {
 		"message": "Aktivno",
 		"description": "Koristi se u preklopnicima za aktivno stanje"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstni-izbornik]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] otvori modalni prozor za upravljanje spremljenim $tabs izravno na stranici postavki Salesforcea"
 	},
 	"cxm_move": {
 		"message": "🧭 Premjesti Tab",
@@ -627,6 +635,10 @@
 		"message": "Ako kliknete na skočni prozor proširenja unutar domene Salesforce, ali ne na stranici za postavljanje, automatski će vas odvesti na stranicu za postavljanje u Salesforce-u.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Možete promijeniti redoslijed svojih $tabs pomoću točkica i povlačenjem.",
+		"description": "[manage-tabs] objašnjenje kako povući Tab"
+	},
 	"help_keep_sort": {
 		"message": "Kada je omogućeno, vaši Tabs-i se drže u sortiranom redoslijedu – bilo po oznaci, URL-u ili organizaciji; ovisno o tome što odaberete.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Onemogućuje provjeru proširenja koja provjerava podudara li se fragment URL-a s formatom ID-ova zapisa/objekata Salesforce (koristi se za automatsko postavljanje spremljenog Tab-a kao Org Tab-a).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Ovdje ćete pronaći podizbornik za izvođenje različitih radnji na $tab u istom retku.",
+		"description": "[manage-tabs] objašnjenje što sadrži strelica s desne strane"
+	},
+	"help_tab_label": {
+		"message": "Ovo je uobičajeni naziv koji ćete koristiti da biste zapamtili kamo će vas ovaj $tab odvesti.",
+		"description": "[manage-tabs] objašnjenje što je oznaka Tab"
+	},
+	"help_tab_org": {
+		"message": "Ovo je naziv Salesforce $org u kojem će se prikazati ovaj $tab. Ako ostane prazno, ovaj će se $tab prikazati u svakom Salesforce $org koji posjetite.",
+		"description": "[manage-tabs] objašnjenje što je Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ovo je (skraćena) poveznica na koju ćete biti preusmjereni klikom na ovaj $tab",
+		"description": "[manage-tabs] objašnjenje što je URL adresa Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Kliknite za preusmjeravanje na dokumentaciju za ovu postavku!",
 		"description": "[postavke-pomoć] poziv na radnju kako bi se korisniku omogućilo da pročita više o određenoj postavci"
+	},
+	"hide_other_org_tabs": {
+		"message": "Sakrij $tabs za $other_org_placeholder",
+		"description": "[manage-tabs] oznaka gumba za skrivanje ostalih Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "ako kliknete na skočni prozor proširenja",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Prijavite se na Salesforce",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na stranicu za prijavu u Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Upravljanje $tabs",
+		"description": "[modal-title] modalni prozor za upravljanje spremljenim $tabs s poljima koja se mogu uređivati i povlačenjem za promjenu redoslijeda"
+	},
+	"manage_tabs_explainer": {
+		"message": "Uređujte, mijenjajte redoslijed i upravljajte svojim spremljenim $tabs izravno iz ovog modalnog prozora. Povucite retke da biste promijenili redoslijed ili koristite padajući izbornik za više radnji.",
+		"description": "[modal-explainer] objašnjava funkcionalnost modalnog prozora za upravljanje karticama"
 	},
 	"must_non_empty_str": {
 		"message": "mora biti neprazan niz znakova",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup stranica",
 		"description": "[notSalesforceSetup] stranica za uređivanje Salesforce postavki"
+	},
+	"show_all_tabs": {
+		"message": "Prikaži sve $tabs",
+		"description": "[manage-tabs] oznaka gumba za prikaz svih Tab"
 	},
 	"skip": {
 		"message": "Preskoči",

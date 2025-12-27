@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Acțiuni",
+		"description": "Eticheta meniului derulant pentru acțiunile Tab"
+	},
 	"active": {
 		"message": "Activ",
 		"description": "Folosit în comutatoare pentru starea activă"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[meniu-contextual]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] deschide fereastra modală pentru a gestiona $tabs salvate direct pe pagina de configurare Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Mutați Tab",
@@ -627,6 +635,10 @@
 		"message": "Dacă faceți clic pe pop-up-ul extensiei într-un domeniu Salesforce, dar nu pe o pagină de configurare, veți fi direcționat automat către pagina de configurare Salesforce.",
 		"description": "[settings-help] pentru $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Puteți reordona $tabs-urile folosind punctele și trăgându-le.",
+		"description": "[manage-tabs] explică cum se trage Tab-ul"
+	},
 	"help_keep_sort": {
 		"message": "Când este activată, Tab-urile dvs. sunt păstrate în ordine sortată — fie după etichetă, URL sau Org; în funcție de ceea ce alegeți.",
 		"description": "[settings-help] pentru $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Dezactivează verificarea extensiei care verifică dacă un fragment de URL se potrivește cu formatul ID-urilor de înregistrare/obiect Salesforce (utilizat pentru a seta automat Tab-ul salvat ca Tab Org).",
 		"description": "[settings-help] pentru $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Aici veți găsi un submeniu pentru a efectua diferite acțiuni asupra $tab-ului de pe același rând.",
+		"description": "[manage-tabs] explică ce conține săgeata din dreapta"
+	},
+	"help_tab_label": {
+		"message": "Acesta este numele comun pe care îl veți folosi pentru a vă aminti unde vă va duce acest $tab.",
+		"description": "[manage-tabs] explică ce este eticheta Tab"
+	},
+	"help_tab_org": {
+		"message": "Acesta este numele Salesforce $org unde va fi afișat acest $tab. Dacă este lăsat gol, acest $tab va fi afișat în fiecare Salesforce $org pe care îl vizitați.",
+		"description": "[manage-tabs] explică ce este Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Acesta este link-ul (scurtat) către care veți fi redirecționat când faceți clic pe acest $tab",
+		"description": "[manage-tabs] explică ce este URL-ul Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Faceți clic pentru a fi redirecționat către documentația pentru această setare!",
 		"description": "[setări-ajutor] apel la acțiune pentru a permite utilizatorului să citească mai multe despre o anumită setare"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ascunde $tabs pentru $other_org_placeholder",
+		"description": "[manage-tabs] eticheta butonului pentru a ascunde alte Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "dacă faceți clic pe fereastra pop-up a extensiei",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Conectați-vă la Salesforce",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de conectare Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gestionați $tabs",
+		"description": "[modal-title] fereastră modală pentru gestionarea $tabs salvate cu câmpuri editabile și glisare pentru reordonare"
+	},
+	"manage_tabs_explainer": {
+		"message": "Editați, reordonați și gestionați $tabs-urile salvate direct din această fereastră modală. Trageți rândurile pentru a le reordona sau utilizați meniului derulant pentru mai multe acțiuni.",
+		"description": "[modal-explainer] explică funcționalitatea ferestrei modale de gestionare a filelor"
 	},
 	"must_non_empty_str": {
 		"message": "trebuie să fie un șir de caractere nevid",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Pagină de configurare",
 		"description": "[nuEsteConfigurareSalesforce] pagina utilizată pentru a modifica setările Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Afișează toate $tabs-urile",
+		"description": "[manage-tabs] eticheta butonului pentru a afișa toate Tab"
 	},
 	"skip": {
 		"message": "Omiteți",

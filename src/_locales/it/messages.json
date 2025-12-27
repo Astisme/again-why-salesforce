@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Azioni",
+		"description": "Etichetta del menu a discesa per le azioni delle Tab"
+	},
 	"active": {
 		"message": "Attivo",
 		"description": "Usato nei toggle per lo stato attivo"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menu-contestuale]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] apre il modale per gestire le $tabs salvate direttamente nella pagina di configurazione di Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Sposta Tab",
@@ -626,6 +634,10 @@
 		"message": "Se fai clic sul popup dell'estensione all'interno di un dominio Salesforce ma non su una pagina di impostazione, verrai automaticamente indirizzato alla pagina di impostazione di Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Puoi riordinare le tue $tabs usando i puntini e trascinandole.",
+		"description": "[manage-tabs] spiega come trascinare la Tab"
+	},
 	"help_keep_sort": {
 		"message": "Quando abilitato, le tue Tabs vengono mantenute in ordine ordinato—per etichetta, URL o organizzazione; a seconda di ciò che scegli.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "Disabilita il controllo dell'estensione che verifica che un frammento URL corrisponda al formato degli ID di record/oggetto di Salesforce (utilizzato per impostare automaticamente la Tab salvata come Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Qui troverai un sottomenu per eseguire diverse azioni sulla $tab nella stessa riga.",
+		"description": "[manage-tabs] spiega cosa contiene la freccia a destra"
+	},
+	"help_tab_label": {
+		"message": "Questo è il nome comune che userai per ricordare dove ti porterà questa $tab.",
+		"description": "[manage-tabs] spiega cos'è l'etichetta della Tab"
+	},
+	"help_tab_org": {
+		"message": "Questo è il nome della Salesforce $org in cui verrà mostrata questa $tab. Se lasciato vuoto, questa $tab verrà mostrata in ogni Salesforce $org che visiti.",
+		"description": "[manage-tabs] spiega cos'è l'Org della Tab"
+	},
+	"help_tab_url": {
+		"message": "Questo è il link (abbreviato) a cui verrai reindirizzato cliccando su questa $tab",
+		"description": "[manage-tabs] spiega cos'è l'URL della Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Clicca per essere reindirizzato alla documentazione per questa impostazione!",
 		"description": "[aiuto-impostazioni] invito all'azione per consentire all'utente di leggere di più su una impostazione specifica"
+	},
+	"hide_other_org_tabs": {
+		"message": "Nascondi le $tabs di $other_org_placeholder",
+		"description": "[manage-tabs] etichetta del pulsante per nascondere altre Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "se fai clic sul popup dell'estensione",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Accedi a Salesforce",
 		"description": "[notSalesforceSetup] invito all'azione su un pulsante per reindirizzare l'utente alla pagina di login di Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gestisci $tabs",
+		"description": "[modal-title] modale per gestire le $tabs salvate con campi modificabili e trascinamento per riordinare"
+	},
+	"manage_tabs_explainer": {
+		"message": "Modifica, riordina e gestisci le tue $tabs salvate direttamente da questo modale. Trascina le righe per riordinare o usa il menu a discesa per altre azioni.",
+		"description": "[modal-explainer] spiega la funzionalità del modale di gestione delle schede"
 	},
 	"must_non_empty_str": {
 		"message": "deve essere una stringa non vuota",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Pagina di Setup",
 		"description": "[notSalesforceSetup] la pagina usata per modificare le impostazioni di Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Mostra tutte le $tabs",
+		"description": "[manage-tabs] etichetta del pulsante per mostrare tutte le Tab"
 	},
 	"skip": {
 		"message": "Salta",

@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Veiksmai",
+		"description": "Tab veiksmų išskleidžiamojo meniu etiketė"
+	},
 	"active": {
 		"message": "Aktyvus",
 		"description": "Naudojama jungikliuose aktyviai būsenai"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstinis-meniu]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] atidaryti modalinį langą išsaugotų $tabs tvarkymui tiesiogiai „Salesforce“ sąrankos puslapyje"
 	},
 	"cxm_move": {
 		"message": "🧭 Perkelti Tab",
@@ -627,6 +635,10 @@
 		"message": "Jei spustelite plėtinio iššokantįjį langą „Salesforce“ domene, bet ne sąrankos puslapyje, automatiškai būsite nukreipti į „Salesforce“ sąrankos puslapį.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Galite pakeisti savo $tabs tvarką naudodami taškus ir juos vilkdami.",
+		"description": "[manage-tabs] paaiškinti, kaip vilkti Tab"
+	},
 	"help_keep_sort": {
 		"message": "Kai įjungta, jūsų Tab'ai yra rūšiuojami pagal etiketę, URL arba Org, priklausomai nuo to, ką pasirinksite.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Išjungia plėtinio patikrinimą, patvirtinantį, kad URL fragmentas atitinka „Salesforce“ įrašo / objekto ID formatą (naudojamą automatiškai nustatyti išsaugotą Tab'ą kaip Org Tab'ą).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Čia rasite papildomą meniu, skirtą atlikti įvairius veiksmus su tos pačios eilutės $tab.",
+		"description": "[manage-tabs] paaiškinti, kas yra dešinėje esančioje rodyklėje"
+	},
+	"help_tab_label": {
+		"message": "Tai yra įprastas pavadinimas, kurį naudosite norėdami prisiminti, kur nuves šis $tab.",
+		"description": "[manage-tabs] paaiškinti, kas yra Tab etiketė"
+	},
+	"help_tab_org": {
+		"message": "Tai yra „Salesforce“ $org pavadinimas, kuriame bus rodomas šis $tab. Jei paliksite tuščią, šis $tab bus rodomas kiekviename „Salesforce“ $org, kuriame lankysitės.",
+		"description": "[manage-tabs] paaiškinti, kas yra Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Tai yra (sutrumpinta) nuoroda, į kurią būsite nukreipti spustelėję šį $tab",
+		"description": "[manage-tabs] paaiškinti, kas yra Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "Spustelėkite, kad būtumėte nukreipti į šio nustatymo dokumentaciją!",
 		"description": "[nustatymų-pagalba] raginimas veikti, leidžiantis vartotojui perskaityti daugiau apie konkretų nustatymą"
+	},
+	"hide_other_org_tabs": {
+		"message": "Slėpti $other_org_placeholder $tabs",
+		"description": "[manage-tabs] mygtuko etiketė, skirta paslėpti kitas Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "jei spustelėsite plėtinio iššokantįjį langą",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Prisijungti prie Salesforce",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce prisijungimo puslapį"
+	},
+	"manage_tabs": {
+		"message": "Tvarkyti $tabs",
+		"description": "[modal-title] modalinis langas išsaugotų $tabs tvarkymui su redaguojamais laukais ir vilkimu tvarkai pakeisti"
+	},
+	"manage_tabs_explainer": {
+		"message": "Redaguokite, perrikiuokite ir tvarkykite savo išsaugotus $tabs tiesiogiai šiame modaliniame lange. Vilkite eilutes, kad pakeistumėte tvarką, arba naudokite išskleidžiamąjį meniu papildomiems veiksmams.",
+		"description": "[modal-explainer] paaiškina skirtukų tvarkymo modalinio lango funkciją"
 	},
 	"must_non_empty_str": {
 		"message": "turi būti netuščia eilutė",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Sąrankos puslapis",
 		"description": "[neSalesforceSąranka] puslapis, naudojamas Salesforce nustatymams keisti"
+	},
+	"show_all_tabs": {
+		"message": "Rodyti visas $tabs",
+		"description": "[manage-tabs] mygtuko etiketė, skirta rodyti visas Tab"
 	},
 	"skip": {
 		"message": "Praleisti",

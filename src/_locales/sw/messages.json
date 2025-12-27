@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Hatua",
+		"description": "Lebo ya menyu kunjuzi kwa hatua za Tab"
+	},
 	"active": {
 		"message": "Inatumika",
 		"description": "Inatumika katika vijigeuza kwa hali inayotumika"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menyu-ya-mukhtadha]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] fungua modali ili kudhibiti $tabs zilizohifadhiwa moja kwa moja kwenye ukurasa wa Usanidi wa Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Sogeza Tab",
@@ -627,6 +635,10 @@
 		"message": "Ukibofya dirisha ibukizi la kiendelezi ndani ya kikoa cha Salesforce lakini si kwenye ukurasa wa Usanidi, utapelekwa kwenye ukurasa wa Usanidi wa Salesforce kiotomatiki.",
 		"description": "[settings-help] kwa $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Unaweza kupanga upya $tabs zako kwa kutumia vitone na kuzivuta.",
+		"description": "[manage-tabs] eleza jinsi ya kuvuta Tab"
+	},
 	"help_keep_sort": {
 		"message": "Inapowezeshwa, Tab-zako zako huwekwa katika mpangilio uliopangwa—kwa lebo, URL au Org; kulingana na unachochagua.",
 		"description": "[settings-help] kwa $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Huzima ukaguzi wa kiendelezi unaothibitisha kuwa sehemu ya URL inalingana na umbizo la vitambulisho vya rekodi/kipengee cha Salesforce (kinachotumiwa kuweka kiotomatiki Tab iliyohifadhiwa kama Tab ya Org).",
 		"description": "[settings-help] kwa $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Hapa utapata menyu ndogo ya kufanya hatua tofauti kwenye $tab iliyo kwenye safu mlalo hiyo hiyo.",
+		"description": "[manage-tabs] eleza kile mshale ulio upande wa kulia una"
+	},
+	"help_tab_label": {
+		"message": "Hili ndilo jina la kawaida utakalotumia kukumbuka ambapo $tab hii itakupeleka.",
+		"description": "[manage-tabs] eleza nini lebo ya Tab ni"
+	},
+	"help_tab_org": {
+		"message": "Hili ndilo jina la Salesforce $org ambapo $tab hii itaonyeshwa. Ikiachwa tupu, $tab hii itaonyeshwa katika kila Salesforce $org unayotembelea.",
+		"description": "[manage-tabs] eleza nini Tab Org ni"
+	},
+	"help_tab_url": {
+		"message": "Hii ndiyo linki (iliyofupishwa) ambapo utaelekezwa unapo bonyeza $tab hii",
+		"description": "[manage-tabs] eleza nini URL ya Tab ni"
+	},
 	"help_tip_click_link": {
 		"message": "Bofya ili uelekezwe upya kwenye nyaraka za mpangilio huu!",
 		"description": "[mipangilio-msaada] mwito wa kuchukua hatua wa kumruhusu mtumiaji kusoma zaidi kuhusu mpangilio maalum"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ficha $tabs za $other_org_placeholder",
+		"description": "[manage-tabs] lebo ya kitufe cha kuficha Org Tabs zingine"
 	},
 	"if_click_popup": {
 		"message": "ukibofya kidirisha ibukizi cha kiendelezi",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Ingia kwenye Salesforce",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa kuingia wa Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Dhibiti $tabs",
+		"description": "[modal-title] modali ya kudhibiti $tabs zilizohifadhiwa kwa sehemu zinazoweza kuhaririwa na kuvuta-ili-kupanga-upya"
+	},
+	"manage_tabs_explainer": {
+		"message": "Hariri, panga upya, na udhibiti $tabs zako zilizohifadhiwa moja kwa moja kutoka kwenye modali hii. Vuta safu mlalo ili kupanga upya, au tumia menyu kunjuzi kwa hatua zaidi.",
+		"description": "[modal-explainer] inaelezea utendaji wa modali ya kudhibiti tabo"
 	},
 	"must_non_empty_str": {
 		"message": "lazima iwe kamba isiyo tupu",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Ukurasa wa Usanidi",
 		"description": "[siUsanidiWaSalesforce] ukurasa unaotumika kurekebisha mipangilio ya Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Onyesha $tabs zote",
+		"description": "[manage-tabs] lebo ya kitufe cha kuonyesha Tab zote"
 	},
 	"skip": {
 		"message": "Ruka",

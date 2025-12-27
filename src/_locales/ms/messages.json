@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Tindakan",
+		"description": "Label menu lungsur untuk tindakan Tab"
+	},
 	"active": {
 		"message": "Aktif",
 		"description": "Digunakan dalam togol untuk keadaan aktif"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[संदर्भ-मेनू]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] buka modal untuk mengurus $tabs yang disimpan secara langsung pada halaman Persediaan Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Alihkan Tab",
@@ -627,6 +635,10 @@
 		"message": "Jika anda mengklik pop timbul sambungan di dalam domain Salesforce tetapi bukan pada halaman Persediaan, anda akan dibawa ke halaman Persediaan Salesforce secara automatik.",
 		"description": "[settings-help] untuk $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Anda boleh menyusun semula $tabs anda dengan menggunakan titik dan menyeretnya.",
+		"description": "[manage-tabs] jelaskan cara menyeret Tab"
+	},
 	"help_keep_sort": {
 		"message": "Apabila diaktifkan, Tab anda akan disusun mengikut label, URL atau Org; bergantung pada pilihan anda.",
 		"description": "[settings-help] untuk $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Melumpuhkan semakan sambungan yang mengesahkan bahawa fragmen URL sepadan dengan format ID rekod/objek Salesforce (digunakan untuk menetapkan Tab yang disimpan sebagai Tab Org secara automatik).",
 		"description": "[settings-help] untuk $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Di sini anda akan menemui submenu untuk melakukan tindakan berbeza pada $tab dalam baris yang sama.",
+		"description": "[manage-tabs] jelaskan kandungan anak panah di sebelah kanan"
+	},
+	"help_tab_label": {
+		"message": "Ini adalah nama biasa yang akan anda gunakan untuk mengingati ke mana $tab ini akan membawa anda.",
+		"description": "[manage-tabs] jelaskan apa itu label Tab"
+	},
+	"help_tab_org": {
+		"message": "Ini adalah nama Salesforce $org tempat $tab ini akan ditunjukkan. Jika dibiarkan kosong, $tab ini akan ditunjukkan dalam setiap Salesforce $org yang anda kunjungi.",
+		"description": "[manage-tabs] jelaskan apa itu Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ini adalah pautan (dipendekkan) ke mana anda akan dibawa apabila mengklik pada $tab ini",
+		"description": "[manage-tabs] jelaskan apa itu URL Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Klik untuk dialihkan ke dokumentasi untuk tetapan ini!",
 		"description": "[bantuan-tetapan] seruan untuk bertindak untuk membolehkan pengguna membaca lebih lanjut tentang tetapan tertentu"
+	},
+	"hide_other_org_tabs": {
+		"message": "Sembunyikan $tabs $other_org_placeholder",
+		"description": "[manage-tabs] label butang untuk menyembunyikan Org Tabs yang lain"
 	},
 	"if_click_popup": {
 		"message": "jika anda mengklik pop timbul sambungan",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Log masuk ke Salesforce",
 		"description": "[bukanPersediaanSalesforce] seruan tindak pada butang untuk mengarahkan pengguna ke halaman log masuk Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Urus $tabs",
+		"description": "[modal-title] modal untuk mengurus $tabs yang disimpan dengan medan boleh edit dan seret-untuk-susun semula"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edit, susun semula dan urus $tabs yang anda simpan secara langsung dari modal ini. Seret baris untuk menyusun semula, atau gunakan menu lungsur untuk lebih banyak tindakan.",
+		"description": "[modal-explainer] menjelaskan kefungsian modal urus tab"
 	},
 	"must_non_empty_str": {
 		"message": "mestilah rentetan tidak kosong",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Halaman Persediaan",
 		"description": "[bukanPersediaanSalesforce] halaman yang digunakan untuk mengubah suai tetapan Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Tunjukkan semua $tabs",
+		"description": "[manage-tabs] label butang untuk menunjukkan semua Tab"
 	},
 	"skip": {
 		"message": "Langkau",
