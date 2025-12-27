@@ -2338,7 +2338,7 @@ export async function generateManageTabsModal(tabs = [], {
 		}
 		showAllTabsButton.setAttribute("disabled", true);
 		hideOtherOrgTabsButton.removeAttribute("disabled");
-        updateModalBodyOverflow(article);
+		updateModalBodyOverflow(article);
 	});
 	hideOtherOrgTabsButton.addEventListener("click", () => {
 		for (
@@ -2350,7 +2350,7 @@ export async function generateManageTabsModal(tabs = [], {
 		}
 		hideOtherOrgTabsButton.setAttribute("disabled", true);
 		showAllTabsButton.removeAttribute("disabled");
-        updateModalBodyOverflow(article);
+		updateModalBodyOverflow(article);
 	});
 	const loggers = []; // track input changes
 	const actionsMap = {}; // map to store action handlers for each row

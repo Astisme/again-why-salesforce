@@ -525,9 +525,9 @@ async function checkDuplicates({
  * @throws Error when tabAppendElement == null
  */
 function checkAddRemoveLastTr({
-  inputObj = managedLoggers[focusedIndex].last_input,
-  tabAppendElement,
-} = {}){
+	inputObj = managedLoggers[focusedIndex].last_input,
+	tabAppendElement,
+} = {}) {
 	if (tabAppendElement == null) {
 		throw new Error("error_required_params");
 	}
@@ -556,31 +556,31 @@ function checkAddRemoveLastTr({
  * @param {TrHTMLElement} [param1.tr=null] - the tr where the Tab is shown
  * @throws Error when tabAppendElement == null or tr == null
  */
-function performAfterChecks({ 
-  url = null,
-  org = null,
+function performAfterChecks({
+	url = null,
+	org = null,
 } = {}, {
-  tabAppendElement = null,
-  tr = null,
-} = {}){
+	tabAppendElement = null,
+	tr = null,
+} = {}) {
 	if (tabAppendElement == null || tr == null) {
 		throw new Error("error_required_params");
 	}
-    // check eventual duplicates
-    checkDuplicates({
-        url: url === "" ? undefined : url,
-        org: org === "" ? undefined : org,
-    }, {
-        tabAppendElement,
-    });
-    // update the "open" button href
-    tr.querySelector("[data-action=open]").href = url == null || url === ""
-        ? "#"
-        : Tab.expandURL(
-            url,
-            getCurrentHref(),
-            org,
-        );
+	// check eventual duplicates
+	checkDuplicates({
+		url: url === "" ? undefined : url,
+		org: org === "" ? undefined : org,
+	}, {
+		tabAppendElement,
+	});
+	// update the "open" button href
+	tr.querySelector("[data-action=open]").href = url == null || url === ""
+		? "#"
+		: Tab.expandURL(
+			url,
+			getCurrentHref(),
+			org,
+		);
 }
 
 /**
@@ -641,16 +641,16 @@ function trInputListener({
 			break;
 	}
 	if (typeMatched) {
-        performAfterChecks({ url, org }, {
-          tabAppendElement,
-          tr,
-        });
+		performAfterChecks({ url, org }, {
+			tabAppendElement,
+			tr,
+		});
 	}
-    inputObj[type] = element.value;
-    checkAddRemoveLastTr({
-      inputObj,
-      tabAppendElement,
-    });
+	inputObj[type] = element.value;
+	checkAddRemoveLastTr({
+		inputObj,
+		tabAppendElement,
+	});
 }
 
 /**
@@ -695,7 +695,7 @@ export async function createManageTabsModal() {
 		".hide_other_org_tabs",
 	);
 	getModalHanger().appendChild(modalParent);
-    updateModalBodyOverflow(modalParent.querySelector('article'));
+	updateModalBodyOverflow(modalParent.querySelector("article"));
 	// Setup drag functionality for the manage tabs table
 	setupDrag();
 	saveButton.addEventListener("click", (e) => {
