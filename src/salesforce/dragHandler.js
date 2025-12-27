@@ -129,6 +129,12 @@ function createListeners() {
 	container.addEventListener("drop", handleDrop, false); // when element is dropped
 }
 
+/**
+ * Sets up the drag-and-drop functionality by initializing the container and event listeners.
+ * It selects the appropriate container based on the presence of the table element or the tab bar.
+ * If the container is not found, it retries after 500ms.
+ * @param {function} callback - the function to call when the drag operation has been completed by the user
+ */
 function setupDrag(callback){
 	container = table ?? ul;
 	closestTag = table == null ? "li" : "tr";
@@ -139,9 +145,8 @@ function setupDrag(callback){
 }
 
 /**
- * Sets up the drag-and-drop functionality by initializing the container and event listeners.
- * It selects the appropriate container based on the presence of the table element or the tab bar.
- * If the container is not found, it retries after 500ms.
+ * Setups the drag functions for the ul
+ * @param {function} callback - the function to call when the drag operation has been completed by the user
  */
 export function setupDragForUl(callback) {
 	ul = document.getElementById(EXTENSION_NAME);
@@ -149,6 +154,10 @@ export function setupDragForUl(callback) {
     setupDrag(callback);
 }
 
+/**
+ * Setups the drag functions for the table
+ * @param {function} callback - the function to call when the drag operation has been completed by the user
+ */
 export function setupDragForTable(callback){
 	table = document.getElementById("sortable-table");
     ul = null;

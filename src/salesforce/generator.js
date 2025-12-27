@@ -333,6 +333,7 @@ export async function generateStyleFromSettings() {
  * @param {Object} conf - the configuration of the row
  * @param {boolean} [conf.hide=false] - True to hide the row
  * @param {boolean} [conf.isPinned=false] - True if the row is one of the pinned ones
+ * @param {number} [conf.index=0] - the index of the row template to be built
  *
  * @return {HTMLElement} - The generated list item element representing the tab.
  */
