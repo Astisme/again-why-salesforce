@@ -29,9 +29,9 @@
 			"js": [
 				"salesforce/bundledContent.js"
 			],
-            "css": [
-                "components/help/help.css"
-            ],
+			"css": [
+				"components/help/help.css"
+			],
 			"run_at": "document_start",
 			"all_frames": false
 		}

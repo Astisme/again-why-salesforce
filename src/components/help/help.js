@@ -10,14 +10,14 @@ class HelpAws extends HTMLElement {
 	 */
 	static get observedAttributes() {
 		return [
-          "href",
-          "target",
-          "rel",
-          "data-show-right",
-          "data-show-left",
-          "data-show-bottom",
-          "data-show-top", // default is to show at the top
-        ];
+			"href",
+			"target",
+			"rel",
+			"data-show-right",
+			"data-show-left",
+			"data-show-bottom",
+			"data-show-top", // default is to show at the top
+		];
 	}
 
 	/**
@@ -27,10 +27,10 @@ class HelpAws extends HTMLElement {
 		super();
 		const shadow = this.attachShadow({ mode: "open" });
 		const { root, anchor, tooltip, linkTip } = generateHelpWith_i_popup();
-        shadow.appendChild(root);
-		this._anchor = anchor
+		shadow.appendChild(root);
+		this._anchor = anchor;
 		this._tooltip = tooltip;
-        this._linkTip = linkTip;
+		this._linkTip = linkTip;
 		const linkEl = document.createElement("link");
 		linkEl.setAttribute("rel", "stylesheet");
 		linkEl.setAttribute("href", new URL("./help.css", import.meta.url));
@@ -39,13 +39,14 @@ class HelpAws extends HTMLElement {
 		this._tooltip.dataset.showLeft = this.dataset.showLeft ?? "false";
 		this._tooltip.dataset.showBottom = this.dataset.showBottom ?? "false";
 		this._tooltip.dataset.showTop = this.dataset.showTop ?? "false";
-        if(
-          this._tooltip.dataset.showRight === "false" &&
-          this._tooltip.dataset.showLeft === "false" &&
-          this._tooltip.dataset.showBottom === "false" &&
-          this._tooltip.dataset.showTop === "false"
-        )
-          this._tooltip.dataset.showRight = true;
+		if (
+			this._tooltip.dataset.showRight === "false" &&
+			this._tooltip.dataset.showLeft === "false" &&
+			this._tooltip.dataset.showBottom === "false" &&
+			this._tooltip.dataset.showTop === "false"
+		) {
+			this._tooltip.dataset.showRight = true;
+		}
 	}
 
 	/**

@@ -65,47 +65,47 @@ async function handleDrop(e) {
 	e.preventDefault();
 	let targetRow = e.target.closest(closestTag); // Get the target row
 	if (
-      // moving in the same spot
-      dragSrcEl == this ||
-      targetRow == null ||
-      // moving somewhere incorrect
-      targetRow.tagName.toLowerCase() != closestTag ||
-      // moving over a non draggable element
-      !targetRow.draggable
-    ) {
+		// moving in the same spot
+		dragSrcEl == this ||
+		targetRow == null ||
+		// moving somewhere incorrect
+		targetRow.tagName.toLowerCase() != closestTag ||
+		// moving over a non draggable element
+		!targetRow.draggable
+	) {
 		return false;
 	}
 	// Swap the positions of the dragged row and the target row
 	const parent = targetRow.parentNode; // Get the parent node (tbody || ul)
-    const childrenArr = [...parent.children];
+	const childrenArr = [...parent.children];
 	let targetIndex = childrenArr.indexOf(targetRow); // Get the index of the target row
 	const dragSrcIndex = childrenArr.indexOf(dragSrcEl); // Get the index of the dragged row
 	const pinnedNumber =
 		(await ensureAllTabsAvailability())[TabContainer.keyPinnedTabsNo];
 	const isMovingRight = targetIndex > dragSrcIndex;
-    if (
-        (
-            // is moving from pinned to unpinned
-            dragSrcIndex < pinnedNumber &&
-            pinnedNumber <= targetIndex
-        ) ||
-        (
-            // is moving from unpinned to pinned
-            targetIndex < pinnedNumber &&
-            pinnedNumber <= dragSrcIndex
-        )
-    ) {
-        // KO illegal movement
-        targetRow = parent.querySelector(
-            `${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`,
-        );
-        targetIndex = childrenArr.indexOf(targetRow);
-    }
-    if (isMovingRight) {
-        targetRow.after(dragSrcEl);
-    } else {
-        targetRow.before(dragSrcEl);
-    }
+	if (
+		(
+			// is moving from pinned to unpinned
+			dragSrcIndex < pinnedNumber &&
+			pinnedNumber <= targetIndex
+		) ||
+		(
+			// is moving from unpinned to pinned
+			targetIndex < pinnedNumber &&
+			pinnedNumber <= dragSrcIndex
+		)
+	) {
+		// KO illegal movement
+		targetRow = parent.querySelector(
+			`${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`,
+		);
+		targetIndex = childrenArr.indexOf(targetRow);
+	}
+	if (isMovingRight) {
+		targetRow.after(dragSrcEl);
+	} else {
+		targetRow.before(dragSrcEl);
+	}
 	e.target.style.cursor = "grab";
 	postMessage({
 		what: "order",
