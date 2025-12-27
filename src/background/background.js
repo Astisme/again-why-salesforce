@@ -400,7 +400,7 @@ function listenToExtensionMessages() {
 			case "error":
 			case "warning":
 			case WHAT_SHOW_EXPORT_MODAL:
-            case CXM_MANAGE_TABS: // from popup
+			case CXM_MANAGE_TABS: // from popup
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
 				break;

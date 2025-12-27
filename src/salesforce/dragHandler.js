@@ -19,7 +19,9 @@ let dragElements = null; //callback
  */
 function handleDragStart(e) {
 	// Check if the dragged element is an icon (or any other specific element) within the row
-	if (e.target.draggable === "true" || e.target.dataset.draggable === "true") {
+	if (
+		e.target.draggable === "true" || e.target.dataset.draggable === "true"
+	) {
 		e.target.style.cursor = "grabbing";
 		dragSrcIndex = e.target.closest(closestTag).dataset.rowIndex; // Find the dragged row
 		e.dataTransfer.effectAllowed = "move";
@@ -60,7 +62,7 @@ async function handleDrop(e) {
 		targetRow == null ||
 		// moving somewhere incorrect
 		targetRow.tagName.toLowerCase() != closestTag ||
-        targetRow.dataset.rowIndex < 0 ||
+		targetRow.dataset.rowIndex < 0 ||
 		// moving over a non draggable element
 		!targetRow.draggable
 	) {
@@ -68,7 +70,9 @@ async function handleDrop(e) {
 	}
 	// Swap the positions of the dragged row and the target row
 	let targetIndex = targetRow.dataset.rowIndex; // Get the index of the target row
-	const dragSrcEl = container.querySelector(`${closestTag}[data-row-index="${dragSrcIndex}"]`); // Get the of the dragged row
+	const dragSrcEl = container.querySelector(
+		`${closestTag}[data-row-index="${dragSrcIndex}"]`,
+	); // Get the of the dragged row
 	const pinnedNumber =
 		(await ensureAllTabsAvailability())[TabContainer.keyPinnedTabsNo];
 	const isMovingRight = targetIndex > dragSrcIndex;
@@ -90,9 +94,11 @@ async function handleDrop(e) {
 		);
 		targetIndex = Array.from(this.children).indexOf(targetRow);
 	} else {
-      // get targetRow from the parent node
-      targetRow = container.querySelector(`${closestTag}[data-row-index="${targetIndex}"]`);
-    }
+		// get targetRow from the parent node
+		targetRow = container.querySelector(
+			`${closestTag}[data-row-index="${targetIndex}"]`,
+		);
+	}
 	if (isMovingRight) {
 		targetRow.after(dragSrcEl);
 	} else {
@@ -123,11 +129,11 @@ function createListeners() {
  * If the container is not found, it retries after 500ms.
  * @param {function} callback - the function to call when the drag operation has been completed by the user
  */
-function setupDrag(callback){
+function setupDrag(callback) {
 	container = table ?? ul;
 	closestTag = table == null ? "li" : "tr";
 	containerName = table == null ? "ul" : "table";
-    dragElements = callback;
+	dragElements = callback;
 	if (container == null) setTimeout(() => setupDrag(), 500);
 	else createListeners();
 }
@@ -138,16 +144,16 @@ function setupDrag(callback){
  */
 export function setupDragForUl(callback) {
 	ul = document.getElementById(EXTENSION_NAME);
-    table = null;
-    setupDrag(callback);
+	table = null;
+	setupDrag(callback);
 }
 
 /**
  * Setups the drag functions for the table
  * @param {function} callback - the function to call when the drag operation has been completed by the user
  */
-export function setupDragForTable(callback){
+export function setupDragForTable(callback) {
 	table = document.getElementById("sortable-table");
-    ul = null;
-    setupDrag(callback);
+	ul = null;
+	setupDrag(callback);
 }
