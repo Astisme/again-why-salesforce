@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Mga Aksyon",
+		"description": "Label ng dropdown menu para sa mga aksyon ng Tab"
+	},
 	"active": {
 		"message": "Aktibo",
 		"description": "Ginagamit sa mga toggle para sa aktibong estado"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[context-menu]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] buksan ang modal para pamahalaan ang mga naka-save na $tabs nang direkta sa pahina ng Salesforce Setup"
 	},
 	"cxm_move": {
 		"message": "🧭 Ilipat ang Tab",
@@ -627,6 +635,10 @@
 		"message": "Kung iki-click mo ang extension popup sa loob ng Salesforce domain pero hindi sa isang Setup page, dadalhin ka nito sa Salesforce Setup page nang awtomatiko.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Maaari mong i-reorder ang iyong mga $tabs sa pamamagitan ng paggamit ng mga tuldok at pag-drag nito.",
+		"description": "[manage-tabs] ipaliwanag kung paano i-drag ang Tab"
+	},
 	"help_keep_sort": {
 		"message": "Kapag naka-enable, pinapanatiling naka-sort order ang iyong mga Tabs—sa pamamagitan ng label, URL o Org; depende sa pipiliin mo.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Dine-disable ang pag-check ng extension na nagbe-verify na tumutugma ang isang URL fragment sa format ng mga ID ng record/object ng Salesforce (ginagamit para awtomatikong itakda ang na-save na Tab bilang isang Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Dito mo makikita ang isang submenu para magsagawa ng iba't ibang aksyon sa $tab sa parehong hilera.",
+		"description": "[manage-tabs] ipaliwanag kung ano ang nilalaman ng arrow sa kanan"
+	},
+	"help_tab_label": {
+		"message": "Ito ang karaniwang pangalan na gagamitin mo para maalala kung saan ka dadalhin ng $tab na ito.",
+		"description": "[manage-tabs] ipaliwanag kung ano ang Tab label"
+	},
+	"help_tab_org": {
+		"message": "Ito ang pangalan ng Salesforce $org kung saan ipapakita ang $tab na ito. Kung iiwang walang laman, ang $tab na ito ay ipapakita sa bawat Salesforce $org na bibisitahin mo.",
+		"description": "[manage-tabs] ipaliwanag kung ano ang Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ito ang (pinaikling) link kung saan ka i-re-redirect kapag kinlik ang $tab na ito",
+		"description": "[manage-tabs] ipaliwanag kung ano ang Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "I-click para i-redirect sa dokumentasyon para sa setting na ito!",
 		"description": "[settings-help] tawag para sa aksyon upang hayaan ang user na magbasa pa tungkol sa isang partikular na setting"
+	},
+	"hide_other_org_tabs": {
+		"message": "Itago ang $other_org_placeholder $tabs",
+		"description": "[manage-tabs] label ng button para itago ang iba pang Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "kung i-click mo ang popup ng extension",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Mag-login sa Salesforce",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce login page"
+	},
+	"manage_tabs": {
+		"message": "Pamahalaan ang $tabs",
+		"description": "[modal-title] modal para pamahalaan ang mga naka-save na $tabs na may mga field na pwedeng i-edit at drag-to-reorder"
+	},
+	"manage_tabs_explainer": {
+		"message": "I-edit, i-reorder, at pamahalaan ang iyong mga naka-save na $tabs nang direkta mula sa modal na ito. I-drag ang mga hilera para i-reorder, o gamitin ang dropdown menu para sa higit pang mga aksyon.",
+		"description": "[modal-explainer] ipinapaliwanag ang functionality ng manage tabs modal"
 	},
 	"must_non_empty_str": {
 		"message": "dapat ay isang hindi-walang laman na string",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Pahina ng Setup",
 		"description": "[notSalesforceSetup] ang page na ginagamit para baguhin ang mga setting ng Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Ipakita ang lahat ng $tabs",
+		"description": "[manage-tabs] label ng button para ipakita ang lahat ng Tab"
 	},
 	"skip": {
 		"message": "Laktawan",

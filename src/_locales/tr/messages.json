@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Eylemler",
+		"description": "Tab eylemleri için açılır menü etiketi"
+	},
 	"active": {
 		"message": "Aktif",
 		"description": "Aktif durum için anahtarlarda kullanılır"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[içerik-menüsü]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] kaydedilmiş $tabs nesnelerini doğrudan Salesforce Kurulum sayfasında yönetmek için modalı açın"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab Taşı",
@@ -627,6 +635,10 @@
 		"message": "Bir Salesforce etki alanının içinde uzantı açılır penceresini tıklarsanız, ancak bir Kurulum sayfasında değilseniz, otomatik olarak Salesforce Kurulum sayfasına yönlendirilirsiniz.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Noktaları kullanarak ve sürükleyerek $tabs nesnelerinizi yeniden sıralayabilirsiniz.",
+		"description": "[manage-tabs] Tab nesnesinin nasıl sürükleneceğini açıklar"
+	},
 	"help_keep_sort": {
 		"message": "Etkinleştirildiğinde, Tab-leriniz seçiminize bağlı olarak etiket, URL veya Org'a göre sıralanmış olarak tutulur.",
 		"description": "[$opt_keep_sort] için [settings-help]"
@@ -671,9 +683,29 @@
 		"message": "URL parçasının Salesforce kayıt/nesne kimlikleri biçimiyle eşleştiğini doğrulayan uzantı kontrolünü devre dışı bırakır (kaydedilen Tab'i otomatik olarak bir Org Tab'i olarak ayarlamak için kullanılır).",
 		"description": "[$opt_skip_link_detection] için [settings-help]"
 	},
+	"help_tab_actions": {
+		"message": "Burada aynı satırdaki $tab üzerinde farklı eylemler gerçekleştirmek için bir alt menü bulacaksınız.",
+		"description": "[manage-tabs] sağdaki okun ne içerdiğini açıklar"
+	},
+	"help_tab_label": {
+		"message": "Bu, bu $tab nesnesinin sizi nereye götüreceğini hatırlamak için kullanacağınız ortak addır.",
+		"description": "[manage-tabs] Tab etiketinin ne olduğunu açıklar"
+	},
+	"help_tab_org": {
+		"message": "Bu, bu $tab nesnesinin gösterileceği Salesforce $org adıdır. Boş bırakılırsa, bu $tab ziyaret ettiğiniz her Salesforce $org içerisinde gösterilecektir.",
+		"description": "[manage-tabs] Tab Org nesnesinin ne olduğunu açıklar"
+	},
+	"help_tab_url": {
+		"message": "Bu, bu $tab nesnesine tıkladığınızda yönlendirileceğiniz (kısaltılmış) bağlantıdır",
+		"description": "[manage-tabs] Tab URL nesnesinin ne olduğunu açıklar"
+	},
 	"help_tip_click_link": {
 		"message": "Bu ayarın belgelerine yönlendirilmek için tıklayın!",
 		"description": "[ayarlar-yardım] kullanıcının belirli bir ayar hakkında daha fazla bilgi okumasını sağlamak için eylem çağrısı"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder $tabs nesnelerini gizle",
+		"description": "[manage-tabs] diğer Org Tabs nesnelerini gizlemek için düğme etiketi"
 	},
 	"if_click_popup": {
 		"message": "uzantı açılır penceresine tıklarsanız",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Salesforce'a Giriş Yap",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce giriş sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"manage_tabs": {
+		"message": "$tabs Yönet",
+		"description": "[modal-title] düzenlenebilir alanlar ve sürükle-yeniden sırala özelliği ile kaydedilmiş $tabs nesnelerini yönetmek için modal"
+	},
+	"manage_tabs_explainer": {
+		"message": "Kaydedilmiş $tabs nesnelerinizi doğrudan bu modaldan düzenleyin, yeniden sıralayın ve yönetin. Yeniden sıralamak için satırları sürükleyin veya daha fazla eylem için açılır menüyü kullanın.",
+		"description": "[modal-explainer] sekmeleri yönet modal işlevselliğini açıklar"
 	},
 	"must_non_empty_str": {
 		"message": "boş olmayan bir dize olmalıdır",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Kurulum Sayfası",
 		"description": "[SalesforceKurulumuDeğil] Salesforce ayarlarını değiştirmek için kullanılan sayfa"
+	},
+	"show_all_tabs": {
+		"message": "Tüm $tabs nesnelerini göster",
+		"description": "[manage-tabs] tüm Tab nesnelerini göstermek için düğme etiketi"
 	},
 	"skip": {
 		"message": "Atla",

@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "アクション",
+		"description": "Tab アクションのドロップダウンメニューラベル"
+	},
 	"active": {
 		"message": "アクティブ",
 		"description": "アクティブ状態のトグルに使用"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[コンテキストメニュー]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] Salesforce 設定ページで保存された $tabs を直接管理するためのモーダルを開く"
 	},
 	"cxm_move": {
 		"message": "🧭 Tab を移動する",
@@ -626,6 +634,10 @@
 		"message": "Salesforceドメイン内で、ただし設定ページ以外で拡張機能のポップアップをクリックすると、自動的にSalesforceの設定ページに移動します。",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "ドットを使用してドラッグすることで、$tabs の順序を入れ替えることができます。",
+		"description": "[manage-tabs] Tab のドラッグ方法についての説明"
+	},
 	"help_keep_sort": {
 		"message": "有効にすると、Tabsはラベル、URL、または組織のいずれかによって、ソートされた順序に保たれます。どちらを選択するかによって異なります。",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "URLフラグメントがSalesforceのレコード/オブジェクトIDの形式と一致するかどうかを確認する拡張機能のチェックを無効にします（保存されたTabをOrg Tabとして自動的に設定するために使用されます）。",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "ここでは、同じ行にある $tab に対してさまざまなアクションを実行するためのサブメニューが表示されます。",
+		"description": "[manage-tabs] 右側の矢印に含まれる内容についての説明"
+	},
+	"help_tab_label": {
+		"message": "これは、この $tab がどこに移動するかを覚えておくために使用する一般的な名前です。",
+		"description": "[manage-tabs] Tab ラベルについての説明"
+	},
+	"help_tab_org": {
+		"message": "これは、この $tab が表示される Salesforce $org 名です。空のままにすると、この $tab は訪問するすべての Salesforce $org で表示されます。",
+		"description": "[manage-tabs] Tab Org についての説明"
+	},
+	"help_tab_url": {
+		"message": "これは、この $tab をクリックしたときにリダイレクトされる（短縮された）リンクです。",
+		"description": "[manage-tabs] Tab URL についての説明"
+	},
 	"help_tip_click_link": {
 		"message": "クリックして、この設定のドキュメントにリダイレクトします！",
 		"description": "[設定-ヘルプ] ユーザーが特定の**設定**についてさらに読むことを可能にする行動喚起"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder の $tabs を非表示にする",
+		"description": "[manage-tabs] 他の Org Tabs を非表示にするためのボタンラベル"
 	},
 	"if_click_popup": {
 		"message": "拡張機能のポップアップをクリックした場合",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Salesforce にログインする",
 		"description": "[notSalesforceSetup] Salesforce ログインページにリダイレクトするための呼びかけ"
+	},
+	"manage_tabs": {
+		"message": "$tabs を管理",
+		"description": "[modal-title] 編集可能なフィールドとドラッグによる並べ替え機能を備えた、保存済み $tabs を管理するためのモーダル"
+	},
+	"manage_tabs_explainer": {
+		"message": "このモーダルから直接、保存した $tabs の編集、並べ替え、管理を行えます。行をドラッグして並べ替えたり、ドロップダウンメニューを使用してその他のアクションを実行したりできます。",
+		"description": "[modal-explainer] タブ管理モーダルの機能を説明する"
 	},
 	"must_non_empty_str": {
 		"message": "空ではない文字列である必要があります",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Setup ページ",
 		"description": "[notSalesforceSetup] Salesforce の設定を変更するためのページ"
+	},
+	"show_all_tabs": {
+		"message": "すべての $tabs を表示",
+		"description": "[manage-tabs] すべての Tab を表示するためのボタンラベル"
 	},
 	"skip": {
 		"message": "スキップする",

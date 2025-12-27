@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Actions",
+		"description": "Libellé du menu déroulant pour les actions de Tab"
+	},
 	"active": {
 		"message": "Actif",
 		"description": "Utilisé dans les bascules pour l'état actif"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menu-contextuel]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] ouvrir la fenêtre modale pour gérer les $tabs enregistrés directement sur la page de configuration Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Déplacer Tab",
@@ -626,6 +634,10 @@
 		"message": "Si vous cliquez sur la fenêtre contextuelle de l'extension dans un domaine Salesforce, mais pas sur une page de configuration, cela vous amène automatiquement à la page de configuration de Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Vous pouvez réorganiser vos $tabs en utilisant les points et en les faisant glisser.",
+		"description": "[manage-tabs] expliquer comment faire glisser le Tab"
+	},
 	"help_keep_sort": {
 		"message": "Lorsque cette option est activée, vos Tabs sont maintenus dans un ordre trié, soit par étiquette, URL ou organisation, selon ce que vous choisissez.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "Désactive la vérification de l'extension qui vérifie qu'un fragment d'URL correspond au format des ID d'enregistrement/d'objet Salesforce (utilisé pour définir automatiquement le Tab enregistré comme un Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Ici, vous trouverez un sous-menu pour effectuer différentes actions sur le $tab de la même ligne.",
+		"description": "[manage-tabs] expliquer ce que contient la flèche à droite"
+	},
+	"help_tab_label": {
+		"message": "C'est le nom commun que vous utiliserez pour vous rappeler où ce $tab vous mènera.",
+		"description": "[manage-tabs] expliquer ce qu'est le libellé du Tab"
+	},
+	"help_tab_org": {
+		"message": "C'est le nom de l'organisation Salesforce $org où ce $tab sera affiché. Si laissé vide, ce $tab sera affiché dans chaque Salesforce $org que vous visitez.",
+		"description": "[manage-tabs] expliquer ce qu'est l'Org du Tab"
+	},
+	"help_tab_url": {
+		"message": "C'est le lien (raccourci) vers lequel vous serez redirigé en cliquant sur ce $tab",
+		"description": "[manage-tabs] expliquer ce qu'est l'URL du Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Cliquez pour être redirigé vers la documentation de ce paramètre !",
 		"description": "[aide-paramètres] appel à l'action pour permettre à l'utilisateur d'en savoir plus sur un paramètre spécifique"
+	},
+	"hide_other_org_tabs": {
+		"message": "Masquer les $tabs de $other_org_placeholder",
+		"description": "[manage-tabs] libellé du bouton pour masquer les autres Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "si vous cliquez sur la fenêtre contextuelle de l'extension",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Se connecter à Salesforce",
 		"description": "[notSalesforceSetup] Appel à l'action pour rediriger vers la page de connexion de Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gérer les $tabs",
+		"description": "[modal-title] fenêtre modale pour gérer les $tabs enregistrés avec des champs modifiables et le glisser-déposer"
+	},
+	"manage_tabs_explainer": {
+		"message": "Modifiez, réorganisez et gérez vos $tabs enregistrés directement depuis cette fenêtre modale. Faites glisser les lignes pour réorganiser ou utilisez le menu déroulant pour plus d'actions.",
+		"description": "[modal-explainer] explique les fonctionnalités de la fenêtre modale de gestion des onglets"
 	},
 	"must_non_empty_str": {
 		"message": "doit être une chaîne non vide",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Page de configuration",
 		"description": "[notSalesforceSetup] Page utilisée pour modifier les paramètres de Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Afficher tous les $tabs",
+		"description": "[manage-tabs] libellé du bouton pour afficher tous les Tab"
 	},
 	"skip": {
 		"message": "Passer",

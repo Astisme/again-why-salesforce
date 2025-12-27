@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Accions",
+		"description": "Etiqueta del menú desplegable per a les accions de la Tab"
+	},
 	"active": {
 		"message": "Actiu",
 		"description": "S'utilitza en interruptors per a l'estat actiu"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menú-contextual]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] obre el modal per gestionar les $tabs desades directament a la pàgina de configuració de Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Moure Tab",
@@ -627,6 +635,10 @@
 		"message": "Si fas clic a la finestra emergent de l'extensió dins d'un domini de Salesforce, però no en una pàgina de configuració, et portarà automàticament a la pàgina de configuració de Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Podeu reordenar les vostres $tabs utilitzant els punts i arrossegant-les.",
+		"description": "[manage-tabs] explica com arrossegar la Tab"
+	},
 	"help_keep_sort": {
 		"message": "Quan està habilitat, les teves Tabs es mantenen en ordre classificat, ja sigui per etiqueta, URL o organització; depenent del que triïs.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Deshabilita la comprovació de l'extensió que verifica que un fragment d'URL coincideixi amb el format d'identificadors de registre/objecte de Salesforce (utilitzat per establir automàticament el Tab guardat com a Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Aquí trobareu un submenú per realitzar diferents accions a la $tab de la mateixa fila.",
+		"description": "[manage-tabs] explica què conté la fletxa de la dreta"
+	},
+	"help_tab_label": {
+		"message": "Aquest és el nom comú que utilitzareu per recordar on us portarà aquesta $tab.",
+		"description": "[manage-tabs] explica què és l'etiqueta de la Tab"
+	},
+	"help_tab_org": {
+		"message": "Aquest és el nom de la Salesforce $org on es mostrarà aquesta $tab. Si es deixa buit, aquesta $tab es mostrarà a cada Salesforce $org que visiteu.",
+		"description": "[manage-tabs] explica què és l'Org de la Tab"
+	},
+	"help_tab_url": {
+		"message": "Aquest és l'enllaç (escurçat) on se us redirigirà en fer clic en aquesta $tab",
+		"description": "[manage-tabs] explica què és l'URL de la Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Feu clic per ser redirigit a la documentació d'aquesta configuració!",
 		"description": "[ajuda-configuració] crida a l'acció per permetre a l'usuari llegir més sobre una configuració específica"
+	},
+	"hide_other_org_tabs": {
+		"message": "Amaga les $tabs de $other_org_placeholder",
+		"description": "[manage-tabs] etiqueta del botó per amagar altres Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "si feu clic a la finestra emergent de l'extensió",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Inicia sessió a Salesforce",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina d'inici de sessió de Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gestiona les $tabs",
+		"description": "[modal-title] modal per gestionar les $tabs desades amb camps editables i arrossegar per reordenar"
+	},
+	"manage_tabs_explainer": {
+		"message": "Editeu, reordeneu i gestioneu les vostres $tabs desades directament des d'aquest modal. Arrossegueu les files per reordenar-les o utilitzeu el menú desplegable per a més accions.",
+		"description": "[modal-explainer] explica la funcionalitat del modal de gestió de pestanyes"
 	},
 	"must_non_empty_str": {
 		"message": "ha de ser una cadena no buida",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Pàgina Setup",
 		"description": "[notSalesforceSetup] la pàgina per modificar els paràmetres de Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Mostra totes les $tabs",
+		"description": "[manage-tabs] etiqueta del botó per mostrar totes les Tab"
 	},
 	"skip": {
 		"message": "Saltar",

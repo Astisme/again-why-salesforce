@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Actions",
+		"description": "Dropdown menu label for tab actions"
+	},
 	"active": {
 		"message": "Active",
 		"description": "Used in toggles for active state"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[context-menu]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] open the modal to manage saved $tabs directly on Salesforce Setup page"
 	},
 	"cxm_move": {
 		"message": "🧭 Move $tab",
@@ -627,6 +635,10 @@
 		"message": "Takes you to the $salesforce_setup page automatically $if_click_popup inside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "You may reorder your $tabs by using the dots and dragging it.",
+		"description": "[manage-tabs] explain how to drag the Tabs around"
+	},
 	"help_keep_sort": {
 		"message": "When enabled, your $tabs are kept in sorted order, depending on what you pick.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Disables the extension check verifying that a $url fragment matches the format of Salesforce record/object IDs ( used to automatically set the saved $tab as an $org $tab ).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Here you'll find a submenu to perform different actions on the $tab in the same row.",
+		"description": "[manage-tabs] explain what the arrow on the right contains"
+	},
+	"help_tab_label": {
+		"message": "This is the common name you'll use to remember where this $tab will take you.",
+		"description": "[manage-tabs] explain what the Tab label is"
+	},
+	"help_tab_org": {
+		"message": "This is the Salesforce $org name where this $tab will be shown. If left empty, this $tab will be shown in every Salesforce $org you visit.",
+		"description": "[manage-tabs] explain what the Tab Org is"
+	},
+	"help_tab_url": {
+		"message": "This is the (shortened) link where you'll be redirected when clicking on this $tab",
+		"description": "[manage-tabs] explain what the Tab URL is"
+	},
 	"help_tip_click_link": {
 		"message": "Click to be redirected to the documentation for this setting!",
 		"description": "[settings-help] call to action to let the user read more about a specific setting"
+	},
+	"hide_other_org_tabs": {
+		"message": "Hide $other_org_placeholder $tabs",
+		"description": "[manage-tabs] button label to hide other Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "if you click the extension popup",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_login page"
+	},
+	"manage_tabs": {
+		"message": "Manage $tabs",
+		"description": "[modal-title] modal to manage saved $tabs with editable fields and drag-to-reorder"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edit, reorder, and manage your saved $tabs directly from this modal. Drag rows to reorder, or use the dropdown menu for more actions.",
+		"description": "[modal-explainer] explains the manage tabs modal functionality"
 	},
 	"must_non_empty_str": {
 		"message": "must be a non-empty string",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] the page used to modify the settings of Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Show all $tabs",
+		"description": "[manage-tabs] button label to show all Tabs"
 	},
 	"skip": {
 		"message": "Skip",

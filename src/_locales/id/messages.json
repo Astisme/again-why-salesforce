@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Tindakan",
+		"description": "Label menu dropdown untuk tindakan Tab"
+	},
 	"active": {
 		"message": "Aktif",
 		"description": "Digunakan dalam tombol sakelar untuk status aktif"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menu-konteks]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] buka modal untuk mengelola $tabs yang disimpan langsung di halaman Penyiapan Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Pindahkan Tab",
@@ -626,6 +634,10 @@
 		"message": "Jika Anda mengeklik popup ekstensi di dalam domain Salesforce tetapi tidak di halaman Setup, Anda akan dibawa ke halaman Setup Salesforce secara otomatis.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Anda dapat menyusun ulang $tabs Anda dengan menggunakan titik-titik dan menyeretnya.",
+		"description": "[manage-tabs] menjelaskan cara menyeret Tab"
+	},
 	"help_keep_sort": {
 		"message": "Saat diaktifkan, Tab Anda akan diurutkan—baik berdasarkan label, URL, atau Org; tergantung pada pilihan Anda.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "Menonaktifkan pemeriksaan ekstensi yang memverifikasi bahwa fragmen URL cocok dengan format ID record/objek Salesforce (digunakan untuk secara otomatis menetapkan Tab yang disimpan sebagai Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Di sini Anda akan menemukan submenu untuk melakukan berbagai tindakan pada $tab di baris yang sama.",
+		"description": "[manage-tabs] menjelaskan apa isi panah di sebelah kanan"
+	},
+	"help_tab_label": {
+		"message": "Ini adalah nama umum yang akan Anda gunakan untuk mengingat ke mana $tab ini akan membawa Anda.",
+		"description": "[manage-tabs] menjelaskan apa itu label Tab"
+	},
+	"help_tab_org": {
+		"message": "Ini adalah nama Salesforce $org tempat $tab ini akan ditampilkan. Jika dibiarkan kosong, $tab ini akan ditampilkan di setiap Salesforce $org yang Anda kunjungi.",
+		"description": "[manage-tabs] menjelaskan apa itu Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ini adalah tautan (yang dipersingkat) tempat Anda akan diarahkan saat mengklik $tab ini",
+		"description": "[manage-tabs] menjelaskan apa itu URL Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Klik untuk diarahkan ke dokumentasi untuk pengaturan ini!",
 		"description": "[bantuan-pengaturan] ajakan bertindak untuk membiarkan pengguna membaca lebih lanjut tentang pengaturan tertentu"
+	},
+	"hide_other_org_tabs": {
+		"message": "Sembunyikan $tabs $other_org_placeholder",
+		"description": "[manage-tabs] label tombol untuk menyembunyikan Org Tabs lainnya"
 	},
 	"if_click_popup": {
 		"message": "jika Anda mengklik popup ekstensi",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Login ke Salesforce",
 		"description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Kelola $tabs",
+		"description": "[modal-title] modal untuk mengelola $tabs yang disimpan dengan bidang yang dapat diedit dan seret-untuk-menyusun-ulang"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edit, susun ulang, dan kelola $tabs yang Anda simpan langsung dari modal ini. Seret baris untuk menyusun ulang, atau gunakan menu dropdown untuk tindakan lainnya.",
+		"description": "[modal-explainer] menjelaskan fungsionalitas modal kelola tab"
 	},
 	"must_non_empty_str": {
 		"message": "harus berupa string yang tidak kosong",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Halaman Setup",
 		"description": "[notSalesforceSetup] Halaman untuk mengubah pengaturan Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Tampilkan semua $tabs",
+		"description": "[manage-tabs] label tombol untuk menampilkan semua Tab"
 	},
 	"skip": {
 		"message": "Lewati",

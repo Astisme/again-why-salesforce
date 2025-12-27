@@ -88,6 +88,9 @@ function sendMessage(message, callback) {
  * @return {Promise} promise resolving based on sendMessage
  */
 export function sendExtensionMessage(message, callback = null) {
+	if (message == null) {
+		return;
+	}
 	if (callback == null) {
 		return new Promise((resolve, reject) => {
 			sendMessage(
@@ -338,6 +341,7 @@ export const CXM_TMP_HIDE_ORG = "hide-with-org";
 export const CXM_TMP_HIDE_NON_ORG = "hide-without-org";
 export const CXM_PIN_TAB = "pin-tab";
 export const CXM_UNPIN_TAB = "unpin-tab";
+export const CXM_MANAGE_TABS = "manage-tabs";
 // commands (keyboard shortcuts)
 export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
 export const CMD_REMOVE_TAB = "cmd-remove-tab";

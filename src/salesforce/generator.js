@@ -1,8 +1,11 @@
 "use strict";
 import Tab from "/tab.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
+	CXM_PIN_TAB,
+	CXM_REMOVE_TAB,
+	CXM_UNPIN_TAB,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
@@ -27,6 +30,7 @@ import {
 import ensureTranslatorAvailability from "/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";
+import { updateModalBodyOverflow } from "./manageTabs.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -823,6 +827,10 @@ export async function generateSldsModal({
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
+	const awsfStyle = document.createElement("style");
+	awsfStyle.textContent =
+		".hidden { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }";
+	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
 	backdropDiv.classList.add(
@@ -967,7 +975,10 @@ export async function generateSldsModal({
 	heading.style.marginLeft = "0.5rem";
 	titleContainer.appendChild(heading);
 	const legend = document.createElement("div");
-	legend.classList.add("required-legend");
+	legend.classList.add(
+		"required-legend",
+		"slds-p-top--none",
+	);
 	article.appendChild(legend);
 	const abbr = document.createElement("abbr");
 	abbr.classList.add("slds-required");
@@ -1559,18 +1570,124 @@ export async function generateUpdateTabModal(label, url, org) {
 }
 
 /**
+ * Generates an i icon which includes information and a possibly a link to the resource
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {null} [param0.text=null] the text to be inserted in the popup
+ * @param {null} [param0.link=null] the valid URL to the resource to give deeper insights
+ * @param {boolean} [param0.showTop=false] whether to show the popup at the top
+ * @param {boolean} [param0.showBottom=false] whether to show the popup at the bottom
+ * @param {boolean} [param0.showRight=false] whether to show the popup at the right
+ * @param {boolean} [param0.showLeft=false] whether to show the popup at the left
+ * @return {Object} used by the `help.js` class
+ */
+export function generateHelpWith_i_popup({
+	text = null,
+	link = null,
+	showTop = false,
+	showBottom = false,
+	showRight = false,
+	showLeft = false,
+} = {}) {
+	const wasCalledWithParams = text != null || link != null;
+	const root = document.createElement("div");
+	root.className = "help-icon";
+	const anchor = document.createElement("a");
+	root.append(anchor);
+	anchor.className = "button";
+	anchor.setAttribute("aria-describedby", "tooltip");
+	if (wasCalledWithParams && link != null && link !== "") anchor.href = link;
+	const svgNS = "http://www.w3.org/2000/svg";
+	const svg = document.createElementNS(svgNS, "svg");
+	anchor.append(svg);
+	svg.setAttribute("focusable", "false");
+	svg.setAttribute("aria-hidden", "true");
+	svg.setAttribute("viewBox", "0 0 520 520");
+	svg.setAttribute("class", "slds-button__icon");
+	const g = document.createElementNS(svgNS, "g");
+	svg.appendChild(g);
+	const path = document.createElementNS(svgNS, "path");
+	g.appendChild(path);
+	path.setAttribute(
+		"d",
+		"M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z",
+	);
+	const assistive = document.createElement("span");
+	anchor.append(assistive);
+	assistive.className = "assistive";
+	assistive.hidden = true;
+	const tooltip = document.createElement("div");
+	root.append(tooltip);
+	tooltip.className = "tooltip";
+	tooltip.setAttribute("role", "tooltip");
+	let slot;
+	if (wasCalledWithParams) {
+		tooltip.dataset.showTop = showTop ||
+			(!showTop && !showBottom && !showRight && !showLeft);
+		tooltip.dataset.showBottom = showBottom;
+		tooltip.dataset.showRight = showRight;
+		tooltip.dataset.showLeft = showLeft;
+		slot = document.createElement("span");
+		slot.textContent = text;
+		const linkid = `${EXTENSION_NAME}-helpcss`;
+		if (!document.getElementById(linkid)) {
+			const link = document.createElement("link");
+			link.id = linkid;
+			link.rel = "stylesheet";
+			link.type = "text/css";
+			link.href = BROWSER.runtime.getURL("/components/help/help.css");
+			document.head.appendChild(link);
+		}
+	} else {
+		slot = document.createElement("slot");
+		slot.name = "text";
+		slot.textContent = "Nothing to see here...";
+	}
+	tooltip.append(slot);
+	const linkTip = document.createElement("div");
+	tooltip.append(linkTip);
+	linkTip.classList.add("link-tip", "hidden");
+	(async () => {
+		const translator = await ensureTranslatorAvailability();
+		assistive.textContent = await translator.translate("help");
+		linkTip.textContent = await translator.translate("help_tip_click_link");
+	})();
+	return {
+		root,
+		anchor,
+		tooltip,
+		linkTip,
+		slot,
+	};
+}
+
+/**
  * Creates a table header cell (th)
  * @param {string} label - The visible label text
  * @param {string} ariaLabel - The aria-label for accessibility
  * @param {string[]} classList - Additional CSS classes
+ * @param {{}} [info={}] - an object used to generate an info button with a popup
  * @return {HTMLTableCellElement} The created th element
  */
-function createTableHeader(label = "", ariaLabel = "", classList = []) {
+function createTableHeader(
+	label = "",
+	ariaLabel = "",
+	classList = [],
+	info = {},
+) {
 	const th = document.createElement("th");
 	th.scope = "col";
 	th.classList.add(...classList);
 	th.setAttribute("aria-label", ariaLabel);
-	th.textContent = label;
+	const div = document.createElement("div");
+	th.append(div);
+	div.textContent = label;
+	if (Object.keys(info).length > 0) {
+		th.style.overflow = "visible";
+		div.style.display = "flex";
+		div.style.alignItems = "center";
+		div.style.justifyContent = "space-around";
+		div.append(generateHelpWith_i_popup(info).root);
+	}
 	return th;
 }
 
@@ -1581,6 +1698,7 @@ function createTableHeader(label = "", ariaLabel = "", classList = []) {
  */
 function createTable(headers = []) {
 	const table = document.createElement("table");
+	table.id = "sortable-table"; // for drag handler to find it
 	table.classList.add(
 		"forceRecordLayout",
 		"uiVirtualDataGrid--default",
@@ -1597,7 +1715,12 @@ function createTable(headers = []) {
 	thead.appendChild(tr);
 	for (const header of headers) {
 		tr.appendChild(
-			createTableHeader(header.label, header.ariaLabel, header.classList),
+			createTableHeader(
+				header.label,
+				header.ariaLabel,
+				header.classList,
+				header.info,
+			),
 		);
 	}
 	const tbody = document.createElement("tbody");
@@ -1713,6 +1836,95 @@ function generateTableWithCheckboxes(
  * - closeButton: The close button element for closing the modal.
  * - getSelectedTabs: A function that returns an array of selected Tab objects.
  */
+/**
+ * Helper function to add title and explainer to a modal article.
+ * Creates and prepends a centered explainer span with translated text.
+ *
+ * @param {HTMLElement} article - The modal article element
+ * @param {string} explainerKey - The i18n key for the explainer text
+ * @return {Promise<HTMLElement>} The explainer element
+ */
+async function addModalExplainer(article, explainerKey) {
+	const translator = await ensureTranslatorAvailability();
+	const explainerEl = document.createElement("span");
+	explainerEl.textContent = await translator.translate(explainerKey);
+	explainerEl.style.display = "flex";
+	explainerEl.style.justifyContent = "center";
+	explainerEl.style.textAlign = "center";
+	explainerEl.classList.add(
+		"slds-p-around_medium",
+		"slds-p-bottom--none",
+	);
+	article.prepend(explainerEl);
+	return explainerEl;
+}
+
+/**
+ * Helper function to create and append a modal content container (divParent).
+ * Applies standard SLDS styling for modal content areas.
+ *
+ * @param {HTMLElement} article - The modal article element
+ * @return {HTMLElement} The created and appended container element
+ */
+function createModalContentContainer(article) {
+	const divParent = document.createElement("div");
+	article.appendChild(divParent);
+	divParent.classList.add(
+		"forceBaseListView",
+		"visualEditorModal",
+		"flexipageEditorActivateContent",
+		"flexipageEditorActivateRecordPage",
+		"slds-p-top--none",
+	);
+	divParent.style.padding =
+		"var(--lwc-spacingLarge,1.5rem) var(--lwc-spacingXLarge,2rem)";
+	return divParent;
+}
+
+/**
+ * Helper function to create a styled table cell (td).
+ *
+ * @param {string} text - The cell content text
+ * @param {Object} options - Configuration options
+ * @param {boolean} [options.wordBreak=false] - Whether to apply word-break styling
+ * @return {HTMLTableCellElement} The created td element
+ */
+function createTableCell({
+	value = "",
+	placeholder = "",
+	className = "",
+	wordBreak = false,
+} = {}) {
+	const td = document.createElement("td");
+	td.style.padding = "0.75rem";
+	td.classList.add("slds-cell-wrap");
+	const input = document.createElement("input");
+	input.type = "text";
+	input.className = className;
+	input.value = value ?? "";
+	input.placeholder = placeholder;
+	input.style.width = "100%";
+	input.style.padding = "0.25rem";
+	if (wordBreak) {
+		input.style.wordBreak = "break-all";
+	}
+	td.appendChild(input);
+	return { td, input };
+}
+
+/**
+ * Generates a modal with the given Tabs. Each row can be selected using a checkbox
+ * @param {Tab[]} [tabs=[]] - the Tab array that needs to be shown in the modal
+ * @param {Object} [param1={}] an object with the following keys
+ * @param {string} [param1.title="export_tabs"] the title so that the modal can be recognized
+ * @param {string} [param1.saveButtonLabel="export"] the label used for the submit button
+ * @param {string} [param1.explainer="select_tabs_export"] a brief explanation of what the modal is supposed to do
+ * @return {Object} with these keys
+ *  - modalParent: containing the element to append to show the modal,
+ *  - saveButton: the submit button on which to add related submit logic,
+ *  - closeButton: the cancel button which removes the modal,
+ *  - getSelectedTabs: function to retrieve all currently selected Tabs,
+ */
 export async function generateSldsModalWithTabList(tabs = [], {
 	title = "export_tabs",
 	saveButtonLabel = "export",
@@ -1724,11 +1936,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			modalTitle: await translator.translate(title),
 			saveButtonLabel: await translator.translate(saveButtonLabel),
 		});
-	const explainerEl = document.createElement("span");
-	explainerEl.textContent = await translator.translate(explainer);
-	explainerEl.style.display = "flex";
-	explainerEl.style.justifyContent = "center";
-	article.prepend(explainerEl);
+	await addModalExplainer(article, explainer);
 	// counter for how many Tabs are selected
 	const tabConterOpen = document.createElement("span");
 	tabConterOpen.innerHTML = "&nbsp;(";
@@ -1755,9 +1963,21 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		// this checkboxes is the one returned from generateTableWithCheckboxes
 		const checkedCount = checkboxes.filter((cb) => cb.checked).length;
 		tabCounter.textContent = checkedCount;
-		selectAllButton.disabled = checkedCount === checkboxes.length;
-		unselectAllButton.disabled = checkedCount === 0;
-		saveButton.disabled = unselectAllButton.disabled;
+		if (checkedCount === checkboxes.length) {
+			selectAllButton.setAttribute("disabled", true);
+		} else {
+			selectAllButton.removeAttribute("disabled");
+		}
+		if (checkedCount === 0) {
+			unselectAllButton.setAttribute("disabled", true);
+		} else {
+			unselectAllButton.removeAttribute("disabled");
+		}
+		if (unselectAllButton.hasAttribute("disabled")) {
+			saveButton.setAttribute("disabled", true);
+		} else {
+			saveButton.removeAttribute("disabled");
+		}
 	}
 	const { checkboxes, table: tabsListTable } =
 		await generateTableWithCheckboxes(
@@ -1766,21 +1986,11 @@ export async function generateSldsModalWithTabList(tabs = [], {
 			updateSelectAllButtonText,
 		);
 	// Add Tabs list container
-	const divParent = document.createElement("div");
-	article.appendChild(divParent);
-	divParent.classList.add(
-		"forceBaseListView",
-		"visualEditorModal",
-		"flexipageEditorActivateContent",
-		"flexipageEditorActivateRecordPage",
-		"slds-p-top--none",
-	);
-	divParent.style.padding =
-		"var(--lwc-spacingLarge,1.5rem) var(--lwc-spacingXLarge,2rem)";
+	const divParent = createModalContentContainer(article);
 	divParent.appendChild(tabsListTable);
 	// Create select/unselect all button container
 	// Create Select All button
-	selectAllButton.disabled = true;
+	selectAllButton.setAttribute("disabled", true);
 	selectAllButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
@@ -1813,7 +2023,7 @@ export async function generateSldsModalWithTabList(tabs = [], {
 	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
 	 */
 	function getSelectedTabs() {
-		const selectedAll = selectAllButton.disabled;
+		const selectedAll = selectAllButton.hasAttribute("disabled");
 		const selectedTabs = selectedAll ? tabs : checkboxes
 			.filter((checkbox) => checkbox.checked)
 			.map((checkbox) =>
@@ -1829,5 +2039,499 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		saveButton,
 		closeButton,
 		getSelectedTabs,
+	};
+}
+
+/**
+ * Creates a drag handle SVG icon for reordering rows
+ * @param {boolean} [draggable=false] - whether the handle should be set as draggable or not
+ * @return {SVGSVGElement} The drag handle SVG element
+ */
+function createDragHandle(draggable = false) {
+	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	svg.setAttribute("viewBox", "0 0 24 24");
+	svg.setAttribute("width", "20");
+	svg.setAttribute("height", "20");
+	svg.setAttribute("fill", "currentColor");
+	svg.dataset.draggable = draggable;
+	// Six dots on two columns
+	const rect1 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect1.setAttribute("x", "6");
+	rect1.setAttribute("y", "4");
+	rect1.setAttribute("width", "2");
+	rect1.setAttribute("height", "2");
+	svg.appendChild(rect1);
+	const rect2 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect2.setAttribute("x", "6");
+	rect2.setAttribute("y", "11");
+	rect2.setAttribute("width", "2");
+	rect2.setAttribute("height", "2");
+	svg.appendChild(rect2);
+	const rect3 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect3.setAttribute("x", "6");
+	rect3.setAttribute("y", "18");
+	rect3.setAttribute("width", "2");
+	rect3.setAttribute("height", "2");
+	svg.appendChild(rect3);
+	const rect4 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect4.setAttribute("x", "16");
+	rect4.setAttribute("y", "4");
+	rect4.setAttribute("width", "2");
+	rect4.setAttribute("height", "2");
+	svg.appendChild(rect4);
+	const rect5 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect5.setAttribute("x", "16");
+	rect5.setAttribute("y", "11");
+	rect5.setAttribute("width", "2");
+	rect5.setAttribute("height", "2");
+	svg.appendChild(rect5);
+	const rect6 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect6.setAttribute("x", "16");
+	rect6.setAttribute("y", "18");
+	rect6.setAttribute("width", "2");
+	rect6.setAttribute("height", "2");
+	svg.appendChild(rect6);
+	return svg;
+}
+
+/**
+ * Helper function to create a styled button with SLDS classes.
+ *
+ * @param {string} text - The button text
+ * @param {Object} options - Configuration options
+ * @param {string} [options.variant="neutral"] - Button variant: "neutral" or "destructive"
+ * @param {string} [options.action] - The data-action attribute value
+ * @param {number} [options.tabIndex] - The data-tabIndex attribute value
+ * @return {HTMLButtonElement} The created button element
+ */
+function createStyledButton(
+	text,
+	{ variant = "neutral", action, tabIndex } = {},
+) {
+	const btn = document.createElement("a");
+	btn.classList.add(
+		"slds-button",
+		`slds-button_${variant}`,
+		"slds-button_small",
+		"awsf-td-button",
+	);
+	btn.textContent = text;
+	btn.style.marginLeft = "0";
+	btn.style.width = "100%";
+	btn.style.justifyContent = "flex-start";
+	btn.style.paddingLeft = "0.75rem";
+	btn.style.borderRadius = "0";
+	btn.style.border = "none";
+	btn.style.textAlign = "left";
+	if (action != null) {
+		btn.dataset.action = action;
+	}
+	if (tabIndex != null) {
+		btn.dataset.tabIndex = tabIndex;
+	}
+	return btn;
+}
+
+/**
+ * Creates a table row with editable inputs for label, URL, and org.
+ * Used by generateManageTabsModal for creating editable tab rows.
+ *
+ * @param {Object} [tab={}] an Object with the following keys
+ * @param {string} [tab.label=""] the label of the Tab
+ * @param {string} [tab.url=""] the url of the Tab
+ * @param {string|null} [tab.org=null] the org of the Tab
+ * @param {Object} [config={}] an Object with the following keys
+ * @param {number} [config.index=0] The row index for data-row-index
+ * @param {boolean} [config.pinned=false] whether the Tab is pinned
+ * @param {boolean} [config.draggable=false] whether the tr is draggable
+ * @param {boolean} [config.disabled=true] whether the tr elements should be disabled
+ * @param {boolean} [config.isThisOrgTab=true] whether the tr contains a Tab related to this Org
+ * @return {Promise<HTMLTableRowElement>} The created tr element
+ */
+export async function createManageTabRow({
+	label = "",
+	url = "",
+	org = null,
+} = {}, {
+	index = 0,
+	pinned = false,
+	disabled = true,
+	isThisOrgTab = true,
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const draggable = !disabled;
+	const tr = document.createElement("tr");
+	tr.dataset.rowIndex = index;
+	tr.classList.add(
+		"slds-hint-parent",
+		EXTENSION_NAME,
+		isThisOrgTab ? undefined : "hidden",
+	);
+	tr.draggable = draggable;
+	tr.dataset.draggable = draggable;
+	tr.dataset.isThisOrgTab = isThisOrgTab;
+	// Drag handle cell
+	const dragCell = document.createElement("td");
+	dragCell.style.padding = "0.75rem";
+	dragCell.style.width = "30px";
+	dragCell.style.textAlign = "center";
+	dragCell.style.cursor = "grab";
+	dragCell.classList.add("slds-cell-wrap");
+	dragCell.appendChild(createDragHandle(draggable));
+	dragCell.dataset.draggable = draggable;
+	tr.appendChild(dragCell);
+	// Label cell with input
+	const { td: labelTd, input: labelInput } = createTableCell({
+		value: label,
+		placeholder: await translator.translate("tab_label"),
+		className: "label",
+	});
+	tr.appendChild(labelTd);
+	// URL cell with input
+	const { td: urlTd, input: urlInput } = createTableCell({
+		value: url,
+		placeholder: await translator.translate("tab_url"),
+		className: "url",
+		wordBreak: true,
+	});
+	tr.appendChild(urlTd);
+	// Org cell with input
+	const { td: orgTd, input: orgInput } = createTableCell({
+		value: org,
+		placeholder: await translator.translate("tab_org"),
+		className: "org",
+	});
+	tr.appendChild(orgTd);
+	// Actions cell with dropdown
+	const actionsCell = document.createElement("td");
+	tr.appendChild(actionsCell);
+	actionsCell.style.padding = "0.75rem";
+	actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
+	actionsCell.style.overflow = "visible";
+	// Position the dropdown relative to button
+	const buttonContainer = document.createElement("div");
+	actionsCell.appendChild(buttonContainer);
+	buttonContainer.style.position = "relative";
+	buttonContainer.style.display = "inline-block";
+	// Dropdown button
+	const dropdownButton = document.createElement("button");
+	buttonContainer.appendChild(dropdownButton);
+	dropdownButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	if (disabled) {
+		dropdownButton.setAttribute("disabled", true);
+	}
+	dropdownButton.style.position = "relative";
+	dropdownButton.textContent = `▼`; // downward arrow
+	dropdownButton.title = await translator.translate("actions");
+	dropdownButton.dataset.name = "dropdownButton";
+	// Dropdown menu container
+	const dropdownMenu = document.createElement("div");
+	buttonContainer.appendChild(dropdownMenu);
+	dropdownMenu.classList.add(
+		"actions-dropdown-menu",
+		"hidden",
+	);
+	dropdownMenu.style.position = "absolute";
+	dropdownMenu.style.top = "100%";
+	dropdownMenu.style.right = "0";
+	dropdownMenu.style.backgroundColor = "white";
+	dropdownMenu.style.border = "1px solid #d3d3d3";
+	dropdownMenu.style.borderRadius = "0.25rem";
+	dropdownMenu.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+	dropdownMenu.style.zIndex = "1";
+	dropdownMenu.style.minWidth = "120px";
+	dropdownMenu.style.padding = "0.5rem 0";
+	dropdownMenu.style.display = "flex";
+	dropdownMenu.style.flexDirection = "column";
+	// Open button
+	const openBtn = createStyledButton(
+		await translator.translate("open"),
+		{ action: "open", tabIndex: index },
+	);
+	openBtn.addEventListener("click", handleLightningLinkClick);
+	if (url) {
+		openBtn.href = Tab.expandURL(url, getCurrentHref());
+	}
+	dropdownMenu.appendChild(openBtn);
+	// Pin/Unpin button (toggle - only show one at a time)
+	const pinBtn = createStyledButton(
+		await translator.translate("cxm_pin_tab"),
+		{ action: CXM_PIN_TAB, tabIndex: index },
+	);
+	pinBtn.classList.add("pin-btn");
+	if (pinned) {
+		dragCell.classList.add(PIN_TAB_CLASS);
+		pinBtn.style.display = "none";
+	}
+	dropdownMenu.appendChild(pinBtn);
+	const unpinBtn = createStyledButton(
+		await translator.translate("cxm_unpin_tab"),
+		{ action: CXM_UNPIN_TAB, tabIndex: index },
+	);
+	unpinBtn.classList.add("unpin-btn");
+	if (!pinned) {
+		unpinBtn.style.display = "none";
+	}
+	dropdownMenu.appendChild(unpinBtn);
+	// Delete button
+	const deleteBtn = createStyledButton(
+		await translator.translate("delete"),
+		{ action: CXM_REMOVE_TAB, tabIndex: index },
+	);
+	deleteBtn.classList.add("delete-btn");
+	if (label === "" && url === "") {
+		deleteBtn.setAttribute("disabled", true); // disabled for empty rows
+	}
+	dropdownMenu.appendChild(deleteBtn);
+	// Dropdown toggle functionality
+	dropdownButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		dropdownMenu.classList.toggle("hidden");
+	});
+	// Prevent dropdown from closing when clicking inside
+	dropdownMenu.addEventListener("click", (e) => {
+		e.preventDefault();
+	});
+	return {
+		tr,
+		dropdownMenu,
+		dropdownButton,
+		logger: {
+			label: labelInput,
+			url: urlInput,
+			org: orgInput,
+			last_input: {
+				label,
+				url,
+				org,
+			},
+		},
+	};
+}
+
+/**
+ * Generates a modal for managing saved tabs with editable fields and drag-to-reorder functionality.
+ * Allows users to edit tabs, add new tabs, and manage pinning/unpinning directly from the modal.
+ *
+ * @param {Array<Tab>} tabs - Array of saved Tab objects
+ * @param {Object} options - Configuration options
+ * @param {string} [options.title="manage_tabs"] - i18n key for modal title
+ * @param {string} [options.saveButtonLabel="save"] - i18n key for save button label
+ * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
+ * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs)
+ */
+export async function generateManageTabsModal(tabs = [], {
+	title = "manage_tabs",
+	saveButtonLabel = "save",
+	explainer = "manage_tabs_explainer",
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const {
+		modalParent,
+		article,
+		closeButton,
+		saveButton,
+		buttonContainer,
+	} = await generateSldsModal({
+		modalTitle: await translator.translate(title),
+		saveButtonLabel: await translator.translate(saveButtonLabel),
+	});
+	await addModalExplainer(article, explainer);
+	// Create a table-like structure for tabs
+	const divParent = createModalContentContainer(article);
+	// Table header with drag handle column
+	const headers = [
+		{
+			label: "",
+			info: {
+				text: await translator.translate("help_drag_tabs"),
+				link: "",
+				showRight: true,
+			},
+		}, // drag handle column
+		{
+			label: await translator.translate("tab_label"),
+			info: {
+				text: await translator.translate("help_tab_label"),
+				link: "",
+				showBottom: true,
+			},
+		},
+		{
+			label: await translator.translate("tab_url"),
+			info: {
+				text: await translator.translate("help_tab_url"),
+				link: "",
+				showBottom: true,
+			},
+		},
+		{
+			label: await translator.translate("tab_org"),
+			info: {
+				text: await translator.translate("help_tab_org"),
+				link: "",
+				showBottom: true,
+			},
+		},
+		{
+			label: await translator.translate("actions"),
+			info: {
+				text: await translator.translate("help_tab_actions"),
+				link: "testlinkactions",
+				showLeft: true,
+			},
+		},
+	];
+	const { table, tbody } = createTable(headers);
+	divParent.appendChild(table);
+	// add 2 new buttons to hide & show not-this-org Tabs
+	// Create Show All button
+	const showAllTabsButton = document.createElement("button");
+	showAllTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+		"show_all_tabs",
+	);
+	showAllTabsButton.textContent = await translator.translate("show_all_tabs");
+	buttonContainer.prepend(showAllTabsButton);
+	// Create Unselect All button
+	const hideOtherOrgTabsButton = document.createElement("button");
+	hideOtherOrgTabsButton.setAttribute("disabled", true);
+	hideOtherOrgTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+		"hide_other_org_tabs",
+	);
+	hideOtherOrgTabsButton.textContent = await translator.translate(
+		"hide_other_org_tabs",
+	);
+	buttonContainer.prepend(hideOtherOrgTabsButton);
+	showAllTabsButton.addEventListener("click", () => {
+		for (
+			const otherOrgTr of tbody.querySelectorAll(
+				"tr[data-is-this-org-tab=false]",
+			)
+		) {
+			otherOrgTr.classList.remove("hidden");
+		}
+		showAllTabsButton.setAttribute("disabled", true);
+		hideOtherOrgTabsButton.removeAttribute("disabled");
+		updateModalBodyOverflow(article);
+	});
+	hideOtherOrgTabsButton.addEventListener("click", () => {
+		for (
+			const otherOrgTr of tbody.querySelectorAll(
+				"tr[data-is-this-org-tab=false]",
+			)
+		) {
+			otherOrgTr.classList.add("hidden");
+		}
+		hideOtherOrgTabsButton.setAttribute("disabled", true);
+		showAllTabsButton.removeAttribute("disabled");
+		updateModalBodyOverflow(article);
+	});
+	const loggers = []; // track input changes
+	const actionsMap = {}; // map to store action handlers for each row
+	// Create rows for all existing tabs
+	const allDropMenus = [];
+	const allTrs = [];
+	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
+	let notThisOrgTabs = 0;
+	for (let i = 0; i < tabs.length; i++) {
+		const tab = tabs[i];
+		const isThisOrgTab = tab.org == null ||
+			tab.org === Tab.extractOrgName(getCurrentHref());
+		if (!isThisOrgTab) {
+			notThisOrgTabs++;
+		}
+		const {
+			tr,
+			dropdownMenu,
+			dropdownButton,
+			logger,
+		} = await createManageTabRow(tab, {
+			index: i,
+			pinned: i < pinnedNumber,
+			disabled: false,
+			isThisOrgTab,
+		});
+		allTrs.push({ tr, dropdownButton });
+		allDropMenus.push(dropdownMenu);
+		loggers.push(logger);
+		tbody.appendChild(tr);
+		// Store action handlers for this tab
+		actionsMap[i] = {
+			[CXM_PIN_TAB]: {
+				what: CXM_PIN_TAB,
+				...tab,
+			},
+			[CXM_UNPIN_TAB]: {
+				what: CXM_UNPIN_TAB,
+				...tab,
+			},
+			[CXM_REMOVE_TAB]: {
+				what: CXM_REMOVE_TAB,
+				...tab,
+			},
+		};
+	}
+	// disable the showAllTabsButton if needed
+	if (notThisOrgTabs <= 0) {
+		showAllTabsButton.setAttribute("disabled", true);
+	}
+	// Add empty row for new tabs
+	const {
+		tr: emptyRow,
+		dropdownMenu: lastMenu,
+		dropdownButton: lastButton,
+		logger: lastLogger,
+	} = await createManageTabRow({}, {
+		index: tabs.length,
+	});
+	allTrs.push({ tr: emptyRow, dropdownButton: lastButton });
+	allDropMenus.push(lastMenu);
+	loggers.push(lastLogger);
+	tbody.appendChild(emptyRow);
+	// Close dropdown when clicking outside
+	for (const { tr, dropdownButton } of allTrs) {
+		tr.addEventListener("click", (e) => {
+			if (e.target !== dropdownButton) {
+				for (const dropdownMenu of allDropMenus) {
+					dropdownMenu.classList.add("hidden");
+				}
+			}
+		});
+	}
+	return {
+		modalParent,
+		closeButton,
+		tbody,
+		actionsMap,
+		saveButton,
+		loggers,
 	};
 }

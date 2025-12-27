@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Akcje",
+		"description": "Etykieta menu rozwijanego dla akcji Tab"
+	},
 	"active": {
 		"message": "Aktywny",
 		"description": "Używane w przełącznikach dla stanu aktywnego"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menu-kontekstowe]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] otwórz modal do zarządzania zapisanymi $tabs bezpośrednio na stronie ustawień Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Przenieś Tab",
@@ -627,6 +635,10 @@
 		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia w domenie Salesforce, ale nie na stronie konfiguracji, automatycznie przeniesie Cię ono na stronę konfiguracji Salesforce.",
 		"description": "[settings-help] dla $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Możesz zmienić kolejność swoich $tabs, używając kropek i przeciągając je.",
+		"description": "[manage-tabs] wyjaśnienie, jak przeciągać Tab"
+	},
 	"help_keep_sort": {
 		"message": "Gdy włączone, Twoje karty są utrzymywane w posortowanej kolejności – albo wg etykiety, URL-a lub org., w zależności od tego, co wybierzesz.",
 		"description": "[settings-help] dla $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Wyłącza sprawdzanie rozszerzenia, które weryfikuje, czy fragment URL-a pasuje do formatu identyfikatorów rekordu/obiektu Salesforce (używane do automatycznego ustawiania zapisanej karty jako karty org.).",
 		"description": "[settings-help] dla $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Tutaj znajdziesz podmenu do wykonywania różnych akcji na $tab w tym samym rzędzie.",
+		"description": "[manage-tabs] wyjaśnienie, co zawiera strzałka po prawej stronie"
+	},
+	"help_tab_label": {
+		"message": "Jest to nazwa, której będziesz używać, aby zapamiętać, dokąd zaprowadzi Cię ta $tab.",
+		"description": "[manage-tabs] wyjaśnienie, czym jest etykieta Tab"
+	},
+	"help_tab_org": {
+		"message": "Jest to nazwa Salesforce $org, w której ta $tab będzie wyświetlana. Jeśli pozostanie puste, ta $tab będzie wyświetlana w każdej odwiedzanej przez Ciebie organizacji Salesforce $org.",
+		"description": "[manage-tabs] wyjaśnienie, czym jest Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Jest to (skrócony) link, do którego zostaniesz przekierowany po kliknięciu tej $tab",
+		"description": "[manage-tabs] wyjaśnienie, czym jest URL Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Kliknij, aby zostać przekierowanym do dokumentacji dla tego ustawienia!",
 		"description": "[pomoc-ustawienia] wezwanie do działania, aby umożliwić użytkownikowi przeczytanie więcej o konkretnym ustawieniu"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ukryj $tabs dla $other_org_placeholder",
+		"description": "[manage-tabs] etykieta przycisku do ukrywania innych Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "jeśli klikniesz wyskakujące okienko rozszerzenia",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Zaloguj się do Salesforce",
 		"description": "[nieKonfiguracjaSalesforce] wezwanie do działania na przycisku, aby przekierować użytkownika na stronę logowania Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Zarządzaj $tabs",
+		"description": "[modal-title] modal do zarządzania zapisanymi $tabs z edytowalnymi polami i przeciąganiem w celu zmiany kolejności"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edytuj, zmieniaj kolejność i zarządzaj zapisanymi $tabs bezpośrednio z tego modala. Przeciągaj wiersze, aby zmienić kolejność, lub użyj menu rozwijanego, aby uzyskać dostęp do dodatkowych akcji.",
+		"description": "[modal-explainer] wyjaśnia funkcjonalność modala do zarządzania kartami"
 	},
 	"must_non_empty_str": {
 		"message": "musi być niepustym ciągiem znaków",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Strona Konfiguracji",
 		"description": "[nieKonfiguracjaSalesforce] strona używana do modyfikowania ustawień Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Pokaż wszystkie $tabs",
+		"description": "[manage-tabs] etykieta przycisku do pokazania wszystkich Tab"
 	},
 	"skip": {
 		"message": "Pomiń",

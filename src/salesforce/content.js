@@ -11,6 +11,7 @@ import {
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
 	CXM_EXPORT_TABS,
+	CXM_MANAGE_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -71,6 +72,7 @@ import {
 } from "./generator.js";
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
+import { createManageTabsModal } from "./manageTabs.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -160,15 +162,20 @@ async function checkAddLightningNavigation() {
  * - Displays a toast message indicating that the Salesforce tabs have been saved.
  * - Reloads the tabs by calling `reloadTabs` with the provided tabs.
  *
- * @param {string|null} [what=null] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
- * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
- * @param {boolean} [shouldReload=true] - If the Tabs should be reloaded from scratch
+ * @param {Object} [param0] an object containing the following keys
+ * @param {string} [param0.what="saved"] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
+ * @param {Array<Tab>|null} [param0.tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
+ * @param {boolean} [param0.shouldReload=true] - If the Tabs should be reloaded from scratch
  */
-export function sf_afterSet(what = null, tabs = null, shouldReload = true) {
+export function sf_afterSet({
+	what = "saved",
+	tabs = null,
+	shouldReload = true,
+} = {}) {
 	if (setupTabUl == null) {
 		return;
 	}
-	if (what == null || what === "saved") {
+	if (what === "saved") {
 		showToast(["extension_label", "tabs_saved"]);
 	}
 	if (shouldReload === true) {
@@ -248,6 +255,7 @@ async function init(tabs = null) {
 			removeOrgTabs: true,
 			sync: false,
 			keepTabsNotThisOrg: orgName,
+			updatePinnedTabs: false,
 		});
 	}
 	if (allTabs.length > 0) {
@@ -468,9 +476,13 @@ async function reorderTabs() {
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
+			updatePinnedTabs: false,
 			//keepTabsNotThisOrg: Tab.extractOrgName(href),
 		});
-		sf_afterSet(undefined, tabs, false);
+		sf_afterSet({
+			tabs,
+			shouldReload: false,
+		});
 	} catch (error) {
 		showToast(error.message, false);
 	}
@@ -494,7 +506,7 @@ function _toggleWarning(duplicatetabs = []) {
  *
  * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
-function makeDuplicatesBold(miniURL) {
+export function makeDuplicatesBold(miniURL) {
 	const duplicatetabs = setupTabUl.querySelectorAll(`a[title="${miniURL}"]`);
 	if (duplicatetabs == null) {
 		return;
@@ -760,7 +772,7 @@ export async function performActionOnTabs(
 				return console.error(noMatch, action);
 			}
 		}
-		sf_afterSet(undefined, allTabs);
+		sf_afterSet({ tabs: allTabs });
 	} catch (error) {
 		console.warn({ action, tab, options });
 		showToast(error.message, false);
@@ -945,7 +957,7 @@ function listenToBackgroundPage() {
 				case "activate":
 				case "highlighted":
 				case "focuschanged":
-					sf_afterSet(message.what, message.tabs);
+					sf_afterSet(message);
 					break;
 				case "warning":
 					showToast(message.message, false, true);
@@ -958,6 +970,9 @@ function listenToBackgroundPage() {
 					break;
 				case ACTION_ADD:
 					createImportModal();
+					break;
+				case CXM_MANAGE_TABS:
+					createManageTabsModal();
 					break;
 				case WHAT_SHOW_EXPORT_MODAL:
 				case CXM_EXPORT_TABS:
@@ -1161,13 +1176,11 @@ function listenToBackgroundPage() {
  */
 function listenToReorderedTabs() {
 	addEventListener("message", (e) => {
-		if (e.source.location != globalThis.location) {
-			return;
-		}
-		const what = e.data.what;
-		if (what === "order") {
+		const message = e.data;
+		e.source.location.href == globalThis.location.href &&
+			message.what === "order" &&
+			message.containerName === "ul" &&
 			reorderTabs();
-		}
 	});
 }
 

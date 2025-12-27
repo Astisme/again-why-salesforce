@@ -13,33 +13,10 @@
 		>
 		<link rel="stylesheet" href="/action/variables.css" />
 		<link rel="stylesheet" href="/action/basic.css" />
-		<link rel="stylesheet" href="/settings/help/help.css" />
+		<link rel="stylesheet" href="/components/help/help.css" />
 		<link rel="stylesheet" href="./options.css" />
 		<script defer src="./options.js" type="module"></script>
-		<template id="help-template">
-			<div class="help-icon">
-				<a class="button" aria-describedby="tooltip">
-					<!-- default built-in icon slot fallback -->
-					<svg
-						focusable="false"
-						aria-hidden="true"
-						viewBox="0 0 520 520"
-						class="slds-button__icon"
-					>
-						<g>
-							<path
-								d="M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
-							>
-							</path>
-						</g>
-					</svg>
-					<span class="assistive" hidden data-i18n="help">Help</span>
-				</a>
-				<!-- deno-fmt-ignore -->
-				<div class="tooltip" role="tooltip"><slot name="text">Nothing to see here...</slot><div class="link-tip hidden" data-i18n="help_tip_click_link">Click to be redirected to the documentation for this setting!</div></div>
-			</div>
-		</template>
-		<script src="/settings/help/help.js" type="module"></script>
+		<script src="/components/help/help.js" type="module"></script>
 	</head>
 
 	<body>

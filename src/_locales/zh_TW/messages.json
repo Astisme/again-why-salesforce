@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "操作",
+		"description": "Tab 操作的下拉選單標籤"
+	},
 	"active": {
 		"message": "作用中",
 		"description": "用於作用中狀態的切換開關"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[內容功能表]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] 打開互動視窗，直接在 Salesforce 設定頁面上管理儲存的 $tabs"
 	},
 	"cxm_move": {
 		"message": "🧭 移動 Tab",
@@ -627,6 +635,10 @@
 		"message": "若您在 Salesforce 網域內點選擴充功能彈出式視窗，但不是在設定頁面，會自動將您帶往 Salesforce 設定頁面。",
 		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
 	},
+	"help_drag_tabs": {
+		"message": "您可以使用點並拖動來重新排序您的 $tabs。",
+		"description": "[manage-tabs] 說明如何拖動 Tab"
+	},
 	"help_keep_sort": {
 		"message": "啟用後，您的 Tab 會保持已排序的狀態—依標籤、URL 或 Org；取決於您的選擇。",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "停用擴充功能檢查，該檢查可驗證 URL 片段是否與 Salesforce 記錄/物件 ID 的格式相符（用於自動將儲存的 Tab 設定為 Org Tab）。",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "在這裡，您將找到一個子選單，用於對同一行中的 $tab 執行不同的操作。",
+		"description": "[manage-tabs] 說明右側箭頭包含的內容"
+	},
+	"help_tab_label": {
+		"message": "這是您用來記住此 $tab 將帶您去哪裡的常用名稱。",
+		"description": "[manage-tabs] 說明什麼是 Tab 標籤"
+	},
+	"help_tab_org": {
+		"message": "這是顯示此 $tab 的 Salesforce $org 名稱。如果留空，此 $tab 將在您訪問的每個 Salesforce $org 中顯示。",
+		"description": "[manage-tabs] 說明什麼是 Tab Org"
+	},
+	"help_tab_url": {
+		"message": "這是點擊此 $tab 時將被重新定向到的（縮短的）連結",
+		"description": "[manage-tabs] 說明什麼是 Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "點擊以重新導向到此設定的說明文件！",
 		"description": "[設定-幫助] 行動呼籲，讓使用者閱讀更多關於特定設定的資訊"
+	},
+	"hide_other_org_tabs": {
+		"message": "隱藏 $other_org_placeholder $tabs",
+		"description": "[manage-tabs] 隱藏其他 Org Tabs 的按鈕標籤"
 	},
 	"if_click_popup": {
 		"message": "如果您點擊擴充功能彈出視窗",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce 登入頁"
+	},
+	"manage_tabs": {
+		"message": "管理 $tabs",
+		"description": "[modal-title] 用於管理儲存的 $tabs 的互動視窗，具有可編輯欄位和拖動重排序功能"
+	},
+	"manage_tabs_explainer": {
+		"message": "直接從此互動視窗編輯、重新排序和管理您儲存的 $tabs。拖動行以重新排序，或使用下拉選單執行更多操作。",
+		"description": "[modal-explainer] 解釋管理分頁互動視窗的功能"
 	},
 	"must_non_empty_str": {
 		"message": "必須是非空字串",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] 用於修改 Salesforce 設定的頁面"
+	},
+	"show_all_tabs": {
+		"message": "顯示所有 $tabs",
+		"description": "[manage-tabs] 顯示所有 Tab 的按鈕標籤"
 	},
 	"skip": {
 		"message": "Skip",

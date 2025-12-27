@@ -1,9 +1,11 @@
+import { ensureAllTabsAvailability, TabContainer } from "./tabContainer.js";
 import { EXTENSION_NAME } from "/constants.js";
 
 let table;
 let ul;
 let container;
 let closestTag;
+let containerName;
 let dragSrcEl = null;
 
 /**
@@ -58,26 +60,59 @@ function handleDragOver(e) {
  * @param {Event} e - The drop event that is triggered when the user drops an item.
  * @return {boolean} - Returns `false` if the drop operation is not valid, preventing further action.
  */
-function handleDrop(e) {
+async function handleDrop(e) {
 	e.stopPropagation();
 	e.preventDefault();
-	const targetRow = e.target.closest(closestTag); // Get the target row
-	if (dragSrcEl == this || targetRow.tagName.toLowerCase() != closestTag) {
+	let targetRow = e.target.closest(closestTag); // Get the target row
+	if (
+		// moving in the same spot
+		dragSrcEl == this ||
+		targetRow == null ||
+		// moving somewhere incorrect
+		targetRow.tagName.toLowerCase() != closestTag ||
+		// moving over a non draggable element
+		!targetRow.draggable
+	) {
 		return false;
 	}
 	// Swap the positions of the dragged row and the target row
-	const parent = targetRow.parentNode; // Get the parent node (tbody)
-	const targetIndex = [...parent.children].indexOf(targetRow); // Get the index of the target row
-	const dragSrcIndex = [...parent.children].indexOf(dragSrcEl); // Get the index of the dragged row
-	if (targetIndex > dragSrcIndex) {
-		// If the target row is after the dragged row, insert the dragged row before the target row
+	const parent = targetRow.parentNode; // Get the parent node (tbody || ul)
+	const childrenArr = [...parent.children];
+	let targetIndex = childrenArr.indexOf(targetRow); // Get the index of the target row
+	const dragSrcIndex = childrenArr.indexOf(dragSrcEl); // Get the index of the dragged row
+	const pinnedNumber =
+		(await ensureAllTabsAvailability())[TabContainer.keyPinnedTabsNo];
+	const isMovingRight = targetIndex > dragSrcIndex;
+	if (
+		(
+			// is moving from pinned to unpinned
+			dragSrcIndex < pinnedNumber &&
+			pinnedNumber <= targetIndex
+		) ||
+		(
+			// is moving from unpinned to pinned
+			targetIndex < pinnedNumber &&
+			pinnedNumber <= dragSrcIndex
+		)
+	) {
+		// KO illegal movement
+		targetRow = parent.querySelector(
+			`${closestTag}:nth-child(${pinnedNumber + Number(!isMovingRight)})`,
+		);
+		targetIndex = childrenArr.indexOf(targetRow);
+	}
+	if (isMovingRight) {
 		targetRow.after(dragSrcEl);
 	} else {
-		// If the target row is before the dragged row, insert the dragged row after the target row
 		targetRow.before(dragSrcEl);
 	}
 	e.target.style.cursor = "grab";
-	postMessage({ what: "order" }, "*");
+	postMessage({
+		what: "order",
+		containerName,
+		fromIndex: dragSrcIndex,
+		toIndex: targetIndex,
+	}, globalThis.location.href);
 }
 
 /**
@@ -100,6 +135,7 @@ export function setupDrag() {
 	ul = document.getElementById(EXTENSION_NAME);
 	container = table ?? ul;
 	closestTag = table == null ? "li" : "tr";
+	containerName = table == null ? "ul" : "table";
 	if (container == null) setTimeout(() => setupDrag(), 500);
 	else createListeners();
 }

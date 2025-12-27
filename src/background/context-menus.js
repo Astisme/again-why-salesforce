@@ -16,6 +16,7 @@ import {
 	CXM_EMPTY_VISIBLE_TABS,
 	CXM_EXPORT_TABS,
 	CXM_IMPORT_TABS,
+	CXM_MANAGE_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -314,6 +315,12 @@ const menuItemsOriginal = [
 	},
 
 	{
+		id: CXM_MANAGE_TABS,
+		title: "cxm_manage_tabs",
+		contexts: ["page", "frame"],
+	},
+
+	{
 		id: CMD_OPEN_SETTINGS,
 		title: "cxm_settings",
 		contexts: ["link", "page", "frame"],
@@ -556,6 +563,7 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 		case CXM_IMPORT_TABS:
 			message.what = "add";
 			break;
+		case CXM_MANAGE_TABS:
 		case CXM_SORT_LABEL:
 		case CXM_SORT_URL:
 		case CXM_SORT_ORG:

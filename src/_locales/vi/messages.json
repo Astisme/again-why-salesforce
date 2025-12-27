@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Hành động",
+		"description": "Nhãn menu thả xuống cho các hành động của Tab"
+	},
 	"active": {
 		"message": "Hoạt động",
 		"description": "Dùng trong các nút chuyển đổi cho trạng thái hoạt động"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menu-ngữ-cảnh]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] mở modal để quản lý các $tabs đã lưu trực tiếp trên trang Thiết lập Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Di chuyển Tab",
@@ -626,6 +634,10 @@
 		"message": "Nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng bên trong một miền Salesforce nhưng không phải trên trang Thiết lập, bạn sẽ tự động được đưa đến trang Thiết lập của Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Bạn có thể sắp xếp lại các $tabs của mình bằng cách sử dụng các dấu chấm và kéo chúng.",
+		"description": "[manage-tabs] giải thích cách kéo Tab"
+	},
 	"help_keep_sort": {
 		"message": "Khi được bật, các Tab của bạn sẽ được giữ ở trạng thái đã sắp xếp—theo nhãn, URL hoặc Tổ chức; tùy thuộc vào lựa chọn của bạn.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "Vô hiệu hóa kiểm tra tiện ích mở rộng xác minh rằng một đoạn URL khớp với định dạng của ID bản ghi/đối tượng Salesforce (được sử dụng để tự động đặt Tab đã lưu là một Tab Tổ chức).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Tại đây, bạn sẽ tìm thấy một menu phụ để thực hiện các hành động khác nhau trên $tab trong cùng một hàng.",
+		"description": "[manage-tabs] giải thích mũi tên bên phải chứa những gì"
+	},
+	"help_tab_label": {
+		"message": "Đây là tên phổ biến mà bạn sẽ sử dụng để ghi nhớ $tab này sẽ đưa bạn đến đâu.",
+		"description": "[manage-tabs] giải thích nhãn Tab là gì"
+	},
+	"help_tab_org": {
+		"message": "Đây là tên Salesforce $org nơi $tab này sẽ được hiển thị. Nếu để trống, $tab này sẽ được hiển thị trong mọi Salesforce $org mà bạn truy cập.",
+		"description": "[manage-tabs] giải thích Tab Org là gì"
+	},
+	"help_tab_url": {
+		"message": "Đây là liên kết (rút gọn) mà bạn sẽ được chuyển hướng đến khi nhấp vào $tab này",
+		"description": "[manage-tabs] giải thích URL của Tab là gì"
+	},
 	"help_tip_click_link": {
 		"message": "Nhấp để được chuyển hướng đến tài liệu cho cài đặt này!",
 		"description": "[cài đặt-trợ giúp] lời kêu gọi hành động để người dùng đọc thêm về một cài đặt cụ thể"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ẩn các $tabs của $other_org_placeholder",
+		"description": "[manage-tabs] nhãn nút để ẩn các Org Tabs khác"
 	},
 	"if_click_popup": {
 		"message": "nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Đăng nhập vào Salesforce",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang đăng nhập Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Quản lý $tabs",
+		"description": "[modal-title] modal để quản lý các $tabs đã lưu với các trường có thể chỉnh sửa và kéo để sắp xếp lại"
+	},
+	"manage_tabs_explainer": {
+		"message": "Chỉnh sửa, sắp xếp lại và quản lý các $tabs đã lưu của bạn trực tiếp từ modal này. Kéo các hàng để sắp xếp lại hoặc sử dụng menu thả xuống cho các hành động khác.",
+		"description": "[modal-explainer] giải thích chức năng của modal quản lý tab"
 	},
 	"must_non_empty_str": {
 		"message": "phải là một chuỗi không rỗng",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Trang Cài đặt",
 		"description": "[notSalesforceSetup] Trang dùng để thay đổi cài đặt của Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Hiển thị tất cả $tabs",
+		"description": "[manage-tabs] nhãn nút để hiển thị tất cả Tab"
 	},
 	"skip": {
 		"message": "Bỏ qua",

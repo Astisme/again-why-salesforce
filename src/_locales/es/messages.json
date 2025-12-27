@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Acciones",
+		"description": "Etiqueta del menú desplegable para las acciones de la Tab"
+	},
 	"active": {
 		"message": "Activo",
 		"description": "Se utiliza en conmutadores para el estado activo"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[menú-contextual]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] abrir el modal para gestionar las $tabs guardadas directamente en la página de configuración de Salesforce"
 	},
 	"cxm_move": {
 		"message": "🧭 Mover Tab",
@@ -626,6 +634,10 @@
 		"message": "Si hace clic en la ventana emergente de la extensión dentro de un dominio de Salesforce pero no en una página de configuración, lo llevará a la página de configuración de Salesforce automáticamente.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Puedes reordenar tus $tabs utilizando los puntos y arrastrándolas.",
+		"description": "[manage-tabs] explica cómo arrastrar la Tab"
+	},
 	"help_keep_sort": {
 		"message": "Cuando está habilitado, sus Tabs se mantienen en orden clasificado, ya sea por etiqueta, URL u organización; dependiendo de lo que elija.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -670,9 +682,29 @@
 		"message": "Desactiva la comprobación de la extensión que verifica que un fragmento de URL coincida con el formato de los ID de registro/objeto de Salesforce (utilizado para establecer automáticamente la Tab guardada como un Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Aquí encontrarás un submenú para realizar diferentes acciones en la $tab de la misma fila.",
+		"description": "[manage-tabs] explica qué contiene la flecha de la derecha"
+	},
+	"help_tab_label": {
+		"message": "Este es el nombre común que usarás para recordar a dónde te llevará esta $tab.",
+		"description": "[manage-tabs] explica qué es la etiqueta de la Tab"
+	},
+	"help_tab_org": {
+		"message": "Este es el nombre de la Salesforce $org donde se mostrará esta $tab. Si se deja vacío, esta $tab se mostrará en cada Salesforce $org que visites.",
+		"description": "[manage-tabs] explica qué es la Org de la Tab"
+	},
+	"help_tab_url": {
+		"message": "Este es el enlace (acortado) al que serás redirigido al hacer clic en esta $tab",
+		"description": "[manage-tabs] explica qué es la URL de la Tab"
+	},
 	"help_tip_click_link": {
 		"message": "¡Haga clic para ser redirigido a la documentación de esta configuración!",
 		"description": "[ayuda-configuración] llamada a la acción para permitir al usuario leer más sobre una configuración específica"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ocultar $tabs de $other_org_placeholder",
+		"description": "[manage-tabs] etiqueta del botón para ocultar otras Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "si hace clic en la ventana emergente de la extensión",
@@ -741,6 +773,14 @@
 	"login_to_salesforce": {
 		"message": "Iniciar sesión en Salesforce",
 		"description": "[notSalesforceSetup] Llamado a la acción para redirigir al inicio de sesión de Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gestionar $tabs",
+		"description": "[modal-title] modal para gestionar $tabs guardadas con campos editables y arrastrar para reordenar"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edita, reordena y gestiona tus $tabs guardadas directamente desde este modal. Arrastra las filas para reordenar o usa el menú desplegable para más acciones.",
+		"description": "[modal-explainer] explica la funcionalidad del modal de gestión de pestañas"
 	},
 	"must_non_empty_str": {
 		"message": "debe ser una cadena no vacía",
@@ -1257,6 +1297,10 @@
 	"setup_page": {
 		"message": "Página de Configuración",
 		"description": "[notSalesforceSetup] Página utilizada para modificar la configuración de Salesforce"
+	},
+	"show_all_tabs": {
+		"message": "Mostrar todas las $tabs",
+		"description": "[manage-tabs] etiqueta del botón para mostrar todas las Tab"
 	},
 	"skip": {
 		"message": "Omitir",

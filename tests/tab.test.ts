@@ -637,7 +637,6 @@ await Deno.test("URL manipulation", async (t) => {
 		);
 		assertEquals(Tab.minifyURL("SetupOneHome/home/"), "SetupOneHome/home");
 		assertEquals(Tab.minifyURL("SetupOneHome/home"), "SetupOneHome/home");
-
 		assertEquals(
 			Tab.minifyURL("/SetupOneHome/home/"),
 			"/SetupOneHome/home",
@@ -707,6 +706,15 @@ await Deno.test("URL manipulation", async (t) => {
 				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
 			),
 			"https://myorgdomain.sandbox.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
+		);
+		assertEquals(
+			Tab.expandURL(
+				"SetupOneHome/home",
+				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+				"myotherorgdomain",
+			),
+			"https://myotherorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
+			"updates the org in the link",
 		);
 	});
 

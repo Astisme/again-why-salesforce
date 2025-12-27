@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "操作",
+		"description": "Tab 操作的下拉菜单标签"
+	},
 	"active": {
 		"message": "活动的",
 		"description": "用于切换按钮以表示活动状态"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[上下文菜单]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] 打开模态框，直接在 Salesforce 设置页面上管理保存的 $tabs"
 	},
 	"cxm_move": {
 		"message": "🧭 移动 Tab",
@@ -627,6 +635,10 @@
 		"message": "如果你在 Salesforce 域内点击扩展程序弹窗，但不在设置页面上，将自动把你带到 Salesforce 设置页面。",
 		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
 	},
+	"help_drag_tabs": {
+		"message": "您可以使用点并拖动来重新排序您的 $tabs。",
+		"description": "[manage-tabs] 说明如何拖动 Tab"
+	},
 	"help_keep_sort": {
 		"message": "启用后，你的 Tab 将保持排序状态 — 无论是按标签、URL 还是组织；具体取决于你的选择。",
 		"description": "[$opt_keep_sort] 的 [settings-help]"
@@ -671,9 +683,29 @@
 		"message": "禁用扩展程序检查，该检查验证 URL 片段是否与 Salesforce 记录/对象 ID 的格式匹配（用于自动将保存的 Tab 设置为 Org Tab）。",
 		"description": "[$opt_skip_link_detection] 的 [settings-help]"
 	},
+	"help_tab_actions": {
+		"message": "在这里，您将找到一个子菜单，用于对同一行中的 $tab 执行不同的操作。",
+		"description": "[manage-tabs] 说明右侧箭头包含的内容"
+	},
+	"help_tab_label": {
+		"message": "这是您用来记住此 $tab 将带您去哪里的常用名称。",
+		"description": "[manage-tabs] 说明什么是 Tab 标签"
+	},
+	"help_tab_org": {
+		"message": "这是显示此 $tab 的 Salesforce $org 名称。如果留空，此 $tab 将在您访问的每个 Salesforce $org 中显示。",
+		"description": "[manage-tabs] 说明什么是 Tab Org"
+	},
+	"help_tab_url": {
+		"message": "这是点击此 $tab 时将被重定向到的（缩短的）链接",
+		"description": "[manage-tabs] 说明什么是 Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "单击以重定向到此设置的文档！",
 		"description": "[设置-帮助] 行动号召，让用户阅读更多关于特定设置的信息"
+	},
+	"hide_other_org_tabs": {
+		"message": "隐藏 $other_org_placeholder $tabs",
+		"description": "[manage-tabs] 隐藏其他 Org Tabs 的按钮标签"
 	},
 	"if_click_popup": {
 		"message": "如果您点击扩展程序弹出窗口",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "登录 Salesforce",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 登录页面"
+	},
+	"manage_tabs": {
+		"message": "管理 $tabs",
+		"description": "[modal-title] 用于管理保存的 $tabs 的模态框，具有可编辑字段和拖动重排序功能"
+	},
+	"manage_tabs_explainer": {
+		"message": "直接从此模态框编辑、重新排序和管理您保存的 $tabs。拖动行以重新排序，或使用下拉菜单执行更多操作。",
+		"description": "[modal-explainer] 解释管理标签页模态框的功能"
 	},
 	"must_non_empty_str": {
 		"message": "必须是非空字符串",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "设置页面",
 		"description": "[非 Salesforce 设置页] 用于修改 Salesforce 设置的页面"
+	},
+	"show_all_tabs": {
+		"message": "显示所有 $tabs",
+		"description": "[manage-tabs] 显示所有 Tab 的按钮标签"
 	},
 	"skip": {
 		"message": "跳过",

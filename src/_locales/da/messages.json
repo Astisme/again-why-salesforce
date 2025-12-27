@@ -1,4 +1,8 @@
 {
+	"actions": {
+		"message": "Handlinger",
+		"description": "Rullemenu-etiket til Tab-handlinger"
+	},
 	"active": {
 		"message": "Aktiv",
 		"description": "Bruges i skiftere for aktiv tilstand"
@@ -106,6 +110,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstmenu]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] åbn modalen for at administrere gemte $tabs direkte på Salesforce Setup-siden"
 	},
 	"cxm_move": {
 		"message": "🧭 Flyt Tab",
@@ -627,6 +635,10 @@
 		"message": "Hvis du klikker på udvidelsespop op-vinduet inden for et Salesforce-domæne, men ikke på en opsætningsside, fører det dig automatisk til Salesforce-opsætningssiden.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "Du kan ændre rækkefølgen af dine $tabs ved at bruge prikkerne og trække i dem.",
+		"description": "[manage-tabs] forklar, hvordan man trækker i Tab"
+	},
 	"help_keep_sort": {
 		"message": "Når aktiveret, holdes dine Tabs i sorteret rækkefølge – enten efter label, URL eller Org; afhængigt af hvad du vælger.",
 		"description": "[settings-help] for $opt_keep_sort"
@@ -671,9 +683,29 @@
 		"message": "Deaktiverer udvidelseskontrollen, der verificerer, at et URL-fragment matcher formatet for Salesforce-post/objekt-ID'er (bruges til automatisk at indstille den gemte Tab som en Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Her finder du en undermenu til at udføre forskellige handlinger på den $tab, der er i samme række.",
+		"description": "[manage-tabs] forklar, hvad pilen til højre indeholder"
+	},
+	"help_tab_label": {
+		"message": "Dette er det almindelige navn, du vil bruge til at huske, hvor denne $tab fører dig hen.",
+		"description": "[manage-tabs] forklar, hvad Tab-etiketten er"
+	},
+	"help_tab_org": {
+		"message": "Dette er navnet på den Salesforce $org, hvor denne $tab vil blive vist. Hvis feltet efterlades tomt, vil denne $tab blive vist i hver Salesforce $org, du besøger.",
+		"description": "[manage-tabs] forklar, hvad Tab Org er"
+	},
+	"help_tab_url": {
+		"message": "Dette er det (forkortede) link, som du vil blive videresendt til, når du klikker på denne $tab",
+		"description": "[manage-tabs] forklar, hvad Tab-URL'en er"
+	},
 	"help_tip_click_link": {
 		"message": "Klik for at blive omdirigeret til dokumentationen for denne indstilling!",
 		"description": "[indstillinger-hjælp] opfordring til handling for at lade brugeren læse mere om en specifik indstilling"
+	},
+	"hide_other_org_tabs": {
+		"message": "Skjul $other_org_placeholder $tabs",
+		"description": "[manage-tabs] knap-etiket til at skjule andre Org Tabs"
 	},
 	"if_click_popup": {
 		"message": "hvis du klikker på udvidelsens popup-vindue",
@@ -742,6 +774,14 @@
 	"login_to_salesforce": {
 		"message": "Log ind på Salesforce",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforces login-side"
+	},
+	"manage_tabs": {
+		"message": "Administrer $tabs",
+		"description": "[modal-title] modal til at administrere gemte $tabs med redigerbare felter og træk-for-at-ændre-rækkefølge"
+	},
+	"manage_tabs_explainer": {
+		"message": "Rediger, omorganiser og administrer dine gemte $tabs direkte fra denne modal. Træk i rækkerne for at ændre rækkefølgen, eller brug rullemenuen for flere handlinger.",
+		"description": "[modal-explainer] forklarer funktionaliteten i modalen til administration af faner"
 	},
 	"must_non_empty_str": {
 		"message": "skal være en ikke-tom streng",
@@ -1258,6 +1298,10 @@
 	"setup_page": {
 		"message": "Setup-side",
 		"description": "[notSalesforceSetup] siden til ændring af Salesforce-indstillinger"
+	},
+	"show_all_tabs": {
+		"message": "Vis alle $tabs",
+		"description": "[manage-tabs] knap-etiket til at vise alle Tab"
 	},
 	"skip": {
 		"message": "Spring over",
