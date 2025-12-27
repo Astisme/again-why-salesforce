@@ -1570,10 +1570,101 @@ export async function generateUpdateTabModal(label, url, org) {
 }
 
 /**
+ * Generates an i icon which includes information and a possibly a link to the resource
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {null} [param0.text=null] the text to be inserted in the popup
+ * @param {null} [param0.link=null] the valid URL to the resource to give deeper insights
+ * @param {boolean} [param0.showTop=false] whether to show the popup at the top
+ * @param {boolean} [param0.showBottom=false] whether to show the popup at the bottom
+ * @param {boolean} [param0.showRight=false] whether to show the popup at the right
+ * @param {boolean} [param0.showLeft=false] whether to show the popup at the left
+ * @return {Object} used by the `help.js` class
+ */
+export function generateHelpWith_i_popup({
+  text = null,
+  link = null,
+  showTop = false,
+  showBottom = false,
+  showRight = false,
+  showLeft = false,
+} = {}){
+    const wasCalledWithParams = text != null || link != null;
+	const root = document.createElement("div");
+	root.className = "help-icon";
+	const anchor = document.createElement("a");
+	root.append(anchor);
+	anchor.className = "button";
+	anchor.setAttribute("aria-describedby", "tooltip");
+    if(wasCalledWithParams && link != null && link !== "") anchor.href = link;
+	const svgNS = "http://www.w3.org/2000/svg";
+	const svg = document.createElementNS(svgNS, "svg");
+    anchor.append(svg);
+	svg.setAttribute("focusable", "false");
+	svg.setAttribute("aria-hidden", "true");
+	svg.setAttribute("viewBox", "0 0 520 520");
+	svg.setAttribute("class", "slds-button__icon");
+	const g = document.createElementNS(svgNS, "g");
+	svg.appendChild(g);
+	const path = document.createElementNS(svgNS, "path");
+	g.appendChild(path);
+	path.setAttribute(
+		"d",
+		"M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
+	);
+	const assistive = document.createElement("span");
+    anchor.append(assistive);
+	assistive.className = "assistive";
+	assistive.hidden = true;
+	const tooltip = document.createElement("div");
+	root.append(tooltip);
+	tooltip.className = "tooltip";
+	tooltip.setAttribute("role", "tooltip");
+	let slot;
+    if(wasCalledWithParams){
+      tooltip.dataset.showTop = showTop || (!showTop && !showBottom && !showRight && !showLeft);
+      tooltip.dataset.showBottom = showBottom;
+      tooltip.dataset.showRight = showRight;
+      tooltip.dataset.showLeft = showLeft;
+      slot = document.createElement('span');
+      slot.textContent = text;
+      const linkid = `${EXTENSION_NAME}-helpcss`;
+      if(!document.getElementById(linkid)){
+        const link = document.createElement('link');
+        link.id = linkid;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = BROWSER.runtime.getURL('/components/help/help.css');
+        document.head.appendChild(link);
+      }
+    } else {
+      slot = document.createElement("slot");
+      slot.name = "text";
+      slot.textContent = "Nothing to see here...";
+    }
+    tooltip.append(slot);
+	const linkTip = document.createElement("div");
+	tooltip.append(linkTip);
+	linkTip.classList.add("link-tip", "hidden");
+    (async () => {
+      const translator = await ensureTranslatorAvailability();
+      assistive.textContent = await translator.translate("help");
+      linkTip.textContent = await translator.translate("help_tip_click_link");
+    })()
+	return {
+		root,
+		anchor,
+		tooltip,
+		linkTip,
+        slot,
+	};
+}
+
+/**
  * Creates a table header cell (th)
  * @param {string} label - The visible label text
  * @param {string} ariaLabel - The aria-label for accessibility
  * @param {string[]} classList - Additional CSS classes
+ * @param {{}} [info={}] - an object used to generate an info button with a popup
  * @return {HTMLTableCellElement} The created th element
  */
 function createTableHeader(label = "", ariaLabel = "", classList = [], info = {}) {
@@ -2431,88 +2522,5 @@ export async function generateManageTabsModal(tabs = [], {
 		actionsMap,
 		saveButton,
 		loggers,
-	};
-}
-
-/**
- * Generates an i icon which includes information and a possibly a link to the resource
- * @return {Object} used by the `help.js` class
- */
-export function generateHelpWith_i_popup({
-  text = null,
-  link = null,
-  showTop = false,
-  showBottom = false,
-  showRight = false,
-  showLeft = false,
-} = {}){
-    const wasCalledWithParams = text != null || link != null;
-	const root = document.createElement("div");
-	root.className = "help-icon";
-	const anchor = document.createElement("a");
-	root.append(anchor);
-	anchor.className = "button";
-	anchor.setAttribute("aria-describedby", "tooltip");
-    if(wasCalledWithParams && link != null && link !== "") anchor.href = link;
-	const svgNS = "http://www.w3.org/2000/svg";
-	const svg = document.createElementNS(svgNS, "svg");
-    anchor.append(svg);
-	svg.setAttribute("focusable", "false");
-	svg.setAttribute("aria-hidden", "true");
-	svg.setAttribute("viewBox", "0 0 520 520");
-	svg.setAttribute("class", "slds-button__icon");
-	const g = document.createElementNS(svgNS, "g");
-	svg.appendChild(g);
-	const path = document.createElementNS(svgNS, "path");
-	g.appendChild(path);
-	path.setAttribute(
-		"d",
-		"M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
-	);
-	const assistive = document.createElement("span");
-    anchor.append(assistive);
-	assistive.className = "assistive";
-	assistive.hidden = true;
-	const tooltip = document.createElement("div");
-	root.append(tooltip);
-	tooltip.className = "tooltip";
-	tooltip.setAttribute("role", "tooltip");
-	let slot;
-    if(wasCalledWithParams){
-      tooltip.dataset.showTop = showTop || (!showTop && !showBottom && !showRight && !showLeft);
-      tooltip.dataset.showBottom = showBottom;
-      tooltip.dataset.showRight = showRight;
-      tooltip.dataset.showLeft = showLeft;
-      slot = document.createElement('span');
-      slot.textContent = text;
-      const linkid = `${EXTENSION_NAME}-helpcss`;
-      if(!document.getElementById(linkid)){
-        const link = document.createElement('link');
-        link.id = linkid;
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = BROWSER.runtime.getURL('/components/help/help.css');
-        document.head.appendChild(link);
-      }
-    } else {
-      slot = document.createElement("slot");
-      slot.name = "text";
-      slot.textContent = "Nothing to see here...";
-    }
-    tooltip.append(slot);
-	const linkTip = document.createElement("div");
-	tooltip.append(linkTip);
-	linkTip.classList.add("link-tip", "hidden");
-    (async () => {
-      const translator = await ensureTranslatorAvailability();
-      assistive.textContent = await translator.translate("help");
-      linkTip.textContent = await translator.translate("help_tip_click_link");
-    })()
-	return {
-		root,
-		anchor,
-		tooltip,
-		linkTip,
-        slot,
 	};
 }
