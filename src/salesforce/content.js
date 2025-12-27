@@ -59,7 +59,7 @@ import {
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
-import { setupDrag } from "/dragHandler.js";
+import { setupDragForUl } from "./dragHandler.js";
 
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import {
@@ -270,6 +270,7 @@ async function init(tabs = null) {
 					{
 						hide: !(row.org == null || row.org === orgName),
 						isPinned: i < pinnedItems,
+						index: i,
 					},
 				),
 			);
@@ -407,7 +408,7 @@ function delayLoadSetupTabs(count = 0) {
 		setupTabUl.dataset.wheelListenerApplied = true;
 	}
 	// initialize
-	setupDrag();
+	setupDragForUl(reorderTabsUl);
 	reloadTabs();
 }
 
@@ -437,7 +438,7 @@ function reloadTabs(tabs = null) {
  *
  * @return {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
  */
-async function reorderTabs() {
+export async function reorderTabsUl() {
 	try {
 		// Get the list of tabs
 		const tabs = Array.from(setupTabUl.children)
@@ -1171,20 +1172,6 @@ function listenToBackgroundPage() {
 }
 
 /**
- * Listens for "order" messages posted from the window to reorder tabs accordingly.
- * Ignores messages not originating from the current window context.
- */
-function listenToReorderedTabs() {
-	addEventListener("message", (e) => {
-		const message = e.data;
-		e.source.location.href == globalThis.location.href &&
-			message.what === "order" &&
-			message.containerName === "ul" &&
-			reorderTabs();
-	});
-}
-
-/**
  * Checks user settings and inserts Simple Analytics script into the document
  * unless analytics collection is explicitly disabled.
  * Modifies Content-Security-Policy meta tag to allow the analytics domains.
@@ -1258,7 +1245,6 @@ async function checkInsertAnalytics() {
  * - Loads all tabs asynchronously.
  * - Injects Lightning navigation script if needed.
  * - Sets up message listeners.
- * - Sets up reordered tab listener.
  * - Loads Salesforce setup tabs with delay.
  * - Inserts analytics script.
  */
@@ -1266,7 +1252,6 @@ function main() {
 	ensureAllTabsAvailability();
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
-	listenToReorderedTabs();
 	delayLoadSetupTabs();
 	checkInsertAnalytics();
 }

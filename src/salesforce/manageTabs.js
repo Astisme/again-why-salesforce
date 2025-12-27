@@ -8,7 +8,7 @@ import {
 } from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
-import { setupDrag } from "/dragHandler.js";
+import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
 
 import {
 	createManageTabRow,
@@ -19,6 +19,7 @@ import {
 	getCurrentHref,
 	getModalHanger,
 	makeDuplicatesBold,
+	reorderTabsUl,
 	sf_afterSet,
 	showToast,
 } from "./content.js";
@@ -670,6 +671,19 @@ function reduceLoggersToElements() {
 }
 
 /**
+ * Callback on reorder events
+ * @param {Object} message the object created from the drag handler
+ * @param {Object} scaffold the object with tbody and allTabs ready to be used
+ */
+function reorderTabsTable(message, scaffold) {
+	readManagedTabsAndSave(scaffold);
+	updateLoggerIndex(message.fromIndex, message.toIndex);
+	updateIndexesOnTrsAfterIndex(
+		Math.min(message.toIndex, message.fromIndex),
+	);
+}
+
+/**
  * Shows a modal for managing saved tabs with actions (open, update, remove, pin/unpin).
  * Displays all saved tabs in a table and handles user interactions via button clicks.
  *
@@ -697,7 +711,10 @@ export async function createManageTabsModal() {
 	getModalHanger().appendChild(modalParent);
 	updateModalBodyOverflow(modalParent.querySelector("article"));
 	// Setup drag functionality for the manage tabs table
-	setupDrag();
+	setupDragForTable((mess) => reorderTabsTable(mess, { tbody, allTabs }));
+	closeButton.addEventListener("click", (_) => {
+		setupDragForUl(reorderTabsUl);
+	});
 	saveButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		readManagedTabsAndSave({ tbody, allTabs });
@@ -718,21 +735,6 @@ export async function createManageTabsModal() {
 			},
 		);
 	}
-	// Listen for drag events to save on reorder
-	addEventListener("message", (e) => {
-		const message = e.data;
-		if (
-			e.source.location.href == globalThis.location.href &&
-			message.what === "order" &&
-			message.containerName === "table"
-		) {
-			readManagedTabsAndSave({ tbody, allTabs });
-			updateLoggerIndex(message.fromIndex, message.toIndex);
-			updateIndexesOnTrsAfterIndex(
-				Math.min(message.toIndex, message.fromIndex),
-			);
-		}
-	});
 	// Listen when the last row is filled in to add a new empty row
 	for (const el of reduceLoggersToElements()) {
 		setInfoForDrag(el.element, () =>

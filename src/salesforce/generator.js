@@ -333,6 +333,7 @@ export async function generateStyleFromSettings() {
  * @param {Object} conf - the configuration of the row
  * @param {boolean} [conf.hide=false] - True to hide the row
  * @param {boolean} [conf.isPinned=false] - True if the row is one of the pinned ones
+ * @param {number} [conf.index=0] - the index of the row template to be built
  *
  * @return {HTMLElement} - The generated list item element representing the tab.
  */
@@ -341,6 +342,7 @@ export function generateRowTemplate(
 	{
 		hide = false,
 		isPinned = false,
+		index = 0,
 	},
 ) {
 	const miniURL = Tab.minifyURL(url);
@@ -355,14 +357,15 @@ export function generateRowTemplate(
 		"navexConsoleTabItem",
 		EXTENSION_NAME,
 	);
+	li.draggable = "true";
 	li.dataset.auraClass = "navexConsoleTabItem";
+	li.dataset.rowIndex = index;
 	if (hide) {
 		li.style.display = "none";
 	}
 	const a = document.createElement("a");
 	a.dataset.draggable = "true";
 	a.setAttribute("role", "tab");
-	a.setAttribute("tabindex", "-1");
 	a.setAttribute("title", miniURL); // popup showing where the Tab is pointing to
 	a.setAttribute("aria-selected", "false");
 	a.setAttribute("href", expURL);
