@@ -957,10 +957,7 @@ function listenToBackgroundPage() {
 				case "activate":
 				case "highlighted":
 				case "focuschanged":
-					sf_afterSet({
-						what: message.what,
-						tabs: message.tabs,
-					});
+					sf_afterSet(message);
 					break;
 				case "warning":
 					showToast(message.message, false, true);
