@@ -21,10 +21,8 @@ function handleDragStart(e) {
 	// Check if the dragged element is an icon (or any other specific element) within the row
 	if (e.target.draggable === "true" || e.target.dataset.draggable === "true") {
 		e.target.style.cursor = "grabbing";
-		dragSrcIndex = e.target.closest(closestTag);
-        dragSrcIndex = dragSrcIndex.dataset.rowIndex; // Find the dragged row
+		dragSrcIndex = e.target.closest(closestTag).dataset.rowIndex; // Find the dragged row
 		e.dataTransfer.effectAllowed = "move";
-		//e.dataTransfer.setData("text/html", dragSrcEl);
 	} else {
 		// Prevent dragging if the dragged element is not the specified element
 		e.preventDefault();
@@ -41,16 +39,6 @@ function handleDragStart(e) {
  */
 function handleDragOver(e) {
 	e.preventDefault();
-	// Highlight the target td where the dragged td will be inserted
-	/*const targetTd = e.target;
-    targetTd.classList.add('highlight');
-    // Remove highlight from all other tds
-    const tds = Array.from(targetTd.parentNode.children);
-    tds.forEach(td => {
-        if (td !== targetTd) {
-            td.classList.remove('highlight');
-        }
-    });*/
 	e.dataTransfer.dropEffect = "move";
 	return false;
 }

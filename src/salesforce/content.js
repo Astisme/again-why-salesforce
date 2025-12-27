@@ -1245,7 +1245,6 @@ async function checkInsertAnalytics() {
  * - Loads all tabs asynchronously.
  * - Injects Lightning navigation script if needed.
  * - Sets up message listeners.
- * - Sets up reordered tab listener.
  * - Loads Salesforce setup tabs with delay.
  * - Inserts analytics script.
  */
