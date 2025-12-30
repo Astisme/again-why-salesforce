@@ -394,7 +394,7 @@ export function requestExportPermission() {
 	});
 }
 /*
- * Requests permission to access the Salesforce Setup pages without having the user click on the popup on every new visit
+ * Requests permission to access the Salesforce Setup pages without having the user click on the popup on every visit
  * @return Promise from browser.permissions.request
  */
 export function requestFramePatternsPermission() {
