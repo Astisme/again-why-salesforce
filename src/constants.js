@@ -414,7 +414,7 @@ export function requestCookiesPermission() {
 }
 /**
  * Determines whether the current tab is Salesforce Setup.
- * @return {Promise<{ ison: boolean, url: string>} whether the user is on Salesforce Setup
+ * @return {Promise<{ ison: boolean, url: string>}>} whether the user is on Salesforce Setup
  */
 export async function isOnSalesforceSetup() {
 	const browserTab = await sendExtensionMessage({ what: "browser-tab" });
