@@ -2,22 +2,14 @@
 import {
 	areFramePatternsAllowed,
 	BROWSER,
-	CHROME_LINK,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
-	EDGE_LINK,
-	FIREFOX_LINK,
-	ISCHROME,
-	ISEDGE,
-	ISFIREFOX,
 	isOnSalesforceSetup,
-	ISSAFARI,
 	openSettingsPage,
 	sendExtensionMessage,
-	SPONSOR_LINK_EN,
-	SPONSOR_LINK_IT,
+	showReviewOrSponsor,
 } from "/constants.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -50,37 +42,13 @@ import { handleSwitchColorTheme } from "../themeHandler.js";
 const translator = await ensureTranslatorAvailability();
 const hiddenClass = "hidden";
 
-{
-	const allTabs = await ensureAllTabsAvailability();
-	if (allTabs.length >= 8) {
-		if (!ISSAFARI) {
-			const reviewSvg = document.getElementById("review");
-			reviewSvg?.classList.remove(hiddenClass);
-			reviewSvg?.addEventListener("click", () => {
-				if (ISEDGE) {
-					return open(EDGE_LINK);
-				}
-				if (ISCHROME) {
-					return open(CHROME_LINK);
-				}
-				if (ISFIREFOX) {
-					return open(FIREFOX_LINK);
-				}
-			});
-		}
-		if (allTabs.length >= 16) {
-			const sponsorSvg = document.getElementById("sponsor");
-			sponsorSvg?.classList.remove(hiddenClass);
-			sponsorSvg?.addEventListener("click", () => {
-				open(
-					translator.currentLanguage === "it"
-						? SPONSOR_LINK_IT
-						: SPONSOR_LINK_EN,
-				);
-			});
-		}
-	}
-}
+showReviewOrSponsor({
+	allTabs: await ensureAllTabsAvailability(),
+	translator,
+	reviewSvg: document.getElementById("review"),
+	sponsorSvg: document.getElementById("sponsor"),
+	hiddenClass,
+});
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");

@@ -357,17 +357,18 @@ export const WHAT_SHOW_EXPORT_MODAL = "show-export-modal";
 export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 	"export-perm-open-popup";
 export const WHAT_EXPORT_FROM_BG = "export-bg";
-export const EDGE_LINK =
+const EDGE_LINK =
 	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
-export const CHROME_LINK =
+const CHROME_LINK =
 	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
-export const FIREFOX_LINK =
+const FIREFOX_LINK =
 	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
 const SPONSOR_DOMAIN = "https://alfredoit.dev";
-export const SPONSOR_LINK_EN =
-	`${SPONSOR_DOMAIN}/en/sponsor/?email=againwhysalesforce@duck.com`;
-export const SPONSOR_LINK_IT =
-	`${SPONSOR_DOMAIN}/it/sponsor/?email=againwhysalesforce@duck.com`;
+const SPONSOR_PATH = "/sponsor/?email=againwhysalesforce@duck.com";
+const SPONSOR_MAP = {
+	it: `${SPONSOR_DOMAIN}/it${SPONSOR_PATH}`,
+	default: `${SPONSOR_DOMAIN}/en${SPONSOR_PATH}`,
+};
 /**
  * Checks if the export functionality is allowed for the current user
  * @return {boolean} true if the export functionality was allowed
@@ -436,4 +437,77 @@ export async function areFramePatternsAllowed() {
 		new URL(globalThis.location.href).searchParams.get(
 				DO_NOT_REQUEST_FRAME_PERMISSION,
 			) === "true";
+}
+/**
+ * Based on how many Tabs the user has saved, declares which support links should be shown
+ * @param {TabContainer[]} [allTabs=[]] - the Tabs saved by the user
+ * @return <{review: boolean, sponsor: boolean}> an object with these keys
+ */
+function shouldShowReviewOrSponsor(allTabs = []) {
+	return {
+		review: allTabs.length >= 8 && !ISSAFARI,
+		sponsor: allTabs.length >= 16,
+	};
+}
+/**
+ * Based on which browser the user is currently using, opens the extension's store link
+ * @return undefined - nothing is really returned
+ */
+function openCorrectBrowserReviewLink() {
+	if (ISEDGE) {
+		return open(EDGE_LINK);
+	}
+	if (ISCHROME) {
+		return open(CHROME_LINK);
+	}
+	if (ISFIREFOX) {
+		return open(FIREFOX_LINK);
+	}
+}
+/**
+ * Based on which language the user has set the extension to, opens the appropriate sponsor link
+ * @param {TranslationService} [translator=null] - the TranslationService instance
+ */
+function openSponsorLink(translator = null) {
+	open(
+		SPONSOR_MAP[translator?.currentLanguage] ?? SPONSOR_MAP.default,
+	);
+}
+/**
+ * Using all the parameters, show the review / sponsor svgs by removing the hiddenClass; then add event listeners to open the correct links
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TabContainer[]} [param0.allTabs=null] - the TabContainer with all the user's Tabs
+ * @param {TranslationService} [param0.translator=null] - the TranslationService instance
+ * @param {HTMLElement} [param0.reviewSvg=null] - the HTMLElement for the review svg
+ * @param {HTMLElement} [param0.sponsorSvg=null] - the HTMLElement for the sponsor svg
+ * @param {string} [param0.hiddenClass="hidden"] - the class used to NOT show the svgs
+ * @throws Error when even a single parameter was not passed correctly
+ */
+export function showReviewOrSponsor({
+	allTabs = null,
+	translator = null,
+	reviewSvg = null,
+	sponsorSvg = null,
+	hiddenClass = "hidden",
+} = {}) {
+	if (
+		allTabs == null ||
+		translator == null ||
+		reviewSvg == null ||
+		sponsorSvg == null
+	) {
+		throw new Error("error_required_params");
+	}
+	const whatToShow = shouldShowReviewOrSponsor(allTabs);
+	if (whatToShow.review) {
+		reviewSvg.classList.remove(hiddenClass);
+		reviewSvg.addEventListener("click", openCorrectBrowserReviewLink);
+	}
+	if (whatToShow.sponsor) {
+		sponsorSvg.classList.remove(hiddenClass);
+		sponsorSvg.addEventListener(
+			"click",
+			() => openSponsorLink(translator),
+		);
+	}
 }

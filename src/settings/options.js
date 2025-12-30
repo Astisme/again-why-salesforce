@@ -31,6 +31,7 @@ import {
 	requestFramePatternsPermission,
 	sendExtensionMessage,
 	SETTINGS_KEY,
+	showReviewOrSponsor,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
 	TAB_ADD_FRONT,
@@ -50,12 +51,20 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 } from "/constants.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 
-// no need to await as we do not need to call the translator
-// we only need it to translate the text on the screen and it may take the time it needs to do so
-ensureTranslatorAvailability();
 const hidden = "hidden";
 const invisible = "invisible";
+
+// show review / sponsor buttons
+// while getting the translator for this function, the i18n elements will get translated
+showReviewOrSponsor({
+	allTabs: await ensureAllTabsAvailability(),
+	translator: await ensureTranslatorAvailability(),
+	reviewSvg: document.getElementById("review"),
+	sponsorSvg: document.getElementById("sponsor"),
+	hiddenClass: hidden,
+});
 
 /**
  * Creates the object used to update the settings

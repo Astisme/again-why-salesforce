@@ -1,5 +1,5 @@
 body {
-	width: 22rem;
+	width: 26rem;
 }
 
 body,
@@ -40,7 +40,7 @@ header {
 			cursor: pointer;
 		}
 
-		& > img, & > svg {
+		& > img, & > a > svg {
 			height: 2rem;
 			padding-left: 0.1rem;
 		}
@@ -51,7 +51,7 @@ div#theme-selector {
 	display: flex;
 	align-items: center;
 
-	& > svg {
+	& > a > svg {
 		height: 2rem;
 
 		& .primary {
