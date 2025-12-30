@@ -368,3 +368,10 @@ export const SPONSOR_LINK_EN =
 	`${SPONSOR_DOMAIN}/en/sponsor/?email=againwhysalesforce@duck.com`;
 export const SPONSOR_LINK_IT =
 	`${SPONSOR_DOMAIN}/it/sponsor/?email=againwhysalesforce@duck.com`;
+/**
+ * Checks if the export functionality is allowed for the current user
+ * @return {boolean} true if the export functionality was allowed
+ */
+export function isExportAllowed(){
+  return ISSAFARI || BROWSER.downloads != null;
+}

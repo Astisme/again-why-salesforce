@@ -3,8 +3,8 @@ import {
 	BROWSER,
 	EXTENSION_NAME,
 	ISCHROME,
+	isExportAllowed,
 	ISFIREFOX,
-	ISSAFARI,
 	MANIFEST,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
@@ -12,8 +12,8 @@ import {
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
+import { TabContainer } from "/tabContainer.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
-import { TabContainer } from "../tabContainer.js";
 
 /**
  * Queries the browser for the current active tab in the current window.
@@ -160,7 +160,7 @@ function requestExportPermission() {
  * @return {boolean} whether the export of Tabs is allowed
  */
 export function checkLaunchExport(tabs = null, checkOnly = false) {
-	const isAllowed = ISSAFARI || BROWSER.downloads != null;
+	const isAllowed = isExportAllowed();
 	if (isAllowed) {
 		if (!checkOnly) {
 			// downloads permission has already been granted

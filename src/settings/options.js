@@ -12,6 +12,7 @@ import {
 	getStyleSettings,
 	isGenericKey,
 	isPinnedKey,
+	isExportAllowed,
 	isStyleKey,
 	LINK_NEW_BROWSER,
 	MANIFEST,
@@ -99,6 +100,7 @@ function saveCheckboxOptions(e, ...dependentCheckboxElements) {
 	sendExtensionMessage(set_msg);
 }
 
+const allowExport = document.getElementById('allow-export');
 /**
  * Contains all checkbox elements used for settings, separated by their Id.
  */
@@ -963,7 +965,7 @@ function savePickedSort(enabled = null, direction = null) {
 			id: TAB_ADD_FRONT,
 			enabled: false,
 		});
-		tab_add_front_el.checked = false;
+		allCheckboxes[TAB_ADD_FRONT].checked = false;
 	}
 	sendExtensionMessage(getObjectToSet({
 		key: SETTINGS_KEY,
@@ -978,6 +980,29 @@ keep_sorted_el.addEventListener("click", (e) => {
 		sortContainer.classList.add(invisible);
 	}
 });
+
+
+/**
+ * Toggles the visibility of the given toast for a small amount of time
+ * @param {HTMLElement} toast - a div on which the invisible class is present and can be toggled
+ */
+function showThenHideToast(toast){
+  toast.classList.remove(invisible);
+  setTimeout(() => toast.classList.add(invisible), 2500);
+}
+
+/**
+ * Shows the given message in a success / error toast.
+ * @param {string} message - the message to be translated to be shown to the user
+ * @param {boolean} [isSuccess=true] - whether the action concluded with a positive outcome
+ */
+async function showToast(message, isSuccess = true){
+  const translator = await ensureTranslatorAvailability();
+  const toast = isSuccess ? successToast : errorToast;
+  const messageDiv = toast.querySelector('div.toastMessage.slds-text-heading--small.forceActionsText');
+  messageDiv.innerText = await translator.translate(message);
+  showThenHideToast(toast);
+}
 
 const listenersSet = {};
 /**
@@ -1066,6 +1091,19 @@ async function restoreGeneralSettings() {
 			sendLanguageMessage();
 		}
 	});
+    allowExport.checked = isExportAllowed();
+    allowExport.addEventListener('click', async e => {
+      e.preventDefault();
+      const isAllowed = isExportAllowed();
+      if(isAllowed){
+        return;
+      }
+      const res = await BROWSER.permissions.request({
+          permissions: ["downloads"],
+      });
+      showToast(res ? "export_success" : "export_failure", res);
+      e.target.checked = res;
+    });
 	listenersSet["settings"] = true;
 }
 
@@ -1482,15 +1520,17 @@ settings_pinnedOrg.header.addEventListener("click", () => {
 });
 
 const saveToast = document.getElementById("save-confirm");
+const successToast = document.getElementById('toast-display-success');
+const errorToast = document.getElementById('toast-display-error');
+
 document.querySelector("#save-container > button").addEventListener(
 	"click",
 	() => {
-		saveToast.classList.remove(invisible);
 		savePickedSort(
 			keep_sorted_el.checked && picked_sort.select.value,
 			picked_sort.direction.value,
 		);
-		setTimeout(() => saveToast.classList.add(invisible), 2500);
+        showThenHideToast(saveToast);
 	},
 );
 
