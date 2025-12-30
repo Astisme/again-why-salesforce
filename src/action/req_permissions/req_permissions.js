@@ -1,4 +1,9 @@
-import { BROWSER, FRAME_PATTERNS } from "/constants.js";
+import {
+	BROWSER,
+	DO_NOT_REQUEST_FRAME_PERMISSION,
+	requestExportPermission,
+	requestFramePatternsPermission,
+} from "/constants.js";
 import ensureTranslatorAvailability from "/translator.js";
 import "../themeHandler.js";
 await ensureTranslatorAvailability();
@@ -10,26 +15,24 @@ const popuplink = BROWSER.runtime.getURL("action/popup/popup.html");
 
 if (whichPermissions == null || whichPermissions === "hostpermissions") {
 	const noPerm = document.getElementById("no-permissions");
-	noPerm.href = `${popuplink}?noPerm=true`;
+	noPerm.href = `${popuplink}?${DO_NOT_REQUEST_FRAME_PERMISSION}=true`;
 
 	document.getElementById("allow-permissions").addEventListener(
 		"click",
 		(e) => {
 			e.preventDefault();
-			BROWSER.permissions.request({
-				origins: FRAME_PATTERNS,
-			});
+			requestFramePatternsPermission();
 			setTimeout(close, 100);
 		},
 	);
 
 	/**
-	 * Sets the `noPerm` item in localStorage then switches to the standard popup
+	 * Sets the DO_NOT_REQUEST_FRAME_PERMISSION item in localStorage then switches to the standard popup
 	 * @param {Event} e - the event connected to the event listener
 	 */
 	const setNoPerm = (e) => {
 		e.preventDefault();
-		localStorage.setItem("noPerm", "true");
+		localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "true");
 		globalThis.location = noPerm.href;
 	};
 
@@ -65,9 +68,7 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 		"click",
 		(e) => {
 			e.preventDefault();
-			BROWSER.permissions.request({
-				permissions: ["downloads"],
-			});
+			requestExportPermission();
 			setOriginalPopup();
 			setTimeout(close, 100);
 		},

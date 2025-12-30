@@ -342,7 +342,7 @@
 							<div
 								class="toastMessage slds-text-heading--small forceActionsText"
 							>
-                              Success message
+								Success message
 							</div>
 						</div>
 					</div>
@@ -402,7 +402,7 @@
 							<div
 								class="toastMessage slds-text-heading--small forceActionsText"
 							>
-                              Error message
+								Error message
 							</div>
 						</div>
 					</div>
@@ -499,24 +499,41 @@
 			<hr>
 
 			<div id="optional-settings">
-              <ul>
-				<li>
-					<input id="allow-export" type="checkbox" />
-					<label
-						for="allow-export"
-						data-i18n="opt_allow_export"
-					>
-                      Allow Again, Why Salesforce to export your Tabs, when you request it.
-					</label>
-					<help-aws
-						href="https://github.com/Astisme/again-why-salesforce/wiki/Export-Tabs"
-					>
-						<span slot="text" data-i18n="help_allow_export"
-						>When enabled, you'll be able to export your Tabs and keep them on your computer.</span>
-					</help-aws>
-				</li>
-              </ul>
-            </div>
+				<ul>
+					<li>
+						<input id="allow-export" type="checkbox" />
+						<label
+							for="allow-export"
+							data-i18n="opt_allow_export"
+						>
+							Allow Again, Why Salesforce to export your Tabs,
+							when you request it.
+						</label>
+						<help-aws
+							href="https://github.com/Astisme/again-why-salesforce/wiki/Export-Tabs"
+						>
+							<span slot="text" data-i18n="help_allow_export"
+							>When enabled, you'll be able to export your Tabs
+								and keep them on your computer.</span>
+						</help-aws>
+					</li>
+					<li>
+						<input id="allow-domains" type="checkbox" />
+						<label
+							for="allow-domains"
+							data-i18n="opt_allow_domains"
+						>
+							Allow Again, Why Salesforce to access Salesforce
+							pages, when you visit them.
+						</label>
+						<help-aws>
+							<span slot="text" data-i18n="help_allow_domains"
+							>When enabled, you'll be able to see your Tabs as
+								soon as you launch Salesforce Setup.</span>
+						</help-aws>
+					</li>
+				</ul>
+			</div>
 			<hr>
 
 			<ul class="settings">

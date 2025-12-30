@@ -372,6 +372,68 @@ export const SPONSOR_LINK_IT =
  * Checks if the export functionality is allowed for the current user
  * @return {boolean} true if the export functionality was allowed
  */
-export function isExportAllowed(){
-  return ISSAFARI || BROWSER.downloads != null;
+export function isExportAllowed() {
+	return ISSAFARI || BROWSER.downloads != null;
+}
+/**
+ * Uses the permission API to request new optional permissions
+ * @param {{}} [permissionObj={}] the object with the new permissions to request
+ * @return Promise from browser.permissions.request
+ */
+function requestPermissions(permissionObj = {}) {
+	return BROWSER.permissions.request(permissionObj);
+}
+/**
+ * Requests permissions to download files (used to export the Tabs)
+ * @return Promise from browser.permissions.request
+ */
+export function requestExportPermission() {
+	return requestPermissions({
+		permissions: ["downloads"],
+	});
+}
+/*
+ * Requests permission to access the Salesforce Setup pages without having the user click on the popup on every new visit
+ * @return Promise from browser.permissions.request
+ */
+export function requestFramePatternsPermission() {
+	return requestPermissions({
+		origins: FRAME_PATTERNS,
+	});
+}
+/**
+ * Requests permission to access the user's cookies so that the extension can follow the language in which Salesforce is set
+ * @return Promise from browser.permissions.request
+ */
+export function requestCookiesPermission() {
+	return requestPermissions({
+		permissions: ["cookies"],
+		origins: MANIFEST.optional_host_permissions,
+	});
+}
+/**
+ * Determines whether the current tab is Salesforce Setup.
+ * @return {Promise<{ ison: boolean, url: string>} whether the user is on Salesforce Setup
+ */
+export async function isOnSalesforceSetup() {
+	const browserTab = await sendExtensionMessage({ what: "browser-tab" });
+	return {
+		ison: browserTab?.url?.match(SETUP_LIGHTNING_PATTERN),
+		url: browserTab?.url,
+	};
+}
+export const DO_NOT_REQUEST_FRAME_PERMISSION = "noPerm";
+/**
+ * Checks if the extension can access Salesforce Setup pages without having the user click on the popup on every new visit
+ * @return {boolean} true if the extension is allowed
+ */
+export async function areFramePatternsAllowed() {
+	const permissionsAvailable = await BROWSER.permissions.contains({
+		origins: FRAME_PATTERNS,
+	});
+	return permissionsAvailable ||
+		localStorage.getItem(DO_NOT_REQUEST_FRAME_PERMISSION) === "true" ||
+		new URL(globalThis.location.href).searchParams.get(
+				DO_NOT_REQUEST_FRAME_PERMISSION,
+			) === "true";
 }

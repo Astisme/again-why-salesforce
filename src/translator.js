@@ -152,7 +152,7 @@ class TranslationService {
 			return this.caches[language];
 		}
 		try {
-			const jsonUrl = await BROWSER.runtime.getURL(
+			const jsonUrl = BROWSER.runtime.getURL(
 				`/_locales/${language}/messages.json`,
 			);
 			const response = await fetch(jsonUrl);

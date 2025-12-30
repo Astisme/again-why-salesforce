@@ -1,6 +1,6 @@
 import ensureTranslatorAvailability from "/translator.js";
 import {
-	BROWSER,
+	areFramePatternsAllowed,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
 	GENERIC_PINNED_TAB_STYLE_KEY,
@@ -10,12 +10,11 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	isExportAllowed,
 	isGenericKey,
 	isPinnedKey,
-	isExportAllowed,
 	isStyleKey,
 	LINK_NEW_BROWSER,
-	MANIFEST,
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
 	ORG_PINNED_TAB_STYLE_KEY,
@@ -27,6 +26,9 @@ import {
 	POPUP_SETUP_NEW_TAB,
 	PREVENT_ANALYTICS,
 	PREVENT_DEFAULT_OVERRIDE,
+	requestCookiesPermission,
+	requestExportPermission,
+	requestFramePatternsPermission,
 	sendExtensionMessage,
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
@@ -100,7 +102,9 @@ function saveCheckboxOptions(e, ...dependentCheckboxElements) {
 	sendExtensionMessage(set_msg);
 }
 
-const allowExport = document.getElementById('allow-export');
+const allowExport = document.getElementById("allow-export");
+const allowDomains = document.getElementById("allow-domains");
+
 /**
  * Contains all checkbox elements used for settings, separated by their Id.
  */
@@ -981,14 +985,13 @@ keep_sorted_el.addEventListener("click", (e) => {
 	}
 });
 
-
 /**
  * Toggles the visibility of the given toast for a small amount of time
  * @param {HTMLElement} toast - a div on which the invisible class is present and can be toggled
  */
-function showThenHideToast(toast){
-  toast.classList.remove(invisible);
-  setTimeout(() => toast.classList.add(invisible), 2500);
+function showThenHideToast(toast) {
+	toast.classList.remove(invisible);
+	setTimeout(() => toast.classList.add(invisible), 2500);
 }
 
 /**
@@ -996,12 +999,14 @@ function showThenHideToast(toast){
  * @param {string} message - the message to be translated to be shown to the user
  * @param {boolean} [isSuccess=true] - whether the action concluded with a positive outcome
  */
-async function showToast(message, isSuccess = true){
-  const translator = await ensureTranslatorAvailability();
-  const toast = isSuccess ? successToast : errorToast;
-  const messageDiv = toast.querySelector('div.toastMessage.slds-text-heading--small.forceActionsText');
-  messageDiv.innerText = await translator.translate(message);
-  showThenHideToast(toast);
+async function showToast(message, isSuccess = true) {
+	const translator = await ensureTranslatorAvailability();
+	const toast = isSuccess ? successToast : errorToast;
+	const messageDiv = toast.querySelector(
+		"div.toastMessage.slds-text-heading--small.forceActionsText",
+	);
+	messageDiv.innerText = await translator.translate(message);
+	showThenHideToast(toast);
 }
 
 const listenersSet = {};
@@ -1059,11 +1064,7 @@ async function restoreGeneralSettings() {
 		saveCheckboxOptions(e);
 	});
 	let oldUserLanguage = user_language_select.value;
-	user_language_select.addEventListener("change", (e) => {
-		const cookiesPermObj = {
-			permissions: ["cookies"],
-			origins: MANIFEST.optional_host_permissions,
-		};
+	user_language_select.addEventListener("change", async (e) => {
 		const languageMessage = getObjectToSet({
 			key: SETTINGS_KEY,
 			set: [{
@@ -1079,31 +1080,47 @@ async function restoreGeneralSettings() {
 			oldUserLanguage = e.target.value;
 		};
 		if (e.target.value === FOLLOW_SF_LANG) { // the user wants to follow the language on salesforce
-			BROWSER.permissions.request(cookiesPermObj)
-				.then((resp) => {
-					if (resp === true) { // the extension has the cookies permission
-						sendLanguageMessage();
-					} else {
-						user_language_select.value = oldUserLanguage;
-					}
-				});
+			const resp = await requestCookiesPermission();
+			if (resp) { // the extension now has the cookies permission
+				sendLanguageMessage();
+			} else {
+				user_language_select.value = oldUserLanguage;
+				showToast("error_permission_unavailable", false);
+			}
 		} else {
 			sendLanguageMessage();
 		}
 	});
-    allowExport.checked = isExportAllowed();
-    allowExport.addEventListener('click', async e => {
-      e.preventDefault();
-      const isAllowed = isExportAllowed();
-      if(isAllowed){
-        return;
-      }
-      const res = await BROWSER.permissions.request({
-          permissions: ["downloads"],
-      });
-      showToast(res ? "export_success" : "export_failure", res);
-      e.target.checked = res;
-    });
+	allowExport.checked = isExportAllowed();
+	allowExport.addEventListener("change", async (e) => {
+		e.preventDefault();
+		const tryingToCheck = e.target.checked;
+		e.target.checked = !e.target.checked;
+		if (isExportAllowed() || !tryingToCheck) {
+			return;
+		}
+		const res = await requestExportPermission();
+		showToast(
+			res ? "permission_request_success" : "permission_request_failure",
+			res,
+		);
+		e.target.checked = res;
+	});
+	allowDomains.checked = await areFramePatternsAllowed();
+	allowDomains.addEventListener("change", async (e) => {
+		e.preventDefault();
+		const tryingToCheck = e.target.checked;
+		e.target.checked = !e.target.checked;
+		if (!tryingToCheck) {
+			return;
+		}
+		const res = await requestFramePatternsPermission();
+		showToast(
+			res ? "permission_request_success" : "permission_request_failure",
+			res,
+		);
+		e.target.checked = res;
+	});
 	listenersSet["settings"] = true;
 }
 
@@ -1520,8 +1537,8 @@ settings_pinnedOrg.header.addEventListener("click", () => {
 });
 
 const saveToast = document.getElementById("save-confirm");
-const successToast = document.getElementById('toast-display-success');
-const errorToast = document.getElementById('toast-display-error');
+const successToast = document.getElementById("toast-display-success");
+const errorToast = document.getElementById("toast-display-error");
 
 document.querySelector("#save-container > button").addEventListener(
 	"click",
@@ -1530,7 +1547,7 @@ document.querySelector("#save-container > button").addEventListener(
 			keep_sorted_el.checked && picked_sort.select.value,
 			picked_sort.direction.value,
 		);
-        showThenHideToast(saveToast);
+		showThenHideToast(saveToast);
 	},
 );
 
