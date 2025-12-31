@@ -3,6 +3,7 @@ import {
 	CXM_PIN_TAB,
 	CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB,
+	HIDDEN_CLASS,
 	PIN_TAB_CLASS,
 } from "/constants.js";
 import { sendExtensionMessage } from "/functions.js";
@@ -200,7 +201,7 @@ function handleActionButtonClick(e, {
 	// Close the dropdown menu
 	const dropdownMenu = row.querySelector(".actions-dropdown-menu");
 	if (dropdownMenu) {
-		dropdownMenu.classList.add("hidden");
+		dropdownMenu.classList.add(HIDDEN_CLASS);
 	}
 	// Handle toggle buttons (pin/unpin)
 	const message = actionsMap?.[tabIndex]?.[action];
@@ -311,7 +312,7 @@ export function updateModalBodyOverflow(article = null) {
 	);
 	// takes into consideration the empty tr at the bottom
 	const table = article.querySelector("#sortable-table");
-	modalBody.style.overflowY = "hidden";
+	modalBody.style.overflowY = HIDDEN_CLASS;
 	let otherElementsInArticleHeight = 0;
 	for (const el of article.childNodes) {
 		if (el !== table.parentNode) {
@@ -323,7 +324,7 @@ export function updateModalBodyOverflow(article = null) {
 			table.clientHeight -
 			otherElementsInArticleHeight <=
 		tr.clientHeight / 2;
-	modalBody.style.overflowY = hasOverflow ? "auto" : "hidden";
+	modalBody.style.overflowY = hasOverflow ? "auto" : HIDDEN_CLASS;
 	if (!hasOverflow) {
 		// automatically scrool to top of modal
 		article.scrollIntoView({

@@ -8,6 +8,7 @@ import {
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
+	HIDDEN_CLASS,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
@@ -834,7 +835,7 @@ export async function generateSldsModal({
 	modalParent.style.zIndex = "9001";
 	const awsfStyle = document.createElement("style");
 	awsfStyle.textContent =
-		".hidden { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }";
+		`.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`;
 	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
@@ -1650,7 +1651,7 @@ export function generateHelpWith_i_popup({
 	tooltip.append(slot);
 	const linkTip = document.createElement("div");
 	tooltip.append(linkTip);
-	linkTip.classList.add("link-tip", "hidden");
+	linkTip.classList.add("link-tip", HIDDEN_CLASS);
 	(async () => {
 		const translator = await ensureTranslatorAvailability();
 		assistive.textContent = await translator.translate("help");
@@ -2188,7 +2189,7 @@ export async function createManageTabRow({
 	tr.classList.add(
 		"slds-hint-parent",
 		EXTENSION_NAME,
-		isThisOrgTab ? undefined : "hidden",
+		isThisOrgTab ? undefined : HIDDEN_CLASS,
 	);
 	tr.draggable = draggable;
 	tr.dataset.draggable = draggable;
@@ -2256,7 +2257,7 @@ export async function createManageTabRow({
 	buttonContainer.appendChild(dropdownMenu);
 	dropdownMenu.classList.add(
 		"actions-dropdown-menu",
-		"hidden",
+		HIDDEN_CLASS,
 	);
 	dropdownMenu.style.position = "absolute";
 	dropdownMenu.style.top = "100%";
@@ -2313,7 +2314,7 @@ export async function createManageTabRow({
 	// Dropdown toggle functionality
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
-		dropdownMenu.classList.toggle("hidden");
+		dropdownMenu.classList.toggle(HIDDEN_CLASS);
 	});
 	// Prevent dropdown from closing when clicking inside
 	dropdownMenu.addEventListener("click", (e) => {
@@ -2441,7 +2442,7 @@ export async function generateManageTabsModal(tabs = [], {
 				"tr[data-is-this-org-tab=false]",
 			)
 		) {
-			otherOrgTr.classList.remove("hidden");
+			otherOrgTr.classList.remove(HIDDEN_CLASS);
 		}
 		showAllTabsButton.setAttribute("disabled", true);
 		hideOtherOrgTabsButton.removeAttribute("disabled");
@@ -2453,7 +2454,7 @@ export async function generateManageTabsModal(tabs = [], {
 				"tr[data-is-this-org-tab=false]",
 			)
 		) {
-			otherOrgTr.classList.add("hidden");
+			otherOrgTr.classList.add(HIDDEN_CLASS);
 		}
 		hideOtherOrgTabsButton.setAttribute("disabled", true);
 		showAllTabsButton.removeAttribute("disabled");
@@ -2526,7 +2527,7 @@ export async function generateManageTabsModal(tabs = [], {
 		tr.addEventListener("click", (e) => {
 			if (e.target !== dropdownButton) {
 				for (const dropdownMenu of allDropMenus) {
-					dropdownMenu.classList.add("hidden");
+					dropdownMenu.classList.add(HIDDEN_CLASS);
 				}
 			}
 		});
@@ -2561,7 +2562,7 @@ export function generateReviewSponsorSvgs() {
 	reviewSvg.setAttribute("fill", "none");
 	reviewSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 	reviewSvg.id = "review";
-	reviewSvg.classList.add("hidden");
+	reviewSvg.classList.add(HIDDEN_CLASS);
 	reviewSvg.dataset.i18n = "write_review+-+alt";
 	for (
 		const attrs of [
@@ -2604,7 +2605,7 @@ export function generateReviewSponsorSvgs() {
 	sponsorSvg.setAttribute("viewBox", "0 0 490 490");
 	sponsorSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 	sponsorSvg.id = "sponsor";
-	sponsorSvg.classList.add("hidden");
+	sponsorSvg.classList.add(HIDDEN_CLASS);
 	sponsorSvg.dataset.i18n = "send_tip+-+alt";
 	const sponsorPath = document.createElementNS(
 		"http://www.w3.org/2000/svg",

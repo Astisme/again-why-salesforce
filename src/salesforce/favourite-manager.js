@@ -4,6 +4,7 @@ import {
 	CMD_SAVE_AS_TAB,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
+	HIDDEN_CLASS,
 	SKIP_LINK_DETECTION,
 	TAB_ADD_FRONT,
 	TAB_AS_ORG,
@@ -146,10 +147,10 @@ async function generateFavouriteButton() {
 			slashedStarCmd == null ? "" : ` (${slashedStarCmd})`
 		}`,
 	}, true);
-	slashedStar.classList.add("hidden");
+	slashedStar.classList.add(HIDDEN_CLASS);
 	span.appendChild(slashedStar);
 	const style = document.createElement("style");
-	style.textContent = ".hidden { display: none; }";
+	style.textContent = `.${HIDDEN_CLASS} { display: none; }`;
 	span.appendChild(style);
 	return button;
 }
@@ -192,11 +193,11 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 	const star = getFavouriteImage(STAR_ID, button);
 	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 	if (isSaved) {
-		star.classList.add("hidden");
-		slashedStar.classList.remove("hidden");
+		star.classList.add(HIDDEN_CLASS);
+		slashedStar.classList.remove(HIDDEN_CLASS);
 	} else {
-		star.classList.remove("hidden");
-		slashedStar.classList.add("hidden");
+		star.classList.remove(HIDDEN_CLASS);
+		slashedStar.classList.add(HIDDEN_CLASS);
 	}
 }
 
@@ -338,7 +339,7 @@ export async function showFavouriteButton(count = 0) {
  */
 export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
-	if (favourite.classList.contains("hidden")) {
+	if (favourite.classList.contains(HIDDEN_CLASS)) {
 		const message = save ? "error_useless_save" : "error_useless_remove";
 		showToast(message, true, true);
 	} else {

@@ -1,9 +1,12 @@
 import {
 	BROWSER,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
+	HIDDEN_CLASS,
+} from "/constants.js";
+import {
 	requestExportPermission,
 	requestFramePatternsPermission,
-} from "/constants.js";
+} from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import "../themeHandler.js";
 await ensureTranslatorAvailability();
@@ -46,8 +49,8 @@ if (whichPermissions == null || whichPermissions === "hostpermissions") {
 		}
 	});
 } else if (whichPermissions === "download") {
-	document.getElementById("host_permissions").classList.add("hidden");
-	document.getElementById("download").classList.remove("hidden");
+	document.getElementById("host_permissions").classList.add(HIDDEN_CLASS);
+	document.getElementById("download").classList.remove(HIDDEN_CLASS);
 	/**
 	 * Tells the browser to reset the Popup to the original one
 	 * @return undefined

@@ -1,14 +1,14 @@
 import {
 	BROWSER,
-	getSettings,
+	HIDDEN_CLASS,
 	POPUP_LOGIN_NEW_TAB,
 	POPUP_OPEN_LOGIN,
 	POPUP_OPEN_SETUP,
 	POPUP_SETUP_NEW_TAB,
 	SALESFORCE_LIGHTNING_PATTERN,
-	sendExtensionMessage,
 	SETUP_LIGHTNING,
 } from "/constants.js";
+import { getSettings, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import "../themeHandler.js";
 
@@ -34,9 +34,9 @@ if (page != null) { // we're in a salesforce page
 		if (SALESFORCE_LIGHTNING_PATTERN.test(page)) {
 			// we're in a Salesforce page (not setup)
 			// switch which button is shown
-			document.getElementById(loginId).classList.add("hidden");
+			document.getElementById(loginId).classList.add(HIDDEN_CLASS);
 			const goSetup = document.getElementById(setupId);
-			goSetup.classList.remove("hidden");
+			goSetup.classList.remove(HIDDEN_CLASS);
 			// update the button href to use the domain
 			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
 			// update the bold on the text
@@ -44,8 +44,8 @@ if (page != null) { // we're in a salesforce page
 		}
 	} catch (e) {
 		console.warn(e);
-		sfsetupTextEl.classList.add("hidden");
-		invalidUrl.classList.remove("hidden");
+		sfsetupTextEl.classList.add(HIDDEN_CLASS);
+		invalidUrl.classList.remove(HIDDEN_CLASS);
 	}
 }
 

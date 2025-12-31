@@ -6,6 +6,7 @@ import {
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
+	HIDDEN_CLASS,
 	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,
@@ -38,7 +39,6 @@ import { handleSwitchColorTheme } from "../themeHandler.js";
 }
 
 const translator = await ensureTranslatorAvailability();
-const hiddenClass = "hidden";
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -50,8 +50,8 @@ const moon = document.getElementById("moon");
 {
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToShow.classList.remove("invisible", hiddenClass);
-	elementToHide.classList.add("invisible", hiddenClass);
+	elementToShow.classList.remove("invisible", HIDDEN_CLASS);
+	elementToHide.classList.add("invisible", HIDDEN_CLASS);
 }
 
 /**
@@ -60,8 +60,8 @@ const moon = document.getElementById("moon");
 function switchTheme() {
 	const elementToShow = html.dataset.theme === "light" ? sun : moon;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToHide.classList.add("invisible", hiddenClass);
-	elementToShow.classList.remove(hiddenClass);
+	elementToHide.classList.add("invisible", HIDDEN_CLASS);
+	elementToShow.classList.remove(HIDDEN_CLASS);
 	setTimeout(() => {
 		elementToShow.classList.remove("invisible");
 	}, 200);

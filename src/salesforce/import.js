@@ -1,5 +1,5 @@
 "use strict";
-import { EXTENSION_NAME } from "/constants.js";
+import { EXTENSION_NAME, HIDDEN_CLASS } from "/constants.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -59,7 +59,7 @@ async function generateSldsImport() {
 	fileInputWrapper.style.marginBottom = "1rem";
 	divParent.appendChild(fileInputWrapper);
 	const style = document.createElement("style");
-	style.textContent = ".hidden { display: none; }";
+	style.textContent = `.${HIDDEN_CLASS} { display: none; }`;
 	divParent.appendChild(style);
 	const duplicateWarningPart0 = document.createElement("div");
 	duplicateWarningPart0.textContent = await translator.translate(
@@ -96,11 +96,11 @@ async function generateSldsImport() {
 		"preserve_org_tabs",
 		true,
 	);
-	otherOrgCheckbox.classList.add("hidden");
+	otherOrgCheckbox.classList.add(HIDDEN_CLASS);
 	divParent.appendChild(otherOrgCheckbox);
 	overwriteCheckbox.addEventListener(
 		"change",
-		() => otherOrgCheckbox.classList.toggle("hidden"),
+		() => otherOrgCheckbox.classList.toggle(HIDDEN_CLASS),
 	);
 	return { saveButton, closeButton, inputContainer };
 }
