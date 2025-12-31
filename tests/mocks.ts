@@ -1,4 +1,12 @@
 // deno-lint-ignore-file no-explicit-any
+import { Window } from "happydom";
+const window = new Window();
+globalThis.window = window;
+globalThis.document = window.document;
+globalThis.HTMLElement = window.HTMLElement;
+globalThis.customElements = {
+  define: () => {},
+};
 import Tab from "/tab.js";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
 enum StorageKeys {
@@ -561,3 +569,4 @@ export function createMockElement() {
 		},
 	};
 }
+

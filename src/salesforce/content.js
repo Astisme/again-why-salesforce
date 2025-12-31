@@ -94,7 +94,7 @@ let modalHanger;
 /**
  * Contains the current href, always up-to-date
  */
-let href = globalThis.location.href;
+let href = globalThis.location?.href;
 /**
  * Returns the current href string, always up-to-date.
  *
@@ -1258,7 +1258,7 @@ function main() {
 // queries the currently active tab of the current active window
 // this prevents showing the tabs when not in a setup page (like Sales or Service Console)
 if (
-	href.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
+	href?.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
 ) {
 	globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
 	main();

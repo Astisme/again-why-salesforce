@@ -9,9 +9,7 @@ import {
 	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,
-	showReviewOrSponsor,
 } from "/constants.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import { handleSwitchColorTheme } from "../themeHandler.js";
@@ -41,14 +39,6 @@ import { handleSwitchColorTheme } from "../themeHandler.js";
 
 const translator = await ensureTranslatorAvailability();
 const hiddenClass = "hidden";
-
-showReviewOrSponsor({
-	allTabs: await ensureAllTabsAvailability(),
-	translator,
-	reviewSvg: document.getElementById("review"),
-	sponsorSvg: document.getElementById("sponsor"),
-	hiddenClass,
-});
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
