@@ -4,16 +4,9 @@ import {
 	assertFalse,
 	assertThrows,
 } from "@std/testing/asserts";
-import { stub } from "@std/testing/mock";
 
 import { createMockElement } from "../mocks.ts";
 import { showReviewOrSponsor } from "/components/review-sponsor/review-sponsor.js";
-
-const generateReviewSponsorSvgsStub = stub(
-    globalThis as any,
-    "generateReviewSponsorSvgs",
-    () => {},
-);
 
 Deno.test("show review or sponsor block", async (t) => {
 	await t.step("throws when required params are missing", () => {
@@ -79,5 +72,3 @@ Deno.test("show review or sponsor block", async (t) => {
 		},
 	);
 });
-
-generateReviewSponsorSvgsStub.restore();

@@ -2541,7 +2541,7 @@ export async function generateManageTabsModal(tabs = [], {
 	};
 }
 
-/** 
+/**
  * Creates a div with a review svg and a sponsor svg which can be used to redirect the user to the extension's review page or its sponsor one.
  * By default, the svgs are hidden.
  * @return {Object} An object containing root (to add to the DOM), reviewSvg, sponsorSvg, reviewLink, sponsorLink which can be used to add titles and alts

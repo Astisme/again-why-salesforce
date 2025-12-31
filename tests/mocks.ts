@@ -5,7 +5,7 @@ globalThis.window = window;
 globalThis.document = window.document;
 globalThis.HTMLElement = window.HTMLElement;
 globalThis.customElements = {
-  define: () => {},
+	define: () => {},
 };
 import Tab from "/tab.js";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
@@ -569,4 +569,3 @@ export function createMockElement() {
 		},
 	};
 }
-

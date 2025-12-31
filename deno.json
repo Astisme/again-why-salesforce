@@ -51,6 +51,6 @@
 		"puppeteer": "npm:puppeteer@^24.17.0",
 		"@std/testing/asserts": "https://deno.land/std/testing/asserts.ts",
 		"@std/testing/mock": "https://deno.land/std/testing/mock.ts",
-        "happydom": "npm:happy-dom"
+		"happydom": "npm:happy-dom"
 	}
 }
