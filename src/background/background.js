@@ -18,7 +18,6 @@ import {
 	MY_SALESFORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
 	NO_RELEASE_NOTES,
-	openSettingsPage,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	PREVENT_DEFAULT_OVERRIDE,
@@ -31,6 +30,7 @@ import {
 	WHAT_SHOW_EXPORT_MODAL,
 	WHY_KEY,
 } from "/constants.js";
+import { openSettingsPage } from "/functions.js";
 import Tab from "/tab.js";
 import {
 	bg_getCurrentBrowserTab,

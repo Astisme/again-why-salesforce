@@ -39,14 +39,12 @@ import {
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
 	EXTENSION_VERSION,
-	getSettings,
 	HAS_ORG_TAB,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
 	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
@@ -56,6 +54,7 @@ import {
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
+import { getSettings, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";

@@ -4,12 +4,12 @@ import {
 	CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB,
 	PIN_TAB_CLASS,
-	sendExtensionMessage,
 } from "/constants.js";
+import { sendExtensionMessage } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
-import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
 
+import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
 import {
 	createManageTabRow,
 	generateManageTabsModal,

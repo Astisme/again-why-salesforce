@@ -1,11 +1,5 @@
-import {
-	BROWSER,
-	getSettings,
-	PERSIST_SORT,
-	sendExtensionMessage,
-	SETTINGS_KEY,
-	WHY_KEY,
-} from "/constants.js";
+import { BROWSER, PERSIST_SORT, SETTINGS_KEY, WHY_KEY } from "/constants.js";
+import { getSettings, sendExtensionMessage } from "/functions.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 

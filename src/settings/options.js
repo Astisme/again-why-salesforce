@@ -1,19 +1,8 @@
-import ensureTranslatorAvailability from "/translator.js";
 import {
-	areFramePatternsAllowed,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getCssRule,
-	getCssSelector,
-	getPinnedSpecificKey,
-	getSettings,
-	getStyleSettings,
-	isExportAllowed,
-	isGenericKey,
-	isPinnedKey,
-	isStyleKey,
 	LINK_NEW_BROWSER,
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
@@ -26,12 +15,7 @@ import {
 	POPUP_SETUP_NEW_TAB,
 	PREVENT_ANALYTICS,
 	PREVENT_DEFAULT_OVERRIDE,
-	requestCookiesPermission,
-	requestExportPermission,
-	requestFramePatternsPermission,
-	sendExtensionMessage,
 	SETTINGS_KEY,
-	showReviewOrSponsor,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
 	TAB_ADD_FRONT,
@@ -51,6 +35,24 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 } from "/constants.js";
+import {
+	areFramePatternsAllowed,
+	getCssRule,
+	getCssSelector,
+	getPinnedSpecificKey,
+	getSettings,
+	getStyleSettings,
+	isExportAllowed,
+	isGenericKey,
+	isPinnedKey,
+	isStyleKey,
+	requestCookiesPermission,
+	requestExportPermission,
+	requestFramePatternsPermission,
+	sendExtensionMessage,
+	showReviewOrSponsor,
+} from "/functions.js";
+import ensureTranslatorAvailability from "/translator.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 
 const hidden = "hidden";

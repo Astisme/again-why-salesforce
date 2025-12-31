@@ -3,19 +3,19 @@ import {
 	assertEquals,
 	assertFalse,
 	assertRejects,
+	assertThrows,
 } from "@std/testing/asserts";
 
 import {
+	BROWSER,
+	DO_NOT_REQUEST_FRAME_PERMISSION,
+	FRAME_PATTERNS,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getCssRule,
-	getCssSelector,
-	getSettings,
-	getStyleSettings,
 	LINK_NEW_BROWSER,
+	MANIFEST,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
@@ -28,6 +28,21 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
+import {
+	areFramePatternsAllowed,
+	getCssRule,
+	getCssSelector,
+	getSettings,
+	getStyleSettings,
+	isExportAllowed,
+	isOnSalesforceSetup,
+	requestCookiesPermission,
+	requestExportPermission,
+	requestFramePatternsPermission,
+	sendExtensionMessage,
+	showReviewOrSponsor,
+} from "/functions.js";
+import { createMockElement } from "./mocks.ts";
 
 Deno.test("sendExtensionMessage returns promise if no callback", async () => {
 	const result = await sendExtensionMessage({ what: "echo", echo: "bar" });
@@ -480,4 +495,116 @@ Deno.test("getCssRule generates correct CSS rules", async (t) => {
 			"",
 		);
 	});
+});
+
+Deno.test("requestPermissions", async (t) => {
+	await t.step("request export permissions", async () => {
+		const exportPermObj = {
+			permissions: ["downloads"],
+		};
+		assertFalse(await BROWSER.permissions.contains(exportPermObj));
+		assertFalse(isExportAllowed());
+		assert(await requestExportPermission());
+		assert(await BROWSER.permissions.contains(exportPermObj));
+		assert(isExportAllowed());
+	});
+	await t.step("request frame patterns permissions", async () => {
+		const framePatternsPermObj = {
+			origins: FRAME_PATTERNS,
+		};
+		assertFalse(await BROWSER.permissions.contains(framePatternsPermObj));
+		globalThis.location = {
+			href: "http://localhost",
+		};
+		assertFalse(await areFramePatternsAllowed());
+		localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "true");
+		assert(await areFramePatternsAllowed());
+		localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "false");
+		assertFalse(await areFramePatternsAllowed());
+		assert(await requestFramePatternsPermission());
+		assert(await BROWSER.permissions.contains(framePatternsPermObj));
+		assert(await areFramePatternsAllowed());
+	});
+	await t.step("request cookies permissions", async () => {
+		const cookiesPermObj = {
+			permissions: ["cookies"],
+			origins: MANIFEST.optional_host_permissions,
+		};
+		assertFalse(await BROWSER.permissions.contains(cookiesPermObj));
+		assert(await requestCookiesPermission());
+		assert(await BROWSER.permissions.contains(cookiesPermObj));
+	});
+});
+
+Deno.test("checks for extensionsion functionality", async (t) => {
+	await t.step("is on salesforce setup", async () => {
+		const isonSFsetup = await isOnSalesforceSetup();
+		assert(isonSFsetup.ison);
+		assert(isonSFsetup.url != null);
+	});
+});
+
+Deno.test("show review or sponsor block", async (t) => {
+	await t.step("throws when required params are missing", () => {
+		assertThrows(
+			() => showReviewOrSponsor({}),
+			Error,
+			"error_required_params",
+		);
+	});
+
+	await t.step(
+		"shows none when shouldShowReviewOrSponsor returns none",
+		() => {
+			const reviewSvg = createMockElement();
+			const sponsorSvg = createMockElement();
+			showReviewOrSponsor({
+				allTabs: Array(7),
+				translator: {},
+				reviewSvg,
+				sponsorSvg,
+			});
+			assertEquals(reviewSvg.classList.removed.length, 0);
+			assertFalse("click" in reviewSvg.events);
+			assertEquals(sponsorSvg.classList.removed.length, 0);
+			assertFalse("click" in sponsorSvg.events);
+		},
+	);
+
+	await t.step(
+		"shows review when shouldShowReviewOrSponsor returns review",
+		() => {
+			const reviewSvg = createMockElement();
+			const sponsorSvg = createMockElement();
+			showReviewOrSponsor({
+				allTabs: Array(8),
+				translator: {},
+				reviewSvg,
+				sponsorSvg,
+			});
+			assertEquals(reviewSvg.classList.removed.length, 1);
+			assert("click" in reviewSvg.events);
+			assertEquals(sponsorSvg.classList.removed.length, 0);
+			assertFalse("click" in sponsorSvg.events);
+		},
+	);
+
+	await t.step(
+		"shows sponsor and review when shouldShowReviewOrSponsor returns sponsor",
+		() => {
+			const reviewSvg = createMockElement();
+			const sponsorSvg = createMockElement();
+			const translator = {};
+			showReviewOrSponsor({
+				allTabs: Array(16),
+				translator,
+				reviewSvg,
+				sponsorSvg,
+			});
+			assertEquals(reviewSvg.classList.removed.length, 1);
+			assert("click" in reviewSvg.events);
+			assertEquals(sponsorSvg.classList.removed.length, 1);
+			assert("click" in sponsorSvg.events);
+		},
+	);
 });

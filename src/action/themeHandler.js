@@ -1,4 +1,4 @@
-import { sendExtensionMessage } from "/constants.js";
+import { sendExtensionMessage } from "/functions.js";
 const html = document.documentElement;
 let systemColorListener = null;
 

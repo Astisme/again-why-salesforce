@@ -85,6 +85,11 @@ type OnMessageCallback = (
 	sendResponse: (response?: any) => void,
 ) => boolean | void;
 type OnCommandCallback = (command: string) => void;
+type PermissionMap = Record<string, true>;
+type PermissionObject = {
+	permissions: PermissionMap;
+	origins: PermissionMap;
+};
 
 export const mockBrowser = {
 	storage: {
@@ -212,6 +217,11 @@ export const mockBrowser = {
 					}
 					break;
 				}
+				case "browser-tab":
+					response = {
+						url: "https://www.mycustomorg.my.force.com/lightning/setup/anypage",
+					};
+					break;
 				case "echo":
 				case "warning":
 					response = message.echo;
@@ -397,6 +407,44 @@ export const mockBrowser = {
 			this._cookies = cookies;
 		},
 	},
+
+	permissions: {
+		_permissions: {} as PermissionObject,
+		request(permissionObj: PermissionObject): Promise<boolean> {
+			for (const category of ["permissions", "origins"] as const) {
+				const source = permissionObj[category];
+				if (source) {
+					for (const key of source) {
+						if (this._permissions[category] == null) {
+							this._permissions[category] = {};
+						}
+						this._permissions[category][key] = true;
+						// special case for downloads (enable BROWSER.downloads)
+						if (key === "downloads") {
+							globalThis.BROWSER.downloads = {}; //only need to not be null
+						}
+					}
+				}
+			}
+			return Promise.resolve(true);
+		},
+		contains(permissionObj: PermissionObject): Promise<boolean> {
+			let allWereFound = true;
+			for (const category of ["permissions", "origins"] as const) {
+				const target = this._permissions[category];
+				const source = permissionObj[category];
+				if (source) {
+					for (const key of source) {
+						if (!target?.[key]) {
+							allWereFound = false;
+							break;
+						}
+					}
+				}
+			}
+			return Promise.resolve(allWereFound);
+		},
+	},
 };
 
 declare global {
@@ -496,3 +544,20 @@ globalThis.fetch = (path: string) => ({
 		}
 	},
 });
+
+export function createMockElement() {
+	return {
+		classList: {
+			removed: [] as string[],
+			remove(cls: string) {
+				this.removed.push(cls);
+			},
+		},
+		// deno-lint-ignore ban-types
+		events: {} as Record<string, Function>,
+		// deno-lint-ignore ban-types
+		addEventListener(event: string, cb: Function) {
+			this.events[event] = cb;
+		},
+	};
+}

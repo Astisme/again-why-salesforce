@@ -1,6 +1,6 @@
 "use strict";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import { EXTENSION_NAME } from "/constants.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {

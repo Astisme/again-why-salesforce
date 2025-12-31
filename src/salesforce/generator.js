@@ -1,6 +1,4 @@
 "use strict";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
 	CXM_PIN_TAB,
@@ -10,11 +8,6 @@ import {
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getCssRule,
-	getCssSelector,
-	getPinnedSpecificKey,
-	getSettings,
-	getStyleSettings,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
@@ -27,6 +20,15 @@ import {
 	TAB_STYLE_TOP,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
+import {
+	getCssRule,
+	getCssSelector,
+	getPinnedSpecificKey,
+	getSettings,
+	getStyleSettings,
+} from "/functions.js";
+import Tab from "/tab.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";

@@ -1,17 +1,16 @@
 "use strict";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
 import {
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
-	getSettings,
-	sendExtensionMessage,
 	SKIP_LINK_DETECTION,
 	TAB_ADD_FRONT,
 	TAB_AS_ORG,
 } from "/constants.js";
+import { getSettings, sendExtensionMessage } from "/functions.js";
+import Tab from "/tab.js";
+import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {

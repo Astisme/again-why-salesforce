@@ -43,10 +43,10 @@ import {
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
-	openSettingsPage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
 } from "/constants.js";
+import { openSettingsPage } from "/functions.js";
 import Tab from "/tab.js";
 import ensureTranslatorAvailability from "/translator.js";
 import {

@@ -3,7 +3,6 @@ import {
 	BROWSER,
 	EXTENSION_NAME,
 	ISCHROME,
-	isExportAllowed,
 	ISFIREFOX,
 	MANIFEST,
 	NO_UPDATE_NOTIFICATION,
@@ -12,6 +11,7 @@ import {
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
+import { isExportAllowed } from "/functions.js";
 import { TabContainer } from "/tabContainer.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
