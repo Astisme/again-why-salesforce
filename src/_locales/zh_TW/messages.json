@@ -627,6 +627,14 @@
 		"message": "新加入我的最愛的 Tab 會插入到設定列中 Tab 列表的前面，而不是追加到結尾。",
 		"description": "[$opt_add_tabs_front] 的 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "啟用後，您一啟動 $salesforce_setup 就能看到您的 $tabs",
+		"description": "[設定說明] 用於啟用我們在 $salesforce_setup 打開時立即準備就緒的選項權限"
+	},
+	"help_allow_export": {
+		"message": "啟用後，您將能夠 $export 您的 $tabs 並將其保存在電腦上。",
+		"description": "[設定說明] 用於啟用我們將 Tab 下載到使用者機器上的選項權限"
+	},
 	"help_automatic_open_login": {
 		"message": "若您在 Salesforce 網域外點選擴充功能彈出式視窗，會自動將您帶往 Salesforce 登入頁面。",
 		"description": "[$opt_automatic_open_login] 的 [settings-help]"
@@ -835,6 +843,14 @@
 		"message": "將新 Tab 新增到前面。",
 		"description": "[settings] 讓使用者將所有新 Tab 新增到前面"
 	},
+	"opt_allow_domains": {
+		"message": "允許 $extension_label 在您訪問 Salesforce 頁面時存取它們。",
+		"description": "[設定] 當使用者訪問 $salesforce_setup 時執行擴充功能的選項權限"
+	},
+	"opt_allow_export": {
+		"message": "允許 $extension_label 在您請求時匯出您的 $tabs。",
+		"description": "[設定] 選項權限，允許我們匯出使用者的 Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "當不在 Salesforce 頁面上時，按一下快顯視窗時自動開啟 $salesforce_login 頁面。",
 		"description": "[設定] 當使用者在隨機網站上開啟快顯視窗時"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "頁面將在目前瀏覽器 Tab 中開啟",
 		"description": "[placeholder] 由其他文字使用"
+	},
+	"permission_request_failure": {
+		"message": "權限未被允許。",
+		"description": "[錯誤] 使用者要求我們向其請求權限，但隨後未接受"
+	},
+	"permission_request_success": {
+		"message": "權限已被允許！",
+		"description": "[成功] 使用者要求我們向其請求權限，且他們接受了"
 	},
 	"pinned": {
 		"message": "已釘選",

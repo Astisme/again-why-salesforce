@@ -627,6 +627,14 @@
 		"message": "새롭게 즐겨찾기에 추가한 Tab이 Tab 목록의 끝에 추가되지 않고 설정 바의 Tab 목록 맨 앞에 삽입됩니다.",
 		"description": "[$opt_add_tabs_front]에 대한 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "활성화하면 $salesforce_setup을(를) 실행하자마자 $tabs을(를) 볼 수 있습니다.",
+		"description": "[설정 도움말] $salesforce_setup이(가) 열리자마자 준비될 수 있도록 하는 선택적 권한"
+	},
+	"help_allow_export": {
+		"message": "활성화하면 $tabs을(를) $export하여 컴퓨터에 저장할 수 있습니다.",
+		"description": "[설정 도움말] 사용자의 기기에 Tab을 다운로드할 수 있도록 하는 선택적 권한"
+	},
 	"help_automatic_open_login": {
 		"message": "Salesforce 도메인 외부에서 확장 프로그램 팝업을 클릭하면 Salesforce 로그인 페이지로 자동으로 이동합니다.",
 		"description": "[$opt_automatic_open_login]에 대한 [settings-help]"
@@ -835,6 +843,14 @@
 		"message": "새 Tab을 맨 앞에 추가합니다.",
 		"description": "[settings] 사용자가 모든 새 Tab을 맨 앞에 추가하도록 허용"
 	},
+	"opt_allow_domains": {
+		"message": "Salesforce 페이지를 방문할 때 $extension_label이(가) 해당 페이지에 액세스하도록 허용합니다.",
+		"description": "[설정] 사용자가 $salesforce_setup을(를) 방문할 때 확장 프로그램을 실행하기 위한 선택적 권한"
+	},
+	"opt_allow_export": {
+		"message": "요청 시 $extension_label이(가) $tabs을(를) 내보낼 수 있도록 허용합니다.",
+		"description": "[설정] 사용자의 Tab을 내보낼 수 있도록 하는 선택적 권한"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce 페이지에 있지 않을 때 팝업을 클릭하면 $salesforce_login 페이지를 자동으로 엽니다.",
 		"description": "[설정] 사용자가 임의의 웹사이트에서 팝업을 열 때"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "페이지가 현재 브라우저 Tab에서 열립니다",
 		"description": "[placeholder] 다른 텍스트에서 사용됨"
+	},
+	"permission_request_failure": {
+		"message": "권한이 허용되지 않았습니다.",
+		"description": "[오류] 사용자가 권한을 요청하도록 했으나 수락하지 않음"
+	},
+	"permission_request_success": {
+		"message": "권한이 허용되었습니다!",
+		"description": "[성공] 사용자가 권한을 요청하도록 했고 이를 수락함"
 	},
 	"pinned": {
 		"message": "Pinned",

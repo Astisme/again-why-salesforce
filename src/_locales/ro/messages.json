@@ -627,6 +627,14 @@
 		"message": "Tab-urile nou adăugate la favorite sunt inserate în fața listei dvs. de Tab-uri din bara de configurare, în loc să fie adăugate la sfârșit.",
 		"description": "[settings-help] pentru $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Când este activat, veți putea vedea $tabs imediat ce lansați $salesforce_setup",
+		"description": "[ajutor-setări] pentru permisiunea opțională care ne permite să fim gata imediat ce $salesforce_setup este deschis"
+	},
+	"help_allow_export": {
+		"message": "Când este activat, veți putea să $export $tabs și să le păstrați pe computer.",
+		"description": "[ajutor-setări] pentru permisiunea opțională care ne permite să descărcăm Tab-urile pe computerul utilizatorului"
+	},
 	"help_automatic_open_login": {
 		"message": "Dacă faceți clic pe pop-up-ul extensiei în afara unui domeniu Salesforce, veți fi direcționat automat către pagina de autentificare Salesforce.",
 		"description": "[settings-help] pentru $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Adăugați Tab-uri noi în față.",
 		"description": "[settings] permite utilizatorului să adauge toate Tab-urile noi în față"
 	},
+	"opt_allow_domains": {
+		"message": "Permiteți $extension_label să acceseze paginile Salesforce atunci când le vizitați.",
+		"description": "[setare] permisiune opțională de a rula extensiile atunci când utilizatorul vizitează $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Permiteți $extension_label să vă exporte $tabs atunci când solicitați acest lucru.",
+		"description": "[setare] permisiune opțională pentru a ne permite să exportăm Tab-urile utilizatorului"
+	},
 	"opt_automatic_open_login": {
 		"message": "Deschideți automat pagina $salesforce_login atunci când faceți clic pe fereastra pop-up în timp ce nu vă aflați pe o pagină Salesforce.",
 		"description": "[setare] când utilizatorul deschide fereastra pop-up în timp ce se află pe un site web aleatoriu"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "pagina va fi deschisă în Tab-ul curent al browser-ului",
 		"description": "[placeholder] utilizat de alte texte"
+	},
+	"permission_request_failure": {
+		"message": "Permisiunea nu a fost acordată.",
+		"description": "[eroare] utilizatorul ne-a cerut să îi solicităm o permisiune, dar apoi nu a acceptat-o"
+	},
+	"permission_request_success": {
+		"message": "Permisiunea a fost acordată!",
+		"description": "[succes] utilizatorul ne-a cerut să îi solicităm o permisiune și a acceptat-o"
 	},
 	"pinned": {
 		"message": "Fixat",

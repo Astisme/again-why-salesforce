@@ -626,6 +626,14 @@
 		"message": "নতুন পছন্দের Tabs আপনার সেটআপ বারে Tab তালিকার শেষে যুক্ত হওয়ার পরিবর্তে সামনে যুক্ত করা হয়।",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "সক্রিয় থাকলে, আপনি $salesforce_setup চালু করার সাথে সাথেই আপনার $tabs দেখতে পাবেন",
+		"description": "[সেটিংস-সহায়তা] $salesforce_setup খোলার সাথে সাথে আমাদের প্রস্তুত থাকতে সক্ষম করার ঐচ্ছিক অনুমতির জন্য"
+	},
+	"help_allow_export": {
+		"message": "সক্রিয় থাকলে, আপনি আপনার $tabs গুলো $export করতে এবং আপনার কম্পিউটারে রাখতে পারবেন।",
+		"description": "[সেটিংস-সহায়তা] ব্যবহারকারীর মেশিনে Tab ডাউনলোড করতে আমাদের সক্ষম করার ঐচ্ছিক অনুমতির জন্য"
+	},
 	"help_automatic_open_login": {
 		"message": "আপনি যদি একটি Salesforce ডোমেনের বাইরে এক্সটেনশনের পপআপে ক্লিক করেন, তাহলে আপনাকে স্বয়ংক্রিয়ভাবে Salesforce লগইন পৃষ্ঠায় নিয়ে যাবে।",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "সামনে নতুন Tabs যুক্ত করুন।",
 		"description": "[settings] ব্যবহারকারীকে সামনে সমস্ত নতুন Tabs যুক্ত করার অনুমতি দিন"
 	},
+	"opt_allow_domains": {
+		"message": "আপনি যখন Salesforce পৃষ্ঠাগুলি ভিজিট করবেন, তখন $extension_label-কে সেগুলি অ্যাক্সেস করার অনুমতি দিন।",
+		"description": "[সেটিং] ব্যবহারকারী যখন $salesforce_setup ভিজিট করবেন তখন এক্সটেনশনগুলি চালানোর ঐচ্ছিক অনুমতি"
+	},
+	"opt_allow_export": {
+		"message": "আপনার অনুরোধে $extension_label-কে আপনার $tabs এক্সপোর্ট করার অনুমতি দিন।",
+		"description": "[সেটিং] ব্যবহারকারীর Tab এক্সপোর্ট করার জন্য আমাদের সক্ষম করতে ঐচ্ছিক অনুমতি"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce পৃষ্ঠায় না থাকাকালীন পপআপে ক্লিক করার সময় স্বয়ংক্রিয়ভাবে $salesforce_login পৃষ্ঠা খুলুন।",
 		"description": "[সেটিং] যখন ব্যবহারকারী একটি এলোমেলো ওয়েবসাইটে থাকাকালীন পপআপ খোলে"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "পৃষ্ঠাটি বর্তমান ব্রাউজার Tab-এ খোলা হবে",
 		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
+	},
+	"permission_request_failure": {
+		"message": "অনুমতি দেওয়া হয়নি।",
+		"description": "[ত্রুটি] ব্যবহারকারী আমাদের একটি অনুমতির অনুরোধ করতে বলেছিলেন কিন্তু তারপর এটি গ্রহণ করেননি"
+	},
+	"permission_request_success": {
+		"message": "অনুমতি দেওয়া হয়েছে!",
+		"description": "[সফল] ব্যবহারকারী আমাদের একটি অনুমতির অনুরোধ করতে বলেছিলেন এবং তারা এটি গ্রহণ করেছেন"
 	},
 	"pinned": {
 		"message": "পিন করা",

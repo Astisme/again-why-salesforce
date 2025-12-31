@@ -626,6 +626,14 @@
 		"message": "Neu favorisierte Tabs werden am Anfang Ihrer Tab-Liste in der Setup-Leiste eingefügt, anstatt am Ende angefügt zu werden.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Wenn diese Option aktiviert ist, siehst du deine $tabs, sobald du $salesforce_setup startest",
+		"description": "[Einstellungs-Hilfe] für die optionale Berechtigung, die es uns ermöglicht, bereit zu sein, sobald $salesforce_setup geöffnet wird"
+	},
+	"help_allow_export": {
+		"message": "Wenn diese Option aktiviert ist, kannst du deine $tabs $export und sie auf deinem Computer speichern.",
+		"description": "[Einstellungs-Hilfe] für die optionale Berechtigung, die es uns ermöglicht, die Tab auf den Computer des Benutzers herunterzuladen"
+	},
 	"help_automatic_open_login": {
 		"message": "Wenn Sie außerhalb einer Salesforce-Domäne auf das Erweiterungs-Popup klicken, gelangen Sie automatisch zur Salesforce-Anmeldeseite.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "Neue Tabs vorne hinzufügen.",
 		"description": "[settings] ermöglicht es dem Benutzer, alle neuen Tabs vorne hinzuzufügen"
 	},
+	"opt_allow_domains": {
+		"message": "Erlaube $extension_label den Zugriff auf Salesforce-Seiten, wenn du diese besuchst.",
+		"description": "[Einstellung] optionale Berechtigung zum Ausführen der Erweiterungen, wenn der Benutzer $salesforce_setup besucht"
+	},
+	"opt_allow_export": {
+		"message": "Erlaube $extension_label, deine $tabs zu exportieren, wenn du dies anforderst.",
+		"description": "[Einstellung] optionale Berechtigung, die es uns ermöglicht, die Tab des Benutzers zu exportieren"
+	},
 	"opt_automatic_open_login": {
 		"message": "Öffnen Sie die $salesforce_login-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich nicht auf einer Salesforce-Seite befinden.",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer zufälligen Website befindet"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "Seite wird im aktuellen Browser Tab geöffnet",
 		"description": "[placeholder] wird von anderen Texten verwendet"
+	},
+	"permission_request_failure": {
+		"message": "Die Berechtigung wurde nicht erteilt.",
+		"description": "[Fehler] der Benutzer hat uns gebeten, eine Berechtigung anzufordern, hat diese dann aber nicht akzeptiert"
+	},
+	"permission_request_success": {
+		"message": "Die Berechtigung wurde erteilt!",
+		"description": "[Erfolg] der Benutzer hat uns gebeten, eine Berechtigung anzufordern, und er hat sie akzeptiert"
 	},
 	"pinned": {
 		"message": "Angepinnt",

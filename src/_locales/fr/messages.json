@@ -626,6 +626,14 @@
 		"message": "Les Tabs nouvellement ajoutés sont insérés au début de votre liste de Tabs dans la barre de configuration plutôt qu'ajoutés à la fin.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Une fois activé, vous pourrez voir vos $tabs dès que vous lancerez $salesforce_setup",
+		"description": "[aide-paramètres] pour l'autorisation facultative nous permettant d'être prêts dès l'ouverture de $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Une fois activé, vous pourrez $export vos $tabs et les conserver sur votre ordinateur.",
+		"description": "[aide-paramètres] pour l'autorisation facultative nous permettant de télécharger les Tab sur la machine de l'utilisateur"
+	},
 	"help_automatic_open_login": {
 		"message": "Si vous cliquez sur la fenêtre contextuelle de l'extension en dehors d'un domaine Salesforce, cela vous amène automatiquement à la page de connexion de Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "Ajouter de nouveaux Tabs à l'avant.",
 		"description": "[settings] permettre à l'utilisateur d'ajouter tous les nouveaux Tabs à l'avant"
 	},
+	"opt_allow_domains": {
+		"message": "Autoriser $extension_label à accéder aux pages Salesforce lorsque vous les visitez.",
+		"description": "[paramètre] autorisation facultative d'exécuter les extensions lorsque l'utilisateur visite $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Autoriser $extension_label à exporter vos $tabs lorsque vous le demandez.",
+		"description": "[paramètre] autorisation facultative nous permettant d'exporter les Tab de l'utilisateur"
+	},
 	"opt_automatic_open_login": {
 		"message": "Ouvrir automatiquement la page $salesforce_login en cliquant sur la fenêtre contextuelle lorsque vous n'êtes pas sur une page Salesforce.",
 		"description": "[paramètre] lorsque l'utilisateur ouvre la fenêtre contextuelle alors qu'il se trouve sur un site Web aléatoire"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "la page s'ouvrira dans la Tab actuelle du navigateur",
 		"description": "[placeholder] utilisé par d'autres textes"
+	},
+	"permission_request_failure": {
+		"message": "L'autorisation n'a pas été accordée.",
+		"description": "[erreur] l'utilisateur nous a demandé de lui solliciter une autorisation mais ne l'a pas acceptée"
+	},
+	"permission_request_success": {
+		"message": "L'autorisation a été accordée !",
+		"description": "[succès] l'utilisateur nous a demandé de lui solliciter une autorisation et il l'a acceptée"
 	},
 	"pinned": {
 		"message": "Épinglé",

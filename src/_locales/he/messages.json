@@ -627,6 +627,14 @@
 		"message": "Tabs חדשים שסומנו כמועדפים מוכנסים לחזית רשימת ה-Tabs שלך בסרגל ההגדרה במקום להתווסף בסוף.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "כאשר המצב מופעל, תוכל לראות את ה-$tabs שלך ברגע שתפעיל את $salesforce_setup",
+		"description": "[עזרה-הגדרות] עבור הרשאה אופציונלית המאפשרת לנו להיות מוכנים ברגע ש-$salesforce_setup נפתח"
+	},
+	"help_allow_export": {
+		"message": "כאשר המצב מופעל, תוכל לבצע $export ל-$tabs שלך ולשמור אותם במחשב שלך.",
+		"description": "[עזרה-הגדרות] עבור הרשאה אופציונלית המאפשרת לנו להוריד את ה-Tab למחשב של המשתמש"
+	},
 	"help_automatic_open_login": {
 		"message": "אם תלחץ על התוסף הקופץ מחוץ לדומיין של Salesforce, הוא יעביר אותך באופן אוטומטי לדף הכניסה של Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "הוסף Tabs חדשים מקדימה.",
 		"description": "[settings] אפשר למשתמש להוסיף את כל ה-Tabs החדשים מקדימה"
 	},
+	"opt_allow_domains": {
+		"message": "אפשר ל-$extension_label לגשת לדפי Salesforce כשאתה מבקר בהם.",
+		"description": "[הגדרה] הרשאה אופציונלית להפעלת ההרחבות כאשר המשתמש מבקר ב-$salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "אפשר ל-$extension_label לייצא את ה-$tabs שלך כשתבקש זאת.",
+		"description": "[הגדרה] הרשאה אופציונלית המאפשרת לנו לייצא את ה-Tab של המשתמש"
+	},
 	"opt_automatic_open_login": {
 		"message": "פתח אוטומטית את דף $salesforce_login בעת לחיצה על החלון הקופץ כשאינך נמצא בדף Salesforce.",
 		"description": "[הגדרה] כשהמשתמש פותח את החלון הקופץ באתר אקראי"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "הדף ייפתח ב-Tab הנוכחי של הדפדפן",
 		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
+	},
+	"permission_request_failure": {
+		"message": "ההרשאה לא אושרה.",
+		"description": "[שגיאה] המשתמש ביקש מאיתנו לבקש ממנו הרשאה אך לאחר מכן לא אישר אותה"
+	},
+	"permission_request_success": {
+		"message": "ההרשאה אושרה!",
+		"description": "[הצלחה] המשתמש ביקש מאיתנו לבקש ממנו הרשאה והוא אישר אותה"
 	},
 	"pinned": {
 		"message": "מוצמד",

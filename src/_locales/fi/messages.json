@@ -627,6 +627,14 @@
 		"message": "Äskettäin suosikeiksi merkityt Tabs-välilehdet lisätään asennuspalkin Tab-luettelon alkuun sen sijaan, että ne lisättäisiin loppuun.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kun tämä on käytössä, näet $tabs heti, kun käynnistät $salesforce_setup",
+		"description": "[asetus-apu] valinnaiseen lupaan, jonka avulla voimme olla valmiina heti, kun $salesforce_setup avataan"
+	},
+	"help_allow_export": {
+		"message": "Kun tämä on käytössä, voit $export $tabs ja säilyttää ne tietokoneellasi.",
+		"description": "[asetus-apu] valinnaiseen lupaan, jonka avulla voimme ladata Tab käyttäjän koneelle"
+	},
 	"help_automatic_open_login": {
 		"message": "Jos napsautat laajennuksen ponnahdusikkunaa Salesforce-verkkotunnuksen ulkopuolella, sinut ohjataan automaattisesti Salesforce-kirjautumissivulle.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Lisää uudet Tabs-välilehdet eteen.",
 		"description": "[settings] antaa käyttäjän lisätä kaikki uudet Tabs-välilehdet eteen"
 	},
+	"opt_allow_domains": {
+		"message": "Salli $extension_label käyttää Salesforce-sivuja, kun vierailet niillä.",
+		"description": "[asetus] valinnainen lupa laajennusten suorittamiseen, kun käyttäjä vierailee osoitteessa $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Salli $extension_label viedä $tabs, kun pyydät sitä.",
+		"description": "[asetus] valinnainen lupa, jonka avulla voimme viedä käyttäjän Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Avaa $salesforce_login-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
 		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan satunnaisella verkkosivustolla"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "sivu avataan nykyisessä selaimen Tab-välilehdessä",
 		"description": "[placeholder] käytetään muissa teksteissä"
+	},
+	"permission_request_failure": {
+		"message": "Lupaa ei sallittu.",
+		"description": "[virhe] käyttäjä pyysi meitä pyytämään lupaa, mutta ei sitten hyväksynyt sitä"
+	},
+	"permission_request_success": {
+		"message": "Lupa on sallittu!",
+		"description": "[onnistuminen] käyttäjä pyysi meitä pyytämään lupaa ja hän hyväksyi sen"
 	},
 	"pinned": {
 		"message": "Kiinnitetty",

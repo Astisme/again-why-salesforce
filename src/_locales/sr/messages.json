@@ -627,6 +627,14 @@
 		"message": "Ново фаворизовани Tab-ови се убацују на почетак ваше листе Tab-ова у траци подешавања, уместо да се додају на крај.",
 		"description": "[settings-help] за $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kada je omogućeno, moći ćete da vidite svoje $tabs čim pokrenete $salesforce_setup",
+		"description": "[pomoć za postavke] za opcionu dozvola koja nam omogućava da budemo spremni čim se otvori $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kada je omogućeno, moći ćete da $export svoje $tabs i čuvate ih na svom računaru.",
+		"description": "[pomoć za postavke] za opcionu dozvolu koja nam omogućava da preuzmemo Tab na korisnikov računar"
+	},
 	"help_automatic_open_login": {
 		"message": "Ако кликнете на искачући прозор проширења изван Salesforce домена, аутоматски ћете бити преусмерени на страницу за пријављивање у Salesforce.",
 		"description": "[settings-help] за $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Додајте нове Tab-ове напред.",
 		"description": "[settings] омогућите кориснику да дода све нове Tab-ове напред"
 	},
+	"opt_allow_domains": {
+		"message": "Dozvolite $extension_label pristup Salesforce stranicama kada ih posetite.",
+		"description": "[postavka] opciona dozvola za pokretanje proširenja kada korisnik poseti $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Dozvolite $extension_label da izveze vaše $tabs kada to zatražite.",
+		"description": "[postavka] opciona dozvola koja nam omogućava da izvezemo korisnikove Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Аутоматски отвори $salesforce_login страницу када кликнете на искачући прозор док нисте на Salesforce страници.",
 		"description": "[подешавање] када корисник отвори искачући прозор док је на насумичној веб локацији"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "страница ће се отворити у тренутном Tab-у прегледача",
 		"description": "[placeholder] користи се другим текстовима"
+	},
+	"permission_request_failure": {
+		"message": "Dozvola nije odobrena.",
+		"description": "[greška] korisnik nas je zamolio da zatražimo dozvolu, ali je potom nije prihvatio"
+	},
+	"permission_request_success": {
+		"message": "Dozvola je odobrena!",
+		"description": "[uspeh] korisnik nas je zamolio da zatražimo dozvolu i on ju je prihvatio"
 	},
 	"pinned": {
 		"message": "Закачено",

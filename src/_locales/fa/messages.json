@@ -627,6 +627,14 @@
 		"message": "Tabs مورد علاقه جدید به جای اضافه شدن در انتها، در جلوی لیست Tabs شما در نوار تنظیمات قرار می‌گیرند.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "در صورت فعال بودن، به محض راه‌اندازی $salesforce_setup می‌توانید $tabs خود را ببینید",
+		"description": "[راهنمای تنظیمات] برای مجوز اختیاری جهت فعال کردن ما برای آماده بودن به محض باز شدن $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "در صورت فعال بودن، می‌توانید $tabs خود را $export کرده و آن‌ها را در رایانه خود نگه دارید.",
+		"description": "[راهنمای تنظیمات] برای مجوز اختیاری جهت فعال کردن ما برای دانلود Tab در دستگاه کاربر"
+	},
 	"help_automatic_open_login": {
 		"message": "اگر روی پنجره بازشو افزونه خارج از دامنه Salesforce کلیک کنید، به صورت خودکار شما را به صفحه ورود به Salesforce می‌برد.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "اضافه کردن Tabs جدید در جلو.",
 		"description": "[settings] به کاربر اجازه می‌دهد تمام Tabs جدید را در جلو اضافه کند"
 	},
+	"opt_allow_domains": {
+		"message": "به $extension_label اجازه دهید هنگام بازدید از صفحات Salesforce، به آن‌ها دسترسی داشته باشد.",
+		"description": "[تنظیمات] مجوز اختیاري برای اجرای افزونه‌ها هنگامی که کاربر از $salesforce_setup بازدید می‌کند"
+	},
+	"opt_allow_export": {
+		"message": "به $extension_label اجازه دهید تا در صورت درخواست شما، $tabs شما را صادر کند.",
+		"description": "[تنظیمات] مجوز اختیاری برای فعال کردن ما جهت صادر کردن Tab کاربر"
+	},
 	"opt_automatic_open_login": {
 		"message": "هنگام کلیک بر روی پنجره بازشو در حالی که در صفحه Salesforce نیستید، صفحه $salesforce_login را به طور خودکار باز کنید.",
 		"description": "[تنظیمات] هنگامی که کاربر پنجره بازشو را در حالی که در یک وب سایت تصادفی است باز می کند"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "صفحه در Tab فعلی مرورگر باز خواهد شد",
 		"description": "[placeholder] استفاده شده توسط متون دیگر"
+	},
+	"permission_request_failure": {
+		"message": "مجوز داده نشد.",
+		"description": "[خطا] کاربر از ما خواست تا از او مجوز بخواهیم اما بعد آن را نپذیرفت"
+	},
+	"permission_request_success": {
+		"message": "مجوز داده شد!",
+		"description": "[موفقیت] کاربر از ما خواست تا از او مجوز بخواهیم و او آن را پذیرفت"
 	},
 	"pinned": {
 		"message": "پین شده",

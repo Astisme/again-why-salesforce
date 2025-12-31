@@ -627,6 +627,14 @@
 		"message": "Nově oblíbené Tabs se vkládají na začátek seznamu Tabs v panelu nastavení, spíše než na konec.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Pokud je tato možnost povolena, uvidíte své $tabs ihned po spuštění $salesforce_setup",
+		"description": "[nápověda-nastavení] pro volitelné oprávnění, abychom mohli být připraveni ihned po otevření $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Pokud je tato funkce povolena, budete moci $export své $tabs a uchovávat je v počítači.",
+		"description": "[nápověda-nastavení] pro volitelné oprávnění, které nám umožní stáhnout Tab do počítače uživatele"
+	},
 	"help_automatic_open_login": {
 		"message": "Pokud kliknete na vyskakovací okno rozšíření mimo doménu Salesforce, automaticky vás přesměruje na přihlašovací stránku Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Přidat nové Tabs dopředu.",
 		"description": "[settings] umožnit uživateli přidat všechny nové Tabs dopředu"
 	},
+	"opt_allow_domains": {
+		"message": "Povolit $extension_label přístup k stránkám Salesforce, když je navštívíte.",
+		"description": "[nastavení] volitelné oprávnění ke spuštění rozšíření, když uživatel navštíví $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Povolit $extension_label exportovat vaše $tabs, když o to požádáte.",
+		"description": "[nastavení] volitelné oprávnění, které nám umožní exportovat Tab uživatele"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automaticky otevřít stránku $salesforce_login po kliknutí na vyskakovací okno, pokud nejste na stránce Salesforce.",
 		"description": "[nastavení] když uživatel otevře vyskakovací okno na náhodné webové stránce"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "stránka se otevře v aktuální Tab prohlížeče",
 		"description": "[placeholder] používáno jinými texty"
+	},
+	"permission_request_failure": {
+		"message": "Oprávnění nebylo povoleno.",
+		"description": "[chyba] uživatel nás požádal o vyžádání povolení, ale poté jej nepřijal"
+	},
+	"permission_request_success": {
+		"message": "Oprávnění bylo povoleno!",
+		"description": "[úspěch] uživatel nás požádal o vyžádání povolení a přijal jej"
 	},
 	"pinned": {
 		"message": "Připnutá",

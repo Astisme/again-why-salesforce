@@ -626,6 +626,14 @@
 		"message": "Las Tabs recién favoritas se insertan al principio de su lista de Tabs en la barra de configuración en lugar de agregarse al final.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Cuando esté habilitado, podrá ver sus $tabs tan pronto como inicie $salesforce_setup",
+		"description": "[ayuda-ajustes] para el permiso opcional que nos permite estar listos tan pronto como se abra $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Cuando esté habilitado, podrá $export sus $tabs y guardarlas en su ordenador.",
+		"description": "[ayuda-ajustes] para el permiso opcional que nos permite descargar las Tab en la máquina del usuario"
+	},
 	"help_automatic_open_login": {
 		"message": "Si hace clic en la ventana emergente de la extensión fuera de un dominio de Salesforce, lo llevará a la página de inicio de sesión de Salesforce automáticamente.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "Agregar nuevas Tabs al frente.",
 		"description": "[settings] permite al usuario agregar todas las Tabs nuevas al frente"
 	},
+	"opt_allow_domains": {
+		"message": "Permitir que $extension_label acceda a las páginas de Salesforce cuando las visite.",
+		"description": "[ajuste] permiso opcional para ejecutar las extensiones cuando el usuario visita $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Permitir que $extension_label exporte sus $tabs cuando lo solicite.",
+		"description": "[ajuste] permiso opcional para permitirnos exportar las Tab del usuario"
+	},
 	"opt_automatic_open_login": {
 		"message": "Abrir automáticamente la página de $salesforce_login al hacer clic en la ventana emergente si no se está en una página de Salesforce.",
 		"description": "[configuración] cuando el usuario abre la ventana emergente mientras está en un sitio web aleatorio"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "la página se abrirá en la Tab actual del navegador",
 		"description": "[placeholder] utilizado por otros textos"
+	},
+	"permission_request_failure": {
+		"message": "El permiso no fue concedido.",
+		"description": "[error] el usuario nos pidió que solicitáramos un permiso pero luego no lo aceptó"
+	},
+	"permission_request_success": {
+		"message": "¡El permiso ha sido concedido!",
+		"description": "[éxito] el usuario nos pidió que solicitáramos un permiso y lo aceptó"
 	},
 	"pinned": {
 		"message": "Anclada",

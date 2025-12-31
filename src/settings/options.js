@@ -34,6 +34,7 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
+    HIDDEN_CLASS,
 } from "/constants.js";
 import {
 	areFramePatternsAllowed,
@@ -53,9 +54,10 @@ import {
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 
-const hidden = "hidden";
+// no need to await as we do not need to call the translator
+// we only need it to translate the text on the screen and it may take the time it needs to do so
+ensureTranslatorAvailability();
 const invisible = "invisible";
-await ensureTranslatorAvailability();
 
 /**
  * Creates the object used to update the settings
@@ -994,6 +996,8 @@ function showThenHideToast(toast) {
 	setTimeout(() => toast.classList.add(invisible), 2500);
 }
 
+const successToast = document.getElementById("toast-display-success");
+const errorToast = document.getElementById("toast-display-error");
 /**
  * Shows the given message in a success / error toast.
  * @param {string} message - the message to be translated to be shown to the user
@@ -1085,7 +1089,7 @@ async function restoreGeneralSettings() {
 				sendLanguageMessage();
 			} else {
 				user_language_select.value = oldUserLanguage;
-				showToast("error_permission_unavailable", false);
+				showToast("permission_request_failure", false);
 			}
 		} else {
 			sendLanguageMessage();
@@ -1503,11 +1507,11 @@ function showRelevantSettings_HideOthers(settings_object) {
 		el.classList.remove(SLDS_ACTIVE);
 	}
 	for (const el of [...allContainers, ...allPreviews]) {
-		el.classList.add(hidden);
+		el.classList.add(HIDDEN_CLASS);
 	}
 	settings_object.header?.classList.add(SLDS_ACTIVE);
-	settings_object.container?.classList.remove(hidden);
-	settings_object.preview?.classList.remove(hidden);
+	settings_object.container?.classList.remove(HIDDEN_CLASS);
+	settings_object.preview?.classList.remove(HIDDEN_CLASS);
 	activePreview = settings_object.preview;
 }
 
@@ -1537,8 +1541,6 @@ settings_pinnedOrg.header.addEventListener("click", () => {
 });
 
 const saveToast = document.getElementById("save-confirm");
-const successToast = document.getElementById("toast-display-success");
-const errorToast = document.getElementById("toast-display-error");
 
 document.querySelector("#save-container > button").addEventListener(
 	"click",

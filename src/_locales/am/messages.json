@@ -627,6 +627,14 @@
 		"message": "በአዲስ የተወዳጅ Tabs በSetup አሞሌ ውስጥ ባለው የ Tab ዝርዝርዎ መጨረሻ ላይ ከመታከል ይልቅ ከፊት ይገባሉ።",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "ሲበራ፣ $salesforce_setup እንደከፈቱ የእርስዎን $tabs ማየት ይችላሉ",
+		"description": "[የቅንብሮች-እርዳታ] $salesforce_setup እንደተከፈተ ዝግጁ ለመሆን የሚያስችል አማራጭ ፈቃድ"
+	},
+	"help_allow_export": {
+		"message": "ሲበራ፣ የእርስዎን $tabs $export ለማድረግ እና በኮምፒተርዎ ላይ ለማስቀመጥ ይችላሉ።",
+		"description": "[የቅንብሮች-እርዳታ] በተጠቃሚው ማሽን ላይ Tab ለማውረድ የሚያስችል አማራጭ ፈቃድ"
+	},
 	"help_automatic_open_login": {
 		"message": "ከSalesforce ጎራ ውጪ የቅጥያ ብቅ-ባይን ጠቅ ካደረጉ በራስ-ሰር ወደ Salesforce መግቢያ ገጽ ይወስድዎታል።",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "አዲስ Tabsን ከፊት ጨምር።",
 		"description": "[settings] ተጠቃሚው ሁሉንም አዲስ Tabs ከፊት እንዲያክሉ ፍቀድ"
 	},
+	"opt_allow_domains": {
+		"message": "የ Salesforce ገጾችን ሲጎበኙ $extension_label እንዲያገኛቸው ፍቀድ።",
+		"description": "[ቅንብር] ተጠቃሚው $salesforce_setup በሚጎበኝበት ጊዜ ቅጥያዎቹን ለማሄድ አማራጭ ፈቃድ"
+	},
+	"opt_allow_export": {
+		"message": "ሲጠይቁ $extension_label የእርስዎን $tabs ወደ ውጭ እንዲልክ ፍቀድ።",
+		"description": "[ቅንብር] የተጠቃሚውን Tab ወደ ውጭ ለመላክ የሚያስችል አማራጭ ፈቃድ"
+	},
 	"opt_automatic_open_login": {
 		"message": "በ Salesforce ገጽ ላይ ባልሆኑበት ጊዜ ብቅ-ባይ ላይ ጠቅ ሲያደርጉ የ $salesforce_login ገጽን በራስ-ሰር ይክፈቱ።",
 		"description": "[ቅንብር] ተጠቃሚው በዘፈቀደ ድር ጣቢያ ላይ እያለ ብቅ-ባይ ሲከፍት"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "ገጹ አሁን ባለው የብሮውዘር Tab ውስጥ ይከፈታል",
 		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
+	},
+	"permission_request_failure": {
+		"message": "ፈቃዱ አልተፈቀደም።",
+		"description": "[ስህተት] ተጠቃሚው ፈቃድ እንድንጠይቅ ጠይቆን ነገር ግን አልተቀበለውም"
+	},
+	"permission_request_success": {
+		"message": "ፈቃዱ ተፈቅዷል!",
+		"description": "[ስኬት] ተጠቃሚው ፈቃድ እንድንጠይቅ ጠይቆን ተቀብሎታል"
 	},
 	"pinned": {
 		"message": "የተሰካ",

@@ -626,6 +626,14 @@
 		"message": "新しくお気に入りに登録されたTabsは、設定バーのTabリストの最後にではなく、先頭に挿入されます。",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "有効にすると、$salesforce_setup を起動するとすぐに $tabs を表示できるようになります。",
+		"description": "[設定ヘルプ] $salesforce_setup が開かれたらすぐに準備ができるようにするためのオプションの権限"
+	},
+	"help_allow_export": {
+		"message": "有効にすると、$tabs を $export してコンピューターに保存できるようになります。",
+		"description": "[設定ヘルプ] ユーザーのデバイスに Tab をダウンロードできるようにするためのオプションの権限"
+	},
 	"help_automatic_open_login": {
 		"message": "Salesforceドメイン外で拡張機能のポップアップをクリックすると、自動的にSalesforceのログインページに移動します。",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "新しいTabsを先頭に追加します。",
 		"description": "[settings] ユーザーがすべての新しいTabsを先頭に追加できるようにする"
 	},
+	"opt_allow_domains": {
+		"message": "Salesforce ページにアクセスしたときに、$extension_label がそれらにアクセスすることを許可します。",
+		"description": "[設定] ユーザーが $salesforce_setup を開いているときに拡張機能を実行するためのオプションの権限"
+	},
+	"opt_allow_export": {
+		"message": "リクエスト時に $extension_label が $tabs をエクスポートすることを許可します。",
+		"description": "[設定] ユーザーの Tab をエクスポートできるようにするためのオプションの権限"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforceページにいないときにポップアップをクリックすると、$salesforce_loginページを自動的に開きます。",
 		"description": "[設定] ユーザーがランダムなウェブサイトでポップアップを開いたとき"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "ページは現在のブラウザ Tab で開かれます",
 		"description": "[placeholder] 他のテキストで使用されます"
+	},
+	"permission_request_failure": {
+		"message": "権限は許可されませんでした。",
+		"description": "[エラー] ユーザーから権限のリクエストを求められましたが、その後承認されませんでした"
+	},
+	"permission_request_success": {
+		"message": "権限が許可されました！",
+		"description": "[成功] ユーザーから権限のリクエストを求められ、承認されました"
 	},
 	"pinned": {
 		"message": "Pinned",

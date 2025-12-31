@@ -627,6 +627,14 @@
 		"message": "Newly favorited $tabs are inserted at the front of your $tab list in the Setup bar rather than appended at the end.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "When enabled, you'll be able to see your $tabs as soon as you launch $salesforce_setup",
+		"description": "[settings-help] for optional permission to enable us to be ready as soon as $salesforce_setup is opened"
+	},
+	"help_allow_export": {
+		"message": "When enabled, you'll be able to $export your $tabs and keep them on your computer.",
+		"description": "[settings-help] for optional permission to enable us to download the Tabs on the user's machine"
+	},
 	"help_automatic_open_login": {
 		"message": "Takes you to the $salesforce_login page automatically $if_click_popup outside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Add new $tabs in front.",
 		"description": "[settings] let the user add all new $tabs in front"
 	},
+	"opt_allow_domains": {
+		"message": "Allow $extension_label to access Salesforce pages, when you visit them.",
+		"description": "[setting] optional permission to run the extensions when the user is visiting $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Allow $extension_label to export your $tabs when you request it.",
+		"description": "[setting] optional permission to enable us ot export the user's Tabs"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatically open $salesforce_login $when_click_popup_while not on a $salesforce_page",
 		"description": "[setting] when the user opens the popup while on a random website"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "page will be opened in the current browser $tab",
 		"description": "[placeholder] used by other texts"
+	},
+	"permission_request_failure": {
+		"message": "The permission was not allowed.",
+		"description": "[error] the user asked us to request them a permission but then did not accept it"
+	},
+	"permission_request_success": {
+		"message": "The permission has been allowed!",
+		"description": "[success] the user asked us to request them a permission and they accepted it"
 	},
 	"pinned": {
 		"message": "Pinned",

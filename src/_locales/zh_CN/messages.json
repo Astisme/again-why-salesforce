@@ -627,6 +627,14 @@
 		"message": "新收藏的 Tab 会插入到设置栏中你的 Tab 列表前面，而不是追加到末尾。",
 		"description": "[$opt_add_tabs_front] 的 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "启用后，您一启动 $salesforce_setup 就能看到您的 $tabs",
+		"description": "[设置帮助] 用于启用我们在 $salesforce_setup 打开时立即准备就绪的可选权限"
+	},
+	"help_allow_export": {
+		"message": "启用后，您将能够 $export 您的 $tabs 并将其保存在电脑上。",
+		"description": "[设置帮助] 用于启用我们将 Tab 下载到用户机器上的可选权限"
+	},
 	"help_automatic_open_login": {
 		"message": "如果你在 Salesforce 域外点击扩展程序弹窗，将自动把你带到 Salesforce 登录页面。",
 		"description": "[$opt_automatic_open_login] 的 [settings-help]"
@@ -835,6 +843,14 @@
 		"message": "将新 Tab 添加到前面。",
 		"description": "[settings] 允许用户将所有新 Tab 添加到前面"
 	},
+	"opt_allow_domains": {
+		"message": "允许 $extension_label 在您访问 Salesforce 页面时访问它们。",
+		"description": "[设置] 当用户访问 $salesforce_setup 时运行扩展程序的可选权限"
+	},
+	"opt_allow_export": {
+		"message": "允许 $extension_label 在您请求时导出您的 $tabs。",
+		"description": "[设置] 可选权限，允许我们导出用户的 Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "当不在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_login 页面。",
 		"description": "[设置] 当用户在随机网站上打开弹出窗口时"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "页面将在当前浏览器 Tab 中打开",
 		"description": "[placeholder] 由其他文本使用"
+	},
+	"permission_request_failure": {
+		"message": "权限未被允许。",
+		"description": "[错误] 用户要求我们向其请求权限，但随后未接受"
+	},
+	"permission_request_success": {
+		"message": "权限已被允许！",
+		"description": "[成功] 用户要求我们向其请求权限，并且他们接受了"
 	},
 	"pinned": {
 		"message": "已固定",

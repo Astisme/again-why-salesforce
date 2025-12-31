@@ -627,6 +627,14 @@
 		"message": "Nylig favoritt-merkede Tab-er settes inn foran Tab-listen din i oppsettlinjen i stedet for å legges til på slutten.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Når aktivert, vil du kunne se dine $tabs så snart du starter $salesforce_setup",
+		"description": "[innstillingshjelp] for valgfri tillatelse til å la oss være klare så snart $salesforce_setup åpnes"
+	},
+	"help_allow_export": {
+		"message": "Når aktivert, vil du kunne $export dine $tabs og lagre dem på datamaskinen din.",
+		"description": "[innstillingshjelp] for valgfri tillatelse til å la oss laste ned Tab på brukerens maskin"
+	},
 	"help_automatic_open_login": {
 		"message": "Hvis du klikker på utvidelsens popup utenfor et Salesforce-domene, blir du automatisk tatt til Salesforce-påloggingssiden.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Legg til nye Tab-er foran.",
 		"description": "[settings] la brukeren legge til alle nye Tab-er foran"
 	},
+	"opt_allow_domains": {
+		"message": "Tillat $extension_label å få tilgang til Salesforce-sider når du besøker dem.",
+		"description": "[innstilling] valgfri tillatelse til å kjøre utvidelsene når brukeren besøker $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Tillat $extension_label å eksportere dine $tabs når du ber om det.",
+		"description": "[innstilling] valgfri tillatelse til å la oss eksportere brukerens Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Åpne $salesforce_login-siden automatisk når du klikker på popup-vinduet mens du ikke er på en Salesforce-side.",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et tilfeldig nettsted"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "siden vil åpnes i den nåværende Tab-en i nettleseren",
 		"description": "[placeholder] brukes av andre tekster"
+	},
+	"permission_request_failure": {
+		"message": "Tillatelsen ble ikke gitt.",
+		"description": "[feil] brukeren ba oss om å be om tillatelse, men godtok den ikke"
+	},
+	"permission_request_success": {
+		"message": "Tillatelsen er gitt!",
+		"description": "[suksess] brukeren ba oss om å be om tillatelse og godtok den"
 	},
 	"pinned": {
 		"message": "Festet",

@@ -627,6 +627,14 @@
 		"message": "Novozaložené Tab-y sú vložené na začiatok vášho zoznamu Tab-ov v nastavení, namiesto toho, aby boli pridané na koniec.",
 		"description": "[settings-help] pre $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Ak je táto možnosť povolená, uvidíte svoje $tabs ihneď po spustení $salesforce_setup",
+		"description": "[pomocník nastavení] pre voliteľné povolenie, aby sme mohli byť pripravení ihneď po otvorení $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Ak je táto možnosť povolená, budete môcť $export svoje $tabs a uchovávať ich v počítači.",
+		"description": "[pomocník nastavení] pre voliteľné povolenie, ktoré nám umožní stiahnuť Tab do počítača používateľa"
+	},
 	"help_automatic_open_login": {
 		"message": "Ak kliknete na vyskakovacie okno rozšírenia mimo domény Salesforce, automaticky vás to presunie na prihlasovaciu stránku Salesforce.",
 		"description": "[settings-help] pre $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Pridať nové Tab-y dopredu.",
 		"description": "[settings] umožnite používateľovi pridávať všetky nové Tab-y dopredu"
 	},
+	"opt_allow_domains": {
+		"message": "Povoliť $extension_label prístup k stránkam Salesforce, keď ich navštívite.",
+		"description": "[nastavenie] voliteľné povolenie na spustenie rozšírení, keď používateľ navštívi $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Povoliť $extension_label exportovať vaše $tabs, keď o to požiadate.",
+		"description": "[nastavenie] voliteľné povolenie, ktoré nám umožní exportovať Tab používateľa"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automaticky otvoriť stránku $salesforce_login po kliknutí na vyskakovacie okno, ak sa nenachádzate na stránke Salesforce.",
 		"description": "[nastavenie] keď používateľ otvorí vyskakovacie okno na náhodnej webovej stránke"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "stránka sa otvorí v aktuálnom Tab prehliadača",
 		"description": "[placeholder] používané inými textami"
+	},
+	"permission_request_failure": {
+		"message": "Povolenie nebolo povolené.",
+		"description": "[chyba] používateľ nás požiadal o vyžiadanie povolenia, ale potom ho neprijal"
+	},
+	"permission_request_success": {
+		"message": "Povolenie bolo povolené!",
+		"description": "[úspech] používateľ nás požiadal o vyžiadanie povolenia a prijal ho"
 	},
 	"pinned": {
 		"message": "Pripnutý",

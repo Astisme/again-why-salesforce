@@ -626,6 +626,14 @@
 		"message": "Các Tab được đánh dấu yêu thích gần đây được chèn vào phía trước danh sách Tab của bạn trong thanh Thiết lập thay vì được thêm vào cuối.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Khi được bật, bạn sẽ có thể thấy các $tabs của mình ngay khi khởi chạy $salesforce_setup",
+		"description": "[trợ giúp cài đặt] cho quyền tùy chọn để cho phép chúng tôi sẵn sàng ngay khi $salesforce_setup được mở"
+	},
+	"help_allow_export": {
+		"message": "Khi được bật, bạn sẽ có thể $export các $tabs của mình và lưu giữ chúng trên máy tính của mình.",
+		"description": "[trợ giúp cài đặt] cho quyền tùy chọn để cho phép chúng tôi tải xuống các Tab trên máy của người dùng"
+	},
 	"help_automatic_open_login": {
 		"message": "Nếu bạn nhấp vào cửa sổ bật lên của tiện ích mở rộng bên ngoài một miền Salesforce, bạn sẽ tự động được đưa đến trang đăng nhập của Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "Thêm Tab mới vào phía trước.",
 		"description": "[settings] cho phép người dùng thêm tất cả các Tab mới vào phía trước"
 	},
+	"opt_allow_domains": {
+		"message": "Cho phép $extension_label truy cập các trang Salesforce khi bạn truy cập chúng.",
+		"description": "[cài đặt] quyền tùy chọn để chạy các tiện ích mở rộng khi người dùng truy cập $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Cho phép $extension_label xuất $tabs của bạn khi bạn yêu cầu.",
+		"description": "[cài đặt] quyền tùy chọn để cho phép chúng tôi xuất Tab của người dùng"
+	},
 	"opt_automatic_open_login": {
 		"message": "Tự động mở trang $salesforce_login khi nhấp vào cửa sổ bật lên trong khi không ở trên trang Salesforce.",
 		"description": "[cài đặt] khi người dùng mở cửa sổ bật lên khi đang ở trên một trang web ngẫu nhiên"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "trang sẽ được mở trong Tab trình duyệt hiện tại",
 		"description": "[placeholder] được sử dụng bởi các văn bản khác"
+	},
+	"permission_request_failure": {
+		"message": "Quyền không được cho phép.",
+		"description": "[lỗi] người dùng đã yêu cầu chúng tôi yêu cầu họ cấp quyền nhưng sau đó không chấp nhận"
+	},
+	"permission_request_success": {
+		"message": "Quyền đã được cho phép!",
+		"description": "[thành công] người dùng đã yêu cầu chúng tôi yêu cầu họ cấp quyền và họ đã chấp nhận"
 	},
 	"pinned": {
 		"message": "Đã Ghim",

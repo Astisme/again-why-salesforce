@@ -627,6 +627,14 @@
 		"message": "Nyligt favoriserede Tabs indsættes foran på din Tab-liste i opsætningslinjen i stedet for at blive tilføjet i slutningen.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Når aktiveret, vil du kunne se dine $tabs, så snart du starter $salesforce_setup",
+		"description": "[indstillingshjælp] til valgfri tilladelse til at gøre det muligt for os at være klar, så snart $salesforce_setup åbnes"
+	},
+	"help_allow_export": {
+		"message": "Når aktiveret, vil du være i stand til at $export dine $tabs og gemme dem på din computer.",
+		"description": "[indstillingshjælp] til valgfri tilladelse til at gøre det muligt for os at downloade Tab på brugerens maskine"
+	},
 	"help_automatic_open_login": {
 		"message": "Hvis du klikker på udvidelsespop op-vinduet uden for et Salesforce-domæne, fører det dig automatisk til Salesforce-loginsiden.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Tilføj nye Tabs foran.",
 		"description": "[settings] lad brugeren tilføje alle nye Tabs foran"
 	},
+	"opt_allow_domains": {
+		"message": "Tillad $extension_label at få adgang til Salesforce-sider, når du besøger dem.",
+		"description": "[indstilling] valgfri tilladelse til at køre udvidelserne, når brugeren besøger $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Tillad $extension_label at eksportere dine $tabs, når du anmoder om det.",
+		"description": "[indstilling] valgfri tilladelse til at gøre det muligt for os at eksportere brugerens Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Åbn automatisk $salesforce_login-siden, når du klikker på pop op-vinduet, mens du ikke er på en Salesforce-side.",
 		"description": "[indstilling] når brugeren åbner pop op-vinduet på et tilfældigt websted"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "side vil blive åbnet i den aktuelle browser Tab",
 		"description": "[placeholder] bruges af andre tekster"
+	},
+	"permission_request_failure": {
+		"message": "Tilladelsen blev ikke givet.",
+		"description": "[fejl] brugeren bad os om at anmode om en tilladelse, men accepterede den ikke"
+	},
+	"permission_request_success": {
+		"message": "Tilladelsen er blevet givet!",
+		"description": "[succes] brugeren bad os om at anmode om en tilladelse, og de accepterede den"
 	},
 	"pinned": {
 		"message": "Fastgjort",

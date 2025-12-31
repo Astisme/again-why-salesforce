@@ -627,6 +627,14 @@
 		"message": "Abas recém-favoritadas são inseridas na frente da sua lista de Abas na barra de configuração, em vez de serem adicionadas ao final.",
 		"description": "[settings-help] para $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Quando ativado, você poderá ver seus $tabs assim que iniciar o $salesforce_setup",
+		"description": "[ajuda-configurações] para permissão opcional que nos permite estar prontos assim que o $salesforce_setup for aberto"
+	},
+	"help_allow_export": {
+		"message": "Quando ativado, você poderá $export seus $tabs e mantê-los em seu computador.",
+		"description": "[ajuda-configurações] para permissão opcional que nos permite baixar as Tab na máquina do usuário"
+	},
 	"help_automatic_open_login": {
 		"message": "Se você clicar no popup da extensão fora de um domínio do Salesforce, será levado automaticamente para a página de login do Salesforce.",
 		"description": "[settings-help] para $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Adicionar novas Abas na frente.",
 		"description": "[settings] permite que o usuário adicione todas as novas Abas na frente"
 	},
+	"opt_allow_domains": {
+		"message": "Permitir que o $extension_label acesse as páginas do Salesforce quando você as visitar.",
+		"description": "[configuração] permissão opcional para executar as extensões quando o usuário visitar $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Permitir que o $extension_label exporte seus $tabs quando você solicitar.",
+		"description": "[configuração] permissão opcional para nos permitir exportar as Tab do usuário"
+	},
 	"opt_automatic_open_login": {
 		"message": "Abrir automaticamente a página $salesforce_login ao clicar no pop-up enquanto não estiver em uma página do Salesforce.",
 		"description": "[configuração] quando o usuário abre o pop-up enquanto está em um site aleatório"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "a página será aberta na Tab atual do navegador",
 		"description": "[placeholder] usado por outros textos"
+	},
+	"permission_request_failure": {
+		"message": "A permissão não foi concedida.",
+		"description": "[erro] o usuário nos pediu para solicitar uma permissão, mas depois não a aceitou"
+	},
+	"permission_request_success": {
+		"message": "A permissão foi concedida!",
+		"description": "[sucesso] o usuário nos pediu para solicitar uma permissão e a aceitou"
 	},
 	"pinned": {
 		"message": "Fixado",

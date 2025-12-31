@@ -627,6 +627,14 @@
 		"message": "Nya favoritmärkta Tab-bar sätts in i början av din Tab-lista i inställningsfältet istället för att läggas till i slutet.",
 		"description": "[settings-help] för $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "När aktiverad kommer du att kunna se dina $tabs så snart du startar $salesforce_setup",
+		"description": "[inställningshjälp] för valfritt tillstånd som låter oss vara redo så snart $salesforce_setup öppnas"
+	},
+	"help_allow_export": {
+		"message": "När aktiverad kommer du att kunna $export dina $tabs och spara dem på din dator.",
+		"description": "[inställningshjälp] för valfritt tillstånd som låter oss ladda ner Tab på användarens dator"
+	},
 	"help_automatic_open_login": {
 		"message": "Om du klickar på tilläggs-popup-en utanför en Salesforce-domän, tas du automatiskt till Salesforce-inloggningssidan.",
 		"description": "[settings-help] för $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Lägg till nya Tab-bar i början.",
 		"description": "[settings] låt användaren lägga till alla nya Tab-bar i början"
 	},
+	"opt_allow_domains": {
+		"message": "Tillåt $extension_label att komma åt Salesforce-sidor när du besöker dem.",
+		"description": "[inställning] valfritt tillstånd för att köra tilläggen när användaren besöker $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Tillåt $extension_label att exportera dina $tabs när du begär det.",
+		"description": "[inställning] valfritt tillstånd för att låta oss exportera användarens Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Öppna $salesforce_login-sidan automatiskt när du klickar på popup-fönstret när du inte är på en Salesforce-sida.",
 		"description": "[inställning] när användaren öppnar popup-fönstret på en slumpmässig webbplats"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "sidan öppnas i den aktuella webbläsar Tab-en",
 		"description": "[placeholder] används av andra texter"
+	},
+	"permission_request_failure": {
+		"message": "Tillståndet beviljades inte.",
+		"description": "[fel] användaren bad oss att begära ett tillstånd men accepterade det sedan inte"
+	},
+	"permission_request_success": {
+		"message": "Tillståndet har beviljats!",
+		"description": "[framgång] användaren bad oss att begära ett tillstånd och de accepterade det"
 	},
 	"pinned": {
 		"message": "Fäst",

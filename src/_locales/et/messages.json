@@ -627,6 +627,14 @@
 		"message": "Äsja lemmikuks lisatud Tabs sisestatakse seadistusriba Tab-ide loendi ette, mitte ei lisata lõppu.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kui see on lubatud, näete oma $tabs kohe pärast $salesforce_setup käivitamist",
+		"description": "[seadete abi] valikulise loa saamiseks, mis võimaldab meil olla valmis kohe pärast $salesforce_setup avamist"
+	},
+	"help_allow_export": {
+		"message": "Kui see on lubatud, saate oma $tabs $export-ida ja hoida neid oma arvutis.",
+		"description": "[seadete abi] valikulise loa saamiseks, mis võimaldab meil Tab kasutaja masinasse alla laadida"
+	},
 	"help_automatic_open_login": {
 		"message": "Kui klõpsate laienduse hüpikaknale väljaspool Salesforce'i domeeni, viib see teid automaatselt Salesforce'i sisselogimislehele.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Lisa uued Tabs ette.",
 		"description": "[settings] laseb kasutajal lisada kõik uued Tabs ette"
 	},
+	"opt_allow_domains": {
+		"message": "Luba $extension_label juurdepääs Salesforce'i lehtedele, kui neid külastate.",
+		"description": "[seadistus] valikuline luba laienduste käivitamiseks, kui kasutaja külastab $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Luba $extension_label eksportida oma $tabs, kui seda soovid.",
+		"description": "[seadistus] valikuline luba, mis võimaldab meil eksportida kasutaja Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automaatselt ava $salesforce_login leht, kui klõpsate hüpikaknal, kui te ei ole Salesforce'i lehel.",
 		"description": "[seadistus] kui kasutaja avab hüpikakna juhuslikul veebisaidil"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "leht avatakse brauseri praeguses Tab'is",
 		"description": "[placeholder] kasutatud teistes tekstides"
+	},
+	"permission_request_failure": {
+		"message": "Luba ei antud.",
+		"description": "[viga] kasutaja palus meil luba küsida, kuid ei nõustunud sellega"
+	},
+	"permission_request_success": {
+		"message": "Luba on antud!",
+		"description": "[edu] kasutaja palus meil luba küsida ja ta nõustus sellega"
 	},
 	"pinned": {
 		"message": "Kinnitatud",

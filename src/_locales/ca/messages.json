@@ -627,6 +627,14 @@
 		"message": "Les Tabs afegides recentment s'insereixen al principi de la llista de Tabs a la barra de configuració en lloc d'afegir-se al final.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Quan estigui activat, podràs veure les teves $tabs tan bon punt iniciïs $salesforce_setup",
+		"description": "[ajuda-configuració] per al permís opcional que ens permet estar preparats tan bon punt s'obre $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Quan estigui activat, podràs $export les teves $tabs i guardar-les al teu ordinador.",
+		"description": "[ajuda-configuració] per al permís opcional que ens permet descarregar les Tab a la màquina de l'usuari"
+	},
 	"help_automatic_open_login": {
 		"message": "Si fas clic a la finestra emergent de l'extensió fora d'un domini de Salesforce, et portarà automàticament a la pàgina d'inici de sessió de Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Afegeix Tabs noves al davant.",
 		"description": "[settings] permet a l'usuari afegir totes les Tabs noves al davant"
 	},
+	"opt_allow_domains": {
+		"message": "Permet que $extension_label accedeixi a les pàgines de Salesforce quan las visitis.",
+		"description": "[configuració] permís opcional per executar les extensions quan l'usuari visita $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Permet a $extension_label exportar les teves $tabs quan ho sol·licitis.",
+		"description": "[configuració] permís opcional per permetre'ns exportar les Tab de l'usuari"
+	},
 	"opt_automatic_open_login": {
 		"message": "Obre automàticament la pàgina $salesforce_login en fer clic a la finestra emergent si no ets en una pàgina de Salesforce.",
 		"description": "[configuració] quan l'usuari obre la finestra emergent mentre és en un lloc web aleatori"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "la pàgina s'obrirà a la Tab actual del navegador",
 		"description": "[placeholder] utilitzat per altres textos"
+	},
+	"permission_request_failure": {
+		"message": "El permís no ha estat permès.",
+		"description": "[error] l'usuari ens ha demanat que li sol·licitéssim un permís però després no l'ha acceptat"
+	},
+	"permission_request_success": {
+		"message": "El permís ha estat permès!",
+		"description": "[èxit] l'usuari ens ha demanat que li sol·licitéssim un permís i l'ha acceptat"
 	},
 	"pinned": {
 		"message": "Fixada",

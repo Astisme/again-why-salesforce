@@ -627,6 +627,14 @@
 		"message": "Az újonnan kedvenc Tabs-ek a beállítási sáv Tab-listájának elejére kerülnek, nem pedig a végére.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Ha engedélyezve van, a $tabs elemeit azonnal láthatja, amint elindítja a $salesforce_setup-ot",
+		"description": "[beállítások-súgó] az opcionális engedélyhez, amely lehetővé teszi számunkra, hogy készen álljunk a $salesforce_setup megnyitásakor"
+	},
+	"help_allow_export": {
+		"message": "Ha engedélyezve van, $export-álhatja a $tabs elemeit, és a számítógépén tarthatja őket.",
+		"description": "[beállítások-súgó] az opcionális engedélyhez, amely lehetővé teszi számunkra a Tab letöltését a felhasználó gépére"
+	},
 	"help_automatic_open_login": {
 		"message": "Ha a bővítmény felugró ablakára kattint egy Salesforce-tartományon kívül, az automatikusan a Salesforce bejelentkezési oldalára viszi.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Új Tabs-ek hozzáadása elölre.",
 		"description": "[settings] lehetővé teszi a felhasználó számára, hogy az összes új Tabs-et elölre adja hozzá"
 	},
+	"opt_allow_domains": {
+		"message": "Engedélyezze a $extension_label számára a Salesforce oldalak elérését, amikor meglátogatja azokat.",
+		"description": "[beállítás] opcionális engedély a bővítmények futtatásához, amikor a felhasználó meglátogatja a $salesforce_setup oldalt"
+	},
+	"opt_allow_export": {
+		"message": "Engedélyezze a $extension_label számára, hogy kérésére exportálja a $tabs elemeit.",
+		"description": "[beállítás] opcionális engedély, amely lehetővé teszi számunkra a felhasználó Tab exportálását"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatikusan nyissa meg a $salesforce_login oldalt, amikor a felugró ablakra kattint, miközben nem Salesforce oldalon van.",
 		"description": "[beállítás] amikor a felhasználó megnyitja a felugró ablakot egy véletlenszerű webhelyen"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "az oldal az aktuális böngésző Tab-ban nyílik meg",
 		"description": "[placeholder] más szövegek által használt"
+	},
+	"permission_request_failure": {
+		"message": "Az engedély nem lett megadva.",
+		"description": "[hiba] a felhasználó kért tőlünk egy engedélykérést, de aztán nem fogadta el azt"
+	},
+	"permission_request_success": {
+		"message": "Az engedély megadva!",
+		"description": "[siker] a felhasználó kért tőlünk egy engedélykérést, és el is fogadta azt"
 	},
 	"pinned": {
 		"message": "Rögzítve",

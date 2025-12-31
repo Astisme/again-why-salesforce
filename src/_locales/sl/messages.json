@@ -627,6 +627,14 @@
 		"message": "Na novo priljubljeni Tab-i so vstavljeni na začetek seznama Tab-ov v nastavitvah namesto na konec.",
 		"description": "[settings-help] za $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Ko je omogočeno, boš lahko videl svoje $tabs takoj, ko zaženeš $salesforce_setup",
+		"description": "[pomoč pri nastavitvah] za neobvezno dovoljenje, ki nam omogoča, da smo pripravljeni takoj, ko se odpre $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Ko je omogočeno, boš lahko $export-al svoje $tabs in jih hranil v svojem računalniku.",
+		"description": "[pomoč pri nastavitvah] za neobvezno dovoljenje, ki nam omogoča prenos Tab v uporabnikov računalnik"
+	},
 	"help_automatic_open_login": {
 		"message": "Če kliknete pojavno okno razširitve zunaj domene Salesforce, boste samodejno preusmerjeni na stran za prijavo v Salesforce.",
 		"description": "[settings-help] za $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Dodaj nove Tab-e spredaj.",
 		"description": "[settings] omogočite uporabniku, da doda vse nove Tab-e spredaj"
 	},
+	"opt_allow_domains": {
+		"message": "Dovoli $extension_label dostop do Salesforce strani, ko jih obiščeš.",
+		"description": "[nastavitev] neobvezno dovoljenje za zagon razširitev, ko uporabnik obišče $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Dovoli $extension_label izvoz tvojih $tabs, ko to zahtevaš.",
+		"description": "[nastavitev] neobvezno dovoljenje, ki nam omogoča izvoz uporabnikovih Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Samodejno odpri stran $salesforce_login, ko kliknete pojavno okno, medtem ko niste na strani Salesforce.",
 		"description": "[nastavitev] ko uporabnik odpre pojavno okno na naključnem spletnem mestu"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "stran se bo odprla v trenutnem Tab brskalnika",
 		"description": "[placeholder] uporablja ga druga besedila"
+	},
+	"permission_request_failure": {
+		"message": "Dovoljenje ni bilo odobreno.",
+		"description": "[napaka] uporabnik nas je prosil, da zahtevamo dovoljenje, vendar ga nato ni sprejel"
+	},
+	"permission_request_success": {
+		"message": "Dovoljenje je bilo odobreno!",
+		"description": "[uspeh] uporabnik nas je prosil, da zahtevamo dovoljenje, in ga je sprejel"
 	},
 	"pinned": {
 		"message": "Pripet",

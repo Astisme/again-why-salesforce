@@ -627,6 +627,14 @@
 		"message": "Tab yang baru difavoritkan disisipkan di bahagian hadapan senarai Tab anda di bar persediaan dan bukannya ditambahkan di hujung.",
 		"description": "[settings-help] untuk $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Apabila didayakan, anda akan dapat melihat $tabs anda sebaik sahaja anda melancarkan $salesforce_setup",
+		"description": "[bantuan-tetapan] untuk kebenaran pilihan bagi membolehkan kami bersedia sebaik sahaja $salesforce_setup dibuka"
+	},
+	"help_allow_export": {
+		"message": "Apabila didayakan, anda akan dapat $export $tabs anda dan menyimpannya di dalam komputer anda.",
+		"description": "[bantuan-tetapan] untuk kebenaran pilihan bagi membolehkan kami memuat turun Tab pada mesin pengguna"
+	},
 	"help_automatic_open_login": {
 		"message": "Jika anda mengklik pop timbul sambungan di luar domain Salesforce, anda akan dibawa ke halaman log masuk Salesforce secara automatik.",
 		"description": "[settings-help] untuk $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Tambah Tab baharu di hadapan.",
 		"description": "[settings] benarkan pengguna menambah semua Tab baharu di hadapan"
 	},
+	"opt_allow_domains": {
+		"message": "Benarkan $extension_label untuk mengakses halaman Salesforce apabila anda melawatnya.",
+		"description": "[tetapan] kebenaran pilihan untuk menjalankan sambungan apabila pengguna melawat $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Benarkan $extension_label untuk mengeksport $tabs anda apabila anda memintanya.",
+		"description": "[tetapan] kebenaran pilihan untuk membolehkan kami mengeksport Tab pengguna"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce पृष्ठावर नसताना पॉपअपवर क्लिक केल्यावर $salesforce_login पृष्ठ स्वयंचलितपणे उघडा.",
 		"description": "[सेटिंग] जेव्हा वापरकर्ता यादृच्छिक वेबसाइटवर असताना पॉपअप उघडतो"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "halaman akan dibuka dalam Tab pelayar semasa",
 		"description": "[placeholder] digunakan oleh teks lain"
+	},
+	"permission_request_failure": {
+		"message": "Kebenaran tidak dibenarkan.",
+		"description": "[ralat] pengguna meminta kami untuk meminta kebenaran daripada mereka tetapi kemudian tidak menerimanya"
+	},
+	"permission_request_success": {
+		"message": "Kebenaran telah dibenarkan!",
+		"description": "[kejayaan] pengguna meminta kami untuk meminta kebenaran daripada mereka dan mereka menerimanya"
 	},
 	"pinned": {
 		"message": "Disematkan",

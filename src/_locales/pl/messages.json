@@ -627,6 +627,14 @@
 		"message": "Nowo dodane do ulubionych karty są wstawiane na początku Twojej listy kart na pasku konfiguracji, a nie dodawane na końcu.",
 		"description": "[settings-help] dla $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Po włączeniu będziesz mógł zobaczyć swoje $tabs natychmiast po uruchomieniu $salesforce_setup",
+		"description": "[pomoc-ustawienia] opcjonalne uprawnienie umożliwiające nam gotowość natychmiast po otwarciu $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Po włączeniu będziesz mógł $export swoje $tabs i przechowywać je na komputerze.",
+		"description": "[pomoc-ustawienia] opcjonalne uprawnienie umożliwiające nam pobieranie Tab na komputer użytkownika"
+	},
 	"help_automatic_open_login": {
 		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia poza domeną Salesforce, automatycznie przeniesie Cię ono na stronę logowania Salesforce.",
 		"description": "[settings-help] dla $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Dodaj nowe karty z przodu.",
 		"description": "[settings] zezwalaj użytkownikowi na dodawanie wszystkich nowych kart z przodu"
 	},
+	"opt_allow_domains": {
+		"message": "Zezwól $extension_label na dostęp do stron Salesforce podczas ich odwiedzania.",
+		"description": "[ustawienie] opcjonalne uprawnienie do uruchamiania rozszerzeń, gdy użytkownik odwiedza $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Zezwól $extension_label na eksportowanie Twoich $tabs na Twoje żądanie.",
+		"description": "[ustawienie] opcjonalne uprawnienie umożliwiające nam eksportowanie Tab użytkownika"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatycznie otwieraj stronę $salesforce_login po kliknięciu wyskakującego okienka, gdy nie jesteś na stronie Salesforce.",
 		"description": "[ustawienie] gdy użytkownik otwiera wyskakujące okienko na losowej stronie internetowej"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "strona zostanie otwarta w bieżącej Tab przeglądarki",
 		"description": "[placeholder] używany przez inne teksty"
+	},
+	"permission_request_failure": {
+		"message": "Uprawnienie nie zostało przyznane.",
+		"description": "[błąd] użytkownik poprosił nas o wystąpienie o uprawnienie, ale potem go nie zaakceptował"
+	},
+	"permission_request_success": {
+		"message": "Uprawnienie zostało przyznane!",
+		"description": "[sukces] użytkownik poprosił nas o wystąpienie o uprawnienie i zaakceptował je"
 	},
 	"pinned": {
 		"message": "Przypięty",

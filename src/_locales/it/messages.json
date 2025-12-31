@@ -626,6 +626,14 @@
 		"message": "Le nuove Tabs preferite vengono inserite all'inizio dell'elenco di Tabs nella barra di configurazione anziché aggiunte alla fine.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Se abilitato, potrai vedere i tuoi $tabs non appena avvii $salesforce_setup",
+		"description": "[aiuto-impostazioni] per l'autorizzazione facoltativa che ci consente di essere pronti non appena viene aperto $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Se abilitato, potrai eseguire l'$export dei tuoi $tabs e conservarli sul tuo computer.",
+		"description": "[aiuto-impostazioni] per l'autorizzazione facoltativa che ci consente di scaricare i Tab sul computer dell'utente"
+	},
 	"help_automatic_open_login": {
 		"message": "Se fai clic sul popup dell'estensione al di fuori di un dominio Salesforce, verrai automaticamente indirizzato alla pagina di accesso di Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "Aggiungi nuove Tabs davanti.",
 		"description": "[settings] consente all'utente di aggiungere tutte le nuove Tabs davanti"
 	},
+	"opt_allow_domains": {
+		"message": "Consenti a $extension_label di accedere alle pagine Salesforce quando le visiti.",
+		"description": "[impostazione] autorizzazione facoltativa per eseguire le estensioni quando l'utente visita $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Consenti a $extension_label di esportare i tuoi $tabs quando lo richiedi.",
+		"description": "[impostazione] autorizzazione facoltativa per consentirci di esportare i Tab dell'utente"
+	},
 	"opt_automatic_open_login": {
 		"message": "Apri automaticamente la pagina $salesforce_login quando si fa clic sul popup mentre non si è su una pagina Salesforce.",
 		"description": "[impostazione] quando l'utente apre il popup mentre si trova su un sito Web casuale"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "la pagina verrà aperta nella Tab corrente del browser",
 		"description": "[placeholder] utilizzato da altri testi"
+	},
+	"permission_request_failure": {
+		"message": "L'autorizzazione non è stata concessa.",
+		"description": "[errore] l'utente ci ha chiesto di richiedere un'autorizzazione ma poi non l'ha accettata"
+	},
+	"permission_request_success": {
+		"message": "L'autorizzazione è stata concessa!",
+		"description": "[successo] l'utente ci ha chiesto di richiedere un'autorizzazione e l'ha accettata"
 	},
 	"pinned": {
 		"message": "Bloccato",
