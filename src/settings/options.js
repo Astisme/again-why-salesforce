@@ -50,23 +50,12 @@ import {
 	requestExportPermission,
 	requestFramePatternsPermission,
 	sendExtensionMessage,
-	showReviewOrSponsor,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
 
 const hidden = "hidden";
 const invisible = "invisible";
-
-// show review / sponsor buttons
-// while getting the translator for this function, the i18n elements will get translated
-showReviewOrSponsor({
-	allTabs: await ensureAllTabsAvailability(),
-	translator: await ensureTranslatorAvailability(),
-	reviewSvg: document.getElementById("review"),
-	sponsorSvg: document.getElementById("sponsor"),
-	hiddenClass: hidden,
-});
+await ensureTranslatorAvailability();
 
 /**
  * Creates the object used to update the settings
