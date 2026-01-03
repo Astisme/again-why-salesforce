@@ -53,31 +53,31 @@
 	},
 	"cmd_export_all": {
 		"message": "Show the modal to export all saved $tabs",
-		"description": "[command description] the user wants to export all $tabs"
+		"description": "[command description] the user wants to export all $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_import": {
 		"message": "Show the modal to import new $tabs",
-		"description": "[command description] the user wants to import new $tabs"
+		"description": "[command description] the user wants to import new $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_open_other_org": {
-		"message": "Show the modal to open $the_current_page in another $org",
-		"description": "[command description] the user wants to open the current page in another $org"
+		"message": "Show the modal to open the current page in another $org",
+		"description": "[command description] the user wants to open the current page in another $org. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_remove_tab": {
-		"message": "Remove $the_current_page from the $tab list (if saved)",
-		"description": "[command description] the user wants to remove the current page"
+		"message": "Remove the current page from the $tab list (if saved)",
+		"description": "[command description] the user wants to remove the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_save_as_tab": {
-		"message": "Save $the_current_page in the $tab list (if not saved)",
-		"description": "[command description] the user wants to save the current page"
+		"message": "Save the current page in the $tab list (if not saved)",
+		"description": "[command description] the user wants to save the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_toggle_org": {
-		"message": "Toggle $the_current_page's $org value (if saved)",
-		"description": "[command description] the user wants to toggle the $org for the current page"
+		"message": "Toggle the current page's $org value (if saved)",
+		"description": "[command description] the user wants to toggle the $org for the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_update_tab": {
-		"message": "Show modal to update $the_current_page (if saved)",
-		"description": "[command description] the user wants to update the current page"
+		"message": "Show modal to update the current page (if saved)",
+		"description": "[command description] the user wants to update the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"confirm_another_org": {
 		"message": "Confirm opening this link.",
@@ -344,7 +344,7 @@
 		"description": "[error] the $tab is not valid"
 	},
 	"error_link_with_id": {
-		"message": "This page could not exist in another $org, because it contains an Id!",
+		"message": "This page could not exist in another $org because it contains an Id!",
 		"description": "[open-other-org-modal] warning for the user that the link may not exist in another $org"
 	},
 	"error_many_matching_tab": {
@@ -627,6 +627,14 @@
 		"message": "Newly favorited $tabs are inserted at the front of your $tab list in the Setup bar rather than appended at the end.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "When enabled, you'll be able to see your $tabs as soon as you launch $salesforce_setup",
+		"description": "[settings-help] for optional permission to enable us to be ready as soon as $salesforce_setup is opened"
+	},
+	"help_allow_export": {
+		"message": "When enabled, you'll be able to $export your $tabs and keep them on your computer.",
+		"description": "[settings-help] for optional permission to enable us to download the Tabs on the user's machine"
+	},
 	"help_automatic_open_login": {
 		"message": "Takes you to the $salesforce_login page automatically $if_click_popup outside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -756,7 +764,7 @@
 		"description": "[error-open-other-org-modal] message for when the user inserts the same $org in the modal"
 	},
 	"insert_valid_org": {
-		"message": "Please insert a valid $org!",
+		"message": "Please insert a valid $org",
 		"description": "[error-open-other-org-modal] message for when the user inserts a wrong $url in the modal"
 	},
 	"italic": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Add new $tabs in front.",
 		"description": "[settings] let the user add all new $tabs in front"
+	},
+	"opt_allow_domains": {
+		"message": "Allow $extension_label to access Salesforce pages, when you visit them.",
+		"description": "[setting] optional permission to run the extensions when the user is visiting $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Allow $extension_label to export your $tabs when you request it.",
+		"description": "[setting] optional permission to enable us ot export the user's Tabs"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automatically open $salesforce_login $when_click_popup_while not on a $salesforce_page",
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "page will be opened in the current browser $tab",
 		"description": "[placeholder] used by other texts"
+	},
+	"permission_request_failure": {
+		"message": "The permission was not allowed.",
+		"description": "[error] the user asked us to request them a permission but then did not accept it"
+	},
+	"permission_request_success": {
+		"message": "The permission has been allowed!",
+		"description": "[success] the user asked us to request them a permission and they accepted it"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "$tabs saved.",
 		"description": "[toast] $tabs were successfully stored."
-	},
-	"the_current_page": {
-		"message": "the current page",
-		"description": "[placeholder] used by other texts"
 	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",

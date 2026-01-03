@@ -14,6 +14,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 # v2.2.0
 
+This release represents the turning point with which we run away from "Why Salesforce" as we've addressed the most central bit of the extension: **Tab Management**.
+
+In this new version, you won't have to deal with the popup as much since you'll be able to manager your Tabs from the WAY BIGGER space in your Salesforce Setup page.
+
+To celebrate this even more, we're introducing the ability to have **pinned Tabs** which will always stay at the top of your list until you unpin them.
+
 ## 🚀 Added
 
 ### Salesforce
@@ -25,14 +31,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 5. New Context menus to **pin or unpin** Tabs
 6. New Context menus to **remove** pinned / unpinned Tabs
 7. New Export modal to **select which Tabs** to export (#80)
-8. New file `export.js` to deal with export
-9. New Import modal to **select which Tabs** to import (#81)
-10. New context menu item to **manage saved tabs without opening the popup** (#120)
-11. Updated logic of draggable items to take into consideration the pinned Tabs
+8. New Import modal to **select which Tabs** to import (#81)
+9. New context menu item to **manage saved tabs without opening the popup** (#120)
+10. Updated logic of draggable items to take into consideration the pinned Tabs
+
+### Popup
+
+1. Added `a` wrappers so that the images have a tooltip
 
 ### Settings
 
 1. New Settings Tabs to style pinned and unpinned Tabs
+2. Added optional permission management to the main page (#123)
+3. Added review and sponsor buttons at the top-right inside of `review-sponsor-aws` (#123)
+4. Added `a` wrappers so that the images have a tooltip
 
 ### Background
 
@@ -41,6 +53,8 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ### Repository
 
 1. Added eslint to check for JSDocs everywhere in `src`
+2. New file `export.js` to deal with export
+3. New file `manageTabs.js` to deal with managing Tabs specifically
 
 ## 🛠 Changed
 
@@ -49,6 +63,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 1. Updated the translator to increment the cache when it finds new translations while using placeholders
 2. Updated css selector to check whether a Tab is pinned or not
 3. Heavily refactored `src/settigs/options.js`
+4. `dragHandler` now does not send messages, improving security
+
+### Popup
+
+1. Refactored review and sponsor into `review-sponsor-aws`
 
 ### Settings
 
@@ -61,6 +80,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 ## 💥 Removed
 
+1. Removed difficult to find popup Tab management (#122)
 1. Unused static method Tab.update() (was only used in tests)
 1. Unused static methods in TabContainer (were only used in tests)
 
@@ -70,6 +90,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 2. Added tests for pinned Tabs
 3. Added tests for new translator feature
 4. Added tests for pinned Tabs export
+5. Added tests for review-sponsor component
 
 # v2.1.0
 

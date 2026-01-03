@@ -627,6 +627,14 @@
 		"message": "Jaunās izlases cilnes tiek ievietotas jūsu cilņu saraksta sākumā, nevis pievienotas beigās.",
 		"description": "[settings-help] priekš $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kad šī iespēja ir iespējota jūs varēsiet redzēt savas $tabs tiklīdz palaidīsiet $salesforce_setup",
+		"description": "[iestatījumu palīdzība] neobligātai atļaujai, lai mēs būtu gatavi, tiklīdz tiek atvērts $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kad šī iespēja ir iespējota, jūs varēsiet $export savas $tabs un saglabāt tās savā datorā.",
+		"description": "[iestatījumu palīdzība] neobligātai atļaujai, kas ļauj mums lejupielādēt Tab lietotāja ierīcē"
+	},
 	"help_automatic_open_login": {
 		"message": "Ja noklikšķināt uz paplašinājuma uznirstošā loga ārpus Salesforce domēna, jūs automātiski nonāksit Salesforce pieteikšanās lapā.",
 		"description": "[settings-help] priekš $opt_automatic_open_login"
@@ -636,7 +644,7 @@
 		"description": "[settings-help] priekš $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Jūs varat pārkārtot savas $tabs, izmantojot punktus un tās velkot.",
+		"message": "Jūs varat pārkārtot savas $tabs izmantojot punktus un tās velkot",
 		"description": "[manage-tabs] paskaidrot, kā vilkt Tab"
 	},
 	"help_keep_sort": {
@@ -692,7 +700,7 @@
 		"description": "[manage-tabs] paskaidrot, kas ir Tab etiķete"
 	},
 	"help_tab_org": {
-		"message": "Šis ir Salesforce $org nosaukums, kurā tiks rādīts šis $tab. Ja atstāsiet tukšu, šis $tab tiks rādīts katrā Salesforce $org, ko apmeklējat.",
+		"message": "Šis ir Salesforce $org nosaukums kurā tiks rādīts šis $tab Ja atstāsiet tukšu šis $tab tiks rādīts katrā Salesforce $org ko apmeklējat",
 		"description": "[manage-tabs] paskaidrot, kas ir Tab Org"
 	},
 	"help_tab_url": {
@@ -835,6 +843,14 @@
 		"message": "Pievienot jaunas cilnes priekšpusē.",
 		"description": "[settings] ļauj lietotājam pievienot visas jaunās cilnes priekšpusē"
 	},
+	"opt_allow_domains": {
+		"message": "Atļaut $extension_label piekļūt Salesforce lapām, kad tās apmeklējat.",
+		"description": "[iestatījums] neobligāta atļauja palaist paplašinājumus, kad lietotājs apmeklē $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Atļaut $extension_label eksportēt jūsu $tabs pēc jūsu pieprasījuma.",
+		"description": "[iestatījums] neobligāta atļauja, kas ļauj mums eksportēt lietotāja Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automātiski atvērt $salesforce_login lapu, noklikšķinot uz uznirstošā loga, ja neesat Salesforce lapā.",
 		"description": "[iestatījums] kad lietotājs atver uznirstošo logu nejaušā vietnē"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "lapa tiks atvērta pašreizējā pārlūka Tab",
 		"description": "[placeholder] izmanto citi teksti"
+	},
+	"permission_request_failure": {
+		"message": "Atļauja netika piešķirta.",
+		"description": "[kļūda] lietotājs lūdza mums pieprasīt atļauju, bet pēc tam to neapstiprināja"
+	},
+	"permission_request_success": {
+		"message": "Atļauja ir piešķirta!",
+		"description": "[veiksme] lietotājs lūdza mums pieprasīt atļauju, un viņš to apstiprināja"
 	},
 	"pinned": {
 		"message": "Piesprausts",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs saglabāti.",
 		"description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
-	},
-	"the_current_page": {
-		"message": "pašreizējā lapa",
-		"description": "[placeholder] izmanto citi teksti"
 	},
 	"theme_dark": {
 		"message": "Mainīt motīvu uz tumšu",

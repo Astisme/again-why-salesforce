@@ -626,6 +626,14 @@
 		"message": "కొత్తగా ఇష్టమైనవిగా గుర్తించిన Tab-లను మీ Tab జాబితా చివరిలో కాకుండా సెటప్ బార్‌లోని మీ Tab జాబితా ముందు భాగంలో చొప్పించండి.",
 		"description": "[$opt_add_tabs_front] కోసం [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "ప్రారంభించినప్పుడు మీరు $salesforce_setup ప్రారంభించిన వెంటనే మీ $tabs ని చూడగలరు",
+		"description": "[సెట్టింగ్‌ల-సహాయం] $salesforce_setup తెరిచిన వెంటనే మేము సిద్ధంగా ఉండటానికి ఐచ్ఛిక అనుమతి కోసం"
+	},
+	"help_allow_export": {
+		"message": "ప్రారంభించినప్పుడు మీరు మీ $tabs ని $export చేయవచ్చు మరియు వాటిని మీ కంప్యూటర్‌లో ఉంచుకోవచ్చు",
+		"description": "[సెట్టింగ్‌ల-సహాయం] వినియోగదారు మెషీన్‌లో Tab డౌన్‌లోడ్ చేయడానికి మమ్మల్ని అనుమతించడానికి ఐచ్ఛిక అనుమతి కోసం"
+	},
 	"help_automatic_open_login": {
 		"message": "మీరు Salesforce డొమైన్ వెలుపల ఎక్స్‌టెన్షన్ పాప్‌అప్‌ను క్లిక్ చేస్తే, అది మిమ్మల్ని స్వయంచాలకంగా Salesforce లాగిన్ పేజీకి తీసుకువెళుతుంది.",
 		"description": "[$opt_automatic_open_login] కోసం [settings-help]"
@@ -834,6 +842,14 @@
 		"message": "కొత్త Tab-లను ముందుగా జోడించు.",
 		"description": "[settings] అన్ని కొత్త Tab-లను ముందుగా జోడించడానికి వినియోగదారుని అనుమతించు"
 	},
+	"opt_allow_domains": {
+		"message": "మీరు Salesforce పేజీలను సందర్శించినప్పుడు వాటిని యాక్సెస్ చేయడానికి $extension_label ని అనుమతించండి",
+		"description": "[సెట్టింగ్] వినియోగదారు $salesforce_setupని సందర్శిస్తున్నప్పుడు పొడిగింపులను అమలు చేయడానికి ఐచ్ఛిక అనుమతి"
+	},
+	"opt_allow_export": {
+		"message": "మీరు కోరినప్పుడు మీ $tabs ఎగుమతి చేయడానికి $extension_label ని అనుమతించండి",
+		"description": "[సెట్టింగ్] వినియోగదారు Tab ఎగుమతి చేయడానికి మమ్మల్ని అనుమతించడానికి ఐచ్ఛిక అనుమతి"
+	},
 	"opt_automatic_open_login": {
 		"message": "సేల్స్‌ఫోర్స్ పేజీలో లేనప్పుడు పాపప్‌పై క్లిక్ చేసినప్పుడు $salesforce_login పేజీని స్వయంచాలకంగా తెరవండి.",
 		"description": "[సెట్టింగ్] వినియోగదారు యాదృచ్ఛిక వెబ్‌సైట్‌లో ఉన్నప్పుడు పాపప్‌ను తెరిచినప్పుడు"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "పేజీ ప్రస్తుత బ్రౌజర్ Tab లో తెరవబడుతుంది",
 		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
+	},
+	"permission_request_failure": {
+		"message": "అనుమతి నిరాకరించబడింది.",
+		"description": "[లోపం] వినియోగదారు మమ్మల్ని అనుమతి కోరమని అడిగారు కానీ దానిని అంగీకరించలేదు"
+	},
+	"permission_request_success": {
+		"message": "అనుమతి లభించింది!",
+		"description": "[విజయం] వినియోగదారు మమ్మల్ని అనుమతి కోరమని అడిగారు మరియు వారు దానిని అంగీకరించారు"
 	},
 	"pinned": {
 		"message": "పిన్ చేయబడింది",
@@ -1307,11 +1331,11 @@
 		"description": "[req_permission] అనుమతులు ఇవ్వకుండా ఉండటానికి బటన్"
 	},
 	"style_generic_pinned": {
-		"message": "పిన్ చేసిన $generic_tabs-ను స్టైల్ చేయి",
+		"message": "పిన్ చేసిన $generic_tabs ను స్టైల్ చేయి",
 		"description": "[ఎంపికలు] పిన్ చేసిన సాధారణ Tab-లను స్టైల్ చేయడానికి టోగుల్ లేబుల్"
 	},
 	"style_org_pinned": {
-		"message": "పిన్ చేసిన $org_tabs-ను స్టైల్ చేయి",
+		"message": "పిన్ చేసిన $org_tabs ను స్టైల్ చేయి",
 		"description": "[ఎంపికలు] పిన్ చేసిన org Tab-లను స్టైల్ చేయడానికి టోగుల్ లేబుల్"
 	},
 	"style_settings_background_label": {
@@ -1405,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs సేవ్ అయ్యాయి",
 		"description": "[toast] Tabs విజయవంతంగా సేవ్ అయ్యాయి."
-	},
-	"the_current_page": {
-		"message": "ప్రస్తుత పేజీ",
-		"description": "[placeholder] ఇతర పాఠాల ద్వారా ఉపయోగించబడుతుంది"
 	},
 	"theme_dark": {
 		"message": "డార్క్ థీమ్‌కు మార్చండి",

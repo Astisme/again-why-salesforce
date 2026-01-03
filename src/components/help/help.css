@@ -118,3 +118,7 @@
 	font-style: italic;
 	color: var(--warning, #b76501);
 }
+
+.hidden {
+	display: none !important;
+}

@@ -626,6 +626,14 @@
 		"message": "يتم إدراج Tabs المفضلة حديثًا في مقدمة قائمة Tabs في شريط الإعداد بدلاً من إضافتها في النهاية.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "عند التمكين، ستتمكن من رؤية $tabs الخاصة بك بمجرد تشغيل $salesforce_setup",
+		"description": "[تعليمات الإعدادات] للحصول على إذن اختياري لتمكيننا من الاستعداد بمجرد فتح $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "عند التمكين، ستتمكن من $export لـ $tabs الخاصة بك والاحتفاظ بها على جهاز الكمبيوتر الخاص بك.",
+		"description": "[تعليمات الإعدادات] للحصول على إذن اختياري لتمكيننا من تنزيل Tab على جهاز المستخدم"
+	},
 	"help_automatic_open_login": {
 		"message": "إذا نقرت على النافذة المنبثقة للإضافة خارج نطاق Salesforce، فستنتقل تلقائيًا إلى صفحة تسجيل الدخول في Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -687,11 +695,11 @@
 		"description": "[manage-tabs] شرح ما يحتويه السهم الموجود على اليمين"
 	},
 	"help_tab_label": {
-		"message": "هذا هو الاسم الشائع الذي ستستخدمه لتذكر إلى أين سيأخذك هذا الـ $tab.",
+		"message": "هذا هو الاسم الشائع الذي ستستخدمه لتذكر إلى أين سيأخذك هذا الـ $tab",
 		"description": "[manage-tabs] شرح ماهية تسمية الـ Tab"
 	},
 	"help_tab_org": {
-		"message": "هذا هو اسم Salesforce $org حيث سيتم عرض هذا الـ $tab. إذا ترك فارغًا، فسيظهر هذا الـ $tab في كل Salesforce $org تزوره.",
+		"message": "هذا هو اسم Salesforce $org حيث سيتم عرض هذا الـ $tab إذا ترك فارغًا فسيظهر هذا الـ $tab في كل Salesforce $org تزوره",
 		"description": "[manage-tabs] شرح ماهية Tab Org"
 	},
 	"help_tab_url": {
@@ -807,7 +815,7 @@
 		"description": "[ليس إعداد Salesforce] عنوان URL غير صالح"
 	},
 	"nss_not_setup_page": {
-		"message": "هذه ليست صفحة إعداد $salesforce_lightning.",
+		"message": "هذه ليست صفحة إعداد $salesforce_lightning",
 		"description": "[notSalesforceSetup] المستخدم ليس على صفحة Salesforce."
 	},
 	"open_here": {
@@ -833,6 +841,14 @@
 	"opt_add_tabs_front": {
 		"message": "إضافة Tabs جديدة في الأمام.",
 		"description": "[settings] السماح للمستخدم بإضافة جميع Tabs الجديدة في الأمام"
+	},
+	"opt_allow_domains": {
+		"message": "السماح لـ $extension_label بالوصول إلى صفحات Salesforce عند زيارتها.",
+		"description": "[إعداد] إذن اختياري لتشغيل الامتدادات عندما يزور المستخدم $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "السماح لـ $extension_label بتصدير $tabs الخاصة بك عندما تطلب ذلك.",
+		"description": "[إعداد] إذن اختياري لتمكيننا من تصدير Tab الخاصة بالمستخدم"
 	},
 	"opt_automatic_open_login": {
 		"message": "افتح صفحة $salesforce_login تلقائيًا عند النقر على النافذة المنبثقة أثناء عدم التواجد على صفحة Salesforce.",
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "سيتم فتح الصفحة في $tab المتصفح الحالي",
 		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
+	},
+	"permission_request_failure": {
+		"message": "لم يتم السماح بالإذن.",
+		"description": "[خطأ] طلب المستخدم منا أن نطلب منه إذناً ولكنه لم يقبله"
+	},
+	"permission_request_success": {
+		"message": "لقد تم السماح بالإذن!",
+		"description": "[نجاح] طلب المستخدم منا أن نطلب منه إذناً وقبله"
 	},
 	"pinned": {
 		"message": "مثبت",
@@ -1405,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "تم حفظ الـ Tabs",
 		"description": "[toast] تم حفظ الـ Tabs بنجاح"
-	},
-	"the_current_page": {
-		"message": "الصفحة الحالية",
-		"description": "[placeholder] يُستخدم بواسطة نصوص أخرى"
 	},
 	"theme_dark": {
 		"message": "تغيير الثيم إلى داكن",

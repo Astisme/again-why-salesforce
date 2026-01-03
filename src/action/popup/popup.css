@@ -1,5 +1,5 @@
 body {
-	width: 22rem;
+	width: 26rem;
 }
 
 body,
@@ -40,7 +40,7 @@ header {
 			cursor: pointer;
 		}
 
-		& > img, & > svg {
+		& > img {
 			height: 2rem;
 			padding-left: 0.1rem;
 		}
@@ -51,9 +51,7 @@ div#theme-selector {
 	display: flex;
 	align-items: center;
 
-	& > svg {
-		height: 2rem;
-
+	& > a > svg {
 		& .primary {
 			fill: none;
 			stroke: var(--color);
@@ -75,15 +73,6 @@ svg#open-settings {
 	& > g > g {
 		fill: var(--color);
 	}
-}
-
-svg#review {
-	stroke: var(--color);
-}
-
-svg#sponsor {
-	fill: var(--color);
-	height: 1.8rem;
 }
 
 #buttons-tray {

@@ -33,8 +33,7 @@ export const EXTENSION_NAME = "again-why-salesforce";
 export const SETUP_LIGHTNING = "/lightning/setup/";
 export const WHY_KEY = "againWhySalesforce";
 export const LOCALE_KEY = "_locale";
-const PROTOCOL_SEPARATOR = "://";
-export const HTTPS = `https${PROTOCOL_SEPARATOR}`;
+export const HTTPS = "https://";
 export const LIGHTNING_FORCE_COM = ".lightning.force.com";
 export const MY_SALESFORCE_SETUP_COM = ".my.salesforce-setup.com";
 export const MY_SALESFORCE_COM = ".my.salesforce.com";
@@ -70,53 +69,6 @@ export const SALESFORCE_LIGHTNING_PATTERN = new RegExp(
 export const SETUP_LIGHTNING_PATTERN = new RegExp(`.*${SETUP_LIGHTNING}.*`);
 export const MANIFEST = BROWSER.runtime.getManifest();
 export const EXTENSION_VERSION = MANIFEST.version;
-/**
- * Invoke the runtime to send the message
- *
- * @param {Object} message - The message to send
- * @param {function} callback - The callback to execute after sending the message
- * @return {Promise} from BROWSER.runtime.sendMessage
- */
-function sendMessage(message, callback) {
-	return BROWSER.runtime.sendMessage(message, callback);
-}
-/**
- * Sends a message to the background script with the specified message.
- *
- * @param {Object} message - The message to send.
- * @param {function} callback - The callback to execute after sending the message.
- * @return {Promise} promise resolving based on sendMessage
- */
-export function sendExtensionMessage(message, callback = null) {
-	if (message == null) {
-		return;
-	}
-	if (callback == null) {
-		return new Promise((resolve, reject) => {
-			sendMessage(
-				message,
-				(response) => {
-					if (BROWSER.runtime.lastError) {
-						reject(BROWSER.runtime.lastError);
-					} else {
-						resolve(response);
-					}
-				},
-			);
-		});
-	}
-	sendMessage(message, callback);
-}
-
-/**
- * Retrieves extension settings for the specified keys.
- *
- * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
- * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
- */
-export async function getSettings(keys = null) {
-	return await sendExtensionMessage({ what: "get-settings", keys });
-}
 // SETTINGS
 export const SETTINGS_KEY = "settings";
 export const LINK_NEW_BROWSER = "link_new_browser";
@@ -143,77 +95,6 @@ export const TAB_ORG_STYLE = "tab_org_style";
 export const ORG_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_ORG_STYLE}`;
 export const ORG_PINNED_TAB_STYLE_KEY =
 	`${SETTINGS_KEY}-${TAB_ORG_STYLE}-${PINNED}`;
-const GENERIC_STYLE_KEYS = new Set([
-	GENERIC_TAB_STYLE_KEY,
-	GENERIC_PINNED_TAB_STYLE_KEY,
-]);
-/**
- * Checks if a key is a generic key
- *
- * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
- * @return {boolean} true if the key is a generic key
- */
-export function isGenericKey(key = GENERIC_TAB_STYLE_KEY) {
-	return GENERIC_STYLE_KEYS.has(key);
-}
-const PINNED_STYLE_KEYS = new Set([
-	GENERIC_PINNED_TAB_STYLE_KEY,
-	ORG_PINNED_TAB_STYLE_KEY,
-]);
-/**
- * Checks if a key is a pinned key
- *
- * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
- * @return {boolean} true if the key is a pinned key
- */
-export function isPinnedKey(key = GENERIC_TAB_STYLE_KEY) {
-	return PINNED_STYLE_KEYS.has(key);
-}
-const ALL_STYLE_KEYS = new Set([
-	GENERIC_TAB_STYLE_KEY,
-	ORG_TAB_STYLE_KEY,
-	GENERIC_PINNED_TAB_STYLE_KEY,
-	ORG_PINNED_TAB_STYLE_KEY,
-]);
-/**
- * Checks if a key is a style key
- *
- * @param {string} [key=GENERIC_TAB_STYLE_KEY] - the key to be checked
- * @return {boolean} true if the key is a style key
- */
-export function isStyleKey(key = GENERIC_TAB_STYLE_KEY) {
-	return ALL_STYLE_KEYS.has(key);
-}
-const PINNED_KEY_FINDER = {
-	// true = isGeneric
-	[true]: {
-		// true = isPinned
-		[true]: GENERIC_PINNED_TAB_STYLE_KEY,
-		// false = !isPinned
-		[false]: GENERIC_TAB_STYLE_KEY,
-	},
-	// false = !isGeneric
-	[false]: {
-		// true = isPinned
-		[true]: ORG_PINNED_TAB_STYLE_KEY,
-		// false = !isPinned
-		[false]: ORG_TAB_STYLE_KEY,
-	},
-};
-/**
- * Returns a style key given the specified parameters
- *
- * @param {Object} [param0={}] - an Object used to determine the style key
- * @param {boolean} [param0.isGeneric=true] - Whether the key to find is Generic
- * @param {boolean} [param0.isPinned=false] - Whether the key to find is Pinned
- * @return {string} one of the ALL_STYLE_KEYS
- */
-export function getPinnedSpecificKey({
-	isGeneric = true,
-	isPinned = false,
-} = {}) {
-	return PINNED_KEY_FINDER[isGeneric][isPinned];
-}
 export const TAB_STYLE_BACKGROUND = "background";
 export const TAB_STYLE_COLOR = "color";
 export const TAB_STYLE_BORDER = "border";
@@ -225,91 +106,11 @@ export const TAB_STYLE_UNDERLINE = "underline";
 export const TAB_STYLE_TOP = "top";
 export const PREVENT_DEFAULT_OVERRIDE = "user-set";
 export const SLDS_ACTIVE = "slds-is-active";
-const SLDS_ACTIVE_CLASS = `.${SLDS_ACTIVE}`;
 export const ORG_TAB_CLASS = "is-org-tab";
 export const HAS_ORG_TAB = `:has(.${ORG_TAB_CLASS})`;
 export const PIN_TAB_CLASS = "is-pin-tab";
-const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
-
-/**
- * Retrieves saved style settings for the specified key.
- * @async
- * @param {string} [key=null] - Key identifying which style settings to fetch. When null finds all style settings
- * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
- */
-export async function getStyleSettings(key = null) {
-	return await sendExtensionMessage({ what: "get-style-settings", key });
-}
-
-/**
- * Constructs a CSS selector string based on tab state, type, and optional pseudo-element.
- *
- * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
- * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
- * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
- * @return {string} The constructed CSS selector.
- */
-export function getCssSelector({
-	isInactive = true,
-	isGeneric = true,
-	isPinned = false,
-	pseudoElement = "",
-} = {}) {
-	const activeClass = isInactive
-		? `:not(${SLDS_ACTIVE_CLASS})`
-		: SLDS_ACTIVE_CLASS;
-	const orgTabClass = isGeneric ? `:not(${HAS_ORG_TAB})` : HAS_ORG_TAB;
-	const pinTabClass = isPinned ? HAS_PIN_TAB : `:not(${HAS_PIN_TAB})`;
-	return `.${EXTENSION_NAME}${activeClass}${orgTabClass}${pinTabClass}${pseudoElement}`;
-}
-
-/**
- * Returns a CSS rule string based on the given style ID and optional value.
- *
- * @param {string} styleId - Identifier for the style to generate.
- * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
- * @return {string} The corresponding CSS rule or an empty string if invalid.
- */
-export function getCssRule(styleId, value = null) {
-	switch (styleId) {
-		case TAB_STYLE_BACKGROUND:
-		case TAB_STYLE_HOVER:
-		case TAB_STYLE_TOP:
-			return `background-color: ${value} !important;`;
-		case TAB_STYLE_COLOR:
-			return `color: ${value};`;
-		case TAB_STYLE_BORDER:
-			return `border: 2px solid ${value};`;
-		case TAB_STYLE_SHADOW:
-			return `text-shadow: 0px 0px 3px ${value};`;
-		case TAB_STYLE_BOLD:
-			return "font-weight: bold;";
-		case TAB_STYLE_ITALIC:
-			return "font-style: italic;";
-		case TAB_STYLE_UNDERLINE:
-			return "text-decoration: underline;";
-		case PREVENT_DEFAULT_OVERRIDE:
-			return "";
-		default:
-			console.error(styleId);
-			return "";
-	}
-}
 export const USER_LANGUAGE = "picked-language";
 export const FOLLOW_SF_LANG = "follow-sf-lang";
-
-/**
- * Opens the extension's settings page.
- *
- * Uses `runtime.openOptionsPage` if available; otherwise, falls back to opening the settings URL directly.
- */
-export function openSettingsPage() {
-	if (BROWSER.runtime.openOptionsPage) {
-		BROWSER.runtime.openOptionsPage();
-	} else {
-		open(BROWSER.runtime.getURL("settings/options.html"));
-	}
-}
 // context menus
 export const CXM_OPEN_OTHER_ORG = "open-other-org";
 export const CXM_UPDATE_ORG = "update-org";
@@ -357,14 +158,5 @@ export const WHAT_SHOW_EXPORT_MODAL = "show-export-modal";
 export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 	"export-perm-open-popup";
 export const WHAT_EXPORT_FROM_BG = "export-bg";
-export const EDGE_LINK =
-	"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description";
-export const CHROME_LINK =
-	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
-export const FIREFOX_LINK =
-	"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/";
-const SPONSOR_DOMAIN = "https://alfredoit.dev";
-export const SPONSOR_LINK_EN =
-	`${SPONSOR_DOMAIN}/en/sponsor/?email=againwhysalesforce@duck.com`;
-export const SPONSOR_LINK_IT =
-	`${SPONSOR_DOMAIN}/it/sponsor/?email=againwhysalesforce@duck.com`;
+export const DO_NOT_REQUEST_FRAME_PERMISSION = "noPerm";
+export const HIDDEN_CLASS = "hidden";

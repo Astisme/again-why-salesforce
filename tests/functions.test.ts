@@ -6,16 +6,15 @@ import {
 } from "@std/testing/asserts";
 
 import {
+	BROWSER,
+	DO_NOT_REQUEST_FRAME_PERMISSION,
+	FRAME_PATTERNS,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getCssRule,
-	getCssSelector,
-	getSettings,
-	getStyleSettings,
 	LINK_NEW_BROWSER,
+	MANIFEST,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
@@ -28,6 +27,19 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
+import {
+	areFramePatternsAllowed,
+	getCssRule,
+	getCssSelector,
+	getSettings,
+	getStyleSettings,
+	isExportAllowed,
+	isOnSalesforceSetup,
+	requestCookiesPermission,
+	requestExportPermission,
+	requestFramePatternsPermission,
+	sendExtensionMessage,
+} from "/functions.js";
 
 Deno.test("sendExtensionMessage returns promise if no callback", async () => {
 	const result = await sendExtensionMessage({ what: "echo", echo: "bar" });
@@ -479,5 +491,52 @@ Deno.test("getCssRule generates correct CSS rules", async (t) => {
 			getCssRule(),
 			"",
 		);
+	});
+});
+
+Deno.test("requestPermissions", async (t) => {
+	await t.step("request export permissions", async () => {
+		const exportPermObj = {
+			permissions: ["downloads"],
+		};
+		assertFalse(await BROWSER.permissions.contains(exportPermObj));
+		assertFalse(isExportAllowed());
+		assert(await requestExportPermission());
+		assert(await BROWSER.permissions.contains(exportPermObj));
+		assert(isExportAllowed());
+	});
+	await t.step("request frame patterns permissions", async () => {
+		const framePatternsPermObj = {
+			origins: FRAME_PATTERNS,
+		};
+		assertFalse(await BROWSER.permissions.contains(framePatternsPermObj));
+		globalThis.location = {
+			href: "http://localhost",
+		};
+		assertFalse(await areFramePatternsAllowed());
+		localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "true");
+		assert(await areFramePatternsAllowed());
+		localStorage.setItem(DO_NOT_REQUEST_FRAME_PERMISSION, "false");
+		assertFalse(await areFramePatternsAllowed());
+		assert(await requestFramePatternsPermission());
+		assert(await BROWSER.permissions.contains(framePatternsPermObj));
+		assert(await areFramePatternsAllowed());
+	});
+	await t.step("request cookies permissions", async () => {
+		const cookiesPermObj = {
+			permissions: ["cookies"],
+			origins: MANIFEST.optional_host_permissions,
+		};
+		assertFalse(await BROWSER.permissions.contains(cookiesPermObj));
+		assert(await requestCookiesPermission());
+		assert(await BROWSER.permissions.contains(cookiesPermObj));
+	});
+});
+
+Deno.test("checks for extensionsion functionality", async (t) => {
+	await t.step("is on salesforce setup", async () => {
+		const isonSFsetup = await isOnSalesforceSetup();
+		assert(isonSFsetup.ison);
+		assert(isonSFsetup.url != null);
 	});
 });

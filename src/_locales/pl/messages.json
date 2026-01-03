@@ -627,6 +627,14 @@
 		"message": "Nowo dodane do ulubionych karty są wstawiane na początku Twojej listy kart na pasku konfiguracji, a nie dodawane na końcu.",
 		"description": "[settings-help] dla $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Po włączeniu będziesz mógł zobaczyć swoje $tabs natychmiast po uruchomieniu $salesforce_setup",
+		"description": "[pomoc-ustawienia] opcjonalne uprawnienie umożliwiające nam gotowość natychmiast po otwarciu $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Po włączeniu będziesz mógł $export swoje $tabs i przechowywać je na komputerze.",
+		"description": "[pomoc-ustawienia] opcjonalne uprawnienie umożliwiające nam pobieranie Tab na komputer użytkownika"
+	},
 	"help_automatic_open_login": {
 		"message": "Jeśli klikniesz wyskakujące okienko rozszerzenia poza domeną Salesforce, automatycznie przeniesie Cię ono na stronę logowania Salesforce.",
 		"description": "[settings-help] dla $opt_automatic_open_login"
@@ -636,7 +644,7 @@
 		"description": "[settings-help] dla $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Możesz zmienić kolejność swoich $tabs, używając kropek i przeciągając je.",
+		"message": "Możesz zmienić kolejność swoich $tabs używając kropek i przeciągając je",
 		"description": "[manage-tabs] wyjaśnienie, jak przeciągać Tab"
 	},
 	"help_keep_sort": {
@@ -688,11 +696,11 @@
 		"description": "[manage-tabs] wyjaśnienie, co zawiera strzałka po prawej stronie"
 	},
 	"help_tab_label": {
-		"message": "Jest to nazwa, której będziesz używać, aby zapamiętać, dokąd zaprowadzi Cię ta $tab.",
+		"message": "Jest to nazwa której będziesz używać aby zapamiętać dokąd zaprowadzi Cię ta $tab",
 		"description": "[manage-tabs] wyjaśnienie, czym jest etykieta Tab"
 	},
 	"help_tab_org": {
-		"message": "Jest to nazwa Salesforce $org, w której ta $tab będzie wyświetlana. Jeśli pozostanie puste, ta $tab będzie wyświetlana w każdej odwiedzanej przez Ciebie organizacji Salesforce $org.",
+		"message": "Jest to nazwa Salesforce $org w której ta $tab będzie wyświetlana Jeśli pozostanie puste ta $tab będzie wyświetlana w każdej odwiedzanej przez Ciebie organizacji Salesforce $org",
 		"description": "[manage-tabs] wyjaśnienie, czym jest Tab Org"
 	},
 	"help_tab_url": {
@@ -808,7 +816,7 @@
 		"description": "[nieDotyczyKonfiguracjiSalesforce] nieprawidłowy adres URL"
 	},
 	"nss_not_setup_page": {
-		"message": "To nie jest strona konfiguracji $salesforce_lightning.",
+		"message": "To nie jest strona konfiguracji $salesforce_lightning",
 		"description": "[notSalesforceSetup] użytkownik nie znajduje się na stronie Salesforce."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Dodaj nowe karty z przodu.",
 		"description": "[settings] zezwalaj użytkownikowi na dodawanie wszystkich nowych kart z przodu"
+	},
+	"opt_allow_domains": {
+		"message": "Zezwól $extension_label na dostęp do stron Salesforce podczas ich odwiedzania.",
+		"description": "[ustawienie] opcjonalne uprawnienie do uruchamiania rozszerzeń, gdy użytkownik odwiedza $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Zezwól $extension_label na eksportowanie Twoich $tabs na Twoje żądanie.",
+		"description": "[ustawienie] opcjonalne uprawnienie umożliwiające nam eksportowanie Tab użytkownika"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automatycznie otwieraj stronę $salesforce_login po kliknięciu wyskakującego okienka, gdy nie jesteś na stronie Salesforce.",
@@ -943,6 +959,14 @@
 		"message": "strona zostanie otwarta w bieżącej Tab przeglądarki",
 		"description": "[placeholder] używany przez inne teksty"
 	},
+	"permission_request_failure": {
+		"message": "Uprawnienie nie zostało przyznane.",
+		"description": "[błąd] użytkownik poprosił nas o wystąpienie o uprawnienie, ale potem go nie zaakceptował"
+	},
+	"permission_request_success": {
+		"message": "Uprawnienie zostało przyznane!",
+		"description": "[sukces] użytkownik poprosił nas o wystąpienie o uprawnienie i zaakceptował je"
+	},
 	"pinned": {
 		"message": "Przypięty",
 		"description": "Tabs użytkownika, które zawsze znajdują się na początku listy"
@@ -972,11 +996,11 @@
 		"description": "[prośba_o_uprawnienia] etykieta, gdy użytkownik nie chce trwale zezwolić na uprawnienia"
 	},
 	"req_permissions_header": {
-		"message": "Zezwól nam na automatyczny dostęp\ndo stron $salesforce_setup.",
+		"message": "Zezwól nam na automatyczny dostęp\ndo stron $salesforce_setup",
 		"description": "[req_permission] nagłówek strony z prośbą o uprawnienia"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jeśli chcesz, możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup,\nbez konieczności klikania tego rozszerzenia za każdym razem.",
+		"message": "Jeśli chcesz możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup\nbez konieczności klikania tego rozszerzenia za każdym razem",
 		"description": "[req_permission] tekst wyjaśniający, dlaczego wymagane są uprawnienia"
 	},
 	"required": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs zapisano.",
 		"description": "[toast] Tabs zostały pomyślnie zapisane."
-	},
-	"the_current_page": {
-		"message": "bieżąca strona",
-		"description": "[placeholder] używany przez inne teksty"
 	},
 	"theme_dark": {
 		"message": "Zmień motyw na ciemny",

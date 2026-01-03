@@ -626,6 +626,14 @@
 		"message": "Недавно добавленные в избранное Tab-ы вставляются в начало списка Tab-ов на панели настройки, а не добавляются в конец.",
 		"description": "[settings-help] для $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Если эта функция включена, вы сможете увидеть свои $tabs сразу после запуска $salesforce_setup",
+		"description": "[справка по настройкам] для дополнительного разрешения, позволяющего нам быть готовыми сразу после открытия $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Если эта функция включена, вы сможете $export свои $tabs и хранить их на своем компьютере.",
+		"description": "[справка по настройкам] для дополнительного разрешения, позволяющего нам скачивать Tab на компьютер пользователя"
+	},
 	"help_automatic_open_login": {
 		"message": "Если вы нажмете на всплывающее окно расширения за пределами домена Salesforce, вы автоматически перейдете на страницу входа в Salesforce.",
 		"description": "[settings-help] для $opt_automatic_open_login"
@@ -635,7 +643,7 @@
 		"description": "[settings-help] для $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Вы можете изменить порядок ваших $tabs, используя точки и перетаскивая их.",
+		"message": "Вы можете изменить порядок ваших $tabs используя точки и перетаскивая их",
 		"description": "[manage-tabs] объяснение того, как перетаскивать Tab"
 	},
 	"help_keep_sort": {
@@ -687,11 +695,11 @@
 		"description": "[manage-tabs] объяснение того, что содержит стрелка справа"
 	},
 	"help_tab_label": {
-		"message": "Это общее название, которое вы будете использовать, чтобы помнить, куда вас приведет этот $tab.",
+		"message": "Это общее название которое вы будете использовать чтобы помнить куда вас приведет этот $tab",
 		"description": "[manage-tabs] объяснение того, что такое метка Tab"
 	},
 	"help_tab_org": {
-		"message": "Это название организации Salesforce $org, в которой будет отображаться этот $tab. Если оставить поле пустым, этот $tab будет отображаться в каждой организации Salesforce $org, которую вы посещаете.",
+		"message": "Это название организации Salesforce $org в которой будет отображаться этот $tab Если оставить поле пустым этот $tab будет отображаться в каждой организации Salesforce $org которую вы посещаете",
 		"description": "[manage-tabs] объяснение того, что такое Tab Org"
 	},
 	"help_tab_url": {
@@ -807,7 +815,7 @@
 		"description": "[неНастройкаSalesforce] недействительный URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Это не страница настройки $salesforce_lightning.",
+		"message": "Это не страница настройки $salesforce_lightning",
 		"description": "[notSalesforceSetup] пользователь не находится на странице Salesforce."
 	},
 	"open_here": {
@@ -833,6 +841,14 @@
 	"opt_add_tabs_front": {
 		"message": "Добавить новые Tab-ы спереди.",
 		"description": "[settings] позволить пользователю добавлять все новые Tab-ы спереди"
+	},
+	"opt_allow_domains": {
+		"message": "Разрешить $extension_label доступ к страницам Salesforce, когда вы их посещаете.",
+		"description": "[настройка] дополнительное разрешение на запуск расширений, когда пользователь посещает $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Разрешить $extension_label экспортировать ваши $tabs по вашему запросу.",
+		"description": "[настройка] дополнительное разрешение, позволяющее нам экспортировать Tab пользователя"
 	},
 	"opt_automatic_open_login": {
 		"message": "Автоматически открывать страницу $salesforce_login при нажатии на всплывающее окно, если вы не находитесь на странице Salesforce.",
@@ -942,6 +958,14 @@
 		"message": "страница будет открыта в текущем Tab браузера",
 		"description": "[placeholder] используется другими текстами"
 	},
+	"permission_request_failure": {
+		"message": "Разрешение не было получено.",
+		"description": "[ошибка] пользователь попросил нас запросить разрешение, но затем не принял его"
+	},
+	"permission_request_success": {
+		"message": "Разрешение получено!",
+		"description": "[успех] пользователь попросил нас запросить разрешение, и он его принял"
+	},
 	"pinned": {
 		"message": "Закрепленный",
 		"description": "Tab-ы пользователя, которые всегда находятся в начале списка"
@@ -971,11 +995,11 @@
 		"description": "[req_permission] Метка, когда пользователь не хочет, чтобы его спрашивали постоянно"
 	},
 	"req_permissions_header": {
-		"message": "Пожалуйста, разрешите нам автоматический доступ\nк страницам $salesforce_setup.",
+		"message": "Пожалуйста, разрешите нам автоматический доступ\nк страницам $salesforce_setup",
 		"description": "[req_permission] заголовок страницы для запроса разрешений"
 	},
 	"req_permissions_paragraph": {
-		"message": "Если хотите, вы можете отображать свои любимые Tabs\nсразу после перехода на страницу $salesforce_setup,\nне нажимая каждый раз это расширение.",
+		"message": "Если хотите вы можете отображать свои любимые Tabs\nсразу после перехода на страницу $salesforce_setup\nне нажимая каждый раз это расширение",
 		"description": "[req_permission] текст, объясняющий, почему запрашиваются разрешения"
 	},
 	"required": {
@@ -1405,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs сохранены",
 		"description": "[toast] Tabs успешно сохранены"
-	},
-	"the_current_page": {
-		"message": "текущая страница",
-		"description": "[placeholder] используется другими текстами"
 	},
 	"theme_dark": {
 		"message": "Переключить тему на Тёмную",

@@ -1,20 +1,10 @@
-import ensureTranslatorAvailability from "/translator.js";
 import {
-	BROWSER,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getCssRule,
-	getCssSelector,
-	getPinnedSpecificKey,
-	getSettings,
-	getStyleSettings,
-	isGenericKey,
-	isPinnedKey,
-	isStyleKey,
+	HIDDEN_CLASS,
 	LINK_NEW_BROWSER,
-	MANIFEST,
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
 	ORG_PINNED_TAB_STYLE_KEY,
@@ -26,7 +16,6 @@ import {
 	POPUP_SETUP_NEW_TAB,
 	PREVENT_ANALYTICS,
 	PREVENT_DEFAULT_OVERRIDE,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	SKIP_LINK_DETECTION,
 	SLDS_ACTIVE,
@@ -47,11 +36,27 @@ import {
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
 } from "/constants.js";
+import {
+	areFramePatternsAllowed,
+	getCssRule,
+	getCssSelector,
+	getPinnedSpecificKey,
+	getSettings,
+	getStyleSettings,
+	isExportAllowed,
+	isGenericKey,
+	isPinnedKey,
+	isStyleKey,
+	requestCookiesPermission,
+	requestExportPermission,
+	requestFramePatternsPermission,
+	sendExtensionMessage,
+} from "/functions.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so
 ensureTranslatorAvailability();
-const hidden = "hidden";
 const invisible = "invisible";
 
 /**
@@ -98,6 +103,9 @@ function saveCheckboxOptions(e, ...dependentCheckboxElements) {
 	Object.assign(set_msg, { set });
 	sendExtensionMessage(set_msg);
 }
+
+const allowExport = document.getElementById("allow-export");
+const allowDomains = document.getElementById("allow-domains");
 
 /**
  * Contains all checkbox elements used for settings, separated by their Id.
@@ -963,7 +971,7 @@ function savePickedSort(enabled = null, direction = null) {
 			id: TAB_ADD_FRONT,
 			enabled: false,
 		});
-		tab_add_front_el.checked = false;
+		allCheckboxes[TAB_ADD_FRONT].checked = false;
 	}
 	sendExtensionMessage(getObjectToSet({
 		key: SETTINGS_KEY,
@@ -978,6 +986,32 @@ keep_sorted_el.addEventListener("click", (e) => {
 		sortContainer.classList.add(invisible);
 	}
 });
+
+/**
+ * Toggles the visibility of the given toast for a small amount of time
+ * @param {HTMLElement} toast - a div on which the invisible class is present and can be toggled
+ */
+function showThenHideToast(toast) {
+	toast.classList.remove(invisible);
+	setTimeout(() => toast.classList.add(invisible), 2500);
+}
+
+const successToast = document.getElementById("toast-display-success");
+const errorToast = document.getElementById("toast-display-error");
+/**
+ * Shows the given message in a success / error toast.
+ * @param {string} message - the message to be translated to be shown to the user
+ * @param {boolean} [isSuccess=true] - whether the action concluded with a positive outcome
+ */
+async function showToast(message, isSuccess = true) {
+	const translator = await ensureTranslatorAvailability();
+	const toast = isSuccess ? successToast : errorToast;
+	const messageDiv = toast.querySelector(
+		"div.toastMessage.slds-text-heading--small.forceActionsText",
+	);
+	messageDiv.innerText = await translator.translate(message);
+	showThenHideToast(toast);
+}
 
 const listenersSet = {};
 /**
@@ -1034,11 +1068,7 @@ async function restoreGeneralSettings() {
 		saveCheckboxOptions(e);
 	});
 	let oldUserLanguage = user_language_select.value;
-	user_language_select.addEventListener("change", (e) => {
-		const cookiesPermObj = {
-			permissions: ["cookies"],
-			origins: MANIFEST.optional_host_permissions,
-		};
+	user_language_select.addEventListener("change", async (e) => {
 		const languageMessage = getObjectToSet({
 			key: SETTINGS_KEY,
 			set: [{
@@ -1054,17 +1084,46 @@ async function restoreGeneralSettings() {
 			oldUserLanguage = e.target.value;
 		};
 		if (e.target.value === FOLLOW_SF_LANG) { // the user wants to follow the language on salesforce
-			BROWSER.permissions.request(cookiesPermObj)
-				.then((resp) => {
-					if (resp === true) { // the extension has the cookies permission
-						sendLanguageMessage();
-					} else {
-						user_language_select.value = oldUserLanguage;
-					}
-				});
+			const resp = await requestCookiesPermission();
+			if (resp) { // the extension now has the cookies permission
+				sendLanguageMessage();
+			} else {
+				user_language_select.value = oldUserLanguage;
+				showToast("permission_request_failure", false);
+			}
 		} else {
 			sendLanguageMessage();
 		}
+	});
+	allowExport.checked = isExportAllowed();
+	allowExport.addEventListener("change", async (e) => {
+		e.preventDefault();
+		const tryingToCheck = e.target.checked;
+		e.target.checked = !e.target.checked;
+		if (isExportAllowed() || !tryingToCheck) {
+			return;
+		}
+		const res = await requestExportPermission();
+		showToast(
+			res ? "permission_request_success" : "permission_request_failure",
+			res,
+		);
+		e.target.checked = res;
+	});
+	allowDomains.checked = await areFramePatternsAllowed();
+	allowDomains.addEventListener("change", async (e) => {
+		e.preventDefault();
+		const tryingToCheck = e.target.checked;
+		e.target.checked = !e.target.checked;
+		if (!tryingToCheck) {
+			return;
+		}
+		const res = await requestFramePatternsPermission();
+		showToast(
+			res ? "permission_request_success" : "permission_request_failure",
+			res,
+		);
+		e.target.checked = res;
 	});
 	listenersSet["settings"] = true;
 }
@@ -1448,11 +1507,11 @@ function showRelevantSettings_HideOthers(settings_object) {
 		el.classList.remove(SLDS_ACTIVE);
 	}
 	for (const el of [...allContainers, ...allPreviews]) {
-		el.classList.add(hidden);
+		el.classList.add(HIDDEN_CLASS);
 	}
 	settings_object.header?.classList.add(SLDS_ACTIVE);
-	settings_object.container?.classList.remove(hidden);
-	settings_object.preview?.classList.remove(hidden);
+	settings_object.container?.classList.remove(HIDDEN_CLASS);
+	settings_object.preview?.classList.remove(HIDDEN_CLASS);
 	activePreview = settings_object.preview;
 }
 
@@ -1482,15 +1541,15 @@ settings_pinnedOrg.header.addEventListener("click", () => {
 });
 
 const saveToast = document.getElementById("save-confirm");
+
 document.querySelector("#save-container > button").addEventListener(
 	"click",
 	() => {
-		saveToast.classList.remove(invisible);
 		savePickedSort(
 			keep_sorted_el.checked && picked_sort.select.value,
 			picked_sort.direction.value,
 		);
-		setTimeout(() => saveToast.classList.add(invisible), 2500);
+		showThenHideToast(saveToast);
 	},
 );
 

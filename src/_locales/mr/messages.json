@@ -626,6 +626,14 @@
 		"message": "नवीन आवडते केलेले Tab तुमच्या Tab सूचीच्या शेवटी जोडण्याऐवजी सेटअप बारमधील तुमच्या Tab सूचीच्या समोर घातले जातात.",
 		"description": "[$opt_add_tabs_front] साठी [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "सक्षम केल्यावर, तुम्ही $salesforce_setup लाँच करताच तुमचे $tabs पाहण्यास सक्षम असाल",
+		"description": "[सेटिंग्ज-मदत] $salesforce_setup उघडताच आम्हाला तयार राहण्यास सक्षम करण्यासाठी पर्यायी परवानगीसाठी"
+	},
+	"help_allow_export": {
+		"message": "सक्षम केल्यावर, तुम्ही तुमचे $tabs $export करू शकाल आणि ते तुमच्या संगणकावर ठेवू शकाल.",
+		"description": "[सेटिंग्ज-मदत] वापरकर्त्याच्या मशीनवर Tab डाउनलोड करण्यास आम्हाला सक्षम करण्यासाठी पर्यायी परवानगीसाठी"
+	},
 	"help_automatic_open_login": {
 		"message": "तुम्ही Salesforce डोमेनच्या बाहेर एक्सटेंशनच्या पॉपअपवर क्लिक केल्यास, तुम्हाला आपोआप Salesforce लॉगिन पेजवर नेले जाईल.",
 		"description": "[$opt_automatic_open_login] साठी [settings-help]"
@@ -834,6 +842,14 @@
 		"message": "नवीन Tab समोर जोडा.",
 		"description": "[settings] वापरकर्त्याला सर्व नवीन Tab समोर जोडण्याची अनुमती द्या"
 	},
+	"opt_allow_domains": {
+		"message": "तुम्ही भेट देता तेव्हा $extension_label ला Salesforce पृष्ठांवर प्रवेश करण्याची परवानगी द्या.",
+		"description": "[सेटिंग] जेव्हा वापरकर्ता $salesforce_setup ला भेट देत असतो तेव्हा विस्तार चालवण्यासाठी पर्यायी परवानगी"
+	},
+	"opt_allow_export": {
+		"message": "तुम्ही विनंती करता तेव्हा $extension_label ला तुमचे $tabs निर्यात करण्याची परवानगी द्या.",
+		"description": "[सेटिंग] वापरकर्त्याचे Tab निर्यात करण्यास आम्हाला सक्षम करण्यासाठी पर्यायी परवानगी"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce पृष्ठावर नसताना पॉपअपवर क्लिक केल्यावर $salesforce_login पृष्ठ स्वयंचलितपणे उघडा.",
 		"description": "[सेटिंग] जेव्हा वापरकर्ता यादृच्छिक वेबसाइटवर असताना पॉपअप उघडतो"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "पृष्ठ वर्तमान ब्राउझर Tab मध्ये उघडले जाईल",
 		"description": "[placeholder] इतर ग्रंथांद्वारे वापरलेले"
+	},
+	"permission_request_failure": {
+		"message": "परवानगी दिली गेली नाही.",
+		"description": "[त्रुटी] वापरकर्त्याने आम्हाला परवानगीची विनंती करण्यास सांगितले पण नंतर ती स्वीकारली नाही"
+	},
+	"permission_request_success": {
+		"message": "परवानगी दिली गेली आहे!",
+		"description": "[यश] वापरकर्त्याने आम्हाला परवानगीची विनंती करण्यास सांगितले आणि त्यांनी ती स्वीकारली"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -1405,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs जतन झाली.",
 		"description": "[toast] Tabs यशस्वीरित्या जतन झाली."
-	},
-	"the_current_page": {
-		"message": "वर्तमान पृष्ठ",
-		"description": "[placeholder] इतर ग्रंथांद्वारे वापरलेले"
 	},
 	"theme_dark": {
 		"message": "Dark थीममध्ये बदला",

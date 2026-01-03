@@ -627,6 +627,14 @@
 		"message": "Nylig favoritt-merkede Tab-er settes inn foran Tab-listen din i oppsettlinjen i stedet for å legges til på slutten.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Når aktivert, vil du kunne se dine $tabs så snart du starter $salesforce_setup",
+		"description": "[innstillingshjelp] for valgfri tillatelse til å la oss være klare så snart $salesforce_setup åpnes"
+	},
+	"help_allow_export": {
+		"message": "Når aktivert, vil du kunne $export dine $tabs og lagre dem på datamaskinen din.",
+		"description": "[innstillingshjelp] for valgfri tillatelse til å la oss laste ned Tab på brukerens maskin"
+	},
 	"help_automatic_open_login": {
 		"message": "Hvis du klikker på utvidelsens popup utenfor et Salesforce-domene, blir du automatisk tatt til Salesforce-påloggingssiden.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -684,19 +692,19 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Her finner du en undermeny for å utføre forskjellige handlinger på den $tab-en som er i samme rad.",
+		"message": "Her finner du en undermeny for å utføre forskjellige handlinger på den $tab en som er i samme rad",
 		"description": "[manage-tabs] forklaring på hva pilen til høyre inneholder"
 	},
 	"help_tab_label": {
-		"message": "Dette er det vanlige navnet du vil bruke for å huske hvor denne $tab-en fører deg.",
+		"message": "Dette er det vanlige navnet du vil bruke for å huske hvor denne $tab en fører deg",
 		"description": "[manage-tabs] forklaring på hva Tab-etiketten er"
 	},
 	"help_tab_org": {
-		"message": "Dette er navnet på Salesforce $org-en der denne $tab-en vil bli vist. Hvis feltet står tomt, vil denne $tab-en vises i hver Salesforce $org du besøker.",
+		"message": "Dette er navnet på Salesforce $org en der denne $tab en vil bli vist Hvis feltet står tomt vil denne $tab en vises i hver Salesforce $org du besøker",
 		"description": "[manage-tabs] forklaring på hva Tab Org er"
 	},
 	"help_tab_url": {
-		"message": "Dette er den (forkortede) lenken du blir videresendt til når du klikker på denne $tab-en",
+		"message": "Dette er den forkortede lenken du blir videresendt til når du klikker på denne $tab en",
 		"description": "[manage-tabs] forklaring på hva Tab-URL-en er"
 	},
 	"help_tip_click_link": {
@@ -808,7 +816,7 @@
 		"description": "[ikkeSalesforceOppsett] en ugyldig URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Dette er ikke en $salesforce_lightning-oppsettside.",
+		"message": "Dette er ikke en $salesforce_lightning oppsettside",
 		"description": "[notSalesforceSetup] brukeren er ikke på en Salesforce-side."
 	},
 	"open_here": {
@@ -835,12 +843,20 @@
 		"message": "Legg til nye Tab-er foran.",
 		"description": "[settings] la brukeren legge til alle nye Tab-er foran"
 	},
+	"opt_allow_domains": {
+		"message": "Tillat $extension_label å få tilgang til Salesforce-sider når du besøker dem.",
+		"description": "[innstilling] valgfri tillatelse til å kjøre utvidelsene når brukeren besøker $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Tillat $extension_label å eksportere dine $tabs når du ber om det.",
+		"description": "[innstilling] valgfri tillatelse til å la oss eksportere brukerens Tab"
+	},
 	"opt_automatic_open_login": {
-		"message": "Åpne $salesforce_login-siden automatisk når du klikker på popup-vinduet mens du ikke er på en Salesforce-side.",
+		"message": "Åpne $salesforce_login siden automatisk når du klikker på popup vinduet mens du ikke er på en Salesforce side",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et tilfeldig nettsted"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Åpne $salesforce_setup-siden automatisk når du klikker på popup-vinduet mens du er på en Salesforce-side.",
+		"message": "Åpne $salesforce_setup siden automatisk når du klikker på popup vinduet mens du er på en Salesforce side",
 		"description": "[innstilling] når brukeren åpner popup-vinduet mens han er på et Salesforce-nettsted"
 	},
 	"opt_confirm_save": {
@@ -872,11 +888,11 @@
 		"description": "[innstilling] lar brukeren forhindre utvidelsen fra å søke etter nye utgivelser"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Åpne alltid $salesforce_login-siden i samme Tab når du klikker på popup-vinduet.",
+		"message": "Åpne alltid $salesforce_login siden i samme Tab når du klikker på popup vinduet",
 		"description": "[innstilling]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Åpne alltid $salesforce_setup-siden i samme Tab når du klikker på popup-vinduet.",
+		"message": "Åpne alltid $salesforce_setup siden i samme Tab når du klikker på popup vinduet",
 		"description": "[innstilling]"
 	},
 	"opt_pick_language": {
@@ -943,6 +959,14 @@
 		"message": "siden vil åpnes i den nåværende Tab-en i nettleseren",
 		"description": "[placeholder] brukes av andre tekster"
 	},
+	"permission_request_failure": {
+		"message": "Tillatelsen ble ikke gitt.",
+		"description": "[feil] brukeren ba oss om å be om tillatelse, men godtok den ikke"
+	},
+	"permission_request_success": {
+		"message": "Tillatelsen er gitt!",
+		"description": "[suksess] brukeren ba oss om å be om tillatelse og godtok den"
+	},
 	"pinned": {
 		"message": "Festet",
 		"description": "Brukerens Tab-er som alltid finnes i begynnelsen av listen"
@@ -972,11 +996,11 @@
 		"description": "[req_permission] etikett når brukeren ikke ønsker å gi tillatelser permanent"
 	},
 	"req_permissions_header": {
-		"message": "Tillat oss å få tilgang til\n$salesforce_setup-sider automatisk.",
+		"message": "Tillat oss å få tilgang til\n$salesforce_setup sider automatisk",
 		"description": "[req_permission] overskrift på siden for å be om tillatelser"
 	},
 	"req_permissions_paragraph": {
-		"message": "Hvis du vil, kan du få favoritt-Tabs til å vises\nså snart du navigerer til en $salesforce_setup-side\nuten å måtte klikke på denne utvidelsen hver gang.",
+		"message": "Hvis du vil kan du få favoritt Tabs til å vises\nså snart du navigerer til en $salesforce_setup side\nuten å måtte klikke på denne utvidelsen hver gang",
 		"description": "[req_permission] tekst som forklarer hvorfor tillatelsene blir bedt om"
 	},
 	"required": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabber lagret.",
 		"description": "[toast] Tabber ble lagret med suksess."
-	},
-	"the_current_page": {
-		"message": "den nåværende siden",
-		"description": "[placeholder] brukes av andre tekster"
 	},
 	"theme_dark": {
 		"message": "Bytt tema til mørkt",

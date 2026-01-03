@@ -627,6 +627,14 @@
 		"message": "新收藏的 Tab 会插入到设置栏中你的 Tab 列表前面，而不是追加到末尾。",
 		"description": "[$opt_add_tabs_front] 的 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "启用后，您一启动 $salesforce_setup 就能看到您的 $tabs",
+		"description": "[设置帮助] 用于启用我们在 $salesforce_setup 打开时立即准备就绪的可选权限"
+	},
+	"help_allow_export": {
+		"message": "启用后，您将能够 $export 您的 $tabs 并将其保存在电脑上。",
+		"description": "[设置帮助] 用于启用我们将 Tab 下载到用户机器上的可选权限"
+	},
 	"help_automatic_open_login": {
 		"message": "如果你在 Salesforce 域外点击扩展程序弹窗，将自动把你带到 Salesforce 登录页面。",
 		"description": "[$opt_automatic_open_login] 的 [settings-help]"
@@ -636,7 +644,7 @@
 		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
 	},
 	"help_drag_tabs": {
-		"message": "您可以使用点并拖动来重新排序您的 $tabs。",
+		"message": "您可以使用点并拖动来重新排序您的 $tabs",
 		"description": "[manage-tabs] 说明如何拖动 Tab"
 	},
 	"help_keep_sort": {
@@ -780,7 +788,7 @@
 		"description": "[modal-title] 用于管理保存的 $tabs 的模态框，具有可编辑字段和拖动重排序功能"
 	},
 	"manage_tabs_explainer": {
-		"message": "直接从此模态框编辑、重新排序和管理您保存的 $tabs。拖动行以重新排序，或使用下拉菜单执行更多操作。",
+		"message": "直接从此模态框编辑 重新排序和管理您保存的 $tabs 拖动行以重新排序 或使用下拉菜单执行更多操作",
 		"description": "[modal-explainer] 解释管理标签页模态框的功能"
 	},
 	"must_non_empty_str": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "将新 Tab 添加到前面。",
 		"description": "[settings] 允许用户将所有新 Tab 添加到前面"
+	},
+	"opt_allow_domains": {
+		"message": "允许 $extension_label 在您访问 Salesforce 页面时访问它们。",
+		"description": "[设置] 当用户访问 $salesforce_setup 时运行扩展程序的可选权限"
+	},
+	"opt_allow_export": {
+		"message": "允许 $extension_label 在您请求时导出您的 $tabs",
+		"description": "[设置] 可选权限，允许我们导出用户的 Tab"
 	},
 	"opt_automatic_open_login": {
 		"message": "当不在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_login 页面。",
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "页面将在当前浏览器 Tab 中打开",
 		"description": "[placeholder] 由其他文本使用"
+	},
+	"permission_request_failure": {
+		"message": "权限未被允许。",
+		"description": "[错误] 用户要求我们向其请求权限，但随后未接受"
+	},
+	"permission_request_success": {
+		"message": "权限已被允许！",
+		"description": "[成功] 用户要求我们向其请求权限，并且他们接受了"
 	},
 	"pinned": {
 		"message": "已固定",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs 已保存。",
 		"description": "[提示信息] Tabs 已成功存储。"
-	},
-	"the_current_page": {
-		"message": "当前页面",
-		"description": "[placeholder] 由其他文本使用"
 	},
 	"theme_dark": {
 		"message": "切换主题为深色",

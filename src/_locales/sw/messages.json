@@ -627,6 +627,14 @@
 		"message": "Tab-zako mpya zilizopendwa huwekwa mbele ya orodha ya Tab-zako kwenye upau wa Usanidi badala ya kuongezwa mwishoni.",
 		"description": "[settings-help] kwa $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Inapowezeshwa, utaweza kuona $tabs zako mara tu unapozindua $salesforce_setup",
+		"description": "[mipangilio-msaada] kwa ruhusa ya hiari ya kutuwezesha kuwa tayari mara tu $salesforce_setup inapofunguliwa"
+	},
+	"help_allow_export": {
+		"message": "Inapowezeshwa, utaweza $export $tabs zako na kuzihifadhi kwenye kompyuta yako.",
+		"description": "[mipangilio-msaada] kwa ruhusa ya hiari ya kutuwezesha kupakua Tab kwenye mashine ya mtumiaji"
+	},
 	"help_automatic_open_login": {
 		"message": "Ukibofya dirisha ibukizi la kiendelezi nje ya kikoa cha Salesforce, utapelekwa kwenye ukurasa wa kuingia wa Salesforce kiotomatiki.",
 		"description": "[settings-help] kwa $opt_automatic_open_login"
@@ -808,7 +816,7 @@
 		"description": "[siUsanidiWaSalesforce] URL ambayo si sahihi"
 	},
 	"nss_not_setup_page": {
-		"message": "Hii si ukurasa wa Mipangilio ya $salesforce_lightning.",
+		"message": "Hii si ukurasa wa Mipangilio ya $salesforce_lightning",
 		"description": "[notSalesforceSetup] mtumiaji hayuko kwenye ukurasa wa Salesforce."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Ongeza Tab-zako mpya mbele.",
 		"description": "[settings] mruhusu mtumiaji kuongeza Tab-zako zote mpya mbele"
+	},
+	"opt_allow_domains": {
+		"message": "Ruhusu $extension_label kufikia kurasa za Salesforce unapotembelea.",
+		"description": "[mipangilio] ruhusa ya hiari ya kuendesha viendelezi wakati mtumiaji anapotembelea $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Ruhusu $extension_label kusafirisha $tabs zako unapoiomba.",
+		"description": "[mipangilio] ruhusa ya hiari ya kutuwezesha kusafirisha Tab za mtumiaji"
 	},
 	"opt_automatic_open_login": {
 		"message": "Fungua ukurasa wa $salesforce_login kiotomatiki unapobofya kwenye ibukizi ukiwa hauko kwenye ukurasa wa Salesforce.",
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "ukurasa utafunguliwa katika Tab ya sasa ya kivinjari",
 		"description": "[placeholder] hutumiwa na maandishi mengine"
+	},
+	"permission_request_failure": {
+		"message": "Ruhusa haikuruhusiwa.",
+		"description": "[hitilafu] mtumiaji alituomba tumuulize ruhusa lakini hakuikubali"
+	},
+	"permission_request_success": {
+		"message": "Ruhusa imeruhusiwa!",
+		"description": "[mafanikio] mtumiaji alituomba tumuulize ruhusa na akaikubali"
 	},
 	"pinned": {
 		"message": "Imebandikwa",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs zimehifadhiwa.",
 		"description": "[toast] Tabs zimehifadhiwa kwa mafanikio."
-	},
-	"the_current_page": {
-		"message": "ukurasa wa sasa",
-		"description": "[placeholder] hutumiwa na maandishi mengine"
 	},
 	"theme_dark": {
 		"message": "Badilisha Mandhari kuwa Giza",

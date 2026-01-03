@@ -39,14 +39,12 @@ import {
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
 	EXTENSION_VERSION,
-	getSettings,
 	HAS_ORG_TAB,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
 	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
@@ -56,6 +54,7 @@ import {
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
+import { getSettings, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
@@ -95,7 +94,7 @@ let modalHanger;
 /**
  * Contains the current href, always up-to-date
  */
-let href = globalThis.location.href;
+let href = globalThis.location?.href;
 /**
  * Returns the current href string, always up-to-date.
  *
@@ -1259,7 +1258,7 @@ function main() {
 // queries the currently active tab of the current active window
 // this prevents showing the tabs when not in a setup page (like Sales or Service Console)
 if (
-	href.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
+	href?.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
 ) {
 	globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
 	main();

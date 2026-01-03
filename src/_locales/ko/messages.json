@@ -627,6 +627,14 @@
 		"message": "새롭게 즐겨찾기에 추가한 Tab이 Tab 목록의 끝에 추가되지 않고 설정 바의 Tab 목록 맨 앞에 삽입됩니다.",
 		"description": "[$opt_add_tabs_front]에 대한 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "활성화하면 $salesforce_setup 을 를 실행하자마자 $tabs 을 를 볼 수 있습니다",
+		"description": "[설정 도움말] $salesforce_setup이(가) 열리자마자 준비될 수 있도록 하는 선택적 권한"
+	},
+	"help_allow_export": {
+		"message": "활성화하면 $tabs 을 를 $export 하여 컴퓨터에 저장할 수 있습니다",
+		"description": "[설정 도움말] 사용자의 기기에 Tab을 다운로드할 수 있도록 하는 선택적 권한"
+	},
 	"help_automatic_open_login": {
 		"message": "Salesforce 도메인 외부에서 확장 프로그램 팝업을 클릭하면 Salesforce 로그인 페이지로 자동으로 이동합니다.",
 		"description": "[$opt_automatic_open_login]에 대한 [settings-help]"
@@ -636,7 +644,7 @@
 		"description": "[$opt_automatic_open_setup]에 대한 [settings-help]"
 	},
 	"help_drag_tabs": {
-		"message": "점 표시를 사용하여 드래그하면 $tabs의 순서를 변경할 수 있습니다.",
+		"message": "점 표시를 사용하여 드래그하면 $tabs 의 순서를 변경할 수 있습니다",
 		"description": "[manage-tabs] Tab을 드래그하는 방법 설명"
 	},
 	"help_keep_sort": {
@@ -684,19 +692,19 @@
 		"description": "[$opt_skip_link_detection]에 대한 [settings-help]"
 	},
 	"help_tab_actions": {
-		"message": "여기에서 같은 줄에 있는 $tab에 대해 다양한 작업을 수행할 수 있는 하위 메뉴를 찾을 수 있습니다.",
+		"message": "여기에서 같은 줄에 있는 $tab 에 대해 다양한 작업을 수행할 수 있는 하위 메뉴를 찾을 수 있습니다",
 		"description": "[manage-tabs] 오른쪽 화살표에 포함된 내용 설명"
 	},
 	"help_tab_label": {
-		"message": "이것은 이 $tab이 어디로 이동하는지 기억하기 위해 사용할 일반적인 이름입니다.",
+		"message": "이것은 이 $tab 이 어디로 이동하는지 기억하기 위해 사용할 일반적인 이름입니다",
 		"description": "[manage-tabs] Tab 라벨이 무엇인지 설명"
 	},
 	"help_tab_org": {
-		"message": "이것은 이 $tab이 표시될 Salesforce $org 이름입니다. 비워 두면 방문하는 모든 Salesforce $org에 이 $tab이 표시됩니다.",
+		"message": "이것은 이 $tab 이 표시될 Salesforce $org 이름입니다 비워 두면 방문하는 모든 Salesforce $org 에 이 $tab 이 표시됩니다",
 		"description": "[manage-tabs] Tab Org가 무엇인지 설명"
 	},
 	"help_tab_url": {
-		"message": "이것은 이 $tab을 클릭했을 때 리다이렉트될 (단축된) 링크입니다.",
+		"message": "이것은 이 $tab 을 클릭했을 때 리다이렉트될 단축된 링크입니다",
 		"description": "[manage-tabs] Tab URL이 무엇인지 설명"
 	},
 	"help_tip_click_link": {
@@ -780,7 +788,7 @@
 		"description": "[modal-title] 편집 가능한 필드와 드래그로 순서 변경 기능이 있는 저장된 $tabs 관리 모달"
 	},
 	"manage_tabs_explainer": {
-		"message": "이 모달에서 직접 저장된 $tabs를 편집, 재정렬 및 관리하세요. 행을 드래그하여 순서를 바꾸거나 드롭다운 메뉴를 사용하여 더 많은 작업을 수행할 수 있습니다.",
+		"message": "이 모달에서 직접 저장된 $tabs 를 편집 재정렬 및 관리하세요 행을 드래그하여 순서를 바꾸거나 드롭다운 메뉴를 사용하여 더 많은 작업을 수행할 수 있습니다",
 		"description": "[modal-explainer] 탭 관리 모달 기능을 설명함"
 	},
 	"must_non_empty_str": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "새 Tab을 맨 앞에 추가합니다.",
 		"description": "[settings] 사용자가 모든 새 Tab을 맨 앞에 추가하도록 허용"
+	},
+	"opt_allow_domains": {
+		"message": "Salesforce 페이지를 방문할 때 $extension_label 이 가 해당 페이지에 액세스하도록 허용합니다",
+		"description": "[설정] 사용자가 $salesforce_setup을(를) 방문할 때 확장 프로그램을 실행하기 위한 선택적 권한"
+	},
+	"opt_allow_export": {
+		"message": "요청 시 $extension_label 이 가 $tabs 을 를 내보낼 수 있도록 허용합니다",
+		"description": "[설정] 사용자의 Tab을 내보낼 수 있도록 하는 선택적 권한"
 	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce 페이지에 있지 않을 때 팝업을 클릭하면 $salesforce_login 페이지를 자동으로 엽니다.",
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "페이지가 현재 브라우저 Tab에서 열립니다",
 		"description": "[placeholder] 다른 텍스트에서 사용됨"
+	},
+	"permission_request_failure": {
+		"message": "권한이 허용되지 않았습니다.",
+		"description": "[오류] 사용자가 권한을 요청하도록 했으나 수락하지 않음"
+	},
+	"permission_request_success": {
+		"message": "권한이 허용되었습니다!",
+		"description": "[성공] 사용자가 권한을 요청하도록 했고 이를 수락함"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs가 저장되었습니다.",
 		"description": "[토스트] Tabs가 성공적으로 저장되었습니다."
-	},
-	"the_current_page": {
-		"message": "현재 페이지",
-		"description": "[placeholder] 다른 텍스트에서 사용됨"
 	},
 	"theme_dark": {
 		"message": "테마를 어둡게 변경",

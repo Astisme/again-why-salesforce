@@ -626,6 +626,14 @@
 		"message": "नए पसंदीदा Tabs को सेटअप बार में आपकी Tab सूची के अंत में जोड़ने के बजाय सामने डाला जाता है।",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "सक्षम होने पर, आप $salesforce_setup लॉन्च करते ही अपने $tabs देख पाएंगे",
+		"description": "[सेटिंग्स-सहायता] $salesforce_setup खुलते ही हमें तैयार रहने में सक्षम करने हेतु वैकल्पिक अनुमति के लिए"
+	},
+	"help_allow_export": {
+		"message": "सक्षम होने पर, आप अपने $tabs को $export कर सकेंगे और उन्हें अपने कंप्यूटर पर रख सकेंगे।",
+		"description": "[सेटिंग्स-सहायता] उपयोगकर्ता की मशीन पर Tab डाउनलोड करने के लिए हमें सक्षम करने हेतु वैकल्पिक अनुमति के लिए"
+	},
 	"help_automatic_open_login": {
 		"message": "यदि आप Salesforce डोमेन के बाहर एक्सटेंशन पॉपअप पर क्लिक करते हैं, तो यह आपको स्वचालित रूप से Salesforce लॉगिन पृष्ठ पर ले जाएगा।",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -834,6 +842,14 @@
 		"message": "नए Tabs को सामने जोड़ें।",
 		"description": "[settings] उपयोगकर्ता को सभी नए Tabs को सामने जोड़ने दें"
 	},
+	"opt_allow_domains": {
+		"message": "जब आप Salesforce पृष्ठों पर जाएं, तो $extension_label को उन्हें एक्सेस करने की अनुमति दें।",
+		"description": "[सेटिंग] जब उपयोगकर्ता $salesforce_setup पर जा रहा हो तो एक्सटेंशन चलाने के लिए वैकल्पिक अनुमति"
+	},
+	"opt_allow_export": {
+		"message": "जब आप अनुरोध करें तो $extension_label को आपके $tabs निर्यात करने की अनुमति दें।",
+		"description": "[सेटिंग] उपयोगकर्ता के Tab निर्यात करने के लिए हमें सक्षम करने हेतु वैकल्पिक अनुमति"
+	},
 	"opt_automatic_open_login": {
 		"message": "Salesforce पृष्ठ पर न होने पर पॉपअप पर क्लिक करते समय $salesforce_login पृष्ठ को स्वचालित रूप से खोलें।",
 		"description": "[सेटिंग] जब उपयोगकर्ता किसी यादृच्छिक वेबसाइट पर पॉपअप खोलता है"
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "पृष्ठ वर्तमान ब्राउज़र Tab में खोला जाएगा",
 		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
+	},
+	"permission_request_failure": {
+		"message": "अनुमति नहीं दी गई थी।",
+		"description": "[त्रुटि] उपयोगकर्ता ने हमसे अनुमति का अनुरोध करने के लिए कहा लेकिन फिर उसे स्वीकार नहीं किया"
+	},
+	"permission_request_success": {
+		"message": "अनुमति दे दी गई है!",
+		"description": "[सफलता] उपयोगकर्ता ने हमसे अनुमति का अनुरोध करने के लिए कहा और उन्होंने इसे स्वीकार कर लिया"
 	},
 	"pinned": {
 		"message": "Pinned",
@@ -1405,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs सहेजे गए।",
 		"description": "[toast] Tabs सफलतापूर्वक सहेजे गए।"
-	},
-	"the_current_page": {
-		"message": "वर्तमान पृष्ठ",
-		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
 	},
 	"theme_dark": {
 		"message": "डार्क थीम में बदलें",

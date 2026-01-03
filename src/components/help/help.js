@@ -1,3 +1,4 @@
+import { HIDDEN_CLASS } from "/constants.js";
 import { generateHelpWith_i_popup } from "/salesforce/generator.js";
 
 /**
@@ -74,7 +75,7 @@ class HelpAws extends HTMLElement {
 	 */
 	_syncLink() {
 		const href = this.getAttribute("href");
-		this._linkTip.classList.toggle("hidden", !href);
+		this._linkTip.classList.toggle(HIDDEN_CLASS, !href);
 		this._anchor.href = href ?? "#";
 		const target = this.getAttribute("target");
 		target

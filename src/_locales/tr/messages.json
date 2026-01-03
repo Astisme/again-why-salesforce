@@ -627,6 +627,14 @@
 		"message": "Yeni favorilere eklenen Tab-ler, Tab listenizin sonuna eklenmek yerine Kurulum çubuğundaki Tab listenizin önüne eklenir.",
 		"description": "[$opt_add_tabs_front] için [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "Etkinleştirildiğinde, $salesforce_setup uygulamasını başlattığınız anda $tabs verilerinizi görebileceksiniz",
+		"description": "[ayarlar-yardım] $salesforce_setup açılır açılmaz hazır olmamıza olanak tanıyan isteğe bağlı izin için"
+	},
+	"help_allow_export": {
+		"message": "Etkinleştirildiğinde, $tabs verilerinizi $export yapabilecek ve bunları bilgisayarınızda saklayabileceksiniz.",
+		"description": "[ayarlar-yardım] kullanıcının makinesine Tab verilerini indirmemize olanak tanıyan isteğe bağlı izin için"
+	},
 	"help_automatic_open_login": {
 		"message": "Bir Salesforce etki alanının dışında uzantı açılır penceresini tıklarsanız, otomatik olarak Salesforce oturum açma sayfasına yönlendirilirsiniz.",
 		"description": "[$opt_automatic_open_login] için [settings-help]"
@@ -835,6 +843,14 @@
 		"message": "Yeni Tab-leri öne ekle.",
 		"description": "[settings] kullanıcının tüm yeni Tab-leri öne eklemesine izin ver"
 	},
+	"opt_allow_domains": {
+		"message": "Ziyaret ettiğinizde $extension_label uygulamasının Salesforce sayfalarına erişmesine izin verin.",
+		"description": "[ayar] kullanıcı $salesforce_setup sayfasını ziyaret ettiğinde uzantıları çalıştırmak için isteğe bağlı izin"
+	},
+	"opt_allow_export": {
+		"message": "Talep ettiğinizde $extension_label uygulamasının $tabs verilerinizi dışa aktarmasına izin verin.",
+		"description": "[ayar] kullanıcının Tab verilerini dışa aktarmamıza olanak tanıyan isteğe bağlı izin"
+	},
 	"opt_automatic_open_login": {
 		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklandığında $salesforce_login sayfasını otomatik olarak aç.",
 		"description": "[ayar] kullanıcı rastgele bir web sitesindeyken açılır pencereyi açtığında"
@@ -943,6 +959,14 @@
 		"message": "sayfa, mevcut tarayıcı Tab'ında açılacaktır",
 		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
+	"permission_request_failure": {
+		"message": "İzne izin verilmedi.",
+		"description": "[hata] kullanıcı bizden bir izin istememizi talep etti ancak daha sonra bunu kabul etmedi"
+	},
+	"permission_request_success": {
+		"message": "İzin verildi!",
+		"description": "[başarı] kullanıcı bizden bir izin istememizi talep etti ve kabul etti"
+	},
 	"pinned": {
 		"message": "Sabitlenmiş",
 		"description": "Kullanıcının her zaman listenin başında bulunan Tab-ları"
@@ -1020,7 +1044,7 @@
 		"description": "[modal] dışa aktarma modunda tüm Tabs'leri seçme düğmesi"
 	},
 	"select_tabs": {
-		"message": "Hangi $tabs'ı istediğinizi seçin",
+		"message": "Hangi $tabs ı istediğinizi seçin",
 		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
 	},
 	"select_tabs_export": {
@@ -1308,11 +1332,11 @@
 		"description": "[izin_iste] izinlere izin VERMEME düğmesi"
 	},
 	"style_generic_pinned": {
-		"message": "Sabitlenmiş $generic_tabs-ın Stili",
+		"message": "Sabitlenmiş $generic_tabs ın Stili",
 		"description": "[seçenekler] Sabitlenmiş genel Tab-ları stilize etmek için anahtar etiketi"
 	},
 	"style_org_pinned": {
-		"message": "Sabitlenmiş $org_tabs-ın Stili",
+		"message": "Sabitlenmiş $org_tabs ın Stili",
 		"description": "[seçenekler] Sabitlenmiş org Tab-ları stilize etmek için anahtar etiketi"
 	},
 	"style_settings_background_label": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs kaydedildi.",
 		"description": "[bildirim] Tabs başarıyla saklandı."
-	},
-	"the_current_page": {
-		"message": "mevcut sayfa",
-		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"theme_dark": {
 		"message": "Temayı Koyu Olarak Değiştir",

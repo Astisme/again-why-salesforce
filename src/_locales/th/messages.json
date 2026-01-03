@@ -627,6 +627,14 @@
 		"message": "Tab-s ที่เพิ่งบันทึกเป็นรายการโปรดจะถูกแทรกไว้ที่ด้านหน้าของรายการ Tab-s ของคุณในแถบ Setup แทนที่จะเพิ่มที่ส่วนท้าย",
 		"description": "[settings-help] สำหรับ $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "เมื่อเปิดใช้งาน คุณจะสามารถเห็น $tabs ของคุณได้ทันทีที่เปิด $salesforce_setup",
+		"description": "[ความช่วยเหลือในการตั้งค่า] สำหรับการอนุญาตทางเลือกเพื่อให้เราพร้อมทันทีที่เปิด $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "เมื่อเปิดใช้งาน คุณจะสามารถ $export $tabs ของคุณและเก็บไว้ในคอมพิวเตอร์ของคุณได้",
+		"description": "[ความช่วยเหลือในการตั้งค่า] สำหรับการอนุญาตทางเลือกเพื่อให้เราสามารถดาวน์โหลด Tab ลงในเครื่องของผู้ใช้ได้"
+	},
 	"help_automatic_open_login": {
 		"message": "หากคุณคลิกป๊อปอัปส่วนขยายที่อยู่นอกโดเมน Salesforce คุณจะถูกนำไปที่หน้าลงชื่อเข้าใช้ของ Salesforce โดยอัตโนมัติ",
 		"description": "[settings-help] สำหรับ $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "เพิ่ม Tab-s ใหม่ไว้ด้านหน้า",
 		"description": "[settings] ให้ผู้ใช้เพิ่ม Tab-s ใหม่ทั้งหมดไว้ด้านหน้า"
 	},
+	"opt_allow_domains": {
+		"message": "อนุญาตให้ $extension_label เข้าถึงหน้า Salesforce เมื่อคุณเยี่ยมชม",
+		"description": "[การตั้งค่า] การอนุญาตทางเลือกเพื่อรันส่วนขยายเมื่อผู้ใช้เยี่ยมชม $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "อนุญาตให้ $extension_label ส่งออก $tabs ของคุณเมื่อคุณร้องขอ",
+		"description": "[การตั้งค่า] การอนุญาตทางเลือกเพื่อให้เราสามารถส่งออก Tab ของผู้ใช้ได้"
+	},
 	"opt_automatic_open_login": {
 		"message": "เปิดหน้า $salesforce_login โดยอัตโนมัติเมื่อคลิกที่ป๊อปอัปในขณะที่ไม่ได้อยู่บนหน้า Salesforce",
 		"description": "[การตั้งค่า] เมื่อผู้ใช้เปิดป๊อปอัปขณะอยู่บนเว็บไซต์แบบสุ่ม"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "หน้าจะถูกเปิดใน Tab เบราว์เซอร์ปัจจุบัน",
 		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
+	},
+	"permission_request_failure": {
+		"message": "การอนุญาตไม่ได้รับการอนุมัติ",
+		"description": "[ข้อผิดพลาด] ผู้ใช้ขอให้เราขออนุญาต แต่แล้วก็ไม่ยอมรับ"
+	},
+	"permission_request_success": {
+		"message": "การอนุญาตได้รับการอนุมัติแล้ว!",
+		"description": "[สำเร็จ] ผู้ใช้ขอให้เราขออนุญาตและพวกเขาก็ยอมรับ"
 	},
 	"pinned": {
 		"message": "ปักหมุดแล้ว",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs saved.",
 		"description": "[toast] บันทึก Tab เรียบร้อยแล้ว"
-	},
-	"the_current_page": {
-		"message": "หน้าปัจจุบัน",
-		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
 	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",

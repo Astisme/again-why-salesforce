@@ -627,6 +627,14 @@
 		"message": "Naujai įtraukti Tab'ai įterpiami į Tab'ų sąrašo priekį, o ne pridedami pabaigoje.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kai įjungta, galėsite matyti savo $tabs iškart, kai tik paleisite $salesforce_setup",
+		"description": "[nustatymų pagalba] papildomam leidimui, kad galėtume būti pasiruošę iškart, kai tik atidaromas $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kai įjungta, galėsite $export savo $tabs ir saugoti juos savo kompiuteryje.",
+		"description": "[nustatymų pagalba] papildomam leidimui, leidžiančiam mums atsisiųsti Tab į naudotojo įrenginį"
+	},
 	"help_automatic_open_login": {
 		"message": "Jei spustelite plėtinio iššokantįjį langą už „Salesforce“ domeno ribų, automatiškai būsite nukreipti į „Salesforce“ prisijungimo puslapį.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -684,15 +692,15 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Čia rasite papildomą meniu, skirtą atlikti įvairius veiksmus su tos pačios eilutės $tab.",
+		"message": "Čia rasite papildomą meniu skirtą atlikti įvairius veiksmus su tos pačios eilutės $tab",
 		"description": "[manage-tabs] paaiškinti, kas yra dešinėje esančioje rodyklėje"
 	},
 	"help_tab_label": {
-		"message": "Tai yra įprastas pavadinimas, kurį naudosite norėdami prisiminti, kur nuves šis $tab.",
+		"message": "Tai yra įprastas pavadinimas kurį naudosite norėdami prisiminti kur nuves šis $tab",
 		"description": "[manage-tabs] paaiškinti, kas yra Tab etiketė"
 	},
 	"help_tab_org": {
-		"message": "Tai yra „Salesforce“ $org pavadinimas, kuriame bus rodomas šis $tab. Jei paliksite tuščią, šis $tab bus rodomas kiekviename „Salesforce“ $org, kuriame lankysitės.",
+		"message": "Tai yra „Salesforce“ $org pavadinimas kuriame bus rodomas šis $tab Jei paliksite tuščią šis $tab bus rodomas kiekviename „Salesforce“ $org kuriame lankysitės",
 		"description": "[manage-tabs] paaiškinti, kas yra Tab Org"
 	},
 	"help_tab_url": {
@@ -835,6 +843,14 @@
 		"message": "Pridėti naujus Tab'us priekyje.",
 		"description": "[settings] leisti vartotojui pridėti visus naujus Tab'us priekyje"
 	},
+	"opt_allow_domains": {
+		"message": "Leisti $extension_label pasiekti „Salesforce“ puslapius, kai juose lankotės.",
+		"description": "[nustatymas] papildomas leidimas paleisti plėtinius, kai naudotojas lankosi $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Leisti $extension_label eksportuoti jūsų $tabs kai to paprašysite",
+		"description": "[nustatymas] papildomas leidimas, leidžiantis mums eksportuoti naudotojo Tab"
+	},
 	"opt_automatic_open_login": {
 		"message": "Automatiškai atidaryti $salesforce_login puslapį spustelėjus iškylantįjį langą, kai nesate „Salesforce“ puslapyje.",
 		"description": "[nustatymas] kai vartotojas atidaro iškylantįjį langą atsitiktinėje svetainėje"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "puslapis bus atidarytas dabartiniame naršyklės Tab",
 		"description": "[placeholder] naudojamas kituose tekstuose"
+	},
+	"permission_request_failure": {
+		"message": "Leidimas nebuvo suteiktas.",
+		"description": "[klaida] naudotojas paprašė mūsų paprašyti leidimo, bet vėliau jo nepriėmė"
+	},
+	"permission_request_success": {
+		"message": "Leidimas suteiktas!",
+		"description": "[sėkmė] naudotojas paprašė mūsų paprašyti leidimo ir jį priėmė"
 	},
 	"pinned": {
 		"message": "Prisegta",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs išsaugoti.",
 		"description": "[pranešimas] Tabs sėkmingai išsaugoti."
-	},
-	"the_current_page": {
-		"message": "dabartinis puslapis",
-		"description": "[placeholder] naudojamas kituose tekstuose"
 	},
 	"theme_dark": {
 		"message": "Keisti temą į tamsią",

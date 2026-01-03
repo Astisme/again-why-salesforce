@@ -1,61 +1,44 @@
 "use strict";
 import {
+	areFramePatternsAllowed,
 	BROWSER,
-	CHROME_LINK,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
-	EDGE_LINK,
-	FIREFOX_LINK,
-	FRAME_PATTERNS,
-	ISCHROME,
-	ISEDGE,
-	ISFIREFOX,
-	ISSAFARI,
+	HIDDEN_CLASS,
+	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,
-	SETUP_LIGHTNING_PATTERN,
-	SPONSOR_LINK_EN,
-	SPONSOR_LINK_IT,
 } from "/constants.js";
-import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import { handleSwitchColorTheme } from "../themeHandler.js";
 
-const translator = await ensureTranslatorAvailability();
-const allTabs = await ensureAllTabsAvailability();
-
-const hiddenClass = "hidden";
-if (allTabs.length >= 8) {
-	if (!ISSAFARI) {
-		const reviewSvg = document.getElementById("review");
-		reviewSvg?.classList.remove(hiddenClass);
-		reviewSvg?.addEventListener("click", () => {
-			if (ISEDGE) {
-				return open(EDGE_LINK);
-			}
-			if (ISCHROME) {
-				return open(CHROME_LINK);
-			}
-			if (ISFIREFOX) {
-				return open(FIREFOX_LINK);
-			}
-		});
-	}
-	if (allTabs.length >= 16) {
-		const sponsorSvg = document.getElementById("sponsor");
-		sponsorSvg?.classList.remove(hiddenClass);
-		sponsorSvg?.addEventListener("click", () => {
-			open(
-				translator.currentLanguage === "it"
-					? SPONSOR_LINK_IT
-					: SPONSOR_LINK_EN,
+{
+	// Get the current tab. If it's not salesforce setup, redirect the popup
+	const isonSFsetup = await isOnSalesforceSetup();
+	if (isonSFsetup.ison) {
+		// we're in Salesforce Setup
+		// check if we can access the Salesforce Setup without requiring the user to click on the extension
+		if (!(await areFramePatternsAllowed())) {
+			// if we do not have them, redirect to the request permission page
+			globalThis.location.href = BROWSER.runtime.getURL(
+				"action/req_permissions/req_permissions.html?whichid=hostpermissions",
 			);
-		});
+			// nothing else will happen from this file
+		}
+	} else {
+		// we're not in Salesforce Setup
+		globalThis.location.href = BROWSER.runtime.getURL(
+			`action/notSalesforceSetup/notSalesforceSetup.html${
+				isonSFsetup.url == null ? "" : "?url=" + isonSFsetup.url
+			}`,
+		);
 	}
 }
+
+const translator = await ensureTranslatorAvailability();
 
 const html = document.documentElement;
 const sun = document.getElementById("sun");
@@ -67,52 +50,9 @@ const moon = document.getElementById("moon");
 {
 	const elementToShow = html.dataset.theme === "light" ? moon : sun;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToShow.classList.remove("invisible", hiddenClass);
-	elementToHide.classList.add("invisible", hiddenClass);
+	elementToShow.classList.remove("invisible", HIDDEN_CLASS);
+	elementToHide.classList.add("invisible", HIDDEN_CLASS);
 }
-
-/**
- * Finds the current tab of the browser then calls the callback, if available. otherwise returns a Promise
- * @param {function|undefined} callback - the function to call when the result is found.
- * @return {Promise} from sendExtensionMessage
- */
-function pop_getCurrentBrowserTab(callback) {
-	return sendExtensionMessage({ what: "browser-tab" }, callback);
-}
-
-// Get the current tab. If it's not salesforce setup, redirect the popup
-pop_getCurrentBrowserTab(async (browserTab) => {
-	// is null if the extension cannot access the current tab
-	const browserTabUrl = browserTab?.url;
-	if (
-		browserTabUrl?.match(SETUP_LIGHTNING_PATTERN)
-	) {
-		// we're in Salesforce Setup
-		// check if we have all the optional permissions available
-		const permissionsAvailable = await BROWSER.permissions.contains({
-			origins: FRAME_PATTERNS,
-		});
-		if (
-			!permissionsAvailable &&
-			localStorage.getItem("noPerm") !== "true" &&
-			new URL(globalThis.location.href).searchParams.get("noPerm") !==
-				"true"
-		) {
-			// if we do not have them, redirect to the request permission page
-			globalThis.location = await BROWSER.runtime.getURL(
-				"action/req_permissions/req_permissions.html?whichid=hostpermissions",
-			);
-			// nothing else will happen from this file
-		}
-	} else {
-		// we're not in Salesforce Setup
-		globalThis.location.href = BROWSER.runtime.getURL(
-			`action/notSalesforceSetup/notSalesforceSetup.html${
-				browserTabUrl == null ? "" : "?url=" + browserTabUrl
-			}`,
-		);
-	}
-});
 
 /**
  * Switches the theme and updates the SVG elements accordingly.
@@ -120,8 +60,8 @@ pop_getCurrentBrowserTab(async (browserTab) => {
 function switchTheme() {
 	const elementToShow = html.dataset.theme === "light" ? sun : moon;
 	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToHide.classList.add("invisible", hiddenClass);
-	elementToShow.classList.remove(hiddenClass);
+	elementToHide.classList.add("invisible", HIDDEN_CLASS);
+	elementToShow.classList.remove(HIDDEN_CLASS);
 	setTimeout(() => {
 		elementToShow.classList.remove("invisible");
 	}, 200);

@@ -627,6 +627,14 @@
 		"message": "Nově oblíbené Tabs se vkládají na začátek seznamu Tabs v panelu nastavení, spíše než na konec.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Pokud je tato možnost povolena, uvidíte své $tabs ihned po spuštění $salesforce_setup",
+		"description": "[nápověda-nastavení] pro volitelné oprávnění, abychom mohli být připraveni ihned po otevření $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Pokud je tato funkce povolena, budete moci $export své $tabs a uchovávat je v počítači.",
+		"description": "[nápověda-nastavení] pro volitelné oprávnění, které nám umožní stáhnout Tab do počítače uživatele"
+	},
 	"help_automatic_open_login": {
 		"message": "Pokud kliknete na vyskakovací okno rozšíření mimo doménu Salesforce, automaticky vás přesměruje na přihlašovací stránku Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -692,7 +700,7 @@
 		"description": "[manage-tabs] vysvětlení, co je štítek Tab"
 	},
 	"help_tab_org": {
-		"message": "Toto je název Salesforce $org, kde se tato $tab zobrazí. Pokud zůstane prázdné, tato $tab se zobrazí v každé Salesforce $org, kterou navštívíte.",
+		"message": "Toto je název Salesforce $org kde se tato $tab zobrazí Pokud zůstane prázdné tato $tab se zobrazí v každé Salesforce $org kterou navštívíte",
 		"description": "[manage-tabs] vysvětlení, co je Tab Org"
 	},
 	"help_tab_url": {
@@ -808,7 +816,7 @@
 		"description": "[neníNastaveníSalesforce] neplatná URL adresa"
 	},
 	"nss_not_setup_page": {
-		"message": "Toto není stránka nastavení $salesforce_lightning.",
+		"message": "Toto není stránka nastavení $salesforce_lightning",
 		"description": "[notSalesforceSetup] uživatel není na stránce Salesforce."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Přidat nové Tabs dopředu.",
 		"description": "[settings] umožnit uživateli přidat všechny nové Tabs dopředu"
+	},
+	"opt_allow_domains": {
+		"message": "Povolit $extension_label přístup k stránkám Salesforce, když je navštívíte.",
+		"description": "[nastavení] volitelné oprávnění ke spuštění rozšíření, když uživatel navštíví $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Povolit $extension_label exportovat vaše $tabs když o to požádáte",
+		"description": "[nastavení] volitelné oprávnění, které nám umožní exportovat Tab uživatele"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automaticky otevřít stránku $salesforce_login po kliknutí na vyskakovací okno, pokud nejste na stránce Salesforce.",
@@ -943,6 +959,14 @@
 		"message": "stránka se otevře v aktuální Tab prohlížeče",
 		"description": "[placeholder] používáno jinými texty"
 	},
+	"permission_request_failure": {
+		"message": "Oprávnění nebylo povoleno.",
+		"description": "[chyba] uživatel nás požádal o vyžádání povolení, ale poté jej nepřijal"
+	},
+	"permission_request_success": {
+		"message": "Oprávnění bylo povoleno!",
+		"description": "[úspěch] uživatel nás požádal o vyžádání povolení a přijal jej"
+	},
 	"pinned": {
 		"message": "Připnutá",
 		"description": "Tab karty uživatele, které se vždy nacházejí na začátku seznamu"
@@ -972,11 +996,11 @@
 		"description": "[req_permission] popisek, když uživatel nechce trvale povolit oprávnění"
 	},
 	"req_permissions_header": {
-		"message": "Povolte nám prosím automatický přístup\nke stránkám $salesforce_setup.",
+		"message": "Povolte nám prosím automatický přístup\nke stránkám $salesforce_setup",
 		"description": "[req_permission] záhlaví stránky pro vyžádání oprávnění"
 	},
 	"req_permissions_paragraph": {
-		"message": "Pokud chcete, můžete si nechat zobrazit své oblíbené Tabs\njakmile přejdete na stránku $salesforce_setup,\naniž byste museli pokaždé klikat na toto rozšíření.",
+		"message": "Pokud chcete můžete si nechat zobrazit své oblíbené Tabs\njakmile přejdete na stránku $salesforce_setup\naniž byste museli pokaždé klikat na toto rozšíření",
 		"description": "[req_permission] text vysvětlující, proč jsou oprávnění požadována"
 	},
 	"required": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Taby uloženy.",
 		"description": "[toast] Taby byly úspěšně uloženy."
-	},
-	"the_current_page": {
-		"message": "aktuální stránka",
-		"description": "[placeholder] používáno jinými texty"
 	},
 	"theme_dark": {
 		"message": "Změnit téma na tmavé",

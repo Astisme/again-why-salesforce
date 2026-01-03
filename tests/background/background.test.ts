@@ -11,7 +11,6 @@ import {
 import {
 	BROWSER,
 	GENERIC_TAB_STYLE_KEY,
-	getStyleSettings,
 	LOCALE_KEY,
 	NO_RELEASE_NOTES,
 	ORG_TAB_STYLE_KEY,
@@ -20,6 +19,7 @@ import {
 	USER_LANGUAGE,
 	WHY_KEY,
 } from "/constants.js";
+import { getStyleSettings } from "/functions.js";
 
 const oldtabs = [
 	{ label: "a", url: "m", org: "o" },

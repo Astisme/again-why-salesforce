@@ -627,6 +627,14 @@
 		"message": "Οι νέες αγαπημένες Tabs εισάγονται στην αρχή της λίστας Tabs στη γραμμή Setup και όχι στο τέλος.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Όταν είναι ενεργοποιημένο, θα μπορείτε να βλέπετε τα $tabs σας μόλις ξεκινήσετε το $salesforce_setup",
+		"description": "[βοήθεια-ρυθμίσεων] για προαιρετική άδεια που μας επιτρέπει να είμαστε έτοιμοι μόλις ανοίξει το $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Όταν είναι ενεργοποιημένο, θα μπορείτε να κάνετε $export τα $tabs σας και να τα διατηρείτε στον υπολογιστή σας.",
+		"description": "[βοήθεια-ρυθμίσεων] για προαιρετική άδεια που μας επιτρέπει να κατεβάζουμε τα Tab στο μηχάνημα του χρήστη"
+	},
 	"help_automatic_open_login": {
 		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εκτός του τομέα του Salesforce, σας μεταφέρει αυτόματα στη σελίδα σύνδεσης του Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -688,11 +696,11 @@
 		"description": "[manage-tabs] εξήγηση για το τι περιέχει το βέλος στα δεξιά"
 	},
 	"help_tab_label": {
-		"message": "Αυτό είναι το κοινό όνομα που θα χρησιμοποιήσετε για να θυμάστε πού θα σας οδηγήσει αυτή η $tab.",
+		"message": "Αυτό είναι το κοινό όνομα που θα χρησιμοποιήσετε για να θυμάστε πού θα σας οδηγήσει αυτή η $tab",
 		"description": "[manage-tabs] εξήγηση για το τι είναι η ετικέτα Tab"
 	},
 	"help_tab_org": {
-		"message": "Αυτό είναι το όνομα του Salesforce $org όπου θα εμφανίζεται αυτή η $tab. Εάν μείνει κενό, αυτή η $tab θα εμφανίζεται σε κάθε Salesforce $org που επισκέπτεστε.",
+		"message": "Αυτό είναι το όνομα του Salesforce $org όπου θα εμφανίζεται αυτή η $tab Εάν μείνει κενό αυτή η $tab θα εμφανίζεται σε κάθε Salesforce $org που επισκέπτεστε",
 		"description": "[manage-tabs] εξήγηση για το τι είναι το Tab Org"
 	},
 	"help_tab_url": {
@@ -808,7 +816,7 @@
 		"description": "[δενΕίναιΡύθμισηSalesforce] ένα μη έγκυρο URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Αυτή δεν είναι σελίδα Ρύθμισης $salesforce_lightning.",
+		"message": "Αυτή δεν είναι σελίδα Ρύθμισης $salesforce_lightning",
 		"description": "[notSalesforceSetup] ο χρήστης δεν βρίσκεται σε σελίδα Salesforce."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Προσθήκη νέων Tabs μπροστά.",
 		"description": "[settings] επιτρέπει στον χρήστη να προσθέτει όλες τις νέες Tabs μπροστά"
+	},
+	"opt_allow_domains": {
+		"message": "Επιτρέψτε στο $extension_label να έχει πρόσβαση στις σελίδες του Salesforce όταν τις επισκέπτεστε.",
+		"description": "[ρύθμιση] προαιρετική άδεια για την εκτέλεση των επεκτάσεων όταν ο χρήστης επισκέπτεται το $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Επιτρέψτε στο $extension_label να εξάγει τα $tabs σας όταν το ζητήσετε.",
+		"description": "[ρύθμιση] προαιρετική άδεια για να μας επιτρέψετε να εξάγουμε τα Tab του χρήστη"
 	},
 	"opt_automatic_open_login": {
 		"message": "Αυτόματο άνοιγμα της σελίδας $salesforce_login όταν κάνετε κλικ στο αναδυόμενο παράθυρο ενώ δεν βρίσκεστε σε σελίδα Salesforce.",
@@ -943,6 +959,14 @@
 		"message": "η σελίδα θα ανοίξει στην τρέχουσα Tab του προγράμματος περιήγησης",
 		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
+	"permission_request_failure": {
+		"message": "Η άδεια δεν επιτράπηκε.",
+		"description": "[σφάλμα] ο χρήστης μας ζήτησε να του ζητήσουμε μια άδεια αλλά στη συνέχεια δεν την αποδέχτηκε"
+	},
+	"permission_request_success": {
+		"message": "Η άδεια επιτράπηκε!",
+		"description": "[επιτυχία] ο χρήστης μας ζήτησε να του ζητήσουμε μια άδεια και την αποδέχτηκε"
+	},
 	"pinned": {
 		"message": "Καρφιτσωμένο",
 		"description": "Οι Tab καρτέλες του χρήστη που βρίσκονται πάντα στην αρχή της λίστας"
@@ -972,7 +996,7 @@
 		"description": "[αίτηση-άδειας] ετικέτα όταν ο χρήστης δεν θέλει να επιτρέπει μόνιμα τις άδειες"
 	},
 	"req_permissions_header": {
-		"message": "Παρακαλώ επιτρέψτε μας την αυτόματη πρόσβαση\nστις σελίδες $salesforce_setup.",
+		"message": "Παρακαλώ επιτρέψτε μας την αυτόματη πρόσβαση\nστις σελίδες $salesforce_setup",
 		"description": "[req_permission] κεφαλίδα της σελίδας για αίτηση δικαιωμάτων"
 	},
 	"req_permissions_paragraph": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Τα Tab αποθηκεύτηκαν.",
 		"description": "[σημείωμα] Τα Tab αποθηκεύτηκαν με επιτυχία."
-	},
-	"the_current_page": {
-		"message": "την τρέχουσα σελίδα",
-		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"theme_dark": {
 		"message": "Αλλαγή Θέματος σε Σκοτεινό",

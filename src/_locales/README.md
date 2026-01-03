@@ -22,7 +22,7 @@ b. Several other top-level keys. The keys listed in the "missingKeys" array are 
 - Translate the string value of its "message" field.
 - Translate the string value of its "description" field.
   **4. Translation Rules:**
-- **Placeholders:** Any word starting with a `$` symbol (e.g., `$extension_label`) must be preserved exactly as is, without translation.
+- **Placeholders:** Any word starting with a `$` symbol (e.g., `$extension_label`) must be preserved exactly as is, without translation. They MUST be either at the beginning of the translation, at the end of the translation or surrounded by whitespaces. The placeholders MUST NOT be near punctuation or other words.
 - **Specific Word "Tab":** The word "Tab" must be kept as "Tab" in all translations; do not translate this specific word.
 - **Bracketed Content:** Text found within square brackets `[]` (e.g., `[error]`) must also be translated according to the target language.
 - **Capitalization:** Maintain the original capitalization style of the source text in your translation. For instance, if the English source is "Error Checking for Updates", a Spanish translation should be something like "Error al Comprobar Actualizaciones", not "error al comprobar actualizaciones" or "ERROR AL COMPROBAR ACTUALIZACIONES" or "Error Al Comprobar Actualizaciones".

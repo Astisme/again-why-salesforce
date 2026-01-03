@@ -5,6 +5,7 @@ bin/*.zip
 bin/*.dmg
 **/bundled*
 missing-keys-report.json
+invalid-variables-report.json
 dmg_staging
 safari-*/
 .env

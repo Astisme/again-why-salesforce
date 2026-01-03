@@ -627,6 +627,14 @@
 		"message": "Os Tab-s recém-adicionados a favoritos são inseridos à frente da sua lista de Tab-s na barra de configuração, em vez de serem adicionados no fim.",
 		"description": "[settings-help] para $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Quando ativado, poderá ver os seus $tabs assim que iniciar o $salesforce_setup",
+		"description": "[ajuda-definições] para permissão opcional que nos permite estar prontos assim que o $salesforce_setup for aberto"
+	},
+	"help_allow_export": {
+		"message": "Quando ativado, poderá $export os seus $tabs e mantê-los no seu computador.",
+		"description": "[ajuda-definições] para permissão opcional que nos permite descarregar os Tab no computador do utilizador"
+	},
 	"help_automatic_open_login": {
 		"message": "Se clicar no popup da extensão fora de um domínio do Salesforce, é levado automaticamente para a página de início de sessão do Salesforce.",
 		"description": "[settings-help] para $opt_automatic_open_login"
@@ -808,7 +816,7 @@
 		"description": "[nãoÉConfiguraçãoSalesforce] um URL que não é válido"
 	},
 	"nss_not_setup_page": {
-		"message": "Esta não é uma página de Configuração do $salesforce_lightning.",
+		"message": "Esta não é uma página de Configuração do $salesforce_lightning",
 		"description": "[notSalesforceSetup] o utilizador não está numa página do Salesforce."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Adicionar novos Tab-s à frente.",
 		"description": "[settings] permite que o utilizador adicione todos os novos Tab-s à frente"
+	},
+	"opt_allow_domains": {
+		"message": "Permitir que o $extension_label aceda às páginas do Salesforce quando as visitar.",
+		"description": "[definição] permissão opcional para executar as extensões quando o utilizador visitar $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Permitir que o $extension_label exporte os seus $tabs quando solicitar.",
+		"description": "[definição] permissão opcional para nos permitir exportar os Tab do utilizador"
 	},
 	"opt_automatic_open_login": {
 		"message": "Abrir automaticamente a página $salesforce_login ao clicar no pop-up enquanto não estiver numa página do Salesforce.",
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "a página será aberta no Tab atual do navegador",
 		"description": "[placeholder] utilizado por outros textos"
+	},
+	"permission_request_failure": {
+		"message": "A permissão não foi concedida.",
+		"description": "[erro] o utilizador pediu-nos para solicitar uma permissão, mas depois não a aceitou"
+	},
+	"permission_request_success": {
+		"message": "A permissão foi concedida!",
+		"description": "[sucesso] o utilizador pediu-nos para solicitar uma permissão e aceitou-a"
 	},
 	"pinned": {
 		"message": "Fixado",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs guardados.",
 		"description": "[toast] Os Tabs foram armazenados com sucesso."
-	},
-	"the_current_page": {
-		"message": "a página atual",
-		"description": "[placeholder] utilizado por outros textos"
 	},
 	"theme_dark": {
 		"message": "Mudar Tema para Escuro",

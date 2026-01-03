@@ -84,7 +84,7 @@
 		"description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
 	},
 	"confirm_update_extension": {
-		"message": "Available na ngayon ang bagong bersyon ng $extension_label!",
+		"message": "Available na ngayon ang bagong bersyon ng $extension_label",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
 	},
 	"continue": {
@@ -627,6 +627,14 @@
 		"message": "Ang mga bagong paboritong Tabs ay ipinapasok sa harap ng iyong Tab list sa Setup bar sa halip na idinidagdag sa dulo.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kapag naka-enable, makikita mo ang iyong $tabs sa sandaling ilunsad mo ang $salesforce_setup",
+		"description": "[settings-help] para sa opsyonal na pahintulot upang paganahin kaming maging handa sa sandaling buksan ang $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kapag naka enable magagawa mong i export ang iyong $tabs at panatilihin ang mga ito sa iyong computer",
+		"description": "[settings-help] para sa opsyonal na pahintulot upang paganahin kaming i-download ang mga Tab sa machine ng gumagamit"
+	},
 	"help_automatic_open_login": {
 		"message": "Kung iki-click mo ang extension popup sa labas ng Salesforce domain, dadalhin ka nito sa Salesforce login page nang awtomatiko.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -835,6 +843,14 @@
 		"message": "Magdagdag ng mga bagong Tabs sa harap.",
 		"description": "[settings] hayaan ang user na magdagdag ng lahat ng bagong Tabs sa harap"
 	},
+	"opt_allow_domains": {
+		"message": "Payagan ang $extension_label na i-access ang mga pahina ng Salesforce kapag binisita mo ang mga ito.",
+		"description": "[setting] opsyonal na pahintulot na patakbuhin ang mga extension kapag bumibisita ang gumagamit sa $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Payagan ang $extension_label na i-export ang iyong $tabs kapag hiniling mo ito.",
+		"description": "[setting] opsyonal na pahintulot upang paganahin kaming i-export ang mga Tab ng gumagamit"
+	},
 	"opt_automatic_open_login": {
 		"message": "Awtomatikong buksan ang $salesforce_login page kapag nag-click sa popup habang wala sa Salesforce page.",
 		"description": "[setting] kapag binuksan ng user ang popup habang nasa isang random na website"
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "bubuksan ang page sa kasalukuyang browser Tab",
 		"description": "[placeholder] ginagamit ng iba pang mga teksto"
+	},
+	"permission_request_failure": {
+		"message": "Hindi pinayagan ang pahintulot.",
+		"description": "[error] hiniling sa amin ng gumagamit na hilingin sa kanila ang isang pahintulot ngunit pagkatapos ay hindi ito tinanggap"
+	},
+	"permission_request_success": {
+		"message": "Pinayagan na ang pahintulot!",
+		"description": "[success] hiniling sa amin ng gumagamit na hilingin sa kanila ang isang pahintulot at tinanggap nila ito"
 	},
 	"pinned": {
 		"message": "Naka-pin",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Nai-save ang mga Tabs.",
 		"description": "[toast] Matagumpay na naimbak ang mga Tabs."
-	},
-	"the_current_page": {
-		"message": "ang kasalukuyang page",
-		"description": "[placeholder] ginagamit ng iba pang mga teksto"
 	},
 	"theme_dark": {
 		"message": "Palitan ang Tema sa Madilim",

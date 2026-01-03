@@ -1,6 +1,7 @@
 "use strict";
+import { WHAT_EXPORT } from "/constants.js";
+import { sendExtensionMessage } from "/functions.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
-import { sendExtensionMessage, WHAT_EXPORT } from "/constants.js";
 import { generateSldsModalWithTabList, MODAL_ID } from "./generator.js";
 import { getModalHanger, showToast } from "./content.js";
 

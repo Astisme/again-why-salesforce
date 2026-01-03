@@ -1,10 +1,10 @@
 import {
 	BROWSER,
 	FOLLOW_SF_LANG,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
 } from "/constants.js";
+import { sendExtensionMessage } from "/functions.js";
 const _translationSecret = Symbol("translationSecret");
 let singletonTranslator = null;
 
@@ -152,7 +152,7 @@ class TranslationService {
 			return this.caches[language];
 		}
 		try {
-			const jsonUrl = await BROWSER.runtime.getURL(
+			const jsonUrl = BROWSER.runtime.getURL(
 				`/_locales/${language}/messages.json`,
 			);
 			const response = await fetch(jsonUrl);

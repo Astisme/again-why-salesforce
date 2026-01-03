@@ -626,6 +626,14 @@
 		"message": "Tab yang baru difavoritkan dimasukkan di depan daftar Tab Anda di bilah Setup, bukan ditambahkan di bagian akhir.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Jika diaktifkan, Anda akan dapat melihat $tabs Anda segera setelah Anda meluncurkan $salesforce_setup",
+		"description": "[bantuan-setelan] untuk izin opsional yang memungkinkan kami bersiap segera setelah $salesforce_setup dibuka"
+	},
+	"help_allow_export": {
+		"message": "Jika diaktifkan, Anda akan dapat melakukan $export pada $tabs Anda dan menyimpannya di komputer Anda.",
+		"description": "[bantuan-setelan] untuk izin opsional yang memungkinkan kami mengunduh Tab di mesin pengguna"
+	},
 	"help_automatic_open_login": {
 		"message": "Jika Anda mengeklik popup ekstensi di luar domain Salesforce, Anda akan dibawa ke halaman login Salesforce secara otomatis.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -807,7 +815,7 @@
 		"description": "[bukanSetupSalesforce] URL yang tidak valid"
 	},
 	"nss_not_setup_page": {
-		"message": "Ini bukan halaman Pengaturan $salesforce_lightning.",
+		"message": "Ini bukan halaman Pengaturan $salesforce_lightning",
 		"description": "[notSalesforceSetup] pengguna tidak berada di halaman Salesforce."
 	},
 	"open_here": {
@@ -833,6 +841,14 @@
 	"opt_add_tabs_front": {
 		"message": "Tambahkan Tab baru di depan.",
 		"description": "[settings] biarkan pengguna menambahkan semua Tab baru di depan"
+	},
+	"opt_allow_domains": {
+		"message": "Izinkan $extension_label untuk mengakses halaman Salesforce saat Anda mengunjunginya.",
+		"description": "[setelan] izin opsional untuk menjalankan ekstensi saat pengguna mengunjungi $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Izinkan $extension_label untuk mengekspor $tabs Anda saat Anda memintanya.",
+		"description": "[setelan] izin opsional untuk memungkinkan kami mengekspor Tab pengguna"
 	},
 	"opt_automatic_open_login": {
 		"message": "Buka halaman $salesforce_login secara otomatis saat mengeklik popup saat tidak di halaman Salesforce.",
@@ -941,6 +957,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "halaman akan dibuka di Tab browser saat ini",
 		"description": "[placeholder] digunakan oleh teks lain"
+	},
+	"permission_request_failure": {
+		"message": "Izin tidak diperbolehkan.",
+		"description": "[error] pengguna meminta kami untuk meminta izin tetapi kemudian tidak menerimanya"
+	},
+	"permission_request_success": {
+		"message": "Izin telah diperbolehkan!",
+		"description": "[success] pengguna meminta kami untuk meminta izin dan mereka menerimanya"
 	},
 	"pinned": {
 		"message": "Disematkan",
@@ -1405,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs tersimpan.",
 		"description": "[toast] Tabs berhasil disimpan."
-	},
-	"the_current_page": {
-		"message": "halaman saat ini",
-		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"theme_dark": {
 		"message": "Ubah Tema ke Gelap",

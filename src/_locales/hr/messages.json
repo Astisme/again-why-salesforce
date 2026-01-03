@@ -627,6 +627,14 @@
 		"message": "Novo omiljeni Tabs se umeću na početak vašeg popisa Tabs-a na traci za postavljanje umjesto da se dodaju na kraj.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kada je omogućeno, moći ćete vidjeti svoje $tabs čim pokrenete $salesforce_setup",
+		"description": "[pomoć za postavke] za neobavezno dopuštenje koje nam omogućuje da budemo spremni čim se otvori $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kada je omogućeno, moći ćete $export svoje $tabs i čuvati ih na svom računalu.",
+		"description": "[pomoć za postavke] za neobavezno dopuštenje koje nam omogućuje preuzimanje Tab na korisnikovo računalo"
+	},
 	"help_automatic_open_login": {
 		"message": "Ako kliknete na skočni prozor proširenja izvan domene Salesforce, automatski će vas odvesti na stranicu za prijavu u Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -692,7 +700,7 @@
 		"description": "[manage-tabs] objašnjenje što je oznaka Tab"
 	},
 	"help_tab_org": {
-		"message": "Ovo je naziv Salesforce $org u kojem će se prikazati ovaj $tab. Ako ostane prazno, ovaj će se $tab prikazati u svakom Salesforce $org koji posjetite.",
+		"message": "Ovo je naziv Salesforce $org u kojem će se prikazati ovaj $tab Ako ostane prazno ovaj će se $tab prikazati u svakom Salesforce $org koji posjetite",
 		"description": "[manage-tabs] objašnjenje što je Tab Org"
 	},
 	"help_tab_url": {
@@ -808,7 +816,7 @@
 		"description": "[nijeSalesforcePostavljanje] nevažeći URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Ovo nije stranica za postavljanje $salesforce_lightning.",
+		"message": "Ovo nije stranica za postavljanje $salesforce_lightning",
 		"description": "[notSalesforceSetup] korisnik nije na Salesforce stranici."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Dodajte nove Tabs-e sprijeda.",
 		"description": "[settings] neka korisnik doda sve nove Tabs-e sprijeda"
+	},
+	"opt_allow_domains": {
+		"message": "Dopustite $extension_label pristup Salesforce stranicama kada ih posjetite.",
+		"description": "[postavka] neobavezno dopuštenje za pokretanje proširenja kada korisnik posjeti $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Dopustite $extension_label da izveze vaše $tabs kada to zatražite.",
+		"description": "[postavka] neobavezno dopuštenje koje nam omogućuje izvoz korisnikovih Tab"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automatski otvori stranicu $salesforce_login kada kliknete na skočni prozor dok niste na Salesforce stranici.",
@@ -943,6 +959,14 @@
 		"message": "stranica će se otvoriti u trenutnom preglednikovom Tab-u",
 		"description": "[placeholder] koristi se drugim tekstovima"
 	},
+	"permission_request_failure": {
+		"message": "Dopuštenje nije odobreno.",
+		"description": "[pogreška] korisnik nas je tražio da zatražimo dopuštenje, ali ga potom nije prihvatio"
+	},
+	"permission_request_success": {
+		"message": "Dopuštenje je odobreno!",
+		"description": "[uspjeh] korisnik nas je tražio da zatražimo dopuštenje i on ga je prihvatio"
+	},
 	"pinned": {
 		"message": "Prikvačeno",
 		"description": "Korisnikovi Tabovi koji se uvijek nalaze na početku liste"
@@ -972,7 +996,7 @@
 		"description": "[req_permission] oznaka kada korisnik ne želi trajno davati ovlasti"
 	},
 	"req_permissions_header": {
-		"message": "Molimo vas da nam dopustite automatski pristup\nstranicama $salesforce_setup.",
+		"message": "Molimo vas da nam dopustite automatski pristup\nstranicama $salesforce_setup",
 		"description": "[req_permission] zaglavlje stranice za traženje dopuštenja"
 	},
 	"req_permissions_paragraph": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabovi spremljeni.",
 		"description": "[toast] Tabovi su uspješno spremljeni."
-	},
-	"the_current_page": {
-		"message": "trenutna stranica",
-		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"theme_dark": {
 		"message": "Promijeni temu u tamnu",

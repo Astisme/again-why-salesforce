@@ -627,6 +627,14 @@
 		"message": "Новомаркираните Tabs се вмъкват в началото на вашия списък с Tabs в лентата за настройка, вместо да се добавят в края.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Когато е активирано, ще можете да виждате вашите $tabs веднага след като стартирате $salesforce_setup",
+		"description": "[помощ за настройките] за незадължително разрешение, което ни позволява да бъдем готови веднага след отварянето на $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Когато е активирано, ще можете да $export вашите $tabs и да ги съхранявате на компютъра си.",
+		"description": "[помощ за настройките] за незадължително разрешение, което ни позволява да изтегляме Tab на машината на потребителя"
+	},
 	"help_automatic_open_login": {
 		"message": "Ако щракнете върху изскачащия прозорец на разширението извън домейн на Salesforce, автоматично ще бъдете отведени до страницата за вход в Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -636,7 +644,7 @@
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Можете да пренаредите вашите $tabs, като използвате точките и ги плъзнете.",
+		"message": "Можете да пренаредите вашите $tabs като използвате точките и ги плъзнете.",
 		"description": "[manage-tabs] обяснение как да плъзгате Tab"
 	},
 	"help_keep_sort": {
@@ -688,11 +696,11 @@
 		"description": "[manage-tabs] обяснение какво съдържа стрелката вдясно"
 	},
 	"help_tab_label": {
-		"message": "Това е общото име, което ще използвате, за да запомните къде ще ви отведе този $tab.",
+		"message": "Това е общото име, което ще използвате, за да запомните къде ще ви отведе този $tab",
 		"description": "[manage-tabs] обяснение какво е етикетът на Tab"
 	},
 	"help_tab_org": {
-		"message": "Това е името на Salesforce $org, където ще се показва този $tab. Ако бъде оставено празно, този $tab ще се показва във всеки Salesforce $org, който посещавате.",
+		"message": "Това е името на Salesforce $org където ще се показва този $tab Ако бъде оставено празно този $tab ще се показва във всеки Salesforce $org който посещавате",
 		"description": "[manage-tabs] обяснение какво е Tab Org"
 	},
 	"help_tab_url": {
@@ -808,7 +816,7 @@
 		"description": "[не е настройка на Salesforce] невалиден URL адрес"
 	},
 	"nss_not_setup_page": {
-		"message": "Това не е страница за настройка на $salesforce_lightning.",
+		"message": "Това не е страница за настройка на $salesforce_lightning",
 		"description": "[notSalesforceSetup] потребителят не е на страница на Salesforce."
 	},
 	"open_here": {
@@ -834,6 +842,14 @@
 	"opt_add_tabs_front": {
 		"message": "Добавяне на нови Tabs отпред.",
 		"description": "[settings] позволява на потребителя да добавя всички нови Tabs отпред"
+	},
+	"opt_allow_domains": {
+		"message": "Разрешете на $extension_label достъп до страниците на Salesforce, когато ги посещавате.",
+		"description": "[настройка] незадължително разрешение за стартиране на разширенията, когато потребителят посещава $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Разрешете на $extension_label да експортира вашите $tabs когато го поискате",
+		"description": "[настройка] незадължително разрешение, което ни позволява да експортираме Tab на потребителя"
 	},
 	"opt_automatic_open_login": {
 		"message": "Автоматично отваряне на страницата $salesforce_login при щракване върху изскачащия прозорец, когато не сте на страница на Salesforce.",
@@ -942,6 +958,14 @@
 	"page_will_open_current_browser_tab": {
 		"message": "страницата ще бъде отворена в текущия браузърен Tab",
 		"description": "[placeholder] използван от други текстове"
+	},
+	"permission_request_failure": {
+		"message": "Разрешението не беше позволено.",
+		"description": "[грешка] потребителят ни помоли да поискаме разрешение, но след това не го прие"
+	},
+	"permission_request_success": {
+		"message": "Разрешението беше позволено!",
+		"description": "[успех] потребителят ни помоли да поискаме разрешение и той го прие"
 	},
 	"pinned": {
 		"message": "Закачен",
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tab са запазени.",
 		"description": "[toast] Tab са успешно запазени."
-	},
-	"the_current_page": {
-		"message": "текущата страница",
-		"description": "[placeholder] използван от други текстове"
 	},
 	"theme_dark": {
 		"message": "Смени темата на тъмна",

@@ -1,6 +1,4 @@
 "use strict";
-import Tab from "/tab.js";
-import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import {
 	BROWSER,
 	CXM_PIN_TAB,
@@ -10,11 +8,7 @@ import {
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getCssRule,
-	getCssSelector,
-	getPinnedSpecificKey,
-	getSettings,
-	getStyleSettings,
+	HIDDEN_CLASS,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
@@ -27,6 +21,15 @@ import {
 	TAB_STYLE_TOP,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
+import {
+	getCssRule,
+	getCssSelector,
+	getPinnedSpecificKey,
+	getSettings,
+	getStyleSettings,
+} from "/functions.js";
+import Tab from "/tab.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";
@@ -832,7 +835,7 @@ export async function generateSldsModal({
 	modalParent.style.zIndex = "9001";
 	const awsfStyle = document.createElement("style");
 	awsfStyle.textContent =
-		".hidden { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }";
+		`.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`;
 	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
@@ -1648,7 +1651,7 @@ export function generateHelpWith_i_popup({
 	tooltip.append(slot);
 	const linkTip = document.createElement("div");
 	tooltip.append(linkTip);
-	linkTip.classList.add("link-tip", "hidden");
+	linkTip.classList.add("link-tip", HIDDEN_CLASS);
 	(async () => {
 		const translator = await ensureTranslatorAvailability();
 		assistive.textContent = await translator.translate("help");
@@ -2186,7 +2189,7 @@ export async function createManageTabRow({
 	tr.classList.add(
 		"slds-hint-parent",
 		EXTENSION_NAME,
-		isThisOrgTab ? undefined : "hidden",
+		isThisOrgTab ? undefined : HIDDEN_CLASS,
 	);
 	tr.draggable = draggable;
 	tr.dataset.draggable = draggable;
@@ -2254,7 +2257,7 @@ export async function createManageTabRow({
 	buttonContainer.appendChild(dropdownMenu);
 	dropdownMenu.classList.add(
 		"actions-dropdown-menu",
-		"hidden",
+		HIDDEN_CLASS,
 	);
 	dropdownMenu.style.position = "absolute";
 	dropdownMenu.style.top = "100%";
@@ -2311,7 +2314,7 @@ export async function createManageTabRow({
 	// Dropdown toggle functionality
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
-		dropdownMenu.classList.toggle("hidden");
+		dropdownMenu.classList.toggle(HIDDEN_CLASS);
 	});
 	// Prevent dropdown from closing when clicking inside
 	dropdownMenu.addEventListener("click", (e) => {
@@ -2439,7 +2442,7 @@ export async function generateManageTabsModal(tabs = [], {
 				"tr[data-is-this-org-tab=false]",
 			)
 		) {
-			otherOrgTr.classList.remove("hidden");
+			otherOrgTr.classList.remove(HIDDEN_CLASS);
 		}
 		showAllTabsButton.setAttribute("disabled", true);
 		hideOtherOrgTabsButton.removeAttribute("disabled");
@@ -2451,7 +2454,7 @@ export async function generateManageTabsModal(tabs = [], {
 				"tr[data-is-this-org-tab=false]",
 			)
 		) {
-			otherOrgTr.classList.add("hidden");
+			otherOrgTr.classList.add(HIDDEN_CLASS);
 		}
 		hideOtherOrgTabsButton.setAttribute("disabled", true);
 		showAllTabsButton.removeAttribute("disabled");
@@ -2524,7 +2527,7 @@ export async function generateManageTabsModal(tabs = [], {
 		tr.addEventListener("click", (e) => {
 			if (e.target !== dropdownButton) {
 				for (const dropdownMenu of allDropMenus) {
-					dropdownMenu.classList.add("hidden");
+					dropdownMenu.classList.add(HIDDEN_CLASS);
 				}
 			}
 		});
@@ -2536,5 +2539,89 @@ export async function generateManageTabsModal(tabs = [], {
 		actionsMap,
 		saveButton,
 		loggers,
+	};
+}
+
+/**
+ * Creates a div with a review svg and a sponsor svg which can be used to redirect the user to the extension's review page or its sponsor one.
+ * By default, the svgs are hidden.
+ * @return {Object} An object containing root (to add to the DOM), reviewSvg, sponsorSvg, reviewLink, sponsorLink which can be used to add titles and alts
+ */
+export function generateReviewSponsorSvgs() {
+	const reviewSponsorContainer = document.createElement("div");
+	// review link
+	const reviewLink = document.createElement("a");
+	reviewLink.href = "#";
+	reviewSponsorContainer.appendChild(reviewLink);
+	reviewLink.dataset.i18n = "write_review+-+title";
+	const reviewSvg = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"svg",
+	);
+	reviewSvg.setAttribute("viewBox", "0 0 24 24");
+	reviewSvg.setAttribute("fill", "none");
+	reviewSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+	reviewSvg.id = "review";
+	reviewSvg.classList.add(HIDDEN_CLASS);
+	reviewSvg.dataset.i18n = "write_review+-+alt";
+	for (
+		const attrs of [
+			{
+				opacity: "0.5",
+				d: "M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5",
+				"stroke-width": "1.5",
+				"stroke-linecap": "round",
+			},
+			{
+				d: "M17.3009 2.80624L16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9L8.03811 15.0229C7.9492 15.2897 8.01862 15.5837 8.21744 15.7826C8.41626 15.9814 8.71035 16.0508 8.97709 15.9619L10.1 15.5876L11.8354 15.0091C12.3775 14.8284 12.6485 14.7381 12.9035 14.6166C13.2043 14.4732 13.4886 14.2975 13.7513 14.0926C13.9741 13.9188 14.1761 13.7168 14.5801 13.3128L20.5449 7.34795L21.1938 6.69914C22.2687 5.62415 22.2687 3.88124 21.1938 2.80624C20.1188 1.73125 18.3759 1.73125 17.3009 2.80624Z",
+				"stroke-width": "1.5",
+			},
+			{
+				opacity: "0.5",
+				d: "M16.6522 3.45508C16.6522 3.45508 16.7333 4.83381 17.9499 6.05034C19.1664 7.26687 20.5451 7.34797 20.5451 7.34797M10.1002 15.5876L8.4126 13.9",
+				"stroke-width": "1.5",
+			},
+		]
+	) {
+		const path = document.createElementNS(
+			"http://www.w3.org/2000/svg",
+			"path",
+		);
+		for (const [key, value] of Object.entries(attrs)) {
+			path.setAttribute(key, value);
+		}
+		reviewSvg.appendChild(path);
+	}
+	reviewLink.appendChild(reviewSvg);
+	// sponsor link
+	const sponsorLink = document.createElement("a");
+	sponsorLink.href = "#";
+	reviewSponsorContainer.appendChild(sponsorLink);
+	sponsorLink.dataset.i18n = "send_tip+-+title";
+	const sponsorSvg = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"svg",
+	);
+	sponsorSvg.setAttribute("viewBox", "0 0 490 490");
+	sponsorSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+	sponsorSvg.id = "sponsor";
+	sponsorSvg.classList.add(HIDDEN_CLASS);
+	sponsorSvg.dataset.i18n = "send_tip+-+alt";
+	const sponsorPath = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"path",
+	);
+	sponsorPath.setAttribute(
+		"d",
+		"M128.833,334.605c32.081,29.39,62.382,57.15,76.074,82.153L245.014,490l40.096-73.247c13.688-25.004,43.988-52.766,76.068-82.158c59.669-54.669,127.3-116.632,127.653-200.181c0.144-33.927-13.428-66.322-38.218-91.217C423.278,15.745,384.441,0,344.059,0c-38.281,0-73.14,13.846-99.055,36.422C219.087,13.846,184.224,0,145.939,0C66.112,0,1.168,60.211,1.168,134.221C1.518,217.967,69.157,279.933,128.833,334.605z M145.939,45.719c54.72,0,99.067,39.607,99.067,88.502c0-48.895,44.334-88.502,99.053-88.502c54.705,0,99.261,39.607,99.053,88.502C442.674,237.755,289.858,312.866,245.006,394.8C200.14,312.866,47.319,237.755,46.887,134.221C46.887,85.326,91.225,45.719,145.939,45.719z",
+	);
+	sponsorSvg.appendChild(sponsorPath);
+	sponsorLink.appendChild(sponsorSvg);
+	return {
+		root: reviewSponsorContainer,
+		reviewSvg,
+		sponsorSvg,
+		reviewLink,
+		sponsorLink,
 	};
 }

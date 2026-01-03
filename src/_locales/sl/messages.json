@@ -627,6 +627,14 @@
 		"message": "Na novo priljubljeni Tab-i so vstavljeni na začetek seznama Tab-ov v nastavitvah namesto na konec.",
 		"description": "[settings-help] za $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Ko je omogočeno, boš lahko videl svoje $tabs takoj, ko zaženeš $salesforce_setup",
+		"description": "[pomoč pri nastavitvah] za neobvezno dovoljenje, ki nam omogoča, da smo pripravljeni takoj, ko se odpre $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Ko je omogočeno boš lahko $export al svoje $tabs in jih hranil v svojem računalniku",
+		"description": "[pomoč pri nastavitvah] za neobvezno dovoljenje, ki nam omogoča prenos Tab v uporabnikov računalnik"
+	},
 	"help_automatic_open_login": {
 		"message": "Če kliknete pojavno okno razširitve zunaj domene Salesforce, boste samodejno preusmerjeni na stran za prijavo v Salesforce.",
 		"description": "[settings-help] za $opt_automatic_open_login"
@@ -692,7 +700,7 @@
 		"description": "[manage-tabs] razlaga, kaj je oznaka Tab"
 	},
 	"help_tab_org": {
-		"message": "To je ime Salesforce $org, kjer bo ta $tab prikazan. Če ostane prazno, bo ta $tab prikazan v vsakem Salesforce $org, ki ga obiščete.",
+		"message": "To je ime Salesforce $org kjer bo ta $tab prikazan Če ostane prazno bo ta $tab prikazan v vsakem Salesforce $org ki ga obiščete",
 		"description": "[manage-tabs] razlaga, kaj je Tab Org"
 	},
 	"help_tab_url": {
@@ -808,7 +816,7 @@
 		"description": "[niNastavitevSalesforce] neveljaven URL naslov"
 	},
 	"nss_not_setup_page": {
-		"message": "To ni stran za nastavitev $salesforce_lightning.",
+		"message": "To ni stran za nastavitev $salesforce_lightning",
 		"description": "[notSalesforceSetup] uporabnik ni na strani Salesforce."
 	},
 	"open_here": {
@@ -835,12 +843,20 @@
 		"message": "Dodaj nove Tab-e spredaj.",
 		"description": "[settings] omogočite uporabniku, da doda vse nove Tab-e spredaj"
 	},
+	"opt_allow_domains": {
+		"message": "Dovoli $extension_label dostop do Salesforce strani, ko jih obiščeš.",
+		"description": "[nastavitev] neobvezno dovoljenje za zagon razširitev, ko uporabnik obišče $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Dovoli $extension_label izvoz tvojih $tabs ko to zahtevaš",
+		"description": "[nastavitev] neobvezno dovoljenje, ki nam omogoča izvoz uporabnikovih Tab"
+	},
 	"opt_automatic_open_login": {
-		"message": "Samodejno odpri stran $salesforce_login, ko kliknete pojavno okno, medtem ko niste na strani Salesforce.",
+		"message": "Samodejno odpri stran $salesforce_login ko kliknete pojavno okno medtem ko niste na strani Salesforce",
 		"description": "[nastavitev] ko uporabnik odpre pojavno okno na naključnem spletnem mestu"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Samodejno odpri stran $salesforce_setup, ko kliknete pojavno okno, medtem ko ste na strani Salesforce.",
+		"message": "Samodejno odpri stran $salesforce_setup ko kliknete pojavno okno medtem ko ste na strani Salesforce",
 		"description": "[nastavitev] ko uporabnik odpre pojavno okno na spletnem mestu Salesforce"
 	},
 	"opt_confirm_save": {
@@ -943,6 +959,14 @@
 		"message": "stran se bo odprla v trenutnem Tab brskalnika",
 		"description": "[placeholder] uporablja ga druga besedila"
 	},
+	"permission_request_failure": {
+		"message": "Dovoljenje ni bilo odobreno.",
+		"description": "[napaka] uporabnik nas je prosil, da zahtevamo dovoljenje, vendar ga nato ni sprejel"
+	},
+	"permission_request_success": {
+		"message": "Dovoljenje je bilo odobreno!",
+		"description": "[uspeh] uporabnik nas je prosil, da zahtevamo dovoljenje, in ga je sprejel"
+	},
 	"pinned": {
 		"message": "Pripet",
 		"description": "Tab-i uporabnika, ki so vedno na začetku seznama"
@@ -972,11 +996,11 @@
 		"description": "[zahtevaj_dovoljenje] oznaka, ko uporabnik ne želi trajno dovoliti dovoljenj"
 	},
 	"req_permissions_header": {
-		"message": "Dovolite nam samodejni dostop\ndo strani $salesforce_setup.",
+		"message": "Dovolite nam samodejni dostop\ndo strani $salesforce_setup",
 		"description": "[req_permission] glava strani za zahtevanje dovoljenj"
 	},
 	"req_permissions_paragraph": {
-		"message": "Če želite, lahko svoje priljubljene Tabs prikažete\ntakoj, ko se pomaknete na stran $salesforce_setup,\nne da bi morali vsakič klikniti to razširitev.",
+		"message": "Če želite lahko svoje priljubljene Tabs prikažete\ntakoj ko se pomaknete na stran $salesforce_setup\nne da bi morali vsakič klikniti to razširitev",
 		"description": "[req_permission] besedilo, ki pojasnjuje, zakaj se zahtevajo dovoljenja"
 	},
 	"required": {
@@ -1406,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs shranjeni.",
 		"description": "[toast] Tabs so bili uspešno shranjeni."
-	},
-	"the_current_page": {
-		"message": "trenutna stran",
-		"description": "[placeholder] uporablja ga druga besedila"
 	},
 	"theme_dark": {
 		"message": "Spremeni temo v temno",
