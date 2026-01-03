@@ -692,7 +692,7 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Täältä löydät alavalikon eri toimintojen suorittamiseen saman rivin $tab-kohdassa.",
+		"message": "Täältä löydät alavalikon eri toimintojen suorittamiseen saman rivin $tab kohdassa",
 		"description": "[manage-tabs] selittää, mitä oikealla oleva nuoli sisältää"
 	},
 	"help_tab_label": {
@@ -704,7 +704,7 @@
 		"description": "[manage-tabs] selittää, mikä Tab Org on"
 	},
 	"help_tab_url": {
-		"message": "Tämä on (lyhennetty) linkki, johon sinut ohjataan, kun klikkaat tätä $tab-kohtaa",
+		"message": "Tämä on lyhennetty linkki johon sinut ohjataan kun klikkaat tätä $tab kohtaa",
 		"description": "[manage-tabs] selittää, mikä Tab-URL on"
 	},
 	"help_tip_click_link": {
@@ -848,15 +848,15 @@
 		"description": "[asetus] valinnainen lupa laajennusten suorittamiseen, kun käyttäjä vierailee osoitteessa $salesforce_setup"
 	},
 	"opt_allow_export": {
-		"message": "Salli $extension_label viedä $tabs, kun pyydät sitä.",
+		"message": "Salli $extension_label viedä $tabs kun pyydät sitä",
 		"description": "[asetus] valinnainen lupa, jonka avulla voimme viedä käyttäjän Tab"
 	},
 	"opt_automatic_open_login": {
-		"message": "Avaa $salesforce_login-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun et ole Salesforce-sivulla.",
+		"message": "Avaa $salesforce_login sivu automaattisesti kun napsautat ponnahdusikkunaa kun et ole Salesforce sivulla",
 		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan satunnaisella verkkosivustolla"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Avaa $salesforce_setup-sivu automaattisesti, kun napsautat ponnahdusikkunaa, kun olet Salesforce-sivulla.",
+		"message": "Avaa $salesforce_setup sivu automaattisesti kun napsautat ponnahdusikkunaa kun olet Salesforce sivulla",
 		"description": "[asetus] kun käyttäjä avaa ponnahdusikkunan Salesforce-verkkosivustolla"
 	},
 	"opt_confirm_save": {
@@ -888,11 +888,11 @@
 		"description": "[asetus] antaa käyttäjän estää laajennusta etsimästä uusia julkaisuja"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Avaa $salesforce_login-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
+		"message": "Avaa $salesforce_login sivu aina samassa Tab kun napsautat ponnahdusikkunaa",
 		"description": "[asetus]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Avaa $salesforce_setup-sivu aina samassa Tab, kun napsautat ponnahdusikkunaa.",
+		"message": "Avaa $salesforce_setup sivu aina samassa Tab kun napsautat ponnahdusikkunaa",
 		"description": "[asetus]"
 	},
 	"opt_pick_language": {
@@ -996,11 +996,11 @@
 		"description": "[req_permission] merkintä, kun käyttäjä ei halua antaa oikeuksia pysyvästi"
 	},
 	"req_permissions_header": {
-		"message": "Salli meidän käyttää\n$salesforce_setup-sivuja automaattisesti.",
+		"message": "Salli meidän käyttää\n$salesforce_setup sivuja automaattisesti",
 		"description": "[req_permission] käyttöoikeuksien pyyntösivun otsikko"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jos haluat, voit saada suosikki Tabs näkyviin\nheti, kun siirryt $salesforce_setup-sivulle\nilman, että sinun tarvitsee napsauttaa tätä laajennusta joka kerta.",
+		"message": "Jos haluat voit saada suosikki Tabs näkyviin\nheti kun siirryt $salesforce_setup sivulle\nilman että sinun tarvitsee napsauttaa tätä laajennusta joka kerta",
 		"description": "[req_permission] teksti, joka selittää, miksi käyttöoikeuksia pyydetään"
 	},
 	"required": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabit tallennettu.",
 		"description": "[toast] Tabit tallennettiin onnistuneesti."
-	},
-	"the_current_page": {
-		"message": "nykyinen sivu",
-		"description": "[placeholder] käytetään muissa teksteissä"
 	},
 	"theme_dark": {
 		"message": "Vaihda tummaan teemaan",

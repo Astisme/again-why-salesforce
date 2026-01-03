@@ -644,7 +644,7 @@
 		"description": "[settings-help] pentru $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Puteți reordona $tabs-urile folosind punctele și trăgându-le.",
+		"message": "Puteți reordona $tabs urile folosind punctele și trăgându le",
 		"description": "[manage-tabs] explică cum se trage Tab-ul"
 	},
 	"help_keep_sort": {
@@ -692,15 +692,15 @@
 		"description": "[settings-help] pentru $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Aici veți găsi un submeniu pentru a efectua diferite acțiuni asupra $tab-ului de pe același rând.",
+		"message": "Aici veți găsi un submeniu pentru a efectua diferite acțiuni asupra $tab ului de pe același rând",
 		"description": "[manage-tabs] explică ce conține săgeata din dreapta"
 	},
 	"help_tab_label": {
-		"message": "Acesta este numele comun pe care îl veți folosi pentru a vă aminti unde vă va duce acest $tab.",
+		"message": "Acesta este numele comun pe care îl veți folosi pentru a vă aminti unde vă va duce acest $tab",
 		"description": "[manage-tabs] explică ce este eticheta Tab"
 	},
 	"help_tab_org": {
-		"message": "Acesta este numele Salesforce $org unde va fi afișat acest $tab. Dacă este lăsat gol, acest $tab va fi afișat în fiecare Salesforce $org pe care îl vizitați.",
+		"message": "Acesta este numele Salesforce $org unde va fi afișat acest $tab Dacă este lăsat gol acest $tab va fi afișat în fiecare Salesforce $org pe care îl vizitați",
 		"description": "[manage-tabs] explică ce este Tab Org"
 	},
 	"help_tab_url": {
@@ -788,7 +788,7 @@
 		"description": "[modal-title] fereastră modală pentru gestionarea $tabs salvate cu câmpuri editabile și glisare pentru reordonare"
 	},
 	"manage_tabs_explainer": {
-		"message": "Editați, reordonați și gestionați $tabs-urile salvate direct din această fereastră modală. Trageți rândurile pentru a le reordona sau utilizați meniului derulant pentru mai multe acțiuni.",
+		"message": "Editați reordonați și gestionați $tabs urile salvate direct din această fereastră modală Trageți rândurile pentru a le reordona sau utilizați meniului derulant pentru mai multe acțiuni",
 		"description": "[modal-explainer] explică funcționalitatea ferestrei modale de gestionare a filelor"
 	},
 	"must_non_empty_str": {
@@ -816,7 +816,7 @@
 		"description": "[nuEsteConfigurareSalesforce] o adresă URL nevalidă"
 	},
 	"nss_not_setup_page": {
-		"message": "Aceasta nu este o pagină de Configurare $salesforce_lightning.",
+		"message": "Aceasta nu este o pagină de Configurare $salesforce_lightning",
 		"description": "[notSalesforceSetup] utilizatorul nu se află pe o pagină Salesforce."
 	},
 	"open_here": {
@@ -996,7 +996,7 @@
 		"description": "[cerere_permisiune] etichetă când utilizatorul nu dorește să permită permisiuni permanent"
 	},
 	"req_permissions_header": {
-		"message": "Vă rugăm să ne permiteți să accesăm\nautomat paginile $salesforce_setup.",
+		"message": "Vă rugăm să ne permiteți să accesăm\nautomat paginile $salesforce_setup",
 		"description": "[req_permission] antetul paginii pentru solicitarea permisiunilor"
 	},
 	"req_permissions_paragraph": {
@@ -1324,7 +1324,7 @@
 		"description": "[nuEsteConfigurareSalesforce] pagina utilizată pentru a modifica setările Salesforce"
 	},
 	"show_all_tabs": {
-		"message": "Afișează toate $tabs-urile",
+		"message": "Afișează toate $tabs urile",
 		"description": "[manage-tabs] eticheta butonului pentru a afișa toate Tab"
 	},
 	"skip": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs salvate.",
 		"description": "[toast] Tabs au fost stocate cu succes."
-	},
-	"the_current_page": {
-		"message": "pagina curentă",
-		"description": "[placeholder] utilizat de alte texte"
 	},
 	"theme_dark": {
 		"message": "Schimbați tema la întunecat",

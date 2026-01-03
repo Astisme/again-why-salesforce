@@ -700,7 +700,7 @@
 		"description": "[manage-tabs] objašnjenje što je oznaka Tab"
 	},
 	"help_tab_org": {
-		"message": "Ovo je naziv Salesforce $org u kojem će se prikazati ovaj $tab. Ako ostane prazno, ovaj će se $tab prikazati u svakom Salesforce $org koji posjetite.",
+		"message": "Ovo je naziv Salesforce $org u kojem će se prikazati ovaj $tab Ako ostane prazno ovaj će se $tab prikazati u svakom Salesforce $org koji posjetite",
 		"description": "[manage-tabs] objašnjenje što je Tab Org"
 	},
 	"help_tab_url": {
@@ -816,7 +816,7 @@
 		"description": "[nijeSalesforcePostavljanje] nevažeći URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Ovo nije stranica za postavljanje $salesforce_lightning.",
+		"message": "Ovo nije stranica za postavljanje $salesforce_lightning",
 		"description": "[notSalesforceSetup] korisnik nije na Salesforce stranici."
 	},
 	"open_here": {
@@ -996,7 +996,7 @@
 		"description": "[req_permission] oznaka kada korisnik ne želi trajno davati ovlasti"
 	},
 	"req_permissions_header": {
-		"message": "Molimo vas da nam dopustite automatski pristup\nstranicama $salesforce_setup.",
+		"message": "Molimo vas da nam dopustite automatski pristup\nstranicama $salesforce_setup",
 		"description": "[req_permission] zaglavlje stranice za traženje dopuštenja"
 	},
 	"req_permissions_paragraph": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabovi spremljeni.",
 		"description": "[toast] Tabovi su uspješno spremljeni."
-	},
-	"the_current_page": {
-		"message": "trenutna stranica",
-		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"theme_dark": {
 		"message": "Promijeni temu u tamnu",

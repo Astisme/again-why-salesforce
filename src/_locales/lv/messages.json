@@ -628,7 +628,7 @@
 		"description": "[settings-help] priekš $opt_add_tabs_front"
 	},
 	"help_allow_domains": {
-		"message": "Kad šī iespēja ir iespējota, jūs varēsiet redzēt savas $tabs, tiklīdz palaidīsiet $salesforce_setup",
+		"message": "Kad šī iespēja ir iespējota jūs varēsiet redzēt savas $tabs tiklīdz palaidīsiet $salesforce_setup",
 		"description": "[iestatījumu palīdzība] neobligātai atļaujai, lai mēs būtu gatavi, tiklīdz tiek atvērts $salesforce_setup"
 	},
 	"help_allow_export": {
@@ -644,7 +644,7 @@
 		"description": "[settings-help] priekš $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Jūs varat pārkārtot savas $tabs, izmantojot punktus un tās velkot.",
+		"message": "Jūs varat pārkārtot savas $tabs izmantojot punktus un tās velkot",
 		"description": "[manage-tabs] paskaidrot, kā vilkt Tab"
 	},
 	"help_keep_sort": {
@@ -700,7 +700,7 @@
 		"description": "[manage-tabs] paskaidrot, kas ir Tab etiķete"
 	},
 	"help_tab_org": {
-		"message": "Šis ir Salesforce $org nosaukums, kurā tiks rādīts šis $tab. Ja atstāsiet tukšu, šis $tab tiks rādīts katrā Salesforce $org, ko apmeklējat.",
+		"message": "Šis ir Salesforce $org nosaukums kurā tiks rādīts šis $tab Ja atstāsiet tukšu šis $tab tiks rādīts katrā Salesforce $org ko apmeklējat",
 		"description": "[manage-tabs] paskaidrot, kas ir Tab Org"
 	},
 	"help_tab_url": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs saglabāti.",
 		"description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
-	},
-	"the_current_page": {
-		"message": "pašreizējā lapa",
-		"description": "[placeholder] izmanto citi teksti"
 	},
 	"theme_dark": {
 		"message": "Mainīt motīvu uz tumšu",

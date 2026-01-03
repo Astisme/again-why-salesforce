@@ -816,7 +816,7 @@
 		"description": "[nãoÉConfiguraçãoDoSalesforce] uma URL que não é válida"
 	},
 	"nss_not_setup_page": {
-		"message": "Esta não é uma página de Configuração do $salesforce_lightning.",
+		"message": "Esta não é uma página de Configuração do $salesforce_lightning",
 		"description": "[notSalesforceSetup] o usuário não está em uma página do Salesforce."
 	},
 	"open_here": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs salvas.",
 		"description": "[toast] As Tabs foram armazenadas com sucesso."
-	},
-	"the_current_page": {
-		"message": "a página atual",
-		"description": "[placeholder] usado por outros textos"
 	},
 	"theme_dark": {
 		"message": "Mudar Tema para Escuro",

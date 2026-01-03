@@ -627,7 +627,7 @@
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
 	"help_allow_domains": {
-		"message": "Wenn diese Option aktiviert ist, siehst du deine $tabs, sobald du $salesforce_setup startest",
+		"message": "Wenn diese Option aktiviert ist siehst du deine $tabs sobald du $salesforce_setup startest",
 		"description": "[Einstellungs-Hilfe] für die optionale Berechtigung, die es uns ermöglicht, bereit zu sein, sobald $salesforce_setup geöffnet wird"
 	},
 	"help_allow_export": {
@@ -699,7 +699,7 @@
 		"description": "[manage-tabs] Erklärung, was das Tab-Label ist"
 	},
 	"help_tab_org": {
-		"message": "Dies ist der Name der Salesforce $org, in der dieser $tab angezeigt wird. Wenn das Feld leer bleibt, wird dieser $tab in jeder Salesforce $org angezeigt, die Sie besuchen.",
+		"message": "Dies ist der Name der Salesforce $org in der dieser $tab angezeigt wird Wenn das Feld leer bleibt wird dieser $tab in jeder Salesforce $org angezeigt die Sie besuchen",
 		"description": "[manage-tabs] Erklärung, was die Tab-Org ist"
 	},
 	"help_tab_url": {
@@ -847,15 +847,15 @@
 		"description": "[Einstellung] optionale Berechtigung zum Ausführen der Erweiterungen, wenn der Benutzer $salesforce_setup besucht"
 	},
 	"opt_allow_export": {
-		"message": "Erlaube $extension_label, deine $tabs zu exportieren, wenn du dies anforderst.",
+		"message": "Erlaube $extension_label deine $tabs zu exportieren wenn du dies anforderst",
 		"description": "[Einstellung] optionale Berechtigung, die es uns ermöglicht, die Tab des Benutzers zu exportieren"
 	},
 	"opt_automatic_open_login": {
-		"message": "Öffnen Sie die $salesforce_login-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich nicht auf einer Salesforce-Seite befinden.",
+		"message": "Öffnen Sie die $salesforce_login Seite automatisch wenn Sie auf das Popup klicken während Sie sich nicht auf einer Salesforce Seite befinden",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer zufälligen Website befindet"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Öffnen Sie die $salesforce_setup-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich auf einer Salesforce-Seite befinden.",
+		"message": "Öffnen Sie die $salesforce_setup Seite automatisch wenn Sie auf das Popup klicken während Sie sich auf einer Salesforce Seite befinden",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer Salesforce-Website befindet"
 	},
 	"opt_confirm_save": {
@@ -887,11 +887,11 @@
 		"description": "[Einstellung] Ermöglicht dem Benutzer zu verhindern, dass die Erweiterung nach neuen Versionen sucht"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Öffnen Sie die $salesforce_login-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
+		"message": "Öffnen Sie die $salesforce_login Seite immer im selben Tab wenn Sie auf das Popup klicken",
 		"description": "[Einstellung]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Öffnen Sie die $salesforce_setup-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
+		"message": "Öffnen Sie die $salesforce_setup Seite immer im selben Tab wenn Sie auf das Popup klicken",
 		"description": "[Einstellung]"
 	},
 	"opt_pick_language": {
@@ -995,11 +995,11 @@
 		"description": "[req_permission] Beschriftung, wenn der Benutzer dauerhaft nicht gefragt werden möchte"
 	},
 	"req_permissions_header": {
-		"message": "Bitte erlauben Sie uns den automatischen Zugriff\nauf $salesforce_setup-Seiten.",
+		"message": "Bitte erlauben Sie uns den automatischen Zugriff\nauf $salesforce_setup Seiten",
 		"description": "[req_permission] Kopfzeile der Seite zur Anforderung von Berechtigungen"
 	},
 	"req_permissions_paragraph": {
-		"message": "Wenn Sie möchten, können Ihre bevorzugten Tabs\nangezeigt werden, sobald Sie zu einer $salesforce_setup-Seite navigieren,\nohne jedes Mal auf diese Erweiterung klicken zu müssen.",
+		"message": "Wenn Sie möchten können Ihre bevorzugten Tabs\nangezeigt werden sobald Sie zu einer $salesforce_setup Seite navigieren\nohne jedes Mal auf diese Erweiterung klicken zu müssen",
 		"description": "[req_permission] Text zur Erläuterung, warum die Berechtigungen angefordert werden"
 	},
 	"required": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs gespeichert.",
 		"description": "[toast] Tabs wurden erfolgreich gespeichert."
-	},
-	"the_current_page": {
-		"message": "die aktuelle Seite",
-		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"theme_dark": {
 		"message": "Thema auf Dunkel wechseln",

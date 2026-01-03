@@ -644,7 +644,7 @@
 		"description": "[settings-help] dla $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Możesz zmienić kolejność swoich $tabs, używając kropek i przeciągając je.",
+		"message": "Możesz zmienić kolejność swoich $tabs używając kropek i przeciągając je",
 		"description": "[manage-tabs] wyjaśnienie, jak przeciągać Tab"
 	},
 	"help_keep_sort": {
@@ -696,11 +696,11 @@
 		"description": "[manage-tabs] wyjaśnienie, co zawiera strzałka po prawej stronie"
 	},
 	"help_tab_label": {
-		"message": "Jest to nazwa, której będziesz używać, aby zapamiętać, dokąd zaprowadzi Cię ta $tab.",
+		"message": "Jest to nazwa której będziesz używać aby zapamiętać dokąd zaprowadzi Cię ta $tab",
 		"description": "[manage-tabs] wyjaśnienie, czym jest etykieta Tab"
 	},
 	"help_tab_org": {
-		"message": "Jest to nazwa Salesforce $org, w której ta $tab będzie wyświetlana. Jeśli pozostanie puste, ta $tab będzie wyświetlana w każdej odwiedzanej przez Ciebie organizacji Salesforce $org.",
+		"message": "Jest to nazwa Salesforce $org w której ta $tab będzie wyświetlana Jeśli pozostanie puste ta $tab będzie wyświetlana w każdej odwiedzanej przez Ciebie organizacji Salesforce $org",
 		"description": "[manage-tabs] wyjaśnienie, czym jest Tab Org"
 	},
 	"help_tab_url": {
@@ -816,7 +816,7 @@
 		"description": "[nieDotyczyKonfiguracjiSalesforce] nieprawidłowy adres URL"
 	},
 	"nss_not_setup_page": {
-		"message": "To nie jest strona konfiguracji $salesforce_lightning.",
+		"message": "To nie jest strona konfiguracji $salesforce_lightning",
 		"description": "[notSalesforceSetup] użytkownik nie znajduje się na stronie Salesforce."
 	},
 	"open_here": {
@@ -996,11 +996,11 @@
 		"description": "[prośba_o_uprawnienia] etykieta, gdy użytkownik nie chce trwale zezwolić na uprawnienia"
 	},
 	"req_permissions_header": {
-		"message": "Zezwól nam na automatyczny dostęp\ndo stron $salesforce_setup.",
+		"message": "Zezwól nam na automatyczny dostęp\ndo stron $salesforce_setup",
 		"description": "[req_permission] nagłówek strony z prośbą o uprawnienia"
 	},
 	"req_permissions_paragraph": {
-		"message": "Jeśli chcesz, możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup,\nbez konieczności klikania tego rozszerzenia za każdym razem.",
+		"message": "Jeśli chcesz możesz wyświetlać ulubione Tabs\nzaraz po przejściu na stronę $salesforce_setup\nbez konieczności klikania tego rozszerzenia za każdym razem",
 		"description": "[req_permission] tekst wyjaśniający, dlaczego wymagane są uprawnienia"
 	},
 	"required": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs zapisano.",
 		"description": "[toast] Tabs zostały pomyślnie zapisane."
-	},
-	"the_current_page": {
-		"message": "bieżąca strona",
-		"description": "[placeholder] używany przez inne teksty"
 	},
 	"theme_dark": {
 		"message": "Zmień motyw na ciemny",

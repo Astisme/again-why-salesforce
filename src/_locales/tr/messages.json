@@ -1044,7 +1044,7 @@
 		"description": "[modal] dışa aktarma modunda tüm Tabs'leri seçme düğmesi"
 	},
 	"select_tabs": {
-		"message": "Hangi $tabs'ı istediğinizi seçin",
+		"message": "Hangi $tabs ı istediğinizi seçin",
 		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
 	},
 	"select_tabs_export": {
@@ -1332,11 +1332,11 @@
 		"description": "[izin_iste] izinlere izin VERMEME düğmesi"
 	},
 	"style_generic_pinned": {
-		"message": "Sabitlenmiş $generic_tabs-ın Stili",
+		"message": "Sabitlenmiş $generic_tabs ın Stili",
 		"description": "[seçenekler] Sabitlenmiş genel Tab-ları stilize etmek için anahtar etiketi"
 	},
 	"style_org_pinned": {
-		"message": "Sabitlenmiş $org_tabs-ın Stili",
+		"message": "Sabitlenmiş $org_tabs ın Stili",
 		"description": "[seçenekler] Sabitlenmiş org Tab-ları stilize etmek için anahtar etiketi"
 	},
 	"style_settings_background_label": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs kaydedildi.",
 		"description": "[bildirim] Tabs başarıyla saklandı."
-	},
-	"the_current_page": {
-		"message": "mevcut sayfa",
-		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"theme_dark": {
 		"message": "Temayı Koyu Olarak Değiştir",

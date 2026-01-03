@@ -816,7 +816,7 @@
 		"description": "[siUsanidiWaSalesforce] URL ambayo si sahihi"
 	},
 	"nss_not_setup_page": {
-		"message": "Hii si ukurasa wa Mipangilio ya $salesforce_lightning.",
+		"message": "Hii si ukurasa wa Mipangilio ya $salesforce_lightning",
 		"description": "[notSalesforceSetup] mtumiaji hayuko kwenye ukurasa wa Salesforce."
 	},
 	"open_here": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs zimehifadhiwa.",
 		"description": "[toast] Tabs zimehifadhiwa kwa mafanikio."
-	},
-	"the_current_page": {
-		"message": "ukurasa wa sasa",
-		"description": "[placeholder] hutumiwa na maandishi mengine"
 	},
 	"theme_dark": {
 		"message": "Badilisha Mandhari kuwa Giza",

@@ -628,11 +628,11 @@
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
 	"help_allow_domains": {
-		"message": "Ha engedélyezve van, a $tabs elemeit azonnal láthatja, amint elindítja a $salesforce_setup-ot",
+		"message": "Ha engedélyezve van a $tabs elemeit azonnal láthatja amint elindítja a $salesforce_setup ot",
 		"description": "[beállítások-súgó] az opcionális engedélyhez, amely lehetővé teszi számunkra, hogy készen álljunk a $salesforce_setup megnyitásakor"
 	},
 	"help_allow_export": {
-		"message": "Ha engedélyezve van, $export-álhatja a $tabs elemeit, és a számítógépén tarthatja őket.",
+		"message": "Ha engedélyezve van $export álhatja a $tabs elemeit és a számítógépén tarthatja őket",
 		"description": "[beállítások-súgó] az opcionális engedélyhez, amely lehetővé teszi számunkra a Tab letöltését a felhasználó gépére"
 	},
 	"help_automatic_open_login": {
@@ -644,7 +644,7 @@
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "A pontok segítségével és húzással átrendezheti a $tabs-ait.",
+		"message": "A pontok segítségével és húzással átrendezheti a $tabs ait",
 		"description": "[manage-tabs] elmagyarázza, hogyan kell húzni a Tab-ot"
 	},
 	"help_keep_sort": {
@@ -692,19 +692,19 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Itt talál egy almenüt a sorban lévő $tab-on végrehajtható különböző műveletekhez.",
+		"message": "Itt talál egy almenüt a sorban lévő $tab on végrehajtható különböző műveletekhez",
 		"description": "[manage-tabs] elmagyarázza, mit tartalmaz a jobb oldali nyíl"
 	},
 	"help_tab_label": {
-		"message": "Ez az a név, amellyel megjegyzi, hová viszi önt ez a $tab.",
+		"message": "Ez az a név amellyel megjegyzi hová viszi önt ez a $tab",
 		"description": "[manage-tabs] elmagyarázza, mi a Tab címkéje"
 	},
 	"help_tab_org": {
-		"message": "Ez annak a Salesforce $org-nak a neve, ahol ez a $tab megjelenik. Ha üresen hagyja, a $tab minden Salesforce $org-ban megjelenik, amelyet meglátogat.",
+		"message": "Ez annak a Salesforce $org nak a neve ahol ez a $tab megjelenik Ha üresen hagyja a $tab minden Salesforce $org ban megjelenik amelyet meglátogat",
 		"description": "[manage-tabs] elmagyarázza, mi a Tab Org"
 	},
 	"help_tab_url": {
-		"message": "Ez az a (rövidített) link, ahová a rendszer átirányítja, ha erre a $tab-ra kattint",
+		"message": "Ez az a rövidített link ahová a rendszer átirányítja ha erre a $tab ra kattint",
 		"description": "[manage-tabs] elmagyarázza, mi a Tab URL-je"
 	},
 	"help_tip_click_link": {
@@ -788,7 +788,7 @@
 		"description": "[modal-title] modális ablak a mentett $tabs kezeléséhez szerkeszthető mezőkkel és átrendezéssel"
 	},
 	"manage_tabs_explainer": {
-		"message": "Szerkessze, rendezze át és kezelje mentett $tabs-ait közvetlenül ebből az ablakból. Húzza a sorokat az átrendezéshez, vagy használja a legördülő menüt további műveletekhez.",
+		"message": "Szerkessze rendezze át és kezelje mentett $tabs ait közvetlenül ebből az ablakból Húzza a sorokat az átrendezéshez vagy használja a legördülő menüt további műveletekhez",
 		"description": "[modal-explainer] elmagyarázza a fülkezelő modális ablak funkcióit"
 	},
 	"must_non_empty_str": {
@@ -1044,7 +1044,7 @@
 		"description": "[modal] gomb az összes Tab kiválasztására az exportáló modálban"
 	},
 	"select_tabs": {
-		"message": "Válassza ki, mely $tabs-t szeretné",
+		"message": "Válassza ki mely $tabs t szeretné",
 		"description": "[import] lehetővé teszi a felhasználó számára, hogy kiválassza, mely $tabs-t importálja az importálás előtt"
 	},
 	"select_tabs_export": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "A Tabok elmentve.",
 		"description": "[toast] A Tabok sikeresen el lettek mentve."
-	},
-	"the_current_page": {
-		"message": "az aktuális oldal",
-		"description": "[placeholder] más szövegek által használt"
 	},
 	"theme_dark": {
 		"message": "Téma váltás Sötétre",

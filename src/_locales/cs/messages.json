@@ -700,7 +700,7 @@
 		"description": "[manage-tabs] vysvětlení, co je štítek Tab"
 	},
 	"help_tab_org": {
-		"message": "Toto je název Salesforce $org, kde se tato $tab zobrazí. Pokud zůstane prázdné, tato $tab se zobrazí v každé Salesforce $org, kterou navštívíte.",
+		"message": "Toto je název Salesforce $org kde se tato $tab zobrazí Pokud zůstane prázdné tato $tab se zobrazí v každé Salesforce $org kterou navštívíte",
 		"description": "[manage-tabs] vysvětlení, co je Tab Org"
 	},
 	"help_tab_url": {
@@ -816,7 +816,7 @@
 		"description": "[neníNastaveníSalesforce] neplatná URL adresa"
 	},
 	"nss_not_setup_page": {
-		"message": "Toto není stránka nastavení $salesforce_lightning.",
+		"message": "Toto není stránka nastavení $salesforce_lightning",
 		"description": "[notSalesforceSetup] uživatel není na stránce Salesforce."
 	},
 	"open_here": {
@@ -848,7 +848,7 @@
 		"description": "[nastavení] volitelné oprávnění ke spuštění rozšíření, když uživatel navštíví $salesforce_setup"
 	},
 	"opt_allow_export": {
-		"message": "Povolit $extension_label exportovat vaše $tabs, když o to požádáte.",
+		"message": "Povolit $extension_label exportovat vaše $tabs když o to požádáte",
 		"description": "[nastavení] volitelné oprávnění, které nám umožní exportovat Tab uživatele"
 	},
 	"opt_automatic_open_login": {
@@ -996,11 +996,11 @@
 		"description": "[req_permission] popisek, když uživatel nechce trvale povolit oprávnění"
 	},
 	"req_permissions_header": {
-		"message": "Povolte nám prosím automatický přístup\nke stránkám $salesforce_setup.",
+		"message": "Povolte nám prosím automatický přístup\nke stránkám $salesforce_setup",
 		"description": "[req_permission] záhlaví stránky pro vyžádání oprávnění"
 	},
 	"req_permissions_paragraph": {
-		"message": "Pokud chcete, můžete si nechat zobrazit své oblíbené Tabs\njakmile přejdete na stránku $salesforce_setup,\naniž byste museli pokaždé klikat na toto rozšíření.",
+		"message": "Pokud chcete můžete si nechat zobrazit své oblíbené Tabs\njakmile přejdete na stránku $salesforce_setup\naniž byste museli pokaždé klikat na toto rozšíření",
 		"description": "[req_permission] text vysvětlující, proč jsou oprávnění požadována"
 	},
 	"required": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Taby uloženy.",
 		"description": "[toast] Taby byly úspěšně uloženy."
-	},
-	"the_current_page": {
-		"message": "aktuální stránka",
-		"description": "[placeholder] používáno jinými texty"
 	},
 	"theme_dark": {
 		"message": "Změnit téma na tmavé",

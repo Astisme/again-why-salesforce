@@ -1430,10 +1430,6 @@
 		"message": "Tabs सहेजे गए।",
 		"description": "[toast] Tabs सफलतापूर्वक सहेजे गए।"
 	},
-	"the_current_page": {
-		"message": "वर्तमान पृष्ठ",
-		"description": "[placeholder] अन्य ग्रंथों द्वारा प्रयुक्त"
-	},
 	"theme_dark": {
 		"message": "डार्क थीम में बदलें",
 		"description": "[popup] थीम बदलने के लिए चाँद पर शीर्षक"

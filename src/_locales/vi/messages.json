@@ -815,7 +815,7 @@
 		"description": "[khôngPhảiThiếtLậpSalesforce] một URL không hợp lệ"
 	},
 	"nss_not_setup_page": {
-		"message": "Đây không phải là trang Thiết lập $salesforce_lightning.",
+		"message": "Đây không phải là trang Thiết lập $salesforce_lightning",
 		"description": "[notSalesforceSetup] người dùng không ở trên trang Salesforce."
 	},
 	"open_here": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Đã lưu các Tabs.",
 		"description": "[toast] Các Tabs đã được lưu thành công."
-	},
-	"the_current_page": {
-		"message": "trang hiện tại",
-		"description": "[placeholder] được sử dụng bởi các văn bản khác"
 	},
 	"theme_dark": {
 		"message": "Chuyển sang Giao diện Tối",

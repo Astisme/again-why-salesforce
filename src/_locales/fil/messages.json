@@ -84,7 +84,7 @@
 		"description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
 	},
 	"confirm_update_extension": {
-		"message": "Available na ngayon ang bagong bersyon ng $extension_label!",
+		"message": "Available na ngayon ang bagong bersyon ng $extension_label",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
 	},
 	"continue": {
@@ -632,7 +632,7 @@
 		"description": "[settings-help] para sa opsyonal na pahintulot upang paganahin kaming maging handa sa sandaling buksan ang $salesforce_setup"
 	},
 	"help_allow_export": {
-		"message": "Kapag naka-enable, magagawa mong i-$export ang iyong $tabs at panatilihin ang mga ito sa iyong computer.",
+		"message": "Kapag naka enable magagawa mong i export ang iyong $tabs at panatilihin ang mga ito sa iyong computer",
 		"description": "[settings-help] para sa opsyonal na pahintulot upang paganahin kaming i-download ang mga Tab sa machine ng gumagamit"
 	},
 	"help_automatic_open_login": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Nai-save ang mga Tabs.",
 		"description": "[toast] Matagumpay na naimbak ang mga Tabs."
-	},
-	"the_current_page": {
-		"message": "ang kasalukuyang page",
-		"description": "[placeholder] ginagamit ng iba pang mga teksto"
 	},
 	"theme_dark": {
 		"message": "Palitan ang Tema sa Madilim",

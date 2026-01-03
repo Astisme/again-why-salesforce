@@ -1431,10 +1431,6 @@
 		"message": "Tabs ተቀምጠዋል።",
 		"description": "[ቶስት] Tabs በተሳካ ሁኔታ ተከማችተዋል።"
 	},
-	"the_current_page": {
-		"message": "አሁን ያለው ገጽ",
-		"description": "[placeholder] በሌሎች ጽሑፎች ጥቅም ላይ የዋለ"
-	},
 	"theme_dark": {
 		"message": "ገጽታን ወደ ጨለማ ቀይር",
 		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በጨረቃ ላይ ያለ ርዕስ"

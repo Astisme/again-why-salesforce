@@ -696,11 +696,11 @@
 		"description": "[manage-tabs] explica què conté la fletxa de la dreta"
 	},
 	"help_tab_label": {
-		"message": "Aquest és el nom comú que utilitzareu per recordar on us portarà aquesta $tab.",
+		"message": "Aquest és el nom comú que utilitzareu per recordar on us portarà aquesta $tab",
 		"description": "[manage-tabs] explica què és l'etiqueta de la Tab"
 	},
 	"help_tab_org": {
-		"message": "Aquest és el nom de la Salesforce $org on es mostrarà aquesta $tab. Si es deixa buit, aquesta $tab es mostrarà a cada Salesforce $org que visiteu.",
+		"message": "Aquest és el nom de la Salesforce $org on es mostrarà aquesta $tab Si es deixa buit aquesta $tab es mostrarà a cada Salesforce $org que visiteu",
 		"description": "[manage-tabs] explica què és l'Org de la Tab"
 	},
 	"help_tab_url": {
@@ -816,7 +816,7 @@
 		"description": "[noÉsConfiguracióDeSalesforce] una URL que no és vàlida"
 	},
 	"nss_not_setup_page": {
-		"message": "Aquesta no és una pàgina de configuració de $salesforce_lightning.",
+		"message": "Aquesta no és una pàgina de configuració de $salesforce_lightning",
 		"description": "[notSalesforceSetup] l'usuari no es troba en una pàgina de Salesforce."
 	},
 	"open_here": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs desats.",
 		"description": "[toast] els Tabs s'han desat amb èxit."
-	},
-	"the_current_page": {
-		"message": "la pàgina actual",
-		"description": "[placeholder] utilitzat per altres textos"
 	},
 	"theme_dark": {
 		"message": "Canviar Tema a Fosc",

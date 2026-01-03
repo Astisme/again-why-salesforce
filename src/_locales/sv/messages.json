@@ -816,7 +816,7 @@
 		"description": "[inteSalesforceSetup] en ogiltig URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Detta är inte en $salesforce_lightning-installationssida.",
+		"message": "Detta är inte en $salesforce_lightning installationssida",
 		"description": "[notSalesforceSetup] användaren är inte på en Salesforce-sida."
 	},
 	"open_here": {
@@ -852,11 +852,11 @@
 		"description": "[inställning] valfritt tillstånd för att låta oss exportera användarens Tab"
 	},
 	"opt_automatic_open_login": {
-		"message": "Öppna $salesforce_login-sidan automatiskt när du klickar på popup-fönstret när du inte är på en Salesforce-sida.",
+		"message": "Öppna $salesforce_login sidan automatiskt när du klickar på popup fönstret när du inte är på en Salesforce sida",
 		"description": "[inställning] när användaren öppnar popup-fönstret på en slumpmässig webbplats"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Öppna $salesforce_setup-sidan automatiskt när du klickar på popup-fönstret när du är på en Salesforce-sida.",
+		"message": "Öppna $salesforce_setup sidan automatiskt när du klickar på popup fönstret när du är på en Salesforce sida",
 		"description": "[inställning] när användaren öppnar popup-fönstret på en Salesforce-webbplats"
 	},
 	"opt_confirm_save": {
@@ -888,11 +888,11 @@
 		"description": "[inställning] låter användaren förhindra tillägget från att söka efter nya versioner"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Öppna alltid $salesforce_login-sidan i samma Tab när du klickar på popup-fönstret.",
+		"message": "Öppna alltid $salesforce_login sidan i samma Tab när du klickar på popup fönstret",
 		"description": "[inställning]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Öppna alltid $salesforce_setup-sidan i samma Tab när du klickar på popup-fönstret.",
+		"message": "Öppna alltid $salesforce_setup sidan i samma Tab när du klickar på popup fönstret",
 		"description": "[inställning]"
 	},
 	"opt_pick_language": {
@@ -996,11 +996,11 @@
 		"description": "[req_permission] etikett när användaren inte vill ge behörigheter permanent"
 	},
 	"req_permissions_header": {
-		"message": "Tillåt oss att automatiskt komma åt\n$salesforce_setup-sidor.",
+		"message": "Tillåt oss att automatiskt komma åt\n$salesforce_setup sidor",
 		"description": "[req_permission] sidhuvud på sidan för att begära behörigheter"
 	},
 	"req_permissions_paragraph": {
-		"message": "Om du vill kan du visa dina favorit-Tabs\nså snart du navigerar till en $salesforce_setup-sida\nutan att behöva klicka på det här tillägget varje gång.",
+		"message": "Om du vill kan du visa dina favorit Tabs\nså snart du navigerar till en $salesforce_setup sida\nutan att behöva klicka på det här tillägget varje gång",
 		"description": "[req_permission] text som förklarar varför behörigheterna begärs"
 	},
 	"required": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabbar sparade.",
 		"description": "[toast] Tabbar sparades framgångsrikt."
-	},
-	"the_current_page": {
-		"message": "den aktuella sidan",
-		"description": "[placeholder] används av andra texter"
 	},
 	"theme_dark": {
 		"message": "Byt tema till mörkt",

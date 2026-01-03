@@ -632,7 +632,7 @@
 		"description": "[seadete abi] valikulise loa saamiseks, mis võimaldab meil olla valmis kohe pärast $salesforce_setup avamist"
 	},
 	"help_allow_export": {
-		"message": "Kui see on lubatud, saate oma $tabs $export-ida ja hoida neid oma arvutis.",
+		"message": "Kui see on lubatud saate oma $tabs $export ida ja hoida neid oma arvutis",
 		"description": "[seadete abi] valikulise loa saamiseks, mis võimaldab meil Tab kasutaja masinasse alla laadida"
 	},
 	"help_automatic_open_login": {
@@ -692,7 +692,7 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Siit leiate alammenüü samas reas oleva $tab-iga erinevate toimingute tegemiseks.",
+		"message": "Siit leiate alammenüü samas reas oleva $tab iga erinevate toimingute tegemiseks",
 		"description": "[manage-tabs] selgitus, mida parempoolne nool sisaldab"
 	},
 	"help_tab_label": {
@@ -700,11 +700,11 @@
 		"description": "[manage-tabs] selgitus, mis on Tabi silt"
 	},
 	"help_tab_org": {
-		"message": "See on Salesforce'i $org nimi, kus seda $tab-i näidatakse. Kui see jääb tühjaks, kuvatakse seda $tab-i igas Salesforce'i $org-is, mida külastate.",
+		"message": "See on Salesforce i $org nimi kus seda $tab i näidatakse Kui see jääb tühjaks kuvatakse seda $tab i igas Salesforce i $org is mida külastate",
 		"description": "[manage-tabs] selgitus, mis on Tabi Org"
 	},
 	"help_tab_url": {
-		"message": "See on (lühendatud) link, kuhu teid suunatakse sellele $tab-ile klõpsates",
+		"message": "See on lühendatud link kuhu teid suunatakse sellele $tab ile klõpsates",
 		"description": "[manage-tabs] selgitus, mis on Tabi URL"
 	},
 	"help_tip_click_link": {
@@ -848,7 +848,7 @@
 		"description": "[seadistus] valikuline luba laienduste käivitamiseks, kui kasutaja külastab $salesforce_setup"
 	},
 	"opt_allow_export": {
-		"message": "Luba $extension_label eksportida oma $tabs, kui seda soovid.",
+		"message": "Luba $extension_label eksportida oma $tabs kui seda soovid",
 		"description": "[seadistus] valikuline luba, mis võimaldab meil eksportida kasutaja Tab"
 	},
 	"opt_automatic_open_login": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs salvestatud.",
 		"description": "[teavitus] Tabs salvestati edukalt."
-	},
-	"the_current_page": {
-		"message": "praegune leht",
-		"description": "[placeholder] kasutatud teistes tekstides"
 	},
 	"theme_dark": {
 		"message": "Muuda teema tumedaks",

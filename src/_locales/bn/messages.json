@@ -691,7 +691,7 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "এখানে আপনি একই সারিতে থাকা $tab-এ বিভিন্ন ক্রিয়াকলাপ সম্পাদন করার জন্য একটি সাবমেনু পাবেন।",
+		"message": "এখানে আপনি একই সারিতে থাকা $tab এ বিভিন্ন ক্রিয়াকলাপ সম্পাদন করার জন্য একটি সাবমেনু পাবেন",
 		"description": "[manage-tabs] ডানদিকের তীরটিতে কী আছে তার ব্যাখ্যা"
 	},
 	"help_tab_label": {
@@ -699,11 +699,11 @@
 		"description": "[manage-tabs] Tab লেবেল কী তার ব্যাখ্যা"
 	},
 	"help_tab_org": {
-		"message": "এটি সেই Salesforce $org নাম যেখানে এই $tab প্রদর্শিত হবে। খালি রাখা হলে, এই $tab আপনার পরিদর্শন করা প্রতিটি Salesforce $org-এ প্রদর্শিত হবে।",
+		"message": "এটি সেই Salesforce $org নাম যেখানে এই $tab প্রদর্শিত হবে খালি রাখা হলে এই $tab আপনার পরিদর্শন করা প্রতিটি Salesforce $org এ প্রদর্শিত হবে",
 		"description": "[manage-tabs] Tab Org কী তার ব্যাখ্যা"
 	},
 	"help_tab_url": {
-		"message": "এটি সেই (সংক্ষিপ্ত) লিঙ্ক যেখানে এই $tab-এ ক্লিক করলে আপনাকে পুনঃনির্দেশিত করা হবে",
+		"message": "এটি সেই সংক্ষিপ্ত লিঙ্ক যেখানে এই $tab এ ক্লিক করলে আপনাকে পুনঃনির্দেশিত করা হবে",
 		"description": "[manage-tabs] Tab URL কী তার ব্যাখ্যা"
 	},
 	"help_tip_click_link": {
@@ -843,11 +843,11 @@
 		"description": "[settings] ব্যবহারকারীকে সামনে সমস্ত নতুন Tabs যুক্ত করার অনুমতি দিন"
 	},
 	"opt_allow_domains": {
-		"message": "আপনি যখন Salesforce পৃষ্ঠাগুলি ভিজিট করবেন, তখন $extension_label-কে সেগুলি অ্যাক্সেস করার অনুমতি দিন।",
+		"message": "আপনি যখন Salesforce পৃষ্ঠাগুলি ভিজিট করবেন তখন $extension_label কে সেগুলি অ্যাক্সেস করার অনুমতি দিন",
 		"description": "[সেটিং] ব্যবহারকারী যখন $salesforce_setup ভিজিট করবেন তখন এক্সটেনশনগুলি চালানোর ঐচ্ছিক অনুমতি"
 	},
 	"opt_allow_export": {
-		"message": "আপনার অনুরোধে $extension_label-কে আপনার $tabs এক্সপোর্ট করার অনুমতি দিন।",
+		"message": "আপনার অনুরোধে $extension_label কে আপনার $tabs এক্সপোর্ট করার অনুমতি দিন",
 		"description": "[সেটিং] ব্যবহারকারীর Tab এক্সপোর্ট করার জন্য আমাদের সক্ষম করতে ঐচ্ছিক অনুমতি"
 	},
 	"opt_automatic_open_login": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs সংরক্ষিত হয়েছে",
 		"description": "[toast] Tabs সফলভাবে সংরক্ষিত হয়েছে"
-	},
-	"the_current_page": {
-		"message": "বর্তমান পৃষ্ঠাটি",
-		"description": "[placeholder] অন্যান্য টেক্সট দ্বারা ব্যবহৃত"
 	},
 	"theme_dark": {
 		"message": "ডার্ক থিমে পরিবর্তন করুন",

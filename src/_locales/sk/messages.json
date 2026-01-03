@@ -700,7 +700,7 @@
 		"description": "[manage-tabs] vysvetlenie, čo je štítok Tab"
 	},
 	"help_tab_org": {
-		"message": "Toto je názov Salesforce $org, kde sa tento $tab zobrazí. Ak zostane prázdne, tento $tab sa zobrazí v každej Salesforce $org, ktorú navštívite.",
+		"message": "Toto je názov Salesforce $org kde sa tento $tab zobrazí Ak zostane prázdne tento $tab sa zobrazí v každej Salesforce $org ktorú navštívite",
 		"description": "[manage-tabs] vysvetlenie, čo je Tab Org"
 	},
 	"help_tab_url": {
@@ -816,7 +816,7 @@
 		"description": "[nieJeNastavenieSalesforce] neplatná URL adresa"
 	},
 	"nss_not_setup_page": {
-		"message": "Toto nie je stránka nastavenia $salesforce_lightning.",
+		"message": "Toto nie je stránka nastavenia $salesforce_lightning",
 		"description": "[notSalesforceSetup] používateľ sa nenachádza na stránke Salesforce."
 	},
 	"open_here": {
@@ -848,7 +848,7 @@
 		"description": "[nastavenie] voliteľné povolenie na spustenie rozšírení, keď používateľ navštívi $salesforce_setup"
 	},
 	"opt_allow_export": {
-		"message": "Povoliť $extension_label exportovať vaše $tabs, keď o to požiadate.",
+		"message": "Povoliť $extension_label exportovať vaše $tabs keď o to požiadate",
 		"description": "[nastavenie] voliteľné povolenie, ktoré nám umožní exportovať Tab používateľa"
 	},
 	"opt_automatic_open_login": {
@@ -996,7 +996,7 @@
 		"description": "[req_permission] označenie, keď používateľ nechce trvalo udeliť oprávnenia"
 	},
 	"req_permissions_header": {
-		"message": "Povoľte nám, prosím, automatický prístup\nk stránkam $salesforce_setup.",
+		"message": "Povoľte nám, prosím, automatický prístup\nk stránkam $salesforce_setup",
 		"description": "[req_permission] hlavička stránky na vyžiadanie povolení"
 	},
 	"req_permissions_paragraph": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tab-y boli uložené.",
 		"description": "[toast] Tab-y boli úspešne uložené."
-	},
-	"the_current_page": {
-		"message": "aktuálna stránka",
-		"description": "[placeholder] používané inými textami"
 	},
 	"theme_dark": {
 		"message": "Prepni tému na tmavú",

@@ -1430,10 +1430,6 @@
 		"message": "Tabs ಉಳಿಸಲಾಗಿದೆ.",
 		"description": "[ಟೋಸ್ಟ್] Tabs ಯಶಸ್ವಿಯಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"
 	},
-	"the_current_page": {
-		"message": "ಪ್ರಸ್ತುತ ಪುಟ",
-		"description": "[placeholder] ಇತರ ಪಠ್ಯಗಳಿಂದ ಬಳಸಲಾಗಿದೆ"
-	},
 	"theme_dark": {
 		"message": "ಡಾರ್ಕ್ ಥೀಮ್ ಗೆ ಬದಲಾಯಿಸಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ಥೀಮ್ ಬದಲಿಸಲು ಚಂದಿರ ಚಿತ್ರ ಶೀರ್ಷಿಕೆ"

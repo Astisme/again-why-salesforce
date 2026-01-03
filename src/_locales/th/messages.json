@@ -1431,10 +1431,6 @@
 		"message": "Tabs saved.",
 		"description": "[toast] บันทึก Tab เรียบร้อยแล้ว"
 	},
-	"the_current_page": {
-		"message": "หน้าปัจจุบัน",
-		"description": "[placeholder] ใช้โดยข้อความอื่น ๆ"
-	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] หัวข้อบนรูปพระจันทร์สำหรับสลับธีม"

@@ -815,7 +815,7 @@
 		"description": "[n'estPasUneConfigurationSalesforce] une URL qui n'est pas valide"
 	},
 	"nss_not_setup_page": {
-		"message": "Ceci n'est pas une page de configuration $salesforce_lightning.",
+		"message": "Ceci n'est pas une page de configuration $salesforce_lightning",
 		"description": "[notSalesforceSetup] l'utilisateur n'est pas sur une page Salesforce."
 	},
 	"open_here": {
@@ -995,7 +995,7 @@
 		"description": "[req_permission] Étiquette lorsque l'utilisateur ne souhaite plus être sollicité"
 	},
 	"req_permissions_header": {
-		"message": "Veuillez nous autoriser à accéder\nautomatiquement aux pages $salesforce_setup.",
+		"message": "Veuillez nous autoriser à accéder\nautomatiquement aux pages $salesforce_setup",
 		"description": "[req_permission] en-tête de la page pour demander des autorisations"
 	},
 	"req_permissions_paragraph": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs enregistrés.",
 		"description": "[toast] Les Tabs ont été enregistrés avec succès."
-	},
-	"the_current_page": {
-		"message": "la page actuelle",
-		"description": "[placeholder] utilisé par d'autres textes"
 	},
 	"theme_dark": {
 		"message": "Changer le thème en Sombre",

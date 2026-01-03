@@ -1431,10 +1431,6 @@
 		"message": "Tabs ذخیره شد.",
 		"description": "[اعلان_کوتاه] Tabs با موفقیت ذخیره شدند."
 	},
-	"the_current_page": {
-		"message": "صفحه فعلی",
-		"description": "[placeholder] استفاده شده توسط متون دیگر"
-	},
 	"theme_dark": {
 		"message": "تغییر پوسته به تیره",
 		"description": "[پنجره_بازشو] عنوان روی ماه برای تغییر پوسته"

@@ -1430,10 +1430,6 @@
 		"message": "Tabs जतन झाली.",
 		"description": "[toast] Tabs यशस्वीरित्या जतन झाली."
 	},
-	"the_current_page": {
-		"message": "वर्तमान पृष्ठ",
-		"description": "[placeholder] इतर ग्रंथांद्वारे वापरलेले"
-	},
 	"theme_dark": {
 		"message": "Dark थीममध्ये बदला",
 		"description": "[popup] थीम बदलण्यासाठी चंद्रावरचे शीर्षक"

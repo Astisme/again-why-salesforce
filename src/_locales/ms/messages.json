@@ -1431,10 +1431,6 @@
 		"message": "Tabs disimpan.",
 		"description": "[toast] Tabs berjaya disimpan."
 	},
-	"the_current_page": {
-		"message": "halaman semasa",
-		"description": "[placeholder] digunakan oleh teks lain"
-	},
 	"theme_dark": {
 		"message": "Tukar Tema kepada Gelap",
 		"description": "[popup] tajuk pada bulan untuk menukar tema"

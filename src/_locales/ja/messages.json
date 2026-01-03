@@ -240,7 +240,7 @@
 		"description": "[popup] 行を削除する"
 	},
 	"delete_all": {
-		"message": "すべてのTabsを$delete",
+		"message": "すべてのTabsを $delete",
 		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"
 	},
 	"descending": {
@@ -627,11 +627,11 @@
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
 	"help_allow_domains": {
-		"message": "有効にすると、$salesforce_setup を起動するとすぐに $tabs を表示できるようになります。",
+		"message": "有効にすると $salesforce_setup を起動するとすぐに $tabs を表示できるようになります",
 		"description": "[設定ヘルプ] $salesforce_setup が開かれたらすぐに準備ができるようにするためのオプションの権限"
 	},
 	"help_allow_export": {
-		"message": "有効にすると、$tabs を $export してコンピューターに保存できるようになります。",
+		"message": "有効にすると $tabs を $export してコンピューターに保存できるようになります",
 		"description": "[設定ヘルプ] ユーザーのデバイスに Tab をダウンロードできるようにするためのオプションの権限"
 	},
 	"help_automatic_open_login": {
@@ -643,7 +643,7 @@
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "ドットを使用してドラッグすることで、$tabs の順序を入れ替えることができます。",
+		"message": "ドットを使用してドラッグすることで $tabs の順序を入れ替えることができます",
 		"description": "[manage-tabs] Tab のドラッグ方法についての説明"
 	},
 	"help_keep_sort": {
@@ -747,7 +747,7 @@
 		"description": "[モーダルタイトル] インポート処理用"
 	},
 	"import_title": {
-		"message": "JSONファイルから$import_tabs",
+		"message": "JSONファイルから $import_tabs",
 		"description": "[ポップアップ] インポートボタンのタイトル"
 	},
 	"inactive": {
@@ -843,7 +843,7 @@
 		"description": "[settings] ユーザーがすべての新しいTabsを先頭に追加できるようにする"
 	},
 	"opt_allow_domains": {
-		"message": "Salesforce ページにアクセスしたときに、$extension_label がそれらにアクセスすることを許可します。",
+		"message": "Salesforce ページにアクセスしたときに $extension_label がそれらにアクセスすることを許可します",
 		"description": "[設定] ユーザーが $salesforce_setup を開いているときに拡張機能を実行するためのオプションの権限"
 	},
 	"opt_allow_export": {
@@ -851,11 +851,11 @@
 		"description": "[設定] ユーザーの Tab をエクスポートできるようにするためのオプションの権限"
 	},
 	"opt_automatic_open_login": {
-		"message": "Salesforceページにいないときにポップアップをクリックすると、$salesforce_loginページを自動的に開きます。",
+		"message": "Salesforceページにいないときにポップアップをクリックすると $salesforce_login ページを自動的に開きます",
 		"description": "[設定] ユーザーがランダムなウェブサイトでポップアップを開いたとき"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Salesforceページにいるときにポップアップをクリックすると、$salesforce_setupページを自動的に開きます。",
+		"message": "Salesforceページにいるときにポップアップをクリックすると $salesforce_setup ページを自動的に開きます",
 		"description": "[設定] ユーザーがSalesforceウェブサイトでポップアップを開いたとき"
 	},
 	"opt_confirm_save": {
@@ -887,11 +887,11 @@
 		"description": "[設定] ユーザーが拡張機能で新しいリリースを検索できないようにします"
 	},
 	"opt_open_login_same_tab": {
-		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_loginページを開きます。",
+		"message": "ポップアップをクリックすると 常に同じTabで $salesforce_login ページを開きます",
 		"description": "[設定]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_setupページを開きます。",
+		"message": "ポップアップをクリックすると 常に同じTabで $salesforce_setup ページを開きます",
 		"description": "[設定]"
 	},
 	"opt_pick_language": {
@@ -923,7 +923,7 @@
 		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
 	},
 	"or_drop": {
-		"message": "または$drop",
+		"message": "または $drop",
 		"description": "[インポート] ユーザーがマウスでファイルを移動してドロップできるようにする"
 	},
 	"org": {
@@ -995,11 +995,11 @@
 		"description": "[req_permission] 常に許可しない場合のラベル"
 	},
 	"req_permissions_header": {
-		"message": "$salesforce_setupページへの\n自動アクセスを許可してください。",
+		"message": "$salesforce_setup ページへの\n自動アクセスを許可してください",
 		"description": "[req_permission] 権限を要求するページのヘッダー"
 	},
 	"req_permissions_paragraph": {
-		"message": "必要に応じて、$salesforce_setupページに移動するとすぐに\nお気に入りのTabsを表示できます。\n毎回この拡張機能をクリックする必要はありません。",
+		"message": "必要に応じて $salesforce_setup ページに移動するとすぐに\nお気に入りのTabsを表示できます\n毎回この拡張機能をクリックする必要はありません",
 		"description": "[req_permission] 権限が要求される理由を説明するテキスト"
 	},
 	"required": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs が保存されました。",
 		"description": "[toast] Tabs が正常に保存されました。"
-	},
-	"the_current_page": {
-		"message": "現在のページ",
-		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"theme_dark": {
 		"message": "ダークテーマに変更する",

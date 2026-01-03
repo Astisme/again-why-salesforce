@@ -1431,10 +1431,6 @@
 		"message": "Tabs saved.",
 		"description": "[toast] Tab સફળતાપૂર્વક સ્ટોર થયાં"
 	},
-	"the_current_page": {
-		"message": "વર્તમાન પૃષ્ઠ",
-		"description": "[placeholder] અન્ય ટેક્સ્ટ દ્વારા વપરાયેલ"
-	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] થીમ સ્વિચ કરવા માટે ચંદ્રમાની ટાઇટલ"

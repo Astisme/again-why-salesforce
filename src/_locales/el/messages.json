@@ -696,11 +696,11 @@
 		"description": "[manage-tabs] εξήγηση για το τι περιέχει το βέλος στα δεξιά"
 	},
 	"help_tab_label": {
-		"message": "Αυτό είναι το κοινό όνομα που θα χρησιμοποιήσετε για να θυμάστε πού θα σας οδηγήσει αυτή η $tab.",
+		"message": "Αυτό είναι το κοινό όνομα που θα χρησιμοποιήσετε για να θυμάστε πού θα σας οδηγήσει αυτή η $tab",
 		"description": "[manage-tabs] εξήγηση για το τι είναι η ετικέτα Tab"
 	},
 	"help_tab_org": {
-		"message": "Αυτό είναι το όνομα του Salesforce $org όπου θα εμφανίζεται αυτή η $tab. Εάν μείνει κενό, αυτή η $tab θα εμφανίζεται σε κάθε Salesforce $org που επισκέπτεστε.",
+		"message": "Αυτό είναι το όνομα του Salesforce $org όπου θα εμφανίζεται αυτή η $tab Εάν μείνει κενό αυτή η $tab θα εμφανίζεται σε κάθε Salesforce $org που επισκέπτεστε",
 		"description": "[manage-tabs] εξήγηση για το τι είναι το Tab Org"
 	},
 	"help_tab_url": {
@@ -816,7 +816,7 @@
 		"description": "[δενΕίναιΡύθμισηSalesforce] ένα μη έγκυρο URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Αυτή δεν είναι σελίδα Ρύθμισης $salesforce_lightning.",
+		"message": "Αυτή δεν είναι σελίδα Ρύθμισης $salesforce_lightning",
 		"description": "[notSalesforceSetup] ο χρήστης δεν βρίσκεται σε σελίδα Salesforce."
 	},
 	"open_here": {
@@ -996,7 +996,7 @@
 		"description": "[αίτηση-άδειας] ετικέτα όταν ο χρήστης δεν θέλει να επιτρέπει μόνιμα τις άδειες"
 	},
 	"req_permissions_header": {
-		"message": "Παρακαλώ επιτρέψτε μας την αυτόματη πρόσβαση\nστις σελίδες $salesforce_setup.",
+		"message": "Παρακαλώ επιτρέψτε μας την αυτόματη πρόσβαση\nστις σελίδες $salesforce_setup",
 		"description": "[req_permission] κεφαλίδα της σελίδας για αίτηση δικαιωμάτων"
 	},
 	"req_permissions_paragraph": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Τα Tab αποθηκεύτηκαν.",
 		"description": "[σημείωμα] Τα Tab αποθηκεύτηκαν με επιτυχία."
-	},
-	"the_current_page": {
-		"message": "την τρέχουσα σελίδα",
-		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"theme_dark": {
 		"message": "Αλλαγή Θέματος σε Σκοτεινό",

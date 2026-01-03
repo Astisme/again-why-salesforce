@@ -815,7 +815,7 @@
 		"description": "[bukanSetupSalesforce] URL yang tidak valid"
 	},
 	"nss_not_setup_page": {
-		"message": "Ini bukan halaman Pengaturan $salesforce_lightning.",
+		"message": "Ini bukan halaman Pengaturan $salesforce_lightning",
 		"description": "[notSalesforceSetup] pengguna tidak berada di halaman Salesforce."
 	},
 	"open_here": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs tersimpan.",
 		"description": "[toast] Tabs berhasil disimpan."
-	},
-	"the_current_page": {
-		"message": "halaman saat ini",
-		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"theme_dark": {
 		"message": "Ubah Tema ke Gelap",

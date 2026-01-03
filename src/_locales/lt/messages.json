@@ -692,15 +692,15 @@
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
 	"help_tab_actions": {
-		"message": "Čia rasite papildomą meniu, skirtą atlikti įvairius veiksmus su tos pačios eilutės $tab.",
+		"message": "Čia rasite papildomą meniu skirtą atlikti įvairius veiksmus su tos pačios eilutės $tab",
 		"description": "[manage-tabs] paaiškinti, kas yra dešinėje esančioje rodyklėje"
 	},
 	"help_tab_label": {
-		"message": "Tai yra įprastas pavadinimas, kurį naudosite norėdami prisiminti, kur nuves šis $tab.",
+		"message": "Tai yra įprastas pavadinimas kurį naudosite norėdami prisiminti kur nuves šis $tab",
 		"description": "[manage-tabs] paaiškinti, kas yra Tab etiketė"
 	},
 	"help_tab_org": {
-		"message": "Tai yra „Salesforce“ $org pavadinimas, kuriame bus rodomas šis $tab. Jei paliksite tuščią, šis $tab bus rodomas kiekviename „Salesforce“ $org, kuriame lankysitės.",
+		"message": "Tai yra „Salesforce“ $org pavadinimas kuriame bus rodomas šis $tab Jei paliksite tuščią šis $tab bus rodomas kiekviename „Salesforce“ $org kuriame lankysitės",
 		"description": "[manage-tabs] paaiškinti, kas yra Tab Org"
 	},
 	"help_tab_url": {
@@ -848,7 +848,7 @@
 		"description": "[nustatymas] papildomas leidimas paleisti plėtinius, kai naudotojas lankosi $salesforce_setup"
 	},
 	"opt_allow_export": {
-		"message": "Leisti $extension_label eksportuoti jūsų $tabs, kai to paprašysite.",
+		"message": "Leisti $extension_label eksportuoti jūsų $tabs kai to paprašysite",
 		"description": "[nustatymas] papildomas leidimas, leidžiantis mums eksportuoti naudotojo Tab"
 	},
 	"opt_automatic_open_login": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs išsaugoti.",
 		"description": "[pranešimas] Tabs sėkmingai išsaugoti."
-	},
-	"the_current_page": {
-		"message": "dabartinis puslapis",
-		"description": "[placeholder] naudojamas kituose tekstuose"
 	},
 	"theme_dark": {
 		"message": "Keisti temą į tamsią",

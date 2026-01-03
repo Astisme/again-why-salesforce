@@ -643,7 +643,7 @@
 		"description": "[settings-help] для $opt_automatic_open_setup"
 	},
 	"help_drag_tabs": {
-		"message": "Вы можете изменить порядок ваших $tabs, используя точки и перетаскивая их.",
+		"message": "Вы можете изменить порядок ваших $tabs используя точки и перетаскивая их",
 		"description": "[manage-tabs] объяснение того, как перетаскивать Tab"
 	},
 	"help_keep_sort": {
@@ -695,11 +695,11 @@
 		"description": "[manage-tabs] объяснение того, что содержит стрелка справа"
 	},
 	"help_tab_label": {
-		"message": "Это общее название, которое вы будете использовать, чтобы помнить, куда вас приведет этот $tab.",
+		"message": "Это общее название которое вы будете использовать чтобы помнить куда вас приведет этот $tab",
 		"description": "[manage-tabs] объяснение того, что такое метка Tab"
 	},
 	"help_tab_org": {
-		"message": "Это название организации Salesforce $org, в которой будет отображаться этот $tab. Если оставить поле пустым, этот $tab будет отображаться в каждой организации Salesforce $org, которую вы посещаете.",
+		"message": "Это название организации Salesforce $org в которой будет отображаться этот $tab Если оставить поле пустым этот $tab будет отображаться в каждой организации Salesforce $org которую вы посещаете",
 		"description": "[manage-tabs] объяснение того, что такое Tab Org"
 	},
 	"help_tab_url": {
@@ -815,7 +815,7 @@
 		"description": "[неНастройкаSalesforce] недействительный URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Это не страница настройки $salesforce_lightning.",
+		"message": "Это не страница настройки $salesforce_lightning",
 		"description": "[notSalesforceSetup] пользователь не находится на странице Salesforce."
 	},
 	"open_here": {
@@ -995,11 +995,11 @@
 		"description": "[req_permission] Метка, когда пользователь не хочет, чтобы его спрашивали постоянно"
 	},
 	"req_permissions_header": {
-		"message": "Пожалуйста, разрешите нам автоматический доступ\nк страницам $salesforce_setup.",
+		"message": "Пожалуйста, разрешите нам автоматический доступ\nк страницам $salesforce_setup",
 		"description": "[req_permission] заголовок страницы для запроса разрешений"
 	},
 	"req_permissions_paragraph": {
-		"message": "Если хотите, вы можете отображать свои любимые Tabs\nсразу после перехода на страницу $salesforce_setup,\nне нажимая каждый раз это расширение.",
+		"message": "Если хотите вы можете отображать свои любимые Tabs\nсразу после перехода на страницу $salesforce_setup\nне нажимая каждый раз это расширение",
 		"description": "[req_permission] текст, объясняющий, почему запрашиваются разрешения"
 	},
 	"required": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs сохранены",
 		"description": "[toast] Tabs успешно сохранены"
-	},
-	"the_current_page": {
-		"message": "текущая страница",
-		"description": "[placeholder] используется другими текстами"
 	},
 	"theme_dark": {
 		"message": "Переключить тему на Тёмную",

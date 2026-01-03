@@ -644,7 +644,7 @@
 		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
 	},
 	"help_drag_tabs": {
-		"message": "您可以使用点并拖动来重新排序您的 $tabs。",
+		"message": "您可以使用点并拖动来重新排序您的 $tabs",
 		"description": "[manage-tabs] 说明如何拖动 Tab"
 	},
 	"help_keep_sort": {
@@ -788,7 +788,7 @@
 		"description": "[modal-title] 用于管理保存的 $tabs 的模态框，具有可编辑字段和拖动重排序功能"
 	},
 	"manage_tabs_explainer": {
-		"message": "直接从此模态框编辑、重新排序和管理您保存的 $tabs。拖动行以重新排序，或使用下拉菜单执行更多操作。",
+		"message": "直接从此模态框编辑 重新排序和管理您保存的 $tabs 拖动行以重新排序 或使用下拉菜单执行更多操作",
 		"description": "[modal-explainer] 解释管理标签页模态框的功能"
 	},
 	"must_non_empty_str": {
@@ -848,7 +848,7 @@
 		"description": "[设置] 当用户访问 $salesforce_setup 时运行扩展程序的可选权限"
 	},
 	"opt_allow_export": {
-		"message": "允许 $extension_label 在您请求时导出您的 $tabs。",
+		"message": "允许 $extension_label 在您请求时导出您的 $tabs",
 		"description": "[设置] 可选权限，允许我们导出用户的 Tab"
 	},
 	"opt_automatic_open_login": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs 已保存。",
 		"description": "[提示信息] Tabs 已成功存储。"
-	},
-	"the_current_page": {
-		"message": "当前页面",
-		"description": "[placeholder] 由其他文本使用"
 	},
 	"theme_dark": {
 		"message": "切换主题为深色",

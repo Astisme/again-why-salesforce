@@ -632,7 +632,7 @@
 		"description": "[instellingen-help] voor optionele toestemming om ons in staat te stellen klaar te zijn zodra $salesforce_setup wordt geopend"
 	},
 	"help_allow_export": {
-		"message": "Indien ingeschakeld, kunt u uw $tabs $export-eren en op uw computer bewaren.",
+		"message": "Indien ingeschakeld kunt u uw $tabs $export eren en op uw computer bewaren",
 		"description": "[instellingen-help] voor optionele toestemming om ons in staat te stellen de Tab op de computer van de gebruiker te downloaden"
 	},
 	"help_automatic_open_login": {
@@ -852,11 +852,11 @@
 		"description": "[instelling] optionele toestemming om ons in staat te stellen de Tab van de gebruiker te exporteren"
 	},
 	"opt_automatic_open_login": {
-		"message": "Open automatisch de $salesforce_login-pagina wanneer u op de pop-up klikt terwijl u niet op een Salesforce-pagina bent.",
+		"message": "Open automatisch de $salesforce_login pagina wanneer u op de pop up klikt terwijl u niet op een Salesforce pagina bent",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een willekeurige website is"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Open automatisch de $salesforce_setup-pagina wanneer u op de pop-up klikt terwijl u op een Salesforce-pagina bent.",
+		"message": "Open automatisch de $salesforce_setup pagina wanneer u op de pop up klikt terwijl u op een Salesforce pagina bent",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een Salesforce-website is"
 	},
 	"opt_confirm_save": {
@@ -888,11 +888,11 @@
 		"description": "[instelling] laat de gebruiker voorkomen dat de extensie naar nieuwe releases zoekt"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Open de $salesforce_login-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
+		"message": "Open de $salesforce_login pagina altijd in dezelfde Tab wanneer u op de pop up klikt",
 		"description": "[instelling]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Open de $salesforce_setup-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
+		"message": "Open de $salesforce_setup pagina altijd in dezelfde Tab wanneer u op de pop up klikt",
 		"description": "[instelling]"
 	},
 	"opt_pick_language": {
@@ -996,11 +996,11 @@
 		"description": "[req_toestemming] label wanneer de gebruiker geen permanente toestemming wil geven"
 	},
 	"req_permissions_header": {
-		"message": "Sta ons alstublieft toe om automatisch\ntoe te treden tot $salesforce_setup-pagina's.",
+		"message": "Sta ons alstublieft toe om automatisch\ntoe te treden tot $salesforce_setup pagina s",
 		"description": "[req_permission] kop van de pagina om toestemmingen aan te vragen"
 	},
 	"req_permissions_paragraph": {
-		"message": "Als u wilt, kunt u uw favoriete Tabs laten verschijnen\nzodra u naar een $salesforce_setup-pagina navigeert\nzonder elke keer op deze extensie te hoeven klikken.",
+		"message": "Als u wilt kunt u uw favoriete Tabs laten verschijnen\nzodra u naar een $salesforce_setup pagina navigeert\nzonder elke keer op deze extensie te hoeven klikken",
 		"description": "[req_permission] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
 	},
 	"required": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "Tabs opgeslagen.",
 		"description": "[toast] Tabs zijn succesvol opgeslagen."
-	},
-	"the_current_page": {
-		"message": "de huidige pagina",
-		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"theme_dark": {
 		"message": "Thema wijzigen naar Donker",

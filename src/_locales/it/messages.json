@@ -631,7 +631,7 @@
 		"description": "[aiuto-impostazioni] per l'autorizzazione facoltativa che ci consente di essere pronti non appena viene aperto $salesforce_setup"
 	},
 	"help_allow_export": {
-		"message": "Se abilitato, potrai eseguire l'$export dei tuoi $tabs e conservarli sul tuo computer.",
+		"message": "Se abilitato, potrai eseguire l'esportazione dei tuoi $tabs e conservarli sul tuo computer.",
 		"description": "[aiuto-impostazioni] per l'autorizzazione facoltativa che ci consente di scaricare i Tab sul computer dell'utente"
 	},
 	"help_automatic_open_login": {
@@ -695,11 +695,11 @@
 		"description": "[manage-tabs] spiega cosa contiene la freccia a destra"
 	},
 	"help_tab_label": {
-		"message": "Questo è il nome comune che userai per ricordare dove ti porterà questa $tab.",
+		"message": "Questo è il nome comune che userai per ricordare dove ti porterà questa $tab",
 		"description": "[manage-tabs] spiega cos'è l'etichetta della Tab"
 	},
 	"help_tab_org": {
-		"message": "Questo è il nome della Salesforce $org in cui verrà mostrata questa $tab. Se lasciato vuoto, questa $tab verrà mostrata in ogni Salesforce $org che visiti.",
+		"message": "Questo è il nome della Salesforce $org in cui verrà mostrata questa $tab Se lasciato vuoto, questa $tab verrà mostrata in ogni Salesforce $org che visiti.",
 		"description": "[manage-tabs] spiega cos'è l'Org della Tab"
 	},
 	"help_tab_url": {
@@ -815,7 +815,7 @@
 		"description": "[notSalesforceSetup] un URL che non è valido"
 	},
 	"nss_not_setup_page": {
-		"message": "Questa non è una pagina di configurazione di $salesforce_lightning.",
+		"message": "Questa non è una pagina di configurazione di $salesforce_lightning",
 		"description": "[notSalesforceSetup] l'utente non si trova su una pagina Salesforce."
 	},
 	"open_here": {
@@ -928,7 +928,7 @@
 	},
 	"org": {
 		"message": "Org",
-		"description": "[key] l'$org Salesforce della Tab"
+		"description": "[key] $org Salesforce della Tab"
 	},
 	"org_link": {
 		"message": "Link Org",
@@ -995,7 +995,7 @@
 		"description": "[req_permission] etichetta quando l'utente non vuole concedere le autorizzazioni in modo permanente"
 	},
 	"req_permissions_header": {
-		"message": "Consentici di accedere\nautomaticamente alle pagine $salesforce_setup.",
+		"message": "Consentici di accedere\nautomaticamente alle pagine $salesforce_setup",
 		"description": "[req_permission] intestazione della pagina per richiedere le autorizzazioni"
 	},
 	"req_permissions_paragraph": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tab salvate.",
 		"description": "[toast] le Tab sono state salvate con successo."
-	},
-	"the_current_page": {
-		"message": "la pagina attuale",
-		"description": "[placeholder] utilizzato da altri testi"
 	},
 	"theme_dark": {
 		"message": "Cambia Tema in Scuro",

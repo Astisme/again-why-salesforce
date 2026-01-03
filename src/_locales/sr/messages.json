@@ -1431,10 +1431,6 @@
 		"message": "Tabovi sačuvani.",
 		"description": "[toast] Tabovi su uspešno sačuvani."
 	},
-	"the_current_page": {
-		"message": "тренутна страница",
-		"description": "[placeholder] користи се другим текстовима"
-	},
 	"theme_dark": {
 		"message": "Promeni temu u tamnu",
 		"description": "[popup] naslov ikone meseca za promenu teme"

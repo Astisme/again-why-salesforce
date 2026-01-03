@@ -695,11 +695,11 @@
 		"description": "[manage-tabs] explica qué contiene la flecha de la derecha"
 	},
 	"help_tab_label": {
-		"message": "Este es el nombre común que usarás para recordar a dónde te llevará esta $tab.",
+		"message": "Este es el nombre común que usarás para recordar a dónde te llevará esta $tab",
 		"description": "[manage-tabs] explica qué es la etiqueta de la Tab"
 	},
 	"help_tab_org": {
-		"message": "Este es el nombre de la Salesforce $org donde se mostrará esta $tab. Si se deja vacío, esta $tab se mostrará en cada Salesforce $org que visites.",
+		"message": "Este es el nombre de la Salesforce $org donde se mostrará esta $tab Si se deja vacío esta $tab se mostrará en cada Salesforce $org que visites",
 		"description": "[manage-tabs] explica qué es la Org de la Tab"
 	},
 	"help_tab_url": {
@@ -815,7 +815,7 @@
 		"description": "[notSalesforceSetup] una URL que no es válida"
 	},
 	"nss_not_setup_page": {
-		"message": "Esta no es una página de Configuración de $salesforce_lightning.",
+		"message": "Esta no es una página de Configuración de $salesforce_lightning",
 		"description": "[notSalesforceSetup] el usuario no está en una página de Salesforce."
 	},
 	"open_here": {
@@ -995,7 +995,7 @@
 		"description": "[req_permission] Etiqueta cuando el usuario no desea que se le pregunte de forma permanente"
 	},
 	"req_permissions_header": {
-		"message": "Permítanos acceder automáticamente\na las páginas de $salesforce_setup.",
+		"message": "Permítanos acceder automáticamente\na las páginas de $salesforce_setup",
 		"description": "[req_permission] encabezado de la página para solicitar permisos"
 	},
 	"req_permissions_paragraph": {
@@ -1429,10 +1429,6 @@
 	"tabs_saved": {
 		"message": "Tabs guardados.",
 		"description": "[toast] Los Tabs se han guardado correctamente."
-	},
-	"the_current_page": {
-		"message": "la página actual",
-		"description": "[placeholder] utilizado por otros textos"
 	},
 	"theme_dark": {
 		"message": "Cambiar Tema a Oscuro",

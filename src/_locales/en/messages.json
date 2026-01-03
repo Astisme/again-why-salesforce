@@ -53,31 +53,31 @@
 	},
 	"cmd_export_all": {
 		"message": "Show the modal to export all saved $tabs",
-		"description": "[command description] the user wants to export all $tabs"
+		"description": "[command description] the user wants to export all $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_import": {
 		"message": "Show the modal to import new $tabs",
-		"description": "[command description] the user wants to import new $tabs"
+		"description": "[command description] the user wants to import new $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_open_other_org": {
-		"message": "Show the modal to open $the_current_page in another $org",
-		"description": "[command description] the user wants to open the current page in another $org"
+		"message": "Show the modal to open the current page in another $org",
+		"description": "[command description] the user wants to open the current page in another $org. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_remove_tab": {
-		"message": "Remove $the_current_page from the $tab list (if saved)",
-		"description": "[command description] the user wants to remove the current page"
+		"message": "Remove the current page from the $tab list (if saved)",
+		"description": "[command description] the user wants to remove the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_save_as_tab": {
-		"message": "Save $the_current_page in the $tab list (if not saved)",
-		"description": "[command description] the user wants to save the current page"
+		"message": "Save the current page in the $tab list (if not saved)",
+		"description": "[command description] the user wants to save the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_toggle_org": {
-		"message": "Toggle $the_current_page's $org value (if saved)",
-		"description": "[command description] the user wants to toggle the $org for the current page"
+		"message": "Toggle the current page's $org value (if saved)",
+		"description": "[command description] the user wants to toggle the $org for the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_update_tab": {
-		"message": "Show modal to update $the_current_page (if saved)",
-		"description": "[command description] the user wants to update the current page"
+		"message": "Show modal to update the current page (if saved)",
+		"description": "[command description] the user wants to update the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"confirm_another_org": {
 		"message": "Confirm opening this link.",
@@ -344,7 +344,7 @@
 		"description": "[error] the $tab is not valid"
 	},
 	"error_link_with_id": {
-		"message": "This page could not exist in another $org, because it contains an Id!",
+		"message": "This page could not exist in another $org because it contains an Id!",
 		"description": "[open-other-org-modal] warning for the user that the link may not exist in another $org"
 	},
 	"error_many_matching_tab": {
@@ -764,7 +764,7 @@
 		"description": "[error-open-other-org-modal] message for when the user inserts the same $org in the modal"
 	},
 	"insert_valid_org": {
-		"message": "Please insert a valid $org!",
+		"message": "Please insert a valid $org",
 		"description": "[error-open-other-org-modal] message for when the user inserts a wrong $url in the modal"
 	},
 	"italic": {
@@ -1430,10 +1430,6 @@
 	"tabs_saved": {
 		"message": "$tabs saved.",
 		"description": "[toast] $tabs were successfully stored."
-	},
-	"the_current_page": {
-		"message": "the current page",
-		"description": "[placeholder] used by other texts"
 	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
