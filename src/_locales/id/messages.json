@@ -235,10 +235,6 @@
 		"message": "🧹 Pembaruan Lainnya",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Hapus",
-		"description": "[popup] Menghapus satu baris"
-	},
 	"delete_all": {
 		"message": "$delete semua Tabs",
 		"description": "[popup] judul di tempat sampah untuk mengosongkan semua Tabs"

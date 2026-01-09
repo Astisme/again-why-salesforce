@@ -235,10 +235,6 @@
 		"message": "🧹 Outras Atualizações",
 		"description": "[menu-de-contexto]"
 	},
-	"delete": {
-		"message": "Excluir",
-		"description": "[popup] excluir uma linha"
-	},
 	"delete_all": {
 		"message": "$delete todas as Tabs",
 		"description": "[popup] título na lixeira para esvaziar todas as Tabs"

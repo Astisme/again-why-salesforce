@@ -235,10 +235,6 @@
 		"message": "🧹 Diğer Güncellemeler",
 		"description": "[bağlam-menüsü]"
 	},
-	"delete": {
-		"message": "Sil",
-		"description": "[açılır-pencere] bir satırı sil"
-	},
 	"delete_all": {
 		"message": "Tüm Tabs $delete",
 		"description": "[popup] tüm Tabs boşaltmak için çöp kutusundaki başlık"

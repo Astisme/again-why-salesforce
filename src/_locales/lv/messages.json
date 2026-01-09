@@ -235,10 +235,6 @@
 		"message": "🧹 Citi atjauninājumi",
 		"description": "[konteksta_izvēlne]"
 	},
-	"delete": {
-		"message": "Dzēst",
-		"description": "[uznirstošais_logs] dzēst rindu"
-	},
 	"delete_all": {
 		"message": "$delete visas Tabs",
 		"description": "[uznirstošais-logs] nosaukums miskastē, lai iztukšotu visas Tabs"

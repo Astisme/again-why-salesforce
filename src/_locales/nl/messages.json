@@ -235,10 +235,6 @@
 		"message": "🧹 Andere updates",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Verwijderen",
-		"description": "[popup] een rij verwijderen"
-	},
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[popup] titel op de prullenbak om alle Tabs te legen"

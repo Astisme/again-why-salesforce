@@ -235,10 +235,6 @@
 		"message": "🧹 Weitere Aktualisierungen",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Löschen",
-		"description": "[popup] Eine Zeile löschen"
-	},
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[Popup] Titel im Papierkorb, um alle Tabs zu leeren"

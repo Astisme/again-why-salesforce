@@ -235,10 +235,6 @@
 		"message": "🧹 Kemas kini Lain",
 		"description": "[menu-konteks]"
 	},
-	"delete": {
-		"message": "Padam",
-		"description": "[popup] padam satu baris"
-	},
 	"delete_all": {
 		"message": "$delete सर्व Tabs",
 		"description": "[पॉपअप] सर्व Tabs रिकामे करण्यासाठी बिनवरील शीर्षक"

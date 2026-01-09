@@ -235,10 +235,6 @@
 		"message": "🧹 Alte actualizări",
 		"description": "[meniu-contextual]"
 	},
-	"delete": {
-		"message": "Ștergeți",
-		"description": "[popup] ștergeți un rând"
-	},
 	"delete_all": {
 		"message": "$delete toate Tabs",
 		"description": "[fereastră-pop-up] titlu pe coșul de gunoi pentru a goli toate Tabs"

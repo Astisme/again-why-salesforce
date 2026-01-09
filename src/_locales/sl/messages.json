@@ -235,10 +235,6 @@
 		"message": "🧹 Druge posodobitve",
 		"description": "[kontekstni_meni]"
 	},
-	"delete": {
-		"message": "Izbriši",
-		"description": "[pojavno_okno] izbriši vrstico"
-	},
 	"delete_all": {
 		"message": "$delete vse Tabs",
 		"description": "[pojavno-okno] naslov na košu za izpraznitev vseh Tabs"

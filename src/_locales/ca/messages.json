@@ -235,10 +235,6 @@
 		"message": "🧹 Altres actualitzacions",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Esborrar",
-		"description": "[popup] esborrar una fila"
-	},
 	"delete_all": {
 		"message": "$delete totes les Tabs",
 		"description": "[finestra-emergent] títol a la paperera per buidar totes les Tabs"

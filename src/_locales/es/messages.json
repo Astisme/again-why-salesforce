@@ -235,10 +235,6 @@
 		"message": "🧹 Otras Actualizaciones",
 		"description": "[menú contextual]"
 	},
-	"delete": {
-		"message": "Eliminar",
-		"description": "[popup] Eliminar una fila"
-	},
 	"delete_all": {
 		"message": "$delete todas las Tabs",
 		"description": "[emergente] título en la papelera para vaciar todas las Tabs"

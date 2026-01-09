@@ -235,10 +235,6 @@
 		"message": "🧹 Andra uppdateringar",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Radera",
-		"description": "[popup] radera en rad"
-	},
 	"delete_all": {
 		"message": "$delete alla Tabs",
 		"description": "[popup] titel på papperskorgen för att tömma alla Tabs"

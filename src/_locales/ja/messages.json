@@ -235,10 +235,6 @@
 		"message": "🧹 その他の更新",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "削除する",
-		"description": "[popup] 行を削除する"
-	},
 	"delete_all": {
 		"message": "すべてのTabsを $delete",
 		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"

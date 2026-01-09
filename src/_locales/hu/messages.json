@@ -235,10 +235,6 @@
 		"message": "🧹 Egyéb frissítések",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Törlés",
-		"description": "[popup] sor törlése"
-	},
 	"delete_all": {
 		"message": "$delete az összes Tabs",
 		"description": "[felugró-ablak] cím a kukán az összes Tabs kiürítéséhez"

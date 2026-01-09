@@ -235,10 +235,6 @@
 		"message": "🧹 Ibang mga Update",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Burahin",
-		"description": "[popup] burahin ang isang row"
-	},
 	"delete_all": {
 		"message": "$delete lahat ng Tabs",
 		"description": "[popup] pamagat sa basurahan para alisan ng laman ang lahat ng Tabs"

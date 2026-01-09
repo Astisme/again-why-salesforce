@@ -235,10 +235,6 @@
 		"message": "🧹 Muud uuendused",
 		"description": "[kontekstimenüü]"
 	},
-	"delete": {
-		"message": "Kustuta",
-		"description": "[hüpikaken] kustuta rida"
-	},
 	"delete_all": {
 		"message": "$delete kõik Tabs",
 		"description": "[hüpikaken] prügikasti pealkiri kõigi Tabs tühjendamiseks"

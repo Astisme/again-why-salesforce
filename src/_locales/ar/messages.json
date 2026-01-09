@@ -235,10 +235,6 @@
 		"message": "🧹 تحديثات أخرى",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "حذف",
-		"description": "[popup] حذف صف"
-	},
 	"delete_all": {
 		"message": "$delete كل Tabs",
 		"description": "[نافذة منبثقة] عنوان على سلة المهملات لإفراغ كل Tabs"

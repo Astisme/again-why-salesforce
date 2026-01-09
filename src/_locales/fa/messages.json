@@ -235,10 +235,6 @@
 		"message": "🧹 به‌روزرسانی‌های دیگر",
 		"description": "[منوی_زمینه]"
 	},
-	"delete": {
-		"message": "حذف",
-		"description": "[پنجره_بازشو] حذف یک ردیف"
-	},
 	"delete_all": {
 		"message": "$delete همه Tabs",
 		"description": "[پنجره-بازشو] عنوان روی سطل زباله برای خالی کردن همه Tabs"

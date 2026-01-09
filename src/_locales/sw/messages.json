@@ -235,10 +235,6 @@
 		"message": "🧹 Masasisho Mengine",
 		"description": "[menu-ya-mukhtadha]"
 	},
-	"delete": {
-		"message": "Futa",
-		"description": "[ibukizi] futa safu"
-	},
 	"delete_all": {
 		"message": "$delete Tabs zote",
 		"description": "[ibukizi] kichwa kwenye pipa la taka ili kumwaga Tabs zote"

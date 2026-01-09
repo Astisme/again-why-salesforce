@@ -235,10 +235,6 @@
 		"message": "🧹 Altri Aggiornamenti",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Elimina",
-		"description": "[popup] elimina una riga"
-	},
 	"delete_all": {
 		"message": "$delete tutte le Tabs",
 		"description": "[popup] titolo sul cestino per svuotare tutte le Tabs"

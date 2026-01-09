@@ -235,10 +235,6 @@
 		"message": "🧹 Muut päivitykset",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Poista",
-		"description": "[popup] poista rivi"
-	},
 	"delete_all": {
 		"message": "$delete kaikki Tabs",
 		"description": "[ponnahdusikkuna] otsikko roskakorissa kaikkien Tabs tyhjentämiseksi"

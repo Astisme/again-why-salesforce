@@ -235,10 +235,6 @@
 		"message": "🧹 Các cập nhật khác",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Xóa",
-		"description": "[popup] Xóa một dòng"
-	},
 	"delete_all": {
 		"message": "$delete tất cả các Tab",
 		"description": "[popup] tiêu đề trên thùng rác để làm trống tất cả các Tab"

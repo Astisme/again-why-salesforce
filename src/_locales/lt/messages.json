@@ -235,10 +235,6 @@
 		"message": "🧹 Kiti atnaujinimai",
 		"description": "[kontekstinis_meniu]"
 	},
-	"delete": {
-		"message": "Ištrinti",
-		"description": "[iškylantysis_langas] ištrinti eilutę"
-	},
 	"delete_all": {
 		"message": "$delete visus Tabs",
 		"description": "[iškylantis-langas] pavadinimas šiukšliadėžėje, norint ištuštinti visus Tabs"

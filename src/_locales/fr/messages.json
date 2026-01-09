@@ -235,10 +235,6 @@
 		"message": "🧹 Autres mises à jour",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Supprimer",
-		"description": "[popup] Supprimer une ligne"
-	},
 	"delete_all": {
 		"message": "$delete tous les Tabs",
 		"description": "[popup] titre sur la corbeille pour vider tous les Tabs"

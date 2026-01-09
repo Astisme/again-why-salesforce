@@ -235,10 +235,6 @@
 		"message": "🧹 其他更新",
 		"description": "[上下文菜单]"
 	},
-	"delete": {
-		"message": "删除",
-		"description": "[弹出窗口] 删除一行"
-	},
 	"delete_all": {
 		"message": "$delete 所有 Tab",
 		"description": "[弹出窗口] 回收站上用于清空所有 Tab 的标题"

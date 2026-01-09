@@ -235,10 +235,6 @@
 		"message": "🧹 Inne aktualizacje",
 		"description": "[menu-kontekstowe]"
 	},
-	"delete": {
-		"message": "Usuń",
-		"description": "[popup] usuń wiersz"
-	},
 	"delete_all": {
 		"message": "$delete wszystkie Tabs",
 		"description": "[wyskakujące-okienko] tytuł na koszu, aby opróżnić wszystkie Tabs"

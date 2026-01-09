@@ -235,10 +235,6 @@
 		"message": "🧹 Ostala ažuriranja",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Izbriši",
-		"description": "[popup] izbriši red"
-	},
 	"delete_all": {
 		"message": "$delete sve Tabs",
 		"description": "[skočni-prozor] naslov na kanti za pražnjenje svih Tabs"

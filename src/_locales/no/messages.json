@@ -235,10 +235,6 @@
 		"message": "🧹 Andre oppdateringer",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Slett",
-		"description": "[popup] slett en rad"
-	},
 	"delete_all": {
 		"message": "$delete alle Tabs",
 		"description": "[popup] tittel på papirkurven for å tømme alle Tabs"

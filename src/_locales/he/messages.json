@@ -235,10 +235,6 @@
 		"message": "🧹 עדכונים אחרים",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "מחק",
-		"description": "[popup] מחק שורה"
-	},
 	"delete_all": {
 		"message": "$delete את כל ה-Tabs",
 		"description": "[חלון-קופץ] כותרת על סל המיחזור לריקון כל ה-Tabs"

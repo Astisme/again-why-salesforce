@@ -235,10 +235,6 @@
 		"message": "🧹 其他更新",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "刪除",
-		"description": "[popup] 刪除一行"
-	},
 	"delete_all": {
 		"message": "$delete 所有 Tab",
 		"description": "[快顯視窗] 清除所有 Tab 的資源回收筒標題"

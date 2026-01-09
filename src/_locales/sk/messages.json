@@ -235,10 +235,6 @@
 		"message": "🧹 Ďalšie aktualizácie",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Vymazať",
-		"description": "[popup] vymazať riadok"
-	},
 	"delete_all": {
 		"message": "$delete všetky Tabs",
 		"description": "[vyskakovacie-okno] názov na koši na vyprázdnenie všetkých Tabs"
