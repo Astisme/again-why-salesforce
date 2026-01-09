@@ -64,6 +64,7 @@ To celebrate this even more, we're introducing the ability to have **pinned Tabs
 2. Updated css selector to check whether a Tab is pinned or not
 3. Heavily refactored `src/settigs/options.js`
 4. `dragHandler` now does not send messages, improving security
+5. Updated the Simple Analytics path, removing the unnecessary version which was moved to utm_source #125
 
 ### Popup
 
