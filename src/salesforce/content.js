@@ -1230,10 +1230,10 @@ async function checkInsertAnalytics() {
 		whereToAppend.appendChild(meta);
 	}
 	const img = document.createElement("img");
-    const apiUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
-    apiUrl.searchParams.set("hostname", "extension.again.whysalesforce");
-    apiUrl.searchParams.set("path", isNewUser ? "/new-user" : "/");
-    apiUrl.searchParams.set("utm_source", EXTENSION_VERSION);
+	const apiUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
+	apiUrl.searchParams.set("hostname", "extension.again.whysalesforce");
+	apiUrl.searchParams.set("path", isNewUser ? "/new-user" : "/");
+	apiUrl.searchParams.set("utm_source", EXTENSION_VERSION);
 	img.src = apiUrl;
 	img.alt = "";
 	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
