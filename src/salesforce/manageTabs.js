@@ -22,6 +22,7 @@ import {
 	reorderTabsUl,
 	showToast,
 } from "./content.js";
+import { HTMLButtonElement } from "happydom";
 
 let focusedIndex = 0;
 let managedLoggers = [];
@@ -326,6 +327,12 @@ function setInfoForDrag(element, listener, index) {
 	element.addEventListener("focusout", checkSaveTab);
 }
 
+/**
+ * Only for TDs; hides all non-hidden dropdowns except the one that's being clicked
+ * @param {event} e - the click event
+ * @param {HTMLButtonElement} button - the button which is the one being clicked
+ * @return undefined - nothing
+ */
 function closeDropdownOnTrClick(e, button) {
 	if (
 		e.target === button ||
@@ -342,6 +349,12 @@ function closeDropdownOnTrClick(e, button) {
 	}
 }
 
+/**
+ * Only for BUTTONs; hides all non-hidden dropdowns except the one that's being clicked
+ * @param {event} e - the click event
+ * @param {HTMLButtonElement} button - the button which is the one being clicked
+ * @return undefined - nothing
+ */
 function closeDropdownOnBtnClick(e, button) {
 	e.preventDefault();
 	if (e.target.tagName !== "BUTTON") {
@@ -693,8 +706,9 @@ function reduceLoggersToElements() {
 
 /**
  * Callback on reorder events
- * @param {Object} message the object created from the drag handler
- * @param {Object} scaffold the object with tbody and allTabs ready to be used
+ * @param {Object} [param0={}] message the object created from the drag handler
+ * @param {number} [param0.fromIndex=0] - the original index of the tr
+ * @param {number} [param0.toIndex=0] - the new index of the tr
  */
 function reorderTabsTable({
 	fromIndex = 0,
