@@ -29,9 +29,6 @@
 			"js": [
 				"salesforce/bundledContent.js"
 			],
-			"css": [
-				"components/help/help.css"
-			],
 			"run_at": "document_start",
 			"all_frames": false
 		}
@@ -42,7 +39,8 @@
 				"salesforce/lightning-navigation.js",
 				"assets/svgs/*.svg",
 				"assets/icons/*.png",
-				"_locales/*/messages.json"
+				"_locales/*/messages.json",
+				"components/help/help.css"
 			],
 			"matches": [
 				"*://*.my.salesforce-setup.com/*",

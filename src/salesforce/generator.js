@@ -2189,8 +2189,10 @@ export async function createManageTabRow({
 	tr.classList.add(
 		"slds-hint-parent",
 		EXTENSION_NAME,
-		isThisOrgTab ? undefined : HIDDEN_CLASS,
 	);
+	if (!isThisOrgTab) {
+		tr.classList.add(HIDDEN_CLASS);
+	}
 	tr.draggable = draggable;
 	tr.dataset.draggable = draggable;
 	tr.dataset.isThisOrgTab = isThisOrgTab;
@@ -2273,7 +2275,7 @@ export async function createManageTabRow({
 	dropdownMenu.style.flexDirection = "column";
 	// Open button
 	const openBtn = createStyledButton(
-		await translator.translate("open"),
+		await translator.translate("act_open"),
 		{ action: "open", tabIndex: index },
 	);
 	openBtn.addEventListener("click", handleLightningLinkClick);
@@ -2303,7 +2305,7 @@ export async function createManageTabRow({
 	dropdownMenu.appendChild(unpinBtn);
 	// Delete button
 	const deleteBtn = createStyledButton(
-		await translator.translate("delete"),
+		await translator.translate("act_delete"),
 		{ action: CXM_REMOVE_TAB, tabIndex: index },
 	);
 	deleteBtn.classList.add("delete-btn");
@@ -2315,10 +2317,6 @@ export async function createManageTabRow({
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		dropdownMenu.classList.toggle(HIDDEN_CLASS);
-	});
-	// Prevent dropdown from closing when clicking inside
-	dropdownMenu.addEventListener("click", (e) => {
-		e.preventDefault();
 	});
 	return {
 		tr,
@@ -2346,7 +2344,7 @@ export async function createManageTabRow({
  * @param {string} [options.title="manage_tabs"] - i18n key for modal title
  * @param {string} [options.saveButtonLabel="save"] - i18n key for save button label
  * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
- * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs)
+ * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs) + deleteAllTabsButton to remove the disabled attribute when needed
  */
 export async function generateManageTabsModal(tabs = [], {
 	title = "manage_tabs",
@@ -2460,14 +2458,28 @@ export async function generateManageTabsModal(tabs = [], {
 		showAllTabsButton.removeAttribute("disabled");
 		updateModalBodyOverflow(article);
 	});
+	// Create Delete All button
+	const deleteAllTabsButton = document.createElement("button");
+	// we should never set disabled=false due to chrome making the button disabled anyways
+	if (tabs.length < 1) {
+		deleteAllTabsButton.setAttribute("disabled", true);
+	}
+	deleteAllTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	deleteAllTabsButton.textContent = await translator.translate(
+		"delete_all",
+	);
+	buttonContainer.prepend(deleteAllTabsButton);
 	const loggers = []; // track input changes
-	const actionsMap = {}; // map to store action handlers for each row
 	// Create rows for all existing tabs
 	const allDropMenus = [];
 	const allTrs = [];
 	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
 	let notThisOrgTabs = 0;
-	for (let i = 0; i < tabs.length; i++) {
+	for (const i in tabs) {
 		const tab = tabs[i];
 		const isThisOrgTab = tab.org == null ||
 			tab.org === Tab.extractOrgName(getCurrentHref());
@@ -2485,25 +2497,10 @@ export async function generateManageTabsModal(tabs = [], {
 			disabled: false,
 			isThisOrgTab,
 		});
-		allTrs.push({ tr, dropdownButton });
+		allTrs.push({ tr, button: dropdownButton });
 		allDropMenus.push(dropdownMenu);
 		loggers.push(logger);
 		tbody.appendChild(tr);
-		// Store action handlers for this tab
-		actionsMap[i] = {
-			[CXM_PIN_TAB]: {
-				what: CXM_PIN_TAB,
-				...tab,
-			},
-			[CXM_UNPIN_TAB]: {
-				what: CXM_UNPIN_TAB,
-				...tab,
-			},
-			[CXM_REMOVE_TAB]: {
-				what: CXM_REMOVE_TAB,
-				...tab,
-			},
-		};
 	}
 	// disable the showAllTabsButton if needed
 	if (notThisOrgTabs <= 0) {
@@ -2518,27 +2515,19 @@ export async function generateManageTabsModal(tabs = [], {
 	} = await createManageTabRow({}, {
 		index: tabs.length,
 	});
-	allTrs.push({ tr: emptyRow, dropdownButton: lastButton });
+	allTrs.push({ tr: emptyRow, button: lastButton });
 	allDropMenus.push(lastMenu);
 	loggers.push(lastLogger);
 	tbody.appendChild(emptyRow);
-	// Close dropdown when clicking outside
-	for (const { tr, dropdownButton } of allTrs) {
-		tr.addEventListener("click", (e) => {
-			if (e.target !== dropdownButton) {
-				for (const dropdownMenu of allDropMenus) {
-					dropdownMenu.classList.add(HIDDEN_CLASS);
-				}
-			}
-		});
-	}
 	return {
 		modalParent,
 		closeButton,
 		tbody,
-		actionsMap,
 		saveButton,
 		loggers,
+		deleteAllTabsButton,
+		trsAndButtons: allTrs,
+		dropdownMenus: allDropMenus,
 	};
 }
 

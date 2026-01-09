@@ -1535,10 +1535,17 @@ function getAllTabs() {
 /**
  * Ensures availability of the TabContainer instance, initializing it if necessary.
  *
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {boolean} [param0.reset=false] - whether to reset the singleton to get fresh data
  * @return {Promise<TabContainer>} The TabContainer instance representing all tabs.
  */
-export async function ensureAllTabsAvailability() {
+export async function ensureAllTabsAvailability({
+	reset = false,
+} = {}) {
 	try {
+		if (reset) {
+			return await TabContainer._reset();
+		}
 		return getAllTabs();
 	} catch (e) {
 		console.info(e);

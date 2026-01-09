@@ -961,9 +961,6 @@ function listenToBackgroundPage() {
 					break;
 				case "warning":
 					showToast(message.message, false, true);
-					if (message.action === "make-bold") {
-						makeDuplicatesBold(message.url);
-					}
 					break;
 				case "error":
 					showToast(message.message, false);
