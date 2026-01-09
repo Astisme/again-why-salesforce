@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Verwijderen",
+		"description": "[Tab-beheren] een rij verwijderen"
+	},
+	"act_open": {
+		"message": "🪂 Openen",
+		"description": "[Tab-beheren] De geselecteerde Tab openen"
+	},
 	"actions": {
 		"message": "Acties",
 		"description": "Label van het vervolgkeuzemenu voor Tab-acties"
@@ -236,8 +244,8 @@
 		"description": "[context-menu]"
 	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[popup] titel op de prullenbak om alle Tabs te legen"
+		"message": "Alle $tabs verwijderen",
+		"description": "[popup] titel op de prullenbak om alle $tabs te legen"
 	},
 	"descending": {
 		"message": "Aflopend (Z-A)",

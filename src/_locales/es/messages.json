@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Eliminar",
+		"description": "[gestionar-Tab] eliminar una fila"
+	},
+	"act_open": {
+		"message": "🪂 Abrir",
+		"description": "[gestionar-Tab] Abrir la Tab seleccionada"
+	},
 	"actions": {
 		"message": "Acciones",
 		"description": "Etiqueta del menú desplegable para las acciones de la Tab"
@@ -236,8 +244,8 @@
 		"description": "[menú contextual]"
 	},
 	"delete_all": {
-		"message": "$delete todas las Tabs",
-		"description": "[emergente] título en la papelera para vaciar todas las Tabs"
+		"message": "Eliminar todas las $tabs",
+		"description": "[emergente] título en la papelera para vaciar todas las $tabs"
 	},
 	"descending": {
 		"message": "Descendente (Z-A)",

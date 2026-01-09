@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ I-delete",
+		"description": "[pamahalaan-ang-Tab] i-delete ang isang row"
+	},
+	"act_open": {
+		"message": "🪂 Buksan",
+		"description": "[pamahalaan-ang-Tab] Buksan ang piniling Tab"
+	},
 	"actions": {
 		"message": "Mga Aksyon",
 		"description": "Label ng dropdown menu para sa mga aksyon ng Tab"
@@ -236,8 +244,8 @@
 		"description": "[context-menu]"
 	},
 	"delete_all": {
-		"message": "$delete lahat ng Tabs",
-		"description": "[popup] pamagat sa basurahan para alisan ng laman ang lahat ng Tabs"
+		"message": "I-delete ang lahat ng $tabs",
+		"description": "[popup] pamagat sa bin para i-empty ang lahat ng $tabs"
 	},
 	"descending": {
 		"message": "Pababa (Z-A)",

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Usuń",
+		"description": "[zarządzaj-Tab] usuń wiersz"
+	},
+	"act_open": {
+		"message": "🪂 Otwórz",
+		"description": "[zarządzaj-Tab] Otwórz wybraną Tab"
+	},
 	"actions": {
 		"message": "Akcje",
 		"description": "Etykieta menu rozwijanego dla akcji Tab"
@@ -236,8 +244,8 @@
 		"description": "[menu-kontekstowe]"
 	},
 	"delete_all": {
-		"message": "$delete wszystkie Tabs",
-		"description": "[wyskakujące-okienko] tytuł na koszu, aby opróżnić wszystkie Tabs"
+		"message": "Usuń wszystkie $tabs",
+		"description": "[popup] tytuł na koszu, aby opróżnić wszystkie $tabs"
 	},
 	"descending": {
 		"message": "Malejąco (Z-A)",

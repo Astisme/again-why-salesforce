@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Excluir",
+		"description": "[gerenciar-Tab] excluir uma linha"
+	},
+	"act_open": {
+		"message": "🪂 Abrir",
+		"description": "[gerenciar-Tab] Abrir a Tab selecionada"
+	},
 	"actions": {
 		"message": "Ações",
 		"description": "Rótulo do menu suspenso para ações da Tab"
@@ -236,8 +244,8 @@
 		"description": "[menu-de-contexto]"
 	},
 	"delete_all": {
-		"message": "$delete todas as Tabs",
-		"description": "[popup] título na lixeira para esvaziar todas as Tabs"
+		"message": "Excluir todas as $tabs",
+		"description": "[popup] título na lixeira para esvaziar todas as $tabs"
 	},
 	"descending": {
 		"message": "Decrescente (Z-A)",

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Διαγραφή",
+		"description": "[διαχείριση-Tab] διαγραφή σειράς"
+	},
+	"act_open": {
+		"message": "🪂 Άνοιγμα",
+		"description": "[διαχείριση-Tab] Άνοιγμα της επιλεγμένης Tab"
+	},
 	"actions": {
 		"message": "Ενέργειες",
 		"description": "Ετικέτα αναπτυσσόμενου μενού για ενέργειες Tab"
@@ -236,8 +244,8 @@
 		"description": "[μενού-πλαισίου]"
 	},
 	"delete_all": {
-		"message": "$delete όλες τις Tabs",
-		"description": "[αναδυόμενο-παράθυρο] τίτλος στον κάδο για εκκαθάριση όλων των Tabs"
+		"message": "Διαγραφή όλων των $tabs",
+		"description": "[αναδυόμενο] τίτλος στον κάδο για άδειασμα όλων των $tabs"
 	},
 	"descending": {
 		"message": "Φθίνουσα (Z-A)",

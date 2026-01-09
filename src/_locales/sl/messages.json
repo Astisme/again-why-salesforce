@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Izbriši",
+		"description": "[upravljanje-Tab] izbriši vrstico"
+	},
+	"act_open": {
+		"message": "🪂 Odpri",
+		"description": "[upravljanje-Tab] Odpri izbrano Tab"
+	},
 	"actions": {
 		"message": "Dejanja",
 		"description": "Oznaka spustnega menija za dejanja Tab"
@@ -236,8 +244,8 @@
 		"description": "[kontekstni_meni]"
 	},
 	"delete_all": {
-		"message": "$delete vse Tabs",
-		"description": "[pojavno-okno] naslov na košu za izpraznitev vseh Tabs"
+		"message": "Izbriši vse $tabs",
+		"description": "[pojavno okno] naslov na košu za praznjenje vseh $tabs"
 	},
 	"descending": {
 		"message": "Padajoče (Z-A)",

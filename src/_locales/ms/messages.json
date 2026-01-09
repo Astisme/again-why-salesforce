@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Padam",
+		"description": "[urus-Tab] padam baris"
+	},
+	"act_open": {
+		"message": "🪂 Buka",
+		"description": "[urus-Tab] Buka Tab yang dipilih"
+	},
 	"actions": {
 		"message": "Tindakan",
 		"description": "Label menu lungsur untuk tindakan Tab"
@@ -236,8 +244,8 @@
 		"description": "[menu-konteks]"
 	},
 	"delete_all": {
-		"message": "$delete सर्व Tabs",
-		"description": "[पॉपअप] सर्व Tabs रिकामे करण्यासाठी बिनवरील शीर्षक"
+		"message": "Padam semua $tabs",
+		"description": "[pop-timbul] tajuk pada tong sampah untuk mengosongkan semua $tabs"
 	},
 	"descending": {
 		"message": "Menurun (Z-A)",

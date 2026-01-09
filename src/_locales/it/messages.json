@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Elimina",
+		"description": "[gestisci-Tab] elimina una riga"
+	},
+	"act_open": {
+		"message": "🪂 Apri",
+		"description": "[gestisci-Tab] Apri la Tab selezionata"
+	},
 	"actions": {
 		"message": "Azioni",
 		"description": "Etichetta del menu a discesa per le azioni delle Tab"
@@ -236,8 +244,8 @@
 		"description": "[context-menu]"
 	},
 	"delete_all": {
-		"message": "$delete tutte le Tabs",
-		"description": "[popup] titolo sul cestino per svuotare tutte le Tabs"
+		"message": "Elimina tutte le $tabs",
+		"description": "[popup] titolo sul cestino per svuotare tutte le $tabs"
 	},
 	"descending": {
 		"message": "Decrescente (Z-A)",

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Ištrinti",
+		"description": "[tvarkyti-Tab] ištrinti eilutę"
+	},
+	"act_open": {
+		"message": "🪂 Atidaryti",
+		"description": "[tvarkyti-Tab] Atidaryti pasirinktą Tab"
+	},
 	"actions": {
 		"message": "Veiksmai",
 		"description": "Tab veiksmų išskleidžiamojo meniu etiketė"
@@ -236,8 +244,8 @@
 		"description": "[kontekstinis_meniu]"
 	},
 	"delete_all": {
-		"message": "$delete visus Tabs",
-		"description": "[iškylantis-langas] pavadinimas šiukšliadėžėje, norint ištuštinti visus Tabs"
+		"message": "Ištrinti visas $tabs",
+		"description": "[iššokantis langas] pavadinimas ant šiukšliadėžės, norint ištuštinti visas $tabs"
 	},
 	"descending": {
 		"message": "Mažėjanti (Z-A)",

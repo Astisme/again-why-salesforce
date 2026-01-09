@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Șterge",
+		"description": "[gestionare-Tab] șterge un rând"
+	},
+	"act_open": {
+		"message": "🪂 Deschide",
+		"description": "[gestionare-Tab] Deschide Tab selectată"
+	},
 	"actions": {
 		"message": "Acțiuni",
 		"description": "Eticheta meniului derulant pentru acțiunile Tab"
@@ -236,8 +244,8 @@
 		"description": "[meniu-contextual]"
 	},
 	"delete_all": {
-		"message": "$delete toate Tabs",
-		"description": "[fereastră-pop-up] titlu pe coșul de gunoi pentru a goli toate Tabs"
+		"message": "Șterge toate $tabs",
+		"description": "[popup] titlu pe coș pentru a goli toate $tabs"
 	},
 	"descending": {
 		"message": "Descendent (Z-A)",

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Obriši",
+		"description": "[upravljanje-Tab] obriši redak"
+	},
+	"act_open": {
+		"message": "🪂 Otvori",
+		"description": "[upravljanje-Tab] Otvori odabranu Tab"
+	},
 	"actions": {
 		"message": "Radnje",
 		"description": "Oznaka padajućeg izbornika za radnje s Tab"
@@ -236,8 +244,8 @@
 		"description": "[context-menu]"
 	},
 	"delete_all": {
-		"message": "$delete sve Tabs",
-		"description": "[skočni-prozor] naslov na kanti za pražnjenje svih Tabs"
+		"message": "Obriši sve $tabs",
+		"description": "[skočni prozor] naslov na kanti za pražnjenje svih $tabs"
 	},
 	"descending": {
 		"message": "Silazno (Ž-A)",

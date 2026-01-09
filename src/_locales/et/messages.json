@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Kustuta",
+		"description": "[halda-Tab] kustuta rida"
+	},
+	"act_open": {
+		"message": "🪂 Ava",
+		"description": "[halda-Tab] Ava valitud Tab"
+	},
 	"actions": {
 		"message": "Toimingud",
 		"description": "Tabi toimingute rippmenüü silt"
@@ -236,8 +244,8 @@
 		"description": "[kontekstimenüü]"
 	},
 	"delete_all": {
-		"message": "$delete kõik Tabs",
-		"description": "[hüpikaken] prügikasti pealkiri kõigi Tabs tühjendamiseks"
+		"message": "Kustuta kõik $tabs",
+		"description": "[hüpikaken] pealkiri prügikastil kõigi $tabs tühjendamiseks"
 	},
 	"descending": {
 		"message": "Kahanev (Z-A)",

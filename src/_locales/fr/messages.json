@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Supprimer",
+		"description": "[gérer-les-Tab] supprimer une ligne"
+	},
+	"act_open": {
+		"message": "🪂 Ouvrir",
+		"description": "[gérer-les-Tab] Ouvrir la Tab sélectionnée"
+	},
 	"actions": {
 		"message": "Actions",
 		"description": "Libellé du menu déroulant pour les actions de Tab"
@@ -236,8 +244,8 @@
 		"description": "[context-menu]"
 	},
 	"delete_all": {
-		"message": "$delete tous les Tabs",
-		"description": "[popup] titre sur la corbeille pour vider tous les Tabs"
+		"message": "Supprimer tous les $tabs",
+		"description": "[fenêtre contextuelle] titre sur la corbeille pour vider tous les $tabs"
 	},
 	"descending": {
 		"message": "Décroissant (Z-A)",

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ 删除",
+		"description": "[管理-Tab] 删除一行"
+	},
+	"act_open": {
+		"message": "🪂 打开",
+		"description": "[管理-Tab] 打开所选 Tab"
+	},
 	"actions": {
 		"message": "操作",
 		"description": "Tab 操作的下拉菜单标签"
@@ -236,8 +244,8 @@
 		"description": "[上下文菜单]"
 	},
 	"delete_all": {
-		"message": "$delete 所有 Tab",
-		"description": "[弹出窗口] 回收站上用于清空所有 Tab 的标题"
+		"message": "删除所有 $tabs",
+		"description": "[弹出窗口] 垃圾桶上的标题，用于清空所有 $tabs"
 	},
 	"descending": {
 		"message": "降序 (Z-A)",

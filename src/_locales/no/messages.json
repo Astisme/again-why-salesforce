@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Slett",
+		"description": "[administrer-Tab] slett en rad"
+	},
+	"act_open": {
+		"message": "🪂 Åpne",
+		"description": "[administrer-Tab] Åpne den valgte Tab"
+	},
 	"actions": {
 		"message": "Handlinger",
 		"description": "Etikett for rullegardinmeny for Tab-handlinger"
@@ -236,8 +244,8 @@
 		"description": "[context-menu]"
 	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[popup] tittel på papirkurven for å tømme alle Tabs"
+		"message": "Slett alle $tabs",
+		"description": "[popup] tittel på papirkurven for å tømme alle $tabs"
 	},
 	"descending": {
 		"message": "Synkende (Z-A)",
