@@ -257,7 +257,7 @@ async function checkLocaleFiles(
  * Main execution
  */
 async function main() {
-	const localesDir = new URL("/src/_locales", import.meta.url).pathname;
+	const localesDir = new URL("../src/_locales", import.meta.url).pathname;
 	try {
 		await Deno.stat(localesDir);
 	} catch {
@@ -281,7 +281,7 @@ async function main() {
 		}
 		// Write the grouped report to a JSON file
 		const outputPath =
-			new URL("/missing-keys-report.json", import.meta.url).pathname;
+			new URL("../missing-keys-report.json", import.meta.url).pathname;
 		await Deno.writeTextFile(
 			outputPath,
 			JSON.stringify(groupedReport, null, "\t"),
