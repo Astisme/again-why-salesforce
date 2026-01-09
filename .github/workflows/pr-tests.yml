@@ -132,9 +132,6 @@ jobs:
                     logFile: "locales-errors.log",
                     title:   "Locale Sorter Failed",
                     matchPattern: /^(?:✖  Failed .+?: .+|Error traversing .+?: .+|Unexpected error: .+)/m,
-                    stripPatterns: [
-                      /^✔  Sorted .+\n/gm
-                    ]
                   });
 
             - name: Run formatter
