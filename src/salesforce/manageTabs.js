@@ -22,7 +22,6 @@ import {
 	reorderTabsUl,
 	showToast,
 } from "./content.js";
-import { HTMLButtonElement } from "happydom";
 
 let focusedIndex = 0;
 let managedLoggers = [];
