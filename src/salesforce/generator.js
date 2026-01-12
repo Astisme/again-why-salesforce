@@ -4,6 +4,7 @@ import {
 	CXM_PIN_TAB,
 	CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB,
+	EXTENSION_GITHUB_LINK,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
@@ -2384,13 +2385,7 @@ export async function generateManageTabsModal(tabs = [], {
 	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
-  const homepage = MANIFEST.homepage_url;
-  const wikiLinkTab = `${homepage}/wiki/What-is-a-Tab`;
-  // Validate homepage URL (must be GitHub)
-  if (!homepage?.startsWith("https://github.com/")) {
-    console.error("no_manifest_github");
-    return;
-  }
+  const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
 	// Table header with drag handle column
 	const headers = [
 		{

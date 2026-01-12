@@ -1,10 +1,11 @@
 "use strict";
 import {
 	BROWSER,
+	EXTENSION_GITHUB_LINK,
 	EXTENSION_NAME,
+	EXTENSION_VERSION,
 	ISCHROME,
 	ISFIREFOX,
-	MANIFEST,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
 	WHAT_EXPORT_FROM_BG,
@@ -235,18 +236,8 @@ export async function checkForUpdates() {
 		SETTINGS_KEY,
 	);
 	try {
-		const currentVersion = MANIFEST.version;
-		const homepageUrl = MANIFEST.homepage_url;
 		// Parse GitHub username and repo from homepage URL
-		const urlParts = homepageUrl?.split("github.com/");
-		// Validate homepage URL (must be GitHub)
-		if (
-			!homepageUrl?.startsWith("https://github.com/") ||
-			urlParts.length < 2
-		) {
-			console.error("no_manifest_github");
-			return;
-		}
+		const urlParts = EXTENSION_GITHUB_LINK.split("github.com/");
 		const repoPath = urlParts[1].replace(/\.git$/, "");
 		// Fetch latest release data from GitHub API
 		const response = await fetch(
@@ -263,7 +254,7 @@ export async function checkForUpdates() {
 				!release.prerelease &&
 				_isNewerVersion(
 					release.tag_name.replace(/^.*(-)?v/, ""),
-					currentVersion,
+					EXTENSION_VERSION,
 				)
 			)
 			.sort((a, b) => {
@@ -274,10 +265,9 @@ export async function checkForUpdates() {
 		if (latestVersion != null) {
 			bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
-				oldversion: currentVersion,
+				oldversion: EXTENSION_VERSION,
 				version: latestVersion,
-				link: homepageUrl,
-				//link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
+				link: EXTENSION_GITHUB_LINK,
 			});
 		}
 	} catch (error) {
