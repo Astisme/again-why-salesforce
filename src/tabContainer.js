@@ -440,7 +440,9 @@ export class TabContainer extends Array {
 	 * @throws {Error} - Throws an error if any Tab (other than duplicates) fails to be added.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
-	async addTabs(tabs, sync = true) {
+	async addTabs(tabs, sync = true, {
+    invalidateSort = false,
+  } = {}) {
 		if (tabs == null || (tabs.length === 0 && !sync)) {
 			return true;
 		}
@@ -456,7 +458,7 @@ export class TabContainer extends Array {
 				// we will continue if all the errors were of duplicate Tabs
 			}
 		}
-		return await (sync ? this.syncTabs() : this.checkSetSorted());
+		return await (sync ? this.syncTabs({ fromInvalidateSortFunction: invalidateSort}) : this.checkSetSorted());
 	}
 
 	/**
@@ -720,6 +722,7 @@ export class TabContainer extends Array {
 		keepTabsNotThisOrg = null,
 		removeThisOrgTabs = null,
 		updatePinnedTabs = true,
+    invalidateSort = false,
 	} = {}) {
 		if (newTabs === this) {
 			return true;
@@ -782,7 +785,7 @@ export class TabContainer extends Array {
 			}
 		}
 		// Add new tabs and sync them
-		return await this.addTabs(newTabs, sync);
+		return await this.addTabs(newTabs, sync, { invalidateSort });
 	}
 
 	/**

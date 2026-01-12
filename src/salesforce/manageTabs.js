@@ -24,13 +24,14 @@ import {
 } from "./content.js";
 
 let focusedIndex = 0;
-let managedLoggers = [];
+const managedLoggers = [];
 const manageTabsButtons = {};
 let deleteAllButton = null;
-let trsAndButtons = [];
-let dropdownMenus = [];
+const trsAndButtons = [];
+const dropdownMenus = [];
 const actionButtons = [];
 let closeButton = null;
+let manage_InvalidateSort = false;
 
 /**
  * Updates all the indexes on every tr after index fromIndex
@@ -717,6 +718,7 @@ function reorderTabsTable({
 	updateIndexesOnTrsAfterIndex(
 		Math.min(fromIndex, toIndex),
 	);
+  manage_InvalidateSort = true;
 }
 
 /**
@@ -761,6 +763,7 @@ async function readManagedTabsAndSave({
 		resetTabs: true,
 		removeOrgTabs: true,
 		updatePinnedTabs: false,
+    invalidateSort: manage_InvalidateSort,
 	});
 }
 
@@ -785,11 +788,12 @@ export async function createManageTabsModal() {
 		trsAndButtons: allTrsAndButtons,
 		dropdownMenus: allDropMenus,
 	} = await generateManageTabsModal(allTabs);
-	managedLoggers = loggers;
+	managedLoggers.splice(0, managedLoggers.length, loggers);
 	deleteAllButton = deleteAllTabsButton;
-	trsAndButtons = allTrsAndButtons;
-	dropdownMenus = allDropMenus;
+	trsAndButtons.splice(0, trsAndButtons.length, allTrsAndButtons);
+	dropdownMenus.splice(0, dropdownMenus.length, allDropMenus);
 	closeButton = modalCloseBtn;
+  manage_InvalidateSort = false;
 	const buttonContainer = saveButton.closest("div");
 	manageTabsButtons.show = buttonContainer.querySelector(".show_all_tabs");
 	manageTabsButtons.hide = buttonContainer.querySelector(
@@ -806,10 +810,12 @@ export async function createManageTabsModal() {
 		e.preventDefault();
 		readManagedTabsAndSave({ tbody, allTabs });
 		closeButton.click();
-		managedLoggers = null;
+		managedLoggers.length = 0;
 	});
 	// Attach listeners to all existing buttons
-	actionButtons.push(
+	actionButtons.splice(
+    0,
+    actionButtons.length,
 		...modalParent.querySelectorAll("[data-action]"),
 	);
 	for (const btn of actionButtons) {

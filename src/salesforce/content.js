@@ -477,7 +477,7 @@ export async function reorderTabsUl() {
 			resetTabs: true,
 			removeOrgTabs: true,
 			updatePinnedTabs: false,
-			//keepTabsNotThisOrg: Tab.extractOrgName(href),
+      invalidateSort: true,
 		});
 		sf_afterSet({
 			tabs,
