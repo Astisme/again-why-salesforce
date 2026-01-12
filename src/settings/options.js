@@ -1412,7 +1412,6 @@ function _setupUIListeners(resources, key) {
 	for (const el of resources.decorations.active) {
 		el?.addEventListener("click", (e) => _flipSelected(e, true));
 	}
-	console.log(resources.decorations);
 }
 
 /**

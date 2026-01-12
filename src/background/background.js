@@ -128,24 +128,21 @@ async function bg_getStyleSettings(
 	key = null,
 	callback = null,
 ) {
-	if (key == null) {
-		key = [
+	const settings = await bg_getSettings(
+		undefined,
+		key ?? [
 			GENERIC_TAB_STYLE_KEY,
 			ORG_TAB_STYLE_KEY,
 			GENERIC_PINNED_TAB_STYLE_KEY,
 			ORG_PINNED_TAB_STYLE_KEY,
-		];
-	}
-	const settings = await bg_getSettings(
-		undefined,
-		key,
+		],
 	);
 	if (
+    settings == null ||
 		Object.values(settings).every(
 			(sett) =>
-				sett == null || sett.every(
-					(s) => s?.value == null,
-				),
+				sett == null ||
+        !Object.values(sett).some(Boolean)
 		)
 	) {
 		return null;
