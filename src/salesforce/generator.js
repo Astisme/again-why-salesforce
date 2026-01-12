@@ -4,6 +4,7 @@ import {
 	CXM_PIN_TAB,
 	CXM_REMOVE_TAB,
 	CXM_UNPIN_TAB,
+	EXTENSION_GITHUB_LINK,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	GENERIC_PINNED_TAB_STYLE_KEY,
@@ -1601,7 +1602,8 @@ export function generateHelpWith_i_popup({
 	root.append(anchor);
 	anchor.className = "button";
 	anchor.setAttribute("aria-describedby", "tooltip");
-	if (wasCalledWithParams && link != null && link !== "") anchor.href = link;
+	const isLinkAvailable = link != null && link !== "";
+	if (wasCalledWithParams && isLinkAvailable) anchor.href = link;
 	const svgNS = "http://www.w3.org/2000/svg";
 	const svg = document.createElementNS(svgNS, "svg");
 	anchor.append(svg);
@@ -1626,6 +1628,8 @@ export function generateHelpWith_i_popup({
 	tooltip.className = "tooltip";
 	tooltip.setAttribute("role", "tooltip");
 	let slot;
+	const linkTip = document.createElement("div");
+	linkTip.classList.add("link-tip");
 	if (wasCalledWithParams) {
 		tooltip.dataset.showTop = showTop ||
 			(!showTop && !showBottom && !showRight && !showLeft);
@@ -1634,14 +1638,18 @@ export function generateHelpWith_i_popup({
 		tooltip.dataset.showLeft = showLeft;
 		slot = document.createElement("span");
 		slot.textContent = text;
+		if (!isLinkAvailable) {
+			linkTip.classList.add(HIDDEN_CLASS);
+		}
+		// add help.css
 		const linkid = `${EXTENSION_NAME}-helpcss`;
 		if (!document.getElementById(linkid)) {
-			const link = document.createElement("link");
-			link.id = linkid;
-			link.rel = "stylesheet";
-			link.type = "text/css";
-			link.href = BROWSER.runtime.getURL("/components/help/help.css");
-			document.head.appendChild(link);
+			const linkEl = document.createElement("link");
+			linkEl.id = linkid;
+			linkEl.rel = "stylesheet";
+			linkEl.type = "text/css";
+			linkEl.href = BROWSER.runtime.getURL("/components/help/help.css");
+			document.head.appendChild(linkEl);
 		}
 	} else {
 		slot = document.createElement("slot");
@@ -1649,9 +1657,7 @@ export function generateHelpWith_i_popup({
 		slot.textContent = "Nothing to see here...";
 	}
 	tooltip.append(slot);
-	const linkTip = document.createElement("div");
 	tooltip.append(linkTip);
-	linkTip.classList.add("link-tip", HIDDEN_CLASS);
 	(async () => {
 		const translator = await ensureTranslatorAvailability();
 		assistive.textContent = await translator.translate("help");
@@ -1793,7 +1799,14 @@ function createTableRow(
 	const tr = document.createElement("tr");
 	const { td, checkbox } = createCheckboxCell(index, true);
 	tr.appendChild(td);
-	tr.addEventListener("click", () => checkbox.click());
+	tr.addEventListener("click", (e) => {
+		if (
+			e.target.tagName !== "INPUT" ||
+			e.target.type !== "checkbox"
+		) {
+			checkbox.click();
+		}
+	});
 	tr.appendChild(createTextCell(label));
 	tr.appendChild(createTextCell(url));
 	tr.appendChild(createTextCell(org));
@@ -1816,9 +1829,9 @@ function generateTableWithCheckboxes(
 		checkboxes: [],
 	};
 	const { table, tbody } = createTable(headers);
-	for (let i = 0; i < tabs.length; i++) {
+	for (const i in tabs) {
 		const { tr, checkbox } = createTableRow(tabs[i], i);
-		checkbox.addEventListener("change", changeListener);
+		checkbox.addEventListener("click", changeListener, { once: true });
 		tbody.appendChild(tr);
 		res.checkboxes.push(checkbox);
 	}
@@ -2024,6 +2037,16 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		}
 		updateSelectAllButtonText();
 	});
+	for (const tr of article.querySelectorAll("tr")) {
+		tr.addEventListener("click", (e) => {
+			if (
+				e.target.tagName !== "INPUT" ||
+				e.target.type !== "checkbox"
+			) {
+				updateSelectAllButtonText();
+			}
+		});
+	}
 	/**
 	 * Function to get selected tabs
 	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
@@ -2189,8 +2212,10 @@ export async function createManageTabRow({
 	tr.classList.add(
 		"slds-hint-parent",
 		EXTENSION_NAME,
-		isThisOrgTab ? undefined : HIDDEN_CLASS,
 	);
+	if (!isThisOrgTab) {
+		tr.classList.add(HIDDEN_CLASS);
+	}
 	tr.draggable = draggable;
 	tr.dataset.draggable = draggable;
 	tr.dataset.isThisOrgTab = isThisOrgTab;
@@ -2273,7 +2298,7 @@ export async function createManageTabRow({
 	dropdownMenu.style.flexDirection = "column";
 	// Open button
 	const openBtn = createStyledButton(
-		await translator.translate("open"),
+		await translator.translate("act_open"),
 		{ action: "open", tabIndex: index },
 	);
 	openBtn.addEventListener("click", handleLightningLinkClick);
@@ -2303,7 +2328,7 @@ export async function createManageTabRow({
 	dropdownMenu.appendChild(unpinBtn);
 	// Delete button
 	const deleteBtn = createStyledButton(
-		await translator.translate("delete"),
+		await translator.translate("act_delete"),
 		{ action: CXM_REMOVE_TAB, tabIndex: index },
 	);
 	deleteBtn.classList.add("delete-btn");
@@ -2315,10 +2340,6 @@ export async function createManageTabRow({
 	dropdownButton.addEventListener("click", (e) => {
 		e.preventDefault();
 		dropdownMenu.classList.toggle(HIDDEN_CLASS);
-	});
-	// Prevent dropdown from closing when clicking inside
-	dropdownMenu.addEventListener("click", (e) => {
-		e.preventDefault();
 	});
 	return {
 		tr,
@@ -2346,7 +2367,7 @@ export async function createManageTabRow({
  * @param {string} [options.title="manage_tabs"] - i18n key for modal title
  * @param {string} [options.saveButtonLabel="save"] - i18n key for save button label
  * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
- * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs)
+ * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs) + deleteAllTabsButton to remove the disabled attribute when needed
  */
 export async function generateManageTabsModal(tabs = [], {
 	title = "manage_tabs",
@@ -2367,6 +2388,7 @@ export async function generateManageTabsModal(tabs = [], {
 	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
+	const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
 	// Table header with drag handle column
 	const headers = [
 		{
@@ -2381,7 +2403,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("tab_label"),
 			info: {
 				text: await translator.translate("help_tab_label"),
-				link: "",
+				link: `${wikiLinkTab}#Label`,
 				showBottom: true,
 			},
 		},
@@ -2389,7 +2411,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("tab_url"),
 			info: {
 				text: await translator.translate("help_tab_url"),
-				link: "",
+				link: `${wikiLinkTab}#Url`,
 				showBottom: true,
 			},
 		},
@@ -2397,7 +2419,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("tab_org"),
 			info: {
 				text: await translator.translate("help_tab_org"),
-				link: "",
+				link: `${wikiLinkTab}#Org`,
 				showBottom: true,
 			},
 		},
@@ -2405,7 +2427,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("actions"),
 			info: {
 				text: await translator.translate("help_tab_actions"),
-				link: "testlinkactions",
+				link: "",
 				showLeft: true,
 			},
 		},
@@ -2460,14 +2482,28 @@ export async function generateManageTabsModal(tabs = [], {
 		showAllTabsButton.removeAttribute("disabled");
 		updateModalBodyOverflow(article);
 	});
+	// Create Delete All button
+	const deleteAllTabsButton = document.createElement("button");
+	// we should never set disabled=false due to chrome making the button disabled anyways
+	if (tabs.length < 1) {
+		deleteAllTabsButton.setAttribute("disabled", true);
+	}
+	deleteAllTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	deleteAllTabsButton.textContent = await translator.translate(
+		"delete_all",
+	);
+	buttonContainer.prepend(deleteAllTabsButton);
 	const loggers = []; // track input changes
-	const actionsMap = {}; // map to store action handlers for each row
 	// Create rows for all existing tabs
 	const allDropMenus = [];
 	const allTrs = [];
 	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
 	let notThisOrgTabs = 0;
-	for (let i = 0; i < tabs.length; i++) {
+	for (const i in tabs) {
 		const tab = tabs[i];
 		const isThisOrgTab = tab.org == null ||
 			tab.org === Tab.extractOrgName(getCurrentHref());
@@ -2485,25 +2521,10 @@ export async function generateManageTabsModal(tabs = [], {
 			disabled: false,
 			isThisOrgTab,
 		});
-		allTrs.push({ tr, dropdownButton });
+		allTrs.push({ tr, button: dropdownButton });
 		allDropMenus.push(dropdownMenu);
 		loggers.push(logger);
 		tbody.appendChild(tr);
-		// Store action handlers for this tab
-		actionsMap[i] = {
-			[CXM_PIN_TAB]: {
-				what: CXM_PIN_TAB,
-				...tab,
-			},
-			[CXM_UNPIN_TAB]: {
-				what: CXM_UNPIN_TAB,
-				...tab,
-			},
-			[CXM_REMOVE_TAB]: {
-				what: CXM_REMOVE_TAB,
-				...tab,
-			},
-		};
 	}
 	// disable the showAllTabsButton if needed
 	if (notThisOrgTabs <= 0) {
@@ -2518,27 +2539,19 @@ export async function generateManageTabsModal(tabs = [], {
 	} = await createManageTabRow({}, {
 		index: tabs.length,
 	});
-	allTrs.push({ tr: emptyRow, dropdownButton: lastButton });
+	allTrs.push({ tr: emptyRow, button: lastButton });
 	allDropMenus.push(lastMenu);
 	loggers.push(lastLogger);
 	tbody.appendChild(emptyRow);
-	// Close dropdown when clicking outside
-	for (const { tr, dropdownButton } of allTrs) {
-		tr.addEventListener("click", (e) => {
-			if (e.target !== dropdownButton) {
-				for (const dropdownMenu of allDropMenus) {
-					dropdownMenu.classList.add(HIDDEN_CLASS);
-				}
-			}
-		});
-	}
 	return {
 		modalParent,
 		closeButton,
 		tbody,
-		actionsMap,
 		saveButton,
 		loggers,
+		deleteAllTabsButton,
+		trsAndButtons: allTrs,
+		dropdownMenus: allDropMenus,
 	};
 }
 

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Избриши",
+		"description": "[управљање-Tab] избриши ред"
+	},
+	"act_open": {
+		"message": "🪂 Отвори",
+		"description": "[управљање-Tab] Отвори изабрану Tab"
+	},
 	"actions": {
 		"message": "Акције",
 		"description": "Ознака падајућег менија за акције Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Ostala ažuriranja",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Obriši",
-		"description": "[popup] obriši red"
-	},
 	"delete_all": {
-		"message": "$delete све Tabs",
-		"description": "[искачући-прозор] наслов на канти за пражњење свих Tabs"
+		"message": "Избриши све $tabs",
+		"description": "[искочујући прозор] наслов на канти за пражњење свих $tabs"
 	},
 	"descending": {
 		"message": "Опадајуће (Z-A)",

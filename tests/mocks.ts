@@ -1,12 +1,4 @@
 // deno-lint-ignore-file no-explicit-any
-import { Window } from "happydom";
-const window = new Window();
-globalThis.window = window;
-globalThis.document = window.document;
-globalThis.HTMLElement = window.HTMLElement;
-globalThis.customElements = {
-	define: () => {},
-};
 import Tab from "/tab.js";
 import manifest from "/manifest/template-manifest.json" with { type: "json" };
 enum StorageKeys {
@@ -552,20 +544,3 @@ globalThis.fetch = (path: string) => ({
 		}
 	},
 });
-
-export function createMockElement() {
-	return {
-		classList: {
-			removed: [] as string[],
-			remove(cls: string) {
-				this.removed.push(cls);
-			},
-		},
-		// deno-lint-ignore ban-types
-		events: {} as Record<string, Function>,
-		// deno-lint-ignore ban-types
-		addEventListener(event: string, cb: Function) {
-			this.events[event] = cb;
-		},
-	};
-}

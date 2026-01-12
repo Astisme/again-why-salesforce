@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Xóa",
+		"description": "[quản-lý-Tab] xóa một hàng"
+	},
+	"act_open": {
+		"message": "🪂 Mở",
+		"description": "[quản-lý-Tab] Mở Tab đã chọn"
+	},
 	"actions": {
 		"message": "Hành động",
 		"description": "Nhãn menu thả xuống cho các hành động của Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Các cập nhật khác",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Xóa",
-		"description": "[popup] Xóa một dòng"
-	},
 	"delete_all": {
-		"message": "$delete tất cả các Tab",
-		"description": "[popup] tiêu đề trên thùng rác để làm trống tất cả các Tab"
+		"message": "Xóa tất cả $tabs",
+		"description": "[popup] tiêu đề trên thùng rác để làm trống tất cả $tabs"
 	},
 	"descending": {
 		"message": "Giảm dần (Z-A)",

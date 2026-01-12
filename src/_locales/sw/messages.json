@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Futa",
+		"description": "[dhibiti-Tab] futa safu"
+	},
+	"act_open": {
+		"message": "🪂 Fungua",
+		"description": "[dhibiti-Tab] Fungua Tab iliyochaguliwa"
+	},
 	"actions": {
 		"message": "Hatua",
 		"description": "Lebo ya menyu kunjuzi kwa hatua za Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Masasisho Mengine",
 		"description": "[menu-ya-mukhtadha]"
 	},
-	"delete": {
-		"message": "Futa",
-		"description": "[ibukizi] futa safu"
-	},
 	"delete_all": {
-		"message": "$delete Tabs zote",
-		"description": "[ibukizi] kichwa kwenye pipa la taka ili kumwaga Tabs zote"
+		"message": "Futa $tabs zote",
+		"description": "[popup] kichwa kwenye pipa ili kumwaga $tabs zote"
 	},
 	"descending": {
 		"message": "Kushuka (Z-A)",

@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ 削除",
+		"description": "[Tabを管理] 行を削除する"
+	},
+	"act_open": {
+		"message": "🪂 開く",
+		"description": "[Tabを管理] 選択した Tab を開く"
+	},
 	"actions": {
 		"message": "アクション",
 		"description": "Tab アクションのドロップダウンメニューラベル"
@@ -235,13 +243,9 @@
 		"message": "🧹 その他の更新",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "削除する",
-		"description": "[popup] 行を削除する"
-	},
 	"delete_all": {
-		"message": "すべてのTabsを $delete",
-		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"
+		"message": "すべての $tabs を削除",
+		"description": "[ポップアップ] すべての $tabs を空にするためのゴミ箱のタイトル"
 	},
 	"descending": {
 		"message": "降順（Z-A）",

@@ -10,11 +10,11 @@ import {
 	CMD_TOGGLE_ORG,
 	CMD_UPDATE_TAB,
 	CXM_MANAGE_TABS,
+	EXTENSION_GITHUB_LINK,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	LIGHTNING_FORCE_COM,
 	LOCALE_KEY,
-	MANIFEST,
 	MY_SALESFORCE_COM,
 	MY_SALESFORCE_SETUP_COM,
 	NO_RELEASE_NOTES,
@@ -128,24 +128,21 @@ async function bg_getStyleSettings(
 	key = null,
 	callback = null,
 ) {
-	if (key == null) {
-		key = [
+	const settings = await bg_getSettings(
+		undefined,
+		key ?? [
 			GENERIC_TAB_STYLE_KEY,
 			ORG_TAB_STYLE_KEY,
 			GENERIC_PINNED_TAB_STYLE_KEY,
 			ORG_PINNED_TAB_STYLE_KEY,
-		];
-	}
-	const settings = await bg_getSettings(
-		undefined,
-		key,
+		],
 	);
 	if (
+		settings == null ||
 		Object.values(settings).every(
 			(sett) =>
-				sett == null || sett.every(
-					(s) => s?.value == null,
-				),
+				sett == null ||
+				!Object.values(sett).some(Boolean),
 		)
 	) {
 		return null;
@@ -614,14 +611,8 @@ function setExtensionBrowserListeners() {
 			}
 			// get the extension version
 			// open github to show the release notes
-			const homepage = MANIFEST.homepage_url;
-			// Validate homepage URL (must be GitHub)
-			if (!homepage?.startsWith("https://github.com/")) {
-				console.error("no_manifest_github");
-				return;
-			}
 			BROWSER.tabs.create({
-				url: `${homepage}/tree/main/docs/CHANGELOG.md`,
+				url: `${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`,
 			});
 		}
 		/* TODO add tutorial on install

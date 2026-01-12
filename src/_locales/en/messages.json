@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Delete",
+		"description": "[manage-tabs] delete a row"
+	},
+	"act_open": {
+		"message": "🪂 Open",
+		"description": "[manage-tabs] Open the selected Tab"
+	},
 	"actions": {
 		"message": "Actions",
 		"description": "Dropdown menu label for tab actions"
@@ -235,12 +243,8 @@
 		"message": "🧹 Other Updates",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Delete",
-		"description": "[popup] delete a row"
-	},
 	"delete_all": {
-		"message": "$delete all $tabs",
+		"message": "Delete all $tabs",
 		"description": "[popup] title on the bin to empty all $tabs"
 	},
 	"descending": {

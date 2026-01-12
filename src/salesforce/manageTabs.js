@@ -6,7 +6,6 @@ import {
 	HIDDEN_CLASS,
 	PIN_TAB_CLASS,
 } from "/constants.js";
-import { sendExtensionMessage } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 
@@ -21,59 +20,18 @@ import {
 	getModalHanger,
 	makeDuplicatesBold,
 	reorderTabsUl,
-	sf_afterSet,
 	showToast,
 } from "./content.js";
 
 let focusedIndex = 0;
-let managedLoggers = [];
+const managedLoggers = [];
 const manageTabsButtons = {};
-
-/**
- * Returns the value from the given selector
- * @param {Object} [param0={}] an object with the following keys
- * @param {TrHTMLElement} [param0.tr=null] - the tr where to selector is located
- * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
- * @return undefined (when the value is null or "") or the trimmed value
- */
-function getInputValue({
-	tr = null,
-	selector = "",
-} = {}) {
-	const value = tr?.querySelector(selector).value.trim();
-	return value == null || value === "" ? undefined : value;
-}
-
-/**
- * Finds all the trs and their inputs to update the currently saved Tabs
- * @param {Object} [param0={}] an object with the following keys
- * @param {TbodyHTMLElement} [param0.tbody=document.querySelector("#sortable-table tbody")] - the tbody inside the modal where the trs can be found
- * @param {TabContainer} [param0.allTabs=await ensureAllTabsAvailability()] - the TabContainer instance
- */
-async function readManagedTabsAndSave({
-	tbody = document.querySelector("#sortable-table tbody"),
-	allTabs = null,
-} = {}) {
-	// read all Tabs in the tbody
-	const tableTabs = [];
-	for (const tr of tbody.querySelectorAll("tr")) {
-		if (tr !== tbody.lastChild) { // lastChild is always empty
-			tableTabs.push(Tab.create({
-				label: getInputValue({ tr, selector: "input.label" }),
-				url: getInputValue({ tr, selector: "input.url" }),
-				org: getInputValue({ tr, selector: "input.org" }),
-			}));
-		}
-	}
-	allTabs = allTabs ?? await ensureAllTabsAvailability();
-	// send message to save the Tabs as they were read
-	await allTabs.replaceTabs(tableTabs, {
-		resetTabs: true,
-		removeOrgTabs: true,
-		updatePinnedTabs: false,
-	});
-	sf_afterSet({ tabs: tableTabs });
-}
+let deleteAllButton = null;
+const trsAndButtons = [];
+const dropdownMenus = [];
+const actionButtons = [];
+let closeButton = null;
+let manage_InvalidateSort = false;
 
 /**
  * Updates all the indexes on every tr after index fromIndex
@@ -178,13 +136,9 @@ function moveTrToGivenIndex({
  * Handles action button clicks (actions are the ones on the right of each row)
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
- * @param {Map} param1.actionsMap - the map of the actions, separated by indexes and action name
- * @param {AHTMLElement} param1.closeButton - the button that closes the popup
  * @param {TabContainer} param1.allTabs - the TabContainer instance
  */
 function handleActionButtonClick(e, {
-	actionsMap,
-	closeButton,
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -204,7 +158,6 @@ function handleActionButtonClick(e, {
 		dropdownMenu.classList.add(HIDDEN_CLASS);
 	}
 	// Handle toggle buttons (pin/unpin)
-	const message = actionsMap?.[tabIndex]?.[action];
 	const pinBtn = row.querySelector(".pin-btn");
 	const unpinBtn = row.querySelector(".unpin-btn");
 	const dragCell = row.querySelector("td.slds-cell-wrap");
@@ -242,22 +195,24 @@ function handleActionButtonClick(e, {
 			break;
 		}
 		case CXM_REMOVE_TAB: {
-			// Extract data from inputs if it's not an empty row
-			const labelInput = row.querySelector(".label");
-			const urlInput = row.querySelector(".url");
-			if (labelInput?.value || urlInput?.value) {
-				sendExtensionMessage(message);
-			}
 			// Remove the row from the table if it is NOT the last one
-			if (tbody.lastElementChild?.dataset.rowIndex !== tabIndex) {
+			if (
+				tbody?.querySelector("tr:last-child")?.dataset.rowIndex !==
+					tabIndex
+			) {
 				row.remove();
+			}
+			// if there is only the empty tr, disable deleteAllButton
+			if (tbody?.querySelectorAll("tr").length <= 1) {
+				deleteAllButton.setAttribute("disabled", true);
+			} else {
+				deleteAllButton.removeAttribute("disabled");
 			}
 			break;
 		}
 		default:
 			break;
 	}
-	readManagedTabsAndSave({ tbody });
 }
 
 /**
@@ -281,7 +236,7 @@ function updateTabAttributes({
 	const dropdownButton = tr.querySelector(
 		"td button[data-name=dropdownButton]",
 	);
-	const actionsButtons = dropdownButton.querySelectorAll("a");
+	const actionsButtons = dropdownButton?.parentNode?.querySelectorAll("a");
 	const buttons = [dropdownButton, ...actionsButtons];
 	if (enable) {
 		for (const btn of buttons) {
@@ -335,7 +290,7 @@ export function updateModalBodyOverflow(article = null) {
 }
 
 /**
- * Checks if both the label and URL fields are not empty, and if so, calls the `readManagedTabsAndSave` function.
+ * Checks if both the label and URL fields are empty, and if so, calls the `removeTr` function.
  * @param {Event} e - the event which is connected to this function
  * @return undefined
  */
@@ -344,11 +299,7 @@ function checkSaveTab(e) {
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
-	if (label !== "" && url !== "") {
-		readManagedTabsAndSave({
-			tabAppendElement,
-		});
-	} else if (label === "" && url === "") {
+	if (label === "" && url === "") {
 		removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
 }
@@ -377,6 +328,53 @@ function setInfoForDrag(element, listener, index) {
 }
 
 /**
+ * Only for TDs; hides all non-hidden dropdowns except the one that's being clicked
+ * @param {event} e - the click event
+ * @param {HTMLButtonElement} button - the button which is the one being clicked
+ * @return undefined - nothing
+ */
+function closeDropdownOnTrClick(e, button) {
+	if (
+		e.target === button ||
+		!["TD", "INPUT"].includes(e.target.tagName)
+	) {
+		return;
+	}
+	for (
+		const menu of dropdownMenus.filter((m) =>
+			!m.className.includes(HIDDEN_CLASS)
+		)
+	) {
+		menu.classList.add(HIDDEN_CLASS);
+	}
+}
+
+/**
+ * Only for BUTTONs; hides all non-hidden dropdowns except the one that's being clicked
+ * @param {event} e - the click event
+ * @param {HTMLButtonElement} button - the button which is the one being clicked
+ * @return undefined - nothing
+ */
+function closeDropdownOnBtnClick(e, button) {
+	e.preventDefault();
+	if (e.target.tagName !== "BUTTON") {
+		return;
+	}
+	for (
+		const menu of dropdownMenus.filter((m) =>
+			!m.className.includes(HIDDEN_CLASS)
+		)
+	) {
+		const dropBtn = menu.parentNode?.querySelector(
+			"[data-name=dropdownButton]",
+		);
+		if (button !== dropBtn) {
+			menu.classList.add(HIDDEN_CLASS);
+		}
+	}
+}
+
+/**
  * Adds a new empty tab at the bottom of the popup and enables the previously last child's delete button.
  * @param {TbodyHTMLElement} [tabAppendElement=null] - the tbody where to add the new tr
  * @throws Error when tabAppendElement == null
@@ -389,12 +387,19 @@ async function addTr(tabAppendElement = null) {
 	if (tabAppendElement.childElementCount >= 1) {
 		updateTabAttributes({ tabAppendElement });
 	}
+	deleteAllButton.removeAttribute("disabled");
 	// add a new empty element
-	const { tr, logger } = await createManageTabRow({}, {
+	const {
+		tr,
+		dropdownMenu,
+		dropdownButton,
+		logger,
+	} = await createManageTabRow({}, {
 		index: tabAppendElement.childElementCount,
 	});
 	tabAppendElement.append(tr);
 	updateModalBodyOverflow(tabAppendElement.closest("article"));
+	// update loggers
 	const index = managedLoggers.length;
 	managedLoggers.push(logger);
 	for (
@@ -409,6 +414,39 @@ async function addTr(tabAppendElement = null) {
 				tabAppendElement,
 				type: el.type,
 			}), el.index);
+	}
+	// update trsAndButtons + dropdownMenus + actionButtons
+	const previousTr = trsAndButtons.at(-1);
+	const actLen = actionButtons.length;
+	const newActionButtons = tr.querySelectorAll("[data-action]");
+	const previousActionBtns = actionButtons.slice(
+		actLen - newActionButtons.length,
+		actLen,
+	);
+	trsAndButtons.push({ tr, button: dropdownButton });
+	dropdownMenus.push(dropdownMenu);
+	actionButtons.push(
+		...newActionButtons,
+	);
+	// add event listeners on previous tr
+	previousTr.tr.addEventListener(
+		"click",
+		(e) => closeDropdownOnTrClick(e, previousTr.button),
+	);
+	previousTr.button.addEventListener(
+		"click",
+		(e) => closeDropdownOnBtnClick(e, previousTr.button),
+	);
+	for (const btn of previousActionBtns) {
+		btn.addEventListener(
+			"click",
+			async (e) => {
+				e.preventDefault();
+				handleActionButtonClick(e, {
+					allTabs: await ensureAllTabsAvailability(),
+				});
+			},
+		);
 	}
 }
 
@@ -449,11 +487,6 @@ async function removeTr(
 	if (removeIndex < allTabs[TabContainer.keyPinnedTabsNo]) {
 		allTabs[TabContainer.keyPinnedTabsNo]--;
 	}
-	// save the updated tabs
-	readManagedTabsAndSave({
-		tabAppendElement,
-		allTabs,
-	});
 	updateIndexesOnTrsAfterIndex(removeIndex);
 }
 
@@ -673,15 +706,65 @@ function reduceLoggersToElements() {
 
 /**
  * Callback on reorder events
- * @param {Object} message the object created from the drag handler
- * @param {Object} scaffold the object with tbody and allTabs ready to be used
+ * @param {Object} [param0={}] message the object created from the drag handler
+ * @param {number} [param0.fromIndex=0] - the original index of the tr
+ * @param {number} [param0.toIndex=0] - the new index of the tr
  */
-function reorderTabsTable(message, scaffold) {
-	readManagedTabsAndSave(scaffold);
-	updateLoggerIndex(message.fromIndex, message.toIndex);
+function reorderTabsTable({
+	fromIndex = 0,
+	toIndex = 0,
+} = {}) {
+	updateLoggerIndex(fromIndex, toIndex);
 	updateIndexesOnTrsAfterIndex(
-		Math.min(message.toIndex, message.fromIndex),
+		Math.min(fromIndex, toIndex),
 	);
+	manage_InvalidateSort = true;
+}
+
+/**
+ * Returns the value from the given selector
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TrHTMLElement} [param0.tr=null] - the tr where to selector is located
+ * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
+ * @return undefined (when the value is null or "") or the trimmed value
+ */
+function getInputValue({
+	tr = null,
+	selector = "",
+} = {}) {
+	const value = tr?.querySelector(selector).value.trim();
+	return value == null || value === "" ? undefined : value;
+}
+
+/**
+ * Finds all the trs and their inputs to update the currently saved Tabs
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {TbodyHTMLElement} [param0.tbody=document.querySelector("#sortable-table tbody")] - the tbody inside the modal where the trs can be found
+ * @param {TabContainer} [param0.allTabs=await ensureAllTabsAvailability()] - the TabContainer instance
+ */
+async function readManagedTabsAndSave({
+	tbody = document.querySelector("#sortable-table tbody"),
+	allTabs = null,
+} = {}) {
+	// read all Tabs in the tbody
+	const tableTabs = [];
+	for (const tr of tbody.querySelectorAll("tr")) {
+		if (tr !== tbody.lastChild) { // lastChild is always empty
+			tableTabs.push(Tab.create({
+				label: getInputValue({ tr, selector: "input.label" }),
+				url: getInputValue({ tr, selector: "input.url" }),
+				org: getInputValue({ tr, selector: "input.org" }),
+			}));
+		}
+	}
+	allTabs = allTabs ?? await ensureAllTabsAvailability();
+	// send message to save the Tabs as they were read
+	await allTabs.replaceTabs(tableTabs, {
+		resetTabs: true,
+		removeOrgTabs: true,
+		updatePinnedTabs: false,
+		invalidateSort: manage_InvalidateSort,
+	});
 }
 
 /**
@@ -694,16 +777,23 @@ export async function createManageTabsModal() {
 	if (document.getElementById(MODAL_ID) != null) {
 		return showToast("error_close_other_modal", false);
 	}
-	const allTabs = await ensureAllTabsAvailability();
+	const allTabs = await ensureAllTabsAvailability({ reset: true });
 	const {
 		modalParent,
-		closeButton,
+		closeButton: modalCloseBtn,
 		tbody,
-		actionsMap,
 		saveButton,
 		loggers,
+		deleteAllTabsButton,
+		trsAndButtons: allTrsAndButtons,
+		dropdownMenus: allDropMenus,
 	} = await generateManageTabsModal(allTabs);
-	managedLoggers = loggers;
+	managedLoggers.splice(0, managedLoggers.length, loggers);
+	deleteAllButton = deleteAllTabsButton;
+	trsAndButtons.splice(0, trsAndButtons.length, allTrsAndButtons);
+	dropdownMenus.splice(0, dropdownMenus.length, allDropMenus);
+	closeButton = modalCloseBtn;
+	manage_InvalidateSort = false;
 	const buttonContainer = saveButton.closest("div");
 	manageTabsButtons.show = buttonContainer.querySelector(".show_all_tabs");
 	manageTabsButtons.hide = buttonContainer.querySelector(
@@ -712,7 +802,7 @@ export async function createManageTabsModal() {
 	getModalHanger().appendChild(modalParent);
 	updateModalBodyOverflow(modalParent.querySelector("article"));
 	// Setup drag functionality for the manage tabs table
-	setupDragForTable((mess) => reorderTabsTable(mess, { tbody, allTabs }));
+	setupDragForTable(reorderTabsTable);
 	closeButton.addEventListener("click", (_) => {
 		setupDragForUl(reorderTabsUl);
 	});
@@ -720,17 +810,20 @@ export async function createManageTabsModal() {
 		e.preventDefault();
 		readManagedTabsAndSave({ tbody, allTabs });
 		closeButton.click();
-		managedLoggers = null;
+		managedLoggers.length = 0;
 	});
 	// Attach listeners to all existing buttons
-	for (const btn of modalParent.querySelectorAll("[data-action]")) {
+	actionButtons.splice(
+		0,
+		actionButtons.length,
+		...modalParent.querySelectorAll("[data-action]"),
+	);
+	for (const btn of actionButtons) {
 		btn.addEventListener(
 			"click",
 			(e) => {
 				e.preventDefault();
 				handleActionButtonClick(e, {
-					actionsMap,
-					closeButton,
 					allTabs,
 				});
 			},
@@ -744,4 +837,31 @@ export async function createManageTabsModal() {
 				type: el.type,
 			}), el.index);
 	}
+	// Close dropdown when clicking outside
+	for (const { tr, button } of trsAndButtons) {
+		tr.addEventListener("click", (e) => closeDropdownOnTrClick(e, button));
+	}
+	const allDropButtons = trsAndButtons.reduce((acc, trAndBtn) => {
+		acc.push(trAndBtn.button);
+		return acc;
+	}, []);
+	for (const button of allDropButtons) {
+		// Prevent dropdown from closing when clicking inside
+		// and close all other Btns
+		button.addEventListener(
+			"click",
+			(e) => closeDropdownOnBtnClick(e, button),
+		);
+	}
+	// enable the deleteAllButton to be clicked
+	deleteAllButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		const lastTr = tbody.querySelector("tr:last-child");
+		for (const tr of Array.from(tbody.querySelectorAll("tr"))) {
+			if (tr !== lastTr) {
+				tr.remove();
+			}
+		}
+		deleteAllButton.setAttribute("disabled", true);
+	});
 }

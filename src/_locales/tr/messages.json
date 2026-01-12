@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Sil",
+		"description": "[Tab-yönet] bir satırı sil"
+	},
+	"act_open": {
+		"message": "🪂 Aç",
+		"description": "[Tab-yönet] Seçili Tab aç"
+	},
 	"actions": {
 		"message": "Eylemler",
 		"description": "Tab eylemleri için açılır menü etiketi"
@@ -235,13 +243,9 @@
 		"message": "🧹 Diğer Güncellemeler",
 		"description": "[bağlam-menüsü]"
 	},
-	"delete": {
-		"message": "Sil",
-		"description": "[açılır-pencere] bir satırı sil"
-	},
 	"delete_all": {
-		"message": "Tüm Tabs $delete",
-		"description": "[popup] tüm Tabs boşaltmak için çöp kutusundaki başlık"
+		"message": "Tüm $tabs sil",
+		"description": "[açılır pencere] tüm $tabs boşaltmak için kutu üzerindeki başlık"
 	},
 	"descending": {
 		"message": "Azalan (Z-A)",

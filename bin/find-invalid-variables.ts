@@ -36,10 +36,12 @@ for (const locale of locales) {
 	}
 }
 
-if (Object.keys(result).length > 0) {
+const keysLen = Object.keys(result).length;
+if (keysLen > 0) {
 	fs.writeFileSync(
 		"invalid-variables-report.json",
 		JSON.stringify(result, null, 2),
 		"utf8",
 	);
+	console.error(`Found ${keysLen} invalid variables.`);
 }

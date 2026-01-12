@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Slet",
+		"description": "[administrer-Tab] slet en række"
+	},
+	"act_open": {
+		"message": "🪂 Åbn",
+		"description": "[administrer-Tab] Åbn den valgte Tab"
+	},
 	"actions": {
 		"message": "Handlinger",
 		"description": "Rullemenu-etiket til Tab-handlinger"
@@ -235,13 +243,9 @@
 		"message": "🧹 Andre opdateringer",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Slet",
-		"description": "[popup] slet en række"
-	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[popup] titel på papirkurven for at tømme alle Tabs"
+		"message": "Slet alle $tabs",
+		"description": "[popup] titel på papirkurven for at tømme alle $tabs"
 	},
 	"descending": {
 		"message": "Faldende (Z-A)",

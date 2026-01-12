@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Löschen",
+		"description": "[Tab-verwalten] eine Zeile löschen"
+	},
+	"act_open": {
+		"message": "🪂 Öffnen",
+		"description": "[Tab-verwalten] Die ausgewählte Tab öffnen"
+	},
 	"actions": {
 		"message": "Aktionen",
 		"description": "Dropdown-Menü-Beschriftung für Tab-Aktionen"
@@ -235,13 +243,9 @@
 		"message": "🧹 Weitere Aktualisierungen",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Löschen",
-		"description": "[popup] Eine Zeile löschen"
-	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[Popup] Titel im Papierkorb, um alle Tabs zu leeren"
+		"message": "Alle $tabs löschen",
+		"description": "[Popup] Titel auf dem Papierkorb, um alle $tabs zu leeren"
 	},
 	"descending": {
 		"message": "Absteigend (Z-A)",

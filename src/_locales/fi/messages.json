@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Poista",
+		"description": "[hallitse-Tab] poista rivi"
+	},
+	"act_open": {
+		"message": "🪂 Avaa",
+		"description": "[hallitse-Tab] Avaa valittu Tab"
+	},
 	"actions": {
 		"message": "Toiminnot",
 		"description": "Pudotusvalikon etiketti Tab-toiminnoille"
@@ -235,13 +243,9 @@
 		"message": "🧹 Muut päivitykset",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Poista",
-		"description": "[popup] poista rivi"
-	},
 	"delete_all": {
-		"message": "$delete kaikki Tabs",
-		"description": "[ponnahdusikkuna] otsikko roskakorissa kaikkien Tabs tyhjentämiseksi"
+		"message": "Poista kaikki $tabs",
+		"description": "[ponnahdusikkuna] roskakorin otsikko kaikkien $tabs tyhjentämiseksi"
 	},
 	"descending": {
 		"message": "Laskeva (Z-A)",

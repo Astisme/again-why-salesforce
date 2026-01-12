@@ -57,6 +57,14 @@ For Safari users, we recommend checking out our [installation guide](https://git
 
 ## Wonderful Features
 
+### Manage your Tabs with comfort
+
+<p align="center">
+    Add, remove, sort, pin (+ more) your Tabs in full screen!
+    <br />
+    <img src="/images/manage-tabs.png" width="50%" title="Manage your Tabs"/>
+</p>
+
 ### Settings and Tab Styles
 
 <p align="center">

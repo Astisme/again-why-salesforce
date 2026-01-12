@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Odstrániť",
+		"description": "[správa-Tab] odstrániť riadok"
+	},
+	"act_open": {
+		"message": "🪂 Otvoriť",
+		"description": "[správa-Tab] Otvoriť vybranú Tab"
+	},
 	"actions": {
 		"message": "Akcie",
 		"description": "Popis rozbaľovacej ponuky pre akcie Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Ďalšie aktualizácie",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Vymazať",
-		"description": "[popup] vymazať riadok"
-	},
 	"delete_all": {
-		"message": "$delete všetky Tabs",
-		"description": "[vyskakovacie-okno] názov na koši na vyprázdnenie všetkých Tabs"
+		"message": "Odstrániť všetky $tabs",
+		"description": "[vyskakovacie okno] názov na koši na vyprázdnenie všetkých $tabs"
 	},
 	"descending": {
 		"message": "Zostupne (Z-A)",

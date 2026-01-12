@@ -8,11 +8,11 @@ import {
 import {
 	BROWSER,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
+	EXTENSION_OPTIONAL_HOST_PERM,
 	FRAME_PATTERNS,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	LINK_NEW_BROWSER,
-	MANIFEST,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	SETTINGS_KEY,
@@ -525,7 +525,7 @@ Deno.test("requestPermissions", async (t) => {
 	await t.step("request cookies permissions", async () => {
 		const cookiesPermObj = {
 			permissions: ["cookies"],
-			origins: MANIFEST.optional_host_permissions,
+			origins: EXTENSION_OPTIONAL_HOST_PERM,
 		};
 		assertFalse(await BROWSER.permissions.contains(cookiesPermObj));
 		assert(await requestCookiesPermission());

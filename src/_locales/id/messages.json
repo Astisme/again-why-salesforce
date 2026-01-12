@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Hapus",
+		"description": "[kelola-Tab] hapus satu baris"
+	},
+	"act_open": {
+		"message": "🪂 Buka",
+		"description": "[kelola-Tab] Buka Tab yang dipilih"
+	},
 	"actions": {
 		"message": "Tindakan",
 		"description": "Label menu dropdown untuk tindakan Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Pembaruan Lainnya",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Hapus",
-		"description": "[popup] Menghapus satu baris"
-	},
 	"delete_all": {
-		"message": "$delete semua Tabs",
-		"description": "[popup] judul di tempat sampah untuk mengosongkan semua Tabs"
+		"message": "Hapus semua $tabs",
+		"description": "[popup] judul pada tempat sampah untuk mengosongkan semua $tabs"
 	},
 	"descending": {
 		"message": "Turun (Z-A)",

@@ -1,16 +1,18 @@
 "use strict";
 import {
-	areFramePatternsAllowed,
 	BROWSER,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
 	HIDDEN_CLASS,
+} from "/constants.js";
+import {
+	areFramePatternsAllowed,
 	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,
-} from "/constants.js";
+} from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import { handleSwitchColorTheme } from "../themeHandler.js";

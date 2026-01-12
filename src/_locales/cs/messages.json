@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Odstranit",
+		"description": "[správa-Tab] odstranit řádek"
+	},
+	"act_open": {
+		"message": "🪂 Otevřít",
+		"description": "[správa-Tab] Otevřít vybranou Tab"
+	},
 	"actions": {
 		"message": "Akce",
 		"description": "Popisek rozbalovací nabídky pro akce Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Další aktualizace",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Smazat",
-		"description": "[popup] smazat řádek"
-	},
 	"delete_all": {
-		"message": "$delete všechny Tabs",
-		"description": "[vyskakovací-okno] název na koši pro vyprázdnění všech Tabs"
+		"message": "Odstranit všechny $tabs",
+		"description": "[vyskakovací okno] název na koši pro vyprázdnění všech $tabs"
 	},
 	"descending": {
 		"message": "Sestupně (Z-A)",

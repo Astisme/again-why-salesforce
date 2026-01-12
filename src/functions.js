@@ -3,12 +3,12 @@ import {
 	BROWSER,
 	DO_NOT_REQUEST_FRAME_PERMISSION,
 	EXTENSION_NAME,
+	EXTENSION_OPTIONAL_HOST_PERM,
 	FRAME_PATTERNS,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	HAS_ORG_TAB,
 	ISSAFARI,
-	MANIFEST,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
 	PIN_TAB_CLASS,
@@ -252,7 +252,7 @@ export function requestFramePatternsPermission() {
 export function requestCookiesPermission() {
 	return requestPermissions({
 		permissions: ["cookies"],
-		origins: MANIFEST.optional_host_permissions,
+		origins: EXTENSION_OPTIONAL_HOST_PERM,
 	});
 }
 /**

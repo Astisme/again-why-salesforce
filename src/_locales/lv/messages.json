@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Dzēst",
+		"description": "[pārvaldīt-Tab] dzēst rindu"
+	},
+	"act_open": {
+		"message": "🪂 Atvērt",
+		"description": "[pārvaldīt-Tab] Atvērt atlasīto Tab"
+	},
 	"actions": {
 		"message": "Darbības",
 		"description": "Nolaižamās izvēlnes etiķete Tab darbībām"
@@ -235,13 +243,9 @@
 		"message": "🧹 Citi atjauninājumi",
 		"description": "[konteksta_izvēlne]"
 	},
-	"delete": {
-		"message": "Dzēst",
-		"description": "[uznirstošais_logs] dzēst rindu"
-	},
 	"delete_all": {
-		"message": "$delete visas Tabs",
-		"description": "[uznirstošais-logs] nosaukums miskastē, lai iztukšotu visas Tabs"
+		"message": "Dzēst visas $tabs",
+		"description": "[uznirstošais logs] virsraksts uz miskastes, lai iztukšotu visas $tabs"
 	},
 	"descending": {
 		"message": "Dilstošā secībā (Z-A)",

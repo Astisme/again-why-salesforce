@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ 삭제",
+		"description": "[Tab-관리] 행 삭제"
+	},
+	"act_open": {
+		"message": "🪂 열기",
+		"description": "[Tab-관리] 선택한 Tab 열기"
+	},
 	"actions": {
 		"message": "작업",
 		"description": "Tab 작업을 위한 드롭다운 메뉴 라벨"
@@ -235,13 +243,9 @@
 		"message": "🧹 기타 업데이트",
 		"description": "[컨텍스트_메뉴]"
 	},
-	"delete": {
-		"message": "삭제",
-		"description": "[팝업] 행 삭제"
-	},
 	"delete_all": {
-		"message": "모든 Tabs $delete",
-		"description": "[팝업] 모든 Tabs를 비우기 위한 휴지통의 제목"
+		"message": "모든 $tabs 삭제",
+		"description": "[팝업] 모든 $tabs를 비우기 위한 휴지통 위의 제목"
 	},
 	"descending": {
 		"message": "내림차순 (Z-A)",

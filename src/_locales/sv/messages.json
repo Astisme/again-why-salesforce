@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Ta bort",
+		"description": "[hantera-Tab] ta bort en rad"
+	},
+	"act_open": {
+		"message": "🪂 Öppna",
+		"description": "[hantera-Tab] Öppna den valda Tab"
+	},
 	"actions": {
 		"message": "Åtgärder",
 		"description": "Etikett för rullgardinsmeny för Tab-åtgärder"
@@ -235,13 +243,9 @@
 		"message": "🧹 Andra uppdateringar",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Radera",
-		"description": "[popup] radera en rad"
-	},
 	"delete_all": {
-		"message": "$delete alla Tabs",
-		"description": "[popup] titel på papperskorgen för att tömma alla Tabs"
+		"message": "Ta bort alla $tabs",
+		"description": "[popup] titel på papperskorgen för att tömma alla $tabs"
 	},
 	"descending": {
 		"message": "Fallande (Z-A)",

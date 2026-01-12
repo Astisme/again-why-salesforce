@@ -4,8 +4,7 @@ import {
 	assertFalse,
 	assertThrows,
 } from "@std/testing/asserts";
-
-import { createMockElement } from "../mocks.ts";
+import { createMockElement } from "../happydom.ts";
 import { showReviewOrSponsor } from "/components/review-sponsor/review-sponsor.js";
 
 Deno.test("show review or sponsor block", async (t) => {

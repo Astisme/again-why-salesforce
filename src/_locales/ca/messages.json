@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Suprimeix",
+		"description": "[gestiona-Tab] suprimeix una fila"
+	},
+	"act_open": {
+		"message": "🪂 Obre",
+		"description": "[gestiona-Tab] Obre la Tab seleccionada"
+	},
 	"actions": {
 		"message": "Accions",
 		"description": "Etiqueta del menú desplegable per a les accions de la Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 Altres actualitzacions",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Esborrar",
-		"description": "[popup] esborrar una fila"
-	},
 	"delete_all": {
-		"message": "$delete totes les Tabs",
-		"description": "[finestra-emergent] títol a la paperera per buidar totes les Tabs"
+		"message": "Suprimeix totes les $tabs",
+		"description": "[emergents] títol a la paperera per buidar totes les $tabs"
 	},
 	"descending": {
 		"message": "Descendent (Z-A)",

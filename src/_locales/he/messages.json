@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ מחק",
+		"description": "[ניהול-Tab] מחק שורה"
+	},
+	"act_open": {
+		"message": "🪂 פתח",
+		"description": "[ניהול-Tab] פתח את ה-Tab הנבחרת"
+	},
 	"actions": {
 		"message": "פעולות",
 		"description": "תווית תפריט נפתח עבור פעולות Tab"
@@ -235,13 +243,9 @@
 		"message": "🧹 עדכונים אחרים",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "מחק",
-		"description": "[popup] מחק שורה"
-	},
 	"delete_all": {
-		"message": "$delete את כל ה-Tabs",
-		"description": "[חלון-קופץ] כותרת על סל המיחזור לריקון כל ה-Tabs"
+		"message": "מחק את כל ה $tabs",
+		"description": "[חלון קופץ] כותרת על הפח לריקון כל ה-$tabs"
 	},
 	"descending": {
 		"message": "יורד (Z-A)",

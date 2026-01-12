@@ -437,10 +437,14 @@ export class TabContainer extends Array {
 	 *
 	 * @param {Array<Object>} tabs - An array of Tab objects to be added to the container.
 	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the Tabs after adding. Defaults to `true`.
+	 * @param {Object} [param2={}] an object with the following keys
+	 * @param {boolean} [param2.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 * @throws {Error} - Throws an error if any Tab (other than duplicates) fails to be added.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
-	async addTabs(tabs, sync = true) {
+	async addTabs(tabs, sync = true, {
+		invalidateSort = false,
+	} = {}) {
 		if (tabs == null || (tabs.length === 0 && !sync)) {
 			return true;
 		}
@@ -456,7 +460,9 @@ export class TabContainer extends Array {
 				// we will continue if all the errors were of duplicate Tabs
 			}
 		}
-		return await (sync ? this.syncTabs() : this.checkSetSorted());
+		return await (sync
+			? this.syncTabs({ fromInvalidateSortFunction: invalidateSort })
+			: this.checkSetSorted());
 	}
 
 	/**
@@ -672,6 +678,7 @@ export class TabContainer extends Array {
 	 * @param {boolean} [param1.keepTabsNotThisOrg=null] - Whether to keep the org-specific Tabs which are not of this Org
 	 * @param {string} [param1.removeThisOrgTabs=null] - The Org for which to remove the Org Tabs
 	 * @param {boolean} [param1.updatePinnedTabs=true] - Wheter to update the currently pinned Tabs number
+	 * @param {boolean} [param1.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 *
 	 * @return {Promise<boolean>} - A Promise stating whether the operation was successful
 	 *
@@ -720,6 +727,7 @@ export class TabContainer extends Array {
 		keepTabsNotThisOrg = null,
 		removeThisOrgTabs = null,
 		updatePinnedTabs = true,
+		invalidateSort = false,
 	} = {}) {
 		if (newTabs === this) {
 			return true;
@@ -782,7 +790,7 @@ export class TabContainer extends Array {
 			}
 		}
 		// Add new tabs and sync them
-		return await this.addTabs(newTabs, sync);
+		return await this.addTabs(newTabs, sync, { invalidateSort });
 	}
 
 	/**
@@ -1535,10 +1543,17 @@ function getAllTabs() {
 /**
  * Ensures availability of the TabContainer instance, initializing it if necessary.
  *
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {boolean} [param0.reset=false] - whether to reset the singleton to get fresh data
  * @return {Promise<TabContainer>} The TabContainer instance representing all tabs.
  */
-export async function ensureAllTabsAvailability() {
+export async function ensureAllTabsAvailability({
+	reset = false,
+} = {}) {
 	try {
+		if (reset) {
+			return await TabContainer._reset();
+		}
 		return getAllTabs();
 	} catch (e) {
 		console.info(e);

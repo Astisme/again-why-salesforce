@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ Törlés",
+		"description": "[Tab-kezelése] egy sor törlése"
+	},
+	"act_open": {
+		"message": "🪂 Megnyitás",
+		"description": "[Tab-kezelése] A kiválasztott Tab megnyitása"
+	},
 	"actions": {
 		"message": "Műveletek",
 		"description": "Legördülő menü címkéje a Tab műveletekhez"
@@ -235,13 +243,9 @@
 		"message": "🧹 Egyéb frissítések",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Törlés",
-		"description": "[popup] sor törlése"
-	},
 	"delete_all": {
-		"message": "$delete az összes Tabs",
-		"description": "[felugró-ablak] cím a kukán az összes Tabs kiürítéséhez"
+		"message": "Összes $tabs törlése",
+		"description": "[felugró] cím a kukán az összes $tabs ürítéséhez"
 	},
 	"descending": {
 		"message": "Csökkenő (Z-A)",

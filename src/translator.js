@@ -256,6 +256,12 @@ class TranslationService {
 		// get all inner translations
 		const cacheMessage = this.#getMessageFromCache(key);
 		if (
+			cacheMessage != null &&
+			!cacheMessage.includes("$")
+		) {
+			return cacheMessage;
+		}
+		if (
 			key.includes(" ") &&
 			cacheMessage == null
 		) {

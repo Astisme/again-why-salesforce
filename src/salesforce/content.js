@@ -477,7 +477,7 @@ export async function reorderTabsUl() {
 			resetTabs: true,
 			removeOrgTabs: true,
 			updatePinnedTabs: false,
-			//keepTabsNotThisOrg: Tab.extractOrgName(href),
+			invalidateSort: true,
 		});
 		sf_afterSet({
 			tabs,
@@ -961,9 +961,6 @@ function listenToBackgroundPage() {
 					break;
 				case "warning":
 					showToast(message.message, false, true);
-					if (message.action === "make-bold") {
-						makeDuplicatesBold(message.url);
-					}
 					break;
 				case "error":
 					showToast(message.message, false);

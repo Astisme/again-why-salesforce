@@ -1,4 +1,12 @@
 {
+	"act_delete": {
+		"message": "🗑️ 刪除",
+		"description": "[管理-Tab] 刪除一行"
+	},
+	"act_open": {
+		"message": "🪂 打開",
+		"description": "[管理-Tab] 打開所選 Tab"
+	},
 	"actions": {
 		"message": "操作",
 		"description": "Tab 操作的下拉選單標籤"
@@ -235,13 +243,9 @@
 		"message": "🧹 其他更新",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "刪除",
-		"description": "[popup] 刪除一行"
-	},
 	"delete_all": {
-		"message": "$delete 所有 Tab",
-		"description": "[快顯視窗] 清除所有 Tab 的資源回收筒標題"
+		"message": "刪除所有 $tabs",
+		"description": "[彈出視窗] 垃圾桶上的標題，用於清空所有 $tabs"
 	},
 	"descending": {
 		"message": "遞減 (Z-A)",

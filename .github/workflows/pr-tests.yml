@@ -112,7 +112,7 @@ jobs:
                     logFile: "missing-locales.log",
                     title:   "These Locale Translation are missing (not blocking)",
                     stripPatterns: [
-                      /^Task locale-check deno --allow-read --allow-write bin\/missing-locales\.ts && deno --allow-read --allow-write bin/find-invalid-variables.ts\n/gm
+                      /^Task locale-check deno --allow-read --allow-write bin\/missing-locales\.ts && deno --allow-read --allow-write bin\/find-invalid-variables\.ts\n/gm
                     ]
                   });
 
@@ -132,9 +132,6 @@ jobs:
                     logFile: "locales-errors.log",
                     title:   "Locale Sorter Failed",
                     matchPattern: /^(?:✖  Failed .+?: .+|Error traversing .+?: .+|Unexpected error: .+)/m,
-                    stripPatterns: [
-                      /^✔  Sorted .+\n/gm
-                    ]
                   });
 
             - name: Run formatter

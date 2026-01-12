@@ -19,7 +19,7 @@
 		"test": "deno task test-gen && deno task test-bg && deno task test-cmp",
 		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
 		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
-		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/components/",
+		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom.ts --allow-env ./tests/components/",
 		"test-sf": "deno task start-browser & BROWSER_PID=$! && sleep 10 && deno test --no-check --parallel  --import=tests/mocks.ts -A ./tests/salesforce/*.test.ts",
 		"start-browser": "deno task setup-chrome && deno run -A ./tests/salesforce/browser-setup.ts",
 		"setup-chrome": "bash ./tests/salesforce/setup-chrome.sh && deno task dev-chrome",
