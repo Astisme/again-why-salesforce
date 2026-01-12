@@ -1601,7 +1601,8 @@ export function generateHelpWith_i_popup({
 	root.append(anchor);
 	anchor.className = "button";
 	anchor.setAttribute("aria-describedby", "tooltip");
-	if (wasCalledWithParams && link != null && link !== "") anchor.href = link;
+  const isLinkAvailable = link != null && link !== "";
+	if (wasCalledWithParams && isLinkAvailable) anchor.href = link;
 	const svgNS = "http://www.w3.org/2000/svg";
 	const svg = document.createElementNS(svgNS, "svg");
 	anchor.append(svg);
@@ -1626,6 +1627,8 @@ export function generateHelpWith_i_popup({
 	tooltip.className = "tooltip";
 	tooltip.setAttribute("role", "tooltip");
 	let slot;
+	const linkTip = document.createElement("div");
+  linkTip.classList.add("link-tip");
 	if (wasCalledWithParams) {
 		tooltip.dataset.showTop = showTop ||
 			(!showTop && !showBottom && !showRight && !showLeft);
@@ -1634,14 +1637,17 @@ export function generateHelpWith_i_popup({
 		tooltip.dataset.showLeft = showLeft;
 		slot = document.createElement("span");
 		slot.textContent = text;
+    if(!isLinkAvailable)
+      linkTip.classList.add(HIDDEN_CLASS);
+    // add help.css
 		const linkid = `${EXTENSION_NAME}-helpcss`;
 		if (!document.getElementById(linkid)) {
-			const link = document.createElement("link");
-			link.id = linkid;
-			link.rel = "stylesheet";
-			link.type = "text/css";
-			link.href = BROWSER.runtime.getURL("/components/help/help.css");
-			document.head.appendChild(link);
+			const linkEl = document.createElement("link");
+			linkEl.id = linkid;
+			linkEl.rel = "stylesheet";
+			linkEl.type = "text/css";
+			linkEl.href = BROWSER.runtime.getURL("/components/help/help.css");
+			document.head.appendChild(linkEl);
 		}
 	} else {
 		slot = document.createElement("slot");
@@ -1649,9 +1655,7 @@ export function generateHelpWith_i_popup({
 		slot.textContent = "Nothing to see here...";
 	}
 	tooltip.append(slot);
-	const linkTip = document.createElement("div");
 	tooltip.append(linkTip);
-	linkTip.classList.add("link-tip", HIDDEN_CLASS);
 	(async () => {
 		const translator = await ensureTranslatorAvailability();
 		assistive.textContent = await translator.translate("help");
@@ -2380,6 +2384,13 @@ export async function generateManageTabsModal(tabs = [], {
 	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
+  const homepage = MANIFEST.homepage_url;
+  const wikiLinkTab = `${homepage}/wiki/What-is-a-Tab`;
+  // Validate homepage URL (must be GitHub)
+  if (!homepage?.startsWith("https://github.com/")) {
+    console.error("no_manifest_github");
+    return;
+  }
 	// Table header with drag handle column
 	const headers = [
 		{
@@ -2394,7 +2405,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("tab_label"),
 			info: {
 				text: await translator.translate("help_tab_label"),
-				link: "",
+				link: `${wikiLinkTab}#Label`,
 				showBottom: true,
 			},
 		},
@@ -2402,7 +2413,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("tab_url"),
 			info: {
 				text: await translator.translate("help_tab_url"),
-				link: "",
+				link: `${wikiLinkTab}#Url`,
 				showBottom: true,
 			},
 		},
@@ -2410,7 +2421,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("tab_org"),
 			info: {
 				text: await translator.translate("help_tab_org"),
-				link: "",
+				link: `${wikiLinkTab}#Org`,
 				showBottom: true,
 			},
 		},
@@ -2418,7 +2429,7 @@ export async function generateManageTabsModal(tabs = [], {
 			label: await translator.translate("actions"),
 			info: {
 				text: await translator.translate("help_tab_actions"),
-				link: "testlinkactions",
+				link: "",
 				showLeft: true,
 			},
 		},
