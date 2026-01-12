@@ -718,7 +718,7 @@ function reorderTabsTable({
 	updateIndexesOnTrsAfterIndex(
 		Math.min(fromIndex, toIndex),
 	);
-  manage_InvalidateSort = true;
+	manage_InvalidateSort = true;
 }
 
 /**
@@ -763,7 +763,7 @@ async function readManagedTabsAndSave({
 		resetTabs: true,
 		removeOrgTabs: true,
 		updatePinnedTabs: false,
-    invalidateSort: manage_InvalidateSort,
+		invalidateSort: manage_InvalidateSort,
 	});
 }
 
@@ -793,7 +793,7 @@ export async function createManageTabsModal() {
 	trsAndButtons.splice(0, trsAndButtons.length, allTrsAndButtons);
 	dropdownMenus.splice(0, dropdownMenus.length, allDropMenus);
 	closeButton = modalCloseBtn;
-  manage_InvalidateSort = false;
+	manage_InvalidateSort = false;
 	const buttonContainer = saveButton.closest("div");
 	manageTabsButtons.show = buttonContainer.querySelector(".show_all_tabs");
 	manageTabsButtons.hide = buttonContainer.querySelector(
@@ -814,8 +814,8 @@ export async function createManageTabsModal() {
 	});
 	// Attach listeners to all existing buttons
 	actionButtons.splice(
-    0,
-    actionButtons.length,
+		0,
+		actionButtons.length,
 		...modalParent.querySelectorAll("[data-action]"),
 	);
 	for (const btn of actionButtons) {

@@ -8,7 +8,7 @@ import {
 	HIDDEN_CLASS,
 } from "/constants.js";
 import {
-  areFramePatternsAllowed,
+	areFramePatternsAllowed,
 	isOnSalesforceSetup,
 	openSettingsPage,
 	sendExtensionMessage,

@@ -138,11 +138,11 @@ async function bg_getStyleSettings(
 		],
 	);
 	if (
-    settings == null ||
+		settings == null ||
 		Object.values(settings).every(
 			(sett) =>
 				sett == null ||
-        !Object.values(sett).some(Boolean)
+				!Object.values(sett).some(Boolean),
 		)
 	) {
 		return null;
