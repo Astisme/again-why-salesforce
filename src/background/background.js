@@ -128,7 +128,7 @@ async function bg_getStyleSettings(
 	key = null,
 	callback = null,
 ) {
-	const settings = await bg_getSettings(
+	let settings = await bg_getSettings(
 		undefined,
 		key ?? [
 			GENERIC_TAB_STYLE_KEY,
@@ -145,7 +145,7 @@ async function bg_getStyleSettings(
 				!Object.values(sett).some(Boolean),
 		)
 	) {
-		return null;
+    settings = null;
 	}
 	if (callback != null) {
 		return callback(settings);
