@@ -662,7 +662,7 @@ function setExtensionBrowserListeners() {
 			// the extension has been updated
 			// check user settings
 			const no_release_notes = await bg_getSettings(NO_RELEASE_NOTES);
-			if (no_release_notes != null && no_release_notes.enabled === true) {
+			if (no_release_notes?.enabled === true) {
 				return;
 			}
 			// get the extension version

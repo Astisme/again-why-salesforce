@@ -75,6 +75,7 @@ To celebrate this even more, we're introducing the ability to have **pinned Tabs
 
 1. The settings previews now will show only the currently selected ones
 2. The settings previews will automatically update from active / inactive state based on which input you're using
+3. Choosing your color styles is now done through color pickers #132
 
 ### Background
 
