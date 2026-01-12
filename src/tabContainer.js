@@ -437,6 +437,8 @@ export class TabContainer extends Array {
 	 *
 	 * @param {Array<Object>} tabs - An array of Tab objects to be added to the container.
 	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the Tabs after adding. Defaults to `true`.
+   * @param {Object} [param2={}] an object with the following keys
+	 * @param {boolean} [param2.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 * @throws {Error} - Throws an error if any Tab (other than duplicates) fails to be added.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
@@ -674,6 +676,7 @@ export class TabContainer extends Array {
 	 * @param {boolean} [param1.keepTabsNotThisOrg=null] - Whether to keep the org-specific Tabs which are not of this Org
 	 * @param {string} [param1.removeThisOrgTabs=null] - The Org for which to remove the Org Tabs
 	 * @param {boolean} [param1.updatePinnedTabs=true] - Wheter to update the currently pinned Tabs number
+	 * @param {boolean} [param1.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 *
 	 * @return {Promise<boolean>} - A Promise stating whether the operation was successful
 	 *
