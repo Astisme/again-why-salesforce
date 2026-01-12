@@ -110,6 +110,14 @@ export const TAB_STYLE_BOLD = "bold";
 export const TAB_STYLE_ITALIC = "italic";
 export const TAB_STYLE_UNDERLINE = "underline";
 export const TAB_STYLE_TOP = "top";
+export const DECORATION_COLORS = new Set([
+  TAB_STYLE_BACKGROUND,
+  TAB_STYLE_COLOR,
+  TAB_STYLE_BORDER,
+  TAB_STYLE_SHADOW,
+  TAB_STYLE_HOVER,
+  TAB_STYLE_TOP,
+]);
 export const PREVENT_DEFAULT_OVERRIDE = "user-set";
 export const SLDS_ACTIVE = "slds-is-active";
 export const ORG_TAB_CLASS = "is-org-tab";
