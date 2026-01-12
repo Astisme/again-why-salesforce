@@ -437,14 +437,14 @@ export class TabContainer extends Array {
 	 *
 	 * @param {Array<Object>} tabs - An array of Tab objects to be added to the container.
 	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the Tabs after adding. Defaults to `true`.
-   * @param {Object} [param2={}] an object with the following keys
+	 * @param {Object} [param2={}] an object with the following keys
 	 * @param {boolean} [param2.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 * @throws {Error} - Throws an error if any Tab (other than duplicates) fails to be added.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if all Tabs were added successfully (excluding duplicates), otherwise `false` if any Tab could not be added.
 	 */
 	async addTabs(tabs, sync = true, {
-    invalidateSort = false,
-  } = {}) {
+		invalidateSort = false,
+	} = {}) {
 		if (tabs == null || (tabs.length === 0 && !sync)) {
 			return true;
 		}
@@ -460,7 +460,9 @@ export class TabContainer extends Array {
 				// we will continue if all the errors were of duplicate Tabs
 			}
 		}
-		return await (sync ? this.syncTabs({ fromInvalidateSortFunction: invalidateSort}) : this.checkSetSorted());
+		return await (sync
+			? this.syncTabs({ fromInvalidateSortFunction: invalidateSort })
+			: this.checkSetSorted());
 	}
 
 	/**
@@ -725,7 +727,7 @@ export class TabContainer extends Array {
 		keepTabsNotThisOrg = null,
 		removeThisOrgTabs = null,
 		updatePinnedTabs = true,
-    invalidateSort = false,
+		invalidateSort = false,
 	} = {}) {
 		if (newTabs === this) {
 			return true;

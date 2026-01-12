@@ -255,11 +255,12 @@ class TranslationService {
 	async translate(key, connector = " ") {
 		// get all inner translations
 		const cacheMessage = this.#getMessageFromCache(key);
-    if(
-      cacheMessage != null &&
-      !cacheMessage.includes("$")
-    )
-      return cacheMessage;
+		if (
+			cacheMessage != null &&
+			!cacheMessage.includes("$")
+		) {
+			return cacheMessage;
+		}
 		if (
 			key.includes(" ") &&
 			cacheMessage == null
@@ -280,8 +281,9 @@ class TranslationService {
 			if (!keyTranslate.includes("$")) {
 				return keyTranslate;
 			}
-      if(['org_tabs','org_pin_tabs'].includes(keyTranslate))
-        console.log('ciao');
+			if (["org_tabs", "org_pin_tabs"].includes(keyTranslate)) {
+				console.log("ciao");
+			}
 			let messageTranslated = "";
 			const words = keyTranslate.split(/\s+/);
 			for (const word of words) {

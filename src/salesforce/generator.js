@@ -1601,7 +1601,7 @@ export function generateHelpWith_i_popup({
 	root.append(anchor);
 	anchor.className = "button";
 	anchor.setAttribute("aria-describedby", "tooltip");
-  const isLinkAvailable = link != null && link !== "";
+	const isLinkAvailable = link != null && link !== "";
 	if (wasCalledWithParams && isLinkAvailable) anchor.href = link;
 	const svgNS = "http://www.w3.org/2000/svg";
 	const svg = document.createElementNS(svgNS, "svg");
@@ -1628,7 +1628,7 @@ export function generateHelpWith_i_popup({
 	tooltip.setAttribute("role", "tooltip");
 	let slot;
 	const linkTip = document.createElement("div");
-  linkTip.classList.add("link-tip");
+	linkTip.classList.add("link-tip");
 	if (wasCalledWithParams) {
 		tooltip.dataset.showTop = showTop ||
 			(!showTop && !showBottom && !showRight && !showLeft);
@@ -1637,9 +1637,10 @@ export function generateHelpWith_i_popup({
 		tooltip.dataset.showLeft = showLeft;
 		slot = document.createElement("span");
 		slot.textContent = text;
-    if(!isLinkAvailable)
-      linkTip.classList.add(HIDDEN_CLASS);
-    // add help.css
+		if (!isLinkAvailable) {
+			linkTip.classList.add(HIDDEN_CLASS);
+		}
+		// add help.css
 		const linkid = `${EXTENSION_NAME}-helpcss`;
 		if (!document.getElementById(linkid)) {
 			const linkEl = document.createElement("link");
@@ -1798,12 +1799,13 @@ function createTableRow(
 	const { td, checkbox } = createCheckboxCell(index, true);
 	tr.appendChild(td);
 	tr.addEventListener("click", (e) => {
-    if(
-      e.target.tagName !== "INPUT" ||
-      e.target.type !== "checkbox"
-    )
-      checkbox.click();
-  });
+		if (
+			e.target.tagName !== "INPUT" ||
+			e.target.type !== "checkbox"
+		) {
+			checkbox.click();
+		}
+	});
 	tr.appendChild(createTextCell(label));
 	tr.appendChild(createTextCell(url));
 	tr.appendChild(createTextCell(org));
@@ -2034,15 +2036,16 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		}
 		updateSelectAllButtonText();
 	});
-  for(const tr of article.querySelectorAll('tr')){
-	tr.addEventListener("click", (e) => {
-    if(
-      e.target.tagName !== "INPUT" ||
-      e.target.type !== "checkbox"
-    )
-      updateSelectAllButtonText();
-  });
-  }
+	for (const tr of article.querySelectorAll("tr")) {
+		tr.addEventListener("click", (e) => {
+			if (
+				e.target.tagName !== "INPUT" ||
+				e.target.type !== "checkbox"
+			) {
+				updateSelectAllButtonText();
+			}
+		});
+	}
 	/**
 	 * Function to get selected tabs
 	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
@@ -2384,13 +2387,13 @@ export async function generateManageTabsModal(tabs = [], {
 	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
-  const homepage = MANIFEST.homepage_url;
-  const wikiLinkTab = `${homepage}/wiki/What-is-a-Tab`;
-  // Validate homepage URL (must be GitHub)
-  if (!homepage?.startsWith("https://github.com/")) {
-    console.error("no_manifest_github");
-    return;
-  }
+	const homepage = MANIFEST.homepage_url;
+	const wikiLinkTab = `${homepage}/wiki/What-is-a-Tab`;
+	// Validate homepage URL (must be GitHub)
+	if (!homepage?.startsWith("https://github.com/")) {
+		console.error("no_manifest_github");
+		return;
+	}
 	// Table header with drag handle column
 	const headers = [
 		{
