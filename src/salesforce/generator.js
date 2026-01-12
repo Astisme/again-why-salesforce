@@ -2388,7 +2388,7 @@ export async function generateManageTabsModal(tabs = [], {
 	await addModalExplainer(article, explainer);
 	// Create a table-like structure for tabs
 	const divParent = createModalContentContainer(article);
-  const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
+	const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
 	// Table header with drag handle column
 	const headers = [
 		{

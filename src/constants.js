@@ -71,7 +71,7 @@ const MANIFEST = BROWSER.runtime.getManifest();
 export const EXTENSION_VERSION = MANIFEST.version;
 // Validate homepage URL (must be GitHub)
 if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
-  throw new Error("no_manifest_github");
+	throw new Error("no_manifest_github");
 }
 export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
