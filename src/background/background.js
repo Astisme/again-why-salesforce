@@ -126,43 +126,46 @@ export async function bg_getSettings(
  * @param {Array|Object<string,Array>} styleSettings - the result from bg_getSettings (for style settings)
  * @return styleSettings, updated with Hexadecimal values
  */
-async function checkStyleSettingsHex(styleKey, styleSettings){
-  if(styleKey == null || styleSettings == null)
-    return styleSettings;
-  if(!Array.isArray(styleKey)){
-    styleKey = [styleKey];
-  }
-  const wasArray = Array.isArray(styleSettings);
-  if(wasArray){
-    styleSettings = Object.fromEntries(
-      styleKey.map(
-        (key) => [key, styleSettings]
-      )
-    );
-  }
-  const updateKeys = new Map();
-  for (const [key, styleArray] of Object.entries(styleSettings)) {
-    for(const styleByKey of styleArray
-      .filter(({ id, value }) => 
-        DECORATION_COLORS.has(id) &&
-        cssColorNames[value.toLowerCase()] != null
-      )
-    ){
-      styleByKey.value = cssColorNames[styleByKey.value.toLowerCase()];
-      if(!updateKeys.has(key))
-        updateKeys.set(key, []);
-      updateKeys.get(key).push(styleByKey);
-    }
-  }
-  if(updateKeys.size > 0)
-    await Promise.all(
-      Array.from(updateKeys, ([key, value]) => 
-        bg_setStorage(value, undefined, key)
-      )
-    );
-  return wasArray
-   ? Object.values(styleSettings).flat()
-   : styleSettings;
+async function checkStyleSettingsHex(styleKey, styleSettings) {
+	if (styleKey == null || styleSettings == null) {
+		return styleSettings;
+	}
+	if (!Array.isArray(styleKey)) {
+		styleKey = [styleKey];
+	}
+	const wasArray = Array.isArray(styleSettings);
+	if (wasArray) {
+		styleSettings = Object.fromEntries(
+			styleKey.map(
+				(key) => [key, styleSettings],
+			),
+		);
+	}
+	const updateKeys = new Map();
+	for (const [key, styleArray] of Object.entries(styleSettings)) {
+		for (
+			const styleByKey of styleArray
+				.filter(({ id, value }) =>
+					DECORATION_COLORS.has(id) &&
+					cssColorNames[value.toLowerCase()] != null
+				)
+		) {
+			styleByKey.value = cssColorNames[styleByKey.value.toLowerCase()];
+			if (!updateKeys.has(key)) {
+				updateKeys.set(key, []);
+			}
+			updateKeys.get(key).push(styleByKey);
+		}
+	}
+	if (updateKeys.size > 0) {
+		await Promise.all(
+			Array.from(
+				updateKeys,
+				([key, value]) => bg_setStorage(value, undefined, key),
+			),
+		);
+	}
+	return wasArray ? Object.values(styleSettings).flat() : styleSettings;
 }
 
 /**
@@ -176,13 +179,14 @@ async function bg_getStyleSettings(
 	key = null,
 	callback = null,
 ) {
-  if(key == null)
-    key = [
+	if (key == null) {
+		key = [
 			GENERIC_TAB_STYLE_KEY,
 			ORG_TAB_STYLE_KEY,
 			GENERIC_PINNED_TAB_STYLE_KEY,
 			ORG_PINNED_TAB_STYLE_KEY,
 		];
+	}
 	let settings = await bg_getSettings(
 		undefined,
 		key,
@@ -195,9 +199,10 @@ async function bg_getStyleSettings(
 				!Object.values(sett).some(Boolean),
 		)
 	) {
-    settings = null;
-	} else 
-    settings = await checkStyleSettingsHex(key, settings);
+		settings = null;
+	} else {
+		settings = await checkStyleSettingsHex(key, settings);
+	}
 	if (callback != null) {
 		return callback(settings);
 	}
