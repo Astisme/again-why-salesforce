@@ -10,6 +10,7 @@ import {
 	CMD_TOGGLE_ORG,
 	CMD_UPDATE_TAB,
 	CXM_MANAGE_TABS,
+	DECORATION_COLORS,
 	EXTENSION_GITHUB_LINK,
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
@@ -39,6 +40,7 @@ import {
 	checkLaunchExport,
 } from "./utils.js";
 import { checkAddRemoveContextMenus } from "./context-menus.js";
+import cssColorNames from "./css-color-names.json" with { type: "json" };
 
 /**
  * Invoke the runtime to send the message
@@ -118,6 +120,55 @@ export async function bg_getSettings(
 }
 
 /**
+ * Checks that the value of every style setting is in Hexadecimal (#FFFFFF) format.
+ * If a style is found with a non-compliant value, it is updated to Hexadecimal
+ * @param {string|string[]} styleKey - the key related to the current style settings
+ * @param {Array|Object<string,Array>} styleSettings - the result from bg_getSettings (for style settings)
+ * @return styleSettings, updated with Hexadecimal values
+ */
+async function checkStyleSettingsHex(styleKey, styleSettings) {
+	if (styleKey == null || styleSettings == null) {
+		return styleSettings;
+	}
+	if (!Array.isArray(styleKey)) {
+		styleKey = [styleKey];
+	}
+	const wasArray = Array.isArray(styleSettings);
+	if (wasArray) {
+		styleSettings = Object.fromEntries(
+			styleKey.map(
+				(key) => [key, styleSettings],
+			),
+		);
+	}
+	const updateKeys = new Map();
+	for (const [key, styleArray] of Object.entries(styleSettings)) {
+		for (
+			const styleByKey of styleArray
+				.filter(({ id, value }) =>
+					DECORATION_COLORS.has(id) &&
+					cssColorNames[value.toLowerCase()] != null
+				)
+		) {
+			styleByKey.value = cssColorNames[styleByKey.value.toLowerCase()];
+			if (!updateKeys.has(key)) {
+				updateKeys.set(key, []);
+			}
+			updateKeys.get(key).push(styleByKey);
+		}
+	}
+	if (updateKeys.size > 0) {
+		await Promise.all(
+			Array.from(
+				updateKeys,
+				([key, value]) => bg_setStorage(value, undefined, key),
+			),
+		);
+	}
+	return wasArray ? Object.values(styleSettings).flat() : styleSettings;
+}
+
+/**
  * Finds the style settings currently persisted, given a key. If not key is requested, returns all available styles
  *
  * @param {String} [key=null] - the key for which to find the persisted styles
@@ -128,14 +179,17 @@ async function bg_getStyleSettings(
 	key = null,
 	callback = null,
 ) {
-	const settings = await bg_getSettings(
-		undefined,
-		key ?? [
+	if (key == null) {
+		key = [
 			GENERIC_TAB_STYLE_KEY,
 			ORG_TAB_STYLE_KEY,
 			GENERIC_PINNED_TAB_STYLE_KEY,
 			ORG_PINNED_TAB_STYLE_KEY,
-		],
+		];
+	}
+	let settings = await bg_getSettings(
+		undefined,
+		key,
 	);
 	if (
 		settings == null ||
@@ -145,7 +199,9 @@ async function bg_getStyleSettings(
 				!Object.values(sett).some(Boolean),
 		)
 	) {
-		return null;
+		settings = null;
+	} else {
+		settings = await checkStyleSettingsHex(key, settings);
 	}
 	if (callback != null) {
 		return callback(settings);
@@ -547,8 +603,8 @@ async function setDefaultOrgStyle() {
 	// for pinned Tabs, assign the same current styles used for the unpinned counterparts
 	// but change the color of the background to the default one
 	const pinnedStyles = [
-		{ id: TAB_STYLE_BACKGROUND, forActive: false, value: "mistyrose" },
-		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "mistyrose" },
+		{ id: TAB_STYLE_BACKGROUND, forActive: false, value: "#FFE4E1" },
+		{ id: TAB_STYLE_BACKGROUND, forActive: true, value: "#FFE4E1" },
 	];
 	if (availableStyles[ORG_PINNED_TAB_STYLE_KEY] == null) {
 		availableStyles[ORG_PINNED_TAB_STYLE_KEY] = _createDefaultStyleWrapper(

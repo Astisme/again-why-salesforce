@@ -11,3 +11,4 @@ safari-*/
 .env
 node_modules/
 package-lock.json
+images/palette.png
