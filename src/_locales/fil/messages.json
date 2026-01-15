@@ -1451,6 +1451,10 @@
 		"message": "Wavy Underline",
 		"description": "Pagpipilian ng estilo ng dekorasyon upang mag-apply ng wavy underline sa teksto ng Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Mayroon kang mga hindi na-save na pagbabago. Gusto mo bang umalis nang hindi nag-e-save?",
+		"description": "[manage-tabs] hiniling ng user na pumunta sa isang Tab nang hindi muna nag-e-save"
+	},
 	"unselect_all": {
 		"message": "Alisin ang Pagkakapili sa Lahat",
 		"description": "[modal] button para alisin ang pagkakapili sa lahat ng Tabs sa export modal"

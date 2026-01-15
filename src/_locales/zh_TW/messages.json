@@ -1451,6 +1451,10 @@
 		"message": "波浪底線",
 		"description": "為 Tab 文字添加波浪下劃線的裝飾樣式選項"
 	},
+	"unsaved_changes_confirm": {
+		"message": "您有未儲存的變更。確定要在不儲存的情況下離開嗎？",
+		"description": "[manage-tabs] 使用者要求在未儲存的情況下前往某個 Tab"
+	},
 	"unselect_all": {
 		"message": "取消全選",
 		"description": "[modal] 在匯出彈出式視窗中取消選取所有 Tabs 的按鈕"

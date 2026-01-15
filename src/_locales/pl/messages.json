@@ -1451,6 +1451,10 @@
 		"message": "Fala podkreślenia",
 		"description": "Opcja stylu dekoracji do zastosowania falistego podkreślenia tekstu karty"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Masz niezapisane zmiany. Czy chcesz wyjść bez zapisywania?",
+		"description": "[manage-tabs] użytkownik poprosił o przejście do Tab bez uprzedniego zapisania"
+	},
 	"unselect_all": {
 		"message": "Odznacz Wszystko",
 		"description": "[modal] przycisk do odznaczania wszystkich Tabs w modalnym oknie eksportu"

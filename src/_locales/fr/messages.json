@@ -1450,6 +1450,10 @@
 		"message": "Soulignement ondulé",
 		"description": "Option de style de décoration pour appliquer un soulignement ondulé au texte de Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Vous avez des modifications non enregistrées. Voulez-vous quitter sans enregistrer ?",
+		"description": "[manage-tabs] l'utilisateur a demandé d'aller sur un Tab sans enregistrer au préalable"
+	},
 	"unselect_all": {
 		"message": "Tout Désélectionner",
 		"description": "[modal] bouton pour désélectionner tous les Tabs dans le modal d'exportation"

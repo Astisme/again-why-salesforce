@@ -1451,6 +1451,10 @@
 		"message": "波浪下划线",
 		"description": "为 Tab 文本应用波浪下划线的装饰样式选项"
 	},
+	"unsaved_changes_confirm": {
+		"message": "您有未保存的更改。确定要在不保存的情况下离开吗？",
+		"description": "[manage-tabs] 用户请求在未保存的情况下转到某个 Tab"
+	},
 	"unselect_all": {
 		"message": "取消全选",
 		"description": "[modal] 导出模态框中取消选择所有 Tabs 的按钮"

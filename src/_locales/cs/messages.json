@@ -1451,6 +1451,10 @@
 		"message": "Podtržení Vlnité",
 		"description": "Možnost stylu dekorace pro použití vlnitého podtržení na text Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Máte neuložené změny. Chcete odejít bez uložení?",
+		"description": "[manage-tabs] uživatel požádal o přechod na Tab bez předchozího uložení"
+	},
 	"unselect_all": {
 		"message": "Zrušit Výběr Všeho",
 		"description": "[modal] tlačítko pro zrušení výběru všech Tabs v modálním okně pro export"

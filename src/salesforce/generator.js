@@ -77,7 +77,7 @@ function _getLinkTarget(e, url) {
  *
  * @param {Event} e - the click event
  */
-async function handleLightningLinkClick(e) {
+export async function handleLightningLinkClick(e) {
 	e.preventDefault();
 	const currentTarget = e.currentTarget.target;
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
@@ -2301,7 +2301,6 @@ export async function createManageTabRow({
 		await translator.translate("act_open"),
 		{ action: "open", tabIndex: index },
 	);
-	openBtn.addEventListener("click", handleLightningLinkClick);
 	if (url) {
 		openBtn.href = Tab.expandURL(url, getCurrentHref());
 	}

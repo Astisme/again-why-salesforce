@@ -1451,6 +1451,10 @@
 		"message": "Valovito podčrtano",
 		"description": "Možnost sloga okrasitve za uporabo valovitega podčrtovanja na besedilu Taba"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Imate neshranjene spremembe. Ali želite zapustiti stran brez shranjevanja?",
+		"description": "[manage-tabs] uporabnik je želel iti na Tab brez predhodnega shranjevanja"
+	},
 	"unselect_all": {
 		"message": "Prekliči Izbiro Vsega",
 		"description": "[modal] gumb za preklic izbire vseh Tabs v modalnem oknu za izvoz"

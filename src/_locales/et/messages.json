@@ -1451,6 +1451,10 @@
 		"message": "Laineline alljoonitus",
 		"description": "Kujundusstiili valik lainelise joone lisamiseks Tab'i teksti alla"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Teil on salvestamata muudatusi. Kas soovite lahkuda ilma salvestamata?",
+		"description": "[manage-tabs] kasutaja soovis minna Tab-le ilma eelnevalt salvestamata"
+	},
 	"unselect_all": {
 		"message": "Tühista Valik Kõigilt",
 		"description": "[modal] nupp kõigi Tabs-ide valiku tühistamiseks ekspordi modaalis"

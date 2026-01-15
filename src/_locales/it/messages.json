@@ -1450,6 +1450,10 @@
 		"message": "Sottolineatura ondulata",
 		"description": "Opzione di stile decorativo per applicare una sottolineatura ondulata al testo della Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Hai delle modifiche non salvate. Vuoi uscire senza salvare?",
+		"description": "[manage-tabs] l'utente ha chiesto di andare su una Tab senza prima salvare"
+	},
 	"unselect_all": {
 		"message": "Deseleziona Tutto",
 		"description": "[modal] pulsante per deselezionare tutte le Tabs nel modale di esportazione"

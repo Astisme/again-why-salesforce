@@ -1451,6 +1451,10 @@
 		"message": "Viļņots pasvītrojums",
 		"description": "Dekorācijas stila opcija viļņota pasvītrojuma pievienošanai Tab tekstam"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Jums ir nesaglabātas izmaiņas. Vai vēlaties doties prom nesaglabājot?",
+		"description": "[manage-tabs] lietotājs pieprasīja doties uz Tab, vispirms nesaglabājot"
+	},
 	"unselect_all": {
 		"message": "Atcelt Visu Izvēli",
 		"description": "[modal] poga visu Tab izvēles atcelšanai eksportēšanas modālajā logā"

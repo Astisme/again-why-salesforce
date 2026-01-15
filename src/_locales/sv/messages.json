@@ -1451,6 +1451,10 @@
 		"message": "Understruken Vågig",
 		"description": "Dekorationsstilalternativ för att applicera en vågig understrykning på Tab-text"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Du har ändringar som inte sparats. Vill du lämna sidan utan att spara?",
+		"description": "[manage-tabs] användaren bad om att få gå till en Tab utan att spara först"
+	},
 	"unselect_all": {
 		"message": "Avmarkera Alla",
 		"description": "[modal] knapp för att avmarkera alla Tabs i exportmodalen"

@@ -1451,6 +1451,10 @@
 		"message": "Bølget understreking",
 		"description": "Dekorasjonsstilalternativ for å bruke en bølget understreking på Tab-tekst"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Du har endringer som ikke er lagret. Vil du forlate siden uten å lagre?",
+		"description": "[manage-tabs] brukeren ba om å gå til en Tab uten å lagre først"
+	},
 	"unselect_all": {
 		"message": "Opphev Valg Av Alle",
 		"description": "[modal] knapp for å oppheve valget av alle Tabs i eksport-modalen"

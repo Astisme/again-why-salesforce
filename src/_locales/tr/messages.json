@@ -1451,6 +1451,10 @@
 		"message": "Dalgalı Altı Çizili",
 		"description": "Sekme metnine dalgalı altı çizili uygulamak için dekorasyon stili seçeneği"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Kaydedilmemiş değişiklikleriniz var. Kaydetmeden ayrılmak istiyor musunuz?",
+		"description": "[manage-tabs] kullanıcı önce kaydetmeden bir Tab öğesine gitmek istedi"
+	},
 	"unselect_all": {
 		"message": "Tüm Seçimi Kaldır",
 		"description": "[modal] dışa aktarma modunda tüm Tabs'lerin seçimini kaldırma düğmesi"

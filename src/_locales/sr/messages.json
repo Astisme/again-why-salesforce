@@ -1451,6 +1451,10 @@
 		"message": "Подвучено Таласасто",
 		"description": "Опција стила декорације за примену таласастог подвлачења на текст Tab-а"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Imate nesačuvane promene. Da li želite da odete bez čuvanja?",
+		"description": "[manage-tabs] korisnik je zatražio da ode na Tab bez prethodnog čuvanja"
+	},
 	"unselect_all": {
 		"message": "Поништи Избор Свих",
 		"description": "[modal] дугме за поништавање избора свих Tabs у модалу за извоз"

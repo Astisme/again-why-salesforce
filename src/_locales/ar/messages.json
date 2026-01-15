@@ -1450,6 +1450,10 @@
 		"message": "تسطير متموج",
 		"description": "خيار نمط الزخرفة لتطبيق تسطير متموج على نص Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "لديك تغييرات غير محفوظة. هل تريد المغادرة دون حفظ؟",
+		"description": "[manage-tabs] طلب المستخدم الانتقال إلى Tab دون الحفظ أولاً"
+	},
 	"unselect_all": {
 		"message": "إلغاء تحديد الكل",
 		"description": "[modal] زر لإلغاء تحديد جميع Tabs في نموذج التصدير"

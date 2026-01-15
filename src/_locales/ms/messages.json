@@ -1451,6 +1451,10 @@
 		"message": "Garis bawah bergelombang",
 		"description": "Pilihan gaya hiasan untuk menerapkan garis bawah bergelombang pada teks Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Anda mempunyai perubahan yang belum disimpan. Adakah anda mahu keluar tanpa menyimpan?",
+		"description": "[manage-tabs] pengguna meminta untuk pergi ke Tab tanpa menyimpan terlebih dahulu"
+	},
 	"unselect_all": {
 		"message": "Nyahpilih Semua",
 		"description": "[modal] butang untuk menyahpilih semua Tabs dalam modal eksport"

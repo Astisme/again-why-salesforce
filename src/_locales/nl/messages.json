@@ -1451,6 +1451,10 @@
 		"message": "Onderstrepen Golvend",
 		"description": "Decoratiestijloptie om een golvende onderstreping toe te passen op Tab-tekst"
 	},
+	"unsaved_changes_confirm": {
+		"message": "U hebt niet-opgeslagen wijzigingen. Wilt u afsluiten zonder op te slaan?",
+		"description": "[manage-tabs] de gebruiker heeft gevraagd naar een Tab te gaan zonder eerst op te slaan"
+	},
 	"unselect_all": {
 		"message": "Selectie Van Alles Opheffen",
 		"description": "[modal] knop om de selectie van alle Tabs op te heffen in de export modal"

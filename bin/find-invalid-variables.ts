@@ -1,6 +1,3 @@
-import * as fs from "node:fs";
-import * as path from "node:path";
-
 const LOCALES_DIR = "src/_locales";
 
 // matches $something where either
@@ -10,18 +7,43 @@ const LOCALES_DIR = "src/_locales";
 // - no double quotes after
 const INVALID_VAR_REGEX = /(?<=[^\s$\w])\$\w+|\$\w+(?=[^\s$\w])/g;
 
+/**
+ * Gets all locale directories from the locales directory
+ * @returns {Promise<string[]>} Array of locale directory names
+ */
+async function getLocales() {
+	const entries = [];
+	for await (const entry of Deno.readDir(LOCALES_DIR)) {
+		if (entry.isDirectory) {
+			entries.push(entry.name);
+		}
+	}
+	return entries.sort();
+}
+
+/**
+ * Checks if a file exists
+ * @param {string} filePath - Path to check
+ * @returns {Promise<boolean>} True if file exists
+ */
+async function fileExists(filePath) {
+	try {
+		await Deno.stat(filePath);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+const locales = await getLocales();
+
 const result = {};
 
-const locales = fs.readdirSync(LOCALES_DIR, { withFileTypes: true })
-	.filter((d) => d.isDirectory())
-	.map((d) => d.name)
-	.sort();
-
 for (const locale of locales) {
-	const filePath = path.join(LOCALES_DIR, locale, "messages.json");
-	if (!fs.existsSync(filePath)) continue;
+	const filePath = `${LOCALES_DIR}/${locale}/messages.json`;
+	if (!await fileExists(filePath)) continue;
 	const matches = [];
-	const jsonLocale = JSON.parse(fs.readFileSync(filePath, "utf8"));
+	const jsonLocale = JSON.parse(await Deno.readTextFile(filePath));
 	for (const [key, value] of Object.entries(jsonLocale)) {
 		if (INVALID_VAR_REGEX.test(value.message)) {
 			matches.push(key);
@@ -38,10 +60,9 @@ for (const locale of locales) {
 
 const keysLen = Object.keys(result).length;
 if (keysLen > 0) {
-	fs.writeFileSync(
+	await Deno.writeTextFile(
 		"invalid-variables-report.json",
 		JSON.stringify(result, null, 2),
-		"utf8",
 	);
-	console.error(`Found ${keysLen} invalid variables.`);
+	Deno.exit(1);
 }

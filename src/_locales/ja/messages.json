@@ -1450,6 +1450,10 @@
 		"message": "波線下線",
 		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
 	},
+	"unsaved_changes_confirm": {
+		"message": "保存されていない変更があります。保存せずに終了しますか？",
+		"description": "[manage-tabs] ユーザーが保存せずに Tab への移動を要求しました"
+	},
 	"unselect_all": {
 		"message": "すべての選択を解除",
 		"description": "[modal] エクスポートモーダルですべてのTabの選択を解除するボタン"

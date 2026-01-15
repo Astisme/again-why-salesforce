@@ -1451,6 +1451,10 @@
 		"message": "Bølget understreget",
 		"description": "Dekorationsstilmulighed for at anvende en bølget understregning på Tab-tekst"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Du har ændringer, der ikke er gemt. Vil du forlade siden uden at gemme?",
+		"description": "[manage-tabs] brugeren bad om at gå til en Tab uden at gemme først"
+	},
 	"unselect_all": {
 		"message": "Fravælg Alt",
 		"description": "[modal] knap til at fravælge alle Tabs i eksport modalen"

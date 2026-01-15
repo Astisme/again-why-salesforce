@@ -1451,6 +1451,10 @@
 		"message": "Subratllat Ondulat",
 		"description": "Opció d'estil de decoració per aplicar un subratllat ondulat al text de Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Teniu canvis sense desar. Voleu sortir sense desar?",
+		"description": "[manage-tabs] l'usuari ha demanat anar a una Tab sense desar primer"
+	},
 	"unselect_all": {
 		"message": "Deseleccionar-ho Tot",
 		"description": "[modal] botó per deseleccionar tots els Tabs al modal d'exportació"

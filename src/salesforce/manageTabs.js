@@ -8,11 +8,13 @@ import {
 } from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 import { setupDragForTable, setupDragForUl } from "./dragHandler.js";
 import {
 	createManageTabRow,
 	generateManageTabsModal,
+	handleLightningLinkClick,
 	MODAL_ID,
 } from "./generator.js";
 import {
@@ -32,6 +34,7 @@ const dropdownMenus = [];
 const actionButtons = [];
 let closeButton = null;
 let manage_InvalidateSort = false;
+let wasSomethingUpdated = false;
 
 /**
  * Updates all the indexes on every tr after index fromIndex
@@ -133,6 +136,30 @@ function moveTrToGivenIndex({
 }
 
 /**
+ * Check if the user has performed some updates and if true, ask for confirmation to open the link while losing the changes
+ * @param {event} e - the event which had this function called
+ */
+async function checkOpenAskConfirm(e) {
+	const translator = await ensureTranslatorAvailability();
+	if (
+		!wasSomethingUpdated ||
+		confirm(await translator.translate("unsaved_changes_confirm"))
+	) {
+		handleLightningLinkClick(e);
+		closeButton.click();
+	}
+}
+
+/**
+ * Retrieves the last tr of the given tbody
+ * @param {TbodyHTMLElement} [tbody=null] - the tbody from which to find the last tr
+ * @return {TrHTMLElement|undefined} - the last tr of the given tbody or undefined if the tbody is null or the last child is not found
+ */
+function getLastTr(tbody = null) {
+	return tbody?.querySelector("tr:last-child");
+}
+
+/**
  * Handles action button clicks (actions are the ones on the right of each row)
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
@@ -146,7 +173,7 @@ function handleActionButtonClick(e, {
 	const btn = e.currentTarget;
 	const action = btn.dataset.action;
 	if (action === "open") {
-		closeButton.click();
+		checkOpenAskConfirm(e);
 		return;
 	}
 	const tabIndex = Number.parseInt(btn.dataset.tabIndex);
@@ -197,7 +224,7 @@ function handleActionButtonClick(e, {
 		case CXM_REMOVE_TAB: {
 			// Remove the row from the table if it is NOT the last one
 			if (
-				tbody?.querySelector("tr:last-child")?.dataset.rowIndex !==
+				getLastTr(tbody)?.dataset.rowIndex !==
 					tabIndex
 			) {
 				row.remove();
@@ -232,7 +259,7 @@ function updateTabAttributes({
 	if (tabAppendElement == null && tr == null) {
 		throw new Error("error_required_params");
 	}
-	tr = tr ?? tabAppendElement?.querySelector("tr:last-child");
+	tr = tr ?? getLastTr(tabAppendElement);
 	const dropdownButton = tr.querySelector(
 		"td button[data-name=dropdownButton]",
 	);
@@ -294,7 +321,7 @@ export function updateModalBodyOverflow(article = null) {
  * @param {Event} e - the event which is connected to this function
  * @return undefined
  */
-function checkSaveTab(e) {
+function checkRemoveTr(e) {
 	const parentTr = e.target.closest("tr");
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
@@ -308,7 +335,7 @@ function checkSaveTab(e) {
  * - Listens for input events to trigger the specified listener.
  * - Tracks focusin to set the `focusedIndex` based on the element's data attribute.
  * - Sets a custom data attribute (`data-element_index`) to the current length of the `loggers` array.
- * - Adds a focusout event listener to call `checkSaveTab` when the element loses focus.
+ * - Adds a focusout event listener to call `checkRemoveTr` when the element loses focus.
  *
  * @param {HTMLElement} element - The DOM input element to attach event listeners to.
  * @param {Function} listener - The function to be called on "input" events for the element.
@@ -324,7 +351,7 @@ function setInfoForDrag(element, listener, index) {
 				e.currentTarget.dataset.element_index,
 			),
 	);
-	element.addEventListener("focusout", checkSaveTab);
+	element.addEventListener("focusout", checkRemoveTr);
 }
 
 /**
@@ -459,7 +486,7 @@ async function addTr(tabAppendElement = null) {
  */
 async function removeTr(
 	tabAppendElement = null,
-	trToRemove = tabAppendElement?.querySelector("tr:last-child"),
+	trToRemove = getLastTr(tabAppendElement),
 	removeIndex = managedLoggers.length - 1,
 ) {
 	if (tabAppendElement == null) {
@@ -639,6 +666,7 @@ function trInputListener({
 	const inputObj = currentObj.last_input;
 	const last_input = inputObj[type] ?? "";
 	const delta = value.length - last_input.length;
+	wasSomethingUpdated = wasSomethingUpdated || delta !== 0;
 	const tr = element.closest("tr");
 	let url = value;
 	let org = value;
@@ -719,6 +747,7 @@ function reorderTabsTable({
 		Math.min(fromIndex, toIndex),
 	);
 	manage_InvalidateSort = true;
+	wasSomethingUpdated = true;
 }
 
 /**
@@ -788,12 +817,13 @@ export async function createManageTabsModal() {
 		trsAndButtons: allTrsAndButtons,
 		dropdownMenus: allDropMenus,
 	} = await generateManageTabsModal(allTabs);
-	managedLoggers.splice(0, managedLoggers.length, loggers);
+	managedLoggers.splice(0, managedLoggers.length, ...loggers);
 	deleteAllButton = deleteAllTabsButton;
-	trsAndButtons.splice(0, trsAndButtons.length, allTrsAndButtons);
-	dropdownMenus.splice(0, dropdownMenus.length, allDropMenus);
+	trsAndButtons.splice(0, trsAndButtons.length, ...allTrsAndButtons);
+	dropdownMenus.splice(0, dropdownMenus.length, ...allDropMenus);
 	closeButton = modalCloseBtn;
 	manage_InvalidateSort = false;
+	wasSomethingUpdated = false;
 	const buttonContainer = saveButton.closest("div");
 	manageTabsButtons.show = buttonContainer.querySelector(".show_all_tabs");
 	manageTabsButtons.hide = buttonContainer.querySelector(
@@ -856,7 +886,7 @@ export async function createManageTabsModal() {
 	// enable the deleteAllButton to be clicked
 	deleteAllButton.addEventListener("click", (e) => {
 		e.preventDefault();
-		const lastTr = tbody.querySelector("tr:last-child");
+		const lastTr = getLastTr(tbody);
 		for (const tr of Array.from(tbody.querySelectorAll("tr"))) {
 			if (tr !== lastTr) {
 				tr.remove();

@@ -1451,6 +1451,10 @@
 		"message": "Hullámos Aláhúzás",
 		"description": "Dekorációs stílus opció hullámos aláhúzás alkalmazásához a Tab szövegen"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Nem mentett módosításai vannak. Szeretne mentés nélkül kilépni?",
+		"description": "[manage-tabs] a felhasználó egy Tab-ra kívánt lépni előzetes mentés nélkül"
+	},
 	"unselect_all": {
 		"message": "Összes Kijelölésének Megszüntetése",
 		"description": "[modal] gomb az összes Tab kijelölésének megszüntetésére az exportáló modálban"

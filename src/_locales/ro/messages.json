@@ -1451,6 +1451,10 @@
 		"message": "Subliniat Ondulat",
 		"description": "Opțiune de stil de decorare pentru aplicarea unei sublinieri ondulate la textul Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Aveți modificări nesalvate. Doriți să părăsiți pagina fără a salva?",
+		"description": "[manage-tabs] utilizatorul a solicitat accesarea unui Tab fără a salva mai întâi"
+	},
 	"unselect_all": {
 		"message": "Deselectează Tot",
 		"description": "[modal] buton pentru a deselecta toate Tabs în modalul de export"

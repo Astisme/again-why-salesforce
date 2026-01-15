@@ -1450,6 +1450,10 @@
 		"message": "Wellig unterstreichen",
 		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Sie haben nicht gespeicherte Änderungen. Möchten Sie die Seite verlassen, ohne zu speichern?",
+		"description": "[manage-tabs] der Benutzer wollte zu einem Tab wechseln, ohne vorher zu speichern"
+	},
 	"unselect_all": {
 		"message": "Auswahl Aufheben",
 		"description": "[modal] Schaltfläche, um die Auswahl aller Tabs im Export-Modal aufzuheben"

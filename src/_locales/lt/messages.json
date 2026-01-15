@@ -1451,6 +1451,10 @@
 		"message": "Banguotas pabraukimas",
 		"description": "Dekoravimo stiliaus parinktis banguoto pabraukimo taikymui Tab tekstui"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Turite neišsaugotų pakeitimų. Ar norite išeiti neišsaugoję?",
+		"description": "[manage-tabs] vartotojas paprašė pereiti į Tab prieš tai neišsaugojęs"
+	},
 	"unselect_all": {
 		"message": "Panaikinti Visų Pasirinkimą",
 		"description": "[modal] mygtukas, skirtas panaikinti visų Tabs pasirinkimą eksportavimo modaliniame lange"

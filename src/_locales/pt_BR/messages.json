@@ -1451,6 +1451,10 @@
 		"message": "Sublinhar ondulado",
 		"description": "Opção de estilo de decoração para aplicar um sublinhado ondulado ao texto de Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Você tem alterações não salvas. Deseja sair sem salvar?",
+		"description": "[manage-tabs] o usuário solicitou ir para uma Tab sem salvar primeiro"
+	},
 	"unselect_all": {
 		"message": "Desmarcar Todos",
 		"description": "[modal] botão para desmarcar todas as Tabs no modal de exportação"

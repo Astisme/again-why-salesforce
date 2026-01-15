@@ -1451,6 +1451,10 @@
 		"message": "Underline Wavy",
 		"description": "Decoration style option to apply a wavy underline to $tab text"
 	},
+	"unsaved_changes_confirm": {
+		"message": "You have unsaved changes. Do you want to leave without saving?",
+		"description": "[manage-tabs] the user asked to go to a Tab without saving first"
+	},
 	"unselect_all": {
 		"message": "Unselect All",
 		"description": "[modal] button to unselect all $tabs in export modal"

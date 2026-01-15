@@ -1451,6 +1451,10 @@
 		"message": "Pigia mstari wa mawimbi",
 		"description": "Chaguo la mtindo wa mapambo kwa kutumia mstari wa mawimbi kwenye maandishi ya Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Una mabadiliko ambayo hayajahifadhiwa. Je, unataka kuondoka bila kuhifadhi?",
+		"description": "[manage-tabs] mtumiaji aliomba kwenda kwenye Tab bila kuhifadhi kwanza"
+	},
 	"unselect_all": {
 		"message": "Ondoa Uchaguzi wa Zote",
 		"description": "[modal] kitufe cha kuondoa uchaguzi wa Tabs zote kwenye modal ya kuhamisha"

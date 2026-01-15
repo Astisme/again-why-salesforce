@@ -1451,6 +1451,10 @@
 		"message": "Valovito podcrtano",
 		"description": "Opcija stila ukrašavanja za primjenu valovitog podcrtavanja na tekst Taba"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Imate nespremljene promjene. Želite li otići bez spremanja?",
+		"description": "[manage-tabs] korisnik je zatražio odlazak na Tab bez prethodnog spremanja"
+	},
 	"unselect_all": {
 		"message": "Poništi Odabir Svih",
 		"description": "[modal] gumb za poništavanje odabira svih Tabs-ova u modalu za izvoz"

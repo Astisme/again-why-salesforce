@@ -1451,6 +1451,10 @@
 		"message": "Aaltomainen alleviivaus",
 		"description": "Koristelutyyli aaltomaisen alleviivauksen lisäämiseksi Tab-tekstiin"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Sinulla on tallentamattomia muutoksia. Haluatko poistua tallentamatta?",
+		"description": "[manage-tabs] käyttäjä pyysi siirtymään Tab-välilehdelle tallentamatta ensin"
+	},
 	"unselect_all": {
 		"message": "Poista Kaikki Valinnat",
 		"description": "[modal] painike kaikkien Tabs-ien valinnan poistamiseksi vientimodaalissa"

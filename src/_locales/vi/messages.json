@@ -1450,6 +1450,10 @@
 		"message": "Gạch chân gợn sóng",
 		"description": "Tùy chọn kiểu trang trí để áp dụng gạch chân gợn sóng cho văn bản Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Bạn có các thay đổi chưa lưu. Bạn có muốn thoát mà không lưu không?",
+		"description": "[manage-tabs] người dùng đã yêu cầu chuyển sang một Tab mà không lưu trước"
+	},
 	"unselect_all": {
 		"message": "Bỏ Chọn Tất Cả",
 		"description": "[modal] nút để bỏ chọn tất cả Tabs trong modal xuất"

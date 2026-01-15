@@ -1451,6 +1451,10 @@
 		"message": "קו תחתון גלי",
 		"description": "אפשרות סגנון עיטור להחלת קו תחתון גלי על טקסט Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "יש לך שינויים שלא נשמרו. האם ברצונك לעזוב מבלי לשמור?",
+		"description": "[manage-tabs] המשתמש ביקש לעבור אל Tab מבלי לשמור תחילה"
+	},
 	"unselect_all": {
 		"message": "בטל בחירת הכל",
 		"description": "[modal] כפתור לביטול בחירת כל ה-Tabs במודל הייצוא"

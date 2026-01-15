@@ -1451,6 +1451,10 @@
 		"message": "በመስመር ሞጎጮ",
 		"description": "በTab ጽሑፍ ላይ በመስመር ሞጎጮ መስመር የማቆሚያ የቅርጽ አማራጭ"
 	},
+	"unsaved_changes_confirm": {
+		"message": "ያልተቀመጡ ለውጦች አሉዎት። ሳያስቀምጡ መውጣት ይፈልጋሉ?",
+		"description": "[manage-tabs] ተጠቃሚው መጀመሪያ ሳያስቀምጥ ወደ Tab እንዲሄድ ጠይቋል"
+	},
 	"unselect_all": {
 		"message": "ምርጫን አንሳ",
 		"description": "[ሞዳል] በውጪ መላኪያ ሞዳል ውስጥ ከሁሉም Tabs ላይ ምርጫን ለማንሳት የሚጠቅም አዝራር"
