@@ -2638,3 +2638,51 @@ export function generateReviewSponsorSvgs() {
 		sponsorLink,
 	};
 }
+
+/**
+ * Generates the HTML elements required for the tutorial overlay system.
+ * Creates an overlay that covers the entire page, a message box for displaying tutorial text,
+ * and a highlight box for emphasizing specific elements on the page.
+ *
+ * @return {Object} An object containing the generated HTML elements:
+ * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
+ * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
+ * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page
+ */
+export function generateTutorialElements() {
+	const overlay = document.createElement("div");
+	overlay.style.position = "fixed";
+	overlay.style.top = "0";
+	overlay.style.left = "0";
+	overlay.style.width = "100%";
+	overlay.style.height = "100%";
+	overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+	overlay.style.zIndex = "10000";
+	overlay.style.pointerEvents = "none";
+
+	const messageBox = document.createElement("div");
+	messageBox.style.position = "fixed";
+	messageBox.style.bottom = "20px";
+	messageBox.style.left = "50%";
+	messageBox.style.transform = "translateX(-50%)";
+	messageBox.style.backgroundColor = "white";
+	messageBox.style.padding = "20px";
+	messageBox.style.borderRadius = "8px";
+	messageBox.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+	messageBox.style.zIndex = "10001";
+	messageBox.style.maxWidth = "400px";
+	messageBox.style.pointerEvents = "auto";
+
+	const highlightBox = document.createElement("div");
+	highlightBox.style.position = "absolute";
+	highlightBox.style.backgroundColor = "rgba(255,255,0,0.5)";
+	highlightBox.style.border = "2px solid yellow";
+	highlightBox.style.zIndex = "9999";
+	highlightBox.style.pointerEvents = "none";
+
+	return {
+		overlay,
+		messageBox,
+		highlightBox,
+	};
+}

@@ -26,8 +26,8 @@ import {
 } from "./content.js";
 
 const BUTTON_ID = `${EXTENSION_NAME}-button`;
-const STAR_ID = `${EXTENSION_NAME}-star`;
-const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
+export const STAR_ID = `${EXTENSION_NAME}-star`;
+export const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
 
 /**
  * Finds the parent node of the current Setup page

@@ -1,23 +1,65 @@
 "use strict";
-import { BROWSER, EXTENSION_GITHUB_LINK } from "/constants.js";
+import { EXTENSION_GITHUB_LINK } from "/constants.js";
 import { sendExtensionMessage } from "/functions.js";
 import { getSetupTabUl } from "./content.js";
-import { STAR_ID, SLASHED_STAR_ID } from "./favourite-manager.js";
+import { SLASHED_STAR_ID, STAR_ID } from "./favourite-manager.js";
+import { generateTutorialElements } from "./generator.js";
 
 /**
  * Tutorial class to guide users through the extension features.
+ * Manages the step-by-step tutorial process, including element highlighting,
+ * message display, and user interaction handling.
  */
 class Tutorial {
+	/**
+	 * Initializes a new Tutorial instance.
+	 * Sets up initial state variables for managing the tutorial flow.
+	 */
 	constructor() {
+		/**
+		 * The current step index in the tutorial sequence.
+		 * @type {number}
+		 */
 		this.currentStep = 0;
+		/**
+		 * Semi-transparent overlay covering the entire page.
+		 * @type {HTMLElement|null}
+		 */
 		this.overlay = null;
+		/**
+		 * Box for displaying tutorial messages and interaction buttons.
+		 * @type {HTMLElement|null}
+		 */
 		this.messageBox = null;
+		/**
+		 * Box used to highlight specific elements on the page.
+		 * @type {HTMLElement|null}
+		 */
 		this.highlightBox = null;
+		/**
+		 * Flag indicating whether the tutorial is currently active.
+		 * @type {boolean}
+		 */
 		this.isActive = false;
+		/**
+		 * Cached keyboard shortcut for opening settings.
+		 * @type {string|null}
+		 */
 		this.shortcut = null;
+		/**
+		 * Array of tutorial steps with their configurations.
+		 * @type {Array<Object>}
+		 */
 		this.steps = [];
 	}
 
+	/**
+	 * Initializes the tutorial steps array with all predefined tutorial phases.
+	 * Each step contains configuration for messages, element highlighting, and user actions.
+	 * This method is asynchronous to fetch the keyboard shortcut for settings.
+	 *
+	 * @return {Promise<void>} Resolves when the steps are fully initialized.
+	 */
 	async initSteps() {
 		this.shortcut = await this.getSettingsShortcut();
 		this.steps = [
@@ -49,7 +91,8 @@ class Tutorial {
 				message: "tutorial_redirect_account",
 				action: "confirm",
 				onConfirm: () => {
-					window.location.href = "/setup/lightning/ObjectManager/Account/FieldsAndRelationships/view";
+					globalThis.location.href =
+						"/setup/lightning/ObjectManager/Account/FieldsAndRelationships/view";
 				},
 			},
 			{
@@ -85,7 +128,10 @@ class Tutorial {
 				link: `${EXTENSION_GITHUB_LINK}/wiki/Manage-Tabs-modal`,
 			},
 			{
-				element: () => document.querySelector('.modal .slds-table tbody tr:nth-child(2) .slds-icon-utility-drag'),
+				element: () =>
+					document.querySelector(
+						".modal .slds-table tbody tr:nth-child(2) .slds-icon-utility-drag",
+					),
 				message: "tutorial_drag_users",
 				action: "highlight",
 				waitFor: "timeout",
@@ -95,7 +141,8 @@ class Tutorial {
 				action: "info",
 			},
 			{
-				element: () => document.querySelector('.modal button[data-i18n="save"]'),
+				element: () =>
+					document.querySelector('.modal button[data-i18n="save"]'),
 				message: "tutorial_save_modal",
 				action: "highlight",
 				waitFor: "click",
@@ -117,7 +164,10 @@ class Tutorial {
 	}
 
 	/**
-	 * Starts the tutorial.
+	 * Starts the tutorial by initializing steps, creating overlay elements, and beginning the first step.
+	 * Ensures the tutorial is not already active before proceeding.
+	 *
+	 * @return {Promise<void>} Resolves when the tutorial has started successfully.
 	 */
 	async start() {
 		if (this.isActive) return;
@@ -129,38 +179,15 @@ class Tutorial {
 	}
 
 	/**
-	 * Creates the overlay for highlighting and messages.
+	 * Creates and appends the overlay elements to the document body.
+	 * Generates the necessary HTML elements for the tutorial interface
+	 * and adds them to the DOM for user interaction.
 	 */
 	createOverlay() {
-		this.overlay = document.createElement("div");
-		this.overlay.style.position = "fixed";
-		this.overlay.style.top = "0";
-		this.overlay.style.left = "0";
-		this.overlay.style.width = "100%";
-		this.overlay.style.height = "100%";
-		this.overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
-		this.overlay.style.zIndex = "10000";
-		this.overlay.style.pointerEvents = "none";
-
-		this.messageBox = document.createElement("div");
-		this.messageBox.style.position = "fixed";
-		this.messageBox.style.bottom = "20px";
-		this.messageBox.style.left = "50%";
-		this.messageBox.style.transform = "translateX(-50%)";
-		this.messageBox.style.backgroundColor = "white";
-		this.messageBox.style.padding = "20px";
-		this.messageBox.style.borderRadius = "8px";
-		this.messageBox.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
-		this.messageBox.style.zIndex = "10001";
-		this.messageBox.style.maxWidth = "400px";
-		this.messageBox.style.pointerEvents = "auto";
-
-		this.highlightBox = document.createElement("div");
-		this.highlightBox.style.position = "absolute";
-		this.highlightBox.style.backgroundColor = "rgba(255,255,0,0.5)";
-		this.highlightBox.style.border = "2px solid yellow";
-		this.highlightBox.style.zIndex = "9999";
-		this.highlightBox.style.pointerEvents = "none";
+		const elements = generateTutorialElements();
+		this.overlay = elements.overlay;
+		this.messageBox = elements.messageBox;
+		this.highlightBox = elements.highlightBox;
 
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
@@ -168,7 +195,9 @@ class Tutorial {
 	}
 
 	/**
-	 * Proceeds to the next step.
+	 * Proceeds to the next step in the tutorial sequence.
+	 * If all steps are completed, ends the tutorial.
+	 * Otherwise, executes the current step's logic.
 	 */
 	nextStep() {
 		if (this.currentStep >= this.steps.length) {
@@ -181,7 +210,19 @@ class Tutorial {
 	}
 
 	/**
-	 * Executes a tutorial step.
+	 * Executes a specific tutorial step based on its configuration.
+	 * Handles element highlighting, message display, and determines the next action
+	 * (waiting for user input, showing confirmation, or auto-progressing).
+	 *
+	 * @param {Object} step - The tutorial step configuration object.
+	 * @param {Function} [step.element] - Function that returns the HTMLElement to highlight.
+	 * @param {string} step.message - The i18n key for the message to display.
+	 * @param {string} step.action - The type of action ("highlight", "info", "confirm").
+	 * @param {string} [step.waitFor] - The type of user action to wait for ("click", "timeout").
+	 * @param {Function} [step.onConfirm] - Callback function for confirmation steps.
+	 * @param {string} [step.link] - Optional link to append to the message.
+	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
+	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
 		// Clear previous highlights
@@ -207,22 +248,34 @@ class Tutorial {
 	}
 
 	/**
-	 * Highlights an element.
+	 * Highlights a specific HTML element by positioning the highlight box over it.
+	 * Calculates the element's bounding rectangle and adjusts the highlight box accordingly.
+	 *
+	 * @param {HTMLElement} el - The HTML element to highlight.
 	 */
 	highlightElement(el) {
 		const rect = el.getBoundingClientRect();
-		this.highlightBox.style.top = rect.top + "px";
-		this.highlightBox.style.left = rect.left + "px";
-		this.highlightBox.style.width = rect.width + "px";
-		this.highlightBox.style.height = rect.height + "px";
+		this.highlightBox.style.top = `${rect.top}px`;
+		this.highlightBox.style.left = `${rect.left}px`;
+		this.highlightBox.style.width = `${rect.width}px`;
+		this.highlightBox.style.height = `${rect.height}px`;
 		this.highlightBox.style.display = "block";
 	}
 
 	/**
-	 * Shows a message for the step.
+	 * Displays the message for the current tutorial step in the message box.
+	 * Translates the message key and appends any additional information like links or shortcuts.
+	 *
+	 * @param {Object} step - The tutorial step object containing message details.
+	 * @param {string} step.message - The i18n key for the message.
+	 * @param {string} [step.link] - Optional link to append to the message.
+	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
+	 * @return {Promise<void>} Resolves when the message has been translated and displayed.
 	 */
 	async showMessage(step) {
-		const translator = await import("/translator.js").then(m => m.default);
+		const translator = await import("/translator.js").then((m) =>
+			m.default
+		);
 		let message = await translator.translate(step.message);
 		if (step.link) {
 			message += `\n\n${step.link}`;
@@ -234,13 +287,20 @@ class Tutorial {
 	}
 
 	/**
-	 * Waits for a user action.
+	 * Waits for a specific user action before proceeding to the next tutorial step.
+	 * Handles different types of waits: click events on elements or timed delays.
+	 *
+	 * @param {Object} step - The tutorial step object.
+	 * @param {Function} [step.element] - Function returning the element to attach click listener to.
+	 * @param {string} step.waitFor - The type of action to wait for ("click" or "timeout").
 	 */
 	waitForAction(step) {
 		if (step.waitFor === "click") {
 			const el = step.element();
 			if (el) {
-				el.addEventListener("click", () => this.nextStep(), { once: true });
+				el.addEventListener("click", () => this.nextStep(), {
+					once: true,
+				});
 			} else {
 				setTimeout(() => this.nextStep(), 1000);
 			}
@@ -250,7 +310,12 @@ class Tutorial {
 	}
 
 	/**
-	 * Shows a confirmation dialog.
+	 * Displays a confirmation dialog for steps requiring user confirmation.
+	 * Creates and appends an "OK" button to the message box that triggers the next step
+	 * and executes any associated confirmation callback.
+	 *
+	 * @param {Object} step - The tutorial step object.
+	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
 	 */
 	showConfirm(step) {
 		const confirmBtn = document.createElement("button");
@@ -263,16 +328,25 @@ class Tutorial {
 	}
 
 	/**
-	 * Gets the settings keyboard shortcut.
+	 * Retrieves the keyboard shortcut for opening the extension settings.
+	 * Sends a message to the background script to get available commands and extracts
+	 * the shortcut for the "cmd-open-settings" command.
+	 *
+	 * @return {Promise<string>} The keyboard shortcut string, or a default value if not found.
 	 */
 	async getSettingsShortcut() {
-		const commands = await sendExtensionMessage({ what: "get-commands", commands: ["cmd-open-settings"] });
-		const cmd = commands.find(c => c.name === "cmd-open-settings");
+		const commands = await sendExtensionMessage({
+			what: "get-commands",
+			commands: ["cmd-open-settings"],
+		});
+		const cmd = commands.find((c) => c.name === "cmd-open-settings");
 		return cmd ? cmd.shortcut : "Alt+Comma";
 	}
 
 	/**
-	 * Ends the tutorial.
+	 * Ends the tutorial by cleaning up DOM elements and marking completion.
+	 * Removes the overlay, message box, and highlight box from the document,
+	 * sets the active flag to false, and stores completion status in localStorage.
 	 */
 	end() {
 		this.isActive = false;
@@ -287,7 +361,11 @@ class Tutorial {
 }
 
 /**
- * Checks if tutorial should be shown automatically.
+ * Checks if the tutorial should be shown automatically on first visit.
+ * If the tutorial has not been completed before, prompts the user to start it.
+ * Uses localStorage to track completion status.
+ *
+ * @return {Promise<void>} Resolves after checking and potentially starting the tutorial.
  */
 export async function checkTutorial() {
 	const completed = localStorage.getItem("tutorialCompleted");
@@ -300,9 +378,12 @@ export async function checkTutorial() {
 }
 
 /**
- * Starts the tutorial manually.
+ * Starts the tutorial manually, typically called from the popup button.
+ * Creates a new Tutorial instance and begins the guided tour.
+ *
+ * @return {Promise<void>} Resolves when the tutorial has started.
  */
 export function startTutorial() {
 	const tutorial = new Tutorial();
-	tutorial.start();
+	return tutorial.start();
 }
