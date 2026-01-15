@@ -72,6 +72,7 @@ import {
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
+import { checkTutorial, startTutorial } from "./tutorial.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -409,6 +410,7 @@ function delayLoadSetupTabs(count = 0) {
 	// initialize
 	setupDragForUl(reorderTabsUl);
 	reloadTabs();
+	checkTutorial();
 }
 
 /**
@@ -970,6 +972,9 @@ function listenToBackgroundPage() {
 					break;
 				case CXM_MANAGE_TABS:
 					createManageTabsModal();
+					break;
+				case "tutorial":
+					startTutorial();
 					break;
 				case WHAT_SHOW_EXPORT_MODAL:
 				case CXM_EXPORT_TABS:

@@ -158,3 +158,12 @@ manageTabsBtn.addEventListener(
 	"click",
 	() => sendExtensionMessage({ what: CXM_MANAGE_TABS }, close),
 );
+
+const tutorialBtn = document.getElementById("tutorial");
+/**
+ * Sends a message that will start the tutorial in the Salesforce page.
+ */
+tutorialBtn.addEventListener(
+	"click",
+	() => sendExtensionMessage({ what: "tutorial" }, close),
+);

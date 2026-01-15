@@ -1486,5 +1486,77 @@
 	"write_review": {
 		"message": "Write a review!",
 		"description": "[popup] title for svg to request writing a review"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] button to start tutorial"
+	},
+	"tutorial_title": {
+		"message": "Start Tutorial",
+		"description": "[popup] title for tutorial button"
+	},
+	"tutorial_restart": {
+		"message": "You may restart the tutorial at any time by clicking on the button in the popup.",
+		"description": "[tutorial] first message"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "These are your favourite Tabs. They allow quick access to frequently used pages.",
+		"description": "[tutorial] highlight favourite tabs"
+	},
+	"tutorial_click_users": {
+		"message": "Click on the 'Users' Tab to navigate to the Users page.",
+		"description": "[tutorial] click users tab"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Click the slashed star to remove this page from favourites.",
+		"description": "[tutorial] remove favourite"
+	},
+	"tutorial_redirect_account": {
+		"message": "We'll now redirect you to the Account object page. Click OK to continue.",
+		"description": "[tutorial] redirect to account"
+	},
+	"tutorial_add_favourite": {
+		"message": "Click the star to add this page to favourites.",
+		"description": "[tutorial] add favourite"
+	},
+	"tutorial_pin_tab": {
+		"message": "Right-click on the Account Tab and select 'Move > Pin' to pin it.",
+		"description": "[tutorial] pin tab"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Notice the Account Tab is now pinned and will stay in place.",
+		"description": "[tutorial] pinned tab"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Right-click on the page (not on a Tab) and select 'Again, Why Salesforce > Manage Tabs' to open the management modal.",
+		"description": "[tutorial] manage tabs"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "You may manage your Tabs from this screen. For more info, visit: ",
+		"description": "[tutorial] manage tabs link"
+	},
+	"tutorial_drag_users": {
+		"message": "Drag the Users row (using the 6 dots) and drop it before the Account Tab.",
+		"description": "[tutorial] drag users"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "The Users Tab couldn't move before the pinned Account Tab, so it went to the second position.",
+		"description": "[tutorial] pinned explanation"
+	},
+	"tutorial_save_modal": {
+		"message": "Click Save to apply changes and see the toast message.",
+		"description": "[tutorial] save modal"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Press the keyboard shortcut to open the Settings page.",
+		"description": "[tutorial] keyboard shortcut"
+	},
+	"tutorial_settings_explanation": {
+		"message": "Here you can change extension behaviour and style your Tabs.",
+		"description": "[tutorial] settings explanation"
+	},
+	"tutorial_end": {
+		"message": "Tutorial completed! Have fun using the extension.",
+		"description": "[tutorial] end"
 	}
 }
