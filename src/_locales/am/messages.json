@@ -555,6 +555,10 @@
 		"message": "translator አልተጀመረም።",
 		"description": "[error] የTranslationService መነሻ አልተዘጋጀም"
 	},
+	"error_unknown_file_structure": {
+		"message": "ሊያስገቡት የፈለጉትን ፋይል መረዳት አልቻልንም\nችግሩ ከቀጠለ፣ እባክዎ የ GitHub እትም በመክፈት ለእኛ ያካፍሉን",
+		"description": "[አስመጣ] የተጠቃሚው ፋይል አልታወቀም"
+	},
 	"error_unknown_message": {
 		"message": "ያልታወቀ መልዕክት ተቀብሏል",
 		"description": "ያልታወቀ መልዕክት ከአድማጭ ተቀብሏል"

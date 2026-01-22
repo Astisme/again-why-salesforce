@@ -554,6 +554,10 @@
 		"message": "il traduttore non era ancora inizializzato.",
 		"description": "[errore] il TranslationService non era pronto"
 	},
+	"error_unknown_file_structure": {
+		"message": "Non siamo riusciti a comprendere un file che desideravi importare\nSe il problema persiste, condividilo con noi aprendo una segnalazione su GitHub",
+		"description": "[importa] il file dell'utente non è stato riconosciuto"
+	},
 	"error_unknown_message": {
 		"message": "Messaggio sconosciuto ricevuto",
 		"description": "un messaggio sconosciuto è stato ricevuto da un listener"

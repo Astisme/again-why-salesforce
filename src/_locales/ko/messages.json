@@ -555,6 +555,10 @@
 		"message": "번역기가 아직 초기화되지 않았습니다.",
 		"description": "[오류] TranslationService가 준비되지 않았습니다"
 	},
+	"error_unknown_file_structure": {
+		"message": "가져오려는 파일을 인식할 수 없습니다\n문제가 지속되면 GitHub 이슈를 열어 공유해 주세요",
+		"description": "[가져오기] 사용자의 파일을 인식할 수 없습니다"
+	},
 	"error_unknown_message": {
 		"message": "알 수 없는 메시지 수신됨",
 		"description": "리스너로부터 알 수 없는 메시지가 수신되었습니다"

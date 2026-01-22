@@ -555,6 +555,10 @@
 		"message": "translator هنوز مقداردهی اولیه نشده است.",
 		"description": "[error] سرویس ترجمه (TranslationService) آماده نبود"
 	},
+	"error_unknown_file_structure": {
+		"message": "ما متوجه فایلی که می‌خواستید وارد کنید نشدیم\nاگر مشکل همچنان ادامه داشت، لطفاً با باز کردن یک گزارش در GitHub آن را با ما در میان بگذارید",
+		"description": "[وارد کردن] فایل کاربر شناسایی نشد"
+	},
 	"error_unknown_message": {
 		"message": "پیام ناشناخته دریافت شد",
 		"description": "یک پیام ناشناخته از شنونده دریافت شده است"

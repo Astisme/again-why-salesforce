@@ -554,6 +554,10 @@
 		"message": "translator belum diinisialisasi.",
 		"description": "[error] TranslationService belum siap"
 	},
+	"error_unknown_file_structure": {
+		"message": "Kami tidak dapat memahami file yang ingin Anda impor\nJika masalah berlanjut, silakan bagikan kepada kami dengan membuka masalah di GitHub",
+		"description": "[impor] file pengguna tidak dikenali"
+	},
 	"error_unknown_message": {
 		"message": "Pesan tidak dikenal diterima",
 		"description": "pesan tidak dikenal telah diterima dari pendengar"

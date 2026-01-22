@@ -554,6 +554,10 @@
 		"message": "翻訳ツールはまだ初期化されていません。",
 		"description": "[エラー] TranslationService が準備できていませんでした"
 	},
+	"error_unknown_file_structure": {
+		"message": "インポートしようとしたファイルを認識できませんでした\n問題が解決しない場合は、GitHubイシューを作成して共有してください",
+		"description": "[インポート] ユーザーのファイルが認識されませんでした"
+	},
 	"error_unknown_message": {
 		"message": "不明なメッセージを受信しました",
 		"description": "リスナーから不明なメッセージが受信されました"

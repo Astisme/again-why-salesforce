@@ -555,6 +555,10 @@
 		"message": "translator nie został jeszcze zainicjalizowany.",
 		"description": "[błąd] TranslationService nie był gotowy"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nie udało nam się zrozumieć pliku, który chciałeś zaimportować\nJeśli problem będzie się powtarzał, podziel się nim z nami, otwierając zgłoszenie w serwisie GitHub",
+		"description": "[import] plik użytkownika nie został rozpoznany"
+	},
 	"error_unknown_message": {
 		"message": "Otrzymano nieznaną wiadomość",
 		"description": "otrzymano nieznaną wiadomość od słuchacza"

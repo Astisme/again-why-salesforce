@@ -555,6 +555,10 @@
 		"message": "翻译器尚未初始化。",
 		"description": "[错误] TranslationService 尚未准备好"
 	},
+	"error_unknown_file_structure": {
+		"message": "我们无法理解您要导入的文件\n如果问题仍然存在，请通过在 GitHub 上提交 Issue 来告诉我们",
+		"description": "[导入] 无法识别用户的文件"
+	},
 	"error_unknown_message": {
 		"message": "收到未知消息",
 		"description": "从侦听器收到一个未知消息"

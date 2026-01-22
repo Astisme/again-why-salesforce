@@ -555,6 +555,10 @@
 		"message": "tulkotājs vēl nebija inicializēts.",
 		"description": "[kļūda] TranslationService nebija gatavs"
 	},
+	"error_unknown_file_structure": {
+		"message": "Mēs nevarējām saprast failu, kuru vēlējāties importēt\nJa problēma joprojām pastāv, lūdzu, kopīgojiet to ar mums, atverot GitHub pieteikumu",
+		"description": "[importēt] lietotāja fails netika atpazīts"
+	},
 	"error_unknown_message": {
 		"message": "Saņemta nezināma ziņa",
 		"description": "no klausītāja saņemta nezināma ziņa"

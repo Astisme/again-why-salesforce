@@ -555,6 +555,10 @@
 		"message": "översättaren var inte initialiserad än.",
 		"description": "[fel] TranslationService var inte redo"
 	},
+	"error_unknown_file_structure": {
+		"message": "Vi kunde inte förstå en fil som du ville importera\nOm problemet kvarstår, dela det med oss genom att öppna ett GitHub-ärende",
+		"description": "[importera] användarens fil kändes inte igen"
+	},
 	"error_unknown_message": {
 		"message": "Okänt meddelande mottaget",
 		"description": "ett okänt meddelande har mottagits från en lyssnare"

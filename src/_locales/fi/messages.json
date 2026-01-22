@@ -555,6 +555,10 @@
 		"message": "translatoria ei ole vielä alustettu.",
 		"description": "[error] TranslationService ei ollut valmis"
 	},
+	"error_unknown_file_structure": {
+		"message": "Emme pystyneet ymmärtämään tiedostoa, jonka halusit tuoda\nJos ongelma toistuu, jaa se kanssamme avaamalla GitHub-ongelma",
+		"description": "[tuonti] käyttäjän tiedostoa ei tunnistettu"
+	},
 	"error_unknown_message": {
 		"message": "Tuntematon viesti vastaanotettu",
 		"description": "tuntematon viesti on vastaanotettu kuuntelijalta"

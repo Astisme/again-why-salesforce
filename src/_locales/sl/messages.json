@@ -555,6 +555,10 @@
 		"message": "prevajalnik še ni bil inicializiran.",
 		"description": "[napaka] TranslationService ni bil pripravljen"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nismo mogli razumeti datoteke, ki ste jo želeli uvoziti\nČe se težava ponavlja, jo delite z nami tako, da odprete težavo na GitHubu",
+		"description": "[uvoz] uporabnikova datoteka ni bila prepoznana"
+	},
 	"error_unknown_message": {
 		"message": "Prejeto neznano sporočilo",
 		"description": "od poslušalca je bilo prejeto neznano sporočilo"

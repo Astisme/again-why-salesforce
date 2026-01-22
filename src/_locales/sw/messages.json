@@ -555,6 +555,10 @@
 		"message": "mtafsiri bado hajaanzishwa.",
 		"description": "[hitilafu] TranslationService haikuwa tayari"
 	},
+	"error_unknown_file_structure": {
+		"message": "Hatukuweza kuelewa faili uliyotaka kuleta\nIkiwa tatizo litaendelea, tafadhali shiriki nasi kwa kufungua suala la GitHub",
+		"description": "[leta] faili ya mtumiaji haikutambuliwa"
+	},
 	"error_unknown_message": {
 		"message": "Ujumbe usiojulikana umepokewa",
 		"description": "ujumbe usiojulikana umepokewa kutoka kwa msikilizaji"

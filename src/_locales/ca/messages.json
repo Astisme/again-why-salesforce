@@ -555,6 +555,10 @@
 		"message": "translator encara no està inicialitzat.",
 		"description": "[error] El TranslationService no estava preparat"
 	},
+	"error_unknown_file_structure": {
+		"message": "No hem pogut entendre un fitxer que volíeu importar\nSi el problema persisteix, compartiu-lo amb nosaltres obrint un problema a GitHub",
+		"description": "[importar] el fitxer de l'usuari no s'ha reconegut"
+	},
 	"error_unknown_message": {
 		"message": "S'ha rebut un missatge desconegut",
 		"description": "s'ha rebut un missatge desconegut d'un listener"

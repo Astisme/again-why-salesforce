@@ -555,6 +555,10 @@
 		"message": "prekladač ešte nebol inicializovaný.",
 		"description": "[chyba] TranslationService nebol pripravený"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nepodarilo sa nám rozpoznať súbor, ktorý ste chceli importovať\nAk problém pretrváva, zdieľajte ho s nami otvorením hlásenia na GitHube",
+		"description": "[import] súbor používateľa nebol rozpoznaný"
+	},
 	"error_unknown_message": {
 		"message": "Prijatá neznáma správa",
 		"description": "bola prijatá neznáma správa od poslucháča"

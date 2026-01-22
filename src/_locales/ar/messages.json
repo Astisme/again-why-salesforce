@@ -554,6 +554,10 @@
 		"message": "لم يتم تهيئة translator بعد.",
 		"description": "[error] لم يكن TranslationService جاهزاً بعد"
 	},
+	"error_unknown_file_structure": {
+		"message": "لم نتمكن من فهم الملف الذي أردت استيراده\nإذا استمرت المشكلة، يرجى مشاركتها معنا من خلال فتح مشكلة على GitHub",
+		"description": "[استيراد] لم يتم التعرف على ملف المستخدم"
+	},
 	"error_unknown_message": {
 		"message": "تم استلام رسالة غير معروفة",
 		"description": "تم استلام رسالة غير معروفة من مستمع"

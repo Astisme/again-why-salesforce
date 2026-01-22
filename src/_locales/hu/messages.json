@@ -555,6 +555,10 @@
 		"message": "translator még nincs inicializálva.",
 		"description": "[error] A TranslationService még nem volt készen"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nem sikerült értelmeznünk az importálni kívánt fájlt\nHa a probléma továbbra is fennáll, kérjük, ossza meg velünk egy GitHub-bejelentés megnyitásával",
+		"description": "[importálás] a felhasználó fájlja nem felismerhető"
+	},
 	"error_unknown_message": {
 		"message": "Ismeretlen üzenet érkezett",
 		"description": "ismeretlen üzenet érkezett egy hallgatótól"

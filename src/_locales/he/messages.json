@@ -555,6 +555,10 @@
 		"message": "ה-translator טרם מאותחל.",
 		"description": "[error] שירות התרגום לא היה מוכן"
 	},
+	"error_unknown_file_structure": {
+		"message": "לא הצלחנו להבין קובץ שרצית לייבא\nאם הבעיה נמשכת, אנא שתף אותה איתנו על ידי פתיחת פנייה ב-GitHub",
+		"description": "[ייבוא] הקובץ של המשתמש לא זוהה"
+	},
 	"error_unknown_message": {
 		"message": "התקבלה הודעה לא ידועה",
 		"description": "התקבלה הודעה לא ידועה ממאזין"

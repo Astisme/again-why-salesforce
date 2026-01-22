@@ -555,6 +555,10 @@
 		"message": "translator pole veel initsialiseeritud.",
 		"description": "[error] TranslationService ei olnud veel valmis"
 	},
+	"error_unknown_file_structure": {
+		"message": "Me ei saanud aru failist, mida soovite importida\nKui probleem püsib, jagage seda meiega, avades GitHubi probleemi",
+		"description": "[import] kasutaja faili ei tuvastatud"
+	},
 	"error_unknown_message": {
 		"message": "Vastu võetud tundmatu sõnum",
 		"description": "listenerilt on vastu võetud tundmatu sõnum"

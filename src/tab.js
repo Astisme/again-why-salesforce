@@ -64,6 +64,13 @@ export default class Tab {
 		this[Tab.keyClickDate] = clickDate;
 	}
 
+	static hasUnexpectedKeys(tab) {
+		return tab != null &&
+			Object.keys(tab)
+					.filter((key) => !Tab.allowedKeys.has(key))
+					.length > 0;
+	}
+
 	/**
 	 * Creates a new `Tab` instance. Can be called with either individual parameters (label, url, org) or an object-style argument.
 	 *
@@ -94,12 +101,9 @@ export default class Tab {
 			}
 			const tab = labelOrTab;
 			// Check for unexpected keys
-			const unexpectedKeys = Object.keys(tab).filter((key) =>
-				!Tab.allowedKeys.has(key)
-			);
-			if (unexpectedKeys.length > 0) {
+			if (Tab.hasUnexpectedKeys(tab)) {
 				throw new Error(
-					["error_tab_unexpected_keys", unexpectedKeys.join(", ")],
+					"error_tab_unexpected_keys",
 				);
 			}
 			return Tab.create(

@@ -554,6 +554,10 @@
 		"message": "trình dịch chưa được khởi tạo.",
 		"description": "[lỗi] TranslationService chưa sẵn sàng"
 	},
+	"error_unknown_file_structure": {
+		"message": "Chúng tôi không thể hiểu tệp bạn muốn Nhập\nNếu sự cố vẫn tiếp diễn, vui lòng chia sẻ với chúng tôi bằng cách mở một vấn đề trên GitHub",
+		"description": "[nhập] tệp của người dùng không được nhận dạng"
+	},
 	"error_unknown_message": {
 		"message": "Đã nhận tin nhắn không xác định",
 		"description": "một tin nhắn không xác định đã được nhận từ người nghe"

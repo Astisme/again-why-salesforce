@@ -555,6 +555,10 @@
 		"message": "vertaler was nog niet geïnitialiseerd.",
 		"description": "[fout] de TranslationService was niet klaar"
 	},
+	"error_unknown_file_structure": {
+		"message": "We konden een bestand dat u wilde importeren niet begrijpen\nAls het probleem aanhoudt, deel het dan met ons door een GitHub-issue te openen",
+		"description": "[importeren] het bestand van de gebruiker werd niet herkend"
+	},
 	"error_unknown_message": {
 		"message": "Onbekend bericht ontvangen",
 		"description": "een onbekend bericht is ontvangen van een luisteraar"
