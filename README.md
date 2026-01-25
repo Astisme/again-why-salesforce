@@ -22,7 +22,7 @@ This extension allows users to create custom tabs in Setup for their most-used s
 -   [ ] Better solutions for waiting until Salesforce setup is completely loaded
 -   [ ] Utils class for templates or other shared code
 -   [ ] Setting cog by as setup tab for easy access
--   [ ] Export and import tabs/settings
+-   [x] Export and import tabs/settings
 
 Contributors
 
