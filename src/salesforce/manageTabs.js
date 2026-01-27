@@ -777,7 +777,7 @@ async function readManagedTabsAndSave({
 } = {}) {
 	// read all Tabs in the tbody
 	const tableTabs = [];
-  const lastTr = getLastTr(tbody);
+	const lastTr = getLastTr(tbody);
 	for (const tr of tbody.querySelectorAll("tr")) {
 		if (tr !== lastTr) { // lastChild is always empty
 			tableTabs.push(Tab.create({
