@@ -64,11 +64,15 @@ export default class Tab {
 		this[Tab.keyClickDate] = clickDate;
 	}
 
+  /**
+   * Checks if a Tab in input contains unsupported keys
+   * @param {Object} tab - the Tab to be checked
+   * @return {boolean} false if the Tab contains only supported keys
+   */
 	static hasUnexpectedKeys(tab) {
 		return tab != null &&
 			Object.keys(tab)
-					.filter((key) => !Tab.allowedKeys.has(key))
-					.length > 0;
+					.some((key) => !Tab.allowedKeys.has(key));
 	}
 
 	/**

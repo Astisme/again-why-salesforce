@@ -165,8 +165,8 @@ function makeValidTabs(tabs = [], {
  * @param {Object} mapping - the key mapping for makeValidTabs
  * @return {Array} with only the valid Tabs
  */
-function getTabsFromExtensions(tabs = [], validator, mapping) {
-	return tabs.length > 0 && tabs.every(validator)
+function getTabsFromExtensions(tabs, validator, mapping) {
+	return Array.isArray(tabs) && tabs.length > 0 && tabs.every(validator)
 		? makeValidTabs(tabs, mapping)
 		: [];
 }
