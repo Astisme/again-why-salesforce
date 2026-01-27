@@ -1,9 +1,11 @@
 "use strict";
-import { EXTENSION_GITHUB_LINK } from "/constants.js";
-import { sendExtensionMessage } from "/functions.js";
-import { getSetupTabUl } from "./content.js";
-import { SLASHED_STAR_ID, STAR_ID } from "./favourite-manager.js";
-import { generateTutorialElements } from "./generator.js";
+import { EXTENSION_GITHUB_LINK, SETUP_LIGHTNING } from "/constants.js";
+import { calculateReadingTime, sendExtensionMessage, performLightningRedirect } from "/functions.js";
+import ensureTranslatorAvailability from "/translator.js";
+import { ACTION_ADD, getSetupTabUl, performActionOnTabs } from "./content.js";
+import { showFavouriteButton, SLASHED_STAR_ID, STAR_ID } from "./favourite-manager.js";
+import { generateRowTemplate, generateTutorialElements } from "./generator.js";
+import { ensureAllTabsAvailability } from "../tabContainer.js";
 
 /**
  * Tutorial class to guide users through the extension features.
@@ -51,7 +53,30 @@ class Tutorial {
 		 * @type {Array<Object>}
 		 */
 		this.steps = [];
+    this.retryCount = 0;
 	}
+
+  #getExtensionElementWithLinkInSetup(){
+    const ul = getSetupTabUl();
+    return ul.querySelector('a:not([title^="/"])');
+  }
+
+  async #generateExtensionElementWithLinkInSetup(){
+    const translator = await ensureTranslatorAvailability();
+    try{
+      performActionOnTabs(ACTION_ADD, {
+        label: await translator.translate('users'),
+        url: 'ManageUsers/home',
+      });
+    } catch(e){
+      console.info(e);
+    }
+    return this.#getExtensionElementWithLinkInSetup();
+  }
+
+  #getStarsContainer(){
+    return document.getElementById(STAR_ID).closest('button');
+  }
 
 	/**
 	 * Initializes the tutorial steps array with all predefined tutorial phases.
@@ -73,16 +98,18 @@ class Tutorial {
 				action: "highlight",
 			},
 			{
-				element: () => {
-					const ul = getSetupTabUl();
-					return ul.querySelector('a[title="Users"]');
-				},
-				message: "tutorial_click_users",
+				element: this.#getExtensionElementWithLinkInSetup,
+        fakeElement: () => (this.#generateExtensionElementWithLinkInSetup.bind(this))(),
+				message: "tutorial_click_highlighted_tab",
 				action: "highlight",
 				waitFor: "click",
 			},
 			{
-				element: () => document.getElementById(SLASHED_STAR_ID),
+				element: this.#getStarsContainer,
+        fakeElement: async () => {
+          await showFavouriteButton();
+          return this.#getStarsContainer();
+        },
 				message: "tutorial_remove_favourite",
 				action: "highlight",
 				waitFor: "click",
@@ -91,30 +118,29 @@ class Tutorial {
 				message: "tutorial_redirect_account",
 				action: "confirm",
 				onConfirm: () => {
-					globalThis.location.href =
-						"/setup/lightning/ObjectManager/Account/FieldsAndRelationships/view";
+          performLightningRedirect(`${SETUP_LIGHTNING}ObjectManager/Account/FieldsAndRelationships/view`);
 				},
+        waitFor: "redirect",
 			},
 			{
-				element: () => document.getElementById(STAR_ID),
+				element: this.#getStarsContainer,
+        fakeElement: async () => {
+          await showFavouriteButton();
+          return this.#getStarsContainer();
+        },
 				message: "tutorial_add_favourite",
 				action: "highlight",
 				waitFor: "click",
 			},
 			{
-				element: () => {
-					const ul = getSetupTabUl();
-					return ul.querySelector('a[title*="Account"]');
-				},
+				element: this.#getExtensionElementWithLinkInSetup,
+        fakeElement: this.#generateExtensionElementWithLinkInSetup,
 				message: "tutorial_pin_tab",
 				action: "highlight",
-				waitFor: "timeout",
 			},
 			{
-				element: () => {
-					const ul = getSetupTabUl();
-					return ul.querySelector('a[title*="Account"]');
-				},
+				element: this.#getExtensionElementWithLinkInSetup,
+        fakeElement: this.#generateExtensionElementWithLinkInSetup,
 				message: "tutorial_pinned_tab",
 				action: "highlight",
 			},
@@ -134,7 +160,6 @@ class Tutorial {
 					),
 				message: "tutorial_drag_users",
 				action: "highlight",
-				waitFor: "timeout",
 			},
 			{
 				message: "tutorial_pinned_explanation",
@@ -204,10 +229,27 @@ class Tutorial {
 			this.end();
 			return;
 		}
+    this.retryCount = 0;
 		const step = this.steps[this.currentStep];
 		this.executeStep(step);
 		this.currentStep++;
 	}
+
+  async getElementNowOrLater(step, callback){
+    const el = step.element();
+    if(el != null)
+      return el;
+    this.retryCount++;
+    if(this.retryCount > 5){
+      const fakeEl = await step.fakeElement();
+      if(fakeEl != null)
+        return fakeEl;
+    }
+    setTimeout(
+      () => callback(step),
+      1000
+    );
+  }
 
 	/**
 	 * Executes a specific tutorial step based on its configuration.
@@ -225,25 +267,25 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
-		// Clear previous highlights
-		this.highlightBox.style.display = "none";
-
+    /*
+    if(step.waitFor === "redirect"){
+    }
+    */
 		if (step.element) {
-			const el = step.element();
-			if (el) {
-				this.highlightElement(el);
-			}
+      const el = await this.getElementNowOrLater(step, this.executeStep.bind(this));
+      if(el == null){
+        return;
+      }
+      this.highlightElement(el);
+      if (step.waitFor === "click") {
+        el.addEventListener("click", () => this.nextStep(), {
+          once: true,
+        });
+      }
 		}
-
 		await this.showMessage(step);
-
-		if (step.waitFor) {
-			this.waitForAction(step);
-		} else if (step.action === "confirm") {
+		if (step.waitFor == null) {
 			this.showConfirm(step);
-		} else {
-			// Auto proceed after message
-			setTimeout(() => this.nextStep(), 3000);
 		}
 	}
 
@@ -254,6 +296,7 @@ class Tutorial {
 	 * @param {HTMLElement} el - The HTML element to highlight.
 	 */
 	highlightElement(el) {
+    this.highlightBox.style.display = "none";
 		const rect = el.getBoundingClientRect();
 		this.highlightBox.style.top = `${rect.top}px`;
 		this.highlightBox.style.left = `${rect.left}px`;
@@ -273,9 +316,7 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the message has been translated and displayed.
 	 */
 	async showMessage(step) {
-		const translator = await import("/translator.js").then((m) =>
-			m.default
-		);
+		const translator = await ensureTranslatorAvailability();
 		let message = await translator.translate(step.message);
 		if (step.link) {
 			message += `\n\n${step.link}`;
@@ -284,29 +325,7 @@ class Tutorial {
 			message += `\n\nShortcut: ${step.shortcut}`;
 		}
 		this.messageBox.textContent = message;
-	}
-
-	/**
-	 * Waits for a specific user action before proceeding to the next tutorial step.
-	 * Handles different types of waits: click events on elements or timed delays.
-	 *
-	 * @param {Object} step - The tutorial step object.
-	 * @param {Function} [step.element] - Function returning the element to attach click listener to.
-	 * @param {string} step.waitFor - The type of action to wait for ("click" or "timeout").
-	 */
-	waitForAction(step) {
-		if (step.waitFor === "click") {
-			const el = step.element();
-			if (el) {
-				el.addEventListener("click", () => this.nextStep(), {
-					once: true,
-				});
-			} else {
-				setTimeout(() => this.nextStep(), 1000);
-			}
-		} else if (step.waitFor === "timeout") {
-			setTimeout(() => this.nextStep(), 5000);
-		}
+    step.message = message;
 	}
 
 	/**
@@ -371,6 +390,8 @@ export async function checkTutorial() {
 	const completed = localStorage.getItem("tutorialCompleted");
 	if (!completed) {
 		if (confirm("Do you want to start the tutorial?")) {
+      // redirect to setup home
+      performLightningRedirect(`${SETUP_LIGHTNING}SetupOneHome/home`);
 			const tutorial = new Tutorial();
 			await tutorial.start();
 		}

@@ -1503,9 +1503,9 @@
 		"message": "These are your favourite Tabs. They allow quick access to frequently used pages.",
 		"description": "[tutorial] highlight favourite tabs"
 	},
-	"tutorial_click_users": {
-		"message": "Click on the 'Users' Tab to navigate to the Users page.",
-		"description": "[tutorial] click users tab"
+	"tutorial_click_highlighted_tab": {
+		"message": "Click on the highlighted Tab to navigate to the corresponding page.",
+		"description": "[tutorial] click highlighted tab"
 	},
 	"tutorial_remove_favourite": {
 		"message": "Click the slashed star to remove this page from favourites.",

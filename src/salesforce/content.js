@@ -54,7 +54,11 @@ import {
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
+import {
+  calculateReadingTime,
+  getSettings,
+  sendExtensionMessage,
+} from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
@@ -102,7 +106,7 @@ let href = globalThis.location?.href;
  * @return {string} The current page href.
  */
 export function getCurrentHref() {
-	return href;
+	return globalThis.location?.href;
 }
 
 /**
@@ -184,19 +188,6 @@ export function sf_afterSet({
 }
 
 /**
- * Calculates the estimated time (in milliseconds) it takes to read a given message.
- *
- * @param {string} message - The message to calculate the reading time for.
- * @return {number} - The estimated reading time in milliseconds.
- */
-function _calculateReadingTime(message) {
-	const words = message.split(/\s+/).filter((word) => word.length > 0);
-	const wordsPerMinute = 200; // Average reading speed
-	const readingTimeMinutes = words.length / wordsPerMinute;
-	const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
-	return (readingTimeSeconds + 2) * 1000;
-}
-/**
  * Displays a toast message on the UI with the provided message and styling options.
  * - The toast message is appended to the DOM and automatically removed after an estimated reading time.
  * - The message is logged to the console with an appropriate log level based on success, warning, or error.
@@ -217,7 +208,7 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
 		toastElement.remove();
-	}, _calculateReadingTime(toastElement.textContent));
+	}, calculateReadingTime(toastElement.textContent));
 	if (isSuccess) {
 		if (isWarning) {
 			console.info(message);

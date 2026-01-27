@@ -287,3 +287,24 @@ export async function areFramePatternsAllowed() {
 				DO_NOT_REQUEST_FRAME_PERMISSION,
 			) === "true";
 }
+/**
+ * Calculates the estimated time (in milliseconds) it takes to read a given message.
+ *
+ * @param {string} message - The message to calculate the reading time for.
+ * @return {number} - The estimated reading time in milliseconds.
+ */
+export function calculateReadingTime(message) {
+	const words = message.split(/\s+/).filter((word) => word.length > 0);
+	const wordsPerMinute = 200; // Average reading speed
+	const readingTimeMinutes = words.length / wordsPerMinute;
+	const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
+	return (readingTimeSeconds + 2) * 1000;
+}
+export function performLightningRedirect(url = ""){
+  postMessage({
+    what: "lightningNavigation",
+    navigationType: "url",
+    url,
+    fallbackURL: url,
+  }, "*");
+}

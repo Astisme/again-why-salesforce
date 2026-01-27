@@ -28,6 +28,7 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	performLightningRedirect,
 } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
@@ -110,12 +111,7 @@ async function handleLightningLinkClick(e) {
 	) {
 		open(url, target);
 	} else {
-		postMessage({
-			what: "lightningNavigation",
-			navigationType: "url",
-			url,
-			fallbackURL: url,
-		}, "*");
+    performLightningRedirect(url);
 	}
 }
 
@@ -347,7 +343,7 @@ export function generateRowTemplate(
 		hide = false,
 		isPinned = false,
 		index = 0,
-	},
+	} = {},
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
