@@ -1799,14 +1799,6 @@ function createTableRow(
 	const tr = document.createElement("tr");
 	const { td, checkbox } = createCheckboxCell(index, true);
 	tr.appendChild(td);
-	tr.addEventListener("click", (e) => {
-		if (
-			e.target.tagName !== "INPUT" ||
-			e.target.type !== "checkbox"
-		) {
-			checkbox.click();
-		}
-	});
 	tr.appendChild(createTextCell(label));
 	tr.appendChild(createTextCell(url));
 	tr.appendChild(createTextCell(org));
@@ -1831,7 +1823,16 @@ function generateTableWithCheckboxes(
 	const { table, tbody } = createTable(headers);
 	for (const i in tabs) {
 		const { tr, checkbox } = createTableRow(tabs[i], i);
-		checkbox.addEventListener("click", changeListener, { once: true });
+    tr.addEventListener("click", (e) => {
+      if (
+        e.target.tagName !== "INPUT" ||
+        e.target.type !== "checkbox"
+      ) {
+        checkbox.checked = !checkbox.checked;
+        changeListener();
+      }
+    });
+		checkbox.addEventListener("click", changeListener);
 		tbody.appendChild(tr);
 		res.checkboxes.push(checkbox);
 	}
@@ -2037,16 +2038,6 @@ export async function generateSldsModalWithTabList(tabs = [], {
 		}
 		updateSelectAllButtonText();
 	});
-	for (const tr of article.querySelectorAll("tr")) {
-		tr.addEventListener("click", (e) => {
-			if (
-				e.target.tagName !== "INPUT" ||
-				e.target.type !== "checkbox"
-			) {
-				updateSelectAllButtonText();
-			}
-		});
-	}
 	/**
 	 * Function to get selected tabs
 	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
