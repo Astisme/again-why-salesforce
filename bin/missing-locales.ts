@@ -1,7 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import * as fs from "node:fs";
-import * as path from "node:path";
-import * as process from "node:process";
+const LOCALES_DIR = "src/_locales";
 
 // Type definitions
 interface MessageFile {
@@ -55,11 +53,11 @@ function compareLocaleKeys(
 /**
  * Removes keys from a locale file and saves the updated file
  */
-function removeKeysFromLocaleFile(
+async function removeKeysFromLocaleFile(
 	filePath: string,
 	localeFile: MessageFile,
 	keysToRemove: string[],
-): void {
+): Promise<void> {
 	if (keysToRemove.length === 0) {
 		return;
 	}
@@ -72,7 +70,7 @@ function removeKeysFromLocaleFile(
 	}
 	// Write the updated file
 	try {
-		fs.writeFileSync(
+		await Deno.writeTextFile(
 			filePath,
 			JSON.stringify(updatedLocaleFile, null, "\t"),
 		);
@@ -89,41 +87,51 @@ function createKeySignature(keys: string[]): string {
 }
 
 /**
- * Get filtered locale directories (excluding English and Spanish 419)
+ * Gets all locale directories from the locales directory (excluding English and Spanish 419)
+ * @returns {Promise<string[]>} Array of locale directory names
  */
-function getLocaleDirectories(localesDir: string): string[] {
-	return fs.readdirSync(localesDir)
-		.filter((file) => {
-			const dirPath = path.join(localesDir, file);
-			return fs.statSync(dirPath).isDirectory() &&
-				!file.startsWith("en") && file !== "es_419";
-		});
+async function getLocaleDirectories() {
+	const entries = [];
+	for await (const entry of Deno.readDir(LOCALES_DIR)) {
+		if (
+			entry.isDirectory &&
+			!entry.name.startsWith("en") &&
+			entry.name !== "es_419"
+		) {
+			entries.push(entry.name);
+		}
+	}
+	return entries;
 }
 
 /**
  * Process a single locale file and return missing keys or error status
  */
-function processLocaleFile(
-	//localeDir: string,
+async function processLocaleFile(
 	localeFilePath: string,
 	englishFile: any,
-): { status: "success" | "missing" | "error"; missingKeys?: string[] } {
-	if (!fs.existsSync(localeFilePath)) {
+): Promise<
+	{ status: "success" | "missing" | "error"; missingKeys?: string[] }
+> {
+	try {
+		await Deno.stat(localeFilePath);
+	} catch {
 		return { status: "missing" };
 	}
-
 	try {
-		const localeContent = fs.readFileSync(localeFilePath, "utf8");
+		const localeContent = await Deno.readTextFile(localeFilePath);
 		const localeFile = JSON.parse(localeContent);
 		const { missingKeys, removedKeys } = compareLocaleKeys(
 			englishFile,
 			localeFile,
 		);
-
 		if (removedKeys.length > 0) {
-			removeKeysFromLocaleFile(localeFilePath, localeFile, removedKeys);
+			await removeKeysFromLocaleFile(
+				localeFilePath,
+				localeFile,
+				removedKeys,
+			);
 		}
-
 		return { status: "success", missingKeys };
 	} catch (error) {
 		console.error(`Error processing file ${localeFilePath}:`, error);
@@ -140,10 +148,8 @@ function groupLocalesByMissingKeys(
 	const groupedResults: { [groupId: string]: LocaleMissingKeys } = {};
 	const signatureMap: { [signature: string]: number } = {};
 	let groupCounter = 0;
-
 	for (const result of localeResults) {
 		const signature = createKeySignature(result.missingKeys);
-
 		if (signatureMap[signature] === undefined) {
 			signatureMap[signature] = groupCounter++;
 			groupedResults[signatureMap[signature].toString()] = {
@@ -151,16 +157,13 @@ function groupLocalesByMissingKeys(
 				missingKeys: result.missingKeys,
 			};
 		}
-
 		const groupId = signatureMap[signature].toString();
 		groupedResults[groupId].locales.push(result.locale);
 	}
-
 	// Sort locales alphabetically within each group
 	for (const group of Object.values(groupedResults)) {
 		group.locales.sort();
 	}
-
 	return groupedResults;
 }
 
@@ -172,7 +175,6 @@ function createEnglishMissingKeysReport(
 	englishFile: any,
 ): EnglishMissingKeys {
 	const englishMissingKeys: EnglishMissingKeys = {};
-
 	for (const key of allMissingKeys) {
 		if (englishFile[key]) {
 			englishMissingKeys[key] = {
@@ -181,7 +183,6 @@ function createEnglishMissingKeysReport(
 			};
 		}
 	}
-
 	return englishMissingKeys;
 }
 
@@ -206,35 +207,27 @@ function addToSpecialGroup(
 /**
  * Main function to check all locale files against the English reference
  */
-function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
+async function checkLocaleFiles(): Promise<GroupedMissingKeys> {
 	const groupedReport: GroupedMissingKeys = {};
-
 	// Read the English reference file
-	const englishFilePath = path.join(localesDir, "en", "messages.json");
-	if (!fs.existsSync(englishFilePath)) {
+	const englishFilePath = `${LOCALES_DIR}/en/messages.json`;
+	try {
+		await Deno.stat(englishFilePath);
+	} catch {
 		throw new Error(
 			"English reference file not found at: " + englishFilePath,
 		);
 	}
-
-	const englishContent = fs.readFileSync(englishFilePath, "utf8");
+	const englishContent = await Deno.readTextFile(englishFilePath);
 	const englishFile = JSON.parse(englishContent);
-
 	// Get filtered locale directories
-	const localeDirs = getLocaleDirectories(localesDir);
-
+	const localeDirs = await getLocaleDirectories();
 	// Process each locale file
 	const allMissingKeys = new Set<string>();
 	const localeResults: { locale: string; missingKeys: string[] }[] = [];
-
 	for (const localeDir of localeDirs) {
-		const localeFilePath = path.join(
-			localesDir,
-			localeDir,
-			"messages.json",
-		);
-		const result = processLocaleFile(localeFilePath, englishFile);
-
+		const localeFilePath = `${LOCALES_DIR}/${localeDir}/messages.json`;
+		const result = await processLocaleFile(localeFilePath, englishFile);
 		if (result.status === "missing") {
 			addToSpecialGroup(groupedReport, "missing_files", localeDir, [
 				"FILE_NOT_FOUND",
@@ -253,33 +246,30 @@ function checkLocaleFiles(localesDir: string): GroupedMissingKeys {
 			}
 		}
 	}
-
 	// Group locales by missing keys and add to report
 	const groupedLocales = groupLocalesByMissingKeys(localeResults);
 	Object.assign(groupedReport, groupedLocales);
-
 	// Add English missing keys report
 	const englishReport = createEnglishMissingKeysReport(
 		allMissingKeys,
 		englishFile,
 	);
 	Object.assign(groupedReport, englishReport);
-
 	return groupedReport;
 }
 
 /**
  * Main execution
  */
-function main() {
-	const localesDir = path.resolve("src/_locales");
-	if (!fs.existsSync(localesDir)) {
-		console.error("_locales directory not found!");
-		process.exit(1);
+async function main() {
+	try {
+		await Deno.stat(LOCALES_DIR);
+	} catch {
+		console.error(`${LOCALES_DIR} directory not found!`);
+		Deno.exit(1);
 	}
 	try {
-		const groupedReport = checkLocaleFiles(localesDir);
-		// Calculate total missing keys and locales with missing translations
+		const groupedReport = await checkLocaleFiles(); // Calculate total missing keys and locales with missing translations
 		let someMissingKeys = false;
 		for (const [key, group] of Object.entries(groupedReport)) {
 			if (!Number.isInteger(Number(key))) continue;
@@ -291,15 +281,17 @@ function main() {
 		}
 		// If no missing keys were found, close with success
 		if (!someMissingKeys) {
-			process.exit(0);
+			Deno.exit(0);
 		}
 		// Write the grouped report to a JSON file
-		const outputPath = path.resolve("missing-keys-report.json");
-		fs.writeFileSync(outputPath, JSON.stringify(groupedReport, null, "\t"));
+		await Deno.writeTextFile(
+			"missing-keys-report.json",
+			JSON.stringify(groupedReport, null, "\t"),
+		);
 	} catch (error) {
 		console.error("Error generating report:", error);
 	}
-	process.exit(1);
+	Deno.exit(1);
 }
 
 main();

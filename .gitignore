@@ -5,6 +5,10 @@ bin/*.zip
 bin/*.dmg
 **/bundled*
 missing-keys-report.json
+invalid-variables-report.json
 dmg_staging
 safari-*/
 .env
+node_modules/
+package-lock.json
+images/palette.png

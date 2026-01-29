@@ -13,33 +13,18 @@
 		>
 		<link rel="stylesheet" href="/action/variables.css" />
 		<link rel="stylesheet" href="/action/basic.css" />
-		<link rel="stylesheet" href="/settings/help/help.css" />
+		<link rel="stylesheet" href="/components/help/help.css" />
+		<link
+			rel="stylesheet"
+			href="/components/review-sponsor/review-sponsor.css"
+		/>
 		<link rel="stylesheet" href="./options.css" />
 		<script defer src="./options.js" type="module"></script>
-		<template id="help-template">
-			<div class="help-icon">
-				<a class="button" aria-describedby="tooltip">
-					<!-- default built-in icon slot fallback -->
-					<svg
-						focusable="false"
-						aria-hidden="true"
-						viewBox="0 0 520 520"
-						class="slds-button__icon"
-					>
-						<g>
-							<path
-								d="M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"
-							>
-							</path>
-						</g>
-					</svg>
-					<span class="assistive" hidden data-i18n="help">Help</span>
-				</a>
-				<!-- deno-fmt-ignore -->
-				<div class="tooltip" role="tooltip"><slot name="text">Nothing to see here...</slot><div class="link-tip hidden" data-i18n="help_tip_click_link">Click to be redirected to the documentation for this setting!</div></div>
-			</div>
-		</template>
-		<script src="/settings/help/help.js" type="module"></script>
+		<script src="/components/help/help.js" type="module"></script>
+		<script
+			src="/components/review-sponsor/review-sponsor.js"
+			type="module"
+		></script>
 	</head>
 
 	<body>
@@ -144,6 +129,40 @@
 								</a>
 							</li>
 							<li
+								id="pinned_tab_generic_style-settings"
+								class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem"
+							>
+								<a
+									role="tab"
+									tabindex="-1"
+									title="Pinned Tab Styler"
+									class="tabHeader slds-context-bar__label-action"
+									data-i18n="set_pin_gen_styler+-+title"
+								>
+									<span
+										class="label slds-truncate"
+										data-i18n="set_pin_gen_styler"
+									>Pinned Tab Styler</span>
+								</a>
+							</li>
+							<li
+								id="pinned_tab_org_style-settings"
+								class="oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem"
+							>
+								<a
+									role="tab"
+									tabindex="-1"
+									title="Pinned Org Styler"
+									class="tabHeader slds-context-bar__label-action"
+									data-i18n="set_pin_org_styler+-+title"
+								>
+									<span
+										class="label slds-truncate"
+										data-i18n="set_pin_org_styler"
+									>Pinned Org Styler</span>
+								</a>
+							</li>
+							<li
 								id="tab_generic_style-preview"
 								class="hidden oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce"
 							>
@@ -177,10 +196,45 @@
 									>Org Preview</span>
 								</a>
 							</li>
+							<li
+								id="pinned_tab_generic_style-preview"
+								class="hidden oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce"
+							>
+								<a
+									role="tab"
+									tabindex="-1"
+									title="Click to toggle active state."
+									class="tabHeader slds-context-bar__label-action"
+									data-i18n="set_toggle_preview+-+title"
+								>
+									<span
+										class="label slds-truncate is-pin-tab"
+										data-i18n="set_pin_gen_preview"
+									>Pinned Tab Preview</span>
+								</a>
+							</li>
+							<li
+								id="pinned_tab_org_style-preview"
+								class="hidden oneConsoleTabItem tabItem slds-context-bar__item borderRight navexConsoleTabItem again-why-salesforce"
+							>
+								<a
+									role="tab"
+									tabindex="-1"
+									title="Click to toggle active state."
+									class="tabHeader slds-context-bar__label-action"
+									data-i18n="set_toggle_preview+-+title"
+								>
+									<span
+										class="label slds-truncate is-org-tab is-pin-tab"
+										data-i18n="set_pin_org_preview"
+									>Pinned Org Preview</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</nav>
 			</div>
+			<review-sponsor-aws></review-sponsor-aws>
 		</div>
 
 		<div
@@ -192,16 +246,11 @@
 				role="alertdialog"
 				aria-describedby="toastDescription7382:0"
 				aria-label="success"
-				data-key="success"
 				class="slds-theme--success slds-notify--toast slds-notify forceToastMessage"
-				data-aura-rendered-by="7384:0"
-				data-aura-class="forceToastMessage"
 			>
 				<lightning-icon
 					icon-name="utility:success"
 					class="slds-icon-utility-success toastIcon slds-m-right--small slds-no-flex slds-align-top slds-icon_container"
-					data-data-rendering-service-uid="1478"
-					data-aura-rendered-by="7386:0"
 				>
 					<span
 						style="--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)"
@@ -214,7 +263,6 @@
 							<svg
 								class="slds-icon slds-icon_small"
 								focusable="false"
-								data-key="success"
 								aria-hidden="true"
 								viewBox="0 0 520 520"
 								part="icon"
@@ -232,23 +280,138 @@
 				</lightning-icon>
 				<div
 					class="toastContent slds-notify__content"
-					data-aura-rendered-by="7387:0"
 				>
 					<div
 						class="slds-align-middle slds-hyphenate"
-						data-aura-rendered-by="7388:0"
 					>
 						<div
 							id="toastDescription7382:0"
-							data-aura-rendered-by="7390:0"
 						>
 							<div
 								class="toastMessage slds-text-heading--small forceActionsText"
-								data-aura-rendered-by="7395:0"
-								data-aura-class="forceActionsText"
 								data-i18n="opt_confirm_save"
 							>
 								Settings were saved!
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			id="toast-display-success"
+			class="invisible visibility-transition toastContainer slds-notify_container"
+			style="pointer-events: none; top: 3%"
+		>
+			<div
+				role="alertdialog"
+				aria-describedby="toastDescription7383:0"
+				aria-label="success"
+				class="slds-theme--success slds-notify--toast slds-notify forceToastMessage"
+			>
+				<lightning-icon
+					icon-name="utility:success"
+					class="slds-icon-utility-success toastIcon slds-m-right--small slds-no-flex slds-align-top slds-icon_container"
+				>
+					<span
+						style="--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)"
+						part="boundary"
+					>
+						<lightning-primitive-icon
+							size="small"
+							variant="inverse"
+						>
+							<svg
+								class="slds-icon slds-icon_small"
+								focusable="false"
+								aria-hidden="true"
+								viewBox="0 0 520 520"
+								part="icon"
+							>
+								<g>
+									<path
+										d="M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
+									>
+									</path>
+								</g>
+							</svg>
+						</lightning-primitive-icon>
+					</span>
+					<span class="slds-assistive-text">success</span>
+				</lightning-icon>
+				<div
+					class="toastContent slds-notify__content"
+				>
+					<div
+						class="slds-align-middle slds-hyphenate"
+					>
+						<div
+							id="toastDescription7383:0"
+						>
+							<div
+								class="toastMessage slds-text-heading--small forceActionsText"
+							>
+								Success message
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			id="toast-display-error"
+			class="invisible visibility-transition toastContainer slds-notify_container"
+			style="pointer-events: none; top: 3%"
+		>
+			<div
+				role="alertdialog"
+				aria-describedby="toastDescription7384:0"
+				aria-label="error"
+				class="slds-theme--error slds-notify--toast slds-notify forceToastMessage"
+			>
+				<lightning-icon
+					icon-name="utility:error"
+					class="slds-icon-utility-error toastIcon slds-m-right--small slds-no-flex slds-align-top slds-icon_container"
+				>
+					<span
+						style="--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)"
+						part="boundary"
+					>
+						<lightning-primitive-icon
+							size="small"
+							variant="inverse"
+						>
+							<svg
+								class="slds-icon slds-icon_small"
+								focusable="false"
+								aria-hidden="true"
+								viewBox="0 0 520 520"
+								part="icon"
+							>
+								<g>
+									<path
+										d="M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
+									>
+									</path>
+								</g>
+							</svg>
+						</lightning-primitive-icon>
+					</span>
+					<span class="slds-assistive-text">error</span>
+				</lightning-icon>
+				<div
+					class="toastContent slds-notify__content"
+				>
+					<div
+						class="slds-align-middle slds-hyphenate"
+					>
+						<div
+							id="toastDescription7384:0"
+						>
+							<div
+								class="toastMessage slds-text-heading--small forceActionsText"
+							>
+								Error message
 							</div>
 						</div>
 					</div>
@@ -341,6 +504,44 @@
 						<option value="zh_TW">zh_TW</option>
 					</select>
 				</div>
+			</div>
+			<hr>
+
+			<div id="optional-settings">
+				<ul>
+					<li>
+						<input id="allow-export" type="checkbox" />
+						<label
+							for="allow-export"
+							data-i18n="opt_allow_export"
+						>
+							Allow Again, Why Salesforce to export your Tabs,
+							when you request it.
+						</label>
+						<help-aws
+							href="https://github.com/Astisme/again-why-salesforce/wiki/Export-Tabs"
+						>
+							<span slot="text" data-i18n="help_allow_export"
+							>When enabled, you'll be able to export your Tabs
+								and keep them on your computer.</span>
+						</help-aws>
+					</li>
+					<li>
+						<input id="allow-domains" type="checkbox" />
+						<label
+							for="allow-domains"
+							data-i18n="opt_allow_domains"
+						>
+							Allow Again, Why Salesforce to access Salesforce
+							pages, when you visit them.
+						</label>
+						<help-aws>
+							<span slot="text" data-i18n="help_allow_domains"
+							>When enabled, you'll be able to see your Tabs as
+								soon as you launch Salesforce Setup.</span>
+						</help-aws>
+					</li>
+				</ul>
 			</div>
 			<hr>
 
@@ -652,6 +853,18 @@
 								>
 									👽 by Org
 								</option>
+								<option
+									value="click-count"
+									data-i18n="cxm_sort_click_count"
+								>
+									🖱️ by Usage
+								</option>
+								<option
+									value="click-date"
+									data-i18n="cxm_sort_click_date"
+								>
+									⌛ by Time
+								</option>
 							</select>
 						</div>
 						<div class="select-wrapper">
@@ -836,7 +1049,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -850,7 +1063,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-background-inactive"
@@ -858,7 +1070,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_background"
-										type="text"
+										type="color"
 										placeholder="white"
 										data-style-key="background"
 									>
@@ -877,7 +1089,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -891,7 +1103,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-color-inactive"
@@ -899,7 +1110,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_color"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="color"
 									>
@@ -918,7 +1129,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -933,7 +1144,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-border-inactive"
@@ -941,7 +1151,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_border_color"
-										type="text"
+										type="color"
 										placeholder="blue"
 										data-style-key="border"
 									>
@@ -960,7 +1170,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -975,7 +1185,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-shadow-inactive"
@@ -983,7 +1192,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_shadow"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="shadow"
 									>
@@ -1002,7 +1211,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1016,7 +1225,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-hover-inactive"
@@ -1024,7 +1232,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_hover_background"
-										type="text"
+										type="color"
 										placeholder="aqua"
 										data-style-key="hover"
 									>
@@ -1194,7 +1402,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1208,7 +1416,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-background-active"
@@ -1216,7 +1423,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_background"
-										type="text"
+										type="color"
 										placeholder="white"
 										data-style-key="background"
 									>
@@ -1235,7 +1442,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1249,7 +1456,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-color-active"
@@ -1257,7 +1463,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_color"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="color"
 									>
@@ -1276,7 +1482,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1291,7 +1497,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-border-active"
@@ -1299,7 +1504,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_border_color"
-										type="text"
+										type="color"
 										placeholder="blue"
 										data-style-key="border"
 									>
@@ -1318,7 +1523,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1333,7 +1538,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-shadow-active"
@@ -1341,7 +1545,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_shadow"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="shadow"
 									>
@@ -1360,7 +1564,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1374,7 +1578,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-hover-active"
@@ -1382,7 +1585,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_hover_background"
-										type="text"
+										type="color"
 										placeholder="aqua"
 										data-style-key="hover"
 									>
@@ -1401,7 +1604,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1415,7 +1618,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_generic_style-top-active"
@@ -1423,7 +1625,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_top_active"
-										type="text"
+										type="color"
 										placeholder="aqua"
 										data-style-key="top"
 									>
@@ -1594,7 +1796,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1608,7 +1810,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-background-inactive"
@@ -1616,7 +1817,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_background"
-										type="text"
+										type="color"
 										placeholder="white"
 										data-style-key="background"
 									>
@@ -1635,7 +1836,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1649,7 +1850,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-color-inactive"
@@ -1657,7 +1857,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_color"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="color"
 									>
@@ -1676,7 +1876,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1690,7 +1890,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-border-inactive"
@@ -1698,7 +1897,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_border_color"
-										type="text"
+										type="color"
 										placeholder="blue"
 										data-style-key="border"
 									>
@@ -1717,7 +1916,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1731,7 +1930,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-shadow-inactive"
@@ -1739,7 +1937,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_shadow"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="shadow"
 									>
@@ -1758,7 +1956,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1772,7 +1970,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-hover-inactive"
@@ -1780,7 +1977,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_hover_background"
-										type="text"
+										type="color"
 										placeholder="aqua"
 										data-style-key="hover"
 									>
@@ -1950,7 +2147,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -1964,7 +2161,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-background-active"
@@ -1972,7 +2168,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_background"
-										type="text"
+										type="color"
 										placeholder="white"
 										data-style-key="background"
 									>
@@ -1991,7 +2187,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -2005,7 +2201,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-color-active"
@@ -2013,7 +2208,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_color"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="color"
 									>
@@ -2032,7 +2227,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -2047,7 +2242,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-border-active"
@@ -2055,7 +2249,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_border_color"
-										type="text"
+										type="color"
 										placeholder="blue"
 										data-style-key="border"
 									>
@@ -2074,7 +2268,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -2089,7 +2283,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-shadow-active"
@@ -2097,7 +2290,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_shadow"
-										type="text"
+										type="color"
 										placeholder="black"
 										data-style-key="shadow"
 									>
@@ -2116,7 +2309,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -2130,7 +2323,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-hover-active"
@@ -2138,7 +2330,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_hover_background"
-										type="text"
+										type="color"
 										placeholder="aqua"
 										data-style-key="hover"
 									>
@@ -2157,7 +2349,7 @@
 							variant="label-stacked"
 						>
 							<div
-								class="slds-form-element__label slds-no-flex"
+								class="slds-form-element__label flex-row"
 								part="input-text"
 							>
 								<label
@@ -2171,7 +2363,6 @@
 								<div
 									class="slds-form-element__control slds-grow"
 									part="input-container"
-									type="text"
 								>
 									<input
 										id="tab_org_style-top-active"
@@ -2179,7 +2370,7 @@
 										part="input"
 										maxlength="255"
 										name="set_tab_top_active"
-										type="text"
+										type="color"
 										placeholder="aqua"
 										data-style-key="top"
 									>
@@ -2191,7 +2382,1512 @@
 			</div>
 		</div>
 
-		<div id="save-container">
+		<div
+			id="pinned_tab_generic_style-container"
+			class="half-container hidden"
+		>
+			<div
+				id="pinned_tab_generic_style-inactive-container"
+				class="container"
+			>
+				<div
+					class="slds-form-element_stacked slds-form-element"
+					variant="label-stacked"
+				>
+					<div
+						class="slds-form-element__label slds-form-element__legend"
+						data-i18n="set_pinned_tab_generic_decoration_label"
+					>
+						Pick one or more decoration styles for your generic
+						Pinned Tabs.
+					</div>
+					<div class="center-columns">
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="available"
+							>Available</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_generic_style-set_decoration_available-inactive"
+									class="slds-listbox slds-listbox_vertical"
+								>
+									<li
+										id="pinned_tab_generic_style-bold-inactive"
+										class="slds-listbox__item"
+										data-style-key="bold"
+									>
+										<!-- set aria-selected="true" from js -->
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="bold"
+													style="font-weight: bold"
+													data-i18n="bold"
+												>Bold</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_generic_style-italic-inactive"
+										class="slds-listbox__item"
+										data-style-key="italic"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="italic"
+													style="font-style: italic"
+													data-i18n="italic"
+												>Italic</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_generic_style-underline-inactive"
+										class="slds-listbox__item"
+										data-style-key="underline"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="underline"
+													style="text-decoration: underline"
+													data-i18n="underline"
+												>Underline</span>
+											</span>
+										</div>
+									</li>
+									<!--
+                                        <li id="pinned_tab_generic_style-wavy-inactive" class="slds-listbox__item" data-style-key="wavy">
+                                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                                        <span class="slds-media__body">
+                                        <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                                        </span>
+                                        </div>
+                                        </li>
+                                    -->
+								</ul>
+							</div>
+						</div>
+						<div class="slds-dueling-list__column">
+							<button
+								id="pinned_tab_generic_style-move-chosen-inactive"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Chosen"
+								type="button"
+								data-i18n="set_move_chosen+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"
+									>
+									</path>
+								</svg>
+							</button>
+							<button
+								id="pinned_tab_generic_style-move-available-inactive"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Available"
+								type="button"
+								data-i18n="set_move_available+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"
+									>
+									</path>
+								</svg>
+							</button>
+						</div>
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="chosen"
+							>Chosen</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_generic_style-set_decoration_chosen-inactive"
+									class="slds-listbox slds-listbox_vertical"
+								>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-background-inactive"
+									data-i18n="set_pinned_tab_generic_background_label"
+								>
+									Insert the background color for your generic
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-background-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_background"
+										type="color"
+										placeholder="white"
+										data-style-key="background"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-color-inactive"
+									data-i18n="set_pinned_tab_generic_color_label"
+								>
+									Insert the color of the text for your
+									generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-color-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_color"
+										type="color"
+										placeholder="black"
+										data-style-key="color"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-border-inactive"
+									data-i18n="set_pinned_tab_generic_border_color_label"
+								>
+									<!-- 1px solid input -->
+									Insert the border color for your generic
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-border-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_border_color"
+										type="color"
+										placeholder="blue"
+										data-style-key="border"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-shadow-inactive"
+									data-i18n="set_pinned_tab_generic_shadow_label"
+								>
+									<!-- 1px 1px 2px input -->
+									Insert the shadow color for your generic
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-shadow-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_shadow"
+										type="color"
+										placeholder="black"
+										data-style-key="shadow"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-hover-inactive"
+									data-i18n="set_pinned_tab_generic_hover_background_label"
+								>
+									Insert the hover background color for your
+									generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-hover-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_hover_background"
+										type="color"
+										placeholder="aqua"
+										data-style-key="hover"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div
+				id="pinned_tab_generic_style-active-container"
+				class="container"
+			>
+				<div
+					class="slds-form-element_stacked slds-form-element"
+					variant="label-stacked"
+				>
+					<div
+						class="slds-form-element__label slds-form-element__legend"
+						data-i18n="set_pinned_tab_generic_decoration_active_label"
+					>
+						Pick one or more decoration styles for your active
+						generic Pinned Tabs.
+					</div>
+					<div class="center-columns">
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="available"
+							>Available</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_generic_style-set_decoration_available-active"
+									class="slds-listbox slds-listbox_vertical"
+								>
+									<li
+										id="pinned_tab_generic_style-bold-active"
+										class="slds-listbox__item"
+										data-style-key="bold"
+									>
+										<!-- set aria-selected="true" from js -->
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="bold"
+													style="font-weight: bold"
+													data-i18n="bold"
+												>Bold</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_generic_style-italic-active"
+										class="slds-listbox__item"
+										data-style-key="italic"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="italic"
+													style="font-style: italic"
+													data-i18n="italic"
+												>Italic</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_generic_style-underline-active"
+										class="slds-listbox__item"
+										data-style-key="underline"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="underline"
+													style="text-decoration: underline"
+													data-i18n="underline"
+												>Underline</span>
+											</span>
+										</div>
+									</li>
+									<!--
+                        <li id="pinned_tab_generic_style-wavy-active" class="slds-listbox__item" data-style-key="wavy">
+                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                        <span class="slds-media__body">
+                        <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                        </span>
+                        </div>
+                        </li>
+                    -->
+								</ul>
+							</div>
+						</div>
+						<div class="slds-dueling-list__column">
+							<button
+								id="pinned_tab_generic_style-move-chosen-active"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Chosen"
+								type="button"
+								data-i18n="set_move_chosen+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"
+									>
+									</path>
+								</svg>
+							</button>
+							<button
+								id="pinned_tab_generic_style-move-available-active"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Available"
+								type="button"
+								data-i18n="set_move_available+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"
+									>
+									</path>
+								</svg>
+							</button>
+						</div>
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="chosen"
+							>Chosen</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_generic_style-set_decoration_chosen-active"
+									class="slds-listbox slds-listbox_vertical"
+								>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-background-active"
+									data-i18n="set_pinned_tab_generic_background_active_label"
+								>
+									Insert the background color for your active
+									generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-background-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_background"
+										type="color"
+										placeholder="white"
+										data-style-key="background"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-color-active"
+									data-i18n="set_pinned_tab_generic_color_active_label"
+								>
+									Insert the color of the text for your active
+									generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-color-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_color"
+										type="color"
+										placeholder="black"
+										data-style-key="color"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-border-active"
+									data-i18n="set_pinned_tab_generic_border_color_active_label"
+								>
+									<!-- 1px solid input -->
+									Insert the border color for your active
+									generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-border-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_border_color"
+										type="color"
+										placeholder="blue"
+										data-style-key="border"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-shadow-active"
+									data-i18n="set_pinned_tab_generic_shadow_active_label"
+								>
+									<!-- 1px 1px 2px input -->
+									Insert the shadow color for your active
+									generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-shadow-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_shadow"
+										type="color"
+										placeholder="black"
+										data-style-key="shadow"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-hover-active"
+									data-i18n="set_pinned_tab_generic_hover_background_active_label"
+								>
+									Insert the hover background color for your
+									active generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-hover-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_hover_background"
+										type="color"
+										placeholder="aqua"
+										data-style-key="hover"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_generic_style-top-active"
+									data-i18n="set_pinned_tab_generic_top_active_label"
+								>
+									Insert the color for the bar at the top of
+									your active generic Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_generic_style-top-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_top_active"
+										type="color"
+										placeholder="aqua"
+										data-style-key="top"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="pinned_tab_org_style-container" class="half-container hidden">
+			<div id="pinned_tab_org_style-inactive-container" class="container">
+				<div
+					class="slds-form-element_stacked slds-form-element"
+					variant="label-stacked"
+				>
+					<div
+						class="slds-form-element__label slds-form-element__legend"
+						data-i18n="set_pinned_tab_org_decoration_label"
+					>
+						Pick one or more decoration styles for your org Pinned
+						Tabs.
+					</div>
+					<div class="center-columns">
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="available"
+							>Available</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_org_style-set_decoration_available-inactive"
+									class="slds-listbox slds-listbox_vertical"
+								>
+									<li
+										id="pinned_tab_org_style-bold-inactive"
+										class="slds-listbox__item"
+										data-style-key="bold"
+									>
+										<!-- set aria-selected="true" from js -->
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="bold"
+													style="font-weight: bold"
+													data-i18n="bold"
+												>Bold</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_org_style-italic-inactive"
+										class="slds-listbox__item"
+										data-style-key="italic"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="italic"
+													style="font-style: italic"
+													data-i18n="italic"
+												>Italic</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_org_style-underline-inactive"
+										class="slds-listbox__item"
+										data-style-key="underline"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="underline"
+													style="text-decoration: underline"
+													data-i18n="underline"
+												>Underline</span>
+											</span>
+										</div>
+									</li>
+									<!--
+                        <li id="pinned_tab_org_style-wavy-inactive" class="slds-listbox__item" data-style-key="wavy">
+                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                        <span class="slds-media__body">
+                        <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                        </span>
+                        </div>
+                        </li>
+                    -->
+								</ul>
+							</div>
+						</div>
+						<div class="slds-dueling-list__column">
+							<button
+								id="pinned_tab_org_style-move-chosen-inactive"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Chosen"
+								type="button"
+								data-i18n="set_move_chosen+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"
+									>
+									</path>
+								</svg>
+							</button>
+							<button
+								id="pinned_tab_org_style-move-available-inactive"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Available"
+								type="button"
+								data-i18n="set_move_available+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"
+									>
+									</path>
+								</svg>
+							</button>
+						</div>
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="chosen"
+							>Chosen</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_org_style-set_decoration_chosen-inactive"
+									class="slds-listbox slds-listbox_vertical"
+								>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-background-inactive"
+									data-i18n="set_pinned_tab_org_background_label"
+								>
+									Insert the background color for your org
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-background-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_background"
+										type="color"
+										placeholder="white"
+										data-style-key="background"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-color-inactive"
+									data-i18n="set_pinned_tab_org_color_label"
+								>
+									Insert the color of the text for your org
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-color-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_color"
+										type="color"
+										placeholder="black"
+										data-style-key="color"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-border-inactive"
+									data-i18n="set_pinned_tab_org_border_color_label"
+								>
+									<!-- 1px solid input -->
+									Insert the border color for your org Pinned
+									Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-border-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_border_color"
+										type="color"
+										placeholder="blue"
+										data-style-key="border"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-shadow-inactive"
+									data-i18n="set_pinned_tab_org_shadow_label"
+								>
+									<!-- 1px 1px 2px input -->
+									Insert the shadow color for your org Pinned
+									Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-shadow-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_shadow"
+										type="color"
+										placeholder="black"
+										data-style-key="shadow"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-hover-inactive"
+									data-i18n="set_pinned_tab_org_hover_background_label"
+								>
+									Insert the hover background color for your
+									org Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-hover-inactive"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_hover_background"
+										type="color"
+										placeholder="aqua"
+										data-style-key="hover"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="pinned_tab_org_style-active-container" class="container">
+				<div
+					class="slds-form-element_stacked slds-form-element"
+					variant="label-stacked"
+				>
+					<div
+						class="slds-form-element__label slds-form-element__legend"
+						data-i18n="set_pinned_tab_org_decoration_active_label"
+					>
+						Pick one or more decoration styles for your active org
+						Pinned Tabs.
+					</div>
+					<div class="center-columns">
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="available"
+							>Available</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_org_style-set_decoration_available-active"
+									class="slds-listbox slds-listbox_vertical"
+								>
+									<li
+										id="pinned_tab_org_style-bold-active"
+										class="slds-listbox__item"
+										data-style-key="bold"
+									>
+										<!-- set aria-selected="true" from js -->
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="bold"
+													style="font-weight: bold"
+													data-i18n="bold"
+												>Bold</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_org_style-italic-active"
+										class="slds-listbox__item"
+										data-style-key="italic"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="italic"
+													style="font-style: italic"
+													data-i18n="italic"
+												>Italic</span>
+											</span>
+										</div>
+									</li>
+									<li
+										id="pinned_tab_org_style-underline-active"
+										class="slds-listbox__item"
+										data-style-key="underline"
+									>
+										<div
+											class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline"
+											aria-selected="false"
+										>
+											<span class="slds-media__body">
+												<span
+													class="slds-truncate"
+													title="underline"
+													style="text-decoration: underline"
+													data-i18n="underline"
+												>Underline</span>
+											</span>
+										</div>
+									</li>
+									<!--
+                        <li id="pinned_tab_org_style-wavy-active" class="slds-listbox__item" data-style-key="wavy">
+                        <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false">
+                        <span class="slds-media__body">
+                        <span class="slds-truncate" title="underline-wavy" style="text-decoration: underline wavy" data-i18n="underline_wavy">Underline Wavy</span>
+                        </span>
+                        </div>
+                        </li>
+                    -->
+								</ul>
+							</div>
+						</div>
+						<div class="slds-dueling-list__column">
+							<button
+								id="pinned_tab_org_style-move-chosen-active"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Chosen"
+								type="button"
+								data-i18n="set_move_chosen+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M140 437V83c0-10 13-17 22-9l212 173c8 6 8 19 0 25L162 447c-9 7-22 1-22-10z"
+									>
+									</path>
+								</svg>
+							</button>
+							<button
+								id="pinned_tab_org_style-move-available-active"
+								class="slds-button slds-button_icon slds-button_icon-container"
+								title="Move to Available"
+								type="button"
+								data-i18n="set_move_available+-+title"
+							>
+								<svg
+									viewBox="0 0 520 520"
+									class="slds-button__icon"
+								>
+									<path
+										d="M380 83v354c0 10-13 17-22 9L146 273c-8-6-8-19 0-25L358 73c9-7 22-1 22 10z"
+									>
+									</path>
+								</svg>
+							</button>
+						</div>
+						<div
+							class="slds-dueling-list__column slds-dueling-list__column_responsive"
+						>
+							<span
+								class="slds-form-element__label"
+								data-i18n="chosen"
+							>Chosen</span>
+							<div class="slds-dueling-list__options">
+								<ul
+									id="pinned_tab_org_style-set_decoration_chosen-active"
+									class="slds-listbox slds-listbox_vertical"
+								>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-background-active"
+									data-i18n="set_pinned_tab_org_background_active_label"
+								>
+									Insert the background color for your active
+									org Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-background-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_background"
+										type="color"
+										placeholder="white"
+										data-style-key="background"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-color-active"
+									data-i18n="set_pinned_tab_org_color_active_label"
+								>
+									Insert the color of the text for your active
+									org Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-color-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_color"
+										type="color"
+										placeholder="black"
+										data-style-key="color"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-border-active"
+									data-i18n="set_pinned_tab_org_border_color_active_label"
+								>
+									<!-- 1px solid input -->
+									Insert the border color for your active org
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-border-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_border_color"
+										type="color"
+										placeholder="blue"
+										data-style-key="border"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-shadow-active"
+									data-i18n="set_pinned_tab_org_shadow_active_label"
+								>
+									<!-- 1px 1px 2px input -->
+									Insert the shadow color for your active org
+									Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-shadow-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_shadow"
+										type="color"
+										placeholder="black"
+										data-style-key="shadow"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-hover-active"
+									data-i18n="set_pinned_tab_org_hover_background_active_label"
+								>
+									Insert the hover background color for your
+									active org Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-hover-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_hover_background"
+										type="color"
+										placeholder="aqua"
+										data-style-key="hover"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div name="input">
+					<div
+						class="slds-form-element slds-form-element_stacked"
+						variant="label-stacked"
+					>
+						<div
+							exportparts="input-text, input-container, input, required"
+							variant="label-stacked"
+						>
+							<div
+								class="slds-form-element__label flex-row"
+								part="input-text"
+							>
+								<label
+									class="slds-form-element__label slds-no-flex"
+									for="pinned_tab_org_style-top-active"
+									data-i18n="set_pinned_tab_org_top_active_label"
+								>
+									Insert the color for the bar at the top of
+									your active org Pinned Tabs.
+								</label>
+								<div
+									class="slds-form-element__control slds-grow"
+									part="input-container"
+								>
+									<input
+										id="pinned_tab_org_style-top-active"
+										class="slds-input"
+										part="input"
+										maxlength="255"
+										name="set_tab_top_active"
+										type="color"
+										placeholder="aqua"
+										data-style-key="top"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="save-container" class="slds-dueling-list">
 			<button class="highlight" data-i18n="save">Save</button>
 		</div>
 	</body>

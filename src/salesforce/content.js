@@ -1,6 +1,7 @@
 "use strict";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
 	CMD_OPEN_OTHER_ORG,
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
@@ -9,6 +10,8 @@ import {
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
+	CXM_EXPORT_TABS,
+	CXM_MANAGE_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
@@ -16,37 +19,46 @@ import {
 	CXM_OPEN_OTHER_ORG,
 	CXM_PAGE_REMOVE_TAB,
 	CXM_PAGE_SAVE_TAB,
+	CXM_PIN_TAB,
 	CXM_REMOVE_LEFT_TABS,
 	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_PIN_TABS,
 	CXM_REMOVE_RIGHT_TABS,
 	CXM_REMOVE_TAB,
+	CXM_REMOVE_UNPIN_TABS,
 	CXM_RESET_DEFAULT_TABS,
+	CXM_SORT_CLICK_COUNT,
+	CXM_SORT_CLICK_DATE,
 	CXM_SORT_LABEL,
 	CXM_SORT_ORG,
 	CXM_SORT_URL,
+	CXM_TMP_HIDE_NON_ORG,
+	CXM_TMP_HIDE_ORG,
+	CXM_UNPIN_TAB,
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
 	EXTENSION_VERSION,
-	getSettings,
+	HAS_ORG_TAB,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
 	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
-	sendExtensionMessage,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
-	WHAT_EXPORT,
+	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
+import { getSettings, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
-import { setupDrag } from "/dragHandler.js";
+import { setupDragForUl } from "./dragHandler.js";
 
 import { pageActionTab, showFavouriteButton } from "./favourite-manager.js";
 import {
@@ -58,6 +70,8 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { createImportModal } from "./import.js";
+import { createExportModal } from "./export.js";
+import { createManageTabsModal } from "./manageTabs.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -66,7 +80,7 @@ let setupTabUl;
 /**
  * Returns the main UL element in Salesforce Setup.
  *
- * @returns {HTMLElement} The main UL element in Salesforce Setup.
+ * @return {HTMLElement} The main UL element in Salesforce Setup.
  */
 export function getSetupTabUl() {
 	return setupTabUl;
@@ -80,11 +94,11 @@ let modalHanger;
 /**
  * Contains the current href, always up-to-date
  */
-let href = globalThis.location.href;
+let href = globalThis.location?.href;
 /**
  * Returns the current href string, always up-to-date.
  *
- * @returns {string} The current page href.
+ * @return {string} The current page href.
  */
 export function getCurrentHref() {
 	return href;
@@ -97,7 +111,7 @@ let wasOnSavedTab;
 /**
  * Returns whether the user was previously on a saved tab.
  *
- * @returns {boolean} True if was on a saved tab, false otherwise.
+ * @return {boolean} True if was on a saved tab, false otherwise.
  */
 export function getWasOnSavedTab() {
 	return wasOnSavedTab;
@@ -110,7 +124,7 @@ let isCurrentlyOnSavedTab;
 /**
  * Returns whether the user is currently on a saved tab.
  *
- * @returns {boolean} True if currently on a saved tab, false otherwise.
+ * @return {boolean} True if currently on a saved tab, false otherwise.
  */
 export function getIsCurrentlyOnSavedTab() {
 	return isCurrentlyOnSavedTab;
@@ -125,7 +139,7 @@ let fromHrefUpdate = false;
  * Dynamically injects the Salesforce Lightning Navigation script into the page
  * if relevant settings allow it.
  *
- * @returns {Promise<void>} Resolves when the script is added or skipped.
+ * @return {Promise<void>} Resolves when the script is added or skipped.
  */
 async function checkAddLightningNavigation() {
 	const settings = await getSettings([
@@ -147,14 +161,20 @@ async function checkAddLightningNavigation() {
  * - Displays a toast message indicating that the Salesforce tabs have been saved.
  * - Reloads the tabs by calling `reloadTabs` with the provided tabs.
  *
- * @param {string|null} [what=null] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
- * @param {Array<Tab>|null} [tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
+ * @param {Object} [param0] an object containing the following keys
+ * @param {string} [param0.what="saved"] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
+ * @param {Array<Tab>|null} [param0.tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
+ * @param {boolean} [param0.shouldReload=true] - If the Tabs should be reloaded from scratch
  */
-function sf_afterSet(what = null, tabs = null, shouldReload = true) {
+export function sf_afterSet({
+	what = "saved",
+	tabs = null,
+	shouldReload = true,
+} = {}) {
 	if (setupTabUl == null) {
 		return;
 	}
-	if (what == null || what === "saved") {
+	if (what === "saved") {
 		showToast(["extension_label", "tabs_saved"]);
 	}
 	if (shouldReload === true) {
@@ -166,7 +186,7 @@ function sf_afterSet(what = null, tabs = null, shouldReload = true) {
  * Calculates the estimated time (in milliseconds) it takes to read a given message.
  *
  * @param {string} message - The message to calculate the reading time for.
- * @returns {number} - The estimated reading time in milliseconds.
+ * @return {number} - The estimated reading time in milliseconds.
  */
 function _calculateReadingTime(message) {
 	const words = message.split(/\s+/).filter((word) => word.length > 0);
@@ -221,7 +241,7 @@ export async function showToast(message, isSuccess = true, isWarning = false) {
  * - It also ensures the presence of a "favourite" button and checks if the current view is for saved tabs.
  *
  * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the saved tabs will be fetched.
- * @returns {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
+ * @return {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
  */
 async function init(tabs = null) {
 	const orgName = Tab.extractOrgName(href);
@@ -234,17 +254,23 @@ async function init(tabs = null) {
 			removeOrgTabs: true,
 			sync: false,
 			keepTabsNotThisOrg: orgName,
+			updatePinnedTabs: false,
 		});
 	}
 	if (allTabs.length > 0) {
 		const frag = document.createDocumentFragment();
-		for (const row of allTabs) {
-			// TODO add option to hide or show not-this-org tabs
+		const pinnedItems = allTabs.pinned;
+		for (const i in allTabs) {
+			const row = allTabs[i];
 			// hide not-this-org tabs
 			frag.appendChild(
 				generateRowTemplate(
 					row,
-					!(row.org == null || row.org === orgName),
+					{
+						hide: !(row.org == null || row.org === orgName),
+						isPinned: i < pinnedItems,
+						index: i,
+					},
 				),
 			);
 		}
@@ -263,7 +289,7 @@ async function init(tabs = null) {
  *
  * @param {boolean} [isFromHrefUpdate=false] - A flag indicating if the check is triggered by a URL update.
  * @param {Function} [callback] - A callback function to be invoked with the result of the saved tab check.
- * @returns {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
+ * @return {Promise<void>} A promise that resolves after checking if the current tab is saved and executing the callback if provided.
  */
 export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 	if (fromHrefUpdate && !isFromHrefUpdate) {
@@ -283,6 +309,8 @@ export async function isOnSavedTab(isFromHrefUpdate = false, callback = null) {
 /**
  * If the user has moved to or from a saved tab, they'll be reloaded to update the highlighted one.
  * otherwise, the favourite button is shown
+ *
+ * @param {boolean} isCurrentlyOnSavedTab - Whether the currently displayed page is a saved Tab
  */
 async function _afterHrefUpdate(isCurrentlyOnSavedTab) {
 	if (isCurrentlyOnSavedTab || wasOnSavedTab) reloadTabs();
@@ -305,7 +333,7 @@ function onHrefUpdate() {
  * If the setting is disabled or not found, moves setupTabUl after the ObjectManager element.
  * Otherwise, moves setupTabUl before the Home element.
  *
- * @returns {Promise<void>} Resolves after repositioning the setupTabUl element based on user preference.
+ * @return {Promise<void>} Resolves after repositioning the setupTabUl element based on user preference.
  */
 async function checkKeepTabsOnLeft() {
 	const keep_tabs_on_left = await getSettings(TAB_ON_LEFT);
@@ -325,6 +353,7 @@ async function checkKeepTabsOnLeft() {
  * - It also sets up event listeners for drag behavior and reloads the tabs.
  *
  * @param {number} [count=0] - The number of retry attempts made so far. Defaults to 0.
+ * @return undefined
  */
 function delayLoadSetupTabs(count = 0) {
 	if (count > 5) {
@@ -378,7 +407,7 @@ function delayLoadSetupTabs(count = 0) {
 		setupTabUl.dataset.wheelListenerApplied = true;
 	}
 	// initialize
-	setupDrag();
+	setupDragForUl(reorderTabsUl);
 	reloadTabs();
 }
 
@@ -389,7 +418,7 @@ function delayLoadSetupTabs(count = 0) {
  * - Removes all tabs in the setup tab list (except for hidden ones, "Home", and "Object Manager") and then calls the `init` function to load the new tabs.
  *
  * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the tabs will be fetched again.
- * @returns {void} This function does not return anything, but it reinitializes the tab list as needed.
+ * @return {void} This function does not return anything, but it reinitializes the tab list as needed.
  */
 function reloadTabs(tabs = null) {
 	// remove the tabs that are already in the page
@@ -406,9 +435,9 @@ function reloadTabs(tabs = null) {
  * - Creates `Tab` objects for valid tabs and attempts to store them using `allTabs.replaceTabs`.
  * - If any errors occur during the process, they are caught and displayed using `showToast`.
  *
- * @returns {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
+ * @return {Promise<void>} A promise that resolves once the tabs have been reordered and updated in `allTabs`.
  */
-async function reorderTabs() {
+export async function reorderTabsUl() {
 	try {
 		// Get the list of tabs
 		const tabs = Array.from(setupTabUl.children)
@@ -447,17 +476,22 @@ async function reorderTabs() {
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
 			removeOrgTabs: true,
-			//keepTabsNotThisOrg: Tab.extractOrgName(href),
+			updatePinnedTabs: false,
+			invalidateSort: true,
 		});
-		sf_afterSet(undefined, tabs, false);
+		sf_afterSet({
+			tabs,
+			shouldReload: false,
+		});
 	} catch (error) {
 		showToast(error.message, false);
 	}
 }
 
 /**
- * @param {Array[HTMLElement] duplicatetabs - the tabs which are duplicated and need to be highlighted
  * For each duplicatetabs, toggles the slds-theme--warning class
+ *
+ * @param {Array[HTMLElement]} [duplicatetabs=[]] - the tabs which are duplicated and need to be highlighted
  */
 function _toggleWarning(duplicatetabs = []) {
 	for (const tab of duplicatetabs) {
@@ -472,7 +506,7 @@ function _toggleWarning(duplicatetabs = []) {
  *
  * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
-function makeDuplicatesBold(miniURL) {
+export function makeDuplicatesBold(miniURL) {
 	const duplicatetabs = setupTabUl.querySelectorAll(`a[title="${miniURL}"]`);
 	if (duplicatetabs == null) {
 		return;
@@ -489,7 +523,7 @@ function makeDuplicatesBold(miniURL) {
  * - If the `modalHanger` is already set, it returns the cached value.
  * - Otherwise, it finds it in the page.
  *
- * @returns {HTMLElement|null} The modal hanger element if found, otherwise null.
+ * @return {HTMLElement|null} The modal hanger element if found, otherwise null.
  */
 export function getModalHanger() {
 	if (modalHanger != null) {
@@ -511,7 +545,7 @@ export function getModalHanger() {
  * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
  * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
  * @param {string|null} [options.org=null] - The org of the current page.
- * @returns {Promise<void>} A promise that resolves once the modal has been displayed and the user interacts with it.
+ * @return {Promise<void>} A promise that resolves once the modal has been displayed and the user interacts with it.
  */
 async function showModalOpenOtherOrg(
 	{ label = null, url = null, org = null } = {},
@@ -619,12 +653,9 @@ const ACTION_MOVE = "move";
 export const ACTION_REMOVE_THIS = "remove-this";
 const ACTION_REMOVE_OTHER = "remove-other";
 export const ACTION_ADD = "add";
-const ACTION_REMOVE_VISIBLE_TABS = "remove-shown-tabs";
-const ACTION_REMOVE_GENERIC_TABS = "remove-generic-tabs";
-const ACTION_RESET_DEFAULT = "reset-default";
-const ACTION_REMOVE_ALL = "remove-all";
 const ACTION_TOGGLE_ORG = "toggle-org";
 const ACTION_SORT = "sort";
+const ACTION_TMP_HIDE = "tmp-hide";
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -636,6 +667,7 @@ const ACTION_SORT = "sort";
  * @param {string} action - The action to perform on the tab.
  * @param {Tab} tab - The tab on which the action should be performed.
  * @param {Object} options - Options that influence the behavior of the action (e.g., filters or specific conditions).
+ * @return undefined
  */
 export async function performActionOnTabs(
 	action,
@@ -662,20 +694,20 @@ export async function performActionOnTabs(
 				if (
 					!await allTabs.addTab(
 						tab,
-						undefined,
-						undefined,
-						options?.addInFront,
+						{
+							addInFront: options?.addInFront,
+						},
 					)
 				) {
 					throw new Error("error_adding_tab");
 				}
 				break;
-			case ACTION_REMOVE_GENERIC_TABS:
+			case CXM_EMPTY_GENERIC_TABS:
 				if (!await allTabs.replaceTabs()) {
 					throw new Error("error_removing_generic_tabs");
 				}
 				break;
-			case ACTION_REMOVE_ALL:
+			case CXM_EMPTY_TABS:
 				if (!await allTabs.replaceTabs([], { removeOrgTabs: true })) {
 					throw new Error("error_removing_all_tabs");
 				}
@@ -683,7 +715,7 @@ export async function performActionOnTabs(
 			case ACTION_TOGGLE_ORG:
 				await toggleOrg(tab);
 				break;
-			case ACTION_REMOVE_VISIBLE_TABS: {
+			case CXM_EMPTY_VISIBLE_TABS: {
 				// The visible Tabs are all the generic ones + the org-specific Tabs for the current Org
 				const thisOrg = Tab.extractOrgName(href);
 				if (
@@ -696,7 +728,7 @@ export async function performActionOnTabs(
 				}
 				break;
 			}
-			case ACTION_RESET_DEFAULT:
+			case CXM_RESET_DEFAULT_TABS:
 				if (!await allTabs.setDefaultTabs()) {
 					throw new Error("error_resetting_default_tabs");
 				}
@@ -706,16 +738,58 @@ export async function performActionOnTabs(
 					throw new Error("error_sorting_tabs", options);
 				}
 				break;
+			case ACTION_TMP_HIDE: {
+				const allowedActions = [CXM_TMP_HIDE_ORG, CXM_TMP_HIDE_NON_ORG];
+				if (!allowedActions.includes(options)) {
+					throw new Error("error_internal", options);
+				}
+				hideTabs(options === CXM_TMP_HIDE_ORG);
+				return;
+			}
+			case CXM_PIN_TAB:
+				if (!await allTabs.pinOrUnpin(tab, true)) {
+					throw new Error("error_pin_tab", tab);
+				}
+				break;
+			case CXM_UNPIN_TAB:
+				if (!await allTabs.pinOrUnpin(tab, false)) {
+					throw new Error("error_unpin_tab", tab);
+				}
+				break;
+			case CXM_REMOVE_PIN_TABS:
+				if (!await allTabs.removePinned(true)) {
+					throw new Error("error_removing_pin_tabs");
+				}
+				break;
+			case CXM_REMOVE_UNPIN_TABS:
+				if (!await allTabs.removePinned(false)) {
+					throw new Error("error_removing_unpin_tabs");
+				}
+				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
 				return console.error(noMatch, action);
 			}
 		}
-		sf_afterSet(undefined, allTabs);
+		sf_afterSet({ tabs: allTabs });
 	} catch (error) {
 		console.warn({ action, tab, options });
 		showToast(error.message, false);
+	}
+}
+
+/**
+ * From setupTabUl hides all the specified Tabs (Org Tabs by default)
+ * @param {boolean} [hideOrgTabs=true] - If the Tabs to be hidden are the Org Tabs (default) or the generic ones
+ */
+function hideTabs(hideOrgTabs = true) {
+	const selector = hideOrgTabs
+		? `li${HAS_ORG_TAB}`
+		: `li:not(${HAS_ORG_TAB})`;
+	const tabsToHide = setupTabUl.querySelectorAll(selector);
+	for (const tth of tabsToHide) {
+		tth.style.display = "none";
 	}
 }
 
@@ -751,6 +825,7 @@ async function toggleOrg({ label = null, url = null, org = null } = {}) {
  * @param {string} tab.label - The label of the Tab to update
  * @param {string} tab.url - The Url of the Tab to update
  * @param {string} tab.org - The Org of the Tab to update
+ * @return undefined
  */
 async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
@@ -822,7 +897,7 @@ async function showModalUpdateTab(
  * @param {string} options.version - The new version of the extension.
  * @param {string} options.link - The URL to the update or release notes.
  * @param {string} options.oldversion - The current installed version before update.
- * @returns {Promise<void>} Resolves after the prompt and possible navigation.
+ * @return {Promise<void>} Resolves after the prompt and possible navigation.
  */
 async function promptUpdateExtension({ version, link, oldversion } = {}) {
 	const translator = await ensureTranslatorAvailability();
@@ -882,19 +957,24 @@ function listenToBackgroundPage() {
 				case "activate":
 				case "highlighted":
 				case "focuschanged":
-					sf_afterSet(message.what, message.tabs);
+					sf_afterSet(message);
 					break;
 				case "warning":
 					showToast(message.message, false, true);
-					if (message.action === "make-bold") {
-						makeDuplicatesBold(message.url);
-					}
 					break;
 				case "error":
 					showToast(message.message, false);
 					break;
-				case "add":
+				case ACTION_ADD:
 					createImportModal();
+					break;
+				case CXM_MANAGE_TABS:
+					createManageTabsModal();
+					break;
+				case WHAT_SHOW_EXPORT_MODAL:
+				case CXM_EXPORT_TABS:
+				case CMD_EXPORT_ALL:
+					createExportModal();
 					break;
 				case CXM_OPEN_OTHER_ORG:
 				case CMD_OPEN_OTHER_ORG:
@@ -961,11 +1041,13 @@ function listenToBackgroundPage() {
 						org: message.org,
 					}, { removeBefore: false });
 					break;
+				case CXM_REMOVE_PIN_TABS:
+				case CXM_REMOVE_UNPIN_TABS:
 				case CXM_EMPTY_GENERIC_TABS:
-					await performActionOnTabs(ACTION_REMOVE_GENERIC_TABS);
-					break;
 				case CXM_EMPTY_TABS:
-					await performActionOnTabs(ACTION_REMOVE_ALL);
+				case CXM_EMPTY_VISIBLE_TABS:
+				case CXM_RESET_DEFAULT_TABS:
+					await performActionOnTabs(message.what);
 					break;
 				case CXM_PAGE_SAVE_TAB:
 				case CMD_SAVE_AS_TAB:
@@ -991,12 +1073,6 @@ function listenToBackgroundPage() {
 						org: message.org,
 					});
 					break;
-				case CXM_EMPTY_VISIBLE_TABS:
-					await performActionOnTabs(ACTION_REMOVE_VISIBLE_TABS);
-					break;
-				case CXM_RESET_DEFAULT_TABS:
-					await performActionOnTabs(ACTION_RESET_DEFAULT);
-					break;
 				case CXM_SORT_LABEL:
 					await performActionOnTabs(ACTION_SORT, undefined, {
 						sortBy: "label",
@@ -1018,6 +1094,39 @@ function listenToBackgroundPage() {
 							!allTabs.isSortedAsc,
 					});
 					break;
+				case CXM_SORT_CLICK_COUNT:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "click-count",
+						sortAsc: allTabs.isSortedBy === "click-count" &&
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_SORT_CLICK_DATE:
+					await performActionOnTabs(ACTION_SORT, undefined, {
+						sortBy: "click-date",
+						sortAsc: allTabs.isSortedBy === "click-date" &&
+							!allTabs.isSortedAsc,
+					});
+					break;
+				case CXM_TMP_HIDE_ORG:
+				case CXM_TMP_HIDE_NON_ORG:
+					await performActionOnTabs(
+						ACTION_TMP_HIDE,
+						undefined,
+						message.what,
+					);
+					break;
+				case CXM_PIN_TAB:
+				case CXM_UNPIN_TAB:
+					await performActionOnTabs(
+						message.what,
+						{
+							label: message.label,
+							url: message.tabUrl ?? message.url,
+							org: message.org,
+						},
+					);
+					break;
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);
 					break;
@@ -1036,7 +1145,7 @@ function listenToBackgroundPage() {
 						);
 					}
 					break;
-				case WHAT_EXPORT:
+				case WHAT_EXPORT_FROM_BG:
 					launchDownload(message);
 					break;
 				default:
@@ -1059,28 +1168,12 @@ function listenToBackgroundPage() {
 }
 
 /**
- * Listens for "order" messages posted from the window to reorder tabs accordingly.
- * Ignores messages not originating from the current window context.
- */
-function listenToReorderedTabs() {
-	addEventListener("message", (e) => {
-		if (e.source.location != globalThis.location) {
-			return;
-		}
-		const what = e.data.what;
-		if (what === "order") {
-			reorderTabs();
-		}
-	});
-}
-
-/**
  * Checks user settings and inserts Simple Analytics script into the document
  * unless analytics collection is explicitly disabled.
  * Modifies Content-Security-Policy meta tag to allow the analytics domains.
  * https://github.com/simpleanalytics
  *
- * @returns {Promise<void>} Resolves once analytics script is injected or skipped.
+ * @return {Promise<void>} Resolves once analytics script is injected or skipped.
  */
 async function checkInsertAnalytics() {
 	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
@@ -1134,10 +1227,11 @@ async function checkInsertAnalytics() {
 		whereToAppend.appendChild(meta);
 	}
 	const img = document.createElement("img");
-	img.src =
-		`https://queue.simpleanalyticscdn.com/noscript.gif?hostname=extension.again.whysalesforce&path=%2F${EXTENSION_VERSION}${
-			isNewUser ? "/new-user" : ""
-		}`;
+	const apiUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
+	apiUrl.searchParams.set("hostname", "extension.again.whysalesforce");
+	apiUrl.searchParams.set("path", isNewUser ? "/new-user" : "/");
+	apiUrl.searchParams.set("utm_source", EXTENSION_VERSION);
+	img.src = apiUrl;
 	img.alt = "";
 	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
 	whereToAppend.appendChild(img);
@@ -1148,7 +1242,6 @@ async function checkInsertAnalytics() {
  * - Loads all tabs asynchronously.
  * - Injects Lightning navigation script if needed.
  * - Sets up message listeners.
- * - Sets up reordered tab listener.
  * - Loads Salesforce setup tabs with delay.
  * - Inserts analytics script.
  */
@@ -1156,7 +1249,6 @@ function main() {
 	ensureAllTabsAvailability();
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
-	listenToReorderedTabs();
 	delayLoadSetupTabs();
 	checkInsertAnalytics();
 }
@@ -1164,7 +1256,7 @@ function main() {
 // queries the currently active tab of the current active window
 // this prevents showing the tabs when not in a setup page (like Sales or Service Console)
 if (
-	href.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
+	href?.includes(SETUP_LIGHTNING) && !globalThis[`hasLoaded${EXTENSION_NAME}`]
 ) {
 	globalThis[`hasLoaded${EXTENSION_NAME}`] = true;
 	main();

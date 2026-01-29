@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ 删除",
+		"description": "[管理-Tab] 删除一行"
+	},
+	"act_open": {
+		"message": "🪂 打开",
+		"description": "[管理-Tab] 打开所选 Tab"
+	},
+	"actions": {
+		"message": "操作",
+		"description": "Tab 操作的下拉菜单标签"
+	},
+	"active": {
+		"message": "活动的",
+		"description": "用于切换按钮以表示活动状态"
+	},
+	"active_generic_pin_tabs": {
+		"message": "活动的 $generic_pin_tabs",
+		"description": "用户当前活动的通用已固定 Tab"
+	},
+	"active_generic_tabs": {
+		"message": "活动的 $generic_tabs",
+		"description": "用户当前活动的通用 Tab"
+	},
+	"active_org_pin_tabs": {
+		"message": "活动的 $org_pin_tabs",
+		"description": "用户当前活动的组织已固定 Tab"
+	},
+	"active_org_tabs": {
+		"message": "活动的 $org_tabs",
+		"description": "用户当前活动的组织 Tab"
+	},
 	"allow": {
 		"message": "允许",
 		"description": "[请求权限] 允许权限的按钮"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[上下文菜单]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] 打开模态框，直接在 Salesforce 设置页面上管理保存的 $tabs"
+	},
 	"cxm_move": {
 		"message": "🧭 移动 Tab",
 		"description": "[上下文菜单]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[上下文菜单]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 固定",
+		"description": "[上下文菜单] 允许用户将此 Tab 保留在列表开头"
+	},
 	"cxm_remove": {
 		"message": "💥 移除 Tab(s)",
 		"description": "[上下文菜单]"
@@ -131,6 +171,10 @@
 		"message": "↔️ 其他 Tabs",
 		"description": "[上下文菜单]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 移除已固定 Tab",
+		"description": "[上下文菜单] 允许用户移除其已固定的 Tab"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 右侧的 Tabs",
 		"description": "[上下文菜单]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ 这个 Tab",
 		"description": "[上下文菜单]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 移除未固定 Tab",
+		"description": "[上下文菜单] 允许用户移除其未固定的 Tab"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 重置默认Tab",
@@ -151,6 +199,14 @@
 		"message": "🎯 排序 Tab",
 		"description": "上下文菜单，让用户自动排序他们的 Tab（父菜单）"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ 按使用次数",
+		"description": "上下文菜单，允许用户按点击 Tab 的次数排序"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ 按时间",
+		"description": "上下文菜单，允许用户按点击 Tab 的时间排序"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 按标签",
 		"description": "上下文菜单，让用户按标签排序他们的 Tab"
@@ -163,25 +219,33 @@
 		"message": "🤖 按 URL",
 		"description": "上下文菜单，让用户按 URL 排序他们的 Tab"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 隐藏非组织 Tab",
+		"description": "[上下文菜单] 暂时隐藏通用 Tab"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 隐藏组织 Tab",
+		"description": "[上下文菜单] 暂时隐藏组织 Tab"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 取消固定",
+		"description": "[上下文菜单] 允许用户从其固定列表中移除此 Tab"
+	},
 	"cxm_update": {
 		"message": "✏️ 更新 Tab",
 		"description": "[上下文菜单]"
 	},
 	"cxm_update_org": {
-		"message": "📌 切换组织",
+		"message": "👜 切换组织",
 		"description": "[上下文菜单]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 其他更新",
 		"description": "[上下文菜单]"
 	},
-	"delete": {
-		"message": "删除",
-		"description": "[弹出窗口] 删除一行"
-	},
 	"delete_all": {
-		"message": "$delete 所有 Tab",
-		"description": "[弹出窗口] 回收站上用于清空所有 Tab 的标题"
+		"message": "删除所有 $tabs",
+		"description": "[弹出窗口] 垃圾桶上的标题，用于清空所有 $tabs"
 	},
 	"descending": {
 		"message": "降序 (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "添加 Tab 时出错。",
 		"description": "[错误] 添加 Tab 时使用的一般错误"
+	},
+	"error_already_pinned": {
+		"message": "此 Tab 已被固定。",
+		"description": "[错误] 用户试图固定一个已被固定的 Tab"
+	},
+	"error_already_unpinned": {
+		"message": "此 Tab 已被取消固定。",
+		"description": "[错误] 用户试图取消固定一个已被取消固定的 Tab"
+	},
+	"error_cannot_move": {
+		"message": "此 Tab 无法移动！",
+		"description": "[错误] 所请求的 Tab 目前无法移动。"
+	},
+	"error_cannot_move_dir": {
+		"message": "此 Tab 无法朝此方向移动！",
+		"description": "[错误] 所请求的 Tab 目前无法移动。"
 	},
 	"error_check_update": {
 		"message": "检查更新时出错",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "导入过程中出错：\n",
 		"description": "[错误] 导入过程中发生错误"
+	},
+	"error_internal": {
+		"message": "内部错误",
+		"description": "[错误] 一般错误"
 	},
 	"error_invalid_key": {
 		"message": "传递给函数的键参数无效",
@@ -323,9 +407,21 @@
 		"message": "没有要检查的对象！",
 		"description": "[错误] 未传递对象"
 	},
+	"error_no_pinned": {
+		"message": "您还没有任何已固定的 Tab！",
+		"description": "[错误] 用户试图移除已固定的 Tab，但他们没有任何已固定的 Tab"
+	},
 	"error_no_setup_tab": {
 		"message": "未能找到设置标签页。",
 		"description": "[错误] 扩展程序无法找到放置收藏 Tabs 的位置。"
+	},
+	"error_no_tabs_selected": {
+		"message": "未选择任何 Tab 进行导出",
+		"description": "[toast] 用户尝试在未选择任何 Tab 的情况下导出时出错"
+	},
+	"error_no_unpinned": {
+		"message": "您没有任何未固定的 Tab！",
+		"description": "[错误] 用户试图移除未固定的 Tab，但他们没有任何未固定的 Tab"
 	},
 	"error_no_url": {
 		"message": "没有要检查的 URL！",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "尚未初始化。",
 		"description": "[错误] 变量未准备就绪时出现的一般错误"
+	},
+	"error_pin_tab": {
+		"message": "固定 Tab 时出错",
+		"description": "[错误]"
 	},
 	"error_processing_tabs": {
 		"message": "处理 Tabs 时出错。",
@@ -359,9 +459,17 @@
 		"message": "移除其他 Tabs 时出错。",
 		"description": "[错误] 移除其他 Tabs 时使用的一般错误"
 	},
+	"error_removing_pin_tabs": {
+		"message": "移除已固定 Tab 时出错。",
+		"description": "[错误] 移除非固定 Tab 时使用的通用错误"
+	},
 	"error_removing_tab": {
 		"message": "移除 Tab 时出错。",
 		"description": "[错误] 移除 Tab 时使用的一般错误"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "移除未固定 Tab 时出错。",
+		"description": "[错误] 移除未固定 Tab 时使用的通用错误"
 	},
 	"error_removing_visible_tabs": {
 		"message": "删除所有可见Tab时出错。",
@@ -383,6 +491,14 @@
 		"message": "无法同步空的 Tabs！",
 		"description": "[错误] 尝试同步无内容"
 	},
+	"error_tab_click_count": {
+		"message": "点击次数必须是非负数",
+		"description": "[错误] 用户试图创建一个点击次数错误的 Tab"
+	},
+	"error_tab_click_date": {
+		"message": "点击日期必须是一个不会导致未来日期的数字",
+		"description": "[错误] 用户试图创建一个点击日期错误的 Tab"
+	},
 	"error_tab_constructor": {
 		"message": "请使用 Tab.create() 而不是 new Tab() 来使用 Tab 类",
 		"description": "[错误] 告诉开发者如何使用 Tab 类"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "未找到 Tab。",
 		"description": "[错误] Tab 未包含在数组中"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab 尚未固定！",
+		"description": "[错误] 用户试图取消固定一个未固定的 Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "使用对象调用时，请勿传递任何其他内容。",
@@ -435,6 +555,10 @@
 		"message": "翻译器尚未初始化。",
 		"description": "[错误] TranslationService 尚未准备好"
 	},
+	"error_unknown_file_structure": {
+		"message": "我们无法理解您要导入的文件\n如果问题仍然存在，请通过在 GitHub 上提交 Issue 来告诉我们",
+		"description": "[导入] 无法识别用户的文件"
+	},
 	"error_unknown_message": {
 		"message": "收到未知消息",
 		"description": "从侦听器收到一个未知消息"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "未知请求。",
 		"description": "[错误] 收到无法识别的消息后出现的一般错误"
+	},
+	"error_unpin_tab": {
+		"message": "取消固定 Tab 时出错",
+		"description": "[错误]"
 	},
 	"error_useless_remove": {
 		"message": "无法移除：\n无法移除之前未保存的页面",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "导出",
 		"description": "[弹出窗口] 导出按钮"
+	},
+	"export_tabs": {
+		"message": "导出 Tabs",
+		"description": "[modal] 导出 Tabs 模态框的标题"
 	},
 	"export_title": {
 		"message": "导出所有 Tabs",
@@ -483,6 +615,14 @@
 		"message": "常规",
 		"description": "常规设置类别的标签"
 	},
+	"generic_pin_tabs": {
+		"message": "通用 $pinned Tab",
+		"description": "用户收藏的非组织特定的 Tab"
+	},
+	"generic_tabs": {
+		"message": "通用 Tab",
+		"description": "用户收藏的非组织特定的 Tab"
+	},
 	"help": {
 		"message": "帮助",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "新收藏的 Tab 会插入到设置栏中你的 Tab 列表前面，而不是追加到末尾。",
 		"description": "[$opt_add_tabs_front] 的 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "启用后，您一启动 $salesforce_setup 就能看到您的 $tabs",
+		"description": "[设置帮助] 用于启用我们在 $salesforce_setup 打开时立即准备就绪的可选权限"
+	},
+	"help_allow_export": {
+		"message": "启用后，您将能够 $export 您的 $tabs 并将其保存在电脑上。",
+		"description": "[设置帮助] 用于启用我们将 Tab 下载到用户机器上的可选权限"
+	},
 	"help_automatic_open_login": {
 		"message": "如果你在 Salesforce 域外点击扩展程序弹窗，将自动把你带到 Salesforce 登录页面。",
 		"description": "[$opt_automatic_open_login] 的 [settings-help]"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "如果你在 Salesforce 域内点击扩展程序弹窗，但不在设置页面上，将自动把你带到 Salesforce 设置页面。",
 		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
+	},
+	"help_drag_tabs": {
+		"message": "您可以使用点并拖动来重新排序您的 $tabs",
+		"description": "[manage-tabs] 说明如何拖动 Tab"
 	},
 	"help_keep_sort": {
 		"message": "启用后，你的 Tab 将保持排序状态 — 无论是按标签、URL 还是组织；具体取决于你的选择。",
@@ -547,9 +699,33 @@
 		"message": "禁用扩展程序检查，该检查验证 URL 片段是否与 Salesforce 记录/对象 ID 的格式匹配（用于自动将保存的 Tab 设置为 Org Tab）。",
 		"description": "[$opt_skip_link_detection] 的 [settings-help]"
 	},
+	"help_tab_actions": {
+		"message": "在这里，您将找到一个子菜单，用于对同一行中的 $tab 执行不同的操作。",
+		"description": "[manage-tabs] 说明右侧箭头包含的内容"
+	},
+	"help_tab_label": {
+		"message": "这是您用来记住此 $tab 将带您去哪里的常用名称。",
+		"description": "[manage-tabs] 说明什么是 Tab 标签"
+	},
+	"help_tab_org": {
+		"message": "这是显示此 $tab 的 Salesforce $org 名称。如果留空，此 $tab 将在您访问的每个 Salesforce $org 中显示。",
+		"description": "[manage-tabs] 说明什么是 Tab Org"
+	},
+	"help_tab_url": {
+		"message": "这是点击此 $tab 时将被重定向到的（缩短的）链接",
+		"description": "[manage-tabs] 说明什么是 Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "单击以重定向到此设置的文档！",
 		"description": "[设置-帮助] 行动号召，让用户阅读更多关于特定设置的信息"
+	},
+	"hide_other_org_tabs": {
+		"message": "隐藏 $other_org_placeholder $tabs",
+		"description": "[manage-tabs] 隐藏其他 Org Tabs 的按钮标签"
+	},
+	"if_click_popup": {
+		"message": "如果您点击扩展程序弹出窗口",
+		"description": "[placeholder] 由其他文本使用"
 	},
 	"import": {
 		"message": "导入",
@@ -567,6 +743,10 @@
 		"message": "无效的文件类型。\n仅支持 JSON 文件。",
 		"description": "[错误] 用于导入的文件不是 JSON"
 	},
+	"import_metadata": {
+		"message": "导入 Tab 元数据（“点击次数”、“点击日期”等）。",
+		"description": "[标签] 在导入过程中导入文件中找到的所有内容"
+	},
 	"import_successful": {
 		"message": "成功导入",
 		"description": "[导入] 导入已完成。之后将显示导入了多少条记录"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "从 JSON 文件 $import_tabs",
 		"description": "[弹出窗口] 导入按钮上的标题"
+	},
+	"inactive": {
+		"message": "非活动的",
+		"description": "用于切换按钮以表示非活动状态"
 	},
 	"insert_another": {
 		"message": "插入另一个",
@@ -595,6 +779,10 @@
 		"message": "斜体",
 		"description": "斜体文本的字体样式选项"
 	},
+	"label": {
+		"message": "标签",
+		"description": "[key] Tab的名称"
+	},
 	"lightning_navigation": {
 		"message": "闪电导航",
 		"description": "Salesforce 的自定义导航技术"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "登录 Salesforce",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 登录页面"
+	},
+	"manage_tabs": {
+		"message": "管理 $tabs",
+		"description": "[modal-title] 用于管理保存的 $tabs 的模态框，具有可编辑字段和拖动重排序功能"
+	},
+	"manage_tabs_explainer": {
+		"message": "直接从此模态框编辑 重新排序和管理您保存的 $tabs 拖动行以重新排序 或使用下拉菜单执行更多操作",
+		"description": "[modal-explainer] 解释管理标签页模态框的功能"
+	},
+	"must_non_empty_str": {
+		"message": "必须是非空字符串",
+		"description": "[placeholder] 由其他文本使用"
 	},
 	"mycustomorg": {
 		"message": "我的自定义组织",
@@ -614,6 +814,10 @@
 	"no_match": {
 		"message": "未匹配任何操作",
 		"description": "[错误] 在 Salesforce 中，当切换无法匹配请求的操作时"
+	},
+	"no_tabs_to_export": {
+		"message": "没有 Tabs 可供导出",
+		"description": "[toast] 没有 Tabs 可供导出时出错"
 	},
 	"nss_invalid_url": {
 		"message": "检测到无效的URL。",
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "将新 Tab 添加到前面。",
 		"description": "[settings] 允许用户将所有新 Tab 添加到前面"
+	},
+	"opt_allow_domains": {
+		"message": "允许 $extension_label 在您访问 Salesforce 页面时访问它们。",
+		"description": "[设置] 当用户访问 $salesforce_setup 时运行扩展程序的可选权限"
+	},
+	"opt_allow_export": {
+		"message": "允许 $extension_label 在您请求时导出您的 $tabs",
+		"description": "[设置] 可选权限，允许我们导出用户的 Tab"
 	},
 	"opt_automatic_open_login": {
 		"message": "当不在 Salesforce 页面上时，点击弹出窗口时自动打开 $salesforce_login 页面。",
@@ -723,9 +935,21 @@
 		"message": "或 $drop",
 		"description": "[导入] 允许用户用鼠标移动文件并释放它们"
 	},
+	"org": {
+		"message": "组织 (Org)",
+		"description": "[key] Tab的Salesforce $org"
+	},
 	"org_link": {
 		"message": "组织链接",
 		"description": "[输入标签]"
+	},
+	"org_pin_tabs": {
+		"message": "组织 $pinned Tab",
+		"description": "组织特定的 Tab"
+	},
+	"org_tabs": {
+		"message": "组织 Tab",
+		"description": "组织特定的 Tab"
 	},
 	"other_org_info": {
 		"message": "其他组织信息",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "覆盖已保存的 Tabs。",
 		"description": "[标签] 在导入过程中删除所有已保存的 Tabs"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "页面将在当前浏览器 Tab 中打开",
+		"description": "[placeholder] 由其他文本使用"
+	},
+	"permission_request_failure": {
+		"message": "权限未被允许。",
+		"description": "[错误] 用户要求我们向其请求权限，但随后未接受"
+	},
+	"permission_request_success": {
+		"message": "权限已被允许！",
+		"description": "[成功] 用户要求我们向其请求权限，并且他们接受了"
+	},
+	"pinned": {
+		"message": "已固定",
+		"description": "用户的 Tab，始终位于列表的开头"
 	},
 	"preserve_org_tabs": {
 		"message": "保留其他组织的 Tabs。",
@@ -779,6 +1019,10 @@
 		"message": "= 必填信息",
 		"description": "[模态框] 告知用户某些信息是强制性的"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce 域名",
+		"description": "[placeholder] 由其他文本使用"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[非 Salesforce 设置页] Salesforce Lightning 平台"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce 登录",
 		"description": "Salesforce 登录页面 (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce 页面",
+		"description": "[placeholder] 在其他文本中使用"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce 设置",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "另存为 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"
+	},
+	"select_all": {
+		"message": "全选",
+		"description": "[modal] 导出模态框中选择所有 Tabs 的按钮"
+	},
+	"select_tabs": {
+		"message": "选择您希望的 $tabs",
+		"description": "[import] 允许用户在导入前选择要导入的 $tabs"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] 允许用户在导出前选择要导出的 $tabs"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] 允许用户在导入前选择要导入的 $tabs"
 	},
 	"send_tip": {
 		"message": "发送小费 ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "组织样式",
 		"description": "配置组织专用 Tabs 样式的标签"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "预览通用 Tab 固定时外观的标签"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "配置通用 Tab 固定时样式的标签"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "预览组织特定 Tab 固定时外观的标签"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "配置组织特定 Tab 固定时样式的标签"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "选择活动的通用 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "选择通用 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "为通用 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "为活动的通用 Tab 设置顶部栏颜色的标签"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "为活动的组织 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "为组织特定 Tab 设置背景颜色的标签"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "为活动的组织特定 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "为组织 Tab 设置边框颜色的标签"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "为活动的组织 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "为组织特定 Tab 设置文本颜色的标签"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "选择活动的组织特定 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "选择组织 Tab 装饰样式的提示"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "为活动的组织 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "为组织特定 Tab 设置悬停背景颜色的标签"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "为活动的组织特定 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "为组织 Tab 设置阴影颜色的标签"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "为活动的组织 Tab 设置顶部栏颜色的标签"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "插入您的活动通用 Tab 的背景颜色。",
@@ -947,13 +1331,57 @@
 		"message": "设置页面",
 		"description": "[非 Salesforce 设置页] 用于修改 Salesforce 设置的页面"
 	},
+	"show_all_tabs": {
+		"message": "显示所有 $tabs",
+		"description": "[manage-tabs] 显示所有 Tab 的按钮标签"
+	},
 	"skip": {
 		"message": "跳过",
 		"description": "[请求权限] 不允许权限的按钮"
 	},
+	"style_generic_pinned": {
+		"message": "样式设置已固定的 $generic_tabs",
+		"description": "[选项] 切换标签以设置已固定的通用 Tab 的样式"
+	},
+	"style_org_pinned": {
+		"message": "样式设置已固定的 $org_tabs",
+		"description": "[选项] 切换标签以设置已固定的组织 Tab 的样式"
+	},
+	"style_settings_background_label": {
+		"message": "插入您的背景颜色",
+		"description": "设置背景颜色的标签"
+	},
+	"style_settings_border_color_label": {
+		"message": "插入您的边框颜色",
+		"description": "设置边框颜色的标签"
+	},
+	"style_settings_color_label": {
+		"message": "插入您的文本颜色",
+		"description": "设置文本颜色的标签"
+	},
+	"style_settings_decoration_label": {
+		"message": "为您的 Tab 选择一个或多个装饰样式",
+		"description": "选择装饰样式的提示"
+	},
+	"style_settings_hover_background_label": {
+		"message": "插入您的悬停背景颜色",
+		"description": "设置悬停背景颜色的标签"
+	},
+	"style_settings_shadow_label": {
+		"message": "插入您的阴影颜色",
+		"description": "设置阴影颜色的标签"
+	},
+	"style_settings_top_active_label": {
+		"message": "插入您的活动 Tab 顶部的栏颜色",
+		"description": "设置顶部栏活动颜色的标签"
+	},
 	"successfully_imported": {
 		"message": "成功导入",
 		"description": "[提示信息] 用户从外部文件添加了 Tabs"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "用户的收藏链接之一"
 	},
 	"tab_explain": {
 		"message": "每个项目必须包含字符串类型的 'label' 和 'url'。此外，每个项目可以包含字符串类型的 'org'。",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "用户的收藏链接"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs 导出成功",
+		"description": "[toast] Tabs 导出成功时的提示信息"
+	},
 	"tabs_saved": {
 		"message": "Tabs 已保存。",
 		"description": "[提示信息] Tabs 已成功存储。"
@@ -1023,6 +1455,14 @@
 		"message": "波浪下划线",
 		"description": "为 Tab 文本应用波浪下划线的装饰样式选项"
 	},
+	"unsaved_changes_confirm": {
+		"message": "您有未保存的更改。确定要在不保存的情况下离开吗？",
+		"description": "[manage-tabs] 用户请求在未保存的情况下转到某个 Tab"
+	},
+	"unselect_all": {
+		"message": "取消全选",
+		"description": "[modal] 导出模态框中取消选择所有 Tabs 的按钮"
+	},
 	"update_available": {
 		"message": "有可用更新",
 		"description": "扩展程序有新的更新可用"
@@ -1031,9 +1471,21 @@
 		"message": "上传",
 		"description": "[导入] 让用户浏览他们的文件并选择正确的文件"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab的链接"
+	},
 	"users": {
 		"message": "用户",
 		"description": "与 ManageUsers/home 相关的页面名称"
+	},
+	"warn_upgrade_backup": {
+		"message": "请导出您的新 Tab，因为您使用的文件将不再受未来版本支持。",
+		"description": "[警告] 用户使用已弃用的 json 文件配置导入了他们的 Tab"
+	},
+	"when_click_popup_while": {
+		"message": "在点击弹出窗口时的页面",
+		"description": "[placeholder] 由其他文本使用"
 	},
 	"where_to": {
 		"message": "去哪里？",

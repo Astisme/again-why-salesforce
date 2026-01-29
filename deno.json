@@ -1,4 +1,5 @@
 {
+	"nodeModulesDir": "auto",
 	"fmt": {
 		"useTabs": true,
 		"indentWidth": 4,
@@ -16,19 +17,20 @@
 		]
 	},
 	"tasks": {
-		"test": "deno task test-gen && deno task test-bg",
+		"test": "deno task test-gen && deno task test-bg && deno task test-cmp",
 		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
 		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
+		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom.ts --allow-env ./tests/components/",
 		"test-sf": "deno task start-browser & BROWSER_PID=$! && sleep 10 && deno test --no-check --parallel  --import=tests/mocks.ts -A ./tests/salesforce/*.test.ts",
 		"start-browser": "deno task setup-chrome && deno run -A ./tests/salesforce/browser-setup.ts",
 		"setup-chrome": "bash ./tests/salesforce/setup-chrome.sh && deno task dev-chrome",
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",
-		"locale-check": "deno --allow-read --allow-write bin/missing-locales.ts",
+		"locale-check": "deno --allow-read --allow-write bin/missing-locales.ts && deno --allow-read --allow-write bin/find-invalid-variables.ts",
 		"locales": "deno task locale-check && deno task sort",
 		"bundle": "deno run -A bin/build.ts",
-		"checks": "deno task locales && deno task fmt && deno task lint && deno task test",
+		"checks": "deno task fmt && deno task lint && deno task test && deno task locales",
 
 		"dev-firefox": "deno --allow-write src/manifest/build-manifest.mjs firefox && deno task bundle",
 		"dev-chrome": "deno --allow-write src/manifest/build-manifest.mjs chrome && deno task bundle",
@@ -48,6 +50,8 @@
 		"@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.1",
 		"esbuild": "npm:esbuild@^0.25.0",
 		"puppeteer": "npm:puppeteer@^24.17.0",
-		"@std/testing/asserts": "https://deno.land/std/testing/asserts.ts"
+		"@std/testing/asserts": "https://deno.land/std/testing/asserts.ts",
+		"@std/testing/mock": "https://deno.land/std/testing/mock.ts",
+		"happydom": "npm:happy-dom"
 	}
 }

@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ I-delete",
+		"description": "[pamahalaan-ang-Tab] i-delete ang isang row"
+	},
+	"act_open": {
+		"message": "🪂 Buksan",
+		"description": "[pamahalaan-ang-Tab] Buksan ang piniling Tab"
+	},
+	"actions": {
+		"message": "Mga Aksyon",
+		"description": "Label ng dropdown menu para sa mga aksyon ng Tab"
+	},
+	"active": {
+		"message": "Aktibo",
+		"description": "Ginagamit sa mga toggle para sa aktibong estado"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktibong $generic_pin_tabs",
+		"description": "Mga generic na Pinned Tab ng user na kasalukuyang aktibo"
+	},
+	"active_generic_tabs": {
+		"message": "aktibong $generic_tabs",
+		"description": "Mga generic na Tab ng user na kasalukuyang aktibo"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktibong $org_pin_tabs",
+		"description": "Mga Pinned Tab ng org ng user na kasalukuyang aktibo"
+	},
+	"active_org_tabs": {
+		"message": "aktibong $org_tabs",
+		"description": "Mga Tab ng org ng user na kasalukuyang aktibo"
+	},
 	"allow": {
 		"message": "Pahintulutan",
 		"description": "[req_permission] button para pahintulutan ang mga pahintulot"
@@ -60,7 +92,7 @@
 		"description": "[open-other-org-modal] humiling ng kumpirmasyon sa user upang buksan ang binuong link."
 	},
 	"confirm_update_extension": {
-		"message": "Available na ngayon ang bagong bersyon ng $extension_label!",
+		"message": "Available na ngayon ang bagong bersyon ng $extension_label",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
 	},
 	"continue": {
@@ -86,6 +118,10 @@
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[context-menu]"
+	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] buksan ang modal para pamahalaan ang mga naka-save na $tabs nang direkta sa pahina ng Salesforce Setup"
 	},
 	"cxm_move": {
 		"message": "🧭 Ilipat ang Tab",
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[context-menu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 I-pin",
+		"description": "[context-menu] hayaan ang user na panatilihin ang Tab na ito sa simula ng kanilang listahan"
+	},
 	"cxm_remove": {
 		"message": "💥 Alisin ang Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Ibang Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Alisin ang Naka-pin",
+		"description": "[context-menu] hayaan ang user na alisin ang kanilang naka-pin na Tab"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Mga Tab sa kanan",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Itong Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Alisin ang Hindi Naka-pin",
+		"description": "[context-menu] hayaan ang user na alisin ang kanilang hindi naka-pin na Tab"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 I-reset ang Default na Tab",
@@ -151,6 +199,14 @@
 		"message": "🎯 I-sort ang mga Tabs",
 		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs nang awtomatiko (parent menu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ ayon sa Paggamit",
+		"description": "context menu para hayaan ang user na ayusin ang kanilang Tab ayon sa kung ilang beses nila kiniklik ang kanilang Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ ayon sa Oras",
+		"description": "context menu para hayaan ang user na ayusin ang kanilang Tab ayon sa kung kailan na-click ang Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 ayon sa Label",
 		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs ayon sa label"
@@ -163,25 +219,33 @@
 		"message": "🤖 ayon sa Url",
 		"description": "context menu para hayaan ang mga user na i-sort ang kanilang mga Tabs ayon sa url"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Itago ang Tab na hindi Org",
+		"description": "[context-menu] pansamantalang itago ang mga generic na Tab"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Itago ang Org Tab",
+		"description": "[context-menu] pansamantalang itago ang mga Org Tab"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 I-unpin",
+		"description": "[context-menu] hayaan ang user na alisin ang Tab na ito mula sa kanilang naka-pin na listahan"
+	},
 	"cxm_update": {
 		"message": "✏️ I-update ang Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 I-toggle ang Org",
+		"message": "👜 I-toggle ang Org",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Ibang mga Update",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Burahin",
-		"description": "[popup] burahin ang isang row"
-	},
 	"delete_all": {
-		"message": "$delete lahat ng Tabs",
-		"description": "[popup] pamagat sa basurahan para alisan ng laman ang lahat ng Tabs"
+		"message": "I-delete ang lahat ng $tabs",
+		"description": "[popup] pamagat sa bin para i-empty ang lahat ng $tabs"
 	},
 	"descending": {
 		"message": "Pababa (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Error sa pagdagdag ng Tab.",
 		"description": "[error] Pangkalahatang error sa pagdagdag ng Tab"
+	},
+	"error_already_pinned": {
+		"message": "Naka-pin na ang Tab na ito.",
+		"description": "[error] sinubukan ng user na i-pin ang isang naka-pin na Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Na-unpin na ang Tab na ito.",
+		"description": "[error] sinubukan ng user na i-unpin ang isang naka-unpin na Tab"
+	},
+	"error_cannot_move": {
+		"message": "Hindi mailipat ang Tab na ito!",
+		"description": "[error] ang hiniling na Tab ay hindi mailipat sa ngayon."
+	},
+	"error_cannot_move_dir": {
+		"message": "Hindi mailipat ang Tab na ito sa direksyong ito!",
+		"description": "[error] ang hiniling na Tab ay hindi mailipat sa ngayon."
 	},
 	"error_check_update": {
 		"message": "Error sa pagsusuri ng mga update",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Error sa pag-import:\n",
 		"description": "[error] nagkaroon ng error sa proseso ng pag-import"
+	},
+	"error_internal": {
+		"message": "Internal Error",
+		"description": "[error] generic na error"
 	},
 	"error_invalid_key": {
 		"message": "Hindi wasto ang key parameter na ipinasa sa function",
@@ -323,9 +407,21 @@
 		"message": "Walang object na susuriin!",
 		"description": "[error] hindi naipasa ang object"
 	},
+	"error_no_pinned": {
+		"message": "Wala ka pang naka-pin na Tab!",
+		"description": "[error] sinubukan ng user na alisin ang mga naka-pin na Tab ngunit wala silang naka-pin na Tab"
+	},
 	"error_no_setup_tab": {
 		"message": "Nabigong mahanap ang Setup tab.",
 		"description": "[error] Hindi mahanap ng extension kung saan ilalagay ang mga paboritong Tabs."
+	},
+	"error_no_tabs_selected": {
+		"message": "Walang Tab na Napili para sa pag-export",
+		"description": "[toast] error kapag sinubukan ng user na mag-export nang walang napiling Tabs"
+	},
+	"error_no_unpinned": {
+		"message": "Wala kang naka-unpin na Tab!",
+		"description": "[error] sinubukan ng user na alisin ang mga naka-unpin na Tab ngunit wala silang naka-unpin na Tab"
 	},
 	"error_no_url": {
 		"message": "Walang URL na susuriin!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Hindi pa na-initialize.",
 		"description": "[error] Pangkalahatang error kapag hindi pa handa ang variable"
+	},
+	"error_pin_tab": {
+		"message": "Error habang nagpi-pin ng Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Error sa pagproseso ng Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Error sa pagtanggal ng ibang Tabs.",
 		"description": "[error] Pangkalahatang error sa pagtanggal ng ibang Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Error habang inaalis ang mga naka-pin na Tab.",
+		"description": "[error] Generic na error na ginagamit habang inaalis ang mga hindi naka-pin na Tab"
+	},
 	"error_removing_tab": {
 		"message": "Error sa pagtanggal ng Tab.",
 		"description": "[error] Pangkalahatang error sa pagtanggal ng Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error habang inaalis ang mga hindi naka-pin na Tab.",
+		"description": "[error] Generic na error na ginagamit habang inaalis ang mga hindi naka-pin na Tab"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Error sa pagtanggal ng lahat ng nakikitang Tab.",
@@ -383,6 +491,14 @@
 		"message": "Hindi ma-sync ang mga null na Tab!",
 		"description": "[error] sinubukang i-synchronize ang wala"
 	},
+	"error_tab_click_count": {
+		"message": "Ang Click Count ay dapat na isang non-negative na numero",
+		"description": "[error] sinubukan ng user na gumawa ng Tab na may maling click count"
+	},
+	"error_tab_click_date": {
+		"message": "Ang Click Date ay dapat na isang numero na hindi magreresulta sa petsa sa hinaharap",
+		"description": "[error] sinubukan ng user na gumawa ng Tab na may maling click date"
+	},
 	"error_tab_constructor": {
 		"message": "Gamitin ang Tab.create() sa halip na new Tab()",
 		"description": "[error] Ipaalam sa developer kung paano gamitin ang klase na Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Hindi nahanap ang Tab.",
 		"description": "[error] hindi kasama ang Tab sa array"
+	},
+	"error_tab_not_pinned": {
+		"message": "Hindi pa naka-pin ang Tab!",
+		"description": "[error] sinubukan ng user na i-unpin ang isang hindi naka-pin na Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Kapag tumatawag gamit ang isang object, huwag magpasa ng anupaman.",
@@ -435,6 +555,10 @@
 		"message": "hindi pa na-initialize ang translator.",
 		"description": "[error] Hindi pa handa ang TranslationService"
 	},
+	"error_unknown_file_structure": {
+		"message": "Hindi namin maunawaan ang file na gusto mong i-import\nKung magpapatuloy ang isyu, pakibahagi ito sa amin sa pamamagitan ng pagbubukas ng GitHub issue",
+		"description": "[i-import] hindi kinilala ang file ng user"
+	},
 	"error_unknown_message": {
 		"message": "Nakakatanggap ng hindi kilalang mensahe",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Hindi kilalang kahilingan.",
 		"description": "[error] Pangkalahatang error pagkatapos makatanggap ng hindi kilalang mensahe"
+	},
+	"error_unpin_tab": {
+		"message": "Error habang nag-uunpin ng Tab",
+		"description": "[error]"
 	},
 	"error_useless_remove": {
 		"message": "Hindi maalis:\nHindi maalis ang isang page na hindi pa nai-save dati",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "I-export",
 		"description": "[popup] button ng pag-export"
+	},
+	"export_tabs": {
+		"message": "I-export ang Tabs",
+		"description": "[modal] pamagat para sa modal ng pag-export ng Tabs"
 	},
 	"export_title": {
 		"message": "I-export lahat ng Tabs",
@@ -483,6 +615,14 @@
 		"message": "Pangkalahatan",
 		"description": "Label para sa kategorya ng pangkalahatang mga setting"
 	},
+	"generic_pin_tabs": {
+		"message": "generic $pinned $tabs",
+		"description": "Mga paboritong Tab ng user na hindi org-specific"
+	},
+	"generic_tabs": {
+		"message": "generic $tabs",
+		"description": "Mga paboritong Tab ng user na hindi org-specific"
+	},
 	"help": {
 		"message": "Tulong",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Ang mga bagong paboritong Tabs ay ipinapasok sa harap ng iyong Tab list sa Setup bar sa halip na idinidagdag sa dulo.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kapag naka-enable, makikita mo ang iyong $tabs sa sandaling ilunsad mo ang $salesforce_setup",
+		"description": "[settings-help] para sa opsyonal na pahintulot upang paganahin kaming maging handa sa sandaling buksan ang $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kapag naka enable magagawa mong i export ang iyong $tabs at panatilihin ang mga ito sa iyong computer",
+		"description": "[settings-help] para sa opsyonal na pahintulot upang paganahin kaming i-download ang mga Tab sa machine ng gumagamit"
+	},
 	"help_automatic_open_login": {
 		"message": "Kung iki-click mo ang extension popup sa labas ng Salesforce domain, dadalhin ka nito sa Salesforce login page nang awtomatiko.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "Kung iki-click mo ang extension popup sa loob ng Salesforce domain pero hindi sa isang Setup page, dadalhin ka nito sa Salesforce Setup page nang awtomatiko.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Maaari mong i-reorder ang iyong mga $tabs sa pamamagitan ng paggamit ng mga tuldok at pag-drag nito.",
+		"description": "[manage-tabs] ipaliwanag kung paano i-drag ang Tab"
 	},
 	"help_keep_sort": {
 		"message": "Kapag naka-enable, pinapanatiling naka-sort order ang iyong mga Tabs—sa pamamagitan ng label, URL o Org; depende sa pipiliin mo.",
@@ -547,9 +699,33 @@
 		"message": "Dine-disable ang pag-check ng extension na nagbe-verify na tumutugma ang isang URL fragment sa format ng mga ID ng record/object ng Salesforce (ginagamit para awtomatikong itakda ang na-save na Tab bilang isang Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Dito mo makikita ang isang submenu para magsagawa ng iba't ibang aksyon sa $tab sa parehong hilera.",
+		"description": "[manage-tabs] ipaliwanag kung ano ang nilalaman ng arrow sa kanan"
+	},
+	"help_tab_label": {
+		"message": "Ito ang karaniwang pangalan na gagamitin mo para maalala kung saan ka dadalhin ng $tab na ito.",
+		"description": "[manage-tabs] ipaliwanag kung ano ang Tab label"
+	},
+	"help_tab_org": {
+		"message": "Ito ang pangalan ng Salesforce $org kung saan ipapakita ang $tab na ito. Kung iiwang walang laman, ang $tab na ito ay ipapakita sa bawat Salesforce $org na bibisitahin mo.",
+		"description": "[manage-tabs] ipaliwanag kung ano ang Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ito ang (pinaikling) link kung saan ka i-re-redirect kapag kinlik ang $tab na ito",
+		"description": "[manage-tabs] ipaliwanag kung ano ang Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "I-click para i-redirect sa dokumentasyon para sa setting na ito!",
 		"description": "[settings-help] tawag para sa aksyon upang hayaan ang user na magbasa pa tungkol sa isang partikular na setting"
+	},
+	"hide_other_org_tabs": {
+		"message": "Itago ang $other_org_placeholder $tabs",
+		"description": "[manage-tabs] label ng button para itago ang iba pang Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "kung i-click mo ang popup ng extension",
+		"description": "[placeholder] ginagamit ng iba pang mga teksto"
 	},
 	"import": {
 		"message": "I-import",
@@ -567,6 +743,10 @@
 		"message": "Hindi balidong uri ng file.\nTanging mga JSON file ang suportado.",
 		"description": "[error] ang file na ginamit para sa pag-import ay hindi isang JSON"
 	},
+	"import_metadata": {
+		"message": "I-import ang metadata ng Tab (\"Click Count\", \"Click Date\" atbp.).",
+		"description": "[label] i-import ang lahat ng nakita sa file sa panahon ng proseso ng pag-import"
+	},
 	"import_successful": {
 		"message": "Matagumpay na na-import",
 		"description": "[import] natapos na ang pag-import. Pagkatapos nito, ipapakita ang bilang ng mga record na na-import"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "$import_tabs mula sa JSON file",
 		"description": "[popup] pamagat sa import button"
+	},
+	"inactive": {
+		"message": "Di-aktibo",
+		"description": "Ginagamit sa mga toggle para sa di-aktibong estado"
 	},
 	"insert_another": {
 		"message": "Magpasok ng iba",
@@ -595,6 +779,10 @@
 		"message": "Italic",
 		"description": "Pagpipilian ng estilo ng font para sa italic na teksto"
 	},
+	"label": {
+		"message": "Label",
+		"description": "[key] ang pangalan ng Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Pasadyang teknolohiya ng pag-navigate ng Salesforce"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Mag-login sa Salesforce",
 		"description": "[notSalesforceSetup] call to action sa isang button para i-redirect ang user sa isang Salesforce login page"
+	},
+	"manage_tabs": {
+		"message": "Pamahalaan ang $tabs",
+		"description": "[modal-title] modal para pamahalaan ang mga naka-save na $tabs na may mga field na pwedeng i-edit at drag-to-reorder"
+	},
+	"manage_tabs_explainer": {
+		"message": "I-edit, i-reorder, at pamahalaan ang iyong mga naka-save na $tabs nang direkta mula sa modal na ito. I-drag ang mga hilera para i-reorder, o gamitin ang dropdown menu para sa higit pang mga aksyon.",
+		"description": "[modal-explainer] ipinapaliwanag ang functionality ng manage tabs modal"
+	},
+	"must_non_empty_str": {
+		"message": "dapat ay isang hindi-walang laman na string",
+		"description": "[placeholder] ginagamit ng iba pang mga teksto"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -614,6 +814,10 @@
 	"no_match": {
 		"message": "Walang tumugmang aksyon",
 		"description": "[error] sa Salesforce kapag hindi maitugma ng switch ang hiniling na aksyon"
+	},
+	"no_tabs_to_export": {
+		"message": "Walang Tabs na I-e-export",
+		"description": "[toast] error kapag walang Tabs na i-e-export"
 	},
 	"nss_invalid_url": {
 		"message": "Hindi balidong URL ang natukoy.",
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "Magdagdag ng mga bagong Tabs sa harap.",
 		"description": "[settings] hayaan ang user na magdagdag ng lahat ng bagong Tabs sa harap"
+	},
+	"opt_allow_domains": {
+		"message": "Payagan ang $extension_label na i-access ang mga pahina ng Salesforce kapag binisita mo ang mga ito.",
+		"description": "[setting] opsyonal na pahintulot na patakbuhin ang mga extension kapag bumibisita ang gumagamit sa $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Payagan ang $extension_label na i-export ang iyong $tabs kapag hiniling mo ito.",
+		"description": "[setting] opsyonal na pahintulot upang paganahin kaming i-export ang mga Tab ng gumagamit"
 	},
 	"opt_automatic_open_login": {
 		"message": "Awtomatikong buksan ang $salesforce_login page kapag nag-click sa popup habang wala sa Salesforce page.",
@@ -723,9 +935,21 @@
 		"message": "O $drop",
 		"description": "[import] hayaan ang user na ilipat ang mga file gamit ang kanilang mouse at bitawan ang mga ito"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] ang Salesforce $org ng Tab"
+	},
 	"org_link": {
 		"message": "Link ng Org",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "org $pinned $tabs",
+		"description": "Mga Tab na org-specific"
+	},
+	"org_tabs": {
+		"message": "org $tabs",
+		"description": "Mga Tab na org-specific"
 	},
 	"other_org_info": {
 		"message": "Impormasyon ng ibang Org",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Patungan ang mga naka-save na Tabs.",
 		"description": "[label] burahin lahat ng naka-save na Tabs sa proseso ng pag-import"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "bubuksan ang page sa kasalukuyang browser Tab",
+		"description": "[placeholder] ginagamit ng iba pang mga teksto"
+	},
+	"permission_request_failure": {
+		"message": "Hindi pinayagan ang pahintulot.",
+		"description": "[error] hiniling sa amin ng gumagamit na hilingin sa kanila ang isang pahintulot ngunit pagkatapos ay hindi ito tinanggap"
+	},
+	"permission_request_success": {
+		"message": "Pinayagan na ang pahintulot!",
+		"description": "[success] hiniling sa amin ng gumagamit na hilingin sa kanila ang isang pahintulot at tinanggap nila ito"
+	},
+	"pinned": {
+		"message": "Naka-pin",
+		"description": "Mga Tab ng user na laging matatagpuan sa simula ng listahan"
 	},
 	"preserve_org_tabs": {
 		"message": "Panatilihin ang mga Tabs para sa ibang mga Org.",
@@ -779,6 +1019,10 @@
 		"message": "= Kinakailangang Impormasyon",
 		"description": "[modal] nagsasabi sa user na ang ilang impormasyon ay mandatoryo"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domain",
+		"description": "[placeholder] ginagamit ng iba pang mga teksto"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] ang Salesforce Lightning platform"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "ang pahina ng pag-login ng Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce page",
+		"description": "[placeholder] ginagamit sa iba pang mga teksto"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "I-save bilang Tab",
 		"description": "[alt] alternatibong teksto kapag hindi gumagana ang mga larawan"
+	},
+	"select_all": {
+		"message": "Piliin Lahat",
+		"description": "[modal] button para piliin lahat ng Tabs sa export modal"
+	},
+	"select_tabs": {
+		"message": "Piliin kung aling $tabs ang gusto mo",
+		"description": "[import] hayaan ang user na piliin kung aling $tabs ang i-iimport bago i-import ang mga ito"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] hayaan ang user na piliin kung aling $tabs ang i-eexport bago i-export ang mga ito"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] hayaan ang user na piliin kung aling $tabs ang i-iimport bago i-import ang mga ito"
 	},
 	"send_tip": {
 		"message": "Magpadala sa amin ng tip ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "Estayler ng Org",
 		"description": "Label para i‑configure ang istilo ng Tab na tukoy sa Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label para sa pag-preview ng generic na hitsura ng Tab kapag naka-pin"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label para sa pag-configure ng estilo ng mga generic na Tab kapag naka-pin"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label para sa pag-preview ng org-specific na hitsura ng Tab kapag naka-pin"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label para sa pag-configure ng estilo ng mga org-specific na Tab kapag naka-pin"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng background para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng background para sa mga generic na Tab"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng border para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng border para sa mga generic na Tab"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng text para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng text para sa mga generic na Tab"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Prompt upang pumili ng mga istilo ng dekorasyon para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Prompt upang pumili ng mga istilo ng dekorasyon para sa mga generic na Tab"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng hover background para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng hover background para sa mga generic na Tab"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng shadow para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng shadow para sa mga generic na Tab"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label upang itakda ang kulay ng top-bar para sa mga aktibong generic na Tab"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng background para sa mga aktibong org Tab"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng background para sa mga org-specific na Tab"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng border para sa mga aktibong org-specific na Tab"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng border para sa mga org Tab"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng text para sa mga aktibong org Tab"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng text para sa mga org-specific na Tab"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Prompt upang pumili ng mga istilo ng dekorasyon para sa mga aktibong org-specific na Tab"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Prompt upang pumili ng mga istilo ng dekorasyon para sa mga org Tab"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng hover background para sa mga aktibong org Tab"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng hover background para sa mga org-specific na Tab"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng shadow para sa mga aktibong org-specific na Tab"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng shadow para sa mga org Tab"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label upang itakda ang kulay ng top-bar para sa mga aktibong org Tab"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Ipasok ang kulay ng background para sa iyong mga aktibong pangkalahatang Tab.",
@@ -947,13 +1331,57 @@
 		"message": "Pahina ng Setup",
 		"description": "[notSalesforceSetup] ang page na ginagamit para baguhin ang mga setting ng Salesforce"
 	},
+	"show_all_tabs": {
+		"message": "Ipakita ang lahat ng $tabs",
+		"description": "[manage-tabs] label ng button para ipakita ang lahat ng Tab"
+	},
 	"skip": {
 		"message": "Laktawan",
 		"description": "[req_permission] button para HINDI payagan ang mga pahintulot"
 	},
+	"style_generic_pinned": {
+		"message": "Istilo ng naka-pin na $generic_tabs",
+		"description": "[options] Label ng toggle upang i-style ang mga naka-pin na generic na Tab"
+	},
+	"style_org_pinned": {
+		"message": "Istilo ng naka-pin na $org_tabs",
+		"description": "[options] Label ng toggle upang i-style ang mga naka-pin na org Tab"
+	},
+	"style_settings_background_label": {
+		"message": "Ipasok ang kulay ng background para sa iyong",
+		"description": "Label upang itakda ang kulay ng background"
+	},
+	"style_settings_border_color_label": {
+		"message": "Ipasok ang kulay ng border para sa iyong",
+		"description": "Label upang itakda ang kulay ng border"
+	},
+	"style_settings_color_label": {
+		"message": "Ipasok ang kulay ng teksto para sa iyong",
+		"description": "Label upang itakda ang kulay ng teksto"
+	},
+	"style_settings_decoration_label": {
+		"message": "Pumili ng isa o higit pang istilo ng dekorasyon para sa iyong",
+		"description": "Prompt upang pumili ng mga istilo ng dekorasyon"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Ipasok ang kulay ng hover background para sa iyong",
+		"description": "Label upang itakda ang kulay ng hover background"
+	},
+	"style_settings_shadow_label": {
+		"message": "Ipasok ang kulay ng shadow para sa iyong",
+		"description": "Label upang itakda ang kulay ng shadow"
+	},
+	"style_settings_top_active_label": {
+		"message": "Ipasok ang kulay para sa bar sa tuktok ng iyong aktibong",
+		"description": "Label upang itakda ang kulay ng top-bar active"
+	},
 	"successfully_imported": {
 		"message": "Matagumpay na na-import",
 		"description": "[toast] nagdagdag ang user ng mga Tab mula sa isang panlabas na file"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "isa sa mga paboritong link ng user"
 	},
 	"tab_explain": {
 		"message": "Bawat item ay dapat may 'label' at 'url' bilang mga string. Bukod pa rito, bawat item ay maaaring magkaroon ng 'org' bilang string.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "ang mga paboritong link ng user"
 	},
+	"tabs_exported_successfully": {
+		"message": "Matagumpay na Na-export ang Tabs",
+		"description": "[toast] success message kapag na-export ang Tabs"
+	},
 	"tabs_saved": {
 		"message": "Nai-save ang mga Tabs.",
 		"description": "[toast] Matagumpay na naimbak ang mga Tabs."
@@ -1023,6 +1455,14 @@
 		"message": "Wavy Underline",
 		"description": "Pagpipilian ng estilo ng dekorasyon upang mag-apply ng wavy underline sa teksto ng Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Mayroon kang mga hindi na-save na pagbabago. Gusto mo bang umalis nang hindi nag-e-save?",
+		"description": "[manage-tabs] hiniling ng user na pumunta sa isang Tab nang hindi muna nag-e-save"
+	},
+	"unselect_all": {
+		"message": "Alisin ang Pagkakapili sa Lahat",
+		"description": "[modal] button para alisin ang pagkakapili sa lahat ng Tabs sa export modal"
+	},
 	"update_available": {
 		"message": "May available na update",
 		"description": "may available na bagong update para sa extension"
@@ -1031,9 +1471,21 @@
 		"message": "Mag-upload",
 		"description": "[import] hayaan ang user na mag-browse sa kanilang mga file at piliin ang tama"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] ang link ng Tab"
+	},
 	"users": {
 		"message": "Mga User",
 		"description": "Ang pangalan ng page na nauugnay sa ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Paki-export ang iyong mga bagong Tab dahil ang ginamit mong file ay hindi susuportahan sa mga susunod na release.",
+		"description": "[warning] in-import ng user ang kanilang Tab gamit ang isang deprecated na configuration ng json file"
+	},
+	"when_click_popup_while": {
+		"message": "page kapag nag-click sa popup habang",
+		"description": "[placeholder] ginagamit ng iba pang mga teksto"
 	},
 	"where_to": {
 		"message": "Saan papunta?",

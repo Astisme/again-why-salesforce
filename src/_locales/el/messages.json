@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Διαγραφή",
+		"description": "[διαχείριση-Tab] διαγραφή σειράς"
+	},
+	"act_open": {
+		"message": "🪂 Άνοιγμα",
+		"description": "[διαχείριση-Tab] Άνοιγμα της επιλεγμένης Tab"
+	},
+	"actions": {
+		"message": "Ενέργειες",
+		"description": "Ετικέτα αναπτυσσόμενου μενού για ενέργειες Tab"
+	},
+	"active": {
+		"message": "Ενεργό",
+		"description": "Χρησιμοποιείται σε διακόπτες για την ενεργή κατάσταση"
+	},
+	"active_generic_pin_tabs": {
+		"message": "ενεργά $generic_pin_tabs",
+		"description": "Οι γενικές καρφιτσωμένες Tab καρτέλες του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
+	"active_generic_tabs": {
+		"message": "ενεργά $generic_tabs",
+		"description": "Οι γενικές Tab καρτέλες του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
+	"active_org_pin_tabs": {
+		"message": "ενεργά $org_pin_tabs",
+		"description": "Οι καρφιτσωμένες Tab καρτέλες οργανισμού του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
+	"active_org_tabs": {
+		"message": "ενεργά $org_tabs",
+		"description": "Οι Tab καρτέλες οργανισμού του χρήστη που είναι ενεργές αυτήν τη στιγμή"
+	},
 	"allow": {
 		"message": "Επιτρέπω",
 		"description": "[αίτηση-άδειας] κουμπί για να επιτρέψετε τις άδειες"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[μενού-περιβάλλοντος]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] άνοιγμα του παραθύρου για τη διαχείριση αποθηκευμένων $tabs απευθείας στη σελίδα Ρυθμίσεων της Salesforce"
+	},
 	"cxm_move": {
 		"message": "🧭 Μετακίνηση Tab",
 		"description": "[μενού-πλαισίου]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[μενού-περιβάλλοντος]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Καρφίτσωμα",
+		"description": "[context-menu] αφήστε τον χρήστη να διατηρήσει αυτήν την Tab καρτέλα στην αρχή της λίστας του"
+	},
 	"cxm_remove": {
 		"message": "💥 Αφαίρεση Tab(s)",
 		"description": "[μενού-πλαισίου]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Άλλα Tab",
 		"description": "[μενού-πλαισίου]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Αφαίρεση Καρφιτσωμένων",
+		"description": "[context-menu] αφήστε τον χρήστη να αφαιρέσει τις καρφιτσωμένες Tab καρτέλες του"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tab στα δεξιά",
 		"description": "[μενού-πλαισίου]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Αυτό το Tab",
 		"description": "[μενού-πλαισίου]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Αφαίρεση μη Καρφιτσωμένων",
+		"description": "[context-menu] αφήστε τον χρήστη να αφαιρέσει τις μη καρφιτσωμένες Tab καρτέλες του"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Επαναφορά προεπιλεγμένων Tab",
@@ -151,6 +199,14 @@
 		"message": "🎯 Ταξινόμηση Tabs",
 		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους αυτόματα (μητρικό μενού)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ κατά Χρήση",
+		"description": "μενού περιβάλλοντος για να επιτρέψετε στους χρήστες να ταξινομήσουν τις Tab καρτέλες τους με βάση το πόσες φορές κάνουν κλικ στις Tab καρτέλες τους"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ κατά Ώρα",
+		"description": "μενού περιβάλλοντος για να επιτρέψετε στους χρήστες να ταξινομήσουν τις Tab καρτέλες τους με βάση το πότε έγινε κλικ στις Tab καρτέλες"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 με Ετικέτα",
 		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά ετικέτα"
@@ -163,25 +219,33 @@
 		"message": "🤖 με Url",
 		"description": "μενού περιβάλλοντος για να επιτρέπει στους χρήστες να ταξινομούν τις Tabs τους ανά URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Απόκρυψη Tab καρτελών μη Οργανισμού",
+		"description": "[context-menu] προσωρινή απόκρυψη γενικών Tab καρτελών"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Απόκρυψη Tab καρτελών Οργανισμού",
+		"description": "[context-menu] προσωρινή απόκρυψη Tab καρτελών Οργανισμού"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Ξεκαρφίτσωμα",
+		"description": "[context-menu] αφήστε τον χρήστη να αφαιρέσει αυτήν την Tab καρτέλα από την καρφιτσωμένη λίστα του"
+	},
 	"cxm_update": {
 		"message": "✏️ Ενημέρωση Tab",
 		"description": "[μενού-πλαισίου]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Εναλλαγή Οργάνωσης",
-		"description": "[μενού-πλαισίου]"
+		"message": "👜 Εναλλαγή Οργανισμού",
+		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Άλλες Ενημερώσεις",
 		"description": "[μενού-πλαισίου]"
 	},
-	"delete": {
-		"message": "Διαγραφή",
-		"description": "[αναδυόμενο-παράθυρο] διαγραφή μιας γραμμής"
-	},
 	"delete_all": {
-		"message": "$delete όλες τις Tabs",
-		"description": "[αναδυόμενο-παράθυρο] τίτλος στον κάδο για εκκαθάριση όλων των Tabs"
+		"message": "Διαγραφή όλων των $tabs",
+		"description": "[αναδυόμενο] τίτλος στον κάδο για άδειασμα όλων των $tabs"
 	},
 	"descending": {
 		"message": "Φθίνουσα (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Σφάλμα κατά την προσθήκη Tab.",
 		"description": "[error] Γενικό σφάλμα κατά την προσθήκη Tab"
+	},
+	"error_already_pinned": {
+		"message": "Αυτή η Tab καρτέλα ήταν ήδη καρφιτσωμένη.",
+		"description": "[error] ο χρήστης προσπάθησε να καρφιτσώσει μια ήδη καρφιτσωμένη Tab καρτέλα"
+	},
+	"error_already_unpinned": {
+		"message": "Αυτή η Tab καρτέλα ήταν ήδη ξεκαρφιτσωμένη.",
+		"description": "[error] ο χρήστης προσπάθησε να ξεκαρφιτσώσει μια ήδη ξεκαρφιτσωμένη Tab καρτέλα"
+	},
+	"error_cannot_move": {
+		"message": "Αυτή η Tab καρτέλα δεν μπορεί να μετακινηθεί!",
+		"description": "[error] η ζητούμενη Tab καρτέλα δεν μπορεί να μετακινηθεί αυτήν τη στιγμή."
+	},
+	"error_cannot_move_dir": {
+		"message": "Αυτή η Tab καρτέλα δεν μπορεί να μετακινηθεί προς αυτήν την κατεύθυνση!",
+		"description": "[error] η ζητούμενη Tab καρτέλα δεν μπορεί να μετακινηθεί αυτήν τη στιγμή."
 	},
 	"error_check_update": {
 		"message": "Σφάλμα κατά τον έλεγχο για ενημερώσεις",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Σφάλμα κατά την εισαγωγή:\n",
 		"description": "[σφάλμα] παρουσιάστηκε σφάλμα κατά τη διαδικασία εισαγωγής"
+	},
+	"error_internal": {
+		"message": "Εσωτερικό Σφάλμα",
+		"description": "[error] γενικό σφάλμα"
 	},
 	"error_invalid_key": {
 		"message": "Η παράμετρος key που στάλθηκε στη συνάρτηση δεν είναι έγκυρη",
@@ -323,9 +407,21 @@
 		"message": "Δεν δόθηκε αντικείμενο προς έλεγχο!",
 		"description": "[σφάλμα] δεν δόθηκε το αντικείμενο"
 	},
+	"error_no_pinned": {
+		"message": "Δεν έχετε καρφιτσωμένες Tab καρτέλες ακόμα!",
+		"description": "[error] ο χρήστης προσπάθησε να αφαιρέσει τις καρφιτσωμένες Tab καρτέλες, αλλά δεν έχει καμία καρφιτσωμένη Tab καρτέλα"
+	},
 	"error_no_setup_tab": {
 		"message": "Απέτυχε η εύρεση του Setup Tab.",
 		"description": "[σφάλμα] η επέκταση δεν μπόρεσε να εντοπίσει πού να τοποθετήσει τα αγαπημένα Tab"
+	},
+	"error_no_tabs_selected": {
+		"message": "Δεν έχουν Επιλεγεί Tabs για εξαγωγή",
+		"description": "[toast] σφάλμα όταν ο χρήστης προσπαθεί να εξάγει χωρίς να έχει επιλεγεί κανένα Tab"
+	},
+	"error_no_unpinned": {
+		"message": "Δεν έχετε μη καρφιτσωμένες Tab καρτέλες!",
+		"description": "[error] ο χρήστης προσπάθησε να αφαιρέσει τις μη καρφιτσωμένες Tab καρτέλες, αλλά δεν έχει καμία μη καρφιτσωμένη Tab καρτέλα"
 	},
 	"error_no_url": {
 		"message": "Δεν δόθηκε URL για έλεγχο!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Δεν έχει αρχικοποιηθεί ακόμη.",
 		"description": "[error] Γενικό σφάλμα όταν μία μεταβλητή δεν είναι έτοιμη"
+	},
+	"error_pin_tab": {
+		"message": "Σφάλμα κατά το καρφίτσωμα Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Σφάλμα κατά την επεξεργασία των Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Σφάλμα κατά την αφαίρεση άλλων Tabs.",
 		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση άλλων Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση καρφιτσωμένων Tab καρτελών.",
+		"description": "[error] Γενικό σφάλμα που χρησιμοποιείται κατά την αφαίρεση μη καρφιτσωμένων Tab καρτελών"
+	},
 	"error_removing_tab": {
 		"message": "Σφάλμα κατά την αφαίρεση Tab.",
 		"description": "[error] Γενικό σφάλμα κατά την αφαίρεση Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Σφάλμα κατά την αφαίρεση μη καρφιτσωμένων Tab καρτελών.",
+		"description": "[error] Γενικό σφάλμα που χρησιμοποιείται κατά την αφαίρεση μη καρφιτσωμένων Tab καρτελών"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Σφάλμα κατά την αφαίρεση όλων των ορατών Tab.",
@@ -383,6 +491,14 @@
 		"message": "Δεν μπορεί να συγχρονιστούν κενά Tab!",
 		"description": "[σφάλμα] προσπαθήθηκε ο συγχρονισμός κενών Tab"
 	},
+	"error_tab_click_count": {
+		"message": "Ο Αριθμός Κλικ πρέπει να είναι ένας μη αρνητικός αριθμός",
+		"description": "[error] ο χρήστης προσπάθησε να δημιουργήσει μια Tab καρτέλα με λάθος αριθμό κλικ"
+	},
+	"error_tab_click_date": {
+		"message": "Η Ημερομηνία Κλικ πρέπει να είναι ένας αριθμός που δεν οδηγεί σε μελλοντική ημερομηνία",
+		"description": "[error] ο χρήστης προσπάθησε να δημιουργήσει μια Tab καρτέλα με λάθος ημερομηνία κλικ"
+	},
 	"error_tab_constructor": {
 		"message": "Χρησιμοποιήστε Tab.create() αντί για new Tab()",
 		"description": "[error] Ενημερώστε τον προγραμματιστή πώς να χρησιμοποιεί την κλάση Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Το Tab δεν βρέθηκε.",
 		"description": "[σφάλμα] το Tab δεν περιλαμβάνεται στον πίνακα"
+	},
+	"error_tab_not_pinned": {
+		"message": "Η Tab καρτέλα δεν είναι καρφιτσωμένη ακόμα!",
+		"description": "[error] ο χρήστης προσπάθησε να ξεκαρφιτσώσει μια μη καρφιτσωμένη Tab καρτέλα"
 	},
 	"error_tab_object_creation": {
 		"message": "Κατά την κλήση με αντικείμενο, μην περάσετε τίποτα άλλο.",
@@ -435,6 +555,10 @@
 		"message": "ο μεταφραστής δεν έχει αρχικοποιηθεί ακόμη.",
 		"description": "[error] Η υπηρεσία μετάφρασης δεν ήταν έτοιμη"
 	},
+	"error_unknown_file_structure": {
+		"message": "Δεν μπορέσαμε να κατανοήσουμε ένα αρχείο που θέλατε να εισαγάγετε\nΕάν το πρόβλημα επιμένει, μοιραστείτε το μαζί μας ανοίγοντας ένα ζήτημα στο GitHub",
+		"description": "[εισαγωγή] το αρχείο του χρήστη δεν αναγνωρίστηκε"
+	},
 	"error_unknown_message": {
 		"message": "Ελήφθη άγνωστο μήνυμα",
 		"description": "ένα άγνωστο μήνυμα ελήφθη από έναν ακροατή"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Άγνωστο αίτημα.",
 		"description": "[error] Γενικό σφάλμα μετά τη λήψη άγνωστου μηνύματος"
+	},
+	"error_unpin_tab": {
+		"message": "Σφάλμα κατά το ξεκαρφίτσωμα Tab",
+		"description": "[error]"
 	},
 	"error_useless_remove": {
 		"message": "Δεν μπορεί να αφαιρεθεί:\nΔεν μπορεί να αφαιρεθεί μια σελίδα που δεν έχει αποθηκευτεί προηγουμένως",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "Εξαγωγή",
 		"description": "[αναδυόμενο-παράθυρο] κουμπί εξαγωγής"
+	},
+	"export_tabs": {
+		"message": "Εξαγωγή Tabs",
+		"description": "[modal] τίτλος για το modal εξαγωγής Tabs"
 	},
 	"export_title": {
 		"message": "Εξαγωγή όλων των Tab",
@@ -483,6 +615,14 @@
 		"message": "Γενικά",
 		"description": "Ετικέτα για την κατηγορία γενικών ρυθμίσεων"
 	},
+	"generic_pin_tabs": {
+		"message": "γενικές $pinned Tab",
+		"description": "Οι αγαπημένες Tab καρτέλες του χρήστη που δεν είναι ειδικές για οργανισμό"
+	},
+	"generic_tabs": {
+		"message": "γενικές $tabs",
+		"description": "Οι αγαπημένες Tab καρτέλες του χρήστη που δεν είναι ειδικές για οργανισμό"
+	},
 	"help": {
 		"message": "Βοήθεια",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Οι νέες αγαπημένες Tabs εισάγονται στην αρχή της λίστας Tabs στη γραμμή Setup και όχι στο τέλος.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Όταν είναι ενεργοποιημένο, θα μπορείτε να βλέπετε τα $tabs σας μόλις ξεκινήσετε το $salesforce_setup",
+		"description": "[βοήθεια-ρυθμίσεων] για προαιρετική άδεια που μας επιτρέπει να είμαστε έτοιμοι μόλις ανοίξει το $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Όταν είναι ενεργοποιημένο, θα μπορείτε να κάνετε $export τα $tabs σας και να τα διατηρείτε στον υπολογιστή σας.",
+		"description": "[βοήθεια-ρυθμίσεων] για προαιρετική άδεια που μας επιτρέπει να κατεβάζουμε τα Tab στο μηχάνημα του χρήστη"
+	},
 	"help_automatic_open_login": {
 		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εκτός του τομέα του Salesforce, σας μεταφέρει αυτόματα στη σελίδα σύνδεσης του Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "Εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης εντός ενός τομέα Salesforce, αλλά όχι σε μια σελίδα ρύθμισης, σας μεταφέρει αυτόματα στη σελίδα ρύθμισης του Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Μπορείτε να αναδιατάξετε τις $tabs σας χρησιμοποιώντας τις τελείες και σέρνοντάς τις.",
+		"description": "[manage-tabs] εξήγηση για το πώς να σύρετε την Tab"
 	},
 	"help_keep_sort": {
 		"message": "Όταν είναι ενεργοποιημένο, οι Tabs σας διατηρούνται σε ταξινομημένη σειρά—είτε με ετικέτα, URL ή Org. ανάλογα με το τι θα επιλέξετε.",
@@ -547,9 +699,33 @@
 		"message": "Απενεργοποιεί τον έλεγχο της επέκτασης που επαληθεύει ότι ένα τμήμα URL ταιριάζει με τη μορφή αναγνωριστικών εγγραφής/αντικειμένου Salesforce (χρησιμοποιείται για αυτόματη ρύθμιση του αποθηκευμένου Tab ως Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Εδώ θα βρείτε ένα υπομενού για την εκτέλεση διαφορετικών ενεργειών στην $tab της ίδιας σειράς.",
+		"description": "[manage-tabs] εξήγηση για το τι περιέχει το βέλος στα δεξιά"
+	},
+	"help_tab_label": {
+		"message": "Αυτό είναι το κοινό όνομα που θα χρησιμοποιήσετε για να θυμάστε πού θα σας οδηγήσει αυτή η $tab",
+		"description": "[manage-tabs] εξήγηση για το τι είναι η ετικέτα Tab"
+	},
+	"help_tab_org": {
+		"message": "Αυτό είναι το όνομα του Salesforce $org όπου θα εμφανίζεται αυτή η $tab Εάν μείνει κενό αυτή η $tab θα εμφανίζεται σε κάθε Salesforce $org που επισκέπτεστε",
+		"description": "[manage-tabs] εξήγηση για το τι είναι το Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Αυτός είναι ο (συντομευμένος) σύνδεσμος όπου θα ανακατευθυνθείτε κάνοντας κλικ σε αυτήν την $tab",
+		"description": "[manage-tabs] εξήγηση για το τι είναι το URL της Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Κάντε κλικ για να μεταφερθείτε στην τεκμηρίωση για αυτήν τη ρύθμιση!",
 		"description": "[βοήθεια-ρυθμίσεων] παρότρυνση για δράση για να επιτρέψει στον χρήστη να διαβάσει περισσότερα για μια συγκεκριμένη ρύθμιση"
+	},
+	"hide_other_org_tabs": {
+		"message": "Απόκρυψη $tabs του $other_org_placeholder",
+		"description": "[manage-tabs] ετικέτα κουμπιού για απόκρυψη άλλων Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "εάν κάνετε κλικ στο αναδυόμενο παράθυρο της επέκτασης",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"import": {
 		"message": "Εισαγωγή",
@@ -567,6 +743,10 @@
 		"message": "Μη έγκυρος τύπος αρχείου.\nΥποστηρίζονται μόνο αρχεία JSON.",
 		"description": "[σφάλμα] το αρχείο που χρησιμοποιήθηκε για εισαγωγή δεν είναι JSON"
 	},
+	"import_metadata": {
+		"message": "Εισαγωγή μεταδεδομένων Tab («Αριθμός Κλικ», «Ημερομηνία Κλικ» κ.λπ.).",
+		"description": "[label] εισαγωγή όλων των στοιχείων που βρέθηκαν στο αρχείο κατά τη διαδικασία εισαγωγής"
+	},
 	"import_successful": {
 		"message": "Εισήχθη με επιτυχία",
 		"description": "[εισαγωγή] η εισαγωγή ολοκληρώθηκε. Μετά από αυτό, θα εμφανιστεί ο αριθμός των εγγεγραμμένων εγγραφών"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "$import_tabs από αρχείο JSON",
 		"description": "[αναδυόμενο-παράθυρο] τίτλος στο κουμπί εισαγωγής"
+	},
+	"inactive": {
+		"message": "Ανενεργό",
+		"description": "Χρησιμοποιείται σε διακόπτες για την ανενεργή κατάσταση"
 	},
 	"insert_another": {
 		"message": "Εισαγωγή άλλου",
@@ -595,6 +779,10 @@
 		"message": "Πλάγια",
 		"description": "Επιλογή στυλ γραμματοσειράς για πλάγιο κείμενο"
 	},
+	"label": {
+		"message": "Ετικέτα",
+		"description": "[key] το όνομα του Tab"
+	},
 	"lightning_navigation": {
 		"message": "Πλοήγηση Lightning",
 		"description": "Προσαρμοσμένη τεχνολογία πλοήγησης της Salesforce"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Σύνδεση στο Salesforce",
 		"description": "[όχιSalesforceSetup] πρόσκληση σε κουμπί για ανακατεύθυνση του χρήστη στη σελίδα σύνδεσης του Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Διαχείριση $tabs",
+		"description": "[modal-title] παράθυρο για τη διαχείριση αποθηκευμένων $tabs με επεξεργάσιμα πεδία και αναδιάταξη με μεταφορά"
+	},
+	"manage_tabs_explainer": {
+		"message": "Επεξεργαστείτε, αναδιατάξτε και διαχειριστείτε τις αποθηκευμένες σας $tabs απευθείας από αυτό το παράθυρο. Σύρετε σειρές για αναδιάταξη ή χρησιμοποιήστε το αναπτυσσόμενο μενού για περισσότερες ενέργειες.",
+		"description": "[modal-explainer] εξηγεί τη λειτουργικότητα του παραθύρου διαχείρισης καρτελών"
+	},
+	"must_non_empty_str": {
+		"message": "πρέπει να είναι μη κενή συμβολοσειρά",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -615,12 +815,16 @@
 		"message": "Δεν ταιριάζει καμία ενέργεια",
 		"description": "[σφάλμα] όταν η εντολή ελέγχου δεν μπορεί να ταιριάξει την ζητούμενη ενέργεια"
 	},
+	"no_tabs_to_export": {
+		"message": "Δεν Υπάρχουν Tabs για εξαγωγή",
+		"description": "[toast] σφάλμα όταν δεν υπάρχουν Tabs για εξαγωγή"
+	},
 	"nss_invalid_url": {
 		"message": "Εντοπίστηκε μη έγκυρο URL.",
 		"description": "[δενΕίναιΡύθμισηSalesforce] ένα μη έγκυρο URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Αυτή δεν είναι σελίδα Ρύθμισης $salesforce_lightning.",
+		"message": "Αυτή δεν είναι σελίδα Ρύθμισης $salesforce_lightning",
 		"description": "[notSalesforceSetup] ο χρήστης δεν βρίσκεται σε σελίδα Salesforce."
 	},
 	"open_here": {
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "Προσθήκη νέων Tabs μπροστά.",
 		"description": "[settings] επιτρέπει στον χρήστη να προσθέτει όλες τις νέες Tabs μπροστά"
+	},
+	"opt_allow_domains": {
+		"message": "Επιτρέψτε στο $extension_label να έχει πρόσβαση στις σελίδες του Salesforce όταν τις επισκέπτεστε.",
+		"description": "[ρύθμιση] προαιρετική άδεια για την εκτέλεση των επεκτάσεων όταν ο χρήστης επισκέπτεται το $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Επιτρέψτε στο $extension_label να εξάγει τα $tabs σας όταν το ζητήσετε.",
+		"description": "[ρύθμιση] προαιρετική άδεια για να μας επιτρέψετε να εξάγουμε τα Tab του χρήστη"
 	},
 	"opt_automatic_open_login": {
 		"message": "Αυτόματο άνοιγμα της σελίδας $salesforce_login όταν κάνετε κλικ στο αναδυόμενο παράθυρο ενώ δεν βρίσκεστε σε σελίδα Salesforce.",
@@ -723,9 +935,21 @@
 		"message": "Ή $drop",
 		"description": "[εισαγωγή] επιτρέψτε στον χρήστη να μετακινήσει αρχεία με το ποντίκι του και να τα αφήσει"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] το Salesforce $org του Tab"
+	},
 	"org_link": {
 		"message": "Σύνδεσμος Οργάνωσης",
 		"description": "[ετικέτα-εισόδου]"
+	},
+	"org_pin_tabs": {
+		"message": "$pinned Tab οργανισμού",
+		"description": "Tab καρτέλες που είναι ειδικές για οργανισμό"
+	},
+	"org_tabs": {
+		"message": "$tabs οργανισμού",
+		"description": "Tab καρτέλες που είναι ειδικές για οργανισμό"
 	},
 	"other_org_info": {
 		"message": "Πληροφορίες άλλης Οργάνωσης",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Αντικατάσταση αποθηκευμένων Tab.",
 		"description": "[ετικέτα] διαγραφή όλων των αποθηκευμένων Tab κατά τη διαδικασία εισαγωγής"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "η σελίδα θα ανοίξει στην τρέχουσα Tab του προγράμματος περιήγησης",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
+	},
+	"permission_request_failure": {
+		"message": "Η άδεια δεν επιτράπηκε.",
+		"description": "[σφάλμα] ο χρήστης μας ζήτησε να του ζητήσουμε μια άδεια αλλά στη συνέχεια δεν την αποδέχτηκε"
+	},
+	"permission_request_success": {
+		"message": "Η άδεια επιτράπηκε!",
+		"description": "[επιτυχία] ο χρήστης μας ζήτησε να του ζητήσουμε μια άδεια και την αποδέχτηκε"
+	},
+	"pinned": {
+		"message": "Καρφιτσωμένο",
+		"description": "Οι Tab καρτέλες του χρήστη που βρίσκονται πάντα στην αρχή της λίστας"
 	},
 	"preserve_org_tabs": {
 		"message": "Διατήρηση Tab για άλλες οργάνωσεις.",
@@ -764,7 +1004,7 @@
 		"description": "[αίτηση-άδειας] ετικέτα όταν ο χρήστης δεν θέλει να επιτρέπει μόνιμα τις άδειες"
 	},
 	"req_permissions_header": {
-		"message": "Παρακαλώ επιτρέψτε μας την αυτόματη πρόσβαση\nστις σελίδες $salesforce_setup.",
+		"message": "Παρακαλώ επιτρέψτε μας την αυτόματη πρόσβαση\nστις σελίδες $salesforce_setup",
 		"description": "[req_permission] κεφαλίδα της σελίδας για αίτηση δικαιωμάτων"
 	},
 	"req_permissions_paragraph": {
@@ -779,6 +1019,10 @@
 		"message": "= Υποχρεωτικές Πληροφορίες",
 		"description": "[διάλογος] ενημερώνει τον χρήστη ότι ορισμένες πληροφορίες είναι υποχρεωτικές"
 	},
+	"salesforce_domain": {
+		"message": "Τομέας Salesforce",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[όχιSalesforceSetup] η πλατφόρμα Salesforce Lightning"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Σύνδεση Salesforce",
 		"description": "η σελίδα σύνδεσης Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Σελίδα Salesforce",
+		"description": "[placeholder] χρησιμοποιείται σε άλλα κείμενα"
 	},
 	"salesforce_setup": {
 		"message": "Ρύθμιση Salesforce",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "Αποθήκευση ως Tab",
 		"description": "[εναλλακτικό-κείμενο] εναλλακτικό κείμενο όταν οι εικόνες δεν λειτουργούν"
+	},
+	"select_all": {
+		"message": "Επιλογή Όλων",
+		"description": "[modal] κουμπί για επιλογή όλων των Tabs στο modal εξαγωγής"
+	},
+	"select_tabs": {
+		"message": "Επιλέξτε ποια $tabs θα θέλατε να",
+		"description": "[import] αφήστε τον χρήστη να επιλέξει ποιες $tabs θα εισάγει πριν τις εισαγάγει"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] αφήστε τον χρήστη να επιλέξει ποιες $tabs θα εξαγάγει πριν τις εξαγάγει"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] αφήστε τον χρήστη να επιλέξει ποιες $tabs θα εισάγει πριν τις εισαγάγει"
 	},
 	"send_tip": {
 		"message": "Στείλτε μας μια συμβουλή ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "Στυλιζαριστής Org",
 		"description": "Ετικέτα για διαμόρφωση του στυλ των Tabs ειδικά για το Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Ετικέτα για προεπισκόπηση της εμφάνισης γενικής Tab καρτέλας όταν είναι καρφιτσωμένη"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Ετικέτα για διαμόρφωση του στυλ των γενικών Tab καρτελών όταν είναι καρφιτσωμένες"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Ετικέτα για προεπισκόπηση της εμφάνισης Tab καρτέλας ειδικής για οργανισμό όταν είναι καρφιτσωμένη"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Ετικέτα για διαμόρφωση του στυλ των Tab καρτελών ειδικών για οργανισμό όταν είναι καρφιτσωμένες"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος πάνω γραμμής για ενεργές γενικές Tab καρτέλες"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για ενεργές Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου για Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για ενεργές Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος για Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για ενεργές Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου για Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για ενεργές Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης για Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για ενεργές Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover) για Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για ενεργές Tab καρτέλες ειδικές για οργανισμό"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς για Tab καρτέλες οργανισμού"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Ετικέτα για ρύθμιση χρώματος πάνω γραμμής για ενεργές Tab καρτέλες οργανισμού"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Εισαγάγετε το χρώμα φόντου για τις ενεργές γενικές Tab-s.",
@@ -947,13 +1331,57 @@
 		"message": "Σελίδα Setup",
 		"description": "[όχιSalesforceSetup] η σελίδα που χρησιμοποιείται για την τροποποίηση των ρυθμίσεων του Salesforce"
 	},
+	"show_all_tabs": {
+		"message": "Εμφάνιση όλων των $tabs",
+		"description": "[manage-tabs] ετικέτα κουμπιού για εμφάνιση όλων των Tab"
+	},
 	"skip": {
 		"message": "Παράλειψη",
 		"description": "[αίτηση-άδειας] κουμπί για ΜΗ επιτρεπτέ άδειες"
 	},
+	"style_generic_pinned": {
+		"message": "Στυλ καρφιτσωμένων $generic_tabs",
+		"description": "[options] Ετικέτα εναλλαγής για τη διαμόρφωση του στυλ των καρφιτσωμένων γενικών Tab καρτελών"
+	},
+	"style_org_pinned": {
+		"message": "Στυλ καρφιτσωμένων $org_tabs",
+		"description": "[options] Ετικέτα εναλλαγής για τη διαμόρφωση του στυλ των καρφιτσωμένων Tab καρτελών οργανισμού"
+	},
+	"style_settings_background_label": {
+		"message": "Εισαγάγετε το χρώμα φόντου για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου"
+	},
+	"style_settings_border_color_label": {
+		"message": "Εισαγάγετε το χρώμα περιγράμματος για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος περιγράμματος"
+	},
+	"style_settings_color_label": {
+		"message": "Εισαγάγετε το χρώμα του κειμένου για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος κειμένου"
+	},
+	"style_settings_decoration_label": {
+		"message": "Επιλέξτε ένα ή περισσότερα στυλ διακόσμησης για τις",
+		"description": "Προτροπή για επιλογή στυλ διακόσμησης"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Εισαγάγετε το χρώμα φόντου κατά την κατάδειξη (hover) για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος φόντου κατά την κατάδειξη (hover)"
+	},
+	"style_settings_shadow_label": {
+		"message": "Εισαγάγετε το χρώμα σκιάς για τις",
+		"description": "Ετικέτα για ρύθμιση χρώματος σκιάς"
+	},
+	"style_settings_top_active_label": {
+		"message": "Εισαγάγετε το χρώμα για τη γραμμή στην κορυφή των ενεργών σας",
+		"description": "Ετικέτα για ρύθμιση του ενεργού χρώματος της πάνω γραμμής"
+	},
 	"successfully_imported": {
 		"message": "Εισήχθη με επιτυχία",
 		"description": "[σημείωμα] ο χρήστης πρόσθεσε Tab από εξωτερικό αρχείο"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "ένας από τους αγαπημένους συνδέσμους του χρήστη"
 	},
 	"tab_explain": {
 		"message": "Κάθε στοιχείο πρέπει να έχει 'label' και 'url' ως συμβολοσειρές. Επιπλέον, κάθε στοιχείο μπορεί να έχει 'org' ως συμβολοσειρά.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "τα αγαπημένα links του χρήστη"
 	},
+	"tabs_exported_successfully": {
+		"message": "Τα Tabs Εξήχθησαν Επιτυχώς",
+		"description": "[toast] μήνυμα επιτυχίας όταν εξάγονται Tabs"
+	},
 	"tabs_saved": {
 		"message": "Τα Tab αποθηκεύτηκαν.",
 		"description": "[σημείωμα] Τα Tab αποθηκεύτηκαν με επιτυχία."
@@ -1023,6 +1455,14 @@
 		"message": "Κυματιστή Υπογράμμιση",
 		"description": "Επιλογή στυλ διακόσμησης για εφαρμογή κυματιστής υπογράμμισης στο κείμενο Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Έχετε μη αποθηκευμένες αλλαγές. Θέλετε να αποχωρήσετε χωρίς αποθήκευση;",
+		"description": "[manage-tabs] ο χρήστης ζήτησε να μεταβεί σε μια Tab χωρίς να προηγηθεί αποθήκευση"
+	},
+	"unselect_all": {
+		"message": "Κατάργηση Επιλογής Όλων",
+		"description": "[modal] κουμπί για κατάργηση επιλογής όλων των Tabs στο modal εξαγωγής"
+	},
 	"update_available": {
 		"message": "Διαθέσιμη ενημέρωση",
 		"description": "μια νέα ενημέρωση για την επέκταση είναι διαθέσιμη"
@@ -1031,9 +1471,21 @@
 		"message": "Ανέβασμα",
 		"description": "[εισαγωγή] επιτρέπει στον χρήστη να περιηγηθεί στα αρχεία του και να επιλέξει το σωστό"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] ο σύνδεσμος του Tab"
+	},
 	"users": {
 		"message": "Χρήστες",
 		"description": "Το όνομα της σελίδας που σχετίζεται με ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Παρακαλούμε εξάγετε τις νέες σας Tab καρτέλες καθώς το αρχείο που χρησιμοποιήσατε δεν θα υποστηρίζεται σε μελλοντικές κυκλοφορίες.",
+		"description": "[warning] ο χρήστης εισήγαγε τις Tab καρτέλες του χρησιμοποιώντας μια απαρχαιωμένη διαμόρφωση του αρχείου json"
+	},
+	"when_click_popup_while": {
+		"message": "σελίδα όταν κάνετε κλικ στο αναδυόμενο παράθυρο ενώ",
+		"description": "[placeholder] χρησιμοποιείται από άλλα κείμενα"
 	},
 	"where_to": {
 		"message": "Που;",

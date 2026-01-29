@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Löschen",
+		"description": "[Tab-verwalten] eine Zeile löschen"
+	},
+	"act_open": {
+		"message": "🪂 Öffnen",
+		"description": "[Tab-verwalten] Die ausgewählte Tab öffnen"
+	},
+	"actions": {
+		"message": "Aktionen",
+		"description": "Dropdown-Menü-Beschriftung für Tab-Aktionen"
+	},
+	"active": {
+		"message": "Aktiv",
+		"description": "Wird in Umschaltern für den aktiven Zustand verwendet"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktive $generic_pin_tabs",
+		"description": "Generische angepinnte Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
+	"active_generic_tabs": {
+		"message": "aktive $generic_tabs",
+		"description": "Generische Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktive $org_pin_tabs",
+		"description": "Organisations-spezifische angepinnte Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
+	"active_org_tabs": {
+		"message": "aktive $org_tabs",
+		"description": "Organisations-spezifische Tab-Karten des Benutzers, die derzeit aktiv sind"
+	},
 	"allow": {
 		"message": "Erlauben",
 		"description": "[req_permission] Schaltfläche, um Berechtigungen zu erteilen"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[Kontextmenü]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] Öffnen Sie das Modal zur Verwaltung gespeicherter $tabs direkt auf der Salesforce-Setup-Seite"
+	},
 	"cxm_move": {
 		"message": "🧭 Tab verschieben",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[Kontextmenü]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Anpinnen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, diese Tab-Karte am Anfang seiner Liste zu behalten"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(s) entfernen",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Andere Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Angepinnte entfernen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, seine angepinnten Tab-Karten zu entfernen"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs rechts",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Diesen Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Nicht angepinnte entfernen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, seine nicht angepinnten Tab-Karten zu entfernen"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Standard-Tabs zurücksetzen",
@@ -151,6 +199,14 @@
 		"message": "🎯 Tabs sortieren",
 		"description": "Kontextmenü, mit dem Benutzer ihre Tabs automatisch sortieren können (Hauptmenü)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ nach Nutzung",
+		"description": "Kontextmenü, um Benutzern das Sortieren ihrer Tab-Karten danach zu ermöglichen, wie oft sie auf ihre Tab-Karten klicken"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ nach Zeit",
+		"description": "Kontextmenü, um Benutzern das Sortieren ihrer Tab-Karten danach zu ermöglichen, wann auf die Tab-Karten geklickt wurde"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 nach Label",
 		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach Beschriftung sortieren können"
@@ -163,25 +219,33 @@
 		"message": "🤖 nach Url",
 		"description": "Kontextmenü, mit dem Benutzer ihre Tabs nach URL sortieren können"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Nicht-Org Tab-Karten ausblenden",
+		"description": "[context-menu] generische Tab-Karten vorübergehend ausblenden"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Org Tab-Karten ausblenden",
+		"description": "[context-menu] Org Tab-Karten vorübergehend ausblenden"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Loslösen",
+		"description": "[context-menu] ermöglicht es dem Benutzer, diese Tab-Karte aus seiner angepinnten Liste zu entfernen"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab aktualisieren",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Org umschalten",
+		"message": "👜 Org umschalten",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Weitere Aktualisierungen",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Löschen",
-		"description": "[popup] Eine Zeile löschen"
-	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[Popup] Titel im Papierkorb, um alle Tabs zu leeren"
+		"message": "Alle $tabs löschen",
+		"description": "[Popup] Titel auf dem Papierkorb, um alle $tabs zu leeren"
 	},
 	"descending": {
 		"message": "Absteigend (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Fehler beim Hinzufügen eines Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Hinzufügen eines Tabs"
+	},
+	"error_already_pinned": {
+		"message": "Diese Tab-Karte war bereits angepinnt.",
+		"description": "[error] der Benutzer versuchte, eine bereits angepinnte Tab-Karte anzupinnen"
+	},
+	"error_already_unpinned": {
+		"message": "Diese Tab-Karte war bereits losgelöst.",
+		"description": "[error] der Benutzer versuchte, eine bereits losgelöste Tab-Karte loszulösen"
+	},
+	"error_cannot_move": {
+		"message": "Diese Tab-Karte kann nicht verschoben werden!",
+		"description": "[error] die angeforderte Tab-Karte kann momentan nicht verschoben werden."
+	},
+	"error_cannot_move_dir": {
+		"message": "Diese Tab-Karte kann nicht in diese Richtung verschoben werden!",
+		"description": "[error] die angeforderte Tab-Karte kann momentan nicht verschoben werden."
 	},
 	"error_check_update": {
 		"message": "Fehler beim Überprüfen auf Updates",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Fehler beim Import:\n",
 		"description": "[error] Während des Importvorgangs ist ein Fehler aufgetreten."
+	},
+	"error_internal": {
+		"message": "Interner Fehler",
+		"description": "[error] allgemeiner Fehler"
 	},
 	"error_invalid_key": {
 		"message": "Der an die Funktion übergebene key-Parameter ist ungültig",
@@ -323,9 +407,21 @@
 		"message": "Kein Objekt zum Überprüfen vorhanden!",
 		"description": "[error] Es wurde kein Objekt übergeben."
 	},
+	"error_no_pinned": {
+		"message": "Sie haben noch keine angepinnten Tab-Karten!",
+		"description": "[error] der Benutzer versuchte, die angepinnten Tab-Karten zu entfernen, hat aber keine angepinnten Tab-Karten"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup-Tab konnte nicht gefunden werden.",
 		"description": "[error] Die Erweiterung konnte den Platz für die favorisierten Tabs nicht finden."
+	},
+	"error_no_tabs_selected": {
+		"message": "Keine Tabs zum Exportieren Ausgewählt",
+		"description": "[toast] Fehler, wenn der Benutzer versucht zu exportieren, ohne Tabs ausgewählt zu haben"
+	},
+	"error_no_unpinned": {
+		"message": "Sie haben keine nicht angepinnten Tab-Karten!",
+		"description": "[error] der Benutzer versuchte, die nicht angepinnten Tab-Karten zu entfernen, hat aber keine nicht angepinnten Tab-Karten"
 	},
 	"error_no_url": {
 		"message": "Keine URL zum Überprüfen vorhanden!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Noch nicht initialisiert.",
 		"description": "[error] Allgemeiner Fehler, wenn eine Variable nicht bereit ist"
+	},
+	"error_pin_tab": {
+		"message": "Fehler beim Anpinnen der Tab-Karte",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Fehler beim Verarbeiten der Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Fehler beim Entfernen anderer Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Entfernen anderer Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Fehler beim Entfernen angepinnter Tab-Karten.",
+		"description": "[error] Allgemeiner Fehler, der beim Entfernen nicht angepinnter Tab-Karten verwendet wird"
+	},
 	"error_removing_tab": {
 		"message": "Fehler beim Entfernen des Tabs.",
 		"description": "[error] Allgemeiner Fehler beim Entfernen eines Tabs"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Fehler beim Entfernen nicht angepinnter Tab-Karten.",
+		"description": "[error] Allgemeiner Fehler, der beim Entfernen nicht angepinnter Tab-Karten verwendet wird"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Fehler beim Entfernen aller sichtbaren Tabs.",
@@ -383,6 +491,14 @@
 		"message": "Leere Tabs können nicht synchronisiert werden!",
 		"description": "[error] Es wurde versucht, nichts zu synchronisieren."
 	},
+	"error_tab_click_count": {
+		"message": "Die Klickanzahl muss eine nicht-negative Zahl sein",
+		"description": "[error] Benutzer versuchte, eine Tab-Karte mit einer falschen Klickanzahl zu erstellen"
+	},
+	"error_tab_click_date": {
+		"message": "Das Klickdatum muss eine Zahl sein, die nicht zu einem Datum in der Zukunft führt",
+		"description": "[error] Benutzer versuchte, eine Tab-Karte mit einem falschen Klickdatum zu erstellen"
+	},
 	"error_tab_constructor": {
 		"message": "Verwende Tab.create() anstelle von new Tab()",
 		"description": "[error] Entwickler darüber informieren, wie die Klasse Tab verwendet wird"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab wurde nicht gefunden.",
 		"description": "[error] Der Tab ist in der Liste nicht enthalten."
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab-Karte ist noch nicht angepinnt!",
+		"description": "[error] Benutzer versuchte, eine nicht angepinnte Tab-Karte loszulösen"
 	},
 	"error_tab_object_creation": {
 		"message": "Beim Aufruf mit einem Objekt dürfen keine zusätzlichen Parameter übergeben werden.",
@@ -434,6 +554,10 @@
 		"message": "translator wurde noch nicht initialisiert.",
 		"description": "[error] TranslationService war noch nicht bereit"
 	},
+	"error_unknown_file_structure": {
+		"message": "Wir konnten eine Datei, die Sie importieren wollten, nicht verstehen\nWenn das Problem weiterhin besteht, teilen Sie es uns bitte mit, indem Sie ein GitHub-Issue eröffnen",
+		"description": "[Import] die Datei des Benutzers wurde nicht erkannt"
+	},
 	"error_unknown_message": {
 		"message": "Unbekannte Nachricht erhalten",
 		"description": "eine unbekannte Nachricht wurde von einem Listener empfangen"
@@ -441,6 +565,10 @@
 	"error_unknown_request": {
 		"message": "Unbekannte Anfrage.",
 		"description": "[error] Allgemeiner Fehler nach Empfang einer unbekannten Nachricht"
+	},
+	"error_unpin_tab": {
+		"message": "Fehler beim Loslösen der Tab-Karte",
+		"description": "[error]"
 	},
 	"error_useless_remove": {
 		"message": "Kann nicht entfernt werden:\nEine Seite, die nie gespeichert wurde, kann nicht entfernt werden.",
@@ -453,6 +581,10 @@
 	"export": {
 		"message": "Exportieren",
 		"description": "[popup] Export-Knopf"
+	},
+	"export_tabs": {
+		"message": "Tabs Exportieren",
+		"description": "[modal] Titel für das Modal zum Exportieren von Tabs"
 	},
 	"export_title": {
 		"message": "Alle Tabs exportieren",
@@ -482,6 +614,14 @@
 		"message": "Allgemein",
 		"description": "Bezeichnung für die Kategorie Allgemeine Einstellungen"
 	},
+	"generic_pin_tabs": {
+		"message": "generische $pinned $tabs",
+		"description": "Bevorzugte Tab-Karten des Benutzers, die nicht organisations-spezifisch sind"
+	},
+	"generic_tabs": {
+		"message": "generische $tabs",
+		"description": "Bevorzugte Tab-Karten des Benutzers, die nicht organisations-spezifisch sind"
+	},
 	"help": {
 		"message": "Hilfe",
 		"description": ""
@@ -494,6 +634,14 @@
 		"message": "Neu favorisierte Tabs werden am Anfang Ihrer Tab-Liste in der Setup-Leiste eingefügt, anstatt am Ende angefügt zu werden.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Wenn diese Option aktiviert ist siehst du deine $tabs sobald du $salesforce_setup startest",
+		"description": "[Einstellungs-Hilfe] für die optionale Berechtigung, die es uns ermöglicht, bereit zu sein, sobald $salesforce_setup geöffnet wird"
+	},
+	"help_allow_export": {
+		"message": "Wenn diese Option aktiviert ist, kannst du deine $tabs $export und sie auf deinem Computer speichern.",
+		"description": "[Einstellungs-Hilfe] für die optionale Berechtigung, die es uns ermöglicht, die Tab auf den Computer des Benutzers herunterzuladen"
+	},
 	"help_automatic_open_login": {
 		"message": "Wenn Sie außerhalb einer Salesforce-Domäne auf das Erweiterungs-Popup klicken, gelangen Sie automatisch zur Salesforce-Anmeldeseite.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -501,6 +649,10 @@
 	"help_automatic_open_setup": {
 		"message": "Wenn Sie innerhalb einer Salesforce-Domäne, aber nicht auf einer Einrichtungsseite auf das Erweiterungs-Popup klicken, gelangen Sie automatisch zur Salesforce-Einrichtungsseite.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Sie können Ihre $tabs neu anordnen, indem Sie die Punkte verwenden und sie ziehen.",
+		"description": "[manage-tabs] Erklärung, wie man die Tab zieht"
 	},
 	"help_keep_sort": {
 		"message": "Wenn aktiviert, werden Ihre Tabs in sortierter Reihenfolge gehalten – entweder nach Beschriftung, URL oder Org; je nachdem, was Sie auswählen.",
@@ -546,9 +698,33 @@
 		"message": "Deaktiviert die Erweiterungsprüfung, die überprüft, ob ein URL-Fragment mit dem Format von Salesforce-Datensatz-/Objekt-IDs übereinstimmt (wird verwendet, um den gespeicherten Tab automatisch als Org Tab festzulegen).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Hier finden Sie ein Untermenü, um verschiedene Aktionen für den $tab in derselben Zeile auszuführen.",
+		"description": "[manage-tabs] Erklärung, was der Pfeil auf der rechten Seite enthält"
+	},
+	"help_tab_label": {
+		"message": "Dies ist der Name, unter dem Sie sich merken, wohin dieser $tab Sie führt.",
+		"description": "[manage-tabs] Erklärung, was das Tab-Label ist"
+	},
+	"help_tab_org": {
+		"message": "Dies ist der Name der Salesforce $org in der dieser $tab angezeigt wird Wenn das Feld leer bleibt wird dieser $tab in jeder Salesforce $org angezeigt die Sie besuchen",
+		"description": "[manage-tabs] Erklärung, was die Tab-Org ist"
+	},
+	"help_tab_url": {
+		"message": "Dies ist der (verkürzte) Link, zu dem Sie weitergeleitet werden, wenn Sie auf diesen $tab klicken.",
+		"description": "[manage-tabs] Erklärung, was die Tab-URL ist"
+	},
 	"help_tip_click_link": {
 		"message": "Klicken Sie, um zur Dokumentation für diese Einstellung weitergeleitet zu werden!",
 		"description": "[einstellungen-hilfe] Handlungsaufforderung, damit der Benutzer mehr über eine bestimmte Einstellung lesen kann"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder $tabs ausblenden",
+		"description": "[manage-tabs] Schaltflächenbeschriftung zum Ausblenden anderer Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "wenn Sie auf das Erweiterungs-Popup klicken",
+		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"import": {
 		"message": "Importieren",
@@ -566,6 +742,10 @@
 		"message": "Ungültiger Dateityp.\nNur JSON-Dateien werden unterstützt.",
 		"description": "[error] Die für den Import verwendete Datei ist kein JSON."
 	},
+	"import_metadata": {
+		"message": "Tab-Metadaten importieren (\"Klickanzahl\", \"Klickdatum\" usw.).",
+		"description": "[label] alles importieren, was während des Importvorgangs in der Datei gefunden wird"
+	},
 	"import_successful": {
 		"message": "Erfolgreich importiert",
 		"description": "[import] Der Import wurde abgeschlossen. Anschließend wird die Anzahl der importierten Datensätze angezeigt"
@@ -577,6 +757,10 @@
 	"import_title": {
 		"message": "$import_tabs aus JSON-Datei",
 		"description": "[Popup] Titel auf der Import-Schaltfläche"
+	},
+	"inactive": {
+		"message": "Inaktiv",
+		"description": "Wird in Umschaltern für den inaktiven Zustand verwendet"
 	},
 	"insert_another": {
 		"message": "Weiteren einfügen",
@@ -594,6 +778,10 @@
 		"message": "Kursiv",
 		"description": "Schriftstiloption für kursiven Text"
 	},
+	"label": {
+		"message": "Beschriftung",
+		"description": "[key] der Name des Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce-eigene Navigationstechnologie"
@@ -601,6 +789,18 @@
 	"login_to_salesforce": {
 		"message": "Bei Salesforce anmelden",
 		"description": "[notSalesforceSetup] Aufruf zur Anmeldung bei Salesforce"
+	},
+	"manage_tabs": {
+		"message": "$tabs verwalten",
+		"description": "[modal-title] Modal zur Verwaltung gespeicherter $tabs mit bearbeitbaren Feldern und Drag-to-Reorder"
+	},
+	"manage_tabs_explainer": {
+		"message": "Bearbeiten, ordnen und verwalten Sie Ihre gespeicherten $tabs direkt in diesem Modal. Ziehen Sie Zeilen, um die Reihenfolge zu ändern, oder nutzen Sie das Dropdown-Menü für weitere Aktionen.",
+		"description": "[modal-explainer] Erklärt die Funktionen des Modals zur Tab-Verwaltung"
+	},
+	"must_non_empty_str": {
+		"message": "muss eine nicht-leere Zeichenkette sein",
+		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -613,6 +813,10 @@
 	"no_match": {
 		"message": "Keine Aktion gefunden, die übereinstimmt",
 		"description": "[error] In Salesforce stimmt die angeforderte Aktion mit keiner verfügbaren Aktion überein."
+	},
+	"no_tabs_to_export": {
+		"message": "Keine Tabs zum Exportieren",
+		"description": "[toast] Fehler, wenn keine Tabs zum Exportieren vorhanden sind"
 	},
 	"nss_invalid_url": {
 		"message": "Ungültige URL erkannt.",
@@ -646,12 +850,20 @@
 		"message": "Neue Tabs vorne hinzufügen.",
 		"description": "[settings] ermöglicht es dem Benutzer, alle neuen Tabs vorne hinzuzufügen"
 	},
+	"opt_allow_domains": {
+		"message": "Erlaube $extension_label den Zugriff auf Salesforce-Seiten, wenn du diese besuchst.",
+		"description": "[Einstellung] optionale Berechtigung zum Ausführen der Erweiterungen, wenn der Benutzer $salesforce_setup besucht"
+	},
+	"opt_allow_export": {
+		"message": "Erlaube $extension_label deine $tabs zu exportieren wenn du dies anforderst",
+		"description": "[Einstellung] optionale Berechtigung, die es uns ermöglicht, die Tab des Benutzers zu exportieren"
+	},
 	"opt_automatic_open_login": {
-		"message": "Öffnen Sie die $salesforce_login-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich nicht auf einer Salesforce-Seite befinden.",
+		"message": "Öffnen Sie die $salesforce_login Seite automatisch wenn Sie auf das Popup klicken während Sie sich nicht auf einer Salesforce Seite befinden",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer zufälligen Website befindet"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Öffnen Sie die $salesforce_setup-Seite automatisch, wenn Sie auf das Popup klicken, während Sie sich auf einer Salesforce-Seite befinden.",
+		"message": "Öffnen Sie die $salesforce_setup Seite automatisch wenn Sie auf das Popup klicken während Sie sich auf einer Salesforce Seite befinden",
 		"description": "[Einstellung] wenn der Benutzer das Popup öffnet, während er sich auf einer Salesforce-Website befindet"
 	},
 	"opt_confirm_save": {
@@ -683,11 +895,11 @@
 		"description": "[Einstellung] Ermöglicht dem Benutzer zu verhindern, dass die Erweiterung nach neuen Versionen sucht"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Öffnen Sie die $salesforce_login-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
+		"message": "Öffnen Sie die $salesforce_login Seite immer im selben Tab wenn Sie auf das Popup klicken",
 		"description": "[Einstellung]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Öffnen Sie die $salesforce_setup-Seite immer im selben Tab, wenn Sie auf das Popup klicken.",
+		"message": "Öffnen Sie die $salesforce_setup Seite immer im selben Tab wenn Sie auf das Popup klicken",
 		"description": "[Einstellung]"
 	},
 	"opt_pick_language": {
@@ -722,9 +934,21 @@
 		"message": "Oder $drop",
 		"description": "[Importieren] Ermöglichen Sie dem Benutzer, Dateien mit der Maus zu verschieben und abzulegen"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] die Salesforce $org des Tab"
+	},
 	"org_link": {
 		"message": "Org-Link",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "Org $pinned $tabs",
+		"description": "Tab-Karten, die organisations-spezifisch sind"
+	},
+	"org_tabs": {
+		"message": "Org $tabs",
+		"description": "Tab-Karten, die organisations-spezifisch sind"
 	},
 	"other_org_info": {
 		"message": "Weitere Org-Informationen",
@@ -737,6 +961,22 @@
 	"overwrite_tabs": {
 		"message": "Gespeicherte Tabs überschreiben.",
 		"description": "[label] Löscht alle gespeicherten Tabs während des Importvorgangs"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "Seite wird im aktuellen Browser Tab geöffnet",
+		"description": "[placeholder] wird von anderen Texten verwendet"
+	},
+	"permission_request_failure": {
+		"message": "Die Berechtigung wurde nicht erteilt.",
+		"description": "[Fehler] der Benutzer hat uns gebeten, eine Berechtigung anzufordern, hat diese dann aber nicht akzeptiert"
+	},
+	"permission_request_success": {
+		"message": "Die Berechtigung wurde erteilt!",
+		"description": "[Erfolg] der Benutzer hat uns gebeten, eine Berechtigung anzufordern, und er hat sie akzeptiert"
+	},
+	"pinned": {
+		"message": "Angepinnt",
+		"description": "Tab-Karten des Benutzers, die sich immer am Anfang der Liste befinden"
 	},
 	"preserve_org_tabs": {
 		"message": "Tabs für andere Orgs beibehalten.",
@@ -763,11 +1003,11 @@
 		"description": "[req_permission] Beschriftung, wenn der Benutzer dauerhaft nicht gefragt werden möchte"
 	},
 	"req_permissions_header": {
-		"message": "Bitte erlauben Sie uns den automatischen Zugriff\nauf $salesforce_setup-Seiten.",
+		"message": "Bitte erlauben Sie uns den automatischen Zugriff\nauf $salesforce_setup Seiten",
 		"description": "[req_permission] Kopfzeile der Seite zur Anforderung von Berechtigungen"
 	},
 	"req_permissions_paragraph": {
-		"message": "Wenn Sie möchten, können Ihre bevorzugten Tabs\nangezeigt werden, sobald Sie zu einer $salesforce_setup-Seite navigieren,\nohne jedes Mal auf diese Erweiterung klicken zu müssen.",
+		"message": "Wenn Sie möchten können Ihre bevorzugten Tabs\nangezeigt werden sobald Sie zu einer $salesforce_setup Seite navigieren\nohne jedes Mal auf diese Erweiterung klicken zu müssen",
 		"description": "[req_permission] Text zur Erläuterung, warum die Berechtigungen angefordert werden"
 	},
 	"required": {
@@ -778,6 +1018,10 @@
 		"message": "= Erforderliche Informationen",
 		"description": "[modal] Zeigt an, dass bestimmte Informationen notwendig sind"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce-Domäne",
+		"description": "[placeholder] wird von anderen Texten verwendet"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Die Salesforce Lightning Plattform"
@@ -785,6 +1029,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce-Anmeldeseite (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce-Seite",
+		"description": "[placeholder] wird in anderen Texten verwendet"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -797,6 +1045,22 @@
 	"save_tab": {
 		"message": "Als Tab speichern",
 		"description": "[alt] Alternativtext, wenn Bilder nicht angezeigt werden."
+	},
+	"select_all": {
+		"message": "Alle Auswählen",
+		"description": "[modal] Schaltfläche, um alle Tabs im Export-Modal auszuwählen"
+	},
+	"select_tabs": {
+		"message": "Wählen Sie, welche $tabs Sie möchten",
+		"description": "[import] lässt den Benutzer auswählen, welche $tabs importiert werden sollen, bevor sie importiert werden"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] lässt den Benutzer auswählen, welche $tabs exportiert werden sollen, bevor sie exportiert werden"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] lässt den Benutzer auswählen, welche $tabs importiert werden sollen, bevor sie importiert werden"
 	},
 	"send_tip": {
 		"message": "Senden Sie uns ein Trinkgeld ❤️",
@@ -829,6 +1093,126 @@
 	"set_org_styler": {
 		"message": "Org-Styler",
 		"description": "Bezeichnung zum Konfigurieren des Stils orgspezifischer Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Beschriftung zur Vorschau des Erscheinungsbilds generischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Beschriftung zur Konfiguration des Stils generischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Beschriftung zur Vorschau des Erscheinungsbilds organisations-spezifischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Beschriftung zur Konfiguration des Stils organisations-spezifischer Tab-Karten, wenn sie angepinnt sind"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für generische Tab-Karten"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Farbe der oberen Leiste für aktive generische Tab-Karten"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für aktive Org Tab-Karten"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe für organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für aktive organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe für Org Tab-Karten"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für aktive Org Tab-Karten"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Textfarbe für organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für aktive organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen für Org Tab-Karten"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für aktive Org Tab-Karten"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe für organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für aktive organisations-spezifische Tab-Karten"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe für Org Tab-Karten"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Beschriftung zum Festlegen der Farbe der oberen Leiste für aktive Org Tab-Karten"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Geben Sie die Hintergrundfarbe für Ihre aktiven generischen Tab-s ein.",
@@ -946,13 +1330,57 @@
 		"message": "Setup-Seite",
 		"description": "[notSalesforceSetup] Seite zur Änderung der Salesforce-Einstellungen"
 	},
+	"show_all_tabs": {
+		"message": "Alle $tabs anzeigen",
+		"description": "[manage-tabs] Schaltflächenbeschriftung zum Anzeigen aller Tab"
+	},
 	"skip": {
 		"message": "Überspringen",
 		"description": "[req_permission] Schaltfläche, um keine Berechtigungen zu erteilen"
 	},
+	"style_generic_pinned": {
+		"message": "Stil angepinnter $generic_tabs",
+		"description": "[options] Umschaltbeschriftung zum Stylen angepinnter generischer Tab-Karten"
+	},
+	"style_org_pinned": {
+		"message": "Stil angepinnter $org_tabs",
+		"description": "[options] Umschaltbeschriftung zum Stylen angepinnter Org Tab-Karten"
+	},
+	"style_settings_background_label": {
+		"message": "Geben Sie die Hintergrundfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Hintergrundfarbe"
+	},
+	"style_settings_border_color_label": {
+		"message": "Geben Sie die Rahmenfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Rahmenfarbe"
+	},
+	"style_settings_color_label": {
+		"message": "Geben Sie die Farbe des Textes für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Textfarbe"
+	},
+	"style_settings_decoration_label": {
+		"message": "Wählen Sie einen oder mehrere Dekorationsstile für Ihre aus",
+		"description": "Aufforderung zur Auswahl von Dekorationsstilen"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Geben Sie die Hover-Hintergrundfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Hover-Hintergrundfarbe"
+	},
+	"style_settings_shadow_label": {
+		"message": "Geben Sie die Schattenfarbe für Ihre ein",
+		"description": "Beschriftung zum Festlegen der Schattenfarbe"
+	},
+	"style_settings_top_active_label": {
+		"message": "Geben Sie die Farbe für die Leiste oben in Ihren aktiven ein",
+		"description": "Beschriftung zum Festlegen der aktiven Farbe der oberen Leiste"
+	},
 	"successfully_imported": {
 		"message": "Erfolgreich importiert",
 		"description": "[toast] Der Benutzer hat Tabs aus einer externen Datei hinzugefügt."
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "einer der Favoriten-Links des Benutzers"
 	},
 	"tab_explain": {
 		"message": "Jedes Element muss 'label' und 'url' als Zeichenketten enthalten. Zusätzlich kann jedes Element ein 'org' als Zeichenkette haben.",
@@ -1002,6 +1430,10 @@
 		"message": "Tabs",
 		"description": "Die favorisierten Links des Benutzers."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Erfolgreich Exportiert",
+		"description": "[toast] Erfolgsmeldung, wenn Tabs exportiert wurden"
+	},
 	"tabs_saved": {
 		"message": "Tabs gespeichert.",
 		"description": "[toast] Tabs wurden erfolgreich gespeichert."
@@ -1022,6 +1454,14 @@
 		"message": "Wellig unterstreichen",
 		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Sie haben nicht gespeicherte Änderungen. Möchten Sie die Seite verlassen, ohne zu speichern?",
+		"description": "[manage-tabs] der Benutzer wollte zu einem Tab wechseln, ohne vorher zu speichern"
+	},
+	"unselect_all": {
+		"message": "Auswahl Aufheben",
+		"description": "[modal] Schaltfläche, um die Auswahl aller Tabs im Export-Modal aufzuheben"
+	},
 	"update_available": {
 		"message": "Update verfügbar",
 		"description": "ein neues Update für die Erweiterung ist verfügbar"
@@ -1030,9 +1470,21 @@
 		"message": "Hochladen",
 		"description": "[import] Ermöglicht es dem Benutzer, durch seine Dateien zu stöbern und die richtige auszuwählen"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] der Link des Tab"
+	},
 	"users": {
 		"message": "Benutzer",
 		"description": "Der Name der Seite, die sich auf ManageUsers/home bezieht"
+	},
+	"warn_upgrade_backup": {
+		"message": "Bitte exportieren Sie Ihre neuen Tab-Karten, da die von Ihnen verwendete Datei in zukünftigen Versionen nicht mehr unterstützt wird.",
+		"description": "[warning] der Benutzer hat seine Tab-Karten mit einer veralteten Konfiguration der json-Datei importiert"
+	},
+	"when_click_popup_while": {
+		"message": "Seite beim Klicken auf das Popup, während",
+		"description": "[placeholder] wird von anderen Texten verwendet"
 	},
 	"where_to": {
 		"message": "Wohin?",

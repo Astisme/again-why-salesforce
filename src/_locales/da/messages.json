@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Slet",
+		"description": "[administrer-Tab] slet en række"
+	},
+	"act_open": {
+		"message": "🪂 Åbn",
+		"description": "[administrer-Tab] Åbn den valgte Tab"
+	},
+	"actions": {
+		"message": "Handlinger",
+		"description": "Rullemenu-etiket til Tab-handlinger"
+	},
+	"active": {
+		"message": "Aktiv",
+		"description": "Bruges i skiftere for aktiv tilstand"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktive $generic_pin_tabs",
+		"description": "Brugerens generiske fastgjorte Tab'er, som i øjeblikket er aktive"
+	},
+	"active_generic_tabs": {
+		"message": "aktive $generic_tabs",
+		"description": "Brugerens generiske Tab'er, som i øjeblikket er aktive"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktive $org_pin_tabs",
+		"description": "Brugerens organisations-specifikke fastgjorte Tab'er, som i øjeblikket er aktive"
+	},
+	"active_org_tabs": {
+		"message": "aktive $org_tabs",
+		"description": "Brugerens organisations-specifikke Tab'er, som i øjeblikket er aktive"
+	},
 	"allow": {
 		"message": "Tillad",
 		"description": "[req_permission] knap for at tillade tilladelser"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstmenu]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] åbn modalen for at administrere gemte $tabs direkte på Salesforce Setup-siden"
+	},
 	"cxm_move": {
 		"message": "🧭 Flyt Tab",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstmenu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Fastgør",
+		"description": "[context-menu] lader brugeren beholde denne Tab i begyndelsen af deres liste"
+	},
 	"cxm_remove": {
 		"message": "💥 Fjern Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Andre Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Fjern fastgjorte",
+		"description": "[context-menu] lader brugeren fjerne deres fastgjorte Tab'er"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tab til højre",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Denne Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Fjern ikke-fastgjorte",
+		"description": "[context-menu] lader brugeren fjerne deres ikke-fastgjorte Tab'er"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Nulstil standard-Tab",
@@ -151,6 +199,14 @@
 		"message": "🎯 Sorter Tabs",
 		"description": "kontekstmenu for at lade brugerne sortere deres Tabs automatisk (forældremenu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ efter Brug",
+		"description": "kontekstmenu for at lade brugere sortere deres Tab'er efter, hvor mange gange de klikker på deres Tab'er"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ efter Tid",
+		"description": "kontekstmenu for at lade brugere sortere deres Tab'er efter, hvornår der blev klikket på Tab'erne"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 efter Label",
 		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter label"
@@ -163,25 +219,33 @@
 		"message": "🤖 efter Url",
 		"description": "kontekstmenu for at lade brugerne sortere deres Tabs efter URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Skjul ikke-Org Tab'er",
+		"description": "[context-menu] skjul midlertidigt generiske Tab'er"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Skjul Org Tab'er",
+		"description": "[context-menu] skjul midlertidigt organisations-specifikke Tab'er"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Frigør",
+		"description": "[context-menu] lader brugeren fjerne denne Tab fra deres fastgjorte liste"
+	},
 	"cxm_update": {
 		"message": "✏️ Opdater Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Skift Organisation",
+		"message": "👜 Skift Org",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Andre opdateringer",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Slet",
-		"description": "[popup] slet en række"
-	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[popup] titel på papirkurven for at tømme alle Tabs"
+		"message": "Slet alle $tabs",
+		"description": "[popup] titel på papirkurven for at tømme alle $tabs"
 	},
 	"descending": {
 		"message": "Faldende (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Fejl ved tilføjelse af Tab.",
 		"description": "[fejl] Generisk fejl ved tilføjelse af en Tab"
+	},
+	"error_already_pinned": {
+		"message": "Denne Tab var allerede fastgjort.",
+		"description": "[error] brugeren forsøgte at fastgøre en allerede fastgjort Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Denne Tab var allerede frigjort.",
+		"description": "[error] brugeren forsøgte at frigøre en allerede frigjort Tab"
+	},
+	"error_cannot_move": {
+		"message": "Denne Tab kan ikke flyttes!",
+		"description": "[error] den anmodede Tab kan ikke flyttes i øjeblikket."
+	},
+	"error_cannot_move_dir": {
+		"message": "Denne Tab kan ikke flyttes i denne retning!",
+		"description": "[error] den anmodede Tab kan ikke flyttes i øjeblikket."
 	},
 	"error_check_update": {
 		"message": "Fejl under kontrol efter opdateringer",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Fejl ved import:\n",
 		"description": "[error] der opstod en fejl under importprocessen"
+	},
+	"error_internal": {
+		"message": "Intern Fejl",
+		"description": "[error] generel fejl"
 	},
 	"error_invalid_key": {
 		"message": "Den nøgleparameter, der blev sendt til funktionen, er ugyldig",
@@ -323,9 +407,21 @@
 		"message": "Intet objekt blev angivet til kontrol!",
 		"description": "[error] intet objekt blev angivet til kontrol"
 	},
+	"error_no_pinned": {
+		"message": "Du har endnu ingen fastgjorte Tab'er!",
+		"description": "[error] brugeren forsøgte at fjerne de fastgjorte Tab'er, men de har ingen fastgjorte Tab'er"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab blev ikke fundet.",
 		"description": "[error] udvidelsen kunne ikke finde, hvor den skulle placere de gemte Tabs"
+	},
+	"error_no_tabs_selected": {
+		"message": "Ingen Tabs Valgt til eksport",
+		"description": "[toast] fejl når brugeren forsøger at eksportere uden valgte Tabs"
+	},
+	"error_no_unpinned": {
+		"message": "Du har ingen ikke-fastgjorte Tab'er!",
+		"description": "[error] brugeren forsøgte at fjerne de ikke-fastgjorte Tab'er, men de har ingen ikke-fastgjorte Tab'er"
 	},
 	"error_no_url": {
 		"message": "Ingen URL blev angivet til kontrol!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Ikke initialiseret endnu.",
 		"description": "[fejl] Generisk fejl når en variabel ikke er klar"
+	},
+	"error_pin_tab": {
+		"message": "Fejl under fastgørelse af Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Fejl ved behandling af Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Fejl ved fjernelse af andre Tabs.",
 		"description": "[fejl] Generisk fejl ved fjernelse af andre Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Fejl under fjernelse af fastgjorte Tab'er.",
+		"description": "[error] Generel fejl brugt under fjernelse af ikke-fastgjorte Tab'er"
+	},
 	"error_removing_tab": {
 		"message": "Fejl ved fjernelse af Tab.",
 		"description": "[fejl] Generisk fejl ved fjernelse af en Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Fejl under fjernelse af ikke-fastgjorte Tab'er.",
+		"description": "[error] Generel fejl brugt under fjernelse af ikke-fastgjorte Tab'er"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Fejl ved fjernelse af alle synlige Tab.",
@@ -383,6 +491,14 @@
 		"message": "Kan ikke synkronisere tomme Tabs!",
 		"description": "[error] der blev forsøgt at synkronisere ingenting"
 	},
+	"error_tab_click_count": {
+		"message": "Klikantal skal være et ikke-negativt tal",
+		"description": "[error] brugeren forsøgte at oprette en Tab med et forkert klikantal"
+	},
+	"error_tab_click_date": {
+		"message": "Klikdato skal være et tal, der ikke resulterer i en dato i fremtiden",
+		"description": "[error] brugeren forsøgte at oprette en Tab med en forkert klikdato"
+	},
 	"error_tab_constructor": {
 		"message": "Brug Tab.create() i stedet for new Tab()",
 		"description": "[fejl] Informer udvikleren om, hvordan man bruger klassen Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab blev ikke fundet.",
 		"description": "[error] Tab blev ikke inkluderet i array'et"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab er endnu ikke fastgjort!",
+		"description": "[error] brugeren forsøgte at frigøre en ikke-fastgjort Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Ved kald med et objekt, skal der ikke sendes andet med.",
@@ -435,6 +555,10 @@
 		"message": "translator er endnu ikke initialiseret.",
 		"description": "[fejl] TranslationService var ikke klar"
 	},
+	"error_unknown_file_structure": {
+		"message": "Vi kunne ikke forstå en fil, du ønskede at importere\nHvis problemet fortsætter, bedes du dele det med os ved at åbne et GitHub-problem",
+		"description": "[import] brugerens fil blev ikke genkendt"
+	},
 	"error_unknown_message": {
 		"message": "Ukendt meddelelse modtaget",
 		"description": "en ukendt meddelelse er modtaget fra en lytter"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Ukendt anmodning.",
 		"description": "[fejl] Generisk fejl efter modtagelse af en ukendt besked"
+	},
+	"error_unpin_tab": {
+		"message": "Fejl under frigørelse af Tab",
+		"description": "[error]"
 	},
 	"error_useless_remove": {
 		"message": "Kan ikke fjernes:\nDet er ikke muligt at fjerne en side, som ikke er blevet gemt tidligere",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "Eksporter",
 		"description": "[popup] eksportknap"
+	},
+	"export_tabs": {
+		"message": "Eksporter Tabs",
+		"description": "[modal] titel for eksport Tabs modal"
 	},
 	"export_title": {
 		"message": "Eksporter alle Tabs",
@@ -483,6 +615,14 @@
 		"message": "Generelt",
 		"description": "Etiket for kategorien med generelle indstillinger"
 	},
+	"generic_pin_tabs": {
+		"message": "generiske $pinned Tab",
+		"description": "Brugerens foretrukne Tab'er, som ikke er organisations-specifikke"
+	},
+	"generic_tabs": {
+		"message": "generiske $tabs",
+		"description": "Brugerens foretrukne Tab'er, som ikke er organisations-specifikke"
+	},
 	"help": {
 		"message": "Hjælp",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Nyligt favoriserede Tabs indsættes foran på din Tab-liste i opsætningslinjen i stedet for at blive tilføjet i slutningen.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Når aktiveret vil du kunne se dine $tabs så snart du starter $salesforce_setup",
+		"description": "[indstillingshjælp] til valgfri tilladelse til at gøre det muligt for os at være klar, så snart $salesforce_setup åbnes"
+	},
+	"help_allow_export": {
+		"message": "Når aktiveret, vil du være i stand til at $export dine $tabs og gemme dem på din computer.",
+		"description": "[indstillingshjælp] til valgfri tilladelse til at gøre det muligt for os at downloade Tab på brugerens maskine"
+	},
 	"help_automatic_open_login": {
 		"message": "Hvis du klikker på udvidelsespop op-vinduet uden for et Salesforce-domæne, fører det dig automatisk til Salesforce-loginsiden.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "Hvis du klikker på udvidelsespop op-vinduet inden for et Salesforce-domæne, men ikke på en opsætningsside, fører det dig automatisk til Salesforce-opsætningssiden.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Du kan ændre rækkefølgen af dine $tabs ved at bruge prikkerne og trække i dem.",
+		"description": "[manage-tabs] forklar, hvordan man trækker i Tab"
 	},
 	"help_keep_sort": {
 		"message": "Når aktiveret, holdes dine Tabs i sorteret rækkefølge – enten efter label, URL eller Org; afhængigt af hvad du vælger.",
@@ -547,9 +699,33 @@
 		"message": "Deaktiverer udvidelseskontrollen, der verificerer, at et URL-fragment matcher formatet for Salesforce-post/objekt-ID'er (bruges til automatisk at indstille den gemte Tab som en Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Her finder du en undermenu til at udføre forskellige handlinger på den $tab der er i samme række",
+		"description": "[manage-tabs] forklar, hvad pilen til højre indeholder"
+	},
+	"help_tab_label": {
+		"message": "Dette er det almindelige navn, du vil bruge til at huske, hvor denne $tab fører dig hen.",
+		"description": "[manage-tabs] forklar, hvad Tab-etiketten er"
+	},
+	"help_tab_org": {
+		"message": "Dette er navnet på den Salesforce $org hvor denne $tab vil blive vist Hvis feltet efterlades tomt vil denne $tab blive vist i hver Salesforce $org du besøger",
+		"description": "[manage-tabs] forklar, hvad Tab Org er"
+	},
+	"help_tab_url": {
+		"message": "Dette er det (forkortede) link, som du vil blive videresendt til, når du klikker på denne $tab",
+		"description": "[manage-tabs] forklar, hvad Tab-URL'en er"
+	},
 	"help_tip_click_link": {
 		"message": "Klik for at blive omdirigeret til dokumentationen for denne indstilling!",
 		"description": "[indstillinger-hjælp] opfordring til handling for at lade brugeren læse mere om en specifik indstilling"
+	},
+	"hide_other_org_tabs": {
+		"message": "Skjul $other_org_placeholder $tabs",
+		"description": "[manage-tabs] knap-etiket til at skjule andre Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "hvis du klikker på udvidelsens popup-vindue",
+		"description": "[placeholder] bruges af andre tekster"
 	},
 	"import": {
 		"message": "Importer",
@@ -567,6 +743,10 @@
 		"message": "Ugyldig filtype.\nKun JSON-filer understøttes.",
 		"description": "[error] filen til import er ikke en JSON-fil"
 	},
+	"import_metadata": {
+		"message": "Importer Tab metadata (\"Klikantal\", \"Klikdato\" osv.).",
+		"description": "[label] importer alt fundet i filen under importprocessen"
+	},
 	"import_successful": {
 		"message": "Importen lykkedes",
 		"description": "[import] importen er fuldført. Herefter vises antallet af importerede poster"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "$import_tabs fra JSON-fil",
 		"description": "[popup] titel på importknappen"
+	},
+	"inactive": {
+		"message": "Inaktiv",
+		"description": "Bruges i skiftere for inaktiv tilstand"
 	},
 	"insert_another": {
 		"message": "Indsæt en anden",
@@ -595,6 +779,10 @@
 		"message": "Kursiv",
 		"description": "Skrifttypemulighed for kursiv tekst"
 	},
+	"label": {
+		"message": "Etiket",
+		"description": "[key] navnet på Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigation",
 		"description": "Salesforce’s tilpassede navigations-teknologi"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Log ind på Salesforce",
 		"description": "[notSalesforceSetup] opfordring på en knap til at omdirigere brugeren til Salesforces login-side"
+	},
+	"manage_tabs": {
+		"message": "Administrer $tabs",
+		"description": "[modal-title] modal til at administrere gemte $tabs med redigerbare felter og træk-for-at-ændre-rækkefølge"
+	},
+	"manage_tabs_explainer": {
+		"message": "Rediger, omorganiser og administrer dine gemte $tabs direkte fra denne modal. Træk i rækkerne for at ændre rækkefølgen, eller brug rullemenuen for flere handlinger.",
+		"description": "[modal-explainer] forklarer funktionaliteten i modalen til administration af faner"
+	},
+	"must_non_empty_str": {
+		"message": "skal være en ikke-tom streng",
+		"description": "[placeholder] bruges af andre tekster"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -614,6 +814,10 @@
 	"no_match": {
 		"message": "Ingen matchende handling fundet",
 		"description": "[error] når switch-sætningen ikke kan matche den anmodede handling"
+	},
+	"no_tabs_to_export": {
+		"message": "Ingen Tabs at eksportere",
+		"description": "[toast] fejl når der ikke er nogen Tabs at eksportere"
 	},
 	"nss_invalid_url": {
 		"message": "Ugyldig URL registreret.",
@@ -647,12 +851,20 @@
 		"message": "Tilføj nye Tabs foran.",
 		"description": "[settings] lad brugeren tilføje alle nye Tabs foran"
 	},
+	"opt_allow_domains": {
+		"message": "Tillad $extension_label at få adgang til Salesforce-sider, når du besøger dem.",
+		"description": "[indstilling] valgfri tilladelse til at køre udvidelserne, når brugeren besøger $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Tillad $extension_label at eksportere dine $tabs når du anmoder om det",
+		"description": "[indstilling] valgfri tilladelse til at gøre det muligt for os at eksportere brugerens Tab"
+	},
 	"opt_automatic_open_login": {
-		"message": "Åbn automatisk $salesforce_login-siden, når du klikker på pop op-vinduet, mens du ikke er på en Salesforce-side.",
+		"message": "Åbn automatisk $salesforce_login siden, når du klikker på pop op-vinduet, mens du ikke er på en Salesforce-side.",
 		"description": "[indstilling] når brugeren åbner pop op-vinduet på et tilfældigt websted"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Åbn automatisk $salesforce_setup-siden, når du klikker på pop op-vinduet, mens du er på en Salesforce-side.",
+		"message": "Åbn automatisk $salesforce_setup siden, når du klikker på pop op-vinduet, mens du er på en Salesforce-side.",
 		"description": "[indstilling] når brugeren åbner pop op-vinduet på et Salesforce-websted"
 	},
 	"opt_confirm_save": {
@@ -684,11 +896,11 @@
 		"description": "[indstilling] lader brugeren forhindre udvidelsen i at søge efter nye udgivelser"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Åbn altid $salesforce_login-siden i samme Tab, når du klikker på pop op-vinduet.",
+		"message": "Åbn altid $salesforce_login siden i samme Tab, når du klikker på pop op-vinduet.",
 		"description": "[indstilling]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Åbn altid $salesforce_setup-siden i samme Tab, når du klikker på pop op-vinduet.",
+		"message": "Åbn altid $salesforce_setup siden i samme Tab når du klikker på pop op vinduet",
 		"description": "[indstilling]"
 	},
 	"opt_pick_language": {
@@ -723,9 +935,21 @@
 		"message": "Eller $drop",
 		"description": "[importer] lad brugeren flytte filer med musen og slippe dem"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab'ens Salesforce $org"
+	},
 	"org_link": {
 		"message": "Organisationslink",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "organisations-specifikke $pinned Tab",
+		"description": "Tab'er, som er organisations-specifikke"
+	},
+	"org_tabs": {
+		"message": "organisations-specifikke $tabs",
+		"description": "Tab'er, som er organisations-specifikke"
 	},
 	"other_org_info": {
 		"message": "Oplysninger om en anden Organisation",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Overskriv gemte Tabs.",
 		"description": "[label] slet alle gemte Tabs under import"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "side vil blive åbnet i den aktuelle browser Tab",
+		"description": "[placeholder] bruges af andre tekster"
+	},
+	"permission_request_failure": {
+		"message": "Tilladelsen blev ikke givet.",
+		"description": "[fejl] brugeren bad os om at anmode om en tilladelse, men accepterede den ikke"
+	},
+	"permission_request_success": {
+		"message": "Tilladelsen er blevet givet!",
+		"description": "[succes] brugeren bad os om at anmode om en tilladelse, og de accepterede den"
+	},
+	"pinned": {
+		"message": "Fastgjort",
+		"description": "Brugerens Tab'er, som altid findes i begyndelsen af listen"
 	},
 	"preserve_org_tabs": {
 		"message": "Bevar Tabs for andre organisationer.",
@@ -764,11 +1004,11 @@
 		"description": "[req_permission] mærkat når brugeren ikke ønsker at give tilladelser permanent"
 	},
 	"req_permissions_header": {
-		"message": "Tillad os venligst at få adgang til\n$salesforce_setup-sider automatisk.",
+		"message": "Tillad os venligst at få adgang til\n$salesforce_setup sider automatisk",
 		"description": "[req_permission] sidehoved på siden for at anmode om tilladelser"
 	},
 	"req_permissions_paragraph": {
-		"message": "Hvis du ønsker det, kan du få dine foretrukne Tabs vist\nså snart du navigerer til en $salesforce_setup-side\nuden at skulle klikke på denne udvidelse hver gang.",
+		"message": "Hvis du ønsker det kan du få dine foretrukne Tabs vist\nså snart du navigerer til en $salesforce_setup side\nuden at skulle klikke på denne udvidelse hver gang",
 		"description": "[req_permission] tekst, der forklarer, hvorfor tilladelserne anmodes om"
 	},
 	"required": {
@@ -779,6 +1019,10 @@
 		"message": "= Påkrævet information",
 		"description": "[modal] informerer brugeren om, at visse oplysninger er påkrævede"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domæne",
+		"description": "[placeholder] bruges af andre tekster"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning-platformen"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce-login",
 		"description": "Salesforce-login-siden (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce side",
+		"description": "[placeholder] bruges i andre tekster"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce-opsætning",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "Gem som Tab",
 		"description": "[alt] alternativ tekst når billeder ikke vises"
+	},
+	"select_all": {
+		"message": "Vælg Alt",
+		"description": "[modal] knap til at vælge alle Tabs i eksport modalen"
+	},
+	"select_tabs": {
+		"message": "Vælg hvilke $tabs du gerne vil",
+		"description": "[import] lad brugeren vælge hvilke $tabs der skal importeres, før de importeres"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] lad brugeren vælge hvilke $tabs der skal eksporteres, før de eksporteres"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] lad brugeren vælge hvilke $tabs der skal importeres, før de importeres"
 	},
 	"send_tip": {
 		"message": "Send os et tip ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "Organisations-styler",
 		"description": "Etiket til konfigurering af stilen for organisationsspecifikke Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etiket for forhåndsvisning af generisk Tab's udseende, når den er fastgjort"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etiket for konfiguration af stilen for generiske Tab'er, når de er fastgjort"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etiket for forhåndsvisning af organisations-specifik Tab's udseende, når den er fastgjort"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etiket for konfiguration af stilen for organisations-specifikke Tab'er, når de er fastgjort"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etiket til at indstille baggrundsfarve for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etiket til at indstille baggrundsfarve for generiske Tab'er"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etiket til at indstille kantfarve for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etiket til at indstille kantfarve for generiske Tab'er"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etiket til at indstille tekstfarve for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etiket til at indstille tekstfarve for generiske Tab'er"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Prompt til at vælge dekorationstypografier for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Prompt til at vælge dekorationstypografier for generiske Tab'er"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etiket til at indstille hover-baggrundsfarve for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etiket til at indstille hover-baggrundsfarve for generiske Tab'er"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etiket til at indstille skyggefarve for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etiket til at indstille skyggefarve for generiske Tab'er"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etiket til at indstille topbar-farve for aktive generiske Tab'er"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etiket til at indstille baggrundsfarve for aktive organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etiket til at indstille baggrundsfarve for organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etiket til at indstille kantfarve for aktive organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etiket til at indstille kantfarve for organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etiket til at indstille tekstfarve for aktive organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etiket til at indstille tekstfarve for organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Prompt til at vælge dekorationstypografier for aktive organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Prompt til at vælge dekorationstypografier for organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etiket til at indstille hover-baggrundsfarve for aktive organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etiket til at indstille hover-baggrundsfarve for organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etiket til at indstille skyggefarve for aktive organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etiket til at indstille skyggefarve for organisations-specifikke Tab'er"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etiket til at indstille topbar-farve for aktive organisations-specifikke Tab'er"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Indsæt baggrundsfarven for dine aktive generiske Tab-s.",
@@ -947,13 +1331,57 @@
 		"message": "Setup-side",
 		"description": "[notSalesforceSetup] siden til ændring af Salesforce-indstillinger"
 	},
+	"show_all_tabs": {
+		"message": "Vis alle $tabs",
+		"description": "[manage-tabs] knap-etiket til at vise alle Tab"
+	},
 	"skip": {
 		"message": "Spring over",
 		"description": "[req_permission] knap til at afvise at give tilladelser"
 	},
+	"style_generic_pinned": {
+		"message": "Styl fastgjorte $generic_tabs",
+		"description": "[options] Skiftemærkat til at style fastgjorte generiske Tab'er"
+	},
+	"style_org_pinned": {
+		"message": "Styl fastgjorte $org_tabs",
+		"description": "[options] Skiftemærkat til at style fastgjorte organisations-specifikke Tab'er"
+	},
+	"style_settings_background_label": {
+		"message": "Indsæt baggrundsfarven for dine",
+		"description": "Etiket til at indstille baggrundsfarve"
+	},
+	"style_settings_border_color_label": {
+		"message": "Indsæt kantfarven for dine",
+		"description": "Etiket til at indstille kantfarve"
+	},
+	"style_settings_color_label": {
+		"message": "Indsæt farven på teksten for dine",
+		"description": "Etiket til at indstille tekstfarve"
+	},
+	"style_settings_decoration_label": {
+		"message": "Vælg en eller flere dekorationstypografier for dine",
+		"description": "Prompt til at vælge dekorationstypografier"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Indsæt hover-baggrundsfarven for dine",
+		"description": "Etiket til at indstille hover-baggrundsfarve"
+	},
+	"style_settings_shadow_label": {
+		"message": "Indsæt skyggefarven for dine",
+		"description": "Etiket til at indstille skyggefarve"
+	},
+	"style_settings_top_active_label": {
+		"message": "Indsæt farven for bjælken øverst i dine aktive",
+		"description": "Etiket til at indstille topbar aktiv farve"
+	},
 	"successfully_imported": {
 		"message": "Importen var succesfuld",
 		"description": "[toast] brugeren importerede Tabs fra en ekstern fil med succes"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "et af brugerens foretrukne links"
 	},
 	"tab_explain": {
 		"message": "Hvert element skal have 'label' og 'url' som strenge. Derudover kan hvert element have 'org' som streng.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "brugerens favorittlinks"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Eksporteret Med Succes",
+		"description": "[toast] succesmeddelelse når Tabs er eksporteret"
+	},
 	"tabs_saved": {
 		"message": "Tabs gemt.",
 		"description": "[toast] Tabs blev gemt med succes."
@@ -1023,6 +1455,14 @@
 		"message": "Bølget understreget",
 		"description": "Dekorationsstilmulighed for at anvende en bølget understregning på Tab-tekst"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Du har ændringer, der ikke er gemt. Vil du forlade siden uden at gemme?",
+		"description": "[manage-tabs] brugeren bad om at gå til en Tab uden at gemme først"
+	},
+	"unselect_all": {
+		"message": "Fravælg Alt",
+		"description": "[modal] knap til at fravælge alle Tabs i eksport modalen"
+	},
 	"update_available": {
 		"message": "Opdatering tilgængelig",
 		"description": "en ny opdatering til udvidelsen er tilgængelig"
@@ -1031,9 +1471,21 @@
 		"message": "Upload",
 		"description": "[import] lader brugeren gennemse deres filer og vælge den rigtige"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab'ens link"
+	},
 	"users": {
 		"message": "Brugere",
 		"description": "navnet på siden relateret til ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Venligst eksporter dine nye Tab'er, da den fil, du har brugt, ikke vil blive understøttet i fremtidige udgivelser.",
+		"description": "[warning] brugeren importerede deres Tab'er ved hjælp af en forældet konfiguration af json-filen"
+	},
+	"when_click_popup_while": {
+		"message": "side når der klikkes på popup-vinduet, mens",
+		"description": "[placeholder] bruges af andre tekster"
 	},
 	"where_to": {
 		"message": "Hvorhen?",

@@ -1,17 +1,19 @@
 "use strict";
 import {
 	BROWSER,
+	EXTENSION_GITHUB_LINK,
 	EXTENSION_NAME,
+	EXTENSION_VERSION,
 	ISCHROME,
 	ISFIREFOX,
-	ISSAFARI,
-	MANIFEST,
 	NO_UPDATE_NOTIFICATION,
 	SETTINGS_KEY,
-	WHAT_EXPORT,
+	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
+import { isExportAllowed } from "/functions.js";
+import { TabContainer } from "/tabContainer.js";
 import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
 
 /**
@@ -48,7 +50,7 @@ async function _queryTabs(callback, count = 0) {
  * @param {Function} [callback] - A callback function to handle the retrieved tab. If not provided, a promise is returned.
  * @param {boolean} [fromPopup=false] - A flag indicating whether the function was called from a popup. If true, queries all tabs in the current window.
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
- * @returns {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
+ * @return {Promise|undefined} A promise that resolves to the current tab if no callback is provided; undefined if a callback is provided.
  */
 export function bg_getCurrentBrowserTab(callback = null) {
 	if (callback == null) {
@@ -81,7 +83,9 @@ export async function bg_notify(message) {
  */
 function _exportHandler(tabs) {
 	const jsonData = JSON.stringify(tabs);
-	const filename = `${EXTENSION_NAME}.json`;
+	const filename = `${EXTENSION_NAME}_${
+		Array.isArray(tabs) ? tabs.length : tabs[TabContainer.keyTabs]?.length
+	}-Tabs.json`;
 	if (ISFIREFOX) {
 		// Firefox implementation
 		const blob = new Blob([jsonData], { type: "application/json" });
@@ -107,7 +111,7 @@ function _exportHandler(tabs) {
 	} else {
 		// Safari and unidentified browsers: send a message to the content script
 		bg_notify({
-			what: WHAT_EXPORT,
+			what: WHAT_EXPORT_FROM_BG,
 			filename,
 			payload: jsonData,
 		});
@@ -118,6 +122,7 @@ function _exportHandler(tabs) {
  * Exports tab data as a JSON file. If no tab data is provided, it retrieves the data from storage.
  *
  * @param {Array|null} tabs - An array of tab objects to be exported as a JSON file. If null, the function fetches the tab data from storage.
+ * @return {Promise} from bg_getStorage
  */
 function exportHandler(tabs = null) {
 	if (tabs == null) {
@@ -130,7 +135,7 @@ function exportHandler(tabs = null) {
  * Attempts to set the browser action popup to the export-permission request page.
  * If the URL for the permission page cannot be obtained, no popup is set.
  *
- * @returns {boolean}
+ * @return {boolean}
  *   `true` if the popup was successfully set to the permission request page;
  *   `false` if the permission page URL could not be retrieved.
  */
@@ -151,21 +156,25 @@ function requestExportPermission() {
  * Checks whether downloads permission is already granted and launches the export handler.
  * If not, it triggers a notification prompting the user to open a popup to grant permission.
  *
- * @param {object[]|null} [tabs=null]
- *   Optional array of tab objects to pass through to the export handler.
- * @returns {void}
+ * @param {object[]|null} [tabs=null] Optional array of Tab objects to pass through to the export handler.
+ * @param {boolean} [checkOnly=false] Whether to check only or launch the export if allowed
+ * @return {boolean} whether the export of Tabs is allowed
  */
-export function checkLaunchExport(tabs = null) {
-	if (ISSAFARI || BROWSER.downloads != null) {
-		// downloads permission has already been granted
-		exportHandler(tabs);
-		return;
+export function checkLaunchExport(tabs = null, checkOnly = false) {
+	const isAllowed = isExportAllowed();
+	if (isAllowed) {
+		if (!checkOnly) {
+			// downloads permission has already been granted
+			exportHandler(tabs);
+		}
+	} else {
+		// show toast message to request the user to open the popup
+		bg_notify({
+			what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+			ok: requestExportPermission(),
+		});
 	}
-	// show toast message to request the user to open the popup
-	bg_notify({
-		what: WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
-		ok: requestExportPermission(),
-	});
+	return isAllowed;
 }
 
 /**
@@ -174,7 +183,7 @@ export function checkLaunchExport(tabs = null) {
  *
  * @param {string} latest - The latest version string.
  * @param {string} current - The current version string.
- * @returns {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
+ * @return {boolean} `true` if the latest version is newer than the current version, otherwise `false`.
  */
 function _isNewerVersion(latest, current) {
 	const latestParts = latest.split(".").map(Number);
@@ -200,7 +209,7 @@ function _isNewerVersion(latest, current) {
  * - Compares the current version with the latest GitHub release.
  * - If an update is available, a notification is triggered with update details.
  *
- * @returns {Promise<void>} A promise that resolves when the update check process completes.
+ * @return {Promise<void>} A promise that resolves when the update check process completes.
  */
 export async function checkForUpdates() {
 	// check user settings
@@ -227,18 +236,8 @@ export async function checkForUpdates() {
 		SETTINGS_KEY,
 	);
 	try {
-		const currentVersion = MANIFEST.version;
-		const homepageUrl = MANIFEST.homepage_url;
 		// Parse GitHub username and repo from homepage URL
-		const urlParts = homepageUrl?.split("github.com/");
-		// Validate homepage URL (must be GitHub)
-		if (
-			!homepageUrl?.startsWith("https://github.com/") ||
-			urlParts.length < 2
-		) {
-			console.error("no_manifest_github");
-			return;
-		}
+		const urlParts = EXTENSION_GITHUB_LINK.split("github.com/");
 		const repoPath = urlParts[1].replace(/\.git$/, "");
 		// Fetch latest release data from GitHub API
 		const response = await fetch(
@@ -255,7 +254,7 @@ export async function checkForUpdates() {
 				!release.prerelease &&
 				_isNewerVersion(
 					release.tag_name.replace(/^.*(-)?v/, ""),
-					currentVersion,
+					EXTENSION_VERSION,
 				)
 			)
 			.sort((a, b) => {
@@ -266,10 +265,9 @@ export async function checkForUpdates() {
 		if (latestVersion != null) {
 			bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
-				oldversion: currentVersion,
+				oldversion: EXTENSION_VERSION,
 				version: latestVersion,
-				link: homepageUrl,
-				//link: `${homepageUrl}/releases/tag/${BROWSER_NAME}-v${latestVersion}`,
+				link: EXTENSION_GITHUB_LINK,
 			});
 		}
 	} catch (error) {

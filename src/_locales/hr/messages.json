@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Obriši",
+		"description": "[upravljanje-Tab] obriši redak"
+	},
+	"act_open": {
+		"message": "🪂 Otvori",
+		"description": "[upravljanje-Tab] Otvori odabranu Tab"
+	},
+	"actions": {
+		"message": "Radnje",
+		"description": "Oznaka padajućeg izbornika za radnje s Tab"
+	},
+	"active": {
+		"message": "Aktivno",
+		"description": "Koristi se u preklopnicima za aktivno stanje"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktivno $generic_pin_tabs",
+		"description": "Korisnikovi opći Prikvačeni Tabovi koji su trenutačno aktivni"
+	},
+	"active_generic_tabs": {
+		"message": "aktivni $generic_tabs",
+		"description": "Korisnikovi opći Tabovi koji su trenutačno aktivni"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktivno $org_pin_tabs",
+		"description": "Korisnikovi org Prikvačeni Tabovi koji su trenutačno aktivni"
+	},
+	"active_org_tabs": {
+		"message": "aktivni $org_tabs",
+		"description": "Korisnikovi org Tabovi koji su trenutačno aktivni"
+	},
 	"allow": {
 		"message": "Dopusti",
 		"description": "[req_permission] gumb za dopuštanje ovlasti"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[kontekstni-izbornik]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] otvori modalni prozor za upravljanje spremljenim $tabs izravno na stranici postavki Salesforcea"
+	},
 	"cxm_move": {
 		"message": "🧭 Premjesti Tab",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[kontekstni-izbornik]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Prikvači",
+		"description": "[kontekstni-izbornik] omogućite korisniku da zadrži ovaj Tab na početku svoje liste"
+	},
 	"cxm_remove": {
 		"message": "💥 Ukloni Tab(ove)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Ostali Tabovi",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Ukloni Prikvačene",
+		"description": "[kontekstni-izbornik] omogućite korisniku da ukloni svoje prikvačene Tabove"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabovi udesno",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Ovaj Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Ukloni Neprikvačene",
+		"description": "[kontekstni-izbornik] omogućite korisniku da ukloni svoje neprikvačene Tabove"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Resetiraj zadane Tabove",
@@ -151,6 +199,14 @@
 		"message": "🎯 Sortiraj Tabs-e",
 		"description": "kontekstni izbornik koji korisnicima omogućuje automatsko sortiranje Tabs-a (roditeljski izbornik)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ prema Korištenju",
+		"description": "kontekstni izbornik za omogućavanje korisnicima da sortiraju svoje Tabove prema broju puta koliko su kliknuli svoje Tabove"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ prema Vremenu",
+		"description": "kontekstni izbornik za omogućavanje korisnicima da sortiraju svoje Tabove prema vremenu kada su Tabovi kliknuti"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 po Oznaci",
 		"description": "kontekstni izbornik koji korisnicima omogućuje sortiranje Tabs-a po oznaci"
@@ -163,25 +219,33 @@
 		"message": "🤖 po Url-u",
 		"description": "kontekstni izbornik koji korisnicima omogućuje sortiranje Tabs-a po URL-u"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Sakrij ne-Org Tabove",
+		"description": "[kontekstni-izbornik] privremeno sakrij opće Tabove"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Sakrij Org Tabove",
+		"description": "[kontekstni-izbornik] privremeno sakrij Org Tabove"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Otkvači",
+		"description": "[kontekstni-izbornik] omogućite korisniku da ukloni ovaj Tab sa svoje prikvačene liste"
+	},
 	"cxm_update": {
 		"message": "✏️ Ažuriraj Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Promijeni Organizaciju",
-		"description": "[context-menu]"
+		"message": "👜 Prebaci Org",
+		"description": "[kontekstni-izbornik]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Ostala ažuriranja",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Izbriši",
-		"description": "[popup] izbriši red"
-	},
 	"delete_all": {
-		"message": "$delete sve Tabs",
-		"description": "[skočni-prozor] naslov na kanti za pražnjenje svih Tabs"
+		"message": "Obriši sve $tabs",
+		"description": "[skočni prozor] naslov na kanti za pražnjenje svih $tabs"
 	},
 	"descending": {
 		"message": "Silazno (Ž-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Pogreška pri dodavanju Tab-a.",
 		"description": "[error] Opća pogreška pri dodavanju Tab-a"
+	},
+	"error_already_pinned": {
+		"message": "Ovaj Tab je već bio prikvačen.",
+		"description": "[greška] korisnik je pokušao prikvačiti prikvačeni Tab"
+	},
+	"error_already_unpinned": {
+		"message": "Ovaj Tab je već bio otkvačen.",
+		"description": "[greška] korisnik je pokušao otkvačiti otkvačeni Tab"
+	},
+	"error_cannot_move": {
+		"message": "Ovaj Tab se ne može pomaknuti!",
+		"description": "[greška] zatraženi Tab se trenutačno ne može pomaknuti."
+	},
+	"error_cannot_move_dir": {
+		"message": "Ovaj Tab se ne može pomaknuti u ovom smjeru!",
+		"description": "[greška] zatraženi Tab se trenutačno ne može pomaknuti."
 	},
 	"error_check_update": {
 		"message": "Greška prilikom provjere ažuriranja",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Greška pri uvozu:\n",
 		"description": "[error] došlo je do greške tijekom procesa uvoza"
+	},
+	"error_internal": {
+		"message": "Interna Greška",
+		"description": "[greška] opća greška"
 	},
 	"error_invalid_key": {
 		"message": "Parametar ključa proslijeđen funkciji nije valjan",
@@ -323,9 +407,21 @@
 		"message": "Nije dostavljen objekt za provjeru!",
 		"description": "[error] objekt nije dostavljen za provjeru"
 	},
+	"error_no_pinned": {
+		"message": "Još nemate prikvačenih Tabova!",
+		"description": "[greška] korisnik je pokušao ukloniti prikvačene Tabove, ali nema prikvačenih Tabova"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab nije pronađen.",
 		"description": "[error] ekstenzija nije uspjela pronaći gdje postaviti omiljene Tabove"
+	},
+	"error_no_tabs_selected": {
+		"message": "Nije Odabran Nijedan Tab za izvoz",
+		"description": "[toast] pogreška kada korisnik pokuša izvesti bez odabranih Tabs-a"
+	},
+	"error_no_unpinned": {
+		"message": "Nemate neprikvačenih Tabova!",
+		"description": "[greška] korisnik je pokušao ukloniti neprikvačene Tabove, ali nema neprikvačenih Tabova"
 	},
 	"error_no_url": {
 		"message": "Nije dostavljen URL za provjeru!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Još nije inicijalizirano.",
 		"description": "[error] Opća pogreška kad varijabla nije spremna"
+	},
+	"error_pin_tab": {
+		"message": "Greška prilikom prikvačivanja Tab",
+		"description": "[greška]"
 	},
 	"error_processing_tabs": {
 		"message": "Pogreška pri obradi Tabs-a.",
@@ -359,9 +459,17 @@
 		"message": "Pogreška pri uklanjanju ostalih Tabs-a.",
 		"description": "[error] Opća pogreška pri uklanjanju ostalih Tabs-a"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Greška prilikom uklanjanja prikvačenih Tabova.",
+		"description": "[greška] Opća greška koja se koristi prilikom uklanjanja neprikvačenih Tabova"
+	},
 	"error_removing_tab": {
 		"message": "Pogreška pri uklanjanju Tab-a.",
 		"description": "[error] Opća pogreška pri uklanjanju Tab-a"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Greška prilikom uklanjanja neprikvačenih Tabova.",
+		"description": "[greška] Opća greška koja se koristi prilikom uklanjanja neprikvačenih Tabova"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Pogreška pri uklanjanju svih vidljivih Tabova.",
@@ -383,6 +491,14 @@
 		"message": "Ne mogu se sinkronizirati prazni Tabovi!",
 		"description": "[error] pokušano je sinkroniziranje praznog sadržaja"
 	},
+	"error_tab_click_count": {
+		"message": "Broj Klikova mora biti nenegativan broj",
+		"description": "[greška] korisnik je pokušao stvoriti Tab s pogrešnim brojem klikova"
+	},
+	"error_tab_click_date": {
+		"message": "Datum Klika mora biti broj koji ne rezultira datumom u budućnosti",
+		"description": "[greška] korisnik je pokušao stvoriti Tab s pogrešnim datumom klika"
+	},
 	"error_tab_constructor": {
 		"message": "Upotrijebite Tab.create() umjesto new Tab()",
 		"description": "[error] Obavijestite programera kako koristiti klasu Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab nije pronađen.",
 		"description": "[error] Tab nije uključen u niz"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab još nije prikvačen!",
+		"description": "[greška] korisnik je pokušao otkvačiti neprikvačeni Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "Pri pozivu s objektom, ne šaljite ništa drugo.",
@@ -435,6 +555,10 @@
 		"message": "translator još nije inicijaliziran.",
 		"description": "[error] TranslationService nije bio spreman"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nismo uspjeli razumjeti datoteku koju ste htjeli uvesti\nAko se problem nastavi, podijelite ga s nama otvaranjem GitHub prijave",
+		"description": "[uvoz] korisnikova datoteka nije prepoznata"
+	},
 	"error_unknown_message": {
 		"message": "Primljena nepoznata poruka",
 		"description": "primljena je nepoznata poruka od slušatelja"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Nepoznat zahtjev.",
 		"description": "[error] Opća pogreška nakon primitka nepoznate poruke"
+	},
+	"error_unpin_tab": {
+		"message": "Greška prilikom otkvačivanja Tab",
+		"description": "[greška]"
 	},
 	"error_useless_remove": {
 		"message": "Ne može se ukloniti:\nNe može se ukloniti stranica koja nije prethodno spremljena",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "Izvezi",
 		"description": "[popup] gumb za izvoz"
+	},
+	"export_tabs": {
+		"message": "Izvezi Tabs-ove",
+		"description": "[modal] naslov za modal za izvoz Tabs-ova"
 	},
 	"export_title": {
 		"message": "Izvezi sve Tabove",
@@ -483,6 +615,14 @@
 		"message": "Općenito",
 		"description": "Oznaka za kategoriju općih postavki"
 	},
+	"generic_pin_tabs": {
+		"message": "opći $pinned Tabovi",
+		"description": "Korisnikovi omiljeni Tabovi koji nisu org-specifični"
+	},
+	"generic_tabs": {
+		"message": "opći Tabovi",
+		"description": "Korisnikovi omiljeni Tabovi koji nisu org-specifični"
+	},
 	"help": {
 		"message": "Pomoć",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Novo omiljeni Tabs se umeću na početak vašeg popisa Tabs-a na traci za postavljanje umjesto da se dodaju na kraj.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Kada je omogućeno, moći ćete vidjeti svoje $tabs čim pokrenete $salesforce_setup",
+		"description": "[pomoć za postavke] za neobavezno dopuštenje koje nam omogućuje da budemo spremni čim se otvori $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Kada je omogućeno, moći ćete $export svoje $tabs i čuvati ih na svom računalu.",
+		"description": "[pomoć za postavke] za neobavezno dopuštenje koje nam omogućuje preuzimanje Tab na korisnikovo računalo"
+	},
 	"help_automatic_open_login": {
 		"message": "Ako kliknete na skočni prozor proširenja izvan domene Salesforce, automatski će vas odvesti na stranicu za prijavu u Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "Ako kliknete na skočni prozor proširenja unutar domene Salesforce, ali ne na stranici za postavljanje, automatski će vas odvesti na stranicu za postavljanje u Salesforce-u.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Možete promijeniti redoslijed svojih $tabs pomoću točkica i povlačenjem.",
+		"description": "[manage-tabs] objašnjenje kako povući Tab"
 	},
 	"help_keep_sort": {
 		"message": "Kada je omogućeno, vaši Tabs-i se drže u sortiranom redoslijedu – bilo po oznaci, URL-u ili organizaciji; ovisno o tome što odaberete.",
@@ -547,9 +699,33 @@
 		"message": "Onemogućuje provjeru proširenja koja provjerava podudara li se fragment URL-a s formatom ID-ova zapisa/objekata Salesforce (koristi se za automatsko postavljanje spremljenog Tab-a kao Org Tab-a).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Ovdje ćete pronaći podizbornik za izvođenje različitih radnji na $tab u istom retku.",
+		"description": "[manage-tabs] objašnjenje što sadrži strelica s desne strane"
+	},
+	"help_tab_label": {
+		"message": "Ovo je uobičajeni naziv koji ćete koristiti da biste zapamtili kamo će vas ovaj $tab odvesti.",
+		"description": "[manage-tabs] objašnjenje što je oznaka Tab"
+	},
+	"help_tab_org": {
+		"message": "Ovo je naziv Salesforce $org u kojem će se prikazati ovaj $tab Ako ostane prazno ovaj će se $tab prikazati u svakom Salesforce $org koji posjetite",
+		"description": "[manage-tabs] objašnjenje što je Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ovo je (skraćena) poveznica na koju ćete biti preusmjereni klikom na ovaj $tab",
+		"description": "[manage-tabs] objašnjenje što je URL adresa Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Kliknite za preusmjeravanje na dokumentaciju za ovu postavku!",
 		"description": "[postavke-pomoć] poziv na radnju kako bi se korisniku omogućilo da pročita više o određenoj postavci"
+	},
+	"hide_other_org_tabs": {
+		"message": "Sakrij $tabs za $other_org_placeholder",
+		"description": "[manage-tabs] oznaka gumba za skrivanje ostalih Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "ako kliknete na skočni prozor proširenja",
+		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"import": {
 		"message": "Uvezi",
@@ -567,6 +743,10 @@
 		"message": "Nevažeći tip datoteke.\nPodržani su samo JSON datoteke.",
 		"description": "[error] datoteka korištena za uvoz nije JSON"
 	},
+	"import_metadata": {
+		"message": "Uvezi Tab metapodatke (\"Broj Klikova\", \"Datum Klika\" itd.).",
+		"description": "[oznaka] uvezite sve pronađeno u datoteci tijekom procesa uvoza"
+	},
 	"import_successful": {
 		"message": "Uvoz je uspješan",
 		"description": "[import] uvoz je završen. Nakon toga će biti prikazan broj unesenih zapisa"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "$import_tabs iz JSON datoteke",
 		"description": "[skočni-prozor] naslov na gumbu za uvoz"
+	},
+	"inactive": {
+		"message": "Neaktivno",
+		"description": "Koristi se u preklopnicima za neaktivno stanje"
 	},
 	"insert_another": {
 		"message": "Ubaci još jedan",
@@ -595,6 +779,10 @@
 		"message": "Kurziv",
 		"description": "Opcija stila fonta za kurzivni tekst"
 	},
+	"label": {
+		"message": "Oznaka",
+		"description": "[key] naziv Tab-a"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigacija",
 		"description": "Prilagođena navigacijska tehnologija Salesforcea"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Prijavite se na Salesforce",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na stranicu za prijavu u Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Upravljanje $tabs",
+		"description": "[modal-title] modalni prozor za upravljanje spremljenim $tabs s poljima koja se mogu uređivati i povlačenjem za promjenu redoslijeda"
+	},
+	"manage_tabs_explainer": {
+		"message": "Uređujte, mijenjajte redoslijed i upravljajte svojim spremljenim $tabs izravno iz ovog modalnog prozora. Povucite retke da biste promijenili redoslijed ili koristite padajući izbornik za više radnji.",
+		"description": "[modal-explainer] objašnjava funkcionalnost modalnog prozora za upravljanje karticama"
+	},
+	"must_non_empty_str": {
+		"message": "mora biti neprazan niz znakova",
+		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -615,12 +815,16 @@
 		"message": "Nije pronađena odgovarajuća akcija",
 		"description": "[error] kada switch ne može podudariti zatraženu akciju"
 	},
+	"no_tabs_to_export": {
+		"message": "Nema Tabs-ova za izvoz",
+		"description": "[toast] pogreška kada nema Tabs-ova za izvoz"
+	},
 	"nss_invalid_url": {
 		"message": "Otkriven je nevažeći URL.",
 		"description": "[nijeSalesforcePostavljanje] nevažeći URL"
 	},
 	"nss_not_setup_page": {
-		"message": "Ovo nije stranica za postavljanje $salesforce_lightning.",
+		"message": "Ovo nije stranica za postavljanje $salesforce_lightning",
 		"description": "[notSalesforceSetup] korisnik nije na Salesforce stranici."
 	},
 	"open_here": {
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "Dodajte nove Tabs-e sprijeda.",
 		"description": "[settings] neka korisnik doda sve nove Tabs-e sprijeda"
+	},
+	"opt_allow_domains": {
+		"message": "Dopustite $extension_label pristup Salesforce stranicama kada ih posjetite.",
+		"description": "[postavka] neobavezno dopuštenje za pokretanje proširenja kada korisnik posjeti $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Dopustite $extension_label da izveze vaše $tabs kada to zatražite.",
+		"description": "[postavka] neobavezno dopuštenje koje nam omogućuje izvoz korisnikovih Tab"
 	},
 	"opt_automatic_open_login": {
 		"message": "Automatski otvori stranicu $salesforce_login kada kliknete na skočni prozor dok niste na Salesforce stranici.",
@@ -723,9 +935,21 @@
 		"message": "Ili $drop",
 		"description": "[uvoz] dopustite korisniku da premješta datoteke mišem i ispušta ih"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Salesforce $org od Tab-a"
+	},
 	"org_link": {
 		"message": "Poveznica do Organizacije",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tabovi",
+		"description": "Tabovi koji su org-specifični"
+	},
+	"org_tabs": {
+		"message": "org Tabovi",
+		"description": "Tabovi koji su org-specifični"
 	},
 	"other_org_info": {
 		"message": "Informacije o drugoj Organizaciji",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Prepiši spremljene Tabove.",
 		"description": "[label] izbriši sve spremljene Tabove tijekom uvoza"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "stranica će se otvoriti u trenutnom preglednikovom Tab-u",
+		"description": "[placeholder] koristi se drugim tekstovima"
+	},
+	"permission_request_failure": {
+		"message": "Dopuštenje nije odobreno.",
+		"description": "[pogreška] korisnik nas je tražio da zatražimo dopuštenje, ali ga potom nije prihvatio"
+	},
+	"permission_request_success": {
+		"message": "Dopuštenje je odobreno!",
+		"description": "[uspjeh] korisnik nas je tražio da zatražimo dopuštenje i on ga je prihvatio"
+	},
+	"pinned": {
+		"message": "Prikvačeno",
+		"description": "Korisnikovi Tabovi koji se uvijek nalaze na početku liste"
 	},
 	"preserve_org_tabs": {
 		"message": "Sačuvaj Tabove za druge organizacije.",
@@ -764,7 +1004,7 @@
 		"description": "[req_permission] oznaka kada korisnik ne želi trajno davati ovlasti"
 	},
 	"req_permissions_header": {
-		"message": "Molimo vas da nam dopustite automatski pristup\nstranicama $salesforce_setup.",
+		"message": "Molimo vas da nam dopustite automatski pristup\nstranicama $salesforce_setup",
 		"description": "[req_permission] zaglavlje stranice za traženje dopuštenja"
 	},
 	"req_permissions_paragraph": {
@@ -779,6 +1019,10 @@
 		"message": "= Obavezne informacije",
 		"description": "[modal] obavještava korisnika da su određene informacije obavezne"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domena",
+		"description": "[placeholder] koristi se drugim tekstovima"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning platforma"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce prijava",
 		"description": "stranica za prijavu u Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce stranica",
+		"description": "[placeholder] koristi se u drugim tekstovima"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce postavke",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "Spremi kao Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"select_all": {
+		"message": "Odaberi Sve",
+		"description": "[modal] gumb za odabir svih Tabs-ova u modalu za izvoz"
+	},
+	"select_tabs": {
+		"message": "Odaberite koje $tabs želite",
+		"description": "[import] omogućite korisniku da odabere koje $tabs želi uvesti prije uvoza"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] omogućite korisniku da odabere koje $tabs želi izvesti prije izvoza"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] omogućite korisniku da odabere koje $tabs želi uvesti prije uvoza"
 	},
 	"send_tip": {
 		"message": "Pošaljite nam savjet ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "Uređivač stila organizacije",
 		"description": "Oznaka za konfiguriranje stila Tabova specifičnih za organizaciju"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Oznaka za pregled izgleda općeg Tab-a kada je prikvačen"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Oznaka za konfiguriranje stila općih Tabova kada su prikvačeni"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Oznaka za pregled izgleda org-specifičnog Tab-a kada je prikvačen"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Oznaka za konfiguriranje stila org-specifičnih Tabova kada su prikvačeni"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za opće Tabove"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za opće Tabove"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za opće Tabove"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za opće Tabove"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za opće Tabove"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za aktivne opće Tabove"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za opće Tabove"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Oznaka za postavljanje boje gornje trake za aktivne opće Tabove"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za aktivne org Tabove"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine za org-specifične Tabove"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za aktivne org-specifične Tabove"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje obruba za org Tabove"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za aktivne org Tabove"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje teksta za org-specifične Tabove"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za aktivne org-specifične Tabove"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Upit za odabir stilova ukrašavanja za org Tabove"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za aktivne org Tabove"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša za org-specifične Tabove"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za aktivne org-specifične Tabove"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje sjene za org Tabove"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Oznaka za postavljanje boje gornje trake za aktivne org Tabove"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Unesite boju pozadine za vaše aktivne generičke Tab-ove.",
@@ -947,13 +1331,57 @@
 		"message": "Setup stranica",
 		"description": "[notSalesforceSetup] stranica za uređivanje Salesforce postavki"
 	},
+	"show_all_tabs": {
+		"message": "Prikaži sve $tabs",
+		"description": "[manage-tabs] oznaka gumba za prikaz svih Tab"
+	},
 	"skip": {
 		"message": "Preskoči",
 		"description": "[req_permission] gumb za odbijanje davanja ovlasti"
 	},
+	"style_generic_pinned": {
+		"message": "Stil prikvačeni $generic_tabs",
+		"description": "[opcije] Oznaka prekidača za stiliziranje prikvačenih općih Tabova"
+	},
+	"style_org_pinned": {
+		"message": "Stil prikvačeni $org_tabs",
+		"description": "[opcije] Oznaka prekidača za stiliziranje prikvačenih org Tabova"
+	},
+	"style_settings_background_label": {
+		"message": "Umetnite boju pozadine za vaše",
+		"description": "Oznaka za postavljanje boje pozadine"
+	},
+	"style_settings_border_color_label": {
+		"message": "Umetnite boju obruba za vaše",
+		"description": "Oznaka za postavljanje boje obruba"
+	},
+	"style_settings_color_label": {
+		"message": "Umetnite boju teksta za vaše",
+		"description": "Oznaka za postavljanje boje teksta"
+	},
+	"style_settings_decoration_label": {
+		"message": "Odaberite jedan ili više stilova ukrašavanja za vaše",
+		"description": "Upit za odabir stilova ukrašavanja"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Umetnite boju pozadine pri prelasku miša za vaše",
+		"description": "Oznaka za postavljanje boje pozadine pri prelasku miša"
+	},
+	"style_settings_shadow_label": {
+		"message": "Umetnite boju sjene za vaše",
+		"description": "Oznaka za postavljanje boje sjene"
+	},
+	"style_settings_top_active_label": {
+		"message": "Umetnite boju za traku na vrhu vašeg aktivnog",
+		"description": "Oznaka za postavljanje aktivne boje gornje trake"
+	},
 	"successfully_imported": {
 		"message": "Uvoz je uspješan",
 		"description": "[toast] Tabovi su uspješno spremljeni"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "jedna od omiljenih poveznica korisnika"
 	},
 	"tab_explain": {
 		"message": "Svaki predmet mora imati 'label' i 'url' kao nizove. Osim toga, svaki predmet može imati 'org' kao niz.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabovi",
 		"description": "omiljene veze korisnika"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs-ovi Uspješno Izvezeni",
+		"description": "[toast] poruka o uspjehu prilikom izvoza Tabs-ova"
+	},
 	"tabs_saved": {
 		"message": "Tabovi spremljeni.",
 		"description": "[toast] Tabovi su uspješno spremljeni."
@@ -1023,6 +1455,14 @@
 		"message": "Valovito podcrtano",
 		"description": "Opcija stila ukrašavanja za primjenu valovitog podcrtavanja na tekst Taba"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Imate nespremljene promjene. Želite li otići bez spremanja?",
+		"description": "[manage-tabs] korisnik je zatražio odlazak na Tab bez prethodnog spremanja"
+	},
+	"unselect_all": {
+		"message": "Poništi Odabir Svih",
+		"description": "[modal] gumb za poništavanje odabira svih Tabs-ova u modalu za izvoz"
+	},
 	"update_available": {
 		"message": "Ažuriranje dostupno",
 		"description": "novo ažuriranje za proširenje je dostupno"
@@ -1031,9 +1471,21 @@
 		"message": "Otpremi",
 		"description": "[import] omogućuje korisniku pregled datoteka i odabir ispravne"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] poveznica Tab-a"
+	},
 	"users": {
 		"message": "Korisnici",
 		"description": "ime stranice povezane s ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Molimo izvezite svoje nove Tabove jer datoteka koju ste koristili neće biti podržana u budućim izdanjima.",
+		"description": "[upozorenje] korisnik je uvezao svoje Tabove koristeći zastarjelu konfiguraciju json datoteke"
+	},
+	"when_click_popup_while": {
+		"message": "stranica pri kliku na skočni prozor dok",
+		"description": "[placeholder] koristi se drugim tekstovima"
 	},
 	"where_to": {
 		"message": "Kamo?",

@@ -64,7 +64,6 @@ async function main() {
 					filePath,
 					`${JSON.stringify(sorted, null, "\t")}\n`,
 				);
-				console.log(`✔  Sorted ${filePath}`);
 			} catch (err) {
 				console.error(`✖  Failed ${filePath}: ${err.message}`);
 				failedOnce = true;

@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ מחק",
+		"description": "[ניהול-Tab] מחק שורה"
+	},
+	"act_open": {
+		"message": "🪂 פתח",
+		"description": "[ניהול-Tab] פתח את ה-Tab הנבחרת"
+	},
+	"actions": {
+		"message": "פעולות",
+		"description": "תווית תפריט נפתח עבור פעולות Tab"
+	},
+	"active": {
+		"message": "פעיל",
+		"description": "משמש במתגים למצב פעיל"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs פעילים",
+		"description": "לשוניות מוצמדות כלליות של המשתמש אשר פעילות כרגע"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs פעילים",
+		"description": "לשוניות כלליות של המשתמש אשר פעילות כרגע"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs פעילים",
+		"description": "לשוניות מוצמדות ארגוניות של המשתמש אשר פעילות כרגע"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs פעילים",
+		"description": "לשוניות ארגוניות של המשתמש אשר פעילות כרגע"
+	},
 	"allow": {
 		"message": "אפשר",
 		"description": "[req_permission] כפתור לאישור הרשאות"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[תפריט-הקשר]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] פתיחת המודל לניהול $tabs שמורות ישירות בדף הגדרות Salesforce"
+	},
 	"cxm_move": {
 		"message": "🧭 הזז Tab",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[תפריט-הקשר]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 הצמד",
+		"description": "[תפריט-הקשר] אפשר למשתמש לשמור את ה-Tab הזה בתחילת הרשימה שלו"
+	},
 	"cxm_remove": {
 		"message": "💥 הסר Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Tab אחרות",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 הסר מוצמדים",
+		"description": "[תפריט-הקשר] אפשר למשתמש להסיר את הלשוניות המוצמדות שלו"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tab מימין",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Tab זה",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 הסר לא מוצמדים",
+		"description": "[תפריט-הקשר] אפשר למשתמש להסיר את הלשוניות הלא-מוצמדות שלו"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 אפס את ברירת המחדל של ה-Tab",
@@ -151,6 +199,14 @@
 		"message": "🎯 מיין Tabs",
 		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם באופן אוטומטי (תפריט ראשי)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ לפי שימוש",
+		"description": "תפריט הקשר המאפשר למשתמשים למיין את הלשוניות שלהם לפי מספר הפעמים שלחצו על הלשוניות שלהם"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ לפי זמן",
+		"description": "תפריט הקשר המאפשר למשתמשים למיין את הלשוניות שלהם לפי מועד הלחיצה על הלשוניות"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 לפי תווית",
 		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם לפי תווית"
@@ -163,25 +219,33 @@
 		"message": "🤖 לפי Url",
 		"description": "תפריט הקשר המאפשר למשתמשים למיין את ה-Tabs שלהם לפי URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 הסתר לא-ארגוני Tab",
+		"description": "[תפריט-הקשר] הסתר זמנית לשוניות כלליות"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 הסתר לשוניות ארגוניות",
+		"description": "[תפריט-הקשר] הסתר זמנית לשוניות ארגוניות"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 בטל הצמדה",
+		"description": "[תפריט-הקשר] אפשר למשתמש להסיר את ה-Tab הזה מרשימת המוצמדים שלו"
+	},
 	"cxm_update": {
 		"message": "✏️ עדכן Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 החלף ארגון",
-		"description": "[context-menu]"
+		"message": "👜 החלף ארגון",
+		"description": "[תפריט-הקשר]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 עדכונים אחרים",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "מחק",
-		"description": "[popup] מחק שורה"
-	},
 	"delete_all": {
-		"message": "$delete את כל ה-Tabs",
-		"description": "[חלון-קופץ] כותרת על סל המיחזור לריקון כל ה-Tabs"
+		"message": "מחק את כל ה $tabs",
+		"description": "[חלון קופץ] כותרת על הפח לריקון כל ה-$tabs"
 	},
 	"descending": {
 		"message": "יורד (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "שגיאה בהוספת Tab.",
 		"description": "[error] שגיאה כללית בהוספת Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tab זה כבר הוצמד.",
+		"description": "[שגיאה] המשתמש ניסה להצמיד Tab שכבר הוצמד"
+	},
+	"error_already_unpinned": {
+		"message": "Tab זה כבר בוטלה הצמדתו.",
+		"description": "[שגיאה] המשתמש ניסה לבטל הצמדה של Tab שכבר בוטלה הצמדתו"
+	},
+	"error_cannot_move": {
+		"message": "Tab זה לא ניתן להזזה!",
+		"description": "[שגיאה] ה-Tab המבוקש לא ניתן להזזה כרגע."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tab זה לא ניתן להזזה בכיוון זה!",
+		"description": "[שגיאה] ה-Tab המבוקש לא ניתן להזזה כרגע."
 	},
 	"error_check_update": {
 		"message": "שגיאה בבדיקת עדכונים",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "שגיאה בייבוא:\n",
 		"description": "[error] אירעה שגיאה במהלך תהליך הייבוא"
+	},
+	"error_internal": {
+		"message": "שגיאה פנימית",
+		"description": "[שגיאה] שגיאה כללית"
 	},
 	"error_invalid_key": {
 		"message": "פרמטר המפתח שהועבר לפונקציה אינו חוקי",
@@ -323,9 +407,21 @@
 		"message": "לא סופק אובייקט לבדיקה!",
 		"description": "[error] לא סופק האובייקט"
 	},
+	"error_no_pinned": {
+		"message": "אין לך עדיין לשוניות מוצמדות!",
+		"description": "[שגיאה] המשתמש ניסה להסיר את הלשוניות המוצמדות אך אין לו לשוניות מוצמדות"
+	},
 	"error_no_setup_tab": {
 		"message": "לא נמצא Setup Tab.",
 		"description": "[error] התוסף לא הצליח למצוא היכן למקם את Tab המועדפים"
+	},
+	"error_no_tabs_selected": {
+		"message": "לא נבחרו Tabs לייצוא",
+		"description": "[toast] שגיאה כאשר המשתמש מנסה לייצא ללא Tabs נבחרים"
+	},
+	"error_no_unpinned": {
+		"message": "אין לך לשוניות לא מוצמדות!",
+		"description": "[שגיאה] המשתמש ניסה להסיר את הלשוניות הלא מוצמדות אך אין לו לשוניות לא מוצמדות"
 	},
 	"error_no_url": {
 		"message": "לא סופקה URL לבדיקה!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "טרם מאותחל.",
 		"description": "[error] שגיאה כללית כאשר משתנה אינו מוכן"
+	},
+	"error_pin_tab": {
+		"message": "שגיאה בעת הצמדת Tab",
+		"description": "[שגיאה]"
 	},
 	"error_processing_tabs": {
 		"message": "שגיאה בעיבוד Tabs.",
@@ -359,9 +459,17 @@
 		"message": "שגיאה בהסרת Tabs אחרות.",
 		"description": "[error] שגיאה כללית בהסרת Tabs אחרות"
 	},
+	"error_removing_pin_tabs": {
+		"message": "שגיאה בעת הסרת לשוניות מוצמדות.",
+		"description": "[שגיאה] שגיאה כללית המשמשת בעת הסרת לשוניות לא מוצמדות"
+	},
 	"error_removing_tab": {
 		"message": "שגיאה בהסרת Tab.",
 		"description": "[error] שגיאה כללית בהסרת Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "שגיאה בעת הסרת לשוניות לא מוצמדות.",
+		"description": "[שגיאה] שגיאה כללית המשמשת בעת הסרת לשוניות לא מוצמדות"
 	},
 	"error_removing_visible_tabs": {
 		"message": "שגיאה בעת הסרת כל ה-Tab הגלויים.",
@@ -383,6 +491,14 @@
 		"message": "לא ניתן לסנכרן Tab ריקים!",
 		"description": "[error] ניסה לסנכרן Tab ללא תוכן"
 	},
+	"error_tab_click_count": {
+		"message": "ספירת לחיצות חייבת להיות מספר לא שלילי",
+		"description": "[שגיאה] המשתמש ניסה ליצור Tab עם ספירת לחיצות שגויה"
+	},
+	"error_tab_click_date": {
+		"message": "תאריך לחיצה חייב להיות מספר שאינו מביא לתאריך עתידי",
+		"description": "[שגיאה] המשתמש ניסה ליצור Tab עם תאריך לחיצה שגוי"
+	},
 	"error_tab_constructor": {
 		"message": "השתמש ב-Tab.create() במקום new Tab()",
 		"description": "[error] הודע למפתח כיצד להשתמש במחלקת Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "לא נמצא Tab.",
 		"description": "[error] ה-Tab לא נכלל במערך"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab אינו מוצמד עדיין!",
+		"description": "[שגיאה] המשתמש ניסה לבטל הצמדה של Tab לא מוצמד"
 	},
 	"error_tab_object_creation": {
 		"message": "בעת קריאה עם אובייקט, אל תעביר דבר נוסף.",
@@ -435,6 +555,10 @@
 		"message": "ה-translator טרם מאותחל.",
 		"description": "[error] שירות התרגום לא היה מוכן"
 	},
+	"error_unknown_file_structure": {
+		"message": "לא הצלחנו להבין קובץ שרצית לייבא\nאם הבעיה נמשכת, אנא שתף אותה איתנו על ידי פתיחת פנייה ב-GitHub",
+		"description": "[ייבוא] הקובץ של המשתמש לא זוהה"
+	},
 	"error_unknown_message": {
 		"message": "התקבלה הודעה לא ידועה",
 		"description": "התקבלה הודעה לא ידועה ממאזין"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "בקשה לא ידועה.",
 		"description": "[error] שגיאה כללית לאחר קבלת הודעה לא מזוהה"
+	},
+	"error_unpin_tab": {
+		"message": "שגיאה בעת ביטול הצמדת Tab",
+		"description": "[שגיאה]"
 	},
 	"error_useless_remove": {
 		"message": "לא ניתן להסיר:\nלא ניתן להסיר דף שלא נשמר קודם",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "ייצא",
 		"description": "[popup] כפתור ייצוא"
+	},
+	"export_tabs": {
+		"message": "ייצוא Tabs",
+		"description": "[modal] כותרת עבור מודל ייצוא Tabs"
 	},
 	"export_title": {
 		"message": "ייצא את כל ה-Tab",
@@ -483,6 +615,14 @@
 		"message": "כללי",
 		"description": "תווית לקטגוריית ההגדרות הכלליות"
 	},
+	"generic_pin_tabs": {
+		"message": "$pinned Tab כלליים",
+		"description": "הלשוניות המועדפות על המשתמש שאינן ספציפיות לארגון"
+	},
+	"generic_tabs": {
+		"message": "Tab כלליים",
+		"description": "הלשוניות המועדפות על המשתמש שאינן ספציפיות לארגון"
+	},
 	"help": {
 		"message": "עזרה",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Tabs חדשים שסומנו כמועדפים מוכנסים לחזית רשימת ה-Tabs שלך בסרגל ההגדרה במקום להתווסף בסוף.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "כאשר המצב מופעל תוכל לראות את ה $tabs שלך ברגע שתפעיל את $salesforce_setup",
+		"description": "[עזרה-הגדרות] עבור הרשאה אופציונלית המאפשרת לנו להיות מוכנים ברגע ש-$salesforce_setup נפתח"
+	},
+	"help_allow_export": {
+		"message": "כאשר המצב מופעל תוכל לבצע $export ל $tabs שלך ולשמור אותם במחשב שלך",
+		"description": "[עזרה-הגדרות] עבור הרשאה אופציונלית המאפשרת לנו להוריד את ה-Tab למחשב של המשתמש"
+	},
 	"help_automatic_open_login": {
 		"message": "אם תלחץ על התוסף הקופץ מחוץ לדומיין של Salesforce, הוא יעביר אותך באופן אוטומטי לדף הכניסה של Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "אם תלחץ על התוסף הקופץ בתוך דומיין של Salesforce אך לא בדף הגדרה, הוא יעביר אותך באופן אוטומטי לדף ההגדרה של Salesforce.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "ניתן לשנות את סדר ה $tabs באמצעות הנקודות וגרירתן",
+		"description": "[manage-tabs] הסבר כיצד לגרור את ה-Tab"
 	},
 	"help_keep_sort": {
 		"message": "כאשר הוא מופעל, ה-Tabs שלך נשמרים בסדר ממוין—או לפי תווית, URL או Org; תלוי במה שתבחר.",
@@ -547,9 +699,33 @@
 		"message": "משבית את בדיקת התוסף שמאמתת שקטע URL תואם לפורמט של מזהי רשומות/אובייקטים של Salesforce (משמש להגדרת ה-Tab השמור באופן אוטומטי כ-Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "כאן תמצאו תפריט משנה לביצוע פעולות שונות ב $tab באותה שורה",
+		"description": "[manage-tabs] הסבר מה מכיל החץ בצד ימין"
+	},
+	"help_tab_label": {
+		"message": "זהו השם הנפוץ שתשתמשו בו כדי לזכור לאן ה $tab הזו תוביל אתכם",
+		"description": "[manage-tabs] הסבר מהי תווית ה-Tab"
+	},
+	"help_tab_org": {
+		"message": "זהו שם ה Salesforce $org שבו תוצג ה $tab הזו אם יישאר ריק ה $tab תוצג בכל Salesforce $org שתבקרו בו",
+		"description": "[manage-tabs] הסבר מהו Tab Org"
+	},
+	"help_tab_url": {
+		"message": "זהו הקישור (המקוצר) שאליו תועברו בעת לחיצה על $tab זו",
+		"description": "[manage-tabs] הסבר מהו ה-URL של ה-Tab"
+	},
 	"help_tip_click_link": {
 		"message": "לחץ כדי להיות מופנה מחדש לתיעוד עבור הגדרה זו!",
 		"description": "[הגדרות-עזרה] קריאה לפעולה כדי לאפשר למשתמש לקרוא עוד על הגדרה ספציפית"
+	},
+	"hide_other_org_tabs": {
+		"message": "הסתר $tabs של $other_org_placeholder",
+		"description": "[manage-tabs] תווית כפתור להסתרת Org Tabs אחרים"
+	},
+	"if_click_popup": {
+		"message": "אם תלחץ על החלון הקופץ של התוסף",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
 	},
 	"import": {
 		"message": "ייבא",
@@ -567,6 +743,10 @@
 		"message": "סוג קובץ לא תקין.\nרק קבצי JSON נתמכים.",
 		"description": "[error] הקובץ לשימוש בייבוא אינו JSON"
 	},
+	"import_metadata": {
+		"message": "ייבא מטא-נתונים של Tab (\"ספירת לחיצות\", \"תאריך לחיצה\" וכו').",
+		"description": "[תווית] ייבא כל מה שנמצא בקובץ במהלך תהליך הייבוא"
+	},
 	"import_successful": {
 		"message": "ייבוא הצליח",
 		"description": "[import] הייבוא הושלם. לאחר מכן יוצג מספר הרשומות שיובאו"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "$import_tabs מקובץ JSON",
 		"description": "[חלון-קופץ] כותרת על לחצן הייבוא"
+	},
+	"inactive": {
+		"message": "לא פעיל",
+		"description": "משמש במתגים למצב לא פעיל"
 	},
 	"insert_another": {
 		"message": "הוסף עוד אחד",
@@ -595,6 +779,10 @@
 		"message": "נטוי",
 		"description": "אפשרות סגנון גופן לטקסט נטוי"
 	},
+	"label": {
+		"message": "תווית",
+		"description": "[key] שם ה-Tab"
+	},
 	"lightning_navigation": {
 		"message": "ניווט Lightning",
 		"description": "טכנולוגיית הניווט המותאמת של Salesforce"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "התחבר ל-Salesforce",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד ההתחברות של Salesforce"
+	},
+	"manage_tabs": {
+		"message": "ניהול $tabs",
+		"description": "[modal-title] מודל לניהול $tabs שמורות עם שדות ניתנים לעריכה וגרירה לשינוי סדר"
+	},
+	"manage_tabs_explainer": {
+		"message": "ערוך שנה סדר ונהל את ה $tabs השמורות שלך ישירות מהמודל הזה גרור שורות כדי לשנות את הסדר או השתמש בתפריט הנפתח לפעולות נוספות",
+		"description": "[modal-explainer] מסביר את הפונקציונליות של מודל ניהול הכרטיסיות"
+	},
+	"must_non_empty_str": {
+		"message": "חייב להיות מחרוזת שאינה ריקה",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -615,12 +815,16 @@
 		"message": "לא נמצאה פעולה תואמת",
 		"description": "[error] כאשר אין התאמה לפעולה המבוקשת"
 	},
+	"no_tabs_to_export": {
+		"message": "אין Tabs לייצוא",
+		"description": "[toast] שגיאה כאשר אין Tabs לייצוא"
+	},
 	"nss_invalid_url": {
 		"message": "אותרה כתובת URL לא חוקית.",
 		"description": "[לאהגדרתSalesforce] כתובת URL שאינה חוקית"
 	},
 	"nss_not_setup_page": {
-		"message": "זה אינו דף הגדרות של $salesforce_lightning.",
+		"message": "זה אינו דף הגדרות של $salesforce_lightning",
 		"description": "[notSalesforceSetup] המשתמש אינו נמצא בדף Salesforce."
 	},
 	"open_here": {
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "הוסף Tabs חדשים מקדימה.",
 		"description": "[settings] אפשר למשתמש להוסיף את כל ה-Tabs החדשים מקדימה"
+	},
+	"opt_allow_domains": {
+		"message": "אפשר ל $extension_label לגשת לדפי Salesforce כשאתה מבקר בהם",
+		"description": "[הגדרה] הרשאה אופציונלית להפעלת ההרחבות כאשר המשתמש מבקר ב-$salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "אפשר ל $extension_label לייצא את ה $tabs שלך כשתבקש זאת",
+		"description": "[הגדרה] הרשאה אופציונלית המאפשרת לנו לייצא את ה-Tab של המשתמש"
 	},
 	"opt_automatic_open_login": {
 		"message": "פתח אוטומטית את דף $salesforce_login בעת לחיצה על החלון הקופץ כשאינך נמצא בדף Salesforce.",
@@ -723,9 +935,21 @@
 		"message": "או $drop",
 		"description": "[ייבוא] אפשר למשתמש להזיז קבצים עם העכבר ולשחרר אותם"
 	},
+	"org": {
+		"message": "ארגון (Org)",
+		"description": "[key] ה-$org של Salesforce של ה-Tab"
+	},
 	"org_link": {
 		"message": "קישור ארגון",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "Tab ארגוניים $pinned",
+		"description": "לשוניות שהן ספציפיות לארגון"
+	},
+	"org_tabs": {
+		"message": "Tab ארגוניים",
+		"description": "לשוניות שהן ספציפיות לארגון"
 	},
 	"other_org_info": {
 		"message": "מידע על ארגון אחר",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "דרוס את ה-Tabs השמורים.",
 		"description": "[label] מחק את כל ה-Tabs השמורים במהלך הייבוא"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "הדף ייפתח ב-Tab הנוכחי של הדפדפן",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
+	},
+	"permission_request_failure": {
+		"message": "ההרשאה לא אושרה.",
+		"description": "[שגיאה] המשתמש ביקש מאיתנו לבקש ממנו הרשאה אך לאחר מכן לא אישר אותה"
+	},
+	"permission_request_success": {
+		"message": "ההרשאה אושרה!",
+		"description": "[הצלחה] המשתמש ביקש מאיתנו לבקש ממנו הרשאה והוא אישר אותה"
+	},
+	"pinned": {
+		"message": "מוצמד",
+		"description": "הלשוניות של המשתמש שתמיד נמצאות בתחילת הרשימה"
 	},
 	"preserve_org_tabs": {
 		"message": "שמור Tabs לארגונים אחרים.",
@@ -779,6 +1019,10 @@
 		"message": "= מידע נדרש",
 		"description": "[modal] מודיע למשתמש שמידע מסוים הינו חובה"
 	},
+	"salesforce_domain": {
+		"message": "דומיין Salesforce",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] פלטפורמת Salesforce Lightning"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "כניסה ל-Salesforce",
 		"description": "דף הכניסה של Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "דף Salesforce",
+		"description": "[placeholder] בשימוש בטקסטים אחרים"
 	},
 	"salesforce_setup": {
 		"message": "הגדרות Salesforce",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "שמור כ-Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"
+	},
+	"select_all": {
+		"message": "בחר הכל",
+		"description": "[modal] כפתור לבחירת כל ה-Tabs במודל הייצוא"
+	},
+	"select_tabs": {
+		"message": "בחר אילו $tabs תרצה",
+		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייבא לפני ייבואם"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייצא לפני ייצואם"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] אפשר למשתמש לבחור אילו $tabs לייבא לפני ייבואם"
 	},
 	"send_tip": {
 		"message": "שלח לנו טיפ ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "מעצב Org",
 		"description": "תווית להגדרת הסגנון של Tabs הספציפיים ל‑Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "תווית לתצוגה מקדימה של מראה Tab כללי כאשר הוא מוצמד"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "תווית להגדרת הסגנון של לשוניות כלליות כאשר הן מוצמדות"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "תווית לתצוגה מקדימה של מראה Tab ספציפי לארגון כאשר הוא מוצמד"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "תווית להגדרת הסגנון של לשוניות ספציפיות לארגון כאשר הן מוצמדות"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "תווית להגדרת צבע רקע עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "תווית להגדרת צבע רקע עבור לשוניות כלליות"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "תווית להגדרת צבע גבול עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "תווית להגדרת צבע גבול עבור לשוניות כלליות"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "תווית להגדרת צבע טקסט עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "תווית להגדרת צבע טקסט עבור לשוניות כלליות"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "הנחיה לבחירת סגנונות קישוט עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "הנחיה לבחירת סגנונות קישוט עבור לשוניות כלליות"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "תווית להגדרת צבע רקע בריחוף עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "תווית להגדרת צבע רקע בריחוף עבור לשוניות כלליות"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "תווית להגדרת צבע צל עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "תווית להגדרת צבע צל עבור לשוניות כלליות"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "תווית להגדרת צבע סרגל עליון עבור לשוניות כלליות פעילות"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "תווית להגדרת צבע רקע עבור לשוניות ארגוניות פעילות"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "תווית להגדרת צבע רקע עבור לשוניות ספציפיות לארגון"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "תווית להגדרת צבע גבול עבור לשוניות ספציפיות לארגון פעילות"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "תווית להגדרת צבע גבול עבור לשוניות ארגוניות"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "תווית להגדרת צבע טקסט עבור לשוניות ארגוניות פעילות"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "תווית להגדרת צבע טקסט עבור לשוניות ספציפיות לארגון"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "הנחיה לבחירת סגנונות קישוט עבור לשוניות ספציפיות לארגון פעילות"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "הנחיה לבחירת סגנונות קישוט עבור לשוניות ארגוניות"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "תווית להגדרת צבע רקע בריחוף עבור לשוניות ארגוניות פעילות"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "תווית להגדרת צבע רקע בריחוף עבור לשוניות ספציפיות לארגון"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "תווית להגדרת צבע צל עבור לשוניות ספציפיות לארגון פעילות"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "תווית להגדרת צבע צל עבור לשוניות ארגוניות"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "תווית להגדרת צבע סרגל עליון עבור לשוניות ארגוניות פעילות"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "הכנס את צבע הרקע עבור ה-Tab-ים הכלליים הפעילים שלך.",
@@ -947,13 +1331,57 @@
 		"message": "עמוד Setup",
 		"description": "[notSalesforceSetup] העמוד לעריכת הגדרות Salesforce"
 	},
+	"show_all_tabs": {
+		"message": "הצג את כל ה $tabs",
+		"description": "[manage-tabs] תווית כפתור להצגת כל ה-Tab"
+	},
 	"skip": {
 		"message": "דלג",
 		"description": "[req_permission] כפתור לסירוב מתן הרשאות"
 	},
+	"style_generic_pinned": {
+		"message": "סגנן Tab כלליים $pinned",
+		"description": "[אפשרויות] תווית מתג לעיצוב לשוניות כלליות מוצמדות"
+	},
+	"style_org_pinned": {
+		"message": "סגנן Tab ארגוניים $pinned",
+		"description": "[אפשרויות] תווית מתג לעיצוב לשוניות ארגוניות מוצמדות"
+	},
+	"style_settings_background_label": {
+		"message": "הכנס את צבע הרקע עבור ה-",
+		"description": "תווית להגדרת צבע רקע"
+	},
+	"style_settings_border_color_label": {
+		"message": "הכנס את צבע הגבול עבור ה-",
+		"description": "תווית להגדרת צבע גבול"
+	},
+	"style_settings_color_label": {
+		"message": "הכנס את צבע הטקסט עבור ה-",
+		"description": "תווית להגדרת צבע טקסט"
+	},
+	"style_settings_decoration_label": {
+		"message": "בחר סגנון קישוט אחד או יותר עבור ה-",
+		"description": "הנחיה לבחירת סגנונות קישוט"
+	},
+	"style_settings_hover_background_label": {
+		"message": "הכנס את צבע הרקע בריחוף עבור ה-",
+		"description": "תווית להגדרת צבע רקע בריחוף"
+	},
+	"style_settings_shadow_label": {
+		"message": "הכנס את צבע הצל עבור ה-",
+		"description": "תווית להגדרת צבע צל"
+	},
+	"style_settings_top_active_label": {
+		"message": "הכנס את הצבע עבור הפס בחלק העליון של ה-",
+		"description": "תווית להגדרת צבע פעיל של סרגל עליון"
+	},
 	"successfully_imported": {
 		"message": "ייבוא הצליח",
 		"description": "[toast] המשתמש ייבא Tabs מקובץ חיצוני בהצלחה"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "אחד מהקישורים המועדפים של המשתמש"
 	},
 	"tab_explain": {
 		"message": "כל פריט חייב לכלול 'label' ו-'url' כמחרוזות. בנוסף, כל פריט יכול לכלול 'org' כמחרוזת.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "קישורי המועדפים של המשתמש"
 	},
+	"tabs_exported_successfully": {
+		"message": "ה-Tabs יוצאו בהצלחה",
+		"description": "[toast] הודעת הצלחה כאשר ה-Tabs מיוצאים"
+	},
 	"tabs_saved": {
 		"message": "Tabs נשמרו.",
 		"description": "[toast] Tabs נשמרו בהצלחה."
@@ -1023,6 +1455,14 @@
 		"message": "קו תחתון גלי",
 		"description": "אפשרות סגנון עיטור להחלת קו תחתון גלי על טקסט Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "יש לך שינויים שלא נשמרו. האם ברצונك לעזוב מבלי לשמור?",
+		"description": "[manage-tabs] המשתמש ביקש לעבור אל Tab מבלי לשמור תחילה"
+	},
+	"unselect_all": {
+		"message": "בטל בחירת הכל",
+		"description": "[modal] כפתור לביטול בחירת כל ה-Tabs במודל הייצוא"
+	},
 	"update_available": {
 		"message": "עדכון זמין",
 		"description": "עדכון חדש עבור ההרחבה זמין"
@@ -1031,9 +1471,21 @@
 		"message": "העלה",
 		"description": "[import] מאפשר למשתמש לעיין בקבציו ולבחור את המתאים"
 	},
+	"url": {
+		"message": "כתובת URL",
+		"description": "[key] הקישור של ה-Tab"
+	},
 	"users": {
 		"message": "משתמשים",
 		"description": "שם העמוד הקשור ל-ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "אנא ייצא את הלשוניות החדשות שלך מכיוון שהקובץ שבו השתמשת לא יתמך בגרסאות עתידיות.",
+		"description": "[אזהרה] המשתמש ייבא את הלשוניות שלו באמצעות תצורה מיושנת של קובץ ה-json"
+	},
+	"when_click_popup_while": {
+		"message": "דף בעת לחיצה על החלון הקופץ בזמן",
+		"description": "[placeholder] בשימוש על ידי טקסטים אחרים"
 	},
 	"where_to": {
 		"message": "לאן?",

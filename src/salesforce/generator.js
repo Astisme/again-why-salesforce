@@ -1,27 +1,40 @@
 "use strict";
-import Tab from "/tab.js";
 import {
 	BROWSER,
+	CXM_PIN_TAB,
+	CXM_REMOVE_TAB,
+	CXM_UNPIN_TAB,
+	EXTENSION_GITHUB_LINK,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
+	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
-	getAllStyleSettings,
-	getCssRule,
-	getCssSelector,
-	getSettings,
+	HIDDEN_CLASS,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
+	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_CLASS,
 	ORG_TAB_STYLE_KEY,
+	PIN_TAB_CLASS,
 	SETUP_LIGHTNING,
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
+import {
+	getCssRule,
+	getCssSelector,
+	getPinnedSpecificKey,
+	getSettings,
+	getStyleSettings,
+} from "/functions.js";
+import Tab from "/tab.js";
+import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import { getCurrentHref, showToast } from "./content.js";
+import { updateModalBodyOverflow } from "./manageTabs.js";
 
 const TOAST_ID = `${EXTENSION_NAME}-toast`;
 export const MODAL_ID = `${EXTENSION_NAME}-modal`;
@@ -29,13 +42,13 @@ const MODAL_CONFIRM_ID = `${EXTENSION_NAME}-modal-confirm`;
 
 /**
  * Generates a random number with the specified number of digits.
- *
- * @param {number} digits - The number of digits for the random number. Must be greater than 1.
- * @returns {number} A random number with the specified number of digits
- *
  * - Calculates the lower bound as 10^(digits - 1) (e.g., 10 for 2 digits, 100 for 3 digits).
  * - Multiplies a random value (0 to 1) by the range (9 * 10^(digits - 1)) and adds the lower bound.
  * - Ensures the result is a whole number with the correct number of digits.
+ *
+ * @param {number} digits - The number of digits for the random number. Must be greater than 1.
+ * @return {number} A random number with the specified number of digits
+ * @throws Error when digits <= 1
  */
 function getRng_n_digits(digits = 1) {
 	if (digits <= 1) {
@@ -51,19 +64,20 @@ function getRng_n_digits(digits = 1) {
  *
  * @param {Event} e - The click event triggered by the link.
  * @param {string} url - The URL of the link being clicked.
- * @returns {string} The target for the link, either "_blank" or "_top".
+ * @return {string} The target for the link, either "_blank" or "_top".
  */
 function _getLinkTarget(e, url) {
 	return e.ctrlKey || e.metaKey || !url.includes(SETUP_LIGHTNING)
 		? "_blank"
 		: "_top";
 }
+
 /**
  * Handles the click event for a Lightning Link and determines the appropriate target for navigation.
  *
  * @param {Event} e - the click event
  */
-async function handleLightningLinkClick(e) {
+export async function handleLightningLinkClick(e) {
 	e.preventDefault();
 	const currentTarget = e.currentTarget.target;
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
@@ -72,6 +86,8 @@ async function handleLightningLinkClick(e) {
 		showToast("error_redirect", false);
 		return;
 	}
+	(await ensureAllTabsAvailability())
+		.handleClickTabByData({ url: Tab.minifyURL(url) });
 	const settings = await getSettings([
 		LINK_NEW_BROWSER,
 		USE_LIGHTNING_NAVIGATION,
@@ -107,7 +123,7 @@ async function handleLightningLinkClick(e) {
  * Checks if two arrays are equal in content and order.
  * @param {Array} arr1 - First array to compare.
  * @param {Array} arr2 - Second array to compare.
- * @returns {boolean} True if arrays are equal, otherwise false.
+ * @return {boolean} True if arrays are equal, otherwise false.
  */
 function areArraysEqual(arr1, arr2) {
 	return (arr1 == null && arr2 == null) ||
@@ -122,25 +138,19 @@ let oldSettings = null;
 /**
  * Determines if tab settings have been updated compared to previous settings.
  * @param {Object} settings - Current settings to compare.
- * @returns {boolean} True if settings were updated, otherwise false.
+ * @return {boolean} True if settings were updated, otherwise false.
  */
 function wereSettingsUpdated(settings) {
-	return oldSettings == null || !(
-		areArraysEqual(
-			oldSettings[GENERIC_TAB_STYLE_KEY],
-			settings[GENERIC_TAB_STYLE_KEY],
-		) &&
-		areArraysEqual(
-			oldSettings[ORG_TAB_STYLE_KEY],
-			settings[ORG_TAB_STYLE_KEY],
-		)
-	);
+	return oldSettings == null ||
+		Object.keys(settings).some((key) =>
+			!areArraysEqual(oldSettings[key], settings[key])
+		);
 }
 
 /**
  * Maps style IDs to their corresponding pseudo-selectors.
  * @param {string} id - The style ID
- * @returns {string} The pseudo-selector string
+ * @return {string} The pseudo-selector string
  */
 function _getPseudoSelector(id) {
 	switch (id) {
@@ -156,16 +166,23 @@ function _getPseudoSelector(id) {
  * Appends pseudo-selector rules to the style element.
  * @param {HTMLStyleElement} style - The style element to append to
  * @param {Array} pseudoRules - Array of pseudo rules to process
- * @param {boolean} isGeneric - Whether this is for generic tab styles
+ * @param {boolean} isGeneric - Whether this is for generic Tab styles
+ * @param {boolean} isPinned - Whether this is for pinned Tab styles
  */
-function _appendPseudoRules(style, pseudoRules, isGeneric) {
+function _appendPseudoRules({
+	style,
+	pseudoRules = [],
+	isGeneric = true,
+	isPinned = false,
+} = {}) {
 	for (const rule of pseudoRules) {
 		const pseudoSelector = _getPseudoSelector(rule.id);
-		const selector = getCssSelector(
-			!rule.forActive,
+		const selector = getCssSelector({
+			isInactive: !rule.forActive,
 			isGeneric,
-			pseudoSelector,
-		);
+			pseudoElement: pseudoSelector,
+			isPinned,
+		});
 		style.textContent += `${selector}{ ${
 			getCssRule(rule.id, rule.value)
 		} }`;
@@ -174,25 +191,37 @@ function _appendPseudoRules(style, pseudoRules, isGeneric) {
 /**
  * Checks if a style ID requires pseudo-selector handling.
  * @param {string} id - The style ID to check
- * @returns {boolean} True if this is a pseudo rule
+ * @return {boolean} True if this is a pseudo rule
  */
 function _isPseudoRule(id) {
 	return id === TAB_STYLE_HOVER || id === TAB_STYLE_TOP;
 }
 /**
  * Builds CSS rules for active/inactive tabs and separates pseudo rules.
- * @param {Array} styleList - Array of style elements
- * @param {boolean} isGeneric - Whether this is for generic tab styles
- * @returns {Object} Object containing activeCss, inactiveCss, and pseudoRules
+ *
+ * @param {Object} [param0={}] - an object contains the following parameters
+ * @param {Object[]} [param0.list=[]] - Array of style elements to process
+ * @param {boolean} [param0.isGeneric=false] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ *
+ * @return {Object} Object containing activeCss, inactiveCss, and pseudoRules
  */
-function _buildCssRules(styleList, isGeneric) {
-	let inactiveCss = `${getCssSelector(true, isGeneric)} { `;
-	let activeCss = `${getCssSelector(false, isGeneric)} {`;
+function _buildCssRules({
+	list = [],
+	isGeneric = false,
+	isPinned = false,
+} = {}) {
+	let inactiveCss = `${
+		getCssSelector({ isInactive: true, isGeneric, isPinned })
+	} { `;
+	let activeCss = `${
+		getCssSelector({ isInactive: false, isGeneric, isPinned })
+	} {`;
 	const pseudoRules = [];
-	for (const element of styleList) {
+	for (const element of list) {
 		if (_isPseudoRule(element.id)) {
 			pseudoRules.push(element);
-			return;
+			continue;
 		}
 		const rule = getCssRule(element.id, element.value);
 		if (element.forActive) {
@@ -201,16 +230,23 @@ function _buildCssRules(styleList, isGeneric) {
 			inactiveCss += rule;
 		}
 	}
+	inactiveCss += "}";
+	activeCss += "}";
 	return { activeCss, inactiveCss, pseudoRules };
 }
+
 /**
  * Gets existing style element or creates a new one.
- * @param {boolean} isGeneric - Whether this is for generic tab styles
- * @returns {HTMLStyleElement} The style element
+ * @param {boolean} isGeneric - Whether this is for generic Tab styles
+ * @param {boolean} isPinned - Whether this is for pinned Tab styles
+ * @return {HTMLStyleElement} The style element
  */
-function _getOrCreateStyleElement(isGeneric) {
+function _getOrCreateStyleElement({
+	isGeneric = false,
+	isPinned = false,
+} = {}) {
 	const styleId = `${EXTENSION_NAME}-${
-		isGeneric ? GENERIC_TAB_STYLE_KEY : ORG_TAB_STYLE_KEY
+		getPinnedSpecificKey({ isGeneric, isPinned })
 	}`;
 	const existingStyle = document.getElementById(styleId);
 	if (existingStyle != null) {
@@ -221,19 +257,28 @@ function _getOrCreateStyleElement(isGeneric) {
 	style.id = styleId;
 	return style;
 }
+
 /**
  * Processes a style list by building CSS and appending to document head.
- * @param {Array} styleList - Array of style elements to process
- * @param {boolean} isGeneric - Whether this is for generic tab styles
+ *
+ * @param {Object} [param0={}] - an object contains the following parameters
+ * @param {Object[]} [param0.list=[]] - Array of style elements to process
+ * @param {boolean} [param0.isGeneric=false] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
  */
-function _processStyleList(styleList, isGeneric) {
-	const style = _getOrCreateStyleElement(isGeneric);
-	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules(
-		styleList,
+function _processStyleList({
+	list = [],
+	isGeneric = false,
+	isPinned = false,
+} = {}) {
+	const style = _getOrCreateStyleElement({ isGeneric, isPinned });
+	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules({
+		list,
 		isGeneric,
-	);
-	style.textContent = `${inactiveCss} } ${activeCss} }`;
-	_appendPseudoRules(style, pseudoRules, isGeneric);
+		isPinned,
+	});
+	style.textContent = `${inactiveCss}${activeCss}`;
+	_appendPseudoRules({ style, pseudoRules, isGeneric, isPinned });
 	document.head.appendChild(style);
 }
 /**
@@ -244,37 +289,65 @@ function _processStyleList(styleList, isGeneric) {
  * - Builds separate CSS rules for active vs. inactive tabs.
  * - Handles pseudo-selectors (`:hover`, `::before`) for special rules.
  * - Appends the assembled `<style>` element to the document head.
- * @returns {Promise<void>} Resolves once styles are updated.
+ * @return {Promise<void>} Resolves once styles are updated.
  */
 export async function generateStyleFromSettings() {
-	const settings = await getAllStyleSettings();
+	const settings = await getStyleSettings();
 	if (settings == null || !wereSettingsUpdated(settings)) {
 		return;
 	}
 	oldSettings = settings;
 	const styleLists = [
-		{ list: settings[GENERIC_TAB_STYLE_KEY], isGeneric: true },
-		{ list: settings[ORG_TAB_STYLE_KEY], isGeneric: false },
+		{
+			list: settings[GENERIC_TAB_STYLE_KEY],
+			isGeneric: true,
+			isPinned: false,
+		},
+		{
+			list: settings[ORG_TAB_STYLE_KEY],
+			isGeneric: false,
+			isPinned: false,
+		},
+		{
+			list: settings[GENERIC_PINNED_TAB_STYLE_KEY],
+			isGeneric: true,
+			isPinned: true,
+		},
+		{
+			list: settings[ORG_PINNED_TAB_STYLE_KEY],
+			isGeneric: false,
+			isPinned: true,
+		},
 	];
-	for (const { list: styleList, isGeneric } of styleLists) {
-		if (styleList?.length > 0) {
-			_processStyleList(styleList, isGeneric);
+	for (const el of styleLists) {
+		if (el.list?.length > 0) {
+			_processStyleList(el);
 		}
 	}
 }
 
 /**
- * Generates the HTML for a tab row.
+ * Generates the HTML for a Tab row.
  *
- * @param {Object} row - The tab data object containing label and URL.
- * @param {string} row.label - The label of the tab.
- * @param {string} row.url - The URL of the tab.
- * @param {string} row.org - The org of the org-specific tab.
- * @returns {HTMLElement} - The generated list item element representing the tab.
+ * @param {Object} row - The Tab data object containing label and URL.
+ * @param {string} row.label - The label of the Tab.
+ * @param {string} row.url - The URL of the Tab.
+ * @param {string} row.org - The org of the org-specific Tab.
+ *
+ * @param {Object} conf - the configuration of the row
+ * @param {boolean} [conf.hide=false] - True to hide the row
+ * @param {boolean} [conf.isPinned=false] - True if the row is one of the pinned ones
+ * @param {number} [conf.index=0] - the index of the row template to be built
+ *
+ * @return {HTMLElement} - The generated list item element representing the tab.
  */
 export function generateRowTemplate(
 	{ label = null, url = null, org = null } = {},
-	hide = false,
+	{
+		hide = false,
+		isPinned = false,
+		index = 0,
+	},
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -288,14 +361,15 @@ export function generateRowTemplate(
 		"navexConsoleTabItem",
 		EXTENSION_NAME,
 	);
+	li.draggable = "true";
 	li.dataset.auraClass = "navexConsoleTabItem";
+	li.dataset.rowIndex = index;
 	if (hide) {
 		li.style.display = "none";
 	}
 	const a = document.createElement("a");
 	a.dataset.draggable = "true";
 	a.setAttribute("role", "tab");
-	a.setAttribute("tabindex", "-1");
 	a.setAttribute("title", miniURL); // popup showing where the Tab is pointing to
 	a.setAttribute("aria-selected", "false");
 	a.setAttribute("href", expURL);
@@ -309,6 +383,9 @@ export function generateRowTemplate(
 	if (org != null) {
 		span.classList.add(ORG_TAB_CLASS);
 		span.dataset.org = org;
+	}
+	if (isPinned) {
+		span.classList.add(PIN_TAB_CLASS);
 	}
 	a.appendChild(span);
 	// Highlight the tab related to the current page
@@ -325,7 +402,7 @@ export function generateRowTemplate(
  * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
  * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
  * @throws {Error} Throws an error if required parameters are missing or invalid.
- * @returns {HTMLElement} The generated toast container element.
+ * @return {HTMLElement} The generated toast container element.
  */
 export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const translator = await ensureTranslatorAvailability();
@@ -441,7 +518,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
  * sets the "title" attribute to "required" and the "part" attribute to "required",
  * and sets its text content to an asterisk ("*").
  *
- * @returns {HTMLElement} The <abbr> element representing the required indicator.
+ * @return {HTMLElement} The <abbr> element representing the required indicator.
  */
 async function generateRequired() {
 	const translator = await ensureTranslatorAvailability();
@@ -459,15 +536,26 @@ async function generateRequired() {
 /**
  * Creates an input element with specified attributes.
  *
- * @param {Object} options - The configuration object for the input element.
- * @param {string|null} options.id - The id of the input element (optional).
- * @param {string|null} options.label - The label for the input element (optional).
- * @param {string} options.type - The type of the input element (required).
- * @param {string|null} options.placeholder - The placeholder text for the input element (optional).
- * @param {boolean} options.required - A flag indicating whether the input is required (default is false).
- * @param {boolean} options.enabled - A flag indicating whether the input is enabled (default is true).
- * @param {string|null} options.style - The CSS styles to apply to the input element (optional).
- * @returns {HTMLInputElement} The created input element.
+ * @param {Object} [config={}] - Configuration object for the input.
+ * @param {string} config.id - The id for the input.
+ * @param {string} config.label - The label text for the input.
+ * @param {string} [config.type="text"] - The type of the input element (e.g., "text", "password").
+ * @param {boolean} [config.required=false] - Indicates if the input is required.
+ * @param {boolean} [config.enabled=trie] - Indicates if the input is enabled.
+ * @param {null} [config.placeholder=null] - Placeholder text for the input.
+ * @param {null} [config.prepend=null] - Configuration for an input element to prepend.
+ * @param {null} [config.append=null] - Configuration for an input element to append.
+ * @param {null} [config.style=null] - Additional inline styles for the main input element.
+ * @param {null} [config.value=null] - The value to be inserted in the input element.
+ * @param {null} [config.title=null] - The title of the element
+ * @param {boolean} [config.isTextArea=false] - True to create a textarea instead of a simple input field
+ *
+ * @param {Object} [translateConfig={}] - Configuration object for the translation
+ * @param {boolean} [translateConfig.translateLabel=true] - True to translate the label
+ * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
+ * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
+ *
+ * @return {HTMLInputElement} The created input element.
  */
 async function createInputElement(
 	{
@@ -525,25 +613,32 @@ async function createInputElement(
 }
 /**
  * Generates a customizable input element wrapped in a Salesforce-styled form structure.
- *
- * @param {Object} config - Configuration object for the input.
- * @param {string} config.label - The label text for the input.
- * @param {string} [config.type="text"] - The type of the input element (e.g., "text", "password").
- * @param {boolean} [config.required=false] - Indicates if the input is required.
- * @param {string|null} [config.placeholder=null] - Placeholder text for the input.
- * @param {Object|null} [config.prepend=null] - Configuration for an input element to prepend.
- * @param {Object|null} [config.append=null] - Configuration for an input element to append.
- * @param {string|null} [config.style=null] - Additional inline styles for the main input element.
- *
- * @returns {Object} - An object containing:
- *   - `inputParent`: The parent `div` containing the entire input structure.
- *   - `inputContainer`: The main input element.
- *
  * - Dynamically generates a unique `id` for the input using `getRng_n_digits(10)`.
  * - Wraps the input in a Salesforce-styled stacked form element.
  * - Supports additional inputs before (`prepend`) or after (`append`) the main input.
  * - Applies optional attributes like `placeholder`, `required`, and `style`.
  * - Maintains Salesforce Lightning Design System (SLDS) styling conventions.
+ *
+ * @param {Object} [config={}] - Configuration object for the input.
+ * @param {*} config.label - The label text for the input.
+ * @param {string} [config.type="text"] - The type of the input element (e.g., "text", "password").
+ * @param {boolean} [config.required=false] - Indicates if the input is required.
+ * @param {null} [config.placeholder=null] - Placeholder text for the input.
+ * @param {null} [config.prepend=null] - Configuration for an input element to prepend.
+ * @param {null} [config.append=null] - Configuration for an input element to append.
+ * @param {null} [config.style=null] - Additional inline styles for the main input element.
+ * @param {null} [config.value=null] - The value to be inserted in the input element.
+ * @param {null} [config.title=null] - The title of the element
+ * @param {boolean} [config.isTextArea=false] - True to create a textarea instead of a simple input field
+ *
+ * @param {Object} [translateConfig={}] - Configuration object for the translation
+ * @param {boolean} [translateConfig.translateLabel=true] - True to translate the label
+ * @param {boolean} [translateConfig.translatePlaceholder=true] - True to translate the placeholder
+ * @param {boolean} [translateConfig.translateTitle=true] - True to translate the title
+ *
+ * @return {Object} - An object containing:
+ *   - `inputParent`: The parent `div` containing the entire input structure.
+ *   - `inputContainer`: The main input element.
  */
 async function generateInput({
 	label,
@@ -628,7 +723,7 @@ async function generateInput({
  *
  * @param {string} sectionTitle - The title of the section to be displayed.
  *
- * @returns {Object} - An object containing:
+ * @return {Object} - An object containing:
  *   - `section`: The root `records-record-layout-section` element that wraps the section.
  *   - `divParent`: A container div element for additional content inside the section.
  *
@@ -710,13 +805,18 @@ export async function generateSection(sectionTitle = null) {
  * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
  *
  * @param {string} modalTitle - The title of the modal.
- * @returns {Object} An object containing key elements of the modal:
+ * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
+ * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - article: The content area within the modal.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
+ * - buttonContainer: The container for the footer of the modal
  */
-export async function generateSldsModal(modalTitle) {
+export async function generateSldsModal({
+	modalTitle = "",
+	saveButtonLabel = "continue",
+} = {}) {
 	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
@@ -734,6 +834,10 @@ export async function generateSldsModal(modalTitle) {
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
+	const awsfStyle = document.createElement("style");
+	awsfStyle.textContent =
+		`.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`;
+	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
 	backdropDiv.classList.add(
@@ -820,6 +924,7 @@ export async function generateSldsModal(modalTitle) {
 		"slds-modal__content",
 		"slds-p-around_medium",
 	);
+	modalBody.style.maxHeight = "65%";
 	modalBody.dataset.scopedScroll = "true";
 	modalContainer.appendChild(modalBody);
 	const viewModeDiv = document.createElement("div");
@@ -846,12 +951,12 @@ export async function generateSldsModal(modalTitle) {
 	const fieldContainerDiv = document.createElement("div");
 	fieldContainerDiv.classList.add(
 		"slds-clearfix",
-		"slds-card",
 		"groupDependentFieldEnabled",
 		"allow-horizontal-form",
 		"wide-input-break",
 		"full-width",
 		"forceDetailPanelDesktop",
+		"slds-p-bottom--none",
 	);
 	fieldContainerDiv.dataset.auraClass = "forceDetailPanelDesktop";
 	actionBodyDiv.appendChild(fieldContainerDiv);
@@ -860,17 +965,14 @@ export async function generateSldsModal(modalTitle) {
 	fieldContainerDiv.appendChild(article);
 	const titleContainer = document.createElement("div");
 	titleContainer.classList.add(
-		"inlineTitle",
-		"slds-p-top--none",
-		"slds-p-horizontal--medium",
-		"slds-p-bottom--medium",
+		"slds-p-around--medium",
 		"slds-text-heading--medium",
 	);
 	titleContainer.style.textAlign = "center";
 	titleContainer.style.display = "flex";
 	titleContainer.style.alignItems = "center";
 	titleContainer.style.justifyContent = "center";
-	article.appendChild(titleContainer);
+	modalHeader.appendChild(titleContainer);
 	const awsIcon = document.createElement("img");
 	awsIcon.src = BROWSER.runtime.getURL("assets/icons/awsf-128.png");
 	awsIcon.style.height = "2rem";
@@ -880,7 +982,10 @@ export async function generateSldsModal(modalTitle) {
 	heading.style.marginLeft = "0.5rem";
 	titleContainer.appendChild(heading);
 	const legend = document.createElement("div");
-	legend.classList.add("required-legend");
+	legend.classList.add(
+		"required-legend",
+		"slds-p-top--none",
+	);
 	article.appendChild(legend);
 	const abbr = document.createElement("abbr");
 	abbr.classList.add("slds-required");
@@ -891,7 +996,7 @@ export async function generateSldsModal(modalTitle) {
 	footerContainer.classList.add("inlineFooter");
 	footerContainer.style.borderTop =
 		"var(--slds-g-sizing-border-2, var(--lwc-borderWidthThick, 2px)) solid var(--slds-g-color-border-1, var(--lwc-colorBorder, rgb(229, 229, 229)))";
-	actionWrapperDiv.appendChild(footerContainer);
+	modalContainer.appendChild(footerContainer);
 	const buttonContainerDiv = document.createElement("div");
 	buttonContainerDiv.classList.add(
 		"button-container",
@@ -938,7 +1043,7 @@ export async function generateSldsModal(modalTitle) {
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-	const msg_continue = await translator.translate("continue");
+	const msg_continue = await translator.translate(saveButtonLabel);
 	saveButton.setAttribute("title", msg_continue);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.dataset.auraClass = "uiButton forceActionButton";
@@ -952,7 +1057,7 @@ export async function generateSldsModal(modalTitle) {
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
 	 *
 	 * @param {KeyboardEvent} event - The keydown event object.
-	 * @returns {void}
+	 * @return {void}
 	 */
 	function keyDownListener(event) {
 		switch (event.key) {
@@ -968,7 +1073,13 @@ export async function generateSldsModal(modalTitle) {
 		document.removeEventListener("keydown", keyDownListener);
 	}
 	document.addEventListener("keydown", keyDownListener);
-	return { modalParent, article, saveButton, closeButton };
+	return {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		buttonContainer: buttonContainerInnerDiv,
+	};
 }
 
 /**
@@ -981,9 +1092,13 @@ export async function generateSldsModal(modalTitle) {
  * @param {string|null} [radio0def.label=null] - The label text for the radio button.
  * @param {boolean} [radio0def.checked=false] - Whether this radio button is checked by default.
  * @param {Object} [radio1def] - Definition for the second radio button (same shape as radio0def).
+ * @param {string|null} [radio1def.id=null] - The id attribute for the radio input.
+ * @param {string|null} [radio1def.value=null] - The value attribute for the radio input.
+ * @param {string|null} [radio1def.label=null] - The label text for the radio button.
+ * @param {boolean} [radio1def.checked=false] - Whether this radio button is checked by default.
  * @param {...Object} otherRadioDefs - Additional radio button definitions.
  *
- * @returns {{ radioGroup: HTMLDivElement, getSelectedRadioButtonValue: () => string|undefined }}
+ * @return {{ radioGroup: HTMLDivElement, getSelectedRadioButtonValue: () => string|undefined }}
  *   An object containing:
  *   - radioGroup: the container <div> element with all radio buttons appended.
  *   - getSelectedRadioButtonValue: a function that returns the value of the currently selected radio button or undefined if none selected.
@@ -1034,7 +1149,7 @@ export function generateRadioButtons(name, {
 	/**
 	 * Returns the value of the currently selected (checked) radio button from the group.
 	 *
-	 * @returns {string|undefined} The value of the checked radio button, or undefined if none are checked.
+	 * @return {string|undefined} The value of the checked radio button, or undefined if none are checked.
 	 */
 	function getSelectedRadioButtonValue() {
 		return allRadioInputs.find((inp) => inp.checked)?.value;
@@ -1049,7 +1164,7 @@ export function generateRadioButtons(name, {
  * @param {string|null} [options.label=null] - The label for the modal. Defaults to a label fetched from saved tabs if not provided.
  * @param {string|null} [options.url=null] - The URL for the page to open in another organization.
  * @param {string|null} [options.org=null] - The org of the current page.
- * @returns {Object} An object containing key elements of the modal:
+ * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1059,9 +1174,9 @@ export async function generateOpenOtherOrgModal(
 	{ label = null, url = null, org = null } = {},
 ) {
 	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal(
-			label,
-		);
+		await generateSldsModal({
+			modalTitle: label,
+		});
 	const { section, divParent } = await generateSection("other_org_info");
 	divParent.style.width = "100%"; // makes the elements inside have full width
 	divParent.style.display = "flex";
@@ -1137,7 +1252,7 @@ export async function generateOpenOtherOrgModal(
  * @param {boolean} [required=true] - Flag indicating if the file input is required.
  * @throws {Error} Throws an error if both `allowDrop` is false and `preventFileSelection` is true.
  * @throws {Error} Throws an error if required parameters are missing.
- * @returns {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
+ * @return {{ fileInputWrapper: HTMLElement, inputContainer: HTMLInputElement }} An object containing:
  *   - fileInputWrapper: The wrapper element for the entire file input component.
  *   - inputContainer: The actual file input element.
  */
@@ -1368,7 +1483,7 @@ export async function generateSldsFileInput(
  * @param {string} id - The unique identifier for the checkbox.
  * @param {string} label - The text to display next to the checkbox.
  * @param {boolean} [checked=false] - Whether the checkbox should be initially checked.
- * @returns {HTMLLabelElement} The label element containing the checkbox input and its text.
+ * @return {HTMLLabelElement} The label element containing the checkbox input and its text.
  */
 export async function generateCheckboxWithLabel(id, label, checked = false) {
 	const translator = await ensureTranslatorAvailability();
@@ -1394,7 +1509,7 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  * @param {string} label - The title of the modal tab.
  * @param {string} url - A partial URL for the target org.
  * @param {string} org - The Org to which the Tab points to.
- * @returns {Object} An object containing key elements of the modal:
+ * @return {Object} An object containing key elements of the modal:
  * - modalParent: The main modal container element.
  * - saveButton: The save button element for user actions.
  * - closeButton: The close button element for closing the modal.
@@ -1404,9 +1519,9 @@ export async function generateCheckboxWithLabel(id, label, checked = false) {
  */
 export async function generateUpdateTabModal(label, url, org) {
 	const { modalParent, article, saveButton, closeButton } =
-		await generateSldsModal(
-			label,
-		);
+		await generateSldsModal({
+			modalTitle: label,
+		});
 	const { section, divParent } = await generateSection("tab_information");
 	divParent.style.width = "100%";
 	divParent.style.display = "flex";
@@ -1458,5 +1573,1058 @@ export async function generateUpdateTabModal(label, url, org) {
 		labelContainer,
 		urlContainer,
 		orgContainer,
+	};
+}
+
+/**
+ * Generates an i icon which includes information and a possibly a link to the resource
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {null} [param0.text=null] the text to be inserted in the popup
+ * @param {null} [param0.link=null] the valid URL to the resource to give deeper insights
+ * @param {boolean} [param0.showTop=false] whether to show the popup at the top
+ * @param {boolean} [param0.showBottom=false] whether to show the popup at the bottom
+ * @param {boolean} [param0.showRight=false] whether to show the popup at the right
+ * @param {boolean} [param0.showLeft=false] whether to show the popup at the left
+ * @return {Object} used by the `help.js` class
+ */
+export function generateHelpWith_i_popup({
+	text = null,
+	link = null,
+	showTop = false,
+	showBottom = false,
+	showRight = false,
+	showLeft = false,
+} = {}) {
+	const wasCalledWithParams = text != null || link != null;
+	const root = document.createElement("div");
+	root.className = "help-icon";
+	const anchor = document.createElement("a");
+	root.append(anchor);
+	anchor.className = "button";
+	anchor.setAttribute("aria-describedby", "tooltip");
+	const isLinkAvailable = link != null && link !== "";
+	if (wasCalledWithParams && isLinkAvailable) anchor.href = link;
+	const svgNS = "http://www.w3.org/2000/svg";
+	const svg = document.createElementNS(svgNS, "svg");
+	anchor.append(svg);
+	svg.setAttribute("focusable", "false");
+	svg.setAttribute("aria-hidden", "true");
+	svg.setAttribute("viewBox", "0 0 520 520");
+	svg.setAttribute("class", "slds-button__icon");
+	const g = document.createElementNS(svgNS, "g");
+	svg.appendChild(g);
+	const path = document.createElementNS(svgNS, "path");
+	g.appendChild(path);
+	path.setAttribute(
+		"d",
+		"M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z",
+	);
+	const assistive = document.createElement("span");
+	anchor.append(assistive);
+	assistive.className = "assistive";
+	assistive.hidden = true;
+	const tooltip = document.createElement("div");
+	root.append(tooltip);
+	tooltip.className = "tooltip";
+	tooltip.setAttribute("role", "tooltip");
+	let slot;
+	const linkTip = document.createElement("div");
+	linkTip.classList.add("link-tip");
+	if (wasCalledWithParams) {
+		tooltip.dataset.showTop = showTop ||
+			(!showTop && !showBottom && !showRight && !showLeft);
+		tooltip.dataset.showBottom = showBottom;
+		tooltip.dataset.showRight = showRight;
+		tooltip.dataset.showLeft = showLeft;
+		slot = document.createElement("span");
+		slot.textContent = text;
+		if (!isLinkAvailable) {
+			linkTip.classList.add(HIDDEN_CLASS);
+		}
+		// add help.css
+		const linkid = `${EXTENSION_NAME}-helpcss`;
+		if (!document.getElementById(linkid)) {
+			const linkEl = document.createElement("link");
+			linkEl.id = linkid;
+			linkEl.rel = "stylesheet";
+			linkEl.type = "text/css";
+			linkEl.href = BROWSER.runtime.getURL("/components/help/help.css");
+			document.head.appendChild(linkEl);
+		}
+	} else {
+		slot = document.createElement("slot");
+		slot.name = "text";
+		slot.textContent = "Nothing to see here...";
+	}
+	tooltip.append(slot);
+	tooltip.append(linkTip);
+	(async () => {
+		const translator = await ensureTranslatorAvailability();
+		assistive.textContent = await translator.translate("help");
+		linkTip.textContent = await translator.translate("help_tip_click_link");
+	})();
+	return {
+		root,
+		anchor,
+		tooltip,
+		linkTip,
+		slot,
+	};
+}
+
+/**
+ * Creates a table header cell (th)
+ * @param {string} label - The visible label text
+ * @param {string} ariaLabel - The aria-label for accessibility
+ * @param {string[]} classList - Additional CSS classes
+ * @param {{}} [info={}] - an object used to generate an info button with a popup
+ * @return {HTMLTableCellElement} The created th element
+ */
+function createTableHeader(
+	label = "",
+	ariaLabel = "",
+	classList = [],
+	info = {},
+) {
+	const th = document.createElement("th");
+	th.scope = "col";
+	th.classList.add(...classList);
+	th.setAttribute("aria-label", ariaLabel);
+	const div = document.createElement("div");
+	th.append(div);
+	div.textContent = label;
+	if (Object.keys(info).length > 0) {
+		th.style.overflow = "visible";
+		div.style.display = "flex";
+		div.style.alignItems = "center";
+		div.style.justifyContent = "space-around";
+		div.append(generateHelpWith_i_popup(info).root);
+	}
+	return th;
+}
+
+/**
+ * Creates a complete table with headers
+ * @param {Array<{label: string, ariaLabel: string, classList?: string[]}>} headers - Array of header configurations
+ * @return {Object{HTMLTableElement, HTMLTbodyElement}} The created table element and its empty tbody
+ */
+function createTable(headers = []) {
+	const table = document.createElement("table");
+	table.id = "sortable-table"; // for drag handler to find it
+	table.classList.add(
+		"forceRecordLayout",
+		"uiVirtualDataGrid--default",
+		"uiVirtualDataGrid",
+	);
+	table.style.border =
+		"var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorderSeparatorAlt,rgb(201, 201, 201))";
+	table.style.borderRadius = "var(--lwc-borderRadiusMedium,0.25rem)";
+	const thead = document.createElement("thead");
+	thead.style.position = "sticky";
+	thead.style.top = 0;
+	table.appendChild(thead);
+	const tr = document.createElement("tr");
+	thead.appendChild(tr);
+	for (const header of headers) {
+		tr.appendChild(
+			createTableHeader(
+				header.label,
+				header.ariaLabel,
+				header.classList,
+				header.info,
+			),
+		);
+	}
+	const tbody = document.createElement("tbody");
+	table.appendChild(tbody);
+	return { table, tbody };
+}
+
+/**
+ * Creates a checkbox cell for a table row
+ * @param {number} [tabIndex=0] The index of the checkbox (for later retrieval)
+ * @param {boolean} [checked=false] if the checkbox should be checked by default
+ * @return {HTMLTableCellElement} The created td element with checkbox
+ */
+function createCheckboxCell(tabIndex = 0, checked = false) {
+	const td = document.createElement("td");
+	td.classList.add(
+		"visualEditorSelectableTable",
+		"containsSelectionCell",
+	);
+	const label = document.createElement("label");
+	td.appendChild(label);
+	label.classList.add("visualEditorTableActionCell");
+	const checkbox = document.createElement("input");
+	label.appendChild(checkbox);
+	checkbox.type = "checkbox";
+	checkbox.name = "assignmentTableCheckbox";
+	checkbox.checked = checked;
+	checkbox.dataset.tabIndex = tabIndex;
+	return { td, checkbox };
+}
+
+/**
+ * Creates a text cell for a table row
+ * @param {string} text - The text content
+ * @param {string} title - The title attribute (optional)
+ * @return {HTMLTableCellElement} The created td element
+ */
+function createTextCell(text = "", title = "") {
+	const td = document.createElement("td");
+	const span = document.createElement("span");
+	td.appendChild(span);
+	span.classList.add("uiOutputText");
+	span.style.display = "inline-block";
+	span.textContent = text;
+	if (title) {
+		span.title = title;
+	}
+	return td;
+}
+
+/**
+ * Creates a complete table row
+ * @param {Object} [tab={}] object with the following keys
+ * @param {string} [tab.label=null] The Tab Label
+ * @param {string} [tab.url=null] The Tab Url
+ * @param {string|undefined} [tab.org=null] The Tab Org (for org-specific Tabs)
+ * @param {number} [index=0] the index of the current row
+ * @return {HTMLTableRowElement} The created tr element
+ */
+function createTableRow(
+	{ label = null, url = null, org = null } = {},
+	index = 0,
+) {
+	const tr = document.createElement("tr");
+	const { td, checkbox } = createCheckboxCell(index, true);
+	tr.appendChild(td);
+	tr.appendChild(createTextCell(label));
+	tr.appendChild(createTextCell(url));
+	tr.appendChild(createTextCell(org));
+	return { tr, checkbox };
+}
+
+/**
+ * Creates a Table with checkboxes to select the elements
+ * @param {any[]} [tabs=[]] The Tabs to show in the Table
+ * @param {Object{label,ariaLabel,classList[]}[]} [headers=[]] What should be displayed inside the each `th`
+ * @param {() => void} [changeListener=() => {}] change listener to all checkboxes to update button states
+ * @return Object{checkboxes:HTMLInputElement[],table:HTMLTableElement} all checkboxes created and the table generated
+ */
+function generateTableWithCheckboxes(
+	tabs = [],
+	headers = [],
+	changeListener = () => {},
+) {
+	const res = {
+		checkboxes: [],
+	};
+	const { table, tbody } = createTable(headers);
+	for (const i in tabs) {
+		const { tr, checkbox } = createTableRow(tabs[i], i);
+		tr.addEventListener("click", (e) => {
+			if (
+				e.target.tagName !== "INPUT" ||
+				e.target.type !== "checkbox"
+			) {
+				checkbox.checked = !checkbox.checked;
+				changeListener();
+			}
+		});
+		checkbox.addEventListener("click", changeListener);
+		tbody.appendChild(tr);
+		res.checkboxes.push(checkbox);
+	}
+	return Object.assign(res, { table });
+}
+
+/**
+ * Generates a modal dialog for exporting selected Tabs.
+ * This function creates a modal that displays all available Tabs with checkboxes,
+ * allowing users to select which Tabs to export. It includes a "Select All" / "Unselect All" button
+ * for convenience.
+ *
+ * @param {Array} tabs - An array of Tab objects to display in the export modal.
+ * @param {Object} [param1={}] object with the following keys
+ * @param {string} [param1.title="export_tabs"] the title of the modal
+ * @param {string} [param1.saveButtonLabel="export"] the label for the submit button
+ * @param {string} [param1.explainer="select_tabs_export"] the text used to explain what to do with this modal
+ * @return {Object} An object containing key elements of the modal:
+ * - modalParent: The main modal container element.
+ * - saveButton: The button element for confirming the selected Tabs.
+ * - closeButton: The close button element for closing the modal.
+ * - getSelectedTabs: A function that returns an array of selected Tab objects.
+ */
+/**
+ * Helper function to add title and explainer to a modal article.
+ * Creates and prepends a centered explainer span with translated text.
+ *
+ * @param {HTMLElement} article - The modal article element
+ * @param {string} explainerKey - The i18n key for the explainer text
+ * @return {Promise<HTMLElement>} The explainer element
+ */
+async function addModalExplainer(article, explainerKey) {
+	const translator = await ensureTranslatorAvailability();
+	const explainerEl = document.createElement("span");
+	explainerEl.textContent = await translator.translate(explainerKey);
+	explainerEl.style.display = "flex";
+	explainerEl.style.justifyContent = "center";
+	explainerEl.style.textAlign = "center";
+	explainerEl.classList.add(
+		"slds-p-around_medium",
+		"slds-p-bottom--none",
+	);
+	article.prepend(explainerEl);
+	return explainerEl;
+}
+
+/**
+ * Helper function to create and append a modal content container (divParent).
+ * Applies standard SLDS styling for modal content areas.
+ *
+ * @param {HTMLElement} article - The modal article element
+ * @return {HTMLElement} The created and appended container element
+ */
+function createModalContentContainer(article) {
+	const divParent = document.createElement("div");
+	article.appendChild(divParent);
+	divParent.classList.add(
+		"forceBaseListView",
+		"visualEditorModal",
+		"flexipageEditorActivateContent",
+		"flexipageEditorActivateRecordPage",
+		"slds-p-top--none",
+	);
+	divParent.style.padding =
+		"var(--lwc-spacingLarge,1.5rem) var(--lwc-spacingXLarge,2rem)";
+	return divParent;
+}
+
+/**
+ * Helper function to create a styled table cell (td).
+ *
+ * @param {string} text - The cell content text
+ * @param {Object} options - Configuration options
+ * @param {boolean} [options.wordBreak=false] - Whether to apply word-break styling
+ * @return {HTMLTableCellElement} The created td element
+ */
+function createTableCell({
+	value = "",
+	placeholder = "",
+	className = "",
+	wordBreak = false,
+} = {}) {
+	const td = document.createElement("td");
+	td.style.padding = "0.75rem";
+	td.classList.add("slds-cell-wrap");
+	const input = document.createElement("input");
+	input.type = "text";
+	input.className = className;
+	input.value = value ?? "";
+	input.placeholder = placeholder;
+	input.style.width = "100%";
+	input.style.padding = "0.25rem";
+	if (wordBreak) {
+		input.style.wordBreak = "break-all";
+	}
+	td.appendChild(input);
+	return { td, input };
+}
+
+/**
+ * Generates a modal with the given Tabs. Each row can be selected using a checkbox
+ * @param {Tab[]} [tabs=[]] - the Tab array that needs to be shown in the modal
+ * @param {Object} [param1={}] an object with the following keys
+ * @param {string} [param1.title="export_tabs"] the title so that the modal can be recognized
+ * @param {string} [param1.saveButtonLabel="export"] the label used for the submit button
+ * @param {string} [param1.explainer="select_tabs_export"] a brief explanation of what the modal is supposed to do
+ * @return {Object} with these keys
+ *  - modalParent: containing the element to append to show the modal,
+ *  - saveButton: the submit button on which to add related submit logic,
+ *  - closeButton: the cancel button which removes the modal,
+ *  - getSelectedTabs: function to retrieve all currently selected Tabs,
+ */
+export async function generateSldsModalWithTabList(tabs = [], {
+	title = "export_tabs",
+	saveButtonLabel = "export",
+	explainer = "select_tabs_export",
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const { modalParent, article, saveButton, closeButton, buttonContainer } =
+		await generateSldsModal({
+			modalTitle: await translator.translate(title),
+			saveButtonLabel: await translator.translate(saveButtonLabel),
+		});
+	await addModalExplainer(article, explainer);
+	// counter for how many Tabs are selected
+	const tabConterOpen = document.createElement("span");
+	tabConterOpen.innerHTML = "&nbsp;(";
+	saveButton.appendChild(tabConterOpen);
+	const tabCounter = document.createElement("span");
+	tabCounter.textContent = tabs.length;
+	saveButton.appendChild(tabCounter);
+	const tabCounterClose = document.createElement("span");
+	tabCounterClose.textContent = ")";
+	saveButton.appendChild(tabCounterClose);
+	// Create checkboxes for each Tab
+	const headers = [
+		{ label: "" },
+		{ label: await translator.translate("tab_label") },
+		{ label: await translator.translate("tab_url") },
+		{ label: await translator.translate("tab_org") },
+	];
+	const selectAllButton = document.createElement("button");
+	const unselectAllButton = document.createElement("button");
+	/**
+	 * Function to update select all button text based on checkbox states
+	 */
+	function updateSelectAllButtonText() {
+		// this checkboxes is the one returned from generateTableWithCheckboxes
+		const checkedCount = checkboxes.filter((cb) => cb.checked).length;
+		tabCounter.textContent = checkedCount;
+		if (checkedCount === checkboxes.length) {
+			selectAllButton.setAttribute("disabled", true);
+		} else {
+			selectAllButton.removeAttribute("disabled");
+		}
+		if (checkedCount === 0) {
+			unselectAllButton.setAttribute("disabled", true);
+		} else {
+			unselectAllButton.removeAttribute("disabled");
+		}
+		if (unselectAllButton.hasAttribute("disabled")) {
+			saveButton.setAttribute("disabled", true);
+		} else {
+			saveButton.removeAttribute("disabled");
+		}
+	}
+	const { checkboxes, table: tabsListTable } =
+		await generateTableWithCheckboxes(
+			tabs,
+			headers,
+			updateSelectAllButtonText,
+		);
+	// Add Tabs list container
+	const divParent = createModalContentContainer(article);
+	divParent.appendChild(tabsListTable);
+	// Create select/unselect all button container
+	// Create Select All button
+	selectAllButton.setAttribute("disabled", true);
+	selectAllButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	selectAllButton.textContent = await translator.translate("select_all");
+	buttonContainer.prepend(selectAllButton);
+	// Create Unselect All button
+	unselectAllButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	unselectAllButton.textContent = await translator.translate("unselect_all");
+	buttonContainer.prepend(unselectAllButton);
+	selectAllButton.addEventListener("click", () => {
+		for (const checkbox of checkboxes) {
+			checkbox.checked = true;
+		}
+		updateSelectAllButtonText();
+	});
+	unselectAllButton.addEventListener("click", () => {
+		for (const checkbox of checkboxes) {
+			checkbox.checked = false;
+		}
+		updateSelectAllButtonText();
+	});
+	/**
+	 * Function to get selected tabs
+	 * @return {Object{selectedAll: Boolean, tabs: Array}} an object with the selected Tabs and a boolean value to represent whether all Tabs where selected
+	 */
+	function getSelectedTabs() {
+		const selectedAll = selectAllButton.hasAttribute("disabled");
+		const selectedTabs = selectedAll ? tabs : checkboxes
+			.filter((checkbox) => checkbox.checked)
+			.map((checkbox) =>
+				tabs[Number.parseInt(checkbox.dataset.tabIndex)]
+			);
+		return {
+			selectedAll,
+			tabs: selectedTabs,
+		};
+	}
+	return {
+		modalParent,
+		saveButton,
+		closeButton,
+		getSelectedTabs,
+	};
+}
+
+/**
+ * Creates a drag handle SVG icon for reordering rows
+ * @param {boolean} [draggable=false] - whether the handle should be set as draggable or not
+ * @return {SVGSVGElement} The drag handle SVG element
+ */
+function createDragHandle(draggable = false) {
+	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	svg.setAttribute("viewBox", "0 0 24 24");
+	svg.setAttribute("width", "20");
+	svg.setAttribute("height", "20");
+	svg.setAttribute("fill", "currentColor");
+	svg.dataset.draggable = draggable;
+	// Six dots on two columns
+	const rect1 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect1.setAttribute("x", "6");
+	rect1.setAttribute("y", "4");
+	rect1.setAttribute("width", "2");
+	rect1.setAttribute("height", "2");
+	svg.appendChild(rect1);
+	const rect2 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect2.setAttribute("x", "6");
+	rect2.setAttribute("y", "11");
+	rect2.setAttribute("width", "2");
+	rect2.setAttribute("height", "2");
+	svg.appendChild(rect2);
+	const rect3 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect3.setAttribute("x", "6");
+	rect3.setAttribute("y", "18");
+	rect3.setAttribute("width", "2");
+	rect3.setAttribute("height", "2");
+	svg.appendChild(rect3);
+	const rect4 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect4.setAttribute("x", "16");
+	rect4.setAttribute("y", "4");
+	rect4.setAttribute("width", "2");
+	rect4.setAttribute("height", "2");
+	svg.appendChild(rect4);
+	const rect5 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect5.setAttribute("x", "16");
+	rect5.setAttribute("y", "11");
+	rect5.setAttribute("width", "2");
+	rect5.setAttribute("height", "2");
+	svg.appendChild(rect5);
+	const rect6 = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"rect",
+	);
+	rect6.setAttribute("x", "16");
+	rect6.setAttribute("y", "18");
+	rect6.setAttribute("width", "2");
+	rect6.setAttribute("height", "2");
+	svg.appendChild(rect6);
+	return svg;
+}
+
+/**
+ * Helper function to create a styled button with SLDS classes.
+ *
+ * @param {string} text - The button text
+ * @param {Object} options - Configuration options
+ * @param {string} [options.variant="neutral"] - Button variant: "neutral" or "destructive"
+ * @param {string} [options.action] - The data-action attribute value
+ * @param {number} [options.tabIndex] - The data-tabIndex attribute value
+ * @return {HTMLButtonElement} The created button element
+ */
+function createStyledButton(
+	text,
+	{ variant = "neutral", action, tabIndex } = {},
+) {
+	const btn = document.createElement("a");
+	btn.classList.add(
+		"slds-button",
+		`slds-button_${variant}`,
+		"slds-button_small",
+		"awsf-td-button",
+	);
+	btn.textContent = text;
+	btn.style.marginLeft = "0";
+	btn.style.width = "100%";
+	btn.style.justifyContent = "flex-start";
+	btn.style.paddingLeft = "0.75rem";
+	btn.style.borderRadius = "0";
+	btn.style.border = "none";
+	btn.style.textAlign = "left";
+	if (action != null) {
+		btn.dataset.action = action;
+	}
+	if (tabIndex != null) {
+		btn.dataset.tabIndex = tabIndex;
+	}
+	return btn;
+}
+
+/**
+ * Creates a table row with editable inputs for label, URL, and org.
+ * Used by generateManageTabsModal for creating editable tab rows.
+ *
+ * @param {Object} [tab={}] an Object with the following keys
+ * @param {string} [tab.label=""] the label of the Tab
+ * @param {string} [tab.url=""] the url of the Tab
+ * @param {string|null} [tab.org=null] the org of the Tab
+ * @param {Object} [config={}] an Object with the following keys
+ * @param {number} [config.index=0] The row index for data-row-index
+ * @param {boolean} [config.pinned=false] whether the Tab is pinned
+ * @param {boolean} [config.draggable=false] whether the tr is draggable
+ * @param {boolean} [config.disabled=true] whether the tr elements should be disabled
+ * @param {boolean} [config.isThisOrgTab=true] whether the tr contains a Tab related to this Org
+ * @return {Promise<HTMLTableRowElement>} The created tr element
+ */
+export async function createManageTabRow({
+	label = "",
+	url = "",
+	org = null,
+} = {}, {
+	index = 0,
+	pinned = false,
+	disabled = true,
+	isThisOrgTab = true,
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const draggable = !disabled;
+	const tr = document.createElement("tr");
+	tr.dataset.rowIndex = index;
+	tr.classList.add(
+		"slds-hint-parent",
+		EXTENSION_NAME,
+	);
+	if (!isThisOrgTab) {
+		tr.classList.add(HIDDEN_CLASS);
+	}
+	tr.draggable = draggable;
+	tr.dataset.draggable = draggable;
+	tr.dataset.isThisOrgTab = isThisOrgTab;
+	// Drag handle cell
+	const dragCell = document.createElement("td");
+	dragCell.style.padding = "0.75rem";
+	dragCell.style.width = "30px";
+	dragCell.style.textAlign = "center";
+	dragCell.style.cursor = "grab";
+	dragCell.classList.add("slds-cell-wrap");
+	dragCell.appendChild(createDragHandle(draggable));
+	dragCell.dataset.draggable = draggable;
+	tr.appendChild(dragCell);
+	// Label cell with input
+	const { td: labelTd, input: labelInput } = createTableCell({
+		value: label,
+		placeholder: await translator.translate("tab_label"),
+		className: "label",
+	});
+	tr.appendChild(labelTd);
+	// URL cell with input
+	const { td: urlTd, input: urlInput } = createTableCell({
+		value: url,
+		placeholder: await translator.translate("tab_url"),
+		className: "url",
+		wordBreak: true,
+	});
+	tr.appendChild(urlTd);
+	// Org cell with input
+	const { td: orgTd, input: orgInput } = createTableCell({
+		value: org,
+		placeholder: await translator.translate("tab_org"),
+		className: "org",
+	});
+	tr.appendChild(orgTd);
+	// Actions cell with dropdown
+	const actionsCell = document.createElement("td");
+	tr.appendChild(actionsCell);
+	actionsCell.style.padding = "0.75rem";
+	actionsCell.classList.add("slds-cell-wrap", "slds-text-align_center");
+	actionsCell.style.overflow = "visible";
+	// Position the dropdown relative to button
+	const buttonContainer = document.createElement("div");
+	actionsCell.appendChild(buttonContainer);
+	buttonContainer.style.position = "relative";
+	buttonContainer.style.display = "inline-block";
+	// Dropdown button
+	const dropdownButton = document.createElement("button");
+	buttonContainer.appendChild(dropdownButton);
+	dropdownButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	if (disabled) {
+		dropdownButton.setAttribute("disabled", true);
+	}
+	dropdownButton.style.position = "relative";
+	dropdownButton.textContent = `▼`; // downward arrow
+	dropdownButton.title = await translator.translate("actions");
+	dropdownButton.dataset.name = "dropdownButton";
+	// Dropdown menu container
+	const dropdownMenu = document.createElement("div");
+	buttonContainer.appendChild(dropdownMenu);
+	dropdownMenu.classList.add(
+		"actions-dropdown-menu",
+		HIDDEN_CLASS,
+	);
+	dropdownMenu.style.position = "absolute";
+	dropdownMenu.style.top = "100%";
+	dropdownMenu.style.right = "0";
+	dropdownMenu.style.backgroundColor = "white";
+	dropdownMenu.style.border = "1px solid #d3d3d3";
+	dropdownMenu.style.borderRadius = "0.25rem";
+	dropdownMenu.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+	dropdownMenu.style.zIndex = "1";
+	dropdownMenu.style.minWidth = "120px";
+	dropdownMenu.style.padding = "0.5rem 0";
+	dropdownMenu.style.display = "flex";
+	dropdownMenu.style.flexDirection = "column";
+	// Open button
+	const openBtn = createStyledButton(
+		await translator.translate("act_open"),
+		{ action: "open", tabIndex: index },
+	);
+	if (url) {
+		openBtn.href = Tab.expandURL(url, getCurrentHref());
+	}
+	dropdownMenu.appendChild(openBtn);
+	// Pin/Unpin button (toggle - only show one at a time)
+	const pinBtn = createStyledButton(
+		await translator.translate("cxm_pin_tab"),
+		{ action: CXM_PIN_TAB, tabIndex: index },
+	);
+	pinBtn.classList.add("pin-btn");
+	if (pinned) {
+		dragCell.classList.add(PIN_TAB_CLASS);
+		pinBtn.style.display = "none";
+	}
+	dropdownMenu.appendChild(pinBtn);
+	const unpinBtn = createStyledButton(
+		await translator.translate("cxm_unpin_tab"),
+		{ action: CXM_UNPIN_TAB, tabIndex: index },
+	);
+	unpinBtn.classList.add("unpin-btn");
+	if (!pinned) {
+		unpinBtn.style.display = "none";
+	}
+	dropdownMenu.appendChild(unpinBtn);
+	// Delete button
+	const deleteBtn = createStyledButton(
+		await translator.translate("act_delete"),
+		{ action: CXM_REMOVE_TAB, tabIndex: index },
+	);
+	deleteBtn.classList.add("delete-btn");
+	if (label === "" && url === "") {
+		deleteBtn.setAttribute("disabled", true); // disabled for empty rows
+	}
+	dropdownMenu.appendChild(deleteBtn);
+	// Dropdown toggle functionality
+	dropdownButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		dropdownMenu.classList.toggle(HIDDEN_CLASS);
+	});
+	return {
+		tr,
+		dropdownMenu,
+		dropdownButton,
+		logger: {
+			label: labelInput,
+			url: urlInput,
+			org: orgInput,
+			last_input: {
+				label,
+				url,
+				org,
+			},
+		},
+	};
+}
+
+/**
+ * Generates a modal for managing saved tabs with editable fields and drag-to-reorder functionality.
+ * Allows users to edit tabs, add new tabs, and manage pinning/unpinning directly from the modal.
+ *
+ * @param {Array<Tab>} tabs - Array of saved Tab objects
+ * @param {Object} options - Configuration options
+ * @param {string} [options.title="manage_tabs"] - i18n key for modal title
+ * @param {string} [options.saveButtonLabel="save"] - i18n key for save button label
+ * @param {string} [options.explainer="manage_tabs_explainer"] - i18n key for explainer text
+ * @return {Promise<Object>} An object containing modalParent, closeButton, tbody (for event listeners), and loggers (for tracking inputs) + deleteAllTabsButton to remove the disabled attribute when needed
+ */
+export async function generateManageTabsModal(tabs = [], {
+	title = "manage_tabs",
+	saveButtonLabel = "save",
+	explainer = "manage_tabs_explainer",
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const {
+		modalParent,
+		article,
+		closeButton,
+		saveButton,
+		buttonContainer,
+	} = await generateSldsModal({
+		modalTitle: await translator.translate(title),
+		saveButtonLabel: await translator.translate(saveButtonLabel),
+	});
+	await addModalExplainer(article, explainer);
+	// Create a table-like structure for tabs
+	const divParent = createModalContentContainer(article);
+	const wikiLinkTab = `${EXTENSION_GITHUB_LINK}/wiki/What-is-a-Tab`;
+	// Table header with drag handle column
+	const headers = [
+		{
+			label: "",
+			info: {
+				text: await translator.translate("help_drag_tabs"),
+				link: "",
+				showRight: true,
+			},
+		}, // drag handle column
+		{
+			label: await translator.translate("tab_label"),
+			info: {
+				text: await translator.translate("help_tab_label"),
+				link: `${wikiLinkTab}#Label`,
+				showBottom: true,
+			},
+		},
+		{
+			label: await translator.translate("tab_url"),
+			info: {
+				text: await translator.translate("help_tab_url"),
+				link: `${wikiLinkTab}#Url`,
+				showBottom: true,
+			},
+		},
+		{
+			label: await translator.translate("tab_org"),
+			info: {
+				text: await translator.translate("help_tab_org"),
+				link: `${wikiLinkTab}#Org`,
+				showBottom: true,
+			},
+		},
+		{
+			label: await translator.translate("actions"),
+			info: {
+				text: await translator.translate("help_tab_actions"),
+				link: "",
+				showLeft: true,
+			},
+		},
+	];
+	const { table, tbody } = createTable(headers);
+	divParent.appendChild(table);
+	// add 2 new buttons to hide & show not-this-org Tabs
+	// Create Show All button
+	const showAllTabsButton = document.createElement("button");
+	showAllTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+		"show_all_tabs",
+	);
+	showAllTabsButton.textContent = await translator.translate("show_all_tabs");
+	buttonContainer.prepend(showAllTabsButton);
+	// Create Unselect All button
+	const hideOtherOrgTabsButton = document.createElement("button");
+	hideOtherOrgTabsButton.setAttribute("disabled", true);
+	hideOtherOrgTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+		"hide_other_org_tabs",
+	);
+	hideOtherOrgTabsButton.textContent = await translator.translate(
+		"hide_other_org_tabs",
+	);
+	buttonContainer.prepend(hideOtherOrgTabsButton);
+	showAllTabsButton.addEventListener("click", () => {
+		for (
+			const otherOrgTr of tbody.querySelectorAll(
+				"tr[data-is-this-org-tab=false]",
+			)
+		) {
+			otherOrgTr.classList.remove(HIDDEN_CLASS);
+		}
+		showAllTabsButton.setAttribute("disabled", true);
+		hideOtherOrgTabsButton.removeAttribute("disabled");
+		updateModalBodyOverflow(article);
+	});
+	hideOtherOrgTabsButton.addEventListener("click", () => {
+		for (
+			const otherOrgTr of tbody.querySelectorAll(
+				"tr[data-is-this-org-tab=false]",
+			)
+		) {
+			otherOrgTr.classList.add(HIDDEN_CLASS);
+		}
+		hideOtherOrgTabsButton.setAttribute("disabled", true);
+		showAllTabsButton.removeAttribute("disabled");
+		updateModalBodyOverflow(article);
+	});
+	// Create Delete All button
+	const deleteAllTabsButton = document.createElement("button");
+	// we should never set disabled=false due to chrome making the button disabled anyways
+	if (tabs.length < 1) {
+		deleteAllTabsButton.setAttribute("disabled", true);
+	}
+	deleteAllTabsButton.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+		"slds-button_small",
+	);
+	deleteAllTabsButton.textContent = await translator.translate(
+		"delete_all",
+	);
+	buttonContainer.prepend(deleteAllTabsButton);
+	const loggers = []; // track input changes
+	// Create rows for all existing tabs
+	const allDropMenus = [];
+	const allTrs = [];
+	const pinnedNumber = tabs[TabContainer.keyPinnedTabsNo];
+	let notThisOrgTabs = 0;
+	for (const i in tabs) {
+		const tab = tabs[i];
+		const isThisOrgTab = tab.org == null ||
+			tab.org === Tab.extractOrgName(getCurrentHref());
+		if (!isThisOrgTab) {
+			notThisOrgTabs++;
+		}
+		const {
+			tr,
+			dropdownMenu,
+			dropdownButton,
+			logger,
+		} = await createManageTabRow(tab, {
+			index: i,
+			pinned: i < pinnedNumber,
+			disabled: false,
+			isThisOrgTab,
+		});
+		allTrs.push({ tr, button: dropdownButton });
+		allDropMenus.push(dropdownMenu);
+		loggers.push(logger);
+		tbody.appendChild(tr);
+	}
+	// disable the showAllTabsButton if needed
+	if (notThisOrgTabs <= 0) {
+		showAllTabsButton.setAttribute("disabled", true);
+	}
+	// Add empty row for new tabs
+	const {
+		tr: emptyRow,
+		dropdownMenu: lastMenu,
+		dropdownButton: lastButton,
+		logger: lastLogger,
+	} = await createManageTabRow({}, {
+		index: tabs.length,
+	});
+	allTrs.push({ tr: emptyRow, button: lastButton });
+	allDropMenus.push(lastMenu);
+	loggers.push(lastLogger);
+	tbody.appendChild(emptyRow);
+	return {
+		modalParent,
+		closeButton,
+		tbody,
+		saveButton,
+		loggers,
+		deleteAllTabsButton,
+		trsAndButtons: allTrs,
+		dropdownMenus: allDropMenus,
+	};
+}
+
+/**
+ * Creates a div with a review svg and a sponsor svg which can be used to redirect the user to the extension's review page or its sponsor one.
+ * By default, the svgs are hidden.
+ * @return {Object} An object containing root (to add to the DOM), reviewSvg, sponsorSvg, reviewLink, sponsorLink which can be used to add titles and alts
+ */
+export function generateReviewSponsorSvgs() {
+	const reviewSponsorContainer = document.createElement("div");
+	// review link
+	const reviewLink = document.createElement("a");
+	reviewLink.href = "#";
+	reviewSponsorContainer.appendChild(reviewLink);
+	reviewLink.dataset.i18n = "write_review+-+title";
+	const reviewSvg = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"svg",
+	);
+	reviewSvg.setAttribute("viewBox", "0 0 24 24");
+	reviewSvg.setAttribute("fill", "none");
+	reviewSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+	reviewSvg.id = "review";
+	reviewSvg.classList.add(HIDDEN_CLASS);
+	reviewSvg.dataset.i18n = "write_review+-+alt";
+	for (
+		const attrs of [
+			{
+				opacity: "0.5",
+				d: "M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5",
+				"stroke-width": "1.5",
+				"stroke-linecap": "round",
+			},
+			{
+				d: "M17.3009 2.80624L16.652 3.45506L10.6872 9.41993C10.2832 9.82394 10.0812 10.0259 9.90743 10.2487C9.70249 10.5114 9.52679 10.7957 9.38344 11.0965C9.26191 11.3515 9.17157 11.6225 8.99089 12.1646L8.41242 13.9L8.03811 15.0229C7.9492 15.2897 8.01862 15.5837 8.21744 15.7826C8.41626 15.9814 8.71035 16.0508 8.97709 15.9619L10.1 15.5876L11.8354 15.0091C12.3775 14.8284 12.6485 14.7381 12.9035 14.6166C13.2043 14.4732 13.4886 14.2975 13.7513 14.0926C13.9741 13.9188 14.1761 13.7168 14.5801 13.3128L20.5449 7.34795L21.1938 6.69914C22.2687 5.62415 22.2687 3.88124 21.1938 2.80624C20.1188 1.73125 18.3759 1.73125 17.3009 2.80624Z",
+				"stroke-width": "1.5",
+			},
+			{
+				opacity: "0.5",
+				d: "M16.6522 3.45508C16.6522 3.45508 16.7333 4.83381 17.9499 6.05034C19.1664 7.26687 20.5451 7.34797 20.5451 7.34797M10.1002 15.5876L8.4126 13.9",
+				"stroke-width": "1.5",
+			},
+		]
+	) {
+		const path = document.createElementNS(
+			"http://www.w3.org/2000/svg",
+			"path",
+		);
+		for (const [key, value] of Object.entries(attrs)) {
+			path.setAttribute(key, value);
+		}
+		reviewSvg.appendChild(path);
+	}
+	reviewLink.appendChild(reviewSvg);
+	// sponsor link
+	const sponsorLink = document.createElement("a");
+	sponsorLink.href = "#";
+	reviewSponsorContainer.appendChild(sponsorLink);
+	sponsorLink.dataset.i18n = "send_tip+-+title";
+	const sponsorSvg = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"svg",
+	);
+	sponsorSvg.setAttribute("viewBox", "0 0 490 490");
+	sponsorSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+	sponsorSvg.id = "sponsor";
+	sponsorSvg.classList.add(HIDDEN_CLASS);
+	sponsorSvg.dataset.i18n = "send_tip+-+alt";
+	const sponsorPath = document.createElementNS(
+		"http://www.w3.org/2000/svg",
+		"path",
+	);
+	sponsorPath.setAttribute(
+		"d",
+		"M128.833,334.605c32.081,29.39,62.382,57.15,76.074,82.153L245.014,490l40.096-73.247c13.688-25.004,43.988-52.766,76.068-82.158c59.669-54.669,127.3-116.632,127.653-200.181c0.144-33.927-13.428-66.322-38.218-91.217C423.278,15.745,384.441,0,344.059,0c-38.281,0-73.14,13.846-99.055,36.422C219.087,13.846,184.224,0,145.939,0C66.112,0,1.168,60.211,1.168,134.221C1.518,217.967,69.157,279.933,128.833,334.605z M145.939,45.719c54.72,0,99.067,39.607,99.067,88.502c0-48.895,44.334-88.502,99.053-88.502c54.705,0,99.261,39.607,99.053,88.502C442.674,237.755,289.858,312.866,245.006,394.8C200.14,312.866,47.319,237.755,46.887,134.221C46.887,85.326,91.225,45.719,145.939,45.719z",
+	);
+	sponsorSvg.appendChild(sponsorPath);
+	sponsorLink.appendChild(sponsorSvg);
+	return {
+		root: reviewSponsorContainer,
+		reviewSvg,
+		sponsorSvg,
+		reviewLink,
+		sponsorLink,
 	};
 }

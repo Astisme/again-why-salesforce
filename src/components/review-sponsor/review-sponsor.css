@@ -1,0 +1,17 @@
+svg {
+	height: 2rem;
+	padding-left: 0.1rem;
+}
+
+svg#review {
+	stroke: var(--color);
+}
+
+svg#sponsor {
+	fill: var(--color);
+	height: 1.8rem;
+}
+
+.hidden {
+	display: none !important;
+}

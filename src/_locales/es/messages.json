@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Eliminar",
+		"description": "[gestionar-Tab] eliminar una fila"
+	},
+	"act_open": {
+		"message": "🪂 Abrir",
+		"description": "[gestionar-Tab] Abrir la Tab seleccionada"
+	},
+	"actions": {
+		"message": "Acciones",
+		"description": "Etiqueta del menú desplegable para las acciones de la Tab"
+	},
+	"active": {
+		"message": "Activo",
+		"description": "Se utiliza en conmutadores para el estado activo"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs activos",
+		"description": "Pestañas (Tab) genéricas ancladas del usuario que están activas actualmente"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs activos",
+		"description": "Pestañas (Tab) genéricas del usuario que están activas actualmente"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs activos",
+		"description": "Pestañas (Tab) ancladas de organización del usuario que están activas actualmente"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs activos",
+		"description": "Pestañas (Tab) de organización del usuario que están activas actualmente"
+	},
 	"allow": {
 		"message": "Permitir",
 		"description": "[req_permission] Botón para permitir permisos"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[menú-contextual]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] abrir el modal para gestionar las $tabs guardadas directamente en la página de configuración de Salesforce"
+	},
 	"cxm_move": {
 		"message": "🧭 Mover Tab",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menú-contextual]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Anclar",
+		"description": "[context-menu] permite al usuario mantener esta Tab al comienzo de su lista"
+	},
 	"cxm_remove": {
 		"message": "💥 Eliminar Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Otros Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Eliminar Ancladas",
+		"description": "[context-menu] permite al usuario eliminar sus Tab ancladas"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs a la derecha",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Este Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Eliminar No Ancladas",
+		"description": "[context-menu] permite al usuario eliminar sus Tab no ancladas"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Restablecer Tabs predeterminadas",
@@ -151,6 +199,14 @@
 		"message": "🎯 Ordenar Tabs",
 		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs automáticamente (menú principal)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ por Uso",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tab por cuántas veces hacen clic en sus Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ por Tiempo",
+		"description": "menú contextual para permitir a los usuarios ordenar sus Tab por la fecha en que se hizo clic en las Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 por Etiqueta",
 		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por etiqueta"
@@ -163,25 +219,33 @@
 		"message": "🤖 por Url",
 		"description": "menú contextual para permitir a los usuarios ordenar sus Tabs por URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Ocultar Tab No Organizacionales",
+		"description": "[context-menu] ocultar temporalmente Tab genéricas"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Ocultar Tab Organizacionales",
+		"description": "[context-menu] ocultar temporalmente Tab Organizacionales"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Desanclar",
+		"description": "[context-menu] permite al usuario eliminar esta Tab de su lista de ancladas"
+	},
 	"cxm_update": {
 		"message": "✏️ Actualizar Tab",
 		"description": "[menú contextual]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Alternar Org",
-		"description": "[menú contextual]"
+		"message": "👜 Alternar Organización",
+		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Otras Actualizaciones",
 		"description": "[menú contextual]"
 	},
-	"delete": {
-		"message": "Eliminar",
-		"description": "[popup] Eliminar una fila"
-	},
 	"delete_all": {
-		"message": "$delete todas las Tabs",
-		"description": "[emergente] título en la papelera para vaciar todas las Tabs"
+		"message": "Eliminar todas las $tabs",
+		"description": "[emergente] título en la papelera para vaciar todas las $tabs"
 	},
 	"descending": {
 		"message": "Descendente (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Error al agregar Tab.",
 		"description": "[error] error genérico al agregar una Tab"
+	},
+	"error_already_pinned": {
+		"message": "Esta Tab ya estaba anclada.",
+		"description": "[error] el usuario intentó anclar una Tab ya anclada"
+	},
+	"error_already_unpinned": {
+		"message": "Esta Tab ya estaba desanclada.",
+		"description": "[error] el usuario intentó desanclar una Tab ya desanclada"
+	},
+	"error_cannot_move": {
+		"message": "¡Esta Tab no se puede mover!",
+		"description": "[error] la Tab solicitada no se puede mover en este momento."
+	},
+	"error_cannot_move_dir": {
+		"message": "¡Esta Tab no se puede mover en esta dirección!",
+		"description": "[error] la Tab solicitada no se puede mover en este momento."
 	},
 	"error_check_update": {
 		"message": "Error al comprobar actualizaciones",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Error durante la importación:\n",
 		"description": "[error] Se produjo un error durante el proceso de importación."
+	},
+	"error_internal": {
+		"message": "Error Interno",
+		"description": "[error] error genérico"
 	},
 	"error_invalid_key": {
 		"message": "El parámetro key pasado a la función no es válido",
@@ -323,9 +407,21 @@
 		"message": "¡No se proporcionó ningún objeto para verificar!",
 		"description": "[error] No se proporcionó ningún objeto."
 	},
+	"error_no_pinned": {
+		"message": "¡Aún no tiene ninguna Tab anclada!",
+		"description": "[error] el usuario intentó eliminar las Tab ancladas pero no tiene ninguna Tab anclada"
+	},
 	"error_no_setup_tab": {
 		"message": "No se encontró la pestaña de Configuración.",
 		"description": "[error] La extensión no pudo encontrar dónde colocar los Tabs favoritos."
+	},
+	"error_no_tabs_selected": {
+		"message": "No hay Tabs Seleccionadas para exportar",
+		"description": "[toast] error cuando el usuario intenta exportar sin haber seleccionado ninguna Tab"
+	},
+	"error_no_unpinned": {
+		"message": "¡No tiene ninguna Tab no anclada!",
+		"description": "[error] el usuario intentó eliminar las Tab no ancladas pero no tiene ninguna Tab no anclada"
 	},
 	"error_no_url": {
 		"message": "¡No hay URL para verificar!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Aún no se ha inicializado.",
 		"description": "[error] error genérico cuando una variable no está lista"
+	},
+	"error_pin_tab": {
+		"message": "Error al anclar Tab",
+		"description": "[error]"
 	},
 	"error_processing_tabs": {
 		"message": "Error al procesar las Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Error al eliminar otras Tabs.",
 		"description": "[error] error genérico al eliminar otras Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Error al eliminar Tab ancladas.",
+		"description": "[error] Error genérico utilizado al eliminar Tab no ancladas"
+	},
 	"error_removing_tab": {
 		"message": "Error al eliminar Tab.",
 		"description": "[error] error genérico al eliminar una Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error al eliminar Tab no ancladas.",
+		"description": "[error] Error genérico utilizado al eliminar Tab no ancladas"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Error al eliminar todas las Tabs visibles.",
@@ -383,6 +491,14 @@
 		"message": "¡No se pueden sincronizar Tabs nulos!",
 		"description": "[error] Se intentó sincronizar nada."
 	},
+	"error_tab_click_count": {
+		"message": "El Recuento de Clics debe ser un número no negativo",
+		"description": "[error] el usuario intentó crear una Tab con un recuento de clics incorrecto"
+	},
+	"error_tab_click_date": {
+		"message": "La Fecha de Clic debe ser un número que no resulte en una fecha futura",
+		"description": "[error] el usuario intentó crear una Tab con una fecha de clic incorrecta"
+	},
 	"error_tab_constructor": {
 		"message": "Utiliza Tab.create() en lugar de new Tab()",
 		"description": "[error] informa al desarrollador cómo usar la clase Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "No se encontró el Tab.",
 		"description": "[error] El Tab no se incluyó en la lista."
+	},
+	"error_tab_not_pinned": {
+		"message": "¡La Tab aún no está anclada!",
+		"description": "[error] el usuario intentó desanclar una Tab no anclada"
 	},
 	"error_tab_object_creation": {
 		"message": "Al llamar con un objeto, no pase nada más.",
@@ -434,6 +554,10 @@
 		"message": "translator aún no se ha inicializado.",
 		"description": "[error] TranslationService no estaba listo"
 	},
+	"error_unknown_file_structure": {
+		"message": "No pudimos entender un archivo que querías importar\nSi el problema persiste, compártelo con nosotros abriendo un problema en GitHub",
+		"description": "[importar] no se reconoció el archivo del usuario"
+	},
 	"error_unknown_message": {
 		"message": "Mensaje desconocido recibido",
 		"description": "se ha recibido un mensaje desconocido de un listener"
@@ -441,6 +565,10 @@
 	"error_unknown_request": {
 		"message": "Solicitud desconocida.",
 		"description": "[error] error genérico después de recibir un mensaje no reconocido"
+	},
+	"error_unpin_tab": {
+		"message": "Error al desanclar Tab",
+		"description": "[error]"
 	},
 	"error_useless_remove": {
 		"message": "No se puede eliminar:\nNo se puede eliminar una página que nunca se ha guardado.",
@@ -453,6 +581,10 @@
 	"export": {
 		"message": "Exportar",
 		"description": "[popup] Botón de exportación"
+	},
+	"export_tabs": {
+		"message": "Exportar Tabs",
+		"description": "[modal] título para el modal de exportación de Tabs"
 	},
 	"export_title": {
 		"message": "Exportar todos los Tabs",
@@ -482,6 +614,14 @@
 		"message": "General",
 		"description": "Etiqueta para la categoría de configuración general"
 	},
+	"generic_pin_tabs": {
+		"message": "$pinned $tabs genéricas",
+		"description": "Tab favoritas del usuario que no son específicas de la organización"
+	},
+	"generic_tabs": {
+		"message": "$tabs genéricas",
+		"description": "Tab favoritas del usuario que no son específicas de la organización"
+	},
 	"help": {
 		"message": "Ayuda",
 		"description": ""
@@ -494,6 +634,14 @@
 		"message": "Las Tabs recién favoritas se insertan al principio de su lista de Tabs en la barra de configuración en lugar de agregarse al final.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Cuando esté habilitado, podrá ver sus $tabs tan pronto como inicie $salesforce_setup",
+		"description": "[ayuda-ajustes] para el permiso opcional que nos permite estar listos tan pronto como se abra $salesforce_setup"
+	},
+	"help_allow_export": {
+		"message": "Cuando esté habilitado, podrá $export sus $tabs y guardarlas en su ordenador.",
+		"description": "[ayuda-ajustes] para el permiso opcional que nos permite descargar las Tab en la máquina del usuario"
+	},
 	"help_automatic_open_login": {
 		"message": "Si hace clic en la ventana emergente de la extensión fuera de un dominio de Salesforce, lo llevará a la página de inicio de sesión de Salesforce automáticamente.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -501,6 +649,10 @@
 	"help_automatic_open_setup": {
 		"message": "Si hace clic en la ventana emergente de la extensión dentro de un dominio de Salesforce pero no en una página de configuración, lo llevará a la página de configuración de Salesforce automáticamente.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Puedes reordenar tus $tabs utilizando los puntos y arrastrándolas.",
+		"description": "[manage-tabs] explica cómo arrastrar la Tab"
 	},
 	"help_keep_sort": {
 		"message": "Cuando está habilitado, sus Tabs se mantienen en orden clasificado, ya sea por etiqueta, URL u organización; dependiendo de lo que elija.",
@@ -546,9 +698,33 @@
 		"message": "Desactiva la comprobación de la extensión que verifica que un fragmento de URL coincida con el formato de los ID de registro/objeto de Salesforce (utilizado para establecer automáticamente la Tab guardada como un Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Aquí encontrarás un submenú para realizar diferentes acciones en la $tab de la misma fila.",
+		"description": "[manage-tabs] explica qué contiene la flecha de la derecha"
+	},
+	"help_tab_label": {
+		"message": "Este es el nombre común que usarás para recordar a dónde te llevará esta $tab",
+		"description": "[manage-tabs] explica qué es la etiqueta de la Tab"
+	},
+	"help_tab_org": {
+		"message": "Este es el nombre de la Salesforce $org donde se mostrará esta $tab Si se deja vacío esta $tab se mostrará en cada Salesforce $org que visites",
+		"description": "[manage-tabs] explica qué es la Org de la Tab"
+	},
+	"help_tab_url": {
+		"message": "Este es el enlace (acortado) al que serás redirigido al hacer clic en esta $tab",
+		"description": "[manage-tabs] explica qué es la URL de la Tab"
+	},
 	"help_tip_click_link": {
 		"message": "¡Haga clic para ser redirigido a la documentación de esta configuración!",
 		"description": "[ayuda-configuración] llamada a la acción para permitir al usuario leer más sobre una configuración específica"
+	},
+	"hide_other_org_tabs": {
+		"message": "Ocultar $tabs de $other_org_placeholder",
+		"description": "[manage-tabs] etiqueta del botón para ocultar otras Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "si hace clic en la ventana emergente de la extensión",
+		"description": "[placeholder] utilizado por otros textos"
 	},
 	"import": {
 		"message": "Importar",
@@ -566,6 +742,10 @@
 		"message": "Tipo de archivo no válido.\nSolo se admiten archivos JSON.",
 		"description": "[error] La archivo utilizado para la importación no es un JSON."
 	},
+	"import_metadata": {
+		"message": "Importar metadatos de Tab (\"Recuento de Clics\", \"Fecha de Clic\" etc.).",
+		"description": "[label] importar todo lo que se encuentre en el archivo durante el proceso de importación"
+	},
 	"import_successful": {
 		"message": "Importación exitosa",
 		"description": "[import] La importación se completó; se mostrará la cantidad de registros importados"
@@ -577,6 +757,10 @@
 	"import_title": {
 		"message": "$import_tabs desde archivo JSON",
 		"description": "[emergente] título en el botón de importar"
+	},
+	"inactive": {
+		"message": "Inactivo",
+		"description": "Se utiliza en conmutadores para el estado inactivo"
 	},
 	"insert_another": {
 		"message": "Insertar otro",
@@ -594,6 +778,10 @@
 		"message": "Cursiva",
 		"description": "Opción de estilo de fuente para texto en cursiva"
 	},
+	"label": {
+		"message": "Etiqueta",
+		"description": "[key] el nombre del Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Tecnología de navegación personalizada de Salesforce"
@@ -601,6 +789,18 @@
 	"login_to_salesforce": {
 		"message": "Iniciar sesión en Salesforce",
 		"description": "[notSalesforceSetup] Llamado a la acción para redirigir al inicio de sesión de Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Gestionar $tabs",
+		"description": "[modal-title] modal para gestionar $tabs guardadas con campos editables y arrastrar para reordenar"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edita, reordena y gestiona tus $tabs guardadas directamente desde este modal. Arrastra las filas para reordenar o usa el menú desplegable para más acciones.",
+		"description": "[modal-explainer] explica la funcionalidad del modal de gestión de pestañas"
+	},
+	"must_non_empty_str": {
+		"message": "debe ser una cadena no vacía",
+		"description": "[placeholder] utilizado por otros textos"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -614,12 +814,16 @@
 		"message": "No se encontró ninguna acción coincidente",
 		"description": "[error] En Salesforce, la acción solicitada no coincide con ninguna acción disponible."
 	},
+	"no_tabs_to_export": {
+		"message": "No hay Tabs para exportar",
+		"description": "[toast] error cuando no hay Tabs para exportar"
+	},
 	"nss_invalid_url": {
 		"message": "URL inválida detectada.",
 		"description": "[notSalesforceSetup] una URL que no es válida"
 	},
 	"nss_not_setup_page": {
-		"message": "Esta no es una página de Configuración de $salesforce_lightning.",
+		"message": "Esta no es una página de Configuración de $salesforce_lightning",
 		"description": "[notSalesforceSetup] el usuario no está en una página de Salesforce."
 	},
 	"open_here": {
@@ -645,6 +849,14 @@
 	"opt_add_tabs_front": {
 		"message": "Agregar nuevas Tabs al frente.",
 		"description": "[settings] permite al usuario agregar todas las Tabs nuevas al frente"
+	},
+	"opt_allow_domains": {
+		"message": "Permitir que $extension_label acceda a las páginas de Salesforce cuando las visite.",
+		"description": "[ajuste] permiso opcional para ejecutar las extensiones cuando el usuario visita $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Permitir que $extension_label exporte sus $tabs cuando lo solicite.",
+		"description": "[ajuste] permiso opcional para permitirnos exportar las Tab del usuario"
 	},
 	"opt_automatic_open_login": {
 		"message": "Abrir automáticamente la página de $salesforce_login al hacer clic en la ventana emergente si no se está en una página de Salesforce.",
@@ -722,9 +934,21 @@
 		"message": "O $drop",
 		"description": "[importar] permitir al usuario mover archivos con el ratón y soltarlos"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] el $org de Salesforce del Tab"
+	},
 	"org_link": {
 		"message": "Enlace de Org",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "$pinned $tabs de organización",
+		"description": "Tab que son específicas de la organización"
+	},
+	"org_tabs": {
+		"message": "$tabs de organización",
+		"description": "Tab que son específicas de la organización"
 	},
 	"other_org_info": {
 		"message": "Otra información de Org",
@@ -737,6 +961,22 @@
 	"overwrite_tabs": {
 		"message": "Sobrescribir Tabs guardados.",
 		"description": "[label] Elimina todos los Tabs guardados durante el proceso de importación"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "la página se abrirá en la Tab actual del navegador",
+		"description": "[placeholder] utilizado por otros textos"
+	},
+	"permission_request_failure": {
+		"message": "El permiso no fue concedido.",
+		"description": "[error] el usuario nos pidió que solicitáramos un permiso pero luego no lo aceptó"
+	},
+	"permission_request_success": {
+		"message": "¡El permiso ha sido concedido!",
+		"description": "[éxito] el usuario nos pidió que solicitáramos un permiso y lo aceptó"
+	},
+	"pinned": {
+		"message": "Anclada",
+		"description": "Tab del usuario que siempre se encuentran al comienzo de la lista"
 	},
 	"preserve_org_tabs": {
 		"message": "Conservar Tabs de otras orgs.",
@@ -763,7 +1003,7 @@
 		"description": "[req_permission] Etiqueta cuando el usuario no desea que se le pregunte de forma permanente"
 	},
 	"req_permissions_header": {
-		"message": "Permítanos acceder automáticamente\na las páginas de $salesforce_setup.",
+		"message": "Permítanos acceder automáticamente\na las páginas de $salesforce_setup",
 		"description": "[req_permission] encabezado de la página para solicitar permisos"
 	},
 	"req_permissions_paragraph": {
@@ -778,6 +1018,10 @@
 		"message": "= Información requerida",
 		"description": "[modal] Indica al usuario que cierta información es obligatoria"
 	},
+	"salesforce_domain": {
+		"message": "Dominio de Salesforce",
+		"description": "[placeholder] utilizado por otros textos"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] La plataforma Salesforce Lightning"
@@ -785,6 +1029,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "la página de inicio de sesión de Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Página de Salesforce",
+		"description": "[placeholder] utilizado en otros textos"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -797,6 +1045,22 @@
 	"save_tab": {
 		"message": "Guardar como Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
+	},
+	"select_all": {
+		"message": "Seleccionar Todo",
+		"description": "[modal] botón para seleccionar todos los Tabs en el modal de exportación"
+	},
+	"select_tabs": {
+		"message": "Seleccione qué $tabs desea",
+		"description": "[import] permite al usuario seleccionar qué $tabs importar antes de importarlos"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $exportar",
+		"description": "[import] permite al usuario seleccionar qué $tabs exportar antes de exportarlos"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $importar",
+		"description": "[import] permite al usuario seleccionar qué $tabs importar antes de importarlos"
 	},
 	"send_tip": {
 		"message": "Envíanos una propina ❤️",
@@ -829,6 +1093,126 @@
 	"set_org_styler": {
 		"message": "Estilizador de Org",
 		"description": "Etiqueta para configurar el estilo de Tab específico de la Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Etiqueta para la vista previa de la apariencia de la Tab genérica cuando está anclada"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Etiqueta para configurar el estilo de las Tab genéricas cuando están ancladas"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Etiqueta para la vista previa de la apariencia de la Tab específica de la organización cuando está anclada"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Etiqueta para configurar el estilo de las Tab específicas de la organización cuando están ancladas"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab genéricas activas"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab genéricas"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Etiqueta para establecer el color de la barra superior para las Tab genéricas activas"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab de organización activas"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo para las Tab específicas de la organización"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab activas específicas de la organización"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color del borde para las Tab de organización"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab de organización activas"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color del texto para las Tab específicas de la organización"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab activas específicas de la organización"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Indicación para seleccionar estilos de decoración para las Tab de organización"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab de organización activas"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón para las Tab específicas de la organización"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab activas específicas de la organización"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de la sombra para las Tab de organización"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Etiqueta para establecer el color de la barra superior para las Tab de organización activas"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Inserte el color de fondo para sus Tab-s genéricas activas.",
@@ -946,13 +1330,57 @@
 		"message": "Página de Configuración",
 		"description": "[notSalesforceSetup] Página utilizada para modificar la configuración de Salesforce"
 	},
+	"show_all_tabs": {
+		"message": "Mostrar todas las $tabs",
+		"description": "[manage-tabs] etiqueta del botón para mostrar todas las Tab"
+	},
 	"skip": {
 		"message": "Omitir",
 		"description": "[req_permission] Botón para NO permitir permisos"
 	},
+	"style_generic_pinned": {
+		"message": "Estilo de $generic_tabs ancladas",
+		"description": "[options] Etiqueta de conmutación para aplicar estilo a las Tab genéricas ancladas"
+	},
+	"style_org_pinned": {
+		"message": "Estilo de $org_tabs ancladas",
+		"description": "[options] Etiqueta de conmutación para aplicar estilo a las Tab de organización ancladas"
+	},
+	"style_settings_background_label": {
+		"message": "Inserte el color de fondo para sus",
+		"description": "Etiqueta para establecer el color de fondo"
+	},
+	"style_settings_border_color_label": {
+		"message": "Inserte el color del borde para sus",
+		"description": "Etiqueta para establecer el color del borde"
+	},
+	"style_settings_color_label": {
+		"message": "Inserte el color del texto para sus",
+		"description": "Etiqueta para establecer el color del texto"
+	},
+	"style_settings_decoration_label": {
+		"message": "Elija uno o más estilos de decoración para sus",
+		"description": "Indicación para seleccionar estilos de decoración"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Inserte el color de fondo al pasar el ratón para sus",
+		"description": "Etiqueta para establecer el color de fondo al pasar el ratón"
+	},
+	"style_settings_shadow_label": {
+		"message": "Inserte el color de la sombra para sus",
+		"description": "Etiqueta para establecer el color de la sombra"
+	},
+	"style_settings_top_active_label": {
+		"message": "Inserte el color para la barra en la parte superior de sus activas",
+		"description": "Etiqueta para establecer el color activo de la barra superior"
+	},
 	"successfully_imported": {
 		"message": "Importación exitosa",
 		"description": "[toast] El usuario ha agregado Tabs desde un archivo externo."
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "uno de los enlaces favoritos del usuario"
 	},
 	"tab_explain": {
 		"message": "Cada elemento debe tener 'label' y 'url' como cadenas. Además, cada elemento puede tener 'org' como cadena.",
@@ -1002,6 +1430,10 @@
 		"message": "Tabs",
 		"description": "Los enlaces favoritos del usuario."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Exportadas Correctamente",
+		"description": "[toast] mensaje de éxito cuando las Tabs se exportan"
+	},
 	"tabs_saved": {
 		"message": "Tabs guardados.",
 		"description": "[toast] Los Tabs se han guardado correctamente."
@@ -1022,6 +1454,14 @@
 		"message": "Subrayado ondulado",
 		"description": "Opción de estilo de decoración para aplicar un subrayado ondulado al texto de Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Tienes cambios sin guardar. ¿Quieres salir sin guardar?",
+		"description": "[manage-tabs] el usuario solicitó ir a una Tab sin guardar primero"
+	},
+	"unselect_all": {
+		"message": "Deseleccionar Todo",
+		"description": "[modal] botón para deseleccionar todos los Tabs en el modal de exportación"
+	},
 	"update_available": {
 		"message": "Actualización disponible",
 		"description": "hay una nueva actualización disponible para la extensión"
@@ -1030,9 +1470,21 @@
 		"message": "Subir",
 		"description": "[import] Permite al usuario buscar y seleccionar archivos"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] el enlace del Tab"
+	},
 	"users": {
 		"message": "Usuarios",
 		"description": "El nombre de la página relacionada con ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Por favor, exporte sus nuevas Tab ya que el archivo que ha utilizado no será compatible en futuras versiones.",
+		"description": "[warning] el usuario importó sus Tab utilizando una configuración obsoleta del archivo json"
+	},
+	"when_click_popup_while": {
+		"message": "página al hacer clic en la ventana emergente mientras",
+		"description": "[placeholder] utilizado por otros textos"
 	},
 	"where_to": {
 		"message": "¿A dónde?",

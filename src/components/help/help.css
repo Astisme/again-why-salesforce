@@ -1,0 +1,124 @@
+.help-icon {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 4px;
+}
+.help-icon .button {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	color: var(--shade, #f3f3f3);
+	min-width: unset;
+	min-height: unset;
+	width: fit-content;
+}
+.help-icon .button:focus .slds-button__icon,
+.help-icon .button:hover .slds-button__icon {
+	fill: var(--highlight-hover, #2a6bc6);
+}
+.help-icon .button .slds-button__icon {
+	width: 1rem;
+	height: 1rem;
+	fill: var(--color, #000000);
+}
+.help-icon .tooltip {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 6px;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+	background-color: #253858;
+	color: var(--background-color, #ffffff);
+	padding: 8px;
+	border-radius: 4px;
+	font-size: 13px;
+	white-space: break-spaces;
+	width: 20em;
+	text-align: center;
+	/* default: above the icon */
+	bottom: calc(100% + 6px);
+	top: auto;
+	z-index: 2;
+	display: block;
+}
+
+.help-icon .tooltip::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -6px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: #253858 transparent transparent transparent;
+}
+
+.tooltip[data-show-bottom="true"]:not(
+	[data-show-top="true"],
+	[data-show-right="true"],
+	[data-show-left="true"]
+) {
+	top: calc(100% + 6px);
+	bottom: auto;
+	&::after {
+		border-color: transparent transparent #253858 transparent;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.tooltip[data-show-right="true"]:not(
+	[data-show-top="true"],
+	[data-show-bottom="true"],
+	[data-show-left="true"]
+) {
+	left: calc(100% + 6px);
+	top: 50%;
+	bottom: auto;
+	transform: translateY(-50%);
+	&::after {
+		top: 50%;
+		left: -6px;
+		transform: translateY(-50%);
+		border-color: transparent #253858 transparent transparent;
+	}
+}
+
+.tooltip[data-show-left="true"]:not(
+	[data-show-top="true"],
+	[data-show-right="true"],
+	[data-show-bottom="true"]
+) {
+	right: calc(100% + 6px);
+	left: auto;
+	top: 50%;
+	bottom: auto;
+	transform: translateY(-50%);
+	&::after {
+		top: 50%;
+		right: -12px;
+		left: auto;
+		transform: translateY(-50%);
+		border-color: transparent transparent transparent #253858;
+	}
+}
+
+.help-icon .button:focus + .tooltip,
+.help-icon .button:hover + .tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+
+.link-tip {
+	font-style: italic;
+	color: var(--warning, #b76501);
+}
+
+.hidden {
+	display: none !important;
+}

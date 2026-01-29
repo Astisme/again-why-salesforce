@@ -7,33 +7,39 @@ enum StorageKeys {
 	SETTINGS_KEY = "settings",
 	GENERIC_TAB_STYLE_KEY = "settings-tab_generic_style",
 	ORG_TAB_STYLE_KEY = "settings-tab_org_style",
+	GENERIC_PINNED_TAB_STYLE_KEY = "settings-tab_generic_style-pinned",
+	ORG_PINNED_TAB_STYLE_KEY = "settings-tab_org_style-pinned",
 }
 
 export interface MockStorage {
-	againWhySalesforce: Tab[];
-	settings: object[];
-	"settings-tab_generic_style": object[] | undefined;
-	"settings-tab_org_style": object[] | undefined;
-	_locale: string;
+	[StorageKeys.WHY_KEY]: Tab[];
+	[StorageKeys.SETTINGS_KEY]: object[];
+	[StorageKeys.GENERIC_TAB_STYLE_KEY]: object[] | undefined;
+	[StorageKeys.ORG_TAB_STYLE_KEY]: object[] | undefined;
+	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: object[] | undefined;
+	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]: object[] | undefined;
+	[StorageKeys.LOCALE_KEY]: string;
 }
 // Mock browser APIs
 export const mockStorage: MockStorage = {
-	againWhySalesforce: [],
-	settings: [],
-	"settings-tab_generic_style": undefined,
-	"settings-tab_org_style": undefined,
-	_locale: "fr",
+	[StorageKeys.WHY_KEY]: [],
+	[StorageKeys.SETTINGS_KEY]: [],
+	[StorageKeys.LOCALE_KEY]: "fr",
+	[StorageKeys.GENERIC_TAB_STYLE_KEY]: undefined,
+	[StorageKeys.ORG_TAB_STYLE_KEY]: undefined,
+	[StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY]: undefined,
+	[StorageKeys.ORG_PINNED_TAB_STYLE_KEY]: undefined,
 };
 
 export interface InternalMessage {
 	what: string;
 	url?: string;
 	set?: any;
-	key?: string;
+	key?: string | string[];
 	keys?: string | string[];
 }
 
-mockStorage.settings.push(
+mockStorage[StorageKeys.SETTINGS_KEY].push(
 	{ enabled: "fr", id: "picked-language" },
 	{ enabled: false, id: "persist_sort" },
 );
@@ -79,6 +85,11 @@ type OnMessageCallback = (
 	sendResponse: (response?: any) => void,
 ) => boolean | void;
 type OnCommandCallback = (command: string) => void;
+type PermissionMap = Record<string, true>;
+type PermissionObject = {
+	permissions: PermissionMap;
+	origins: PermissionMap;
+};
 
 export const mockBrowser = {
 	storage: {
@@ -106,6 +117,7 @@ export const mockBrowser = {
 			addListener: () => {},
 		},
 	},
+
 	runtime: {
 		sendMessage: (
 			message: InternalMessage,
@@ -115,7 +127,6 @@ export const mockBrowser = {
 			delete (chrome.runtime as any).lastError;
 			const setError = (message: string) =>
 				(chrome.runtime as any).lastError = message;
-
 			let response: any;
 			switch (message.what) {
 				case "get":
@@ -143,9 +154,10 @@ export const mockBrowser = {
 						: [message.keys];
 					for (const key of keys) {
 						if (typeof key === "string") {
-							const foundSetting = mockStorage.settings.filter(
-								(s) => s.id === key,
-							);
+							const foundSetting =
+								mockStorage[StorageKeys.SETTINGS_KEY].filter(
+									(s) => s.id === key,
+								);
 							if (
 								foundSetting != null && foundSetting.length > 0
 							) {
@@ -155,7 +167,7 @@ export const mockBrowser = {
 								break;
 							}
 						} else if (key == null) {
-							response = mockStorage.settings;
+							response = mockStorage[StorageKeys.SETTINGS_KEY];
 						} else {
 							response = undefined;
 							setError(
@@ -169,8 +181,28 @@ export const mockBrowser = {
 					break;
 				}
 				case "get-style-settings": {
-					const settings = mockStorage[message.key];
-					if (message.keys == null || settings == null) {
+					const updatedKey = message.key == null;
+					if (updatedKey) {
+						message.key = [
+							StorageKeys.GENERIC_TAB_STYLE_KEY,
+							StorageKeys.ORG_TAB_STYLE_KEY,
+							StorageKeys.GENERIC_PINNED_TAB_STYLE_KEY,
+							StorageKeys.ORG_PINNED_TAB_STYLE_KEY,
+						];
+					}
+					const settings = Array.isArray(message.key)
+						? Object.fromEntries(
+							Object.entries(mockStorage).filter(([key]) =>
+								message.key.includes(key)
+							),
+						)
+						: mockStorage[message.key];
+					if (
+						updatedKey &&
+						Object.values(settings).every((s) => s?.[1] == null)
+					) {
+						response = null;
+					} else if (message.keys == null || settings == null) {
 						response = settings;
 					} else {
 						if (!Array.isArray(message.keys)) {
@@ -185,7 +217,13 @@ export const mockBrowser = {
 					}
 					break;
 				}
+				case "browser-tab":
+					response = {
+						url: "https://www.mycustomorg.my.force.com/lightning/setup/anypage",
+					};
+					break;
 				case "echo":
+				case "warning":
 					response = message.echo;
 					break;
 				default:
@@ -244,11 +282,13 @@ export const mockBrowser = {
 			},
 		},
 	},
+
 	i18n: {
 		getMessage: (_: string): string => {
 			return "Again, Why Salesforce";
 		},
 	},
+
 	contextMenus: {
 		onClicked: {
 			_listeners: [] as OnClickedCallback[],
@@ -269,6 +309,7 @@ export const mockBrowser = {
 			this._contextMenus.push(cm);
 		},
 	},
+
 	tabs: {
 		onActivated: {
 			_listeners: [] as OnActivatedCallback[],
@@ -304,6 +345,7 @@ export const mockBrowser = {
 			return Promise.resolve(true);
 		},
 	},
+
 	windows: {
 		onFocusChanged: {
 			_listeners: [] as OnFocusChangedCallback[],
@@ -317,6 +359,7 @@ export const mockBrowser = {
 			},
 		},
 	},
+
 	commands: {
 		onCommand: {
 			_listeners: [] as OnCommandCallback[],
@@ -338,6 +381,7 @@ export const mockBrowser = {
 			return Promise.resolve(this._mockCommands);
 		},
 	},
+
 	action: {
 		_popupMap: new Map<number | undefined, string>(),
 		setPopup(details: { tabId?: number; popup: string }): Promise<void> {
@@ -349,6 +393,7 @@ export const mockBrowser = {
 			return this._popupMap.get(tabId);
 		},
 	},
+
 	cookies: {
 		_cookies: [] as Cookie[],
 		getAll(which: Cookie): Promise<Cookie[]> {
@@ -360,6 +405,44 @@ export const mockBrowser = {
 		},
 		setMockCookies(cookies: Cookie[]): void {
 			this._cookies = cookies;
+		},
+	},
+
+	permissions: {
+		_permissions: {} as PermissionObject,
+		request(permissionObj: PermissionObject): Promise<boolean> {
+			for (const category of ["permissions", "origins"] as const) {
+				const source = permissionObj[category];
+				if (source) {
+					for (const key of source) {
+						if (this._permissions[category] == null) {
+							this._permissions[category] = {};
+						}
+						this._permissions[category][key] = true;
+						// special case for downloads (enable BROWSER.downloads)
+						if (key === "downloads") {
+							globalThis.BROWSER.downloads = {}; //only need to not be null
+						}
+					}
+				}
+			}
+			return Promise.resolve(true);
+		},
+		contains(permissionObj: PermissionObject): Promise<boolean> {
+			let allWereFound = true;
+			for (const category of ["permissions", "origins"] as const) {
+				const target = this._permissions[category];
+				const source = permissionObj[category];
+				if (source) {
+					for (const key of source) {
+						if (!target?.[key]) {
+							allWereFound = false;
+							break;
+						}
+					}
+				}
+			}
+			return Promise.resolve(allWereFound);
 		},
 	},
 };
@@ -406,6 +489,21 @@ export const translations = {
 		},
 		"world": {
 			"message": "$hello World",
+		},
+		"salesforce": {
+			"message": "Salesforce",
+		},
+		"sf_login": {
+			"message": "$salesforce Login",
+		},
+		"use_sf_login": {
+			"message": "Use $sf_login",
+		},
+		"you_should": {
+			"message": "You should",
+		},
+		"plz_use_sf_login": {
+			"message": "$you_should $use_sf_login please!",
 		},
 		"error_missing_key": {
 			"message": "Key not found anywhere",

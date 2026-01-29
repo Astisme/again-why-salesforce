@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Hapus",
+		"description": "[kelola-Tab] hapus satu baris"
+	},
+	"act_open": {
+		"message": "🪂 Buka",
+		"description": "[kelola-Tab] Buka Tab yang dipilih"
+	},
+	"actions": {
+		"message": "Tindakan",
+		"description": "Label menu dropdown untuk tindakan Tab"
+	},
+	"active": {
+		"message": "Aktif",
+		"description": "Digunakan dalam tombol sakelar untuk status aktif"
+	},
+	"active_generic_pin_tabs": {
+		"message": "$generic_pin_tabs aktif",
+		"description": "Tab Tersemat generik pengguna yang sedang aktif"
+	},
+	"active_generic_tabs": {
+		"message": "$generic_tabs aktif",
+		"description": "Tab generik pengguna yang sedang aktif"
+	},
+	"active_org_pin_tabs": {
+		"message": "$org_pin_tabs aktif",
+		"description": "Tab Tersemat org pengguna yang sedang aktif"
+	},
+	"active_org_tabs": {
+		"message": "$org_tabs aktif",
+		"description": "Tab org pengguna yang sedang aktif"
+	},
 	"allow": {
 		"message": "Izinkan",
 		"description": "[req_permission] Tombol untuk memberikan izin"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[menu-konteks]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] buka modal untuk mengelola $tabs yang disimpan langsung di halaman Penyiapan Salesforce"
+	},
 	"cxm_move": {
 		"message": "🧭 Pindahkan Tab",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[menu-konteks]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Sematkan",
+		"description": "[menu-konteks] biarkan pengguna menyimpan Tab ini di awal daftar mereka"
+	},
 	"cxm_remove": {
 		"message": "💥 Hapus Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Tab lainnya",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Hapus Yang Disematkan",
+		"description": "[menu-konteks] biarkan pengguna menghapus Tab mereka yang disematkan"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Hapus Tab di kanan",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Hapus Tab ini",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Hapus Yang Tidak Disematkan",
+		"description": "[menu-konteks] biarkan pengguna menghapus Tab mereka yang tidak disematkan"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Reset Tab Default",
@@ -151,6 +199,14 @@
 		"message": "🎯 Urutkan Tabs",
 		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka secara otomatis (menu induk)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ berdasarkan Penggunaan",
+		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka berdasarkan berapa kali mereka mengeklik Tab mereka"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ berdasarkan Waktu",
+		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka berdasarkan kapan Tab tersebut diklik"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 menurut Label",
 		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka menurut label"
@@ -163,25 +219,33 @@
 		"message": "🤖 menurut Url",
 		"description": "menu konteks untuk memungkinkan pengguna mengurutkan Tab mereka menurut URL"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Sembunyikan Tab non-Org",
+		"description": "[menu-konteks] sembunyikan sementara Tab generik"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Sembunyikan Tab Org",
+		"description": "[menu-konteks] sembunyikan sementara Tab Org"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Lepaskan Sematan",
+		"description": "[menu-konteks] biarkan pengguna menghapus Tab ini dari daftar yang disematkan"
+	},
 	"cxm_update": {
 		"message": "✏️ Perbarui Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Alihkan Org",
-		"description": "[context-menu]"
+		"message": "👜 Alihkan Org",
+		"description": "[menu-konteks]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Pembaruan Lainnya",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Hapus",
-		"description": "[popup] Menghapus satu baris"
-	},
 	"delete_all": {
-		"message": "$delete semua Tabs",
-		"description": "[popup] judul di tempat sampah untuk mengosongkan semua Tabs"
+		"message": "Hapus semua $tabs",
+		"description": "[popup] judul pada tempat sampah untuk mengosongkan semua $tabs"
 	},
 	"descending": {
 		"message": "Turun (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Kesalahan saat menambah Tab.",
 		"description": "[error] Kesalahan umum saat menambah Tab"
+	},
+	"error_already_pinned": {
+		"message": "Tab ini sudah disematkan.",
+		"description": "[kesalahan] pengguna mencoba menyematkan Tab yang sudah disematkan"
+	},
+	"error_already_unpinned": {
+		"message": "Tab ini sudah dilepaskan sematannya.",
+		"description": "[kesalahan] pengguna mencoba melepaskan sematan Tab yang sudah dilepaskan sematannya"
+	},
+	"error_cannot_move": {
+		"message": "Tab ini tidak dapat dipindahkan!",
+		"description": "[kesalahan] Tab yang diminta tidak dapat dipindahkan saat ini."
+	},
+	"error_cannot_move_dir": {
+		"message": "Tab ini tidak dapat dipindahkan ke arah ini!",
+		"description": "[kesalahan] Tab yang diminta tidak dapat dipindahkan saat ini."
 	},
 	"error_check_update": {
 		"message": "Kesalahan saat memeriksa pembaruan",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Kesalahan saat impor:\n",
 		"description": "[error] Terjadi kesalahan selama proses impor."
+	},
+	"error_internal": {
+		"message": "Kesalahan Internal",
+		"description": "[kesalahan] kesalahan umum"
 	},
 	"error_invalid_key": {
 		"message": "Parameter kunci yang dilewatkan ke fungsi tidak valid",
@@ -323,9 +407,21 @@
 		"message": "Tidak ada objek untuk diperiksa!",
 		"description": "[error] Objek tidak dikirim."
 	},
+	"error_no_pinned": {
+		"message": "Anda belum memiliki Tab yang disematkan!",
+		"description": "[kesalahan] pengguna mencoba menghapus Tab yang disematkan tetapi mereka tidak memiliki Tab yang disematkan"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab tidak ditemukan.",
 		"description": "[error] Ekstensi tidak dapat menemukan tempat untuk menyisipkan Tabs favorit."
+	},
+	"error_no_tabs_selected": {
+		"message": "Tidak Ada Tab yang Dipilih untuk ekspor",
+		"description": "[toast] error ketika pengguna mencoba mengekspor tanpa memilih Tabs"
+	},
+	"error_no_unpinned": {
+		"message": "Anda tidak memiliki Tab yang tidak disematkan!",
+		"description": "[kesalahan] pengguna mencoba menghapus Tab yang tidak disematkan tetapi mereka tidak memiliki Tab yang tidak disematkan"
 	},
 	"error_no_url": {
 		"message": "Tidak ada URL untuk diperiksa!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "Belum diinisialisasi.",
 		"description": "[error] Kesalahan umum ketika variabel belum siap"
+	},
+	"error_pin_tab": {
+		"message": "Kesalahan saat menyematkan Tab",
+		"description": "[kesalahan]"
 	},
 	"error_processing_tabs": {
 		"message": "Kesalahan saat memproses Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Kesalahan saat menghapus Tabs lain.",
 		"description": "[error] Kesalahan umum saat menghapus Tabs lain"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Kesalahan saat menghapus Tab yang disematkan.",
+		"description": "[kesalahan] Kesalahan umum yang digunakan saat menghapus Tab yang tidak disematkan"
+	},
 	"error_removing_tab": {
 		"message": "Kesalahan saat menghapus Tab.",
 		"description": "[error] Kesalahan umum saat menghapus Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Kesalahan saat menghapus Tab yang tidak disematkan.",
+		"description": "[kesalahan] Kesalahan umum yang digunakan saat menghapus Tab yang tidak disematkan"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Kesalahan saat menghapus semua Tab terlihat.",
@@ -383,6 +491,14 @@
 		"message": "Tidak dapat menyinkronkan Tabs kosong!",
 		"description": "[error] Mencoba menyinkronkan sesuatu yang kosong."
 	},
+	"error_tab_click_count": {
+		"message": "Jumlah Klik harus berupa angka non-negatif",
+		"description": "[kesalahan] pengguna mencoba membuat Tab dengan jumlah klik yang salah"
+	},
+	"error_tab_click_date": {
+		"message": "Tanggal Klik harus berupa angka yang tidak menghasilkan tanggal di masa mendatang",
+		"description": "[kesalahan] pengguna mencoba membuat Tab dengan tanggal klik yang salah"
+	},
 	"error_tab_constructor": {
 		"message": "Gunakan Tab.create() alih-alih new Tab()",
 		"description": "[error] Beri tahu pengembang cara menggunakan kelas Tab"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab tidak ditemukan.",
 		"description": "[error] Tab tidak terdapat dalam daftar."
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab belum disematkan!",
+		"description": "[kesalahan] pengguna mencoba melepaskan sematan Tab yang tidak disematkan"
 	},
 	"error_tab_object_creation": {
 		"message": "Saat memanggil dengan objek, jangan kirim apa pun yang lain.",
@@ -434,6 +554,10 @@
 		"message": "translator belum diinisialisasi.",
 		"description": "[error] TranslationService belum siap"
 	},
+	"error_unknown_file_structure": {
+		"message": "Kami tidak dapat memahami file yang ingin Anda impor\nJika masalah berlanjut, silakan bagikan kepada kami dengan membuka masalah di GitHub",
+		"description": "[impor] file pengguna tidak dikenali"
+	},
 	"error_unknown_message": {
 		"message": "Pesan tidak dikenal diterima",
 		"description": "pesan tidak dikenal telah diterima dari pendengar"
@@ -441,6 +565,10 @@
 	"error_unknown_request": {
 		"message": "Permintaan tidak dikenal.",
 		"description": "[error] Kesalahan umum setelah menerima pesan yang tidak dikenali"
+	},
+	"error_unpin_tab": {
+		"message": "Kesalahan saat melepaskan sematan Tab",
+		"description": "[kesalahan]"
 	},
 	"error_useless_remove": {
 		"message": "Tidak dapat menghapus:\nHalaman yang belum pernah disimpan tidak bisa dihapus.",
@@ -453,6 +581,10 @@
 	"export": {
 		"message": "Ekspor",
 		"description": "[popup] Tombol ekspor"
+	},
+	"export_tabs": {
+		"message": "Ekspor Tabs",
+		"description": "[modal] judul untuk modal ekspor Tabs"
 	},
 	"export_title": {
 		"message": "Ekspor semua Tabs",
@@ -482,6 +614,14 @@
 		"message": "Umum",
 		"description": "Label untuk kategori pengaturan umum"
 	},
+	"generic_pin_tabs": {
+		"message": "Tab $pinned generik",
+		"description": "Tab favorit pengguna yang tidak spesifik untuk org"
+	},
+	"generic_tabs": {
+		"message": "Tab generik",
+		"description": "Tab favorit pengguna yang tidak spesifik untuk org"
+	},
 	"help": {
 		"message": "Bantuan",
 		"description": ""
@@ -494,6 +634,14 @@
 		"message": "Tab yang baru difavoritkan dimasukkan di depan daftar Tab Anda di bilah Setup, bukan ditambahkan di bagian akhir.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Jika diaktifkan, Anda akan dapat melihat $tabs Anda segera setelah Anda meluncurkan $salesforce_setup",
+		"description": "[bantuan-setelan] untuk izin opsional yang memungkinkan kami bersiap segera setelah $salesforce_setup dibuka"
+	},
+	"help_allow_export": {
+		"message": "Jika diaktifkan, Anda akan dapat melakukan $export pada $tabs Anda dan menyimpannya di komputer Anda.",
+		"description": "[bantuan-setelan] untuk izin opsional yang memungkinkan kami mengunduh Tab di mesin pengguna"
+	},
 	"help_automatic_open_login": {
 		"message": "Jika Anda mengeklik popup ekstensi di luar domain Salesforce, Anda akan dibawa ke halaman login Salesforce secara otomatis.",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -501,6 +649,10 @@
 	"help_automatic_open_setup": {
 		"message": "Jika Anda mengeklik popup ekstensi di dalam domain Salesforce tetapi tidak di halaman Setup, Anda akan dibawa ke halaman Setup Salesforce secara otomatis.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Anda dapat menyusun ulang $tabs Anda dengan menggunakan titik-titik dan menyeretnya.",
+		"description": "[manage-tabs] menjelaskan cara menyeret Tab"
 	},
 	"help_keep_sort": {
 		"message": "Saat diaktifkan, Tab Anda akan diurutkan—baik berdasarkan label, URL, atau Org; tergantung pada pilihan Anda.",
@@ -546,9 +698,33 @@
 		"message": "Menonaktifkan pemeriksaan ekstensi yang memverifikasi bahwa fragmen URL cocok dengan format ID record/objek Salesforce (digunakan untuk secara otomatis menetapkan Tab yang disimpan sebagai Org Tab).",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Di sini Anda akan menemukan submenu untuk melakukan berbagai tindakan pada $tab di baris yang sama.",
+		"description": "[manage-tabs] menjelaskan apa isi panah di sebelah kanan"
+	},
+	"help_tab_label": {
+		"message": "Ini adalah nama umum yang akan Anda gunakan untuk mengingat ke mana $tab ini akan membawa Anda.",
+		"description": "[manage-tabs] menjelaskan apa itu label Tab"
+	},
+	"help_tab_org": {
+		"message": "Ini adalah nama Salesforce $org tempat $tab ini akan ditampilkan. Jika dibiarkan kosong, $tab ini akan ditampilkan di setiap Salesforce $org yang Anda kunjungi.",
+		"description": "[manage-tabs] menjelaskan apa itu Tab Org"
+	},
+	"help_tab_url": {
+		"message": "Ini adalah tautan (yang dipersingkat) tempat Anda akan diarahkan saat mengklik $tab ini",
+		"description": "[manage-tabs] menjelaskan apa itu URL Tab"
+	},
 	"help_tip_click_link": {
 		"message": "Klik untuk diarahkan ke dokumentasi untuk pengaturan ini!",
 		"description": "[bantuan-pengaturan] ajakan bertindak untuk membiarkan pengguna membaca lebih lanjut tentang pengaturan tertentu"
+	},
+	"hide_other_org_tabs": {
+		"message": "Sembunyikan $tabs $other_org_placeholder",
+		"description": "[manage-tabs] label tombol untuk menyembunyikan Org Tabs lainnya"
+	},
+	"if_click_popup": {
+		"message": "jika Anda mengklik popup ekstensi",
+		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"import": {
 		"message": "Impor",
@@ -566,6 +742,10 @@
 		"message": "Tipe file tidak valid.\nHanya file JSON yang didukung.",
 		"description": "[error] File yang digunakan untuk impor bukan JSON."
 	},
+	"import_metadata": {
+		"message": "Impor metadata Tab (\"Jumlah Klik\", \"Tanggal Klik\", dll.).",
+		"description": "[label] impor semua yang ditemukan dalam file selama proses impor"
+	},
 	"import_successful": {
 		"message": "Berhasil diimpor",
 		"description": "[impor] impor selesai. Setelah ini, jumlah berapa banyak catatan yang telah diimpor akan ditampilkan"
@@ -577,6 +757,10 @@
 	"import_title": {
 		"message": "$import_tabs dari file JSON",
 		"description": "[popup] judul pada tombol impor"
+	},
+	"inactive": {
+		"message": "Tidak Aktif",
+		"description": "Digunakan dalam tombol sakelar untuk status tidak aktif"
 	},
 	"insert_another": {
 		"message": "Masukkan yang lain",
@@ -594,6 +778,10 @@
 		"message": "Miring",
 		"description": "Opsi gaya font untuk teks miring"
 	},
+	"label": {
+		"message": "Label",
+		"description": "[key] nama Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Teknologi navigasi kustom Salesforce"
@@ -601,6 +789,18 @@
 	"login_to_salesforce": {
 		"message": "Login ke Salesforce",
 		"description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
+	},
+	"manage_tabs": {
+		"message": "Kelola $tabs",
+		"description": "[modal-title] modal untuk mengelola $tabs yang disimpan dengan bidang yang dapat diedit dan seret-untuk-menyusun-ulang"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edit, susun ulang, dan kelola $tabs yang Anda simpan langsung dari modal ini. Seret baris untuk menyusun ulang, atau gunakan menu dropdown untuk tindakan lainnya.",
+		"description": "[modal-explainer] menjelaskan fungsionalitas modal kelola tab"
+	},
+	"must_non_empty_str": {
+		"message": "harus berupa string yang tidak kosong",
+		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -614,12 +814,16 @@
 		"message": "Tidak ada aksi yang cocok",
 		"description": "[error] Di Salesforce, aksi yang diminta tidak cocok dengan aksi yang tersedia."
 	},
+	"no_tabs_to_export": {
+		"message": "Tidak Ada Tabs untuk diekspor",
+		"description": "[toast] error ketika tidak ada Tabs untuk diekspor"
+	},
 	"nss_invalid_url": {
 		"message": "URL tidak valid terdeteksi.",
 		"description": "[bukanSetupSalesforce] URL yang tidak valid"
 	},
 	"nss_not_setup_page": {
-		"message": "Ini bukan halaman Pengaturan $salesforce_lightning.",
+		"message": "Ini bukan halaman Pengaturan $salesforce_lightning",
 		"description": "[notSalesforceSetup] pengguna tidak berada di halaman Salesforce."
 	},
 	"open_here": {
@@ -645,6 +849,14 @@
 	"opt_add_tabs_front": {
 		"message": "Tambahkan Tab baru di depan.",
 		"description": "[settings] biarkan pengguna menambahkan semua Tab baru di depan"
+	},
+	"opt_allow_domains": {
+		"message": "Izinkan $extension_label untuk mengakses halaman Salesforce saat Anda mengunjunginya.",
+		"description": "[setelan] izin opsional untuk menjalankan ekstensi saat pengguna mengunjungi $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Izinkan $extension_label untuk mengekspor $tabs Anda saat Anda memintanya.",
+		"description": "[setelan] izin opsional untuk memungkinkan kami mengekspor Tab pengguna"
 	},
 	"opt_automatic_open_login": {
 		"message": "Buka halaman $salesforce_login secara otomatis saat mengeklik popup saat tidak di halaman Salesforce.",
@@ -722,9 +934,21 @@
 		"message": "Atau $drop",
 		"description": "[impor] biarkan pengguna memindahkan file dengan mouse mereka dan melepaskannya"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] $org Salesforce dari Tab"
+	},
 	"org_link": {
 		"message": "Link Org",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "Tab $pinned org",
+		"description": "Tab yang spesifik untuk org"
+	},
+	"org_tabs": {
+		"message": "Tab org",
+		"description": "Tab yang spesifik untuk org"
 	},
 	"other_org_info": {
 		"message": "Info Org Lainnya",
@@ -737,6 +961,22 @@
 	"overwrite_tabs": {
 		"message": "Timpa Tabs yang disimpan.",
 		"description": "[label] Hapus semua Tabs yang disimpan selama proses impor"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "halaman akan dibuka di Tab browser saat ini",
+		"description": "[placeholder] digunakan oleh teks lain"
+	},
+	"permission_request_failure": {
+		"message": "Izin tidak diperbolehkan.",
+		"description": "[error] pengguna meminta kami untuk meminta izin tetapi kemudian tidak menerimanya"
+	},
+	"permission_request_success": {
+		"message": "Izin telah diperbolehkan!",
+		"description": "[success] pengguna meminta kami untuk meminta izin dan mereka menerimanya"
+	},
+	"pinned": {
+		"message": "Disematkan",
+		"description": "Tab pengguna yang selalu ditemukan di awal daftar"
 	},
 	"preserve_org_tabs": {
 		"message": "Pertahankan Tabs untuk Org lain.",
@@ -778,6 +1018,10 @@
 		"message": "= Informasi yang diperlukan",
 		"description": "[modal] Memberitahukan pengguna bahwa beberapa informasi wajib diisi"
 	},
+	"salesforce_domain": {
+		"message": "Domain Salesforce",
+		"description": "[placeholder] digunakan oleh teks lain"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Platform Salesforce Lightning"
@@ -785,6 +1029,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "halaman login Salesforce (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Halaman Salesforce",
+		"description": "[placeholder] digunakan di teks lain"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -797,6 +1045,22 @@
 	"save_tab": {
 		"message": "Simpan sebagai Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"select_all": {
+		"message": "Pilih Semua",
+		"description": "[modal] tombol untuk memilih semua Tabs di modal ekspor"
+	},
+	"select_tabs": {
+		"message": "Pilih $tabs mana yang Anda inginkan",
+		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diimpor sebelum mengimpornya"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diekspor sebelum mengekspornya"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] biarkan pengguna memilih $tabs mana yang akan diimpor sebelum mengimpornya"
 	},
 	"send_tip": {
 		"message": "Kirimkan kami tip ❤️",
@@ -829,6 +1093,126 @@
 	"set_org_styler": {
 		"message": "Pengatur Gaya Org",
 		"description": "Label untuk mengonfigurasi gaya Tab khusus Org"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label untuk mempratinjau tampilan Tab generik saat disematkan"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label untuk mengonfigurasi gaya Tab generik saat disematkan"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label untuk mempratinjau tampilan Tab spesifik org saat disematkan"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label untuk mengonfigurasi gaya Tab spesifik org saat disematkan"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang untuk Tab generik"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label untuk mengatur warna batas untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label untuk mengatur warna batas untuk Tab generik"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label untuk mengatur warna teks untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label untuk mengatur warna teks untuk Tab generik"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Perintah untuk memilih gaya dekorasi untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Perintah untuk memilih gaya dekorasi untuk Tab generik"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang hover untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang hover untuk Tab generik"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label untuk mengatur warna bayangan untuk Tab generik aktif"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label untuk mengatur warna bayangan untuk Tab generik"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label untuk mengatur warna bilah atas untuk Tab generik aktif"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang untuk Tab org aktif"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang untuk Tab spesifik org"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label untuk mengatur warna batas untuk Tab spesifik org aktif"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label untuk mengatur warna batas untuk Tab org"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label untuk mengatur warna teks untuk Tab org aktif"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label untuk mengatur warna teks untuk Tab spesifik org"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Perintah untuk memilih gaya dekorasi untuk Tab spesifik org aktif"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Perintah untuk memilih gaya dekorasi untuk Tab org"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang hover untuk Tab org aktif"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label untuk mengatur warna latar belakang hover untuk Tab spesifik org"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label untuk mengatur warna bayangan untuk Tab spesifik org aktif"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label untuk mengatur warna bayangan untuk Tab org"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label untuk mengatur warna bilah atas untuk Tab org aktif"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Masukkan warna latar belakang untuk Tab generik aktif Anda.",
@@ -946,13 +1330,57 @@
 		"message": "Halaman Setup",
 		"description": "[notSalesforceSetup] Halaman untuk mengubah pengaturan Salesforce"
 	},
+	"show_all_tabs": {
+		"message": "Tampilkan semua $tabs",
+		"description": "[manage-tabs] label tombol untuk menampilkan semua Tab"
+	},
 	"skip": {
 		"message": "Lewati",
 		"description": "[req_permission] Tombol untuk tidak memberikan izin"
 	},
+	"style_generic_pinned": {
+		"message": "Gaya Tab $generic_tabs yang disematkan",
+		"description": "[opsi] Label tombol sakelar untuk menata Tab generik yang disematkan"
+	},
+	"style_org_pinned": {
+		"message": "Gaya Tab $org_tabs yang disematkan",
+		"description": "[opsi] Label tombol sakelar untuk menata Tab org yang disematkan"
+	},
+	"style_settings_background_label": {
+		"message": "Masukkan warna latar belakang untuk",
+		"description": "Label untuk mengatur warna latar belakang"
+	},
+	"style_settings_border_color_label": {
+		"message": "Masukkan warna batas untuk",
+		"description": "Label untuk mengatur warna batas"
+	},
+	"style_settings_color_label": {
+		"message": "Masukkan warna teks untuk",
+		"description": "Label untuk mengatur warna teks"
+	},
+	"style_settings_decoration_label": {
+		"message": "Pilih satu atau lebih gaya dekorasi untuk",
+		"description": "Perintah untuk memilih gaya dekorasi"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Masukkan warna latar belakang hover untuk",
+		"description": "Label untuk mengatur warna latar belakang hover"
+	},
+	"style_settings_shadow_label": {
+		"message": "Masukkan warna bayangan untuk",
+		"description": "Label untuk mengatur warna bayangan"
+	},
+	"style_settings_top_active_label": {
+		"message": "Masukkan warna untuk bilah di bagian atas $active",
+		"description": "Label untuk mengatur warna aktif bilah atas"
+	},
 	"successfully_imported": {
 		"message": "Berhasil diimpor",
 		"description": "[toast] Pengguna telah menambahkan Tabs dari file eksternal."
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "salah satu tautan favorit pengguna"
 	},
 	"tab_explain": {
 		"message": "Setiap item harus memiliki 'label' dan 'url' dalam bentuk string. Selain itu, setiap item dapat memiliki 'org' dalam bentuk string.",
@@ -1002,6 +1430,10 @@
 		"message": "Tabs",
 		"description": "Link favorit pengguna."
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Berhasil Diekspor",
+		"description": "[toast] pesan sukses ketika Tabs diekspor"
+	},
 	"tabs_saved": {
 		"message": "Tabs tersimpan.",
 		"description": "[toast] Tabs berhasil disimpan."
@@ -1022,6 +1454,14 @@
 		"message": "Garis bawah bergelombang",
 		"description": "Opsi gaya dekorasi untuk menerapkan garis bawah bergelombang pada teks Tab"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Ada perubahan yang belum disimpan. Apakah Anda ingin keluar tanpa menyimpan?",
+		"description": "[manage-tabs] pengguna meminta untuk pergi ke Tab tanpa menyimpan terlebih dahulu"
+	},
+	"unselect_all": {
+		"message": "Batalkan Pilihan Semua",
+		"description": "[modal] tombol untuk membatalkan pilihan semua Tabs di modal ekspor"
+	},
 	"update_available": {
 		"message": "Pembaruan tersedia",
 		"description": "pembaruan baru untuk ekstensi tersedia"
@@ -1030,9 +1470,21 @@
 		"message": "Unggah",
 		"description": "[impor] biarkan pengguna menjelajahi file mereka dan memilih yang benar"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] tautan Tab"
+	},
 	"users": {
 		"message": "Pengguna",
 		"description": "Nama halaman terkait ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Harap ekspor Tab baru Anda karena file yang Anda gunakan tidak akan didukung di rilis mendatang.",
+		"description": "[peringatan] pengguna mengimpor Tab mereka menggunakan konfigurasi file json yang sudah usang"
+	},
+	"when_click_popup_while": {
+		"message": "halaman saat mengklik popup sementara",
+		"description": "[placeholder] digunakan oleh teks lain"
 	},
 	"where_to": {
 		"message": "Ke mana?",

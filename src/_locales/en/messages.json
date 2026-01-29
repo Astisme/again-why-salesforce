@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Delete",
+		"description": "[manage-tabs] delete a row"
+	},
+	"act_open": {
+		"message": "🪂 Open",
+		"description": "[manage-tabs] Open the selected Tab"
+	},
+	"actions": {
+		"message": "Actions",
+		"description": "Dropdown menu label for tab actions"
+	},
+	"active": {
+		"message": "Active",
+		"description": "Used in toggles for active state"
+	},
+	"active_generic_pin_tabs": {
+		"message": "active $generic_pin_tabs",
+		"description": "User's generic Pinned $tabs which are currently active"
+	},
+	"active_generic_tabs": {
+		"message": "active $generic_tabs",
+		"description": "User's $generic_tabs which are currently active"
+	},
+	"active_org_pin_tabs": {
+		"message": "active $org_pin_tabs",
+		"description": "User's $org Pinned $tabs which are currently active"
+	},
+	"active_org_tabs": {
+		"message": "active $org_tabs",
+		"description": "User's $org_tabs which are currently active"
+	},
 	"allow": {
 		"message": "Allow",
 		"description": "[req_permission] button to allow permissions"
@@ -28,32 +60,32 @@
 		"description": "Section header for items that have been selected"
 	},
 	"cmd_export_all": {
-		"message": "Show the modal to export all saved Tabs",
-		"description": "[command description] the user wants to export all Tabs"
+		"message": "Show the modal to export all saved $tabs",
+		"description": "[command description] the user wants to export all $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_import": {
-		"message": "Show the modal to import new Tabs",
-		"description": "[command description] the user wants to import new Tabs"
+		"message": "Show the modal to import new $tabs",
+		"description": "[command description] the user wants to import new $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_open_other_org": {
-		"message": "Show the modal to open the current page in another Org",
-		"description": "[command description] the user wants to open the current page in another Org"
+		"message": "Show the modal to open the current page in another $org",
+		"description": "[command description] the user wants to open the current page in another $org. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_remove_tab": {
-		"message": "Remove the current page from the Tab list (if saved)",
-		"description": "[command description] the user wants to remove the current page"
+		"message": "Remove the current page from the $tab list (if saved)",
+		"description": "[command description] the user wants to remove the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_save_as_tab": {
-		"message": "Save the current page in the Tab list (if not saved)",
-		"description": "[command description] the user wants to save the current page"
+		"message": "Save the current page in the $tab list (if not saved)",
+		"description": "[command description] the user wants to save the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_toggle_org": {
-		"message": "Toggle the current page's Org value (if saved)",
-		"description": "[command description] the user wants to toggle the Org for the current page"
+		"message": "Toggle the current page's $org value (if saved)",
+		"description": "[command description] the user wants to toggle the $org for the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_update_tab": {
-		"message": "Show modal to update current page (if saved)",
-		"description": "[command description] the user wants to update the current page"
+		"message": "Show modal to update the current page (if saved)",
+		"description": "[command description] the user wants to update the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"confirm_another_org": {
 		"message": "Confirm opening this link.",
@@ -68,27 +100,31 @@
 		"description": "textContent for buttons that allow the current action to execute"
 	},
 	"cxm_empty_generic_tabs": {
-		"message": "😊 All generic Tabs",
+		"message": "😊 All $generic_tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_empty_tabs": {
-		"message": "😨 Remove all Tabs",
+		"message": "😨 Remove all $tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_empty_visible_tabs": {
-		"message": "👀 All visible Tabs",
+		"message": "👀 All visible $tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_export_tabs": {
-		"message": "⬇️ Export Tabs",
+		"message": "⬇️ $export $tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_import_tabs": {
 		"message": "🆙 $import_tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] open the modal to manage saved $tabs directly on Salesforce Setup page"
+	},
 	"cxm_move": {
-		"message": "🧭 Move Tab",
+		"message": "🧭 Move $tab",
 		"description": "[context-menu]"
 	},
 	"cxm_move_first": {
@@ -108,7 +144,7 @@
 		"description": "[context-menu]"
 	},
 	"cxm_open_other_org": {
-		"message": "🔗 Open in another Org",
+		"message": "🔗 Open in another $org",
 		"description": "[context-menu]"
 	},
 	"cxm_page_remove_tab": {
@@ -119,28 +155,40 @@
 		"message": "💾 $save_tab",
 		"description": "[context-menu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Pin",
+		"description": "[context-menu] let the user keep this $tab at the beginning of their list"
+	},
 	"cxm_remove": {
 		"message": "💥 Remove Tab(s)",
 		"description": "[context-menu]"
 	},
 	"cxm_remove_left_tabs": {
-		"message": "🔥 Tabs to the left",
+		"message": "🔥 $tabs to the left",
 		"description": "[context-menu]"
 	},
 	"cxm_remove_other_tabs": {
-		"message": "↔️ Other Tabs",
+		"message": "↔️ Other $tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Remove Pinned",
+		"description": "[context-menu] let the user remove their pinned $tabs"
+	},
 	"cxm_remove_right_tabs": {
-		"message": "🌊 Tabs to the right",
+		"message": "🌊 $tabs to the right",
 		"description": "[context-menu]"
 	},
 	"cxm_remove_tab": {
-		"message": "1️⃣ This Tab",
+		"message": "1️⃣ This $tab",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Remove Unpinned",
+		"description": "[context-menu] let the user remove their not-pinned $tabs"
+	},
 	"cxm_reset_default": {
-		"message": "🧐 Reset Default Tabs",
+		"message": "🧐 Reset Default $tabs",
 		"description": "[context-menu]"
 	},
 	"cxm_settings": {
@@ -148,40 +196,56 @@
 		"description": "Label for the settings menu"
 	},
 	"cxm_sort": {
-		"message": "🎯 Sort Tabs",
-		"description": "context menu to let users sort their Tabs automatically (parent menu)"
+		"message": "🎯 Sort $tabs",
+		"description": "context menu to let users sort their $tabs automatically (parent menu)"
+	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ by Usage",
+		"description": "context menu to let users sort their $tabs by how many times they click their $tabs"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ by Time",
+		"description": "context menu to let users sort their $tabs by when the $tabs were clicked"
 	},
 	"cxm_sort_label": {
-		"message": "🥱 by Label",
-		"description": "context menu to let users sort their Tabs by label"
+		"message": "🥱 by $label",
+		"description": "context menu to let users sort their $tabs by $label"
 	},
 	"cxm_sort_org": {
-		"message": "👽 by Org",
-		"description": "context menu to let users sort their Tabs by org"
+		"message": "👽 by $org",
+		"description": "context menu to let users sort their $tabs by $org"
 	},
 	"cxm_sort_url": {
-		"message": "🤖 by Url",
-		"description": "context menu to let users sort their Tabs by url"
+		"message": "🤖 by $url",
+		"description": "context menu to let users sort their $tabs by url"
+	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Hide non-Org $tabs",
+		"description": "[context-menu] temporarily hide $generic_tabs"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Hide $org_tabs",
+		"description": "[context-menu] temporarily hide $org_tabs"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Unpin",
+		"description": "[context-menu] let the user remove this $tab from their pinned list"
 	},
 	"cxm_update": {
-		"message": "✏️ Update Tab",
+		"message": "✏️ Update $tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Toggle Org",
+		"message": "👜 Toggle $org",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Other Updates",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Delete",
-		"description": "[popup] delete a row"
-	},
 	"delete_all": {
-		"message": "$delete all Tabs",
-		"description": "[popup] title on the bin to empty all Tabs"
+		"message": "Delete all $tabs",
+		"description": "[popup] title on the bin to empty all $tabs"
 	},
 	"descending": {
 		"message": "Descending (Z-A)",
@@ -196,8 +260,24 @@
 		"description": "[req_permission] button to enable permissions"
 	},
 	"error_adding_tab": {
-		"message": "Error when adding Tab.",
-		"description": "[error] Generic error used while adding a Tab"
+		"message": "Error when adding $tab",
+		"description": "[error] Generic error used while adding a $tab"
+	},
+	"error_already_pinned": {
+		"message": "This $tab was already pinned.",
+		"description": "[error] the user tried to pin a pinned $tab"
+	},
+	"error_already_unpinned": {
+		"message": "This $tab was already unpinned.",
+		"description": "[error] the user tried to unpin a unpinned $tab"
+	},
+	"error_cannot_move": {
+		"message": "This $tab cannot be moved!",
+		"description": "[error] the requested $tab cannot be moved at the moment."
+	},
+	"error_cannot_move_dir": {
+		"message": "This $tab cannot be moved in this direction!",
+		"description": "[error] the requested $tab cannot be moved at the moment."
 	},
 	"error_check_update": {
 		"message": "Error checking for updates",
@@ -220,36 +300,40 @@
 		"description": "[error] the context menu items could not be eliminated"
 	},
 	"error_duplicate_tab": {
-		"message": "This Tab already exists",
-		"description": "[error] the Tab is duplicated"
+		"message": "This $tab already exists",
+		"description": "[error] the $tab is duplicated"
 	},
 	"error_expand_url": {
 		"message": "Cannot expand an empty URL!",
-		"description": "[error] the url to expand was not passed"
+		"description": "[error] the $url to expand was not passed"
 	},
 	"error_expand_url_no_base": {
-		"message": "Cannot expand a URL without its host!",
-		"description": "[error] the base url used to expand was not passed"
+		"message": "Cannot expand a $url without its host!",
+		"description": "[error] the base $url used to expand was not passed"
 	},
 	"error_extract_empty_url": {
-		"message": "Cannot extract org name from empty URL!",
-		"description": "[error] the url from which to retrieve the org name was not passed"
+		"message": "Cannot extract $org name from empty URL!",
+		"description": "[error] the $url from which to retrieve the $org name was not passed"
 	},
 	"error_failed_sync": {
 		"message": "Failed to sync.",
-		"description": "[error] Generic error when the Tabs could not get synced from the user"
+		"description": "[error] Generic error when the $tabs could not get synced from the user"
 	},
 	"error_failed_to_fetch": {
 		"message": "Failed to fetch external resources",
 		"description": "[error] The call to an external website did not succeed"
 	},
 	"error_get_with_no_org": {
-		"message": "Cannot get Tabs if Org is not specified.",
-		"description": "[error] tried to search tabs by org without sending org information"
+		"message": "Cannot get $tabs if $org is not specified.",
+		"description": "[error] tried to search $tabs by $org without sending org information"
 	},
 	"error_import": {
 		"message": "Error during import:\n",
 		"description": "[error] there was an error during the import process"
+	},
+	"error_internal": {
+		"message": "Internal Error",
+		"description": "[error] generic error"
 	},
 	"error_invalid_key": {
 		"message": "The key parameter passed to the function is not valid",
@@ -260,24 +344,24 @@
 		"description": "[error] Generic error after getting a badly formatted message"
 	},
 	"error_invalid_tab": {
-		"message": "Invalid Tab",
-		"description": "[error] the Tab is not valid"
+		"message": "Invalid $tab",
+		"description": "[error] the $tab is not valid"
 	},
 	"error_link_with_id": {
-		"message": "This page could not exist in another Org, because it contains an Id!",
-		"description": "[open-other-org-modal] warning for the user that the link may not exist in another org"
+		"message": "This page could not exist in another $org because it contains an Id!",
+		"description": "[open-other-org-modal] warning for the user that the link may not exist in another $org"
 	},
 	"error_many_matching_tab": {
-		"message": "Found more than 1 matching Tab.",
-		"description": "[error] many Tabs where retrieved"
+		"message": "Found more than 1 matching $tab",
+		"description": "[error] many $tabs where retrieved"
 	},
 	"error_many_tabs_found": {
-		"message": "Found more than one Tab.",
-		"description": "[error] many Tabs where retrieved"
+		"message": "Found more than one $tab",
+		"description": "[error] many $tabs where retrieved"
 	},
 	"error_minify_url": {
 		"message": "Cannot minify an empty URL!",
-		"description": "[error] the url to reduce was not passed"
+		"description": "[error] the $url to reduce was not passed"
 	},
 	"error_missing_favourite_id": {
 		"message": "Cannot get favourite image without the Id",
@@ -292,8 +376,8 @@
 		"description": "[error] did not receive a valid array"
 	},
 	"error_no_browser_tab": {
-		"message": "Could not find current browser tab.",
-		"description": "[error] background page could not establish an active browser tab"
+		"message": "Could not find current browser $tab",
+		"description": "[error] background page could not establish an active browser $tab"
 	},
 	"error_no_callback": {
 		"message": "Please provide a callback",
@@ -304,16 +388,16 @@
 		"description": "[error] Salesforce cookies were not returned"
 	},
 	"error_no_data": {
-		"message": "Cannot identify Tab without data.",
-		"description": "[error] tried to get a Tab without sending data"
+		"message": "Cannot identify $tab without data.",
+		"description": "[error] tried to get a $tab without sending data"
 	},
 	"error_no_headers": {
 		"message": "Failed to find headers.",
 		"description": "[error] The extension could not find where to put the favourite button"
 	},
 	"error_no_matching_tab": {
-		"message": "Did not find any matching Tabs.",
-		"description": "[error] no Tabs where retrieved"
+		"message": "Did not find any matching $tabs",
+		"description": "[error] no $tabs where retrieved"
 	},
 	"error_no_message": {
 		"message": "Did not specify a message to send.",
@@ -323,108 +407,145 @@
 		"message": "No object to be checked!",
 		"description": "[error] the object was not passed"
 	},
+	"error_no_pinned": {
+		"message": "You do not have any pinned $tabs yet!",
+		"description": "[error] the user tried to remove the pinned $tabs but they do not have any pinned $tabs"
+	},
 	"error_no_setup_tab": {
-		"message": "Failed to find Setup tab.",
-		"description": "[error] The extension could not find where to put the favourite Tabs."
+		"message": "Failed to find Setup $tab",
+		"description": "[error] The extension could not find where to put the favourite $tabs"
+	},
+	"error_no_tabs_selected": {
+		"message": "No $tabs selected for export",
+		"description": "[toast] error when user tries to export with no $tabs selected"
+	},
+	"error_no_unpinned": {
+		"message": "You do not have any unpinned $tabs",
+		"description": "[error] the user tried to remove the unpinned $tabs but they do not have any unpinned $tabs"
 	},
 	"error_no_url": {
-		"message": "No URL to check!",
-		"description": "[error] the url to check was not passed"
+		"message": "No $url to check!",
+		"description": "[error] the $url to check was not passed"
 	},
 	"error_not_initialized": {
 		"message": "was not yet initialized.",
 		"description": "[error] Generic error for when a variable is not ready"
 	},
+	"error_pin_tab": {
+		"message": "Error while pinning $tab",
+		"description": "[error]"
+	},
 	"error_processing_tabs": {
-		"message": "Error processing Tabs.",
-		"description": "[error] Generic error when processing the Tabs"
+		"message": "Error processing $tabs",
+		"description": "[error] Generic error when processing the $tabs"
 	},
 	"error_redirect": {
 		"message": "Cannot redirect. Please refresh the page.",
 		"description": "[error] Generic error on page redirection."
 	},
 	"error_remove_not_favourite": {
-		"message": "Cannot remove a non favourite Tab!",
-		"description": "[error] the user tried to remove a Tab which was not saved yet"
+		"message": "Cannot remove a non favourite $tab",
+		"description": "[error] the user tried to remove a $tab which was not saved yet"
 	},
 	"error_removing_all_tabs": {
-		"message": "Error when removing all Tabs.",
-		"description": "[error] Generic error used while removing all Tabs"
+		"message": "Error when removing all $tabs",
+		"description": "[error] Generic error used while removing all $tabs"
 	},
 	"error_removing_generic_tabs": {
-		"message": "Error when removing generic Tabs.",
-		"description": "[error] Generic error used while removing generic Tabs"
+		"message": "Error when removing $generic_tabs",
+		"description": "[error] Generic error used while removing $generic_tabs"
 	},
 	"error_removing_other_tabs": {
-		"message": "Error when removing other Tabs.",
-		"description": "[error] Generic error used while removing other Tabs"
+		"message": "Error when removing other $tabs",
+		"description": "[error] Generic error used while removing other $tabs"
+	},
+	"error_removing_pin_tabs": {
+		"message": "Error when removing pinned $tabs",
+		"description": "[error] Generic error used while removing non-pinned $tabs"
 	},
 	"error_removing_tab": {
-		"message": "Error when removing Tab.",
-		"description": "[error] Generic error used while removing a Tab"
+		"message": "Error when removing $tab",
+		"description": "[error] Generic error used while removing a $tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Error when removing non-pinned $tabs",
+		"description": "[error] Generic error used while removing non-pinned $tabs"
 	},
 	"error_removing_visible_tabs": {
-		"message": "Error when removing all visible Tabs.",
-		"description": "[error] Generic error used while removing all visible Tabs"
+		"message": "Error when removing all visible $tabs",
+		"description": "[error] Generic error used while removing all visible $tabs"
 	},
 	"error_required_params": {
 		"message": "The required parameters for the function were not passed",
 		"description": "[error] the developer tried to call a function without the necessary parameters"
 	},
 	"error_resetting_default_tabs": {
-		"message": "Error when resetting to default Tabs.",
-		"description": "[error] Generic error used while resetting the Tabs to their default"
+		"message": "Error when resetting to default $tabs",
+		"description": "[error] Generic error used while resetting the $tabs to their default"
 	},
 	"error_sorting_tabs": {
-		"message": "Error while sorting the Tabs",
+		"message": "Error while sorting the $tabs",
 		"description": "[error] shown in a toast message"
 	},
 	"error_sync_nothing": {
-		"message": "Cannot sync null Tabs!",
+		"message": "Cannot sync null $tabs",
 		"description": "[error] tried to synchronize nothing"
+	},
+	"error_tab_click_count": {
+		"message": "Click Count must be a non-negative number",
+		"description": "[error] user tried to create a $tab with a wrong click count"
+	},
+	"error_tab_click_date": {
+		"message": "Click Date must be a number which does not result in a date in the future",
+		"description": "[error] user tried to create a $tab with a wrong click date"
 	},
 	"error_tab_constructor": {
 		"message": "Use Tab.create() instead of new Tab()",
-		"description": "[error] tell the developer how to use the Tab class"
+		"description": "[error] tell the developer how to use the $tab class"
 	},
 	"error_tab_label": {
-		"message": "Label must be a non-empty string",
-		"description": "[error] user tried to create a Tab without a label"
+		"message": "$label $must_non_empty_str",
+		"description": "[error] user tried to create a $tab without a $label"
 	},
 	"error_tab_not_found": {
-		"message": "Tab was not found.",
-		"description": "[error] the Tab was not included in the array"
+		"message": "$tab was not found.",
+		"description": "[error] the $tab was not included in the array"
+	},
+	"error_tab_not_pinned": {
+		"message": "$tab is not pinned yet!",
+		"description": "[error] user tried to unpin a non-pinned $tab"
 	},
 	"error_tab_object_creation": {
 		"message": "When calling with an object, do not pass anything else.",
 		"description": "[error] implementation error by the developer"
 	},
 	"error_tab_org": {
-		"message": "Org must be a string or undefined",
-		"description": "[error] user tried to create a Tab with invalid org value"
+		"message": "$org must be a string or undefined",
+		"description": "[error] user tried to create a $tab with invalid $org value"
 	},
 	"error_tab_unexpected_keys": {
 		"message": "Unexpected keys found:",
-		"description": "[error] user tried to create a Tab with some not supported properties"
+		"description": "[error] user tried to create a $tab with some not supported properties"
 	},
 	"error_tab_url": {
-		"message": "URL must be a non-empty string",
-		"description": "[error] user tried to create a Tab without a url"
+		"message": "$url $must_non_empty_str",
+		"description": "[error] user tried to create a $tab without a url"
 	},
 	"error_tab_url_saved": {
-		"message": "A Tab with this URL has already been saved!",
-		"description": "[error] The user tried to save an already favourited Tab"
+		"message": "A $tab with this $url has already been saved!",
+		"description": "[error] The user tried to save an already favourited $tab"
 	},
 	"error_tabcont_initialize": {
-		"message": "Cannot initialize with"
+		"message": "Cannot initialize with",
+		"description": "[error] the TabContainer could not be initialized due to an internal error"
 	},
 	"error_tabcont_invalid_tabs": {
 		"message": "Invalid Tab(s) detected.\nFirst occurrence:",
-		"description": "[error] invalid Tabs were passed"
+		"description": "[error] invalid $tabs were passed"
 	},
 	"error_tabcontainer_constructor": {
 		"message": "Use TabContainer.create() instead of new TabContainer()",
-		"description": "[error] tell the developer how to use the TabContainer class"
+		"description": "[error] tell the developer how to use the $tabContainer class"
 	},
 	"error_translationservice_constructor": {
 		"message": "Use TranslationService.create() instead of new TranslationService()",
@@ -434,6 +555,10 @@
 		"message": "translator was not yet initialized.",
 		"description": "[error] the TranslationService was not ready"
 	},
+	"error_unknown_file_structure": {
+		"message": "We could not understand a file you wanted to Import\nIf the issue persists, please share it with us by opening a GitHub issue",
+		"description": "[import] the user's file was not recognized"
+	},
 	"error_unknown_message": {
 		"message": "Unknown message received",
 		"description": "an unknown message has been received from a listener"
@@ -441,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Unknown request.",
 		"description": "[error] Generic error after getting a message which was not recognized"
+	},
+	"error_unpin_tab": {
+		"message": "Error while unpinning $tab",
+		"description": "[error]"
 	},
 	"error_useless_remove": {
 		"message": "Cannot remove:\nCannot remove a page that has not been saved before",
@@ -454,12 +583,16 @@
 		"message": "Export",
 		"description": "[popup] export button"
 	},
+	"export_tabs": {
+		"message": "$export $tabs",
+		"description": "[modal] title for export $tabs modal"
+	},
 	"export_title": {
-		"message": "Export all Tabs",
+		"message": "$export all $tabs",
 		"description": "[popup] title on export button"
 	},
 	"extension_description": {
-		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
+		"message": "Create and manage custom $tabs in the available space on $salesforce_lightning Setup page.",
 		"description": "[manifest] The description of this extension"
 	},
 	"extension_label": {
@@ -476,42 +609,62 @@
 	},
 	"flows": {
 		"message": "Flows",
-		"description": "[default-tab] Label for the default Flows Tab"
+		"description": "[default-tab] $label for the default Flows $tab"
 	},
 	"general": {
 		"message": "General",
 		"description": "Label for the general settings category"
+	},
+	"generic_pin_tabs": {
+		"message": "generic $pinned $tabs",
+		"description": "User's favorite $tabs which are non $org-specific"
+	},
+	"generic_tabs": {
+		"message": "generic $tabs",
+		"description": "User's favorite $tabs which are non $org-specific"
 	},
 	"help": {
 		"message": "Help",
 		"description": ""
 	},
 	"help_add_tabs_as_org": {
-		"message": "Marks new Tabs as Org Tabs, so they're visible only when logged into that particular Salesforce Org's.",
+		"message": "Marks new $tabs as $org_tabs so they're visible only when logged into that particular Salesforce $org",
 		"description": "[settings-help] for $opt_add_tabs_as_org"
 	},
 	"help_add_tabs_front": {
-		"message": "Newly favorited Tabs are inserted at the front of your Tab list in the Setup bar rather than appended at the end.",
+		"message": "Newly favorited $tabs are inserted at the front of your $tab list in the Setup bar rather than appended at the end.",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "When enabled, you'll be able to see your $tabs as soon as you launch $salesforce_setup",
+		"description": "[settings-help] for optional permission to enable us to be ready as soon as $salesforce_setup is opened"
+	},
+	"help_allow_export": {
+		"message": "When enabled, you'll be able to $export your $tabs and keep them on your computer.",
+		"description": "[settings-help] for optional permission to enable us to download the Tabs on the user's machine"
+	},
 	"help_automatic_open_login": {
-		"message": "If you click the extension popup outside of a Salesforce domain, takes you to the Salesforce login page automatically.",
+		"message": "Takes you to the $salesforce_login page automatically $if_click_popup outside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_automatic_open_login"
 	},
 	"help_automatic_open_setup": {
-		"message": "If you click the extension popup inside of a Salesforce domain but not on a Setup page, takes you to the Salesforce Setup page automatically.",
+		"message": "Takes you to the $salesforce_setup page automatically $if_click_popup inside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_automatic_open_setup"
 	},
+	"help_drag_tabs": {
+		"message": "You may reorder your $tabs by using the dots and dragging it.",
+		"description": "[manage-tabs] explain how to drag the Tabs around"
+	},
 	"help_keep_sort": {
-		"message": "When enabled, your Tabs are kept in sorted order—either by label, URL or Org; depending on what you pick.",
+		"message": "When enabled, your $tabs are kept in sorted order, depending on what you pick.",
 		"description": "[settings-help] for $opt_keep_sort"
 	},
 	"help_keep_tabs_left": {
-		"message": "Pins your saved Tabs before the standard navigation menu (Home / Object Manager) in Setup, instead of after it.",
+		"message": "Pins your saved $tabs before the standard navigation menu (Home / Object Manager) in Setup, instead of after it.",
 		"description": "[settings-help] for $opt_keep_tabs_left"
 	},
 	"help_link_new_browser": {
-		"message": "When enabled, every saved Tab will open the related page in a new tab.",
+		"message": "When enabled, every saved $tab will open the related page in a new $tab",
 		"description": "[settings-help] for $opt_link_new_browser"
 	},
 	"help_no_release_notes": {
@@ -523,11 +676,11 @@
 		"description": "[settings-help] for $opt_no_update_notification"
 	},
 	"help_open_login_same_tab": {
-		"message": "If you click the extension popup outside of a Salesforce domain, the login page will be opened in the current browser tab.",
+		"message": "The $salesforce_login $page_will_open_current_browser_tab $if_click_popup outside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_open_login_same_tab"
 	},
 	"help_open_setup_same_tab": {
-		"message": "If you click the extension popup inside of a Salesforce domain but not on a Setup page, the Salesforce Setup page will be opened in the current browser tab.",
+		"message": "The $salesforce_setup $page_will_open_current_browser_tab $if_click_popup inside of a $salesforce_domain",
 		"description": "[settings-help] for $opt_open_setup_same_tab"
 	},
 	"help_pick_language": {
@@ -539,60 +692,96 @@
 		"description": "[settings-help] for $opt_prevent_analytics"
 	},
 	"help_prevent_lightning_navigation": {
-		"message": "Bypasses the Lightning Navigation API and opens links via full-page reload, which can be faster in some org setups.",
+		"message": "Bypasses the Lightning Navigation API and opens links via full-page reload, which can be faster in some $org setups.",
 		"description": "[settings-help] for $opt_prevent_lightning_navigation"
 	},
 	"help_skip_link_detection": {
-		"message": "Disables the extension check verifying that a URL fragment matches the format of Salesforce record/object IDs (used to automatically set the saved Tab as an Org Tab).",
+		"message": "Disables the extension check verifying that a $url fragment matches the format of Salesforce record/object IDs ( used to automatically set the saved $tab as an $org $tab ).",
 		"description": "[settings-help] for $opt_skip_link_detection"
+	},
+	"help_tab_actions": {
+		"message": "Here you'll find a submenu to perform different actions on the $tab in the same row.",
+		"description": "[manage-tabs] explain what the arrow on the right contains"
+	},
+	"help_tab_label": {
+		"message": "This is the common name you'll use to remember where this $tab will take you.",
+		"description": "[manage-tabs] explain what the Tab label is"
+	},
+	"help_tab_org": {
+		"message": "This is the Salesforce $org name where this $tab will be shown. If left empty, this $tab will be shown in every Salesforce $org you visit.",
+		"description": "[manage-tabs] explain what the Tab Org is"
+	},
+	"help_tab_url": {
+		"message": "This is the (shortened) link where you'll be redirected when clicking on this $tab",
+		"description": "[manage-tabs] explain what the Tab URL is"
 	},
 	"help_tip_click_link": {
 		"message": "Click to be redirected to the documentation for this setting!",
 		"description": "[settings-help] call to action to let the user read more about a specific setting"
+	},
+	"hide_other_org_tabs": {
+		"message": "Hide $other_org_placeholder $tabs",
+		"description": "[manage-tabs] button label to hide other Org Tabs"
+	},
+	"if_click_popup": {
+		"message": "if you click the extension popup",
+		"description": "[placeholder] used by other texts"
 	},
 	"import": {
 		"message": "Import",
 		"description": "[popup] import button"
 	},
 	"import_duplicate_description_0": {
-		"message": "Duplicate tabs will be ignored.",
+		"message": "Duplicate $tabs will be ignored.",
 		"description": "[import] description of what the import process does part 0"
 	},
 	"import_duplicate_description_1": {
-		"message": "Two tabs are considered duplicates if they have the same URL.",
+		"message": "Two $tabs are considered duplicates if they have the same $url and the same $org",
 		"description": "[import] description of what the import process does part 1"
 	},
 	"import_invalid_file": {
 		"message": "Invalid file type.\nOnly JSON files are supported.",
 		"description": "[error] the file used for import is not a JSON"
 	},
+	"import_metadata": {
+		"message": "Import $tab metadata (\"Click Count\", \"Click Date\" etc.).",
+		"description": "[label] import everything found in the file during the import process"
+	},
 	"import_successful": {
 		"message": "Successfully imported",
 		"description": "[import] import was completed. After this, a number of how many records have been imported will be shown"
 	},
 	"import_tabs": {
-		"message": "Import Tabs",
+		"message": "Import $tabs",
 		"description": "[modal-title] for import process"
 	},
 	"import_title": {
 		"message": "$import_tabs from JSON file",
 		"description": "[popup] title on import button"
 	},
+	"inactive": {
+		"message": "Inactive",
+		"description": "Used in toggles for inactive state"
+	},
 	"insert_another": {
 		"message": "Insert another",
-		"description": "[error-open-other-org-modal] message for when the user inserts the same org in the modal"
+		"description": "[error-open-other-org-modal] message for when the user inserts the same $org in the modal"
 	},
 	"insert_another_org": {
-		"message": "The inserted Org is the current one!\nPlease insert another Org.",
-		"description": "[error-open-other-org-modal] message for when the user inserts the same org in the modal"
+		"message": "The inserted $org is the current one!\nPlease insert another $org",
+		"description": "[error-open-other-org-modal] message for when the user inserts the same $org in the modal"
 	},
 	"insert_valid_org": {
-		"message": "Please insert a valid Org!",
-		"description": "[error-open-other-org-modal] message for when the user inserts a wrong url in the modal"
+		"message": "Please insert a valid $org",
+		"description": "[error-open-other-org-modal] message for when the user inserts a wrong $url in the modal"
 	},
 	"italic": {
 		"message": "Italic",
 		"description": "Font style option for italic text"
+	},
+	"label": {
+		"message": "Label",
+		"description": "[key] the Tab's name"
 	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
@@ -602,9 +791,21 @@
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_login page"
 	},
+	"manage_tabs": {
+		"message": "Manage $tabs",
+		"description": "[modal-title] modal to manage saved $tabs with editable fields and drag-to-reorder"
+	},
+	"manage_tabs_explainer": {
+		"message": "Edit, reorder, and manage your saved $tabs directly from this modal. Drag rows to reorder, or use the dropdown menu for more actions.",
+		"description": "[modal-explainer] explains the manage tabs modal functionality"
+	},
+	"must_non_empty_str": {
+		"message": "must be a non-empty string",
+		"description": "[placeholder] used by other texts"
+	},
 	"mycustomorg": {
 		"message": "mycustomorg",
-		"description": "placeholder for the Update Tab modal"
+		"description": "placeholder for the Update $tab modal"
 	},
 	"no_manifest_github": {
 		"message": "Invalid or missing GitHub homepage_url in manifest",
@@ -614,21 +815,25 @@
 		"message": "Did not match any action",
 		"description": "[error] in salesforce when the switch cannot match the requested action"
 	},
+	"no_tabs_to_export": {
+		"message": "No $tabs to export",
+		"description": "[toast] error when there are no $tabs to export"
+	},
 	"nss_invalid_url": {
-		"message": "Invalid URL detected.",
-		"description": "[notSalesforceSetup] a URL which is not valid"
+		"message": "Invalid $url detected.",
+		"description": "[notSalesforceSetup] a $url which is not valid"
 	},
 	"nss_not_setup_page": {
 		"message": "This is not a $salesforce_lightning Setup page.",
 		"description": "[notSalesforceSetup] the user is not on a Salesforce page."
 	},
 	"open_here": {
-		"message": "Open in this tab.",
-		"description": "[open-other-org-modal] radio button to let the user open in the same browser tab"
+		"message": "Open in this $tab",
+		"description": "[open-other-org-modal] radio button to let the user open in the same browser $tab"
 	},
 	"open_new_tab": {
-		"message": "Open in a new tab.",
-		"description": "[open-other-org-modal] radio button to let the user open in a new browser tab."
+		"message": "Open in a new $tab",
+		"description": "[open-other-org-modal] radio button to let the user open in a new browser $tab."
 	},
 	"open_settings": {
 		"message": "Open Extension Settings",
@@ -639,23 +844,31 @@
 		"description": "[notSalesforceSetup] call to action on a button to redirect the user to a $salesforce_setup page"
 	},
 	"opt_add_tabs_as_org": {
-		"message": "Add new Tabs as Org Tabs.",
-		"description": "[settings] let the user add all new Tabs as org-specific"
+		"message": "Add new $tabs as $org_tabs",
+		"description": "[settings] let the user add all new $tabs as $org-specific"
 	},
 	"opt_add_tabs_front": {
-		"message": "Add new Tabs in front.",
-		"description": "[settings] let the user add all new Tabs in front"
+		"message": "Add new $tabs in front.",
+		"description": "[settings] let the user add all new $tabs in front"
+	},
+	"opt_allow_domains": {
+		"message": "Allow $extension_label to access Salesforce pages, when you visit them.",
+		"description": "[setting] optional permission to run the extensions when the user is visiting $salesforce_setup"
+	},
+	"opt_allow_export": {
+		"message": "Allow $extension_label to export your $tabs when you request it.",
+		"description": "[setting] optional permission to enable us ot export the user's Tabs"
 	},
 	"opt_automatic_open_login": {
-		"message": "Automatically open $salesforce_login page when clicking on the popup while not on a Salesforce page.",
+		"message": "Automatically open $salesforce_login $when_click_popup_while not on a $salesforce_page",
 		"description": "[setting] when the user opens the popup while on a random website"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Automatically open $salesforce_setup page when clicking on the popup while on a Salesforce page.",
+		"message": "Automatically open $salesforce_setup $when_click_popup_while on a $salesforce_page",
 		"description": "[setting] when the user opens the popup while on a Salesforce website"
 	},
 	"opt_confirm_save": {
-		"message": "Settings were saved!",
+		"message": "$settings were saved!",
 		"description": "[popup]"
 	},
 	"opt_en_default": {
@@ -663,16 +876,16 @@
 		"description": "Default language option of the extension"
 	},
 	"opt_keep_sort": {
-		"message": "Keep Tabs sorted.",
-		"description": "[setting] allow the user to keep their Tabs sorted by one of their keys"
+		"message": "Keep $tabs sorted.",
+		"description": "[setting] allow the user to keep their $tabs sorted by one of their keys"
 	},
 	"opt_keep_tabs_left": {
-		"message": "Keep favourite Tabs on the left of Home and Object Manager.",
-		"description": "Toggle to pin favorite Tabs to the left side of the navigation bar"
+		"message": "Keep favourite $tabs on the left of Home and Object Manager.",
+		"description": "Toggle to pin favorite $tabs to the left side of the navigation bar"
 	},
 	"opt_link_new_browser": {
-		"message": "Always open links in a new browser tab.",
-		"description": "[setting] when the user clicks on a favourite Tab, open it in a new browser tab"
+		"message": "Always open links in a new browser $tab",
+		"description": "[setting] when the user clicks on a favourite $tab, open it in a new browser $tab"
 	},
 	"opt_no_release_notes": {
 		"message": "Do not show update release notes.",
@@ -683,20 +896,20 @@
 		"description": "[setting] let the user prevent the extension from search for new releases"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Always open $salesforce_login page in the same tab when clicking on the popup.",
+		"message": "Always open $salesforce_login $opt_same_tab_popup",
 		"description": "[setting]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Always open $salesforce_setup page in the same tab when clicking on the popup.",
+		"message": "Always open $salesforce_setup $opt_same_tab_popup",
 		"description": "[setting]"
 	},
 	"opt_pick_language": {
 		"message": "Pick extension language",
-		"description": "[setting] label to propt the user to pick their preferred language"
+		"description": "[setting] $label to propt the user to pick their preferred language"
 	},
 	"opt_pick_sort": {
-		"message": "Pick by which field should the Tabs be sorted",
-		"description": "[setting] now the user can pick by which key to keep the Tabs sorted by"
+		"message": "Pick by which field should the $tabs be sorted",
+		"description": "[setting] now the user can pick by which key to keep the $tabs sorted by"
 	},
 	"opt_prevent_analytics": {
 		"message": "Prevent use of Simple Analytics (do not show up in user counts).",
@@ -707,8 +920,8 @@
 		"description": "[setting] do not allow Lightning Navigation with explanation of feature"
 	},
 	"opt_same_tab_popup": {
-		"message": "page in the same tab when clicking on the popup.",
-		"description": "[setting] prevent opening a new browser tab"
+		"message": "page in the same $tab when clicking on the popup.",
+		"description": "[setting] prevent opening a new browser $tab"
 	},
 	"opt_sf_lang_cookies": {
 		"message": "Follow Salesforce Language (reads Salesforce Cookies)",
@@ -716,18 +929,30 @@
 	},
 	"opt_skip_link_detection": {
 		"message": "Skip automatic check of Salesforce Id.",
-		"description": "[setting] when the favourites a Tab, prevent checking if there's an Id in the link that's being saved."
+		"description": "[setting] when the favourites a $tab, prevent checking if there's an Id in the link that's being saved."
 	},
 	"or_drop": {
 		"message": "Or $drop",
 		"description": "[import] let the user move files with their mouse and release them"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] the Tab's Salesforce $org"
+	},
 	"org_link": {
-		"message": "Org Link",
+		"message": "$org Link",
 		"description": "[input-label]"
 	},
+	"org_pin_tabs": {
+		"message": "$org $pinned $tabs",
+		"description": "$tabs which are $org-specific"
+	},
+	"org_tabs": {
+		"message": "$org $tabs",
+		"description": "$tabs which are $org-specific"
+	},
 	"other_org_info": {
-		"message": "Other Org info",
+		"message": "Other $org info",
 		"description": "[modal-title]"
 	},
 	"other_org_placeholder": {
@@ -735,15 +960,31 @@
 		"description": "[input-placeholder]"
 	},
 	"overwrite_tabs": {
-		"message": "Overwrite saved Tabs.",
-		"description": "[label] delete all saved Tabs during import process"
+		"message": "Overwrite saved $tabs",
+		"description": "[label] delete all saved $tabs during import process"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "page will be opened in the current browser $tab",
+		"description": "[placeholder] used by other texts"
+	},
+	"permission_request_failure": {
+		"message": "The permission was not allowed.",
+		"description": "[error] the user asked us to request them a permission but then did not accept it"
+	},
+	"permission_request_success": {
+		"message": "The permission has been allowed!",
+		"description": "[success] the user asked us to request them a permission and they accepted it"
+	},
+	"pinned": {
+		"message": "Pinned",
+		"description": "User's $tabs which are always found at the beginning of the list"
 	},
 	"preserve_org_tabs": {
-		"message": "Preserve Tabs for other orgs.",
-		"description": "[label] keep all org-specific Tabs during import process"
+		"message": "Preserve $tabs for other Orgs.",
+		"description": "[label] keep all $org-specific $tabs during import process"
 	},
 	"remove_tab": {
-		"message": "Remove Tab",
+		"message": "Remove $tab",
 		"description": "[alt] alternative text when pictures do not work"
 	},
 	"req_downloads_open_popup": {
@@ -760,14 +1001,14 @@
 	},
 	"req_permissions_dont_ask": {
 		"message": "Do not ask again.",
-		"description": "[req_permission] label when the user does not want to allow permissions permanently"
+		"description": "[req_permission] $label when the user does not want to allow permissions permanently"
 	},
 	"req_permissions_header": {
 		"message": "Please allow us to access\n$salesforce_setup pages automatically.",
 		"description": "[req_permission] header of the page to request permissions"
 	},
 	"req_permissions_paragraph": {
-		"message": "If you want, you may have your favourite Tabs appear\nas soon as you navigate to a $salesforce_setup page\nwithout having to click this extension every time.",
+		"message": "If you want, you may have your favourite $tabs appear\nas soon as you navigate to a $salesforce_setup page\nwithout having to click this extension every time.",
 		"description": "[req_permission] text to explain why the permissions are being requested"
 	},
 	"required": {
@@ -778,6 +1019,10 @@
 		"message": "= Required Information",
 		"description": "[modal] tells the user that some info is mandatory"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce domain",
+		"description": "[placeholder] used by other texts"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] the Salesforce Lightning platform"
@@ -785,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "the Salesforce Login page (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce page",
+		"description": "[placeholder] used in other texts"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -795,20 +1044,36 @@
 		"description": "Apply changes and store them in memory"
 	},
 	"save_tab": {
-		"message": "Save as Tab",
+		"message": "Save as $tab",
 		"description": "[alt] alternative text when pictures do not work"
+	},
+	"select_all": {
+		"message": "Select All",
+		"description": "[modal] button to select all $tabs in export modal"
+	},
+	"select_tabs": {
+		"message": "Select which $tabs you'd like to",
+		"description": "[import] let the user select which $tabs to import before importing them"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] let the user select which $tabs to export before exporting them"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] let the user select which $tabs to import before importing them"
 	},
 	"send_tip": {
 		"message": "Send us a tip ❤️",
 		"description": "[popup] title for svg to prompt sending a tip"
 	},
 	"set_gen_preview": {
-		"message": "Tab Preview",
-		"description": "Label for previewing generic Tab appearance"
+		"message": "$tab Preview",
+		"description": "Label for previewing generic $tab appearance"
 	},
 	"set_gen_styler": {
-		"message": "Tab Styler",
-		"description": "Label for configuring the style of generic Tabs"
+		"message": "$tab Styler",
+		"description": "Label for configuring the style of $generic_tabs"
 	},
 	"set_general_settings": {
 		"message": "General Settings",
@@ -823,116 +1088,236 @@
 		"description": "Button title to move selected items to Chosen"
 	},
 	"set_org_preview": {
-		"message": "Org Preview",
-		"description": "Label for previewing org-specific Tab appearance"
+		"message": "$org Preview",
+		"description": "Label for previewing $org-specific $tab appearance"
 	},
 	"set_org_styler": {
-		"message": "Org Styler",
-		"description": "Label for configuring the style of org-specific Tabs"
+		"message": "$org Styler",
+		"description": "Label for configuring the style of $org-specific $tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label for previewing generic $tab appearance when pinned"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label for configuring the style of $generic_tabs when pinned"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label for previewing $org-specific $tab appearance when pinned"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label for configuring the style of $org-specific $tabs when pinned"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label to set background color for active $generic_tabs"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label to set background color for $generic_tabs"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label to set border color for active $generic_tabs"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label to set border color for $generic_tabs"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label to set text color for active $generic_tabs"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label to set text color for $generic_tabs"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Prompt to select decoration styles for active $generic_tabs"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Prompt to select decoration styles for $generic_tabs"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label to set hover background color for active $generic_tabs"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label to set hover background color for $generic_tabs"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label to set shadow color for active $generic_tabs"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label to set shadow color for $generic_tabs"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label to set top-bar color for active $generic_tabs"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label to set background color for active $org_tabs"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label to set background color for $org-specific $tabs"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label to set border color for active $org-specific $tabs"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label to set border color for $org_tabs"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label to set text color for active $org_tabs"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label to set text color for $org-specific $tabs"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Prompt to select decoration styles for active $org-specific $tabs"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Prompt to select decoration styles for $org_tabs"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label to set hover background color for active $org_tabs"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label to set hover background color for $org-specific $tabs"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label to set shadow color for active $org-specific $tabs"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label to set shadow color for $org_tabs"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label to set top-bar color for active $org_tabs"
 	},
 	"set_tab_generic_background_active_label": {
-		"message": "Insert the background color for your active generic Tabs.",
-		"description": "Label to set background color for active generic Tabs"
+		"message": "$style_settings_background_label $active_generic_tabs",
+		"description": "Label to set background color for active $generic_tabs"
 	},
 	"set_tab_generic_background_label": {
-		"message": "Insert the background color for your generic Tabs.",
-		"description": "Label to set background color for generic Tabs"
+		"message": "$style_settings_background_label $generic_tabs",
+		"description": "Label to set background color for $generic_tabs"
 	},
 	"set_tab_generic_border_color_active_label": {
-		"message": "Insert the border color for your active generic Tabs.",
-		"description": "Label to set border color for active generic Tabs"
+		"message": "$style_settings_border_color_label $active_generic_tabs",
+		"description": "Label to set border color for active $generic_tabs"
 	},
 	"set_tab_generic_border_color_label": {
-		"message": "Insert the border color for your generic Tabs.",
-		"description": "Label to set border color for generic Tabs"
+		"message": "$style_settings_border_color_label $generic_tabs",
+		"description": "Label to set border color for $generic_tabs"
 	},
 	"set_tab_generic_color_active_label": {
-		"message": "Insert the color of the text for your active generic Tabs.",
-		"description": "Label to set text color for active generic Tabs"
+		"message": "$style_settings_color_label $active_generic_tabs",
+		"description": "Label to set text color for active $generic_tabs"
 	},
 	"set_tab_generic_color_label": {
-		"message": "Insert the color of the text for your generic Tabs.",
-		"description": "Label to set text color for generic Tabs"
+		"message": "$style_settings_color_label $generic_tabs",
+		"description": "Label to set text color for $generic_tabs"
 	},
 	"set_tab_generic_decoration_active_label": {
-		"message": "Pick one or more decoration styles for your active generic Tabs.",
-		"description": "Prompt to select decoration styles for active generic Tabs"
+		"message": "$style_settings_decoration_label $active_generic_tabs",
+		"description": "Prompt to select decoration styles for active $generic_tabs"
 	},
 	"set_tab_generic_decoration_label": {
-		"message": "Pick one or more decoration styles for your generic Tabs.",
-		"description": "Prompt to select decoration styles for generic Tabs"
+		"message": "$style_settings_decoration_label $generic_tabs",
+		"description": "Prompt to select decoration styles for $generic_tabs"
 	},
 	"set_tab_generic_hover_background_active_label": {
-		"message": "Insert the hover background color for your active generic Tabs.",
-		"description": "Label to set hover background color for active generic Tabs"
+		"message": "$style_settings_hover_background_label $active_generic_tabs",
+		"description": "Label to set hover background color for active $generic_tabs"
 	},
 	"set_tab_generic_hover_background_label": {
-		"message": "Insert the hover background color for your generic Tabs.",
-		"description": "Label to set hover background color for generic Tabs"
+		"message": "$style_settings_hover_background_label $generic_tabs",
+		"description": "Label to set hover background color for $generic_tabs"
 	},
 	"set_tab_generic_shadow_active_label": {
-		"message": "Insert the shadow color for your active generic Tabs.",
-		"description": "Label to set shadow color for active generic Tabs"
+		"message": "$style_settings_shadow_label $active_generic_tabs",
+		"description": "Label to set shadow color for active $generic_tabs"
 	},
 	"set_tab_generic_shadow_label": {
-		"message": "Insert the shadow color for your generic Tabs.",
-		"description": "Label to set shadow color for generic Tabs"
+		"message": "$style_settings_shadow_label $generic_tabs",
+		"description": "Label to set shadow color for $generic_tabs"
 	},
 	"set_tab_generic_top_active_label": {
-		"message": "Insert the color for the bar at the top of your active generic Tabs.",
-		"description": "Label to set top-bar color for active generic Tabs"
+		"message": "$style_settings_top_active_label $generic_tabs",
+		"description": "Label to set top-bar color for active $generic_tabs"
 	},
 	"set_tab_org_background_active_label": {
-		"message": "Insert the background color for your active org Tabs.",
-		"description": "Label to set background color for active org Tabs"
+		"message": "$style_settings_background_label $active_org_tabs",
+		"description": "Label to set background color for active $org_tabs"
 	},
 	"set_tab_org_background_label": {
-		"message": "Insert the background color for your org Tabs.",
-		"description": "Label to set background color for org-specific Tabs"
+		"message": "$style_settings_background_label $org_tabs",
+		"description": "Label to set background color for $org-specific $tabs"
 	},
 	"set_tab_org_border_color_active_label": {
-		"message": "Insert the border color for your active org Tabs.",
-		"description": "Label to set border color for active org-specific Tabs"
+		"message": "$style_settings_border_color_label $active_org_tabs",
+		"description": "Label to set border color for active $org-specific $tabs"
 	},
 	"set_tab_org_border_color_label": {
-		"message": "Insert the border color for your org Tabs.",
-		"description": "Label to set border color for org Tabs"
+		"message": "$style_settings_border_color_label $org_tabs",
+		"description": "Label to set border color for $org_tabs"
 	},
 	"set_tab_org_color_active_label": {
-		"message": "Insert the color of the text for your active org Tabs.",
-		"description": "Label to set text color for active org Tabs"
+		"message": "$style_settings_color_label $active_org_tabs",
+		"description": "Label to set text color for active $org_tabs"
 	},
 	"set_tab_org_color_label": {
-		"message": "Insert the color of the text for your org Tabs.",
-		"description": "Label to set text color for org-specific Tabs"
+		"message": "$style_settings_color_label $org_tabs",
+		"description": "Label to set text color for $org-specific $tabs"
 	},
 	"set_tab_org_decoration_active_label": {
-		"message": "Pick one or more decoration styles for your active org Tabs.",
-		"description": "Prompt to select decoration styles for active org-specific Tabs"
+		"message": "$style_settings_decoration_label $active_org_tabs",
+		"description": "Prompt to select decoration styles for active $org-specific $tabs"
 	},
 	"set_tab_org_decoration_label": {
-		"message": "Pick one or more decoration styles for your org Tabs.",
-		"description": "Prompt to select decoration styles for org Tabs"
+		"message": "$style_settings_decoration_label $org_tabs",
+		"description": "Prompt to select decoration styles for $org_tabs"
 	},
 	"set_tab_org_hover_background_active_label": {
-		"message": "Insert the hover background color for your active org Tabs.",
-		"description": "Label to set hover background color for active org Tabs"
+		"message": "$style_settings_hover_background_label $active_org_tabs",
+		"description": "Label to set hover background color for active $org_tabs"
 	},
 	"set_tab_org_hover_background_label": {
-		"message": "Insert the hover background color for your org Tabs.",
-		"description": "Label to set hover background color for org-specific Tabs"
+		"message": "$style_settings_hover_background_label $org_tabs",
+		"description": "Label to set hover background color for $org-specific $tabs"
 	},
 	"set_tab_org_shadow_active_label": {
-		"message": "Insert the shadow color for your active org Tabs.",
-		"description": "Label to set shadow color for active org-specific Tabs"
+		"message": "$style_settings_shadow_label $active_org_tabs",
+		"description": "Label to set shadow color for active $org-specific $tabs"
 	},
 	"set_tab_org_shadow_label": {
-		"message": "Insert the shadow color for your org Tabs.",
-		"description": "Label to set shadow color for org Tabs"
+		"message": "$style_settings_shadow_label $org_tabs",
+		"description": "Label to set shadow color for $org_tabs"
 	},
 	"set_tab_org_top_active_label": {
-		"message": "Insert the color for the bar at the top of your active org Tabs.",
-		"description": "Label to set top-bar color for active org Tabs"
+		"message": "$style_settings_top_active_label $org_tabs",
+		"description": "Label to set top-bar color for active $org_tabs"
 	},
 	"set_toggle_preview": {
 		"message": "Click to toggle active state.",
@@ -946,65 +1331,113 @@
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] the page used to modify the settings of Salesforce"
 	},
+	"show_all_tabs": {
+		"message": "Show all $tabs",
+		"description": "[manage-tabs] button label to show all Tabs"
+	},
 	"skip": {
 		"message": "Skip",
 		"description": "[req_permission] button to NOT allow permissons"
 	},
+	"style_generic_pinned": {
+		"message": "Style $generic_pin_tabs",
+		"description": "[options] Toggle $label to style pinned $generic_tabs"
+	},
+	"style_org_pinned": {
+		"message": "Style $org_pin_tabs",
+		"description": "[options] Toggle $label to style pinned $org_tabs"
+	},
+	"style_settings_background_label": {
+		"message": "Insert the background color for your",
+		"description": "Label to set background color"
+	},
+	"style_settings_border_color_label": {
+		"message": "Insert the border color for your",
+		"description": "Label to set border color"
+	},
+	"style_settings_color_label": {
+		"message": "Insert the color of the text for your",
+		"description": "Label to set text color"
+	},
+	"style_settings_decoration_label": {
+		"message": "Pick one or more decoration styles for your",
+		"description": "Prompt to select decoration styles"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Insert the hover background color for your",
+		"description": "Label to set hover background color"
+	},
+	"style_settings_shadow_label": {
+		"message": "Insert the shadow color for your",
+		"description": "Label to set shadow color"
+	},
+	"style_settings_top_active_label": {
+		"message": "Insert the color for the bar at the top of your active",
+		"description": "Label to set top-bar active color"
+	},
 	"successfully_imported": {
 		"message": "Successfully imported",
-		"description": "[toast] the user added Tabs from an external file"
+		"description": "[toast] the user added $tabs from an external file"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "one of the user's favourite links"
 	},
 	"tab_explain": {
 		"message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
-		"description": "[error] explains how a Tab should be constructed"
+		"description": "[error] explains how a $tab should be constructed"
 	},
 	"tab_information": {
-		"message": "Tab information",
-		"description": "title for update Tab modal"
+		"message": "$tab information",
+		"description": "title for update $tab modal"
 	},
 	"tab_label": {
-		"message": "Tab Label",
-		"description": "the Label property of the Tab, its name"
+		"message": "$tab $label",
+		"description": "the $label property of the $tab, its name"
 	},
 	"tab_org": {
-		"message": "Tab Org",
-		"description": "the Org property of the Tab, if it's for a single Salesforce Organization"
+		"message": "$tab $org",
+		"description": "the $org property of the $tab, if it's for a single Salesforce Organization"
 	},
 	"tab_url": {
-		"message": "Tab URL",
-		"description": "the URL property of the Tab, where it points to"
+		"message": "$tab $url",
+		"description": "the $url property of the $tab, where it points to"
 	},
 	"table_delete": {
-		"message": "Delete Tab",
+		"message": "Delete $tab",
 		"description": "[popup] assistive text for column with delete button"
 	},
 	"table_org": {
-		"message": "Is Org Tab",
-		"description": "[popup] assistive text for column with org checkbox"
+		"message": "Is $org $tab",
+		"description": "[popup] assistive text for column with $org checkbox"
 	},
 	"table_row_label": {
-		"message": "Enter the label for this URL",
-		"description": "[popup] input field with Tab name"
+		"message": "Enter the $label for this $url",
+		"description": "[popup] input field with $tab name"
 	},
 	"table_row_org": {
-		"message": "Click if you want this Tab to be available for this Org only.",
-		"description": "[popup] checkbox to toggle Tab to be org-specific"
+		"message": "Click if you want this $tab to be available for this $org only.",
+		"description": "[popup] checkbox to toggle $tab to be $org-specific"
 	},
 	"table_row_org_name": {
-		"message": "The Org for which this Tab is available.",
-		"description": "[popup] input field with org name"
+		"message": "The $org for which this $tab is available.",
+		"description": "[popup] input field with $org name"
 	},
 	"table_row_url": {
 		"message": "Enter the sub_URL where you want to be redirected.",
-		"description": "[popup] input field with Tab url"
+		"description": "[popup] input field with $tab url"
 	},
 	"tabs": {
 		"message": "Tabs",
 		"description": "the user's favourite links"
 	},
+	"tabs_exported_successfully": {
+		"message": "$tabs exported successfully",
+		"description": "[toast] success message when $tabs are exported"
+	},
 	"tabs_saved": {
-		"message": "Tabs saved.",
-		"description": "[toast] Tabs were successfully stored."
+		"message": "$tabs saved.",
+		"description": "[toast] $tabs were successfully stored."
 	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
@@ -1016,11 +1449,19 @@
 	},
 	"underline": {
 		"message": "Underline",
-		"description": "Decoration style option to underline Tab text"
+		"description": "Decoration style option to underline $tab text"
 	},
 	"underline_wavy": {
 		"message": "Underline Wavy",
-		"description": "Decoration style option to apply a wavy underline to Tab text"
+		"description": "Decoration style option to apply a wavy underline to $tab text"
+	},
+	"unsaved_changes_confirm": {
+		"message": "You have unsaved changes. Do you want to leave without saving?",
+		"description": "[manage-tabs] the user asked to go to a Tab without saving first"
+	},
+	"unselect_all": {
+		"message": "Unselect All",
+		"description": "[modal] button to unselect all $tabs in export modal"
 	},
 	"update_available": {
 		"message": "Update available",
@@ -1030,9 +1471,21 @@
 		"message": "Upload",
 		"description": "[import] let the user browse through their files and pick the right one"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] the Tab's link"
+	},
 	"users": {
 		"message": "Users",
 		"description": "The name of the page related to ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Please $export your new $tabs as the file you've used won't be supported in future releases.",
+		"description": "[warning] the user imported their $tabs using a deprecated configuration of the json file"
+	},
+	"when_click_popup_while": {
+		"message": "page when clicking on the popup while",
+		"description": "[placeholder] used by other texts"
 	},
 	"where_to": {
 		"message": "Where to?",

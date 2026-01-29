@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ 削除",
+		"description": "[Tabを管理] 行を削除する"
+	},
+	"act_open": {
+		"message": "🪂 開く",
+		"description": "[Tabを管理] 選択した Tab を開く"
+	},
+	"actions": {
+		"message": "アクション",
+		"description": "Tab アクションのドロップダウンメニューラベル"
+	},
+	"active": {
+		"message": "アクティブ",
+		"description": "アクティブ状態のトグルに使用"
+	},
+	"active_generic_pin_tabs": {
+		"message": "アクティブな $generic_pin_tabs",
+		"description": "現在アクティブなユーザーの汎用ピン留めされたTab"
+	},
+	"active_generic_tabs": {
+		"message": "アクティブな $generic_tabs",
+		"description": "現在アクティブなユーザーの汎用Tab"
+	},
+	"active_org_pin_tabs": {
+		"message": "アクティブな $org_pin_tabs",
+		"description": "現在アクティブなユーザーの組織ピン留めされたTab"
+	},
+	"active_org_tabs": {
+		"message": "アクティブな $org_tabs",
+		"description": "現在アクティブなユーザーの組織Tab"
+	},
 	"allow": {
 		"message": "許可する",
 		"description": "[req_permission] 許可を与えるためのボタン"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[コンテキストメニュー]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] Salesforce 設定ページで保存された $tabs を直接管理するためのモーダルを開く"
+	},
 	"cxm_move": {
 		"message": "🧭 Tab を移動する",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[コンテキストメニュー]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Pin",
+		"description": "[コンテキストメニュー] ユーザーがこのTabをリストの最初に保持できるようにする"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(たち) を削除する",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ 他の Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 ピン留めを削除",
+		"description": "[コンテキストメニュー] ユーザーがピン留めされたTabを削除できるようにする"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 右側の Tab を削除する",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ この Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 ピン留めされていないものを削除",
+		"description": "[コンテキストメニュー] ユーザーがピン留めされていないTabを削除できるようにする"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 デフォルトTabにリセット",
@@ -151,6 +199,14 @@
 		"message": "🎯 Tabsをソート",
 		"description": "ユーザーがTabsを自動的にソートできるようにするコンテキストメニュー（親メニュー）"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ 使用回数で",
+		"description": "ユーザーがTabをクリックした回数でTabをソートできるようにするコンテキストメニュー"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ 時間で",
+		"description": "Tabがクリックされた日時でユーザーがTabをソートできるようにするコンテキストメニュー"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 ラベル順",
 		"description": "ユーザーがTabsをラベルでソートできるようにするコンテキストメニュー"
@@ -163,25 +219,33 @@
 		"message": "🤖 Url順",
 		"description": "ユーザーがTabsをURLでソートできるようにするコンテキストメニュー"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 非組織Tabを非表示",
+		"description": "[コンテキストメニュー] 一時的に汎用Tabを非表示にする"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 組織Tabを非表示",
+		"description": "[コンテキストメニュー] 一時的に組織Tabを非表示にする"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Pinを解除",
+		"description": "[コンテキストメニュー] ユーザーがこのTabをピン留めされたリストから削除できるようにする"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab を更新する",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Org を切り替える",
-		"description": "[context-menu]"
+		"message": "👜 組織を切り替え",
+		"description": "[コンテキストメニュー]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 その他の更新",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "削除する",
-		"description": "[popup] 行を削除する"
-	},
 	"delete_all": {
-		"message": "すべてのTabsを$delete",
-		"description": "[ポップアップ] すべてのTabsを空にするゴミ箱のタイトル"
+		"message": "すべての $tabs を削除",
+		"description": "[ポップアップ] すべての $tabs を空にするためのゴミ箱のタイトル"
 	},
 	"descending": {
 		"message": "降順（Z-A）",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Tab の追加中にエラーが発生しました。",
 		"description": "[エラー] Tab の追加中に使用される一般的なエラー"
+	},
+	"error_already_pinned": {
+		"message": "このTabはすでにピン留めされています。",
+		"description": "[エラー] ユーザーがすでにピン留めされているTabをピン留めしようとした"
+	},
+	"error_already_unpinned": {
+		"message": "このTabはすでにピン留めが解除されています。",
+		"description": "[エラー] ユーザーがすでにピン留めが解除されているTabのピン留めを解除しようとした"
+	},
+	"error_cannot_move": {
+		"message": "このTabは移動できません！",
+		"description": "[エラー] 要求されたTabは現在移動できません。"
+	},
+	"error_cannot_move_dir": {
+		"message": "このTabはこの方向に移動できません！",
+		"description": "[エラー] 要求されたTabは現在移動できません。"
 	},
 	"error_check_update": {
 		"message": "アップデート確認中にエラーが発生しました",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "インポート中にエラーが発生しました：\n",
 		"description": "[error] インポートプロセス中にエラーが発生しました"
+	},
+	"error_internal": {
+		"message": "内部エラー",
+		"description": "[エラー] 一般的なエラー"
 	},
 	"error_invalid_key": {
 		"message": "関数に渡されたキーパラメータが無効です",
@@ -323,9 +407,21 @@
 		"message": "確認するためのオブジェクトが渡されませんでした！",
 		"description": "[error] オブジェクトが渡されませんでした"
 	},
+	"error_no_pinned": {
+		"message": "まだピン留めされたTabはありません！",
+		"description": "[エラー] ユーザーがピン留めされたTabを削除しようとしましたが、ピン留めされたTabがありません"
+	},
 	"error_no_setup_tab": {
 		"message": "Setup Tab が見つかりませんでした。",
 		"description": "[error] お気に入りの Tabs を配置する場所が見つかりませんでした"
+	},
+	"error_no_tabs_selected": {
+		"message": "エクスポートするTabが選択されていません",
+		"description": "[toast] ユーザーがTabを選択せずにエクスポートしようとしたときのエラー"
+	},
+	"error_no_unpinned": {
+		"message": "ピン留めされていないTabはありません！",
+		"description": "[エラー] ユーザーがピン留めされていないTabを削除しようとしましたが、ピン留めされていないTabがありません"
 	},
 	"error_no_url": {
 		"message": "確認するための URL がありません！",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "はまだ初期化されていませんでした。",
 		"description": "[エラー] 変数が準備できていない場合の一般的なエラー"
+	},
+	"error_pin_tab": {
+		"message": "Tabのピン留め中にエラーが発生しました",
+		"description": "[エラー]"
 	},
 	"error_processing_tabs": {
 		"message": "Tabs の処理中にエラーが発生しました。",
@@ -359,9 +459,17 @@
 		"message": "他の Tabs を削除中にエラーが発生しました。",
 		"description": "[エラー] 他の Tabs を削除中に使用される一般的なエラー"
 	},
+	"error_removing_pin_tabs": {
+		"message": "ピン留めされたTabを削除中にエラーが発生しました。",
+		"description": "[エラー] 非ピン留めされたTabを削除中に使用される一般的なエラー"
+	},
 	"error_removing_tab": {
 		"message": "Tab の削除中にエラーが発生しました。",
 		"description": "[エラー] Tab の削除中に使用される一般的なエラー"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "非ピン留めされたTabを削除中にエラーが発生しました。",
+		"description": "[エラー] 非ピン留めされたTabを削除中に使用される一般的なエラー"
 	},
 	"error_removing_visible_tabs": {
 		"message": "すべての表示中のTabの削除中にエラーが発生しました。",
@@ -383,6 +491,14 @@
 		"message": "空の Tabs は同期できません！",
 		"description": "[error] 同期すべきものがありません。"
 	},
+	"error_tab_click_count": {
+		"message": "クリック数は非負の数値である必要があります",
+		"description": "[エラー] ユーザーが間違ったクリック数でTabを作成しようとした"
+	},
+	"error_tab_click_date": {
+		"message": "クリック日時は、未来の日付にならない数値である必要があります",
+		"description": "[エラー] ユーザーが間違ったクリック日時でTabを作成しようとした"
+	},
 	"error_tab_constructor": {
 		"message": "新しい Tab() の代わりに Tab.create() を使用してください",
 		"description": "[エラー] 開発者に Tab クラスの使用方法を伝えます"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab が見つかりませんでした。",
 		"description": "[error] Tab がリストに含まれていません。"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tabはまだピン留めされていません！",
+		"description": "[エラー] ユーザーがピン留めされていないTabのピン留めを解除しようとした"
 	},
 	"error_tab_object_creation": {
 		"message": "オブジェクトで呼び出す際、余計なものは渡さないでください。",
@@ -434,6 +554,10 @@
 		"message": "翻訳ツールはまだ初期化されていません。",
 		"description": "[エラー] TranslationService が準備できていませんでした"
 	},
+	"error_unknown_file_structure": {
+		"message": "インポートしようとしたファイルを認識できませんでした\n問題が解決しない場合は、GitHubイシューを作成して共有してください",
+		"description": "[インポート] ユーザーのファイルが認識されませんでした"
+	},
 	"error_unknown_message": {
 		"message": "不明なメッセージを受信しました",
 		"description": "リスナーから不明なメッセージが受信されました"
@@ -441,6 +565,10 @@
 	"error_unknown_request": {
 		"message": "不明なリクエスト。",
 		"description": "[エラー] 認識されなかったメッセージを受信した後の一般的なエラー"
+	},
+	"error_unpin_tab": {
+		"message": "Tabのピン留め解除中にエラーが発生しました",
+		"description": "[エラー]"
 	},
 	"error_useless_remove": {
 		"message": "削除できません：\n一度も保存されていないページは削除できません",
@@ -453,6 +581,10 @@
 	"export": {
 		"message": "エクスポートする",
 		"description": "[popup] エクスポートボタン"
+	},
+	"export_tabs": {
+		"message": "Tabsをエクスポート",
+		"description": "[modal] Tabsのエクスポートモーダルのタイトル"
 	},
 	"export_title": {
 		"message": "すべての Tabs をエクスポートする",
@@ -482,6 +614,14 @@
 		"message": "一般",
 		"description": "一般設定カテゴリのラベル"
 	},
+	"generic_pin_tabs": {
+		"message": "汎用 $pinned Tab",
+		"description": "組織固有ではない、ユーザーのお気に入りのTab"
+	},
+	"generic_tabs": {
+		"message": "汎用 Tab",
+		"description": "組織固有ではない、ユーザーのお気に入りのTab"
+	},
 	"help": {
 		"message": "ヘルプ",
 		"description": ""
@@ -494,6 +634,14 @@
 		"message": "新しくお気に入りに登録されたTabsは、設定バーのTabリストの最後にではなく、先頭に挿入されます。",
 		"description": "[settings-help] for $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "有効にすると $salesforce_setup を起動するとすぐに $tabs を表示できるようになります",
+		"description": "[設定ヘルプ] $salesforce_setup が開かれたらすぐに準備ができるようにするためのオプションの権限"
+	},
+	"help_allow_export": {
+		"message": "有効にすると $tabs を $export してコンピューターに保存できるようになります",
+		"description": "[設定ヘルプ] ユーザーのデバイスに Tab をダウンロードできるようにするためのオプションの権限"
+	},
 	"help_automatic_open_login": {
 		"message": "Salesforceドメイン外で拡張機能のポップアップをクリックすると、自動的にSalesforceのログインページに移動します。",
 		"description": "[settings-help] for $opt_automatic_open_login"
@@ -501,6 +649,10 @@
 	"help_automatic_open_setup": {
 		"message": "Salesforceドメイン内で、ただし設定ページ以外で拡張機能のポップアップをクリックすると、自動的にSalesforceの設定ページに移動します。",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "ドットを使用してドラッグすることで $tabs の順序を入れ替えることができます",
+		"description": "[manage-tabs] Tab のドラッグ方法についての説明"
 	},
 	"help_keep_sort": {
 		"message": "有効にすると、Tabsはラベル、URL、または組織のいずれかによって、ソートされた順序に保たれます。どちらを選択するかによって異なります。",
@@ -546,9 +698,33 @@
 		"message": "URLフラグメントがSalesforceのレコード/オブジェクトIDの形式と一致するかどうかを確認する拡張機能のチェックを無効にします（保存されたTabをOrg Tabとして自動的に設定するために使用されます）。",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "ここでは、同じ行にある $tab に対してさまざまなアクションを実行するためのサブメニューが表示されます。",
+		"description": "[manage-tabs] 右側の矢印に含まれる内容についての説明"
+	},
+	"help_tab_label": {
+		"message": "これは、この $tab がどこに移動するかを覚えておくために使用する一般的な名前です。",
+		"description": "[manage-tabs] Tab ラベルについての説明"
+	},
+	"help_tab_org": {
+		"message": "これは、この $tab が表示される Salesforce $org 名です。空のままにすると、この $tab は訪問するすべての Salesforce $org で表示されます。",
+		"description": "[manage-tabs] Tab Org についての説明"
+	},
+	"help_tab_url": {
+		"message": "これは、この $tab をクリックしたときにリダイレクトされる（短縮された）リンクです。",
+		"description": "[manage-tabs] Tab URL についての説明"
+	},
 	"help_tip_click_link": {
 		"message": "クリックして、この設定のドキュメントにリダイレクトします！",
 		"description": "[設定-ヘルプ] ユーザーが特定の**設定**についてさらに読むことを可能にする行動喚起"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder の $tabs を非表示にする",
+		"description": "[manage-tabs] 他の Org Tabs を非表示にするためのボタンラベル"
+	},
+	"if_click_popup": {
+		"message": "拡張機能のポップアップをクリックした場合",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"import": {
 		"message": "インポートする",
@@ -566,6 +742,10 @@
 		"message": "無効なファイルタイプです。\nJSON ファイルのみがサポートされます。",
 		"description": "[error] インポートに使用されたファイルは JSON ではありません"
 	},
+	"import_metadata": {
+		"message": "Tabメタデータ（「クリック数」、「クリック日」など）をインポートします。",
+		"description": "[ラベル] インポートプロセス中にファイル内で見つかったすべてをインポートする"
+	},
 	"import_successful": {
 		"message": "インポートに成功しました",
 		"description": "[インポート] インポートが完了しました。この後、インポートされたレコード数が表示されます"
@@ -575,8 +755,12 @@
 		"description": "[モーダルタイトル] インポート処理用"
 	},
 	"import_title": {
-		"message": "JSONファイルから$import_tabs",
+		"message": "JSONファイルから $import_tabs",
 		"description": "[ポップアップ] インポートボタンのタイトル"
+	},
+	"inactive": {
+		"message": "非アクティブ",
+		"description": "非アクティブ状態のトグルに使用"
 	},
 	"insert_another": {
 		"message": "別のものを挿入する",
@@ -594,6 +778,10 @@
 		"message": "斜体",
 		"description": "斜体テキスト用のフォントスタイルオプション"
 	},
+	"label": {
+		"message": "ラベル",
+		"description": "[key] Tabの名前"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforceのカスタムナビゲーション技術"
@@ -601,6 +789,18 @@
 	"login_to_salesforce": {
 		"message": "Salesforce にログインする",
 		"description": "[notSalesforceSetup] Salesforce ログインページにリダイレクトするための呼びかけ"
+	},
+	"manage_tabs": {
+		"message": "$tabs を管理",
+		"description": "[modal-title] 編集可能なフィールドとドラッグによる並べ替え機能を備えた、保存済み $tabs を管理するためのモーダル"
+	},
+	"manage_tabs_explainer": {
+		"message": "このモーダルから直接、保存した $tabs の編集、並べ替え、管理を行えます。行をドラッグして並べ替えたり、ドロップダウンメニューを使用してその他のアクションを実行したりできます。",
+		"description": "[modal-explainer] タブ管理モーダルの機能を説明する"
+	},
+	"must_non_empty_str": {
+		"message": "空ではない文字列である必要があります",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -613,6 +813,10 @@
 	"no_match": {
 		"message": "一致するアクションが見つかりませんでした",
 		"description": "[error] リクエストされたアクションが利用可能なものと一致しません"
+	},
+	"no_tabs_to_export": {
+		"message": "エクスポートするTabsがありません",
+		"description": "[toast] エクスポートするTabsがないときのエラー"
 	},
 	"nss_invalid_url": {
 		"message": "無効なURLが検出されました。",
@@ -646,12 +850,20 @@
 		"message": "新しいTabsを先頭に追加します。",
 		"description": "[settings] ユーザーがすべての新しいTabsを先頭に追加できるようにする"
 	},
+	"opt_allow_domains": {
+		"message": "Salesforce ページにアクセスしたときに $extension_label がそれらにアクセスすることを許可します",
+		"description": "[設定] ユーザーが $salesforce_setup を開いているときに拡張機能を実行するためのオプションの権限"
+	},
+	"opt_allow_export": {
+		"message": "リクエスト時に $extension_label が $tabs をエクスポートすることを許可します。",
+		"description": "[設定] ユーザーの Tab をエクスポートできるようにするためのオプションの権限"
+	},
 	"opt_automatic_open_login": {
-		"message": "Salesforceページにいないときにポップアップをクリックすると、$salesforce_loginページを自動的に開きます。",
+		"message": "Salesforceページにいないときにポップアップをクリックすると $salesforce_login ページを自動的に開きます",
 		"description": "[設定] ユーザーがランダムなウェブサイトでポップアップを開いたとき"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Salesforceページにいるときにポップアップをクリックすると、$salesforce_setupページを自動的に開きます。",
+		"message": "Salesforceページにいるときにポップアップをクリックすると $salesforce_setup ページを自動的に開きます",
 		"description": "[設定] ユーザーがSalesforceウェブサイトでポップアップを開いたとき"
 	},
 	"opt_confirm_save": {
@@ -683,11 +895,11 @@
 		"description": "[設定] ユーザーが拡張機能で新しいリリースを検索できないようにします"
 	},
 	"opt_open_login_same_tab": {
-		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_loginページを開きます。",
+		"message": "ポップアップをクリックすると 常に同じTabで $salesforce_login ページを開きます",
 		"description": "[設定]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "ポップアップをクリックすると、常に同じTabで$salesforce_setupページを開きます。",
+		"message": "ポップアップをクリックすると 常に同じTabで $salesforce_setup ページを開きます",
 		"description": "[設定]"
 	},
 	"opt_pick_language": {
@@ -719,12 +931,24 @@
 		"description": "[設定] お気に入りに追加するときにリンク内のIDチェックを防止"
 	},
 	"or_drop": {
-		"message": "または$drop",
+		"message": "または $drop",
 		"description": "[インポート] ユーザーがマウスでファイルを移動してドロップできるようにする"
+	},
+	"org": {
+		"message": "組織 (Org)",
+		"description": "[key] TabのSalesforce $org"
 	},
 	"org_link": {
 		"message": "Org リンク",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "組織 $pinned Tab",
+		"description": "組織固有のTab"
+	},
+	"org_tabs": {
+		"message": "組織 Tab",
+		"description": "組織固有のTab"
 	},
 	"other_org_info": {
 		"message": "その他の Org 情報",
@@ -737,6 +961,22 @@
 	"overwrite_tabs": {
 		"message": "保存された Tabs を上書きする。",
 		"description": "[label] インポート中に保存されたすべての Tabs を削除する"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "ページは現在のブラウザ Tab で開かれます",
+		"description": "[placeholder] 他のテキストで使用されます"
+	},
+	"permission_request_failure": {
+		"message": "権限は許可されませんでした。",
+		"description": "[エラー] ユーザーから権限のリクエストを求められましたが、その後承認されませんでした"
+	},
+	"permission_request_success": {
+		"message": "権限が許可されました！",
+		"description": "[成功] ユーザーから権限のリクエストを求められ、承認されました"
+	},
+	"pinned": {
+		"message": "Pinned",
+		"description": "常にリストの最初に見つかるユーザーのTab"
 	},
 	"preserve_org_tabs": {
 		"message": "他の Org の Tabs を保持する。",
@@ -763,11 +1003,11 @@
 		"description": "[req_permission] 常に許可しない場合のラベル"
 	},
 	"req_permissions_header": {
-		"message": "$salesforce_setupページへの\n自動アクセスを許可してください。",
+		"message": "$salesforce_setup ページへの\n自動アクセスを許可してください",
 		"description": "[req_permission] 権限を要求するページのヘッダー"
 	},
 	"req_permissions_paragraph": {
-		"message": "必要に応じて、$salesforce_setupページに移動するとすぐに\nお気に入りのTabsを表示できます。\n毎回この拡張機能をクリックする必要はありません。",
+		"message": "必要に応じて $salesforce_setup ページに移動するとすぐに\nお気に入りのTabsを表示できます\n毎回この拡張機能をクリックする必要はありません",
 		"description": "[req_permission] 権限が要求される理由を説明するテキスト"
 	},
 	"required": {
@@ -778,6 +1018,10 @@
 		"message": "= 必要な情報",
 		"description": "[modal] 一部の情報が必須であることを示します"
 	},
+	"salesforce_domain": {
+		"message": "Salesforceドメイン",
+		"description": "[placeholder] 他のテキストで使用されます"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning プラットフォーム"
@@ -785,6 +1029,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforceログインページ (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforceページ",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -797,6 +1045,22 @@
 	"save_tab": {
 		"message": "Tab として保存する",
 		"description": "[alt] 画像が表示されない場合の代替テキスト"
+	},
+	"select_all": {
+		"message": "すべて選択",
+		"description": "[modal] エクスポートモーダルですべてのTabを選択するボタン"
+	},
+	"select_tabs": {
+		"message": "どの $tabs を希望するか選択してください",
+		"description": "[import] インポートする前に、ユーザーにどの $tabs をインポートするかを選択させます"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] エクスポートする前に、ユーザーにどの $tabs をエクスポートするかを選択させます"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] インポートする前に、ユーザーにどの $tabs をインポートするかを選択させます"
 	},
 	"send_tip": {
 		"message": "チップを送る ❤️",
@@ -829,6 +1093,126 @@
 	"set_org_styler": {
 		"message": "Org スタイラー",
 		"description": "組織固有の Tab のスタイルを設定するラベル"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "ピン留めされたときの汎用Tabの外観をプレビューするためのラベル"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "ピン留めされたときの汎用Tabのスタイルを設定するためのラベル"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "ピン留めされたときの組織固有のTabの外観をプレビューするためのラベル"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "ピン留めされたときの組織固有のTabのスタイルを設定するためのラベル"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "アクティブな汎用Tabの背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "汎用Tabの背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "アクティブな汎用Tabの境界線の色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "汎用Tabの境界線の色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "アクティブな汎用Tabのテキストの色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "汎用Tabのテキストの色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "アクティブな汎用Tabの装飾スタイルを選択するためのプロンプト"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "汎用Tabの装飾スタイルを選択するためのプロンプト"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "アクティブな汎用Tabのホバー時の背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "汎用Tabのホバー時の背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "アクティブな汎用Tabの影の色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "汎用Tabの影の色を設定するためのラベル"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "アクティブな汎用Tabのトップバーの色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "アクティブな組織Tabの背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "組織固有のTabの背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "アクティブな組織固有のTabの境界線の色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "組織Tabの境界線の色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "アクティブな組織Tabのテキストの色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "組織固有のTabのテキストの色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "アクティブな組織固有のTabの装飾スタイルを選択するためのプロンプト"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "組織Tabの装飾スタイルを選択するためのプロンプト"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "アクティブな組織Tabのホバー時の背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "組織固有のTabのホバー時の背景色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "アクティブな組織固有のTabの影の色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "組織Tabの影の色を設定するためのラベル"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "アクティブな組織Tabのトップバーの色を設定するためのラベル"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "アクティブな汎用 Tab の背景色を挿入してください。",
@@ -946,13 +1330,57 @@
 		"message": "Setup ページ",
 		"description": "[notSalesforceSetup] Salesforce の設定を変更するためのページ"
 	},
+	"show_all_tabs": {
+		"message": "すべての $tabs を表示",
+		"description": "[manage-tabs] すべての Tab を表示するためのボタンラベル"
+	},
 	"skip": {
 		"message": "スキップする",
 		"description": "[req_permission] 許可を与えないためのボタン"
 	},
+	"style_generic_pinned": {
+		"message": "ピン留めされた $generic_tabs をスタイル",
+		"description": "[オプション] ピン留めされた汎用Tabをスタイリングするためのトグルラベル"
+	},
+	"style_org_pinned": {
+		"message": "ピン留めされた $org_tabs をスタイル",
+		"description": "[オプション] ピン留めされた組織Tabをスタイリングするためのトグルラベル"
+	},
+	"style_settings_background_label": {
+		"message": "あなたの背景色を挿入してください",
+		"description": "背景色を設定するためのラベル"
+	},
+	"style_settings_border_color_label": {
+		"message": "あなたの境界線の色を挿入してください",
+		"description": "境界線の色を設定するためのラベル"
+	},
+	"style_settings_color_label": {
+		"message": "あなたのテキストの色を挿入してください",
+		"description": "テキストの色を設定するためのラベル"
+	},
+	"style_settings_decoration_label": {
+		"message": "あなたのための装飾スタイルを1つ以上選択してください",
+		"description": "装飾スタイルを選択するためのプロンプト"
+	},
+	"style_settings_hover_background_label": {
+		"message": "あなたのホバー背景色を挿入してください",
+		"description": "ホバー時の背景色を設定するためのラベル"
+	},
+	"style_settings_shadow_label": {
+		"message": "あなたの影の色を挿入してください",
+		"description": "影の色を設定するためのラベル"
+	},
+	"style_settings_top_active_label": {
+		"message": "あなたの活発なもののトップにあるバーの色を挿入してください",
+		"description": "トップバーのアクティブな色を設定するためのラベル"
+	},
 	"successfully_imported": {
 		"message": "正常にインポートされました",
 		"description": "[toast] 外部ファイルから Tabs が追加されました"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "ユーザーのお気に入りリンクの1つ"
 	},
 	"tab_explain": {
 		"message": "各項目は 'label' と 'url' を文字列として持つ必要があります。さらに、各項目は 'org' を文字列として持つことができます。",
@@ -1002,6 +1430,10 @@
 		"message": "Tabs",
 		"description": "お気に入りのリンク"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabsが正常にエクスポートされました",
+		"description": "[toast] Tabsがエクスポートされたときの成功メッセージ"
+	},
 	"tabs_saved": {
 		"message": "Tabs が保存されました。",
 		"description": "[toast] Tabs が正常に保存されました。"
@@ -1022,6 +1454,14 @@
 		"message": "波線下線",
 		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
 	},
+	"unsaved_changes_confirm": {
+		"message": "保存されていない変更があります。保存せずに終了しますか？",
+		"description": "[manage-tabs] ユーザーが保存せずに Tab への移動を要求しました"
+	},
+	"unselect_all": {
+		"message": "すべての選択を解除",
+		"description": "[modal] エクスポートモーダルですべてのTabの選択を解除するボタン"
+	},
 	"update_available": {
 		"message": "アップデート利用可能",
 		"description": "拡張機能の新しいアップデートが利用可能です"
@@ -1030,9 +1470,21 @@
 		"message": "アップロード",
 		"description": "[インポート] ユーザーが自分のファイルを参照して適切なものを選択できるようにします"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tabのリンク"
+	},
 	"users": {
 		"message": "ユーザー",
 		"description": "ManageUsers/home に関連するページの名前"
+	},
+	"warn_upgrade_backup": {
+		"message": "使用したファイルは将来のリリースでサポートされなくなるため、新しいTabをエクスポートしてください。",
+		"description": "[警告] ユーザーがjsonファイルの非推奨の構成を使用してTabをインポートした"
+	},
+	"when_click_popup_while": {
+		"message": "ポップアップをクリックしたときのページ",
+		"description": "[placeholder] 他のテキストで使用されます"
 	},
 	"where_to": {
 		"message": "どこへ？",

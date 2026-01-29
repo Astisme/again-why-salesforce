@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ 刪除",
+		"description": "[管理-Tab] 刪除一行"
+	},
+	"act_open": {
+		"message": "🪂 打開",
+		"description": "[管理-Tab] 打開所選 Tab"
+	},
+	"actions": {
+		"message": "操作",
+		"description": "Tab 操作的下拉選單標籤"
+	},
+	"active": {
+		"message": "作用中",
+		"description": "用於作用中狀態的切換開關"
+	},
+	"active_generic_pin_tabs": {
+		"message": "作用中的 $generic_pin_tabs",
+		"description": "使用者目前作用中的通用型已釘選 Tab"
+	},
+	"active_generic_tabs": {
+		"message": "作用中的 $generic_tabs",
+		"description": "使用者目前作用中的通用型 Tab"
+	},
+	"active_org_pin_tabs": {
+		"message": "作用中的 $org_pin_tabs",
+		"description": "使用者目前作用中的組織型已釘選 Tab"
+	},
+	"active_org_tabs": {
+		"message": "作用中的 $org_tabs",
+		"description": "使用者目前作用中的組織型 Tab"
+	},
 	"allow": {
 		"message": "允許",
 		"description": "[req_permission] 按鈕，用於允許權限"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[內容功能表]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] 打開互動視窗，直接在 Salesforce 設定頁面上管理儲存的 $tabs"
+	},
 	"cxm_move": {
 		"message": "🧭 移動 Tab",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[內容功能表]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 釘選",
+		"description": "[上下文選單] 讓使用者將此 Tab 保留在列表開頭"
+	},
 	"cxm_remove": {
 		"message": "💥 移除 Tab(s)",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ 其它 Tab",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 移除已釘選 Tab",
+		"description": "[上下文選單] 讓使用者移除其已釘選的 Tab"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 右側 Tab",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ This Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 移除未釘選 Tab",
+		"description": "[上下文選單] 讓使用者移除其未釘選的 Tab"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 重設預設Tab",
@@ -151,6 +199,14 @@
 		"message": "🎯 排序 Tab",
 		"description": "上下文選單，可讓使用者自動排序他們的 Tab（父選單）"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ 依使用次數",
+		"description": "上下文選單，讓使用者按點擊 Tab 的次數排序其 Tab"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ 依時間",
+		"description": "上下文選單，讓使用者按點擊 Tab 的時間排序其 Tab"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 依標籤",
 		"description": "上下文選單，可讓使用者依標籤排序他們的 Tab"
@@ -163,25 +219,33 @@
 		"message": "🤖 依 URL",
 		"description": "上下文選單，可讓使用者依 URL 排序他們的 Tab"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 隱藏非組織 Tab",
+		"description": "[上下文選單] 暫時隱藏通用型 Tab"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 隱藏組織型 Tab",
+		"description": "[上下文選單] 暫時隱藏組織型 Tab"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 取消釘選",
+		"description": "[上下文選單] 讓使用者從其釘選列表中移除此 Tab"
+	},
 	"cxm_update": {
 		"message": "✏️ 更新 Tab",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 切換 Org",
-		"description": "[context-menu]"
+		"message": "👜 切換組織",
+		"description": "[上下文選單]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 其他更新",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "刪除",
-		"description": "[popup] 刪除一行"
-	},
 	"delete_all": {
-		"message": "$delete 所有 Tab",
-		"description": "[快顯視窗] 清除所有 Tab 的資源回收筒標題"
+		"message": "刪除所有 $tabs",
+		"description": "[彈出視窗] 垃圾桶上的標題，用於清空所有 $tabs"
 	},
 	"descending": {
 		"message": "遞減 (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "新增 Tab 時發生錯誤。",
 		"description": "[錯誤] 新增 Tab 時使用的一般錯誤"
+	},
+	"error_already_pinned": {
+		"message": "此 Tab 已被釘選。",
+		"description": "[錯誤] 使用者嘗試釘選一個已被釘選的 Tab"
+	},
+	"error_already_unpinned": {
+		"message": "此 Tab 已被取消釘選。",
+		"description": "[錯誤] 使用者嘗試取消釘選一個已被取消釘選的 Tab"
+	},
+	"error_cannot_move": {
+		"message": "此 Tab 無法移動！",
+		"description": "[錯誤] 所請求的 Tab 目前無法移動。"
+	},
+	"error_cannot_move_dir": {
+		"message": "此 Tab 無法朝此方向移動！",
+		"description": "[錯誤] 所請求的 Tab 目前無法移動。"
 	},
 	"error_check_update": {
 		"message": "檢查更新時發生錯誤",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "匯入期間發生錯誤:\n",
 		"description": "[error] 匯入過程中出現錯誤"
+	},
+	"error_internal": {
+		"message": "內部錯誤",
+		"description": "[錯誤] 一般錯誤"
 	},
 	"error_invalid_key": {
 		"message": "傳遞給函數的鍵參數無效",
@@ -323,9 +407,21 @@
 		"message": "未傳入可檢查的對象！",
 		"description": "[error] 未傳入對象"
 	},
+	"error_no_pinned": {
+		"message": "您還沒有任何已釘選的 Tab！",
+		"description": "[錯誤] 使用者嘗試移除已釘選的 Tab，但他們沒有任何已釘選的 Tab"
+	},
 	"error_no_setup_tab": {
 		"message": "找不到 Setup Tab。",
 		"description": "[error] 擴展無法確定放置最愛 Tab 的位置"
+	},
+	"error_no_tabs_selected": {
+		"message": "沒有選擇任何 Tab 進行匯出",
+		"description": "[toast] 使用者嘗試在未選擇任何 Tab 的情況下匯出時發生的錯誤"
+	},
+	"error_no_unpinned": {
+		"message": "您沒有任何未釘選的 Tab！",
+		"description": "[錯誤] 使用者嘗試移除未釘選的 Tab，但他們沒有任何未釘選的 Tab"
 	},
 	"error_no_url": {
 		"message": "未傳入要檢查的 URL！",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "尚未初始化。",
 		"description": "[錯誤] 變數未準備就緒時的一般錯誤"
+	},
+	"error_pin_tab": {
+		"message": "釘選 Tab 時發生錯誤",
+		"description": "[錯誤]"
 	},
 	"error_processing_tabs": {
 		"message": "處理 Tabs 時發生錯誤。",
@@ -359,9 +459,17 @@
 		"message": "移除其他 Tabs 時發生錯誤。",
 		"description": "[錯誤] 移除其他 Tabs 時使用的一般錯誤"
 	},
+	"error_removing_pin_tabs": {
+		"message": "移除已釘選 Tab 時發生錯誤。",
+		"description": "[錯誤] 移除非釘選 Tab 時使用的通用錯誤"
+	},
 	"error_removing_tab": {
 		"message": "移除 Tab 時發生錯誤。",
 		"description": "[錯誤] 移除 Tab 時使用的一般錯誤"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "移除未釘選 Tab 時發生錯誤。",
+		"description": "[錯誤] 移除未釘選 Tab 時使用的通用錯誤"
 	},
 	"error_removing_visible_tabs": {
 		"message": "移除所有可見Tab時發生錯誤。",
@@ -383,6 +491,14 @@
 		"message": "無法同步空的 Tab！",
 		"description": "[error] 嘗試同步空的 Tab"
 	},
+	"error_tab_click_count": {
+		"message": "點擊次數必須是非負數",
+		"description": "[錯誤] 使用者嘗試建立一個點擊次數錯誤的 Tab"
+	},
+	"error_tab_click_date": {
+		"message": "點擊日期必須是一個不會導致未來日期的數字",
+		"description": "[錯誤] 使用者嘗試建立一個點擊日期錯誤的 Tab"
+	},
 	"error_tab_constructor": {
 		"message": "請使用 Tab.create() 而不是 new Tab() 來使用 Tab 類別",
 		"description": "[錯誤] 告訴開發人員如何使用 Tab 類別"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "未找到 Tab。",
 		"description": "[error] Tab 未包含於陣列中"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab 尚未釘選！",
+		"description": "[錯誤] 使用者嘗試取消釘選一個未釘選的 Tab"
 	},
 	"error_tab_object_creation": {
 		"message": "呼叫對象時，請勿傳入其他任何內容。",
@@ -435,6 +555,10 @@
 		"message": "翻譯工具尚未初始化。",
 		"description": "[錯誤] TranslationService 尚未準備好"
 	},
+	"error_unknown_file_structure": {
+		"message": "我們無法辨識您想要匯入的文件\n如果問題持續存在，請透過在 GitHub 上提交 Issue 與我們分享",
+		"description": "[匯入] 無法辨識使用者的文件"
+	},
 	"error_unknown_message": {
 		"message": "收到未知訊息",
 		"description": "從偵聽器收到一個未知訊息"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "未知請求。",
 		"description": "[錯誤] 收到無法辨識的訊息後的一般錯誤"
+	},
+	"error_unpin_tab": {
+		"message": "取消釘選 Tab 時發生錯誤",
+		"description": "[錯誤]"
 	},
 	"error_useless_remove": {
 		"message": "無法移除：\n無法刪除尚未儲存的頁面",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "匯出",
 		"description": "[popup] 匯出按鈕"
+	},
+	"export_tabs": {
+		"message": "匯出 Tabs",
+		"description": "[modal] 匯出 Tabs 彈出式視窗的標題"
 	},
 	"export_title": {
 		"message": "匯出所有 Tab",
@@ -483,6 +615,14 @@
 		"message": "一般",
 		"description": "一般設定類別的標籤"
 	},
+	"generic_pin_tabs": {
+		"message": "通用型 $pinned Tab",
+		"description": "使用者收藏的非組織特定的 Tab"
+	},
+	"generic_tabs": {
+		"message": "通用型 Tab",
+		"description": "使用者收藏的非組織特定的 Tab"
+	},
 	"help": {
 		"message": "說明",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "新加入我的最愛的 Tab 會插入到設定列中 Tab 列表的前面，而不是追加到結尾。",
 		"description": "[$opt_add_tabs_front] 的 [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "啟用後，您一啟動 $salesforce_setup 就能看到您的 $tabs",
+		"description": "[設定說明] 用於啟用我們在 $salesforce_setup 打開時立即準備就緒的選項權限"
+	},
+	"help_allow_export": {
+		"message": "啟用後，您將能夠 $export 您的 $tabs 並將其保存在電腦上。",
+		"description": "[設定說明] 用於啟用我們將 Tab 下載到使用者機器上的選項權限"
+	},
 	"help_automatic_open_login": {
 		"message": "若您在 Salesforce 網域外點選擴充功能彈出式視窗，會自動將您帶往 Salesforce 登入頁面。",
 		"description": "[$opt_automatic_open_login] 的 [settings-help]"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "若您在 Salesforce 網域內點選擴充功能彈出式視窗，但不是在設定頁面，會自動將您帶往 Salesforce 設定頁面。",
 		"description": "[$opt_automatic_open_setup] 的 [settings-help]"
+	},
+	"help_drag_tabs": {
+		"message": "您可以使用點並拖動來重新排序您的 $tabs",
+		"description": "[manage-tabs] 說明如何拖動 Tab"
 	},
 	"help_keep_sort": {
 		"message": "啟用後，您的 Tab 會保持已排序的狀態—依標籤、URL 或 Org；取決於您的選擇。",
@@ -547,9 +699,33 @@
 		"message": "停用擴充功能檢查，該檢查可驗證 URL 片段是否與 Salesforce 記錄/物件 ID 的格式相符（用於自動將儲存的 Tab 設定為 Org Tab）。",
 		"description": "[settings-help] for $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "在這裡，您將找到一個子選單，用於對同一行中的 $tab 執行不同的操作。",
+		"description": "[manage-tabs] 說明右側箭頭包含的內容"
+	},
+	"help_tab_label": {
+		"message": "這是您用來記住此 $tab 將帶您去哪裡的常用名稱。",
+		"description": "[manage-tabs] 說明什麼是 Tab 標籤"
+	},
+	"help_tab_org": {
+		"message": "這是顯示此 $tab 的 Salesforce $org 名稱。如果留空，此 $tab 將在您訪問的每個 Salesforce $org 中顯示。",
+		"description": "[manage-tabs] 說明什麼是 Tab Org"
+	},
+	"help_tab_url": {
+		"message": "這是點擊此 $tab 時將被重新定向到的（縮短的）連結",
+		"description": "[manage-tabs] 說明什麼是 Tab URL"
+	},
 	"help_tip_click_link": {
 		"message": "點擊以重新導向到此設定的說明文件！",
 		"description": "[設定-幫助] 行動呼籲，讓使用者閱讀更多關於特定設定的資訊"
+	},
+	"hide_other_org_tabs": {
+		"message": "隱藏 $other_org_placeholder $tabs",
+		"description": "[manage-tabs] 隱藏其他 Org Tabs 的按鈕標籤"
+	},
+	"if_click_popup": {
+		"message": "如果您點擊擴充功能彈出視窗",
+		"description": "[placeholder] 由其他文字使用"
 	},
 	"import": {
 		"message": "Import",
@@ -567,6 +743,10 @@
 		"message": "Invalid file type.\nOnly JSON files are supported.",
 		"description": "[error] 用於匯入的檔案不是 JSON 格式"
 	},
+	"import_metadata": {
+		"message": "匯入 Tab 後設資料（「點擊次數」、「點擊日期」等）。",
+		"description": "[標籤] 在匯入過程中匯入檔案中找到的所有內容"
+	},
 	"import_successful": {
 		"message": "Successfully imported",
 		"description": "[import] 匯入已完成，之後會顯示匯入記錄的數量"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "從 JSON 檔案 $import_tabs",
 		"description": "[快顯視窗] 匯入按鈕上的標題"
+	},
+	"inactive": {
+		"message": "非作用中",
+		"description": "用於非作用中狀態的切換開關"
 	},
 	"insert_another": {
 		"message": "Insert another",
@@ -595,6 +779,10 @@
 		"message": "斜體",
 		"description": "斜體文字的字體樣式選項"
 	},
+	"label": {
+		"message": "標籤",
+		"description": "[key] Tab的名稱"
+	},
 	"lightning_navigation": {
 		"message": "Lightning 導航",
 		"description": "Salesforce 的自訂導航技術"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce 登入頁"
+	},
+	"manage_tabs": {
+		"message": "管理 $tabs",
+		"description": "[modal-title] 用於管理儲存的 $tabs 的互動視窗，具有可編輯欄位和拖動重排序功能"
+	},
+	"manage_tabs_explainer": {
+		"message": "直接從此互動視窗編輯 重新排序和管理您儲存的 $tabs 拖動行以重新排序 或使用下拉選單執行更多操作",
+		"description": "[modal-explainer] 解釋管理分頁互動視窗的功能"
+	},
+	"must_non_empty_str": {
+		"message": "必須是非空字串",
+		"description": "[placeholder] 由其他文字使用"
 	},
 	"mycustomorg": {
 		"message": "mycustomorg",
@@ -614,6 +814,10 @@
 	"no_match": {
 		"message": "Did not match any action",
 		"description": "[error] 當 Salesforce 中的 switch 無法匹配請求的動作時"
+	},
+	"no_tabs_to_export": {
+		"message": "沒有 Tabs 可以匯出",
+		"description": "[toast] 沒有 Tabs 可以匯出時發生的錯誤"
 	},
 	"nss_invalid_url": {
 		"message": "偵測到無效的 URL。",
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "將新 Tab 新增到前面。",
 		"description": "[settings] 讓使用者將所有新 Tab 新增到前面"
+	},
+	"opt_allow_domains": {
+		"message": "允許 $extension_label 在您訪問 Salesforce 頁面時存取它們。",
+		"description": "[設定] 當使用者訪問 $salesforce_setup 時執行擴充功能的選項權限"
+	},
+	"opt_allow_export": {
+		"message": "允許 $extension_label 在您請求時匯出您的 $tabs",
+		"description": "[設定] 選項權限，允許我們匯出使用者的 Tab"
 	},
 	"opt_automatic_open_login": {
 		"message": "當不在 Salesforce 頁面上時，按一下快顯視窗時自動開啟 $salesforce_login 頁面。",
@@ -723,9 +935,21 @@
 		"message": "或 $drop",
 		"description": "[匯入] 讓使用者使用滑鼠移動檔案並放開它們"
 	},
+	"org": {
+		"message": "Org (組織)",
+		"description": "[key] Tab的Salesforce $org"
+	},
 	"org_link": {
 		"message": "Org Link",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "組織型 $pinned Tab",
+		"description": "組織特定的 Tab"
+	},
+	"org_tabs": {
+		"message": "組織型 Tab",
+		"description": "組織特定的 Tab"
 	},
 	"other_org_info": {
 		"message": "Other Org info",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Overwrite saved Tabs.",
 		"description": "[label] 在匯入過程中刪除所有儲存的 Tab"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "頁面將在目前瀏覽器 Tab 中開啟",
+		"description": "[placeholder] 由其他文字使用"
+	},
+	"permission_request_failure": {
+		"message": "權限未被允許。",
+		"description": "[錯誤] 使用者要求我們向其請求權限，但隨後未接受"
+	},
+	"permission_request_success": {
+		"message": "權限已被允許！",
+		"description": "[成功] 使用者要求我們向其請求權限，且他們接受了"
+	},
+	"pinned": {
+		"message": "已釘選",
+		"description": "使用者的 Tab，始終位於列表的開頭"
 	},
 	"preserve_org_tabs": {
 		"message": "Preserve Tabs for other orgs.",
@@ -779,6 +1019,10 @@
 		"message": "= Required Information",
 		"description": "[modal] 告知使用者某些資訊為必填"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce 網域",
+		"description": "[placeholder] 由其他文字使用"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[notSalesforceSetup] Salesforce Lightning 平台"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce 登錄",
 		"description": "Salesforce 登錄頁面 (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce 頁面",
+		"description": "[placeholder] 在其他文字中使用"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce 設定",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "Save as Tab",
 		"description": "[alt] 當圖片無法顯示時的替代文字"
+	},
+	"select_all": {
+		"message": "全選",
+		"description": "[modal] 在匯出彈出式視窗中選取所有 Tabs 的按鈕"
+	},
+	"select_tabs": {
+		"message": "選擇您希望的 $tabs",
+		"description": "[import] 允許使用者在匯入前選擇要匯入的 $tabs"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] 允許使用者在匯出前選擇要匯出的 $tabs"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] 允許使用者在匯入前選擇要匯入的 $tabs"
 	},
 	"send_tip": {
 		"message": "發送小費 ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "組織樣式設計器",
 		"description": "設定組織特定 Tab 樣式的標籤"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "預覽通用型 Tab 釘選時外觀的標籤"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "配置通用型 Tab 釘選時樣式的標籤"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "預覽組織型 Tab 釘選時外觀的標籤"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "配置組織型 Tab 釘選時樣式的標籤"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "為作用中的通用型 Tab 設定背景顏色的標籤"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "為通用型 Tab 設定背景顏色的標籤"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "為作用中的通用型 Tab 設定邊框顏色的標籤"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "為通用型 Tab 設定邊框顏色的標籤"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "為作用中的通用型 Tab 設定文字顏色的標籤"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "為通用型 Tab 設定文字顏色的標籤"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "選擇作用中的通用型 Tab 裝飾樣式的提示"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "選擇通用型 Tab 裝飾樣式的提示"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "為作用中的通用型 Tab 設定懸停背景顏色的標籤"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "為通用型 Tab 設定懸停背景顏色的標籤"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "為作用中的通用型 Tab 設定陰影顏色的標籤"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "為通用型 Tab 設定陰影顏色的標籤"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "為作用中的通用型 Tab 設定頂部欄顏色的標籤"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "為作用中的組織型 Tab 設定背景顏色的標籤"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "為組織型 Tab 設定背景顏色的標籤"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "為作用中的組織型 Tab 設定邊框顏色的標籤"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "為組織型 Tab 設定邊框顏色的標籤"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "為作用中的組織型 Tab 設定文字顏色的標籤"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "為組織型 Tab 設定文字顏色的標籤"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "選擇作用中的組織型 Tab 裝飾樣式的提示"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "選擇組織型 Tab 裝飾樣式的提示"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "為作用中的組織型 Tab 設定懸停背景顏色的標籤"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "為組織型 Tab 設定懸停背景顏色的標籤"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "為作用中的組織型 Tab 設定陰影顏色的標籤"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "為組織型 Tab 設定陰影顏色的標籤"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "為作用中的組織型 Tab 設定頂部欄顏色的標籤"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "插入您目前開啟的一般 Tab 的背景顏色。",
@@ -947,13 +1331,57 @@
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] 用於修改 Salesforce 設定的頁面"
 	},
+	"show_all_tabs": {
+		"message": "顯示所有 $tabs",
+		"description": "[manage-tabs] 顯示所有 Tab 的按鈕標籤"
+	},
 	"skip": {
 		"message": "Skip",
 		"description": "[req_permission] 按鈕，用於不授予權限"
 	},
+	"style_generic_pinned": {
+		"message": "樣式設定已釘選的 $generic_tabs",
+		"description": "[選項] 樣式設定已釘選通用型 Tab 的切換標籤"
+	},
+	"style_org_pinned": {
+		"message": "樣式設定已釘選的 $org_tabs",
+		"description": "[選項] 樣式設定已釘選組織型 Tab 的切換標籤"
+	},
+	"style_settings_background_label": {
+		"message": "插入您的背景顏色",
+		"description": "設定背景顏色的標籤"
+	},
+	"style_settings_border_color_label": {
+		"message": "插入您的邊框顏色",
+		"description": "設定邊框顏色的標籤"
+	},
+	"style_settings_color_label": {
+		"message": "插入您的文字顏色",
+		"description": "設定文字顏色的標籤"
+	},
+	"style_settings_decoration_label": {
+		"message": "為您的 Tab 選擇一個或多個裝飾樣式",
+		"description": "選擇裝飾樣式的提示"
+	},
+	"style_settings_hover_background_label": {
+		"message": "插入您的懸停背景顏色",
+		"description": "設定懸停背景顏色的標籤"
+	},
+	"style_settings_shadow_label": {
+		"message": "插入您的陰影顏色",
+		"description": "設定陰影顏色的標籤"
+	},
+	"style_settings_top_active_label": {
+		"message": "插入您的作用中 Tab 頂部的欄顏色",
+		"description": "設定頂部欄作用中顏色的標籤"
+	},
 	"successfully_imported": {
 		"message": "Successfully imported",
 		"description": "[toast] 使用者已成功從外部檔案中新增 Tab"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "使用者喜愛的連結之一"
 	},
 	"tab_explain": {
 		"message": "Each item must have 'label' and 'url' as strings. Additionally, every item may have an 'org' as string.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "使用者的最愛連結"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs 已成功匯出",
+		"description": "[toast] Tabs 成功匯出時的成功訊息"
+	},
 	"tabs_saved": {
 		"message": "Tabs saved.",
 		"description": "[toast] Tab 成功儲存。"
@@ -1023,6 +1455,14 @@
 		"message": "波浪底線",
 		"description": "為 Tab 文字添加波浪下劃線的裝飾樣式選項"
 	},
+	"unsaved_changes_confirm": {
+		"message": "您有未儲存的變更。確定要在不儲存的情況下離開嗎？",
+		"description": "[manage-tabs] 使用者要求在未儲存的情況下前往某個 Tab"
+	},
+	"unselect_all": {
+		"message": "取消全選",
+		"description": "[modal] 在匯出彈出式視窗中取消選取所有 Tabs 的按鈕"
+	},
 	"update_available": {
 		"message": "有可用更新",
 		"description": "擴充功能有新的更新可用"
@@ -1031,9 +1471,21 @@
 		"message": "Upload",
 		"description": "[import] 讓使用者瀏覽其檔案並選擇正確檔案"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab的連結"
+	},
 	"users": {
 		"message": "Users",
 		"description": "與 ManageUsers/home 相關之頁面的名稱"
+	},
+	"warn_upgrade_backup": {
+		"message": "請匯出您的新 Tab，因為您使用的檔案將不再受未來版本支援。",
+		"description": "[警告] 使用者使用已棄用的 json 檔案配置匯入了他們的 Tab"
+	},
+	"when_click_popup_while": {
+		"message": "點擊彈出視窗時的頁面",
+		"description": "[placeholder] 由其他文字使用"
 	},
 	"where_to": {
 		"message": "Where to?",

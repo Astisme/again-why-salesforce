@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Sil",
+		"description": "[Tab-yönet] bir satırı sil"
+	},
+	"act_open": {
+		"message": "🪂 Aç",
+		"description": "[Tab-yönet] Seçili Tab aç"
+	},
+	"actions": {
+		"message": "Eylemler",
+		"description": "Tab eylemleri için açılır menü etiketi"
+	},
+	"active": {
+		"message": "Aktif",
+		"description": "Aktif durum için anahtarlarda kullanılır"
+	},
+	"active_generic_pin_tabs": {
+		"message": "aktif $generic_pin_tabs",
+		"description": "Kullanıcının şu anda aktif olan genel Pinli Tab-ları"
+	},
+	"active_generic_tabs": {
+		"message": "aktif $generic_tabs",
+		"description": "Kullanıcının şu anda aktif olan genel Tab-ları"
+	},
+	"active_org_pin_tabs": {
+		"message": "aktif $org_pin_tabs",
+		"description": "Kullanıcının şu anda aktif olan org Pinli Tab-ları"
+	},
+	"active_org_tabs": {
+		"message": "aktif $org_tabs",
+		"description": "Kullanıcının şu anda aktif olan org Tab-ları"
+	},
 	"allow": {
 		"message": "İzin Ver",
 		"description": "[izin_iste] izinlere izin verme düğmesi"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[içerik-menüsü]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] kaydedilmiş $tabs nesnelerini doğrudan Salesforce Kurulum sayfasında yönetmek için modalı açın"
+	},
 	"cxm_move": {
 		"message": "🧭 Tab Taşı",
 		"description": "[bağlam-menüsü]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[içerik-menüsü]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Sabitle",
+		"description": "[bağlam-menüsü] kullanıcının bu Tab-ı listesinin başında tutmasını sağlar"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(ları) Kaldır",
 		"description": "[bağlam-menüsü]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Diğer Tabs",
 		"description": "[bağlam-menüsü]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Sabitlenmişleri Kaldır",
+		"description": "[bağlam-menüsü] kullanıcının sabitlenmiş Tab-larını kaldırmasını sağlar"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Sağdaki Tabs",
 		"description": "[bağlam-menüsü]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Bu Tab",
 		"description": "[bağlam-menüsü]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Sabitlenmemişleri Kaldır",
+		"description": "[bağlam-menüsü] kullanıcının sabitlenmemiş Tab-larını kaldırmasını sağlar"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Varsayılan Tab'ları Sıfırla",
@@ -151,6 +199,14 @@
 		"message": "🎯 Tab-leri Sırala",
 		"description": "kullanıcıların Tab-lerini otomatik olarak sıralamalarını sağlayan bağlam menüsü (üst menü)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ Kullanıma Göre",
+		"description": "kullanıcıların Tab-larını kaç kez tıkladıklarına göre sıralamasını sağlayan bağlam menüsü"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ Zamana Göre",
+		"description": "kullanıcıların Tab-larını ne zaman tıklandıklarına göre sıralamasını sağlayan bağlam menüsü"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 Etikete göre",
 		"description": "kullanıcıların Tab-lerini etikete göre sıralamalarını sağlayan bağlam menüsü"
@@ -163,25 +219,33 @@
 		"message": "🤖 Url'ye göre",
 		"description": "kullanıcıların Tab-lerini url'ye göre sıralamalarını sağlayan bağlam menüsü"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Org Olmayan Tab-ları Gizle",
+		"description": "[bağlam-menüsü] genel Tab-ları geçici olarak gizle"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Org Tab-larını Gizle",
+		"description": "[bağlam-menüsü] Org Tab-larını geçici olarak gizle"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Sabitlemeyi Kaldır",
+		"description": "[bağlam-menüsü] kullanıcının bu Tab-ı sabitlenmiş listesinden kaldırmasını sağlar"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab Güncelle",
 		"description": "[bağlam-menüsü]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Kuruluşu Değiştir",
+		"message": "👜 Org'u Değiştir",
 		"description": "[bağlam-menüsü]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Diğer Güncellemeler",
 		"description": "[bağlam-menüsü]"
 	},
-	"delete": {
-		"message": "Sil",
-		"description": "[açılır-pencere] bir satırı sil"
-	},
 	"delete_all": {
-		"message": "Tüm Tabs $delete",
-		"description": "[popup] tüm Tabs boşaltmak için çöp kutusundaki başlık"
+		"message": "Tüm $tabs sil",
+		"description": "[açılır pencere] tüm $tabs boşaltmak için kutu üzerindeki başlık"
 	},
 	"descending": {
 		"message": "Azalan (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Tab eklenirken hata.",
 		"description": "[hata] Tab eklenirken kullanılan genel hata"
+	},
+	"error_already_pinned": {
+		"message": "Bu Tab zaten sabitlenmişti.",
+		"description": "[hata] kullanıcı zaten sabitlenmiş bir Tab-ı sabitlemeye çalıştı"
+	},
+	"error_already_unpinned": {
+		"message": "Bu Tab zaten sabitlenmemişti.",
+		"description": "[hata] kullanıcı zaten sabitlenmemiş bir Tab-ın sabitlemesini kaldırmaya çalıştı"
+	},
+	"error_cannot_move": {
+		"message": "Bu Tab taşınamaz!",
+		"description": "[hata] istenen Tab şu anda taşınamıyor."
+	},
+	"error_cannot_move_dir": {
+		"message": "Bu Tab bu yönde taşınamaz!",
+		"description": "[hata] istenen Tab şu anda taşınamıyor."
 	},
 	"error_check_update": {
 		"message": "Güncellemeler denetlenirken hata oluştu",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "İçe aktarma sırasında hata:\n",
 		"description": "[hata] içe aktarma işlemi sırasında bir hata oluştu"
+	},
+	"error_internal": {
+		"message": "Dahili Hata",
+		"description": "[hata] genel hata"
 	},
 	"error_invalid_key": {
 		"message": "Fonskiyon'a geçirilen anahtar parametresi geçerli değil",
@@ -323,9 +407,21 @@
 		"message": "Kontrol edilecek nesne yok!",
 		"description": "[hata] nesne iletilmedi"
 	},
+	"error_no_pinned": {
+		"message": "Henüz sabitlenmiş Tab-larınız yok!",
+		"description": "[hata] kullanıcı sabitlenmiş Tab-ları kaldırmaya çalıştı ancak sabitlenmiş Tab-ları yok"
+	},
 	"error_no_setup_tab": {
 		"message": "Kurulum sekmesi bulunamadı.",
 		"description": "[hata] Uzantı, favori Tabs'in nereye konulacağını bulamadı."
+	},
+	"error_no_tabs_selected": {
+		"message": "Dışa Aktarma İçin Hiçbir Tab Seçilmedi",
+		"description": "[toast] kullanıcı hiçbir Tab seçmeden dışa aktarmaya çalıştığında hata"
+	},
+	"error_no_unpinned": {
+		"message": "Sabitlenmemiş Tab-larınız yok!",
+		"description": "[hata] kullanıcı sabitlenmemiş Tab-ları kaldırmaya çalıştı ancak sabitlenmemiş Tab-ları yok"
 	},
 	"error_no_url": {
 		"message": "Kontrol edilecek URL yok!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "henüz başlatılmadı.",
 		"description": "[hata] Bir değişken hazır olmadığında genel hata"
+	},
+	"error_pin_tab": {
+		"message": "Tab sabitlenirken hata oluştu",
+		"description": "[hata]"
 	},
 	"error_processing_tabs": {
 		"message": "Tabs işlenirken hata.",
@@ -359,9 +459,17 @@
 		"message": "Diğer Tabs kaldırılırken hata.",
 		"description": "[hata] Diğer Tabs kaldırılırken kullanılan genel hata"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Sabitlenmiş Tab-lar kaldırılırken hata oluştu.",
+		"description": "[hata] Sabitlenmemiş Tab-lar kaldırılırken kullanılan genel hata"
+	},
 	"error_removing_tab": {
 		"message": "Tab kaldırılırken hata.",
 		"description": "[hata] Tab kaldırılırken kullanılan genel hata"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Sabitlenmemiş Tab-lar kaldırılırken hata oluştu.",
+		"description": "[hata] Sabitlenmemiş Tab-lar kaldırılırken kullanılan genel hata"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Tüm görünür Tab'lar kaldırılırken hata oluştu.",
@@ -383,6 +491,14 @@
 		"message": "Boş Tabs senkronize edilemez!",
 		"description": "[hata] hiçbir şeyi senkronize etmeye çalışıldı"
 	},
+	"error_tab_click_count": {
+		"message": "Tıklama Sayısı negatif olmayan bir sayı olmalıdır",
+		"description": "[hata] kullanıcı yanlış tıklama sayısıyla bir Tab oluşturmaya çalıştı"
+	},
+	"error_tab_click_date": {
+		"message": "Tıklama Tarihi gelecekteki bir tarihe neden olmayan bir sayı olmalıdır",
+		"description": "[hata] kullanıcı yanlış tıklama tarihiyle bir Tab oluşturmaya çalıştı"
+	},
 	"error_tab_constructor": {
 		"message": "Tab sınıfını kullanmak için new Tab() yerine Tab.create() kullanın",
 		"description": "[hata] geliştiriciye Tab sınıfını nasıl kullanacağını söyleyin"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab bulunamadı.",
 		"description": "[hata] Tab dizide bulunamadı"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tab henüz sabitlenmedi!",
+		"description": "[hata] kullanıcı sabitlenmemiş bir Tab-ın sabitlemesini kaldırmaya çalıştı"
 	},
 	"error_tab_object_creation": {
 		"message": "Bir nesne ile çağırırken başka bir şey iletmeyin.",
@@ -435,6 +555,10 @@
 		"message": "çevirmen henüz başlatılmadı.",
 		"description": "[hata] TranslationService hazır değildi"
 	},
+	"error_unknown_file_structure": {
+		"message": "İçe aktarmak istediğiniz bir dosyayı anlayamadık\nSorun devam ederse, lütfen bir GitHub sorunu açarak bunu bizimle paylaşın",
+		"description": "[içe aktar] kullanıcının dosyası tanınmadı"
+	},
 	"error_unknown_message": {
 		"message": "Bilinmeyen mesaj alındı",
 		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Bilinmeyen istek.",
 		"description": "[hata] Tanınmayan bir mesaj alındıktan sonra genel hata"
+	},
+	"error_unpin_tab": {
+		"message": "Tab sabitlemesi kaldırılırken hata oluştu",
+		"description": "[hata]"
 	},
 	"error_useless_remove": {
 		"message": "Kaldırılamıyor:\nDaha önce kaydedilmemiş bir sayfa kaldırılamaz",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "Dışa Aktar",
 		"description": "[açılır-pencere] dışa aktarma düğmesi"
+	},
+	"export_tabs": {
+		"message": "Tabs Dışa Aktar",
+		"description": "[modal] Tabs dışa aktarma modu başlığı"
 	},
 	"export_title": {
 		"message": "Tüm Tabs Dışa Aktar",
@@ -483,6 +615,14 @@
 		"message": "Genel",
 		"description": "Genel ayarlar kategorisi için etiket"
 	},
+	"generic_pin_tabs": {
+		"message": "genel $pinned Tab-lar",
+		"description": "Kullanıcının org'a özel olmayan favori Tab-ları"
+	},
+	"generic_tabs": {
+		"message": "genel Tab-lar",
+		"description": "Kullanıcının org'a özel olmayan favori Tab-ları"
+	},
 	"help": {
 		"message": "Yardım",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Yeni favorilere eklenen Tab-ler, Tab listenizin sonuna eklenmek yerine Kurulum çubuğundaki Tab listenizin önüne eklenir.",
 		"description": "[$opt_add_tabs_front] için [settings-help]"
 	},
+	"help_allow_domains": {
+		"message": "Etkinleştirildiğinde, $salesforce_setup uygulamasını başlattığınız anda $tabs verilerinizi görebileceksiniz",
+		"description": "[ayarlar-yardım] $salesforce_setup açılır açılmaz hazır olmamıza olanak tanıyan isteğe bağlı izin için"
+	},
+	"help_allow_export": {
+		"message": "Etkinleştirildiğinde, $tabs verilerinizi $export yapabilecek ve bunları bilgisayarınızda saklayabileceksiniz.",
+		"description": "[ayarlar-yardım] kullanıcının makinesine Tab verilerini indirmemize olanak tanıyan isteğe bağlı izin için"
+	},
 	"help_automatic_open_login": {
 		"message": "Bir Salesforce etki alanının dışında uzantı açılır penceresini tıklarsanız, otomatik olarak Salesforce oturum açma sayfasına yönlendirilirsiniz.",
 		"description": "[$opt_automatic_open_login] için [settings-help]"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "Bir Salesforce etki alanının içinde uzantı açılır penceresini tıklarsanız, ancak bir Kurulum sayfasında değilseniz, otomatik olarak Salesforce Kurulum sayfasına yönlendirilirsiniz.",
 		"description": "[settings-help] for $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "Noktaları kullanarak ve sürükleyerek $tabs nesnelerinizi yeniden sıralayabilirsiniz.",
+		"description": "[manage-tabs] Tab nesnesinin nasıl sürükleneceğini açıklar"
 	},
 	"help_keep_sort": {
 		"message": "Etkinleştirildiğinde, Tab-leriniz seçiminize bağlı olarak etiket, URL veya Org'a göre sıralanmış olarak tutulur.",
@@ -547,9 +699,33 @@
 		"message": "URL parçasının Salesforce kayıt/nesne kimlikleri biçimiyle eşleştiğini doğrulayan uzantı kontrolünü devre dışı bırakır (kaydedilen Tab'i otomatik olarak bir Org Tab'i olarak ayarlamak için kullanılır).",
 		"description": "[$opt_skip_link_detection] için [settings-help]"
 	},
+	"help_tab_actions": {
+		"message": "Burada aynı satırdaki $tab üzerinde farklı eylemler gerçekleştirmek için bir alt menü bulacaksınız.",
+		"description": "[manage-tabs] sağdaki okun ne içerdiğini açıklar"
+	},
+	"help_tab_label": {
+		"message": "Bu, bu $tab nesnesinin sizi nereye götüreceğini hatırlamak için kullanacağınız ortak addır.",
+		"description": "[manage-tabs] Tab etiketinin ne olduğunu açıklar"
+	},
+	"help_tab_org": {
+		"message": "Bu, bu $tab nesnesinin gösterileceği Salesforce $org adıdır. Boş bırakılırsa, bu $tab ziyaret ettiğiniz her Salesforce $org içerisinde gösterilecektir.",
+		"description": "[manage-tabs] Tab Org nesnesinin ne olduğunu açıklar"
+	},
+	"help_tab_url": {
+		"message": "Bu, bu $tab nesnesine tıkladığınızda yönlendirileceğiniz (kısaltılmış) bağlantıdır",
+		"description": "[manage-tabs] Tab URL nesnesinin ne olduğunu açıklar"
+	},
 	"help_tip_click_link": {
 		"message": "Bu ayarın belgelerine yönlendirilmek için tıklayın!",
 		"description": "[ayarlar-yardım] kullanıcının belirli bir ayar hakkında daha fazla bilgi okumasını sağlamak için eylem çağrısı"
+	},
+	"hide_other_org_tabs": {
+		"message": "$other_org_placeholder $tabs nesnelerini gizle",
+		"description": "[manage-tabs] diğer Org Tabs nesnelerini gizlemek için düğme etiketi"
+	},
+	"if_click_popup": {
+		"message": "uzantı açılır penceresine tıklarsanız",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"import": {
 		"message": "İçe Aktar",
@@ -567,6 +743,10 @@
 		"message": "Geçersiz dosya türü.\nYalnızca JSON dosyaları desteklenir.",
 		"description": "[hata] içe aktarma için kullanılan dosya bir JSON değil"
 	},
+	"import_metadata": {
+		"message": "Tab meta verilerini (\"Tıklama Sayısı\", \"Tıklama Tarihi\" vb.) İçe Aktar.",
+		"description": "[etiket] içe aktarma işlemi sırasında dosyada bulunan her şeyi içe aktar"
+	},
 	"import_successful": {
 		"message": "Başarıyla içe aktarıldı",
 		"description": "[içe-aktar] içe aktarma tamamlandı. Bundan sonra, kaç kaydın içe aktarıldığı gösterilecektir"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "JSON dosyasından $import_tabs",
 		"description": "[popup] içe aktarma düğmesindeki başlık"
+	},
+	"inactive": {
+		"message": "Pasif",
+		"description": "Pasif durum için anahtarlarda kullanılır"
 	},
 	"insert_another": {
 		"message": "Başka bir tane ekle",
@@ -595,6 +779,10 @@
 		"message": "İtalik",
 		"description": "İtalik metin için yazı tipi stili seçeneği"
 	},
+	"label": {
+		"message": "Etiket",
+		"description": "[key] Tab'ın adı"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce'un özel gezinme teknolojisi"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Salesforce'a Giriş Yap",
 		"description": "[SalesforceKurulumuDeğil] kullanıcıyı bir Salesforce giriş sayfasına yönlendirmek için bir düğme üzerindeki eylem çağrısı"
+	},
+	"manage_tabs": {
+		"message": "$tabs Yönet",
+		"description": "[modal-title] düzenlenebilir alanlar ve sürükle-yeniden sırala özelliği ile kaydedilmiş $tabs nesnelerini yönetmek için modal"
+	},
+	"manage_tabs_explainer": {
+		"message": "Kaydedilmiş $tabs nesnelerinizi doğrudan bu modaldan düzenleyin, yeniden sıralayın ve yönetin. Yeniden sıralamak için satırları sürükleyin veya daha fazla eylem için açılır menüyü kullanın.",
+		"description": "[modal-explainer] sekmeleri yönet modal işlevselliğini açıklar"
+	},
+	"must_non_empty_str": {
+		"message": "boş olmayan bir dize olmalıdır",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"mycustomorg": {
 		"message": "benimözelkuruluşum",
@@ -614,6 +814,10 @@
 	"no_match": {
 		"message": "Herhangi bir eylemle eşleşmedi",
 		"description": "[hata] Salesforce'ta anahtar istenen eylemle eşleşemediğinde"
+	},
+	"no_tabs_to_export": {
+		"message": "Dışa Aktarılacak Tabs Yok",
+		"description": "[toast] dışa aktarılacak Tabs olmadığında hata"
 	},
 	"nss_invalid_url": {
 		"message": "Geçersiz URL tespit edildi.",
@@ -646,6 +850,14 @@
 	"opt_add_tabs_front": {
 		"message": "Yeni Tab-leri öne ekle.",
 		"description": "[settings] kullanıcının tüm yeni Tab-leri öne eklemesine izin ver"
+	},
+	"opt_allow_domains": {
+		"message": "Ziyaret ettiğinizde $extension_label uygulamasının Salesforce sayfalarına erişmesine izin verin.",
+		"description": "[ayar] kullanıcı $salesforce_setup sayfasını ziyaret ettiğinde uzantıları çalıştırmak için isteğe bağlı izin"
+	},
+	"opt_allow_export": {
+		"message": "Talep ettiğinizde $extension_label uygulamasının $tabs verilerinizi dışa aktarmasına izin verin.",
+		"description": "[ayar] kullanıcının Tab verilerini dışa aktarmamıza olanak tanıyan isteğe bağlı izin"
 	},
 	"opt_automatic_open_login": {
 		"message": "Bir Salesforce sayfasında değilken açılır pencereye tıklandığında $salesforce_login sayfasını otomatik olarak aç.",
@@ -723,9 +935,21 @@
 		"message": "Veya $drop",
 		"description": "[içe aktarma] kullanıcının dosyaları faresiyle taşımasına ve bırakmasına izin verin"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] Tab'ın Salesforce $org'u"
+	},
 	"org_link": {
 		"message": "Kuruluş Bağlantısı",
 		"description": "[giriş-etiketi]"
+	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tab-lar",
+		"description": "Org'a özel olan Tab-lar"
+	},
+	"org_tabs": {
+		"message": "org Tab-lar",
+		"description": "Org'a özel olan Tab-lar"
 	},
 	"other_org_info": {
 		"message": "Diğer Kuruluş bilgisi",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Kaydedilmiş Tabs üzerine yaz.",
 		"description": "[etiket] içe aktarma işlemi sırasında tüm kaydedilmiş Tabs sil"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "sayfa, mevcut tarayıcı Tab'ında açılacaktır",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
+	},
+	"permission_request_failure": {
+		"message": "İzne izin verilmedi.",
+		"description": "[hata] kullanıcı bizden bir izin istememizi talep etti ancak daha sonra bunu kabul etmedi"
+	},
+	"permission_request_success": {
+		"message": "İzin verildi!",
+		"description": "[başarı] kullanıcı bizden bir izin istememizi talep etti ve kabul etti"
+	},
+	"pinned": {
+		"message": "Sabitlenmiş",
+		"description": "Kullanıcının her zaman listenin başında bulunan Tab-ları"
 	},
 	"preserve_org_tabs": {
 		"message": "Diğer kuruluşlar için Tabs koru.",
@@ -779,6 +1019,10 @@
 		"message": "= Gerekli Bilgi",
 		"description": "[modal] kullanıcıya bazı bilgilerin zorunlu olduğunu söyler"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce alanı",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[SalesforceKurulumuDeğil] Salesforce Lightning platformu"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce Login",
 		"description": "Salesforce oturum açma sayfası (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce sayfası",
+		"description": "[placeholder] diğer metinlerde kullanılır"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce Setup",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "Tab Olarak Kaydet",
 		"description": "[alt] resimler çalışmadığında alternatif metin"
+	},
+	"select_all": {
+		"message": "Tümünü Seç",
+		"description": "[modal] dışa aktarma modunda tüm Tabs'leri seçme düğmesi"
+	},
+	"select_tabs": {
+		"message": "Hangi $tabs ı istediğinizi seçin",
+		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] kullanıcının dışa aktarmadan önce hangi $tabs'ı dışa aktaracağını seçmesine izin verin"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] kullanıcının içe aktarmadan önce hangi $tabs'ı içe aktaracağını seçmesine izin verin"
 	},
 	"send_tip": {
 		"message": "Bize bir bahşiş gönderin ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "Organizasyon Stilcisi",
 		"description": "Organizasyona özel Sekmelerin stilini yapılandırmak için etiket"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Sabitlendiğinde genel Tab görünümünü önizlemek için etiket"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Genel Tab-lar sabitlendiğinde stilini yapılandırmak için etiket"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Sabitlendiğinde org'a özel Tab görünümünü önizlemek için etiket"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Org'a özel Tab-lar sabitlendiğinde stilini yapılandırmak için etiket"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Genel Tab-lar için arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için kenarlık rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Genel Tab-lar için kenarlık rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için metin rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Genel Tab-lar için metin rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için dekorasyon stillerini seçmek için istem"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Genel Tab-lar için dekorasyon stillerini seçmek için istem"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için üzerine gelme (hover) arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Genel Tab-lar için üzerine gelme (hover) arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için gölge rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Genel Tab-lar için gölge rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Aktif genel Tab-lar için üst çubuk rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Aktif org Tab-lar için arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Org'a özel Tab-lar için arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Aktif org'a özel Tab-lar için kenarlık rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Org Tab-lar için kenarlık rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Aktif org Tab-lar için metin rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Org'a özel Tab-lar için metin rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Aktif org'a özel Tab-lar için dekorasyon stillerini seçmek için istem"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Org Tab-lar için dekorasyon stillerini seçmek için istem"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Aktif org Tab-lar için üzerine gelme (hover) arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Org'a özel Tab-lar için üzerine gelme (hover) arka plan rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Aktif org'a özel Tab-lar için gölge rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Org Tab-lar için gölge rengini ayarlamak için etiket"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Aktif org Tab-lar için üst çubuk rengini ayarlamak için etiket"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Aktif genel Tab'larınız için arka plan rengini girin.",
@@ -947,13 +1331,57 @@
 		"message": "Kurulum Sayfası",
 		"description": "[SalesforceKurulumuDeğil] Salesforce ayarlarını değiştirmek için kullanılan sayfa"
 	},
+	"show_all_tabs": {
+		"message": "Tüm $tabs nesnelerini göster",
+		"description": "[manage-tabs] tüm Tab nesnelerini göstermek için düğme etiketi"
+	},
 	"skip": {
 		"message": "Atla",
 		"description": "[izin_iste] izinlere izin VERMEME düğmesi"
 	},
+	"style_generic_pinned": {
+		"message": "Sabitlenmiş $generic_tabs ın Stili",
+		"description": "[seçenekler] Sabitlenmiş genel Tab-ları stilize etmek için anahtar etiketi"
+	},
+	"style_org_pinned": {
+		"message": "Sabitlenmiş $org_tabs ın Stili",
+		"description": "[seçenekler] Sabitlenmiş org Tab-ları stilize etmek için anahtar etiketi"
+	},
+	"style_settings_background_label": {
+		"message": "Arka plan renginizi girin",
+		"description": "Arka plan rengini ayarlamak için etiket"
+	},
+	"style_settings_border_color_label": {
+		"message": "Kenarlık renginizi girin",
+		"description": "Kenarlık rengini ayarlamak için etiket"
+	},
+	"style_settings_color_label": {
+		"message": "Metninizin rengini girin",
+		"description": "Metin rengini ayarlamak için etiket"
+	},
+	"style_settings_decoration_label": {
+		"message": "Dekorasyon stillerinden birini veya daha fazlasını seçin",
+		"description": "Dekorasyon stillerini seçmek için istem"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Üzerine gelme (hover) arka plan renginizi girin",
+		"description": "Üzerine gelme (hover) arka plan rengini ayarlamak için etiket"
+	},
+	"style_settings_shadow_label": {
+		"message": "Gölge renginizi girin",
+		"description": "Gölge rengini ayarlamak için etiket"
+	},
+	"style_settings_top_active_label": {
+		"message": "Aktif Tab-ınızın üstündeki çubuk için rengi girin",
+		"description": "Üst çubuk aktif rengini ayarlamak için etiket"
+	},
 	"successfully_imported": {
 		"message": "Başarıyla içe aktarıldı",
 		"description": "[bildirim] kullanıcı harici bir dosyadan Tabs ekledi"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "kullanıcının favori bağlantılarından biri"
 	},
 	"tab_explain": {
 		"message": "Her öğenin 'label' ve 'url' dize olarak olmalıdır. Ek olarak, her öğenin 'org' dize olarak olabilir.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "kullanıcının favori bağlantıları"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Başarıyla Dışa Aktarıldı",
+		"description": "[toast] Tabs dışa aktarıldığında başarı mesajı"
+	},
 	"tabs_saved": {
 		"message": "Tabs kaydedildi.",
 		"description": "[bildirim] Tabs başarıyla saklandı."
@@ -1023,6 +1455,14 @@
 		"message": "Dalgalı Altı Çizili",
 		"description": "Sekme metnine dalgalı altı çizili uygulamak için dekorasyon stili seçeneği"
 	},
+	"unsaved_changes_confirm": {
+		"message": "Kaydedilmemiş değişiklikleriniz var. Kaydetmeden ayrılmak istiyor musunuz?",
+		"description": "[manage-tabs] kullanıcı önce kaydetmeden bir Tab öğesine gitmek istedi"
+	},
+	"unselect_all": {
+		"message": "Tüm Seçimi Kaldır",
+		"description": "[modal] dışa aktarma modunda tüm Tabs'lerin seçimini kaldırma düğmesi"
+	},
 	"update_available": {
 		"message": "Güncelleme mevcut",
 		"description": "uzantı için yeni bir güncelleme mevcut"
@@ -1031,9 +1471,21 @@
 		"message": "Yükle",
 		"description": "[içe-aktar] kullanıcının dosyalarına göz atmasına ve doğru olanı seçmesine izin verin"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] Tab'ın bağlantısı"
+	},
 	"users": {
 		"message": "Kullanıcılar",
 		"description": "ManageUsers/home ile ilgili sayfanın adı"
+	},
+	"warn_upgrade_backup": {
+		"message": "Lütfen yeni Tab-larınızı dışa aktarın, çünkü kullandığınız dosya gelecekteki sürümlerde desteklenmeyecektir.",
+		"description": "[uyarı] kullanıcı, json dosyasının eski bir yapılandırmasını kullanarak Tab-larını içe aktardı"
+	},
+	"when_click_popup_while": {
+		"message": "açılır pencereye tıklanırken sayfa",
+		"description": "[placeholder] diğer metinler tarafından kullanılır"
 	},
 	"where_to": {
 		"message": "Nereye?",

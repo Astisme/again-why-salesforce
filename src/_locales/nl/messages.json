@@ -1,4 +1,36 @@
 {
+	"act_delete": {
+		"message": "🗑️ Verwijderen",
+		"description": "[Tab-beheren] een rij verwijderen"
+	},
+	"act_open": {
+		"message": "🪂 Openen",
+		"description": "[Tab-beheren] De geselecteerde Tab openen"
+	},
+	"actions": {
+		"message": "Acties",
+		"description": "Label van het vervolgkeuzemenu voor Tab-acties"
+	},
+	"active": {
+		"message": "Actief",
+		"description": "Gebruikt in schakelaars voor actieve status"
+	},
+	"active_generic_pin_tabs": {
+		"message": "actieve $generic_pin_tabs",
+		"description": "De generieke Vastgezette Tabbladen van de gebruiker die momenteel actief zijn"
+	},
+	"active_generic_tabs": {
+		"message": "actieve $generic_tabs",
+		"description": "De generieke Tabbladen van de gebruiker die momenteel actief zijn"
+	},
+	"active_org_pin_tabs": {
+		"message": "actieve $org_pin_tabs",
+		"description": "De org Vastgezette Tabbladen van de gebruiker die momenteel actief zijn"
+	},
+	"active_org_tabs": {
+		"message": "actieve $org_tabs",
+		"description": "De org Tabbladen van de gebruiker die momenteel actief zijn"
+	},
 	"allow": {
 		"message": "Toestaan",
 		"description": "[req_toestemming] knop om toestemmingen toe te staan"
@@ -87,6 +119,10 @@
 		"message": "🆙 $import_tabs",
 		"description": "[contextmenu]"
 	},
+	"cxm_manage_tabs": {
+		"message": "📋 $manage_tabs",
+		"description": "[context-menu] open de modal om opgeslagen $tabs rechtstreeks op de Salesforce Setup-pagina te beheren"
+	},
 	"cxm_move": {
 		"message": "🧭 Tab verplaatsen",
 		"description": "[context-menu]"
@@ -119,6 +155,10 @@
 		"message": "💾 $save_tab",
 		"description": "[contextmenu]"
 	},
+	"cxm_pin_tab": {
+		"message": "🔒 Vastzetten",
+		"description": "[context-menu] laat de gebruiker dit Tabblad aan het begin van hun lijst houden"
+	},
 	"cxm_remove": {
 		"message": "💥 Tab(s) verwijderen",
 		"description": "[context-menu]"
@@ -131,6 +171,10 @@
 		"message": "↔️ Andere Tabs",
 		"description": "[context-menu]"
 	},
+	"cxm_remove_pin_tabs": {
+		"message": "📌 Vastgezette Verwijderen",
+		"description": "[context-menu] laat de gebruiker hun vastgezette Tabbladen verwijderen"
+	},
 	"cxm_remove_right_tabs": {
 		"message": "🌊 Tabs aan de rechterkant",
 		"description": "[context-menu]"
@@ -138,6 +182,10 @@
 	"cxm_remove_tab": {
 		"message": "1️⃣ Deze Tab",
 		"description": "[context-menu]"
+	},
+	"cxm_remove_unpin_tabs": {
+		"message": "⛓️‍💥 Niet-vastgezette Verwijderen",
+		"description": "[context-menu] laat de gebruiker hun niet-vastgezette Tabbladen verwijderen"
 	},
 	"cxm_reset_default": {
 		"message": "🧐 Standaard Tabs resetten",
@@ -151,6 +199,14 @@
 		"message": "🎯 Tabbladen sorteren",
 		"description": "contextmenu om gebruikers hun Tabbladen automatisch te laten sorteren (hoofdmenu)"
 	},
+	"cxm_sort_click_count": {
+		"message": "🖱️ op Gebruik",
+		"description": "contextmenu om gebruikers hun Tabbladen te laten sorteren op hoe vaak ze op hun Tabbladen klikken"
+	},
+	"cxm_sort_click_date": {
+		"message": "⌛ op Tijd",
+		"description": "contextmenu om gebruikers hun Tabbladen te laten sorteren op wanneer de Tabbladen zijn aangeklikt"
+	},
 	"cxm_sort_label": {
 		"message": "🥱 op label",
 		"description": "contextmenu om gebruikers hun Tabbladen op label te laten sorteren"
@@ -163,25 +219,33 @@
 		"message": "🤖 op URL",
 		"description": "contextmenu om gebruikers hun Tabbladen op URL te laten sorteren"
 	},
+	"cxm_tmp_hide_non_org": {
+		"message": "🫣 Niet-Org Tabbladen Verbergen",
+		"description": "[context-menu] tijdelijk generieke Tabbladen verbergen"
+	},
+	"cxm_tmp_hide_org": {
+		"message": "🙈 Org Tabbladen Verbergen",
+		"description": "[context-menu] tijdelijk Org Tabbladen verbergen"
+	},
+	"cxm_unpin_tab": {
+		"message": "🔓 Losmaken",
+		"description": "[context-menu] laat de gebruiker dit Tabblad van hun vastgezette lijst verwijderen"
+	},
 	"cxm_update": {
 		"message": "✏️ Tab bijwerken",
 		"description": "[context-menu]"
 	},
 	"cxm_update_org": {
-		"message": "📌 Org wisselen",
+		"message": "👜 Org Schakelen",
 		"description": "[context-menu]"
 	},
 	"cxm_update_tab": {
 		"message": "🧹 Andere updates",
 		"description": "[context-menu]"
 	},
-	"delete": {
-		"message": "Verwijderen",
-		"description": "[popup] een rij verwijderen"
-	},
 	"delete_all": {
-		"message": "$delete alle Tabs",
-		"description": "[popup] titel op de prullenbak om alle Tabs te legen"
+		"message": "Alle $tabs verwijderen",
+		"description": "[popup] titel op de prullenbak om alle $tabs te legen"
 	},
 	"descending": {
 		"message": "Aflopend (Z-A)",
@@ -198,6 +262,22 @@
 	"error_adding_tab": {
 		"message": "Fout bij het toevoegen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het toevoegen van een Tab"
+	},
+	"error_already_pinned": {
+		"message": "Dit Tabblad was al vastgezet.",
+		"description": "[fout] de gebruiker probeerde een vastgezet Tabblad vast te zetten"
+	},
+	"error_already_unpinned": {
+		"message": "Dit Tabblad was al losgemaakt.",
+		"description": "[fout] de gebruiker probeerde een losgemaakt Tabblad los te maken"
+	},
+	"error_cannot_move": {
+		"message": "Dit Tabblad kan niet worden verplaatst!",
+		"description": "[fout] het gevraagde Tabblad kan momenteel niet worden verplaatst."
+	},
+	"error_cannot_move_dir": {
+		"message": "Dit Tabblad kan niet in deze richting worden verplaatst!",
+		"description": "[fout] het gevraagde Tabblad kan momenteel niet worden verplaatst."
 	},
 	"error_check_update": {
 		"message": "Fout bij het controleren op updates",
@@ -250,6 +330,10 @@
 	"error_import": {
 		"message": "Fout tijdens importeren:\n",
 		"description": "[fout] er is een fout opgetreden tijdens het importproces"
+	},
+	"error_internal": {
+		"message": "Interne Fout",
+		"description": "[fout] algemene fout"
 	},
 	"error_invalid_key": {
 		"message": "De key-parameter die aan de functie is doorgegeven, is niet geldig",
@@ -323,9 +407,21 @@
 		"message": "Geen object om te controleren!",
 		"description": "[fout] het object is niet doorgegeven"
 	},
+	"error_no_pinned": {
+		"message": "U hebt nog geen vastgezette Tabbladen!",
+		"description": "[fout] de gebruiker probeerde de vastgezette Tabbladen te verwijderen maar ze hebben geen vastgezette Tabbladen"
+	},
 	"error_no_setup_tab": {
 		"message": "Kon Setup-tabblad niet vinden.",
 		"description": "[fout] De extensie kon niet vinden waar de favoriete Tabs moesten worden geplaatst."
+	},
+	"error_no_tabs_selected": {
+		"message": "Geen Tabs Geselecteerd voor export",
+		"description": "[toast] fout wanneer de gebruiker probeert te exporteren zonder geselecteerde Tabs"
+	},
+	"error_no_unpinned": {
+		"message": "U hebt geen niet-vastgezette Tabbladen!",
+		"description": "[fout] de gebruiker probeerde de niet-vastgezette Tabbladen te verwijderen maar ze hebben geen niet-vastgezette Tabbladen"
 	},
 	"error_no_url": {
 		"message": "Geen URL om te controleren!",
@@ -334,6 +430,10 @@
 	"error_not_initialized": {
 		"message": "was nog niet geïnitialiseerd.",
 		"description": "[fout] Algemene fout voor wanneer een variabele niet klaar is"
+	},
+	"error_pin_tab": {
+		"message": "Fout bij het vastzetten van Tabblad",
+		"description": "[fout]"
 	},
 	"error_processing_tabs": {
 		"message": "Fout bij het verwerken van Tabs.",
@@ -359,9 +459,17 @@
 		"message": "Fout bij het verwijderen van andere Tabs.",
 		"description": "[fout] Algemene fout gebruikt bij het verwijderen van andere Tabs"
 	},
+	"error_removing_pin_tabs": {
+		"message": "Fout bij het verwijderen van vastgezette Tabbladen.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van niet-vastgezette Tabbladen"
+	},
 	"error_removing_tab": {
 		"message": "Fout bij het verwijderen van Tab.",
 		"description": "[fout] Algemene fout gebruikt bij het verwijderen van een Tab"
+	},
+	"error_removing_unpin_tabs": {
+		"message": "Fout bij het verwijderen van niet-vastgezette Tabbladen.",
+		"description": "[fout] Algemene fout gebruikt bij het verwijderen van niet-vastgezette Tabbladen"
 	},
 	"error_removing_visible_tabs": {
 		"message": "Fout bij het verwijderen van alle zichtbare Tab.",
@@ -383,6 +491,14 @@
 		"message": "Kan null Tabs niet synchroniseren!",
 		"description": "[fout] geprobeerd niets te synchroniseren"
 	},
+	"error_tab_click_count": {
+		"message": "Kliktelling moet een niet-negatief getal zijn",
+		"description": "[fout] gebruiker probeerde een Tabblad te maken met een verkeerde kliktelling"
+	},
+	"error_tab_click_date": {
+		"message": "Klikdatum moet een getal zijn dat niet resulteert in een datum in de toekomst",
+		"description": "[fout] gebruiker probeerde een Tabblad te maken met een verkeerde klikdatum"
+	},
 	"error_tab_constructor": {
 		"message": "Gebruik Tab.create() in plaats van new Tab() om de Tab klasse te gebruiken",
 		"description": "[fout] vertel de ontwikkelaar hoe de Tab klasse te gebruiken"
@@ -394,6 +510,10 @@
 	"error_tab_not_found": {
 		"message": "Tab is niet gevonden.",
 		"description": "[fout] de Tab was niet opgenomen in de array"
+	},
+	"error_tab_not_pinned": {
+		"message": "Tabblad is nog niet vastgezet!",
+		"description": "[fout] gebruiker probeerde een niet-vastgezet Tabblad los te maken"
 	},
 	"error_tab_object_creation": {
 		"message": "Geef bij het aanroepen met een object niets anders door.",
@@ -435,6 +555,10 @@
 		"message": "vertaler was nog niet geïnitialiseerd.",
 		"description": "[fout] de TranslationService was niet klaar"
 	},
+	"error_unknown_file_structure": {
+		"message": "We konden een bestand dat u wilde importeren niet begrijpen\nAls het probleem aanhoudt, deel het dan met ons door een GitHub-issue te openen",
+		"description": "[importeren] het bestand van de gebruiker werd niet herkend"
+	},
 	"error_unknown_message": {
 		"message": "Onbekend bericht ontvangen",
 		"description": "een onbekend bericht is ontvangen van een luisteraar"
@@ -442,6 +566,10 @@
 	"error_unknown_request": {
 		"message": "Onbekend verzoek.",
 		"description": "[fout] Algemene fout na ontvangst van een niet-herkend bericht"
+	},
+	"error_unpin_tab": {
+		"message": "Fout bij het losmaken van Tabblad",
+		"description": "[fout]"
 	},
 	"error_useless_remove": {
 		"message": "Kan niet verwijderen:\nKan een pagina die nog niet eerder is opgeslagen niet verwijderen",
@@ -454,6 +582,10 @@
 	"export": {
 		"message": "Exporteren",
 		"description": "[popup] exportknop"
+	},
+	"export_tabs": {
+		"message": "Tabs Exporteren",
+		"description": "[modal] titel voor de Tabs export modal"
 	},
 	"export_title": {
 		"message": "Alle Tabs exporteren",
@@ -483,6 +615,14 @@
 		"message": "Algemeen",
 		"description": "Label voor de algemene instellingencategorie"
 	},
+	"generic_pin_tabs": {
+		"message": "generieke $pinned Tabbladen",
+		"description": "De favoriete Tabbladen van de gebruiker die niet org-specifiek zijn"
+	},
+	"generic_tabs": {
+		"message": "generieke Tabbladen",
+		"description": "De favoriete Tabbladen van de gebruiker die niet org-specifiek zijn"
+	},
 	"help": {
 		"message": "Hulp",
 		"description": ""
@@ -495,6 +635,14 @@
 		"message": "Nieuw als favoriet ingestelde Tabbladen worden vooraan in uw Tabbladlijst in de Setup-balk ingevoegd, in plaats van achteraan te worden toegevoegd.",
 		"description": "[settings-help] voor $opt_add_tabs_front"
 	},
+	"help_allow_domains": {
+		"message": "Indien ingeschakeld, kunt u uw $tabs zien zodra u $salesforce_setup start",
+		"description": "[instellingen-help] voor optionele toestemming om ons in staat te stellen klaar te zijn zodra $salesforce_setup wordt geopend"
+	},
+	"help_allow_export": {
+		"message": "Indien ingeschakeld kunt u uw $tabs $export eren en op uw computer bewaren",
+		"description": "[instellingen-help] voor optionele toestemming om ons in staat te stellen de Tab op de computer van de gebruiker te downloaden"
+	},
 	"help_automatic_open_login": {
 		"message": "Als u buiten een Salesforce-domein op de pop-up van de extensie klikt, wordt u automatisch naar de inlogpagina van Salesforce gebracht.",
 		"description": "[settings-help] voor $opt_automatic_open_login"
@@ -502,6 +650,10 @@
 	"help_automatic_open_setup": {
 		"message": "Als u binnen een Salesforce-domein op de pop-up van de extensie klikt, maar niet op een Setup-pagina, wordt u automatisch naar de Salesforce Setup-pagina gebracht.",
 		"description": "[settings-help] voor $opt_automatic_open_setup"
+	},
+	"help_drag_tabs": {
+		"message": "U kunt uw $tabs herschikken door de stippen te gebruiken en ze te slepen.",
+		"description": "[manage-tabs] uitleg over het slepen van de Tab"
 	},
 	"help_keep_sort": {
 		"message": "Wanneer ingeschakeld, worden uw Tabbladen gesorteerd op label, URL of Org; afhankelijk van wat u kiest.",
@@ -547,9 +699,33 @@
 		"message": "Schakelt de extensiecontrole uit die verifieert of een URL-fragment overeenkomt met de indeling van Salesforce-record-/object-ID's (gebruikt om de opgeslagen Tab automatisch in te stellen als een Org-Tab).",
 		"description": "[settings-help] voor $opt_skip_link_detection"
 	},
+	"help_tab_actions": {
+		"message": "Hier vindt u un submenu om verschillende acties uit te voeren op de $tab in dezelfde rij.",
+		"description": "[manage-tabs] uitleg over wat de pijl aan de rechterkant bevat"
+	},
+	"help_tab_label": {
+		"message": "Dit is de algemene naam die u gebruikt om te onthouden waar deze $tab u naartoe brengt.",
+		"description": "[manage-tabs] uitleg over wat het Tab-label is"
+	},
+	"help_tab_org": {
+		"message": "Dit is de naam van de Salesforce $org waar deze $tab wordt getoond. Indien leeg gelaten, wordt deze $tab getoond in elke Salesforce $org die u bezoekt.",
+		"description": "[manage-tabs] uitleg over wat de Tab Org is"
+	},
+	"help_tab_url": {
+		"message": "Dit is de (verkorte) link waarnaar u wordt doorgestuurd wanneer u op deze $tab klikt",
+		"description": "[manage-tabs] uitleg over wat de Tab-URL is"
+	},
 	"help_tip_click_link": {
 		"message": "Klik om doorgestuurd te worden naar de documentatie voor deze instelling!",
 		"description": "[instellingen-hulp] oproep tot actie om de gebruiker meer te laten lezen over een specifieke instelling"
+	},
+	"hide_other_org_tabs": {
+		"message": "Verberg $other_org_placeholder $tabs",
+		"description": "[manage-tabs] knoplabel om andere Org Tabs te verbergen"
+	},
+	"if_click_popup": {
+		"message": "als u op de extensie-popup klikt",
+		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"import": {
 		"message": "Importeren",
@@ -567,6 +743,10 @@
 		"message": "Ongeldig bestandstype.\nAlleen JSON-bestanden worden ondersteund.",
 		"description": "[fout] het bestand dat voor importeren is gebruikt, is geen JSON"
 	},
+	"import_metadata": {
+		"message": "Tabblad metadata importeren (\"Kliktelling\", \"Klikdatum\" enz.).",
+		"description": "[label] importeer alles wat in het bestand wordt gevonden tijdens het importproces"
+	},
 	"import_successful": {
 		"message": "Succesvol geïmporteerd",
 		"description": "[importeren] importeren is voltooid. Hierna wordt getoond hoeveel records zijn geïmporteerd"
@@ -578,6 +758,10 @@
 	"import_title": {
 		"message": "$import_tabs van JSON-bestand",
 		"description": "[popup] titel op de importknop"
+	},
+	"inactive": {
+		"message": "Inactief",
+		"description": "Gebruikt in schakelaars voor inactieve status"
 	},
 	"insert_another": {
 		"message": "Nog een invoegen",
@@ -595,6 +779,10 @@
 		"message": "Cursief",
 		"description": "Lettertype-optie voor cursieve tekst"
 	},
+	"label": {
+		"message": "Label",
+		"description": "[key] de naam van de Tab"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigatie",
 		"description": "Salesforce’s aangepaste navigatietechnologie"
@@ -602,6 +790,18 @@
 	"login_to_salesforce": {
 		"message": "Inloggen bij Salesforce",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
+	},
+	"manage_tabs": {
+		"message": "$tabs beheren",
+		"description": "[modal-title] modal om opgeslagen $tabs te beheren met bewerkbare velden en slepen om te herschikken"
+	},
+	"manage_tabs_explainer": {
+		"message": "Bewerk, herschik en beheer uw opgeslagen $tabs rechtstreeks vanuit deze modal. Sleep rijen om ze te herschikken, of gebruik het vervolgkeuzemenu voor meer acties.",
+		"description": "[modal-explainer] legt de functionaliteit van de modal voor het beheren van tabbladen uit"
+	},
+	"must_non_empty_str": {
+		"message": "moet een niet-lege string zijn",
+		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"mycustomorg": {
 		"message": "mijneigenorg",
@@ -614,6 +814,10 @@
 	"no_match": {
 		"message": "Geen overeenkomst gevonden voor actie",
 		"description": "[fout] in Salesforce wanneer de switch de gevraagde actie niet kan matchen"
+	},
+	"no_tabs_to_export": {
+		"message": "Geen Tabs om te exporteren",
+		"description": "[toast] fout wanneer er geen Tabs zijn om te exporteren"
 	},
 	"nss_invalid_url": {
 		"message": "Ongeldige URL gedetecteerd.",
@@ -647,12 +851,20 @@
 		"message": "Nieuwe Tabbladen vooraan toevoegen.",
 		"description": "[settings] de gebruiker in staat stellen om alle nieuwe Tabbladen vooraan toe te voegen"
 	},
+	"opt_allow_domains": {
+		"message": "Sta $extension_label toe om toegang te krijgen tot Salesforce-pagina's wanneer u deze bezoekt.",
+		"description": "[instelling] optionele toestemming om de extensies uit te voeren wanneer de gebruiker $salesforce_setup bezoekt"
+	},
+	"opt_allow_export": {
+		"message": "Sta $extension_label toe om uw $tabs te exporteren wanneer u daarom vraagt.",
+		"description": "[instelling] optionele toestemming om ons in staat te stellen de Tab van de gebruiker te exporteren"
+	},
 	"opt_automatic_open_login": {
-		"message": "Open automatisch de $salesforce_login-pagina wanneer u op de pop-up klikt terwijl u niet op een Salesforce-pagina bent.",
+		"message": "Open automatisch de $salesforce_login pagina wanneer u op de pop up klikt terwijl u niet op een Salesforce pagina bent",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een willekeurige website is"
 	},
 	"opt_automatic_open_setup": {
-		"message": "Open automatisch de $salesforce_setup-pagina wanneer u op de pop-up klikt terwijl u op een Salesforce-pagina bent.",
+		"message": "Open automatisch de $salesforce_setup pagina wanneer u op de pop up klikt terwijl u op een Salesforce pagina bent",
 		"description": "[instelling] wanneer de gebruiker de pop-up opent terwijl hij op een Salesforce-website is"
 	},
 	"opt_confirm_save": {
@@ -684,11 +896,11 @@
 		"description": "[instelling] laat de gebruiker voorkomen dat de extensie naar nieuwe releases zoekt"
 	},
 	"opt_open_login_same_tab": {
-		"message": "Open de $salesforce_login-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
+		"message": "Open de $salesforce_login pagina altijd in dezelfde Tab wanneer u op de pop up klikt",
 		"description": "[instelling]"
 	},
 	"opt_open_setup_same_tab": {
-		"message": "Open de $salesforce_setup-pagina altijd in dezelfde Tab wanneer u op de pop-up klikt.",
+		"message": "Open de $salesforce_setup pagina altijd in dezelfde Tab wanneer u op de pop up klikt",
 		"description": "[instelling]"
 	},
 	"opt_pick_language": {
@@ -723,9 +935,21 @@
 		"message": "Of $drop",
 		"description": "[importeren] laat de gebruiker bestanden met de muis verplaatsen en loslaten"
 	},
+	"org": {
+		"message": "Org",
+		"description": "[key] de Salesforce $org van de Tab"
+	},
 	"org_link": {
 		"message": "Org Link",
 		"description": "[input-label]"
+	},
+	"org_pin_tabs": {
+		"message": "org $pinned Tabbladen",
+		"description": "Tabbladen die org-specifiek zijn"
+	},
+	"org_tabs": {
+		"message": "org Tabbladen",
+		"description": "Tabbladen die org-specifiek zijn"
 	},
 	"other_org_info": {
 		"message": "Info andere Org",
@@ -738,6 +962,22 @@
 	"overwrite_tabs": {
 		"message": "Opgeslagen Tabs overschrijven.",
 		"description": "[label] verwijder alle opgeslagen Tabs tijdens het importproces"
+	},
+	"page_will_open_current_browser_tab": {
+		"message": "pagina wordt geopend in de huidige browser Tab",
+		"description": "[placeholder] gebruikt door andere teksten"
+	},
+	"permission_request_failure": {
+		"message": "De toestemming is niet verleend.",
+		"description": "[fout] de gebruiker heeft ons gevraagd om een toestemming aan te vragen, maar heeft deze vervolgens niet geaccepteerd"
+	},
+	"permission_request_success": {
+		"message": "De toestemming is verleend!",
+		"description": "[succes] de gebruiker heeft ons gevraagd om een toestemming aan te vragen en heeft deze geaccepteerd"
+	},
+	"pinned": {
+		"message": "Vastgezet",
+		"description": "De Tabbladen van de gebruiker die altijd aan het begin van de lijst worden gevonden"
 	},
 	"preserve_org_tabs": {
 		"message": "Tabs voor andere Orgs behouden.",
@@ -764,11 +1004,11 @@
 		"description": "[req_toestemming] label wanneer de gebruiker geen permanente toestemming wil geven"
 	},
 	"req_permissions_header": {
-		"message": "Sta ons alstublieft toe om automatisch\ntoe te treden tot $salesforce_setup-pagina's.",
+		"message": "Sta ons alstublieft toe om automatisch\ntoe te treden tot $salesforce_setup pagina s",
 		"description": "[req_permission] kop van de pagina om toestemmingen aan te vragen"
 	},
 	"req_permissions_paragraph": {
-		"message": "Als u wilt, kunt u uw favoriete Tabs laten verschijnen\nzodra u naar een $salesforce_setup-pagina navigeert\nzonder elke keer op deze extensie te hoeven klikken.",
+		"message": "Als u wilt kunt u uw favoriete Tabs laten verschijnen\nzodra u naar een $salesforce_setup pagina navigeert\nzonder elke keer op deze extensie te hoeven klikken",
 		"description": "[req_permission] tekst om uit te leggen waarom de toestemmingen worden gevraagd"
 	},
 	"required": {
@@ -779,6 +1019,10 @@
 		"message": "= Vereiste informatie",
 		"description": "[modal] vertelt de gebruiker dat sommige info verplicht is"
 	},
+	"salesforce_domain": {
+		"message": "Salesforce-domein",
+		"description": "[placeholder] gebruikt door andere teksten"
+	},
 	"salesforce_lightning": {
 		"message": "Salesforce Lightning",
 		"description": "[geenSalesforceSetup] het Salesforce Lightning-platform"
@@ -786,6 +1030,10 @@
 	"salesforce_login": {
 		"message": "Salesforce-login",
 		"description": "de Salesforce-loginpagina (https://login.salesforce.com)"
+	},
+	"salesforce_page": {
+		"message": "Salesforce-pagina",
+		"description": "[placeholder] gebruikt in andere teksten"
 	},
 	"salesforce_setup": {
 		"message": "Salesforce-instellingen",
@@ -798,6 +1046,22 @@
 	"save_tab": {
 		"message": "Opslaan als Tab",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"select_all": {
+		"message": "Alles Selecteren",
+		"description": "[modal] knop om alle Tabs te selecteren in de export modal"
+	},
+	"select_tabs": {
+		"message": "Selecteer welke $tabs u wilt",
+		"description": "[import] laat de gebruiker selecteren welke $tabs geïmporteerd moeten worden voordat ze worden geïmporteerd"
+	},
+	"select_tabs_export": {
+		"message": "$select_tabs $export",
+		"description": "[import] laat de gebruiker selecteren welke $tabs geëxporteerd moeten worden voordat ze worden geëxporteerd"
+	},
+	"select_tabs_import": {
+		"message": "$select_tabs $import",
+		"description": "[import] laat de gebruiker selecteren welke $tabs geïmporteerd moeten worden voordat ze worden geïmporteerd"
 	},
 	"send_tip": {
 		"message": "Stuur ons een fooi ❤️",
@@ -830,6 +1094,126 @@
 	"set_org_styler": {
 		"message": "Org-styler",
 		"description": "Label voor het configureren van de stijl van Org-specifieke Tabs"
+	},
+	"set_pin_gen_preview": {
+		"message": "$pinned $set_gen_preview",
+		"description": "Label voor het vooraf bekijken van het uiterlijk van een generiek Tabblad wanneer het is vastgezet"
+	},
+	"set_pin_gen_styler": {
+		"message": "$pinned $set_gen_styler",
+		"description": "Label voor het configureren van de stijl van generieke Tabbladen wanneer ze zijn vastgezet"
+	},
+	"set_pin_org_preview": {
+		"message": "$pinned $set_org_preview",
+		"description": "Label voor het vooraf bekijken van het uiterlijk van een org-specifiek Tabblad wanneer het is vastgezet"
+	},
+	"set_pin_org_styler": {
+		"message": "$pinned $set_org_styler",
+		"description": "Label voor het configureren van de stijl van org-specifieke Tabbladen wanneer ze zijn vastgezet"
+	},
+	"set_pinned_tab_generic_background_active_label": {
+		"message": "$style_settings_background_label $active_generic_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_background_label": {
+		"message": "$style_settings_background_label $generic_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_generic_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_border_color_label": {
+		"message": "$style_settings_border_color_label $generic_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_color_active_label": {
+		"message": "$style_settings_color_label $active_generic_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_color_label": {
+		"message": "$style_settings_color_label $generic_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_generic_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_decoration_label": {
+		"message": "$style_settings_decoration_label $generic_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_generic_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_hover_background_label": {
+		"message": "$style_settings_hover_background_label $generic_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_generic_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_shadow_label": {
+		"message": "$style_settings_shadow_label $generic_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor generieke Tabbladen"
+	},
+	"set_pinned_tab_generic_top_active_label": {
+		"message": "$style_settings_top_active_label $generic_pin_tabs",
+		"description": "Label om de kleur van de bovenste balk in te stellen voor actieve generieke Tabbladen"
+	},
+	"set_pinned_tab_org_background_active_label": {
+		"message": "$style_settings_background_label $active_org_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor actieve org Tabbladen"
+	},
+	"set_pinned_tab_org_background_label": {
+		"message": "$style_settings_background_label $org_pin_tabs",
+		"description": "Label om de achtergrondkleur in te stellen voor org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_border_color_active_label": {
+		"message": "$style_settings_border_color_label $active_org_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor actieve org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_border_color_label": {
+		"message": "$style_settings_border_color_label $org_pin_tabs",
+		"description": "Label om de randkleur in te stellen voor org Tabbladen"
+	},
+	"set_pinned_tab_org_color_active_label": {
+		"message": "$style_settings_color_label $active_org_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor actieve org Tabbladen"
+	},
+	"set_pinned_tab_org_color_label": {
+		"message": "$style_settings_color_label $org_pin_tabs",
+		"description": "Label om de tekstkleur in te stellen voor org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_decoration_active_label": {
+		"message": "$style_settings_decoration_label $active_org_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor actieve org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_decoration_label": {
+		"message": "$style_settings_decoration_label $org_pin_tabs",
+		"description": "Vraag om decoratiestijlen te selecteren voor org Tabbladen"
+	},
+	"set_pinned_tab_org_hover_background_active_label": {
+		"message": "$style_settings_hover_background_label $active_org_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor actieve org Tabbladen"
+	},
+	"set_pinned_tab_org_hover_background_label": {
+		"message": "$style_settings_hover_background_label $org_pin_tabs",
+		"description": "Label om de hover achtergrondkleur in te stellen voor org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_shadow_active_label": {
+		"message": "$style_settings_shadow_label $active_org_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor actieve org-specifieke Tabbladen"
+	},
+	"set_pinned_tab_org_shadow_label": {
+		"message": "$style_settings_shadow_label $org_pin_tabs",
+		"description": "Label om de schaduwkleur in te stellen voor org Tabbladen"
+	},
+	"set_pinned_tab_org_top_active_label": {
+		"message": "$style_settings_top_active_label $org_pin_tabs",
+		"description": "Label om de kleur van de bovenste balk in te stellen voor actieve org Tabbladen"
 	},
 	"set_tab_generic_background_active_label": {
 		"message": "Voer de achtergrondkleur in voor uw actieve algemene Tab.",
@@ -947,13 +1331,57 @@
 		"message": "Setup Pagina",
 		"description": "[geenSalesforceSetup] de pagina die wordt gebruikt om de instellingen van Salesforce te wijzigen"
 	},
+	"show_all_tabs": {
+		"message": "Toon alle $tabs",
+		"description": "[manage-tabs] knoplabel om alle Tab te tonen"
+	},
 	"skip": {
 		"message": "Overslaan",
 		"description": "[req_toestemming] knop om toestemmingen NIET toe te staan"
 	},
+	"style_generic_pinned": {
+		"message": "Stijl vastgezette $generic_tabs",
+		"description": "[opties] Schakellabel om vastgezette generieke Tabbladen te stylen"
+	},
+	"style_org_pinned": {
+		"message": "Stijl vastgezette $org_tabs",
+		"description": "[opties] Schakellabel om vastgezette org Tabbladen te stylen"
+	},
+	"style_settings_background_label": {
+		"message": "Voer de achtergrondkleur in voor uw",
+		"description": "Label om de achtergrondkleur in te stellen"
+	},
+	"style_settings_border_color_label": {
+		"message": "Voer de randkleur in voor uw",
+		"description": "Label om de randkleur in te stellen"
+	},
+	"style_settings_color_label": {
+		"message": "Voer de kleur van de tekst in voor uw",
+		"description": "Label om de tekstkleur in te stellen"
+	},
+	"style_settings_decoration_label": {
+		"message": "Kies een of meer decoratiestijlen voor uw",
+		"description": "Vraag om decoratiestijlen te selecteren"
+	},
+	"style_settings_hover_background_label": {
+		"message": "Voer de hover achtergrondkleur in voor uw",
+		"description": "Label om de hover achtergrondkleur in te stellen"
+	},
+	"style_settings_shadow_label": {
+		"message": "Voer de schaduwkleur in voor uw",
+		"description": "Label om de schaduwkleur in te stellen"
+	},
+	"style_settings_top_active_label": {
+		"message": "Voer de kleur in voor de balk bovenaan uw actieve",
+		"description": "Label om de actieve kleur van de bovenste balk in te stellen"
+	},
 	"successfully_imported": {
 		"message": "Succesvol geïmporteerd",
 		"description": "[toast] de gebruiker heeft Tabs toegevoegd vanuit een extern bestand"
+	},
+	"tab": {
+		"message": "Tab",
+		"description": "een van de favoriete links van de gebruiker"
 	},
 	"tab_explain": {
 		"message": "Elk item moet 'label' en 'url' als strings hebben. Daarnaast kan elk item een 'org' als string hebben.",
@@ -1003,6 +1431,10 @@
 		"message": "Tabs",
 		"description": "de favoriete links van de gebruiker"
 	},
+	"tabs_exported_successfully": {
+		"message": "Tabs Succesvol Geëxporteerd",
+		"description": "[toast] succesbericht wanneer Tabs zijn geëxporteerd"
+	},
 	"tabs_saved": {
 		"message": "Tabs opgeslagen.",
 		"description": "[toast] Tabs zijn succesvol opgeslagen."
@@ -1023,6 +1455,14 @@
 		"message": "Onderstrepen Golvend",
 		"description": "Decoratiestijloptie om een golvende onderstreping toe te passen op Tab-tekst"
 	},
+	"unsaved_changes_confirm": {
+		"message": "U hebt niet-opgeslagen wijzigingen. Wilt u afsluiten zonder op te slaan?",
+		"description": "[manage-tabs] de gebruiker heeft gevraagd naar een Tab te gaan zonder eerst op te slaan"
+	},
+	"unselect_all": {
+		"message": "Selectie Van Alles Opheffen",
+		"description": "[modal] knop om de selectie van alle Tabs op te heffen in de export modal"
+	},
 	"update_available": {
 		"message": "Update beschikbaar",
 		"description": "een nieuwe update voor de extensie is beschikbaar"
@@ -1031,9 +1471,21 @@
 		"message": "Uploaden",
 		"description": "[importeren] laat de gebruiker door zijn bestanden bladeren en de juiste kiezen"
 	},
+	"url": {
+		"message": "URL",
+		"description": "[key] de link van de Tab"
+	},
 	"users": {
 		"message": "Gebruikers",
 		"description": "De naam van de pagina gerelateerd aan ManageUsers/home"
+	},
+	"warn_upgrade_backup": {
+		"message": "Exporteer alstublieft uw nieuwe Tabbladen, aangezien het bestand dat u hebt gebruikt, niet meer wordt ondersteund in toekomstige releases.",
+		"description": "[waarschuwing] de gebruiker heeft zijn Tabbladen geïmporteerd met behulp van een verouderde configuratie van het json-bestand"
+	},
+	"when_click_popup_while": {
+		"message": "pagina bij het klikken op de popup terwijl",
+		"description": "[placeholder] gebruikt door andere teksten"
 	},
 	"where_to": {
 		"message": "Waarheen?",
