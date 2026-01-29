@@ -1823,15 +1823,15 @@ function generateTableWithCheckboxes(
 	const { table, tbody } = createTable(headers);
 	for (const i in tabs) {
 		const { tr, checkbox } = createTableRow(tabs[i], i);
-    tr.addEventListener("click", (e) => {
-      if (
-        e.target.tagName !== "INPUT" ||
-        e.target.type !== "checkbox"
-      ) {
-        checkbox.checked = !checkbox.checked;
-        changeListener();
-      }
-    });
+		tr.addEventListener("click", (e) => {
+			if (
+				e.target.tagName !== "INPUT" ||
+				e.target.type !== "checkbox"
+			) {
+				checkbox.checked = !checkbox.checked;
+				changeListener();
+			}
+		});
 		checkbox.addEventListener("click", changeListener);
 		tbody.appendChild(tr);
 		res.checkboxes.push(checkbox);
