@@ -592,8 +592,8 @@
 		"description": "[popup] title on export button"
 	},
 	"extension_description": {
-		"message": "Create and manage custom $tabs in the available space on $salesforce_lightning Setup page.",
-		"description": "[manifest] The description of this extension"
+		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
+		"description": "[manifest] The description of this extension DO NOT USE $VARIABLES"
 	},
 	"extension_label": {
 		"message": "Again, Why Salesforce",
