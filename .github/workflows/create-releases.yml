@@ -48,6 +48,8 @@ jobs:
                     print_flag {print}
                   ' "docs/CHANGELOG.md" > release-notes.txt
                 fi
+                echo "RELEASE_NOTES=./release-notes.txt" >> $GITHUB_ENV
+                echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
 
             - name: Setup Deno
               uses: denoland/setup-deno@v2
