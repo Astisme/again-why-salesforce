@@ -38,8 +38,16 @@ jobs:
                   $0 ~ "^# v[0-9]+\\.[0-9]+\\.[0-9]+" && print_flag {exit}
                   print_flag {print}
                 ' "docs/CHANGELOG.md" > release-notes.txt
-                echo "RELEASE_NOTES=./release-notes.txt" >> $GITHUB_ENV
-                echo "TAG_VERSION=$TAG_VERSION" >> $GITHUB_ENV
+                # If release notes are empty, default to last release
+                if [ ! -s release-notes.txt ]; then
+                  awk '
+                    $0 ~ "^# v[0-9]+\\.[0-9]+\\.[0-9]+" {
+                      if (!print_flag) {print_flag=1; next}
+                      else {exit}
+                    }
+                    print_flag {print}
+                  ' "docs/CHANGELOG.md" > release-notes.txt
+                fi
 
             - name: Setup Deno
               uses: denoland/setup-deno@v2
