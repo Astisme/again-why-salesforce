@@ -298,7 +298,7 @@ class Tutorial {
 			}
 		}
 		await this.showMessage(step);
-		if (step.waitFor == null) {
+		if (step.action === "confirm" || step.waitFor == null) {
 			this.showConfirm(step);
 		}
 	}
