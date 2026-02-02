@@ -34,7 +34,7 @@ it will guide the user in these phases to let them understand how to use the ext
 
 - [x] after i click on the tab to navigate to its page, where the next step would be to click on the slashed star, the program cannot find the slashed star
 - [x] after i click on an highlighted element, the next step should remove the highlight but it is currently kept forever
-- [ ] for the step that should redirect to the Account page, the ok button to confirm the redirect is not provided
+- [x] for the step that should redirect to the Account page, the ok button to confirm the redirect is not provided
 - [ ]
 - [ ]
 - [ ]
