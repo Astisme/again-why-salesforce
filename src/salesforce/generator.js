@@ -111,7 +111,7 @@ export async function handleLightningLinkClick(e) {
 	) {
 		open(url, target);
 	} else {
-    performLightningRedirect(url);
+		performLightningRedirect(url);
 	}
 }
 

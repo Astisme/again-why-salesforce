@@ -300,11 +300,11 @@ export function calculateReadingTime(message) {
 	const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
 	return (readingTimeSeconds + 2) * 1000;
 }
-export function performLightningRedirect(url = ""){
-  postMessage({
-    what: "lightningNavigation",
-    navigationType: "url",
-    url,
-    fallbackURL: url,
-  }, "*");
+export function performLightningRedirect(url = "") {
+	postMessage({
+		what: "lightningNavigation",
+		navigationType: "url",
+		url,
+		fallbackURL: url,
+	}, "*");
 }

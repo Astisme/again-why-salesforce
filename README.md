@@ -127,7 +127,7 @@ For Safari users, we recommend checking out our [installation guide](https://git
 | ------- | --------------- |
 | Chrome  | 120             |
 | Edge    | 120             |
-| Firefox | 112             |
+| Firefox | 128             |
 | Safari  | 14              |
 
 <p align="center">

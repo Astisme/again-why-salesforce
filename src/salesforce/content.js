@@ -55,9 +55,9 @@ import {
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
 import {
-  calculateReadingTime,
-  getSettings,
-  sendExtensionMessage,
+	calculateReadingTime,
+	getSettings,
+	sendExtensionMessage,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";

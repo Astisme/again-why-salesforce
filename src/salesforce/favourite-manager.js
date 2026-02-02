@@ -320,7 +320,7 @@ export async function showFavouriteButton(count = 0) {
 				url,
 				org: Tab.extractOrgName(currentHref),
 			}),
-      oldButton
+			oldButton,
 		);
 		return;
 	}
