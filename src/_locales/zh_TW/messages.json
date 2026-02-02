@@ -555,6 +555,10 @@
 		"message": "翻譯工具尚未初始化。",
 		"description": "[錯誤] TranslationService 尚未準備好"
 	},
+	"error_unknown_file_structure": {
+		"message": "我們無法辨識您想要匯入的文件\n如果問題持續存在，請透過在 GitHub 上提交 Issue 與我們分享",
+		"description": "[匯入] 無法辨識使用者的文件"
+	},
 	"error_unknown_message": {
 		"message": "收到未知訊息",
 		"description": "從偵聽器收到一個未知訊息"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "波浪底線",
 		"description": "為 Tab 文字添加波浪下劃線的裝飾樣式選項"
+	},
+	"unsaved_changes_confirm": {
+		"message": "您有未儲存的變更。確定要在不儲存的情況下離開嗎？",
+		"description": "[manage-tabs] 使用者要求在未儲存的情況下前往某個 Tab"
 	},
 	"unselect_all": {
 		"message": "取消全選",

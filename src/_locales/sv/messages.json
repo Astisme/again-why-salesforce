@@ -555,6 +555,10 @@
 		"message": "översättaren var inte initialiserad än.",
 		"description": "[fel] TranslationService var inte redo"
 	},
+	"error_unknown_file_structure": {
+		"message": "Vi kunde inte förstå en fil som du ville importera\nOm problemet kvarstår, dela det med oss genom att öppna ett GitHub-ärende",
+		"description": "[importera] användarens fil kändes inte igen"
+	},
 	"error_unknown_message": {
 		"message": "Okänt meddelande mottaget",
 		"description": "ett okänt meddelande har mottagits från en lyssnare"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Understruken Vågig",
 		"description": "Dekorationsstilalternativ för att applicera en vågig understrykning på Tab-text"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Du har ändringar som inte sparats. Vill du lämna sidan utan att spara?",
+		"description": "[manage-tabs] användaren bad om att få gå till en Tab utan att spara först"
 	},
 	"unselect_all": {
 		"message": "Avmarkera Alla",

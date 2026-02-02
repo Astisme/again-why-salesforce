@@ -554,6 +554,10 @@
 		"message": "translator अभी तक प्रारंभ नहीं हुआ है।",
 		"description": "[error] TranslationService तैयार नहीं था"
 	},
+	"error_unknown_file_structure": {
+		"message": "हम उस फ़ाइल को समझ नहीं पाए जिसे आप आयात करना चाहते थे\nयदि समस्या बनी रहती है, तो कृपया GitHub समस्या खोलकर इसे हमारे साथ साझा करें",
+		"description": "[आयात] उपयोगकर्ता की फ़ाइल पहचानी नहीं गई"
+	},
 	"error_unknown_message": {
 		"message": "अज्ञात संदेश प्राप्त हुआ",
 		"description": "एक श्रोता से एक अज्ञात संदेश प्राप्त हुआ है"
@@ -1449,6 +1453,10 @@
 	"underline_wavy": {
 		"message": "तरंग रेखांकित",
 		"description": "Tab टेक्स्ट पर तरंगाकार रेखांकित लागू करने के लिए सजावट शैली विकल्प"
+	},
+	"unsaved_changes_confirm": {
+		"message": "आपके पास बिना सहेजे गए परिवर्तन हैं। क्या आप बिना सहेजे बाहर निकलना चाहते हैं?",
+		"description": "[manage-tabs] उपयोगकर्ता ने पहले सहेजे बिना Tab पर जाने के लिए कहा"
 	},
 	"unselect_all": {
 		"message": "सभी का चयन हटाएँ",

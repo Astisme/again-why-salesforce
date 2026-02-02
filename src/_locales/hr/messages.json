@@ -555,6 +555,10 @@
 		"message": "translator još nije inicijaliziran.",
 		"description": "[error] TranslationService nije bio spreman"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nismo uspjeli razumjeti datoteku koju ste htjeli uvesti\nAko se problem nastavi, podijelite ga s nama otvaranjem GitHub prijave",
+		"description": "[uvoz] korisnikova datoteka nije prepoznata"
+	},
 	"error_unknown_message": {
 		"message": "Primljena nepoznata poruka",
 		"description": "primljena je nepoznata poruka od slušatelja"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Valovito podcrtano",
 		"description": "Opcija stila ukrašavanja za primjenu valovitog podcrtavanja na tekst Taba"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Imate nespremljene promjene. Želite li otići bez spremanja?",
+		"description": "[manage-tabs] korisnik je zatražio odlazak na Tab bez prethodnog spremanja"
 	},
 	"unselect_all": {
 		"message": "Poništi Odabir Svih",

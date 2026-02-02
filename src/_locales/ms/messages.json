@@ -555,6 +555,10 @@
 		"message": "penterjemah belum dimulakan lagi.",
 		"description": "[ralat] TranslationService belum siap"
 	},
+	"error_unknown_file_structure": {
+		"message": "Kami tidak dapat memahami fail yang anda ingin import\nJika masalah berterusan, sila kongsi dengan kami dengan membuka isu GitHub",
+		"description": "[import] fail pengguna tidak dikenali"
+	},
 	"error_unknown_message": {
 		"message": "Mesej tidak diketahui diterima",
 		"description": "mesej tidak diketahui telah diterima daripada pendengar"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Garis bawah bergelombang",
 		"description": "Pilihan gaya hiasan untuk menerapkan garis bawah bergelombang pada teks Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Anda mempunyai perubahan yang belum disimpan. Adakah anda mahu keluar tanpa menyimpan?",
+		"description": "[manage-tabs] pengguna meminta untuk pergi ke Tab tanpa menyimpan terlebih dahulu"
 	},
 	"unselect_all": {
 		"message": "Nyahpilih Semua",

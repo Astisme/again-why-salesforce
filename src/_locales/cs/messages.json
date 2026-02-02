@@ -555,6 +555,10 @@
 		"message": "translator dosud nebyl inicializován.",
 		"description": "[error] TranslationService nebyl připraven"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nepodařilo se nám rozpoznat soubor, který jste chtěli importovat\nPokud problém přetrvává, sdílejte ho s námi otevřením hlášení na GitHubu",
+		"description": "[import] soubor uživatele nebyl rozpoznán"
+	},
 	"error_unknown_message": {
 		"message": "Přijata neznámá zpráva",
 		"description": "byla přijata neznámá zpráva od posluchače"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Podtržení Vlnité",
 		"description": "Možnost stylu dekorace pro použití vlnitého podtržení na text Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Máte neuložené změny. Chcete odejít bez uložení?",
+		"description": "[manage-tabs] uživatel požádal o přechod na Tab bez předchozího uložení"
 	},
 	"unselect_all": {
 		"message": "Zrušit Výběr Všeho",

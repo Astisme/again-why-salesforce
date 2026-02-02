@@ -555,6 +555,10 @@
 		"message": "hindi pa na-initialize ang translator.",
 		"description": "[error] Hindi pa handa ang TranslationService"
 	},
+	"error_unknown_file_structure": {
+		"message": "Hindi namin maunawaan ang file na gusto mong i-import\nKung magpapatuloy ang isyu, pakibahagi ito sa amin sa pamamagitan ng pagbubukas ng GitHub issue",
+		"description": "[i-import] hindi kinilala ang file ng user"
+	},
 	"error_unknown_message": {
 		"message": "Nakakatanggap ng hindi kilalang mensahe",
 		"description": "isang hindi kilalang mensahe ang natanggap mula sa isang listener"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Wavy Underline",
 		"description": "Pagpipilian ng estilo ng dekorasyon upang mag-apply ng wavy underline sa teksto ng Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Mayroon kang mga hindi na-save na pagbabago. Gusto mo bang umalis nang hindi nag-e-save?",
+		"description": "[manage-tabs] hiniling ng user na pumunta sa isang Tab nang hindi muna nag-e-save"
 	},
 	"unselect_all": {
 		"message": "Alisin ang Pagkakapili sa Lahat",

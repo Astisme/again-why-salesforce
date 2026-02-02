@@ -554,6 +554,10 @@
 		"message": "翻訳ツールはまだ初期化されていません。",
 		"description": "[エラー] TranslationService が準備できていませんでした"
 	},
+	"error_unknown_file_structure": {
+		"message": "インポートしようとしたファイルを認識できませんでした\n問題が解決しない場合は、GitHubイシューを作成して共有してください",
+		"description": "[インポート] ユーザーのファイルが認識されませんでした"
+	},
 	"error_unknown_message": {
 		"message": "不明なメッセージを受信しました",
 		"description": "リスナーから不明なメッセージが受信されました"
@@ -1449,6 +1453,10 @@
 	"underline_wavy": {
 		"message": "波線下線",
 		"description": "Tabテキストに波状の下線を適用する装飾スタイルオプション"
+	},
+	"unsaved_changes_confirm": {
+		"message": "保存されていない変更があります。保存せずに終了しますか？",
+		"description": "[manage-tabs] ユーザーが保存せずに Tab への移動を要求しました"
 	},
 	"unselect_all": {
 		"message": "すべての選択を解除",

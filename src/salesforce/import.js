@@ -1,5 +1,6 @@
 "use strict";
 import { EXTENSION_NAME, HIDDEN_CLASS } from "/constants.js";
+import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -137,6 +138,106 @@ async function launchImport(tabs = [], importConfig = {}) {
 }
 
 /**
+ * From the given Tabs, maps the objects to valid Tab objects based on the mapping passed in the second argument
+ * @param {Array} [tabs=[]] - the Tabs to be mapped
+ * @param {Object} [mapping={}] - an object with the following keys
+ * @param {string} [mapping.label="label"] - the label mapping
+ * @param {string} [mapping.url="url"] - the url mapping
+ * @param {string} [mapping.org="org"] - the org mapping
+ * @return {Array} the Tabs passed as input, mapped to be a TabContainer
+ */
+function makeValidTabs(tabs = [], {
+	label = "label",
+	url = "url",
+	org = "org",
+} = {}) {
+	return tabs?.map((tab) => ({
+		label: tab[label],
+		url: tab[url],
+		org: tab[org],
+	})) ?? [];
+}
+
+/**
+ * Finds and validates Tabs from extensions that use different key structures
+ * @param {Array} [tabs=[]] - the Tabs which have to be validated
+ * @param {Function} validator - the validation function to check Tab structure
+ * @param {Object} mapping - the key mapping for makeValidTabs
+ * @return {Array} with only the valid Tabs
+ */
+function getTabsFromExtensions(tabs, validator, mapping) {
+	return Array.isArray(tabs) && tabs.length > 0 && tabs.every(validator)
+		? makeValidTabs(tabs, mapping)
+		: [];
+}
+
+/**
+ * Checks if a tab is from WhySalesforce extension
+ * @param {Object} tab - the tab to validate
+ * @return {boolean} true if the tab is from Why Salesforce
+ */
+function isWhySalesforceTab(tab) {
+	return tab?.label == null && tab?.tabTitle != null;
+}
+
+/**
+ * Checks if a tab is from Salesforce Easy Navigator extension
+ * @param {Object} tab - the tab to validate
+ * @return {boolean} true if the tab is from Salesforce Easy Navigator
+ */
+function isSalesforceEasyNavigatorTab(tab) {
+	return tab?.label == null && tab?.title != null;
+}
+
+/**
+ * Removes all the Tabs with unexpected keys
+ * @param {Array} [tabs=null] - the Array to be filtered
+ * @return {Array} with only the valid Tabs
+ */
+function filterForUnexpectedTabKeys(tabs = null) {
+	return tabs
+		?.filter((tab) => !Tab.hasUnexpectedKeys(tab)) ??
+		[];
+}
+
+/**
+ * Extract the Tabs from the given JSON object, taking care of checking if the user is importing the Tabs from other extensions
+ * @param {Object} [jsonWithTabs=null] - the JSON object in which the Tabs are located
+ * @return {Array} the valid Tabs found in the given object
+ */
+function getTabsFromJSON(jsonWithTabs = null) {
+	if (jsonWithTabs == null) {
+		return [];
+	}
+	const tabs = jsonWithTabs[TabContainer.keyTabs];
+	// first of all, check if the Tabs are from this extension
+	if (tabs != null) {
+		const validTabs0 = filterForUnexpectedTabKeys(tabs);
+		return validTabs0.length === tabs.length
+			? validTabs0 // none were excluded (from this extension or a compatible one)
+			: getTabsFromExtensions(tabs, isWhySalesforceTab, {
+				label: "tabTitle",
+			}); // some of the Tabs had unexpected keys
+	}
+	// tabs == null
+	const bookmarks = jsonWithTabs.bookmarks;
+	if (bookmarks != null) {
+		return getTabsFromExtensions(bookmarks, isSalesforceEasyNavigatorTab, {
+			label: "title",
+		});
+	}
+	// bookmarks == null
+	return [];
+}
+
+/**
+ * Did not find a match for any supported extensions
+ */
+function showToastBrokenImportFile() {
+	showToast("error_unknown_file_structure", false);
+}
+
+/**
  * Presents all the Tabs which are about to be imported so the user may pick which ones to actually import, then runs the import with the selected Tabs
  * @param {File|File[]} files - The file(s) to read and validate.
  * @param {Object} [importConfig={}] an Object with the following keys
@@ -156,10 +257,12 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 	const fileTabsIsArray = Array.isArray(fileTabs) && fileTabs.length > 1;
 	const availableTabs = [];
 	for (const ft of fileTabs) {
-		if (Array.isArray(ft)) {
-			availableTabs.push(...ft);
+		const tabs = Array.isArray(ft)
+			? getTabsFromJSON({ [TabContainer.keyTabs]: ft })
+			: getTabsFromJSON(ft);
+		if (tabs.length === 0) {
+			showToastBrokenImportFile();
 		} else {
-			const tabs = ft[TabContainer.keyTabs];
 			availableTabs.push(...tabs);
 		}
 	}
@@ -167,7 +270,7 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 	const importTabs = TabContainer.getThrowawayInstance({
 		tabs: availableTabs,
 	}); // ensure no duplicates
-	importTabs.sort({ sortBy: "url" }, false); // sort by label asc without sync
+	importTabs.sort({ sortBy: "url" }, false); // sort by url asc without sync
 	const {
 		modalParent,
 		saveButton,

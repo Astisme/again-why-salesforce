@@ -554,6 +554,10 @@
 		"message": "translator wurde noch nicht initialisiert.",
 		"description": "[error] TranslationService war noch nicht bereit"
 	},
+	"error_unknown_file_structure": {
+		"message": "Wir konnten eine Datei, die Sie importieren wollten, nicht verstehen\nWenn das Problem weiterhin besteht, teilen Sie es uns bitte mit, indem Sie ein GitHub-Issue eröffnen",
+		"description": "[Import] die Datei des Benutzers wurde nicht erkannt"
+	},
 	"error_unknown_message": {
 		"message": "Unbekannte Nachricht erhalten",
 		"description": "eine unbekannte Nachricht wurde von einem Listener empfangen"
@@ -1449,6 +1453,10 @@
 	"underline_wavy": {
 		"message": "Wellig unterstreichen",
 		"description": "Dekorationsstiloption zum Anwenden einer welligen Unterstreichung auf Tab-Text"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Sie haben nicht gespeicherte Änderungen. Möchten Sie die Seite verlassen, ohne zu speichern?",
+		"description": "[manage-tabs] der Benutzer wollte zu einem Tab wechseln, ohne vorher zu speichern"
 	},
 	"unselect_all": {
 		"message": "Auswahl Aufheben",

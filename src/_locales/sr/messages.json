@@ -555,6 +555,10 @@
 		"message": "преводилац још није био иницијализован.",
 		"description": "[грешка] TranslationService није био спреман"
 	},
+	"error_unknown_file_structure": {
+		"message": "Нисмо успели да разумемо датотеку коју сте желели да увезете\nАко се проблем настави, поделите га са нама отварањем GitHub пријаве",
+		"description": "[увоз] корисникова датотека није препозната"
+	},
 	"error_unknown_message": {
 		"message": "Примљена непозната порука",
 		"description": "примљена је непозната порука од слушаоца"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Подвучено Таласасто",
 		"description": "Опција стила декорације за примену таласастог подвлачења на текст Tab-а"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Imate nesačuvane promene. Da li želite da odete bez čuvanja?",
+		"description": "[manage-tabs] korisnik je zatražio da ode na Tab bez prethodnog čuvanja"
 	},
 	"unselect_all": {
 		"message": "Поништи Избор Свих",

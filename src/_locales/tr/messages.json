@@ -555,6 +555,10 @@
 		"message": "çevirmen henüz başlatılmadı.",
 		"description": "[hata] TranslationService hazır değildi"
 	},
+	"error_unknown_file_structure": {
+		"message": "İçe aktarmak istediğiniz bir dosyayı anlayamadık\nSorun devam ederse, lütfen bir GitHub sorunu açarak bunu bizimle paylaşın",
+		"description": "[içe aktar] kullanıcının dosyası tanınmadı"
+	},
 	"error_unknown_message": {
 		"message": "Bilinmeyen mesaj alındı",
 		"description": "bir dinleyiciden bilinmeyen bir mesaj alındı"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Dalgalı Altı Çizili",
 		"description": "Sekme metnine dalgalı altı çizili uygulamak için dekorasyon stili seçeneği"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Kaydedilmemiş değişiklikleriniz var. Kaydetmeden ayrılmak istiyor musunuz?",
+		"description": "[manage-tabs] kullanıcı önce kaydetmeden bir Tab öğesine gitmek istedi"
 	},
 	"unselect_all": {
 		"message": "Tüm Seçimi Kaldır",

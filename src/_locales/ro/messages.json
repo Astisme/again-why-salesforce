@@ -555,6 +555,10 @@
 		"message": "traducătorul nu a fost încă inițializat.",
 		"description": "[eroare] TranslationService nu era gata"
 	},
+	"error_unknown_file_structure": {
+		"message": "Nu am putut înțelege un fișier pe care ați dorit să îl importați\nDacă problema persistă, vă rugăm să ne-o comunicați prin deschiderea unei probleme pe GitHub",
+		"description": "[import] fișierul utilizatorului nu a fost recunoscut"
+	},
 	"error_unknown_message": {
 		"message": "Mesaj necunoscut primit",
 		"description": "un mesaj necunoscut a fost primit de la un ascultător"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Subliniat Ondulat",
 		"description": "Opțiune de stil de decorare pentru aplicarea unei sublinieri ondulate la textul Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Aveți modificări nesalvate. Doriți să părăsiți pagina fără a salva?",
+		"description": "[manage-tabs] utilizatorul a solicitat accesarea unui Tab fără a salva mai întâi"
 	},
 	"unselect_all": {
 		"message": "Deselectează Tot",

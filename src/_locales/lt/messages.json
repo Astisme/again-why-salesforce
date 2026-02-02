@@ -555,6 +555,10 @@
 		"message": "vertėjas dar nebuvo inicializuotas.",
 		"description": "[klaida] TranslationService nebuvo paruoštas"
 	},
+	"error_unknown_file_structure": {
+		"message": "Mums nepavyko suprasti failo, kurį norėjote importuoti\nJei problema išlieka, pasidalykite ja su mumis atidarydami „GitHub“ problemą",
+		"description": "[importuoti] vartotojo failas neatpažintas"
+	},
 	"error_unknown_message": {
 		"message": "Gauta nežinoma žinutė",
 		"description": "iš klausytojo gauta nežinoma žinutė"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Banguotas pabraukimas",
 		"description": "Dekoravimo stiliaus parinktis banguoto pabraukimo taikymui Tab tekstui"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Turite neišsaugotų pakeitimų. Ar norite išeiti neišsaugoję?",
+		"description": "[manage-tabs] vartotojas paprašė pereiti į Tab prieš tai neišsaugojęs"
 	},
 	"unselect_all": {
 		"message": "Panaikinti Visų Pasirinkimą",

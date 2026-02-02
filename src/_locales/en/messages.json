@@ -555,6 +555,10 @@
 		"message": "translator was not yet initialized.",
 		"description": "[error] the TranslationService was not ready"
 	},
+	"error_unknown_file_structure": {
+		"message": "We could not understand a file you wanted to Import\nIf the issue persists, please share it with us by opening a GitHub issue",
+		"description": "[import] the user's file was not recognized"
+	},
 	"error_unknown_message": {
 		"message": "Unknown message received",
 		"description": "an unknown message has been received from a listener"
@@ -588,8 +592,8 @@
 		"description": "[popup] title on export button"
 	},
 	"extension_description": {
-		"message": "Create and manage custom $tabs in the available space on $salesforce_lightning Setup page.",
-		"description": "[manifest] The description of this extension"
+		"message": "Create and manage custom Tabs in the available space on Salesforce Lightning Setup page.",
+		"description": "[manifest] The description of this extension DO NOT USE $VARIABLES"
 	},
 	"extension_label": {
 		"message": "Again, Why Salesforce",
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Underline Wavy",
 		"description": "Decoration style option to apply a wavy underline to $tab text"
+	},
+	"unsaved_changes_confirm": {
+		"message": "You have unsaved changes. Do you want to leave without saving?",
+		"description": "[manage-tabs] the user asked to go to a Tab without saving first"
 	},
 	"unselect_all": {
 		"message": "Unselect All",

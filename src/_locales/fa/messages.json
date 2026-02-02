@@ -555,6 +555,10 @@
 		"message": "translator هنوز مقداردهی اولیه نشده است.",
 		"description": "[error] سرویس ترجمه (TranslationService) آماده نبود"
 	},
+	"error_unknown_file_structure": {
+		"message": "ما متوجه فایلی که می‌خواستید وارد کنید نشدیم\nاگر مشکل همچنان ادامه داشت، لطفاً با باز کردن یک گزارش در GitHub آن را با ما در میان بگذارید",
+		"description": "[وارد کردن] فایل کاربر شناسایی نشد"
+	},
 	"error_unknown_message": {
 		"message": "پیام ناشناخته دریافت شد",
 		"description": "یک پیام ناشناخته از شنونده دریافت شده است"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "زیرخط موجی",
 		"description": "گزینه سبک تزئینی برای اعمال زیرخط موجی به متن Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "تغییرات ذخیره نشده دارید. آیا می‌خواهید بدون ذخیره کردن خارج شوید؟",
+		"description": "[manage-tabs] کاربر درخواست کرده بدون ذخیره‌سازی اولیه به یک Tab برود"
 	},
 	"unselect_all": {
 		"message": "لغو انتخاب همه",

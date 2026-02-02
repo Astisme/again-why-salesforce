@@ -555,6 +555,10 @@
 		"message": "mtafsiri bado hajaanzishwa.",
 		"description": "[hitilafu] TranslationService haikuwa tayari"
 	},
+	"error_unknown_file_structure": {
+		"message": "Hatukuweza kuelewa faili uliyotaka kuleta\nIkiwa tatizo litaendelea, tafadhali shiriki nasi kwa kufungua suala la GitHub",
+		"description": "[leta] faili ya mtumiaji haikutambuliwa"
+	},
 	"error_unknown_message": {
 		"message": "Ujumbe usiojulikana umepokewa",
 		"description": "ujumbe usiojulikana umepokewa kutoka kwa msikilizaji"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Pigia mstari wa mawimbi",
 		"description": "Chaguo la mtindo wa mapambo kwa kutumia mstari wa mawimbi kwenye maandishi ya Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Una mabadiliko ambayo hayajahifadhiwa. Je, unataka kuondoka bila kuhifadhi?",
+		"description": "[manage-tabs] mtumiaji aliomba kwenda kwenye Tab bila kuhifadhi kwanza"
 	},
 	"unselect_all": {
 		"message": "Ondoa Uchaguzi wa Zote",

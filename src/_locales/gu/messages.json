@@ -555,6 +555,10 @@
 		"message": "translator હજી ઈનિશિયલાઈઝ થયું નથી.",
 		"description": "[error] TranslationService રેડી નથી"
 	},
+	"error_unknown_file_structure": {
+		"message": "તમે જે ફાઇલ આયાત કરવા માંગતા હતા તે અમે સમજી શક્યા નથી\nજો સમસ્યા ચાલુ રહે, તો કૃપા કરીને GitHub ઇશ્યુ ખોલીને અમારી સાથે શેર કરો",
+		"description": "[આયાત કરો] વપરાશકર્તાની ફાઇલ ઓળખાઈ નથી"
+	},
 	"error_unknown_message": {
 		"message": "અજાણ્યો સંદેશ પ્રાપ્ત થયો",
 		"description": "એક શ્રોતા પાસેથી અજાણ્યો સંદેશ પ્રાપ્ત થયો છે"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "લહેરદાર અંડરલાઇન",
 		"description": "Tab લખાણ નીચે તરંગી અંડરલાઇન લાગુ કરવા માટે ડેકોરેશન શૈલી વિકલ્પ"
+	},
+	"unsaved_changes_confirm": {
+		"message": "તમારી પાસે સાચવેલ ન હોય તેવા ફેરફારો છે. શું તમે સાચવ્યા વિના છોડવા માંગો છો?",
+		"description": "[manage-tabs] વપરાશકર્તાએ પહેલા સાચવ્યા વિના Tab પર જવાનું કહ્યું"
 	},
 	"unselect_all": {
 		"message": "બધાની પસંદગી દૂર કરો",

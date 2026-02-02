@@ -158,6 +158,35 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 	});
 
 	await t.step(
+		"check for unexpected keys",
+		() => {
+			assert(
+				Tab.hasUnexpectedKeys({
+					label: "Test",
+					url: "https://example.com",
+					invalidKey: "value",
+				}),
+			);
+			assert(
+				Tab.hasUnexpectedKeys({
+					tabTitle: "Test",
+					url: "https://example.com",
+					org: "value",
+				}),
+			);
+			assertFalse(
+				Tab.hasUnexpectedKeys({
+					label: "Settings",
+					url: "https://example.com/settings",
+					org: "testorg",
+					[Tab.keyClickCount]: 8,
+					[Tab.keyClickDate]: currentDate,
+				}),
+			);
+		},
+	);
+
+	await t.step(
 		"throws error when object contains unexpected keys",
 		() => {
 			assertThrows(

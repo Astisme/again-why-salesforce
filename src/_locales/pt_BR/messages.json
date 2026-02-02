@@ -555,6 +555,10 @@
 		"message": "o tradutor ainda não foi inicializado.",
 		"description": "[erro] o TranslationService não estava pronto"
 	},
+	"error_unknown_file_structure": {
+		"message": "Não conseguimos entender um arquivo que você desejava importar\nSe o problema persistir, compartilhe-o conosco abrindo uma issue no GitHub",
+		"description": "[importar] o arquivo do usuário não foi reconhecido"
+	},
 	"error_unknown_message": {
 		"message": "Mensagem desconhecida recebida",
 		"description": "uma mensagem desconhecida foi recebida de um listener"
@@ -1450,6 +1454,10 @@
 	"underline_wavy": {
 		"message": "Sublinhar ondulado",
 		"description": "Opção de estilo de decoração para aplicar um sublinhado ondulado ao texto de Tab"
+	},
+	"unsaved_changes_confirm": {
+		"message": "Você tem alterações não salvas. Deseja sair sem salvar?",
+		"description": "[manage-tabs] o usuário solicitou ir para uma Tab sem salvar primeiro"
 	},
 	"unselect_all": {
 		"message": "Desmarcar Todos",

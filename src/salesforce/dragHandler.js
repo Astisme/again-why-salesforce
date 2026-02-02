@@ -134,7 +134,7 @@ function setupDrag(callback) {
 	closestTag = table == null ? "li" : "tr";
 	containerName = table == null ? "ul" : "table";
 	dragElements = callback;
-	if (container == null) setTimeout(() => setupDrag(), 500);
+	if (container == null) setTimeout(() => setupDrag(callback), 500);
 	else createListeners();
 }
 
@@ -153,7 +153,7 @@ export function setupDragForUl(callback) {
  * @param {function} callback - the function to call when the drag operation has been completed by the user
  */
 export function setupDragForTable(callback) {
-	table = document.getElementById("sortable-table");
+	table = document.querySelector("#sortable-table > tbody");
 	ul = null;
 	setupDrag(callback);
 }
