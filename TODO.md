@@ -31,7 +31,7 @@ it will guide the user in these phases to let them understand how to use the ext
 1. Explain that they'll be able to change the behaviour of the extension by tweaking the options found in this page and that they'll have the possibility to style their Tabs by switching to the related tab found in the header (generic Tabs, Org Tabs, generic pinned Tabs, Org pinned Tabs) and that they'll be able to change both when the Tab is inactive (when they're currently not on the related page) or active (when they are on the related page)
 1. tell the user that the tutorial is over and wish them to have fun
 
-- [ ] after i click on the tab to navigate to its page, where the next step would be to click on the slashed star, the program cannot find the slashed star
+- [x] after i click on the tab to navigate to its page, where the next step would be to click on the slashed star, the program cannot find the slashed star
 - [ ]
 - [ ]
 - [ ]
