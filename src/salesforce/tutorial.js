@@ -291,6 +291,11 @@ class Tutorial {
 					once: true,
 				});
 			}
+		} else {
+			// Step has no element to highlight, hide any existing highlight
+			if (this.highlightBox) {
+				this.highlightBox.style.display = "none";
+			}
 		}
 		await this.showMessage(step);
 		if (step.waitFor == null) {

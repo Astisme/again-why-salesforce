@@ -1,5 +1,6 @@
 some of these have already been created but there are some issues.
-find one of such issues as listed below and work on in. when you've completed it, mark it as completed and commit your changes.
+find one of such issues as listed below and work on in. when you've completed it, commit your changes and STOP.
+DO NOT git push
 keep your commits concise and reviewable by a human.
 before committing, run `deno task checks` and fix whatever comes up as errors (ignore missing-keys-report.json: if you get to it, continue). if everything works fine, run `deno task dev-firefox` and fix any new errors. if no errors come up, you're allowed to commit with a concise but useful message.
 study this file
@@ -32,6 +33,8 @@ it will guide the user in these phases to let them understand how to use the ext
 1. tell the user that the tutorial is over and wish them to have fun
 
 - [x] after i click on the tab to navigate to its page, where the next step would be to click on the slashed star, the program cannot find the slashed star
+- [x] after i click on an highlighted element, the next step should remove the highlight but it is currently kept forever
+- [ ] for the step that should redirect to the Account page, the ok button to confirm the redirect is not provided
 - [ ]
 - [ ]
 - [ ]
