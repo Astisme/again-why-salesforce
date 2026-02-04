@@ -1566,5 +1566,19 @@
 	"tutorial_end": {
 		"message": "Tutorial completed! Have fun using the extension.",
 		"description": "[tutorial] end"
+	},
+	"tutorial_continue_prompt": {
+		"message": "You have an unfinished tutorial. Do you want to continue from step $1?",
+		"description": "[tutorial] prompt to continue tutorial",
+		"placeholders": {
+			"1": {
+				"content": "$1",
+				"example": "5"
+			}
+		}
+	},
+	"tutorial_restart_prompt": {
+		"message": "Do you want to start the tutorial from the beginning?",
+		"description": "[tutorial] prompt to restart tutorial"
 	}
 }

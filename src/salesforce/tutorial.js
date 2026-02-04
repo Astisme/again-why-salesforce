@@ -95,15 +95,18 @@ class Tutorial {
 	 */
 	async initSteps() {
 		this.shortcut = await this.getSettingsShortcut();
+		const accountPage = "ObjectManager/Account/FieldsAndRelationships/view";
 		this.steps = [
 			{
 				message: "tutorial_restart",
 				action: "info",
+				pageUrl: "SetupOneHome/home",
 			},
 			{
 				element: () => getSetupTabUl(),
 				message: "tutorial_favourite_tabs",
 				action: "highlight",
+				pageUrl: "SetupOneHome/home",
 			},
 			{
 				element: this.#getExtensionElementWithLinkInSetup,
@@ -114,6 +117,7 @@ class Tutorial {
 				message: "tutorial_click_highlighted_tab",
 				action: "highlight",
 				waitFor: "click",
+				pageUrl: "SetupOneHome/home",
 			},
 			{
 				element: this.#getStarsContainer,
@@ -125,16 +129,18 @@ class Tutorial {
 				action: "highlight",
 				waitFor: "click",
 				awaitsCustomEvent: true,
+				pageUrl: "ManageUsers/home", // After clicking "Users" tab
 			},
 			{
 				message: "tutorial_redirect_account",
 				action: "confirm",
 				onConfirm: () => {
 					performLightningRedirect(
-						`${SETUP_LIGHTNING}ObjectManager/Account/FieldsAndRelationships/view`,
+						`${SETUP_LIGHTNING}${accountPage}`,
 					);
 				},
 				waitFor: "redirect",
+				pageUrl: "ManageUsers/home",
 			},
 			{
 				element: this.#getStarsContainer,
@@ -146,32 +152,37 @@ class Tutorial {
 				action: "highlight",
 				waitFor: "click",
 				awaitsCustomEvent: true,
+				pageUrl: accountPage,
 			},
 			{
 				element: () => {
 					const ul = getSetupTabUl();
 					if (!ul) return null;
 					return ul.querySelector(
-						'a[title="ObjectManager/Account/FieldsAndRelationships/view"]',
+						`a[title="${accountPage}"]`,
 					)?.closest("li");
 				},
 				message: "tutorial_pin_tab",
 				action: "highlight",
+				pageUrl: accountPage,
 			},
 			{
 				element: this.#getExtensionElementWithLinkInSetup,
 				fakeElement: this.#generateExtensionElementWithLinkInSetup,
 				message: "tutorial_pinned_tab",
 				action: "highlight",
+				pageUrl: accountPage,
 			},
 			{
 				message: "tutorial_manage_tabs",
 				action: "info",
+				pageUrl: accountPage,
 			},
 			{
 				message: "tutorial_manage_tabs_link",
 				action: "info",
 				link: `${EXTENSION_GITHUB_LINK}/wiki/Manage-Tabs-modal`,
+				pageUrl: accountPage, // Still on this page
 			},
 			{
 				element: () =>
@@ -180,10 +191,12 @@ class Tutorial {
 					),
 				message: "tutorial_drag_users",
 				action: "highlight",
+				pageUrl: accountPage, // Modal is open on this page
 			},
 			{
 				message: "tutorial_pinned_explanation",
 				action: "info",
+				pageUrl: accountPage,
 			},
 			{
 				element: () =>
@@ -191,19 +204,23 @@ class Tutorial {
 				message: "tutorial_save_modal",
 				action: "highlight",
 				waitFor: "click",
+				pageUrl: accountPage,
 			},
 			{
 				message: "tutorial_keyboard_shortcut",
 				action: "info",
 				shortcut: this.shortcut,
+				pageUrl: accountPage, // After modal closes
 			},
 			{
 				message: "tutorial_settings_explanation",
 				action: "info",
+				// No pageUrl, as this is a browser extension page
 			},
 			{
 				message: "tutorial_end",
 				action: "info",
+				// No pageUrl
 			},
 		];
 	}
@@ -281,7 +298,7 @@ class Tutorial {
 		const step = this.steps[this.currentStep];
 		this.executeStep(step);
 		this.currentStep++;
-		sendExtensionMessage({ what: TUTORIAL_KEY, data: this.currentStep });
+		sendExtensionMessage({ what: "set", key: TUTORIAL_KEY, data: this.currentStep });
 	}
 
 	async getElementNowOrLater(step, callback) {
@@ -446,7 +463,7 @@ class Tutorial {
 			document.body.removeChild(this.highlightBox);
 			document.body.removeChild(this.spinner);
 		}
-		sendExtensionMessage({ what: TUTORIAL_KEY, data: this.steps.length });
+		sendExtensionMessage({ what: "set", key: TUTORIAL_KEY, data: this.steps.length });
 	}
 }
 
@@ -461,12 +478,14 @@ export async function checkTutorial() {
 	const completed = localStorage.getItem("tutorialCompleted");
 	if (!completed) {
 		const tutorialProgress = await sendExtensionMessage({
-			what: TUTORIAL_KEY,
+      what: "get", key: TUTORIAL_KEY,
 		});
+		const tutorial = new Tutorial();
+		await tutorial.initSteps(); // Initialize steps to get their properties
 
 		if (
 			tutorialProgress != null &&
-			tutorialProgress < new Tutorial().steps.length
+			tutorialProgress < tutorial.steps.length
 		) {
 			const translator = await ensureTranslatorAvailability();
 			const msg_continue = await translator.translate(
@@ -474,30 +493,29 @@ export async function checkTutorial() {
 				[tutorialProgress + 1],
 			);
 			if (confirm(msg_continue)) {
-				// Redirect to the appropriate page for the step, if necessary
-				// This part is missing in the initial TODO, but is implied by "perform lightning redirect to the correct page"
-				// For now, just start the tutorial from the saved step
-				const tutorial = new Tutorial();
+				const step = tutorial.steps[tutorialProgress];
+				if (step.pageUrl) {
+					performLightningRedirect(
+						`${SETUP_LIGHTNING}${step.pageUrl}`,
+					);
+				}
 				await tutorial.start(tutorialProgress);
 			} else {
 				// User doesn't want to continue, clear progress and ask to start from beginning
-				await sendExtensionMessage({ what: TUTORIAL_KEY, data: 0 });
-				if (
-					confirm(
-						"Do you want to start the tutorial from the beginning?",
-					)
-				) {
+				await sendExtensionMessage({ what: "set", key: TUTORIAL_KEY, data: 0 });
+				const msg_restart = await translator.translate(
+					"tutorial_restart_prompt",
+				);
+				if (confirm(msg_restart)) {
 					performLightningRedirect(
 						`${SETUP_LIGHTNING}SetupOneHome/home`,
 					);
-					const tutorial = new Tutorial();
 					await tutorial.start();
 				}
 			}
 		} else if (confirm("Do you want to start the tutorial?")) {
 			// redirect to setup home
 			performLightningRedirect(`${SETUP_LIGHTNING}SetupOneHome/home`);
-			const tutorial = new Tutorial();
 			await tutorial.start();
 		}
 	}
