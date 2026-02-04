@@ -2666,9 +2666,43 @@ export function generateTutorialElements() {
 	highlightBox.style.zIndex = "9999";
 	highlightBox.style.pointerEvents = "none";
 
+	// Spinner element
+	const spinner = document.createElement("div");
+	spinner.classList.add("slds-spinner_container");
+	spinner.style.position = "fixed";
+	spinner.style.top = "0";
+	spinner.style.left = "0";
+	spinner.style.width = "100%";
+	spinner.style.height = "100%";
+	spinner.style.zIndex = "10002"; // Higher than messageBox
+	spinner.style.display = "none"; // Hidden by default
+
+	const spinnerInner = document.createElement("div");
+	spinnerInner.setAttribute("role", "status");
+	spinnerInner.classList.add(
+		"slds-spinner",
+		"slds-spinner_medium",
+		"slds-spinner_brand",
+	);
+	spinner.appendChild(spinnerInner);
+
+	const assistiveText = document.createElement("span");
+	assistiveText.classList.add("slds-assistive-text");
+	assistiveText.textContent = "Loading...";
+	spinnerInner.appendChild(assistiveText);
+
+	const dotA = document.createElement("div");
+	dotA.classList.add("slds-spinner__dot-a");
+	spinnerInner.appendChild(dotA);
+
+	const dotB = document.createElement("div");
+	dotB.classList.add("slds-spinner__dot-b");
+	spinnerInner.appendChild(dotB);
+
 	return {
 		overlay,
 		messageBox,
 		highlightBox,
+		spinner,
 	};
 }

@@ -38,6 +38,11 @@ class Tutorial {
 		 */
 		this.highlightBox = null;
 		/**
+		 * Spinner element to show loading states.
+		 * @type {HTMLElement|null}
+		 */
+		this.spinner = null; // New property
+		/**
 		 * Flag indicating whether the tutorial is currently active.
 		 * @type {boolean}
 		 */
@@ -224,10 +229,30 @@ class Tutorial {
 		this.overlay = elements.overlay;
 		this.messageBox = elements.messageBox;
 		this.highlightBox = elements.highlightBox;
+		this.spinner = elements.spinner; // Add spinner
 
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
 		document.body.appendChild(this.highlightBox);
+		document.body.appendChild(this.spinner); // Append spinner
+	}
+
+	/**
+	 * Shows the Salesforce-like spinner.
+	 */
+	showSpinner() {
+		if (this.spinner) {
+			this.spinner.style.display = "block";
+		}
+	}
+
+	/**
+	 * Hides the Salesforce-like spinner.
+	 */
+	hideSpinner() {
+		if (this.spinner) {
+			this.spinner.style.display = "none";
+		}
 	}
 
 	/**
@@ -236,6 +261,7 @@ class Tutorial {
 	 * Otherwise, executes the current step's logic.
 	 */
 	nextStep() {
+		this.showSpinner(); // Show spinner when starting the next step
 		if (this.currentStep >= this.steps.length) {
 			this.end();
 			return;
@@ -280,6 +306,7 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
+		this.hideSpinner(); // Hide spinner when executing a step
 		/*
     if(step.waitFor === "redirect"){
     }
@@ -405,6 +432,7 @@ class Tutorial {
 			document.body.removeChild(this.overlay);
 			document.body.removeChild(this.messageBox);
 			document.body.removeChild(this.highlightBox);
+			document.body.removeChild(this.spinner); // Remove spinner
 		}
 		// Mark tutorial as completed
 		localStorage.setItem("tutorialCompleted", "true");
