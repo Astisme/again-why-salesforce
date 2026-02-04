@@ -40,10 +40,10 @@ it will guide the user in these phases to let them understand how to use the ext
 - [x] after i click on an highlighted element, the next step should remove the highlight but it is currently kept forever
 - [x] for the step that should redirect to the Account page, the ok button to confirm the redirect is not provided
 - [x] after i click on the star after being redirected to the account page, nothing happens and the tutorial freezes
-- [ ] show the salesforce spinner when the step is completed and hide it when the following step has started
-- [ ] save the tutorial progress using `/functions.js/sendExtensionMessage` with a what = `export const TUTORIAL_KEY = "tutorial-progress"` from `/constants.js`
-- [ ] when checking if the user has already completed the tutorial, also check if they have already started it but not completed it. if yes, prompt them to restart from where they left off. if yes, perform lightining redirect to the correct page for the step they have to perform.
-- [ ] if the user resizes the browser window, the highlight overlay is kept in place. find a better alternative (maybe directly add a css property and toggle the related class? if going this way, do not use `.hightlighted` as this is for other styles)
+- [x] show the salesforce spinner when the step is completed and hide it when the following step has started
+- [x] save the tutorial progress using `/functions.js/sendExtensionMessage` with a what = `export const TUTORIAL_KEY = "tutorial-progress"` from `/constants.js`
+- [x] when checking if the user has already completed the tutorial, also check if they have already started it but not completed it. if yes, prompt them to restart from where they left off. if yes, perform lightining redirect to the correct page for the step they have to perform.
+- [x] if the user resizes the browser window, the highlight overlay is kept in place. find a better alternative (maybe directly add a css property and toggle the related class? if going this way, do not use `.hightlighted` as this is for other styles)
 - [ ] ensure that each step with an `element` property, has a `fakeElement` function that creates the element if it is not found.
 - [ ]
 - [ ]

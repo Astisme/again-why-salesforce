@@ -10,6 +10,8 @@ import { ACTION_ADD, getSetupTabUl, performActionOnTabs } from "./content.js";
 import { showFavouriteButton, STAR_ID } from "./favourite-manager.js";
 import { generateTutorialElements } from "./generator.js";
 
+const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
+
 /**
  * Tutorial class to guide users through the extension features.
  * Manages the step-by-step tutorial process, including element highlighting,
@@ -138,7 +140,6 @@ class Tutorial {
 				waitFor: "click",
 				awaitsCustomEvent: true,
 				pageUrl: "ManageUsers/home", // After clicking "Users" tab
-				beginsBlock: true,
 			},
 			{
 				message: "tutorial_redirect_account",
@@ -274,15 +275,14 @@ class Tutorial {
 
 		// Define the custom highlight CSS class
 		this.highlightStyleElement = document.createElement("style");
-		this.highlightStyleElement.id = "awsf-tutorial-highlight-style";
 		this.highlightStyleElement.textContent = `
-            .awsf-tutorial-highlight {
-                outline: 3px solid yellow !important; /* Visible border */
-                box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important; /* Dark overlay effect */
-                position: relative !important; /* Ensure z-index works correctly */
-                z-index: 10000 !important; /* Above other content, below message box */
-            }
-        `;
+        .${TUTORIAL_HIGHLIGHT_CLASS} {
+            background: yellow !important;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important;
+            position: relative !important;
+            z-index: 10000 !important;
+        }
+    `;
 		document.head.appendChild(this.highlightStyleElement);
 
 		document.body.appendChild(this.overlay);
@@ -395,7 +395,7 @@ class Tutorial {
 			// Step has no element to highlight, remove any existing highlight
 			if (this.highlightedElement) {
 				this.highlightedElement.classList.remove(
-					"awsf-tutorial-highlight",
+					TUTORIAL_HIGHLIGHT_CLASS,
 				);
 				this.highlightedElement = null;
 			}
@@ -414,10 +414,10 @@ class Tutorial {
 	highlightElement(el) {
 		// Remove highlight from previously highlighted element
 		if (this.highlightedElement) {
-			this.highlightedElement.classList.remove("awsf-tutorial-highlight");
+			this.highlightedElement.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		}
 		// Add highlight to the new element
-		el.classList.add("awsf-tutorial-highlight");
+		el.classList.add(TUTORIAL_HIGHLIGHT_CLASS);
 		this.highlightedElement = el;
 	}
 
@@ -496,7 +496,7 @@ class Tutorial {
 			// Clean up highlight
 			if (this.highlightedElement) {
 				this.highlightedElement.classList.remove(
-					"awsf-tutorial-highlight",
+					TUTORIAL_HIGHLIGHT_CLASS,
 				);
 			}
 			if (
