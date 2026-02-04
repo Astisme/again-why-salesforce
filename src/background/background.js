@@ -27,6 +27,7 @@ import {
 	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
+	TUTORIAL_KEY,
 	WHAT_EXPORT,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHY_KEY,
@@ -292,6 +293,7 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 		}
 		case WHY_KEY:
 		case LOCALE_KEY:
+		case TUTORIAL_KEY:
 			if (changedToArray) {
 				tobeset = tobeset[0];
 			}

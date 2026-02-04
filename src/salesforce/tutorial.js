@@ -101,12 +101,14 @@ class Tutorial {
 				message: "tutorial_restart",
 				action: "info",
 				pageUrl: "SetupOneHome/home",
+				beginsBlock: true,
 			},
 			{
 				element: () => getSetupTabUl(),
 				message: "tutorial_favourite_tabs",
 				action: "highlight",
 				pageUrl: "SetupOneHome/home",
+				beginsBlock: true,
 			},
 			{
 				element: this.#getExtensionElementWithLinkInSetup,
@@ -118,6 +120,7 @@ class Tutorial {
 				action: "highlight",
 				waitFor: "click",
 				pageUrl: "SetupOneHome/home",
+				beginsBlock: true,
 			},
 			{
 				element: this.#getStarsContainer,
@@ -130,6 +133,7 @@ class Tutorial {
 				waitFor: "click",
 				awaitsCustomEvent: true,
 				pageUrl: "ManageUsers/home", // After clicking "Users" tab
+				beginsBlock: true,
 			},
 			{
 				message: "tutorial_redirect_account",
@@ -153,6 +157,7 @@ class Tutorial {
 				waitFor: "click",
 				awaitsCustomEvent: true,
 				pageUrl: accountPage,
+				beginsBlock: true,
 			},
 			{
 				element: () => {
@@ -165,6 +170,7 @@ class Tutorial {
 				message: "tutorial_pin_tab",
 				action: "highlight",
 				pageUrl: accountPage,
+				beginsBlock: true,
 			},
 			{
 				element: this.#getExtensionElementWithLinkInSetup,
@@ -177,6 +183,7 @@ class Tutorial {
 				message: "tutorial_manage_tabs",
 				action: "info",
 				pageUrl: accountPage,
+				beginsBlock: true,
 			},
 			{
 				message: "tutorial_manage_tabs_link",
@@ -211,10 +218,12 @@ class Tutorial {
 				action: "info",
 				shortcut: this.shortcut,
 				pageUrl: accountPage, // After modal closes
+				beginsBlock: true,
 			},
 			{
 				message: "tutorial_settings_explanation",
 				action: "info",
+				beginsBlock: true,
 				// No pageUrl, as this is a browser extension page
 			},
 			{
@@ -297,8 +306,14 @@ class Tutorial {
 		this.retryCount = 0;
 		const step = this.steps[this.currentStep];
 		this.executeStep(step);
+		if (step.beginsBlock) {
+			sendExtensionMessage({
+				what: "set",
+				key: TUTORIAL_KEY,
+				set: this.currentStep,
+			});
+		}
 		this.currentStep++;
-		sendExtensionMessage({ what: "set", key: TUTORIAL_KEY, data: this.currentStep });
 	}
 
 	async getElementNowOrLater(step, callback) {
@@ -335,11 +350,6 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
-		this.hideSpinner();
-		/*
-    if(step.waitFor === "redirect"){
-    }
-    */
 		if (step.element) {
 			const el = await this.getElementNowOrLater(
 				step,
@@ -412,6 +422,7 @@ class Tutorial {
 		if (step.shortcut) {
 			message += `\n\nShortcut: ${step.shortcut}`;
 		}
+		this.hideSpinner();
 		this.messageBox.textContent = message;
 		step.message = message;
 	}
@@ -463,7 +474,11 @@ class Tutorial {
 			document.body.removeChild(this.highlightBox);
 			document.body.removeChild(this.spinner);
 		}
-		sendExtensionMessage({ what: "set", key: TUTORIAL_KEY, data: this.steps.length });
+		sendExtensionMessage({
+			what: "set",
+			key: TUTORIAL_KEY,
+			set: this.steps.length,
+		});
 	}
 }
 
@@ -475,48 +490,54 @@ class Tutorial {
  * @return {Promise<void>} Resolves after checking and potentially starting the tutorial.
  */
 export async function checkTutorial() {
-	const completed = localStorage.getItem("tutorialCompleted");
-	if (!completed) {
-		const tutorialProgress = await sendExtensionMessage({
-      what: "get", key: TUTORIAL_KEY,
-		});
-		const tutorial = new Tutorial();
-		await tutorial.initSteps(); // Initialize steps to get their properties
-
-		if (
-			tutorialProgress != null &&
-			tutorialProgress < tutorial.steps.length
-		) {
-			const translator = await ensureTranslatorAvailability();
-			const msg_continue = await translator.translate(
-				"tutorial_continue_prompt",
-				[tutorialProgress + 1],
-			);
-			if (confirm(msg_continue)) {
-				const step = tutorial.steps[tutorialProgress];
-				if (step.pageUrl) {
-					performLightningRedirect(
-						`${SETUP_LIGHTNING}${step.pageUrl}`,
-					);
-				}
-				await tutorial.start(tutorialProgress);
-			} else {
-				// User doesn't want to continue, clear progress and ask to start from beginning
-				await sendExtensionMessage({ what: "set", key: TUTORIAL_KEY, data: 0 });
-				const msg_restart = await translator.translate(
-					"tutorial_restart_prompt",
-				);
-				if (confirm(msg_restart)) {
-					performLightningRedirect(
-						`${SETUP_LIGHTNING}SetupOneHome/home`,
-					);
-					await tutorial.start();
-				}
-			}
-		} else if (confirm("Do you want to start the tutorial?")) {
+	const tutorialProgress = await sendExtensionMessage({
+		what: "get",
+		key: TUTORIAL_KEY,
+	});
+	const tutorial = new Tutorial();
+	await tutorial.initSteps(); // Initialize steps to get their properties
+	const translator = await ensureTranslatorAvailability();
+	if (tutorialProgress == null) {
+		if (confirm(await translator.translate("tutorial_start_prompt"))) {
 			// redirect to setup home
 			performLightningRedirect(`${SETUP_LIGHTNING}SetupOneHome/home`);
-			await tutorial.start();
+			tutorial.start();
+		}
+		return;
+	}
+	if (
+		confirm(
+			await translator.translate(
+				"tutorial_continue_prompt",
+				[tutorialProgress + 1],
+			),
+		)
+	) {
+		const step = tutorial.steps[tutorialProgress];
+		if (step.pageUrl) {
+			performLightningRedirect(
+				`${SETUP_LIGHTNING}${step.pageUrl}`,
+			);
+		}
+		tutorial.start(tutorialProgress);
+	} else {
+		// User doesn't want to continue, clear progress and ask to start from beginning
+		if (
+			confirm(
+				await translator.translate(
+					"tutorial_restart_prompt",
+				),
+			)
+		) {
+			await sendExtensionMessage({
+				what: "set",
+				key: TUTORIAL_KEY,
+				set: 0,
+			});
+			performLightningRedirect(
+				`${SETUP_LIGHTNING}SetupOneHome/home`,
+			);
+			tutorial.start();
 		}
 	}
 }
