@@ -6,9 +6,14 @@ import {
 } from "/constants.js";
 import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
-import { ACTION_ADD, getSetupTabUl, performActionOnTabs } from "./content.js";
+import {
+	ACTION_ADD,
+	getSetupTabUl,
+	performActionOnTabs,
+	showToast,
+} from "./content.js";
 import { showFavouriteButton, STAR_ID } from "./favourite-manager.js";
-import { generateTutorialElements } from "./generator.js";
+import { generateTutorialElements, MODAL_ID } from "./generator.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
 
@@ -200,7 +205,7 @@ class Tutorial {
 			{
 				element: () =>
 					document.querySelector(
-						".modal .slds-table tbody tr:nth-child(2) .slds-icon-utility-drag",
+						`#${MODAL_ID} #sortable-table tr:nth-child(2) .slds-cell-wrap`,
 					),
 				message: "tutorial_drag_users",
 				action: "highlight",
@@ -213,7 +218,9 @@ class Tutorial {
 			},
 			{
 				element: () =>
-					document.querySelector('.modal button[data-i18n="save"]'),
+					document.querySelector(
+						`#${MODAL_ID} #again-why-salesforce-modal-confirm`,
+					),
 				message: "tutorial_save_modal",
 				action: "highlight",
 				waitFor: "click",
@@ -238,6 +245,12 @@ class Tutorial {
 				// No pageUrl
 			},
 		];
+		this.beginBlockStepIndexes = [];
+		for (const i in this.steps) {
+			if (this.steps[i].beginsBlock) {
+				this.beginBlockStepIndexes.push(Number(i));
+			}
+		}
 	}
 
 	/**
@@ -313,7 +326,7 @@ class Tutorial {
 	 * If all steps are completed, ends the tutorial.
 	 * Otherwise, executes the current step's logic.
 	 */
-	nextStep() {
+	async nextStep() {
 		this.showSpinner();
 		if (this.currentStep >= this.steps.length) {
 			this.end();
@@ -321,7 +334,7 @@ class Tutorial {
 		}
 		this.retryCount = 0;
 		const step = this.steps[this.currentStep];
-		this.executeStep(step);
+		await this.executeStep(step);
 		if (step.beginsBlock) {
 			sendExtensionMessage({
 				what: "set",
@@ -367,11 +380,33 @@ class Tutorial {
 	 */
 	async executeStep(step) {
 		if (step.element) {
-			const el = await this.getElementNowOrLater(
-				step,
-				this.executeStep.bind(this),
-			);
+			let el;
+			const canFakeElement = step.fakeElement;
+			if (canFakeElement) {
+				el = await this.getElementNowOrLater(
+					step,
+					this.executeStep.bind(this),
+				);
+			} else {
+				el = step.element();
+			}
 			if (el == null) {
+				if (!canFakeElement) {
+					showToast("tutorial_step_was_missed", false, true);
+					// reset to the beginning of the block
+					let maxIndex = 0;
+					for (
+						let b = maxIndex;
+						b < this.beginBlockStepIndexes.length &&
+						this.beginBlockStepIndexes[b] <= this.currentStep &&
+						this.beginBlockStepIndexes[b] >= maxIndex;
+						b++
+					) {
+						maxIndex = this.beginBlockStepIndexes[b];
+					}
+					this.currentStep = maxIndex;
+					this.nextStep();
+				}
 				return;
 			}
 			this.highlightElement(el);
@@ -400,7 +435,9 @@ class Tutorial {
 				this.highlightedElement = null;
 			}
 		}
+		const stepNo = this.currentStep;
 		await this.showMessage(step);
+		this.currentStep = stepNo;
 		if (step.action === "confirm" || step.waitFor == null) {
 			this.showConfirm(step);
 		}
@@ -434,10 +471,10 @@ class Tutorial {
 	async showMessage(step) {
 		const translator = await ensureTranslatorAvailability();
 		let message = await translator.translate(step.message);
-		if (step.link) {
+		if (step.link && !message.includes(step.link)) {
 			message += `\n\n${step.link}`;
 		}
-		if (step.shortcut) {
+		if (step.shortcut && !message.includes(step.shortcut)) {
 			message += `\n\nShortcut: ${step.shortcut}`;
 		}
 		this.hideSpinner();
