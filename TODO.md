@@ -1,9 +1,10 @@
+study this file
+DO NOT git push
+
 some of these have already been created but there are some issues.
 find one of such issues as listed below and work on in. when you've completed it, commit your changes and STOP.
-DO NOT git push
 keep your commits concise and reviewable by a human.
-before committing, run `deno task checks` and fix whatever comes up as errors (ignore missing-keys-report.json: if you get to it, continue). if everything works fine, run `deno task dev-firefox` and fix any new errors. if no errors come up, you're allowed to commit with a concise but useful message.
-study this file
+before committing, run `deno task fmt` and `deno task lint` and fix whatever comes up as errors (ignore missing-keys-report.json: if you get to it, continue). if everything works fine, run `deno task dev-firefox` and fix any new errors (this command simply builds the extension and is not interactive). if no errors come up, you're allowed to commit with a concise but useful message.
 study what is needed inside `src/salesforce` starting from `tutorial.js`
 do not rush your changes, think them through, we need to have a useful product, not fast updates.
 
@@ -35,6 +36,11 @@ it will guide the user in these phases to let them understand how to use the ext
 - [x] after i click on the tab to navigate to its page, where the next step would be to click on the slashed star, the program cannot find the slashed star
 - [x] after i click on an highlighted element, the next step should remove the highlight but it is currently kept forever
 - [x] for the step that should redirect to the Account page, the ok button to confirm the redirect is not provided
-- [ ]
+- [x] after i click on the star after being redirected to the account page, nothing happens and the tutorial freezes
+- [ ] ensure that each step with an `element` property, has a `fakeElement` function that creates the element if it is not found.
+- [ ] show the salesforce spinner when the step is completed and hide it when the following step has started
+- [ ] save the tutorial progress using `/functions.js/sendExtensionMessage` with a what = `export const TUTORIAL_KEY = "tutorial-progress"` from `/constants.js`
+- [ ] when checking if the user has already completed the tutorial, also check if they have already started it but not completed it. if yes, prompt them to restart from where they left off. if yes, perform lightining redirect to the correct page for the step they have to perform.
+- [ ] if the user resizes the browser window, the highlight overlay is kept in place. find a better alternative (maybe directly add a css property and toggle the related class? if going this way, do not use `.hightlighted` as this is for other styles)
 - [ ]
 - [ ]
