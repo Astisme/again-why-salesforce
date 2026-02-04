@@ -1,5 +1,9 @@
 "use strict";
-import { EXTENSION_GITHUB_LINK, SETUP_LIGHTNING } from "/constants.js";
+import {
+	EXTENSION_GITHUB_LINK,
+	SETUP_LIGHTNING,
+	TUTORIAL_KEY,
+} from "/constants.js";
 import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { ACTION_ADD, getSetupTabUl, performActionOnTabs } from "./content.js";
@@ -41,7 +45,7 @@ class Tutorial {
 		 * Spinner element to show loading states.
 		 * @type {HTMLElement|null}
 		 */
-		this.spinner = null; // New property
+		this.spinner = null;
 		/**
 		 * Flag indicating whether the tutorial is currently active.
 		 * @type {boolean}
@@ -208,14 +212,21 @@ class Tutorial {
 	 * Starts the tutorial by initializing steps, creating overlay elements, and beginning the first step.
 	 * Ensures the tutorial is not already active before proceeding.
 	 *
+	 * @param {number} [startStep=0] - The step index to start the tutorial from.
 	 * @return {Promise<void>} Resolves when the tutorial has started successfully.
 	 */
-	async start() {
+	async start(startStep = 0) {
 		if (this.isActive) return;
 		this.isActive = true;
 		await this.initSteps();
+
+		// Set the starting step, either from parameter or default 0
+		if (startStep >= 0 && startStep < this.steps.length) {
+			this.currentStep = startStep;
+		} else {
+			this.currentStep = 0;
+		}
 		this.createOverlay();
-		this.currentStep = 0;
 		this.nextStep();
 	}
 
@@ -229,12 +240,12 @@ class Tutorial {
 		this.overlay = elements.overlay;
 		this.messageBox = elements.messageBox;
 		this.highlightBox = elements.highlightBox;
-		this.spinner = elements.spinner; // Add spinner
+		this.spinner = elements.spinner;
 
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
 		document.body.appendChild(this.highlightBox);
-		document.body.appendChild(this.spinner); // Append spinner
+		document.body.appendChild(this.spinner);
 	}
 
 	/**
@@ -261,7 +272,7 @@ class Tutorial {
 	 * Otherwise, executes the current step's logic.
 	 */
 	nextStep() {
-		this.showSpinner(); // Show spinner when starting the next step
+		this.showSpinner();
 		if (this.currentStep >= this.steps.length) {
 			this.end();
 			return;
@@ -270,6 +281,7 @@ class Tutorial {
 		const step = this.steps[this.currentStep];
 		this.executeStep(step);
 		this.currentStep++;
+		sendExtensionMessage({ what: TUTORIAL_KEY, data: this.currentStep });
 	}
 
 	async getElementNowOrLater(step, callback) {
@@ -306,7 +318,7 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
-		this.hideSpinner(); // Hide spinner when executing a step
+		this.hideSpinner();
 		/*
     if(step.waitFor === "redirect"){
     }
@@ -432,10 +444,9 @@ class Tutorial {
 			document.body.removeChild(this.overlay);
 			document.body.removeChild(this.messageBox);
 			document.body.removeChild(this.highlightBox);
-			document.body.removeChild(this.spinner); // Remove spinner
+			document.body.removeChild(this.spinner);
 		}
-		// Mark tutorial as completed
-		localStorage.setItem("tutorialCompleted", "true");
+		sendExtensionMessage({ what: TUTORIAL_KEY, data: this.steps.length });
 	}
 }
 
@@ -449,7 +460,41 @@ class Tutorial {
 export async function checkTutorial() {
 	const completed = localStorage.getItem("tutorialCompleted");
 	if (!completed) {
-		if (confirm("Do you want to start the tutorial?")) {
+		const tutorialProgress = await sendExtensionMessage({
+			what: TUTORIAL_KEY,
+		});
+
+		if (
+			tutorialProgress != null &&
+			tutorialProgress < new Tutorial().steps.length
+		) {
+			const translator = await ensureTranslatorAvailability();
+			const msg_continue = await translator.translate(
+				"tutorial_continue_prompt",
+				[tutorialProgress + 1],
+			);
+			if (confirm(msg_continue)) {
+				// Redirect to the appropriate page for the step, if necessary
+				// This part is missing in the initial TODO, but is implied by "perform lightning redirect to the correct page"
+				// For now, just start the tutorial from the saved step
+				const tutorial = new Tutorial();
+				await tutorial.start(tutorialProgress);
+			} else {
+				// User doesn't want to continue, clear progress and ask to start from beginning
+				await sendExtensionMessage({ what: TUTORIAL_KEY, data: 0 });
+				if (
+					confirm(
+						"Do you want to start the tutorial from the beginning?",
+					)
+				) {
+					performLightningRedirect(
+						`${SETUP_LIGHTNING}SetupOneHome/home`,
+					);
+					const tutorial = new Tutorial();
+					await tutorial.start();
+				}
+			}
+		} else if (confirm("Do you want to start the tutorial?")) {
 			// redirect to setup home
 			performLightningRedirect(`${SETUP_LIGHTNING}SetupOneHome/home`);
 			const tutorial = new Tutorial();
