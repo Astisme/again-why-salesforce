@@ -37,10 +37,15 @@ class Tutorial {
 		 */
 		this.messageBox = null;
 		/**
-		 * Box used to highlight specific elements on the page.
+		 * The currently highlighted element.
 		 * @type {HTMLElement|null}
 		 */
-		this.highlightBox = null;
+		this.highlightedElement = null; // New property
+		/**
+		 * The dynamically created style element for highlighting.
+		 * @type {HTMLStyleElement|null}
+		 */
+		this.highlightStyleElement = null; // New property
 		/**
 		 * Spinner element to show loading states.
 		 * @type {HTMLElement|null}
@@ -265,12 +270,23 @@ class Tutorial {
 		const elements = generateTutorialElements();
 		this.overlay = elements.overlay;
 		this.messageBox = elements.messageBox;
-		this.highlightBox = elements.highlightBox;
 		this.spinner = elements.spinner;
+
+		// Define the custom highlight CSS class
+		this.highlightStyleElement = document.createElement("style");
+		this.highlightStyleElement.id = "awsf-tutorial-highlight-style";
+		this.highlightStyleElement.textContent = `
+            .awsf-tutorial-highlight {
+                outline: 3px solid yellow !important; /* Visible border */
+                box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important; /* Dark overlay effect */
+                position: relative !important; /* Ensure z-index works correctly */
+                z-index: 10000 !important; /* Above other content, below message box */
+            }
+        `;
+		document.head.appendChild(this.highlightStyleElement);
 
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
-		document.body.appendChild(this.highlightBox);
 		document.body.appendChild(this.spinner);
 	}
 
@@ -376,9 +392,12 @@ class Tutorial {
 				}
 			}
 		} else {
-			// Step has no element to highlight, hide any existing highlight
-			if (this.highlightBox) {
-				this.highlightBox.style.display = "none";
+			// Step has no element to highlight, remove any existing highlight
+			if (this.highlightedElement) {
+				this.highlightedElement.classList.remove(
+					"awsf-tutorial-highlight",
+				);
+				this.highlightedElement = null;
 			}
 		}
 		await this.showMessage(step);
@@ -388,19 +407,18 @@ class Tutorial {
 	}
 
 	/**
-	 * Highlights a specific HTML element by positioning the highlight box over it.
-	 * Calculates the element's bounding rectangle and adjusts the highlight box accordingly.
+	 * Highlights a specific HTML element by adding a CSS class.
 	 *
 	 * @param {HTMLElement} el - The HTML element to highlight.
 	 */
 	highlightElement(el) {
-		this.highlightBox.style.display = "none";
-		const rect = el.getBoundingClientRect();
-		this.highlightBox.style.top = `${rect.top}px`;
-		this.highlightBox.style.left = `${rect.left}px`;
-		this.highlightBox.style.width = `${rect.width}px`;
-		this.highlightBox.style.height = `${rect.height}px`;
-		this.highlightBox.style.display = "block";
+		// Remove highlight from previously highlighted element
+		if (this.highlightedElement) {
+			this.highlightedElement.classList.remove("awsf-tutorial-highlight");
+		}
+		// Add highlight to the new element
+		el.classList.add("awsf-tutorial-highlight");
+		this.highlightedElement = el;
 	}
 
 	/**
@@ -465,20 +483,38 @@ class Tutorial {
 	 * Ends the tutorial by cleaning up DOM elements and marking completion.
 	 * Removes the overlay, message box, and highlight box from the document,
 	 * sets the active flag to false, and stores completion status in localStorage.
+	 *
+	 * @param {boolean} [shouldSaveProgress=true] - Whether to save the tutorial's completion status.
 	 */
-	end() {
+	end(shouldSaveProgress = true) {
 		this.isActive = false;
 		if (this.overlay) {
 			document.body.removeChild(this.overlay);
 			document.body.removeChild(this.messageBox);
-			document.body.removeChild(this.highlightBox);
 			document.body.removeChild(this.spinner);
+
+			// Clean up highlight
+			if (this.highlightedElement) {
+				this.highlightedElement.classList.remove(
+					"awsf-tutorial-highlight",
+				);
+			}
+			if (
+				this.highlightStyleElement &&
+				this.highlightStyleElement.parentNode
+			) {
+				this.highlightStyleElement.parentNode.removeChild(
+					this.highlightStyleElement,
+				);
+			}
 		}
-		sendExtensionMessage({
-			what: "set",
-			key: TUTORIAL_KEY,
-			set: this.steps.length,
-		});
+		if (shouldSaveProgress) {
+			sendExtensionMessage({
+				what: "set",
+				key: TUTORIAL_KEY,
+				set: this.steps.length,
+			});
+		}
 	}
 }
 

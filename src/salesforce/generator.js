@@ -2659,13 +2659,6 @@ export function generateTutorialElements() {
 	messageBox.style.maxWidth = "400px";
 	messageBox.style.pointerEvents = "auto";
 
-	const highlightBox = document.createElement("div");
-	highlightBox.style.position = "absolute";
-	highlightBox.style.backgroundColor = "rgba(255,255,0,0.5)";
-	highlightBox.style.border = "2px solid yellow";
-	highlightBox.style.zIndex = "9999";
-	highlightBox.style.pointerEvents = "none";
-
 	// Spinner element
 	const spinner = document.createElement("div");
 	spinner.classList.add("slds-spinner_container");
@@ -2702,7 +2695,6 @@ export function generateTutorialElements() {
 	return {
 		overlay,
 		messageBox,
-		highlightBox,
 		spinner,
 	};
 }
