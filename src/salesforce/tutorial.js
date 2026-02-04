@@ -115,6 +115,7 @@ class Tutorial {
 				message: "tutorial_remove_favourite",
 				action: "highlight",
 				waitFor: "click",
+				awaitsCustomEvent: true,
 			},
 			{
 				message: "tutorial_redirect_account",
@@ -135,10 +136,16 @@ class Tutorial {
 				message: "tutorial_add_favourite",
 				action: "highlight",
 				waitFor: "click",
+				awaitsCustomEvent: true,
 			},
 			{
-				element: this.#getExtensionElementWithLinkInSetup,
-				fakeElement: this.#generateExtensionElementWithLinkInSetup,
+				element: () => {
+					const ul = getSetupTabUl();
+					if (!ul) return null;
+					return ul.querySelector(
+						'a[title="ObjectManager/Account/FieldsAndRelationships/view"]',
+					)?.closest("li");
+				},
 				message: "tutorial_pin_tab",
 				action: "highlight",
 			},
@@ -287,9 +294,20 @@ class Tutorial {
 			}
 			this.highlightElement(el);
 			if (step.waitFor === "click") {
-				el.addEventListener("click", () => this.nextStep(), {
-					once: true,
-				});
+				if (step.awaitsCustomEvent) {
+					document.addEventListener(
+						"actionFavourite:completed",
+						() => this.nextStep(),
+						{ once: true },
+					);
+				} else {
+					el.addEventListener("click", () => {
+						// Adding a delay to allow other click handlers and DOM updates to process
+						setTimeout(() => this.nextStep(), 200);
+					}, {
+						once: true,
+					});
+				}
 			}
 		} else {
 			// Step has no element to highlight, hide any existing highlight

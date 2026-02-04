@@ -275,6 +275,7 @@ async function actionFavourite() {
 	} else {
 		await addTab(url);
 	}
+	document.dispatchEvent(new CustomEvent("actionFavourite:completed"));
 }
 
 /**
