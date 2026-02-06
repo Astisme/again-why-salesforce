@@ -2,6 +2,11 @@
 import {
 	EXTENSION_GITHUB_LINK,
 	SETUP_LIGHTNING,
+	TUTORIAL_EVENT_ACTION_FAVOURITE,
+	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_PIN_TAB,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 	TUTORIAL_KEY,
 } from "/constants.js";
 import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
@@ -143,7 +148,7 @@ class Tutorial {
 				message: "tutorial_remove_favourite",
 				action: "highlight",
 				waitFor: "click",
-				awaitsCustomEvent: true,
+				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 				pageUrl: "ManageUsers/home", // After clicking "Users" tab
 			},
 			{
@@ -166,21 +171,21 @@ class Tutorial {
 				message: "tutorial_add_favourite",
 				action: "highlight",
 				waitFor: "click",
-				awaitsCustomEvent: true,
+				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_FAVOURITE,
 				pageUrl: accountPage,
 				beginsBlock: true,
 			},
 			{
 				element: () => {
-					const ul = getSetupTabUl();
-					if (!ul) return null;
-					return ul.querySelector(
+					return getSetupTabUl()?.querySelector(
 						`a[title="${accountPage}"]`,
 					)?.closest("li");
 				},
 				message: "tutorial_pin_tab",
 				action: "highlight",
 				pageUrl: accountPage,
+				waitFor: "click",
+				awaitsCustomEvent: TUTORIAL_EVENT_PIN_TAB,
 				beginsBlock: true,
 			},
 			{
@@ -194,6 +199,8 @@ class Tutorial {
 				message: "tutorial_manage_tabs",
 				action: "info",
 				pageUrl: accountPage,
+				waitFor: "click",
+				awaitsCustomEvent: TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 				beginsBlock: true,
 			},
 			{
@@ -210,6 +217,8 @@ class Tutorial {
 				message: "tutorial_drag_users",
 				action: "highlight",
 				pageUrl: accountPage, // Modal is open on this page
+				waitFor: "click",
+				awaitsCustomEvent: TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 			},
 			{
 				message: "tutorial_pinned_explanation",
@@ -410,21 +419,10 @@ class Tutorial {
 				return;
 			}
 			this.highlightElement(el);
-			if (step.waitFor === "click") {
-				if (step.awaitsCustomEvent) {
-					document.addEventListener(
-						"actionFavourite:completed",
-						() => this.nextStep(),
-						{ once: true },
-					);
-				} else {
-					el.addEventListener("click", () => {
-						// Adding a delay to allow other click handlers and DOM updates to process
-						setTimeout(() => this.nextStep(), 200);
-					}, {
-						once: true,
-					});
-				}
+			if (step.waitFor === "click" && !step.awaitsCustomEvent) {
+				el.addEventListener("click", () => this.nextStep(), {
+					once: true,
+				});
 			}
 		} else {
 			// Step has no element to highlight, remove any existing highlight
@@ -435,11 +433,15 @@ class Tutorial {
 				this.highlightedElement = null;
 			}
 		}
-		const stepNo = this.currentStep;
 		await this.showMessage(step);
-		this.currentStep = stepNo;
 		if (step.action === "confirm" || step.waitFor == null) {
 			this.showConfirm(step);
+		} else if (step.waitFor === "click" && step.awaitsCustomEvent) {
+			document.addEventListener(
+				step.awaitsCustomEvent,
+				() => this.nextStep(),
+				{ once: true },
+			);
 		}
 	}
 

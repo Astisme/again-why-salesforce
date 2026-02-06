@@ -8,6 +8,8 @@ import {
 	SKIP_LINK_DETECTION,
 	TAB_ADD_FRONT,
 	TAB_AS_ORG,
+	TUTORIAL_EVENT_ACTION_FAVOURITE,
+	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import Tab from "/tab.js";
@@ -272,10 +274,15 @@ async function actionFavourite() {
 			console.warn(e);
 			showToast("error_remove_not_favourite", false, true);
 		}
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_ACTION_UNFAVOURITE),
+		);
 	} else {
 		await addTab(url);
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_ACTION_FAVOURITE),
+		);
 	}
-	document.dispatchEvent(new CustomEvent("actionFavourite:completed"));
 }
 
 /**

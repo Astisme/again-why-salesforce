@@ -5,6 +5,8 @@ import {
 	CXM_UNPIN_TAB,
 	HIDDEN_CLASS,
 	PIN_TAB_CLASS,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
@@ -748,6 +750,9 @@ function reorderTabsTable({
 	);
 	manage_InvalidateSort = true;
 	wasSomethingUpdated = true;
+	document.dispatchEvent(
+		new CustomEvent(TUTORIAL_EVENT_REORDERED_TABS_TABLE),
+	);
 }
 
 /**
@@ -895,4 +900,7 @@ export async function createManageTabsModal() {
 		}
 		deleteAllButton.setAttribute("disabled", true);
 	});
+	document.dispatchEvent(
+		new CustomEvent(TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL),
+	);
 }

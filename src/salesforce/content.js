@@ -48,6 +48,7 @@ import {
 	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
+	TUTORIAL_EVENT_PIN_TAB,
 	USE_LIGHTNING_NAVIGATION,
 	WHAT_EXPORT_FROM_BG,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
@@ -743,6 +744,7 @@ export async function performActionOnTabs(
 				if (!await allTabs.pinOrUnpin(tab, true)) {
 					throw new Error("error_pin_tab", tab);
 				}
+				document.dispatchEvent(new CustomEvent(TUTORIAL_EVENT_PIN_TAB));
 				break;
 			case CXM_UNPIN_TAB:
 				if (!await allTabs.pinOrUnpin(tab, false)) {

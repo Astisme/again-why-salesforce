@@ -176,3 +176,12 @@ export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 export const WHAT_EXPORT_FROM_BG = "export-bg";
 export const DO_NOT_REQUEST_FRAME_PERMISSION = "noPerm";
 export const HIDDEN_CLASS = "hidden";
+export const TUTORIAL_EVENT_ACTION_FAVOURITE =
+	"tutorial:actionFavourite:completed";
+export const TUTORIAL_EVENT_ACTION_UNFAVOURITE =
+	"tutorial:actionUnfavourite:completed";
+export const TUTORIAL_EVENT_PIN_TAB = "tutorial:pinTab:completed";
+export const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+	"tutorial:createManageTabsModal:completed";
+export const TUTORIAL_EVENT_REORDERED_TABS_TABLE =
+	"tutorial:tableReorder:completed";
