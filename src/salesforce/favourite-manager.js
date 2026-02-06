@@ -5,6 +5,7 @@ import {
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	HIDDEN_CLASS,
+	SALESFORCE_SETUP_HOME_MINI,
 	SKIP_LINK_DETECTION,
 	TAB_ADD_FRONT,
 	TAB_AS_ORG,
@@ -305,7 +306,7 @@ export async function showFavouriteButton(count = 0) {
 	const currentHref = getCurrentHref();
 	const url = Tab.minifyURL(currentHref);
 	// Do not add favourite button on Home and Object Manager
-	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
+	const standardTabs = [SALESFORCE_SETUP_HOME_MINI, "ObjectManager/home"];
 	if (standardTabs.includes(url)) {
 		return;
 	}

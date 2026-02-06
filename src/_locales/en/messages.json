@@ -1543,25 +1543,21 @@
 		"message": "You may manage your Tabs from this screen. For more info, visit: ",
 		"description": "[tutorial] manage tabs link"
 	},
-	"tutorial_drag_users": {
-		"message": "Drag the Users row (using the 6 dots) and drop it before the Account Tab.",
-		"description": "[tutorial] drag users"
+	"tutorial_drag_flows": {
+		"message": "Drag the Flows row (using the 6 dots) and drop it before the Account Tab.",
+		"description": "[tutorial] drag flows"
 	},
 	"tutorial_pinned_explanation": {
-		"message": "The Users Tab couldn't move before the pinned Account Tab, so it went to the second position.",
+		"message": "The Flows Tab couldn't be moved before the pinned Account Tab (because it is currently unpinned), so it went to the second position.",
 		"description": "[tutorial] pinned explanation"
 	},
 	"tutorial_save_modal": {
-		"message": "Click Save to apply changes and see the toast message.",
+		"message": "Click Save to apply changes and see the confirmation message.",
 		"description": "[tutorial] save modal"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Press the keyboard shortcut to open the Settings page.",
+		"message": "Press the keyboard shortcut to open the Settings page where you can change the extension's behaviour and style your Tabs.",
 		"description": "[tutorial] keyboard shortcut"
-	},
-	"tutorial_settings_explanation": {
-		"message": "Here you can change extension behaviour and style your Tabs.",
-		"description": "[tutorial] settings explanation"
 	},
 	"tutorial_end": {
 		"message": "Tutorial completed! Have fun using the extension.",

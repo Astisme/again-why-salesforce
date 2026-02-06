@@ -1,6 +1,7 @@
 "use strict";
 import {
 	EXTENSION_GITHUB_LINK,
+	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 	TUTORIAL_EVENT_ACTION_FAVOURITE,
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
@@ -21,6 +22,12 @@ import { showFavouriteButton, STAR_ID } from "./favourite-manager.js";
 import { generateTutorialElements, MODAL_ID } from "./generator.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
+const usersPage = "ManageUsers/home";
+
+function redirectToHomeAndStart(tutorial) {
+	performLightningRedirect(`${SETUP_LIGHTNING}${SALESFORCE_SETUP_HOME_MINI}`);
+	tutorial?.start();
+}
 
 /**
  * Tutorial class to guide users through the extension features.
@@ -91,7 +98,7 @@ class Tutorial {
 		try {
 			performActionOnTabs(ACTION_ADD, {
 				label: await translator.translate("users"),
-				url: "ManageUsers/home",
+				url: usersPage,
 			});
 		} catch (e) {
 			console.info(e);
@@ -116,43 +123,43 @@ class Tutorial {
 		this.steps = [
 			{
 				message: "tutorial_restart",
-				action: "info",
-				pageUrl: "SetupOneHome/home",
+				pageUrl: SALESFORCE_SETUP_HOME_MINI,
 				beginsBlock: true,
 			},
 			{
-				element: () => getSetupTabUl(),
 				message: "tutorial_favourite_tabs",
-				action: "highlight",
-				pageUrl: "SetupOneHome/home",
+				pageUrl: SALESFORCE_SETUP_HOME_MINI,
 				beginsBlock: true,
+				element: () => getSetupTabUl(),
+				action: "highlight",
 			},
 			{
+				message: "tutorial_click_highlighted_tab",
+				pageUrl: SALESFORCE_SETUP_HOME_MINI,
+				beginsBlock: true,
 				element: this.#getExtensionElementWithLinkInSetup,
 				fakeElement: () =>
 					(this.#generateExtensionElementWithLinkInSetup.bind(
 						this,
 					))(),
-				message: "tutorial_click_highlighted_tab",
 				action: "highlight",
 				waitFor: "click",
-				pageUrl: "SetupOneHome/home",
-				beginsBlock: true,
 			},
 			{
+				message: "tutorial_remove_favourite",
+				pageUrl: usersPage, // After clicking "Users" tab
 				element: this.#getStarsContainer,
 				fakeElement: async () => {
 					await showFavouriteButton();
 					return this.#getStarsContainer();
 				},
-				message: "tutorial_remove_favourite",
 				action: "highlight",
-				waitFor: "click",
+				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_UNFAVOURITE,
-				pageUrl: "ManageUsers/home", // After clicking "Users" tab
 			},
 			{
 				message: "tutorial_redirect_account",
+				pageUrl: usersPage,
 				action: "confirm",
 				onConfirm: () => {
 					performLightningRedirect(
@@ -160,97 +167,85 @@ class Tutorial {
 					);
 				},
 				waitFor: "redirect",
-				pageUrl: "ManageUsers/home",
 			},
 			{
+				message: "tutorial_add_favourite",
+				pageUrl: accountPage,
+				beginsBlock: true,
 				element: this.#getStarsContainer,
 				fakeElement: async () => {
 					await showFavouriteButton();
 					return this.#getStarsContainer();
 				},
-				message: "tutorial_add_favourite",
 				action: "highlight",
-				waitFor: "click",
+				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_FAVOURITE,
-				pageUrl: accountPage,
-				beginsBlock: true,
 			},
 			{
+				message: "tutorial_pin_tab",
+				pageUrl: accountPage,
+				beginsBlock: true,
 				element: () => {
 					return getSetupTabUl()?.querySelector(
 						`a[title="${accountPage}"]`,
 					)?.closest("li");
 				},
-				message: "tutorial_pin_tab",
 				action: "highlight",
-				pageUrl: accountPage,
-				waitFor: "click",
+				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_PIN_TAB,
-				beginsBlock: true,
 			},
 			{
+				message: "tutorial_pinned_tab",
+				pageUrl: accountPage,
 				element: this.#getExtensionElementWithLinkInSetup,
 				fakeElement: this.#generateExtensionElementWithLinkInSetup,
-				message: "tutorial_pinned_tab",
 				action: "highlight",
-				pageUrl: accountPage,
 			},
 			{
 				message: "tutorial_manage_tabs",
-				action: "info",
 				pageUrl: accountPage,
-				waitFor: "click",
-				awaitsCustomEvent: TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 				beginsBlock: true,
+				waitFor: "event",
+				awaitsCustomEvent: TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 			},
 			{
 				message: "tutorial_manage_tabs_link",
-				action: "info",
-				link: `${EXTENSION_GITHUB_LINK}/wiki/Manage-Tabs-modal`,
 				pageUrl: accountPage, // Still on this page
+				link: `${EXTENSION_GITHUB_LINK}/wiki/Manage-Tabs-modal`,
 			},
 			{
+				message: "tutorial_drag_flows",
+				pageUrl: accountPage, // Modal is open on this page
 				element: () =>
 					document.querySelector(
-						`#${MODAL_ID} #sortable-table tr:nth-child(2) .slds-cell-wrap`,
+						`#${MODAL_ID} #sortable-table tr:nth-child(3) .slds-cell-wrap`,
 					),
-				message: "tutorial_drag_users",
 				action: "highlight",
-				pageUrl: accountPage, // Modal is open on this page
-				waitFor: "click",
+				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 			},
 			{
 				message: "tutorial_pinned_explanation",
-				action: "info",
 				pageUrl: accountPage,
 			},
 			{
+				message: "tutorial_save_modal",
+				pageUrl: accountPage,
 				element: () =>
 					document.querySelector(
 						`#${MODAL_ID} #again-why-salesforce-modal-confirm`,
 					),
-				message: "tutorial_save_modal",
 				action: "highlight",
 				waitFor: "click",
-				pageUrl: accountPage,
 			},
 			{
 				message: "tutorial_keyboard_shortcut",
-				action: "info",
-				shortcut: this.shortcut,
 				pageUrl: accountPage, // After modal closes
 				beginsBlock: true,
-			},
-			{
-				message: "tutorial_settings_explanation",
-				action: "info",
-				beginsBlock: true,
-				// No pageUrl, as this is a browser extension page
+				shortcut: this.shortcut,
 			},
 			{
 				message: "tutorial_end",
-				action: "info",
 				// No pageUrl
 			},
 		];
@@ -272,7 +267,9 @@ class Tutorial {
 	async start(startStep = 0) {
 		if (this.isActive) return;
 		this.isActive = true;
-		await this.initSteps();
+		if (this.steps?.length < 1) {
+			await this.initSteps();
+		}
 
 		// Set the starting step, either from parameter or default 0
 		if (startStep >= 0 && startStep < this.steps.length) {
@@ -380,7 +377,7 @@ class Tutorial {
 	 * @param {Object} step - The tutorial step configuration object.
 	 * @param {Function} [step.element] - Function that returns the HTMLElement to highlight.
 	 * @param {string} step.message - The i18n key for the message to display.
-	 * @param {string} step.action - The type of action ("highlight", "info", "confirm").
+	 * @param {string} step.action - The type of action ("highlight", "confirm").
 	 * @param {string} [step.waitFor] - The type of user action to wait for ("click", "timeout").
 	 * @param {Function} [step.onConfirm] - Callback function for confirmation steps.
 	 * @param {string} [step.link] - Optional link to append to the message.
@@ -419,7 +416,7 @@ class Tutorial {
 				return;
 			}
 			this.highlightElement(el);
-			if (step.waitFor === "click" && !step.awaitsCustomEvent) {
+			if (step.waitFor === "click") {
 				el.addEventListener("click", () => this.nextStep(), {
 					once: true,
 				});
@@ -436,7 +433,7 @@ class Tutorial {
 		await this.showMessage(step);
 		if (step.action === "confirm" || step.waitFor == null) {
 			this.showConfirm(step);
-		} else if (step.waitFor === "click" && step.awaitsCustomEvent) {
+		} else if (step.waitFor === "event" && step.awaitsCustomEvent) {
 			document.addEventListener(
 				step.awaitsCustomEvent,
 				() => this.nextStep(),
@@ -574,9 +571,7 @@ export async function checkTutorial() {
 	const translator = await ensureTranslatorAvailability();
 	if (tutorialProgress == null) {
 		if (confirm(await translator.translate("tutorial_start_prompt"))) {
-			// redirect to setup home
-			performLightningRedirect(`${SETUP_LIGHTNING}SetupOneHome/home`);
-			tutorial.start();
+			redirectToHomeAndStart(tutorial);
 		}
 		return;
 	}
@@ -609,10 +604,7 @@ export async function checkTutorial() {
 				key: TUTORIAL_KEY,
 				set: 0,
 			});
-			performLightningRedirect(
-				`${SETUP_LIGHTNING}SetupOneHome/home`,
-			);
-			tutorial.start();
+			redirectToHomeAndStart(tutorial);
 		}
 	}
 }

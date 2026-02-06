@@ -6,6 +6,7 @@ import {
 	POPUP_OPEN_SETUP,
 	POPUP_SETUP_NEW_TAB,
 	SALESFORCE_LIGHTNING_PATTERN,
+	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
@@ -38,7 +39,8 @@ if (page != null) { // we're in a salesforce page
 			const goSetup = document.getElementById(setupId);
 			goSetup.classList.remove(HIDDEN_CLASS);
 			// update the button href to use the domain
-			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
+			goSetup.href =
+				`${domain}${SETUP_LIGHTNING}${SALESFORCE_SETUP_HOME_MINI}`;
 			// update the bold on the text
 			willOpenLogin = false;
 		}

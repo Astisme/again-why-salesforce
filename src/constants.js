@@ -185,3 +185,4 @@ export const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 	"tutorial:createManageTabsModal:completed";
 export const TUTORIAL_EVENT_REORDERED_TABS_TABLE =
 	"tutorial:tableReorder:completed";
+export const SALESFORCE_SETUP_HOME_MINI = "SetupOneHome/home";
