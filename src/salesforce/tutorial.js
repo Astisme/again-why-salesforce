@@ -297,7 +297,7 @@ class Tutorial {
 		this.highlightStyleElement.textContent = `
         .${TUTORIAL_HIGHLIGHT_CLASS} {
             background: yellow !important;
-            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important;
+            color: black !important;
             position: relative !important;
             z-index: 10000 !important;
         }

@@ -45,6 +45,6 @@ it will guide the user in these phases to let them understand how to use the ext
 - [x] when checking if the user has already completed the tutorial, also check if they have already started it but not completed it. if yes, prompt them to restart from where they left off. if yes, perform lightining redirect to the correct page for the step they have to perform.
 - [x] if the user resizes the browser window, the highlight overlay is kept in place. find a better alternative (maybe directly add a css property and toggle the related class? if going this way, do not use `.hightlighted` as this is for other styles)
 - [x] use a better way to detect if the user has performed the step action -> if the step requires to listen to a context menu, read the background file and do the same thing
+- [x] fix that inside the manage tabs modal, every time a step is performed, a new overlay seems to be added (BUT NO OVERLAY IS ACTUALLY ADDED, SIMPLY THE SCREEN DARKENS MORE AND MORE). find out what could be the cause of this issue reading `src/salesforce/generator.js`
 - [ ] fix text for "Users not moved due to pinned" as the users Tab is no longer available
-- [ ] fix that in the manage tabs modal, every time a step is performed, a new overlay seems to be added (but no overlay is actually added, simply the screen darkens more and more)
 - [ ]
