@@ -1475,6 +1475,10 @@
 		"message": "URL",
 		"description": "[key] the Tab's link"
 	},
+	"case": {
+		"message": "Case",
+		"description": "The name of the page related to ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"users": {
 		"message": "Users",
 		"description": "The name of the page related to ManageUsers/home"
@@ -1500,11 +1504,15 @@
 		"description": "[popup] button to start tutorial"
 	},
 	"tutorial_title": {
-		"message": "Start Tutorial",
+		"message": "Start $tutorial",
 		"description": "[popup] title for tutorial button"
 	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "We could not find usable links to start the $tutorial\nPlease export your $tabs and restart the $tutorial",
+		"description": "[tutorial] error message could not start"
+	},
 	"tutorial_restart": {
-		"message": "You may restart the tutorial at any time by clicking on the button in the popup.",
+		"message": "You may restart the $tutorial at any time by clicking on the button in the popup.",
 		"description": "[tutorial] first message"
 	},
 	"tutorial_favourite_tabs": {
@@ -1544,11 +1552,11 @@
 		"description": "[tutorial] manage tabs link"
 	},
 	"tutorial_drag_flows": {
-		"message": "Drag the Flows row (using the 6 dots) and drop it before the Account Tab.",
+		"message": "Drag the highlighted row (using the 6 dots) and drop it before the first row (which is pinned).",
 		"description": "[tutorial] drag flows"
 	},
 	"tutorial_pinned_explanation": {
-		"message": "The Flows Tab couldn't be moved before the pinned Account Tab (because it is currently unpinned), so it went to the second position.",
+		"message": "The dragged row couldn't be moved before the pinned row (because it is currently unpinned), so it went to at the end of the pinned list which is treated separately.",
 		"description": "[tutorial] pinned explanation"
 	},
 	"tutorial_save_modal": {
@@ -1560,21 +1568,15 @@
 		"description": "[tutorial] keyboard shortcut"
 	},
 	"tutorial_end": {
-		"message": "Tutorial completed! Have fun using the extension.",
+		"message": "$tutorial completed! Have fun using the extension.",
 		"description": "[tutorial] end"
 	},
 	"tutorial_continue_prompt": {
-		"message": "You have an unfinished tutorial. Do you want to continue from step $1?",
-		"description": "[tutorial] prompt to continue tutorial",
-		"placeholders": {
-			"1": {
-				"content": "$1",
-				"example": "5"
-			}
-		}
+		"message": "You have an unfinished $tutorial. Do you want to continue?",
+		"description": "[tutorial] prompt to continue tutorial"
 	},
 	"tutorial_restart_prompt": {
-		"message": "Do you want to start the tutorial from the beginning?",
+		"message": "Do you want to start the $tutorial from the beginning?",
 		"description": "[tutorial] prompt to restart tutorial"
 	}
 }

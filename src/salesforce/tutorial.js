@@ -20,9 +20,70 @@ import {
 } from "./content.js";
 import { showFavouriteButton, STAR_ID } from "./favourite-manager.js";
 import { generateTutorialElements, MODAL_ID } from "./generator.js";
+import { ensureAllTabsAvailability } from "../tabContainer.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
-const usersPage = "ManageUsers/home";
+const usablePages = {
+	objectManager: [
+		{
+			label: "Account",
+			url: "ObjectManager/Account/FieldsAndRelationships/view",
+		},
+		{
+			label: "Case",
+			url: "ObjectManager/Case/FieldsAndRelationships/view",
+		},
+		{
+			label: "Contact",
+			url: "ObjectManager/Contact/FieldsAndRelationships/view",
+		},
+		{
+			label: "Opportunity",
+			url: "ObjectManager/Opportunity/FieldsAndRelationships/view",
+		},
+		{
+			label: "Lead",
+			url: "ObjectManager/Lead/FieldsAndRelationships/view",
+		},
+		{
+			label: "Task",
+			url: "ObjectManager/Task/FieldsAndRelationships/view",
+		},
+		{
+			label: "Campaign",
+			url: "ObjectManager/Campaign/FieldsAndRelationships/view",
+		},
+		{
+			label: "Product2",
+			url: "ObjectManager/Product2/FieldsAndRelationships/view",
+		},
+		{
+			label: "Pricebook2",
+			url: "ObjectManager/Pricebook2/FieldsAndRelationships/view",
+		},
+		{
+			label: "Asset",
+			url: "ObjectManager/Asset/FieldsAndRelationships/view",
+		},
+	],
+	standAlone: [
+		{ label: "Permission Sets", url: "PermSets/home" },
+		{ label: "Login History", url: "OrgLoginHistory/home" },
+		{ label: "Sessions", url: "SecuritySession/home" },
+		{ label: "Setup Audit Trail", url: "SecurityEvents/home" },
+		{ label: "Sharing Settings", url: "SecuritySharing/home" },
+		{ label: "Field Accessibility", url: "FieldAccessibility/home" },
+		{
+			label: "Classic Email Templates",
+			url: "CommunicationTemplatesEmail/home",
+		},
+		{ label: "Reports and Dashboards Settings", url: "ReportUI/home" },
+		{ label: "Manage Connected Apps", url: "ConnectedApplication/home" },
+		{ label: "Company Information", url: "CompanyProfileInfo/home" },
+	],
+};
+const accountPage = "ObjectManager/Account/FieldsAndRelationships/view";
+const casePage = "ObjectManager/Case/FieldsAndRelationships/view";
 
 function redirectToHomeAndStart(tutorial) {
 	performLightningRedirect(`${SETUP_LIGHTNING}${SALESFORCE_SETUP_HOME_MINI}`);
@@ -88,17 +149,51 @@ class Tutorial {
 		this.retryCount = 0;
 	}
 
+	/**
+	 * Finds up to two elements whose URLs don't match any saved Tab
+	 * @returns {Promise<{firstRedirectElement: Object|null, secondRedirectElement: Object|null}>}
+	 */
+	async #findRedirectLinks() {
+		const allTabs = await ensureAllTabsAvailability();
+		const openUrls = new Set(allTabs.map((t) => t.url));
+    let viableObjManEl = null;
+    let elementIndex = 0;
+    const objManElementLen = usablePages.objectManager.length;
+		const res = { firstRedirectElement: null, secondRedirectElement: null };
+		for (
+			const el of [
+				...usablePages.objectManager,
+				...usablePages.standAlone,
+			]
+		) {
+			if (!openUrls.has(el.url)) {
+				if (!res.firstRedirectElement) res.firstRedirectElement = el;
+				else if (!res.secondRedirectElement) {
+          if(elementIndex >= objManElementLen) viableObjManEl = el;
+          else res.secondRedirectElement = el;
+					break;
+				}
+			}
+      elementIndex++;
+		}
+    if(!res.secondRedirectElement && viableObjManEl != null)
+      res.secondRedirectElement = viableObjManEl;
+		return res;
+	}
+
 	#getExtensionElementWithLinkInSetup() {
 		const ul = getSetupTabUl();
-		return ul.querySelector('a:not([title^="/"])');
+		return ul.querySelector(
+			`a:not([title^="/"]):not([title="${accountPage}"])`,
+		);
 	}
 
 	async #generateExtensionElementWithLinkInSetup() {
 		const translator = await ensureTranslatorAvailability();
 		try {
 			performActionOnTabs(ACTION_ADD, {
-				label: await translator.translate("users"),
-				url: usersPage,
+				label: await translator.translate("case"),
+				url: casePage,
 			});
 		} catch (e) {
 			console.info(e);
@@ -115,11 +210,18 @@ class Tutorial {
 	 * Each step contains configuration for messages, element highlighting, and user actions.
 	 * This method is asynchronous to fetch the keyboard shortcut for settings.
 	 *
-	 * @return {Promise<void>} Resolves when the steps are fully initialized.
+	 * @return {Promise<boolean>} Resolves with `true` when the steps are fully initialized.
 	 */
 	async initSteps() {
 		this.shortcut = await this.getSettingsShortcut();
-		const accountPage = "ObjectManager/Account/FieldsAndRelationships/view";
+		const { firstRedirectElement, secondRedirectElement } = await this
+			.#findRedirectLinks();
+    if(firstRedirectElement == null || secondRedirectElement == null){
+      // we could not find 2 links which were not saved by the user...
+      // ask the user to export their Tabs and restart the tutorial with only the default Tabs?
+      showToast("tutorial_export_and_reset_for_tutorial");
+      return false;
+    }
 		this.steps = [
 			{
 				message: "tutorial_restart",
@@ -147,7 +249,7 @@ class Tutorial {
 			},
 			{
 				message: "tutorial_remove_favourite",
-				pageUrl: usersPage, // After clicking "Users" tab
+				pageUrl: casePage, // After clicking "Case" tab
 				element: this.#getStarsContainer,
 				fakeElement: async () => {
 					await showFavouriteButton();
@@ -159,7 +261,7 @@ class Tutorial {
 			},
 			{
 				message: "tutorial_redirect_account",
-				pageUrl: usersPage,
+				pageUrl: casePage,
 				action: "confirm",
 				onConfirm: () => {
 					performLightningRedirect(
@@ -255,6 +357,7 @@ class Tutorial {
 				this.beginBlockStepIndexes.push(Number(i));
 			}
 		}
+    return true;
 	}
 
 	/**
@@ -266,11 +369,10 @@ class Tutorial {
 	 */
 	async start(startStep = 0) {
 		if (this.isActive) return;
-		this.isActive = true;
-		if (this.steps?.length < 1) {
-			await this.initSteps();
+		if (this.steps?.length < 1 && !(await this.initSteps())) {
+      return;
 		}
-
+		this.isActive = true;
 		// Set the starting step, either from parameter or default 0
 		if (startStep >= 0 && startStep < this.steps.length) {
 			this.currentStep = startStep;
@@ -567,7 +669,8 @@ export async function checkTutorial() {
 		key: TUTORIAL_KEY,
 	});
 	const tutorial = new Tutorial();
-	await tutorial.initSteps(); // Initialize steps to get their properties
+	if(!await tutorial.initSteps()) // Initialize steps to get their properties
+    return;
 	const translator = await ensureTranslatorAvailability();
 	if (tutorialProgress == null) {
 		if (confirm(await translator.translate("tutorial_start_prompt"))) {
