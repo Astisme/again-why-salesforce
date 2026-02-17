@@ -259,6 +259,10 @@
 		"message": "Enable",
 		"description": "[req_permission] button to enable permissions"
 	},
+	"error_unknown_toast_type": {
+		"message": "The requested toast type could not be interpreted. Please change your code.",
+		"description": "[error] Generic error used while setting the toast type"
+	},
 	"error_adding_tab": {
 		"message": "Error when adding $tab",
 		"description": "[error] Generic error used while adding a $tab"

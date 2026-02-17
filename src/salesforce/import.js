@@ -134,7 +134,7 @@ async function launchImport(tabs = [], importConfig = {}) {
 	}
 	// remove file import modal
 	document.getElementById(CLOSE_MODAL_ID)?.click();
-	showToast(["import_successful", importedNum, "tabs"], true);
+	showToast(["import_successful", importedNum, "tabs"]);
 }
 
 /**
@@ -234,7 +234,7 @@ function getTabsFromJSON(jsonWithTabs = null) {
  * Did not find a match for any supported extensions
  */
 function showToastBrokenImportFile() {
-	showToast("error_unknown_file_structure", false);
+	showToast("error_unknown_file_structure", { isError: true });
 }
 
 /**
@@ -289,7 +289,7 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 		e.preventDefault();
 		const { tabs: pickedTabs, selectedAll } = getSelectedTabs();
 		if (pickedTabs.length === 0) {
-			return showToast("error_no_tabs_selected", false, true);
+			return showToast("error_no_tabs_selected", { isWarning: true });
 		}
 		closeButton.click();
 		const selectedTabContainer = TabContainer.getThrowawayInstance({
@@ -318,7 +318,7 @@ async function readFile(files) {
 		if (file.type === "application/json") {
 			validFileArray.push(file);
 		} else {
-			showToast("import_invalid_file", false);
+			showToast("import_invalid_file", { isError: true });
 		}
 	}
 	try {
@@ -340,7 +340,7 @@ async function readFile(files) {
 		}
 		return await launchImport(validFileArray, importConfig);
 	} catch (error) {
-		showToast(["error_import", error.message], false);
+		showToast(["error_import", error.message], { isError: true });
 	}
 }
 
@@ -389,7 +389,7 @@ async function showFileImport() {
 		getSetupTabUl().querySelector(`#${IMPORT_ID}`) != null ||
 		document.getElementById(MODAL_ID) != null
 	) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", { isError: true });
 	}
 	const { saveButton } = await generateSldsImport();
 	saveButton.remove();
@@ -411,6 +411,6 @@ export async function createImportModal() {
 	try {
 		await showFileImport();
 	} catch (error) {
-		showToast(error, false);
+		showToast(error, { isError: true });
 	}
 }

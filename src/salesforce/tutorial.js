@@ -156,9 +156,9 @@ class Tutorial {
 	async #findRedirectLinks() {
 		const allTabs = await ensureAllTabsAvailability();
 		const openUrls = new Set(allTabs.map((t) => t.url));
-    let viableObjManEl = null;
-    let elementIndex = 0;
-    const objManElementLen = usablePages.objectManager.length;
+		let viableObjManEl = null;
+		let elementIndex = 0;
+		const objManElementLen = usablePages.objectManager.length;
 		const res = { firstRedirectElement: null, secondRedirectElement: null };
 		for (
 			const el of [
@@ -169,15 +169,16 @@ class Tutorial {
 			if (!openUrls.has(el.url)) {
 				if (!res.firstRedirectElement) res.firstRedirectElement = el;
 				else if (!res.secondRedirectElement) {
-          if(elementIndex >= objManElementLen) viableObjManEl = el;
-          else res.secondRedirectElement = el;
+					if (elementIndex >= objManElementLen) viableObjManEl = el;
+					else res.secondRedirectElement = el;
 					break;
 				}
 			}
-      elementIndex++;
+			elementIndex++;
 		}
-    if(!res.secondRedirectElement && viableObjManEl != null)
-      res.secondRedirectElement = viableObjManEl;
+		if (!res.secondRedirectElement && viableObjManEl != null) {
+			res.secondRedirectElement = viableObjManEl;
+		}
 		return res;
 	}
 
@@ -216,12 +217,12 @@ class Tutorial {
 		this.shortcut = await this.getSettingsShortcut();
 		const { firstRedirectElement, secondRedirectElement } = await this
 			.#findRedirectLinks();
-    if(firstRedirectElement == null || secondRedirectElement == null){
-      // we could not find 2 links which were not saved by the user...
-      // ask the user to export their Tabs and restart the tutorial with only the default Tabs?
-      showToast("tutorial_export_and_reset_for_tutorial");
-      return false;
-    }
+		if (firstRedirectElement == null || secondRedirectElement == null) {
+			// we could not find 2 links which were not saved by the user...
+			// ask the user to export their Tabs and restart the tutorial with only the default Tabs?
+			showToast("tutorial_export_and_reset_for_tutorial");
+			return false;
+		}
 		this.steps = [
 			{
 				message: "tutorial_restart",
@@ -357,7 +358,7 @@ class Tutorial {
 				this.beginBlockStepIndexes.push(Number(i));
 			}
 		}
-    return true;
+		return true;
 	}
 
 	/**
@@ -370,7 +371,7 @@ class Tutorial {
 	async start(startStep = 0) {
 		if (this.isActive) return;
 		if (this.steps?.length < 1 && !(await this.initSteps())) {
-      return;
+			return;
 		}
 		this.isActive = true;
 		// Set the starting step, either from parameter or default 0
@@ -500,7 +501,7 @@ class Tutorial {
 			}
 			if (el == null) {
 				if (!canFakeElement) {
-					showToast("tutorial_step_was_missed", false, true);
+					showToast("tutorial_step_was_missed", { isWarning: true });
 					// reset to the beginning of the block
 					let maxIndex = 0;
 					for (
@@ -669,8 +670,9 @@ export async function checkTutorial() {
 		key: TUTORIAL_KEY,
 	});
 	const tutorial = new Tutorial();
-	if(!await tutorial.initSteps()) // Initialize steps to get their properties
-    return;
+	if (!await tutorial.initSteps()) { // Initialize steps to get their properties
+		return;
+	}
 	const translator = await ensureTranslatorAvailability();
 	if (tutorialProgress == null) {
 		if (confirm(await translator.translate("tutorial_start_prompt"))) {

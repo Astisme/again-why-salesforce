@@ -554,7 +554,7 @@ async function checkDuplicates({
 		return;
 	}
 	// show warning in salesforce
-	showToast("error_tab_url_saved", false, true);
+	showToast("error_tab_url_saved", { isWarning: true });
 	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
 	checkAddDuplicateStyle(tabAppendElement);
@@ -810,7 +810,7 @@ async function readManagedTabsAndSave({
  */
 export async function createManageTabsModal() {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", { isError: true });
 	}
 	const allTabs = await ensureAllTabsAvailability({ reset: true });
 	const {

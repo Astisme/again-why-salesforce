@@ -197,33 +197,56 @@ export function sf_afterSet({
  * @param {boolean} [isSuccess=true] - Indicates if the message is a success. Defaults to `true`.
  * @param {boolean} [isWarning=false] - Indicates if the message is a warning. Defaults to `false`.
  */
-export async function showToast(message, isSuccess = true, isWarning = false) {
+export async function showToast(message, {
+	isSuccess = false,
+	isError = false,
+	isWarning = false,
+	isInfo = false,
+} = {}) {
+	{
+		const truelen =
+			[isSuccess, isError, isWarning, isInfo].filter(Boolean).length;
+		if (truelen >= 2) {
+			if ((isSuccess && isError) || (isWarning && isInfo)) {
+				throw new Error("error_unknown_toast_type");
+			}
+			// now there are surely only 2 trues
+			// the first will be either success or error
+			// the other one will be warning or info
+			isSuccess = false;
+			isError = false;
+		} else if (truelen === 0) {
+			isSuccess = true;
+		}
+		// if truelen === 1, the function was used correctly
+	}
 	const hanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
 	const toastElement = await generateSldsToastMessage(
 		Array.isArray(message) ? message : [message],
-		isSuccess,
-		isWarning,
+		{
+			isSuccess,
+			isError,
+			isWarning,
+			isInfo,
+		},
 	);
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
 		toastElement.remove();
 	}, calculateReadingTime(toastElement.textContent));
-	if (isSuccess) {
-		if (isWarning) {
-			console.info(message);
-		} else {
-			console.log(message);
-		}
-	} else {
-		console.trace();
-		if (isWarning) {
-			console.warn(message);
-		} else {
-			console.error(message);
-		}
-	}
+	if (isError || isWarning) console.trace();
+	const logFn = isSuccess
+		? console.log
+		: isError
+		? console.error
+		: isWarning
+		? console.warn
+		: isInfo
+		? console.info
+		: null;
+	logFn?.(message);
 }
 
 /**
@@ -478,7 +501,7 @@ export async function reorderTabsUl() {
 			shouldReload: false,
 		});
 	} catch (error) {
-		showToast(error.message, false);
+		showToast(error.message, { isError: true });
 	}
 }
 
@@ -545,7 +568,7 @@ async function showModalOpenOtherOrg(
 	{ label = null, url = null, org = null } = {},
 ) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", { isError: true });
 	}
 	const allTabs = await ensureAllTabsAvailability();
 	const href = getCurrentHref();
@@ -570,8 +593,7 @@ async function showModalOpenOtherOrg(
 	) {
 		showToast(
 			"error_link_with_id",
-			false,
-			true,
+			{ isWarning: true },
 		);
 	}
 	const translator = await ensureTranslatorAvailability();
@@ -609,7 +631,9 @@ async function showModalOpenOtherOrg(
 		const linkTarget = getSelectedRadioButtonValue();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
-			return showToast(["insert_another", "org_link"], false, true);
+			return showToast(["insert_another", "org_link"], {
+				isWarning: true,
+			});
 		}
 		const newTarget = Tab.extractOrgName(inputVal);
 		if (lastExtracted === newTarget) return; // could be called more than once
@@ -619,12 +643,14 @@ async function showModalOpenOtherOrg(
 				SALESFORCE_URL_PATTERN,
 			)
 		) {
-			return showToast(["insert_valid_org", newTarget], false);
+			return showToast(["insert_valid_org", newTarget], {
+				isError: true,
+			});
 		}
 		if (newTarget === Tab.extractOrgName(getCurrentHref())) {
 			return showToast(
 				"insert_another_org",
-				false,
+				{ isError: true },
 			);
 		}
 		const targetUrl = new URL(
@@ -770,7 +796,7 @@ export async function performActionOnTabs(
 		sf_afterSet({ tabs: allTabs });
 	} catch (error) {
 		console.warn({ action, tab, options });
-		showToast(error.message, false);
+		showToast(error.message, { isError: true });
 	}
 }
 
@@ -826,7 +852,7 @@ async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
 ) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", { isError: true });
 	}
 	const tab = { label, url, org };
 	const tabIsEmpty = tab.label == null && tab.url == null && tab.org == null;
@@ -842,7 +868,7 @@ async function showModalUpdateTab(
 				: tab,
 		);
 	} catch (e) {
-		showToast(e.message, false, false);
+		showToast(e.message, { isError: true });
 		return;
 	}
 	const {
@@ -955,10 +981,10 @@ function listenToBackgroundPage() {
 					sf_afterSet(message);
 					break;
 				case "warning":
-					showToast(message.message, false, true);
+					showToast(message.message, { isWarning: true });
 					break;
 				case "error":
-					showToast(message.message, false);
+					showToast(message.message, { isError: true });
 					break;
 				case ACTION_ADD:
 					createImportModal();
@@ -1132,14 +1158,11 @@ function listenToBackgroundPage() {
 					if (message.ok) {
 						showToast(
 							"req_downloads_open_popup",
-							true,
-							true,
 						);
 					} else {
 						showToast(
 							"error_req_downloads",
-							false,
-							false,
+							{ isError: true },
 						);
 					}
 					break;
@@ -1153,14 +1176,13 @@ function listenToBackgroundPage() {
 								"error_unknown_message",
 								message.what,
 							],
-							false,
-							true,
+							{ isWarning: true },
 						);
 					}
 					break;
 			}
 		} catch (error) {
-			showToast(error.message, false);
+			showToast(error.message, { isError: true });
 		}
 	});
 }

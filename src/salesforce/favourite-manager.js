@@ -273,7 +273,7 @@ async function actionFavourite() {
 			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
 		} catch (e) {
 			console.warn(e);
-			showToast("error_remove_not_favourite", false, true);
+			showToast("error_remove_not_favourite", { isWarning: true });
 		}
 		document.dispatchEvent(
 			new CustomEvent(TUTORIAL_EVENT_ACTION_UNFAVOURITE),
@@ -351,7 +351,7 @@ export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
 	if (favourite.classList.contains(HIDDEN_CLASS)) {
 		const message = save ? "error_useless_save" : "error_useless_remove";
-		showToast(message, true, true);
+		showToast(message, { isInfo: true });
 	} else {
 		favourite.closest("button").click(); // otherwise we would click on the svg
 	}

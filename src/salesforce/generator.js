@@ -84,7 +84,7 @@ export async function handleLightningLinkClick(e) {
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
-		showToast("error_redirect", false);
+		showToast("error_redirect", { isError: true });
 		return;
 	}
 	(await ensureAllTabsAvailability())
@@ -400,7 +400,12 @@ export function generateRowTemplate(
  * @throws {Error} Throws an error if required parameters are missing or invalid.
  * @return {HTMLElement} The generated toast container element.
  */
-export async function generateSldsToastMessage(message, isSuccess, isWarning) {
+export async function generateSldsToastMessage(message, {
+	isSuccess = false,
+	isError = false,
+	isWarning = false,
+	isInfo = false,
+} = {}) {
 	const translator = await ensureTranslatorAvailability();
 	if (
 		message == null || message === "" || isSuccess == null ||
@@ -408,9 +413,15 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	) {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const successType = isWarning ? "info" : "success";
-	const errorType = isWarning ? "warning" : "error";
-	const toastType = isSuccess ? successType : errorType;
+	const toastType = isSuccess
+		? "success"
+		: isError
+		? "error"
+		: isWarning
+		? "warning"
+		: isInfo
+		? "info"
+		: "";
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
@@ -463,7 +474,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute(
 		"d",
-		isSuccess
+		isSuccess || isInfo
 			? "M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
 			: "M260 20C128 20 20 128 20 260s108 240 240 240 240-108 240-240S392 20 260 20zM80 260a180 180 0 01284-147L113 364a176 176 0 01-33-104zm180 180c-39 0-75-12-104-33l251-251a180 180 0 01-147 284z",
 	);

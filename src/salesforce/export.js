@@ -12,7 +12,7 @@ import { getModalHanger, showToast } from "./content.js";
  */
 async function showExportModal() {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", { isError: true });
 	}
 	const allTabs = await ensureAllTabsAvailability();
 	const {
@@ -30,7 +30,7 @@ async function showExportModal() {
 		e.preventDefault();
 		const { tabs, selectedAll } = getSelectedTabs();
 		if (tabs.length === 0) {
-			return showToast("error_no_tabs_selected", false, true);
+			return showToast("error_no_tabs_selected", { isWarning: true });
 		}
 		closeButton.click();
 		// Send message to background script to handle export
@@ -55,6 +55,6 @@ export async function createExportModal() {
 	try {
 		await showExportModal();
 	} catch (error) {
-		showToast(error.message, false);
+		showToast(error.message, { isError: true });
 	}
 }
