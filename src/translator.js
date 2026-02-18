@@ -182,9 +182,8 @@ class TranslationService {
 	#getMessageFromCache(key) {
 		if (Array.isArray(key)) {
 			return undefined;
-		}
-		if (typeof key !== "string") {
-			throw new TypeError("error_required_params");
+		} else if (typeof key === "number") {
+			return `${key}`;
 		}
 		return this.caches?.[this.currentLanguage]?.[key]?.message;
 	}
