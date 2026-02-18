@@ -48,6 +48,10 @@ import {
 	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
+	TOAST_ERROR,
+	TOAST_INFO,
+	TOAST_SUCCESS,
+	TOAST_WARNING,
 	TUTORIAL_EVENT_PIN_TAB,
 	USE_LIGHTNING_NAVIGATION,
 	WHAT_EXPORT_FROM_BG,
@@ -194,58 +198,47 @@ export function sf_afterSet({
  * - The message is logged to the console with an appropriate log level based on success, warning, or error.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} [isSuccess=true] - Indicates if the message is a success. Defaults to `true`.
- * @param {boolean} [isWarning=false] - Indicates if the message is a warning. Defaults to `false`.
+ * @param {string} [status="success"]  - The toast type.
  */
-export async function showToast(message, {
-	isSuccess = false,
-	isError = false,
-	isWarning = false,
-	isInfo = false,
-} = {}) {
-	{
-		const truelen =
-			[isSuccess, isError, isWarning, isInfo].filter(Boolean).length;
-		if (truelen >= 2) {
-			if ((isSuccess && isError) || (isWarning && isInfo)) {
-				throw new Error("error_unknown_toast_type");
-			}
-			// now there are surely only 2 trues
-			// the first will be either success or error
-			// the other one will be warning or info
-			isSuccess = false;
-			isError = false;
-		} else if (truelen === 0) {
-			isSuccess = true;
-		}
-		// if truelen === 1, the function was used correctly
-	}
+export async function showToast(message, status = TOAST_SUCCESS) {
+  if(
+    ![
+      TOAST_SUCCESS,
+      TOAST_ERROR,
+      TOAST_WARNING,
+      TOAST_INFO,
+    ].includes(status)
+  )
+    throw new Error("error_unknown_toast_type");
 	const hanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
 	const toastElement = await generateSldsToastMessage(
 		Array.isArray(message) ? message : [message],
-		{
-			isSuccess,
-			isError,
-			isWarning,
-			isInfo,
-		},
+    status
 	);
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
 		toastElement.remove();
 	}, calculateReadingTime(toastElement.textContent));
-	if (isError || isWarning) console.trace();
-	const logFn = isSuccess
-		? console.log
-		: isError
-		? console.error
-		: isWarning
-		? console.warn
-		: isInfo
-		? console.info
-		: null;
+	if (status === TOAST_ERROR || status === TOAST_WARNING) console.trace();
+  let logFn = null;
+  switch(status){
+    case TOAST_SUCCESS:
+      logFn = console.log;
+      break;
+    case TOAST_ERROR:
+      logFn = console.error;
+      break;
+    case TOAST_WARNING:
+      logFn = console.warn;
+      break;
+    case TOAST_INFO:
+      logFn = console.info;
+      break;
+    default:
+      break;
+  }
 	logFn?.(message);
 }
 
@@ -501,7 +494,7 @@ export async function reorderTabsUl() {
 			shouldReload: false,
 		});
 	} catch (error) {
-		showToast(error.message, { isError: true });
+		showToast(error.message, TOAST_ERROR);
 	}
 }
 
@@ -568,7 +561,7 @@ async function showModalOpenOtherOrg(
 	{ label = null, url = null, org = null } = {},
 ) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", { isError: true });
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability();
 	const href = getCurrentHref();
@@ -593,7 +586,7 @@ async function showModalOpenOtherOrg(
 	) {
 		showToast(
 			"error_link_with_id",
-			{ isWarning: true },
+			TOAST_WARNING,
 		);
 	}
 	const translator = await ensureTranslatorAvailability();
@@ -631,9 +624,7 @@ async function showModalOpenOtherOrg(
 		const linkTarget = getSelectedRadioButtonValue();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
-			return showToast(["insert_another", "org_link"], {
-				isWarning: true,
-			});
+			return showToast(["insert_another", "org_link"], TOAST_WARNING);
 		}
 		const newTarget = Tab.extractOrgName(inputVal);
 		if (lastExtracted === newTarget) return; // could be called more than once
@@ -643,14 +634,12 @@ async function showModalOpenOtherOrg(
 				SALESFORCE_URL_PATTERN,
 			)
 		) {
-			return showToast(["insert_valid_org", newTarget], {
-				isError: true,
-			});
+			return showToast(["insert_valid_org", newTarget], TOAST_ERROR);
 		}
 		if (newTarget === Tab.extractOrgName(getCurrentHref())) {
 			return showToast(
 				"insert_another_org",
-				{ isError: true },
+				TOAST_ERROR,
 			);
 		}
 		const targetUrl = new URL(
@@ -796,7 +785,7 @@ export async function performActionOnTabs(
 		sf_afterSet({ tabs: allTabs });
 	} catch (error) {
 		console.warn({ action, tab, options });
-		showToast(error.message, { isError: true });
+		showToast(error.message, TOAST_ERROR);
 	}
 }
 
@@ -852,7 +841,7 @@ async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
 ) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", { isError: true });
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const tab = { label, url, org };
 	const tabIsEmpty = tab.label == null && tab.url == null && tab.org == null;
@@ -868,7 +857,7 @@ async function showModalUpdateTab(
 				: tab,
 		);
 	} catch (e) {
-		showToast(e.message, { isError: true });
+		showToast(e.message, TOAST_ERROR);
 		return;
 	}
 	const {
@@ -981,10 +970,10 @@ function listenToBackgroundPage() {
 					sf_afterSet(message);
 					break;
 				case "warning":
-					showToast(message.message, { isWarning: true });
+					showToast(message.message, TOAST_WARNING);
 					break;
 				case "error":
-					showToast(message.message, { isError: true });
+					showToast(message.message, TOAST_ERROR);
 					break;
 				case ACTION_ADD:
 					createImportModal();
@@ -1162,7 +1151,7 @@ function listenToBackgroundPage() {
 					} else {
 						showToast(
 							"error_req_downloads",
-							{ isError: true },
+							TOAST_ERROR,
 						);
 					}
 					break;
@@ -1176,13 +1165,13 @@ function listenToBackgroundPage() {
 								"error_unknown_message",
 								message.what,
 							],
-							{ isWarning: true },
+							TOAST_WARNING,
 						);
 					}
 					break;
 			}
 		} catch (error) {
-			showToast(error.message, { isError: true });
+			showToast(error.message, TOAST_ERROR);
 		}
 	});
 }

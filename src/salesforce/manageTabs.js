@@ -5,6 +5,8 @@ import {
 	CXM_UNPIN_TAB,
 	HIDDEN_CLASS,
 	PIN_TAB_CLASS,
+	TOAST_ERROR,
+	TOAST_WARNING,
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "/constants.js";
@@ -554,7 +556,7 @@ async function checkDuplicates({
 		return;
 	}
 	// show warning in salesforce
-	showToast("error_tab_url_saved", { isWarning: true });
+	showToast("error_tab_url_saved", TOAST_WARNING);
 	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
 	checkAddDuplicateStyle(tabAppendElement);
@@ -810,7 +812,7 @@ async function readManagedTabsAndSave({
  */
 export async function createManageTabsModal() {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", { isError: true });
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability({ reset: true });
 	const {

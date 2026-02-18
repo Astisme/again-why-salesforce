@@ -20,6 +20,8 @@ import {
 	SETUP_LIGHTNING,
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
+	TOAST_ERROR,
+	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
 import {
@@ -84,7 +86,7 @@ export async function handleLightningLinkClick(e) {
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
-		showToast("error_redirect", { isError: true });
+		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
 	(await ensureAllTabsAvailability())
@@ -395,33 +397,16 @@ export function generateRowTemplate(
  * Generates an SLDS-styled toast message with a specified message, success, and warning types.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
- * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
+ * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
+ * @param {string} status - The toast type.
  * @return {HTMLElement} The generated toast container element.
  */
-export async function generateSldsToastMessage(message, {
-	isSuccess = false,
-	isError = false,
-	isWarning = false,
-	isInfo = false,
-} = {}) {
+export async function generateSldsToastMessage(message, status = TOAST_SUCCESS) {
 	const translator = await ensureTranslatorAvailability();
-	if (
-		message == null || message === "" || isSuccess == null ||
-		isWarning == null
-	) {
+	if (message == null || message === "") {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const toastType = isSuccess
-		? "success"
-		: isError
-		? "error"
-		: isWarning
-		? "warning"
-		: isInfo
-		? "info"
-		: "";
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
@@ -435,10 +420,10 @@ export async function generateSldsToastMessage(message, {
 	const toast = document.createElement("div");
 	toast.setAttribute("role", "alertdialog");
 	toast.setAttribute("aria-describedby", "toastDescription7382:0");
-	toast.setAttribute("aria-label", toastType);
-	toast.dataset.key = toastType;
+	toast.setAttribute("aria-label", status);
+	toast.dataset.key = status;
 	toast.classList.add(
-		`slds-theme--${toastType}`,
+		`slds-theme--${status}`,
 		"slds-notify--toast",
 		"slds-notify",
 		"slds-notify--toast",
@@ -446,9 +431,9 @@ export async function generateSldsToastMessage(message, {
 	);
 	toast.dataset.auraClass = "forceToastMessage";
 	const iconContainer = document.createElement("lightning-icon");
-	iconContainer.setAttribute("icon-name", `utility:${toastType}`);
+	iconContainer.setAttribute("icon-name", `utility:${status}`);
 	iconContainer.classList.add(
-		`slds-icon-utility-${toastType}`,
+		`slds-icon-utility-${status}`,
 		"toastIcon",
 		"slds-m-right--small",
 		"slds-no-flex",
@@ -466,7 +451,7 @@ export async function generateSldsToastMessage(message, {
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.classList.add("slds-icon", "slds-icon_small");
 	svg.setAttribute("focusable", "false");
-	svg.dataset.key = toastType;
+	svg.dataset.key = status;
 	svg.setAttribute("aria-hidden", "true");
 	svg.setAttribute("viewBox", "0 0 520 520");
 	svg.setAttribute("part", "icon");
@@ -474,7 +459,7 @@ export async function generateSldsToastMessage(message, {
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute(
 		"d",
-		isSuccess || isInfo
+    status === "success" || status === "info"
 			? "M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
 			: "M260 20C128 20 20 128 20 260s108 240 240 240 240-108 240-240S392 20 260 20zM80 260a180 180 0 01284-147L113 364a176 176 0 01-33-104zm180 180c-39 0-75-12-104-33l251-251a180 180 0 01-147 284z",
 	);
@@ -486,7 +471,7 @@ export async function generateSldsToastMessage(message, {
 	iconContainer.appendChild(boundarySpan);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = toastType;
+	assistiveText.textContent = status;
 	iconContainer.appendChild(assistiveText);
 	const toastContent = document.createElement("div");
 	toastContent.classList.add("toastContent", "slds-notify__content");

@@ -3,6 +3,7 @@ import {
 	EXTENSION_GITHUB_LINK,
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
+	TOAST_WARNING,
 	TUTORIAL_EVENT_ACTION_FAVOURITE,
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
@@ -220,7 +221,7 @@ class Tutorial {
 		if (firstRedirectElement == null || secondRedirectElement == null) {
 			// we could not find 2 links which were not saved by the user...
 			// ask the user to export their Tabs and restart the tutorial with only the default Tabs?
-			showToast("tutorial_export_and_reset_for_tutorial");
+			showToast("tutorial_export_and_reset_for_tutorial", TOAST_WARNING);
 			return false;
 		}
 		this.steps = [
@@ -501,7 +502,7 @@ class Tutorial {
 			}
 			if (el == null) {
 				if (!canFakeElement) {
-					showToast("tutorial_step_was_missed", { isWarning: true });
+					showToast("tutorial_step_was_missed", TOAST_WARNING);
 					// reset to the beginning of the block
 					let maxIndex = 0;
 					for (

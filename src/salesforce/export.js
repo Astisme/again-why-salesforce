@@ -1,5 +1,5 @@
 "use strict";
-import { WHAT_EXPORT } from "/constants.js";
+import { TOAST_ERROR, TOAST_WARNING, WHAT_EXPORT } from "/constants.js";
 import { sendExtensionMessage } from "/functions.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import { generateSldsModalWithTabList, MODAL_ID } from "./generator.js";
@@ -12,7 +12,7 @@ import { getModalHanger, showToast } from "./content.js";
  */
 async function showExportModal() {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", { isError: true });
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability();
 	const {
@@ -30,7 +30,7 @@ async function showExportModal() {
 		e.preventDefault();
 		const { tabs, selectedAll } = getSelectedTabs();
 		if (tabs.length === 0) {
-			return showToast("error_no_tabs_selected", { isWarning: true });
+			return showToast("error_no_tabs_selected", TOAST_WARNING);
 		}
 		closeButton.click();
 		// Send message to background script to handle export
@@ -55,6 +55,6 @@ export async function createExportModal() {
 	try {
 		await showExportModal();
 	} catch (error) {
-		showToast(error.message, { isError: true });
+		showToast(error.message, TOAST_ERROR);
 	}
 }

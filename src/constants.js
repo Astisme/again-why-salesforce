@@ -186,3 +186,7 @@ export const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 export const TUTORIAL_EVENT_REORDERED_TABS_TABLE =
 	"tutorial:tableReorder:completed";
 export const SALESFORCE_SETUP_HOME_MINI = "SetupOneHome/home";
+export const TOAST_SUCCESS = "success";
+export const TOAST_ERROR = "error";
+export const TOAST_WARNING = "warning";
+export const TOAST_INFO = "info";
