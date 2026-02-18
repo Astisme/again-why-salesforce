@@ -330,7 +330,6 @@ export function getInnerElementFieldBySelector({
 	field = "",
 	selector = "",
 } = {}) {
-	// TODO test with both field being a single string or separated with dots
 	let value = parentElement?.querySelector(selector);
 	for (const part of field.split(".")) {
 		value = value?.[part];
