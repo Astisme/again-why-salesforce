@@ -8,6 +8,7 @@ import {
 	SALESFORCE_LIGHTNING_PATTERN,
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
+	WHAT_GET_BROWSER_TAB,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -61,7 +62,7 @@ let openPageInSameTab = false;
  */
 function nss_getCurrentBrowserTab(callback, url) {
 	sendExtensionMessage(
-		{ what: "browser-tab" },
+		{ what: WHAT_GET_BROWSER_TAB },
 		(browserTab) => {
 			currentTab = browserTab;
 			if (callback != null) {

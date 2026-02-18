@@ -1,5 +1,6 @@
 "use strict";
 import {
+	CMD_OPEN_SETTINGS,
 	EXTENSION_GITHUB_LINK,
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
@@ -10,15 +11,14 @@ import {
 	TUTORIAL_EVENT_PIN_TAB,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 	TUTORIAL_KEY,
+	WHAT_ADD,
+	WHAT_GET,
+	WHAT_GET_COMMANDS,
+	WHAT_SET,
 } from "/constants.js";
 import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
-import {
-	ACTION_ADD,
-	getSetupTabUl,
-	performActionOnTabs,
-	showToast,
-} from "./content.js";
+import { getSetupTabUl, performActionOnTabs, showToast } from "./content.js";
 import { showFavouriteButton, STAR_ID } from "./favourite-manager.js";
 import { generateTutorialElements, MODAL_ID } from "./generator.js";
 import { ensureAllTabsAvailability } from "../tabContainer.js";
@@ -189,8 +189,8 @@ class Tutorial {
 	async #generateExtensionElementWithLinkInSetup() {
 		const translator = await ensureTranslatorAvailability();
 		try {
-			performActionOnTabs(ACTION_ADD, {
-				label: await translator.translate("case"),
+			performActionOnTabs(WHAT_ADD, {
+				label: await translator.translate("case"), // FIXME update the translation to the actual element used
 				url: casePage,
 			});
 		} catch (e) {
@@ -426,6 +426,22 @@ class Tutorial {
 	}
 
 	/**
+	 * Sends a message to the background page with the tutorial progress passed as input
+	 * @param {number} [stepNo=this.currentStep] - the step at which the tutorial has arrived
+	 * @async
+	 */
+	persistTutorialProgress(stepNo = this.currentStep) {
+		if (typeof stepNo !== "number") {
+			throw new TypeError("stepNo should be a number");
+		}
+		return sendExtensionMessage({
+			what: WHAT_SET,
+			key: TUTORIAL_KEY,
+			set: stepNo,
+		});
+	}
+
+	/**
 	 * Proceeds to the next step in the tutorial sequence.
 	 * If all steps are completed, ends the tutorial.
 	 * Otherwise, executes the current step's logic.
@@ -440,11 +456,7 @@ class Tutorial {
 		const step = this.steps[this.currentStep];
 		await this.executeStep(step);
 		if (step.beginsBlock) {
-			sendExtensionMessage({
-				what: "set",
-				key: TUTORIAL_KEY,
-				set: this.currentStep,
-			});
+			this.persistTutorialProgress();
 		}
 		this.currentStep++;
 	}
@@ -602,10 +614,15 @@ class Tutorial {
 	 */
 	async getSettingsShortcut() {
 		const commands = await sendExtensionMessage({
-			what: "get-commands",
-			commands: ["cmd-open-settings"],
+			what: WHAT_GET_COMMANDS,
+			commands: [CMD_OPEN_SETTINGS],
 		});
-		const cmd = commands.find((c) => c.name === "cmd-open-settings");
+		let cmd = null;
+		if (commands.length > 1) {
+			cmd = commands.find((c) => c.name === CMD_OPEN_SETTINGS);
+		} else if (commands.length === 1) {
+			cmd = commands[0];
+		}
 		return cmd ? cmd.shortcut : "Alt+Comma";
 	}
 
@@ -624,11 +641,7 @@ class Tutorial {
 		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		this.highlightStyleElement?.remove();
 		if (shouldSaveProgress) {
-			sendExtensionMessage({
-				what: "set",
-				key: TUTORIAL_KEY,
-				set: this.steps.length,
-			});
+			this.persistTutorialProgress(this.steps.length);
 		}
 	}
 }
@@ -642,7 +655,7 @@ class Tutorial {
  */
 export async function checkTutorial() {
 	const tutorialProgress = await sendExtensionMessage({
-		what: "get",
+		what: WHAT_GET,
 		key: TUTORIAL_KEY,
 	});
 	const tutorial = new Tutorial();
@@ -678,11 +691,7 @@ export async function checkTutorial() {
 			),
 		)
 	) {
-		await sendExtensionMessage({
-			what: "set",
-			key: TUTORIAL_KEY,
-			set: 0,
-		});
+		await this.persistTutorialProgress(0);
 		redirectToHomeAndStart(tutorial);
 	}
 }

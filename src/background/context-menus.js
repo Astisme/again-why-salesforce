@@ -1,6 +1,8 @@
 "use strict";
 import {
+	ALL_CXM_KEYS,
 	BROWSER,
+	CMD_AND_CXM_MAP_TO_WHAT,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_OTHER_ORG,
@@ -44,6 +46,7 @@ import {
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
 	SETTINGS_KEY,
+	TOAST_WARNING,
 	USER_LANGUAGE,
 } from "/constants.js";
 import { openSettingsPage } from "/functions.js";
@@ -538,8 +541,18 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
 BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
-	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+	const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
+	const message = {
+		what: CMD_AND_CXM_MAP_TO_WHAT[info.menuItemId] ?? info.menuItemId,
+		tabUrl: Tab.minifyURL(url),
+		label: info.linkText,
+		url: Tab.expandURL(
+			url,
+			browserTabUrl,
+		),
+		org: Tab.extractOrgName(url),
+	};
 	switch (info.menuItemId) {
 		case CMD_OPEN_SETTINGS:
 			openSettingsPage();
@@ -560,29 +573,13 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			}
 			message.linkTabLabel = info.linkText;
 			break;
-		case CXM_IMPORT_TABS:
-			message.what = "add";
+		default:
+			if (!ALL_CXM_KEYS.has(info.menuItemId)) {
+				message.what = TOAST_WARNING;
+				message.message =
+					`Received unknown context menu: ${info.menuItemId}`;
+			}
 			break;
-		case CXM_MANAGE_TABS:
-		case CXM_SORT_LABEL:
-		case CXM_SORT_URL:
-		case CXM_SORT_ORG:
-		case CXM_SORT_CLICK_COUNT:
-		case CXM_SORT_CLICK_DATE:
-		case CXM_REMOVE_PIN_TABS:
-		case CXM_REMOVE_UNPIN_TABS:
-			break;
-		default: {
-			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
-			message.tabUrl = Tab.minifyURL(url);
-			message.url = Tab.expandURL(
-				url,
-				browserTabUrl,
-			);
-			message.label = info.linkText;
-			message.org = Tab.extractOrgName(url);
-			break;
-		}
 	}
 	bg_notify(message);
 });

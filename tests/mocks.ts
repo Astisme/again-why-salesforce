@@ -217,7 +217,7 @@ export const mockBrowser = {
 					}
 					break;
 				}
-				case "browser-tab":
+				case "get-browser-tab":
 					response = {
 						url: "https://www.mycustomorg.my.force.com/lightning/setup/anypage",
 					};

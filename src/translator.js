@@ -3,6 +3,8 @@ import {
 	FOLLOW_SF_LANG,
 	SETTINGS_KEY,
 	USER_LANGUAGE,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_SF_LANG,
 } from "/constants.js";
 import { sendExtensionMessage } from "/functions.js";
 const _translationSecret = Symbol("translationSecret");
@@ -86,7 +88,7 @@ class TranslationService {
 	 */
 	async loadLanguageBackground() {
 		const userLanguage = (await sendExtensionMessage({
-			what: "get-settings",
+			what: WHAT_GET_SETTINGS,
 			keys: USER_LANGUAGE,
 		}))?.enabled;
 		// load the user picked language
@@ -97,7 +99,7 @@ class TranslationService {
 		}
 		// load the language in which salesforce is currently set
 		const sfLanguage = await sendExtensionMessage({
-			what: "get-sf-language",
+			what: WHAT_GET_SF_LANG,
 		});
 		if (await this.loadNewLanguage(sfLanguage)) {
 			return sfLanguage;

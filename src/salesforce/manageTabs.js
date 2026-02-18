@@ -28,6 +28,7 @@ import {
 	reorderTabsUl,
 	showToast,
 } from "./content.js";
+import { getInnerElementFieldBySelector } from "../functions.js";
 
 let focusedIndex = 0;
 const managedLoggers = [];
@@ -758,21 +759,6 @@ function reorderTabsTable({
 }
 
 /**
- * Returns the value from the given selector
- * @param {Object} [param0={}] an object with the following keys
- * @param {TrHTMLElement} [param0.tr=null] - the tr where to selector is located
- * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
- * @return undefined (when the value is null or "") or the trimmed value
- */
-function getInputValue({
-	tr = null,
-	selector = "",
-} = {}) {
-	const value = tr?.querySelector(selector).value.trim();
-	return value == null || value === "" ? undefined : value;
-}
-
-/**
  * Finds all the trs and their inputs to update the currently saved Tabs
  * @param {Object} [param0={}] an object with the following keys
  * @param {TbodyHTMLElement} [param0.tbody=document.querySelector("#sortable-table tbody")] - the tbody inside the modal where the trs can be found
@@ -788,9 +774,21 @@ async function readManagedTabsAndSave({
 	for (const tr of tbody.querySelectorAll("tr")) {
 		if (tr !== lastTr) { // lastChild is always empty
 			tableTabs.push(Tab.create({
-				label: getInputValue({ tr, selector: "input.label" }),
-				url: getInputValue({ tr, selector: "input.url" }),
-				org: getInputValue({ tr, selector: "input.org" }),
+				label: getInnerElementFieldBySelector({
+					parentelement: tr,
+					field: "value",
+					selector: "input.label",
+				}),
+				url: getInnerElementFieldBySelector({
+					parentelement: tr,
+					field: "value",
+					selector: "input.url",
+				}),
+				org: getInnerElementFieldBySelector({
+					parentelement: tr,
+					field: "value",
+					selector: "input.org",
+				}),
 			}));
 		}
 	}

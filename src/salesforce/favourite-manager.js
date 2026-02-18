@@ -2,6 +2,7 @@
 import {
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
+	CXM_REMOVE_TAB,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	HIDDEN_CLASS,
@@ -13,6 +14,8 @@ import {
 	TOAST_WARNING,
 	TUTORIAL_EVENT_ACTION_FAVOURITE,
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+	WHAT_ADD,
+	WHAT_GET_COMMANDS,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import Tab from "/tab.js";
@@ -20,8 +23,6 @@ import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
-	ACTION_ADD,
-	ACTION_REMOVE_THIS,
 	getCurrentHref,
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
@@ -121,7 +122,7 @@ async function generateFavouriteButton() {
 	button.appendChild(span);
 	const commands = [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB];
 	const connectedCommands = await sendExtensionMessage({
-		what: "get-commands",
+		what: WHAT_GET_COMMANDS,
 		commands,
 	});
 	let starCmd = null;
@@ -245,7 +246,7 @@ async function addTab(url) {
 		org = Tab.extractOrgName(href);
 	}
 	await performActionOnTabs(
-		ACTION_ADD,
+		WHAT_ADD,
 		{ label, url, org },
 		{
 			addInFront: Array.isArray(settings) &&
@@ -272,7 +273,7 @@ async function actionFavourite() {
 				url,
 				org: Tab.extractOrgName(getCurrentHref()),
 			});
-			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
+			await performActionOnTabs(CXM_REMOVE_TAB, tabToRemove);
 		} catch (e) {
 			console.warn(e);
 			showToast("error_remove_not_favourite", TOAST_WARNING);
