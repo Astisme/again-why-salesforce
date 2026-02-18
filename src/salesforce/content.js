@@ -454,7 +454,7 @@ export async function reorderTabsUl() {
 	try {
 		// Get the list of tabs
 		const tabs = [];
-		for (const li of getSetupTabUl()?.querySelectorAll("li")) {
+		for (const li of setupTabUl?.querySelectorAll("li")) {
 			tabs.push(Tab.create({
 				label: getInnerElementFieldBySelector({
 					parentElement: li,
