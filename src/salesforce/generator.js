@@ -402,7 +402,10 @@ export function generateRowTemplate(
  * @param {string} status - The toast type.
  * @return {HTMLElement} The generated toast container element.
  */
-export async function generateSldsToastMessage(message, status = TOAST_SUCCESS) {
+export async function generateSldsToastMessage(
+	message,
+	status = TOAST_SUCCESS,
+) {
 	const translator = await ensureTranslatorAvailability();
 	if (message == null || message === "") {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
@@ -459,7 +462,7 @@ export async function generateSldsToastMessage(message, status = TOAST_SUCCESS) 
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute(
 		"d",
-    status === "success" || status === "info"
+		status === "success" || status === "info"
 			? "M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
 			: "M260 20C128 20 20 128 20 260s108 240 240 240 240-108 240-240S392 20 260 20zM80 260a180 180 0 01284-147L113 364a176 176 0 01-33-104zm180 180c-39 0-75-12-104-33l251-251a180 180 0 01-147 284z",
 	);

@@ -98,57 +98,51 @@ function redirectToHomeAndStart(tutorial) {
  */
 class Tutorial {
 	/**
-	 * Initializes a new Tutorial instance.
-	 * Sets up initial state variables for managing the tutorial flow.
+	 * The current step index in the tutorial sequence.
+	 * @type {number}
 	 */
-	constructor() {
-		/**
-		 * The current step index in the tutorial sequence.
-		 * @type {number}
-		 */
-		this.currentStep = 0;
-		/**
-		 * Semi-transparent overlay covering the entire page.
-		 * @type {HTMLElement|null}
-		 */
-		this.overlay = null;
-		/**
-		 * Box for displaying tutorial messages and interaction buttons.
-		 * @type {HTMLElement|null}
-		 */
-		this.messageBox = null;
-		/**
-		 * The currently highlighted element.
-		 * @type {HTMLElement|null}
-		 */
-		this.highlightedElement = null; // New property
-		/**
-		 * The dynamically created style element for highlighting.
-		 * @type {HTMLStyleElement|null}
-		 */
-		this.highlightStyleElement = null; // New property
-		/**
-		 * Spinner element to show loading states.
-		 * @type {HTMLElement|null}
-		 */
-		this.spinner = null;
-		/**
-		 * Flag indicating whether the tutorial is currently active.
-		 * @type {boolean}
-		 */
-		this.isActive = false;
-		/**
-		 * Cached keyboard shortcut for opening settings.
-		 * @type {string|null}
-		 */
-		this.shortcut = null;
-		/**
-		 * Array of tutorial steps with their configurations.
-		 * @type {Array<Object>}
-		 */
-		this.steps = [];
-		this.retryCount = 0;
-	}
+	currentStep = 0;
+	/**
+	 * Semi-transparent overlay covering the entire page.
+	 * @type {HTMLElement|null}
+	 */
+	overlay = null;
+	/**
+	 * Box for displaying tutorial messages and interaction buttons.
+	 * @type {HTMLElement|null}
+	 */
+	messageBox = null;
+	/**
+	 * The currently highlighted element.
+	 * @type {HTMLElement|null}
+	 */
+	highlightedElement = null; // New property
+	/**
+	 * The dynamically created style element for highlighting.
+	 * @type {HTMLStyleElement|null}
+	 */
+	highlightStyleElement = null; // New property
+	/**
+	 * Spinner element to show loading states.
+	 * @type {HTMLElement|null}
+	 */
+	spinner = null;
+	/**
+	 * Flag indicating whether the tutorial is currently active.
+	 * @type {boolean}
+	 */
+	isActive = false;
+	/**
+	 * Cached keyboard shortcut for opening settings.
+	 * @type {string|null}
+	 */
+	shortcut = null;
+	/**
+	 * Array of tutorial steps with their configurations.
+	 * @type {Array<Object>}
+	 */
+	steps = [];
+	retryCount = 0;
 
 	/**
 	 * Finds up to two elements whose URLs don't match any saved Tab
@@ -171,8 +165,10 @@ class Tutorial {
 				if (!res.firstRedirectElement) res.firstRedirectElement = el;
 				else if (!res.secondRedirectElement) {
 					if (elementIndex >= objManElementLen) viableObjManEl = el;
-					else res.secondRedirectElement = el;
-					break;
+					else {
+						res.secondRedirectElement = el;
+						break;
+					}
 				}
 			}
 			elementIndex++;
@@ -395,7 +391,6 @@ class Tutorial {
 		this.overlay = elements.overlay;
 		this.messageBox = elements.messageBox;
 		this.spinner = elements.spinner;
-
 		// Define the custom highlight CSS class
 		this.highlightStyleElement = document.createElement("style");
 		this.highlightStyleElement.textContent = `
@@ -407,7 +402,6 @@ class Tutorial {
         }
     `;
 		document.head.appendChild(this.highlightStyleElement);
-
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
 		document.body.appendChild(this.spinner);
@@ -525,14 +519,12 @@ class Tutorial {
 					once: true,
 				});
 			}
-		} else {
+		} else if (this.highlightedElement) {
 			// Step has no element to highlight, remove any existing highlight
-			if (this.highlightedElement) {
-				this.highlightedElement.classList.remove(
-					TUTORIAL_HIGHLIGHT_CLASS,
-				);
-				this.highlightedElement = null;
-			}
+			this.highlightedElement.classList.remove(
+				TUTORIAL_HIGHLIGHT_CLASS,
+			);
+			this.highlightedElement = null;
 		}
 		await this.showMessage(step);
 		if (step.action === "confirm" || step.waitFor == null) {
@@ -553,12 +545,10 @@ class Tutorial {
 	 */
 	highlightElement(el) {
 		// Remove highlight from previously highlighted element
-		if (this.highlightedElement) {
-			this.highlightedElement.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
-		}
+		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		// Add highlight to the new element
-		el.classList.add(TUTORIAL_HIGHLIGHT_CLASS);
 		this.highlightedElement = el;
+		this.highlightedElement.classList.add(TUTORIAL_HIGHLIGHT_CLASS);
 	}
 
 	/**
@@ -597,7 +587,7 @@ class Tutorial {
 		const confirmBtn = document.createElement("button");
 		confirmBtn.textContent = "OK";
 		confirmBtn.addEventListener("click", () => {
-			if (step.onConfirm) step.onConfirm();
+			step.onConfirm?.();
 			this.nextStep();
 		});
 		this.messageBox.appendChild(confirmBtn);
@@ -628,26 +618,11 @@ class Tutorial {
 	 */
 	end(shouldSaveProgress = true) {
 		this.isActive = false;
-		if (this.overlay) {
-			document.body.removeChild(this.overlay);
-			document.body.removeChild(this.messageBox);
-			document.body.removeChild(this.spinner);
-
-			// Clean up highlight
-			if (this.highlightedElement) {
-				this.highlightedElement.classList.remove(
-					TUTORIAL_HIGHLIGHT_CLASS,
-				);
-			}
-			if (
-				this.highlightStyleElement &&
-				this.highlightStyleElement.parentNode
-			) {
-				this.highlightStyleElement.parentNode.removeChild(
-					this.highlightStyleElement,
-				);
-			}
-		}
+		this.overlay?.remove();
+		this.messageBox?.remove();
+		this.spinner?.remove();
+		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
+		this.highlightStyleElement?.remove();
 		if (shouldSaveProgress) {
 			sendExtensionMessage({
 				what: "set",
@@ -685,7 +660,6 @@ export async function checkTutorial() {
 		confirm(
 			await translator.translate(
 				"tutorial_continue_prompt",
-				[tutorialProgress + 1],
 			),
 		)
 	) {
@@ -696,22 +670,20 @@ export async function checkTutorial() {
 			);
 		}
 		tutorial.start(tutorialProgress);
-	} else {
-		// User doesn't want to continue, clear progress and ask to start from beginning
-		if (
-			confirm(
-				await translator.translate(
-					"tutorial_restart_prompt",
-				),
-			)
-		) {
-			await sendExtensionMessage({
-				what: "set",
-				key: TUTORIAL_KEY,
-				set: 0,
-			});
-			redirectToHomeAndStart(tutorial);
-		}
+	} else if (
+		// User doesn't want to continue, ask to start from beginning and clear progress if accepted
+		confirm(
+			await translator.translate(
+				"tutorial_restart_prompt",
+			),
+		)
+	) {
+		await sendExtensionMessage({
+			what: "set",
+			key: TUTORIAL_KEY,
+			set: 0,
+		});
+		redirectToHomeAndStart(tutorial);
 	}
 }
 
@@ -722,6 +694,5 @@ export async function checkTutorial() {
  * @return {Promise<void>} Resolves when the tutorial has started.
  */
 export function startTutorial() {
-	const tutorial = new Tutorial();
-	return tutorial.start();
+	return new Tutorial().start();
 }

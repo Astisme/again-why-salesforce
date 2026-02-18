@@ -201,44 +201,46 @@ export function sf_afterSet({
  * @param {string} [status="success"]  - The toast type.
  */
 export async function showToast(message, status = TOAST_SUCCESS) {
-  if(
-    ![
-      TOAST_SUCCESS,
-      TOAST_ERROR,
-      TOAST_WARNING,
-      TOAST_INFO,
-    ].includes(status)
-  )
-    throw new Error("error_unknown_toast_type");
+	if (
+		![
+			TOAST_SUCCESS,
+			TOAST_ERROR,
+			TOAST_WARNING,
+			TOAST_INFO,
+		].includes(status)
+	) {
+		throw new Error("error_unknown_toast_type");
+	}
 	const hanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
 	const toastElement = await generateSldsToastMessage(
 		Array.isArray(message) ? message : [message],
-    status
+		status,
 	);
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
 		toastElement.remove();
 	}, calculateReadingTime(toastElement.textContent));
-	if (status === TOAST_ERROR || status === TOAST_WARNING) console.trace();
-  let logFn = null;
-  switch(status){
-    case TOAST_SUCCESS:
-      logFn = console.log;
-      break;
-    case TOAST_ERROR:
-      logFn = console.error;
-      break;
-    case TOAST_WARNING:
-      logFn = console.warn;
-      break;
-    case TOAST_INFO:
-      logFn = console.info;
-      break;
-    default:
-      break;
-  }
+	let logFn = null;
+	switch (status) {
+		case TOAST_SUCCESS:
+			logFn = console.log;
+			break;
+		case TOAST_INFO:
+			logFn = console.info;
+			break;
+		case TOAST_ERROR:
+			console.trace();
+			logFn = console.error;
+			break;
+		case TOAST_WARNING:
+			console.trace();
+			logFn = console.warn;
+			break;
+		default:
+			break;
+	}
 	logFn?.(message);
 }
 

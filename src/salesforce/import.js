@@ -1,5 +1,10 @@
 "use strict";
-import { EXTENSION_NAME, HIDDEN_CLASS, TOAST_ERROR, TOAST_WARNING } from "/constants.js";
+import {
+	EXTENSION_NAME,
+	HIDDEN_CLASS,
+	TOAST_ERROR,
+	TOAST_WARNING,
+} from "/constants.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
