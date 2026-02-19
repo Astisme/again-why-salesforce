@@ -1,4 +1,93 @@
 {
+	"account": {
+		"message": "Account",
+		"description": "The page related to ObjectManager/Account/FieldsAndRelationships/view"
+	},
+	"case": {
+		"message": "Case",
+		"description": "The page related to ObjectManager/Case/FieldsAndRelationships/view"
+	},
+	"contact": {
+		"message": "Contact",
+		"description": "The page related to ObjectManager/Contact/FieldsAndRelationships/view"
+	},
+	"opportunity": {
+		"message": "Opportunity",
+		"description": "The page related to ObjectManager/Opportunity/FieldsAndRelationships/view"
+	},
+	"lead": {
+		"message": "Lead",
+		"description": "The page related to ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"task": {
+		"message": "Task",
+		"description": "The page related to ObjectManager/Task/FieldsAndRelationships/view"
+	},
+	"campaign": {
+		"message": "Campaign",
+		"description": "The page related to ObjectManager/Campaign/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Product2",
+		"description": "The page related to ObjectManager/Product2/FieldsAndRelationships/view"
+	},
+	"pricebook2": {
+		"message": "Pricebook2",
+		"description": "The page related to ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"asset": {
+		"message": "Asset",
+		"description": "The page related to ObjectManager/Asset/FieldsAndRelationships/view"
+	},
+	"permission_sets": {
+		"message": "Permission Sets",
+		"description": "The page related to PermSets/home"
+	},
+
+	"login_history": {
+		"message": "Login History",
+		"description": "The page related to OrgLoginHistory/home"
+	},
+
+	"sessions": {
+		"message": "Sessions",
+		"description": "The page related to SecuritySession/home"
+	},
+
+	"setup_audit_trail": {
+		"message": "Setup Audit Trail",
+		"description": "The page related to SecurityEvents/home"
+	},
+
+	"sharing_settings": {
+		"message": "Sharing Settings",
+		"description": "The page related to SecuritySharing/home"
+	},
+
+	"field_accessibility": {
+		"message": "Field Accessibility",
+		"description": "The page related to FieldAccessibility/home"
+	},
+
+	"classic_email_templates": {
+		"message": "Classic Email Templates",
+		"description": "The page related to CommunicationTemplatesEmail/home"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Reports and Dashboards Settings",
+		"description": "The page related to ReportUI/home"
+	},
+
+	"manage_connected_apps": {
+		"message": "Manage Connected Apps",
+		"description": "The page related to ConnectedApplication/home"
+	},
+
+	"company_information": {
+		"message": "Company Information",
+		"description": "The page related to CompanyProfileInfo/home"
+	},
+
 	"act_delete": {
 		"message": "🗑️ Delete",
 		"description": "[manage-tabs] delete a row"
@@ -1520,19 +1609,19 @@
 		"description": "[tutorial] first message"
 	},
 	"tutorial_favourite_tabs": {
-		"message": "These are your favourite Tabs. They allow quick access to frequently used pages.",
+		"message": "These are your favourite $tabs and they are used for quick access to frequently used pages.",
 		"description": "[tutorial] highlight favourite tabs"
 	},
 	"tutorial_click_highlighted_tab": {
-		"message": "Click on the highlighted Tab to navigate to the corresponding page.",
+		"message": "Click on the highlighted $tab to navigate to the corresponding page.",
 		"description": "[tutorial] click highlighted tab"
 	},
 	"tutorial_remove_favourite": {
-		"message": "Click the slashed star to remove this page from favourites.",
+		"message": "Click the slashed star to remove this page from favourites. TIP: you may click the star after this step has been completed to avoid losing this $tab",
 		"description": "[tutorial] remove favourite"
 	},
 	"tutorial_redirect_account": {
-		"message": "We'll now redirect you to the Account object page. Click OK to continue.",
+		"message": "We'll now redirect you to another page to show you more. Click OK to continue.",
 		"description": "[tutorial] redirect to account"
 	},
 	"tutorial_add_favourite": {
@@ -1540,11 +1629,11 @@
 		"description": "[tutorial] add favourite"
 	},
 	"tutorial_pin_tab": {
-		"message": "Right-click on the Account Tab and select 'Move > Pin' to pin it.",
+		"message": "Right-click on the highlighted $tab and select 'Move > Pin' to pin it.",
 		"description": "[tutorial] pin tab"
 	},
 	"tutorial_pinned_tab": {
-		"message": "Notice the Account Tab is now pinned and will stay in place.",
+		"message": "Notice that the $tab is now pinned and will stay in place.",
 		"description": "[tutorial] pinned tab"
 	},
 	"tutorial_manage_tabs": {
@@ -1552,7 +1641,7 @@
 		"description": "[tutorial] manage tabs"
 	},
 	"tutorial_manage_tabs_link": {
-		"message": "You may manage your Tabs from this screen. For more info, visit: ",
+		"message": "You may manage your $tabs from this screen. Click here to get more info.",
 		"description": "[tutorial] manage tabs link"
 	},
 	"tutorial_drag_flows": {
@@ -1560,23 +1649,27 @@
 		"description": "[tutorial] drag flows"
 	},
 	"tutorial_pinned_explanation": {
-		"message": "The dragged row couldn't be moved before the pinned row (because it is currently unpinned), so it went to at the end of the pinned list which is treated separately.",
+		"message": "The dragged row couldn't be moved before the pinned row (because it is currently unpinned), so it went to at the beginning of the unpinned list. These two lists are treated separately.",
 		"description": "[tutorial] pinned explanation"
 	},
 	"tutorial_save_modal": {
-		"message": "Click Save to apply changes and see the confirmation message.",
+		"message": "Click $save to apply changes and see the confirmation message.",
 		"description": "[tutorial] save modal"
 	},
 	"tutorial_keyboard_shortcut": {
-		"message": "Press the keyboard shortcut to open the Settings page where you can change the extension's behaviour and style your Tabs.",
+		"message": "Press the keyboard shortcut to open the $settings page where you can change the extension's behaviour and style your $tabs",
 		"description": "[tutorial] keyboard shortcut"
 	},
 	"tutorial_end": {
 		"message": "$tutorial completed! Have fun using the extension.",
 		"description": "[tutorial] end"
 	},
+	"tutorial_start_prompt": {
+		"message": "Do you want to check out the $tutorial for $extension_label ?",
+		"description": "[tutorial] prompt to continue tutorial"
+	},
 	"tutorial_continue_prompt": {
-		"message": "You have an unfinished $tutorial. Do you want to continue?",
+		"message": "Do you want to continue your unfinished $tutorial ?",
 		"description": "[tutorial] prompt to continue tutorial"
 	},
 	"tutorial_restart_prompt": {

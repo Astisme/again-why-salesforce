@@ -31,7 +31,7 @@ import {
 	showToast,
 } from "./content.js";
 
-const BUTTON_ID = `${EXTENSION_NAME}-button`;
+export const FAVOURITE_BUTTON_ID = `${EXTENSION_NAME}-button`;
 export const STAR_ID = `${EXTENSION_NAME}-star`;
 export const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
 
@@ -107,7 +107,7 @@ function createStarSvg({
  */
 async function generateFavouriteButton() {
 	const button = document.createElement("button");
-	button.id = BUTTON_ID;
+	button.id = FAVOURITE_BUTTON_ID;
 	button.classList.add("slds-button", "slds-button--neutral", "uiButton");
 	button.setAttribute("type", "button");
 	button.setAttribute("aria-live", "off");
@@ -323,7 +323,7 @@ export async function showFavouriteButton(count = 0) {
 	if (getWasOnSavedTab() == null && isCurrentlyOnSavedTab == null) {
 		await isOnSavedTab();
 	}
-	const oldButton = header.querySelector(`#${BUTTON_ID}`);
+	const oldButton = header.querySelector(`#${FAVOURITE_BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
 		const allTabs = await ensureAllTabsAvailability();

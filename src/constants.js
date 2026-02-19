@@ -192,43 +192,15 @@ export const ALL_CXM_KEYS = new Set([
 	CXM_UNPIN_TAB,
 	CXM_MANAGE_TABS,
 ]);
-/**
- * Retrieves the command key from the manifest to enable single source of truth because the strings for these MUST BE the same as the ones in the manifest
- * @param {string} description - the description of the command found in the manifest
- * @return {string} the related command key
- */
-function getCmdNameFromManifestByDescription(description) {
-	for (const cmdKey of Object.keys(MANIFEST.commands)) {
-		if (description === MANIFEST.commands[cmdKey].description) {
-			return cmdKey;
-		}
-	}
-	return "cmd-unknown";
-}
-export const CMD_SAVE_AS_TAB = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_save_as_tab__",
-);
-export const CMD_REMOVE_TAB = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_remove_tab__",
-);
-export const CMD_TOGGLE_ORG = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_toggle_org__",
-);
-export const CMD_UPDATE_TAB = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_update_tab__",
-);
-export const CMD_OPEN_SETTINGS = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_open_settings__",
-);
-export const CMD_OPEN_OTHER_ORG = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_open_other_org__",
-);
-export const CMD_IMPORT = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_import__",
-);
-export const CMD_EXPORT_ALL = getCmdNameFromManifestByDescription(
-	"__MSG_cmd_export_all__",
-);
+// these commands must be the same as the keys found in MANIFEST.commands
+export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
+export const CMD_REMOVE_TAB = "cmd-remove-tab";
+export const CMD_TOGGLE_ORG = "cmd-toggle-org";
+export const CMD_UPDATE_TAB = "cmd-update-tab";
+export const CMD_OPEN_SETTINGS = "cmd-open-settings";
+export const CMD_OPEN_OTHER_ORG = "cmd-open-other-org";
+export const CMD_IMPORT = "cmd-import";
+export const CMD_EXPORT_ALL = "cmd-export-all";
 export const ALL_CMD_KEYS = new Set([
 	CMD_SAVE_AS_TAB,
 	CMD_REMOVE_TAB,
@@ -306,3 +278,33 @@ export const WHAT_GET_SETTINGS = "get-settings";
 export const WHAT_GET_STYLE_SETTINGS = "get-style-settings";
 export const WHAT_GET_COMMANDS = "get-commands";
 export const WHAT_START_TUTORIAL = "start-tutorial";
+export const ALL_WHAT_REASONS = new Set([
+	WHAT_FOCUS_CHANGED,
+	WHAT_STARTUP,
+	WHAT_INSTALLED,
+	WHAT_ACTIVATE,
+	WHAT_HIGHLIGHTED,
+	WHAT_THEME,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_SF_LANG,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_STYLE_SETTINGS,
+	WHAT_GET_COMMANDS,
+	WHAT_START_TUTORIAL,
+	WHAT_SET,
+	WHAT_GET,
+	WHAT_SAVED,
+	WHAT_SHOW_IMPORT,
+	WHAT_SHOW_OPEN_OTHER_ORG,
+	WHAT_PAGE_SAVE_TAB,
+	WHAT_PAGE_REMOVE_TAB,
+	WHAT_TOGGLE_ORG,
+	WHAT_UPDATE_TAB,
+	WHAT_ADD,
+	WHAT_UPDATE_EXTENSION,
+	WHAT_EXPORT,
+	WHAT_SHOW_EXPORT_MODAL,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_EXPORT_FROM_BG,
+]);

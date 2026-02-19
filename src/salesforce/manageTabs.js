@@ -26,6 +26,7 @@ import {
 	getModalHanger,
 	makeDuplicatesBold,
 	reorderTabsUl,
+	sf_afterSet,
 	showToast,
 } from "./content.js";
 import { getInnerElementFieldBySelector } from "../functions.js";
@@ -170,7 +171,7 @@ function getLastTr(tbody = null) {
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
  */
-function handleActionButtonClick(e, {
+export function handleActionButtonClick(e, {
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -775,17 +776,17 @@ async function readManagedTabsAndSave({
 		if (tr !== lastTr) { // lastChild is always empty
 			tableTabs.push(Tab.create({
 				label: getInnerElementFieldBySelector({
-					parentelement: tr,
+					parentElement: tr,
 					field: "value",
 					selector: "input.label",
 				}),
 				url: getInnerElementFieldBySelector({
-					parentelement: tr,
+					parentElement: tr,
 					field: "value",
 					selector: "input.url",
 				}),
 				org: getInnerElementFieldBySelector({
-					parentelement: tr,
+					parentElement: tr,
 					field: "value",
 					selector: "input.org",
 				}),
@@ -794,12 +795,20 @@ async function readManagedTabsAndSave({
 	}
 	allTabs = allTabs ?? await ensureAllTabsAvailability();
 	// send message to save the Tabs as they were read
-	await allTabs.replaceTabs(tableTabs, {
-		resetTabs: true,
-		removeOrgTabs: true,
-		updatePinnedTabs: false,
-		invalidateSort: manage_InvalidateSort,
-	});
+	if (
+		await allTabs.replaceTabs(tableTabs, {
+			resetTabs: true,
+			removeOrgTabs: true,
+			updatePinnedTabs: false,
+			invalidateSort: manage_InvalidateSort,
+		})
+	) {
+		sf_afterSet({
+			tabs: allTabs,
+		});
+	} else {
+		showToast("error_processing_tabs", TOAST_ERROR);
+	}
 }
 
 /**

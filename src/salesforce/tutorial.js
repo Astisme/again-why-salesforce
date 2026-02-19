@@ -1,6 +1,7 @@
 "use strict";
 import {
 	CMD_OPEN_SETTINGS,
+	CXM_UNPIN_TAB,
 	EXTENSION_GITHUB_LINK,
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
@@ -19,75 +20,108 @@ import {
 import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { getSetupTabUl, performActionOnTabs, showToast } from "./content.js";
-import { showFavouriteButton, STAR_ID } from "./favourite-manager.js";
+import {
+	FAVOURITE_BUTTON_ID,
+	showFavouriteButton,
+} from "./favourite-manager.js";
 import { generateTutorialElements, MODAL_ID } from "./generator.js";
-import { ensureAllTabsAvailability } from "../tabContainer.js";
+import { ensureAllTabsAvailability, TabContainer } from "../tabContainer.js";
+import { handleActionButtonClick } from "./manageTabs.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
 const usablePages = {
 	objectManager: [
 		{
-			label: "Account",
+			label: "account",
 			url: "ObjectManager/Account/FieldsAndRelationships/view",
 		},
 		{
-			label: "Case",
+			label: "case",
 			url: "ObjectManager/Case/FieldsAndRelationships/view",
 		},
 		{
-			label: "Contact",
+			label: "contact",
 			url: "ObjectManager/Contact/FieldsAndRelationships/view",
 		},
 		{
-			label: "Opportunity",
+			label: "opportunity",
 			url: "ObjectManager/Opportunity/FieldsAndRelationships/view",
 		},
 		{
-			label: "Lead",
+			label: "lead",
 			url: "ObjectManager/Lead/FieldsAndRelationships/view",
 		},
 		{
-			label: "Task",
+			label: "task",
 			url: "ObjectManager/Task/FieldsAndRelationships/view",
 		},
 		{
-			label: "Campaign",
+			label: "campaign",
 			url: "ObjectManager/Campaign/FieldsAndRelationships/view",
 		},
 		{
-			label: "Product2",
+			label: "product2",
 			url: "ObjectManager/Product2/FieldsAndRelationships/view",
 		},
 		{
-			label: "Pricebook2",
+			label: "pricebook2",
 			url: "ObjectManager/Pricebook2/FieldsAndRelationships/view",
 		},
 		{
-			label: "Asset",
+			label: "asset",
 			url: "ObjectManager/Asset/FieldsAndRelationships/view",
 		},
 	],
 	standAlone: [
-		{ label: "Permission Sets", url: "PermSets/home" },
-		{ label: "Login History", url: "OrgLoginHistory/home" },
-		{ label: "Sessions", url: "SecuritySession/home" },
-		{ label: "Setup Audit Trail", url: "SecurityEvents/home" },
-		{ label: "Sharing Settings", url: "SecuritySharing/home" },
-		{ label: "Field Accessibility", url: "FieldAccessibility/home" },
 		{
-			label: "Classic Email Templates",
+			label: "permission_sets",
+			url: "PermSets/home",
+		},
+		{
+			label: "login_history",
+			url: "OrgLoginHistory/home",
+		},
+		{
+			label: "sessions",
+			url: "SecuritySession/home",
+		},
+		{
+			label: "setup_audit_trail",
+			url: "SecurityEvents/home",
+		},
+		{
+			label: "sharing_settings",
+			url: "SecuritySharing/home",
+		},
+		{
+			label: "field_accessibility",
+			url: "FieldAccessibility/home",
+		},
+		{
+			label: "classic_email_templates",
 			url: "CommunicationTemplatesEmail/home",
 		},
-		{ label: "Reports and Dashboards Settings", url: "ReportUI/home" },
-		{ label: "Manage Connected Apps", url: "ConnectedApplication/home" },
-		{ label: "Company Information", url: "CompanyProfileInfo/home" },
+		{
+			label: "reports_and_dashboards_settings",
+			url: "ReportUI/home",
+		},
+		{
+			label: "manage_connected_apps",
+			url: "ConnectedApplication/home",
+		},
+		{
+			label: "company_information",
+			url: "CompanyProfileInfo/home",
+		},
 	],
 };
-const accountPage = "ObjectManager/Account/FieldsAndRelationships/view";
-const casePage = "ObjectManager/Case/FieldsAndRelationships/view";
+
+function customLightningRedirect(miniUrl = "") {
+	performLightningRedirect(`${SETUP_LIGHTNING}${miniUrl}`);
+}
 
 function redirectToHomeAndStart(tutorial) {
-	performLightningRedirect(`${SETUP_LIGHTNING}${SALESFORCE_SETUP_HOME_MINI}`);
+	customLightningRedirect(SALESFORCE_SETUP_HOME_MINI);
 	tutorial?.start();
 }
 
@@ -101,7 +135,7 @@ class Tutorial {
 	 * The current step index in the tutorial sequence.
 	 * @type {number}
 	 */
-	currentStep = 0;
+	currentStep = -1;
 	/**
 	 * Semi-transparent overlay covering the entire page.
 	 * @type {HTMLElement|null}
@@ -133,11 +167,6 @@ class Tutorial {
 	 */
 	isActive = false;
 	/**
-	 * Cached keyboard shortcut for opening settings.
-	 * @type {string|null}
-	 */
-	shortcut = null;
-	/**
 	 * Array of tutorial steps with their configurations.
 	 * @type {Array<Object>}
 	 */
@@ -145,62 +174,76 @@ class Tutorial {
 	retryCount = 0;
 
 	/**
-	 * Finds up to two elements whose URLs don't match any saved Tab
-	 * @returns {Promise<{firstRedirectElement: Object|null, secondRedirectElement: Object|null}>}
+	 * Finds up to two elements whose URLs don't match any saved Tab and sets them up as class elements
+	 * @returns {Promise<void>}
 	 */
 	async #findRedirectLinks() {
 		const allTabs = await ensureAllTabsAvailability();
-		const openUrls = new Set(allTabs.map((t) => t.url));
+		const usersSavedUrls = new Set(allTabs.map((t) => t.url));
 		let viableObjManEl = null;
-		let elementIndex = 0;
 		const objManElementLen = usablePages.objectManager.length;
-		const res = { firstRedirectElement: null, secondRedirectElement: null };
+		const allObjects = [
+			...usablePages.objectManager,
+			...usablePages.standAlone,
+		];
 		for (
-			const el of [
-				...usablePages.objectManager,
-				...usablePages.standAlone,
-			]
+			const elementIndex in allObjects
 		) {
-			if (!openUrls.has(el.url)) {
-				if (!res.firstRedirectElement) res.firstRedirectElement = el;
-				else if (!res.secondRedirectElement) {
-					if (elementIndex >= objManElementLen) viableObjManEl = el;
+			const el = allObjects[elementIndex];
+			if (!usersSavedUrls.has(el.url)) {
+				if (!this.firstRedirectElement) this.firstRedirectElement = el;
+				else if (!this.secondRedirectElement) {
+					if (elementIndex < objManElementLen) viableObjManEl = el;
 					else {
-						res.secondRedirectElement = el;
+						// we're looking at standAlone pages
+						this.secondRedirectElement = el;
 						break;
 					}
 				}
 			}
-			elementIndex++;
 		}
-		if (!res.secondRedirectElement && viableObjManEl != null) {
-			res.secondRedirectElement = viableObjManEl;
+		if (!this.secondRedirectElement && viableObjManEl != null) {
+			this.secondRedirectElement = viableObjManEl;
 		}
-		return res;
 	}
 
-	#getExtensionElementWithLinkInSetup() {
+	#getExtensionElementWithLinkInSetup(redirectElement) {
+		const goToUrl =
+			(redirectElement ?? this.steps[this.currentStep]?.redirectElement)
+				?.url;
 		const ul = getSetupTabUl();
 		return ul.querySelector(
-			`a:not([title^="/"]):not([title="${accountPage}"])`,
+			`a:not([title^="/"]):not([title^="http"])`,
+		) ?? ul.querySelector(
+			`a[title="${goToUrl}"]`,
 		);
 	}
 
-	async #generateExtensionElementWithLinkInSetup() {
-		const translator = await ensureTranslatorAvailability();
+	#generateExtensionElementWithLinkInSetup() {
+		const redirectElement = this.steps[this.currentStep]?.redirectElement;
 		try {
-			performActionOnTabs(WHAT_ADD, {
-				label: await translator.translate("case"), // FIXME update the translation to the actual element used
-				url: casePage,
-			});
+			performActionOnTabs(WHAT_ADD, redirectElement);
 		} catch (e) {
 			console.info(e);
 		}
-		return this.#getExtensionElementWithLinkInSetup();
+		return this.#getExtensionElementWithLinkInSetup(redirectElement);
 	}
 
 	#getStarsContainer() {
-		return document.getElementById(STAR_ID)?.closest("button");
+		// Salesforce has 2 "pages" for ObjectManager and standard pages so we have 2 buttons actually
+		for (
+			const btn of document.querySelectorAll(`#${FAVOURITE_BUTTON_ID}`)
+		) {
+			const bounds = btn.getBoundingClientRect();
+			if (bounds.width !== 0 && bounds.height !== 0) {
+				return btn;
+			}
+		}
+	}
+
+	async #showStarsContainerAndReturnIt() {
+		await showFavouriteButton();
+		return this.#getStarsContainer();
 	}
 
 	/**
@@ -211,15 +254,24 @@ class Tutorial {
 	 * @return {Promise<boolean>} Resolves with `true` when the steps are fully initialized.
 	 */
 	async initSteps() {
-		this.shortcut = await this.getSettingsShortcut();
-		const { firstRedirectElement, secondRedirectElement } = await this
-			.#findRedirectLinks();
-		if (firstRedirectElement == null || secondRedirectElement == null) {
+		await this.#findRedirectLinks();
+		if (
+			this.firstRedirectElement == null ||
+			this.secondRedirectElement == null
+		) {
 			// we could not find 2 links which were not saved by the user...
 			// ask the user to export their Tabs and restart the tutorial with only the default Tabs?
 			showToast("tutorial_export_and_reset_for_tutorial", TOAST_WARNING);
 			return false;
 		}
+		const translator = await ensureTranslatorAvailability();
+		this.firstRedirectElement.label = await translator.translate(
+			this.firstRedirectElement.label,
+		);
+		this.secondRedirectElement.label = await translator.translate(
+			this.secondRedirectElement.label,
+		);
+		const settingsShortcut = await this.getSettingsShortcut();
 		this.steps = [
 			{
 				message: "tutorial_restart",
@@ -237,100 +289,135 @@ class Tutorial {
 				message: "tutorial_click_highlighted_tab",
 				pageUrl: SALESFORCE_SETUP_HOME_MINI,
 				beginsBlock: true,
-				element: this.#getExtensionElementWithLinkInSetup,
+				redirectElement: this.firstRedirectElement,
+				element: () => this.#getExtensionElementWithLinkInSetup(),
 				fakeElement: () =>
 					(this.#generateExtensionElementWithLinkInSetup.bind(
 						this,
 					))(),
 				action: "highlight",
-				waitFor: "click",
+				waitFor: "redirect",
 			},
 			{
 				message: "tutorial_remove_favourite",
-				pageUrl: casePage, // After clicking "Case" tab
+				pageUrl: this.firstRedirectElement.url,
 				element: this.#getStarsContainer,
-				fakeElement: async () => {
-					await showFavouriteButton();
-					return this.#getStarsContainer();
-				},
+				fakeElement: () =>
+					(this.#showStarsContainerAndReturnIt.bind(
+						this,
+					))(),
 				action: "highlight",
 				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 			},
 			{
 				message: "tutorial_redirect_account",
-				pageUrl: casePage,
+				pageUrl: this.firstRedirectElement.url,
+				redirectElement: this.secondRedirectElement,
 				action: "confirm",
 				onConfirm: () => {
-					performLightningRedirect(
-						`${SETUP_LIGHTNING}${accountPage}`,
+					customLightningRedirect(
+						this.secondRedirectElement.url,
 					);
 				},
 				waitFor: "redirect",
 			},
 			{
 				message: "tutorial_add_favourite",
-				pageUrl: accountPage,
+				pageUrl: this.secondRedirectElement.url,
 				beginsBlock: true,
 				element: this.#getStarsContainer,
-				fakeElement: async () => {
-					await showFavouriteButton();
-					return this.#getStarsContainer();
-				},
+				fakeElement: () =>
+					(this.#showStarsContainerAndReturnIt.bind(
+						this,
+					))(),
 				action: "highlight",
 				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_FAVOURITE,
 			},
 			{
 				message: "tutorial_pin_tab",
-				pageUrl: accountPage,
+				pageUrl: this.secondRedirectElement.url,
 				beginsBlock: true,
+				redirectElement: this.secondRedirectElement,
 				element: () => {
-					return getSetupTabUl()?.querySelector(
-						`a[title="${accountPage}"]`,
-					)?.closest("li");
+					return this.#getExtensionElementWithLinkInSetup()?.closest(
+						"li",
+					);
 				},
+				fakeElement: () =>
+					(this.#generateExtensionElementWithLinkInSetup.bind(
+						this,
+					))()?.closest("li"),
 				action: "highlight",
 				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_PIN_TAB,
 			},
 			{
 				message: "tutorial_pinned_tab",
-				pageUrl: accountPage,
-				element: this.#getExtensionElementWithLinkInSetup,
-				fakeElement: this.#generateExtensionElementWithLinkInSetup,
+				pageUrl: this.secondRedirectElement.url,
+				redirectElement: this.secondRedirectElement,
+				element: () => this.#getExtensionElementWithLinkInSetup(),
+				fakeElement: () =>
+					(this.#generateExtensionElementWithLinkInSetup.bind(
+						this,
+					))(),
 				action: "highlight",
 			},
 			{
 				message: "tutorial_manage_tabs",
-				pageUrl: accountPage,
+				pageUrl: this.secondRedirectElement.url,
 				beginsBlock: true,
 				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 			},
 			{
 				message: "tutorial_manage_tabs_link",
-				pageUrl: accountPage, // Still on this page
+				pageUrl: this.secondRedirectElement.url, // Still on this page
 				link: `${EXTENSION_GITHUB_LINK}/wiki/Manage-Tabs-modal`,
 			},
 			{
 				message: "tutorial_drag_flows",
-				pageUrl: accountPage, // Modal is open on this page
-				element: () =>
-					document.querySelector(
-						`#${MODAL_ID} #sortable-table tr:nth-child(3) .slds-cell-wrap`,
-					),
+				pageUrl: this.secondRedirectElement.url, // Modal is open on this page
+				element: async () => {
+					const allTabs = await ensureAllTabsAvailability();
+					const pinnedNumber = allTabs[TabContainer.keyPinnedTabsNo];
+					const tabsLen = allTabs.length;
+					let nthChild;
+					if (tabsLen > pinnedNumber) {
+						nthChild = Math.min(pinnedNumber + 2, tabsLen);
+					} else {
+						// the pinned list and the total length is the same
+						// unpin the last 2 Tabs
+						const unpinUpTo = pinnedNumber <= 2 ? 2 : 3;
+						for (let i = 1; i < unpinUpTo; i++) {
+							await handleActionButtonClick({
+								preventDefault: () => {},
+								stopPropagation: () => {},
+								currentTarget: document.querySelector(
+									`#sortable-table tbody tr:nth-child(${
+										tabsLen - i
+									}) [data-action="${CXM_UNPIN_TAB}"]`,
+								),
+							}, { allTabs });
+						}
+						nthChild = tabsLen;
+					}
+					return document.querySelector(
+						`#${MODAL_ID} #sortable-table tr:nth-child(${nthChild}) .slds-cell-wrap`,
+					);
+				},
 				action: "highlight",
 				waitFor: "event",
 				awaitsCustomEvent: TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 			},
 			{
 				message: "tutorial_pinned_explanation",
-				pageUrl: accountPage,
+				pageUrl: this.secondRedirectElement.url,
 			},
 			{
 				message: "tutorial_save_modal",
-				pageUrl: accountPage,
+				pageUrl: this.secondRedirectElement.url,
 				element: () =>
 					document.querySelector(
 						`#${MODAL_ID} #again-why-salesforce-modal-confirm`,
@@ -340,9 +427,9 @@ class Tutorial {
 			},
 			{
 				message: "tutorial_keyboard_shortcut",
-				pageUrl: accountPage, // After modal closes
+				pageUrl: this.secondRedirectElement.url, // After modal closes
 				beginsBlock: true,
-				shortcut: this.shortcut,
+				shortcut: settingsShortcut,
 			},
 			{
 				message: "tutorial_end",
@@ -378,6 +465,11 @@ class Tutorial {
 			this.currentStep = 0;
 		}
 		this.createOverlay();
+		this.currentStep--; // because nextStep increases before starting
+		const pageUrl = this.steps[this.currentStep]?.pageUrl;
+		if (pageUrl != null) {
+			customLightningRedirect(pageUrl);
+		}
 		this.nextStep();
 	}
 
@@ -399,6 +491,7 @@ class Tutorial {
             color: black !important;
             position: relative !important;
             z-index: 10000 !important;
+            box-shadow: 0 0 2em !important;
         }
     `;
 		document.head.appendChild(this.highlightStyleElement);
@@ -411,18 +504,14 @@ class Tutorial {
 	 * Shows the Salesforce-like spinner.
 	 */
 	showSpinner() {
-		if (this.spinner) {
-			this.spinner.style.display = "block";
-		}
+		this.spinner.style.display = "block";
 	}
 
 	/**
 	 * Hides the Salesforce-like spinner.
 	 */
 	hideSpinner() {
-		if (this.spinner) {
-			this.spinner.style.display = "none";
-		}
+		this.spinner.style.display = "none";
 	}
 
 	/**
@@ -447,6 +536,7 @@ class Tutorial {
 	 * Otherwise, executes the current step's logic.
 	 */
 	async nextStep() {
+		this.currentStep++;
 		this.showSpinner();
 		if (this.currentStep >= this.steps.length) {
 			this.end();
@@ -458,11 +548,10 @@ class Tutorial {
 		if (step.beginsBlock) {
 			this.persistTutorialProgress();
 		}
-		this.currentStep++;
 	}
 
 	async getElementNowOrLater(step, callback) {
-		const el = step.element();
+		const el = await step.element();
 		if (el != null) {
 			return el;
 		}
@@ -504,7 +593,7 @@ class Tutorial {
 					this.executeStep.bind(this),
 				);
 			} else {
-				el = step.element();
+				el = await step.element();
 			}
 			if (el == null) {
 				if (!canFakeElement) {
@@ -520,7 +609,7 @@ class Tutorial {
 					) {
 						maxIndex = this.beginBlockStepIndexes[b];
 					}
-					this.currentStep = maxIndex;
+					this.currentStep = maxIndex - 1;
 					this.nextStep();
 				}
 				return;
@@ -539,7 +628,7 @@ class Tutorial {
 			this.highlightedElement = null;
 		}
 		await this.showMessage(step);
-		if (step.action === "confirm" || step.waitFor == null) {
+		if (step.waitFor == null) {
 			this.showConfirm(step);
 		} else if (step.waitFor === "event" && step.awaitsCustomEvent) {
 			document.addEventListener(
@@ -547,7 +636,60 @@ class Tutorial {
 				() => this.nextStep(),
 				{ once: true },
 			);
+		} else if (step.waitFor === "redirect") {
+			if (step.action === "confirm") {
+				this.showConfirm(step, { continueAfterClick: false });
+			}
+			const cleanup = this.#listenToLightningNavigation(() => {
+				cleanup();
+				this.nextStep();
+			});
 		}
+	}
+
+	/**
+	 * Wraps a history method to intercept calls.
+	 * @param {function} original - The original history method.
+	 * @param {function(string): void} onNavigate - Called with the new URL.
+	 * @returns {function} Wrapped method.
+	 */
+	#wrapHistoryMethod(original, onNavigate) {
+		return function (...args) {
+			original(...args);
+			onNavigate(location.href);
+		};
+	}
+	/**
+	 * Patches history methods and listens for Lightning soft navigation events.
+	 * @param {function(string): void} onNavigate - Called with the new URL on navigation.
+	 * @returns {function(): void} Cleanup function to remove all listeners.
+	 */
+	#listenToLightningNavigation(onNavigate) {
+		const originalPushState = history.pushState.bind(history);
+		const originalReplaceState = history.replaceState.bind(history);
+		history.pushState = this.#wrapHistoryMethod(
+			originalPushState,
+			onNavigate,
+		);
+		history.replaceState = this.#wrapHistoryMethod(
+			originalReplaceState,
+			onNavigate,
+		);
+		const lastUrl = location.href;
+		const observer = new MutationObserver(() => {
+			if (location.href !== lastUrl) {
+				onNavigate(location.href);
+			}
+		});
+		observer.observe(document.body, { childList: true, subtree: true });
+		const onPopState = () => onNavigate(location.href);
+		globalThis.addEventListener("popstate", onPopState, { once: true });
+		return () => {
+			history.pushState = originalPushState;
+			history.replaceState = originalReplaceState;
+			globalThis.removeEventListener("popstate", onPopState);
+			observer.disconnect();
+		};
 	}
 
 	/**
@@ -595,14 +737,18 @@ class Tutorial {
 	 * @param {Object} step - The tutorial step object.
 	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
 	 */
-	showConfirm(step) {
+	showConfirm(step, {
+		continueAfterClick = true,
+	} = {}) {
 		const confirmBtn = document.createElement("button");
 		confirmBtn.textContent = "OK";
-		confirmBtn.addEventListener("click", () => {
-			step.onConfirm?.();
-			this.nextStep();
-		});
 		this.messageBox.appendChild(confirmBtn);
+		this.messageBox.addEventListener("click", () => {
+			step.onConfirm?.();
+			if (continueAfterClick) {
+				this.nextStep();
+			}
+		}, { once: true });
 	}
 
 	/**
@@ -617,13 +763,7 @@ class Tutorial {
 			what: WHAT_GET_COMMANDS,
 			commands: [CMD_OPEN_SETTINGS],
 		});
-		let cmd = null;
-		if (commands.length > 1) {
-			cmd = commands.find((c) => c.name === CMD_OPEN_SETTINGS);
-		} else if (commands.length === 1) {
-			cmd = commands[0];
-		}
-		return cmd ? cmd.shortcut : "Alt+Comma";
+		return commands?.[0]?.shortcut;
 	}
 
 	/**
@@ -676,13 +816,7 @@ export async function checkTutorial() {
 			),
 		)
 	) {
-		const step = tutorial.steps[tutorialProgress];
-		if (step.pageUrl) {
-			performLightningRedirect(
-				`${SETUP_LIGHTNING}${step.pageUrl}`,
-			);
-		}
-		tutorial.start(tutorialProgress);
+		tutorial.start(tutorialProgress - 1);
 	} else if (
 		// User doesn't want to continue, ask to start from beginning and clear progress if accepted
 		confirm(
@@ -691,7 +825,7 @@ export async function checkTutorial() {
 			),
 		)
 	) {
-		await this.persistTutorialProgress(0);
+		await tutorial.persistTutorialProgress(0);
 		redirectToHomeAndStart(tutorial);
 	}
 }

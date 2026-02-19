@@ -1,6 +1,7 @@
 "use strict";
 import {
 	ALL_CMD_KEYS,
+	ALL_WHAT_REASONS,
 	BROWSER,
 	CMD_AND_CXM_MAP_TO_WHAT,
 	CMD_EXPORT_ALL,
@@ -42,6 +43,7 @@ import {
 	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
 	WHAT_STARTUP,
 	WHAT_THEME,
 	WHY_KEY,
@@ -350,11 +352,11 @@ async function _getAPIHostAndHeaders(currentUrl) {
 			MY_SALESFORCE_COM,
 		);
 	}
-	const cookies = await BROWSER.cookies.getAll({
+	const cookies = await BROWSER.cookies?.getAll({
 		domain: origin.replace("https://", ""),
 		name: "sid",
 	});
-	if (cookies.length === 0) {
+	if (cookies == null || cookies.length === 0) {
 		throw new Error("error_no_cookies");
 	}
 	return [
@@ -470,6 +472,7 @@ function listenToExtensionMessages() {
 			case TOAST_WARNING:
 			case WHAT_SHOW_EXPORT_MODAL:
 			case CXM_MANAGE_TABS: // from popup
+			case WHAT_START_TUTORIAL: // from popup
 				sendResponse(null);
 				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for WHAT_SHOW_IMPORT)
 				break;
@@ -501,8 +504,7 @@ function listenToExtensionMessages() {
 				bg_getCommandLinks(request.commands, sendResponse);
 				break;
 			default:
-				// FIXME I think this import test is not required since we're already checking for import modal above
-				if (!["import"].includes(request.what)) {
+				if (!ALL_WHAT_REASONS.has(request.what)) {
 					console.error({ error: "error_unknown_request", request });
 				}
 				break;
