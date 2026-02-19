@@ -6,7 +6,9 @@ import {
 	POPUP_OPEN_SETUP,
 	POPUP_SETUP_NEW_TAB,
 	SALESFORCE_LIGHTNING_PATTERN,
+	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
+	WHAT_GET_BROWSER_TAB,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -38,7 +40,8 @@ if (page != null) { // we're in a salesforce page
 			const goSetup = document.getElementById(setupId);
 			goSetup.classList.remove(HIDDEN_CLASS);
 			// update the button href to use the domain
-			goSetup.href = `${domain}${SETUP_LIGHTNING}SetupOneHome/home`;
+			goSetup.href =
+				`${domain}${SETUP_LIGHTNING}${SALESFORCE_SETUP_HOME_MINI}`;
 			// update the bold on the text
 			willOpenLogin = false;
 		}
@@ -59,7 +62,7 @@ let openPageInSameTab = false;
  */
 function nss_getCurrentBrowserTab(callback, url) {
 	sendExtensionMessage(
-		{ what: "browser-tab" },
+		{ what: WHAT_GET_BROWSER_TAB },
 		(browserTab) => {
 			currentTab = browserTab;
 			if (callback != null) {

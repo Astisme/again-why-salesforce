@@ -1,4 +1,12 @@
-import { BROWSER, PERSIST_SORT, SETTINGS_KEY, WHY_KEY } from "/constants.js";
+import {
+	BROWSER,
+	PERSIST_SORT,
+	SETTINGS_KEY,
+	TOAST_WARNING,
+	WHAT_GET,
+	WHAT_SET,
+	WHY_KEY,
+} from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import Tab from "./tab.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -367,7 +375,7 @@ export class TabContainer extends Array {
 	 */
 	async getSavedTabs(replace = true) {
 		const res = this.#getTabContainerFromObj(
-			await sendExtensionMessage({ what: "get", key: WHY_KEY }),
+			await sendExtensionMessage({ what: WHAT_GET, key: WHY_KEY }),
 		);
 		if (replace) {
 			res[TabContainer.keyTabs] = await this.replaceTabs(
@@ -831,7 +839,7 @@ export class TabContainer extends Array {
 		if (metadata.isUsingOldVersion) {
 			// tell the user to upgrade their backups
 			sendExtensionMessage({
-				what: "warning",
+				what: TOAST_WARNING,
 				message: "warn_upgrade_backup",
 			});
 		}
@@ -979,9 +987,9 @@ export class TabContainer extends Array {
 		// replace tabs already checks the tabs
 		await this.checkSetSorted(fromSortFunction, fromInvalidateSortFunction);
 		await sendExtensionMessage({
-			what: "set",
-			set: this.toJSON(),
+			what: WHAT_SET,
 			key: WHY_KEY,
+			set: this.toJSON(),
 		});
 		if (BROWSER.runtime.lastError) {
 			throw new Error(BROWSER.runtime.lastError);
@@ -1316,7 +1324,7 @@ export class TabContainer extends Array {
 	#invalidateSort() {
 		// Update the sort setting persisted (do not wait for response)
 		sendExtensionMessage({
-			what: "set",
+			what: WHAT_SET,
 			key: SETTINGS_KEY,
 			set: [{
 				id: PERSIST_SORT,
@@ -1510,6 +1518,29 @@ export class TabContainer extends Array {
 		return await this.syncTabs({
 			fromInvalidateSortFunction: isPin ? undefined : true,
 		});
+	}
+
+	/**
+	 * Return the option object used to sort the Tabs
+	 * @param {Object} [param0={}] - an object with the following keys
+	 * @param {string} [param0.sortBy="label"] the Tab field to sort by
+	 * @param {boolean} [param0.standardSort=true] whether to follow the ascending-then-descending sort or the reverse (descending-then-ascending)
+	 * @return {Object} ready to be used by the TabContainer
+	 */
+	getSortOptions({
+		sortBy = "label",
+		standardSort = true,
+	} = {}) {
+		if (!Tab.allowedKeys.has(sortBy)) {
+			throw new Error("error_tab_unexpected_keys");
+		}
+		return {
+			sortBy,
+			sortAsc: (standardSort &&
+				(this.isSortedBy !== sortBy || !this.isSortedAsc)) ||
+				(!standardSort &&
+					(this.isSortedBy === sortBy && !this.isSortedAsc)),
+		};
 	}
 }
 

@@ -77,6 +77,7 @@ if (!MANIFEST.homepage_url?.startsWith("https://github.com/")) {
 export const EXTENSION_GITHUB_LINK = MANIFEST.homepage_url;
 export const EXTENSION_OPTIONAL_HOST_PERM = MANIFEST.optional_host_permissions;
 // SETTINGS
+export const TUTORIAL_KEY = "tutorial-progress"; // Added for tutorial progress saving
 export const SETTINGS_KEY = "settings";
 export const LINK_NEW_BROWSER = "link_new_browser";
 export const SKIP_LINK_DETECTION = "skip_link_detection";
@@ -158,7 +159,40 @@ export const CXM_TMP_HIDE_NON_ORG = "hide-without-org";
 export const CXM_PIN_TAB = "pin-tab";
 export const CXM_UNPIN_TAB = "unpin-tab";
 export const CXM_MANAGE_TABS = "manage-tabs";
-// commands (keyboard shortcuts)
+export const ALL_CXM_KEYS = new Set([
+	CXM_OPEN_OTHER_ORG,
+	CXM_UPDATE_ORG,
+	CXM_UPDATE_TAB,
+	CXM_MOVE_FIRST,
+	CXM_MOVE_LEFT,
+	CXM_MOVE_RIGHT,
+	CXM_MOVE_LAST,
+	CXM_REMOVE_TAB,
+	CXM_REMOVE_OTHER_TABS,
+	CXM_REMOVE_LEFT_TABS,
+	CXM_REMOVE_RIGHT_TABS,
+	CXM_REMOVE_PIN_TABS,
+	CXM_REMOVE_UNPIN_TABS,
+	CXM_EMPTY_VISIBLE_TABS,
+	CXM_EMPTY_GENERIC_TABS,
+	CXM_RESET_DEFAULT_TABS,
+	CXM_EMPTY_TABS,
+	CXM_IMPORT_TABS,
+	CXM_EXPORT_TABS,
+	CXM_PAGE_SAVE_TAB,
+	CXM_PAGE_REMOVE_TAB,
+	CXM_SORT_LABEL,
+	CXM_SORT_URL,
+	CXM_SORT_ORG,
+	CXM_SORT_CLICK_COUNT,
+	CXM_SORT_CLICK_DATE,
+	CXM_TMP_HIDE_ORG,
+	CXM_TMP_HIDE_NON_ORG,
+	CXM_PIN_TAB,
+	CXM_UNPIN_TAB,
+	CXM_MANAGE_TABS,
+]);
+// these commands must be the same as the keys found in MANIFEST.commands
 export const CMD_SAVE_AS_TAB = "cmd-save-as-tab";
 export const CMD_REMOVE_TAB = "cmd-remove-tab";
 export const CMD_TOGGLE_ORG = "cmd-toggle-org";
@@ -167,6 +201,16 @@ export const CMD_OPEN_SETTINGS = "cmd-open-settings";
 export const CMD_OPEN_OTHER_ORG = "cmd-open-other-org";
 export const CMD_IMPORT = "cmd-import";
 export const CMD_EXPORT_ALL = "cmd-export-all";
+export const ALL_CMD_KEYS = new Set([
+	CMD_SAVE_AS_TAB,
+	CMD_REMOVE_TAB,
+	CMD_TOGGLE_ORG,
+	CMD_UPDATE_TAB,
+	CMD_OPEN_SETTINGS,
+	CMD_OPEN_OTHER_ORG,
+	CMD_IMPORT,
+	CMD_EXPORT_ALL,
+]);
 export const WHAT_UPDATE_EXTENSION = "update-extension";
 export const WHAT_EXPORT = "export";
 export const WHAT_SHOW_EXPORT_MODAL = "show-export-modal";
@@ -175,3 +219,92 @@ export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 export const WHAT_EXPORT_FROM_BG = "export-bg";
 export const DO_NOT_REQUEST_FRAME_PERMISSION = "noPerm";
 export const HIDDEN_CLASS = "hidden";
+export const TUTORIAL_EVENT_ACTION_FAVOURITE =
+	"tutorial:actionFavourite:completed";
+export const TUTORIAL_EVENT_ACTION_UNFAVOURITE =
+	"tutorial:actionUnfavourite:completed";
+export const TUTORIAL_EVENT_PIN_TAB = "tutorial:pinTab:completed";
+export const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+	"tutorial:createManageTabsModal:completed";
+export const TUTORIAL_EVENT_REORDERED_TABS_TABLE =
+	"tutorial:tableReorder:completed";
+export const SALESFORCE_SETUP_HOME_MINI = "SetupOneHome/home";
+export const TOAST_SUCCESS = "success";
+export const TOAST_ERROR = "error";
+export const TOAST_WARNING = "warning";
+export const TOAST_INFO = "info";
+export const ALL_TOAST_TYPES = new Set([
+	TOAST_SUCCESS,
+	TOAST_ERROR,
+	TOAST_WARNING,
+	TOAST_INFO,
+]);
+export const WHAT_SET = "set";
+export const WHAT_GET = "get";
+export const WHAT_SAVED = "saved";
+export const WHAT_SHOW_IMPORT = "show-import";
+export const WHAT_SHOW_OPEN_OTHER_ORG = "show-ooo";
+export const WHAT_PAGE_SAVE_TAB = "save-tab";
+export const WHAT_PAGE_REMOVE_TAB = "remove-tab";
+export const WHAT_TOGGLE_ORG = "toggle-org";
+export const WHAT_UPDATE_TAB = "update-single-tab";
+export const WHAT_ADD = "add";
+export const CMD_AND_CXM_MAP_TO_WHAT = {
+	[CMD_SAVE_AS_TAB]: WHAT_PAGE_SAVE_TAB,
+	[CXM_PAGE_SAVE_TAB]: WHAT_PAGE_SAVE_TAB,
+	[CMD_OPEN_OTHER_ORG]: WHAT_SHOW_OPEN_OTHER_ORG,
+	[CXM_OPEN_OTHER_ORG]: WHAT_SHOW_OPEN_OTHER_ORG,
+	[CMD_EXPORT_ALL]: WHAT_SHOW_EXPORT_MODAL,
+	[CXM_EXPORT_TABS]: WHAT_SHOW_EXPORT_MODAL,
+	[CXM_IMPORT_TABS]: WHAT_SHOW_IMPORT,
+	[CMD_IMPORT]: WHAT_SHOW_IMPORT,
+	[CXM_PAGE_REMOVE_TAB]: WHAT_PAGE_REMOVE_TAB,
+	[CMD_REMOVE_TAB]: WHAT_PAGE_REMOVE_TAB,
+	[CXM_UPDATE_ORG]: WHAT_TOGGLE_ORG,
+	[CMD_TOGGLE_ORG]: WHAT_TOGGLE_ORG,
+	[CXM_UPDATE_TAB]: WHAT_UPDATE_TAB,
+	[CMD_UPDATE_TAB]: WHAT_UPDATE_TAB,
+};
+export const WHAT_FOCUS_CHANGED = "focuschanged";
+export const WHAT_STARTUP = "startup";
+export const WHAT_INSTALLED = "installed";
+export const WHAT_ACTIVATE = "activate";
+export const WHAT_HIGHLIGHTED = "highlighted";
+export const WHAT_THEME = "theme";
+export const WHAT_EXPORT_CHECK = "export-check";
+export const WHAT_GET_BROWSER_TAB = "get-browser-tab";
+export const WHAT_GET_SF_LANG = "get-sf-language";
+export const WHAT_GET_SETTINGS = "get-settings";
+export const WHAT_GET_STYLE_SETTINGS = "get-style-settings";
+export const WHAT_GET_COMMANDS = "get-commands";
+export const WHAT_START_TUTORIAL = "start-tutorial";
+export const ALL_WHAT_REASONS = new Set([
+	WHAT_FOCUS_CHANGED,
+	WHAT_STARTUP,
+	WHAT_INSTALLED,
+	WHAT_ACTIVATE,
+	WHAT_HIGHLIGHTED,
+	WHAT_THEME,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_SF_LANG,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_STYLE_SETTINGS,
+	WHAT_GET_COMMANDS,
+	WHAT_START_TUTORIAL,
+	WHAT_SET,
+	WHAT_GET,
+	WHAT_SAVED,
+	WHAT_SHOW_IMPORT,
+	WHAT_SHOW_OPEN_OTHER_ORG,
+	WHAT_PAGE_SAVE_TAB,
+	WHAT_PAGE_REMOVE_TAB,
+	WHAT_TOGGLE_ORG,
+	WHAT_UPDATE_TAB,
+	WHAT_ADD,
+	WHAT_UPDATE_EXTENSION,
+	WHAT_EXPORT,
+	WHAT_SHOW_EXPORT_MODAL,
+	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_EXPORT_FROM_BG,
+]);

@@ -1,24 +1,15 @@
 "use strict";
 import {
+	ALL_TOAST_TYPES,
 	BROWSER,
-	CMD_EXPORT_ALL,
-	CMD_OPEN_OTHER_ORG,
-	CMD_REMOVE_TAB,
-	CMD_SAVE_AS_TAB,
-	CMD_TOGGLE_ORG,
-	CMD_UPDATE_TAB,
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
-	CXM_EXPORT_TABS,
 	CXM_MANAGE_TABS,
 	CXM_MOVE_FIRST,
 	CXM_MOVE_LAST,
 	CXM_MOVE_LEFT,
 	CXM_MOVE_RIGHT,
-	CXM_OPEN_OTHER_ORG,
-	CXM_PAGE_REMOVE_TAB,
-	CXM_PAGE_SAVE_TAB,
 	CXM_PIN_TAB,
 	CXM_REMOVE_LEFT_TABS,
 	CXM_REMOVE_OTHER_TABS,
@@ -35,8 +26,6 @@ import {
 	CXM_TMP_HIDE_NON_ORG,
 	CXM_TMP_HIDE_ORG,
 	CXM_UNPIN_TAB,
-	CXM_UPDATE_ORG,
-	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
 	EXTENSION_VERSION,
 	HAS_ORG_TAB,
@@ -48,13 +37,39 @@ import {
 	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
+	TOAST_ERROR,
+	TOAST_INFO,
+	TOAST_SUCCESS,
+	TOAST_WARNING,
+	TUTORIAL_EVENT_PIN_TAB,
 	USE_LIGHTNING_NAVIGATION,
+	WHAT_ACTIVATE,
+	WHAT_ADD,
 	WHAT_EXPORT_FROM_BG,
+	WHAT_FOCUS_CHANGED,
+	WHAT_HIGHLIGHTED,
+	WHAT_INSTALLED,
+	WHAT_PAGE_REMOVE_TAB,
+	WHAT_PAGE_SAVE_TAB,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
+	WHAT_SAVED,
+	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
+	WHAT_SHOW_IMPORT,
+	WHAT_SHOW_OPEN_OTHER_ORG,
+	WHAT_START_TUTORIAL,
+	WHAT_STARTUP,
+	WHAT_THEME,
+	WHAT_TOGGLE_ORG,
 	WHAT_UPDATE_EXTENSION,
+	WHAT_UPDATE_TAB,
 } from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
+import {
+	calculateReadingTime,
+	getInnerElementFieldBySelector,
+	getSettings,
+	sendExtensionMessage,
+} from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
@@ -72,6 +87,7 @@ import {
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
+import { checkTutorial, startTutorial } from "./tutorial.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -101,7 +117,7 @@ let href = globalThis.location?.href;
  * @return {string} The current page href.
  */
 export function getCurrentHref() {
-	return href;
+	return globalThis.location?.href;
 }
 
 /**
@@ -162,75 +178,71 @@ async function checkAddLightningNavigation() {
  * - Reloads the tabs by calling `reloadTabs` with the provided tabs.
  *
  * @param {Object} [param0] an object containing the following keys
- * @param {string} [param0.what="saved"] - A flag indicating the action that triggered this function. If null or "saved", a toast message is shown.
+ * @param {string} [param0.what=WHAT_SAVED] - A flag indicating the action that triggered this function. If null or WHAT_SAVED, a toast message is shown.
  * @param {Array<Tab>|null} [param0.tabs=null] - The tabs to reload. If provided, they are passed to `reloadTabs`.
  * @param {boolean} [param0.shouldReload=true] - If the Tabs should be reloaded from scratch
  */
 export function sf_afterSet({
-	what = "saved",
+	what = WHAT_SAVED,
 	tabs = null,
 	shouldReload = true,
 } = {}) {
 	if (setupTabUl == null) {
 		return;
 	}
-	if (what === "saved") {
+	if (what === WHAT_SAVED) {
 		showToast(["extension_label", "tabs_saved"]);
 	}
-	if (shouldReload === true) {
+	if (shouldReload) {
 		reloadTabs(tabs);
 	}
 }
 
-/**
- * Calculates the estimated time (in milliseconds) it takes to read a given message.
- *
- * @param {string} message - The message to calculate the reading time for.
- * @return {number} - The estimated reading time in milliseconds.
- */
-function _calculateReadingTime(message) {
-	const words = message.split(/\s+/).filter((word) => word.length > 0);
-	const wordsPerMinute = 200; // Average reading speed
-	const readingTimeMinutes = words.length / wordsPerMinute;
-	const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
-	return (readingTimeSeconds + 2) * 1000;
-}
 /**
  * Displays a toast message on the UI with the provided message and styling options.
  * - The toast message is appended to the DOM and automatically removed after an estimated reading time.
  * - The message is logged to the console with an appropriate log level based on success, warning, or error.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} [isSuccess=true] - Indicates if the message is a success. Defaults to `true`.
- * @param {boolean} [isWarning=false] - Indicates if the message is a warning. Defaults to `false`.
+ * @param {string} [status="success"]  - The toast type.
  */
-export async function showToast(message, isSuccess = true, isWarning = false) {
+export async function showToast(message, status = TOAST_SUCCESS) {
+	if (
+		!ALL_TOAST_TYPES.has(status)
+	) {
+		throw new Error("error_unknown_toast_type");
+	}
 	const hanger = document.getElementsByClassName(
 		"oneConsoleTabset navexConsoleTabset",
 	)[0];
 	const toastElement = await generateSldsToastMessage(
 		Array.isArray(message) ? message : [message],
-		isSuccess,
-		isWarning,
+		status,
 	);
 	hanger.appendChild(toastElement);
 	setTimeout(() => {
 		toastElement.remove();
-	}, _calculateReadingTime(toastElement.textContent));
-	if (isSuccess) {
-		if (isWarning) {
-			console.info(message);
-		} else {
-			console.log(message);
-		}
-	} else {
-		console.trace();
-		if (isWarning) {
-			console.warn(message);
-		} else {
-			console.error(message);
-		}
+	}, calculateReadingTime(toastElement.textContent));
+	let logFn = null;
+	switch (status) {
+		case TOAST_SUCCESS:
+			logFn = console.log;
+			break;
+		case TOAST_INFO:
+			logFn = console.info;
+			break;
+		case TOAST_ERROR:
+			console.trace();
+			logFn = console.error;
+			break;
+		case TOAST_WARNING:
+			console.trace();
+			logFn = console.warn;
+			break;
+		default:
+			break;
 	}
+	logFn?.(message);
 }
 
 /**
@@ -409,6 +421,7 @@ function delayLoadSetupTabs(count = 0) {
 	// initialize
 	setupDragForUl(reorderTabsUl);
 	reloadTabs();
+	checkTutorial();
 }
 
 /**
@@ -440,38 +453,27 @@ function reloadTabs(tabs = null) {
 export async function reorderTabsUl() {
 	try {
 		// Get the list of tabs
-		const tabs = Array.from(setupTabUl.children)
-			.map((tab) => {
-				const a = tab.querySelector("a");
-				if (a == null) {
-					return null;
-				}
-				const span = a.querySelector("span");
-				if (span == null) {
-					return null;
-				}
-				const isOrgTab = span.dataset.org != null;
-				const label = span.innerText;
-				const aHref = a.href;
-				if (label == null || aHref == null) {
-					return null;
-				}
-				try {
-					if (!isOrgTab) {
-						return Tab.create(label, aHref);
-					}
-					const org = span.dataset.org;
-					return Tab.create(
-						label,
-						aHref,
-						org == null || org === "" ? getCurrentHref() : org,
-					);
-				} catch (error) {
-					console.error(error);
-					return null;
-				}
-			})
-			.filter((tab) => tab != null);
+		const tabs = [];
+		for (const li of setupTabUl?.querySelectorAll("li")) {
+			tabs.push(Tab.create({
+				label: getInnerElementFieldBySelector({
+					parentElement: li,
+					field: "innerText",
+					selector: "a > span",
+				}),
+				url: getInnerElementFieldBySelector({
+					parentElement: li,
+					field: "href",
+					selector: "a",
+				}),
+				org: getInnerElementFieldBySelector({
+					parentElement: li,
+					field: "dataset.org",
+					selector: "a > span",
+				}),
+			}));
+		}
+		// persist the Tabs
 		const allTabs = await ensureAllTabsAvailability();
 		await allTabs.replaceTabs(tabs, {
 			resetTabs: true,
@@ -484,7 +486,7 @@ export async function reorderTabsUl() {
 			shouldReload: false,
 		});
 	} catch (error) {
-		showToast(error.message, false);
+		showToast(error.message, TOAST_ERROR);
 	}
 }
 
@@ -551,7 +553,7 @@ async function showModalOpenOtherOrg(
 	{ label = null, url = null, org = null } = {},
 ) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability();
 	const href = getCurrentHref();
@@ -576,8 +578,7 @@ async function showModalOpenOtherOrg(
 	) {
 		showToast(
 			"error_link_with_id",
-			false,
-			true,
+			TOAST_WARNING,
 		);
 	}
 	const translator = await ensureTranslatorAvailability();
@@ -615,7 +616,7 @@ async function showModalOpenOtherOrg(
 		const linkTarget = getSelectedRadioButtonValue();
 		const inputVal = inputContainer.value;
 		if (inputVal == null || inputVal === "") {
-			return showToast(["insert_another", "org_link"], false, true);
+			return showToast(["insert_another", "org_link"], TOAST_WARNING);
 		}
 		const newTarget = Tab.extractOrgName(inputVal);
 		if (lastExtracted === newTarget) return; // could be called more than once
@@ -625,12 +626,12 @@ async function showModalOpenOtherOrg(
 				SALESFORCE_URL_PATTERN,
 			)
 		) {
-			return showToast(["insert_valid_org", newTarget], false);
+			return showToast(["insert_valid_org", newTarget], TOAST_ERROR);
 		}
 		if (newTarget === Tab.extractOrgName(getCurrentHref())) {
 			return showToast(
 				"insert_another_org",
-				false,
+				TOAST_ERROR,
 			);
 		}
 		const targetUrl = new URL(
@@ -650,12 +651,8 @@ async function showModalOpenOtherOrg(
 }
 
 const ACTION_MOVE = "move";
-export const ACTION_REMOVE_THIS = "remove-this";
 const ACTION_REMOVE_OTHER = "remove-other";
-export const ACTION_ADD = "add";
-const ACTION_TOGGLE_ORG = "toggle-org";
 const ACTION_SORT = "sort";
-const ACTION_TMP_HIDE = "tmp-hide";
 
 /**
  * Performs a specified action on a given tab, such as moving, removing, or adding it, with additional options.
@@ -680,7 +677,7 @@ export async function performActionOnTabs(
 			case ACTION_MOVE:
 				await allTabs.moveTab(tab, options);
 				break;
-			case ACTION_REMOVE_THIS:
+			case CXM_REMOVE_TAB:
 				if (!await allTabs.remove(tab, options)) {
 					throw new Error("error_removing_tab", tab);
 				}
@@ -690,7 +687,7 @@ export async function performActionOnTabs(
 					throw new Error("error_removing_other_tabs", tab);
 				}
 				break;
-			case ACTION_ADD:
+			case WHAT_ADD:
 				if (
 					!await allTabs.addTab(
 						tab,
@@ -712,7 +709,7 @@ export async function performActionOnTabs(
 					throw new Error("error_removing_all_tabs");
 				}
 				break;
-			case ACTION_TOGGLE_ORG:
+			case WHAT_TOGGLE_ORG:
 				await toggleOrg(tab);
 				break;
 			case CXM_EMPTY_VISIBLE_TABS: {
@@ -738,18 +735,15 @@ export async function performActionOnTabs(
 					throw new Error("error_sorting_tabs", options);
 				}
 				break;
-			case ACTION_TMP_HIDE: {
-				const allowedActions = [CXM_TMP_HIDE_ORG, CXM_TMP_HIDE_NON_ORG];
-				if (!allowedActions.includes(options)) {
-					throw new Error("error_internal", options);
-				}
-				hideTabs(options === CXM_TMP_HIDE_ORG);
+			case CXM_TMP_HIDE_ORG:
+			case CXM_TMP_HIDE_NON_ORG:
+				hideTabs(action === CXM_TMP_HIDE_ORG);
 				return;
-			}
 			case CXM_PIN_TAB:
 				if (!await allTabs.pinOrUnpin(tab, true)) {
 					throw new Error("error_pin_tab", tab);
 				}
+				document.dispatchEvent(new CustomEvent(TUTORIAL_EVENT_PIN_TAB));
 				break;
 			case CXM_UNPIN_TAB:
 				if (!await allTabs.pinOrUnpin(tab, false)) {
@@ -766,6 +760,12 @@ export async function performActionOnTabs(
 					throw new Error("error_removing_unpin_tabs");
 				}
 				break;
+			case WHAT_PAGE_SAVE_TAB:
+				pageActionTab(true);
+				break;
+			case WHAT_PAGE_REMOVE_TAB:
+				pageActionTab(false);
+				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();
 				const noMatch = await translator.translate("no_match");
@@ -775,7 +775,7 @@ export async function performActionOnTabs(
 		sf_afterSet({ tabs: allTabs });
 	} catch (error) {
 		console.warn({ action, tab, options });
-		showToast(error.message, false);
+		showToast(error.message, TOAST_ERROR);
 	}
 }
 
@@ -831,7 +831,7 @@ async function showModalUpdateTab(
 	{ label = null, url = null, org = null } = {},
 ) {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const tab = { label, url, org };
 	const tabIsEmpty = tab.label == null && tab.url == null && tab.org == null;
@@ -847,7 +847,7 @@ async function showModalUpdateTab(
 				: tab,
 		);
 	} catch (e) {
-		showToast(e.message, false, false);
+		showToast(e.message, TOAST_ERROR);
 		return;
 	}
 	const {
@@ -947,185 +947,44 @@ function listenToBackgroundPage() {
 		}
 		sendResponse(null);
 		const allTabs = await ensureAllTabsAvailability();
+		const messageTab = {
+			label: message.label,
+			url: message.tabUrl ?? message.url,
+			org: message.org,
+		};
 		try {
 			switch (message.what) {
 				// hot reload (from context-menus.js)
-				case "saved":
-				case "focused":
-				case "startup":
-				case "installed":
-				case "activate":
-				case "highlighted":
-				case "focuschanged":
+				case WHAT_SAVED:
+				case WHAT_STARTUP:
+				case WHAT_INSTALLED:
+				case WHAT_ACTIVATE:
+				case WHAT_HIGHLIGHTED:
+				case WHAT_FOCUS_CHANGED:
 					sf_afterSet(message);
 					break;
-				case "warning":
-					showToast(message.message, false, true);
+				case TOAST_WARNING:
+				case TOAST_ERROR:
+					showToast(message.message, message.what);
 					break;
-				case "error":
-					showToast(message.message, false);
-					break;
-				case ACTION_ADD:
+				case WHAT_SHOW_IMPORT:
 					createImportModal();
 					break;
 				case CXM_MANAGE_TABS:
 					createManageTabsModal();
 					break;
+				case WHAT_START_TUTORIAL:
+					startTutorial();
+					break;
 				case WHAT_SHOW_EXPORT_MODAL:
-				case CXM_EXPORT_TABS:
-				case CMD_EXPORT_ALL:
 					createExportModal();
 					break;
-				case CXM_OPEN_OTHER_ORG:
-				case CMD_OPEN_OTHER_ORG:
-					showModalOpenOtherOrg({
-						label: message.linkTabLabel,
-						url: message.linkTabUrl ?? message.pageTabUrl ??
-							message.url,
-						org: message.org,
-					});
+				case WHAT_SHOW_OPEN_OTHER_ORG:
+					messageTab.url = message.linkTabUrl ?? messageTab.url;
+					showModalOpenOtherOrg(messageTab);
 					break;
-				case CXM_MOVE_FIRST:
-					await performActionOnTabs(ACTION_MOVE, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					}, { moveBefore: true, fullMovement: true });
-					break;
-				case CXM_MOVE_LEFT:
-					await performActionOnTabs(ACTION_MOVE, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					}, { moveBefore: true, fullMovement: false });
-					break;
-				case CXM_MOVE_RIGHT:
-					await performActionOnTabs(ACTION_MOVE, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					}, { moveBefore: false, fullMovement: false });
-					break;
-				case CXM_MOVE_LAST:
-					await performActionOnTabs(ACTION_MOVE, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					}, { moveBefore: false, fullMovement: true });
-					break;
-				case CXM_REMOVE_TAB:
-					await performActionOnTabs(ACTION_REMOVE_THIS, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					});
-					break;
-				case CXM_REMOVE_OTHER_TABS:
-					await performActionOnTabs(ACTION_REMOVE_OTHER, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					});
-					break;
-				case CXM_REMOVE_LEFT_TABS:
-					await performActionOnTabs(ACTION_REMOVE_OTHER, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					}, { removeBefore: true });
-					break;
-				case CXM_REMOVE_RIGHT_TABS:
-					await performActionOnTabs(ACTION_REMOVE_OTHER, {
-						label: message.label,
-						url: message.tabUrl,
-						org: message.org,
-					}, { removeBefore: false });
-					break;
-				case CXM_REMOVE_PIN_TABS:
-				case CXM_REMOVE_UNPIN_TABS:
-				case CXM_EMPTY_GENERIC_TABS:
-				case CXM_EMPTY_TABS:
-				case CXM_EMPTY_VISIBLE_TABS:
-				case CXM_RESET_DEFAULT_TABS:
-					await performActionOnTabs(message.what);
-					break;
-				case CXM_PAGE_SAVE_TAB:
-				case CMD_SAVE_AS_TAB:
-					pageActionTab(true);
-					break;
-				case CXM_PAGE_REMOVE_TAB:
-				case CMD_REMOVE_TAB:
-					pageActionTab(false);
-					break;
-				case CXM_UPDATE_ORG:
-				case CMD_TOGGLE_ORG:
-					await performActionOnTabs(ACTION_TOGGLE_ORG, {
-						label: message.label,
-						url: message.tabUrl ?? message.url,
-						org: message.org,
-					});
-					break;
-				case CXM_UPDATE_TAB:
-				case CMD_UPDATE_TAB:
-					showModalUpdateTab({
-						label: message.label,
-						url: message.tabUrl ?? message.url,
-						org: message.org,
-					});
-					break;
-				case CXM_SORT_LABEL:
-					await performActionOnTabs(ACTION_SORT, undefined, {
-						sortBy: "label",
-						sortAsc: allTabs.isSortedBy !== "label" ||
-							!allTabs.isSortedAsc,
-					});
-					break;
-				case CXM_SORT_URL:
-					await performActionOnTabs(ACTION_SORT, undefined, {
-						sortBy: "url",
-						sortAsc: allTabs.isSortedBy !== "url" ||
-							!allTabs.isSortedAsc,
-					});
-					break;
-				case CXM_SORT_ORG:
-					await performActionOnTabs(ACTION_SORT, undefined, {
-						sortBy: "org",
-						sortAsc: allTabs.isSortedBy !== "org" ||
-							!allTabs.isSortedAsc,
-					});
-					break;
-				case CXM_SORT_CLICK_COUNT:
-					await performActionOnTabs(ACTION_SORT, undefined, {
-						sortBy: "click-count",
-						sortAsc: allTabs.isSortedBy === "click-count" &&
-							!allTabs.isSortedAsc,
-					});
-					break;
-				case CXM_SORT_CLICK_DATE:
-					await performActionOnTabs(ACTION_SORT, undefined, {
-						sortBy: "click-date",
-						sortAsc: allTabs.isSortedBy === "click-date" &&
-							!allTabs.isSortedAsc,
-					});
-					break;
-				case CXM_TMP_HIDE_ORG:
-				case CXM_TMP_HIDE_NON_ORG:
-					await performActionOnTabs(
-						ACTION_TMP_HIDE,
-						undefined,
-						message.what,
-					);
-					break;
-				case CXM_PIN_TAB:
-				case CXM_UNPIN_TAB:
-					await performActionOnTabs(
-						message.what,
-						{
-							label: message.label,
-							url: message.tabUrl ?? message.url,
-							org: message.org,
-						},
-					);
+				case WHAT_UPDATE_TAB:
+					showModalUpdateTab(messageTab);
 					break;
 				case WHAT_UPDATE_EXTENSION:
 					promptUpdateExtension(message);
@@ -1134,35 +993,131 @@ function listenToBackgroundPage() {
 					if (message.ok) {
 						showToast(
 							"req_downloads_open_popup",
-							true,
-							true,
 						);
 					} else {
 						showToast(
 							"error_req_downloads",
-							false,
-							false,
+							TOAST_ERROR,
 						);
 					}
 					break;
 				case WHAT_EXPORT_FROM_BG:
 					launchDownload(message);
 					break;
+				case CXM_MOVE_RIGHT:
+					await performActionOnTabs(ACTION_MOVE, messageTab, {
+						moveBefore: false,
+						fullMovement: false,
+					});
+					break;
+				case CXM_MOVE_LAST:
+					await performActionOnTabs(ACTION_MOVE, messageTab, {
+						moveBefore: false,
+						fullMovement: true,
+					});
+					break;
+				case CXM_MOVE_LEFT:
+					await performActionOnTabs(ACTION_MOVE, messageTab, {
+						moveBefore: true,
+						fullMovement: false,
+					});
+					break;
+				case CXM_MOVE_FIRST:
+					await performActionOnTabs(ACTION_MOVE, messageTab, {
+						moveBefore: true,
+						fullMovement: true,
+					});
+					break;
+				case CXM_REMOVE_OTHER_TABS:
+					await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab);
+					break;
+				case CXM_REMOVE_LEFT_TABS:
+					await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab, {
+						removeBefore: true,
+					});
+					break;
+				case CXM_REMOVE_RIGHT_TABS:
+					await performActionOnTabs(ACTION_REMOVE_OTHER, messageTab, {
+						removeBefore: false,
+					});
+					break;
+				case CXM_SORT_LABEL:
+					await performActionOnTabs(
+						ACTION_SORT,
+						undefined,
+						allTabs.getSortOptions({
+							sortBy: "label",
+						}),
+					);
+					break;
+				case CXM_SORT_URL:
+					await performActionOnTabs(
+						ACTION_SORT,
+						undefined,
+						allTabs.getSortOptions({
+							sortBy: "url",
+						}),
+					);
+					break;
+				case CXM_SORT_ORG:
+					await performActionOnTabs(
+						ACTION_SORT,
+						undefined,
+						allTabs.getSortOptions({
+							sortBy: "org",
+						}),
+					);
+					break;
+				case CXM_SORT_CLICK_COUNT:
+					await performActionOnTabs(
+						ACTION_SORT,
+						undefined,
+						allTabs.getSortOptions({
+							sortBy: Tab.keyClickCount,
+							standardSort: false,
+						}),
+					);
+					break;
+				case CXM_SORT_CLICK_DATE:
+					await performActionOnTabs(
+						ACTION_SORT,
+						undefined,
+						allTabs.getSortOptions({
+							sortBy: Tab.keyClickDate,
+							standardSort: false,
+						}),
+					);
+					break;
+				case CXM_REMOVE_PIN_TABS:
+				case CXM_REMOVE_UNPIN_TABS:
+				case CXM_EMPTY_GENERIC_TABS:
+				case CXM_EMPTY_TABS:
+				case CXM_EMPTY_VISIBLE_TABS:
+				case CXM_RESET_DEFAULT_TABS:
+				case WHAT_TOGGLE_ORG:
+				case CXM_PIN_TAB:
+				case CXM_UNPIN_TAB:
+				case CXM_REMOVE_TAB:
+				case CXM_TMP_HIDE_ORG:
+				case CXM_TMP_HIDE_NON_ORG:
+				case WHAT_PAGE_SAVE_TAB:
+				case WHAT_PAGE_REMOVE_TAB:
+					await performActionOnTabs(message.what, messageTab);
+					break;
 				default:
-					if (message.what != "theme") {
+					if (message.what !== WHAT_THEME) {
 						showToast(
 							[
 								"error_unknown_message",
 								message.what,
 							],
-							false,
-							true,
+							TOAST_WARNING,
 						);
 					}
 					break;
 			}
 		} catch (error) {
-			showToast(error.message, false);
+			showToast(error.message, TOAST_ERROR);
 		}
 	});
 }
@@ -1198,7 +1153,7 @@ async function checkInsertAnalytics() {
 		const today = new Date();
 		today.setUTCHours(0, 0, 0, 0);
 		sendExtensionMessage({
-			what: "set",
+			what: WHAT_SET,
 			key: SETTINGS_KEY,
 			set: [{
 				id: PREVENT_ANALYTICS,

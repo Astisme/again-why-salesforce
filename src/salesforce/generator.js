@@ -20,6 +20,8 @@ import {
 	SETUP_LIGHTNING,
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
+	TOAST_ERROR,
+	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
 import {
@@ -28,6 +30,7 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	performLightningRedirect,
 } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
@@ -83,7 +86,7 @@ export async function handleLightningLinkClick(e) {
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
-		showToast("error_redirect", false);
+		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
 	(await ensureAllTabsAvailability())
@@ -110,12 +113,7 @@ export async function handleLightningLinkClick(e) {
 	) {
 		open(url, target);
 	} else {
-		postMessage({
-			what: "lightningNavigation",
-			navigationType: "url",
-			url,
-			fallbackURL: url,
-		}, "*");
+		performLightningRedirect(url);
 	}
 }
 
@@ -347,7 +345,7 @@ export function generateRowTemplate(
 		hide = false,
 		isPinned = false,
 		index = 0,
-	},
+	} = {},
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -399,22 +397,19 @@ export function generateRowTemplate(
  * Generates an SLDS-styled toast message with a specified message, success, and warning types.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
- * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
+ * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
+ * @param {string} status - The toast type.
  * @return {HTMLElement} The generated toast container element.
  */
-export async function generateSldsToastMessage(message, isSuccess, isWarning) {
+export async function generateSldsToastMessage(
+	message,
+	status = TOAST_SUCCESS,
+) {
 	const translator = await ensureTranslatorAvailability();
-	if (
-		message == null || message === "" || isSuccess == null ||
-		isWarning == null
-	) {
+	if (message == null || message === "") {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const successType = isWarning ? "info" : "success";
-	const errorType = isWarning ? "warning" : "error";
-	const toastType = isSuccess ? successType : errorType;
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
@@ -428,10 +423,10 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const toast = document.createElement("div");
 	toast.setAttribute("role", "alertdialog");
 	toast.setAttribute("aria-describedby", "toastDescription7382:0");
-	toast.setAttribute("aria-label", toastType);
-	toast.dataset.key = toastType;
+	toast.setAttribute("aria-label", status);
+	toast.dataset.key = status;
 	toast.classList.add(
-		`slds-theme--${toastType}`,
+		`slds-theme--${status}`,
 		"slds-notify--toast",
 		"slds-notify",
 		"slds-notify--toast",
@@ -439,9 +434,9 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	toast.dataset.auraClass = "forceToastMessage";
 	const iconContainer = document.createElement("lightning-icon");
-	iconContainer.setAttribute("icon-name", `utility:${toastType}`);
+	iconContainer.setAttribute("icon-name", `utility:${status}`);
 	iconContainer.classList.add(
-		`slds-icon-utility-${toastType}`,
+		`slds-icon-utility-${status}`,
 		"toastIcon",
 		"slds-m-right--small",
 		"slds-no-flex",
@@ -459,7 +454,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.classList.add("slds-icon", "slds-icon_small");
 	svg.setAttribute("focusable", "false");
-	svg.dataset.key = toastType;
+	svg.dataset.key = status;
 	svg.setAttribute("aria-hidden", "true");
 	svg.setAttribute("viewBox", "0 0 520 520");
 	svg.setAttribute("part", "icon");
@@ -467,7 +462,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute(
 		"d",
-		isSuccess
+		status === "success" || status === "info"
 			? "M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
 			: "M260 20C128 20 20 128 20 260s108 240 240 240 240-108 240-240S392 20 260 20zM80 260a180 180 0 01284-147L113 364a176 176 0 01-33-104zm180 180c-39 0-75-12-104-33l251-251a180 180 0 01-147 284z",
 	);
@@ -479,7 +474,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	iconContainer.appendChild(boundarySpan);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = toastType;
+	assistiveText.textContent = status;
 	iconContainer.appendChild(assistiveText);
 	const toastContent = document.createElement("div");
 	toastContent.classList.add("toastContent", "slds-notify__content");
@@ -2626,5 +2621,79 @@ export function generateReviewSponsorSvgs() {
 		sponsorSvg,
 		reviewLink,
 		sponsorLink,
+	};
+}
+
+/**
+ * Generates the HTML elements required for the tutorial overlay system.
+ * Creates an overlay that covers the entire page, a message box for displaying tutorial text,
+ * and a highlight box for emphasizing specific elements on the page.
+ *
+ * @return {Object} An object containing the generated HTML elements:
+ * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
+ * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
+ * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page
+ */
+export function generateTutorialElements() {
+	const overlay = document.createElement("div");
+	overlay.style.position = "fixed";
+	overlay.style.top = "0";
+	overlay.style.left = "0";
+	overlay.style.width = "100%";
+	overlay.style.height = "100%";
+	overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+	overlay.style.zIndex = "10000";
+	overlay.style.pointerEvents = "none";
+
+	const messageBox = document.createElement("div");
+	messageBox.style.position = "fixed";
+	messageBox.style.bottom = "20px";
+	messageBox.style.left = "50%";
+	messageBox.style.transform = "translateX(-50%)";
+	messageBox.style.backgroundColor = "white";
+	messageBox.style.padding = "20px";
+	messageBox.style.borderRadius = "8px";
+	messageBox.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+	messageBox.style.zIndex = "10001";
+	messageBox.style.maxWidth = "400px";
+	messageBox.style.pointerEvents = "auto";
+
+	// Spinner element
+	const spinner = document.createElement("div");
+	spinner.classList.add("slds-spinner_container");
+	spinner.style.position = "fixed";
+	spinner.style.top = "0";
+	spinner.style.left = "0";
+	spinner.style.width = "100%";
+	spinner.style.height = "100%";
+	spinner.style.zIndex = "10002"; // Higher than messageBox
+	spinner.style.display = "none"; // Hidden by default
+
+	const spinnerInner = document.createElement("div");
+	spinnerInner.setAttribute("role", "status");
+	spinnerInner.classList.add(
+		"slds-spinner",
+		"slds-spinner_medium",
+		"slds-spinner_brand",
+	);
+	spinner.appendChild(spinnerInner);
+
+	const assistiveText = document.createElement("span");
+	assistiveText.classList.add("slds-assistive-text");
+	assistiveText.textContent = "Loading...";
+	spinnerInner.appendChild(assistiveText);
+
+	const dotA = document.createElement("div");
+	dotA.classList.add("slds-spinner__dot-a");
+	spinnerInner.appendChild(dotA);
+
+	const dotB = document.createElement("div");
+	dotB.classList.add("slds-spinner__dot-b");
+	spinnerInner.appendChild(dotB);
+
+	return {
+		overlay,
+		messageBox,
+		spinner,
 	};
 }

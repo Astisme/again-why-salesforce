@@ -31,6 +31,7 @@ import {
 	areFramePatternsAllowed,
 	getCssRule,
 	getCssSelector,
+	getInnerElementFieldBySelector,
 	getSettings,
 	getStyleSettings,
 	isExportAllowed,
@@ -538,5 +539,116 @@ Deno.test("checks for extensionsion functionality", async (t) => {
 		const isonSFsetup = await isOnSalesforceSetup();
 		assert(isonSFsetup.ison);
 		assert(isonSFsetup.url != null);
+	});
+});
+
+class MockElement {
+	querySelector(selector: string) {
+		if (selector == null || selector.trim() === "") {
+			return null;
+		}
+		return this;
+	}
+}
+
+Deno.test("test inner element field by selector", async (t) => {
+	await t.step("nothing passed should return undefined and not fail", () => {
+		assertEquals(getInnerElementFieldBySelector(), undefined);
+		assertEquals(
+			getInnerElementFieldBySelector({
+				field: "value",
+			}),
+			undefined,
+		);
+		assertEquals(
+			getInnerElementFieldBySelector({
+				selector: "a > span",
+			}),
+			undefined,
+		);
+		assertEquals(
+			getInnerElementFieldBySelector({
+				parentElement: new MockElement(),
+			}),
+			undefined,
+		);
+		assertEquals(
+			getInnerElementFieldBySelector({
+				parentElement: new MockElement(),
+				field: "value",
+			}),
+			undefined,
+		);
+		assertEquals(
+			getInnerElementFieldBySelector({
+				parentElement: new MockElement(),
+				selector: "a > span",
+			}),
+			undefined,
+		);
+		assertEquals(
+			getInnerElementFieldBySelector({
+				field: "value",
+				selector: "a > span",
+			}),
+			undefined,
+		);
+	});
+
+	const mockEl = new MockElement();
+	const lookedValue = "returnvalue";
+
+	await t.step(
+		"should return the correct field with field without dots",
+		() => {
+			mockEl.value = lookedValue;
+			assertEquals(
+				getInnerElementFieldBySelector({
+					parentElement: mockEl,
+					field: "value",
+					selector: "a > span",
+				}),
+				lookedValue,
+			);
+			// does not find the value if the field is incorrect
+			assertEquals(
+				getInnerElementFieldBySelector({
+					parentElement: mockEl,
+					field: "href",
+					selector: "a > span",
+				}),
+				undefined,
+			);
+		},
+	);
+
+	await t.step("should return the correct field with field with dots", () => {
+		mockEl.dataset = {
+			org: lookedValue,
+			just: {
+				an: {
+					interesting: {
+						test: lookedValue,
+					},
+				},
+			},
+		};
+		assertEquals(
+			getInnerElementFieldBySelector({
+				parentElement: mockEl,
+				field: "dataset.org",
+				selector: "a > span",
+			}),
+			lookedValue,
+		);
+		// does not find the value if the field is incorrect
+		assertEquals(
+			getInnerElementFieldBySelector({
+				parentElement: mockEl,
+				field: "dataset.just.an.interesting.test",
+				selector: "a > span",
+			}),
+			lookedValue,
+		);
 	});
 });

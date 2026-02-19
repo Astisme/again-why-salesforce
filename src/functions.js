@@ -24,6 +24,9 @@ import {
 	TAB_STYLE_SHADOW,
 	TAB_STYLE_TOP,
 	TAB_STYLE_UNDERLINE,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_STYLE_SETTINGS,
 } from "/constants.js";
 
 /**
@@ -70,7 +73,7 @@ export function sendExtensionMessage(message, callback = null) {
  * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
 export async function getSettings(keys = null) {
-	return await sendExtensionMessage({ what: "get-settings", keys });
+	return await sendExtensionMessage({ what: WHAT_GET_SETTINGS, keys });
 }
 /**
  * Retrieves saved style settings for the specified key.
@@ -79,7 +82,7 @@ export async function getSettings(keys = null) {
  * @return {Promise<Object|null>} The retrieved style settings or null if none exist.
  */
 export async function getStyleSettings(key = null) {
-	return await sendExtensionMessage({ what: "get-style-settings", key });
+	return await sendExtensionMessage({ what: WHAT_GET_STYLE_SETTINGS, key });
 }
 const GENERIC_STYLE_KEYS = new Set([
 	GENERIC_TAB_STYLE_KEY,
@@ -260,7 +263,9 @@ export function requestCookiesPermission() {
  * @return {Promise<{ ison: boolean, url: string>}>} whether the user is on Salesforce Setup
  */
 export async function isOnSalesforceSetup() {
-	const browserTab = await sendExtensionMessage({ what: "browser-tab" });
+	const browserTab = await sendExtensionMessage({
+		what: WHAT_GET_BROWSER_TAB,
+	});
 	return {
 		ison: SETUP_LIGHTNING_PATTERN.test(browserTab?.url),
 		url: browserTab?.url,
@@ -286,4 +291,49 @@ export async function areFramePatternsAllowed() {
 		new URL(globalThis.location.href).searchParams.get(
 				DO_NOT_REQUEST_FRAME_PERMISSION,
 			) === "true";
+}
+/**
+ * Calculates the estimated time (in milliseconds) it takes to read a given message.
+ *
+ * @param {string} message - The message to calculate the reading time for.
+ * @return {number} - The estimated reading time in milliseconds.
+ */
+export function calculateReadingTime(message) {
+	const words = message.split(/\s+/).filter((word) => word.length > 0);
+	const wordsPerMinute = 200; // Average reading speed
+	const readingTimeMinutes = words.length / wordsPerMinute;
+	const readingTimeSeconds = Math.ceil(readingTimeMinutes * 60);
+	return (readingTimeSeconds + 2) * 1000;
+}
+/**
+ * Performs a lightning redirect using Salesforce own redirect
+ * @param {string} [url=""] where you'll get redirected to
+ */
+export function performLightningRedirect(url = "") {
+	postMessage({
+		what: "lightningNavigation",
+		navigationType: "url",
+		url,
+		fallbackURL: url,
+	}, "*");
+}
+/**
+ * Returns the value from the given selector
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {HTMLElement} [param0.parentElement=null] - the tr where to selector is located
+ * @param {string} [param0.field=""] - the field to get from the queried inner element
+ * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
+ * @return the trimmed field value OR undefined (when the value is null or "")
+ */
+export function getInnerElementFieldBySelector({
+	parentElement = null,
+	field = "",
+	selector = "",
+} = {}) {
+	let value = parentElement?.querySelector(selector);
+	for (const part of field.split(".")) {
+		value = value?.[part];
+	}
+	value = value?.trim();
+	return value == null || value === "" ? undefined : value;
 }

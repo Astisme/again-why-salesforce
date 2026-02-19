@@ -35,6 +35,7 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
+	WHAT_SET,
 } from "/constants.js";
 import {
 	areFramePatternsAllowed,
@@ -76,7 +77,7 @@ function getObjectToSet({
 		throw new Error("error_required_params");
 	}
 	return {
-		what: "set",
+		what: WHAT_SET,
 		key,
 		set,
 	};

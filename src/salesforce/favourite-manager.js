@@ -2,12 +2,20 @@
 import {
 	CMD_REMOVE_TAB,
 	CMD_SAVE_AS_TAB,
+	CXM_REMOVE_TAB,
 	EXTENSION_LABEL,
 	EXTENSION_NAME,
 	HIDDEN_CLASS,
+	SALESFORCE_SETUP_HOME_MINI,
 	SKIP_LINK_DETECTION,
 	TAB_ADD_FRONT,
 	TAB_AS_ORG,
+	TOAST_INFO,
+	TOAST_WARNING,
+	TUTORIAL_EVENT_ACTION_FAVOURITE,
+	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+	WHAT_ADD,
+	WHAT_GET_COMMANDS,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
 import Tab from "/tab.js";
@@ -15,8 +23,6 @@ import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 
 import {
-	ACTION_ADD,
-	ACTION_REMOVE_THIS,
 	getCurrentHref,
 	getIsCurrentlyOnSavedTab,
 	getWasOnSavedTab,
@@ -25,9 +31,9 @@ import {
 	showToast,
 } from "./content.js";
 
-const BUTTON_ID = `${EXTENSION_NAME}-button`;
-const STAR_ID = `${EXTENSION_NAME}-star`;
-const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
+export const FAVOURITE_BUTTON_ID = `${EXTENSION_NAME}-button`;
+export const STAR_ID = `${EXTENSION_NAME}-star`;
+export const SLASHED_STAR_ID = `${EXTENSION_NAME}-slashed-star`;
 
 /**
  * Finds the parent node of the current Setup page
@@ -101,7 +107,7 @@ function createStarSvg({
  */
 async function generateFavouriteButton() {
 	const button = document.createElement("button");
-	button.id = BUTTON_ID;
+	button.id = FAVOURITE_BUTTON_ID;
 	button.classList.add("slds-button", "slds-button--neutral", "uiButton");
 	button.setAttribute("type", "button");
 	button.setAttribute("aria-live", "off");
@@ -116,7 +122,7 @@ async function generateFavouriteButton() {
 	button.appendChild(span);
 	const commands = [CMD_SAVE_AS_TAB, CMD_REMOVE_TAB];
 	const connectedCommands = await sendExtensionMessage({
-		what: "get-commands",
+		what: WHAT_GET_COMMANDS,
 		commands,
 	});
 	let starCmd = null;
@@ -240,7 +246,7 @@ async function addTab(url) {
 		org = Tab.extractOrgName(href);
 	}
 	await performActionOnTabs(
-		ACTION_ADD,
+		WHAT_ADD,
 		{ label, url, org },
 		{
 			addInFront: Array.isArray(settings) &&
@@ -267,13 +273,19 @@ async function actionFavourite() {
 				url,
 				org: Tab.extractOrgName(getCurrentHref()),
 			});
-			await performActionOnTabs(ACTION_REMOVE_THIS, tabToRemove);
+			await performActionOnTabs(CXM_REMOVE_TAB, tabToRemove);
 		} catch (e) {
 			console.warn(e);
-			showToast("error_remove_not_favourite", false, true);
+			showToast("error_remove_not_favourite", TOAST_WARNING);
 		}
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_ACTION_UNFAVOURITE),
+		);
 	} else {
 		await addTab(url);
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_ACTION_FAVOURITE),
+		);
 	}
 }
 
@@ -297,7 +309,7 @@ export async function showFavouriteButton(count = 0) {
 	const currentHref = getCurrentHref();
 	const url = Tab.minifyURL(currentHref);
 	// Do not add favourite button on Home and Object Manager
-	const standardTabs = ["SetupOneHome/home", "ObjectManager/home"];
+	const standardTabs = [SALESFORCE_SETUP_HOME_MINI, "ObjectManager/home"];
 	if (standardTabs.includes(url)) {
 		return;
 	}
@@ -311,7 +323,7 @@ export async function showFavouriteButton(count = 0) {
 	if (getWasOnSavedTab() == null && isCurrentlyOnSavedTab == null) {
 		await isOnSavedTab();
 	}
-	const oldButton = header.querySelector(`#${BUTTON_ID}`);
+	const oldButton = header.querySelector(`#${FAVOURITE_BUTTON_ID}`);
 	if (oldButton != null) {
 		// already inserted my button, check if I should switch it
 		const allTabs = await ensureAllTabsAvailability();
@@ -320,6 +332,7 @@ export async function showFavouriteButton(count = 0) {
 				url,
 				org: Tab.extractOrgName(currentHref),
 			}),
+			oldButton,
 		);
 		return;
 	}
@@ -341,7 +354,7 @@ export function pageActionTab(save = true) {
 	const favourite = getFavouriteImage(save ? STAR_ID : SLASHED_STAR_ID);
 	if (favourite.classList.contains(HIDDEN_CLASS)) {
 		const message = save ? "error_useless_save" : "error_useless_remove";
-		showToast(message, true, true);
+		showToast(message, TOAST_INFO);
 	} else {
 		favourite.closest("button").click(); // otherwise we would click on the svg
 	}
