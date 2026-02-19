@@ -1523,8 +1523,7 @@ export class TabContainer extends Array {
 	/**
 	 * Return the option object used to sort the Tabs
 	 * @param {Object} [param0={}] - an object with the following keys
-	 * @param {string} [param0.sortBy="label"] the TabContainer field to sort it by
-	 * @param {null} [param0.allTabs=null] the TabContainer currently in use
+	 * @param {string} [param0.sortBy="label"] the Tab field to sort by
 	 * @param {boolean} [param0.standardSort=true] whether to follow the ascending-then-descending sort or the reverse (descending-then-ascending)
 	 * @return {Object} ready to be used by the TabContainer
 	 */
@@ -1532,9 +1531,8 @@ export class TabContainer extends Array {
 		sortBy = "label",
 		standardSort = true,
 	} = {}) {
-		// TODO test!!
 		if (!Tab.allowedKeys.has(sortBy)) {
-			throw new Error(); // FIXME
+			throw new Error("error_tab_unexpected_keys");
 		}
 		return {
 			sortBy,
