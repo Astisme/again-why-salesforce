@@ -221,11 +221,7 @@ class Tutorial {
 
 	#generateExtensionElementWithLinkInSetup() {
 		const redirectElement = this.steps[this.currentStep]?.redirectElement;
-		try {
-			performActionOnTabs(WHAT_ADD, redirectElement);
-		} catch (e) {
-			console.info(e);
-		}
+        performActionOnTabs(WHAT_ADD, redirectElement)
 		return this.#getExtensionElementWithLinkInSetup(redirectElement);
 	}
 
@@ -391,7 +387,7 @@ class Tutorial {
 						// unpin the last 2 Tabs
 						const unpinUpTo = pinnedNumber <= 2 ? 2 : 3;
 						for (let i = 1; i < unpinUpTo; i++) {
-							await handleActionButtonClick({
+							handleActionButtonClick({
 								preventDefault: () => {},
 								stopPropagation: () => {},
 								currentTarget: document.querySelector(
@@ -568,6 +564,59 @@ class Tutorial {
 		);
 	}
 
+    #addListenersForWaitFor(step, el = null){
+      switch (step.waitFor) {
+        case "event":
+        case "click":
+          (el ?? document).addEventListener(
+              step.awaitsCustomEvent ?? "click",
+              () => this.nextStep(),
+              { once: true },
+          );
+          break;
+        case "redirect": {
+			if (step.action === "confirm") {
+				this.showConfirm(step, { continueAfterClick: false });
+			}
+			const cleanup = this.#listenToLightningNavigation(() => {
+				cleanup();
+				this.nextStep();
+			});
+          break;
+        }
+        default:
+			this.showConfirm(step);
+          break;
+      }
+    }
+
+    #resetToCloserBeginBlockAndRestart(){
+        let maxIndex = 0;
+        for (
+            let b = maxIndex;
+            b < this.beginBlockStepIndexes.length &&
+            this.beginBlockStepIndexes[b] <= this.currentStep &&
+            this.beginBlockStepIndexes[b] >= maxIndex;
+            b++
+        ) {
+            maxIndex = this.beginBlockStepIndexes[b];
+        }
+        this.currentStep = maxIndex - 1;
+        this.nextStep();
+    }
+
+    async #getElementFromStep(step){
+        const canFakeElement = step.fakeElement;
+        if (canFakeElement) {
+            return await this.getElementNowOrLater(
+                step,
+                this.executeStep.bind(this),
+            );
+        } else {
+            return await step.element();
+        }
+    }
+
 	/**
 	 * Executes a specific tutorial step based on its configuration.
 	 * Handles element highlighting, message display, and determines the next action
@@ -584,67 +633,21 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
+        let el;
 		if (step.element) {
-			let el;
-			const canFakeElement = step.fakeElement;
-			if (canFakeElement) {
-				el = await this.getElementNowOrLater(
-					step,
-					this.executeStep.bind(this),
-				);
-			} else {
-				el = await step.element();
-			}
+          el = await this.#getElementFromStep(step);
 			if (el == null) {
-				if (!canFakeElement) {
+				if (!step.fakeElement) {
 					showToast("tutorial_step_was_missed", TOAST_WARNING);
 					// reset to the beginning of the block
-					let maxIndex = 0;
-					for (
-						let b = maxIndex;
-						b < this.beginBlockStepIndexes.length &&
-						this.beginBlockStepIndexes[b] <= this.currentStep &&
-						this.beginBlockStepIndexes[b] >= maxIndex;
-						b++
-					) {
-						maxIndex = this.beginBlockStepIndexes[b];
-					}
-					this.currentStep = maxIndex - 1;
-					this.nextStep();
+                    this.#resetToCloserBeginBlockAndRestart();
 				}
-				return;
+				return; // this is needed because getElementFromStep uses this if the element cannot be found in a run
 			}
-			this.highlightElement(el);
-			if (step.waitFor === "click") {
-				el.addEventListener("click", () => this.nextStep(), {
-					once: true,
-				});
-			}
-		} else if (this.highlightedElement) {
-			// Step has no element to highlight, remove any existing highlight
-			this.highlightedElement.classList.remove(
-				TUTORIAL_HIGHLIGHT_CLASS,
-			);
-			this.highlightedElement = null;
 		}
+        this.highlightElement(el);
 		await this.showMessage(step);
-		if (step.waitFor == null) {
-			this.showConfirm(step);
-		} else if (step.waitFor === "event" && step.awaitsCustomEvent) {
-			document.addEventListener(
-				step.awaitsCustomEvent,
-				() => this.nextStep(),
-				{ once: true },
-			);
-		} else if (step.waitFor === "redirect") {
-			if (step.action === "confirm") {
-				this.showConfirm(step, { continueAfterClick: false });
-			}
-			const cleanup = this.#listenToLightningNavigation(() => {
-				cleanup();
-				this.nextStep();
-			});
-		}
+        this.#addListenersForWaitFor(step, el);
 	}
 
 	/**
@@ -702,7 +705,7 @@ class Tutorial {
 		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		// Add highlight to the new element
 		this.highlightedElement = el;
-		this.highlightedElement.classList.add(TUTORIAL_HIGHLIGHT_CLASS);
+		this.highlightedElement?.classList.add(TUTORIAL_HIGHLIGHT_CLASS);
 	}
 
 	/**

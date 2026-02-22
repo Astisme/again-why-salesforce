@@ -454,7 +454,7 @@ export async function reorderTabsUl() {
 	try {
 		// Get the list of tabs
 		const tabs = [];
-		for (const li of setupTabUl?.querySelectorAll("li")) {
+		for (const li of setupTabUl?.querySelectorAll("li") ?? []) {
 			tabs.push(Tab.create({
 				label: getInnerElementFieldBySelector({
 					parentElement: li,
@@ -509,7 +509,7 @@ function _toggleWarning(duplicatetabs = []) {
  * @param {string} miniURL - The URL (or part of it) used to identify duplicate tabs.
  */
 export function makeDuplicatesBold(miniURL) {
-	const duplicatetabs = setupTabUl.querySelectorAll(`a[title="${miniURL}"]`);
+	const duplicatetabs = setupTabUl?.querySelectorAll(`a[title="${miniURL}"]`);
 	if (duplicatetabs == null) {
 		return;
 	}
@@ -787,7 +787,7 @@ function hideTabs(hideOrgTabs = true) {
 	const selector = hideOrgTabs
 		? `li${HAS_ORG_TAB}`
 		: `li:not(${HAS_ORG_TAB})`;
-	const tabsToHide = setupTabUl.querySelectorAll(selector);
+	const tabsToHide = setupTabUl?.querySelectorAll(selector) ?? [];
 	for (const tth of tabsToHide) {
 		tth.style.display = "none";
 	}
