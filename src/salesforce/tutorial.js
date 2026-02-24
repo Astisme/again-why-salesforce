@@ -29,6 +29,11 @@ import { ensureAllTabsAvailability, TabContainer } from "../tabContainer.js";
 import { handleActionButtonClick } from "./manageTabs.js";
 
 const TUTORIAL_HIGHLIGHT_CLASS = "awsf-tutorial-highlight";
+/**
+ * The pages which could be used if the user does not have any in-setup Tabs
+ * The `label` should be a string found inside the locales files
+ * The `url` should be the minified version of the full url
+ */
 const usablePages = {
 	objectManager: [
 		{
@@ -116,13 +121,21 @@ const usablePages = {
 	],
 };
 
+/**
+ * Performs a lightning redirect within SETUP_LIGHTNING pages
+ * @param {string} [miniUrl=""] - the url where to redirect the user
+ */
 function customLightningRedirect(miniUrl = "") {
 	performLightningRedirect(`${SETUP_LIGHTNING}${miniUrl}`);
 }
 
-function redirectToHomeAndStart(tutorial) {
+/**
+ * Redirects the user to the Setup Homepage and starts the tutorial
+ * @param {Tutorial} [tutorial=null] - the tutorial instance
+ */
+function redirectToHomeAndStart(tutorial = null) {
 	customLightningRedirect(SALESFORCE_SETUP_HOME_MINI);
-	tutorial?.start();
+	(tutorial ?? new Tutorial()).start();
 }
 
 /**
@@ -175,7 +188,7 @@ class Tutorial {
 
 	/**
 	 * Finds up to two elements whose URLs don't match any saved Tab and sets them up as class elements
-	 * @returns {Promise<void>}
+	 * @return {Promise<void>}
 	 */
 	async #findRedirectLinks() {
 		const allTabs = await ensureAllTabsAvailability();
@@ -207,7 +220,12 @@ class Tutorial {
 		}
 	}
 
-	#getExtensionElementWithLinkInSetup(redirectElement) {
+	/**
+	 * Finds a suitable element from the Tabs saved by the user or from the redirectElement
+	 * @param {Object|null} redirectElement - one element from usablePages
+	 * @return HTMLElement the automatically selected `li`
+	 */
+	#getExtensionElementWithLinkInSetup(redirectElement = null) {
 		const goToUrl =
 			(redirectElement ?? this.steps[this.currentStep]?.redirectElement)
 				?.url;
@@ -219,12 +237,19 @@ class Tutorial {
 		);
 	}
 
+	/**
+	 * Adds a new Tab to the ones in the user's list and returns it
+	 * @return HTMLElement the `li` with the added Tab
+	 */
 	#generateExtensionElementWithLinkInSetup() {
 		const redirectElement = this.steps[this.currentStep]?.redirectElement;
-        performActionOnTabs(WHAT_ADD, redirectElement)
+		performActionOnTabs(WHAT_ADD, redirectElement);
 		return this.#getExtensionElementWithLinkInSetup(redirectElement);
 	}
 
+	/**
+	 * Finds the currently shown stars container
+	 */
 	#getStarsContainer() {
 		// Salesforce has 2 "pages" for ObjectManager and standard pages so we have 2 buttons actually
 		for (
@@ -237,6 +262,10 @@ class Tutorial {
 		}
 	}
 
+	/**
+	 * Shows the favourite button and finds the stars container
+	 * @return HTMLElement - the element from getStarsContainer
+	 */
 	async #showStarsContainerAndReturnIt() {
 		await showFavouriteButton();
 		return this.#getStarsContainer();
@@ -432,12 +461,6 @@ class Tutorial {
 				// No pageUrl
 			},
 		];
-		this.beginBlockStepIndexes = [];
-		for (const i in this.steps) {
-			if (this.steps[i].beginsBlock) {
-				this.beginBlockStepIndexes.push(Number(i));
-			}
-		}
 		return true;
 	}
 
@@ -451,6 +474,7 @@ class Tutorial {
 	async start(startStep = 0) {
 		if (this.isActive) return;
 		if (this.steps?.length < 1 && !(await this.initSteps())) {
+			console.error("error_tutorial_not_initialized");
 			return;
 		}
 		this.isActive = true;
@@ -513,7 +537,8 @@ class Tutorial {
 	/**
 	 * Sends a message to the background page with the tutorial progress passed as input
 	 * @param {number} [stepNo=this.currentStep] - the step at which the tutorial has arrived
-	 * @async
+	 * @throws TypeError if stepNo is not a number
+	 * @return Promise<void> the promise from sendExtensionMessage
 	 */
 	persistTutorialProgress(stepNo = this.currentStep) {
 		if (typeof stepNo !== "number") {
@@ -546,6 +571,12 @@ class Tutorial {
 		}
 	}
 
+	/**
+	 * Finds the element from step.element or creates a fake element after 5 retries
+	 * @param {Object} step - the current step
+	 * @param {function} callback - the function to call if the element was not found
+	 * @return HTMLElement - the element from the step
+	 */
 	async getElementNowOrLater(step, callback) {
 		const el = await step.element();
 		if (el != null) {
@@ -564,58 +595,69 @@ class Tutorial {
 		);
 	}
 
-    #addListenersForWaitFor(step, el = null){
-      switch (step.waitFor) {
-        case "event":
-        case "click":
-          (el ?? document).addEventListener(
-              step.awaitsCustomEvent ?? "click",
-              () => this.nextStep(),
-              { once: true },
-          );
-          break;
-        case "redirect": {
-			if (step.action === "confirm") {
-				this.showConfirm(step, { continueAfterClick: false });
+	/**
+	 * Based on step.waitFor, adds the listeners to let the tutorial continue
+	 * @param {Object} step - the current step
+	 * @param {HTMLElement|null} [el=null] - the element on which to add the listener
+	 */
+	#addListenersForWaitFor(step, el = null) {
+		switch (step.waitFor) {
+			case "event":
+			case "click":
+				(el ?? document).addEventListener(
+					step.awaitsCustomEvent ?? "click",
+					() => this.nextStep(),
+					{ once: true },
+				);
+				break;
+			case "redirect": {
+				if (step.action === "confirm") {
+					this.showConfirm(step, { continueAfterClick: false });
+				}
+				const cleanup = this.#listenToLightningNavigation(() => {
+					cleanup();
+					this.nextStep();
+				});
+				break;
 			}
-			const cleanup = this.#listenToLightningNavigation(() => {
-				cleanup();
-				this.nextStep();
-			});
-          break;
-        }
-        default:
-			this.showConfirm(step);
-          break;
-      }
-    }
+			default:
+				this.showConfirm(step);
+				break;
+		}
+	}
 
-    #resetToCloserBeginBlockAndRestart(){
-        let maxIndex = 0;
-        for (
-            let b = maxIndex;
-            b < this.beginBlockStepIndexes.length &&
-            this.beginBlockStepIndexes[b] <= this.currentStep &&
-            this.beginBlockStepIndexes[b] >= maxIndex;
-            b++
-        ) {
-            maxIndex = this.beginBlockStepIndexes[b];
-        }
-        this.currentStep = maxIndex - 1;
-        this.nextStep();
-    }
+	/**
+	 * Moves the tutorial back a few steps until it finds a beginning block
+	 * Updates this.currentStep
+	 */
+	#resetToCloserBeginBlockAndRestart() {
+		for (let x = this.currentStep; x > 0; x--) {
+			if (this.steps[x]?.beginsBlock) {
+				this.currentStep = x - 1; // because nextStep adds 1
+				break;
+			}
+		}
+		this.nextStep();
+	}
 
-    async #getElementFromStep(step){
-        const canFakeElement = step.fakeElement;
-        if (canFakeElement) {
-            return await this.getElementNowOrLater(
-                step,
-                this.executeStep.bind(this),
-            );
-        } else {
-            return await step.element();
-        }
-    }
+	/**
+	 * Gets the element from step.element or if step.fakeElement exists, calls getElementNowOrLater
+	 * @param {Object} step - the current step
+	 * @param {function} step.element - the async function which returns the step's element
+	 * @param {function} step.fakeElement - the async function which creates and returns the step's fake element
+	 * @return HTMLElement the step's element or fake element
+	 */
+	async #getElementFromStep(step) {
+		const canFakeElement = step.fakeElement;
+		if (canFakeElement) {
+			return await this.getElementNowOrLater(
+				step,
+				this.executeStep.bind(this),
+			);
+		} else {
+			return await step.element();
+		}
+	}
 
 	/**
 	 * Executes a specific tutorial step based on its configuration.
@@ -633,28 +675,28 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
-        let el;
+		let el;
 		if (step.element) {
-          el = await this.#getElementFromStep(step);
+			el = await this.#getElementFromStep(step);
 			if (el == null) {
 				if (!step.fakeElement) {
 					showToast("tutorial_step_was_missed", TOAST_WARNING);
 					// reset to the beginning of the block
-                    this.#resetToCloserBeginBlockAndRestart();
+					this.#resetToCloserBeginBlockAndRestart();
 				}
 				return; // this is needed because getElementFromStep uses this if the element cannot be found in a run
 			}
 		}
-        this.highlightElement(el);
+		this.highlightElement(el);
 		await this.showMessage(step);
-        this.#addListenersForWaitFor(step, el);
+		this.#addListenersForWaitFor(step, el);
 	}
 
 	/**
 	 * Wraps a history method to intercept calls.
 	 * @param {function} original - The original history method.
 	 * @param {function(string): void} onNavigate - Called with the new URL.
-	 * @returns {function} Wrapped method.
+	 * @return {function} Wrapped method.
 	 */
 	#wrapHistoryMethod(original, onNavigate) {
 		return function (...args) {
@@ -665,7 +707,7 @@ class Tutorial {
 	/**
 	 * Patches history methods and listens for Lightning soft navigation events.
 	 * @param {function(string): void} onNavigate - Called with the new URL on navigation.
-	 * @returns {function(): void} Cleanup function to remove all listeners.
+	 * @return {function(): void} Cleanup function to remove all listeners.
 	 */
 	#listenToLightningNavigation(onNavigate) {
 		const originalPushState = history.pushState.bind(history);
@@ -739,6 +781,8 @@ class Tutorial {
 	 *
 	 * @param {Object} step - The tutorial step object.
 	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
+	 * @param {Object} [param1={}] an object with the following keys
+	 * @param {boolean} [param1.continueAfterClick=true] whether to continue to the next step after calling the onConfirm function
 	 */
 	showConfirm(step, {
 		continueAfterClick = true,
@@ -801,15 +845,16 @@ export async function checkTutorial() {
 		what: WHAT_GET,
 		key: TUTORIAL_KEY,
 	});
-	const tutorial = new Tutorial();
-	if (!await tutorial.initSteps()) { // Initialize steps to get their properties
-		return;
-	}
 	const translator = await ensureTranslatorAvailability();
 	if (tutorialProgress == null) {
 		if (confirm(await translator.translate("tutorial_start_prompt"))) {
-			redirectToHomeAndStart(tutorial);
+			redirectToHomeAndStart();
 		}
+		return;
+	}
+	const tutorial = new Tutorial();
+	if (!await tutorial.initSteps()) { // Initialize steps to get their properties
+		console.error("error_tutorial_not_initialized");
 		return;
 	}
 	if (

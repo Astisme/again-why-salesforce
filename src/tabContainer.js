@@ -1525,6 +1525,7 @@ export class TabContainer extends Array {
 	 * @param {Object} [param0={}] - an object with the following keys
 	 * @param {string} [param0.sortBy="label"] the Tab field to sort by
 	 * @param {boolean} [param0.standardSort=true] whether to follow the ascending-then-descending sort or the reverse (descending-then-ascending)
+	 * @throws Error when sortBy is not a key allowed by Tab
 	 * @return {Object} ready to be used by the TabContainer
 	 */
 	getSortOptions({

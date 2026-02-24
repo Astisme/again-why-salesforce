@@ -644,6 +644,10 @@
 		"message": "Use TranslationService.create() instead of new TranslationService()",
 		"description": "[error] tell the developer how to use the TranslationService class"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "tutorial could not be initialized.",
+		"description": "[error] the Tutorial was not initialized"
+	},
 	"error_translator_not_initialized": {
 		"message": "translator was not yet initialized.",
 		"description": "[error] the TranslationService was not ready"
