@@ -9,6 +9,7 @@ import {
 	TOAST_WARNING,
 	TUTORIAL_EVENT_ACTION_FAVOURITE,
 	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_PIN_TAB,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
@@ -445,7 +446,8 @@ class Tutorial {
 						`#${MODAL_ID} #again-why-salesforce-modal-confirm`,
 					),
 				action: "highlight",
-				waitFor: "click",
+				waitFor: "event",
+				awaitsCustomEvent: TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
 			},
 			{
 				message: "tutorial_keyboard_shortcut",
@@ -600,18 +602,18 @@ class Tutorial {
 				);
 				break;
 			case "redirect": {
-				this.showConfirm(step, {
-					continueAfterClick: step.action !== "confirm",
-				});
+				this.showConfirm();
 				const cleanup = this.#listenToLightningNavigation(() => {
 					cleanup();
 					this.nextStep();
 				});
-				this.btnsParent.classList.add(HIDDEN_CLASS);
+				if (step.action !== "confirm") {
+					this.btnsParent.classList.add(HIDDEN_CLASS);
+				}
 				break;
 			}
 			default:
-				this.showConfirm(step);
+				this.showConfirm();
 				break;
 		}
 	}
@@ -769,17 +771,13 @@ class Tutorial {
 	 * Creates and appends an "OK" button to the message box that triggers the next step
 	 * and executes any associated confirmation callback.
 	 *
-	 * @param {Object} step - The tutorial step object.
 	 * @param {Function} [step.onConfirm] - Optional callback to execute on confirmation.
-	 * @param {Object} [param1={}] an object with the following keys
-	 * @param {boolean} [param1.continueAfterClick=true] whether to continue to the next step after calling the onConfirm function
 	 */
-	showConfirm(step, {
-		continueAfterClick = true,
-	} = {}) {
+	showConfirm() {
 		this.messageBox.addEventListener("click", () => {
+			const step = this.steps[this.currentStep];
 			step.onConfirm?.();
-			if (continueAfterClick) {
+			if (step.action !== "confirm") {
 				this.nextStep();
 			}
 		}, { once: true });

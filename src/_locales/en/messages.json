@@ -1629,7 +1629,7 @@
 		"description": "[tutorial] remove favourite"
 	},
 	"tutorial_redirect_account": {
-		"message": "We'll now redirect you to another page to show you more. Click OK to continue.",
+		"message": "We'll now redirect you to another page to show you more. Click here to continue.",
 		"description": "[tutorial] redirect to account"
 	},
 	"tutorial_add_favourite": {

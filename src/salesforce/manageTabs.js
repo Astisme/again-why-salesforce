@@ -7,6 +7,7 @@ import {
 	PIN_TAB_CLASS,
 	TOAST_ERROR,
 	TOAST_WARNING,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
 	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "/constants.js";
@@ -846,6 +847,9 @@ export async function createManageTabsModal() {
 	setupDragForTable(reorderTabsTable);
 	closeButton.addEventListener("click", (_) => {
 		setupDragForUl(reorderTabsUl);
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_CLOSE_MANAGE_TABS),
+		);
 	});
 	saveButton.addEventListener("click", (e) => {
 		e.preventDefault();

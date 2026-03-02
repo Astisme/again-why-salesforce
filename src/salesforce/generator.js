@@ -163,9 +163,10 @@ function _getPseudoSelector(id) {
 }
 /**
  * Returns pseudo-selector rules for Tab styles.
- * @param {Array} pseudoRules - Array of pseudo rules to process
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {Array} [param0.pseudoRules=[]] - Array of pseudo rules to process
+ * @param {boolean} [param0.isGeneric=true] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
  * @return {string} the css pseudo element rules
  */
 function _getPseudoRules({
@@ -2604,7 +2605,7 @@ export function generateReviewSponsorSvgs() {
 
 /**
  * Variation 7: blueprint grid card with corner brackets and dashed dividers.
- * @returns {{
+ * @return {{
  *   messageBox: HTMLDivElement,
  *   segments:   HTMLDivElement,
  *   confirmBtn: HTMLButtonElement,
@@ -2673,14 +2674,13 @@ export async function generateTutorialElements() {
 	overlay.style.pointerEvents = "none";
 	// Spinner element
 	const spinner = document.createElement("div");
-	spinner.classList.add("slds-spinner_container");
+	spinner.classList.add("slds-spinner_container", HIDDEN_CLASS); // Hidden by default
 	spinner.style.position = "fixed";
 	spinner.style.top = "0";
 	spinner.style.left = "0";
 	spinner.style.width = "100%";
 	spinner.style.height = "100%";
 	spinner.style.zIndex = "10002"; // Higher than messageBox
-	spinner.style.display = "none"; // Hidden by default
 	const spinnerInner = document.createElement("div");
 	spinnerInner.setAttribute("role", "status");
 	spinnerInner.classList.add(
