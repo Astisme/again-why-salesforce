@@ -1,4 +1,4 @@
-@keyframes tut-v7-in {
+@keyframes tutorial-in {
 	from {
 		opacity: 0;
 		transform: translateX(-50%) translateY(22px) scaleY(0.9);
@@ -8,7 +8,7 @@
 		transform: translateX(-50%) translateY(0) scaleY(1);
 	}
 }
-.tut-v7 {
+.tutorial {
 	position: fixed;
 	bottom: 20px;
 	left: 50%;
@@ -25,10 +25,10 @@
 	z-index: 10001;
 	pointer-events: auto;
 	box-shadow: 0 4px 0 #3355cc, 0 8px 32px rgba(51, 85, 204, 0.2);
-	animation: tut-v7-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+	animation: tutorial-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 /* corner brackets via pseudo — applied on the wrapper */
-.tut-v7-corner {
+.tutorial-corner {
 	position: absolute;
 	width: 14px;
 	height: 14px;
@@ -36,33 +36,33 @@
 	border-style: solid;
 	pointer-events: none;
 }
-.tut-v7-corner-tl {
+.tutorial-corner-tl {
 	top: -2px;
 	left: -2px;
 	border-width: 3px 0 0 3px;
 }
-.tut-v7-corner-tr {
+.tutorial-corner-tr {
 	top: -2px;
 	right: -2px;
 	border-width: 3px 3px 0 0;
 }
-.tut-v7-corner-bl {
+.tutorial-corner-bl {
 	bottom: -2px;
 	left: -2px;
 	border-width: 0 0 3px 3px;
 }
-.tut-v7-corner-br {
+.tutorial-corner-br {
 	bottom: -2px;
 	right: -2px;
 	border-width: 0 3px 3px 0;
 }
-.tut-v7-header {
+.tutorial-header {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	margin-bottom: 14px;
 }
-.tut-v7-tag {
+.tutorial-tag {
 	font-size: 9.5px;
 	font-weight: 600;
 	letter-spacing: 3px;
@@ -73,17 +73,17 @@
 	padding: 2px 8px;
 	border-radius: 2px;
 }
-.tut-v7-dash {
+.tutorial-dash {
 	flex: 1;
 	border-top: 1.5px dashed #3355cc;
 	opacity: 0.4;
 }
-.tut-v7-segments {
+.tutorial-segments {
 	font-size: 13px;
 	color: #1a2a5e;
 	line-height: 1.7;
 }
-.tut-v7-actions {
+.tutorial-actions {
 	display: flex;
 	gap: 8px;
 	margin-top: 18px;

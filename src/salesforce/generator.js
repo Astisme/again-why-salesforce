@@ -2604,43 +2604,43 @@ export function generateReviewSponsorSvgs() {
 }
 
 /**
- * Variation 7: blueprint grid card with corner brackets and dashed dividers.
+ * blueprint grid card with corner brackets and dashed dividers.
  * @return {{
- *   messageBox: HTMLDivElement,
- *   segments:   HTMLDivElement,
- *   confirmBtn: HTMLButtonElement,
+ *   messageBox: HTMLDivElement, // the element to add to the document
+ *   segments:   HTMLDivElement, // where to put the new textContent
+ *   confirmBtn: HTMLButtonElement, // to continue the tutorial
  * }}
  */
-async function generateMessageBoxV7() {
+async function generateMessageBox() {
 	injectStyle(
-		"tut-v7-style",
+		"tutorial-style",
 		{ link: BROWSER.runtime.getURL("/salesforce/css/tutorial.css") },
 	);
 	const messageBox = document.createElement("div");
-	messageBox.classList.add("tut-v7");
+	messageBox.classList.add("tutorial");
 	messageBox.style.position = "fixed";
 	for (const pos of ["tl", "tr", "bl", "br"]) {
 		const c = document.createElement("div");
 		c.classList.add(
-			"tut-v7-corner",
-			`tut-v7-corner-${pos}`,
+			"tutorial-corner",
+			`tutorial-corner-${pos}`,
 		);
 		messageBox.appendChild(c);
 	}
 	const header = document.createElement("div");
-	header.classList.add("tut-v7-header");
+	header.classList.add("tutorial-header");
 	const tag = document.createElement("div");
-	tag.classList.add("tut-v7-tag");
+	tag.classList.add("tutorial-tag");
 	tag.textContent = "Tutorial";
 	const dash = document.createElement("div");
-	dash.classList.add("tut-v7-dash");
+	dash.classList.add("tutorial-dash");
 	header.append(tag, dash);
 	const segments = document.createElement("div");
-	segments.classList.add("tut-v7-segments");
+	segments.classList.add("tutorial-segments");
 	const actions = document.createElement("div");
-	actions.classList.add("tut-v7-actions");
+	actions.classList.add("tutorial-actions");
 	const confirmBtn = document.createElement("button");
-	//confirmBtn.className = "tut-v7-btn tut-v7-confirm";
+	//confirmBtn.className = "tutorial-btn tutorial-confirm";
 	confirmBtn.classList.add(
 		"slds-button",
 		"slds-button_brand",
@@ -2702,6 +2702,6 @@ export async function generateTutorialElements() {
 	return {
 		overlay,
 		spinner,
-		...await generateMessageBoxV7(),
+		...await generateMessageBox(),
 	};
 }

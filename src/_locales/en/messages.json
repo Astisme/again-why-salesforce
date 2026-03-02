@@ -136,6 +136,10 @@
 		"message": "Bold",
 		"description": "Font style option for bold text"
 	},
+	"close": {
+		"message": "Close",
+		"description": "close without anything happening"
+	},
 	"cancel": {
 		"message": "Cancel",
 		"description": "title or textContent for buttons that prevent the current action from executing"

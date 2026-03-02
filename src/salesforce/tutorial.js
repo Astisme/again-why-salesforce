@@ -296,11 +296,11 @@ class Tutorial {
 			showToast("tutorial_export_and_reset_for_tutorial", TOAST_WARNING);
 			return false;
 		}
-		const translator = await ensureTranslatorAvailability();
-		this.firstRedirectElement.label = await translator.translate(
+		this.translator = await ensureTranslatorAvailability();
+		this.firstRedirectElement.label = await this.translator.translate(
 			this.firstRedirectElement.label,
 		);
-		this.secondRedirectElement.label = await translator.translate(
+		this.secondRedirectElement.label = await this.translator.translate(
 			this.secondRedirectElement.label,
 		);
 		const settingsShortcut = await this.getSettingsShortcut();
@@ -466,7 +466,10 @@ class Tutorial {
 			},
 			{
 				message: "tutorial_end",
-				// No pageUrl
+        beginsBlock: true,
+        isEndingStep: true,
+        waitFor: WAIT_FOR.confirm,
+        onConfirm: () => this.end(),
 			},
 		];
 		return true;
@@ -547,7 +550,7 @@ class Tutorial {
 		return sendExtensionMessage({
 			what: WHAT_SET,
 			key: TUTORIAL_KEY,
-			set: stepNo,
+			set: stepNo < this.steps.length - 1 ? stepNo : this.steps.length, // if the user got to the last step, save it as soon as they get to it (without waiting for the confirmation)
 		});
 	}
 
@@ -568,6 +571,8 @@ class Tutorial {
 		await this.executeStep(step);
 		if (step.beginsBlock) {
 			this.persistTutorialProgress();
+      if(step.isEndingStep)
+        this.confirmBtn.textContent = await this.translator.translate("close");
 		}
 	}
 
@@ -607,6 +612,7 @@ class Tutorial {
 					() => this.nextStep(),
 					{ once: true },
 				);
+        this.btnsParent.classList.add(HIDDEN_CLASS);
 				break;
 			case WAIT_FOR.redirect: {
 				this.showConfirm();
@@ -759,8 +765,7 @@ class Tutorial {
 	 * @return {Promise<void>} Resolves when the message has been translated and displayed.
 	 */
 	async showMessage(step) {
-		const translator = await ensureTranslatorAvailability();
-		let message = await translator.translate(step.message);
+		let message = await this.translator.translate(step.message);
 		if (step.link && !message.includes(step.link)) {
 			message += `\n\n${step.link}`;
 		}
@@ -849,6 +854,7 @@ export async function checkTutorial() {
 		return;
 	}
 	if (
+    tutorialProgress < tutorial.steps.length &&
 		confirm(
 			await translator.translate(
 				"tutorial_continue_prompt",
