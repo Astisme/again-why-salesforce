@@ -141,15 +141,6 @@ function customLightningRedirect(miniUrl = "") {
 }
 
 /**
- * Redirects the user to the Setup Homepage and starts the tutorial
- * @param {Tutorial} [tutorial=null] - the tutorial instance
- */
-function redirectToHomeAndStart(tutorial = null) {
-	customLightningRedirect(SALESFORCE_SETUP_HOME_MINI);
-	(tutorial ?? new Tutorial()).start();
-}
-
-/**
  * Tutorial class to guide users through the extension features.
  * Manages the step-by-step tutorial process, including element highlighting,
  * message display, and user interaction handling.
@@ -515,7 +506,7 @@ class Tutorial {
 		this.messageBox = elements.messageBox;
 		this.spinner = elements.spinner;
 		this.segments = elements.segments;
-		//this.confirmBtn = elements.confirmBtn;
+		this.confirmBtn = elements.confirmBtn;
 		this.btnsParent = elements.btnsParent;
 		// append elements to the page
 		document.body.appendChild(this.overlay);
@@ -575,6 +566,7 @@ class Tutorial {
 				this.confirmBtn.textContent = await this.translator.translate(
 					"close",
 				);
+				this.throwConfetti();
 			}
 		}
 	}
@@ -830,6 +822,87 @@ class Tutorial {
 			this.persistTutorialProgress(this.steps.length);
 		}
 	}
+
+	/**
+	 * Updates the tutorial progress to the end of the steps
+	 * @param {Tutorial} [tutorial=null] - an instantiated tutorial (or nothing)
+	 */
+	static async setTutorialAsCompleted(tutorial = null) {
+		if (tutorial == null || tutorial.steps.length < 1) {
+			tutorial = new Tutorial();
+			await tutorial.initSteps();
+		}
+		tutorial.end();
+	}
+
+	/**
+	 * Throws a bunch of confetti from the messageBox to indicate that the tutorial
+	 * has been completed and cheer up the user!
+	 */
+	throwConfetti() {
+		const PARTICLE_COUNT = 120;
+		const DURATION = 3000;
+		const rect = this.messageBox.getBoundingClientRect();
+		const canvas = document.createElement("canvas");
+		const ctx = canvas.getContext("2d");
+		canvas.style.cssText =
+			"position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;";
+		canvas.width = globalThis.innerWidth;
+		canvas.height = globalThis.innerHeight;
+		document.body.appendChild(canvas);
+		const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+			x: rect.left + Math.random() * rect.width,
+			y: rect.top,
+			vx: (Math.random() - 0.5) * 8,
+			vy: -(Math.random() * 10 + 6),
+			color: `hsl(${Math.random() * 360}, 90%, 60%)`,
+			size: Math.random() * 8 + 4,
+			rotation: Math.random() * Math.PI * 2,
+			rotationSpeed: (Math.random() - 0.5) * 0.2,
+			shape: Math.random() > 0.5 ? "rect" : "circle",
+		}));
+		const start = performance.now();
+		const draw = (now) => {
+			const elapsed = now - start;
+			if (elapsed > DURATION) {
+				canvas.remove();
+				return;
+			}
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			const progress = elapsed / DURATION;
+			particles.forEach((p) => {
+				p.vy += 0.3;
+				p.vx *= 0.99;
+				p.x += p.vx;
+				p.y += p.vy;
+				p.rotation += p.rotationSpeed;
+				ctx.save();
+				ctx.globalAlpha = 1 - progress;
+				ctx.translate(p.x, p.y);
+				ctx.rotate(p.rotation);
+				ctx.fillStyle = p.color;
+				if (p.shape === "rect") {
+					ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+				} else {
+					ctx.beginPath();
+					ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+					ctx.fill();
+				}
+				ctx.restore();
+			});
+			requestAnimationFrame(draw);
+		};
+		requestAnimationFrame(draw);
+	}
+}
+
+/**
+ * Redirects the user to the Setup Homepage and starts the tutorial
+ * @param {Tutorial} [tutorial=null] - the tutorial instance
+ */
+function redirectToHomeAndStart(tutorial = null) {
+	customLightningRedirect(SALESFORCE_SETUP_HOME_MINI);
+	(tutorial ?? new Tutorial()).start();
 }
 
 /**
@@ -848,6 +921,9 @@ export async function checkTutorial() {
 	if (tutorialProgress == null) {
 		if (confirm(await translator.translate("tutorial_start_prompt"))) {
 			redirectToHomeAndStart();
+		} else {
+			// set the tutorial as completed
+			Tutorial.setTutorialAsCompleted();
 		}
 		return;
 	}
@@ -864,17 +940,10 @@ export async function checkTutorial() {
 			),
 		)
 	) {
-		tutorial.start(tutorialProgress - 1);
-	} else if (
-		// User doesn't want to continue, ask to start from beginning and clear progress if accepted
-		confirm(
-			await translator.translate(
-				"tutorial_restart_prompt",
-			),
-		)
-	) {
-		await tutorial.persistTutorialProgress(0);
-		redirectToHomeAndStart(tutorial);
+		tutorial.start(tutorialProgress - 1); // because nextStep adds 1 when it starts
+	} else {
+		// set the tutorial as completed
+		Tutorial.setTutorialAsCompleted(tutorial);
 	}
 }
 

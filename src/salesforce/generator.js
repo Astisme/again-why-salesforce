@@ -2609,38 +2609,39 @@ export function generateReviewSponsorSvgs() {
  *   messageBox: HTMLDivElement, // the element to add to the document
  *   segments:   HTMLDivElement, // where to put the new textContent
  *   confirmBtn: HTMLButtonElement, // to continue the tutorial
- * }}
+ *   btnsParent: HTMLDivElement, // where the buttons are located
+ * }} as described
  */
 async function generateMessageBox() {
 	injectStyle(
-		"tutorial-style",
+		"tut-v7-style",
 		{ link: BROWSER.runtime.getURL("/salesforce/css/tutorial.css") },
 	);
 	const messageBox = document.createElement("div");
-	messageBox.classList.add("tutorial");
+	messageBox.classList.add("tut-v7");
 	messageBox.style.position = "fixed";
 	for (const pos of ["tl", "tr", "bl", "br"]) {
 		const c = document.createElement("div");
 		c.classList.add(
-			"tutorial-corner",
-			`tutorial-corner-${pos}`,
+			"tut-v7-corner",
+			`tut-v7-corner-${pos}`,
 		);
 		messageBox.appendChild(c);
 	}
 	const header = document.createElement("div");
-	header.classList.add("tutorial-header");
+	header.classList.add("tut-v7-header");
 	const tag = document.createElement("div");
-	tag.classList.add("tutorial-tag");
+	tag.classList.add("tut-v7-tag");
 	tag.textContent = "Tutorial";
 	const dash = document.createElement("div");
-	dash.classList.add("tutorial-dash");
+	dash.classList.add("tut-v7-dash");
 	header.append(tag, dash);
 	const segments = document.createElement("div");
-	segments.classList.add("tutorial-segments");
+	segments.classList.add("tut-v7-segments");
 	const actions = document.createElement("div");
-	actions.classList.add("tutorial-actions");
+	actions.classList.add("tut-v7-actions");
 	const confirmBtn = document.createElement("button");
-	//confirmBtn.className = "tutorial-btn tutorial-confirm";
+	//confirmBtn.className = "tut-v7-btn tut-v7-confirm";
 	confirmBtn.classList.add(
 		"slds-button",
 		"slds-button_brand",
