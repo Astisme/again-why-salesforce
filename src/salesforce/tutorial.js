@@ -123,6 +123,15 @@ const usablePages = {
 	],
 };
 
+const ACTION = {
+  highlight: "highlight",
+  confirm: "confirm"
+};
+const WAIT_FOR = {
+  redirect: "redirect",
+  event: "event",
+};
+
 /**
  * Performs a lightning redirect within SETUP_LIGHTNING pages
  * @param {string} [miniUrl=""] - the url where to redirect the user
@@ -306,7 +315,7 @@ class Tutorial {
 				pageUrl: SALESFORCE_SETUP_HOME_MINI,
 				beginsBlock: true,
 				element: () => getSetupTabUl(),
-				action: "highlight",
+				action: ACTION.highlight,
 			},
 			{
 				message: "tutorial_click_highlighted_tab",
@@ -318,8 +327,8 @@ class Tutorial {
 					(this.#generateExtensionElementWithLinkInSetup.bind(
 						this,
 					))(),
-				action: "highlight",
-				waitFor: "redirect",
+				action: ACTION.highlight,
+				waitFor: WAIT_FOR.redirect,
 			},
 			{
 				message: "tutorial_remove_favourite",
@@ -329,21 +338,21 @@ class Tutorial {
 					(this.#showStarsContainerAndReturnIt.bind(
 						this,
 					))(),
-				action: "highlight",
-				waitFor: "event",
+				action: ACTION.highlight,
+				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_UNFAVOURITE,
 			},
 			{
 				message: "tutorial_redirect_account",
 				pageUrl: this.firstRedirectElement.url,
 				redirectElement: this.secondRedirectElement,
-				action: "confirm",
+				action: ACTION.confirm,
 				onConfirm: () => {
 					customLightningRedirect(
 						this.secondRedirectElement.url,
 					);
 				},
-				waitFor: "redirect",
+				waitFor: WAIT_FOR.redirect,
 			},
 			{
 				message: "tutorial_add_favourite",
@@ -354,8 +363,8 @@ class Tutorial {
 					(this.#showStarsContainerAndReturnIt.bind(
 						this,
 					))(),
-				action: "highlight",
-				waitFor: "event",
+				action: ACTION.highlight,
+				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_ACTION_FAVOURITE,
 			},
 			{
@@ -372,8 +381,8 @@ class Tutorial {
 					(this.#generateExtensionElementWithLinkInSetup.bind(
 						this,
 					))()?.closest("li"),
-				action: "highlight",
-				waitFor: "event",
+				action: ACTION.highlight,
+				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_PIN_TAB,
 			},
 			{
@@ -385,13 +394,13 @@ class Tutorial {
 					(this.#generateExtensionElementWithLinkInSetup.bind(
 						this,
 					))(),
-				action: "highlight",
+				action: ACTION.highlight,
 			},
 			{
 				message: "tutorial_manage_tabs",
 				pageUrl: this.secondRedirectElement.url,
 				beginsBlock: true,
-				waitFor: "event",
+				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
 			},
 			{
@@ -430,8 +439,8 @@ class Tutorial {
 						`#${MODAL_ID} #sortable-table tr:nth-child(${nthChild}) .slds-cell-wrap`,
 					);
 				},
-				action: "highlight",
-				waitFor: "event",
+				action: ACTION.highlight,
+				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 			},
 			{
@@ -445,8 +454,8 @@ class Tutorial {
 					document.querySelector(
 						`#${MODAL_ID} #again-why-salesforce-modal-confirm`,
 					),
-				action: "highlight",
-				waitFor: "event",
+				action: ACTION.highlight,
+				waitFor: WAIT_FOR.event,
 				awaitsCustomEvent: TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
 			},
 			{
@@ -589,25 +598,23 @@ class Tutorial {
 	/**
 	 * Based on step.waitFor, adds the listeners to let the tutorial continue
 	 * @param {Object} step - the current step
-	 * @param {HTMLElement|null} [el=null] - the element on which to add the listener
 	 */
-	#addListenersForWaitFor(step, el = null) {
+	#addListenersForWaitFor(step) {
 		switch (step.waitFor) {
-			case "event":
-			case "click":
-				(step.waitFor === "click" ? el : document).addEventListener(
+			case WAIT_FOR.event:
+				document.addEventListener(
 					step.awaitsCustomEvent ?? "click",
 					() => this.nextStep(),
 					{ once: true },
 				);
 				break;
-			case "redirect": {
+			case WAIT_FOR.redirect: {
 				this.showConfirm();
 				const cleanup = this.#listenToLightningNavigation(() => {
 					cleanup();
 					this.nextStep();
 				});
-				if (step.action !== "confirm") {
+				if (step.action !== ACTION.confirm) {
 					this.btnsParent.classList.add(HIDDEN_CLASS);
 				}
 				break;
@@ -659,17 +666,16 @@ class Tutorial {
 	 * @param {Object} step - The tutorial step configuration object.
 	 * @param {Function} [step.element] - Function that returns the HTMLElement to highlight.
 	 * @param {string} step.message - The i18n key for the message to display.
-	 * @param {string} step.action - The type of action ("highlight", "confirm").
-	 * @param {string} [step.waitFor] - The type of user action to wait for ("click", "timeout").
+	 * @param {string} step.action - The type of action (ACTION.highlight, ACTION.confirm).
+	 * @param {string} [step.waitFor] - The type of user action to wait for.
 	 * @param {Function} [step.onConfirm] - Callback function for confirmation steps.
 	 * @param {string} [step.link] - Optional link to append to the message.
 	 * @param {string} [step.shortcut] - Optional keyboard shortcut to display.
 	 * @return {Promise<void>} Resolves when the step execution is complete.
 	 */
 	async executeStep(step) {
-		let el;
 		if (step.element) {
-			el = await this.#getElementFromStep(step);
+			const el = await this.#getElementFromStep(step);
 			if (el == null) {
 				if (!step.fakeElement) {
 					showToast("tutorial_step_was_missed", TOAST_WARNING);
@@ -678,10 +684,10 @@ class Tutorial {
 				}
 				return; // this is needed because getElementFromStep uses this if the element cannot be found in a run
 			}
+      this.highlightElement(el);
 		}
-		this.highlightElement(el);
 		await this.showMessage(step);
-		this.#addListenersForWaitFor(step, el);
+		this.#addListenersForWaitFor(step);
 	}
 
 	/**
@@ -777,7 +783,7 @@ class Tutorial {
 		this.messageBox.addEventListener("click", () => {
 			const step = this.steps[this.currentStep];
 			step.onConfirm?.();
-			if (step.action !== "confirm") {
+			if (step.action !== ACTION.confirm) {
 				this.nextStep();
 			}
 		}, { once: true });
