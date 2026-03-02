@@ -3,6 +3,7 @@ import {
 	CMD_OPEN_SETTINGS,
 	CXM_UNPIN_TAB,
 	EXTENSION_GITHUB_LINK,
+	HIDDEN_CLASS,
 	SALESFORCE_SETUP_HOME_MINI,
 	SETUP_LIGHTNING,
 	TOAST_WARNING,
@@ -163,12 +164,7 @@ class Tutorial {
 	 * The currently highlighted element.
 	 * @type {HTMLElement|null}
 	 */
-	highlightedElement = null; // New property
-	/**
-	 * The dynamically created style element for highlighting.
-	 * @type {HTMLStyleElement|null}
-	 */
-	highlightStyleElement = null; // New property
+	highlightedElement = null;
 	/**
 	 * Spinner element to show loading states.
 	 * @type {HTMLElement|null}
@@ -249,6 +245,7 @@ class Tutorial {
 
 	/**
 	 * Finds the currently shown stars container
+	 * @return {HTMLInputElement} the currently shown stars container
 	 */
 	#getStarsContainer() {
 		// Salesforce has 2 "pages" for ObjectManager and standard pages so we have 2 buttons actually
@@ -484,7 +481,7 @@ class Tutorial {
 		} else {
 			this.currentStep = 0;
 		}
-		this.createOverlay();
+		await this.createOverlay();
 		this.currentStep--; // because nextStep increases before starting
 		const pageUrl = this.steps[this.currentStep]?.pageUrl;
 		if (pageUrl != null) {
@@ -498,23 +495,15 @@ class Tutorial {
 	 * Generates the necessary HTML elements for the tutorial interface
 	 * and adds them to the DOM for user interaction.
 	 */
-	createOverlay() {
-		const elements = generateTutorialElements();
+	async createOverlay() {
+		const elements = await generateTutorialElements();
 		this.overlay = elements.overlay;
 		this.messageBox = elements.messageBox;
 		this.spinner = elements.spinner;
-		// Define the custom highlight CSS class
-		this.highlightStyleElement = document.createElement("style");
-		this.highlightStyleElement.textContent = `
-        .${TUTORIAL_HIGHLIGHT_CLASS} {
-            background: yellow !important;
-            color: black !important;
-            position: relative !important;
-            z-index: 10000 !important;
-            box-shadow: 0 0 2em !important;
-        }
-    `;
-		document.head.appendChild(this.highlightStyleElement);
+		this.segments = elements.segments;
+		//this.confirmBtn = elements.confirmBtn;
+		this.btnsParent = elements.btnsParent;
+		// append elements to the page
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
 		document.body.appendChild(this.spinner);
@@ -524,14 +513,14 @@ class Tutorial {
 	 * Shows the Salesforce-like spinner.
 	 */
 	showSpinner() {
-		this.spinner.style.display = "block";
+		this.spinner.classList.remove(HIDDEN_CLASS);
 	}
 
 	/**
 	 * Hides the Salesforce-like spinner.
 	 */
 	hideSpinner() {
-		this.spinner.style.display = "none";
+		this.spinner.classList.add(HIDDEN_CLASS);
 	}
 
 	/**
@@ -604,20 +593,21 @@ class Tutorial {
 		switch (step.waitFor) {
 			case "event":
 			case "click":
-				(el ?? document).addEventListener(
+				(step.waitFor === "click" ? el : document).addEventListener(
 					step.awaitsCustomEvent ?? "click",
 					() => this.nextStep(),
 					{ once: true },
 				);
 				break;
 			case "redirect": {
-				if (step.action === "confirm") {
-					this.showConfirm(step, { continueAfterClick: false });
-				}
+				this.showConfirm(step, {
+					continueAfterClick: step.action !== "confirm",
+				});
 				const cleanup = this.#listenToLightningNavigation(() => {
 					cleanup();
 					this.nextStep();
 				});
+				this.btnsParent.classList.add(HIDDEN_CLASS);
 				break;
 			}
 			default:
@@ -770,7 +760,7 @@ class Tutorial {
 			message += `\n\nShortcut: ${step.shortcut}`;
 		}
 		this.hideSpinner();
-		this.messageBox.textContent = message;
+		this.segments.textContent = message;
 		step.message = message;
 	}
 
@@ -787,15 +777,13 @@ class Tutorial {
 	showConfirm(step, {
 		continueAfterClick = true,
 	} = {}) {
-		const confirmBtn = document.createElement("button");
-		confirmBtn.textContent = "OK";
-		this.messageBox.appendChild(confirmBtn);
 		this.messageBox.addEventListener("click", () => {
 			step.onConfirm?.();
 			if (continueAfterClick) {
 				this.nextStep();
 			}
 		}, { once: true });
+		this.btnsParent.classList.remove(HIDDEN_CLASS);
 	}
 
 	/**
@@ -826,7 +814,6 @@ class Tutorial {
 		this.messageBox?.remove();
 		this.spinner?.remove();
 		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
-		this.highlightStyleElement?.remove();
 		if (shouldSaveProgress) {
 			this.persistTutorialProgress(this.steps.length);
 		}

@@ -17,7 +17,7 @@ import {
 	WHAT_ADD,
 	WHAT_GET_COMMANDS,
 } from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
+import { getSettings, injectStyle, sendExtensionMessage } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -155,8 +155,10 @@ async function generateFavouriteButton() {
 	}, true);
 	slashedStar.classList.add(HIDDEN_CLASS);
 	span.appendChild(slashedStar);
-	const style = document.createElement("style");
-	style.textContent = `.${HIDDEN_CLASS} { display: none; }`;
+	const style = injectStyle(
+		"awsf-hidden",
+		{ css: `.${HIDDEN_CLASS} { display: none; }` },
+	);
 	span.appendChild(style);
 	return button;
 }

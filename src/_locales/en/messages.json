@@ -176,8 +176,12 @@
 		"message": "Show modal to update the current page (if saved)",
 		"description": "[command description] the user wants to update the current page. DO NOT USE PLACEHOLDERS"
 	},
+	"confirm": {
+		"message": "Confirm",
+		"description": "text to ask the user to continue"
+	},
 	"confirm_another_org": {
-		"message": "Confirm opening this link.",
+		"message": "$confirm opening this link.",
 		"description": "[open-other-org-modal] request confirmation to the user to open the constructed link."
 	},
 	"confirm_update_extension": {

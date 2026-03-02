@@ -29,7 +29,7 @@ import {
 	sf_afterSet,
 	showToast,
 } from "./content.js";
-import { getInnerElementFieldBySelector } from "../functions.js";
+import { getInnerElementFieldBySelector, injectStyle } from "../functions.js";
 
 let focusedIndex = 0;
 const managedLoggers = [];
@@ -528,15 +528,11 @@ async function removeTr(
  * @param {TbodyHTMLElement} tabAppendElement - the tbody element where to append the style
  */
 function checkAddDuplicateStyle(tabAppendElement) {
-	const styleId = "awsf-warning";
-	const style = tabAppendElement.querySelector(`#${styleId}`);
-	if (style == null) {
-		const newStyle = document.createElement("style");
-		newStyle.id = styleId;
-		newStyle.textContent =
-			".duplicate { background-color: #dd7a01 !important; }";
-		tabAppendElement.appendChild(newStyle);
-	}
+	const styleEl = injectStyle(
+		"awsf-warning",
+		{ css: ".duplicate { background-color: #dd7a01 !important; }" },
+	);
+	tabAppendElement.appendChild(styleEl);
 }
 
 /**

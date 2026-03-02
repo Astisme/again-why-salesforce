@@ -32,9 +32,10 @@ class HelpAws extends HTMLElement {
 		this._anchor = anchor;
 		this._tooltip = tooltip;
 		this._linkTip = linkTip;
-		const linkEl = document.createElement("link");
-		linkEl.setAttribute("rel", "stylesheet");
-		linkEl.setAttribute("href", new URL("./help.css", import.meta.url));
+		const linkEl = injectStyle(
+			"awsf-help",
+			BROWSER.runtime.getURL("./help.css"),
+		);
 		this.shadowRoot.appendChild(linkEl);
 		this._tooltip.dataset.showRight = this.dataset.showRight ?? "false";
 		this._tooltip.dataset.showLeft = this.dataset.showLeft ?? "false";

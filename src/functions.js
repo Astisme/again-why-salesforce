@@ -337,3 +337,42 @@ export function getInnerElementFieldBySelector({
 	value = value?.trim();
 	return value == null || value === "" ? undefined : value;
 }
+/**
+ * Injects a <style> or <link> tag into <head> if it hasn't been injected yet.
+ * @param {string} id   - Unique ID for the style tag, prevents duplicates.
+ * @param {Object} [param1={}] an object with one of the following keys
+ * @param {string|null} [param1.css=null] - the CSS rule to inject. if the style element already exists, the rule is overwritten with this
+ * @param {string|null} [param1.link=null] - The link which contains the CSS string to inject.
+ * @throws Error if the id was not passed or if both css and link are != null
+ * @return the existing/created style/link element
+ */
+export function injectStyle(id, {
+	css = null,
+	link = null,
+} = {}) {
+	const workingWithCss = css != null;
+	if (
+		(id == null || id === "") ||
+		(workingWithCss && link != null)
+	) {
+		throw new Error("error_required_params");
+	}
+	const existingStyle = document.getElementById(id);
+	if (existingStyle) {
+		if (workingWithCss) {
+			existingStyle.textContent = css;
+		}
+		return existingStyle;
+	}
+	const tag = document.createElement(workingWithCss ? "style" : "link");
+	tag.id = id;
+	if (workingWithCss) {
+		tag.textContent = css;
+	} else {
+		tag.rel = "stylesheet";
+		tag.type = "text/css";
+		tag.href = link;
+	}
+	document.head.appendChild(tag);
+	return tag;
+}

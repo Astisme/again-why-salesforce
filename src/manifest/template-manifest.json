@@ -40,7 +40,8 @@
 				"assets/svgs/*.svg",
 				"assets/icons/*.png",
 				"_locales/*/messages.json",
-				"components/help/help.css"
+				"components/help/help.css",
+				"salesforce/css/*.css"
 			],
 			"matches": [
 				"*://*.my.salesforce-setup.com/*",

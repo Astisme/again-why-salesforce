@@ -18,6 +18,7 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
+import { injectStyle } from "../functions.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
@@ -64,8 +65,10 @@ async function generateSldsImport() {
 	);
 	fileInputWrapper.style.marginBottom = "1rem";
 	divParent.appendChild(fileInputWrapper);
-	const style = document.createElement("style");
-	style.textContent = `.${HIDDEN_CLASS} { display: none; }`;
+	const style = injectStyle(
+		"awsf-hidden",
+		{ css: `.${HIDDEN_CLASS} { display: none; }` },
+	);
 	divParent.appendChild(style);
 	const duplicateWarningPart0 = document.createElement("div");
 	duplicateWarningPart0.textContent = await translator.translate(
