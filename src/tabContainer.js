@@ -114,26 +114,27 @@ export class TabContainer extends Array {
 	/**
 	 * Initializes the `TabContainer` by adding tabs, either from the saved tabs or provided as an argument. Called by the constructor.
 	 *
+	 * @param {TabContainer} instance - The TabContainer instance to be initialized.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if initialization is successful, otherwise `false`.
 	 * @private
 	 */
-	static async #initialize() {
-		if (singletonAllTabs == null) {
+	static async #initialize(instance) {
+		if (instance == null) {
 			throw new Error("error_tabcont_initialize");
 		}
 		const {
 			[TabContainer.keyTabs]: savedTabs,
 			[TabContainer.keyPinnedTabsNo]: pinnedTabs,
-		} = await singletonAllTabs.getSavedTabs(false);
+		} = await instance.getSavedTabs(false);
 		return (
 			Array.isArray(savedTabs) &&
 			savedTabs.length > 0 &&
-			await (singletonAllTabs.addTabs(savedTabs, false)) &&
+			await (instance.addTabs(savedTabs, false)) &&
 			Boolean(
-				(singletonAllTabs[TabContainer.keyPinnedTabsNo] = pinnedTabs) ||
+				(instance[TabContainer.keyPinnedTabsNo] = pinnedTabs) ||
 					true,
 			) // set pinned number based on storage (if pinned === 0, do not fail (with true))
-		) || await singletonAllTabs.setDefaultTabs();
+		) || await instance.setDefaultTabs();
 	}
 
 	/**
@@ -160,18 +161,24 @@ export class TabContainer extends Array {
 	 */
 	static async create() {
 		if (singletonAllTabs != null) {
-			return singletonAllTabs;
+			return (singletonAllTabs instanceof Promise)
+				? await singletonAllTabs
+				: singletonAllTabs;
 		}
-		singletonAllTabs = new TabContainer(_tabContainerSecret);
-		translator = await ensureTranslatorAvailability();
-		if (!await TabContainer.#initialize()) {
-			throw new Error(
-				await translator.translate([
-					"error_tabcont_initialize",
-				]),
-			);
-		}
-		return singletonAllTabs;
+		singletonAllTabs = (async () => {
+			const instance = new TabContainer(_tabContainerSecret);
+			translator = await ensureTranslatorAvailability();
+			if (!await TabContainer.#initialize(instance)) {
+				throw new Error(
+					await translator.translate([
+						"error_tabcont_initialize",
+					]),
+				);
+			}
+			singletonAllTabs = instance;
+			return instance;
+		})();
+		return await singletonAllTabs;
 	}
 
 	/**
@@ -1455,12 +1462,18 @@ export class TabContainer extends Array {
 
 	/**
 	 * Resets the singleton and returns a new instance. Only for use in tests!
-	 *
 	 * @return {Promise<TabContainer>} the new instance
 	 */
 	static async _reset() {
 		singletonAllTabs = null;
 		return await ensureAllTabsAvailability();
+	}
+
+	/**
+	 * Clears the singleton instance. Only for use in tests!
+	 */
+	static _clear() {
+		singletonAllTabs = null;
 	}
 
 	/**
