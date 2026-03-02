@@ -6,10 +6,10 @@ import {
 	ISFIREFOX,
 	ISSAFARI,
 } from "/constants.js";
+import { injectStyle } from "/functions.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
-import { injectStyle } from "../../functions.js";
 
 /**
  * Based on how many Tabs the user has saved, declares which support links should be shown
@@ -109,7 +109,7 @@ class ReviewSponsorAws extends HTMLElement {
 		shadow.appendChild(result.root);
 		const linkEl = injectStyle(
 			"awsf-rev-spons",
-			BROWSER.runtime.getURL("./review-sponsor.css"),
+			{ link: BROWSER.runtime.getURL("./review-sponsor.css") },
 		);
 		this.shadowRoot.appendChild(linkEl);
 		this._showReviewOrSponsor(result);

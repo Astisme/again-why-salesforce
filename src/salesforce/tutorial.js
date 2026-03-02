@@ -124,12 +124,12 @@ const usablePages = {
 };
 
 const ACTION = {
-  highlight: "highlight",
-  confirm: "confirm"
+	highlight: "highlight",
+	confirm: "confirm",
 };
 const WAIT_FOR = {
-  redirect: "redirect",
-  event: "event",
+	redirect: "redirect",
+	event: "event",
 };
 
 /**
@@ -466,10 +466,10 @@ class Tutorial {
 			},
 			{
 				message: "tutorial_end",
-        beginsBlock: true,
-        isEndingStep: true,
-        waitFor: WAIT_FOR.confirm,
-        onConfirm: () => this.end(),
+				beginsBlock: true,
+				isEndingStep: true,
+				waitFor: WAIT_FOR.confirm,
+				onConfirm: () => this.end(),
 			},
 		];
 		return true;
@@ -571,8 +571,11 @@ class Tutorial {
 		await this.executeStep(step);
 		if (step.beginsBlock) {
 			this.persistTutorialProgress();
-      if(step.isEndingStep)
-        this.confirmBtn.textContent = await this.translator.translate("close");
+			if (step.isEndingStep) {
+				this.confirmBtn.textContent = await this.translator.translate(
+					"close",
+				);
+			}
 		}
 	}
 
@@ -612,7 +615,7 @@ class Tutorial {
 					() => this.nextStep(),
 					{ once: true },
 				);
-        this.btnsParent.classList.add(HIDDEN_CLASS);
+				this.btnsParent.classList.add(HIDDEN_CLASS);
 				break;
 			case WAIT_FOR.redirect: {
 				this.showConfirm();
@@ -690,7 +693,7 @@ class Tutorial {
 				}
 				return; // this is needed because getElementFromStep uses this if the element cannot be found in a run
 			}
-      this.highlightElement(el);
+			this.highlightElement(el);
 		}
 		await this.showMessage(step);
 		this.#addListenersForWaitFor(step);
@@ -854,7 +857,7 @@ export async function checkTutorial() {
 		return;
 	}
 	if (
-    tutorialProgress < tutorial.steps.length &&
+		tutorialProgress < tutorial.steps.length &&
 		confirm(
 			await translator.translate(
 				"tutorial_continue_prompt",

@@ -5,6 +5,7 @@ import {
 	TOAST_ERROR,
 	TOAST_WARNING,
 } from "/constants.js";
+import { injectStyle } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -18,7 +19,6 @@ import {
 	MODAL_ID,
 } from "./generator.js";
 import { getModalHanger, getSetupTabUl, showToast } from "./content.js";
-import { injectStyle } from "../functions.js";
 
 const IMPORT_ID = `${EXTENSION_NAME}-import`;
 const IMPORT_FILE_ID = `${IMPORT_ID}-file`;
