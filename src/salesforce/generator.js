@@ -2641,7 +2641,6 @@ async function generateMessageBox() {
 	const actions = document.createElement("div");
 	actions.classList.add("tut-v7-actions");
 	const confirmBtn = document.createElement("button");
-	//confirmBtn.className = "tut-v7-btn tut-v7-confirm";
 	confirmBtn.classList.add(
 		"slds-button",
 		"slds-button_brand",
