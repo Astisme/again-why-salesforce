@@ -22,7 +22,12 @@ import {
 import { performLightningRedirect, sendExtensionMessage } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
-import { getCurrentHref, getSetupTabUl, performActionOnTabs, showToast } from "./content.js";
+import {
+	getCurrentHref,
+	getSetupTabUl,
+	performActionOnTabs,
+	showToast,
+} from "./content.js";
 import {
 	FAVOURITE_BUTTON_ID,
 	showFavouriteButton,
@@ -191,7 +196,7 @@ class Tutorial {
 	async #findRedirectLinks() {
 		const allTabs = await ensureAllTabsAvailability();
 		const usersSavedUrls = new Set(allTabs.map((t) => t.url));
-    usersSavedUrls.add(Tab.minifyURL(getCurrentHref()));
+		usersSavedUrls.add(Tab.minifyURL(getCurrentHref()));
 		let viableObjManEl = null;
 		const objManElementLen = usablePages.objectManager.length;
 		const allObjects = [
@@ -230,7 +235,9 @@ class Tutorial {
 				?.url;
 		const ul = getSetupTabUl();
 		return ul.querySelector(
-			`a:not([title^="/"]):not([title^="http"]):not([title="${Tab.minifyURL(getCurrentHref())}"])`,
+			`a:not([title^="/"]):not([title^="http"]):not([title="${
+				Tab.minifyURL(getCurrentHref())
+			}"])`,
 		) ?? ul.querySelector(
 			`a[title="${goToUrl}"]`,
 		);
