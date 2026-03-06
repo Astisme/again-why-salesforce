@@ -72,7 +72,9 @@ async function getUsableSalesforcePage(browser, fallbackPage) {
 		if (preferredSalesforce != null) {
 			return preferredSalesforce;
 		}
-		const nonBlank = usablePages.find((candidate) => !isBlankPage(candidate.url()));
+		const nonBlank = usablePages.find((candidate) =>
+			!isBlankPage(candidate.url())
+		);
 		if (nonBlank != null) {
 			return nonBlank;
 		}
@@ -92,55 +94,65 @@ async function captureUi(page, label: string) {
 	const safeLabel = label.replaceAll(/[^a-zA-Z0-9-_]/g, "_");
 	const path = `${DEBUG_DIR}/${Date.now()}-${safeLabel}.png`;
 	try {
-		await runWithPageRetries("captureUi:screenshot", () =>
-			page.screenshot({ path, fullPage: true }).catch(() => null)
+		await runWithPageRetries(
+			"captureUi:screenshot",
+			() => page.screenshot({ path, fullPage: true }).catch(() => null),
 		);
-		const state = await runWithPageRetries("captureUi:evaluate", () =>
-			page.evaluate(() => ({
-				url: location.href,
-				title: document.title,
-				readyState: document.readyState,
-			}))
+		const state = await runWithPageRetries(
+			"captureUi:evaluate",
+			() =>
+				page.evaluate(() => ({
+					url: location.href,
+					title: document.title,
+					readyState: document.readyState,
+				})),
 		);
 		console.log(`UI[${label}] ${JSON.stringify(state)} screenshot=${path}`);
 	} catch (error) {
 		const message = error instanceof Error ? error.message : String(error);
-		console.warn(`UI[${label}] capture skipped due to transient error: ${message}`);
+		console.warn(
+			`UI[${label}] capture skipped due to transient error: ${message}`,
+		);
 	}
 }
 
 async function waitForTutorialConfirm(page) {
-	await runWithPageRetries("waitForTutorialConfirm", () =>
-		page.waitForFunction(
-			(selector) => {
-				const button = document.querySelector(selector);
-				if (!(button instanceof HTMLButtonElement)) {
-					return false;
-				}
-				const parent = button.parentElement;
-				return parent != null && !parent.classList.contains("hidden");
-			},
-			{ timeout: 60000 },
-			TUTORIAL_CONFIRM_SELECTOR,
-		)
+	await runWithPageRetries(
+		"waitForTutorialConfirm",
+		() =>
+			page.waitForFunction(
+				(selector) => {
+					const button = document.querySelector(selector);
+					if (!(button instanceof HTMLButtonElement)) {
+						return false;
+					}
+					const parent = button.parentElement;
+					return parent != null &&
+						!parent.classList.contains("hidden");
+				},
+				{ timeout: 60000 },
+				TUTORIAL_CONFIRM_SELECTOR,
+			),
 	);
 }
 
 async function clickElementCenter(page, selector: string, label: string) {
-	const point = await runWithPageRetries(`clickElementCenter:${label}:coords`, () =>
-		page.$eval(selector, (element) => {
-			if (!(element instanceof HTMLElement)) {
-				throw new Error(`Element ${selector} is not clickable`);
-			}
-			const rect = element.getBoundingClientRect();
-			if (rect.width <= 0 || rect.height <= 0) {
-				throw new Error(`Element ${selector} has no visible size`);
-			}
-			return {
-				x: rect.x + rect.width / 2,
-				y: rect.y + rect.height / 2,
-			};
-		})
+	const point = await runWithPageRetries(
+		`clickElementCenter:${label}:coords`,
+		() =>
+			page.$eval(selector, (element) => {
+				if (!(element instanceof HTMLElement)) {
+					throw new Error(`Element ${selector} is not clickable`);
+				}
+				const rect = element.getBoundingClientRect();
+				if (rect.width <= 0 || rect.height <= 0) {
+					throw new Error(`Element ${selector} has no visible size`);
+				}
+				return {
+					x: rect.x + rect.width / 2,
+					y: rect.y + rect.height / 2,
+				};
+			}),
 	);
 	await page.mouse.move(point.x, point.y);
 	await page.mouse.down();
@@ -149,24 +161,31 @@ async function clickElementCenter(page, selector: string, label: string) {
 
 async function clickTutorialConfirm(page, label: string) {
 	await waitForTutorialConfirm(page);
-	await clickElementCenter(page, TUTORIAL_CONFIRM_SELECTOR, `confirm:${label}`);
+	await clickElementCenter(
+		page,
+		TUTORIAL_CONFIRM_SELECTOR,
+		`confirm:${label}`,
+	);
 }
 
 async function clickTutorialConfirmIfVisible(page, label: string) {
 	try {
-		await runWithPageRetries(`waitForTutorialConfirmIfVisible:${label}`, () =>
-			page.waitForFunction(
-				(selector) => {
-					const button = document.querySelector(selector);
-					if (!(button instanceof HTMLButtonElement)) {
-						return false;
-					}
-					const parent = button.parentElement;
-					return parent != null && !parent.classList.contains("hidden");
-				},
-				{ timeout: 8000 },
-				TUTORIAL_CONFIRM_SELECTOR,
-			)
+		await runWithPageRetries(
+			`waitForTutorialConfirmIfVisible:${label}`,
+			() =>
+				page.waitForFunction(
+					(selector) => {
+						const button = document.querySelector(selector);
+						if (!(button instanceof HTMLButtonElement)) {
+							return false;
+						}
+						const parent = button.parentElement;
+						return parent != null &&
+							!parent.classList.contains("hidden");
+					},
+					{ timeout: 8000 },
+					TUTORIAL_CONFIRM_SELECTOR,
+				),
 		);
 		await clickTutorialConfirm(page, label);
 		return true;
@@ -176,15 +195,17 @@ async function clickTutorialConfirmIfVisible(page, label: string) {
 }
 
 async function waitForVisibleIcon(page, iconSelector: string, timeout = 60000) {
-	await runWithPageRetries(`waitForVisibleIcon:${iconSelector}`, () =>
-		page.waitForFunction(
-			(selector) => {
-				const icon = document.querySelector(selector);
-				return icon != null && !icon.classList.contains("hidden");
-			},
-			{ timeout },
-			iconSelector,
-		)
+	await runWithPageRetries(
+		`waitForVisibleIcon:${iconSelector}`,
+		() =>
+			page.waitForFunction(
+				(selector) => {
+					const icon = document.querySelector(selector);
+					return icon != null && !icon.classList.contains("hidden");
+				},
+				{ timeout },
+				iconSelector,
+			),
 	);
 }
 
@@ -196,22 +217,30 @@ async function ensureFavouriteIconReady(
 ) {
 	let activePage = page;
 	const isVisible = () =>
-		runWithPageRetries(`ensureFavouriteIconReady:check:${label}`, () =>
-			(async () => {
-				activePage = await getUsableSalesforcePage(browser, activePage);
-				return await activePage.evaluate((selector) => {
-					const icon = document.querySelector(selector);
-					if (!(icon instanceof Element)) {
-						return false;
-					}
-					const style = globalThis.getComputedStyle(icon);
-					if (style.display === "none" || style.visibility === "hidden") {
-						return false;
-					}
-					const rect = icon.getBoundingClientRect();
-					return rect.width > 0 && rect.height > 0;
-				}, iconSelector);
-			})()
+		runWithPageRetries(
+			`ensureFavouriteIconReady:check:${label}`,
+			() =>
+				(async () => {
+					activePage = await getUsableSalesforcePage(
+						browser,
+						activePage,
+					);
+					return await activePage.evaluate((selector) => {
+						const icon = document.querySelector(selector);
+						if (!(icon instanceof Element)) {
+							return false;
+						}
+						const style = globalThis.getComputedStyle(icon);
+						if (
+							style.display === "none" ||
+							style.visibility === "hidden"
+						) {
+							return false;
+						}
+						const rect = icon.getBoundingClientRect();
+						return rect.width > 0 && rect.height > 0;
+					}, iconSelector);
+				})(),
 		);
 	for (let attempt = 1; attempt <= 8; attempt++) {
 		activePage = await getUsableSalesforcePage(browser, activePage);
@@ -246,19 +275,21 @@ async function ensureTutorialUiReady(browser, page) {
 	const deadline = Date.now() + 90000;
 	while (Date.now() < deadline) {
 		activePage = await getUsableSalesforcePage(browser, activePage);
-		const isReady = await runWithPageRetries("ensureTutorialUiReady:check", () =>
-			activePage.evaluate((selector) => {
-				const node = document.querySelector(selector);
-				if (!(node instanceof HTMLElement)) {
-					return false;
-				}
-				const style = globalThis.getComputedStyle(node);
-				const rect = node.getBoundingClientRect();
-				return style.display !== "none" &&
-					style.visibility !== "hidden" &&
-					rect.width > 0 &&
-					rect.height > 0;
-			}, TUTORIAL_BOX_SELECTOR)
+		const isReady = await runWithPageRetries(
+			"ensureTutorialUiReady:check",
+			() =>
+				activePage.evaluate((selector) => {
+					const node = document.querySelector(selector);
+					if (!(node instanceof HTMLElement)) {
+						return false;
+					}
+					const style = globalThis.getComputedStyle(node);
+					const rect = node.getBoundingClientRect();
+					return style.display !== "none" &&
+						style.visibility !== "hidden" &&
+						rect.width > 0 &&
+						rect.height > 0;
+				}, TUTORIAL_BOX_SELECTOR),
 		).catch((error) => {
 			if (!isTransientPageError(error)) {
 				throw error;
@@ -274,31 +305,36 @@ async function ensureTutorialUiReady(browser, page) {
 }
 
 async function getVisibleFavouriteIcon(page) {
-	return await runWithPageRetries("getVisibleFavouriteIcon", () =>
-		page.evaluate(({ starSelector, slashedSelector }) => {
-			const isVisible = (selector: string) => {
-				const icon = document.querySelector(selector);
-				if (!(icon instanceof Element)) {
-					return false;
+	return await runWithPageRetries(
+		"getVisibleFavouriteIcon",
+		() =>
+			page.evaluate(({ starSelector, slashedSelector }) => {
+				const isVisible = (selector: string) => {
+					const icon = document.querySelector(selector);
+					if (!(icon instanceof Element)) {
+						return false;
+					}
+					const style = globalThis.getComputedStyle(icon);
+					if (
+						style.display === "none" ||
+						style.visibility === "hidden"
+					) {
+						return false;
+					}
+					const rect = icon.getBoundingClientRect();
+					return rect.width > 0 && rect.height > 0;
+				};
+				if (isVisible(slashedSelector)) {
+					return slashedSelector;
 				}
-				const style = globalThis.getComputedStyle(icon);
-				if (style.display === "none" || style.visibility === "hidden") {
-					return false;
+				if (isVisible(starSelector)) {
+					return starSelector;
 				}
-				const rect = icon.getBoundingClientRect();
-				return rect.width > 0 && rect.height > 0;
-			};
-			if (isVisible(slashedSelector)) {
-				return slashedSelector;
-			}
-			if (isVisible(starSelector)) {
-				return starSelector;
-			}
-			return null;
-		}, {
-			starSelector: STAR_SELECTOR,
-			slashedSelector: SLASHED_STAR_SELECTOR,
-		})
+				return null;
+			}, {
+				starSelector: STAR_SELECTOR,
+				slashedSelector: SLASHED_STAR_SELECTOR,
+			}),
 	);
 }
 
@@ -326,28 +362,34 @@ async function performTutorialUnfavourite(browser, page) {
 async function clickHighlightedRedirectTab(page) {
 	const beforeRedirectUrl = page.url();
 	await page.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, { timeout: 60000 });
-	const clickAction = await runWithPageRetries("clickHighlightedRedirectTab", () =>
-		page.evaluate((highlightSelector) => {
-			const highlighted = document.querySelector(highlightSelector);
-			const candidates: Element[] = [];
-			if (highlighted != null) {
-				candidates.push(
-					highlighted,
-					...highlighted.querySelectorAll("a, button, [role='button'], [data-action]"),
-				);
-				const parentClickable = highlighted.closest("a, button, li");
-				if (parentClickable != null) {
-					candidates.push(parentClickable);
+	const clickAction = await runWithPageRetries(
+		"clickHighlightedRedirectTab",
+		() =>
+			page.evaluate((highlightSelector) => {
+				const highlighted = document.querySelector(highlightSelector);
+				const candidates: Element[] = [];
+				if (highlighted != null) {
+					candidates.push(
+						highlighted,
+						...highlighted.querySelectorAll(
+							"a, button, [role='button'], [data-action]",
+						),
+					);
+					const parentClickable = highlighted.closest(
+						"a, button, li",
+					);
+					if (parentClickable != null) {
+						candidates.push(parentClickable);
+					}
 				}
-			}
-			for (const candidate of candidates) {
-				if (candidate instanceof HTMLElement) {
-					candidate.click();
-					return "clicked-highlight";
+				for (const candidate of candidates) {
+					if (candidate instanceof HTMLElement) {
+						candidate.click();
+						return "clicked-highlight";
+					}
 				}
-			}
-			throw new Error("No highlighted setup tab link to click");
-		}, TUTORIAL_HIGHLIGHT_SELECTOR)
+				throw new Error("No highlighted setup tab link to click");
+			}, TUTORIAL_HIGHLIGHT_SELECTOR),
 	);
 	console.log(`Step2 action: ${clickAction}`);
 	await page.waitForFunction(
@@ -392,7 +434,10 @@ async function clickFavouriteButtonByIcon(
 					if (!(button instanceof HTMLButtonElement)) {
 						throw new Error("Favourite button not found");
 					}
-					button.scrollIntoView({ block: "center", inline: "center" });
+					button.scrollIntoView({
+						block: "center",
+						inline: "center",
+					});
 					const rect = button.getBoundingClientRect();
 					if (rect.width <= 0 || rect.height <= 0) {
 						throw new Error("Favourite button is not visible");
@@ -404,49 +449,77 @@ async function clickFavouriteButtonByIcon(
 					};
 				}),
 		);
-		await runWithPageRetries("clickFavouriteButtonByIcon:click", async () => {
-			await activePage.mouse.move(beforeClickState.x, beforeClickState.y);
-			await activePage.mouse.down();
-			await activePage.mouse.up();
-		});
-		try {
-			await runWithPageRetries("clickFavouriteButtonByIcon:toggle", () =>
-				activePage.waitForFunction(
-					({ expectedVisibleSelector, expectedHiddenSelector, previousPressed }) => {
-						const isVisible = (element: Element | null) => {
-							if (!(element instanceof Element)) {
-								return false;
-							}
-							const style = globalThis.getComputedStyle(element);
-							if (style.display === "none" || style.visibility === "hidden") {
-								return false;
-							}
-							const rect = element.getBoundingClientRect();
-							return rect.width > 0 && rect.height > 0;
-						};
-						const expectedVisible = document.querySelector(expectedVisibleSelector);
-						const expectedHidden = document.querySelector(expectedHiddenSelector);
-						if (isVisible(expectedVisible) && !isVisible(expectedHidden)) {
-							return true;
-						}
-						const button = expectedHidden?.closest("button") ??
-							expectedVisible?.closest("button");
-						if (!(button instanceof HTMLButtonElement)) {
-							return false;
-						}
-						const currentPressed = button.getAttribute("aria-pressed");
-						return previousPressed != null &&
-							currentPressed != null &&
-							currentPressed !== previousPressed;
-					},
-					{ timeout: 12000 },
-					{
-						expectedVisibleSelector: nextIconSelector,
-						expectedHiddenSelector: iconSelector,
-						previousPressed: beforeClickState.pressed,
-					},
-					)
+		await runWithPageRetries(
+			"clickFavouriteButtonByIcon:click",
+			async () => {
+				await activePage.mouse.move(
+					beforeClickState.x,
+					beforeClickState.y,
 				);
+				await activePage.mouse.down();
+				await activePage.mouse.up();
+			},
+		);
+		try {
+			await runWithPageRetries(
+				"clickFavouriteButtonByIcon:toggle",
+				() =>
+					activePage.waitForFunction(
+						(
+							{
+								expectedVisibleSelector,
+								expectedHiddenSelector,
+								previousPressed,
+							},
+						) => {
+							const isVisible = (element: Element | null) => {
+								if (!(element instanceof Element)) {
+									return false;
+								}
+								const style = globalThis.getComputedStyle(
+									element,
+								);
+								if (
+									style.display === "none" ||
+									style.visibility === "hidden"
+								) {
+									return false;
+								}
+								const rect = element.getBoundingClientRect();
+								return rect.width > 0 && rect.height > 0;
+							};
+							const expectedVisible = document.querySelector(
+								expectedVisibleSelector,
+							);
+							const expectedHidden = document.querySelector(
+								expectedHiddenSelector,
+							);
+							if (
+								isVisible(expectedVisible) &&
+								!isVisible(expectedHidden)
+							) {
+								return true;
+							}
+							const button = expectedHidden?.closest("button") ??
+								expectedVisible?.closest("button");
+							if (!(button instanceof HTMLButtonElement)) {
+								return false;
+							}
+							const currentPressed = button.getAttribute(
+								"aria-pressed",
+							);
+							return previousPressed != null &&
+								currentPressed != null &&
+								currentPressed !== previousPressed;
+						},
+						{ timeout: 12000 },
+						{
+							expectedVisibleSelector: nextIconSelector,
+							expectedHiddenSelector: iconSelector,
+							previousPressed: beforeClickState.pressed,
+						},
+					),
+			);
 			return activePage;
 		} catch {
 			if (attempt === 4) {
@@ -470,42 +543,63 @@ async function clickFavouriteButtonByIcon(
 
 async function clickPinFromHighlightedTab(page) {
 	await page.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, { timeout: 60000 });
-	const action = await runWithPageRetries("clickPinFromHighlightedTab", () =>
-		page.evaluate((highlightSelector) => {
-			const highlighted = document.querySelector(highlightSelector);
-			if (highlighted == null) {
-				throw new Error("Tutorial highlighted tab missing");
-			}
-			const directPin = highlighted.querySelector('[data-action="pin-tab"]');
-			if (directPin instanceof HTMLElement) {
-				directPin.click();
-				return "pin-direct";
-			}
-			const dropdown = highlighted.querySelector('button[data-name="dropdownButton"]') ??
-				highlighted.closest("li")?.querySelector('button[data-name="dropdownButton"]');
-			if (dropdown instanceof HTMLElement) {
-				dropdown.click();
-				const pinInMenu = highlighted.closest("li")?.querySelector('[data-action="pin-tab"]');
-				if (pinInMenu instanceof HTMLElement) {
-					pinInMenu.click();
-					return "pin-dropdown";
+	const action = await runWithPageRetries(
+		"clickPinFromHighlightedTab",
+		() =>
+			page.evaluate((highlightSelector) => {
+				const highlighted = document.querySelector(highlightSelector);
+				if (highlighted == null) {
+					throw new Error("Tutorial highlighted tab missing");
 				}
-			}
-			throw new Error("No UI pin action found on highlighted tab");
-		}, TUTORIAL_HIGHLIGHT_SELECTOR)
+				const directPin = highlighted.querySelector(
+					'[data-action="pin-tab"]',
+				);
+				if (directPin instanceof HTMLElement) {
+					directPin.click();
+					return "pin-direct";
+				}
+				const dropdown = highlighted.querySelector(
+					'button[data-name="dropdownButton"]',
+				) ??
+					highlighted.closest("li")?.querySelector(
+						'button[data-name="dropdownButton"]',
+					);
+				if (dropdown instanceof HTMLElement) {
+					dropdown.click();
+					const pinInMenu = highlighted.closest("li")?.querySelector(
+						'[data-action="pin-tab"]',
+					);
+					if (pinInMenu instanceof HTMLElement) {
+						pinInMenu.click();
+						return "pin-dropdown";
+					}
+				}
+				throw new Error("No UI pin action found on highlighted tab");
+			}, TUTORIAL_HIGHLIGHT_SELECTOR),
 	);
 	console.log(`Step6 action: ${action}`);
 }
 
 async function reorderTabsInModalByDrag(page) {
 	await page.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, { timeout: 60000 });
-	await page.waitForSelector(`${SORTABLE_TABLE_SELECTOR} tr`, { timeout: 60000 });
+	await page.waitForSelector(`${SORTABLE_TABLE_SELECTOR} tr`, {
+		timeout: 60000,
+	});
 	const dragInfo = await page.evaluate(() => {
 		const highlighted = document.querySelector(".awsf-tutorial-highlight");
-		const sourceHandle = highlighted?.closest("tr")?.querySelector(".slds-cell-wrap") ?? highlighted;
-		const targetHandle = document.querySelector("#sortable-table tbody tr:nth-child(1) .slds-cell-wrap");
-		if (!(sourceHandle instanceof HTMLElement) || !(targetHandle instanceof HTMLElement)) {
-			throw new Error("Unable to find drag handles for tutorial reorder step");
+		const sourceHandle =
+			highlighted?.closest("tr")?.querySelector(".slds-cell-wrap") ??
+				highlighted;
+		const targetHandle = document.querySelector(
+			"#sortable-table tbody tr:nth-child(1) .slds-cell-wrap",
+		);
+		if (
+			!(sourceHandle instanceof HTMLElement) ||
+			!(targetHandle instanceof HTMLElement)
+		) {
+			throw new Error(
+				"Unable to find drag handles for tutorial reorder step",
+			);
 		}
 		const sourceRow = sourceHandle.closest("tr");
 		const targetRow = targetHandle.closest("tr");
@@ -518,10 +612,15 @@ async function reorderTabsInModalByDrag(page) {
 
 	if (dragInfo.sameRow) {
 		const alt = await page.evaluate(() => {
-			const rows = Array.from(document.querySelectorAll("#sortable-table tbody tr"));
+			const rows = Array.from(
+				document.querySelectorAll("#sortable-table tbody tr"),
+			);
 			const second = rows.at(1)?.querySelector(".slds-cell-wrap");
 			const first = rows.at(0)?.querySelector(".slds-cell-wrap");
-			if (!(second instanceof HTMLElement) || !(first instanceof HTMLElement)) {
+			if (
+				!(second instanceof HTMLElement) ||
+				!(first instanceof HTMLElement)
+			) {
 				return null;
 			}
 			return {
@@ -530,11 +629,20 @@ async function reorderTabsInModalByDrag(page) {
 			};
 		});
 		if (alt == null) {
-			throw new Error("No draggable rows available for reorder tutorial step");
+			throw new Error(
+				"No draggable rows available for reorder tutorial step",
+			);
 		}
-		await page.mouse.move(alt.sourceRect.x + alt.sourceRect.width / 2, alt.sourceRect.y + alt.sourceRect.height / 2);
+		await page.mouse.move(
+			alt.sourceRect.x + alt.sourceRect.width / 2,
+			alt.sourceRect.y + alt.sourceRect.height / 2,
+		);
 		await page.mouse.down();
-		await page.mouse.move(alt.targetRect.x + alt.targetRect.width / 2, alt.targetRect.y + alt.targetRect.height / 2, { steps: 15 });
+		await page.mouse.move(
+			alt.targetRect.x + alt.targetRect.width / 2,
+			alt.targetRect.y + alt.targetRect.height / 2,
+			{ steps: 15 },
+		);
 		await page.mouse.up();
 		return;
 	}
@@ -579,7 +687,10 @@ Deno.test(
 				await captureUi(activePage, "after-step2-redirect");
 
 				activePage = await getUsableSalesforcePage(browser, activePage);
-				activePage = await performTutorialUnfavourite(browser, activePage);
+				activePage = await performTutorialUnfavourite(
+					browser,
+					activePage,
+				);
 				await captureUi(activePage, "after-step3");
 
 				const step4Confirmed = await clickTutorialConfirmIfVisible(
@@ -587,7 +698,9 @@ Deno.test(
 					"step4",
 				);
 				if (!step4Confirmed) {
-					console.warn("Step4 confirm not visible, continuing with visible UI state checks");
+					console.warn(
+						"Step4 confirm not visible, continuing with visible UI state checks",
+					);
 				}
 				await captureUi(activePage, "after-step4");
 
