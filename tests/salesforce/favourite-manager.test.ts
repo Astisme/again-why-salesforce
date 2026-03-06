@@ -12,7 +12,9 @@ Deno.test(
 	"Star Toggle Functionality",
 	{ sanitizeOps: false, sanitizeResources: false },
 	async () => {
-		const { browser, page } = await createReadySalesforceSession({ dialogAction: "dismiss" });
+		const { browser, page } = await createReadySalesforceSession({
+			dialogAction: "dismiss",
+		});
 		try {
 			await ensureFavouriteButtonVisible(page);
 			await page.waitForSelector(EXT_BUTTON_ID, { timeout: 30000 });
@@ -20,16 +22,17 @@ Deno.test(
 			const initialStarVisible = await page.$(EXT_STAR_ID).then((el) =>
 				el?.isIntersectingViewport()
 			);
-			const initialSlashedVisible = await page.$(EXT_SLASHED_STAR_ID).then((el) =>
-				el?.isIntersectingViewport()
-			);
+			const initialSlashedVisible = await page.$(EXT_SLASHED_STAR_ID)
+				.then((el) => el?.isIntersectingViewport());
 
-			await page.click(initialStarVisible ? EXT_STAR_ID : EXT_SLASHED_STAR_ID);
+			await page.click(
+				initialStarVisible ? EXT_STAR_ID : EXT_SLASHED_STAR_ID,
+			);
 			await page.waitForTimeout(300);
 
-			const afterToggleStarVisible = await page.$(EXT_STAR_ID).then((el) =>
-				el?.isIntersectingViewport()
-			);
+			const afterToggleStarVisible = await page.$(EXT_STAR_ID).then((
+				el,
+			) => el?.isIntersectingViewport());
 			if (initialStarVisible === afterToggleStarVisible) {
 				throw new Error("Star state did not toggle");
 			}
@@ -42,9 +45,9 @@ Deno.test(
 			const finalStarVisible = await page.$(EXT_STAR_ID).then((el) =>
 				el?.isIntersectingViewport()
 			);
-			const finalSlashedVisible = await page.$(EXT_SLASHED_STAR_ID).then((el) =>
-				el?.isIntersectingViewport()
-			);
+			const finalSlashedVisible = await page.$(EXT_SLASHED_STAR_ID).then((
+				el,
+			) => el?.isIntersectingViewport());
 			if (
 				initialStarVisible !== finalStarVisible ||
 				initialSlashedVisible !== finalSlashedVisible

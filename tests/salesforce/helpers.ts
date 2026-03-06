@@ -118,7 +118,8 @@ async function sendRuntimeMessageFromWorker(browser, message) {
 				if (runtime?.sendMessage == null) {
 					resolve({
 						ok: false,
-						error: "runtime.sendMessage unavailable in worker context",
+						error:
+							"runtime.sendMessage unavailable in worker context",
 					});
 					return;
 				}
@@ -132,7 +133,11 @@ async function sendRuntimeMessageFromWorker(browser, message) {
 	return response as { ok: boolean; error?: string | null };
 }
 
-async function sendMessageToSalesforceTab(browser, salesforceUrl: string, message) {
+async function sendMessageToSalesforceTab(
+	browser,
+	salesforceUrl: string,
+	message,
+) {
 	const worker = await getExtensionWorker(browser);
 	const response = await worker.evaluate(
 		({ expectedUrl, instance, request }) =>
@@ -146,7 +151,9 @@ async function sendMessageToSalesforceTab(browser, salesforceUrl: string, messag
 					return;
 				}
 				tabs.query({}, (allTabs) => {
-					const exactTarget = allTabs.find((tab) => tab.url === expectedUrl);
+					const exactTarget = allTabs.find((tab) =>
+						tab.url === expectedUrl
+					);
 					const activeTarget = allTabs.find((tab) =>
 						tab.active === true &&
 						tab.url?.includes(`${instance}.my.salesforce-setup.com`)
@@ -154,7 +161,8 @@ async function sendMessageToSalesforceTab(browser, salesforceUrl: string, messag
 					const fallbackTarget = allTabs.find((tab) =>
 						tab.url?.includes(`${instance}.my.salesforce-setup.com`)
 					);
-					const target = exactTarget ?? activeTarget ?? fallbackTarget;
+					const target = exactTarget ?? activeTarget ??
+						fallbackTarget;
 					if (target?.id == null) {
 						resolve({
 							ok: false,
@@ -163,8 +171,9 @@ async function sendMessageToSalesforceTab(browser, salesforceUrl: string, messag
 						return;
 					}
 					tabs.sendMessage(target.id, request, () => {
-						const error = globalThis.chrome?.runtime?.lastError?.message ??
-							null;
+						const error =
+							globalThis.chrome?.runtime?.lastError?.message ??
+								null;
 						resolve({ ok: error == null, error });
 					});
 				});
@@ -186,7 +195,9 @@ export async function resetTutorialProgress(browser) {
 	});
 	if (response?.ok !== true) {
 		throw new Error(
-			`Failed to reset tutorial progress: ${response?.error ?? "unknown error"}`,
+			`Failed to reset tutorial progress: ${
+				response?.error ?? "unknown error"
+			}`,
 		);
 	}
 }
@@ -199,7 +210,9 @@ export async function startTutorialFromWorker(browser, salesforceUrl: string) {
 	);
 	if (emptyTabsResponse?.ok !== true) {
 		throw new Error(
-			`Failed to reset tabs before tutorial: ${emptyTabsResponse?.error ?? "unknown error"}`,
+			`Failed to reset tabs before tutorial: ${
+				emptyTabsResponse?.error ?? "unknown error"
+			}`,
 		);
 	}
 	await sleep(600);
@@ -210,7 +223,9 @@ export async function startTutorialFromWorker(browser, salesforceUrl: string) {
 	);
 	if (startResponse?.ok !== true) {
 		throw new Error(
-			`Failed to start tutorial: ${startResponse?.error ?? "unknown error"}`,
+			`Failed to start tutorial: ${
+				startResponse?.error ?? "unknown error"
+			}`,
 		);
 	}
 }
@@ -218,7 +233,9 @@ export async function startTutorialFromWorker(browser, salesforceUrl: string) {
 export async function getSalesforcePage(browser) {
 	await closeInstallTabs(browser);
 	const pages = await browser.pages();
-	return pages.find((page) => isSalesforceUrl(page.url()) && !page.isClosed()) ??
+	return pages.find((page) =>
+		isSalesforceUrl(page.url()) && !page.isClosed()
+	) ??
 		pages.find((page) => !page.isClosed()) ??
 		await browser.newPage();
 }
@@ -251,7 +268,8 @@ export async function setFieldValue(page, selector, value, label) {
 	await page.waitForFunction(
 		(sel, expected) => {
 			const element = document.querySelector(sel);
-			return element instanceof HTMLInputElement && element.value === expected;
+			return element instanceof HTMLInputElement &&
+				element.value === expected;
 		},
 		{ timeout: 10000 },
 		selector,
@@ -266,8 +284,10 @@ export async function dumpState(page, label) {
 		(buttonSelector, rootSelector) => ({
 			url: location.href,
 			title: document.title,
-			hasUsername: document.querySelector("#username") instanceof HTMLInputElement,
-			hasPassword: document.querySelector("#password") instanceof HTMLInputElement,
+			hasUsername: document.querySelector("#username") instanceof
+				HTMLInputElement,
+			hasPassword: document.querySelector("#password") instanceof
+				HTMLInputElement,
 			hasVerificationInput: Boolean(
 				document.querySelector(
 					'input[name*="otp"], input[name*="code"], input[id*="otp"], input[id*="code"]',
@@ -275,7 +295,9 @@ export async function dumpState(page, label) {
 			),
 			hasExtensionRoot: Boolean(document.querySelector(rootSelector)),
 			hasExtensionButton: Boolean(document.querySelector(buttonSelector)),
-			body: document.body?.innerText?.replace(/\s+/g, " ").slice(0, 500) ?? "",
+			body:
+				document.body?.innerText?.replace(/\s+/g, " ").slice(0, 500) ??
+					"",
 		}),
 		EXTENSION_BUTTON_ID,
 		EXTENSION_ROOT_ID,

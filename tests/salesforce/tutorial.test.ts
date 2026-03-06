@@ -1,7 +1,4 @@
-import {
-	createReadySalesforceSession,
-	EXTENSION_ROOT_ID,
-} from "./helpers.ts";
+import { createReadySalesforceSession, EXTENSION_ROOT_ID } from "./helpers.ts";
 
 Deno.test(
 	"Tutorial namespace and styles are wired in Salesforce Chrome session",
@@ -13,10 +10,14 @@ Deno.test(
 		try {
 			await page.waitForSelector(EXTENSION_ROOT_ID, { timeout: 60000 });
 
-			const extensionLoaded = await page.evaluate((selector) =>
-				Boolean(document.querySelector(selector)), EXTENSION_ROOT_ID);
+			const extensionLoaded = await page.evaluate(
+				(selector) => Boolean(document.querySelector(selector)),
+				EXTENSION_ROOT_ID,
+			);
 			if (!extensionLoaded) {
-				throw new Error("Extension root not found in Salesforce Setup page");
+				throw new Error(
+					"Extension root not found in Salesforce Setup page",
+				);
 			}
 
 			const bundledContent = await Deno.readTextFile(
@@ -34,13 +35,21 @@ Deno.test(
 				"awsf-tutorial-in",
 			];
 			for (const token of requiredTokens) {
-				if (!bundledContent.includes(token) && !tutorialCss.includes(token)) {
+				if (
+					!bundledContent.includes(token) &&
+					!tutorialCss.includes(token)
+				) {
 					throw new Error(`Missing tutorial token: ${token}`);
 				}
 			}
 
-			if (bundledContent.includes("tut-v7") || tutorialCss.includes("tut-v7")) {
-				throw new Error("Legacy tutorial namespace tut-v7 is still present");
+			if (
+				bundledContent.includes("tut-v7") ||
+				tutorialCss.includes("tut-v7")
+			) {
+				throw new Error(
+					"Legacy tutorial namespace tut-v7 is still present",
+				);
 			}
 		} finally {
 			await browser.close();
