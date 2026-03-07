@@ -875,7 +875,8 @@ async function waitForManualAuthCompletion(page) {
 					);
 					const host = location.hostname.toLowerCase();
 					const path = location.pathname.toLowerCase();
-					const onAuthSurface = host.includes("login.salesforce.com") ||
+					const onAuthSurface =
+						host.includes("login.salesforce.com") ||
 						host.includes("test.salesforce.com") ||
 						path.includes("/secur/") ||
 						path.includes("/login");
@@ -891,7 +892,9 @@ async function waitForManualAuthCompletion(page) {
 			);
 			return;
 		} catch (error) {
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			const shouldContinue = message.includes("Waiting failed") ||
 				message.includes("Runtime.callFunctionOn timed out") ||
 				isTransientNavigationContextError(error);
@@ -917,29 +920,27 @@ function isTransientNavigationContextError(error: unknown) {
 async function hasAuthOrVerificationInputs(page) {
 	for (let attempt = 1; attempt <= 6; attempt++) {
 		try {
-			return await page.evaluate(() =>
-				{
-					const hasLoginInputs = Boolean(
-						document.querySelector("#username") ||
-							document.querySelector("#password"),
-					);
-					const host = location.hostname.toLowerCase();
-					const path = location.pathname.toLowerCase();
-					const onAuthSurface = host.includes("login.salesforce.com") ||
-						host.includes("test.salesforce.com") ||
-						path.includes("/secur/") ||
-						path.includes("/login");
-					if (!hasLoginInputs && !onAuthSurface) {
-						return false;
-					}
-					return Boolean(
-						hasLoginInputs ||
-							document.querySelector(
-								'input[name*="otp"], input[name*="code"], input[id*="otp"], input[id*="code"]',
-							),
-					);
+			return await page.evaluate(() => {
+				const hasLoginInputs = Boolean(
+					document.querySelector("#username") ||
+						document.querySelector("#password"),
+				);
+				const host = location.hostname.toLowerCase();
+				const path = location.pathname.toLowerCase();
+				const onAuthSurface = host.includes("login.salesforce.com") ||
+					host.includes("test.salesforce.com") ||
+					path.includes("/secur/") ||
+					path.includes("/login");
+				if (!hasLoginInputs && !onAuthSurface) {
+					return false;
 				}
-			);
+				return Boolean(
+					hasLoginInputs ||
+						document.querySelector(
+							'input[name*="otp"], input[name*="code"], input[id*="otp"], input[id*="code"]',
+						),
+				);
+			});
 		} catch (error) {
 			if (!isTransientNavigationContextError(error) || attempt === 6) {
 				throw error;
@@ -1074,7 +1075,8 @@ export async function ensureExtensionLoaded(browser, page) {
 			lastError = error instanceof Error
 				? error
 				: new Error(String(error));
-			const shouldRecover = isTransientNavigationContextError(lastError) ||
+			const shouldRecover =
+				isTransientNavigationContextError(lastError) ||
 				lastError.message.includes("frame got detached") ||
 				lastError.message.includes("Target closed");
 			if (shouldRecover) {

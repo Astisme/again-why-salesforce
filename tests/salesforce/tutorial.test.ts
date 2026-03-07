@@ -625,55 +625,65 @@ async function captureUi(page, label: string) {
 	const safeLabel = label.replaceAll(/[^a-zA-Z0-9-_]/g, "_");
 	const path = `${DEBUG_DIR}/${Date.now()}-${safeLabel}.png`;
 	try {
-		await runWithPageRetries("captureUi:screenshot", () =>
-			page.screenshot({ path, fullPage: true }).catch(() => null)
+		await runWithPageRetries(
+			"captureUi:screenshot",
+			() => page.screenshot({ path, fullPage: true }).catch(() => null),
 		);
-		const state = await runWithPageRetries("captureUi:evaluate", () =>
-			page.evaluate(() => ({
-				url: location.href,
-				title: document.title,
-				readyState: document.readyState,
-			}))
+		const state = await runWithPageRetries(
+			"captureUi:evaluate",
+			() =>
+				page.evaluate(() => ({
+					url: location.href,
+					title: document.title,
+					readyState: document.readyState,
+				})),
 		);
 		console.log(`UI[${label}] ${JSON.stringify(state)} screenshot=${path}`);
 	} catch (error) {
 		const message = error instanceof Error ? error.message : String(error);
-		console.warn(`UI[${label}] capture skipped due to transient error: ${message}`);
+		console.warn(
+			`UI[${label}] capture skipped due to transient error: ${message}`,
+		);
 	}
 }
 
 async function waitForTutorialConfirm(page) {
-	await runWithPageRetries("waitForTutorialConfirm", () =>
-		page.waitForFunction(
-			(selector) => {
-				const button = document.querySelector(selector);
-				if (!(button instanceof HTMLButtonElement)) {
-					return false;
-				}
-				const parent = button.parentElement;
-				return parent != null && !parent.classList.contains("hidden");
-			},
-			{ timeout: 60000 },
-			TUTORIAL_CONFIRM_SELECTOR,
-		)
+	await runWithPageRetries(
+		"waitForTutorialConfirm",
+		() =>
+			page.waitForFunction(
+				(selector) => {
+					const button = document.querySelector(selector);
+					if (!(button instanceof HTMLButtonElement)) {
+						return false;
+					}
+					const parent = button.parentElement;
+					return parent != null &&
+						!parent.classList.contains("hidden");
+				},
+				{ timeout: 60000 },
+				TUTORIAL_CONFIRM_SELECTOR,
+			),
 	);
 }
 
 async function clickElementCenter(page, selector: string, label: string) {
-	const point = await runWithPageRetries(`clickElementCenter:${label}:coords`, () =>
-		page.$eval(selector, (element) => {
-			if (!(element instanceof HTMLElement)) {
-				throw new Error(`Element ${selector} is not clickable`);
-			}
-			const rect = element.getBoundingClientRect();
-			if (rect.width <= 0 || rect.height <= 0) {
-				throw new Error(`Element ${selector} has no visible size`);
-			}
-			return {
-				x: rect.x + rect.width / 2,
-				y: rect.y + rect.height / 2,
-			};
-		})
+	const point = await runWithPageRetries(
+		`clickElementCenter:${label}:coords`,
+		() =>
+			page.$eval(selector, (element) => {
+				if (!(element instanceof HTMLElement)) {
+					throw new Error(`Element ${selector} is not clickable`);
+				}
+				const rect = element.getBoundingClientRect();
+				if (rect.width <= 0 || rect.height <= 0) {
+					throw new Error(`Element ${selector} has no visible size`);
+				}
+				return {
+					x: rect.x + rect.width / 2,
+					y: rect.y + rect.height / 2,
+				};
+			}),
 	);
 	await page.mouse.move(point.x, point.y);
 	await page.mouse.down();
@@ -758,19 +768,22 @@ async function clickTutorialConfirmAndWaitForChange(page, label: string) {
 
 async function clickTutorialConfirmIfVisible(page, label: string) {
 	try {
-		await runWithPageRetries(`waitForTutorialConfirmIfVisible:${label}`, () =>
-			page.waitForFunction(
-				(selector) => {
-					const button = document.querySelector(selector);
-					if (!(button instanceof HTMLButtonElement)) {
-						return false;
-					}
-					const parent = button.parentElement;
-					return parent != null && !parent.classList.contains("hidden");
-				},
-				{ timeout: 8000 },
-				TUTORIAL_CONFIRM_SELECTOR,
-			)
+		await runWithPageRetries(
+			`waitForTutorialConfirmIfVisible:${label}`,
+			() =>
+				page.waitForFunction(
+					(selector) => {
+						const button = document.querySelector(selector);
+						if (!(button instanceof HTMLButtonElement)) {
+							return false;
+						}
+						const parent = button.parentElement;
+						return parent != null &&
+							!parent.classList.contains("hidden");
+					},
+					{ timeout: 8000 },
+					TUTORIAL_CONFIRM_SELECTOR,
+				),
 		);
 		await clickTutorialConfirm(page, label);
 		return true;
@@ -780,15 +793,17 @@ async function clickTutorialConfirmIfVisible(page, label: string) {
 }
 
 async function waitForVisibleIcon(page, iconSelector: string, timeout = 60000) {
-	await runWithPageRetries(`waitForVisibleIcon:${iconSelector}`, () =>
-		page.waitForFunction(
-			(selector) => {
-				const icon = document.querySelector(selector);
-				return icon != null && !icon.classList.contains("hidden");
-			},
-			{ timeout },
-			iconSelector,
-		)
+	await runWithPageRetries(
+		`waitForVisibleIcon:${iconSelector}`,
+		() =>
+			page.waitForFunction(
+				(selector) => {
+					const icon = document.querySelector(selector);
+					return icon != null && !icon.classList.contains("hidden");
+				},
+				{ timeout },
+				iconSelector,
+			),
 	);
 }
 
@@ -800,22 +815,30 @@ async function ensureFavouriteIconReady(
 ) {
 	let activePage = page;
 	const isVisible = () =>
-		runWithPageRetries(`ensureFavouriteIconReady:check:${label}`, () =>
-			(async () => {
-				activePage = await getUsableSalesforcePage(browser, activePage);
-				return await activePage.evaluate((selector) => {
-					const icon = document.querySelector(selector);
-					if (!(icon instanceof Element)) {
-						return false;
-					}
-					const style = globalThis.getComputedStyle(icon);
-					if (style.display === "none" || style.visibility === "hidden") {
-						return false;
-					}
-					const rect = icon.getBoundingClientRect();
-					return rect.width > 0 && rect.height > 0;
-				}, iconSelector);
-			})()
+		runWithPageRetries(
+			`ensureFavouriteIconReady:check:${label}`,
+			() =>
+				(async () => {
+					activePage = await getUsableSalesforcePage(
+						browser,
+						activePage,
+					);
+					return await activePage.evaluate((selector) => {
+						const icon = document.querySelector(selector);
+						if (!(icon instanceof Element)) {
+							return false;
+						}
+						const style = globalThis.getComputedStyle(icon);
+						if (
+							style.display === "none" ||
+							style.visibility === "hidden"
+						) {
+							return false;
+						}
+						const rect = icon.getBoundingClientRect();
+						return rect.width > 0 && rect.height > 0;
+					}, iconSelector);
+				})(),
 		);
 	for (let attempt = 1; attempt <= 8; attempt++) {
 		activePage = await getUsableSalesforcePage(browser, activePage);
@@ -902,31 +925,36 @@ async function ensureTutorialUiReady(browser, page) {
 }
 
 async function getVisibleFavouriteIcon(page) {
-	return await runWithPageRetries("getVisibleFavouriteIcon", () =>
-		page.evaluate(({ starSelector, slashedSelector }) => {
-			const isVisible = (selector: string) => {
-				const icon = document.querySelector(selector);
-				if (!(icon instanceof Element)) {
-					return false;
+	return await runWithPageRetries(
+		"getVisibleFavouriteIcon",
+		() =>
+			page.evaluate(({ starSelector, slashedSelector }) => {
+				const isVisible = (selector: string) => {
+					const icon = document.querySelector(selector);
+					if (!(icon instanceof Element)) {
+						return false;
+					}
+					const style = globalThis.getComputedStyle(icon);
+					if (
+						style.display === "none" ||
+						style.visibility === "hidden"
+					) {
+						return false;
+					}
+					const rect = icon.getBoundingClientRect();
+					return rect.width > 0 && rect.height > 0;
+				};
+				if (isVisible(slashedSelector)) {
+					return slashedSelector;
 				}
-				const style = globalThis.getComputedStyle(icon);
-				if (style.display === "none" || style.visibility === "hidden") {
-					return false;
+				if (isVisible(starSelector)) {
+					return starSelector;
 				}
-				const rect = icon.getBoundingClientRect();
-				return rect.width > 0 && rect.height > 0;
-			};
-			if (isVisible(slashedSelector)) {
-				return slashedSelector;
-			}
-			if (isVisible(starSelector)) {
-				return starSelector;
-			}
-			return null;
-		}, {
-			starSelector: STAR_SELECTOR,
-			slashedSelector: SLASHED_STAR_SELECTOR,
-		})
+				return null;
+			}, {
+				starSelector: STAR_SELECTOR,
+				slashedSelector: SLASHED_STAR_SELECTOR,
+			}),
 	);
 }
 
@@ -1115,7 +1143,10 @@ async function clickFavouriteButtonByIcon(
 					if (!(button instanceof HTMLButtonElement)) {
 						throw new Error("Favourite button not found");
 					}
-					button.scrollIntoView({ block: "center", inline: "center" });
+					button.scrollIntoView({
+						block: "center",
+						inline: "center",
+					});
 					const rect = button.getBoundingClientRect();
 					if (rect.width <= 0 || rect.height <= 0) {
 						throw new Error("Favourite button is not visible");
@@ -1127,49 +1158,77 @@ async function clickFavouriteButtonByIcon(
 					};
 				}),
 		);
-		await runWithPageRetries("clickFavouriteButtonByIcon:click", async () => {
-			await activePage.mouse.move(beforeClickState.x, beforeClickState.y);
-			await activePage.mouse.down();
-			await activePage.mouse.up();
-		});
-		try {
-			await runWithPageRetries("clickFavouriteButtonByIcon:toggle", () =>
-				activePage.waitForFunction(
-					({ expectedVisibleSelector, expectedHiddenSelector, previousPressed }) => {
-						const isVisible = (element: Element | null) => {
-							if (!(element instanceof Element)) {
-								return false;
-							}
-							const style = globalThis.getComputedStyle(element);
-							if (style.display === "none" || style.visibility === "hidden") {
-								return false;
-							}
-							const rect = element.getBoundingClientRect();
-							return rect.width > 0 && rect.height > 0;
-						};
-						const expectedVisible = document.querySelector(expectedVisibleSelector);
-						const expectedHidden = document.querySelector(expectedHiddenSelector);
-						if (isVisible(expectedVisible) && !isVisible(expectedHidden)) {
-							return true;
-						}
-						const button = expectedHidden?.closest("button") ??
-							expectedVisible?.closest("button");
-						if (!(button instanceof HTMLButtonElement)) {
-							return false;
-						}
-						const currentPressed = button.getAttribute("aria-pressed");
-						return previousPressed != null &&
-							currentPressed != null &&
-							currentPressed !== previousPressed;
-					},
-					{ timeout: 12000 },
-					{
-						expectedVisibleSelector: nextIconSelector,
-						expectedHiddenSelector: iconSelector,
-						previousPressed: beforeClickState.pressed,
-					},
-					)
+		await runWithPageRetries(
+			"clickFavouriteButtonByIcon:click",
+			async () => {
+				await activePage.mouse.move(
+					beforeClickState.x,
+					beforeClickState.y,
 				);
+				await activePage.mouse.down();
+				await activePage.mouse.up();
+			},
+		);
+		try {
+			await runWithPageRetries(
+				"clickFavouriteButtonByIcon:toggle",
+				() =>
+					activePage.waitForFunction(
+						(
+							{
+								expectedVisibleSelector,
+								expectedHiddenSelector,
+								previousPressed,
+							},
+						) => {
+							const isVisible = (element: Element | null) => {
+								if (!(element instanceof Element)) {
+									return false;
+								}
+								const style = globalThis.getComputedStyle(
+									element,
+								);
+								if (
+									style.display === "none" ||
+									style.visibility === "hidden"
+								) {
+									return false;
+								}
+								const rect = element.getBoundingClientRect();
+								return rect.width > 0 && rect.height > 0;
+							};
+							const expectedVisible = document.querySelector(
+								expectedVisibleSelector,
+							);
+							const expectedHidden = document.querySelector(
+								expectedHiddenSelector,
+							);
+							if (
+								isVisible(expectedVisible) &&
+								!isVisible(expectedHidden)
+							) {
+								return true;
+							}
+							const button = expectedHidden?.closest("button") ??
+								expectedVisible?.closest("button");
+							if (!(button instanceof HTMLButtonElement)) {
+								return false;
+							}
+							const currentPressed = button.getAttribute(
+								"aria-pressed",
+							);
+							return previousPressed != null &&
+								currentPressed != null &&
+								currentPressed !== previousPressed;
+						},
+						{ timeout: 12000 },
+						{
+							expectedVisibleSelector: nextIconSelector,
+							expectedHiddenSelector: iconSelector,
+							previousPressed: beforeClickState.pressed,
+						},
+					),
+			);
 			return activePage;
 		} catch {
 			if (attempt === 4) {
@@ -1413,11 +1472,20 @@ async function reorderTabsInModalByDrag(page) {
 			};
 		});
 		if (alt == null) {
-			throw new Error("No draggable rows available for reorder tutorial step");
+			throw new Error(
+				"No draggable rows available for reorder tutorial step",
+			);
 		}
-		await page.mouse.move(alt.sourceRect.x + alt.sourceRect.width / 2, alt.sourceRect.y + alt.sourceRect.height / 2);
+		await page.mouse.move(
+			alt.sourceRect.x + alt.sourceRect.width / 2,
+			alt.sourceRect.y + alt.sourceRect.height / 2,
+		);
 		await page.mouse.down();
-		await page.mouse.move(alt.targetRect.x + alt.targetRect.width / 2, alt.targetRect.y + alt.targetRect.height / 2, { steps: 15 });
+		await page.mouse.move(
+			alt.targetRect.x + alt.targetRect.width / 2,
+			alt.targetRect.y + alt.targetRect.height / 2,
+			{ steps: 15 },
+		);
 		await page.mouse.up();
 		return;
 	}
