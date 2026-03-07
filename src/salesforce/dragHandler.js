@@ -5,7 +5,6 @@ let table;
 let ul;
 let container;
 let closestTag;
-let containerName;
 let dragSrcIndex = null;
 let dragElements = null; //callback
 
@@ -106,8 +105,6 @@ async function handleDrop(e) {
 	}
 	e.target.style.cursor = "grab";
 	dragElements({
-		what: "order",
-		containerName,
 		fromIndex: dragSrcIndex,
 		toIndex: targetIndex,
 	});
@@ -132,7 +129,6 @@ function createListeners() {
 function setupDrag(callback) {
 	container = table ?? ul;
 	closestTag = table == null ? "li" : "tr";
-	containerName = table == null ? "ul" : "table";
 	dragElements = callback;
 	if (container == null) setTimeout(() => setupDrag(callback), 500);
 	else createListeners();

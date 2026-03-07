@@ -1,5 +1,11 @@
 "use strict";
-import { EXTENSION_NAME, HIDDEN_CLASS } from "/constants.js";
+import {
+	EXTENSION_NAME,
+	HIDDEN_CLASS,
+	TOAST_ERROR,
+	TOAST_WARNING,
+} from "/constants.js";
+import { injectStyle } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -59,8 +65,10 @@ async function generateSldsImport() {
 	);
 	fileInputWrapper.style.marginBottom = "1rem";
 	divParent.appendChild(fileInputWrapper);
-	const style = document.createElement("style");
-	style.textContent = `.${HIDDEN_CLASS} { display: none; }`;
+	const style = injectStyle(
+		"awsf-hidden",
+		{ css: `.${HIDDEN_CLASS} { display: none; }` },
+	);
 	divParent.appendChild(style);
 	const duplicateWarningPart0 = document.createElement("div");
 	duplicateWarningPart0.textContent = await translator.translate(
@@ -134,7 +142,7 @@ async function launchImport(tabs = [], importConfig = {}) {
 	}
 	// remove file import modal
 	document.getElementById(CLOSE_MODAL_ID)?.click();
-	showToast(["import_successful", importedNum, "tabs"], true);
+	showToast(["import_successful", importedNum, "tabs"]);
 }
 
 /**
@@ -234,7 +242,7 @@ function getTabsFromJSON(jsonWithTabs = null) {
  * Did not find a match for any supported extensions
  */
 function showToastBrokenImportFile() {
-	showToast("error_unknown_file_structure", false);
+	showToast("error_unknown_file_structure", TOAST_ERROR);
 }
 
 /**
@@ -289,7 +297,7 @@ async function showTabSelectThenImport(files = [], importConfig = {}) {
 		e.preventDefault();
 		const { tabs: pickedTabs, selectedAll } = getSelectedTabs();
 		if (pickedTabs.length === 0) {
-			return showToast("error_no_tabs_selected", false, true);
+			return showToast("error_no_tabs_selected", TOAST_WARNING);
 		}
 		closeButton.click();
 		const selectedTabContainer = TabContainer.getThrowawayInstance({
@@ -318,7 +326,7 @@ async function readFile(files) {
 		if (file.type === "application/json") {
 			validFileArray.push(file);
 		} else {
-			showToast("import_invalid_file", false);
+			showToast("import_invalid_file", TOAST_ERROR);
 		}
 	}
 	try {
@@ -340,7 +348,7 @@ async function readFile(files) {
 		}
 		return await launchImport(validFileArray, importConfig);
 	} catch (error) {
-		showToast(["error_import", error.message], false);
+		showToast(["error_import", error.message], TOAST_ERROR);
 	}
 }
 
@@ -389,7 +397,7 @@ async function showFileImport() {
 		getSetupTabUl().querySelector(`#${IMPORT_ID}`) != null ||
 		document.getElementById(MODAL_ID) != null
 	) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const { saveButton } = await generateSldsImport();
 	saveButton.remove();
@@ -411,6 +419,6 @@ export async function createImportModal() {
 	try {
 		await showFileImport();
 	} catch (error) {
-		showToast(error, false);
+		showToast(error, TOAST_ERROR);
 	}
 }

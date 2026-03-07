@@ -20,6 +20,8 @@ import {
 	SETUP_LIGHTNING,
 	TAB_STYLE_HOVER,
 	TAB_STYLE_TOP,
+	TOAST_ERROR,
+	TOAST_SUCCESS,
 	USE_LIGHTNING_NAVIGATION,
 } from "/constants.js";
 import {
@@ -28,6 +30,8 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	injectStyle,
+	performLightningRedirect,
 } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
@@ -83,7 +87,7 @@ export async function handleLightningLinkClick(e) {
 	const metaCtrl = { ctrlKey: e.ctrlKey, metaKey: e.metaKey };
 	const url = e.currentTarget.href;
 	if (url == null) {
-		showToast("error_redirect", false);
+		showToast("error_redirect", TOAST_ERROR);
 		return;
 	}
 	(await ensureAllTabsAvailability())
@@ -110,12 +114,7 @@ export async function handleLightningLinkClick(e) {
 	) {
 		open(url, target);
 	} else {
-		postMessage({
-			what: "lightningNavigation",
-			navigationType: "url",
-			url,
-			fallbackURL: url,
-		}, "*");
+		performLightningRedirect(url);
 	}
 }
 
@@ -163,18 +162,19 @@ function _getPseudoSelector(id) {
 	}
 }
 /**
- * Appends pseudo-selector rules to the style element.
- * @param {HTMLStyleElement} style - The style element to append to
- * @param {Array} pseudoRules - Array of pseudo rules to process
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
+ * Returns pseudo-selector rules for Tab styles.
+ * @param {Object} [param0={}] an object with the following keys
+ * @param {Array} [param0.pseudoRules=[]] - Array of pseudo rules to process
+ * @param {boolean} [param0.isGeneric=true] - Whether this is for generic Tab styles
+ * @param {boolean} [param0.isPinned=false] - Whether this is for pinned Tab styles
+ * @return {string} the css pseudo element rules
  */
-function _appendPseudoRules({
-	style,
+function _getPseudoRules({
 	pseudoRules = [],
 	isGeneric = true,
 	isPinned = false,
 } = {}) {
+	let result = "";
 	for (const rule of pseudoRules) {
 		const pseudoSelector = _getPseudoSelector(rule.id);
 		const selector = getCssSelector({
@@ -183,10 +183,9 @@ function _appendPseudoRules({
 			pseudoElement: pseudoSelector,
 			isPinned,
 		});
-		style.textContent += `${selector}{ ${
-			getCssRule(rule.id, rule.value)
-		} }`;
+		result += `${selector}{ ${getCssRule(rule.id, rule.value)} }`;
 	}
+	return result;
 }
 /**
  * Checks if a style ID requires pseudo-selector handling.
@@ -236,29 +235,6 @@ function _buildCssRules({
 }
 
 /**
- * Gets existing style element or creates a new one.
- * @param {boolean} isGeneric - Whether this is for generic Tab styles
- * @param {boolean} isPinned - Whether this is for pinned Tab styles
- * @return {HTMLStyleElement} The style element
- */
-function _getOrCreateStyleElement({
-	isGeneric = false,
-	isPinned = false,
-} = {}) {
-	const styleId = `${EXTENSION_NAME}-${
-		getPinnedSpecificKey({ isGeneric, isPinned })
-	}`;
-	const existingStyle = document.getElementById(styleId);
-	if (existingStyle != null) {
-		existingStyle.textContent = "";
-		return existingStyle;
-	}
-	const style = document.createElement("style");
-	style.id = styleId;
-	return style;
-}
-
-/**
  * Processes a style list by building CSS and appending to document head.
  *
  * @param {Object} [param0={}] - an object contains the following parameters
@@ -271,15 +247,18 @@ function _processStyleList({
 	isGeneric = false,
 	isPinned = false,
 } = {}) {
-	const style = _getOrCreateStyleElement({ isGeneric, isPinned });
 	const { activeCss, inactiveCss, pseudoRules } = _buildCssRules({
 		list,
 		isGeneric,
 		isPinned,
 	});
-	style.textContent = `${inactiveCss}${activeCss}`;
-	_appendPseudoRules({ style, pseudoRules, isGeneric, isPinned });
-	document.head.appendChild(style);
+	const cssRules = `${inactiveCss}${activeCss}${
+		_getPseudoRules({ pseudoRules, isGeneric, isPinned })
+	}`;
+	injectStyle(
+		`${EXTENSION_NAME}-${getPinnedSpecificKey({ isGeneric, isPinned })}`,
+		{ css: cssRules },
+	);
 }
 /**
  * Generates and injects CSS rules based on saved tab style settings.
@@ -347,7 +326,7 @@ export function generateRowTemplate(
 		hide = false,
 		isPinned = false,
 		index = 0,
-	},
+	} = {},
 ) {
 	const miniURL = Tab.minifyURL(url);
 	const expURL = Tab.expandURL(url, getCurrentHref());
@@ -399,22 +378,19 @@ export function generateRowTemplate(
  * Generates an SLDS-styled toast message with a specified message, success, and warning types.
  *
  * @param {string} message - The message to display in the toast.
- * @param {boolean} isSuccess - Flag indicating if the message is a success. If false, the message is an error.
- * @param {boolean} isWarning - Flag indicating if the message is a warning (if isSuccess=false) or it is an info (if isSuccess=true).
+ * @param {string} [status="success"]  - The toast type.
  * @throws {Error} Throws an error if required parameters are missing or invalid.
+ * @param {string} status - The toast type.
  * @return {HTMLElement} The generated toast container element.
  */
-export async function generateSldsToastMessage(message, isSuccess, isWarning) {
+export async function generateSldsToastMessage(
+	message,
+	status = TOAST_SUCCESS,
+) {
 	const translator = await ensureTranslatorAvailability();
-	if (
-		message == null || message === "" || isSuccess == null ||
-		isWarning == null
-	) {
+	if (message == null || message === "") {
 		throw new Error(await translator.translate("error_toast_generation")); // [en] "Unable to generate Toast Message."
 	}
-	const successType = isWarning ? "info" : "success";
-	const errorType = isWarning ? "warning" : "error";
-	const toastType = isSuccess ? successType : errorType;
 	const toastContainer = document.createElement("div");
 	const randomNumber10digits = getRng_n_digits(10);
 	toastContainer.id = `${TOAST_ID}-${randomNumber10digits}`;
@@ -428,10 +404,10 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const toast = document.createElement("div");
 	toast.setAttribute("role", "alertdialog");
 	toast.setAttribute("aria-describedby", "toastDescription7382:0");
-	toast.setAttribute("aria-label", toastType);
-	toast.dataset.key = toastType;
+	toast.setAttribute("aria-label", status);
+	toast.dataset.key = status;
 	toast.classList.add(
-		`slds-theme--${toastType}`,
+		`slds-theme--${status}`,
 		"slds-notify--toast",
 		"slds-notify",
 		"slds-notify--toast",
@@ -439,9 +415,9 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	);
 	toast.dataset.auraClass = "forceToastMessage";
 	const iconContainer = document.createElement("lightning-icon");
-	iconContainer.setAttribute("icon-name", `utility:${toastType}`);
+	iconContainer.setAttribute("icon-name", `utility:${status}`);
 	iconContainer.classList.add(
-		`slds-icon-utility-${toastType}`,
+		`slds-icon-utility-${status}`,
 		"toastIcon",
 		"slds-m-right--small",
 		"slds-no-flex",
@@ -459,7 +435,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	svg.classList.add("slds-icon", "slds-icon_small");
 	svg.setAttribute("focusable", "false");
-	svg.dataset.key = toastType;
+	svg.dataset.key = status;
 	svg.setAttribute("aria-hidden", "true");
 	svg.setAttribute("viewBox", "0 0 520 520");
 	svg.setAttribute("part", "icon");
@@ -467,7 +443,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute(
 		"d",
-		isSuccess
+		status === "success" || status === "info"
 			? "M260 20a240 240 0 100 480 240 240 0 100-480zm134 180L241 355c-6 6-16 6-22 0l-84-85c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l44 45a10 10 0 0015 0l112-116c6-6 16-6 22 0l22 22c7 6 7 16 0 23z"
 			: "M260 20C128 20 20 128 20 260s108 240 240 240 240-108 240-240S392 20 260 20zM80 260a180 180 0 01284-147L113 364a176 176 0 01-33-104zm180 180c-39 0-75-12-104-33l251-251a180 180 0 01-147 284z",
 	);
@@ -479,7 +455,7 @@ export async function generateSldsToastMessage(message, isSuccess, isWarning) {
 	iconContainer.appendChild(boundarySpan);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = toastType;
+	assistiveText.textContent = status;
 	iconContainer.appendChild(assistiveText);
 	const toastContent = document.createElement("div");
 	toastContent.classList.add("toastContent", "slds-notify__content");
@@ -834,9 +810,12 @@ export async function generateSldsModal({
 	modalParent.setAttribute("aria-hidden", "false");
 	modalParent.style.display = "block";
 	modalParent.style.zIndex = "9001";
-	const awsfStyle = document.createElement("style");
-	awsfStyle.textContent =
-		`.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`;
+	const awsfStyle = injectStyle(
+		"awsf-modal-style",
+		{
+			css: `.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`,
+		},
+	);
 	modalParent.appendChild(awsfStyle);
 	const backdropDiv = document.createElement("div");
 	backdropDiv.setAttribute("tabindex", "-1");
@@ -1597,10 +1576,10 @@ export function generateHelpWith_i_popup({
 } = {}) {
 	const wasCalledWithParams = text != null || link != null;
 	const root = document.createElement("div");
-	root.className = "help-icon";
+	root.classList.add("help-icon");
 	const anchor = document.createElement("a");
 	root.append(anchor);
-	anchor.className = "button";
+	anchor.classList.add("button");
 	anchor.setAttribute("aria-describedby", "tooltip");
 	const isLinkAvailable = link != null && link !== "";
 	if (wasCalledWithParams && isLinkAvailable) anchor.href = link;
@@ -1621,11 +1600,11 @@ export function generateHelpWith_i_popup({
 	);
 	const assistive = document.createElement("span");
 	anchor.append(assistive);
-	assistive.className = "assistive";
+	assistive.classList.add("assistive");
 	assistive.hidden = true;
 	const tooltip = document.createElement("div");
 	root.append(tooltip);
-	tooltip.className = "tooltip";
+	tooltip.classList.add("tooltip");
 	tooltip.setAttribute("role", "tooltip");
 	let slot;
 	const linkTip = document.createElement("div");
@@ -1642,15 +1621,10 @@ export function generateHelpWith_i_popup({
 			linkTip.classList.add(HIDDEN_CLASS);
 		}
 		// add help.css
-		const linkid = `${EXTENSION_NAME}-helpcss`;
-		if (!document.getElementById(linkid)) {
-			const linkEl = document.createElement("link");
-			linkEl.id = linkid;
-			linkEl.rel = "stylesheet";
-			linkEl.type = "text/css";
-			linkEl.href = BROWSER.runtime.getURL("/components/help/help.css");
-			document.head.appendChild(linkEl);
-		}
+		injectStyle(
+			`${EXTENSION_NAME}-helpcss`,
+			{ link: BROWSER.runtime.getURL("/components/help/help.css") },
+		);
 	} else {
 		slot = document.createElement("slot");
 		slot.name = "text";
@@ -2626,5 +2600,108 @@ export function generateReviewSponsorSvgs() {
 		sponsorSvg,
 		reviewLink,
 		sponsorLink,
+	};
+}
+
+/**
+ * blueprint grid card with corner brackets and dashed dividers.
+ * @return {{
+ *   messageBox: HTMLDivElement, // the element to add to the document
+ *   segments:   HTMLDivElement, // where to put the new textContent
+ *   confirmBtn: HTMLButtonElement, // to continue the tutorial
+ *   btnsParent: HTMLDivElement, // where the buttons are located
+ * }} as described
+ */
+async function generateMessageBox() {
+	injectStyle(
+		"tut-v7-style",
+		{ link: BROWSER.runtime.getURL("/salesforce/css/tutorial.css") },
+	);
+	const messageBox = document.createElement("div");
+	messageBox.classList.add("tut-v7");
+	messageBox.style.position = "fixed";
+	for (const pos of ["tl", "tr", "bl", "br"]) {
+		const c = document.createElement("div");
+		c.classList.add(
+			"tut-v7-corner",
+			`tut-v7-corner-${pos}`,
+		);
+		messageBox.appendChild(c);
+	}
+	const header = document.createElement("div");
+	header.classList.add("tut-v7-header");
+	const tag = document.createElement("div");
+	tag.classList.add("tut-v7-tag");
+	tag.textContent = "Tutorial";
+	const dash = document.createElement("div");
+	dash.classList.add("tut-v7-dash");
+	header.append(tag, dash);
+	const segments = document.createElement("div");
+	segments.classList.add("tut-v7-segments");
+	const actions = document.createElement("div");
+	actions.classList.add("tut-v7-actions");
+	const confirmBtn = document.createElement("button");
+	confirmBtn.classList.add(
+		"slds-button",
+		"slds-button_brand",
+	);
+	confirmBtn.textContent = await (await ensureTranslatorAvailability())
+		.translate("confirm");
+	actions.append(confirmBtn);
+	messageBox.append(header, segments, actions);
+	return { messageBox, segments, confirmBtn, btnsParent: actions };
+}
+
+/**
+ * Generates the HTML elements required for the tutorial overlay system.
+ * Creates an overlay that covers the entire page, a message box for displaying tutorial text,
+ * and a highlight box for emphasizing specific elements on the page.
+ *
+ * @return {Object} An object containing the generated HTML elements:
+ * - {HTMLElement} overlay: A semi-transparent overlay covering the entire viewport
+ * - {HTMLElement} messageBox: A positioned box for displaying tutorial messages and buttons
+ * - {HTMLElement} highlightBox: A box used to highlight specific elements on the page
+ */
+export async function generateTutorialElements() {
+	const overlay = document.createElement("div");
+	overlay.style.position = "fixed";
+	overlay.style.top = "0";
+	overlay.style.left = "0";
+	overlay.style.width = "100%";
+	overlay.style.height = "100%";
+	overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+	overlay.style.zIndex = "10000";
+	overlay.style.pointerEvents = "none";
+	// Spinner element
+	const spinner = document.createElement("div");
+	spinner.classList.add("slds-spinner_container", HIDDEN_CLASS); // Hidden by default
+	spinner.style.position = "fixed";
+	spinner.style.top = "0";
+	spinner.style.left = "0";
+	spinner.style.width = "100%";
+	spinner.style.height = "100%";
+	spinner.style.zIndex = "10002"; // Higher than messageBox
+	const spinnerInner = document.createElement("div");
+	spinnerInner.setAttribute("role", "status");
+	spinnerInner.classList.add(
+		"slds-spinner",
+		"slds-spinner_medium",
+		"slds-spinner_brand",
+	);
+	spinner.appendChild(spinnerInner);
+	const assistiveText = document.createElement("span");
+	assistiveText.classList.add("slds-assistive-text");
+	assistiveText.textContent = "Loading...";
+	spinnerInner.appendChild(assistiveText);
+	const dotA = document.createElement("div");
+	dotA.classList.add("slds-spinner__dot-a");
+	spinnerInner.appendChild(dotA);
+	const dotB = document.createElement("div");
+	dotB.classList.add("slds-spinner__dot-b");
+	spinnerInner.appendChild(dotB);
+	return {
+		overlay,
+		spinner,
+		...await generateMessageBox(),
 	};
 }

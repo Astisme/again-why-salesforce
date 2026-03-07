@@ -36,6 +36,39 @@ function matchStorageToContainer(container: TabContainer) {
 	}
 }
 
+async function resetToUnsortedContainer(container: TabContainer) {
+	await container.setDefaultTabs();
+	assertEquals(container.length, 3);
+	assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+	assertEquals(container[0].label, "⚡");
+	assertEquals(container[1].label, "flows");
+	assertEquals(container[2].label, "users");
+	assert(container.isSorted, "should detect is alredy sorted");
+	assert(
+		container.isSortedBy === "label" || container.isSortedBy === "url",
+	);
+	assert(container.isSortedAsc);
+	assertFalse(container.isSortedDesc);
+	// update to invalidate sort
+	assert(
+		await container.addTab({
+			label: "mylabel",
+			url: "/myurl",
+			org: "myorg",
+			[Tab.keyClickCount]: 4,
+			[Tab.keyClickDate]: 4,
+		}),
+	);
+	assert(
+		await container.updateTab(container[0], {
+			org: "myorg",
+			[Tab.keyClickCount]: 4,
+			[Tab.keyClickDate]: 4,
+		}),
+	);
+	assertFalse(container.isSorted, container.isSortedBy);
+}
+
 const container = await ensureAllTabsAvailability();
 
 await Deno.test("TabContainer - Initialization", async (t) => {
@@ -1043,6 +1076,210 @@ await Deno.test("TabContainer - Utility functions", async (t) => {
 		assertEquals(container[0].url, "/lightning");
 		assertEquals(container[1].url, "/lightning/app/standard__FlowsApp");
 		assertEquals(container[2].url, "ManageUsers/home");
+	});
+
+	await t.step("getSortOptions", async () => {
+		await resetToUnsortedContainer(container);
+		// now ready to check the method
+		assertThrows(() => {
+			container.getSortOptions({ sortBy: "notafield" });
+		});
+		// standart sort = true
+		assertEquals(
+			container.getSortOptions(),
+			{
+				sortBy: "label",
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+			}),
+			{
+				sortBy: "url",
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "org",
+			}),
+			{
+				sortBy: "org",
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickCount,
+			}),
+			{
+				sortBy: Tab.keyClickCount,
+				sortAsc: true,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickDate,
+			}),
+			{
+				sortBy: Tab.keyClickDate,
+				sortAsc: true,
+			},
+		);
+		// standard sort = false
+		assertEquals(
+			container.getSortOptions({
+				standardSort: false,
+			}),
+			{
+				sortBy: "label",
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+				standardSort: false,
+			}),
+			{
+				sortBy: "url",
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "org",
+				standardSort: false,
+			}),
+			{
+				sortBy: "org",
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickCount,
+				standardSort: false,
+			}),
+			{
+				sortBy: Tab.keyClickCount,
+				sortAsc: false,
+			},
+		);
+		assertEquals(
+			container.getSortOptions({
+				sortBy: Tab.keyClickDate,
+				standardSort: false,
+			}),
+			{
+				sortBy: Tab.keyClickDate,
+				sortAsc: false,
+			},
+		);
+		// now retry with sorted container by label asc
+		await container.sort({ sortBy: "label", sortAsc: true });
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions(),
+			{
+				sortBy: "label",
+				sortAsc: false,
+			},
+			"the container is already sorted by label asc so now we should sort it by label desc",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+			}),
+			{
+				sortBy: "url",
+				sortAsc: true,
+			},
+			"the container is sorted but by another field",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				standardSort: false,
+			}),
+			{
+				sortBy: "label",
+				sortAsc: false,
+			},
+			"we requested not standart sort so we should get to sort desc",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+				standardSort: false,
+			}),
+			{
+				sortBy: "url",
+				sortAsc: false,
+			},
+			"the container is sorted by another field and we requested inverted sort",
+		);
+		assert(container.isSortedAsc);
+		assertEquals(container.isSortedBy, "label");
+		// now retry with sorted container by label desc
+		await container.sort({ sortBy: "label", sortAsc: false });
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions(),
+			{
+				sortBy: "label",
+				sortAsc: true,
+			},
+			"the container is already sorted by label desc so now we should sort it by label asc",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+			}),
+			{
+				sortBy: "url",
+				sortAsc: true,
+			},
+			"the container is sorted but by another field",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				standardSort: false,
+			}),
+			{
+				sortBy: "label",
+				sortAsc: true,
+			},
+			"we requested not standart sort so we should get to sort asc",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
+		assertEquals(
+			container.getSortOptions({
+				sortBy: "url",
+				standardSort: false,
+			}),
+			{
+				sortBy: "url",
+				sortAsc: false,
+			},
+			"the container is sorted by another field and we requested inverted sort",
+		);
+		assert(container.isSortedDesc);
+		assertEquals(container.isSortedBy, "label");
 	});
 });
 

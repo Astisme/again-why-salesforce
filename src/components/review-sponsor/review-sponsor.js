@@ -1,10 +1,12 @@
 import {
+	BROWSER,
 	HIDDEN_CLASS,
 	ISCHROME,
 	ISEDGE,
 	ISFIREFOX,
 	ISSAFARI,
 } from "/constants.js";
+import { injectStyle } from "/functions.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
@@ -105,11 +107,9 @@ class ReviewSponsorAws extends HTMLElement {
 		const shadow = this.attachShadow({ mode: "open" });
 		const result = generateReviewSponsorSvgs();
 		shadow.appendChild(result.root);
-		const linkEl = document.createElement("link");
-		linkEl.setAttribute("rel", "stylesheet");
-		linkEl.setAttribute(
-			"href",
-			new URL("./review-sponsor.css", import.meta.url),
+		const linkEl = injectStyle(
+			"awsf-rev-spons",
+			{ link: BROWSER.runtime.getURL("./review-sponsor.css") },
 		);
 		this.shadowRoot.appendChild(linkEl);
 		this._showReviewOrSponsor(result);
