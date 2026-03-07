@@ -1133,7 +1133,7 @@ export async function launchSalesforceBrowser() {
 		browser: "chrome",
 		executablePath: getChromePath(),
 		headless: false,
-		pipe: false,
+		pipe: true,
 		ignoreDefaultArgs: [
 			"--disable-extensions",
 			"--disable-component-extensions-with-background-pages",
@@ -1142,6 +1142,7 @@ export async function launchSalesforceBrowser() {
 		defaultViewport: null,
 		args: launchArgs,
 		timeout: 30000,
+		protocolTimeout: 180000,
 	});
 	await closeInstallTabs(browser);
 	const page = await browser.newPage();
