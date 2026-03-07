@@ -300,7 +300,9 @@ async function getLiveExtensionContext(browser, extensionId?: string) {
 		try {
 			target = await browser.waitForTarget(matcher, { timeout: 15000 });
 		} catch (error) {
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			if (!message.includes("Timed out after waiting")) {
 				throw error;
 			}
@@ -343,11 +345,16 @@ async function withExtensionContext<T>(
 			} catch {
 				// fall back to first available extension target if id is unavailable
 			}
-			const liveContext = await getLiveExtensionContext(browser, extensionId);
+			const liveContext = await getLiveExtensionContext(
+				browser,
+				extensionId,
+			);
 			return await fn(liveContext);
 		} catch (error) {
 			lastError = error;
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			const canRetry = message.includes("Timed out after waiting") ||
 				message.includes("service worker not available") ||
 				message.includes("Execution context is not available") ||
@@ -690,7 +697,11 @@ export async function getTutorialProgress(browser) {
 }
 
 export async function setTutorialProgress(browser, progress: number) {
-	const response = await setStorageValue(browser, TUTORIAL_STORAGE_KEY, progress);
+	const response = await setStorageValue(
+		browser,
+		TUTORIAL_STORAGE_KEY,
+		progress,
+	);
 	if (response?.ok !== true) {
 		throw new Error(
 			`Failed to set tutorial progress: ${
@@ -763,8 +774,12 @@ export async function getSalesforcePage(browser) {
 	await closeInstallTabs(browser);
 	const pages = await browser.pages();
 	const candidates = [
-		...pages.filter((page) => isSalesforceUrl(page.url()) && !page.isClosed()),
-		...pages.filter((page) => !isSalesforceUrl(page.url()) && !page.isClosed()),
+		...pages.filter((page) =>
+			isSalesforceUrl(page.url()) && !page.isClosed()
+		),
+		...pages.filter((page) =>
+			!isSalesforceUrl(page.url()) && !page.isClosed()
+		),
 	];
 	for (const page of candidates) {
 		try {
@@ -1179,7 +1194,9 @@ export async function createReadySalesforceSession(
 			console.log("createReadySalesforceSession: ensuring auth");
 			await ensureAuthenticated(activePage);
 			activePage = await getSalesforcePage(browser);
-			console.log("createReadySalesforceSession: ensuring extension loaded");
+			console.log(
+				"createReadySalesforceSession: ensuring extension loaded",
+			);
 			activePage = await ensureExtensionLoaded(browser, activePage);
 			if (resetTutorial) {
 				console.log(
@@ -1197,7 +1214,9 @@ export async function createReadySalesforceSession(
 		} catch (error) {
 			lastError = error;
 			await browser.close().catch(() => null);
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			const isRetryable = isTransientNavigationContextError(error) ||
 				message.includes("Protocol error: Connection closed") ||
 				message.includes("Target closed") ||

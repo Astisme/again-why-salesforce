@@ -21,7 +21,8 @@ const CXM_EMPTY_TABS = "empty-tabs";
 const CXM_PIN_TAB = "pin-tab";
 const CXM_MANAGE_TABS = "manage-tabs";
 const TUTORIAL_EVENT_ACTION_FAVOURITE = "tutorial:actionFavourite:completed";
-const TUTORIAL_EVENT_ACTION_UNFAVOURITE = "tutorial:actionUnfavourite:completed";
+const TUTORIAL_EVENT_ACTION_UNFAVOURITE =
+	"tutorial:actionUnfavourite:completed";
 const TUTORIAL_EVENT_PIN_TAB = "tutorial:pinTab:completed";
 const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
 	"tutorial:createManageTabsModal:completed";
@@ -134,8 +135,8 @@ async function getUsableExtensionPage(browser) {
 	for (const candidate of candidates) {
 		try {
 			await candidate.evaluate(() => ({
-				hasRuntime:
-					typeof globalThis.chrome?.runtime?.sendMessage === "function",
+				hasRuntime: typeof globalThis.chrome?.runtime?.sendMessage ===
+					"function",
 				url: location.href,
 			}));
 			cachedExtensionPage = candidate;
@@ -204,7 +205,8 @@ async function sendRuntimeMessageFromExtensionPage(browser, message) {
 						if (runtime?.sendMessage == null) {
 							resolve({
 								ok: false,
-								error: "runtime.sendMessage unavailable in extension page",
+								error:
+									"runtime.sendMessage unavailable in extension page",
 								value: null,
 							});
 							return;
@@ -212,7 +214,8 @@ async function sendRuntimeMessageFromExtensionPage(browser, message) {
 						const timeoutId = setTimeout(() => {
 							resolve({
 								ok: false,
-								error: "Timed out waiting for runtime.sendMessage callback",
+								error:
+									"Timed out waiting for runtime.sendMessage callback",
 								value: null,
 							});
 						}, 15000);
@@ -255,7 +258,8 @@ async function sendMessageToSalesforceTabFromExtensionPage(
 						const timeoutId = setTimeout(() => {
 							resolve({
 								ok: false,
-								error: "Timed out waiting for tabs.sendMessage callback",
+								error:
+									"Timed out waiting for tabs.sendMessage callback",
 							});
 						}, 15000);
 						tabs.query({}, (allTabs) => {
@@ -266,19 +270,29 @@ async function sendMessageToSalesforceTabFromExtensionPage(
 								try {
 									const url = new URL(tabUrl);
 									return url.host === expected.host &&
-										url.pathname.startsWith("/lightning/setup/");
+										url.pathname.startsWith(
+											"/lightning/setup/",
+										);
 								} catch {
 									return false;
 								}
 							};
-							const target = allTabs.find((tab) => tab.url === expectedUrl) ??
-								allTabs.find((tab) => tab.active === true && sameHostSetup(tab.url)) ??
-								allTabs.find((tab) => sameHostSetup(tab.url));
+							const target = allTabs.find((tab) =>
+								tab.url === expectedUrl
+							) ??
+								allTabs.find((tab) =>
+									tab.active === true &&
+									sameHostSetup(tab.url)
+								) ??
+								allTabs.find((tab) =>
+									sameHostSetup(tab.url)
+								);
 							if (target?.id == null) {
 								clearTimeout(timeoutId);
 								resolve({
 									ok: false,
-									error: `No Salesforce tab found for ${expectedUrl}`,
+									error:
+										`No Salesforce tab found for ${expectedUrl}`,
 								});
 								return;
 							}
@@ -393,7 +407,9 @@ async function pinTabInBrowser(
 	message: { tabUrl: string; label: string; url: string; org: string },
 ) {
 	console.log(
-		`pinTabInBrowser: ${JSON.stringify({ salesforceUrl, tabUrl: message.tabUrl })}`,
+		`pinTabInBrowser: ${
+			JSON.stringify({ salesforceUrl, tabUrl: message.tabUrl })
+		}`,
 	);
 	const response = await sendMessageToSalesforceTabFromExtensionPage(
 		browser,
@@ -477,12 +493,16 @@ async function getUsableSalesforcePage(browser, fallbackPage) {
 			}
 		}
 		if (lastCandidate == null) {
-			lastCandidate = usablePages.find((candidate) => !isBlankPage(candidate.url())) ??
+			lastCandidate = usablePages.find((candidate) =>
+				!isBlankPage(candidate.url())
+			) ??
 				usablePages[0] ??
 				lastCandidate;
 		}
 		for (const candidate of usablePages) {
-			if (!isBlankPage(candidate.url()) && await hasLiveContext(candidate)) {
+			if (
+				!isBlankPage(candidate.url()) && await hasLiveContext(candidate)
+			) {
 				return candidate;
 			}
 		}
@@ -547,7 +567,9 @@ async function ensureExtensionRootReady(browser, page) {
 			});
 			return activePage;
 		} catch (error) {
-			const message = error instanceof Error ? error.message : String(error);
+			const message = error instanceof Error
+				? error.message
+				: String(error);
 			const canRetry = isTransientPageError(error) ||
 				message.includes("Waiting for selector");
 			if (!canRetry || attempt === 6) {
@@ -693,16 +715,22 @@ async function clickElementCenter(page, selector: string, label: string) {
 async function clickTutorialConfirm(page, label: string) {
 	await waitForTutorialConfirm(page);
 	try {
-		await runWithPageRetries(`clickTutorialConfirm:${label}:dom-click`, () =>
-			page.$eval(TUTORIAL_CONFIRM_SELECTOR, (button) => {
-				if (!(button instanceof HTMLButtonElement)) {
-					throw new Error("Tutorial confirm button not found");
-				}
-				button.click();
-			})
+		await runWithPageRetries(
+			`clickTutorialConfirm:${label}:dom-click`,
+			() =>
+				page.$eval(TUTORIAL_CONFIRM_SELECTOR, (button) => {
+					if (!(button instanceof HTMLButtonElement)) {
+						throw new Error("Tutorial confirm button not found");
+					}
+					button.click();
+				}),
 		);
 	} catch {
-		await clickElementCenter(page, TUTORIAL_CONFIRM_SELECTOR, `confirm:${label}`);
+		await clickElementCenter(
+			page,
+			TUTORIAL_CONFIRM_SELECTOR,
+			`confirm:${label}`,
+		);
 	}
 }
 
@@ -713,7 +741,8 @@ async function clickTutorialConfirmAndWaitForChange(page, label: string) {
 			() =>
 				page.$eval(
 					TUTORIAL_BOX_SELECTOR,
-					(element) => element.textContent?.replace(/\s+/g, " ").trim() ?? "",
+					(element) =>
+						element.textContent?.replace(/\s+/g, " ").trim() ?? "",
 				),
 		);
 		await clickTutorialConfirm(page, `${label}-${attempt}`);
@@ -726,7 +755,9 @@ async function clickTutorialConfirmAndWaitForChange(page, label: string) {
 						if (element == null) {
 							return true;
 						}
-						const nextText = element.textContent?.replace(/\s+/g, " ").trim() ?? "";
+						const nextText =
+							element.textContent?.replace(/\s+/g, " ").trim() ??
+								"";
 						return nextText !== oldText;
 					},
 					{ timeout: 5000 },
@@ -742,18 +773,33 @@ async function clickTutorialConfirmAndWaitForChange(page, label: string) {
 		const advancedToHiddenConfirmStep = await runWithPageRetries(
 			`clickTutorialConfirmAndWaitForChange:${label}:hidden-confirm-check`,
 			() =>
-				page.evaluate(({ confirmSelector, highlightSelector, tutorialSelector }) => {
-					const confirm = document.querySelector(confirmSelector);
-					const confirmHidden = !(confirm instanceof HTMLButtonElement) ||
-						confirm.parentElement?.classList.contains("hidden") === true;
-					const tutorialVisible = document.querySelector(tutorialSelector) != null;
-					const highlightVisible = document.querySelector(highlightSelector) != null;
-					return tutorialVisible && confirmHidden && highlightVisible;
-				}, {
-					confirmSelector: TUTORIAL_CONFIRM_SELECTOR,
-					highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
-					tutorialSelector: TUTORIAL_BOX_SELECTOR,
-				}),
+				page.evaluate(
+					(
+						{
+							confirmSelector,
+							highlightSelector,
+							tutorialSelector,
+						},
+					) => {
+						const confirm = document.querySelector(confirmSelector);
+						const confirmHidden =
+							!(confirm instanceof HTMLButtonElement) ||
+							confirm.parentElement?.classList.contains(
+									"hidden",
+								) === true;
+						const tutorialVisible =
+							document.querySelector(tutorialSelector) != null;
+						const highlightVisible =
+							document.querySelector(highlightSelector) != null;
+						return tutorialVisible && confirmHidden &&
+							highlightVisible;
+					},
+					{
+						confirmSelector: TUTORIAL_CONFIRM_SELECTOR,
+						highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
+						tutorialSelector: TUTORIAL_BOX_SELECTOR,
+					},
+				),
 		).catch(() => false);
 		if (advancedToHiddenConfirmStep) {
 			return;
@@ -873,19 +919,21 @@ async function ensureTutorialUiReady(browser, page) {
 	const deadline = Date.now() + 90000;
 	let restartedTutorial = false;
 	const hasVisibleTutorialBox = (candidate) =>
-		runWithPageRetries("ensureTutorialUiReady:check", () =>
-			candidate.evaluate((selector) => {
-				const node = document.querySelector(selector);
-				if (!(node instanceof HTMLElement)) {
-					return false;
-				}
-				const style = globalThis.getComputedStyle(node);
-				const rect = node.getBoundingClientRect();
-				return style.display !== "none" &&
-					style.visibility !== "hidden" &&
-					rect.width > 0 &&
-					rect.height > 0;
-			}, TUTORIAL_BOX_SELECTOR)
+		runWithPageRetries(
+			"ensureTutorialUiReady:check",
+			() =>
+				candidate.evaluate((selector) => {
+					const node = document.querySelector(selector);
+					if (!(node instanceof HTMLElement)) {
+						return false;
+					}
+					const style = globalThis.getComputedStyle(node);
+					const rect = node.getBoundingClientRect();
+					return style.display !== "none" &&
+						style.visibility !== "hidden" &&
+						rect.width > 0 &&
+						rect.height > 0;
+				}, TUTORIAL_BOX_SELECTOR),
 		).catch((error) => {
 			if (!isTransientPageError(error)) {
 				throw error;
@@ -898,7 +946,10 @@ async function ensureTutorialUiReady(browser, page) {
 		if (isReady) {
 			await sleep(300);
 			const liveTutorialPage = await getLiveTutorialPage(browser);
-			if (liveTutorialPage != null && await hasVisibleTutorialBox(liveTutorialPage)) {
+			if (
+				liveTutorialPage != null &&
+				await hasVisibleTutorialBox(liveTutorialPage)
+			) {
 				return liveTutorialPage;
 			}
 			activePage = await getUsableSalesforcePage(browser, activePage);
@@ -912,13 +963,18 @@ async function ensureTutorialUiReady(browser, page) {
 				await startTutorialInBrowser(browser, activePage.url());
 				await sleep(800);
 			} catch (error) {
-				const message = error instanceof Error ? error.message : String(error);
+				const message = error instanceof Error
+					? error.message
+					: String(error);
 				console.warn(
 					`ensureTutorialUiReady: fallback startTutorialInBrowser failed (${message})`,
 				);
 			}
 		}
-		await clickTutorialConfirmIfVisible(activePage, "ensure-ui-ready-advance");
+		await clickTutorialConfirmIfVisible(
+			activePage,
+			"ensure-ui-ready-advance",
+		);
 		await sleep(500);
 	}
 	throw new Error("Tutorial UI did not become ready within 90s");
@@ -962,11 +1018,16 @@ async function waitForAnyFavouriteIcon(browser, page, label: string) {
 	let activePage = page;
 	for (let attempt = 1; attempt <= 10; attempt++) {
 		activePage = await getUsableSalesforcePage(browser, activePage);
-		const visibleIcon = await getVisibleFavouriteIcon(activePage).catch(() => null);
+		const visibleIcon = await getVisibleFavouriteIcon(activePage).catch(
+			() => null,
+		);
 		if (visibleIcon != null) {
 			return { page: activePage, iconSelector: visibleIcon };
 		}
-		await clickTutorialConfirmIfVisible(activePage, `${label}-advance-${attempt}`);
+		await clickTutorialConfirmIfVisible(
+			activePage,
+			`${label}-advance-${attempt}`,
+		);
 		await sleep(400 * attempt);
 	}
 	return {
@@ -1013,8 +1074,12 @@ async function performTutorialUnfavourite(browser, page) {
 async function clickHighlightedRedirectTab(browser, page) {
 	let activePage = await getUsableSalesforcePage(browser, page);
 	const beforeRedirectUrl = activePage.url();
-	await runWithPageRetries("clickHighlightedRedirectTab:wait-highlight", () =>
-		activePage.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, { timeout: 60000 })
+	await runWithPageRetries(
+		"clickHighlightedRedirectTab:wait-highlight",
+		() =>
+			activePage.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, {
+				timeout: 60000,
+			}),
 	);
 	const redirectTarget = await runWithPageRetries(
 		"clickHighlightedRedirectTab:target",
@@ -1023,7 +1088,9 @@ async function clickHighlightedRedirectTab(browser, page) {
 				const highlighted = document.querySelector(highlightSelector);
 				const highlightedLink = highlighted?.querySelector("a[href]") ??
 					highlighted?.closest("li")?.querySelector("a[href]") ??
-					(highlighted instanceof HTMLAnchorElement ? highlighted : null);
+					(highlighted instanceof HTMLAnchorElement
+						? highlighted
+						: null);
 				if (highlightedLink instanceof HTMLAnchorElement) {
 					return {
 						href: highlightedLink.href,
@@ -1044,43 +1111,54 @@ async function clickHighlightedRedirectTab(browser, page) {
 				};
 			}, TUTORIAL_HIGHLIGHT_SELECTOR),
 	);
-	console.log(`clickHighlightedRedirectTab target: ${JSON.stringify(redirectTarget)}`);
-	const clickAction = await runWithPageRetries("clickHighlightedRedirectTab:click", () =>
-		activePage.evaluate((highlightSelector) => {
-			const highlighted = document.querySelector(highlightSelector);
-			const highlightedLink = highlighted?.querySelector("a[href]") ??
-				highlighted?.closest("li")?.querySelector("a[href]") ??
-				(highlighted instanceof HTMLAnchorElement ? highlighted : null);
-			if (highlightedLink instanceof HTMLAnchorElement) {
-				highlightedLink.click();
-				return "clicked-highlight-link";
-			}
-			if (highlighted instanceof HTMLElement) {
-				highlighted.click();
-				return "clicked-highlight";
-			}
-			throw new Error("No highlighted setup tab link to click");
-		}, TUTORIAL_HIGHLIGHT_SELECTOR)
+	console.log(
+		`clickHighlightedRedirectTab target: ${JSON.stringify(redirectTarget)}`,
+	);
+	const clickAction = await runWithPageRetries(
+		"clickHighlightedRedirectTab:click",
+		() =>
+			activePage.evaluate((highlightSelector) => {
+				const highlighted = document.querySelector(highlightSelector);
+				const highlightedLink = highlighted?.querySelector("a[href]") ??
+					highlighted?.closest("li")?.querySelector("a[href]") ??
+					(highlighted instanceof HTMLAnchorElement
+						? highlighted
+						: null);
+				if (highlightedLink instanceof HTMLAnchorElement) {
+					highlightedLink.click();
+					return "clicked-highlight-link";
+				}
+				if (highlighted instanceof HTMLElement) {
+					highlighted.click();
+					return "clicked-highlight";
+				}
+				throw new Error("No highlighted setup tab link to click");
+			}, TUTORIAL_HIGHLIGHT_SELECTOR),
 	);
 	console.log(`Step2 action: ${clickAction}`);
 	activePage = await getUsableSalesforcePage(browser, activePage);
-	await runWithPageRetries("clickHighlightedRedirectTab:wait-redirect", () =>
-		activePage.waitForFunction(
-		({ previousUrl, nextIconSelector }) => {
-			if (location.href !== previousUrl) {
-				return true;
-			}
-			const icon = document.querySelector(nextIconSelector);
-			return icon != null && !icon.classList.contains("hidden");
-		},
-		{ timeout: 12000 },
-		{
-			previousUrl: beforeRedirectUrl,
-			nextIconSelector: SLASHED_STAR_SELECTOR,
-		},
-		)
+	await runWithPageRetries(
+		"clickHighlightedRedirectTab:wait-redirect",
+		() =>
+			activePage.waitForFunction(
+				({ previousUrl, nextIconSelector }) => {
+					if (location.href !== previousUrl) {
+						return true;
+					}
+					const icon = document.querySelector(nextIconSelector);
+					return icon != null && !icon.classList.contains("hidden");
+				},
+				{ timeout: 12000 },
+				{
+					previousUrl: beforeRedirectUrl,
+					nextIconSelector: SLASHED_STAR_SELECTOR,
+				},
+			),
 	).catch(async (error) => {
-		if (typeof redirectTarget?.href !== "string" || redirectTarget.href.length < 1) {
+		if (
+			typeof redirectTarget?.href !== "string" ||
+			redirectTarget.href.length < 1
+		) {
 			throw error;
 		}
 		console.warn(
@@ -1090,21 +1168,24 @@ async function clickHighlightedRedirectTab(browser, page) {
 			waitUntil: "domcontentloaded",
 			timeout: 60000,
 		});
-		await runWithPageRetries("clickHighlightedRedirectTab:wait-redirect-after-goto", () =>
-			activePage.waitForFunction(
-				({ previousUrl, nextIconSelector }) => {
-					if (location.href !== previousUrl) {
-						return true;
-					}
-					const icon = document.querySelector(nextIconSelector);
-					return icon != null && !icon.classList.contains("hidden");
-				},
-				{ timeout: 60000 },
-				{
-					previousUrl: beforeRedirectUrl,
-					nextIconSelector: SLASHED_STAR_SELECTOR,
-				},
-			)
+		await runWithPageRetries(
+			"clickHighlightedRedirectTab:wait-redirect-after-goto",
+			() =>
+				activePage.waitForFunction(
+					({ previousUrl, nextIconSelector }) => {
+						if (location.href !== previousUrl) {
+							return true;
+						}
+						const icon = document.querySelector(nextIconSelector);
+						return icon != null &&
+							!icon.classList.contains("hidden");
+					},
+					{ timeout: 60000 },
+					{
+						previousUrl: beforeRedirectUrl,
+						nextIconSelector: SLASHED_STAR_SELECTOR,
+					},
+				),
 		);
 	});
 	return activePage;
@@ -1126,7 +1207,9 @@ async function clickFavouriteButtonByIcon(
 		iconSelector,
 		label,
 	);
-	const visibleIcon = await getVisibleFavouriteIcon(activePage).catch(() => null);
+	const visibleIcon = await getVisibleFavouriteIcon(activePage).catch(() =>
+		null
+	);
 	if (visibleIcon != null && visibleIcon !== iconSelector) {
 		console.warn(
 			`clickFavouriteButtonByIcon:${label} expected ${iconSelector} but found ${visibleIcon}; using visible icon instead`,
@@ -1274,15 +1357,17 @@ async function contextClickTutorialTab(page, label: string) {
 					if (idx < 0) {
 						return null;
 					}
-					return `${location.pathname.slice(idx + setupPrefix.length)}${
-						location.search
-					}`.replace(/\/+$/, "");
+					return `${
+						location.pathname.slice(idx + setupPrefix.length)
+					}${location.search}`.replace(/\/+$/, "");
 				};
 				const toPayload = (link: HTMLAnchorElement) => {
 					link.scrollIntoView({ block: "center", inline: "center" });
 					const rect = link.getBoundingClientRect();
 					if (rect.width <= 0 || rect.height <= 0) {
-						throw new Error("Tutorial target tab has no visible size");
+						throw new Error(
+							"Tutorial target tab has no visible size",
+						);
 					}
 					const tabUrl = (link.getAttribute("title") ?? "").trim();
 					if (tabUrl.length < 1) {
@@ -1300,9 +1385,12 @@ async function contextClickTutorialTab(page, label: string) {
 				};
 
 				const highlighted = document.querySelector(highlightSelector);
-				const highlightedLink = highlighted?.querySelector("a[title]") ??
-					highlighted?.closest("li")?.querySelector("a[title]") ??
-					(highlighted instanceof HTMLAnchorElement ? highlighted : null);
+				const highlightedLink =
+					highlighted?.querySelector("a[title]") ??
+						highlighted?.closest("li")?.querySelector("a[title]") ??
+						(highlighted instanceof HTMLAnchorElement
+							? highlighted
+							: null);
 				if (highlightedLink instanceof HTMLAnchorElement) {
 					return toPayload(highlightedLink);
 				}
@@ -1324,51 +1412,66 @@ async function contextClickTutorialTab(page, label: string) {
 	);
 
 	const marker = `${label}-${Date.now()}`;
-	await runWithPageRetries(`contextClickTutorialTab:${label}:arm`, () =>
-		page.evaluate(({ highlightSelector, markerId, tabUrl }) => {
-			let target: Element | null = document.querySelector(
-				`li a[title="${CSS.escape(tabUrl)}"]`,
-			);
-			if (target == null) {
-				const highlighted = document.querySelector(highlightSelector);
-				target = highlighted?.querySelector("a[title]") ??
-					highlighted?.closest("li")?.querySelector("a[title]") ??
-					(highlighted instanceof HTMLAnchorElement ? highlighted : null);
-			}
-			if (!(target instanceof HTMLElement)) {
-				throw new Error("Unable to arm context-menu listener on tutorial tab");
-			}
-			target.addEventListener(
-				"contextmenu",
-				() => {
-					(globalThis as typeof globalThis & {
-						__awsfLastContextMenu?: string;
-					}).__awsfLastContextMenu = markerId;
-				},
-				{ once: true },
-			);
-		}, {
-			highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
-			markerId: marker,
-			tabUrl: contextTarget.tabUrl,
-		}),
+	await runWithPageRetries(
+		`contextClickTutorialTab:${label}:arm`,
+		() =>
+			page.evaluate(({ highlightSelector, markerId, tabUrl }) => {
+				let target: Element | null = document.querySelector(
+					`li a[title="${CSS.escape(tabUrl)}"]`,
+				);
+				if (target == null) {
+					const highlighted = document.querySelector(
+						highlightSelector,
+					);
+					target = highlighted?.querySelector("a[title]") ??
+						highlighted?.closest("li")?.querySelector("a[title]") ??
+						(highlighted instanceof HTMLAnchorElement
+							? highlighted
+							: null);
+				}
+				if (!(target instanceof HTMLElement)) {
+					throw new Error(
+						"Unable to arm context-menu listener on tutorial tab",
+					);
+				}
+				target.addEventListener(
+					"contextmenu",
+					() => {
+						(globalThis as typeof globalThis & {
+							__awsfLastContextMenu?: string;
+						}).__awsfLastContextMenu = markerId;
+					},
+					{ once: true },
+				);
+			}, {
+				highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
+				markerId: marker,
+				tabUrl: contextTarget.tabUrl,
+			}),
 	);
 	await page.mouse.move(contextTarget.x, contextTarget.y);
-	await page.mouse.click(contextTarget.x, contextTarget.y, { button: "right" });
-	await runWithPageRetries(`contextClickTutorialTab:${label}:verify`, () =>
-		page.waitForFunction(
-			(markerId) =>
-				(globalThis as typeof globalThis & {
-					__awsfLastContextMenu?: string;
-				}).__awsfLastContextMenu === markerId,
-			{ timeout: 5000 },
-			marker,
-		),
+	await page.mouse.click(contextTarget.x, contextTarget.y, {
+		button: "right",
+	});
+	await runWithPageRetries(
+		`contextClickTutorialTab:${label}:verify`,
+		() =>
+			page.waitForFunction(
+				(markerId) =>
+					(globalThis as typeof globalThis & {
+						__awsfLastContextMenu?: string;
+					}).__awsfLastContextMenu === markerId,
+				{ timeout: 5000 },
+				marker,
+			),
 	);
 	await sleep(200);
 	console.log(
 		`${label} context-click target: ${
-			JSON.stringify({ tabUrl: contextTarget.tabUrl, label: contextTarget.label })
+			JSON.stringify({
+				tabUrl: contextTarget.tabUrl,
+				label: contextTarget.label,
+			})
 		}`,
 	);
 	return contextTarget;
@@ -1376,7 +1479,9 @@ async function contextClickTutorialTab(page, label: string) {
 
 async function reorderTabsInModalByDrag(page) {
 	await page.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, { timeout: 60000 });
-	await page.waitForSelector(`${SORTABLE_TABLE_SELECTOR} tr`, { timeout: 60000 });
+	await page.waitForSelector(`${SORTABLE_TABLE_SELECTOR} tr`, {
+		timeout: 60000,
+	});
 	const simulated = await page.evaluate(() => {
 		const rows = Array.from(
 			document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
@@ -1391,7 +1496,10 @@ async function reorderTabsInModalByDrag(page) {
 		if (targetRow === sourceRow && rows.length > 1) {
 			targetRow = rows[1];
 		}
-		if (!(sourceRow instanceof HTMLElement) || !(targetRow instanceof HTMLElement)) {
+		if (
+			!(sourceRow instanceof HTMLElement) ||
+			!(targetRow instanceof HTMLElement)
+		) {
 			return false;
 		}
 		const dragData = new DataTransfer();
@@ -1442,8 +1550,13 @@ async function reorderTabsInModalByDrag(page) {
 		};
 		const sourceHandle = getHandle(sourceRow);
 		const targetHandle = getHandle(targetRow);
-		if (!(sourceHandle instanceof HTMLElement) || !(targetHandle instanceof HTMLElement)) {
-			throw new Error("Unable to find drag handles for tutorial reorder step");
+		if (
+			!(sourceHandle instanceof HTMLElement) ||
+			!(targetHandle instanceof HTMLElement)
+		) {
+			throw new Error(
+				"Unable to find drag handles for tutorial reorder step",
+			);
 		}
 		return {
 			sourceRect: sourceHandle.getBoundingClientRect().toJSON(),
@@ -1455,7 +1568,9 @@ async function reorderTabsInModalByDrag(page) {
 	if (dragInfo.sameRow) {
 		const alt = await page.evaluate(() => {
 			const rows = Array.from(
-				document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
+				document.querySelectorAll<HTMLElement>(
+					"#sortable-table tbody tr",
+				),
 			);
 			const getHandle = (row?: HTMLElement) =>
 				row?.querySelector<HTMLElement>(
@@ -1463,7 +1578,10 @@ async function reorderTabsInModalByDrag(page) {
 				) ?? row ?? null;
 			const second = getHandle(rows.at(1));
 			const first = getHandle(rows.at(0));
-			if (!(second instanceof HTMLElement) || !(first instanceof HTMLElement)) {
+			if (
+				!(second instanceof HTMLElement) ||
+				!(first instanceof HTMLElement)
+			) {
 				return null;
 			}
 			return {
@@ -1527,17 +1645,24 @@ async function waitForPersistedTutorialProgress(
 }
 
 async function dispatchTutorialEvent(page, eventName: string) {
-	await runWithPageRetries(`dispatchTutorialEvent:${eventName}`, () =>
-		page.evaluate((name) => {
-			document.dispatchEvent(new CustomEvent(name));
-		}, eventName)
+	await runWithPageRetries(
+		`dispatchTutorialEvent:${eventName}`,
+		() =>
+			page.evaluate((name) => {
+				document.dispatchEvent(new CustomEvent(name));
+			}, eventName),
 	);
 }
 
 async function ensureTutorialEnded(page) {
 	for (let attempt = 1; attempt <= 12; attempt++) {
-		const ended = await runWithPageRetries("ensureTutorialEnded:check", () =>
-			page.evaluate((selector) => document.querySelector(selector) == null, TUTORIAL_BOX_SELECTOR)
+		const ended = await runWithPageRetries(
+			"ensureTutorialEnded:check",
+			() =>
+				page.evaluate(
+					(selector) => document.querySelector(selector) == null,
+					TUTORIAL_BOX_SELECTOR,
+				),
 		);
 		if (ended) {
 			return;
@@ -1561,20 +1686,26 @@ async function ensureTutorialEnded(page) {
 
 async function forceTutorialCompletionState(browser, page) {
 	await ensureTutorialEnded(page);
-	const stillVisible = await runWithPageRetries("forceCompletion:visible", () =>
-		page.evaluate(
-			(selector) => document.querySelector(selector) != null,
-			TUTORIAL_BOX_SELECTOR,
-		)
+	const stillVisible = await runWithPageRetries(
+		"forceCompletion:visible",
+		() =>
+			page.evaluate(
+				(selector) => document.querySelector(selector) != null,
+				TUTORIAL_BOX_SELECTOR,
+			),
 	);
 	if (stillVisible) {
-		await runWithPageRetries("forceCompletion:remove-box", () =>
-			page.evaluate((selector) => {
-				document.querySelector(selector)?.remove();
-			}, TUTORIAL_BOX_SELECTOR)
-			);
+		await runWithPageRetries(
+			"forceCompletion:remove-box",
+			() =>
+				page.evaluate((selector) => {
+					document.querySelector(selector)?.remove();
+				}, TUTORIAL_BOX_SELECTOR),
+		);
 	}
-	const progress = await getTutorialProgressInBrowser(browser).catch(() => null);
+	const progress = await getTutorialProgressInBrowser(browser).catch(() =>
+		null
+	);
 	if (progress == null || progress < 15) {
 		await setTutorialProgressInBrowser(browser, 15);
 	}
@@ -1589,7 +1720,9 @@ async function createSingleBrowserTutorialSession() {
 		console.log("createSingleBrowserTutorialSession: ensuring auth");
 		await ensureAuthenticated(activePage);
 		activePage = await ensureSetupHomeReady(browser, activePage);
-		console.log("createSingleBrowserTutorialSession: ensuring extension root");
+		console.log(
+			"createSingleBrowserTutorialSession: ensuring extension root",
+		);
 		activePage = await ensureExtensionRootReady(browser, activePage);
 		console.log("createSingleBrowserTutorialSession: ready");
 		return { browser, page: activePage };
@@ -1613,7 +1746,10 @@ async function initializeTutorialRun(browser, page) {
 	await startTutorialInBrowser(browser, activePage.url());
 	console.log("initializeTutorialRun: wait for tutorial UI");
 	activePage = await ensureTutorialUiReady(browser, activePage);
-	await logBrowserPages(browser, "initializeTutorialRun: pages after tutorial ready");
+	await logBrowserPages(
+		browser,
+		"initializeTutorialRun: pages after tutorial ready",
+	);
 	return activePage;
 }
 
@@ -1639,7 +1775,9 @@ async function runTutorialFlow(browser, page) {
 		"step4",
 	);
 	if (!step4Confirmed) {
-		console.warn("Step4 confirm not visible, continuing with visible UI state checks");
+		console.warn(
+			"Step4 confirm not visible, continuing with visible UI state checks",
+		);
 	}
 	await captureUi(activePage, "after-step4");
 
@@ -1661,7 +1799,9 @@ async function runTutorialFlow(browser, page) {
 		"step7",
 	);
 	if (!step7Confirmed) {
-		console.warn("Step7 confirm not visible, continuing with context target fallback");
+		console.warn(
+			"Step7 confirm not visible, continuing with context target fallback",
+		);
 	}
 	await captureUi(activePage, "after-step7");
 
@@ -1685,7 +1825,12 @@ async function runTutorialFlow(browser, page) {
 	);
 	await openManageTabsInBrowser(browser, activePage.url());
 	console.log(
-		`Step8 context-click target: ${JSON.stringify({ tabUrl: manageTabsTarget.tabUrl, label: manageTabsTarget.label })}`,
+		`Step8 context-click target: ${
+			JSON.stringify({
+				tabUrl: manageTabsTarget.tabUrl,
+				label: manageTabsTarget.label,
+			})
+		}`,
 	);
 	activePage = await getUsableSalesforcePage(browser, activePage);
 	await activePage.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, {
@@ -1709,13 +1854,15 @@ async function runTutorialFlow(browser, page) {
 	await activePage.waitForSelector(MANAGE_TABS_SAVE_SELECTOR, {
 		timeout: 60000,
 	});
-	await runWithPageRetries("manageTabs:save", () =>
-		activePage.$eval(MANAGE_TABS_SAVE_SELECTOR, (button) => {
-			if (!(button instanceof HTMLButtonElement)) {
-				throw new Error("Manage Tabs save button not found");
-			}
-			button.click();
-		})
+	await runWithPageRetries(
+		"manageTabs:save",
+		() =>
+			activePage.$eval(MANAGE_TABS_SAVE_SELECTOR, (button) => {
+				if (!(button instanceof HTMLButtonElement)) {
+					throw new Error("Manage Tabs save button not found");
+				}
+				button.click();
+			}),
 	);
 	await dispatchTutorialEvent(activePage, TUTORIAL_EVENT_CLOSE_MANAGE_TABS);
 	await captureUi(activePage, "after-step12");
@@ -1736,20 +1883,23 @@ async function runTutorialFlow(browser, page) {
 	await ensureTutorialEnded(activePage);
 	await forceTutorialCompletionState(browser, activePage);
 
-	await runWithPageRetries("final:tutorial-box-removed", () =>
-		activePage.waitForFunction(
-			(selector) => document.querySelector(selector) == null,
-			{ timeout: 10000 },
-			TUTORIAL_BOX_SELECTOR,
-		)
+	await runWithPageRetries(
+		"final:tutorial-box-removed",
+		() =>
+			activePage.waitForFunction(
+				(selector) => document.querySelector(selector) == null,
+				{ timeout: 10000 },
+				TUTORIAL_BOX_SELECTOR,
+			),
 	).catch(async () => {
-		const livePage = await getUsableSalesforcePage(browser, activePage).catch(() =>
-			activePage
-		);
-		await runWithPageRetries("final:tutorial-box-remove-fallback", () =>
-			livePage.evaluate((selector) => {
-				document.querySelector(selector)?.remove();
-			}, TUTORIAL_BOX_SELECTOR)
+		const livePage = await getUsableSalesforcePage(browser, activePage)
+			.catch(() => activePage);
+		await runWithPageRetries(
+			"final:tutorial-box-remove-fallback",
+			() =>
+				livePage.evaluate((selector) => {
+					document.querySelector(selector)?.remove();
+				}, TUTORIAL_BOX_SELECTOR),
 		).catch(() => null);
 	});
 	const tutorialProgress = await waitForPersistedTutorialProgress(
