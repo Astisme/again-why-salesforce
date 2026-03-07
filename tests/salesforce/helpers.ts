@@ -16,6 +16,7 @@ const MANUAL_AUTH_TIMEOUT_MS = 300000;
 const TUTORIAL_STORAGE_KEY = "tutorial-progress";
 const WHAT_START_TUTORIAL = "start-tutorial";
 const CXM_EMPTY_TABS = "empty-tabs";
+const CXM_PIN_TAB = "pin-tab";
 const CXM_MANAGE_TABS = "manage-tabs";
 const USERNAME = Deno.env.get("SALESFORCE_USERNAME");
 const PASSWORD = Deno.env.get("SALESFORCE_PASSWORD");
@@ -110,6 +111,37 @@ export function getExtensionPath() {
 }
 
 async function ensureChromeProfileUnlocked(profileDir: string) {
+	try {
+		const psOut = await new Deno.Command("ps", {
+			args: ["-eo", "pid,args"],
+			stdout: "piped",
+			stderr: "null",
+		}).output();
+		const text = new TextDecoder().decode(psOut.stdout);
+		for (const line of text.split("\n")) {
+			const trimmed = line.trim();
+			if (
+				trimmed.length < 1 ||
+				!trimmed.includes(profileDir) ||
+				(!trimmed.includes("chrome-linux64/chrome") &&
+					!trimmed.includes("google-chrome"))
+			) {
+				continue;
+			}
+			const [pidText] = trimmed.split(/\s+/, 1);
+			const pid = Number.parseInt(pidText, 10);
+			if (!Number.isNaN(pid) && pid !== Deno.pid) {
+				try {
+					Deno.kill(pid, "SIGTERM");
+				} catch {
+					// ignore
+				}
+			}
+		}
+	} catch {
+		// best effort cleanup only
+	}
+	await sleep(300);
 	const singletonLock = `${profileDir}/SingletonLock`;
 	let lockTarget: string | null = null;
 	try {
@@ -221,16 +253,71 @@ async function getLiveExtensionContext(browser, extensionId?: string) {
 	const urlPrefix = extensionId == null
 		? "chrome-extension://"
 		: `chrome-extension://${extensionId}/`;
+	const extensionPageMatcher = (target) =>
+		target.type() === "page" && target.url().startsWith(urlPrefix);
 	const matcher = (target) =>
 		(
 			target.type() === "service_worker" ||
 			target.type() === "background_page"
 		) &&
 		target.url().startsWith(urlPrefix);
-	const target = await browser.waitForTarget(matcher, { timeout: 15000 });
+	const openExtensionPageContext = async () => {
+		const existingPageTarget = browser.targets().find(extensionPageMatcher);
+		if (existingPageTarget != null) {
+			const existingPage = await existingPageTarget.page();
+			if (existingPage != null) {
+				try {
+					await existingPage.evaluate(() => location.href);
+					return existingPage;
+				} catch {
+					await existingPage.close().catch(() => null);
+				}
+			}
+		}
+		if (extensionId == null) {
+			return null;
+		}
+		const page = await browser.newPage();
+		const optionsUrl = `${urlPrefix}settings/options.html`;
+		await page.goto(optionsUrl, {
+			waitUntil: "domcontentloaded",
+			timeout: 15000,
+		}).catch(() => null);
+		if (page.url().startsWith(urlPrefix)) {
+			try {
+				await page.evaluate(() => location.href);
+			} catch {
+				await page.close().catch(() => null);
+				return null;
+			}
+			return page;
+		}
+		await page.close().catch(() => null);
+		return null;
+	};
+	let target = browser.targets().find(matcher);
+	if (target == null) {
+		try {
+			target = await browser.waitForTarget(matcher, { timeout: 15000 });
+		} catch (error) {
+			const message = error instanceof Error ? error.message : String(error);
+			if (!message.includes("Timed out after waiting")) {
+				throw error;
+			}
+			const pageContext = await openExtensionPageContext();
+			if (pageContext != null) {
+				return pageContext;
+			}
+			throw error;
+		}
+	}
 	if (target.type() === "service_worker") {
 		const worker = await target.worker();
 		if (worker == null) {
+			const pageContext = await openExtensionPageContext();
+			if (pageContext != null) {
+				return pageContext;
+			}
 			throw new Error("Extension service worker not available");
 		}
 		return worker;
@@ -246,14 +333,38 @@ async function withExtensionContext<T>(
 	browser,
 	fn: (context) => Promise<T>,
 ) {
-	let extensionId: string | undefined = undefined;
-	try {
-		extensionId = await getExtensionIdFromPreferences();
-	} catch {
-		// fall back to first available extension target if id is unavailable
+	const maxAttempts = 6;
+	let lastError: unknown = null;
+	for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+		try {
+			let extensionId: string | undefined = undefined;
+			try {
+				extensionId = await getExtensionIdFromPreferences();
+			} catch {
+				// fall back to first available extension target if id is unavailable
+			}
+			const liveContext = await getLiveExtensionContext(browser, extensionId);
+			return await fn(liveContext);
+		} catch (error) {
+			lastError = error;
+			const message = error instanceof Error ? error.message : String(error);
+			const canRetry = message.includes("Timed out after waiting") ||
+				message.includes("service worker not available") ||
+				message.includes("Execution context is not available") ||
+				message.includes("detached Frame") ||
+				message.includes("Target closed") ||
+				message.includes("Protocol error");
+			if (!canRetry || attempt === maxAttempts) {
+				throw error;
+			}
+			const waitMs = 300 * attempt;
+			console.warn(
+				`withExtensionContext: retrying ${attempt}/${maxAttempts} after ${waitMs}ms (${message})`,
+			);
+			await sleep(waitMs);
+		}
 	}
-	const liveContext = await getLiveExtensionContext(browser, extensionId);
-	return await fn(liveContext);
+	throw lastError;
 }
 
 function messageErrorText(error?: string | null) {
@@ -273,6 +384,10 @@ function isTransientMessageError(error?: string | null) {
 		) ||
 		text.includes("extension context invalidated") ||
 		text.includes("context was destroyed") ||
+		text.includes("chromemethodbfe") ||
+		text.includes("lockfile") ||
+		text.includes("target closed") ||
+		text.includes("attempted to use detached frame") ||
 		text.includes(
 			"execution context is not available in detached frame or worker",
 		) ||
@@ -574,6 +689,17 @@ export async function getTutorialProgress(browser) {
 	return result.value ?? null;
 }
 
+export async function setTutorialProgress(browser, progress: number) {
+	const response = await setStorageValue(browser, TUTORIAL_STORAGE_KEY, progress);
+	if (response?.ok !== true) {
+		throw new Error(
+			`Failed to set tutorial progress: ${
+				response?.error ?? "unknown error"
+			}`,
+		);
+	}
+}
+
 export async function startTutorialFromWorker(browser, salesforceUrl: string) {
 	const emptyTabsResponse = await sendMessageToSalesforceTab(
 		browser,
@@ -615,14 +741,44 @@ export async function openManageTabsFromWorker(browser, salesforceUrl: string) {
 	}
 }
 
+export async function pinTabFromWorker(
+	browser,
+	salesforceUrl: string,
+	message: { tabUrl: string; label: string; url: string; org: string },
+) {
+	const response = await sendMessageToSalesforceTab(browser, salesforceUrl, {
+		what: CXM_PIN_TAB,
+		...message,
+	});
+	if (response?.ok !== true) {
+		throw new Error(
+			`Failed to pin tab from worker: ${
+				response?.error ?? "unknown error"
+			}`,
+		);
+	}
+}
+
 export async function getSalesforcePage(browser) {
 	await closeInstallTabs(browser);
 	const pages = await browser.pages();
-	return pages.find((page) =>
-		isSalesforceUrl(page.url()) && !page.isClosed()
-	) ??
-		pages.find((page) => !page.isClosed()) ??
-		await browser.newPage();
+	const candidates = [
+		...pages.filter((page) => isSalesforceUrl(page.url()) && !page.isClosed()),
+		...pages.filter((page) => !isSalesforceUrl(page.url()) && !page.isClosed()),
+	];
+	for (const page of candidates) {
+		try {
+			await page.evaluate(() => location.href);
+			return page;
+		} catch (error) {
+			if (!isTransientNavigationContextError(error)) {
+				throw error;
+			}
+		}
+	}
+	const freshPage = await browser.newPage();
+	await openSetupHome(freshPage).catch(() => null);
+	return freshPage;
 }
 
 export async function setFieldValue(page, selector, value, label) {
@@ -1003,33 +1159,55 @@ export async function createReadySalesforceSession(
 		startTutorial?: boolean;
 	} = {},
 ) {
-	console.log("createReadySalesforceSession: launching browser");
-	const { browser, page } = await launchSalesforceBrowser();
-	let activePage = page;
-	page.removeAllListeners("dialog");
-	page.on("dialog", async (dialog) => {
-		if (dialogAction === "accept") {
-			await dialog.accept();
-			return;
+	let lastError: unknown = null;
+	for (let attempt = 1; attempt <= 3; attempt++) {
+		console.log("createReadySalesforceSession: launching browser");
+		const { browser, page } = await launchSalesforceBrowser();
+		try {
+			let activePage = page;
+			page.removeAllListeners("dialog");
+			page.on("dialog", async (dialog) => {
+				if (dialogAction === "accept") {
+					await dialog.accept();
+					return;
+				}
+				await dialog.dismiss();
+			});
+			console.log("createReadySalesforceSession: ensuring auth");
+			await ensureAuthenticated(activePage);
+			activePage = await getSalesforcePage(browser);
+			console.log("createReadySalesforceSession: ensuring extension loaded");
+			activePage = await ensureExtensionLoaded(browser, activePage);
+			if (resetTutorial) {
+				console.log(
+					"createReadySalesforceSession: resetting tutorial after extension is ready",
+				);
+				await resetTutorialProgress(browser);
+			}
+			if (startTutorial) {
+				console.log("createReadySalesforceSession: starting tutorial");
+				await activePage.bringToFront();
+				await startTutorialFromWorker(browser, activePage.url());
+			}
+			console.log("createReadySalesforceSession: ready");
+			return { browser, page: activePage };
+		} catch (error) {
+			lastError = error;
+			await browser.close().catch(() => null);
+			const message = error instanceof Error ? error.message : String(error);
+			const isRetryable = isTransientNavigationContextError(error) ||
+				message.includes("Protocol error: Connection closed") ||
+				message.includes("Target closed") ||
+				message.includes("Execution context");
+			if (!isRetryable || attempt === 3) {
+				throw error;
+			}
+			const waitMs = 500 * attempt;
+			console.warn(
+				`createReadySalesforceSession: retrying bootstrap ${attempt}/3 in ${waitMs}ms (${message})`,
+			);
+			await sleep(waitMs);
 		}
-		await dialog.dismiss();
-	});
-	console.log("createReadySalesforceSession: ensuring auth");
-	await ensureAuthenticated(activePage);
-	activePage = await getSalesforcePage(browser);
-	console.log("createReadySalesforceSession: ensuring extension loaded");
-	activePage = await ensureExtensionLoaded(browser, activePage);
-	if (resetTutorial) {
-		console.log(
-			"createReadySalesforceSession: resetting tutorial after extension is ready",
-		);
-		await resetTutorialProgress(browser);
 	}
-	if (startTutorial) {
-		console.log("createReadySalesforceSession: starting tutorial");
-		await activePage.bringToFront();
-		await startTutorialFromWorker(browser, activePage.url());
-	}
-	console.log("createReadySalesforceSession: ready");
-	return { browser, page: activePage };
+	throw lastError;
 }

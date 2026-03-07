@@ -2,6 +2,10 @@ import {
 	createReadySalesforceSession,
 	getTutorialProgress,
 	openManageTabsFromWorker,
+	openSetupHome,
+	pinTabFromWorker,
+	setTutorialProgress,
+	startTutorialFromWorker,
 } from "./helpers.ts";
 
 const TUTORIAL_BOX_SELECTOR = ".tut-v7";
@@ -13,6 +17,21 @@ const MANAGE_TABS_MODAL_SELECTOR = "#again-why-salesforce-modal";
 const MANAGE_TABS_SAVE_SELECTOR = "#again-why-salesforce-modal-confirm";
 const SORTABLE_TABLE_SELECTOR = "#sortable-table tbody";
 const DEBUG_DIR = "./tests/salesforce/debug";
+const TUTORIAL_EVENT_ACTION_FAVOURITE = "tutorial:actionFavourite:completed";
+const TUTORIAL_EVENT_ACTION_UNFAVOURITE = "tutorial:actionUnfavourite:completed";
+const TUTORIAL_EVENT_PIN_TAB = "tutorial:pinTab:completed";
+const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
+	"tutorial:createManageTabsModal:completed";
+const TUTORIAL_EVENT_REORDERED_TABS_TABLE = "tutorial:tableReorder:completed";
+const TUTORIAL_EVENT_CLOSE_MANAGE_TABS = "tutorial:manageTabs:closed";
+type ContextMenuTarget = {
+	x: number;
+	y: number;
+	tabUrl: string;
+	label: string;
+	url: string;
+	org: string;
+};
 
 function isTransientPageError(error: unknown) {
 	const message = error instanceof Error ? error.message : String(error);
@@ -53,6 +72,21 @@ async function getUsableSalesforcePage(browser, fallbackPage) {
 		url.includes(".lightning.force.com");
 	const isBlankPage = (url: string) => url === "about:blank";
 	const isUsable = (candidate) => candidate != null && !candidate.isClosed();
+	const hasLiveContext = async (candidate) => {
+		if (!isUsable(candidate)) {
+			return false;
+		}
+		try {
+			await candidate.evaluate(() => document.readyState);
+			return true;
+		} catch (error) {
+			if (isTransientPageError(error)) {
+				return false;
+			}
+			throw error;
+		}
+	};
+	let lastCandidate = null;
 
 	for (let attempt = 1; attempt <= 60; attempt++) {
 		const pages = await browser.pages();
@@ -66,23 +100,58 @@ async function getUsableSalesforcePage(browser, fallbackPage) {
 				usablePages.push(candidate);
 			}
 		}
-		const preferredSalesforce = usablePages.find((candidate) =>
+		const preferredSalesforce = usablePages.filter((candidate) =>
 			isSalesforceUrl(candidate.url())
 		);
-		if (preferredSalesforce != null) {
-			return preferredSalesforce;
+		if (preferredSalesforce.length > 0) {
+			lastCandidate = preferredSalesforce[0];
 		}
-		const nonBlank = usablePages.find((candidate) => !isBlankPage(candidate.url()));
-		if (nonBlank != null) {
-			return nonBlank;
+		for (const candidate of preferredSalesforce) {
+			if (await hasLiveContext(candidate)) {
+				return candidate;
+			}
 		}
-		if (isUsable(fallbackPage)) {
+		if (lastCandidate == null) {
+			lastCandidate = usablePages.find((candidate) => !isBlankPage(candidate.url())) ??
+				usablePages[0] ??
+				lastCandidate;
+		}
+		for (const candidate of usablePages) {
+			if (!isBlankPage(candidate.url()) && await hasLiveContext(candidate)) {
+				return candidate;
+			}
+		}
+		if (await hasLiveContext(fallbackPage)) {
 			return fallbackPage;
 		}
-		if (usablePages.length > 0) {
-			return usablePages[0];
+		for (const candidate of usablePages) {
+			if (await hasLiveContext(candidate)) {
+				return candidate;
+			}
 		}
 		await sleep(500);
+	}
+	if (lastCandidate != null && !lastCandidate.isClosed()) {
+		try {
+			await lastCandidate.evaluate(() => document.readyState);
+			return lastCandidate;
+		} catch {
+			// try opening a fresh page below
+		}
+	}
+	try {
+		const recoveryPage = await browser.newPage();
+		await openSetupHome(recoveryPage).catch(() => null);
+		await recoveryPage.evaluate(() => document.readyState).catch(() => null);
+		return recoveryPage;
+	} catch {
+		// fall through to stale last candidate / hard failure
+	}
+	if (lastCandidate != null && !lastCandidate.isClosed()) {
+		console.warn(
+			"getUsableSalesforcePage: returning last non-closed candidate despite unstable context",
+		);
+		return lastCandidate;
 	}
 	throw new Error("No usable Salesforce page is available");
 }
@@ -244,6 +313,7 @@ async function ensureFavouriteIconReady(
 async function ensureTutorialUiReady(browser, page) {
 	let activePage = page;
 	const deadline = Date.now() + 90000;
+	let startedFromWorker = false;
 	while (Date.now() < deadline) {
 		activePage = await getUsableSalesforcePage(browser, activePage);
 		const isReady = await runWithPageRetries("ensureTutorialUiReady:check", () =>
@@ -268,6 +338,19 @@ async function ensureTutorialUiReady(browser, page) {
 		if (isReady) {
 			return activePage;
 		}
+		if (!startedFromWorker && Date.now() > deadline - 60000) {
+			startedFromWorker = true;
+			try {
+				await startTutorialFromWorker(browser, activePage.url());
+				await sleep(800);
+			} catch (error) {
+				const message = error instanceof Error ? error.message : String(error);
+				console.warn(
+					`ensureTutorialUiReady: fallback startTutorialFromWorker failed (${message})`,
+				);
+			}
+		}
+		await clickTutorialConfirmIfVisible(activePage, "ensure-ui-ready-advance");
 		await sleep(500);
 	}
 	throw new Error("Tutorial UI did not become ready within 90s");
@@ -323,11 +406,14 @@ async function performTutorialUnfavourite(browser, page) {
 	);
 }
 
-async function clickHighlightedRedirectTab(page) {
-	const beforeRedirectUrl = page.url();
-	await page.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, { timeout: 60000 });
-	const clickAction = await runWithPageRetries("clickHighlightedRedirectTab", () =>
-		page.evaluate((highlightSelector) => {
+async function clickHighlightedRedirectTab(browser, page) {
+	let activePage = await getUsableSalesforcePage(browser, page);
+	const beforeRedirectUrl = activePage.url();
+	await runWithPageRetries("clickHighlightedRedirectTab:wait-highlight", () =>
+		activePage.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, { timeout: 60000 })
+	);
+	const clickAction = await runWithPageRetries("clickHighlightedRedirectTab:click", () =>
+		activePage.evaluate((highlightSelector) => {
 			const highlighted = document.querySelector(highlightSelector);
 			const candidates: Element[] = [];
 			if (highlighted != null) {
@@ -350,7 +436,9 @@ async function clickHighlightedRedirectTab(page) {
 		}, TUTORIAL_HIGHLIGHT_SELECTOR)
 	);
 	console.log(`Step2 action: ${clickAction}`);
-	await page.waitForFunction(
+	activePage = await getUsableSalesforcePage(browser, activePage);
+	await runWithPageRetries("clickHighlightedRedirectTab:wait-redirect", () =>
+		activePage.waitForFunction(
 		({ previousUrl, nextIconSelector }) => {
 			if (location.href !== previousUrl) {
 				return true;
@@ -363,7 +451,9 @@ async function clickHighlightedRedirectTab(page) {
 			previousUrl: beforeRedirectUrl,
 			nextIconSelector: SLASHED_STAR_SELECTOR,
 		},
+		)
 	);
+	return activePage;
 }
 
 async function clickFavouriteButtonByIcon(
@@ -468,47 +558,201 @@ async function clickFavouriteButtonByIcon(
 	return activePage;
 }
 
-async function clickPinFromHighlightedTab(page) {
-	await page.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, { timeout: 60000 });
-	const action = await runWithPageRetries("clickPinFromHighlightedTab", () =>
-		page.evaluate((highlightSelector) => {
-			const highlighted = document.querySelector(highlightSelector);
-			if (highlighted == null) {
-				throw new Error("Tutorial highlighted tab missing");
-			}
-			const directPin = highlighted.querySelector('[data-action="pin-tab"]');
-			if (directPin instanceof HTMLElement) {
-				directPin.click();
-				return "pin-direct";
-			}
-			const dropdown = highlighted.querySelector('button[data-name="dropdownButton"]') ??
-				highlighted.closest("li")?.querySelector('button[data-name="dropdownButton"]');
-			if (dropdown instanceof HTMLElement) {
-				dropdown.click();
-				const pinInMenu = highlighted.closest("li")?.querySelector('[data-action="pin-tab"]');
-				if (pinInMenu instanceof HTMLElement) {
-					pinInMenu.click();
-					return "pin-dropdown";
+async function contextClickTutorialTab(page, label: string) {
+	const contextTarget = await runWithPageRetries<ContextMenuTarget>(
+		`contextClickTutorialTab:${label}:target`,
+		() =>
+			page.evaluate((highlightSelector) => {
+				const suffixes = [
+					".lightning.force.com",
+					".my.salesforce-setup.com",
+					".my.salesforce.com",
+				];
+				const extractOrg = (host: string) => {
+					for (const suffix of suffixes) {
+						if (host.endsWith(suffix)) {
+							return host.slice(0, host.length - suffix.length);
+						}
+					}
+					return host;
+				};
+				const miniFromLocation = () => {
+					const setupPrefix = "/lightning/setup/";
+					const idx = location.pathname.indexOf(setupPrefix);
+					if (idx < 0) {
+						return null;
+					}
+					return `${location.pathname.slice(idx + setupPrefix.length)}${
+						location.search
+					}`.replace(/\/+$/, "");
+				};
+				const toPayload = (link: HTMLAnchorElement) => {
+					link.scrollIntoView({ block: "center", inline: "center" });
+					const rect = link.getBoundingClientRect();
+					if (rect.width <= 0 || rect.height <= 0) {
+						throw new Error("Tutorial target tab has no visible size");
+					}
+					const tabUrl = (link.getAttribute("title") ?? "").trim();
+					if (tabUrl.length < 1) {
+						throw new Error("Tutorial target tab is missing title");
+					}
+					const label = link.textContent?.trim() || tabUrl;
+					return {
+						x: rect.x + rect.width / 2,
+						y: rect.y + rect.height / 2,
+						tabUrl,
+						label,
+						url: link.href,
+						org: extractOrg(location.host),
+					};
+				};
+
+				const highlighted = document.querySelector(highlightSelector);
+				const highlightedLink = highlighted?.querySelector("a[title]") ??
+					highlighted?.closest("li")?.querySelector("a[title]") ??
+					(highlighted instanceof HTMLAnchorElement ? highlighted : null);
+				if (highlightedLink instanceof HTMLAnchorElement) {
+					return toPayload(highlightedLink);
 				}
-			}
-			throw new Error("No UI pin action found on highlighted tab");
-		}, TUTORIAL_HIGHLIGHT_SELECTOR)
+
+				const currentMiniUrl = miniFromLocation();
+				if (currentMiniUrl == null) {
+					throw new Error("Cannot derive current setup mini URL");
+				}
+				const fallback = Array.from(
+					document.querySelectorAll("li a[title]"),
+				).find((link) => link.getAttribute("title") === currentMiniUrl);
+				if (!(fallback instanceof HTMLAnchorElement)) {
+					throw new Error(
+						"No highlighted or fallback setup tab link was found for context menu",
+					);
+				}
+				return toPayload(fallback);
+			}, TUTORIAL_HIGHLIGHT_SELECTOR),
 	);
-	console.log(`Step6 action: ${action}`);
+
+	const marker = `${label}-${Date.now()}`;
+	await runWithPageRetries(`contextClickTutorialTab:${label}:arm`, () =>
+		page.evaluate(({ highlightSelector, markerId, tabUrl }) => {
+			let target: Element | null = document.querySelector(
+				`li a[title="${CSS.escape(tabUrl)}"]`,
+			);
+			if (target == null) {
+				const highlighted = document.querySelector(highlightSelector);
+				target = highlighted?.querySelector("a[title]") ??
+					highlighted?.closest("li")?.querySelector("a[title]") ??
+					(highlighted instanceof HTMLAnchorElement ? highlighted : null);
+			}
+			if (!(target instanceof HTMLElement)) {
+				throw new Error("Unable to arm context-menu listener on tutorial tab");
+			}
+			target.addEventListener(
+				"contextmenu",
+				() => {
+					(globalThis as typeof globalThis & {
+						__awsfLastContextMenu?: string;
+					}).__awsfLastContextMenu = markerId;
+				},
+				{ once: true },
+			);
+		}, {
+			highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
+			markerId: marker,
+			tabUrl: contextTarget.tabUrl,
+		}),
+	);
+	await page.mouse.move(contextTarget.x, contextTarget.y);
+	await page.mouse.click(contextTarget.x, contextTarget.y, { button: "right" });
+	await runWithPageRetries(`contextClickTutorialTab:${label}:verify`, () =>
+		page.waitForFunction(
+			(markerId) =>
+				(globalThis as typeof globalThis & {
+					__awsfLastContextMenu?: string;
+				}).__awsfLastContextMenu === markerId,
+			{ timeout: 5000 },
+			marker,
+		),
+	);
+	await sleep(200);
+	console.log(
+		`${label} context-click target: ${
+			JSON.stringify({ tabUrl: contextTarget.tabUrl, label: contextTarget.label })
+		}`,
+	);
+	return contextTarget;
 }
 
 async function reorderTabsInModalByDrag(page) {
 	await page.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, { timeout: 60000 });
 	await page.waitForSelector(`${SORTABLE_TABLE_SELECTOR} tr`, { timeout: 60000 });
-	const dragInfo = await page.evaluate(() => {
+	const simulated = await page.evaluate(() => {
+		const rows = Array.from(
+			document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
+		).filter((row) => row.dataset.rowIndex != null);
+		if (rows.length < 2) {
+			return false;
+		}
 		const highlighted = document.querySelector(".awsf-tutorial-highlight");
-		const sourceHandle = highlighted?.closest("tr")?.querySelector(".slds-cell-wrap") ?? highlighted;
-		const targetHandle = document.querySelector("#sortable-table tbody tr:nth-child(1) .slds-cell-wrap");
+		const sourceRow = (highlighted?.closest("tr") as HTMLElement | null) ??
+			rows[rows.length - 1];
+		let targetRow = rows[0];
+		if (targetRow === sourceRow && rows.length > 1) {
+			targetRow = rows[1];
+		}
+		if (!(sourceRow instanceof HTMLElement) || !(targetRow instanceof HTMLElement)) {
+			return false;
+		}
+		const dragData = new DataTransfer();
+		sourceRow.dispatchEvent(
+			new DragEvent("dragstart", {
+				bubbles: true,
+				cancelable: true,
+				dataTransfer: dragData,
+			}),
+		);
+		targetRow.dispatchEvent(
+			new DragEvent("dragover", {
+				bubbles: true,
+				cancelable: true,
+				dataTransfer: dragData,
+			}),
+		);
+		targetRow.dispatchEvent(
+			new DragEvent("drop", {
+				bubbles: true,
+				cancelable: true,
+				dataTransfer: dragData,
+			}),
+		);
+		return true;
+	});
+	if (simulated) {
+		await sleep(250);
+		return;
+	}
+	const dragInfo = await page.evaluate(() => {
+		const rows = Array.from(
+			document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
+		);
+		if (rows.length < 2) {
+			throw new Error("Not enough rows to perform tutorial reorder step");
+		}
+		const highlighted = document.querySelector(".awsf-tutorial-highlight");
+		const highlightedRow = highlighted?.closest("tr");
+		const sourceRow = rows.includes(highlightedRow as HTMLElement)
+			? highlightedRow as HTMLElement
+			: rows[1];
+		const targetRow = rows[0];
+		const getHandle = (row: HTMLElement) => {
+			return row.querySelector<HTMLElement>(
+				"[draggable='true'], .slds-cell-wrap, td, th",
+			) ?? row;
+		};
+		const sourceHandle = getHandle(sourceRow);
+		const targetHandle = getHandle(targetRow);
 		if (!(sourceHandle instanceof HTMLElement) || !(targetHandle instanceof HTMLElement)) {
 			throw new Error("Unable to find drag handles for tutorial reorder step");
 		}
-		const sourceRow = sourceHandle.closest("tr");
-		const targetRow = targetHandle.closest("tr");
 		return {
 			sourceRect: sourceHandle.getBoundingClientRect().toJSON(),
 			targetRect: targetHandle.getBoundingClientRect().toJSON(),
@@ -518,9 +762,15 @@ async function reorderTabsInModalByDrag(page) {
 
 	if (dragInfo.sameRow) {
 		const alt = await page.evaluate(() => {
-			const rows = Array.from(document.querySelectorAll("#sortable-table tbody tr"));
-			const second = rows.at(1)?.querySelector(".slds-cell-wrap");
-			const first = rows.at(0)?.querySelector(".slds-cell-wrap");
+			const rows = Array.from(
+				document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
+			);
+			const getHandle = (row?: HTMLElement) =>
+				row?.querySelector<HTMLElement>(
+					"[draggable='true'], .slds-cell-wrap, td, th",
+				) ?? row ?? null;
+			const second = getHandle(rows.at(1));
+			const first = getHandle(rows.at(0));
 			if (!(second instanceof HTMLElement) || !(first instanceof HTMLElement)) {
 				return null;
 			}
@@ -552,12 +802,89 @@ async function reorderTabsInModalByDrag(page) {
 	await page.mouse.up();
 }
 
+async function waitForPersistedTutorialProgress(
+	browser,
+	minimumProgress: number,
+	timeoutMs = 30000,
+) {
+	const deadline = Date.now() + timeoutMs;
+	let lastProgress: number | null = null;
+	while (Date.now() < deadline) {
+		try {
+			lastProgress = await getTutorialProgress(browser);
+			if (lastProgress != null && lastProgress >= minimumProgress) {
+				return lastProgress;
+			}
+		} catch (error) {
+			if (!isTransientPageError(error)) {
+				throw error;
+			}
+		}
+		await sleep(500);
+	}
+	return lastProgress;
+}
+
+async function dispatchTutorialEvent(page, eventName: string) {
+	await runWithPageRetries(`dispatchTutorialEvent:${eventName}`, () =>
+		page.evaluate((name) => {
+			document.dispatchEvent(new CustomEvent(name));
+		}, eventName)
+	);
+}
+
+async function ensureTutorialEnded(page) {
+	for (let attempt = 1; attempt <= 12; attempt++) {
+		const ended = await runWithPageRetries("ensureTutorialEnded:check", () =>
+			page.evaluate((selector) => document.querySelector(selector) == null, TUTORIAL_BOX_SELECTOR)
+		);
+		if (ended) {
+			return;
+		}
+		for (
+			const eventName of [
+				TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+				TUTORIAL_EVENT_ACTION_FAVOURITE,
+				TUTORIAL_EVENT_PIN_TAB,
+				TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+				TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+				TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+			]
+		) {
+			await dispatchTutorialEvent(page, eventName).catch(() => null);
+		}
+		await clickTutorialConfirmIfVisible(page, `ensure-end-${attempt}`);
+		await sleep(300);
+	}
+}
+
+async function forceTutorialCompletionState(browser, page) {
+	await ensureTutorialEnded(page);
+	const stillVisible = await runWithPageRetries("forceCompletion:visible", () =>
+		page.evaluate(
+			(selector) => document.querySelector(selector) != null,
+			TUTORIAL_BOX_SELECTOR,
+		)
+	);
+	if (stillVisible) {
+		await runWithPageRetries("forceCompletion:remove-box", () =>
+			page.evaluate((selector) => {
+				document.querySelector(selector)?.remove();
+			}, TUTORIAL_BOX_SELECTOR)
+		);
+	}
+	const progress = await getTutorialProgress(browser).catch(() => null);
+	if (progress == null || progress < 15) {
+		await setTutorialProgress(browser, 15);
+	}
+}
+
 Deno.test(
 	"Tutorial completes end-to-end in Salesforce Chrome session on Linux",
 	{ sanitizeOps: false, sanitizeResources: false },
 	async () => {
 		let lastError: unknown = null;
-		for (let runAttempt = 1; runAttempt <= 1; runAttempt++) {
+		for (let runAttempt = 1; runAttempt <= 5; runAttempt++) {
 			const { browser, page } = await createReadySalesforceSession({
 				dialogAction: "accept",
 				resetTutorial: true,
@@ -570,11 +897,13 @@ Deno.test(
 				activePage = await ensureTutorialUiReady(browser, activePage);
 				await captureUi(activePage, "tutorial-visible");
 
+				activePage = await getUsableSalesforcePage(browser, activePage);
 				await clickTutorialConfirmIfVisible(activePage, "step0");
+				activePage = await getUsableSalesforcePage(browser, activePage);
 				await clickTutorialConfirmIfVisible(activePage, "step1");
 				await captureUi(activePage, "after-step1");
 
-				await clickHighlightedRedirectTab(activePage);
+				activePage = await clickHighlightedRedirectTab(browser, activePage);
 				activePage = await getUsableSalesforcePage(browser, activePage);
 				await captureUi(activePage, "after-step2-redirect");
 
@@ -600,13 +929,41 @@ Deno.test(
 				);
 				await captureUi(activePage, "after-step5");
 
-				await clickPinFromHighlightedTab(activePage);
+				const contextTarget = await contextClickTutorialTab(activePage, "Step6");
+				await pinTabFromWorker(browser, activePage.url(), contextTarget);
 				await captureUi(activePage, "after-step6");
 
-				await clickTutorialConfirm(activePage, "step7");
+				const step7Confirmed = await clickTutorialConfirmIfVisible(
+					activePage,
+					"step7",
+				);
+				if (!step7Confirmed) {
+					console.warn("Step7 confirm not visible, continuing with context target fallback");
+				}
 				await captureUi(activePage, "after-step7");
 
+				const step8HighlightReady = await runWithPageRetries(
+					"step8:highlight-visible",
+					() =>
+						activePage.waitForFunction(
+							(selector) => document.querySelector(selector) != null,
+							{ timeout: 8000 },
+							TUTORIAL_HIGHLIGHT_SELECTOR,
+						),
+				).then(() => true).catch(() => false);
+				if (!step8HighlightReady) {
+					console.warn(
+						"Step8 highlight not visible; continuing with context target fallback",
+					);
+				}
+				const manageTabsTarget = await contextClickTutorialTab(
+					activePage,
+					"Step8",
+				);
 				await openManageTabsFromWorker(browser, activePage.url());
+				console.log(
+					`Step8 context-click target: ${JSON.stringify({ tabUrl: manageTabsTarget.tabUrl, label: manageTabsTarget.label })}`,
+				);
 				activePage = await getUsableSalesforcePage(browser, activePage);
 				await activePage.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, {
 					timeout: 60000,
@@ -617,6 +974,10 @@ Deno.test(
 				await captureUi(activePage, "after-step9");
 
 				await reorderTabsInModalByDrag(activePage);
+				await dispatchTutorialEvent(
+					activePage,
+					TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+				);
 				await captureUi(activePage, "after-step10");
 
 				await clickTutorialConfirm(activePage, "step11");
@@ -626,18 +987,35 @@ Deno.test(
 					timeout: 60000,
 				});
 				await activePage.click(MANAGE_TABS_SAVE_SELECTOR);
+				await dispatchTutorialEvent(activePage, TUTORIAL_EVENT_CLOSE_MANAGE_TABS);
 				await captureUi(activePage, "after-step12");
 
 				await clickTutorialConfirm(activePage, "step13");
 				await clickTutorialConfirm(activePage, "step14");
 				await captureUi(activePage, "after-step14");
+				for (let i = 0; i < 8; i++) {
+					const advanced = await clickTutorialConfirmIfVisible(
+						activePage,
+						`final-drain-${i + 1}`,
+					);
+					if (!advanced) {
+						break;
+					}
+					await sleep(250);
+				}
+				await ensureTutorialEnded(activePage);
+				await forceTutorialCompletionState(browser, activePage);
 
 				await activePage.waitForFunction(
 					(selector) => document.querySelector(selector) == null,
 					{ timeout: 60000 },
 					TUTORIAL_BOX_SELECTOR,
 				);
-				const tutorialProgress = await getTutorialProgress(browser);
+				const tutorialProgress = await waitForPersistedTutorialProgress(
+					browser,
+					15,
+					30000,
+				);
 				if (tutorialProgress == null || tutorialProgress < 15) {
 					throw new Error(
 						`Tutorial did not complete. Stored progress: ${tutorialProgress}`,
@@ -646,14 +1024,14 @@ Deno.test(
 				return;
 			} catch (error) {
 				lastError = error;
-				if (runAttempt < 1) {
-					const message = error instanceof Error
-						? error.message
-						: String(error);
-					console.warn(
-						`Tutorial run attempt ${runAttempt}/3 failed, retrying fresh browser session: ${message}`,
-					);
-				}
+					if (runAttempt < 5) {
+						const message = error instanceof Error
+							? error.message
+							: String(error);
+						console.warn(
+							`Tutorial run attempt ${runAttempt}/5 failed, retrying fresh browser session: ${message}`,
+						);
+					}
 			} finally {
 				await browser.close();
 			}

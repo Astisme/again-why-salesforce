@@ -2,6 +2,7 @@ import {
 	createReadySalesforceSession,
 	ensureFavouriteButtonVisible,
 	EXTENSION_NAME,
+	sleep,
 } from "./helpers.ts";
 
 const EXT_BUTTON_ID = `#${EXTENSION_NAME}-button`;
@@ -28,7 +29,7 @@ Deno.test(
 			await page.click(
 				initialStarVisible ? EXT_STAR_ID : EXT_SLASHED_STAR_ID,
 			);
-			await page.waitForTimeout(300);
+			await sleep(300);
 
 			const afterToggleStarVisible = await page.$(EXT_STAR_ID).then((
 				el,
@@ -40,7 +41,7 @@ Deno.test(
 			await page.click(
 				afterToggleStarVisible ? EXT_STAR_ID : EXT_SLASHED_STAR_ID,
 			);
-			await page.waitForTimeout(300);
+			await sleep(300);
 
 			const finalStarVisible = await page.$(EXT_STAR_ID).then((el) =>
 				el?.isIntersectingViewport()
