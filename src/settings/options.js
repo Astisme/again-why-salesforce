@@ -53,11 +53,73 @@ import {
 	sendExtensionMessage,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
+import { handleSwitchColorTheme } from "/action/themeHandler.js";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so
 ensureTranslatorAvailability();
 const invisible = "invisible";
+const html = document.documentElement;
+const themeTransitionClass = "theme-transitioning";
+const themeTransitionDuration = 500;
+let themeTransitionTimeout = null;
+
+const themeSelector = document.getElementById("theme-selector");
+const sun = document.getElementById("sun");
+const moon = document.getElementById("moon");
+
+/**
+ * Retrieves the effective theme applied to the page.
+ *
+ * @return {string} The current theme.
+ */
+function getCurrentTheme() {
+	return html.dataset.theme ?? localStorage.getItem("usingTheme") ??
+		"light";
+}
+
+/**
+ * Updates the visibility of the theme toggle icons based on the active theme.
+ */
+function syncThemeIcons() {
+	const currentTheme = getCurrentTheme();
+	const elementToShow = currentTheme === "light" ? moon : sun;
+	const elementToHide = elementToShow === sun ? moon : sun;
+	elementToShow.classList.remove("invisible", HIDDEN_CLASS);
+	elementToHide.classList.add("invisible", HIDDEN_CLASS);
+}
+
+/**
+ * Applies a temporary class so native controls can animate smoothly during theme changes.
+ */
+function startThemeTransition() {
+	clearTimeout(themeTransitionTimeout);
+	html.classList.add(themeTransitionClass);
+	themeTransitionTimeout = setTimeout(() => {
+		html.classList.remove(themeTransitionClass);
+	}, themeTransitionDuration);
+}
+
+themeSelector.addEventListener("click", (e) => {
+	e.preventDefault();
+	const elementToShow = getCurrentTheme() === "light" ? sun : moon;
+	const elementToHide = elementToShow === sun ? moon : sun;
+	elementToHide.classList.add("invisible", HIDDEN_CLASS);
+	elementToShow.classList.remove(HIDDEN_CLASS);
+	setTimeout(() => {
+		elementToShow.classList.remove("invisible");
+	}, 200);
+	startThemeTransition();
+	requestAnimationFrame(() => {
+		requestAnimationFrame(() => handleSwitchColorTheme());
+	});
+});
+
+new MutationObserver(syncThemeIcons).observe(html, {
+	attributes: true,
+	attributeFilter: ["data-theme"],
+});
+syncThemeIcons();
 
 /**
  * Creates the object used to update the settings
