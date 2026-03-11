@@ -16,18 +16,6 @@ Please remember that this project is entirely funded by **the support of its use
 
 # v2.2.3
 
-<<<<<<< codex/138-usage-days-prompts
-
-## 🛠 Changed
-
-### Salesforce
-
-1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
-
-## 🧪 Tests
-
-1. # Added test for new review / sponsor logic
-
 ## 🚀 Added
 
 1. Added `data_collection_permissions` for Firefox (#137) which made us bump its min-version to 140
@@ -36,9 +24,14 @@ Please remember that this project is entirely funded by **the support of its use
 
 ### Salesforce
 
+1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
 1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
 
->>>>>>> stag
+## 🧪 Tests
+
+1. Added test for new review / sponsor logic
+2. Added tests for analytics
+
 
 # v2.2.0
 
