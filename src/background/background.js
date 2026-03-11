@@ -21,6 +21,7 @@ import {
 	NO_RELEASE_NOTES,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
+	PERM_CHECK,
 	PREVENT_DEFAULT_OVERRIDE,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
@@ -424,6 +425,12 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
 	callback(requestedCommands);
 }
 
+async function bg_isPermissionGranted(contains, callback) {
+	const response = await BROWSER.permissions.contains(contains);
+	callback?.(response);
+	return response;
+}
+
 /**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
  * Also handles theme updates and tab-related messages.
@@ -483,6 +490,9 @@ function listenToExtensionMessages() {
 				break;
 			case "get-commands":
 				bg_getCommandLinks(request.commands, sendResponse);
+				break;
+			case PERM_CHECK:
+				bg_isPermissionGranted(request.contains, sendResponse);
 				break;
 			default:
 				if (!["import"].includes(request.what)) {
@@ -657,6 +667,7 @@ function setExtensionBrowserListeners() {
 	);
 	// when the extension is installed / updated
 	BROWSER.runtime.onInstalled.addListener(async (details) => {
+		if (detail.temporary) return; // skip during development
 		checkAddRemoveContextMenus("installed");
 		if (details.reason === "update") {
 			// the extension has been updated

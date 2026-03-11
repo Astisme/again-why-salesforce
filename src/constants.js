@@ -175,3 +175,4 @@ export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 export const WHAT_EXPORT_FROM_BG = "export-bg";
 export const DO_NOT_REQUEST_FRAME_PERMISSION = "noPerm";
 export const HIDDEN_CLASS = "hidden";
+export const PERM_CHECK = "check-permission-granted";
