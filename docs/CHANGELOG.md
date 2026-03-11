@@ -24,7 +24,13 @@ Please remember that this project is entirely funded by **the support of its use
 
 ### Salesforce
 
+1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
 1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
+
+## 🧪 Tests
+
+1. Added test for new review / sponsor logic
+2. Added tests for analytics
 
 # v2.2.0
 
