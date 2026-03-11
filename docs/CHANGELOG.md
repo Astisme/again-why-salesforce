@@ -17,9 +17,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ## 🛠 Changed
 
 ### Salesforce
+
 1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
 
 ## 🧪 Tests
+
 1. Added test for new review / sponsor logic
 
 # v2.2.0
