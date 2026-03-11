@@ -12,7 +12,7 @@ import { getSettings, sendExtensionMessage } from "/functions.js";
 /**
  * Determines whether the analytics beacon has already been sent today.
  *
- * @param {{ date?: string } | null | undefined} analyticsSetting - The current analytics setting.
+ * @param {string | undefined} date - the date of the last time a ping was sent
  * @return {boolean} Whether the analytics beacon has already been sent today.
  */
 function hasSentAnalyticsToday(date) {
@@ -27,6 +27,7 @@ function hasSentAnalyticsToday(date) {
  * Persists analytics settings without waiting for storage to finish.
  *
  * @param {{ id: string, enabled?: boolean, date?: string }} setting - The setting payload to store.
+ * @return {Promise} the same from sendExtensionMessage
  */
 function syncAnalyticsSetting(setting) {
 	return sendExtensionMessage({

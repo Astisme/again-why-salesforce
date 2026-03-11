@@ -425,6 +425,12 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
 	callback(requestedCommands);
 }
 
+/**
+ * Checks whether the object passed as contains is contained in the granted permissions
+ * @param {Object} contains - the permission object to be checked
+ * @param {function} callback - the function to call to send the response back
+ * @return {boolean} the response from the API
+ */
 async function bg_isPermissionGranted(contains, callback) {
 	const response = await BROWSER.permissions.contains(contains);
 	callback?.(response);
