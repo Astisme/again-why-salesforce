@@ -12,6 +12,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ## 🧪 Tests
 -->
 
+# v2.2.3
+
+## 🛠 Changed
+
+### Salesforce
+1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
+
+## 🧪 Tests
+1. Added test for new review / sponsor logic
+
 # v2.2.0
 
 This release represents the turning point with which we run away from "Why Salesforce" as we've addressed the most central bit of the extension: **Tab Management**.
