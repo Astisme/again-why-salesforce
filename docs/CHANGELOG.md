@@ -32,7 +32,6 @@ Please remember that this project is entirely funded by **the support of its use
 1. Added test for new review / sponsor logic
 2. Added tests for analytics
 
-
 # v2.2.0
 
 This release represents the turning point with which we run away from "Why Salesforce" as we've addressed the most central bit of the extension: **Tab Management**.
