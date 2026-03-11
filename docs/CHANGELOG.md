@@ -17,6 +17,7 @@ Please remember that this project is entirely funded by **the support of its use
 # v2.2.3
 
 <<<<<<< codex/138-usage-days-prompts
+
 ## 🛠 Changed
 
 ### Salesforce
@@ -25,8 +26,8 @@ Please remember that this project is entirely funded by **the support of its use
 
 ## 🧪 Tests
 
-1. Added test for new review / sponsor logic
-=======
+1. # Added test for new review / sponsor logic
+
 ## 🚀 Added
 
 1. Added `data_collection_permissions` for Firefox (#137) which made us bump its min-version to 140
@@ -36,6 +37,7 @@ Please remember that this project is entirely funded by **the support of its use
 ### Salesforce
 
 1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
+
 >>>>>>> stag
 
 # v2.2.0
