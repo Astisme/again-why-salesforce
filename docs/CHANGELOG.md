@@ -3,6 +3,8 @@
 All notable changes to this project are documented here.\
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
 
+Please remember that this project is entirely funded by **the support of its users**; if you'd like to send a tip, [click here](https://alfredoit.dev/en/sponsor?email=againwhysalesforce@duck.com).
+
 <!--
 # Next release
 ## 🚀 Added
@@ -14,6 +16,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 # v2.2.3
 
+<<<<<<< codex/138-usage-days-prompts
 ## 🛠 Changed
 
 ### Salesforce
@@ -23,6 +26,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ## 🧪 Tests
 
 1. Added test for new review / sponsor logic
+=======
+## 🚀 Added
+
+1. Added `data_collection_permissions` for Firefox (#137) which made us bump its min-version to 140
+
+## 🛠 Changed
+
+### Salesforce
+
+1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
+>>>>>>> stag
 
 # v2.2.0
 
