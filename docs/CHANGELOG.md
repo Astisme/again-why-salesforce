@@ -26,7 +26,6 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
 
-
 # v2.2.0
 
 This release represents the turning point with which we run away from "Why Salesforce" as we've addressed the most central bit of the extension: **Tab Management**.

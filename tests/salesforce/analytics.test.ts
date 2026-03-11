@@ -1,8 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import {
-	assertEquals,
-	assertStringIncludes,
-} from "@std/testing/asserts";
+import { assertEquals, assertStringIncludes } from "@std/testing/asserts";
 
 const PREVENT_ANALYTICS = "prevent_analytics";
 const QUEUE_ANALYTICS = "https://queue.simpleanalyticscdn.com";

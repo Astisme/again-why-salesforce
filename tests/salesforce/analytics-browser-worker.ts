@@ -90,7 +90,10 @@ function installRuntime({
 	const originalSendMessage = runtime.sendMessage.bind(runtime);
 	const messages: any[] = [];
 
-	runtime.sendMessage = (message: any, callback?: (response?: any) => void) => {
+	runtime.sendMessage = (
+		message: any,
+		callback?: (response?: any) => void,
+	) => {
 		messages.push(structuredClone(message));
 		if (message.what === PERM_CHECK) {
 			delete runtime.lastError;
@@ -99,7 +102,10 @@ function installRuntime({
 				callback?.(undefined);
 				return;
 			}
-			if (message.contains?.data_collection?.[0] !== TECHNICAL_AND_INTERACTION) {
+			if (
+				message.contains?.data_collection?.[0] !==
+					TECHNICAL_AND_INTERACTION
+			) {
 				runtime.lastError = new Error("Unexpected permission payload");
 				callback?.(undefined);
 				return;
@@ -135,7 +141,9 @@ function setSettings(settings: any[]) {
  * @return {any} The appended image mock, if present.
  */
 function getBeaconImage(documentMock: any) {
-	return documentMock.head.children.find((child: any) => child.tagName === "img");
+	return documentMock.head.children.find((child: any) =>
+		child.tagName === "img"
+	);
 }
 
 type WorkerStep = {
@@ -153,7 +161,8 @@ type WorkerRequest = {
 };
 
 self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
-	const { browserName, consent, consentError, initialSettings, steps } = event.data;
+	const { browserName, consent, consentError, initialSettings, steps } =
+		event.data;
 
 	Object.defineProperty(globalThis, "navigator", {
 		value: { userAgent: browserName },
