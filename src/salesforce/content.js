@@ -50,7 +50,6 @@ import {
 	WHAT_PAGE_SAVE_TAB,
 	WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP,
 	WHAT_SAVED,
-	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_SHOW_IMPORT,
 	WHAT_SHOW_OPEN_OTHER_ORG,
@@ -65,7 +64,6 @@ import {
 	calculateReadingTime,
 	getInnerElementFieldBySelector,
 	getSettings,
-	sendExtensionMessage,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";

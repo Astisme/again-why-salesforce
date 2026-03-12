@@ -22,7 +22,7 @@
 		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
 		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom.ts --allow-env ./tests/components/",
 		"test-sf": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --allow-read tests/salesforce/*.test.ts",
-    
+
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",

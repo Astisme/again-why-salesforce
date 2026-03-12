@@ -9,7 +9,10 @@ import { Window } from "happydom";
 /**
  * Filesystem path to the tutorial module under test.
  */
-const TUTORIAL_PATH = new URL("../../src/salesforce/tutorial.js", import.meta.url);
+const TUTORIAL_PATH = new URL(
+	"../../src/salesforce/tutorial.js",
+	import.meta.url,
+);
 /**
  * Baseline Salesforce Setup URL used to initialize the DOM harness.
  */
@@ -55,7 +58,9 @@ type TutorialDeps = {
 	constants: Record<string, string>;
 	functions: {
 		performLightningRedirect: (url: string) => void;
-		sendExtensionMessage: (message: Record<string, unknown>) => Promise<unknown>;
+		sendExtensionMessage: (
+			message: Record<string, unknown>,
+		) => Promise<unknown>;
 	};
 	ensureTranslatorAvailability: () => Promise<Translator>;
 	Tab: {
@@ -144,7 +149,9 @@ async function waitFor(predicate: () => boolean, timeoutMs = 1000) {
 function stripImport(source: string, fileName: string) {
 	return source.replace(
 		new RegExp(
-			String.raw`import[\s\S]*?from\s*"${fileName.replaceAll("/", "\\/")}";\n`,
+			String.raw`import[\s\S]*?from\s*"${
+				fileName.replaceAll("/", "\\/")
+			}";\n`,
 		),
 		"",
 	);
@@ -159,17 +166,19 @@ function stripImport(source: string, fileName: string) {
 async function loadTutorialModule(deps: TutorialDeps) {
 	let source = await Deno.readTextFile(TUTORIAL_PATH);
 	source = source.replace(`"use strict";\n`, "");
-	for (const fileName of [
-		"/constants.js",
-		"/functions.js",
-		"/translator.js",
-		"/tab.js",
-		"./content.js",
-		"./favourite-manager.js",
-		"./generator.js",
-		"../tabContainer.js",
-		"./manageTabs.js",
-	]) {
+	for (
+		const fileName of [
+			"/constants.js",
+			"/functions.js",
+			"/translator.js",
+			"/tab.js",
+			"./content.js",
+			"./favourite-manager.js",
+			"./generator.js",
+			"../tabContainer.js",
+			"./manageTabs.js",
+		]
+	) {
 		source = stripImport(source, fileName);
 	}
 	const prelude = `
@@ -217,7 +226,9 @@ const { handleActionButtonClick } = __deps.manageTabs;
 	);
 
 	try {
-		(globalThis as typeof globalThis & { __tutorialTestDeps?: TutorialDeps })
+		(globalThis as typeof globalThis & {
+			__tutorialTestDeps?: TutorialDeps;
+		})
 			.__tutorialTestDeps = deps;
 		return await import(`${moduleUrl}#${crypto.randomUUID()}`);
 	} finally {
@@ -281,26 +292,31 @@ async function advanceCurrentStep(tutorial: TutorialDriver) {
 function installDom(url = DEFAULT_URL) {
 	const window = new Window({ url });
 	const previousGlobals = new Map<string, unknown>();
-	for (const [name, value] of Object.entries({
-		window,
-		document: window.document,
-		location: window.location,
-		history: window.history,
-		navigator: window.navigator,
-		HTMLElement: window.HTMLElement,
-		Element: window.Element,
-		Node: window.Node,
-		Event: window.Event,
-		CustomEvent: window.CustomEvent,
-		MutationObserver: window.MutationObserver,
-		HTMLCanvasElement: window.HTMLCanvasElement,
-		HTMLInputElement: window.HTMLInputElement,
-		getComputedStyle: window.getComputedStyle.bind(window),
-		requestAnimationFrame: window.requestAnimationFrame.bind(window),
-		cancelAnimationFrame: window.cancelAnimationFrame.bind(window),
-		performance: window.performance,
-	})) {
-		previousGlobals.set(name, (globalThis as Record<string, unknown>)[name]);
+	for (
+		const [name, value] of Object.entries({
+			window,
+			document: window.document,
+			location: window.location,
+			history: window.history,
+			navigator: window.navigator,
+			HTMLElement: window.HTMLElement,
+			Element: window.Element,
+			Node: window.Node,
+			Event: window.Event,
+			CustomEvent: window.CustomEvent,
+			MutationObserver: window.MutationObserver,
+			HTMLCanvasElement: window.HTMLCanvasElement,
+			HTMLInputElement: window.HTMLInputElement,
+			getComputedStyle: window.getComputedStyle.bind(window),
+			requestAnimationFrame: window.requestAnimationFrame.bind(window),
+			cancelAnimationFrame: window.cancelAnimationFrame.bind(window),
+			performance: window.performance,
+		})
+	) {
+		previousGlobals.set(
+			name,
+			(globalThis as Record<string, unknown>)[name],
+		);
 		setGlobal(name, value);
 	}
 	globalThis.document.body.innerHTML = "";
@@ -330,7 +346,9 @@ function createHarness(options: {
 	const setupTabUl = globalThis.document.createElement("ul");
 	globalThis.document.body.appendChild(setupTabUl);
 	const state = {
-		savedTabUrls: [...(options.savedTabUrls ?? ["SavedOne/home", "SavedTwo/home"])],
+		savedTabUrls: [
+			...(options.savedTabUrls ?? ["SavedOne/home", "SavedTwo/home"]),
+		],
 		pinnedTabsNo: options.pinnedTabsNo ?? 0,
 	};
 
@@ -342,16 +360,14 @@ function createHarness(options: {
 		SALESFORCE_SETUP_HOME_MINI: "SetupOneHome/home",
 		SETUP_LIGHTNING: "/lightning/setup/",
 		TOAST_WARNING: "warning",
-		TUTORIAL_EVENT_ACTION_FAVOURITE:
-			"tutorial:actionFavourite:completed",
+		TUTORIAL_EVENT_ACTION_FAVOURITE: "tutorial:actionFavourite:completed",
 		TUTORIAL_EVENT_ACTION_UNFAVOURITE:
 			"tutorial:actionUnfavourite:completed",
 		TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "tutorial:manageTabs:closed",
 		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL:
 			"tutorial:createManageTabsModal:completed",
 		TUTORIAL_EVENT_PIN_TAB: "tutorial:pinTab:completed",
-		TUTORIAL_EVENT_REORDERED_TABS_TABLE:
-			"tutorial:tableReorder:completed",
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE: "tutorial:tableReorder:completed",
 		TUTORIAL_KEY: "tutorial-progress",
 		WHAT_ADD: "add",
 		WHAT_GET: "get",
@@ -369,7 +385,7 @@ function createHarness(options: {
 		[constants.TUTORIAL_KEY]: options.tutorialProgress ?? null,
 	};
 	const translator: Translator = {
-		translate: async (key) => `translated:${key}`,
+		translate: (key) => `translated:${key}`,
 	};
 
 	/**
@@ -476,7 +492,8 @@ function createHarness(options: {
 	 * @return Root modal element.
 	 */
 	function createManageTabsModal(rows = state.savedTabUrls.length) {
-		globalThis.document.getElementById("again-why-salesforce-modal")?.remove();
+		globalThis.document.getElementById("again-why-salesforce-modal")
+			?.remove();
 		const modal = globalThis.document.createElement("div");
 		modal.id = "again-why-salesforce-modal";
 		const table = globalThis.document.createElement("table");
@@ -526,12 +543,16 @@ function createHarness(options: {
 			}
 			case constants.TUTORIAL_EVENT_ACTION_UNFAVOURITE: {
 				const miniUrl = currentMiniUrl();
-				state.savedTabUrls = state.savedTabUrls.filter((url) => url !== miniUrl);
+				state.savedTabUrls = state.savedTabUrls.filter((url) =>
+					url !== miniUrl
+				);
 				renderSetupTabs();
 				break;
 			}
 		}
-		globalThis.document.dispatchEvent(new globalThis.CustomEvent(eventName));
+		globalThis.document.dispatchEvent(
+			new globalThis.CustomEvent(eventName),
+		);
 	}
 
 	/**
@@ -556,7 +577,7 @@ function createHarness(options: {
 				const miniUrl = url.replace(/^\/lightning\/setup\//, "");
 				navigateTo(miniUrl);
 			},
-			sendExtensionMessage: async (message) => {
+			sendExtensionMessage: (message) => {
 				records.messages.push(message);
 				switch (message.what) {
 					case constants.WHAT_GET_COMMANDS:
@@ -571,7 +592,7 @@ function createHarness(options: {
 				}
 			},
 		},
-		ensureTranslatorAvailability: async () => translator,
+		ensureTranslatorAvailability: () => translator,
 		Tab: {
 			minifyURL: (url) =>
 				url.replace(/^https?:\/\/[^/]+\/lightning\/setup\//, ""),
@@ -591,13 +612,13 @@ function createHarness(options: {
 		},
 		favouriteManager: {
 			FAVOURITE_BUTTON_ID: "again-why-salesforce-star",
-			showFavouriteButton: async () => {
+			showFavouriteButton: () => {
 				ensureVisibleFavouriteButton();
 			},
 		},
 		generator: {
 			MODAL_ID: "again-why-salesforce-modal",
-			generateTutorialElements: async () => {
+			generateTutorialElements: () => {
 				const overlay = globalThis.document.createElement("div");
 				const messageBox = globalThis.document.createElement("div");
 				messageBox.className = "tut-v7";
@@ -623,7 +644,7 @@ function createHarness(options: {
 			},
 		},
 		tabContainer: {
-			ensureAllTabsAvailability: async () => {
+			ensureAllTabsAvailability: () => {
 				const allTabs = state.savedTabUrls.map((url) => ({ url }));
 				(allTabs as Array<{ url: string }> & Record<string, number>)[
 					"pinnedTabsNo"
@@ -674,7 +695,9 @@ Deno.test("checkTutorial starts the tutorial without a browser", async () => {
 		await tutorialModule.checkTutorial();
 		await harness.waitForMessage("tutorial_restart");
 
-		assertEquals(harness.records.redirects, ["/lightning/setup/SetupOneHome/home"]);
+		assertEquals(harness.records.redirects, [
+			"/lightning/setup/SetupOneHome/home",
+		]);
 		assertExists(globalThis.document.querySelector(".tut-v7"));
 		assertEquals(
 			harness.records.latestUi?.segments.textContent,
@@ -711,14 +734,19 @@ Deno.test("executeStep advances on tutorial custom events", async () => {
 
 		await tutorial.executeStep({
 			message: "tutorial_add_favourite",
-			element: async () => highlighted,
+			element: () => highlighted,
 			action: "highlight",
 			waitFor: "event",
-			awaitsCustomEvent: harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
+			awaitsCustomEvent:
+				harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
 		});
 
 		assert(highlighted.classList.contains("awsf-tutorial-highlight"));
-		assert(tutorial.btnsParent.classList.contains(harness.constants.HIDDEN_CLASS));
+		assert(
+			tutorial.btnsParent.classList.contains(
+				harness.constants.HIDDEN_CLASS,
+			),
+		);
 
 		harness.dispatchTutorialEvent(
 			harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
@@ -749,13 +777,17 @@ Deno.test("executeStep listens for Lightning navigation without a browser", asyn
 
 		await tutorial.executeStep({
 			message: "tutorial_click_highlighted_tab",
-			element: async () => target,
+			element: () => target,
 			action: "highlight",
 			waitFor: "redirect",
 		});
 
 		assert(target.classList.contains("awsf-tutorial-highlight"));
-		assert(tutorial.btnsParent.classList.contains(harness.constants.HIDDEN_CLASS));
+		assert(
+			tutorial.btnsParent.classList.contains(
+				harness.constants.HIDDEN_CLASS,
+			),
+		);
 
 		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
 		await flush();
@@ -834,15 +866,23 @@ Deno.test("tutorial runs end to end and persists completion without a browser", 
 
 		await advanceCurrentStep(tutorial);
 		await harness.waitForMessage("tutorial_end");
-		assertEquals(harness.records.latestUi?.confirmBtn.textContent, "translated:close");
+		assertEquals(
+			harness.records.latestUi?.confirmBtn.textContent,
+			"translated:close",
+		);
 
 		await advanceCurrentStep(tutorial);
 		await waitFor(() => !tutorial.isActive);
 
-		assertEquals(harness.storage["tutorial-progress"], tutorial.steps.length);
+		assertEquals(
+			harness.storage["tutorial-progress"],
+			tutorial.steps.length,
+		);
 		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
 		assert(
-			harness.records.redirects.includes("/lightning/setup/PermSets/home"),
+			harness.records.redirects.includes(
+				"/lightning/setup/PermSets/home",
+			),
 		);
 		assertEquals(harness.state.pinnedTabsNo, 1);
 	} finally {
@@ -900,7 +940,7 @@ Deno.test("executeStep resets to the nearest starting block when a required elem
 
 		await tutorial.executeStep({
 			message: "missing_element_step",
-			element: async () => null,
+			element: () => null,
 		});
 
 		assertEquals(harness.records.toasts, [{
@@ -968,7 +1008,7 @@ Deno.test("showMessage appends link and shortcut only when they are not already 
 		const tutorial = new tutorialModule.Tutorial();
 		await tutorial.createOverlay();
 		tutorial.translator = {
-			translate: async (key) => {
+			translate: (key) => {
 				if (key === "already_complete") {
 					return "Message with https://docs.test and Shortcut: Alt+K";
 				}
@@ -986,7 +1026,9 @@ Deno.test("showMessage appends link and shortcut only when they are not already 
 			tutorial.segments.textContent,
 			"Base message\n\nhttps://docs.test\n\nShortcut: Alt+K",
 		);
-		assert(tutorial.spinner.classList.contains(harness.constants.HIDDEN_CLASS));
+		assert(
+			tutorial.spinner.classList.contains(harness.constants.HIDDEN_CLASS),
+		);
 
 		await tutorial.showMessage({
 			message: "already_complete",
@@ -1013,8 +1055,8 @@ Deno.test("getElementNowOrLater creates a fake element after enough retries", as
 		tutorial.retryCount = 5;
 
 		const result = await tutorial.getElementNowOrLater({
-			element: async () => null,
-			fakeElement: async () => fakeEl,
+			element: () => null,
+			fakeElement: () => fakeEl,
 		}, () => {
 			callbackCalls++;
 		});
@@ -1035,21 +1077,27 @@ Deno.test("getElementNowOrLater schedules a retry when the element is still miss
 		const tutorialModule = await harness.load();
 		const tutorial = new tutorialModule.Tutorial();
 		const scheduled = [] as Array<{ delay: number; callback: () => void }>;
-		setGlobal("setTimeout", ((callback: () => void, delay: number) => {
-			scheduled.push({ delay, callback });
-			return 1;
-		}) as typeof setTimeout);
+		setGlobal(
+			"setTimeout",
+			((callback: () => void, delay: number) => {
+				scheduled.push({ delay, callback });
+				return 1;
+			}) as typeof setTimeout,
+		);
 
 		let callbackCalls = 0;
 		const step = {
-			element: async () => null,
-			fakeElement: async () => null,
+			element: () => null,
+			fakeElement: () => null,
 		};
 
-		const result = await tutorial.getElementNowOrLater(step, (receivedStep) => {
-			assertEquals(receivedStep, step);
-			callbackCalls++;
-		});
+		const result = await tutorial.getElementNowOrLater(
+			step,
+			(receivedStep) => {
+				assertEquals(receivedStep, step);
+				callbackCalls++;
+			},
+		);
 
 		assertEquals(result, undefined);
 		assertEquals(tutorial.retryCount, 1);

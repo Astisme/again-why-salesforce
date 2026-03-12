@@ -7,7 +7,7 @@ import {
 	ISFIREFOX,
 	ISSAFARI,
 } from "/constants.js";
-import { injectStyle, getSettings } from "/functions.js";
+import { getSettings, injectStyle } from "/functions.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
