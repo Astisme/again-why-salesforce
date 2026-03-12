@@ -18,10 +18,9 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		localStorage.clear();
 	};
 
-	// deno-lint-ignore require-await
 	await t.step(
 		"renders both theme buttons and shows the dark toggle in light mode",
-		async () => {
+		() => {
 			restoreGlobals();
 			globalThis.MutationObserver = class {
 				observe() {}
@@ -45,10 +44,9 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		},
 	);
 
-	// deno-lint-ignore require-await
 	await t.step(
 		"dispatches the before-theme-toggle event and swaps visible buttons on click",
-		async () => {
+		() => {
 			restoreGlobals();
 			globalThis.MutationObserver = class {
 				observe() {}
