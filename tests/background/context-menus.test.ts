@@ -6,13 +6,17 @@ import {
 } from "@std/testing/asserts";
 import {
 	checkAddRemoveContextMenus,
-	getIntervalCxm,
 	refreshContextMenus,
+	resetContextMenuStateForTests,
 } from "/background/context-menus.js";
 import { BROWSER, CMD_SAVE_AS_TAB, CXM_PAGE_SAVE_TAB } from "/constants.js";
 
-clearInterval(getIntervalCxm());
-
+/**
+ * Sets the active mocked browser tab used by the background tests.
+ *
+ * @param {string} url - The URL that should be treated as the active tab.
+ * @return {Promise<void>}
+ */
 async function setActiveTab(url: string) {
 	BROWSER.tabs.setMockBrowserTabs([{
 		id: 0,
@@ -28,20 +32,17 @@ async function setActiveTab(url: string) {
 }
 
 Deno.test({
-	name: "should create and notify when URL matches pattern",
+	name: "should create and notify without depending on the active tab",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
 		let called = false;
-		await setActiveTab(
-			"https://mock.my.salesforce-setup.com/lightning/setup/mock",
-		);
+		await setActiveTab("https://mock1.url");
 		await checkAddRemoveContextMenus("testAction", () => {
 			called = true;
 		});
 		assert(called, "the callback should be called");
-		await setActiveTab("https://mock1.url");
-		await checkAddRemoveContextMenus("cleanup");
+		assert(BROWSER.contextMenus._contextMenus.length > 0);
 	},
 });
 
@@ -50,9 +51,7 @@ Deno.test({
 	sanitizeOps: false,
 	sanitizeResources: false,
 	fn: async () => {
-		await setActiveTab(
-			"https://mock.my.salesforce-setup.com/lightning/setup/mock",
-		);
+		await setActiveTab("https://mock1.url");
 		BROWSER.commands.setMockCommands([{
 			name: CMD_SAVE_AS_TAB,
 			shortcut: "Alt+Shift+P",
@@ -84,15 +83,38 @@ Deno.test({
 			).length,
 			1,
 		);
+	},
+});
 
-		await setActiveTab("https://mock1.url");
-		await checkAddRemoveContextMenus("cleanup");
-		assertEquals(BROWSER.contextMenus._contextMenus.length, 0);
+Deno.test({
+	name: "should replace stale browser menu entries before creating new ones",
+	sanitizeOps: false,
+	sanitizeResources: false,
+	fn: async () => {
+		await setActiveTab(
+			"https://mock.my.salesforce-setup.com/lightning/setup/mock",
+		);
+		BROWSER.contextMenus._contextMenus.push({
+			id: CXM_PAGE_SAVE_TAB,
+			title: "stale",
+		});
+		BROWSER.commands.setMockCommands([{
+			name: CMD_SAVE_AS_TAB,
+			shortcut: "Alt+Shift+P",
+		}]);
+
+		await checkAddRemoveContextMenus("create");
+
+		const matchingMenus = BROWSER.contextMenus._contextMenus.filter((menu) =>
+			menu.id === CXM_PAGE_SAVE_TAB
+		);
+		assertEquals(matchingMenus.length, 1);
+		assertStringIncludes(matchingMenus[0].title, "(Alt+Shift+P)");
 	},
 });
 
 Deno.test.afterEach(async () => {
 	await setActiveTab("https://mock1.url");
-	await checkAddRemoveContextMenus("cleanup");
-	clearInterval(getIntervalCxm());
+	await BROWSER.contextMenus.removeAll();
+	resetContextMenuStateForTests();
 });
