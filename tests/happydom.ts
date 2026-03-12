@@ -3,9 +3,8 @@ const window = new Window();
 globalThis.window = window;
 globalThis.document = window.document;
 globalThis.HTMLElement = window.HTMLElement;
-globalThis.customElements = {
-	define: () => {},
-};
+globalThis.CustomEvent = window.CustomEvent;
+globalThis.customElements = window.customElements;
 
 export function createMockElement() {
 	return {

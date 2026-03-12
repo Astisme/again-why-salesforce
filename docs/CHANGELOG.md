@@ -12,6 +12,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ## 🧪 Tests
 -->
 
+# v2.2.3
+
+## 🚀 Added
+
+### Settings
+1. Added theme change in settings (light/dark) which syncs with the popup (#129)
+
+### Components
+1. Created new component for theme handling
+
+## 🧪 Tests
+1. Added tests for theme change behavior
+
 # v2.2.0
 
 This release represents the turning point with which we run away from "Why Salesforce" as we've addressed the most central bit of the extension: **Tab Management**.

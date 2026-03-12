@@ -224,6 +224,7 @@ export const mockBrowser = {
 					break;
 				case "echo":
 				case "warning":
+				case "theme":
 					response = message.echo;
 					break;
 				default:

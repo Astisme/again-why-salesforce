@@ -87,27 +87,6 @@ ul.settings {
 	}
 }
 
-div#theme-selector {
-	display: flex;
-	align-items: center;
-
-	& > a > svg {
-		height: 2rem;
-		transition-property: fill, stroke, color, opacity;
-		transition-duration: var(--transition-duration);
-		transition-timing-function: var(--transition-timing-function);
-
-		& .primary {
-			fill: none;
-			stroke: var(--color);
-		}
-
-		& .secondary {
-			fill: var(--theme-fill);
-		}
-	}
-}
-
 .dual-listbox-container {
 	display: flex;
 	gap: 10px;
