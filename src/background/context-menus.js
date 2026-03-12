@@ -70,6 +70,8 @@ let link_cmd_open_settings = null;
 let link_cmd_open_other_org = null;
 let link_cmd_import = null;
 let link_cmd_export_all = null;
+// deno-lint-ignore no-var
+var pendingContextMenuOperation = null;
 
 /**
  * Asynchronously retrieves command shortcut links and updates corresponding variables.
@@ -456,6 +458,21 @@ async function createMenuItems() {
 	resetLinks();
 }
 
+function isSupportedContextMenuUrl(browserTabUrl) {
+	return browserTabUrl != null &&
+		CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp));
+}
+
+function queueContextMenuOperation(operation) {
+	if (pendingContextMenuOperation == null) {
+		pendingContextMenuOperation = Promise.resolve();
+	}
+	pendingContextMenuOperation = pendingContextMenuOperation
+		.catch(() => undefined)
+		.then(operation);
+	return pendingContextMenuOperation;
+}
+
 /**
  * Removes all existing context menu items.
  */
@@ -481,49 +498,76 @@ export function getIntervalCxm() {
 	return intervalCxm;
 }
 /**
- * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
- * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
- * The function also triggers a notification if the context menu is updated.
+ * Ensures context menu items exist when the current browser tab matches the
+ * supported Setup URL patterns and removes them when it does not.
  *
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
  * @param {function} [callback=null] - A callback to call at the end of the execution
  * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
  */
 export async function checkAddRemoveContextMenus(what, callback = null) {
-	const isFirstLaunch = intervalCxm == null;
-	if (isFirstLaunch) {
-		// Start periodic check
-		intervalCxm = setInterval(async () => {
-			if (!areMenuItemsVisible) {
-				await checkAddRemoveContextMenus();
+	return queueContextMenuOperation(async () => {
+		const isFirstLaunch = intervalCxm == null;
+		if (isFirstLaunch) {
+			// Start periodic check
+			intervalCxm = setInterval(async () => {
+				if (!areMenuItemsVisible) {
+					await checkAddRemoveContextMenus();
+				}
+			}, 60000);
+		}
+		try {
+			const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+			if (!isSupportedContextMenuUrl(browserTabUrl)) {
+				await removeMenuItems();
+				return;
 			}
-		}, 60000);
-	}
-	try {
-		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (browserTabUrl == null) {
-			return;
-		}
-		if (!isFirstLaunch) {
-			await removeMenuItems();
-		}
-		if (
-			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
-		) {
-			await createMenuItems();
+			if (!areMenuItemsVisible) {
+				await createMenuItems();
+			}
 			bg_notify({ what });
 			if (callback != null) {
 				callback();
 			}
+		} catch (error) {
+			console.trace();
+			if (error != null && error.message !== "") {
+				const translator = await ensureTranslatorAvailability();
+				const msg = await translator.translate("error_cxm_check");
+				console.error(msg, error.message);
+			}
 		}
-	} catch (error) {
-		console.trace();
-		if (error != null && error.message !== "") {
-			const translator = await ensureTranslatorAvailability();
-			const msg = await translator.translate("error_cxm_check");
-			console.error(msg, error.message);
+	});
+}
+
+/**
+ * Rebuilds context menu items so translated labels and command shortcuts stay current.
+ * The rebuild only runs while the current tab supports the extension context menus.
+ *
+ * @param {string} what - A string identifier to specify the action that triggered the context menu refresh.
+ */
+export async function refreshContextMenus(what) {
+	return queueContextMenuOperation(async () => {
+		try {
+			const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+			if (!isSupportedContextMenuUrl(browserTabUrl)) {
+				await removeMenuItems();
+				return;
+			}
+			await removeMenuItems();
+			await createMenuItems();
+			if (what != null) {
+				bg_notify({ what });
+			}
+		} catch (error) {
+			console.trace();
+			if (error != null && error.message !== "") {
+				const translator = await ensureTranslatorAvailability();
+				const msg = await translator.translate("error_cxm_check");
+				console.error(msg, error.message);
+			}
 		}
-	}
+	});
 }
 
 /**
@@ -592,6 +636,6 @@ BROWSER.storage.onChanged.addListener((changes) => {
 		el.id === USER_LANGUAGE
 	);
 	if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
-		checkAddRemoveContextMenus();
+		refreshContextMenus();
 	}
 });
