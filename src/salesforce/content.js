@@ -69,7 +69,7 @@ import {
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
-import { checkInsertAnalytics } from "./analytics.js";
+import { executeOncePerDay } from "./once-a-day.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -1178,7 +1178,7 @@ function main() {
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
 	delayLoadSetupTabs();
-	checkInsertAnalytics();
+	executeOncePerDay();
 }
 
 // queries the currently active tab of the current active window

@@ -6,7 +6,6 @@ import {
 } from "@std/testing/asserts";
 import { createMockElement } from "../happydom.ts";
 import {
-	getReviewSponsorUsageUpdate,
 	showReviewOrSponsor,
 } from "/components/review-sponsor/review-sponsor.js";
 
@@ -111,63 +110,4 @@ Deno.test("show review or sponsor block", async (t) => {
 			assert("click" in sponsorSvg.events);
 		},
 	);
-});
-
-Deno.test("getReviewSponsorUsageUpdate", async (t) => {
-	await t.step(
-		"initializes missing usage tracking at zero on first open",
-		() => {
-			assertEquals(
-				getReviewSponsorUsageUpdate([], "2026-03-11"),
-				{
-					usageDays: 0,
-					set: [
-						{ id: "review_sponsor_usage_days", enabled: 0 },
-						{
-							id: "review_sponsor_last_active_day",
-							enabled: "2026-03-11",
-						},
-					],
-				},
-			);
-		},
-	);
-
-	await t.step("does not increment twice on the same day", () => {
-		assertEquals(
-			getReviewSponsorUsageUpdate([
-				{ id: "review_sponsor_usage_days", enabled: 7 },
-				{
-					id: "review_sponsor_last_active_day",
-					enabled: "2026-03-11",
-				},
-			], "2026-03-11"),
-			{
-				usageDays: 7,
-				set: null,
-			},
-		);
-	});
-
-	await t.step("increments usage days on a new day", () => {
-		assertEquals(
-			getReviewSponsorUsageUpdate([
-				{ id: "review_sponsor_usage_days", enabled: 7 },
-				{
-					id: "review_sponsor_last_active_day",
-					enabled: "2026-03-10",
-				},
-			], "2026-03-11"),
-			{
-				usageDays: 8,
-				set: [
-					{ id: "review_sponsor_usage_days", enabled: 8 },
-					{
-						id: "review_sponsor_last_active_day",
-						enabled: "2026-03-11",
-					},
-				],
-			},
-		);
-	});
 });
