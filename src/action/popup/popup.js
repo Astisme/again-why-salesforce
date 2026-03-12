@@ -18,8 +18,7 @@ import {
 	sendExtensionMessage,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
-
-import { handleSwitchColorTheme } from "../themeHandler.js";
+import "/components/theme-selector/theme-selector.js";
 
 {
 	// Get the current tab. If it's not salesforce setup, redirect the popup
@@ -45,39 +44,6 @@ import { handleSwitchColorTheme } from "../themeHandler.js";
 }
 
 const translator = await ensureTranslatorAvailability();
-
-const html = document.documentElement;
-const sun = document.getElementById("sun");
-const moon = document.getElementById("moon");
-
-/**
- * Initializes the theme SVG elements based on the current theme and updates visibility.
- */
-{
-	const elementToShow = html.dataset.theme === "light" ? moon : sun;
-	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToShow.classList.remove("invisible", HIDDEN_CLASS);
-	elementToHide.classList.add("invisible", HIDDEN_CLASS);
-}
-
-/**
- * Switches the theme and updates the SVG elements accordingly.
- */
-function switchTheme() {
-	const elementToShow = html.dataset.theme === "light" ? sun : moon;
-	const elementToHide = elementToShow === sun ? moon : sun;
-	elementToHide.classList.add("invisible", HIDDEN_CLASS);
-	elementToShow.classList.remove(HIDDEN_CLASS);
-	setTimeout(() => {
-		elementToShow.classList.remove("invisible");
-	}, 200);
-	handleSwitchColorTheme();
-}
-
-document.getElementById("theme-selector").addEventListener(
-	"click",
-	switchTheme,
-);
 
 /**
  * Sends a message that will start the export procedure.

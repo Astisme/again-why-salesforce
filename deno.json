@@ -13,17 +13,16 @@
 	},
 	"lint": {
 		"exclude": [
-			"./tests/salesforce/*"
+			"./tests/salesforce/with-browser/*"
 		]
 	},
 	"tasks": {
-		"test": "deno task test-gen && deno task test-bg && deno task test-cmp",
+		"test": "deno task test-gen && deno task test-bg && deno task test-cmp && deno task test-sf",
 		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
 		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
 		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom.ts --allow-env ./tests/components/",
-		"test-sf": "deno test --no-check --quiet --allow-read ./tests/salesforce/*.test.ts",
-		"start-browser": "deno task dev-chrome && deno run -A ./tests/salesforce/browser-setup.ts",
-		"setup-chrome": "bash ./tests/salesforce/setup-chrome.sh && deno task dev-chrome",
+		"test-sf": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --allow-read tests/salesforce/*.test.ts",
+    
 		"fmt": "deno fmt",
 		"lint": "deno lint",
 		"sort": "deno --allow-read --allow-write bin/sort-locales.ts && git add src/_locales/*/messages.json",

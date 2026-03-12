@@ -18,6 +18,7 @@ import {
 	NO_RELEASE_NOTES,
 	ORG_PINNED_TAB_STYLE_KEY,
 	ORG_TAB_STYLE_KEY,
+	PERM_CHECK,
 	PREVENT_DEFAULT_OVERRIDE,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
@@ -443,6 +444,18 @@ export async function bg_getCommandLinks(commands = null, callback = null) {
 }
 
 /**
+ * Checks whether the object passed as contains is contained in the granted permissions
+ * @param {Object} contains - the permission object to be checked
+ * @param {function} callback - the function to call to send the response back
+ * @return {boolean} the response from the API
+ */
+async function bg_isPermissionGranted(contains, callback) {
+	const response = await BROWSER.permissions.contains(contains);
+	callback?.(response);
+	return response;
+}
+
+/**
  * Listens for incoming messages and processes requests to get, set, or bg_notify about storage changes.
  * Also handles theme updates and tab-related messages.
  *
@@ -502,6 +515,9 @@ function listenToExtensionMessages() {
 				break;
 			case WHAT_GET_COMMANDS:
 				bg_getCommandLinks(request.commands, sendResponse);
+				break;
+			case PERM_CHECK:
+				bg_isPermissionGranted(request.contains, sendResponse);
 				break;
 			default:
 				if (!ALL_WHAT_REASONS.has(request.what)) {
@@ -669,6 +685,7 @@ function setExtensionBrowserListeners() {
 	);
 	// when the extension is installed / updated
 	BROWSER.runtime.onInstalled.addListener(async (details) => {
+		if (detail.temporary) return; // skip during development
 		checkAddRemoveContextMenus(WHAT_INSTALLED);
 		if (details.reason === "update") {
 			// the extension has been updated

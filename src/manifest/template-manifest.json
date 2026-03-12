@@ -77,7 +77,13 @@
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "again@why.salesforce",
-			"strict_min_version": "112.0"
+			"strict_min_version": "140.0",
+			"data_collection_permissions": {
+				"required": [],
+				"optional": [
+					"technicalAndInteraction"
+				]
+			}
 		},
 		"safari": {
 			"strict_min_version": "14.0"
