@@ -1,1929 +1,1161 @@
 import {
-	ensureAuthenticated,
-	launchSalesforceBrowser,
-	openSetupHome,
-} from "./helpers.ts";
+	assert,
+	assertEquals,
+	assertExists,
+	assertThrows,
+} from "@std/testing/asserts";
+import { Window } from "happydom";
 
-const TUTORIAL_BOX_SELECTOR = ".tut-v7";
-const TUTORIAL_CONFIRM_SELECTOR = ".tut-v7-actions button";
-const TUTORIAL_HIGHLIGHT_SELECTOR = ".awsf-tutorial-highlight";
-const STAR_SELECTOR = "#again-why-salesforce-star";
-const SLASHED_STAR_SELECTOR = "#again-why-salesforce-slashed-star";
-const MANAGE_TABS_MODAL_SELECTOR = "#again-why-salesforce-modal";
-const MANAGE_TABS_SAVE_SELECTOR = "#again-why-salesforce-modal-confirm";
-const SORTABLE_TABLE_SELECTOR = "#sortable-table tbody";
-const DEBUG_DIR = "./tests/salesforce/debug";
-const TUTORIAL_STORAGE_KEY = "tutorial-progress";
-const WHAT_GET = "get";
-const WHAT_SET = "set";
-const WHAT_START_TUTORIAL = "start-tutorial";
-const CXM_EMPTY_TABS = "empty-tabs";
-const CXM_PIN_TAB = "pin-tab";
-const CXM_MANAGE_TABS = "manage-tabs";
-const TUTORIAL_EVENT_ACTION_FAVOURITE = "tutorial:actionFavourite:completed";
-const TUTORIAL_EVENT_ACTION_UNFAVOURITE =
-	"tutorial:actionUnfavourite:completed";
-const TUTORIAL_EVENT_PIN_TAB = "tutorial:pinTab:completed";
-const TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL =
-	"tutorial:createManageTabsModal:completed";
-const TUTORIAL_EVENT_REORDERED_TABS_TABLE = "tutorial:tableReorder:completed";
-const TUTORIAL_EVENT_CLOSE_MANAGE_TABS = "tutorial:manageTabs:closed";
-type ContextMenuTarget = {
-	x: number;
-	y: number;
-	tabUrl: string;
-	label: string;
-	url: string;
-	org: string;
+/**
+ * Filesystem path to the tutorial module under test.
+ */
+const TUTORIAL_PATH = new URL("../../src/salesforce/tutorial.js", import.meta.url);
+/**
+ * Baseline Salesforce Setup URL used to initialize the DOM harness.
+ */
+const DEFAULT_URL =
+	"https://acme.my.salesforce-setup.com/lightning/setup/SetupOneHome/home";
+/**
+ * Every fallback tutorial page supported by the production module.
+ */
+const ALL_USABLE_PAGE_URLS = [
+	"ObjectManager/Account/FieldsAndRelationships/view",
+	"ObjectManager/Case/FieldsAndRelationships/view",
+	"ObjectManager/Contact/FieldsAndRelationships/view",
+	"ObjectManager/Opportunity/FieldsAndRelationships/view",
+	"ObjectManager/Lead/FieldsAndRelationships/view",
+	"ObjectManager/Task/FieldsAndRelationships/view",
+	"ObjectManager/Campaign/FieldsAndRelationships/view",
+	"ObjectManager/Product2/FieldsAndRelationships/view",
+	"ObjectManager/Pricebook2/FieldsAndRelationships/view",
+	"ObjectManager/Asset/FieldsAndRelationships/view",
+	"PermSets/home",
+	"OrgLoginHistory/home",
+	"SecuritySession/home",
+	"SecurityEvents/home",
+	"SecuritySharing/home",
+	"FieldAccessibility/home",
+	"CommunicationTemplatesEmail/home",
+	"ReportUI/home",
+	"ConnectedApplication/home",
+	"CompanyProfileInfo/home",
+];
+
+/**
+ * Minimal translation service surface required by the tutorial.
+ */
+type Translator = {
+	translate: (key: string) => Promise<string>;
 };
-let cachedExtensionPage = null;
 
-function isTransientPageError(error: unknown) {
-	const message = error instanceof Error ? error.message : String(error);
-	return message.includes("Execution context was destroyed") ||
-		message.includes("Cannot find context with specified id") ||
-		message.includes("frame got detached") ||
-		message.includes("detached Frame") ||
-		message.includes("Attempted to use detached Frame") ||
-		message.includes("Target closed") ||
-		message.includes("Protocol error: Connection closed");
-}
-
-async function sleep(ms: number) {
-	return await new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function attachDialogHandler(page, dialogAction: "accept" | "dismiss") {
-	page.removeAllListeners("dialog");
-	page.on("dialog", async (dialog) => {
-		if (dialogAction === "accept") {
-			await dialog.accept().catch(() => null);
-			return;
-		}
-		await dialog.dismiss().catch(() => null);
-	});
-}
-
-async function installDialogHandlers(
-	browser,
-	dialogAction: "accept" | "dismiss",
-) {
-	for (const page of await browser.pages()) {
-		attachDialogHandler(page, dialogAction);
-	}
-	browser.on("targetcreated", async (target) => {
-		if (target.type() !== "page") {
-			return;
-		}
-		const page = await target.page();
-		if (page != null) {
-			attachDialogHandler(page, dialogAction);
-		}
-	});
-}
-
-function isExtensionUrl(url: string) {
-	return url.startsWith("chrome-extension://");
-}
-
-async function getExtensionId(browser) {
-	for (let attempt = 1; attempt <= 30; attempt++) {
-		for (const target of browser.targets()) {
-			const url = target.url();
-			if (!isExtensionUrl(url)) {
-				continue;
-			}
-			try {
-				return new URL(url).host;
-			} catch {
-				// try again below
-			}
-		}
-		await sleep(500);
-	}
-	throw new Error("Unable to determine extension ID from browser targets");
-}
-
-async function getUsableExtensionPage(browser) {
-	const extensionId = await getExtensionId(browser);
-	const extensionPrefix = `chrome-extension://${extensionId}/`;
-	const optionsUrl = `${extensionPrefix}settings/options.html`;
-	const candidates = [];
-
-	if (
-		cachedExtensionPage != null &&
-		!cachedExtensionPage.isClosed() &&
-		cachedExtensionPage.url().startsWith(extensionPrefix)
-	) {
-		candidates.push(cachedExtensionPage);
-	}
-
-	for (const target of browser.targets()) {
-		if (target.type() !== "page") {
-			continue;
-		}
-		const url = target.url();
-		if (!url.startsWith(extensionPrefix)) {
-			continue;
-		}
-		const page = await target.page();
-		if (page != null && !candidates.includes(page)) {
-			candidates.push(page);
-		}
-	}
-
-	for (const candidate of candidates) {
-		try {
-			await candidate.evaluate(() => ({
-				hasRuntime: typeof globalThis.chrome?.runtime?.sendMessage ===
-					"function",
-				url: location.href,
-			}));
-			cachedExtensionPage = candidate;
-			if (candidate.url() !== optionsUrl) {
-				await candidate.goto(optionsUrl, {
-					waitUntil: "domcontentloaded",
-					timeout: 15000,
-				});
-			}
-			return candidate;
-		} catch {
-			// try other candidates or open a fresh extension page below
-		}
-	}
-
-	const page = await browser.newPage();
-	console.log(`getUsableExtensionPage: opening ${optionsUrl}`);
-	await page.goto(optionsUrl, {
-		waitUntil: "domcontentloaded",
-		timeout: 15000,
-	});
-	attachDialogHandler(page, "accept");
-	await page.waitForFunction(
-		() => typeof globalThis.chrome?.runtime?.sendMessage === "function",
-		{ timeout: 15000 },
-	);
-	cachedExtensionPage = page;
-	return page;
-}
-
-async function evaluateInExtensionPage<T>(
-	browser,
-	label: string,
-	task: (page) => Promise<T>,
-) {
-	for (let attempt = 1; attempt <= 6; attempt++) {
-		try {
-			const extensionPage = await getUsableExtensionPage(browser);
-			return await task(extensionPage);
-		} catch (error) {
-			if (!isTransientPageError(error) || attempt === 6) {
-				throw error;
-			}
-			if (cachedExtensionPage?.isClosed?.() === true) {
-				cachedExtensionPage = null;
-			}
-			const waitMs = 250 * attempt;
-			console.warn(
-				`${label}: transient extension page error on attempt ${attempt}/6, retrying in ${waitMs}ms`,
-			);
-			await sleep(waitMs);
-		}
-	}
-	throw new Error(`${label}: exhausted retries`);
-}
-
-async function sendRuntimeMessageFromExtensionPage(browser, message) {
-	return await evaluateInExtensionPage(
-		browser,
-		"sendRuntimeMessageFromExtensionPage",
-		(page) =>
-			page.evaluate(
-				(request) =>
-					new Promise((resolve) => {
-						const runtime = globalThis.chrome?.runtime;
-						if (runtime?.sendMessage == null) {
-							resolve({
-								ok: false,
-								error:
-									"runtime.sendMessage unavailable in extension page",
-								value: null,
-							});
-							return;
-						}
-						const timeoutId = setTimeout(() => {
-							resolve({
-								ok: false,
-								error:
-									"Timed out waiting for runtime.sendMessage callback",
-								value: null,
-							});
-						}, 15000);
-						runtime.sendMessage(request, (value) => {
-							clearTimeout(timeoutId);
-							resolve({
-								ok: runtime.lastError == null,
-								error: runtime.lastError?.message ?? null,
-								value: value ?? null,
-							});
-						});
-					}),
-				message,
-			),
-	);
-}
-
-async function sendMessageToSalesforceTabFromExtensionPage(
-	browser,
-	salesforceUrl: string,
-	message,
-) {
-	return await evaluateInExtensionPage(
-		browser,
-		"sendMessageToSalesforceTabFromExtensionPage",
-		(page) =>
-			page.evaluate(
-				({ expectedUrl, request }) =>
-					new Promise((resolve) => {
-						const tabs = globalThis.chrome?.tabs;
-						const runtime = globalThis.chrome?.runtime;
-						if (tabs?.query == null || tabs.sendMessage == null) {
-							resolve({
-								ok: false,
-								error: "tabs API unavailable in extension page",
-							});
-							return;
-						}
-						const expected = new URL(expectedUrl);
-						const timeoutId = setTimeout(() => {
-							resolve({
-								ok: false,
-								error:
-									"Timed out waiting for tabs.sendMessage callback",
-							});
-						}, 15000);
-						tabs.query({}, (allTabs) => {
-							const sameHostSetup = (tabUrl?: string) => {
-								if (tabUrl == null) {
-									return false;
-								}
-								try {
-									const url = new URL(tabUrl);
-									return url.host === expected.host &&
-										url.pathname.startsWith(
-											"/lightning/setup/",
-										);
-								} catch {
-									return false;
-								}
-							};
-							const target = allTabs.find((tab) =>
-								tab.url === expectedUrl
-							) ??
-								allTabs.find((tab) =>
-									tab.active === true &&
-									sameHostSetup(tab.url)
-								) ??
-								allTabs.find((tab) =>
-									sameHostSetup(tab.url)
-								);
-							if (target?.id == null) {
-								clearTimeout(timeoutId);
-								resolve({
-									ok: false,
-									error:
-										`No Salesforce tab found for ${expectedUrl}`,
-								});
-								return;
-							}
-							tabs.sendMessage(target.id, request, () => {
-								clearTimeout(timeoutId);
-								resolve({
-									ok: runtime?.lastError == null,
-									error: runtime?.lastError?.message ?? null,
-								});
-							});
-						});
-					}),
-				{ expectedUrl: salesforceUrl, request: message },
-			),
-	);
-}
-
-async function resetTutorialProgressInBrowser(browser) {
-	console.log("resetTutorialProgressInBrowser: start");
-	const response = await sendRuntimeMessageFromExtensionPage(browser, {
-		what: WHAT_SET,
-		key: TUTORIAL_STORAGE_KEY,
-		set: null,
-	});
-	if (response?.ok !== true) {
-		throw new Error(
-			`Failed to reset tutorial progress: ${
-				response?.error ?? "unknown error"
-			}`,
-		);
-	}
-}
-
-async function getTutorialProgressInBrowser(browser) {
-	const response = await sendRuntimeMessageFromExtensionPage(browser, {
-		what: WHAT_GET,
-		key: TUTORIAL_STORAGE_KEY,
-	});
-	if (response?.ok !== true) {
-		throw new Error(
-			`Failed to read tutorial progress: ${
-				response?.error ?? "unknown error"
-			}`,
-		);
-	}
-	return response?.value ?? null;
-}
-
-async function setTutorialProgressInBrowser(browser, progress: number) {
-	const response = await sendRuntimeMessageFromExtensionPage(browser, {
-		what: WHAT_SET,
-		key: TUTORIAL_STORAGE_KEY,
-		set: progress,
-	});
-	if (response?.ok !== true) {
-		throw new Error(
-			`Failed to set tutorial progress: ${
-				response?.error ?? "unknown error"
-			}`,
-		);
-	}
-}
-
-async function startTutorialInBrowser(browser, salesforceUrl: string) {
-	console.log(`startTutorialInBrowser: ${salesforceUrl}`);
-	const resetTabsResponse = await sendMessageToSalesforceTabFromExtensionPage(
-		browser,
-		salesforceUrl,
-		{ what: CXM_EMPTY_TABS },
-	);
-	if (resetTabsResponse?.ok !== true) {
-		throw new Error(
-			`Failed to reset tabs before tutorial: ${
-				resetTabsResponse?.error ?? "unknown error"
-			}`,
-		);
-	}
-	await sleep(600);
-	const startResponse = await sendMessageToSalesforceTabFromExtensionPage(
-		browser,
-		salesforceUrl,
-		{ what: WHAT_START_TUTORIAL },
-	);
-	if (startResponse?.ok !== true) {
-		throw new Error(
-			`Failed to start tutorial: ${
-				startResponse?.error ?? "unknown error"
-			}`,
-		);
-	}
-}
-
-async function openManageTabsInBrowser(browser, salesforceUrl: string) {
-	console.log(`openManageTabsInBrowser: ${salesforceUrl}`);
-	const response = await sendMessageToSalesforceTabFromExtensionPage(
-		browser,
-		salesforceUrl,
-		{ what: CXM_MANAGE_TABS },
-	);
-	if (response?.ok !== true) {
-		throw new Error(
-			`Failed to open manage tabs modal: ${
-				response?.error ?? "unknown error"
-			}`,
-		);
-	}
-}
-
-async function pinTabInBrowser(
-	browser,
-	salesforceUrl: string,
-	message: { tabUrl: string; label: string; url: string; org: string },
-) {
-	console.log(
-		`pinTabInBrowser: ${
-			JSON.stringify({ salesforceUrl, tabUrl: message.tabUrl })
-		}`,
-	);
-	const response = await sendMessageToSalesforceTabFromExtensionPage(
-		browser,
-		salesforceUrl,
-		{
-			what: CXM_PIN_TAB,
-			...message,
-		},
-	);
-	if (response?.ok !== true) {
-		throw new Error(
-			`Failed to pin tab from extension page: ${
-				response?.error ?? "unknown error"
-			}`,
-		);
-	}
-}
-
-async function runWithPageRetries<T>(label: string, task: () => Promise<T>) {
-	for (let attempt = 1; attempt <= 6; attempt++) {
-		try {
-			return await task();
-		} catch (error) {
-			if (!isTransientPageError(error) || attempt === 6) {
-				throw error;
-			}
-			const waitMs = 250 * attempt;
-			console.warn(
-				`${label}: transient page error on attempt ${attempt}/6, retrying in ${waitMs}ms`,
-			);
-			await sleep(waitMs);
-		}
-	}
-	throw new Error(`${label}: exhausted retries`);
-}
-
-async function getUsableSalesforcePage(browser, fallbackPage) {
-	const isSalesforceUrl = (url: string) =>
-		url.includes(".my.salesforce.com") ||
-		url.includes(".my.salesforce-setup.com") ||
-		url.includes(".lightning.force.com");
-	const isBlankPage = (url: string) => url === "about:blank";
-	const isUsable = (candidate) => candidate != null && !candidate.isClosed();
-	const hasLiveContext = async (candidate) => {
-		if (!isUsable(candidate)) {
-			return false;
-		}
-		try {
-			await candidate.evaluate(() => document.readyState);
-			return true;
-		} catch (error) {
-			if (isTransientPageError(error)) {
-				return false;
-			}
-			throw error;
-		}
+/**
+ * Dependency bundle injected into the tutorial module for browserless tests.
+ */
+type TutorialDeps = {
+	constants: Record<string, string>;
+	functions: {
+		performLightningRedirect: (url: string) => void;
+		sendExtensionMessage: (message: Record<string, unknown>) => Promise<unknown>;
 	};
-	let lastCandidate = null;
+	ensureTranslatorAvailability: () => Promise<Translator>;
+	Tab: {
+		minifyURL: (url: string) => string;
+	};
+	content: {
+		getCurrentHref: () => string;
+		getSetupTabUl: () => HTMLUListElement;
+		performActionOnTabs: (
+			action: string,
+			redirectElement: { url: string },
+		) => void;
+		showToast: (message: string, status: string) => void;
+	};
+	favouriteManager: {
+		FAVOURITE_BUTTON_ID: string;
+		showFavouriteButton: () => Promise<void>;
+	};
+	generator: {
+		MODAL_ID: string;
+		generateTutorialElements: () => Promise<Record<string, HTMLElement>>;
+	};
+	tabContainer: {
+		ensureAllTabsAvailability: () => Promise<Array<{ url: string }>>;
+		TabContainer: {
+			keyPinnedTabsNo: string;
+		};
+	};
+	manageTabs: {
+		handleActionButtonClick: () => void;
+	};
+};
 
-	for (let attempt = 1; attempt <= 60; attempt++) {
-		const pages = await browser.pages();
-		const usablePages = [];
-		for (const candidate of pages) {
-			const url = candidate.url();
-			if (url.startsWith("chrome-extension://")) {
-				continue;
-			}
-			if (isUsable(candidate)) {
-				usablePages.push(candidate);
-			}
-		}
-		const preferredSalesforce = usablePages.filter((candidate) =>
-			isSalesforceUrl(candidate.url())
-		);
-		if (preferredSalesforce.length > 0) {
-			lastCandidate = preferredSalesforce[0];
-		}
-		for (const candidate of preferredSalesforce) {
-			if (await hasLiveContext(candidate)) {
-				return candidate;
-			}
-		}
-		if (lastCandidate == null) {
-			lastCandidate = usablePages.find((candidate) =>
-				!isBlankPage(candidate.url())
-			) ??
-				usablePages[0] ??
-				lastCandidate;
-		}
-		for (const candidate of usablePages) {
-			if (
-				!isBlankPage(candidate.url()) && await hasLiveContext(candidate)
-			) {
-				return candidate;
-			}
-		}
-		if (await hasLiveContext(fallbackPage)) {
-			return fallbackPage;
-		}
-		for (const candidate of usablePages) {
-			if (await hasLiveContext(candidate)) {
-				return candidate;
-			}
-		}
-		await sleep(500);
-	}
-	if (lastCandidate != null && !lastCandidate.isClosed()) {
-		try {
-			await lastCandidate.evaluate(() => document.readyState);
-			return lastCandidate;
-		} catch {
-			// try opening a fresh page below
-		}
-	}
-	try {
-		const recoveryPage = await browser.newPage();
-		await openSetupHome(recoveryPage).catch(() => null);
-		await recoveryPage.evaluate(() => document.readyState);
-		return recoveryPage;
-	} catch {
-		// hard failure below
-	}
-	throw new Error("No usable Salesforce page is available");
-}
+/**
+ * Concrete return type for the local tutorial harness factory.
+ */
+type Harness = ReturnType<typeof createHarness>;
+/**
+ * Tutorial UI elements generated by the stubbed modal factory.
+ */
+type TutorialUi = {
+	overlay: HTMLElement;
+	messageBox: HTMLElement;
+	spinner: HTMLElement;
+	segments: HTMLElement;
+	confirmBtn: HTMLElement;
+	btnsParent: HTMLElement;
+};
 
-async function ensureSetupHomeReady(browser, page) {
-	let activePage = page;
-	for (let attempt = 1; attempt <= 6; attempt++) {
-		try {
-			activePage = await getUsableSalesforcePage(browser, activePage);
-			await openSetupHome(activePage);
-			return await getUsableSalesforcePage(browser, activePage);
-		} catch (error) {
-			if (!isTransientPageError(error) || attempt === 6) {
-				throw error;
-			}
-			const waitMs = 300 * attempt;
-			console.warn(
-				`ensureSetupHomeReady: transient navigation error on attempt ${attempt}/6, retrying in ${waitMs}ms`,
-			);
-			await sleep(waitMs);
-			activePage = await browser.newPage();
-		}
-	}
-	throw new Error("ensureSetupHomeReady: exhausted retries");
-}
+/**
+ * Minimal mutable tutorial surface needed to advance a step in tests.
+ */
+type TutorialDriver = {
+	currentStep: number;
+	nextStep: () => Promise<void> | void;
+	steps: Array<{
+		action?: string;
+		onConfirm?: () => void;
+	}>;
+};
 
-async function ensureExtensionRootReady(browser, page) {
-	let activePage = page;
-	for (let attempt = 1; attempt <= 6; attempt++) {
-		try {
-			activePage = await ensureSetupHomeReady(browser, activePage);
-			await activePage.waitForSelector("#again-why-salesforce", {
-				timeout: 15000,
-			});
-			return activePage;
-		} catch (error) {
-			const message = error instanceof Error
-				? error.message
-				: String(error);
-			const canRetry = isTransientPageError(error) ||
-				message.includes("Waiting for selector");
-			if (!canRetry || attempt === 6) {
-				throw error;
-			}
-			const waitMs = 300 * attempt;
-			console.warn(
-				`ensureExtensionRootReady: retrying ${attempt}/6 in ${waitMs}ms (${message})`,
-			);
-			await sleep(waitMs);
-			activePage = await browser.newPage();
+/**
+ * Polls until a condition becomes true or the timeout expires.
+ *
+ * @param predicate Condition checked on each poll.
+ * @param timeoutMs Maximum time to wait in milliseconds.
+ * @return Resolves once the predicate succeeds.
+ */
+async function waitFor(predicate: () => boolean, timeoutMs = 1000) {
+	const startedAt = Date.now();
+	while (!predicate()) {
+		if (Date.now() - startedAt > timeoutMs) {
+			throw new Error("Timed out waiting for test condition");
 		}
-	}
-	throw new Error("ensureExtensionRootReady: exhausted retries");
-}
-
-async function closeExtraSalesforcePages(browser, keepPage) {
-	for (const candidate of await browser.pages()) {
-		if (
-			candidate === keepPage ||
-			candidate.isClosed() ||
-			candidate.url().startsWith("chrome-extension://")
-		) {
-			continue;
-		}
-		await candidate.close().catch(() => null);
+		await new Promise((resolve) => setTimeout(resolve, 10));
 	}
 }
 
-async function logBrowserPages(browser, label: string) {
-	const pages = await browser.pages();
-	const summary = pages.map((candidate, index) => ({
-		index,
-		url: candidate.url(),
-		closed: candidate.isClosed(),
-	}));
-	console.log(`${label}: ${JSON.stringify(summary)}`);
-}
-
-async function getLiveTutorialPage(browser) {
-	for (const candidate of await browser.pages()) {
-		const url = candidate.url();
-		if (
-			candidate.isClosed() ||
-			url === "about:blank" ||
-			url.startsWith("chrome-extension://")
-		) {
-			continue;
-		}
-		try {
-			const hasTutorial = await candidate.evaluate((selector) => {
-				const node = document.querySelector(selector);
-				if (!(node instanceof HTMLElement)) {
-					return false;
-				}
-				const style = globalThis.getComputedStyle(node);
-				const rect = node.getBoundingClientRect();
-				return style.display !== "none" &&
-					style.visibility !== "hidden" &&
-					rect.width > 0 &&
-					rect.height > 0;
-			}, TUTORIAL_BOX_SELECTOR);
-			if (hasTutorial) {
-				return candidate;
-			}
-		} catch {
-			// ignore detached candidates and continue
-		}
-	}
-	return null;
-}
-
-async function captureUi(page, label: string) {
-	await Deno.mkdir(DEBUG_DIR, { recursive: true });
-	const safeLabel = label.replaceAll(/[^a-zA-Z0-9-_]/g, "_");
-	const path = `${DEBUG_DIR}/${Date.now()}-${safeLabel}.png`;
-	try {
-		await runWithPageRetries(
-			"captureUi:screenshot",
-			() => page.screenshot({ path, fullPage: true }).catch(() => null),
-		);
-		const state = await runWithPageRetries(
-			"captureUi:evaluate",
-			() =>
-				page.evaluate(() => ({
-					url: location.href,
-					title: document.title,
-					readyState: document.readyState,
-				})),
-		);
-		console.log(`UI[${label}] ${JSON.stringify(state)} screenshot=${path}`);
-	} catch (error) {
-		const message = error instanceof Error ? error.message : String(error);
-		console.warn(
-			`UI[${label}] capture skipped due to transient error: ${message}`,
-		);
-	}
-}
-
-async function waitForTutorialConfirm(page) {
-	await runWithPageRetries(
-		"waitForTutorialConfirm",
-		() =>
-			page.waitForFunction(
-				(selector) => {
-					const button = document.querySelector(selector);
-					if (!(button instanceof HTMLButtonElement)) {
-						return false;
-					}
-					const parent = button.parentElement;
-					return parent != null &&
-						!parent.classList.contains("hidden");
-				},
-				{ timeout: 60000 },
-				TUTORIAL_CONFIRM_SELECTOR,
-			),
+/**
+ * Removes one static import from the tutorial source so the test can inject a stub.
+ *
+ * @param source Tutorial source code.
+ * @param fileName Import specifier to remove.
+ * @return Source code without the matching import statement.
+ */
+function stripImport(source: string, fileName: string) {
+	return source.replace(
+		new RegExp(
+			String.raw`import[\s\S]*?from\s*"${fileName.replaceAll("/", "\\/")}";\n`,
+		),
+		"",
 	);
 }
 
-async function clickElementCenter(page, selector: string, label: string) {
-	const point = await runWithPageRetries(
-		`clickElementCenter:${label}:coords`,
-		() =>
-			page.$eval(selector, (element) => {
-				if (!(element instanceof HTMLElement)) {
-					throw new Error(`Element ${selector} is not clickable`);
-				}
-				const rect = element.getBoundingClientRect();
-				if (rect.width <= 0 || rect.height <= 0) {
-					throw new Error(`Element ${selector} has no visible size`);
-				}
-				return {
-					x: rect.x + rect.width / 2,
-					y: rect.y + rect.height / 2,
-				};
-			}),
+/**
+ * Loads the real tutorial module after replacing its imports with injected test doubles.
+ *
+ * @param deps Dependency bundle exposed through `globalThis`.
+ * @return Imported tutorial module plus the test-only `Tutorial` export.
+ */
+async function loadTutorialModule(deps: TutorialDeps) {
+	let source = await Deno.readTextFile(TUTORIAL_PATH);
+	source = source.replace(`"use strict";\n`, "");
+	for (const fileName of [
+		"/constants.js",
+		"/functions.js",
+		"/translator.js",
+		"/tab.js",
+		"./content.js",
+		"./favourite-manager.js",
+		"./generator.js",
+		"../tabContainer.js",
+		"./manageTabs.js",
+	]) {
+		source = stripImport(source, fileName);
+	}
+	const prelude = `
+const __deps = globalThis.__tutorialTestDeps;
+const {
+	CMD_OPEN_SETTINGS,
+	CXM_UNPIN_TAB,
+	EXTENSION_GITHUB_LINK,
+	HIDDEN_CLASS,
+	SALESFORCE_SETUP_HOME_MINI,
+	SETUP_LIGHTNING,
+	TOAST_WARNING,
+	TUTORIAL_EVENT_ACTION_FAVOURITE,
+	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_PIN_TAB,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+	TUTORIAL_KEY,
+	WHAT_ADD,
+	WHAT_GET,
+	WHAT_GET_COMMANDS,
+	WHAT_SET,
+} = __deps.constants;
+const { performLightningRedirect, sendExtensionMessage } = __deps.functions;
+const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
+const Tab = __deps.Tab;
+const {
+	getCurrentHref,
+	getSetupTabUl,
+	performActionOnTabs,
+	showToast,
+} = __deps.content;
+const {
+	FAVOURITE_BUTTON_ID,
+	showFavouriteButton,
+} = __deps.favouriteManager;
+const { generateTutorialElements, MODAL_ID } = __deps.generator;
+const { ensureAllTabsAvailability, TabContainer } = __deps.tabContainer;
+const { handleActionButtonClick } = __deps.manageTabs;
+`;
+	const moduleSource = `${prelude}\n${source}\nexport { Tutorial };\n`;
+	const moduleUrl = URL.createObjectURL(
+		new Blob([moduleSource], { type: "text/javascript" }),
 	);
-	await page.mouse.move(point.x, point.y);
-	await page.mouse.down();
-	await page.mouse.up();
-}
 
-async function clickTutorialConfirm(page, label: string) {
-	await waitForTutorialConfirm(page);
 	try {
-		await runWithPageRetries(
-			`clickTutorialConfirm:${label}:dom-click`,
-			() =>
-				page.$eval(TUTORIAL_CONFIRM_SELECTOR, (button) => {
-					if (!(button instanceof HTMLButtonElement)) {
-						throw new Error("Tutorial confirm button not found");
-					}
-					button.click();
-				}),
-		);
-	} catch {
-		await clickElementCenter(
-			page,
-			TUTORIAL_CONFIRM_SELECTOR,
-			`confirm:${label}`,
-		);
+		(globalThis as typeof globalThis & { __tutorialTestDeps?: TutorialDeps })
+			.__tutorialTestDeps = deps;
+		return await import(`${moduleUrl}#${crypto.randomUUID()}`);
+	} finally {
+		delete (globalThis as typeof globalThis & {
+			__tutorialTestDeps?: TutorialDeps;
+		}).__tutorialTestDeps;
+		URL.revokeObjectURL(moduleUrl);
 	}
 }
 
-async function clickTutorialConfirmAndWaitForChange(page, label: string) {
-	for (let attempt = 1; attempt <= 3; attempt++) {
-		const previousText = await runWithPageRetries(
-			`clickTutorialConfirmAndWaitForChange:${label}:read`,
-			() =>
-				page.$eval(
-					TUTORIAL_BOX_SELECTOR,
-					(element) =>
-						element.textContent?.replace(/\s+/g, " ").trim() ?? "",
-				),
-		);
-		await clickTutorialConfirm(page, `${label}-${attempt}`);
-		const changed = await runWithPageRetries(
-			`clickTutorialConfirmAndWaitForChange:${label}:wait-change`,
-			() =>
-				page.waitForFunction(
-					({ selector, oldText }) => {
-						const element = document.querySelector(selector);
-						if (element == null) {
-							return true;
-						}
-						const nextText =
-							element.textContent?.replace(/\s+/g, " ").trim() ??
-								"";
-						return nextText !== oldText;
-					},
-					{ timeout: 5000 },
-					{
-						selector: TUTORIAL_BOX_SELECTOR,
-						oldText: previousText,
-					},
-				),
-		).then(() => true).catch(() => false);
-		if (changed) {
-			return;
-		}
-		const advancedToHiddenConfirmStep = await runWithPageRetries(
-			`clickTutorialConfirmAndWaitForChange:${label}:hidden-confirm-check`,
-			() =>
-				page.evaluate(
-					(
-						{
-							confirmSelector,
-							highlightSelector,
-							tutorialSelector,
-						},
-					) => {
-						const confirm = document.querySelector(confirmSelector);
-						const confirmHidden =
-							!(confirm instanceof HTMLButtonElement) ||
-							confirm.parentElement?.classList.contains(
-									"hidden",
-								) === true;
-						const tutorialVisible =
-							document.querySelector(tutorialSelector) != null;
-						const highlightVisible =
-							document.querySelector(highlightSelector) != null;
-						return tutorialVisible && confirmHidden &&
-							highlightVisible;
-					},
-					{
-						confirmSelector: TUTORIAL_CONFIRM_SELECTOR,
-						highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
-						tutorialSelector: TUTORIAL_BOX_SELECTOR,
-					},
-				),
-		).catch(() => false);
-		if (advancedToHiddenConfirmStep) {
-			return;
-		}
-		console.warn(
-			`clickTutorialConfirmAndWaitForChange:${label} did not advance on attempt ${attempt}/3`,
-		);
-		await sleep(300);
-	}
-	throw new Error(`Tutorial confirm did not advance for ${label}`);
+/**
+ * Installs a writable global property for the lifetime of a test.
+ *
+ * @param name Global property name.
+ * @param value Value assigned to the property.
+ */
+function setGlobal(name: string, value: unknown) {
+	Object.defineProperty(globalThis, name, {
+		value,
+		configurable: true,
+		writable: true,
+	});
 }
 
-async function clickTutorialConfirmIfVisible(page, label: string) {
-	try {
-		await runWithPageRetries(
-			`waitForTutorialConfirmIfVisible:${label}`,
-			() =>
-				page.waitForFunction(
-					(selector) => {
-						const button = document.querySelector(selector);
-						if (!(button instanceof HTMLButtonElement)) {
-							return false;
-						}
-						const parent = button.parentElement;
-						return parent != null &&
-							!parent.classList.contains("hidden");
-					},
-					{ timeout: 8000 },
-					TUTORIAL_CONFIRM_SELECTOR,
-				),
-		);
-		await clickTutorialConfirm(page, label);
-		return true;
-	} catch {
-		return false;
-	}
+/**
+ * Flushes pending timers and waits for Happy DOM async work to settle.
+ *
+ * @return Resolves after the test environment becomes idle.
+ */
+async function flush() {
+	await new Promise((resolve) => setTimeout(resolve, 0));
+	await (globalThis.window as Window & {
+		happyDOM?: { waitUntilComplete?: () => Promise<void> };
+	}).happyDOM?.waitUntilComplete?.();
 }
 
-async function waitForVisibleIcon(page, iconSelector: string, timeout = 60000) {
-	await runWithPageRetries(
-		`waitForVisibleIcon:${iconSelector}`,
-		() =>
-			page.waitForFunction(
-				(selector) => {
-					const icon = document.querySelector(selector);
-					return icon != null && !icon.classList.contains("hidden");
-				},
-				{ timeout },
-				iconSelector,
-			),
-	);
+/**
+ * Advances the currently active tutorial step without relying on DOM click wiring.
+ *
+ * This mirrors the production confirm handler semantics closely enough for the
+ * browserless end-to-end test while leaving `tutorial.js` unchanged.
+ *
+ * @param tutorial Tutorial instance under test.
+ * @return Resolves after the triggered step work has settled.
+ */
+async function advanceCurrentStep(tutorial: TutorialDriver) {
+	const step = tutorial.steps[tutorial.currentStep];
+	step?.onConfirm?.();
+	if (step?.action !== "confirm") {
+		await tutorial.nextStep();
+	}
+	await flush();
 }
 
-async function ensureFavouriteIconReady(
-	browser,
-	page,
-	iconSelector: string,
-	label: string,
-) {
-	let activePage = page;
-	const isVisible = () =>
-		runWithPageRetries(
-			`ensureFavouriteIconReady:check:${label}`,
-			() =>
-				(async () => {
-					activePage = await getUsableSalesforcePage(
-						browser,
-						activePage,
-					);
-					return await activePage.evaluate((selector) => {
-						const icon = document.querySelector(selector);
-						if (!(icon instanceof Element)) {
-							return false;
-						}
-						const style = globalThis.getComputedStyle(icon);
-						if (
-							style.display === "none" ||
-							style.visibility === "hidden"
-						) {
-							return false;
-						}
-						const rect = icon.getBoundingClientRect();
-						return rect.width > 0 && rect.height > 0;
-					}, iconSelector);
-				})(),
-		);
-	for (let attempt = 1; attempt <= 8; attempt++) {
-		activePage = await getUsableSalesforcePage(browser, activePage);
-		if (await isVisible()) {
-			return activePage;
-		}
-		const advanced = await clickTutorialConfirmIfVisible(
-			activePage,
-			`${label}-advance-${attempt}`,
-		);
-		if (advanced) {
-			await sleep(300);
-			continue;
-		}
-		await sleep(300 * attempt);
+/**
+ * Creates a fresh Happy DOM window and temporarily binds it onto `globalThis`.
+ *
+ * @param url Initial page URL for the simulated browser window.
+ * @return Window handle plus a cleanup callback that restores previous globals.
+ */
+function installDom(url = DEFAULT_URL) {
+	const window = new Window({ url });
+	const previousGlobals = new Map<string, unknown>();
+	for (const [name, value] of Object.entries({
+		window,
+		document: window.document,
+		location: window.location,
+		history: window.history,
+		navigator: window.navigator,
+		HTMLElement: window.HTMLElement,
+		Element: window.Element,
+		Node: window.Node,
+		Event: window.Event,
+		CustomEvent: window.CustomEvent,
+		MutationObserver: window.MutationObserver,
+		HTMLCanvasElement: window.HTMLCanvasElement,
+		HTMLInputElement: window.HTMLInputElement,
+		getComputedStyle: window.getComputedStyle.bind(window),
+		requestAnimationFrame: window.requestAnimationFrame.bind(window),
+		cancelAnimationFrame: window.cancelAnimationFrame.bind(window),
+		performance: window.performance,
+	})) {
+		previousGlobals.set(name, (globalThis as Record<string, unknown>)[name]);
+		setGlobal(name, value);
 	}
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	await clickTutorialConfirmIfVisible(activePage, `${label}-final-advance`);
-	try {
-		await waitForVisibleIcon(activePage, iconSelector, 45000);
-	} catch (error) {
-		const message = error instanceof Error ? error.message : String(error);
-		console.warn(
-			`ensureFavouriteIconReady:${label} icon ${iconSelector} not visible after fallback wait; continuing (${message})`,
-		);
-	}
-	return activePage;
-}
-
-async function ensureTutorialUiReady(browser, page) {
-	let activePage = page;
-	const deadline = Date.now() + 90000;
-	let restartedTutorial = false;
-	const hasVisibleTutorialBox = (candidate) =>
-		runWithPageRetries(
-			"ensureTutorialUiReady:check",
-			() =>
-				candidate.evaluate((selector) => {
-					const node = document.querySelector(selector);
-					if (!(node instanceof HTMLElement)) {
-						return false;
-					}
-					const style = globalThis.getComputedStyle(node);
-					const rect = node.getBoundingClientRect();
-					return style.display !== "none" &&
-						style.visibility !== "hidden" &&
-						rect.width > 0 &&
-						rect.height > 0;
-				}, TUTORIAL_BOX_SELECTOR),
-		).catch((error) => {
-			if (!isTransientPageError(error)) {
-				throw error;
-			}
-			return false;
-		});
-	while (Date.now() < deadline) {
-		activePage = await getUsableSalesforcePage(browser, activePage);
-		const isReady = await hasVisibleTutorialBox(activePage);
-		if (isReady) {
-			await sleep(300);
-			const liveTutorialPage = await getLiveTutorialPage(browser);
-			if (
-				liveTutorialPage != null &&
-				await hasVisibleTutorialBox(liveTutorialPage)
-			) {
-				return liveTutorialPage;
-			}
-			activePage = await getUsableSalesforcePage(browser, activePage);
-			if (await hasVisibleTutorialBox(activePage)) {
-				return activePage;
-			}
-		}
-		if (!restartedTutorial && Date.now() > deadline - 60000) {
-			restartedTutorial = true;
-			try {
-				await startTutorialInBrowser(browser, activePage.url());
-				await sleep(800);
-			} catch (error) {
-				const message = error instanceof Error
-					? error.message
-					: String(error);
-				console.warn(
-					`ensureTutorialUiReady: fallback startTutorialInBrowser failed (${message})`,
-				);
-			}
-		}
-		await clickTutorialConfirmIfVisible(
-			activePage,
-			"ensure-ui-ready-advance",
-		);
-		await sleep(500);
-	}
-	throw new Error("Tutorial UI did not become ready within 90s");
-}
-
-async function getVisibleFavouriteIcon(page) {
-	return await runWithPageRetries(
-		"getVisibleFavouriteIcon",
-		() =>
-			page.evaluate(({ starSelector, slashedSelector }) => {
-				const isVisible = (selector: string) => {
-					const icon = document.querySelector(selector);
-					if (!(icon instanceof Element)) {
-						return false;
-					}
-					const style = globalThis.getComputedStyle(icon);
-					if (
-						style.display === "none" ||
-						style.visibility === "hidden"
-					) {
-						return false;
-					}
-					const rect = icon.getBoundingClientRect();
-					return rect.width > 0 && rect.height > 0;
-				};
-				if (isVisible(slashedSelector)) {
-					return slashedSelector;
-				}
-				if (isVisible(starSelector)) {
-					return starSelector;
-				}
-				return null;
-			}, {
-				starSelector: STAR_SELECTOR,
-				slashedSelector: SLASHED_STAR_SELECTOR,
-			}),
-	);
-}
-
-async function waitForAnyFavouriteIcon(browser, page, label: string) {
-	let activePage = page;
-	for (let attempt = 1; attempt <= 10; attempt++) {
-		activePage = await getUsableSalesforcePage(browser, activePage);
-		const visibleIcon = await getVisibleFavouriteIcon(activePage).catch(
-			() => null,
-		);
-		if (visibleIcon != null) {
-			return { page: activePage, iconSelector: visibleIcon };
-		}
-		await clickTutorialConfirmIfVisible(
-			activePage,
-			`${label}-advance-${attempt}`,
-		);
-		await sleep(400 * attempt);
-	}
+	globalThis.document.body.innerHTML = "";
 	return {
-		page: await getUsableSalesforcePage(browser, activePage),
-		iconSelector: null,
+		window,
+		cleanup() {
+			for (const [name, value] of previousGlobals.entries()) {
+				setGlobal(name, value);
+			}
+		},
 	};
 }
 
-async function performTutorialUnfavourite(browser, page) {
-	const { page: activePage, iconSelector } = await waitForAnyFavouriteIcon(
-		browser,
-		page,
-		"step3-any-icon",
-	);
-	const initialIcon = iconSelector;
-	if (initialIcon === STAR_SELECTOR) {
-		console.warn(
-			"Step3 started with STAR visible; toggling to favourite first so unfavourite event can fire",
-		);
-		const nextPage = await clickFavouriteButtonByIcon(
-			browser,
-			activePage,
-			STAR_SELECTOR,
-			"step3-prefavourite",
-		);
-		return await clickFavouriteButtonByIcon(
-			browser,
-			nextPage,
-			SLASHED_STAR_SELECTOR,
-			"step3",
-		);
-	}
-	if (initialIcon == null) {
-		throw new Error("Step3 favourite icon never became visible");
-	}
-	return await clickFavouriteButtonByIcon(
-		browser,
-		activePage,
-		SLASHED_STAR_SELECTOR,
-		"step3",
-	);
-}
+/**
+ * Builds a reusable browserless harness around the real tutorial module.
+ *
+ * @param options Initial storage, navigation, and tab state for the tutorial.
+ * @return Harness helpers, dependency doubles, and captured side effects.
+ */
+function createHarness(options: {
+	tutorialProgress?: number | null;
+	savedTabUrls?: string[];
+	url?: string;
+	pinnedTabsNo?: number;
+} = {}) {
+	const dom = installDom(options.url);
+	const setupTabUl = globalThis.document.createElement("ul");
+	globalThis.document.body.appendChild(setupTabUl);
+	const state = {
+		savedTabUrls: [...(options.savedTabUrls ?? ["SavedOne/home", "SavedTwo/home"])],
+		pinnedTabsNo: options.pinnedTabsNo ?? 0,
+	};
 
-async function clickHighlightedRedirectTab(browser, page) {
-	let activePage = await getUsableSalesforcePage(browser, page);
-	const beforeRedirectUrl = activePage.url();
-	await runWithPageRetries(
-		"clickHighlightedRedirectTab:wait-highlight",
-		() =>
-			activePage.waitForSelector(TUTORIAL_HIGHLIGHT_SELECTOR, {
-				timeout: 60000,
-			}),
-	);
-	const redirectTarget = await runWithPageRetries(
-		"clickHighlightedRedirectTab:target",
-		() =>
-			activePage.evaluate((highlightSelector) => {
-				const highlighted = document.querySelector(highlightSelector);
-				const highlightedLink = highlighted?.querySelector("a[href]") ??
-					highlighted?.closest("li")?.querySelector("a[href]") ??
-					(highlighted instanceof HTMLAnchorElement
-						? highlighted
-						: null);
-				if (highlightedLink instanceof HTMLAnchorElement) {
-					return {
-						href: highlightedLink.href,
-						title: highlightedLink.getAttribute("title"),
-						text: highlightedLink.textContent?.trim() ?? "",
-					};
-				}
-				const fallbackLink = Array.from(
-					document.querySelectorAll<HTMLAnchorElement>("li a[title]"),
-				).find((link) => {
-					const parent = link.closest("li");
-					return parent?.querySelector(highlightSelector) != null;
-				});
-				return {
-					href: fallbackLink?.href ?? null,
-					title: fallbackLink?.getAttribute("title") ?? null,
-					text: fallbackLink?.textContent?.trim() ?? "",
-				};
-			}, TUTORIAL_HIGHLIGHT_SELECTOR),
-	);
-	console.log(
-		`clickHighlightedRedirectTab target: ${JSON.stringify(redirectTarget)}`,
-	);
-	const clickAction = await runWithPageRetries(
-		"clickHighlightedRedirectTab:click",
-		() =>
-			activePage.evaluate((highlightSelector) => {
-				const highlighted = document.querySelector(highlightSelector);
-				const highlightedLink = highlighted?.querySelector("a[href]") ??
-					highlighted?.closest("li")?.querySelector("a[href]") ??
-					(highlighted instanceof HTMLAnchorElement
-						? highlighted
-						: null);
-				if (highlightedLink instanceof HTMLAnchorElement) {
-					highlightedLink.click();
-					return "clicked-highlight-link";
-				}
-				if (highlighted instanceof HTMLElement) {
-					highlighted.click();
-					return "clicked-highlight";
-				}
-				throw new Error("No highlighted setup tab link to click");
-			}, TUTORIAL_HIGHLIGHT_SELECTOR),
-	);
-	console.log(`Step2 action: ${clickAction}`);
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	await runWithPageRetries(
-		"clickHighlightedRedirectTab:wait-redirect",
-		() =>
-			activePage.waitForFunction(
-				({ previousUrl, nextIconSelector }) => {
-					if (location.href !== previousUrl) {
-						return true;
-					}
-					const icon = document.querySelector(nextIconSelector);
-					return icon != null && !icon.classList.contains("hidden");
-				},
-				{ timeout: 12000 },
-				{
-					previousUrl: beforeRedirectUrl,
-					nextIconSelector: SLASHED_STAR_SELECTOR,
-				},
-			),
-	).catch(async (error) => {
-		if (
-			typeof redirectTarget?.href !== "string" ||
-			redirectTarget.href.length < 1
-		) {
-			throw error;
+	const constants = {
+		CMD_OPEN_SETTINGS: "cmd-open-settings",
+		CXM_UNPIN_TAB: "unpin-tab",
+		EXTENSION_GITHUB_LINK: "https://example.test/again-why-salesforce",
+		HIDDEN_CLASS: "is-hidden",
+		SALESFORCE_SETUP_HOME_MINI: "SetupOneHome/home",
+		SETUP_LIGHTNING: "/lightning/setup/",
+		TOAST_WARNING: "warning",
+		TUTORIAL_EVENT_ACTION_FAVOURITE:
+			"tutorial:actionFavourite:completed",
+		TUTORIAL_EVENT_ACTION_UNFAVOURITE:
+			"tutorial:actionUnfavourite:completed",
+		TUTORIAL_EVENT_CLOSE_MANAGE_TABS: "tutorial:manageTabs:closed",
+		TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL:
+			"tutorial:createManageTabsModal:completed",
+		TUTORIAL_EVENT_PIN_TAB: "tutorial:pinTab:completed",
+		TUTORIAL_EVENT_REORDERED_TABS_TABLE:
+			"tutorial:tableReorder:completed",
+		TUTORIAL_KEY: "tutorial-progress",
+		WHAT_ADD: "add",
+		WHAT_GET: "get",
+		WHAT_GET_COMMANDS: "get-commands",
+		WHAT_SET: "set",
+	};
+	const records = {
+		redirects: [] as string[],
+		messages: [] as Array<Record<string, unknown>>,
+		toasts: [] as Array<{ message: string; status: string }>,
+		latestUi: null as null | TutorialUi,
+		actionButtonClicks: 0,
+	};
+	const storage = {
+		[constants.TUTORIAL_KEY]: options.tutorialProgress ?? null,
+	};
+	const translator: Translator = {
+		translate: async (key) => `translated:${key}`,
+	};
+
+	/**
+	 * Creates one setup tab entry matching the structure expected by the tutorial.
+	 *
+	 * @param url Minified Salesforce Setup URL stored in the anchor title.
+	 * @return List item containing the simulated setup link.
+	 */
+	function createSetupLink(url: string) {
+		const li = globalThis.document.createElement("li");
+		const link = globalThis.document.createElement("a");
+		link.title = url;
+		link.textContent = url;
+		li.appendChild(link);
+		return li;
+	}
+
+	/**
+	 * Re-renders the mocked Setup tab list from the harness state.
+	 */
+	function renderSetupTabs() {
+		setupTabUl.innerHTML = "";
+		for (const url of state.savedTabUrls) {
+			setupTabUl.appendChild(createSetupLink(url));
 		}
-		console.warn(
-			`clickHighlightedRedirectTab: click did not navigate in time, falling back to direct navigation: ${redirectTarget.href}`,
-		);
-		await activePage.goto(redirectTarget.href, {
-			waitUntil: "domcontentloaded",
-			timeout: 60000,
-		});
-		await runWithPageRetries(
-			"clickHighlightedRedirectTab:wait-redirect-after-goto",
-			() =>
-				activePage.waitForFunction(
-					({ previousUrl, nextIconSelector }) => {
-						if (location.href !== previousUrl) {
-							return true;
-						}
-						const icon = document.querySelector(nextIconSelector);
-						return icon != null &&
-							!icon.classList.contains("hidden");
-					},
-					{ timeout: 60000 },
-					{
-						previousUrl: beforeRedirectUrl,
-						nextIconSelector: SLASHED_STAR_SELECTOR,
-					},
-				),
-		);
-	});
-	return activePage;
-}
-
-async function clickFavouriteButtonByIcon(
-	browser,
-	page,
-	iconSelector: string,
-	label: string,
-) {
-	const nextIconSelector = iconSelector === STAR_SELECTOR
-		? SLASHED_STAR_SELECTOR
-		: STAR_SELECTOR;
-	let activePage = await getUsableSalesforcePage(browser, page);
-	activePage = await ensureFavouriteIconReady(
-		browser,
-		activePage,
-		iconSelector,
-		label,
-	);
-	const visibleIcon = await getVisibleFavouriteIcon(activePage).catch(() =>
-		null
-	);
-	if (visibleIcon != null && visibleIcon !== iconSelector) {
-		console.warn(
-			`clickFavouriteButtonByIcon:${label} expected ${iconSelector} but found ${visibleIcon}; using visible icon instead`,
-		);
-		iconSelector = visibleIcon;
 	}
-	for (let attempt = 1; attempt <= 4; attempt++) {
-		activePage = await getUsableSalesforcePage(browser, activePage);
-		const beforeClickState = await runWithPageRetries(
-			"clickFavouriteButtonByIcon:state",
-			() =>
-				activePage.$eval(iconSelector, (icon) => {
-					const button = icon.closest("button");
-					if (!(button instanceof HTMLButtonElement)) {
-						throw new Error("Favourite button not found");
-					}
-					button.scrollIntoView({
-						block: "center",
-						inline: "center",
-					});
-					const rect = button.getBoundingClientRect();
-					if (rect.width <= 0 || rect.height <= 0) {
-						throw new Error("Favourite button is not visible");
-					}
-					return {
-						x: rect.x + rect.width / 2,
-						y: rect.y + rect.height / 2,
-						pressed: button.getAttribute("aria-pressed"),
-					};
-				}),
+
+	/**
+	 * Ensures the favourite star exists and is visible to hit-testing code.
+	 *
+	 * @return Visible favourite button element.
+	 */
+	function ensureVisibleFavouriteButton() {
+		let button = globalThis.document.getElementById(
+			"again-why-salesforce-star",
+		) as HTMLInputElement | null;
+		if (button == null) {
+			button = globalThis.document.createElement("input");
+			button.id = "again-why-salesforce-star";
+			globalThis.document.body.appendChild(button);
+		}
+		button.getBoundingClientRect = () =>
+			({
+				width: 24,
+				height: 24,
+				top: 0,
+				left: 0,
+				right: 24,
+				bottom: 24,
+				x: 0,
+				y: 0,
+				toJSON: () => ({}),
+			}) as DOMRect;
+		return button;
+	}
+
+	/**
+	 * Converts the current full URL into the minified Setup path used by the tutorial.
+	 *
+	 * @return Current Setup path without the origin prefix.
+	 */
+	function currentMiniUrl() {
+		return globalThis.location.href.replace(
+			/^https?:\/\/[^/]+\/lightning\/setup\//,
+			"",
 		);
-		await runWithPageRetries(
-			"clickFavouriteButtonByIcon:click",
-			async () => {
-				await activePage.mouse.move(
-					beforeClickState.x,
-					beforeClickState.y,
-				);
-				await activePage.mouse.down();
-				await activePage.mouse.up();
-			},
+	}
+
+	/**
+	 * Renders page-level fixtures needed for a given mocked Setup page.
+	 *
+	 * @param miniUrl Minified Setup URL being shown.
+	 */
+	function renderPage(miniUrl: string) {
+		renderSetupTabs();
+		const starButton = globalThis.document.getElementById(
+			"again-why-salesforce-star",
 		);
-		try {
-			await runWithPageRetries(
-				"clickFavouriteButtonByIcon:toggle",
-				() =>
-					activePage.waitForFunction(
-						(
-							{
-								expectedVisibleSelector,
-								expectedHiddenSelector,
-								previousPressed,
-							},
-						) => {
-							const isVisible = (element: Element | null) => {
-								if (!(element instanceof Element)) {
-									return false;
-								}
-								const style = globalThis.getComputedStyle(
-									element,
-								);
-								if (
-									style.display === "none" ||
-									style.visibility === "hidden"
-								) {
-									return false;
-								}
-								const rect = element.getBoundingClientRect();
-								return rect.width > 0 && rect.height > 0;
-							};
-							const expectedVisible = document.querySelector(
-								expectedVisibleSelector,
-							);
-							const expectedHidden = document.querySelector(
-								expectedHiddenSelector,
-							);
-							if (
-								isVisible(expectedVisible) &&
-								!isVisible(expectedHidden)
-							) {
-								return true;
-							}
-							const button = expectedHidden?.closest("button") ??
-								expectedVisible?.closest("button");
-							if (!(button instanceof HTMLButtonElement)) {
-								return false;
-							}
-							const currentPressed = button.getAttribute(
-								"aria-pressed",
-							);
-							return previousPressed != null &&
-								currentPressed != null &&
-								currentPressed !== previousPressed;
-						},
-						{ timeout: 12000 },
-						{
-							expectedVisibleSelector: nextIconSelector,
-							expectedHiddenSelector: iconSelector,
-							previousPressed: beforeClickState.pressed,
-						},
-					),
-			);
-			return activePage;
-		} catch {
-			if (attempt === 4) {
+		if (miniUrl === constants.SALESFORCE_SETUP_HOME_MINI) {
+			starButton?.remove();
+			return;
+		}
+		ensureVisibleFavouriteButton();
+	}
+
+	/**
+	 * Navigates the harness to a mocked Lightning Setup URL.
+	 *
+	 * @param miniUrl Minified Setup URL to visit.
+	 */
+	function navigateTo(miniUrl: string) {
+		renderPage(miniUrl);
+		globalThis.history.pushState(
+			{},
+			"",
+			`${constants.SETUP_LIGHTNING}${miniUrl}`,
+		);
+	}
+
+	/**
+	 * Creates the minimal Manage Tabs modal DOM required by tutorial steps.
+	 *
+	 * @param rows Number of sortable rows rendered in the modal table.
+	 * @return Root modal element.
+	 */
+	function createManageTabsModal(rows = state.savedTabUrls.length) {
+		globalThis.document.getElementById("again-why-salesforce-modal")?.remove();
+		const modal = globalThis.document.createElement("div");
+		modal.id = "again-why-salesforce-modal";
+		const table = globalThis.document.createElement("table");
+		table.id = "sortable-table";
+		const tbody = globalThis.document.createElement("tbody");
+		for (let index = 0; index < rows; index++) {
+			const row = globalThis.document.createElement("tr");
+			const wrapCell = globalThis.document.createElement("td");
+			const wrap = globalThis.document.createElement("div");
+			wrap.className = "slds-cell-wrap";
+			wrap.textContent = `Row ${index + 1}`;
+			wrapCell.appendChild(wrap);
+			row.appendChild(wrapCell);
+			const actionCell = globalThis.document.createElement("td");
+			const actionButton = globalThis.document.createElement("button");
+			actionButton.dataset.action = constants.CXM_UNPIN_TAB;
+			actionCell.appendChild(actionButton);
+			row.appendChild(actionCell);
+			tbody.appendChild(row);
+		}
+		table.appendChild(tbody);
+		modal.appendChild(table);
+		const saveButton = globalThis.document.createElement("button");
+		saveButton.id = "again-why-salesforce-modal-confirm";
+		modal.appendChild(saveButton);
+		globalThis.document.body.appendChild(modal);
+		return modal;
+	}
+
+	/**
+	 * Updates harness state for a tutorial event and dispatches it on the document.
+	 *
+	 * @param eventName Tutorial custom event name to emit.
+	 */
+	function dispatchTutorialEvent(eventName: string) {
+		switch (eventName) {
+			case constants.TUTORIAL_EVENT_PIN_TAB:
+				state.pinnedTabsNo = Math.max(state.pinnedTabsNo, 1);
+				break;
+			case constants.TUTORIAL_EVENT_ACTION_FAVOURITE: {
+				const miniUrl = currentMiniUrl();
+				if (!state.savedTabUrls.includes(miniUrl)) {
+					state.savedTabUrls.push(miniUrl);
+					renderSetupTabs();
+				}
 				break;
 			}
-			await sleep(500 * attempt);
+			case constants.TUTORIAL_EVENT_ACTION_UNFAVOURITE: {
+				const miniUrl = currentMiniUrl();
+				state.savedTabUrls = state.savedTabUrls.filter((url) => url !== miniUrl);
+				renderSetupTabs();
+				break;
+			}
 		}
+		globalThis.document.dispatchEvent(new globalThis.CustomEvent(eventName));
 	}
-	const advancedTutorial = await clickTutorialConfirmIfVisible(
-		activePage,
-		"favourite-toggle-fallback",
-	);
-	if (advancedTutorial) {
-		return activePage;
-	}
-	console.warn(
-		`Favourite toggle state could not be confirmed from ${iconSelector} to ${nextIconSelector}; continuing with downstream tutorial checks`,
-	);
-	return activePage;
-}
 
-async function contextClickTutorialTab(page, label: string) {
-	const contextTarget = await runWithPageRetries<ContextMenuTarget>(
-		`contextClickTutorialTab:${label}:target`,
-		() =>
-			page.evaluate((highlightSelector) => {
-				const suffixes = [
-					".lightning.force.com",
-					".my.salesforce-setup.com",
-					".my.salesforce.com",
-				];
-				const extractOrg = (host: string) => {
-					for (const suffix of suffixes) {
-						if (host.endsWith(suffix)) {
-							return host.slice(0, host.length - suffix.length);
-						}
-					}
-					return host;
-				};
-				const miniFromLocation = () => {
-					const setupPrefix = "/lightning/setup/";
-					const idx = location.pathname.indexOf(setupPrefix);
-					if (idx < 0) {
+	/**
+	 * Waits until the visible tutorial message starts with the translated key.
+	 *
+	 * @param key Translation key expected in the message box.
+	 * @return Resolves once the message box shows the requested step.
+	 */
+	async function waitForMessage(key: string) {
+		await waitFor(() =>
+			records.latestUi?.segments.textContent?.startsWith(
+				`translated:${key}`,
+			) === true
+		);
+	}
+
+	const deps: TutorialDeps = {
+		constants,
+		functions: {
+			performLightningRedirect: (url) => {
+				records.redirects.push(url);
+				const miniUrl = url.replace(/^\/lightning\/setup\//, "");
+				navigateTo(miniUrl);
+			},
+			sendExtensionMessage: async (message) => {
+				records.messages.push(message);
+				switch (message.what) {
+					case constants.WHAT_GET_COMMANDS:
+						return [{ shortcut: "Ctrl+Shift+Y" }];
+					case constants.WHAT_GET:
+						return storage[message.key as string];
+					case constants.WHAT_SET:
+						storage[message.key as string] = message.set;
+						return true;
+					default:
 						return null;
-					}
-					return `${
-						location.pathname.slice(idx + setupPrefix.length)
-					}${location.search}`.replace(/\/+$/, "");
+				}
+			},
+		},
+		ensureTranslatorAvailability: async () => translator,
+		Tab: {
+			minifyURL: (url) =>
+				url.replace(/^https?:\/\/[^/]+\/lightning\/setup\//, ""),
+		},
+		content: {
+			getCurrentHref: () => globalThis.location.href,
+			getSetupTabUl: () => setupTabUl,
+			performActionOnTabs: (_action, redirectElement) => {
+				if (!state.savedTabUrls.includes(redirectElement.url)) {
+					state.savedTabUrls.push(redirectElement.url);
+				}
+				renderSetupTabs();
+			},
+			showToast: (message, status) => {
+				records.toasts.push({ message, status });
+			},
+		},
+		favouriteManager: {
+			FAVOURITE_BUTTON_ID: "again-why-salesforce-star",
+			showFavouriteButton: async () => {
+				ensureVisibleFavouriteButton();
+			},
+		},
+		generator: {
+			MODAL_ID: "again-why-salesforce-modal",
+			generateTutorialElements: async () => {
+				const overlay = globalThis.document.createElement("div");
+				const messageBox = globalThis.document.createElement("div");
+				messageBox.className = "tut-v7";
+				const segments = globalThis.document.createElement("div");
+				const btnsParent = globalThis.document.createElement("div");
+				btnsParent.classList.add(constants.HIDDEN_CLASS);
+				const confirmBtn = globalThis.document.createElement("button");
+				btnsParent.appendChild(confirmBtn);
+				messageBox.appendChild(segments);
+				messageBox.appendChild(btnsParent);
+				const spinner = globalThis.document.createElement("div");
+				spinner.classList.add(constants.HIDDEN_CLASS);
+				const ui = {
+					overlay,
+					messageBox,
+					spinner,
+					segments,
+					confirmBtn,
+					btnsParent,
 				};
-				const toPayload = (link: HTMLAnchorElement) => {
-					link.scrollIntoView({ block: "center", inline: "center" });
-					const rect = link.getBoundingClientRect();
-					if (rect.width <= 0 || rect.height <= 0) {
-						throw new Error(
-							"Tutorial target tab has no visible size",
-						);
-					}
-					const tabUrl = (link.getAttribute("title") ?? "").trim();
-					if (tabUrl.length < 1) {
-						throw new Error("Tutorial target tab is missing title");
-					}
-					const label = link.textContent?.trim() || tabUrl;
-					return {
-						x: rect.x + rect.width / 2,
-						y: rect.y + rect.height / 2,
-						tabUrl,
-						label,
-						url: link.href,
-						org: extractOrg(location.host),
-					};
-				};
+				records.latestUi = ui;
+				return ui;
+			},
+		},
+		tabContainer: {
+			ensureAllTabsAvailability: async () => {
+				const allTabs = state.savedTabUrls.map((url) => ({ url }));
+				(allTabs as Array<{ url: string }> & Record<string, number>)[
+					"pinnedTabsNo"
+				] = state.pinnedTabsNo;
+				return allTabs;
+			},
+			TabContainer: {
+				keyPinnedTabsNo: "pinnedTabsNo",
+			},
+		},
+		manageTabs: {
+			handleActionButtonClick: () => {
+				records.actionButtonClicks++;
+			},
+		},
+	};
 
-				const highlighted = document.querySelector(highlightSelector);
-				const highlightedLink =
-					highlighted?.querySelector("a[title]") ??
-						highlighted?.closest("li")?.querySelector("a[title]") ??
-						(highlighted instanceof HTMLAnchorElement
-							? highlighted
-							: null);
-				if (highlightedLink instanceof HTMLAnchorElement) {
-					return toPayload(highlightedLink);
-				}
+	renderPage(constants.SALESFORCE_SETUP_HOME_MINI);
 
-				const currentMiniUrl = miniFromLocation();
-				if (currentMiniUrl == null) {
-					throw new Error("Cannot derive current setup mini URL");
-				}
-				const fallback = Array.from(
-					document.querySelectorAll("li a[title]"),
-				).find((link) => link.getAttribute("title") === currentMiniUrl);
-				if (!(fallback instanceof HTMLAnchorElement)) {
-					throw new Error(
-						"No highlighted or fallback setup tab link was found for context menu",
-					);
-				}
-				return toPayload(fallback);
-			}, TUTORIAL_HIGHLIGHT_SELECTOR),
-	);
-
-	const marker = `${label}-${Date.now()}`;
-	await runWithPageRetries(
-		`contextClickTutorialTab:${label}:arm`,
-		() =>
-			page.evaluate(({ highlightSelector, markerId, tabUrl }) => {
-				let target: Element | null = document.querySelector(
-					`li a[title="${CSS.escape(tabUrl)}"]`,
-				);
-				if (target == null) {
-					const highlighted = document.querySelector(
-						highlightSelector,
-					);
-					target = highlighted?.querySelector("a[title]") ??
-						highlighted?.closest("li")?.querySelector("a[title]") ??
-						(highlighted instanceof HTMLAnchorElement
-							? highlighted
-							: null);
-				}
-				if (!(target instanceof HTMLElement)) {
-					throw new Error(
-						"Unable to arm context-menu listener on tutorial tab",
-					);
-				}
-				target.addEventListener(
-					"contextmenu",
-					() => {
-						(globalThis as typeof globalThis & {
-							__awsfLastContextMenu?: string;
-						}).__awsfLastContextMenu = markerId;
-					},
-					{ once: true },
-				);
-			}, {
-				highlightSelector: TUTORIAL_HIGHLIGHT_SELECTOR,
-				markerId: marker,
-				tabUrl: contextTarget.tabUrl,
-			}),
-	);
-	await page.mouse.move(contextTarget.x, contextTarget.y);
-	await page.mouse.click(contextTarget.x, contextTarget.y, {
-		button: "right",
-	});
-	await runWithPageRetries(
-		`contextClickTutorialTab:${label}:verify`,
-		() =>
-			page.waitForFunction(
-				(markerId) =>
-					(globalThis as typeof globalThis & {
-						__awsfLastContextMenu?: string;
-					}).__awsfLastContextMenu === markerId,
-				{ timeout: 5000 },
-				marker,
-			),
-	);
-	await sleep(200);
-	console.log(
-		`${label} context-click target: ${
-			JSON.stringify({
-				tabUrl: contextTarget.tabUrl,
-				label: contextTarget.label,
-			})
-		}`,
-	);
-	return contextTarget;
+	return {
+		constants,
+		deps,
+		dom,
+		records,
+		state,
+		setupTabUl,
+		storage,
+		translator,
+		createManageTabsModal,
+		dispatchTutorialEvent,
+		async load() {
+			return await loadTutorialModule(deps);
+		},
+		navigateTo,
+		waitForMessage,
+		cleanup() {
+			dom.cleanup();
+		},
+	};
 }
 
-async function reorderTabsInModalByDrag(page) {
-	await page.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, { timeout: 60000 });
-	await page.waitForSelector(`${SORTABLE_TABLE_SELECTOR} tr`, {
-		timeout: 60000,
-	});
-	const simulated = await page.evaluate(() => {
-		const rows = Array.from(
-			document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
-		).filter((row) => row.dataset.rowIndex != null);
-		if (rows.length < 2) {
-			return false;
-		}
-		const highlighted = document.querySelector(".awsf-tutorial-highlight");
-		const sourceRow = (highlighted?.closest("tr") as HTMLElement | null) ??
-			rows[rows.length - 1];
-		let targetRow = rows[0];
-		if (targetRow === sourceRow && rows.length > 1) {
-			targetRow = rows[1];
-		}
-		if (
-			!(sourceRow instanceof HTMLElement) ||
-			!(targetRow instanceof HTMLElement)
-		) {
-			return false;
-		}
-		const dragData = new DataTransfer();
-		sourceRow.dispatchEvent(
-			new DragEvent("dragstart", {
-				bubbles: true,
-				cancelable: true,
-				dataTransfer: dragData,
-			}),
-		);
-		targetRow.dispatchEvent(
-			new DragEvent("dragover", {
-				bubbles: true,
-				cancelable: true,
-				dataTransfer: dragData,
-			}),
-		);
-		targetRow.dispatchEvent(
-			new DragEvent("drop", {
-				bubbles: true,
-				cancelable: true,
-				dataTransfer: dragData,
-			}),
-		);
-		return true;
-	});
-	if (simulated) {
-		await sleep(250);
-		return;
-	}
-	const dragInfo = await page.evaluate(() => {
-		const rows = Array.from(
-			document.querySelectorAll<HTMLElement>("#sortable-table tbody tr"),
-		);
-		if (rows.length < 2) {
-			throw new Error("Not enough rows to perform tutorial reorder step");
-		}
-		const highlighted = document.querySelector(".awsf-tutorial-highlight");
-		const highlightedRow = highlighted?.closest("tr");
-		const sourceRow = rows.includes(highlightedRow as HTMLElement)
-			? highlightedRow as HTMLElement
-			: rows[1];
-		const targetRow = rows[0];
-		const getHandle = (row: HTMLElement) => {
-			return row.querySelector<HTMLElement>(
-				"[draggable='true'], .slds-cell-wrap, td, th",
-			) ?? row;
-		};
-		const sourceHandle = getHandle(sourceRow);
-		const targetHandle = getHandle(targetRow);
-		if (
-			!(sourceHandle instanceof HTMLElement) ||
-			!(targetHandle instanceof HTMLElement)
-		) {
-			throw new Error(
-				"Unable to find drag handles for tutorial reorder step",
-			);
-		}
-		return {
-			sourceRect: sourceHandle.getBoundingClientRect().toJSON(),
-			targetRect: targetHandle.getBoundingClientRect().toJSON(),
-			sameRow: sourceRow === targetRow,
-		};
-	});
-
-	if (dragInfo.sameRow) {
-		const alt = await page.evaluate(() => {
-			const rows = Array.from(
-				document.querySelectorAll<HTMLElement>(
-					"#sortable-table tbody tr",
-				),
-			);
-			const getHandle = (row?: HTMLElement) =>
-				row?.querySelector<HTMLElement>(
-					"[draggable='true'], .slds-cell-wrap, td, th",
-				) ?? row ?? null;
-			const second = getHandle(rows.at(1));
-			const first = getHandle(rows.at(0));
-			if (
-				!(second instanceof HTMLElement) ||
-				!(first instanceof HTMLElement)
-			) {
-				return null;
-			}
-			return {
-				sourceRect: second.getBoundingClientRect().toJSON(),
-				targetRect: first.getBoundingClientRect().toJSON(),
-			};
-		});
-		if (alt == null) {
-			throw new Error(
-				"No draggable rows available for reorder tutorial step",
-			);
-		}
-		await page.mouse.move(
-			alt.sourceRect.x + alt.sourceRect.width / 2,
-			alt.sourceRect.y + alt.sourceRect.height / 2,
-		);
-		await page.mouse.down();
-		await page.mouse.move(
-			alt.targetRect.x + alt.targetRect.width / 2,
-			alt.targetRect.y + alt.targetRect.height / 2,
-			{ steps: 15 },
-		);
-		await page.mouse.up();
-		return;
-	}
-
-	await page.mouse.move(
-		dragInfo.sourceRect.x + dragInfo.sourceRect.width / 2,
-		dragInfo.sourceRect.y + dragInfo.sourceRect.height / 2,
-	);
-	await page.mouse.down();
-	await page.mouse.move(
-		dragInfo.targetRect.x + dragInfo.targetRect.width / 2,
-		dragInfo.targetRect.y + dragInfo.targetRect.height / 2,
-		{ steps: 15 },
-	);
-	await page.mouse.up();
-}
-
-async function waitForPersistedTutorialProgress(
-	browser,
-	minimumProgress: number,
-	timeoutMs = 30000,
-) {
-	const deadline = Date.now() + timeoutMs;
-	let lastProgress: number | null = null;
-	while (Date.now() < deadline) {
-		try {
-			lastProgress = await getTutorialProgressInBrowser(browser);
-			if (lastProgress != null && lastProgress >= minimumProgress) {
-				return lastProgress;
-			}
-		} catch (error) {
-			if (!isTransientPageError(error)) {
-				throw error;
-			}
-		}
-		await sleep(500);
-	}
-	return lastProgress;
-}
-
-async function dispatchTutorialEvent(page, eventName: string) {
-	await runWithPageRetries(
-		`dispatchTutorialEvent:${eventName}`,
-		() =>
-			page.evaluate((name) => {
-				document.dispatchEvent(new CustomEvent(name));
-			}, eventName),
-	);
-}
-
-async function ensureTutorialEnded(page) {
-	for (let attempt = 1; attempt <= 12; attempt++) {
-		const ended = await runWithPageRetries(
-			"ensureTutorialEnded:check",
-			() =>
-				page.evaluate(
-					(selector) => document.querySelector(selector) == null,
-					TUTORIAL_BOX_SELECTOR,
-				),
-		);
-		if (ended) {
-			return;
-		}
-		for (
-			const eventName of [
-				TUTORIAL_EVENT_ACTION_UNFAVOURITE,
-				TUTORIAL_EVENT_ACTION_FAVOURITE,
-				TUTORIAL_EVENT_PIN_TAB,
-				TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
-				TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-				TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-			]
-		) {
-			await dispatchTutorialEvent(page, eventName).catch(() => null);
-		}
-		await clickTutorialConfirmIfVisible(page, `ensure-end-${attempt}`);
-		await sleep(300);
-	}
-}
-
-async function forceTutorialCompletionState(browser, page) {
-	await ensureTutorialEnded(page);
-	const stillVisible = await runWithPageRetries(
-		"forceCompletion:visible",
-		() =>
-			page.evaluate(
-				(selector) => document.querySelector(selector) != null,
-				TUTORIAL_BOX_SELECTOR,
-			),
-	);
-	if (stillVisible) {
-		await runWithPageRetries(
-			"forceCompletion:remove-box",
-			() =>
-				page.evaluate((selector) => {
-					document.querySelector(selector)?.remove();
-				}, TUTORIAL_BOX_SELECTOR),
-		);
-	}
-	const progress = await getTutorialProgressInBrowser(browser).catch(() =>
-		null
-	);
-	if (progress == null || progress < 15) {
-		await setTutorialProgressInBrowser(browser, 15);
-	}
-}
-
-async function createSingleBrowserTutorialSession() {
-	cachedExtensionPage = null;
-	const { browser, page } = await launchSalesforceBrowser();
-	await installDialogHandlers(browser, "accept");
+Deno.test("checkTutorial starts the tutorial without a browser", async () => {
+	const harness = createHarness({ tutorialProgress: null });
+	const previousConfirm = globalThis.confirm;
 	try {
-		let activePage = page;
-		console.log("createSingleBrowserTutorialSession: ensuring auth");
-		await ensureAuthenticated(activePage);
-		activePage = await ensureSetupHomeReady(browser, activePage);
-		console.log(
-			"createSingleBrowserTutorialSession: ensuring extension root",
+		const tutorialModule = await harness.load();
+		setGlobal("confirm", () => true);
+		await tutorialModule.checkTutorial();
+		await harness.waitForMessage("tutorial_restart");
+
+		assertEquals(harness.records.redirects, ["/lightning/setup/SetupOneHome/home"]);
+		assertExists(globalThis.document.querySelector(".tut-v7"));
+		assertEquals(
+			harness.records.latestUi?.segments.textContent,
+			"translated:tutorial_restart",
 		);
-		activePage = await ensureExtensionRootReady(browser, activePage);
-		console.log("createSingleBrowserTutorialSession: ready");
-		return { browser, page: activePage };
-	} catch (error) {
-		await browser.close().catch(() => null);
-		throw error;
-	}
-}
-
-async function initializeTutorialRun(browser, page) {
-	console.log("initializeTutorialRun: ensure setup home");
-	let activePage = await ensureSetupHomeReady(browser, page);
-	console.log("initializeTutorialRun: ensure extension root");
-	activePage = await ensureExtensionRootReady(browser, activePage);
-	console.log("initializeTutorialRun: bring page to front");
-	await activePage.bringToFront().catch(() => null);
-	console.log("initializeTutorialRun: reset tutorial progress");
-	await resetTutorialProgressInBrowser(browser);
-	await sleep(400);
-	console.log("initializeTutorialRun: start tutorial");
-	await startTutorialInBrowser(browser, activePage.url());
-	console.log("initializeTutorialRun: wait for tutorial UI");
-	activePage = await ensureTutorialUiReady(browser, activePage);
-	await logBrowserPages(
-		browser,
-		"initializeTutorialRun: pages after tutorial ready",
-	);
-	return activePage;
-}
-
-async function runTutorialFlow(browser, page) {
-	let activePage = await getLiveTutorialPage(browser) ?? page;
-	await captureUi(activePage, "tutorial-visible");
-
-	await clickTutorialConfirmAndWaitForChange(activePage, "step0");
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	await clickTutorialConfirmAndWaitForChange(activePage, "step1");
-	await captureUi(activePage, "after-step1");
-
-	activePage = await clickHighlightedRedirectTab(browser, activePage);
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	await captureUi(activePage, "after-step2-redirect");
-
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	activePage = await performTutorialUnfavourite(browser, activePage);
-	await captureUi(activePage, "after-step3");
-
-	const step4Confirmed = await clickTutorialConfirmIfVisible(
-		activePage,
-		"step4",
-	);
-	if (!step4Confirmed) {
-		console.warn(
-			"Step4 confirm not visible, continuing with visible UI state checks",
-		);
-	}
-	await captureUi(activePage, "after-step4");
-
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	activePage = await clickFavouriteButtonByIcon(
-		browser,
-		activePage,
-		STAR_SELECTOR,
-		"step5",
-	);
-	await captureUi(activePage, "after-step5");
-
-	const contextTarget = await contextClickTutorialTab(activePage, "Step6");
-	await pinTabInBrowser(browser, activePage.url(), contextTarget);
-	await captureUi(activePage, "after-step6");
-
-	const step7Confirmed = await clickTutorialConfirmIfVisible(
-		activePage,
-		"step7",
-	);
-	if (!step7Confirmed) {
-		console.warn(
-			"Step7 confirm not visible, continuing with context target fallback",
-		);
-	}
-	await captureUi(activePage, "after-step7");
-
-	const step8HighlightReady = await runWithPageRetries(
-		"step8:highlight-visible",
-		() =>
-			activePage.waitForFunction(
-				(selector) => document.querySelector(selector) != null,
-				{ timeout: 8000 },
-				TUTORIAL_HIGHLIGHT_SELECTOR,
+		assertEquals(harness.storage["tutorial-progress"], 0);
+		assert(
+			harness.records.messages.some((message) =>
+				message.what === "get-commands"
 			),
-	).then(() => true).catch(() => false);
-	if (!step8HighlightReady) {
-		console.warn(
-			"Step8 highlight not visible; continuing with context target fallback",
 		);
+	} finally {
+		setGlobal("confirm", previousConfirm);
+		await flush();
+		harness.cleanup();
 	}
-	const manageTabsTarget = await contextClickTutorialTab(
-		activePage,
-		"Step8",
-	);
-	await openManageTabsInBrowser(browser, activePage.url());
-	console.log(
-		`Step8 context-click target: ${
-			JSON.stringify({
-				tabUrl: manageTabsTarget.tabUrl,
-				label: manageTabsTarget.label,
-			})
-		}`,
-	);
-	activePage = await getUsableSalesforcePage(browser, activePage);
-	await activePage.waitForSelector(MANAGE_TABS_MODAL_SELECTOR, {
-		timeout: 60000,
+});
+
+Deno.test("executeStep advances on tutorial custom events", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+
+		const highlighted = globalThis.document.createElement("div");
+		globalThis.document.body.appendChild(highlighted);
+
+		let nextStepCalls = 0;
+		tutorial.nextStep = () => {
+			nextStepCalls++;
+		};
+
+		await tutorial.executeStep({
+			message: "tutorial_add_favourite",
+			element: async () => highlighted,
+			action: "highlight",
+			waitFor: "event",
+			awaitsCustomEvent: harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
+		});
+
+		assert(highlighted.classList.contains("awsf-tutorial-highlight"));
+		assert(tutorial.btnsParent.classList.contains(harness.constants.HIDDEN_CLASS));
+
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
+		);
+
+		assertEquals(nextStepCalls, 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("executeStep listens for Lightning navigation without a browser", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+
+		const target = globalThis.document.createElement("div");
+		globalThis.document.body.appendChild(target);
+
+		let nextStepCalls = 0;
+		tutorial.nextStep = () => {
+			nextStepCalls++;
+		};
+
+		await tutorial.executeStep({
+			message: "tutorial_click_highlighted_tab",
+			element: async () => target,
+			action: "highlight",
+			waitFor: "redirect",
+		});
+
+		assert(target.classList.contains("awsf-tutorial-highlight"));
+		assert(tutorial.btnsParent.classList.contains(harness.constants.HIDDEN_CLASS));
+
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		await flush();
+
+		assertEquals(nextStepCalls, 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("tutorial runs end to end and persists completion without a browser", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		await tutorial.start();
+		await harness.waitForMessage("tutorial_restart");
+		assertEquals(tutorial.currentStep, 0);
+		assertEquals(harness.storage["tutorial-progress"], 0);
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_favourite_tabs");
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_click_highlighted_tab");
+
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		await harness.waitForMessage("tutorial_remove_favourite");
+
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_ACTION_UNFAVOURITE,
+		);
+		await harness.waitForMessage("tutorial_redirect_account");
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_add_favourite");
+
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_ACTION_FAVOURITE,
+		);
+		await harness.waitForMessage("tutorial_pin_tab");
+
+		harness.dispatchTutorialEvent(harness.constants.TUTORIAL_EVENT_PIN_TAB);
+		await harness.waitForMessage("tutorial_pinned_tab");
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_manage_tabs");
+
+		harness.createManageTabsModal();
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+		);
+		await harness.waitForMessage("tutorial_manage_tabs_link");
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_drag_flows");
+
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_REORDERED_TABS_TABLE,
+		);
+		await harness.waitForMessage("tutorial_pinned_explanation");
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_save_modal");
+
+		harness.dispatchTutorialEvent(
+			harness.constants.TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+		);
+		await harness.waitForMessage("tutorial_keyboard_shortcut");
+		assert(
+			harness.records.latestUi?.segments.textContent?.includes(
+				"Shortcut: Ctrl+Shift+Y",
+			),
+		);
+
+		await advanceCurrentStep(tutorial);
+		await harness.waitForMessage("tutorial_end");
+		assertEquals(harness.records.latestUi?.confirmBtn.textContent, "translated:close");
+
+		await advanceCurrentStep(tutorial);
+		await waitFor(() => !tutorial.isActive);
+
+		assertEquals(harness.storage["tutorial-progress"], tutorial.steps.length);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+		assert(
+			harness.records.redirects.includes("/lightning/setup/PermSets/home"),
+		);
+		assertEquals(harness.state.pinnedTabsNo, 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("checkTutorial resumes from stored progress without a browser", async () => {
+	const harness = createHarness({ tutorialProgress: 6 });
+	const previousConfirm = globalThis.confirm;
+	try {
+		const tutorialModule = await harness.load();
+		setGlobal("confirm", () => true);
+		await tutorialModule.checkTutorial();
+		await harness.waitForMessage("tutorial_add_favourite");
+
+		assertEquals(harness.records.redirects, [
+			"/lightning/setup/ObjectManager/Account/FieldsAndRelationships/view",
+		]);
+		assertEquals(harness.storage["tutorial-progress"], 5);
+		assert(
+			harness.records.latestUi?.segments.textContent?.includes(
+				"translated:tutorial_add_favourite",
+			),
+		);
+	} finally {
+		setGlobal("confirm", previousConfirm);
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("executeStep resets to the nearest starting block when a required element is missing", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+		tutorial.steps = [
+			{ message: "block_zero", beginsBlock: true },
+			{ message: "inside_zero" },
+			{ message: "block_two", beginsBlock: true },
+			{ message: "inside_two" },
+			{ message: "current_step" },
+		];
+		tutorial.currentStep = 4;
+
+		let restartFromStep: number | null = null;
+		tutorial.nextStep = () => {
+			tutorial.currentStep++;
+			restartFromStep = tutorial.currentStep;
+		};
+
+		await tutorial.executeStep({
+			message: "missing_element_step",
+			element: async () => null,
+		});
+
+		assertEquals(harness.records.toasts, [{
+			message: "tutorial_step_was_missed",
+			status: "warning",
+		}]);
+		assertEquals(restartFromStep, 2);
+		assertEquals(tutorial.currentStep, 2);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("initSteps returns false and shows a toast when no redirect links are available", async () => {
+	const harness = createHarness({
+		savedTabUrls: ALL_USABLE_PAGE_URLS,
 	});
-	await captureUi(activePage, "after-step8");
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
 
-	await clickTutorialConfirm(activePage, "step9");
-	await captureUi(activePage, "after-step9");
+		const initialized = await tutorial.initSteps();
 
-	await reorderTabsInModalByDrag(activePage);
-	await dispatchTutorialEvent(
-		activePage,
-		TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-	);
-	await captureUi(activePage, "after-step10");
+		assertEquals(initialized, false);
+		assertEquals(harness.records.toasts, [{
+			message: "tutorial_export_and_reset_for_tutorial",
+			status: "warning",
+		}]);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
 
-	await clickTutorialConfirm(activePage, "step11");
-	await captureUi(activePage, "after-step11");
+Deno.test("persistTutorialProgress validates input and clamps the last step to completion", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.steps = [{}, {}, {}];
+		tutorial.currentStep = 2;
 
-	await activePage.waitForSelector(MANAGE_TABS_SAVE_SELECTOR, {
-		timeout: 60000,
-	});
-	await runWithPageRetries(
-		"manageTabs:save",
-		() =>
-			activePage.$eval(MANAGE_TABS_SAVE_SELECTOR, (button) => {
-				if (!(button instanceof HTMLButtonElement)) {
-					throw new Error("Manage Tabs save button not found");
+		assertThrows(
+			() => tutorial.persistTutorialProgress("bad"),
+			TypeError,
+			"stepNo should be a number",
+		);
+
+		await tutorial.persistTutorialProgress();
+		assertEquals(harness.storage["tutorial-progress"], 3);
+
+		await tutorial.persistTutorialProgress(1);
+		assertEquals(harness.storage["tutorial-progress"], 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("showMessage appends link and shortcut only when they are not already present", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		await tutorial.createOverlay();
+		tutorial.translator = {
+			translate: async (key) => {
+				if (key === "already_complete") {
+					return "Message with https://docs.test and Shortcut: Alt+K";
 				}
-				button.click();
-			}),
-	);
-	await dispatchTutorialEvent(activePage, TUTORIAL_EVENT_CLOSE_MANAGE_TABS);
-	await captureUi(activePage, "after-step12");
+				return "Base message";
+			},
+		};
 
-	await clickTutorialConfirm(activePage, "step13");
-	await clickTutorialConfirm(activePage, "step14");
-	await captureUi(activePage, "after-step14");
-	for (let i = 0; i < 8; i++) {
-		const advanced = await clickTutorialConfirmIfVisible(
-			activePage,
-			`final-drain-${i + 1}`,
+		tutorial.showSpinner();
+		await tutorial.showMessage({
+			message: "base",
+			link: "https://docs.test",
+			shortcut: "Alt+K",
+		});
+		assertEquals(
+			tutorial.segments.textContent,
+			"Base message\n\nhttps://docs.test\n\nShortcut: Alt+K",
 		);
-		if (!advanced) {
-			break;
-		}
-		await sleep(250);
-	}
-	await ensureTutorialEnded(activePage);
-	await forceTutorialCompletionState(browser, activePage);
+		assert(tutorial.spinner.classList.contains(harness.constants.HIDDEN_CLASS));
 
-	await runWithPageRetries(
-		"final:tutorial-box-removed",
-		() =>
-			activePage.waitForFunction(
-				(selector) => document.querySelector(selector) == null,
-				{ timeout: 10000 },
-				TUTORIAL_BOX_SELECTOR,
-			),
-	).catch(async () => {
-		const livePage = await getUsableSalesforcePage(browser, activePage)
-			.catch(() => activePage);
-		await runWithPageRetries(
-			"final:tutorial-box-remove-fallback",
-			() =>
-				livePage.evaluate((selector) => {
-					document.querySelector(selector)?.remove();
-				}, TUTORIAL_BOX_SELECTOR),
-		).catch(() => null);
-	});
-	const tutorialProgress = await waitForPersistedTutorialProgress(
-		browser,
-		15,
-		30000,
-	);
-	if (tutorialProgress == null || tutorialProgress < 15) {
-		throw new Error(
-			`Tutorial did not complete. Stored progress: ${tutorialProgress}`,
+		await tutorial.showMessage({
+			message: "already_complete",
+			link: "https://docs.test",
+			shortcut: "Alt+K",
+		});
+		assertEquals(
+			tutorial.segments.textContent,
+			"Message with https://docs.test and Shortcut: Alt+K",
 		);
+	} finally {
+		await flush();
+		harness.cleanup();
 	}
-}
+});
 
-Deno.test(
-	"Tutorial completes end-to-end in Salesforce Chrome session on Linux",
-	{ sanitizeOps: false, sanitizeResources: false },
-	async () => {
-		const { browser, page } = await createSingleBrowserTutorialSession();
-		try {
-			const activePage = await initializeTutorialRun(browser, page);
-			await runTutorialFlow(browser, activePage);
-		} finally {
-			await browser.close().catch(() => null);
-		}
-	},
-);
+Deno.test("getElementNowOrLater creates a fake element after enough retries", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		const fakeEl = globalThis.document.createElement("div");
+		let callbackCalls = 0;
+		tutorial.retryCount = 5;
+
+		const result = await tutorial.getElementNowOrLater({
+			element: async () => null,
+			fakeElement: async () => fakeEl,
+		}, () => {
+			callbackCalls++;
+		});
+
+		assertEquals(result, fakeEl);
+		assertEquals(tutorial.retryCount, 6);
+		assertEquals(callbackCalls, 0);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("getElementNowOrLater schedules a retry when the element is still missing", async () => {
+	const harness = createHarness();
+	const originalSetTimeout = globalThis.setTimeout;
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		const scheduled = [] as Array<{ delay: number; callback: () => void }>;
+		setGlobal("setTimeout", ((callback: () => void, delay: number) => {
+			scheduled.push({ delay, callback });
+			return 1;
+		}) as typeof setTimeout);
+
+		let callbackCalls = 0;
+		const step = {
+			element: async () => null,
+			fakeElement: async () => null,
+		};
+
+		const result = await tutorial.getElementNowOrLater(step, (receivedStep) => {
+			assertEquals(receivedStep, step);
+			callbackCalls++;
+		});
+
+		assertEquals(result, undefined);
+		assertEquals(tutorial.retryCount, 1);
+		assertEquals(scheduled.length, 1);
+		assertEquals(scheduled[0].delay, 1000);
+
+		scheduled[0].callback();
+		assertEquals(callbackCalls, 1);
+	} finally {
+		setGlobal("setTimeout", originalSetTimeout);
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("end(false) cleans up the UI without overwriting stored progress", async () => {
+	const harness = createHarness({ tutorialProgress: 4 });
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.steps = [{}, {}, {}];
+		tutorial.isActive = true;
+		await tutorial.createOverlay();
+		const highlighted = globalThis.document.createElement("div");
+		globalThis.document.body.appendChild(highlighted);
+		tutorial.highlightElement(highlighted);
+
+		tutorial.end(false);
+
+		assertEquals(tutorial.isActive, false);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+		assert(!highlighted.classList.contains("awsf-tutorial-highlight"));
+		assertEquals(harness.storage["tutorial-progress"], 4);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("checkTutorial marks the tutorial completed when the user declines the first prompt", async () => {
+	const harness = createHarness({ tutorialProgress: null });
+	const previousConfirm = globalThis.confirm;
+	try {
+		const tutorialModule = await harness.load();
+		setGlobal("confirm", () => false);
+
+		await tutorialModule.checkTutorial();
+		await waitFor(() => harness.storage["tutorial-progress"] != null);
+
+		assertEquals(harness.storage["tutorial-progress"], 15);
+		assertEquals(harness.records.redirects, []);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+	} finally {
+		setGlobal("confirm", previousConfirm);
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("checkTutorial marks the tutorial completed when the user declines to continue", async () => {
+	const harness = createHarness({ tutorialProgress: 3 });
+	const previousConfirm = globalThis.confirm;
+	try {
+		const tutorialModule = await harness.load();
+		setGlobal("confirm", () => false);
+
+		await tutorialModule.checkTutorial();
+		await waitFor(() => harness.storage["tutorial-progress"] === 15);
+
+		assertEquals(harness.records.redirects, []);
+		assertEquals(globalThis.document.querySelector(".tut-v7"), null);
+	} finally {
+		setGlobal("confirm", previousConfirm);
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("nextStep configures the ending step and triggers confetti", async () => {
+	const harness = createHarness();
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+		tutorial.translator = harness.translator;
+		await tutorial.createOverlay();
+		tutorial.steps = [{
+			message: "tutorial_end",
+			beginsBlock: true,
+			isEndingStep: true,
+			waitFor: "confirm",
+		}];
+		tutorial.currentStep = -1;
+
+		let confettiCalls = 0;
+		tutorial.throwConfetti = () => {
+			confettiCalls++;
+		};
+
+		await tutorial.nextStep();
+
+		assertEquals(tutorial.currentStep, 0);
+		assertEquals(tutorial.confirmBtn.textContent, "translated:close");
+		assertEquals(confettiCalls, 1);
+		assertEquals(harness.storage["tutorial-progress"], 1);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
