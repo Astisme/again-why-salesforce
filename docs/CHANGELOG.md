@@ -20,6 +20,14 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Added `data_collection_permissions` for Firefox (#137) which made us bump its min-version to 140
 
+### Settings
+
+1. Added theme change in settings (light/dark) which syncs with the popup (#129)
+
+### Components
+
+1. Created new component for theme handling
+
 ## 🛠 Changed
 
 ### Salesforce
@@ -31,6 +39,7 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Added test for new review / sponsor logic
 2. Added tests for analytics
+3. Added tests for theme change behavior
 
 # v2.2.0
 

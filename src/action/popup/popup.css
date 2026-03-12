@@ -47,21 +47,6 @@ header {
 	}
 }
 
-div#theme-selector {
-	display: flex;
-	align-items: center;
-
-	& > a > svg {
-		& .primary {
-			fill: none;
-			stroke: var(--color);
-		}
-		& .secondary {
-			fill: var(--theme-fill);
-		}
-	}
-}
-
 svg {
 	height: 2rem;
 }

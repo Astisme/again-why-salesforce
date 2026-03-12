@@ -53,11 +53,32 @@ import {
 	sendExtensionMessage,
 } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
+import "/components/theme-selector/theme-selector.js";
 
 // no need to await as we do not need to call the translator
 // we only need it to translate the text on the screen and it may take the time it needs to do so
 ensureTranslatorAvailability();
 const invisible = "invisible";
+const html = document.documentElement;
+const themeTransitionClass = "theme-transitioning";
+const themeTransitionDuration = 500;
+let themeTransitionTimeout = null;
+
+/**
+ * Applies a temporary class so native controls can animate smoothly during theme changes.
+ */
+function startThemeTransition() {
+	clearTimeout(themeTransitionTimeout);
+	html.classList.add(themeTransitionClass);
+	themeTransitionTimeout = setTimeout(() => {
+		html.classList.remove(themeTransitionClass);
+	}, themeTransitionDuration);
+}
+
+document.querySelector("theme-selector-aws").addEventListener(
+	"before-theme-toggle",
+	startThemeTransition,
+);
 
 /**
  * Creates the object used to update the settings
