@@ -5,6 +5,10 @@ const html = document.documentElement;
 const invisible = "invisible";
 let styleInjected = false;
 
+/**
+ * Ensures the theme selector stylesheet is loaded only once.
+ * @return {void}
+ */
 function ensureStyles() {
 	if (styleInjected) {
 		return;
@@ -24,9 +28,17 @@ function ensureStyles() {
 	styleInjected = true;
 }
 
+/**
+ * Custom element that renders the theme toggle buttons and keeps them in sync
+ * with the current document theme.
+ */
 export class ThemeSelectorAws extends HTMLElement {
 	observer = new MutationObserver(() => this.syncVisibleButton());
 
+	/**
+	 * Initializes the component markup, listeners, and theme observer.
+	 * @return {void}
+	 */
 	connectedCallback() {
 		ensureStyles();
 		if (!this.querySelector("[data-theme-target]")) {
@@ -40,11 +52,19 @@ export class ThemeSelectorAws extends HTMLElement {
 		this.syncVisibleButton();
 	}
 
+	/**
+	 * Cleans up listeners and observers when the element is removed.
+	 * @return {void}
+	 */
 	disconnectedCallback() {
 		this.removeEventListener("click", this.handleClick);
 		this.observer.disconnect();
 	}
 
+	/**
+	 * Renders the light and dark theme toggle buttons.
+	 * @return {void}
+	 */
 	render() {
 		this.innerHTML = `
 			<button
@@ -105,11 +125,19 @@ export class ThemeSelectorAws extends HTMLElement {
 		`;
 	}
 
+	/**
+	 * Reads the currently active theme from the document or persisted settings.
+	 * @return {string} the active theme name
+	 */
 	getCurrentTheme() {
 		return html.dataset.theme ?? localStorage.getItem("usingTheme") ??
 			"light";
 	}
 
+	/**
+	 * Shows the button for switching away from the current theme and hides the other one.
+	 * @return {void}
+	 */
 	syncVisibleButton() {
 		const lightButton = this.querySelector('[data-theme-target="light"]');
 		const darkButton = this.querySelector('[data-theme-target="dark"]');
@@ -123,6 +151,11 @@ export class ThemeSelectorAws extends HTMLElement {
 		buttonToHide?.classList.add(invisible, HIDDEN_CLASS);
 	}
 
+	/**
+	 * Handles theme toggle clicks and dispatches the pre-toggle lifecycle event.
+	 * @param {MouseEvent} e - the click event fired on the component
+	 * @return {void}
+	 */
 	handleClick = (e) => {
 		if (!e.target.closest("button")) {
 			return;
@@ -140,10 +173,12 @@ export class ThemeSelectorAws extends HTMLElement {
 		setTimeout(() => {
 			buttonToShow?.classList.remove(invisible);
 		}, 200);
-		this.dispatchEvent(new CustomEvent("before-theme-toggle", {
-			bubbles: true,
-			composed: true,
-		}));
+		this.dispatchEvent(
+			new CustomEvent("before-theme-toggle", {
+				bubbles: true,
+				composed: true,
+			}),
+		);
 		requestAnimationFrame(() => {
 			requestAnimationFrame(() => handleSwitchColorTheme());
 		});

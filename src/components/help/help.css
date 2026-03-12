@@ -66,11 +66,11 @@
 	transition:
 		opacity 0.2s ease-in-out,
 		background-color var(--help-transition-duration)
-			var(--help-transition-timing-function),
+		var(--help-transition-timing-function),
 		border-color var(--help-transition-duration)
-			var(--help-transition-timing-function),
+		var(--help-transition-timing-function),
 		color var(--help-transition-duration)
-			var(--help-transition-timing-function);
+		var(--help-transition-timing-function);
 }
 
 .help-icon .tooltip::after {

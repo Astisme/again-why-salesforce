@@ -20,8 +20,14 @@ label,
 .slds-dueling-list__options,
 .slds-listbox,
 .slds-listbox__option {
-	transition-property: background-color, border-color, color, fill, stroke,
-		box-shadow, accent-color;
+	transition-property:
+		background-color,
+		border-color,
+		color,
+		fill,
+		stroke,
+		box-shadow,
+		accent-color;
 	transition-duration: var(--transition-duration);
 	transition-timing-function: var(--transition-timing-function);
 }
@@ -44,7 +50,8 @@ html.theme-transitioning input[type="checkbox"] {
 	filter: saturate(0.2);
 }
 
-html.theme-transitioning :is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
+html.theme-transitioning
+	:is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
 	opacity: 0.78;
 }
 
@@ -243,15 +250,16 @@ hr {
 	transition-timing-function: var(--transition-timing-function);
 }
 
-#header :is(
-	.slds-context-bar,
-	.slds-context-bar__primary,
-	.slds-context-bar__secondary,
-	.slds-context-bar__label-action,
-	.slds-context-bar__button,
-	.slds-truncate,
-	.appName
-) {
+#header
+	:is(
+		.slds-context-bar,
+		.slds-context-bar__primary,
+		.slds-context-bar__secondary,
+		.slds-context-bar__label-action,
+		.slds-context-bar__button,
+		.slds-truncate,
+		.appName
+	) {
 	transition-property: background-color, color;
 	transition-duration: var(--transition-duration);
 	transition-timing-function: var(--transition-timing-function);
@@ -267,11 +275,22 @@ hr {
 
 html[data-theme="dark"] {
 	#header,
-	#header :is(.slds-context-bar, .slds-context-bar__primary, .slds-context-bar__secondary) {
+	#header
+		:is(
+			.slds-context-bar,
+			.slds-context-bar__primary,
+			.slds-context-bar__secondary
+		) {
 		background-color: var(--shade);
 	}
 
-	#header :is(.slds-context-bar__label-action, .slds-context-bar__button, .slds-truncate, .appName) {
+	#header
+		:is(
+			.slds-context-bar__label-action,
+			.slds-context-bar__button,
+			.slds-truncate,
+			.appName
+		) {
 		color: var(--color);
 	}
 
