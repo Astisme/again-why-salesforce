@@ -337,7 +337,11 @@ export const mockBrowser = {
 			},
 			triggerUpdated(
 				tabId: number,
-				changeInfo: { status?: string; url?: string; [key: string]: any },
+				changeInfo: {
+					status?: string;
+					url?: string;
+					[key: string]: any;
+				},
 				tab: BrowserTab,
 			): void {
 				for (const listener of this._listeners) {

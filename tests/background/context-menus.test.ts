@@ -17,7 +17,7 @@ import { BROWSER, CMD_SAVE_AS_TAB, CXM_PAGE_SAVE_TAB } from "/constants.js";
  * @param {string} url - The URL that should be treated as the active tab.
  * @return {Promise<void>}
  */
-async function setActiveTab(url: string) {
+function setActiveTab(url: string) {
 	BROWSER.tabs.setMockBrowserTabs([{
 		id: 0,
 		url,
@@ -105,9 +105,9 @@ Deno.test({
 
 		await checkAddRemoveContextMenus("create");
 
-		const matchingMenus = BROWSER.contextMenus._contextMenus.filter((menu) =>
-			menu.id === CXM_PAGE_SAVE_TAB
-		);
+		const matchingMenus = BROWSER.contextMenus._contextMenus.filter((
+			menu,
+		) => menu.id === CXM_PAGE_SAVE_TAB);
 		assertEquals(matchingMenus.length, 1);
 		assertStringIncludes(matchingMenus[0].title, "(Alt+Shift+P)");
 	},

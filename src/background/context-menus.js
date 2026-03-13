@@ -535,9 +535,9 @@ export function checkAddRemoveContextMenus(what, callback = null) {
 		try {
 			await createMenuItems();
 			if (what != null) {
-                bg_notify({ what });
+				bg_notify({ what });
 			}
-            callback?.();
+			callback?.();
 		} catch (error) {
 			await logContextMenuError(error);
 		}
@@ -555,7 +555,7 @@ export function refreshContextMenus(what) {
 		try {
 			await createMenuItems(true);
 			if (what != null) {
-                bg_notify({ what });
+				bg_notify({ what });
 			}
 		} catch (error) {
 			await logContextMenuError(error);
