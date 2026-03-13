@@ -144,7 +144,11 @@ class ReviewSponsorAws extends HTMLElement {
 		shadow.appendChild(result.root);
 		const linkEl = injectStyle(
 			"awsf-rev-spons",
-			{ link: BROWSER.runtime.getURL("/components/review-sponsor/review-sponsor.css") },
+			{
+				link: BROWSER.runtime.getURL(
+					"/components/review-sponsor/review-sponsor.css",
+				),
+			},
 		);
 		this.shadowRoot.appendChild(linkEl);
 		this._showReviewOrSponsor(result);
