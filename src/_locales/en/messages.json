@@ -839,6 +839,10 @@
 		"message": "Lead",
 		"description": "The page related to ObjectManager/Lead/FieldsAndRelationships/view"
 	},
+	"learn_more_about_extension": {
+		"message": "learn more about $extension_label",
+		"description": "[popup][settings] accessible title and aria-label for the wiki help button"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce's custom navigation technology"
