@@ -664,15 +664,32 @@ class MockDocument extends EventTarget {
 export function createMockElement() {
 	return {
 		classList: {
-			removed: [] as string[],
-			/**
-			 * Records removed CSS classes.
-			 *
-			 * @param cls CSS class being removed.
-			 * @return {void}
-			 */
+			list: [] as string[],
+			add(cls: string) {
+				if (!this.list.includes(cls)) {
+					this.list.push(cls);
+				}
+			},
 			remove(cls: string) {
-				this.removed.push(cls);
+				const index = this.list.indexOf(cls);
+				if (index !== -1) {
+					this.list.splice(index, 1);
+				}
+			},
+			toggle(cls: string, force: boolean) {
+				if (force != null) {
+					if (force) {
+						this.add(cls);
+					} else {
+						this.remove(cls);
+					}
+					return;
+				}
+				if (this.list.includes(cls)) {
+					this.remove(cls);
+				} else {
+					this.add(cls);
+				}
 			},
 		},
 		// deno-lint-ignore ban-types
@@ -687,6 +704,10 @@ export function createMockElement() {
 		// deno-lint-ignore ban-types
 		addEventListener(event: string, cb: Function) {
 			this.events[event] = cb;
+		},
+		attributes: {} as Map<string, string>,
+		setAttribute(key: string, value: string) {
+			this.attributes[key] = value;
 		},
 	};
 }

@@ -84,11 +84,11 @@
 		"description": "close without anything happening"
 	},
 	"cmd_export_all": {
-		"message": "Show the modal to export all saved $tabs",
+		"message": "Show the modal to export your saved Tabs",
 		"description": "[command description] the user wants to export all $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_import": {
-		"message": "Show the modal to import new $tabs",
+		"message": "Show the modal to import new Tabs",
 		"description": "[command description] the user wants to import new $tabs. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_open_other_org": {
@@ -96,15 +96,15 @@
 		"description": "[command description] the user wants to open the current page in another $org. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_remove_tab": {
-		"message": "Remove the current page from the $tab list (if saved)",
+		"message": "Remove the current page from the Tab list (if saved)",
 		"description": "[command description] the user wants to remove the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_save_as_tab": {
-		"message": "Save the current page in the $tab list (if not saved)",
+		"message": "Save the current page in the Tab list (if not saved)",
 		"description": "[command description] the user wants to save the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_toggle_org": {
-		"message": "Toggle the current page's $org value (if saved)",
+		"message": "Toggle the current page's Org value (if saved)",
 		"description": "[command description] the user wants to toggle the $org for the current page. DO NOT USE PLACEHOLDERS"
 	},
 	"cmd_update_tab": {

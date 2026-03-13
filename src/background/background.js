@@ -57,7 +57,10 @@ import {
 	checkForUpdates,
 	checkLaunchExport,
 } from "./utils.js";
-import { checkAddRemoveContextMenus } from "./context-menus.js";
+import {
+	checkAddRemoveContextMenus,
+	refreshContextMenus,
+} from "./context-menus.js";
 import cssColorNames from "./css-color-names.json" with { type: "json" };
 
 /**
@@ -706,14 +709,28 @@ function setExtensionBrowserListeners() {
 		"activate",
 		() => checkAddRemoveContextMenus(WHAT_ACTIVATE),
 	);
-	// when the tab changes
+	// when the active tab changes
 	BROWSER.tabs.onActivated.addListener(() =>
 		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates)
 	);
+	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
+	// when the current tab URL changes without switching tabs
+	BROWSER.tabs.onUpdated?.addListener((_, changeInfo, tab) => {
+		if (
+			tab?.active !== true ||
+			(changeInfo.status !== "complete" && changeInfo.url == null)
+		) {
+			return;
+		}
+		debouncedCheckMenus("highlighted");
+	});
 	// when window changes
 	BROWSER.windows.onFocusChanged.addListener(() =>
 		checkAddRemoveContextMenus(WHAT_FOCUS_CHANGED)
 	);
+	BROWSER.commands.onChanged?.addListener(() => {
+		refreshContextMenus("highlighted");
+	});
 
 	/*
   // TODO update uninstall url

@@ -111,7 +111,7 @@ async function generateFavouriteButton() {
 	button.classList.add("slds-button", "slds-button--neutral", "uiButton");
 	button.setAttribute("type", "button");
 	button.setAttribute("aria-live", "off");
-	button.setAttribute("aria-label", "");
+	button.setAttribute("aria-pressed", "false");
 	button.addEventListener(
 		"click",
 		actionFavourite,
@@ -140,18 +140,27 @@ async function generateFavouriteButton() {
 		}
 	}
 	const translator = await ensureTranslatorAvailability();
+	const saveTabAssistive = `${await translator.translate("save_tab")}${
+		starCmd == null ? "" : ` (${starCmd})`
+	}`;
+	const removeTabAssistive = `${await translator.translate("remove_tab")}${
+		slashedStarCmd == null ? "" : ` (${slashedStarCmd})`
+	}`;
+	button.dataset.saveAssistiveText = saveTabAssistive;
+	button.dataset.removeAssistiveText = removeTabAssistive;
+	button.setAttribute("aria-label", saveTabAssistive);
+	const assistiveText = document.createElement("span");
+	assistiveText.classList.add("slds-assistive-text");
+	assistiveText.textContent = saveTabAssistive;
+	button.appendChild(assistiveText);
 	const star = createStarSvg({
 		id: STAR_ID,
-		alt: `${await translator.translate("save_tab")}${
-			starCmd == null ? "" : ` (${starCmd})`
-		}`,
+		alt: saveTabAssistive,
 	}, false);
 	span.appendChild(star);
 	const slashedStar = createStarSvg({
 		id: SLASHED_STAR_ID,
-		alt: `${await translator.translate("remove_tab")}${
-			slashedStarCmd == null ? "" : ` (${slashedStarCmd})`
-		}`,
+		alt: removeTabAssistive,
 	}, true);
 	slashedStar.classList.add(HIDDEN_CLASS);
 	span.appendChild(slashedStar);
@@ -198,6 +207,7 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 	if (isSaved == null) {
 		return;
 	}
+	const favouriteButton = button ?? document.getElementById(BUTTON_ID);
 	const star = getFavouriteImage(STAR_ID, button);
 	const slashedStar = getFavouriteImage(SLASHED_STAR_ID, button);
 	if (isSaved) {
@@ -206,6 +216,19 @@ function toggleFavouriteButton(isSaved = null, button = null) {
 	} else {
 		star.classList.remove(HIDDEN_CLASS);
 		slashedStar.classList.add(HIDDEN_CLASS);
+	}
+	if (favouriteButton != null) {
+		const assistiveLabel = isSaved
+			? favouriteButton.dataset.removeAssistiveText
+			: favouriteButton.dataset.saveAssistiveText;
+		favouriteButton.setAttribute("aria-pressed", `${isSaved}`);
+		favouriteButton.setAttribute("aria-label", assistiveLabel);
+		const assistiveText = favouriteButton.querySelector(
+			".slds-assistive-text",
+		);
+		if (assistiveText != null) {
+			assistiveText.textContent = assistiveLabel;
+		}
 	}
 }
 

@@ -2,6 +2,15 @@
 const process = require('node:process');
 const fs = require('fs');
 
+const COMMENT_MARKER = '<!-- pr-tests-comment -->';
+
+function slugify(value) {
+	return String(value)
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}
+
 /**
  * reads the given logFile and writes a comment with its content on github
  * if the contents match the matchPattern
@@ -91,7 +100,9 @@ module.exports = async function commentOnPr({
 		owner:			context.repo.owner,
 		repo:			context.repo.repo,
 		issue_number:   context.issue.number,
-		body:		    `## ${title}:
+		body:		    `${COMMENT_MARKER}
+<!-- pr-tests-title:${slugify(title)} -->
+## ${title}:
 \`\`\`
 ${clean}
 \`\`\``,
