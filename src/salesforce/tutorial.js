@@ -456,7 +456,7 @@ class Tutorial {
 				pageUrl: this.secondRedirectElement.url,
 				element: () =>
 					document.querySelector(
-						`#${MODAL_ID} #again-why-salesforce-modal-confirm`,
+						`#${MODAL_ID} #${MODAL_ID}-save-btn`,
 					),
 				action: ACTION.highlight,
 				waitFor: WAIT_FOR.event,
@@ -520,11 +520,19 @@ class Tutorial {
 		this.spinner = elements.spinner;
 		this.segments = elements.segments;
 		this.confirmBtn = elements.confirmBtn;
+		this.closeBtn = elements.closeBtn;
+		this.closeBtn.addEventListener(
+			"click",
+			() => this.end(true, this.currentStep),
+		);
 		this.btnsParent = elements.btnsParent;
 		// append elements to the page
 		document.body.appendChild(this.overlay);
 		document.body.appendChild(this.messageBox);
 		document.body.appendChild(this.spinner);
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") this.end(true, this.currentStep);
+		});
 	}
 
 	/**
@@ -576,9 +584,7 @@ class Tutorial {
 		if (step.beginsBlock) {
 			this.persistTutorialProgress();
 			if (step.isEndingStep) {
-				this.confirmBtn.textContent = await this.translator.translate(
-					"close",
-				);
+				this.confirmBtn.remove();
 				this.throwConfetti();
 			}
 		}
@@ -760,6 +766,7 @@ class Tutorial {
 		// Add highlight to the new element
 		this.highlightedElement = el;
 		this.highlightedElement?.classList.add(TUTORIAL_HIGHLIGHT_CLASS);
+		this.highlightedElement?.focus();
 	}
 
 	/**
@@ -801,6 +808,7 @@ class Tutorial {
 			}
 		}, { once: true });
 		this.btnsParent.classList.remove(HIDDEN_CLASS);
+		this.confirmBtn.focus();
 	}
 
 	/**
@@ -824,15 +832,16 @@ class Tutorial {
 	 * sets the active flag to false, and stores completion status in localStorage.
 	 *
 	 * @param {boolean} [shouldSaveProgress=true] - Whether to save the tutorial's completion status.
+	 * @param {number} [stepToSave=this.steps.length] - The number of completed steps to save
 	 */
-	end(shouldSaveProgress = true) {
+	end(shouldSaveProgress = true, stepToSave = this.steps.length) {
 		this.isActive = false;
 		this.overlay?.remove();
 		this.messageBox?.remove();
 		this.spinner?.remove();
 		this.highlightedElement?.classList.remove(TUTORIAL_HIGHLIGHT_CLASS);
 		if (shouldSaveProgress) {
-			this.persistTutorialProgress(this.steps.length);
+			this.persistTutorialProgress(stepToSave);
 		}
 	}
 

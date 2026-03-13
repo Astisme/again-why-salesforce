@@ -831,6 +831,10 @@
 		"message": "Label",
 		"description": "[key] the Tab's name"
 	},
+	"learn_more_about_extension": {
+		"message": "learn more about $extension_label",
+		"description": "[popup][settings] accessible title and aria-label for the wiki help button"
+	},
 	"lead": {
 		"message": "Lead",
 		"description": "The page related to ObjectManager/Lead/FieldsAndRelationships/view"
@@ -1584,7 +1588,7 @@
 		"description": "[tutorial] keyboard shortcut"
 	},
 	"tutorial_manage_tabs": {
-		"message": "Right-click on the page (not on a Tab) and select 'Again, Why Salesforce > Manage Tabs' to open the management modal.",
+		"message": "Right-click on the page (not on a Tab) and select $extension_label > $cxm_manage_tabs to open the management modal.",
 		"description": "[tutorial] manage tabs"
 	},
 	"tutorial_manage_tabs_link": {
@@ -1592,7 +1596,7 @@
 		"description": "[tutorial] manage tabs link"
 	},
 	"tutorial_pin_tab": {
-		"message": "Right-click on the highlighted $tab and select 'Move > Pin' to pin it.",
+		"message": "Right-click on the highlighted $tab and select $extension_label > $cxm_move > $cxm_pin_tab to pin it.",
 		"description": "[tutorial] pin tab"
 	},
 	"tutorial_pinned_explanation": {

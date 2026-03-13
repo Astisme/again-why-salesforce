@@ -1016,6 +1016,7 @@ function createSldsModalShell({
 	cancelSpan.textContent = cancelButtonLabel;
 	cancelButton.appendChild(cancelSpan);
 	const saveButton = document.createElement("button");
+	saveButton.id = `${MODAL_ID}-save-btn`;
 	saveButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
@@ -1150,6 +1151,7 @@ function generateSldsPromptModal({
 		"slds-text-align_center",
 	);
 	bodyParagraph.style.margin = "0";
+	bodyParagraph.textContent = bodyText;
 	article.appendChild(bodyParagraph);
 	article.style.padding = "1em";
 	return {
@@ -2765,16 +2767,29 @@ async function generateMessageBox() {
 	segments.classList.add("tut-v7-segments");
 	const actions = document.createElement("div");
 	actions.classList.add("tut-v7-actions");
+	const translator = await ensureTranslatorAvailability();
 	const confirmBtn = document.createElement("button");
 	confirmBtn.classList.add(
 		"slds-button",
 		"slds-button_brand",
 	);
-	confirmBtn.textContent = await (await ensureTranslatorAvailability())
-		.translate("confirm");
+	confirmBtn.textContent = await translator.translate("confirm");
 	actions.append(confirmBtn);
+	const closeBtn = document.createElement("button");
+	closeBtn.classList.add(
+		"slds-button",
+		"slds-button_neutral",
+	);
+	closeBtn.textContent = await translator.translate("close");
+	actions.append(closeBtn);
 	messageBox.append(header, segments, actions);
-	return { messageBox, segments, confirmBtn, btnsParent: actions };
+	return {
+		messageBox,
+		segments,
+		confirmBtn,
+		closeBtn,
+		btnsParent: actions,
+	};
 }
 
 /**
