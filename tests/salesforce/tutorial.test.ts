@@ -121,6 +121,7 @@ type TutorialUi = {
 	spinner: HTMLElement;
 	segments: HTMLElement;
 	confirmBtn: HTMLElement;
+	closeBtn: HTMLElement;
 	btnsParent: HTMLElement;
 };
 /**
@@ -510,7 +511,7 @@ function createHarness(options: {
 		table.appendChild(tbody);
 		modal.appendChild(table);
 		const saveButton = globalThis.document.createElement("button");
-		saveButton.id = "again-why-salesforce-modal-confirm";
+		saveButton.id = "again-why-salesforce-modal-save-btn";
 		modal.appendChild(saveButton);
 		globalThis.document.body.appendChild(modal);
 		return modal;
@@ -718,7 +719,11 @@ function createHarness(options: {
 				const btnsParent = globalThis.document.createElement("div");
 				btnsParent.classList.add(constants.HIDDEN_CLASS);
 				const confirmBtn = globalThis.document.createElement("button");
+				confirmBtn.textContent = "translated:confirm";
+				const closeBtn = globalThis.document.createElement("button");
+				closeBtn.textContent = "translated:close";
 				btnsParent.appendChild(confirmBtn);
+				btnsParent.appendChild(closeBtn);
 				messageBox.appendChild(segments);
 				messageBox.appendChild(btnsParent);
 				const spinner = globalThis.document.createElement("div");
@@ -729,6 +734,7 @@ function createHarness(options: {
 					spinner,
 					segments,
 					confirmBtn,
+					closeBtn,
 					btnsParent,
 				};
 				records.latestUi = ui;
@@ -959,9 +965,10 @@ Deno.test("tutorial runs end to end and persists completion without a browser", 
 		await advanceCurrentStep(tutorial);
 		await harness.waitForMessage("tutorial_end");
 		assertEquals(
-			harness.records.latestUi?.confirmBtn.textContent,
+			harness.records.latestUi?.closeBtn.textContent,
 			"translated:close",
 		);
+		assertEquals(harness.records.latestUi?.confirmBtn.parentElement, null);
 
 		await advanceCurrentStep(tutorial);
 		await waitFor(() => !tutorial.isActive);
@@ -1298,7 +1305,8 @@ Deno.test("nextStep configures the ending step and triggers confetti", async () 
 		await tutorial.nextStep();
 
 		assertEquals(tutorial.currentStep, 0);
-		assertEquals(tutorial.confirmBtn.textContent, "translated:close");
+		assertEquals(tutorial.closeBtn.textContent, "translated:close");
+		assertEquals(tutorial.confirmBtn.parentElement, null);
 		assertEquals(confettiCalls, 1);
 		assertEquals(harness.storage["tutorial-progress"], 1);
 	} finally {
