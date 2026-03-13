@@ -32,6 +32,8 @@ Please remember that this project is entirely funded by **the support of its use
 
 ## 🛠 Changed
 
+1. Now using way less loose strings for message exchanges and instead relying on constants
+
 ### Salesforce
 
 1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
@@ -43,6 +45,8 @@ Please remember that this project is entirely funded by **the support of its use
 2. Added tests for analytics
 3. Added tests for theme change behavior
 4. Added tests for the new tutorial
+5. Added tests for new global functions
+6. Added tests for new function in TabContainer
 
 # v2.2.0
 

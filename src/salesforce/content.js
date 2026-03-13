@@ -757,10 +757,8 @@ export async function performActionOnTabs(
 				}
 				break;
 			case WHAT_PAGE_SAVE_TAB:
-				pageActionTab(true);
-				break;
-			case WHAT_PAGE_REMOVE_TAB:
-				pageActionTab(false);
+          case WHAT_PAGE_REMOVE_TAB:
+				pageActionTab(action === WHAT_PAGE_SAVE_TAB);
 				break;
 			default: {
 				const translator = await ensureTranslatorAvailability();

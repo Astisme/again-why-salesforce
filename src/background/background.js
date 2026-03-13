@@ -713,7 +713,7 @@ function setExtensionBrowserListeners() {
 	BROWSER.tabs.onActivated.addListener(() =>
 		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates)
 	);
-	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
+	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus(WHAT_HIGHLIGHTED));
 	// when the current tab URL changes without switching tabs
 	BROWSER.tabs.onUpdated?.addListener((_, changeInfo, tab) => {
 		if (
@@ -722,14 +722,14 @@ function setExtensionBrowserListeners() {
 		) {
 			return;
 		}
-		debouncedCheckMenus("highlighted");
+		debouncedCheckMenus(WHAT_HIGHLIGHTED);
 	});
 	// when window changes
 	BROWSER.windows.onFocusChanged.addListener(() =>
 		checkAddRemoveContextMenus(WHAT_FOCUS_CHANGED)
 	);
 	BROWSER.commands.onChanged?.addListener(() => {
-		refreshContextMenus("highlighted");
+		refreshContextMenus(WHAT_HIGHLIGHTED);
 	});
 
 	/*
