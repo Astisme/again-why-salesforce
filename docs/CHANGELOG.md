@@ -23,6 +23,7 @@ Please remember that this project is entirely funded by **the support of its use
 ### Settings
 
 1. Added theme change in settings (light/dark) which syncs with the popup (#129)
+2. An onboarding Tutorial has been created! (#135)
 
 ### Components
 
@@ -40,6 +41,7 @@ Please remember that this project is entirely funded by **the support of its use
 1. Added test for new review / sponsor logic
 2. Added tests for analytics
 3. Added tests for theme change behavior
+4. Added tests for the new tutorial
 
 # v2.2.0
 

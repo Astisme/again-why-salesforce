@@ -20,7 +20,7 @@
 		"test": "deno task test-gen && deno task test-bg && deno task test-cmp && deno task test-sf",
 		"test-gen": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/*.test.ts",
 		"test-bg": "deno test --no-check --parallel --quiet --import=tests/mocks.ts ./tests/background/",
-		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom.ts --allow-env ./tests/components/",
+		"test-cmp": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --import=tests/happydom-global.ts --allow-env ./tests/components/",
 		"test-sf": "deno test --no-check --parallel --quiet --import=tests/mocks.ts --allow-read tests/salesforce/*.test.ts",
 
 		"fmt": "deno fmt",
@@ -51,6 +51,6 @@
 		"puppeteer": "npm:puppeteer@^24.17.0",
 		"@std/testing/asserts": "https://deno.land/std/testing/asserts.ts",
 		"@std/testing/mock": "https://deno.land/std/testing/mock.ts",
-		"happydom": "npm:happy-dom"
+		"happydom": "npm:happy-dom/lib/window/Window.js"
 	}
 }

@@ -778,22 +778,23 @@ export async function generateSection(sectionTitle = null) {
 }
 
 /**
- * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
+ * Builds the shared SLDS modal shell used by Salesforce-style dialogs.
  *
- * @param {string} modalTitle - The title of the modal.
- * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
- * @return {Object} An object containing key elements of the modal:
- * - modalParent: The main modal container element.
- * - article: The content area within the modal.
- * - saveButton: The save button element for user actions.
- * - closeButton: The close button element for closing the modal.
- * - buttonContainer: The container for the footer of the modal
+ * @param {Object} [options={}] - Modal configuration.
+ * @param {string} [options.modalTitle=""] - Already translated modal title.
+ * @param {string} [options.closeButtonLabel=""] - Already translated close button title.
+ * @param {string} [options.cancelButtonLabel=""] - Already translated cancel button label.
+ * @param {string} [options.confirmButtonLabel=""] - Already translated confirm button label.
+ * @param {boolean} [options.showRequiredInfo=true] - Whether to render the required legend container.
+ * @return {Object} Core modal elements that callers can customize further.
  */
-export async function generateSldsModal({
+function createSldsModalShell({
 	modalTitle = "",
-	saveButtonLabel = "continue",
+	closeButtonLabel = "",
+	cancelButtonLabel = "",
+	confirmButtonLabel = "",
+	showRequiredInfo = true,
 } = {}) {
-	const translator = await ensureTranslatorAvailability();
 	const modalParent = document.createElement("div");
 	modalParent.id = MODAL_ID;
 	modalParent.classList.add(
@@ -813,7 +814,7 @@ export async function generateSldsModal({
 	const awsfStyle = injectStyle(
 		"awsf-modal-style",
 		{
-			css: `.${HIDDEN_CLASS} { display:none; visibility:hidden; } .again-why-salesforce :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`,
+			css: `.${HIDDEN_CLASS} { display:none; visibility:hidden; } .${EXTENSION_NAME} :is([disabled=true], td[data-draggable=false]) { cursor: not-allowed !important; pointer-events: painted; }`,
 		},
 	);
 	modalParent.appendChild(awsfStyle);
@@ -853,8 +854,7 @@ export async function generateSldsModal({
 	modalContainer.appendChild(modalHeader);
 	const closeButton = document.createElement("button");
 	closeButton.setAttribute("type", "button");
-	const msg_cancelClose = await translator.translate("cancel_close");
-	closeButton.setAttribute("title", msg_cancelClose);
+	closeButton.setAttribute("title", closeButtonLabel);
 	closeButton.classList.add(
 		"slds-button",
 		"slds-button_icon",
@@ -893,10 +893,10 @@ export async function generateSldsModal({
 	closeGroupElement.appendChild(closePath);
 	const assistiveText = document.createElement("span");
 	assistiveText.classList.add("slds-assistive-text");
-	assistiveText.textContent = msg_cancelClose;
+	assistiveText.textContent = closeButtonLabel;
 	closeButton.appendChild(assistiveText);
 	const modalBody = document.createElement("div");
-	modalBody.id = "content_1099:0";
+	modalBody.id = `${MODAL_ID}-content`;
 	modalBody.classList.add(
 		"modal-body",
 		"scrollable",
@@ -940,7 +940,7 @@ export async function generateSldsModal({
 	fieldContainerDiv.dataset.auraClass = "forceDetailPanelDesktop";
 	actionBodyDiv.appendChild(fieldContainerDiv);
 	const article = document.createElement("article");
-	article.setAttribute("aria-labelledby", MODAL_ID);
+	article.setAttribute("aria-describedby", modalBody.id);
 	fieldContainerDiv.appendChild(article);
 	const titleContainer = document.createElement("div");
 	titleContainer.classList.add(
@@ -957,20 +957,24 @@ export async function generateSldsModal({
 	awsIcon.style.height = "2rem";
 	titleContainer.appendChild(awsIcon);
 	const heading = document.createElement("h2");
+	heading.id = `${MODAL_ID}-title`;
 	heading.textContent = modalTitle;
 	heading.style.marginLeft = "0.5rem";
 	titleContainer.appendChild(heading);
-	const legend = document.createElement("div");
-	legend.classList.add(
-		"required-legend",
-		"slds-p-top--none",
-	);
-	article.appendChild(legend);
-	const abbr = document.createElement("abbr");
-	abbr.classList.add("slds-required");
-	abbr.textContent = "*";
-	legend.appendChild(abbr);
-	legend.append(await translator.translate("required_info"));
+	article.setAttribute("aria-labelledby", heading.id);
+	let legend = null;
+	if (showRequiredInfo) {
+		legend = document.createElement("div");
+		legend.classList.add(
+			"required-legend",
+			"slds-p-top--none",
+		);
+		article.appendChild(legend);
+		const abbr = document.createElement("abbr");
+		abbr.classList.add("slds-required");
+		abbr.textContent = "*";
+		legend.appendChild(abbr);
+	}
 	const footerContainer = document.createElement("div");
 	footerContainer.classList.add("inlineFooter");
 	footerContainer.style.borderTop =
@@ -1000,8 +1004,7 @@ export async function generateSldsModal({
 	);
 	cancelButton.setAttribute("aria-live", "off");
 	cancelButton.setAttribute("type", "button");
-	const msg_cancel = await translator.translate("cancel");
-	cancelButton.setAttribute("title", msg_cancel);
+	cancelButton.setAttribute("title", cancelButtonLabel);
 	cancelButton.setAttribute("aria-label", "");
 	cancelButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(cancelButton);
@@ -1009,10 +1012,9 @@ export async function generateSldsModal({
 	const cancelSpan = document.createElement("span");
 	cancelSpan.classList.add("label", "bBody");
 	cancelSpan.setAttribute("dir", "ltr");
-	cancelSpan.textContent = msg_cancel;
+	cancelSpan.textContent = cancelButtonLabel;
 	cancelButton.appendChild(cancelSpan);
 	const saveButton = document.createElement("button");
-	saveButton.id = MODAL_CONFIRM_ID;
 	saveButton.classList.add(
 		"slds-button",
 		"slds-button_neutral",
@@ -1022,21 +1024,19 @@ export async function generateSldsModal({
 	);
 	saveButton.setAttribute("aria-live", "off");
 	saveButton.setAttribute("type", "submit");
-	const msg_continue = await translator.translate(saveButtonLabel);
-	saveButton.setAttribute("title", msg_continue);
+	saveButton.setAttribute("title", confirmButtonLabel);
 	saveButton.setAttribute("aria-label", "");
 	saveButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(saveButton);
 	const saveSpan = document.createElement("span");
 	saveSpan.classList.add("label", "bBody");
 	saveSpan.setAttribute("dir", "ltr");
-	saveSpan.textContent = msg_continue;
+	saveSpan.textContent = confirmButtonLabel;
 	saveButton.appendChild(saveSpan);
 	/**
 	 * Handles the keydown event and triggers specific actions based on the key pressed.
 	 *
 	 * @param {KeyboardEvent} event - The keydown event object.
-	 * @return {void}
 	 */
 	function keyDownListener(event) {
 		switch (event.key) {
@@ -1057,7 +1057,109 @@ export async function generateSldsModal({
 		article,
 		saveButton,
 		closeButton,
+		cancelButton,
 		buttonContainer: buttonContainerInnerDiv,
+		modalBody,
+		legend,
+	};
+}
+
+/**
+ * Generates a Salesforce Lightning Design System (SLDS)-styled modal dialog.
+ *
+ * @param {string} modalTitle - The title of the modal.
+ * @param {string} [saveButtonLabel="continue"] The text to translate to use for the submit button
+ * @return {Object} An object containing key elements of the modal:
+ * - modalParent: The main modal container element.
+ * - article: The content area within the modal.
+ * - saveButton: The save button element for user actions.
+ * - closeButton: The close button element for closing the modal.
+ * - buttonContainer: The container for the footer of the modal
+ */
+export async function generateSldsModal({
+	modalTitle = "",
+	saveButtonLabel = "continue",
+} = {}) {
+	const translator = await ensureTranslatorAvailability();
+	const msg_cancelClose = await translator.translate("cancel_close");
+	const msg_cancel = await translator.translate("cancel");
+	const msg_continue = await translator.translate(saveButtonLabel);
+	const {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		buttonContainer,
+		legend,
+	} = createSldsModalShell({
+		modalTitle,
+		closeButtonLabel: msg_cancelClose,
+		cancelButtonLabel: msg_cancel,
+		confirmButtonLabel: msg_continue,
+	});
+	legend?.append(await translator.translate("required_info"));
+	return {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		buttonContainer,
+	};
+}
+
+/**
+ * Generates a synchronous Salesforce-style prompt modal with translated text
+ * already provided by the caller.
+ *
+ * @param {Object} [options={}] - Prompt configuration.
+ * @param {string} [options.modalTitle=""] - Already translated modal title.
+ * @param {string} [options.bodyText=""] - Already translated modal body.
+ * @param {string} [options.confirmButtonLabel=""] - Already translated confirm button label.
+ * @param {string} [options.cancelButtonLabel=""] - Already translated cancel button label.
+ * @param {string} [options.closeButtonLabel=""] - Already translated close button label.
+ * @return {Object} Prompt modal elements.
+ */
+function generateSldsPromptModal({
+	modalTitle = "",
+	bodyText = "",
+	confirmButtonLabel = "",
+	cancelButtonLabel = "",
+	closeButtonLabel = "",
+} = {}) {
+	const {
+		modalParent,
+		article,
+		saveButton,
+		closeButton,
+		cancelButton,
+		buttonContainer,
+		modalBody,
+	} = createSldsModalShell({
+		modalTitle,
+		closeButtonLabel,
+		cancelButtonLabel,
+		confirmButtonLabel,
+		showRequiredInfo: false,
+	});
+	saveButton.setAttribute("type", "button");
+	modalBody.setAttribute("aria-label", bodyText);
+	const bodyParagraph = document.createElement("p");
+	bodyParagraph.classList.add(
+		"slds-text-body_regular",
+		"slds-text-align_center",
+	);
+	bodyParagraph.style.margin = "0";
+	article.appendChild(bodyParagraph);
+	article.style.padding = "1em";
+	return {
+		modalParent,
+		article,
+		modalBody,
+		bodyParagraph,
+		saveButton,
+		closeButton,
+		cancelButton,
+		buttonContainer,
 	};
 }
 
@@ -2704,4 +2806,65 @@ export async function generateTutorialElements() {
 		spinner,
 		...await generateMessageBox(),
 	};
+}
+
+/**
+ * Shows a Salesforce-styled confirm prompt and resolves with the user's choice.
+ *
+ * @param {Object} options - Prompt configuration.
+ * @param {string} options.title - Already translated modal title.
+ * @param {string} options.body - Already translated modal body.
+ * @param {string} options.confirmLabel - Already translated confirm button label.
+ * @param {string} options.cancelLabel - Already translated cancel button label.
+ * @param {string} options.closeLabel - Already translated close button label.
+ * @return {Promise<boolean>} `true` when the user confirms the prompt.
+ */
+export function sldsConfirm({
+	title,
+	body,
+	confirmLabel,
+	cancelLabel,
+	closeLabel,
+}) {
+	document.getElementById(MODAL_CONFIRM_ID)?.remove(); // remove itself
+	const {
+		modalParent,
+		saveButton,
+		cancelButton,
+		closeButton,
+	} = generateSldsPromptModal({
+		modalTitle: title,
+		bodyText: body,
+		confirmButtonLabel: confirmLabel,
+		cancelButtonLabel: cancelLabel,
+		closeButtonLabel: closeLabel,
+	});
+	modalParent.id = MODAL_CONFIRM_ID;
+	document.body.appendChild(modalParent);
+	saveButton.focus();
+	return new Promise((resolve) => {
+		let isResolved = false;
+		/**
+		 * Completes the current prompt only once.
+		 *
+		 * @param {boolean} value - The user selection.
+		 */
+		function finish(value) {
+			if (isResolved) {
+				return;
+			}
+			isResolved = true;
+			modalParent.remove();
+			resolve(value);
+		}
+		saveButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			finish(true);
+		});
+		cancelButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			finish(false);
+		});
+		closeButton.addEventListener("click", () => finish(false));
+	});
 }

@@ -1555,9 +1555,13 @@
 		"message": "Click on the highlighted $tab to navigate to the corresponding page.",
 		"description": "[tutorial] click highlighted tab"
 	},
-	"tutorial_continue_prompt": {
-		"message": "Do you want to continue your unfinished $tutorial ?",
-		"description": "[tutorial] prompt to continue tutorial"
+	"tutorial_continue_prompt_body": {
+		"message": "This is for $extension_label and it'll resume your unfinished $tutorial from where you left off.",
+		"description": "[tutorial] body text to continue tutorial"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Continue $tutorial from last step?",
+		"description": "[tutorial] modal title to continue tutorial"
 	},
 	"tutorial_drag_flows": {
 		"message": "Drag the highlighted row (using the 6 dots) and drop it before the first row (which is pinned).",
@@ -1619,13 +1623,13 @@
 		"message": "Click $save to apply changes and see the confirmation message.",
 		"description": "[tutorial] save modal"
 	},
-	"tutorial_start_prompt": {
-		"message": "Do you want to check out the $tutorial for $extension_label ?",
-		"description": "[tutorial] prompt to continue tutorial"
+	"tutorial_start_prompt_body": {
+		"message": "This is for $extension_label and it'll take you to the Setup Home page first, then start the guided $tutorial",
+		"description": "[tutorial] body text to start tutorial"
 	},
-	"tutorial_title": {
-		"message": "Start $tutorial",
-		"description": "[popup] title for tutorial button"
+	"tutorial_start_prompt_title": {
+		"message": "Start $tutorial from Setup Home?",
+		"description": "[tutorial] modal title to start tutorial"
 	},
 	"underline": {
 		"message": "Underline",

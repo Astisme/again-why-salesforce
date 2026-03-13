@@ -4,3 +4,4 @@ any string in src should be a string that is a key in src/_locales/en/messages.j
 only write en messages unless explicitly requested to translate
 make sure to always write jsdocs for functions
 follow DRY principles
+prefer to not have external dependencies especially for code in `src`

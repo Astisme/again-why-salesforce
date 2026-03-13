@@ -700,10 +700,6 @@ function setExtensionBrowserListeners() {
 				url: `${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`,
 			});
 		}
-		/* TODO add tutorial on install
-      if (details.reason == "install") {
-      }
-      */
 	});
 	// when the extension is activated by the BROWSER
 	self.addEventListener(

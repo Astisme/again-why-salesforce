@@ -32,7 +32,11 @@ import {
 	FAVOURITE_BUTTON_ID,
 	showFavouriteButton,
 } from "./favourite-manager.js";
-import { generateTutorialElements, MODAL_ID } from "./generator.js";
+import {
+	generateTutorialElements,
+	MODAL_ID,
+	sldsConfirm,
+} from "./generator.js";
 import { ensureAllTabsAvailability, TabContainer } from "../tabContainer.js";
 import { handleActionButtonClick } from "./manageTabs.js";
 
@@ -908,10 +912,11 @@ class Tutorial {
 /**
  * Redirects the user to the Setup Homepage and starts the tutorial
  * @param {Tutorial} [tutorial=null] - the tutorial instance
+ * @return {Promise<void>} Resolves when the tutorial start sequence is kicked off.
  */
 function redirectToHomeAndStart(tutorial = null) {
 	customLightningRedirect(SALESFORCE_SETUP_HOME_MINI);
-	(tutorial ?? new Tutorial()).start();
+	return (tutorial ?? new Tutorial()).start();
 }
 
 /**
@@ -927,9 +932,22 @@ export async function checkTutorial() {
 		key: TUTORIAL_KEY,
 	});
 	const translator = await ensureTranslatorAvailability();
+	const confirmLabel = await translator.translate("confirm");
+	const cancelLabel = await translator.translate("cancel");
+	const closeLabel = await translator.translate("cancel_close");
 	if (tutorialProgress == null) {
-		if (confirm(await translator.translate("tutorial_start_prompt"))) {
-			redirectToHomeAndStart();
+		if (
+			await sldsConfirm({
+				title: await translator.translate(
+					"tutorial_start_prompt_title",
+				),
+				body: await translator.translate("tutorial_start_prompt_body"),
+				confirmLabel,
+				cancelLabel,
+				closeLabel,
+			})
+		) {
+			await redirectToHomeAndStart();
 		} else {
 			// set the tutorial as completed
 			Tutorial.setTutorialAsCompleted();
@@ -943,13 +961,15 @@ export async function checkTutorial() {
 	}
 	if (
 		tutorialProgress < tutorial.steps.length &&
-		confirm(
-			await translator.translate(
-				"tutorial_continue_prompt",
-			),
-		)
+		await sldsConfirm({
+			title: await translator.translate("tutorial_continue_prompt_title"),
+			body: await translator.translate("tutorial_continue_prompt_body"),
+			confirmLabel,
+			cancelLabel,
+			closeLabel,
+		})
 	) {
-		tutorial.start(tutorialProgress - 1); // because nextStep adds 1 when it starts
+		await tutorial.start(tutorialProgress - 1); // because nextStep adds 1 when it starts
 	} else {
 		// set the tutorial as completed
 		Tutorial.setTutorialAsCompleted(tutorial);
