@@ -82,6 +82,8 @@ function openSponsorLink(translator = null) {
  * @param {TranslationService} [param0.translator=null] - the TranslationService instance
  * @param {HTMLElement} [param0.reviewSvg=null] - the HTMLElement for the review svg
  * @param {HTMLElement} [param0.sponsorSvg=null] - the HTMLElement for the sponsor svg
+ * @param {HTMLAnchorElement} [param0.reviewLink=null] - the anchor wrapping the review svg
+ * @param {HTMLAnchorElement} [param0.sponsorLink=null] - the anchor wrapping the sponsor svg
  * @throws Error when even a single parameter was not passed correctly
  * @exports for tests
  */
@@ -91,26 +93,39 @@ export function showReviewOrSponsor({
 	translator = null,
 	reviewSvg = null,
 	sponsorSvg = null,
+	reviewLink = null,
+	sponsorLink = null,
 } = {}) {
 	if (
 		allTabs == null ||
 		translator == null ||
 		reviewSvg == null ||
-		sponsorSvg == null
+		sponsorSvg == null ||
+		reviewLink == null ||
+		sponsorLink == null
 	) {
 		throw new Error("error_required_params");
 	}
 	const whatToShow = shouldShowReviewOrSponsor({ allTabs, usageDays });
+	reviewSvg.classList.toggle(HIDDEN_CLASS, !whatToShow.review);
+	sponsorSvg.classList.toggle(HIDDEN_CLASS, !whatToShow.sponsor);
+	reviewSvg.setAttribute("aria-hidden", String(!whatToShow.review));
+	sponsorSvg.setAttribute("aria-hidden", String(!whatToShow.sponsor));
+	reviewLink.setAttribute("aria-hidden", String(!whatToShow.review));
+	sponsorLink.setAttribute("aria-hidden", String(!whatToShow.sponsor));
+	reviewLink.tabIndex = whatToShow.review ? 0 : -1;
+	sponsorLink.tabIndex = whatToShow.sponsor ? 0 : -1;
 	if (whatToShow.review) {
-		reviewSvg.classList.remove(HIDDEN_CLASS);
-		reviewSvg.addEventListener("click", openCorrectBrowserReviewLink);
+		reviewLink.addEventListener("click", (event) => {
+			event.preventDefault();
+			openCorrectBrowserReviewLink();
+		});
 	}
 	if (whatToShow.sponsor) {
-		sponsorSvg.classList.remove(HIDDEN_CLASS);
-		sponsorSvg.addEventListener(
-			"click",
-			() => openSponsorLink(translator),
-		);
+		sponsorLink.addEventListener("click", (event) => {
+			event.preventDefault();
+			openSponsorLink(translator);
+		});
 	}
 }
 
@@ -162,13 +177,15 @@ class ReviewSponsorAws extends HTMLElement {
 			translator,
 			usageDays,
 		}));
-		// add titles and alts
+		// add accessible names to icon-only links
 		const reviewMsg = await translator.translate("write_review");
 		result.reviewLink.title = reviewMsg;
-		result.reviewSvg.alt = reviewMsg;
+		result.reviewLink.setAttribute("aria-label", reviewMsg);
+		result.reviewSvg.setAttribute("focusable", "false");
 		const sponsorMsg = await translator.translate("send_tip");
 		result.sponsorLink.title = sponsorMsg;
-		result.sponsorSvg.alt = sponsorMsg;
+		result.sponsorLink.setAttribute("aria-label", sponsorMsg);
+		result.sponsorSvg.setAttribute("focusable", "false");
 	}
 }
 

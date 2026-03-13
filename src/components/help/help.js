@@ -1,5 +1,6 @@
 import { HIDDEN_CLASS } from "/constants.js";
 import { generateHelpWith_i_popup } from "/salesforce/generator.js";
+import ensureTranslatorAvailability from "/translator.js";
 
 /**
  * Class to take care of the Help button in the settings
@@ -55,6 +56,7 @@ class HelpAws extends HTMLElement {
 	 */
 	connectedCallback() {
 		this._syncLink();
+		this._addAssistiveText();
 	}
 
 	/**
@@ -85,6 +87,16 @@ class HelpAws extends HTMLElement {
 		rel
 			? this._anchor.setAttribute("rel", rel)
 			: this._anchor.removeAttribute("rel");
+	}
+
+	/**
+	 * Ensures the icon-only anchor has an accessible name.
+	 */
+	async _addAssistiveText() {
+		const translator = await ensureTranslatorAvailability();
+		const helpMsg = await translator.translate("help");
+		this._anchor.title = helpMsg;
+		this._anchor.setAttribute("aria-label", helpMsg);
 	}
 }
 

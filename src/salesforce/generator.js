@@ -975,6 +975,7 @@ export async function generateSldsModal({
 	modalHeader.appendChild(titleContainer);
 	const awsIcon = document.createElement("img");
 	awsIcon.src = BROWSER.runtime.getURL("assets/icons/awsf-128.png");
+	awsIcon.alt = await translator.translate("extension_label");
 	awsIcon.style.height = "2rem";
 	titleContainer.appendChild(awsIcon);
 	const heading = document.createElement("h2");
@@ -1023,7 +1024,7 @@ export async function generateSldsModal({
 	cancelButton.setAttribute("type", "button");
 	const msg_cancel = await translator.translate("cancel");
 	cancelButton.setAttribute("title", msg_cancel);
-	cancelButton.setAttribute("aria-label", "");
+	cancelButton.setAttribute("aria-label", msg_cancel);
 	cancelButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(cancelButton);
 	cancelButton.addEventListener("click", () => closeButton.click());
@@ -1045,7 +1046,7 @@ export async function generateSldsModal({
 	saveButton.setAttribute("type", "submit");
 	const msg_continue = await translator.translate(saveButtonLabel);
 	saveButton.setAttribute("title", msg_continue);
-	saveButton.setAttribute("aria-label", "");
+	saveButton.setAttribute("aria-label", msg_continue);
 	saveButton.dataset.auraClass = "uiButton forceActionButton";
 	buttonContainerInnerDiv.appendChild(saveButton);
 	const saveSpan = document.createElement("span");
@@ -1299,6 +1300,10 @@ export async function generateSldsFileInput(
 	innerDiv.appendChild(cardBodyDiv);
 	const msg_file = await translator.translate("file");
 	const msg_files = await translator.translate("files");
+	const msg_upload = await translator.translate("upload");
+	const uploadAssistive = `${msg_upload} ${
+		singleFile ? msg_file : msg_files
+	}`;
 	if (preventFileSelection && allowDrop) {
 		const fileSelectorDiv = document.createElement("div");
 		fileSelectorDiv.classList.add(
@@ -1389,6 +1394,7 @@ export async function generateSldsFileInput(
 		"slds-form-element__label",
 		"slds-assistive-text",
 	);
+	formLabelSpan.textContent = uploadAssistive;
 	primitiveInputFile.appendChild(formLabelSpan);
 	const controlDiv = document.createElement("div");
 	controlDiv.classList.add("slds-form-element__control");
@@ -1419,6 +1425,7 @@ export async function generateSldsFileInput(
 	inputContainer.setAttribute("part", "input");
 	inputContainer.setAttribute("multiple", "");
 	inputContainer.setAttribute("name", "fileInput");
+	inputContainer.setAttribute("aria-label", uploadAssistive);
 	slot.appendChild(inputContainer);
 	const fileSelectorLabel = document.createElement("label");
 	fileSelectorLabel.classList.add("slds-file-selector__body");
@@ -1435,7 +1442,6 @@ export async function generateSldsFileInput(
 	const buttonIcon = document.createElement("lightning-primitive-icon");
 	buttonIcon.setAttribute("variant", "bare");
 	fileSelectorButtonSpan.appendChild(buttonIcon);
-	const msg_upload = await translator.translate("upload");
 	fileSelectorButtonSpan.append(
 		`${msg_upload} ${singleFile ? msg_file : msg_files}`,
 	);
@@ -1689,7 +1695,7 @@ function createTableHeader(
 	const th = document.createElement("th");
 	th.scope = "col";
 	th.classList.add(...classList);
-	th.setAttribute("aria-label", ariaLabel);
+	th.setAttribute("aria-label", ariaLabel || label);
 	const div = document.createElement("div");
 	th.append(div);
 	div.textContent = label;
@@ -1744,9 +1750,10 @@ function createTable(headers = []) {
  * Creates a checkbox cell for a table row
  * @param {number} [tabIndex=0] The index of the checkbox (for later retrieval)
  * @param {boolean} [checked=false] if the checkbox should be checked by default
+ * @param {string} [ariaLabel=""] The assistive label for the checkbox
  * @return {HTMLTableCellElement} The created td element with checkbox
  */
-function createCheckboxCell(tabIndex = 0, checked = false) {
+function createCheckboxCell(tabIndex = 0, checked = false, ariaLabel = "") {
 	const td = document.createElement("td");
 	td.classList.add(
 		"visualEditorSelectableTable",
@@ -1761,6 +1768,7 @@ function createCheckboxCell(tabIndex = 0, checked = false) {
 	checkbox.name = "assignmentTableCheckbox";
 	checkbox.checked = checked;
 	checkbox.dataset.tabIndex = tabIndex;
+	checkbox.setAttribute("aria-label", ariaLabel);
 	return { td, checkbox };
 }
 
@@ -1790,14 +1798,21 @@ function createTextCell(text = "", title = "") {
  * @param {string} [tab.url=null] The Tab Url
  * @param {string|undefined} [tab.org=null] The Tab Org (for org-specific Tabs)
  * @param {number} [index=0] the index of the current row
+ * @param {string} [checkboxPrefix=""] The translated prefix used in checkbox aria-label
  * @return {HTMLTableRowElement} The created tr element
  */
 function createTableRow(
 	{ label = null, url = null, org = null } = {},
 	index = 0,
+	checkboxPrefix = "",
 ) {
 	const tr = document.createElement("tr");
-	const { td, checkbox } = createCheckboxCell(index, true);
+	const rowLabel = label ?? url ?? `${index + 1}`;
+	const { td, checkbox } = createCheckboxCell(
+		index,
+		true,
+		`${checkboxPrefix}: ${rowLabel}`,
+	);
 	tr.appendChild(td);
 	tr.appendChild(createTextCell(label));
 	tr.appendChild(createTextCell(url));
@@ -1810,19 +1825,22 @@ function createTableRow(
  * @param {any[]} [tabs=[]] The Tabs to show in the Table
  * @param {Object{label,ariaLabel,classList[]}[]} [headers=[]] What should be displayed inside the each `th`
  * @param {() => void} [changeListener=() => {}] change listener to all checkboxes to update button states
- * @return Object{checkboxes:HTMLInputElement[],table:HTMLTableElement} all checkboxes created and the table generated
+ * @return {Promise<Object{checkboxes:HTMLInputElement[],table:HTMLTableElement}>}
+ * all checkboxes created and the table generated
  */
-function generateTableWithCheckboxes(
+async function generateTableWithCheckboxes(
 	tabs = [],
 	headers = [],
 	changeListener = () => {},
 ) {
+	const translator = await ensureTranslatorAvailability();
+	const msg_tabLabel = await translator.translate("tab_label");
 	const res = {
 		checkboxes: [],
 	};
 	const { table, tbody } = createTable(headers);
 	for (const i in tabs) {
-		const { tr, checkbox } = createTableRow(tabs[i], i);
+		const { tr, checkbox } = createTableRow(tabs[i], i, msg_tabLabel);
 		tr.addEventListener("click", (e) => {
 			if (
 				e.target.tagName !== "INPUT" ||
@@ -1923,6 +1941,7 @@ function createTableCell({
 	input.className = className;
 	input.value = value ?? "";
 	input.placeholder = placeholder;
+	input.setAttribute("aria-label", placeholder);
 	input.style.width = "100%";
 	input.style.padding = "0.25rem";
 	if (wordBreak) {
@@ -2073,6 +2092,8 @@ function createDragHandle(draggable = false) {
 	svg.setAttribute("width", "20");
 	svg.setAttribute("height", "20");
 	svg.setAttribute("fill", "currentColor");
+	svg.setAttribute("focusable", "false");
+	svg.setAttribute("aria-hidden", "true");
 	svg.dataset.draggable = draggable;
 	// Six dots on two columns
 	const rect1 = document.createElementNS(
@@ -2266,7 +2287,9 @@ export async function createManageTabRow({
 	}
 	dropdownButton.style.position = "relative";
 	dropdownButton.textContent = `▼`; // downward arrow
-	dropdownButton.title = await translator.translate("actions");
+	const msg_actions = await translator.translate("actions");
+	dropdownButton.title = msg_actions;
+	dropdownButton.setAttribute("aria-label", msg_actions);
 	dropdownButton.dataset.name = "dropdownButton";
 	// Dropdown menu container
 	const dropdownMenu = document.createElement("div");
@@ -2556,7 +2579,7 @@ export function generateReviewSponsorSvgs() {
 	const reviewLink = document.createElement("a");
 	reviewLink.href = "#";
 	reviewSponsorContainer.appendChild(reviewLink);
-	reviewLink.dataset.i18n = "write_review+-+title";
+	reviewLink.dataset.i18n = "write_review+-+title+-+ariaLabel";
 	const reviewSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
 		"svg",
@@ -2600,7 +2623,7 @@ export function generateReviewSponsorSvgs() {
 	const sponsorLink = document.createElement("a");
 	sponsorLink.href = "#";
 	reviewSponsorContainer.appendChild(sponsorLink);
-	sponsorLink.dataset.i18n = "send_tip+-+title";
+	sponsorLink.dataset.i18n = "send_tip+-+title+-+ariaLabel";
 	const sponsorSvg = document.createElementNS(
 		"http://www.w3.org/2000/svg",
 		"svg",
