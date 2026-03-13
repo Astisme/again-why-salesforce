@@ -529,6 +529,7 @@ async function logContextMenuError(error) {
  *
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
  * @param {function} [callback=null] - A callback to call at the end of the execution
+ * @return {Promise} the promise with the queued operation
  */
 export function checkAddRemoveContextMenus(what, callback = null) {
 	return queueContextMenuOperation(async () => {
@@ -549,6 +550,7 @@ export function checkAddRemoveContextMenus(what, callback = null) {
  * Visibility remains controlled by each item's `documentUrlPatterns`.
  *
  * @param {string} what - A string identifier to specify the action that triggered the context menu refresh.
+ * @return {Promise} the promise with the queued operation
  */
 export function refreshContextMenus(what) {
 	return queueContextMenuOperation(async () => {
