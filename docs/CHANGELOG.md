@@ -24,6 +24,7 @@ Please remember that this project is entirely funded by **the support of its use
 
 1. Added theme change in settings (light/dark) which syncs with the popup (#129)
 2. An onboarding Tutorial has been created! (#135)
+3. Added Help (?) button to link to [the wiki](https://github.com/Astisme/again-why-salesforce/wiki)
 
 ### Components
 

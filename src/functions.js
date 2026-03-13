@@ -222,20 +222,6 @@ export function openSettingsPage() {
 		open(BROWSER.runtime.getURL("settings/options.html"));
 	}
 }
-
-/**
- * Opens the provided URL in a new browser tab.
- *
- * @param {string} url - The absolute URL to open.
- * @throws {Error} When the url parameter is missing.
- * @return {Promise<browser.tabs.Tab | chrome.tabs.Tab | undefined>} The created tab promise from the browser API.
- */
-export function openBrowserTab(url) {
-	if (url == null) {
-		throw new Error("error_required_params");
-	}
-	return BROWSER.tabs.create({ url });
-}
 /**
  * Uses the permission API to request new optional permissions
  * @param {{}} [permissionObj={}] the object with the new permissions to request

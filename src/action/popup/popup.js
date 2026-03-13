@@ -5,7 +5,6 @@ import {
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
-	EXTENSION_GITHUB_WIKI_LINK,
 	WHAT_EXPORT_CHECK,
 	WHAT_GET_COMMANDS,
 	WHAT_SHOW_IMPORT,
@@ -14,7 +13,6 @@ import {
 import {
 	areFramePatternsAllowed,
 	isOnSalesforceSetup,
-	openBrowserTab,
 	openSettingsPage,
 	sendExtensionMessage,
 } from "/functions.js";
@@ -96,19 +94,6 @@ settingsBtn.addEventListener(
 	"click",
 	openSettingsPage,
 );
-const wikiBtn = document.getElementById("open-extension-wiki");
-wikiBtn.href = EXTENSION_GITHUB_WIKI_LINK;
-/**
- * Opens the extension wiki in a new browser tab from the popup and closes the popup afterwards.
- *
- * @param {MouseEvent} event - The click event triggered by the wiki button.
- */
-function openExtensionWikiFromPopup(event) {
-	event.preventDefault();
-	openBrowserTab(EXTENSION_GITHUB_WIKI_LINK);
-	setTimeout(close, 100);
-}
-wikiBtn.addEventListener("click", openExtensionWikiFromPopup);
 
 const availableCommands = await sendExtensionMessage({
 	what: WHAT_GET_COMMANDS,

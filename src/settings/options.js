@@ -1,5 +1,4 @@
 import {
-	EXTENSION_GITHUB_WIKI_LINK,
 	EXTENSION_NAME,
 	FOLLOW_SF_LANG,
 	GENERIC_PINNED_TAB_STYLE_KEY,
@@ -50,7 +49,6 @@ import {
 	isGenericKey,
 	isPinnedKey,
 	isStyleKey,
-	openBrowserTab,
 	requestCookiesPermission,
 	requestExportPermission,
 	requestFramePatternsPermission,
@@ -83,19 +81,6 @@ document.querySelector("theme-selector-aws").addEventListener(
 	"before-theme-toggle",
 	startThemeTransition,
 );
-const wikiBtn = document.getElementById("open-extension-wiki");
-wikiBtn.href = EXTENSION_GITHUB_WIKI_LINK;
-wikiBtn.addEventListener("click", openExtensionWikiFromSettings);
-
-/**
- * Opens the extension wiki in a new browser tab from the settings page.
- *
- * @param {MouseEvent} event - The click event triggered by the wiki button.
- */
-function openExtensionWikiFromSettings(event) {
-	event.preventDefault();
-	openBrowserTab(EXTENSION_GITHUB_WIKI_LINK);
-}
 
 /**
  * Creates the object used to update the settings
