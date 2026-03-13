@@ -38,14 +38,11 @@ import {
 	CXM_UPDATE_ORG,
 	CXM_UPDATE_TAB,
 	EXTENSION_NAME,
-	EXTENSION_VERSION,
 	HAS_ORG_TAB,
 	HTTPS,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
-	PREVENT_ANALYTICS,
 	SALESFORCE_URL_PATTERN,
-	SETTINGS_KEY,
 	SETUP_LIGHTNING,
 	TAB_ON_LEFT,
 	USE_LIGHTNING_NAVIGATION,
@@ -54,7 +51,7 @@ import {
 	WHAT_SHOW_EXPORT_MODAL,
 	WHAT_UPDATE_EXTENSION,
 } from "/constants.js";
-import { getSettings, sendExtensionMessage } from "/functions.js";
+import { getSettings } from "/functions.js";
 import ensureTranslatorAvailability from "/translator.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
@@ -72,6 +69,7 @@ import {
 import { createImportModal } from "./import.js";
 import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
+import { executeOncePerDay } from "./once-a-day.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -1168,76 +1166,6 @@ function listenToBackgroundPage() {
 }
 
 /**
- * Checks user settings and inserts Simple Analytics script into the document
- * unless analytics collection is explicitly disabled.
- * Modifies Content-Security-Policy meta tag to allow the analytics domains.
- * https://github.com/simpleanalytics
- *
- * @return {Promise<void>} Resolves once analytics script is injected or skipped.
- */
-async function checkInsertAnalytics() {
-	const prevent_analytics = await getSettings(PREVENT_ANALYTICS);
-	const isNewUser = prevent_analytics?.date == null;
-	if (
-		prevent_analytics != null &&
-		(
-			prevent_analytics.enabled === true || // the user does not want to send analytics call
-			(
-				!isNewUser &&
-				Math.floor(
-						(Date.now() - new Date(prevent_analytics.date)) /
-							(1000 * 60 * 60 * 24),
-					) <= 0 // the date difference is less than a day
-			)
-		)
-	) {
-		return;
-	}
-	{
-		// set last date saved as today (no need to wait for promise fullfillment)
-		const today = new Date();
-		today.setUTCHours(0, 0, 0, 0);
-		sendExtensionMessage({
-			what: "set",
-			key: SETTINGS_KEY,
-			set: [{
-				id: PREVENT_ANALYTICS,
-				date: today.toJSON(),
-			}],
-		});
-	}
-	const whereToAppend = document.head || document.documentElement;
-	const cspMeta = document.querySelector(
-		'meta[http-equiv="Content-Security-Policy"]',
-	);
-	if (cspMeta) {
-		const currentCSP = cspMeta.getAttribute("content");
-		cspMeta.setAttribute(
-			"content",
-			currentCSP +
-				" https://queue.simpleanalyticscdn.com https://simpleanalyticscdn.com",
-		);
-	} else {
-		const meta = document.createElement("meta");
-		meta.setAttribute("http-equiv", "Content-Security-Policy");
-		meta.setAttribute(
-			"content",
-			"default-src 'self'; img-src 'self' https://queue.simpleanalyticscdn.com;",
-		);
-		whereToAppend.appendChild(meta);
-	}
-	const img = document.createElement("img");
-	const apiUrl = new URL("https://queue.simpleanalyticscdn.com/noscript.gif");
-	apiUrl.searchParams.set("hostname", "extension.again.whysalesforce");
-	apiUrl.searchParams.set("path", isNewUser ? "/new-user" : "/");
-	apiUrl.searchParams.set("utm_source", EXTENSION_VERSION);
-	img.src = apiUrl;
-	img.alt = "";
-	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-	whereToAppend.appendChild(img);
-}
-
-/**
  * Main bootstrap function that initializes the extension:
  * - Loads all tabs asynchronously.
  * - Injects Lightning navigation script if needed.
@@ -1250,7 +1178,7 @@ function main() {
 	checkAddLightningNavigation();
 	listenToBackgroundPage();
 	delayLoadSetupTabs();
-	checkInsertAnalytics();
+	executeOncePerDay();
 }
 
 // queries the currently active tab of the current active window

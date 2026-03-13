@@ -78,6 +78,11 @@ type OnInstalledCallback = (
 type OnActivatedCallback = (
 	activeInfo: { tabId: number; windowId: number },
 ) => void;
+type OnUpdatedCallback = (
+	tabId: number,
+	changeInfo: { status?: string; url?: string; [key: string]: any },
+	tab: BrowserTab,
+) => void;
 type OnFocusChangedCallback = (windowId: number) => void;
 type OnMessageCallback = (
 	message: any,
@@ -85,6 +90,7 @@ type OnMessageCallback = (
 	sendResponse: (response?: any) => void,
 ) => boolean | void;
 type OnCommandCallback = (command: string) => void;
+type OnCommandChangedCallback = () => void;
 type PermissionMap = Record<string, true>;
 type PermissionObject = {
 	permissions: PermissionMap;
@@ -224,6 +230,7 @@ export const mockBrowser = {
 					break;
 				case "echo":
 				case "warning":
+				case "theme":
 					response = message.echo;
 					break;
 				default:
@@ -324,6 +331,25 @@ export const mockBrowser = {
 				}
 			},
 		},
+		onUpdated: {
+			_listeners: [] as OnUpdatedCallback[],
+			addListener(callback: OnUpdatedCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerUpdated(
+				tabId: number,
+				changeInfo: {
+					status?: string;
+					url?: string;
+					[key: string]: any;
+				},
+				tab: BrowserTab,
+			): void {
+				for (const listener of this._listeners) {
+					listener(tabId, changeInfo, tab);
+				}
+			},
+		},
 		_mockBrowserTabs: [] as BrowserTab[],
 		// Allows you to set mock tab data in tests
 		setMockBrowserTabs(tabs: BrowserTab[]): void {
@@ -369,6 +395,17 @@ export const mockBrowser = {
 			triggerCommand(command: string): void {
 				for (const listener of this._listeners) {
 					listener(command);
+				}
+			},
+		},
+		onChanged: {
+			_listeners: [] as OnCommandChangedCallback[],
+			addListener(callback: OnCommandChangedCallback): void {
+				this._listeners.push(callback);
+			},
+			triggerChanged(): void {
+				for (const listener of this._listeners) {
+					listener();
 				}
 			},
 		},

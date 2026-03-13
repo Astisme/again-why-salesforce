@@ -92,6 +92,8 @@ export const NO_RELEASE_NOTES = "no_release_notes";
 export const NO_UPDATE_NOTIFICATION = "no_update_notification";
 export const PREVENT_ANALYTICS = "prevent_analytics";
 export const PERSIST_SORT = "persist_sort";
+export const EXTENSION_USAGE_DAYS = "extension_usage_days";
+export const EXTENSION_LAST_ACTIVE_DAY = "extension_last_active_day";
 // decoration settings
 export const TAB_GENERIC_STYLE = "tab_generic_style";
 export const GENERIC_TAB_STYLE_KEY = `${SETTINGS_KEY}-${TAB_GENERIC_STYLE}`;
@@ -175,3 +177,4 @@ export const WHAT_REQUEST_EXPORT_PERMISSION_TO_OPEN_POPUP =
 export const WHAT_EXPORT_FROM_BG = "export-bg";
 export const DO_NOT_REQUEST_FRAME_PERMISSION = "noPerm";
 export const HIDDEN_CLASS = "hidden";
+export const PERM_CHECK = "check-permission-granted";
