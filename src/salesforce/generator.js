@@ -954,7 +954,7 @@ function createSldsModalShell({
 	modalHeader.appendChild(titleContainer);
 	const awsIcon = document.createElement("img");
 	awsIcon.src = BROWSER.runtime.getURL("assets/icons/awsf-128.png");
-	awsIcon.alt = await translator.translate("extension_label");
+	awsIcon.alt = EXTENSION_LABEL;
 	awsIcon.style.height = "2rem";
 	titleContainer.appendChild(awsIcon);
 	const heading = document.createElement("h2");
