@@ -757,7 +757,7 @@ export async function performActionOnTabs(
 				}
 				break;
 			case WHAT_PAGE_SAVE_TAB:
-          case WHAT_PAGE_REMOVE_TAB:
+			case WHAT_PAGE_REMOVE_TAB:
 				pageActionTab(action === WHAT_PAGE_SAVE_TAB);
 				break;
 			default: {
