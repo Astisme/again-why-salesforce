@@ -831,10 +831,6 @@
 		"message": "Label",
 		"description": "[key] the Tab's name"
 	},
-	"wiki_label": {
-		"message": "Learn more about $extension_label",
-		"description": "[popup][settings] accessible title and aria-label for the wiki help button"
-	},
 	"lead": {
 		"message": "Lead",
 		"description": "The page related to ObjectManager/Lead/FieldsAndRelationships/view"
@@ -1682,6 +1678,10 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] fallback title for the modal"
+	},
+	"wiki_label": {
+		"message": "Learn more about $extension_label",
+		"description": "[popup][settings] accessible title and aria-label for the wiki help button"
 	},
 	"write_review": {
 		"message": "Write a review!",
