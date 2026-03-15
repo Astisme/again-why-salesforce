@@ -104,6 +104,11 @@ export function getSetupTabUl() {
 let modalHanger;
 
 /**
+ * Abort controller for the latest reload operation.
+ */
+let reloadController = null;
+
+/**
  * Contains the current href, always up-to-date
  */
 let href = globalThis.location?.href;
@@ -249,11 +254,18 @@ export async function showToast(message, status = TOAST_SUCCESS) {
  * - It also ensures the presence of a "favourite" button and checks if the current view is for saved tabs.
  *
  * @param {Array<Tab>|null} [tabs=null] - The tabs to initialize. If null, the saved tabs will be fetched.
+ * @param {AbortSignal|null} [signal=null] - Signal used to stop stale reload work.
  * @return {Promise<void>} A promise that resolves after the initialization process is completed, including tab setup and UI updates.
  */
-async function init(tabs = null) {
+async function init(tabs = null, signal = null) {
+	if (shouldAbortReload(signal)) {
+		return;
+	}
 	const orgName = Tab.extractOrgName(href);
 	const allTabs = await ensureAllTabsAvailability();
+	if (shouldAbortReload(signal)) {
+		return;
+	}
 	if (tabs == null) {
 		await allTabs.getSavedTabs(true);
 	} else {
@@ -265,10 +277,16 @@ async function init(tabs = null) {
 			updatePinnedTabs: false,
 		});
 	}
+	if (shouldAbortReload(signal)) {
+		return;
+	}
 	if (allTabs.length > 0) {
 		const frag = document.createDocumentFragment();
 		const pinnedItems = allTabs.pinned;
 		for (const i in allTabs) {
+			if (shouldAbortReload(signal)) {
+				return;
+			}
 			const row = allTabs[i];
 			// hide not-this-org tabs
 			frag.appendChild(
@@ -282,11 +300,41 @@ async function init(tabs = null) {
 				),
 			);
 		}
-		setupTabUl.appendChild(frag);
+		if (shouldAbortReload(signal)) {
+			return;
+		}
+		setupTabUl.replaceChildren(frag);
 	}
-	isOnSavedTab();
-	checkKeepTabsOnLeft();
-	showFavouriteButton();
+	await isOnSavedTab();
+	if (shouldAbortReload(signal)) {
+		return;
+	}
+	await checkKeepTabsOnLeft();
+	if (shouldAbortReload(signal)) {
+		return;
+	}
+	await showFavouriteButton();
+}
+
+/**
+ * Returns whether the current reload should stop because a newer one started.
+ *
+ * @param {AbortSignal|null} [signal=null] - Signal for the current reload.
+ * @return {boolean} True when the reload should stop, false otherwise.
+ */
+function shouldAbortReload(signal = null) {
+	return signal?.aborted === true;
+}
+
+/**
+ * Aborts the previous reload and returns a signal for the current one.
+ *
+ * @return {AbortSignal} The signal bound to the latest reload.
+ */
+function startReloadSignal() {
+	reloadController?.abort();
+	reloadController = new AbortController();
+	return reloadController.signal;
 }
 
 /**
@@ -430,12 +478,8 @@ function delayLoadSetupTabs(count = 0) {
  * @return {void} This function does not return anything, but it reinitializes the tab list as needed.
  */
 function reloadTabs(tabs = null) {
-	// remove the tabs that are already in the page
-	if (setupTabUl.childElementCount > 0) {
-		setupTabUl.innerHTML = null;
-	}
-	generateStyleFromSettings();
-	init(tabs);
+	void generateStyleFromSettings();
+	void init(tabs, startReloadSignal());
 }
 
 /**

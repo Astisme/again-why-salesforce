@@ -1,3 +1,4 @@
+import { isSalesforceHostname } from "./functions.js";
 import {
 	HTTPS,
 	LIGHTNING_FORCE_COM,
@@ -252,12 +253,7 @@ export default class Tab {
 		const oldOrg = Tab.extractOrgName(baseUrl);
 		// update the url with the given org name
 		const shouldUpdateOrg = org != null && org !== "" && oldOrg !== org;
-		if (
-			url.startsWith(HTTPS) &&
-			!url.includes(MY_SALESFORCE_SETUP_COM) &&
-			!url.includes(MY_SALESFORCE_COM) &&
-			!url.includes(LIGHTNING_FORCE_COM)
-		) {
+		if (url.startsWith(HTTPS) && !isSalesforceHostname(new URL(url))) {
 			return shouldUpdateOrg ? url.replace(oldOrg, org) : url;
 		}
 		url = Tab.minifyURL(url);

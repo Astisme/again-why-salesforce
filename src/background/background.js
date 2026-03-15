@@ -22,7 +22,6 @@ import {
 	PREVENT_DEFAULT_OVERRIDE,
 	SETTINGS_KEY,
 	SETUP_LIGHTNING_PATTERN,
-	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
 	TOAST_ERROR,
@@ -49,7 +48,7 @@ import {
 	WHAT_THEME,
 	WHY_KEY,
 } from "/constants.js";
-import { openSettingsPage } from "/functions.js";
+import { isSalesforceHostname, openSettingsPage } from "/functions.js";
 import Tab from "/tab.js";
 import {
 	bg_getCurrentBrowserTab,
@@ -342,15 +341,12 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 async function _getAPIHostAndHeaders(currentUrl) {
 	const url = new URL(currentUrl);
 	let origin = url.origin;
-	if (
-		SUPPORTED_SALESFORCE_URLS.filter((pattern) => origin.includes(pattern))
-			.length === 0
-	) {
+	if (!isSalesforceHostname(url)) {
 		return;
 	}
-	if (url.origin.includes(LIGHTNING_FORCE_COM)) {
+	if (url.hostname.endsWith(LIGHTNING_FORCE_COM)) {
 		origin = url.origin.replace(LIGHTNING_FORCE_COM, MY_SALESFORCE_COM);
-	} else if (url.origin.includes(MY_SALESFORCE_SETUP_COM)) {
+	} else if (url.hostname.endsWith(MY_SALESFORCE_SETUP_COM)) {
 		origin = url.origin.replace(
 			MY_SALESFORCE_SETUP_COM,
 			MY_SALESFORCE_COM,
@@ -382,7 +378,11 @@ async function _getAPIHostAndHeaders(currentUrl) {
  */
 async function getCurrentUserInfo(currentUrl) {
 	try {
-		const [apiHost, headers] = await _getAPIHostAndHeaders(currentUrl);
+		const apiHostAndHeaders = await _getAPIHostAndHeaders(currentUrl);
+		if (apiHostAndHeaders == null) {
+			return;
+		}
+		const [apiHost, headers] = apiHostAndHeaders;
 		const retrievedRows = await fetch(
 			`${apiHost}/services/oauth2/userinfo`,
 			{ headers },
@@ -688,7 +688,7 @@ function setExtensionBrowserListeners() {
 	);
 	// when the extension is installed / updated
 	BROWSER.runtime.onInstalled.addListener(async (details) => {
-		if (detail.temporary) return; // skip during development
+		if (details.temporary) return; // skip during development
 		checkAddRemoveContextMenus(WHAT_INSTALLED);
 		if (details.reason === "update") {
 			// the extension has been updated
