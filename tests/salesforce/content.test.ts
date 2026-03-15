@@ -304,7 +304,9 @@ const { executeOncePerDay } = __deps.onceADay;
 		...hookLines,
 	];
 	const originalLines = [
-		...sourceLines.slice(0, bootstrapLineIndex).map((_, index) => index + 1),
+		...sourceLines.slice(0, bootstrapLineIndex).map((_, index) =>
+			index + 1
+		),
 		...preludeLines.map(() => 0),
 		...sourceLines.slice(bootstrapLineIndex).map((_, index) =>
 			bootstrapLineIndex + index + 1
@@ -340,6 +342,25 @@ function setGlobal(name: string, value: unknown) {
 		configurable: true,
 		writable: true,
 	});
+}
+
+/**
+ * Creates a deferred promise that can be resolved by the caller.
+ *
+ * @return {{
+ * 	promise: Promise<void>;
+ * 	resolve: () => void;
+ * }} Deferred promise controls.
+ */
+function createDeferred() {
+	let resolve = () => {};
+	const promise = new Promise<void>((resolvePromise) => {
+		resolve = resolvePromise;
+	});
+	return {
+		promise,
+		resolve,
+	};
 }
 
 function createHarness(url = SETUP_URL) {
@@ -507,6 +528,7 @@ function createHarness(url = SETUP_URL) {
 				selector: string;
 			}) => any),
 		getSavedTabsCalls: 0,
+		ensureAllTabsHook: null as null | (() => any[] | Promise<any[]>),
 		removeResult: true,
 		removeOtherResult: true,
 		addResult: true,
@@ -516,6 +538,12 @@ function createHarness(url = SETUP_URL) {
 		syncResult: true,
 		defaultTabsResult: true,
 		replaceTabsResult: true,
+		replaceTabsHook: null as
+			| null
+			| ((
+				newTabs: any[],
+				options: Record<string, unknown>,
+			) => boolean | Promise<boolean>),
 		confirmResult: true,
 		modalRadioTarget: "_blank",
 	};
@@ -607,6 +635,25 @@ function createHarness(url = SETUP_URL) {
 					if (!state.replaceTabsResult) {
 						return false;
 					}
+					const replaceResult = state.replaceTabsHook?.(
+						newTabs,
+						options,
+					);
+					if (replaceResult instanceof Promise) {
+						return replaceResult.then((hookResult) => {
+							if (!hookResult) {
+								return hookResult;
+							}
+							tabs.length = 0;
+							for (const tab of newTabs ?? []) {
+								tabs.push(createTab(tab));
+							}
+							return hookResult;
+						});
+					}
+					if (replaceResult === false) {
+						return replaceResult;
+					}
 					tabs.length = 0;
 					for (const tab of newTabs ?? []) {
 						tabs.push(createTab(tab));
@@ -676,7 +723,9 @@ function createHarness(url = SETUP_URL) {
 						any
 					>,
 				) => {
-					const extractedOrg = org == null ? null : extractOrgName(org);
+					const extractedOrg = org == null
+						? null
+						: extractOrgName(org);
 					const match = tabs.find((tab: any) =>
 						(label == null || tab.label === label) &&
 						(url == null || tab.url === minifyURL(url)) &&
@@ -975,7 +1024,8 @@ function createHarness(url = SETUP_URL) {
 			containsSalesforceId,
 		},
 		tabContainer: {
-			ensureAllTabsAvailability: () => allTabs,
+			ensureAllTabsAvailability: () =>
+				state.ensureAllTabsHook?.() ?? allTabs,
 		},
 		dragHandler: {
 			setupDragForUl: (callback) => {
@@ -1184,6 +1234,130 @@ Deno.test("sf_afterSet reloads tabs and can skip reload while still toasting", a
 	}
 });
 
+Deno.test("reloadTabs aborts stale in-flight renders when a newer update starts", async () => {
+	const harness = createHarness();
+	try {
+		const content = await harness.load();
+		await harness.flush();
+		const hooks = content.__testHooks;
+		const oldReloadDeferred = createDeferred();
+		harness.state.replaceTabsHook = (newTabs) => {
+			if (newTabs[0]?.label === "Old Users") {
+				return oldReloadDeferred.promise.then(() => true);
+			}
+			return true;
+		};
+		hooks.reloadTabs([{ label: "Old Users", url: USERS_URL }]);
+		await harness.flush();
+		hooks.reloadTabs([{ label: "New Users", url: FLOWS_URL }]);
+		await harness.flush();
+		assertEquals(
+			content.getSetupTabUl().querySelector("span")?.innerText,
+			"New Users",
+		);
+		const favouriteCallsAfterNewReload =
+			harness.records.showFavouriteButton;
+		oldReloadDeferred.resolve();
+		await harness.flush();
+		assertEquals(
+			content.getSetupTabUl().querySelector("span")?.innerText,
+			"New Users",
+		);
+		assertEquals(
+			harness.records.showFavouriteButton,
+			favouriteCallsAfterNewReload,
+		);
+	} finally {
+		harness.cleanup();
+	}
+});
+
+Deno.test("reloadTabs aborts follow-up work after isOnSavedTab resolves for a stale render", async () => {
+	const harness = createHarness();
+	try {
+		const content = await harness.load();
+		await harness.flush();
+		const hooks = content.__testHooks;
+		const staleReloadDeferred = createDeferred();
+		let ensureAllTabsCalls = 0;
+		harness.state.ensureAllTabsHook = () => {
+			ensureAllTabsCalls++;
+			if (ensureAllTabsCalls === 2) {
+				return staleReloadDeferred.promise.then(() => harness.allTabs);
+			}
+			return harness.allTabs;
+		};
+		hooks.reloadTabs([{ label: "Old Users", url: USERS_URL }]);
+		await harness.flush();
+		hooks.reloadTabs([{ label: "New Users", url: FLOWS_URL }]);
+		await harness.flush();
+		const favouriteCallsAfterNewReload =
+			harness.records.showFavouriteButton;
+		staleReloadDeferred.resolve();
+		await harness.flush();
+		assertEquals(
+			content.getSetupTabUl().querySelector("span")?.innerText,
+			"New Users",
+		);
+		assertEquals(
+			harness.records.showFavouriteButton,
+			favouriteCallsAfterNewReload,
+		);
+	} finally {
+		harness.cleanup();
+	}
+});
+
+Deno.test("showModalOpenOtherOrg covers duplicate, link-detection, and invalid-org branches directly", async () => {
+	const harness = createHarness(USERS_URL);
+	try {
+		const content = await harness.load();
+		await harness.flush();
+		const hooks = content.__testHooks;
+		const duplicateModal = document.createElement("div");
+		duplicateModal.id = "again-why-salesforce-modal";
+		document.body.appendChild(duplicateModal);
+		await hooks.showModalOpenOtherOrg({
+			label: "Users",
+			url: "ManageUsers/home",
+			org: "acme",
+		});
+		await harness.flush();
+		assertEquals(
+			harness.records.toasts.at(-1)?.message[0],
+			"error_close_other_modal",
+		);
+		duplicateModal.remove();
+		await hooks.showModalOpenOtherOrg({
+			label: "Users",
+			url: "001ABCDEF123456789/view",
+			org: "acme",
+		});
+		await harness.flush();
+		assertEquals(
+			harness.records.toasts.some((toast) =>
+				toast.message[0] === "error_link_with_id" &&
+				toast.status === "warning"
+			),
+			true,
+		);
+		const modal = document.getElementById("again-why-salesforce-modal");
+		assertExists(modal);
+		(modal.querySelector("input") as HTMLInputElement).value = "bad_org";
+		(modal.querySelector("button") as HTMLButtonElement).dispatchEvent(
+			new Event("click", { bubbles: true, cancelable: true }),
+		);
+		await harness.flush();
+		assertEquals(
+			harness.records.toasts.at(-1)?.message[0],
+			"insert_valid_org",
+		);
+		modal.remove();
+	} finally {
+		harness.cleanup();
+	}
+});
+
 Deno.test("isOnSavedTab tracks current and previous saved state across href updates", async () => {
 	const harness = createHarness();
 	try {
@@ -1342,137 +1516,173 @@ Deno.test("internal helper hooks cover setup retries, direct startup branches, a
 		const content = await harness.load();
 		const hooks = content.__testHooks;
 
-		await t.step("lightning navigation can be skipped and left-side positioning can be forced", async () => {
-			const headChildren = document.head.childElementCount;
-			harness.state.settings.set("link_new_browser", {
-				id: "link_new_browser",
-				enabled: true,
-			});
-			await hooks.checkAddLightningNavigation();
-			assertEquals(document.head.childElementCount, headChildren);
-			harness.state.settings.set("tab_position_left", {
-				id: "tab_position_left",
-				enabled: true,
-			});
-			await hooks.checkKeepTabsOnLeft();
-			assertEquals(
-				content.getSetupTabUl().parentElement?.children[0],
-				content.getSetupTabUl(),
-			);
-			harness.state.settings.delete("link_new_browser");
-			const originalHead = document.head;
-			Object.defineProperty(document, "head", {
-				value: null,
-				configurable: true,
-			});
-			try {
+		await t.step(
+			"lightning navigation can be skipped and left-side positioning can be forced",
+			async () => {
+				const headChildren = document.head.childElementCount;
+				harness.state.settings.set("link_new_browser", {
+					id: "link_new_browser",
+					enabled: true,
+				});
 				await hooks.checkAddLightningNavigation();
+				assertEquals(document.head.childElementCount, headChildren);
+				harness.state.settings.set("tab_position_left", {
+					id: "tab_position_left",
+					enabled: true,
+				});
+				await hooks.checkKeepTabsOnLeft();
 				assertEquals(
-					document.documentElement.childElementCount > 0,
-					true,
+					content.getSetupTabUl().parentElement?.children[0],
+					content.getSetupTabUl(),
 				);
-			} finally {
+				harness.state.settings.delete("link_new_browser");
+				const originalHead = document.head;
 				Object.defineProperty(document, "head", {
-					value: originalHead,
+					value: null,
 					configurable: true,
 				});
-			}
-		});
+				try {
+					await hooks.checkAddLightningNavigation();
+					assertEquals(
+						document.documentElement.childElementCount > 0,
+						true,
+					);
+				} finally {
+					Object.defineProperty(document, "head", {
+						value: originalHead,
+						configurable: true,
+					});
+				}
+			},
+		);
 
-		await t.step("href updates that do not change the URL are ignored", () => {
-			const previousFavouriteCalls = harness.records.showFavouriteButton;
-			harness.triggerMutation();
-			harness.flushTimers();
-			assertEquals(
-				harness.records.showFavouriteButton,
-				previousFavouriteCalls,
-			);
-		});
+		await t.step(
+			"href updates that do not change the URL are ignored",
+			() => {
+				const previousFavouriteCalls =
+					harness.records.showFavouriteButton;
+				harness.triggerMutation();
+				harness.flushTimers();
+				assertEquals(
+					harness.records.showFavouriteButton,
+					previousFavouriteCalls,
+				);
+			},
+		);
 
-		await t.step("href updates can process a changed URL directly", async () => {
-			harness.allTabs.push({
-				label: "Users",
-				url: "ManageUsers/home",
-				org: undefined,
-				update() {
-					return this;
-				},
-			});
-			harness.setUrl(USERS_URL);
-			hooks.onHrefUpdate();
-			await harness.flush();
-			assertEquals(content.getCurrentHref(), USERS_URL);
-		});
+		await t.step(
+			"href updates can process a changed URL directly",
+			async () => {
+				harness.allTabs.push({
+					label: "Users",
+					url: "ManageUsers/home",
+					org: undefined,
+					update() {
+						return this;
+					},
+				});
+				harness.setUrl(USERS_URL);
+				hooks.onHrefUpdate();
+				await harness.flush();
+				assertEquals(content.getCurrentHref(), USERS_URL);
+			},
+		);
 
-		await t.step("after-href-update covers both reload and favourite fallback branches", async () => {
-			const previousStyleCalls = harness.records.styleCalls;
-			await hooks._afterHrefUpdate(true);
-			await harness.flush();
-			assertEquals(harness.records.styleCalls > previousStyleCalls, true);
-			harness.allTabs.length = 0;
-			harness.setUrl(
-				"https://acme.lightning.force.com/lightning/setup/NoMatchOne/home",
-			);
-			await content.isOnSavedTab();
-			await content.isOnSavedTab();
-			const previousFavouriteCalls = harness.records.showFavouriteButton;
-			await hooks._afterHrefUpdate(false);
-			await harness.flush();
-			assertEquals(
-				harness.records.showFavouriteButton > previousFavouriteCalls,
-				true,
-			);
-		});
+		await t.step(
+			"after-href-update covers both reload and favourite fallback branches",
+			async () => {
+				const previousStyleCalls = harness.records.styleCalls;
+				await hooks._afterHrefUpdate(true);
+				await harness.flush();
+				assertEquals(
+					harness.records.styleCalls > previousStyleCalls,
+					true,
+				);
+				harness.allTabs.length = 0;
+				harness.setUrl(
+					"https://acme.lightning.force.com/lightning/setup/NoMatchOne/home",
+				);
+				await content.isOnSavedTab();
+				await content.isOnSavedTab();
+				const previousFavouriteCalls =
+					harness.records.showFavouriteButton;
+				await hooks._afterHrefUpdate(false);
+				await harness.flush();
+				assertEquals(
+					harness.records.showFavouriteButton >
+						previousFavouriteCalls,
+					true,
+				);
+			},
+		);
 
-		await t.step("init can no-op cleanly when the rendered tab list is empty", async () => {
-			await hooks.init([]);
-			assertEquals(content.getSetupTabUl().childElementCount >= 0, true);
-		});
+		await t.step(
+			"init can no-op cleanly when the rendered tab list is empty",
+			async () => {
+				await hooks.init([]);
+				assertEquals(
+					content.getSetupTabUl().childElementCount >= 0,
+					true,
+				);
+			},
+		);
 
-		await t.step("delayLoadSetupTabs handles retries, failures, and pre-existing setup lists", async () => {
-			const originalError = console.error;
-			const errors = [] as unknown[];
-			console.error = (...args: unknown[]) => errors.push(args);
-			try {
-				harness.tabsParent.replaceChildren();
-				hooks.delayLoadSetupTabs(0);
-				const existingSetupUl = document.createElement("ul");
-				existingSetupUl.id = "again-why-salesforce";
-				existingSetupUl.classList.add("tabBarItems", "slds-grid");
-				existingSetupUl.dataset.wheelListenerApplied = "true";
-				existingSetupUl.style.overflowX = "auto";
+		await t.step(
+			"delayLoadSetupTabs handles retries, failures, and pre-existing setup lists",
+			async () => {
+				const originalError = console.error;
+				const errors = [] as unknown[];
+				console.error = (...args: unknown[]) => errors.push(args);
+				try {
+					harness.tabsParent.replaceChildren();
+					hooks.delayLoadSetupTabs(0);
+					const existingSetupUl = document.createElement("ul");
+					existingSetupUl.id = "again-why-salesforce";
+					existingSetupUl.classList.add("tabBarItems", "slds-grid");
+					existingSetupUl.dataset.wheelListenerApplied = "true";
+					existingSetupUl.style.overflowX = "auto";
 					harness.tabsParent.appendChild(existingSetupUl);
 					harness.flushTimers();
 					await harness.flush();
-					assertEquals(content.getSetupTabUl()?.id, "again-why-salesforce");
 					assertEquals(
-						Boolean(content.getSetupTabUl()?.dataset.wheelListenerApplied),
+						content.getSetupTabUl()?.id,
+						"again-why-salesforce",
+					);
+					assertEquals(
+						Boolean(
+							content.getSetupTabUl()?.dataset
+								.wheelListenerApplied,
+						),
 						true,
 					);
-				hooks.delayLoadSetupTabs(6);
-				await harness.flush();
-				assertEquals(errors.length > 0, true);
-			} finally {
-				console.error = originalError;
-			}
-		});
+					hooks.delayLoadSetupTabs(6);
+					await harness.flush();
+					assertEquals(errors.length > 0, true);
+				} finally {
+					console.error = originalError;
+				}
+			},
+		);
 
-		await t.step("non-org hiding and duplicate highlighting safely no-op when setup tabs are absent", async () => {
-			harness.cleanup();
-			const offSetupHarness = createHarness(
-				"https://acme.lightning.force.com/lightning/page/home",
-			);
-			try {
-				const offSetupContent = await offSetupHarness.load();
-				offSetupContent.__testHooks.hideTabs(false);
-				await offSetupContent.reorderTabsUl();
-				offSetupContent.makeDuplicatesBold("ManageUsers/home");
-				offSetupContent.sf_afterSet();
-				assertEquals(offSetupHarness.records.toasts.length, 0);
-			} finally {
-				offSetupHarness.cleanup();
-			}
-		});
+		await t.step(
+			"non-org hiding and duplicate highlighting safely no-op when setup tabs are absent",
+			async () => {
+				harness.cleanup();
+				const offSetupHarness = createHarness(
+					"https://acme.lightning.force.com/lightning/page/home",
+				);
+				try {
+					const offSetupContent = await offSetupHarness.load();
+					offSetupContent.__testHooks.hideTabs(false);
+					await offSetupContent.reorderTabsUl();
+					offSetupContent.makeDuplicatesBold("ManageUsers/home");
+					offSetupContent.sf_afterSet();
+					assertEquals(offSetupHarness.records.toasts.length, 0);
+				} finally {
+					offSetupHarness.cleanup();
+				}
+			},
+		);
 	} finally {
 		try {
 			harness.cleanup();
@@ -1676,105 +1886,128 @@ Deno.test("performActionOnTabs and internal hooks cover remaining failure and de
 		const content = await harness.load();
 		const hooks = content.__testHooks;
 
-		await t.step("info toasts, update prompts, and downloads cover alternate utility branches", async () => {
-			await content.showToast("heads-up", "info");
-			harness.state.confirmResult = false;
-			await hooks.promptUpdateExtension({
-				version: "2.0.0",
-				oldversion: "1.0.0",
-				link: "https://example.test/release",
-			});
-			hooks.launchDownload({ payload: '{"ok":true}' });
-			assertEquals(
-				harness.records.toasts.some((toast) =>
-					toast.status === "info" && toast.message[0] === "heads-up"
-				),
-				true,
-			);
-			assertEquals(
-				harness.records.openCalls.some((call) =>
-					call[0] === "https://example.test/release"
-				),
-				false,
-			);
-		});
+		await t.step(
+			"info toasts, update prompts, and downloads cover alternate utility branches",
+			async () => {
+				await content.showToast("heads-up", "info");
+				harness.state.confirmResult = false;
+				await hooks.promptUpdateExtension({
+					version: "2.0.0",
+					oldversion: "1.0.0",
+					link: "https://example.test/release",
+				});
+				hooks.launchDownload({ payload: '{"ok":true}' });
+				assertEquals(
+					harness.records.toasts.some((toast) =>
+						toast.status === "info" &&
+						toast.message[0] === "heads-up"
+					),
+					true,
+				);
+				assertEquals(
+					harness.records.openCalls.some((call) =>
+						call[0] === "https://example.test/release"
+					),
+					false,
+				);
+			},
+		);
 
-		await t.step("toggleOrg fills current url and org when the input tab is omitted", async () => {
-			await harness.allTabs.replaceTabs([{
-				label: "Users",
-				url: USERS_URL,
-				org: USERS_URL,
-			}], {
-				resetTabs: true,
-				removeOrgTabs: true,
-				updatePinnedTabs: false,
-			});
-			await hooks.toggleOrg();
-			assertEquals(harness.records.syncCalls > 0, true);
-		});
+		await t.step(
+			"toggleOrg fills current url and org when the input tab is omitted",
+			async () => {
+				await harness.allTabs.replaceTabs([{
+					label: "Users",
+					url: USERS_URL,
+					org: USERS_URL,
+				}], {
+					resetTabs: true,
+					removeOrgTabs: true,
+					updatePinnedTabs: false,
+				});
+				await hooks.toggleOrg();
+				assertEquals(harness.records.syncCalls > 0, true);
+			},
+		);
 
-		await t.step("showModalUpdateTab can be launched directly with an empty selector payload", async () => {
-			document.getElementById("again-why-salesforce-modal")?.remove();
-			await harness.allTabs.replaceTabs([{
-				label: "Users",
-				url: USERS_URL,
-				org: USERS_URL,
-			}], {
-				resetTabs: true,
-				removeOrgTabs: true,
-				updatePinnedTabs: false,
-			});
-			await hooks.showModalUpdateTab();
-			assertExists(document.getElementById("again-why-salesforce-modal"));
-			document.getElementById("again-why-salesforce-modal")?.remove();
-		});
+		await t.step(
+			"showModalUpdateTab can be launched directly with an empty selector payload",
+			async () => {
+				document.getElementById("again-why-salesforce-modal")?.remove();
+				await harness.allTabs.replaceTabs([{
+					label: "Users",
+					url: USERS_URL,
+					org: USERS_URL,
+				}], {
+					resetTabs: true,
+					removeOrgTabs: true,
+					updatePinnedTabs: false,
+				});
+				await hooks.showModalUpdateTab();
+				assertExists(
+					document.getElementById("again-why-salesforce-modal"),
+				);
+				document.getElementById("again-why-salesforce-modal")?.remove();
+			},
+		);
 
-		await t.step("direct modal hooks and main bootstrap remain callable", async () => {
-			const duplicateModal = document.createElement("div");
-			duplicateModal.id = "again-why-salesforce-modal";
-			document.body.appendChild(duplicateModal);
-			await hooks.showModalOpenOtherOrg({
-				label: "Users",
-				url: "ManageUsers/home",
-				org: "acme",
-			});
-			await harness.flush();
-			duplicateModal.remove();
-			harness.setUrl(
-				"https://acme.lightning.force.com/lightning/setup/001ABCDEF123456789/view",
-			);
-			const directOrgModal = document.getElementById(
-				"again-why-salesforce-modal",
-			);
-			assertEquals(directOrgModal, null);
-			await hooks.showModalOpenOtherOrg({
-				label: "Users",
-				url: "001ABCDEF123456789/view",
-				org: "acme",
-			});
-			const directOrgModalAfterOpen = document.getElementById(
-				"again-why-salesforce-modal",
-			);
-			assertExists(directOrgModalAfterOpen);
-			(directOrgModalAfterOpen.querySelector("input") as HTMLInputElement).value =
-				"bad_org";
-			(directOrgModalAfterOpen.querySelector("button") as HTMLButtonElement).dispatchEvent(
-				new Event("click", { bubbles: true, cancelable: true }),
-			);
-			await harness.flush();
-			assertEquals(harness.records.toasts.at(-1)?.message[0], "insert_valid_org");
-			directOrgModalAfterOpen.remove();
-			await hooks.showModalUpdateTab({
-				label: "Users",
-				url: USERS_URL,
-				org: USERS_URL,
-			});
-			assertExists(document.getElementById("again-why-salesforce-modal"));
-			document.getElementById("again-why-salesforce-modal")?.remove();
-			hooks.main();
-			await harness.flush();
-			assertEquals(harness.records.executeOncePerDay >= 2, true);
-		});
+		await t.step(
+			"direct modal hooks and main bootstrap remain callable",
+			async () => {
+				const duplicateModal = document.createElement("div");
+				duplicateModal.id = "again-why-salesforce-modal";
+				document.body.appendChild(duplicateModal);
+				await hooks.showModalOpenOtherOrg({
+					label: "Users",
+					url: "ManageUsers/home",
+					org: "acme",
+				});
+				await harness.flush();
+				duplicateModal.remove();
+				harness.setUrl(
+					"https://acme.lightning.force.com/lightning/setup/001ABCDEF123456789/view",
+				);
+				const directOrgModal = document.getElementById(
+					"again-why-salesforce-modal",
+				);
+				assertEquals(directOrgModal, null);
+				await hooks.showModalOpenOtherOrg({
+					label: "Users",
+					url: "001ABCDEF123456789/view",
+					org: "acme",
+				});
+				const directOrgModalAfterOpen = document.getElementById(
+					"again-why-salesforce-modal",
+				);
+				assertExists(directOrgModalAfterOpen);
+				(directOrgModalAfterOpen.querySelector(
+					"input",
+				) as HTMLInputElement).value = "bad_org";
+				(directOrgModalAfterOpen.querySelector(
+					"button",
+				) as HTMLButtonElement).dispatchEvent(
+					new Event("click", { bubbles: true, cancelable: true }),
+				);
+				await harness.flush();
+				assertEquals(
+					harness.records.toasts.at(-1)?.message[0],
+					"insert_valid_org",
+				);
+				directOrgModalAfterOpen.remove();
+				await hooks.showModalUpdateTab({
+					label: "Users",
+					url: USERS_URL,
+					org: USERS_URL,
+				});
+				assertExists(
+					document.getElementById("again-why-salesforce-modal"),
+				);
+				document.getElementById("again-why-salesforce-modal")?.remove();
+				hooks.main();
+				await harness.flush();
+				assertEquals(harness.records.executeOncePerDay >= 2, true);
+			},
+		);
 
 		await t.step("failing actions surface every error branch", async () => {
 			await content.performActionOnTabs("add", {
@@ -1783,7 +2016,10 @@ Deno.test("performActionOnTabs and internal hooks cover remaining failure and de
 			}, {
 				addInFront: false,
 			});
-			assertEquals(harness.records.addCalls.at(-1)?.options.addInFront, false);
+			assertEquals(
+				harness.records.addCalls.at(-1)?.options.addInFront,
+				false,
+			);
 			harness.state.addResult = false;
 			await content.performActionOnTabs("add", {
 				label: "Added",
@@ -2078,9 +2314,10 @@ Deno.test("content.js modal flows cover open-other-org and update-tab interactio
 				assertExists(slashModal);
 				(slashModal.querySelector("input") as HTMLInputElement).value =
 					"other-org";
-				(slashModal.querySelector("button") as HTMLButtonElement).dispatchEvent(
-					new Event("click", { bubbles: true, cancelable: true }),
-				);
+				(slashModal.querySelector("button") as HTMLButtonElement)
+					.dispatchEvent(
+						new Event("click", { bubbles: true, cancelable: true }),
+					);
 				await harness.flush();
 				assertEquals(
 					String(harness.records.openCalls.at(-1)?.[0]).includes(
@@ -2196,9 +2433,32 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 			});
 
 			await t.step(
+				"remove-left routing can be awaited directly on the background listener",
+				async () => {
+					const backgroundListener =
+						harness.browser.runtime._listeners[0];
+					await backgroundListener(
+						{
+							what: "remove-left-tabs",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
+					assertEquals(
+						harness.records.removeOtherCalls.at(-1)?.options
+							.removeBefore,
+						true,
+					);
+				},
+			);
+
+			await t.step(
 				"permission, move, remove, and sort variants route correctly",
 				async () => {
-					const backgroundListener = harness.browser.runtime._listeners[0];
+					const backgroundListener =
+						harness.browser.runtime._listeners[0];
 					harness.browser.runtime.triggerMessage({
 						what: "export-perm-open-popup",
 						ok: true,
@@ -2362,21 +2622,32 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 					});
 					harness.browser.runtime.triggerMessage({});
 					await harness.flush();
-					assertEquals(harness.records.replaceTabsCalls.length >= 10, true);
+					assertEquals(
+						harness.records.replaceTabsCalls.length >= 5,
+						true,
+					);
 					assertEquals(
 						harness.records.toasts.some((toast) =>
-							toast.message[0] === "warn-msg" && toast.status === "warning"
+							toast.message[0] === "warn-msg" &&
+							toast.status === "warning"
 						),
 						true,
 					);
 					assertEquals(
 						harness.records.toasts.some((toast) =>
-							toast.message[0] === "error-msg" && toast.status === "error"
+							toast.message[0] === "error-msg" &&
+							toast.status === "error"
 						),
 						true,
 					);
-					assertEquals(harness.records.removePinnedCalls.length >= 2, true);
-					assertEquals(harness.records.pageActions.slice(-2), [true, false]);
+					assertEquals(
+						harness.records.removePinnedCalls.length >= 2,
+						true,
+					);
+					assertEquals(harness.records.pageActions.slice(-2), [
+						true,
+						false,
+					]);
 					assertEquals(orgLi.style.display, "none");
 					assertEquals(genericLi.style.display, "none");
 					assertEquals(

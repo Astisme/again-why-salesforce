@@ -688,7 +688,7 @@ function setExtensionBrowserListeners() {
 	);
 	// when the extension is installed / updated
 	BROWSER.runtime.onInstalled.addListener(async (details) => {
-		if (detail.temporary) return; // skip during development
+		if (details.temporary) return; // skip during development
 		checkAddRemoveContextMenus(WHAT_INSTALLED);
 		if (details.reason === "update") {
 			// the extension has been updated
