@@ -242,6 +242,23 @@ await Deno.test("bg_getSalesforceLanguage behavior", async () => {
 	assertEquals(sflang, "sf-lang-en"); // only for tests, from Salesforce, we'll get the correct language
 });
 
+await Deno.test("bg_getSalesforceLanguage ignores lookalike non-Salesforce hosts", async () => {
+	mockStorage[LOCALE_KEY] = "fallback-locale";
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 0,
+		url: "https://mycustomorg.lightning.force.com.attacker.test",
+		active: true,
+		currentWindow: true,
+	}]);
+	BROWSER.cookies.setMockCookies([{
+		domain: "mycustomorg.my.salesforce.com.attacker.test",
+		name: "sid",
+		value: "bearer value",
+	}]);
+	const sflang = await bg_getSalesforceLanguage();
+	assertEquals(sflang, "fallback-locale");
+});
+
 await Deno.test("bg_getCommandLinks behavior", async (t) => {
 	BROWSER.commands.setMockCommands([
 		{ shortcut: "a", name: "l" },

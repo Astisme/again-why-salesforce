@@ -745,6 +745,14 @@ await Deno.test("URL manipulation", async (t) => {
 			"https://myotherorgdomain.my.salesforce-setup.com/lightning/setup/SetupOneHome/home",
 			"updates the org in the link",
 		);
+		assertEquals(
+			Tab.expandURL(
+				"https://example.com/?target=https://myorgdomain.lightning.force.com",
+				"https://myorgdomain.sandbox.my.salesforce-setup.com/",
+			),
+			"https://example.com/?target=https://myorgdomain.lightning.force.com",
+			"keeps non-Salesforce absolute links unchanged even when their query contains a Salesforce hostname",
+		);
 	});
 
 	await t.step("containsSalesforceId", () => {

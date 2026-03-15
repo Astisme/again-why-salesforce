@@ -15,6 +15,7 @@ import {
 	PREVENT_DEFAULT_OVERRIDE,
 	SETUP_LIGHTNING_PATTERN,
 	SLDS_ACTIVE,
+	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
 	TAB_STYLE_BORDER,
@@ -375,4 +376,15 @@ export function injectStyle(id, {
 	}
 	document.head.appendChild(tag);
 	return tag;
+}
+/**
+ * Returns whether a hostname belongs to a Salesforce domain handled by the extension.
+ *
+ * @param {URL} [url=new URL()] - the URL with the hostname to validate
+ * @return {boolean} True when the hostname ends with a supported Salesforce suffix.
+ */
+export function isSalesforceHostname(url = new URL()) {
+	return SUPPORTED_SALESFORCE_URLS.some((pattern) =>
+		url.hostname.endsWith(pattern)
+	);
 }

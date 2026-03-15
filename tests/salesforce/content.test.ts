@@ -2186,11 +2186,11 @@ Deno.test("content.js modal flows cover open-other-org and update-tab interactio
 					new Event("click", { bubbles: true, cancelable: true }),
 				);
 				await harness.flush();
+				const openedUrl = harness.records.openCalls.at(-1)?.[0];
+				assert(openedUrl instanceof URL);
 				assertEquals(
-					String(harness.records.openCalls.at(-1)?.[0]).includes(
-						"other-org.lightning.force.com",
-					),
-					true,
+					openedUrl.hostname,
+					"other-org.lightning.force.com",
 				);
 			},
 		);
@@ -2319,11 +2319,11 @@ Deno.test("content.js modal flows cover open-other-org and update-tab interactio
 						new Event("click", { bubbles: true, cancelable: true }),
 					);
 				await harness.flush();
+				const openedUrl = harness.records.openCalls.at(-1)?.[0];
+				assert(openedUrl instanceof URL);
 				assertEquals(
-					String(harness.records.openCalls.at(-1)?.[0]).includes(
-						"/lightning/page/home",
-					),
-					true,
+					openedUrl.pathname,
+					"/lightning/page/home",
 				);
 			},
 		);
