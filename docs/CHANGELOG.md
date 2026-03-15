@@ -23,12 +23,16 @@ Please remember that this project is entirely funded by **the support of its use
 ### Settings
 
 1. Added theme change in settings (light/dark) which syncs with the popup (#129)
+2. An onboarding Tutorial has been created! (#135)
+3. Added Help (?) button to link to [the wiki](https://github.com/Astisme/again-why-salesforce/wiki)
 
 ### Components
 
 1. Created new component for theme handling
 
 ## 🛠 Changed
+
+1. Now using way less loose strings for message exchanges and instead relying on constants
 
 ### Salesforce
 
@@ -40,6 +44,9 @@ Please remember that this project is entirely funded by **the support of its use
 1. Added test for new review / sponsor logic
 2. Added tests for analytics
 3. Added tests for theme change behavior
+4. Added tests for the new tutorial
+5. Added tests for new global functions
+6. Added tests for new function in TabContainer
 
 # v2.2.0
 

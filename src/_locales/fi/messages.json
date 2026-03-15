@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Tili",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Poista",
 		"description": "[hallitse-Tab] poista rivi"
@@ -39,6 +43,10 @@
 		"message": "Nouseva (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Resurssi",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Saatavilla",
 		"description": "Osionotsikko kohteille, jotka voidaan lisätä"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Lihavoitu",
 		"description": "Fonttityylivalinta lihavoidulle tekstille"
+	},
+	"campaign": {
+		"message": "Kampanja",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Peruuta",
@@ -55,9 +67,21 @@
 		"message": "Peruuta ja sulje",
 		"description": "otsikko tai tekstisisältö modal-ikkunan sulkemispainikkeelle"
 	},
+	"case": {
+		"message": "Tapaus",
+		"description": "Sivun nimi, joka liittyy kohteeseen ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Valittu",
 		"description": "Osionotsikko kohteille, jotka on valittu"
+	},
+	"classic_email_templates": {
+		"message": "Perinteiset sähköpostimallit",
+		"description": "Sivu, joka liittyy kohteeseen CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Sulje",
+		"description": "sulje ilman, että mitään tapahtuu"
 	},
 	"cmd_export_all": {
 		"message": "Näytä modaalinen ikkuna kaikkien tallennettujen Tabsien vientiin",
@@ -87,6 +111,14 @@
 		"message": "Näytä modaalinen ikkuna nykyisen sivun päivittämiseksi (jos tallennettu)",
 		"description": "[command description] käyttäjä haluaa päivittää nykyisen sivun"
 	},
+	"company_information": {
+		"message": "Yrityksen tiedot",
+		"description": "Sivu, joka liittyy kohteeseen CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Vahvista",
+		"description": "teksti, jolla käyttäjää pyydetään jatkamaan"
+	},
 	"confirm_another_org": {
 		"message": "Vahvista tämän linkin avaaminen.",
 		"description": "[open-other-org-modal] pyytää käyttäjältä vahvistusta rakennetun linkin avaamiseen."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Uusi versio $extension_label on nyt saatavilla!",
 		"description": "tuntematon viesti on vastaanotettu kuuntelijalta"
+	},
+	"contact": {
+		"message": "Yhteystieto",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Jatka",
@@ -555,6 +591,10 @@
 		"message": "translatoria ei ole vielä alustettu.",
 		"description": "[error] TranslationService ei ollut valmis"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "opastusohjelmaa ei voitu alustaa.",
+		"description": "[error] Opastusohjelmaa ei alustettu"
+	},
 	"error_unknown_file_structure": {
 		"message": "Emme pystyneet ymmärtämään tiedostoa, jonka halusit tuoda\nJos ongelma toistuu, jaa se kanssamme avaamalla GitHub-ongelma",
 		"description": "[tuonti] käyttäjän tiedostoa ei tunnistettu"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Tuntematon pyyntö.",
 		"description": "[error] Yleinen virhe tuntemattoman viestin vastaanoton jälkeen"
+	},
+	"error_unknown_toast_type": {
+		"message": "Pyydettyä ilmoitustyyppiä ei voitu tulkita. Muuta koodiasi.",
+		"description": "[error] Yleinen virhe, jota käytetään ilmoitustyyppiä asetettaessa"
 	},
 	"error_unpin_tab": {
 		"message": "Virhe Tab-välilehden kiinnityksen poistamisessa",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Tämän laajennuksen nimi"
+	},
+	"field_accessibility": {
+		"message": "Kenttien saavutettavuus",
+		"description": "Sivu, joka liittyy kohteeseen FieldAccessibility/home"
 	},
 	"file": {
 		"message": "tiedosto",
@@ -783,13 +831,29 @@
 		"message": "Otsikko",
 		"description": "[key] Tab-välilehden nimi"
 	},
+	"lead": {
+		"message": "Liidi",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "lue lisää kohteesta $extension_label",
+		"description": "[popup][settings] saavutettava otsikko ja aria-label wiki-ohjepainikkeelle"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigointi",
 		"description": "Salesforcen mukautettu navigointiteknologia"
 	},
+	"login_history": {
+		"message": "Kirjautumishistoria",
+		"description": "Sivu, joka liittyy kohteeseen OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Kirjaudu Salesforceen",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforcen kirjautumissivulle"
+	},
+	"manage_connected_apps": {
+		"message": "Hallitse yhdistettyjä sovelluksia",
+		"description": "Sivu, joka liittyy kohteeseen ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Hallitse $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Avaa Setup",
 		"description": "[notSalesforceSetup] toimintakehotus painikkeelle, joka ohjaa käyttäjän Salesforce Setup -sivulle"
+	},
+	"opportunity": {
+		"message": "Mahdollisuus",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Lisää uudet Tabs-välilehdet Org Tabs -välilehdiksi.",
@@ -975,6 +1043,10 @@
 		"message": "Lupa on sallittu!",
 		"description": "[onnistuminen] käyttäjä pyysi meitä pyytämään lupaa ja hän hyväksyi sen"
 	},
+	"permission_sets": {
+		"message": "Käyttöoikeusjoukot",
+		"description": "Sivu, joka liittyy kohteeseen PermSets/home"
+	},
 	"pinned": {
 		"message": "Kiinnitetty",
 		"description": "Käyttäjän Tab-välilehdet, jotka löytyvät aina listan alusta"
@@ -983,9 +1055,21 @@
 		"message": "Säilytä Tabit muille organisaatioille.",
 		"description": "[label] säilytä kaikki organisaatiokohtaiset Tabit tuonnin aikana"
 	},
+	"pricebook2": {
+		"message": "Hinnasto 2",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Tuote 2",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Poista Tab",
 		"description": "[alt] vaihtoehtoinen teksti, kun kuvia ei näytetä"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Raporttien ja koontinäyttöjen asetukset",
+		"description": "Sivu, joka liittyy kohteeseen ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Avaa laajennuksen ponnahdusikkuna selaimen laajennusvalikosta.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Lähetä meille vinkki ❤️",
 		"description": "[popup] otsikko svg:lle pyytää vinkin lähettämistä"
+	},
+	"sessions": {
+		"message": "Istunnot",
+		"description": "Sivu, joka liittyy kohteeseen SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab-esikatselu",
@@ -1327,9 +1415,17 @@
 		"message": "Asetukset",
 		"description": "Nimike asetusvalikkoa varten"
 	},
+	"setup_audit_trail": {
+		"message": "Määritä tarkastusketju",
+		"description": "Sivu, joka liittyy kohteeseen SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup-sivu",
 		"description": "[notSalesforceSetup] sivu Salesforce-asetusten muokkaamiseksi"
+	},
+	"sharing_settings": {
+		"message": "Jakoasetukset",
+		"description": "Sivu, joka liittyy kohteeseen SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Näytä kaikki $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabit tallennettu.",
 		"description": "[toast] Tabit tallennettiin onnistuneesti."
 	},
+	"task": {
+		"message": "Tehtävä",
+		"description": "Sivu, joka liittyy kohteeseen ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Vaihda tummaan teemaan",
 		"description": "[popup] kuun kuvakkeen otsikko teeman vaihtamiseksi"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Vaihda vaaleaan teemaan",
 		"description": "[popup] auringon kuvakkeen otsikko teeman vaihtamiseksi"
+	},
+	"tutorial": {
+		"message": "Opastusohjelma",
+		"description": "[popup] painike opastusohjelman käynnistämiseksi"
+	},
+	"tutorial_add_favourite": {
+		"message": "Napsauta tähteä lisätäksesi tämän sivun suosikkeihin.",
+		"description": "[tutorial] lisää suosikki"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Napsauta korostettua $tab -välilehteä siirtyäksesi vastaavalle sivulle.",
+		"description": "[tutorial] napsauta korostettua välilehteä"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Tämä koskee laajennusta $extension_label ja jatkaa keskeneräistä $tutorial -opastusta siitä, mihin jäit.",
+		"description": "[tutorial] leipäteksti opastuksen jatkamiseksi"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Jatketaanko opastusta $tutorial viimeisestä vaiheesta?",
+		"description": "[tutorial] modaalin otsikko opastuksen jatkamiseksi"
+	},
+	"tutorial_drag_flows": {
+		"message": "Vedä korostettu rivi (käyttämällä 6 pistettä) ja pudota se ennen ensimmäistä riviä (joka on kiinnitetty).",
+		"description": "[tutorial] vedä työnkulkuja"
+	},
+	"tutorial_end": {
+		"message": "$tutorial suoritettu! Pidä hauskaa laajennuksen parissa.",
+		"description": "[tutorial] loppu"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Emme löytäneet käyttökelpoisia linkkejä opastuksen $tutorial aloittamiseksi. \nVie $tabs -välilehtesi ja käynnistä $tutorial uudelleen.",
+		"description": "[tutorial] virheilmoitus: aloitus epäonnistui"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Nämä ovat suosikki- $tabs -välilehtesi, ja niitä käytetään usein käytettyjen sivujen nopeaan avaamiseen.",
+		"description": "[tutorial] korosta suosikkivälilehti"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Avaa $settings -sivu pikanäppäimellä. Siellä voit muuttaa laajennuksen toimintaa ja muokata $tabs -välilehtien tyyliä.",
+		"description": "[tutorial] pikanäppäin"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Napsauta sivua kakkospainikkeella (ei välilehteä) ja valitse $extension_label > $cxm_manage_tabs avataksesi hallintamodaalin.",
+		"description": "[tutorial] hallitse välilehteä"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Voit hallita $tabs -välilehtiäsi tästä näkymästä. Napsauta tästä saadaksesi lisätietoja.",
+		"description": "[tutorial] linkki välilehtien hallintaan"
+	},
+	"tutorial_pin_tab": {
+		"message": "Napsauta korostettua $tab -välilehteä kakkospainikkeella ja kiinnitä se valitsemalla $extension_label > $cxm_move > $cxm_pin_tab .",
+		"description": "[tutorial] kiinnitä välilehti"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Vedettyä riviä ei voitu siirtää kiinnitetyn rivin edelle (koska sitä ei ole tällä hetkellä kiinnitetty), joten se siirtyi kiinnittämättömien luettelon alkuun. Näitä kahta luetteloa käsitellään erikseen.",
+		"description": "[tutorial] selitys kiinnittämisestä"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Huomaa, että $tab on nyt kiinnitetty ja se pysyy paikallaan.",
+		"description": "[tutorial] kiinnitetty välilehti"
+	},
+	"tutorial_redirect_account": {
+		"message": "Ohjaamme sinut nyt toiselle sivulle näyttääksemme lisää. Jatka napsauttamalla tästä.",
+		"description": "[tutorial] uudelleenohjaus tilille"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Poista tämä sivu suosikeista napsauttamalla yliviivattua tähteä. VINKKI: voit napsauttaa tähteä tämän vaiheen jälkeen välttääksesi välilehden $tab menettämisen.",
+		"description": "[tutorial] poista suosikki"
+	},
+	"tutorial_restart": {
+		"message": "Voit aloittaa opastuksen $tutorial uudelleen milloin tahansa napsauttamalla ponnahdusikkunan painiketta.",
+		"description": "[tutorial] ensimmäinen viesti"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Haluatko aloittaa opastuksen $tutorial alusta?",
+		"description": "[tutorial] kehote opastuksen uudelleenkäynnistämiseksi"
+	},
+	"tutorial_save_modal": {
+		"message": "Ota muutokset käyttöön ja näytä vahvistusviesti napsauttamalla $save .",
+		"description": "[tutorial] tallenna modaali"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Tämä koskee laajennusta $extension_label . Se vie sinut ensin Setup Home -sivulle ja aloittaa sitten ohjatun opastuksen $tutorial .",
+		"description": "[tutorial] leipäteksti opastuksen aloittamiseksi"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Aloitetaanko opastus $tutorial Setup Homesta?",
+		"description": "[tutorial] modaalin otsikko opastuksen aloittamiseksi"
 	},
 	"underline": {
 		"message": "Alleviivaus",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Mihin?",
 		"description": "[open-other-org-modal] vaihtoehtoinen otsikko modalille"
+	},
+	"wiki_label": {
+		"message": "Lue lisää kohteesta $extension_label",
+		"description": "[popup][settings] saavutettava otsikko ja aria-label wiki-ohjepainikkeelle"
 	},
 	"write_review": {
 		"message": "Kirjoita arvostelu!",

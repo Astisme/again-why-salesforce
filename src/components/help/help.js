@@ -1,4 +1,5 @@
-import { HIDDEN_CLASS } from "/constants.js";
+import { BROWSER, HIDDEN_CLASS } from "/constants.js";
+import { injectStyle } from "/functions.js";
 import { generateHelpWith_i_popup } from "/salesforce/generator.js";
 import ensureTranslatorAvailability from "/translator.js";
 
@@ -33,9 +34,10 @@ class HelpAws extends HTMLElement {
 		this._anchor = anchor;
 		this._tooltip = tooltip;
 		this._linkTip = linkTip;
-		const linkEl = document.createElement("link");
-		linkEl.setAttribute("rel", "stylesheet");
-		linkEl.setAttribute("href", new URL("./help.css", import.meta.url));
+		const linkEl = injectStyle(
+			"awsf-help",
+			{ link: BROWSER.runtime.getURL("/components/help/help.css") },
+		);
 		this.shadowRoot.appendChild(linkEl);
 		this._tooltip.dataset.showRight = this.dataset.showRight ?? "false";
 		this._tooltip.dataset.showLeft = this.dataset.showLeft ?? "false";

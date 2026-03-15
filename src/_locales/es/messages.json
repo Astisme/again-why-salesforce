@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Cuenta",
+		"description": "La página relacionada con ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Eliminar",
 		"description": "[gestionar-Tab] eliminar una fila"
@@ -39,6 +43,10 @@
 		"message": "Ascendente (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Activo",
+		"description": "La página relacionada con ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Disponible",
 		"description": "Encabezado de sección para elementos que se pueden agregar"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Negrita",
 		"description": "Opción de estilo de fuente para texto en negrita"
+	},
+	"campaign": {
+		"message": "Campaña",
+		"description": "La página relacionada con ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Cancelar",
@@ -55,9 +67,21 @@
 		"message": "Cancelar y cerrar",
 		"description": "Título o texto para el botón de cerrar modales"
 	},
+	"case": {
+		"message": "Caso",
+		"description": "El nombre de la página relacionada con ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Seleccionado",
 		"description": "Encabezado de sección para elementos que han sido seleccionados"
+	},
+	"classic_email_templates": {
+		"message": "Plantillas de correo electrónico clásicas",
+		"description": "La página relacionada con CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Cerrar",
+		"description": "cerrar sin que pase nada"
 	},
 	"cmd_export_all": {
 		"message": "Mostrar la ventana modal para exportar todas las Tabs guardadas",
@@ -87,6 +111,14 @@
 		"message": "Mostrar la ventana modal para actualizar la página actual (si está guardada)",
 		"description": "[command description] el usuario quiere actualizar la página actual"
 	},
+	"company_information": {
+		"message": "Información de la empresa",
+		"description": "La página relacionada con CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Confirmar",
+		"description": "texto para pedir al usuario que continúe"
+	},
 	"confirm_another_org": {
 		"message": "Confirme abrir este enlace.",
 		"description": "[open-other-org-modal] Solicita al usuario confirmar la apertura del enlace construido."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "¡Una nueva versión de $extension_label ya está disponible!",
 		"description": "se ha recibido un mensaje desconocido de un detector"
+	},
+	"contact": {
+		"message": "Contacto",
+		"description": "La página relacionada con ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Continuar",
@@ -554,6 +590,10 @@
 		"message": "translator aún no se ha inicializado.",
 		"description": "[error] TranslationService no estaba listo"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "el tutorial no se pudo inicializar.",
+		"description": "[error] El Tutorial no fue inicializado"
+	},
 	"error_unknown_file_structure": {
 		"message": "No pudimos entender un archivo que querías importar\nSi el problema persiste, compártelo con nosotros abriendo un problema en GitHub",
 		"description": "[importar] no se reconoció el archivo del usuario"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "Solicitud desconocida.",
 		"description": "[error] error genérico después de recibir un mensaje no reconocido"
+	},
+	"error_unknown_toast_type": {
+		"message": "El tipo de aviso solicitado no pudo interpretarse. Por favor, cambie su código.",
+		"description": "[error] Error genérico utilizado al configurar el tipo de aviso"
 	},
 	"error_unpin_tab": {
 		"message": "Error al desanclar Tab",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] El nombre de esta extensión"
+	},
+	"field_accessibility": {
+		"message": "Accesibilidad de campos",
+		"description": "La página relacionada con FieldAccessibility/home"
 	},
 	"file": {
 		"message": "archivo",
@@ -782,13 +830,29 @@
 		"message": "Etiqueta",
 		"description": "[key] el nombre del Tab"
 	},
+	"lead": {
+		"message": "Candidato",
+		"description": "La página relacionada con ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "obtener más información sobre $extension_label",
+		"description": "[popup][settings] título accesible y aria-label para el botón de ayuda de la wiki"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Tecnología de navegación personalizada de Salesforce"
 	},
+	"login_history": {
+		"message": "Historial de inicio de sesión",
+		"description": "La página relacionada con OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Iniciar sesión en Salesforce",
 		"description": "[notSalesforceSetup] Llamado a la acción para redirigir al inicio de sesión de Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Gestionar aplicaciones conectadas",
+		"description": "La página relacionada con ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Gestionar $tabs",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Abrir Configuración",
 		"description": "[notSalesforceSetup] Llamado a la acción para ir a la página de Configuración de Salesforce"
+	},
+	"opportunity": {
+		"message": "Oportunidad",
+		"description": "La página relacionada con ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Agregar nuevas Tabs como Org Tabs.",
@@ -974,6 +1042,10 @@
 		"message": "¡El permiso ha sido concedido!",
 		"description": "[éxito] el usuario nos pidió que solicitáramos un permiso y lo aceptó"
 	},
+	"permission_sets": {
+		"message": "Conjuntos de permisos",
+		"description": "La página relacionada con PermSets/home"
+	},
 	"pinned": {
 		"message": "Anclada",
 		"description": "Tab del usuario que siempre se encuentran al comienzo de la lista"
@@ -982,9 +1054,21 @@
 		"message": "Conservar Tabs de otras orgs.",
 		"description": "[label] Mantiene los Tabs específicos de otras orgs durante el proceso de importación"
 	},
+	"pricebook2": {
+		"message": "Lista de precios 2",
+		"description": "La página relacionada con ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Producto 2",
+		"description": "La página relacionada con ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Eliminar Tab",
 		"description": "[alt] Texto alternativo cuando las imágenes no funcionan."
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Configuración de informes y paneles",
+		"description": "La página relacionada con ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Por favor, abra la ventana emergente de la extensión desde el menú de extensiones de su navegador.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "Envíanos una propina ❤️",
 		"description": "[popup] título para svg para solicitar el envío de una propina"
+	},
+	"sessions": {
+		"message": "Sesiones",
+		"description": "La página relacionada con SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Vista previa de Tab",
@@ -1326,9 +1414,17 @@
 		"message": "Configuración",
 		"description": "Etiqueta para el menú de configuración"
 	},
+	"setup_audit_trail": {
+		"message": "Pista de auditoría de configuración",
+		"description": "La página relacionada con SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Página de Configuración",
 		"description": "[notSalesforceSetup] Página utilizada para modificar la configuración de Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Configuración de uso compartido",
+		"description": "La página relacionada con SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Mostrar todas las $tabs",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs guardados.",
 		"description": "[toast] Los Tabs se han guardado correctamente."
 	},
+	"task": {
+		"message": "Tarea",
+		"description": "La página relacionada con ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Cambiar Tema a Oscuro",
 		"description": "[popup] Título en la luna para cambiar el tema"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "Cambiar Tema a Claro",
 		"description": "[popup] Título en el sol para cambiar el tema"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] botón para iniciar el tutorial"
+	},
+	"tutorial_add_favourite": {
+		"message": "Haga clic en la estrella para añadir esta página a favoritos.",
+		"description": "[tutorial] añadir favorito"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Haga clic en la $tab resaltada para navegar a la página correspondiente.",
+		"description": "[tutorial] clic en la Tab resaltada"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Esto es para $extension_label y reanudará su $tutorial inacabado desde donde lo dejó.",
+		"description": "[tutorial] texto del cuerpo para continuar el tutorial"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "¿Continuar $tutorial desde el último paso?",
+		"description": "[tutorial] título modal para continuar el tutorial"
+	},
+	"tutorial_drag_flows": {
+		"message": "Arrastre la fila resaltada (usando los 6 puntos) y suéltela antes de la primera fila (que está fijada).",
+		"description": "[tutorial] arrastrar flujos"
+	},
+	"tutorial_end": {
+		"message": "¡ $tutorial completado! Diviértase usando la extensión.",
+		"description": "[tutorial] fin"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "No pudimos encontrar enlaces utilizables para iniciar el $tutorial \nPor favor, exporte sus $tabs y reinicie el $tutorial",
+		"description": "[tutorial] mensaje de error no se pudo iniciar"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Estas son sus $tabs favoritas y se utilizan para acceder rápidamente a las páginas que usa con frecuencia.",
+		"description": "[tutorial] resaltar Tab favoritas"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Presione el atajo de teclado para abrir la página de $settings donde puede cambiar el comportamiento de la extensión y personalizar sus $tabs",
+		"description": "[tutorial] atajo de teclado"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Haga clic derecho en la página (no en una Tab) y seleccione $extension_label > $cxm_manage_tabs para abrir el modal de gestión.",
+		"description": "[tutorial] gestionar Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Puede gestionar sus $tabs desde esta pantalla. Haga clic aquí para obtener más información.",
+		"description": "[tutorial] enlace para gestionar Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "Haga clic derecho en la $tab resaltada y seleccione $extension_label > $cxm_move > $cxm_pin_tab para fijarla.",
+		"description": "[tutorial] fijar Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "La fila arrastrada no pudo moverse antes de la fila fijada (porque actualmente no está fijada), por lo que se movió al principio de la lista de no fijadas. Estas dos listas se tratan por separado.",
+		"description": "[tutorial] explicación de fijado"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Observe que la $tab ahora está fijada y se mantendrá en su lugar.",
+		"description": "[tutorial] Tab fijada"
+	},
+	"tutorial_redirect_account": {
+		"message": "Ahora le redirigiremos a otra página para mostrarle más. Haga clic aquí para continuar.",
+		"description": "[tutorial] redirigir a cuenta"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Haga clic en la estrella tachada para eliminar esta página de favoritos. CONSEJO: puede hacer clic en la estrella después de completar este paso para evitar perder esta $tab",
+		"description": "[tutorial] eliminar favorito"
+	},
+	"tutorial_restart": {
+		"message": "Puede reiniciar el $tutorial en cualquier momento haciendo clic en el botón de la ventana emergente.",
+		"description": "[tutorial] primer mensaje"
+	},
+	"tutorial_restart_prompt": {
+		"message": "¿Quiere iniciar el $tutorial desde el principio?",
+		"description": "[tutorial] aviso para reiniciar el tutorial"
+	},
+	"tutorial_save_modal": {
+		"message": "Haga clic en $save para aplicar los cambios y ver el mensaje de confirmación.",
+		"description": "[tutorial] guardar modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Esto es para $extension_label y le llevará primero a la página de inicio de configuración, luego iniciará el $tutorial guiado",
+		"description": "[tutorial] texto del cuerpo para iniciar el tutorial"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "¿Iniciar $tutorial desde Inicio de configuración?",
+		"description": "[tutorial] título modal para iniciar el tutorial"
 	},
 	"underline": {
 		"message": "Subrayar",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "¿A dónde?",
 		"description": "[open-other-org-modal] Título alternativo para el modal."
+	},
+	"wiki_label": {
+		"message": "Obtenga más información sobre $extension_label",
+		"description": "[popup][settings] título accesible y aria-label para el botón de ayuda de la wiki"
 	},
 	"write_review": {
 		"message": "¡Escribe una reseña!",

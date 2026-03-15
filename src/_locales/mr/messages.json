@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "खाते (Account)",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view शी संबंधित पृष्ठ"
+	},
 	"act_delete": {
 		"message": "🗑️ हटवा",
 		"description": "[Tab-व्यवस्थापित करा] एक ओळ हटवा"
@@ -39,6 +43,10 @@
 		"message": "चढत्या क्रमाने (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "मालमत्ता (Asset)",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view शी संबंधित पृष्ठ"
+	},
 	"available": {
 		"message": "उपलब्ध",
 		"description": "उपलब्ध विभागातील आयटém्ससाठी विभाग शीर्षक"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "ठळक",
 		"description": "ठळक मजकुरासाठी फॉन्ट शैली पर्याय"
+	},
+	"campaign": {
+		"message": "मोहीम (Campaign)",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view शी संबंधित पृष्ठ"
 	},
 	"cancel": {
 		"message": "रद्द करा",
@@ -55,9 +67,21 @@
 		"message": "रद्द करा आणि बंद करा",
 		"description": "मोडल्सच्या क्लोज बटणासाठी शीर्षक किंवा टेक्स्ट कंटेंट"
 	},
+	"case": {
+		"message": "प्रकरण (Case)",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view शी संबंधित पृष्ठाचे नाव"
+	},
 	"chosen": {
 		"message": "निवडलेले",
 		"description": "निवडलेल्या आयटém्ससाठी विभाग शीर्षक"
+	},
+	"classic_email_templates": {
+		"message": "क्लासिक ईमेल टेम्पलेट्स",
+		"description": "CommunicationTemplatesEmail/home शी संबंधित पृष्ठ"
+	},
+	"close": {
+		"message": "बंद करा",
+		"description": "काहीही न होता बंद करा"
 	},
 	"cmd_export_all": {
 		"message": "जतन केलेले सर्व Tab निर्यात करण्यासाठी modal दाखवा",
@@ -87,6 +111,14 @@
 		"message": "सध्याचे पृष्ठ अद्यतनित करण्यासाठी modal दाखवा (जतन केलेले असल्यास)",
 		"description": "[कमांड वर्णन] वापरकर्त्याला सध्याचे पृष्ठ अद्यतनित करायचे आहे"
 	},
+	"company_information": {
+		"message": "कंपनीची माहिती",
+		"description": "CompanyProfileInfo/home शी संबंधित पृष्ठ"
+	},
+	"confirm": {
+		"message": "पुष्टी करा",
+		"description": "वापरकर्त्याला पुढे जाण्यासाठी सूचित करणारा मजकूर"
+	},
 	"confirm_another_org": {
 		"message": "हा लिंक उघडणे पुष्टी करा.",
 		"description": "[open-other-org-modal] तयार केलेल्या लिंक उघडण्यासाठी वापरकर्त्याकडून पुष्टी मागते."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label ची नवीन आवृत्ती आता उपलब्ध आहे!",
 		"description": "श्रोत्याकडून अज्ञात संदेश प्राप्त झाला आहे"
+	},
+	"contact": {
+		"message": "संपर्क (Contact)",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view शी संबंधित पृष्ठ"
 	},
 	"continue": {
 		"message": "सुरू ठेवा",
@@ -554,6 +590,10 @@
 		"message": "भाषांतरकार अद्याप सुरु केलेला नाही.",
 		"description": "[त्रुटी] TranslationService तयार नव्हते"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ट्यूटोरियल सुरू होऊ शकले नाही.",
+		"description": "[error] ट्यूटोरियल सुरू झाले नव्हते"
+	},
 	"error_unknown_file_structure": {
 		"message": "तुम्ही आयात करू इच्छित असलेली फाईल आम्हाला समजली नाही\nसमस्या कायम राहिल्यास, कृपया GitHub इश्यू उघडून ती आमच्यासोबत शेअर करा",
 		"description": "[आयात] वापरकर्त्याची फाईल ओळखली गेली नाही"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "अज्ञात विनंती.",
 		"description": "[त्रुटी] ओळखल्या न गेलेल्या संदेशानंतरची सामान्य त्रुटी"
+	},
+	"error_unknown_toast_type": {
+		"message": "विनंती केलेल्या टोस्ट प्रकाराचा अर्थ लावता आला नाही. कृपया तुमचा कोड बदला.",
+		"description": "[error] टोस्ट प्रकार सेट करताना वापरली जाणारी सामान्य त्रुटी"
 	},
 	"error_unpin_tab": {
 		"message": "Tab अनपिन करताना त्रुटी",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] या एक्सटेंशनचे नाव"
+	},
+	"field_accessibility": {
+		"message": "फील्ड ॲक्सेसिबिलिटी",
+		"description": "FieldAccessibility/home शी संबंधित पृष्ठ"
 	},
 	"file": {
 		"message": "फाईल",
@@ -782,13 +830,29 @@
 		"message": "लेबल",
 		"description": "[key] Tab चे नाव"
 	},
+	"lead": {
+		"message": "लीड (Lead)",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view शी संबंधित पृष्ठ"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label बद्दल अधिक जाणून घ्या",
+		"description": "[popup][settings] विकी मदत बटणासाठी सुलभ शीर्षक आणि aria-label"
+	},
 	"lightning_navigation": {
 		"message": "Lightning नेव्हिगेशन",
 		"description": "Salesforce ची सानुकूल नेव्हिगेशन तंत्रज्ञान"
 	},
+	"login_history": {
+		"message": "लॉगिन इतिहास",
+		"description": "OrgLoginHistory/home शी संबंधित पृष्ठ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce मध्ये लॉगिन करा",
 		"description": "[notSalesforceSetup] Salesforce लॉगिन पृष्ठावर पुनर्निर्देशित करण्यासाठी कॉल टू अॅक्शन"
+	},
+	"manage_connected_apps": {
+		"message": "कनेक्ट केलेले ॲप्स व्यवस्थापित करा",
+		"description": "ConnectedApplication/home शी संबंधित पृष्ठ"
 	},
 	"manage_tabs": {
 		"message": "$tabs व्यवस्थापित करा",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Setup उघडा",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठाकडे जाण्यासाठी कॉल टू अॅक्शन"
+	},
+	"opportunity": {
+		"message": "संधी (Opportunity)",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view शी संबंधित पृष्ठ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "नवीन Tab Org Tab म्हणून जोडा.",
@@ -974,6 +1042,10 @@
 		"message": "परवानगी दिली गेली आहे!",
 		"description": "[यश] वापरकर्त्याने आम्हाला परवानगीची विनंती करण्यास सांगितले आणि त्यांनी ती स्वीकारली"
 	},
+	"permission_sets": {
+		"message": "परवानगी संच",
+		"description": "PermSets/home शी संबंधित पृष्ठ"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "वापरकर्त्याचे Tab जे नेहमी यादीच्या सुरुवातीस आढळतात"
@@ -982,9 +1054,21 @@
 		"message": "इतर Org साठी Tabs जतन करा.",
 		"description": "[label] आयात प्रक्रियेदरम्यान Org-विशिष्ट Tabs राखून ठेवते"
 	},
+	"pricebook2": {
+		"message": "किंमत पुस्तिका २",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view शी संबंधित पृष्ठ"
+	},
+	"product2": {
+		"message": "उत्पादन २",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view शी संबंधित पृष्ठ"
+	},
 	"remove_tab": {
 		"message": "Tab काढून टाका",
 		"description": "[alt] प्रतिमांदृष्ट अयशस्वी झाल्यास पर्यायी मजकूर"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "अहवाल आणि डॅशबोर्ड सेटिंग्ज",
+		"description": "ReportUI/home शी संबंधित पृष्ठ"
 	},
 	"req_downloads_open_popup": {
 		"message": "कृपया आपल्या ब्राउझरच्या एक्सटेंशन मेनूमधून एक्सटेंशन पॉपअप उघडा.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "आम्हाला एक टिप पाठवा ❤️",
 		"description": "[popup] टिप पाठवण्यासाठी प्रॉम्प्ट करण्यासाठी svg साठी शीर्षक"
+	},
+	"sessions": {
+		"message": "सत्रे (Sessions)",
+		"description": "SecuritySession/home शी संबंधित पृष्ठ"
 	},
 	"set_gen_preview": {
 		"message": "Tab पूर्वावलोकन",
@@ -1326,9 +1414,17 @@
 		"message": "सेटिंग्ज",
 		"description": "सेटिंग्ज मेन्यूसाठी लेबल"
 	},
+	"setup_audit_trail": {
+		"message": "सेटअप ऑडिट ट्रेल",
+		"description": "SecurityEvents/home शी संबंधित पृष्ठ"
+	},
 	"setup_page": {
 		"message": "Setup पृष्ठ",
 		"description": "[notSalesforceSetup] Salesforce सेटिंग्ज बदलण्यासाठीचे पृष्ठ"
+	},
+	"sharing_settings": {
+		"message": "शेअरिंग सेटिंग्ज",
+		"description": "SecuritySharing/home शी संबंधित पृष्ठ"
 	},
 	"show_all_tabs": {
 		"message": "सर्व $tabs दाखवा",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs जतन झाली.",
 		"description": "[toast] Tabs यशस्वीरित्या जतन झाली."
 	},
+	"task": {
+		"message": "कार्य (Task)",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view शी संबंधित पृष्ठ"
+	},
 	"theme_dark": {
 		"message": "Dark थीममध्ये बदला",
 		"description": "[popup] थीम बदलण्यासाठी चंद्रावरचे शीर्षक"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "Light थीममध्ये बदला",
 		"description": "[popup] थीम बदलण्यासाठी सूर्यावरचे शीर्षक"
+	},
+	"tutorial": {
+		"message": "ट्यूटोरियल",
+		"description": "[popup] ट्यूटोरियल सुरू करण्यासाठी बटण"
+	},
+	"tutorial_add_favourite": {
+		"message": "हे पृष्ठ आवडीमध्ये (favorites) जोडण्यासाठी ताऱ्यावर क्लिक करा.",
+		"description": "[tutorial] आवडते जोडा"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "संबंधित पृष्ठावर जाण्यासाठी हायलाइट केलेल्या $tab वर क्लिक करा.",
+		"description": "[tutorial] हायलाइट केलेल्या टॅबवर क्लिक करा"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "हे $extension_label साठी आहे आणि तुमचे अपूर्ण $tutorial तुम्ही जिथून सोडले होते तिथून पुन्हा सुरू होईल.",
+		"description": "[tutorial] ट्यूटोरियल सुरू ठेवण्यासाठी मुख्य मजकूर"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "शेवटच्या पायरीपासून $tutorial सुरू ठेवायचे?",
+		"description": "[tutorial] ट्यूटोरियल सुरू ठेवण्यासाठी मोडल शीर्षक"
+	},
+	"tutorial_drag_flows": {
+		"message": "हायलाइट केलेली ओळ (६ ठिपके वापरून) ड्रॅग करा आणि पहिल्या ओळीच्या (जी पिन केलेली आहे) आधी सोडा.",
+		"description": "[tutorial] फ्लो ड्रॅग करा"
+	},
+	"tutorial_end": {
+		"message": "$tutorial पूर्ण झाले! एक्स्टेंशन वापरण्याचा आनंद घ्या.",
+		"description": "[tutorial] समाप्त"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "आम्हाला $tutorial सुरू करण्यासाठी कोणतेही उपयुक्त दुवे सापडले नाहीत\nकृपया तुमचे $tabs एक्सपोर्ट करा आणि $tutorial रीस्टार्ट करा",
+		"description": "[tutorial] सुरू होऊ शकले नाही असा त्रुटी संदेश"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "हे तुमचे आवडते $tabs आहेत आणि वारंवार वापरल्या जाणाऱ्या पृष्ठांवर द्रुत प्रवेशासाठी वापरले जातात.",
+		"description": "[tutorial] आवडता टॅब हायलाइट करा"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "$settings पृष्ठ उघडण्यासाठी कीबोर्ड शॉर्टकट दाबा जिथे तुम्ही एक्स्टेंशनचे वर्तन बदलू शकता आणि तुमचे $tabs स्टाईल करू शकता",
+		"description": "[tutorial] कीबोर्ड शॉर्टकट"
+	},
+	"tutorial_manage_tabs": {
+		"message": "पृष्ठावर राइट क्लिक करा (टॅबवर नाही) आणि व्यवस्थापन मोडल उघडण्यासाठी $extension_label > $cxm_manage_tabs निवडा.",
+		"description": "[tutorial] टॅब व्यवस्थापित करा"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "तुम्ही या स्क्रीनवरून तुमचे $tabs व्यवस्थापित करू शकता. अधिक माहितीसाठी येथे क्लिक करा.",
+		"description": "[tutorial] टॅब व्यवस्थापित करण्यासाठी दुवा"
+	},
+	"tutorial_pin_tab": {
+		"message": "हायलाइट केलेल्या $tab वर राइट क्लिक करा आणि ते पिन करण्यासाठी $extension_label > $cxm_move > $cxm_pin_tab निवडा.",
+		"description": "[tutorial] टॅब पिन करा"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ड्रॅग केलेली ओळ पिन केलेल्या ओळीच्या आधी हलवता आली नाही (कारण ती सध्या पिन केलेली नाही), म्हणून ती अनपिन केलेल्या सूचीच्या सुरुवातीला गेली. या दोन्ही सूची स्वतंत्र मानल्या जातात.",
+		"description": "[tutorial] पिन केलेल्याबद्दल स्पष्टीकरण"
+	},
+	"tutorial_pinned_tab": {
+		"message": "लक्षात घ्या की $tab आता पिन झाले आहे आणि त्याच्या जागी राहील.",
+		"description": "[tutorial] पिन केलेला टॅब"
+	},
+	"tutorial_redirect_account": {
+		"message": "तुम्हाला अधिक दाखवण्यासाठी आम्ही आता तुम्हाला दुसऱ्या पृष्ठावर रीडायरेक्ट करू. सुरू ठेवण्यासाठी येथे क्लिक करा.",
+		"description": "[tutorial] खात्यावर रीडायरेक्ट करा"
+	},
+	"tutorial_remove_favourite": {
+		"message": "हे पृष्ठ आवडीतून काढून टाकण्यासाठी क्रॉस केलेल्या ताऱ्यावर क्लिक करा. टीप: ही पायरी पूर्ण झाल्यानंतर तुम्ही ताऱ्यावर क्लिक करू शकता जेणेकरून हे $tab गमावणे टाळता येईल",
+		"description": "[tutorial] आवडते काढा"
+	},
+	"tutorial_restart": {
+		"message": "तुम्ही पॉपअपमधील बटणावर क्लिक करून कधीही $tutorial रीस्टार्ट करू शकता.",
+		"description": "[tutorial] पहिला संदेश"
+	},
+	"tutorial_restart_prompt": {
+		"message": "तुम्हाला $tutorial सुरुवातीपासून सुरू करायचे आहे का?",
+		"description": "[tutorial] ट्यूटोरियल रीस्टार्ट करण्यासाठी प्रॉमप्ट"
+	},
+	"tutorial_save_modal": {
+		"message": "बदल लागू करण्यासाठी आणि पुष्टीकरण संदेश पाहण्यासाठी $save वर क्लिक करा.",
+		"description": "[tutorial] मोडल सेव्ह करा"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "हे $extension_label साठी आहे आणि तुम्हाला प्रथम सेटअप होम पेजवर नेईल, त्यानंतर मार्गदर्शित $tutorial सुरू होईल",
+		"description": "[tutorial] ट्यूटोरियल सुरू करण्यासाठी मुख्य मजकूर"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "सेटअप होममधून $tutorial सुरू करायचे?",
+		"description": "[tutorial] ट्यूटोरियल सुरू करण्यासाठी मोडल शीर्षक"
 	},
 	"underline": {
 		"message": "खाली रेषा",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "कोठे?",
 		"description": "[open-other-org-modal] modal साठी पर्यायी शीर्षक"
+	},
+	"wiki_label": {
+		"message": "$extension_label बद्दल अधिक जाणून घ्या",
+		"description": "[popup][settings] विकी मदत बटणासाठी सुलभ शीर्षक आणि aria-label"
 	},
 	"write_review": {
 		"message": "एक पुनरावलोकन लिहा!",

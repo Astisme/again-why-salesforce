@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Cont",
+		"description": "Pagina legată de ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Șterge",
 		"description": "[gestionare-Tab] șterge un rând"
@@ -39,6 +43,10 @@
 		"message": "Ascendent (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Activ",
+		"description": "Pagina legată de ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Disponibil",
 		"description": "Antet de secțiune pentru elementele care pot fi adăugate"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Aldin",
 		"description": "Opțiune de stil pentru text aldin"
+	},
+	"campaign": {
+		"message": "Campanie",
+		"description": "Pagina legată de ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Anulați",
@@ -55,9 +67,21 @@
 		"message": "Anulați și închideți",
 		"description": "titlu sau textContent pentru butonul de închidere al modalelor"
 	},
+	"case": {
+		"message": "Caz",
+		"description": "Numele paginii legate de ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Ales",
 		"description": "Antet de secțiune pentru elementele care au fost selectate"
+	},
+	"classic_email_templates": {
+		"message": "Șabloane de e-mail clasice",
+		"description": "Pagina legată de CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Închide",
+		"description": "închide fără nicio acțiune"
 	},
 	"cmd_export_all": {
 		"message": "Afișează modalul pentru a exporta toate Tabs salvate",
@@ -87,6 +111,14 @@
 		"message": "Afișează modalul pentru a actualiza pagina curentă (dacă este salvată)",
 		"description": "[descrierea comenzii] utilizatorul dorește să actualizeze pagina curentă"
 	},
+	"company_information": {
+		"message": "Informații despre companie",
+		"description": "Pagina legată de CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Confirmă",
+		"description": "text pentru a solicita utilizatorului să continue"
+	},
 	"confirm_another_org": {
 		"message": "Confirmați deschiderea acestui link.",
 		"description": "[modal-deschide-altă-org] solicitați confirmarea utilizatorului pentru a deschide linkul construit."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "O nouă versiune a $extension_label este acum disponibilă!",
 		"description": "un mesaj necunoscut a fost primit de la un ascultător"
+	},
+	"contact": {
+		"message": "Contact",
+		"description": "Pagina legată de ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Continuați",
@@ -555,6 +591,10 @@
 		"message": "traducătorul nu a fost încă inițializat.",
 		"description": "[eroare] TranslationService nu era gata"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "tutorialul nu a putut fi inițializat.",
+		"description": "[error] Tutorialul nu a fost inițializat"
+	},
 	"error_unknown_file_structure": {
 		"message": "Nu am putut înțelege un fișier pe care ați dorit să îl importați\nDacă problema persistă, vă rugăm să ne-o comunicați prin deschiderea unei probleme pe GitHub",
 		"description": "[import] fișierul utilizatorului nu a fost recunoscut"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Solicitare necunoscută.",
 		"description": "[eroare] Eroare generică după primirea unui mesaj care nu a fost recunoscut"
+	},
+	"error_unknown_toast_type": {
+		"message": "Tipul de notificare solicitat nu a putut fi interpretat. Vă rugăm să schimbați codul.",
+		"description": "[error] Eroare generică utilizată la setarea tipului de notificare (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Eroare la defixarea Tab-ului",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Numele acestei extensii"
+	},
+	"field_accessibility": {
+		"message": "Accesibilitatea câmpurilor",
+		"description": "Pagina legată de FieldAccessibility/home"
 	},
 	"file": {
 		"message": "fișier",
@@ -783,13 +831,29 @@
 		"message": "Etichetă",
 		"description": "[key] numele Tab"
 	},
+	"lead": {
+		"message": "Lead",
+		"description": "Pagina legată de ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "aflați mai multe despre $extension_label",
+		"description": "[popup][settings] titlu accesibil și aria-label pentru butonul de ajutor wiki"
+	},
 	"lightning_navigation": {
 		"message": "Navigație Lightning",
 		"description": "tehnologia personalizată de navigare a Salesforce"
 	},
+	"login_history": {
+		"message": "Istoricul autentificărilor",
+		"description": "Pagina legată de OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Conectați-vă la Salesforce",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de conectare Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Gestionați aplicațiile conectate",
+		"description": "Pagina legată de ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Gestionați $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Deschideți Configurare",
 		"description": "[nuEsteConfigurareSalesforce] apel la acțiune pe un buton pentru a redirecționa utilizatorul către o pagină de Configurare Salesforce"
+	},
+	"opportunity": {
+		"message": "Oportunitate",
+		"description": "Pagina legată de ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Adăugați Tab-uri noi ca Tab-uri Org.",
@@ -975,6 +1043,10 @@
 		"message": "Permisiunea a fost acordată!",
 		"description": "[succes] utilizatorul ne-a cerut să îi solicităm o permisiune și a acceptat-o"
 	},
+	"permission_sets": {
+		"message": "Seturi de permisiuni",
+		"description": "Pagina legată de PermSets/home"
+	},
 	"pinned": {
 		"message": "Fixat",
 		"description": "Tab-urile utilizatorului care se găsesc întotdeauna la începutul listei"
@@ -983,9 +1055,21 @@
 		"message": "Păstrați Tabs pentru alte org.",
 		"description": "[etichetă] păstrați toate Tabs specifice Org în timpul procesului de import"
 	},
+	"pricebook2": {
+		"message": "Catalog de prețuri 2",
+		"description": "Pagina legată de ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produs 2",
+		"description": "Pagina legată de ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Eliminați Tab",
 		"description": "[alt] text alternativ când imaginile nu funcționează"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Setări rapoarte și tablouri de bord",
+		"description": "Pagina legată de ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Vă rugăm să deschideți fereastra pop-up a extensiei din meniul de extensii al browserului dumneavoastră.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Trimite-ne un pont ❤️",
 		"description": "[popup] titlu pentru svg pentru a solicita trimiterea unui pont"
+	},
+	"sessions": {
+		"message": "Sesiuni",
+		"description": "Pagina legată de SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Previzualizare Tab",
@@ -1327,9 +1415,17 @@
 		"message": "Setări",
 		"description": "Etichetă pentru meniul de setări"
 	},
+	"setup_audit_trail": {
+		"message": "Pista de audit a configurării",
+		"description": "Pagina legată de SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Pagină de configurare",
 		"description": "[nuEsteConfigurareSalesforce] pagina utilizată pentru a modifica setările Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Setări de partajare",
+		"description": "Pagina legată de SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Afișează toate $tabs urile",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs salvate.",
 		"description": "[toast] Tabs au fost stocate cu succes."
 	},
+	"task": {
+		"message": "Sarcini",
+		"description": "Pagina legată de ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Schimbați tema la întunecat",
 		"description": "[popup] titlu pe lună pentru a comuta tema"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Schimbați tema la luminos",
 		"description": "[popup] titlu pe soare pentru a comuta tema"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] buton pentru a începe tutorialul"
+	},
+	"tutorial_add_favourite": {
+		"message": "Faceți clic pe stea pentru a adăuga această pagină la favorite.",
+		"description": "[tutorial] adăugați favorit"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Faceți clic pe $tab evidențiat pentru a naviga la pagina corespunzătoare.",
+		"description": "[tutorial] faceți clic pe fila evidențiată"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Acesta este pentru $extension_label și va continua $tutorial ul neterminat de unde ați rămas.",
+		"description": "[tutorial] text pentru continuarea tutorialului"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Continuați $tutorial de la ultimul pas?",
+		"description": "[tutorial] titlu modal pentru continuarea tutorialului"
+	},
+	"tutorial_drag_flows": {
+		"message": "Trageți rândul evidențiat (folosind cele 6 puncte) și plasați-l înaintea primului rând (care este fixat).",
+		"description": "[tutorial] trageți fluxurile"
+	},
+	"tutorial_end": {
+		"message": "$tutorial finalizat! Distrați-vă folosind extensia.",
+		"description": "[tutorial] sfârșit"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Nu am găsit niciun link util pentru a începe $tutorial\nVă rugăm să exportați $tabs urile și să reporniți $tutorial",
+		"description": "[tutorial] mesaj de eroare la imposibilitatea de a începe"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Acestea sunt $tabs urile favorite și sunt folosite pentru acces rapid la paginile utilizate frecvent.",
+		"description": "[tutorial] evidențiați fila favorită"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Apăsați comanda rapidă de la tastatură pentru a deschide pagina $settings unde puteți schimba comportamentul extensiei și puteți stiliza $tabs urile",
+		"description": "[tutorial] comandă rapidă de la tastatură"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Faceți clic dreapta pe pagină (nu pe o filă) și alegeți $extension_label > $cxm_manage_tabs pentru a deschide modalul de gestionare.",
+		"description": "[tutorial] gestionați fila"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Vă puteți gestiona $tabs urile din acest ecran. Faceți clic aici pentru mai multe informații.",
+		"description": "[tutorial] link gestionare file"
+	},
+	"tutorial_pin_tab": {
+		"message": "Faceți clic dreapta pe $tab evidențiat și alegeți $extension_label > $cxm_move > $cxm_pin_tab pentru a-l fixa.",
+		"description": "[tutorial] fixați fila"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Rândul tras nu a putut fi mutat înaintea rândului fixat (deoarece nu este fixat în prezent), așa că a mers la începutul listei de nefixate. Aceste două liste sunt tratate separat.",
+		"description": "[tutorial] explicație fixare"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Rețineți că $tab este acum fixat și va rămâne pe loc.",
+		"description": "[tutorial] filă fixată"
+	},
+	"tutorial_redirect_account": {
+		"message": "Vă vom redirecționa acum către o altă pagină pentru a vă arăta mai multe. Faceți clic aici pentru a continua.",
+		"description": "[tutorial] redirecționare către cont"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Faceți clic pe steaua tăiată pentru a elimina această pagină din favorite. SFAT: puteți face clic pe stea după ce acest pas este finalizat pentru a evita pierderea acestui $tab",
+		"description": "[tutorial] eliminați favorit"
+	},
+	"tutorial_restart": {
+		"message": "Puteți reporni $tutorial oricând făcând clic pe butonul din pop-up.",
+		"description": "[tutorial] primul mesaj"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Doriți să începeți $tutorial de la început?",
+		"description": "[tutorial] prompt pentru repornirea tutorialului"
+	},
+	"tutorial_save_modal": {
+		"message": "Faceți clic pe $save pentru a aplica modificările și a vedea mesajul de confirmare.",
+		"description": "[tutorial] salvare modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Acesta este pentru $extension_label și vă va duce mai întâi la pagina principală de configurare, apoi va începe $tutorial ul ghidat",
+		"description": "[tutorial] text pentru începerea tutorialului"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Începeți $tutorial de la pagina principală de configurare?",
+		"description": "[tutorial] titlu modal pentru începerea tutorialului"
 	},
 	"underline": {
 		"message": "Subliniat",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Unde?",
 		"description": "[modal-deschide-altă-org] titlu de rezervă pentru modal"
+	},
+	"wiki_label": {
+		"message": "aflați mai multe despre $extension_label",
+		"description": "[popup][settings] titlu accesibil și aria-label pentru butonul de ajutor wiki"
 	},
 	"write_review": {
 		"message": "Scrie o recenzie!",

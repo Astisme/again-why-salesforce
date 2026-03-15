@@ -1,14 +1,11 @@
 "use strict";
 import {
+	ALL_CMD_KEYS,
+	ALL_WHAT_REASONS,
 	BROWSER,
+	CMD_AND_CXM_MAP_TO_WHAT,
 	CMD_EXPORT_ALL,
-	CMD_IMPORT,
-	CMD_OPEN_OTHER_ORG,
 	CMD_OPEN_SETTINGS,
-	CMD_REMOVE_TAB,
-	CMD_SAVE_AS_TAB,
-	CMD_TOGGLE_ORG,
-	CMD_UPDATE_TAB,
 	CXM_MANAGE_TABS,
 	DECORATION_COLORS,
 	EXTENSION_GITHUB_LINK,
@@ -28,8 +25,28 @@ import {
 	SUPPORTED_SALESFORCE_URLS,
 	TAB_STYLE_BACKGROUND,
 	TAB_STYLE_BOLD,
+	TOAST_ERROR,
+	TOAST_WARNING,
+	TUTORIAL_KEY,
+	WHAT_ACTIVATE,
 	WHAT_EXPORT,
+	WHAT_EXPORT_CHECK,
+	WHAT_FOCUS_CHANGED,
+	WHAT_GET,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_COMMANDS,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_SF_LANG,
+	WHAT_GET_STYLE_SETTINGS,
+	WHAT_HIGHLIGHTED,
+	WHAT_INSTALLED,
+	WHAT_SAVED,
+	WHAT_SET,
 	WHAT_SHOW_EXPORT_MODAL,
+	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
+	WHAT_STARTUP,
+	WHAT_THEME,
 	WHY_KEY,
 } from "/constants.js";
 import { openSettingsPage } from "/functions.js";
@@ -296,6 +313,7 @@ export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
 		}
 		case WHY_KEY:
 		case LOCALE_KEY:
+		case TUTORIAL_KEY:
 			if (changedToArray) {
 				tobeset = tobeset[0];
 			}
@@ -338,11 +356,11 @@ async function _getAPIHostAndHeaders(currentUrl) {
 			MY_SALESFORCE_COM,
 		);
 	}
-	const cookies = await BROWSER.cookies.getAll({
+	const cookies = await BROWSER.cookies?.getAll({
 		domain: origin.replace("https://", ""),
 		name: "sid",
 	});
-	if (cookies.length === 0) {
+	if (cookies == null || cookies.length === 0) {
 		throw new Error("error_no_cookies");
 	}
 	return [
@@ -457,23 +475,24 @@ function listenToExtensionMessages() {
 			return false;
 		}
 		switch (request.what) {
-			case "get":
+			case WHAT_GET:
 				bg_getStorage(sendResponse, request.key);
 				break;
-			case "set":
+			case WHAT_SET:
 				bg_setStorage(request.set, sendResponse, request.key);
 				break;
-			case "saved":
-			case "add":
-			case "theme":
-			case "error":
-			case "warning":
+			case WHAT_SAVED:
+			case WHAT_SHOW_IMPORT:
+			case WHAT_THEME:
+			case TOAST_ERROR:
+			case TOAST_WARNING:
 			case WHAT_SHOW_EXPORT_MODAL:
 			case CXM_MANAGE_TABS: // from popup
+			case WHAT_START_TUTORIAL: // from popup
 				sendResponse(null);
-				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for "add")
+				setTimeout(() => bg_notify(request), 250); // delay the notification to prevent accidental removal (for WHAT_SHOW_IMPORT)
 				break;
-			case "export-check":
+			case WHAT_EXPORT_CHECK:
 				if (checkLaunchExport(undefined, true)) {
 					sendResponse(null);
 					bg_notify({
@@ -485,26 +504,26 @@ function listenToExtensionMessages() {
 				checkLaunchExport(request.tabs);
 				sendResponse(null);
 				break;
-			case "browser-tab":
+			case WHAT_GET_BROWSER_TAB:
 				bg_getCurrentBrowserTab(sendResponse);
 				break;
-			case "get-sf-language":
+			case WHAT_GET_SF_LANG:
 				bg_getSalesforceLanguage(sendResponse);
 				break;
-			case "get-settings":
+			case WHAT_GET_SETTINGS:
 				bg_getSettings(request.keys, undefined, sendResponse);
 				break;
-			case "get-style-settings":
+			case WHAT_GET_STYLE_SETTINGS:
 				bg_getStyleSettings(request.key, sendResponse);
 				break;
-			case "get-commands":
+			case WHAT_GET_COMMANDS:
 				bg_getCommandLinks(request.commands, sendResponse);
 				break;
 			case PERM_CHECK:
 				bg_isPermissionGranted(request.contains, sendResponse);
 				break;
 			default:
-				if (!["import"].includes(request.what)) {
+				if (!ALL_WHAT_REASONS.has(request.what)) {
 					console.error({ error: "error_unknown_request", request });
 				}
 				break;
@@ -525,7 +544,7 @@ function listenToExtensionCommands() {
 			return;
 		}
 		const message = {
-			what: command,
+			what: CMD_AND_CXM_MAP_TO_WHAT[command] ?? command,
 			url: Tab.minifyURL(browserTabUrl),
 			org: Tab.extractOrgName(browserTabUrl),
 		};
@@ -533,23 +552,16 @@ function listenToExtensionCommands() {
 			case CMD_OPEN_SETTINGS:
 				openSettingsPage();
 				return;
-			case CMD_IMPORT:
-				message.what = "add";
-				break;
 			case CMD_EXPORT_ALL:
 				if (!checkLaunchExport(undefined, true)) {
 					return;
 				}
 				break;
-			case CMD_SAVE_AS_TAB:
-			case CMD_REMOVE_TAB:
-			case CMD_TOGGLE_ORG:
-			case CMD_UPDATE_TAB:
-			case CMD_OPEN_OTHER_ORG:
-				break;
 			default:
-				message.what = "warning";
-				message.message = `Received unknown command: ${command}`;
+				if (!ALL_CMD_KEYS.has(command)) {
+					message.what = TOAST_WARNING;
+					message.message = `Received unknown command: ${command}`;
+				}
 				break;
 		}
 		bg_notify(message);
@@ -672,12 +684,12 @@ function setExtensionBrowserListeners() {
 	const debouncedCheckMenus = _debounce(checkAddRemoveContextMenus);
 	// when the browser starts
 	BROWSER.runtime.onStartup.addListener(() =>
-		checkAddRemoveContextMenus("startup")
+		checkAddRemoveContextMenus(WHAT_STARTUP)
 	);
 	// when the extension is installed / updated
 	BROWSER.runtime.onInstalled.addListener(async (details) => {
 		if (detail.temporary) return; // skip during development
-		checkAddRemoveContextMenus("installed");
+		checkAddRemoveContextMenus(WHAT_INSTALLED);
 		if (details.reason === "update") {
 			// the extension has been updated
 			// check user settings
@@ -691,21 +703,17 @@ function setExtensionBrowserListeners() {
 				url: `${EXTENSION_GITHUB_LINK}/tree/main/docs/CHANGELOG.md`,
 			});
 		}
-		/* TODO add tutorial on install
-      if (details.reason == "install") {
-      }
-      */
 	});
 	// when the extension is activated by the BROWSER
 	self.addEventListener(
 		"activate",
-		() => checkAddRemoveContextMenus("activate"),
+		() => checkAddRemoveContextMenus(WHAT_ACTIVATE),
 	);
 	// when the active tab changes
 	BROWSER.tabs.onActivated.addListener(() =>
-		debouncedCheckMenus("highlighted", checkForUpdates)
+		debouncedCheckMenus(WHAT_HIGHLIGHTED, checkForUpdates)
 	);
-	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus("highlighted"));
+	//BROWSER.tabs.onHighlighted.addListener(() => checkAddRemoveContextMenus(WHAT_HIGHLIGHTED));
 	// when the current tab URL changes without switching tabs
 	BROWSER.tabs.onUpdated?.addListener((_, changeInfo, tab) => {
 		if (
@@ -714,15 +722,14 @@ function setExtensionBrowserListeners() {
 		) {
 			return;
 		}
-		debouncedCheckMenus("highlighted");
+		debouncedCheckMenus(WHAT_HIGHLIGHTED);
 	});
 	// when window changes
-	//BROWSER.windows.onFocusChanged.addListener(() => debouncedCheckMenus("focuschanged"));
 	BROWSER.windows.onFocusChanged.addListener(() =>
-		checkAddRemoveContextMenus("focuschanged")
+		checkAddRemoveContextMenus(WHAT_FOCUS_CHANGED)
 	);
 	BROWSER.commands.onChanged?.addListener(() => {
-		refreshContextMenus("highlighted");
+		refreshContextMenus(WHAT_HIGHLIGHTED);
 	});
 
 	/*

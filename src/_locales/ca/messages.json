@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Compte",
+		"description": "La pàgina relacionada amb ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Suprimeix",
 		"description": "[gestiona-Tab] suprimeix una fila"
@@ -39,6 +43,10 @@
 		"message": "Ascendent (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Actiu",
+		"description": "La pàgina relacionada amb ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Disponible",
 		"description": "Capçalera de secció per als elements que es poden afegir"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Negreta",
 		"description": "Opció d'estil de lletra per a text en negreta"
+	},
+	"campaign": {
+		"message": "Campanya",
+		"description": "La pàgina relacionada amb ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Cancel·lar",
@@ -55,9 +67,21 @@
 		"message": "Cancel·lar i tancar",
 		"description": "títol o text per al botó que tanca els diàlegs"
 	},
+	"case": {
+		"message": "Cas",
+		"description": "El nom de la pàgina relacionada amb ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Triat",
 		"description": "Capçalera de secció per als elements que s'han seleccionat"
+	},
+	"classic_email_templates": {
+		"message": "Plantilles de correu electrònic clàssiques",
+		"description": "La pàgina relacionada amb CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Tanca",
+		"description": "tanca sense que passi res"
 	},
 	"cmd_export_all": {
 		"message": "Mostra el modal per exportar totes les Tabs desades",
@@ -87,6 +111,14 @@
 		"message": "Mostra el modal per actualitzar la pàgina actual (si està desada)",
 		"description": "[command description] l’usuari vol actualitzar la pàgina actual"
 	},
+	"company_information": {
+		"message": "Informació de l'empresa",
+		"description": "La pàgina relacionada amb CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Confirma",
+		"description": "text per demanar a l'usuari que continuï"
+	},
 	"confirm_another_org": {
 		"message": "Confirmeu l'obertura d'aquest enllaç.",
 		"description": "[open-other-org-modal] sol·licitud de confirmació a l'usuari per obrir l'enllaç construït."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Una nova versió de $extension_label ja està disponible!",
 		"description": "s'ha rebut un missatge desconegut d'un listener"
+	},
+	"contact": {
+		"message": "Contacte",
+		"description": "La pàgina relacionada amb ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Continuar",
@@ -555,6 +591,10 @@
 		"message": "translator encara no està inicialitzat.",
 		"description": "[error] El TranslationService no estava preparat"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "no s'ha pogut inicialitzar el tutorial.",
+		"description": "[error] El Tutorial no s'ha inicialitzat"
+	},
 	"error_unknown_file_structure": {
 		"message": "No hem pogut entendre un fitxer que volíeu importar\nSi el problema persisteix, compartiu-lo amb nosaltres obrint un problema a GitHub",
 		"description": "[importar] el fitxer de l'usuari no s'ha reconegut"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Sol·licitud desconeguda.",
 		"description": "[error] Error genèric després de rebre un missatge no reconegut"
+	},
+	"error_unknown_toast_type": {
+		"message": "El tipus d'avís sol·licitat no s'ha pogut interpretar. Si us plau, canvieu el vostre codi.",
+		"description": "[error] Error genèric utilitzat en establir el tipus d'avís"
 	},
 	"error_unpin_tab": {
 		"message": "Error en desfixar la Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "El nom d'aquesta extensió"
+	},
+	"field_accessibility": {
+		"message": "Accessibilitat dels camps",
+		"description": "La pàgina relacionada amb FieldAccessibility/home"
 	},
 	"file": {
 		"message": "fitxer",
@@ -783,13 +831,29 @@
 		"message": "Etiqueta",
 		"description": "[key] el nom del Tab"
 	},
+	"lead": {
+		"message": "Candidat",
+		"description": "La pàgina relacionada amb ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "més informació sobre $extension_label",
+		"description": "[popup][settings] títol accessible i aria-label per al botó d'ajuda de la wiki"
+	},
 	"lightning_navigation": {
 		"message": "Navegació Lightning",
 		"description": "Tecnologia de navegació personalitzada de Salesforce"
 	},
+	"login_history": {
+		"message": "Historial d'inici de sessió",
+		"description": "La pàgina relacionada amb OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Inicia sessió a Salesforce",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina d'inici de sessió de Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Gestiona les aplicacions connectades",
+		"description": "La pàgina relacionada amb ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Gestiona les $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Obrir Setup",
 		"description": "[notSalesforceSetup] crida a l'acció en un botó per redirigir l'usuari a la pàgina Salesforce Setup"
+	},
+	"opportunity": {
+		"message": "Oportunitat",
+		"description": "La pàgina relacionada amb ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Afegeix Tabs noves com a Org Tabs.",
@@ -975,6 +1043,10 @@
 		"message": "El permís ha estat permès!",
 		"description": "[èxit] l'usuari ens ha demanat que li sol·licitéssim un permís i l'ha acceptat"
 	},
+	"permission_sets": {
+		"message": "Conjunts de permisos",
+		"description": "La pàgina relacionada amb PermSets/home"
+	},
 	"pinned": {
 		"message": "Fixada",
 		"description": "Tab de l'usuari que sempre es troben al començament de la llista"
@@ -983,9 +1055,21 @@
 		"message": "Conservar els Tabs per a altres organitzacions.",
 		"description": "[label] conservar tots els Tabs específics d'organització durant la importació"
 	},
+	"pricebook2": {
+		"message": "Llibre de preus 2",
+		"description": "La pàgina relacionada amb ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Producte 2",
+		"description": "La pàgina relacionada amb ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Eliminar Tab",
 		"description": "[alt] text alternatiu quan les imatges no es mostren"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Configuració d'informes i taulers",
+		"description": "La pàgina relacionada amb ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Si us plau, obriu la finestra emergent de l'extensió des del menú d'extensions del vostre navegador.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Envia'ns una propina ❤️",
 		"description": "[popup] títol per a svg per sol·licitar l'enviament d'una propina"
+	},
+	"sessions": {
+		"message": "Sessions",
+		"description": "La pàgina relacionada amb SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab Previsualització",
@@ -1327,9 +1415,17 @@
 		"message": "Configuració",
 		"description": "Etiqueta per al menú de configuració"
 	},
+	"setup_audit_trail": {
+		"message": "Pista d'auditoria de configuració",
+		"description": "La pàgina relacionada amb SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Pàgina Setup",
 		"description": "[notSalesforceSetup] la pàgina per modificar els paràmetres de Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Configuració d'ús compartit",
+		"description": "La pàgina relacionada amb SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Mostra totes les $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs desats.",
 		"description": "[toast] els Tabs s'han desat amb èxit."
 	},
+	"task": {
+		"message": "Tasca",
+		"description": "La pàgina relacionada amb ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Canviar Tema a Fosc",
 		"description": "[popup] títol de la icona de la lluna per canviar el tema"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Canviar Tema a Clar",
 		"description": "[popup] títol de la icona del sol per canviar el tema"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] botó per iniciar el tutorial"
+	},
+	"tutorial_add_favourite": {
+		"message": "Feu clic a l'estrella per afegir aquesta pàgina als preferits.",
+		"description": "[tutorial] afegeix preferit"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Feu clic a la $tab ressaltada per navegar a la pàgina corresponent.",
+		"description": "[tutorial] fer clic a la Tab ressaltada"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Això és per a $extension_label i reprendrà el vostre $tutorial inacabat des d'on el vau deixar.",
+		"description": "[tutorial] text del cos per continuar el tutorial"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Voleu continuar el $tutorial des de l'últim pas?",
+		"description": "[tutorial] títol modal per continuar el tutorial"
+	},
+	"tutorial_drag_flows": {
+		"message": "Arrossegueu la fila ressaltada (utilitzant els 6 punts) i deixeu-la anar abans de la primera fila (que està fixada).",
+		"description": "[tutorial] arrossegar fluxos"
+	},
+	"tutorial_end": {
+		"message": "$tutorial completat! Divertiu-vos fent servir l'extensió.",
+		"description": "[tutorial] final"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "No hem pogut trobar enllaços utilitzables per iniciar el $tutorial \nSi us plau, exporteu les vostres $tabs i reinicieu el $tutorial",
+		"description": "[tutorial] missatge d'error no s'ha pogut iniciar"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Aquestes són les vostres $tabs preferides i s'utilitzen per accedir ràpidament a les pàgines que feu servir sovint.",
+		"description": "[tutorial] ressaltar Tab preferides"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Premeu la drecera de teclat per obrir la pàgina $settings on podeu canviar el comportament de l'extensió i donar estil a les vostres $tabs",
+		"description": "[tutorial] drecera de teclat"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Feu clic amb el botó dret a la pàgina (no en una Tab) i seleccioneu $extension_label > $cxm_manage_tabs per obrir el modal de gestió.",
+		"description": "[tutorial] gestionar Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Podeu gestionar les vostres $tabs des d'aquesta pantalla. Feu clic aquí per obtenir més informació.",
+		"description": "[tutorial] enllaç gestionar Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "Feu clic amb el botó dret a la $tab ressaltada i seleccioneu $extension_label > $cxm_move > $cxm_pin_tab per fixar-la.",
+		"description": "[tutorial] fixar Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "La fila arrossegada no s'ha pogut moure abans de la fila fixada (perquè actualment no està fixada), així que s'ha situat al principi de la llista no fixada. Aquestes dues llistes es tracten per separat.",
+		"description": "[tutorial] explicació de fixat"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Fixeu-vos que la $tab ara està fixada i es mantindrà al seu lloc.",
+		"description": "[tutorial] Tab fixada"
+	},
+	"tutorial_redirect_account": {
+		"message": "Ara us redirigirem a una altra pàgina per mostrar-vos-en més. Feu clic aquí per continuar.",
+		"description": "[tutorial] redirigir a compte"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Feu clic a l'estrella ratllada per eliminar aquesta pàgina dels preferits. CONSELL: podeu fer clic a l'estrella després d'haver completat aquest pas per evitar perdre aquesta $tab",
+		"description": "[tutorial] eliminar preferit"
+	},
+	"tutorial_restart": {
+		"message": "Podeu reiniciar el $tutorial en qualsevol moment fent clic al botó de la finestra emergent.",
+		"description": "[tutorial] primer missatge"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Voleu iniciar el $tutorial des del principi?",
+		"description": "[tutorial] indicació per reiniciar el tutorial"
+	},
+	"tutorial_save_modal": {
+		"message": "Feu clic a $save per aplicar els canvis i veure el missatge de confirmació.",
+		"description": "[tutorial] desar modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Això és per a $extension_label i us portarà primer a la pàgina d'inici de configuració i després iniciarà el $tutorial guiat",
+		"description": "[tutorial] text del cos per iniciar el tutorial"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Voleu iniciar el $tutorial des de l'inici de la configuració?",
+		"description": "[tutorial] títol modal per iniciar el tutorial"
 	},
 	"underline": {
 		"message": "Subratllat",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "On?",
 		"description": "[open-other-org-modal] títol alternatiu per al diàleg modal"
+	},
+	"wiki_label": {
+		"message": "Més informació sobre $extension_label",
+		"description": "[popup][settings] títol accessible i aria-label per al botó d'ajuda de la wiki"
 	},
 	"write_review": {
 		"message": "Escriu una ressenya!",

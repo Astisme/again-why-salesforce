@@ -5,6 +5,10 @@ import {
 	CMD_IMPORT,
 	CMD_OPEN_SETTINGS,
 	CXM_MANAGE_TABS,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET_COMMANDS,
+	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
 } from "/constants.js";
 import {
 	areFramePatternsAllowed,
@@ -45,7 +49,7 @@ const translator = await ensureTranslatorAvailability();
  */
 function pop_exportHandler() {
 	sendExtensionMessage({
-		what: "export-check",
+		what: WHAT_EXPORT_CHECK,
 	});
 	setTimeout(close, 100);
 }
@@ -81,7 +85,7 @@ const importBtn = document.getElementById("import");
  */
 importBtn.addEventListener(
 	"click",
-	() => sendExtensionMessage({ what: "add" }, close),
+	() => sendExtensionMessage({ what: WHAT_SHOW_IMPORT }, close),
 );
 const exportBtn = document.getElementById("export");
 exportBtn.addEventListener("click", pop_exportHandler);
@@ -92,7 +96,7 @@ settingsBtn.addEventListener(
 );
 
 const availableCommands = await sendExtensionMessage({
-	what: "get-commands",
+	what: WHAT_GET_COMMANDS,
 	commands: [
 		CMD_EXPORT_ALL,
 		CMD_IMPORT,
@@ -122,4 +126,13 @@ const manageTabsBtn = document.getElementById("manage-tabs");
 manageTabsBtn.addEventListener(
 	"click",
 	() => sendExtensionMessage({ what: CXM_MANAGE_TABS }, close),
+);
+
+const tutorialBtn = document.getElementById("tutorial");
+/**
+ * Sends a message that will start the tutorial in the Salesforce page.
+ */
+tutorialBtn.addEventListener(
+	"click",
+	() => sendExtensionMessage({ what: WHAT_START_TUTORIAL }, close),
 );

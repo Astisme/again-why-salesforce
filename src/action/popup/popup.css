@@ -1,5 +1,5 @@
 body {
-	width: 26rem;
+	width: 30rem;
 }
 
 body,
@@ -49,6 +49,26 @@ header {
 
 svg {
 	height: 2rem;
+}
+
+a.action-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color);
+	text-decoration: none;
+
+	&:focus-visible {
+		outline: 2px solid var(--highlight);
+		outline-offset: 2px;
+		border-radius: 0.25rem;
+	}
+
+	& > svg {
+		width: 1.5rem;
+		height: 1.5rem;
+		fill: currentColor;
+	}
 }
 
 svg#open-settings {

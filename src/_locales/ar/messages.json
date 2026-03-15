@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "الحساب",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ حذف",
 		"description": "[إدارة-Tab] حذف صف"
@@ -39,6 +43,10 @@
 		"message": "تصاعدي (أ-ي)",
 		"description": ""
 	},
+	"asset": {
+		"message": "الأصل",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "متاح",
 		"description": "رأس قسم للعناصر التي يمكن إضافتها"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "عريض",
 		"description": "خيار نمط الخط للنص العريض"
+	},
+	"campaign": {
+		"message": "الحملة",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "إلغاء",
@@ -55,9 +67,21 @@
 		"message": "إلغاء وإغلاق",
 		"description": "العنوان أو النص لمحتوى زر الإغلاق في النوافذ المنبثقة"
 	},
+	"case": {
+		"message": "الحالة",
+		"description": "اسم الصفحة المتعلقة بـ ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "مختار",
 		"description": "رأس قسم للعناصر التي تم اختيارها"
+	},
+	"classic_email_templates": {
+		"message": "قوالب البريد الإلكتروني الكلاسيكية",
+		"description": "الصفحة المتعلقة بـ CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "إغلاق",
+		"description": "إغلاق دون حدوث أي شيء"
 	},
 	"cmd_export_all": {
 		"message": "عرض النافذة لتصدير جميع Tabs المحفوظة",
@@ -87,6 +111,14 @@
 		"message": "عرض النافذة لتحديث الصفحة الحالية (إذا كانت محفوظة)",
 		"description": "[command description] يريد المستخدم تحديث الصفحة الحالية"
 	},
+	"company_information": {
+		"message": "معلومات الشركة",
+		"description": "الصفحة المتعلقة بـ CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "تأكيد",
+		"description": "نص لطلب المتابعة من المستخدم"
+	},
 	"confirm_another_org": {
 		"message": "أكد فتح هذا الرابط.",
 		"description": "[open-other-org-modal] طلب تأكيد من المستخدم لفتح الرابط المُنشأ"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "إصدار جديد من $extension_label متوفر الآن!",
 		"description": "تم استلام رسالة غير معروفة من مستمع"
+	},
+	"contact": {
+		"message": "جهة الاتصال",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "متابعة",
@@ -554,6 +590,10 @@
 		"message": "لم يتم تهيئة translator بعد.",
 		"description": "[error] لم يكن TranslationService جاهزاً بعد"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "تعذر تهيئة البرنامج التعليمي.",
+		"description": "[خطأ] لم يتم تهيئة البرنامج التعليمي"
+	},
 	"error_unknown_file_structure": {
 		"message": "لم نتمكن من فهم الملف الذي أردت استيراده\nإذا استمرت المشكلة، يرجى مشاركتها معنا من خلال فتح مشكلة على GitHub",
 		"description": "[استيراد] لم يتم التعرف على ملف المستخدم"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "طلب غير معروف.",
 		"description": "[error] خطأ عام بعد استقبال رسالة غير معروفة"
+	},
+	"error_unknown_toast_type": {
+		"message": "تعذر تفسير نوع التنبيه المطلوب. يرجى تغيير الكود الخاص بك.",
+		"description": "[خطأ] خطأ عام يستخدم أثناء تعيين نوع التنبيه"
 	},
 	"error_unpin_tab": {
 		"message": "خطأ أثناء إلغاء تثبيت Tab",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] اسم هذا الامتداد"
+	},
+	"field_accessibility": {
+		"message": "إمكانية الوصول للحقول",
+		"description": "الصفحة المتعلقة بـ FieldAccessibility/home"
 	},
 	"file": {
 		"message": "ملف",
@@ -782,13 +830,29 @@
 		"message": "تسمية",
 		"description": "[key] اسم الـ Tab"
 	},
+	"lead": {
+		"message": "العميل المحتمل",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "تعرف على المزيد حول $extension_label",
+		"description": "[نافذة منبثقة][إعدادات] عنوان متاح وتسمية aria لزر مساعدة الويكي"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "تقنية التنقل المخصصة من Salesforce"
 	},
+	"login_history": {
+		"message": "سجل تسجيل الدخول",
+		"description": "الصفحة المتعلقة بـ OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "تسجيل الدخول إلى Salesforce",
 		"description": "[notSalesforceSetup] دعوة لإعادة التوجيه إلى صفحة تسجيل الدخول في Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "إدارة التطبيقات المتصلة",
+		"description": "الصفحة المتعلقة بـ ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "إدارة الـ $tabs",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "فتح الإعداد",
 		"description": "[notSalesforceSetup] دعوة للذهاب إلى صفحة إعداد Salesforce"
+	},
+	"opportunity": {
+		"message": "الفرصة",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "إضافة Tabs جديدة كـ Org Tabs.",
@@ -974,6 +1042,10 @@
 		"message": "لقد تم السماح بالإذن!",
 		"description": "[نجاح] طلب المستخدم منا أن نطلب منه إذناً وقبله"
 	},
+	"permission_sets": {
+		"message": "مجموعات الأذونات",
+		"description": "الصفحة المتعلقة بـ PermSets/home"
+	},
 	"pinned": {
 		"message": "مثبت",
 		"description": "علامات Tab الخاصة بالمستخدم والتي توجد دائمًا في بداية القائمة"
@@ -982,9 +1054,21 @@
 		"message": "الحفاظ على الـ Tabs الخاصة بـ Orgs الأخرى",
 		"description": "[label] الاحتفاظ بـ Tabs خاص بـ Org أخرى أثناء عملية الاستيراد"
 	},
+	"pricebook2": {
+		"message": "Pricebook2",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "المنتج2",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "إزالة الـ Tab",
 		"description": "[alt] نص بديل عند عدم ظهور الصور"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "إعدادات التقارير ولوحات المعلومات",
+		"description": "الصفحة المتعلقة بـ ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "الرجاء فتح نافذة الإضافة المنبثقة من قائمة الإضافات في متصفحك.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "أرسل لنا إكرامية ❤️",
 		"description": "[popup] عنوان svg للمطالبة بإرسال إكرامية"
+	},
+	"sessions": {
+		"message": "الجلسات",
+		"description": "الصفحة المتعلقة بـ SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "معاينة Tab",
@@ -1326,9 +1414,17 @@
 		"message": "الإعدادات",
 		"description": "علامة لقائمة الإعدادات"
 	},
+	"setup_audit_trail": {
+		"message": "إعداد مسار التدقيق",
+		"description": "الصفحة المتعلقة بـ SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "صفحة الإعداد",
 		"description": "[notSalesforceSetup] الصفحة المستخدمة لتعديل إعدادات Salesforce"
+	},
+	"sharing_settings": {
+		"message": "إعدادات المشاركة",
+		"description": "الصفحة المتعلقة بـ SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "إظهار كل الـ $tabs",
@@ -1438,6 +1534,10 @@
 		"message": "تم حفظ الـ Tabs",
 		"description": "[toast] تم حفظ الـ Tabs بنجاح"
 	},
+	"task": {
+		"message": "المهمة",
+		"description": "الصفحة المتعلقة بـ ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "تغيير الثيم إلى داكن",
 		"description": "[popup] عنوان على القمر لتغيير الثيم"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "تغيير الثيم إلى فاتح",
 		"description": "[popup] عنوان على الشمس لتغيير الثيم"
+	},
+	"tutorial": {
+		"message": "برنامج تعليمي",
+		"description": "[نافذة منبثقة] زر لبدء البرنامج التعليمي"
+	},
+	"tutorial_add_favourite": {
+		"message": "انقر فوق النجمة لإضافة هذه الصفحة إلى المفضلة.",
+		"description": "[برنامج تعليمي] إضافة مفضلة"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "انقر فوق $tab المميزة للانتقال إلى الصفحة المقابلة.",
+		"description": "[برنامج تعليمي] انقر فوق Tab المميزة"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "هذا مخصص لـ $extension_label وسيستأنف $tutorial غير المكتمل من حيث توقفت.",
+		"description": "[برنامج تعليمي] نص الجسم لمتابعة البرنامج التعليمي"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "هل تريد متابعة $tutorial من الخطوة الأخيرة؟",
+		"description": "[برنامج تعليمي] عنوان النافذة لمتابعة البرنامج التعليمي"
+	},
+	"tutorial_drag_flows": {
+		"message": "اسحب الصف المميز (باستخدام النقاط الست) وأفلته قبل الصف الأول (المثبت).",
+		"description": "[برنامج تعليمي] سحب التدفقات"
+	},
+	"tutorial_end": {
+		"message": "اكتمل $tutorial ! استمتع باستخدام الامتداد.",
+		"description": "[برنامج تعليمي] النهاية"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "لم نتمكن من العثور على روابط صالحة لبدء $tutorial \nيرجى تصدير $tabs الخاصة بك وإعادة تشغيل $tutorial",
+		"description": "[برنامج تعليمي] رسالة خطأ تعذر البدء"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "هذه هي $tabs المفضلة لديك وتُستخدم للوصول السريع إلى الصفحات المستخدمة بكثرة.",
+		"description": "[برنامج تعليمي] تمييز Tab المفضلة"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "اضغط على اختصار لوحة المفاتيح لفتح صفحة $settings حيث يمكنك تغيير سلوك الامتداد وتنسيق $tabs الخاصة بك",
+		"description": "[برنامج تعليمي] اختصار لوحة المفاتيح"
+	},
+	"tutorial_manage_tabs": {
+		"message": "انقر بزر الماوس الأيمن على الصفحة (ليس على Tab) وحدد $extension_label > $cxm_manage_tabs لفتح نافذة الإدارة.",
+		"description": "[برنامج تعليمي] إدارة Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "يمكنك إدارة $tabs الخاصة بك من هذه الشاشة. انقر هنا للحصول على مزيد من المعلومات.",
+		"description": "[برنامج تعليمي] رابط إدارة Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "انقر بزر الماوس الأيمن فوق $tab المميزة وحدد $extension_label > $cxm_move > $cxm_pin_tab لتثبيتها.",
+		"description": "[برنامج تعليمي] تثبيت Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "تعذر نقل الصف المسحوب قبل الصف المثبت (لأنه غير مثبت حاليًا)، لذا انتقل إلى بداية القائمة غير المثبتة. يتم التعامل مع هاتين القائمتين بشكل منفصل.",
+		"description": "[برنامج تعليمي] شرح التثبيت"
+	},
+	"tutorial_pinned_tab": {
+		"message": "لاحظ أن $tab مثبتة الآن وستبقى في مكانها.",
+		"description": "[برنامج تعليمي] Tab مثبتة"
+	},
+	"tutorial_redirect_account": {
+		"message": "سنقوم الآن بإعادة توجيهك إلى صفحة أخرى لنوضح لك المزيد. انقر هنا للمتابعة.",
+		"description": "[برنامج تعليمي] إعادة توجيه إلى الحساب"
+	},
+	"tutorial_remove_favourite": {
+		"message": "انقر فوق النجمة التي عليها خط لإزالة هذه الصفحة من المفضلة. تلميح: يمكنك النقر فوق النجمة بعد اكتمال هذه الخطوة لتجنب فقدان $tab هذه",
+		"description": "[برنامج تعليمي] إزالة المفضلة"
+	},
+	"tutorial_restart": {
+		"message": "يمكنك إعادة تشغيل $tutorial في أي وقت بالنقر فوق الزر الموجود في النافذة المنبثقة.",
+		"description": "[برنامج تعليمي] الرسالة الأولى"
+	},
+	"tutorial_restart_prompt": {
+		"message": "هل تريد بدء $tutorial من البداية؟",
+		"description": "[برنامج تعليمي] مطالبة لإعادة تشغيل البرنامج التعليمي"
+	},
+	"tutorial_save_modal": {
+		"message": "انقر فوق $save لتطبيق التغييرات ورؤية رسالة التأكيد.",
+		"description": "[برنامج تعليمي] حفظ النافذة"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "هذا مخصص لـ $extension_label وسينقلك إلى صفحة إعداد الصفحة الرئيسية أولاً، ثم يبدأ $tutorial الموجه",
+		"description": "[برنامج تعليمي] نص الجسم لبدء البرنامج التعليمي"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "بدء $tutorial من صفحة إعداد الصفحة الرئيسية؟",
+		"description": "[برنامج تعليمي] عنوان النافذة لبدء البرنامج التعليمي"
 	},
 	"underline": {
 		"message": "تسطير",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "أين؟",
 		"description": "[open-other-org-modal] عنوان بديل للنافذة المنبثقة"
+	},
+	"wiki_label": {
+		"message": "تعرف على المزيد حول $extension_label",
+		"description": "[نافذة منبثقة][إعدادات] عنوان متاح وتسمية aria لزر مساعدة الويكي"
 	},
 	"write_review": {
 		"message": "اكتب مراجعة!",

@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "એકાઉન્ટ",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
+	},
 	"act_delete": {
 		"message": "🗑️ કાઢી નાખો",
 		"description": "[Tab-સંચાલિત કરો] એક પંક્તિ કાઢી નાખો"
@@ -39,6 +43,10 @@
 		"message": "ચડતો (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "સંપત્તિ",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
+	},
 	"available": {
 		"message": "ઉપલબ્ધ",
 		"description": "ઉપલબ્ધમાં ઉમેરી શકાય તેવી વસ્તુઓ માટે વિભાગ શીર્ષક"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "બોલ્ડ",
 		"description": "મોટા ટેક્સ્ટ માટે ફોન્ટ શૈલી વિકલ્પ"
+	},
+	"campaign": {
+		"message": "ઝુંબેશ",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
 	},
 	"cancel": {
 		"message": "રદ્દ કરો",
@@ -55,9 +67,21 @@
 		"message": "રદ્દ કરો અને બંધ કરો",
 		"description": "મોડલના બંધ બટન માટેનું શીર્ષક અથવા લખાણ"
 	},
+	"case": {
+		"message": "કેસ",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠનું નામ"
+	},
 	"chosen": {
 		"message": "પસંદ કરેલ",
 		"description": "પસંદ કરેલ વસ્તુઓ માટે વિભાગ શીર્ષક"
+	},
+	"classic_email_templates": {
+		"message": "ક્લાસિક ઇમેઇલ નમૂનાઓ",
+		"description": "CommunicationTemplatesEmail/home ને સંબંધિત પૃષ્ઠ"
+	},
+	"close": {
+		"message": "બંધ કરો",
+		"description": "કંઈપણ થયા વગર બંધ કરો"
 	},
 	"cmd_export_all": {
 		"message": "બધા સંગ્રહિત Tabs નિકાસ કરવા માટે મોડલ દેખાવો",
@@ -87,6 +111,14 @@
 		"message": "વર્તમાન પાનું (જો સાચવેલું હોય) અપડેટ કરવા માટે મોડલ દેખાવો",
 		"description": "[command description] વપરાશકર્તા વર્તમાન પાનું અપડેટ કરવા માંગે છે"
 	},
+	"company_information": {
+		"message": "કંપનીની માહિતી",
+		"description": "CompanyProfileInfo/home ને સંબંધિત પૃષ્ઠ"
+	},
+	"confirm": {
+		"message": "પુષ્ટિ કરો",
+		"description": "વપરાશકર્તાને આગળ વધવા માટે પ્રોમ્પ્ટ કરવા માટે ટેક્સ્ટ"
+	},
 	"confirm_another_org": {
 		"message": "આ લિંક ખોલવાનું സ്ഥിരീകരો.",
 		"description": "[open-other-org-modal] બનાવેલા લિંકને ખોલવા માટે વપરાશકર્તાની પુષ્ટિ માંગતી વિનંતી"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label નું નવું સંસ્કરણ હવે ઉપલબ્ધ છે!",
 		"description": "એક શ્રોતા તરફથી અજાણ્યો સંદેશ પ્રાપ્ત થયો છે"
+	},
+	"contact": {
+		"message": "સંપર્ક",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
 	},
 	"continue": {
 		"message": "ચાલુ રાખો",
@@ -555,6 +591,10 @@
 		"message": "translator હજી ઈનિશિયલાઈઝ થયું નથી.",
 		"description": "[error] TranslationService રેડી નથી"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ટ્યુટોરીયલ પ્રારંભ કરી શકાયું નથી.",
+		"description": "[error] ટ્યુટોરીયલ પ્રારંભ થયું ન હતું"
+	},
 	"error_unknown_file_structure": {
 		"message": "તમે જે ફાઇલ આયાત કરવા માંગતા હતા તે અમે સમજી શક્યા નથી\nજો સમસ્યા ચાલુ રહે, તો કૃપા કરીને GitHub ઇશ્યુ ખોલીને અમારી સાથે શેર કરો",
 		"description": "[આયાત કરો] વપરાશકર્તાની ફાઇલ ઓળખાઈ નથી"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "અજ્ઞાત વિનંતી.",
 		"description": "[error] અજ્ઞાત સંદેશ મળ્યા પછી સામાન્ય ભૂલ"
+	},
+	"error_unknown_toast_type": {
+		"message": "વિનંતી કરેલ ટોસ્ટ પ્રકારનું અર્થઘટન કરી શકાયું નથી. કૃપા કરીને તમારા કોડમાં ફેરફાર કરો.",
+		"description": "[error] ટોસ્ટ પ્રકાર સેટ કરતી વખતે વપરાતી સામાન્ય ભૂલ"
 	},
 	"error_unpin_tab": {
 		"message": "Tab અનપિન કરતી વખતે ભૂલ",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "આ એક્સટેન્શનનું નામ"
+	},
+	"field_accessibility": {
+		"message": "ક્ષેત્ર સુલભતા",
+		"description": "FieldAccessibility/home ને સંબંધિત પૃષ્ઠ"
 	},
 	"file": {
 		"message": "file",
@@ -783,13 +831,29 @@
 		"message": "લેબલ",
 		"description": "[key] Tab નું નામ"
 	},
+	"lead": {
+		"message": "લીડ",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label વિશે વધુ જાણો",
+		"description": "[popup][settings] વિકી હેલ્પ બટન માટે સુલભ શીર્ષક અને aria-label"
+	},
 	"lightning_navigation": {
 		"message": "Lightning નાવિગેશન",
 		"description": "Salesforce ની કસ્ટમ નાવિગેશન તકનીક"
 	},
+	"login_history": {
+		"message": "લોગિન ઇતિહાસ",
+		"description": "OrgLoginHistory/home ને સંબંધિત પૃષ્ઠ"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce લૉગિન પૃષ્ઠ પર રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
+	},
+	"manage_connected_apps": {
+		"message": "કનેક્ટેડ એપ્સ મેનેજ કરો",
+		"description": "ConnectedApplication/home ને સંબંધિત પૃષ્ઠ"
 	},
 	"manage_tabs": {
 		"message": "$tabs સંચાલિત કરો",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] વપરાશકર્તાને Salesforce Setup પૃષ્ઠ તરફ રીડાયરેક્ટ કરવા માટેનું કાર્યબાહક સંદેશ"
+	},
+	"opportunity": {
+		"message": "તક",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "નવા Tabs ને Org Tabs તરીકે ઉમેરો.",
@@ -975,6 +1043,10 @@
 		"message": "પરવાનગી આપવામાં આવી છે!",
 		"description": "[સફળતા] વપરાશકર્તાએ અમને પરવાનગીની વિንંતી કરવા કહ્યું અને તેઓએ તેને સ્વીકારી લીધી"
 	},
+	"permission_sets": {
+		"message": "પરવાનગી સેટ",
+		"description": "PermSets/home ને સંબંધિત પૃષ્ઠ"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "વપરાશકર્તાના Tab જે હંમેશા સૂચિની શરૂઆતમાં જોવા મળે છે"
@@ -983,9 +1055,21 @@
 		"message": "Preserve Tabs for other orgs.",
 		"description": "[label] આયાત પ્રક્રિયા દરમિયાન તમામ Org-વિશિષ્ટ Tab ને જાળવો"
 	},
+	"pricebook2": {
+		"message": "પ્રાઇસબુક 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
+	},
+	"product2": {
+		"message": "પ્રોડક્ટ 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
+	},
 	"remove_tab": {
 		"message": "Remove Tab",
 		"description": "[alt] ચિત્રો કામ ન કરતા હોવા પર વિકલ્પિક લખાણ"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "રિપોર્ટ્સ અને ડેશબોર્ડ્સ સેટિંગ્સ",
+		"description": "ReportUI/home ને સંબંધિત પૃષ્ઠ"
 	},
 	"req_downloads_open_popup": {
 		"message": "કૃપા કરીને તમારા બ્રાઉઝરના એક્સ્ટેન્શન્સ મેનુમાંથી એક્સ્ટેંશન પૉપઅપ ખોલો.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "અમને એક ટિપ મોકલો ❤️",
 		"description": "[popup] ટિપ મોકલવા માટે પ્રોમ્પ્ટ કરવા માટે svg માટે શીર્ષક"
+	},
+	"sessions": {
+		"message": "સત્રો",
+		"description": "SecuritySession/home ને સંબંધિત પૃષ્ઠ"
 	},
 	"set_gen_preview": {
 		"message": "Tab પૂર્વદર્શન",
@@ -1327,9 +1415,17 @@
 		"message": "Settings",
 		"description": "સેટિંગ્સ મેનુ માટે લેબલ"
 	},
+	"setup_audit_trail": {
+		"message": "સેટઅપ ઓડિટ ટ્રેઇલ",
+		"description": "SecurityEvents/home ને સંબંધિત પૃષ્ઠ"
+	},
 	"setup_page": {
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] Salesforce ની સેટિંગ્સ બદલવા માટેનો પૃષ્ઠ"
+	},
+	"sharing_settings": {
+		"message": "શેરિંગ સેટિંગ્સ",
+		"description": "SecuritySharing/home ને સંબંધિત પૃષ્ઠ"
 	},
 	"show_all_tabs": {
 		"message": "બધા $tabs બતાવો",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs saved.",
 		"description": "[toast] Tab સફળતાપૂર્વક સ્ટોર થયાં"
 	},
+	"task": {
+		"message": "કાર્ય",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view ને સંબંધિત પૃષ્ઠ"
+	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] થીમ સ્વિચ કરવા માટે ચંદ્રમાની ટાઇટલ"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Change Theme to Light",
 		"description": "[popup] થીમ સ્વિચ કરવા માટે સૂર્યની ટાઇટલ"
+	},
+	"tutorial": {
+		"message": "ટ્યુટોરીયલ",
+		"description": "[popup] ટ્યુટોરીયલ શરૂ કરવા માટેનું બટન"
+	},
+	"tutorial_add_favourite": {
+		"message": "આ પૃષ્ઠને મનપસંદમાં ઉમેરવા માટે સ્ટાર પર ક્લિક કરો.",
+		"description": "[tutorial] મનપસંદ ઉમેરો"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "સંબંધિત પૃષ્ઠ પર જવા માટે હાઇલાઇટ કરેલી $tab પર ક્લિક કરો.",
+		"description": "[tutorial] હાઇલાઇટ કરેલી Tab પર ક્લિક કરો"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "આ $extension_label માટે છે અને તમે જ્યાંથી છોડ્યું હતું ત્યાંથી તમારું અધૂરું $tutorial ફરી શરૂ કરશે.",
+		"description": "[tutorial] ટ્યુટોરીયલ ચાલુ રાખવા માટે બોડી ટેક્સ્ટ"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "છેલ્લા સ્ટેપથી $tutorial ચાલુ રાખવું છે?",
+		"description": "[tutorial] ટ્યુટોરીયલ ચાલુ રાખવા માટે મોડલ શીર્ષક"
+	},
+	"tutorial_drag_flows": {
+		"message": "હાઇલાઇટ કરેલી પંક્તિને (6 બિંદુઓનો ઉપયોગ કરીને) ખેંચો અને તેને પ્રથમ પંક્તિ (જે પિન કરેલી છે) પહેલાં છોડો.",
+		"description": "[tutorial] ફ્લો ખેંચો"
+	},
+	"tutorial_end": {
+		"message": "$tutorial પૂર્ણ થયું! એક્સ્ટેંશનનો ઉપયોગ કરીને આનંદ માણો.",
+		"description": "[tutorial] અંત"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial શરૂ કરવા માટે અમને કોઈ ઉપયોગી લિંક્સ મળી નથી\nકૃપા કરીને તમારી $tabs નિકાસ કરો અને $tutorial પુનઃપ્રારંભ કરો",
+		"description": "[tutorial] ભૂલ સંદેશ શરૂ કરી શકાયો નથી"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "આ તમારી મનપસંદ $tabs છે અને તેનો ઉપયોગ વારંવાર ઉપયોગમાં લેવાતા પૃષ્ઠો પર ઝડપી પહોંચ માટે થાય છે.",
+		"description": "[tutorial] મનપસંદ Tab હાઇલાઇટ કરો"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "કીબોર્ડ શોર્ટકટ દબાવો $settings પૃષ્ઠ ખોલવા માટે જ્યાં તમે એક્સ્ટેંશન વર્તનમાં ફેરફાર કરી શકો છો અને તમારી $tabs ને સ્ટાઇલ કરી શકો છો",
+		"description": "[tutorial] કીબોર્ડ શોર્ટકટ"
+	},
+	"tutorial_manage_tabs": {
+		"message": "પૃષ્ઠ પર રાઇટ ક્લિક કરો (Tab પર નહીં) અને મેનેજમેન્ટ મોડલ ખોલવા માટે $extension_label > $cxm_manage_tabs પસંદ કરો.",
+		"description": "[tutorial] Tab મેનેજ કરો"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "તમે આ સ્ક્રીન પરથી તમારી $tabs મેનેજ કરી શકો છો. વધુ માહિતી માટે અહીં ક્લિક કરો.",
+		"description": "[tutorial] Tab મેનેજ કરવાની લિંક"
+	},
+	"tutorial_pin_tab": {
+		"message": "હાઇલાઇટ કરેલી $tab પર રાઇટ ક્લિક કરો અને તેને પિન કરવા માટે $extension_label > $cxm_move > $cxm_pin_tab પસંદ કરો.",
+		"description": "[tutorial] Tab પિન કરો"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ખેંચાયેલી પંક્તિને પિન કરેલી પંક્તિની પહેલાં ખસેડી શકાઈ નથી (કારણ કે તે હાલમાં અનપિન કરેલી છે), તેથી તે અનપિન કરેલી સૂચિની શરૂઆતમાં ગઈ. આ બે સૂચિઓને અલગથી ગણવામાં આવે છે.",
+		"description": "[tutorial] પિન કરેલી સમજૂતી"
+	},
+	"tutorial_pinned_tab": {
+		"message": "નોંધ લો કે $tab હવે પિન થઈ ગઈ છે અને તે સ્થાને રહેશે.",
+		"description": "[tutorial] પિન કરેલી Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "તમને વધુ બતાવવા માટે અમે હવે તમને બીજા પૃષ્ઠ પર રીડાયરેક્ટ કરીશું. ચાલુ રાખવા માટે અહીં ક્લિક કરો.",
+		"description": "[tutorial] એકાઉન્ટ પર રીડાયરેક્ટ"
+	},
+	"tutorial_remove_favourite": {
+		"message": "આ પૃષ્ઠને મનપસંદમાંથી દૂર કરવા માટે ચેકો મારેલા સ્ટાર પર ક્લિક કરો. ટીપ: તમે આ પગલું પૂર્ણ થયા પછી સ્ટાર પર ક્લિક કરી શકો છો જેથી આ $tab ગુમાવવાનું ટાળી શકાય",
+		"description": "[tutorial] મનપસંદ દૂર કરો"
+	},
+	"tutorial_restart": {
+		"message": "તમે પૉપઅપમાં બટન પર ક્લિક કરીને કોઈપણ સમયે $tutorial પુનઃપ્રારંભ કરી શકો છો.",
+		"description": "[tutorial] પ્રથમ સંદેશ"
+	},
+	"tutorial_restart_prompt": {
+		"message": "શું તમે શરૂઆતથી $tutorial શરૂ કરવા માંગો છો?",
+		"description": "[tutorial] ટ્યુટોરીયલ પુનઃપ્રારંભ કરવા માટે પ્રોમ્પ્ટ"
+	},
+	"tutorial_save_modal": {
+		"message": "ફેરફારો લાગુ કરવા અને પુષ્ટિકરણ સંદેશ જોવા માટે $save પર ક્લિક કરો.",
+		"description": "[tutorial] સેવ મોડલ"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "આ $extension_label માટે છે અને તમને પહેલા સેટઅપ હોમ પેજ પર લઈ જશે, પછી માર્ગદર્શિત $tutorial શરૂ કરશે",
+		"description": "[tutorial] ટ્યુટોરીયલ શરૂ કરવા માટે બોડી ટેક્સ્ટ"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "સેટઅપ હોમથી $tutorial શરૂ કરવું છે?",
+		"description": "[tutorial] ટ્યુટોરીયલ શરૂ કરવા માટે મોડલ શીર્ષક"
 	},
 	"underline": {
 		"message": "અંડરલાઇન",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] મોડલ માટેનું ફ્લેબેક ટાઇટલ"
+	},
+	"wiki_label": {
+		"message": "$extension_label વિશે વધુ જાણો",
+		"description": "[popup][settings] વિકી હેલ્પ બટન માટે સુલભ શીર્ષક અને aria-label"
 	},
 	"write_review": {
 		"message": "સમીક્ષા લખો!",

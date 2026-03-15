@@ -1,4 +1,5 @@
 import {
+	BROWSER,
 	EXTENSION_USAGE_DAYS,
 	HIDDEN_CLASS,
 	ISCHROME,
@@ -6,7 +7,7 @@ import {
 	ISFIREFOX,
 	ISSAFARI,
 } from "/constants.js";
-import { getSettings } from "/functions.js";
+import { getSettings, injectStyle } from "/functions.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
 import { generateReviewSponsorSvgs } from "/salesforce/generator.js";
@@ -141,11 +142,13 @@ class ReviewSponsorAws extends HTMLElement {
 		const shadow = this.attachShadow({ mode: "open" });
 		const result = generateReviewSponsorSvgs();
 		shadow.appendChild(result.root);
-		const linkEl = document.createElement("link");
-		linkEl.setAttribute("rel", "stylesheet");
-		linkEl.setAttribute(
-			"href",
-			new URL("./review-sponsor.css", import.meta.url),
+		const linkEl = injectStyle(
+			"awsf-rev-spons",
+			{
+				link: BROWSER.runtime.getURL(
+					"/components/review-sponsor/review-sponsor.css",
+				),
+			},
 		);
 		this.shadowRoot.appendChild(linkEl);
 		this._showReviewOrSponsor(result);

@@ -35,6 +35,7 @@ import {
 	TAB_STYLE_UNDERLINE,
 	USE_LIGHTNING_NAVIGATION,
 	USER_LANGUAGE,
+	WHAT_SET,
 } from "/constants.js";
 import {
 	areFramePatternsAllowed,
@@ -43,6 +44,7 @@ import {
 	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	injectStyle,
 	isExportAllowed,
 	isGenericKey,
 	isPinnedKey,
@@ -97,7 +99,7 @@ function getObjectToSet({
 		throw new Error("error_required_params");
 	}
 	return {
-		what: "set",
+		what: WHAT_SET,
 		key,
 		set,
 	};
@@ -730,27 +732,6 @@ const allOrgDecorations = {
 };
 
 /**
- * Updates or removes a style element in the document head
- * @param {string} styleId - ID of the style element to update or remove
- * @param {string|null} newStyle - CSS content to add, or null to only remove existing style
- */
-function updateStyle(styleId, newStyle = null) {
-	// Remove any previous style for this element
-	const oldStyle = document.getElementById(styleId);
-	if (oldStyle != null) {
-		oldStyle.remove();
-	}
-	if (newStyle == null) {
-		return;
-	}
-	// Create new style element
-	const style = document.createElement("style");
-	style.id = styleId;
-	style.textContent = newStyle;
-	document.head.appendChild(style);
-}
-
-/**
  * Extracts element references from configuration based on tab state and type.
  * Handles both input elements and decoration list containers.
  * @param {Object} config - Style configuration object containing element mappings
@@ -906,7 +887,7 @@ function setPreviewAndInputValue(
 		wasPicked,
 		isPinned,
 	});
-	updateStyle(styleId, cssRule);
+	injectStyle(styleId, { css: cssRule });
 	// Update UI elements if requested
 	if (updateViews) {
 		_updateUIElements(elements, setting.value);

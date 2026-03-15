@@ -1,5 +1,5 @@
 "use strict";
-import { BROWSER } from "/constants.js";
+import { BROWSER, WHAT_THEME } from "/constants.js";
 import { initTheme } from "../themeHandler.js";
 initTheme();
 
@@ -7,7 +7,7 @@ const html = document.documentElement;
 
 /**
  * Listener for runtime messages related to theme updates.
- * Listens for messages with `what: "theme"` and a valid `theme` property.
+ * Listens for messages with `what: WHAT_THEME` and a valid `theme` property.
  *
  * @param {Object} mess - The incoming message object.
  * @param {*} _ - Unused sender parameter.
@@ -16,7 +16,7 @@ const html = document.documentElement;
 function readThemeMessage(mess, _, sendResponse) {
 	const message = mess.message;
 	if (
-		message?.what == null || message?.what !== "theme" ||
+		message?.what !== WHAT_THEME ||
 		message?.theme == null
 	) {
 		return;

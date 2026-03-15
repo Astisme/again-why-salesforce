@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Akun",
+		"description": "Halaman yang terkait dengan ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Hapus",
 		"description": "[kelola-Tab] hapus satu baris"
@@ -39,6 +43,10 @@
 		"message": "Naik (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Aset",
+		"description": "Halaman yang terkait dengan ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Tersedia",
 		"description": "Judul bagian untuk item yang dapat ditambahkan"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Tebal",
 		"description": "Opsi gaya font untuk teks tebal"
+	},
+	"campaign": {
+		"message": "Kampanye",
+		"description": "Halaman yang terkait dengan ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Batal",
@@ -55,9 +67,21 @@
 		"message": "Batal dan tutup",
 		"description": "judul atau textContent untuk tombol tutup modal"
 	},
+	"case": {
+		"message": "Kasus",
+		"description": "Nama halaman yang terkait dengan ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Terpilih",
 		"description": "Judul bagian untuk item yang telah dipilih"
+	},
+	"classic_email_templates": {
+		"message": "Templat Email Klasik",
+		"description": "Halaman yang terkait dengan CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Tutup",
+		"description": "tutup tanpa terjadi apa-apa"
 	},
 	"cmd_export_all": {
 		"message": "Tampilkan modal untuk mengekspor semua Tabs yang disimpan",
@@ -87,6 +111,14 @@
 		"message": "Tampilkan modal untuk memperbarui halaman saat ini (jika disimpan)",
 		"description": "[command description] pengguna ingin memperbarui halaman saat ini"
 	},
+	"company_information": {
+		"message": "Informasi Perusahaan",
+		"description": "Halaman yang terkait dengan CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Konfirmasi",
+		"description": "teks untuk meminta pengguna melanjutkan"
+	},
 	"confirm_another_org": {
 		"message": "Konfirmasi pembukaan link ini.",
 		"description": "[open-other-org-modal] Meminta konfirmasi dari pengguna untuk membuka link yang telah dibentuk."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Versi baru $extension_label sekarang tersedia!",
 		"description": "pesan yang tidak dikenal telah diterima dari pendengar"
+	},
+	"contact": {
+		"message": "Kontak",
+		"description": "Halaman yang terkait dengan ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Lanjutkan",
@@ -554,6 +590,10 @@
 		"message": "translator belum diinisialisasi.",
 		"description": "[error] TranslationService belum siap"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "tutorial tidak dapat diinisialisasi.",
+		"description": "[error] Tutorial tidak diinisialisasi"
+	},
 	"error_unknown_file_structure": {
 		"message": "Kami tidak dapat memahami file yang ingin Anda impor\nJika masalah berlanjut, silakan bagikan kepada kami dengan membuka masalah di GitHub",
 		"description": "[impor] file pengguna tidak dikenali"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "Permintaan tidak dikenal.",
 		"description": "[error] Kesalahan umum setelah menerima pesan yang tidak dikenali"
+	},
+	"error_unknown_toast_type": {
+		"message": "Tipe toast yang diminta tidak dapat diinterpretasikan. Silakan ubah kode Anda.",
+		"description": "[error] Kesalahan umum yang digunakan saat menyetel tipe toast"
 	},
 	"error_unpin_tab": {
 		"message": "Kesalahan saat melepaskan sematan Tab",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] Nama ekstensi ini"
+	},
+	"field_accessibility": {
+		"message": "Aksesibilitas Bidang",
+		"description": "Halaman yang terkait dengan FieldAccessibility/home"
 	},
 	"file": {
 		"message": "file",
@@ -782,13 +830,29 @@
 		"message": "Label",
 		"description": "[key] nama Tab"
 	},
+	"lead": {
+		"message": "Lead",
+		"description": "Halaman yang terkait dengan ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "pelajari lebih lanjut tentang $extension_label",
+		"description": "[popup][settings] judul yang dapat diakses dan aria-label untuk tombol bantuan wiki"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Teknologi navigasi kustom Salesforce"
 	},
+	"login_history": {
+		"message": "Riwayat Login",
+		"description": "Halaman yang terkait dengan OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Login ke Salesforce",
 		"description": "[notSalesforceSetup] Ajakan untuk mengarahkan ke halaman login Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Kelola Aplikasi Terhubung",
+		"description": "Halaman yang terkait dengan ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Kelola $tabs",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Buka Setup",
 		"description": "[notSalesforceSetup] Ajakan untuk membuka halaman Setup Salesforce"
+	},
+	"opportunity": {
+		"message": "Peluang",
+		"description": "Halaman yang terkait dengan ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Tambahkan Tab baru sebagai Org Tabs.",
@@ -974,6 +1042,10 @@
 		"message": "Izin telah diperbolehkan!",
 		"description": "[success] pengguna meminta kami untuk meminta izin dan mereka menerimanya"
 	},
+	"permission_sets": {
+		"message": "Set Izin",
+		"description": "Halaman yang terkait dengan PermSets/home"
+	},
 	"pinned": {
 		"message": "Disematkan",
 		"description": "Tab pengguna yang selalu ditemukan di awal daftar"
@@ -982,9 +1054,21 @@
 		"message": "Pertahankan Tabs untuk Org lain.",
 		"description": "[label] Pertahankan Tabs khusus Org selama proses impor"
 	},
+	"pricebook2": {
+		"message": "Daftar Harga 2",
+		"description": "Halaman yang terkait dengan ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produk 2",
+		"description": "Halaman yang terkait with ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Hapus Tab",
 		"description": "[alt] Teks alternatif ketika gambar tidak muncul."
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Pengaturan Laporan dan Dasbor",
+		"description": "Halaman yang terkait dengan ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Silakan buka popup ekstensi dari menu ekstensi browser Anda.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "Kirimkan kami tip ❤️",
 		"description": "[popup] judul untuk svg untuk meminta pengiriman tip"
+	},
+	"sessions": {
+		"message": "Sesi",
+		"description": "Halaman yang terkait dengan SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Pratinjau Tab",
@@ -1326,9 +1414,17 @@
 		"message": "Pengaturan",
 		"description": "Label untuk menu pengaturan"
 	},
+	"setup_audit_trail": {
+		"message": "Setup Audit Trail",
+		"description": "Halaman yang terkait dengan SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Halaman Setup",
 		"description": "[notSalesforceSetup] Halaman untuk mengubah pengaturan Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Pengaturan Berbagi",
+		"description": "Halaman yang terkait dengan SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Tampilkan semua $tabs",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs tersimpan.",
 		"description": "[toast] Tabs berhasil disimpan."
 	},
+	"task": {
+		"message": "Tugas",
+		"description": "Halaman yang terkait dengan ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Ubah Tema ke Gelap",
 		"description": "[popup] Judul di bulan untuk mengganti tema"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "Ubah Tema ke Terang",
 		"description": "[popup] Judul di matahari untuk mengganti tema"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] tombol untuk memulai tutorial"
+	},
+	"tutorial_add_favourite": {
+		"message": "Klik bintang untuk menambahkan halaman ini ke favorit.",
+		"description": "[tutorial] tambahkan favorit"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Klik $tab yang disorot untuk menavigasi ke halaman terkait.",
+		"description": "[tutorial] klik tab yang disorot"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Ini untuk $extension_label dan akan melanjutkan $tutorial yang belum selesai dari bagian terakhir yang Anda tinggalkan.",
+		"description": "[tutorial] teks isi untuk melanjutkan tutorial"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Lanjutkan $tutorial dari langkah terakhir?",
+		"description": "[tutorial] judul modal untuk melanjutkan tutorial"
+	},
+	"tutorial_drag_flows": {
+		"message": "Seret baris yang disorot (menggunakan 6 titik) dan lepaskan sebelum baris pertama (yang disematkan).",
+		"description": "[tutorial] seret alur"
+	},
+	"tutorial_end": {
+		"message": "$tutorial selesai! Selamat menggunakan ekstensi.",
+		"description": "[tutorial] akhir"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Kami tidak dapat menemukan tautan yang dapat digunakan untuk memulai $tutorial\nSilakan ekspor $tabs Anda dan mulai ulang $tutorial",
+		"description": "[tutorial] pesan kesalahan tidak dapat memulai"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Ini adalah $tabs favorit Anda dan digunakan untuk akses cepat ke halaman yang sering digunakan.",
+		"description": "[tutorial] sorot tab favorit"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Tekan pintasan keyboard untuk membuka halaman $settings tempat Anda dapat mengubah perilaku ekstensi dan menata gaya $tabs Anda",
+		"description": "[tutorial] pintasan keyboard"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Klik kanan pada halaman (bukan pada tab) dan pilih $extension_label > $cxm_manage_tabs untuk membuka modal manajemen.",
+		"description": "[tutorial] kelola tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Anda dapat mengelola $tabs Anda dari layar ini. Klik di sini untuk informasi lebih lanjut.",
+		"description": "[tutorial] tautan kelola tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "Klik kanan pada $tab yang disorot dan pilih $extension_label > $cxm_move > $cxm_pin_tab untuk menyematkannya.",
+		"description": "[tutorial] sematkan tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Baris yang diseret tidak dapat dipindahkan sebelum baris yang disematkan (karena saat ini tidak disematkan), sehingga baris tersebut berada di awal daftar yang tidak disematkan. Kedua daftar ini diperlakukan secara terpisah.",
+		"description": "[tutorial] penjelasan tentang yang disematkan"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Perhatikan bahwa $tab sekarang telah disematkan dan akan tetap di tempatnya.",
+		"description": "[tutorial] tab yang disematkan"
+	},
+	"tutorial_redirect_account": {
+		"message": "Kami sekarang akan mengarahkan Anda ke halaman lain untuk menunjukkan lebih banyak hal kepada Anda. Klik di sini untuk melanjutkan.",
+		"description": "[tutorial] alihkan ke akun"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Klik bintang yang dicoret untuk menghapus halaman ini dari favorit. TIPS: Anda dapat mengklik bintang setelah langkah ini selesai untuk menghindari kehilangan $tab ini",
+		"description": "[tutorial] hapus favorit"
+	},
+	"tutorial_restart": {
+		"message": "Anda dapat memulai ulang $tutorial kapan saja dengan mengeklik tombol di popup.",
+		"description": "[tutorial] pesan pertama"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Apakah Anda ingin memulai $tutorial dari awal?",
+		"description": "[tutorial] permintaan untuk memulai ulang tutorial"
+	},
+	"tutorial_save_modal": {
+		"message": "Klik $save untuk menerapkan perubahan dan melihat pesan konfirmasi.",
+		"description": "[tutorial] simpan modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Ini untuk $extension_label dan akan membawa Anda ke halaman Setup Home terlebih dahulu, lalu memulai $tutorial yang dipandu",
+		"description": "[tutorial] teks isi untuk memulai tutorial"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Mulai $tutorial dari Setup Home?",
+		"description": "[tutorial] judul modal untuk memulai tutorial"
 	},
 	"underline": {
 		"message": "Garis bawah",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "Ke mana?",
 		"description": "[open-other-org-modal] Judul alternatif untuk modal"
+	},
+	"wiki_label": {
+		"message": "pelajari lebih lanjut tentang $extension_label",
+		"description": "[popup][settings] judul yang dapat diakses dan aria-label untuk tombol bantuan wiki"
 	},
 	"write_review": {
 		"message": "Tulis ulasan!",
