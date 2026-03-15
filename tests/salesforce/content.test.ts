@@ -275,6 +275,7 @@ const { executeOncePerDay } = __deps.onceADay;
 	const preludeLines = prelude.split("\n");
 	const hookLines = [
 		"export const __testHooks = {",
+		"\t_afterHrefUpdate,",
 		"\tcheckAddLightningNavigation,",
 		"\tcheckKeepTabsOnLeft,",
 		"\tdelayLoadSetupTabs,",
@@ -284,21 +285,30 @@ const { executeOncePerDay } = __deps.onceADay;
 		"\tmain,",
 		"\tonHrefUpdate,",
 		"\tpromptUpdateExtension,",
+		"\treloadTabs,",
 		"\tshowModalOpenOtherOrg,",
 		"\tshowModalUpdateTab,",
 		"\ttoggleOrg,",
 		"};",
 	];
+	const bootstrapLineIndex = sourceLines.findIndex((line) =>
+		line.includes("// queries the currently active tab")
+	);
+	if (bootstrapLineIndex < 0) {
+		throw new Error("error_missing_bootstrap_comment");
+	}
 	const generatedLines = [
-		sourceLines[0],
+		...sourceLines.slice(0, bootstrapLineIndex),
 		...preludeLines,
-		...sourceLines.slice(1),
+		...sourceLines.slice(bootstrapLineIndex),
 		...hookLines,
 	];
 	const originalLines = [
-		1,
+		...sourceLines.slice(0, bootstrapLineIndex).map((_, index) => index + 1),
 		...preludeLines.map(() => 0),
-		...sourceLines.slice(1).map((_, index) => index + 2),
+		...sourceLines.slice(bootstrapLineIndex).map((_, index) =>
+			bootstrapLineIndex + index + 1
+		),
 		...hookLines.map(() => 0),
 	];
 	const inlineSourceMap = buildInlineSourceMap({
@@ -666,12 +676,14 @@ function createHarness(url = SETUP_URL) {
 						any
 					>,
 				) => {
+					const extractedOrg = org == null ? null : extractOrgName(org);
 					const match = tabs.find((tab: any) =>
 						(label == null || tab.label === label) &&
 						(url == null || tab.url === minifyURL(url)) &&
 						(
-							org == null ||
-							tab.org === extractOrgName(org)
+							extractedOrg == null ||
+							tab.org == null ||
+							tab.org === extractedOrg
 						)
 					);
 					if (match == null) {
@@ -1347,6 +1359,24 @@ Deno.test("internal helper hooks cover setup retries, direct startup branches, a
 				content.getSetupTabUl().parentElement?.children[0],
 				content.getSetupTabUl(),
 			);
+			harness.state.settings.delete("link_new_browser");
+			const originalHead = document.head;
+			Object.defineProperty(document, "head", {
+				value: null,
+				configurable: true,
+			});
+			try {
+				await hooks.checkAddLightningNavigation();
+				assertEquals(
+					document.documentElement.childElementCount > 0,
+					true,
+				);
+			} finally {
+				Object.defineProperty(document, "head", {
+					value: originalHead,
+					configurable: true,
+				});
+			}
 		});
 
 		await t.step("href updates that do not change the URL are ignored", () => {
@@ -1372,6 +1402,26 @@ Deno.test("internal helper hooks cover setup retries, direct startup branches, a
 			hooks.onHrefUpdate();
 			await harness.flush();
 			assertEquals(content.getCurrentHref(), USERS_URL);
+		});
+
+		await t.step("after-href-update covers both reload and favourite fallback branches", async () => {
+			const previousStyleCalls = harness.records.styleCalls;
+			await hooks._afterHrefUpdate(true);
+			await harness.flush();
+			assertEquals(harness.records.styleCalls > previousStyleCalls, true);
+			harness.allTabs.length = 0;
+			harness.setUrl(
+				"https://acme.lightning.force.com/lightning/setup/NoMatchOne/home",
+			);
+			await content.isOnSavedTab();
+			await content.isOnSavedTab();
+			const previousFavouriteCalls = harness.records.showFavouriteButton;
+			await hooks._afterHrefUpdate(false);
+			await harness.flush();
+			assertEquals(
+				harness.records.showFavouriteButton > previousFavouriteCalls,
+				true,
+			);
 		});
 
 		await t.step("init can no-op cleanly when the rendered tab list is empty", async () => {
@@ -1541,6 +1591,9 @@ Deno.test("performActionOnTabs covers move, remove-other, reset, toggle, and pin
 			"toggle org syncs matching tabs and errors on failed sync",
 			async () => {
 				await harness.allTabs.replaceTabs([{
+					label: "Flows",
+					url: FLOWS_URL,
+				}, {
 					label: "Users",
 					url: USERS_URL,
 					org: USERS_URL,
@@ -1549,6 +1602,11 @@ Deno.test("performActionOnTabs covers move, remove-other, reset, toggle, and pin
 					removeOrgTabs: true,
 					updatePinnedTabs: false,
 				});
+				await content.performActionOnTabs("toggle-org", {
+					label: "Flows",
+					url: FLOWS_URL,
+				});
+				assertEquals(harness.records.syncCalls > 0, true);
 				await content.performActionOnTabs("toggle-org", {
 					label: "Users",
 					url: USERS_URL,
@@ -1672,23 +1730,40 @@ Deno.test("performActionOnTabs and internal hooks cover remaining failure and de
 		});
 
 		await t.step("direct modal hooks and main bootstrap remain callable", async () => {
+			const duplicateModal = document.createElement("div");
+			duplicateModal.id = "again-why-salesforce-modal";
+			document.body.appendChild(duplicateModal);
 			await hooks.showModalOpenOtherOrg({
 				label: "Users",
 				url: "ManageUsers/home",
 				org: "acme",
 			});
+			await harness.flush();
+			duplicateModal.remove();
+			harness.setUrl(
+				"https://acme.lightning.force.com/lightning/setup/001ABCDEF123456789/view",
+			);
 			const directOrgModal = document.getElementById(
 				"again-why-salesforce-modal",
 			);
-			assertExists(directOrgModal);
-			(directOrgModal.querySelector("input") as HTMLInputElement).value =
+			assertEquals(directOrgModal, null);
+			await hooks.showModalOpenOtherOrg({
+				label: "Users",
+				url: "001ABCDEF123456789/view",
+				org: "acme",
+			});
+			const directOrgModalAfterOpen = document.getElementById(
+				"again-why-salesforce-modal",
+			);
+			assertExists(directOrgModalAfterOpen);
+			(directOrgModalAfterOpen.querySelector("input") as HTMLInputElement).value =
 				"bad_org";
-			(directOrgModal.querySelector("button") as HTMLButtonElement).dispatchEvent(
+			(directOrgModalAfterOpen.querySelector("button") as HTMLButtonElement).dispatchEvent(
 				new Event("click", { bubbles: true, cancelable: true }),
 			);
 			await harness.flush();
 			assertEquals(harness.records.toasts.at(-1)?.message[0], "insert_valid_org");
-			directOrgModal.remove();
+			directOrgModalAfterOpen.remove();
 			await hooks.showModalUpdateTab({
 				label: "Users",
 				url: USERS_URL,
@@ -2123,6 +2198,7 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 			await t.step(
 				"permission, move, remove, and sort variants route correctly",
 				async () => {
+					const backgroundListener = harness.browser.runtime._listeners[0];
 					harness.browser.runtime.triggerMessage({
 						what: "export-perm-open-popup",
 						ok: true,
@@ -2161,6 +2237,15 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 						label: "Users",
 						url: USERS_URL,
 					});
+					await backgroundListener(
+						{
+							what: "remove-left-tabs",
+							label: "Users",
+							url: USERS_URL,
+						},
+						{},
+						() => {},
+					);
 					harness.browser.runtime.triggerMessage({
 						what: "remove-right-tabs",
 						label: "Users",
@@ -2182,6 +2267,12 @@ Deno.test("background message routing covers modal launchers, downloads, sorting
 					assertEquals(harness.records.moveCalls.length >= 4, true);
 					assertEquals(
 						harness.records.removeOtherCalls.length >= 3,
+						true,
+					);
+					assertEquals(
+						harness.records.removeOtherCalls.some((call) =>
+							call.options?.removeBefore === true
+						),
 						true,
 					);
 					assertEquals(harness.records.sortCalls.length >= 5, true);
