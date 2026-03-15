@@ -282,7 +282,7 @@ async function init(tabs = null) {
 				),
 			);
 		}
-		setupTabUl.appendChild(frag);
+		setupTabUl.replaceChildren(frag);
 	}
 	isOnSavedTab();
 	checkKeepTabsOnLeft();
@@ -430,10 +430,6 @@ function delayLoadSetupTabs(count = 0) {
  * @return {void} This function does not return anything, but it reinitializes the tab list as needed.
  */
 function reloadTabs(tabs = null) {
-	// remove the tabs that are already in the page
-	if (setupTabUl.childElementCount > 0) {
-		setupTabUl.innerHTML = null;
-	}
 	generateStyleFromSettings();
 	init(tabs);
 }
