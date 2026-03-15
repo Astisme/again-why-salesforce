@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Обліковий запис",
+		"description": "Сторінка, пов'язана з ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Видалити",
 		"description": "[керування-Tab] видалити рядок"
@@ -39,6 +43,10 @@
 		"message": "За зростанням (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Актив",
+		"description": "Сторінка, пов'язана з ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Доступно",
 		"description": "Заголовок розділу для елементів, які можна додати"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Жирний",
 		"description": "Параметр стилю шрифту для жирного тексту"
+	},
+	"campaign": {
+		"message": "Кампанія",
+		"description": "Сторінка, пов'язана з ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Скасувати",
@@ -55,9 +67,21 @@
 		"message": "Скасувати та закрити",
 		"description": "заголовок або textContent для кнопки закриття модальних вікон"
 	},
+	"case": {
+		"message": "Кейс",
+		"description": "Назва сторінки, пов'язаної з ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Вибрано",
 		"description": "Заголовок розділу для вибраних елементів"
+	},
+	"classic_email_templates": {
+		"message": "Класичні шаблони електронних листів",
+		"description": "Сторінка, пов'язана з CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Закрити",
+		"description": "закрити без жодних дій"
 	},
 	"cmd_export_all": {
 		"message": "Показати модальне вікно для експорту всіх збережених Tabs",
@@ -87,6 +111,14 @@
 		"message": "Показати модальне вікно для оновлення поточної сторінки (якщо збережено)",
 		"description": "[опис команди] користувач хоче оновити поточну сторінку"
 	},
+	"company_information": {
+		"message": "Інформація про компанію",
+		"description": "Сторінка, пов'язана з CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Підтвердити",
+		"description": "текст із пропозицією користувачеві продовжити"
+	},
 	"confirm_another_org": {
 		"message": "Підтвердити відкриття цього посилання.",
 		"description": "[модальне_вікно_відкрити_іншу_орг] запит підтвердження від користувача на відкриття створеного посилання."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Нова версія $extension_label тепер доступна!",
 		"description": "отримано невідоме повідомлення від слухача"
+	},
+	"contact": {
+		"message": "Контакт",
+		"description": "Сторінка, пов'язана з ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Продовжити",
@@ -555,6 +591,10 @@
 		"message": "перекладач ще не був ініціалізований.",
 		"description": "[помилка] TranslationService не був готовий"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "не вдалося ініціалізувати посібник.",
+		"description": "[error] Посібник не ініціалізовано"
+	},
 	"error_unknown_file_structure": {
 		"message": "Нам не вдалося розпізнати файл, який ви хотіли імпортувати\nЯкщо проблема не зникне, повідомте нам про це, створивши тікет на GitHub",
 		"description": "[імпорт] файл користувача не було розпізнано"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Невідомий запит.",
 		"description": "[помилка] Загальна помилка після отримання нерозпізнаного повідомлення"
+	},
+	"error_unknown_toast_type": {
+		"message": "Не вдалося інтерпретувати запитаний тип сповіщення. Будь ласка, змініть свій код.",
+		"description": "[error] Загальна помилка, що використовується при встановленні типу сповіщення (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Помилка під час відкріплення Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Назва цього розширення"
+	},
+	"field_accessibility": {
+		"message": "Доступність полів",
+		"description": "Сторінка, пов'язана з FieldAccessibility/home"
 	},
 	"file": {
 		"message": "файл",
@@ -783,13 +831,29 @@
 		"message": "Мітка",
 		"description": "[key] назва Tab"
 	},
+	"lead": {
+		"message": "Лід",
+		"description": "Сторінка, пов'язана з ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "дізнатися більше про $extension_label",
+		"description": "[popup][settings] доступний заголовок та aria-label для кнопки допомоги wiki"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Спеціальна технологія навігації Salesforce"
 	},
+	"login_history": {
+		"message": "Історія входів",
+		"description": "Сторінка, пов'язана з OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Увійти в Salesforce",
 		"description": "[неНалаштуванняSalesforce] заклик до дії на кнопці для перенаправлення користувача на сторінку входу Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Керування підключеними програмами",
+		"description": "Сторінка, пов'язана з ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Керування $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Відкрити Налаштування",
 		"description": "[неНалаштуванняSalesforce] заклик до дії на кнопці для перенаправлення користувача на сторінку Налаштування Salesforce"
+	},
+	"opportunity": {
+		"message": "Можливість",
+		"description": "Сторінка, пов'язана з ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Додати нові Tab-и як Tab-и Org.",
@@ -975,6 +1043,10 @@
 		"message": "Дозвіл надано!",
 		"description": "[успіх] користувач попросив нас запитати дозвіл, і він його прийняв"
 	},
+	"permission_sets": {
+		"message": "Набори дозволів",
+		"description": "Сторінка, пов'язана з PermSets/home"
+	},
 	"pinned": {
 		"message": "Закріплені",
 		"description": "Tab користувача, які завжди знаходяться на початку списку"
@@ -983,9 +1055,21 @@
 		"message": "Зберегти Tabs для інших орг.",
 		"description": "[мітка] зберегти всі Tabs, специфічні для Org, під час процесу імпорту"
 	},
+	"pricebook2": {
+		"message": "Прайс-лист 2",
+		"description": "Сторінка, пов'язана з ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Продукт 2",
+		"description": "Сторінка, пов'язана з ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Видалити Tab",
 		"description": "[alt] альтернативний текст, коли зображення не працюють"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Налаштування звітів та інформаційних панелей",
+		"description": "Сторінка, пов'язана з ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Будь ласка, відкрийте спливаюче вікно розширення з меню розширень вашого браузера.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Надішліть нам чайові ❤️",
 		"description": "[popup] заголовок для svg для підказки надсилання чайових"
+	},
+	"sessions": {
+		"message": "Сесії",
+		"description": "Сторінка, пов'язана з SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Попередній перегляд Tab",
@@ -1327,9 +1415,17 @@
 		"message": "Налаштування",
 		"description": "Позначка для меню налаштувань"
 	},
+	"setup_audit_trail": {
+		"message": "Журнал аудиту налаштувань",
+		"description": "Сторінка, пов'язана з SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Сторінка Налаштування",
 		"description": "[неНалаштуванняSalesforce] сторінка, що використовується для зміни налаштувань Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Налаштування спільного доступу",
+		"description": "Сторінка, пов'язана з SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Показати всі $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs збережено.",
 		"description": "[спливаюче_повідомлення] Tabs успішно збережено."
 	},
+	"task": {
+		"message": "Завдання",
+		"description": "Сторінка, пов'язана з ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Змінити тему на темну",
 		"description": "[спливаюче_вікно] заголовок на місяці для перемикання теми"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Змінити тему на світлу",
 		"description": "[спливаюче_вікно] заголовок на сонці для перемикання теми"
+	},
+	"tutorial": {
+		"message": "Посібник",
+		"description": "[popup] кнопка для запуску посібника"
+	},
+	"tutorial_add_favourite": {
+		"message": "Натисніть на зірочку, щоб додати цю сторінку до обраного.",
+		"description": "[tutorial] додати до обраного"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Натисніть на виділену вкладку $tab , щоб перейти на відповідну сторінку.",
+		"description": "[tutorial] натиснути на виділену вкладку"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Це для $extension_label , посібник $tutorial буде продовжено з того місця, де ви зупинилися.",
+		"description": "[tutorial] текст для продовження посібника"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Продовжити посібник $tutorial з останнього кроку?",
+		"description": "[tutorial] заголовок вікна продовження посібника"
+	},
+	"tutorial_drag_flows": {
+		"message": "Перетягніть виділений рядок (використовуючи 6 точок) і відпустіть його перед першим рядком (який закріплений).",
+		"description": "[tutorial] перетягування потоків"
+	},
+	"tutorial_end": {
+		"message": "Посібник $tutorial завершено! Насолоджуйтесь використанням розширення.",
+		"description": "[tutorial] кінець"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Нам не вдалося знайти корисних посилань для запуску $tutorial\nБудь ласка, експортуйте свої вкладки $tabs і перезапустіть $tutorial",
+		"description": "[tutorial] повідомлення про помилку при неможливості запуску"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Це ваші обрані вкладки $tabs , вони використовуються для швидкого доступу до сторінок, що часто використовуються.",
+		"description": "[tutorial] виділити обрану вкладку"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Натисніть комбінацію клавіш, щоб відкрити сторінку $settings , де ви можете змінити поведінку розширення та стилізувати свої вкладки $tabs",
+		"description": "[tutorial] комбінація клавіш"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Клацніть правою кнопкою миші на сторінці (не на вкладці) і виберіть $extension_label > $cxm_manage_tabs , щоб відкрити вікно керування.",
+		"description": "[tutorial] керувати вкладкою"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Ви можете керувати своїми вкладками $tabs з цього екрана. Натисніть тут для отримання додаткової інформації.",
+		"description": "[tutorial] посилання на керування вкладками"
+	},
+	"tutorial_pin_tab": {
+		"message": "Клацніть правою кнопкою миші на виділеній вкладці $tab і виберіть $extension_label > $cxm_move > $cxm_pin_tab , щоб закріпити її.",
+		"description": "[tutorial] закріпити вкладку"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Перетягнутий рядок не вдалося перемістити перед закріпленим рядком (оскільки він зараз не закріплений), тому він перемістився на початок списку незакріплених елементів. Ці два списки обробляються окремо.",
+		"description": "[tutorial] пояснення закріплення"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Зверніть увагу, що вкладка $tab тепер закріплена і залишатиметься на місці.",
+		"description": "[tutorial] закріплена вкладка"
+	},
+	"tutorial_redirect_account": {
+		"message": "Зараз ми перенаправимо вас на іншу сторінку, щоб показати більше. Натисніть тут, щоб продовжити.",
+		"description": "[tutorial] перенаправити на обліковий запис"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Натисніть на перекреслену зірочку, щоб видалити цю сторінку з обраного. ПОРАДА: ви можете натиснути на зірочку після завершення цього кроку, щоб не втратити вкладку $tab",
+		"description": "[tutorial] видалити з обраного"
+	},
+	"tutorial_restart": {
+		"message": "Ви можете перезапустити $tutorial у будь-який час, натиснувши кнопку у спливаючому вікні.",
+		"description": "[tutorial] перше повідомлення"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Бажаєте почати посібник $tutorial спочатку?",
+		"description": "[tutorial] запит на перезапуск посібника"
+	},
+	"tutorial_save_modal": {
+		"message": "Натисніть $save , щоб застосувати зміни та побачити повідомлення про підтвердження.",
+		"description": "[tutorial] зберегти модальне вікно"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Це для $extension_label , ви спочатку перейдете на головну сторінку налаштувань, а потім почнеться покроковий посібник $tutorial",
+		"description": "[tutorial] текст для початку посібника"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Почати посібник $tutorial з головної сторінки налаштувань?",
+		"description": "[tutorial] заголовок вікна початку посібника"
 	},
 	"underline": {
 		"message": "Підкреслення",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Куди?",
 		"description": "[модальне_вікно_відкрити_іншу_орг] резервний заголовок для модального вікна"
+	},
+	"wiki_label": {
+		"message": "дізнатися більше про $extension_label",
+		"description": "[popup][settings] доступний заголовок та aria-label для кнопки допомоги wiki"
 	},
 	"write_review": {
 		"message": "Написати відгук!",

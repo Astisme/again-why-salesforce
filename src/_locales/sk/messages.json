@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Účet",
+		"description": "Stránka súvisiaca s ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Odstrániť",
 		"description": "[správa-Tab] odstrániť riadok"
@@ -39,6 +43,10 @@
 		"message": "Vzostupne (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Aktívum",
+		"description": "Stránka súvisiaca s ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Dostupné",
 		"description": "Hlavička sekcie pre položky, ktoré možno pridať"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Tučné",
 		"description": "Možnosť štýlu písma pre tučný text"
+	},
+	"campaign": {
+		"message": "Kampaň",
+		"description": "Stránka súvisiaca s ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Zrušiť",
@@ -55,9 +67,21 @@
 		"message": "Zrušiť a zavrieť",
 		"description": "názov alebo text pre tlačidlo zavretia modálnych okien"
 	},
+	"case": {
+		"message": "Prípad",
+		"description": "Názov stránky súvisiacej s ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Vybrané",
 		"description": "Hlavička sekcie pre položky, ktoré boli vybrané"
+	},
+	"classic_email_templates": {
+		"message": "Klasické e-mailové šablóny",
+		"description": "Stránka súvisiaca s CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Zavrieť",
+		"description": "zavrieť bez akejkoľvek akcie"
 	},
 	"cmd_export_all": {
 		"message": "Zobraziť modal na export všetkých uložených Tabs",
@@ -87,6 +111,14 @@
 		"message": "Zobraziť modal na aktualizáciu aktuálnej stránky (ak je uložená)",
 		"description": "[popis príkazu] používateľ chce aktualizovať aktuálnu stránku"
 	},
+	"company_information": {
+		"message": "Informácie o spoločnosti",
+		"description": "Stránka súvisiaca s CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Potvrdiť",
+		"description": "text na vyzvanie používateľa, aby pokračoval"
+	},
 	"confirm_another_org": {
 		"message": "Potvrďte otvorenie tohto odkazu.",
 		"description": "[open-other-org-modal] žiadosť o potvrdenie od používateľa na otvorenie vytvoreného odkazu."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Nová verzia $extension_label je teraz k dispozícii!",
 		"description": "od poslucháča bola prijatá neznáma správa"
+	},
+	"contact": {
+		"message": "Kontakt",
+		"description": "Stránka súvisiaca s ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Pokračovať",
@@ -555,6 +591,10 @@
 		"message": "prekladač ešte nebol inicializovaný.",
 		"description": "[chyba] TranslationService nebol pripravený"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "tutoriál sa nepodarilo inicializovať.",
+		"description": "[error] Tutoriál nebol inicializovaný"
+	},
 	"error_unknown_file_structure": {
 		"message": "Nepodarilo sa nám rozpoznať súbor, ktorý ste chceli importovať\nAk problém pretrváva, zdieľajte ho s nami otvorením hlásenia na GitHube",
 		"description": "[import] súbor používateľa nebol rozpoznaný"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Neznáma požiadavka.",
 		"description": "[chyba] Všeobecná chyba po prijatí správy, ktorá nebola rozpoznaná"
+	},
+	"error_unknown_toast_type": {
+		"message": "Požadovaný typ oznámenia nebolo možné interpretovať. Zmeňte svoj kód.",
+		"description": "[error] Všeobecná chyba použitá pri nastavovaní typu oznámenia (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Chyba pri odopínaní Tab-u",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Názov tohto rozšírenia"
+	},
+	"field_accessibility": {
+		"message": "Prístupnosť polí",
+		"description": "Stránka súvisiaca s FieldAccessibility/home"
 	},
 	"file": {
 		"message": "súbor",
@@ -783,13 +831,29 @@
 		"message": "Štítok",
 		"description": "[key] názov Tab"
 	},
+	"lead": {
+		"message": "Lead",
+		"description": "Stránka súvisiaca s ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "dozvedieť sa viac o $extension_label",
+		"description": "[popup][settings] prístupný názov a aria-label pre tlačidlo pomocníka wiki"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigácia",
 		"description": "Vlastná navigačná technológia Salesforce"
 	},
+	"login_history": {
+		"message": "História prihlásení",
+		"description": "Stránka súvisiaca s OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Prihlásiť sa do Salesforce",
 		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na prihlásovaciu stránku Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Spravovať pripojené aplikácie",
+		"description": "Stránka súvisiaca s ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Spravovať $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Otvoriť Setup",
 		"description": "[notSalesforceSetup] výzva na akciu pre tlačidlo, ktoré presmeruje používateľa na stránku Salesforce Setup"
+	},
+	"opportunity": {
+		"message": "Príležitosť",
+		"description": "Stránka súvisiaca s ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Pridať nové Tab-y ako Tab-y Org.",
@@ -975,6 +1043,10 @@
 		"message": "Povolenie bolo povolené!",
 		"description": "[úspech] používateľ nás požiadal o vyžiadanie povolenia a prijal ho"
 	},
+	"permission_sets": {
+		"message": "Sady oprávnení",
+		"description": "Stránka súvisiaca s PermSets/home"
+	},
 	"pinned": {
 		"message": "Pripnutý",
 		"description": "Tab-y používateľa, ktoré sa vždy nachádzajú na začiatku zoznamu"
@@ -983,9 +1055,21 @@
 		"message": "Zachovať Tab-y pre iné organizácie.",
 		"description": "[label] ponechať všetky organizačne špecifické Tab-y počas importu"
 	},
+	"pricebook2": {
+		"message": "Cenník 2",
+		"description": "Stránka súvisiaca s ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produkt 2",
+		"description": "Stránka súvisiaca s ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Odstrániť Tab",
 		"description": "[alt] náhradný text, keď obrázky nie sú zobrazené"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Nastavenia prehľadov a informačných panelov",
+		"description": "Stránka súvisiaca s ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Otvorte vyskakovacie okno rozšírenia z ponuky rozšírení vášho prehliadača.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Pošlite nám tip ❤️",
 		"description": "[popup] titul pre svg na podnietenie odoslania tipu"
+	},
+	"sessions": {
+		"message": "Relácie",
+		"description": "Stránka súvisiaca s SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Náhľad Tabu",
@@ -1327,9 +1415,17 @@
 		"message": "Nastavenia",
 		"description": "Označenie pre menu nastavení"
 	},
+	"setup_audit_trail": {
+		"message": "Auditná stopa nastavenia",
+		"description": "Stránka súvisiaca s SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup stránka",
 		"description": "[notSalesforceSetup] stránka na úpravu nastavení Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Nastavenia zdieľania",
+		"description": "Stránka súvisiaca s SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Zobraziť všetky $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tab-y boli uložené.",
 		"description": "[toast] Tab-y boli úspešne uložené."
 	},
+	"task": {
+		"message": "Úloha",
+		"description": "Stránka súvisiaca s ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Prepni tému na tmavú",
 		"description": "[popup] nadpis pre mesiacovú ikonu na zmenu témy"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Prepni tému na svetlú",
 		"description": "[popup] nadpis pre slnečnú ikonu na zmenu témy"
+	},
+	"tutorial": {
+		"message": "Tutoriál",
+		"description": "[popup] tlačidlo na spustenie tutoriálu"
+	},
+	"tutorial_add_favourite": {
+		"message": "Kliknutím na hviezdičku pridáte túto stránku do obľúbených.",
+		"description": "[tutorial] pridať obľúbené"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Kliknutím na zvýraznenú kartu $tab prejdete na príslušnú stránku.",
+		"description": "[tutorial] kliknite na zvýraznenú kartu"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Toto je pre $extension_label a bude pokračovať v nedokončenom tutoriáli $tutorial tam, kde ste prestali.",
+		"description": "[tutorial] text pre pokračovanie v tutoriáli"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Pokračovať v $tutorial od posledného kroku?",
+		"description": "[tutorial] názov modálneho okna pre pokračovanie v tutoriáli"
+	},
+	"tutorial_drag_flows": {
+		"message": "Presuňte zvýraznený riadok (pomocou 6 bodiek) a pustite ho pred prvý riadok (ktorý je pripnutý).",
+		"description": "[tutorial] presúvanie tokov"
+	},
+	"tutorial_end": {
+		"message": "$tutorial dokončený! Užite si používanie rozšírenia.",
+		"description": "[tutorial] koniec"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Nenašli sme žiadne použiteľné odkazy na spustenie tutoriálu $tutorial\nExportujte svoje karty $tabs a reštartujte $tutorial",
+		"description": "[tutorial] chybové hlásenie pri nemožnosti spustenia"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Toto sú vaše obľúbené karty $tabs a používajú sa na rýchly prístup k často používaným stránkam.",
+		"description": "[tutorial] zvýrazniť obľúbenú kartu"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Stlačením klávesovej skratky otvoríte stránku $settings kde môžete zmeniť správanie rozšírenia a štýlovať svoje karty $tabs",
+		"description": "[tutorial] klávesová skratka"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Kliknite pravým tlačidlom na stránku (nie na kartu) a vyberte $extension_label > $cxm_manage_tabs aby ste otvorili modálne okno správy.",
+		"description": "[tutorial] spravovať kartu"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Svoje karty $tabs môžete spravovať z tejto obrazovky. Kliknutím sem získate ďalšie informácie.",
+		"description": "[tutorial] odkaz na správu kariet"
+	},
+	"tutorial_pin_tab": {
+		"message": "Kliknite pravým tlačidlom na zvýraznenú kartu $tab a vyberte $extension_label > $cxm_move > $cxm_pin_tab aby ste ju pripli.",
+		"description": "[tutorial] pripnúť kartu"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Presúvaný riadok nebolo možné presunúť pred pripnutý riadok (pretože momentálne nie je pripnutý), takže sa presunul na začiatok zoznamu nepripnutých položiek. Tieto dva zoznamy sa posudzujú samostatne.",
+		"description": "[tutorial] vysvetlenie pripnutia"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Všimnite si, že karta $tab je teraz pripnutá a zostane na svojom mieste.",
+		"description": "[tutorial] pripnutá karta"
+	},
+	"tutorial_redirect_account": {
+		"message": "Teraz vás presmerujeme na inú stránku, aby sme vám ukázali viac. Pokračujte kliknutím sem.",
+		"description": "[tutorial] presmerovanie na účet"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Kliknutím na prečiarknutú hviezdičku odstránite túto stránku z obľúbených. TIP: na hviezdičku môžete kliknúť po dokončení tohto kroku, aby ste neprišli o túto kartu $tab",
+		"description": "[tutorial] odstrániť obľúbené"
+	},
+	"tutorial_restart": {
+		"message": "Tutoriál $tutorial môžete kedykoľvek reštartovať kliknutím na tlačidlo vo vyskakovacom okne.",
+		"description": "[tutorial] prvá správa"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Chcete spustiť $tutorial od začiatku?",
+		"description": "[tutorial] výzva na reštartovanie tutoriálu"
+	},
+	"tutorial_save_modal": {
+		"message": "Kliknutím na $save aplikujete zmeny a zobrazíte potvrdzujúcu správu.",
+		"description": "[tutorial] uložiť modálne okno"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Toto je pre $extension_label a najskôr vás zavedie na domovskú stránku nastavenia, potom spustí riadený tutoriál $tutorial",
+		"description": "[tutorial] text pre spustenie tutoriálu"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Spustiť $tutorial z domovskej stránky nastavenia?",
+		"description": "[tutorial] názov modálneho okna pre spustenie tutoriálu"
 	},
 	"underline": {
 		"message": "Podčiarknutie",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Kam?",
 		"description": "[open-other-org-modal] alternatívny nadpis pre modal"
+	},
+	"wiki_label": {
+		"message": "dozvedieť sa viac o $extension_label",
+		"description": "[popup][settings] prístupný názov a aria-label pre tlačidlo pomocníka wiki"
 	},
 	"write_review": {
 		"message": "Napísať recenziu!",

@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Račun",
+		"description": "Stranica koja se odnosi na ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Obriši",
 		"description": "[upravljanje-Tab] obriši redak"
@@ -39,6 +43,10 @@
 		"message": "Uzlazno (A-Ž)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Imovina",
+		"description": "Stranica koja se odnosi na ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Dostupno",
 		"description": "Naslov odjeljka za stavke koje se mogu dodati"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Podebljano",
 		"description": "Opcija stila fonta za podebljani tekst"
+	},
+	"campaign": {
+		"message": "Kampanja",
+		"description": "Stranica koja se odnosi na ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Odustani",
@@ -55,9 +67,21 @@
 		"message": "Odustani i zatvori",
 		"description": "naslov ili tekst za gumb za zatvaranje modalnih prozora"
 	},
+	"case": {
+		"message": "Slučaj",
+		"description": "Naziv stranice koja se odnosi na ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Odabrano",
 		"description": "Naslov odjeljka za stavke koje su odabrane"
+	},
+	"classic_email_templates": {
+		"message": "Klasični predlošci e-pošte",
+		"description": "Stranica koja se odnosi na CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Zatvori",
+		"description": "zatvorite bez da se išta dogodi"
 	},
 	"cmd_export_all": {
 		"message": "Prikaži modal za izvoz svih spremljenih Tabs-a",
@@ -87,6 +111,14 @@
 		"message": "Prikaži modal za ažuriranje trenutne stranice (ako je spremljena)",
 		"description": "[command description] korisnik želi ažurirati trenutnu stranicu"
 	},
+	"company_information": {
+		"message": "Informacije o tvrtki",
+		"description": "Stranica koja se odnosi na CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Potvrdi",
+		"description": "tekst za poticanje korisnika da nastavi"
+	},
 	"confirm_another_org": {
 		"message": "Potvrdite otvaranje ove veze.",
 		"description": "[open-other-org-modal] zahtjev za potvrdu od korisnika za otvaranje konstruirane veze."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Nova verzija $extension_label sada je dostupna!",
 		"description": "nepoznata poruka primljena je od slušatelja"
+	},
+	"contact": {
+		"message": "Kontakt",
+		"description": "Stranica koja se odnosi na ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Nastavi",
@@ -555,6 +591,10 @@
 		"message": "translator još nije inicijaliziran.",
 		"description": "[error] TranslationService nije bio spreman"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "vodič se nije mogao inicijalizirati.",
+		"description": "[error] Vodič nije inicijaliziran"
+	},
 	"error_unknown_file_structure": {
 		"message": "Nismo uspjeli razumjeti datoteku koju ste htjeli uvesti\nAko se problem nastavi, podijelite ga s nama otvaranjem GitHub prijave",
 		"description": "[uvoz] korisnikova datoteka nije prepoznata"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Nepoznat zahtjev.",
 		"description": "[error] Opća pogreška nakon primitka nepoznate poruke"
+	},
+	"error_unknown_toast_type": {
+		"message": "Tražena vrsta obavijesti nije se mogla protumačiti. Promijenite svoj kod.",
+		"description": "[error] Opća pogreška koja se koristi pri postavljanju vrste obavijesti (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Greška prilikom otkvačivanja Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Naziv ovog proširenja"
+	},
+	"field_accessibility": {
+		"message": "Pristupačnost polja",
+		"description": "Stranica koja se odnosi na FieldAccessibility/home"
 	},
 	"file": {
 		"message": "datoteka",
@@ -783,13 +831,29 @@
 		"message": "Oznaka",
 		"description": "[key] naziv Tab-a"
 	},
+	"lead": {
+		"message": "Potencijalni klijent",
+		"description": "Stranica koja se odnosi na ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "saznajte više o $extension_label",
+		"description": "[popup][settings] pristupačan naslov i aria-label za gumb pomoći wiki"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigacija",
 		"description": "Prilagođena navigacijska tehnologija Salesforcea"
 	},
+	"login_history": {
+		"message": "Povijest prijave",
+		"description": "Stranica koja se odnosi na OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Prijavite se na Salesforce",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na stranicu za prijavu u Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Upravljanje povezanim aplikacijama",
+		"description": "Stranica koja se odnosi na ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Upravljanje $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Otvori Setup",
 		"description": "[notSalesforceSetup] poziv na akciju na gumbu za preusmjeravanje korisnika na Salesforce Setup stranicu"
+	},
+	"opportunity": {
+		"message": "Prilika",
+		"description": "Stranica koja se odnosi na ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Dodajte nove Tabs-e kao Org Tabs-e.",
@@ -975,6 +1043,10 @@
 		"message": "Dopuštenje je odobreno!",
 		"description": "[uspjeh] korisnik nas je tražio da zatražimo dopuštenje i on ga je prihvatio"
 	},
+	"permission_sets": {
+		"message": "Skupovi dopuštenja",
+		"description": "Stranica koja se odnosi na PermSets/home"
+	},
 	"pinned": {
 		"message": "Prikvačeno",
 		"description": "Korisnikovi Tabovi koji se uvijek nalaze na početku liste"
@@ -983,9 +1055,21 @@
 		"message": "Sačuvaj Tabove za druge organizacije.",
 		"description": "[label] zadrži sve organizacijski specifične Tabove tijekom uvoza"
 	},
+	"pricebook2": {
+		"message": "Cjenik 2",
+		"description": "Stranica koja se odnosi na ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Proizvod 2",
+		"description": "Stranica koja se odnosi na ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Ukloni Tab",
 		"description": "[alt] alternativni tekst kada slike nisu prikazane"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Postavke izvješća i nadzornih ploča",
+		"description": "Stranica koja se odnosi na ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Molimo otvorite skočni prozor proširenja iz izbornika proširenja vašeg preglednika.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Pošaljite nam savjet ❤️",
 		"description": "[popup] naslov za svg za poticanje slanja savjeta"
+	},
+	"sessions": {
+		"message": "Sesije",
+		"description": "Stranica koja se odnosi na SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab pregled",
@@ -1327,9 +1415,17 @@
 		"message": "Postavke",
 		"description": "Oznaka za izbornik postavki"
 	},
+	"setup_audit_trail": {
+		"message": "Postavljanje revizijskog traga",
+		"description": "Stranica koja se odnosi na SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup stranica",
 		"description": "[notSalesforceSetup] stranica za uređivanje Salesforce postavki"
+	},
+	"sharing_settings": {
+		"message": "Postavke dijeljenja",
+		"description": "Stranica koja se odnosi na SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Prikaži sve $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabovi spremljeni.",
 		"description": "[toast] Tabovi su uspješno spremljeni."
 	},
+	"task": {
+		"message": "Zadatak",
+		"description": "Stranica koja se odnosi na ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Promijeni temu u tamnu",
 		"description": "[popup] naslov ikone mjeseca za promjenu teme"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Promijeni temu u svijetlu",
 		"description": "[popup] naslov ikone sunca za promjenu teme"
+	},
+	"tutorial": {
+		"message": "Vodič",
+		"description": "[popup] gumb za pokretanje vodiča"
+	},
+	"tutorial_add_favourite": {
+		"message": "Kliknite na zvjezdicu da dodate ovu stranicu u favorite.",
+		"description": "[tutorial] dodaj favorit"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Kliknite na istaknutu $tab za navigaciju do odgovarajuće stranice.",
+		"description": "[tutorial] kliknite na istaknutu karticu"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Ovo je za $extension_label i nastavit će vaš nedovršeni $tutorial tamo gdje ste stali.",
+		"description": "[tutorial] tekst tijela za nastavak vodiča"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Nastaviti $tutorial od zadnjeg koraka?",
+		"description": "[tutorial] naslov modala za nastavak vodiča"
+	},
+	"tutorial_drag_flows": {
+		"message": "Povucite istaknuti redak (pomoću 6 točaka) i ispustite ga prije prvog retka (koji je prikvačen).",
+		"description": "[tutorial] povuci tijekove"
+	},
+	"tutorial_end": {
+		"message": "$tutorial završen! Zabavite se koristeći proširenje.",
+		"description": "[tutorial] kraj"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Nismo uspjeli pronaći upotrebljive veze za pokretanje $tutorial\nIzvezite svoje $tabs i ponovno pokrenite $tutorial",
+		"description": "[tutorial] poruka o pogrešci: nije moguće pokrenuti"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Ovo su vaše omiljene $tabs i koriste se za brzi pristup često korištenim stranicama.",
+		"description": "[tutorial] istakni omiljenu karticu"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Pritisnite tipkovnički prečac da otvorite stranicu $settings gdje možete promijeniti ponašanje proširenja i stilizirati svoje $tabs",
+		"description": "[tutorial] tipkovnički prečac"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Kliknite desnom tipkom miša na stranicu (ne na karticu) i odaberite $extension_label > $cxm_manage_tabs da otvorite modal za upravljanje.",
+		"description": "[tutorial] upravljanje karticom"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Svojim $tabs možete upravljati s ovog zaslona. Kliknite ovdje za više informacija.",
+		"description": "[tutorial] veza za upravljanje karticom"
+	},
+	"tutorial_pin_tab": {
+		"message": "Kliknite desnom tipkom miša na istaknutu $tab i odaberite $extension_label > $cxm_move > $cxm_pin_tab da biste je prikvačili.",
+		"description": "[tutorial] prikvači karticu"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Povučeni redak nije se mogao premjestiti prije prikvačenog retka (jer trenutno nije prikvačen), pa je otišao na početak popisa neprikvačenih stavki. Ova dva popisa tretiraju se odvojeno.",
+		"description": "[tutorial] objašnjenje prikvačenog"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Primijetite da je $tab sada prikvačena i ostat će na mjestu.",
+		"description": "[tutorial] prikvačena kartica"
+	},
+	"tutorial_redirect_account": {
+		"message": "Sada ćemo vas preusmjeriti na drugu stranicu kako bismo vam pokazali više. Kliknite ovdje za nastavak.",
+		"description": "[tutorial] preusmjeri na račun"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Kliknite na prekriženu zvjezdicu da uklonite ovu stranicu iz favorita. SAVJET: možete kliknuti na zvjezdicu nakon što ovaj korak završi kako biste izbjegli gubitak ove $tab",
+		"description": "[tutorial] ukloni favorit"
+	},
+	"tutorial_restart": {
+		"message": "Možete ponovno pokrenuti $tutorial u bilo kojem trenutku klikom na gumb u skočno prozoru.",
+		"description": "[tutorial] prva poruka"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Želite li pokrenuti $tutorial ispočetka?",
+		"description": "[tutorial] upit za ponovno pokretanje vodiča"
+	},
+	"tutorial_save_modal": {
+		"message": "Kliknite $save za primjenu promjena i prikaz poruke potvrde.",
+		"description": "[tutorial] spremi modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Ovo je za $extension_label i prvo će vas odvesti na početnu stranicu za postavljanje, a zatim pokrenuti vođeni $tutorial",
+		"description": "[tutorial] tekst tijela za početak vodiča"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Pokrenuti $tutorial s početne stranice postavljanja?",
+		"description": "[tutorial] naslov modala za početak vodiča"
 	},
 	"underline": {
 		"message": "Podcrtano",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Kamo?",
 		"description": "[open-other-org-modal] alternativni naslov za modal"
+	},
+	"wiki_label": {
+		"message": "saznajte više o $extension_label",
+		"description": "[popup][settings] pristupačan naslov i aria-label za gumb pomoći wiki"
 	},
 	"write_review": {
 		"message": "Napiši recenziju!",

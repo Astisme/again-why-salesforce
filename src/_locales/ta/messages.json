@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "கணக்கு",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
+	},
 	"act_delete": {
 		"message": "🗑️ நீக்கு",
 		"description": "[Tab-நிர்வகி] ஒரு வரிசையை நீக்கு"
@@ -39,6 +43,10 @@
 		"message": "ஏறுவரிசை (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "சொத்து",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
+	},
 	"available": {
 		"message": "கிடைக்கக்கூடியவை",
 		"description": "சேர்க்கக்கூடிய உருப்படிகளுக்கான பிரிவு தலைப்பு"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "தடிமன்",
 		"description": "தடிமனான உரைக்கான எழுத்துரு பாணி விருப்பம்"
+	},
+	"campaign": {
+		"message": "பிரச்சாரம்",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
 	},
 	"cancel": {
 		"message": "ரத்துசெய்",
@@ -55,9 +67,21 @@
 		"message": "ரத்துசெய்து மூடு",
 		"description": "மோடல்களின் மூடு பொத்தானுக்கான தலைப்பு அல்லது textContent"
 	},
+	"case": {
+		"message": "வழக்கு",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view தொடர்புடைய பக்கத்தின் பெயர்"
+	},
 	"chosen": {
 		"message": "தேர்ந்தெடுக்கப்பட்டவை",
 		"description": "தேர்ந்தெடுக்கப்பட்ட உருப்படிகளுக்கான பிரிவு தலைப்பு"
+	},
+	"classic_email_templates": {
+		"message": "கிளாசிக் மின்னஞ்சல் வார்ப்புருக்கள்",
+		"description": "CommunicationTemplatesEmail/home தொடர்புடைய பக்கம்"
+	},
+	"close": {
+		"message": "மூடு",
+		"description": "எந்த நடவடிக்கையும் இல்லாமல் மூடு"
 	},
 	"cmd_export_all": {
 		"message": "சேமிக்கப்பட்ட அனைத்து Tabs ஐயும் экспоர்ட் செய்ய modal ஐக் காட்டு",
@@ -87,6 +111,14 @@
 		"message": "தற்போதைய பக்கத்தை புதுப்பிக்க modal ஐக் காட்டு (சேமிக்கப்பட்டிருந்தால்)",
 		"description": "[கட்டளை விளக்கம்] பயனர் தற்போதைய பக்கத்தை புதுப்பிக்க விரும்புகிறார்"
 	},
+	"company_information": {
+		"message": "நிறுவனத்தின் தகவல்",
+		"description": "CompanyProfileInfo/home தொடர்புடைய பக்கம்"
+	},
+	"confirm": {
+		"message": "உறுதிப்படுத்து",
+		"description": "பயனர் தொடரச் சொல்லும் உரை"
+	},
 	"confirm_another_org": {
 		"message": "இந்த இணைப்பைத் திறப்பதை உறுதிப்படுத்தவும்.",
 		"description": "[open-other-org-modal] கட்டமைக்கப்பட்ட இணைப்பைத் திறக்க பயனரிடமிருந்து உறுதிப்படுத்தல் கோரவும்."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label இன் புதிய பதிப்பு இப்போது கிடைக்கிறது!",
 		"description": "ஒரு கேட்பவரிடமிருந்து அறியப்படாத செய்தி பெறப்பட்டது"
+	},
+	"contact": {
+		"message": "தொடர்பு",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
 	},
 	"continue": {
 		"message": "தொடர்க",
@@ -555,6 +591,10 @@
 		"message": "மொழிபெயர்ப்பாளர் இன்னும் தொடங்கப்படவில்லை.",
 		"description": "[பிழை] TranslationService தயாராக இல்லை"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "டுடோரியலைத் தொடங்க முடியவில்லை.",
+		"description": "[error] டுடோரியல் தொடங்கப்படவில்லை"
+	},
 	"error_unknown_file_structure": {
 		"message": "நீங்கள் இறக்குமதி செய்ய விரும்பிய கோப்பை எங்களால் புரிந்துகொள்ள முடியவில்லை\nபிரச்சினை நீடித்தால், GitHub சிக்கலைத் திறப்பதன் மூலம் அதை எங்களுடன் பகிர்ந்து கொள்ளவும்",
 		"description": "[இறக்குமதி] பயனரின் கோப்பு அடையாளம் காணப்படவில்லை"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "அறியப்படாத கோரிக்கை.",
 		"description": "[பிழை] அறியப்படாத செய்தியைப் பெற்ற பிறகு பொதுவான பிழை"
+	},
+	"error_unknown_toast_type": {
+		"message": "கோரப்பட்ட அறிவிப்பு வகையை விளக்க முடியவில்லை. உங்கள் குறியீட்டை மாற்றவும்.",
+		"description": "[error] அறிவிப்பு வகை (toast) அமைக்கும் போது பயன்படுத்தப்படும் பொதுவான பிழை"
 	},
 	"error_unpin_tab": {
 		"message": "Tab-ன் குறியை நீக்கும் போது பிழை",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "இந்த நீட்டிப்பின் பெயர்"
+	},
+	"field_accessibility": {
+		"message": "புல அணுகல்தன்மை",
+		"description": "FieldAccessibility/home தொடர்புடைய பக்கம்"
 	},
 	"file": {
 		"message": "கோப்பு",
@@ -783,13 +831,29 @@
 		"message": "லேபிள்",
 		"description": "[key] Tab இன் பெயர்"
 	},
+	"lead": {
+		"message": "லீட் (Lead)",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label பற்றி மேலும் அறிக",
+		"description": "[popup][settings] விக்கி உதவி பொத்தானுக்கான அணுகக்கூடிய தலைப்பு மற்றும் ஏரியா-லேபிள்"
+	},
 	"lightning_navigation": {
 		"message": "லைட்னிங் நெவிகேஷன்",
 		"description": "Salesforce-இன் தனிப்பயன் வழிசெலுத்தல் தொழில்நுட்பம்"
 	},
+	"login_history": {
+		"message": "உள்நுழைவு வரலாறு",
+		"description": "OrgLoginHistory/home தொடர்புடைய பக்கம்"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce இல் உள்நுழைக",
 		"description": "[notSalesforceSetup] பயனரை Salesforce உள்நுழைவு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
+	},
+	"manage_connected_apps": {
+		"message": "இணைக்கப்பட்ட பயன்பாடுகளை நிர்வகி",
+		"description": "ConnectedApplication/home தொடர்புடைய பக்கம்"
 	},
 	"manage_tabs": {
 		"message": "$tabs களை நிர்வகி",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "அமைப்பைத் திற",
 		"description": "[notSalesforceSetup] பயனரை Salesforce அமைப்பு பக்கத்திற்கு திருப்பிவிட ஒரு பொத்தானில் செயல்பாடு அழைப்பு"
+	},
+	"opportunity": {
+		"message": "வாய்ப்பு",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "புதிய Tab-களை Org Tab-களாகச் சேர்.",
@@ -975,6 +1043,10 @@
 		"message": "அனுமதி வழங்கப்பட்டுள்ளது!",
 		"description": "[வெற்றி] பயனர் எங்களை அனுமதி கேட்கச் சொன்னார், அவர் அதை ஏற்றுக்கொண்டார்"
 	},
+	"permission_sets": {
+		"message": "அனுமதி தொகுப்புகள்",
+		"description": "PermSets/home தொடர்புடைய பக்கம்"
+	},
 	"pinned": {
 		"message": "குறியிடப்பட்டது",
 		"description": "பட்டியலின் தொடக்கத்தில் எப்போதும் காணப்படும் பயனரின் Tab-கள்"
@@ -983,9 +1055,21 @@
 		"message": "மற்ற org க்களுக்கான Tabs ஐப் பாதுகா.",
 		"description": "[label] இறக்குமதி செயல்முறையின் போது அனைத்து Org-குறிப்பிட்ட Tabs ஐயும் வைத்திரு"
 	},
+	"pricebook2": {
+		"message": "விலைப் புத்தகம் 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
+	},
+	"product2": {
+		"message": "தயாரிப்பு 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
+	},
 	"remove_tab": {
 		"message": "Tab அகற்று",
 		"description": "[alt] படங்கள் வேலை செய்யாதபோது மாற்று உரை"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "அறிக்கைகள் மற்றும் டாஷ்போர்டு அமைப்புகள்",
+		"description": "ReportUI/home தொடர்புடைய பக்கம்"
 	},
 	"req_downloads_open_popup": {
 		"message": "உங்கள் உலாவியின் நீட்டிப்புகள் மெனுவிலிருந்து நீட்டிப்பு பாப்அப்பைத் திறக்கவும்.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "எங்களுக்கு ஒரு உதவிக்குறிப்பை அனுப்பவும் ❤️",
 		"description": "[popup] ஒரு உதவிக்குறிப்பை அனுப்புமாறு தூண்டுவதற்கான svg-க்கான தலைப்பு"
+	},
+	"sessions": {
+		"message": "அமர்வுகள்",
+		"description": "SecuritySession/home தொடர்புடைய பக்கம்"
 	},
 	"set_gen_preview": {
 		"message": "Tab முன்னோட்டம்",
@@ -1327,9 +1415,17 @@
 		"message": "அமைப்புகள்",
 		"description": "அமைப்புகள் மெனுவிற்கான லேபிள்"
 	},
+	"setup_audit_trail": {
+		"message": "ஆடிட் ட்ரெயில் அமைவு",
+		"description": "SecurityEvents/home தொடர்புடைய பக்கம்"
+	},
 	"setup_page": {
 		"message": "அமைப்பு பக்கம்",
 		"description": "[notSalesforceSetup] Salesforce அமைப்புகளை மாற்றப் பயன்படுத்தப்படும் பக்கம்"
+	},
+	"sharing_settings": {
+		"message": "பகிர்வு அமைப்புகள்",
+		"description": "SecuritySharing/home தொடர்புடைய பக்கம்"
 	},
 	"show_all_tabs": {
 		"message": "அனைத்து $tabs களையும் காட்டு",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs சேமிக்கப்பட்டது.",
 		"description": "[toast] Tabs வெற்றிகரமாக சேமிக்கப்பட்டது."
 	},
+	"task": {
+		"message": "பணி",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view தொடர்புடைய பக்கம்"
+	},
 	"theme_dark": {
 		"message": "கருப்பொருளை இருண்டதாக மாற்று",
 		"description": "[popup] கருப்பொருளை மாற்ற சந்திரனின் மீதான தலைப்பு"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "கருப்பொருளை வெளிச்சமாக மாற்று",
 		"description": "[popup] கருப்பொருளை மாற்ற சூரியனின் மீதான தலைப்பு"
+	},
+	"tutorial": {
+		"message": "டுடோரியல்",
+		"description": "[popup] டுடோரியலைத் தொடங்குவதற்கான பொத்தான்"
+	},
+	"tutorial_add_favourite": {
+		"message": "இந்தப் பக்கத்தை விருப்பமானவைகளில் சேர்க்க நட்சத்திரத்தைக் கிளிக் செய்யவும்.",
+		"description": "[tutorial] விருப்பமானவைகளில் சேர்"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "தொடர்புடைய பக்கத்திற்குச் செல்ல சிறப்பிக்கப்பட்ட $tab தாவலைக் கிளிக் செய்யவும்.",
+		"description": "[tutorial] சிறப்பிக்கப்பட்ட தாவலைக் கிளிக் செய்யவும்"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "இது $extension_label க்கானது மற்றும் நீங்கள் விட்ட இடத்திலிருந்து முடிக்கப்படாத $tutorial ஐத் தொடரும்.",
+		"description": "[tutorial] டுடோரியலைத் தொடர்வதற்கான உரை"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "கடைசி படியிலிருந்து $tutorial ஐத் தொடரவா?",
+		"description": "[tutorial] டுடோரியலைத் தொடர்வதற்கான மாடல் தலைப்பு"
+	},
+	"tutorial_drag_flows": {
+		"message": "சிறப்பிக்கப்பட்ட வரிசையை (6 புள்ளிகளைப் பயன்படுத்தி) இழுத்து முதல் வரிசைக்கு (பின் செய்யப்பட்டது) முன்னால் விடவும்.",
+		"description": "[tutorial] இழுத்து விடுதல்"
+	},
+	"tutorial_end": {
+		"message": "$tutorial முடிந்தது! நீட்டிப்பைப் பயன்படுத்தி மகிழுங்கள்.",
+		"description": "[tutorial] முடிவு"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial ஐத் தொடங்க பயனுள்ள இணைப்புகள் எதுவும் கிடைக்கவில்லை\nதயவுசெய்து உங்கள் $tabs களை ஏற்றுமதி செய்து $tutorial ஐ மீண்டும் தொடங்கவும்",
+		"description": "[tutorial] தொடங்க முடியாதபோது பிழை செய்தி"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "இவை உங்களுக்குப் பிடித்த $tabs மற்றும் அடிக்கடி பயன்படுத்தப்படும் பக்கங்களை விரைவாக அணுகப் பயன்படும்.",
+		"description": "[tutorial] விருப்பமான தாவலைச் சிறப்பித்துக் காட்டு"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "நீட்டிப்பின் நடத்தை மற்றும் $tabs களின் பாணியை மாற்றக்கூடிய $settings பக்கத்தைத் திறக்க விசைப்பலகை குறுக்குவழியை அழுத்தவும்",
+		"description": "[tutorial] விசைப்பலகை குறுக்குவழி"
+	},
+	"tutorial_manage_tabs": {
+		"message": "பக்கத்தில் (தாவலில் அல்ல) வலது கிளிக் செய்து, மேலாண்மை சாளரத்தைத் திறக்க $extension_label > $cxm_manage_tabs ஐத் தேர்ந்தெடுக்கவும்.",
+		"description": "[tutorial] தாவலை நிர்வகி"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "இந்தத் திரையில் இருந்து உங்கள் $tabs களை நிர்வகிக்கலாம். கூடுதல் தகவலுக்கு இங்கே கிளிக் செய்யவும்.",
+		"description": "[tutorial] தாவல் நிர்வாக இணைப்பு"
+	},
+	"tutorial_pin_tab": {
+		"message": "சிறப்பிக்கப்பட்ட $tab இல் வலது கிளிக் செய்து, அதை பின் செய்ய $extension_label > $cxm_move > $cxm_pin_tab ஐத் தேர்ந்தெடுக்கவும்.",
+		"description": "[tutorial] தாவலைப் பின் செய்"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "இழுக்கப்பட்ட வரிசையை பின் செய்யப்பட்ட வரிசைக்கு முன்னால் நகர்த்த முடியவில்லை (ஏனெனில் அது தற்போது பின் செய்யப்படவில்லை), எனவே அது பின் செய்யப்படாத பட்டியலின் தொடக்கத்திற்குச் சென்றது. இந்த இரண்டு பட்டியல்களும் தனித்தனியாகக் கருதப்படுகின்றன.",
+		"description": "[tutorial] பின் செய்வது பற்றிய விளக்கம்"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab இப்போது பின் செய்யப்பட்டுள்ளது மற்றும் அதன் இடத்திலேயே இருக்கும்.",
+		"description": "[tutorial] பின் செய்யப்பட்ட தாவல்"
+	},
+	"tutorial_redirect_account": {
+		"message": "மேலும் பலவற்றைக் காட்ட இப்போது நாங்கள் உங்களை வேறொரு பக்கத்திற்கு அழைத்துச் செல்வோம். தொடர இங்கே கிளிக் செய்யவும்.",
+		"description": "[tutorial] கணக்கிற்குத் திருப்பிவிடு"
+	},
+	"tutorial_remove_favourite": {
+		"message": "இந்தப் பக்கத்தை விருப்பமானவைகளில் இருந்து அகற்ற நட்சத்திரத்தைக் கிளிக் செய்யவும். குறிப்பு: இந்தத் தாவலைத் $tab தவிர்க்க, இந்தப் படி முடிந்ததும் நட்சத்திரத்தை மீண்டும் கிளிக் செய்யலாம்.",
+		"description": "[tutorial] விருப்பமானவைகளில் இருந்து அகற்று"
+	},
+	"tutorial_restart": {
+		"message": "பாப்-அப்பில் உள்ள பொத்தானைக் கிளிக் செய்வதன் மூலம் எந்த நேரத்திலும் $tutorial ஐ மீண்டும் தொடங்கலாம்.",
+		"description": "[tutorial] முதல் செய்தி"
+	},
+	"tutorial_restart_prompt": {
+		"message": "$tutorial ஐ ஆரம்பத்திலிருந்தே தொடங்க விரும்புகிறீர்களா?",
+		"description": "[tutorial] டுடோரியலை மீண்டும் தொடங்குவதற்கான அறிவுறுத்தல்"
+	},
+	"tutorial_save_modal": {
+		"message": "மாற்றங்களைப் பயன்படுத்த மற்றும் உறுதிப்படுத்தல் செய்தியைப் பார்க்க $save என்பதைக் கிளிக் செய்யவும்.",
+		"description": "[tutorial] மாடல் சேமிப்பு"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "இது $extension_label க்கானது மற்றும் உங்களை முதலில் அமைவு முகப்புப் பக்கத்திற்கு அழைத்துச் செல்லும், பின்னர் வழிகாட்டப்பட்ட $tutorial ஐத் தொடங்கும்",
+		"description": "[tutorial] டுடோரியலைத் தொடங்குவதற்கான உரை"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "அமைவு முகப்பிலிருந்து $tutorial ஐத் தொடங்கவா?",
+		"description": "[tutorial] டுடோரியலைத் தொடங்குவதற்கான மாடல் தலைப்பு"
 	},
 	"underline": {
 		"message": "அடிக்கோடு",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "எங்கே?",
 		"description": "[open-other-org-modal] மோடலுக்கான பின்னடைவு தலைப்பு"
+	},
+	"wiki_label": {
+		"message": "$extension_label பற்றி மேலும் அறிக",
+		"description": "[popup][settings] விக்கி உதவி பொத்தானுக்கான அணுகக்கூடிய தலைப்பு மற்றும் ஏரியா-லேபிள்"
 	},
 	"write_review": {
 		"message": "ஒரு மதிப்பாய்வு எழுதுங்கள்!",

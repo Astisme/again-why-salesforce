@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "አካውንት",
+		"description": "ከ ObjectManager/Account/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
+	},
 	"act_delete": {
 		"message": "🗑️ ሰርዝ",
 		"description": "[Tab-አስተዳድር] ረድፍ ሰርዝ"
@@ -39,6 +43,10 @@
 		"message": "ወደ ላይ መውጣት (ሀ-ዠ)",
 		"description": ""
 	},
+	"asset": {
+		"message": "ንብረት",
+		"description": "ከ ObjectManager/Asset/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
+	},
 	"available": {
 		"message": "ይገኛል",
 		"description": "ሊታካል የሚችሉ ንጥሎች የክፍል ርዕሰ መልዕክት"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "ብልጥግና",
 		"description": "ብልጥግና ጽሑፍ የፊደል አወታት አማራጭ"
+	},
+	"campaign": {
+		"message": "ዘመቻ",
+		"description": "ከ ObjectManager/Campaign/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
 	},
 	"cancel": {
 		"message": "ሰርዝ",
@@ -55,9 +67,21 @@
 		"message": "ሰርዝ እና ዝጋ",
 		"description": "የሞዳል መዝጊያ አዝራር ርዕስ ወይም የጽሑፍ ይዘት"
 	},
+	"case": {
+		"message": "ጉዳይ",
+		"description": "ከ ObjectManager/Case/FieldsAndRelationships/view ጋር የተያያዘ የገጽ ስም"
+	},
 	"chosen": {
 		"message": "ተመርጧል",
 		"description": "ተመርጡ የሆኑ ንጥሎች የክፍል ርዕሰ መልዕክት"
+	},
+	"classic_email_templates": {
+		"message": "ክላሲክ የኢሜይል አብነቶች",
+		"description": "ከ CommunicationTemplatesEmail/home ጋር የተያያዘ ገጽ"
+	},
+	"close": {
+		"message": "ዝጋ",
+		"description": "ምንም ነገር ሳይከሰት ዝጋ"
 	},
 	"cmd_export_all": {
 		"message": "የተቀመጡትን ሁሉንም Tabs ለማስወገድ ቁልፍ አሳይ",
@@ -87,6 +111,14 @@
 		"message": "ተቀመጠ ገጽ ሲሆን ለማዘመን ቁልፍ አሳይ",
 		"description": "[command description] ተጠቃሚው ያሁኑን ገጽ ለማዘመን ይፈልጋል"
 	},
+	"company_information": {
+		"message": "የኩባንያ መረጃ",
+		"description": "ከ CompanyProfileInfo/home ጋር የተያያዘ ገጽ"
+	},
+	"confirm": {
+		"message": "አረጋግጥ",
+		"description": "ተጠቃሚው እንዲቀጥል ለመጠየቅ የሚረዳ ጽሑፍ"
+	},
 	"confirm_another_org": {
 		"message": "ይህን ሊንክ መክፈት ያረጋግጡ።",
 		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] የተገነባውን ሊንክ ለመክፈት ከተጠቃሚው ማረጋገጫ ይጠይቁ።"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "አዲስ የ $extension_label ስሪት አሁን ይገኛል!",
 		"description": "ያልታወቀ መልዕክት ከተቀባይ ደርሷል"
+	},
+	"contact": {
+		"message": "እውቂያ",
+		"description": "ከ ObjectManager/Contact/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
 	},
 	"continue": {
 		"message": "ቀጥል",
@@ -555,6 +591,10 @@
 		"message": "translator አልተጀመረም።",
 		"description": "[error] የTranslationService መነሻ አልተዘጋጀም"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "መማሪያው ሊጀመር አልቻለም።",
+		"description": "[ስህተት] መማሪያው አልተጀመረም"
+	},
 	"error_unknown_file_structure": {
 		"message": "ሊያስገቡት የፈለጉትን ፋይል መረዳት አልቻልንም\nችግሩ ከቀጠለ፣ እባክዎ የ GitHub እትም በመክፈት ለእኛ ያካፍሉን",
 		"description": "[አስመጣ] የተጠቃሚው ፋይል አልታወቀም"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "ያልታወቀ ትእዛዝ።",
 		"description": "[error] እርዳታ ሲጠየቅ ያልታወቀ መልዕክት የተቀበለ ስህተት"
+	},
+	"error_unknown_toast_type": {
+		"message": "የተጠየቀው የቶስት ዓይነት ሊተረጎም አልቻለም። እባክዎ ኮድዎን ይቀይሩ።",
+		"description": "[ስህተት] የቶስት ዓይነት በሚዘጋጅበት ጊዜ ጥቅም ላይ የሚውል አጠቃላይ ስህተት"
 	},
 	"error_unpin_tab": {
 		"message": "Tab ሰካ ሲነሳ ስህተት ተፈጥሯል",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "የዚህ ቅጥያ ስም"
+	},
+	"field_accessibility": {
+		"message": "የመስክ ተደራሽነት",
+		"description": "ከ FieldAccessibility/home ጋር የተያያዘ ገጽ"
 	},
 	"file": {
 		"message": "ፋይል",
@@ -783,13 +831,29 @@
 		"message": "መለያ",
 		"description": "[key] የ Tab ስም"
 	},
+	"lead": {
+		"message": "መሪ",
+		"description": "ከ ObjectManager/Lead/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
+	},
+	"learn_more_about_extension": {
+		"message": "ስለ $extension_label የበለጠ ይረዱ",
+		"description": "[ፖፕአፕ][ቅንብሮች] ለዊኪ የእርዳታ ቁልፍ የሚሆን ተደራሽ ርዕስ እና aria-label"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce የተለመዱ ትንታኔ ቴክኖሎጂ"
 	},
+	"login_history": {
+		"message": "የመግቢያ ታሪክ",
+		"description": "ከ OrgLoginHistory/home ጋር የተያያዘ ገጽ"
+	},
 	"login_to_salesforce": {
 		"message": "ወደ Salesforce ግባ",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce መግቢያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
+	},
+	"manage_connected_apps": {
+		"message": "የተገናኙ መተግበሪያዎችን ያስተዳድሩ",
+		"description": "ከ ConnectedApplication/home ጋር የተያያዘ ገጽ"
 	},
 	"manage_tabs": {
 		"message": "$tabs ያስተዳድሩ",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "ማዋቀሪያ (Setup) ክፈት",
 		"description": "[SalesforceSetupአይደለም] ተጠቃሚውን ወደ Salesforce የማዋቀሪያ ገጽ ለማዞር በአዝራር ላይ ያለ የድርጊት ጥሪ"
+	},
+	"opportunity": {
+		"message": "አጋጣሚ",
+		"description": "ከ ObjectManager/Opportunity/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "አዲስ Tabsን እንደ Org Tabs ጨምር።",
@@ -975,6 +1043,10 @@
 		"message": "ፈቃዱ ተፈቅዷል!",
 		"description": "[ስኬት] ተጠቃሚው ፈቃድ እንድንጠይቅ ጠይቆን ተቀብሎታል"
 	},
+	"permission_sets": {
+		"message": "የፈቃድ ስብስቦች",
+		"description": "ከ PermSets/home ጋር የተያያዘ ገጽ"
+	},
 	"pinned": {
 		"message": "የተሰካ",
 		"description": "ሁልጊዜ በዝርዝሩ መጀመሪያ ላይ የሚገኙ የተጠቃሚው Tabዎች"
@@ -983,9 +1055,21 @@
 		"message": "ለሌሎች ድርጅቶች Tabs ጠብቅ።",
 		"description": "[መለያ] በማስመጣት ሂደት ወቅት ሁሉንም ለድርጅት-ተኮር የሆኑ Tabs አቆይ"
 	},
+	"pricebook2": {
+		"message": "Pricebook2",
+		"description": "ከ ObjectManager/Pricebook2/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
+	},
+	"product2": {
+		"message": "ምርት2",
+		"description": "ከ ObjectManager/Product2/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
+	},
 	"remove_tab": {
 		"message": "Tab አስወግድ",
 		"description": "[alt] ስዕሎች በማይሰሩበት ጊዜ አማራጭ ጽሑፍ"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "የሪፖርቶች እና የዳሽቦርዶች ቅንብሮች",
+		"description": "ከ ReportUI/home ጋር የተያያዘ ገጽ"
 	},
 	"req_downloads_open_popup": {
 		"message": "እባክዎ የቅጥያ ብቅ-ባይን ከእርስዎ አሳሽ የቅጥያዎች ምናሌ ይክፈቱ።",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "ጠቃሚ ምክር ይላኩልን ❤️",
 		"description": "[popup] ምክር ለመላክ የሚጠይቅ የ svg ርዕስ"
+	},
+	"sessions": {
+		"message": "ክፍለ-ጊዜዎች",
+		"description": "ከ SecuritySession/home ጋር የተያያዘ ገጽ"
 	},
 	"set_gen_preview": {
 		"message": "Tab ቅድመ እይታ",
@@ -1327,9 +1415,17 @@
 		"message": "ቅንብሮች",
 		"description": "ለቅንብሮች ማውጫ መለያ"
 	},
+	"setup_audit_trail": {
+		"message": "የኦዲት መከታተያ ያዋቅሩ",
+		"description": "ከ SecurityEvents/home ጋር የተያያዘ ገጽ"
+	},
 	"setup_page": {
 		"message": "የማዋቀሪያ ገጽ",
 		"description": "[SalesforceSetupአይደለም] የ Salesforce ቅንብሮችን ለመቀየር የሚያገለግል ገጽ"
+	},
+	"sharing_settings": {
+		"message": "የማጋራት ቅንብሮች",
+		"description": "ከ SecuritySharing/home ጋር የተያያዘ ገጽ"
 	},
 	"show_all_tabs": {
 		"message": "ሁሉንም $tabs አሳይ",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs ተቀምጠዋል።",
 		"description": "[ቶስት] Tabs በተሳካ ሁኔታ ተከማችተዋል።"
 	},
+	"task": {
+		"message": "ተግባር",
+		"description": "ከ ObjectManager/Task/FieldsAndRelationships/view ጋር የተያያዘ ገጽ"
+	},
 	"theme_dark": {
 		"message": "ገጽታን ወደ ጨለማ ቀይር",
 		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በጨረቃ ላይ ያለ ርዕስ"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "ገጽታን ወደ ብርሃን ቀይር",
 		"description": "[ብቅ_ባይ] ገጽታን ለመቀየር በፀሐይ ላይ ያለ ርዕስ"
+	},
+	"tutorial": {
+		"message": "መማሪያ",
+		"description": "[ፖፕአፕ] መማሪያውን ለመጀመር የሚረዳ ቁልፍ"
+	},
+	"tutorial_add_favourite": {
+		"message": "ይህንን ገጽ ወደ ተወዳጆች ለመጨመር ኮከቡን ጠቅ ያድርጉ።",
+		"description": "[መማሪያ] ተወዳጅ ያክሉ"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "ወደ ተጓዳኝ ገጽ ለመሄድ የደመቀውን $tab ጠቅ ያድርጉ።",
+		"description": "[መማሪያ] የደመቀውን Tab ጠቅ ያድርጉ"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "ይህ ለ $extension_label ነው እና ያልተጠናቀቀውን $tutorial ካቆሙበት ይቀጥላል።",
+		"description": "[መማሪያ] መማሪያውን ለመቀጠል የሚረዳ የጽሑፍ አካል"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "$tutorial ከመጨረሻው ደረጃ ይቀጥል?",
+		"description": "[መማሪያ] መማሪያውን ለመቀጠል የሚረዳ የሞዳል ርዕስ"
+	},
+	"tutorial_drag_flows": {
+		"message": "የደመቀውን ረድፍ (ባለ 6 ነጥቦችን በመጠቀም) ይጎትቱ እና ከመጀመሪያው ረድፍ (ከተሰካው) በፊት ያስቀምጡት።",
+		"description": "[መማሪያ] ፍሰቶችን ይጎትቱ"
+	},
+	"tutorial_end": {
+		"message": "$tutorial ተጠናቋል! ቅጥያውን በመጠቀም ይደሰቱ።",
+		"description": "[መማሪያ] መጨረሻ"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial ለመጀመር የሚያገለግሉ አገናኞችን ማግኘት አልቻልንም \nእባክዎ $tabs ዎን ኤክስፖርት ያድርጉ እና $tutorial ን እንደገና ያስጀምሩ",
+		"description": "[መማሪያ] መጀመር አልተቻለም የሚል የስህተት መልእክት"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "እነዚህ የእርስዎ ተወዳጅ $tabs ናቸው እና በተደጋጋሚ ጥቅም ላይ የሚውሉ ገጾችን በፍጥነት ለመድረስ ያገለግላሉ።",
+		"description": "[መማሪያ] ተወዳጅ Tabዎችን ያድምቁ"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "የቅጥያውን ባህሪ ለመለወጥ እና $tabs ዎን ለማስጌጥ የሚያስችልዎትን የ $settings ገጽ ለመክፈት የቁልፍ ሰሌዳ አቋራጩን ይጫኑ",
+		"description": "[መማሪያ] የቁልፍ ሰሌዳ አቋራጭ"
+	},
+	"tutorial_manage_tabs": {
+		"message": "በገጹ ላይ በቀኝ ጠቅ ያድርጉ (በ Tab ላይ ሳይሆን) እና የአስተዳደር ሞዳሉን ለመክፈት $extension_label > $cxm_manage_tabs ይምረጡ።",
+		"description": "[መማሪያ] Tabዎችን ያስተዳድሩ"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "$tabs ዎን ከዚህ ማያ ገጽ ላይ ማስተዳደር ይችላሉ። ተጨማሪ መረጃ ለማግኘት እዚህ ጠቅ ያድርጉ።",
+		"description": "[መማሪያ] የTabዎች ማስተዳደሪያ አገናኝ"
+	},
+	"tutorial_pin_tab": {
+		"message": "በደመቀው $tab ላይ በቀኝ ጠቅ ያድርጉ እና ለመሰካት $extension_label > $cxm_move > $cxm_pin_tab ይምረጡ።",
+		"description": "[መማሪያ] Tabን ይሰኩ"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "የተጎተተው ረድፍ ከተሰካው ረድፍ በፊት ሊንቀሳቀስ አልቻለም (ምክንያቱም በአሁኑ ጊዜ ስላልተሰካ)፣ ስለዚህ ባልተሰኩት ዝርዝር መጀመሪያ ላይ ተቀምጧል። እነዚህ ሁለት ዝርዝሮች በተናጥል ይታያሉ።",
+		"description": "[መማሪያ] የተሰካ ማብራሪያ"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab አሁን መሰካቱን እና ባለበት እንደሚቆይ ልብ ይበሉ።",
+		"description": "[መማሪያ] የተሰካ Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "ተጨማሪ ለማሳየት አሁን ወደ ሌላ ገጽ እናዞርዎታለን። ለመቀጠል እዚህ ጠቅ ያድርጉ።",
+		"description": "[መማሪያ] ወደ አካውንት ያዞራል"
+	},
+	"tutorial_remove_favourite": {
+		"message": "ይህንን ገጽ ከተወዳጆች ለማስወገድ የተሰረዘውን ኮከብ ጠቅ ያድርጉ። ጠቃሚ ምክር፡ ይህ $tab እንዳይጠፋ ይህ ደረጃ ከተጠናቀቀ በኋላ ኮከቡን ጠቅ ማድረግ ይችላሉ",
+		"description": "[መማሪያ] ተወዳጅን ያስወግዱ"
+	},
+	"tutorial_restart": {
+		"message": "በፖፕአፕ ውስጥ ያለውን ቁልፍ ጠቅ በማድረግ $tutorial ን በማንኛውም ጊዜ እንደገና ማስጀመር ይችላሉ።",
+		"description": "[መማሪያ] የመጀመሪያ መልእክት"
+	},
+	"tutorial_restart_prompt": {
+		"message": "$tutorial ን ከመጀመሪያው መጀመር ይፈልጋሉ?",
+		"description": "[መማሪያ] መማሪያውን እንደገና ለማስጀመር የሚረዳ ጥያቄ"
+	},
+	"tutorial_save_modal": {
+		"message": "ለውጦችን ለመተግበር እና የማረጋገጫ መልእክቱን ለማየት $save ን ጠቅ ያድርጉ።",
+		"description": "[መማሪያ] ሞዳልን ያስቀምጡ"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "ይህ ለ $extension_label ነው እና በመጀመሪያ ወደ Setup Home ገጽ ይወስድዎታል፣ ከዚያ የሚመራውን $tutorial ይጀምራል",
+		"description": "[መማሪያ] መማሪያውን ለመጀመር የሚረዳ የጽሑፍ አካል"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "$tutorial ን ከ Setup Home ይጀምሩ?",
+		"description": "[መማሪያ] መማሪያውን ለመጀመር የሚረዳ የሞዳል ርዕስ"
 	},
 	"underline": {
 		"message": "በመስመር ታቦት",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "ወዴት?",
 		"description": "[ሌላ_ድርጅት_ክፈት_ሞዳል] ለሞዳሉ አማራጭ ርዕስ"
+	},
+	"wiki_label": {
+		"message": "ስለ $extension_label የበለጠ ይረዱ",
+		"description": "[ፖፕአፕ][ቅንብሮች] ለዊኪ የእርዳታ ቁልፍ የሚሆን ተደራሽ ርዕስ እና aria-label"
 	},
 	"write_review": {
 		"message": "ግምገማ ይጻፉ!",

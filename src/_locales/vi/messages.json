@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Tài khoản",
+		"description": "Trang liên quan đến ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Xóa",
 		"description": "[quản-lý-Tab] xóa một hàng"
@@ -39,6 +43,10 @@
 		"message": "Tăng dần (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Tài sản",
+		"description": "Trang liên quan đến ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Có sẵn",
 		"description": "Tiêu đề phần cho các mục có thể thêm"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Đậm",
 		"description": "Tùy chọn kiểu phông chữ cho văn bản đậm"
+	},
+	"campaign": {
+		"message": "Chiến dịch",
+		"description": "Trang liên quan đến ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Hủy",
@@ -55,9 +67,21 @@
 		"message": "Hủy và đóng",
 		"description": "tiêu đề hoặc textContent cho nút đóng của cửa sổ bật lên"
 	},
+	"case": {
+		"message": "Trường hợp",
+		"description": "Tên trang liên quan đến ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Đã chọn",
 		"description": "Tiêu đề phần cho các mục đã được chọn"
+	},
+	"classic_email_templates": {
+		"message": "Mẫu email cổ điển",
+		"description": "Trang liên quan đến CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Đóng",
+		"description": "đóng mà không có bất kỳ hành động nào"
 	},
 	"cmd_export_all": {
 		"message": "Hiển thị modal để xuất tất cả Tabs đã lưu",
@@ -87,6 +111,14 @@
 		"message": "Hiển thị modal để cập nhật trang hiện tại (nếu đã lưu)",
 		"description": "[mô tả lệnh] người dùng muốn cập nhật trang hiện tại"
 	},
+	"company_information": {
+		"message": "Thông tin công ty",
+		"description": "Trang liên quan đến CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Xác nhận",
+		"description": "văn bản yêu cầu người dùng tiếp tục"
+	},
 	"confirm_another_org": {
 		"message": "Xác nhận mở liên kết này.",
 		"description": "[open-other-org-modal] Yêu cầu xác nhận từ người dùng để mở liên kết đã được tạo."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Một phiên bản mới của $extension_label hiện đã có sẵn!",
 		"description": "một tin nhắn không xác định đã được nhận từ một người nghe"
+	},
+	"contact": {
+		"message": "Liên hệ",
+		"description": "Trang liên quan đến ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Tiếp tục",
@@ -554,6 +590,10 @@
 		"message": "trình dịch chưa được khởi tạo.",
 		"description": "[lỗi] TranslationService chưa sẵn sàng"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "không thể khởi tạo hướng dẫn.",
+		"description": "[error] Hướng dẫn chưa được khởi tạo"
+	},
 	"error_unknown_file_structure": {
 		"message": "Chúng tôi không thể hiểu tệp bạn muốn Nhập\nNếu sự cố vẫn tiếp diễn, vui lòng chia sẻ với chúng tôi bằng cách mở một vấn đề trên GitHub",
 		"description": "[nhập] tệp của người dùng không được nhận dạng"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "Yêu cầu không xác định.",
 		"description": "[lỗi] Lỗi chung sau khi nhận được thông báo không được nhận dạng"
+	},
+	"error_unknown_toast_type": {
+		"message": "Loại thông báo yêu cầu không thể được diễn giải. Vui lòng thay đổi mã của bạn.",
+		"description": "[error] Lỗi chung được sử dụng khi thiết lập loại thông báo (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Lỗi khi bỏ ghim Tab",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] Tên của tiện ích mở rộng này"
+	},
+	"field_accessibility": {
+		"message": "Khả năng truy cập trường",
+		"description": "Trang liên quan đến FieldAccessibility/home"
 	},
 	"file": {
 		"message": "tệp",
@@ -782,13 +830,29 @@
 		"message": "Nhãn",
 		"description": "[key] tên của Tab"
 	},
+	"lead": {
+		"message": "Khách hàng tiềm năng",
+		"description": "Trang liên quan đến ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "tìm hiểu thêm về $extension_label",
+		"description": "[popup][settings] tiêu đề có thể truy cập và aria-label cho nút trợ giúp wiki"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Công nghệ điều hướng tùy chỉnh của Salesforce"
 	},
+	"login_history": {
+		"message": "Lịch sử đăng nhập",
+		"description": "Trang liên quan đến OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Đăng nhập vào Salesforce",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang đăng nhập Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Quản lý ứng dụng đã kết nối",
+		"description": "Trang liên quan đến ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Quản lý $tabs",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Mở Cài đặt",
 		"description": "[notSalesforceSetup] Lời kêu gọi chuyển hướng đến trang Cài đặt Salesforce"
+	},
+	"opportunity": {
+		"message": "Cơ hội",
+		"description": "Trang liên quan đến ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Thêm Tab mới là Tab Tổ chức.",
@@ -974,6 +1042,10 @@
 		"message": "Quyền đã được cho phép!",
 		"description": "[thành công] người dùng đã yêu cầu chúng tôi yêu cầu họ cấp quyền và họ đã chấp nhận"
 	},
+	"permission_sets": {
+		"message": "Bộ quyền",
+		"description": "Trang liên quan đến PermSets/home"
+	},
 	"pinned": {
 		"message": "Đã Ghim",
 		"description": "Các Tab của người dùng luôn được tìm thấy ở đầu danh sách"
@@ -982,9 +1054,21 @@
 		"message": "Bảo lưu các Tabs cho Org khác.",
 		"description": "[label] Giữ lại các Tabs dành riêng cho Org trong quá trình nhập khẩu"
 	},
+	"pricebook2": {
+		"message": "Bảng giá 2",
+		"description": "Trang liên quan đến ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Sản phẩm 2",
+		"description": "Trang liên quan đến ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Xóa Tab",
 		"description": "[alt] Văn bản thay thế khi hình ảnh không hiển thị."
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Cài đặt báo cáo và bảng điều khiển",
+		"description": "Trang liên quan đến ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Vui lòng mở cửa sổ bật lên của tiện ích mở rộng từ menu tiện ích mở rộng của trình duyệt.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "Gửi cho chúng tôi một mẹo ❤️",
 		"description": "[popup] tiêu đề cho svg để nhắc nhở gửi một mẹo"
+	},
+	"sessions": {
+		"message": "Phiên làm việc",
+		"description": "Trang liên quan đến SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Xem trước Tab",
@@ -1326,9 +1414,17 @@
 		"message": "Cài đặt",
 		"description": "Nhãn cho menu cài đặt"
 	},
+	"setup_audit_trail": {
+		"message": "Theo dõi kiểm tra thiết lập",
+		"description": "Trang liên quan đến SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Trang Cài đặt",
 		"description": "[notSalesforceSetup] Trang dùng để thay đổi cài đặt của Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Cài đặt chia sẻ",
+		"description": "Trang liên quan đến SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Hiển thị tất cả $tabs",
@@ -1438,6 +1534,10 @@
 		"message": "Đã lưu các Tabs.",
 		"description": "[toast] Các Tabs đã được lưu thành công."
 	},
+	"task": {
+		"message": "Nhiệm vụ",
+		"description": "Trang liên quan đến ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Chuyển sang Giao diện Tối",
 		"description": "[popup] Tiêu đề trên mặt trăng để chuyển giao diện"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "Chuyển sang Giao diện Sáng",
 		"description": "[popup] Tiêu đề trên mặt trời để chuyển giao diện"
+	},
+	"tutorial": {
+		"message": "Hướng dẫn",
+		"description": "[popup] nút để bắt đầu hướng dẫn"
+	},
+	"tutorial_add_favourite": {
+		"message": "Nhấp vào ngôi sao để thêm trang này vào mục yêu thích.",
+		"description": "[tutorial] thêm vào yêu thích"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Nhấp vào thẻ $tab được làm nổi bật để điều hướng đến trang tương ứng.",
+		"description": "[tutorial] nhấp vào thẻ được làm nổi bật"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Đây là dành cho $extension_label và sẽ tiếp tục hướng dẫn $tutorial chưa hoàn thành của bạn từ nơi bạn đã dừng lại.",
+		"description": "[tutorial] văn bản để tiếp tục hướng dẫn"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Tiếp tục hướng dẫn $tutorial từ bước cuối cùng?",
+		"description": "[tutorial] tiêu đề cửa sổ để tiếp tục hướng dẫn"
+	},
+	"tutorial_drag_flows": {
+		"message": "Kéo hàng được làm nổi bật (sử dụng 6 dấu chấm) và thả nó vào trước hàng đầu tiên (được ghim).",
+		"description": "[tutorial] kéo quy trình"
+	},
+	"tutorial_end": {
+		"message": "Hướng dẫn $tutorial đã hoàn thành! Chúc bạn sử dụng tiện ích vui vẻ.",
+		"description": "[tutorial] kết thúc"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Chúng tôi không tìm thấy bất kỳ liên kết hữu ích nào để bắt đầu hướng dẫn $tutorial\nVui lòng xuất các thẻ $tabs của bạn và khởi động lại hướng dẫn $tutorial",
+		"description": "[tutorial] thông báo lỗi khi không thể bắt đầu"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Đây là các thẻ $tabs yêu thích của bạn và được sử dụng để truy cập nhanh vào các trang thường xuyên sử dụng.",
+		"description": "[tutorial] làm nổi bật thẻ yêu thích"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Nhấn phím tắt để mở trang $settings nơi bạn có thể thay đổi hành vi của tiện ích và tạo kiểu cho các thẻ $tabs của mình",
+		"description": "[tutorial] phím tắt"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Nhấp chuột phải vào trang (không phải trên thẻ) và chọn $extension_label > $cxm_manage_tabs để mở cửa sổ quản lý.",
+		"description": "[tutorial] quản lý thẻ"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Bạn có thể quản lý các thẻ $tabs của mình từ màn hình này. Nhấp vào đây để biết thêm thông tin.",
+		"description": "[tutorial] liên kết quản lý thẻ"
+	},
+	"tutorial_pin_tab": {
+		"message": "Nhấp chuột phải vào thẻ $tab được làm nổi bật và chọn $extension_label > $cxm_move > $cxm_pin_tab để ghim nó.",
+		"description": "[tutorial] ghim thẻ"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Hàng được kéo không thể di chuyển lên trước hàng được ghim (vì hiện tại nó không được ghim), vì vậy nó đã chuyển đến đầu danh sách không được ghim. Hai danh sách này được xử lý riêng biệt.",
+		"description": "[tutorial] giải thích về ghim"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Lưu ý rằng thẻ $tab hiện đã được ghim và sẽ giữ nguyên vị trí.",
+		"description": "[tutorial] thẻ đã ghim"
+	},
+	"tutorial_redirect_account": {
+		"message": "Bây giờ chúng tôi sẽ chuyển hướng bạn đến một trang khác để hiển thị thêm cho bạn. Nhấp vào đây để tiếp tục.",
+		"description": "[tutorial] chuyển hướng đến tài khoản"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Nhấp vào ngôi sao bị gạch chéo để xóa trang này khỏi mục yêu thích. MẸO: bạn có thể nhấp vào ngôi sao sau khi bước này hoàn thành để tránh làm mất thẻ $tab này",
+		"description": "[tutorial] xóa khỏi yêu thích"
+	},
+	"tutorial_restart": {
+		"message": "Bạn có thể khởi động lại hướng dẫn $tutorial bất kỳ lúc nào bằng cách nhấp vào nút trong cửa sổ bật lên.",
+		"description": "[tutorial] tin nhắn đầu tiên"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Bạn có muốn bắt đầu hướng dẫn $tutorial từ đầu không?",
+		"description": "[tutorial] yêu cầu khởi động lại hướng dẫn"
+	},
+	"tutorial_save_modal": {
+		"message": "Nhấp vào $save để áp dụng các thay đổi và xem thông báo xác nhận.",
+		"description": "[tutorial] lưu cửa sổ"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Đây là dành cho $extension_label và sẽ đưa bạn đến trang Chủ Thiết lập trước, sau đó bắt đầu hướng dẫn $tutorial theo trình tự",
+		"description": "[tutorial] văn bản để bắt đầu hướng dẫn"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Bắt đầu hướng dẫn $tutorial từ trang Chủ Thiết lập?",
+		"description": "[tutorial] tiêu đề cửa sổ để bắt đầu hướng dẫn"
 	},
 	"underline": {
 		"message": "Gạch chân",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "Đi đâu?",
 		"description": "[open-other-org-modal] Tiêu đề dự phòng cho modal"
+	},
+	"wiki_label": {
+		"message": "tìm hiểu thêm về $extension_label",
+		"description": "[popup][settings] tiêu đề có thể truy cập và aria-label cho nút trợ giúp wiki"
 	},
 	"write_review": {
 		"message": "Viết đánh giá!",

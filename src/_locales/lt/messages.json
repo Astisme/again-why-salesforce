@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Paskyra",
+		"description": "Puslapis, susijęs su ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Ištrinti",
 		"description": "[tvarkyti-Tab] ištrinti eilutę"
@@ -39,6 +43,10 @@
 		"message": "Didėjanti (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Turtas",
+		"description": "Puslapis, susijęs su ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Galimi",
 		"description": "Skyriaus antraštė elementams, kuriuos galima pridėti"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Paryškintas",
 		"description": "Šrifto stiliaus parinktis paryškintam tekstui"
+	},
+	"campaign": {
+		"message": "Kampanija",
+		"description": "Puslapis, susijęs su ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Atšaukti",
@@ -55,9 +67,21 @@
 		"message": "Atšaukti ir uždaryti",
 		"description": "modalinių langų uždarymo mygtuko pavadinimas arba textContent"
 	},
+	"case": {
+		"message": "Atvejis",
+		"description": "Puslapio pavadinimas, susijęs su ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Pasirinkti",
 		"description": "Skyriaus antraštė elementams, kurie buvo pasirinkti"
+	},
+	"classic_email_templates": {
+		"message": "Klasikiniai el. pašto šablonai",
+		"description": "Puslapis, susijęs su CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Uždaryti",
+		"description": "uždaryti niekam neįvykus"
 	},
 	"cmd_export_all": {
 		"message": "Rodyti modalą visų išsaugotų Tabs eksportavimui",
@@ -87,6 +111,14 @@
 		"message": "Rodyti modalą dabartinio puslapio atnaujinimui (jei išsaugotas)",
 		"description": "[komandos aprašymas] vartotojas nori atnaujinti dabartinį puslapį"
 	},
+	"company_information": {
+		"message": "Įmonės informacija",
+		"description": "Puslapis, susijęs su CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Patvirtinti",
+		"description": "tekstas, raginantis vartotoją tęsti"
+	},
 	"confirm_another_org": {
 		"message": "Patvirtinkite šios nuorodos atidarymą.",
 		"description": "[atidaryti_kitą_org_modal] prašyti vartotojo patvirtinimo atidaryti sukurtą nuorodą."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Nauja $extension_label versija jau pasiekiama!",
 		"description": "iš klausytojo gautas nežinomas pranešimas"
+	},
+	"contact": {
+		"message": "Kontaktas",
+		"description": "Puslapis, susijęs su ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Tęsti",
@@ -555,6 +591,10 @@
 		"message": "vertėjas dar nebuvo inicializuotas.",
 		"description": "[klaida] TranslationService nebuvo paruoštas"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "nepavyko inicijuoti mokomosios medžiagos.",
+		"description": "[error] Mokomoji medžiaga nebuvo inicijuota"
+	},
 	"error_unknown_file_structure": {
 		"message": "Mums nepavyko suprasti failo, kurį norėjote importuoti\nJei problema išlieka, pasidalykite ja su mumis atidarydami „GitHub“ problemą",
 		"description": "[importuoti] vartotojo failas neatpažintas"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Nežinoma užklausa.",
 		"description": "[klaida] Bendra klaida gavus neatpažintą žinutę"
+	},
+	"error_unknown_toast_type": {
+		"message": "Nepavyko interpretuoti prašomo pranešimo tipo. Pakeiskite savo kodą.",
+		"description": "[error] Bendra klaida, naudojama nustatant pranešimo tipą"
 	},
 	"error_unpin_tab": {
 		"message": "Klaida atsegant Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Šio plėtinio pavadinimas"
+	},
+	"field_accessibility": {
+		"message": "Laukų prieinamumas",
+		"description": "Puslapis, susijęs su FieldAccessibility/home"
 	},
 	"file": {
 		"message": "failas",
@@ -783,13 +831,29 @@
 		"message": "Etiketė",
 		"description": "[key] Tab pavadinimas"
 	},
+	"lead": {
+		"message": "Potencialus klientas",
+		"description": "Puslapis, susijęs su ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "sužinokite daugiau apie $extension_label",
+		"description": "[popup][settings] prieinamas pavadinimas ir aria-label wiki pagalbos mygtukui"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "„Salesforce“ pasirinktinė navigacijos technologija"
 	},
+	"login_history": {
+		"message": "Prisijungimo istorija",
+		"description": "Puslapis, susijęs su OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Prisijungti prie Salesforce",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce prisijungimo puslapį"
+	},
+	"manage_connected_apps": {
+		"message": "Tvarkyti prijungtas programėles",
+		"description": "Puslapis, susijęs su ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Tvarkyti $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Atidaryti Sąranką",
 		"description": "[neSalesforceSąranka] raginimas veikti mygtuke, nukreipiantis vartotoją į Salesforce sąrankos puslapį"
+	},
+	"opportunity": {
+		"message": "Galimybė",
+		"description": "Puslapis, susijęs su ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Pridėti naujus Tab'us kaip Org Tab'us.",
@@ -975,6 +1043,10 @@
 		"message": "Leidimas suteiktas!",
 		"description": "[sėkmė] naudotojas paprašė mūsų paprašyti leidimo ir jį priėmė"
 	},
+	"permission_sets": {
+		"message": "Leidimų rinkiniai",
+		"description": "Puslapis, susijęs su PermSets/home"
+	},
 	"pinned": {
 		"message": "Prisegta",
 		"description": "Vartotojo Tab, kurios visada randamos sąrašo pradžioje"
@@ -983,9 +1055,21 @@
 		"message": "Išsaugoti Tabs kitoms Org.",
 		"description": "[etiketė] išlaikyti visus Org specifinius Tabs importavimo proceso metu"
 	},
+	"pricebook2": {
+		"message": "Kainynas 2",
+		"description": "Puslapis, susijęs su ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produktas 2",
+		"description": "Puslapis, susijęs su ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Pašalinti Tab",
 		"description": "[alt] alternatyvus tekstas, kai paveikslėliai neveikia"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Ataskaitų ir suvestinių nustatymai",
+		"description": "Puslapis, susijęs su ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Prašome atidaryti plėtinio iššokantįjį langą iš savo naršyklės plėtinių meniu.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Atsiųskite mums patarimą ❤️",
 		"description": "[popup] svg antraštė, skirta paraginti siųsti patarimą"
+	},
+	"sessions": {
+		"message": "Seansai",
+		"description": "Puslapis, susijęs su SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab peržiūra",
@@ -1327,9 +1415,17 @@
 		"message": "Nustatymai",
 		"description": "Etiketė nustatymų meniu"
 	},
+	"setup_audit_trail": {
+		"message": "Sąrankos audito seka",
+		"description": "Puslapis, susijęs su SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Sąrankos puslapis",
 		"description": "[neSalesforceSąranka] puslapis, naudojamas Salesforce nustatymams keisti"
+	},
+	"sharing_settings": {
+		"message": "Bendrinimo nustatymai",
+		"description": "Puslapis, susijęs su SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Rodyti visas $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs išsaugoti.",
 		"description": "[pranešimas] Tabs sėkmingai išsaugoti."
 	},
+	"task": {
+		"message": "Užduotis",
+		"description": "Puslapis, susijęs su ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Keisti temą į tamsią",
 		"description": "[iškylantysis_langas] pavadinimas ant mėnulio, kad perjungtumėte temą"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Keisti temą į šviesią",
 		"description": "[iškylantysis_langas] pavadinimas ant saulės, kad perjungtumėte temą"
+	},
+	"tutorial": {
+		"message": "Mokomoji medžiaga",
+		"description": "[popup] mygtukas mokomajai medžiagai pradėti"
+	},
+	"tutorial_add_favourite": {
+		"message": "Spustelėkite žvaždutę, kad pridėtumėte šį puslapį prie mėgstamiausių.",
+		"description": "[tutorial] pridėti mėgstamiausią"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Spustelėkite paryškintą $tab , kad pereitumėte į atitinkamą puslapį.",
+		"description": "[tutorial] spustelėkite paryškintą kortelę"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Tai skirta $extension_label ir bus tęsiama nebaigta $tutorial nuo ten, kur baigėte.",
+		"description": "[tutorial] pagrindinis tekstas mokomajai medžiagai tęsti"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Tęsti $tutorial nuo paskutinio žingsnio?",
+		"description": "[tutorial] modalinis pavadinimas mokomajai medžiagai tęsti"
+	},
+	"tutorial_drag_flows": {
+		"message": "Vilkite paryškintą eilutę (naudodami 6 taškus) ir numeskite ją prieš pirmąją eilutę (kuri yra prisegta).",
+		"description": "[tutorial] vilkti srautus"
+	},
+	"tutorial_end": {
+		"message": "$tutorial baigta! Mėgaukitės plėtiniu.",
+		"description": "[tutorial] pabaiga"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Nepavyko rasti tinkamų nuorodų $tutorial pradėti\nEksportuokite savo $tabs ir iš naujo paleiskite $tutorial",
+		"description": "[tutorial] klaidos pranešimas apie negalėjimą pradėti"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Tai jūsų mėgstamiausios $tabs , jos naudojamos greitai pasiekti dažnai naudojamus puslapius.",
+		"description": "[tutorial] paryškinti mėgstamiausią kortelę"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Paspauskite klaviatūros klavišų derinį, kad atidarytumėte $settings puslapį, kuriame galite pakeisti plėtinio veikimą ir stilizuoti savo $tabs",
+		"description": "[tutorial] klaviatūros klavišų derinys"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Dešiniuoju pelės mygtuku spustelėkite puslapį (ne kortelę) ir pasirinkite $extension_label > $cxm_manage_tabs , kad atidarytumėte valdymo langą.",
+		"description": "[tutorial] tvarkyti kortelę"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Šiame ekrane galite tvarkyti savo $tabs . Spustelėkite čia norėdami gauti daugiau informacijos.",
+		"description": "[tutorial] kortelių valdymo nuoroda"
+	},
+	"tutorial_pin_tab": {
+		"message": "Dešiniuoju pelės mygtuku spustelėkite paryškintą $tab ir pasirinkite $extension_label > $cxm_move > $cxm_pin_tab , kad ją prisegtumėte.",
+		"description": "[tutorial] prisegti kortelę"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Vilkta eilutė negalėjo būti perkelta prieš prisegtą eilutę (nes ji šiuo metu nėra prisegta), todėl ji atsidūrė neprisegtųjų sąrašo pradžioje. Šie du sąrašai traktuojami atskirai.",
+		"description": "[tutorial] prisegimo paaiškinimas"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Atkreipkite dėmesį, kad $tab dabar prisegta ir liks savo vietoje.",
+		"description": "[tutorial] prisegta kortelė"
+	},
+	"tutorial_redirect_account": {
+		"message": "Dabar nukreipsime jus į kitą puslapį, kad parodytume daugiau. Spustelėkite čia, kad tęstumėte.",
+		"description": "[tutorial] nukreipti į paskyrą"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Spustelėkite perbrauktą žvaždutę, kad pašalintumėte šį puslapį iš mėgstamiausių. PATARIMAS: galite spustelėti žvaždutę, kai šis žingsnis bus baigtas, kad neprarastumėte šios $tab",
+		"description": "[tutorial] pašalinti mėgstamiausią"
+	},
+	"tutorial_restart": {
+		"message": "$tutorial galite paleisti iš naujo bet kuriuo metu spustelėję iššokančio lango mygtuką.",
+		"description": "[tutorial] pirmoji žinutė"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Ar norite pradėti $tutorial nuo pradžių?",
+		"description": "[tutorial] raginimas iš naujo paleisti mokomąją medžiagą"
+	},
+	"tutorial_save_modal": {
+		"message": "Spustelėkite $save , kad pritaikytumėte pakeitimus ir pamatytumėte patvirtinimo pranešimą.",
+		"description": "[tutorial] išsaugoti modalinį langą"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Tai skirta $extension_label . Pirmiausia pateksite į sąrankos pagrindinį puslapį, o tada prasidės $tutorial",
+		"description": "[tutorial] pagrindinis tekstas mokomajai medžiagai pradėti"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Pradėti $tutorial iš sąrankos pagrindinio puslapio?",
+		"description": "[tutorial] modalinis pavadinimas mokomajai medžiagai pradėti"
 	},
 	"underline": {
 		"message": "Pabraukimas",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Kur?",
 		"description": "[atidaryti_kitą_org_modal] atsarginis pavadinimas modaliniam langui"
+	},
+	"wiki_label": {
+		"message": "sužinokite daugiau apie $extension_label",
+		"description": "[popup][settings] prieinamas pavadinimas ir aria-label wiki pagalbos mygtukui"
 	},
 	"write_review": {
 		"message": "Parašykite apžvalgą!",

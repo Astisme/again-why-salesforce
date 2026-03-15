@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "ಖಾತೆ",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"act_delete": {
 		"message": "🗑️ ಅಳಿಸಿ",
 		"description": "[Tab-ನಿರ್ವಹಿಸಿ] ಒಂದು ಸಾಲನ್ನು ಅಳಿಸಿ"
@@ -39,6 +43,10 @@
 		"message": "ಆರೋಹಣ (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "ಆಸ್ತಿ",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"available": {
 		"message": "ಲಭ್ಯವಿದೆ",
 		"description": "ಸೇರಿಸಬಹುದಾದ ಐಟಂಗಳಿಗಾಗಿ ವಿಭಾಗ ಶೀರ್ಷಿಕೆ"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "ದಪ್ಪ",
 		"description": "ದಪ್ಪ ಪಂಕ್ತಿಗಾಗಿ ಫಾಂಟ್ ಶೈಲಿ ಆಯ್ಕೆ"
+	},
+	"campaign": {
+		"message": "ಪ್ರಚಾರ",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"cancel": {
 		"message": "ರದ್ದುಮಾಡಿ",
@@ -55,9 +67,21 @@
 		"message": "ರದ್ದುಮಾಡಿ ಮತ್ತು ಮುಚ್ಚಿ",
 		"description": "ಮೊಡಲ್‌ಗಳ ಮುಚ್ಚುವ ಬಟನ್‌ಗೆ ಶೀರ್ಷಿಕೆ ಅಥವಾ ಪಠ್ಯ ವಿಷಯ"
 	},
+	"case": {
+		"message": "ಪ್ರಕರಣ",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟದ ಹೆಸರು"
+	},
 	"chosen": {
 		"message": "ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",
 		"description": "ಆಯ್ಕೆಮಾಡಿದ ಐಟಂಗಳಿಗಾಗಿ ವಿಭಾಗ ಶೀರ್ಷಿಕೆ"
+	},
+	"classic_email_templates": {
+		"message": "ಕ್ಲಾಸಿಕ್ ಇಮೇಲ್ ಟೆಂಪ್ಲೇಟ್‌ಗಳು",
+		"description": "CommunicationTemplatesEmail/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
+	"close": {
+		"message": "ಮುಚ್ಚಿ",
+		"description": "ಏನೂ ಆಗದೆಯೇ ಮುಚ್ಚಿ"
 	},
 	"cmd_export_all": {
 		"message": "ಉಳಿಸಿದ ಎಲ್ಲಾ Tab ಗಳನ್ನು ರಫ್ತು ಮಾಡಲು ಮೋಡಲ್ ತೋರಿಸಿ",
@@ -87,6 +111,14 @@
 		"message": "ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ನವೀಕರಿಸಲು ಮೋಡಲ್ ತೋರಿಸಿ (ಉಳಿಸಿದ್ದರೆ)",
 		"description": "[ಕಮಾಂಡ್ ವಿವರಣೆ] ಬಳಕೆದಾರರು ಪ್ರಸ್ತುತ ಪುಟವನ್ನು ನವೀಕರಿಸಲು ಬಯಸುತ್ತಾರೆ"
 	},
+	"company_information": {
+		"message": "ಕಂಪನಿ ಮಾಹಿತಿ",
+		"description": "CompanyProfileInfo/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
+	"confirm": {
+		"message": "ದೃಢೀಕರಿಸಿ",
+		"description": "ಮುಂದುವರಿಯಲು ಬಳಕೆದಾರರನ್ನು ಪ್ರಾಂಪ್ಟ್ ಮಾಡಲು ಪಠ್ಯ"
+	},
 	"confirm_another_org": {
 		"message": "ಈ ಲಿಂಕ್ ತೆರೆಯುವುದನ್ನು ಖಚಿತಪಡಿಸಿ.",
 		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್] ನಿರ್ಮಿತ ಲಿಂಕ್ ತೆರೆಯಲು ಬಳಕೆದಾರರ ಖಚಿತೀಕರಣ ಕೇಳುವುದು."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label ನ ಹೊಸ ಆವೃತ್ತಿ ಈಗ ಲಭ್ಯವಿದೆ!",
 		"description": "ಕೇಳುಗರಿಂದ ಅಪರಿಚಿತ ಸಂದೇಶವನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+	},
+	"contact": {
+		"message": "ಸಂಪರ್ಕ",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"continue": {
 		"message": "ಮುಂದುವರೆಯಿರಿ",
@@ -554,6 +590,10 @@
 		"message": "ಭಾಷಾಂತರಕಾರ ಇನ್ನೂ ಆರಂಭಗೊಂಡಿಲ್ಲ.",
 		"description": "[ದೋಷ] TranslationService ಸಿದ್ಧವಾಗಿಲ್ಲ"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ಟ್ಯುಟೋರಿಯಲ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.",
+		"description": "[error] ಟ್ಯುಟೋರಿಯಲ್ ಪ್ರಾರಂಭಿಸಲಾಗಿಲ್ಲ"
+	},
 	"error_unknown_file_structure": {
 		"message": "ನೀವು ಆಮದು ಮಾಡಲು ಬಯಸಿದ ಫೈಲ್ ಅನ್ನು ನಮಗೆ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ\nಸಮಸ್ಯೆಯು ಮುಂದುವರಿದರೆ, ದಯವಿಟ್ಟು GitHub ಸಮಸ್ಯೆಯನ್ನು ತೆರೆಯುವ ಮೂಲಕ ಅದನ್ನು ನಮ್ಮೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ",
 		"description": "[ಆಮದು] ಬಳಕೆದಾರರ ಫೈಲ್ ಅನ್ನು ಗುರುತಿಸಲಾಗಿಲ್ಲ"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "ಅಜ್ಞಾತ ವಿನಂತಿ.",
 		"description": "[ದೋಷ] ಗುರುತಿಸದ ಸಂದೇಶವನ್ನು ಪಡೆದ ನಂತರ ಸಾಮಾನ್ಯ ದೋಷ"
+	},
+	"error_unknown_toast_type": {
+		"message": "ವಿನಂತಿಸಿದ ಟೋಸ್ಟ್ ಪ್ರಕಾರವನ್ನು ಅರ್ಥೈಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಕೋಡ್ ಅನ್ನು ಬದಲಾಯಿಸಿ.",
+		"description": "[error] ಟೋಸ್ಟ್ ಪ್ರಕಾರವನ್ನು ಹೊಂದಿಸುವಾಗ ಬಳಸುವ ಸಾಮಾನ್ಯ ದೋಷ"
 	},
 	"error_unpin_tab": {
 		"message": "Tab ಅನ್ನು ಅನ್ಪಿನ್ ಮಾಡುವಾಗ ದೋಷ",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "ಈ ವಿಸ್ತರಣೆಯ ಹೆಸರು"
+	},
+	"field_accessibility": {
+		"message": "ಕ್ಷೇತ್ರ ಪ್ರವೇಶಿಸುವಿಕೆ",
+		"description": "FieldAccessibility/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"file": {
 		"message": "ಫೈಲ್",
@@ -782,13 +830,29 @@
 		"message": "ಲೇಬಲ್",
 		"description": "[key] Tab ನ ಹೆಸರು"
 	},
+	"lead": {
+		"message": "ಲೀಡ್",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+		"description": "[popup][settings] ವಿಕಿ ಸಹಾಯ ಬಟನ್‌ಗಾಗಿ ಪ್ರವೇಶಿಸಬಹುದಾದ ಶೀರ್ಷಿಕೆ ಮತ್ತು aria-label"
+	},
 	"lightning_navigation": {
 		"message": "ಲೈಟ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಶನ್",
 		"description": "Salesforce ನ ಕಸ್ಟಮ್ ನ್ಯಾವಿಗೇಶನ್ ತಂತ್ರಜ್ಞಾನ"
 	},
+	"login_history": {
+		"message": "ಲಾಗಿನ್ ಇತಿಹಾಸ",
+		"description": "OrgLoginHistory/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce ಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಲಾಗಿನ್ ಪುಟಕ್ಕೆ ದಾರಿ ತೋರುವ ಕರೆ"
+	},
+	"manage_connected_apps": {
+		"message": "ಸಂಪರ್ಕಿತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+		"description": "ConnectedApplication/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"manage_tabs": {
 		"message": "$tabs ನಿರ್ವಹಿಸಿ",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "ಸೆಟಪ್ ತೆರೆಯಿರಿ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟಪ್ ಪುಟಕ್ಕೆ ಕರೆ"
+	},
+	"opportunity": {
+		"message": "ಅವಕಾಶ",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Org Tabs ಆಗಿ ಹೊಸ Tabs ಅನ್ನು ಸೇರಿಸಿ.",
@@ -974,6 +1042,10 @@
 		"message": "ಅನುಮತಿಯನ್ನು ಅನುಮತಿಸಲಾಗಿದೆ!",
 		"description": "[ಯಶಸ್ಸು] ಬಳಕೆದಾರರು ನಮಗೆ ಅನುಮತಿಯನ್ನು ವಿನಂತಿಸಲು ಕೇಳಿಕೊಂಡರು ಮತ್ತು ಅವರು ಅದನ್ನು ಒಪ್ಪಿಕೊಂಡರು"
 	},
+	"permission_sets": {
+		"message": "ಅನುಮತಿ ಸೆಟ್‌ಗಳು",
+		"description": "PermSets/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "ಯಾವಾಗಲೂ ಪಟ್ಟಿಯ ಆರಂಭದಲ್ಲಿ ಕಂಡುಬರುವ ಬಳಕೆದಾರರ Tabಗಳು"
@@ -982,9 +1054,21 @@
 		"message": "ಇತರ ಸಂಸ್ಥೆಗಳ Tabs ಉಳಿಸಿ.",
 		"description": "[ಲೇಬಲ್] ಆಮದು ಪ್ರಕ್ರಿಯೆ ಸಮಯದಲ್ಲಿ ಸಂಸ್ಥಾ-ವಿಶೇಷ Tabs ಉಳಿಸಲು"
 	},
+	"pricebook2": {
+		"message": "ಬೆಲೆಪಟ್ಟಿ 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
+	"product2": {
+		"message": "ಉತ್ಪನ್ನ 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"remove_tab": {
 		"message": "Tab ತೆಗೆದುಹಾಕಿ",
 		"description": "[ಬದಲಿ] ಚಿತ್ರಗಳು ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭದಲ್ಲಿ ಬದಲಿ ಪಠ್ಯ"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "ವರದಿಗಳು ಮತ್ತು ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗಳ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+		"description": "ReportUI/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"req_downloads_open_popup": {
 		"message": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನ ವಿಸ್ತರಣೆಗಳ ಮೆನುವಿನಿಂದ ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ತೆರೆಯಿರಿ.",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "ನಮಗೆ ಒಂದು ಸಲಹೆ ಕಳುಹಿಸಿ ❤️",
 		"description": "[popup] ಸಲಹೆ ಕಳುಹಿಸಲು ಪ್ರೇರೇಪಿಸುವ svg ಗಾಗಿ ಶೀರ್ಷಿಕೆ"
+	},
+	"sessions": {
+		"message": "ಸೆಷನ್‌ಗಳು",
+		"description": "SecuritySession/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"set_gen_preview": {
 		"message": "Tab ಪೂರ್ವದೃಶ್ಯ",
@@ -1326,9 +1414,17 @@
 		"message": "ಸೆಟ್ಟಿಂಗ್ಸ್",
 		"description": "ಸೆಟ್ಟಿಂಗ್ಸ್ ಮೆನುಗೆ ಲೇಬಲ್"
 	},
+	"setup_audit_trail": {
+		"message": "ಸೆಟಪ್ ಆಡಿಟ್ ಟ್ರಯಲ್",
+		"description": "SecurityEvents/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"setup_page": {
 		"message": "ಸೆಟಪ್ ಪುಟ",
 		"description": "[Salesforce ಸೆಟ್ಟಪ್ ಅಲ್ಲ] Salesforce ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪರಿಷ್ಕರಿಸುವ ಪುಟ"
+	},
+	"sharing_settings": {
+		"message": "ಹಂಚಿಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+		"description": "SecuritySharing/home ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
 	},
 	"show_all_tabs": {
 		"message": "ಎಲ್ಲಾ $tabs ತೋರಿಸಿ",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs ಉಳಿಸಲಾಗಿದೆ.",
 		"description": "[ಟೋಸ್ಟ್] Tabs ಯಶಸ್ವಿಯಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"
 	},
+	"task": {
+		"message": "ಕಾರ್ಯ",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view ಗೆ ಸಂಬಂಧಿಸಿದ ಪುಟ"
+	},
 	"theme_dark": {
 		"message": "ಡಾರ್ಕ್ ಥೀಮ್ ಗೆ ಬದಲಾಯಿಸಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ಥೀಮ್ ಬದಲಿಸಲು ಚಂದಿರ ಚಿತ್ರ ಶೀರ್ಷಿಕೆ"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "ಲೈಟ್ ಥೀಮ್ ಗೆ ಬದಲಾಯಿಸಿ",
 		"description": "[ಪಾಪ್ಅಪ್] ಥೀಮ್ ಬದಲಿಸಲು ಸೂರ್ಯ ಚಿತ್ರ ಶೀರ್ಷಿಕೆ"
+	},
+	"tutorial": {
+		"message": "ಟ್ಯುಟೋರಿಯಲ್",
+		"description": "[popup] ಟ್ಯುಟೋರಿಯಲ್ ಪ್ರಾರಂಭಿಸಲು ಬಟನ್"
+	},
+	"tutorial_add_favourite": {
+		"message": "ಈ ಪುಟವನ್ನು ಮೆಚ್ಚಿನವುಗಳಿಗೆ ಸೇರಿಸಲು ನಕ್ಷತ್ರದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "[tutorial] ಮೆಚ್ಚಿನದನ್ನು ಸೇರಿಸಿ"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "ಸಂಬಂಧಿತ ಪುಟಕ್ಕೆ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಲು ಹೈಲೈಟ್ ಮಾಡಲಾದ $tab ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "[tutorial] ಹೈಲೈಟ್ ಮಾಡಿದ ಟ್ಯಾಬ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "ಇದು $extension_label ಗಾಗಿ ಮತ್ತು ನೀವು ಬಿಟ್ಟ ಸ್ಥಳದಿಂದ ನಿಮ್ಮ ಅಪೂರ್ಣ $tutorial ಅನ್ನು ಮುಂದುವರಿಸುತ್ತದೆ.",
+		"description": "[tutorial] ಟ್ಯುಟೋರಿಯಲ್ ಮುಂದುವರಿಸಲು ಬಾಡಿ ಟೆಕ್ಸ್ಟ್"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "ಕೊನೆಯ ಹಂತದಿಂದ $tutorial ಮುಂದುವರಿಸಬೇಕೆ?",
+		"description": "[tutorial] ಟ್ಯುಟೋರಿಯಲ್ ಮುಂದುವರಿಸಲು ಮೋಡಲ್ ಶೀರ್ಷಿಕೆ"
+	},
+	"tutorial_drag_flows": {
+		"message": "ಹೈಲೈಟ್ ಮಾಡಿದ ಸಾಲನ್ನು ಎಳೆಯಿರಿ (6 ಚುಕ್ಕೆಗಳನ್ನು ಬಳಸಿ) ಮತ್ತು ಮೊದಲ ಸಾಲಿನ ಮೊದಲು (ಪಿನ್ ಮಾಡಲಾದ) ಬಿಡಿ.",
+		"description": "[tutorial] ಫ್ಲೋಗಳನ್ನು ಎಳೆಯಿರಿ"
+	},
+	"tutorial_end": {
+		"message": "$tutorial ಪೂರ್ಣಗೊಂಡಿದೆ! ವಿಸ್ತರಣೆಯನ್ನು ಬಳಸುವುದನ್ನು ಆನಂದಿಸಿ.",
+		"description": "[tutorial] ಅಂತ್ಯ"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "$tutorial ಅನ್ನು ಪ್ರಾರಂಭಿಸಲು ನಮಗೆ ಯಾವುದೇ ಉಪಯುಕ್ತ ಲಿಂಕ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ\nದಯವಿಟ್ಟು ನಿಮ್ಮ $tabs ಅನ್ನು ರಫ್ತು ಮಾಡಿ ಮತ್ತು $tutorial ಅನ್ನು ಮರುಪ್ರಾರಂಭಿಸಿ",
+		"description": "[tutorial] ಪ್ರಾರಂಭಿಸಲು ಸಾಧ್ಯವಾಗದ ದೋಷ ಸಂದೇಶ"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "ಇವು ನಿಮ್ಮ ನೆಚ್ಚಿನ $tabs ಮತ್ತು ಪದೇ ಪದೇ ಬಳಸುವ ಪುಟಗಳಿಗೆ ತ್ವರಿತ ಪ್ರವೇಶಕ್ಕಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ.",
+		"description": "[tutorial] ನೆಚ್ಚಿನ ಟ್ಯಾಬ್ ಹೈಲೈಟ್ ಮಾಡಿ"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "$settings ಪುಟವನ್ನು ತೆರೆಯಲು ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್ ಒತ್ತಿರಿ ಅಲ್ಲಿ ನೀವು ವಿಸ್ತರಣೆಯ ನಡವಳಿಕೆಯನ್ನು ಬದಲಾಯಿಸಬಹುದು ಮತ್ತು ನಿಮ್ಮ $tabs ಅನ್ನು ಸ್ಟೈಲ್ ಮಾಡಬಹುದು",
+		"description": "[tutorial] ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್"
+	},
+	"tutorial_manage_tabs": {
+		"message": "ಪುಟದ ಮೇಲೆ ರೈಟ್ ಕ್ಲಿಕ್ ಮಾಡಿ (ಟ್ಯಾಬ್ ಮೇಲೆ ಅಲ್ಲ) ಮತ್ತು ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್ ಮೋಡಲ್ ತೆರೆಯಲು $extension_label > $cxm_manage_tabs ಆಯ್ಕೆಮಾಡಿ.",
+		"description": "[tutorial] ಟ್ಯಾಬ್ ನಿರ್ವಹಿಸಿ"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "ಈ ಪರದೆಯಿಂದ ನಿಮ್ಮ $tabs ಅನ್ನು ನೀವು ನಿರ್ವಹಿಸಬಹುದು. ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "[tutorial] ಟ್ಯಾಬ್ ನಿರ್ವಹಣೆ ಲಿಂಕ್"
+	},
+	"tutorial_pin_tab": {
+		"message": "ಹೈಲೈಟ್ ಮಾಡಲಾದ $tab ಮೇಲೆ ರೈಟ್ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ಅದನ್ನು ಪಿನ್ ಮಾಡಲು $extension_label > $cxm_move > $cxm_pin_tab ಆಯ್ಕೆಮಾಡಿ.",
+		"description": "[tutorial] ಟ್ಯಾಬ್ ಪಿನ್ ಮಾಡಿ"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ಎಳೆದ ಸಾಲನ್ನು ಪಿನ್ ಮಾಡಿದ ಸಾಲಿಗಿಂತ ಮೊದಲು ಸರಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ (ಏಕೆಂದರೆ ಅದು ಪ್ರಸ್ತುತ ಪಿನ್ ಮಾಡಲಾಗಿಲ್ಲ), ಆದ್ದರಿಂದ ಅದು ಪಿನ್ ಮಾಡದ ಪಟ್ಟಿಯ ಆರಂಭಕ್ಕೆ ಹೋಯಿತು. ಈ ಎರಡು ಪಟ್ಟಿಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ.",
+		"description": "[tutorial] ಪಿನ್ ಮಾಡಿದ ವಿವರಣೆ"
+	},
+	"tutorial_pinned_tab": {
+		"message": "$tab ಈಗ ಪಿನ್ ಆಗಿದೆ ಮತ್ತು ಸ್ಥಳದಲ್ಲಿ ಉಳಿಯುತ್ತದೆ ಎಂಬುದನ್ನು ಗಮನಿಸಿ.",
+		"description": "[tutorial] ಪಿನ್ ಮಾಡಿದ ಟ್ಯಾಬ್"
+	},
+	"tutorial_redirect_account": {
+		"message": "ನಿಮಗೆ ಹೆಚ್ಚಿನದನ್ನು ತೋರಿಸಲು ನಾವು ಈಗ ನಿಮ್ಮನ್ನು ಇನ್ನೊಂದು ಪುಟಕ್ಕೆ ಮರುನಿರ್ದೇಶಿಸುತ್ತೇವೆ. ಮುಂದುವರಿಸಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "[tutorial] ಖಾತೆಗೆ ಮರುನಿರ್ದೇಶಿಸಿ"
+	},
+	"tutorial_remove_favourite": {
+		"message": "ಈ ಪುಟವನ್ನು ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲು ಅಡ್ಡಲಾದ ನಕ್ಷತ್ರದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ. ಸುಳಿವು: ಈ ಹಂತವು ಪೂರ್ಣಗೊಂಡ ನಂತರ ನೀವು ನಕ್ಷತ್ರದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಬಹುದು ಇದರಿಂದ ಈ $tab ಅನ್ನು ಕಳೆದುಕೊಳ್ಳುವುದನ್ನು ತಪ್ಪಿಸಬಹುದು",
+		"description": "[tutorial] ಮೆಚ್ಚಿನದನ್ನು ತೆಗೆದುಹಾಕಿ"
+	},
+	"tutorial_restart": {
+		"message": "ಪಾಪ್‌ಅಪ್‌ನಲ್ಲಿರುವ ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡುವ ಮೂಲಕ ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ $tutorial ಅನ್ನು ಮರುಪ್ರಾರಂಭಿಸಬಹುದು.",
+		"description": "[tutorial] ಮೊದಲ ಸಂದೇಶ"
+	},
+	"tutorial_restart_prompt": {
+		"message": "ನೀವು ಮೊದಲಿನಿಂದ $tutorial ಅನ್ನು ಪ್ರಾರಂಭಿಸಲು ಬಯಸುವಿರಾ?",
+		"description": "[tutorial] ಟ್ಯುಟೋರಿಯಲ್ ಮರುಪ್ರಾರಂಭಿಸಲು ಪ್ರಾಂಪ್ಟ್"
+	},
+	"tutorial_save_modal": {
+		"message": "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲು ಮತ್ತು ದೃಢೀಕರಣ ಸಂದೇಶವನ್ನು ನೋಡಲು $save ಕ್ಲಿಕ್ ಮಾಡಿ.",
+		"description": "[tutorial] ಮೋಡಲ್ ಉಳಿಸಿ"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "ಇದು $extension_label ಗಾಗಿ ಮತ್ತು ನಿಮ್ಮನ್ನು ಮೊದಲು ಸೆಟಪ್ ಹೋಮ್ ಪುಟಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತದೆ, ನಂತರ ಮಾರ್ಗದರ್ಶಿ $tutorial ಅನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ",
+		"description": "[tutorial] ಟ್ಯುಟೋರಿಯಲ್ ಪ್ರಾರಂಭಿಸಲು ಬಾಡಿ ಟೆಕ್ಸ್ಟ್"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "ಸೆಟಪ್ ಹೋಮ್‌ನಿಂದ $tutorial ಪ್ರಾರಂಭಿಸಬೇಕೆ?",
+		"description": "[tutorial] ಟ್ಯುಟೋರಿಯಲ್ ಪ್ರಾರಂಭಿಸಲು ಮೋಡಲ್ ಶೀರ್ಷಿಕೆ"
 	},
 	"underline": {
 		"message": "ಅಡಿಯ ರೇಖೆ",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "ಎಲ್ಲಿ?",
 		"description": "[ಇತರ-ಸಂಸ್ಥೆ-ಮೊಡಲ್] ಮೊಡಲ್ ಗೆ ಜಾಗಾರ್ಷಕ ಶೀರ್ಷಿಕೆ"
+	},
+	"wiki_label": {
+		"message": "$extension_label ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+		"description": "[popup][settings] ವಿಕಿ ಸಹಾಯ ಬಟನ್‌ಗಾಗಿ ಪ್ರವೇಶಿಸಬಹುದಾದ ಶೀರ್ಷಿಕೆ ಮತ್ತು aria-label"
 	},
 	"write_review": {
 		"message": "ಒಂದು ವಿಮರ್ಶೆ ಬರೆಯಿರಿ!",

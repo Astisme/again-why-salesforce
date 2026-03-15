@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "账户",
+		"description": "与 ObjectManager/Account/FieldsAndRelationships/view 相关的页面"
+	},
 	"act_delete": {
 		"message": "🗑️ 删除",
 		"description": "[管理-Tab] 删除一行"
@@ -39,6 +43,10 @@
 		"message": "升序 (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "资产",
+		"description": "与 ObjectManager/Asset/FieldsAndRelationships/view 相关的页面"
+	},
 	"available": {
 		"message": "可用",
 		"description": "可添加项目的部分标题"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "加粗",
 		"description": "粗体文本的字体样式选项"
+	},
+	"campaign": {
+		"message": "营销活动",
+		"description": "与 ObjectManager/Campaign/FieldsAndRelationships/view 相关的页面"
 	},
 	"cancel": {
 		"message": "取消",
@@ -55,9 +67,21 @@
 		"message": "取消并关闭",
 		"description": "模态框关闭按钮的标题或文本内容"
 	},
+	"case": {
+		"message": "个案",
+		"description": "与 ObjectManager/Case/FieldsAndRelationships/view 相关的页面名称"
+	},
 	"chosen": {
 		"message": "已选择",
 		"description": "已选项目的部分标题"
+	},
+	"classic_email_templates": {
+		"message": "经典电子邮件模板",
+		"description": "与 CommunicationTemplatesEmail/home 相关的页面"
+	},
+	"close": {
+		"message": "关闭",
+		"description": "关闭且不发生任何操作"
 	},
 	"cmd_export_all": {
 		"message": "显示 modal 以导出所有已保存的 Tabs",
@@ -87,6 +111,14 @@
 		"message": "显示 modal 以更新当前页面（如果已保存）",
 		"description": "[命令说明] 用户想要更新当前页面"
 	},
+	"company_information": {
+		"message": "公司信息",
+		"description": "与 CompanyProfileInfo/home 相关的页面"
+	},
+	"confirm": {
+		"message": "确认",
+		"description": "要求用户继续的文本"
+	},
 	"confirm_another_org": {
 		"message": "确认打开此链接。",
 		"description": "[打开其他组织模态框] 请求用户确认以打开构造的链接。"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label 的新版本现已可用！",
 		"description": "从侦听器收到一条未知消息"
+	},
+	"contact": {
+		"message": "联系人",
+		"description": "与 ObjectManager/Contact/FieldsAndRelationships/view 相关的页面"
 	},
 	"continue": {
 		"message": "继续",
@@ -555,6 +591,10 @@
 		"message": "翻译器尚未初始化。",
 		"description": "[错误] TranslationService 尚未准备好"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "教程无法初始化。",
+		"description": "[错误] 教程未初始化"
+	},
 	"error_unknown_file_structure": {
 		"message": "我们无法理解您要导入的文件\n如果问题仍然存在，请通过在 GitHub 上提交 Issue 来告诉我们",
 		"description": "[导入] 无法识别用户的文件"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "未知请求。",
 		"description": "[错误] 收到无法识别的消息后出现的一般错误"
+	},
+	"error_unknown_toast_type": {
+		"message": "无法解析请求的 toast 类型。请更改您的代码。",
+		"description": "[错误] 设置 toast 类型时使用的通用错误"
 	},
 	"error_unpin_tab": {
 		"message": "取消固定 Tab 时出错",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "此扩展程序的名称"
+	},
+	"field_accessibility": {
+		"message": "字段辅助功能",
+		"description": "与 FieldAccessibility/home 相关的页面"
 	},
 	"file": {
 		"message": "文件",
@@ -783,13 +831,29 @@
 		"message": "标签",
 		"description": "[key] Tab的名称"
 	},
+	"lead": {
+		"message": "潜在客户",
+		"description": "与 ObjectManager/Lead/FieldsAndRelationships/view 相关的页面"
+	},
+	"learn_more_about_extension": {
+		"message": "了解更多关于 $extension_label 的信息",
+		"description": "[弹出窗口][设置] wiki 帮助按钮的可访问标题和 aria-label"
+	},
 	"lightning_navigation": {
 		"message": "闪电导航",
 		"description": "Salesforce 的自定义导航技术"
 	},
+	"login_history": {
+		"message": "登录历史",
+		"description": "与 OrgLoginHistory/home 相关的页面"
+	},
 	"login_to_salesforce": {
 		"message": "登录 Salesforce",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 登录页面"
+	},
+	"manage_connected_apps": {
+		"message": "管理连接的应用程序",
+		"description": "与 ConnectedApplication/home 相关的页面"
 	},
 	"manage_tabs": {
 		"message": "管理 $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "打开设置",
 		"description": "[非 Salesforce 设置页] 按钮上的号召性用语，将用户重定向到 Salesforce 设置页面"
+	},
+	"opportunity": {
+		"message": "业务机会",
+		"description": "与 ObjectManager/Opportunity/FieldsAndRelationships/view 相关的页面"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "将新 Tab 添加为 Org Tab。",
@@ -975,6 +1043,10 @@
 		"message": "权限已被允许！",
 		"description": "[成功] 用户要求我们向其请求权限，并且他们接受了"
 	},
+	"permission_sets": {
+		"message": "权限集",
+		"description": "与 PermSets/home 相关的页面"
+	},
 	"pinned": {
 		"message": "已固定",
 		"description": "用户的 Tab，始终位于列表的开头"
@@ -983,9 +1055,21 @@
 		"message": "保留其他组织的 Tabs。",
 		"description": "[标签] 在导入过程中保留所有特定于组织的 Tabs"
 	},
+	"pricebook2": {
+		"message": "价格手册2",
+		"description": "与 ObjectManager/Pricebook2/FieldsAndRelationships/view 相关的页面"
+	},
+	"product2": {
+		"message": "产品2",
+		"description": "与 ObjectManager/Product2/FieldsAndRelationships/view 相关的页面"
+	},
 	"remove_tab": {
 		"message": "移除 Tab",
 		"description": "[替代文本] 图片无法显示时的替代文本"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "报表和仪表板设置",
+		"description": "与 ReportUI/home 相关的页面"
 	},
 	"req_downloads_open_popup": {
 		"message": "请从浏览器的扩展菜单中打开扩展弹出窗口。",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "发送小费 ❤️",
 		"description": "[popup] 提示发送小费的 svg 标题"
+	},
+	"sessions": {
+		"message": "会话",
+		"description": "与 SecuritySession/home 相关的页面"
 	},
 	"set_gen_preview": {
 		"message": "Tab 预览",
@@ -1327,9 +1415,17 @@
 		"message": "设置",
 		"description": "设置菜单的标签"
 	},
+	"setup_audit_trail": {
+		"message": "设置审计线索",
+		"description": "与 SecurityEvents/home 相关的页面"
+	},
 	"setup_page": {
 		"message": "设置页面",
 		"description": "[非 Salesforce 设置页] 用于修改 Salesforce 设置的页面"
+	},
+	"sharing_settings": {
+		"message": "共享设置",
+		"description": "与 SecuritySharing/home 相关的页面"
 	},
 	"show_all_tabs": {
 		"message": "显示所有 $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs 已保存。",
 		"description": "[提示信息] Tabs 已成功存储。"
 	},
+	"task": {
+		"message": "任务",
+		"description": "与 ObjectManager/Task/FieldsAndRelationships/view 相关的页面"
+	},
 	"theme_dark": {
 		"message": "切换主题为深色",
 		"description": "[弹出窗口] 月亮图标上的标题，用于切换主题"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "切换主题为浅色",
 		"description": "[弹出窗口] 太阳图标上的标题，用于切换主题"
+	},
+	"tutorial": {
+		"message": "教程",
+		"description": "[弹出窗口] 开始教程的按钮"
+	},
+	"tutorial_add_favourite": {
+		"message": "点击星标将此页面添加到收藏夹。",
+		"description": "[教程] 添加收藏"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "点击突出显示的 $tab 以导航到相应的页面。",
+		"description": "[教程] 点击突出显示的 Tab"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "这是为了 $extension_label 它将从您上次中断的地方恢复未完成的 $tutorial",
+		"description": "[教程] 继续教程的正文文本"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "从上一步继续 $tutorial 吗？",
+		"description": "[教程] 继续教程的模态框标题"
+	},
+	"tutorial_drag_flows": {
+		"message": "拖动突出显示的行（使用 6 个点）并将其放在第一行（已固定）之前。",
+		"description": "[教程] 拖动流程"
+	},
+	"tutorial_end": {
+		"message": "$tutorial 已完成！祝您使用扩展程序愉快。",
+		"description": "[教程] 结束"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "我们找不到可用于开始 $tutorial 的链接\n请导出您的 $tabs 并重新启动 $tutorial",
+		"description": "[教程] 无法开始的错误消息"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "这些是您的收藏 $tabs 它们用于快速访问常用页面。",
+		"description": "[教程] 突出显示收藏 Tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "按下键盘快捷键打开 $settings 页面，您可以在其中更改扩展程序的行为并为您的 $tabs 设置样式",
+		"description": "[教程] 键盘快捷键"
+	},
+	"tutorial_manage_tabs": {
+		"message": "右键点击页面（不是在 Tab 上），然后选择 $extension_label > $cxm_manage_tabs 以打开管理模态框。",
+		"description": "[教程] 管理 Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "您可以在此屏幕管理您的 $tabs 点击此处获取更多信息。",
+		"description": "[教程] 管理 Tab 链接"
+	},
+	"tutorial_pin_tab": {
+		"message": "右键点击突出显示的 $tab 并选择 $extension_label > $cxm_move > $cxm_pin_tab 以固定它。",
+		"description": "[教程] 固定 Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "拖动的行无法移动到固定行之前（因为它目前未固定），因此它转到了未固定列表的开头。这两个列表是分开处理的。",
+		"description": "[教程] 固定解释"
+	},
+	"tutorial_pinned_tab": {
+		"message": "请注意 $tab 现在已固定并保持在原位。",
+		"description": "[教程] 已固定的 Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "我们现在将把您重定向到另一个页面以向您展示更多内容。点击此处继续。",
+		"description": "[教程] 重定向到账户"
+	},
+	"tutorial_remove_favourite": {
+		"message": "点击划掉的星标从此页面移除收藏。提示：您可以在此步骤完成后点击星标，以避免丢失此 $tab",
+		"description": "[教程] 移除收藏"
+	},
+	"tutorial_restart": {
+		"message": "您可以随时通过点击弹出窗口中的按钮重新启动 $tutorial",
+		"description": "[教程] 第一条消息"
+	},
+	"tutorial_restart_prompt": {
+		"message": "您想从头开始 $tutorial 吗？",
+		"description": "[教程] 重新启动教程的提示"
+	},
+	"tutorial_save_modal": {
+		"message": "点击 $save 以应用更改并查看确认消息。",
+		"description": "[教程] 保存模态框"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "这是为了 $extension_label 它将先带您进入设置主页，然后开始引导式 $tutorial",
+		"description": "[教程] 开始教程的正文文本"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "从设置主页开始 $tutorial 吗？",
+		"description": "[教程] 开始教程的模态框标题"
 	},
 	"underline": {
 		"message": "下划线",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "去哪里？",
 		"description": "[打开其他组织模态框] 模态框的备用标题"
+	},
+	"wiki_label": {
+		"message": "了解更多关于 $extension_label 的信息",
+		"description": "[弹出窗口][设置] wiki 帮助按钮的可访问标题和 aria-label"
 	},
 	"write_review": {
 		"message": "写评论！",

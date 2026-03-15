@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Konts",
+		"description": "Lapa, kas saistīta ar ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Dzēst",
 		"description": "[pārvaldīt-Tab] dzēst rindu"
@@ -39,6 +43,10 @@
 		"message": "Augošā secībā (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Aktīvs",
+		"description": "Lapa, kas saistīta ar ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Pieejams",
 		"description": "Sadaļas virsraksts vienumiem, kurus var pievienot"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Treknraksts",
 		"description": "Fonta stila opcija treknraksta tekstam"
+	},
+	"campaign": {
+		"message": "Kampaņa",
+		"description": "Lapa, kas saistīta ar ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Atcelt",
@@ -55,9 +67,21 @@
 		"message": "Atcelt un aizvērt",
 		"description": "virsraksts vai textContent modālo logu aizvēršanas pogai"
 	},
+	"case": {
+		"message": "Lieta",
+		"description": "Lapas nosaukums, kas saistīts ar ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Izvēlēts",
 		"description": "Sadaļas virsraksts vienumiem, kas ir atlasīti"
+	},
+	"classic_email_templates": {
+		"message": "Klasiskās e-pasta veidnes",
+		"description": "Lapa, kas saistīta ar CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Aizvērt",
+		"description": "aizvērt bez jebkādām darbībām"
 	},
 	"cmd_export_all": {
 		"message": "Rādīt modālo logu visu saglabāto Tabs eksportēšanai",
@@ -87,6 +111,14 @@
 		"message": "Rādīt modālo logu pašreizējās lapas atjaunināšanai (ja saglabāta)",
 		"description": "[komandas apraksts] lietotājs vēlas atjaunināt pašreizējo lapu"
 	},
+	"company_information": {
+		"message": "Uzņēmuma informācija",
+		"description": "Lapa, kas saistīta ar CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Apstiprināt",
+		"description": "teksts, lai mudinātu lietotāju turpināt"
+	},
 	"confirm_another_org": {
 		"message": "Apstipriniet šīs saites atvēršanu.",
 		"description": "[atvērt_citu_org_modal] lūgt lietotāja apstiprinājumu, lai atvērtu izveidoto saiti."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Tagad ir pieejama jauna $extension_label versija!",
 		"description": "no klausītāja ir saņemts nezināms ziņojums"
+	},
+	"contact": {
+		"message": "Kontakts",
+		"description": "Lapa, kas saistīta ar ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Turpināt",
@@ -555,6 +591,10 @@
 		"message": "tulkotājs vēl nebija inicializēts.",
 		"description": "[kļūda] TranslationService nebija gatavs"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "neizdevās inicializēt pamācību.",
+		"description": "[error] Pamācība netika inicializēta"
+	},
 	"error_unknown_file_structure": {
 		"message": "Mēs nevarējām saprast failu, kuru vēlējāties importēt\nJa problēma joprojām pastāv, lūdzu, kopīgojiet to ar mums, atverot GitHub pieteikumu",
 		"description": "[importēt] lietotāja fails netika atpazīts"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Nezināms pieprasījums.",
 		"description": "[kļūda] Vispārīga kļūda pēc neatpazītas ziņas saņemšanas"
+	},
+	"error_unknown_toast_type": {
+		"message": "Neizdevās interpretēt pieprasīto paziņojuma veidu. Lūdzu, mainiet savu kodu.",
+		"description": "[error] Vispārīga kļūda, ko izmanto, iestatot paziņojuma veidu"
 	},
 	"error_unpin_tab": {
 		"message": "Kļūda atspraužot Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Šī paplašinājuma nosaukums"
+	},
+	"field_accessibility": {
+		"message": "Lauku pieejamība",
+		"description": "Lapa, kas saistīta ar FieldAccessibility/home"
 	},
 	"file": {
 		"message": "fails",
@@ -783,13 +831,29 @@
 		"message": "Etiķete",
 		"description": "[key] Tab nosaukums"
 	},
+	"lead": {
+		"message": "Interesents",
+		"description": "Lapa, kas saistīta ar ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "uzziniet vairāk par $extension_label",
+		"description": "[popup][settings] pieejams virsraksts un aria-label wiki palīdzības pogai"
+	},
 	"lightning_navigation": {
 		"message": "Lightning Navigation",
 		"description": "Salesforce pielāgotās navigācijas tehnoloģija"
 	},
+	"login_history": {
+		"message": "Pieteikšanās vēsture",
+		"description": "Lapa, kas saistīta ar OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Pieteikties Salesforce",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce pieteikšanās lapu"
+	},
+	"manage_connected_apps": {
+		"message": "Pārvaldīt saistītās lietotnes",
+		"description": "Lapa, kas saistīta ar ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Pārvaldīt $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Atvērt iestatīšanu",
 		"description": "[navSalesforceIestatīšana] aicinājums uz darbību uz pogas, lai pārvirzītu lietotāju uz Salesforce iestatīšanas lapu"
+	},
+	"opportunity": {
+		"message": "Iespēja",
+		"description": "Lapa, kas saistīta ar ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Pievienot jaunas cilnes kā Org cilnes.",
@@ -975,6 +1043,10 @@
 		"message": "Atļauja ir piešķirta!",
 		"description": "[veiksme] lietotājs lūdza mums pieprasīt atļauju, un viņš to apstiprināja"
 	},
+	"permission_sets": {
+		"message": "Atļauju kopas",
+		"description": "Lapa, kas saistīta ar PermSets/home"
+	},
 	"pinned": {
 		"message": "Piesprausts",
 		"description": "Lietotāja Tab, kas vienmēr atrodas saraksta sākumā"
@@ -983,9 +1055,21 @@
 		"message": "Saglabāt Tabs citām Org.",
 		"description": "[etiķete] saglabāt visus Org specifiskos Tabs importēšanas procesa laikā"
 	},
+	"pricebook2": {
+		"message": "Cenu lapa 2",
+		"description": "Lapa, kas saistīta ar ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produkts 2",
+		"description": "Lapa, kas saistīta ar ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Noņemt Tab",
 		"description": "[alt] alternatīvais teksts, kad attēli nedarbojas"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Atskaišu un paneļu iestatījumi",
+		"description": "Lapa, kas saistīta ar ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Lūdzu, atveriet paplašinājuma uznirstošo logu no savas pārlūkprogrammas paplašinājumu izvēlnes.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Sūtiet mums dzeramnaudu ❤️",
 		"description": "[popup] svg virsraksts, lai mudinātu sūtīt dzeramnaudu"
+	},
+	"sessions": {
+		"message": "Sesijas",
+		"description": "Lapa, kas saistīta ar SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab priekšskatījums",
@@ -1327,9 +1415,17 @@
 		"message": "Iestatījumi",
 		"description": "Etiķete iestatījumu izvēlnei"
 	},
+	"setup_audit_trail": {
+		"message": "Iestatīšanas audita izsekojamība",
+		"description": "Lapa, kas saistīta ar SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Iestatīšanas lapa",
 		"description": "[navSalesforceIestatīšana] lapa, ko izmanto Salesforce iestatījumu modificēšanai"
+	},
+	"sharing_settings": {
+		"message": "Kopīgošanas iestatījumi",
+		"description": "Lapa, kas saistīta ar SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Rādīt visas $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs saglabāti.",
 		"description": "[paziņojums] Tabs tika veiksmīgi saglabāti."
 	},
+	"task": {
+		"message": "Uzdevums",
+		"description": "Lapa, kas saistīta ar ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Mainīt motīvu uz tumšu",
 		"description": "[uznirstošais_logs] virsraksts uz mēness, lai pārslēgtu motīvu"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Mainīt motīvu uz gaišu",
 		"description": "[uznirstošais_logs] virsraksts uz saules, lai pārslēgtu motīvu"
+	},
+	"tutorial": {
+		"message": "Pamācība",
+		"description": "[popup] poga pamācības sākšanai"
+	},
+	"tutorial_add_favourite": {
+		"message": "Noklikšķiniet uz zvaigznītes, lai pievienotu šo lapu izlasei.",
+		"description": "[tutorial] pievienot izlasei"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Noklikšķiniet uz izceltās $tab , lai pārietu uz attiecīgo lapu.",
+		"description": "[tutorial] noklikšķiniet uz izceltās cilnes"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Tas ir paredzēts $extension_label un turpinās jūsu nepabeigto $tutorial no vietas, kur pārtraucāt.",
+		"description": "[tutorial] pamatteksts pamācības turpināšanai"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Turpināt $tutorial no pēdējā soļa?",
+		"description": "[tutorial] modālais virsraksts pamācības turpināšanai"
+	},
+	"tutorial_drag_flows": {
+		"message": "Velciet izcelto rindu (izmantojot 6 punktus) un nometiet to pirms pirmās rindas (kas ir piesprausta).",
+		"description": "[tutorial] vilkt plūsmas"
+	},
+	"tutorial_end": {
+		"message": "$tutorial pabeigta! Izbaudiet paplašinājuma lietošanu.",
+		"description": "[tutorial] beigas"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Mums neizdevās atrast derīgas saites, lai sāktu $tutorial\nLūdzu, eksportējiet savas $tabs un restartējiet $tutorial",
+		"description": "[tutorial] kļūdas ziņojums par neiespējamību sākt"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Šīs ir jūsu izlases $tabs , un tās tiek izmantotas ātrai piekļuvei biežāk lietotajām lapām.",
+		"description": "[tutorial] izcelt izlases cilni"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Nospiediet tastatūras saīsni, lai atvērtu $settings lapu, kurā varat mainīt paplašinājuma darbību un stilizēt savas $tabs",
+		"description": "[tutorial] tastatūras saīsne"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Ar peles labo pogu noklikšķiniet uz lapas (nevis uz cilnes) un izvēlieties $extension_label > $cxm_manage_tabs , lai atvērtu pārvaldības logu.",
+		"description": "[tutorial] pārvaldīt cilni"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Šajā ekrānā varat pārvaldīt savas $tabs . Noklikšķiniet šeit, lai iegūtu vairāk informācijas.",
+		"description": "[tutorial] cilņu pārvaldības saite"
+	},
+	"tutorial_pin_tab": {
+		"message": "Ar peles labo pogu noklikšķiniet uz izceltās $tab un izvēlieties $extension_label > $cxm_move > $cxm_pin_tab , lai to piespraustu.",
+		"description": "[tutorial] piespraust cilni"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Vilkto rindu nevarēja pārvietot pirms piespraustās rindas (jo tā šobrīd nav piesprausta), tāpēc tā nonāca nepiesprausto saraksta sākumā. Šie divi saraksti tiek apstrādāti atsevišķi.",
+		"description": "[tutorial] piespraušanas skaidrojums"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Ievērojiet, ka $tab tagad ir piesprausta un paliks savā vietā.",
+		"description": "[tutorial] piesprausta cilne"
+	},
+	"tutorial_redirect_account": {
+		"message": "Tagad mēs jūs novirzīsim uz citu lapu, lai parādītu vairāk. Noklikšķiniet šeit, lai turpinātu.",
+		"description": "[tutorial] novirzīt uz kontu"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Noklikšķiniet uz pārsvītrotās zvaigznītes, lai noņemtu šo lapu no izlases. PADOMS: varat noklikšķināt uz zvaigznītes pēc šī soļa pabeigšanas, lai nezaudētu šo $tab",
+		"description": "[tutorial] noņemt izlasi"
+	},
+	"tutorial_restart": {
+		"message": "Jūs varat restartēt $tutorial jebkurā laikā, noklikšķinot uz pogas uznirstošajā logā.",
+		"description": "[tutorial] pirmais ziņojums"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Vai vēlaties sākt $tutorial no sākuma?",
+		"description": "[tutorial] aicinājums restartēt pamācību"
+	},
+	"tutorial_save_modal": {
+		"message": "Noklikšķiniet uz $save , lai lietotu izmaiņas un redzētu apstiprinājuma ziņojumu.",
+		"description": "[tutorial] saglabāt modālo logu"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Tas ir paredzēts $extension_label . Vispirms jūs tiksit novirzīts uz iestatīšanas sākumlapu, un pēc tam sāksies $tutorial",
+		"description": "[tutorial] pamatteksts pamācības sākšanai"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Sākt $tutorial no iestatīšanas sākumlapas?",
+		"description": "[tutorial] modālais virsraksts pamācības sākšanai"
 	},
 	"underline": {
 		"message": "Pasvītrojums",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Uz kurieni?",
 		"description": "[atvērt_citu_org_modal] rezerves virsraksts modālajam logam"
+	},
+	"wiki_label": {
+		"message": "uzziniet vairāk par $extension_label",
+		"description": "[popup][settings] pieejams virsraksts un aria-label wiki palīdzības pogai"
 	},
 	"write_review": {
 		"message": "Raksti atsauksmi!",

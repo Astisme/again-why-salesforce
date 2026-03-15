@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "חשבון",
+		"description": "הדף הקשור ל-ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ מחק",
 		"description": "[ניהול-Tab] מחק שורה"
@@ -39,6 +43,10 @@
 		"message": "עולה (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "נכס",
+		"description": "הדף הקשור ל-ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "זמין",
 		"description": "כותרת מקטע לפריטים שניתן להוסיף"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "מודגש",
 		"description": "אפשרות סגנון גופן לטקסט מודגש"
+	},
+	"campaign": {
+		"message": "קמפיין",
+		"description": "הדף הקשור ל-ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "ביטול",
@@ -55,9 +67,21 @@
 		"message": "בטל וסגור",
 		"description": "כותרת או תוכן טקסט עבור כפתור הסגירה של מודלים"
 	},
+	"case": {
+		"message": "קריאה",
+		"description": "שם הדף הקשור ל-ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "נבחר",
 		"description": "כותרת מקטע לפריטים שנבחרו"
+	},
+	"classic_email_templates": {
+		"message": "תבניות אימייל קלאסיות",
+		"description": "הדף הקשור ל-CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "סגור",
+		"description": "סגירה מבלי שדבר יקרה"
 	},
 	"cmd_export_all": {
 		"message": "הצג חלון לייצוא כל ה-Tabs השמורים",
@@ -87,6 +111,14 @@
 		"message": "הצג חלון לעדכון הדף הנוכחי (אם שמור)",
 		"description": "[command description] המשתמש רוצה לעדכן את הדף הנוכחי"
 	},
+	"company_information": {
+		"message": "מידע על החברה",
+		"description": "הדף הקשור ל-CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "אשר",
+		"description": "טקסט המבקש מהמשתמש להמשיך"
+	},
 	"confirm_another_org": {
 		"message": "אשר פתיחת הקישור הזה.",
 		"description": "[open-other-org-modal] בקשת אישור מהמשתמש לפתיחת הקישור שנבנה."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "גרסה חדשה של $extension_label זמינה כעת!",
 		"description": "הודעה לא מוכרת התקבלה ממאזין"
+	},
+	"contact": {
+		"message": "איש קשר",
+		"description": "הדף הקשור ל-ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "המשך",
@@ -555,6 +591,10 @@
 		"message": "ה-translator טרם מאותחל.",
 		"description": "[error] שירות התרגום לא היה מוכן"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "לא ניתן היה לאתחל את המדריך.",
+		"description": "[error] המדריך לא אותחל"
+	},
 	"error_unknown_file_structure": {
 		"message": "לא הצלחנו להבין קובץ שרצית לייבא\nאם הבעיה נמשכת, אנא שתף אותה איתנו על ידי פתיחת פנייה ב-GitHub",
 		"description": "[ייבוא] הקובץ של המשתמש לא זוהה"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "בקשה לא ידועה.",
 		"description": "[error] שגיאה כללית לאחר קבלת הודעה לא מזוהה"
+	},
+	"error_unknown_toast_type": {
+		"message": "לא ניתן היה לפרש את סוג ההודעה המבוקש. אנא שנה את הקוד שלך.",
+		"description": "[error] שגיאה כללית בשימוש בעת הגדרת סוג הודעה (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "שגיאה בעת ביטול הצמדת Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "שם התוסף הזה"
+	},
+	"field_accessibility": {
+		"message": "נגישות שדות",
+		"description": "הדף הקשור ל-FieldAccessibility/home"
 	},
 	"file": {
 		"message": "קובץ",
@@ -783,13 +831,29 @@
 		"message": "תווית",
 		"description": "[key] שם ה-Tab"
 	},
+	"lead": {
+		"message": "ליד",
+		"description": "הדף הקשור ל-ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "למד עוד על $extension_label",
+		"description": "[popup][settings] כותרת נגישה ו-aria-label עבור כפתור העזרה של הוויקי"
+	},
 	"lightning_navigation": {
 		"message": "ניווט Lightning",
 		"description": "טכנולוגיית הניווט המותאמת של Salesforce"
 	},
+	"login_history": {
+		"message": "היסטוריית התחברות",
+		"description": "הדף הקשור ל-OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "התחבר ל-Salesforce",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד ההתחברות של Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "נהל אפליקציות מחוברות",
+		"description": "הדף הקשור ל-ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "ניהול $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "פתח Setup",
 		"description": "[notSalesforceSetup] קריאה לפעולה לכפתור להפניית המשתמש לעמוד Salesforce Setup"
+	},
+	"opportunity": {
+		"message": "הזדמנות",
+		"description": "הדף הקשור ל-ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "הוסף Tabs חדשים כ-Org Tabs.",
@@ -975,6 +1043,10 @@
 		"message": "ההרשאה אושרה!",
 		"description": "[הצלחה] המשתמש ביקש מאיתנו לבקש ממנו הרשאה והוא אישר אותה"
 	},
+	"permission_sets": {
+		"message": "קבוצות הרשאות",
+		"description": "הדף הקשור ל-PermSets/home"
+	},
 	"pinned": {
 		"message": "מוצמד",
 		"description": "הלשוניות של המשתמש שתמיד נמצאות בתחילת הרשימה"
@@ -983,9 +1055,21 @@
 		"message": "שמור Tabs לארגונים אחרים.",
 		"description": "[label] שמור את כל ה-Tabs הספציפיים לארגון במהלך הייבוא"
 	},
+	"pricebook2": {
+		"message": "מחירון 2",
+		"description": "הדף הקשור ל-ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "מוצר 2",
+		"description": "הדף הקשור ל-ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "הסר Tab",
 		"description": "[alt] טקסט חלופי כאשר התמונות אינן מוצגות"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "הגדרות דוחות ולוחות בקרה",
+		"description": "הדף הקשור ל-ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "אנא פתח את חלון קופץ של התוסף מתפריט התוספים של הדפדפן שלך.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "שלח לנו טיפ ❤️",
 		"description": "[popup] כותרת ל-svg כדי להניע שליחת טיפ"
+	},
+	"sessions": {
+		"message": "סשנים",
+		"description": "הדף הקשור ל-SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab תצוגה מקדימה",
@@ -1327,9 +1415,17 @@
 		"message": "הגדרות",
 		"description": "תווית לתפריט ההגדרות"
 	},
+	"setup_audit_trail": {
+		"message": "תיעוד ביקורת הגדרות",
+		"description": "הדף הקשור ל-SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "עמוד Setup",
 		"description": "[notSalesforceSetup] העמוד לעריכת הגדרות Salesforce"
+	},
+	"sharing_settings": {
+		"message": "הגדרות שיתוף",
+		"description": "הדף הקשור ל-SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "הצג את כל ה $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs נשמרו.",
 		"description": "[toast] Tabs נשמרו בהצלחה."
 	},
+	"task": {
+		"message": "משימה",
+		"description": "הדף הקשור ל-ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "שנה נושא לחושך",
 		"description": "[popup] כותרת עבור אייקון הירח לשינוי נושא"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "שנה נושא לבהיר",
 		"description": "[popup] כותרת עבור אייקון השמש לשינוי נושא"
+	},
+	"tutorial": {
+		"message": "מדריך",
+		"description": "[popup] כפתור להפעלת המדריך"
+	},
+	"tutorial_add_favourite": {
+		"message": "לחץ על הכוכב כדי להוסיף דף זה למועדפים.",
+		"description": "[tutorial] הוספת מועדף"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "לחץ על ה- $tab המודגש כדי לנווט לדף המתאים.",
+		"description": "[tutorial] לחיצה על לשונית מודגשת"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "זה עבור $extension_label וזה ימשיך את ה- $tutorial הלא גמור שלך מהמקום שבו הפסקת.",
+		"description": "[tutorial] טקסט גוף להמשך המדריך"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "להמשיך את ה- $tutorial מהשלב האחרון?",
+		"description": "[tutorial] כותרת חלונית להמשך המדריך"
+	},
+	"tutorial_drag_flows": {
+		"message": "גרור את השורה המודגשת (באמצעות 6 הנקודות) ושחרר אותה לפני השורה הראשונה (הנעוצה).",
+		"description": "[tutorial] גרירת תהליכים"
+	},
+	"tutorial_end": {
+		"message": "ה- $tutorial הושלם! תהנה מהשימוש בתוסף.",
+		"description": "[tutorial] סיום"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "לא הצלחנו למצוא קישורים שמישים להפעלת ה- $tutorial \nאנא ייצא את ה- $tabs שלך והפעל מחדש את ה- $tutorial",
+		"description": "[tutorial] הודעת שגיאה על אי יכולת להתחיל"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "אלו ה- $tabs המועדפים שלך והם משמשים לגישה מהירה לדפים שבשימוש תדיר.",
+		"description": "[tutorial] הדגשת לשוניות מועדפות"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "לחץ על קיצור המקלדת כדי לפתוח את דף ה- $settings שבו תוכל לשנות את התנהגות התוסף ולעצב את ה- $tabs שלך",
+		"description": "[tutorial] קיצור מקלדת"
+	},
+	"tutorial_manage_tabs": {
+		"message": "לחץ קליק ימני על הדף (לא על לשונית) ובחר $extension_label > $cxm_manage_tabs כדי לפתוח את חלונית הניהול.",
+		"description": "[tutorial] ניהול לשוניות"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "תוכל לנהל את ה- $tabs שלך ממסך זה. לחץ כאן למידע נוסף.",
+		"description": "[tutorial] קישור לניהול לשוניות"
+	},
+	"tutorial_pin_tab": {
+		"message": "לחץ קליק ימני על ה- $tab המודגש ובחר $extension_label > $cxm_move > $cxm_pin_tab כדי לנעוץ אותו.",
+		"description": "[tutorial] נעיצת לשונית"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "לא ניתן היה להעביר את השורה שנגררה לפני השורה הנעוצה (מכיוון שהיא אינה נעוצה כרגע), ולכן היא עברה לתחילת הרשימה הלא נעוצה. שתי הרשימות הללו מטופלות בנפרד.",
+		"description": "[tutorial] הסבר על נעוצים"
+	},
+	"tutorial_pinned_tab": {
+		"message": "שים לב שה- $tab נעוץ כעת ויישאר במקומו.",
+		"description": "[tutorial] לשונית נעוצה"
+	},
+	"tutorial_redirect_account": {
+		"message": "כעת נעביר אותך לדף אחר כדי להראות לך עוד. לחץ כאן כדי להמשיך.",
+		"description": "[tutorial] העברה לחשבון"
+	},
+	"tutorial_remove_favourite": {
+		"message": "לחץ על הכוכב עם הקו עליו כדי להסיר דף זה מהמועדפים. טיפ: תוכל ללחוץ על הכוכב לאחר סיום שלב זה כדי להימנע מאיבוד ה- $tab הזה",
+		"description": "[tutorial] הסרת מועדף"
+	},
+	"tutorial_restart": {
+		"message": "תוכל להפעיל מחדש את ה- $tutorial בכל עת על ידי לחיצה על הכפתור בחלונית הקופצת.",
+		"description": "[tutorial] הודעה ראשונה"
+	},
+	"tutorial_restart_prompt": {
+		"message": "האם ברצונך להתחיל את ה- $tutorial מההתחלה?",
+		"description": "[tutorial] בקשה להפעלה מחדש של המדריך"
+	},
+	"tutorial_save_modal": {
+		"message": "לחץ על $save כדי להחיל שינויים ולראות את הודעת האישור.",
+		"description": "[tutorial] שמירה בחלונית"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "זה עבור $extension_label וזה יוביל אותך תחילה לדף הבית של ההגדרות, ואז יתחיל את ה- $tutorial המודרך",
+		"description": "[tutorial] טקסט גוף לתחילת המדריך"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "להתחיל את ה- $tutorial מדף הבית של ההגדרות?",
+		"description": "[tutorial] כותרת חלונית לתחילת המדריך"
 	},
 	"underline": {
 		"message": "קו תחתון",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "לאן?",
 		"description": "[open-other-org-modal] כותרת חלופית לחלון המודאלי"
+	},
+	"wiki_label": {
+		"message": "למד עוד על $extension_label",
+		"description": "[popup][settings] כותרת נגישה ו-aria-label עבור כפתור העזרה של הוויקי"
 	},
 	"write_review": {
 		"message": "כתוב ביקורת!",
