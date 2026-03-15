@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Akaunti",
+		"description": "Ukurasa unaohusiana na ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Futa",
 		"description": "[dhibiti-Tab] futa safu"
@@ -39,6 +43,10 @@
 		"message": "Kupanda (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Rasilimali",
+		"description": "Ukurasa unaohusiana na ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Zinazopatikana",
 		"description": "Kichwa cha sehemu ya vipengee vinavyoweza kuongezwa"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Nzito",
 		"description": "Chaguo la mtindo wa fonti kwa maandishi nzito"
+	},
+	"campaign": {
+		"message": "Kampeni",
+		"description": "Ukurasa unaohusiana na ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Ghairi",
@@ -55,9 +67,21 @@
 		"message": "Ghairi na ufunge",
 		"description": "kichwa au textContent kwa kitufe cha kufunga cha modali"
 	},
+	"case": {
+		"message": "Kesi",
+		"description": "Jina la ukurasa unaohusiana na ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Zilizochaguliwa",
 		"description": "Kichwa cha sehemu ya vipengee vilivyochaguliwa"
+	},
+	"classic_email_templates": {
+		"message": "Violezo vya Barua Pepe vya Kawaida",
+		"description": "Ukurasa unaohusiana na CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Funga",
+		"description": "funga bila kitu chochote kutokea"
 	},
 	"cmd_export_all": {
 		"message": "Onyesha modal kuэкспорт Tabs zote zilizohifadhiwa",
@@ -87,6 +111,14 @@
 		"message": "Onyesha modal kusasisha ukurasa wa sasa (ikiwa imehifadhiwa)",
 		"description": "[maelezo ya amri] mtumiaji anataka kusasisha ukurasa wa sasa"
 	},
+	"company_information": {
+		"message": "Habari za Kampuni",
+		"description": "Ukurasa unaohusiana na CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Thibitisha",
+		"description": "maandishi ya kumuuliza mtumiaji kuendelea"
+	},
 	"confirm_another_org": {
 		"message": "Thibitisha kufungua kiungo hiki.",
 		"description": "[fungua-modal-org-nyingine] omba uthibitisho kutoka kwa mtumiaji ili kufungua kiungo kilichojengwa."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Toleo jipya la $extension_label sasa linapatikana!",
 		"description": "ujumbe usiojulikana umepokelewa kutoka kwa msikilizaji"
+	},
+	"contact": {
+		"message": "Mawasiliano",
+		"description": "Ukurasa unaohusiana na ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Endelea",
@@ -555,6 +591,10 @@
 		"message": "mtafsiri bado hajaanzishwa.",
 		"description": "[hitilafu] TranslationService haikuwa tayari"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "mafunzo hayakuweza kuanzishwa.",
+		"description": "[hitilafu] Mafunzo hayakuanzishwa"
+	},
 	"error_unknown_file_structure": {
 		"message": "Hatukuweza kuelewa faili uliyotaka kuleta\nIkiwa tatizo litaendelea, tafadhali shiriki nasi kwa kufungua suala la GitHub",
 		"description": "[leta] faili ya mtumiaji haikutambuliwa"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Ombi lisilojulikana.",
 		"description": "[hitilafu] Hitilafu ya jumla baada ya kupata ujumbe ambao haukutambuliwa"
+	},
+	"error_unknown_toast_type": {
+		"message": "Aina ya toast iliyoombwa haikuweza kutafsiriwa. Tafadhali badilisha nambari yako.",
+		"description": "[hitilafu] Hitilafu ya jumla inayotumiwa wakati wa kuweka aina ya toast"
 	},
 	"error_unpin_tab": {
 		"message": "Hitilafu wakati wa kubandua Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Jina la kiendelezi hiki"
+	},
+	"field_accessibility": {
+		"message": "Ufikiaji wa Sehemu",
+		"description": "Ukurasa unaohusiana na FieldAccessibility/home"
 	},
 	"file": {
 		"message": "faili",
@@ -783,13 +831,29 @@
 		"message": "Lebo",
 		"description": "[key] jina la Tab"
 	},
+	"lead": {
+		"message": "Kiongozi",
+		"description": "Ukurasa unaohusiana na ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "jifunze zaidi kuhusu $extension_label",
+		"description": "[pop-up][mipangilio] kichwa kinachoweza kufikiwa na lebo ya aria kwa kifungo cha msaada wa wiki"
+	},
 	"lightning_navigation": {
 		"message": "Uabiri wa Umeme (Lightning)",
 		"description": "Teknolojia maalum ya uabiri ya Salesforce"
 	},
+	"login_history": {
+		"message": "Historia ya Kuingia",
+		"description": "Ukurasa unaohusiana na OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Ingia kwenye Salesforce",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa kuingia wa Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "Dhibiti Programu Zilizounganishwa",
+		"description": "Ukurasa unaohusiana na ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Dhibiti $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Fungua Usanidi",
 		"description": "[siUsanidiWaSalesforce] wito wa kuchukua hatua kwenye kitufe ili kumwelekeza mtumiaji kwenye ukurasa wa Usanidi wa Salesforce"
+	},
+	"opportunity": {
+		"message": "Fursa",
+		"description": "Ukurasa unaohusiana na ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Ongeza Tab-zako mpya kama Tab-zako za Org.",
@@ -975,6 +1043,10 @@
 		"message": "Ruhusa imeruhusiwa!",
 		"description": "[mafanikio] mtumiaji alituomba tumuulize ruhusa na akaikubali"
 	},
+	"permission_sets": {
+		"message": "Seti za Ruhusa",
+		"description": "Ukurasa unaohusiana na PermSets/home"
+	},
 	"pinned": {
 		"message": "Imebandikwa",
 		"description": "Tab-s za mtumiaji ambazo hupatikana kila wakati mwanzoni mwa orodha"
@@ -983,9 +1055,21 @@
 		"message": "Hifadhi Tabs kwa Org nyingine.",
 		"description": "[lebo] weka Tabs zote maalum za Org wakati wa mchakato wa kuingiza"
 	},
+	"pricebook2": {
+		"message": "Pricebook2",
+		"description": "Ukurasa unaohusiana na ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Product2",
+		"description": "Ukurasa unaohusiana na ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Ondoa Tab",
 		"description": "[alt] maandishi mbadala wakati picha hazifanyi kazi"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Mipangilio ya Ripoti na Dashibodi",
+		"description": "Ukurasa unaohusiana na ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Tafadhali fungua popup ya kiendelezi kutoka kwenye menyu ya viendelezi ya kivinjari chako.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Tutumie dokezo ❤️",
 		"description": "[popup] kichwa cha svg cha kuhamasisha kutuma dokezo"
+	},
+	"sessions": {
+		"message": "Vipindi",
+		"description": "Ukurasa unaohusiana na SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Hakiki Tab",
@@ -1327,9 +1415,17 @@
 		"message": "Mipangilio",
 		"description": "Lebo ya menyu ya mipangilio"
 	},
+	"setup_audit_trail": {
+		"message": "Sanidi Njia ya Ukaguzi",
+		"description": "Ukurasa unaohusiana na SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Ukurasa wa Usanidi",
 		"description": "[siUsanidiWaSalesforce] ukurasa unaotumika kurekebisha mipangilio ya Salesforce"
+	},
+	"sharing_settings": {
+		"message": "Mipangilio ya Kushiriki",
+		"description": "Ukurasa unaohusiana na SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Onyesha $tabs zote",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs zimehifadhiwa.",
 		"description": "[toast] Tabs zimehifadhiwa kwa mafanikio."
 	},
+	"task": {
+		"message": "Kazi",
+		"description": "Ukurasa unaohusiana na ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Badilisha Mandhari kuwa Giza",
 		"description": "[ibukizi] kichwa kwenye mwezi ili kubadilisha mandhari"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Badilisha Mandhari kuwa Angavu",
 		"description": "[ibukizi] kichwa kwenye jua ili kubadilisha mandhari"
+	},
+	"tutorial": {
+		"message": "Mafunzo",
+		"description": "[pop-up] kifungo cha kuanza mafunzo"
+	},
+	"tutorial_add_favourite": {
+		"message": "Bofya nyota ili kuongeza ukurasa huu kwenye vipendwa.",
+		"description": "[mafunzo] ongeza kipendwa"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Bofya kwenye $tab iliyoangaziwa ili kwenda kwenye ukurasa unaolingana.",
+		"description": "[mafunzo] bofya Tab iliyoangaziwa"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Hii ni kwa ajili ya $extension_label na itaanza tena $tutorial yako ambayo haijaisha kutoka pale ulipoishia.",
+		"description": "[mafunzo] maandishi ya mwili kuendelea na mafunzo"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Endelea na $tutorial kutoka hatua ya mwisho?",
+		"description": "[mafunzo] kichwa cha modal kuendelea na mafunzo"
+	},
+	"tutorial_drag_flows": {
+		"message": "Vuta safu iliyoangaziwa (ukitumia nukta 6) na uiangushe kabla ya safu ya kwanza (ambayo imebandikwa).",
+		"description": "[mafunzo] vuta mitiririko"
+	},
+	"tutorial_end": {
+		"message": "$tutorial imekamilika! Furahia kutumia ugani.",
+		"description": "[mafunzo] mwisho"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Hatukuweza kupata viungo vinavyoweza kutumika kuanzisha $tutorial\nTafadhali hamisha $tabs zako na uanzishe tena $tutorial",
+		"description": "[mafunzo] ujumbe wa hitilafu haikuweza kuanza"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Hizi ni $tabs zako unazozipenda na hutumiwa kwa ufikiaji wa haraka wa kurasa zinazotumiwa mara kwa mara.",
+		"description": "[mafunzo] angazia Tab vipendwa"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Bonyeza njia ya mkato ya kibodi ili kufungua ukurasa wa $settings ambapo unaweza kubadilisha tabia ya ugani na kusanifu $tabs zako",
+		"description": "[mafunzo] njia ya mkato ya kibodi"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Bofya kulia kwenye ukurasa (sio kwenye Tab) na uchague $extension_label > $cxm_manage_tabs ili kufungua modal ya usimamizi.",
+		"description": "[mafunzo] dhibiti Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Unaweza kudhibiti $tabs zako kutoka skrini hii. Bofya hapa kupata maelezo zaidi.",
+		"description": "[mafunzo] kiungo cha kudhibiti Tab"
+	},
+	"tutorial_pin_tab": {
+		"message": "Bofya kulia kwenye $tab iliyoangaziwa na uchague $extension_label > $cxm_move > $cxm_pin_tab ili kuibandika.",
+		"description": "[mafunzo] bandika Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Safu iliyovutwa haikuweza kuhamishwa kabla ya safu iliyobandikwa (kwa sababu kwa sasa haijabandikwa), kwa hivyo ilienda mwanzoni mwa orodha isiyobandikwa. Orodha hizi mbili zinachukuliwa kando.",
+		"description": "[mafunzo] maelezo yaliyobandikwa"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Zingatia kwamba $tab sasa imebandikwa na itabaki mahali pake.",
+		"description": "[mafunzo] Tab iliyobandikwa"
+	},
+	"tutorial_redirect_account": {
+		"message": "Sasa tutakuelekeza kwenye ukurasa mwingine ili kukuonyesha zaidi. Bofya hapa ili kuendelea.",
+		"description": "[mafunzo] elekeza kwenye akaunti"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Bofya nyota iliyokatwa ili kuondoa ukurasa huu kutoka kwa vipendwa. KIDOKEZO: unaweza kubofya nyota baada ya hatua hii kukamilika ili kuepuka kupoteza $tab hii",
+		"description": "[mafunzo] ondoa kipendwa"
+	},
+	"tutorial_restart": {
+		"message": "Unaweza kuanzisha tena $tutorial wakati wowote kwa kubofya kitufe kwenye pop-up.",
+		"description": "[mafunzo] ujumbe wa kwanza"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Je, unataka kuanza $tutorial tangu mwanzo?",
+		"description": "[mafunzo] haraka ya kuanzisha tena mafunzo"
+	},
+	"tutorial_save_modal": {
+		"message": "Bofya $save ili kutumia mabadiliko na kuona ujumbe wa uthibitisho.",
+		"description": "[mafunzo] hifadhi modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Hii ni kwa ajili ya $extension_label na itakupeleka kwenye ukurasa wa Sanidi Nyumbani kwanza, kisha uanze $tutorial iliyoongozwa",
+		"description": "[mafunzo] maandishi ya mwili kuanza mafunzo"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Anza $tutorial kutoka Sanidi Nyumbani?",
+		"description": "[mafunzo] kichwa cha modal kuanza mafunzo"
 	},
 	"underline": {
 		"message": "Pigia mstari",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Wapi?",
 		"description": "[fungua-modal-org-nyingine] kichwa mbadala kwa modal"
+	},
+	"wiki_label": {
+		"message": "Jifunze zaidi kuhusu $extension_label",
+		"description": "[pop-up][mipangilio] kichwa kinachoweza kufikiwa na lebo ya aria kwa kifungo cha msaada wa wiki"
 	},
 	"write_review": {
 		"message": "Andika ukaguzi!",

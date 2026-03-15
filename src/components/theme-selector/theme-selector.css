@@ -1,0 +1,49 @@
+theme-selector-aws {
+	display: flex;
+	align-items: center;
+}
+
+theme-selector-aws button[data-theme-target] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+	border: none;
+	border-radius: 0.25rem;
+	background: none;
+	background-color: transparent;
+	width: auto;
+	min-width: 0;
+	min-height: 0;
+	color: inherit;
+	cursor: pointer;
+	appearance: none;
+}
+
+theme-selector-aws button[data-theme-target]:hover,
+theme-selector-aws button[data-theme-target]:active {
+	background-color: transparent;
+}
+
+theme-selector-aws button[data-theme-target]:focus-visible {
+	outline: 2px solid var(--highlight);
+	outline-offset: 2px;
+}
+
+theme-selector-aws svg {
+	height: 2rem;
+	width: 2rem;
+	transition-property: fill, stroke, color, opacity;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+}
+
+theme-selector-aws .primary {
+	fill: none;
+	stroke: var(--color);
+}
+
+theme-selector-aws .secondary {
+	fill: var(--theme-fill);
+}

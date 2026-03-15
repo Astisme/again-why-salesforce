@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "帳戶",
+		"description": "與 ObjectManager/Account/FieldsAndRelationships/view 相關的頁面"
+	},
 	"act_delete": {
 		"message": "🗑️ 刪除",
 		"description": "[管理-Tab] 刪除一行"
@@ -39,6 +43,10 @@
 		"message": "遞增 (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "資產",
+		"description": "與 ObjectManager/Asset/FieldsAndRelationships/view 相關的頁面"
+	},
 	"available": {
 		"message": "可用",
 		"description": "可添加項目的區段標題"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "粗體",
 		"description": "粗體文字的字體樣式選項"
+	},
+	"campaign": {
+		"message": "行銷活動",
+		"description": "與 ObjectManager/Campaign/FieldsAndRelationships/view 相關的頁面"
 	},
 	"cancel": {
 		"message": "取消",
@@ -55,9 +67,21 @@
 		"message": "取消並關閉",
 		"description": "用於模態視窗關閉按鈕的標題或文字內容"
 	},
+	"case": {
+		"message": "個案",
+		"description": "與 ObjectManager/Case/FieldsAndRelationships/view 相關的頁面名稱"
+	},
 	"chosen": {
 		"message": "已選擇",
 		"description": "已選擇項目的區段標題"
+	},
+	"classic_email_templates": {
+		"message": "傳統電子郵件範本",
+		"description": "與 CommunicationTemplatesEmail/home 相關的頁面"
+	},
+	"close": {
+		"message": "關閉",
+		"description": "關閉且不發生任何事"
 	},
 	"cmd_export_all": {
 		"message": "顯示 modal 以匯出所有已儲存的 Tabs",
@@ -87,6 +111,14 @@
 		"message": "顯示 modal 以更新目前頁面（如果已儲存）",
 		"description": "[指令說明] 使用者想要更新目前頁面"
 	},
+	"company_information": {
+		"message": "公司資訊",
+		"description": "與 CompanyProfileInfo/home 相關的頁面"
+	},
+	"confirm": {
+		"message": "確認",
+		"description": "要求使用者繼續的文字"
+	},
 	"confirm_another_org": {
 		"message": "確認開啟此連結。",
 		"description": "[open-other-org-modal] 向使用者請求確認以開啟所構建的連結"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label 的新版本現已推出！",
 		"description": "從接聽程式收到未知訊息"
+	},
+	"contact": {
+		"message": "聯絡人",
+		"description": "與 ObjectManager/Contact/FieldsAndRelationships/view 相關的頁面"
 	},
 	"continue": {
 		"message": "繼續",
@@ -555,6 +591,10 @@
 		"message": "翻譯工具尚未初始化。",
 		"description": "[錯誤] TranslationService 尚未準備好"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "教學課程無法初始化。",
+		"description": "[錯誤] 教學課程未初始化"
+	},
 	"error_unknown_file_structure": {
 		"message": "我們無法辨識您想要匯入的文件\n如果問題持續存在，請透過在 GitHub 上提交 Issue 與我們分享",
 		"description": "[匯入] 無法辨識使用者的文件"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "未知請求。",
 		"description": "[錯誤] 收到無法辨識的訊息後的一般錯誤"
+	},
+	"error_unknown_toast_type": {
+		"message": "無法解析請求的 toast 類型。請更改您的代碼。",
+		"description": "[錯誤] 設定 toast 類型時使用的通用錯誤"
 	},
 	"error_unpin_tab": {
 		"message": "取消釘選 Tab 時發生錯誤",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "此擴充功能的名稱"
+	},
+	"field_accessibility": {
+		"message": "欄位協助工具",
+		"description": "與 FieldAccessibility/home 相關的頁面"
 	},
 	"file": {
 		"message": "file",
@@ -783,13 +831,29 @@
 		"message": "標籤",
 		"description": "[key] Tab的名稱"
 	},
+	"lead": {
+		"message": "潛在客戶",
+		"description": "與 ObjectManager/Lead/FieldsAndRelationships/view 相關的頁面"
+	},
+	"learn_more_about_extension": {
+		"message": "深入了解 $extension_label",
+		"description": "[彈出式視窗][設定] wiki 幫助按鈕的可存取標題與 aria-label"
+	},
 	"lightning_navigation": {
 		"message": "Lightning 導航",
 		"description": "Salesforce 的自訂導航技術"
 	},
+	"login_history": {
+		"message": "登入歷史記錄",
+		"description": "與 OrgLoginHistory/home 相關的頁面"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce 登入頁"
+	},
+	"manage_connected_apps": {
+		"message": "管理連線的應用程式",
+		"description": "與 ConnectedApplication/home 相關的頁面"
 	},
 	"manage_tabs": {
 		"message": "管理 $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] 按鈕呼籲用戶前往 Salesforce Setup 頁面"
+	},
+	"opportunity": {
+		"message": "業務機會",
+		"description": "與 ObjectManager/Opportunity/FieldsAndRelationships/view 相關的頁面"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "將新 Tab 新增為 Org Tab。",
@@ -975,6 +1043,10 @@
 		"message": "權限已被允許！",
 		"description": "[成功] 使用者要求我們向其請求權限，且他們接受了"
 	},
+	"permission_sets": {
+		"message": "權限集",
+		"description": "與 PermSets/home 相關的頁面"
+	},
 	"pinned": {
 		"message": "已釘選",
 		"description": "使用者的 Tab，始終位於列表的開頭"
@@ -983,9 +1055,21 @@
 		"message": "Preserve Tabs for other orgs.",
 		"description": "[label] 在匯入過程中保留所有特定於 Org 的 Tab"
 	},
+	"pricebook2": {
+		"message": "價格手冊2",
+		"description": "與 ObjectManager/Pricebook2/FieldsAndRelationships/view 相關的頁面"
+	},
+	"product2": {
+		"message": "產品2",
+		"description": "與 ObjectManager/Product2/FieldsAndRelationships/view 相關的頁面"
+	},
 	"remove_tab": {
 		"message": "Remove Tab",
 		"description": "[alt] 當圖片無法顯示時的替代文字"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "報表與儀表板設定",
+		"description": "與 ReportUI/home 相關的頁面"
 	},
 	"req_downloads_open_popup": {
 		"message": "請從瀏覽器的擴充功能選單中開啟擴充功能彈出視窗。",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "發送小費 ❤️",
 		"description": "[popup] 提示發送小費的 svg 標題"
+	},
+	"sessions": {
+		"message": "工作階段",
+		"description": "與 SecuritySession/home 相關的頁面"
 	},
 	"set_gen_preview": {
 		"message": "Tab 預覽",
@@ -1327,9 +1415,17 @@
 		"message": "設定",
 		"description": "設定選單的標籤"
 	},
+	"setup_audit_trail": {
+		"message": "設定稽核軌跡",
+		"description": "與 SecurityEvents/home 相關的頁面"
+	},
 	"setup_page": {
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] 用於修改 Salesforce 設定的頁面"
+	},
+	"sharing_settings": {
+		"message": "共用設定",
+		"description": "與 SecuritySharing/home 相關的頁面"
 	},
 	"show_all_tabs": {
 		"message": "顯示所有 $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs saved.",
 		"description": "[toast] Tab 成功儲存。"
 	},
+	"task": {
+		"message": "工作",
+		"description": "與 ObjectManager/Task/FieldsAndRelationships/view 相關的頁面"
+	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] 切換主題時月亮圖示的標題"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Change Theme to Light",
 		"description": "[popup] 切換主題時太陽圖示的標題"
+	},
+	"tutorial": {
+		"message": "教學課程",
+		"description": "[彈出式視窗] 開始教學課程的按鈕"
+	},
+	"tutorial_add_favourite": {
+		"message": "按一下星號將此頁面加入最愛。",
+		"description": "[教學課程] 加入最愛"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "按一下醒目提示的 $tab 以瀏覽至對應頁面。",
+		"description": "[教學課程] 按一下醒目提示的 Tab"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "這是為了 $extension_label 它將從您上次中斷的地方恢復未完成的 $tutorial",
+		"description": "[教學課程] 繼續教學課程的正文文字"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "從上一步繼續 $tutorial 嗎？",
+		"description": "[教學課程] 繼續教學課程的互動視窗標題"
+	},
+	"tutorial_drag_flows": {
+		"message": "拖曳醒目提示的列（使用 6 個點）並將其放在第一列（已釘選）之前。",
+		"description": "[教學課程] 拖曳流程"
+	},
+	"tutorial_end": {
+		"message": "$tutorial 已完成！祝您使用擴充功能愉快。",
+		"description": "[教學課程] 結束"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "我們找不到可用來開始 $tutorial 的連結\n請匯出您的 $tabs 並重新啟動 $tutorial",
+		"description": "[教學課程] 無法開始的錯誤訊息"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "這些是您的最愛 $tabs 它們用於快速存取常用頁面",
+		"description": "[教學課程] 醒目提示最愛 Tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "按下鍵盤快速鍵以開啟 $settings 頁面，您可以在其中更改擴充功能的行為並設定 $tabs 的樣式",
+		"description": "[教學課程] 鍵盤快速鍵"
+	},
+	"tutorial_manage_tabs": {
+		"message": "右鍵按一下頁面（不要在 Tab 上），然後選擇 $extension_label > $cxm_manage_tabs 以開啟管理互動視窗。",
+		"description": "[教學課程] 管理 Tab"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "您可以在此畫面管理您的 $tabs 按一下這裡以取得更多資訊",
+		"description": "[教學課程] 管理 Tab 連結"
+	},
+	"tutorial_pin_tab": {
+		"message": "右鍵按一下醒目提示的 $tab 並選擇 $extension_label > $cxm_move > $cxm_pin_tab 以釘選它。",
+		"description": "[教學課程] 釘選 Tab"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "拖曳的列無法移動到釘選列之前（因為它目前未釘選），因此它移到了未釘選清單的開頭。這兩個清單是分開處理的。",
+		"description": "[教學課程] 釘選說明"
+	},
+	"tutorial_pinned_tab": {
+		"message": "請注意 $tab 現在已釘選並將保持在原位。",
+		"description": "[教學課程] 已釘選的 Tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "我們現在將把您重新導向至另一個頁面以向您展示更多內容。按一下這裡繼續。",
+		"description": "[教學課程] 重新導向至帳戶"
+	},
+	"tutorial_remove_favourite": {
+		"message": "按一下劃掉的星號將此頁面從最愛中移除。提示：您可以在此步驟完成後按一下星號，以避免遺失此 $tab",
+		"description": "[教學課程] 移除最愛"
+	},
+	"tutorial_restart": {
+		"message": "您可以隨時按一下彈出式視窗中的按鈕來重新啟動 $tutorial",
+		"description": "[教學課程] 第一則訊息"
+	},
+	"tutorial_restart_prompt": {
+		"message": "您要從頭開始 $tutorial 嗎？",
+		"description": "[教學課程] 重新啟動教學課程的提示"
+	},
+	"tutorial_save_modal": {
+		"message": "按一下 $save 以套用更改並查看確認訊息。",
+		"description": "[教學課程] 儲存互動視窗"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "這是為了 $extension_label 它將先帶您前往「設定首頁」，然後開始引導式 $tutorial",
+		"description": "[教學課程] 開始教學課程的正文文字"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "從「設定首頁」開始 $tutorial 嗎？",
+		"description": "[教學課程] 開始教學課程的互動視窗標題"
 	},
 	"underline": {
 		"message": "底線",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] 模態視窗的備用標題"
+	},
+	"wiki_label": {
+		"message": "深入了解 $extension_label",
+		"description": "[彈出式視窗][設定] wiki 幫助按鈕的可存取標題與 aria-label"
 	},
 	"write_review": {
 		"message": "撰寫評論！",

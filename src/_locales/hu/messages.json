@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Fiók",
+		"description": "Az ObjectManager/Account/FieldsAndRelationships/view oldallal kapcsolatos"
+	},
 	"act_delete": {
 		"message": "🗑️ Törlés",
 		"description": "[Tab-kezelése] egy sor törlése"
@@ -39,6 +43,10 @@
 		"message": "Növekvő (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Vagyontárgy",
+		"description": "Az ObjectManager/Asset/FieldsAndRelationships/view oldallal kapcsolatos"
+	},
 	"available": {
 		"message": "Elérhető",
 		"description": "Szakaszfejléc a hozzáadható elemekhez"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Félkövér",
 		"description": "Betűstílus opció félkövér szöveghez"
+	},
+	"campaign": {
+		"message": "Kampány",
+		"description": "Az ObjectManager/Campaign/FieldsAndRelationships/view oldallal kapcsolatos"
 	},
 	"cancel": {
 		"message": "Mégsem",
@@ -55,9 +67,21 @@
 		"message": "Mégsem és bezár",
 		"description": "cím vagy szöveg azokhoz a gombokhoz, amelyek bezárják a modális ablakokat"
 	},
+	"case": {
+		"message": "Ügy",
+		"description": "Az ObjectManager/Case/FieldsAndRelationships/view oldallal kapcsolatos oldal neve"
+	},
 	"chosen": {
 		"message": "Kiválasztott",
 		"description": "Szakaszfejléc a kiválasztott elemekhez"
+	},
+	"classic_email_templates": {
+		"message": "Klasszikus e-mail sablonok",
+		"description": "A CommunicationTemplatesEmail/home oldallal kapcsolatos"
+	},
+	"close": {
+		"message": "Bezárás",
+		"description": "bezárás anélkül, hogy bármi történne"
 	},
 	"cmd_export_all": {
 		"message": "Mutasd a párbeszédet az összes mentett Tab exportálásához",
@@ -87,6 +111,14 @@
 		"message": "Mutasd a párbeszédet az aktuális oldal frissítéséhez (ha el van mentve)",
 		"description": "[command description] a felhasználó az aktuális oldal frissítését kéri"
 	},
+	"company_information": {
+		"message": "Céginformáció",
+		"description": "A CompanyProfileInfo/home oldallal kapcsolatos"
+	},
+	"confirm": {
+		"message": "Megerősítés",
+		"description": "szöveg, amely felszólítja a felhasználót a folytatásra"
+	},
 	"confirm_another_org": {
 		"message": "Erősítse meg ennek a linknek a megnyitását.",
 		"description": "[open-other-org-modal] felhasználói megerősítés kérése a generált link megnyitásához."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "A(z) $extension_label új verziója már elérhető!",
 		"description": "ismeretlen üzenet érkezett egy figyelőtől"
+	},
+	"contact": {
+		"message": "Kapcsolattartó",
+		"description": "Az ObjectManager/Contact/FieldsAndRelationships/view oldallal kapcsolatos"
 	},
 	"continue": {
 		"message": "Folytatás",
@@ -555,6 +591,10 @@
 		"message": "translator még nincs inicializálva.",
 		"description": "[error] A TranslationService még nem volt készen"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "az oktatóanyagot nem sikerült inicializálni.",
+		"description": "[error] Az oktatóanyag nem lett inicializálva"
+	},
 	"error_unknown_file_structure": {
 		"message": "Nem sikerült értelmeznünk az importálni kívánt fájlt\nHa a probléma továbbra is fennáll, kérjük, ossza meg velünk egy GitHub-bejelentés megnyitásával",
 		"description": "[importálás] a felhasználó fájlja nem felismerhető"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Ismeretlen kérés.",
 		"description": "[error] Általános hiba ismeretlen üzenet fogadása után"
+	},
+	"error_unknown_toast_type": {
+		"message": "A kért értesítési típus nem értelmezhető. Kérjük, módosítsa a kódot.",
+		"description": "[error] Általános hiba az értesítés típusának beállításakor"
 	},
 	"error_unpin_tab": {
 		"message": "Hiba a Tab rögzítésének feloldása közben",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Ennek a kiterjesztésnek a neve"
+	},
+	"field_accessibility": {
+		"message": "Mező-hozzáférhetőség",
+		"description": "A FieldAccessibility/home oldallal kapcsolatos"
 	},
 	"file": {
 		"message": "fájl",
@@ -783,13 +831,29 @@
 		"message": "Címke",
 		"description": "[key] a Tab neve"
 	},
+	"lead": {
+		"message": "Érdeklődő",
+		"description": "Az ObjectManager/Lead/FieldsAndRelationships/view oldallal kapcsolatos"
+	},
+	"learn_more_about_extension": {
+		"message": "további információ a $extension_label bővítményről",
+		"description": "[popup][settings] akadálymentes cím és aria-label a wiki súgó gombhoz"
+	},
 	"lightning_navigation": {
 		"message": "Lightning navigáció",
 		"description": "A Salesforce egyedi navigációs technológiája"
 	},
+	"login_history": {
+		"message": "Bejelentkezési előzmények",
+		"description": "Az OrgLoginHistory/home oldallal kapcsolatos"
+	},
 	"login_to_salesforce": {
 		"message": "Bejelentkezés a Salesforce-ba",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce bejelentkezési oldalára való átnyomásra"
+	},
+	"manage_connected_apps": {
+		"message": "Csatlakoztatott alkalmazások kezelése",
+		"description": "A ConnectedApplication/home oldallal kapcsolatos"
 	},
 	"manage_tabs": {
 		"message": "$tabs kezelése",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Setup megnyitása",
 		"description": "[notSalesforceSetup] felhívás gomb a Salesforce Setup oldalára történő átnyomásra"
+	},
+	"opportunity": {
+		"message": "Lehetőség",
+		"description": "Az ObjectManager/Opportunity/FieldsAndRelationships/view oldallal kapcsolatos"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Új Tabs-ek hozzáadása Org Tabs-ként.",
@@ -975,6 +1043,10 @@
 		"message": "Az engedély megadva!",
 		"description": "[siker] a felhasználó kért tőlünk egy engedélykérést, és el is fogadta azt"
 	},
+	"permission_sets": {
+		"message": "Jogosultságkészletek",
+		"description": "A PermSets/home oldallal kapcsolatos"
+	},
 	"pinned": {
 		"message": "Rögzítve",
 		"description": "A felhasználó Tabjai, amelyek mindig a lista elején találhatók"
@@ -983,9 +1055,21 @@
 		"message": "Tabok megőrzése más szervezetek számára.",
 		"description": "[label] az összes szervezet specifikus Tab megőrzése importálás során"
 	},
+	"pricebook2": {
+		"message": "Árjegyzék 2",
+		"description": "Az ObjectManager/Pricebook2/FieldsAndRelationships/view oldallal kapcsolatos"
+	},
+	"product2": {
+		"message": "Termék 2",
+		"description": "Az ObjectManager/Product2/FieldsAndRelationships/view oldallal kapcsolatos"
+	},
 	"remove_tab": {
 		"message": "Tab eltávolítása",
 		"description": "[alt] helyettesítő szöveg, ha a képek nem jelennek meg"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Jelentés- és műszerfal-beállítások",
+		"description": "A ReportUI/home oldallal kapcsolatos"
 	},
 	"req_downloads_open_popup": {
 		"message": "Kérjük, nyissa meg az extension előugró ablakát a böngészője extension menüjéből.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Küldj nekünk egy tippet ❤️",
 		"description": "[popup] cím svg-hez, hogy küldjön egy tippet"
+	},
+	"sessions": {
+		"message": "Munkamenetek",
+		"description": "A SecuritySession/home oldallal kapcsolatos"
 	},
 	"set_gen_preview": {
 		"message": "Tab Előnézet",
@@ -1327,9 +1415,17 @@
 		"message": "Beállítások",
 		"description": "Címke a beállítások menühöz"
 	},
+	"setup_audit_trail": {
+		"message": "Beállítási napló",
+		"description": "A SecurityEvents/home oldallal kapcsolatos"
+	},
 	"setup_page": {
 		"message": "Setup oldal",
 		"description": "[notSalesforceSetup] a Salesforce beállításait módosító oldal"
+	},
+	"sharing_settings": {
+		"message": "Megosztási beállítások",
+		"description": "A SecuritySharing/home oldallal kapcsolatos"
 	},
 	"show_all_tabs": {
 		"message": "Összes $tabs megjelenítése",
@@ -1439,6 +1535,10 @@
 		"message": "A Tabok elmentve.",
 		"description": "[toast] A Tabok sikeresen el lettek mentve."
 	},
+	"task": {
+		"message": "Feladat",
+		"description": "Az ObjectManager/Task/FieldsAndRelationships/view oldallal kapcsolatos"
+	},
 	"theme_dark": {
 		"message": "Téma váltás Sötétre",
 		"description": "[popup] ikon címe a holdon, a téma váltásához"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Téma váltás Világosra",
 		"description": "[popup] ikon címe a napon, a téma váltásához"
+	},
+	"tutorial": {
+		"message": "Oktatóanyag",
+		"description": "[popup] gomb az oktatóanyag indításához"
+	},
+	"tutorial_add_favourite": {
+		"message": "Kattintson a csillagra az oldal hozzáadásához a kedvencekhez.",
+		"description": "[tutorial] kedvenc hozzáadása"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Kattintson a kiemelt $tab fülre a megfelelő oldalra navigáláshoz.",
+		"description": "[tutorial] kattintás a kiemelt fülre"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Ez a(z) $extension_label bővítményhez tartozik, és ott folytatja a befejezetlen $tutorial oktatóanyagot, ahol abbahagyta.",
+		"description": "[tutorial] szövegtörzs az oktatóanyag folytatásához"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Folytatja a(z) $tutorial oktatóanyagot az utolsó lépéstől?",
+		"description": "[tutorial] modális ablak címe az oktatóanyag folytatásához"
+	},
+	"tutorial_drag_flows": {
+		"message": "Húzza el a kiemelt sort (a 6 pont segítségével), és dobja az első (rögzített) sor elé.",
+		"description": "[tutorial] folyamatok húzása"
+	},
+	"tutorial_end": {
+		"message": "$tutorial befejezve! Jó szórakozást a bővítmény használatához.",
+		"description": "[tutorial] vége"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Nem találtunk használható hivatkozásokat a(z) $tutorial indításához.\nKérjük, exportálja a(z) $tabs elemeket, és indítsa újra a(z) $tutorial oktatóanyagot.",
+		"description": "[tutorial] hibaüzenet: nem sikerült elindítani"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Ezek a kedvenc $tabs fülei, amelyek a gyakran használt oldalak gyors elérésére szolgálnak.",
+		"description": "[tutorial] kedvenc fül kiemelése"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Nyomja meg a billentyűparancsot a $settings oldal megnyitásához, ahol módosíthatja a bővítmény viselkedését és stílusozhatja a(z) $tabs füleket.",
+		"description": "[tutorial] billentyűparancs"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Kattintson a jobb gombbal az oldalon (ne egy fülön), és válassza a $extension_label > $cxm_manage_tabs lehetőséget a kezelőablak megnyitásához.",
+		"description": "[tutorial] fülek kezelése"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Ezen a képernyőn kezelheti a(z) $tabs füleket. Kattintson ide a további információkért.",
+		"description": "[tutorial] fülkezelő hivatkozás"
+	},
+	"tutorial_pin_tab": {
+		"message": "Kattintson a jobb gombbal a kiemelt $tab fülre, és válassza a $extension_label > $cxm_move > $cxm_pin_tab lehetőséget a rögzítéshez.",
+		"description": "[tutorial] fül rögzítése"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "A behúzott sort nem lehetett a rögzített sor elé mozgatni (mivel jelenleg nincs rögzítve), ezért a nem rögzített lista elejére került. Ez a két lista külön kezelendő.",
+		"description": "[tutorial] rögzítéssel kapcsolatos magyarázat"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Vegye figyelembe, hogy a(z) $tab most már rögzítve van, és a helyén marad.",
+		"description": "[tutorial] rögzített fül"
+	},
+	"tutorial_redirect_account": {
+		"message": "Most átirányítjuk egy másik oldalra, hogy többet mutassunk. Kattintson ide a folytatáshoz.",
+		"description": "[tutorial] átirányítás a fiókhoz"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Kattintson az áthúzott csillagra az oldal eltávolításához a kedvencek közül. TIPP: a lépés befejezése után ismét a csillagra kattintva elkerülheti a(z) $tab elvesztését.",
+		"description": "[tutorial] kedvenc eltávolítása"
+	},
+	"tutorial_restart": {
+		"message": "A felugró ablakban található gombra kattintva bármikor újraindíthatja a(z) $tutorial oktatóanyagot.",
+		"description": "[tutorial] első üzenet"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Szeretné elölről kezdeni a(z) $tutorial oktatóanyagot?",
+		"description": "[tutorial] felszólítás az oktatóanyag újraindítására"
+	},
+	"tutorial_save_modal": {
+		"message": "Kattintson a $save gombra a módosítások alkalmazásához és a megerősítő üzenet megtekintéséhez.",
+		"description": "[tutorial] mentés modális ablakban"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Ez a(z) $extension_label bővítményhez tartozik. Először a Beállítások kezdőoldalára viszi, majd elindítja a vezetett $tutorial oktatóanyagot.",
+		"description": "[tutorial] szövegtörzs az oktatóanyag indításához"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Elindítja a(z) $tutorial oktatóanyagot a Beállítások kezdőoldaláról?",
+		"description": "[tutorial] modális ablak címe az oktatóanyag indításához"
 	},
 	"underline": {
 		"message": "Aláhúzás",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Hová?",
 		"description": "[open-other-org-modal] alternatív cím a modális ablakhoz"
+	},
+	"wiki_label": {
+		"message": "további információ a $extension_label bővítményről",
+		"description": "[popup][settings] akadálymentes cím és aria-label a wiki súgó gombhoz"
 	},
 	"write_review": {
 		"message": "Írj véleményt!",

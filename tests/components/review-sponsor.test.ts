@@ -5,7 +5,10 @@ import {
 	assertThrows,
 } from "@std/testing/asserts";
 import { createMockElement } from "../happydom.ts";
-import { showReviewOrSponsor } from "/components/review-sponsor/review-sponsor.js";
+import {
+	showReviewOrSponsor,
+} from "/components/review-sponsor/review-sponsor.js";
+import { HIDDEN_CLASS } from "/constants.js";
 
 Deno.test("show review or sponsor block", async (t) => {
 	await t.step("throws when required params are missing", () => {
@@ -21,16 +24,22 @@ Deno.test("show review or sponsor block", async (t) => {
 		() => {
 			const reviewSvg = createMockElement();
 			const sponsorSvg = createMockElement();
+			reviewSvg.classList.add(HIDDEN_CLASS);
+			sponsorSvg.classList.add(HIDDEN_CLASS);
+			const reviewLink = createMockElement();
+			const sponsorLink = createMockElement();
 			showReviewOrSponsor({
 				allTabs: Array(7),
 				translator: {},
 				reviewSvg,
 				sponsorSvg,
+				reviewLink,
+				sponsorLink,
 			});
-			assertEquals(reviewSvg.classList.removed.length, 0);
-			assertFalse("click" in reviewSvg.events);
-			assertEquals(sponsorSvg.classList.removed.length, 0);
-			assertFalse("click" in sponsorSvg.events);
+			assertEquals(reviewSvg.classList.list.length, 1);
+			assertFalse("click" in reviewLink.events);
+			assertEquals(sponsorSvg.classList.list.length, 1);
+			assertFalse("click" in sponsorLink.events);
 		},
 	);
 
@@ -39,16 +48,22 @@ Deno.test("show review or sponsor block", async (t) => {
 		() => {
 			const reviewSvg = createMockElement();
 			const sponsorSvg = createMockElement();
+			reviewSvg.classList.add(HIDDEN_CLASS);
+			sponsorSvg.classList.add(HIDDEN_CLASS);
+			const reviewLink = createMockElement();
+			const sponsorLink = createMockElement();
 			showReviewOrSponsor({
 				allTabs: Array(8),
 				translator: {},
 				reviewSvg,
 				sponsorSvg,
+				reviewLink,
+				sponsorLink,
 			});
-			assertEquals(reviewSvg.classList.removed.length, 1);
-			assert("click" in reviewSvg.events);
-			assertEquals(sponsorSvg.classList.removed.length, 0);
-			assertFalse("click" in sponsorSvg.events);
+			assertEquals(reviewSvg.classList.list.length, 0);
+			assert("click" in reviewLink.events);
+			assertEquals(sponsorSvg.classList.list.length, 1);
+			assertFalse("click" in sponsorLink.events);
 		},
 	);
 
@@ -57,17 +72,73 @@ Deno.test("show review or sponsor block", async (t) => {
 		() => {
 			const reviewSvg = createMockElement();
 			const sponsorSvg = createMockElement();
+			reviewSvg.classList.add(HIDDEN_CLASS);
+			sponsorSvg.classList.add(HIDDEN_CLASS);
 			const translator = {};
+			const reviewLink = createMockElement();
+			const sponsorLink = createMockElement();
 			showReviewOrSponsor({
 				allTabs: Array(16),
 				translator,
 				reviewSvg,
 				sponsorSvg,
+				reviewLink,
+				sponsorLink,
 			});
-			assertEquals(reviewSvg.classList.removed.length, 1);
-			assert("click" in reviewSvg.events);
-			assertEquals(sponsorSvg.classList.removed.length, 1);
-			assert("click" in sponsorSvg.events);
+			assertEquals(reviewSvg.classList.list.length, 0);
+			assert("click" in reviewLink.events);
+			assertEquals(sponsorSvg.classList.list.length, 0);
+			assert("click" in sponsorLink.events);
+		},
+	);
+
+	await t.step(
+		"shows review after 20 days of actual use even without enough tabs",
+		() => {
+			const reviewSvg = createMockElement();
+			const sponsorSvg = createMockElement();
+			reviewSvg.classList.add(HIDDEN_CLASS);
+			sponsorSvg.classList.add(HIDDEN_CLASS);
+			const reviewLink = createMockElement();
+			const sponsorLink = createMockElement();
+			showReviewOrSponsor({
+				allTabs: [],
+				usageDays: 20,
+				translator: {},
+				reviewSvg,
+				sponsorSvg,
+				reviewLink,
+				sponsorLink,
+			});
+			assertEquals(reviewSvg.classList.list.length, 0);
+			assert("click" in reviewLink.events);
+			assertEquals(sponsorSvg.classList.list.length, 1);
+			assertFalse("click" in sponsorLink.events);
+		},
+	);
+
+	await t.step(
+		"shows sponsor after 40 days of actual use even without enough tabs",
+		() => {
+			const reviewSvg = createMockElement();
+			const sponsorSvg = createMockElement();
+			reviewSvg.classList.add(HIDDEN_CLASS);
+			sponsorSvg.classList.add(HIDDEN_CLASS);
+			const reviewLink = createMockElement();
+			const sponsorLink = createMockElement();
+			showReviewOrSponsor({
+				allTabs: [],
+				usageDays: 40,
+				translator: {},
+				reviewSvg,
+				sponsorSvg,
+				reviewLink,
+				sponsorLink,
+			});
+			assertEquals(reviewSvg.classList.list.length, 0);
+			assert("click" in reviewLink.events);
+			assertEquals(sponsorSvg.classList.list.length, 0);
+			assert("click" in sponsorLink.events);
 		},
 	);
 });

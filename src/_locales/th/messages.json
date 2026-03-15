@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "บัญชี",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ ลบ",
 		"description": "[จัดการ-Tab] ลบแถว"
@@ -39,6 +43,10 @@
 		"message": "จากน้อยไปมาก (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "สินทรัพย์",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "มีให้ใช้งาน",
 		"description": "หัวข้อส่วนสำหรับรายการที่สามารถเพิ่มได้"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "ตัวหนา",
 		"description": "ตัวเลือกรูปแบบตัวอักษรสำหรับข้อความตัวหนา"
+	},
+	"campaign": {
+		"message": "แคมเปญ",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "ยกเลิก",
@@ -55,9 +67,21 @@
 		"message": "ยกเลิกและปิด",
 		"description": "หัวเรื่องหรือเนื้อความสำหรับปุ่มปิดของโมดอล"
 	},
+	"case": {
+		"message": "เคส",
+		"description": "ชื่อหน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "ที่เลือกไว้",
 		"description": "หัวข้อส่วนสำหรับรายการที่ถูกเลือกแล้ว"
+	},
+	"classic_email_templates": {
+		"message": "เทมเพลตอีเมลคลาสสิก",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "ปิด",
+		"description": "ปิดโดยไม่ต้องดำเนินการใดๆ"
 	},
 	"cmd_export_all": {
 		"message": "แสดงโมดอลเพื่อส่งออก Tabs ที่บันทึกไว้ทั้งหมด",
@@ -87,6 +111,14 @@
 		"message": "แสดงโมดอลเพื่ออัปเดตหน้าปัจจุบัน (หากบันทึกไว้)",
 		"description": "[คำอธิบายคำสั่ง] ผู้ใช้ต้องการอัปเดตหน้าปัจจุบัน"
 	},
+	"company_information": {
+		"message": "ข้อมูลบริษัท",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "ยืนยัน",
+		"description": "ข้อความเพื่อขอให้ผู้ใช้ดำเนินการต่อ"
+	},
 	"confirm_another_org": {
 		"message": "ยืนยันการเปิดลิงก์นี้",
 		"description": "[open-other-org-modal] ขอการยืนยันจากผู้ใช้เพื่อเปิดลิงก์ที่สร้างขึ้น"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "เวอร์ชันใหม่ของ $extension_label พร้อมใช้งานแล้ว!",
 		"description": "ได้รับข้อความที่ไม่รู้จักจากผู้ฟัง"
+	},
+	"contact": {
+		"message": "ผู้ติดต่อ",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "ดำเนินการต่อ",
@@ -555,6 +591,10 @@
 		"message": "ตัวแปลยังไม่ได้รับการเริ่มต้น.",
 		"description": "[ข้อผิดพลาด] TranslationService ยังไม่พร้อม"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ไม่สามารถเริ่มบทเรียนแนะนำการใช้งานได้",
+		"description": "[error] บทเรียนแนะนำการใช้งานไม่ได้ถูกเตรียมค่าเริ่มต้น"
+	},
 	"error_unknown_file_structure": {
 		"message": "เราไม่สามารถทำความเข้าใจไฟล์ที่คุณต้องการนำเข้าได้\nหากปัญหายังคงอยู่ โปรดแชร์ให้เราทราบโดยการเปิดปัญหาบน GitHub",
 		"description": "[นำเข้า] ไม่รู้จักไฟล์ของผู้ใช้"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "คำขอไม่ทราบ.",
 		"description": "[ข้อผิดพลาด] ข้อผิดพลาดทั่วไปหลังจากได้รับข้อความที่ไม่รู้จัก"
+	},
+	"error_unknown_toast_type": {
+		"message": "ไม่สามารถตีความประเภทการแจ้งเตือนที่ร้องขอได้ โปรดเปลี่ยนรหัสของคุณ",
+		"description": "[error] ข้อผิดพลาดทั่วไปที่ใช้เมื่อตั้งค่าประเภทการแจ้งเตือน (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "ข้อผิดพลาดขณะเลิกปักหมุด Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "ชื่อของส่วนเสริมนี้"
+	},
+	"field_accessibility": {
+		"message": "การเข้าถึงฟิลด์",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ FieldAccessibility/home"
 	},
 	"file": {
 		"message": "file",
@@ -783,13 +831,29 @@
 		"message": "ป้ายกำกับ",
 		"description": "[key] ชื่อของ Tab"
 	},
+	"lead": {
+		"message": "ลูกค้ามุ่งหวัง",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "เรียนรู้เพิ่มเติมเกี่ยวกับ $extension_label",
+		"description": "[popup][settings] ชื่อที่เข้าถึงได้และ aria-label สำหรับปุ่มช่วยเหลือ wiki"
+	},
 	"lightning_navigation": {
 		"message": "การนำทาง Lightning",
 		"description": "เทคโนโลยีการนำทางที่ปรับแต่งโดย Salesforce"
 	},
+	"login_history": {
+		"message": "ประวัติการเข้าสู่ระบบ",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Login to Salesforce",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้าล็อกอินของ Salesforce"
+	},
+	"manage_connected_apps": {
+		"message": "จัดการแอปที่เชื่อมต่อ",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "จัดการ $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Open Setup",
 		"description": "[notSalesforceSetup] การเรียกร้องให้ดำเนินการผ่านปุ่มเพื่อเปลี่ยนเส้นทางผู้ใช้ไปยังหน้า Salesforce Setup"
+	},
+	"opportunity": {
+		"message": "โอกาสการขาย",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "เพิ่ม Tab-s ใหม่เป็น Org Tab-s",
@@ -975,6 +1043,10 @@
 		"message": "การอนุญาตได้รับการอนุมัติแล้ว!",
 		"description": "[สำเร็จ] ผู้ใช้ขอให้เราขออนุญาตและพวกเขาก็ยอมรับ"
 	},
+	"permission_sets": {
+		"message": "ชุดสิทธิ์การใช้งาน",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ PermSets/home"
+	},
 	"pinned": {
 		"message": "ปักหมุดแล้ว",
 		"description": "Tab ของผู้ใช้ที่พบเสมอที่จุดเริ่มต้นของรายการ"
@@ -983,9 +1055,21 @@
 		"message": "Preserve Tabs for other orgs.",
 		"description": "[label] เก็บ Tab เฉพาะองค์กรทั้งหมดในระหว่างกระบวนการนำเข้า"
 	},
+	"pricebook2": {
+		"message": "สมุดราคา 2",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "สินค้า 2",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Remove Tab",
 		"description": "[alt] ข้อความแสดงแทนเมื่อรูปภาพไม่ทำงาน"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "การตั้งค่ารายงานและแดชบอร์ด",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "โปรดเปิดส่วนขยายป๊อปอัปจากเมนูส่วนขยายของเบราว์เซอร์ของคุณ",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "ส่งทิปให้เรา ❤️",
 		"description": "[popup] หัวข้อสำหรับ svg เพื่อแจ้งให้ส่งทิป"
+	},
+	"sessions": {
+		"message": "เซสชัน",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "ตัวอย่าง Tab",
@@ -1327,9 +1415,17 @@
 		"message": "การตั้งค่า",
 		"description": "ป้ายกำกับสำหรับเมนูการตั้งค่า"
 	},
+	"setup_audit_trail": {
+		"message": "การตรวจสอบประวัติการตั้งค่า",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup Page",
 		"description": "[notSalesforceSetup] หน้าเพจที่ใช้สำหรับแก้ไขการตั้งค่าของ Salesforce"
+	},
+	"sharing_settings": {
+		"message": "การตั้งค่าการแชร์",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "แสดง $tabs ทั้งหมด",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs saved.",
 		"description": "[toast] บันทึก Tab เรียบร้อยแล้ว"
 	},
+	"task": {
+		"message": "งาน",
+		"description": "หน้าเว็บที่เกี่ยวข้องกับ ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Change Theme to Dark",
 		"description": "[popup] หัวข้อบนรูปพระจันทร์สำหรับสลับธีม"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Change Theme to Light",
 		"description": "[popup] หัวข้อบนรูปพระอาทิตย์สำหรับสลับธีม"
+	},
+	"tutorial": {
+		"message": "บทเรียนแนะนำการใช้งาน",
+		"description": "[popup] ปุ่มสำหรับเริ่มบทเรียนแนะนำการใช้งาน"
+	},
+	"tutorial_add_favourite": {
+		"message": "คลิกที่รูปดาวเพื่อเพิ่มหน้านี้ไปยังรายการโปรด",
+		"description": "[tutorial] เพิ่มรายการโปรด"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "คลิกที่แท็บ $tab ที่ไฮไลต์เพื่อไปยังหน้าที่เกี่ยวข้อง",
+		"description": "[tutorial] คลิกแท็บที่ไฮไลต์"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "นี่คือข้อมูลสำหรับ $extension_label และจะดำเนินการต่อจากจุดที่คุณค้างไว้ใน $tutorial ที่ยังไม่เสร็จสิ้น",
+		"description": "[tutorial] ข้อความสำหรับดำเนินการบทเรียนต่อ"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "ดำเนินการ $tutorial ต่อจากขั้นตอนล่าสุดหรือไม่?",
+		"description": "[tutorial] ชื่อโมดัลสำหรับดำเนินการบทเรียนต่อ"
+	},
+	"tutorial_drag_flows": {
+		"message": "ลากแถวที่ไฮไลต์ (โดยใช้จุด 6 จุด) และวางไว้ก่อนแถวแรก (ซึ่งปักหมุดไว้)",
+		"description": "[tutorial] การลากโฟลว์"
+	},
+	"tutorial_end": {
+		"message": "จบ $tutorial แล้ว! ขอให้สนุกกับการใช้ส่วนขยาย",
+		"description": "[tutorial] จบ"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "เราไม่พบลิงก์ที่เป็นประโยชน์ในการเริ่ม $tutorial\nโปรดส่งออกแท็บ $tabs ของคุณและเริ่ม $tutorial ใหม่อีกครั้ง",
+		"description": "[tutorial] ข้อความแจ้งข้อผิดพลาดเมื่อไม่สามารถเริ่มได้"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "นี่คือแท็บ $tabs โปรดของคุณ ซึ่งใช้สำหรับการเข้าถึงหน้าที่ใช้บ่อยอย่างรวดเร็ว",
+		"description": "[tutorial] ไฮไลต์แท็บโปรด"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "กดปุ่มลัดแป้นพิมพ์เพื่อเปิดหน้า $settings ซึ่งคุณสามารถเปลี่ยนพฤติกรรมของส่วนขยายและจัดรูปแบบแท็บ $tabs ของคุณได้",
+		"description": "[tutorial] ปุ่มลัดแป้นพิมพ์"
+	},
+	"tutorial_manage_tabs": {
+		"message": "คลิกขวาที่หน้าเว็บ (ไม่ใช่ที่แท็บ) แล้วเลือก $extension_label > $cxm_manage_tabs เพื่อเปิดหน้าต่างการจัดการ",
+		"description": "[tutorial] จัดการแท็บ"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "คุณสามารถจัดการแท็บ $tabs ของคุณได้จากหน้านี้ คลิกที่นี่เพื่อดูข้อมูลเพิ่มเติม",
+		"description": "[tutorial] ลิงก์จัดการแท็บ"
+	},
+	"tutorial_pin_tab": {
+		"message": "คลิกขวาที่แท็บ $tab ที่ไฮไลต์แล้วเลือก $extension_label > $cxm_move > $cxm_pin_tab เพื่อปักหมุด",
+		"description": "[tutorial] ปักหมุดแท็บ"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "ไม่สามารถย้ายแถวที่ลากไปไว้ก่อนแถวที่ปักหมุดได้ (เนื่องจากแถวนั้นไม่ได้ปักหมุดไว้ในขณะนี้) แถวดังกล่าวจึงไปอยู่ที่จุดเริ่มต้นของรายการที่ไม่ได้ปักหมุด รายการทั้งสองนี้จะถูกแยกออกจากกัน",
+		"description": "[tutorial] คำอธิบายการปักหมุด"
+	},
+	"tutorial_pinned_tab": {
+		"message": "สังเกตว่าตอนนี้แท็บ $tab ปักหมุดแล้วและจะคงอยู่ในตำแหน่งเดิม",
+		"description": "[tutorial] แท็บที่ปักหมุดแล้ว"
+	},
+	"tutorial_redirect_account": {
+		"message": "เรากำลังจะนำคุณไปยังหน้าอื่นเพื่อแสดงข้อมูลเพิ่มเติม คลิกที่นี่เพื่อดำเนินการต่อ",
+		"description": "[tutorial] เปลี่ยนเส้นทางไปยังบัญชี"
+	},
+	"tutorial_remove_favourite": {
+		"message": "คลิกที่รูปดาวที่มีเส้นขีดทับเพื่อนำหน้านี้ออกจากรายการโปรด เคล็ดลับ: คุณสามารถคลิกรูปดาวได้หลังจากทำขั้นตอนนี้เสร็จแล้วเพื่อไม่ให้แท็บ $tab นี้หายไป",
+		"description": "[tutorial] นำรายการโปรดออก"
+	},
+	"tutorial_restart": {
+		"message": "คุณสามารถเริ่ม $tutorial ใหม่ได้ทุกเมื่อโดยคลิกที่ปุ่มในป๊อปอัป",
+		"description": "[tutorial] ข้อความแรก"
+	},
+	"tutorial_restart_prompt": {
+		"message": "คุณต้องการเริ่ม $tutorial ตั้งแต่เริ่มต้นหรือไม่?",
+		"description": "[tutorial] ข้อความถามเพื่อเริ่มบทเรียนใหม่"
+	},
+	"tutorial_save_modal": {
+		"message": "คลิก $save เพื่อบันทึกการเปลี่ยนแปลงและดูข้อความยืนยัน",
+		"description": "[tutorial] บันทึกโมดัล"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "นี่คือข้อมูลสำหรับ $extension_label และจะนำคุณไปยังหน้าหลักการตั้งค่าก่อน จากนั้นจะเริ่มบทเรียนแนะนำการใช้งาน $tutorial",
+		"description": "[tutorial] ข้อความเริ่มบทเรียน"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "เริ่ม $tutorial จากหน้าหลักการตั้งค่าหรือไม่?",
+		"description": "[tutorial] ชื่อโมดัลสำหรับเริ่มบทเรียน"
 	},
 	"underline": {
 		"message": "ขีดเส้นใต้",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Where to?",
 		"description": "[open-other-org-modal] ชื่อสำรองสำหรับโมดอล"
+	},
+	"wiki_label": {
+		"message": "เรียนรู้เพิ่มเติมเกี่ยวกับ $extension_label",
+		"description": "[popup][settings] ชื่อที่เข้าถึงได้และ aria-label สำหรับปุ่มช่วยเหลือ wiki"
 	},
 	"write_review": {
 		"message": "เขียนรีวิว!",

@@ -40,7 +40,8 @@
 				"assets/svgs/*.svg",
 				"assets/icons/*.png",
 				"_locales/*/messages.json",
-				"components/help/help.css"
+				"components/help/help.css",
+				"salesforce/css/*.css"
 			],
 			"matches": [
 				"*://*.my.salesforce-setup.com/*",
@@ -76,7 +77,13 @@
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "again@why.salesforce",
-			"strict_min_version": "112.0"
+			"strict_min_version": "140.0",
+			"data_collection_permissions": {
+				"required": [],
+				"optional": [
+					"technicalAndInteraction"
+				]
+			}
 		},
 		"safari": {
 			"strict_min_version": "14.0"
@@ -130,7 +137,7 @@
 			"suggested_key": {
 				"default": "Alt+Shift+X"
 			},
-			"description": "__MSG_export_title__"
+			"description": "__MSG_cmd_export_all__"
 		},
 		"_execute_action": {
 			"suggested_key": {

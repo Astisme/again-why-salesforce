@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Account",
+		"description": "Pagina gerelateerd aan ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Verwijderen",
 		"description": "[Tab-beheren] een rij verwijderen"
@@ -39,6 +43,10 @@
 		"message": "Oplopend (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Asset",
+		"description": "Pagina gerelateerd aan ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Beschikbaar",
 		"description": "Sectiekop voor items die kunnen worden toegevoegd"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Vet",
 		"description": "Lettertype-optie voor vetgedrukte tekst"
+	},
+	"campaign": {
+		"message": "Campagne",
+		"description": "Pagina gerelateerd aan ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Annuleren",
@@ -55,9 +67,21 @@
 		"message": "Annuleren en sluiten",
 		"description": "titel of textContent voor de sluitknop van modals"
 	},
+	"case": {
+		"message": "Case",
+		"description": "Pagina gerelateerd aan ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Gekozen",
 		"description": "Sectiekop voor items die zijn geselecteerd"
+	},
+	"classic_email_templates": {
+		"message": "Klassieke e-mailsjablonen",
+		"description": "Pagina gerelateerd aan CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Sluiten",
+		"description": "sluiten zonder dat er iets gebeurt"
 	},
 	"cmd_export_all": {
 		"message": "Toon de modal om alle opgeslagen Tabs te exporteren",
@@ -87,6 +111,14 @@
 		"message": "Toon modal om huidige pagina bij te werken (indien opgeslagen)",
 		"description": "[opdrachtbeschrijving] de gebruiker wil de huidige pagina bijwerken"
 	},
+	"company_information": {
+		"message": "Bedrijfsinformatie",
+		"description": "Pagina gerelateerd aan CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Bevestigen",
+		"description": "tekst om gebruiker te vragen door te gaan"
+	},
 	"confirm_another_org": {
 		"message": "Bevestig het openen van deze link.",
 		"description": "[open-andere-org-modal] vraag de gebruiker om bevestiging om de geconstrueerde link te openen."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "Een nieuwe versie van $extension_label is nu beschikbaar!",
 		"description": "een onbekend bericht is ontvangen van een listener"
+	},
+	"contact": {
+		"message": "Contactpersoon",
+		"description": "Pagina gerelateerd aan ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Doorgaan",
@@ -555,6 +591,10 @@
 		"message": "vertaler was nog niet geïnitialiseerd.",
 		"description": "[fout] de TranslationService was niet klaar"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "tutorial kon niet worden geïnitialiseerd.",
+		"description": "[error] Tutorial was niet geïnitialiseerd"
+	},
 	"error_unknown_file_structure": {
 		"message": "We konden een bestand dat u wilde importeren niet begrijpen\nAls het probleem aanhoudt, deel het dan met ons door een GitHub-issue te openen",
 		"description": "[importeren] het bestand van de gebruiker werd niet herkend"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Onbekend verzoek.",
 		"description": "[fout] Algemene fout na ontvangst van een niet-herkend bericht"
+	},
+	"error_unknown_toast_type": {
+		"message": "Gevraagd toast-type kon niet worden geïnterpreteerd. Wijzig uw code.",
+		"description": "[error] Algemene fout gebruikt bij instellen van toast-type"
 	},
 	"error_unpin_tab": {
 		"message": "Fout bij het losmaken van Tabblad",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "De naam van deze extensie"
+	},
+	"field_accessibility": {
+		"message": "Veldtoegankelijkheid",
+		"description": "Pagina gerelateerd aan FieldAccessibility/home"
 	},
 	"file": {
 		"message": "bestand",
@@ -783,13 +831,29 @@
 		"message": "Label",
 		"description": "[key] de naam van de Tab"
 	},
+	"lead": {
+		"message": "Lead",
+		"description": "Pagina gerelateerd aan ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "meer informatie over $extension_label",
+		"description": "[popup][settings] toegankelijke titel en aria-label voor wiki-helpknop"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigatie",
 		"description": "Salesforce’s aangepaste navigatietechnologie"
 	},
+	"login_history": {
+		"message": "Inloggeschiedenis",
+		"description": "Pagina gerelateerd aan OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Inloggen bij Salesforce",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce-inlogpagina"
+	},
+	"manage_connected_apps": {
+		"message": "Verbonden apps beheren",
+		"description": "Pagina gerelateerd aan ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "$tabs beheren",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Setup openen",
 		"description": "[geenSalesforceSetup] call-to-action op een knop om de gebruiker door te sturen naar een Salesforce Setup-pagina"
+	},
+	"opportunity": {
+		"message": "Opportunity",
+		"description": "Pagina gerelateerd aan ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Nieuwe Tabbladen toevoegen als Org-Tabbladen.",
@@ -975,6 +1043,10 @@
 		"message": "De toestemming is verleend!",
 		"description": "[succes] de gebruiker heeft ons gevraagd om een toestemming aan te vragen en heeft deze geaccepteerd"
 	},
+	"permission_sets": {
+		"message": "Machtigingenverzamelingen",
+		"description": "Pagina gerelateerd aan PermSets/home"
+	},
 	"pinned": {
 		"message": "Vastgezet",
 		"description": "De Tabbladen van de gebruiker die altijd aan het begin van de lijst worden gevonden"
@@ -983,9 +1055,21 @@
 		"message": "Tabs voor andere Orgs behouden.",
 		"description": "[label] behoud alle Org-specifieke Tabs tijdens het importproces"
 	},
+	"pricebook2": {
+		"message": "Prijslijst 2",
+		"description": "Pagina gerelateerd aan ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Product 2",
+		"description": "Pagina gerelateerd aan ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Tab verwijderen",
 		"description": "[alt] alternatieve tekst wanneer afbeeldingen niet werken"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Instellingen voor rapporten en dashboards",
+		"description": "Pagina gerelateerd aan ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Open de extensie-popup vanuit het extensie-menu van uw browser.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Stuur ons een fooi ❤️",
 		"description": "[popup] titel voor svg om te vragen om een fooi te sturen"
+	},
+	"sessions": {
+		"message": "Sessies",
+		"description": "Pagina gerelateerd aan SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab Voorbeeld",
@@ -1327,9 +1415,17 @@
 		"message": "Instellingen",
 		"description": "Label voor het instellingenmenu"
 	},
+	"setup_audit_trail": {
+		"message": "Auditspoor voor configuratie",
+		"description": "Pagina gerelateerd aan SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup Pagina",
 		"description": "[geenSalesforceSetup] de pagina die wordt gebruikt om de instellingen van Salesforce te wijzigen"
+	},
+	"sharing_settings": {
+		"message": "Instellingen voor delen",
+		"description": "Pagina gerelateerd aan SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Toon alle $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabs opgeslagen.",
 		"description": "[toast] Tabs zijn succesvol opgeslagen."
 	},
+	"task": {
+		"message": "Taak",
+		"description": "Pagina gerelateerd aan ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Thema wijzigen naar Donker",
 		"description": "[popup] titel op de maan om thema te wisselen"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Thema wijzigen naar Licht",
 		"description": "[popup] titel op de zon om thema te wisselen"
+	},
+	"tutorial": {
+		"message": "Tutorial",
+		"description": "[popup] knop om tutorial te starten"
+	},
+	"tutorial_add_favourite": {
+		"message": "Klik op de ster om deze pagina aan favorieten toe te voegen.",
+		"description": "[tutorial] favoriet toevoegen"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Klik op de gemarkeerde $tab om naar de bijbehorende pagina te gaan.",
+		"description": "[tutorial] klik op gemarkeerde tab"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Dit is voor $extension_label en vervolgt uw onvoltooide $tutorial waar u gebleven was.",
+		"description": "[tutorial] tekst voor het vervolgen van de tutorial"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "$tutorial vervolgen vanaf de laatste stap?",
+		"description": "[tutorial] titel voor het vervolgen van de tutorial"
+	},
+	"tutorial_drag_flows": {
+		"message": "Sleep de gemarkeerde rij (gebruik de 6 stippen) en zet deze neer voor de eerste rij (die vastgezet is).",
+		"description": "[tutorial] flows slepen"
+	},
+	"tutorial_end": {
+		"message": "$tutorial voltooid! Veel plezier met de extensie.",
+		"description": "[tutorial] einde"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "We konden geen bruikbare links vinden om de $tutorial te starten\nExporteer uw $tabs en herstart de $tutorial",
+		"description": "[tutorial] foutmelding kan niet starten"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Dit zijn uw favoriete $tabs en ze worden gebruikt voor snelle toegang tot veelgebruikte pagina's.",
+		"description": "[tutorial] markeer favoriete tab"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Druk op de sneltoets om de pagina $settings te openen waar u het gedrag van de extensie kunt wijzigen en uw $tabs kunt stylen",
+		"description": "[tutorial] sneltoets"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Klik met de rechtermuisknop op de pagina (niet op een tab) en kies $extension_label > $cxm_manage_tabs om de beheermodule te openen.",
+		"description": "[tutorial] tab beheren"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "U kunt uw $tabs beheren vanuit dit scherm. Klik hier voor meer informatie.",
+		"description": "[tutorial] link voor tabbeheer"
+	},
+	"tutorial_pin_tab": {
+		"message": "Klik met de rechtermuisknop op de gemarkeerde $tab en kies $extension_label > $cxm_move > $cxm_pin_tab om deze vast te zetten.",
+		"description": "[tutorial] tab vastzetten"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "De gesleepte rij kon niet voor de vastgezette rij worden geplaatst (omdat deze momenteel niet vastgezet is), dus deze is naar het begin van de niet-vastgezette lijst gegaan. Deze twee lijsten worden afzonderlijk behandeld.",
+		"description": "[tutorial] uitleg vastgezet"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Merk op dat de $tab nu is vastgezet en op zijn plaats blijft.",
+		"description": "[tutorial] vastgezette tab"
+	},
+	"tutorial_redirect_account": {
+		"message": "We leiden u nu door naar een andere pagina om u meer te laten zien. Klik hier om door te gaan.",
+		"description": "[tutorial] doorsturen naar account"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Klik op de doorgestreepte ster om deze pagina uit de favorieten te verwijderen. TIP: u kunt op de ster klikken nadat deze stap is voltooid om te voorkomen dat u deze $tab verliest",
+		"description": "[tutorial] favoriet verwijderen"
+	},
+	"tutorial_restart": {
+		"message": "U kunt de $tutorial op elk gewenst moment herstarten door op de knop in de pop-up te klikken.",
+		"description": "[tutorial] eerste bericht"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Wilt u de $tutorial vanaf het begin starten?",
+		"description": "[tutorial] prompt voor herstarten tutorial"
+	},
+	"tutorial_save_modal": {
+		"message": "Klik op $save om de wijzigingen toe te passen en de bevestiging te zien.",
+		"description": "[tutorial] modaal venster opslaan"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Dit is voor $extension_label en brengt u eerst naar de Setup Home-pagina en start daarna de begeleide $tutorial",
+		"description": "[tutorial] tekst voor het starten van de tutorial"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "$tutorial starten vanaf Setup Home?",
+		"description": "[tutorial] titel voor het starten van de tutorial"
 	},
 	"underline": {
 		"message": "Onderstrepen",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Waarheen?",
 		"description": "[open-andere-org-modal] fallback-titel voor de modal"
+	},
+	"wiki_label": {
+		"message": "meer informatie over $extension_label",
+		"description": "[popup][settings] toegankelijke titel en aria-label voor wiki-helpknop"
 	},
 	"write_review": {
 		"message": "Schrijf een recensie!",

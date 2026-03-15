@@ -1,6 +1,8 @@
 "use strict";
 import {
+	ALL_CXM_KEYS,
 	BROWSER,
+	CMD_AND_CXM_MAP_TO_WHAT,
 	CMD_EXPORT_ALL,
 	CMD_IMPORT,
 	CMD_OPEN_OTHER_ORG,
@@ -10,7 +12,6 @@ import {
 	CMD_TOGGLE_ORG,
 	CMD_UPDATE_TAB,
 	CONTEXT_MENU_PATTERNS,
-	CONTEXT_MENU_PATTERNS_REGEX,
 	CXM_EMPTY_GENERIC_TABS,
 	CXM_EMPTY_TABS,
 	CXM_EMPTY_VISIBLE_TABS,
@@ -44,6 +45,7 @@ import {
 	CXM_UPDATE_TAB,
 	FRAME_PATTERNS,
 	SETTINGS_KEY,
+	TOAST_WARNING,
 	USER_LANGUAGE,
 } from "/constants.js";
 import { openSettingsPage } from "/functions.js";
@@ -70,6 +72,8 @@ let link_cmd_open_settings = null;
 let link_cmd_open_other_org = null;
 let link_cmd_import = null;
 let link_cmd_export_all = null;
+// deno-lint-ignore no-var
+var pendingContextMenuOperation = null; // is var for tests
 
 /**
  * Asynchronously retrieves command shortcut links and updates corresponding variables.
@@ -131,7 +135,6 @@ const menuItemsOriginal = [
 	{
 		id: CXM_OPEN_OTHER_ORG,
 		title: "cxm_open_other_org",
-		//title: ["cxm_open_other_org",link_cmd_open_other_org != null ? `(${link_cmd_open_other_org})` : null],
 		contexts: ["link", "page", "frame"],
 	},
 
@@ -421,15 +424,20 @@ function getMenuItemsClone() {
 
 /**
  * Creates context menu items dynamically based on the provided menu definitions.
+ * Existing menus are removed first when a forced rebuild is requested or when
+ * local state indicates the browser menu tree may be stale.
  *
- * - Iterates through `menuItems` and creates each item using `BROWSER.contextMenus.create`.
+ * @param {boolean} [force=false] - Whether to rebuild the menu tree even when
+ * it is already marked as visible.
  */
-async function createMenuItems() {
-	if (areMenuItemsVisible) return;
+async function createMenuItems(force = false) {
+	if (areMenuItemsVisible && !force) {
+		return;
+	}
 	const translator = await ensureTranslatorAvailability();
 	await updateCommandLinks();
-	areMenuItemsVisible = true;
 	try {
+		await removeMenuItems(true);
 		// load the user picked language
 		if (
 			!await translator.loadNewLanguage(
@@ -448,19 +456,50 @@ async function createMenuItems() {
 				throw new Error(BROWSER.runtime.lastError.message);
 			}
 		}
+		areMenuItemsVisible = true;
 	} catch (error) {
+		areMenuItemsVisible = false;
 		const msg = await translator.translate("error_cxm_create");
 		console.error(msg, error);
-		await removeMenuItems();
+		await removeMenuItems(true);
 	}
 	resetLinks();
 }
 
 /**
- * Removes all existing context menu items.
+ * Serializes context menu mutations so create/remove/refresh flows do not overlap.
+ *
+ * @param {Function} operation - The async menu operation to run.
+ * @return {Promise<unknown>} A promise that resolves when the queued operation completes.
  */
-async function removeMenuItems() {
-	if (!areMenuItemsVisible) return;
+function queueContextMenuOperation(operation) {
+	if (pendingContextMenuOperation == null) {
+		pendingContextMenuOperation = Promise.resolve();
+	}
+	pendingContextMenuOperation = pendingContextMenuOperation
+		.catch(() => undefined)
+		.then(operation);
+	return pendingContextMenuOperation;
+}
+
+/**
+ * Resets in-memory context menu tracking used by this module.
+ * This is exported for tests so each case can start from a clean state.
+ */
+export function resetContextMenuStateForTests() {
+	areMenuItemsVisible = false;
+	pendingContextMenuOperation = null;
+	resetLinks();
+}
+
+/**
+ * Removes existing context menu items.
+ *
+ * @param {boolean} [force=false] - Whether to remove menu items even when the
+ * local visibility state says none are currently tracked.
+ */
+async function removeMenuItems(force = false) {
+	if (!force && !areMenuItemsVisible) return;
 	try {
 		await BROWSER.contextMenus.removeAll();
 		areMenuItemsVisible = false;
@@ -471,59 +510,62 @@ async function removeMenuItems() {
 	}
 }
 
-// deno-lint-ignore no-var
-var intervalCxm = null; // is var so that it does not break tests
 /**
- * Returns the current interval (for tests)
- * @return current interval
+ * Logs a translated context menu error message.
+ *
+ * @param {unknown} error - The error thrown while managing context menus.
+ * @return {Promise<void>}
  */
-export function getIntervalCxm() {
-	return intervalCxm;
+async function logContextMenuError(error) {
+	console.trace();
+	if (error == null || error.message === "") {
+		return;
+	}
+	const translator = await ensureTranslatorAvailability();
+	const msg = await translator.translate("error_cxm_check");
+	console.error(msg, error.message);
 }
+
 /**
- * Checks the current browser tab's URL against a list of patterns and adds or removes context menu items based on the match.
- * If a match is found, it removes existing context menu items and creates new ones. If no match is found, it removes any existing context menu items.
- * The function also triggers a notification if the context menu is updated.
+ * Ensures context menu items are registered in the browser. Visibility is
+ * controlled by each item's `documentUrlPatterns`, not by the active tab.
  *
  * @param {string} what - A string identifier to specify the action that triggered the context menu check. This is used in the notification.
  * @param {function} [callback=null] - A callback to call at the end of the execution
- * @throws {Error} Throws an error if there is an issue retrieving the current browser tab or if there are any errors during context menu updates.
+ * @return {Promise} the promise with the queued operation
  */
-export async function checkAddRemoveContextMenus(what, callback = null) {
-	const isFirstLaunch = intervalCxm == null;
-	if (isFirstLaunch) {
-		// Start periodic check
-		intervalCxm = setInterval(async () => {
-			if (!areMenuItemsVisible) {
-				await checkAddRemoveContextMenus();
-			}
-		}, 60000);
-	}
-	try {
-		const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
-		if (browserTabUrl == null) {
-			return;
-		}
-		if (!isFirstLaunch) {
-			await removeMenuItems();
-		}
-		if (
-			CONTEXT_MENU_PATTERNS_REGEX.some((cmp) => browserTabUrl.match(cmp))
-		) {
+export function checkAddRemoveContextMenus(what, callback = null) {
+	return queueContextMenuOperation(async () => {
+		try {
 			await createMenuItems();
-			bg_notify({ what });
-			if (callback != null) {
-				callback();
+			if (what != null) {
+				bg_notify({ what });
 			}
+			callback?.();
+		} catch (error) {
+			await logContextMenuError(error);
 		}
-	} catch (error) {
-		console.trace();
-		if (error != null && error.message !== "") {
-			const translator = await ensureTranslatorAvailability();
-			const msg = await translator.translate("error_cxm_check");
-			console.error(msg, error.message);
+	});
+}
+
+/**
+ * Rebuilds context menu items so translated labels and command shortcuts stay current.
+ * Visibility remains controlled by each item's `documentUrlPatterns`.
+ *
+ * @param {string} what - A string identifier to specify the action that triggered the context menu refresh.
+ * @return {Promise} the promise with the queued operation
+ */
+export function refreshContextMenus(what) {
+	return queueContextMenuOperation(async () => {
+		try {
+			await createMenuItems(true);
+			if (what != null) {
+				bg_notify({ what });
+			}
+		} catch (error) {
+			await logContextMenuError(error);
 		}
-	}
+	});
 }
 
 /**
@@ -538,8 +580,18 @@ export async function checkAddRemoveContextMenus(what, callback = null) {
  * - Calls `bg_notify(message)` to handle further processing or communication.
  */
 BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
-	const message = { what: info.menuItemId };
 	const browserTabUrl = (await bg_getCurrentBrowserTab())?.url;
+	const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
+	const message = {
+		what: CMD_AND_CXM_MAP_TO_WHAT[info.menuItemId] ?? info.menuItemId,
+		tabUrl: Tab.minifyURL(url),
+		label: info.linkText,
+		url: Tab.expandURL(
+			url,
+			browserTabUrl,
+		),
+		org: Tab.extractOrgName(url),
+	};
 	switch (info.menuItemId) {
 		case CMD_OPEN_SETTINGS:
 			openSettingsPage();
@@ -560,29 +612,13 @@ BROWSER.contextMenus.onClicked.addListener(async (info, _) => {
 			}
 			message.linkTabLabel = info.linkText;
 			break;
-		case CXM_IMPORT_TABS:
-			message.what = "add";
+		default:
+			if (!ALL_CXM_KEYS.has(info.menuItemId)) {
+				message.what = TOAST_WARNING;
+				message.message =
+					`Received unknown context menu: ${info.menuItemId}`;
+			}
 			break;
-		case CXM_MANAGE_TABS:
-		case CXM_SORT_LABEL:
-		case CXM_SORT_URL:
-		case CXM_SORT_ORG:
-		case CXM_SORT_CLICK_COUNT:
-		case CXM_SORT_CLICK_DATE:
-		case CXM_REMOVE_PIN_TABS:
-		case CXM_REMOVE_UNPIN_TABS:
-			break;
-		default: {
-			const url = info.linkUrl ?? info.pageUrl ?? browserTabUrl;
-			message.tabUrl = Tab.minifyURL(url);
-			message.url = Tab.expandURL(
-				url,
-				browserTabUrl,
-			);
-			message.label = info.linkText;
-			message.org = Tab.extractOrgName(url);
-			break;
-		}
 	}
 	bg_notify(message);
 });
@@ -592,6 +628,6 @@ BROWSER.storage.onChanged.addListener((changes) => {
 		el.id === USER_LANGUAGE
 	);
 	if (pickedLanguageObj != null && pickedLanguageObj.length > 0) {
-		checkAddRemoveContextMenus();
+		refreshContextMenus();
 	}
 });

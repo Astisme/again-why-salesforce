@@ -5,7 +5,13 @@ import {
 	CXM_UNPIN_TAB,
 	HIDDEN_CLASS,
 	PIN_TAB_CLASS,
+	TOAST_ERROR,
+	TOAST_WARNING,
+	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
+	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
+	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
 } from "/constants.js";
+import { getInnerElementFieldBySelector, injectStyle } from "/functions.js";
 import Tab from "/tab.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";
 import ensureTranslatorAvailability from "/translator.js";
@@ -22,6 +28,7 @@ import {
 	getModalHanger,
 	makeDuplicatesBold,
 	reorderTabsUl,
+	sf_afterSet,
 	showToast,
 } from "./content.js";
 
@@ -165,7 +172,7 @@ function getLastTr(tbody = null) {
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
  */
-function handleActionButtonClick(e, {
+export function handleActionButtonClick(e, {
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -522,15 +529,11 @@ async function removeTr(
  * @param {TbodyHTMLElement} tabAppendElement - the tbody element where to append the style
  */
 function checkAddDuplicateStyle(tabAppendElement) {
-	const styleId = "awsf-warning";
-	const style = tabAppendElement.querySelector(`#${styleId}`);
-	if (style == null) {
-		const newStyle = document.createElement("style");
-		newStyle.id = styleId;
-		newStyle.textContent =
-			".duplicate { background-color: #dd7a01 !important; }";
-		tabAppendElement.appendChild(newStyle);
-	}
+	const styleEl = injectStyle(
+		"awsf-warning",
+		{ css: ".duplicate { background-color: #dd7a01 !important; }" },
+	);
+	tabAppendElement.appendChild(styleEl);
 }
 
 /**
@@ -552,7 +555,7 @@ async function checkDuplicates({
 		return;
 	}
 	// show warning in salesforce
-	showToast("error_tab_url_saved", false, true);
+	showToast("error_tab_url_saved", TOAST_WARNING);
 	makeDuplicatesBold(url);
 	// highlight all duplicated rows and scroll to the first one
 	checkAddDuplicateStyle(tabAppendElement);
@@ -748,21 +751,9 @@ function reorderTabsTable({
 	);
 	manage_InvalidateSort = true;
 	wasSomethingUpdated = true;
-}
-
-/**
- * Returns the value from the given selector
- * @param {Object} [param0={}] an object with the following keys
- * @param {TrHTMLElement} [param0.tr=null] - the tr where to selector is located
- * @param {string} [param0.selector=""] - the selector to be used inside the query to find the element with a value
- * @return undefined (when the value is null or "") or the trimmed value
- */
-function getInputValue({
-	tr = null,
-	selector = "",
-} = {}) {
-	const value = tr?.querySelector(selector).value.trim();
-	return value == null || value === "" ? undefined : value;
+	document.dispatchEvent(
+		new CustomEvent(TUTORIAL_EVENT_REORDERED_TABS_TABLE),
+	);
 }
 
 /**
@@ -781,20 +772,40 @@ async function readManagedTabsAndSave({
 	for (const tr of tbody.querySelectorAll("tr")) {
 		if (tr !== lastTr) { // lastChild is always empty
 			tableTabs.push(Tab.create({
-				label: getInputValue({ tr, selector: "input.label" }),
-				url: getInputValue({ tr, selector: "input.url" }),
-				org: getInputValue({ tr, selector: "input.org" }),
+				label: getInnerElementFieldBySelector({
+					parentElement: tr,
+					field: "value",
+					selector: "input.label",
+				}),
+				url: getInnerElementFieldBySelector({
+					parentElement: tr,
+					field: "value",
+					selector: "input.url",
+				}),
+				org: getInnerElementFieldBySelector({
+					parentElement: tr,
+					field: "value",
+					selector: "input.org",
+				}),
 			}));
 		}
 	}
 	allTabs = allTabs ?? await ensureAllTabsAvailability();
 	// send message to save the Tabs as they were read
-	await allTabs.replaceTabs(tableTabs, {
-		resetTabs: true,
-		removeOrgTabs: true,
-		updatePinnedTabs: false,
-		invalidateSort: manage_InvalidateSort,
-	});
+	if (
+		await allTabs.replaceTabs(tableTabs, {
+			resetTabs: true,
+			removeOrgTabs: true,
+			updatePinnedTabs: false,
+			invalidateSort: manage_InvalidateSort,
+		})
+	) {
+		sf_afterSet({
+			tabs: allTabs,
+		});
+	} else {
+		showToast("error_processing_tabs", TOAST_ERROR);
+	}
 }
 
 /**
@@ -805,7 +816,7 @@ async function readManagedTabsAndSave({
  */
 export async function createManageTabsModal() {
 	if (document.getElementById(MODAL_ID) != null) {
-		return showToast("error_close_other_modal", false);
+		return showToast("error_close_other_modal", TOAST_ERROR);
 	}
 	const allTabs = await ensureAllTabsAvailability({ reset: true });
 	const {
@@ -836,6 +847,9 @@ export async function createManageTabsModal() {
 	setupDragForTable(reorderTabsTable);
 	closeButton.addEventListener("click", (_) => {
 		setupDragForUl(reorderTabsUl);
+		document.dispatchEvent(
+			new CustomEvent(TUTORIAL_EVENT_CLOSE_MANAGE_TABS),
+		);
 	});
 	saveButton.addEventListener("click", (e) => {
 		e.preventDefault();
@@ -895,4 +909,7 @@ export async function createManageTabsModal() {
 		}
 		deleteAllButton.setAttribute("disabled", true);
 	});
+	document.dispatchEvent(
+		new CustomEvent(TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL),
+	);
 }

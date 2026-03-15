@@ -1,10 +1,58 @@
+html,
 body {
-	background-color: unset;
+	background-color: var(--background-color);
+	color: var(--color);
 }
 
 .tabContainer {
 	overflow-x: auto;
 	scrollbar-width: thin;
+}
+
+html,
+body,
+input,
+label,
+#header,
+.container,
+.select-wrapper select,
+.select-wrapper::after,
+.slds-dueling-list__options,
+.slds-listbox,
+.slds-listbox__option {
+	transition-property:
+		background-color,
+		border-color,
+		color,
+		fill,
+		stroke,
+		box-shadow,
+		accent-color;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+}
+
+input[type="checkbox"] {
+	vertical-align: text-bottom;
+	transition: filter var(--transition-duration)
+		var(--transition-timing-function);
+}
+
+#optional-settings li,
+ul.settings > li,
+#sort-container > .flex-row {
+	transition-property: opacity, color, background-color;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+}
+
+html.theme-transitioning input[type="checkbox"] {
+	filter: saturate(0.2);
+}
+
+html.theme-transitioning
+	:is(#optional-settings li, ul.settings > li, #sort-container > .flex-row) {
+	opacity: 0.78;
 }
 
 ul.settings {
@@ -32,6 +80,38 @@ ul.settings {
 .container {
 	margin: 1rem;
 	margin-bottom: 0;
+}
+
+#actions {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-left: auto;
+	padding-inline: 1rem;
+
+	& > * {
+		cursor: pointer;
+	}
+}
+
+#actions > a.action-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color);
+	text-decoration: none;
+
+	&:focus-visible {
+		outline: 2px solid var(--highlight);
+		outline-offset: 2px;
+		border-radius: 0.25rem;
+	}
+
+	& > svg {
+		width: 1.5rem;
+		height: 1.5rem;
+		fill: currentColor;
+	}
 }
 
 .dual-listbox-container {
@@ -98,7 +178,7 @@ ul.settings {
 	label {
 		font-size: 14px;
 		margin-bottom: 4px;
-		color: #16325c;
+		color: var(--color);
 	}
 	.select-wrapper {
 		position: relative;
@@ -107,9 +187,9 @@ ul.settings {
 			padding: 8px 32px 8px 12px;
 			font-size: 14px;
 			line-height: 1.4;
-			color: #16325c;
-			background: #fff;
-			border: 1px solid #0070d2;
+			color: var(--color);
+			background: var(--background-color);
+			border: 1px solid var(--highlight);
 			border-radius: 4px;
 			appearance: none;
 			-webkit-appearance: none;
@@ -117,7 +197,7 @@ ul.settings {
 			cursor: pointer;
 			&:focus {
 				outline: none;
-				box-shadow: 0 0 0 2px rgba(0, 112, 210, 0.3);
+				box-shadow: 0 0 0 2px rgba(var(--rgbcolor), 0.2);
 			}
 		}
 		&::after {
@@ -129,9 +209,12 @@ ul.settings {
 			height: 0;
 			border-left: 5px solid transparent;
 			border-right: 5px solid transparent;
-			border-top: 5px solid #16325c;
+			border-top: 5px solid var(--color);
 			transform: translateY(-50%);
 			pointer-events: none;
+			transition-property: border-top-color;
+			transition-duration: var(--transition-duration);
+			transition-timing-function: var(--transition-timing-function);
 		}
 	}
 }
@@ -180,6 +263,26 @@ hr {
 	position: sticky;
 	top: 0;
 	z-index: 1;
+	background-color: var(--background-color);
+	box-shadow: 0 2px 2px 0 rgba(var(--rgbcolor), 0.1);
+	transition-property: background-color, box-shadow, opacity;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
+}
+
+#header
+	:is(
+		.slds-context-bar,
+		.slds-context-bar__primary,
+		.slds-context-bar__secondary,
+		.slds-context-bar__label-action,
+		.slds-context-bar__button,
+		.slds-truncate,
+		.appName
+	) {
+	transition-property: background-color, color;
+	transition-duration: var(--transition-duration);
+	transition-timing-function: var(--transition-timing-function);
 }
 
 .slds-form-element__label.flex-row:has(label, input) {
@@ -187,5 +290,47 @@ hr {
 	& div.slds-grow {
 		width: 4.65em;
 		flex-grow: 0;
+	}
+}
+
+html[data-theme="dark"] {
+	#header,
+	#header
+		:is(
+			.slds-context-bar,
+			.slds-context-bar__primary,
+			.slds-context-bar__secondary
+		) {
+		background-color: var(--shade);
+	}
+
+	#header
+		:is(
+			.slds-context-bar__label-action,
+			.slds-context-bar__button,
+			.slds-truncate,
+			.appName
+		) {
+		color: var(--color);
+	}
+
+	#header .slds-context-bar__item.slds-is-active {
+		background-color: var(--background-color);
+	}
+
+	.slds-dueling-list__options,
+	.slds-listbox,
+	.slds-listbox__option {
+		background-color: var(--shade);
+		border-color: var(--border-color);
+		color: var(--color);
+	}
+
+	.slds-listbox_vertical .slds-listbox__option:hover {
+		background-color: rgba(var(--rgbcolor), 0.08);
+	}
+
+	hr {
+		border-color: var(--border-color);
 	}
 }

@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "Konto",
+		"description": "Side relatert til ObjectManager/Account/FieldsAndRelationships/view"
+	},
 	"act_delete": {
 		"message": "🗑️ Slett",
 		"description": "[administrer-Tab] slett en rad"
@@ -39,6 +43,10 @@
 		"message": "Stigende (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "Eiendel",
+		"description": "Side relatert til ObjectManager/Asset/FieldsAndRelationships/view"
+	},
 	"available": {
 		"message": "Tilgjengelig",
 		"description": "Seksjonshode for elementer som kan legges til"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "Fet",
 		"description": "Skriftalternativ for fet tekst"
+	},
+	"campaign": {
+		"message": "Kampanje",
+		"description": "Side relatert til ObjectManager/Campaign/FieldsAndRelationships/view"
 	},
 	"cancel": {
 		"message": "Avbryt",
@@ -55,9 +67,21 @@
 		"message": "Avbryt og lukk",
 		"description": "tittel eller tekst for lukke-knappen for modaler"
 	},
+	"case": {
+		"message": "Sak",
+		"description": "Navnet på siden relatert til ObjectManager/Case/FieldsAndRelationships/view"
+	},
 	"chosen": {
 		"message": "Valgt",
 		"description": "Seksjonshode for elementer som har blitt valgt"
+	},
+	"classic_email_templates": {
+		"message": "Klassiske e-postmaler",
+		"description": "Side relatert til CommunicationTemplatesEmail/home"
+	},
+	"close": {
+		"message": "Lukk",
+		"description": "lukk uten at noe skjer"
 	},
 	"cmd_export_all": {
 		"message": "Vis modal for å eksportere alle lagrede Tabs",
@@ -87,6 +111,14 @@
 		"message": "Vis modal for å oppdatere gjeldende side (hvis lagret)",
 		"description": "[kommando beskrivelse] brukeren vil oppdatere gjeldende side"
 	},
+	"company_information": {
+		"message": "Firmainformasjon",
+		"description": "Side relatert til CompanyProfileInfo/home"
+	},
+	"confirm": {
+		"message": "Bekreft",
+		"description": "tekst for å be brukeren fortsette"
+	},
 	"confirm_another_org": {
 		"message": "Bekreft åpning av denne lenken.",
 		"description": "[open-other-org-modal] ber om bekreftelse fra brukeren for å åpne den konstruerte lenken."
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "En ny versjon av $extension_label er nå tilgjengelig!",
 		"description": "en ukjent melding er mottatt fra en lytter"
+	},
+	"contact": {
+		"message": "Kontakt",
+		"description": "Side relatert til ObjectManager/Contact/FieldsAndRelationships/view"
 	},
 	"continue": {
 		"message": "Fortsett",
@@ -555,6 +591,10 @@
 		"message": "oversetteren ble ikke initialisert ennå.",
 		"description": "[feil] TranslationService var ikke klar"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "opplæringen kunne ikke initialiseres.",
+		"description": "[error] Opplæringen ble ikke initialisert"
+	},
 	"error_unknown_file_structure": {
 		"message": "Vi kunne ikke forstå en fil du ønsket å importere\nHvis problemet vedvarer, vennligst del det med oss ved å åpne en GitHub-sak",
 		"description": "[importer] brukerens fil ble ikke gjenkjent"
@@ -566,6 +606,10 @@
 	"error_unknown_request": {
 		"message": "Ukjent forespørsel.",
 		"description": "[feil] Generisk feil etter å ha mottatt en melding som ikke ble gjenkjent"
+	},
+	"error_unknown_toast_type": {
+		"message": "Forespurt varslingstype kunne ikke tolkes. Vennligst endre koden din.",
+		"description": "[error] Generell feil brukt ved innstilling av varslingstype (toast)"
 	},
 	"error_unpin_tab": {
 		"message": "Feil under løsning av Tab",
@@ -598,6 +642,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "Navnet på denne utvidelsen"
+	},
+	"field_accessibility": {
+		"message": "Felttilgjengelighet",
+		"description": "Side relatert til FieldAccessibility/home"
 	},
 	"file": {
 		"message": "fil",
@@ -783,13 +831,29 @@
 		"message": "Etikett",
 		"description": "[key] Tab-ens navn"
 	},
+	"lead": {
+		"message": "Salgssemne",
+		"description": "Side relatert til ObjectManager/Lead/FieldsAndRelationships/view"
+	},
+	"learn_more_about_extension": {
+		"message": "lær mer om $extension_label",
+		"description": "[popup][settings] tilgjengelig tittel og aria-label for wiki-hjelpeknapp"
+	},
 	"lightning_navigation": {
 		"message": "Lightning-navigasjon",
 		"description": "Salesforces tilpassede navigasjonsteknologi"
 	},
+	"login_history": {
+		"message": "Innloggingshistorikk",
+		"description": "Side relatert til OrgLoginHistory/home"
+	},
 	"login_to_salesforce": {
 		"message": "Logg inn på Salesforce",
 		"description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforces innloggingsside"
+	},
+	"manage_connected_apps": {
+		"message": "Administrer tilkoblede apper",
+		"description": "Side relatert til ConnectedApplication/home"
 	},
 	"manage_tabs": {
 		"message": "Administrer $tabs",
@@ -842,6 +906,10 @@
 	"open_setup": {
 		"message": "Åpne Setup",
 		"description": "[notSalesforceSetup] handlingsoppfordring på en knapp for å omdirigere brukeren til Salesforce Setup-siden"
+	},
+	"opportunity": {
+		"message": "Salgsmulighet",
+		"description": "Side relatert til ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "Legg til nye Tab-er som Org Tab-er.",
@@ -975,6 +1043,10 @@
 		"message": "Tillatelsen er gitt!",
 		"description": "[suksess] brukeren ba oss om å be om tillatelse og godtok den"
 	},
+	"permission_sets": {
+		"message": "Tilgangssett",
+		"description": "Side relatert til PermSets/home"
+	},
 	"pinned": {
 		"message": "Festet",
 		"description": "Brukerens Tab-er som alltid finnes i begynnelsen av listen"
@@ -983,9 +1055,21 @@
 		"message": "Behold Tabber for andre organisasjoner.",
 		"description": "[label] behold alle organisasjonsspesifikke Tabber under import"
 	},
+	"pricebook2": {
+		"message": "Prisliste 2",
+		"description": "Side relatert til ObjectManager/Pricebook2/FieldsAndRelationships/view"
+	},
+	"product2": {
+		"message": "Produkt 2",
+		"description": "Side relatert til ObjectManager/Product2/FieldsAndRelationships/view"
+	},
 	"remove_tab": {
 		"message": "Fjern Tab",
 		"description": "[alt] alternativ tekst når bilder ikke vises"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "Innstillinger for rapporter og instrumentbord",
+		"description": "Side relatert til ReportUI/home"
 	},
 	"req_downloads_open_popup": {
 		"message": "Vennligst åpne utvidelsens popup fra utvidelsesmenyen i nettleseren din.",
@@ -1066,6 +1150,10 @@
 	"send_tip": {
 		"message": "Send oss et tips ❤️",
 		"description": "[popup] tittel for svg for å be om å sende et tips"
+	},
+	"sessions": {
+		"message": "Sesjoner",
+		"description": "Side relatert til SecuritySession/home"
 	},
 	"set_gen_preview": {
 		"message": "Tab-forhåndsvisning",
@@ -1327,9 +1415,17 @@
 		"message": "Innstillinger",
 		"description": "Etikett for innstillingsmenyen"
 	},
+	"setup_audit_trail": {
+		"message": "Revisjonsspor for oppsett",
+		"description": "Side relatert til SecurityEvents/home"
+	},
 	"setup_page": {
 		"message": "Setup-side",
 		"description": "[notSalesforceSetup] siden for å endre Salesforce-innstillinger"
+	},
+	"sharing_settings": {
+		"message": "Delingsinnstillinger",
+		"description": "Side relatert til SecuritySharing/home"
 	},
 	"show_all_tabs": {
 		"message": "Vis alle $tabs",
@@ -1439,6 +1535,10 @@
 		"message": "Tabber lagret.",
 		"description": "[toast] Tabber ble lagret med suksess."
 	},
+	"task": {
+		"message": "Oppgave",
+		"description": "Side relatert til ObjectManager/Task/FieldsAndRelationships/view"
+	},
 	"theme_dark": {
 		"message": "Bytt tema til mørkt",
 		"description": "[popup] tittel for måneikonet for temaendring"
@@ -1446,6 +1546,94 @@
 	"theme_light": {
 		"message": "Bytt tema til lyst",
 		"description": "[popup] tittel for solikonet for temaendring"
+	},
+	"tutorial": {
+		"message": "Opplæring",
+		"description": "[popup] knapp for å starte opplæring"
+	},
+	"tutorial_add_favourite": {
+		"message": "Klikk på stjernen for å legge til denne siden i favoritter.",
+		"description": "[tutorial] legg til favoritt"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "Klikk på den uthevede $tab for å navigere til den tilsvarende siden.",
+		"description": "[tutorial] klikk på uthevet fane"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "Dette er for $extension_label og vil fortsette din ufullstendige $tutorial der du slapp.",
+		"description": "[tutorial] tekst for å fortsette opplæringen"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "Fortsett $tutorial fra siste trinn?",
+		"description": "[tutorial] tittel for å fortsette opplæringen"
+	},
+	"tutorial_drag_flows": {
+		"message": "Dra den uthevede raden (ved hjelp av de 6 punktene) og slipp den før den første raden (som er festet).",
+		"description": "[tutorial] dra flyter"
+	},
+	"tutorial_end": {
+		"message": "$tutorial fullført! Ha det gøy med utvidelsen.",
+		"description": "[tutorial] slutt"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "Vi fant ingen brukbare lenker for å starte $tutorial\nVennligst eksporter dine $tabs og start $tutorial på nytt",
+		"description": "[tutorial] feilmelding kan ikke starte"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "Dette er dine favoritt $tabs og brukes for rask tilgang til ofte brukte sider.",
+		"description": "[tutorial] uthev favorittfane"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "Trykk på hurtigtasten for å åpne $settings siden der du kan endre utvidelsens oppførsel og style dine $tabs",
+		"description": "[tutorial] hurtigtast"
+	},
+	"tutorial_manage_tabs": {
+		"message": "Høyreklikk på siden (ikke på en fane) og velg $extension_label > $cxm_manage_tabs for å åpne administrasjonsvinduet.",
+		"description": "[tutorial] administrer fane"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "Du kan administrere dine $tabs fra dette skjermbildet. Klikk her for mer informasjon.",
+		"description": "[tutorial] lenke for fanestyring"
+	},
+	"tutorial_pin_tab": {
+		"message": "Høyreklikk på den uthevede $tab og velg $extension_label > $cxm_move > $cxm_pin_tab for å feste den.",
+		"description": "[tutorial] fest fane"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "Den dratte raden kunne ikke flyttes før den festede raden (fordi den ikke er festet for øyeblikket), så den gikk til starten av listen over ufestedet elementer. Disse to listene behandles separat.",
+		"description": "[tutorial] forklaring av festet"
+	},
+	"tutorial_pinned_tab": {
+		"message": "Merk at $tab nå er festet og vil forbli på plass.",
+		"description": "[tutorial] festet fane"
+	},
+	"tutorial_redirect_account": {
+		"message": "Vi vil nå omdirigere deg til en annen side for å vise deg mer. Klikk her for å fortsette.",
+		"description": "[tutorial] omdiriger til konto"
+	},
+	"tutorial_remove_favourite": {
+		"message": "Klikk på den overstrøkne stjernen for å fjerne denne siden fra favoritter. TIPS: du kan klikke på stjernen etter at dette trinnet er fullført for å unngå å miste denne $tab",
+		"description": "[tutorial] fjern favoritt"
+	},
+	"tutorial_restart": {
+		"message": "Du kan starte $tutorial på nytt når som helst ved å klikke på knappen i popup-vinduet.",
+		"description": "[tutorial] første melding"
+	},
+	"tutorial_restart_prompt": {
+		"message": "Vil du starte $tutorial fra begynnelsen?",
+		"description": "[tutorial] spørsmål om å starte opplæringen på nytt"
+	},
+	"tutorial_save_modal": {
+		"message": "Klikk på $save for å ta i bruk endringene og se bekreftelsesmeldingen.",
+		"description": "[tutorial] lagre modal"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "Dette er for $extension_label og vil ta deg til Setup Home-siden først, og deretter starte den guidede $tutorial",
+		"description": "[tutorial] tekst for å starte opplæringen"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "Start $tutorial fra Setup Home?",
+		"description": "[tutorial] tittel for å starte opplæringen"
 	},
 	"underline": {
 		"message": "Understreking",
@@ -1490,6 +1678,10 @@
 	"where_to": {
 		"message": "Til hvor?",
 		"description": "[open-other-org-modal] alternativ tittel for modal"
+	},
+	"wiki_label": {
+		"message": "lær mer om $extension_label",
+		"description": "[popup][settings] tilgjengelig tittel og aria-label for wiki-hjelpeknapp"
 	},
 	"write_review": {
 		"message": "Skriv en anmeldelse!",

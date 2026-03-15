@@ -1,4 +1,8 @@
 {
+	"account": {
+		"message": "खाता (Account)",
+		"description": "ObjectManager/Account/FieldsAndRelationships/view से संबंधित पृष्ठ"
+	},
 	"act_delete": {
 		"message": "🗑️ हटाएँ",
 		"description": "[Tab-प्रबंधन] एक पंक्ति हटाएँ"
@@ -39,6 +43,10 @@
 		"message": "आरोही (A-Z)",
 		"description": ""
 	},
+	"asset": {
+		"message": "संपत्ति (Asset)",
+		"description": "ObjectManager/Asset/FieldsAndRelationships/view से संबंधित पृष्ठ"
+	},
 	"available": {
 		"message": "उपलब्ध",
 		"description": "ऐसे आइटम्स के लिए अनुभाग शीर्षक जिन्हें जोड़ा जा सकता है"
@@ -46,6 +54,10 @@
 	"bold": {
 		"message": "बोल्ड",
 		"description": "बोल्ड टेक्स्ट के लिए फ़ॉन्ट शैली विकल्प"
+	},
+	"campaign": {
+		"message": "अभियान (Campaign)",
+		"description": "ObjectManager/Campaign/FieldsAndRelationships/view से संबंधित पृष्ठ"
 	},
 	"cancel": {
 		"message": "रद्द करें",
@@ -55,9 +67,21 @@
 		"message": "रद्द करें और बंद करें",
 		"description": "मोडल के क्लोज बटन का शीर्षक या टेक्स्ट"
 	},
+	"case": {
+		"message": "मामला (Case)",
+		"description": "ObjectManager/Case/FieldsAndRelationships/view से संबंधित पृष्ठ का नाम"
+	},
 	"chosen": {
 		"message": "चयनित",
 		"description": "चयनित आइटम्स के लिए अनुभाग शीर्षक"
+	},
+	"classic_email_templates": {
+		"message": "क्लासिक ईमेल टेम्प्लेट",
+		"description": "CommunicationTemplatesEmail/home से संबंधित पृष्ठ"
+	},
+	"close": {
+		"message": "बंद करें",
+		"description": "बिना कुछ हुए बंद करें"
 	},
 	"cmd_export_all": {
 		"message": "सहेजे गए सभी Tabs को निर्यात करने के लिए मोडल दिखाएँ",
@@ -87,6 +111,14 @@
 		"message": "वर्तमान पृष्ठ (यदि सहेजा गया हो) को अपडेट करने के लिए मोडल दिखाएँ",
 		"description": "[command description] उपयोगकर्ता वर्तमान पृष्ठ को अपडेट करना चाहता है"
 	},
+	"company_information": {
+		"message": "कंपनी की जानकारी",
+		"description": "CompanyProfileInfo/home से संबंधित पृष्ठ"
+	},
+	"confirm": {
+		"message": "पुष्टि करें",
+		"description": "उपयोगकर्ता को आगे बढ़ने के लिए प्रेरित करने वाला टेक्स्ट"
+	},
 	"confirm_another_org": {
 		"message": "इस लिंक को खोलने की पुष्टि करें।",
 		"description": "[open-other-org-modal] निर्मित लिंक खोलने के लिए उपयोगकर्ता से पुष्टि माँगे"
@@ -94,6 +126,10 @@
 	"confirm_update_extension": {
 		"message": "$extension_label का एक नया संस्करण अब उपलब्ध है!",
 		"description": "एक श्रोता से एक अज्ञात संदेश प्राप्त हुआ है"
+	},
+	"contact": {
+		"message": "संपर्क (Contact)",
+		"description": "ObjectManager/Contact/FieldsAndRelationships/view से संबंधित पृष्ठ"
 	},
 	"continue": {
 		"message": "जारी रखें",
@@ -554,6 +590,10 @@
 		"message": "translator अभी तक प्रारंभ नहीं हुआ है।",
 		"description": "[error] TranslationService तैयार नहीं था"
 	},
+	"error_tutorial_not_initialized": {
+		"message": "ट्यूटोरियल प्रारंभ नहीं किया जा सका।",
+		"description": "[error] ट्यूटोरियल शुरू नहीं हुआ था"
+	},
 	"error_unknown_file_structure": {
 		"message": "हम उस फ़ाइल को समझ नहीं पाए जिसे आप आयात करना चाहते थे\nयदि समस्या बनी रहती है, तो कृपया GitHub समस्या खोलकर इसे हमारे साथ साझा करें",
 		"description": "[आयात] उपयोगकर्ता की फ़ाइल पहचानी नहीं गई"
@@ -565,6 +605,10 @@
 	"error_unknown_request": {
 		"message": "अज्ञात अनुरोध।",
 		"description": "[error] अज्ञात संदेश प्राप्त होने के बाद सामान्य त्रुटि"
+	},
+	"error_unknown_toast_type": {
+		"message": "अनुरोधित टोस्ट प्रकार की व्याख्या नहीं की जा सकी। कृपया अपना कोड बदलें।",
+		"description": "[error] टोस्ट प्रकार सेट करते समय उपयोग की जाने वाली सामान्य त्रुटि"
 	},
 	"error_unpin_tab": {
 		"message": "Tab को अनपिन करते समय त्रुटि",
@@ -597,6 +641,10 @@
 	"extension_label": {
 		"message": "Again, Why Salesforce",
 		"description": "[manifest] इस एक्सटेंशन का नाम"
+	},
+	"field_accessibility": {
+		"message": "फ़ील्ड एक्सेसिबिलिटी",
+		"description": "FieldAccessibility/home से संबंधित पृष्ठ"
 	},
 	"file": {
 		"message": "फाइल",
@@ -782,13 +830,29 @@
 		"message": "लेबल",
 		"description": "[key] Tab का नाम"
 	},
+	"lead": {
+		"message": "लीड (Lead)",
+		"description": "ObjectManager/Lead/FieldsAndRelationships/view से संबंधित पृष्ठ"
+	},
+	"learn_more_about_extension": {
+		"message": "$extension_label के बारे में अधिक जानें",
+		"description": "[popup][settings] विकी सहायता बटन के लिए सुलभ शीर्षक और aria-label"
+	},
 	"lightning_navigation": {
 		"message": "लाइटनिंग नेविगेशन",
 		"description": "Salesforce की कस्टम नेविगेशन तकनीक"
 	},
+	"login_history": {
+		"message": "लॉगिन इतिहास",
+		"description": "OrgLoginHistory/home से संबंधित पृष्ठ"
+	},
 	"login_to_salesforce": {
 		"message": "Salesforce में लॉगिन करें",
 		"description": "[notSalesforceSetup] Salesforce लॉगिन पृष्ठ पर जाने के लिए कॉल टू एक्शन"
+	},
+	"manage_connected_apps": {
+		"message": "कनेक्टेड ऐप्स प्रबंधित करें",
+		"description": "ConnectedApplication/home से संबंधित पृष्ठ"
 	},
 	"manage_tabs": {
 		"message": "$tabs मैनेज करें",
@@ -841,6 +905,10 @@
 	"open_setup": {
 		"message": "Setup खोलें",
 		"description": "[notSalesforceSetup] Salesforce Setup पृष्ठ पर जाने के लिए कॉल टू एक्शन"
+	},
+	"opportunity": {
+		"message": "अवसर (Opportunity)",
+		"description": "ObjectManager/Opportunity/FieldsAndRelationships/view से संबंधित पृष्ठ"
 	},
 	"opt_add_tabs_as_org": {
 		"message": "नए Tabs को Org Tabs के रूप में जोड़ें।",
@@ -974,6 +1042,10 @@
 		"message": "अनुमति दे दी गई है!",
 		"description": "[सफलता] उपयोगकर्ता ने हमसे अनुमति का अनुरोध करने के लिए कहा और उन्होंने इसे स्वीकार कर लिया"
 	},
+	"permission_sets": {
+		"message": "अनुमति सेट",
+		"description": "PermSets/home से संबंधित पृष्ठ"
+	},
 	"pinned": {
 		"message": "Pinned",
 		"description": "उपयोगकर्ता के Tab जो हमेशा सूची की शुरुआत में पाए जाते हैं"
@@ -982,9 +1054,21 @@
 		"message": "अन्य Orgs के Tabs संरक्षित रखें।",
 		"description": "[label] आयात प्रक्रिया के दौरान अन्य Org-संबंधी Tabs रखें"
 	},
+	"pricebook2": {
+		"message": "प्राइस बुक 2",
+		"description": "ObjectManager/Pricebook2/FieldsAndRelationships/view से संबंधित पृष्ठ"
+	},
+	"product2": {
+		"message": "उत्पाद 2",
+		"description": "ObjectManager/Product2/FieldsAndRelationships/view से संबंधित पृष्ठ"
+	},
 	"remove_tab": {
 		"message": "Tab हटाएं",
 		"description": "[alt] जब चित्र काम नहीं करते, तो वैकल्पिक पाठ।"
+	},
+	"reports_and_dashboards_settings": {
+		"message": "रिपोर्ट और डैशबोर्ड सेटिंग्स",
+		"description": "ReportUI/home से संबंधित पृष्ठ"
 	},
 	"req_downloads_open_popup": {
 		"message": "कृपया अपने ब्राउज़र के एक्सटेंशन मेनू से एक्सटेंशन पॉपअप खोलें।",
@@ -1065,6 +1149,10 @@
 	"send_tip": {
 		"message": "हमें एक टिप भेजें ❤️",
 		"description": "[popup] एक टिप भेजने के लिए svg के लिए शीर्षक"
+	},
+	"sessions": {
+		"message": "सत्र (Sessions)",
+		"description": "SecuritySession/home से संबंधित पृष्ठ"
 	},
 	"set_gen_preview": {
 		"message": "Tab पूर्वावलोकन",
@@ -1326,9 +1414,17 @@
 		"message": "सेटिंग्स",
 		"description": "सेटिंग मेनू के लिए लेबल"
 	},
+	"setup_audit_trail": {
+		"message": "सेटअप ऑडिट ट्रेल",
+		"description": "SecurityEvents/home से संबंधित पृष्ठ"
+	},
 	"setup_page": {
 		"message": "Setup पृष्ठ",
 		"description": "[notSalesforceSetup] Salesforce सेटिंग्स बदलने वाला पृष्ठ"
+	},
+	"sharing_settings": {
+		"message": "शेयरिंग सेटिंग्स",
+		"description": "SecuritySharing/home से संबंधित पृष्ठ"
 	},
 	"show_all_tabs": {
 		"message": "सभी $tabs दिखाएं",
@@ -1438,6 +1534,10 @@
 		"message": "Tabs सहेजे गए।",
 		"description": "[toast] Tabs सफलतापूर्वक सहेजे गए।"
 	},
+	"task": {
+		"message": "कार्य (Task)",
+		"description": "ObjectManager/Task/FieldsAndRelationships/view से संबंधित पृष्ठ"
+	},
 	"theme_dark": {
 		"message": "डार्क थीम में बदलें",
 		"description": "[popup] थीम बदलने के लिए चाँद पर शीर्षक"
@@ -1445,6 +1545,94 @@
 	"theme_light": {
 		"message": "लाइट थीम में बदलें",
 		"description": "[popup] थीम बदलने के लिए सूरज पर शीर्षक"
+	},
+	"tutorial": {
+		"message": "ट्यूटोरियल",
+		"description": "[popup] ट्यूटोरियल शुरू करने के लिए बटन"
+	},
+	"tutorial_add_favourite": {
+		"message": "इस पृष्ठ को पसंदीदा में जोड़ने के लिए स्टार पर क्लिक करें।",
+		"description": "[tutorial] पसंदीदा जोड़ें"
+	},
+	"tutorial_click_highlighted_tab": {
+		"message": "संबंधित पृष्ठ पर जाने के लिए हाइलाइट किए गए $tab पर क्लिक करें।",
+		"description": "[tutorial] हाइलाइट किए गए टैब पर क्लिक करें"
+	},
+	"tutorial_continue_prompt_body": {
+		"message": "यह $extension_label के लिए है और आपके अधूरे $tutorial को वहीं से फिर से शुरू करेगा जहां आपने छोड़ा था।",
+		"description": "[tutorial] ट्यूटोरियल जारी रखने के लिए मुख्य टेक्स्ट"
+	},
+	"tutorial_continue_prompt_title": {
+		"message": "पिछले चरण से $tutorial जारी रखें?",
+		"description": "[tutorial] ट्यूटोरियल जारी रखने के लिए मोडल शीर्षक"
+	},
+	"tutorial_drag_flows": {
+		"message": "हाइलाइट की गई पंक्ति को (6 बिंदुओं का उपयोग करके) खींचें और पहली पंक्ति (जो पिन की गई है) से पहले छोड़ें।",
+		"description": "[tutorial] प्रवाह खींचें"
+	},
+	"tutorial_end": {
+		"message": "$tutorial पूरा हुआ! एक्सटेंशन का उपयोग करने का आनंद लें।",
+		"description": "[tutorial] अंत"
+	},
+	"tutorial_export_and_reset_for_tutorial": {
+		"message": "हमें $tutorial शुरू करने के लिए कोई उपयोगी लिंक नहीं मिला\nकृपया अपने $tabs निर्यात करें और $tutorial को पुनरारंभ करें",
+		"description": "[tutorial] त्रुटि संदेश शुरू नहीं किया जा सका"
+	},
+	"tutorial_favourite_tabs": {
+		"message": "ये आपके पसंदीदा $tabs हैं और इनका उपयोग अक्सर उपयोग किए जाने वाले पृष्ठों तक त्वरित पहुंच के लिए किया जाता है।",
+		"description": "[tutorial] पसंदीदा टैब हाइलाइट करें"
+	},
+	"tutorial_keyboard_shortcut": {
+		"message": "$settings पृष्ठ खोलने के लिए कीबोर्ड शॉर्टकट दबाएं जहां आप एक्सटेंशन व्यवहार बदल सकते हैं और अपने $tabs को स्टाइल कर सकते हैं",
+		"description": "[tutorial] कीबोर्ड शॉर्टकट"
+	},
+	"tutorial_manage_tabs": {
+		"message": "पृष्ठ पर राइट क्लिक करें (टैब पर नहीं) और प्रबंधन मोडल खोलने के लिए $extension_label > $cxm_manage_tabs चुनें।",
+		"description": "[tutorial] टैब प्रबंधित करें"
+	},
+	"tutorial_manage_tabs_link": {
+		"message": "आप इस स्क्रीन से अपने $tabs प्रबंधित कर सकते हैं। अधिक जानकारी के लिए यहाँ क्लिक करें।",
+		"description": "[tutorial] टैब प्रबंधित करने के लिए लिंक"
+	},
+	"tutorial_pin_tab": {
+		"message": "हाइलाइट किए गए $tab पर राइट क्लिक करें और इसे पिन करने के लिए $extension_label > $cxm_move > $cxm_pin_tab चुनें।",
+		"description": "[tutorial] टैब पिन करें"
+	},
+	"tutorial_pinned_explanation": {
+		"message": "खींची गई पंक्ति को पिन की गई पंक्ति से पहले नहीं ले जाया जा सका (क्योंकि यह वर्तमान में अनपिन है), इसलिए यह अनपिन सूची की शुरुआत में चली गई। इन दोनों सूचियों को अलग-अलग माना जाता है।",
+		"description": "[tutorial] पिन की गई व्याख्या"
+	},
+	"tutorial_pinned_tab": {
+		"message": "ध्यान दें कि $tab अब पिन हो गया है और अपनी जगह पर रहेगा।",
+		"description": "[tutorial] पिन किया गया टैब"
+	},
+	"tutorial_redirect_account": {
+		"message": "हम आपको और दिखाने के लिए अब दूसरे पृष्ठ पर रीडायरेक्ट करेंगे। जारी रखने के लिए यहां क्लिक करें।",
+		"description": "[tutorial] खाते पर रीडायरेक्ट करें"
+	},
+	"tutorial_remove_favourite": {
+		"message": "इस पृष्ठ को पसंदीदा से हटाने के लिए क्रॉस किए हुए स्टार पर क्लिक करें। टिप: आप इस चरण को पूरा करने के बाद स्टार पर क्लिक कर सकते हैं ताकि इस $tab को खोने से बचा जा सके",
+		"description": "[tutorial] पसंदीदा निकालें"
+	},
+	"tutorial_restart": {
+		"message": "आप पॉपअप में बटन पर क्लिक करके किसी भी समय $tutorial को पुनरारंभ कर सकते हैं।",
+		"description": "[tutorial] पहला संदेश"
+	},
+	"tutorial_restart_prompt": {
+		"message": "क्या आप शुरुआत से $tutorial शुरू करना चाहते हैं?",
+		"description": "[tutorial] ट्यूटोरियल पुनरारंभ करने के लिए संकेत"
+	},
+	"tutorial_save_modal": {
+		"message": "परिवर्तनों को लागू करने और पुष्टि संदेश देखने के लिए $save पर क्लिक करें।",
+		"description": "[tutorial] मोडल सहेजें"
+	},
+	"tutorial_start_prompt_body": {
+		"message": "यह $extension_label के लिए है और आपको पहले सेटअप होम पेज पर ले जाएगा, फिर निर्देशित $tutorial शुरू करेगा",
+		"description": "[tutorial] ट्यूटोरियल शुरू करने के लिए मुख्य टेक्स्ट"
+	},
+	"tutorial_start_prompt_title": {
+		"message": "सेटअप होम से $tutorial शुरू करें?",
+		"description": "[tutorial] ट्यूटोरियल शुरू करने के लिए मोडल शीर्षक"
 	},
 	"underline": {
 		"message": "रेखांकित",
@@ -1489,6 +1677,10 @@
 	"where_to": {
 		"message": "कहाँ?",
 		"description": "[open-other-org-modal] modal के लिए fallback शीर्षक"
+	},
+	"wiki_label": {
+		"message": "$extension_label के बारे में अधिक जानें",
+		"description": "[popup][settings] विकी सहायता बटन के लिए सुलभ शीर्षक और aria-label"
 	},
 	"write_review": {
 		"message": "एक समीक्षा लिखें!",

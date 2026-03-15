@@ -3,6 +3,8 @@
 All notable changes to this project are documented here.\
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
 
+Please remember that this project is entirely funded by **the support of its users**; if you'd like to send a tip, [click here](https://alfredoit.dev/en/sponsor?email=againwhysalesforce@duck.com).
+
 <!--
 # Next release
 ## 🚀 Added
@@ -11,6 +13,40 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 ## 💥 Removed
 ## 🧪 Tests
 -->
+
+# v2.2.3
+
+## 🚀 Added
+
+1. Added `data_collection_permissions` for Firefox (#137) which made us bump its min-version to 140
+
+### Settings
+
+1. Added theme change in settings (light/dark) which syncs with the popup (#129)
+2. An onboarding Tutorial has been created! (#135)
+3. Added Help (?) button to link to [the wiki](https://github.com/Astisme/again-why-salesforce/wiki)
+
+### Components
+
+1. Created new component for theme handling
+
+## 🛠 Changed
+
+1. Now using way less loose strings for message exchanges and instead relying on constants
+
+### Salesforce
+
+1. The review and sponsor images are now shown after 20 / 40 days of use even if the user does not have the required Tabs (#138)
+1. Moved Simple Analytics to its own file (`src/salesforce/analytics.js`)
+
+## 🧪 Tests
+
+1. Added test for new review / sponsor logic
+2. Added tests for analytics
+3. Added tests for theme change behavior
+4. Added tests for the new tutorial
+5. Added tests for new global functions
+6. Added tests for new function in TabContainer
 
 # v2.2.0
 
