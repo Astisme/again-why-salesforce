@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { mockStorage } from "./mocks.ts";
 import {
 	assert,

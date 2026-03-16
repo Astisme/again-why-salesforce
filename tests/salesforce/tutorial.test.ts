@@ -1,3 +1,4 @@
+/// <reference lib="dom" />
 import {
 	assert,
 	assertEquals,
@@ -375,11 +376,11 @@ function createHarness(options: {
 		latestPrompt: null as null | TutorialPromptUi,
 		actionButtonClicks: 0,
 	};
-	const storage = {
+	const storage: Record<string, unknown> = {
 		[constants.TUTORIAL_KEY]: options.tutorialProgress ?? null,
 	};
 	const translator: Translator = {
-		translate: (key) => `translated:${key}`,
+		translate: async (key: string) => `translated:${key}`,
 	};
 
 	/**
@@ -571,7 +572,7 @@ function createHarness(options: {
 				const miniUrl = url.replace(/^\/lightning\/setup\//, "");
 				navigateTo(miniUrl);
 			},
-			sendExtensionMessage: (message) => {
+			sendExtensionMessage: async (message) => {
 				records.messages.push(message);
 				switch (message.what) {
 					case constants.WHAT_GET_COMMANDS:
@@ -586,7 +587,7 @@ function createHarness(options: {
 				}
 			},
 		},
-		ensureTranslatorAvailability: () => translator,
+		ensureTranslatorAvailability: async () => translator,
 		Tab: {
 			minifyURL: (url) =>
 				url.replace(/^https?:\/\/[^/]+\/lightning\/setup\//, ""),
@@ -606,7 +607,7 @@ function createHarness(options: {
 		},
 		favouriteManager: {
 			FAVOURITE_BUTTON_ID: "again-why-salesforce-star",
-			showFavouriteButton: () => {
+			showFavouriteButton: async () => {
 				ensureVisibleFavouriteButton();
 			},
 		},
@@ -711,7 +712,7 @@ function createHarness(options: {
 					closeButton,
 				};
 			},
-			generateTutorialElements: () => {
+			generateTutorialElements: async () => {
 				const overlay = globalThis.document.createElement("div");
 				const messageBox = globalThis.document.createElement("div");
 				messageBox.className = "tut-v7";
@@ -742,7 +743,7 @@ function createHarness(options: {
 			},
 		},
 		tabContainer: {
-			ensureAllTabsAvailability: () => {
+			ensureAllTabsAvailability: async () => {
 				const allTabs = state.savedTabUrls.map((url) => ({ url }));
 				(allTabs as Array<{ url: string }> & Record<string, number>)[
 					"pinnedTabsNo"
@@ -1110,7 +1111,7 @@ Deno.test("showMessage appends link and shortcut only when they are not already 
 		const tutorial = new tutorialModule.Tutorial();
 		await tutorial.createOverlay();
 		tutorial.translator = {
-			translate: (key) => {
+			translate: (key: string) => {
 				if (key === "already_complete") {
 					return "Message with https://docs.test and Shortcut: Alt+K";
 				}
@@ -1195,7 +1196,7 @@ Deno.test("getElementNowOrLater schedules a retry when the element is still miss
 
 		const result = await tutorial.getElementNowOrLater(
 			step,
-			(receivedStep) => {
+			(receivedStep: typeof step) => {
 				assertEquals(receivedStep, step);
 				callbackCalls++;
 			},

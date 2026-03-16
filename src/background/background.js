@@ -290,12 +290,12 @@ async function mergeSettings(newsettings, key = SETTINGS_KEY) {
 /**
  * Stores the provided tabs data in the browser's storage and invokes the callback.
  *
- * @param {Array} tobeset - The object to be stored
- * @param {function} callback - The callback to execute after storing the data.
+ * @param {Array|Object|string} tobeset - The data to be stored.
+ * @param {function|null} [callback=null] - The callback to execute after storing the data.
  * @param {string} [key=WHY_KEY] - The key of the map where to store the tobeset array
  * @return {Promise} the promise from BROWSER.storage.sync.set
  */
-export async function bg_setStorage(tobeset, callback, key = WHY_KEY) {
+export async function bg_setStorage(tobeset, callback = null, key = WHY_KEY) {
 	const set = {};
 	const changedToArray = !Array.isArray(tobeset);
 	if (changedToArray) {
@@ -418,7 +418,7 @@ export async function bg_getSalesforceLanguage(callback = null) {
  * Filters commands to those that have assigned shortcuts.
  * Supports optional callback or returns a Promise.
  *
- * @param {string[]|null} [commands=null] - Array of command names to filter. If null, returns all commands with shortcuts.
+ * @param {string|string[]|null} [commands=null] - One or more command names to filter. If null, returns all commands with shortcuts.
  * @param {Function|null} [callback=null] - Optional callback to receive the commands.
  * @return {Promise<Array<Object>>|void} Promise resolving to command objects or void if callback is provided.
  */

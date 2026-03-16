@@ -1,3 +1,4 @@
+import "./mocks.ts";
 import {
 	assert,
 	assertEquals,
@@ -235,6 +236,7 @@ await Deno.test("Tab Creation - Object Style", async (t) => {
 							url: "https://example.com",
 						},
 						undefined,
+						// @ts-expect-error intentional invalid object-style overload usage
 						123,
 					);
 				},
@@ -296,6 +298,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 	await t.step("throws error when org is not a string", () => {
 		assertThrows(
 			() => {
+				// @ts-expect-error intentional invalid org type
 				Tab.create("Test", "https://example.com", 123);
 			},
 			Error,
@@ -316,6 +319,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 	await t.step("throws error when click-count is not a number", () => {
 		assertThrows(
 			() => {
+				// @ts-expect-error intentional invalid click-count type
 				Tab.create("Test", "https://example.com", undefined, "123");
 			},
 			Error,
@@ -341,6 +345,7 @@ await Deno.test("Tab Creation - Error Cases", async (t) => {
 					"https://example.com",
 					undefined,
 					undefined,
+					// @ts-expect-error intentional invalid click-date type
 					"123",
 				);
 			},
@@ -378,6 +383,7 @@ await Deno.test("Tab Constructor Protection", () => {
 				"Test",
 				"https://example.com",
 				undefined,
+				// @ts-expect-error intentional invalid constructor secret
 				Symbol("fake"),
 			);
 		},

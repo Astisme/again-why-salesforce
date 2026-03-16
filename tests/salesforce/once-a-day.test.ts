@@ -1,7 +1,7 @@
 import { assert, assertEquals } from "@std/testing/asserts";
+import { mockStorage } from "../mocks.ts";
 import { PREVENT_ANALYTICS, SETTINGS_KEY } from "/constants.js";
 import { executeOncePerDay, getTodayDateKey } from "/salesforce/once-a-day.js";
-import { mockStorage } from "../mocks.ts";
 
 /**
  * Creates a minimal in-memory sessionStorage mock for tests.

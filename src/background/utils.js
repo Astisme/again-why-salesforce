@@ -156,7 +156,7 @@ function requestExportPermission() {
  * Checks whether downloads permission is already granted and launches the export handler.
  * If not, it triggers a notification prompting the user to open a popup to grant permission.
  *
- * @param {object[]|null} [tabs=null] Optional array of Tab objects to pass through to the export handler.
+ * @param {object[]|object|null} [tabs=null] Optional array of Tab objects or a serialized TabContainer payload to pass through to the export handler.
  * @param {boolean} [checkOnly=false] Whether to check only or launch the export if allowed
  * @return {boolean} whether the export of Tabs is allowed
  */

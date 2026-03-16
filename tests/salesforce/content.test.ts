@@ -1,3 +1,5 @@
+// @ts-nocheck
+/// <reference lib="dom" />
 // deno-lint-ignore-file no-explicit-any
 import {
 	assert,
@@ -430,7 +432,10 @@ function createHarness(url = SETUP_URL) {
 			} else {
 				this.children.push(element);
 			}
-			element.parentElement = this;
+			Object.defineProperty(element, "parentElement", {
+				configurable: true,
+				value: this,
+			});
 			return element;
 		};
 	}
@@ -448,9 +453,10 @@ function createHarness(url = SETUP_URL) {
 			element.classList.toggle = function (cls: string) {
 				if (this.contains(cls)) {
 					this.remove(cls);
-				} else {
-					this.add(cls);
+					return false;
 				}
+				this.add(cls);
+				return true;
 			};
 		}
 		return element;

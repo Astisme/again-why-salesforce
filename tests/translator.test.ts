@@ -1,12 +1,7 @@
+/// <reference lib="dom" />
 // deno-lint-ignore-file no-explicit-any
 import { assertEquals } from "@std/testing/asserts";
-import { mockBrowser, translations } from "./mocks.ts";
-declare global {
-	var chrome: typeof mockBrowser;
-	var browser: typeof mockBrowser;
-}
-// Setup global objects that extension code expects
-globalThis.chrome = mockBrowser as any;
+import { translations } from "./mocks.ts";
 import ensureTranslatorAvailability from "/translator.js";
 const translate_element_attribute = "data-i18n";
 
@@ -74,9 +69,9 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	await t.step("translates to french", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("fr");
-		const mockEle = document.querySelectorAll(
+		const mockEle = Array.from(document.querySelectorAll(
 			`[${translate_element_attribute}]`,
-		);
+		)) as HTMLElement[];
 		assertEquals(
 			mockEle[0].textContent,
 			"Bonjour",
@@ -107,9 +102,9 @@ Deno.test("TranslationService - updatePageTranslations", async (t) => {
 	await t.step("translates to english", async () => {
 		// Mock DOM elements
 		await service.updatePageTranslations("en");
-		const mockEle = document.querySelectorAll(
+		const mockEle = Array.from(document.querySelectorAll(
 			`[${translate_element_attribute}]`,
-		);
+		)) as HTMLElement[];
 		assertEquals(
 			mockEle[0].textContent,
 			"Hello",
@@ -142,7 +137,9 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 	const service = await ensureTranslatorAvailability();
 	// Test loading a new language
 	// Add mock de to translations
-	const mockJson = { "test": "Test de" };
+	const mockJson: Record<string, { message: string }> = {
+		"test": { message: "Test de" },
+	};
 	translations.de = mockJson;
 	const result = await service.loadLanguageFile("de");
 	assertEquals(result, mockJson, "Should return loaded translations");

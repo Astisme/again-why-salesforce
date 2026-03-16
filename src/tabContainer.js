@@ -77,7 +77,9 @@ export class TabContainer extends Array {
 		this.#pinnedTabs = Math.max(0, Math.min(this.length, pinnedTabs));
 	}
 
+	/** @type {"pinned"} */
 	static keyPinnedTabsNo = "pinned";
+	/** @type {"tabs"} */
 	static keyTabs = "tabs";
 	/**
 	 * All the keys which express data about a TabContainer.
@@ -421,7 +423,9 @@ export class TabContainer extends Array {
 	 * Adds a new tab to the `TabContainer` if it is valid and does not already exist.
 	 *
 	 * @param {Object} tab - The tab object to be added.
-	 * @param {boolean} [sync=true] - A flag indicating whether to synchronize the tabs after adding. Defaults to `true`.
+	 * @param {Object} [param1={}] - Add options.
+	 * @param {boolean} [param1.sync=true] - Whether to synchronize the tabs after adding.
+	 * @param {boolean} [param1.addInFront=false] - Whether to insert the tab after the pinned segment instead of at the end.
 	 * @throws {Error} - Throws an error if the tab object is invalid or if the tab already exists.
 	 * @return {Promise<boolean>} - A promise that resolves to `true` if the tab is added and synchronized (if `sync` is `true`), otherwise `true` if not synchronized.
 	 */
@@ -637,7 +641,8 @@ export class TabContainer extends Array {
 	/**
 	 * Checks if a tab with the specified data (label, url, and organization) exists in the container.
 	 *
-	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `url` and `org` properties. Defaults to an empty object.
+	 * @param {Object} [tab={}] - An object containing the tab data to check for. The object can include `label`, `url`, and `org` properties. Defaults to an empty object.
+	 * @param {string} [tab.label=null] - Optional label ignored by existence checks.
 	 * @param {string} [tab.url=null] - The URL of the tab to check for.
 	 * @param {string} [tab.org=null] - The organization associated with the tab to check for.
 	 * @param {boolean} [checkDuplicate=false] - Whether to check for duplicates (true) or for equality (false)
@@ -690,8 +695,8 @@ export class TabContainer extends Array {
 	 * When `resetTabs=true` and `removeOrgTabs=false`, removes only non-org-specific Tabs (Tabs with `org == null`), sparing org-specific Tabs.
 	 * When `resetTabs=false` and `removeOrgTabs=false`, does nothing.
 	 * @param {boolean} [param1.sync=true] - Whether to perform a sync operation
-	 * @param {boolean} [param1.keepTabsNotThisOrg=null] - Whether to keep the org-specific Tabs which are not of this Org
-	 * @param {string} [param1.removeThisOrgTabs=null] - The Org for which to remove the Org Tabs
+	 * @param {string|null} [param1.keepTabsNotThisOrg=null] - Org-specific tabs outside this org are preserved when set.
+	 * @param {string|null} [param1.removeThisOrgTabs=null] - The org for which to remove the org tabs.
 	 * @param {boolean} [param1.updatePinnedTabs=true] - Wheter to update the currently pinned Tabs number
 	 * @param {boolean} [param1.invalidateSort=false] - Wheter the function was called from an invalidate sort action
 	 *
@@ -832,8 +837,10 @@ export class TabContainer extends Array {
 	/**
 	 * Import tabs from JSON
 	 * @param {string} jsonString - JSON string of tabs
-	 * @param {boolean} [resetTabs=false] - Whether the imported array should overwrite the currently saved tabs
-	 * @param {boolean} [preserveOtherOrg=true] - Whether the org-specific tabs should be preserved
+	 * @param {Object} [param1={}] - Import options.
+	 * @param {boolean} [param1.resetTabs=false] - Whether the imported array should overwrite the currently saved tabs.
+	 * @param {boolean} [param1.preserveOtherOrg=true] - Whether the org-specific tabs should be preserved.
+	 * @param {boolean} [param1.importMetadata=false] - Whether pinned-tab metadata should also be restored.
 	 * @return {number} - Number of tabs successfully imported
 	 */
 	async importTabs(jsonString, {
@@ -1434,8 +1441,8 @@ export class TabContainer extends Array {
 	/**
 	 * Takes care of updating a single Tab and synchronize the Array
 	 *
-	 * @param {Tab} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - the Tab that has to be updated; it MUST be a Tab which is already present in the Array
-	 * @param {{ label: undefined; url: undefined; org: undefined; }} [updateTo={label: undefined, url: undefined, org: undefined}] - an Object which contains the keys that have to be updated
+	 * @param {{ label?: string; url?: string; org?: string; }} [tabToUpdate={label: undefined, url: undefined, org: undefined}] - The tab lookup data for the tab that has to be updated.
+	 * @param {{ label?: string; url?: string; org?: string; [Tab.keyClickCount]?: number; [Tab.keyClickDate]?: number; }} [updateTo={label: undefined, url: undefined, org: undefined}] - An object which contains the keys that have to be updated.
 	 *
 	 * @return {boolean} whether the Tab was updated AND the array was synced
 	 */

@@ -70,7 +70,7 @@ export function sendExtensionMessage(message, callback = null) {
 /**
  * Retrieves extension settings for the specified keys.
  *
- * @param {string[] | null} [keys=null] - An array of setting keys to retrieve. If null, all settings will be returned.
+ * @param {string|string[]|null} [keys=null] - One or more setting keys to retrieve. If null, all settings will be returned.
  * @return {Promise<Object>} A promise that resolves to an object containing the requested settings.
  */
 export async function getSettings(keys = null) {
@@ -161,9 +161,11 @@ const HAS_PIN_TAB = `:has(.${PIN_TAB_CLASS})`;
 /**
  * Constructs a CSS selector string based on tab state, type, and optional pseudo-element.
  *
- * @param {boolean} [isInactive=true] - Whether the selector targets inactive tabs.
- * @param {boolean} [isGeneric=true] - Whether the selector targets generic tabs.
- * @param {string} [pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
+ * @param {Object} [param0={}] Selector options.
+ * @param {boolean} [param0.isInactive=true] - Whether the selector targets inactive tabs.
+ * @param {boolean} [param0.isGeneric=true] - Whether the selector targets generic tabs.
+ * @param {boolean} [param0.isPinned=false] - Whether the selector targets pinned tabs.
+ * @param {string} [param0.pseudoElement=""] - Optional pseudo-element or pseudo-class to append.
  * @return {string} The constructed CSS selector.
  */
 export function getCssSelector({
@@ -186,7 +188,7 @@ export function getCssSelector({
  * @param {string|null} [value=null] - Value to apply in the CSS rule if needed.
  * @return {string} The corresponding CSS rule or an empty string if invalid.
  */
-export function getCssRule(styleId, value = null) {
+export function getCssRule(styleId = "", value = null) {
 	switch (styleId) {
 		case TAB_STYLE_BACKGROUND:
 		case TAB_STYLE_HOVER:

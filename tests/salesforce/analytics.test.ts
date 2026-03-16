@@ -1,5 +1,9 @@
 // deno-lint-ignore-file no-explicit-any
-import { assertEquals, assertStringIncludes } from "@std/testing/asserts";
+import {
+	assertEquals,
+	assertExists,
+	assertStringIncludes,
+} from "@std/testing/asserts";
 
 const PREVENT_ANALYTICS = "prevent_analytics";
 const QUEUE_ANALYTICS = "https://queue.simpleanalyticscdn.com";
@@ -51,24 +55,48 @@ function startOfYesterdayIso() {
  *   }>
  * }>} The worker's recorded runtime messages and DOM results.
  */
+type AnalyticsSetting = {
+	id: string;
+	enabled?: boolean;
+	date?: string;
+};
+
+type AnalyticsMessage = {
+	what: string;
+	set?: AnalyticsSetting[];
+};
+
+type AnalyticsWorkerResult = {
+	messages: AnalyticsMessage[];
+	finalSettings: AnalyticsSetting[];
+	results: Array<{
+		headChildrenCount: number;
+		cspContent: string | null;
+		beaconPath: string | null;
+	}>;
+};
+
 async function runAnalyticsWorker(scenario: {
 	browserName: "firefox" | "chrome";
 	consent?: boolean | null;
 	consentError?: boolean;
-	initialSettings: any[];
+	initialSettings: AnalyticsSetting[];
 	steps: Array<{
 		existingCspContent?: string;
-		settingsBeforeCall?: any[];
+		settingsBeforeCall?: AnalyticsSetting[];
 		silenceInfo?: boolean;
 	}>;
-}) {
+}): Promise<AnalyticsWorkerResult> {
 	const worker = new Worker(
 		new URL("./analytics-browser-worker.ts", import.meta.url).href,
 		{ type: "module" },
 	);
 
 	try {
-		const resultPromise = new Promise<any>((resolve, reject) => {
+		const resultPromise = new Promise<AnalyticsWorkerResult>((
+			resolve,
+			reject,
+		) => {
 			worker.onmessage = (event) => resolve(event.data);
 			worker.onerror = (event) => {
 				event.preventDefault();
@@ -118,7 +146,12 @@ Deno.test("checkInsertAnalytics inserts beacon for a new Firefox user with conse
 	assertEquals(result.results[0].beaconPath, "/new-user");
 	assertEquals(
 		result.messages
-			.filter((message) => message.what === "set")
+			.filter(
+				(
+					message,
+				): message is AnalyticsMessage & { set: AnalyticsSetting[] } =>
+					message.what === "set" && message.set != null,
+			)
 			.map((message) => message.set[0].enabled ?? "date"),
 		[false, "date"],
 	);
@@ -160,6 +193,7 @@ Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP", a
 		}],
 	});
 
+	assertExists(result.results[0].cspContent);
 	assertStringIncludes(result.results[0].cspContent, QUEUE_ANALYTICS);
 	assertStringIncludes(result.results[0].cspContent, ANALYTICS_CDN);
 	assertEquals(result.results[0].beaconPath, "/");

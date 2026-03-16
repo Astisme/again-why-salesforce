@@ -1,3 +1,4 @@
+/// <reference lib="dom" />
 /**
  * Event listener callback type used by the local mock DOM.
  */
@@ -127,9 +128,9 @@ class MockElement extends EventTarget {
 	/**
 	 * Creates a mock element with the provided tag name.
 	 *
-	 * @param {string} tagName Tag name for the element.
+	 * @param {string} [tagName="div"] Tag name for the element.
 	 */
-	constructor(tagName: string) {
+	constructor(tagName = "div") {
 		super();
 		this.tagName = tagName.toUpperCase();
 	}
@@ -705,7 +706,7 @@ export function createMockElement() {
 		addEventListener(event: string, cb: Function) {
 			this.events[event] = cb;
 		},
-		attributes: {} as Map<string, string>,
+		attributes: {} as Record<string, string>,
 		setAttribute(key: string, value: string) {
 			this.attributes[key] = value;
 		},

@@ -21,6 +21,29 @@ import {
 } from "/constants.js";
 import { getStyleSettings } from "/functions.js";
 
+type EnabledSetting = {
+	id: string;
+	enabled: boolean | string;
+};
+
+type CommandLink = {
+	name: string;
+	shortcut: string;
+};
+
+/**
+ * Narrows a retrieved setting to the shape used by these tests.
+ *
+ * @param setting Retrieved setting value.
+ * @return {asserts setting is EnabledSetting}
+ */
+function assertIsEnabledSetting(setting: unknown): asserts setting is EnabledSetting {
+	assert(setting != null);
+	assert(!Array.isArray(setting));
+	assert(typeof setting === "object");
+	assert("enabled" in setting);
+}
+
 const oldtabs = [
 	{ label: "a", url: "m", org: "o" },
 	{ label: "e", url: "t" },
@@ -49,7 +72,7 @@ await Deno.test("bg_getStorage behavior", async (t) => {
 		assertEquals(tabs.at(-1).label, "i");
 		const newtabs = await bg_getStorage(undefined, WHY_KEY);
 		assertEquals(newtabs, tabs);
-		bg_getStorage((calledtabs) => {
+		bg_getStorage((calledtabs: unknown) => {
 			assertEquals(calledtabs, tabs);
 		}, WHY_KEY);
 	});
@@ -98,14 +121,13 @@ await Deno.test("bg_getSettings behavior", async (t) => {
 		bg_getSettings(
 			undefined,
 			SETTINGS_KEY,
-			(calledsettings) => assertEquals(calledsettings, settings),
+			(calledsettings: unknown) => assertEquals(calledsettings, settings),
 		);
 	});
 
 	await t.step("get one specific setting", async () => {
 		const no_release = await bg_getSettings(NO_RELEASE_NOTES);
-		assert(no_release != null);
-		assertFalse(Array.isArray(no_release));
+		assertIsEnabledSetting(no_release);
 		assert(no_release.enabled);
 	});
 
@@ -163,7 +185,7 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 		await bg_setStorage([oldtabs[0]], undefined, WHY_KEY);
 		const newtabs = await bg_getStorage();
 		assertEquals(newtabs, [oldtabs[0]]);
-		bg_setStorage(oldtabs, (calledtabs) => {
+		bg_setStorage(oldtabs, (calledtabs: unknown) => {
 			assertEquals(calledtabs, oldtabs);
 		}, WHY_KEY);
 	});
@@ -175,8 +197,7 @@ await Deno.test("bg_setStorage behavior", async (t) => {
 			SETTINGS_KEY,
 		);
 		const newset = await bg_getSettings("new_setting");
-		assert(newset != null);
-		assertFalse(Array.isArray(newset));
+		assertIsEnabledSetting(newset);
 		assert(newset.enabled);
 	});
 
@@ -273,7 +294,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(allcommands != null);
 		assert(Array.isArray(allcommands));
 		assertEquals(allcommands.length, 4); // should remove the one with no shortuct
-		bg_getCommandLinks(undefined, (calledcommands) => {
+		bg_getCommandLinks(undefined, (calledcommands: unknown) => {
 			assertEquals(calledcommands, allcommands);
 		});
 	});
@@ -283,7 +304,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(fcommands != null);
 		assert(Array.isArray(fcommands));
 		assertEquals(fcommands.length, 1);
-		bg_getCommandLinks("f", (calledcommands) => {
+		bg_getCommandLinks("f", (calledcommands: unknown) => {
 			assertEquals(calledcommands, fcommands);
 		});
 	});
@@ -294,7 +315,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(threecommands != null);
 		assert(Array.isArray(threecommands));
 		assertEquals(threecommands.length, 2); // should remove the one with no shortuct
-		bg_getCommandLinks(commandstoget, (calledcommands) => {
+		bg_getCommandLinks(commandstoget, (calledcommands: unknown) => {
 			assertEquals(calledcommands, threecommands);
 		});
 	});
@@ -306,7 +327,7 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 		assert(threecommands != null);
 		assert(Array.isArray(threecommands));
 		assertEquals(threecommands.length, 0); // there are no available commands
-		bg_getCommandLinks(commandstoget, (calledcommands) => {
+		bg_getCommandLinks(commandstoget, (calledcommands: unknown) => {
 			assertEquals(calledcommands, threecommands);
 		});
 	});

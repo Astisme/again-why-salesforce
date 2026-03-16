@@ -1,3 +1,4 @@
+import "../mocks.ts";
 import { assert, assertRejects } from "@std/testing/asserts";
 
 import {
@@ -12,7 +13,7 @@ import { BROWSER } from "/constants.js";
 Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 	await t.step("rejects if no tab found after retries", async () => {
 		await assertRejects(
-			() => bg_getCurrentBrowserTab(),
+			async () => await bg_getCurrentBrowserTab(),
 			Error,
 			"error_no_browser_tab",
 		);
@@ -40,7 +41,7 @@ Deno.test("bg_getCurrentBrowserTab behavior", async (t) => {
 
 	await t.step("invokes callback with active tab", () => {
 		return new Promise<void>((resolve, reject) => {
-			bg_getCurrentBrowserTab((tab) => {
+			bg_getCurrentBrowserTab((tab: { id: number; url: string }) => {
 				try {
 					assert(typeof tab.id === "number");
 					assert(typeof tab.url === "string");
@@ -60,7 +61,7 @@ Deno.test("bg_notify behavior", async (t) => {
 
 	await t.step("throws if message is null", () => {
 		assertRejects(
-			async () => await bg_notify(),
+			async () => await bg_notify(null as never),
 			Error,
 			"error_no_message",
 		);
@@ -75,10 +76,16 @@ Deno.test("checkLaunchExport behavior", async (t) => {
 	});
 
 	BROWSER.downloads = {
-		dowload: () => {},
+		download: async () => 0,
+		onChanged: {
+			addListener: () => {},
+		},
 	};
-	chrome.dowloads = {
-		dowload: () => {},
+	chrome.downloads = {
+		download: async () => 0,
+		onChanged: {
+			addListener: () => {},
+		},
 	};
 
 	await t.step("returns true when downloads available", () => {

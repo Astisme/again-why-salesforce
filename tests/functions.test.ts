@@ -1,3 +1,5 @@
+// @ts-nocheck
+import "./mocks.ts";
 import {
 	assert,
 	assertEquals,

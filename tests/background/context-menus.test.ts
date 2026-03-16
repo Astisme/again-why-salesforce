@@ -2,6 +2,7 @@ import "../mocks.ts";
 import {
 	assert,
 	assertEquals,
+	assertExists,
 	assertStringIncludes,
 } from "@std/testing/asserts";
 import {
@@ -63,6 +64,7 @@ Deno.test({
 			menu.id === CXM_PAGE_SAVE_TAB
 		);
 		assert(initialMenu != null);
+		assertExists(initialMenu.title);
 		assertStringIncludes(initialMenu.title, "(Alt+Shift+P)");
 
 		BROWSER.commands.setMockCommands([{
@@ -76,6 +78,7 @@ Deno.test({
 			menu.id === CXM_PAGE_SAVE_TAB
 		);
 		assert(refreshedMenu != null);
+		assertExists(refreshedMenu.title);
 		assertStringIncludes(refreshedMenu.title, "(Ctrl+Shift+P)");
 		assertEquals(
 			BROWSER.contextMenus._contextMenus.filter((menu) =>
@@ -109,6 +112,7 @@ Deno.test({
 			menu,
 		) => menu.id === CXM_PAGE_SAVE_TAB);
 		assertEquals(matchingMenus.length, 1);
+		assertExists(matchingMenus[0].title);
 		assertStringIncludes(matchingMenus[0].title, "(Alt+Shift+P)");
 	},
 });

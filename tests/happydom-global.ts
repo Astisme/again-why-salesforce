@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Window from "happydom";
 
 /**

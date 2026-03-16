@@ -15,8 +15,14 @@ const _tabSecret = Symbol("tabSecret");
  * It allows to check if an object is a Tab and to transform a Tab into JSON.
  */
 export default class Tab {
+	/** @type {"click-count"} */
 	static keyClickCount = "click-count";
+	/** @type {"click-date"} */
 	static keyClickDate = "click-date";
+	/** @type {number|undefined} */
+	["click-count"];
+	/** @type {number|undefined} */
+	["click-date"];
 	/**
 	 * All the keys which express data about a Tab.
 	 */
@@ -42,8 +48,8 @@ export default class Tab {
 	 * @param {string} label - The label of the Tab.
 	 * @param {string} url - The URL of the Tab.
 	 * @param {string|undefined} [org=undefined] - The optional organization associated with the Tab.
-	 * @param {string|null} [clickCount=undefined] - The number of times the Tab was clicked.
-	 * @param {string|null} [clickDate=undefined] - The Date in which the Tab was clicked last.
+	 * @param {number|undefined} [clickCount=undefined] - The number of times the Tab was clicked.
+	 * @param {number|undefined} [clickDate=undefined] - The date in which the Tab was clicked last.
 	 * @param {string} secret - A secret value required to initialize the tab. Must match `_tabSecret`.
 	 * @throws {Error} - Throws an error if the `secret` does not match `_tabSecret` or if `Tab.create()` is not used.
 	 */
@@ -82,8 +88,8 @@ export default class Tab {
 	 * @param {string|Object} labelOrTab - The label of the Tab, or an object representing a Tab (with `label`, `url`, and optional `org` properties).
 	 * @param {string|null} [url=null] - The URL of the Tab. Ignored if `labelOrTab` is an object.
 	 * @param {string|undefined} [org=undefined] - The optional organization associated with the Tab. Ignored if `labelOrTab` is an object.
-	 * @param {string|null} [clickCount=undefined] - The number of times the Tab was clicked. Ignored if `labelOrTab` is an object.
-	 * @param {string|null} [clickDate=undefined] - The Date in which the Tab was clicked last. Ignored if `labelOrTab` is an object.
+	 * @param {number|undefined} [clickCount=undefined] - The number of times the Tab was clicked. Ignored if `labelOrTab` is an object.
+	 * @param {number|undefined} [clickDate=undefined] - The date in which the Tab was clicked last. Ignored if `labelOrTab` is an object.
 	 * @throws {Error} - Throws an error if the parameters are invalid, or if unexpected keys are found in the object.
 	 * @return {Tab} - A new instance of the `Tab` class.
 	 */
@@ -401,6 +407,7 @@ export default class Tab {
 	 * If two Tabs have the same `url`, but different `org` (and viceversa) they are NOT duplicates.
 	 *
 	 * @param {Object} [param] - The object to compare against.
+	 * @param {string|null} [param.label=null] - Optional label ignored by duplicate checks.
 	 * @param {string|null} [param.url=null] - The URL to compare.
 	 * @param {string|null} [param.org=null] - The organization to compare.
 	 * @return {boolean} - Returns `true` if the `Tab` is duplicate to the provided object based on the specified properties, otherwise `false`.
@@ -419,10 +426,10 @@ export default class Tab {
 
 	/**
 	 * Update a Tab based on the options passed. YOU MUST take care of syncing after updating the Tab
-	 * @param {Object} tab - an Object containing the following data
-	 * @param {*} tab.label - the new label for the Tab
-	 * @param {*} tab.url - the new url for the Tab
-	 * @param {*} tab.org - the new org for the Tab
+	 * @param {Object} [tab={}] - an Object containing the following data
+	 * @param {*} [tab.label] - the new label for the Tab
+	 * @param {*} [tab.url] - the new url for the Tab
+	 * @param {*} [tab.org] - the new org for the Tab
 	 * @return {Tab} The updated Tab
 	 */
 	update(
