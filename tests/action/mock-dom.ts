@@ -1,7 +1,7 @@
 /**
  * Event listener signature used by the lightweight action-page mock DOM.
  */
-type Listener = (event: Event) => void;
+type Listener = (event: Event) => void | Promise<void>;
 
 /**
  * Stores CSS classes for a mock element.
@@ -162,21 +162,28 @@ export class MockElement {
 	/**
 	 * Dispatches a click event.
 	 *
-	 * @return {void}
+	 * @return {Promise<void> | void} Listener completion when async handlers are present.
 	 */
 	click() {
-		this.dispatchEvent(new Event("click", { cancelable: true }));
+		return this.dispatchEvent(new Event("click", { cancelable: true }));
 	}
 
 	/**
 	 * Dispatches an event to registered listeners.
 	 *
 	 * @param {Event} event Event instance.
-	 * @return {void}
+	 * @return {Promise<void> | void} Listener completion when async handlers are present.
 	 */
 	dispatchEvent(event: Event) {
+		const asyncListeners: Promise<void>[] = [];
 		for (const listener of this.#listeners.get(event.type) ?? []) {
-			listener(event);
+			const result = listener(event);
+			if (result instanceof Promise) {
+				asyncListeners.push(result);
+			}
+		}
+		if (asyncListeners.length > 0) {
+			return Promise.all(asyncListeners).then(() => {});
 		}
 	}
 

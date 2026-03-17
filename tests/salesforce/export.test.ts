@@ -75,6 +75,7 @@ async function loadExportModule({
 	let pushedTabs: unknown[] = [];
 	closeButton.click = () => {
 		closeClicks.value++;
+		return undefined;
 	};
 	modalHanger.appendChild = (child) => {
 		appended.push(child);
@@ -105,15 +106,15 @@ async function loadExportModule({
 			document: {
 				getElementById: () => hasExistingModal ? new MockElement("div") : null,
 			},
-			ensureAllTabsAvailability: async () => ({
+			ensureAllTabsAvailability: () => Promise.resolve({
 				pinned,
 			}),
-			generateSldsModalWithTabList: async (_allTabs, options) => {
+			generateSldsModalWithTabList: (_allTabs, options) => {
 				if (generateError != null) {
 					throw generateError;
 				}
 				modalOptions.push(options);
-				return {
+				return Promise.resolve({
 					closeButton,
 					getSelectedTabs: () => ({
 						selectedAll,
@@ -121,7 +122,7 @@ async function loadExportModule({
 					}),
 					modalParent,
 					saveButton,
-				};
+				});
 			},
 			getModalHanger: () => modalHanger,
 			sendExtensionMessage: (message) => {
