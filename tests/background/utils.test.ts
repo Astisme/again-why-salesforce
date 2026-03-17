@@ -1,5 +1,6 @@
 import "../mocks.ts";
 import { assert, assertEquals, assertFalse, assertRejects } from "@std/testing/asserts";
+import { waitForCondition, waitForNextTask } from "../async.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
 import {
@@ -58,16 +59,6 @@ type BackgroundUtilsDependencies = {
 	bg_getStorage: (callback: (tabs: object[]) => void) => Promise<void>;
 	bg_setStorage: (value: object[], other?: null, key?: string) => void;
 };
-
-/**
- * Flushes queued promise continuations used by async background notifications.
- *
- * @return {Promise<void>}
- */
-async function flushBackgroundTasks() {
-	await Promise.resolve();
-	await Promise.resolve();
-}
 
 /**
  * Loads background/utils.js with explicit browser and update-check stubs.
@@ -341,7 +332,7 @@ Deno.test("background utils isolated branches cover export handlers and update c
 		const firefox = await loadBackgroundUtilsModule({ isFirefox: true });
 		try {
 			firefox.module._exportHandler([{ url: "/firefox" }]);
-			await flushBackgroundTasks();
+			await waitForNextTask();
 			firefox.triggerDownloadComplete();
 			assert(firefox.downloads[0].url.startsWith("blob:"));
 			assertEquals(firefox.revokedUrls, ["blob:test"]);
@@ -365,7 +356,7 @@ Deno.test("background utils isolated branches cover export handlers and update c
 		});
 		try {
 			fallback.module._exportHandler([{ url: "/safari" }]);
-			await flushBackgroundTasks();
+			await waitForCondition(() => fallback.messages.length === 1);
 			assertEquals(fallback.messages, [{
 				what: "export-from-bg",
 				filename: "again-why-salesforce_1-Tabs.json",
@@ -416,7 +407,6 @@ Deno.test("background utils isolated branches cover export handlers and update c
 		});
 		try {
 			await updateFixture.module.checkForUpdates();
-			await flushBackgroundTasks();
 			assertEquals(updateFixture.storageWrites.length, 1);
 			assertEquals(updateFixture.messages, [{
 				what: "update-extension",

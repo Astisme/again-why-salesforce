@@ -38,8 +38,9 @@ async function _queryTabs(callback, count = 0) {
 		if (count > 5) {
 			throw new Error("error_no_browser_tab");
 		}
-		await _queryTabs(callback, count + 1);
-	} else callback(browserTabs[0]);
+		return await _queryTabs(callback, count + 1);
+	}
+	return callback(browserTabs[0]);
 }
 /**
  * Retrieves the current active browser tab based on the given parameters.
@@ -60,7 +61,7 @@ export function bg_getCurrentBrowserTab(callback = null) {
 				.catch((e) => reject(e));
 		});
 	}
-	_queryTabs(callback);
+	return _queryTabs(callback);
 }
 /**
  * Sends the same message back to other parts of the extension.
@@ -263,7 +264,7 @@ export async function checkForUpdates() {
 			?.[0].tag_name.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
 		if (latestVersion != null) {
-			bg_notify({
+			await bg_notify({
 				what: WHAT_UPDATE_EXTENSION,
 				oldversion: EXTENSION_VERSION,
 				version: latestVersion,

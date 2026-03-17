@@ -168,16 +168,6 @@ function createHeaderSelector(innerElement: string) {
 }
 
 /**
- * Waits for async click handlers that resolve on the next microtask.
- *
- * @return {Promise<void>} Promise resolved after queued tasks complete.
- */
-async function flushTasks() {
-	await Promise.resolve();
-	await Promise.resolve();
-}
-
-/**
  * Loads favourite-manager.js with isolated dependencies and a small DOM harness.
  *
  * @param {LoadFavouriteManagerOptions} [options={}] Fixture configuration.
@@ -378,6 +368,25 @@ async function appendGeneratedButton(
 	const button = await fixture.module.generateFavouriteButton();
 	parent.appendChild(button);
 	return button;
+}
+
+/**
+ * Invokes a registered event listener and awaits async handlers.
+ *
+ * @param {EventListenerOrEventListenerObject} listener Registered listener.
+ * @param {EventTarget} target Event target bound as `this`.
+ * @return {Promise<void>} Promise resolved after the listener completes.
+ */
+async function invokeEventListener(
+	listener: EventListenerOrEventListenerObject,
+	target: EventTarget,
+) {
+	const event = new Event("click");
+	if (typeof listener === "function") {
+		await listener.call(target, event);
+		return;
+	}
+	await listener.handleEvent(event);
 }
 
 Deno.test("favourite-manager creates regular and slashed star svgs", async () => {
@@ -881,12 +890,29 @@ Deno.test("favourite-manager button click handlers invoke the favourite action f
 		isCurrentlyOnSavedTab: false,
 		minifiedUrl: "Users/home",
 	});
+	const originalAddEventListener = EventTarget.prototype.addEventListener;
+	let clickListener: EventListenerOrEventListenerObject | null = null;
+	EventTarget.prototype.addEventListener = function (
+		type: string,
+		listener: EventListenerOrEventListenerObject | null,
+		options?: AddEventListenerOptions | boolean,
+	) {
+		if (
+			type === "click" &&
+			listener != null &&
+			this instanceof HTMLElement &&
+			this.tagName === "BUTTON"
+		) {
+			clickListener = listener;
+		}
+		return originalAddEventListener.call(this, type, listener, options);
+	};
 
 	try {
 		const button = await fixture.module.generateFavouriteButton();
 
-		button.click();
-		await flushTasks();
+		assert(clickListener != null);
+		await invokeEventListener(clickListener, button);
 
 		assertEquals(fixture.performActionCalls, [{
 			action: "add",
@@ -898,6 +924,7 @@ Deno.test("favourite-manager button click handlers invoke the favourite action f
 			},
 		}]);
 	} finally {
+		EventTarget.prototype.addEventListener = originalAddEventListener;
 		fixture.cleanup();
 	}
 });

@@ -26,6 +26,7 @@ type ReviewSponsorClass = CustomElementConstructor & {
 type ReviewSponsorInstance = MockElement & {
 	_getExtensionUsageDays: () => Promise<number>;
 	_showReviewOrSponsor: (result: ReviewSponsorResult) => Promise<void>;
+	whenReady: () => Promise<void>;
 };
 
 type ReviewSponsorDependencies = {
@@ -155,17 +156,6 @@ function createStoredCustomElementsRegistry() {
 function isReviewSponsorClass(constructor: CustomElementConstructor): constructor is ReviewSponsorClass {
 	return typeof constructor.prototype._getExtensionUsageDays === "function" &&
 		typeof constructor.prototype._showReviewOrSponsor === "function";
-}
-
-/**
- * Flushes the microtasks queued by the review-sponsor constructor.
- *
- * @return {Promise<void>} Promise resolved after async lifecycle work completes.
- */
-async function waitForReviewSponsorTasks() {
-	for (let index = 0; index < 12; index++) {
-		await Promise.resolve();
-	}
 }
 
 /**
@@ -547,28 +537,20 @@ Deno.test("show review or sponsor block", async (t) => {
 
 			try {
 				const component = new ReviewSponsorConstructor();
-				await waitForReviewSponsorTasks();
+				await component.whenReady();
 
 				assertEquals(await component._getExtensionUsageDays(), 45);
 				assertEquals(component.shadowRoot?.children.length, 2);
 
-				const svgs = component.shadowRoot?.querySelectorAll("svg") ?? [];
-				const reviewSvg = svgs[0];
-				const sponsorSvg = svgs[1];
-				const reviewLink = reviewSvg?.parentElement as HTMLAnchorElement | null;
-				const sponsorLink = sponsorSvg?.parentElement as HTMLAnchorElement | null;
+				const links = component.shadowRoot?.querySelectorAll("a") ?? [];
+				const reviewLink = links[0] as HTMLAnchorElement | undefined;
+				const sponsorLink = links[1] as HTMLAnchorElement | undefined;
+				const reviewSvg = reviewLink?.querySelector("svg");
+				const sponsorSvg = sponsorLink?.querySelector("svg");
 				assert(reviewLink != null);
 				assert(sponsorLink != null);
 				assert(reviewSvg != null);
 				assert(sponsorSvg != null);
-				for (
-					let index = 0;
-					index < 50 &&
-					sponsorLink.getAttribute("aria-label") !== "Send tip";
-					index++
-				) {
-					await Promise.resolve();
-				}
 
 				assertEquals(reviewLink.title, "Write review");
 				assertEquals(reviewLink.getAttribute("aria-label"), "Write review");
@@ -677,7 +659,7 @@ Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in
 		assert(ReviewSponsorConstructor != null);
 
 		const component = new ReviewSponsorConstructor();
-		await waitForReviewSponsorTasks();
+		await component.whenReady();
 
 		assertEquals(settingsCalls, [["extension_usage_days"]]);
 		assertEquals(injectCalls, [{
