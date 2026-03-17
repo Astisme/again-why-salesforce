@@ -29,13 +29,13 @@ type ManageTabsModule = {
 	checkAddRemoveLastTr: (options?: {
 		inputObj?: Record<string, string>;
 		tabAppendElement?: ManageElement | null;
-	}) => void;
+	}) => Promise<void>;
 	checkDuplicates: (
 		tab?: { org?: string | null; url?: string | null },
 		options?: { tabAppendElement?: ManageElement | null },
 	) => Promise<void>;
 	checkOpenAskConfirm: (event: ManageEvent) => Promise<void>;
-	checkRemoveTr: (event: ManageEvent) => void;
+	checkRemoveTr: (event: ManageEvent) => Promise<void> | void;
 	closeDropdownOnBtnClick: (event: ManageEvent, button: ManageElement) => void;
 	closeDropdownOnTrClick: (event: ManageEvent, button: ManageElement) => void;
 	createManageTabsModal: () => Promise<void>;
@@ -43,7 +43,7 @@ type ManageTabsModule = {
 	handleActionButtonClick: (
 		event: ManageEvent,
 		options?: { allTabs?: Record<string, number> },
-	) => void;
+	) => Promise<void>;
 	moveTrToGivenIndex: (options?: {
 		currentIndex?: number | null;
 		currentlyPinnedNo?: number | null;
@@ -81,7 +81,7 @@ type ManageTabsModule = {
 	trInputListener: (options?: {
 		tabAppendElement?: ManageElement | null;
 		type?: string;
-	}) => void;
+	}) => Promise<void>;
 	updateLoggerIndex: (fromIndex?: number | null, toIndex?: number | null) => void;
 	updateModalBodyOverflow: (article?: ManageElement | null) => void;
 	updateTabAttributes: (options?: {
@@ -258,7 +258,7 @@ class ManageElement {
 	tagName: string;
 	value = "";
 	#closestMap = new Map<string, ManageElement | null>();
-	#listeners = new Map<string, Array<(event: ManageEvent) => void>>();
+	#listeners = new Map<string, Array<(event: ManageEvent) => void | Promise<void>>>();
 	#queryMap = new Map<string, ManageElement | null>();
 	#queryAllMap = new Map<string, ManageElement[]>();
 
@@ -300,10 +300,10 @@ class ManageElement {
 	 * Registers an event listener.
 	 *
 	 * @param {string} type Event type.
-	 * @param {(event: ManageEvent) => void} listener Listener callback.
+	 * @param {(event: ManageEvent) => void | Promise<void>} listener Listener callback.
 	 * @return {void}
 	 */
-	addEventListener(type: string, listener: (event: ManageEvent) => void) {
+	addEventListener(type: string, listener: (event: ManageEvent) => void | Promise<void>) {
 		const listeners = this.#listeners.get(type) ?? [];
 		listeners.push(listener);
 		this.#listeners.set(type, listeners);
@@ -363,16 +363,23 @@ class ManageElement {
 	 * Dispatches an event to registered listeners.
 	 *
 	 * @param {ManageEvent} event Event object.
-	 * @return {void}
+	 * @return {Promise<void> | void} Listener completion when async handlers are present.
 	 */
 	dispatchEvent(event: ManageEvent) {
 		const type = event.type ?? "click";
+		const asyncListeners: Promise<void>[] = [];
 		for (const listener of this.#listeners.get(type) ?? []) {
-			listener({
+			const result = listener({
 				...event,
 				currentTarget: event.currentTarget ?? this,
 				target: event.target ?? this,
 			});
+			if (result instanceof Promise) {
+				asyncListeners.push(result);
+			}
+		}
+		if (asyncListeners.length > 0) {
+			return Promise.all(asyncListeners).then(() => {});
 		}
 	}
 
@@ -459,10 +466,10 @@ class ManageElement {
 	/**
 	 * Dispatches a click event on the element.
 	 *
-	 * @return {void}
+	 * @return {Promise<void> | void} Listener completion when async handlers are present.
 	 */
 	click() {
-		this.dispatchEvent(createEvent(this));
+		return this.dispatchEvent(createEvent(this));
 	}
 
 	/**
@@ -937,16 +944,6 @@ function createArticleFixture(
 	return { article, modalBody, table };
 }
 
-/**
- * Waits for queued microtasks created by async helpers.
- *
- * @return {Promise<void>} Promise resolving after pending microtasks.
- */
-async function flushMicrotasks() {
-	await Promise.resolve();
-	await Promise.resolve();
-}
-
 Deno.test("manageTabs reorders logger state and validates required indices", async () => {
 	const fixture = await loadManageTabs();
 	const rows = [createRow(0).row, createRow(1).row, createRow(2).row];
@@ -1129,6 +1126,7 @@ Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions"
 	closeButton.setClosest("button", closeButton);
 	(closeButton as ManageElement & { click?: () => void }).click = () => {
 		closeClicks++;
+		return undefined;
 	};
 	fixture.module.__setState({
 		closeButton,
@@ -1141,9 +1139,9 @@ Deno.test("manageTabs handles open, pin, unpin, remove, and unknown row actions"
 		const openButton = new ManageElement("button");
 		openButton.dataset.action = "open";
 		const openEvent = createEvent(openButton);
-		fixture.module.handleActionButtonClick(openEvent, { allTabs: { pinnedTabsNo: 1 } });
-		await Promise.resolve();
-		await Promise.resolve();
+		await fixture.module.handleActionButtonClick(openEvent, {
+			allTabs: { pinnedTabsNo: 1 },
+		});
 		assertEquals(openEvent.prevented.value, true);
 		assertEquals(openEvent.stopped.value, true);
 		assertEquals(fixture.lightningClicks.value, 1);
@@ -1342,10 +1340,9 @@ Deno.test("manageTabs closes dropdowns and removes empty rows from drag listener
 
 		managedLoggers[0].label.value = "";
 		managedLoggers[0].url.value = "";
-		managedLoggers[0].label.dispatchEvent(
+		await managedLoggers[0].label.dispatchEvent(
 			createEvent(managedLoggers[0].label, managedLoggers[0].label, "focusout"),
 		);
-		await flushMicrotasks();
 		assertEquals(tbody.children.length, 1);
 		assertEquals(row1.attributes.has("draggable"), false);
 	} finally {
@@ -1408,8 +1405,7 @@ Deno.test("manageTabs adds and removes rows through internal helpers", async () 
 		row0Parts.dropdownButton.dispatchEvent(createEvent(row0Parts.dropdownButton));
 		assertEquals(row0Parts.dropdownMenu.classList.contains("hidden"), true);
 
-		previousAction.dispatchEvent(createEvent(previousAction));
-		await flushMicrotasks();
+		await previousAction.dispatchEvent(createEvent(previousAction));
 		assertEquals(row0Parts.dropdownMenu.classList.contains("hidden"), true);
 
 		const newLogger = fixture.module.__getState().managedLoggers[1];
@@ -1566,7 +1562,7 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			"Fresh label",
 		);
 
-		assertThrows(
+		await assertRejects(
 			() => fixture.module.checkAddRemoveLastTr(),
 			Error,
 			"error_required_params",
@@ -1584,11 +1580,10 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 				tr: previousRowParts.row,
 			}],
 		});
-		fixture.module.checkAddRemoveLastTr({
+		await fixture.module.checkAddRemoveLastTr({
 			inputObj: { label: "new", url: "url" },
 			tabAppendElement: addTbody,
 		});
-		await flushMicrotasks();
 		assertEquals(addTbody.children.length, 1);
 
 		fixture.module.__setState({
@@ -1599,11 +1594,10 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 		fixture.module.__setState({
 			focusedIndex: 1,
 		});
-		fixture.module.checkAddRemoveLastTr({
+		await fixture.module.checkAddRemoveLastTr({
 			inputObj: { label: "present", url: "" },
 			tabAppendElement: tbody,
 		});
-		await flushMicrotasks();
 		assertEquals(tbody.children.length, 3);
 	} finally {
 		fixture.cleanup();
@@ -1734,8 +1728,7 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 		loggers[2].url.dispatchEvent(createEvent(loggers[2].url, loggers[2].url, "input"));
 		assertEquals(loggers[2].url.value, "min:modal-url");
 
-		actionButton.click();
-		await flushMicrotasks();
+		await actionButton.click();
 		assertEquals(fixture.lightningClicks.value, 1);
 		assertEquals(fixture.setupDragForUlCalls.value, 1);
 		assertEquals(fixture.documentEvents.includes("close-manage-tabs"), true);
@@ -1754,8 +1747,7 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 		row0Parts.dropdownButton.dispatchEvent(createEvent(row0Parts.dropdownButton));
 		assertEquals(row1Parts.dropdownMenu.classList.contains("hidden"), true);
 
-		saveButton.click();
-		await flushMicrotasks();
+		await saveButton.click();
 		assertEquals(fixture.replaceTabsCalls.at(-1)?.tabs.length, 2);
 		assertEquals(fixture.module.__getState().managedLoggers.length, 0);
 

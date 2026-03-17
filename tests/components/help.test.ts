@@ -14,7 +14,7 @@ type HelpInstance = MockElement & {
 	_anchor: MockElement;
 	_linkTip: MockElement;
 	_tooltip: MockElement;
-	connectedCallback: () => void;
+	connectedCallback: () => Promise<void>;
 	attributeChangedCallback: (
 		name: Event | null,
 		oldValue: string | null,
@@ -53,16 +53,6 @@ class MockHelpHTMLElement extends MockElement {
 	}
 }
 
-/**
- * Waits for pending microtasks triggered by async lifecycle work.
- *
- * @return {Promise<void>} Promise resolved after the queued async work completes.
- */
-async function waitForMicrotask() {
-	await Promise.resolve();
-	await Promise.resolve();
-}
-
 Deno.test("help component syncs link attributes and accessibility text in isolation", async () => {
 	let registeredName = "";
 	let registeredConstructor: HelpComponentClass | null = null;
@@ -78,10 +68,10 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 				},
 			},
 			HIDDEN_CLASS: "hidden",
-			ensureTranslatorAvailability: async () => ({
-				translate: async () => {
+			ensureTranslatorAvailability: () => Promise.resolve({
+				translate: () => {
 					translateCalls++;
-					return "Help";
+					return Promise.resolve("Help");
 				},
 			}),
 			generateHelpWith_i_popup: () => ({
@@ -131,8 +121,7 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 		component.setAttribute("target", "_blank");
 		component.setAttribute("rel", "noopener");
 
-		component.connectedCallback();
-		await waitForMicrotask();
+		await component.connectedCallback();
 
 		assertEquals(injectCalls, [{
 			id: "awsf-help",

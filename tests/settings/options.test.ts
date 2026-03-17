@@ -213,6 +213,7 @@ type OptionsFixture = {
 	module: OptionsModule;
 	querySelectors: Map<string, OptionElement>;
 	requestCookiesPermissionResult: { value: boolean };
+	restoreOnLoadPromise: Promise<void>;
 	sendMessages: Record<string, unknown>[];
 	scheduledTimeouts: Array<() => void>;
 	settingsResult: { value: Record<string, unknown> | Record<string, unknown>[] | null };
@@ -236,11 +237,6 @@ function createListItem(id: string, styleKey: string) {
 	const element = new OptionElement(id, "li");
 	element.dataset.styleKey = styleKey;
 	return element;
-}
-
-async function flushMicrotasks() {
-	await Promise.resolve();
-	await Promise.resolve();
 }
 
 async function loadOptions({ runRestoreOnLoad = false }: { runRestoreOnLoad?: boolean } = {}) {
@@ -416,6 +412,7 @@ function __getState() {
 					querySelectorMap.get(selector) ?? getOrCreateElement(elements, selector),
 			},
 			__runRestoreGeneralSettingsOnLoad: runRestoreOnLoad,
+			__restoreGeneralSettingsOnLoadPromise: undefined,
 			setTimeout: (callback: () => void) => {
 				scheduledTimeouts.push(callback);
 				return scheduledTimeouts.length;
@@ -430,7 +427,7 @@ function __getState() {
 		transformSource: (source) =>
 			source.replace(
 				/\nawait restoreGeneralSettings\(\);\s*$/,
-				"\nif (globalThis.__runRestoreGeneralSettingsOnLoad) { restoreGeneralSettings(); } else { globalThis.__restoreGeneralSettingsSkipped = true; }\n",
+				"\nif (globalThis.__runRestoreGeneralSettingsOnLoad) { globalThis.__restoreGeneralSettingsOnLoadPromise = restoreGeneralSettings(); } else { globalThis.__restoreGeneralSettingsSkipped = true; globalThis.__restoreGeneralSettingsOnLoadPromise = Promise.resolve(); }\n",
 			),
 	});
 
@@ -451,6 +448,10 @@ function __getState() {
 		module,
 		querySelectors: querySelectorMap,
 		requestCookiesPermissionResult,
+		restoreOnLoadPromise:
+			(globalThis as {
+				__restoreGeneralSettingsOnLoadPromise?: Promise<void>;
+			}).__restoreGeneralSettingsOnLoadPromise ?? Promise.resolve(),
 		scheduledTimeouts,
 		sendMessages,
 		settingsResult,
@@ -1012,7 +1013,6 @@ Deno.test("options restores general settings and handles general setting listene
 		fixture.requestCookiesPermissionResult.value = false;
 		userLanguage.value = "follow-sf-lang";
 		await userLanguage.dispatch("change");
-		await flushMicrotasks();
 		assertEquals(userLanguage.value, "it");
 		assertEquals(
 			fixture.elements.get("toast-display-error")?.querySelector(
@@ -1041,7 +1041,6 @@ Deno.test("options restores general settings and handles general setting listene
 		fixture.exportPermissionResult.value = false;
 		allowExport.checked = true;
 		await allowExport.dispatch("change");
-		await flushMicrotasks();
 		assertEquals(allowExport.checked, false);
 		assertEquals(
 			fixture.elements.get("toast-display-error")?.querySelector(
@@ -1056,7 +1055,6 @@ Deno.test("options restores general settings and handles general setting listene
 		fixture.exportPermissionResult.value = true;
 		allowExport.checked = true;
 		await allowExport.dispatch("change");
-		await flushMicrotasks();
 		assertEquals(allowExport.checked, true);
 
 		fixture.framePatternsPermissionResult.value = false;
@@ -1064,12 +1062,10 @@ Deno.test("options restores general settings and handles general setting listene
 		await allowDomains.dispatch("change");
 		allowDomains.checked = true;
 		await allowDomains.dispatch("change");
-		await flushMicrotasks();
 		assertEquals(allowDomains.checked, false);
 		fixture.framePatternsPermissionResult.value = true;
 		allowDomains.checked = true;
 		await allowDomains.dispatch("change");
-		await flushMicrotasks();
 		assertEquals(allowDomains.checked, true);
 		assertEquals(
 			fixture.elements.get("toast-display-success")?.querySelector(
@@ -1092,7 +1088,7 @@ Deno.test("options can trigger general settings restoration on module load", asy
 	const fixture = await loadOptions({ runRestoreOnLoad: true });
 
 	try {
-		await flushMicrotasks();
+		await fixture.restoreOnLoadPromise;
 		assertEquals(fixture.module.__getState().listenersSet.settings, true);
 	} finally {
 		fixture.cleanup();

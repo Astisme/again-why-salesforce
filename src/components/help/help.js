@@ -58,7 +58,7 @@ class HelpAws extends HTMLElement {
 	 */
 	connectedCallback() {
 		this._syncLink();
-		this._addAssistiveText();
+		return this._addAssistiveText();
 	}
 
 	/**

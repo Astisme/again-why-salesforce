@@ -21,7 +21,7 @@ type ImportModule = {
 	readDropFiles: (event: {
 		dataTransfer: { files: FileLike[] };
 		preventDefault: () => void;
-	}) => void;
+	}) => Promise<void>;
 	showFileImport: () => Promise<void>;
 	showTabSelectThenImport: (
 		files?: FileLike[],
@@ -201,21 +201,9 @@ class MockTabContainer {
  */
 function createFile(type: string, contents: string): FileLike {
 	return {
-		text: async () => contents,
+		text: () => Promise.resolve(contents),
 		type,
 	};
-}
-
-/**
- * Flushes pending microtasks triggered by the async import handlers.
- *
- * @return {Promise<void>} Promise resolved after queued async work completes.
- */
-async function waitForImportFlow() {
-	await Promise.resolve();
-	await Promise.resolve();
-	await Promise.resolve();
-	await new Promise<void>((resolve) => setTimeout(resolve, 0));
 }
 
 /**
@@ -296,9 +284,11 @@ async function loadImportModule({
 	closeButton.click = () => {
 		modalPresent = false;
 		closeClicks.value++;
+		return undefined;
 	};
 	selectedCloseButton.click = () => {
 		closeClicks.value++;
+		return undefined;
 	};
 	modalHanger.appendChild = (child) => {
 		hangerChildren.push(child);
@@ -371,35 +361,35 @@ function __getInputModalParent() { return inputModalParent; }`,
 					return null;
 				},
 			},
-			ensureAllTabsAvailability: async () => ({
-				importTabs: async (json, config) => {
+			ensureAllTabsAvailability: () => Promise.resolve({
+				importTabs: (json, config) => {
 					importCalls.push({ config, json });
-					return importCount;
+					return Promise.resolve(importCount);
 				},
 			}),
-			ensureTranslatorAvailability: async () => ({
-				translate: async (message) => `translated:${message}`,
+			ensureTranslatorAvailability: () => Promise.resolve({
+				translate: (message) => Promise.resolve(`translated:${message}`),
 			}),
-			generateCheckboxWithLabel: async (id, _label, checked) => {
+			generateCheckboxWithLabel: (id, _label, checked) => {
 				const existingCheckbox = fileCheckboxes[id];
 				if (existingCheckbox != null) {
-					return existingCheckbox;
+					return Promise.resolve(existingCheckbox);
 				}
 				const checkbox = new MockElement("input");
 				checkbox.id = id;
 				checkbox.checked = checked;
 				fileCheckboxes[id] = checkbox;
-				return checkbox;
+				return Promise.resolve(checkbox);
 			},
-			generateSection: async () => ({
+			generateSection: () => Promise.resolve({
 				divParent: new MockElement("div"),
 				section: new MockElement("section"),
 			}),
-			generateSldsFileInput: async () => ({
+			generateSldsFileInput: () => Promise.resolve({
 				fileInputWrapper,
 				inputContainer,
 			}),
-			generateSldsModal: async () => ({
+			generateSldsModal: () => Promise.resolve({
 				...(generateModalError == null ? {} : (() => {
 					throw generateModalError;
 				})()),
@@ -417,9 +407,9 @@ function __getInputModalParent() { return inputModalParent; }`,
 				})(),
 				saveButton,
 			}),
-			generateSldsModalWithTabList: async (_tabs, options) => {
+			generateSldsModalWithTabList: (_tabs, options) => {
 				modalListCalls.push(options);
-				return {
+				return Promise.resolve({
 					closeButton: selectedCloseButton,
 					getSelectedTabs: () => ({
 						selectedAll,
@@ -427,7 +417,7 @@ function __getInputModalParent() { return inputModalParent; }`,
 					}),
 					modalParent: selectedModalParent,
 					saveButton: selectedSaveButton,
-				};
+				});
 			},
 			getModalHanger: () => modalHanger,
 			getSetupTabUl: () => ({
@@ -521,7 +511,7 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 		await fixture.module.createImportModal();
 		assertEquals(fixture.hangerChildren.length, 1);
 
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
 				files: [
@@ -533,7 +523,6 @@ Deno.test("import shows the file modal and imports valid JSON files directly", a
 			},
 			type: "change",
 		} as unknown as Event);
-		await waitForImportFlow();
 
 		assertEquals(fixture.importCalls, [{
 			config: {
@@ -594,7 +583,7 @@ Deno.test("import rejects non-JSON files and surfaces the validation toast", asy
 
 	try {
 		await fixture.module.createImportModal();
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
 				files: [
@@ -603,7 +592,6 @@ Deno.test("import rejects non-JSON files and surfaces the validation toast", asy
 			},
 			type: "change",
 		} as unknown as Event);
-		await waitForImportFlow();
 
 		assertEquals(fixture.toasts, [
 			{
@@ -632,7 +620,7 @@ Deno.test("import lets the user pick tabs before importing and warns on empty se
 
 	try {
 		await fixture.module.createImportModal();
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
 				files: [
@@ -647,9 +635,7 @@ Deno.test("import lets the user pick tabs before importing and warns on empty se
 			},
 			type: "change",
 		} as unknown as Event);
-		await waitForImportFlow();
-		fixture.selectedSaveButton.click();
-		await waitForImportFlow();
+		await fixture.selectedSaveButton.click();
 
 		assertEquals(fixture.modalListCalls, [{
 			explainer: "select_tabs_import",
@@ -677,7 +663,7 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 
 	try {
 		await fixture.module.createImportModal();
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
 				files: [
@@ -692,9 +678,7 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 			},
 			type: "change",
 		} as unknown as Event);
-		await waitForImportFlow();
-		fixture.selectedSaveButton.click();
-		await waitForImportFlow();
+		await fixture.selectedSaveButton.click();
 
 		assertEquals(fixture.closeClicks.value, 3);
 		assertEquals(fixture.importCalls, [{
@@ -724,7 +708,7 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 
 	try {
 		await fixture.module.createImportModal();
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
 				files: [
@@ -738,9 +722,7 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 			},
 			type: "change",
 		} as unknown as Event);
-		await waitForImportFlow();
-		fixture.selectedSaveButton.click();
-		await waitForImportFlow();
+		await fixture.selectedSaveButton.click();
 
 		assertEquals(fixture.importCalls, [{
 			config: {
@@ -769,7 +751,7 @@ Deno.test("import closes the open file modal before showing the tab picker", asy
 	try {
 		await fixture.module.createImportModal();
 		fixture.setModalPresent(true);
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			preventDefault() {},
 			target: {
 				files: [
@@ -784,7 +766,6 @@ Deno.test("import closes the open file modal before showing the tab picker", asy
 			},
 			type: "change",
 		} as unknown as Event);
-		await waitForImportFlow();
 
 		assertEquals(fixture.closeClicks.value, 1);
 		assertEquals(fixture.modalListCalls.length, 1);
@@ -802,7 +783,7 @@ Deno.test("import surfaces unknown file structures through the drop handler", as
 
 	try {
 		await fixture.module.createImportModal();
-		fixture.changeTarget.dispatchEvent({
+		await fixture.changeTarget.dispatchEvent({
 			dataTransfer: {
 				files: [
 					createFile(
@@ -814,7 +795,6 @@ Deno.test("import surfaces unknown file structures through the drop handler", as
 			preventDefault() {},
 			type: "drop",
 		} as unknown as Event);
-		await waitForImportFlow();
 
 		assertEquals(fixture.toasts.at(0), {
 			message: "error_unknown_file_structure",
@@ -919,7 +899,7 @@ Deno.test("import attaches the drop reader directly", async () => {
 
 	try {
 		await fixture.module.createImportModal();
-		fixture.module.readDropFiles({
+		await fixture.module.readDropFiles({
 			dataTransfer: {
 				files: [
 					createFile(
@@ -930,7 +910,6 @@ Deno.test("import attaches the drop reader directly", async () => {
 			},
 			preventDefault() {},
 		});
-		await waitForImportFlow();
 
 		assertEquals(fixture.importCalls, [{
 			config: {
@@ -957,9 +936,7 @@ Deno.test("import reads a single file object directly and surfaces read failures
 			),
 		);
 		await fixture.module.readFile({
-			text: async () => {
-				throw new Error("broken-file");
-			},
+			text: () => Promise.reject(new Error("broken-file")),
 			type: "application/json",
 		});
 

@@ -172,7 +172,7 @@ function getLastTr(tbody = null) {
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
  */
-export function handleActionButtonClick(e, {
+export async function handleActionButtonClick(e, {
 	allTabs,
 } = {}) {
 	e.preventDefault();
@@ -180,8 +180,7 @@ export function handleActionButtonClick(e, {
 	const btn = e.currentTarget;
 	const action = btn.dataset.action;
 	if (action === "open") {
-		checkOpenAskConfirm(e);
-		return;
+		return await checkOpenAskConfirm(e);
 	}
 	const tabIndex = Number.parseInt(btn.dataset.tabIndex);
 	const row = btn.closest("tr");
@@ -334,7 +333,7 @@ function checkRemoveTr(e) {
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
 	if (label === "" && url === "") {
-		removeTr(tabAppendElement, parentTr, focusedIndex);
+		return removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
 }
 /**
@@ -476,7 +475,7 @@ async function addTr(tabAppendElement = null) {
 			"click",
 			async (e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, {
+				return await handleActionButtonClick(e, {
 					allTabs: await ensureAllTabsAvailability(),
 				});
 			},
@@ -589,7 +588,7 @@ async function checkDuplicates({
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append or remove the tr
  * @throws Error when tabAppendElement == null
  */
-function checkAddRemoveLastTr({
+async function checkAddRemoveLastTr({
 	inputObj = managedLoggers[focusedIndex].last_input,
 	tabAppendElement,
 } = {}) {
@@ -601,13 +600,13 @@ function checkAddRemoveLastTr({
 		focusedIndex === (managedLoggers.length - 1) &&
 		(inputObj.label && inputObj.url)
 	) {
-		addTr(tabAppendElement);
+		return await addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (
 		focusedIndex === (managedLoggers.length - 2) &&
 		(!inputObj.label || !inputObj.url)
 	) {
-		removeTr(tabAppendElement);
+		return await removeTr(tabAppendElement);
 	}
 }
 
@@ -713,7 +712,7 @@ function trInputListener({
 		});
 	}
 	inputObj[type] = element.value;
-	checkAddRemoveLastTr({
+	return checkAddRemoveLastTr({
 		inputObj,
 		tabAppendElement,
 	});
@@ -851,9 +850,9 @@ export async function createManageTabsModal() {
 			new CustomEvent(TUTORIAL_EVENT_CLOSE_MANAGE_TABS),
 		);
 	});
-	saveButton.addEventListener("click", (e) => {
+	saveButton.addEventListener("click", async (e) => {
 		e.preventDefault();
-		readManagedTabsAndSave({ tbody, allTabs });
+		await readManagedTabsAndSave({ tbody, allTabs });
 		closeButton.click();
 		managedLoggers.length = 0;
 	});
@@ -866,9 +865,9 @@ export async function createManageTabsModal() {
 	for (const btn of actionButtons) {
 		btn.addEventListener(
 			"click",
-			(e) => {
+			async (e) => {
 				e.preventDefault();
-				handleActionButtonClick(e, {
+				return await handleActionButtonClick(e, {
 					allTabs,
 				});
 			},
