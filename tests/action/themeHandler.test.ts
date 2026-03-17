@@ -226,6 +226,11 @@ Deno.test("themeHandler attaches and detaches the system color listener", async 
 			what: "theme-message",
 		});
 		assertEquals(localStorage.getItem("userTheme"), "system");
+		assertStrictEquals(mediaQueryList?.listeners.length, 1);
+
+		mediaQueryList?.dispatch(false);
+		await waitForThemeUpdate();
+		assertEquals(sentMessages.length, 1);
 
 		mediaQueryList?.dispatch(true);
 		await waitForThemeUpdate();
@@ -234,13 +239,35 @@ Deno.test("themeHandler attaches and detaches the system color listener", async 
 			what: "theme-message",
 		});
 		assertEquals(document.documentElement.dataset.theme, "dark");
-		
+
 		module.systemColorSchemeListener(false);
 		assertStrictEquals(mediaQueryList?.listeners.length, 0);
+
+		module.systemColorSchemeListener(true);
+		assertStrictEquals(mediaQueryList?.listeners.length, 1);
+
+		module.systemColorSchemeListener(true);
+		assertStrictEquals(mediaQueryList?.listeners.length, 1);
 
 		module.systemColorSchemeListener(false);
 		module.systemColorSchemeListener(null);
 		assertStrictEquals(mediaQueryList?.listeners.length, 0);
+	} finally {
+		cleanup();
+	}
+});
+
+Deno.test("themeHandler ignores enabling the system listener when matchMedia is unavailable", async () => {
+	const storage = new MemoryStorage();
+	storage.setItem("userTheme", "light");
+	const { cleanup, localStorage, module } = await loadThemeHandler({
+		localStorage: storage,
+		matchMedia: null,
+	});
+
+	try {
+		module.systemColorSchemeListener(true);
+		assertEquals(localStorage.getItem("userTheme"), "light");
 	} finally {
 		cleanup();
 	}

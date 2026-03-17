@@ -4,9 +4,78 @@ import {
 	assertFalse,
 	assertThrows,
 } from "@std/testing/asserts";
+import { MockElement } from "../action/mock-dom.ts";
 import { installMockDom } from "../happydom.ts";
-import "../mocks.ts";
-import { HIDDEN_CLASS } from "/constants.js";
+import { loadIsolatedModule } from "../load-isolated-module.ts";
+import { mockStorage } from "../mocks.ts";
+import {
+	EXTENSION_USAGE_DAYS,
+	HIDDEN_CLASS,
+	SETTINGS_KEY,
+	WHY_KEY,
+} from "/constants.js";
+
+const CHROME_REVIEW_LINK =
+	"https://chromewebstore.google.com/detail/again-why-salesforce/bceeoimjhgjbihanbiifgpndmkklajbi/reviews";
+
+type ReviewSponsorClass = CustomElementConstructor & {
+	new (): ReviewSponsorInstance;
+	prototype: ReviewSponsorInstance;
+};
+
+type ReviewSponsorInstance = MockElement & {
+	_getExtensionUsageDays: () => Promise<number>;
+	_showReviewOrSponsor: (result: ReviewSponsorResult) => Promise<void>;
+};
+
+type ReviewSponsorDependencies = {
+	BROWSER: {
+		runtime: {
+			getURL: (path: string) => string;
+		};
+	};
+	EXTENSION_USAGE_DAYS: string;
+	HIDDEN_CLASS: string;
+	ISCHROME: boolean;
+	ISEDGE: boolean;
+	ISFIREFOX: boolean;
+	ISSAFARI: boolean;
+	ensureAllTabsAvailability: () => Promise<Record<string, string>[]>;
+	ensureTranslatorAvailability: () => Promise<{
+		currentLanguage: string;
+		translate: (message: string) => Promise<string>;
+	}>;
+	generateReviewSponsorSvgs: () => ReviewSponsorResult;
+	getSettings: (keys: string[]) => Promise<{ enabled: number }>;
+	injectStyle: (id: string, options: { link: string }) => MockElement;
+};
+
+type ReviewSponsorResult = {
+	reviewLink: MockElement;
+	reviewSvg: MockElement;
+	root: MockElement;
+	sponsorLink: MockElement;
+	sponsorSvg: MockElement;
+};
+
+type ToggleableClassList = {
+	add: (...tokens: string[]) => void;
+	contains: (token: string) => boolean;
+	remove: (...tokens: string[]) => void;
+	toggle?: (token: string, force?: boolean) => boolean;
+};
+
+/**
+ * HTMLElement replacement with shadow-root support for isolated tests.
+ */
+class MockReviewSponsorHTMLElement extends MockElement {
+	/**
+	 * Creates the host element.
+	 */
+	constructor() {
+		super("review-sponsor-aws");
+	}
+}
 
 /**
  * Creates a typed fixture set for `showReviewOrSponsor`.
@@ -45,30 +114,171 @@ function createElements() {
 }
 
 /**
- * Provides the minimal custom-elements registry surface needed at module import time.
+ * Creates a custom-elements registry that stores the review-sponsor
+ * constructor for isolated tests.
  *
- * @return {CustomElementRegistry}
+ * @return {{ getConstructor: () => ReviewSponsorClass | null; registry: CustomElementRegistry; }}
  */
-function createCustomElementsRegistry() {
+function createStoredCustomElementsRegistry() {
+	let constructor: ReviewSponsorClass | null = null;
 	return {
-		define(_name: string, _constructor: CustomElementConstructor) {},
-		get(_name: string) {
-			return undefined;
+		getConstructor: () => constructor,
+		registry: {
+			define(name: string, registeredConstructor: CustomElementConstructor) {
+				if (
+					name === "review-sponsor-aws" &&
+					isReviewSponsorClass(registeredConstructor)
+				) {
+					constructor = registeredConstructor;
+				}
+			},
+			get(_name: string) {
+				return undefined;
+			},
+			getName(_constructor: CustomElementConstructor) {
+				return null;
+			},
+			upgrade(_root: Node) {},
+			whenDefined(_name: string) {
+				return Promise.resolve(class extends HTMLElement {});
+			},
+		} satisfies CustomElementRegistry,
+	};
+}
+
+/**
+ * Narrows a custom-element constructor to the review-sponsor shape used in tests.
+ *
+ * @param {CustomElementConstructor} constructor Constructor registered for the element.
+ * @return {constructor is ReviewSponsorClass} `true` when the constructor exposes the expected methods.
+ */
+function isReviewSponsorClass(constructor: CustomElementConstructor): constructor is ReviewSponsorClass {
+	return typeof constructor.prototype._getExtensionUsageDays === "function" &&
+		typeof constructor.prototype._showReviewOrSponsor === "function";
+}
+
+/**
+ * Flushes the microtasks queued by the review-sponsor constructor.
+ *
+ * @return {Promise<void>} Promise resolved after async lifecycle work completes.
+ */
+async function waitForReviewSponsorTasks() {
+	for (let index = 0; index < 12; index++) {
+		await Promise.resolve();
+	}
+}
+
+/**
+ * Loads the review-sponsor module with browser flags overridden for branch tests.
+ *
+ * @param {{
+ *   isChrome?: boolean;
+ *   isEdge?: boolean;
+ *   isFirefox?: boolean;
+ *   isSafari?: boolean;
+ * }} [options={}] Browser flag overrides.
+ * @return {Promise<{
+ *   cleanup: () => void;
+ *   openCalls: string[];
+ *   showReviewOrSponsor: (input: {
+ *     allTabs?: object[];
+ *     reviewLink?: HTMLElement;
+ *     reviewSvg?: HTMLElement;
+ *     sponsorLink?: HTMLElement;
+ *     sponsorSvg?: HTMLElement;
+ *     translator?: { currentLanguage?: string } | null;
+ *     usageDays?: number;
+ *   }) => void;
+ * }>} Loaded module handles.
+ */
+async function loadReviewSponsorBranchModule(
+	{
+		isChrome = false,
+		isEdge = false,
+		isFirefox = false,
+		isSafari = false,
+	}: {
+		isChrome?: boolean;
+		isEdge?: boolean;
+		isFirefox?: boolean;
+		isSafari?: boolean;
+	} = {},
+) {
+	const registry = createStoredCustomElementsRegistry();
+	const openCalls: string[] = [];
+	const result = await loadIsolatedModule<
+		{
+			showReviewOrSponsor: (input: {
+				allTabs?: object[];
+				reviewLink?: HTMLElement;
+				reviewSvg?: HTMLElement;
+				sponsorLink?: HTMLElement;
+				sponsorSvg?: HTMLElement;
+				translator?: { currentLanguage?: string } | null;
+				usageDays?: number;
+			}) => void;
 		},
-		getName(_constructor: CustomElementConstructor) {
-			return null;
+		ReviewSponsorDependencies
+	>({
+		modulePath: new URL(
+			"../../src/components/review-sponsor/review-sponsor.js",
+			import.meta.url,
+		),
+		dependencies: {
+			BROWSER: {
+				runtime: {
+					getURL: (path) => `chrome-extension://test${path}`,
+				},
+			},
+			EXTENSION_USAGE_DAYS: "extension_usage_days",
+			HIDDEN_CLASS: "hidden",
+			ISCHROME: isChrome,
+			ISEDGE: isEdge,
+			ISFIREFOX: isFirefox,
+			ISSAFARI: isSafari,
+			ensureAllTabsAvailability: () => Promise.resolve([]),
+			ensureTranslatorAvailability: () => Promise.resolve({
+				currentLanguage: "en",
+				translate: (message) => Promise.resolve(message),
+			}),
+			generateReviewSponsorSvgs: () => ({
+				reviewLink: new MockElement("a"),
+				reviewSvg: new MockElement("svg"),
+				root: new MockElement("div"),
+				sponsorLink: new MockElement("a"),
+				sponsorSvg: new MockElement("svg"),
+			}),
+			getSettings: () => Promise.resolve({ enabled: 0 }),
+			injectStyle: () => new MockElement("link"),
 		},
-		upgrade(_root: Node) {},
-		whenDefined(_name: string) {
-			return Promise.resolve(class extends HTMLElement {});
+		globals: {
+			HTMLElement: MockReviewSponsorHTMLElement,
+			customElements: registry.registry,
+			open: (url?: string | URL) => {
+				openCalls.push(String(url));
+				return null;
+			},
 		},
-	} satisfies CustomElementRegistry;
+		importsToReplace: new Set([
+			"/constants.js",
+			"/functions.js",
+			"/tabContainer.js",
+			"/translator.js",
+			"/salesforce/generator.js",
+		]),
+	});
+	return {
+		cleanup: result.cleanup,
+		openCalls,
+		showReviewOrSponsor: result.module.showReviewOrSponsor,
+	};
 }
 
 Deno.test("show review or sponsor block", async (t) => {
 	const { cleanup } = installMockDom();
+	const directRegistry = createStoredCustomElementsRegistry();
 	Object.defineProperty(globalThis, "customElements", {
-		value: createCustomElementsRegistry(),
+		value: directRegistry.registry,
 		configurable: true,
 		writable: true,
 	});
@@ -200,6 +410,302 @@ Deno.test("show review or sponsor block", async (t) => {
 		},
 	);
 
+	await t.step(
+		"opens Edge and Firefox review links and defaults sponsor language in isolation",
+		async () => {
+			{
+				const edgeModule = await loadReviewSponsorBranchModule({
+					isEdge: true,
+				});
+				const edgeElements = createElements();
+				try {
+					edgeModule.showReviewOrSponsor({
+						allTabs: Array(8),
+						translator: {},
+						...edgeElements,
+					});
+					edgeElements.reviewLink.click();
+					assertEquals(
+						edgeModule.openCalls[0],
+						"https://microsoftedge.microsoft.com/addons/detail/again-why-salesforce/dfdjpokbfeaamjcomllncennmfhpldmm#description",
+					);
+				} finally {
+					edgeModule.cleanup();
+				}
+			}
+
+			{
+				const firefoxModule = await loadReviewSponsorBranchModule({
+					isFirefox: true,
+				});
+				const firefoxElements = createElements();
+				try {
+					firefoxModule.showReviewOrSponsor({
+						allTabs: Array(16),
+						translator: {},
+						...firefoxElements,
+					});
+					firefoxElements.reviewLink.click();
+					firefoxElements.sponsorLink.click();
+					assertEquals(
+						firefoxModule.openCalls[0],
+						"https://addons.mozilla.org/en-US/firefox/addon/again-why-salesforce/",
+					);
+					assertEquals(
+						firefoxModule.openCalls[1],
+						"https://alfredoit.dev/en/sponsor/?email=againwhysalesforce@duck.com",
+					);
+				} finally {
+					firefoxModule.cleanup();
+				}
+			}
+
+			{
+				const safariModule = await loadReviewSponsorBranchModule({
+					isSafari: true,
+				});
+				const safariElements = createElements();
+				try {
+					safariModule.showReviewOrSponsor({
+						allTabs: Array(8),
+						translator: {},
+						...safariElements,
+					});
+					assert(safariElements.reviewSvg.classList.contains(HIDDEN_CLASS));
+					assertEquals(safariElements.reviewLink.tabIndex, -1);
+				} finally {
+					safariModule.cleanup();
+				}
+			}
+		},
+	);
+
+	await t.step(
+		"constructs the custom element and populates direct-import metadata",
+		async () => {
+			const ReviewSponsorConstructor = directRegistry.getConstructor();
+			assert(ReviewSponsorConstructor != null);
+			const originalFetch = globalThis.fetch;
+			const originalWhy = structuredClone(mockStorage[WHY_KEY]);
+			const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
+			openCalls.length = 0;
+			mockStorage[WHY_KEY] = Array.from(
+				{ length: 20 },
+				(_value, index) => ({
+					label: `Tab ${index}`,
+					org: "acme",
+					url: `/setup/${index}`,
+				}),
+			);
+			mockStorage[SETTINGS_KEY] = [
+				{ enabled: "en", id: "picked-language" },
+				{ enabled: false, id: "persist_sort" },
+				{ enabled: 45, id: EXTENSION_USAGE_DAYS },
+			];
+			const originalCreateElementNS = document.createElementNS.bind(document);
+			document.createElementNS = ((namespace: string, tagName: string) => {
+				const element = originalCreateElementNS(namespace, tagName);
+				const classList = element.classList as ToggleableClassList;
+				classList.toggle ??= function (token: string, force?: boolean) {
+					const shouldAdd = force ?? !this.contains(token);
+					if (shouldAdd) {
+						this.add(token);
+						return true;
+					}
+					this.remove(token);
+					return false;
+				};
+				return element;
+			}) as typeof document.createElementNS;
+			const originalAttachShadow = ReviewSponsorConstructor.prototype.attachShadow;
+			Object.defineProperty(ReviewSponsorConstructor.prototype, "attachShadow", {
+				value(this: HTMLElement) {
+					const shadowRoot = document.createElement("shadow-root");
+					Object.defineProperty(this, "shadowRoot", {
+						value: shadowRoot,
+						configurable: true,
+						writable: true,
+					});
+					return shadowRoot;
+				},
+				configurable: true,
+				writable: true,
+			});
+			globalThis.fetch = ((path: string | URL | Request) => {
+				const url = String(path);
+				if (url.includes("/_locales/")) {
+					return Promise.resolve({
+						json: () =>
+							Promise.resolve({
+								send_tip: { message: "Send tip" },
+								write_review: { message: "Write review" },
+							}),
+					} as Response);
+				}
+				return originalFetch(path);
+			}) as typeof globalThis.fetch;
+
+			try {
+				const component = new ReviewSponsorConstructor();
+				await waitForReviewSponsorTasks();
+
+				assertEquals(await component._getExtensionUsageDays(), 45);
+				assertEquals(component.shadowRoot?.children.length, 2);
+
+				const svgs = component.shadowRoot?.querySelectorAll("svg") ?? [];
+				const reviewSvg = svgs[0];
+				const sponsorSvg = svgs[1];
+				const reviewLink = reviewSvg?.parentElement as HTMLAnchorElement | null;
+				const sponsorLink = sponsorSvg?.parentElement as HTMLAnchorElement | null;
+				assert(reviewLink != null);
+				assert(sponsorLink != null);
+				assert(reviewSvg != null);
+				assert(sponsorSvg != null);
+				for (
+					let index = 0;
+					index < 50 &&
+					sponsorLink.getAttribute("aria-label") !== "Send tip";
+					index++
+				) {
+					await Promise.resolve();
+				}
+
+				assertEquals(reviewLink.title, "Write review");
+				assertEquals(reviewLink.getAttribute("aria-label"), "Write review");
+				assertEquals(reviewSvg.getAttribute("focusable"), "false");
+
+			} finally {
+				document.createElementNS = originalCreateElementNS;
+				if (originalAttachShadow == null) {
+					Reflect.deleteProperty(
+						ReviewSponsorConstructor.prototype,
+						"attachShadow",
+					);
+				} else {
+					Object.defineProperty(
+						ReviewSponsorConstructor.prototype,
+						"attachShadow",
+						{
+						value: originalAttachShadow,
+						configurable: true,
+						writable: true,
+						},
+					);
+				}
+				globalThis.fetch = originalFetch;
+				mockStorage[WHY_KEY] = originalWhy;
+				mockStorage[SETTINGS_KEY] = originalSettings;
+			}
+		},
+	);
+
 	globalThis.open = originalOpen;
 	cleanup();
+});
+
+Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in isolation", async () => {
+	const registry = createStoredCustomElementsRegistry();
+	const injectCalls: Array<{ id: string; link: string }> = [];
+	const openCalls: string[] = [];
+	const settingsCalls: string[][] = [];
+	const translateCalls: string[] = [];
+	const generated = {
+		reviewLink: new MockElement("a"),
+		reviewSvg: new MockElement("svg"),
+		root: new MockElement("div"),
+		sponsorLink: new MockElement("a"),
+		sponsorSvg: new MockElement("svg"),
+	} satisfies ReviewSponsorResult;
+
+	const { cleanup } = await loadIsolatedModule<Record<string, never>, ReviewSponsorDependencies>({
+		modulePath: new URL(
+			"../../src/components/review-sponsor/review-sponsor.js",
+			import.meta.url,
+		),
+		dependencies: {
+			BROWSER: {
+				runtime: {
+					getURL: (path) => `chrome-extension://test${path}`,
+				},
+			},
+			EXTENSION_USAGE_DAYS: "extension_usage_days",
+			HIDDEN_CLASS: "hidden",
+			ISCHROME: true,
+			ISEDGE: false,
+			ISFIREFOX: false,
+			ISSAFARI: false,
+			ensureAllTabsAvailability: () => Promise.resolve(Array.from(
+				{ length: 20 },
+				(_value, index) => ({ id: String(index) }),
+			)),
+			ensureTranslatorAvailability: () => Promise.resolve({
+				currentLanguage: "fr",
+				translate: (message) => {
+					translateCalls.push(message);
+					return Promise.resolve(`translated:${message}`);
+				},
+			}),
+			generateReviewSponsorSvgs: () => generated,
+			getSettings: (keys) => {
+				settingsCalls.push(keys);
+				return Promise.resolve({ enabled: 45 });
+			},
+			injectStyle: (id, options) => {
+				injectCalls.push({ id, link: options.link });
+				return new MockElement("link");
+			},
+		},
+		globals: {
+			HTMLElement: MockReviewSponsorHTMLElement,
+			customElements: registry.registry,
+			open: (url?: string | URL) => {
+				openCalls.push(String(url));
+				return null;
+			},
+		},
+		importsToReplace: new Set([
+			"/constants.js",
+			"/functions.js",
+			"/tabContainer.js",
+			"/translator.js",
+			"/salesforce/generator.js",
+		]),
+	});
+
+	try {
+		const ReviewSponsorConstructor = registry.getConstructor();
+		assert(ReviewSponsorConstructor != null);
+
+		const component = new ReviewSponsorConstructor();
+		await waitForReviewSponsorTasks();
+
+		assertEquals(settingsCalls, [["extension_usage_days"]]);
+		assertEquals(injectCalls, [{
+			id: "awsf-rev-spons",
+			link: "chrome-extension://test/components/review-sponsor/review-sponsor.css",
+		}]);
+		assertEquals(translateCalls, ["write_review", "send_tip"]);
+		assertEquals(component.shadowRoot?.children.length, 2);
+		assertEquals(await component._getExtensionUsageDays(), 45);
+		assertEquals(generated.reviewLink.title, "translated:write_review");
+		assertEquals(
+			generated.reviewLink.getAttribute("aria-label"),
+			"translated:write_review",
+		);
+		assertEquals(generated.reviewSvg.getAttribute("focusable"), "false");
+		assertEquals(generated.sponsorLink.title, "translated:send_tip");
+		assertEquals(
+			generated.sponsorLink.getAttribute("aria-label"),
+			"translated:send_tip",
+		);
+		assertEquals(generated.sponsorSvg.getAttribute("focusable"), "false");
+
+		generated.reviewLink.click();
+		generated.sponsorLink.click();
+
+		assertEquals(openCalls[0], CHROME_REVIEW_LINK);
+		assert(openCalls[1].includes("/en/"));
+	} finally {
+		cleanup();
+	}
 });

@@ -244,9 +244,33 @@ function createInlineSourceMapUrl(
 		version: 3,
 		mappings,
 	};
-	return `data:application/json;base64,${
-		btoa(JSON.stringify(sourceMap))
-	}`;
+	const sourceMapJson = JSON.stringify(sourceMap);
+	const sourceMapBase64 = btoa(
+		String.fromCharCode(...new TextEncoder().encode(sourceMapJson)),
+	);
+	return `data:application/json;base64,${sourceMapBase64}`;
+}
+
+/**
+ * Builds a default line map that keeps transformed lines aligned to the
+ * original file and collapses appended helper lines onto the last source line.
+ *
+ * @param {string} transformedSource Source after import/export transforms.
+ * @param {string} extraSource Extra helper source appended by the test.
+ * @param {number} originalLineCount Total lines in the original source file.
+ * @return {number[]} 1-based original line per generated line.
+ */
+function createDefaultSourceMapLineMap(
+	transformedSource: string,
+	extraSource: string,
+	originalLineCount: number,
+) {
+	const transformedLineCount = transformedSource.split("\n").length;
+	const extraLineCount = extraSource === "" ? 0 : extraSource.split("\n").length;
+	const generatedLineCount = transformedLineCount + extraLineCount + 3;
+	return Array.from({ length: generatedLineCount }, (_value, index) =>
+		Math.min(index + 1, originalLineCount)
+	);
 }
 
 /**
@@ -356,9 +380,17 @@ export async function loadIsolatedModule<
 		sourceWithoutImports,
 	);
 	const exportKey = `__isolatedModuleExports_${crypto.randomUUID()}`;
-	const inlineSourceMapUrl = sourceMapLineMap == null
-		? null
-		: createInlineSourceMapUrl(modulePath, rawSource, sourceMapLineMap);
+	const effectiveSourceMapLineMap = sourceMapLineMap ??
+		createDefaultSourceMapLineMap(
+			sourceWithoutExports,
+			extraSource,
+			rawSource.split("\n").length,
+		);
+	const inlineSourceMapUrl = createInlineSourceMapUrl(
+		modulePath,
+		rawSource,
+		effectiveSourceMapLineMap,
+	);
 	const cleanupGlobals = installGlobals({
 		...globals,
 		...Object.fromEntries(

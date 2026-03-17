@@ -1,10 +1,11 @@
-// @ts-nocheck
+// @ts-nocheck: legacy mixed global mocks in this file are not fully typed yet.
 import "./mocks.ts";
 import {
 	assert,
 	assertEquals,
 	assertFalse,
 	assertRejects,
+	assertThrows,
 } from "@std/testing/asserts";
 
 import {
@@ -31,18 +32,27 @@ import {
 } from "/constants.js";
 import {
 	areFramePatternsAllowed,
+	calculateReadingTime,
 	getCssRule,
 	getCssSelector,
 	getInnerElementFieldBySelector,
+	getPinnedSpecificKey,
 	getSettings,
 	getStyleSettings,
+	injectStyle,
 	isExportAllowed,
+	isGenericKey,
 	isOnSalesforceSetup,
+	isPinnedKey,
+	isStyleKey,
+	openSettingsPage,
+	performLightningRedirect,
 	requestCookiesPermission,
 	requestExportPermission,
 	requestFramePatternsPermission,
 	sendExtensionMessage,
 } from "/functions.js";
+import { installMockDom } from "./happydom.ts";
 
 Deno.test("sendExtensionMessage returns promise if no callback", async () => {
 	const result = await sendExtensionMessage({ what: "echo", echo: "bar" });
@@ -53,6 +63,10 @@ Deno.test("sendExtensionMessage supports callback usage", () => {
 	sendExtensionMessage({ what: "echo", echo: "bar" }, (response) => {
 		assertEquals(response, "bar");
 	});
+});
+
+Deno.test("sendExtensionMessage ignores null messages", () => {
+	assertEquals(sendExtensionMessage(null), undefined);
 });
 
 Deno.test("sendExtensionMessage rejects on runtime error", async () => {
@@ -494,6 +508,119 @@ Deno.test("getCssRule generates correct CSS rules", async (t) => {
 			getCssRule(),
 			"",
 		);
+	});
+});
+
+Deno.test("functions helper exports cover style keys, settings page, redirects, and style injection", async (t) => {
+	await t.step("style key helpers return the expected mappings", () => {
+		assert(isGenericKey(GENERIC_TAB_STYLE_KEY));
+		assertFalse(isGenericKey(ORG_TAB_STYLE_KEY));
+		assert(isPinnedKey(GENERIC_PINNED_TAB_STYLE_KEY));
+		assertFalse(isPinnedKey(ORG_TAB_STYLE_KEY));
+		assert(isStyleKey(ORG_PINNED_TAB_STYLE_KEY));
+		assertFalse(isStyleKey("not-a-style-key"));
+		assertEquals(
+			getPinnedSpecificKey({ isGeneric: true, isPinned: false }),
+			GENERIC_TAB_STYLE_KEY,
+		);
+		assertEquals(
+			getPinnedSpecificKey({ isGeneric: true, isPinned: true }),
+			GENERIC_PINNED_TAB_STYLE_KEY,
+		);
+		assertEquals(
+			getPinnedSpecificKey({ isGeneric: false, isPinned: false }),
+			ORG_TAB_STYLE_KEY,
+		);
+		assertEquals(
+			getPinnedSpecificKey({ isGeneric: false, isPinned: true }),
+			ORG_PINNED_TAB_STYLE_KEY,
+		);
+	});
+
+	await t.step("openSettingsPage uses the options API when available", () => {
+		let openedOptions = 0;
+		const originalOpenOptionsPage = BROWSER.runtime.openOptionsPage;
+		BROWSER.runtime.openOptionsPage = () => {
+			openedOptions++;
+		};
+		try {
+			openSettingsPage();
+			assertEquals(openedOptions, 1);
+		} finally {
+			BROWSER.runtime.openOptionsPage = originalOpenOptionsPage;
+		}
+	});
+
+	await t.step("openSettingsPage falls back to opening the settings url", () => {
+		const originalOpenOptionsPage = BROWSER.runtime.openOptionsPage;
+		const originalOpen = globalThis.open;
+		const openedUrls = [];
+		BROWSER.runtime.openOptionsPage = null;
+		globalThis.open = (url) => {
+			openedUrls.push(String(url));
+			return null;
+		};
+		try {
+			openSettingsPage();
+			assertEquals(openedUrls, ["settings/options.html"]);
+		} finally {
+			BROWSER.runtime.openOptionsPage = originalOpenOptionsPage;
+			globalThis.open = originalOpen;
+		}
+	});
+
+	await t.step("calculateReadingTime and performLightningRedirect use the expected payloads", () => {
+		assertEquals(calculateReadingTime("one two three"), 3000);
+		const originalPostMessage = globalThis.postMessage;
+		const messages = [];
+		globalThis.postMessage = (message, targetOrigin) => {
+			messages.push({ message, targetOrigin });
+		};
+		try {
+			performLightningRedirect("/lightning/page");
+			assertEquals(messages, [{
+				message: {
+					what: "lightningNavigation",
+					navigationType: "url",
+					url: "/lightning/page",
+					fallbackURL: "/lightning/page",
+				},
+				targetOrigin: "*",
+			}]);
+		} finally {
+			globalThis.postMessage = originalPostMessage;
+		}
+	});
+
+	await t.step("injectStyle validates, reuses, and creates both style and link tags", () => {
+		const originalDocument = globalThis.document;
+		const { cleanup } = installMockDom();
+		try {
+			assertThrows(() => injectStyle(""), Error, "error_required_params");
+			assertThrows(() => injectStyle("bad", {
+				css: ".a{}",
+				link: "/dup.css",
+			}), Error, "error_required_params");
+
+			const styleTag = injectStyle("style-id", { css: ".a{color:red;}" });
+			assertEquals(styleTag.tagName, "STYLE");
+			assertEquals(styleTag.textContent, ".a{color:red;}");
+			assertEquals(document.head.children.length, 1);
+
+			const updatedStyleTag = injectStyle("style-id", { css: ".a{color:blue;}" });
+			assertEquals(updatedStyleTag, styleTag);
+			assertEquals(styleTag.textContent, ".a{color:blue;}");
+			assertEquals(document.head.children.length, 1);
+
+			const linkTag = injectStyle("link-id", { link: "/style.css" });
+			assertEquals(linkTag.tagName, "LINK");
+			assertEquals(linkTag.href, "/style.css");
+			assertEquals(linkTag.rel, "stylesheet");
+			assertEquals(document.head.children.length, 2);
+		} finally {
+			cleanup();
+			globalThis.document = originalDocument;
+		}
 	});
 });
 
