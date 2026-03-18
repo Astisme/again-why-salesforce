@@ -2,12 +2,15 @@
 
 export const KNOWLEDGE_SILO_MIN_SAMPLE_SIZE = 5;
 export const KNOWLEDGE_SILO_DOMINANCE_THRESHOLD = 0.6;
+export const KNOWLEDGE_SILO_USER_LINK_THRESHOLD = 0.6;
 
 const ELIGIBLE_COLUMN_LABELS = new Set([
 	"owner",
 	"created by",
 	"last modified by",
 ]);
+const KNOWLEDGE_SILO_USER_LINK_PATTERN =
+	/(?:^|[^a-z0-9])005[a-z0-9]{12,15}(?:[^a-z0-9]|$)/i;
 const WARNING_CACHE = new Set();
 
 /**
@@ -75,19 +78,31 @@ export function findKnowledgeSiloTable(root = document) {
 	if (tables.length === 0) {
 		return { reason: "unsupported-page" };
 	}
+	let bestMatch = null;
 	for (const table of tables) {
 		const headerLabels = getKnowledgeSiloHeaderLabels(table);
-		const columnIndex = headerLabels.findIndex((label) =>
-			ELIGIBLE_COLUMN_LABELS.has(label.toLowerCase())
-		);
-		if (columnIndex >= 0) {
-			return {
-				reason: "eligible-table",
-				table,
-				columnIndex,
-				columnLabel: headerLabels[columnIndex],
-			};
+		for (const [columnIndex, columnLabel] of headerLabels.entries()) {
+			const score = getKnowledgeSiloColumnMatchScore({
+				columnLabel,
+				columnCells: getKnowledgeSiloColumnCells(table, columnIndex),
+			});
+			if (score == null) {
+				continue;
+			}
+			if (bestMatch == null || score > bestMatch.score) {
+				bestMatch = {
+					reason: "eligible-table",
+					table,
+					columnIndex,
+					columnLabel,
+					score,
+				};
+			}
 		}
+	}
+	if (bestMatch != null) {
+		delete bestMatch.score;
+		return bestMatch;
 	}
 	return { reason: "missing-column" };
 }
@@ -104,6 +119,88 @@ export function getVisibleKnowledgeSiloRows(table) {
 }
 
 /**
+ * Returns the visible cells for one table column.
+ *
+ * @param {HTMLTableElement} table Table to inspect.
+ * @param {number} columnIndex Zero-based column index.
+ * @return {HTMLElement[]} Visible column cells.
+ */
+export function getKnowledgeSiloColumnCells(table, columnIndex) {
+	return getVisibleKnowledgeSiloRows(table)
+		.map((row) =>
+			[...row.children].filter((cell) => isVisibleKnowledgeSiloElement(cell))
+		)
+		.map((cells) => cells[columnIndex])
+		.filter(Boolean);
+}
+
+/**
+ * Returns whether a hyperlink appears to point to a Salesforce user page.
+ *
+ * @param {string|null|undefined} href Hyperlink URL to inspect.
+ * @return {boolean} `true` when the link targets a Salesforce user record.
+ */
+export function isKnowledgeSiloUserHref(href) {
+	const normalizedHref = normalizeKnowledgeSiloText(href);
+	const decodedHref = (() => {
+		try {
+			return decodeURIComponent(normalizedHref);
+		} catch {
+			return normalizedHref;
+		}
+	})();
+	return KNOWLEDGE_SILO_USER_LINK_PATTERN.test(normalizedHref) ||
+		KNOWLEDGE_SILO_USER_LINK_PATTERN.test(decodedHref);
+}
+
+/**
+ * Returns whether a visible table cell links to a Salesforce user record.
+ *
+ * @param {HTMLElement|null|undefined} cell Table cell to inspect.
+ * @return {boolean} `true` when the cell includes a Salesforce user link.
+ */
+export function isKnowledgeSiloUserCell(cell) {
+	return [...(cell?.querySelectorAll("a[href]") ?? [])].some((link) =>
+		isKnowledgeSiloUserHref(link.getAttribute("href"))
+	);
+}
+
+/**
+ * Scores how likely a column is to represent authorship or ownership.
+ *
+ * @param {Object} options Column metadata.
+ * @param {string} [options.columnLabel=""] Visible column label.
+ * @param {HTMLElement[]} [options.columnCells=[]] Visible column cells.
+ * @return {number|null} Numeric score or `null` when the column is not eligible.
+ */
+export function getKnowledgeSiloColumnMatchScore({
+	columnLabel = "",
+	columnCells = [],
+} = {}) {
+	const normalizedLabel = normalizeKnowledgeSiloText(columnLabel).toLowerCase();
+	if (normalizedLabel === "") {
+		return null;
+	}
+	if (ELIGIBLE_COLUMN_LABELS.has(normalizedLabel)) {
+		return 10;
+	}
+	const nonEmptyCells = columnCells.filter((cell) =>
+		normalizeKnowledgeSiloText(cell.textContent) !== ""
+	);
+	if (nonEmptyCells.length === 0) {
+		return null;
+	}
+	const linkedCellCount = nonEmptyCells.filter((cell) =>
+		isKnowledgeSiloUserCell(cell)
+	).length;
+	const linkedCellRatio = linkedCellCount / nonEmptyCells.length;
+	if (linkedCellRatio < KNOWLEDGE_SILO_USER_LINK_THRESHOLD) {
+		return null;
+	}
+	return linkedCellRatio;
+}
+
+/**
  * Extracts normalized names from the selected ownership column.
  *
  * @param {HTMLTableElement} table Table holding the records.
@@ -111,13 +208,8 @@ export function getVisibleKnowledgeSiloRows(table) {
  * @return {string[]} Visible normalized names.
  */
 export function extractKnowledgeSiloNames(table, columnIndex) {
-	return getVisibleKnowledgeSiloRows(table)
-		.map((row) => {
-			const cells = [...row.children].filter((cell) =>
-				isVisibleKnowledgeSiloElement(cell)
-			);
-			return normalizeKnowledgeSiloText(cells[columnIndex]?.textContent);
-		})
+	return getKnowledgeSiloColumnCells(table, columnIndex)
+		.map((cell) => normalizeKnowledgeSiloText(cell.textContent))
 		.filter(Boolean);
 }
 
