@@ -93,6 +93,7 @@ export const TAB_AS_ORG = "tab_as_org";
 export const NO_RELEASE_NOTES = "no_release_notes";
 export const NO_UPDATE_NOTIFICATION = "no_update_notification";
 export const PREVENT_ANALYTICS = "prevent_analytics";
+export const KNOWLEDGE_SILO_DETECTION = "knowledge_silo_detection";
 export const PERSIST_SORT = "persist_sort";
 export const EXTENSION_USAGE_DAYS = "extension_usage_days";
 export const EXTENSION_LAST_ACTIVE_DAY = "extension_last_active_day";

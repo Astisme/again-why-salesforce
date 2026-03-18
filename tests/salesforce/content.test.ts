@@ -78,6 +78,12 @@ type ContentDeps = {
 	onceADay: {
 		executeOncePerDay: () => void;
 	};
+	knowledgeSilo: {
+		detectKnowledgeSilo: (options?: Record<string, unknown>) => Record<
+			string,
+			unknown
+		>;
+	};
 };
 
 /**
@@ -180,6 +186,7 @@ async function loadContentModule(deps: ContentDeps) {
 			"./manageTabs.js",
 			"./tutorial.js",
 			"./once-a-day.js",
+			"./knowledge-silo.js",
 		]
 	) {
 		source = blankImport(source, fileName);
@@ -216,6 +223,7 @@ const {
 	EXTENSION_NAME,
 	HAS_ORG_TAB,
 	HTTPS,
+	KNOWLEDGE_SILO_DETECTION,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
 	SALESFORCE_URL_PATTERN,
@@ -270,6 +278,7 @@ const { createExportModal } = __deps.exportModule;
 const { createManageTabsModal } = __deps.manageTabs;
 const { checkTutorial, startTutorial } = __deps.tutorial;
 const { executeOncePerDay } = __deps.onceADay;
+const { detectKnowledgeSilo } = __deps.knowledgeSilo;
 `;
 	const sourceLines = source.split("\n");
 	const preludeLines = prelude.split("\n");
@@ -280,9 +289,11 @@ const { executeOncePerDay } = __deps.onceADay;
 		"\tcheckKeepTabsOnLeft,",
 		"\tdelayLoadSetupTabs,",
 		"\thideTabs,",
+		"\tisKnowledgeSiloDetectionEnabled,",
 		"\tinit,",
 		"\tlaunchDownload,",
 		"\tmain,",
+		"\tmaybeShowKnowledgeSiloWarning,",
 		"\tonHrefUpdate,",
 		"\tpromptUpdateExtension,",
 		"\treloadTabs,",
@@ -492,6 +503,7 @@ function createHarness(url = SETUP_URL) {
 		createImportModal: 0,
 		createExportModal: 0,
 		createManageTabsModal: 0,
+		knowledgeSiloCalls: [] as Array<Record<string, unknown>>,
 		rowTemplates: [] as Array<
 			{ row: Record<string, any>; conf: Record<string, any> }
 		>,
@@ -515,11 +527,26 @@ function createHarness(url = SETUP_URL) {
 	const state = {
 		settings: new Map<string, any>([
 			["tab_position_left", { id: "tab_position_left", enabled: false }],
+			["knowledge_silo_detection", {
+				id: "knowledge_silo_detection",
+				enabled: false,
+			}],
 			["skip_link_detection", {
 				id: "skip_link_detection",
 				enabled: false,
 			}],
 		]),
+		knowledgeSiloResult: {
+			columnIndex: 1,
+			columnLabel: "Owner",
+			dominantCount: 4,
+			dominantName: "Ada",
+			dominanceRatio: 0.8,
+			href: url,
+			reason: "knowledge-silo",
+			sampleSize: 5,
+			shouldWarn: true,
+		} as Record<string, unknown>,
 		innerFieldOverride: null as
 			| null
 			| ((options: {
@@ -930,6 +957,7 @@ function createHarness(url = SETUP_URL) {
 			EXTENSION_NAME: "again-why-salesforce",
 			HAS_ORG_TAB: ".has-org-tab",
 			HTTPS: "https://",
+			KNOWLEDGE_SILO_DETECTION: "knowledge_silo_detection",
 			LIGHTNING_FORCE_COM: ".lightning.force.com",
 			LINK_NEW_BROWSER: "link_new_browser",
 			SALESFORCE_URL_PATTERN: /^[a-z0-9-]+$/i,
@@ -1081,6 +1109,15 @@ function createHarness(url = SETUP_URL) {
 				records.executeOncePerDay++;
 			},
 		},
+		knowledgeSilo: {
+			detectKnowledgeSilo: (options = {}) => {
+				records.knowledgeSiloCalls.push(options);
+				return {
+					...state.knowledgeSiloResult,
+					href: options.href ?? state.knowledgeSiloResult.href,
+				};
+			},
+		},
 	};
 
 	return {
@@ -1148,6 +1185,7 @@ Deno.test("content.js bootstraps on setup pages and exposes current setup DOM", 
 		assertEquals(harness.records.executeOncePerDay, 1);
 		assertEquals(harness.records.styleCalls, 1);
 		assertEquals(harness.records.showFavouriteButton, 1);
+		assertEquals(harness.records.knowledgeSiloCalls.length, 0);
 		assertEquals(harness.allTabs.length, 2);
 		assertEquals(setupTabUl.childElementCount, 2);
 		assertEquals(harness.records.rowTemplates[1].conf.hide, true);
@@ -1155,6 +1193,74 @@ Deno.test("content.js bootstraps on setup pages and exposes current setup DOM", 
 		assertEquals(harness.browser.runtime._listeners.length, 1);
 		assertEquals(globalThis.hasLoadedagainwhysalesforce, undefined);
 		assertEquals(globalThis["hasLoadedagain-why-salesforce"], true);
+	} finally {
+		harness.cleanup();
+	}
+});
+
+Deno.test("content.js runs the knowledge silo detector on setup load when enabled", async () => {
+	const harness = createHarness();
+	try {
+		harness.state.settings.set("knowledge_silo_detection", {
+			id: "knowledge_silo_detection",
+			enabled: true,
+		});
+		const content = await harness.load();
+		await harness.flush();
+		assertEquals(harness.records.knowledgeSiloCalls.length, 1);
+		assertEquals(harness.records.knowledgeSiloCalls[0].href, SETUP_URL);
+		assertEquals(harness.records.toasts.at(-1), {
+			message: [
+				"knowledge_silo_warning",
+				"Ada",
+				"knowledge_silo_dominates",
+				"4/5",
+				"knowledge_silo_visible_rows_in",
+				"Owner",
+			],
+			status: "warning",
+		});
+		assertExists(content.getSetupTabUl());
+	} finally {
+		harness.cleanup();
+	}
+});
+
+Deno.test("content.js reruns the knowledge silo detector on setup route changes", async () => {
+	const harness = createHarness();
+	try {
+		harness.state.settings.set("knowledge_silo_detection", {
+			id: "knowledge_silo_detection",
+			enabled: true,
+		});
+		const content = await harness.load();
+		await harness.flush();
+		harness.state.knowledgeSiloResult = {
+			...harness.state.knowledgeSiloResult,
+			columnLabel: "Created By",
+			dominantCount: 5,
+			dominantName: "Grace",
+			href: USERS_URL,
+			sampleSize: 6,
+		};
+		harness.setUrl(USERS_URL);
+		harness.triggerMutation();
+		harness.flushTimers();
+		await harness.flush();
+		assertEquals(harness.records.knowledgeSiloCalls.length, 2);
+		assertEquals(harness.records.knowledgeSiloCalls.at(-1)?.href, USERS_URL);
+		assertEquals(harness.records.toasts.at(-1), {
+			message: [
+				"knowledge_silo_warning",
+				"Grace",
+				"knowledge_silo_dominates",
+				"5/6",
+				"knowledge_silo_visible_rows_in",
+				"Created By",
+			],
+			status: "warning",
+		});
+		assertExists(content.getSetupTabUl());
 	} finally {
 		harness.cleanup();
 	}

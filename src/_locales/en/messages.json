@@ -711,6 +711,10 @@
 		"message": "Pins your saved $tabs before the standard navigation menu (Home / Object Manager) in Setup, instead of after it.",
 		"description": "[settings-help] for $opt_keep_tabs_left"
 	},
+	"help_knowledge_silo_detection": {
+		"message": "Checks visible Setup list pages for Owner, Created By, or Last Modified By columns and warns when one person dominates the visible records.",
+		"description": "[settings-help] for $opt_knowledge_silo_detection"
+	},
 	"help_link_new_browser": {
 		"message": "When enabled, every saved $tab will open the related page in a new $tab",
 		"description": "[settings-help] for $opt_link_new_browser"
@@ -911,6 +915,18 @@
 		"message": "Opportunity",
 		"description": "The page related to ObjectManager/Opportunity/FieldsAndRelationships/view"
 	},
+	"knowledge_silo_dominates": {
+		"message": "dominates",
+		"description": "[knowledge-silo-toast] indicates one visible contributor controls most listed rows"
+	},
+	"knowledge_silo_visible_rows_in": {
+		"message": "visible rows in",
+		"description": "[knowledge-silo-toast] introduces the column used by the silo heuristic"
+	},
+	"knowledge_silo_warning": {
+		"message": "Potential knowledge silo:",
+		"description": "[knowledge-silo-toast] warning prefix when one visible contributor dominates a setup list page"
+	},
 	"opt_add_tabs_as_org": {
 		"message": "Add new $tabs as $org_tabs",
 		"description": "[settings] let the user add all new $tabs as $org-specific"
@@ -950,6 +966,10 @@
 	"opt_keep_tabs_left": {
 		"message": "Keep favourite $tabs on the left of Home and Object Manager.",
 		"description": "Toggle to pin favorite $tabs to the left side of the navigation bar"
+	},
+	"opt_knowledge_silo_detection": {
+		"message": "Warn when one person dominates the visible setup records.",
+		"description": "[setting] opt in to client-side knowledge silo detection on eligible setup list pages"
 	},
 	"opt_link_new_browser": {
 		"message": "Always open links in a new browser $tab",

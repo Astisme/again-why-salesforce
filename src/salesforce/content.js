@@ -29,6 +29,7 @@ import {
 	EXTENSION_NAME,
 	HAS_ORG_TAB,
 	HTTPS,
+	KNOWLEDGE_SILO_DETECTION,
 	LIGHTNING_FORCE_COM,
 	LINK_NEW_BROWSER,
 	SALESFORCE_URL_PATTERN,
@@ -84,6 +85,7 @@ import { createExportModal } from "./export.js";
 import { createManageTabsModal } from "./manageTabs.js";
 import { checkTutorial, startTutorial } from "./tutorial.js";
 import { executeOncePerDay } from "./once-a-day.js";
+import { detectKnowledgeSilo } from "./knowledge-silo.js";
 
 /**
  * The main UL on Salesforce Setup
@@ -382,6 +384,49 @@ function onHrefUpdate() {
 	}
 	href = newRef;
 	isOnSavedTab(true, _afterHrefUpdate);
+	maybeShowKnowledgeSiloWarning();
+}
+
+/**
+ * Returns whether the knowledge silo detector is enabled in settings.
+ *
+ * @return {Promise<boolean>} `true` when the detector should run.
+ */
+async function isKnowledgeSiloDetectionEnabled() {
+	const setting = await getSettings(KNOWLEDGE_SILO_DETECTION);
+	if (Array.isArray(setting)) {
+		return setting.some((item) => item?.enabled);
+	}
+	return setting?.enabled === true;
+}
+
+/**
+ * Runs the knowledge silo detector and surfaces warnings through the toast UI.
+ *
+ * @return {Promise<void>} Resolves after the detector finishes.
+ */
+async function maybeShowKnowledgeSiloWarning() {
+	if (!getCurrentHref()?.includes(SETUP_LIGHTNING)) {
+		return;
+	}
+	if (!await isKnowledgeSiloDetectionEnabled()) {
+		return;
+	}
+	const result = detectKnowledgeSilo({ href: getCurrentHref() });
+	if (!result.shouldWarn) {
+		return;
+	}
+	showToast(
+		[
+			"knowledge_silo_warning",
+			result.dominantName,
+			"knowledge_silo_dominates",
+			`${result.dominantCount}/${result.sampleSize}`,
+			"knowledge_silo_visible_rows_in",
+			result.columnLabel,
+		],
+		TOAST_WARNING,
+	);
 }
 
 /**
@@ -466,6 +511,7 @@ function delayLoadSetupTabs(count = 0) {
 	setupDragForUl(reorderTabsUl);
 	reloadTabs();
 	checkTutorial();
+	maybeShowKnowledgeSiloWarning();
 }
 
 /**
