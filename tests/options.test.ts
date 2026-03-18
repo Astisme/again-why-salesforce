@@ -1,11 +1,73 @@
 import { assertEquals } from "@std/testing/asserts";
-import Window from "happydom";
+import { installMockDom } from "./happydom.ts";
 
 const OPTIONS_PATH = new URL("../src/settings/options.js", import.meta.url);
-const OPTIONS_HTML_PATH = new URL(
-	"../src/settings/options.html",
-	import.meta.url,
-);
+const TEST_CONSTANTS = {
+	EXTENSION_NAME: "again-why-salesforce",
+	FOLLOW_SF_LANG: "follow-sf-lang",
+	GENERIC_PINNED_TAB_STYLE_KEY: "settings-tab_generic_style-pinned",
+	GENERIC_TAB_STYLE_KEY: "settings-tab_generic_style",
+	HIDDEN_CLASS: "hidden",
+	KNOWLEDGE_SILO_DETECTION: "knowledge_silo_detection",
+	LINK_NEW_BROWSER: "link_new_browser",
+	NO_RELEASE_NOTES: "no_release_notes",
+	NO_UPDATE_NOTIFICATION: "no_update_notification",
+	ORG_PINNED_TAB_STYLE_KEY: "settings-tab_org_style-pinned",
+	ORG_TAB_STYLE_KEY: "settings-tab_org_style",
+	PERSIST_SORT: "persist_sort",
+	POPUP_LOGIN_NEW_TAB: "popup_login_new_tab",
+	POPUP_OPEN_LOGIN: "popup_open_login",
+	POPUP_OPEN_SETUP: "popup_open_setup",
+	POPUP_SETUP_NEW_TAB: "popup_setup_new_tab",
+	PREVENT_ANALYTICS: "prevent_analytics",
+	PREVENT_DEFAULT_OVERRIDE: "user-set",
+	SETTINGS_KEY: "settings",
+	SKIP_LINK_DETECTION: "skip_link_detection",
+	SLDS_ACTIVE: "slds-is-active",
+	TAB_ADD_FRONT: "tab_add_front",
+	TAB_AS_ORG: "tab_as_org",
+	TAB_GENERIC_STYLE: "tab_generic_style",
+	TAB_ON_LEFT: "tab_position_left",
+	TAB_ORG_STYLE: "tab_org_style",
+	TAB_STYLE_BACKGROUND: "background",
+	TAB_STYLE_BOLD: "bold",
+	TAB_STYLE_BORDER: "border",
+	TAB_STYLE_COLOR: "color",
+	TAB_STYLE_HOVER: "hover",
+	TAB_STYLE_ITALIC: "italic",
+	TAB_STYLE_SHADOW: "shadow",
+	TAB_STYLE_TOP: "top",
+	TAB_STYLE_UNDERLINE: "underline",
+	USE_LIGHTNING_NAVIGATION: "use_lightning_navigation",
+	USER_LANGUAGE: "picked-language",
+	WHAT_SET: "set",
+};
+const SETTINGS_CHECKBOX_IDS = [
+	"allow-export",
+	"allow-domains",
+	TEST_CONSTANTS.LINK_NEW_BROWSER,
+	TEST_CONSTANTS.SKIP_LINK_DETECTION,
+	TEST_CONSTANTS.USE_LIGHTNING_NAVIGATION,
+	TEST_CONSTANTS.POPUP_OPEN_LOGIN,
+	TEST_CONSTANTS.POPUP_OPEN_SETUP,
+	TEST_CONSTANTS.POPUP_LOGIN_NEW_TAB,
+	TEST_CONSTANTS.POPUP_SETUP_NEW_TAB,
+	TEST_CONSTANTS.TAB_ON_LEFT,
+	TEST_CONSTANTS.TAB_ADD_FRONT,
+	TEST_CONSTANTS.TAB_AS_ORG,
+	TEST_CONSTANTS.NO_RELEASE_NOTES,
+	TEST_CONSTANTS.NO_UPDATE_NOTIFICATION,
+	TEST_CONSTANTS.PREVENT_ANALYTICS,
+	TEST_CONSTANTS.KNOWLEDGE_SILO_DETECTION,
+	"keep_sorted",
+];
+const SETTINGS_CONTAINER_NAMES = [
+	"general",
+	TEST_CONSTANTS.TAB_GENERIC_STYLE,
+	TEST_CONSTANTS.TAB_ORG_STYLE,
+	`pinned_${TEST_CONSTANTS.TAB_GENERIC_STYLE}`,
+	`pinned_${TEST_CONSTANTS.TAB_ORG_STYLE}`,
+];
 
 /**
  * Replaces an import statement with blank lines so line numbers stay stable.
@@ -200,7 +262,118 @@ const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
 }
 
 /**
- * Creates a realistic options page DOM and module dependency harness.
+ * Appends a mock element to the current document body.
+ *
+ * @param {Object} [options={}] Element options.
+ * @param {string} [options.className=""] CSS classes to assign.
+ * @param {string} [options.id=""] Element id.
+ * @param {HTMLElement} [options.parent=document.body] Parent element.
+ * @param {string} [options.tagName="div"] Element tag name.
+ * @param {string} [options.type=""] Input type attribute.
+ * @return {HTMLElement} The appended element.
+ */
+function appendOptionsElement({
+	className = "",
+	id = "",
+	parent = document.body,
+	tagName = "div",
+	type = "",
+}: {
+	className?: string;
+	id?: string;
+	parent?: HTMLElement;
+	tagName?: string;
+	type?: string;
+} = {}) {
+	const element = document.createElement(tagName);
+	if (className !== "") {
+		element.className = className;
+	}
+	if (id !== "") {
+		element.id = id;
+	}
+	if (type !== "") {
+		element.setAttribute("type", type);
+	}
+	parent.appendChild(element);
+	return element;
+}
+
+/**
+ * Appends the toast structure required by the options page.
+ *
+ * @param {string} id Toast container id.
+ * @return {HTMLElement} The toast container.
+ */
+function appendToast(id: string) {
+	const toast = appendOptionsElement({ id });
+	appendOptionsElement({
+		className: "toastMessage slds-text-heading--small forceActionsText",
+		parent: toast,
+	});
+	return toast;
+}
+
+/**
+ * Appends one settings section with the required header, container, and preview.
+ *
+ * @param {string} name Section name used by the options page id convention.
+ * @return {void}
+ */
+function appendSettingsSection(name: string) {
+	appendOptionsElement({ id: `${name}-container` });
+	appendOptionsElement({ id: `${name}-settings`, tagName: "button" });
+	appendOptionsElement({ id: `${name}-preview`, tagName: "li" });
+}
+
+/**
+ * Patches the mock document to support selectors used by the options bootstrap.
+ *
+ * @return {void}
+ */
+function patchOptionsSelectors() {
+	const originalQuerySelector = document.querySelector.bind(document);
+	document.querySelector = ((selector: string) => {
+		if (selector === "#save-container > button") {
+			return document.getElementById("save-button");
+		}
+		return originalQuerySelector(selector);
+	}) as typeof document.querySelector;
+}
+
+/**
+ * Builds the minimal DOM required for the options module to bootstrap.
+ *
+ * @return {void}
+ */
+function buildOptionsDom() {
+	appendOptionsElement({ tagName: "theme-selector-aws" });
+	for (const id of SETTINGS_CHECKBOX_IDS) {
+		appendOptionsElement({ id, tagName: "input", type: "checkbox" });
+	}
+	appendOptionsElement({ id: TEST_CONSTANTS.USER_LANGUAGE, tagName: "select" });
+	appendOptionsElement({ id: "sort-wrapper" });
+	appendOptionsElement({ id: "picked-sort", tagName: "select" });
+	appendOptionsElement({
+		id: "picked-sort-direction",
+		tagName: "select",
+	});
+	appendToast("toast-display-success");
+	appendToast("toast-display-error");
+	appendToast("save-confirm");
+	for (const name of SETTINGS_CONTAINER_NAMES) {
+		appendSettingsSection(name);
+	}
+	const saveContainer = appendOptionsElement({ id: "save-container" });
+	appendOptionsElement({
+		id: "save-button",
+		parent: saveContainer,
+		tagName: "button",
+	});
+}
+
+/**
+ * Creates a minimal options page DOM and module dependency harness.
  *
  * @param {Array<Record<string, unknown>>} settings Settings returned by getSettings.
  * @return {Promise<{
@@ -210,77 +383,14 @@ const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
  * }>} Harness state.
  */
 async function createOptionsHarness(settings: Array<Record<string, unknown>>) {
-	const window = new Window({
-		url: "https://example.test/settings/options.html",
-	});
-	const html = await Deno.readTextFile(OPTIONS_HTML_PATH);
-	window.document.write(html);
-	const previousGlobals = new Map<string, unknown>();
-	for (
-		const [name, value] of Object.entries({
-			window,
-			document: window.document,
-			HTMLElement: window.HTMLElement,
-			CustomEvent: window.CustomEvent,
-			Event: window.Event,
-			Node: window.Node,
-			customElements: window.customElements,
-			navigator: window.navigator,
-			history: window.history,
-			location: window.location,
-		})
-	) {
-		previousGlobals.set(name, (globalThis as Record<string, unknown>)[name]);
-		Object.defineProperty(globalThis, name, {
-			value,
-			configurable: true,
-			writable: true,
-		});
-	}
+	const dom = installMockDom("https://example.test/settings/options.html");
+	patchOptionsSelectors();
+	buildOptionsDom();
 	const records = {
 		messages: [] as Record<string, unknown>[],
 	};
 	await loadOptionsModule({
-		constants: {
-			EXTENSION_NAME: "again-why-salesforce",
-			FOLLOW_SF_LANG: "follow-sf-lang",
-			GENERIC_PINNED_TAB_STYLE_KEY: "settings-tab_generic_style-pinned",
-			GENERIC_TAB_STYLE_KEY: "settings-tab_generic_style",
-			HIDDEN_CLASS: "hidden",
-			KNOWLEDGE_SILO_DETECTION: "knowledge_silo_detection",
-			LINK_NEW_BROWSER: "link_new_browser",
-			NO_RELEASE_NOTES: "no_release_notes",
-			NO_UPDATE_NOTIFICATION: "no_update_notification",
-			ORG_PINNED_TAB_STYLE_KEY: "settings-tab_org_style-pinned",
-			ORG_TAB_STYLE_KEY: "settings-tab_org_style",
-			PERSIST_SORT: "persist_sort",
-			POPUP_LOGIN_NEW_TAB: "popup_login_new_tab",
-			POPUP_OPEN_LOGIN: "popup_open_login",
-			POPUP_OPEN_SETUP: "popup_open_setup",
-			POPUP_SETUP_NEW_TAB: "popup_setup_new_tab",
-			PREVENT_ANALYTICS: "prevent_analytics",
-			PREVENT_DEFAULT_OVERRIDE: "user-set",
-			SETTINGS_KEY: "settings",
-			SKIP_LINK_DETECTION: "skip_link_detection",
-			SLDS_ACTIVE: "slds-is-active",
-			TAB_ADD_FRONT: "tab_add_front",
-			TAB_AS_ORG: "tab_as_org",
-			TAB_GENERIC_STYLE: "tab_generic_style",
-			TAB_ON_LEFT: "tab_position_left",
-			TAB_ORG_STYLE: "tab_org_style",
-			TAB_STYLE_BACKGROUND: "background",
-			TAB_STYLE_BOLD: "bold",
-			TAB_STYLE_BORDER: "border",
-			TAB_STYLE_COLOR: "color",
-			TAB_STYLE_HOVER: "hover",
-			TAB_STYLE_ITALIC: "italic",
-			TAB_STYLE_SHADOW: "shadow",
-			TAB_STYLE_TOP: "top",
-			TAB_STYLE_UNDERLINE: "underline",
-			USE_LIGHTNING_NAVIGATION: "use_lightning_navigation",
-			USER_LANGUAGE: "picked-language",
-			WHAT_SET: "set",
-		},
+		constants: TEST_CONSTANTS,
 		functions: {
 			areFramePatternsAllowed: () => Promise.resolve(false),
 			getCssRule: () => "",
@@ -319,17 +429,10 @@ async function createOptionsHarness(settings: Array<Record<string, unknown>>) {
 			}),
 	});
 	return {
-		document: window.document,
+		document,
 		records,
 		cleanup() {
-			window.close();
-			for (const [name, value] of previousGlobals.entries()) {
-				Object.defineProperty(globalThis, name, {
-					value,
-					configurable: true,
-					writable: true,
-				});
-			}
+			dom.cleanup();
 		},
 	};
 }
