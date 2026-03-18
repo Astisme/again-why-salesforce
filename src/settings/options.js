@@ -4,6 +4,7 @@ import {
 	GENERIC_PINNED_TAB_STYLE_KEY,
 	GENERIC_TAB_STYLE_KEY,
 	HIDDEN_CLASS,
+	KNOWLEDGE_SILO_DETECTION,
 	LINK_NEW_BROWSER,
 	NO_RELEASE_NOTES,
 	NO_UPDATE_NOTIFICATION,
@@ -149,6 +150,9 @@ const allCheckboxes = {
 	[NO_RELEASE_NOTES]: document.getElementById(NO_RELEASE_NOTES),
 	[NO_UPDATE_NOTIFICATION]: document.getElementById(NO_UPDATE_NOTIFICATION),
 	[PREVENT_ANALYTICS]: document.getElementById(PREVENT_ANALYTICS),
+	[KNOWLEDGE_SILO_DETECTION]: document.getElementById(
+		KNOWLEDGE_SILO_DETECTION,
+	),
 };
 
 const user_language_select = document.getElementById(USER_LANGUAGE);
@@ -916,6 +920,7 @@ function setCurrentChoice(setting) {
 		case NO_RELEASE_NOTES:
 		case NO_UPDATE_NOTIFICATION:
 		case PREVENT_ANALYTICS:
+		case KNOWLEDGE_SILO_DETECTION:
 			allCheckboxes[setting.id].checked = setting.enabled;
 			break;
 		case USER_LANGUAGE:
