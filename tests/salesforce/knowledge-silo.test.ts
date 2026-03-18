@@ -4,6 +4,10 @@ import {
 	analyzeKnowledgeSiloNames,
 	createKnowledgeSiloWarningKey,
 	detectKnowledgeSilo,
+	getKnowledgeSiloColumnMatchScore,
+	isKnowledgeSiloUserCell,
+	isKnowledgeSiloUserHref,
+	normalizeKnowledgeSiloText,
 	resetKnowledgeSiloWarnings,
 } from "/salesforce/knowledge-silo.js";
 
@@ -11,7 +15,7 @@ import {
  * Appends a simple table to the current document body.
  *
  * @param {string[]} headers Header labels.
- * @param {Array<Array<string | { text: string; hidden?: boolean }>>} rows Row cell values.
+ * @param {Array<Array<string | { hidden?: boolean; href?: string; text: string }>>} rows Row cell values.
  * @return {HTMLTableElement} Rendered table element.
  */
 function appendKnowledgeSiloTable(headers, rows) {
@@ -32,7 +36,14 @@ function appendKnowledgeSiloTable(headers, rows) {
 			if (typeof cellData === "string") {
 				cell.textContent = cellData;
 			} else {
-				cell.textContent = cellData.text;
+				if (cellData.href != null) {
+					const link = document.createElement("a");
+					link.setAttribute("href", cellData.href);
+					link.textContent = cellData.text;
+					cell.appendChild(link);
+				} else {
+					cell.textContent = cellData.text;
+				}
 				if (cellData.hidden) {
 					cell.style.display = "none";
 					row.style.display = "none";
@@ -90,6 +101,61 @@ Deno.test("detectKnowledgeSilo ignores tables without ownership columns", () => 
 	}
 });
 
+Deno.test("detectKnowledgeSilo infers localized ownership columns from Salesforce user links", () => {
+	const dom = installMockDom("https://acme.lightning.force.com/lightning/setup/Users/home");
+	try {
+		appendKnowledgeSiloTable(
+			["Name", "Proprietario"],
+			[
+				["Alpha", {
+					href:
+						"/lightning/setup/ManageUsers/page?address=%2F005AAA000000001AAA",
+					text: "Ada",
+				}],
+				["Beta", {
+					href:
+						"/lightning/setup/ManageUsers/page?address=%2F005AAA000000001AAA",
+					text: "Ada",
+				}],
+				["Gamma", {
+					href:
+						"/lightning/setup/ManageUsers/page?address=%2F005AAA000000001AAA",
+					text: "Ada",
+				}],
+				["Delta", {
+					href:
+						"/lightning/setup/ManageUsers/page?address=%2F005AAA000000002AAA",
+					text: "Grace",
+				}],
+				["Epsilon", {
+					href:
+						"/lightning/setup/ManageUsers/page?address=%2F005AAA000000001AAA",
+					text: "Ada",
+				}],
+			],
+		);
+		resetKnowledgeSiloWarnings();
+		assertEquals(
+			detectKnowledgeSilo(),
+			{
+				columnIndex: 1,
+				columnLabel: "Proprietario",
+				dominantCount: 4,
+				dominantName: "Ada",
+				dominanceRatio: 0.8,
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Users/home",
+				reason: "knowledge-silo",
+				sampleSize: 5,
+				shouldWarn: true,
+			},
+		);
+	} finally {
+		dom.cleanup();
+		resetKnowledgeSiloWarnings();
+	}
+});
+
 Deno.test("detectKnowledgeSilo requires a minimum visible sample size", () => {
 	const dom = installMockDom("https://acme.lightning.force.com/lightning/setup/Users/home");
 	try {
@@ -140,6 +206,30 @@ Deno.test("detectKnowledgeSilo ignores balanced ownership", () => {
 		);
 		resetKnowledgeSiloWarnings();
 		assertEquals(detectKnowledgeSilo().reason, "balanced-ownership");
+	} finally {
+		dom.cleanup();
+		resetKnowledgeSiloWarnings();
+	}
+});
+
+Deno.test("detectKnowledgeSilo ignores localized linked columns that do not point to Salesforce users", () => {
+	const dom = installMockDom("https://acme.lightning.force.com/lightning/setup/Users/home");
+	try {
+		appendKnowledgeSiloTable(
+			["Name", "Proprietario"],
+			[
+				["Alpha", {
+					href: "/lightning/r/Flow/301AAA000000001AAA/view",
+					text: "Release flow",
+				}],
+				["Beta", {
+					href: "/lightning/r/Flow/301AAA000000002AAA/view",
+					text: "Release flow",
+				}],
+			],
+		);
+		resetKnowledgeSiloWarnings();
+		assertEquals(detectKnowledgeSilo().reason, "missing-column");
 	} finally {
 		dom.cleanup();
 		resetKnowledgeSiloWarnings();
@@ -204,9 +294,50 @@ Deno.test("detectKnowledgeSilo suppresses duplicate warnings in the same session
 	}
 });
 
+Deno.test("knowledge silo column scoring rejects blank labels and low user-link ratios", () => {
+	const dom = installMockDom("https://acme.lightning.force.com/lightning/setup/Users/home");
+	try {
+		const nonUserCell = document.createElement("td");
+		const nonUserLink = document.createElement("a");
+		nonUserLink.setAttribute(
+			"href",
+			"/lightning/r/Flow/301AAA000000001AAA/view",
+		);
+		nonUserLink.textContent = "Release flow";
+		nonUserCell.appendChild(nonUserLink);
+		const userCell = document.createElement("td");
+		const userLink = document.createElement("a");
+		userLink.setAttribute(
+			"href",
+			"/lightning/setup/ManageUsers/page?address=%2F005AAA000000001AAA",
+		);
+		userLink.textContent = "Ada";
+		userCell.appendChild(userLink);
+		assertEquals(
+			getKnowledgeSiloColumnMatchScore({
+				columnLabel: "",
+				columnCells: [userCell],
+			}),
+			null,
+		);
+		assertEquals(
+			getKnowledgeSiloColumnMatchScore({
+				columnLabel: "Proprietario",
+				columnCells: [userCell, nonUserCell],
+			}),
+			null,
+		);
+	} finally {
+		dom.cleanup();
+		resetKnowledgeSiloWarnings();
+	}
+});
+
 Deno.test("knowledge silo helpers cover empty samples and default fallbacks", () => {
 	const originalLocation = globalThis.location;
 	try {
+		assertEquals(normalizeKnowledgeSiloText("  Ada   Lovelace  "), "Ada Lovelace");
+		assertEquals(normalizeKnowledgeSiloText(null), "");
 		assertEquals(
 			analyzeKnowledgeSiloNames([], { minSampleSize: 0 }),
 			{
@@ -226,6 +357,18 @@ Deno.test("knowledge silo helpers cover empty samples and default fallbacks", ()
 			}),
 			"|Owner||4|5",
 		);
+		assertEquals(
+			isKnowledgeSiloUserHref(
+				"/lightning/setup/ManageUsers/page?address=%2F005AAA000000001AAA",
+			),
+			true,
+		);
+		assertEquals(
+			isKnowledgeSiloUserHref("/lightning/r/Flow/301AAA000000001AAA/view"),
+			false,
+		);
+		assertEquals(isKnowledgeSiloUserHref("%E0%A4%A"), false);
+		assertEquals(isKnowledgeSiloUserCell(null), false);
 		delete (globalThis as Record<string, unknown>).location;
 		assertEquals(
 			detectKnowledgeSilo({
