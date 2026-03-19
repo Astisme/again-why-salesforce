@@ -1598,6 +1598,77 @@ await Deno.test("TabContainer - Import", async (t) => {
 		);
 		assertEquals(container.length, 3);
 	});
+
+	await t.step("imports legacy array backups and triggers upgrade warning", async () => {
+		await container.setDefaultTabs();
+		assertEquals(container.length, 3);
+		const runtime = (globalThis.browser as unknown as {
+			runtime: {
+				sendMessage: (
+					message: { what?: string; message?: string },
+					callback?: (response?: unknown) => void,
+				) => unknown;
+			};
+		}).runtime;
+		const originalSendMessage = runtime.sendMessage;
+		const warningMessages: string[] = [];
+		runtime.sendMessage = (
+			message: { what?: string; message?: string },
+			callback?: (response?: unknown) => void,
+		) => {
+			if (message?.what === "warning") {
+				warningMessages.push(message.message ?? "");
+			}
+			return originalSendMessage.call(runtime, message, callback);
+		};
+		try {
+			assertEquals(
+				await container.importTabs(
+					`[{"label":"legacy tab","url":"legacy-url"},{"label":"legacy org","url":"legacy-org-url","org":"legacy-org"}]`,
+					{ resetTabs: true, importMetadata: true },
+				),
+				2,
+			);
+		} finally {
+			runtime.sendMessage = originalSendMessage;
+		}
+		assertEquals(warningMessages, ["warn_upgrade_backup"]);
+		assertEquals(container.length, 2);
+		assertEquals(container[0].url, "legacy-url");
+		assertEquals(container[1].url, "legacy-org-url");
+		assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+	});
+
+	await t.step(
+		"keeps metadata and pinned behavior stable across object and array payloads",
+		async () => {
+			await container.setDefaultTabs();
+			assertEquals(
+				await container.importTabs(
+					`{"${TabContainer.keyPinnedTabsNo}":1,"${TabContainer.keyTabs}":[{"label":"object pinned","url":"object-pinned-url"},{"label":"object regular","url":"object-regular-url","${Tab.keyClickCount}":3}]}`,
+					{ resetTabs: true, importMetadata: true },
+				),
+				2,
+			);
+			assertEquals(container.length, 2);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 1);
+			assertEquals(container[0].url, "object-pinned-url");
+			assertEquals(container[1][Tab.keyClickCount], 3);
+			assertEquals(
+				await container.importTabs(
+					`[{"label":"array one","url":"array-one","${Tab.keyClickCount}":5},{"label":"array two","url":"array-two","${Tab.keyClickDate}":${currentDate}}]`,
+					{ resetTabs: true, importMetadata: true },
+				),
+				2,
+			);
+			assertEquals(container.length, 2);
+			assertEquals(container[TabContainer.keyPinnedTabsNo], 0);
+			assertEquals(container[0].url, "array-one");
+			assertEquals(container[0][Tab.keyClickCount], 5);
+			assertEquals(container[1].url, "array-two");
+			assertEquals(container[1][Tab.keyClickDate], currentDate);
+		},
+	);
 });
 
 await Deno.test("TabContainer - Move Tab", async (t) => {
