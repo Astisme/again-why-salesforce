@@ -12,6 +12,8 @@ Deno.test("TranslationService - load user preference", async () => {
 		"fr",
 		"Should load language from storage",
 	);
+	assertEquals(service.translateAttributeDataset, "i18n");
+	assertEquals(service.separator, "+-+");
 });
 
 Deno.test("TranslationService - translate method", async () => {
@@ -165,4 +167,23 @@ Deno.test("TranslationService - loadLanguageFile", async () => {
 		translations.en,
 		"Should return fallback language on error",
 	);
+	await service.loadLanguageFile("pt_BR");
+});
+
+Deno.test("TranslationService - edge cases", async () => {
+	const service = await ensureTranslatorAvailability();
+	assertEquals(
+		await service.translate("plain sentence key"),
+		"plain sentence key",
+		"Missing space-delimited keys should be returned as-is",
+	);
+
+	const originalDocument = globalThis.document;
+	Reflect.set(globalThis, "document", undefined);
+	assertEquals(
+		await service.updatePageTranslations("en"),
+		false,
+		"Should return false when no document is available",
+	);
+	Reflect.set(globalThis, "document", originalDocument);
 });

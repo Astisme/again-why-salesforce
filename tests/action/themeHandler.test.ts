@@ -341,16 +341,16 @@ Deno.test("themeHandler direct module coverage", async () => {
 
 		globalThis.matchMedia =
 			undefined as unknown as typeof globalThis.matchMedia;
-			localStorage.setItem("userTheme", "system");
-			await module.initTheme();
-			assertEquals(document.documentElement.dataset.usertheme, "system");
-			assertStrictEquals(document.documentElement.dataset.theme, null);
+		localStorage.setItem("userTheme", "system");
+		await module.initTheme();
+		assertEquals(document.documentElement.dataset.usertheme, "system");
+		assertStrictEquals(document.documentElement.dataset.theme, null);
 
-			localStorage.removeItem("userTheme");
-			await module.initTheme();
-			assertEquals(document.documentElement.dataset.usertheme, "system");
-			assertStrictEquals(document.documentElement.dataset.theme, null);
-		} finally {
+		localStorage.removeItem("userTheme");
+		await module.initTheme();
+		assertEquals(document.documentElement.dataset.usertheme, "system");
+		assertStrictEquals(document.documentElement.dataset.theme, null);
+	} finally {
 		globalThis.matchMedia = originalMatchMedia;
 		localStorage.removeItem("userTheme");
 		localStorage.removeItem("usingTheme");

@@ -82,6 +82,43 @@ function loadConstants(
 	});
 }
 
+/**
+ * Runs the constants module in a dedicated worker with explicit browser globals.
+ *
+ * @param {{
+ *   userAgent: string;
+ *   homepageUrl?: string;
+ * }} options Worker execution options.
+ * @return {Promise<{ browserName: string | undefined; errorMessage: string | null }>} Worker response.
+ */
+async function runConstantsWorker({
+	userAgent,
+	homepageUrl = "https://github.com/acme/repo",
+}: {
+	userAgent: string;
+	homepageUrl?: string;
+}) {
+	const worker = new Worker(
+		new URL("./constants-worker.ts", import.meta.url).href,
+		{ type: "module" },
+	);
+	try {
+		const result = new Promise<
+			{ browserName: string | undefined; errorMessage: string | null }
+		>((resolve, reject) => {
+			worker.onmessage = (event) => resolve(event.data);
+			worker.onerror = (event) => {
+				event.preventDefault();
+				reject(event.error ?? new Error(event.message));
+			};
+		});
+		worker.postMessage({ userAgent, homepageUrl });
+		return await result;
+	} finally {
+		worker.terminate();
+	}
+}
+
 Deno.test("constants prefers the browser API for Firefox and exposes manifest data", async () => {
 	const fixture = await loadConstants("Mozilla/5.0 Firefox/140.0");
 	try {
@@ -180,4 +217,24 @@ Deno.test("constants reject non-GitHub homepages", async () => {
 		Error,
 		"no_manifest_github",
 	);
+});
+
+Deno.test("constants worker detects Edge and Safari and rejects invalid homepages", async () => {
+	const edgeResult = await runConstantsWorker({
+		userAgent: "Mozilla/5.0 Edg/120.0",
+	});
+	assertEquals(edgeResult.browserName, "edge");
+	assertEquals(edgeResult.errorMessage, null);
+
+	const safariResult = await runConstantsWorker({
+		userAgent: "Mozilla/5.0 Version/17.0 Safari/605.1.15",
+	});
+	assertEquals(safariResult.browserName, "safari");
+	assertEquals(safariResult.errorMessage, null);
+
+	const invalidHomepageResult = await runConstantsWorker({
+		userAgent: "Mozilla/5.0 Firefox/140.0",
+		homepageUrl: "https://example.com/not-github",
+	});
+	assertEquals(invalidHomepageResult.errorMessage, "no_manifest_github");
 });

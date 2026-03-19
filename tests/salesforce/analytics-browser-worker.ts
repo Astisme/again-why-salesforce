@@ -147,9 +147,7 @@ function setSettings(settings: any[]) {
  */
 function getBeaconImage(documentMock: any) {
 	const appendTarget = documentMock.head ?? documentMock.documentElement;
-	return appendTarget.children.find((child: any) =>
-		child.tagName === "img"
-	);
+	return appendTarget.children.find((child: any) => child.tagName === "img");
 }
 
 type WorkerStep = {
@@ -190,26 +188,27 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 			if (step.settingsBeforeCall != null) {
 				setSettings(step.settingsBeforeCall);
 			}
-				const documentMock = installDocument(
-					step.existingCspContent,
-					step.useDocumentElementOnly === true,
-				);
-				const appendTarget = documentMock.head ?? documentMock.documentElement;
-				const originalInfo = console.info;
-				if (step.silenceInfo) {
-					console.info = () => {};
-				}
+			const documentMock = installDocument(
+				step.existingCspContent,
+				step.useDocumentElementOnly === true,
+			);
+			const appendTarget = documentMock.head ??
+				documentMock.documentElement;
+			const originalInfo = console.info;
+			if (step.silenceInfo) {
+				console.info = () => {};
+			}
 			try {
 				await checkInsertAnalytics();
 			} finally {
 				console.info = originalInfo;
 			}
-				const beacon = getBeaconImage(documentMock);
-				results.push({
-					headChildrenCount: appendTarget.children.length,
-					cspContent: documentMock.querySelector(
-						'meta[http-equiv="Content-Security-Policy"]',
-					)?.getAttribute("content") ?? null,
+			const beacon = getBeaconImage(documentMock);
+			results.push({
+				headChildrenCount: appendTarget.children.length,
+				cspContent: documentMock.querySelector(
+					'meta[http-equiv="Content-Security-Policy"]',
+				)?.getAttribute("content") ?? null,
 				beaconPath: beacon
 					? new URL(String(beacon.src)).searchParams.get("path")
 					: null,

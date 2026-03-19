@@ -128,6 +128,13 @@ async function loadBackgroundUtilsModule(
 	const changedListeners: Array<
 		(event: { state: { current: string } }) => void
 	> = [];
+	const modulePath = new NativeURL(
+		"../../src/background/utils.js",
+		import.meta.url,
+	);
+	const sourceMapLineMap = (await Deno.readTextFile(modulePath))
+		.split("\n")
+		.map((_, index) => index + 1);
 	const MockURL = Object.assign(class extends NativeURL {}, {
 		createObjectURL: () => "blob:test",
 		revokeObjectURL: (url: string) => {
@@ -138,10 +145,7 @@ async function loadBackgroundUtilsModule(
 		BackgroundUtilsModule,
 		BackgroundUtilsDependencies
 	>({
-		modulePath: new NativeURL(
-			"../../src/background/utils.js",
-			import.meta.url,
-		),
+		modulePath,
 		additionalExports: [
 			"_exportHandler",
 			"_isNewerVersion",
@@ -224,6 +228,7 @@ async function loadBackgroundUtilsModule(
 			"/tabContainer.js",
 			"./background.js",
 		]),
+		sourceMapLineMap,
 	});
 
 	return {

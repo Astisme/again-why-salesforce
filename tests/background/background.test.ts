@@ -1,5 +1,6 @@
 import { mockStorage } from "../mocks.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
+import { waitForCondition } from "../async.ts";
 
 import {
 	bg_getCommandLinks,
@@ -10,13 +11,32 @@ import {
 } from "/background/background.js";
 import {
 	BROWSER,
+	CMD_EXPORT_ALL,
+	CXM_MANAGE_TABS,
 	GENERIC_TAB_STYLE_KEY,
 	LOCALE_KEY,
 	NO_RELEASE_NOTES,
 	ORG_TAB_STYLE_KEY,
+	PERM_CHECK,
 	SETTINGS_KEY,
 	TAB_ADD_FRONT,
+	TOAST_ERROR,
+	TOAST_WARNING,
 	USER_LANGUAGE,
+	WHAT_EXPORT,
+	WHAT_EXPORT_CHECK,
+	WHAT_GET,
+	WHAT_GET_BROWSER_TAB,
+	WHAT_GET_COMMANDS,
+	WHAT_GET_SETTINGS,
+	WHAT_GET_SF_LANG,
+	WHAT_GET_STYLE_SETTINGS,
+	WHAT_SAVED,
+	WHAT_SET,
+	WHAT_SHOW_EXPORT_MODAL,
+	WHAT_SHOW_IMPORT,
+	WHAT_START_TUTORIAL,
+	WHAT_THEME,
 	WHY_KEY,
 } from "/constants.js";
 import { getStyleSettings } from "/functions.js";
@@ -333,4 +353,148 @@ await Deno.test("bg_getCommandLinks behavior", async (t) => {
 			assertEquals(calledcommands, threecommands);
 		});
 	});
+});
+
+await Deno.test("background listeners handle runtime, command, and browser events", async () => {
+	const originalSetTimeout = globalThis.setTimeout;
+	const originalSendMessage = BROWSER.tabs.sendMessage;
+	const originalContains = BROWSER.permissions.contains;
+	const sentMessages: unknown[] = [];
+
+	globalThis.setTimeout = ((handler: TimerHandler) => {
+		if (typeof handler === "function") {
+			handler();
+		}
+		return 1;
+	}) as typeof setTimeout;
+	BROWSER.tabs.sendMessage = (_tabId: number, message: unknown) => {
+		sentMessages.push(message);
+		return Promise.resolve(true);
+	};
+	BROWSER.permissions.contains = () => Promise.resolve(true);
+	BROWSER.tabs.setMockBrowserTabs([{
+		id: 1,
+		url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+		active: true,
+		currentWindow: true,
+	}]);
+	mockStorage[NO_RELEASE_NOTES] = undefined;
+	mockStorage[SETTINGS_KEY] = [
+		{ enabled: "fr", id: USER_LANGUAGE },
+		{ enabled: false, id: NO_RELEASE_NOTES },
+		{ enabled: false, id: TAB_ADD_FRONT },
+	];
+
+	try {
+		let savedResponse: unknown;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_SAVED, echo: "saved" },
+			"",
+			(response) => {
+				savedResponse = response;
+			},
+		);
+		assertEquals(savedResponse, null);
+
+		let permissionResponse: unknown;
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: PERM_CHECK, contains: { permissions: ["tabs"] } },
+			"",
+			(response) => {
+				permissionResponse = response;
+			},
+		);
+		await waitForCondition(() => permissionResponse != null);
+		assertEquals(permissionResponse, true);
+
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET, key: WHY_KEY },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_SET, key: WHY_KEY, set: [{ label: "A", url: "B" }] },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_SETTINGS, keys: USER_LANGUAGE },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_STYLE_SETTINGS, key: ORG_TAB_STYLE_KEY },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_COMMANDS, commands: [] },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_BROWSER_TAB },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_GET_SF_LANG },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT_CHECK },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: WHAT_EXPORT, tabs: [{ label: "x", url: "y" }] },
+			"",
+			() => {},
+		);
+		for (
+			const what of [
+				WHAT_SHOW_IMPORT,
+				WHAT_THEME,
+				TOAST_ERROR,
+				TOAST_WARNING,
+				WHAT_SHOW_EXPORT_MODAL,
+				CXM_MANAGE_TABS,
+				WHAT_START_TUTORIAL,
+			]
+		) {
+			BROWSER.runtime.onMessage.triggerMessage({ what }, "", () => {});
+		}
+		BROWSER.runtime.onMessage.triggerMessage(
+			{ what: "unknown" },
+			"",
+			() => {},
+		);
+		BROWSER.runtime.onMessage.triggerMessage({}, "", () => {});
+
+		BROWSER.commands.onCommand.triggerCommand(CMD_EXPORT_ALL);
+		BROWSER.commands.onCommand.triggerCommand("unknown-command");
+		await waitForCondition(() => sentMessages.length > 0);
+		assert(sentMessages.length > 0);
+
+		BROWSER.runtime.onStartup.triggerStartup();
+		BROWSER.tabs.onActivated.triggerActivated({ tabId: 1, windowId: 1 });
+		BROWSER.tabs.onUpdated.triggerUpdated(
+			1,
+			{ status: "complete" },
+			{
+				id: 1,
+				url: "https://acme.lightning.force.com/lightning/setup/SetupOneHome/home",
+				active: true,
+				currentWindow: true,
+			},
+		);
+		BROWSER.windows.onFocusChanged.triggerFocusChanged(1);
+		BROWSER.commands.onChanged.triggerChanged();
+		assert(sentMessages.length > 0);
+	} finally {
+		globalThis.setTimeout = originalSetTimeout;
+		BROWSER.tabs.sendMessage = originalSendMessage;
+		BROWSER.permissions.contains = originalContains;
+	}
 });

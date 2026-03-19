@@ -144,12 +144,12 @@ Deno.test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
 		const defaultComponent = document.createElement(
 			"theme-selector-aws",
 		) as ThemeSelectorElement;
-			appendThemeButtons(defaultComponent);
-			document.body.append(defaultComponent);
-			defaultComponent.connectedCallback?.();
-			document.documentElement.dataset.theme = "light";
+		appendThemeButtons(defaultComponent);
+		document.body.append(defaultComponent);
+		defaultComponent.connectedCallback?.();
+		document.documentElement.dataset.theme = "light";
 
-			assertEquals(defaultComponent.getCurrentTheme?.(), "light");
+		assertEquals(defaultComponent.getCurrentTheme?.(), "light");
 	} finally {
 		globalThis.localStorage = originalLocalStorage;
 		cleanup();
