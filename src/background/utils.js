@@ -33,7 +33,7 @@ async function _queryTabs(callback, count = 0) {
 	const browserTabs = await BROWSER.tabs.query(queryParams);
 	if (
 		BROWSER.runtime.lastError || browserTabs == null ||
-		browserTabs == [] || browserTabs[0] == null
+		browserTabs.length === 0 || browserTabs[0] == null
 	) {
 		if (count > 5) {
 			throw new Error("error_no_browser_tab");
@@ -261,7 +261,7 @@ export async function checkForUpdates() {
 			.sort((a, b) => {
 				return new Date(b.created_at) - new Date(a.created_at);
 			})
-			?.[0].tag_name.replace(/^.*(-)?v/, "");
+			?.[0]?.tag_name?.replace(/^.*(-)?v/, "");
 		// Compare versions and open homepage if update is available
 		if (latestVersion != null) {
 			await bg_notify({

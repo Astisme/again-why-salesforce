@@ -7,6 +7,7 @@ import {
 } from "@std/testing/asserts";
 import { waitForCondition, waitForNextTask } from "../async.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
+import { mockStorage } from "../mocks.ts";
 
 import {
 	bg_getCurrentBrowserTab,
@@ -15,7 +16,12 @@ import {
 	checkLaunchExport,
 } from "/background/utils.js";
 import { ensureAllTabsAvailability } from "/tabContainer.js";
-import { BROWSER } from "/constants.js";
+import {
+	BROWSER,
+	EXTENSION_VERSION,
+	NO_UPDATE_NOTIFICATION,
+	SETTINGS_KEY,
+} from "/constants.js";
 
 const NativeURL = globalThis.URL;
 
@@ -355,6 +361,148 @@ Deno.test("checkForUpdates idempotency", async (t) => {
 	});
 });
 
+Deno.test("checkForUpdates and export-permission direct branches", async (t) => {
+	await t.step(
+		"checkLaunchExport handles unavailable permission url directly",
+		() => {
+			const originalGetURL = BROWSER.runtime.getURL;
+			const originalDownloads = BROWSER.downloads;
+			BROWSER.runtime.getURL = (() => null) as unknown as (
+				path: string,
+			) => string;
+			BROWSER.downloads = undefined;
+			try {
+				assertFalse(checkLaunchExport());
+			} finally {
+				BROWSER.runtime.getURL = originalGetURL;
+				BROWSER.downloads = originalDownloads;
+			}
+		},
+	);
+
+	await t.step(
+		"checkForUpdates fetches releases and sends an update notification when newer",
+		async () => {
+			const originalFetch = globalThis.fetch;
+			const originalSendMessage = BROWSER.tabs.sendMessage;
+			const originalSettings = structuredClone(
+				mockStorage[SETTINGS_KEY] as Array<Record<string, unknown>>,
+			);
+			const sentMessages: Array<{ what?: string; version?: string }> = [];
+			mockStorage[SETTINGS_KEY] = [];
+			BROWSER.tabs.setMockBrowserTabs([{
+				id: 0,
+				url: "https://mock0.url",
+				active: true,
+				currentWindow: true,
+			}]);
+			BROWSER.tabs.sendMessage = (_tabId: number, message: object) => {
+				sentMessages.push(
+					message as { what?: string; version?: string },
+				);
+				return Promise.resolve(true);
+			};
+			globalThis.fetch = () =>
+				Promise.resolve({
+					json: () =>
+						Promise.resolve([{
+							tag_name: "release-v999.0.0",
+							prerelease: false,
+							created_at: "2026-01-01T00:00:00.000Z",
+						}]),
+					ok: true,
+					status: 200,
+				} as Response);
+			try {
+				await checkForUpdates();
+				assert(
+					mockStorage[SETTINGS_KEY].some((setting) =>
+						setting.id === NO_UPDATE_NOTIFICATION
+					),
+				);
+				assert(
+					sentMessages.some((message) =>
+						message.version === "999.0.0"
+					),
+				);
+			} finally {
+				globalThis.fetch = originalFetch;
+				BROWSER.tabs.sendMessage = originalSendMessage;
+				mockStorage[SETTINGS_KEY] = originalSettings;
+			}
+		},
+	);
+
+	await t.step(
+		"checkForUpdates handles older/equal/newer releases and fetch errors",
+		async () => {
+			const originalFetch = globalThis.fetch;
+			const originalSendMessage = BROWSER.tabs.sendMessage;
+			const originalSettings = structuredClone(
+				mockStorage[SETTINGS_KEY] as Array<Record<string, unknown>>,
+			);
+			const sentMessages: Array<{ what?: string; version?: string }> = [];
+			mockStorage[SETTINGS_KEY] = [];
+			BROWSER.tabs.setMockBrowserTabs([{
+				id: 0,
+				url: "https://mock0.url",
+				active: true,
+				currentWindow: true,
+			}]);
+			BROWSER.tabs.sendMessage = (_tabId: number, message: object) => {
+				sentMessages.push(
+					message as { what?: string; version?: string },
+				);
+				return Promise.resolve(true);
+			};
+			globalThis.fetch = () =>
+				Promise.resolve({
+					json: () =>
+						Promise.resolve([
+							{
+								tag_name: "release-v0.0.1",
+								prerelease: false,
+								created_at: "2024-01-01T00:00:00.000Z",
+							},
+							{
+								tag_name: `release-v${EXTENSION_VERSION}`,
+								prerelease: false,
+								created_at: "2024-01-02T00:00:00.000Z",
+							},
+							{
+								tag_name: "release-v999.0.0",
+								prerelease: false,
+								created_at: "2024-01-03T00:00:00.000Z",
+							},
+							{
+								tag_name: "release-v1000.0.0",
+								prerelease: false,
+								created_at: "2024-01-04T00:00:00.000Z",
+							},
+						]),
+					ok: true,
+					status: 200,
+				} as Response);
+			try {
+				await checkForUpdates();
+				assert(
+					sentMessages.some((message) =>
+						message.version === "1000.0.0"
+					),
+				);
+				mockStorage[SETTINGS_KEY] = [];
+				globalThis.fetch = () =>
+					Promise.reject(new Error("fetch-failure"));
+				await checkForUpdates();
+			} finally {
+				globalThis.fetch = originalFetch;
+				BROWSER.tabs.sendMessage = originalSendMessage;
+				mockStorage[SETTINGS_KEY] = originalSettings;
+			}
+		},
+	);
+});
+
 Deno.test("background utils isolated branches cover export handlers and update checks", async (t) => {
 	await t.step(
 		"export handler covers Firefox, Chrome, and fallback notification paths",
@@ -479,6 +627,17 @@ Deno.test("background utils isolated branches cover export handlers and update c
 				assertEquals(failedFixture.messages, []);
 			} finally {
 				failedFixture.cleanup();
+			}
+
+			const emptyReleasesFixture = await loadBackgroundUtilsModule({
+				releases: [],
+				responseOk: true,
+			});
+			try {
+				await emptyReleasesFixture.module.checkForUpdates();
+				assertEquals(emptyReleasesFixture.messages, []);
+			} finally {
+				emptyReleasesFixture.cleanup();
 			}
 		},
 	);
