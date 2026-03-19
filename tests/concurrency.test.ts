@@ -1,4 +1,8 @@
-import { type InternalMessage, mockBrowser, mockStorage } from "./mocks.ts";
+import {
+	type InternalMessage,
+	mockBrowser,
+	mockStorage,
+} from "./mocks.test.ts";
 import { assert, assertEquals } from "@std/testing/asserts";
 import { WHY_KEY } from "/constants.js";
 import { ensureAllTabsAvailability, TabContainer } from "/tabContainer.js";

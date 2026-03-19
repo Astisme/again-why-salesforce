@@ -1,5 +1,5 @@
 // @ts-nocheck: legacy mixed global mocks in this file are not fully typed yet.
-import "./mocks.ts";
+import "./mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -52,7 +52,7 @@ import {
 	requestFramePatternsPermission,
 	sendExtensionMessage,
 } from "/functions.js";
-import { installMockDom } from "./happydom.ts";
+import { installMockDom } from "./happydom.test.ts";
 
 Deno.test("sendExtensionMessage returns promise if no callback", async () => {
 	const result = await sendExtensionMessage({ what: "echo", echo: "bar" });

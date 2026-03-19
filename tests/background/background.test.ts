@@ -1,6 +1,6 @@
-import { mockStorage } from "../mocks.ts";
+import { mockStorage } from "../mocks.test.ts";
 import { assert, assertEquals, assertFalse } from "@std/testing/asserts";
-import { waitForCondition } from "../async.ts";
+import { waitForCondition } from "../async.test.ts";
 
 import {
 	bg_getCommandLinks,

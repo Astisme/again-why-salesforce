@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { mockStorage } from "../mocks.ts";
+import { mockStorage } from "../mocks.test.ts";
 
 const SETTINGS_KEY = "settings";
 const PERM_CHECK = "check-permission-granted";

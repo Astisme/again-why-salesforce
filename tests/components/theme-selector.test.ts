@@ -1,5 +1,5 @@
 /// <reference lib="dom" />
-import "../mocks.ts";
+import "../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
@@ -7,7 +7,7 @@ import {
 	assertFalse,
 	assertStringIncludes,
 } from "@std/testing/asserts";
-import { installMockDom } from "../happydom.ts";
+import { installMockDom } from "../happydom.test.ts";
 
 type ThemeSelectorElement = HTMLElement & {
 	connectedCallback?: () => void;

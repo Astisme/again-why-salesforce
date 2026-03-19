@@ -1,13 +1,13 @@
-import "../mocks.ts";
+import "../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
 	assertFalse,
 	assertRejects,
 } from "@std/testing/asserts";
-import { waitForCondition, waitForNextTask } from "../async.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
-import { mockStorage } from "../mocks.ts";
+import { waitForCondition, waitForNextTask } from "../async.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
+import { mockStorage } from "../mocks.test.ts";
 
 import {
 	bg_getCurrentBrowserTab,

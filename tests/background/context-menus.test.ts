@@ -1,11 +1,11 @@
-import "../mocks.ts";
+import "../mocks.test.ts";
 import {
 	assert,
 	assertEquals,
 	assertExists,
 	assertStringIncludes,
 } from "@std/testing/asserts";
-import { waitForCondition } from "../async.ts";
+import { waitForCondition } from "../async.test.ts";
 import {
 	checkAddRemoveContextMenus,
 	refreshContextMenus,

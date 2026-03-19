@@ -89,7 +89,7 @@ async function runAnalyticsWorker(scenario: {
 	}>;
 }): Promise<AnalyticsWorkerResult> {
 	const worker = new Worker(
-		new URL("./analytics-browser-worker.ts", import.meta.url).href,
+		new URL("./analytics-browser-worker.test.ts", import.meta.url).href,
 		{ type: "module" },
 	);
 

@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/testing/asserts";
-import { MockElement } from "../action/mock-dom.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
+import { MockElement } from "../action/mock-dom.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
 
 type ImportModule = {
 	__getInputModalParent: () => MockElement | null | undefined;

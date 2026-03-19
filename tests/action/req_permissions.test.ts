@@ -1,6 +1,10 @@
 import { assertEquals } from "@std/testing/asserts";
-import { createMockWindow, MockDocument, MockElement } from "./mock-dom.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
+import {
+	createMockWindow,
+	MockDocument,
+	MockElement,
+} from "./mock-dom.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
 
 type PermissionDependencies = {
 	BROWSER: {

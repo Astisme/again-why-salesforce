@@ -5,8 +5,8 @@ import {
 	assertExists,
 	assertThrows,
 } from "@std/testing/asserts";
-import { installMockDom } from "../happydom.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
+import { installMockDom } from "../happydom.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
 
 /**
  * Filesystem path to the tutorial module under test.

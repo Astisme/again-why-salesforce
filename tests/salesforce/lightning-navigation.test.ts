@@ -3,7 +3,7 @@ import {
 	assertExists,
 	assertStrictEquals,
 } from "@std/testing/asserts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
 
 type LightningNavigationDependencies = {
 	$A: {

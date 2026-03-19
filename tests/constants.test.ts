@@ -1,5 +1,5 @@
 import { assertEquals, assertRejects } from "@std/testing/asserts";
-import { loadIsolatedModule } from "./load-isolated-module.ts";
+import { loadIsolatedModule } from "./load-isolated-module.test.ts";
 
 type BrowserLike = {
 	i18n: {
@@ -99,7 +99,7 @@ async function runConstantsWorker({
 	homepageUrl?: string;
 }) {
 	const worker = new Worker(
-		new URL("./constants-worker.ts", import.meta.url).href,
+		new URL("./constants-worker.test.ts", import.meta.url).href,
 		{ type: "module" },
 	);
 	try {

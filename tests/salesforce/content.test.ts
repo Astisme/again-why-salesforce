@@ -8,7 +8,7 @@ import {
 	assertRejects,
 	assertStringIncludes,
 } from "@std/testing/asserts";
-import { installMockDom } from "../happydom.ts";
+import { installMockDom } from "../happydom.test.ts";
 
 const CONTENT_PATH = new URL(
 	"../../src/salesforce/content.js",

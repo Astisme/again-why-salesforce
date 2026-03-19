@@ -4,10 +4,10 @@ import {
 	assertFalse,
 	assertThrows,
 } from "@std/testing/asserts";
-import { MockElement } from "../action/mock-dom.ts";
-import { installMockDom } from "../happydom.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
-import { mockStorage } from "../mocks.ts";
+import { MockElement } from "../action/mock-dom.test.ts";
+import { installMockDom } from "../happydom.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
+import { mockStorage } from "../mocks.test.ts";
 import {
 	EXTENSION_USAGE_DAYS,
 	HIDDEN_CLASS,

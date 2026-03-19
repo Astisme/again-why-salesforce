@@ -1,6 +1,6 @@
 import { assert, assertEquals, assertThrows } from "@std/testing/asserts";
-import { installMockDom } from "../happydom.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
+import { installMockDom } from "../happydom.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
 
 const MODULE_PATH = new URL(
 	"../../src/salesforce/favourite-manager.js",

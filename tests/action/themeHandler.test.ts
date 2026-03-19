@@ -1,7 +1,7 @@
 import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
-import { installMockDom } from "../happydom.ts";
-import { loadIsolatedModule } from "../load-isolated-module.ts";
-import "../mocks.ts";
+import { installMockDom } from "../happydom.test.ts";
+import { loadIsolatedModule } from "../load-isolated-module.test.ts";
+import "../mocks.test.ts";
 
 type ThemeHandlerModule = {
 	handleSwitchColorTheme: () => Promise<void>;

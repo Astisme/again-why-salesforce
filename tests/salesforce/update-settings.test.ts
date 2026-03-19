@@ -1,4 +1,4 @@
-import "../mocks.ts";
+import "../mocks.test.ts";
 import { assertEquals } from "@std/testing/asserts";
 import { SETTINGS_KEY } from "/constants.js";
 import { getTodayDateKey } from "/salesforce/once-a-day.js";
@@ -6,7 +6,7 @@ import {
 	getUsageDaysUpdate,
 	updateExtensionUsageDays,
 } from "/salesforce/update-settings.js";
-import { mockStorage } from "../mocks.ts";
+import { mockStorage } from "../mocks.test.ts";
 
 const today = "2026-03-11";
 const yesterday = "2026-03-10";
