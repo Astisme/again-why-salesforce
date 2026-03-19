@@ -24,6 +24,7 @@ import { bg_getSettings, bg_getStorage, bg_setStorage } from "./background.js";
  * @param {Function} callback - A function to handle the retrieved tab once it is found.
  * @param {number} [count=0] - A counter used to track the number of retries. Defaults to 0.
  * @throws {Error} Throws an error if the current tab cannot be found after 5 retries.
+ * @return Promise the browser tab which was found
  */
 async function _queryTabs(callback, count = 0) {
 	const queryParams = { active: true, currentWindow: true };

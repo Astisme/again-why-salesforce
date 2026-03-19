@@ -171,6 +171,7 @@ function getLastTr(tbody = null) {
  * @param {event} e - the event which had this function called
  * @param {Object} [param1={}] an object with the following keys
  * @param {TabContainer} param1.allTabs - the TabContainer instance
+ * @return Promise fulfilled when checkOpenAskConfirm is completed
  */
 export async function handleActionButtonClick(e, {
 	allTabs,
@@ -587,6 +588,7 @@ async function checkDuplicates({
  * @param {Object} [param0.inputObj=managedLoggers[focusedIndex].last_input] - the last_input object of the currently focused logger
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append or remove the tr
  * @throws Error when tabAppendElement == null
+ * @return Promise fulfilled when addTr or removeTr are completed
  */
 async function checkAddRemoveLastTr({
 	inputObj = managedLoggers[focusedIndex].last_input,
@@ -654,6 +656,7 @@ function performAfterChecks({
  * @param {TbodyHTMLElement} [param0.tabAppendElement=null] - the tbody where to append the tr
  * @param {string} [param0.type="label"]  - The type of input field ("label", "url" or "org").
  * @throws Error when tabAppendElement == null
+ * @return Promise fulfilled when the checkAddRemoveLastTr is completed
  */
 function trInputListener({
 	tabAppendElement = null,
