@@ -22,7 +22,10 @@ const CONTENT_PATH = new URL(
  */
 function createTrackedButton() {
 	const button = document.createElement("button") as HTMLButtonElement & {
-		__trackedListeners?: Map<string, Set<EventListenerOrEventListenerObject>>;
+		__trackedListeners?: Map<
+			string,
+			Set<EventListenerOrEventListenerObject>
+		>;
 	};
 	const originalAddEventListener = button.addEventListener.bind(button);
 	button.__trackedListeners = new Map();
@@ -33,7 +36,8 @@ function createTrackedButton() {
 		return originalAddEventListener(type, listener, options);
 	}) as HTMLButtonElement["addEventListener"];
 	button.dispatchEvent = ((event: Event) => {
-		const listeners = button.__trackedListeners?.get(event.type) ?? new Set();
+		const listeners = button.__trackedListeners?.get(event.type) ??
+			new Set();
 		const asyncListeners: Promise<void>[] = [];
 		for (const listener of listeners) {
 			const result = typeof listener === "function"
@@ -48,7 +52,9 @@ function createTrackedButton() {
 			}
 		}
 		if (asyncListeners.length > 0) {
-			return Promise.all(asyncListeners).then(() => true) as unknown as boolean;
+			return Promise.all(asyncListeners).then(() =>
+				true
+			) as unknown as boolean;
 		}
 		return EventTarget.prototype.dispatchEvent.call(button, event);
 	}) as HTMLButtonElement["dispatchEvent"];
@@ -491,7 +497,9 @@ function createHarness(url = SETUP_URL) {
 		) {
 			return task;
 		}
-		const wrapped = Promise.resolve(task).finally(() => pendingTasks.delete(wrapped));
+		const wrapped = Promise.resolve(task).finally(() =>
+			pendingTasks.delete(wrapped)
+		);
 		pendingTasks.add(wrapped);
 		return wrapped;
 	}
@@ -1365,7 +1373,8 @@ Deno.test("sf_afterSet reloads tabs and can skip reload while still toasting", a
 });
 
 Deno.test({
-	name: "reloadTabs aborts stale in-flight renders when a newer update starts",
+	name:
+		"reloadTabs aborts stale in-flight renders when a newer update starts",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	async fn() {
@@ -1381,8 +1390,14 @@ Deno.test({
 				}
 				return true;
 			};
-			const oldReload = hooks.reloadTabs([{ label: "Old Users", url: USERS_URL }]);
-			const newReload = hooks.reloadTabs([{ label: "New Users", url: FLOWS_URL }]);
+			const oldReload = hooks.reloadTabs([{
+				label: "Old Users",
+				url: USERS_URL,
+			}]);
+			const newReload = hooks.reloadTabs([{
+				label: "New Users",
+				url: FLOWS_URL,
+			}]);
 			await newReload;
 			assertEquals(
 				content.getSetupTabUl().querySelector("span")?.innerText,
@@ -1407,7 +1422,8 @@ Deno.test({
 });
 
 Deno.test({
-	name: "reloadTabs aborts follow-up work after isOnSavedTab resolves for a stale render",
+	name:
+		"reloadTabs aborts follow-up work after isOnSavedTab resolves for a stale render",
 	sanitizeOps: false,
 	sanitizeResources: false,
 	async fn() {
@@ -1425,8 +1441,14 @@ Deno.test({
 				}
 			};
 			const initialFavouriteCalls = harness.records.showFavouriteButton;
-			const staleReload = hooks.reloadTabs([{ label: "Old Users", url: USERS_URL }]);
-			const freshReload = hooks.reloadTabs([{ label: "New Users", url: FLOWS_URL }]);
+			const staleReload = hooks.reloadTabs([{
+				label: "Old Users",
+				url: USERS_URL,
+			}]);
+			const freshReload = hooks.reloadTabs([{
+				label: "New Users",
+				url: FLOWS_URL,
+			}]);
 			await staleReload;
 			staleReloadDeferred.resolve();
 			await freshReload;

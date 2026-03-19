@@ -1,7 +1,4 @@
-import {
-	assertEquals,
-	assertRejects,
-} from "@std/testing/asserts";
+import { assertEquals, assertRejects } from "@std/testing/asserts";
 import { loadIsolatedModule } from "./load-isolated-module.ts";
 
 type BrowserLike = {
@@ -46,7 +43,10 @@ type ConstantsDependencies = {
  * @param {string} homepageUrl Homepage URL returned by `getManifest`.
  * @return {BrowserLike} Browser stub.
  */
-function createBrowser(label: string, homepageUrl = "https://github.com/acme/repo") {
+function createBrowser(
+	label: string,
+	homepageUrl = "https://github.com/acme/repo",
+) {
 	return {
 		i18n: {
 			getMessage: (key: string) => `${label}:${key}`,
@@ -68,7 +68,10 @@ function createBrowser(label: string, homepageUrl = "https://github.com/acme/rep
  * @param {string} homepageUrl Homepage URL returned by the chosen browser manifest.
  * @return {Promise<ConstantsModule>} Imported constants module.
  */
-function loadConstants(userAgent: string, homepageUrl = "https://github.com/acme/repo") {
+function loadConstants(
+	userAgent: string,
+	homepageUrl = "https://github.com/acme/repo",
+) {
 	return loadIsolatedModule<ConstantsModule, ConstantsDependencies>({
 		modulePath: new URL("../src/constants.js", import.meta.url),
 		dependencies: {
@@ -89,8 +92,13 @@ Deno.test("constants prefers the browser API for Firefox and exposes manifest da
 		assertEquals(module.ISCHROME, false);
 		assertEquals(module.EXTENSION_LABEL, "browser:extension_label");
 		assertEquals(module.EXTENSION_VERSION, "1.2.3");
-		assertEquals(module.EXTENSION_GITHUB_LINK, "https://github.com/acme/repo");
-		assertEquals(module.EXTENSION_OPTIONAL_HOST_PERM, ["https://*.example.com/*"]);
+		assertEquals(
+			module.EXTENSION_GITHUB_LINK,
+			"https://github.com/acme/repo",
+		);
+		assertEquals(module.EXTENSION_OPTIONAL_HOST_PERM, [
+			"https://*.example.com/*",
+		]);
 		assertEquals(module.CONTEXT_MENU_PATTERNS, [
 			"https://*.my.salesforce-setup.com/lightning/setup/*",
 			"https://*.lightning.force.com/lightning/setup/*",
@@ -109,14 +117,19 @@ Deno.test("constants detect Edge and still use the chrome API", async () => {
 		assertEquals(module.ISEDGE, true);
 		assertEquals(module.ISCHROME, true);
 		assertEquals(module.EXTENSION_LABEL, "chrome:extension_label");
-		assertEquals(module.BROWSER.i18n.getMessage("extension_label"), "chrome:extension_label");
+		assertEquals(
+			module.BROWSER.i18n.getMessage("extension_label"),
+			"chrome:extension_label",
+		);
 	} finally {
 		fixture.cleanup();
 	}
 });
 
 Deno.test("constants detect Chrome", async () => {
-	const fixture = await loadConstants("Mozilla/5.0 Chrome/120.0 Safari/537.36");
+	const fixture = await loadConstants(
+		"Mozilla/5.0 Chrome/120.0 Safari/537.36",
+	);
 	try {
 		const module = fixture.module;
 
@@ -129,7 +142,9 @@ Deno.test("constants detect Chrome", async () => {
 });
 
 Deno.test("constants detect Safari", async () => {
-	const fixture = await loadConstants("Mozilla/5.0 Version/17.0 Safari/605.1.15");
+	const fixture = await loadConstants(
+		"Mozilla/5.0 Version/17.0 Safari/605.1.15",
+	);
 	try {
 		const module = fixture.module;
 

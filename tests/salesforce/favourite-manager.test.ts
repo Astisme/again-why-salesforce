@@ -1,8 +1,4 @@
-import {
-	assert,
-	assertEquals,
-	assertThrows,
-} from "@std/testing/asserts";
+import { assert, assertEquals, assertThrows } from "@std/testing/asserts";
 import { installMockDom } from "../happydom.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
@@ -65,7 +61,9 @@ type SettingsEntry = {
 
 type TabList = {
 	existsWithOrWithoutOrg: (tab: { org: string; url: string }) => boolean;
-	getSingleTabByData: (tab: { org: string; url: string }) => FavouriteActionPayload;
+	getSingleTabByData: (
+		tab: { org: string; url: string },
+	) => FavouriteActionPayload;
 };
 
 type FavouriteManagerDependencies = {
@@ -176,7 +174,8 @@ function createHeaderSelector(innerElement: string) {
 async function loadFavouriteManagerFixture(
 	{
 		commands = [],
-		currentHref = "https://acme.lightning.force.com/lightning/setup/Users/home",
+		currentHref =
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
 		existsWithOrWithoutOrg = false,
 		getSingleTabByDataError = null,
 		headerPresent = true,
@@ -270,29 +269,31 @@ async function loadFavouriteManagerFixture(
 				extractOrgName: (href) => `org:${href}`,
 				minifyURL: (_href) => minifiedUrl,
 			},
-			ensureAllTabsAvailability: () => Promise.resolve({
-				existsWithOrWithoutOrg: (tab) => {
-					existsCalls.push(tab);
-					return existsWithOrWithoutOrg;
-				},
-				getSingleTabByData: (tab) => {
-					getSingleTabByDataCalls.push(tab);
-					if (getSingleTabByDataError != null) {
-						throw getSingleTabByDataError;
-					}
-					return {
-						label: "Saved Tab",
-						org: tab.org,
-						url: tab.url,
-					};
-				},
-			}),
-			ensureTranslatorAvailability: () => Promise.resolve({
-				translate: (key) => {
-					translationCalls.push(key);
-					return Promise.resolve(`translated:${key}`);
-				},
-			}),
+			ensureAllTabsAvailability: () =>
+				Promise.resolve({
+					existsWithOrWithoutOrg: (tab) => {
+						existsCalls.push(tab);
+						return existsWithOrWithoutOrg;
+					},
+					getSingleTabByData: (tab) => {
+						getSingleTabByDataCalls.push(tab);
+						if (getSingleTabByDataError != null) {
+							throw getSingleTabByDataError;
+						}
+						return {
+							label: "Saved Tab",
+							org: tab.org,
+							url: tab.url,
+						};
+					},
+				}),
+			ensureTranslatorAvailability: () =>
+				Promise.resolve({
+					translate: (key) => {
+						translationCalls.push(key);
+						return Promise.resolve(`translated:${key}`);
+					},
+				}),
 			getCurrentHref: () => currentHref,
 			getIsCurrentlyOnSavedTab: () => isCurrentlyOnSavedTab,
 			getSettings: (_keys) => Promise.resolve(settings),
@@ -398,8 +399,12 @@ Deno.test("favourite-manager creates regular and slashed star svgs", async () =>
 			{ alt: "label", id: "star-id" },
 			true,
 		);
-		const regularPath = regularStar.querySelector("path") as StyledElement | null;
-		const slashedPath = slashedStar.querySelector("path") as StyledElement | null;
+		const regularPath = regularStar.querySelector("path") as
+			| StyledElement
+			| null;
+		const slashedPath = slashedStar.querySelector("path") as
+			| StyledElement
+			| null;
 
 		assertEquals(regularStar.getAttribute("viewBox"), "0 0 24 24");
 		assertEquals(regularStar.getAttribute("id"), null);
@@ -443,7 +448,9 @@ Deno.test("favourite-manager generates the button markup with shortcut labels", 
 		const button = await fixture.module.generateFavouriteButton();
 		const assistiveText = button.querySelector(".slds-assistive-text");
 		const star = button.querySelector(`#${fixture.module.STAR_ID}`);
-		const slashedStar = button.querySelector(`#${fixture.module.SLASHED_STAR_ID}`);
+		const slashedStar = button.querySelector(
+			`#${fixture.module.SLASHED_STAR_ID}`,
+		);
 
 		assertEquals(fixture.sendMessageCalls, [{
 			commands: ["cmd_save_as_tab", "cmd_remove_tab"],
@@ -464,7 +471,10 @@ Deno.test("favourite-manager generates the button markup with shortcut labels", 
 			button.dataset.removeAssistiveText,
 			"translated:remove_tab (Ctrl+R)",
 		);
-		assertEquals(assistiveText?.textContent, "translated:save_tab (Ctrl+S)");
+		assertEquals(
+			assistiveText?.textContent,
+			"translated:save_tab (Ctrl+S)",
+		);
 		assert(star != null);
 		assert(slashedStar != null);
 		assert(slashedStar.classList.contains("hidden"));
@@ -486,7 +496,10 @@ Deno.test("favourite-manager omits shortcut suffixes when commands are unavailab
 		const button = await fixture.module.generateFavouriteButton();
 
 		assertEquals(button.dataset.saveAssistiveText, "translated:save_tab");
-		assertEquals(button.dataset.removeAssistiveText, "translated:remove_tab");
+		assertEquals(
+			button.dataset.removeAssistiveText,
+			"translated:remove_tab",
+		);
 	} finally {
 		fixture.cleanup();
 	}
@@ -523,7 +536,9 @@ Deno.test("favourite-manager toggles button icons and assistive text", async () 
 	try {
 		const button = await appendGeneratedButton(fixture, fixture.header);
 		const star = button.querySelector(`#${fixture.module.STAR_ID}`);
-		const slashedStar = button.querySelector(`#${fixture.module.SLASHED_STAR_ID}`);
+		const slashedStar = button.querySelector(
+			`#${fixture.module.SLASHED_STAR_ID}`,
+		);
 
 		fixture.module.toggleFavouriteButton(null, button);
 		assert(!star?.classList.contains("hidden"));
@@ -555,7 +570,9 @@ Deno.test("favourite-manager tolerates missing favourite buttons and assistive t
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
-		const star = fixture.module.createStarSvg({ id: fixture.module.STAR_ID }, false);
+		const star = fixture.module.createStarSvg({
+			id: fixture.module.STAR_ID,
+		}, false);
 		const slashedStar = fixture.module.createStarSvg(
 			{ id: fixture.module.SLASHED_STAR_ID },
 			true,
@@ -746,7 +763,9 @@ Deno.test("favourite-manager schedules retries for missing headers and logs hard
 
 		assertEquals(result, 1);
 		assertEquals(failFixture.translationCalls, ["error_no_headers"]);
-		assertEquals(failFixture.errorCalls, ["AWSF - translated:error_no_headers"]);
+		assertEquals(failFixture.errorCalls, [
+			"AWSF - translated:error_no_headers",
+		]);
 		assertEquals(failFixture.timeoutCalls.length, 1);
 		assertEquals(failFixture.timeoutCalls[0].delay, 5000);
 	} finally {
@@ -803,9 +822,10 @@ Deno.test("favourite-manager refreshes an existing button from the current saved
 			"translated:remove_tab",
 		);
 		assert(
-			button.querySelector(`#${fixture.module.STAR_ID}`)?.classList.contains(
-				"hidden",
-			),
+			button.querySelector(`#${fixture.module.STAR_ID}`)?.classList
+				.contains(
+					"hidden",
+				),
 		);
 	} finally {
 		fixture.cleanup();
@@ -843,7 +863,10 @@ Deno.test("favourite-manager page actions show info toasts or click the matching
 	const fixture = await loadFavouriteManagerFixture();
 
 	try {
-		const uselessSaveButton = await appendGeneratedButton(fixture, fixture.header);
+		const uselessSaveButton = await appendGeneratedButton(
+			fixture,
+			fixture.header,
+		);
 		const uselessSaveStar = uselessSaveButton.querySelector(
 			`#${fixture.module.STAR_ID}`,
 		);

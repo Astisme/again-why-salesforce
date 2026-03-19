@@ -42,8 +42,8 @@ type AsyncFunctionConstructor = new (
 	source: string,
 ) => EvaluatedModuleExecutor;
 
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor as
-	AsyncFunctionConstructor;
+const AsyncFunction = Object.getPrototypeOf(async function () {})
+	.constructor as AsyncFunctionConstructor;
 
 /**
  * Parses a static import clause and returns the local binding names that need values injected.
@@ -59,7 +59,8 @@ function getLocalImportNames(clause: string) {
 	}
 	if (trimmedClause.includes("{")) {
 		const braceIndex = trimmedClause.indexOf("{");
-		const defaultPart = trimmedClause.slice(0, braceIndex).replace(/,$/, "").trim();
+		const defaultPart = trimmedClause.slice(0, braceIndex).replace(/,$/, "")
+			.trim();
 		if (defaultPart !== "") {
 			localNames.push(defaultPart);
 		}
@@ -226,8 +227,7 @@ function createInlineSourceMapUrl(
 	const mappings = lineMap.map((originalLine) => {
 		const sourceIndex = 0;
 		const originalColumn = 0;
-		const segment =
-			encodeBase64Vlq(0) +
+		const segment = encodeBase64Vlq(0) +
 			encodeBase64Vlq(sourceIndex - previousSourceIndex) +
 			encodeBase64Vlq((originalLine - 1) - previousOriginalLine) +
 			encodeBase64Vlq(originalColumn - previousOriginalColumn);
@@ -274,7 +274,11 @@ function installGlobals(globals: Record<string, unknown>) {
 	return () => {
 		for (const [name, previousState] of previousGlobals.entries()) {
 			if (previousState.exists && previousState.descriptor != null) {
-				Object.defineProperty(globalThis, name, previousState.descriptor);
+				Object.defineProperty(
+					globalThis,
+					name,
+					previousState.descriptor,
+				);
 				continue;
 			}
 			delete (globalThis as Record<string, unknown>)[name];
@@ -350,7 +354,9 @@ export async function loadIsolatedModule<
 	LoadIsolatedModuleResult<TModule>
 > {
 	const rawSource = await Deno.readTextFile(modulePath);
-	const source = transformSource == null ? rawSource : transformSource(rawSource);
+	const source = transformSource == null
+		? rawSource
+		: transformSource(rawSource);
 	const dependencyMap = dependencies ?? {} as TDependencies;
 	const { importedNames, source: sourceWithoutImports } = replaceImports(
 		source,
@@ -386,7 +392,8 @@ export async function loadIsolatedModule<
 			inlineSourceMapUrl,
 		);
 		await evaluateModuleSource(moduleSource);
-		const module = (globalThis as Record<string, unknown>)[exportKey] as TModule;
+		const module =
+			(globalThis as Record<string, unknown>)[exportKey] as TModule;
 		return {
 			cleanup: () => {
 				delete (globalThis as Record<string, unknown>)[exportKey];

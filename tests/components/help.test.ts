@@ -1,7 +1,4 @@
-import {
-	assertEquals,
-	assertExists,
-} from "@std/testing/asserts";
+import { assertEquals, assertExists } from "@std/testing/asserts";
 import { MockElement } from "../action/mock-dom.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
@@ -59,8 +56,14 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 	const injectCalls: { id: string; link: string }[] = [];
 	let translateCalls = 0;
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, HelpDependencies>({
-		modulePath: new URL("../../src/components/help/help.js", import.meta.url),
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		HelpDependencies
+	>({
+		modulePath: new URL(
+			"../../src/components/help/help.js",
+			import.meta.url,
+		),
 		dependencies: {
 			BROWSER: {
 				runtime: {
@@ -68,12 +71,13 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 				},
 			},
 			HIDDEN_CLASS: "hidden",
-			ensureTranslatorAvailability: () => Promise.resolve({
-				translate: () => {
-					translateCalls++;
-					return Promise.resolve("Help");
-				},
-			}),
+			ensureTranslatorAvailability: () =>
+				Promise.resolve({
+					translate: () => {
+						translateCalls++;
+						return Promise.resolve("Help");
+					},
+				}),
 			generateHelpWith_i_popup: () => ({
 				anchor: new MockElement("a"),
 				linkTip: new MockElement("span"),
@@ -104,7 +108,9 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 
 	try {
 		assertEquals(registeredName, "help-aws");
-		const HelpConstructor = registeredConstructor as HelpComponentClass | null;
+		const HelpConstructor = registeredConstructor as
+			| HelpComponentClass
+			| null;
 		assertExists(HelpConstructor);
 		assertEquals(HelpConstructor.observedAttributes, [
 			"href",
@@ -139,7 +145,11 @@ Deno.test("help component syncs link attributes and accessibility text in isolat
 		component.removeAttribute("href");
 		component.removeAttribute("target");
 		component.removeAttribute("rel");
-		component.attributeChangedCallback(null, "https://docs.example.com/help", null);
+		component.attributeChangedCallback(
+			null,
+			"https://docs.example.com/help",
+			null,
+		);
 
 		assertEquals(component._anchor.href, "#");
 		assertEquals(component._anchor.getAttribute("target"), null);

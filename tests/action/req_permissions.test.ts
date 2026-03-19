@@ -1,6 +1,4 @@
-import {
-	assertEquals,
-} from "@std/testing/asserts";
+import { assertEquals } from "@std/testing/asserts";
 import { createMockWindow, MockDocument, MockElement } from "./mock-dom.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
@@ -79,9 +77,17 @@ async function loadPermissionsModule(url: string) {
 	const hostPermissions = appendElement(document, "div", "host_permissions");
 	const download = appendElement(document, "div", "download");
 	const noPermissions = appendElement(document, "a", "no-permissions");
-	const allowPermissions = appendElement(document, "button", "allow-permissions");
+	const allowPermissions = appendElement(
+		document,
+		"button",
+		"allow-permissions",
+	);
 	const rememberSkip = appendElement(document, "input", "remember-skip");
-	const noPermissionsDown = appendElement(document, "a", "no-permissions-down");
+	const noPermissionsDown = appendElement(
+		document,
+		"a",
+		"no-permissions-down",
+	);
 	const allowPermissionsDown = appendElement(
 		document,
 		"button",
@@ -97,7 +103,10 @@ async function loadPermissionsModule(url: string) {
 	const timeoutCalls: number[] = [];
 	const popupUpdates: { popup: string }[] = [];
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, PermissionDependencies>({
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		PermissionDependencies
+	>({
 		modulePath: new URL(
 			"../../src/action/req_permissions/req_permissions.js",
 			import.meta.url,
@@ -203,7 +212,10 @@ Deno.test("req_permissions handles the download-permission flow in isolation", a
 
 	try {
 		assertEquals(fixture.counters.translatorCalls, 1);
-		assertEquals(fixture.hostPermissions.classList.contains("hidden"), true);
+		assertEquals(
+			fixture.hostPermissions.classList.contains("hidden"),
+			true,
+		);
 		assertEquals(fixture.download.classList.contains("hidden"), false);
 
 		fixture.noPermissionsDown.click();

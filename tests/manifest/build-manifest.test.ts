@@ -83,7 +83,10 @@ async function runBuild(browserName: string) {
 	};
 
 	try {
-		const { cleanup } = await loadIsolatedModule<Record<string, never>, BuildManifestDependencies>({
+		const { cleanup } = await loadIsolatedModule<
+			Record<string, never>,
+			BuildManifestDependencies
+		>({
 			modulePath: new URL(
 				"../../src/manifest/build-manifest.mjs",
 				import.meta.url,
@@ -109,14 +112,21 @@ Deno.test("build-manifest keeps Chromium-only command shortcuts and writes the f
 	assertEquals(thrown, null);
 	assertEquals(writes.length, 1);
 	assertEquals(writes[0].path, "./src/manifest.json");
-	assertEquals((manifest.background as Record<string, unknown>).scripts, undefined);
+	assertEquals(
+		(manifest.background as Record<string, unknown>).scripts,
+		undefined,
+	);
 	assertEquals(manifest.browser_specific_settings, undefined);
 	assertExists(
-		((manifest.commands as Record<string, Record<string, unknown>>)["cmd-save-as-tab"])
+		(manifest.commands as Record<string, Record<string, unknown>>)[
+			"cmd-save-as-tab"
+		]
 			.suggested_key,
 	);
 	assertEquals(
-		((manifest.commands as Record<string, Record<string, unknown>>)["cmd-export-all"])
+		(manifest.commands as Record<string, Record<string, unknown>>)[
+			"cmd-export-all"
+		]
 			.suggested_key,
 		undefined,
 	);
@@ -133,7 +143,7 @@ Deno.test("build-manifest removes Firefox-incompatible fields", async () => {
 		undefined,
 	);
 	assertEquals(
-		((manifest.browser_specific_settings as Record<string, unknown>).safari),
+		(manifest.browser_specific_settings as Record<string, unknown>).safari,
 		undefined,
 	);
 });
@@ -144,7 +154,10 @@ Deno.test("build-manifest removes Safari-incompatible permissions and background
 	assertEquals(thrown, null);
 	assertEquals(writes.length, 1);
 	assertEquals(manifest.minimum_chrome_version, undefined);
-	assertEquals((manifest.background as Record<string, unknown>).type, undefined);
+	assertEquals(
+		(manifest.background as Record<string, unknown>).type,
+		undefined,
+	);
 	assertEquals(
 		(manifest.background as Record<string, unknown>).scripts,
 		undefined,
@@ -153,7 +166,7 @@ Deno.test("build-manifest removes Safari-incompatible permissions and background
 	assertEquals(manifest.permissions, ["storage"]);
 	assertEquals(manifest.optional_permissions, ["cookies"]);
 	assertEquals(
-		((manifest.browser_specific_settings as Record<string, unknown>).gecko),
+		(manifest.browser_specific_settings as Record<string, unknown>).gecko,
 		undefined,
 	);
 });

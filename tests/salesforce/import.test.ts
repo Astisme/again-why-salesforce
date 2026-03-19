@@ -6,13 +6,17 @@ type ImportModule = {
 	__getInputModalParent: () => MockElement | null | undefined;
 	__setInputModalParent: (value: MockElement | null) => void;
 	createImportModal: () => Promise<void>;
-	filterForUnexpectedTabKeys: (tabs?: Record<string, unknown>[] | null) => unknown[];
+	filterForUnexpectedTabKeys: (
+		tabs?: Record<string, unknown>[] | null,
+	) => unknown[];
 	generateSldsImport: () => Promise<{
 		closeButton: MockElement;
 		inputContainer: MockElement;
 		saveButton: MockElement;
 	}>;
-	getTabsFromJSON: (jsonWithTabs?: Record<string, unknown> | null) => unknown[];
+	getTabsFromJSON: (
+		jsonWithTabs?: Record<string, unknown> | null,
+	) => unknown[];
 	makeValidTabs: (
 		tabs?: Record<string, unknown>[] | null,
 		mapping?: { label?: string; org?: string; url?: string },
@@ -61,7 +65,10 @@ type ImportDependencies = {
 		getElementById: (id: string) => MockElement | null;
 	};
 	ensureAllTabsAvailability: () => Promise<{
-		importTabs: (json: string, config: Record<string, boolean>) => Promise<number>;
+		importTabs: (
+			json: string,
+			config: Record<string, boolean>,
+		) => Promise<number>;
 	}>;
 	ensureTranslatorAvailability: () => Promise<{
 		translate: (message: string) => Promise<string>;
@@ -142,7 +149,9 @@ class MockTabContainer {
 	 *
 	 * @param {{ pinned?: number; tabs?: unknown[]; }} [options={}] Initial state.
 	 */
-	constructor({ pinned = 0, tabs = [] }: { pinned?: number; tabs?: unknown[] } = {}) {
+	constructor(
+		{ pinned = 0, tabs = [] }: { pinned?: number; tabs?: unknown[] } = {},
+	) {
 		this.pinned = pinned;
 		this.#tabs = [...tabs];
 	}
@@ -153,7 +162,9 @@ class MockTabContainer {
 	 * @param {{ pinned?: number; tabs?: unknown[]; }} [options={}] Initial state.
 	 * @return {MockTabContainer} Container instance.
 	 */
-	static getThrowawayInstance(options: { pinned?: number; tabs?: unknown[] } = {}) {
+	static getThrowawayInstance(
+		options: { pinned?: number; tabs?: unknown[] } = {},
+	) {
 		return new MockTabContainer(options);
 	}
 
@@ -270,7 +281,8 @@ async function loadImportModule({
 	let modalPresent = false;
 	let modalBuildCount = 0;
 	let clearedInputModalParent = false;
-	let setInputModalParent: ((value: MockElement | null) => void) | null = null;
+	let setInputModalParent: ((value: MockElement | null) => void) | null =
+		null;
 	let setupImportPresent = false;
 
 	saveButton.remove = () => {
@@ -316,7 +328,10 @@ async function loadImportModule({
 		fileCheckboxes[id] = checkbox;
 	}
 
-	const { cleanup, module } = await loadIsolatedModule<ImportModule, ImportDependencies>({
+	const { cleanup, module } = await loadIsolatedModule<
+		ImportModule,
+		ImportDependencies
+	>({
 		modulePath: new URL("../../src/salesforce/import.js", import.meta.url),
 		additionalExports: [
 			"__setInputModalParent",
@@ -342,7 +357,9 @@ function __getInputModalParent() { return inputModalParent; }`,
 			Tab: {
 				hasUnexpectedKeys: (tab) =>
 					Object.keys(tab).some((key) =>
-						!["label", "url", "org", "tabTitle", "title"].includes(key)
+						!["label", "url", "org", "tabTitle", "title"].includes(
+							key,
+						)
 					),
 			},
 			TabContainer: MockTabContainer,
@@ -356,20 +373,25 @@ function __getInputModalParent() { return inputModalParent; }`,
 						return closeButton;
 					}
 					if (id === "awsf-modal") {
-						return modalPresent || hasExistingModal ? modalParent : null;
+						return modalPresent || hasExistingModal
+							? modalParent
+							: null;
 					}
 					return null;
 				},
 			},
-			ensureAllTabsAvailability: () => Promise.resolve({
-				importTabs: (json, config) => {
-					importCalls.push({ config, json });
-					return Promise.resolve(importCount);
-				},
-			}),
-			ensureTranslatorAvailability: () => Promise.resolve({
-				translate: (message) => Promise.resolve(`translated:${message}`),
-			}),
+			ensureAllTabsAvailability: () =>
+				Promise.resolve({
+					importTabs: (json, config) => {
+						importCalls.push({ config, json });
+						return Promise.resolve(importCount);
+					},
+				}),
+			ensureTranslatorAvailability: () =>
+				Promise.resolve({
+					translate: (message) =>
+						Promise.resolve(`translated:${message}`),
+				}),
 			generateCheckboxWithLabel: (id, _label, checked) => {
 				const existingCheckbox = fileCheckboxes[id];
 				if (existingCheckbox != null) {
@@ -381,32 +403,37 @@ function __getInputModalParent() { return inputModalParent; }`,
 				fileCheckboxes[id] = checkbox;
 				return Promise.resolve(checkbox);
 			},
-			generateSection: () => Promise.resolve({
-				divParent: new MockElement("div"),
-				section: new MockElement("section"),
-			}),
-			generateSldsFileInput: () => Promise.resolve({
-				fileInputWrapper,
-				inputContainer,
-			}),
-			generateSldsModal: () => Promise.resolve({
-				...(generateModalError == null ? {} : (() => {
-					throw generateModalError;
-				})()),
-				article,
-				closeButton,
-				modalParent: (() => {
-					const currentBuildCount = modalBuildCount;
-					modalBuildCount += 1;
-					modalPresent = true;
-					return missingModalParentOnce && currentBuildCount === 0
-						? null as unknown as MockElement & {
-							querySelector: (selector: string) => MockElement | null;
-						}
-						: modalParent;
-				})(),
-				saveButton,
-			}),
+			generateSection: () =>
+				Promise.resolve({
+					divParent: new MockElement("div"),
+					section: new MockElement("section"),
+				}),
+			generateSldsFileInput: () =>
+				Promise.resolve({
+					fileInputWrapper,
+					inputContainer,
+				}),
+			generateSldsModal: () =>
+				Promise.resolve({
+					...(generateModalError == null ? {} : (() => {
+						throw generateModalError;
+					})()),
+					article,
+					closeButton,
+					modalParent: (() => {
+						const currentBuildCount = modalBuildCount;
+						modalBuildCount += 1;
+						modalPresent = true;
+						return missingModalParentOnce && currentBuildCount === 0
+							? null as unknown as MockElement & {
+								querySelector: (
+									selector: string,
+								) => MockElement | null;
+							}
+							: modalParent;
+					})(),
+					saveButton,
+				}),
 			generateSldsModalWithTabList: (_tabs, options) => {
 				modalListCalls.push(options);
 				return Promise.resolve({
@@ -421,7 +448,8 @@ function __getInputModalParent() { return inputModalParent; }`,
 			},
 			getModalHanger: () => modalHanger,
 			getSetupTabUl: () => ({
-				querySelector: () => setupImportPresent ? new MockElement("div") : null,
+				querySelector: () =>
+					setupImportPresent ? new MockElement("div") : null,
 			}),
 			injectStyle: () => new MockElement("style"),
 			showToast: (message, status) => {
@@ -501,7 +529,7 @@ Deno.test("import blocks opening when another modal element is already present",
 
 Deno.test("import shows the file modal and imports valid JSON files directly", async () => {
 	const fixture = await loadImportModule({
-	checkboxState: {
+		checkboxState: {
 			"again-why-salesforce-import-metadata": true,
 		},
 		importCount: 3,
@@ -670,7 +698,11 @@ Deno.test("import maps supported external formats and imports the selected tabs"
 					createFile(
 						"application/json",
 						JSON.stringify({
-							bookmarks: [{ title: "Mapped", url: "/mapped", org: "org" }],
+							bookmarks: [{
+								title: "Mapped",
+								url: "/mapped",
+								org: "org",
+							}],
 							pinnedTabsNo: 1,
 						}),
 					),
@@ -715,7 +747,12 @@ Deno.test("import maps WhySalesforce tab arrays through the select flow", async 
 					createFile(
 						"application/json",
 						JSON.stringify([
-							{ tabTitle: "Mapped", url: "/mapped", org: "org", extra: true },
+							{
+								tabTitle: "Mapped",
+								url: "/mapped",
+								org: "org",
+								extra: true,
+							},
 						]),
 					),
 				],
@@ -759,7 +796,11 @@ Deno.test("import closes the open file modal before showing the tab picker", asy
 						"application/json",
 						JSON.stringify({
 							pinnedTabsNo: 1,
-							tabs: [{ label: "Mapped", url: "/mapped", org: "org" }],
+							tabs: [{
+								label: "Mapped",
+								url: "/mapped",
+								org: "org",
+							}],
 						}),
 					),
 				],
@@ -841,7 +882,12 @@ Deno.test("import maps WhySalesforce fallback tabs through getTabsFromJSON", asy
 		assertEquals(
 			fixture.module.getTabsFromJSON({
 				tabs: [
-					{ tabTitle: "Mapped", url: "/mapped", org: "org", extra: true },
+					{
+						tabTitle: "Mapped",
+						url: "/mapped",
+						org: "org",
+						extra: true,
+					},
 				],
 			}),
 			[{ label: "Mapped", url: "/mapped", org: "org" }],
@@ -904,7 +950,11 @@ Deno.test("import attaches the drop reader directly", async () => {
 				files: [
 					createFile(
 						"application/json",
-						JSON.stringify([{ label: "Drop", url: "/drop", org: "org" }]),
+						JSON.stringify([{
+							label: "Drop",
+							url: "/drop",
+							org: "org",
+						}]),
 					),
 				],
 			},
@@ -932,7 +982,11 @@ Deno.test("import reads a single file object directly and surfaces read failures
 		await fixture.module.readFile(
 			createFile(
 				"application/json",
-				JSON.stringify([{ label: "Single", url: "/single", org: "org" }]),
+				JSON.stringify([{
+					label: "Single",
+					url: "/single",
+					org: "org",
+				}]),
 			),
 		);
 		await fixture.module.readFile({
@@ -946,7 +1000,11 @@ Deno.test("import reads a single file object directly and surfaces read failures
 				preserveOtherOrg: false,
 				resetTabs: false,
 			},
-			json: JSON.stringify([{ label: "Single", url: "/single", org: "org" }]),
+			json: JSON.stringify([{
+				label: "Single",
+				url: "/single",
+				org: "org",
+			}]),
 		});
 		assertEquals(fixture.toasts.at(-1), {
 			message: ["error_import", "broken-file"],

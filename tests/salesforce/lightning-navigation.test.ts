@@ -38,13 +38,19 @@ type LightningNavigationListener = (event: {
 async function loadLightningNavigation() {
 	const errors: string[] = [];
 	const opens: { target: string; url: string }[] = [];
-	const records: { eventName: string; params: Record<string, string>[] }[] = [];
-	let listener: ((event: {
-		data: Record<string, string>;
-		source: object;
-	}) => void) | null = null;
+	const records: { eventName: string; params: Record<string, string>[] }[] =
+		[];
+	let listener:
+		| ((event: {
+			data: Record<string, string>;
+			source: object;
+		}) => void)
+		| null = null;
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, LightningNavigationDependencies>({
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		LightningNavigationDependencies
+	>({
 		modulePath: new URL(
 			"../../src/salesforce/lightning-navigation.js",
 			import.meta.url,
@@ -52,7 +58,10 @@ async function loadLightningNavigation() {
 		dependencies: {
 			$A: {
 				get: (eventName) => {
-					const record = { eventName, params: [] as Record<string, string>[] };
+					const record = {
+						eventName,
+						params: [] as Record<string, string>[],
+					};
 					records.push(record);
 					return {
 						fire: () => {},
@@ -119,7 +128,8 @@ Deno.test("lightning-navigation handles record and URL navigation messages", asy
 });
 
 Deno.test("lightning-navigation ignores foreign sources and reports invalid types", async () => {
-	const { cleanup, errors, listener, records } = await loadLightningNavigation();
+	const { cleanup, errors, listener, records } =
+		await loadLightningNavigation();
 	const registeredListener = listener as LightningNavigationListener | null;
 
 	try {
@@ -160,7 +170,10 @@ Deno.test("lightning-navigation falls back to open when the Salesforce event API
 	const opens: { target: string; url: string }[] = [];
 	let listener: LightningNavigationListener | null = null;
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, LightningNavigationDependencies>({
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		LightningNavigationDependencies
+	>({
 		modulePath: new URL(
 			"../../src/salesforce/lightning-navigation.js",
 			import.meta.url,
@@ -186,7 +199,9 @@ Deno.test("lightning-navigation falls back to open when the Salesforce event API
 	});
 
 	try {
-		const registeredListener = listener as LightningNavigationListener | null;
+		const registeredListener = listener as
+			| LightningNavigationListener
+			| null;
 		assertExists(registeredListener);
 		registeredListener({
 			data: {

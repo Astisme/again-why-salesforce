@@ -210,7 +210,9 @@ type TutorialModule = {
 		isActive: boolean;
 		messageBox: HTMLElement;
 		nextStep: () => Promise<void> | void;
-		persistTutorialProgress: (stepNo?: number | string) => Promise<void> | void;
+		persistTutorialProgress: (
+			stepNo?: number | string,
+		) => Promise<void> | void;
 		retryCount: number;
 		segments: HTMLElement;
 		showConfirm: () => void;
@@ -709,8 +711,8 @@ function createHarness(options: {
 					closeButton,
 				};
 			},
-				generateTutorialElements: () => {
-					const overlay = globalThis.document.createElement("div");
+			generateTutorialElements: () => {
+				const overlay = globalThis.document.createElement("div");
 				const messageBox = globalThis.document.createElement("div");
 				messageBox.className = "tut-v7";
 				const segments = globalThis.document.createElement("div");
@@ -734,19 +736,19 @@ function createHarness(options: {
 					confirmBtn,
 					closeBtn,
 					btnsParent,
-					};
-					records.latestUi = ui;
-					return Promise.resolve(ui);
-				},
+				};
+				records.latestUi = ui;
+				return Promise.resolve(ui);
 			},
-			tabContainer: {
-				ensureAllTabsAvailability: () => {
-					const allTabs = state.savedTabUrls.map((url) => ({ url }));
-					(allTabs as Array<{ url: string }> & Record<string, number>)[
-						"pinnedTabsNo"
-					] = state.pinnedTabsNo;
-					return Promise.resolve(allTabs);
-				},
+		},
+		tabContainer: {
+			ensureAllTabsAvailability: () => {
+				const allTabs = state.savedTabUrls.map((url) => ({ url }));
+				(allTabs as Array<{ url: string }> & Record<string, number>)[
+					"pinnedTabsNo"
+				] = state.pinnedTabsNo;
+				return Promise.resolve(allTabs);
+			},
 			TabContainer: {
 				keyPinnedTabsNo: "pinnedTabsNo",
 			},
@@ -1339,12 +1341,13 @@ Deno.test("tutorial initSteps covers fallback redirect elements and fake-element
 			"ObjectManager/Account/FieldsAndRelationships/view",
 		];
 		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
-		const fallbackTitle = "ObjectManager/Account/FieldsAndRelationships/view";
+		const fallbackTitle =
+			"ObjectManager/Account/FieldsAndRelationships/view";
 		const originalQuerySelector = harness.setupTabUl.querySelector.bind(
 			harness.setupTabUl,
 		);
-		const matchingLink = harness.setupTabUl.firstElementChild?.firstElementChild as
-			HTMLAnchorElement;
+		const matchingLink = harness.setupTabUl.firstElementChild
+			?.firstElementChild as HTMLAnchorElement;
 		let selectorCalls = 0;
 		harness.setupTabUl.querySelector = ((selector: string) => {
 			selectorCalls++;
@@ -1387,7 +1390,10 @@ Deno.test("tutorial initSteps covers fallback redirect elements and fake-element
 		harness.navigateTo("ObjectManager/Case/FieldsAndRelationships/view");
 		tutorial.currentStep = 6;
 		const generatedPinnedTab = await tutorial.steps[6]?.fakeElement?.();
-		assertEquals((generatedPinnedTab as HTMLLIElement | null)?.tagName, "LI");
+		assertEquals(
+			(generatedPinnedTab as HTMLLIElement | null)?.tagName,
+			"LI",
+		);
 
 		tutorial.currentStep = 7;
 		const generatedPinnedLink = await tutorial.steps[7]?.fakeElement?.();
@@ -1421,7 +1427,8 @@ Deno.test("tutorial initSteps covers fallback redirect elements and fake-element
 Deno.test("tutorial fake favourite lookup can return undefined when no visible star exists", async () => {
 	const harness = createHarness();
 	try {
-		harness.deps.favouriteManager.showFavouriteButton = () => Promise.resolve();
+		harness.deps.favouriteManager.showFavouriteButton = () =>
+			Promise.resolve();
 		const tutorialModule = await harness.load();
 		const tutorial = new tutorialModule.Tutorial();
 
@@ -1574,7 +1581,10 @@ Deno.test("tutorial start branches cover failed initialization, invalid start st
 		const failedStartTutorial = new tutorialModule.Tutorial();
 		failedStartTutorial.initSteps = () => Promise.resolve(false);
 		await failedStartTutorial.start();
-		assertEquals(errorCalls.includes("error_tutorial_not_initialized"), true);
+		assertEquals(
+			errorCalls.includes("error_tutorial_not_initialized"),
+			true,
+		);
 
 		const invalidStartTutorial = new tutorialModule.Tutorial();
 		invalidStartTutorial.steps = [{
@@ -1605,9 +1615,13 @@ Deno.test("tutorial start branches cover failed initialization, invalid start st
 			true,
 		);
 
-		tutorialModule.Tutorial.prototype.initSteps = () => Promise.resolve(false);
+		tutorialModule.Tutorial.prototype.initSteps = () =>
+			Promise.resolve(false);
 		await tutorialModule.checkTutorial();
-		assertEquals(errorCalls.includes("error_tutorial_not_initialized"), true);
+		assertEquals(
+			errorCalls.includes("error_tutorial_not_initialized"),
+			true,
+		);
 	} finally {
 		console.error = originalConsoleError;
 		await flush();

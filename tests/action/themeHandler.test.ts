@@ -1,7 +1,4 @@
-import {
-	assertEquals,
-	assertStrictEquals,
-} from "@std/testing/asserts";
+import { assertEquals, assertStrictEquals } from "@std/testing/asserts";
 import { installMockDom } from "../happydom.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 import "../mocks.ts";
@@ -138,8 +135,14 @@ async function loadThemeHandler(
 		},
 	};
 	const hasMatchMediaOverride = Object.hasOwn(overrides, "matchMedia");
-	const { cleanup, module } = await loadIsolatedModule<ThemeHandlerModule, ThemeHandlerDependencies>({
-		modulePath: new URL("../../src/action/themeHandler.js", import.meta.url),
+	const { cleanup, module } = await loadIsolatedModule<
+		ThemeHandlerModule,
+		ThemeHandlerDependencies
+	>({
+		modulePath: new URL(
+			"../../src/action/themeHandler.js",
+			import.meta.url,
+		),
 		dependencies,
 		globals: {
 			document: { documentElement },
@@ -172,10 +175,11 @@ async function loadThemeHandler(
 Deno.test("themeHandler initializes and updates theme state in isolation", async () => {
 	const storage = new MemoryStorage();
 	storage.setItem("userTheme", "dark");
-	const { cleanup, document, localStorage, module, sentMessages } = await loadThemeHandler({
-		localStorage: storage,
-		matchMedia: null,
-	});
+	const { cleanup, document, localStorage, module, sentMessages } =
+		await loadThemeHandler({
+			localStorage: storage,
+			matchMedia: null,
+		});
 	try {
 		assertEquals(
 			document.documentElement.dataset.usertheme,
@@ -207,10 +211,16 @@ Deno.test("themeHandler initializes and updates theme state in isolation", async
 });
 
 Deno.test("themeHandler attaches and detaches the system color listener", async () => {
-	const { cleanup, document, localStorage, module, mediaQueryList, sentMessages } =
-		await loadThemeHandler({
-			localStorage: new MemoryStorage(),
-		});
+	const {
+		cleanup,
+		document,
+		localStorage,
+		module,
+		mediaQueryList,
+		sentMessages,
+	} = await loadThemeHandler({
+		localStorage: new MemoryStorage(),
+	});
 	try {
 		assertStrictEquals(mediaQueryList?.listeners.length, 1);
 		assertEquals(sentMessages[0], {
@@ -293,7 +303,9 @@ Deno.test("themeHandler re-initializes both stored and default user themes", asy
 });
 
 Deno.test("themeHandler direct module coverage", async () => {
-	const dom = installMockDom("https://example.lightning.force.com/lightning/setup/");
+	const dom = installMockDom(
+		"https://example.lightning.force.com/lightning/setup/",
+	);
 	const originalMatchMedia = globalThis.matchMedia;
 	try {
 		const module = await import("/action/themeHandler.js");
@@ -313,7 +325,9 @@ Deno.test("themeHandler direct module coverage", async () => {
 
 		await module.systemColorSchemeListener(false);
 		await module.systemColorSchemeListener(false);
-		await (module.systemColorSchemeListener as (enable?: boolean | null) => Promise<void>)(null);
+		await (module.systemColorSchemeListener as (
+			enable?: boolean | null,
+		) => Promise<void>)(null);
 		await module.systemColorSchemeListener(true);
 		await module.systemColorSchemeListener(true);
 
@@ -325,12 +339,18 @@ Deno.test("themeHandler direct module coverage", async () => {
 		await module.initTheme();
 		assertEquals(document.documentElement.dataset.theme, "dark");
 
-		globalThis.matchMedia = undefined as unknown as typeof globalThis.matchMedia;
-		localStorage.setItem("userTheme", "system");
-		await module.initTheme();
-		assertEquals(document.documentElement.dataset.usertheme, "system");
-		assertStrictEquals(document.documentElement.dataset.theme, null);
-	} finally {
+		globalThis.matchMedia =
+			undefined as unknown as typeof globalThis.matchMedia;
+			localStorage.setItem("userTheme", "system");
+			await module.initTheme();
+			assertEquals(document.documentElement.dataset.usertheme, "system");
+			assertStrictEquals(document.documentElement.dataset.theme, null);
+
+			localStorage.removeItem("userTheme");
+			await module.initTheme();
+			assertEquals(document.documentElement.dataset.usertheme, "system");
+			assertStrictEquals(document.documentElement.dataset.theme, null);
+		} finally {
 		globalThis.matchMedia = originalMatchMedia;
 		localStorage.removeItem("userTheme");
 		localStorage.removeItem("usingTheme");

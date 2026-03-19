@@ -120,7 +120,9 @@ type PermissionObject = {
 type DownloadsApi = {
 	download: (details: Record<string, unknown>) => Promise<number>;
 	onChanged: {
-		addListener: (callback: (event: Record<string, unknown>) => void) => void;
+		addListener: (
+			callback: (event: Record<string, unknown>) => void,
+		) => void;
 	};
 };
 
@@ -254,9 +256,7 @@ export const mockBrowser = {
 						}
 						const requestedSettings = (settings as any[]).filter((
 							setting: any,
-						) =>
-							(message.keys as string[]).includes(setting.id)
-						);
+						) => (message.keys as string[]).includes(setting.id));
 						response = message.keys.length > 1
 							? requestedSettings
 							: requestedSettings[0];
@@ -489,7 +489,10 @@ export const mockBrowser = {
 	},
 
 	permissions: {
-		_permissions: {} as Record<"permissions" | "origins", Record<string, true>>,
+		_permissions: {} as Record<
+			"permissions" | "origins",
+			Record<string, true>
+		>,
 		request(permissionObj: PermissionObject): Promise<boolean> {
 			for (const category of ["permissions", "origins"] as const) {
 				const source = permissionObj[category];

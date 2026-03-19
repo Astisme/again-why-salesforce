@@ -1,7 +1,4 @@
-import {
-	assertEquals,
-	assertExists,
-} from "@std/testing/asserts";
+import { assertEquals, assertExists } from "@std/testing/asserts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
 type RuntimeListener = (
@@ -40,7 +37,10 @@ async function loadLogoModule() {
 	let initThemeCalls = 0;
 	const responses: null[] = [];
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, LogoDependencies>({
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		LogoDependencies
+	>({
 		modulePath: new URL("../../src/action/logo/logo.js", import.meta.url),
 		dependencies: {
 			BROWSER: {
@@ -72,7 +72,8 @@ async function loadLogoModule() {
 }
 
 Deno.test("logo initializes theme handling and reacts only to theme messages", async () => {
-	const { cleanup, html, initThemeCalls, listener, responses } = await loadLogoModule();
+	const { cleanup, html, initThemeCalls, listener, responses } =
+		await loadLogoModule();
 	const registeredListener = listener as RuntimeListener | null;
 	try {
 		assertEquals(initThemeCalls, 1);

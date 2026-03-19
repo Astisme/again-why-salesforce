@@ -56,7 +56,9 @@ function installCustomElementsRegistry(document: Document) {
 			return constructors.get(name);
 		},
 		getName(constructor: CustomElementConstructor) {
-			for (const [name, registeredConstructor] of constructors.entries()) {
+			for (
+				const [name, registeredConstructor] of constructors.entries()
+			) {
 				if (registeredConstructor === constructor) {
 					return name;
 				}
@@ -121,8 +123,9 @@ Deno.test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
 
 		await import("/components/theme-selector/theme-selector.js");
 
-		const component = document.createElement("theme-selector-aws") as
-			ThemeSelectorElement;
+		const component = document.createElement(
+			"theme-selector-aws",
+		) as ThemeSelectorElement;
 		appendThemeButtons(component);
 		document.body.append(component);
 		component.connectedCallback?.();
@@ -138,13 +141,15 @@ Deno.test("ThemeSelectorAws reuses an existing stylesheet link", async () => {
 		testLocalStorage.clear();
 		Reflect.deleteProperty(document.documentElement.dataset, "theme");
 
-		const defaultComponent = document.createElement("theme-selector-aws") as
-			ThemeSelectorElement;
-		appendThemeButtons(defaultComponent);
-		document.body.append(defaultComponent);
-		defaultComponent.connectedCallback?.();
+		const defaultComponent = document.createElement(
+			"theme-selector-aws",
+		) as ThemeSelectorElement;
+			appendThemeButtons(defaultComponent);
+			document.body.append(defaultComponent);
+			defaultComponent.connectedCallback?.();
+			document.documentElement.dataset.theme = "light";
 
-		assertEquals(defaultComponent.getCurrentTheme?.(), "light");
+			assertEquals(defaultComponent.getCurrentTheme?.(), "light");
 	} finally {
 		globalThis.localStorage = originalLocalStorage;
 		cleanup();

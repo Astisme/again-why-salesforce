@@ -34,8 +34,8 @@ type LightningLinkEvent = {
 };
 
 type ManageTabsInput =
-	Array<{ label?: string; org?: string | null; url?: string }> &
-	{ pinnedTabsNo?: number };
+	& Array<{ label?: string; org?: string | null; url?: string }>
+	& { pinnedTabsNo?: number };
 
 type GeneratorModule = {
 	_buildCssRules: (options?: {
@@ -116,7 +116,10 @@ type GeneratorModule = {
 		modalParent: HTMLElement;
 		saveButton: HTMLButtonElement;
 	};
-	createTextCell: (text?: string | null, title?: string) => HTMLTableCellElement;
+	createTextCell: (
+		text?: string | null,
+		title?: string,
+	) => HTMLTableCellElement;
 	generateCheckboxWithLabel: (
 		id: string,
 		label: string,
@@ -151,7 +154,9 @@ type GeneratorModule = {
 		inputParent: HTMLElement;
 	}>;
 	generateTableWithCheckboxes: (
-		tabs?: Array<{ label?: string | null; org?: string | null; url?: string | null }>,
+		tabs?: Array<
+			{ label?: string | null; org?: string | null; url?: string | null }
+		>,
 		headers?: Array<{
 			ariaLabel?: string;
 			classList?: string[];
@@ -195,7 +200,9 @@ type GeneratorModule = {
 		modalParent: HTMLElement;
 		saveButton: HTMLButtonElement;
 		tbody: HTMLTableSectionElement;
-		trsAndButtons: Array<{ button: HTMLButtonElement; tr: HTMLTableRowElement }>;
+		trsAndButtons: Array<
+			{ button: HTMLButtonElement; tr: HTMLTableRowElement }
+		>;
 	}>;
 	generateOpenOtherOrgModal: (options?: {
 		label?: string | null;
@@ -210,9 +217,26 @@ type GeneratorModule = {
 	}>;
 	generateRadioButtons: (
 		name: string,
-		radio0?: { checked?: boolean; id?: string | null; label?: string | null; value?: string | null },
-		radio1?: { checked?: boolean; id?: string | null; label?: string | null; value?: string | null },
-		...otherRadioDefs: Array<{ checked?: boolean; id?: string | null; label?: string | null; value?: string | null }>
+		radio0?: {
+			checked?: boolean;
+			id?: string | null;
+			label?: string | null;
+			value?: string | null;
+		},
+		radio1?: {
+			checked?: boolean;
+			id?: string | null;
+			label?: string | null;
+			value?: string | null;
+		},
+		...otherRadioDefs: Array<
+			{
+				checked?: boolean;
+				id?: string | null;
+				label?: string | null;
+				value?: string | null;
+			}
+		>
 	) => {
 		getSelectedRadioButtonValue: () => string | undefined;
 		radioGroup: HTMLDivElement;
@@ -226,7 +250,11 @@ type GeneratorModule = {
 		sponsorSvg: SVGElement;
 	};
 	generateRowTemplate: (
-		row?: { label?: string | null; org?: string | null; url?: string | null },
+		row?: {
+			label?: string | null;
+			org?: string | null;
+			url?: string | null;
+		},
 		conf?: { hide?: boolean; index?: number; isPinned?: boolean },
 	) => HTMLElement;
 	generateSection: (sectionTitle?: string | null) => Promise<{
@@ -398,7 +426,9 @@ type GeneratorDependencies = {
 type GeneratorFixture = {
 	cleanup: () => void;
 	handleClickCalls: Array<{ url: string }>;
-	injectStyleCalls: Array<{ id: string; options: { css?: string; link?: string } }>;
+	injectStyleCalls: Array<
+		{ id: string; options: { css?: string; link?: string } }
+	>;
 	module: GeneratorModule;
 	openCalls: Array<{ target: string; url: string }>;
 	redirects: string[];
@@ -443,7 +473,9 @@ async function loadGeneratorFixture({
 		};
 	}
 	if (typeof document.createElement("div").style.setProperty !== "function") {
-		const stylePrototype = Object.getPrototypeOf(document.createElement("div").style) as {
+		const stylePrototype = Object.getPrototypeOf(
+			document.createElement("div").style,
+		) as {
 			setProperty?: (name: string, value: string) => void;
 		};
 		stylePrototype.setProperty = function (name: string, value: string) {
@@ -451,7 +483,9 @@ async function loadGeneratorFixture({
 		};
 	}
 	if (typeof globalThis.Element.prototype.prepend !== "function") {
-		globalThis.Element.prototype.prepend = function (...nodes: Array<string | Node>) {
+		globalThis.Element.prototype.prepend = function (
+			...nodes: Array<string | Node>
+		) {
 			for (const node of [...nodes].reverse()) {
 				const resolvedNode = typeof node === "string"
 					? document.createElement("span")
@@ -499,7 +533,9 @@ async function loadGeneratorFixture({
 	}
 	const redirects: string[] = [];
 	const handleClickCalls: Array<{ url: string }> = [];
-	const injectStyleCalls: Array<{ id: string; options: { css?: string; link?: string } }> = [];
+	const injectStyleCalls: Array<
+		{ id: string; options: { css?: string; link?: string } }
+	> = [];
 	const openCalls: Array<{ target: string; url: string }> = [];
 	const toasts: Array<{ message: string; status?: string }> = [];
 	const translationCalls: Array<string> = [];
@@ -509,7 +545,10 @@ async function loadGeneratorFixture({
 		GeneratorModule,
 		GeneratorDependencies
 	>({
-		modulePath: new URL("../../src/salesforce/generator.js", import.meta.url),
+		modulePath: new URL(
+			"../../src/salesforce/generator.js",
+			import.meta.url,
+		),
 		additionalExports: [
 			"getRng_n_digits",
 			"_getLinkTarget",
@@ -560,7 +599,9 @@ async function loadGeneratorFixture({
 				expandURL: (url, _href) =>
 					url?.startsWith("http")
 						? url
-						: `https://acme.lightning.force.com/lightning/setup/${url ?? ""}`,
+						: `https://acme.lightning.force.com/lightning/setup/${
+							url ?? ""
+						}`,
 				minifyURL: (url) =>
 					(url ?? "").replace(
 						/^https:\/\/acme\.lightning\.force\.com\/lightning\/setup\//,
@@ -570,18 +611,25 @@ async function loadGeneratorFixture({
 			TabContainer: {
 				keyPinnedTabsNo: "pinnedTabsNo",
 			},
-			ensureAllTabsAvailability: () => Promise.resolve({
-				handleClickTabByData: (payload) => {
-					handleClickCalls.push(payload);
-				},
-			}),
-			ensureTranslatorAvailability: () => Promise.resolve({
-				translate: (key) => {
-					const joinedKey = Array.isArray(key) ? key.join(" ") : key;
-					translationCalls.push(joinedKey);
-					return Promise.resolve(translations[joinedKey] ?? `translated:${joinedKey}`);
-				},
-			}),
+			ensureAllTabsAvailability: () =>
+				Promise.resolve({
+					handleClickTabByData: (payload) => {
+						handleClickCalls.push(payload);
+					},
+				}),
+			ensureTranslatorAvailability: () =>
+				Promise.resolve({
+					translate: (key) => {
+						const joinedKey = Array.isArray(key)
+							? key.join(" ")
+							: key;
+						translationCalls.push(joinedKey);
+						return Promise.resolve(
+							translations[joinedKey] ??
+								`translated:${joinedKey}`,
+						);
+					},
+				}),
 			getCssRule: (id, value) => `${id}:${value};`,
 			getCssSelector: ({
 				isGeneric = false,
@@ -596,12 +644,17 @@ async function loadGeneratorFixture({
 			getPinnedSpecificKey: ({
 				isGeneric = false,
 				isPinned = false,
-			}) => `${isGeneric ? "generic" : "org"}-${isPinned ? "pinned" : "tabs"}`,
+			}) =>
+				`${isGeneric ? "generic" : "org"}-${
+					isPinned ? "pinned" : "tabs"
+				}`,
 			getSettings: (_keys) => Promise.resolve(settings),
 			getStyleSettings: () => Promise.resolve(styleSettings),
 			injectStyle: (id, options) => {
 				injectStyleCalls.push({ id, options });
-				const element = document.createElement(options.link != null ? "link" : "style");
+				const element = document.createElement(
+					options.link != null ? "link" : "style",
+				);
 				element.id = id;
 				if (options.css != null) {
 					element.textContent = options.css;
@@ -789,7 +842,8 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 		await redirectFixture.module.handleLightningLinkClick({
 			ctrlKey: false,
 			currentTarget: {
-				href: "https://acme.lightning.force.com/lightning/setup/Flows/home",
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Flows/home",
 				target: "",
 			},
 			metaKey: false,
@@ -815,7 +869,8 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 		await openFixture.module.handleLightningLinkClick({
 			ctrlKey: false,
 			currentTarget: {
-				href: "https://acme.lightning.force.com/lightning/setup/Profiles/home",
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Profiles/home",
 				target: "",
 			},
 			metaKey: false,
@@ -840,7 +895,8 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 		await sameHrefFixture.module.handleLightningLinkClick({
 			ctrlKey: false,
 			currentTarget: {
-				href: "https://acme.lightning.force.com/lightning/setup/Profiles/home",
+				href:
+					"https://acme.lightning.force.com/lightning/setup/Profiles/home",
 				target: "_self",
 			},
 			metaKey: false,
@@ -864,7 +920,8 @@ Deno.test("generator handles Lightning links for missing href, redirects, and ne
 		await lightningNavFixture.module.handleLightningLinkClick({
 			ctrlKey: false,
 			currentTarget: {
-				href: "https://acme.lightning.force.com/lightning/setup/PermissionSets/home",
+				href:
+					"https://acme.lightning.force.com/lightning/setup/PermissionSets/home",
 				target: "",
 			},
 			metaKey: false,
@@ -900,7 +957,10 @@ Deno.test("generator renders styles only when settings exist and change", async 
 		await fixture.module.generateStyleFromSettings();
 
 		assertEquals(fixture.injectStyleCalls.length, 2);
-		assertEquals(fixture.injectStyleCalls[0].id, "again-why-salesforce-generic-tabs");
+		assertEquals(
+			fixture.injectStyleCalls[0].id,
+			"again-why-salesforce-generic-tabs",
+		);
 		assertStringIncludes(
 			fixture.injectStyleCalls[0].options.css ?? "",
 			".selector-g-i-u { color:red;}",
@@ -909,7 +969,10 @@ Deno.test("generator renders styles only when settings exist and change", async 
 			fixture.injectStyleCalls[0].options.css ?? "",
 			".selector-g-a-u:hover{ hover:orange; }",
 		);
-		assertEquals(fixture.injectStyleCalls[1].id, "again-why-salesforce-org-tabs");
+		assertEquals(
+			fixture.injectStyleCalls[1].id,
+			"again-why-salesforce-org-tabs",
+		);
 	} finally {
 		fixture.cleanup();
 	}
@@ -917,7 +980,8 @@ Deno.test("generator renders styles only when settings exist and change", async 
 
 Deno.test("generator builds active rows and translated toasts", async () => {
 	const fixture = await loadGeneratorFixture({
-		currentHref: "https://acme.lightning.force.com/lightning/setup/Users/home",
+		currentHref:
+			"https://acme.lightning.force.com/lightning/setup/Users/home",
 		translations: {
 			toast_lines: "Line one\nLine two",
 		},
@@ -942,7 +1006,11 @@ Deno.test("generator builds active rows and translated toasts", async () => {
 		assertEquals(String(row.dataset.rowIndex), "3");
 		assertEquals(row.style.display, "none");
 		assert(row.classList.contains("slds-is-active"));
-		assertEquals(anchor?.getAttribute("href"), fixture.openCalls[0]?.url ?? "https://acme.lightning.force.com/lightning/setup/Users/home");
+		assertEquals(
+			anchor?.getAttribute("href"),
+			fixture.openCalls[0]?.url ??
+				"https://acme.lightning.force.com/lightning/setup/Users/home",
+		);
 		assert(label?.classList.contains("org-tab"));
 		assert(label?.classList.contains("pin-tab"));
 		assertEquals(label?.dataset.org, "acme");
@@ -975,7 +1043,9 @@ Deno.test("generator builds active rows and translated toasts", async () => {
 			true,
 		);
 		assertEquals(
-			toast.querySelector(".forceToastMessage")?.getAttribute("aria-label"),
+			toast.querySelector(".forceToastMessage")?.getAttribute(
+				"aria-label",
+			),
 			"warning",
 		);
 		assertEquals(toastLines.length, 2);
@@ -1021,9 +1091,15 @@ Deno.test("generator renders sections, required markers, and stacked inputs", as
 			},
 		);
 		assertEquals(textarea.tagName, "TEXTAREA");
-		assertEquals(textarea.getAttribute("placeholder"), "translated:tab_placeholder");
+		assertEquals(
+			textarea.getAttribute("placeholder"),
+			"translated:tab_placeholder",
+		);
 		assert(textarea.getAttribute("disabled") != null);
-		assertEquals(textarea.getAttribute("title"), "translated:table_row_label");
+		assertEquals(
+			textarea.getAttribute("title"),
+			"translated:table_row_label",
+		);
 
 		const generatedInput = await fixture.module.generateInput({
 			append: { label: "suffix", type: "text" },
@@ -1032,7 +1108,9 @@ Deno.test("generator renders sections, required markers, and stacked inputs", as
 			required: true,
 			type: "text",
 		});
-		assertExists(generatedInput.inputParent.querySelector("abbr.slds-required"));
+		assertExists(
+			generatedInput.inputParent.querySelector("abbr.slds-required"),
+		);
 		assertEquals(
 			generatedInput.inputParent.querySelectorAll("input").length,
 			3,
@@ -1071,7 +1149,10 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 		document.dispatchEvent(enterKey);
 		assertEquals(saveClicks, 1);
 		shell.closeButton.click();
-		assertEquals(document.getElementById("Again Why Salesforce-modal"), null);
+		assertEquals(
+			document.getElementById("Again Why Salesforce-modal"),
+			null,
+		);
 
 		const backdropShell = fixture.module.createSldsModalShell({
 			cancelButtonLabel: "Cancel",
@@ -1081,7 +1162,9 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 		});
 		document.body.appendChild(backdropShell.modalParent);
 		(
-			backdropShell.modalParent.querySelector(".modal-glass") as HTMLElement
+			backdropShell.modalParent.querySelector(
+				".modal-glass",
+			) as HTMLElement
 		).dispatchEvent(new Event("click"));
 		assertEquals(backdropShell.modalParent.parentElement, null);
 
@@ -1118,7 +1201,10 @@ Deno.test("generator builds modal shells, prompt modals, and confirm flows", asy
 			modalTitle: "Prompt",
 		});
 		assertEquals(prompt.bodyParagraph.textContent, "Prompt body");
-		assertEquals(prompt.modalBody.getAttribute("aria-label"), "Prompt body");
+		assertEquals(
+			prompt.modalBody.getAttribute("aria-label"),
+			"Prompt body",
+		);
 
 		const rejectPromise = fixture.module.sldsConfirm({
 			body: "Body",
@@ -1203,9 +1289,14 @@ Deno.test("generator covers radios, file inputs, checkbox labels, tutorial eleme
 			true,
 		);
 		assertEquals(fileInput.fileInputWrapper.id, "wrapper");
-		assertEquals(fileInput.inputContainer.getAttribute("aria-label"), "translated:upload translated:file");
 		assertEquals(
-			fileInput.fileInputWrapper.textContent?.includes("translated:drop translated:file"),
+			fileInput.inputContainer.getAttribute("aria-label"),
+			"translated:upload translated:file",
+		);
+		assertEquals(
+			fileInput.fileInputWrapper.textContent?.includes(
+				"translated:drop translated:file",
+			),
 			true,
 		);
 		const multiFileInput = await fixture.module.generateSldsFileInput(
@@ -1241,15 +1332,28 @@ Deno.test("generator covers radios, file inputs, checkbox labels, tutorial eleme
 		const reviewSponsor = fixture.module.generateReviewSponsorSvgs();
 		assert(reviewSponsor.reviewSvg.classList.contains("hidden"));
 		assert(reviewSponsor.sponsorSvg.classList.contains("hidden"));
-		assertEquals(reviewSponsor.reviewLink.dataset.i18n, "write_review+-+title+-+ariaLabel");
+		assertEquals(
+			reviewSponsor.reviewLink.dataset.i18n,
+			"write_review+-+title+-+ariaLabel",
+		);
 
-		const tutorialElements = await fixture.module.generateTutorialElements();
-		assertEquals(tutorialElements.overlay.style.backgroundColor, "rgba(0,0,0,0.5)");
+		const tutorialElements = await fixture.module
+			.generateTutorialElements();
+		assertEquals(
+			tutorialElements.overlay.style.backgroundColor,
+			"rgba(0,0,0,0.5)",
+		);
 		assert(tutorialElements.spinner.classList.contains("hidden"));
-		assertEquals(tutorialElements.confirmBtn.textContent, "translated:confirm");
+		assertEquals(
+			tutorialElements.confirmBtn.textContent,
+			"translated:confirm",
+		);
 		assertEquals(tutorialElements.closeBtn.textContent, "translated:close");
 		assertEquals(
-			fixture.injectStyleCalls.some((call) => call.options.link?.includes("/salesforce/css/tutorial.css") === true),
+			fixture.injectStyleCalls.some((call) =>
+				call.options.link?.includes("/salesforce/css/tutorial.css") ===
+					true
+			),
 			true,
 		);
 	} finally {
@@ -1266,7 +1370,10 @@ Deno.test("generator covers open-other-org, update-tab, and help popup builders"
 			org: "sandbox",
 			url: "Users/home",
 		});
-		assertStringIncludes(otherOrgModal.modalParent.textContent ?? "", "https://");
+		assertStringIncludes(
+			otherOrgModal.modalParent.textContent ?? "",
+			"https://",
+		);
 		assertStringIncludes(
 			otherOrgModal.modalParent.textContent ?? "",
 			".lightning.force.com/lightning/setup/Users/home",
@@ -1314,14 +1421,18 @@ Deno.test("generator covers open-other-org, update-tab, and help popup builders"
 		assertEquals(linkedHelp.linkTip.classList.contains("hidden"), false);
 		assertEquals(
 			fixture.injectStyleCalls.some((call) =>
-				call.options.link?.includes("/components/help/help.css") === true
+				call.options.link?.includes("/components/help/help.css") ===
+					true
 			),
 			true,
 		);
 
 		const passiveHelp = fixture.module.generateHelpWith_i_popup();
 		await new Promise((resolve) => setTimeout(resolve, 0));
-		assertEquals((passiveHelp.slot as HTMLElement & { name?: string }).name, "text");
+		assertEquals(
+			(passiveHelp.slot as HTMLElement & { name?: string }).name,
+			"text",
+		);
 		assertEquals(passiveHelp.slot.textContent, "Nothing to see here...");
 	} finally {
 		fixture.cleanup();
@@ -1356,8 +1467,8 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 		const checkboxes = Array.from(
 			tabListModal.modalParent.querySelectorAll("input"),
 		) as HTMLInputElement[];
-		const firstRow = checkboxes[0].parentElement?.parentElement?.parentElement as
-			HTMLTableRowElement;
+		const firstRow = checkboxes[0].parentElement?.parentElement
+			?.parentElement as HTMLTableRowElement;
 		assertEquals(tabListModal.getSelectedTabs().selectedAll, true);
 		firstRow.dispatchEvent(new Event("click"));
 		assertEquals(checkboxes[0].checked, false);
@@ -1386,7 +1497,9 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 		assertEquals(String(manageRow.tr.dataset.rowIndex), "1");
 		assert(manageRow.tr.classList.contains("hidden"));
 		assertEquals(manageRow.tr.draggable, true);
-		const openButton = manageRow.dropdownMenu.children[0] as HTMLAnchorElement | undefined;
+		const openButton = manageRow.dropdownMenu.children[0] as
+			| HTMLAnchorElement
+			| undefined;
 		assertEquals(
 			openButton?.href,
 			"https://acme.lightning.force.com/lightning/setup/Accounts/home",
@@ -1406,7 +1519,10 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 
 		const originalCreateElement = document.createElement.bind(document);
 		type TrackedRow = HTMLTableRowElement & {
-			__trackedListeners: Map<string, Set<EventListenerOrEventListenerObject>>;
+			__trackedListeners: Map<
+				string,
+				Set<EventListenerOrEventListenerObject>
+			>;
 		};
 		const trackedRows: TrackedRow[] = [];
 		document.createElement = ((tagName: string) => {
@@ -1416,9 +1532,10 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 			}
 			const trackedRow = element as TrackedRow;
 			trackedRow.__trackedListeners = new Map();
-			const originalRowAddEventListener = trackedRow.addEventListener.bind(
-				trackedRow,
-			);
+			const originalRowAddEventListener = trackedRow.addEventListener
+				.bind(
+					trackedRow,
+				);
 			trackedRow.addEventListener = ((
 				type: string,
 				listener: EventListenerOrEventListenerObject | null,
@@ -1438,10 +1555,11 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 			trackedRows.push(trackedRow);
 			return trackedRow;
 		}) as typeof document.createElement;
-		const tableWithCheckboxes = await fixture.module.generateTableWithCheckboxes(
-			tabs,
-			[{ label: "" }],
-		);
+		const tableWithCheckboxes = await fixture.module
+			.generateTableWithCheckboxes(
+				tabs,
+				[{ label: "" }],
+			);
 		document.createElement = originalCreateElement;
 		const checkboxRow = tableWithCheckboxes.checkboxes[0].parentElement
 			?.parentElement?.parentElement as HTMLTableRowElement;
@@ -1456,12 +1574,14 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 		);
 		assertExists(rowWithClickListener);
 		const trackedCheckbox = rowWithClickListener.querySelector("input") as
-			HTMLInputElement | null;
+			| HTMLInputElement
+			| null;
 		assertExists(trackedCheckbox);
 		trackedCheckbox.checked = true;
 		for (
-			const listener of rowWithClickListener?.__trackedListeners.get("click") ??
-				[]
+			const listener
+				of rowWithClickListener?.__trackedListeners.get("click") ??
+					[]
 		) {
 			if (typeof listener === "function") {
 				listener.call(rowWithClickListener, tableRowEvent);
@@ -1475,8 +1595,9 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 			value: { tagName: "INPUT", type: "checkbox" },
 		});
 		for (
-			const listener of rowWithClickListener?.__trackedListeners.get("click") ??
-				[]
+			const listener
+				of rowWithClickListener?.__trackedListeners.get("click") ??
+					[]
 		) {
 			if (typeof listener === "function") {
 				listener.call(rowWithClickListener, checkboxClickEvent);
@@ -1502,9 +1623,10 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 		const showAllButton = manageTabsModal.modalParent.querySelector(
 			".show_all_tabs",
 		) as HTMLButtonElement | null;
-		const hideOtherOrgTabsButton = manageTabsModal.modalParent.querySelector(
-			".hide_other_org_tabs",
-		) as HTMLButtonElement | null;
+		const hideOtherOrgTabsButton = manageTabsModal.modalParent
+			.querySelector(
+				".hide_other_org_tabs",
+			) as HTMLButtonElement | null;
 		assertEquals(manageTabsModal.loggers.length >= 3, true);
 		assertEquals(manageTabsModal.trsAndButtons.length >= 3, true);
 		assertEquals(manageTabsModal.dropdownMenus.length >= 3, true);
@@ -1512,14 +1634,17 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 			manageTabsModal.deleteAllTabsButton.hasAttribute("disabled"),
 			false,
 		);
-		const originalQuerySelectorAll = manageTabsModal.tbody.querySelectorAll.bind(
-			manageTabsModal.tbody,
-		);
+		const originalQuerySelectorAll = manageTabsModal.tbody.querySelectorAll
+			.bind(
+				manageTabsModal.tbody,
+			);
 		const otherOrgRows = [manageTabsModal.trsAndButtons[1].tr] as Element[];
 		manageTabsModal.tbody.querySelectorAll = ((selector: string) =>
 			selector === "tr[data-is-this-org-tab=false]"
 				? createNodeList(otherOrgRows)
-				: originalQuerySelectorAll(selector)) as typeof manageTabsModal.tbody.querySelectorAll;
+				: originalQuerySelectorAll(
+					selector,
+				)) as typeof manageTabsModal.tbody.querySelectorAll;
 		showAllButton?.click();
 		assertEquals(
 			manageTabsModal.trsAndButtons[1].tr.classList.contains("hidden"),
@@ -1532,9 +1657,10 @@ Deno.test("generator covers selectable tab-list and manage-tabs modal builders",
 		);
 		assertEquals(fixture.updateModalBodyOverflowCalls, 2);
 
-		const emptyManageTabsModal = await fixture.module.generateManageTabsModal(
-			[] as ManageTabsInput,
-		);
+		const emptyManageTabsModal = await fixture.module
+			.generateManageTabsModal(
+				[] as ManageTabsInput,
+			);
 		assertEquals(
 			emptyManageTabsModal.deleteAllTabsButton.hasAttribute("disabled"),
 			true,

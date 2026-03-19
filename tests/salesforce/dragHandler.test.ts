@@ -8,7 +8,9 @@ type DragCallbackPayload = {
 
 type DragHandlerModule = {
 	setupDrag: (callback: (payload: DragCallbackPayload) => void) => void;
-	setupDragForTable: (callback: (payload: DragCallbackPayload) => void) => void;
+	setupDragForTable: (
+		callback: (payload: DragCallbackPayload) => void,
+	) => void;
 	setupDragForUl: (callback: (payload: DragCallbackPayload) => void) => void;
 };
 
@@ -25,7 +27,10 @@ type DragHandlerDependencies = {
 	setTimeout: (callback: () => void, delay: number) => number;
 };
 
-type DragListener = (this: DragContainer, event: DragEventLike) => boolean | void | Promise<boolean | void>;
+type DragListener = (
+	this: DragContainer,
+	event: DragEventLike,
+) => boolean | void | Promise<boolean | void>;
 
 type DragEventLike = {
 	dataTransfer: {
@@ -237,7 +242,10 @@ async function loadDragHandler({
 	pinnedTabs?: number;
 	ulContainer?: DragContainer | null;
 }) {
-	const modulePath = new URL("../../src/salesforce/dragHandler.js", import.meta.url);
+	const modulePath = new URL(
+		"../../src/salesforce/dragHandler.js",
+		import.meta.url,
+	);
 	const rawSource = await Deno.readTextFile(modulePath);
 	const sourceLineCount = rawSource.split("\n").length;
 	const transformSource = (source: string) =>
@@ -249,7 +257,10 @@ async function loadDragHandler({
 			].join("\n"),
 		);
 	const timeoutCalls: number[] = [];
-	const { cleanup, module } = await loadIsolatedModule<DragHandlerModule, DragHandlerDependencies>({
+	const { cleanup, module } = await loadIsolatedModule<
+		DragHandlerModule,
+		DragHandlerDependencies
+	>({
 		modulePath,
 		additionalExports: ["setupDrag"],
 		sourceMapLineMap: Array.from(
@@ -290,7 +301,11 @@ async function loadDragHandler({
 }
 
 Deno.test("dragHandler wires UL drag listeners and reorders rows within the same pinned section", async () => {
-	const rows = [new DragRow("li", 0), new DragRow("li", 1), new DragRow("li", 2)];
+	const rows = [
+		new DragRow("li", 0),
+		new DragRow("li", 1),
+		new DragRow("li", 2),
+	];
 	const container = new DragContainer(rows);
 	const callbacks: DragCallbackPayload[] = [];
 	const { cleanup, module } = await loadDragHandler({
@@ -309,7 +324,10 @@ Deno.test("dragHandler wires UL drag listeners and reorders rows within the same
 		assertEquals(startEvent.event.dataTransfer.effectAllowed, "move");
 
 		const overEvent = createDragEvent(rows[1]);
-		const overResult = await container.dispatch("dragover", overEvent.event);
+		const overResult = await container.dispatch(
+			"dragover",
+			overEvent.event,
+		);
 		assertEquals(overResult, false);
 		assertEquals(overEvent.prevented.value, true);
 		assertEquals(overEvent.event.dataTransfer.dropEffect, "move");
@@ -319,7 +337,11 @@ Deno.test("dragHandler wires UL drag listeners and reorders rows within the same
 		assertEquals(dropEvent.prevented.value, true);
 		assertEquals(dropEvent.stopped.value, true);
 		assertEquals(rows[1].style.cursor, "grab");
-		assertEquals(container.children.map((row) => row.dataset.rowIndex), ["1", "0", "2"]);
+		assertEquals(container.children.map((row) => row.dataset.rowIndex), [
+			"1",
+			"0",
+			"2",
+		]);
 		assertEquals(callbacks, [{
 			fromIndex: "0",
 			toIndex: "1",
@@ -330,7 +352,11 @@ Deno.test("dragHandler wires UL drag listeners and reorders rows within the same
 });
 
 Deno.test("dragHandler blocks illegal pinned-to-unpinned moves by clamping the target row", async () => {
-	const rows = [new DragRow("li", 0), new DragRow("li", 1), new DragRow("li", 2)];
+	const rows = [
+		new DragRow("li", 0),
+		new DragRow("li", 1),
+		new DragRow("li", 2),
+	];
 	const container = new DragContainer(rows);
 	const callbacks: DragCallbackPayload[] = [];
 	const { cleanup, module } = await loadDragHandler({
@@ -346,7 +372,11 @@ Deno.test("dragHandler blocks illegal pinned-to-unpinned moves by clamping the t
 		await container.dispatch("dragstart", createDragEvent(rows[2]).event);
 		await container.dispatch("drop", createDragEvent(rows[0]).event);
 
-		assertEquals(container.children.map((row) => row.dataset.rowIndex), ["0", "2", "1"]);
+		assertEquals(container.children.map((row) => row.dataset.rowIndex), [
+			"0",
+			"2",
+			"1",
+		]);
 		assertEquals(callbacks, [{
 			fromIndex: "2",
 			toIndex: 1,
@@ -373,7 +403,10 @@ Deno.test("dragHandler ignores invalid drops and schedules a retry when no UL co
 		});
 		try {
 			activeModule.module.setupDragForUl(() => {});
-			await container.dispatch("dragstart", createDragEvent(rows[0]).event);
+			await container.dispatch(
+				"dragstart",
+				createDragEvent(rows[0]).event,
+			);
 			const invalidDropResult = await container.dispatch(
 				"drop",
 				createDragEvent(rows[1]).event,
@@ -402,7 +435,10 @@ Deno.test("dragHandler can attach listeners to the sortable table body", async (
 		await container.dispatch("dragstart", createDragEvent(rows[0]).event);
 		await container.dispatch("drop", createDragEvent(rows[1]).event);
 
-		assertEquals(container.children.map((row) => row.dataset.rowIndex), ["1", "0"]);
+		assertEquals(container.children.map((row) => row.dataset.rowIndex), [
+			"1",
+			"0",
+		]);
 		assertEquals(callbacks, [{
 			fromIndex: "0",
 			toIndex: "1",

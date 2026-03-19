@@ -8,4 +8,3 @@ prefer to not have external dependencies especially for code in `src`
 when creating a new branch, start from `stag` unless explicitly told otherwise
 always write tests for new changes; make sure the coverage is 100/100/100 (do not change src code to achieve this)
 Tests do not use: --allow-env, --no-check, --quiet, unknown or any types, await Promise.resolve()
-

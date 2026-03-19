@@ -551,77 +551,99 @@ Deno.test("functions helper exports cover style keys, settings page, redirects, 
 		}
 	});
 
-	await t.step("openSettingsPage falls back to opening the settings url", () => {
-		const originalOpenOptionsPage = BROWSER.runtime.openOptionsPage;
-		const originalOpen = globalThis.open;
-		const openedUrls = [];
-		BROWSER.runtime.openOptionsPage = null;
-		globalThis.open = (url) => {
-			openedUrls.push(String(url));
-			return null;
-		};
-		try {
-			openSettingsPage();
-			assertEquals(openedUrls, ["settings/options.html"]);
-		} finally {
-			BROWSER.runtime.openOptionsPage = originalOpenOptionsPage;
-			globalThis.open = originalOpen;
-		}
-	});
+	await t.step(
+		"openSettingsPage falls back to opening the settings url",
+		() => {
+			const originalOpenOptionsPage = BROWSER.runtime.openOptionsPage;
+			const originalOpen = globalThis.open;
+			const openedUrls = [];
+			BROWSER.runtime.openOptionsPage = null;
+			globalThis.open = (url) => {
+				openedUrls.push(String(url));
+				return null;
+			};
+			try {
+				openSettingsPage();
+				assertEquals(openedUrls, ["settings/options.html"]);
+			} finally {
+				BROWSER.runtime.openOptionsPage = originalOpenOptionsPage;
+				globalThis.open = originalOpen;
+			}
+		},
+	);
 
-	await t.step("calculateReadingTime and performLightningRedirect use the expected payloads", () => {
-		assertEquals(calculateReadingTime("one two three"), 3000);
-		const originalPostMessage = globalThis.postMessage;
-		const messages = [];
-		globalThis.postMessage = (message, targetOrigin) => {
-			messages.push({ message, targetOrigin });
-		};
-		try {
-			performLightningRedirect("/lightning/page");
-			assertEquals(messages, [{
-				message: {
-					what: "lightningNavigation",
-					navigationType: "url",
-					url: "/lightning/page",
-					fallbackURL: "/lightning/page",
-				},
-				targetOrigin: "*",
-			}]);
-		} finally {
-			globalThis.postMessage = originalPostMessage;
-		}
-	});
+	await t.step(
+		"calculateReadingTime and performLightningRedirect use the expected payloads",
+		() => {
+			assertEquals(calculateReadingTime("one two three"), 3000);
+			const originalPostMessage = globalThis.postMessage;
+			const messages = [];
+			globalThis.postMessage = (message, targetOrigin) => {
+				messages.push({ message, targetOrigin });
+			};
+			try {
+				performLightningRedirect("/lightning/page");
+				assertEquals(messages, [{
+					message: {
+						what: "lightningNavigation",
+						navigationType: "url",
+						url: "/lightning/page",
+						fallbackURL: "/lightning/page",
+					},
+					targetOrigin: "*",
+				}]);
+			} finally {
+				globalThis.postMessage = originalPostMessage;
+			}
+		},
+	);
 
-	await t.step("injectStyle validates, reuses, and creates both style and link tags", () => {
-		const originalDocument = globalThis.document;
-		const { cleanup } = installMockDom();
-		try {
-			assertThrows(() => injectStyle(""), Error, "error_required_params");
-			assertThrows(() => injectStyle("bad", {
-				css: ".a{}",
-				link: "/dup.css",
-			}), Error, "error_required_params");
+	await t.step(
+		"injectStyle validates, reuses, and creates both style and link tags",
+		() => {
+			const originalDocument = globalThis.document;
+			const { cleanup } = installMockDom();
+			try {
+				assertThrows(
+					() => injectStyle(""),
+					Error,
+					"error_required_params",
+				);
+				assertThrows(
+					() =>
+						injectStyle("bad", {
+							css: ".a{}",
+							link: "/dup.css",
+						}),
+					Error,
+					"error_required_params",
+				);
 
-			const styleTag = injectStyle("style-id", { css: ".a{color:red;}" });
-			assertEquals(styleTag.tagName, "STYLE");
-			assertEquals(styleTag.textContent, ".a{color:red;}");
-			assertEquals(document.head.children.length, 1);
+				const styleTag = injectStyle("style-id", {
+					css: ".a{color:red;}",
+				});
+				assertEquals(styleTag.tagName, "STYLE");
+				assertEquals(styleTag.textContent, ".a{color:red;}");
+				assertEquals(document.head.children.length, 1);
 
-			const updatedStyleTag = injectStyle("style-id", { css: ".a{color:blue;}" });
-			assertEquals(updatedStyleTag, styleTag);
-			assertEquals(styleTag.textContent, ".a{color:blue;}");
-			assertEquals(document.head.children.length, 1);
+				const updatedStyleTag = injectStyle("style-id", {
+					css: ".a{color:blue;}",
+				});
+				assertEquals(updatedStyleTag, styleTag);
+				assertEquals(styleTag.textContent, ".a{color:blue;}");
+				assertEquals(document.head.children.length, 1);
 
-			const linkTag = injectStyle("link-id", { link: "/style.css" });
-			assertEquals(linkTag.tagName, "LINK");
-			assertEquals(linkTag.href, "/style.css");
-			assertEquals(linkTag.rel, "stylesheet");
-			assertEquals(document.head.children.length, 2);
-		} finally {
-			cleanup();
-			globalThis.document = originalDocument;
-		}
-	});
+				const linkTag = injectStyle("link-id", { link: "/style.css" });
+				assertEquals(linkTag.tagName, "LINK");
+				assertEquals(linkTag.href, "/style.css");
+				assertEquals(linkTag.rel, "stylesheet");
+				assertEquals(document.head.children.length, 2);
+			} finally {
+				cleanup();
+				globalThis.document = originalDocument;
+			}
+		},
+	);
 });
 
 Deno.test("requestPermissions", async (t) => {

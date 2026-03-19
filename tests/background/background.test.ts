@@ -37,7 +37,9 @@ type CommandLink = {
  * @param setting Retrieved setting value.
  * @return {asserts setting is EnabledSetting}
  */
-function assertIsEnabledSetting(setting: unknown): asserts setting is EnabledSetting {
+function assertIsEnabledSetting(
+	setting: unknown,
+): asserts setting is EnabledSetting {
 	assert(setting != null);
 	assert(!Array.isArray(setting));
 	assert(typeof setting === "object");

@@ -72,7 +72,9 @@ async function loadPopupModule({
 	framePatternsAllowed?: boolean;
 	salesforceState?: { ison: boolean; url?: string | null };
 }) {
-	const window = createMockWindow("https://example.test/action/popup/popup.html");
+	const window = createMockWindow(
+		"https://example.test/action/popup/popup.html",
+	);
 	const document = window.document;
 	const importButton = appendElement(document, "button", "import");
 	const exportButton = appendElement(document, "button", "export");
@@ -89,7 +91,10 @@ async function loadPopupModule({
 	};
 	const messages: Record<string, unknown>[] = [];
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, PopupDependencies>({
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		PopupDependencies
+	>({
 		modulePath: new URL("../../src/action/popup/popup.js", import.meta.url),
 		dependencies: {
 			BROWSER: {
@@ -111,7 +116,9 @@ async function loadPopupModule({
 				return {
 					separator: "+-+",
 					translate: async (message) =>
-						Array.isArray(message) ? message.join(" ") : `translated:${message}`,
+						Array.isArray(message)
+							? message.join(" ")
+							: `translated:${message}`,
 					translateAttributeDataset: "i18n",
 				};
 			},

@@ -82,7 +82,10 @@ async function loadExportModule({
 		return child;
 	};
 
-	const { cleanup, module } = await loadIsolatedModule<ExportModule, ExportDependencies>({
+	const { cleanup, module } = await loadIsolatedModule<
+		ExportModule,
+		ExportDependencies
+	>({
 		modulePath: new URL("../../src/salesforce/export.js", import.meta.url),
 		dependencies: {
 			MODAL_ID: "awsf-modal",
@@ -104,11 +107,13 @@ async function loadExportModule({
 			},
 			WHAT_EXPORT: "export",
 			document: {
-				getElementById: () => hasExistingModal ? new MockElement("div") : null,
+				getElementById: () =>
+					hasExistingModal ? new MockElement("div") : null,
 			},
-			ensureAllTabsAvailability: () => Promise.resolve({
-				pinned,
-			}),
+			ensureAllTabsAvailability: () =>
+				Promise.resolve({
+					pinned,
+				}),
 			generateSldsModalWithTabList: (_allTabs, options) => {
 				if (generateError != null) {
 					throw generateError;
@@ -148,7 +153,9 @@ async function loadExportModule({
 		messages,
 		modalOptions,
 		module,
-		saveButton: generateError == null && !hasExistingModal ? saveButton : null,
+		saveButton: generateError == null && !hasExistingModal
+			? saveButton
+			: null,
 		toasts,
 	};
 }

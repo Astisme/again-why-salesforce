@@ -1,7 +1,4 @@
-import {
-	assertEquals,
-	assertRejects,
-} from "@std/testing/asserts";
+import { assertEquals, assertRejects } from "@std/testing/asserts";
 import { createMockWindow, MockDocument, MockElement } from "./mock-dom.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
@@ -83,7 +80,9 @@ async function loadNotSalesforceSetupModule({
 	pageUrl?: string | null;
 	settings?: Setting[];
 }) {
-	const popupUrl = new URL("https://example.test/action/notSalesforceSetup.html");
+	const popupUrl = new URL(
+		"https://example.test/action/notSalesforceSetup.html",
+	);
 	if (pageUrl != null) {
 		popupUrl.searchParams.set("url", pageUrl);
 	}
@@ -105,7 +104,10 @@ async function loadNotSalesforceSetupModule({
 	const sendMessages: { what: string }[] = [];
 	const remainingResponses = [...browserTabResponses];
 
-	const { cleanup } = await loadIsolatedModule<Record<string, never>, NotSalesforceSetupDependencies>({
+	const { cleanup } = await loadIsolatedModule<
+		Record<string, never>,
+		NotSalesforceSetupDependencies
+	>({
 		modulePath: new URL(
 			"../../src/action/notSalesforceSetup/notSalesforceSetup.js",
 			import.meta.url,

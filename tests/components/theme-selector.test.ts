@@ -67,7 +67,9 @@ function installCustomElementsRegistry(document: Document) {
 			return constructors.get(name);
 		},
 		getName(constructor: CustomElementConstructor) {
-			for (const [name, registeredConstructor] of constructors.entries()) {
+			for (
+				const [name, registeredConstructor] of constructors.entries()
+			) {
 				if (registeredConstructor === constructor) {
 					return name;
 				}
@@ -145,12 +147,16 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		() => {
 			restoreGlobals();
 			document.documentElement.dataset.theme = "light";
-			const component = document.createElement("theme-selector-aws") as
-				ThemeSelectorElement;
+			const component = document.createElement(
+				"theme-selector-aws",
+			) as ThemeSelectorElement;
 			document.body.append(component);
 			component.connectedCallback?.();
 
-			assertStringIncludes(component.innerHTML, `data-theme-target="light"`);
+			assertStringIncludes(
+				component.innerHTML,
+				`data-theme-target="light"`,
+			);
 			const injectedLink = document.head.firstElementChild;
 			assertExists(injectedLink);
 			assert(injectedLink instanceof HTMLElement);
@@ -164,8 +170,9 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		() => {
 			restoreGlobals();
 			document.documentElement.dataset.theme = "light";
-			const component = document.createElement("theme-selector-aws") as
-				ThemeSelectorElement;
+			const component = document.createElement(
+				"theme-selector-aws",
+			) as ThemeSelectorElement;
 			appendThemeButtons(component);
 			document.body.append(component);
 			component.connectedCallback?.();
@@ -183,7 +190,10 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			assertEquals(buttons.length, 2);
 			assert(lightButton.classList.contains("hidden"));
 			assertFalse(darkButton.classList.contains("hidden"));
-			component.observer?.callback?.([], component.observer as MutationObserver);
+			component.observer?.callback?.(
+				[],
+				component.observer as MutationObserver,
+			);
 		},
 	);
 
@@ -193,8 +203,9 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			restoreGlobals();
 			Reflect.deleteProperty(document.documentElement.dataset, "theme");
 			globalThis.localStorage.setItem("usingTheme", "dark");
-			const component = document.createElement("theme-selector-aws") as
-				ThemeSelectorElement;
+			const component = document.createElement(
+				"theme-selector-aws",
+			) as ThemeSelectorElement;
 			appendThemeButtons(component);
 			document.body.append(component);
 			component.connectedCallback?.();
@@ -216,8 +227,9 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			};
 			globalThis.clearTimeout = () => {};
 			document.documentElement.dataset.theme = "light";
-			const component = document.createElement("theme-selector-aws") as
-				ThemeSelectorElement;
+			const component = document.createElement(
+				"theme-selector-aws",
+			) as ThemeSelectorElement;
 			appendThemeButtons(component);
 			document.body.append(component);
 			component.connectedCallback?.();
@@ -249,7 +261,8 @@ Deno.test("ThemeSelectorAws", async (t) => {
 			restoreGlobals();
 			document.documentElement.dataset.theme = "light";
 			const component = document.createElement("theme-selector-aws") as
-				ThemeSelectorElement & {
+				& ThemeSelectorElement
+				& {
 					disconnectedCallback?: () => void;
 					observer: MutationObserver;
 				};
@@ -291,21 +304,22 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		},
 	);
 
-		await t.step(
-			"swaps the opposite buttons when the current theme is dark",
-			() => {
-				restoreGlobals();
-				globalThis.setTimeout = (callback: TimerHandler) => {
+	await t.step(
+		"swaps the opposite buttons when the current theme is dark",
+		() => {
+			restoreGlobals();
+			globalThis.setTimeout = (callback: TimerHandler) => {
 				if (typeof callback === "function") {
 					callback();
 				}
 				return 1;
-				};
-				globalThis.clearTimeout = () => {};
-				document.documentElement.dataset.theme = "dark";
-				testLocalStorage.setItem("usingTheme", "dark");
-				const component = document.createElement("theme-selector-aws") as
-					ThemeSelectorElement;
+			};
+			globalThis.clearTimeout = () => {};
+			document.documentElement.dataset.theme = "dark";
+			testLocalStorage.setItem("usingTheme", "dark");
+			const component = document.createElement(
+				"theme-selector-aws",
+			) as ThemeSelectorElement;
 			appendThemeButtons(component);
 			document.body.append(component);
 			component.connectedCallback?.();

@@ -125,7 +125,10 @@ class OptionElement {
 	tagName: string;
 	textContent = "";
 	value = "";
-	#listeners = new Map<string, Array<(event: Record<string, unknown>) => void>>();
+	#listeners = new Map<
+		string,
+		Array<(event: Record<string, unknown>) => void>
+	>();
 	#queryMap = new Map<string, OptionElement | null>();
 	#queryAllMap = new Map<string, OptionElement[]>();
 
@@ -134,7 +137,10 @@ class OptionElement {
 		this.tagName = tagName.toUpperCase();
 	}
 
-	addEventListener(type: string, listener: (event: Record<string, unknown>) => void) {
+	addEventListener(
+		type: string,
+		listener: (event: Record<string, unknown>) => void,
+	) {
 		const listeners = this.#listeners.get(type) ?? [];
 		listeners.push(listener);
 		this.#listeners.set(type, listeners);
@@ -143,9 +149,8 @@ class OptionElement {
 	append(...elements: OptionElement[]) {
 		for (const element of elements) {
 			if (element.parentNode != null) {
-				element.parentNode.children = element.parentNode.children.filter((child) =>
-					child !== element
-				);
+				element.parentNode.children = element.parentNode.children
+					.filter((child) => child !== element);
 			}
 			element.parentNode = this;
 			this.children.push(element);
@@ -216,7 +221,9 @@ type OptionsFixture = {
 	restoreOnLoadPromise: Promise<void>;
 	sendMessages: Record<string, unknown>[];
 	scheduledTimeouts: Array<() => void>;
-	settingsResult: { value: Record<string, unknown> | Record<string, unknown>[] | null };
+	settingsResult: {
+		value: Record<string, unknown> | Record<string, unknown>[] | null;
+	};
 	styleSettings: Map<string, unknown>;
 };
 
@@ -239,7 +246,9 @@ function createListItem(id: string, styleKey: string) {
 	return element;
 }
 
-async function loadOptions({ runRestoreOnLoad = false }: { runRestoreOnLoad?: boolean } = {}) {
+async function loadOptions(
+	{ runRestoreOnLoad = false }: { runRestoreOnLoad?: boolean } = {},
+) {
 	const areFramePatternsAllowedResult = { value: true };
 	const clearTimeoutCalls: Array<number | null> = [];
 	const consoleErrors: string[] = [];
@@ -260,8 +269,14 @@ async function loadOptions({ runRestoreOnLoad = false }: { runRestoreOnLoad?: bo
 	};
 	const styleSettings = new Map<string, unknown>();
 	const querySelectorMap = new Map<string, OptionElement>();
-	querySelectorMap.set("theme-selector-aws", new OptionElement("theme-selector-aws"));
-	querySelectorMap.set("#save-container > button", new OptionElement("save-button", "button"));
+	querySelectorMap.set(
+		"theme-selector-aws",
+		new OptionElement("theme-selector-aws"),
+	);
+	querySelectorMap.set(
+		"#save-container > button",
+		new OptionElement("save-button", "button"),
+	);
 	for (const toastId of ["toast-display-success", "toast-display-error"]) {
 		const toast = getOrCreateElement(elements, toastId);
 		const message = new OptionElement(`${toastId}-message`);
@@ -271,7 +286,10 @@ async function loadOptions({ runRestoreOnLoad = false }: { runRestoreOnLoad?: bo
 		);
 	}
 
-	const { cleanup, module } = await loadIsolatedModule<OptionsModule, Record<string, unknown>>({
+	const { cleanup, module } = await loadIsolatedModule<
+		OptionsModule,
+		Record<string, unknown>
+	>({
 		modulePath: new URL("../../src/settings/options.js", import.meta.url),
 		additionalExports: [
 			"_buildCssRule",
@@ -364,7 +382,8 @@ function __getState() {
 			USE_LIGHTNING_NAVIGATION: "use-lightning-navigation",
 			USER_LANGUAGE: "user-language",
 			WHAT_SET: "what-set",
-			areFramePatternsAllowed: async () => areFramePatternsAllowedResult.value,
+			areFramePatternsAllowed: async () =>
+				areFramePatternsAllowedResult.value,
 			ensureTranslatorAvailability: async () => ({
 				translate: async (key: string) => key,
 			}),
@@ -377,10 +396,16 @@ function __getState() {
 				return `.selector-${cssSelectorCalls.length}`;
 			},
 			getPinnedSpecificKey: (
-				{ isGeneric, isPinned }: { isGeneric: boolean; isPinned: boolean },
-			) => `${isGeneric ? "generic" : "org"}-${isPinned ? "pinned" : "unpinned"}`,
+				{ isGeneric, isPinned }: {
+					isGeneric: boolean;
+					isPinned: boolean;
+				},
+			) => `${isGeneric ? "generic" : "org"}-${
+				isPinned ? "pinned" : "unpinned"
+			}`,
 			getSettings: async () => settingsResult.value,
-			getStyleSettings: async (key: string) => styleSettings.get(key) ?? null,
+			getStyleSettings: async (key: string) =>
+				styleSettings.get(key) ?? null,
 			injectStyle: (id: string, { css }: { css: string | null }) => {
 				injectStyleCalls.push({ css, id });
 				return new OptionElement(id, "style");
@@ -389,9 +414,11 @@ function __getState() {
 			isGenericKey: (key: string) => key.includes("generic"),
 			isPinnedKey: (key: string) => key.includes("pinned"),
 			isStyleKey: () => isStyleKeyResult.value,
-			requestCookiesPermission: async () => requestCookiesPermissionResult.value,
+			requestCookiesPermission: async () =>
+				requestCookiesPermissionResult.value,
 			requestExportPermission: async () => exportPermissionResult.value,
-			requestFramePatternsPermission: async () => framePatternsPermissionResult.value,
+			requestFramePatternsPermission: async () =>
+				framePatternsPermissionResult.value,
 			sendExtensionMessage: (message: Record<string, unknown>) => {
 				sendMessages.push(message);
 			},
@@ -407,9 +434,11 @@ function __getState() {
 			},
 			document: {
 				documentElement,
-				getElementById: (id: string) => getOrCreateElement(elements, id),
+				getElementById: (id: string) =>
+					getOrCreateElement(elements, id),
 				querySelector: (selector: string) =>
-					querySelectorMap.get(selector) ?? getOrCreateElement(elements, selector),
+					querySelectorMap.get(selector) ??
+						getOrCreateElement(elements, selector),
 			},
 			__runRestoreGeneralSettingsOnLoad: runRestoreOnLoad,
 			__restoreGeneralSettingsOnLoadPromise: undefined,
@@ -448,10 +477,9 @@ function __getState() {
 		module,
 		querySelectors: querySelectorMap,
 		requestCookiesPermissionResult,
-		restoreOnLoadPromise:
-			(globalThis as {
-				__restoreGeneralSettingsOnLoadPromise?: Promise<void>;
-			}).__restoreGeneralSettingsOnLoadPromise ?? Promise.resolve(),
+		restoreOnLoadPromise: (globalThis as {
+			__restoreGeneralSettingsOnLoadPromise?: Promise<void>;
+		}).__restoreGeneralSettingsOnLoadPromise ?? Promise.resolve(),
 		scheduledTimeouts,
 		sendMessages,
 		settingsResult,
@@ -470,9 +498,15 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 		fixture.module.__setState({ listenersSet: { settings: true } });
 		fixture.module.__setState({ listenersSet: { other: true } });
 		fixture.module.startThemeTransition();
-		assertEquals(fixture.documentElement.classList.contains("theme-transitioning"), true);
+		assertEquals(
+			fixture.documentElement.classList.contains("theme-transitioning"),
+			true,
+		);
 		fixture.scheduledTimeouts[0]();
-		assertEquals(fixture.documentElement.classList.contains("theme-transitioning"), false);
+		assertEquals(
+			fixture.documentElement.classList.contains("theme-transitioning"),
+			false,
+		);
 
 		fixture.module.startThemeTransition();
 		assertEquals(fixture.clearTimeoutCalls, [null, 1]);
@@ -482,14 +516,17 @@ Deno.test("options starts the theme transition and builds checkbox payloads", as
 			Error,
 			"error_required_params",
 		);
-		assertEquals(fixture.module.getObjectToSet({
-			key: "settings-key",
-			set: [{ id: "a" }],
-		}), {
-			key: "settings-key",
-			set: [{ id: "a" }],
-			what: "what-set",
-		});
+		assertEquals(
+			fixture.module.getObjectToSet({
+				key: "settings-key",
+				set: [{ id: "a" }],
+			}),
+			{
+				key: "settings-key",
+				set: [{ id: "a" }],
+				what: "what-set",
+			},
+		);
 
 		const checkbox = new OptionElement("allow-export");
 		checkbox.checked = true;
@@ -593,17 +630,32 @@ Deno.test("options resolves tab element ids and tab element groups", async () =>
 		});
 		assertEquals(inactiveTabElements.elements.top, null);
 		assertEquals(inactiveTabElements.decorations.length, 3);
-		assertEquals(inactiveTabElements.moveBtns.available.id, "generic-move-available-inactive");
-		assertEquals(inactiveTabElements.styleIds.hover, "awsf-hover-style-generic-inactive");
+		assertEquals(
+			inactiveTabElements.moveBtns.available.id,
+			"generic-move-available-inactive",
+		);
+		assertEquals(
+			inactiveTabElements.styleIds.hover,
+			"awsf-hover-style-generic-inactive",
+		);
 
 		const activeTabElements = fixture.module.createTabElements({
 			prefix: "pinned_",
 			state: "active",
 			tabType: "org",
 		});
-		assertEquals(activeTabElements.elements.top?.id, "pinned_org-top-active");
-		assertEquals(activeTabElements.decorationUls.chosen.id, "pinned_org-set_decoration_chosen-active");
-		assertEquals(activeTabElements.styleIds.top, "awsf-pinned_-top-style-org-active");
+		assertEquals(
+			activeTabElements.elements.top?.id,
+			"pinned_org-top-active",
+		);
+		assertEquals(
+			activeTabElements.decorationUls.chosen.id,
+			"pinned_org-set_decoration_chosen-active",
+		);
+		assertEquals(
+			activeTabElements.styleIds.top,
+			"awsf-pinned_-top-style-org-active",
+		);
 		assertEquals(fixture.module.getPinKey({ isPinned: false }), "unpinned");
 		assertEquals(fixture.module.getPinKey({ isPinned: true }), "pinned");
 	} finally {
@@ -700,7 +752,10 @@ Deno.test("options builds structured style configuration maps", async () => {
 			"active-unpinned-bold",
 			"active-unpinned-top",
 		]);
-		assertEquals(structured.pinned.inactive.moveBtns.available, "inactive-pinned-move-available");
+		assertEquals(
+			structured.pinned.inactive.moveBtns.available,
+			"inactive-pinned-move-available",
+		);
 	} finally {
 		fixture.cleanup();
 	}
@@ -779,14 +834,24 @@ Deno.test("options builds preview css rules and updates preview inputs", async (
 		assertEquals(
 			fixture.module._buildCssRule(
 				{ id: "hover", value: "red" },
-				{ isForInactive: false, isGeneric: true, isPinned: true, wasPicked: false },
+				{
+					isForInactive: false,
+					isGeneric: true,
+					isPinned: true,
+					wasPicked: false,
+				},
 			),
 			null,
 		);
 		assertEquals(
 			fixture.module._buildCssRule(
 				{ id: "hover", value: "red" },
-				{ isForInactive: false, isGeneric: true, isPinned: true, wasPicked: true },
+				{
+					isForInactive: false,
+					isGeneric: true,
+					isPinned: true,
+					wasPicked: true,
+				},
 			),
 			".selector-1{ hover:red; }",
 		);
@@ -846,7 +911,8 @@ Deno.test("options builds preview css rules and updates preview inputs", async (
 			value: "bold",
 		});
 		assertEquals(
-			fixture.elements.get("generic-set_decoration_chosen-active")?.children[0],
+			fixture.elements.get("generic-set_decoration_chosen-active")
+				?.children[0],
 			fixture.elements.get("generic-bold-active"),
 		);
 	} finally {
@@ -877,16 +943,25 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 			enabled: "recent",
 			id: "persist-sort",
 		});
-		assertEquals(fixture.elements.get("keep_sorted")?.checked, "recent" as unknown as boolean);
+		assertEquals(
+			fixture.elements.get("keep_sorted")?.checked,
+			"recent" as unknown as boolean,
+		);
 		assertEquals(fixture.elements.get("picked-sort")?.value, "recent");
-		assertEquals(fixture.elements.get("picked-sort-direction")?.value, "descending");
+		assertEquals(
+			fixture.elements.get("picked-sort-direction")?.value,
+			"descending",
+		);
 		assertEquals(sortWrapper.classList.contains("invisible"), false);
 		fixture.module.setCurrentChoice({
 			ascending: true,
 			enabled: "recent",
 			id: "persist-sort",
 		});
-		assertEquals(fixture.elements.get("picked-sort-direction")?.value, "ascending");
+		assertEquals(
+			fixture.elements.get("picked-sort-direction")?.value,
+			"ascending",
+		);
 
 		fixture.module.setCurrentChoice({
 			id: "generic-style",
@@ -896,12 +971,18 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 				value: "gold",
 			}],
 		});
-		assertEquals(fixture.elements.get("generic-color-active")?.value, "gold");
+		assertEquals(
+			fixture.elements.get("generic-color-active")?.value,
+			"gold",
+		);
 
 		fixture.module.setCurrentChoice({
 			id: "unknown-setting",
 		});
-		assertEquals(fixture.consoleErrors.at(-1), "Unmatched setting id: unknown-setting");
+		assertEquals(
+			fixture.consoleErrors.at(-1),
+			"Unmatched setting id: unknown-setting",
+		);
 
 		fixture.module.savePickedSort("custom-key", "ascending");
 		assertEquals(fixture.elements.get("tab-add-front")?.checked, false);
@@ -957,7 +1038,9 @@ Deno.test("options restores general settings and handles general setting listene
 	const skipLinkDetection = fixture.elements.get("skip-link-detection")!;
 	const sortWrapper = fixture.elements.get("sort-wrapper")!;
 	const tabAddFront = fixture.elements.get("tab-add-front")!;
-	const useLightningNavigation = fixture.elements.get("use-lightning-navigation")!;
+	const useLightningNavigation = fixture.elements.get(
+		"use-lightning-navigation",
+	)!;
 	const userLanguage = fixture.elements.get("user-language")!;
 	sortWrapper.classList.add("invisible");
 	userLanguage.value = "en";
@@ -1100,10 +1183,16 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 	const activeInput = fixture.elements.get("generic-border-active")!;
 	activeInput.dataset.styleKey = "border";
 	activeInput.value = "2px";
-	const inactiveDecoration = createListItem("generic-italic-inactive", "italic");
+	const inactiveDecoration = createListItem(
+		"generic-italic-inactive",
+		"italic",
+	);
 	const activeDecoration = createListItem("generic-bold-active", "bold");
 	const destination = new OptionElement("destination", "ul");
-	const otherDecoration = createListItem("generic-underline-active", "underline");
+	const otherDecoration = createListItem(
+		"generic-underline-active",
+		"underline",
+	);
 	const child = new OptionElement("child", "span");
 	child.parentNode = activeDecoration;
 	const preview = new OptionElement("preview");
@@ -1111,14 +1200,21 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 	fixture.module.__setState({ activePreview: preview });
 
 	try {
-		fixture.module.saveTabOptions({ target: activeInput }, "org-pinned-style");
+		fixture.module.saveTabOptions(
+			{ target: activeInput },
+			"org-pinned-style",
+		);
 		assertEquals(fixture.sendMessages.at(-1), {
 			key: "org-pinned-style",
 			set: [{ forActive: true, id: "border", value: "2px" }],
 			what: "what-set",
 		});
 
-		fixture.module.saveTabDecorations([inactiveDecoration], false, "generic-style");
+		fixture.module.saveTabDecorations(
+			[inactiveDecoration],
+			false,
+			"generic-style",
+		);
 		assertEquals(fixture.sendMessages.at(-1), {
 			key: "generic-style",
 			set: [
@@ -1176,13 +1272,19 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 			isPinned: true,
 		});
 		assertEquals(Array.isArray(orgPinnedResources.inputs.active), true);
-		assertEquals(Array.isArray(orgPinnedResources.decorations.inactive), true);
+		assertEquals(
+			Array.isArray(orgPinnedResources.decorations.inactive),
+			true,
+		);
 
 		fixture.styleSettings.set("generic-pinned-style", [
 			{ forActive: false, id: "shadow", value: "4px" },
 		]);
 		await fixture.module._restoreSettings("generic-pinned-style");
-		assertEquals(fixture.elements.get("pinned_generic-shadow-inactive")?.value, "4px");
+		assertEquals(
+			fixture.elements.get("pinned_generic-shadow-inactive")?.value,
+			"4px",
+		);
 	} finally {
 		fixture.cleanup();
 	}
@@ -1219,7 +1321,10 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		fixture.isStyleKeyResult.value = true;
 
 		await fixture.module.restoreTabSettings("generic-style");
-		assertEquals(fixture.module.__getState().listenersSet["generic-unpinned"], true);
+		assertEquals(
+			fixture.module.__getState().listenersSet["generic-unpinned"],
+			true,
+		);
 		assertEquals(activeInput.value, "navy");
 
 		activeInput.value = "orange";
@@ -1230,37 +1335,57 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 			what: "what-set",
 		});
 
-		fixture.module.__setState({ activePreview: fixture.elements.get("generic-preview") });
+		fixture.module.__setState({
+			activePreview: fixture.elements.get("generic-preview"),
+		});
 		await inactiveInput.dispatch("click");
 		assertEquals(
-			fixture.elements.get("generic-preview")?.classList.contains("slds-active"),
+			fixture.elements.get("generic-preview")?.classList.contains(
+				"slds-active",
+			),
 			false,
 		);
 		await activeInput.dispatch("click");
 		assertEquals(
-			fixture.elements.get("generic-preview")?.classList.contains("slds-active"),
+			fixture.elements.get("generic-preview")?.classList.contains(
+				"slds-active",
+			),
 			true,
 		);
 
 		const inactiveLi = new OptionElement("inactive-li", "li");
 		inactiveDecoration.parentNode = inactiveLi;
-		await inactiveDecoration.dispatch("click", { target: inactiveDecoration });
+		await inactiveDecoration.dispatch("click", {
+			target: inactiveDecoration,
+		});
 		assertEquals(inactiveLi.ariaSelected, true as unknown as string);
 
-		const inactiveChosenButton = resources.inactive.moveBtns.chosen as OptionElement;
-		const inactiveAvailableButton = resources.inactive.moveBtns.available as OptionElement;
+		const inactiveChosenButton = resources.inactive.moveBtns
+			.chosen as OptionElement;
+		const inactiveAvailableButton = resources.inactive.moveBtns
+			.available as OptionElement;
 		const inactiveChosenUl = resources.inactive.uls.chosen as OptionElement;
-		const inactiveAvailableUl = resources.inactive.uls.available as OptionElement;
-		const activeAvailableButton = resources.active.moveBtns.available as OptionElement;
-		const activeChosenButton = resources.active.moveBtns.chosen as OptionElement;
+		const inactiveAvailableUl = resources.inactive.uls
+			.available as OptionElement;
+		const activeAvailableButton = resources.active.moveBtns
+			.available as OptionElement;
+		const activeChosenButton = resources.active.moveBtns
+			.chosen as OptionElement;
 		const activeChosenUl = resources.active.uls.chosen as OptionElement;
-		const activeAvailableUl = resources.active.uls.available as OptionElement;
+		const activeAvailableUl = resources.active.uls
+			.available as OptionElement;
 		inactiveDecoration.ariaSelected = "true";
 		await inactiveChosenButton.dispatch("click");
-		assertEquals(inactiveChosenUl.children.includes(inactiveDecoration), true);
+		assertEquals(
+			inactiveChosenUl.children.includes(inactiveDecoration),
+			true,
+		);
 		inactiveDecoration.ariaSelected = "true";
 		await inactiveAvailableButton.dispatch("click");
-		assertEquals(inactiveAvailableUl.children.includes(inactiveDecoration), true);
+		assertEquals(
+			inactiveAvailableUl.children.includes(inactiveDecoration),
+			true,
+		);
 
 		const activeLi = new OptionElement("active-li", "li");
 		activeDecoration.parentNode = activeLi;
@@ -1271,7 +1396,10 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		assertEquals(activeChosenUl.children.includes(activeDecoration), true);
 		activeDecoration.ariaSelected = "true";
 		await activeAvailableButton.dispatch("click");
-		assertEquals(activeAvailableUl.children.includes(activeDecoration), true);
+		assertEquals(
+			activeAvailableUl.children.includes(activeDecoration),
+			true,
+		);
 
 		inactiveInput.value = "teal";
 		await inactiveInput.dispatch("change");
@@ -1302,20 +1430,35 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 			header: fixture.elements.get("org-settings"),
 			preview: fixture.elements.get("org-preview"),
 		});
-		assertEquals(fixture.elements.get("org-settings")?.classList.contains("slds-active"), true);
-		assertEquals(fixture.module.__getState().activePreview, fixture.elements.get("org-preview"));
+		assertEquals(
+			fixture.elements.get("org-settings")?.classList.contains(
+				"slds-active",
+			),
+			true,
+		);
+		assertEquals(
+			fixture.module.__getState().activePreview,
+			fixture.elements.get("org-preview"),
+		);
 
 		await fixture.elements.get("general-settings")!.dispatch("click");
 		await fixture.elements.get("generic-settings")!.dispatch("click");
 		await fixture.elements.get("org-settings")!.dispatch("click");
-		await fixture.elements.get("pinned_generic-settings")!.dispatch("click");
+		await fixture.elements.get("pinned_generic-settings")!.dispatch(
+			"click",
+		);
 		await fixture.elements.get("pinned_org-settings")!.dispatch("click");
-		assertEquals(fixture.module.__getState().listenersSet["org-pinned"], true);
+		assertEquals(
+			fixture.module.__getState().listenersSet["org-pinned"],
+			true,
+		);
 
 		fixture.elements.get("keep_sorted")!.checked = true;
 		fixture.elements.get("picked-sort")!.value = "alpha";
 		fixture.elements.get("picked-sort-direction")!.value = "ascending";
-		await fixture.querySelectors.get("#save-container > button")!.dispatch("click");
+		await fixture.querySelectors.get("#save-container > button")!.dispatch(
+			"click",
+		);
 		assertEquals(fixture.sendMessages.at(-1), {
 			key: "settings-key",
 			set: [
@@ -1324,7 +1467,12 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 			],
 			what: "what-set",
 		});
-		assertEquals(fixture.elements.get("save-confirm")?.classList.contains("invisible"), false);
+		assertEquals(
+			fixture.elements.get("save-confirm")?.classList.contains(
+				"invisible",
+			),
+			false,
+		);
 	} finally {
 		fixture.cleanup();
 	}

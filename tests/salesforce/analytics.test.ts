@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-explicit-any
 import {
 	assertEquals,
 	assertExists,
@@ -42,7 +41,8 @@ function startOfYesterdayIso() {
  *   steps: Array<{
  *     existingCspContent?: string,
  *     settingsBeforeCall?: any[],
- *     silenceInfo?: boolean
+ *     silenceInfo?: boolean,
+ *     useDocumentElementOnly?: boolean
  *   }>
  * }} scenario Worker setup and per-invocation steps to execute.
  * @return {Promise<{
@@ -85,6 +85,7 @@ async function runAnalyticsWorker(scenario: {
 		existingCspContent?: string;
 		settingsBeforeCall?: AnalyticsSetting[];
 		silenceInfo?: boolean;
+		useDocumentElementOnly?: boolean;
 	}>;
 }): Promise<AnalyticsWorkerResult> {
 	const worker = new Worker(
@@ -348,4 +349,17 @@ Deno.test("checkInsertAnalytics repeated Chrome calls on the same day stop after
 		"set",
 		"get-settings",
 	]);
+});
+
+Deno.test("checkInsertAnalytics appends analytics tags when document.head is unavailable", async () => {
+	const result = await runAnalyticsWorker({
+		browserName: "chrome",
+		initialSettings: [],
+		steps: [{
+			useDocumentElementOnly: true,
+		}],
+	});
+
+	assertEquals(result.results[0].headChildrenCount, 2);
+	assertEquals(result.results[0].beaconPath, "/new-user");
 });

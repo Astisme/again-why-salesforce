@@ -1,5 +1,10 @@
 import "../mocks.ts";
-import { assert, assertEquals, assertFalse, assertRejects } from "@std/testing/asserts";
+import {
+	assert,
+	assertEquals,
+	assertFalse,
+	assertRejects,
+} from "@std/testing/asserts";
 import { waitForCondition, waitForNextTask } from "../async.ts";
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
@@ -15,7 +20,9 @@ import { BROWSER } from "/constants.js";
 const NativeURL = globalThis.URL;
 
 type BackgroundUtilsModule = {
-	_exportHandler: (tabs: object[] | { length?: number; tabs?: object[] }) => void;
+	_exportHandler: (
+		tabs: object[] | { length?: number; tabs?: object[] },
+	) => void;
 	_isNewerVersion: (latest: string, current: string) => boolean;
 	checkForUpdates: () => Promise<void>;
 	requestExportPermission: () => boolean;
@@ -27,9 +34,13 @@ type BackgroundUtilsDependencies = {
 			setPopup: (details: { popup: string }) => void;
 		};
 		downloads: {
-			download: (details: { filename: string; url: string }) => Promise<number> | number;
+			download: (
+				details: { filename: string; url: string },
+			) => Promise<number> | number;
 			onChanged: {
-				addListener: (listener: (event: { state: { current: string } }) => void) => void;
+				addListener: (
+					listener: (event: { state: { current: string } }) => void,
+				) => void;
 			};
 		} | null;
 		runtime: {
@@ -55,7 +66,9 @@ type BackgroundUtilsDependencies = {
 	TabContainer: {
 		keyTabs: string;
 	};
-	bg_getSettings: (_key: string) => Promise<{ date?: string; enabled?: boolean } | null>;
+	bg_getSettings: (
+		_key: string,
+	) => Promise<{ date?: string; enabled?: boolean } | null>;
 	bg_getStorage: (callback: (tabs: object[]) => void) => Promise<void>;
 	bg_setStorage: (value: object[], other?: null, key?: string) => void;
 };
@@ -100,7 +113,9 @@ async function loadBackgroundUtilsModule(
 		isChrome?: boolean;
 		isExportAllowed?: boolean;
 		isFirefox?: boolean;
-		releases?: Array<{ created_at: string; prerelease: boolean; tag_name: string }>;
+		releases?: Array<
+			{ created_at: string; prerelease: boolean; tag_name: string }
+		>;
 		responseOk?: boolean;
 		updateSetting?: { date?: string; enabled?: boolean } | null;
 	} = {},
@@ -123,8 +138,15 @@ async function loadBackgroundUtilsModule(
 		BackgroundUtilsModule,
 		BackgroundUtilsDependencies
 	>({
-		modulePath: new NativeURL("../../src/background/utils.js", import.meta.url),
-		additionalExports: ["_exportHandler", "_isNewerVersion", "requestExportPermission"],
+		modulePath: new NativeURL(
+			"../../src/background/utils.js",
+			import.meta.url,
+		),
+		additionalExports: [
+			"_exportHandler",
+			"_isNewerVersion",
+			"requestExportPermission",
+		],
 		dependencies: {
 			BROWSER: {
 				action: {
@@ -154,7 +176,8 @@ async function loadBackgroundUtilsModule(
 					},
 				},
 			},
-			EXTENSION_GITHUB_LINK: "https://github.com/acme/again-why-salesforce",
+			EXTENSION_GITHUB_LINK:
+				"https://github.com/acme/again-why-salesforce",
 			EXTENSION_NAME: "again-why-salesforce",
 			EXTENSION_VERSION: extensionVersion,
 			ISCHROME: isChrome,
@@ -328,115 +351,130 @@ Deno.test("checkForUpdates idempotency", async (t) => {
 });
 
 Deno.test("background utils isolated branches cover export handlers and update checks", async (t) => {
-	await t.step("export handler covers Firefox, Chrome, and fallback notification paths", async () => {
-		const firefox = await loadBackgroundUtilsModule({ isFirefox: true });
-		try {
-			firefox.module._exportHandler([{ url: "/firefox" }]);
-			await waitForNextTask();
-			firefox.triggerDownloadComplete();
-			assert(firefox.downloads[0].url.startsWith("blob:"));
-			assertEquals(firefox.revokedUrls, ["blob:test"]);
-		} finally {
-			firefox.cleanup();
-		}
+	await t.step(
+		"export handler covers Firefox, Chrome, and fallback notification paths",
+		async () => {
+			const firefox = await loadBackgroundUtilsModule({
+				isFirefox: true,
+			});
+			try {
+				firefox.module._exportHandler([{ url: "/firefox" }]);
+				await waitForNextTask();
+				firefox.triggerDownloadComplete();
+				assert(firefox.downloads[0].url.startsWith("blob:"));
+				assertEquals(firefox.revokedUrls, ["blob:test"]);
+			} finally {
+				firefox.cleanup();
+			}
 
-		const chrome = await loadBackgroundUtilsModule({ isChrome: true });
-		try {
-			chrome.module._exportHandler([{ url: "/chrome" }]);
-			assert(chrome.downloads[0].url.startsWith(
-				"data:application/json;charset=utf-8,",
-			));
-		} finally {
-			chrome.cleanup();
-		}
+			const chrome = await loadBackgroundUtilsModule({ isChrome: true });
+			try {
+				chrome.module._exportHandler([{ url: "/chrome" }]);
+				assert(chrome.downloads[0].url.startsWith(
+					"data:application/json;charset=utf-8,",
+				));
+			} finally {
+				chrome.cleanup();
+			}
 
-		const fallback = await loadBackgroundUtilsModule({
-			isChrome: false,
-			isFirefox: false,
-		});
-		try {
-			fallback.module._exportHandler([{ url: "/safari" }]);
-			await waitForCondition(() => fallback.messages.length === 1);
-			assertEquals(fallback.messages, [{
-				what: "export-from-bg",
-				filename: "again-why-salesforce_1-Tabs.json",
-				payload: JSON.stringify([{ url: "/safari" }]),
-			}]);
-		} finally {
-			fallback.cleanup();
-		}
-	});
+			const fallback = await loadBackgroundUtilsModule({
+				isChrome: false,
+				isFirefox: false,
+			});
+			try {
+				fallback.module._exportHandler([{ url: "/safari" }]);
+				await waitForCondition(() => fallback.messages.length === 1);
+				assertEquals(fallback.messages, [{
+					what: "export-from-bg",
+					filename: "again-why-salesforce_1-Tabs.json",
+					payload: JSON.stringify([{ url: "/safari" }]),
+				}]);
+			} finally {
+				fallback.cleanup();
+			}
+		},
+	);
 
-	await t.step("requestExportPermission returns false when the permission page url is unavailable", async () => {
-		const fixture = await loadBackgroundUtilsModule({
-			getURL: () => null,
-			isExportAllowed: false,
-		});
-		try {
-			assertEquals(fixture.module.requestExportPermission(), false);
-			assertEquals(fixture.popups, []);
-		} finally {
-			fixture.cleanup();
-		}
-	});
+	await t.step(
+		"requestExportPermission returns false when the permission page url is unavailable",
+		async () => {
+			const fixture = await loadBackgroundUtilsModule({
+				getURL: () => null,
+				isExportAllowed: false,
+			});
+			try {
+				assertEquals(fixture.module.requestExportPermission(), false);
+				assertEquals(fixture.popups, []);
+			} finally {
+				fixture.cleanup();
+			}
+		},
+	);
 
-	await t.step("version comparison and update checks cover newer, older, skipped, and failed fetch branches", async () => {
-		const versionFixture = await loadBackgroundUtilsModule();
-		try {
-			assert(versionFixture.module._isNewerVersion("1.2.0", "1.1.9"));
-			assertFalse(versionFixture.module._isNewerVersion("1.0.0", "1.0.1"));
-			assertFalse(versionFixture.module._isNewerVersion("1.0", "1.0.0"));
-		} finally {
-			versionFixture.cleanup();
-		}
+	await t.step(
+		"version comparison and update checks cover newer, older, skipped, and failed fetch branches",
+		async () => {
+			const versionFixture = await loadBackgroundUtilsModule();
+			try {
+				assert(versionFixture.module._isNewerVersion("1.2.0", "1.1.9"));
+				assertFalse(
+					versionFixture.module._isNewerVersion("1.0.0", "1.0.1"),
+				);
+				assertFalse(
+					versionFixture.module._isNewerVersion("1.0", "1.0.0"),
+				);
+			} finally {
+				versionFixture.cleanup();
+			}
 
-		const updateFixture = await loadBackgroundUtilsModule({
-			extensionVersion: "1.0.0",
-			releases: [
-				{
-					tag_name: "release-v1.1.0",
-					prerelease: false,
-					created_at: "2025-02-01T00:00:00.000Z",
-				},
-				{
-					tag_name: "release-v2.0.0-beta",
-					prerelease: true,
-					created_at: "2025-03-01T00:00:00.000Z",
-				},
-			],
-		});
-		try {
-			await updateFixture.module.checkForUpdates();
-			assertEquals(updateFixture.storageWrites.length, 1);
-			assertEquals(updateFixture.messages, [{
-				what: "update-extension",
-				oldversion: "1.0.0",
-				version: "1.1.0",
-				link: "https://github.com/acme/again-why-salesforce",
-			}]);
-		} finally {
-			updateFixture.cleanup();
-		}
+			const updateFixture = await loadBackgroundUtilsModule({
+				extensionVersion: "1.0.0",
+				releases: [
+					{
+						tag_name: "release-v1.1.0",
+						prerelease: false,
+						created_at: "2025-02-01T00:00:00.000Z",
+					},
+					{
+						tag_name: "release-v2.0.0-beta",
+						prerelease: true,
+						created_at: "2025-03-01T00:00:00.000Z",
+					},
+				],
+			});
+			try {
+				await updateFixture.module.checkForUpdates();
+				assertEquals(updateFixture.storageWrites.length, 1);
+				assertEquals(updateFixture.messages, [{
+					what: "update-extension",
+					oldversion: "1.0.0",
+					version: "1.1.0",
+					link: "https://github.com/acme/again-why-salesforce",
+				}]);
+			} finally {
+				updateFixture.cleanup();
+			}
 
-		const skippedFixture = await loadBackgroundUtilsModule({
-			updateSetting: { enabled: true },
-		});
-		try {
-			await skippedFixture.module.checkForUpdates();
-			assertEquals(skippedFixture.storageWrites.length, 0);
-			assertEquals(skippedFixture.messages, []);
-		} finally {
-			skippedFixture.cleanup();
-		}
+			const skippedFixture = await loadBackgroundUtilsModule({
+				updateSetting: { enabled: true },
+			});
+			try {
+				await skippedFixture.module.checkForUpdates();
+				assertEquals(skippedFixture.storageWrites.length, 0);
+				assertEquals(skippedFixture.messages, []);
+			} finally {
+				skippedFixture.cleanup();
+			}
 
-		const failedFixture = await loadBackgroundUtilsModule({
-			responseOk: false,
-		});
-		try {
-			await failedFixture.module.checkForUpdates();
-			assertEquals(failedFixture.messages, []);
-		} finally {
-			failedFixture.cleanup();
-		}
-	});
+			const failedFixture = await loadBackgroundUtilsModule({
+				responseOk: false,
+			});
+			try {
+				await failedFixture.module.checkForUpdates();
+				assertEquals(failedFixture.messages, []);
+			} finally {
+				failedFixture.cleanup();
+			}
+		},
+	);
 });
