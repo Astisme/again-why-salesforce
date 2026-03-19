@@ -47,7 +47,7 @@ function appendElement(
 	document: MockDocument,
 	tagName: string,
 	id: string,
-) {
+): MockElement {
 	const element = document.createElement(tagName);
 	element.id = id;
 	document.body.appendChild(element);
@@ -110,19 +110,22 @@ async function loadPopupModule({
 			WHAT_GET_COMMANDS: "get-commands",
 			WHAT_SHOW_IMPORT: "show-import",
 			WHAT_START_TUTORIAL: "start-tutorial",
-			areFramePatternsAllowed: async () => framePatternsAllowed,
-			ensureTranslatorAvailability: async () => {
+			areFramePatternsAllowed: () =>
+				Promise.resolve(framePatternsAllowed),
+			ensureTranslatorAvailability: () => {
 				counters.translatorCalls++;
-				return {
+				return Promise.resolve({
 					separator: "+-+",
-					translate: async (message) =>
-						Array.isArray(message)
-							? message.join(" ")
-							: `translated:${message}`,
+					translate: (message) =>
+						Promise.resolve(
+							Array.isArray(message)
+								? message.join(" ")
+								: `translated:${message}`,
+						),
 					translateAttributeDataset: "i18n",
-				};
+				});
 			},
-			isOnSalesforceSetup: async () => salesforceState,
+			isOnSalesforceSetup: () => Promise.resolve(salesforceState),
 			openSettingsPage: () => {
 				counters.openSettingsCalls++;
 			},

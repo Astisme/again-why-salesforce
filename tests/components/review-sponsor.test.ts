@@ -597,7 +597,6 @@ Deno.test("show review or sponsor block", async (t) => {
 				const reviewLink = links[0] as HTMLAnchorElement | undefined;
 				const sponsorLink = links[1] as HTMLAnchorElement | undefined;
 				const reviewSvg = reviewLink?.querySelector("svg");
-				const sponsorSvg = sponsorLink?.querySelector("svg");
 				assert(reviewLink != null);
 				assert(sponsorLink != null);
 				assert(reviewSvg != null);

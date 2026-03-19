@@ -282,9 +282,10 @@ async function loadDragHandler({
 				getElementById: () => ulContainer,
 				querySelector: () => tableContainer,
 			},
-			ensureAllTabsAvailability: async () => ({
-				pinnedTabsNo: pinnedTabs,
-			}),
+			ensureAllTabsAvailability: () =>
+				Promise.resolve({
+					pinnedTabsNo: pinnedTabs,
+				}),
 			setTimeout: (_callback, delay) => {
 				timeoutCalls.push(delay);
 				return timeoutCalls.length;

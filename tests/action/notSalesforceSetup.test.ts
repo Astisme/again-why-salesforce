@@ -55,7 +55,7 @@ function appendElement(
 	document: MockDocument,
 	tagName: string,
 	id: string,
-) {
+): MockElement {
 	const element = document.createElement(tagName);
 	element.id = id;
 	document.body.appendChild(element);
@@ -138,10 +138,11 @@ async function loadNotSalesforceSetupModule({
 					warnings.push(error);
 				},
 			},
-			ensureTranslatorAvailability: async () => {
+			ensureTranslatorAvailability: () => {
 				counters.translatorCalls++;
+				return Promise.resolve();
 			},
-			getSettings: async () => settings,
+			getSettings: () => Promise.resolve(settings),
 			sendExtensionMessage: (message, callback) => {
 				sendMessages.push(message);
 				callback(remainingResponses.shift() ?? null);

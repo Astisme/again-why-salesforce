@@ -6,7 +6,6 @@ import {
 import { loadIsolatedModule } from "../load-isolated-module.ts";
 
 type OptionsModule = {
-	[key: string]: any;
 	buildDecorationConfigs: (
 		styles: string[],
 		configs: Record<string, Record<string, unknown>>,
@@ -69,7 +68,120 @@ type OptionsModule = {
 		event: { target: OptionElement },
 		...dependentCheckboxElements: OptionElement[]
 	) => void;
+	__getState: () => {
+		activePreview: OptionElement | null;
+		listenersSet: Record<string, boolean>;
+	};
+	__setState: (state: {
+		activePreview?: OptionElement | null;
+		listenersSet?: Record<string, boolean>;
+	}) => void;
+	_buildCssRule: (
+		setting: { id: string; value: string },
+		options: {
+			isForInactive: boolean;
+			isGeneric: boolean;
+			isPinned: boolean;
+			wasPicked: boolean;
+		},
+	) => string | null;
+	_flipSelected: (
+		event: { target: OptionElement },
+		isSelected: boolean,
+	) => void;
+	_getElementReferences: (
+		config: Record<string, object | string | null>,
+		options: {
+			isForInactive: boolean;
+			isGeneric: boolean;
+			pinKey: string;
+			wasPicked?: boolean;
+		},
+	) => { chosenUl?: OptionElement | null; input?: OptionElement | null };
+	_getPseudoSelector: (id: string) => string;
+	_getReferencesByKey: (
+		configs?: {
+			active: Record<string, Record<string, string>>;
+			inactive: Record<string, Record<string, string>>;
+		},
+		key?: string,
+	) => {
+		active: Record<string, string>;
+		inactive: Record<string, string>;
+	};
+	_getStyleId: (
+		config: Record<string, object | string | null>,
+		options: {
+			isForInactive: boolean;
+			isGeneric: boolean;
+			pinKey: string;
+		},
+	) => string | null;
+	_getTabResources: (options: {
+		isGeneric: boolean;
+		isPinned: boolean;
+	}) => {
+		inputs: { active: OptionElement[]; inactive: OptionElement[] };
+		decorations: { active: OptionElement[]; inactive: OptionElement[] };
+		active: {
+			moveBtns: Record<string, OptionElement | null>;
+			uls: Record<string, OptionElement | null>;
+		};
+		inactive: {
+			moveBtns: Record<string, OptionElement | null>;
+			uls: Record<string, OptionElement | null>;
+		};
+	};
+	_restoreSettings: (key: string) => Promise<void>;
+	_updateUIElements: (
+		references: {
+			chosenUl?: OptionElement | null;
+			input?: OptionElement | null;
+		},
+		value: string,
+	) => void;
+	getContainers: (key?: string) => {
+		container: OptionElement;
+		header: OptionElement;
+		preview: OptionElement;
+	};
+	moveSelectedDecorationsTo: (options?: {
+		allDecorations: OptionElement[];
+		allMovableDecorations: OptionElement[];
+		isAdding: boolean;
+		key: string;
+		moveHereElement: OptionElement;
+	}) => void;
+	restoreGeneralSettings: () => Promise<void>;
+	restoreTabSettings: (key: string) => Promise<void>;
+	savePickedSort: (key?: string | null, direction?: string | null) => void;
+	saveTabDecorations: (
+		decorations: OptionElement[],
+		isForActive: boolean,
+		key: string,
+	) => void;
+	saveTabOptions: (event: { target: OptionElement }, key: string) => void;
+	setActivePreview: (options: { isActive: boolean }) => void;
+	setCurrentChoice: (choice: {
+		ascending?: boolean;
+		enabled?: boolean | string;
+		id: string;
+		value?: Array<{ forActive: boolean; id: string; value: string }>;
+	}) => void;
+	setPreviewAndInputValue: (options: {
+		forActive: boolean;
+		id: string;
+		value: string;
+	}) => void;
+	showRelevantSettings_HideOthers: (options: {
+		container?: OptionElement;
+		header?: OptionElement;
+		preview?: OptionElement;
+	}) => void;
+	showThenHideToast: (toast: OptionElement) => void;
+	showToast: (message: string, isSuccess: boolean) => Promise<void>;
 	startThemeTransition: () => void;
+	toggleActivePreview: (event: { target: OptionElement }) => void;
 };
 
 class OptionClassList {
@@ -111,8 +223,8 @@ class OptionClassList {
 }
 
 class OptionElement {
-	ariaSelected = "false";
-	checked = false;
+	ariaSelected: boolean | string = "false";
+	checked: boolean | string = false;
 	children: OptionElement[] = [];
 	classList = new OptionClassList(this);
 	className = "";
@@ -162,12 +274,17 @@ class OptionElement {
 	}
 
 	closest(selector: string) {
-		let current: OptionElement | null = this;
-		while (current != null) {
+		if (selector.toLowerCase() === this.tagName.toLowerCase()) {
+			return this;
+		}
+		for (
+			let current = this.parentNode;
+			current != null;
+			current = current.parentNode
+		) {
 			if (selector.toLowerCase() === current.tagName.toLowerCase()) {
 				return current;
 			}
-			current = current.parentNode;
 		}
 		return null;
 	}
@@ -382,11 +499,12 @@ function __getState() {
 			USE_LIGHTNING_NAVIGATION: "use-lightning-navigation",
 			USER_LANGUAGE: "user-language",
 			WHAT_SET: "what-set",
-			areFramePatternsAllowed: async () =>
-				areFramePatternsAllowedResult.value,
-			ensureTranslatorAvailability: async () => ({
-				translate: async (key: string) => key,
-			}),
+			areFramePatternsAllowed: () =>
+				Promise.resolve(areFramePatternsAllowedResult.value),
+			ensureTranslatorAvailability: () =>
+				Promise.resolve({
+					translate: (key: string) => Promise.resolve(key),
+				}),
 			getCssRule: (id: string, value: string) => {
 				cssRuleCalls.push({ id, value });
 				return `${id}:${value};`;
@@ -403,9 +521,9 @@ function __getState() {
 			) => `${isGeneric ? "generic" : "org"}-${
 				isPinned ? "pinned" : "unpinned"
 			}`,
-			getSettings: async () => settingsResult.value,
-			getStyleSettings: async (key: string) =>
-				styleSettings.get(key) ?? null,
+			getSettings: () => Promise.resolve(settingsResult.value),
+			getStyleSettings: (key: string) =>
+				Promise.resolve(styleSettings.get(key) ?? null),
 			injectStyle: (id: string, { css }: { css: string | null }) => {
 				injectStyleCalls.push({ css, id });
 				return new OptionElement(id, "style");
@@ -414,11 +532,12 @@ function __getState() {
 			isGenericKey: (key: string) => key.includes("generic"),
 			isPinnedKey: (key: string) => key.includes("pinned"),
 			isStyleKey: () => isStyleKeyResult.value,
-			requestCookiesPermission: async () =>
-				requestCookiesPermissionResult.value,
-			requestExportPermission: async () => exportPermissionResult.value,
-			requestFramePatternsPermission: async () =>
-				framePatternsPermissionResult.value,
+			requestCookiesPermission: () =>
+				Promise.resolve(requestCookiesPermissionResult.value),
+			requestExportPermission: () =>
+				Promise.resolve(exportPermissionResult.value),
+			requestFramePatternsPermission: () =>
+				Promise.resolve(framePatternsPermissionResult.value),
 			sendExtensionMessage: (message: Record<string, unknown>) => {
 				sendMessages.push(message);
 			},
@@ -665,6 +784,30 @@ Deno.test("options resolves tab element ids and tab element groups", async () =>
 
 Deno.test("options builds structured style configuration maps", async () => {
 	const fixture = await loadOptions();
+	type NestedValueConfig = Record<
+		string,
+		Record<string, Record<string, string>>
+	>;
+	type InputConfigEntry = {
+		elements: NestedValueConfig;
+		styleIds: NestedValueConfig;
+	};
+	type DecorationConfigEntry = {
+		availableUls: NestedValueConfig;
+		chosenUls: NestedValueConfig;
+	};
+	type MergedConfigEntry = {
+		type: string;
+		availableUls: NestedValueConfig;
+	};
+	type StructuredConfEntry = {
+		inputs: string[];
+		moveBtns: Record<string, string>;
+	};
+	type StructuredConfig = Record<
+		string,
+		Record<string, StructuredConfEntry>
+	>;
 	const makeConfig = (prefix: string) => ({
 		decorations: [prefix],
 		decorationUls: {
@@ -701,7 +844,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 		const inputConfigs = fixture.module.buildInputConfigs(
 			["background", "bold", "top"],
 			configs,
-		) as Record<string, any>;
+		) as Record<string, InputConfigEntry>;
 		assertEquals(
 			inputConfigs.background.elements.inactive.generic.unpinned,
 			"inactive-generic-unpinned-background",
@@ -714,7 +857,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 		const decorationConfigs = fixture.module.buildDecorationConfigs(
 			["bold"],
 			configs,
-		) as Record<string, any>;
+		) as Record<string, DecorationConfigEntry>;
 		assertEquals(
 			decorationConfigs.bold.chosenUls.active.generic.unpinned,
 			"active-generic-unpinned-chosen",
@@ -726,7 +869,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 
 		const mergedConfigs = fixture.module.buildInputDecorationConfigs(
 			configs,
-		) as Record<string, any>;
+		) as Record<string, MergedConfigEntry>;
 		assertEquals(mergedConfigs.bold.type, "decoration");
 		assertEquals(
 			mergedConfigs.background.type,
@@ -746,7 +889,7 @@ Deno.test("options builds structured style configuration maps", async () => {
 				pinned: makeConfig("inactive-pinned"),
 				unpinned: makeConfig("inactive-unpinned"),
 			},
-		}) as Record<string, any>;
+		}) as StructuredConfig;
 		assertEquals(structured.unpinned.active.inputs, [
 			"active-unpinned-background",
 			"active-unpinned-bold",
@@ -945,7 +1088,7 @@ Deno.test("options applies current choices, sort settings, and toast helpers", a
 		});
 		assertEquals(
 			fixture.elements.get("keep_sorted")?.checked,
-			"recent" as unknown as boolean,
+			"recent",
 		);
 		assertEquals(fixture.elements.get("picked-sort")?.value, "recent");
 		assertEquals(
@@ -1230,7 +1373,7 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 		assertEquals(preview.classList.contains("slds-active"), true);
 
 		fixture.module._flipSelected({ target: child }, true);
-		assertEquals(activeDecoration.ariaSelected, true as unknown as string);
+		assertEquals(String(activeDecoration.ariaSelected), "true");
 		assertEquals(preview.classList.contains("slds-active"), true);
 
 		assertThrows(
@@ -1248,8 +1391,8 @@ Deno.test("options saves tab style inputs and decoration selections", async () =
 			moveHereElement: destination,
 		});
 		assertEquals(destination.children[0], activeDecoration);
-		assertEquals(activeDecoration.ariaSelected, false as unknown as string);
-		assertEquals(otherDecoration.ariaSelected, false as unknown as string);
+		assertEquals(String(activeDecoration.ariaSelected), "false");
+		assertEquals(String(otherDecoration.ariaSelected), "false");
 
 		assertThrows(
 			() => fixture.module._getReferencesByKey(),
@@ -1358,7 +1501,7 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		await inactiveDecoration.dispatch("click", {
 			target: inactiveDecoration,
 		});
-		assertEquals(inactiveLi.ariaSelected, true as unknown as string);
+		assertEquals(String(inactiveLi.ariaSelected), "true");
 
 		const inactiveChosenButton = resources.inactive.moveBtns
 			.chosen as OptionElement;
@@ -1390,7 +1533,7 @@ Deno.test("options restores tab settings and wires tab, header, and save listene
 		const activeLi = new OptionElement("active-li", "li");
 		activeDecoration.parentNode = activeLi;
 		await activeDecoration.dispatch("click", { target: activeDecoration });
-		assertEquals(activeLi.ariaSelected, true as unknown as string);
+		assertEquals(String(activeLi.ariaSelected), "true");
 		activeDecoration.ariaSelected = "true";
 		await activeChosenButton.dispatch("click");
 		assertEquals(activeChosenUl.children.includes(activeDecoration), true);

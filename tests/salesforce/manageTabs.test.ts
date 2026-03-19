@@ -707,12 +707,13 @@ async function loadManageTabs() {
 	const allTabs: ManageAllTabs = {
 		exists: () => false,
 		pinnedTabsNo: 0,
-		replaceTabs: async () => true,
+		replaceTabs: () => Promise.resolve(true),
 	};
 	const createManageTabRowResult = {
-		current: (async () => {
-			throw new Error("not-needed");
-		}) as ManageTabsDependencies["createManageTabRow"],
+		current: (() =>
+			Promise.reject(
+				new Error("not-needed"),
+			)) as ManageTabsDependencies["createManageTabRow"],
 	};
 	const confirmResult = { value: true };
 	const currentHref = { value: "https://example.com" };
@@ -723,9 +724,10 @@ async function loadManageTabs() {
 	const duplicateUrls: string[] = [];
 	const ensureAllTabsCalls: Array<Record<string, unknown> | undefined> = [];
 	const generateManageTabsModalResult = {
-		current: (async () => {
-			throw new Error("not-needed");
-		}) as ManageTabsDependencies["generateManageTabsModal"],
+		current: (() =>
+			Promise.reject(
+				new Error("not-needed"),
+			)) as ManageTabsDependencies["generateManageTabsModal"],
 	};
 	const hanger = new ManageElement("div");
 	const lightningClicks = { value: 0 };
@@ -744,9 +746,9 @@ async function loadManageTabs() {
 	const toasts: { message: string; status?: string }[] = [];
 
 	allTabs.exists = () => duplicateExists.value;
-	allTabs.replaceTabs = async (tabs, options) => {
+	allTabs.replaceTabs = (tabs, options) => {
 		replaceTabsCalls.push({ options, tabs });
-		return replacedTabsResult.value;
+		return Promise.resolve(replacedTabsResult.value);
 	};
 
 	const { cleanup, module } = await loadIsolatedModule<
@@ -844,13 +846,14 @@ function __getState() {
 			confirm: () => confirmResult.value,
 			createManageTabRow: (...args) =>
 				createManageTabRowResult.current(...args),
-			ensureAllTabsAvailability: async (options) => {
+			ensureAllTabsAvailability: (options) => {
 				ensureAllTabsCalls.push(options);
-				return allTabs;
+				return Promise.resolve(allTabs);
 			},
-			ensureTranslatorAvailability: async () => ({
-				translate: async () => "translated",
-			}),
+			ensureTranslatorAvailability: () =>
+				Promise.resolve({
+					translate: () => Promise.resolve("translated"),
+				}),
 			generateManageTabsModal: (tabs) =>
 				generateManageTabsModalResult.current(tabs),
 			getCurrentHref: () => currentHref.value,
@@ -1455,18 +1458,18 @@ Deno.test("manageTabs adds and removes rows through internal helpers", async () 
 	});
 	createArticleFixture(tbody, row0Parts.row);
 
-	fixture.createManageTabRowResult.current = async () => {
+	fixture.createManageTabRowResult.current = () => {
 		const row1Parts = createRow(1);
 		const [logger] = createManagedLoggers([row1Parts.row]);
 		const newAction = new ManageElement("a");
 		newAction.dataset.action = "unknown";
 		row1Parts.row.setQueryResults("[data-action]", [newAction]);
-		return {
+		return Promise.resolve({
 			dropdownButton: row1Parts.dropdownButton,
 			dropdownMenu: row1Parts.dropdownMenu,
 			logger,
 			tr: row1Parts.row,
-		};
+		});
 	};
 
 	try {
@@ -1558,16 +1561,16 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 	managedLoggers[0].url.value = "duplicate-url";
 	managedLoggers[1].url.value = "duplicate-url";
 
-	fixture.createManageTabRowResult.current = async () => {
+	fixture.createManageTabRowResult.current = () => {
 		const row3Parts = createRow(3);
 		const [logger] = createManagedLoggers([row3Parts.row]);
 		row3Parts.row.setQueryResults("[data-action]", []);
-		return {
+		return Promise.resolve({
 			dropdownButton: row3Parts.dropdownButton,
 			dropdownMenu: row3Parts.dropdownMenu,
 			logger,
 			tr: row3Parts.row,
-		};
+		});
 	};
 
 	try {
@@ -1825,16 +1828,17 @@ Deno.test("manageTabs creates the modal and wires its listeners", async () => {
 		row2Parts.dropdownMenu,
 	];
 	fixture.documentById.current = new ManageElement("div");
-	fixture.generateManageTabsModalResult.current = async () => ({
-		closeButton,
-		deleteAllTabsButton,
-		dropdownMenus,
-		loggers,
-		modalParent,
-		saveButton,
-		tbody,
-		trsAndButtons,
-	});
+	fixture.generateManageTabsModalResult.current = () =>
+		Promise.resolve({
+			closeButton,
+			deleteAllTabsButton,
+			dropdownMenus,
+			loggers,
+			modalParent,
+			saveButton,
+			tbody,
+			trsAndButtons,
+		});
 
 	try {
 		await fixture.module.createManageTabsModal();

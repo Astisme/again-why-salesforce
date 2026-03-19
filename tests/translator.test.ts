@@ -1,5 +1,4 @@
 /// <reference lib="dom" />
-// deno-lint-ignore-file no-explicit-any
 import { assertEquals } from "@std/testing/asserts";
 import { translations } from "./mocks.ts";
 import ensureTranslatorAvailability from "/translator.js";

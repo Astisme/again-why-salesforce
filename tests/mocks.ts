@@ -505,7 +505,7 @@ export const mockBrowser = {
 						// special case for downloads (enable BROWSER.downloads)
 						if (key === "downloads") {
 							globalThis.BROWSER.downloads = {
-								download: async (_details) => 0,
+								download: (_details) => Promise.resolve(0),
 								onChanged: {
 									addListener: () => {},
 								},

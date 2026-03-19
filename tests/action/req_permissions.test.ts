@@ -58,7 +58,7 @@ function appendElement(
 	document: MockDocument,
 	tagName: string,
 	id: string,
-) {
+): MockElement {
 	const element = document.createElement(tagName);
 	element.id = id;
 	document.body.appendChild(element);
@@ -124,8 +124,9 @@ async function loadPermissionsModule(url: string) {
 			},
 			DO_NOT_REQUEST_FRAME_PERMISSION: "no-frame-request",
 			HIDDEN_CLASS: "hidden",
-			ensureTranslatorAvailability: async () => {
+			ensureTranslatorAvailability: () => {
 				counters.translatorCalls++;
+				return Promise.resolve();
 			},
 			requestExportPermission: () => {
 				counters.exportRequests++;
