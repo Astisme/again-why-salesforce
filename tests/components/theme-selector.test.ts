@@ -291,20 +291,21 @@ Deno.test("ThemeSelectorAws", async (t) => {
 		},
 	);
 
-	await t.step(
-		"swaps the opposite buttons when the current theme is dark",
-		() => {
-			restoreGlobals();
-			globalThis.setTimeout = (callback: TimerHandler) => {
+		await t.step(
+			"swaps the opposite buttons when the current theme is dark",
+			() => {
+				restoreGlobals();
+				globalThis.setTimeout = (callback: TimerHandler) => {
 				if (typeof callback === "function") {
 					callback();
 				}
 				return 1;
-			};
-			globalThis.clearTimeout = () => {};
-			testLocalStorage.setItem("usingTheme", "dark");
-			const component = document.createElement("theme-selector-aws") as
-				ThemeSelectorElement;
+				};
+				globalThis.clearTimeout = () => {};
+				document.documentElement.dataset.theme = "dark";
+				testLocalStorage.setItem("usingTheme", "dark");
+				const component = document.createElement("theme-selector-aws") as
+					ThemeSelectorElement;
 			appendThemeButtons(component);
 			document.body.append(component);
 			component.connectedCallback?.();

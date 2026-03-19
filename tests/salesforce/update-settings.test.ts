@@ -62,6 +62,35 @@ Deno.test("getUsageDaysUpdate increments usage days on a new day", () => {
 	);
 });
 
+Deno.test("getUsageDaysUpdate normalizes non-array settings input", () => {
+	assertEquals(
+		getUsageDaysUpdate(
+			{ id: "extension_usage_days", enabled: 2 },
+			today,
+		),
+		{
+			usageDays: 2,
+			set: [
+				{ id: "extension_usage_days", enabled: 2 },
+				{ id: "extension_last_active_day", enabled: today },
+			],
+		},
+	);
+});
+
+Deno.test("getUsageDaysUpdate handles null settings input", () => {
+	assertEquals(
+		getUsageDaysUpdate(null, today),
+		{
+			usageDays: 0,
+			set: [
+				{ id: "extension_usage_days", enabled: 0 },
+				{ id: "extension_last_active_day", enabled: today },
+			],
+		},
+	);
+});
+
 Deno.test("updateExtensionUsageDays persists the usage settings", async () => {
 	const originalSettings = cloneSettings();
 	try {

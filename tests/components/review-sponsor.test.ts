@@ -48,15 +48,15 @@ type ReviewSponsorDependencies = {
 	}>;
 	generateReviewSponsorSvgs: () => ReviewSponsorResult;
 	getSettings: (keys: string[]) => Promise<{ enabled: number }>;
-	injectStyle: (id: string, options: { link: string }) => MockElement;
+	injectStyle: (id: string, options: { link: string }) => MockElement | HTMLElement;
 };
 
 type ReviewSponsorResult = {
-	reviewLink: MockElement;
-	reviewSvg: MockElement;
-	root: MockElement;
-	sponsorLink: MockElement;
-	sponsorSvg: MockElement;
+	reviewLink: MockElement | HTMLElement;
+	reviewSvg: MockElement | HTMLElement;
+	root: MockElement | HTMLElement;
+	sponsorLink: MockElement | HTMLElement;
+	sponsorSvg: MockElement | HTMLElement;
 };
 
 type ToggleableClassList = {
@@ -169,6 +169,7 @@ function isReviewSponsorClass(constructor: CustomElementConstructor): constructo
  * }} [options={}] Browser flag overrides.
  * @return {Promise<{
  *   cleanup: () => void;
+ *   getConstructor: () => ReviewSponsorClass | null;
  *   openCalls: string[];
  *   showReviewOrSponsor: (input: {
  *     allTabs?: object[];
@@ -227,20 +228,49 @@ async function loadReviewSponsorBranchModule(
 			ISFIREFOX: isFirefox,
 			ISSAFARI: isSafari,
 			ensureAllTabsAvailability: () => Promise.resolve([]),
-			ensureTranslatorAvailability: () => Promise.resolve({
-				currentLanguage: "en",
-				translate: (message) => Promise.resolve(message),
-			}),
-			generateReviewSponsorSvgs: () => ({
-				reviewLink: new MockElement("a"),
-				reviewSvg: new MockElement("svg"),
-				root: new MockElement("div"),
-				sponsorLink: new MockElement("a"),
-				sponsorSvg: new MockElement("svg"),
-			}),
-			getSettings: () => Promise.resolve({ enabled: 0 }),
-			injectStyle: () => new MockElement("link"),
-		},
+				ensureTranslatorAvailability: () => Promise.resolve({
+					currentLanguage: "en",
+					translate: (message) => Promise.resolve(message),
+				}),
+				generateReviewSponsorSvgs: () => {
+					const root = document.createElement("div");
+					const reviewLink = document.createElement("a");
+					const sponsorLink = document.createElement("a");
+					const reviewSvg = document.createElement("svg");
+					const sponsorSvg = document.createElement("svg");
+					for (const element of [reviewSvg, sponsorSvg]) {
+						element.classList.toggle ??= (token: string, force?: boolean) => {
+							const shouldAdd = force ?? !element.classList.contains(token);
+							if (shouldAdd) {
+								element.classList.add(token);
+								return true;
+							}
+							element.classList.remove(token);
+							return false;
+						};
+					}
+					reviewLink.appendChild(reviewSvg);
+					sponsorLink.appendChild(sponsorSvg);
+					root.appendChild(reviewLink);
+					root.appendChild(sponsorLink);
+					return {
+						reviewLink,
+						reviewSvg,
+						root,
+						sponsorLink,
+						sponsorSvg,
+					};
+				},
+				getSettings: (keys) => {
+					const settingId = keys[0];
+					const settings = mockStorage[SETTINGS_KEY] ?? [];
+					const matched = settings.find((setting) => setting.id === settingId);
+					return Promise.resolve({
+						enabled: Number(matched?.enabled ?? 0),
+					});
+				},
+				injectStyle: () => document.createElement("link"),
+			},
 		globals: {
 			HTMLElement: MockReviewSponsorHTMLElement,
 			customElements: registry.registry,
@@ -259,6 +289,7 @@ async function loadReviewSponsorBranchModule(
 	});
 	return {
 		cleanup: result.cleanup,
+		getConstructor: registry.getConstructor,
 		openCalls,
 		showReviewOrSponsor: result.module.showReviewOrSponsor,
 	};
@@ -266,21 +297,8 @@ async function loadReviewSponsorBranchModule(
 
 Deno.test("show review or sponsor block", async (t) => {
 	const { cleanup } = installMockDom();
-	const directRegistry = createStoredCustomElementsRegistry();
-	Object.defineProperty(globalThis, "customElements", {
-		value: directRegistry.registry,
-		configurable: true,
-		writable: true,
-	});
-	const { showReviewOrSponsor } = await import(
-		"/components/review-sponsor/review-sponsor.js"
-	);
-	const openCalls: string[] = [];
-	const originalOpen = globalThis.open;
-	globalThis.open = ((url?: string | URL) => {
-		openCalls.push(String(url));
-		return null;
-	}) as typeof globalThis.open;
+	const reviewSponsorModule = await loadReviewSponsorBranchModule();
+	const { showReviewOrSponsor, openCalls } = reviewSponsorModule;
 
 	await t.step("throws when required params are missing", () => {
 		assertThrows(
@@ -472,9 +490,9 @@ Deno.test("show review or sponsor block", async (t) => {
 
 	await t.step(
 		"constructs the custom element and populates direct-import metadata",
-		async () => {
-			const ReviewSponsorConstructor = directRegistry.getConstructor();
-			assert(ReviewSponsorConstructor != null);
+			async () => {
+				const ReviewSponsorConstructor = reviewSponsorModule.getConstructor();
+				assert(ReviewSponsorConstructor != null);
 			const originalFetch = globalThis.fetch;
 			const originalWhy = structuredClone(mockStorage[WHY_KEY]);
 			const originalSettings = structuredClone(mockStorage[SETTINGS_KEY]);
@@ -547,13 +565,12 @@ Deno.test("show review or sponsor block", async (t) => {
 				const sponsorLink = links[1] as HTMLAnchorElement | undefined;
 				const reviewSvg = reviewLink?.querySelector("svg");
 				const sponsorSvg = sponsorLink?.querySelector("svg");
-				assert(reviewLink != null);
-				assert(sponsorLink != null);
-				assert(reviewSvg != null);
-				assert(sponsorSvg != null);
+					assert(reviewLink != null);
+					assert(sponsorLink != null);
+					assert(reviewSvg != null);
 
-				assertEquals(reviewLink.title, "Write review");
-				assertEquals(reviewLink.getAttribute("aria-label"), "Write review");
+					assertEquals(reviewLink.title, "write_review");
+					assertEquals(reviewLink.getAttribute("aria-label"), "write_review");
 				assertEquals(reviewSvg.getAttribute("focusable"), "false");
 
 			} finally {
@@ -581,7 +598,7 @@ Deno.test("show review or sponsor block", async (t) => {
 		},
 	);
 
-	globalThis.open = originalOpen;
+	reviewSponsorModule.cleanup();
 	cleanup();
 });
 

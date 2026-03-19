@@ -6,6 +6,7 @@ import {
 	assertThrows,
 } from "@std/testing/asserts";
 import { installMockDom } from "../happydom.ts";
+import { loadIsolatedModule } from "../load-isolated-module.ts";
 
 /**
  * Filesystem path to the tutorial module under test.
@@ -49,8 +50,14 @@ const ALL_USABLE_PAGE_URLS = [
  * Minimal translation service surface required by the tutorial.
  */
 type Translator = {
-	translate: (key: string) => Promise<string>;
+	translate: (key: string) => Promise<string> | string;
 };
+
+type TutorialMessageValue = boolean | number | string | null | undefined;
+
+type TutorialStorageValue =
+	| Array<{ shortcut: string }>
+	| TutorialMessageValue;
 
 /**
  * Dependency bundle injected into the tutorial module for browserless tests.
@@ -60,8 +67,8 @@ type TutorialDeps = {
 	functions: {
 		performLightningRedirect: (url: string) => void;
 		sendExtensionMessage: (
-			message: Record<string, unknown>,
-		) => Promise<unknown>;
+			message: Record<string, TutorialMessageValue>,
+		) => Promise<TutorialStorageValue>;
 	};
 	ensureTranslatorAvailability: () => Promise<Translator>;
 	Tab: {
@@ -105,7 +112,10 @@ type TutorialDeps = {
 		};
 	};
 	manageTabs: {
-		handleActionButtonClick: () => void;
+		handleActionButtonClick: (event: {
+			preventDefault: () => void;
+			stopPropagation: () => void;
+		}) => void;
 	};
 };
 
@@ -148,6 +158,22 @@ type TutorialDriver = {
 	}>;
 };
 
+type TutorialStep = {
+	action?: string;
+	awaitsCustomEvent?: string;
+	beginsBlock?: boolean;
+	element?: () => HTMLElement | Promise<HTMLElement | null> | null;
+	fakeElement?: () => HTMLElement | Promise<HTMLElement | null> | null;
+	isEndingStep?: boolean;
+	link?: string;
+	message?: string;
+	onConfirm?: () => void;
+	pageUrl?: string;
+	redirectElement?: { label: string; url: string };
+	shortcut?: string;
+	waitFor?: string;
+};
+
 /**
  * Polls until a condition becomes true or the timeout expires.
  *
@@ -165,35 +191,67 @@ async function waitFor(predicate: () => boolean, timeoutMs = 1000) {
 	}
 }
 
-/**
- * Removes one static import from the tutorial source so the test can inject a stub.
- *
- * @param source Tutorial source code.
- * @param fileName Import specifier to remove.
- * @return Source code without the matching import statement.
- */
-function stripImport(source: string, fileName: string) {
-	return source.replace(
-		new RegExp(
-			String.raw`import[\s\S]*?from\s*"${
-				fileName.replaceAll("/", "\\/")
-			}";\n`,
-		),
-		"",
-	);
-}
+type TutorialModule = {
+	Tutorial: new () => TutorialDriver & {
+		btnsParent: HTMLElement;
+		closeBtn: HTMLElement;
+		confirmBtn: HTMLElement;
+		createOverlay: () => Promise<void>;
+		currentStep: number;
+		end: (shouldSaveProgress?: boolean, stepToSave?: number) => void;
+		executeStep: (step: TutorialStep) => Promise<void>;
+		getElementNowOrLater: (
+			step: TutorialStep,
+			callback: (step: TutorialStep) => void,
+		) => Promise<HTMLElement | undefined | null>;
+		hideSpinner: () => void;
+		highlightElement: (element: HTMLElement) => void;
+		initSteps: () => Promise<boolean>;
+		isActive: boolean;
+		messageBox: HTMLElement;
+		nextStep: () => Promise<void> | void;
+		persistTutorialProgress: (stepNo?: number | string) => Promise<void> | void;
+		retryCount: number;
+		segments: HTMLElement;
+		showConfirm: () => void;
+		showMessage: (step: TutorialStep) => Promise<void>;
+		showSpinner: () => void;
+		spinner: HTMLElement;
+		start: (startStep?: number) => Promise<void>;
+		steps: TutorialStep[];
+		throwConfetti: () => void;
+		translator: Translator;
+	};
+	checkTutorial: () => Promise<void>;
+	startTutorial: () => Promise<void>;
+};
 
 /**
  * Loads the real tutorial module after replacing its imports with injected test doubles.
  *
  * @param deps Dependency bundle exposed through `globalThis`.
- * @return Imported tutorial module plus the test-only `Tutorial` export.
+ * @return Loaded tutorial module plus isolated-module cleanup hooks.
  */
 async function loadTutorialModule(deps: TutorialDeps) {
-	let source = await Deno.readTextFile(TUTORIAL_PATH);
-	source = source.replace(`"use strict";\n`, "");
-	for (
-		const fileName of [
+	const flattenedDeps = {
+		...deps.constants,
+		...deps.functions,
+		...deps.content,
+		...deps.favouriteManager,
+		...deps.generator,
+		...deps.manageTabs,
+		...deps.tabContainer,
+		Tab: deps.Tab,
+		ensureTranslatorAvailability: deps.ensureTranslatorAvailability,
+	};
+	return await loadIsolatedModule<
+		TutorialModule,
+		typeof flattenedDeps
+	>({
+		modulePath: TUTORIAL_PATH,
+		additionalExports: ["Tutorial"],
+		dependencies: flattenedDeps,
+		importsToReplace: new Set([
 			"/constants.js",
 			"/functions.js",
 			"/translator.js",
@@ -203,71 +261,8 @@ async function loadTutorialModule(deps: TutorialDeps) {
 			"./generator.js",
 			"../tabContainer.js",
 			"./manageTabs.js",
-		]
-	) {
-		source = stripImport(source, fileName);
-	}
-	const prelude = `
-const __deps = globalThis.__tutorialTestDeps;
-const {
-	CMD_OPEN_SETTINGS,
-	CXM_UNPIN_TAB,
-	EXTENSION_GITHUB_LINK,
-	HIDDEN_CLASS,
-	SALESFORCE_SETUP_HOME_MINI,
-	SETUP_LIGHTNING,
-	TOAST_WARNING,
-	TUTORIAL_EVENT_ACTION_FAVOURITE,
-	TUTORIAL_EVENT_ACTION_UNFAVOURITE,
-	TUTORIAL_EVENT_CLOSE_MANAGE_TABS,
-	TUTORIAL_EVENT_CREATE_MANAGE_TABS_MODAL,
-	TUTORIAL_EVENT_PIN_TAB,
-	TUTORIAL_EVENT_REORDERED_TABS_TABLE,
-	TUTORIAL_KEY,
-	WHAT_ADD,
-	WHAT_GET,
-	WHAT_GET_COMMANDS,
-	WHAT_SET,
-} = __deps.constants;
-const { performLightningRedirect, sendExtensionMessage } = __deps.functions;
-const ensureTranslatorAvailability = __deps.ensureTranslatorAvailability;
-const Tab = __deps.Tab;
-const {
-	getCurrentHref,
-	getSetupTabUl,
-	performActionOnTabs,
-	showToast,
-} = __deps.content;
-const {
-	FAVOURITE_BUTTON_ID,
-	showFavouriteButton,
-} = __deps.favouriteManager;
-const {
-	generateSldsPromptModal,
-	generateTutorialElements,
-	MODAL_ID,
-	sldsConfirm,
-} = __deps.generator;
-const { ensureAllTabsAvailability, TabContainer } = __deps.tabContainer;
-const { handleActionButtonClick } = __deps.manageTabs;
-`;
-	const moduleSource = `${prelude}\n${source}\nexport { Tutorial };\n`;
-	const moduleUrl = URL.createObjectURL(
-		new Blob([moduleSource], { type: "text/javascript" }),
-	);
-
-	try {
-		(globalThis as typeof globalThis & {
-			__tutorialTestDeps?: TutorialDeps;
-		})
-			.__tutorialTestDeps = deps;
-		return await import(`${moduleUrl}#${crypto.randomUUID()}`);
-	} finally {
-		delete (globalThis as typeof globalThis & {
-			__tutorialTestDeps?: TutorialDeps;
-		}).__tutorialTestDeps;
-		URL.revokeObjectURL(moduleUrl);
-	}
+		]),
+	});
 }
 
 /**
@@ -276,7 +271,7 @@ const { handleActionButtonClick } = __deps.manageTabs;
  * @param name Global property name.
  * @param value Value assigned to the property.
  */
-function setGlobal(name: string, value: unknown) {
+function setGlobal<T>(name: string, value: T) {
 	Object.defineProperty(globalThis, name, {
 		value,
 		configurable: true,
@@ -370,17 +365,18 @@ function createHarness(options: {
 	};
 	const records = {
 		redirects: [] as string[],
-		messages: [] as Array<Record<string, unknown>>,
+		messages: [] as Array<Record<string, TutorialMessageValue>>,
 		toasts: [] as Array<{ message: string; status: string }>,
 		latestUi: null as null | TutorialUi,
 		latestPrompt: null as null | TutorialPromptUi,
 		actionButtonClicks: 0,
 	};
-	const storage: Record<string, unknown> = {
+	const storage: Record<string, TutorialStorageValue> = {
 		[constants.TUTORIAL_KEY]: options.tutorialProgress ?? null,
 	};
+	let moduleCleanup: (() => void) | null = null;
 	const translator: Translator = {
-		translate: async (key: string) => `translated:${key}`,
+		translate: (key: string) => Promise.resolve(`translated:${key}`),
 	};
 
 	/**
@@ -572,22 +568,22 @@ function createHarness(options: {
 				const miniUrl = url.replace(/^\/lightning\/setup\//, "");
 				navigateTo(miniUrl);
 			},
-			sendExtensionMessage: async (message) => {
+			sendExtensionMessage: (message) => {
 				records.messages.push(message);
 				switch (message.what) {
 					case constants.WHAT_GET_COMMANDS:
-						return [{ shortcut: "Ctrl+Shift+Y" }];
+						return Promise.resolve([{ shortcut: "Ctrl+Shift+Y" }]);
 					case constants.WHAT_GET:
-						return storage[message.key as string];
+						return Promise.resolve(storage[message.key as string]);
 					case constants.WHAT_SET:
 						storage[message.key as string] = message.set;
-						return true;
+						return Promise.resolve(true);
 					default:
-						return null;
+						return Promise.resolve(null);
 				}
 			},
 		},
-		ensureTranslatorAvailability: async () => translator,
+		ensureTranslatorAvailability: () => Promise.resolve(translator),
 		Tab: {
 			minifyURL: (url) =>
 				url.replace(/^https?:\/\/[^/]+\/lightning\/setup\//, ""),
@@ -607,8 +603,9 @@ function createHarness(options: {
 		},
 		favouriteManager: {
 			FAVOURITE_BUTTON_ID: "again-why-salesforce-star",
-			showFavouriteButton: async () => {
+			showFavouriteButton: () => {
 				ensureVisibleFavouriteButton();
+				return Promise.resolve();
 			},
 		},
 		generator: {
@@ -712,8 +709,8 @@ function createHarness(options: {
 					closeButton,
 				};
 			},
-			generateTutorialElements: async () => {
-				const overlay = globalThis.document.createElement("div");
+				generateTutorialElements: () => {
+					const overlay = globalThis.document.createElement("div");
 				const messageBox = globalThis.document.createElement("div");
 				messageBox.className = "tut-v7";
 				const segments = globalThis.document.createElement("div");
@@ -737,25 +734,30 @@ function createHarness(options: {
 					confirmBtn,
 					closeBtn,
 					btnsParent,
-				};
-				records.latestUi = ui;
-				return ui;
+					};
+					records.latestUi = ui;
+					return Promise.resolve(ui);
+				},
 			},
-		},
-		tabContainer: {
-			ensureAllTabsAvailability: async () => {
-				const allTabs = state.savedTabUrls.map((url) => ({ url }));
-				(allTabs as Array<{ url: string }> & Record<string, number>)[
-					"pinnedTabsNo"
-				] = state.pinnedTabsNo;
-				return allTabs;
-			},
+			tabContainer: {
+				ensureAllTabsAvailability: () => {
+					const allTabs = state.savedTabUrls.map((url) => ({ url }));
+					(allTabs as Array<{ url: string }> & Record<string, number>)[
+						"pinnedTabsNo"
+					] = state.pinnedTabsNo;
+					return Promise.resolve(allTabs);
+				},
 			TabContainer: {
 				keyPinnedTabsNo: "pinnedTabsNo",
 			},
 		},
 		manageTabs: {
-			handleActionButtonClick: () => {
+			handleActionButtonClick: (event: {
+				preventDefault: () => void;
+				stopPropagation: () => void;
+			}) => {
+				event.preventDefault();
+				event.stopPropagation();
 				records.actionButtonClicks++;
 			},
 		},
@@ -775,11 +777,14 @@ function createHarness(options: {
 		createManageTabsModal,
 		dispatchTutorialEvent,
 		async load() {
-			return await loadTutorialModule(deps);
+			const loadedModule = await loadTutorialModule(deps);
+			moduleCleanup = loadedModule.cleanup;
+			return loadedModule.module;
 		},
 		navigateTo,
 		waitForMessage,
 		cleanup() {
+			moduleCleanup?.();
 			dom.cleanup();
 		},
 	};
@@ -1196,7 +1201,7 @@ Deno.test("getElementNowOrLater schedules a retry when the element is still miss
 
 		const result = await tutorial.getElementNowOrLater(
 			step,
-			(receivedStep: typeof step) => {
+			(receivedStep) => {
 				assertEquals(receivedStep, step);
 				callbackCalls++;
 			},
@@ -1311,6 +1316,300 @@ Deno.test("nextStep configures the ending step and triggers confetti", async () 
 		assertEquals(confettiCalls, 1);
 		assertEquals(harness.storage["tutorial-progress"], 1);
 	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("tutorial initSteps covers fallback redirect elements and fake-element helpers", async () => {
+	const harness = createHarness({
+		savedTabUrls: ALL_USABLE_PAGE_URLS.slice(2),
+	});
+	try {
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+
+		assertEquals(await tutorial.initSteps(), true);
+		assertEquals(
+			tutorial.steps[4]?.redirectElement?.url,
+			"ObjectManager/Case/FieldsAndRelationships/view",
+		);
+
+		harness.state.savedTabUrls = [
+			"ObjectManager/Account/FieldsAndRelationships/view",
+		];
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		const fallbackTitle = "ObjectManager/Account/FieldsAndRelationships/view";
+		const originalQuerySelector = harness.setupTabUl.querySelector.bind(
+			harness.setupTabUl,
+		);
+		const matchingLink = harness.setupTabUl.firstElementChild?.firstElementChild as
+			HTMLAnchorElement;
+		let selectorCalls = 0;
+		harness.setupTabUl.querySelector = ((selector: string) => {
+			selectorCalls++;
+			if (selectorCalls === 1) {
+				return null;
+			}
+			if (selector === `a[title="${fallbackTitle}"]`) {
+				return matchingLink;
+			}
+			return originalQuerySelector(selector);
+		}) as typeof harness.setupTabUl.querySelector;
+		tutorial.currentStep = 2;
+		const fallbackSetupLink = await tutorial.steps[2]?.element?.();
+		assertEquals(
+			(fallbackSetupLink as HTMLAnchorElement | null)?.title,
+			fallbackTitle,
+		);
+		harness.setupTabUl.querySelector = originalQuerySelector;
+
+		harness.state.savedTabUrls = [];
+		harness.navigateTo(harness.constants.SALESFORCE_SETUP_HOME_MINI);
+		tutorial.currentStep = 2;
+		const generatedSetupLink = await tutorial.steps[2]?.fakeElement?.();
+		assertEquals(
+			(generatedSetupLink as HTMLAnchorElement | null)?.title,
+			"ObjectManager/Account/FieldsAndRelationships/view",
+		);
+
+		harness.navigateTo("ObjectManager/Account/FieldsAndRelationships/view");
+		tutorial.currentStep = 3;
+		const shownStar = await tutorial.steps[3]?.fakeElement?.();
+		assertExists(shownStar);
+
+		harness.navigateTo("ObjectManager/Case/FieldsAndRelationships/view");
+		tutorial.currentStep = 5;
+		const secondShownStar = await tutorial.steps[5]?.fakeElement?.();
+		assertExists(secondShownStar);
+
+		harness.state.savedTabUrls = [];
+		harness.navigateTo("ObjectManager/Case/FieldsAndRelationships/view");
+		tutorial.currentStep = 6;
+		const generatedPinnedTab = await tutorial.steps[6]?.fakeElement?.();
+		assertEquals((generatedPinnedTab as HTMLLIElement | null)?.tagName, "LI");
+
+		tutorial.currentStep = 7;
+		const generatedPinnedLink = await tutorial.steps[7]?.fakeElement?.();
+		assertEquals(
+			(generatedPinnedLink as HTMLAnchorElement | null)?.title,
+			"ObjectManager/Case/FieldsAndRelationships/view",
+		);
+
+		harness.createManageTabsModal(harness.state.savedTabUrls.length);
+		harness.state.pinnedTabsNo = harness.state.savedTabUrls.length;
+		const dragElement = await tutorial.steps[10]?.element?.();
+		assertExists(dragElement);
+		assertEquals(harness.records.actionButtonClicks > 0, true);
+
+		harness.state.savedTabUrls = [
+			"ObjectManager/Case/FieldsAndRelationships/view",
+			"ObjectManager/Lead/FieldsAndRelationships/view",
+			"ObjectManager/Task/FieldsAndRelationships/view",
+		];
+		harness.createManageTabsModal(3);
+		harness.state.pinnedTabsNo = 3;
+		const fallbackDragElement = await tutorial.steps[10]?.element?.();
+		assertExists(fallbackDragElement);
+		assertEquals(harness.records.actionButtonClicks >= 3, true);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("tutorial fake favourite lookup can return undefined when no visible star exists", async () => {
+	const harness = createHarness();
+	try {
+		harness.deps.favouriteManager.showFavouriteButton = () => Promise.resolve();
+		const tutorialModule = await harness.load();
+		const tutorial = new tutorialModule.Tutorial();
+
+		assertEquals(await tutorial.initSteps(), true);
+		globalThis.history.pushState(
+			{},
+			"",
+			`${harness.constants.SETUP_LIGHTNING}ObjectManager/Account/FieldsAndRelationships/view`,
+		);
+		tutorial.currentStep = 3;
+
+		assertEquals(await tutorial.steps[3]?.fakeElement?.(), undefined);
+	} finally {
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("tutorial overlay handlers cover close button, escape, default event waiters, and popstate redirects", async () => {
+	const harness = createHarness();
+	const originalMutationObserver = globalThis.MutationObserver;
+	try {
+		const tutorialModule = await harness.load();
+
+		const closeTutorial = new tutorialModule.Tutorial();
+		closeTutorial.translator = harness.translator;
+		closeTutorial.steps = [{ message: "tutorial_restart" }];
+		closeTutorial.currentStep = 0;
+		let savedStep: number | null = null;
+		closeTutorial.persistTutorialProgress = (stepNo?: number | string) => {
+			savedStep = Number(stepNo);
+		};
+		await closeTutorial.createOverlay();
+		closeTutorial.closeBtn.click();
+		assertEquals(savedStep, 0);
+
+		const escapeTutorial = new tutorialModule.Tutorial();
+		escapeTutorial.translator = harness.translator;
+		escapeTutorial.steps = [{ message: "tutorial_restart" }];
+		escapeTutorial.currentStep = 0;
+		let escapeSavedStep: number | null = null;
+		escapeTutorial.persistTutorialProgress = (stepNo?: number | string) => {
+			escapeSavedStep = Number(stepNo);
+		};
+		await escapeTutorial.createOverlay();
+		const escapeEvent = new Event("keydown");
+		Object.defineProperty(escapeEvent, "key", { value: "Escape" });
+		document.dispatchEvent(escapeEvent);
+		assertEquals(escapeSavedStep, 0);
+
+		const clickTutorial = new tutorialModule.Tutorial();
+		clickTutorial.translator = harness.translator;
+		await clickTutorial.createOverlay();
+		let nextStepCalls = 0;
+		clickTutorial.nextStep = () => {
+			nextStepCalls++;
+		};
+		await clickTutorial.executeStep({
+			message: "tutorial_manage_tabs",
+			waitFor: "event",
+		});
+		document.dispatchEvent(new Event("click"));
+		assertEquals(nextStepCalls, 1);
+
+		const popstateTutorial = new tutorialModule.Tutorial();
+		popstateTutorial.translator = harness.translator;
+		await popstateTutorial.createOverlay();
+		let popstateNextSteps = 0;
+		popstateTutorial.nextStep = () => {
+			popstateNextSteps++;
+		};
+		await popstateTutorial.executeStep({
+			action: "highlight",
+			message: "tutorial_redirect_account",
+			waitFor: "redirect",
+		});
+		globalThis.dispatchEvent(new Event("popstate"));
+		assertEquals(popstateNextSteps, 1);
+
+		const observerTutorial = new tutorialModule.Tutorial();
+		observerTutorial.translator = harness.translator;
+		let triggerMutationObserver = () => {};
+		setGlobal(
+			"MutationObserver",
+			class {
+				constructor(callback: () => void) {
+					triggerMutationObserver = callback;
+				}
+				disconnect() {}
+				observe() {}
+			},
+		);
+		await observerTutorial.createOverlay();
+		let observerNextSteps = 0;
+		observerTutorial.nextStep = () => {
+			observerNextSteps++;
+		};
+		await observerTutorial.executeStep({
+			action: "highlight",
+			message: "tutorial_redirect_account",
+			waitFor: "redirect",
+		});
+		globalThis.history.pushState(
+			{},
+			"",
+			"/lightning/setup/ObjectManager/Case/FieldsAndRelationships/view",
+		);
+		triggerMutationObserver();
+		assertEquals(observerNextSteps, 2);
+		setGlobal("MutationObserver", originalMutationObserver);
+
+		const confirmTutorial = new tutorialModule.Tutorial();
+		confirmTutorial.translator = harness.translator;
+		await confirmTutorial.createOverlay();
+		let confirmCalls = 0;
+		let confirmNextSteps = 0;
+		confirmTutorial.currentStep = 0;
+		confirmTutorial.steps = [{
+			action: "highlight",
+			message: "tutorial_restart",
+			onConfirm: () => {
+				confirmCalls++;
+			},
+		}];
+		confirmTutorial.nextStep = () => {
+			confirmNextSteps++;
+		};
+		confirmTutorial.showConfirm();
+		confirmTutorial.messageBox.dispatchEvent(new Event("click"));
+		assertEquals(confirmCalls, 1);
+		assertEquals(confirmNextSteps, 1);
+	} finally {
+		setGlobal("MutationObserver", originalMutationObserver);
+		await flush();
+		harness.cleanup();
+	}
+});
+
+Deno.test("tutorial start branches cover failed initialization, invalid start steps, manual start, and failed resume", async () => {
+	const harness = createHarness({ tutorialProgress: 2 });
+	const originalConsoleError = console.error;
+	const errorCalls: string[] = [];
+	console.error = (message?: string | number | boolean | null) => {
+		errorCalls.push(String(message));
+	};
+
+	try {
+		const tutorialModule = await harness.load();
+
+		const failedStartTutorial = new tutorialModule.Tutorial();
+		failedStartTutorial.initSteps = () => Promise.resolve(false);
+		await failedStartTutorial.start();
+		assertEquals(errorCalls.includes("error_tutorial_not_initialized"), true);
+
+		const invalidStartTutorial = new tutorialModule.Tutorial();
+		invalidStartTutorial.steps = [{
+			message: "tutorial_restart",
+			pageUrl: harness.constants.SALESFORCE_SETUP_HOME_MINI,
+		}];
+		invalidStartTutorial.createOverlay = () => Promise.resolve();
+		invalidStartTutorial.nextStep = () => {};
+		await invalidStartTutorial.start(999);
+		assertEquals(invalidStartTutorial.currentStep, -1);
+
+		const activeTutorial = new tutorialModule.Tutorial();
+		activeTutorial.isActive = true;
+		let activeOverlayCalls = 0;
+		activeTutorial.createOverlay = () => {
+			activeOverlayCalls++;
+			return Promise.resolve();
+		};
+		await activeTutorial.start();
+		assertEquals(activeOverlayCalls, 0);
+
+		await tutorialModule.startTutorial();
+		await harness.waitForMessage("tutorial_restart");
+		assertEquals(
+			harness.records.latestUi?.segments.textContent?.startsWith(
+				"translated:tutorial_restart",
+			) === true,
+			true,
+		);
+
+		tutorialModule.Tutorial.prototype.initSteps = () => Promise.resolve(false);
+		await tutorialModule.checkTutorial();
+		assertEquals(errorCalls.includes("error_tutorial_not_initialized"), true);
+	} finally {
+		console.error = originalConsoleError;
 		await flush();
 		harness.cleanup();
 	}

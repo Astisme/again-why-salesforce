@@ -252,28 +252,6 @@ function createInlineSourceMapUrl(
 }
 
 /**
- * Builds a default line map that keeps transformed lines aligned to the
- * original file and collapses appended helper lines onto the last source line.
- *
- * @param {string} transformedSource Source after import/export transforms.
- * @param {string} extraSource Extra helper source appended by the test.
- * @param {number} originalLineCount Total lines in the original source file.
- * @return {number[]} 1-based original line per generated line.
- */
-function createDefaultSourceMapLineMap(
-	transformedSource: string,
-	extraSource: string,
-	originalLineCount: number,
-) {
-	const transformedLineCount = transformedSource.split("\n").length;
-	const extraLineCount = extraSource === "" ? 0 : extraSource.split("\n").length;
-	const generatedLineCount = transformedLineCount + extraLineCount + 3;
-	return Array.from({ length: generatedLineCount }, (_value, index) =>
-		Math.min(index + 1, originalLineCount)
-	);
-}
-
-/**
  * Installs temporary global overrides for a loaded isolated module.
  *
  * @param {Record<string, unknown>} globals Global values to install.
@@ -310,7 +288,7 @@ function installGlobals(globals: Record<string, unknown>) {
  * @param {URL} modulePath Original source module path.
  * @param {string} source Source with imports removed and exports stripped.
  * @param {string[]} exportedNames Names to return from the evaluated module.
- * @return {string} Function body with a `sourceURL` pointing at the original module.
+ * @return {string} Function body with source-map metadata for attribution.
  */
 function createEvaluatedModuleSource(
 	modulePath: URL,
@@ -325,15 +303,17 @@ function createEvaluatedModuleSource(
 	const moduleRecord = moduleKeys.length === 0
 		? "{}"
 		: `{ ${moduleKeys.join(", ")} }`;
+	const sourceUrlDirective = inlineSourceMapUrl == null
+		? `//# sourceURL=${modulePath.href}`
+		: "";
+	const sourceMapDirective = inlineSourceMapUrl == null
+		? ""
+		: `//# sourceMappingURL=${inlineSourceMapUrl}`;
 	return `${source}
 ${extraSource}
 globalThis["${exportKey}"] = ${moduleRecord};
-//# sourceURL=${modulePath.href}
-${
-		inlineSourceMapUrl == null
-			? ""
-			: `//# sourceMappingURL=${inlineSourceMapUrl}`
-	}`;
+${sourceUrlDirective}
+${sourceMapDirective}`;
 }
 
 /**
@@ -380,17 +360,13 @@ export async function loadIsolatedModule<
 		sourceWithoutImports,
 	);
 	const exportKey = `__isolatedModuleExports_${crypto.randomUUID()}`;
-	const effectiveSourceMapLineMap = sourceMapLineMap ??
-		createDefaultSourceMapLineMap(
-			sourceWithoutExports,
-			extraSource,
-			rawSource.split("\n").length,
+	const inlineSourceMapUrl = sourceMapLineMap == null
+		? null
+		: createInlineSourceMapUrl(
+			modulePath,
+			rawSource,
+			sourceMapLineMap,
 		);
-	const inlineSourceMapUrl = createInlineSourceMapUrl(
-		modulePath,
-		rawSource,
-		effectiveSourceMapLineMap,
-	);
 	const cleanupGlobals = installGlobals({
 		...globals,
 		...Object.fromEntries(
