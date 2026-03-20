@@ -360,9 +360,11 @@ async function readFile(files) {
  * @param {Event} event - The change event triggered by the file input.
  * @return {Promise<void>} Promise resolved when the import flow settles.
  */
-function readChangeOrDropFiles(event){
-  event.preventDefault();
-  return readFile(event.target?.files ?? Array.from(event.dataTransfer?.files));
+function readChangeOrDropFiles(event) {
+	event.preventDefault();
+	return readFile(
+		event.target?.files ?? Array.from(event.dataTransfer?.files),
+	);
 }
 /**
  * Attaches event listeners to handle file uploads via both file selection and drag-and-drop.
