@@ -328,13 +328,13 @@ export function updateModalBodyOverflow(article = null) {
  * @param {Event} e - the event which is connected to this function
  * @return undefined
  */
-function checkRemoveTr(e) {
+async function checkRemoveTr(e) {
 	const parentTr = e.target.closest("tr");
 	const label = parentTr.querySelector(".label").value;
 	const url = parentTr.querySelector(".url").value;
 	const tabAppendElement = parentTr.closest("tbody");
 	if (label === "" && url === "") {
-		return removeTr(tabAppendElement, parentTr, focusedIndex);
+		await removeTr(tabAppendElement, parentTr, focusedIndex);
 	}
 }
 /**
@@ -476,7 +476,7 @@ async function addTr(tabAppendElement = null) {
 			"click",
 			async (e) => {
 				e.preventDefault();
-				return await handleActionButtonClick(e, {
+				await handleActionButtonClick(e, {
 					allTabs: await ensureAllTabsAvailability(),
 				});
 			},
@@ -602,13 +602,13 @@ async function checkAddRemoveLastTr({
 		focusedIndex === (managedLoggers.length - 1) &&
 		(inputObj.label && inputObj.url)
 	) {
-		return await addTr(tabAppendElement);
+		await addTr(tabAppendElement);
 	} // if the user is on the previous-to-last td, remove the last tab if either one of the fields are empty
 	else if (
 		focusedIndex === (managedLoggers.length - 2) &&
 		(!inputObj.label || !inputObj.url)
 	) {
-		return await removeTr(tabAppendElement);
+		await removeTr(tabAppendElement);
 	}
 }
 
@@ -658,7 +658,7 @@ function performAfterChecks({
  * @throws Error when tabAppendElement == null
  * @return Promise fulfilled when the checkAddRemoveLastTr is completed
  */
-function trInputListener({
+async function trInputListener({
 	tabAppendElement = null,
 	type = "label",
 } = {}) {
@@ -715,7 +715,7 @@ function trInputListener({
 		});
 	}
 	inputObj[type] = element.value;
-	return checkAddRemoveLastTr({
+	await checkAddRemoveLastTr({
 		inputObj,
 		tabAppendElement,
 	});
@@ -870,7 +870,7 @@ export async function createManageTabsModal() {
 			"click",
 			async (e) => {
 				e.preventDefault();
-				return await handleActionButtonClick(e, {
+				await handleActionButtonClick(e, {
 					allTabs,
 				});
 			},

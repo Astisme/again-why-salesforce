@@ -24,8 +24,10 @@ type ReviewSponsorClass = CustomElementConstructor & {
 };
 
 type ReviewSponsorInstance = MockElement & {
+	_ensureReadyPromise: () => Promise<void>;
 	_getExtensionUsageDays: () => Promise<number>;
 	_showReviewOrSponsor: (result: ReviewSponsorResult) => Promise<void>;
+	connectedCallback: () => void;
 	whenReady: () => Promise<void>;
 };
 
@@ -588,6 +590,7 @@ Deno.test("show review or sponsor block", async (t) => {
 
 			try {
 				const component = new ReviewSponsorConstructor();
+				component.connectedCallback();
 				await component.whenReady();
 
 				assertEquals(await component._getExtensionUsageDays(), 45);
@@ -715,6 +718,8 @@ Deno.test("ReviewSponsorAws loads async metadata and opens the expected links in
 		assert(ReviewSponsorConstructor != null);
 
 		const component = new ReviewSponsorConstructor();
+		component.connectedCallback();
+		component.connectedCallback();
 		await component.whenReady();
 
 		assertEquals(settingsCalls, [["extension_usage_days"]]);

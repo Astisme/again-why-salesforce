@@ -11,18 +11,13 @@ let systemColorListener = null;
  * @return {Promise<void>} Promise resolved when the theme update has been applied.
  */
 function messageAndUpdateTheme(theme, updateUserTheme = false) {
-	sendExtensionMessage({ what: WHAT_THEME, theme });
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			html.dataset.theme = theme;
-			localStorage.setItem("usingTheme", theme);
-			if (updateUserTheme) {
-				html.dataset.usertheme = theme;
-				localStorage.setItem("userTheme", theme);
-			}
-			resolve();
-		}, 10);
-	});
+	html.dataset.theme = theme;
+	localStorage.setItem("usingTheme", theme);
+	if (updateUserTheme) {
+		html.dataset.usertheme = theme;
+		localStorage.setItem("userTheme", theme);
+	}
+	return sendExtensionMessage({ what: WHAT_THEME, theme });
 }
 
 /**
@@ -31,14 +26,13 @@ function messageAndUpdateTheme(theme, updateUserTheme = false) {
  * @param {MediaQueryListEvent} e - The event triggered when the system color scheme changes.
  * @return {Promise<void>} Promise resolved when the theme update (if needed) has been applied.
  */
-function handleSystemColorSchemeChange(e) {
+async function handleSystemColorSchemeChange(e) {
 	// check if theme has to be changed
 	const systemThemeValue = e.matches ? "dark" : "light";
 	const htmlThemeValue = html.dataset.theme;
 	if (systemThemeValue !== htmlThemeValue) {
-		return messageAndUpdateTheme(systemThemeValue);
+		return await messageAndUpdateTheme(systemThemeValue);
 	}
-	return Promise.resolve();
 }
 
 /**
@@ -53,7 +47,7 @@ export async function systemColorSchemeListener(enable = true) {
 		(enable && systemColorListener != null) ||
 		(!enable && systemColorListener == null)
 	) {
-		return Promise.resolve();
+		return;
 	}
 
 	localStorage.setItem("userTheme", "system");
@@ -76,7 +70,7 @@ export async function systemColorSchemeListener(enable = true) {
 		);
 		systemColorListener = null;
 	}
-	return Promise.resolve();
+	return;
 }
 
 /**
@@ -102,4 +96,5 @@ export async function initTheme() {
 	await systemColorSchemeListener(html.dataset.usertheme === "system");
 }
 
-export const initThemePromise = initTheme();
+// exported for tests
+export const initThemePromise = await initTheme();

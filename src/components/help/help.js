@@ -55,7 +55,7 @@ class HelpAws extends HTMLElement {
 
 	/**
 	 * On first connect, sync any attributes already set on the host
-     * @return Promise fulfilled when everything has been setup
+	 * @return Promise fulfilled when everything has been setup
 	 */
 	connectedCallback() {
 		this._syncLink();

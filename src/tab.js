@@ -19,10 +19,6 @@ export default class Tab {
 	static keyClickCount = "click-count";
 	/** @type {"click-date"} */
 	static keyClickDate = "click-date";
-	/** @type {number|undefined} */
-	["click-count"];
-	/** @type {number|undefined} */
-	["click-date"];
 	/**
 	 * All the keys which express data about a Tab.
 	 */

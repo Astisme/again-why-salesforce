@@ -1624,8 +1624,8 @@ Deno.test("manageTabs checks duplicates, updates links, and handles input bookke
 			"current-org::saved-url::saved-org",
 		);
 
-		assertThrows(
-			() => fixture.module.trInputListener(),
+		assertRejects(
+			async () => await fixture.module.trInputListener(),
 			Error,
 			"error_required_params",
 		);

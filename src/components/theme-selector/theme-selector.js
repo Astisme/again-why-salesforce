@@ -179,9 +179,7 @@ export class ThemeSelectorAws extends HTMLElement {
 				composed: true,
 			}),
 		);
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => handleSwitchColorTheme());
-		});
+		handleSwitchColorTheme();
 	};
 }
 
