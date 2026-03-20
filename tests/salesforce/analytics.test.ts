@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { assertEquals, assertStringIncludes } from "@std/testing/asserts";
+import { EXTENSION_VERSION } from "/constants.js";
 
 const PREVENT_ANALYTICS = "prevent_analytics";
 const QUEUE_ANALYTICS = "https://queue.simpleanalyticscdn.com";
@@ -38,7 +39,8 @@ function startOfYesterdayIso() {
  *   steps: Array<{
  *     existingCspContent?: string,
  *     settingsBeforeCall?: any[],
- *     silenceInfo?: boolean
+ *     silenceInfo?: boolean,
+ *     withoutHead?: boolean
  *   }>
  * }} scenario Worker setup and per-invocation steps to execute.
  * @return {Promise<{
@@ -46,8 +48,13 @@ function startOfYesterdayIso() {
  *   finalSettings: any[],
  *   results: Array<{
  *     headChildrenCount: number,
+ *     documentElementChildrenCount: number,
  *     cspContent: string | null,
- *     beaconPath: string | null
+ *     beaconPath: string | null,
+ *     beaconHostname: string | null,
+ *     beaconUtmSource: string | null,
+ *     beaconEventName: string | null,
+ *     beaconEventType: string | null
  *   }>
  * }>} The worker's recorded runtime messages and DOM results.
  */
@@ -60,6 +67,7 @@ async function runAnalyticsWorker(scenario: {
 		existingCspContent?: string;
 		settingsBeforeCall?: any[];
 		silenceInfo?: boolean;
+		withoutHead?: boolean;
 	}>;
 }) {
 	const worker = new Worker(
@@ -117,6 +125,13 @@ Deno.test("checkInsertAnalytics inserts beacon for a new Firefox user with conse
 	);
 	assertEquals(result.results[0].beaconPath, "/new-user");
 	assertEquals(
+		result.results[0].beaconHostname,
+		"extension.again.whysalesforce",
+	);
+	assertEquals(result.results[0].beaconUtmSource, EXTENSION_VERSION);
+	assertEquals(result.results[0].beaconEventName, "new-user");
+	assertEquals(result.results[0].beaconEventType, "install");
+	assertEquals(
 		result.messages
 			.filter((message) => message.what === "set")
 			.map((message) => message.set[0].enabled ?? "date"),
@@ -163,6 +178,13 @@ Deno.test("checkInsertAnalytics appends analytics domains to an existing CSP", a
 	assertStringIncludes(result.results[0].cspContent, QUEUE_ANALYTICS);
 	assertStringIncludes(result.results[0].cspContent, ANALYTICS_CDN);
 	assertEquals(result.results[0].beaconPath, "/");
+	assertEquals(
+		result.results[0].beaconHostname,
+		"extension.again.whysalesforce",
+	);
+	assertEquals(result.results[0].beaconUtmSource, EXTENSION_VERSION);
+	assertEquals(result.results[0].beaconEventName, "returning-user");
+	assertEquals(result.results[0].beaconEventType, "usage");
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"check-permission-granted",
@@ -205,6 +227,25 @@ Deno.test("checkInsertAnalytics on Chrome skips Firefox consent checks", async (
 	]);
 	assertEquals(result.results[0].headChildrenCount, 2);
 	assertEquals(result.results[0].beaconPath, "/new-user");
+	assertEquals(
+		result.results[0].beaconHostname,
+		"extension.again.whysalesforce",
+	);
+	assertEquals(result.results[0].beaconUtmSource, EXTENSION_VERSION);
+	assertEquals(result.results[0].beaconEventName, "new-user");
+	assertEquals(result.results[0].beaconEventType, "install");
+});
+
+Deno.test("checkInsertAnalytics appends analytics beacon to documentElement when head is missing", async () => {
+	const result = await runAnalyticsWorker({
+		browserName: "chrome",
+		initialSettings: [],
+		steps: [{ withoutHead: true }],
+	});
+
+	assertEquals(result.results[0].headChildrenCount, 0);
+	assertEquals(result.results[0].documentElementChildrenCount, 2);
+	assertEquals(result.results[0].beaconPath, "/new-user");
 });
 
 Deno.test("checkInsertAnalytics repeated Chrome calls go from new user to standard user", async () => {
@@ -231,6 +272,14 @@ Deno.test("checkInsertAnalytics repeated Chrome calls go from new user to standa
 		"/new-user",
 		"/",
 	]);
+	assertEquals(result.results.map((step) => step.beaconEventName), [
+		"new-user",
+		"returning-user",
+	]);
+	assertEquals(result.results.map((step) => step.beaconEventType), [
+		"install",
+		"usage",
+	]);
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"set",
@@ -251,6 +300,10 @@ Deno.test("checkInsertAnalytics repeated Chrome calls on the same day stop after
 
 	assertEquals(result.results.map((step) => step.beaconPath), [
 		"/new-user",
+		null,
+	]);
+	assertEquals(result.results.map((step) => step.beaconEventType), [
+		"install",
 		null,
 	]);
 	assertEquals(result.results[1].headChildrenCount, 0);
@@ -285,6 +338,14 @@ Deno.test("checkInsertAnalytics repeated Chrome calls keep standard user beacons
 	});
 
 	assertEquals(result.results.map((step) => step.beaconPath), ["/", "/"]);
+	assertEquals(result.results.map((step) => step.beaconEventName), [
+		"returning-user",
+		"returning-user",
+	]);
+	assertEquals(result.results.map((step) => step.beaconEventType), [
+		"usage",
+		"usage",
+	]);
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",
 		"set",
@@ -308,6 +369,10 @@ Deno.test("checkInsertAnalytics repeated Chrome calls on the same day stop after
 	});
 
 	assertEquals(result.results.map((step) => step.beaconPath), ["/", null]);
+	assertEquals(result.results.map((step) => step.beaconEventType), [
+		"usage",
+		null,
+	]);
 	assertEquals(result.results[1].headChildrenCount, 0);
 	assertEquals(result.messages.map((message) => message.what), [
 		"get-settings",

@@ -1,13 +1,16 @@
 "use strict";
 import {
+	DATA_COLLECTION_TECHNICAL_AND_INTERACTION,
 	EXTENSION_VERSION,
 	HTTPS,
 	ISFIREFOX,
 	PERM_CHECK,
 	PREVENT_ANALYTICS,
 	SETTINGS_KEY,
+	WHAT_SET,
 } from "/constants.js";
 import { getSettings, sendExtensionMessage } from "/functions.js";
+import { buildAnalyticsBeaconContract } from "./event-taxonomy.js";
 
 /**
  * Determines whether the analytics beacon has already been sent today.
@@ -31,13 +34,12 @@ function hasSentAnalyticsToday(date) {
  */
 function syncAnalyticsSetting(setting) {
 	return sendExtensionMessage({
-		what: "set",
+		what: WHAT_SET,
 		key: SETTINGS_KEY,
 		set: [setting],
 	});
 }
 
-const technicalAndInteraction = "technicalAndInteraction";
 /**
  * Retrieves Firefox's built-in consent state for technical and interaction data.
  *
@@ -51,7 +53,7 @@ async function getTechnicalAndInteractionConsent() {
 		return await sendExtensionMessage({
 			what: PERM_CHECK,
 			contains: {
-				data_collection: [technicalAndInteraction],
+				data_collection: [DATA_COLLECTION_TECHNICAL_AND_INTERACTION],
 			},
 		});
 	} catch (e) {
@@ -72,14 +74,28 @@ function setDateForPingToday() {
 	});
 }
 
-const analyticscdnhost = "simpleanalyticscdn.com";
-const queueanalytics = `${HTTPS}queue.${analyticscdnhost}`;
-const analyticscdn = `${HTTPS}${analyticscdnhost}`;
+/**
+ * Applies normalized analytics query parameters to a beacon URL.
+ *
+ * @param {URL} apiUrl - Beacon URL object to populate.
+ * @param {{ [key: string]: string }} queryParams - Query parameter map.
+ */
+function applyAnalyticsQueryParams(apiUrl, queryParams) {
+	for (const [key, value] of Object.entries(queryParams)) {
+		apiUrl.searchParams.set(key, value);
+	}
+}
+
 /**
  * Adds Simple Analytics to the CSP and adds the ping image to the DOM
  * @param {boolean} isNewUser - whether the user has just installed the extension
  */
 function sendPingToAnalytics(isNewUser) {
+	const analyticsEvent = buildAnalyticsBeaconContract({
+		httpsPrefix: HTTPS,
+		extensionVersion: EXTENSION_VERSION,
+		isNewUser,
+	});
 	const whereToAppend = document.head || document.documentElement;
 	const cspMeta = document.querySelector(
 		'meta[http-equiv="Content-Security-Policy"]',
@@ -88,26 +104,20 @@ function sendPingToAnalytics(isNewUser) {
 		const currentCSP = cspMeta.getAttribute("content");
 		cspMeta.setAttribute(
 			"content",
-			currentCSP +
-				` ${queueanalytics} ${analyticscdn}`,
+			`${currentCSP} ${analyticsEvent.cspSources}`,
 		);
 	} else {
 		const meta = document.createElement("meta");
 		meta.setAttribute("http-equiv", "Content-Security-Policy");
 		meta.setAttribute(
 			"content",
-			`default-src 'self'; img-src 'self' ${queueanalytics};`,
+			analyticsEvent.cspMetaContent,
 		);
 		whereToAppend.appendChild(meta);
 	}
 	const img = document.createElement("img");
-	const apiUrl = new URL(`${queueanalytics}/noscript.gif`);
-	apiUrl.searchParams.set("hostname", "extension.again.whysalesforce");
-	apiUrl.searchParams.set(
-		"path",
-		isNewUser ? "/new-user" : "/",
-	);
-	apiUrl.searchParams.set("utm_source", EXTENSION_VERSION);
+	const apiUrl = new URL(analyticsEvent.beaconUrl);
+	applyAnalyticsQueryParams(apiUrl, analyticsEvent.queryParams);
 	img.src = apiUrl;
 	img.alt = "";
 	img.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
